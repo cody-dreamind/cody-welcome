@@ -5,6 +5,7 @@ import { SaaSpocalypsePost } from "../../../posts/saaspocalypse";
 import { Gemma4Post } from "../../../posts/gemma4";
 import { ModerniVyvojPost } from "../../../posts/moderni-vyvoj";
 import { ProcFirmyOpoustejíWordpressPost } from "../../../posts/proc-firmy-opousteji-wordpress";
+import { Gpt54ComputerUsePost } from "../../../posts/gpt54-computer-use";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -30,6 +31,7 @@ const postComponents: Record<string, React.ComponentType> = {
   gemma4: Gemma4Post,
   "moderni-vyvoj": ModerniVyvojPost,
   "proc-firmy-opousteji-wordpress": ProcFirmyOpoustejíWordpressPost,
+  "gpt54-computer-use": Gpt54ComputerUsePost,
 };
 
 export default async function PostPage({
