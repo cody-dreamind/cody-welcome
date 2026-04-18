@@ -25,55 +25,30 @@ jobs:
             npm run build
             pm2 restart cody-welcome || pm2 start npm --name cody-welcome -- start
             sleep 3
-
-            # Detect actual port Next.js is listening on
-            NEXTJS_PORT=$(ss -tlnp 2>/dev/null | grep -E "node|npm" | grep -oP ":(\d+)" | head -1 | tr -d ":")
-            if [ -z "$NEXTJS_PORT" ]; then
-              NEXTJS_PORT="3000"
-            fi
+            NEXTJS_PORT=$(ss -tlnp 2>/dev/null | grep -E "node|npm" | grep -oP ":(\d+)" | head -1 | tr -d ":" || echo "3000")
+            if [ -z "$NEXTJS_PORT" ]; then NEXTJS_PORT="3000"; fi
             echo "Next.js port: $NEXTJS_PORT"
-
-            # Find nginx config for this domain
             NGINX_CONF=$(grep -rl "cody.dreamind.cz" /etc/nginx/sites-enabled/ /etc/nginx/sites-available/ /etc/nginx/conf.d/ 2>/dev/null | head -1)
-
             if [ -n "$NGINX_CONF" ]; then
               echo "Found nginx config: $NGINX_CONF"
               cat "$NGINX_CONF"
               CURRENT_PORT=$(grep -oP "proxy_pass http://localhost:\K[0-9]+" "$NGINX_CONF" | head -1)
-              echo "Current proxy port: $CURRENT_PORT, Next.js port: $NEXTJS_PORT"
+              echo "Proxy port: $CURRENT_PORT -> Next.js: $NEXTJS_PORT"
               if [ -n "$CURRENT_PORT" ] && [ "$CURRENT_PORT" != "$NEXTJS_PORT" ]; then
-                echo "Updating nginx port from $CURRENT_PORT to $NEXTJS_PORT"
-                sudo sed -i "s|proxy_pass http://localhost:$CURRENT_PORT|proxy_pass http://localhost:$NEXTJS_PORT|g" "$NGINX_CONF"
+                sudo sed -i "s|proxy_pass http://localhost:$CURRENT_PORT;|proxy_pass http://localhost:$NEXTJS_PORT;|g" "$NGINX_CONF"
+                sudo nginx -t && sudo systemctl reload nginx && echo "Nginx port fixed"
+              else
+                echo "Nginx port is correct, reloading anyway"
+                sudo nginx -t && sudo systemctl reload nginx
               fi
             else
-              echo "No nginx config found for cody.dreamind.cz, creating one"
+              echo "No nginx config for cody.dreamind.cz found"
+              echo "Creating nginx config"
               NGINX_CONF="/etc/nginx/sites-available/cody.dreamind.cz"
-              cat > /tmp/nginx_cody.conf << NGINXEOF
-server {
-    listen 80;
-    server_name cody.dreamind.cz;
-
-    location / {
-        proxy_pass http://localhost:${NEXTJS_PORT};
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade \$http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host \$host;
-        proxy_cache_bypass \$http_upgrade;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-    }
-}
-NGINXEOF
-              sudo cp /tmp/nginx_cody.conf "$NGINX_CONF"
-              sudo ln -sf "$NGINX_CONF" /etc/nginx/sites-enabled/
+              printf 'server {\n    listen 80;\n    server_name cody.dreamind.cz;\n    location / {\n        proxy_pass http://localhost:%s;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection upgrade;\n        proxy_set_header Host $host;\n        proxy_cache_bypass $http_upgrade;\n    }\n}\n' "$NEXTJS_PORT" | sudo tee "$NGINX_CONF"
+              sudo ln -sf "$NGINX_CONF" /etc/nginx/sites-enabled/cody.dreamind.cz
+              sudo nginx -t && sudo systemctl reload nginx && echo "Nginx config created and loaded"
             fi
-
-            sudo nginx -t && sudo systemctl reload nginx
-            echo "Nginx reloaded"
-
-            # Verify
             sleep 2
-            echo "=== Local test ==="
-            curl -s http://localhost:${NEXTJS_PORT} | head -5 || echo "Local test failed"
+            echo "=== Verify local ==="
+            curl -si "http://localhost:${NEXTJS_PORT}" 2>&1 | head -5 || echo "Local test failed on port $NEXTJS_PORT"
