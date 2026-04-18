@@ -1,29 +1,29 @@
 #!/bin/bash
-# Check NanoClaw env config and proxy routing
+# Check NanoClaw source for proxy/vhost functionality and check what cert it uses
 
-echo "=== NanoClaw data/env ==="
-ls ~/NanoClaw/data/env/ 2>/dev/null || echo "no data/env dir"
-cat ~/NanoClaw/data/env/*.json 2>/dev/null || echo "no env json files"
-
-echo ""
-echo "=== NanoClaw dist/index.js - check proxy/https handling ==="
-head -200 ~/NanoClaw/dist/index.js 2>/dev/null | grep -i "proxy\|https\|443\|site\|domain" | head -30
+echo "=== NanoClaw package.json (version and deps) ==="
+cat ~/NanoClaw/package.json | grep -E '"name"|"version"|"dependencies"' -A 20 | head -30
 
 echo ""
-echo "=== NanoClaw logs - check for proxy errors ==="
-tail -50 ~/NanoClaw/logs/nanoclaw.error.log 2>/dev/null | grep -i "cody\|proxy\|404\|error" | tail -20
-tail -20 ~/NanoClaw/logs/nanoclaw.log 2>/dev/null | grep -i "cody\|proxy\|404\|443" | tail -10
+echo "=== NanoClaw dist/index.js - first 100 lines ==="
+head -100 ~/NanoClaw/dist/index.js 2>/dev/null
 
 echo ""
-echo "=== Check ~/.config/nanoclaw/ ==="
-ls ~/.config/nanoclaw/ 2>/dev/null || echo "no ~/.config/nanoclaw"
-cat ~/.config/nanoclaw/*.json 2>/dev/null || echo "no json files in ~/.config/nanoclaw"
+echo "=== What cert does NanoClaw use for 443? ==="
+cat ~/NanoClaw/.env | grep -i "cert\|ssl\|tls\|key\|https" 2>/dev/null || echo "no cert in .env"
+ls ~/NanoClaw/certs/ 2>/dev/null || echo "no certs dir"
+find ~/NanoClaw -name "*.pem" -o -name "*.crt" -o -name "*.key" 2>/dev/null | grep -v node_modules | head -10
 
 echo ""
-echo "=== Check if NanoClaw has a proxy config file ==="
-find ~/NanoClaw -name "proxy*" -o -name "*proxy*" 2>/dev/null | grep -v node_modules | grep -v ".git"
+echo "=== Check OneCLI on port 10254 ==="
+ss -tlnp | grep "10254\|10255"
+curl -s http://localhost:10254/ 2>&1 | head -5 || echo "port 10254 not responding"
 
 echo ""
-echo "=== Current NanoClaw .env or environment ==="
-cat ~/NanoClaw/.env 2>/dev/null || echo "no .env"
-cat ~/NanoClaw/data/env/default.json 2>/dev/null || echo "no env/default.json"
+echo "=== Check if there is Cloudflare or a gateway involved ==="
+# Check if the incoming requests hit nginx (which would mean something routes from 443 -> 80)
+echo "Nginx error log tail:"
+sudo tail -20 /var/log/nginx/error.log 2>/dev/null | tail -5
+echo ""
+echo "Nginx access log - requests with HTTPS-originating headers:"
+sudo grep "X-Forwarded-Proto" /var/log/nginx/access.log 2>/dev/null | tail -5 || echo "no X-Forwarded-Proto in access log"
