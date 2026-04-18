@@ -1,33 +1,29 @@
 #!/bin/bash
-# Check NanoClaw proxy configuration for site routing
+# Check NanoClaw env config and proxy routing
 
-echo "=== NanoClaw config files ==="
-find ~/NanoClaw -name "*.json" -not -path "*/node_modules/*" -not -path "*/.pm2/*" 2>/dev/null | sort
-
-echo ""
-echo "=== NanoClaw main config ==="
-cat ~/NanoClaw/config.json 2>/dev/null || echo "no config.json"
-cat ~/NanoClaw/nanoclaw.json 2>/dev/null || echo "no nanoclaw.json"
+echo "=== NanoClaw data/env ==="
+ls ~/NanoClaw/data/env/ 2>/dev/null || echo "no data/env dir"
+cat ~/NanoClaw/data/env/*.json 2>/dev/null || echo "no env json files"
 
 echo ""
-echo "=== NanoClaw dist/index.js - proxy config grep ==="
-grep -n "proxy\|site\|domain\|443\|cody\|listen" ~/NanoClaw/dist/index.js 2>/dev/null | head -30 || echo "cannot read dist/index.js"
+echo "=== NanoClaw dist/index.js - check proxy/https handling ==="
+head -200 ~/NanoClaw/dist/index.js 2>/dev/null | grep -i "proxy\|https\|443\|site\|domain" | head -30
 
 echo ""
-echo "=== How is NanoClaw started? ==="
-cat ~/NanoClaw/package.json 2>/dev/null | grep -A5 '"scripts"'
+echo "=== NanoClaw logs - check for proxy errors ==="
+tail -50 ~/NanoClaw/logs/nanoclaw.error.log 2>/dev/null | grep -i "cody\|proxy\|404\|error" | tail -20
+tail -20 ~/NanoClaw/logs/nanoclaw.log 2>/dev/null | grep -i "cody\|proxy\|404\|443" | tail -10
 
 echo ""
-echo "=== Check if there is a sites/proxy config in NanoClaw ==="
-ls ~/NanoClaw/data/ 2>/dev/null
-cat ~/NanoClaw/data/sites.json 2>/dev/null || echo "no data/sites.json"
-cat ~/NanoClaw/data/proxy-config.json 2>/dev/null || echo "no data/proxy-config.json"
+echo "=== Check ~/.config/nanoclaw/ ==="
+ls ~/.config/nanoclaw/ 2>/dev/null || echo "no ~/.config/nanoclaw"
+cat ~/.config/nanoclaw/*.json 2>/dev/null || echo "no json files in ~/.config/nanoclaw"
 
 echo ""
-echo "=== Check NanoClaw for proxy/reverse proxy config ==="
-find ~/NanoClaw -maxdepth 3 -name "*.json" -not -path "*/node_modules/*" 2>/dev/null | xargs grep -l "proxy\|reverse\|upstream" 2>/dev/null | head -10
+echo "=== Check if NanoClaw has a proxy config file ==="
+find ~/NanoClaw -name "proxy*" -o -name "*proxy*" 2>/dev/null | grep -v node_modules | grep -v ".git"
 
 echo ""
-echo "=== NanoClaw systemd or startup config ==="
-cat /etc/systemd/system/nanoclaw.service 2>/dev/null || sudo cat /etc/systemd/system/nanoclaw.service 2>/dev/null || echo "no nanoclaw.service"
-pm2 describe NanoClaw 2>/dev/null || pm2 describe nanoclaw 2>/dev/null || echo "nanoclaw not in pm2"
+echo "=== Current NanoClaw .env or environment ==="
+cat ~/NanoClaw/.env 2>/dev/null || echo "no .env"
+cat ~/NanoClaw/data/env/default.json 2>/dev/null || echo "no env/default.json"
