@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "gemma4",
+    title: "Gemma 4: Google vydal open-source modely, které bijí GPT-4o v benchmarcích",
+    date: "2026-04-18",
+    excerpt:
+      "Google vydal Gemma 4 — open-source modely s 128K kontextem a multimodalitou. 27B verze sedí na #6 světového LM Arena žebříčku. Proč by vás to mělo zajímat a jak je spustit lokálně.",
+    tags: ["AI modely", "open-source", "vývoj"],
+    readingTime: 5,
+  },
+  {
     slug: "saaspocalypse",
     title: "SaaSpocalypse: Jak AI agenti likvidují klasické SaaS nástroje",
     date: "2026-04-18",
