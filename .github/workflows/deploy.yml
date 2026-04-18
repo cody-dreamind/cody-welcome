@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy and fix nginx
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -25,56 +25,4 @@ jobs:
             npm run build
             pm2 restart cody-welcome || pm2 start npm --name cody-welcome -- start
             sleep 5
-
-            NEXTJS_PORT=$(ss -tlnp 2>/dev/null | grep -E "node|npm" | grep -v ":443 " | grep -v ":80 " | grep -v ":22 " | grep -oP ":(\d+)" | head -1 | tr -d ":")
-            if [ -z "$NEXTJS_PORT" ]; then
-              NEXTJS_PORT="3000"
-            fi
-            echo "Next.js port detected: $NEXTJS_PORT"
-
-            echo "=== Nginx structure ==="
-            ls /etc/nginx/ 2>/dev/null || echo "No /etc/nginx"
-            ls /etc/nginx/sites-enabled/ 2>/dev/null || echo "No sites-enabled"
-            ls /etc/nginx/sites-available/ 2>/dev/null || echo "No sites-available"
-            ls /etc/nginx/conf.d/ 2>/dev/null || echo "No conf.d"
-
-            NGINX_CONF=$(grep -rl "cody.dreamind.cz" /etc/nginx/ 2>/dev/null | head -1)
-            echo "Config found: $NGINX_CONF"
-
-            if [ -n "$NGINX_CONF" ]; then
-              cat "$NGINX_CONF"
-              CURRENT_PORT=$(grep -oP "proxy_pass http://localhost:\K[0-9]+" "$NGINX_CONF" | head -1)
-              echo "Proxy port: $CURRENT_PORT"
-              if [ -n "$CURRENT_PORT" ] && [ "$CURRENT_PORT" != "$NEXTJS_PORT" ]; then
-                echo "Fixing: $CURRENT_PORT -> $NEXTJS_PORT"
-                sudo sed -i "s|proxy_pass http://localhost:$CURRENT_PORT;|proxy_pass http://localhost:$NEXTJS_PORT;|g" "$NGINX_CONF"
-              fi
-            else
-              sudo mkdir -p /etc/nginx/sites-available /etc/nginx/sites-enabled
-              CONF_CONTENT="server {
-    listen 80;
-    server_name cody.dreamind.cz;
-    location / {
-        proxy_pass http://localhost:${NEXTJS_PORT};
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade \$http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host \$host;
-        proxy_cache_bypass \$http_upgrade;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-    }
-}"
-              echo "$CONF_CONTENT" | sudo tee /etc/nginx/sites-available/cody.dreamind.cz
-              sudo ln -sf /etc/nginx/sites-available/cody.dreamind.cz /etc/nginx/sites-enabled/cody.dreamind.cz
-              if ! grep -q "sites-enabled" /etc/nginx/nginx.conf 2>/dev/null; then
-                echo "WARNING: nginx.conf may not include sites-enabled"
-                cat /etc/nginx/nginx.conf || true
-              fi
-            fi
-
-            sudo nginx -t && sudo systemctl reload nginx
-            echo "Nginx reloaded"
-            sleep 2
-            curl -si "http://localhost:${NEXTJS_PORT}" 2>&1 | head -5 || echo "Local test failed"
+            bash ${{ secrets.DEPLOY_PATH }}/scripts/fix-nginx.sh
