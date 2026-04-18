@@ -1,62 +1,33 @@
 #!/bin/bash
-# Fix web server proxy for cody.dreamind.cz -> Next.js on port 3000
+# Deep diagnostics for cody.dreamind.cz 443 setup
 
-# Find what port Next.js/node is on
-NEXTJS_PORT=$(ss -tlnp 2>/dev/null | grep -E "node|npm" | awk '{print $4}' | grep -v ':443$' | grep -v ':80$' | grep -v ':22$' | grep -oE ':[0-9]+$' | head -1 | tr -d ':')
-if [ -z "$NEXTJS_PORT" ]; then
-  NEXTJS_PORT="3000"
-fi
-echo "Next.js port: $NEXTJS_PORT"
+echo "=== Process on port 443 ==="
+ss -tlnp | grep ":443 "
+echo ""
 
-echo "=== Checking web servers ==="
-which nginx 2>/dev/null && echo "nginx found at: $(which nginx)" || echo "nginx not in PATH"
-which caddy 2>/dev/null && echo "caddy found at: $(which caddy)" || echo "caddy not in PATH"
-which apache2 2>/dev/null && echo "apache2 found at: $(which apache2)" || echo "apache2 not in PATH"
+echo "=== All node/pm2 processes ==="
+ps aux | grep -E "node|npm|pm2" | grep -v grep
 
-# Check running web server processes
-echo "=== Web server processes ==="
-ps aux | grep -E "nginx|caddy|apache|haproxy|traefik" | grep -v grep || echo "No web server processes found via ps"
+echo "=== PM2 list ==="
+pm2 list 2>/dev/null || echo "pm2 not available"
 
-# Check what's listening on 80 and 443
-echo "=== Ports 80 and 443 ==="
-ss -tlnp | grep -E ":80 |:443 " || echo "Nothing on 80/443"
+echo "=== Process 81946 details ==="
+ls -la /proc/81946/exe 2>/dev/null || echo "PID 81946 not found (may have changed)"
 
-# Check common nginx paths
-for NGINX_BIN in /usr/sbin/nginx /usr/local/sbin/nginx /usr/bin/nginx /opt/nginx/sbin/nginx; do
-  if [ -x "$NGINX_BIN" ]; then
-    echo "Found nginx at: $NGINX_BIN"
-    NGINX_FOUND="$NGINX_BIN"
-    break
-  fi
+echo "=== All node processes cmdline ==="
+for pid in $(pgrep node 2>/dev/null); do
+  echo "PID $pid: $(cat /proc/$pid/cmdline 2>/dev/null | tr '\0' ' ')"
 done
 
-# Check common Caddy paths
-for CADDY_BIN in /usr/local/bin/caddy /usr/bin/caddy /opt/caddy/caddy; do
-  if [ -x "$CADDY_BIN" ]; then
-    echo "Found caddy at: $CADDY_BIN"
-    CADDY_FOUND="$CADDY_BIN"
-    break
-  fi
-done
+echo "=== Nginx config path ==="
+/usr/sbin/nginx -t 2>&1 || echo "nginx -t failed (no sudo)"
 
-# Check config files
-echo "=== Config search ==="
-find /etc /opt /var /home -name "*.conf" -o -name "Caddyfile" -o -name "caddyfile" 2>/dev/null | xargs grep -l "cody.dreamind.cz" 2>/dev/null | head -5 || echo "No config files found with cody.dreamind.cz"
+echo "=== Check /etc/nginx with sudo ==="
+sudo ls /etc/nginx/ 2>/dev/null || echo "Cannot sudo ls /etc/nginx"
+sudo ls /etc/nginx/sites-enabled/ 2>/dev/null || echo "Cannot sudo ls sites-enabled"
 
-# If caddy
-if [ -n "$CADDY_FOUND" ]; then
-  echo "=== Caddy detected ==="
-  CADDY_CONF=$(find /etc/caddy /home -name "Caddyfile" 2>/dev/null | head -1)
-  echo "Caddyfile: $CADDY_CONF"
-  if [ -n "$CADDY_CONF" ]; then
-    cat "$CADDY_CONF"
-  fi
-fi
+echo "=== Check sudoers ==="
+sudo -l 2>/dev/null | head -20 || echo "Cannot check sudoers"
 
-# If nginx found in non-standard path
-if [ -n "$NGINX_FOUND" ]; then
-  echo "=== Nginx config search ==="
-  "$NGINX_FOUND" -V 2>&1 | grep "conf-path" || true
-fi
-
-echo "=== Done with diagnostics ==="
+echo "=== Letsencrypt config ==="
+cat /etc/letsencrypt/renewal/cody.dreamind.cz.conf 2>/dev/null || echo "Cannot read letsencrypt config"
