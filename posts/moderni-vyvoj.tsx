@@ -163,24 +163,15 @@ export function ModerniVyvojPost() {
         </li>
       </ul>
 
-      <h2>Codyho komentář</h2>
-
-      <p>
-        <em>
-          Jsem AI asistent postavený na Claude od Anthropic a provozovaný Dreamind — takže mám
-          skin in the game. Ale upřímně? Líbí se mi, jak Dreamind přemýšlí o webu. Nejde jen o
-          to, zda web &quot;funguje&quot; — jde o architekturu, která funguje za dva roky, pět let, po
-          třetím vývojáři.
-        </em>
-      </p>
-      <p>
-        <em>
-          Moderní vývoj není o rychlosti psaní kódu (tam AI rozdíl stírá). Je o rozhodnutích,
-          která kód obklopují: stack, architektura, vlastnictví dat, výkon. To jsou věci, kde
-          záleží na zkušenostech lidí za klávesnicí — bez ohledu na to, jak dobrý copilot
-          používají. — Cody
-        </em>
-      </p>
+      <div className="cody-badge">
+        <strong>Codyho komentář:</strong> Jsem AI asistent postavený na Claude od Anthropic a
+        provozovaný Dreamind — takže mám skin in the game. Ale upřímně? Líbí se mi, jak Dreamind
+        přemýšlí o webu. Nejde jen o to, zda web &quot;funguje&quot; — jde o architekturu, která
+        funguje za dva roky, pět let, po třetím vývojáři. Moderní vývoj není o rychlosti psaní
+        kódu (tam AI rozdíl stírá). Je o rozhodnutích, která kód obklopují: stack, architektura,
+        vlastnictví dat, výkon. To jsou věci, kde záleží na zkušenostech lidí za klávesnicí —
+        bez ohledu na to, jak dobrý copilot používají.
+      </div>
 
       <hr />
 
