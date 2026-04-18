@@ -1,29 +1,59 @@
 #!/bin/bash
-# Check NanoClaw source for proxy/vhost functionality and check what cert it uses
+# Check webhook.js in NanoClaw and attempt the real fix
 
-echo "=== NanoClaw package.json (version and deps) ==="
-cat ~/NanoClaw/package.json | grep -E '"name"|"version"|"dependencies"' -A 20 | head -30
-
-echo ""
-echo "=== NanoClaw dist/index.js - first 100 lines ==="
-head -100 ~/NanoClaw/dist/index.js 2>/dev/null
+echo "=== NanoClaw webhook.js ==="
+cat ~/NanoClaw/dist/webhook.js 2>/dev/null | head -60 || echo "no webhook.js"
 
 echo ""
-echo "=== What cert does NanoClaw use for 443? ==="
-cat ~/NanoClaw/.env | grep -i "cert\|ssl\|tls\|key\|https" 2>/dev/null || echo "no cert in .env"
-ls ~/NanoClaw/certs/ 2>/dev/null || echo "no certs dir"
-find ~/NanoClaw -name "*.pem" -o -name "*.crt" -o -name "*.key" 2>/dev/null | grep -v node_modules | head -10
+echo "=== Check what WEBHOOK_PORT NanoClaw uses ==="
+cat ~/NanoClaw/.env | grep -i "webhook\|port\|443"
 
 echo ""
-echo "=== Check OneCLI on port 10254 ==="
-ss -tlnp | grep "10254\|10255"
-curl -s http://localhost:10254/ 2>&1 | head -5 || echo "port 10254 not responding"
+echo "=== SS full port listing ==="
+ss -tlnp 2>/dev/null
 
 echo ""
-echo "=== Check if there is Cloudflare or a gateway involved ==="
-# Check if the incoming requests hit nginx (which would mean something routes from 443 -> 80)
-echo "Nginx error log tail:"
-sudo tail -20 /var/log/nginx/error.log 2>/dev/null | tail -5
+echo "=== Attempt nginx SSL config for cody.dreamind.cz ==="
+# Add SSL to nginx config
+NGINX_CONF="/etc/nginx/sites-available/cody.dreamind.cz"
+sudo bash -c "cat > $NGINX_CONF" << 'NGINXEOF'
+server {
+    listen 80;
+    server_name cody.dreamind.cz;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name cody.dreamind.cz;
+
+    ssl_certificate /etc/letsencrypt/live/cody.dreamind.cz/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/cody.dreamind.cz/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+}
+NGINXEOF
+
+echo "=== Nginx config written ==="
+sudo cat /etc/nginx/sites-available/cody.dreamind.cz
+
 echo ""
-echo "Nginx access log - requests with HTTPS-originating headers:"
-sudo grep "X-Forwarded-Proto" /var/log/nginx/access.log 2>/dev/null | tail -5 || echo "no X-Forwarded-Proto in access log"
+echo "=== Test nginx config ==="
+sudo nginx -t 2>&1
+
+echo ""
+echo "=== Check if port 443 is available for nginx ==="
+# Check if NanoClaw is bound to 443 (would conflict)
+ss -tlnp | grep ":443 " && echo "PORT 443 IS IN USE" || echo "PORT 443 IS FREE"
