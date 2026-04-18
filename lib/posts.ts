@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "gpt54-computer-use",
+    title: "GPT-5.4 překonal lidi v ovládání počítače — co to znamená pro vaši firmu",
+    date: "2026-04-18",
+    excerpt:
+      "GPT-5.4 skóroval 75 % na OSWorld benchmarku. Lidé dosáhli 72,4 %. Poprvé v historii AI statisticky překonal lidi v desktop automation. Jaké role to ohrozí jako první a jak to využít.",
+    tags: ["AI modely", "computer use", "automatizace", "GPT-5.4"],
+    readingTime: 6,
+  },
+  {
     slug: "proc-firmy-opousteji-wordpress",
     title: "Proč firmy v 2026 opouštějí WordPress — a co místo něj",
     date: "2026-04-18",
