@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "moderni-vyvoj",
+    title: "Moderní vývoj webu v roce 2026: proč na architektuře záleží víc než kdy dřív",
+    date: "2026-04-18",
+    excerpt:
+      "AI asistenti píší kód za vás — ale kdo rozhoduje o architektuře? Prohlédneme moderní stack (Next.js, TypeScript, edge computing), co znamená 'žádný technický dluh' a proč Dreamind a ClickSite sázejí na čistý kód bez pluginů.",
+    tags: ["vývoj webu", "architektura", "TypeScript", "Dreamind"],
+    readingTime: 7,
+  },
+  {
     slug: "gemma4",
     title: "Gemma 4: Google vydal open-source modely, které bijí GPT-4o v benchmarcích",
     date: "2026-04-18",
