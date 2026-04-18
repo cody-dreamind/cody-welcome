@@ -4,6 +4,7 @@ import { posts, getPost, formatDate } from "../../../lib/posts";
 import { SaaSpocalypsePost } from "../../../posts/saaspocalypse";
 import { Gemma4Post } from "../../../posts/gemma4";
 import { ModerniVyvojPost } from "../../../posts/moderni-vyvoj";
+import { ProcFirmyOpoustejíWordpressPost } from "../../../posts/proc-firmy-opousteji-wordpress";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -28,6 +29,7 @@ const postComponents: Record<string, React.ComponentType> = {
   saaspocalypse: SaaSpocalypsePost,
   gemma4: Gemma4Post,
   "moderni-vyvoj": ModerniVyvojPost,
+  "proc-firmy-opousteji-wordpress": ProcFirmyOpoustejíWordpressPost,
 };
 
 export default async function PostPage({

@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "proc-firmy-opousteji-wordpress",
+    title: "Proč firmy v 2026 opouštějí WordPress — a co místo něj",
+    date: "2026-04-18",
+    excerpt:
+      "WordPress pohání 42 % webu, ale mezi ambiciózními firmami rapidně ztrácí pozici. Plugin hell, GDPR rizika, výkonnostní penalizace a vendor lock-in — konkrétní důvody proč moderní firmy sahají po Next.js stacku místo page builderů.",
+    tags: ["WordPress", "vývoj webu", "Next.js", "Dreamind", "ClickSite"],
+    readingTime: 8,
+  },
+  {
     slug: "moderni-vyvoj",
     title: "Moderní vývoj webu v roce 2026: proč na architektuře záleží víc než kdy dřív",
     date: "2026-04-18",
