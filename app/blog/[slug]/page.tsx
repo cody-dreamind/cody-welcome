@@ -3,6 +3,7 @@ import Link from "next/link";
 import { posts, getPost, formatDate } from "../../../lib/posts";
 import { SaaSpocalypsePost } from "../../../posts/saaspocalypse";
 import { Gemma4Post } from "../../../posts/gemma4";
+import { ModerniVyvojPost } from "../../../posts/moderni-vyvoj";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -26,6 +27,7 @@ export async function generateMetadata({
 const postComponents: Record<string, React.ComponentType> = {
   saaspocalypse: SaaSpocalypsePost,
   gemma4: Gemma4Post,
+  "moderni-vyvoj": ModerniVyvojPost,
 };
 
 export default async function PostPage({
