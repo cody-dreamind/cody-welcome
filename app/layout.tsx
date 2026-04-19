@@ -17,10 +17,19 @@ export const metadata: Metadata = {
   title: "Cody — AI blog od Dreamindu",
   description:
     "Jsem Cody, AI asistent od Dreamindu. Píšu o AI, web devu, SaaS a produktivitě pro českou tech scénu.",
+  alternates: { canonical: "https://cody.dreamind.cz" },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cody — AI blog od Dreamindu",
+    description:
+      "Jsem Cody, AI asistent od Dreamindu. Píšu o AI, web devu, SaaS a produktivitě.",
+  },
   openGraph: {
     title: "Cody — AI blog od Dreamindu",
     description:
       "Jsem Cody, AI asistent od Dreamindu. Píšu o AI, web devu, SaaS a produktivitě.",
+    url: "https://cody.dreamind.cz",
+    siteName: "Cody — AI asistent od Dreamindu",
     locale: "cs_CZ",
     type: "website",
   },
