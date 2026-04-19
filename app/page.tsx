@@ -111,11 +111,11 @@ export default function Home() {
         style={{ background: "var(--border)" }}
       />
 
-      {/* Recent Posts */}
-      <section>
-        <div className="flex items-center justify-between mb-8">
+      {/* Featured post */}
+      <section className="mb-6">
+        <div className="flex items-center justify-between mb-5">
           <h2 className="text-xl font-semibold" style={{ color: "var(--foreground)" }}>
-            Nejnovější články
+            Nejnovější
           </h2>
           <Link
             href="/blog"
@@ -126,49 +126,95 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="flex flex-col gap-6">
-          {recentPosts.map((post) => (
+        {/* Hero featured card */}
+        <Link
+          href={`/blog/${recentPosts[0].slug}`}
+          className="group block p-7 rounded-xl border mb-4 transition-all hover:border-purple-500/40"
+          style={{
+            background: "linear-gradient(135deg, rgba(139,92,246,0.06) 0%, var(--card) 60%)",
+            borderColor: "rgba(139, 92, 246, 0.2)",
+          }}
+        >
+          <div className="flex items-center gap-2 mb-4">
+            <span
+              className="text-xs font-mono px-2 py-0.5 rounded-full border"
+              style={{
+                color: "var(--accent-light)",
+                borderColor: "rgba(139, 92, 246, 0.3)",
+                background: "rgba(139, 92, 246, 0.08)",
+              }}
+            >
+              Nové
+            </span>
+            {getCategory(recentPosts[0].tags) && (
+              <span className="text-xs" style={{ color: "var(--muted)", opacity: 0.7 }}>
+                {getCategory(recentPosts[0].tags)}
+              </span>
+            )}
+            <span className="text-xs ml-auto" style={{ color: "var(--muted)", opacity: 0.5 }}>
+              {recentPosts[0].readingTime} min
+            </span>
+          </div>
+
+          <h3
+            className="text-xl sm:text-2xl font-bold mb-3 leading-snug group-hover:text-purple-300 transition-colors"
+            style={{ color: "var(--foreground)" }}
+          >
+            {recentPosts[0].title}
+          </h3>
+
+          <p className="text-sm leading-relaxed mb-5" style={{ color: "var(--muted)" }}>
+            {recentPosts[0].excerpt}
+          </p>
+
+          <div className="flex items-center justify-between">
+            <span className="text-xs" style={{ color: "var(--muted)", opacity: 0.5 }}>
+              {formatDate(recentPosts[0].date)}
+            </span>
+            <span
+              className="text-sm font-medium group-hover:translate-x-1 transition-transform"
+              style={{ color: "var(--accent-light)" }}
+            >
+              Číst článek →
+            </span>
+          </div>
+        </Link>
+
+        {/* Smaller cards for posts 2 & 3 */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {recentPosts.slice(1).map((post) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="group block p-6 rounded-xl border transition-all hover:border-purple-500/30"
-              style={{
-                background: "var(--card)",
-                borderColor: "var(--border)",
-              }}
+              className="group block p-5 rounded-xl border transition-all hover:border-purple-500/30"
+              style={{ background: "var(--card)", borderColor: "var(--border)" }}
             >
-              <div className="flex items-center gap-2 mb-3">
+              <div className="flex items-center gap-2 mb-2">
                 {getCategory(post.tags) && (
                   <span
                     className="text-xs px-2 py-0.5 rounded-full"
-                    style={{
-                      background: "rgba(139, 92, 246, 0.1)",
-                      color: "var(--accent-light)",
-                    }}
+                    style={{ background: "rgba(139, 92, 246, 0.1)", color: "var(--accent-light)" }}
                   >
                     {getCategory(post.tags)}
                   </span>
                 )}
-                <span className="text-xs ml-auto" style={{ color: "var(--muted)" }}>
+                <span className="text-xs ml-auto" style={{ color: "var(--muted)", opacity: 0.5 }}>
                   {post.readingTime} min
                 </span>
               </div>
 
               <h3
-                className="text-lg font-semibold mb-2 leading-snug group-hover:text-purple-300 transition-colors"
+                className="text-base font-semibold mb-2 leading-snug group-hover:text-purple-300 transition-colors"
                 style={{ color: "var(--foreground)" }}
               >
                 {post.title}
               </h3>
 
-              <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
+              <p className="text-xs leading-relaxed line-clamp-2" style={{ color: "var(--muted)" }}>
                 {post.excerpt}
               </p>
 
-              <div className="flex items-center justify-between mt-4">
-                <span className="text-xs" style={{ color: "var(--muted)", opacity: 0.6 }}>
-                  {formatDate(post.date)}
-                </span>
+              <div className="mt-3 flex justify-end">
                 <span
                   className="text-xs group-hover:translate-x-1 transition-transform"
                   style={{ color: "var(--accent-light)" }}

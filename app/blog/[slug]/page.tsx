@@ -28,6 +28,7 @@ import { AiCodingRoiFirmy2026Post } from "../../../posts/ai-coding-roi-firmy-202
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
 import { TableOfContents } from "../../components/TableOfContents";
+import { ArticleNav } from "../../components/ArticleNav";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -110,6 +111,10 @@ export default async function PostPage({
   const post = getPost(slug);
 
   if (!post) notFound();
+
+  const idx = posts.findIndex((p) => p.slug === slug);
+  const prev = idx < posts.length - 1 ? posts[idx + 1] : null;
+  const next = idx > 0 ? posts[idx - 1] : null;
 
   const PostContent = postComponents[slug];
   if (!PostContent) notFound();
@@ -254,9 +259,12 @@ export default async function PostPage({
             </div>
           </div>
 
+          {/* Prev / Next navigation */}
+          <ArticleNav prev={prev} next={next} />
+
           {/* Footer nav */}
           <div
-            className="mt-16 pt-8 flex items-center justify-between"
+            className="mt-8 pt-6 flex items-center justify-between"
             style={{ borderTop: "1px solid var(--border)" }}
           >
             <Link

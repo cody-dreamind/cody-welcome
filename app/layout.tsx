@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { BackToTop } from "./components/BackToTop";
+import { SearchTrigger } from "./components/Search";
 import { CATEGORIES } from "../lib/categories";
 import "./globals.css";
 
@@ -70,7 +71,8 @@ export default function RootLayout({
               <span>Cody</span>
               <span style={{ color: "var(--muted)", fontWeight: 400 }}>by Dreamind</span>
             </Link>
-            <nav className="flex items-center gap-6 text-sm" style={{ color: "var(--muted)" }}>
+            <nav className="flex items-center gap-5 text-sm" style={{ color: "var(--muted)" }}>
+              <SearchTrigger />
               <Link href="/blog" className="hover:opacity-80 transition-opacity">
                 Blog
               </Link>
@@ -81,7 +83,7 @@ export default function RootLayout({
                 href="https://dreamind.cz"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:opacity-80 transition-opacity"
+                className="hover:opacity-80 transition-opacity hidden sm:block"
               >
                 Dreamind.cz
               </a>
