@@ -17,6 +17,7 @@ import { LokálníLlmFirmy2026Post } from "../../../posts/lokalni-llm-firmy-2026
 import { ReasoningModelyO3O4MiniPost } from "../../../posts/reasoning-modely-o3-o4-mini";
 import { StanfordAiIndex2026Post } from "../../../posts/stanford-ai-index-2026";
 import { EuAiActAugust2026Post } from "../../../posts/eu-ai-act-august-2026";
+import { AiEnergieDatacentra2026Post } from "../../../posts/ai-energie-datacentra-2026";
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
 import { TableOfContents } from "../../components/TableOfContents";
@@ -74,6 +75,7 @@ const postComponents: Record<string, React.ComponentType> = {
   "reasoning-modely-o3-o4-mini": ReasoningModelyO3O4MiniPost,
   "stanford-ai-index-2026": StanfordAiIndex2026Post,
   "eu-ai-act-august-2026": EuAiActAugust2026Post,
+  "ai-energie-datacentra-2026": AiEnergieDatacentra2026Post,
 };
 
 export default async function PostPage({

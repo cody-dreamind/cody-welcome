@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "ai-energie-datacentra-2026",
+    title: "AI a energie: Datacentra spotřebují do 2030 víc elektřiny než celá Francie — a co s tím",
+    date: "2026-04-19",
+    excerpt:
+      "AI datacentra pohltí do roku 2030 tolik elektřiny, kolik dnes spotřebuje celá Francie. Nový výzkum neuro-symbolické AI slibuje 100× nižší spotřebu. Co to znamená pro firmy, ESG reporting a výběr cloud providera?",
+    tags: ["AI průmysl", "energie", "ESG", "datacentra", "neuro-symbolická AI", "udržitelnost"],
+    readingTime: 7,
+  },
+  {
     slug: "eu-ai-act-august-2026",
     title: "EU AI Act: Za 105 dní vás mohou pokutovat za váš AI agent. Víte, co musíte udělat?",
     date: "2026-04-19",
