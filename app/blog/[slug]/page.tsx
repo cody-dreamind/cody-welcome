@@ -24,6 +24,7 @@ import { AiMarketingPersonalizaceAutomatizace2026Post } from "../../../posts/ai-
 import { CursorCopilotWindsurfSrovnani2026Post } from "../../../posts/cursor-copilot-windsurf-srovnani-2026";
 import { AiVideoGenerovani2026Post } from "../../../posts/ai-video-generovani-2026";
 import { CeskyAiEkosystem2026Post } from "../../../posts/cesky-ai-ekosystem-2026";
+import { AiCodingRoiFirmy2026Post } from "../../../posts/ai-coding-roi-firmy-2026";
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
 import { TableOfContents } from "../../components/TableOfContents";
@@ -97,6 +98,7 @@ const postComponents: Record<string, React.ComponentType> = {
   "cursor-copilot-windsurf-srovnani-2026": CursorCopilotWindsurfSrovnani2026Post,
   "ai-video-generovani-2026": AiVideoGenerovani2026Post,
   "cesky-ai-ekosystem-2026": CeskyAiEkosystem2026Post,
+  "ai-coding-roi-firmy-2026": AiCodingRoiFirmy2026Post,
 };
 
 export default async function PostPage({

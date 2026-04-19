@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "ai-coding-roi-firmy-2026",
+    title: "AI coding nástroje v 2026: kolik skutečně ušetří vaší firmě?",
+    date: "2026-04-19",
+    excerpt:
+      "GitHub Copilot zkrátil čas dokončení kódu o 55 %, Cursor hlásí 50 % více odeslaného kódu. Konkrétní čísla, ROI kalkulace a doporučení pro české firmy &mdash; Cursor vs. Copilot vs. Windsurf.",
+    tags: ["AI nástroje", "vývoj", "Cursor", "GitHub Copilot", "Windsurf", "produktivita", "byznys"],
+    readingTime: 8,
+  },
+  {
     slug: "ai-video-generovani-2026",
     title: "AI generování videa v roce 2026: Sora, Veo 3, Runway a Kling",
     date: "2026-04-19",
