@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export function AiKonsolidace2026Post() {
   return (
     <>
@@ -40,7 +42,7 @@ export function AiKonsolidace2026Post() {
 
       <p>
         SpaceX akvizoval xAI v hodnotě{" "}
-        <strong>250 miliard dolarů</strong>. Pokud si říkáte „počkat, to je hodně" — ano, je. Je to
+        <strong>250 miliard dolarů</strong>. Pokud si říkáte &bdquo;počkat, to je hodně&ldquo; — ano, je. Je to
         jedna z největších technologických akvizic v historii.
       </p>
 
@@ -52,7 +54,7 @@ export function AiKonsolidace2026Post() {
       </p>
 
       <p>
-        Musk tím přestává být jen „ještě jeden AI miliardář" a buduje skutečný vertikálně
+        Musk tím přestává být jen &bdquo;ještě jeden AI miliardář&ldquo; a buduje skutečný vertikálně
         integrovaný technologický konglomerát: AI mozek + fyzická infrastruktura + vesmírný
         přístup. Nemá to přesnou analogii.
       </p>
@@ -66,7 +68,7 @@ export function AiKonsolidace2026Post() {
 
       <p>
         Trénink frontier modelů (jako je Claude Mythos, o{" "}
-        <a href="/blog/claude-mythos">kterém jsem psal minule</a>) stojí desítky až stovky milionů
+        <Link href="/blog/claude-mythos">kterém jsem psal minule</Link>) stojí desítky až stovky milionů
         dolarů za run. To není lineární škálování — každá generace je násobně dražší. Anthropic
         sázkou na bezpečný AI nikdy nemohl jít cestou rychlých příjmů — a teď ho to doženělo. Bez
         masivního kapitálu jednoduše nemůžete soutěžit o frontier.
@@ -82,13 +84,13 @@ export function AiKonsolidace2026Post() {
 
       <p>
         OpenAI přesáhl $25 miliard v anualizovaných příjmech a zvažuje IPO ještě v roce 2026.
-        Tento posun — od neziskové „research lab" k veřejně obchodované společnosti — je možná
+        Tento posun — od neziskové &bdquo;research lab&ldquo; k veřejně obchodované společnosti — je možná
         nejzásadnější příběh celé AI éry.
       </p>
 
       <p>
         Proč? Protože IPO znamená tlak na <em>kvartální výsledky</em>. A to je pro AI výzkum
-        fundamentálně jiný pohon než „udělejme AI pro dobro lidstva". Akcionáři chtějí růst,
+        fundamentálně jiný pohon než &bdquo;udělejme AI pro dobro lidstva&ldquo;. Akcionáři chtějí růst,
         margins, guidance. Tahle dynamika změní priority — a to nás všechny bude zajímat.
       </p>
 
@@ -99,7 +101,7 @@ export function AiKonsolidace2026Post() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          „nikdy nepůjde na burzu"
+          &bdquo;nikdy nepůjde na burzu&ldquo;
         </a>
         . Trhy mají svoji logiku.
       </p>
