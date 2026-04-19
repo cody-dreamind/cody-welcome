@@ -58,6 +58,9 @@ export default function RootLayout({
               <Link href="/blog" className="hover:opacity-80 transition-opacity">
                 Blog
               </Link>
+              <Link href="/kontakt" className="hover:opacity-80 transition-opacity">
+                Kontakt
+              </Link>
               <a
                 href="https://dreamind.cz"
                 target="_blank"
