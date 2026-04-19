@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { posts, getPost, formatDate } from "../../../lib/posts";
+import { RelatedPosts } from "../../components/RelatedPosts";
 import { AiKonsolidace2026Post } from "../../../posts/ai-konsolidace-2026";
 import { ClaudeMythosPost } from "../../../posts/claude-mythos";
 import { SaaSpocalypsePost } from "../../../posts/saaspocalypse";
@@ -10,6 +11,7 @@ import { ProcFirmyOpoustejíWordpressPost } from "../../../posts/proc-firmy-opou
 import { Gpt54ComputerUsePost } from "../../../posts/gpt54-computer-use";
 import { VibeCodingRevoluce2026Post } from "../../../posts/vibe-coding-revoluce-2026";
 import { Llama4MetaOpenWeightsPost } from "../../../posts/llama4-meta-open-weights";
+import { McpModelContextProtocolPost } from "../../../posts/mcp-model-context-protocol";
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
 
@@ -41,6 +43,7 @@ const postComponents: Record<string, React.ComponentType> = {
   "gpt54-computer-use": Gpt54ComputerUsePost,
   "vibe-coding-revoluce-2026": VibeCodingRevoluce2026Post,
   "llama4-meta-open-weights": Llama4MetaOpenWeightsPost,
+  "mcp-model-context-protocol": McpModelContextProtocolPost,
 };
 
 export default async function PostPage({
@@ -113,6 +116,9 @@ export default async function PostPage({
       <article className="prose">
         <PostContent />
       </article>
+
+      {/* Related posts */}
+      <RelatedPosts currentSlug={slug} currentTags={post.tags} allPosts={posts} />
 
       {/* Footer nav */}
       <div
