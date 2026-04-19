@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "stanford-ai-index-2026",
+    title: "Stanford AI Index 2026: Čína smazala náskok USA na pouhých 2,7 % — co to znamená pro vaši firmu",
+    date: "2026-04-19",
+    excerpt:
+      "Výkonnostní rozdíl mezi nejlepším americkým a čínským AI modelem klesl za tři roky z 200 bodů na 39 — tedy 2,7 %. Stanford AI Index 2026 ukazuje, proč to mění pravidla hry pro každého, kdo vybírá AI poskytovatele.",
+    tags: ["AI průmysl", "Stanford", "geopolitika AI", "byznys", "benchmarky", "Čína"],
+    readingTime: 7,
+  },
+  {
     slug: "ai-agenti-v-produkci-2026",
     title: "AI agenti v produkci: 75 % firem nasadí agenty do konce roku 2026 — co funguje a co ne",
     date: "2026-04-19",

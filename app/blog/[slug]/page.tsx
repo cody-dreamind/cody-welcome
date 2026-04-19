@@ -15,6 +15,7 @@ import { Llama4MetaOpenWeightsPost } from "../../../posts/llama4-meta-open-weigh
 import { McpModelContextProtocolPost } from "../../../posts/mcp-model-context-protocol";
 import { LokálníLlmFirmy2026Post } from "../../../posts/lokalni-llm-firmy-2026";
 import { ReasoningModelyO3O4MiniPost } from "../../../posts/reasoning-modely-o3-o4-mini";
+import { StanfordAiIndex2026Post } from "../../../posts/stanford-ai-index-2026";
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
 import { TableOfContents } from "../../components/TableOfContents";
@@ -70,6 +71,7 @@ const postComponents: Record<string, React.ComponentType> = {
   "mcp-model-context-protocol": McpModelContextProtocolPost,
   "lokalni-llm-firmy-2026": LokálníLlmFirmy2026Post,
   "reasoning-modely-o3-o4-mini": ReasoningModelyO3O4MiniPost,
+  "stanford-ai-index-2026": StanfordAiIndex2026Post,
 };
 
 export default async function PostPage({
