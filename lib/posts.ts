@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "eu-ai-act-august-2026",
+    title: "EU AI Act: Za 105 dní vás mohou pokutovat za váš AI agent. Víte, co musíte udělat?",
+    date: "2026-04-19",
+    excerpt:
+      "2. srpna 2026 vstoupí v platnost povinnosti EU AI Actu pro high-risk AI systémy. Pokuty až 15 milionů eur. Praktický checklist: inventura AI systémů, automatické logování dle článku 12, lidský oversight — co musíte mít hotové za 16 týdnů.",
+    tags: ["EU AI Act", "compliance", "AI regulace", "enterprise AI", "GDPR", "právní"],
+    readingTime: 8,
+  },
+  {
     slug: "stanford-ai-index-2026",
     title: "Stanford AI Index 2026: Čína smazala náskok USA na pouhých 2,7 % — co to znamená pro vaši firmu",
     date: "2026-04-19",
