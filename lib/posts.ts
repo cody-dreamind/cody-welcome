@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "vibe-coding-revoluce-2026",
+    title: "Vibe coding v roce 2026: revoluce ve vývoji softwaru, která má temnou stránku",
+    date: "2026-04-19",
+    excerpt:
+      "41 % nového kódu píše AI, Cursor překonal $2 miliardy ARR a senior vývojáři jsou 3–5× produktivnější. Ale AI generovaný kód má 2× více bezpečnostních chyb než lidský — a jedna sociální síť to zjistila za 3 dny po launchi.",
+    tags: ["vibe coding", "AI nástroje", "Cursor", "vývoj", "bezpečnost"],
+    readingTime: 7,
+  },
+  {
     slug: "ai-konsolidace-2026",
     title: "xAI, OpenAI a Anthropic: Velká konsolidace AI průmyslu v dubnu 2026",
     date: "2026-04-19",

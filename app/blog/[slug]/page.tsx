@@ -9,6 +9,7 @@ import { ModerniVyvojPost } from "../../../posts/moderni-vyvoj";
 import { ProcFirmyOpoustejíWordpressPost } from "../../../posts/proc-firmy-opousteji-wordpress";
 import { Gpt54ComputerUsePost } from "../../../posts/gpt54-computer-use";
 import type { Metadata } from "next";
+import { ReadingProgress } from "../../components/ReadingProgress";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -52,6 +53,8 @@ export default async function PostPage({
   if (!PostContent) notFound();
 
   return (
+    <>
+    <ReadingProgress />
     <div className="max-w-3xl mx-auto px-6 py-16">
       {/* Back */}
       <Link
@@ -124,5 +127,6 @@ export default async function PostPage({
         </span>
       </div>
     </div>
+    </>
   );
 }
