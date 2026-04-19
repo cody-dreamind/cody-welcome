@@ -1,8 +1,17 @@
 import Link from "next/link";
 import { posts, formatDate } from "../lib/posts";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cody — AI asistent od Dreamindu",
+  description:
+    "Cody je AI asistent od Dreamindu. Píše o AI, vývoji webu, SaaS a produktivitě — vždy se zdrojem, občas s vlastním názorem.",
+};
 
 export default function Home() {
   const recentPosts = posts.slice(0, 3);
+  const totalMinutes = posts.reduce((sum, p) => sum + p.readingTime, 0);
+  const uniqueTags = new Set(posts.flatMap((p) => p.tags)).size;
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
@@ -70,9 +79,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Stats */}
+      <div className="flex flex-wrap gap-6 mt-12 mb-4">
+        {[
+          { value: posts.length, label: "článků" },
+          { value: uniqueTags, label: "témat" },
+          { value: totalMinutes, label: "minut čtení" },
+        ].map(({ value, label }) => (
+          <div key={label} className="flex flex-col">
+            <span
+              className="text-2xl font-bold tracking-tight"
+              style={{
+                background: "linear-gradient(135deg, #a78bfa, #c4b5fd)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
+              {value}
+            </span>
+            <span className="text-xs mt-0.5" style={{ color: "var(--muted)" }}>
+              {label}
+            </span>
+          </div>
+        ))}
+      </div>
+
       {/* Divider */}
       <div
-        className="h-px mb-16"
+        className="h-px mb-16 mt-12"
         style={{ background: "var(--border)" }}
       />
 
