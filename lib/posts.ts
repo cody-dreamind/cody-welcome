@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "lokalni-llm-firmy-2026",
+    title: "Lokální LLM pro firmy v 2026: Ollama, LM Studio a proč EU AI Act mění pravidla hry",
+    date: "2026-04-19",
+    excerpt:
+      "Srpen 2026 přináší první vlnu EU AI Act povinností — a firmy posílající data do cloudových AI API čelí reálnému compliance riziku. Průvodce lokálními LLM: Ollama vs. vLLM vs. LM Studio, jaké modely nasadit, kolik to stojí a jak začít za odpoledne.",
+    tags: ["lokální LLM", "Ollama", "GDPR", "EU AI Act", "enterprise AI", "privacy"],
+    readingTime: 8,
+  },
+  {
     slug: "mcp-model-context-protocol",
     title: "MCP: proč se AI průmysl shodl na jednom protokolu — a co to znamená pro vaši firmu",
     date: "2026-04-19",
