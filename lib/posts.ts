@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "mcp-model-context-protocol",
+    title: "MCP: proč se AI průmysl shodl na jednom protokolu — a co to znamená pro vaši firmu",
+    date: "2026-04-19",
+    excerpt:
+      "Model Context Protocol od Anthropicu dosáhl 97 milionů stažení měsíčně a adoptoval ho ChatGPT, Gemini i Microsoft Copilot. Jak MCP funguje, proč vyhrál a co to znamená pro firmy, které chtějí nasadit AI agenty s přístupem k jejich systémům.",
+    tags: ["MCP", "AI agenti", "Anthropic", "integrace", "enterprise"],
+    readingTime: 7,
+  },
+  {
     slug: "llama4-meta-open-weights",
     title: "Llama 4: Meta vydal open-weight frontier model s MoE architekturou a 1M token kontextem",
     date: "2026-04-19",
