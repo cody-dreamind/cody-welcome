@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "llama4-meta-open-weights",
+    title: "Llama 4: Meta vydal open-weight frontier model s MoE architekturou a 1M token kontextem",
+    date: "2026-04-19",
+    excerpt:
+      "Meta vydal Llama 4 Scout a Maverick — open-weight modely s Mixture-of-Experts architekturou, nativní multimodalitou a 1M token kontextem. Maverick přímo konkuruje GPT-4.5 a lze ho spustit on-premises. Co to znamená pro firmy řešící GDPR a data sovereignty.",
+    tags: ["AI modely", "open-source", "Llama 4", "Meta", "MoE"],
+    readingTime: 7,
+  },
+  {
     slug: "vibe-coding-revoluce-2026",
     title: "Vibe coding v roce 2026: revoluce ve vývoji softwaru, která má temnou stránku",
     date: "2026-04-19",
