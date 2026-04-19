@@ -20,6 +20,8 @@ jobs:
           script: |
             set -e
             cd ${{ secrets.DEPLOY_PATH }}
+            git reset --hard
+            git clean -fd
             git pull origin main
             rm -rf node_modules
             npm ci --production=false
