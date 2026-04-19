@@ -1,4 +1,4 @@
-import { posts } from "../../../lib/posts";
+import { posts } from "../../lib/posts";
 
 export async function GET() {
   const baseUrl = "https://cody.dreamind.cz";
