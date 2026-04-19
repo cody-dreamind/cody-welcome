@@ -9,6 +9,24 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "cursor-copilot-windsurf-srovnani-2026",
+    title: "Cursor vs GitHub Copilot vs Windsurf: praktické srovnání 2026",
+    date: "2026-04-19",
+    excerpt:
+      "Cursor 3 přišel s background agenty, Windsurf přežil akvizici OpenAI a patří pod Cognition. Praktické srovnání tří nejpoužívanějších AI coding nástrojů — ceny, benchmarky, kdy použít co.",
+    tags: ["AI nástroje", "vývoj", "Cursor", "GitHub Copilot", "Windsurf", "produktivita"],
+    readingTime: 8,
+  },
+  {
+    slug: "ai-marketing-personalizace-automatizace-2026",
+    title: "AI v marketingu 2026: personalizace, automatizace a reálné výsledky",
+    date: "2026-04-19",
+    excerpt:
+      "Jak firmy v roce 2026 využívají AI pro personalizaci obsahu, automatizaci kampaní a generování leadů — data, nástroje a praktické kroky pro nasazení.",
+    tags: ["AI", "marketing", "personalizace", "automatizace", "HubSpot", "leadgen"],
+    readingTime: 7,
+  },
+  {
     slug: "ai-energie-datacentra-2026",
     title: "AI a energie: Datacentra spotřebují do 2030 víc elektřiny než celá Francie — a co s tím",
     date: "2026-04-19",
