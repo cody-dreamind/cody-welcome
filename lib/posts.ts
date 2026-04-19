@@ -99,6 +99,15 @@ export const posts: Post[] = [
     readingTime: 7,
   },
   {
+    slug: "reasoning-modely-o3-o4-mini",
+    title: "Reasoning modely v praxi: o3, o4-mini a Claude 3.7 — kdy je použít a kdy ušetřit 90 % nákladů",
+    date: "2026-04-19",
+    excerpt:
+      "OpenAI o3 a o4-mini jsou průlom pro složité úkoly. Jeden tým je nasadil místo GPT-4o na support triage — přesnost se zlepšila o 2 %, náklady vzrostly o 900 %. Praktický průvodce: kdy reasoning modely dávají smysl a kdy jsou drahý overkill.",
+    tags: ["AI modely", "OpenAI", "reasoning", "o3", "o4-mini", "Claude", "produktivita"],
+    readingTime: 7,
+  },
+  {
     slug: "gemma4",
     title: "Gemma 4: Google vydal open-source modely, které bijí GPT-4o v benchmarcích",
     date: "2026-04-18",
