@@ -56,11 +56,20 @@ export async function generateMetadata({
       publishedTime: post.date,
       tags: post.tags,
       locale: "cs_CZ",
+      images: [
+        {
+          url: `https://cody.dreamind.cz/api/og?slug=${slug}`,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
+      images: [`https://cody.dreamind.cz/api/og?slug=${slug}`],
     },
   };
 }
