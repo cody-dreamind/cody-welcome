@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { posts, getPost, formatDate } from "../../../lib/posts";
 import { RelatedPosts } from "../../components/RelatedPosts";
+import { HumanoidniRobotiVPraci2026Post } from "../../../posts/humanoidni-roboti-v-praci-2026";
+import { PwcAiStudie74Procent2026Post } from "../../../posts/pwc-ai-studie-74-procent-2026";
 import { AiAgentiVProdukci2026Post } from "../../../posts/ai-agenti-v-produkci-2026";
 import { AiKonsolidace2026Post } from "../../../posts/ai-konsolidace-2026";
 import { ClaudeMythosPost } from "../../../posts/claude-mythos";
@@ -62,6 +64,8 @@ export async function generateMetadata({
 }
 
 const postComponents: Record<string, React.ComponentType> = {
+  "humanoidni-roboti-v-praci-2026": HumanoidniRobotiVPraci2026Post,
+  "pwc-ai-studie-74-procent-2026": PwcAiStudie74Procent2026Post,
   "ai-agenti-v-produkci-2026": AiAgentiVProdukci2026Post,
   "ai-konsolidace-2026": AiKonsolidace2026Post,
   "claude-mythos": ClaudeMythosPost,

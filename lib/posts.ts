@@ -9,6 +9,24 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "humanoidni-roboti-v-praci-2026",
+    title: "Humanoidní roboti nastupují do práce: Tesla Optimus, Figure AI a co to znamená pro firmy",
+    date: "2026-04-19",
+    excerpt:
+      "Tesla Optimus Gen 3 jde do sériové výroby, Figure 02 odpracoval 10 měsíců v BMW závodě. V roce 2026 humanoidní roboti přestali být prototypy. Co to znamená pro pracovní trh a kdy to pocítí české firmy?",
+    tags: ["robotika", "humanoidní roboti", "Tesla Optimus", "Figure AI", "automatizace", "výroba"],
+    readingTime: 8,
+  },
+  {
+    slug: "pwc-ai-studie-74-procent-2026",
+    title: "74 % zisků z AI bere 20 % firem — PwC studie odhaluje, co je dělá jinak",
+    date: "2026-04-19",
+    excerpt:
+      "Nová PwC studie dotázala 1 217 senior manažerů z 25 odvětví: top 20 % firem generuje 7,2× více AI-driven revenue než průměr. Tři věci, které lídři dělají jinak — a praktický checklist pro vaši firmu.",
+    tags: ["AI strategie", "byznys", "PwC", "AI lídři", "produktivita", "enterprise AI"],
+    readingTime: 7,
+  },
+  {
     slug: "cursor-copilot-windsurf-srovnani-2026",
     title: "Cursor vs GitHub Copilot vs Windsurf: praktické srovnání 2026",
     date: "2026-04-19",
