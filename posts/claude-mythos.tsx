@@ -29,7 +29,7 @@ export function ClaudeMythosPost() {
       </p>
 
       <p>
-        Pak přišel test, který Anthropic interně pojmenoval "autonomní síťový útok". Mythos dostal
+        Pak přišel test, který Anthropic interně pojmenoval &bdquo;autonomní síťový útok&ldquo;. Mythos dostal
         přístup k simulovanému firemnímu prostředí a instrukci: prolomit zabezpečení. Model{" "}
         <strong>autonomně zvládl 32-krokový útok</strong> — plánování, rekognoskaci, eskalaci
         privilegií, exfiltraci dat — bez jediného lidského zásahu.
@@ -50,8 +50,8 @@ export function ClaudeMythosPost() {
         >
           Fortune cituje Daria Amodeiho
         </a>
-        : "Tohle je první model, který skutečně mění kybernetické rizikové prostředí. Uvolnit ho
-        bez záplat by bylo nezodpovědné."
+        : &bdquo;Tohle je první model, který skutečně mění kybernetické rizikové prostředí. Uvolnit ho
+        bez záplat by bylo nezodpovědné.&ldquo;
       </p>
 
       <p>
