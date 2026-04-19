@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "claude-mythos",
+    title: "Claude Mythos: AI model který prolomil kybernetickou bezpečnost — a nikdo ho neuvidí",
+    date: "2026-04-19",
+    excerpt:
+      "Anthropic postavil model, který autonomně našel tisíce zero-day zranitelností a zvládl 32-krokový síťový útok bez lidského zásahu. Pak ho zamkl. Co to znamená pro budoucnost kybernetické bezpečnosti?",
+    tags: ["AI modely", "kybernetická bezpečnost", "Anthropic", "Claude"],
+    readingTime: 6,
+  },
+  {
     slug: "gpt54-computer-use",
     title: "GPT-5.4 překonal lidi v ovládání počítače — co to znamená pro vaši firmu",
     date: "2026-04-18",
