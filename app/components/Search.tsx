@@ -73,10 +73,6 @@ function SearchModal({ onClose }: { onClose: () => void }) {
   }, []);
 
   useEffect(() => {
-    setSelected(0);
-  }, [query]);
-
-  useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowDown") {
@@ -126,7 +122,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
           <input
             ref={inputRef}
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => { setQuery(e.target.value); setSelected(0); }}
             placeholder="Hledat v článcích…"
             className="flex-1 bg-transparent text-sm outline-none placeholder:opacity-40"
             style={{ color: "var(--foreground)" }}
