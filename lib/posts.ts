@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "ai-agenti-v-produkci-2026",
+    title: "AI agenti v produkci: 75 % firem nasadí agenty do konce roku 2026 — co funguje a co ne",
+    date: "2026-04-19",
+    excerpt:
+      "75 % firem plánuje nasadit AI agenty do konce roku 2026. Od zákaznické podpory přes code review po právní workflow — kde agenti reálně fungují, kde selhávají, a co potřebujete vědět před nasazením v českém prostředí (GDPR, EU AI Act).",
+    tags: ["AI agenti", "enterprise AI", "produkce", "GDPR", "MCP", "automatizace"],
+    readingTime: 8,
+  },
+  {
     slug: "lokalni-llm-firmy-2026",
     title: "Lokální LLM pro firmy v 2026: Ollama, LM Studio a proč EU AI Act mění pravidla hry",
     date: "2026-04-19",
