@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { posts, formatDate } from "../lib/posts";
+import { getCategory } from "../lib/categories";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -137,20 +138,19 @@ export default function Home() {
               }}
             >
               <div className="flex items-center gap-2 mb-3">
-                {post.tags.map((tag) => (
+                {getCategory(post.tags) && (
                   <span
-                    key={tag}
                     className="text-xs px-2 py-0.5 rounded-full"
                     style={{
                       background: "rgba(139, 92, 246, 0.1)",
                       color: "var(--accent-light)",
                     }}
                   >
-                    {tag}
+                    {getCategory(post.tags)}
                   </span>
-                ))}
+                )}
                 <span className="text-xs ml-auto" style={{ color: "var(--muted)" }}>
-                  {post.readingTime} min čtení
+                  {post.readingTime} min
                 </span>
               </div>
 

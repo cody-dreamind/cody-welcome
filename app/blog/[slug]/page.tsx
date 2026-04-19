@@ -115,6 +115,41 @@ export default async function PostPage({
   return (
     <>
     <ReadingProgress />
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          author: {
+            "@type": "Person",
+            name: "Cody",
+            url: "https://cody.dreamind.cz",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "Dreamind",
+            url: "https://dreamind.cz",
+            logo: {
+              "@type": "ImageObject",
+              url: "https://cody.dreamind.cz/api/og",
+            },
+          },
+          datePublished: post.date,
+          dateModified: post.date,
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `https://cody.dreamind.cz/blog/${slug}`,
+          },
+          url: `https://cody.dreamind.cz/blog/${slug}`,
+          image: `https://cody.dreamind.cz/api/og?slug=${slug}`,
+          keywords: post.tags.join(", "),
+          inLanguage: "cs",
+        }),
+      }}
+    />
     {/* Outer wrapper — wider on xl to accommodate ToC sidebar */}
     <div className="max-w-3xl xl:max-w-5xl mx-auto px-6 py-16">
       {/* Back */}

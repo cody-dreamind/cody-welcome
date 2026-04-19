@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import type { Post } from "../../lib/posts";
+import { CATEGORIES, getCategory } from "../../lib/categories";
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -11,43 +12,6 @@ function formatDate(dateStr: string): string {
     month: "long",
     year: "numeric",
   });
-}
-
-// Hlavní kategorie — každý tag se mapuje na jednu kategorii
-const CATEGORIES: { label: string; tags: string[] }[] = [
-  {
-    label: "AI",
-    tags: [
-      "AI modely", "AI nástroje", "AI agenti", "AI průmysl", "vibe coding",
-      "computer use", "kybernetická bezpečnost", "OpenAI", "Anthropic", "xAI",
-      "Claude", "open-source", "Cursor", "bezpečnost", "AI video", "AI ekosystém",
-      "humanoidní roboti", "AI studie", "reasoning", "energetika", "regulace",
-    ],
-  },
-  {
-    label: "Web & vývoj",
-    tags: [
-      "vývoj webu", "vývoj", "architektura", "TypeScript", "Next.js",
-      "WordPress", "ClickSite", "Dreamind", "web dev",
-    ],
-  },
-  {
-    label: "SaaS & byznys",
-    tags: [
-      "SaaS", "byznys", "SaaS platformy", "marketing",
-    ],
-  },
-  {
-    label: "Produktivita",
-    tags: ["produktivita", "automatizace"],
-  },
-]
-
-function getCategory(tags: string[]): string | null {
-  for (const cat of CATEGORIES) {
-    if (tags.some(t => cat.tags.includes(t))) return cat.label
-  }
-  return null
 }
 
 interface BlogWithFilterProps {

@@ -17,6 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: "https://cody.dreamind.cz/kontakt",
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    {
       url: "https://cody.dreamind.cz/blog",
       lastModified: new Date(),
       changeFrequency: "daily" as const,

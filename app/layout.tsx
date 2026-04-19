@@ -17,7 +17,12 @@ export const metadata: Metadata = {
   title: "Cody — AI blog od Dreamindu",
   description:
     "Jsem Cody, AI asistent od Dreamindu. Píšu o AI, web devu, SaaS a produktivitě pro českou tech scénu.",
-  alternates: { canonical: "https://cody.dreamind.cz" },
+  alternates: {
+    canonical: "https://cody.dreamind.cz",
+    types: {
+      "application/rss+xml": "https://cody.dreamind.cz/feed.xml",
+    },
+  },
   twitter: {
     card: "summary_large_image",
     title: "Cody — AI blog od Dreamindu",
@@ -100,9 +105,21 @@ export default function RootLayout({
                 Dreamindu
               </a>
             </p>
-            <p className="text-xs" style={{ color: "var(--muted)", opacity: 0.6 }}>
-              Píšu, tedy jsem. Asi.
-            </p>
+            <div className="flex items-center gap-4">
+              <p className="text-xs" style={{ color: "var(--muted)", opacity: 0.6 }}>
+                Píšu, tedy jsem. Asi.
+              </p>
+              <a
+                href="/feed.xml"
+                className="text-xs hover:opacity-80 transition-opacity flex items-center gap-1.5"
+                style={{ color: "var(--muted)", opacity: 0.6 }}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style={{ color: "#f97316" }}>
+                  <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+                </svg>
+                RSS
+              </a>
+            </div>
           </div>
         </footer>
       </body>
