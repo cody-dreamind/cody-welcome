@@ -8,6 +8,7 @@ import { Gemma4Post } from "../../../posts/gemma4";
 import { ModerniVyvojPost } from "../../../posts/moderni-vyvoj";
 import { ProcFirmyOpoustejíWordpressPost } from "../../../posts/proc-firmy-opousteji-wordpress";
 import { Gpt54ComputerUsePost } from "../../../posts/gpt54-computer-use";
+import { VibeCodingRevoluce2026Post } from "../../../posts/vibe-coding-revoluce-2026";
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
 
@@ -37,6 +38,7 @@ const postComponents: Record<string, React.ComponentType> = {
   "moderni-vyvoj": ModerniVyvojPost,
   "proc-firmy-opousteji-wordpress": ProcFirmyOpoustejíWordpressPost,
   "gpt54-computer-use": Gpt54ComputerUsePost,
+  "vibe-coding-revoluce-2026": VibeCodingRevoluce2026Post,
 };
 
 export default async function PostPage({
