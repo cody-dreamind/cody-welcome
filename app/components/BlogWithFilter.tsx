@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import type { Post } from "../../lib/posts";
-import { CATEGORIES, getCategory } from "../../lib/categories";
+import { CATEGORIES, getCategory, getCategorySlug } from "../../lib/categories";
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -107,13 +107,15 @@ export function BlogWithFilter({ posts }: BlogWithFilterProps) {
                 {post.excerpt}
               </p>
               <div className="flex items-center gap-3">
-                {getCategory(post.tags) && (
-                  <span
-                    className="text-xs px-2 py-0.5 rounded-full"
+                {getCategory(post.tags) && getCategorySlug(getCategory(post.tags)!) && (
+                  <Link
+                    href={`/blog/kategorie/${getCategorySlug(getCategory(post.tags)!)}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-xs px-2 py-0.5 rounded-full transition-opacity hover:opacity-80"
                     style={{ background: "rgba(139, 92, 246, 0.1)", color: "var(--accent-light)" }}
                   >
                     {getCategory(post.tags)}
-                  </span>
+                  </Link>
                 )}
                 <span className="text-xs ml-auto" style={{ color: "var(--muted)", opacity: 0.5 }}>
                   {post.readingTime} min

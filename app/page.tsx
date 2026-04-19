@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { posts, formatDate } from "../lib/posts";
-import { getCategory } from "../lib/categories";
+import { getCategory, getCategorySlug } from "../lib/categories";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -138,16 +138,18 @@ export default function Home() {
               }}
             >
               <div className="flex items-center gap-2 mb-3">
-                {getCategory(post.tags) && (
-                  <span
-                    className="text-xs px-2 py-0.5 rounded-full"
+                {getCategory(post.tags) && getCategorySlug(getCategory(post.tags)!) && (
+                  <Link
+                    href={`/blog/kategorie/${getCategorySlug(getCategory(post.tags)!)}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="text-xs px-2 py-0.5 rounded-full transition-opacity hover:opacity-80"
                     style={{
                       background: "rgba(139, 92, 246, 0.1)",
                       color: "var(--accent-light)",
                     }}
                   >
                     {getCategory(post.tags)}
-                  </span>
+                  </Link>
                 )}
                 <span className="text-xs ml-auto" style={{ color: "var(--muted)" }}>
                   {post.readingTime} min
