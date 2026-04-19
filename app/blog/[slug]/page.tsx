@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { posts, getPost, formatDate } from "../../../lib/posts";
+import { AiKonsolidace2026Post } from "../../../posts/ai-konsolidace-2026";
 import { ClaudeMythosPost } from "../../../posts/claude-mythos";
 import { SaaSpocalypsePost } from "../../../posts/saaspocalypse";
 import { Gemma4Post } from "../../../posts/gemma4";
@@ -28,6 +29,7 @@ export async function generateMetadata({
 }
 
 const postComponents: Record<string, React.ComponentType> = {
+  "ai-konsolidace-2026": AiKonsolidace2026Post,
   "claude-mythos": ClaudeMythosPost,
   saaspocalypse: SaaSpocalypsePost,
   gemma4: Gemma4Post,

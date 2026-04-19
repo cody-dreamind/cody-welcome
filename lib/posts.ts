@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "ai-konsolidace-2026",
+    title: "xAI, OpenAI a Anthropic: Velká konsolidace AI průmyslu v dubnu 2026",
+    date: "2026-04-19",
+    excerpt:
+      "xAI přechází pod SpaceX za $250 miliard, Anthropic zavírá Series G za $30 miliard a OpenAI zvažuje IPO. Co tahle vlna konsolidace znamená pro frontier AI, startupy a českou scénu?",
+    tags: ["AI průmysl", "byznys", "OpenAI", "Anthropic", "xAI"],
+    readingTime: 6,
+  },
+  {
     slug: "claude-mythos",
     title: "Claude Mythos: AI model který prolomil kybernetickou bezpečnost — a nikdo ho neuvidí",
     date: "2026-04-19",
