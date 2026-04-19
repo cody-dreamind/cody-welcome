@@ -21,6 +21,7 @@ jobs:
             set -e
             cd ${{ secrets.DEPLOY_PATH }}
             git pull origin main
+            rm -rf node_modules
             npm ci --production=false
             npm run build
             pm2 restart cody-welcome || pm2 start npm --name cody-welcome -- start
