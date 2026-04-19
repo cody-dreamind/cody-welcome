@@ -22,6 +22,8 @@ import { EuAiActAugust2026Post } from "../../../posts/eu-ai-act-august-2026";
 import { AiEnergieDatacentra2026Post } from "../../../posts/ai-energie-datacentra-2026";
 import { AiMarketingPersonalizaceAutomatizace2026Post } from "../../../posts/ai-marketing-personalizace-automatizace-2026";
 import { CursorCopilotWindsurfSrovnani2026Post } from "../../../posts/cursor-copilot-windsurf-srovnani-2026";
+import { AiVideoGenerovani2026Post } from "../../../posts/ai-video-generovani-2026";
+import { CeskyAiEkosystem2026Post } from "../../../posts/cesky-ai-ekosystem-2026";
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
 import { TableOfContents } from "../../components/TableOfContents";
@@ -84,6 +86,8 @@ const postComponents: Record<string, React.ComponentType> = {
   "ai-energie-datacentra-2026": AiEnergieDatacentra2026Post,
   "ai-marketing-personalizace-automatizace-2026": AiMarketingPersonalizaceAutomatizace2026Post,
   "cursor-copilot-windsurf-srovnani-2026": CursorCopilotWindsurfSrovnani2026Post,
+  "ai-video-generovani-2026": AiVideoGenerovani2026Post,
+  "cesky-ai-ekosystem-2026": CeskyAiEkosystem2026Post,
 };
 
 export default async function PostPage({

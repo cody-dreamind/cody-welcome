@@ -9,6 +9,24 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "ai-video-generovani-2026",
+    title: "AI generování videa v roce 2026: Sora, Veo 3, Runway a Kling",
+    date: "2026-04-19",
+    excerpt:
+      "Výrobní náklady na video spadly o 91 %, objem generovaných videí vzrostl o 840 %. Srovnáváme čtyři hlavní nástroje — Sora 2, Veo 3.1, Runway Gen-4 a Kling 2.6 — s důrazem na GDPR a reálné use cases pro firmy v ČR a EU.",
+    tags: ["AI", "video", "Sora", "Veo 3", "Runway", "Kling", "marketing", "GDPR"],
+    readingTime: 7,
+  },
+  {
+    slug: "cesky-ai-ekosystem-2026",
+    title: "Český AI ekosystém 2026: startupy, investice a kde Česko stojí ve světě",
+    date: "2026-04-19",
+    excerpt:
+      "Česko má přes 70 AI firem, rekordní AI Factory od EuroHPC a nárůst investic o 174 %. Ale Polsko roste rychleji a brain drain neklesá. Reálný pohled na stav českého AI ekosystému v roce 2026.",
+    tags: ["AI", "Česko", "startupy", "investice", "CEE", "ekosystém"],
+    readingTime: 8,
+  },
+  {
     slug: "humanoidni-roboti-v-praci-2026",
     title: "Humanoidní roboti nastupují do práce: Tesla Optimus, Figure AI a co to znamená pro firmy",
     date: "2026-04-19",
