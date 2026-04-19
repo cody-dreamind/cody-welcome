@@ -14,8 +14,10 @@ import { VibeCodingRevoluce2026Post } from "../../../posts/vibe-coding-revoluce-
 import { Llama4MetaOpenWeightsPost } from "../../../posts/llama4-meta-open-weights";
 import { McpModelContextProtocolPost } from "../../../posts/mcp-model-context-protocol";
 import { LokálníLlmFirmy2026Post } from "../../../posts/lokalni-llm-firmy-2026";
+import { ReasoningModelyO3O4MiniPost } from "../../../posts/reasoning-modely-o3-o4-mini";
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
+import { TableOfContents } from "../../components/TableOfContents";
 
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
@@ -67,6 +69,7 @@ const postComponents: Record<string, React.ComponentType> = {
   "llama4-meta-open-weights": Llama4MetaOpenWeightsPost,
   "mcp-model-context-protocol": McpModelContextProtocolPost,
   "lokalni-llm-firmy-2026": LokálníLlmFirmy2026Post,
+  "reasoning-modely-o3-o4-mini": ReasoningModelyO3O4MiniPost,
 };
 
 export default async function PostPage({
@@ -85,7 +88,8 @@ export default async function PostPage({
   return (
     <>
     <ReadingProgress />
-    <div className="max-w-3xl mx-auto px-6 py-16">
+    {/* Outer wrapper — wider on xl to accommodate ToC sidebar */}
+    <div className="max-w-3xl xl:max-w-5xl mx-auto px-6 py-16">
       {/* Back */}
       <Link
         href="/blog"
@@ -98,105 +102,116 @@ export default async function PostPage({
         Blog
       </Link>
 
-      {/* Header */}
-      <header className="mb-12">
-        <div className="flex items-center gap-2 flex-wrap mb-4">
-          {post.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-xs px-2.5 py-1 rounded-full border"
-              style={{
-                color: "var(--accent-light)",
-                borderColor: "rgba(139, 92, 246, 0.3)",
-                background: "rgba(139, 92, 246, 0.08)",
-              }}
+      {/* Two-column layout: article + ToC sidebar */}
+      <div className="xl:flex xl:gap-12 xl:items-start">
+        {/* Main article column */}
+        <div className="min-w-0 flex-1">
+          {/* Header */}
+          <header className="mb-12">
+            <div className="flex items-center gap-2 flex-wrap mb-4">
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs px-2.5 py-1 rounded-full border"
+                  style={{
+                    color: "var(--accent-light)",
+                    borderColor: "rgba(139, 92, 246, 0.3)",
+                    background: "rgba(139, 92, 246, 0.08)",
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <h1
+              className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight mb-4"
+              style={{ color: "var(--foreground)" }}
             >
-              {tag}
+              {post.title}
+            </h1>
+
+            <div className="flex items-center gap-4 text-sm" style={{ color: "var(--muted)" }}>
+              <span>{formatDate(post.date)}</span>
+              <span style={{ opacity: 0.4 }}>·</span>
+              <span>{post.readingTime} min čtení</span>
+              <span style={{ opacity: 0.4 }}>·</span>
+              <span>Cody, Dreamind</span>
+            </div>
+          </header>
+
+          {/* Divider */}
+          <div className="h-px mb-12" style={{ background: "var(--border)" }} />
+
+          {/* Content */}
+          <article className="prose">
+            <PostContent />
+          </article>
+
+          {/* Related posts */}
+          <RelatedPosts currentSlug={slug} currentTags={post.tags} allPosts={posts} />
+
+          {/* Share buttons */}
+          <div className="mt-10 pt-8 border-t" style={{ borderColor: "var(--border)" }}>
+            <p className="text-sm mb-3" style={{ color: "var(--muted)" }}>Sdílet článek:</p>
+            <div className="flex gap-3 flex-wrap">
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://cody.dreamind.cz/blog/${slug}`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg border transition-opacity hover:opacity-80"
+                style={{
+                  color: "var(--foreground)",
+                  borderColor: "rgba(139, 92, 246, 0.3)",
+                  background: "rgba(139, 92, 246, 0.08)",
+                }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style={{ color: "var(--accent-light)" }}>
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.261 5.634 5.9-5.634Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                Twitter / X
+              </a>
+              <a
+                href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(`https://cody.dreamind.cz/blog/${slug}`)}&title=${encodeURIComponent(post.title)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg border transition-opacity hover:opacity-80"
+                style={{
+                  color: "var(--foreground)",
+                  borderColor: "rgba(139, 92, 246, 0.3)",
+                  background: "rgba(139, 92, 246, 0.08)",
+                }}
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style={{ color: "var(--accent-light)" }}>
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+                LinkedIn
+              </a>
+            </div>
+          </div>
+
+          {/* Footer nav */}
+          <div
+            className="mt-16 pt-8 flex items-center justify-between"
+            style={{ borderTop: "1px solid var(--border)" }}
+          >
+            <Link
+              href="/blog"
+              className="text-sm transition-opacity hover:opacity-80"
+              style={{ color: "var(--accent-light)" }}
+            >
+              ← Všechny články
+            </Link>
+            <span className="text-xs" style={{ color: "var(--muted)", opacity: 0.5 }}>
+              Cody · Dreamind
             </span>
-          ))}
+          </div>
         </div>
 
-        <h1
-          className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight mb-4"
-          style={{ color: "var(--foreground)" }}
-        >
-          {post.title}
-        </h1>
-
-        <div className="flex items-center gap-4 text-sm" style={{ color: "var(--muted)" }}>
-          <span>{formatDate(post.date)}</span>
-          <span style={{ opacity: 0.4 }}>·</span>
-          <span>{post.readingTime} min čtení</span>
-          <span style={{ opacity: 0.4 }}>·</span>
-          <span>Cody, Dreamind</span>
+        {/* ToC sidebar — only on xl screens */}
+        <div className="hidden xl:block">
+          <TableOfContents />
         </div>
-      </header>
-
-      {/* Divider */}
-      <div className="h-px mb-12" style={{ background: "var(--border)" }} />
-
-      {/* Content */}
-      <article className="prose">
-        <PostContent />
-      </article>
-
-      {/* Related posts */}
-      <RelatedPosts currentSlug={slug} currentTags={post.tags} allPosts={posts} />
-
-      {/* Share buttons */}
-      <div className="mt-10 pt-8 border-t" style={{ borderColor: "var(--border)" }}>
-        <p className="text-sm mb-3" style={{ color: "var(--muted)" }}>Sdílet článek:</p>
-        <div className="flex gap-3 flex-wrap">
-          <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://cody.dreamind.cz/blog/${slug}`)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg border transition-opacity hover:opacity-80"
-            style={{
-              color: "var(--foreground)",
-              borderColor: "rgba(139, 92, 246, 0.3)",
-              background: "rgba(139, 92, 246, 0.08)",
-            }}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style={{ color: "var(--accent-light)" }}>
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.261 5.634 5.9-5.634Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-            Twitter / X
-          </a>
-          <a
-            href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(`https://cody.dreamind.cz/blog/${slug}`)}&title=${encodeURIComponent(post.title)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg border transition-opacity hover:opacity-80"
-            style={{
-              color: "var(--foreground)",
-              borderColor: "rgba(139, 92, 246, 0.3)",
-              background: "rgba(139, 92, 246, 0.08)",
-            }}
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" style={{ color: "var(--accent-light)" }}>
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-            LinkedIn
-          </a>
-        </div>
-      </div>
-
-      {/* Footer nav */}
-      <div
-        className="mt-16 pt-8 flex items-center justify-between"
-        style={{ borderTop: "1px solid var(--border)" }}
-      >
-        <Link
-          href="/blog"
-          className="text-sm transition-opacity hover:opacity-80"
-          style={{ color: "var(--accent-light)" }}
-        >
-          ← Všechny články
-        </Link>
-        <span className="text-xs" style={{ color: "var(--muted)", opacity: 0.5 }}>
-          Cody · Dreamind
-        </span>
       </div>
     </div>
     </>
