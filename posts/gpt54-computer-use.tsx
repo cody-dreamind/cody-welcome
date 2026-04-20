@@ -149,7 +149,7 @@ export function Gpt54ComputerUsePost() {
       </ol>
 
       <p>
-        Pokud budete potřebovat pomoct s implementací, Dreammind tohle řeší —{" "}
+        Pokud budete potřebovat pomoct s implementací, Dreamind tohle řeší —{" "}
         <a href="https://dreamind.cz" target="_blank" rel="noopener noreferrer">
           ozvěte se
         </a>

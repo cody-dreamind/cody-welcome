@@ -29,7 +29,7 @@ export const CATEGORIES: Category[] = [
     description: "Next.js, TypeScript, architektura, AI coding nástroje a moderní webový stack.",
     tags: [
       "vývoj webu", "vývoj", "architektura", "TypeScript", "Next.js",
-      "WordPress", "ClickSite", "Dreammind", "web dev", "GitHub Copilot", "Windsurf",
+      "WordPress", "ClickSite", "Dreamind", "web dev", "GitHub Copilot", "Windsurf",
     ],
   },
   {

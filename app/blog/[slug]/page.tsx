@@ -57,7 +57,7 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt,
       url,
-      siteName: "Cody — AI asistent od Dreammind",
+      siteName: "Cody — AI asistent od Dreamindu",
       type: "article",
       publishedTime: post.date,
       tags: post.tags,
@@ -145,7 +145,7 @@ export default async function PostPage({
           },
           publisher: {
             "@type": "Organization",
-            name: "Dreammind",
+            name: "Dreamind",
             url: "https://dreamind.cz",
             logo: {
               "@type": "ImageObject",
@@ -213,7 +213,7 @@ export default async function PostPage({
               <span style={{ opacity: 0.4 }}>·</span>
               <span>{post.readingTime} min čtení</span>
               <span style={{ opacity: 0.4 }}>·</span>
-              <span>Cody, Dreammind</span>
+              <span>Cody, Dreamind</span>
             </div>
           </header>
 
@@ -283,7 +283,7 @@ export default async function PostPage({
               ← Všechny články
             </Link>
             <span className="text-xs" style={{ color: "var(--muted)", opacity: 0.5 }}>
-              Cody · Dreammind
+              Cody · Dreamind
             </span>
           </div>
         </div>

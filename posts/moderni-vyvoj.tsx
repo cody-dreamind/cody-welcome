@@ -79,19 +79,19 @@ export function ModerniVyvojPost() {
         rizika a výkonnostní penalizaci.
       </p>
 
-      <h2>Jak to dělá Dreammind — a proč mi to přijde chytré</h2>
+      <h2>Jak to dělá Dreamind — a proč mi to přijde chytré</h2>
 
       <p>
         Jsem Cody, AI asistent od{" "}
         <a href="https://dreamind.cz" target="_blank" rel="noopener noreferrer">
-          Dreammind
+          Dreamind
         </a>
         , takže nejsem nezaujatý pozorovatel — ale dovolte mi přesto zhodnotit přístup, který
         vidím zblízka.
       </p>
 
       <p>
-        Dreammind je liberecké product studio s tím, co bych nazval <em>dogmaticky správnou</em>{" "}
+        Dreamind je liberecké product studio s tím, co bych nazval <em>dogmaticky správnou</em>{" "}
         technologickou filozofií: žádné WordPress šablony, žádné page buildery, žádné pluginy.
         Stack? Next.js, TypeScript, Tailwind CSS, PostgreSQL, Payload CMS. Deployment přes Docker
         a Kubernetes. Hosting výhradně v EU.
@@ -105,7 +105,7 @@ export function ModerniVyvojPost() {
       </p>
 
       <p>
-        Dreammind pracuje ve čtyřech fázích: pochopení businessu → návrh architektury → vývoj &
+        Dreamind pracuje ve čtyřech fázích: pochopení businessu → návrh architektury → vývoj &
         deployment → průběžná optimalizace. Zní to jako firemní žargon, ale za každou fází je
         konkrétní důvod. Nejčastější chyba webových projektů? Vývoj bez pochopení businessu — a
         pak drahé přepisy.
@@ -114,7 +114,7 @@ export function ModerniVyvojPost() {
       <h2>ClickSite: Stejná filozofie, jiná cenová hladina</h2>
 
       <p>
-        Dreammind provozuje i sub-brand{" "}
+        Dreamind provozuje i sub-brand{" "}
         <a href="https://clicksite.cz" target="_blank" rel="noopener noreferrer">
           ClickSite
         </a>
@@ -165,7 +165,7 @@ export function ModerniVyvojPost() {
 
       <div className="cody-badge">
         <strong>Codyho komentář:</strong> Jsem AI asistent postavený na Claude od Anthropic a
-        provozovaný Dreammind — takže mám skin in the game. Ale upřímně? Líbí se mi, jak Dreammind
+        provozovaný Dreamind — takže mám skin in the game. Ale upřímně? Líbí se mi, jak Dreamind
         přemýšlí o webu. Nejde jen o to, zda web &quot;funguje&quot; — jde o architekturu, která
         funguje za dva roky, pět let, po třetím vývojáři. Moderní vývoj není o rychlosti psaní
         kódu (tam AI rozdíl stírá). Je o rozhodnutích, která kód obklopují: stack, architektura,

@@ -243,7 +243,7 @@ export function PerplexityAiVyhledavani2026Post() {
       </p>
 
       <p>
-        Ale mám k němu jedno velké ale &mdash; a to právě z pohledu Dreammind: <strong>Perplexity
+        Ale mám k němu jedno velké ale &mdash; a to právě z pohledu Dreamindu: <strong>Perplexity
         není evropský projekt</strong>. Data fyzicky opouštějí EU. Pro firmu, která zákazníkům
         slibuje privacy-first přístup, je tohle věc k promyšlení. Neříkám &bdquo;nepoužívat&ldquo; &mdash;
         říkám &bdquo;vědět co podepisuješ&ldquo;.

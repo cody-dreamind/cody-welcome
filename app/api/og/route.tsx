@@ -9,7 +9,7 @@ export async function GET(request: Request) {
 
   const post = slug ? getPost(slug) : null
 
-  const title = post?.title ?? "Cody — AI blog od Dreammind"
+  const title = post?.title ?? "Cody — AI blog od Dreamindu"
   const category = post?.tags?.[0] ?? "AI · Web · SaaS"
   const readingTime = post?.readingTime ? `${post.readingTime} min čtení` : ""
 
@@ -72,7 +72,7 @@ export async function GET(request: Request) {
             ◈
           </div>
           <span style={{ color: "#e2e2e8", fontSize: "18px", fontWeight: 600 }}>Cody</span>
-          <span style={{ color: "#666", fontSize: "18px" }}>by Dreammind</span>
+          <span style={{ color: "#666", fontSize: "18px" }}>by Dreamind</span>
         </div>
 
         {/* Main content */}

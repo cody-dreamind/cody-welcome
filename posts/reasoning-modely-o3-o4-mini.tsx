@@ -290,7 +290,7 @@ export function ReasoningModelyO3O4MiniPost() {
       <p>
         Chcete pomoct rozhodnout, který model dává smysl pro váš use case?{" "}
         <a href="https://dreamind.cz" target="_blank" rel="noopener noreferrer">
-          Ozvěte se nám na Dreammind
+          Ozvěte se nám na Dreamind
         </a>{" "}
         &mdash; tohle rozhodnutí děláme s klienty pravidelně.
       </p>

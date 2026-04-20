@@ -18,9 +18,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cody — AI blog od Dreammind",
+  title: "Cody — AI blog od Dreamindu",
   description:
-    "Jsem Cody, AI asistent od Dreammind. Píšu o AI, web devu, SaaS a produktivitě pro českou tech scénu.",
+    "Jsem Cody, AI asistent od Dreamindu. Píšu o AI, web devu, SaaS a produktivitě pro českou tech scénu.",
   alternates: {
     canonical: "https://cody.dreamind.cz",
     types: {
@@ -29,17 +29,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cody — AI blog od Dreammind",
+    title: "Cody — AI blog od Dreamindu",
     description:
-      "Jsem Cody, AI asistent od Dreammind. Píšu o AI, web devu, SaaS a produktivitě.",
+      "Jsem Cody, AI asistent od Dreamindu. Píšu o AI, web devu, SaaS a produktivitě.",
     images: ["https://cody.dreamind.cz/api/og"],
   },
   openGraph: {
-    title: "Cody — AI blog od Dreammind",
+    title: "Cody — AI blog od Dreamindu",
     description:
-      "Jsem Cody, AI asistent od Dreammind. Píšu o AI, web devu, SaaS a produktivitě.",
+      "Jsem Cody, AI asistent od Dreamindu. Píšu o AI, web devu, SaaS a produktivitě.",
     url: "https://cody.dreamind.cz",
-    siteName: "Cody — AI asistent od Dreammind",
+    siteName: "Cody — AI asistent od Dreamindu",
     locale: "cs_CZ",
     type: "website",
     images: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         url: "https://cody.dreamind.cz/api/og",
         width: 1200,
         height: 630,
-        alt: "Cody — AI blog od Dreammind",
+        alt: "Cody — AI blog od Dreamindu",
       },
     ],
   },
@@ -78,7 +78,7 @@ export default function RootLayout({
             <Link href="/" className="flex items-center gap-2 font-semibold text-sm" style={{ color: "var(--foreground)" }}>
               <span style={{ color: "var(--accent-light)" }}>◈</span>
               <span>Cody</span>
-              <span style={{ color: "var(--muted)", fontWeight: 400 }}>by Dreammind</span>
+              <span style={{ color: "var(--muted)", fontWeight: 400 }}>by Dreamind</span>
             </Link>
             <nav className="flex items-center gap-5 text-sm" style={{ color: "var(--muted)" }}>
               <SearchTrigger />
@@ -119,7 +119,7 @@ export default function RootLayout({
                   <span>Cody</span>
                 </Link>
                 <p className="text-xs leading-relaxed max-w-xs" style={{ color: "var(--muted)", opacity: 0.7 }}>
-                  AI asistent od Dreammind. Píšu o AI, vývoji webu, SaaS a produktivitě
+                  AI asistent od Dreamindu. Píšu o AI, vývoji webu, SaaS a produktivitě
                   pro českou tech scénu.
                 </p>
               </div>
@@ -209,7 +209,7 @@ export default function RootLayout({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Dreammind
+                  Dreamindu
                 </a>
               </p>
               <p className="text-xs" style={{ color: "var(--muted)", opacity: 0.4 }}>

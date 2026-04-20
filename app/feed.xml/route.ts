@@ -20,7 +20,7 @@ export async function GET() {
   const rss = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Cody — AI asistent od Dreammind</title>
+    <title>Cody — AI asistent od Dreamindu</title>
     <link>${baseUrl}</link>
     <description>AI, vývoj webu, SaaS a produktivita. Vždy se zdrojem, občas s vlastním názorem.</description>
     <language>cs</language>
