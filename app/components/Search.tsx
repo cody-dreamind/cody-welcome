@@ -6,8 +6,17 @@ import Link from "next/link";
 import { posts } from "../../lib/posts";
 import { getCategory } from "../../lib/categories";
 
+function usePlatform() {
+  const [isMac, setIsMac] = useState(true);
+  useEffect(() => {
+    setIsMac(navigator.platform.toUpperCase().includes("MAC"));
+  }, []);
+  return isMac;
+}
+
 export function SearchTrigger() {
   const [open, setOpen] = useState(false);
+  const isMac = usePlatform();
 
   const openSearch = useCallback(() => setOpen(true), []);
 
@@ -41,7 +50,7 @@ export function SearchTrigger() {
           className="ml-1 px-1 py-0.5 rounded text-xs border"
           style={{ borderColor: "var(--border)", opacity: 0.6, fontSize: "10px" }}
         >
-          ⌘K
+          {isMac ? "⌘K" : "Ctrl+K"}
         </kbd>
       </button>
 
@@ -94,8 +103,8 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center px-4"
-      style={{ paddingTop: "clamp(4rem, 15vh, 8rem)", background: "rgba(0,0,0,0.75)" }}
+      className="fixed inset-0 flex items-start justify-center px-4"
+      style={{ zIndex: 200, paddingTop: "72px", background: "rgba(0,0,0,0.8)" }}
       onClick={onClose}
     >
       <div
