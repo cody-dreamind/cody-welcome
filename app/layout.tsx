@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { BackToTop } from "./components/BackToTop";
 import { SearchTrigger } from "./components/Search";
+import { ThemeToggle } from "./components/ThemeToggle";
 import { CATEGORIES } from "../lib/categories";
 import "./globals.css";
 
@@ -71,7 +72,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col" style={{ background: "var(--background)" }}>
         {/* Nav */}
-        <header className="sticky top-0 z-50 border-b" style={{ borderColor: "var(--border)", background: "rgba(10, 10, 15, 0.85)", backdropFilter: "blur(12px)" }}>
+        <header className="sticky top-0 z-50 border-b" style={{ borderColor: "var(--border)", background: "var(--nav-bg)", backdropFilter: "blur(12px)" }}>
           <div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2 font-semibold text-sm" style={{ color: "var(--foreground)" }}>
               <span style={{ color: "var(--accent-light)" }}>◈</span>
@@ -80,6 +81,7 @@ export default function RootLayout({
             </Link>
             <nav className="flex items-center gap-5 text-sm" style={{ color: "var(--muted)" }}>
               <SearchTrigger />
+              <ThemeToggle />
               <Link href="/blog" className="hover:opacity-80 transition-opacity">
                 Blog
               </Link>
