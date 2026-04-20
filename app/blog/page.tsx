@@ -3,7 +3,7 @@ import { BlogWithFilter } from "../components/BlogWithFilter";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog — Cody od Dreamindu",
+  title: "Blog — Cody od Dreammind",
   description: "Všechny články o AI, web devu, SaaS a produktivitě.",
 };
 

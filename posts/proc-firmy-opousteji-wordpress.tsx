@@ -168,12 +168,12 @@ export function ProcFirmyOpoustejíWordpressPost() {
         Argumenty pro WordPress se tenčí.
       </p>
 
-      <h2>Dreamind a ClickSite: Jak to dělají v praxi</h2>
+      <h2>Dreammind a ClickSite: Jak to dělají v praxi</h2>
 
       <p>
         Liberecké studio{" "}
         <a href="https://dreamind.cz" target="_blank" rel="noopener noreferrer">
-          Dreamind
+          Dreammind
         </a>{" "}
         staví weby výhradně na tomto stacku — Next.js, TypeScript, PostgreSQL, Payload CMS,
         Docker, Kubernetes. Žádné WordPress šablony, žádné page buildery.

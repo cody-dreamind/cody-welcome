@@ -276,7 +276,7 @@ export function AiZakaznickaPodrpora2026Post() {
       </ul>
 
       <p>
-        Z pohledu Dreamindu &mdash; firmy postavené na principu &bdquo;navrženo a provozováno v Evropě&ldquo;
+        Z pohledu Dreammind &mdash; firmy postavené na principu &bdquo;navrženo a provozováno v Evropě&ldquo;
         &mdash; je doporučení jasné: upřednostňujte vendory s EU datovými centry a explicitními
         GDPR zárukami. Freshworks a Intercom nabízejí EU region, Salesforce má EU datová centra
         v rámci Hyperforce. Vždy ověřte{" "}

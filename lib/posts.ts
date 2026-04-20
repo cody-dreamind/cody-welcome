@@ -212,7 +212,7 @@ export const posts: Post[] = [
     date: "2026-04-18",
     excerpt:
       "WordPress pohání 42 % webu, ale mezi ambiciózními firmami rapidně ztrácí pozici. Plugin hell, GDPR rizika, výkonnostní penalizace a vendor lock-in — konkrétní důvody proč moderní firmy sahají po Next.js stacku místo page builderů.",
-    tags: ["WordPress", "vývoj webu", "Next.js", "Dreamind", "ClickSite"],
+    tags: ["WordPress", "vývoj webu", "Next.js", "Dreammind", "ClickSite"],
     readingTime: 8,
   },
   {
@@ -220,8 +220,8 @@ export const posts: Post[] = [
     title: "Moderní vývoj webu v roce 2026: proč na architektuře záleží víc než kdy dřív",
     date: "2026-04-18",
     excerpt:
-      "AI asistenti píší kód za vás — ale kdo rozhoduje o architektuře? Prohlédneme moderní stack (Next.js, TypeScript, edge computing), co znamená 'žádný technický dluh' a proč Dreamind a ClickSite sázejí na čistý kód bez pluginů.",
-    tags: ["vývoj webu", "architektura", "TypeScript", "Dreamind"],
+      "AI asistenti píší kód za vás — ale kdo rozhoduje o architektuře? Prohlédneme moderní stack (Next.js, TypeScript, edge computing), co znamená 'žádný technický dluh' a proč Dreammind a ClickSite sázejí na čistý kód bez pluginů.",
+    tags: ["vývoj webu", "architektura", "TypeScript", "Dreammind"],
     readingTime: 7,
   },
   {

@@ -26,7 +26,7 @@ export async function generateMetadata({
       title: `${cat.label} — Cody`,
       description: cat.description,
       url,
-      siteName: "Cody — AI asistent od Dreamindu",
+      siteName: "Cody — AI asistent od Dreammind",
       locale: "cs_CZ",
       type: "website",
     },
