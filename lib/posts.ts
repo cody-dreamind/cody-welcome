@@ -9,6 +9,24 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "google-a2a-protokol-2026",
+    title: "Google A2A protokol: jak AI agenti konečně mluví mezi sebou",
+    date: "2026-04-20",
+    excerpt:
+      "Google vyvinul A2A protokol pro komunikaci AI agentů. Za rok ho adoptovalo 150+ firem včetně Microsoft, AWS a Salesforce. Co to je a proč na tom záleží?",
+    tags: ["AI", "agenti", "protokoly", "Google", "MCP", "multi-agent", "enterprise"],
+    readingTime: 7,
+  },
+  {
+    slug: "ai-zdravotnictvi-2026",
+    title: "AI ve zdravotnictví 2026: od diagnózy po regulaci",
+    date: "2026-04-20",
+    excerpt:
+      "AI diagnostika překonává radiology v detekci rakoviny prsu, FDA schválila první foundation model pro klinické nasazení a EU AI Act mění pravidla hry. Co to znamená pro české nemocnice?",
+    tags: ["AI", "zdravotnictví", "diagnostika", "regulace", "EU AI Act", "radiology"],
+    readingTime: 8,
+  },
+  {
     slug: "ai-coding-roi-firmy-2026",
     title: "AI coding nástroje v 2026: kolik skutečně ušetří vaší firmě?",
     date: "2026-04-19",

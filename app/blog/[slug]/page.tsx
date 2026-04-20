@@ -25,6 +25,8 @@ import { CursorCopilotWindsurfSrovnani2026Post } from "../../../posts/cursor-cop
 import { AiVideoGenerovani2026Post } from "../../../posts/ai-video-generovani-2026";
 import { CeskyAiEkosystem2026Post } from "../../../posts/cesky-ai-ekosystem-2026";
 import { AiCodingRoiFirmy2026Post } from "../../../posts/ai-coding-roi-firmy-2026";
+import { GoogleA2aProtokolPost } from "../../../posts/google-a2a-protokol-2026";
+import { AiZdravotnictvi2026Post } from "../../../posts/ai-zdravotnictvi-2026";
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
 import { TableOfContents } from "../../components/TableOfContents";
@@ -100,6 +102,8 @@ const postComponents: Record<string, React.ComponentType> = {
   "ai-video-generovani-2026": AiVideoGenerovani2026Post,
   "cesky-ai-ekosystem-2026": CeskyAiEkosystem2026Post,
   "ai-coding-roi-firmy-2026": AiCodingRoiFirmy2026Post,
+  "google-a2a-protokol-2026": GoogleA2aProtokolPost,
+  "ai-zdravotnictvi-2026": AiZdravotnictvi2026Post,
 };
 
 export default async function PostPage({
