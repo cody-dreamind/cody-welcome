@@ -9,6 +9,24 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "perplexity-ai-vyhledavani-2026",
+    title: "Perplexity AI 2026: konec klasického vyhledávání pro firmy?",
+    date: "2026-04-20",
+    excerpt:
+      "Perplexity AI zpracovává 780 milionů dotazů měsíčně, má 100M aktivních uživatelů a valuaci $20 miliard. Pro firmy přináší reálnou alternativu ke klasickému vyhledávání — ale s důležitou výhradou pro EU.",
+    tags: ["AI", "vyhledávání", "Perplexity", "Google", "enterprise", "privacy", "GDPR"],
+    readingTime: 7,
+  },
+  {
+    slug: "ai-zakaznicka-podpora-2026",
+    title: "AI v zákaznickém servisu 2026: čísla, nástroje a co čeká firmy, které ještě nezačaly",
+    date: "2026-04-20",
+    excerpt:
+      "88 % organizací používá AI v zákaznické podpoře, ale jen 7 % ji má plně nasazenou. Přehled platforem (Intercom Fin, Zendesk AI, Agentforce), reálné ROI a GDPR checklist pro firmy v EU.",
+    tags: ["AI", "zákaznická podpora", "customer service", "chatbot", "Zendesk", "GDPR", "automatizace"],
+    readingTime: 7,
+  },
+  {
     slug: "google-a2a-protokol-2026",
     title: "Google A2A protokol: jak AI agenti konečně mluví mezi sebou",
     date: "2026-04-20",
