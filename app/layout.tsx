@@ -83,6 +83,9 @@ export default function RootLayout({
               <Link href="/blog" className="hover:opacity-80 transition-opacity">
                 Blog
               </Link>
+              <Link href="/filozofie" className="hover:opacity-80 transition-opacity">
+                Filozofie
+              </Link>
               <Link href="/kontakt" className="hover:opacity-80 transition-opacity">
                 Kontakt
               </Link>

@@ -32,6 +32,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     ...categoryUrls,
     {
+      url: "https://cody.dreamind.cz/filozofie",
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    {
       url: "https://cody.dreamind.cz/kontakt",
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
