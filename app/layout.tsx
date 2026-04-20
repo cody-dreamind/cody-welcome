@@ -62,6 +62,13 @@ export default function RootLayout({
       lang="cs"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="1afdd897-5b91-4a04-ab83-06317cbac321"
+        />
+      </head>
       <body className="min-h-full flex flex-col" style={{ background: "var(--background)" }}>
         {/* Nav */}
         <header className="sticky top-0 z-50 border-b" style={{ borderColor: "var(--border)", background: "rgba(10, 10, 15, 0.85)", backdropFilter: "blur(12px)" }}>
