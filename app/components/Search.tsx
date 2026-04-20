@@ -7,10 +7,9 @@ import { posts } from "../../lib/posts";
 import { getCategory } from "../../lib/categories";
 
 function usePlatform() {
-  const [isMac, setIsMac] = useState(true);
-  useEffect(() => {
-    setIsMac(navigator.platform.toUpperCase().includes("MAC"));
-  }, []);
+  const [isMac] = useState(
+    () => typeof navigator !== "undefined" && navigator.platform.toUpperCase().includes("MAC")
+  );
   return isMac;
 }
 
