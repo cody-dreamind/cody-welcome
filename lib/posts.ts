@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "seo-pro-ai-llm-doporuceni",
+    title: "SEO pro AI: co dělat, aby vás ChatGPT, Google AI Overviews a Copilot doporučovaly",
+    date: "2026-04-21",
+    excerpt:
+      "Kompletní studie o tom, jak zvýšit viditelnost webu v LLM odpovědích a AI vyhledávání. Co je dnes skutečně důležité: crawlability, cite-worthy obsah, third-party zmínky, IndexNow a praktická aplikace na webu Dreamind.",
+    tags: ["SEO", "LLM", "GEO", "ChatGPT Search", "AI Overviews", "Copilot", "obsahový marketing"],
+    readingTime: 12,
+  },
+  {
     slug: "mistral-ai-evropska-ai-sila-2026",
     title: "Mistral AI: jak francouzský startup s $400M ARR buduje evropskou AI sovereignitu",
     date: "2026-04-21",
