@@ -354,76 +354,41 @@ export function SeoProAiLlmDoporuceniPost() {
         <li>leady a konverze z obsahových landing pages, ne jen session count.</li>
       </ul>
 
-      <h2>6. Co bych udělal na vzorovém webu Dreamind</h2>
+      <h2>6. Co bych udělal na vzorovém B2B webu</h2>
 
       <p>
-        Jako modelový web beru veřejně dostupný{" "}
-        <a
-          href="https://dreamind.cz/en"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Dreamind web
-        </a>
-        . Už teď na něm jsou dobré základy: homepage má jasnou value proposition, existuje{" "}
-        <a
-          href="https://dreamind.cz/sitemap.xml"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          sitemap.xml
-        </a>
-        , více jazykových verzí a v HTML je přítomné Organization a FAQ structured data.
+        Když to stáhnu z teorie do praxe, typický B2B web mívá slušný základ: jasnou homepage,
+        servisní stránky, technicky funkční sitemapu, více jazykových verzí a nějakou formu
+        structured data. To je dobrý start, ale pro viditelnost v LLM odpovědích to samo o sobě
+        nestačí.
       </p>
 
       <p>
-        Zároveň tam ale vidím několik zásadních mezer:
+        Nejběžnější mezery bývají pořád stejné:
       </p>
 
       <ul>
         <li>
-          <strong>Chybí veřejný blog / knowledge hub:</strong>{" "}
-          <a
-            href="https://dreamind.cz/en/blog"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            `/en/blog`
-          </a>{" "}
-          vrací 404. To znamená, že web má málo dokumentů, které by mohly sbírat long-tail intent a
-          stát se zdrojem pro LLM odpovědi.
+          <strong>Chybí veřejný blog / knowledge hub:</strong> web má málo dokumentů, které by
+          mohly sbírat long-tail intent a stát se zdrojem pro LLM odpovědi.
         </li>
         <li>
-          <strong>`robots.txt` nevrací standardní robots soubor:</strong>{" "}
-          <a
-            href="https://dreamind.cz/robots.txt"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            `dreamind.cz/robots.txt`
-          </a>{" "}
-          aktuálně vrací HTML 404 stránku. To je zbytečný technický dluh u webu, který chce být
-          dobře procházený.
+          <strong>Technické SEO není dotažené:</strong> chybějící nebo nekonzistentní `robots.txt`,
+          slabá práce s canonical URL, nebo servisní stránky, které se špatně procházejí. To je
+          zbytečný technický dluh u webu, který chce být dobře citovatelný.
         </li>
         <li>
-          <strong>Reference jsou zatím spíš listing než cite-worthy asset:</strong>{" "}
-          <a
-            href="https://dreamind.cz/en/reference"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            stránka referencí
-          </a>{" "}
-          obsahuje přehled projektů, ale pro LLM discovery by bylo silnější rozdělit reference na
-          samostatné detailní URL s problémem, řešením, stackem, čísly a klientským kontextem.
+          <strong>Reference jsou spíš listing než cite-worthy asset:</strong> přehled projektů je
+          fajn pro sales, ale pro LLM discovery bývá silnější rozdělit reference na samostatné
+          detailní URL s problémem, řešením, stackem, čísly a klientským kontextem.
         </li>
         <li>
-          <strong>Chybí srovnávací a vysvětlující obsah:</strong> web dobře prodává služby, ale skoro
-          vůbec neodpovídá na otázky, které lidé kladou modelům před nákupem.
+          <strong>Chybí srovnávací a vysvětlující obsah:</strong> web dobře prodává služby, ale
+          skoro vůbec neodpovídá na otázky, které lidé kladou modelům před nákupem.
         </li>
       </ul>
 
-      <h3>Konkrétní obsahové clustery pro Dreamind</h3>
+      <h3>Konkrétní obsahové clustery pro takový web</h3>
 
       <p>
         Kdybych to měl převést do backlogu, začal bych těmito stránkami:
@@ -439,8 +404,8 @@ export function SeoProAiLlmDoporuceniPost() {
           rozpadovým modelem.
         </li>
         <li>
-          &bdquo;EU hosting pro SaaS: kdy vám nestačí Vercel/Cloudflare stack&ldquo;: obsah přesně
-          sedící na Dreamind positioning &bdquo;navrženo, postaveno a provozováno v Evropě&ldquo;.
+          &bdquo;EU hosting pro SaaS: kdy vám nestačí Vercel/Cloudflare stack&ldquo;: silné téma pro
+          firmy, které staví na evropské infrastruktuře, compliance a kontrole nad daty.
         </li>
         <li>
           &bdquo;Jak poznat, že potřebujete custom webovou aplikaci místo no-code stacku&ldquo;:
@@ -547,8 +512,8 @@ export function SeoProAiLlmDoporuceniPost() {
       </p>
 
       <p>
-        Pro Dreamind je na tom nejlepší to, že většina potřebných signálů už sedí na positioning:
-        EU-first infrastruktura, custom development, privacy-first přístup, konzultační expertiza.
+        Pro spoustu kvalitních B2B firem je na tom nejlepší to, že většina potřebných signálů už
+        dávno existuje: expertiza, reference, jasně pojmenované use casey i odlišná pozice na trhu.
         Chybí hlavně udělat z toho systematicky citovatelnou znalostní vrstvu. Jakmile vznikne,
         klasické SEO a LLM visibility si začnou pomáhat navzájem místo toho, aby se tvářily jako dva
         oddělené světy.

@@ -103,22 +103,30 @@ function SearchModal({ onClose }: { onClose: () => void }) {
   return (
     <div
       className="fixed inset-0 flex items-start justify-center px-4"
-      style={{ zIndex: 200, paddingTop: "72px", background: "rgba(0,0,0,0.8)" }}
+      style={{
+        zIndex: 200,
+        paddingTop: "72px",
+        background: "var(--search-overlay)",
+        backdropFilter: "blur(10px)",
+      }}
       onClick={onClose}
     >
       <div
         className="w-full max-w-lg rounded-xl border overflow-hidden shadow-2xl"
         style={{
-          background: "var(--card)",
+          background: "var(--search-surface)",
           borderColor: "rgba(139, 92, 246, 0.35)",
-          boxShadow: "0 0 60px rgba(139, 92, 246, 0.1)",
+          boxShadow: "0 24px 80px rgba(10, 10, 15, 0.32)",
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Input row */}
         <div
           className="flex items-center gap-3 px-4 py-3.5 border-b"
-          style={{ borderColor: "var(--border)" }}
+          style={{
+            borderColor: "var(--border)",
+            background: "var(--search-section)",
+          }}
         >
           <svg
             width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -199,7 +207,10 @@ function SearchModal({ onClose }: { onClose: () => void }) {
         {/* Footer hint */}
         <div
           className="px-4 py-2 flex items-center gap-4 border-t"
-          style={{ borderColor: "var(--border)" }}
+          style={{
+            borderColor: "var(--border)",
+            background: "var(--search-section)",
+          }}
         >
           {[
             { key: "↑↓", label: "navigovat" },

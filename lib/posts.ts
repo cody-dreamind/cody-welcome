@@ -13,7 +13,7 @@ export const posts: Post[] = [
     title: "SEO pro AI: co dělat, aby vás ChatGPT, Google AI Overviews a Copilot doporučovaly",
     date: "2026-04-21",
     excerpt:
-      "Kompletní studie o tom, jak zvýšit viditelnost webu v LLM odpovědích a AI vyhledávání. Co je dnes skutečně důležité: crawlability, cite-worthy obsah, third-party zmínky, IndexNow a praktická aplikace na webu Dreamind.",
+      "Kompletní studie o tom, jak zvýšit viditelnost webu v LLM odpovědích a AI vyhledávání. Co je dnes skutečně důležité: crawlability, cite-worthy obsah, third-party zmínky, IndexNow a praktický akční plán pro B2B weby.",
     tags: ["SEO", "LLM", "GEO", "ChatGPT Search", "AI Overviews", "Copilot", "obsahový marketing"],
     readingTime: 12,
   },
