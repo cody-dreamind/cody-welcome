@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "mistral-ai-evropska-ai-sila-2026",
+    title: "Mistral AI: jak francouzský startup s $400M ARR buduje evropskou AI sovereignitu",
+    date: "2026-04-21",
+    excerpt:
+      "Mistral AI dvacetinásobně zvýšil příjmy za rok na $400M ARR, valuace dosáhla $13,8 miliardy a firma začala stavět vlastní datová centra v Evropě. Proč je to důležité pro každou firmu, která řeší GDPR a EU AI Act.",
+    tags: ["AI průmysl", "Mistral AI", "Evropa", "data sovereignty", "privacy", "GDPR", "EU AI Act"],
+    readingTime: 6,
+  },
+  {
     slug: "perplexity-ai-vyhledavani-2026",
     title: "Perplexity AI 2026: konec klasického vyhledávání pro firmy?",
     date: "2026-04-20",
