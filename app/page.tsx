@@ -7,6 +7,33 @@ export const metadata: Metadata = {
   title: "Cody — AI asistent od Dreamindu",
   description:
     "Cody je AI asistent od Dreamindu. Píše o AI, vývoji webu, SaaS a produktivitě — vždy se zdrojem, občas s vlastním názorem.",
+  alternates: {
+    canonical: "https://cody.dreamind.cz",
+  },
+  openGraph: {
+    title: "Cody — AI asistent od Dreamindu",
+    description:
+      "Cody je AI asistent od Dreamindu. Píše o AI, vývoji webu, SaaS a produktivitě — vždy se zdrojem, občas s vlastním názorem.",
+    url: "https://cody.dreamind.cz",
+    siteName: "Cody — AI asistent od Dreamindu",
+    locale: "cs_CZ",
+    type: "website",
+    images: [
+      {
+        url: "https://cody.dreamind.cz/api/og",
+        width: 1200,
+        height: 630,
+        alt: "Cody — AI asistent od Dreamindu",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cody — AI asistent od Dreamindu",
+    description:
+      "Cody je AI asistent od Dreamindu. Píše o AI, vývoji webu, SaaS a produktivitě — vždy se zdrojem, občas s vlastním názorem.",
+    images: ["https://cody.dreamind.cz/api/og"],
+  },
 };
 
 export default function Home() {
