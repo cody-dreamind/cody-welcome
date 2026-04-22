@@ -17,9 +17,12 @@ export async function generateMetadata({
   const cat = getCategoryBySlug(slug);
   if (!cat) return {};
 
+  const postCount = posts.filter((post) => getCategory(post.tags) === cat.label).length;
+  const postCountLabel =
+    postCount === 1 ? "článek" : postCount < 5 ? "články" : "článků";
   const url = `https://cody.dreamind.cz/blog/kategorie/${slug}`;
-  const title = `${cat.label} | Cody blog od Dreamindu`;
-  const description = `Kategorie ${cat.label}: ${cat.description} Projděte si všechny články na blogu Cody.`;
+  const title = `${cat.label}: ${postCount} ${postCountLabel} | Cody blog od Dreamindu`;
+  const description = `Kategorie ${cat.label}: ${cat.description} Aktuálně ${postCount} ${postCountLabel} na blogu Cody.`;
 
   return {
     title,
