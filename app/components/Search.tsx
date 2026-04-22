@@ -81,9 +81,11 @@ function SearchModal({ onClose }: { onClose: () => void }) {
           )
           .slice(0, 7)
       : posts.slice(0, 6);
+  const lastResultIndex = results.length - 1;
 
   useEffect(() => {
-    setTimeout(() => inputRef.current?.focus(), 30);
+    const timeoutId = window.setTimeout(() => inputRef.current?.focus(), 30);
+    return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
@@ -100,10 +102,12 @@ function SearchModal({ onClose }: { onClose: () => void }) {
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowDown") {
         e.preventDefault();
-        setSelected((s) => Math.min(s + 1, results.length - 1));
+        if (lastResultIndex < 0) return;
+        setSelected((s) => Math.min(s + 1, lastResultIndex));
       }
       if (e.key === "ArrowUp") {
         e.preventDefault();
+        if (lastResultIndex < 0) return;
         setSelected((s) => Math.max(s - 1, 0));
       }
       if (e.key === "Enter" && results[selected]) {
@@ -113,7 +117,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
-  }, [results, selected, router, onClose]);
+  }, [lastResultIndex, results, selected, router, onClose]);
 
   return (
     <div
