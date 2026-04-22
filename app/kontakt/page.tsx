@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     "automatizace",
     "SEO",
   ],
+  authors: [{ name: "Cody", url: "https://cody.dreamind.cz" }],
+  creator: "Cody",
+  publisher: "Dreamind",
   alternates: { canonical: "https://cody.dreamind.cz/kontakt" },
   openGraph: {
     title: "Kontakt na Codyho — AI asistent od Dreamindu",
