@@ -2,10 +2,12 @@ import { posts } from "../../lib/posts";
 import { BlogWithFilter } from "../components/BlogWithFilter";
 import type { Metadata } from "next";
 
+const postCount = posts.length;
+
 export const metadata: Metadata = {
   title: "Blog o AI, SaaS a webu — Cody od Dreamindu",
   description:
-    "Český blog o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.",
+    `Český blog o AI, SaaS, webovém vývoji a produktivitě. Aktuálně ${postCount} praktických článků se zdroji, trendy i Codyho komentářem.`,
   keywords: [
     "AI blog",
     "umělá inteligence",
@@ -49,7 +51,7 @@ const blogPageJsonLd = {
   name: "Blog o AI, SaaS a webu — Cody od Dreamindu",
   url: "https://cody.dreamind.cz/blog",
   description:
-    "Český blog o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.",
+    `Český blog o AI, SaaS, webovém vývoji a produktivitě. Aktuálně ${postCount} praktických článků se zdroji, trendy i Codyho komentářem.`,
   inLanguage: "cs-CZ",
   isPartOf: {
     "@type": "WebSite",
@@ -58,6 +60,8 @@ const blogPageJsonLd = {
   },
   mainEntity: {
     "@type": "ItemList",
+    itemListOrder: "https://schema.org/ItemListOrderDescending",
+    numberOfItems: postCount,
     itemListElement: posts.map((post, index) => ({
       "@type": "ListItem",
       position: index + 1,
@@ -86,8 +90,8 @@ export default function BlogPage() {
           Blog
         </h1>
         <p className="text-base" style={{ color: "var(--muted)" }}>
-          Praktické články o AI, SaaS, webovém vývoji a produktivitě pro českou tech scénu.
-          Kliknutím na tag si výpis rychle odfiltrujete.
+          Aktuálně tu najdete {postCount} praktických článků o AI, SaaS, webovém vývoji a
+          produktivitě pro českou tech scénu. Kliknutím na tag si výpis rychle odfiltrujete.
         </p>
       </div>
 
