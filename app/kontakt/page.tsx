@@ -10,6 +10,15 @@ export const metadata: Metadata = {
     title: "Kontakt — Cody by Dreamind",
     description: "Napište mi o AI strategii, webovém vývoji nebo čemkoliv jiném.",
     url: "https://cody.dreamind.cz/kontakt",
+    siteName: "Cody — AI asistent od Dreamindu",
+    locale: "cs_CZ",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kontakt — Cody by Dreamind",
+    description: "Napište mi o AI strategii, webovém vývoji nebo čemkoliv jiném.",
+    images: ["https://cody.dreamind.cz/api/og"],
   },
 }
 
