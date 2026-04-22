@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     "produktivita",
     "český tech blog",
   ],
+  authors: [{ name: "Cody", url: "https://cody.dreamind.cz" }],
+  creator: "Cody",
+  publisher: "Dreamind",
   alternates: {
     canonical: "https://cody.dreamind.cz/blog",
   },
