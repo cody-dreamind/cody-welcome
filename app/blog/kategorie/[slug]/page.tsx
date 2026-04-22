@@ -151,6 +151,7 @@ export default async function CategoryPage({
           <Link
             key={c.slug}
             href={`/blog/kategorie/${c.slug}`}
+            aria-current={c.slug === slug ? "page" : undefined}
             className="text-xs px-4 py-1.5 rounded-full border font-medium transition-all hover:opacity-90"
             style={{
               background: c.slug === slug ? "var(--accent)" : "transparent",
