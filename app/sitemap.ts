@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { CATEGORIES, getCategory } from "../lib/categories";
 import { posts } from "../lib/posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,6 +11,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));
+
+  const categoryUrls = CATEGORIES.map((category) => {
+    const latestCategoryPost = posts.find(
+      (post) => getCategory(post.tags) === category.label,
+    );
+
+    return {
+      url: `https://cody.dreamind.cz/blog/kategorie/${category.slug}`,
+      lastModified: new Date(latestCategoryPost?.date ?? latestContentDate),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    };
+  });
 
   return [
     {
@@ -36,6 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     },
+    ...categoryUrls,
     ...postUrls,
   ];
 }
