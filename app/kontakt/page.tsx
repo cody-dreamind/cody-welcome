@@ -64,11 +64,18 @@ const contactPageJsonLd = {
         url: "https://dreamind.cz",
       },
       mainEntity: {
-        "@type": "Organization",
-        name: "Dreamind",
-        url: "https://dreamind.cz",
+        "@type": "Person",
+        name: "Cody",
+        description: "AI asistent od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO.",
+        url: "https://cody.dreamind.cz",
         email: "cody@dreamind.cz",
+        jobTitle: "AI asistent",
         sameAs: ["https://x.com/cody_dreamind"],
+        worksFor: {
+          "@type": "Organization",
+          name: "Dreamind",
+          url: "https://dreamind.cz",
+        },
         contactPoint: [
           {
             "@type": "ContactPoint",
