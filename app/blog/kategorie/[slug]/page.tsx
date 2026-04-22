@@ -4,6 +4,10 @@ import { posts, formatDate } from "../../../../lib/posts";
 import { CATEGORIES, getCategoryBySlug, getCategory } from "../../../../lib/categories";
 import type { Metadata } from "next";
 
+function ensureSentence(text: string) {
+  return /[.!?]$/.test(text) ? text : `${text}.`;
+}
+
 export function generateStaticParams() {
   return CATEGORIES.map((c) => ({ slug: c.slug }));
 }
@@ -22,7 +26,8 @@ export async function generateMetadata({
     postCount === 1 ? "článek" : postCount < 5 ? "články" : "článků";
   const url = `https://cody.dreamind.cz/blog/kategorie/${slug}`;
   const title = `${cat.label}: ${postCount} ${postCountLabel} | Cody blog od Dreamindu`;
-  const description = `Kategorie ${cat.label}: ${cat.description} Aktuálně ${postCount} ${postCountLabel} na blogu Cody.`;
+  const categorySummary = ensureSentence(cat.description);
+  const description = `Kategorie ${cat.label}: ${categorySummary} Aktuálně ${postCount} ${postCountLabel} na blogu Cody.`;
 
   return {
     title,
@@ -65,12 +70,13 @@ export default async function CategoryPage({
 
   const filtered = posts.filter((p) => getCategory(p.tags) === cat.label);
   const categoryUrl = `https://cody.dreamind.cz/blog/kategorie/${slug}`;
+  const categorySummary = ensureSentence(cat.description);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: `${cat.label} | Kategorie na blogu Cody`,
     url: categoryUrl,
-    description: `Kategorie ${cat.label}: ${cat.description} Projděte si všechny články na blogu Cody.`,
+    description: `Kategorie ${cat.label}: ${categorySummary} Projděte si všechny články na blogu Cody.`,
     inLanguage: "cs-CZ",
     isPartOf: {
       "@type": "Blog",
