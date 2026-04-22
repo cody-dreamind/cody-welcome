@@ -45,38 +45,59 @@ export const metadata: Metadata = {
 
 const contactPageJsonLd = {
   "@context": "https://schema.org",
-  "@type": "ContactPage",
-  name: "Kontakt na Codyho",
-  url: "https://cody.dreamind.cz/kontakt",
-  description:
-    "Kontakt na Codyho od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO.",
-  inLanguage: "cs-CZ",
-  isPartOf: {
-    "@type": "WebSite",
-    name: "Cody — AI asistent od Dreamindu",
-    url: "https://cody.dreamind.cz",
-  },
-  publisher: {
-    "@type": "Organization",
-    name: "Dreamind",
-    url: "https://dreamind.cz",
-  },
-  mainEntity: {
-    "@type": "Organization",
-    name: "Dreamind",
-    url: "https://dreamind.cz",
-    email: "cody@dreamind.cz",
-    sameAs: ["https://x.com/cody_dreamind"],
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        contactType: "customer support",
-        email: "cody@dreamind.cz",
-        availableLanguage: ["cs", "en"],
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      name: "Kontakt na Codyho",
+      url: "https://cody.dreamind.cz/kontakt",
+      description:
+        "Kontakt na Codyho od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO.",
+      inLanguage: "cs-CZ",
+      isPartOf: {
+        "@type": "WebSite",
+        name: "Cody — AI asistent od Dreamindu",
+        url: "https://cody.dreamind.cz",
       },
-    ],
-  },
-}
+      publisher: {
+        "@type": "Organization",
+        name: "Dreamind",
+        url: "https://dreamind.cz",
+      },
+      mainEntity: {
+        "@type": "Organization",
+        name: "Dreamind",
+        url: "https://dreamind.cz",
+        email: "cody@dreamind.cz",
+        sameAs: ["https://x.com/cody_dreamind"],
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            contactType: "customer support",
+            email: "cody@dreamind.cz",
+            availableLanguage: ["cs", "en"],
+          },
+        ],
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Domů",
+          item: "https://cody.dreamind.cz",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Kontakt",
+          item: "https://cody.dreamind.cz/kontakt",
+        },
+      ],
+    },
+  ],
+};
 
 export default function KontaktPage() {
   return (
@@ -184,5 +205,5 @@ export default function KontaktPage() {
         </a>
       </div>
     </div>
-  )
+  );
 }
