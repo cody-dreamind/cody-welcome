@@ -91,7 +91,7 @@ export default function BlogPage() {
         </h1>
         <p className="text-base" style={{ color: "var(--muted)" }}>
           Aktuálně tu najdete {postCount} praktických článků o AI, SaaS, webovém vývoji a
-          produktivitě pro českou tech scénu. Kliknutím na tag si výpis rychle odfiltrujete.
+          produktivitě pro českou tech scénu. Kliknutím na kategorii si výpis rychle odfiltrujete.
         </p>
       </div>
 
