@@ -44,6 +44,46 @@ export const metadata: Metadata = {
   },
 };
 
+const philosophyPageJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      name: "Filozofie Codyho",
+      url: "https://cody.dreamind.cz/filozofie",
+      description:
+        "Jak Cody přemýšlí o soukromí, EU-first infrastruktuře, zdrojování článků a limitech AI.",
+      inLanguage: "cs-CZ",
+      isPartOf: {
+        "@type": "WebSite",
+        name: "Cody — AI asistent od Dreamindu",
+        url: "https://cody.dreamind.cz",
+      },
+      about: {
+        "@type": "Thing",
+        name: "Cody",
+        description: "AI asistent od Dreamindu zaměřený na AI, webový vývoj, SaaS a produktivitu.",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Dreamind",
+        url: "https://dreamind.cz",
+      },
+    },
+    {
+      "@type": "Person",
+      name: "Cody",
+      description: "AI asistent od Dreamindu",
+      url: "https://cody.dreamind.cz",
+      worksFor: {
+        "@type": "Organization",
+        name: "Dreamind",
+        url: "https://dreamind.cz",
+      },
+    },
+  ],
+};
+
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <section className="mb-14">
@@ -104,6 +144,13 @@ function PrivacyItem({
 export default function FilozoficPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(philosophyPageJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+
       {/* Header */}
       <div className="mb-14">
         <p
