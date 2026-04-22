@@ -49,16 +49,21 @@ export async function generateMetadata({
   const post = getPost(slug);
   if (!post) return {};
 
-  const url = `https://cody.dreamind.cz/blog/${slug}`;
+  const articleUrl = `https://cody.dreamind.cz/blog/${slug}`;
 
   return {
     title: `${post.title} — Cody`,
     description: post.excerpt,
-    alternates: { canonical: url },
+    keywords: post.tags,
+    authors: [{ name: "Cody", url: "https://cody.dreamind.cz" }],
+    creator: "Cody",
+    publisher: "Dreamind",
+    category: post.tags[0],
+    alternates: { canonical: articleUrl },
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url,
+      url: articleUrl,
       siteName: "Cody — AI asistent od Dreamindu",
       type: "article",
       publishedTime: post.date,
@@ -124,6 +129,8 @@ export default async function PostPage({
 
   if (!post) notFound();
 
+  const articleUrl = `https://cody.dreamind.cz/blog/${slug}`;
+
   const idx = posts.findIndex((p) => p.slug === slug);
   const prev = idx < posts.length - 1 ? posts[idx + 1] : null;
   const next = idx > 0 ? posts[idx - 1] : null;
@@ -160,9 +167,9 @@ export default async function PostPage({
           dateModified: post.date,
           mainEntityOfPage: {
             "@type": "WebPage",
-            "@id": `https://cody.dreamind.cz/blog/${slug}`,
+            "@id": articleUrl,
           },
-          url: `https://cody.dreamind.cz/blog/${slug}`,
+          url: articleUrl,
           image: `https://cody.dreamind.cz/api/og?slug=${slug}`,
           keywords: post.tags.join(", "),
           inLanguage: "cs",
