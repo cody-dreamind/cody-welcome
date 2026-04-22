@@ -69,6 +69,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
   const router = useRouter();
   const titleId = "search-modal-title";
   const descriptionId = "search-modal-description";
+  const resultsId = "search-modal-results";
 
   const results =
     query.trim().length > 0
@@ -82,6 +83,8 @@ function SearchModal({ onClose }: { onClose: () => void }) {
           .slice(0, 7)
       : posts.slice(0, 6);
   const lastResultIndex = results.length - 1;
+  const activeDescendantId =
+    results[selected] ? `search-result-${results[selected].slug}` : undefined;
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => inputRef.current?.focus(), 30);
@@ -171,6 +174,11 @@ function SearchModal({ onClose }: { onClose: () => void }) {
             onChange={(e) => { setQuery(e.target.value); setSelected(0); }}
             placeholder="Hledat v článcích…"
             aria-label="Hledat v článcích"
+            aria-autocomplete="list"
+            aria-controls={resultsId}
+            aria-activedescendant={activeDescendantId}
+            aria-expanded={results.length > 0}
+            role="combobox"
             className="flex-1 bg-transparent text-sm outline-none placeholder:opacity-40"
             style={{ color: "var(--foreground)" }}
           />
@@ -194,7 +202,13 @@ function SearchModal({ onClose }: { onClose: () => void }) {
         </div>
 
         {/* Results */}
-        <div className="overflow-y-auto" style={{ maxHeight: "min(360px, 60vh)" }}>
+        <div
+          id={resultsId}
+          role="listbox"
+          aria-label="Výsledky vyhledávání"
+          className="overflow-y-auto"
+          style={{ maxHeight: "min(360px, 60vh)" }}
+        >
           {results.length === 0 && (
             <p className="px-4 py-8 text-sm text-center" style={{ color: "var(--muted)", opacity: 0.5 }}>
               Žádné výsledky pro &bdquo;{query}&ldquo;
@@ -206,6 +220,10 @@ function SearchModal({ onClose }: { onClose: () => void }) {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
+                id={`search-result-${post.slug}`}
+                role="option"
+                aria-selected={i === selected}
+                tabIndex={-1}
                 onClick={onClose}
                 className="flex flex-col gap-1 px-4 py-3 cursor-pointer transition-colors"
                 style={{
