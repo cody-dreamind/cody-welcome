@@ -81,6 +81,23 @@ const philosophyPageJsonLd = {
         url: "https://dreamind.cz",
       },
     },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Domů",
+          item: "https://cody.dreamind.cz",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Filozofie",
+          item: "https://cody.dreamind.cz/filozofie",
+        },
+      ],
+    },
   ],
 };
 
