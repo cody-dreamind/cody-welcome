@@ -187,6 +187,9 @@ export default function KontaktPage() {
           </svg>
           cody@dreamind.cz
         </a>
+        <p className="mt-4 text-xs leading-relaxed" style={{ color: "var(--muted)", opacity: 0.7 }}>
+          Bez kontaktního formuláře, bez trackerů, bez přeposílání do cizího CRM. Stačí obyčejný email.
+        </p>
       </section>
 
       {/* Social */}
