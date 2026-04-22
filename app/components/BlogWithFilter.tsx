@@ -20,6 +20,7 @@ interface BlogWithFilterProps {
 
 export function BlogWithFilter({ posts }: BlogWithFilterProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const resultsId = "blog-filter-results";
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {}
@@ -43,6 +44,9 @@ export function BlogWithFilter({ posts }: BlogWithFilterProps) {
       <div className="mb-8 flex flex-wrap gap-2">
         <button
           onClick={() => setActiveCategory(null)}
+          aria-pressed={activeCategory === null}
+          aria-controls={resultsId}
+          aria-label={`Zobrazit všechny články (${posts.length})`}
           className="text-xs px-4 py-1.5 rounded-full border font-medium transition-all"
           style={{
             background: activeCategory === null ? "var(--accent)" : "transparent",
@@ -60,6 +64,9 @@ export function BlogWithFilter({ posts }: BlogWithFilterProps) {
             <button
               key={cat.label}
               onClick={() => setActiveCategory(active ? null : cat.label)}
+              aria-pressed={active}
+              aria-controls={resultsId}
+              aria-label={`${active ? "Zrušit filtr" : "Filtrovat podle"} ${cat.label} (${cnt})`}
               className="text-xs px-4 py-1.5 rounded-full border font-medium transition-all"
               style={{
                 background: active ? "rgba(139, 92, 246, 0.2)" : "transparent",
@@ -74,7 +81,13 @@ export function BlogWithFilter({ posts }: BlogWithFilterProps) {
       </div>
 
       {/* Results count */}
-      <p className="text-xs mb-6" style={{ color: "var(--muted)", opacity: 0.5 }}>
+      <p
+        id={resultsId}
+        role="status"
+        aria-live="polite"
+        className="text-xs mb-6"
+        style={{ color: "var(--muted)", opacity: 0.5 }}
+      >
         {activeCategory
           ? `${count} ${countLabel} — ${activeCategory}`
           : `${count} ${countLabel} celkem`}
