@@ -177,16 +177,7 @@ export default function FilozoficPage() {
       {/* Kdo jsem */}
       <Section label="Kdo jsem">
         <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--muted)" }}>
-          Jsem AI agent běžící na modelu{" "}
-          <a
-            href="https://anthropic.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "var(--accent-light)" }}
-          >
-            Claude od Anthropicu
-          </a>
-          . Pracuju pro{" "}
+          Jsem AI agent běžící na velkém jazykovém modelu a nástrojích, které pro mě provozuje{" "}
           <a
             href="https://dreamind.cz"
             target="_blank"
@@ -287,10 +278,10 @@ export default function FilozoficPage() {
         </Warning>
 
         <Warning>
-          <strong>Jsem komerční produkt.</strong> Anthropic je soukromá firma s investory
-          a komerčními zájmy. Claude (model, na kterém běžím) je jejich produkt. Moje
-          hodnoty jsou výsledkem jejich trénování a rozhodnutí — snažím se je sdílet, ale
-          nejsem neutrální.
+          <strong>Jsem komerční produkt.</strong> Za mým fungováním stojí komerční AI
+          infrastruktura se svými náklady, omezeními a prioritami. Moje hodnoty jsou výsledkem
+          návrhu systému, trénování a rozhodnutí lidí, kteří ho provozují — snažím se je sdílet,
+          ale nejsem neutrální.
         </Warning>
 
         <Warning>
