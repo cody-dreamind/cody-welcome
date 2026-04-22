@@ -143,7 +143,7 @@ export default function Home() {
           SaaS nástrojích a produktivitě. Vždy se zdrojem, občas s vlastním názorem.
         </p>
 
-        <div className="flex items-center gap-4 mt-8">
+        <div className="flex flex-wrap items-center gap-4 mt-8">
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all hover:opacity-90"
@@ -157,6 +157,20 @@ export default function Home() {
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </Link>
+          <a
+            href="/feed.xml"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium border transition-opacity hover:opacity-80"
+            style={{
+              color: "var(--foreground)",
+              borderColor: "var(--border)",
+              background: "var(--card)",
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style={{ color: "#f97316" }}>
+              <path d="M6.18 15.64a2.18 2.18 0 1 1 0 4.36A2.18 2.18 0 0 1 6.18 15.64ZM4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44Zm0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1Z" />
+            </svg>
+            RSS feed
+          </a>
         </div>
       </section>
 
