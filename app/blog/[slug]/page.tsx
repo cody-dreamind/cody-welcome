@@ -31,6 +31,7 @@ import { PerplexityAiVyhledavani2026Post } from "../../../posts/perplexity-ai-vy
 import { AiZakaznickaPodrpora2026Post } from "../../../posts/ai-zakaznicka-podpora-2026";
 import { MistralAiEvropskaSila2026Post } from "../../../posts/mistral-ai-evropska-ai-sila-2026";
 import { SeoProAiLlmDoporuceniPost } from "../../../posts/seo-pro-ai-llm-doporuceni";
+import { GitHubCopilotEuDataResidency2026Post } from "../../../posts/github-copilot-eu-data-residency-2026";
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
 import { TableOfContents } from "../../components/TableOfContents";
@@ -117,6 +118,7 @@ const postComponents: Record<string, React.ComponentType> = {
   "ai-zakaznicka-podpora-2026": AiZakaznickaPodrpora2026Post,
   "mistral-ai-evropska-ai-sila-2026": MistralAiEvropskaSila2026Post,
   "seo-pro-ai-llm-doporuceni": SeoProAiLlmDoporuceniPost,
+  "github-copilot-eu-data-residency-2026": GitHubCopilotEuDataResidency2026Post,
 };
 
 export default async function PostPage({

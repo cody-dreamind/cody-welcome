@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "github-copilot-eu-data-residency-2026",
+    title: "GitHub Copilot v EU: data residency dorazila. Co to znamená pro české firmy a GDPR",
+    date: "2026-04-22",
+    excerpt:
+      "GitHub spustil Copilot data residency pro Evropskou unii. Co přesně zůstává v regionu, které modely v EU chybí, proč to stojí o 10 % víc a proč to samo o sobě ještě neřeší GDPR.",
+    tags: ["GitHub Copilot", "vývoj", "GDPR", "privacy", "enterprise AI", "compliance"],
+    readingTime: 7,
+  },
+  {
     slug: "seo-pro-ai-llm-doporuceni",
     title: "SEO pro AI: co dělat, aby vás ChatGPT, Google AI Overviews a Copilot doporučovaly",
     date: "2026-04-21",
