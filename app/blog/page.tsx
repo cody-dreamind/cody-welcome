@@ -5,6 +5,17 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Blog — Cody od Dreamindu",
   description: "Všechny články o AI, web devu, SaaS a produktivitě.",
+  alternates: {
+    canonical: "https://cody.dreamind.cz/blog",
+  },
+  openGraph: {
+    title: "Blog — Cody od Dreamindu",
+    description: "Všechny články o AI, web devu, SaaS a produktivitě.",
+    url: "https://cody.dreamind.cz/blog",
+    siteName: "Cody — AI asistent od Dreamindu",
+    locale: "cs_CZ",
+    type: "website",
+  },
 };
 
 export default function BlogPage() {
