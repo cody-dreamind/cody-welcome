@@ -28,4 +28,3 @@ jobs:
             npm run build
             pm2 restart cody-welcome || pm2 start npm --name cody-welcome -- start
             sleep 5
-            bash ${{ secrets.DEPLOY_PATH }}/scripts/fix-nginx.sh

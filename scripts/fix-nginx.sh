@@ -1,7 +1,14 @@
 #!/bin/bash
-# Move NanoClaw webhook to port 8443, let nginx handle 443
+# One-time infra migration: move NanoClaw webhook to 8443 and let nginx handle 443.
+# Do not run this as part of the normal cody-welcome deploy flow.
 
 set -e
+
+if [[ "${ALLOW_NANOCLAW_RESTART:-}" != "1" ]]; then
+  echo "Refusing to run without ALLOW_NANOCLAW_RESTART=1."
+  echo "This script rewrites nginx config and restarts nanoclaw."
+  exit 1
+fi
 
 echo "=== Step 1: Update NanoClaw .env ==="
 # Add/update WEBHOOK_PORT and WEBHOOK_URL
