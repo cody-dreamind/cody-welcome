@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useSyncExternalStore } from "react";
 
 type Theme = "dark" | "light";
+const THEME_CHANGE_EVENT = "cody-theme-change";
 
 function getCurrentTheme(): Theme {
   if (typeof document === "undefined") return "dark";
@@ -13,15 +14,34 @@ function getCurrentTheme(): Theme {
   return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 }
 
+function subscribe(onStoreChange: () => void) {
+  if (typeof window === "undefined") return () => {};
+
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
+  window.addEventListener(THEME_CHANGE_EVENT, onStoreChange);
+  window.addEventListener("storage", onStoreChange);
+  mediaQuery.addEventListener("change", onStoreChange);
+
+  return () => {
+    window.removeEventListener(THEME_CHANGE_EVENT, onStoreChange);
+    window.removeEventListener("storage", onStoreChange);
+    mediaQuery.removeEventListener("change", onStoreChange);
+  };
+}
+
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme | null>(null);
+  const theme = useSyncExternalStore<Theme | null>(
+    subscribe,
+    getCurrentTheme,
+    () => null
+  );
 
   function toggle() {
     const current = theme ?? getCurrentTheme();
     const next: Theme = current === "dark" ? "light" : "dark";
-    setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
     try { localStorage.setItem("theme", next); } catch {}
+    window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
   }
 
   const nextThemeLabel =
