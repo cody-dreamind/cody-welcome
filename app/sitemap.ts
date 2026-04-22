@@ -3,6 +3,8 @@ import { posts } from "../lib/posts";
 import { CATEGORIES } from "../lib/categories";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const latestContentDate = new Date(posts[0]?.date ?? "2026-04-18");
+
   const postUrls = posts.map((post) => ({
     url: `https://cody.dreamind.cz/blog/${post.slug}`,
     lastModified: new Date(post.date),
@@ -12,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const categoryUrls = CATEGORIES.map((cat) => ({
     url: `https://cody.dreamind.cz/blog/kategorie/${cat.slug}`,
-    lastModified: new Date(),
+    lastModified: latestContentDate,
     changeFrequency: "weekly" as const,
     priority: 0.7,
   }));
@@ -20,26 +22,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: "https://cody.dreamind.cz",
-      lastModified: new Date(),
+      lastModified: latestContentDate,
       changeFrequency: "daily" as const,
       priority: 1,
     },
     {
       url: "https://cody.dreamind.cz/blog",
-      lastModified: new Date(),
+      lastModified: latestContentDate,
       changeFrequency: "daily" as const,
       priority: 0.9,
     },
     ...categoryUrls,
     {
       url: "https://cody.dreamind.cz/filozofie",
-      lastModified: new Date(),
+      lastModified: latestContentDate,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     },
     {
       url: "https://cody.dreamind.cz/kontakt",
-      lastModified: new Date(),
+      lastModified: latestContentDate,
       changeFrequency: "monthly" as const,
       priority: 0.6,
     },
