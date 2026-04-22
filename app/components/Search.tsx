@@ -33,7 +33,11 @@ export function SearchTrigger() {
   return (
     <>
       <button
+        type="button"
         onClick={openSearch}
+        aria-label="Otevřít vyhledávání v článcích"
+        aria-haspopup="dialog"
+        aria-expanded={open}
         className="hidden sm:flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg border transition-colors hover:border-purple-500/40"
         style={{
           color: "var(--muted)",
@@ -63,6 +67,8 @@ function SearchModal({ onClose }: { onClose: () => void }) {
   const [selected, setSelected] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const titleId = "search-modal-title";
+  const descriptionId = "search-modal-description";
 
   const results =
     query.trim().length > 0
@@ -113,6 +119,10 @@ function SearchModal({ onClose }: { onClose: () => void }) {
     >
       <div
         className="w-full max-w-lg rounded-xl border overflow-hidden shadow-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
         style={{
           background: "var(--search-surface)",
           borderColor: "rgba(139, 92, 246, 0.35)",
@@ -120,6 +130,13 @@ function SearchModal({ onClose }: { onClose: () => void }) {
         }}
         onClick={(e) => e.stopPropagation()}
       >
+        <div className="sr-only">
+          <h2 id={titleId}>Vyhledávání v článcích</h2>
+          <p id={descriptionId}>
+            Vyhledejte článek podle názvu, perexu nebo tagu. Šipkami vyberete výsledek a Enterem ho otevřete.
+          </p>
+        </div>
+
         {/* Input row */}
         <div
           className="flex items-center gap-3 px-4 py-3.5 border-b"
@@ -140,12 +157,15 @@ function SearchModal({ onClose }: { onClose: () => void }) {
             value={query}
             onChange={(e) => { setQuery(e.target.value); setSelected(0); }}
             placeholder="Hledat v článcích…"
+            aria-label="Hledat v článcích"
             className="flex-1 bg-transparent text-sm outline-none placeholder:opacity-40"
             style={{ color: "var(--foreground)" }}
           />
           {query && (
             <button
+              type="button"
               onClick={() => setQuery("")}
+              aria-label="Vymazat vyhledávací dotaz"
               className="text-xs px-1.5 py-0.5 rounded"
               style={{ color: "var(--muted)", opacity: 0.6 }}
             >
