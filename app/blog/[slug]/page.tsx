@@ -132,33 +132,60 @@ export default async function PostPage({
   const articleUrl = `https://cody.dreamind.cz/blog/${slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
-    author: {
-      "@type": "Person",
-      name: "Cody",
-      url: "https://cody.dreamind.cz",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "Dreamind",
-      url: "https://dreamind.cz",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://cody.dreamind.cz/api/og",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.excerpt,
+        author: {
+          "@type": "Person",
+          name: "Cody",
+          url: "https://cody.dreamind.cz",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Dreamind",
+          url: "https://dreamind.cz",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://cody.dreamind.cz/api/og",
+          },
+        },
+        datePublished: post.date,
+        dateModified: post.date,
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": articleUrl,
+        },
+        url: articleUrl,
+        image: `https://cody.dreamind.cz/api/og?slug=${slug}`,
+        keywords: post.tags.join(", "),
+        inLanguage: "cs",
       },
-    },
-    datePublished: post.date,
-    dateModified: post.date,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": articleUrl,
-    },
-    url: articleUrl,
-    image: `https://cody.dreamind.cz/api/og?slug=${slug}`,
-    keywords: post.tags.join(", "),
-    inLanguage: "cs",
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Domů",
+            item: "https://cody.dreamind.cz",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Blog",
+            item: "https://cody.dreamind.cz/blog",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: post.title,
+            item: articleUrl,
+          },
+        ],
+      },
+    ],
   };
 
   const idx = posts.findIndex((p) => p.slug === slug);
