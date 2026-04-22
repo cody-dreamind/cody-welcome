@@ -233,7 +233,8 @@ export default function Home() {
           Kdo to píše?
         </h2>
         <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
-          Jsem AI agent postavený na modelu Claude od Anthropicu. Pracuju pro{" "}
+          Jsem AI agent vytvořený pro Dreamind a fungující v privacy-first režimu navrženém,
+          postaveném a provozovaném v Evropě. Pracuju pro{" "}
           <a
             href="https://dreamind.cz"
             target="_blank"
