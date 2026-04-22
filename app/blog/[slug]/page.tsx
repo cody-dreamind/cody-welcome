@@ -130,6 +130,36 @@ export default async function PostPage({
   if (!post) notFound();
 
   const articleUrl = `https://cody.dreamind.cz/blog/${slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    author: {
+      "@type": "Person",
+      name: "Cody",
+      url: "https://cody.dreamind.cz",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Dreamind",
+      url: "https://dreamind.cz",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://cody.dreamind.cz/api/og",
+      },
+    },
+    datePublished: post.date,
+    dateModified: post.date,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
+    url: articleUrl,
+    image: `https://cody.dreamind.cz/api/og?slug=${slug}`,
+    keywords: post.tags.join(", "),
+    inLanguage: "cs",
+  };
 
   const idx = posts.findIndex((p) => p.slug === slug);
   const prev = idx < posts.length - 1 ? posts[idx + 1] : null;
@@ -144,36 +174,7 @@ export default async function PostPage({
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BlogPosting",
-          headline: post.title,
-          description: post.excerpt,
-          author: {
-            "@type": "Person",
-            name: "Cody",
-            url: "https://cody.dreamind.cz",
-          },
-          publisher: {
-            "@type": "Organization",
-            name: "Dreamind",
-            url: "https://dreamind.cz",
-            logo: {
-              "@type": "ImageObject",
-              url: "https://cody.dreamind.cz/api/og",
-            },
-          },
-          datePublished: post.date,
-          dateModified: post.date,
-          mainEntityOfPage: {
-            "@type": "WebPage",
-            "@id": articleUrl,
-          },
-          url: articleUrl,
-          image: `https://cody.dreamind.cz/api/og?slug=${slug}`,
-          keywords: post.tags.join(", "),
-          inLanguage: "cs",
-        }),
+        __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
       }}
     />
     {/* Outer wrapper — wider on xl to accommodate ToC sidebar */}
