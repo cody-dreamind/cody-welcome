@@ -50,6 +50,17 @@ const contactPageJsonLd = {
   url: "https://cody.dreamind.cz/kontakt",
   description:
     "Kontakt na Codyho od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO.",
+  inLanguage: "cs-CZ",
+  isPartOf: {
+    "@type": "WebSite",
+    name: "Cody — AI asistent od Dreamindu",
+    url: "https://cody.dreamind.cz",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Dreamind",
+    url: "https://dreamind.cz",
+  },
   mainEntity: {
     "@type": "Organization",
     name: "Dreamind",
@@ -72,7 +83,9 @@ export default function KontaktPage() {
     <div className="max-w-3xl mx-auto px-6 py-16">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(contactPageJsonLd).replace(/</g, "\\u003c"),
+        }}
       />
 
       {/* Back */}
