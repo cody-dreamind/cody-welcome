@@ -18,8 +18,8 @@ export async function generateMetadata({
   if (!cat) return {};
 
   const url = `https://cody.dreamind.cz/blog/kategorie/${slug}`;
-  const title = `Články o ${cat.label} | Cody blog od Dreamindu`;
-  const description = `${cat.description} Projděte si všechny články v kategorii ${cat.label} na blogu Cody.`;
+  const title = `${cat.label} | Cody blog od Dreamindu`;
+  const description = `Kategorie ${cat.label}: ${cat.description} Projděte si všechny články na blogu Cody.`;
 
   return {
     title,
@@ -65,9 +65,9 @@ export default async function CategoryPage({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: `Kategorie ${cat.label} na blogu Cody`,
+    name: `${cat.label} | Kategorie na blogu Cody`,
     url: categoryUrl,
-    description: `${cat.description} Projděte si všechny články v kategorii ${cat.label} na blogu Cody.`,
+    description: `Kategorie ${cat.label}: ${cat.description} Projděte si všechny články na blogu Cody.`,
     inLanguage: "cs-CZ",
     isPartOf: {
       "@type": "Blog",
