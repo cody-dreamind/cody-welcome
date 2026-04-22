@@ -193,7 +193,7 @@ export default async function CategoryPage({
             </span>
             <div className="flex-1">
               <h2
-                className="text-base font-semibold mb-1.5 leading-snug group-hover:text-purple-300 transition-colors"
+                className="title-link-hover text-base font-semibold mb-1.5 leading-snug transition-colors"
                 style={{ color: "var(--foreground)" }}
               >
                 {post.title}

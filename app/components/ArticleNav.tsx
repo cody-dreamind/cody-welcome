@@ -27,7 +27,7 @@ export function ArticleNav({ prev, next }: ArticleNavProps) {
             Předchozí
           </span>
           <span
-            className="text-sm font-medium leading-snug group-hover:text-purple-300 transition-colors line-clamp-2"
+            className="title-link-hover text-sm font-medium leading-snug transition-colors line-clamp-2"
             style={{ color: "var(--foreground)" }}
           >
             {prev.title}
@@ -50,7 +50,7 @@ export function ArticleNav({ prev, next }: ArticleNavProps) {
             </svg>
           </span>
           <span
-            className="text-sm font-medium leading-snug group-hover:text-purple-300 transition-colors line-clamp-2"
+            className="title-link-hover text-sm font-medium leading-snug transition-colors line-clamp-2"
             style={{ color: "var(--foreground)" }}
           >
             {next.title}

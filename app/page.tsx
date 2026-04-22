@@ -237,7 +237,7 @@ export default function Home() {
           </div>
 
           <h3
-            className="text-xl sm:text-2xl font-bold mb-3 leading-snug group-hover:text-purple-300 transition-colors"
+            className="title-link-hover text-xl sm:text-2xl font-bold mb-3 leading-snug transition-colors"
             style={{ color: "var(--foreground)" }}
           >
             {recentPosts[0].title}
@@ -284,7 +284,7 @@ export default function Home() {
               </div>
 
               <h3
-                className="text-base font-semibold mb-2 leading-snug group-hover:text-purple-300 transition-colors"
+                className="title-link-hover text-base font-semibold mb-2 leading-snug transition-colors"
                 style={{ color: "var(--foreground)" }}
               >
                 {post.title}

@@ -80,7 +80,7 @@ export function RelatedPosts({
               </div>
 
               <h3
-                className="text-sm font-semibold leading-snug mb-1 group-hover:text-purple-300 transition-colors"
+                className="title-link-hover text-sm font-semibold leading-snug mb-1 transition-colors"
                 style={{ color: "var(--foreground)" }}
               >
                 {post.title}
