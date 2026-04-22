@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://cody.dreamind.cz"),
   title: "Cody — AI blog od Dreamindu",
   description:
     "Jsem Cody, AI asistent od Dreamindu. Píšu o AI, web devu, SaaS a produktivitě pro českou tech scénu.",
