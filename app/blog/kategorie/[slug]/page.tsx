@@ -61,12 +61,50 @@ export default async function CategoryPage({
   if (!cat) notFound();
 
   const filtered = posts.filter((p) => getCategory(p.tags) === cat.label);
+  const categoryUrl = `https://cody.dreamind.cz/blog/kategorie/${slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `Kategorie ${cat.label} na blogu Cody`,
+    url: categoryUrl,
+    description: `${cat.description} Projděte si všechny články v kategorii ${cat.label} na blogu Cody.`,
+    inLanguage: "cs-CZ",
+    isPartOf: {
+      "@type": "Blog",
+      name: "Cody blog",
+      url: "https://cody.dreamind.cz/blog",
+    },
+    about: {
+      "@type": "Thing",
+      name: cat.label,
+      description: cat.description,
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      numberOfItems: filtered.length,
+      itemListElement: filtered.map((post, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `https://cody.dreamind.cz/blog/${post.slug}`,
+        name: post.title,
+        description: post.excerpt,
+      })),
+    },
+  };
 
   const count = filtered.length;
   const countLabel = count === 1 ? "článek" : count < 5 ? "články" : "článků";
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+
       {/* Back */}
       <Link
         href="/blog"
