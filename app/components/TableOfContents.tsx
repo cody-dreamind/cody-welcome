@@ -8,6 +8,15 @@ interface TocItem {
   level: 2 | 3;
 }
 
+function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]/g, "");
+}
+
 function collectHeadings(): TocItem[] {
   const article = document.querySelector("article.prose");
   if (!article) return [];
@@ -18,17 +27,21 @@ function collectHeadings(): TocItem[] {
 
   if (headings.length === 0) return [];
 
-  headings.forEach((heading) => {
-    if (!heading.id) {
-      const slug =
-        heading.textContent
-          ?.toLowerCase()
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .replace(/\s+/g, "-")
-          .replace(/[^\w-]/g, "") ?? Math.random().toString(36).slice(2);
-      heading.id = slug;
+  const usedIds = new Set<string>();
+
+  headings.forEach((heading, index) => {
+    const baseId =
+      heading.id.trim() || slugifyHeading(heading.textContent ?? "") || `section-${index + 1}`;
+    let uniqueId = baseId;
+    let suffix = 2;
+
+    while (usedIds.has(uniqueId)) {
+      uniqueId = `${baseId}-${suffix}`;
+      suffix += 1;
     }
+
+    heading.id = uniqueId;
+    usedIds.add(uniqueId);
   });
 
   return headings.map((h) => ({
