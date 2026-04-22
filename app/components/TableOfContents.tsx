@@ -23,6 +23,8 @@ function collectHeadings(): TocItem[] {
       const slug =
         heading.textContent
           ?.toLowerCase()
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
           .replace(/\s+/g, "-")
           .replace(/[^\w-]/g, "") ?? Math.random().toString(36).slice(2);
       heading.id = slug;
