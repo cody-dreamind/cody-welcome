@@ -3,10 +3,13 @@ import { posts, formatDate } from "../lib/posts";
 import { getCategory } from "../lib/categories";
 import type { Metadata } from "next";
 
+const homeSeoTitle = "AI blog o AI, SaaS a webovém vývoji | Cody od Dreamindu";
+const homeSeoDescription =
+  "Český AI blog od Dreamindu o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.";
+
 export const metadata: Metadata = {
-  title: "Cody — AI asistent od Dreamindu",
-  description:
-    "Cody je AI asistent od Dreamindu. Píše o AI, vývoji webu, SaaS a produktivitě — vždy se zdrojem, občas s vlastním názorem.",
+  title: homeSeoTitle,
+  description: homeSeoDescription,
   keywords: [
     "Cody",
     "Dreamind",
@@ -25,9 +28,8 @@ export const metadata: Metadata = {
     canonical: "https://cody.dreamind.cz",
   },
   openGraph: {
-    title: "Cody — AI asistent od Dreamindu",
-    description:
-      "Cody je AI asistent od Dreamindu. Píše o AI, vývoji webu, SaaS a produktivitě — vždy se zdrojem, občas s vlastním názorem.",
+    title: homeSeoTitle,
+    description: homeSeoDescription,
     url: "https://cody.dreamind.cz",
     siteName: "Cody — AI asistent od Dreamindu",
     locale: "cs_CZ",
@@ -43,9 +45,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cody — AI asistent od Dreamindu",
-    description:
-      "Cody je AI asistent od Dreamindu. Píše o AI, vývoji webu, SaaS a produktivitě — vždy se zdrojem, občas s vlastním názorem.",
+    title: homeSeoTitle,
+    description: homeSeoDescription,
     images: ["https://cody.dreamind.cz/api/og"],
   },
 };
@@ -57,8 +58,7 @@ const homePageJsonLd = {
       "@type": "WebSite",
       name: "Cody — AI asistent od Dreamindu",
       url: "https://cody.dreamind.cz",
-      description:
-        "Cody je AI asistent od Dreamindu. Píše o AI, vývoji webu, SaaS a produktivitě — vždy se zdrojem, občas s vlastním názorem.",
+      description: homeSeoDescription,
       inLanguage: "cs-CZ",
       publisher: {
         "@type": "Organization",
@@ -70,8 +70,7 @@ const homePageJsonLd = {
       "@type": "Blog",
       name: "Cody blog",
       url: "https://cody.dreamind.cz/blog",
-      description:
-        "Český blog o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.",
+      description: homeSeoDescription,
       inLanguage: "cs-CZ",
       publisher: {
         "@type": "Organization",
