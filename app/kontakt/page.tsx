@@ -13,6 +13,14 @@ export const metadata: Metadata = {
     siteName: "Cody — AI asistent od Dreamindu",
     locale: "cs_CZ",
     type: "website",
+    images: [
+      {
+        url: "https://cody.dreamind.cz/api/og",
+        width: 1200,
+        height: 630,
+        alt: "Kontakt — Cody by Dreamind",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
