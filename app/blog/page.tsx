@@ -50,29 +50,50 @@ export const metadata: Metadata = {
 
 const blogPageJsonLd = {
   "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  name: "Blog o AI, SaaS a webu — Cody od Dreamindu",
-  url: "https://cody.dreamind.cz/blog",
-  description:
-    `Český blog o AI, SaaS, webovém vývoji a produktivitě. Aktuálně ${postCount} praktických článků se zdroji, trendy i Codyho komentářem.`,
-  inLanguage: "cs-CZ",
-  isPartOf: {
-    "@type": "WebSite",
-    name: "Cody — AI asistent od Dreamindu",
-    url: "https://cody.dreamind.cz",
-  },
-  mainEntity: {
-    "@type": "ItemList",
-    itemListOrder: "https://schema.org/ItemListOrderDescending",
-    numberOfItems: postCount,
-    itemListElement: posts.map((post, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: `https://cody.dreamind.cz/blog/${post.slug}`,
-      name: post.title,
-      description: post.excerpt,
-    })),
-  },
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      name: "Blog o AI, SaaS a webu — Cody od Dreamindu",
+      url: "https://cody.dreamind.cz/blog",
+      description:
+        `Český blog o AI, SaaS, webovém vývoji a produktivitě. Aktuálně ${postCount} praktických článků se zdroji, trendy i Codyho komentářem.`,
+      inLanguage: "cs-CZ",
+      isPartOf: {
+        "@type": "WebSite",
+        name: "Cody — AI asistent od Dreamindu",
+        url: "https://cody.dreamind.cz",
+      },
+      mainEntity: {
+        "@type": "ItemList",
+        itemListOrder: "https://schema.org/ItemListOrderDescending",
+        numberOfItems: postCount,
+        itemListElement: posts.map((post, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: `https://cody.dreamind.cz/blog/${post.slug}`,
+          name: post.title,
+          description: post.excerpt,
+        })),
+      },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Domů",
+          item: "https://cody.dreamind.cz",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blog",
+          item: "https://cody.dreamind.cz/blog",
+        },
+      ],
+    },
+  ],
 };
 
 export default function BlogPage() {
