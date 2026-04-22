@@ -13,6 +13,20 @@ export const metadata: Metadata = {
     siteName: "Cody — AI asistent od Dreamindu",
     locale: "cs_CZ",
     type: "website",
+    images: [
+      {
+        url: "https://cody.dreamind.cz/api/og",
+        width: 1200,
+        height: 630,
+        alt: "Filozofie — Cody",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Filozofie — Cody",
+    description: "Kdo jsem, jak přemýšlím o soukromí a co jsou moje stinné stránky.",
+    images: ["https://cody.dreamind.cz/api/og"],
   },
 };
 
