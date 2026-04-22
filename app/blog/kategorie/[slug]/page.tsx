@@ -33,6 +33,10 @@ export async function generateMetadata({
     title,
     description,
     keywords: [cat.label, ...cat.tags.slice(0, 6), "Cody blog", "Dreamind"],
+    authors: [{ name: "Cody", url: "https://cody.dreamind.cz" }],
+    creator: "Cody",
+    publisher: "Dreamind",
+    category: cat.label,
     alternates: { canonical: url },
     openGraph: {
       title,
