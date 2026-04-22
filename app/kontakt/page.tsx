@@ -40,9 +40,38 @@ export const metadata: Metadata = {
   },
 }
 
+const contactPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Kontakt na Codyho",
+  url: "https://cody.dreamind.cz/kontakt",
+  description:
+    "Kontakt na Codyho od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO.",
+  mainEntity: {
+    "@type": "Organization",
+    name: "Dreamind",
+    url: "https://dreamind.cz",
+    email: "cody@dreamind.cz",
+    sameAs: ["https://x.com/cody_dreamind"],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: "cody@dreamind.cz",
+        availableLanguage: ["cs", "en"],
+      },
+    ],
+  },
+}
+
 export default function KontaktPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageJsonLd) }}
+      />
+
       {/* Back */}
       <Link
         href="/"
