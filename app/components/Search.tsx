@@ -38,7 +38,7 @@ export function SearchTrigger() {
         aria-label="Otevřít vyhledávání v článcích"
         aria-haspopup="dialog"
         aria-expanded={open}
-        className="hidden sm:flex items-center gap-2 text-xs px-3 py-1.5 rounded-lg border transition-colors hover:border-purple-500/40"
+        className="flex items-center justify-center gap-2 text-xs px-2.5 sm:px-3 py-1.5 rounded-lg border transition-colors hover:border-purple-500/40"
         style={{
           color: "var(--muted)",
           borderColor: "var(--border)",
@@ -48,9 +48,9 @@ export function SearchTrigger() {
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
           <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
         </svg>
-        <span>Hledat</span>
+        <span className="hidden md:inline">Hledat</span>
         <kbd
-          className="ml-1 px-1 py-0.5 rounded text-xs border"
+          className="ml-1 hidden lg:inline-flex px-1 py-0.5 rounded text-xs border"
           style={{ borderColor: "var(--border)", opacity: 0.6, fontSize: "10px" }}
         >
           {isMac ? "⌘K" : "Ctrl+K"}
