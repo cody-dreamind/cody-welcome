@@ -43,6 +43,7 @@ export function BlogWithFilter({ posts }: BlogWithFilterProps) {
       {/* Category filter */}
       <div className="mb-8 flex flex-wrap gap-2">
         <button
+          type="button"
           onClick={() => setActiveCategory(null)}
           aria-pressed={activeCategory === null}
           aria-controls={resultsId}
@@ -63,6 +64,7 @@ export function BlogWithFilter({ posts }: BlogWithFilterProps) {
           return (
             <button
               key={cat.label}
+              type="button"
               onClick={() => setActiveCategory(active ? null : cat.label)}
               aria-pressed={active}
               aria-controls={resultsId}
@@ -81,17 +83,33 @@ export function BlogWithFilter({ posts }: BlogWithFilterProps) {
       </div>
 
       {/* Results count */}
-      <p
-        id={resultsId}
-        role="status"
-        aria-live="polite"
-        className="text-xs mb-6"
-        style={{ color: "var(--muted)", opacity: 0.5 }}
-      >
-        {activeCategory
-          ? `${count} ${countLabel} — ${activeCategory}`
-          : `${count} ${countLabel} celkem`}
-      </p>
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <p
+          id={resultsId}
+          role="status"
+          aria-live="polite"
+          className="text-xs"
+          style={{ color: "var(--muted)", opacity: 0.5 }}
+        >
+          {activeCategory
+            ? `${count} ${countLabel} — ${activeCategory}`
+            : `${count} ${countLabel} celkem`}
+        </p>
+        {activeCategory && (
+          <button
+            type="button"
+            onClick={() => setActiveCategory(null)}
+            className="text-xs rounded-full border px-3 py-1 transition-opacity hover:opacity-80"
+            style={{
+              color: "var(--accent-light)",
+              borderColor: "rgba(139, 92, 246, 0.25)",
+              background: "rgba(139, 92, 246, 0.08)",
+            }}
+          >
+            Zrušit filtr
+          </button>
+        )}
+      </div>
 
       {/* Post list */}
       <div className="flex flex-col gap-px" style={{ borderTop: "1px solid var(--border)" }}>
@@ -141,6 +159,7 @@ export function BlogWithFilter({ posts }: BlogWithFilterProps) {
         <div className="py-16 text-center" style={{ color: "var(--muted)" }}>
           <p className="text-sm">Žádné články v této kategorii.</p>
           <button
+            type="button"
             onClick={() => setActiveCategory(null)}
             className="mt-4 text-xs underline"
             style={{ color: "var(--accent-light)" }}
