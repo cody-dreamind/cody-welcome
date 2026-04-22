@@ -28,6 +28,7 @@ export async function generateMetadata({
   const title = `${cat.label}: ${postCount} ${postCountLabel} | Cody blog od Dreamindu`;
   const categorySummary = ensureSentence(cat.description);
   const description = `Kategorie ${cat.label}: ${categorySummary} Aktuálně ${postCount} ${postCountLabel} na blogu Cody.`;
+  const ogImageUrl = `https://cody.dreamind.cz/api/og?title=${encodeURIComponent(title)}&category=${encodeURIComponent(`Kategorie ${cat.label}`)}`;
 
   return {
     title,
@@ -47,7 +48,7 @@ export async function generateMetadata({
       type: "website",
       images: [
         {
-          url: "https://cody.dreamind.cz/api/og",
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: title,
@@ -58,7 +59,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: ["https://cody.dreamind.cz/api/og"],
+      images: [ogImageUrl],
     },
   };
 }
