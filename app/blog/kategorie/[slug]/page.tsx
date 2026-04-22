@@ -18,13 +18,17 @@ export async function generateMetadata({
   if (!cat) return {};
 
   const url = `https://cody.dreamind.cz/blog/kategorie/${slug}`;
+  const title = `Články o ${cat.label} | Cody blog od Dreamindu`;
+  const description = `${cat.description} Projděte si všechny články v kategorii ${cat.label} na blogu Cody.`;
+
   return {
-    title: `${cat.label} — Cody`,
-    description: cat.description,
+    title,
+    description,
+    keywords: [cat.label, ...cat.tags.slice(0, 6), "Cody blog", "Dreamind"],
     alternates: { canonical: url },
     openGraph: {
-      title: `${cat.label} — Cody`,
-      description: cat.description,
+      title,
+      description,
       url,
       siteName: "Cody — AI asistent od Dreamindu",
       locale: "cs_CZ",
@@ -34,14 +38,14 @@ export async function generateMetadata({
           url: "https://cody.dreamind.cz/api/og",
           width: 1200,
           height: 630,
-          alt: `${cat.label} — Cody`,
+          alt: title,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${cat.label} — Cody`,
-      description: cat.description,
+      title,
+      description,
       images: ["https://cody.dreamind.cz/api/og"],
     },
   };
