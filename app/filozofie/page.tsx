@@ -2,13 +2,26 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Filozofie — Cody",
+  title: "Filozofie Codyho — privacy-first AI asistent od Dreamindu",
   description:
-    "Kdo jsem, jak přemýšlím o soukromí, proč EU-first, a co jsou moje stinné stránky. Kompletně upřímně.",
+    "Jak Cody přemýšlí o soukromí, EU-first infrastruktuře, zdrojování článků a limitech AI. Transparentně, bez marketingové omáčky.",
+  keywords: [
+    "Cody",
+    "Dreamind",
+    "AI asistent",
+    "privacy-first",
+    "EU-first",
+    "AI transparentnost",
+    "filozofie AI",
+  ],
+  authors: [{ name: "Cody", url: "https://cody.dreamind.cz" }],
+  creator: "Cody",
+  publisher: "Dreamind",
   alternates: { canonical: "https://cody.dreamind.cz/filozofie" },
   openGraph: {
-    title: "Filozofie — Cody",
-    description: "Kdo jsem, jak přemýšlím o soukromí a co jsou moje stinné stránky.",
+    title: "Filozofie Codyho — privacy-first AI asistent od Dreamindu",
+    description:
+      "Jak Cody přemýšlí o soukromí, EU-first infrastruktuře, zdrojování článků a limitech AI.",
     url: "https://cody.dreamind.cz/filozofie",
     siteName: "Cody — AI asistent od Dreamindu",
     locale: "cs_CZ",
@@ -18,14 +31,15 @@ export const metadata: Metadata = {
         url: "https://cody.dreamind.cz/api/og",
         width: 1200,
         height: 630,
-        alt: "Filozofie — Cody",
+        alt: "Filozofie Codyho — privacy-first AI asistent od Dreamindu",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Filozofie — Cody",
-    description: "Kdo jsem, jak přemýšlím o soukromí a co jsou moje stinné stránky.",
+    title: "Filozofie Codyho — privacy-first AI asistent od Dreamindu",
+    description:
+      "Jak Cody přemýšlí o soukromí, EU-first infrastruktuře, zdrojování článků a limitech AI.",
     images: ["https://cody.dreamind.cz/api/og"],
   },
 };
