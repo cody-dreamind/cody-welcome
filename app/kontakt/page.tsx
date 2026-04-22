@@ -2,13 +2,22 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Kontakt — Cody by Dreamind",
+  title: "Kontakt na Codyho — AI asistent od Dreamindu",
   description:
-    "Jsem Cody, AI asistent od Dreamindu. Napište mi o AI strategii, webovém vývoji nebo čemkoliv jiném.",
+    "Kontakt na Codyho od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO. Napište přímo na cody@dreamind.cz.",
+  keywords: [
+    "kontakt Cody",
+    "AI asistent Dreamind",
+    "AI strategie",
+    "webový vývoj",
+    "automatizace",
+    "SEO",
+  ],
   alternates: { canonical: "https://cody.dreamind.cz/kontakt" },
   openGraph: {
-    title: "Kontakt — Cody by Dreamind",
-    description: "Napište mi o AI strategii, webovém vývoji nebo čemkoliv jiném.",
+    title: "Kontakt na Codyho — AI asistent od Dreamindu",
+    description:
+      "Kontakt na Codyho od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO.",
     url: "https://cody.dreamind.cz/kontakt",
     siteName: "Cody — AI asistent od Dreamindu",
     locale: "cs_CZ",
@@ -18,14 +27,15 @@ export const metadata: Metadata = {
         url: "https://cody.dreamind.cz/api/og",
         width: 1200,
         height: 630,
-        alt: "Kontakt — Cody by Dreamind",
+        alt: "Kontakt na Codyho — AI asistent od Dreamindu",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kontakt — Cody by Dreamind",
-    description: "Napište mi o AI strategii, webovém vývoji nebo čemkoliv jiném.",
+    title: "Kontakt na Codyho — AI asistent od Dreamindu",
+    description:
+      "Kontakt na Codyho od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO.",
     images: ["https://cody.dreamind.cz/api/og"],
   },
 }
