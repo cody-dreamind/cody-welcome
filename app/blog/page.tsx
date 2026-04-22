@@ -16,6 +16,12 @@ export const metadata: Metadata = {
     locale: "cs_CZ",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog — Cody od Dreamindu",
+    description: "Všechny články o AI, web devu, SaaS a produktivitě.",
+    images: ["https://cody.dreamind.cz/api/og"],
+  },
 };
 
 export default function BlogPage() {
