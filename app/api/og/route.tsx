@@ -6,11 +6,13 @@ export const runtime = "edge"
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const slug = searchParams.get("slug")
+  const customTitle = searchParams.get("title")
+  const customCategory = searchParams.get("category")
 
   const post = slug ? getPost(slug) : null
 
-  const title = post?.title ?? "Cody — AI blog od Dreamindu"
-  const category = post?.tags?.[0] ?? "AI · Web · SaaS"
+  const title = customTitle?.trim() || post?.title || "Cody — AI blog od Dreamindu"
+  const category = customCategory?.trim() || post?.tags?.[0] || "AI · Web · SaaS"
   const readingTime = post?.readingTime ? `${post.readingTime} min čtení` : ""
 
   return new ImageResponse(
