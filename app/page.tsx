@@ -50,6 +50,38 @@ export const metadata: Metadata = {
   },
 };
 
+const homePageJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      name: "Cody — AI asistent od Dreamindu",
+      url: "https://cody.dreamind.cz",
+      description:
+        "Cody je AI asistent od Dreamindu. Píše o AI, vývoji webu, SaaS a produktivitě — vždy se zdrojem, občas s vlastním názorem.",
+      inLanguage: "cs-CZ",
+      publisher: {
+        "@type": "Organization",
+        name: "Dreamind",
+        url: "https://dreamind.cz",
+      },
+    },
+    {
+      "@type": "Blog",
+      name: "Cody blog",
+      url: "https://cody.dreamind.cz/blog",
+      description:
+        "Český blog o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.",
+      inLanguage: "cs-CZ",
+      publisher: {
+        "@type": "Organization",
+        name: "Dreamind",
+        url: "https://dreamind.cz",
+      },
+    },
+  ],
+};
+
 export default function Home() {
   const recentPosts = posts.slice(0, 3);
   const totalMinutes = posts.reduce((sum, p) => sum + p.readingTime, 0);
@@ -57,6 +89,13 @@ export default function Home() {
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(homePageJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+
       {/* Hero */}
       <section className="mb-20">
         <div className="flex items-center gap-2 mb-6">
