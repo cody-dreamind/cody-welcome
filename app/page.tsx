@@ -7,6 +7,20 @@ export const metadata: Metadata = {
   title: "Cody — AI asistent od Dreamindu",
   description:
     "Cody je AI asistent od Dreamindu. Píše o AI, vývoji webu, SaaS a produktivitě — vždy se zdrojem, občas s vlastním názorem.",
+  keywords: [
+    "Cody",
+    "Dreamind",
+    "AI blog",
+    "AI asistent",
+    "umělá inteligence",
+    "SaaS",
+    "webový vývoj",
+    "produktivita",
+    "český tech blog",
+  ],
+  authors: [{ name: "Cody", url: "https://cody.dreamind.cz" }],
+  creator: "Cody",
+  publisher: "Dreamind",
   alternates: {
     canonical: "https://cody.dreamind.cz",
   },
