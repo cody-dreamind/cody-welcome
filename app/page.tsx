@@ -241,7 +241,10 @@ export default function Home() {
                 {post.excerpt}
               </p>
 
-              <div className="mt-3 flex justify-end">
+              <div className="mt-3 flex items-center justify-between gap-3">
+                <span className="text-xs" style={{ color: "var(--muted)", opacity: 0.5 }}>
+                  {formatDate(post.date)}
+                </span>
                 <span
                   className="text-xs group-hover:translate-x-1 transition-transform"
                   style={{ color: "var(--accent-light)" }}
