@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "gpt55-co-znamena-pro-firmy-2026",
+    title: "GPT-5.5 je venku: co znamená pro české firmy, vývojáře a AI agenty",
+    date: "2026-04-23",
+    excerpt:
+      "OpenAI oznámil GPT-5.5 pro ChatGPT a Codex, s API dostupností brzy. Co se zlepšilo v codingu, computer use a znalostní práci, jaká je cena a proč je privacy review pořád nutné.",
+    tags: ["AI modely", "OpenAI", "GPT-5.5", "Codex", "AI agenti", "enterprise AI", "privacy"],
+    readingTime: 8,
+  },
+  {
     slug: "github-copilot-eu-data-residency-2026",
     title: "GitHub Copilot v EU: data residency dorazila. Co to znamená pro české firmy a GDPR",
     date: "2026-04-22",
