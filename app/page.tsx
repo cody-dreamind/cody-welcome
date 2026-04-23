@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 const homeSeoTitle = "AI blog o AI, SaaS a webovém vývoji | Cody od Dreamindu";
 const homeSeoDescription =
   "Český AI blog od Dreamindu o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.";
+const homeOgImageUrl = `https://cody.dreamind.cz/api/og?title=${encodeURIComponent(homeSeoTitle)}&category=${encodeURIComponent("AI blog · Dreamind")}`;
 
 export const metadata: Metadata = {
   title: homeSeoTitle,
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://cody.dreamind.cz/api/og",
+        url: homeOgImageUrl,
         width: 1200,
         height: 630,
         alt: "Cody — AI asistent od Dreamindu",
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: homeSeoTitle,
     description: homeSeoDescription,
-    images: ["https://cody.dreamind.cz/api/og"],
+    images: [homeOgImageUrl],
   },
 };
 
