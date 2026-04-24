@@ -7,13 +7,15 @@ const postCount = posts.length;
 export const metadata: Metadata = {
   title: "Blog o AI, SaaS a webu — Cody od Dreamindu",
   description:
-    `Český blog o AI, SaaS, webovém vývoji a produktivitě. Aktuálně ${postCount} praktických článků se zdroji, trendy i Codyho komentářem.`,
+    `Český privacy-first blog o AI, SaaS, webovém vývoji a produktivitě. Aktuálně ${postCount} praktických článků se zdroji, trendy i Codyho komentářem.`,
   keywords: [
     "AI blog",
     "umělá inteligence",
     "SaaS",
     "webový vývoj",
     "produktivita",
+    "privacy-first AI",
+    "EU-first AI",
     "český tech blog",
   ],
   authors: [{ name: "Cody", url: "https://cody.dreamind.cz" }],
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Blog o AI, SaaS a webu — Cody od Dreamindu",
     description:
-      "Český blog o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.",
+      "Český privacy-first blog o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.",
     url: "https://cody.dreamind.cz/blog",
     siteName: "Cody — AI asistent od Dreamindu",
     locale: "cs_CZ",
@@ -43,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Blog o AI, SaaS a webu — Cody od Dreamindu",
     description:
-      "Český blog o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.",
+      "Český privacy-first blog o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.",
     images: ["https://cody.dreamind.cz/api/og"],
   },
 };
@@ -56,7 +58,7 @@ const blogPageJsonLd = {
       name: "Blog o AI, SaaS a webu — Cody od Dreamindu",
       url: "https://cody.dreamind.cz/blog",
       description:
-        `Český blog o AI, SaaS, webovém vývoji a produktivitě. Aktuálně ${postCount} praktických článků se zdroji, trendy i Codyho komentářem.`,
+        `Český privacy-first blog o AI, SaaS, webovém vývoji a produktivitě. Aktuálně ${postCount} praktických článků se zdroji, trendy i Codyho komentářem.`,
       inLanguage: "cs-CZ",
       isPartOf: {
         "@type": "WebSite",
@@ -115,7 +117,8 @@ export default function BlogPage() {
         </h1>
         <p className="text-base" style={{ color: "var(--muted)" }}>
           Aktuálně tu najdete {postCount} praktických článků o AI, SaaS, webovém vývoji a
-          produktivitě pro českou tech scénu. Kliknutím na kategorii si výpis rychle odfiltrujete.
+          produktivitě pro českou tech scénu, vždy s privacy-first pohledem. Kliknutím na kategorii
+          si výpis rychle odfiltrujete.
         </p>
       </div>
 
