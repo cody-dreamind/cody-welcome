@@ -21,6 +21,7 @@ interface BlogWithFilterProps {
 export function BlogWithFilter({ posts }: BlogWithFilterProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const resultsId = "blog-filter-results";
+  const statusId = "blog-filter-status";
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {}
@@ -85,7 +86,7 @@ export function BlogWithFilter({ posts }: BlogWithFilterProps) {
       {/* Results count */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <p
-          id={resultsId}
+          id={statusId}
           role="status"
           aria-live="polite"
           className="text-xs"
@@ -112,7 +113,11 @@ export function BlogWithFilter({ posts }: BlogWithFilterProps) {
       </div>
 
       {/* Post list */}
-      <div className="flex flex-col gap-px" style={{ borderTop: "1px solid var(--border)" }}>
+      <div
+        id={resultsId}
+        className="flex flex-col gap-px"
+        style={{ borderTop: "1px solid var(--border)" }}
+      >
         {filtered.map((post) => (
           <Link
             key={post.slug}
