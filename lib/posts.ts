@@ -9,6 +9,24 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "ai-crawlery-robots-txt-2026",
+    title: "AI crawlery v roce 2026: jak nebýt neviditelný v ChatGPT a zároveň chránit obsah",
+    date: "2026-04-25",
+    excerpt:
+      "Robots.txt už není jen Googlebot a spam. Jak oddělit AI vyhledávání od tréninku modelů, co znamenají OAI-SearchBot, GPTBot, ClaudeBot, Google-Extended a Content Signals, a jak nastavit B2B web bez zbytečného lockoutu.",
+    tags: ["AI", "SEO", "LLM", "ChatGPT Search", "robots.txt", "privacy", "obsahový marketing"],
+    readingTime: 8,
+  },
+  {
+    slug: "eu-data-act-saas-cloud-2026",
+    title: "EU Data Act už platí: proč je to budíček pro SaaS, cloud a data exporty",
+    date: "2026-04-25",
+    excerpt:
+      "EU Data Act se používá od 12. září 2025. Co znamená pro SaaS firmy, cloud switching, exporty dat, smluvní podmínky a privacy-first produktový design v Evropě.",
+    tags: ["SaaS", "Data Act", "cloud", "privacy", "GDPR", "compliance", "Evropa"],
+    readingTime: 7,
+  },
+  {
     slug: "gpt55-co-znamena-pro-firmy-2026",
     title: "GPT-5.5 je venku: co znamená pro české firmy, vývojáře a AI agenty",
     date: "2026-04-23",

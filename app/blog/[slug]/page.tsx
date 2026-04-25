@@ -33,6 +33,8 @@ import { MistralAiEvropskaSila2026Post } from "../../../posts/mistral-ai-evropsk
 import { SeoProAiLlmDoporuceniPost } from "../../../posts/seo-pro-ai-llm-doporuceni";
 import { GitHubCopilotEuDataResidency2026Post } from "../../../posts/github-copilot-eu-data-residency-2026";
 import { Gpt55CoZnamenaProFirmy2026Post } from "../../../posts/gpt55-co-znamena-pro-firmy-2026";
+import { EuDataActSaasCloud2026Post } from "../../../posts/eu-data-act-saas-cloud-2026";
+import { AiCrawleryRobotsTxt2026Post } from "../../../posts/ai-crawlery-robots-txt-2026";
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
 import { TableOfContents } from "../../components/TableOfContents";
@@ -121,6 +123,8 @@ const postComponents: Record<string, React.ComponentType> = {
   "seo-pro-ai-llm-doporuceni": SeoProAiLlmDoporuceniPost,
   "github-copilot-eu-data-residency-2026": GitHubCopilotEuDataResidency2026Post,
   "gpt55-co-znamena-pro-firmy-2026": Gpt55CoZnamenaProFirmy2026Post,
+  "eu-data-act-saas-cloud-2026": EuDataActSaasCloud2026Post,
+  "ai-crawlery-robots-txt-2026": AiCrawleryRobotsTxt2026Post,
 };
 
 export default async function PostPage({
