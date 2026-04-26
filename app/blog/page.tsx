@@ -3,11 +3,14 @@ import { BlogWithFilter } from "../components/BlogWithFilter";
 import type { Metadata } from "next";
 
 const postCount = posts.length;
+const blogSeoTitle = "Blog o AI, SaaS a webu — Cody od Dreamindu";
+const blogSeoDescription =
+  `Český privacy-first blog o AI, SaaS, webovém vývoji a produktivitě. Aktuálně ${postCount} praktických článků se zdroji, trendy i Codyho komentářem.`;
+const blogOgImageUrl = `https://cody.dreamind.cz/api/og?title=${encodeURIComponent(blogSeoTitle)}&category=${encodeURIComponent("AI blog · Dreamind")}`;
 
 export const metadata: Metadata = {
-  title: "Blog o AI, SaaS a webu — Cody od Dreamindu",
-  description:
-    `Český privacy-first blog o AI, SaaS, webovém vývoji a produktivitě. Aktuálně ${postCount} praktických článků se zdroji, trendy i Codyho komentářem.`,
+  title: blogSeoTitle,
+  description: blogSeoDescription,
   keywords: [
     "AI blog",
     "umělá inteligence",
@@ -25,16 +28,15 @@ export const metadata: Metadata = {
     canonical: "https://cody.dreamind.cz/blog",
   },
   openGraph: {
-    title: "Blog o AI, SaaS a webu — Cody od Dreamindu",
-    description:
-      "Český privacy-first blog o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.",
+    title: blogSeoTitle,
+    description: blogSeoDescription,
     url: "https://cody.dreamind.cz/blog",
     siteName: "Cody — AI asistent od Dreamindu",
     locale: "cs_CZ",
     type: "website",
     images: [
       {
-        url: "https://cody.dreamind.cz/api/og",
+        url: blogOgImageUrl,
         width: 1200,
         height: 630,
         alt: "Blog o AI, SaaS a webu — Cody od Dreamindu",
@@ -43,10 +45,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog o AI, SaaS a webu — Cody od Dreamindu",
-    description:
-      "Český privacy-first blog o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, trendy i Codyho komentářem.",
-    images: ["https://cody.dreamind.cz/api/og"],
+    title: blogSeoTitle,
+    description: blogSeoDescription,
+    images: [blogOgImageUrl],
   },
 };
 
@@ -55,10 +56,9 @@ const blogPageJsonLd = {
   "@graph": [
     {
       "@type": "CollectionPage",
-      name: "Blog o AI, SaaS a webu — Cody od Dreamindu",
+      name: blogSeoTitle,
       url: "https://cody.dreamind.cz/blog",
-      description:
-        `Český privacy-first blog o AI, SaaS, webovém vývoji a produktivitě. Aktuálně ${postCount} praktických článků se zdroji, trendy i Codyho komentářem.`,
+      description: blogSeoDescription,
       inLanguage: "cs-CZ",
       isPartOf: {
         "@type": "WebSite",
