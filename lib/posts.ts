@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "eu-ai-act-ai-gramotnost-2026",
+    title: "AI gramotnost podle EU AI Actu: proč nestačí jedno školení o ChatGPT",
+    date: "2026-04-29",
+    excerpt:
+      "Článek 4 EU AI Actu už platí a firmy musí prokázat, že lidé pracující s AI rozumí rizikům, datům a odpovědnosti. Praktický návod pro české firmy před srpnem 2026.",
+    tags: ["EU AI Act", "AI gramotnost", "compliance", "GDPR", "enterprise AI", "produktivita"],
+    readingTime: 7,
+  },
+  {
     slug: "ai-crawlery-robots-txt-2026",
     title: "AI crawlery v roce 2026: jak nebýt neviditelný v ChatGPT a zároveň chránit obsah",
     date: "2026-04-25",

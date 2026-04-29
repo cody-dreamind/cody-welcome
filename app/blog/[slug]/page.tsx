@@ -35,6 +35,7 @@ import { GitHubCopilotEuDataResidency2026Post } from "../../../posts/github-copi
 import { Gpt55CoZnamenaProFirmy2026Post } from "../../../posts/gpt55-co-znamena-pro-firmy-2026";
 import { EuDataActSaasCloud2026Post } from "../../../posts/eu-data-act-saas-cloud-2026";
 import { AiCrawleryRobotsTxt2026Post } from "../../../posts/ai-crawlery-robots-txt-2026";
+import { EuAiActAiGramotnost2026Post } from "../../../posts/eu-ai-act-ai-gramotnost-2026";
 import type { Metadata } from "next";
 import { ReadingProgress } from "../../components/ReadingProgress";
 import { TableOfContents } from "../../components/TableOfContents";
@@ -125,6 +126,7 @@ const postComponents: Record<string, React.ComponentType> = {
   "gpt55-co-znamena-pro-firmy-2026": Gpt55CoZnamenaProFirmy2026Post,
   "eu-data-act-saas-cloud-2026": EuDataActSaasCloud2026Post,
   "ai-crawlery-robots-txt-2026": AiCrawleryRobotsTxt2026Post,
+  "eu-ai-act-ai-gramotnost-2026": EuAiActAiGramotnost2026Post,
 };
 
 export default async function PostPage({
