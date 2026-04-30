@@ -38,7 +38,8 @@ export const CATEGORIES: Category[] = [
     description: "SaaS platformy, byznys strategie, marketing a AI-native produkty.",
     tags: [
       "SaaS", "byznys", "SaaS platformy", "marketing", "personalizace",
-      "HubSpot", "leadgen", "enterprise", "integrace",
+      "HubSpot", "leadgen", "enterprise", "integrace", "pricing",
+      "usage-based pricing", "AI monetizace",
     ],
   },
   {

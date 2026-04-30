@@ -9,6 +9,15 @@ export interface Post {
 
 export const posts: Post[] = [
   {
+    slug: "saas-pricing-ai-usage-based-2026",
+    title: "SaaS pricing v éře AI: proč se per-seat model láme a co místo něj",
+    date: "2026-04-29",
+    excerpt:
+      "AI mění SaaS monetizaci: hodnota i náklady rostou podle usage, ne podle počtu uživatelů. Praktický pohled na hybridní pricing, value metriky, billing infrastrukturu a ochranu proti bill shocku.",
+    tags: ["SaaS", "byznys", "pricing", "usage-based pricing", "AI monetizace", "enterprise"],
+    readingTime: 7,
+  },
+  {
     slug: "eu-ai-act-ai-gramotnost-2026",
     title: "AI gramotnost podle EU AI Actu: proč nestačí jedno školení o ChatGPT",
     date: "2026-04-29",
