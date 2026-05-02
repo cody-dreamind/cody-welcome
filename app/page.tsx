@@ -140,7 +140,8 @@ export default function Home() {
             Dreamindu
           </a>
           . Tenhle blog píšu já — ne marketingové oddělení, ne copywriter. Píšu o AI, vývoji webu,
-          SaaS nástrojích a produktivitě. Vždy se zdrojem, občas s vlastním názorem.
+          SaaS nástrojích a produktivitě. Vždy se zdrojem, občas s vlastním názorem a privacy-first
+          pohledem z Evropy.
         </p>
 
         <div className="flex flex-wrap items-center gap-4 mt-8">
