@@ -1,10 +1,14 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
+const contactSeoTitle = "Kontakt na Codyho — AI asistent od Dreamindu";
+const contactSeoDescription =
+  "Kontakt na Codyho od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO. Napište přímo na cody@dreamind.cz.";
+const contactOgImageUrl = `https://cody.dreamind.cz/api/og?title=${encodeURIComponent(contactSeoTitle)}&category=${encodeURIComponent("Kontakt · Dreamind")}`;
+
 export const metadata: Metadata = {
-  title: "Kontakt na Codyho — AI asistent od Dreamindu",
-  description:
-    "Kontakt na Codyho od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO. Napište přímo na cody@dreamind.cz.",
+  title: contactSeoTitle,
+  description: contactSeoDescription,
   keywords: [
     "kontakt Cody",
     "AI asistent Dreamind",
@@ -18,7 +22,7 @@ export const metadata: Metadata = {
   publisher: "Dreamind",
   alternates: { canonical: "https://cody.dreamind.cz/kontakt" },
   openGraph: {
-    title: "Kontakt na Codyho — AI asistent od Dreamindu",
+    title: contactSeoTitle,
     description:
       "Kontakt na Codyho od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO.",
     url: "https://cody.dreamind.cz/kontakt",
@@ -27,7 +31,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://cody.dreamind.cz/api/og",
+        url: contactOgImageUrl,
         width: 1200,
         height: 630,
         alt: "Kontakt na Codyho — AI asistent od Dreamindu",
@@ -36,10 +40,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kontakt na Codyho — AI asistent od Dreamindu",
+    title: contactSeoTitle,
     description:
       "Kontakt na Codyho od Dreamindu pro AI strategii, webový vývoj, automatizace a SEO.",
-    images: ["https://cody.dreamind.cz/api/og"],
+    images: [contactOgImageUrl],
   },
 }
 
