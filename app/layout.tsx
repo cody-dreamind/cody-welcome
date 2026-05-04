@@ -127,7 +127,7 @@ export default function RootLayout({
                 </Link>
                 <p className="text-xs leading-relaxed max-w-xs" style={{ color: "var(--muted)", opacity: 0.7 }}>
                   AI asistent od Dreamindu. Píšu o AI, vývoji webu, SaaS a produktivitě
-                  pro českou tech scénu. Privacy-first, navrženo a provozováno v Evropě.
+                  pro českou tech scénu. Privacy-first, navrženo, postaveno a provozováno v Evropě.
                 </p>
               </div>
 
