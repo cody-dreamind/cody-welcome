@@ -103,6 +103,116 @@ Otevřete homepage a zkuste během deseti sekund odpovědět:
 
 Pokud musíte scrollovat, hádat nebo číst tři odstavce obecného textu, stránka potřebuje zpřesnit. Ne nutně předělat celá. Často stačí přepsat hero sekci, přidat konkrétní důkazy a zjednodušit cestu ke kontaktu.
 
+## Kapitola 2: Jak poznat dobrý web: rychlost, důvěra, obsah, konverze
+
+Dobrý web není ten, který se nejvíc líbí majiteli firmy. Dobrý web pomáhá návštěvníkovi udělat správné rozhodnutí a firmě šetří čas. Když ho hodnotíme jen podle vzhledu, snadno přehlédneme, že neumí vysvětlit nabídku, nevede k akci, je pomalý na mobilu nebo působí nedůvěryhodně.
+
+Prakticky se dá dobrý web posuzovat ve čtyřech vrstvách:
+
+1. Rychlost: načte se svižně a nepřekáží návštěvníkovi.
+2. Důvěra: jasně ukazuje, kdo za nabídkou stojí a proč mu věřit.
+3. Obsah: odpovídá na skutečné otázky zákazníků, ne na interní představy firmy.
+4. Konverze: má srozumitelný další krok a nenutí návštěvníka přemýšlet, co má udělat.
+
+Když jedna vrstva chybí, web obvykle teče. Rychlý web bez důvěry nevydělá. Důvěryhodný web bez jasné akce sbírá obdiv, ale ne poptávky. Web plný obsahu bez struktury se čte jako šuplík s poznámkami. A konverzní formulář na stránce, která nic nevysvětluje, je jen digitální verze natažené ruky.
+
+### Rychlost: první forma respektu
+
+Rychlost není jen technická metrika. Je to pocit, že web návštěvníka nebrzdí. Uživatel nemusí vědět, co je JavaScript bundle, lazy loading nebo cache. Pozná ale, když stránka poskakuje, tlačítko nereaguje, obrázek se načítá věčnost nebo se formulář rozbije na mobilu.
+
+Pro malý a střední web je nejčastější problém zbytečná složitost. Příliš těžké obrázky, marketingové skripty, chat widgety, externí fonty, video hero sekce a analytika z pěti systémů najednou. Každý doplněk má cenu. Nejen v penězích, ale i v rychlosti, soukromí a spolehlivosti.
+
+Praktický přístup:
+
+- Obrázky dávejte v rozumném rozlišení, ne jako surové exporty z grafiky.
+- Nepřidávejte skript, dokud neumíte říct, jaké rozhodnutí díky němu uděláte.
+- Kritické informace a hlavní akce musí fungovat i bez efektů a animací.
+- Na mobilu testujte reálný tok: otevřít stránku, pochopit nabídku, najít kontakt, odeslat formulář.
+- Pokud web působí pomalu, nejdřív odstraňujte zbytečnosti. Až potom laděte drobnosti.
+
+Codyho komentář: rychlost webu je často manažerské rozhodnutí, ne jen vývojářský úkol. Když někdo trvá na pěti trackerech, autoplay videu a třech externích widgetech, vývojář z toho kouzlem neudělá lehký web. Tedy může zkusit kouzlo, ale většinou se tomu říká kompromis a bývá drahý.
+
+### Důvěra: návštěvník hledá důkaz
+
+Důvěra se nestaví jednou větou typu "jsme profesionálové". To říká každý. Důvěra vzniká z konkrétnosti. Čím jasněji web ukáže kontext, zkušenost, proces a výsledky, tím méně musí návštěvník hádat.
+
+Důvěryhodný web obvykle obsahuje:
+
+- Konkrétní popis služby nebo produktu bez prázdných superlativů.
+- Jména, fotky nebo alespoň jasnou identitu týmu či firmy.
+- Reference, případové studie, ukázky práce nebo měřitelné výsledky.
+- Vysvětlení procesu: co se stane po kontaktu, jak probíhá spolupráce, jak dlouho typicky trvá první krok.
+- Kontaktní údaje a právní informace, které nevypadají jako schované v suterénu webu.
+- Srozumitelné informace o zpracování dat, cookies a analytice.
+
+Privacy-first přístup je v důvěře silná karta. Pokud web otevřeně říká, že nepoužívá zbytečné trackery, preferuje evropský provoz a sbírá jen data potřebná k provozu služby, není to právní poznámka na konec. Je to obchodní argument. Zákazníkům tím říkáte: vaše data nejsou náš vedlejší produkt.
+
+### Obsah: odpovědi před ornamenty
+
+Obsah webu má prodávat tím, že snižuje nejistotu. Návštěvník často nepřichází s otázkou "kdo má nejhezčí homepage". Přichází s otázkou "vyřeší to můj problém, zvládnu tomu věřit a stojí mi za to udělat další krok".
+
+Dobrá stránka proto pracuje s otázkami, které zákazník skutečně řeší:
+
+- Je to pro firmu jako jsme my?
+- Co přesně dostaneme?
+- Co od nás budete potřebovat?
+- Jak poznáme, že to funguje?
+- Kolik práce bude na naší straně?
+- Jaká jsou rizika?
+- Co když už máme existující systém?
+
+Příklad pro agenturu, která staví SaaS MVP:
+
+Slabý text:
+"Vyvíjíme moderní digitální produkty na míru s důrazem na kvalitu, inovace a dlouhodobou spolupráci."
+
+Silnější text:
+"Pomáháme B2B firmám převést interní proces nebo zákaznický portál do prvního SaaS MVP. Během úvodního workshopu zpřesníme uživatele, datový model, klíčový tok a rizika provozu. Výsledkem není jen kód, ale rozhodnutí, co postavit teď a co odložit."
+
+Rozdíl není v poetice. Silnější text říká, pro koho služba je, co se řeší, jak vypadá první krok a jaká je hodnota spolupráce.
+
+### Konverze: jeden jasný další krok
+
+Konverze není manipulace. Je to odstranění zbytečného tření mezi zájmem a akcí. Když návštěvník pochopí hodnotu, web mu má nabídnout přirozený další krok. Ne deset stejně výrazných tlačítek. Jeden hlavní směr a pár podpůrných cest pro lidi, kteří ještě nejsou rozhodnutí.
+
+Pro servisní firmu může být hlavní akce "Domluvit konzultaci". Pro SaaS produkt "Vyzkoušet demo". Pro technický blog "Odebírat RSS". Pro enterprise produkt "Poslat dotaz na řešení". Důležité je, aby akce odpovídala fázi zákazníka.
+
+Typické chyby:
+
+- Hlavní tlačítko vede na obecný kontakt bez kontextu.
+- Formulář chce příliš mnoho údajů hned na začátku.
+- Web tlačí demo, ale nikde předtím nevysvětlí produkt.
+- Každá sekce má jiné CTA a návštěvník neví, co je hlavní.
+- Po odeslání formuláře není jasné, kdy a jak firma odpoví.
+
+Dobré CTA je konkrétní a poctivé. Místo "Odeslat" napište, co se stane: "Poslat poptávku", "Domluvit úvodní hovor", "Získat audit webu". A vedle formuláře klidně doplňte jednu větu: "Ozveme se s návrhem dalšího kroku, nebudeme vás přidávat do marketingového seznamu." To je malá věc, ale pro důvěru velká.
+
+### Mini audit webu za 30 minut
+
+Vezměte jednu důležitou stránku a projděte ji bez interní shovívavosti:
+
+1. Otevřete ji na mobilu mimo ideální pracovní prostředí.
+2. Do jedné věty napište, co stránka slibuje.
+3. Zakroužkujte všechny prvky, které odvádějí pozornost od hlavní akce.
+4. Spočítejte, kolik externích služeb se načítá jen kvůli marketingu nebo měření.
+5. Najděte první konkrétní důkaz důvěry. Pokud je až dole, posuňte ho výš.
+6. Zkontrolujte, jestli formulář chce jen údaje potřebné pro první odpověď.
+7. Pošlete stránku někomu mimo firmu a zeptejte se, co by udělal dál.
+
+### Checklist kapitoly
+
+- Je do pěti až deseti sekund jasné, co nabízíte a pro koho?
+- Načítá se stránka svižně na běžném mobilu?
+- Má web viditelné důkazy důvěry, ne jen obecná tvrzení?
+- Odpovídá obsah na otázky zákazníka před kontaktem?
+- Má každá důležitá stránka jeden hlavní další krok?
+- Je formulář krátký, srozumitelný a férový?
+- Víte, proč na webu běží každý externí skript?
+- Umíte zákazníkovi vysvětlit, jak chráníte jeho data?
+
+Když web projde tímto testem, nemusí být dokonalý. Bude ale použitelný, měřitelný a obchodně srozumitelný. A to je lepší základ než další redesign, který jen přemaluje stejné nejasnosti.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
+- 2026-05-04: Dopsána kapitola 2 o hodnocení dobrého webu podle rychlosti, důvěry, obsahu a konverzí.
