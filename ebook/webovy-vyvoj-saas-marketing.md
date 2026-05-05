@@ -6208,6 +6208,312 @@ Lead generation má být systém důvěry. Když ho postavíte na jasném segmen
 - [European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en)
 - [European Commission: How much data can be collected?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/how-much-data-can-be-collected_en)
 
+## Kapitola 26: E-mail, newslettery a RSS
+
+E-mail je pořád jeden z nejdůležitějších obchodních kanálů. Není závislý na jednom algoritmu, dá se archivovat, předávat v týmu, napojit na CRM a používat pro dlouhodobý vztah se zákazníky. Zároveň je to kanál, který se velmi snadno zneužije: nakoupené databáze, automatické sekvence bez kontextu, nejasné souhlasy, sledovací pixely, přehnaná personalizace a odhlášení schované jako hledání pokladu.
+
+RSS je proti tomu nenápadné, ale extrémně zdravé. Člověk si sám vybere zdroj, odběr spravuje ve své čtečce, nemusí nikomu dávat e-mail a vydavatel nemusí stavět vztah na tom, že má databázi osobních údajů. Pro privacy-first web je RSS jedna z nejlepších defaultních voleb: jednoduché, otevřené, přenositelné a bez sledování.
+
+Dobrá strategie proto nestaví e-mail proti RSS. Používá obojí:
+
+1. RSS jako otevřený, nízkotlaký kanál pro lidi, kteří chtějí sledovat obsah bez registrace.
+2. Newsletter jako dobrovolný vztah pro lidi, kteří chtějí dostávat vybraný obsah nebo produktové aktualizace e-mailem.
+3. Transakční e-maily jako provozní součást produktu, ne marketingovou zkratku.
+4. Přímé odkazy jako základ distribuce, aby obsah žil i mimo platformy a kampaně.
+
+Cílem není posílat víc zpráv. Cílem je doručit správnou informaci lidem, kteří o ni opravdu stojí.
+
+### Nejdřív rozlišit typ e-mailu
+
+Ne každý e-mail má stejný účel, riziko a pravidla. Pokud je házíte do jednoho pytle, vznikne chaos: uživatel se odhlásí z marketingu a přestanou mu chodit faktury, nebo naopak přijde provozní zpráva s nenápadnou reklamní vsuvkou.
+
+Praktické rozdělení:
+
+- Transakční e-mail: potvrzení účtu, reset hesla, faktura, bezpečnostní upozornění, změna stavu objednávky.
+- Produktová notifikace: upozornění uvnitř služby, například dokončený export nebo pozvánka do týmu.
+- Servisní komunikace: výpadek, plánovaná údržba, změna podmínek, důležitá bezpečnostní informace.
+- Newsletter: redakční obsah, tipy, novinky a kurátorovaný přehled.
+- Obchodní sdělení: nabídka produktu, akce, upsell, cross-sell, prodejní pozvánka.
+- Osobní obchodní kontakt: individuální odpověď nebo ruční navázání vztahu s jasným kontextem.
+
+Každý typ má mít vlastní šablonu, účel, zdroj dat, odhlašovací logiku a měření. Newsletter nemá jezdit po stejné koleji jako reset hesla. Marketingový experiment nesmí poškodit doručitelnost transakčních e-mailů.
+
+Příklad pro SaaS:
+
+- `security@example.cz`: bezpečnostní a přihlašovací zprávy.
+- `billing@example.cz`: fakturace a platby.
+- `product@example.cz`: produktové notifikace.
+- `newsletter@example.cz`: obsahový newsletter.
+
+Nemusí jít nutně o čtyři fyzické schránky. Důležitější je oddělit odesílací domény nebo subdomény, reputaci, šablony, odhlášení a interní odpovědnost.
+
+### Souhlas a obchodní sdělení bez mlhy
+
+Tahle část není právní rada. Je to praktické minimum, aby marketing nevypadal jako "nějak to pošleme a uvidíme". V Česku je potřeba řešit zákon č. 480/2004 Sb. a výklad ÚOOÚ k obchodním sdělením. ÚOOÚ ve FAQ uvádí, že volně dostupné kontaktní údaje na internetu nelze použít pro rozesílání reklamní nabídky e-mailem a že žádost o souhlas zaslaná e-mailem může sama být obchodním sdělením ([ÚOOÚ: Často kladené otázky k zákonu č. 480/2004 Sb.](https://uoou.gov.cz/cinnost/obchodni-sdeleni/casto-kladene-otazky-k-zakonu-c-4802004-sb)).
+
+ePrivacy směrnice v článku 13 řeší nevyžádanou komunikaci pro účely přímého marketingu a pracuje s principem předchozího souhlasu u elektronické pošty ([EUR-Lex: Directive 2002/58/EC, Article 13](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058-20091219)). GDPR pak u souhlasu vyžaduje, aby byl svobodný, konkrétní, informovaný a jednoznačný; EDPB k souhlasu vydává samostatné pokyny ([EDPB: Guidelines 05/2020 on consent](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)).
+
+Praktický dopad pro newsletter:
+
+- Přihlášení musí být aktivní volba, ne předzaškrtnutý checkbox.
+- Text u formuláře má říkat, co bude chodit a jak často přibližně.
+- Souhlas s newsletterem nesmí být schovaný v kontaktu na obchodní poptávku.
+- Uložte si důkaz, kdy, odkud a s jakým textem se člověk přihlásil.
+- Každý newsletter musí mít jasnou identitu odesílatele.
+- Odhlášení má být snadné, funkční a respektované.
+- Neposílejte newsletter lidem jen proto, že vám kdysi napsali přes formulář.
+
+U stávajících zákazníků může existovat jiný režim pro vlastní obdobné výrobky a služby, ale to není kouzelné povolení posílat cokoliv komukoliv. Vždy řešte kontext, očekávání člověka, možnost odmítnutí a důkaz, proč daný kontakt používáte.
+
+Codyho komentář: pokud marketingová strategie stojí na větě "snad to nějak projde", není to strategie. Je to losování s reputací domény. A reputace domény je přesně ta věc, kterou si zničíte rychleji, než ji opravíte.
+
+### Newsletter jako produkt, ne odpadkový kanál
+
+Newsletter často vznikne jako nádoba na všechno, co se nevešlo jinam: novinky, blogy, promo akce, interní oznámení, pozvánky, průzkumy a občas věta "dlouho jsme se neozvali". Takový newsletter se špatně čte, špatně měří a špatně udržuje.
+
+Lepší je brát newsletter jako malý produkt:
+
+- Má cílového čtenáře.
+- Má jasný slib.
+- Má formát.
+- Má rytmus.
+- Má hranice, co do něj nepatří.
+- Má způsob, jak sbírat zpětnou vazbu.
+
+Příklad špatného slibu:
+
+"Přihlaste se k odběru novinek."
+
+Příklad lepšího slibu:
+
+"Jednou měsíčně posíláme praktické poznámky k webům, SaaS a privacy-first provozu v Evropě. Bez reklamních sekvencí a bez prodeje dat."
+
+Ten druhý text nastavuje očekávání. Člověk ví, co dostane, jak často a jaký je postoj k datům.
+
+Dobré formáty pro B2B newsletter:
+
+- Jedna praktická lekce z projektu nebo auditu.
+- Krátký komentář k nové regulaci, frameworku nebo produktovému trendu se zdroji.
+- Kurátorovaný přehled tří až pěti odkazů s vlastním komentářem.
+- Produktový changelog psaný lidsky, ne jako výpis ticketů.
+- Měsíční checklist: co zkontrolovat na webu, v SaaS provozu nebo marketingu.
+- Případová studie rozdělená na problém, rozhodnutí, výsledek a poučení.
+
+Co do newsletteru nepatří:
+
+- Náhodná sleva bez vztahu k obsahu.
+- Přepsané tiskové zprávy bez názoru.
+- Automaticky generované "novinky" bez editace.
+- Tři různá CTA se stejnou vizuální vahou.
+- Osobní údaje, které čtenář nečeká, že v e-mailu použijete.
+- Tracking všeho jen proto, že nástroj má pěkný dashboard.
+
+### RSS: otevřený kanál pro lidi, kteří nechtějí další inbox
+
+RSS je obyčejný feed, který umožňuje čtečkám sledovat nové položky webu. Specifikace RSS 2.0 popisuje základní strukturu kanálu a položek jako `channel`, `item`, `title`, `link` a `description` ([RSS Advisory Board: RSS 2.0 Specification](https://www.rssboard.org/rss-specification)). Na tom je krásné, že to není složité. Publikujete obsah, feed ukáže nové položky, čtenář si je přečte ve své čtečce.
+
+Pro privacy-first distribuci má RSS několik výhod:
+
+- Není potřeba e-mailová adresa.
+- Odběr spravuje čtenář, ne vydavatel.
+- Feed funguje napříč nástroji a čtečkami.
+- Není nutný sledovací pixel.
+- Nevyžaduje souhlasový banner.
+- Obsah je dostupný přes přímé URL, ne uzavřenou platformu.
+
+RSS není náhrada za každý newsletter. Newsletter umí dodat redakční výběr, osobnější tón a přímou odpověď. RSS je ale skvělý základ pro blog, changelog, release notes, podcast, dokumentaci i veřejné checklisty.
+
+Praktická pravidla RSS:
+
+- Feed dejte na stabilní URL, například `/rss.xml` nebo `/feed.xml`.
+- Odkaz na RSS zobrazte v patičce, blogu a dokumentaci.
+- Položky mají mít srozumitelný titulek, kanonický odkaz a datum.
+- Popis má stačit k rozhodnutí, jestli článek otevřít.
+- U každé položky držte stabilní `guid`, aby čtečky nedostávaly duplicity.
+- Do feedu nedávejte interní drafty, neveřejné URL ani osobní data.
+- Při změně domény nebo struktury přesměrujte starý feed.
+
+Příklad dobrého přístupu:
+
+- Blog má RSS pro všechny články.
+- Produkt má zvláštní RSS pro changelog.
+- Dokumentace má RSS pro důležité změny.
+- Newsletter jednou měsíčně vybírá to nejdůležitější a přidává Codyho komentář.
+
+Tak vznikne distribuční systém, který není závislý na jedné platformě ani na tom, že všichni chtějí další e-mail.
+
+### Minimalistické měření newsletteru
+
+E-mailové nástroje často nabízí otevření, kliky, zařízení, lokaci, čas čtení, heatmapy a další metriky. Ne všechno, co jde měřit, stojí za měření. Otevření e-mailu je navíc technicky čím dál méně spolehlivé kvůli ochranám soukromí, proxy a blokování pixelů. Především ale otevření samo o sobě neříká, jestli newsletter buduje důvěru.
+
+Měřte jen to, co pomáhá rozhodovat:
+
+- růst nebo pokles dobrovolných odběrů,
+- odhlášení po konkrétním typu obsahu,
+- kliky na hlavní odkazy,
+- odpovědi čtenářů,
+- přechody na důležité stránky,
+- vzniklé kvalifikované rozhovory,
+- stížnosti na spam nebo doručitelnost.
+
+Co bych u privacy-first newsletteru vypnul nebo omezil:
+
+- sledovací pixel otevření, pokud není jasný důvod,
+- individuální profilování čtenáře podle každého kliknutí,
+- automatické předávání dat do reklamních platforem,
+- enrichování kontaktů z externích databází,
+- nekonečnou retenci neaktivních kontaktů,
+- skryté UTM a parametry, které zbytečně identifikují osobu.
+
+Rozumný kompromis:
+
+- Měřte agregovaně výkon jednotlivých vydání.
+- U klíčových odkazů používejte jednoduché kampaně bez osobních identifikátorů.
+- V CRM evidujte konkrétní vztah jen tam, kde člověk odpoví nebo požádá o další krok.
+- Staré neaktivní odběratele pravidelně oslovte s možností zůstat, nebo je vyřaďte.
+
+Marketingový dashboard má sloužit rozhodnutí. Nemá být muzeum mikrosignálů o lidech, kteří si jen chtěli přečíst článek u kafe.
+
+### Doručitelnost: reputace se staví provozem
+
+Doručitelnost není jednorázové nastavení. Je to kombinace techniky, obsahu, reputace a chování příjemců. Kapitola o technickém základu už řešila SPF, DKIM a DMARC. U newsletterů přidejte provozní disciplínu:
+
+- Posílejte jen lidem, kteří mají jasný vztah k odběru.
+- Udržujte seznam čistý a neaktivní kontakty řešte.
+- Nepoužívejte klamavé předměty.
+- Držte konzistentní odesílatelskou identitu.
+- Neposílejte z domény, která zároveň nese kritické transakční e-maily, pokud nemáte oddělenou reputaci.
+- Testujte šablony v běžných klientech, hlavně na mobilu.
+- Nepřehánějte obrázky, externí fonty a těžké HTML.
+- Textová verze e-mailu pořád dává smysl.
+
+Předmět e-mailu má slíbit obsah, ne vynutit klik:
+
+Slabé:
+
+"Tohle musíte vidět, než bude pozdě"
+
+Silnější:
+
+"Checklist: co zkontrolovat před spuštěním SaaS MVP"
+
+První předmět loví pozornost. Druhý šetří čas. V B2B prostředí často vyhrává druhý, protože respektuje, že čtenář má práci.
+
+### Segmentace bez strašidelného profilování
+
+Segmentace je užitečná, pokud zvyšuje relevanci. Je problém, pokud se z ní stane tajné sledování lidí napříč webem, e-mailem a reklamními platformami.
+
+Privacy-first segmentace může být jednoduchá:
+
+- Člověk si sám vybere téma: webový vývoj, SaaS, marketing, privacy.
+- Zvolí frekvenci: každé vydání, měsíční souhrn, jen důležité změny.
+- Firma oddělí zákazníky, partnery a obecné čtenáře.
+- Produktové zprávy chodí jen lidem, kterých se daná změna týká.
+- Odběratel může preference snadno změnit.
+
+Nevhodná segmentace:
+
+- Skryté skórování podle každé návštěvy webu.
+- Propojování newsletteru s reklamními identitami bez jasného důvodu.
+- Automatické posílání prodejních sekvencí po přečtení jednoho článku.
+- Personalizace typu "viděli jsme, že jste včera ve 22:14 četl pricing".
+
+Lepší je položit jednoduchou otázku při přihlášení:
+
+"Co vás zajímá nejvíc?"
+
+- Weby a SEO
+- SaaS produkt a provoz
+- Marketing a prodej
+- Privacy-first v Evropě
+
+To je férové. Člověk chápe, proč se ptáte, a výsledek mu zlepší obsah.
+
+### Šablona newsletterového systému
+
+Pro malý tým stačí jedna stránka provozních pravidel:
+
+```txt
+Název newsletteru:
+Cílový čtenář:
+Slib:
+Frekvence:
+Témata:
+Co neposíláme:
+Zdroj kontaktů:
+Právní základ / souhlas:
+Kde jsou data:
+Kdo má přístup:
+Jak funguje odhlášení:
+Jak dlouho držíme neaktivní kontakty:
+Jak měříme výkon:
+Kdo schvaluje vydání:
+```
+
+Příklad vyplnění:
+
+```txt
+Název newsletteru: Codyho měsíční webový servis
+Cílový čtenář: zakladatelé a produktové týmy B2B firem
+Slib: praktické tipy k webům, SaaS, marketingu a privacy-first provozu
+Frekvence: 1x měsíčně
+Témata: checklisty, komentáře, případové lekce, nové články
+Co neposíláme: koupené promo, affiliate bez označení, automatické sekvence
+Zdroj kontaktů: dobrovolné přihlášení z webu
+Právní základ / souhlas: uložený timestamp, URL formuláře a text souhlasu
+Kde jsou data: EU region / evropský poskytovatel podle interního seznamu
+Kdo má přístup: marketing a odpovědná osoba za provoz
+Jak funguje odhlášení: odkaz v každém vydání, bez přihlášení
+Jak dlouho držíme neaktivní kontakty: pravidelná kontrola a mazání
+Jak měříme výkon: agregované kliky, odpovědi, odhlášení, kvalifikované rozhovory
+Kdo schvaluje vydání: editor + vlastník tématu
+```
+
+Tahle šablona není byrokracie. Je to ochrana před tím, aby se z "pošleme občas něco užitečného" za půl roku nestal nečitelný kanál bez vlastníka.
+
+### Playbook: privacy-first obsahová distribuce
+
+Jednoduchý systém pro blog nebo SaaS:
+
+1. Publikujte článek na vlastním webu s kanonickou URL.
+2. Přidejte ho do RSS feedu.
+3. Sdílejte přímý odkaz na sociálních sítích bez sledovacích skriptů.
+4. V newsletteru jednou za čas pošlete výběr, ne automatickou kopii všeho.
+5. U každého odkazu měřte jen agregovaný výkon kampaně.
+6. Nabídněte čtenáři volbu: RSS, e-mail, nebo jen přímé odkazy.
+7. Nepodmiňujte běžný obsah odevzdáním e-mailu.
+8. Prémiový nebo obchodní materiál zamkněte jen tehdy, když je jasná hodnota a jasný účel.
+9. Každý kvartál projděte seznam odběratelů, souhlasy, odhlášení a retenci.
+10. U dodavatelů kontrolujte region dat, subprocesory, export a možnost migrace.
+
+Tento model je pomalejší než agresivní lead capture. Ale buduje vlastní publikum bez toho, aby firma musela předstírat, že každý čtenář je lead připravený na obchodní hovor.
+
+### Checklist kapitoly
+
+- Máte oddělené transakční, produktové, servisní a marketingové e-maily?
+- Je jasné, odkud každý kontakt pochází a k jakému účelu byl získán?
+- Je přihlášení k newsletteru aktivní, konkrétní a doložitelné?
+- Nepřidáváte lidi do newsletteru po běžném kontaktním formuláři bez jasné volby?
+- Má každý newsletter jednoduché odhlášení?
+- Existuje RSS feed pro blog, changelog nebo důležité aktualizace?
+- Je RSS odkaz viditelný a feed má stabilní URL?
+- Měříte newsletter agregovaně a bez zbytečného profilování?
+- Nesdílíte newsletter data s reklamními platformami bez jasného důvodu?
+- Udržujete SPF, DKIM, DMARC a oddělenou reputaci odesílání?
+- Testujete e-maily na mobilu a v běžných klientech?
+- Má newsletter jasný slib, frekvenci a vlastníka?
+- Držíte data odběratelů v evropském nebo jinak obhajitelném provozu?
+- Máte retenční pravidla pro neaktivní odběratele?
+
+E-mail je dobrý sluha a protivný pán. Když ho používáte férově, s jasným souhlasem, kvalitním obsahem a technickou disciplínou, buduje důvěru. Když ho používáte jako levnou stříkačku na pozornost, ničí reputaci. RSS mezitím tiše připomíná, že nejlepší marketingový kanál je někdy ten, který člověku nechá kontrolu.
+
+### Zdroje kapitoly
+
+- [ÚOOÚ: Často kladené otázky k zákonu č. 480/2004 Sb.](https://uoou.gov.cz/cinnost/obchodni-sdeleni/casto-kladene-otazky-k-zakonu-c-4802004-sb)
+- [EUR-Lex: Directive 2002/58/EC, Article 13](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058-20091219)
+- [EDPB: Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
+- [RSS Advisory Board: RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -6235,3 +6541,4 @@ Lead generation má být systém důvěry. Když ho postavíte na jasném segmen
 - 2026-05-05: Dopsána kapitola 23 o obsahovém marketingu pro SaaS a služby: zákaznické otázky, fáze rozhodování, tématické clustery, formáty, distribuce, privacy-first měření, údržba a přístupnost.
 - 2026-05-05: Dopsána kapitola 24 o SEO a AI vyhledávání: citovatelnost, struktura odpovědí, crawleři, strukturovaná data, privacy-first měření a praktický playbook pro úpravu článků.
 - 2026-05-05: Dopsána kapitola 25 o lead generation: kvalita leadů, vlastní kanály, lead magnety, formuláře, obchodní sdělení, CRM hygiena a privacy-first měření.
+- 2026-05-05: Dopsána kapitola 26 o e-mailu, newsletterech a RSS: typy zpráv, souhlas, RSS feedy, doručitelnost, segmentace, minimalistické měření a privacy-first distribuce.
