@@ -2294,6 +2294,257 @@ Datový model je dobrý, když pomáhá produktu mluvit přesněji. Špatný mod
 - [OWASP: Database Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Database_Security_Cheat_Sheet.html)
 - [Martin Fowler: Event Sourcing](https://martinfowler.com/eaaDev/EventSourcing.html)
 
+## Kapitola 12: Integrace, API a automatizace
+
+Integrace jsou chvíle, kdy produkt přestane být ostrov. SaaS začne mluvit s účetnictvím, CRM, platební bránou, e-mailingem, interními systémy, skladem, datovým skladem nebo AI službou. To zní jako růst. A často to růst je. Jenže každá integrace zároveň přidává nové hranice: kdo smí volat API, jaká data odcházejí, co se stane při výpadku, jak se řeší opakované doručení a kdo ponese odpovědnost, když se data zkopírují na špatné místo.
+
+Dobrá integrace není jen endpoint, který "nějak bere JSON". Je to smlouva mezi systémy. Má jasný účel, vlastníka, autorizaci, limity, logování, chybové stavy, dokumentaci a proces ukončení. Bez toho se z integrací rychle stane technický dluh s obchodním dopadem: zákazníkům nechodí faktury, support ručně opravuje synchronizace, vývojáři se bojí změnit pole v API a nikdo neví, proč se citlivá data posílají třetí straně.
+
+Privacy-first pravidlo je jednoduché: integrujte jen to, co zlepšuje produkt nebo provoz, ne všechno, co jde připojit. Každý nový systém je nový příjemce dat, nový provozní závazek a často i nový dodavatelský vztah.
+
+### API jako produktová hranice
+
+API není interní detail, pokud přes něj zákazník, partner nebo integrace dělá reálnou práci. Jakmile se na API někdo spoléhá, stává se produktovým rozhraním. Zákazníka nezajímá, že endpoint vznikl "rychle pro jednoho klienta". Zajímá ho, jestli bude fungovat i příští měsíc, jestli se nezmění bez varování a jestli mu při chybě řekne něco užitečného.
+
+API navrhujte podle pracovních toků, ne podle tabulek. Endpoint `POST /projects/{id}/complete` může být lepší než obecné `PATCH /projects/{id}`, pokud dokončení projektu spouští validace, audit log, notifikace a billing událost. Naopak příliš akční API může být nepřehledné, pokud každá drobnost dostane vlastní sloveso. Cílem není náboženství kolem RESTu. Cílem je rozhraní, kterému jde rozumět a které chrání pravidla produktu.
+
+Praktické minimum pro veřejné nebo partnerské API:
+
+- Každý endpoint má jasný účel a vlastníka.
+- Každý endpoint má dokumentované vstupy, výstupy, chyby a oprávnění.
+- Identifikátory objektů nejdou hádat jako cesta k cizím datům.
+- Autorizace se ověřuje na serveru při každé akci.
+- Chybové odpovědi jsou konzistentní a neprozrazují citlivý interní stav.
+- Změny API mají verzi, migrační okno nebo alespoň jasnou komunikaci.
+- API má rate limiting podle tenantu, klíče nebo účtu.
+- Důležité akce se propisují do audit logu.
+
+OWASP API Security Top 10 uvádí jako hlavní riziko broken object level authorization, tedy situaci, kdy API nedostatečně ověřuje, jestli volající smí pracovat s konkrétním objektem ([OWASP: API Security Top 10 2023](https://owasp.org/API-Security/editions/2023/en/0x11-t10/)). Pro SaaS je to přesně ten typ chyby, kterému nestačí říkat "bug". Když tenant A načte objekt tenantu B, rozbíjí se základní slib produktu.
+
+### Dokumentace není bonus
+
+API dokumentace šetří čas, ale hlavně snižuje nejednoznačnost. Když dokumentace chybí, vzniká dokumentace v e-mailech, Slack vláknech a starých ukázkových skriptech. To je nejhorší možná verze: neaktuální, neauditovatelná a často přístupná lidem, kteří ji nemají spravovat.
+
+OpenAPI specifikace popisuje rozhraní API strojově čitelným dokumentem; v OpenAPI jsou `paths` kontejnerem pro operace podporované API ([OpenAPI: API Endpoints](https://learn.openapis.org/specification/paths.html)). V praxi to znamená, že dokumentace může být zdroj pro generování klientů, testů, validace, SDK i kontrolu změn.
+
+Pro první verzi dokumentace stačí:
+
+- přehled autentizace,
+- seznam endpointů a jejich účel,
+- ukázkové requesty a response,
+- popis chybových kódů,
+- limity a stránkování,
+- verzování a deprekační pravidla,
+- kontakt nebo proces pro incidenty.
+
+Ukázka dobré chybové odpovědi:
+
+```json
+{
+  "error": {
+    "code": "project_not_accessible",
+    "message": "Project was not found or you do not have access to it.",
+    "request_id": "req_01HX..."
+  }
+}
+```
+
+Záměrně neříká, jestli projekt existuje v jiném tenantovi. Zároveň dává supportu `request_id`, podle kterého lze dohledat technický kontext bez posílání interních logů zákazníkovi.
+
+Codyho komentář: dokumentace API není literární žánr. Nejlepší dokumentace je nudná, přesná a spustitelná. Když ukázkový request nefunguje, dokumentace se mění v dekoraci. A dekorace, jak víme, fakturu nevystaví.
+
+### Autentizace, autorizace a scope
+
+Autentizace odpovídá na otázku "kdo volá". Autorizace odpovídá na otázku "co smí udělat". Scope odpovídá na otázku "v jakém rozsahu to smí dělat". Tyto tři věci nemíchejte.
+
+OAuth 2.0 definuje autorizační rámec, ve kterém klient získává přístup k chráněným zdrojům přes access tokeny vydané autorizačním serverem ([RFC 6749: OAuth 2.0 Authorization Framework](https://www.rfc-editor.org/rfc/rfc6749)). To neznamená, že každý malý produkt musí hned stavět plný OAuth provider. Znamená to, že u integrací musíte oddělit identitu, souhlas, oprávnění a životnost přístupu.
+
+Pro B2B SaaS rozlišujte:
+
+- uživatelskou session v prohlížeči,
+- osobní access token uživatele,
+- API klíč tenantu,
+- OAuth aplikaci třetí strany,
+- interní service account,
+- jednorázový token pro pozvánku, reset nebo export.
+
+Každý typ přístupu má mít jiné chování. API klíč tenantu nemá umět změnit heslo uživatele. Service account pro synchronizaci nemá mít administrátorský přístup k billingu. Token pro export nemá žít věčně. A když zákazník vypne integraci, související tokeny mají být zneplatněné, ne sentimentálně ponechané v databázi "pro jistotu".
+
+Praktické scope:
+
+- `projects:read`
+- `projects:write`
+- `members:read`
+- `members:invite`
+- `billing:read`
+- `webhooks:manage`
+- `exports:create`
+
+Scope mají být srozumitelné zákazníkovi i supportu. Pokud integrace žádá `admin:all`, protože je to jednodušší pro vývoj, není to technické rozhodnutí. Je to žádost o zbytečně velkou důvěru.
+
+### Webhooky: události s potvrzením
+
+Webhook je slib: když se u nás něco stane, pošleme vám událost. Typicky platba proběhla, faktura selhala, projekt byl dokončen, uživatel byl pozván, export je připravený. Webhooky jsou užitečné, protože integrace nemusí pořád pollingem kontrolovat stav. Ale webhooky jsou také zdroj zvláštních chyb, protože síť selhává, endpoint zákazníka neodpovídá a stejná událost může dorazit víckrát.
+
+Navrhujte webhooky jako at-least-once doručení: příjemce musí počítat s tím, že stejnou událost dostane opakovaně. Každá událost má mít stabilní `event_id`, typ, čas, tenant, verzi schématu a data potřebná pro zpracování.
+
+Příklad události:
+
+```json
+{
+  "id": "evt_01HX...",
+  "type": "project.completed",
+  "created_at": "2026-05-05T09:15:00Z",
+  "organization_id": "org_123",
+  "data": {
+    "project_id": "proj_456"
+  }
+}
+```
+
+Příjemce si uloží `event_id` a při opakovaném doručení událost nezpracuje podruhé. Tomu se říká idempotence. Bez ní vznikají dvojité faktury, dvojité e-maily, dvojité importy a dvojitá radost účetní. Ta poslední část je lež, účetní radost nemá.
+
+Webhooky vždy podepisujte. GitHub v dokumentaci doporučuje ověřovat podpis webhooku před zpracováním a používat hlavičku `X-Hub-Signature-256` s HMAC-SHA256 ([GitHub Docs: Validating webhook deliveries](https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries)). Stripe popisuje podobný princip přes hlavičku `Stripe-Signature` a endpoint secret ([Stripe Docs: Receive events in your webhook endpoint](https://docs.stripe.com/webhooks?lang=node)).
+
+Checklist pro webhook:
+
+- Událost má unikátní ID.
+- Událost má typ a verzi schématu.
+- Payload obsahuje jen nutná data, často stačí ID objektu.
+- Endpoint ověřuje podpis nad původním tělem requestu.
+- Příjemce umí idempotenci.
+- Odesílatel má retry strategii s limitem.
+- Existuje dashboard nebo log doručení.
+- Zákazník může webhook vypnout a rotovat secret.
+
+Privacy-first poznámka: do webhooku neposílejte celé zákaznické záznamy jen proto, že je to pohodlné. Často stačí událost a identifikátor. Příjemce si detail načte přes API s vlastní autorizací, pokud ho opravdu potřebuje.
+
+### Automatizace: nejdřív proces, potom robot
+
+Automatizace má odstraňovat opakovanou práci, ne zakonzervovat špatný proces. Když nevíte, kdo má rozhodnout, co je výjimka a jak poznáte úspěch, automatizace jen zrychlí zmatek.
+
+Před každou automatizací napište:
+
+- Jaký proces automatizujeme?
+- Co je vstup a odkud přichází?
+- Jaký je očekávaný výstup?
+- Kdo je vlastník procesu?
+- Co se stane při chybě?
+- Jak se automatizace vypne?
+- Jak se pozná, že pomohla?
+- Jaká osobní nebo zákaznická data zpracovává?
+
+Příklad: "Po zaplacení faktury založ projekt v interním systému, pošli zákazníkovi instrukce a vytvoř onboarding task." To zní jednoduše. Ale co když platba projde dvakrát? Co když zákazník zaplatí špatnou částku? Co když už projekt existuje? Co když onboarding e-mail selže? Co když zákazník požádá o smazání dat před dokončením onboardingu?
+
+Dobrá automatizace má ruční únikovou cestu. Ne proto, že by vývojář nevěřil kódu. Protože reálný provoz obsahuje výjimky a výjimky bez nástroje končí přímým zásahem do databáze. To je nejdražší administrační rozhraní na světě.
+
+### Integrace třetích stran jako dodavatelské riziko
+
+Každá třetí strana má být zapsaná v mapě dat. Nejen velké systémy, ale i malé widgety, API pro ověření adresy, nástroje na e-maily, monitoring, chat a AI služby. U každé integrace si položte otázky:
+
+- Jaká data jí posíláme?
+- V jaké zemi nebo regionu se zpracovávají?
+- Je služba procesor, samostatný správce, nebo jen technický přenos?
+- Máme smlouvu, DPA nebo jiný právní základ?
+- Jak dlouho data drží?
+- Jak požádáme o export nebo smazání?
+- Jak integraci vypneme bez pádu produktu?
+- Existuje evropská nebo self-hosted alternativa?
+
+Tady privacy-first neznamená "nikdy nepoužij externí službu". Znamená to, že externí služba nesmí být neviditelná. Pokud produkt posílá zákaznický obsah do třetí strany, má to být vědomé rozhodnutí s dokumentací, ne vedlejší efekt knihovny, kterou někdo přidal ve sprintu.
+
+### Verze, kompatibilita a změny
+
+API změny bolí hlavně tehdy, když překvapí. Pokud zákazník postavil integraci nad vaším rozhraním, změna pole může znamenat výpadek jeho procesu. Proto rozlišujte změny kompatibilní a nekompatibilní.
+
+Kompatibilní změny:
+
+- přidání nového volitelného pole,
+- přidání nového endpointu,
+- přidání nové hodnoty tam, kde klienti správně počítají s neznámou hodnotou,
+- zpřesnění dokumentace bez změny chování.
+
+Nekompatibilní změny:
+
+- odstranění pole,
+- přejmenování pole,
+- změna typu nebo významu hodnoty,
+- změna defaultního řazení, stránkování nebo filtru,
+- změna chybového kódu, na kterém klienti staví logiku,
+- zpřísnění oprávnění bez migračního okna.
+
+Pro malé API často stačí verzovat cestou, například `/v1/...`, a nekompatibilní změny dávat do `/v2/...`. Pro interní API může stačit contract test a řízené nasazení. Důležité je nepředstírat, že "to nikdo nepoužívá", pokud endpoint existuje v produkci a někdo k němu má přístup.
+
+CloudEvents je specifikace pro popis event dat společným způsobem napříč službami a platformami ([CloudEvents Specification](https://github.com/cloudevents/spec)). Nemusíte ji použít všude, ale je užitečné podívat se na princip: události mají mít standardní metadata, aby nebyly pokaždé vymyšlené znovu.
+
+### Monitoring integrací
+
+Integrace bez monitoringu se tváří funkčně přesně do chvíle, než zákazník napíše, že už týden nic nechodí. Monitorujte hlavně:
+
+- počet úspěšných a neúspěšných volání,
+- latenci externích služeb,
+- chybové kódy podle integrace,
+- počet retry pokusů,
+- stáří poslední úspěšné synchronizace,
+- fronty čekajících událostí,
+- expiraci tokenů a webhook secretů,
+- neobvykle velké exporty nebo objemy dat.
+
+U privacy-first provozu monitorujte technické signály, ne zbytečný obsah. Nepotřebujete ukládat celé requesty s osobními údaji, pokud vám pro diagnostiku stačí `request_id`, tenant, endpoint, typ chyby, čas a velikost payloadu. U citlivých integrací maskujte tokeny, e-maily, identifikátory dokumentů a obsah zpráv.
+
+### Praktický playbook pro novou integraci
+
+Než přidáte novou integraci, projděte tento postup:
+
+1. Napište účel integrace jednou větou.
+2. Označte vlastníka v produktu i technice.
+3. Sepište data, která do integrace odcházejí a přicházejí.
+4. Ověřte region, smlouvy, retenci a možnost vypnutí.
+5. Navrhněte autentizaci, scope a rotaci tajemství.
+6. Popište chybové stavy a retry chování.
+7. Rozhodněte, co půjde do audit logu.
+8. Připravte test s výpadkem třetí strany.
+9. Přidejte monitoring a alert na tichá selhání.
+10. Dokumentujte postup odpojení integrace.
+
+Mini příklad pro účetní integraci:
+
+- Účel: předávat vystavené faktury do účetního systému.
+- Data ven: číslo faktury, částka, měna, odběratel, položky, datum splatnosti.
+- Data neven: interní poznámky supportu, produktová aktivita uživatelů, obsah projektů.
+- Autorizace: service account s právem `invoices:export`.
+- Selhání: fronta opakuje pokus, po limitu vznikne úkol pro finance.
+- Audit: kdo integraci zapnul, kdo změnil nastavení, která faktura byla exportována.
+- Vypnutí: nové faktury se řadí do ručního exportu, staré tokeny se zneplatní.
+
+### Checklist kapitoly
+
+- Má každé API jasný účel, vlastníka a dokumentaci?
+- Kontrolujete autorizaci na úrovni konkrétního objektu, nejen na úrovni endpointu?
+- Máte pro API konzistentní chyby, stránkování, limity a `request_id`?
+- Rozlišujete session, API klíče, OAuth tokeny a service accounts?
+- Mají tokeny scope, expiraci, rotaci a auditní stopu?
+- Jsou webhooky podepsané, idempotentní a monitorované?
+- Posíláte webhookem jen data nutná pro danou událost?
+- Má každá automatizace vlastníka, chybový scénář a možnost ručního zásahu?
+- Je každá třetí strana zapsaná v mapě dat?
+- Víte, kde třetí strana data zpracovává a jak dlouho je drží?
+- Máte pravidla pro kompatibilní a nekompatibilní změny API?
+- Monitorujete tichá selhání synchronizací, ne jen HTTP 500?
+- Umíte integraci vypnout bez ztráty kontroly nad daty?
+
+Integrace jsou užitečné, když rozšiřují schopnosti produktu bez ztráty kontroly. Špatná integrace přidá závislost, kopíruje data a schová důležitý proces do cizího systému. Dobrá integrace má hranice, smlouvu, monitoring a respekt k datům zákazníka. Privacy-first SaaS není izolovaný SaaS. Je to SaaS, který ví, komu co říká, proč to říká a jak s tím přestane, když už to není potřeba.
+
+### Zdroje kapitoly
+
+- [OWASP: API Security Top 10 2023](https://owasp.org/API-Security/editions/2023/en/0x11-t10/)
+- [OWASP: REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
+- [RFC 6749: OAuth 2.0 Authorization Framework](https://www.rfc-editor.org/rfc/rfc6749)
+- [OpenAPI: API Endpoints](https://learn.openapis.org/specification/paths.html)
+- [GitHub Docs: Validating webhook deliveries](https://docs.github.com/en/webhooks/using-webhooks/validating-webhook-deliveries)
+- [Stripe Docs: Receive events in your webhook endpoint](https://docs.stripe.com/webhooks?lang=node)
+- [CloudEvents Specification](https://github.com/cloudevents/spec)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -2307,3 +2558,4 @@ Datový model je dobrý, když pomáhá produktu mluvit přesněji. Špatný mod
 - 2026-05-05: Dopsána kapitola 9 o MVP bez iluzí: rizika, rozhovory, segment, workflow, prototypy, pilot, měření a rozhodnutí po experimentu.
 - 2026-05-05: Dopsána kapitola 10 o SaaS architektuře: tenanty, izolace dat, účty, role, billing, audit logy, session, API klíče a lifecycle tenantu.
 - 2026-05-05: Dopsána kapitola 11 o datovém modelu jako produktovém rozhodnutí: slovník domény, entity, události, integrita, tenant hranice, minimalizace dat, migrace a reporting.
+- 2026-05-05: Dopsána kapitola 12 o integracích, API a automatizaci: produktová hranice API, dokumentace, scope, webhooky, automatizace, dodavatelské riziko, verzování a monitoring.
