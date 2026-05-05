@@ -876,6 +876,262 @@ Obsahová architektura je dobrá tehdy, když návštěvník nemusí hádat. Web
 - [W3C WAI: Page Structure Tutorial](https://www.w3.org/WAI/tutorials/page-structure/)
 - [W3C WAI: Headings](https://www.w3.org/WAI/tutorials/page-structure/headings/)
 
+## Kapitola 6: SEO pro lidi i vyhledávače
+
+SEO není trik, jak přelstít vyhledávač. Dobré SEO je disciplína, která pomáhá správným lidem najít správnou odpověď ve správný moment. Technické detaily jsou důležité, ale bez užitečného obsahu, jasné struktury a důvěryhodnosti jen zrychlují cestu k prázdné stránce.
+
+Google ve své dokumentaci k helpful content zdůrazňuje obsah vytvářený primárně pro lidi, ne pro manipulaci vyhledávacích systémů ([Google Search Central: Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)). To je dobrý kompas i pro menší české firmy: pište a stavte stránky tak, aby návštěvník opravdu dostal odpověď, ne aby stránka jen obsahovala správná klíčová slova.
+
+Praktické SEO stojí na šesti vrstvách:
+
+1. Záměr hledání: proč člověk dotaz píše a co chce rozhodnout.
+2. Obsah: konkrétní odpověď, důkazy, příklady a další krok.
+3. Struktura webu: srozumitelné URL, nadpisy, interní odkazy a sitemap.
+4. Technická dostupnost: crawler se k obsahu dostane a stránka se dá indexovat.
+5. Důvěra: autorita, zkušenost, transparentnost a aktualizace.
+6. Měření: sledujete dotazy a konverze, ne jen návštěvnost.
+
+SEO tedy není samostatná magie vedle webu. Je to průnik produktového myšlení, obsahu, UX a technického pořádku.
+
+### Začněte záměrem, ne klíčovým slovem
+
+Klíčové slovo je jen stopa. Záměr je důvod, proč člověk hledá. Dotaz "SaaS MVP cena" může znamenat: chci rychlý odhad rozpočtu, porovnávám dodavatele, připravuji interní business case, nebo jen zjišťuji, jestli nejsem mimo realitu. Stránka, která odpoví jen "děláme SaaS MVP na míru", záměr nevyřeší.
+
+U každého důležitého tématu si napište:
+
+- Kdo to hledá?
+- V jaké je fázi rozhodování?
+- Jakou obavu potřebuje snížit?
+- Jak konkrétní odpověď očekává?
+- Jaký další krok je férový?
+
+Příklad pro agenturu nebo produktové studio:
+
+Dotaz: "kolik stojí vývoj webové aplikace"
+
+Slabá odpověď:
+"Cena záleží na rozsahu, kontaktujte nás."
+
+Silnější odpověď:
+"Jednoduchý interní nástroj, zákaznický portál a plnohodnotný SaaS produkt mají jiná rizika. Cena se typicky skládá z analýzy, návrhu datového modelu, vývoje, testování, provozu a podpory. Před přesným odhadem potřebujeme znát uživatele, klíčový workflow, integrace, bezpečnostní požadavky a způsob provozu."
+
+Druhá varianta neslibuje falešnou přesnost. Ale pomáhá člověku pochopit, z čeho se rozhodnutí skládá. To je užitečnější než univerzální kalkulačka, která na konci stejně řekne "od".
+
+### Tématické clustery místo osamělých článků
+
+Osamělý článek může přivést návštěvu. Tématický cluster buduje důvěru. Pokud chcete být dohledatelní na téma "privacy-first SaaS v Evropě", nestačí jeden článek s tímto nadpisem. Potřebujete síť obsahu, která pokrývá praktické otázky:
+
+- Jak vybrat evropský hosting pro SaaS.
+- Co patří do privacy-first analytiky.
+- Jak oddělit produktová data, logy a marketing.
+- Jak vysvětlit zákazníkům zpracování dat.
+- Jak dělat onboarding bez zbytečných trackerů.
+- Jak nastavit export dat a právo odejít.
+
+Google SEO Starter Guide doporučuje organizovat podobné stránky do smysluplných adresářů a používat popisné URL, které pomáhají lidem pochopit obsah výsledku ([Google Search Central: SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)). Prakticky to znamená, že struktura webu má odpovídat tématům, ne náhodnému pořadí publikace.
+
+Příklad struktury:
+
+- `/saas/`
+- `/saas/mvp/`
+- `/saas/architektura/`
+- `/saas/privacy-first-provoz/`
+- `/saas/onboarding/`
+- `/saas/pricing/`
+
+Taková struktura pomáhá návštěvníkům, editorům i vyhledávačům. Člověk se neztratí, tým ví, kam nový obsah patří, a interní odkazy dávají smysl.
+
+Codyho komentář: pokud má blog dvacet článků a každý je v jiné kategorii, není to informační architektura. To je konfety CMS. Kategorie mají pomáhat rozhodování, ne sloužit jako šuplík pro momentální náladu autora.
+
+### Stránka musí odpovědět lépe než konkurence
+
+SEO text není delší text. Je to lepší odpověď. Někdy je lepší odpověď krátká tabulka. Jindy detailní návod, checklist, kalkulační rámec, diagram procesu nebo konkrétní příklad.
+
+Při návrhu stránky si udělejte mini analýzu:
+
+1. Otevřete výsledky hledání na hlavní dotaz.
+2. Zapište, jaké typy odpovědí se opakují.
+3. Najděte, co je povrchní, zastaralé nebo nepřesné.
+4. Doplňte vlastní zkušenost, příklad nebo rozhodovací rámec.
+5. Přidejte jasný další krok pro člověka, který nechce hned nakupovat.
+
+Příklad: článek "Jak vybrat analytiku pro web" by neměl jen vyjmenovat nástroje. Lepší struktura:
+
+- Jaké rozhodnutí chcete díky analytice dělat.
+- Co opravdu potřebujete měřit na začátku.
+- Kdy stačí privacy-friendly agregovaná analytika.
+- Kdy už řešíte produktovou analytiku.
+- Jak se ptát na region, retenci a přístup k datům.
+- Checklist pro výběr.
+
+Tento přístup je silnější, protože návštěvník odchází schopnější. A schopnější návštěvník častěji důvěřuje autorovi.
+
+### Title, meta description a nadpisy bez akrobacie
+
+Title a meta description nejsou místo pro sloganovou gymnastiku. Mají říct, co stránka nabízí a proč je relevantní. Google u title linků vysvětluje, že jejich generování je automatické a vychází z obsahu stránky i dalších signálů; doporučuje proto popisné, konkrétní a výstižné titulky ([Google Search Central: Influencing title links](https://developers.google.com/search/docs/advanced/appearance/good-titles-snippets)).
+
+Praktická pravidla:
+
+- Každá indexovatelná stránka má unikátní title.
+- Title obsahuje konkrétní téma, ne jen název firmy.
+- Meta description shrnuje hodnotu stránky pro člověka.
+- H1 odpovídá skutečnému obsahu stránky.
+- Nadpisy tvoří skenovatelnou mapu, ne sbírku marketingových hesel.
+- Nepište různé sliby do title, H1 a hero textu. Stránka má držet jednu myšlenku.
+
+Slabý title:
+"Moderní řešení pro vaše podnikání | Firma"
+
+Silnější title:
+"Vývoj SaaS MVP pro B2B firmy | Firma"
+
+Slabá meta description:
+"Jsme inovativní tým, který pomáhá firmám růst pomocí moderních technologií."
+
+Silnější meta description:
+"Navrhujeme a vyvíjíme první SaaS MVP pro B2B firmy: analýza workflow, datový model, role, audit logy, integrace a provoz v EU."
+
+Rozdíl není v délce. Rozdíl je v konkrétnosti.
+
+### Indexace: crawler musí vidět to, co má být nalezeno
+
+Když stránka není dostupná pro crawler, SEO končí dřív, než začne. U moderních webů se často stává, že obsah existuje pro člověka v prohlížeči, ale je zbytečně těžký, schovaný za klientským renderováním, blokovaný v `robots.txt`, kanonizovaný na špatnou URL nebo označený `noindex`.
+
+Technické minimum:
+
+- Důležité stránky vrací HTTP `200`.
+- Přesměrování jsou jednoduchá a vedou na finální kanonickou URL.
+- Každá důležitá stránka má samoreferenční canonical nebo jasně určenou kanonickou verzi.
+- Interní odkazy používají normální `a href`, ne jen JavaScript akce.
+- `robots.txt` neblokuje kritické stránky ani potřebné zdroje pro render.
+- `noindex` je jen tam, kde ho opravdu chcete.
+- Sitemap obsahuje jen kanonické, indexovatelné a důležité URL.
+
+Google dokumentace upozorňuje, že `robots.txt` slouží primárně k řízení crawler trafficu a není vhodný způsob, jak skrýt webové stránky z výsledků hledání; pro skutečné vyřazení stránky z výsledků je potřeba použít jiné metody, například `noindex` nebo ochranu heslem ([Google Search Central: robots.txt introduction](https://developers.google.com/search/docs/crawling-indexing/robots/intro)). To je častý zdroj chyb: tým zablokuje stránku v `robots.txt` a čeká, že tím vyřešil soukromí. Nevyřešil. Jen dal crawleru pokyn, aby obsah neprocházel.
+
+### Sitemap a robots.txt: jednoduché, čitelné, bez kouzel
+
+Sitemap není náhradní navigace a sama o sobě nezaručuje indexaci. Je to seznam URL, které považujete za důležité. Google popisuje sitemap jako soubor, který pomáhá vyhledávačům efektivněji procházet web a poskytuje informace o stránkách a souborech, které považujete za důležité ([Google Search Central: What is a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview)).
+
+Dobrá sitemap:
+
+- obsahuje jen URL, které chcete indexovat,
+- používá finální canonical URL,
+- neobsahuje přesměrování, chyby, staging nebo duplicity,
+- aktualizuje se při publikaci a mazání obsahu,
+- je uvedená v `robots.txt` nebo odeslaná ve vyhledávacích nástrojích.
+
+Dobré `robots.txt`:
+
+- je na správném hostu, například `https://example.cz/robots.txt`,
+- neobsahuje historické zákazy bez vlastníka,
+- uvádí sitemap pomocí absolutní URL,
+- neblokuje CSS a JavaScript, které crawler potřebuje k pochopení stránky,
+- nepředstírá bezpečnost.
+
+Příklad jednoduchého `robots.txt`:
+
+```txt
+User-agent: *
+Allow: /
+
+Sitemap: https://example.cz/sitemap.xml
+```
+
+U citlivých nebo neveřejných částí nepoužívejte `robots.txt` jako zámek. Použijte autentizaci, neveřejné prostředí, správná oprávnění a u veřejně dostupných stránek `noindex`, pokud mají zůstat mimo výsledky.
+
+### Strukturovaná data: pomozte strojům, ale nelžete jim
+
+Strukturovaná data pomáhají popsat obsah stránky strojově čitelným způsobem. Pro běžný web se typicky hodí `Organization`, `WebSite`, `Article`, `BreadcrumbList`, `Product`, `FAQPage` nebo `SoftwareApplication`, podle reálného obsahu.
+
+Google dokumentace říká, že většina strukturovaných dat pro Search používá slovník schema.org, ale pro chování ve výsledcích Google Search je určující dokumentace Google Search Central; zároveň doporučuje používat kompletní a přesná doporučená data místo snahy vyplnit všechno za každou cenu ([Google Search Central: Intro to structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)).
+
+Praktická pravidla:
+
+- Značkujte jen to, co je viditelné nebo pravdivě reprezentované na stránce.
+- Nepřidávejte fake recenze, ceny, FAQ nebo hodnocení.
+- Používejte JSON-LD, pokud to stack dovoluje.
+- Testujte výstup ve validátorech a po deployi sledujte chyby.
+- U článků vyplňte autora, datum publikace, datum aktualizace a hlavní obrázek.
+- U firmy držte konzistentní název, URL, logo a kontaktní informace.
+
+Strukturovaná data nejsou turbo tlačítko pro ranking. Jsou způsob, jak snížit nejednoznačnost. Když stránka neumí odpovědět člověku, JSON-LD ji nezachrání. Jen dá přesný popisek špatnému obsahu.
+
+### Interní odkazy: navigace pro lidi i roboty
+
+Interní odkazy říkají, co spolu souvisí. Blogový článek o SaaS MVP má odkazovat na stránku služby, checklist MVP, článek o datovém modelu a třeba kapitolu o privacy-first provozu. Ne proto, aby se "rozlil link juice", ale protože čtenář potřebuje další kontext.
+
+Dobré interní odkazy:
+
+- používají konkrétní anchor text,
+- vedou na relevantní další krok,
+- propojují nové články se staršími důležitými stránkami,
+- pomáhají procházet cluster od obecného k detailu,
+- nevnucují CTA v každém odstavci.
+
+Slabý anchor:
+"Klikněte zde"
+
+Silnější anchor:
+"checklist pro SaaS MVP"
+
+U privacy-first webu mají interní odkazy ještě jednu výhodu: udržují distribuci na vlastním webu. Člověk nemusí přes sociální síť, reklamní pixel nebo uzavřený newsletterový nástroj, aby se dostal k dalšímu užitečnému obsahu. RSS, přímé odkazy a čitelná struktura jsou pořád velmi silná infrastruktura.
+
+### Měření SEO bez šmírování
+
+SEO se dá měřit bez toho, aby web posílal návštěvníka do pěti reklamních ekosystémů. Na začátku stačí kombinace Search Console, serverových logů, privacy-friendly analytiky a vlastních obchodních dat.
+
+Sledujte hlavně:
+
+- dotazy, na které se web zobrazuje,
+- stránky, které přivádějí relevantní návštěvy,
+- články, po kterých lidé pokračují na službu, demo nebo kontakt,
+- obsah, který získává přímé odkazy nebo citace,
+- formuláře a konverze bez automatického přihlášení do marketingového seznamu,
+- témata, kde lidé hledají odpověď, ale web ji zatím nemá.
+
+Nesledujte jen průměrnou pozici. Pozice bez kontextu umí mást. Jeden článek může mít menší návštěvnost, ale přivádět přesné B2B poptávky. Jiný může mít hodně návštěv, ale žádnou obchodní hodnotu. SEO je obchodní kanál, ne soutěž v grafu.
+
+Praktický měsíční SEO rituál:
+
+1. Vyberte deset stránek s největším potenciálem.
+2. U každé zkontrolujte dotazy, CTR a další krok.
+3. Najděte stránky, které mají zobrazení, ale slabý proklik.
+4. Upravte title, meta description nebo úvod, pokud neodpovídají záměru.
+5. Doplňte interní odkazy ze souvisejících článků.
+6. Aktualizujte zastaralé části s datem poslední revize.
+7. Zkontrolujte, jestli stránka stále sbírá jen potřebná data.
+
+### SEO checklist pro novou stránku
+
+Před publikací nové stránky projděte krátký checklist:
+
+- Je jasné, pro koho stránka je a jaký záměr řeší?
+- Odpovídá stránka konkrétněji než obecný konkurenční obsah?
+- Má unikátní title, meta description a jedno hlavní H1?
+- Dávají nadpisy smysl jako samostatná mapa stránky?
+- Je URL krátká, popisná a stabilní?
+- Vede stránka na férový další krok?
+- Obsahuje interní odkazy na související stránky a z nich zpět?
+- Je stránka indexovatelná, bez nechtěného `noindex` nebo blokace v `robots.txt`?
+- Je uvedená v sitemap, pokud patří mezi důležité URL?
+- Má canonical na správnou finální URL?
+- Jsou obrázky optimalizované a mají smysluplný alternativní text?
+- Jsou strukturovaná data pravdivá, validní a odpovídají skutečnému obsahu?
+- Je jasné, kdy se stránka má znovu zkontrolovat?
+- Nepřibyly kvůli měření zbytečné trackery?
+
+SEO pro lidi i vyhledávače je ve výsledku poctivá práce s významem. Řekněte jasně, co víte. Ukažte důkazy. Udržujte technický pořádek. Nechte lidi číst a rozhodovat bez zbytečného sledování. Vyhledávače se mění, ale dobrá odpověď, důvěra a srozumitelná struktura mají pořád hodnotu.
+
+### Zdroje kapitoly
+
+- [Google Search Central: Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
+- [Google Search Central: SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide)
+- [Google Search Central: Influencing title links in Google Search](https://developers.google.com/search/docs/advanced/appearance/good-titles-snippets)
+- [Google Search Central: robots.txt introduction and guide](https://developers.google.com/search/docs/crawling-indexing/robots/intro)
+- [Google Search Central: What is a sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview)
+- [Google Search Central: Intro to structured data](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -883,3 +1139,4 @@ Obsahová architektura je dobrá tehdy, když návštěvník nemusí hádat. Web
 - 2026-05-05: Dopsána kapitola 3 o technickém základu webu: doména, hosting, DNS, HTTPS/TLS, e-mail a privacy-first analytika.
 - 2026-05-05: Dopsána kapitola 4 o praktickém frontendu: UX, přístupnost, responzivita, výkon, komponenty a testování.
 - 2026-05-05: Dopsána kapitola 5 o obsahové architektuře: uživatelské úkoly, inventura obsahu, navigace, struktura stránek, formuláře a údržba.
+- 2026-05-05: Dopsána kapitola 6 o SEO pro lidi i vyhledávače: záměr hledání, tématické clustery, indexace, sitemap, strukturovaná data, interní odkazy a privacy-first měření.
