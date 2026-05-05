@@ -3698,6 +3698,330 @@ Pricing je živý systém. První verze má být dost jednoduchá, aby ji zákaz
 - [Stripe: Usage-Based Billing](https://stripe.com/gb/billing/usage-based-billing)
 - [Stripe Atlas: Pricing low-touch SaaS](https://stripe.com/en-my/guides/atlas/saas-pricing)
 
+## Kapitola 17: Onboarding: první hodina rozhoduje
+
+Onboarding není prohlídka produktu. Není to ani sada tooltipů, které uživateli vysvětlí, že tlačítko "Nový projekt" slouží k vytvoření nového projektu. Překvapivé, já vím. Onboarding je řízená cesta od prvního zájmu k prvnímu skutečnému výsledku. U SaaS produktu často rozhoduje o tom, jestli registrace začne žít, nebo se změní na další mrtvý účet v databázi.
+
+Product-led týmy rozlišují onboarding a aktivaci: onboarding je cesta, aktivace je dosažení chování nebo momentu, který vytváří hodnotu a typicky souvisí s retencí ([Skene: Onboarding vs activation](https://www.skene.ai/product-led-growth/onboarding-vs-activation)). To je důležité. Pokud měříte jen "uživatel dokončil tour", můžete optimalizovat divadlo místo produktu. Aktivovaný uživatel neznamená uživatel, který viděl pět obrazovek. Znamená uživatel, který udělal něco smysluplného.
+
+Pro B2B SaaS je onboarding ještě složitější, protože často neaktivujete jen jednoho člověka. Aktivujete účet, tým, proces a důvěru. První uživatel může být zakladatel, manažer, analytik, administrátor nebo někdo, kdo jen dostal úkol "zkus to". Každý z nich potřebuje jinou míru vedení, jiný důkaz hodnoty a jiný další krok.
+
+### První výsledek před první prohlídkou
+
+Nejčastější chyba onboardingu je začít výkladem. Produkt uživatele vítá, představí pět modulů, vysvětlí menu, ukáže profil, nabídne nastavení a po deseti minutách pořád nevznikla žádná hodnota. Uživatel ví, kde je nastavení fakturace, ale neví, proč by měl zůstat. Gratuluji, právě jste vyrobili edukovaného odcházejícího.
+
+Lepší otázka zní: jaký nejmenší výsledek může nový uživatel získat co nejdřív?
+
+Příklady:
+
+- Nástroj pro reporting: nahrát první datový zdroj a vidět první report.
+- CRM pro malé týmy: založit první obchodní případ a nastavit další aktivitu.
+- AI asistent pro podporu: importovat tři články znalostní báze a odpovědět na první testovací dotaz.
+- Projektový portál: vytvořit projekt, pozvat klienta a sdílet první soubor nebo úkol.
+- Fakturační SaaS: vystavit první návrh faktury a ověřit, že obsahuje správné údaje.
+
+Onboarding má odstranit vše, co tomuto výsledku překáží. Pokud uživatel k první hodnotě nepotřebuje logo firmy, telefonní číslo, preferovanou barvu rozhraní ani dotaz "jak jste se o nás dozvěděli", nechte to na později. První hodina není sběr dat pro marketing. První hodina je zkouška, jestli produkt umí dodat slib.
+
+### Aktivační událost musí být konkrétní
+
+Aktivační událost je chování, které naznačuje, že uživatel zažil hodnotu produktu. ProductLed doporučuje hledat aktivaci podle chování nejlepších uživatelů a optimalizovat onboarding pro best-fit zákazníky, ne pro každý náhodný signup ([ProductLed: Product-Led Onboarding](https://productled.com/blog/product-led-onboarding)). To je zdravá brzda proti posedlosti celkovou konverzí.
+
+Slabé aktivační události:
+
+- uživatel se přihlásil,
+- uživatel dokončil profil,
+- uživatel klikl na tři obrazovky,
+- uživatel otevřel e-mail,
+- uživatel strávil v aplikaci pět minut.
+
+Silnější aktivační události:
+
+- tým importoval první reálná data,
+- uživatel vytvořil první projekt a pozval kolegu,
+- účet poslal první automatizovaný report klientovi,
+- administrátor nastavil role a dokončil první auditovatelný workflow,
+- AI funkce vygenerovala výstup, který uživatel upravil a použil.
+
+Dobrá aktivační událost má tři vlastnosti:
+
+1. Souvisí s hodnotou, kterou produkt slibuje.
+2. Jde ji technicky změřit bez čtení citlivého obsahu.
+3. Je dost brzká na to, aby ji onboarding mohl ovlivnit.
+
+Pokud aktivace přijde až po třech měsících, je to důležitá metrika, ale špatný kompas pro první obrazovky. Pro onboarding potřebujete dřívější signál. Ne finální ROI, ale první důkaz, že účet jde správným směrem.
+
+### Segmentujte podle práce, ne podle nálady
+
+Onboarding pro všechny je často onboarding pro nikoho. B2B SaaS má různé uživatele a každý přichází s jinou prací. Zakladatel chce rychle vidět hodnotu. Admin potřebuje bezpečně nastavit účet. Manažer chce report. Operátor chce udělat konkrétní úkol bez školení. Nákup nebo právní oddělení bude řešit smlouvu, DPA, fakturaci a data.
+
+Segmentace nemusí začínat složitou personalizací. Stačí položit jednu praktickou otázku:
+
+"Co chcete dnes dokončit?"
+
+Možnosti mohou být například:
+
+- Vyzkoušet produkt na vlastních datech.
+- Připravit účet pro tým.
+- Pozvat klienta nebo kolegu.
+- Ověřit bezpečnost a datový provoz.
+- Jen si projít demo bez registrace.
+
+Každá odpověď vede na jinou cestu. Ne na jiný produkt. Na jiný první krok. Uživatel, který chce ověřit bezpečnost, nepotřebuje hned importovat data. Potřebuje vidět region provozu, role, audit log, export a seznam subdodavatelů. Uživatel, který chce zkusit hodnotu, nepotřebuje právní román. Potřebuje bezpečný sandbox, vzorová data nebo malý import.
+
+Codyho komentář: onboarding není IQ test. Když produkt nutí uživatele hádat správný postup, neznamená to, že máte "power user" produkt. Znamená to, že jste dokumentaci převlékli za uživatelské rozhraní.
+
+### Signup: berte jen to, co opravdu potřebujete
+
+Každé pole v registraci má cenu. E-mail a heslo, magic link, SSO, název firmy, telefon, velikost týmu, obor, role, účel použití, souhlas s newsletterem, ověření telefonu. Některé údaje dávají smysl. Všechny najednou skoro nikdy.
+
+Privacy-first onboarding používá princip postupného sběru:
+
+- Před hodnotou sbírá jen údaje nutné k vytvoření účtu a bezpečnému provozu.
+- Kontextové otázky pokládá až ve chvíli, kdy zlepší aktuální krok.
+- Marketingové preference odděluje od provozních souhlasů.
+- Citlivá data nepoužívá jako ukázkový materiál, pokud stačí sandbox nebo vzorová data.
+- U každého sbíraného údaje umí říct účel, retenci a kdo k němu má přístup.
+
+GDPR staví mezi základní principy minimalizaci dat: osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro daný účel ([EUR-Lex: GDPR, článek 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1670531008195&uri=CELEX%3A32016R0679)). Evropský sbor pro ochranu osobních údajů zároveň ve vodítkách k data protection by design and by default popisuje ochranu dat jako návrhový princip, ne jako právní nálepku přilepenou po vývoji ([EDPB: Guidelines 4/2019 on Article 25](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)).
+
+Praktický příklad: pokud SaaS nabízí analýzu dokumentů, onboarding by neměl tlačit nového uživatele k nahrání citlivé smlouvy jen proto, aby viděl demo. Nabídněte vzorový dokument, anonymizovaný import nebo lokální předkontrolu. Reálná data si vyžádejte až ve chvíli, kdy uživatel chápe, co se s nimi stane.
+
+### Prázdný stav je obchodní obrazovka
+
+Prázdný dashboard je kritický moment. Uživatel se přihlásí a vidí nic. Prázdnou tabulku, prázdný graf, prázdný projekt. Produkt technicky funguje, ale psychologicky mlčí.
+
+Dobrý prázdný stav odpovídá na čtyři otázky:
+
+- Co tady bude, až produkt začne pracovat?
+- Jaký první krok mám udělat?
+- Kolik času to zabere?
+- Můžu si to zkusit bez rizika?
+
+Špatný prázdný stav říká "zatím nemáte žádná data". To je pravda, ale není to pomoc. Lepší je:
+
+"Zatím tu není žádný report. Připojte první zdroj dat, nebo si otevřete ukázkový report s demo daty. První nastavení zabere asi dvě minuty."
+
+U privacy-first produktů má prázdný stav ještě jednu roli: vysvětlit datový tok ve chvíli, kdy je relevantní. Například před importem:
+
+"Soubor zpracujeme jen pro tento účet. Obsah neposíláme do reklamních služeb. Po importu můžete data exportovat nebo smazat v nastavení projektu."
+
+To je lepší než schovat všechno do patnáctistránkové privacy policy a doufat, že si ji někdo přečte místo spaní.
+
+### Checklist není onboarding, ale může pomoct
+
+Onboarding checklist funguje, když vede k hodnotě. Selhává, když jen ukazuje administrativní seznam. Uživatel nepotřebuje odškrtat "doplňte avatar". Potřebuje dokončit práci, kvůli které přišel.
+
+Dobrá checklist položka:
+
+- má jasný výsledek,
+- je krátká,
+- dá se dokončit bez podpory,
+- posouvá uživatele k aktivaci,
+- vysvětluje, proč na ní záleží.
+
+Příklad pro B2B projektový portál:
+
+1. Vytvořte první projekt.
+2. Přidejte jeden interní úkol.
+3. Pozvěte kolegu s rolí editor.
+4. Nahrajte ukázkový dokument.
+5. Otevřete klientský náhled.
+
+Tohle je lepší než:
+
+1. Vyplňte profil.
+2. Nahrajte logo.
+3. Nastavte notifikace.
+4. Přečtěte si dokumentaci.
+5. Sledujte nás na sociálních sítích.
+
+Sociální sítě v onboarding checklistu jsou jako dát na dveře ordinace ceduli "nejdřív nám dejte follow". Technicky možné, lidsky podezřelé.
+
+### E-mail onboarding má navazovat na produkt
+
+E-mail může onboardingu pomoct, ale nesmí nahrazovat produkt. Pokud uživatel musí číst sérii sedmi e-mailů, aby pochopil základní hodnotu, problém je v aplikaci. E-mail má vracet uživatele k nedokončenému kroku, vysvětlit kontext nebo zapojit dalšího člověka v účtu.
+
+Rozumné e-mailové scénáře:
+
+- Uživatel začal import, ale nedokončil ho.
+- Uživatel vytvořil projekt, ale nikoho nepozval.
+- Admin pozval tým, ale nikdo nepřijal pozvánku.
+- Trial se blíží ke konci a účet ještě nedosáhl aktivační události.
+- Uživatel dosáhl první hodnoty a má smysl nabídnout další krok.
+
+Špatné scénáře:
+
+- Každý signup dostane stejnou obecnou sekvenci bez ohledu na chování.
+- E-mail tlačí upgrade dřív, než produkt dodal hodnotu.
+- Newsletter souhlas je předem zaškrtnutý nebo schovaný v registraci.
+- E-mail používá sledovací pixely a parametry bez jasného účelu.
+- Odhlášení je těžší než registrace.
+
+Privacy-first přístup preferuje transakční a kontextové e-maily před plošným naháněním. Měřte doručení, kliknutí na důležité provozní odkazy a dokončení návazného kroku. Nepotřebujete vědět, jestli si uživatel otevřel e-mail v tramvaji v 8:13 a jaké má boty. Tedy doufám.
+
+### Trial: čas sám o sobě neprodává
+
+Free trial není strategie. Je to formát ověření hodnoty. Pokud během trialu uživatel nedosáhne výsledku, konec trialu jen připomene, že produkt neprošel zkouškou. Stripe ve svých SaaS návodech ukazuje běžné modely trialů, checkoutu a customer portalu pro správu předplatného ([Stripe Docs: Integrate a SaaS business](https://docs.stripe.com/saas?locale=en-GB)). Technická implementace je ale jen část. Produkt musí vědět, co se má v trialu stát.
+
+Před spuštěním trialu si odpovězte:
+
+- Co má účet dokázat do první hodiny?
+- Co má dokázat do prvního dne?
+- Co má dokázat do konce trialu?
+- Která událost říká, že trial má obchodní šanci?
+- Kdy má zasáhnout člověk ze sales nebo podpory?
+- Kdy je férové trial prodloužit?
+- Jak uživatel exportuje data, pokud nepokračuje?
+
+Trial bez aktivační logiky často vede k falešné naději. Mnoho registrací, málo zákazníků, hodně e-mailů "jen se připomínám". Produkt má raději méně registrací, které se dostanou k hodnotě, než víc účtů, které skončí v mlze.
+
+### Týmový onboarding: účet není jeden uživatel
+
+U B2B SaaS často aktivujete účet až ve chvíli, kdy se zapojí správná kombinace lidí. Jeden člověk může produkt nastavit, ale hodnota vzniká až v týmu. Proto onboarding nesmí končit u prvního přihlášeného uživatele.
+
+Sledujte týmové signály:
+
+- byl pozván kolega,
+- pozvánka byla přijata,
+- role odpovídají reálnému workflow,
+- vznikl první sdílený objekt,
+- proběhla první spolupráce,
+- admin nastavil bezpečnostní pravidla,
+- účet použil export nebo integraci.
+
+Zároveň netlačte pozvánky příliš brzy. Pokud uživatel ještě neví, co produkt dělá, žádost "pozvěte celý tým" působí agresivně. Lepší je pozvat ve chvíli, kdy existuje konkrétní důvod:
+
+"Report je připravený. Pozvěte kolegu z financí ke kontrole čísel."
+
+To je jiné než obecné "pozvěte tým a získejte víc hodnoty". Konkrétní práce vytváří konkrétní pozvánku.
+
+### Self-serve, high-touch a hybrid
+
+Ne každý SaaS má mít čistě self-serve onboarding. Čím vyšší cena, riziko, integrace a organizační změna, tím větší smysl dává hybridní nebo high-touch onboarding. Product-led growth neznamená, že člověk nesmí do procesu vstoupit. Znamená, že produkt nese co největší část hodnoty a obchodní tým vstupuje tam, kde zvyšuje důvěru nebo odstraňuje specifické riziko.
+
+Self-serve se hodí, když:
+
+- hodnota je rychle viditelná,
+- nastavení je jednoduché,
+- data nejsou extrémně citlivá,
+- uživatel má pravomoc začít,
+- cena nevyžaduje nákupní proces.
+
+High-touch nebo hybrid se hodí, když:
+
+- je potřeba integrace s interními systémy,
+- data jsou citlivá nebo regulovaná,
+- zákazník řeší bezpečnostní review,
+- produkt mění proces více týmům,
+- hodnota vzniká až po migraci nebo konfiguraci,
+- roční kontrakt ospravedlní onboarding práci.
+
+Praktický hybrid: produkt nabídne sandbox, ukázková data a první workflow samoobslužně. Když účet dosáhne relevantního signálu, třeba importuje reálná data nebo pozve tři lidi ze stejné firmy, nabídne krátký onboarding call. Ne proto, aby obchodník recitoval slide deck, ale aby pomohl odstranit další riziko.
+
+### Měřte cestu k hodnotě, ne zvědavost
+
+Onboarding metriky mají odpovídat na otázku: kde lidé ztrácejí cestu k hodnotě?
+
+Sledujte minimálně:
+
+- počet nových účtů podle segmentu,
+- dokončení prvního klíčového kroku,
+- dosažení aktivační události,
+- čas k první hodnotě,
+- návrat do produktu po první session,
+- zapojení dalších členů účtu,
+- konverzi trialu podle aktivačního stavu,
+- důvody opuštění nebo nedokončení.
+
+Nesledujte všechno jen proto, že to umí analytický nástroj. Každá událost je datový závazek: musíte ji pojmenovat, udržovat, vysvětlit, chránit a jednou možná smazat. Privacy-first produktová analytika začíná otázkami, ne eventovým ohňostrojem.
+
+Dobrá eventová sada pro onboarding může vypadat takto:
+
+- `account_created`
+- `onboarding_goal_selected`
+- `sample_data_opened`
+- `first_project_created`
+- `first_import_completed`
+- `teammate_invited`
+- `activation_reached`
+- `trial_export_requested`
+
+Ani jedna událost nepotřebuje obsah dokumentu, text zprávy nebo citlivý detail. Měříte postup, ne čtete uživateli přes rameno.
+
+### Support je součást onboardingu
+
+Podpora v onboardingu nemá být jen čekárna pro zmatené uživatele. Je to zdroj produktové pravdy. Každý dotaz v první hodině říká, kde produkt není jasný, kde marketing slíbil něco nejednoznačného nebo kde chybí důvěra.
+
+Zaveďte jednoduché značení onboarding dotazů:
+
+- nerozumí hodnotě,
+- nenašel další krok,
+- bojí se importovat data,
+- neví, koho pozvat,
+- narazil na technickou chybu,
+- řeší cenu nebo trial,
+- řeší bezpečnost, DPA nebo subdodavatele.
+
+Jednou týdně projděte dotazy a hledejte opakující se vzory. Pokud se pět lidí ptá, jestli mohou data smazat, není řešením šestý makrotext v supportu. Řešením je dát informaci přímo do kroku, kde data nahrávají.
+
+### Praktický onboarding workshop
+
+Vezměte jeden cílový segment a projděte onboarding bez iluzí. Ideálně s produktem otevřeným na mobilu i desktopu.
+
+Otázky:
+
+1. Kdo je první uživatel a kdo je skutečný kupující?
+2. Jaký výsledek chce uživatel v první hodině?
+3. Jaká aktivační událost nejlépe odpovídá dlouhodobé hodnotě?
+4. Jaký je nejkratší bezpečný tok od registrace k této události?
+5. Které údaje sbíráme před první hodnotou a proč?
+6. Které kroky jsou jen naše zvědavost nebo interní pohodlí?
+7. Kde uživatel poprvé pracuje s reálnými daty?
+8. Jak v tu chvíli vysvětlujeme soukromí, retenci a export?
+9. Kdy má smysl nabídnout vzorová data?
+10. Kdy má smysl pozvat kolegu?
+11. Jak poznáme, že má zasáhnout podpora nebo sales?
+12. Jak uživatel odejde, pokud produkt není vhodný?
+
+Potom nakreslete onboarding jako trasu:
+
+- Vstup: odkud uživatel přichází a co očekává.
+- První rozhodnutí: co chce dnes dokončit.
+- První práce: nejmenší krok s reálným výsledkem.
+- První důkaz: výstup, report, odpověď, sdílení nebo automatizace.
+- První rozšíření: pozvánka, integrace, upgrade nebo bezpečnostní nastavení.
+- Záchrana: co se stane, když se zasekne.
+
+Nakonec z trasy odstraňte vše, co není nutné pro hodnotu, bezpečnost nebo důvěru. Pokud něco potřebuje marketing, ale ne uživatel, nechte to na později. Marketing to přežije. Uživatel možná ne.
+
+### Checklist kapitoly
+
+- Máte definovanou aktivační událost pro hlavní segment?
+- Souvisí aktivace s reálnou hodnotou, ne jen s dokončením tour?
+- Dostane se nový uživatel k prvnímu výsledku bez zbytečného nastavování?
+- Umíte nabídnout vzorová data nebo sandbox místo tlačení citlivého importu?
+- Sbírá registrace jen údaje nutné pro první krok?
+- Oddělujete provozní e-maily od marketingových souhlasů?
+- Vysvětlujete datový tok ve chvíli, kdy uživatel nahrává nebo propojuje data?
+- Prázdné stavy říkají, co udělat dál, ne jen že nic neexistuje?
+- Checklist vede k hodnotě, ne k administrativní kosmetice?
+- Měříte čas k první hodnotě a dokončení klíčových kroků?
+- Máte týmové signály aktivace, pokud produkt prodáváte firmám?
+- Ví support, jak značit onboarding problémy?
+- Je jasné, kdy má do procesu vstoupit člověk?
+- Umožňujete férový export nebo ukončení účtu i během trialu?
+
+Onboarding je první provozní slib produktu. Ukazuje, jestli opravdu rozumíte práci zákazníka, nebo jestli jste jen postavili funkce a doufáte, že si k nim někdo najde cestu. Dobře navržený onboarding není nátlak. Je to respekt k času, datům a pozornosti uživatele. A přesně proto prodává.
+
+### Zdroje kapitoly
+
+- [Skene: Onboarding vs activation](https://www.skene.ai/product-led-growth/onboarding-vs-activation)
+- [ProductLed: Product-Led Onboarding](https://productled.com/blog/product-led-onboarding)
+- [OpenView: Product-Led Growth](https://openviewpartners.com/product-led-growth/)
+- [Stripe Docs: Integrate a SaaS business](https://docs.stripe.com/saas?locale=en-GB)
+- [EUR-Lex: General Data Protection Regulation, Article 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1670531008195&uri=CELEX%3A32016R0679)
+- [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -3716,3 +4040,4 @@ Pricing je živý systém. První verze má být dost jednoduchá, aby ji zákaz
 - 2026-05-05: Dopsána kapitola 14 o bezpečnosti a provozu: rizika, bezpečný vývoj, tenant izolace, tajemství, zálohy, monitoring, logy, incident response a vulnerability disclosure.
 - 2026-05-05: Dopsána kapitola 15 o výběru trhu a positioningu: segment, bolest, alternativy, tržní kategorie, hodnotová nabídka, privacy-first diferenciace a praktický workshop.
 - 2026-05-05: Dopsána kapitola 16 o SaaS pricingu: hodnotová metrika, per-seat, usage-based, hybrid, enterprise, ceník, slevy a privacy-first billing.
+- 2026-05-05: Dopsána kapitola 17 o SaaS onboardingu: první výsledek, aktivační událost, segmentace, trial, týmové signály, privacy-first data flow a praktický workshop.
