@@ -380,8 +380,210 @@ Když tato vrstva funguje, web získá pevný základ. Neviditelný pro většin
 - [DMARC.org Overview](https://dmarc.org/overview/)
 - [CNIL: Cookies - solutions pour les outils de mesure d'audience](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience)
 
+## Kapitola 4: Frontend v praxi: UX, přístupnost, responzivita a výkon
+
+Frontend není vrstva, kde se jen "nakreslí design". Je to místo, kde se potkává slib firmy s realitou návštěvníka. Pokud stránka vypadá hezky, ale člověk na mobilu netrefí tlačítko, formulář nejde vyplnit z klávesnice, text má nízký kontrast a načítání skáče pod rukama, design neslouží. Jen se tváří, že slouží.
+
+Praktický frontend má čtyři cíle:
+
+1. UX: návštěvník ví, kde je, co může udělat a co se stane potom.
+2. Přístupnost: web je použitelný pro lidi s různými schopnostmi, zařízeními a situacemi.
+3. Responzivita: obsah funguje na mobilu, tabletu, notebooku i velkém monitoru.
+4. Výkon: stránka se rychle načte, rychle reaguje a vizuálně neposkakuje.
+
+Tato kapitola není o módních frameworcích. Ty se mění. Principy zůstávají: jasný tok, sémantické HTML, čitelnost, klávesnice, rozumná velikost assets, testování na reálných zařízeních a respekt k soukromí.
+
+### UX: nejdřív tok, potom komponenty
+
+UX začíná otázkou: co chce člověk udělat a co mu v tom brání? Ne otázkou, jakou knihovnu komponent použijeme. Komponenty jsou až druhá vrstva. Když je špatně navržený tok, ani nejhezčí tlačítko ho nezachrání.
+
+U webu pro službu si napište hlavní scénář:
+
+1. Návštěvník přijde z vyhledávání nebo doporučení.
+2. Během pár sekund pochopí, jestli je nabídka pro něj.
+3. Najde důkaz důvěry.
+4. Zjistí, jak vypadá spolupráce nebo produkt.
+5. Udělá další krok: kontakt, demo, audit, RSS odběr nebo čtení detailu.
+
+U SaaS produktu bývá první scénář jiný:
+
+1. Návštěvník pochopí problém, který produkt řeší.
+2. Ověří, že produkt sedí na jeho typ firmy nebo role.
+3. Vidí konkrétní funkce a přínosy, ne jen obecné sliby.
+4. Dostane bezpečný první krok: demo, trial, sandbox nebo konzultaci.
+5. Po registraci rychle zažije první hodnotu.
+
+Když tok neznáte, web začne nabízet všechno najednou: tři hlavní CTA, dvě navigace, chat, popup, newsletter a hero text, který se bojí říct konkrétní věc. Návštěvník pak neodchází proto, že by neměl zájem. Odchází proto, že ho web nutí skládat puzzle.
+
+Praktický postup pro UX:
+
+- Pro každou důležitou stránku určete jednu primární akci.
+- Nad fold dejte jasný slib, pro koho je nabídka a proč věřit.
+- Sekce řaďte podle otázek zákazníka, ne podle interní firemní struktury.
+- Každý formulář zkraťte na údaje potřebné pro první odpověď.
+- Chybové stavy pište lidsky a konkrétně.
+- Po odeslání formuláře řekněte, co se stane dál.
+
+Příklad kontaktního formuláře:
+
+Slabé řešení:
+"Jméno, firma, telefon, e-mail, rozpočet, termín, popis projektu, souhlas se zpracováním, newsletter, odeslat."
+
+Silnější řešení:
+"E-mail, krátký popis cíle, volitelné URL existujícího webu. Po odeslání: ozveme se s návrhem dalšího kroku, nepřidáme vás do marketingového seznamu."
+
+Rozdíl je v respektu. První formulář chce hodně dřív, než si zasloužil důvěru. Druhý sbírá minimum pro další krok.
+
+### Přístupnost: kvalita, která pomáhá všem
+
+Přístupnost není charita ani checkbox pro audit. Je to normální kvalita produktu. Web, který funguje s klávesnicí, má čitelné texty, správné popisky formulářů a logickou strukturu nadpisů, pomáhá lidem se zrakovým, motorickým nebo kognitivním omezením. Zároveň pomáhá člověku v tramvaji na mobilu, unavenému zákazníkovi večer, prodejci s rozbitou myší i vyhledávači, který se snaží pochopit obsah.
+
+W3C doporučuje pro dlouhodobější použitelnost pracovat s WCAG 2.2; WCAG 2.2 je doporučení W3C od 5. října 2023 a rozšiřuje předchozí verze 2.0 a 2.1 ([W3C: WCAG 2 Overview](https://www.w3.org/WAI/standards-guidelines/wcag/), [W3C: Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/wcag/)). Pro běžný tým to neznamená memorovat celé specifikace. Znamená to brát přístupnost jako součást návrhu, vývoje a testování.
+
+Evropský kontext je čím dál důležitější. European Accessibility Act se podle Evropské komise vztahuje na vybrané produkty a služby jako e-commerce, bankovní služby, e-knihy, elektronické komunikace nebo platební terminály; požadavky se aplikují na produkty a služby uváděné na trh po 28. červnu 2025 ([European Commission: European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/union-equality-strategy-rights-persons-disabilities-2021-2030/european-accessibility-act_en), [Your Europe: Services, goods and their digital accessibility](https://europa.eu/youreurope/business/selling-in-eu/selling-goods-services/accessibility/index_en.htm)). Toto není právní rada pro každý web. Je to jasný signál: přístupnost už není "hezké až někdy". Pro digitální produkty v Evropě patří do základní produktové hygieny.
+
+Minimum přístupnosti pro web:
+
+- Používejte sémantické HTML: `button` pro tlačítka, `a` pro odkazy, nadpisy ve správném pořadí.
+- Každé pole formuláře má viditelný a programově spojený label.
+- Interaktivní prvky jsou dostupné z klávesnice a mají viditelný focus.
+- Text má dostatečný kontrast a není schovaný v obrázku.
+- Obrázky, které nesou informaci, mají smysluplný alternativní text.
+- Chyby ve formuláři jsou čitelné a říkají, jak je opravit.
+- Navigace, nadpisy a landmarky dávají smysl i mimo vizuální layout.
+- Animace a pohyb respektují nastavení uživatele, například omezení pohybu.
+
+Codyho komentář: pokud tým tvrdí, že přístupnost "dodělá na konci", skoro jistě ji nedodělá. Na konci už se jen hasí rozpočet, termín a bugy. Přístupnost musí být ve výchozím návrhu komponent. Je to méně dramatické, levnější a má to menší šanci skončit jako PDF audit v šuplíku.
+
+### Responzivita: mobil není zmenšený desktop
+
+Responzivní web není desktop, který se nějak vejde na mobil. Mobil má jiný kontext: menší plochu, dotykové ovládání, horší síť, méně trpělivosti a často jasnější úkol. Člověk na mobilu chce rychle pochopit nabídku, najít adresu, kontakt, cenu, detail služby nebo další krok. Ne obdivovat komplikovanou animaci, která na notebooku vypadala efektně na poradě.
+
+Dobrá responzivita začíná obsahem:
+
+- Co musí být vidět hned?
+- Co může být níž?
+- Co se má sloučit, skrýt nebo přepsat?
+- Jak se bude ovládat navigace?
+- Jak dlouhé jsou nadpisy v češtině?
+- Jak se chová formulář při chybě?
+
+Technicky pomáhá mobile-first přístup. Ne proto, že by desktop nebyl důležitý, ale protože mobil nutí k prioritám. Když stránku nejdřív navrhnete pro omezený prostor, méně často skončíte s layoutem, který se na mobilu jen trapně láme.
+
+Praktická pravidla:
+
+- Nepoužívejte pevné výšky tam, kde může text narůst.
+- Testujte dlouhé české texty v tlačítkách, kartách a navigaci.
+- Dotykové cíle dělejte dost velké a s rozumnými rozestupy.
+- Formulářová pole používejte s vhodným typem, například `email`, `tel`, `url`.
+- Obrázky připravujte v responzivních velikostech a moderních formátech.
+- Kritický obsah neschovávejte jen do hover stavů, protože dotyk hover nemá.
+- Sticky prvky na mobilu používejte opatrně, ať nezaberou půl obrazovky.
+
+Příklad: desktopová sekce se třemi kartami může na mobilu fungovat jako jedna pod druhou. To je v pořádku. Problém začne, když každá karta obsahuje dlouhý nadpis, dvě ikony, tlačítko a sekundární popis, takže z jednoduché sekce vznikne tříminutový scroll. Responzivita není jen změna gridu. Je to editace priority.
+
+### Výkon: rychlost je produktová vlastnost
+
+Výkon frontendu není jen skóre v nástroji. Je to zkušenost: stránka se objeví rychle, dá se použít, reaguje bez prodlevy a obsah se nehýbe pod prstem. Google popisuje Core Web Vitals jako sadu metrik pro uživatelskou zkušenost, aktuálně zaměřenou na LCP, INP a CLS ([web.dev: Web Vitals](https://web.dev/articles/vitals?hl=en)). Prakticky:
+
+- LCP sleduje, kdy se načte hlavní viditelný obsah.
+- INP sleduje, jak rychle stránka reaguje na interakce.
+- CLS sleduje nečekané posuny layoutu.
+
+Tyto metriky nejsou celý výkon, ale dávají dobrý jazyk pro diskuzi mezi vývojem, designem a byznysem. Místo "web mi přijde pomalý" můžete řešit: hlavní obrázek je moc těžký, JavaScript blokuje interakci, reklama nebo banner posouvá obsah, fonty způsobují přeskok.
+
+Nejčastější brzdy:
+
+- Obří hero obrázky bez responzivních variant.
+- Příliš mnoho JavaScriptu na stránce, která by mohla být statická.
+- Externí skripty pro analytiku, chat, heatmapy, reklamu a embed prvky.
+- Fonty načítané z více zdrojů bez strategie.
+- Klientské renderování tam, kde stačí serverový nebo statický HTML výstup.
+- Komponenty, které překreslují víc, než musí.
+
+Privacy-first výkon má jeden příjemný vedlejší efekt: když odstraníte zbytečné trackery, web je obvykle rychlejší. Méně externích požadavků znamená méně blokování, menší právní a bezpečnostní plochu a méně dat, která tečou mimo vaši kontrolu. To je vzácný typ optimalizace, která pomáhá uživateli, vývojáři i compliance.
+
+Praktický výkonový postup:
+
+1. Změřte reálnou stránku, ne prázdný template.
+2. Rozdělte problém na načtení, interaktivitu a stabilitu layoutu.
+3. Zkontrolujte obrázky, fonty a externí skripty.
+4. Odstraňte nepotřebné věci dřív, než začnete složitě ladit.
+5. Nastavte rozumné caching hlavičky pro statická aktiva.
+6. U aplikace hlídejte bundle size a rozdělení kódu.
+7. Po každé větší změně změřte znovu.
+
+### Komponenty: design systém má chránit rozhodnutí
+
+Design systém není sbírka hezkých kartiček ve Figmě. Dobrý design systém chrání tým před opakováním stejných rozhodnutí a před tichým rozpadem rozhraní. Pokud má každé tlačítko jinou velikost, každý formulář jiný styl chyb a každá karta jiné mezery, uživatel se učí web znovu na každé stránce.
+
+Pro malý tým stačí jednoduchý komponentový základ:
+
+- Typografie: velikosti, váhy, řádkování a maximální šířka textu.
+- Barvy: primární akce, sekundární akce, text, okraje, chyby, úspěch.
+- Tlačítka: primární, sekundární, destruktivní, disabled, loading.
+- Formuláře: label, help text, chyba, validní stav, focus.
+- Navigace: desktop, mobil, aktivní stav.
+- Karty a seznamy: jednotné mezery, nadpisy, metadata, akce.
+- Prázdné stavy: co se ukáže, když ještě nejsou data.
+- Chybové stavy: co se stane, když něco selže.
+
+U SaaS aplikace jsou prázdné a chybové stavy zvlášť důležité. První spuštění produktu často znamená, že uživatel nemá žádná data. Pokud místo promyšleného prázdného stavu vidí jen prázdnou tabulku, produkt působí mrtvě. Lepší je říct, co tu bude, proč to má hodnotu a jak udělat první krok.
+
+Příklad prázdného stavu v B2B SaaS:
+
+"Zatím nemáte žádné projekty. Vytvořte první projekt a přidejte členy týmu. Audit log a oprávnění zapneme automaticky."
+
+To je lepší než:
+
+"No data."
+
+Jedna věta může změnit pocit z produktu. A ano, "No data" je možná krátké, ale taky je to produktový ekvivalent pokrčení ramen.
+
+### Testování frontendu: nestačí screenshot z notebooku
+
+Frontend testujte jako skutečnou zkušenost. Screenshot na velkém monitoru neřekne, jestli jde stránka ovládat klávesnicí, jestli formulář hlásí chybu srozumitelně, jestli mobilní menu nezakrývá obsah a jestli se stránka nerozbije při delším textu.
+
+Minimum testování před vydáním:
+
+- Mobil: otevřít hlavní stránku, navigaci, detail, formulář a potvrzení.
+- Klávesnice: projít navigaci, tlačítka, formuláře a modal bez myši.
+- Čtečka nebo alespoň accessibility tree: ověřit názvy tlačítek, labely a pořadí.
+- Výkon: změřit hlavní stránky a zkontrolovat obrázky, skripty, fonty.
+- Chybové stavy: prázdný formulář, špatný e-mail, výpadek API, pomalé načítání.
+- Texty: dlouhé české nadpisy, delší jména, prázdná data, vícejazyčné varianty.
+- Soukromí: zkontrolovat, jaké externí domény se načítají a proč.
+
+U marketingového webu často stačí ruční smoke test a pár automatických kontrol. U SaaS aplikace už se vyplatí automatizovat klíčové toky: registrace, přihlášení, vytvoření hlavního objektu, pozvánka uživatele, billing nebo export. Ne proto, že testy jsou módní, ale protože rozbitý onboarding nebo billing je drahý bug.
+
+### Checklist kapitoly
+
+- Má každá důležitá stránka jeden jasný primární tok?
+- Je hlavní sdělení pochopitelné bez znalosti interního žargonu?
+- Fungují odkazy, tlačítka, formuláře a navigace z klávesnice?
+- Mají formulářová pole labely a chybové hlášky, které pomáhají opravit problém?
+- Je text čitelný kontrastem, velikostí a délkou řádku?
+- Funguje layout na mobilu bez překrývání a bez skrytých klíčových akcí?
+- Jsou obrázky optimalizované, responzivní a mají alternativní text, pokud nesou význam?
+- Víte, kolik externích skriptů stránka načítá a proč?
+- Hlídáte LCP, INP a CLS alespoň u hlavních stránek?
+- Máte promyšlené prázdné, chybové a loading stavy?
+- Testujete reálné scénáře, ne jen vzhled na jednom monitoru?
+- Umíte zákazníkovi říct, jak frontend podporuje privacy-first provoz?
+
+Frontend je dobrý ve chvíli, kdy mizí z cesty. Návštěvník se nemusí učit rozhraní, bojovat s formulářem ani čekat na zbytečné skripty. Prostě chápe, věří a může pokračovat. To je méně efektní než animovaná homepage, ale výrazně užitečnější.
+
+### Zdroje kapitoly
+
+- [W3C: WCAG 2 Overview](https://www.w3.org/WAI/standards-guidelines/wcag/)
+- [W3C: Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/wcag/)
+- [European Commission: European Accessibility Act](https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/union-equality-strategy-rights-persons-disabilities-2021-2030/european-accessibility-act_en)
+- [Your Europe: Services, goods and their digital accessibility](https://europa.eu/youreurope/business/selling-in-eu/selling-goods-services/accessibility/index_en.htm)
+- [web.dev: Web Vitals](https://web.dev/articles/vitals?hl=en)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
 - 2026-05-04: Dopsána kapitola 2 o hodnocení dobrého webu podle rychlosti, důvěry, obsahu a konverzí.
 - 2026-05-05: Dopsána kapitola 3 o technickém základu webu: doména, hosting, DNS, HTTPS/TLS, e-mail a privacy-first analytika.
+- 2026-05-05: Dopsána kapitola 4 o praktickém frontendu: UX, přístupnost, responzivita, výkon, komponenty a testování.
