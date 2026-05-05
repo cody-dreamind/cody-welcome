@@ -2545,6 +2545,321 @@ Integrace jsou užitečné, když rozšiřují schopnosti produktu bez ztráty k
 - [Stripe Docs: Receive events in your webhook endpoint](https://docs.stripe.com/webhooks?lang=node)
 - [CloudEvents Specification](https://github.com/cloudevents/spec)
 
+## Kapitola 13: AI ve webových produktech: kde pomáhá a kde jen zdražuje provoz
+
+AI ve webovém produktu není funkce sama o sobě. Je to schopnost, která může zrychlit práci, zjednodušit rozhraní, najít vzory v datech nebo pomoct uživateli rozhodnout. Stejně snadno ale může přidat latenci, náklady, právní riziko, bezpečnostní díry a produktovou mlhu. Když tým začne otázkou "kam dáme AI", obvykle skončí chatbotem. Když začne otázkou "kde má uživatel drahou nejistotu nebo opakovanou práci", má šanci postavit něco užitečného.
+
+Dobré AI použití ve webovém produktu má jasný pracovní tok:
+
+1. Vstup: co uživatel nebo systém předá.
+2. Úkol: co má AI udělat a podle jakých pravidel.
+3. Kontext: jaká data smí použít.
+4. Výstup: v jakém formátu má odpovědět.
+5. Kontrola: kdo nebo co výsledek ověří.
+6. Akce: co se stane dál a kdo za to nese odpovědnost.
+
+Bez těchto šesti bodů AI často jen přesune neurčitost z formuláře do promptu. To není inovace. To je jen dražší textové pole.
+
+### Začněte problémem, ne modelem
+
+Model není produktová strategie. Uživatel většinou nechce "generativní AI". Chce rychlejší odpověď, méně ručního přepisování, lepší vyhledávání, méně chyb, kvalitnější návrh nebo srozumitelnější další krok. AI má smysl tam, kde klasická pravidla nestačí, protože vstup je neformální, jazykový, dlouhý nebo proměnlivý.
+
+Dobré kandidáty:
+
+- Shrnutí dlouhé komunikace pro support nebo account manažera.
+- Extrakce strukturovaných údajů z e-mailu, PDF nebo poznámek.
+- Návrh odpovědi, který člověk schválí před odesláním.
+- Sémantické vyhledávání v dokumentaci, znalostní bázi nebo katalogu.
+- Klasifikace příchozích požadavků podle tématu, priority nebo týmu.
+- Kontrola konzistence textu: tón, chybějící informace, duplicity.
+- Pomoc při onboardingu: doporučit další krok podle stavu účtu.
+- Interní asistent pro operátory, který neprovádí akce bez potvrzení.
+
+Špatní kandidáti:
+
+- Nahrazení deterministického pravidla, které jde napsat jednoduše v kódu.
+- Generování odpovědí zákazníkům bez kontroly u citlivých témat.
+- Automatické rozhodování o ceně, přístupu nebo riziku bez auditovatelné logiky.
+- Chatbot na homepage, který nezná produkt a sbírá osobní údaje do cizí služby.
+- Agent s právem měnit data, mazat záznamy nebo posílat e-maily bez hranic.
+- AI tam, kde produkt neumí ani základní filtrování, navigaci nebo dokumentaci.
+
+Codyho komentář: AI je výborná lopata na textový a znalostní nepořádek. Ale když je nepořádek produktový, lopata nestačí. Nejdřív určete, co má produkt dělat. Pak teprve řešte, jestli model pomůže.
+
+### Použití, která obvykle dávají smysl
+
+Nejužitečnější AI funkce často nejsou nejokázalejší. Jsou to malé asistence v konkrétním toku.
+
+Příklad v B2B SaaS supportu:
+
+- Zákazník pošle dlouhý požadavek.
+- AI navrhne štítky: billing, integrace, priorita střední.
+- AI shrne problém do tří vět.
+- AI najde relevantní dokumentaci a podobné incidenty.
+- Operátor vidí návrh, upraví odpověď a odešle ji sám.
+
+To je dobré použití, protože AI nezískává konečnou odpovědnost. Zrychluje člověka a zlepšuje orientaci.
+
+Příklad v analytickém produktu:
+
+- Uživatel vloží popis segmentu volným jazykem.
+- AI ho převede na návrh filtru.
+- Produkt ukáže technický dotaz nebo srozumitelný náhled.
+- Uživatel filtr potvrdí.
+- Systém uloží auditní stopu: kdo filtr vytvořil a co přesně se spustilo.
+
+Tady AI pomáhá s překladem z lidského jazyka do strukturovaného pravidla. Výsledek ale nesmí být tajemná magie. Uživatel musí vidět, co se bude dít.
+
+Příklad v marketingovém CMS:
+
+- Autor napíše článek.
+- AI navrhne meta description, interní odkazy a otázky, které text neřeší.
+- AI zkontroluje, jestli tvrzení potřebují zdroj.
+- Editor rozhodne, co použije.
+
+To je lepší než tlačítko "napiš mi článek". AI podporuje kvalitu, ale autor pořád nese zodpovědnost za obsah, zdroje a tón.
+
+### Použití, která jen zdražují provoz
+
+AI umí být drahá i tehdy, když jednotlivé volání vypadá levně. Náklady rostou s počtem uživatelů, délkou kontextu, opakovanými pokusy, embeddingy, logováním, observabilitou, podporou, bezpečnostními kontrolami a lidskou revizí. Pokud funkce nezlepšuje aktivaci, retenci, kvalitu práce nebo prodej, může být jen drahý efekt.
+
+Typické pasti:
+
+- AI odpovídá na otázky, na které by stačila dobrá dokumentace.
+- Každé načtení stránky volá model, i když výsledek může být uložený.
+- Prompt posílá celý objekt zákazníka, i když stačí pár polí.
+- Uživatelé zkoušejí funkci ze zvědavosti, ale nevracejí se k ní v práci.
+- Výstupy jsou tak nespolehlivé, že je tým musí celé přepisovat.
+- Support řeší dotazy "proč AI řekla X", místo aby měl méně práce.
+- Produkt neumí vypnout AI funkci pro tenanty, kteří ji nechtějí nebo nesmí použít.
+
+Před implementací si spočítejte rozpočet:
+
+- Kolik volání vznikne na jednu dokončenou uživatelskou akci?
+- Jak dlouhý je typický prompt a odpověď?
+- Co lze cachovat, dávkovat nebo spustit asynchronně?
+- Jaký je limit nákladů na tenant, uživatele nebo workflow?
+- Co se stane, když poskytovatel zdraží, zpomalí nebo vypadne?
+- Jak poznáte, že funkce vydělává nebo šetří víc, než stojí?
+
+AI funkce má mít vlastní produktovou metriku. Například: zkrácení času zpracování ticketu, vyšší úspěšnost onboardingu, nižší počet ručních oprav, lepší nalezitelnost dokumentace nebo vyšší dokončení návrhu. Metrika "počet AI odpovědí" je jen počítadlo spotřeby.
+
+### Architektura: AI jako omezená služba, ne všemocný mozek
+
+AI vrstvu navrhujte jako úzké rozhraní s jasnými vstupy a výstupy. Ne jako všemocný modul, který má přístup do celé databáze a rozhoduje podle nálady promptu.
+
+Rozumná architektura:
+
+- Aplikace připraví minimální kontext.
+- AI služba dostane konkrétní úkol a očekávané schéma odpovědi.
+- Výstup se validuje jako nedůvěryhodný vstup.
+- Produktová logika rozhodne, co se smí stát dál.
+- Citlivé akce vyžadují oprávnění a často i potvrzení člověka.
+- Vše důležité se loguje bez zbytečného ukládání osobních dat.
+
+Užitečné je oddělit:
+
+- prompt templates,
+- výběr modelu,
+- retrieval nebo hledání kontextu,
+- validaci výstupu,
+- audit a observabilitu,
+- produktové rozhodnutí.
+
+Tím si necháte možnost změnit model, upravit prompt, přidat lokální nebo evropsky provozovanou variantu a testovat chování bez přepisování celé aplikace.
+
+Příklad hranice:
+
+```json
+{
+  "task": "classify_support_request",
+  "input": {
+    "subject": "Invoice webhook failed",
+    "body_excerpt": "We stopped receiving paid invoice events..."
+  },
+  "allowed_labels": ["billing", "webhook", "account", "bug", "feature_request"],
+  "output_schema": {
+    "labels": ["string"],
+    "priority": "low|medium|high",
+    "confidence": "number",
+    "reason": "string"
+  }
+}
+```
+
+Výstup pořád ověřte. Pokud model vrátí štítek mimo povolený seznam, produkt ho odmítne. Pokud vrátí nízkou důvěru, pošle požadavek člověku bez automatické akce. Model navrhuje. Produkt rozhoduje.
+
+### RAG a znalostní báze: kontext musí respektovat oprávnění
+
+Retrieval augmented generation, zkráceně RAG, je běžný způsob, jak modelu dodat relevantní dokumenty místo toho, aby odpovídal jen z obecné paměti. Vypadá to jednoduše: rozsekáte dokumenty, vytvoříte embeddingy, při dotazu najdete podobné části a přidáte je do promptu. Prakticky tím ale stavíte nový vyhledávací a oprávňovací systém.
+
+Privacy-first RAG pravidla:
+
+- Indexujte jen dokumenty, které mají jasného vlastníka a účel.
+- U každého chunku držte tenant, zdroj, oprávnění a datum aktualizace.
+- Retrieval filtrujte podle oprávnění dřív, než text pošlete modelu.
+- Do promptu posílejte jen části potřebné pro odpověď.
+- U odpovědí zobrazujte zdroje, ze kterých model čerpal.
+- Mazání dokumentu musí odstranit nebo zneplatnit i jeho embeddingy.
+- Citlivá data maskujte, pokud nejsou pro úkol nezbytná.
+
+Nejhorší RAG chyba v SaaS není halucinace. Nejhorší chyba je únik dat mezi tenanty. Pokud uživatel z jedné firmy dostane odpověď založenou na dokumentu jiné firmy, problém není v promptu. Problém je v architektuře oprávnění.
+
+### Bezpečnost: prompt injection je vstup, ne kuriozita
+
+AI bezpečnost není jen otázka, jestli model "neřekne něco divného". LLM aplikace pracují s nedůvěryhodným textem, generují nedůvěryhodný výstup a někdy mají přístup k nástrojům. To je klasická aplikační bezpečnost s novými vstupy.
+
+OWASP Top 10 pro LLM a generativní AI aplikace 2025 uvádí mezi riziky například prompt injection, sensitive information disclosure, improper output handling, excessive agency, vector and embedding weaknesses, misinformation a unbounded consumption ([OWASP GenAI Security Project: 2025 Top 10 Risk & Mitigations for LLMs and Gen AI Apps](https://genai.owasp.org/llm-top-10/)). Pro webový produkt z toho plyne několik praktických pravidel:
+
+- Vše od uživatele, webu, dokumentu, e-mailu nebo externí stránky berte jako nedůvěryhodné.
+- Modelový výstup nikdy neposílejte přímo do SQL, shellu, HTML, e-mailu nebo API akce bez validace.
+- Agentům dávejte nejmenší možná oprávnění a konkrétní nástroje.
+- Každá akce má být autorizovaná běžnou aplikační logikou, ne jen promptem.
+- Prompt není bezpečnostní hranice. Je to instrukce, kterou lze napadnout.
+- Nastavte limity délky vstupu, počtu kroků, nákladů a času.
+- Logujte rozhodující kroky tak, aby šel incident vyšetřit bez ukládání celých citlivých promptů.
+
+Příklad špatného návrhu:
+
+"AI agent dostane přístup k CRM a na základě e-mailu zákazníka může měnit stav dealu, posílat nabídku a aktualizovat poznámky."
+
+Silnější návrh:
+
+"AI navrhne klasifikaci e-mailu, shrnutí a doporučený další krok. CRM změny se provedou až po kliknutí uživatele. Každá změna projde standardní autorizací a zapíše se do audit logu."
+
+Rozdíl je v míře autonomie. Čím víc smí AI agent jednat za uživatele, tím přísnější musí být hranice, oprávnění a auditní stopa.
+
+### Soukromí a data: prompt je zpracování dat
+
+Prompt není technický odpad. Prompt může obsahovat osobní údaje, obchodní tajemství, zákaznická data, interní poznámky, zdravotní nebo finanční kontext, API výstupy a dokumenty. Když ho pošlete třetí straně, vzniká zpracování dat, které má mít účel, právní základ, smluvní rámec, retenci a bezpečnostní opatření.
+
+Privacy-first otázky před spuštěním AI funkce:
+
+- Jaká data posíláme modelu?
+- Jsou mezi nimi osobní údaje nebo důvěrné zákaznické informace?
+- Kde se data zpracovávají a ukládají?
+- Používá poskytovatel vstupy nebo výstupy k trénování nebo zlepšování služby?
+- Jaká je retence promptů, výstupů, embeddingů a logů?
+- Má zákazník možnost AI funkci vypnout?
+- Umíme data exportovat, smazat a dohledat podle tenantu?
+- Máme DPA nebo jiný odpovídající smluvní rámec?
+- Umíme vysvětlit AI zpracování na privacy stránce lidským jazykem?
+
+Minimalizace dat je u AI ještě důležitější než u běžného API. Model často nepotřebuje celé jméno, e-mail, telefon, obsah všech poznámek ani historická data. Potřebuje relevantní výřez. Čím méně pošlete, tím méně musíte chránit, vysvětlovat a auditovat.
+
+Praktický vzor:
+
+- Ne: "Pošli modelu celý zákaznický profil a zeptej se, co má support udělat."
+- Ano: "Pošli anonymizovaný typ plánu, stav účtu, poslední chybový kód a krátký výřez aktuálního ticketu."
+
+Pokud stavíte evropský privacy-first produkt, preferujte poskytovatele a provozní režimy, u kterých umíte jasně doložit region, zpracování, retenci a smlouvy. Někdy to bude velké cloudové API. Někdy lokální model. Někdy žádná AI, protože uživatelský tok jde vyřešit čistěji.
+
+### Evropský kontext: AI Act není jen právní poznámka
+
+EU AI Act vstoupil v platnost 1. srpna 2024 a uplatňuje se postupně. Oficiální AI Act Service Desk uvádí, že definice, AI literacy a zákazy platí od 2. února 2025, pravidla pro general-purpose AI a governance od 2. srpna 2025, většina pravidel včetně Annex III high-risk systémů a transparentnostních pravidel má začít 2. srpna 2026 a plné rozvinutí je plánované do 2. srpna 2027 ([AI Act Service Desk: Timeline for the Implementation of the EU AI Act](https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act)).
+
+Toto není právní rada. Pro produktový tým je ale důležité začít klasifikací:
+
+- Je to vůbec AI systém podle relevantní definice?
+- Patří do zakázaných praktik?
+- Je to high-risk systém podle oblasti použití?
+- Má transparentnostní povinnost vůči uživateli?
+- Jste poskytovatel, deployer, importér, distributor, nebo jen uživatel služby?
+- Používáte general-purpose AI model od třetí strany?
+- Umíte doložit účel, data, testování, monitoring a lidský dohled?
+
+Pro většinu běžných SaaS asistencí bude praktický závěr méně dramatický než "potřebujeme compliance armádu". Ale i nízkoriziková funkce má mít dokumentaci. Když produkt používá AI ke shrnutí support ticketů, je rozumné zapsat účel, datové vstupy, poskytovatele, retenci, oprávnění, měření kvality a způsob vypnutí. Ne proto, že každý řádek vyžaduje právník. Protože za půl roku jinak nikdo neví, co přesně bylo nasazeno.
+
+NIST AI Risk Management Framework je dobrovolný rámec pro řízení AI rizik v návrhu, vývoji, používání a vyhodnocování AI produktů, služeb a systémů ([NIST: AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)). Pro evropský SaaS tým může sloužit jako praktická inspirace: AI riziko není jen právní kolonka, ale průběžná práce s důvěryhodností, bezpečností, odpovědností, transparentností a soukromím.
+
+### Evals: testujte chování, ne jen demo
+
+AI funkce se netestuje jedním povedeným demem. Modely jsou pravděpodobnostní, prompt se může změnit, poskytovatel aktualizuje model a reální uživatelé píší divné věci. Potřebujete evals: opakovatelné testy kvality, bezpečnosti a užitečnosti.
+
+Minimální eval sada:
+
+- Běžné vstupy, které mají projít.
+- Hraniční vstupy: krátké, dlouhé, neúplné, vícejazyčné.
+- Citlivé vstupy: osobní údaje, interní poznámky, zákaznická tajemství.
+- Útoky: prompt injection, pokus o získání systémového promptu, snaha obejít oprávnění.
+- Formát: model musí vrátit validní JSON nebo konkrétní strukturu.
+- Neznalost: model má umět říct, že neví nebo nemá dost kontextu.
+- Náklady a latence: testy hlídají, jestli se funkce nevejde do limitů.
+
+U klasifikace můžete měřit přesnost proti ručně označeným příkladům. U shrnutí můžete měřit, jestli nevynechává kritické informace a nepřidává neexistující fakta. U generování odpovědí můžete měřit, jestli text nepřekračuje oprávnění, nepřidává právní sliby a drží tón značky.
+
+Praktické pravidlo: každá AI funkce, která se dotýká zákaznických dat nebo spouští obchodní akci, má mít před nasazením alespoň malou zlatou sadu příkladů a regresní test po změně promptu nebo modelu.
+
+### Human-in-the-loop: člověk má být na správném místě
+
+Lidská kontrola není omluva pro špatnou AI funkci. Pokud člověk musí pokaždé celé přečíst, ověřit a přepsat, AI nepomohla. Správný human-in-the-loop znamená, že člověk kontroluje rozhodující bod, ne supluje celý systém.
+
+Dobré vzory:
+
+- AI navrhne odpověď, člověk ji schválí.
+- AI vyplní pole, člověk vidí změny a uloží formulář.
+- AI označí riziko, člověk rozhodne o eskalaci.
+- AI navrhne dotaz, produkt ukáže náhled výsledku před spuštěním.
+- AI připraví draft článku nebo e-mailu, editor doplní zdroje a odpovědnost.
+
+Špatné vzory:
+
+- Člověk má "dohlížet", ale nevidí, z jakých dat AI vycházela.
+- Schválení je schované jako drobný checkbox po automatické akci.
+- Operátor je trestaný za to, že AI návrh nepoužil.
+- Produkt ukládá AI výstup jako fakt bez označení a historie.
+
+U citlivých oblastí potřebujete i možnost zpětné opravy. Kdo může výstup upravit? Kdo vidí historii? Jak zákazník pozná, že text vznikl s pomocí AI? Kdy se výstup smaže? Jak se řeší stížnost nebo incident?
+
+### Praktický AI playbook pro SaaS tým
+
+Než přidáte AI funkci, projděte tento postup:
+
+1. Napište uživatelský problém jednou větou.
+2. Popište současný tok bez AI a jeho náklady.
+3. Vyberte jeden konkrétní úkol pro AI.
+4. Určete, jaká data jsou nutná a co se nesmí poslat.
+5. Rozhodněte, jestli výstup jen radí, nebo spouští akci.
+6. Přidejte autorizaci, validaci a audit log mimo prompt.
+7. Nastavte nákladový a časový limit.
+8. Připravte eval s běžnými, hraničními a útočnými příklady.
+9. Sepište privacy a dodavatelský záznam.
+10. Dejte zákazníkovi srozumitelnou informaci a možnost vypnutí, pokud to dává smysl.
+
+Mini rozhodovací matice:
+
+- Vysoká hodnota, nízké riziko: interní shrnutí, návrhy textů, klasifikace s kontrolou.
+- Vysoká hodnota, vysoké riziko: rozhodování o přístupu, financích, právních závěrech nebo citlivých datech. Tady potřebujete silný dohled, dokumentaci a právní kontrolu.
+- Nízká hodnota, nízké riziko: možná později, pokud nezatíží produkt.
+- Nízká hodnota, vysoké riziko: nedělat. To je nejhezčí backlog položka k odstranění.
+
+### Checklist kapitoly
+
+- Řeší AI funkce konkrétní uživatelský problém, nebo jen přidává módní vrstvu?
+- Umíte popsat vstup, úkol, kontext, výstup, kontrolu a další akci?
+- Má funkce jasnou metriku hodnoty, ne jen metriku spotřeby?
+- Posíláte modelu jen data potřebná pro daný úkol?
+- Víte, kde se prompty, výstupy, embeddingy a logy zpracovávají a jak dlouho drží?
+- Respektuje retrieval oprávnění tenantu a uživatele před odesláním kontextu modelu?
+- Validujete modelový výstup jako nedůvěryhodný vstup?
+- Má agent nebo AI služba nejmenší možná oprávnění?
+- Jsou citlivé akce potvrzené člověkem nebo běžnou aplikační autorizací?
+- Máte eval s běžnými, hraničními a útočnými příklady?
+- Máte limit nákladů, délky vstupu, počtu kroků a latence?
+- Umíte funkci vypnout, změnit model nebo přejít na jiného poskytovatele?
+- Máte zapsaný dodavatelský, privacy a AI Act kontext?
+- Je uživateli jasné, kdy pracuje s AI výstupem a kdy s ověřeným faktem?
+
+AI ve webovém produktu má být přesná páka, ne mlhový stroj. Když ji zasadíte do konkrétního workflow, omezíte data, nastavíte hranice a měříte hodnotu, může zrychlit práci a zlepšit produkt. Když ji přilepíte na chaos, chaos se jen naučí mluvit plynuleji.
+
+### Zdroje kapitoly
+
+- [AI Act Service Desk: Timeline for the Implementation of the EU AI Act](https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act)
+- [AI Act Service Desk: AI Act Single Information Platform](https://ai-act-service-desk.ec.europa.eu/en)
+- [OWASP GenAI Security Project: 2025 Top 10 Risk & Mitigations for LLMs and Gen AI Apps](https://genai.owasp.org/llm-top-10/)
+- [OWASP: Top 10 for Large Language Model Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+- [NIST: AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -2559,3 +2874,4 @@ Integrace jsou užitečné, když rozšiřují schopnosti produktu bez ztráty k
 - 2026-05-05: Dopsána kapitola 10 o SaaS architektuře: tenanty, izolace dat, účty, role, billing, audit logy, session, API klíče a lifecycle tenantu.
 - 2026-05-05: Dopsána kapitola 11 o datovém modelu jako produktovém rozhodnutí: slovník domény, entity, události, integrita, tenant hranice, minimalizace dat, migrace a reporting.
 - 2026-05-05: Dopsána kapitola 12 o integracích, API a automatizaci: produktová hranice API, dokumentace, scope, webhooky, automatizace, dodavatelské riziko, verzování a monitoring.
+- 2026-05-05: Dopsána kapitola 13 o AI ve webových produktech: vhodné a nevhodné use casy, náklady, architektura, RAG, bezpečnost, privacy-first provoz, EU AI Act kontext a evals.
