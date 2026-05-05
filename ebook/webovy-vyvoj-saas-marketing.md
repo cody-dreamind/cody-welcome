@@ -1846,6 +1846,268 @@ MVP bez iluzí není malé proto, že tým nemá ambice. Je malé proto, že amb
 - [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
 - [Nielsen Norman Group: Usability Testing 101](https://media.nngroup.com/media/articles/attachments/UsabilityTesting101_Letter_Size.pdf)
 
+## Kapitola 10: SaaS architektura: tenanty, účty, billing, role a audit logy
+
+SaaS architektura není jen otázka frameworku, databáze a hezkého dashboardu. Je to sada rozhodnutí o tom, jak v jednom produktu bezpečně obsloužit více zákazníků, jak oddělit jejich data, jak řídit přístupy, jak účtovat používání, jak řešit změny v čase a jak dokázat, co se v systému stalo.
+
+Největší rozdíl proti běžné webové aplikaci je odpovědnost za opakovaný provoz pro více organizací. Když uděláte chybu v marketingovém webu, typicky rozbijete stránku. Když uděláte chybu v multi-tenant SaaS, můžete ukázat data jednoho zákazníka druhému. To není bug ve stylu "tlačítko je trochu níž". To je incident.
+
+OWASP Multi-Tenant Application Security Cheat Sheet popisuje multi-tenant aplikace jako aplikace, které obsluhují více zákazníků ze sdílené infrastruktury, codebase a často i sdílených databází; zároveň upozorňuje na rizika jako únik dat mezi tenanty, slabou izolaci, manipulaci s tenant kontextem, noisy neighbor problém a mezery v auditování ([OWASP: Multi-Tenant Application Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html)). Prakticky: SaaS architektura musí být navržená tak, aby chyba jednoho místa neměla nekontrolovatelný dopad na všechny zákazníky.
+
+### Tenant není jen firma v tabulce
+
+Tenant je hranice odpovědnosti. Nejčastěji to bývá zákaznická organizace, tým, workspace nebo účet firmy. Ale technicky nestačí přidat do tabulek sloupec `tenant_id` a prohlásit hotovo. Musíte rozhodnout, kde všude tenant existuje:
+
+- v databázových záznamech,
+- v URL a routingu,
+- v session nebo tokenu,
+- v cache,
+- v souborech a objektovém úložišti,
+- v queue a background jobech,
+- v logách,
+- v analytice,
+- v billing systému,
+- v administraci a support nástrojích.
+
+Příklad: aplikace má správně filtrované projekty podle `tenant_id`, ale exporty PDF ukládá do sdíleného bucketu pod názvem `report-123.pdf`. Pokud odkaz není vázaný na tenant a oprávnění, jeden zákazník může při chybě nebo hádání URL stáhnout cizí report. Izolace tedy není jen databázový filtr. Je to pravidlo napříč celým produktem.
+
+Praktické minimum:
+
+- Každý zákaznický objekt má jasné vlastnictví tenantem.
+- Každý request získá tenant kontext z důvěryhodného zdroje, ne z libovolného parametru.
+- Každý databázový dotaz na zákaznická data je omezen tenantem.
+- Cache klíče obsahují tenant kontext.
+- Soubory jsou oddělené podle tenantu a přístup kontroluje aplikace.
+- Background joby nesou tenant kontext explicitně.
+- Admin nástroje vyžadují důvod přístupu a logují zásah.
+
+Codyho komentář: multi-tenancy je místo, kde se optimismus mění v bezpečnostní dluh. "Tohle si vývojáři pohlídají" není architektura. To je přání s pull requestem.
+
+### Izolace dat: sdílená databáze, schema, nebo databáze pro zákazníka
+
+Neexistuje jedna správná izolace pro každý SaaS. Existují kompromisy.
+
+Základní modely:
+
+- Sdílená databáze, sdílené tabulky, `tenant_id` u záznamů.
+- Sdílená databáze, oddělená schémata pro tenanty.
+- Oddělená databáze pro každého většího zákazníka.
+- Hybrid: většina zákazníků sdíleně, enterprise zákazníci izolovaně.
+
+Sdílené tabulky jsou jednoduché na provoz, migrace a reporting. Zároveň vyžadují perfektní disciplínu v autorizaci a dotazech. Oddělená schémata nebo databáze snižují riziko náhodného úniku přes špatný filtr, ale zvyšují složitost migrací, monitoringu, záloh a podpory. Hybrid dává obchodně smysl u enterprise zákazníků, kteří chtějí silnější izolaci, ale tým musí umět provozovat dvě varianty bez chaosu.
+
+Rozhodujte podle těchto otázek:
+
+- Jak citlivá data produkt drží?
+- Jak velcí a regulovaní budou zákazníci?
+- Potřebují zákazníci vlastní region, zálohy nebo retenci?
+- Jak často budete měnit datový model?
+- Umíte automatizovat migrace napříč tenanty?
+- Potřebujete analyzovat agregovaná produktová data?
+- Jak rychle musí jít obnovit jeden tenant bez dopadu na ostatní?
+
+Pro první B2B SaaS často dává smysl sdílená databáze se striktním tenant filtrováním, testy izolace a dobrou provozní disciplínou. Pokud ale prodáváte do segmentu, kde zákazník očekává vlastní datovou hranici, audit a smluvní kontrolu nad daty, plánujte izolaci dřív. Přestavovat multi-tenancy za provozu je jako měnit základy domu, ve kterém právě probíhá konference.
+
+### Účty, identity a organizace
+
+U SaaS produktu rozlišujte člověka a organizaci. Jeden člověk může patřit do více organizací. Jedna organizace může mít více lidí. Role člověka se může lišit podle organizace.
+
+Model typu `user -> company_id` stačí jen u velmi jednoduchých aplikací. Jakmile uživatel může být ve více týmech, potřebujete vztah:
+
+- `users`: osoba a její přihlašovací identita,
+- `tenants` nebo `organizations`: zákaznická organizace,
+- `memberships`: vazba uživatele na tenant,
+- `roles` nebo oprávnění: co smí dělat v daném tenantovi,
+- `invitations`: pozvánky před vytvořením účtu.
+
+Tohle není akademická čistota. Je to ochrana před budoucími slepými uličkami. Pokud konzultant pracuje pro tři klienty, nemá mít tři oddělené účty se stejným e-mailem. Pokud zaměstnanec změní firmu, jeho přístup do starého tenantu má jít odebrat bez mazání identity. Pokud uživatel spravuje billing v jedné organizaci a jen čte data ve druhé, model to musí unést.
+
+OpenID Connect 1.0 definuje identitní vrstvu nad OAuth 2.0 a umožňuje klientům ověřit identitu uživatele na základě autentizace provedené autorizačním serverem ([OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html)). Pro B2B SaaS z toho plyne praktická věc: pokud míříte na firmy, připravte architekturu na federovanou identitu, SSO a firemní správu uživatelů. Nemusí být ve verzi jedna, ale model účtů by ji neměl blokovat.
+
+NIST SP 800-63B-4, vydaný jako finální část Digital Identity Guidelines v červenci 2025, se věnuje autentizaci a správě autentizátorů ([NIST CSRC: SP 800-63B-4](https://csrc.nist.gov/pubs/sp/800/63/B/4/final)). Není to povinná norma pro každý soukromý SaaS, ale je to dobrý zdroj pro přemýšlení o přihlašování, autentizačních úrovních, správě hesel, MFA a rizikových událostech.
+
+Praktické minimum pro účty:
+
+- E-mail ověřujte před citlivými akcemi.
+- Podporujte MFA pro administrátory a citlivé role.
+- U firemních zákazníků plánujte SSO jako enterprise vrstvu.
+- Pozvánky mají expiraci a jasný tenant kontext.
+- Změna e-mailu, hesla, MFA a role se loguje.
+- Deaktivace uživatele neznamená mazání auditní historie.
+
+### Role: RBAC stačí na začátek, ale nenechte ho explodovat
+
+Role mají odpovědět na otázku: kdo smí co udělat s jakým objektem a v jakém kontextu. Nejjednodušší je RBAC: admin, manager, member, viewer. Pro první verzi je to často správně. Problém začíná, když se role stanou skladem výjimek: admin bez billingu, manager jen pro jeden projekt, viewer s exportem, externista bez komentářů, auditor jen pro logy.
+
+OWASP Authorization Cheat Sheet upozorňuje, že nedostatky v autorizaci mohou vést k přístupu k cizím zdrojům a že RBAC může při větší komplexitě narazit na "role explosion"; u multi-tenant a mezi-organizačních scénářů zmiňuje jako výraznější modely ABAC nebo ReBAC ([OWASP: Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)).
+
+Praktický přístup:
+
+- Začněte malým počtem rolí.
+- Definujte oprávnění jako akce nad objekty, ne jen názvy rolí.
+- Kontrolujte oprávnění na serveru při každé citlivé akci.
+- Neposílejte rozhodnutí "může editovat" jen z frontendu.
+- Testujte, že uživatel nevidí objekty jiného tenantu ani při přímé URL.
+- U složitějších B2B scénářů oddělte policy od aplikační logiky.
+
+Příklad oprávnění:
+
+- `project.read`
+- `project.update`
+- `project.delete`
+- `member.invite`
+- `billing.manage`
+- `audit_log.read`
+- `export.create`
+
+Role je potom jen balíček těchto oprávnění. To pomáhá, když později potřebujete jemnější kontrolu bez kompletní přestavby.
+
+### Billing je produktová architektura, ne jen platba kartou
+
+Billing v SaaS není až poslední obrazovka. Ovlivňuje datový model, limity, onboarding, oprávnění, podporu, účetnictví i obchod. Per-seat model potřebuje přesně vědět, kdo je placený uživatel. Usage-based model potřebuje spolehlivě měřit jednotky použití. Enterprise model potřebuje smlouvy, fakturaci, limity, výjimky a ruční schvalování.
+
+Stripe Billing dokumentace uvádí pricing modely jako flat-rate, per-seat, usage-based, tiered, variable a multi-currency; u usage-based billing popisuje účtování podle používání produktu ve zvoleném období ([Stripe Docs: Billing](https://docs.stripe.com/billing?locale=en-GB)). Stripe je jen jeden příklad nástroje, ne doporučení pro každý evropský privacy-first provoz. Důležité je architektonické poučení: způsob účtování musí odpovídat tomu, co produkt spolehlivě měří a umí vysvětlit zákazníkovi.
+
+Před implementací billingu si napište:
+
+- Co je zákazník: tenant, workspace, organizace, nebo jednotlivý user?
+- Co je placená jednotka: seat, projekt, dokument, objem dat, API call, AI token, report?
+- Kdy se jednotka počítá: při vytvoření, dokončení, použití, nebo na konci období?
+- Co se stane při překročení limitu?
+- Kdo smí měnit plán a platební údaje?
+- Jak řešíte zrušení, downgrade, trial, refund a nezaplacenou fakturu?
+- Co musí zůstat dostupné po ukončení služby kvůli exportu dat?
+
+Privacy-first billing má ještě jednu otázku: musí všechna produktová data téct do platebního systému? Často ne. Platebnímu poskytovateli obvykle stačí zákazník, plán, fakturační údaje a agregovaná účtovací jednotka. Detailní obsah projektů, dokumentů nebo zákaznických záznamů má zůstat v produktu.
+
+Příklad: pokud účtujete podle počtu zpracovaných reportů, do billingu neposílejte názvy reportů a interní data zákazníka. Uložte si v produktu událost `report.completed`, přiřaďte ji tenantovi a do fakturační vrstvy posílejte jen počet účtovatelných reportů za období.
+
+### Audit log: paměť produktu
+
+Audit log není totéž co technický log. Technický log pomáhá vývojářům a provozu. Audit log odpovídá na otázku: kdo udělal jakou důležitou akci, kdy, nad čím a s jakým výsledkem.
+
+U B2B SaaS je audit log často důležitější, než se zdá v první verzi. Zákazník se zeptá: kdo pozval nového uživatele, kdo změnil roli, kdo exportoval data, kdo smazal projekt, kdo změnil billing, kdo se přihlásil přes SSO, kdo upravil nastavení integrace. Pokud odpověď zní "to bychom možná našli v serverových logách", produkt ještě není dospělý.
+
+OWASP Logging Cheat Sheet zdůrazňuje, že aplikační logging je víc než webserver logy a že aplikace sama má přístup k událostem, které infrastruktura nevidí; zároveň rozlišuje bezpečnostní, provozní, auditní a transakční logy podle účelu ([OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)).
+
+Auditujte hlavně:
+
+- přihlášení, odhlášení a rizikové autentizační události,
+- změny MFA, hesla a identity,
+- pozvánky, přijetí pozvánky a odebrání členů,
+- změny rolí a oprávnění,
+- vytvoření, export a smazání důležitých objektů,
+- změny billingu, plánů a platebních údajů,
+- změny integrací, API klíčů a webhooků,
+- administrátorský přístup supportu,
+- importy a hromadné akce.
+
+Dobrý audit log má obsahovat: čas, tenant, uživatele nebo systémový actor, akci, objekt, výsledek, technický kontext a případně důvod. Nemá obsahovat hesla, tokeny, celé citlivé dokumenty ani zbytečné osobní údaje. Audit log má být důvěryhodný, ale ne proměněný v nekonečné datové skladiště.
+
+### Session, tokeny a API klíče
+
+Jakmile SaaS nabídne webovou aplikaci, API nebo integrace, řešíte session a tokeny. Uživatel se přihlásí v prohlížeči, integrace volá API, webhook přijímá události, mobilní klient obnovuje token a admin mění oprávnění.
+
+OWASP Session Management Cheat Sheet doporučuje, aby session ID neobsahovalo citlivé informace a aby business logika spojená se session byla na serveru; také popisuje regeneraci session ID po změně úrovně oprávnění, timeouty a invalidaci při odhlášení ([OWASP: Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)). Pro SaaS to znamená: session není místo pro ukládání všeho, co se zrovna hodí frontendu.
+
+API klíče navrhujte jako produktovou funkci:
+
+- Patří tenantovi nebo konkrétnímu uživateli?
+- Jaké mají scope?
+- Kdy expirují?
+- Kdo je může vytvořit a zrušit?
+- Jak se zobrazí tajná hodnota a jak se rotuje?
+- Jaké akce s nimi jdou do audit logu?
+- Jak se rate limitují podle tenantu a plánu?
+
+OWASP REST Security Cheat Sheet u API klíčů připomíná, že veřejné REST služby bez kontroly přístupu mohou být zneužité k nadměrnému čerpání zdrojů, že API klíče mohou riziko snížit, ale nemají samy chránit citlivé a vysoce hodnotné zdroje ([OWASP: REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)).
+
+Praktický vzor: API klíč nikdy neukazujte znovu celý. Po vytvoření zobrazte tajemství jednou, uložte hash, zobrazujte jen prefix, povolte rotaci a každý request logujte tak, aby šel při incidentu přiřadit k tenantovi a klíči.
+
+### Onboarding a offboarding tenantu
+
+Tenant má životní cyklus. Vznikne, pozve lidi, nastaví data, používá produkt, změní plán, integruje systémy, možná odejde. Každý krok má bezpečnostní a provozní dopad.
+
+Onboarding:
+
+- vytvořit tenant s jednoznačným vlastníkem,
+- ověřit doménu nebo oprávnění zakladatele, pokud je to potřeba,
+- nastavit výchozí role a minimální oprávnění,
+- připravit ukázková data bez osobních údajů,
+- vysvětlit první hodnotu,
+- nastavit billing nebo pilotní režim,
+- vytvořit auditní stopu od prvního dne.
+
+Offboarding:
+
+- zastavit nové účtování podle pravidel smlouvy,
+- nabídnout export dat,
+- odebrat aktivní session a API klíče,
+- vypnout integrace a webhooky,
+- nastavit retenci pro pracovní kopie, logy a zálohy,
+- smazat nebo anonymizovat data podle dohodnutého procesu,
+- ponechat nezbytné účetní, bezpečnostní nebo auditní záznamy jen po jasně definovanou dobu.
+
+Tohle je privacy-first moment. Zákazník nemá být rukojmí. Produkt má umět vysvětlit, jak odejít, jak získat data a co se s nimi stane po ukončení. Vendor lock-in může krátkodobě vypadat obchodně výhodně, ale dlouhodobě ničí důvěru.
+
+### Praktický návrh první SaaS architektury
+
+Pro první B2B SaaS bych začal jednoduše, ale ne naivně:
+
+- `users` pro identity.
+- `organizations` jako tenanty.
+- `memberships` pro vazbu uživatele na organizaci.
+- `roles` a `permissions` jako čitelný model oprávnění.
+- Každý zákaznický objekt má `organization_id`.
+- Každý request má serverově ověřený tenant context.
+- Každá kritická akce má audit log.
+- Billing je navázaný na organizaci, ne na jednotlivého uživatele, pokud produkt prodáváte firmám.
+- API klíče patří organizaci a mají scope.
+- Export a smazání dat nejsou "později", ale minimálně navržený proces od začátku.
+
+K tomu přidejte testy izolace: uživatel z organizace A nesmí číst, měnit, exportovat ani mazat data organizace B, a to ani přes přímé URL, API, search, export, cache, background job nebo admin endpoint.
+
+Příklad testu v lidské řeči:
+
+1. Vytvoř tenant A a tenant B.
+2. V každém vytvoř projekt.
+3. Přihlas uživatele z tenantu A.
+4. Zkus načíst projekt B přes API.
+5. Zkus ho najít ve vyhledávání.
+6. Zkus export s ID projektu B.
+7. Očekávej odmítnutí a auditní záznam pokusu.
+
+Takové testy nejsou luxus. Jsou brzda před nejdražším typem SaaS chyby.
+
+### Checklist kapitoly
+
+- Je jasně definované, co je tenant a kde všude se propisuje?
+- Má každý zákaznický objekt vlastníka v tenantovi?
+- Kontrolujete tenant izolaci v databázi, cache, souborech, jobech, exportech a API?
+- Rozlišujete uživatele, organizaci, členství a roli?
+- Umí jeden uživatel patřit do více tenantů bez duplicitních účtů?
+- Jsou oprávnění kontrolovaná na serveru při každé citlivé akci?
+- Máte plán, kdy stačí RBAC a kdy už potřebujete jemnější policy model?
+- Je billing navržený podle skutečně měřitelné a vysvětlitelné jednotky?
+- Posíláte do fakturační vrstvy jen data nutná pro účtování?
+- Existuje audit log pro změny rolí, členů, billingu, exportů, integrací a admin přístup?
+- Jsou session, tokeny a API klíče rotovatelné, odvolatelné a auditované?
+- Má tenant popsaný onboarding i offboarding včetně exportu a retence?
+- Testujete, že tenant A nikdy nevidí data tenantu B přes přímé URL, API, cache ani export?
+
+SaaS architektura je dobrá tehdy, když chrání zákaznické hranice i při růstu. Nejde o to postavit všechno enterprise hned. Jde o to neudělat v první verzi rozhodnutí, která později znemožní izolaci dat, férový billing, auditovatelnost a odchod zákazníka. Privacy-first SaaS není jen "běží v Evropě". Je to produkt, který umí řídit přístup, účel, retenci a odpovědnost v každé vrstvě.
+
+### Zdroje kapitoly
+
+- [OWASP: Multi-Tenant Application Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multi_Tenant_Security_Cheat_Sheet.html)
+- [OWASP: Authorization Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authorization_Cheat_Sheet.html)
+- [OpenID Connect Core 1.0](https://openid.net/specs/openid-connect-core-1_0.html)
+- [NIST CSRC: SP 800-63B-4 Digital Identity Guidelines - Authentication and Authenticator Management](https://csrc.nist.gov/pubs/sp/800/63/B/4/final)
+- [Stripe Docs: Billing](https://docs.stripe.com/billing?locale=en-GB)
+- [OWASP: Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [OWASP: Session Management Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html)
+- [OWASP: REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -1857,3 +2119,4 @@ MVP bez iluzí není malé proto, že tým nemá ambice. Je malé proto, že amb
 - 2026-05-05: Dopsána kapitola 7 o privacy-first webu: datová mapa, analytika, cookies, třetí strany, evropský provoz, formuláře, logy a srozumitelná privacy komunikace.
 - 2026-05-05: Dopsána kapitola 8 o rozhodování, kdy web přerůstá v aplikaci: signály, datový model, přihlášení, provoz, bezpečnost a MVP workflow.
 - 2026-05-05: Dopsána kapitola 9 o MVP bez iluzí: rizika, rozhovory, segment, workflow, prototypy, pilot, měření a rozhodnutí po experimentu.
+- 2026-05-05: Dopsána kapitola 10 o SaaS architektuře: tenanty, izolace dat, účty, role, billing, audit logy, session, API klíče a lifecycle tenantu.
