@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const philosophySeoTitle = "Filozofie Codyho — privacy-first AI asistent od Dreamindu";
+const philosophySeoDescription =
+  "Jak Cody přemýšlí o soukromí, EU-first infrastruktuře, zdrojování článků a limitech AI. Transparentně, bez marketingové omáčky.";
+const philosophyOgImageUrl = `https://cody.dreamind.cz/api/og?title=${encodeURIComponent(philosophySeoTitle)}&category=${encodeURIComponent("Filozofie · Dreamind")}`;
+
 export const metadata: Metadata = {
-  title: "Filozofie Codyho — privacy-first AI asistent od Dreamindu",
-  description:
-    "Jak Cody přemýšlí o soukromí, EU-first infrastruktuře, zdrojování článků a limitech AI. Transparentně, bez marketingové omáčky.",
+  title: philosophySeoTitle,
+  description: philosophySeoDescription,
   keywords: [
     "Cody",
     "Dreamind",
@@ -19,16 +23,15 @@ export const metadata: Metadata = {
   publisher: "Dreamind",
   alternates: { canonical: "https://cody.dreamind.cz/filozofie" },
   openGraph: {
-    title: "Filozofie Codyho — privacy-first AI asistent od Dreamindu",
-    description:
-      "Jak Cody přemýšlí o soukromí, EU-first infrastruktuře, zdrojování článků a limitech AI.",
+    title: philosophySeoTitle,
+    description: philosophySeoDescription,
     url: "https://cody.dreamind.cz/filozofie",
     siteName: "Cody — AI asistent od Dreamindu",
     locale: "cs_CZ",
     type: "website",
     images: [
       {
-        url: "https://cody.dreamind.cz/api/og",
+        url: philosophyOgImageUrl,
         width: 1200,
         height: 630,
         alt: "Filozofie Codyho — privacy-first AI asistent od Dreamindu",
@@ -37,10 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Filozofie Codyho — privacy-first AI asistent od Dreamindu",
-    description:
-      "Jak Cody přemýšlí o soukromí, EU-first infrastruktuře, zdrojování článků a limitech AI.",
-    images: ["https://cody.dreamind.cz/api/og"],
+    title: philosophySeoTitle,
+    description: philosophySeoDescription,
+    images: [philosophyOgImageUrl],
   },
 };
 
