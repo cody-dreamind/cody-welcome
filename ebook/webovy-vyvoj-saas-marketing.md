@@ -5621,6 +5621,256 @@ Obsahový marketing pro SaaS není továrna na články. Je to veřejná dokumen
 - [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en)
 - [W3C WAI: Accessibility Principles](https://www.w3.org/WAI/fundamentals/accessibility-principles/)
 
+## Kapitola 24: SEO a AI vyhledávání: jak být citovatelný
+
+SEO se nemění tím, že by přestalo záležet na technickém webu, obsahu a důvěře. Mění se rozhraní. Část lidí už nehledá jen seznam modrých odkazů. Ptá se delšími větami, porovnává možnosti, nechává si shrnout téma a kliká méně často. Google v dokumentaci k AI Overviews a AI Mode říká, že pro zapojení do AI funkcí platí stejné základní SEO postupy jako pro běžné vyhledávání a že stránka musí být indexovatelná a způsobilá pro snippet ([Google Search Central: AI features and your website](https://developers.google.com/search/docs/appearance/ai-features?hl=en)).
+
+To je důležitá zpráva: nepotřebujete magický nový obor s drahou zkratkou. Potřebujete být dobrý zdroj. AI vyhledávání totiž posouvá otázku z "na jaké pozici jsem" na "jsem vůbec použitelný jako citovatelný zdroj pro odpověď".
+
+Pew Research Center ve studii chování amerických uživatelů Googlu v březnu 2025 zjistil, že stránky s AI souhrnem vedly k menšímu počtu kliků na výsledky než stránky bez AI souhrnu: 8 % návštěv s AI souhrnem vedlo ke kliku na tradiční výsledek, zatímco bez AI souhrnu to bylo 15 %. Klik přímo na odkaz v AI souhrnu nastal jen v 1 % návštěv se souhrnem ([Pew Research Center, 2025](https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/)). Není rozumné z toho dělat paniku. Je ale rozumné přestat měřit SEO jen jako hon za návštěvností a začít řešit viditelnost značky, přesnost citací, kvalitu zdrojových stránek a dopad na obchod.
+
+### Co znamená být citovatelný
+
+Citovatelný obsah má vlastnosti, které pomáhají člověku i stroji:
+
+- řeší konkrétní otázku, ne vágní téma,
+- má jasnou odpověď na začátku a detail níže,
+- uvádí autora, firmu, datum a kontext,
+- odděluje fakta, doporučení, názor a příklad,
+- odkazuje na primární zdroje, pokud tvrdí něco aktuálního nebo právního,
+- používá srozumitelné nadpisy,
+- má stabilní URL,
+- obsahuje strukturovaná data tam, kde dávají smysl,
+- nepřekáží crawlerům zbytečným JavaScriptem, paywallem nebo blokací,
+- neobsahuje marketingovou mlhu místo odpovědi.
+
+AI odpověď často skládá více zdrojů. Pokud stránka vypadá jako obecná brožura, je snadno nahraditelná. Pokud obsahuje jasné definice, konkrétní kroky, rozhodovací kritéria, tabulky, checklisty a zkušenost z praxe, má větší šanci být užitečná. Ne proto, že by AI milovala checklisty. Protože checklisty snižují nejasnost.
+
+### Staré SEO pořád platí, jen je méně tolerantní k prázdnotě
+
+Základní technické SEO zůstává nudně důležité:
+
+- stránka musí být indexovatelná,
+- kanonická URL musí ukazovat na správnou verzi,
+- sitemap má obsahovat důležité stránky,
+- interní odkazy mají vést crawlera i člověka,
+- titulky a meta description mají popisovat skutečný obsah,
+- stránka má být rychlá a čitelná na mobilu,
+- obsah nemá být duplicitní nebo nafouknutý.
+
+AI vyhledávání přidává jednu praktickou vrstvu: stránka musí jít snadno rozebrat na odpovědi. Dlouhý text bez mezititulků, s generickými odstavci a bez konkrétních závěrů se špatně používá. Nejen pro model. I pro člověka, který má tři minuty a nechce luštit korporátní poezii.
+
+Příklad slabého nadpisu:
+
+"Naše řešení pro moderní týmy"
+
+Silnější nadpis:
+
+"Kdy má B2B SaaS zavést audit logy"
+
+První nadpis prodává náladu. Druhý vytváří odpověditelnou jednotku. Pod takovým nadpisem může být konkrétní pravidlo: audit logy zaveďte nejpozději ve chvíli, kdy produkt pracuje s rolemi, více tenanty, citlivými operacemi nebo enterprise zákazníkem. To je věta, kterou jde citovat, zkontrolovat a použít v rozhodování.
+
+### Obsah pište jako znalostní bázi, ne jako kampaň
+
+Kampaň může být krátkodobá. Znalostní báze má vydržet. U AI vyhledávání je výhoda, když web obsahuje stránky, které nejsou jen prodejní, ale vysvětlují doménu:
+
+- definice pojmů,
+- srovnání přístupů,
+- návody krok za krokem,
+- rozhodovací stromy,
+- checklisty,
+- FAQ,
+- příklady datových modelů,
+- limity a rizika,
+- aktualizované právní a technické poznámky,
+- případové studie s reálným kontextem.
+
+Pro SaaS produkt může být lepší článek "Jak vybrat hodnotovou metriku pro usage-based pricing" než další text "Proč jsme nejlepší platforma pro růst". První článek řeší rozhodnutí. Druhý článek obvykle řeší ego.
+
+Codyho komentář: AI vyhledávání trestá obsah, který je jen lehce přepsaná reklamní brožura. Ne vždy hned a ne dokonale, ale směr je jasný. Když stránka neobsahuje informaci, kterou by stálo za to citovat, není moc co optimalizovat. To je nepříjemné, ale aspoň upřímné. SEO kouzelník s tím může mávat pláštěm, ale pod pláštěm je pořád prázdná stránka.
+
+### Struktura stránky pro odpověď
+
+Praktická šablona pro citovatelný článek:
+
+1. Jednovětá odpověď: co je hlavní závěr.
+2. Kontext: pro koho závěr platí a pro koho ne.
+3. Kritéria rozhodnutí: podle čeho vybrat variantu.
+4. Postup: kroky v pořadí, které jde použít.
+5. Příklad: konkrétní situace, ideálně s čísly nebo scénářem.
+6. Rizika: co se může pokazit.
+7. Checklist: rychlá kontrola.
+8. Zdroje: primární odkazy, dokumentace, metodiky.
+9. Datum aktualizace: aby bylo jasné, jak čerstvý text je.
+
+Tahle struktura není povinná pro každý článek. Je ale velmi užitečná pro témata, kde zákazník hledá rozhodnutí: "co mám udělat", "co je lepší", "jaké jsou povinnosti", "jak to nastavit", "jak poznám problém".
+
+### Strukturovaná data pomáhají vyjasnit kontext
+
+Strukturovaná data nejsou náhrada dobrého obsahu. Jsou to popisky pro stroje. Google u `Article` strukturovaných dat uvádí, že mohou pomoci lépe pochopit stránku a zobrazit přesnější informace jako titulek, obrázek nebo datum u článků ([Google Search Central: Article structured data](https://developers.google.com/search/docs/appearance/structured-data/article)). Schema.org u typu `Organization` například definuje vlastnosti jako `name`, `url`, `sameAs` nebo `mainEntityOfPage`, které pomáhají popsat identitu organizace ([Schema.org: Organization](https://schema.org/Organization)).
+
+Minimum pro odborný obsah:
+
+- `Article` nebo `BlogPosting` pro články,
+- `Organization` pro firmu,
+- `Person` nebo `Organization` jako autor,
+- `datePublished` a `dateModified`,
+- `headline`,
+- `description`,
+- `mainEntityOfPage`,
+- jasné kanonické URL,
+- breadcrumb navigace, pokud web používá hlubší strukturu.
+
+FAQ strukturovaná data používejte opatrně. Google omezuje FAQ rich results hlavně na autoritativní vládní a zdravotní weby ([Google Search Central: FAQPage structured data](https://developers.google.com/search/docs/appearance/structured-data/faqpage)). To neznamená, že FAQ na stránce nemá smysl. Znamená to, že FAQ pište hlavně pro lidi a jasnost, ne kvůli slibu speciálního vzhledu ve výsledcích.
+
+### Crawleři, robots.txt a rozdíl mezi vyhledáváním a tréninkem
+
+Tady je potřeba přesnost. Blokovat "AI" plošně může znít lákavě, ale různí crawleři mají různé účely. OpenAI ve své dokumentaci rozlišuje například `OAI-SearchBot` pro zobrazování webů ve vyhledávacích funkcích ChatGPT a `GPTBot` pro obsah, který může být použit při tréninku modelů. Dokumentace výslovně uvádí, že nastavení jsou nezávislá: web může povolit `OAI-SearchBot` pro vyhledávání a zároveň zakázat `GPTBot` pro trénink ([OpenAI: Overview of OpenAI Crawlers](https://developers.openai.com/api/docs/bots)).
+
+Praktický příklad pro web, který chce být dohledatelný v ChatGPT Search, ale nechce poskytovat obsah pro trénink:
+
+```txt
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Disallow: /
+```
+
+To není univerzální doporučení pro každou firmu. Je to příklad oddělení účelů. U každého crawlera se ptejte:
+
+- K čemu slouží?
+- Pomáhá nám být dohledatelní, nebo jen sbírá data pro cizí účel?
+- Má oficiální dokumentaci?
+- Respektuje `robots.txt`?
+- Umíme v logu ověřit, že se chová podle pravidel?
+- Je pro nás lepší povolit, omezit nebo blokovat?
+
+Google u AI funkcí v Search uvádí, že kontrola pro vlastníky webů vede přes běžné Googlebot a preview controls. Pro omezení zobrazovaného obsahu používá `nosnippet`, `data-nosnippet`, `max-snippet` nebo `noindex` ([Google Search Central: AI features and your website](https://developers.google.com/search/docs/appearance/ai-features?hl=en)). Dokumentace robots meta tagů zároveň říká, že `nosnippet` a `max-snippet` se vztahují i na AI Overviews a AI Mode ([Google Search Central: Robots meta tag](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag)).
+
+Privacy-first postoj není "všechno zakázat". Je to vědomě rozhodnout, co povolit, proč a komu. V evropském provozu je to zvlášť důležité, protože web často pracuje s obsahem, logy, zákaznickými dotazy a dokumentací, která může obsahovat obchodně citlivé informace.
+
+### Jak psát odpovědi, které se dají citovat
+
+Citovatelný odstavec má být samostatně pochopitelný. Ne ve smyslu vytržený z kontextu bez rizika, ale tak, aby dával smysl i v souhrnu.
+
+Slabé:
+
+"Moderní analytika pomáhá firmám lépe chápat zákazníky a optimalizovat výkon digitálních kanálů."
+
+Silnější:
+
+"Privacy-first analytika má měřit jen události, které vedou k rozhodnutí. U B2B webu obvykle stačí návštěva klíčové stránky, klik na kontakt, odeslání formuláře, zdroj návštěvy a technický stav formuláře. Jméno, e-mail ani obsah zprávy do analytického eventu nepatří."
+
+Silnější text obsahuje pravidlo, rozsah, příklad a hranici. To je přesně typ informace, kterou lze použít v AI odpovědi, sales e-mailu i interním checklistu.
+
+### Citovatelnost není jen text
+
+AI vyhledávání a klasické vyhledávače čerpají z více signálů. Stránka by měla mít jasnou identitu:
+
+- autor je dohledatelný,
+- firma má konzistentní název a popis,
+- kontaktní stránka není schovaná,
+- reference a case studies mají kontext,
+- důležité články odkazují na související produktové stránky,
+- produktové stránky odkazují na vysvětlující obsah,
+- obsah má datum úpravy,
+- staré informace jsou aktualizované nebo označené jako archiv.
+
+Bing ve vysvětlení výsledků uvádí mezi parametry relevance také kvalitu, čerstvost, autoritu a popularitu; u kvality a důvěryhodnosti zohledňuje mimo jiné jasnost účelu webu, použitelnost a reputaci ([Microsoft Support: How Bing delivers search results](https://support.microsoft.com/en-us/bing/how-bing-delivers-search-results)). To je hezký připomínač: citovatelnost není trik na jedné stránce. Je to reputace celého webu.
+
+### Měření AI vyhledávání bez sledovacího cirkusu
+
+Měření bude chvíli nečisté. Ne každý AI nástroj předává jasný referrer. Google zahrnuje AI funkce v Search Console do webového typu výkonu, ale neposkytuje vždy oddělený pohled pro každý AI prvek. OpenAI uvádí, že vydavatelé povolující `OAI-SearchBot` mohou sledovat referral traffic z ChatGPT v analytice, ale v praxi je dobré počítat s tím, že část dopadu bude nepřímá.
+
+Privacy-first měření:
+
+- sledujte referrery typu `chatgpt.com`, `perplexity.ai`, `bing.com`, `google.com`,
+- používejte UTM parametry jen u vlastních distribučních odkazů,
+- do eventů neposílejte osobní údaje,
+- měřte akce po příchodu: kontakt, demo, RSS, stažení šablony,
+- sledujte brand search dotazy v Search Console,
+- dělejte ruční kvartální testy klíčových dotazů v AI nástrojích,
+- ukládejte screenshot nebo poznámku jen interně, bez osobních údajů,
+- porovnávejte kvalitu leadů, ne jen počet návštěv.
+
+Praktická tabulka pro měsíční kontrolu:
+
+| Otázka | Co sledovat | Proč |
+| --- | --- | --- |
+| Objevuje se značka v odpovědích? | Ruční test 10-20 dotazů | AI nástroje nemusí poslat klik, ale mohou ovlivnit rozhodnutí |
+| Jsou citace správné? | URL, název, kontext | Špatná citace může poslat člověka na starý nebo nevhodný obsah |
+| Které stránky dostávají AI referrery? | Referrer + landing page | Pomůže zjistit, jaký typ obsahu funguje |
+| Vedou návštěvy k akci? | Kontakt, demo, RSS, interní proklik | Návštěvnost bez dalšího kroku je jen šum |
+| Neunikají citlivá data? | Logy, eventy, formuláře | Privacy-first SEO nesmí vytvářet nový datový nepořádek |
+
+### Playbook: jak zlepšit existující článek pro AI vyhledávání
+
+Vyberte jeden důležitý článek, který už existuje. Nezačínejte novým megaprojektem. Udělejte jednu kvalitní úpravu:
+
+1. Přepište nadpis tak, aby odpovídal konkrétní otázce nebo rozhodnutí.
+2. Přidejte první odstavec s jasnou odpovědí.
+3. Doplňte sekci "Kdy to platí a kdy ne".
+4. Rozdělte dlouhé odstavce na logické podnadpisy.
+5. Přidejte checklist nebo rozhodovací tabulku.
+6. Doplňte primární zdroje u faktů, které se mohou měnit.
+7. Zkontrolujte autora, datum aktualizace a kanonickou URL.
+8. Přidejte interní odkazy na související produktové a vzdělávací stránky.
+9. Ověřte indexaci a snippet pravidla.
+10. Po měsíci zkontrolujte Search Console, referrery a obchodní dopad.
+
+Příklad pro článek o SaaS onboardingu:
+
+- Slabý název: "Jak zlepšit onboarding"
+- Silnější název: "Jak definovat aktivační událost v B2B SaaS onboardingu"
+- Jasná odpověď: "Aktivační událost je první měřitelný okamžik, kdy uživatel zažije hodnotu produktu. Nemá to být přihlášení ani vytvoření účtu, ale dokončený pracovní výsledek."
+- Checklist: segment, první úkol, potřebná data, limit času, odpovědná role, signál úspěchu.
+
+Takový článek pomůže SEO, AI vyhledávání, sales i produktu. To je správný druh recyklace. Ne přepsat jeden text do patnácti slabších postů, ale udělat z něj užitečný zdroj.
+
+### Co nedělat
+
+- Nevyrábějte stovky mělkých článků jen proto, že AI umí generovat text rychle.
+- Neslibujte číselné benchmarky bez zdroje a data.
+- Neoptimalizujte pro jednu platformu tak, že rozbijete web pro lidi.
+- Nepřidávejte falešné FAQ, které jen opakuje klíčová slova.
+- Neblokujte všechny AI crawlers bez rozlišení účelu.
+- Neposílejte osobní údaje do analytických eventů kvůli "lepší atribuci".
+- Neberte `llms.txt` jako náhradu za sitemap, robots, strukturovaná data a kvalitní obsah.
+- Nehodnoťte úspěch jen podle kliků z AI odpovědí.
+
+Poznámka k `llms.txt`: jako jednoduchý kurátor důležitých URL může dávat smysl u dokumentace nebo znalostní báze, ale není to oficiální webový standard typu W3C/IETF a velké platformy ho nemusí používat konzistentně. Berte ho jako volitelný doplněk, ne jako strategii. Strategie je stále: dobrý obsah, jasná struktura, kontrolované crawlování, primární zdroje a vlastní měření.
+
+### Checklist kapitoly
+
+- Má každý důležitý článek jasnou otázku nebo rozhodnutí, které řeší?
+- Je hlavní odpověď viditelná na začátku stránky?
+- Jsou fakta, právní povinnosti a aktuální trendy podložené zdroji?
+- Má obsah autora, datum publikace a datum aktualizace?
+- Používáte `Article` nebo `BlogPosting` strukturovaná data tam, kde dávají smysl?
+- Je identita firmy popsaná konzistentně přes web a strukturovaná data?
+- Je `robots.txt` nastavený podle účelu crawlerů, ne podle emocí?
+- Rozlišujete vyhledávací crawlers od tréninkových crawlers?
+- Máte jasno, jestli chcete povolit `OAI-SearchBot`, `GPTBot`, Googlebot a další boty?
+- Používáte `nosnippet`, `data-nosnippet`, `max-snippet` nebo `noindex` jen vědomě?
+- Obsahuje stránka checklist, příklad, tabulku nebo rozhodovací kritéria?
+- Měříte AI referrery a následné akce bez osobních údajů?
+- Testujete kvartálně, jak se značka a klíčová témata objevují v AI odpovědích?
+- Aktualizujete starší obsah, aby AI i lidé necitovali vaše minulé já?
+
+AI vyhledávání je méně o honbě za trikem a víc o tom, jestli je web veřejně použitelná znalost firmy. Pokud ano, citovatelnost je přirozený důsledek. Pokud ne, žádný crawler vám reputaci nenajde. Maximálně najde hezkou prázdnotu s meta description.
+
+### Zdroje kapitoly
+
+- [Google Search Central: AI features and your website](https://developers.google.com/search/docs/appearance/ai-features?hl=en)
+- [Google Search Central: Robots meta tag, data-nosnippet, X-Robots-Tag](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag)
+- [Google Search Central: Article structured data](https://developers.google.com/search/docs/appearance/structured-data/article)
+- [Google Search Central: FAQPage structured data](https://developers.google.com/search/docs/appearance/structured-data/faqpage)
+- [OpenAI: Overview of OpenAI Crawlers](https://developers.openai.com/api/docs/bots)
+- [Pew Research Center: Google users are less likely to click on links when an AI summary appears in the results](https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/)
+- [Microsoft Support: How Bing delivers search results](https://support.microsoft.com/en-us/bing/how-bing-delivers-search-results)
+- [Schema.org: Organization](https://schema.org/Organization)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -5646,3 +5896,4 @@ Obsahový marketing pro SaaS není továrna na články. Je to veřejná dokumen
 - 2026-05-05: Dopsána kapitola 21 o škálování bez chaosu: standardizace, vlastnictví, proces, toil, runbooky, incidenty, technické hranice a hiring.
 - 2026-05-05: Dopsána kapitola 22 o marketingu bez kouřové clony: segment, konkrétní slib, důkazy, vlastní kanály, lead kvalita, privacy-first měření, dark patterns a pravidelný marketingový rytmus.
 - 2026-05-05: Dopsána kapitola 23 o obsahovém marketingu pro SaaS a služby: zákaznické otázky, fáze rozhodování, tématické clustery, formáty, distribuce, privacy-first měření, údržba a přístupnost.
+- 2026-05-05: Dopsána kapitola 24 o SEO a AI vyhledávání: citovatelnost, struktura odpovědí, crawleři, strukturovaná data, privacy-first měření a praktický playbook pro úpravu článků.
