@@ -4301,6 +4301,301 @@ Retence není snaha udržet každého za každou cenu. Je to schopnost opakovan�
 - [EUR-Lex: General Data Protection Regulation, Article 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
 - [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
 
+## Kapitola 19: Metriky: MRR, ARR, CAC, LTV, payback a aktivace
+
+Metriky nejsou ozdoba pro investor deck. Jsou provozní jazyk firmy. Když tým neví, co znamená MRR, jak počítá churn, kolik stojí získání zákazníka a kdy se nový účet poprvé dostane k hodnotě, rozhoduje podle pocitu. Pocit je dobrý signál pro rozhovor. Není to dobrý účetní systém pro SaaS.
+
+Největší chyba malých SaaS týmů není absence sofistikovaného BI nástroje. Největší chyba je, že metriky nemají jednotnou definici. Marketing počítá leady, sales počítá uzavřené dealy, produkt počítá registrace, finance počítají faktury a zakladatel v hlavě míchá cash flow, MRR a přání. Výsledkem je dashboard, který vypadá odborně, ale neřídí firmu.
+
+Dobrá metrika má tři vlastnosti:
+
+1. Má jasnou definici.
+2. Vede ke konkrétnímu rozhodnutí.
+3. Jde segmentovat bez zbytečného sběru osobních dat.
+
+Tato kapitola řeší praktický základ: MRR, ARR, CAC, LTV, payback a aktivaci. Ne proto, že by jiné metriky nebyly důležité, ale protože právě tyto ukazatele nejčastěji rozhodují, jestli SaaS roste zdravě, nebo jen pálí čas a peníze.
+
+### MRR a ARR: opakovaný příjem, ne nálada v bankovnictví
+
+MRR znamená monthly recurring revenue, tedy normalizovaný měsíční opakovaný příjem ze subscription modelu. ARR je annual run rate, často zjednodušeně `MRR x 12`. ChartMogul ve své knihovně SaaS metrik uvádí ARR právě jako násobek MRR dvanácti ([ChartMogul: SaaS Metrics Library](https://chartmogul.com/saas-metrics/)). Stripe Billing v analytics dokumentaci pracuje s MRR, churnem a aktivními subscribers jako konfigurovatelnými subscription metrikami nad billing daty ([Stripe Docs: Subscription analytics](https://docs.stripe.com/billing/subscriptions/analytics?locale=en-GB)).
+
+Prakticky to znamená: MRR není totéž jako peníze, které dnes přišly na účet. Roční platba se v MRR rozpočítává na měsíce. Jednorázová implementace nebo setup fee do MRR nepatří. Sleva, upgrade, downgrade, zrušení a pozastavení se musí promítnout podle pravidel, která tým zná.
+
+Rozdělte MRR pohyby minimálně takto:
+
+- New MRR: nový opakovaný příjem od nových zákazníků.
+- Expansion MRR: navýšení od existujících zákazníků.
+- Contraction MRR: snížení plánu nebo použití.
+- Churned MRR: ztracený opakovaný příjem ze zrušených účtů.
+- Reactivation MRR: návrat zákazníka, který už byl churned.
+
+Příklad:
+
+SaaS má na začátku měsíce MRR 10 000 EUR. Během měsíce získá nové zákazníky za 1 500 EUR, existující zákazníci navýší plán o 600 EUR, dva zákazníci sníží plán o 300 EUR a jeden odejde s MRR 500 EUR.
+
+Výpočet:
+
+```txt
+Koncové MRR = 10 000 + 1 500 + 600 - 300 - 500
+Koncové MRR = 11 300 EUR
+```
+
+Tento rozpad je důležitější než samotné koncové číslo. Ukazuje, jestli růst táhne akvizice, expanze, nebo jen dočasně přehlušený churn.
+
+Codyho komentář: MRR bez pohybů je jako váha bez informace, co jíte. Číslo se změnilo, gratuluji, ale pořád nevíte proč. A "proč" je přesně ta část, ze které vzniká řízení firmy.
+
+### MRR není účetnictví
+
+MRR je manažerská metrika. Účetnictví a cash flow mají vlastní pravidla. Když zákazník zaplatí roční plán dopředu, cash flow vypadá krásně, ale MRR se má normalizovat. Když zákazník nezaplatí fakturu, podle billing pravidel se může stát past due, unpaid nebo churned. Pokud tým tyto stavy nerozlišuje, metriky začnou lhát.
+
+U každé subscription metriky si proto napište:
+
+- Kdy se nový zákazník počítá do MRR.
+- Jak zacházíte se trialem.
+- Jak počítáte roční a měsíční platby.
+- Jak zacházíte se slevami, kredity a refundy.
+- Kdy past due účet přestává být aktivní MRR.
+- Jestli usage-based část normalizujete, nebo ji sledujete odděleně.
+- Jak zacházíte s jednorázovými službami.
+
+Pro malé týmy je nejbezpečnější mít jeden zdroj pravdy pro billing a jeden export nebo dashboard, který používají všichni. Spreadsheet je na začátku v pořádku, pokud má jasné definice. Horší je mít tři automatizované dashboardy, které se neshodnou a každý má pravdu podle jiného filtru.
+
+### CAC: kolik opravdu stojí nový zákazník
+
+CAC znamená customer acquisition cost. Zjednodušeně: kolik vás stojí získat nového zákazníka. Problém je ve slově "stojí". Některé týmy počítají jen reklamní spend. Jiné přidají agenturu, obsah, nástroje, sales mzdy, provize, demo čas a onboarding před podpisem. Obě čísla mohou být užitečná, ale nesmí se míchat.
+
+Základní výpočet:
+
+```txt
+CAC = náklady na akvizici za období / počet nových zákazníků za období
+```
+
+Prakticky sledujte alespoň dvě verze:
+
+- Blended CAC: všechny sales a marketing náklady dělené všemi novými zákazníky.
+- Paid CAC: placené akviziční náklady dělené zákazníky z placených kanálů.
+
+U B2B SaaS často dává smysl sledovat CAC podle segmentu:
+
+- self-serve zákazník,
+- sales-assisted zákazník,
+- enterprise zákazník,
+- partner channel,
+- inbound z obsahu,
+- outbound.
+
+Příklad:
+
+Pokud utratíte 4 000 EUR za reklamu a získáte 20 zákazníků z placených kampaní, paid CAC je 200 EUR. Pokud ale na stejnou akvizici pracoval sales člověk, freelancer na landing page, nástroj na e-mailing a dva týdny founder času, blended pohled bude vyšší. To neznamená, že kampaň nefunguje. Znamená to, že potřebujete vědět, jaké rozhodnutí právě děláte.
+
+Časté chyby:
+
+- Počítat CAC jen z reklamního spendu a ignorovat sales práci.
+- Míchat leady, trialy a platící zákazníky.
+- Porovnávat CAC napříč segmenty bez ohledu na velikost účtu.
+- Vyhodnocovat kanál dřív, než zákazníci prošli aktivací a retencí.
+- Neoddělit jednorázovou launch kampaň od opakovatelné akvizice.
+
+CAC bez retence je nebezpečné číslo. Levný zákazník, který odejde po měsíci, není levný. Drahý zákazník, který zůstane tři roky a roste, může být výborná investice.
+
+### LTV: užitečný odhad, ne křišťálová koule
+
+LTV znamená lifetime value, tedy odhad hodnoty zákazníka za dobu, kdy službu používá. ChartMogul popisuje LTV jako odhad příjmu, který získáte od průměrného subscriberu během jeho životnosti ([ChartMogul: SaaS Metrics Library](https://chartmogul.com/saas-metrics/)).
+
+Jednoduchý rámec:
+
+```txt
+LTV = průměrný měsíční příjem na účet x hrubá marže x očekávaná délka vztahu
+```
+
+Nebo zjednodušeně přes churn:
+
+```txt
+LTV = ARPA x hrubá marže / měsíční churn rate
+```
+
+Tento výpočet je citlivý na vstupy. Pokud máte málo zákazníků, krátkou historii nebo churn skáče podle několika účtů, LTV bude spíš pracovní odhad než pravda. To nevadí, pokud s ním tak zacházíte.
+
+Používejte LTV hlavně k otázkám:
+
+- Který segment má dlouhodobě vyšší hodnotu?
+- Vyplatí se sales-assisted proces?
+- Má levnější plán skutečně dobrý onboarding a retenci?
+- Který kanál přivádí zákazníky, kteří zůstávají?
+- Kde má smysl investovat do expanze?
+
+Nepoužívejte LTV jako alibi pro neomezený marketing spend. Pokud model říká, že zákazník má LTV 5 000 EUR, ale historicky máte jen tři měsíce dat, není to povolenka utratit 2 000 EUR za akvizici bez dalších signálů. To je tabulkový optimismus. Vypadá elegantně, dokud nepřijde cash flow.
+
+### CAC payback: kdy se akvizice vrátí
+
+Payback period říká, za kolik měsíců se vrátí náklady na získání zákazníka. Pro malé SaaS týmy je často praktičtější než vzdálené LTV, protože řeší hotovost a rychlost učení.
+
+Jednoduchý výpočet:
+
+```txt
+CAC payback v měsících = CAC / měsíční hrubý zisk z účtu
+```
+
+Pokud CAC je 300 EUR, zákazník platí 100 EUR měsíčně a hrubá marže je 80 %, měsíční hrubý zisk je 80 EUR.
+
+```txt
+Payback = 300 / 80 = 3,75 měsíce
+```
+
+To je velmi jiná situace než CAC 1 500 EUR u stejného plánu:
+
+```txt
+Payback = 1 500 / 80 = 18,75 měsíce
+```
+
+Není potřeba si hned pamatovat univerzální benchmark. Důležitější je chápat dopad na firmu. Dlouhý payback znamená, že růst spotřebovává hotovost dřív, než ji vrací. U enterprise SaaS to může být přijatelné, pokud jsou kontrakty větší a retence silná. U malého self-serve produktu může dlouhý payback znamenat, že placená akvizice škáluje hlavně ztrátu.
+
+Sledujte payback podle kanálu a segmentu. Průměr umí lhát. Jeden kanál může přivádět levné účty s vysokým churnem, druhý dražší účty s rychlou aktivací a expanzí. Pokud je hodíte do jednoho čísla, přijdete o rozhodnutí.
+
+### Aktivace: první důkaz hodnoty
+
+Aktivace je moment, kdy zákazník poprvé zažije hodnotu, kterou produkt slíbil. Není to registrace. Není to potvrzený e-mail. Není to "uživatel klikl na tři věci". Aktivace musí souviset s tím, proč produkt existuje.
+
+Příklady aktivačních událostí:
+
+- Projektový SaaS: uživatel vytvořil první projekt, přidal kolegu a dokončil první workflow.
+- Fakturační nástroj: uživatel vystavil a odeslal první fakturu.
+- Monitoring: uživatel přidal první službu a dostal první smysluplný alert.
+- Knowledge base: tým publikoval první interní stránku a alespoň dva lidé ji otevřeli.
+- Marketingový nástroj: uživatel vytvořil první kampaň a vidí první výsledek.
+- Privacy-first analytika: web poslal první agregovanou návštěvnost a uživatel označil hlavní konverzi.
+
+Dobrá aktivační metrika má být:
+
+- blízko skutečné hodnotě,
+- měřitelná bez čtení citlivého obsahu,
+- segmentovatelná podle typu zákazníka,
+- dosažitelná v rozumném čase,
+- použitelná pro onboarding rozhodnutí.
+
+Špatná aktivační metrika:
+
+- počet přihlášení,
+- počet otevřených obrazovek,
+- počet kliků,
+- vyplnění profilu bez vazby na hodnotu,
+- "strávil v aplikaci deset minut".
+
+Čas v aplikaci může znamenat zájem. Může také znamenat zmatek. Pokud produkt slibuje úsporu času, dlouhý čas v aplikaci není automaticky úspěch. To je oblíbená past produktové analytiky: měří aktivitu, ne hodnotu.
+
+### Funnel: od návštěvy k aktivovanému příjmu
+
+Pro SaaS nestačí měřit jen marketingový funnel do registrace. Potřebujete propojit cestu až k aktivovanému a retenčnímu příjmu.
+
+Jednoduchý funnel:
+
+1. Relevantní návštěva: člověk přišel na stránku, která odpovídá jeho problému.
+2. Kvalifikovaný zájem: demo, trial, kontakt nebo interakce s klíčovou stránkou.
+3. Nový účet nebo deal: vznikl platící zákazník nebo jasný trial.
+4. Aktivace: zákazník dosáhl první hodnoty.
+5. Retence nebo expanze: zákazník hodnotu opakuje, zůstává nebo roste.
+
+Tento pohled mění marketing. Kanál, který přivádí hodně trialů, ale má slabou aktivaci, není automaticky dobrý. Kanál, který přivádí méně lidí, ale ti dosáhnou hodnoty a zůstávají, může být strategicky silnější.
+
+Privacy-first měření tady neznamená, že nemůžete měřit funnel. Znamená to, že měříte události a stavy, ne zbytečné profily jednotlivců. Pro mnoho rozhodnutí stačí agregace podle kanálu, segmentu, plánu a kohorty. Citlivý obsah projektů, zpráv, souborů nebo interních dat zákazníka do analytiky nepatří.
+
+### Metriky pro týdenní řízení
+
+Malý SaaS tým nepotřebuje padesát grafů. Potřebuje rytmus. Jednou týdně projděte krátký dashboard, kde každé číslo vede k otázce.
+
+Základní týdenní pohled:
+
+- MRR na začátku a konci týdne.
+- New, expansion, contraction a churned MRR.
+- Nové trialy nebo dema podle kanálu.
+- Aktivační rate podle segmentu.
+- Počet účtů, které uvízly před aktivací.
+- Past due MRR a obnovitelné platby.
+- Nejčastější support nebo onboarding důvod.
+- Jedna metrika kvality produktu, například dokončený hlavní workflow.
+
+Měsíční pohled:
+
+- ARR nebo MRR trend.
+- Logo churn a revenue churn.
+- GRR a NRR.
+- CAC podle kanálu.
+- Payback podle segmentu.
+- LTV odhad podle segmentu, pokud máte dost dat.
+- Funnel od návštěvy po aktivaci.
+- Retenční kohorty.
+
+U každé metriky si přidejte rozhodovací otázku:
+
+- Když číslo stoupá, co uděláme?
+- Když klesá, kdo to řeší?
+- Jak poznáme, že je změna šum?
+- Jaký detail potřebujeme segmentovat?
+- Jaký zásah by měl změnu ovlivnit?
+
+Dashboard bez rozhodovacích otázek je jen tapeta pro meeting. Hezká, ale drahá.
+
+### Datová kvalita a privacy-first provoz
+
+Metriky jsou jen tak dobré jako data pod nimi. U SaaS se chyby často schovávají v billing stavech, testovacích účtech, ručně přepsaných slevách, interních workspaces, refundech, trialech a migracích.
+
+Praktická pravidla:
+
+- Oddělte produkční zákazníky od interních a testovacích účtů.
+- Každý plán má jasnou billing kategorii.
+- Ruční slevy mají důvod a datum konce.
+- Zrušení, downgrade a nezaplacená platba nejsou jedna kategorie.
+- Aktivace je event, který produkt umí vysvětlit.
+- Marketingový zdroj neukládejte do citlivého zákaznického obsahu.
+- Retenční a produktové eventy navrhujte bez ukládání textů, souborů nebo soukromých detailů.
+- Přístupy k dashboardům omezte podle role.
+
+GDPR princip minimalizace dat říká, že osobní údaje mají být přiměřené, relevantní a omezené na to, co je nezbytné pro účely zpracování ([EUR-Lex: GDPR, Article 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)). V metrikách to není brzda. Je to dobrá architektura. Když event `invoice_created` nebo `project_created` stačí k rozhodnutí, nepotřebujete posílat celý obsah faktury nebo projektu do analytiky.
+
+### Praktický workshop metrik
+
+Na začátku si vystačíte s dvouhodinovým workshopem.
+
+Postup:
+
+1. Napište aktuální definici MRR, churnu, aktivace a zákazníka.
+2. U každé definice označte nejasnosti.
+3. Vyberte jeden zdroj pravdy pro billing.
+4. Rozdělte MRR pohyby na new, expansion, contraction, churn a reactivation.
+5. Definujte aktivační událost pro hlavní segment.
+6. Spojte akviziční kanál s aktivací, ne jen s registrací.
+7. Spočítejte blended CAC a jeden segmentový CAC.
+8. Spočítejte orientační payback pro hlavní plán.
+9. Určete pět metrik pro týdenní meeting.
+10. Ke každé metrice napište rozhodnutí, které má ovlivnit.
+
+Výstup nemá být dokonalý model. Výstup má být sdílený jazyk. Jakmile tým používá stejná slova pro stejná čísla, začne se bavit o rozhodnutích místo o tom, čí tabulka má pravdu.
+
+### Checklist kapitoly
+
+- Máte jednotnou definici MRR a ARR?
+- Oddělujete new, expansion, contraction, churned a reactivation MRR?
+- Víte, jak do MRR vstupují trialy, slevy, roční platby, refundy a past due účty?
+- Rozlišujete cash flow, účetní výnosy a subscription metriky?
+- Počítáte CAC podle jasně určených nákladů?
+- Sledujete blended CAC i CAC podle důležitých kanálů nebo segmentů?
+- Neporovnáváte levné trialy s kvalitními aktivovanými zákazníky jako stejný úspěch?
+- Používáte LTV jako odhad, ne jako jistotu?
+- Sledujete CAC payback podle plánu, kanálu a segmentu?
+- Máte definovanou aktivační událost, která odpovídá skutečné hodnotě produktu?
+- Měříte funnel až k aktivaci a retenci, ne jen k registraci?
+- Sbíráte pro metriky jen data, která potřebujete pro rozhodnutí?
+- Jsou dashboardy přístupné podle role a bez citlivého obsahu zákazníků?
+- Má každá hlavní metrika vlastníka a rozhodovací otázku?
+
+Metriky mají firmu zklidnit, ne zahltit. Když víte, jak vzniká MRR, kolik stojí zákazník, kdy se akvizice vrací a kde zákazník poprvé zažije hodnotu, můžete řídit růst bez kouřové clony. SaaS pak není jen produkt s předplatným. Je to systém slibů, peněz, dat a opakované hodnoty.
+
+### Zdroje kapitoly
+
+- [Stripe Docs: Subscription analytics](https://docs.stripe.com/billing/subscriptions/analytics?locale=en-GB)
+- [ChartMogul: SaaS Metrics Library](https://chartmogul.com/saas-metrics/)
+- [EUR-Lex: General Data Protection Regulation, Article 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -4321,3 +4616,4 @@ Retence není snaha udržet každého za každou cenu. Je to schopnost opakovan�
 - 2026-05-05: Dopsána kapitola 16 o SaaS pricingu: hodnotová metrika, per-seat, usage-based, hybrid, enterprise, ceník, slevy a privacy-first billing.
 - 2026-05-05: Dopsána kapitola 17 o SaaS onboardingu: první výsledek, aktivační událost, segmentace, trial, týmové signály, privacy-first data flow a praktický workshop.
 - 2026-05-05: Dopsána kapitola 18 o retenci a churnu: typy churnu, health signály, cancellation flow, involuntary churn, expanze, churn interviews a privacy-first měření.
+- 2026-05-05: Dopsána kapitola 19 o SaaS metrikách: MRR, ARR, CAC, LTV, payback, aktivace, funnel, datová kvalita a privacy-first měření.
