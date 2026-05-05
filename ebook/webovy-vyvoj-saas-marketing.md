@@ -2860,6 +2860,308 @@ AI ve webovém produktu má být přesná páka, ne mlhový stroj. Když ji zasa
 - [OWASP: Top 10 for Large Language Model Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 - [NIST: AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 
+## Kapitola 14: Bezpečnost a provoz: zálohy, monitoring, incidenty
+
+Bezpečnost a provoz nejsou závěrečná dekorace před spuštěním. Jsou to podmínky, aby produkt přežil první reálné uživatele, první chybu v integraci, první výpadek databáze, první špatné oprávnění a první pátek večer, kdy něco přestane fungovat přesně ve chvíli, kdy všichni chtějí být offline.
+
+Malý SaaS tým nepotřebuje hned bezpečnostní oddělení, SOC, tři certifikace a šanon procesů. Potřebuje ale vědět:
+
+1. Co chrání.
+2. Proti čemu se realisticky brání.
+3. Kdo má k čemu přístup.
+4. Jak pozná problém.
+5. Jak obnoví službu.
+6. Jak incident zdokumentuje a komunikuje.
+
+Dobrá bezpečnost v produktu není o paranoii. Je to provozní hygiena. Stejně jako testy, migrace a účetnictví: když ji odkládáte, dluh se neztratí. Jen si počká na horší okamžik.
+
+### Začněte modelem rizik, ne nákupem nástrojů
+
+Nejhorší bezpečnostní plán je seznam nástrojů bez kontextu. SAST, WAF, SIEM, EDR, pentest, bug bounty, secret scanning. Všechno může být užitečné. Nic z toho ale samo neodpoví, co je pro váš produkt největší riziko.
+
+První bezpečnostní workshop může být jednoduchý:
+
+- Jaká data držíme?
+- Která data jsou osobní, citlivá, obchodně důvěrná nebo zákaznicky kritická?
+- Kdo jsou uživatelé a jaká mají oprávnění?
+- Jaké integrace mohou číst nebo měnit data?
+- Co se stane, když selže přihlášení, billing, webhook, databáze nebo e-mail?
+- Co je nejhorší realistický scénář pro zákazníka?
+- Co je nejhorší realistický scénář pro naši firmu?
+
+Příklad: jednoduchý fakturační SaaS nemá největší riziko v tom, že někdo zničí homepage. Kritické je, aby jeden tenant neviděl faktury druhého, aby webhooky nešlo podvrhnout, aby exporty neunikaly přes špatná oprávnění, aby šly obnovit údaje po chybné migraci a aby administrátor neměl trvalý přístup bez auditní stopy.
+
+NIST Cybersecurity Framework 2.0 popisuje kybernetickou bezpečnost přes šest funkcí: Govern, Identify, Protect, Detect, Respond a Recover ([NIST Cybersecurity Framework](https://www.nist.gov/cyberframework)). Pro malý tým je to dobrá mentální mapa. Nepotřebujete kopírovat celý rámec. Stačí si položit otázku, jestli máte aspoň základ pro řízení, identifikaci aktiv, ochranu, detekci, reakci a obnovu.
+
+### Bezpečný vývoj: standard jako checklist, ne kouzelná pečeť
+
+OWASP Application Security Verification Standard poskytuje seznam požadavků pro bezpečný vývoj a testování webových aplikací ([OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/)). Pro SaaS tým je užitečný hlavně jako kontrolní mapa: autentizace, správa session, validace vstupů, řízení přístupu, kryptografie, API, chyby, logování, konfigurace a ochrana dat.
+
+Prakticky si pro MVP vyberte minimum, které musí platit hned:
+
+- Všechna přístupová rozhodnutí jsou na serveru, ne v UI.
+- Každý dotaz na data kontroluje tenant a oprávnění uživatele.
+- Hesla se nikdy neukládají v čitelné podobě.
+- Session a tokeny mají expiraci, rotaci a možnost zneplatnění.
+- API klíče mají scope, název, datum vytvoření, poslední použití a možnost revoke.
+- Formuláře a API validují vstup podle schématu.
+- Chybové hlášky neprozrazují interní detaily.
+- Produkční konfigurace nemá debug režim.
+- Tajemství nejsou v repozitáři, logu ani klientském JavaScriptu.
+- Administrátorské akce se zapisují do audit logu.
+
+Bezpečnostní review má být součást vývoje, ne speciální svátek jednou za rok. U každé větší změny se ptejte:
+
+- Přibyl nový typ dat?
+- Přibylo nové oprávnění?
+- Přibylo nové místo, kde se dá exportovat nebo mazat?
+- Přibyl nový externí příjemce dat?
+- Změnila se hranice tenantu?
+- Změnil se billing, role nebo auditní stopa?
+
+Codyho komentář: bezpečnostní checklist není sexy. To je v pořádku. Ani záloha databáze není sexy, dokud ji nepotřebujete. Pak se z ní najednou stane nejdůležitější soubor v infrastruktuře. Provoz umí člověka naučit skromnosti dost rychle.
+
+### Oprávnění: nejčastější SaaS problém je horizontální únik dat
+
+V SaaS produktech je izolace tenantů základní slib. Pokud jeden zákazník uvidí data druhého, není to drobná chyba v rohu aplikace. Je to porušení důvěry.
+
+Pravidla pro tenant bezpečnost:
+
+- `tenant_id` není jen sloupec. Je to bezpečnostní hranice.
+- Každý read, write, export, webhook a background job musí mít tenant kontext.
+- Admin rozhraní musí mít přísnější logging než běžné UI.
+- Sdílené odkazy musí mít expiraci, scope a možnost zneplatnění.
+- Importy a exporty musí respektovat stejná oprávnění jako obrazovka v aplikaci.
+- Testy mají obsahovat pokus o přístup k cizímu tenantu.
+
+Příklad regresního testu:
+
+```text
+Uživatel A patří do tenant_1.
+Uživatel B patří do tenant_2.
+Faktura X patří do tenant_2.
+
+Když uživatel A zavolá /api/invoices/X,
+server musí vrátit 404 nebo 403,
+ne detail faktury a ne odkaz ke stažení PDF.
+```
+
+Chyby tohoto typu často vznikají v pomocných funkcích: export CSV, náhled PDF, webhook retry, admin filtr, fulltext, reporting, background job. Hlavní obrazovka bývá ošetřená. Vedlejší cesta bývá rychle dopsaná. A přesně tam bezpečnost ráda zakopává.
+
+### Tajemství a konfigurace: žádný klíč není "jen testovací"
+
+API klíče, databázová hesla, OAuth secrety, webhook signing secrets, SMTP hesla a privátní klíče patří do správy tajemství, ne do repozitáře, poznámek, screenshotů nebo chatu.
+
+Minimum:
+
+- `.env` soubory nejsou commitované.
+- CI kontroluje únik tajemství před mergem.
+- Produkční tajemství jsou oddělená od vývojových.
+- Každý externí klíč má vlastní název a účel.
+- Klíče lze rotovat bez výpadku nebo s jasným krátkým postupem.
+- Přístup k produkčním tajemstvím má jen ten, kdo ho opravdu potřebuje.
+- Když někdo z týmu odchází, přístupy se odeberou a klíče s osobním kontextem se rotují.
+
+Praktická tabulka pro tým:
+
+```text
+Název tajemství | Účel | Prostředí | Kde je uloženo | Kdo má přístup | Rotace | Poslední kontrola
+STRIPE_WEBHOOK_SECRET | Ověření billing webhooků | prod | secret manager | backend tým | při incidentu / změně | 2026-05-05
+```
+
+Privacy-first provoz k tomu přidává otázku: posílá tento klíč data mimo EU, mimo naši kontrolu nebo do služby, která sbírá víc, než potřebujeme? Ne každý externí nástroj je problém. Problém je nevědět, kam data tečou.
+
+### Zálohy: dokud neobnovíte, nemáte zálohu
+
+Záloha není soubor, který někde existuje. Záloha je schopnost obnovit službu do použitelného stavu v čase, který byznys přežije.
+
+U každého systému určete:
+
+- RPO: kolik dat si můžete dovolit ztratit.
+- RTO: jak dlouho může služba být mimo provoz.
+- Co se zálohuje: databáze, soubory, média, konfigurace, tajemství, DNS, infrastruktura.
+- Kde záloha leží a v jakém regionu.
+- Kdo ji umí obnovit.
+- Jak často se testuje obnova.
+- Jak se chrání zálohy proti smazání, ransomware a chybě administrátora.
+
+Příklad:
+
+```text
+Marketingový web:
+RPO: 24 hodin
+RTO: 4 hodiny
+Záloha: repozitář, CMS export, média, DNS screenshot
+
+B2B SaaS:
+RPO: 15 minut
+RTO: 1 hodina pro kritické workflow
+Záloha: databáze point-in-time recovery, object storage, konfigurace, audit logy, infrastruktura jako kód
+```
+
+Test obnovy dělejte jako normální úkol. Vytvořte izolované prostředí, obnovte databázi, spusťte aplikaci, ověřte přihlášení, tenant data, klíčové obrazovky a exporty. Pokud obnova závisí na člověku, který "ví, jak se to dělá", proces není hotový. Je jen uložený v hlavě. To je storage s mizerným SLA.
+
+### Monitoring: měřte zdraví služby, ne jen návštěvnost
+
+Analytika říká, co dělají uživatelé. Monitoring říká, jestli produkt žije. Obojí je důležité, ale nemíchejte je.
+
+Minimální provozní monitoring:
+
+- Dostupnost hlavních URL a API endpointů.
+- Chybovost serveru a klienta.
+- Latence kritických akcí.
+- Stav databáze, front, jobů a diskového prostoru.
+- Expirace certifikátů a domén.
+- Selhání plateb, webhooků, e-mailů a importů.
+- Počet neúspěšných přihlášení a podezřelé změny oprávnění.
+- Stav záloh a výsledek posledního restore testu.
+
+Alerty nastavujte podle dopadu, ne podle každého šumu. Dobrý alert říká:
+
+- Co se stalo.
+- Jaký je dopad.
+- Jak dlouho to trvá.
+- Koho se to týká.
+- Kde je runbook.
+- Kdo je odpovědný za první reakci.
+
+Špatný alert říká jen "něco je červené". To je barevná úzkost, ne provozní informace.
+
+Privacy-first monitoring znamená sbírat technická data potřebná k provozu, ale neskladovat zbytečně celé payloady, osobní údaje, přístupové tokeny nebo obsah zákaznických dokumentů. OWASP Logging Cheat Sheet připomíná, že aplikační logování je důležité pro bezpečnost i provoz, ale musí být konzistentní a použitelné pro analýzu ([OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)).
+
+### Logy a audit: co se stalo, kdo to udělal a proč na tom záleží
+
+Logy mají dvě odlišné role:
+
+- Provozní logy pomáhají najít chybu.
+- Audit logy dokazují důležité akce v produktu.
+
+Provozní log může říct, že selhal request kvůli timeoutu databáze. Audit log má říct, kdo změnil roli uživatele, kdo exportoval data, kdo zneplatnil API klíč, kdo upravil billing nastavení nebo kdo smazal projekt.
+
+Audit log pro SaaS by měl obsahovat:
+
+- čas,
+- tenant,
+- uživatele nebo systémový proces,
+- typ akce,
+- cílový objekt,
+- výsledek,
+- IP nebo technický kontext, pokud je oprávněně potřebný,
+- korelační ID pro dohledání provozních logů.
+
+Neukládejte do audit logu celé citlivé hodnoty. U změny hesla nepotřebujete staré ani nové heslo. U změny API klíče nepotřebujete celý klíč. U změny konfigurace někdy stačí hash, název pole nebo maskovaný výřez. Cíl je dohledatelnost, ne vytvořit druhou databázi citlivých dat.
+
+### Incident response: napište postup dřív, než ho budete potřebovat
+
+Incident není jen "server spadl". Incident je událost, která ohrožuje dostupnost, integritu, důvěrnost, bezpečnost nebo důvěru zákazníků. Může to být výpadek, únik dat, špatná migrace, kompromitovaný účet, zneužitý API klíč, odeslaný e-mail špatným příjemcům nebo chyba v oprávněních.
+
+ENISA popisuje incident response jako oblast zahrnující prevenci, detekci a řešení incidentů a podporu CSIRT/SOC schopností v EU ([ENISA: Incident response](https://tools.enisa.europa.eu/topics/incident-response)). Pro malý SaaS tým stačí jednoduchý runbook:
+
+1. Potvrdit incident: co se děje a jaký je dopad.
+2. Určit incident lead: jeden člověk koordinuje, ostatní řeší.
+3. Zastavit škodu: vypnout funkci, revoke klíče, zastavit job, rollback.
+4. Zachovat důkazy: logy, časová osa, dotčené systémy, rozhodnutí.
+5. Komunikovat interně: kdo ví co, kdo odpovídá zákazníkům.
+6. Vyhodnotit právní a zákaznické povinnosti.
+7. Obnovit službu.
+8. Udělat postmortem bez hledání viníka.
+9. Přidat preventivní změny do backlogu a dotáhnout je.
+
+U incidentů s osobními údaji vstupuje do hry GDPR. EDPB ve svém průvodci pro SME uvádí, že porušení zabezpečení osobních údajů se oznamuje příslušnému dozorovému úřadu do 72 hodin, pokud není nepravděpodobné, že povede k riziku pro fyzické osoby; zpracovatel má informovat správce bez zbytečného odkladu ([EDPB: Data breaches](https://www.edpb.europa.eu/sme-data-protection-guide/data-breaches_en)). To není právní rada. Praktický závěr pro produktový tým je ale jasný: u bezpečnostní události musíte rychle vědět, zda se dotýká osobních údajů, kterých subjektů, jakého rozsahu a jaká opatření jste udělali.
+
+### Komunikace: rychle, přesně, bez divadla
+
+V incidentu se snadno píše buď příliš málo, nebo příliš teatrálně. Dobrá komunikace je konkrétní:
+
+- Co se stalo.
+- Koho se to týká.
+- Jaký je dopad.
+- Co jsme udělali.
+- Co má udělat zákazník.
+- Kdy dáme další update.
+- Kde bude závěrečné shrnutí.
+
+Neříkejte "data jsou v bezpečí", pokud to ještě nevíte. Neříkejte "šlo o drobný incident", pokud zákazníkům nefunguje kritický workflow. Neházejte vinu na dodavatele, i když problém začal u něj. Zákazník má smlouvu s vámi.
+
+Vhodný první update:
+
+```text
+Od 10:42 řešíme výpadek exportu faktur u části účtů. Přihlášení a práce s daty fungují, problém se týká jen generování PDF. Příčinu jsme zúžili na frontu pro zpracování exportů a nasadili jsme dočasné omezení opakovaných jobů. Další update pošleme do 30 minut.
+```
+
+Nevhodný první update:
+
+```text
+Náš poskytovatel má problém, nemůžeme za to. Pracujeme na tom.
+```
+
+Ten druhý text možná uleví týmu. Zákazníkovi nepomůže.
+
+### Vulnerability disclosure: dejte lidem bezpečný kanál
+
+Když někdo najde zranitelnost, měl by vědět, kam ji poslat. OWASP Vulnerability Disclosure Cheat Sheet doporučuje jasný způsob hlášení, rozumnou komunikaci s výzkumníky a publikování kontaktů, například přes `security.txt` nebo adresu `security@` ([OWASP Vulnerability Disclosure Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html)).
+
+Minimum pro menší SaaS:
+
+- `security@firma.cz` nebo jasně uvedený bezpečnostní kontakt.
+- Stránka s pravidly hlášení zranitelností.
+- `/.well-known/security.txt` s kontaktem a preferovaným jazykem.
+- Interní postup, kdo hlášení čte a jak rychle reaguje.
+- Rozlišení mezi legitimním reportem a vydíráním.
+- Historie přijatých reportů a oprav.
+
+Nemusíte hned spouštět placený bug bounty program. Ale nemít bezpečnostní kontakt znamená, že lidé budou psát na obecný formulář, sociální sítě nebo náhodným lidem z týmu. To je zbytečně křehké.
+
+### Dodavatelé a evropský provoz: bezpečnost nekončí u vašeho kódu
+
+SaaS produkt obvykle stojí na desítkách služeb: hosting, databáze, e-mail, platby, storage, monitoring, support, analytics, AI API, CRM, error tracking. Každá z nich může být bezpečnostní a privacy riziko.
+
+U každého dodavatele si zapište:
+
+- Jaká data dostává.
+- Zda jsou data osobní nebo zákaznicky důvěrná.
+- V jakém regionu se zpracovávají.
+- Jaká je retence.
+- Kdo má u dodavatele přístup.
+- Jak funguje export a smazání dat.
+- Jaký je incident notification proces.
+- Jak rychle umíte dodavatele vypnout nebo nahradit.
+
+Privacy-first neznamená izolovat se od světa. Znamená mít kontrolu nad tokem dat. Evropský provoz, omezení trackerů a přímé vztahy s dodavateli jsou praktická výhoda, protože snižují počet míst, kde se může problém rozlít.
+
+### Praktický provozní checklist před launchem
+
+Před spuštěním produktu projděte tento seznam:
+
+1. Kritická data a systémy jsou popsané v jednoduché mapě aktiv.
+2. Tenant hranice jsou vynucené na serveru a pokryté testy.
+3. Role a oprávnění odpovídají reálným uživatelským scénářům.
+4. Tajemství nejsou v repozitáři ani klientském kódu.
+5. API klíče a webhooky mají podpis, scope, expiraci nebo možnost revoke.
+6. Produkce má oddělenou konfiguraci od vývoje.
+7. Zálohy se vytvářejí automaticky a obnova byla otestovaná.
+8. Monitoring hlídá dostupnost, chyby, latenci, fronty, zálohy a expirace.
+9. Alerty mají vlastníka a runbook.
+10. Audit log pokrývá administrátorské, bezpečnostní a datové akce.
+11. Incident runbook existuje a tým ví, kde je.
+12. Privacy dokumentace popisuje zpracování dat lidským jazykem.
+13. Dodavatelé jsou zapsaní v mapě datových toků.
+14. Existuje bezpečnostní kontakt nebo `security.txt`.
+15. Po incidentu je naplánované postmortem a opravy mají vlastníka.
+
+Bezpečnost a provoz nejsou stav, kterého jednou dosáhnete. Je to rytmus. Každá nová funkce, integrace, role, export a automatizace mění rizika. Když je průběžně zapisujete, testujete a zjednodušujete, produkt zůstane ovladatelný. Když ne, infrastruktura začne psát vlastní thriller. A ten obvykle nemá hezký konec.
+
+### Zdroje kapitoly
+
+- [NIST: Cybersecurity Framework](https://www.nist.gov/cyberframework)
+- [NIST: The NIST Cybersecurity Framework (CSF) 2.0](https://csrc.nist.gov/pubs/cswp/29/the-nist-cybersecurity-framework-csf-20/final)
+- [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- [OWASP Logging Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html)
+- [OWASP Vulnerability Disclosure Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html)
+- [ENISA: Incident response](https://tools.enisa.europa.eu/topics/incident-response)
+- [EDPB: Data breaches](https://www.edpb.europa.eu/sme-data-protection-guide/data-breaches_en)
+- [EDPB: Guidelines 9/2022 on personal data breach notification under GDPR](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -2875,3 +3177,4 @@ AI ve webovém produktu má být přesná páka, ne mlhový stroj. Když ji zasa
 - 2026-05-05: Dopsána kapitola 11 o datovém modelu jako produktovém rozhodnutí: slovník domény, entity, události, integrita, tenant hranice, minimalizace dat, migrace a reporting.
 - 2026-05-05: Dopsána kapitola 12 o integracích, API a automatizaci: produktová hranice API, dokumentace, scope, webhooky, automatizace, dodavatelské riziko, verzování a monitoring.
 - 2026-05-05: Dopsána kapitola 13 o AI ve webových produktech: vhodné a nevhodné use casy, náklady, architektura, RAG, bezpečnost, privacy-first provoz, EU AI Act kontext a evals.
+- 2026-05-05: Dopsána kapitola 14 o bezpečnosti a provozu: rizika, bezpečný vývoj, tenant izolace, tajemství, zálohy, monitoring, logy, incident response a vulnerability disclosure.
