@@ -1608,6 +1608,244 @@ Aplikace začíná tam, kde vzniká opakovaná hodnota, stav a odpovědnost za d
 - [OWASP Application Security Verification Standard project](https://owasp.org/www-project-application-security-verification-standard/)
 - [OWASP ASVS GitHub repository](https://github.com/OWASP/ASVS)
 
+## Kapitola 9: MVP bez iluzí: co ověřit před vývojem
+
+MVP není levná verze finálního produktu. MVP je způsob, jak co nejrychleji ověřit největší riziko: jestli problém opravdu existuje, jestli za jeho řešení někdo zaplatí nebo investuje čas, jestli navržený workflow dává smysl a jestli tým chápe data, oprávnění a provozní odpovědnost.
+
+Špatně pojaté MVP bývá drahé, protože se tváří skromně, ale uvnitř obsahuje skoro celý budoucí produkt: registraci, dashboard, billing, role, notifikace, exporty, nastavení, integrace, admin panel a marketingový web. Jen je všechno polovičaté. Takové MVP neověří trh. Ověří hlavně trpělivost týmu.
+
+Dobré MVP je nemilosrdně konkrétní. Neptá se "co všechno bychom jednou mohli mít", ale "jakou nejistotu musíme odstranit jako první". GOV.UK Service Manual u alpha fáze doporučuje prototypovat minimum potřebné k otestování nejrizikovějších předpokladů a rozhodnout, co má smysl vzít do bety ([GOV.UK Service Manual: How the alpha phase works](https://www.gov.uk/service-manual/phases/alpha)). To je výborný princip i pro SaaS a komerční webové produkty.
+
+### MVP začíná seznamem rizik
+
+Než začnete kreslit obrazovky, napište si rizika. Produkt není riskantní jen technicky. Často je největší riziko obchodní, provozní nebo behaviorální: lidé problém neřeší dost bolestivě, současný workaround jim stačí, rozhodovatel není uživatel, data nejsou dostupná, integrace je složitější, než se zdá, nebo onboarding vyžaduje víc podpory, než unese malý tým.
+
+Typické typy rizik:
+
+- Problém: řešíme něco, co zákazník opravdu považuje za prioritu?
+- Segment: víme přesně, pro koho první verze je?
+- Workflow: dokáže uživatel projít hlavní tok bez ručního vysvětlování?
+- Hodnota: vznikne měřitelný výsledek dost rychle?
+- Ochota platit: existuje rozpočet, vlastník a důvod koupit?
+- Data: máme přístup ke vstupům, které produkt potřebuje?
+- Provoz: zvládneme podporu, incidenty, zálohy, exporty a změny?
+- Soukromí: sbíráme jen data nutná pro první hodnotu?
+
+MVP má ověřovat první největší riziko, ne všechna rizika najednou. Pokud nevíte, jestli lidé vůbec chtějí výsledek, nepotřebujete nejdřív budovat samoobslužný billing. Pokud nevíte, jestli workflow funguje, nepotřebujete tři úrovně týmových rolí. Pokud nevíte, jestli data půjdou získat, nepotřebujete pixel-perfect dashboard.
+
+Codyho komentář: zakladatelé často říkají "potřebujeme MVP", ale myslí tím "potřebujeme menší produkt, který se nám nebude tak těžko obhajovat". To není MVP. To je scope v kabátě a s falešným knírem.
+
+### Nejdřív problémový rozhovor, potom řešení
+
+První validace nemá být demo. Má být rozhovor o problému. Když člověku hned ukážete řešení, začne být zdvořilý. Řekne, co se mu líbí, co by možná použil a co by tam jednou chtěl. To je příjemné, ale slabé. Silnější je zjistit, jak problém řeší dnes.
+
+Ptejte se na minulost a konkrétní situace:
+
+- Kdy jste ten problém řešili naposledy?
+- Co se stalo, když jste ho nevyřešili?
+- Kdo byl zapojený?
+- Jaký workaround používáte dnes?
+- Kolik času, peněz nebo reputace vás to stálo?
+- Kdo rozhoduje o změně procesu nebo nástroje?
+- Co by muselo být pravda, abyste přešli na nové řešení?
+
+GOV.UK metodika k user needs zdůrazňuje, že služba má uspokojit potřeby uživatele, aby se dostal ke správnému výsledku ([GOV.UK Service Manual: Learning about users and their needs](https://www.gov.uk/service-manual/user-centred-design/user-needs)). Pro komerční produkt k tomu přidejte obchodní otázku: je tato potřeba dost důležitá, aby se kvůli ní změnilo chování?
+
+Slabý signál:
+"To zní zajímavě."
+
+Silnější signál:
+"Minulý měsíc jsme kvůli tomu ručně zpracovali 240 řádků, dva lidé nad tím strávili pátek a vedoucí chce, aby se to do konce kvartálu vyřešilo."
+
+Validace není hledání pochvaly. Je to hledání důkazů, že problém má váhu.
+
+### Vyberte jeden segment a jeden workflow
+
+MVP pro všechny je skoro vždy MVP pro nikoho. První verze potřebuje ostrý segment: konkrétní typ firmy, role, situace a bolest. Segment "malé a střední firmy" je příliš široký. Segment "B2B servisní firmy, které koordinují opakované zakázky přes e-mail a tabulky" už se dá ověřovat.
+
+U segmentu si napište:
+
+- Jaká firma nebo tým to je?
+- Kdo produkt používá denně?
+- Kdo rozhoduje o nákupu?
+- Jaký proces dnes bolí?
+- Jaké systémy už používají?
+- Jaká data mají dostupná?
+- Co by byl první viditelný úspěch?
+
+Potom vyberte jeden hlavní workflow. Ne dashboard. Workflow. Například:
+
+- Zákazník pošle požadavek.
+- Tým ho zařadí, přiřadí odpovědnost a doplní stav.
+- Klient vidí průběh bez dalšího e-mailu.
+- Na konci vznikne export nebo report.
+
+To je ověřitelný tok. Dá se nakreslit, prototypovat, ručně obsloužit a měřit. Dashboard bez toku je často jen výkladní skříň budoucích dat, která zatím nevznikají.
+
+### Prototyp může být levnější než kód
+
+Ne každé MVP musí být software. Někdy je lepší začít ručně, v tabulce, formuláři, klikacím prototypu, concierge službě nebo jednoduchém interním nástroji. Cíl není předstírat, že produkt už existuje. Cíl je ověřit, jestli výsledek má hodnotu.
+
+Možnosti před vývojem:
+
+- Landing page: ověří srozumitelnost nabídky a zájem o další krok.
+- Klikací prototyp: ověří tok a jazyk rozhraní bez backendu.
+- Concierge MVP: tým dodá výsledek ručně, zákazník zažije hodnotu.
+- Wizard-of-Oz: uživatel vidí jednoduché rozhraní, část procesu běží ručně.
+- Tabulka plus pravidelný report: ověří datový model a výsledek.
+- Interní skript: ověří automatizaci jednoho bolestivého kroku.
+
+GOV.UK Prototype Kit popisuje prototypy jako způsob, jak získat zpětnou vazbu a poznatky z user research nebo od lidí, se kterými spolupracujete ([GOV.UK Prototype Kit](https://prototype-kit.service.gov.uk/)). Pro SaaS to znamená: prototyp není ostuda před "opravdovým vývojem". Je to levnější místo, kde udělat špatné rozhodnutí.
+
+Příklad: chcete stavět SaaS pro pravidelné bezpečnostní reporty. První MVP nemusí mít multi-tenant aplikaci, billing a generátor PDF. Může začít takto:
+
+1. Zákazník vyplní krátký formulář s URL a kontaktem.
+2. Tým ručně provede audit podle checklistu.
+3. Výstup doručí jako strukturovaný report.
+4. Sleduje, které části reportu zákazník řeší a za co by zaplatil opakovaně.
+5. Teprve potom automatizuje sběr dat, stav nálezů a export.
+
+Tím ověřujete hodnotu reportu, jazyk, rozhodovatele a opakovatelnost. Neutrácíte měsíce za systém, který možná řeší špatný problém.
+
+### Definujte hranici "viable"
+
+Minimum neznamená nekvalitní. Viable znamená, že výsledek je dostatečně užitečný, aby se dal férově otestovat. Pokud je produkt tak osekaný, že člověk nemůže zažít hodnotu, netestujete produkt. Testujete frustraci.
+
+U MVP si stanovte:
+
+- Co musí fungovat vždy?
+- Co může být ruční?
+- Co může chybět úplně?
+- Jaké chyby jsou přijatelné v pilotu?
+- Jaké chyby by porušily důvěru?
+- Jaké bezpečnostní a privacy požadavky jsou nevyjednatelné?
+
+Nešetřete na věcech, které chrání důvěru: bezpečný přístup, správná autorizace, neukládání tajemství do logů, základní zálohy, jasná komunikace, export dat a férové zacházení s osobními údaji. Šetřete na automatizaci, vzhledu sekundárních obrazovek, pokročilých nastaveních a integracích, které nejsou nutné pro první hodnotu.
+
+Privacy-first minimum:
+
+- Sbírejte jen údaje potřebné pro pilot.
+- Nepřidávejte marketingové trackery do produktu.
+- Oddělte testovací a produkční data.
+- Řekněte zákazníkovi, co je ruční a co automatizované.
+- Mějte jasný způsob smazání nebo exportu dat po pilotu.
+- Nepoužívejte reálná zákaznická data v demo prostředích.
+
+EDPB ve vodítkách k Data Protection by Design and by Default připomíná, že ochrana dat má být zabudovaná do návrhu a výchozích nastavení, ne přilepená až na konec ([EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)). U MVP je to obzvlášť důležité, protože "dočasné" kompromisy mají nepříjemný talent přežít do produkce.
+
+### Měřte signály, ne dojmy
+
+MVP bez měření je jen experiment s pamětí. Před spuštěním si napište, jak poznáte, že jste se něco naučili. Metriky nemusí být složité. Musí odpovídat riziku.
+
+Příklady signálů:
+
+- Problém: kolik respondentů popsalo konkrétní poslední výskyt bez nápovědy.
+- Zájem: kolik lidí požádalo o pilot, ne jen pochválilo nápad.
+- Workflow: kolik uživatelů dokončilo hlavní tok bez asistence.
+- Hodnota: kolik lidí použilo výstup v reálném rozhodnutí.
+- Ochota platit: kolik zákazníků podepsalo pilot, LOI nebo zaplatilo první malý balíček.
+- Retence: kolik týmů se vrátilo k druhému použití.
+- Provoz: kolik ruční práce zabral jeden zákazník a zda se dá zmenšit.
+
+Kvalitativní testování má pořád velkou hodnotu. Nielsen Norman Group u usability testování doporučuje pro kvalitativní studie pracovat s realistickými účastníky a typicky 5-8 účastníky, protože cílem je odhalit problémy a příležitosti, ne dělat statistiku ([NN/g: Usability Testing 101](https://media.nngroup.com/media/articles/attachments/UsabilityTesting101_Letter_Size.pdf)). Prakticky: pět dobrých rozhovorů s lidmi z cílového segmentu je lepší než padesát názorů od lidí, kteří by nikdy nekoupili.
+
+Nejlepší měření kombinuje:
+
+- pozorování reálného chování,
+- krátké rozhovory po akci,
+- provozní náklady na dodání výsledku,
+- obchodní signál,
+- privacy a bezpečnostní dopad.
+
+Když metrika nevede k rozhodnutí, vyhoďte ji. MVP nemá potřebovat dashboard o dvaceti grafech. Má potřebovat odvahu říct: pokračujeme, měníme segment, zužujeme workflow, nebo končíme.
+
+### Pilot není produkce pro všechny
+
+Pilot má mít pravidla. Když první zákazníky pustíte do nejasného experimentu bez očekávání, riskujete důvěru. Naopak dobře vedený pilot může být velmi silný: zákazník ví, co testuje, co dostane, jak bude vypadat podpora a co se bude dít s daty.
+
+Pilotní dohoda by měla jasně říct:
+
+- Jaký problém ověřujete.
+- Jak dlouho pilot trvá.
+- Co je součástí a co není.
+- Jak často bude zpětná vazba.
+- Jaká data zákazník poskytne.
+- Kdo k datům přistupuje.
+- Jak se řeší ukončení, export a smazání.
+- Jak se rozhodne o pokračování.
+
+U B2B SaaS je často lepší mít několik pečlivě vybraných pilotních zákazníků než veřejný launch pro náhodný provoz. Pilot umožní ruční podporu, rychlé učení a poctivé rozhovory. Veřejný launch bez připravené podpory může vyrobit hluk, ale málo poznání.
+
+### Rozhodovací matice po MVP
+
+Po MVP si nenechávejte závěr v mlze. Udělejte rozhodovací schůzku a napište verdikt. Ne "bylo to zajímavé". Konkrétní rozhodnutí.
+
+Možné výsledky:
+
+- Pokračovat: problém, segment a workflow se potvrdily.
+- Zúžit: hodnota existuje, ale jen pro konkrétnější segment.
+- Změnit workflow: problém existuje, ale navržený tok neodpovídá realitě.
+- Automatizovat: ruční dodání funguje a nejdražší krok se opakuje.
+- Zastavit: problém není dost bolestivý nebo se nedá obhájit obchodně.
+- Odložit: technické, datové nebo právní riziko je větší než aktuální přínos.
+
+Ke každému rozhodnutí napište důkazy:
+
+- Co jsme předpokládali?
+- Co jsme pozorovali?
+- Co lidé skutečně udělali?
+- Co zaplatili nebo byli ochotni podepsat?
+- Co nás stálo dodání výsledku?
+- Jaké privacy, bezpečnostní nebo provozní riziko zůstává?
+- Jaký je další nejmenší test?
+
+Tohle je rozdíl mezi učením a dojmem. Dojem je "asi to má potenciál". Učení je "tři z pěti pilotních týmů dokončily workflow, dva chtějí placené pokračování, ruční příprava reportu zabírá 90 minut, největší problém je import dat z jejich CRM".
+
+### Praktický MVP canvas
+
+Před prvním sprintem vyplňte jednu stránku:
+
+- Segment: pro koho přesně je první verze.
+- Problém: konkrétní situace, ne obecná potřeba.
+- Dnešní workaround: jak to řeší teď.
+- Největší riziko: co musíme ověřit jako první.
+- Hlavní workflow: vstup, kroky, výstup.
+- První hodnota: co uživatel získá a kdy.
+- Minimum: co musí být automatizované.
+- Ruční části: co zatím obslouží tým.
+- Data: co sbíráme, proč, kde leží a kdo k tomu má přístup.
+- Pilot: kdo se zúčastní, jak dlouho a jaká jsou pravidla.
+- Signály úspěchu: konkrétní chování nebo obchodní důkaz.
+- Stop pravidlo: kdy experiment ukončíme.
+- Další test: co uděláme, pokud se hlavní předpoklad potvrdí.
+
+Canvas nemá být dokument do archivu. Má být pracovní dohoda. Pokud tým neumí vyplnit segment, workflow, data a signály úspěchu, není připravený na vývoj. Je připravený na další rozhovory. To není zdržení. To je levnější forma pravdy.
+
+### Checklist kapitoly
+
+- Máte sepsaná hlavní rizika produktu před návrhem funkcí?
+- Víte, které jedno riziko má MVP ověřit jako první?
+- Mluvili jste s lidmi o jejich posledním reálném problému, ne jen o vašem nápadu?
+- Má první verze jasný segment a jedno hlavní workflow?
+- Umíte říct, co je první hodnota a kdy ji uživatel zažije?
+- Vybrali jste nejlevnější způsob ověření: rozhovor, prototyp, concierge, tabulku, skript nebo aplikaci?
+- Je jasné, co musí fungovat a co může zůstat ruční?
+- Sbírá pilot jen data nutná pro ověření hodnoty?
+- Máte pravidla pro export, mazání, přístupy a ukončení pilotu?
+- Měříte chování a obchodní signály, ne jen pochvalné názory?
+- Máte stop pravidlo, aby se experiment nestal nekonečným vývojem?
+- Po MVP vznikne rozhodnutí: pokračovat, zúžit, změnit, automatizovat, zastavit nebo odložit?
+
+MVP bez iluzí není malé proto, že tým nemá ambice. Je malé proto, že ambice bez učení je drahá mlha. Nejlepší MVP neukazuje, jak skvělý produkt jednou bude. Ukazuje, jestli má smysl ho vůbec stavět.
+
+### Zdroje kapitoly
+
+- [GOV.UK Service Manual: How the alpha phase works](https://www.gov.uk/service-manual/phases/alpha)
+- [GOV.UK Service Manual: Learning about users and their needs](https://www.gov.uk/service-manual/user-centred-design/user-needs)
+- [GOV.UK Prototype Kit](https://prototype-kit.service.gov.uk/)
+- [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
+- [Nielsen Norman Group: Usability Testing 101](https://media.nngroup.com/media/articles/attachments/UsabilityTesting101_Letter_Size.pdf)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -1618,3 +1856,4 @@ Aplikace začíná tam, kde vzniká opakovaná hodnota, stav a odpovědnost za d
 - 2026-05-05: Dopsána kapitola 6 o SEO pro lidi i vyhledávače: záměr hledání, tématické clustery, indexace, sitemap, strukturovaná data, interní odkazy a privacy-first měření.
 - 2026-05-05: Dopsána kapitola 7 o privacy-first webu: datová mapa, analytika, cookies, třetí strany, evropský provoz, formuláře, logy a srozumitelná privacy komunikace.
 - 2026-05-05: Dopsána kapitola 8 o rozhodování, kdy web přerůstá v aplikaci: signály, datový model, přihlášení, provoz, bezpečnost a MVP workflow.
+- 2026-05-05: Dopsána kapitola 9 o MVP bez iluzí: rizika, rozhovory, segment, workflow, prototypy, pilot, měření a rozhodnutí po experimentu.
