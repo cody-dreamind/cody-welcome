@@ -3162,6 +3162,260 @@ Bezpečnost a provoz nejsou stav, kterého jednou dosáhnete. Je to rytmus. Kaž
 - [EDPB: Data breaches](https://www.edpb.europa.eu/sme-data-protection-guide/data-breaches_en)
 - [EDPB: Guidelines 9/2022 on personal data breach notification under GDPR](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-92022-personal-data-breach-notification-under_en)
 
+## Kapitola 15: Výběr trhu a positioning
+
+SaaS byznys nezačíná ceníkem ani roadmapou. Začíná rozhodnutím, komu vlastně pomáháte, proč má ten problém prioritu a proti čemu vás bude zákazník porovnávat. Bez toho je produkt jen sada funkcí, která čeká, až jí trh sám přiřadí význam. Trh to někdy udělá, ale většinou ne tak, jak by si tým přál. Trh je v tomhle dost nezdvořilý.
+
+Výběr trhu a positioning jsou dvě spojené disciplíny:
+
+1. Výběr trhu říká, na jaký segment, problém a nákupní situaci se soustředíte.
+2. Positioning říká, jak má cílový zákazník pochopit hodnotu produktu ve srovnání s alternativami.
+
+Když je trh příliš široký, marketing mluví obecně, prodej vysvětluje pořád od začátku a produktový tým neví, které požadavky odmítat. Když je positioning slabý, zákazník si vás zařadí špatně: jako levnější náhradu za spreadsheet, dražší variantu známého nástroje, technickou hračku bez obchodního dopadu nebo další "AI platformu", protože takových je na světě zjevně málo.
+
+Dobrý positioning neříká jen "jsme lepší". Říká: pro tento typ zákazníka, v této situaci, proti těmto alternativám, dodáváme tuto konkrétní hodnotu a máme k tomu tyto důkazy.
+
+### Trh není seznam firem
+
+Začátečnická chyba je definovat trh demografií nebo velikostí firmy: "malé a střední firmy", "e-shopy", "výrobní společnosti", "B2B segment". To je začátek seznamu kontaktů, ne trh pro SaaS. Skutečný trh je skupina zákazníků, kteří mají podobný problém, podobný kontext, podobný způsob rozhodování a podobnou představu o tom, co je lepší výsledek.
+
+Silnější definice trhu obsahuje:
+
+- Typ organizace nebo týmu.
+- Role, která problém nejvíc cítí.
+- Spouštěč, kdy se problém stává prioritou.
+- Současný způsob řešení.
+- Náklady neřešení: čas, peníze, riziko, reputace nebo ztracená příležitost.
+- Nákupní proces: kdo používá, kdo platí, kdo blokuje.
+- Omezení: bezpečnost, integrace, regulace, jazyk, region, rozpočet.
+
+Příklad slabé definice:
+
+"Náš produkt je pro firmy, které chtějí lepší projektové řízení."
+
+Silnější definice:
+
+"Produkt je pro menší B2B servisní firmy, které koordinují opakované klientské zakázky přes e-mail a tabulky. Problém začne bolet ve chvíli, kdy tým ztratí přehled o stavu zakázek, klienti se ptají na aktualizace a manažer tráví část týdne ručním skládáním reportu."
+
+Druhá definice ještě není finální strategie. Ale už se podle ní dá psát web, vést rozhovor, navrhnout MVP, vybrat integrace a poznat, jestli nový feature request patří do první verze.
+
+### Segment vybírejte podle bolesti, ne podle velikosti
+
+Velký trh v prezentaci neznamená dobrý první trh. Pro začínající SaaS je často lepší úzký segment s akutní bolestí než obrovský segment s vlažným zájmem. Úzký segment se lépe hledá, lépe oslovuje, lépe poslouchá a lépe přesvědčuje. Navíc dovolí týmu mluvit konkrétním jazykem zákazníka.
+
+U každého kandidátního segmentu si dejte skóre 1 až 5:
+
+- Bolest: jak často a silně problém řeší?
+- Rozpočet: existuje vlastník peněz?
+- Dostupnost: umíte se dostat k uživatelům a rozhodovatelům?
+- Urgence: je problém spojený s termínem, růstem, auditem, náklady nebo rizikem?
+- Opakovatelnost: mají zákazníci podobný workflow?
+- Diferenciace: máte proti současným alternativám jasnou výhodu?
+- Privacy fit: pomáhá vám evropský provoz, kontrola dat nebo minimum trackerů jako obchodní argument?
+
+Segment, který má vysokou bolest, dostupné rozhodovatele a opakovatelný workflow, je pro první SaaS často lepší než širší segment s větším teoretickým objemem. Teorie se totiž špatně fakturuje.
+
+Příklad:
+
+- "Všechny firmy, které používají Excel" je obrovské, ale neuchopitelné.
+- "České a evropské B2B týmy, které ručně připravují měsíční compliance reporty pro klienty a řeší citlivá data" je menší, ale ostřejší.
+
+U druhého segmentu okamžitě víte, že privacy-first provoz není jen hodnota do patičky webu. Je to součást nákupního rozhodnutí.
+
+### Problém popište jako situaci
+
+Dobrá tržní příležitost má konkrétní situaci. Ne jen obecný problém. "Firmy mají chaos v komunikaci" je moc široké. "Account manažer každý pátek ručně spojuje informace z e-mailu, tabulky a fakturace, aby klientovi poslal stav projektu" už je situace.
+
+Jobs-to-be-Done přístup připomíná, že zákazník si produkt "najímá" pro práci, kterou se snaží udělat v konkrétním kontextu. Christensen Institute popisuje Jobs to Be Done jako teorii, která pomáhá chápat okolnosti, v nichž zákazník hledá pokrok, a ne jen jeho profil nebo kategorii ([Christensen Institute: Jobs to Be Done](https://www.christenseninstitute.org/theory/jobs-to-be-done/)). Pro SaaS je to praktické: produkt neprodáváte profilu, ale situaci, ve které současný způsob práce selhává.
+
+Zkuste větu:
+
+"Když [typ zákazníka] potřebuje [výsledek], dnes používá [alternativa], ale to selhává protože [bolest]. Náš produkt pomáhá tím, že [hodnota]."
+
+Příklad:
+
+"Když menší auditorský tým potřebuje předat klientovi průběžný stav nálezů, dnes používá e-mail a tabulku, ale to selhává protože nikdo nevidí aktuální stav, odpovědnosti a historii změn. Náš produkt pomáhá tím, že drží nálezy, komentáře, priority a export na jednom místě s audit logem a evropským provozem."
+
+Tato věta není marketingový slogan. Je to pracovní nástroj. Když nejde napsat, positioning bude mlhavý.
+
+### Rozhovory: hledejte důkaz, ne pochvalu
+
+Před výběrem trhu mluvte s lidmi. Ne proto, abyste jim prodali vizi, ale abyste pochopili jejich realitu. Y Combinator ve Startup School opakovaně zdůrazňuje přímý kontakt zakladatelů s uživateli; v recap textu k rozhovorům s uživateli doporučuje ptát se na konkrétní minulé situace místo hypotetických otázek typu "používali byste to?" ([Y Combinator: Startup School Week 1 Recap](https://www.ycombinator.com/blog/startup-school-week-1-recap-kevin-hale-and-eric-migicovsky/)).
+
+Dobré otázky:
+
+- Kdy jste tento problém řešili naposledy?
+- Co přesně se stalo?
+- Kdo byl zapojený?
+- Jak to řešíte dnes?
+- Co na současném řešení nefunguje?
+- Kolik času nebo peněz vás to stálo?
+- Co se stane, když problém nevyřešíte?
+- Kdo by musel schválit nový nástroj?
+- Jaké požadavky na data, bezpečnost a provoz by nástroj musel splnit?
+
+Slabé otázky:
+
+- Líbí se vám náš nápad?
+- Používali byste to?
+- Kolik byste za to platili?
+- Chcete ještě tuto funkci?
+
+Problém hypotetických otázek je jednoduchý: lidé jsou zdvořilí, optimističtí a často nechtějí zklamat. Minulé chování je tvrdší materiál. Pokud zákazník problém nikdy neřešil, nic ho nestál a nikdo za něj nemá odpovědnost, pravděpodobně to není první trh. Možná je to budoucí trh. To je elegantní název pro "teď to nekupují".
+
+Codyho komentář: nejlepší rozhovor často bolí ego. Zjistíte, že zákazník problém popisuje jinými slovy, používá trapně jednoduchý workaround a vaši nejoblíbenější funkci vůbec nepotřebuje. Výborně. Právě jste ušetřili sprint.
+
+### Positioning začíná alternativami
+
+Když zákazník zvažuje nový produkt, neporovnává ho jen s přímým konkurentem. Porovnává ho se současným stavem: tabulkou, e-mailem, interním skriptem, velkým monolitickým systémem, agenturou, ruční prací nebo tím, že problém prostě nechá být.
+
+April Dunford ve svém úvodu do positioningu rozděluje positioning na komponenty jako konkurenční alternativy, odlišující schopnosti, hodnotu pro zákazníka, cílový segment a tržní kategorii ([April Dunford: An Introduction to Positioning](https://www.aprildunford.com/post/an-introduction-to-positioning)). V samostatném textu o konkurenci upozorňuje, že první alternativa, kterou často musíte porazit, je status quo ([April Dunford: Positioning and Competition](https://www.aprildunford.com/post/positioning-and-competition)).
+
+Prakticky si sepište alternativy:
+
+- Status quo: co zákazník dělá dnes?
+- Přímý konkurent: jaký specializovaný nástroj už zná?
+- Nepřímá alternativa: agentura, interní vývoj, tabulka, ERP modul, e-mail.
+- Neřešení: co se stane, když nic nekoupí?
+
+Potom ke každé alternativě doplňte:
+
+- Proč ji zákazník používá?
+- Co na ní funguje?
+- Co na ní bolí?
+- Kdy přestává stačit?
+- Jakou hodnotu musíte ukázat, aby změna dávala smysl?
+
+Příklad: pokud prodáváte SaaS pro klientské reporty, konkurent nemusí být jiný reportovací SaaS. Konkurent může být páteční e-mail manažera. Ten je levný, známý a flexibilní. Aby váš produkt vyhrál, nestačí říct "máme dashboard". Musíte ukázat, že snižujete ruční práci, chyby, čekání klienta, auditní riziko a ztracený kontext.
+
+### Kategorie určuje očekávání
+
+Tržní kategorie je mentální šuplík, do kterého si vás zákazník zařadí. "Projektové řízení", "CRM", "produktová analytika", "klientský portál", "compliance reporting", "AI asistent". Kategorie pomáhá, protože zákazník rychle chápe rámec. Zároveň škodí, pokud vás zařadí vedle špatných alternativ.
+
+Stejný produkt může jít popsat různě:
+
+- "Projektový nástroj pro agentury."
+- "Klientský portál pro průběžné reportování práce."
+- "Audit log a workflow pro servisní týmy."
+- "Privacy-first reporting pro B2B zakázky v Evropě."
+
+Každá kategorie vyvolá jiné srovnání, jiné očekávání funkcí a jinou toleranci k ceně. Pokud řeknete "projektový nástroj", zákazník vás porovná s velkými horizontálními nástroji. Pokud řeknete "klientský portál pro auditní a servisní reporty", možná budete v menší kategorii, ale s jasnějším důvodem existovat.
+
+Výběr kategorie tedy není kosmetika. Je to strategické rozhodnutí. Má odpovídat tomu, kde je vaše hodnota nejvíc zjevná a kde zákazník nejrychleji pochopí, proč by měl měnit současné řešení.
+
+### Hodnotová nabídka: propojte práci, bolest a důkaz
+
+Strategyzer u Value Proposition Canvas popisuje práci se zákaznickými jobs-to-be-done, pains a gains a propojení s tím, jak nabídka zmírňuje bolesti a vytváří přínosy ([Strategyzer: The Value Proposition Canvas](https://www.strategyzer.com/library/the-value-proposition-canvas)). Pro SaaS je to užitečný způsob, jak oddělit funkce od hodnoty.
+
+Funkce:
+
+- Audit log.
+- Role.
+- Export PDF.
+- Webhooky.
+- Dashboard.
+
+Hodnota:
+
+- Manažer ví, kdo změnil stav zakázky.
+- Klient vidí aktuální informace bez e-mailového ping-pongu.
+- Tým splní interní kontrolní požadavky bez ručního skládání historie.
+- Data zůstávají v evropském provozu a nejsou posílaná do reklamních systémů.
+- Zákazník může kdykoli získat export a odejít.
+
+Dobrá hodnotová nabídka spojuje:
+
+1. Práci, kterou zákazník potřebuje udělat.
+2. Bolest současného řešení.
+3. Odlišující schopnost produktu.
+4. Obchodní nebo provozní výsledek.
+5. Důkaz, že to není jen slib.
+
+Příklad:
+
+"Pomáháme B2B servisním týmům předávat klientům průběžný stav práce bez ručního reportování. Oproti e-mailu a tabulkám držíme stav, odpovědnosti, komentáře a historii změn na jednom místě. Pro týmy v Evropě přidáváme privacy-first provoz, krátkou datovou mapu a export, aby reporting nezvyšoval datové riziko."
+
+To je lepší než:
+
+"Moderní platforma pro efektivní spolupráci."
+
+Moderní platforma pro efektivní spolupráci je věta, která by měla mít vlastní karanténu.
+
+### Positioning se musí propsat do produktu i webu
+
+Positioning není dokument v šuplíku. Musí se projevit v tom, co stavíte, co odmítáte, jak pojmenujete navigaci, jak vypadá onboarding, co měříte a jak prodáváte.
+
+Na webu se positioning projeví takto:
+
+- Hero říká konkrétní segment, problém a výsledek.
+- Stránky služeb nebo use casů odpovídají na rozhodovací otázky segmentu.
+- Case studies ukazují situace podobné cílovému zákazníkovi.
+- CTA odpovídá nákupní fázi: demo, audit, konzultace, sandbox, RSS.
+- Privacy-first provoz je důkaz důvěry tam, kde zákazník řeší data.
+- SEO témata vycházejí z reálných problémů segmentu, ne z interních sloganů.
+
+V produktu se positioning projeví takto:
+
+- První obrazovka vede k první hodnotě pro vybraný segment.
+- Výchozí nastavení odpovídá reálnému workflow.
+- Šablony, role, exporty a notifikace používají jazyk zákazníka.
+- Roadmapa nehoní každý nápad, ale posiluje odlišující hodnotu.
+- Analytika měří aktivaci a výsledek, ne jen klikání.
+
+Pokud positioning říká "privacy-first reporting pro evropské B2B týmy", ale produkt hned po registraci přidá reklamní pixel, vyžádá telefon, pošle data do pěti externích nástrojů a export je schovaný za podporou, positioning není strategie. Je to dekorace.
+
+### Praktický positioning workshop
+
+Pro první verzi si vyhraďte dvě hodiny a napište odpovědi bez dlouhé prezentace. Cílem je najít jasnost, ne vyhrát interní soutěž v hezkých formulacích.
+
+Postup:
+
+1. Vyberte jeden cílový segment.
+2. Popište konkrétní situaci, ve které problém bolí.
+3. Sepište současné alternativy včetně status quo.
+4. U každé alternativy napište, co na ní funguje a kde selhává.
+5. Sepište schopnosti produktu, které alternativy nemají.
+6. Přeložte schopnosti do hodnoty pro zákazníka.
+7. Vyberte tržní kategorii, kde je hodnota nejrychleji pochopitelná.
+8. Napište jednu pracovní positioning větu.
+9. Ověřte ji na pěti rozhovorech se zákazníky.
+10. Přepište homepage, demo scénář a sales deck podle toho, co jste zjistili.
+
+Pracovní šablona:
+
+"Pro [cílový segment], který [situace/problém], je [produkt] [kategorie], který [hlavní hodnota]. Na rozdíl od [alternativy] pomáhá [odlišující schopnost a výsledek]."
+
+Příklad:
+
+"Pro evropské B2B servisní týmy, které ručně reportují stav klientských zakázek, je produkt privacy-first klientský portál pro průběžné reportování. Na rozdíl od e-mailů a tabulek drží stav, odpovědnosti, komentáře a historii změn na jednom místě a umožní klientovi získat přehled bez dalšího sledování a bez reklamních trackerů."
+
+Není to finální slogan. Je to provozní formulace, podle které tým pozná, co má říkat, stavět a odmítat.
+
+### Checklist kapitoly
+
+- Máte definovaný první trh jako konkrétní situaci, ne jen obor nebo velikost firmy?
+- Víte, kdo problém cítí, kdo platí a kdo může nákup zablokovat?
+- Umíte popsat současný workaround zákazníka?
+- Znáte náklady neřešení: čas, peníze, riziko nebo reputaci?
+- Má segment opakovatelný workflow, který se dá produktizovat?
+- Mluvili jste se zákazníky o minulých situacích, ne jen o hypotetickém zájmu?
+- Máte sepsané konkurenční alternativy včetně status quo?
+- Víte, ve které kategorii bude vaše hodnota nejrychleji pochopitelná?
+- Umíte přeložit funkce do konkrétní hodnoty pro zákazníka?
+- Je privacy-first provoz součást positioningu tam, kde zákazník řeší data?
+- Projevuje se positioning v homepage, onboardingu, roadmapě a sales materiálech?
+- Umíte říct, které segmenty teď vědomě neobsluhujete?
+
+Výběr trhu a positioning jsou disciplína odmítání. Odmítáte příliš široký trh, příliš mnoho cílových skupin, příliš vágní hodnotu a příliš pohodlné srovnání. Tím produkt nezmenšujete. Dáváte mu šanci být pro někoho jasně nejlepší místo toho, aby byl pro všechny neurčitě zajímavý.
+
+### Zdroje kapitoly
+
+- [Christensen Institute: Jobs to Be Done](https://www.christenseninstitute.org/theory/jobs-to-be-done/)
+- [Y Combinator: Startup School Week 1 Recap - Kevin Hale and Eric Migicovsky](https://www.ycombinator.com/blog/startup-school-week-1-recap-kevin-hale-and-eric-migicovsky/)
+- [April Dunford: An Introduction to Positioning](https://www.aprildunford.com/post/an-introduction-to-positioning)
+- [April Dunford: Positioning and Competition](https://www.aprildunford.com/post/positioning-and-competition)
+- [Strategyzer: The Value Proposition Canvas](https://www.strategyzer.com/library/the-value-proposition-canvas)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -3178,3 +3432,4 @@ Bezpečnost a provoz nejsou stav, kterého jednou dosáhnete. Je to rytmus. Kaž
 - 2026-05-05: Dopsána kapitola 12 o integracích, API a automatizaci: produktová hranice API, dokumentace, scope, webhooky, automatizace, dodavatelské riziko, verzování a monitoring.
 - 2026-05-05: Dopsána kapitola 13 o AI ve webových produktech: vhodné a nevhodné use casy, náklady, architektura, RAG, bezpečnost, privacy-first provoz, EU AI Act kontext a evals.
 - 2026-05-05: Dopsána kapitola 14 o bezpečnosti a provozu: rizika, bezpečný vývoj, tenant izolace, tajemství, zálohy, monitoring, logy, incident response a vulnerability disclosure.
+- 2026-05-05: Dopsána kapitola 15 o výběru trhu a positioningu: segment, bolest, alternativy, tržní kategorie, hodnotová nabídka, privacy-first diferenciace a praktický workshop.
