@@ -5076,6 +5076,261 @@ Výstupem auditu nejsou desítky úkolů. Vyberte jednu věc pro odstranění ch
 - [Atlassian Incident Management Handbook](https://www.atlassian.com/incident-management/handbook)
 - [Atlassian: Postmortems](https://www.atlassian.com/incident-management/handbook/postmortems)
 
+## Kapitola 22: Marketing bez kouřové clony
+
+Marketing není umění dělat hluk. Marketing je systém, který pomáhá správným lidem pochopit správnou hodnotu ve správný moment a udělat bezpečný další krok. Když se z marketingu stane jen sběr kontaktů, honění impresí, retargeting na každého návštěvníka a dashboard plný metrik bez rozhodnutí, firma nevytváří růst. Vytváří mlhu s rozpočtem.
+
+Dobrá zpráva: marketing nemusí být manipulativní, aby fungoval. U webů, SaaS a B2B služeb často funguje lépe opak: konkrétnost, užitečnost, důvěra, jasné důkazy a respekt k datům. Zákazník nepotřebuje další trychtýř, který ho tlačí do formuláře. Potřebuje pochopit, jestli problém řešíte, proč vám věřit, co se stane po kontaktu a jakou kontrolu si nechává nad svými daty.
+
+Marketing bez kouřové clony stojí na pěti principech:
+
+1. Segment: nemluvit na všechny.
+2. Hodnota: vysvětlit konkrétní výsledek, ne obecnou ambici.
+3. Důkaz: ukázat příklady, proces a limity.
+4. Distribuce: stavět vlastní kanály, ne závislost na algoritmu.
+5. Soukromí: měřit rozhodnutí, ne špehovat lidi.
+
+### Začněte rozhodnutím, komu nepíšete
+
+Marketing se často rozpadá už na začátku, protože se snaží nikoho neurazit. Texty jsou pak tak obecné, že sedí na každou firmu a nepomáhají žádné. "Pomáháme firmám růst díky moderním technologiím" může napsat agentura, SaaS, konzultant, CRM integrátor i dodavatel kancelářských židlí, když má kreativní den a trochu odvahy.
+
+Silnější marketing začíná volbou:
+
+- Pro koho je nabídka primárně?
+- V jaké situaci se nachází?
+- Jaký problém už zkoušel řešit?
+- Co ho stojí současný stav?
+- Proč by měl měnit zrovna teď?
+- Jaké riziko musí před nákupem snížit?
+
+GOV.UK content design metodika připomíná, že obsah má vycházet z validní uživatelské potřeby a z úkolu, který chce člověk dokončit ([GOV.UK: User needs](https://www.gov.uk/guidance/content-design/user-needs)). Pro komerční marketing k tomu přidejte obchodní realitu: potřeba musí být dost důležitá, aby vedla k akci, rozpočtu nebo změně chování.
+
+Příklad slabého sdělení:
+
+"Vyvíjíme moderní webové aplikace na míru pro firmy všech velikostí."
+
+Silnější sdělení:
+
+"Pomáháme B2B firmám převést opakovaný interní proces z tabulek a e-mailů do první webové aplikace. Začínáme datovým modelem, rolemi, workflow a provozem v EU, aby první verze řešila skutečnou práci, ne jen měla login."
+
+Druhá varianta neosloví každého. To je výhoda. Člověk, který právě řeší tento problém, si rychleji řekne: tohle je o nás.
+
+### Slib musí být konkrétní a ověřitelný
+
+Marketingový slib má zákazníkovi pomoct pochopit hodnotu. Nemá dělat dojem, že produkt umí všechno. Čím abstraktnější slib, tím víc práce musí odvést sales, onboarding a support. A často také tím víc zklamání vznikne po nákupu.
+
+Slabé sliby:
+
+- "Zvyšte efektivitu."
+- "Získejte kontrolu nad procesy."
+- "Digitalizujte své podnikání."
+- "Využijte sílu AI."
+- "Posuňte svůj marketing na novou úroveň."
+
+Silnější sliby:
+
+- "Zkraťte ruční přípravu klientského reportu z hodin na jeden sdílený workflow."
+- "Dejte zákazníkům přehled o stavu zakázky bez pátečního e-mailového kolečka."
+- "Zaveďte audit log, role a export dat do prvního SaaS MVP."
+- "Shrňte support tiket, najděte relevantní dokumentaci a nechte člověka odpověď schválit."
+
+Konkrétní slib má obsahovat výsledek, kontext a hranici. Ne vždy musíte uvádět číslo. Pokud číslo nemáte ověřené, nevymýšlejte ho. Lepší poctivá konkrétnost než přesná fantazie.
+
+Evropská komise u nekalých obchodních praktik upozorňuje na zákaz zavádějících informací a agresivního chování v marketingové, smluvní i navazující fázi obchodního vztahu ([European Commission: Unfair treatment - policy information](https://commission.europa.eu/live-work-travel-eu/consumer-rights-and-complaints/unfair-treatment/unfair-treatment-policy-information_en)). Pro B2B marketing je to i praktická rada: nepřehánějte, neskrývejte limity a neprodávejte budoucí roadmapu jako hotovou schopnost.
+
+Codyho komentář: dobrý marketing nemusí šeptat. Může být ostrý, sebevědomý a prodejní. Ale když slib potřebuje mlhu, aby vypadal dobře, není to positioning. Je to kouřostroj v zasedačce.
+
+### Důkaz před superlativem
+
+Superlativy jsou levné. Důkazy jsou práce. Proto mají důkazy větší váhu.
+
+Místo tvrzení "jsme experti" ukažte:
+
+- konkrétní případovou studii,
+- ukázku procesu,
+- screenshot nebo demo workflow,
+- rozhodovací checklist,
+- před a po,
+- technický princip,
+- popis limitů,
+- citaci zákazníka s kontextem,
+- metodu, podle které pracujete.
+
+Příklad pro SaaS produkt:
+
+Slabé:
+
+"Naše platforma je bezpečná a škálovatelná."
+
+Silnější:
+
+"Každý zákazník má vlastní tenant kontext, role se kontrolují na serveru, exporty respektují stejná oprávnění jako UI a změny rolí se zapisují do audit logu. U enterprise účtů dokumentujeme subdodavatele, region provozu a retenční pravidla."
+
+Druhá věta není tak lesklá. Ale člověk, který řeší bezpečnost, z ní pozná, že nejde jen o dekorativní slovo "secure".
+
+Důkaz může být i negativní vymezení:
+
+- "Není vhodné pro týmy, které potřebují plnou ERP náhradu."
+- "První verze neřeší payroll ani sklad."
+- "AI výstupy neposíláme zákazníkovi automaticky, vždy je schvaluje člověk."
+- "Nepoužíváme reklamní pixely na pricing page."
+
+Limity zvyšují důvěru, protože ukazují, že produkt má hranice. Produkt bez hranic je podezřele podobný prezentaci.
+
+### Kanály: vlastní základ, cizí dosah
+
+Marketingové kanály rozdělte na dvě skupiny:
+
+- Vlastní kanály: web, blog, dokumentace, RSS, e-mail se souhlasem, komunita, zákaznický portál, přímé odkazy.
+- Cizí kanály: sociální sítě, vyhledávače, reklamní platformy, marketplaces, média, partnerské databáze.
+
+Cizí kanály jsou užitečné pro dosah. Vlastní kanály jsou důležité pro kontrolu. Pokud se celá distribuce opírá o algoritmus jedné sociální sítě, reklamní účet nebo newsletter platformu bez exportu, marketing stojí na pronajatém pozemku.
+
+Privacy-first marketing preferuje vlastní web, RSS, přímé URL, obsahové clustery a měření bez reklamního profilování. To neznamená ignorovat sociální sítě. Znamená to nepředávat jim roli primární infrastruktury.
+
+Praktický kanálový mix pro malý B2B SaaS:
+
+- Web: jasná nabídka, ceník, security/privacy stránka, demo nebo kontakt.
+- Obsah: praktické články pro rozhodovací otázky segmentu.
+- SEO: témata podle problémů, ne podle interních sloganů.
+- RSS: jednoduchý odběr novinek bez závislosti na platformě.
+- E-mail: transakční a hodnotný obsah jen se souhlasem nebo jasným obchodním kontextem.
+- Partnerské odkazy: integrátoři, konzultanti, specializované komunity.
+- Sociální sítě: distribuce ukázek a přímých odkazů, ne jediný archiv obsahu.
+
+Google dokumentace k užitečnému obsahu doporučuje tvořit obsah primárně pro lidi a ne pro manipulaci vyhledávacích systémů ([Google Search Central: Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)). To je dobré pravidlo i mimo SEO: pište tak, aby člověk odešel schopnější udělat rozhodnutí.
+
+### Lead není cíl, lead je začátek odpovědnosti
+
+Lead generation se často měří počtem kontaktů. To je nebezpečné, protože počet kontaktů se dá zvýšit velmi snadno: schovejte informace, nabídněte PDF za e-mail, přidejte popup, zaveďte agresivní remarketing a vyžadujte formulář pro každou drobnost. Číslo poroste. Důvěra nemusí.
+
+Lepší otázky:
+
+- Kolik kontaktů odpovídá cílovému segmentu?
+- Kolik kontaktů má reálný problém a rozpočet?
+- Kolik kontaktů se dostane k prvnímu hodnotnému rozhovoru?
+- Kolik se aktivuje po trialu nebo pilotu?
+- Kolik zůstane po třech až šesti měsících?
+- Kolik leadů vzniklo z obsahu, který opravdu pomohl rozhodnutí?
+
+Kvalitní lead magnet nemusí být past na e-mail. Může být veřejný checklist, otevřený playbook, kalkulační rámec nebo ukázkový dokument bez formuláře. Pokud dává smysl sbírat kontakt, řekněte proč.
+
+Příklad férového CTA:
+
+"Stáhnout checklist bez registrace. Pokud chcete, pošlete nám URL webu a připravíme krátký návrh prvních tří priorit. Údaje použijeme jen pro odpověď na tento dotaz."
+
+Tím oddělujete hodnotný obsah od obchodního kontaktu. Ano, možná získáte méně e-mailů. Získáte ale víc důvěry a méně lidí, kteří se jen snažili utéct z formulářového labyrintu.
+
+### Měření: rozhodnutí místo vševědoucnosti
+
+Marketing bez měření je drahé hádání. Marketing s příliš invazivním měřením je drahá ztráta důvěry. Privacy-first varianta je praktičtější: měřte to, co potřebujete pro rozhodnutí, a zbytek nechte být.
+
+Základní otázky marketingového měření:
+
+- Které stránky přivádějí relevantní návštěvy?
+- Které články vedou k dalšímu kroku?
+- Které kanály přivádějí aktivované zákazníky, ne jen registrace?
+- Kde lidé opouštějí cestu k poptávce, trialu nebo demo scénáři?
+- Které kampaně přivádějí zákazníky s dobrou retencí?
+- Které dotazy v supportu ukazují, že marketing slibuje nejasně?
+
+Evropská komise u GDPR principů zmiňuje mimo jiné zákonnost, korektnost, transparentnost, omezení účelu a minimalizaci dat ([European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en)). Prakticky: marketingová analytika má mít účel, přiměřený rozsah a srozumitelné vysvětlení.
+
+Dobrá sada marketingových eventů:
+
+- `pricing_viewed`
+- `case_study_viewed`
+- `rss_subscribed`
+- `contact_started`
+- `contact_submitted`
+- `demo_requested`
+- `trial_started`
+- `activation_reached`
+
+Co typicky nepotřebujete:
+
+- nahrávky celých návštěv,
+- heatmapy na každé stránce,
+- reklamní profilování všech návštěvníků,
+- obsah formulářové zprávy v analytickém nástroji,
+- sdílení produktových dat do marketingových platforem,
+- deset tag manager skriptů, které nikdo nevlastní.
+
+Měřte méně, ale propojte měření až k aktivaci a retenci. Návštěvnost bez kvality je jen dav. U SaaS je lepší vědět, že článek přivedl pět správných zákazníků, než že kampaň přivedla pět tisíc lidí, kteří nikdy nepochopili produkt.
+
+### Dark patterns nejsou growth strategie
+
+Manipulativní design může krátkodobě zvednout metriky. Schovat odmítnutí cookies, předem zaškrtnout marketing, udělat zrušení obtížné, přidat falešnou urgenci, skrýt cenu, nutit registraci před hodnotou. Čísla možná poskočí. Důvěra klesne.
+
+EDPB ve vodítkách k deceptive design patterns popisuje designové vzory, které mohou uživatele ovlivňovat při rozhodování o osobních datech a podrývat jejich schopnost chránit data ([EDPB: Guidelines 03/2022 on deceptive design patterns](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media_en)). I když se dokument zaměřuje na sociální platformy, princip je širší: rozhraní má lidem pomáhat rozhodovat, ne je tlačit do volby výhodné pro provozovatele.
+
+Marketingové rozhraní proto kontrolujte otázkami:
+
+- Je odmítnutí stejně srozumitelné jako přijetí?
+- Je cena viditelná před kontaktem, pokud jde o self-serve produkt?
+- Je newsletter oddělený od běžné poptávky?
+- Je zrušení účtu stejně férové jako registrace?
+- Je trial jasný v tom, kdy končí a co se stane s daty?
+- Jsou limity plánů popsány před nákupem?
+- Je "doporučený" plán doporučený podle segmentu, nebo jen podle marže?
+
+Codyho komentář: pokud růst stojí na tom, že uživatel nepochopil, co udělal, není to growth. Je to účetní oddělení maskované jako UX experiment.
+
+### Praktický marketingový systém pro malý tým
+
+Malý tým nepotřebuje obří marketingové oddělení. Potřebuje rytmus:
+
+Týdně:
+
+- publikovat nebo zlepšit jeden kus obsahu s jasným úkolem,
+- zkontrolovat nové poptávky podle segmentu a kvality,
+- projít dotazy ze sales a supportu,
+- doplnit jeden důkaz nebo odpověď na web.
+
+Měsíčně:
+
+- vyhodnotit kanály podle aktivace, ne jen návštěvnosti,
+- aktualizovat jednu klíčovou stránku podle reálných otázek zákazníků,
+- zkontrolovat externí skripty a datové toky,
+- přepsat jeden slabý slib na konkrétnější hodnotu,
+- doplnit interní odkazy mezi obsahem, službou, pricingem a privacy stránkou.
+
+Kvartálně:
+
+- ověřit positioning na zákaznických rozhovorech,
+- zkontrolovat, jestli ceník a web neprodávají špatný segment,
+- odstranit obsah, který je zastaralý nebo mate,
+- udělat audit měření a trackerů,
+- rozhodnout, které kanály posílit a které vypnout.
+
+Marketing je provozní disciplína. Ne jednorázová kampaň, po které se čeká na zázrak.
+
+### Checklist kapitoly
+
+- Má marketing jasně určený segment a situaci zákazníka?
+- Umíte říct, komu nabídka teď vědomě není určena?
+- Je hlavní slib konkrétní, ověřitelný a bez přehánění?
+- Nahrazujete superlativy důkazy: ukázkami, procesem, limity a case studies?
+- Stavíte vlastní kanály: web, obsah, RSS, přímé odkazy a dokumentaci?
+- Nepoužíváte sociální sítě jako jediný archiv a distribuční systém?
+- Měříte kvalitu leadů až k aktivaci a retenci?
+- Jsou formuláře krátké a jasně říkají, co se stane po odeslání?
+- Oddělujete obchodní kontakt od marketingového odběru?
+- Sbírá analytika data pro rozhodnutí, ne pro zvědavost?
+- Víte, proč běží každý marketingový skript a kam posílá data?
+- Neobsahuje web dark patterns v cookies, trialu, pricingu, zrušení nebo newsletteru?
+- Má marketing týdenní, měsíční a kvartální rytmus zlepšování?
+
+Marketing bez kouřové clony je jednodušší a náročnější zároveň. Jednodušší, protože nemusíte stavět složitý sledovací stroj. Náročnější, protože musíte opravdu rozumět zákazníkovi, hodnotě a důkazům. Privacy-first marketing není slabší marketing. Je to marketing, který si důvěru nepálí jako palivo.
+
+### Zdroje kapitoly
+
+- [GOV.UK: Content design - User needs](https://www.gov.uk/guidance/content-design/user-needs)
+- [Google Search Central: Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
+- [European Commission: Unfair treatment - policy information](https://commission.europa.eu/live-work-travel-eu/consumer-rights-and-complaints/unfair-treatment/unfair-treatment-policy-information_en)
+- [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en)
+- [EDPB: Guidelines 03/2022 on deceptive design patterns in social media platform interfaces](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media_en)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -5099,3 +5354,4 @@ Výstupem auditu nejsou desítky úkolů. Vyberte jednu věc pro odstranění ch
 - 2026-05-05: Dopsána kapitola 19 o SaaS metrikách: MRR, ARR, CAC, LTV, payback, aktivace, funnel, datová kvalita a privacy-first měření.
 - 2026-05-05: Dopsána kapitola 20 o customer supportu jako produktové zpětné vazbě: štítkování tiketů, dokumentace, SLA, privacy-first support data a přenos signálů do roadmapy.
 - 2026-05-05: Dopsána kapitola 21 o škálování bez chaosu: standardizace, vlastnictví, proces, toil, runbooky, incidenty, technické hranice a hiring.
+- 2026-05-05: Dopsána kapitola 22 o marketingu bez kouřové clony: segment, konkrétní slib, důkazy, vlastní kanály, lead kvalita, privacy-first měření, dark patterns a pravidelný marketingový rytmus.
