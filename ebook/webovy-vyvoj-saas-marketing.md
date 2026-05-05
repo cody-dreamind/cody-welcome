@@ -3416,6 +3416,288 @@ Výběr trhu a positioning jsou disciplína odmítání. Odmítáte příliš š
 - [April Dunford: Positioning and Competition](https://www.aprildunford.com/post/positioning-and-competition)
 - [Strategyzer: The Value Proposition Canvas](https://www.strategyzer.com/library/the-value-proposition-canvas)
 
+## Kapitola 16: Pricing: per-seat, usage-based, hybrid a enterprise
+
+Pricing není jen tabulka na webu. Je to produktové rozhodnutí, obchodní filtr, slib zákazníkovi a interní mechanismus, podle kterého poznáte, jestli produkt vydělává přiměřeně k hodnotě, kterou dodává. Špatný pricing umí zničit dobrý produkt dvěma směry: buď zákazníky odradí dřív, než pochopí hodnotu, nebo firmu postupně vyhladoví, protože roste používání, podpora i infrastruktura, ale tržby ne.
+
+U SaaS je největší past tvářit se, že existuje jeden správný model. Neexistuje. Per-seat dává smysl, když hodnota roste s počtem lidí v týmu. Usage-based dává smysl, když hodnota roste se spotřebou, objemem dat, počtem transakcí nebo AI tokeny. Hybrid dává smysl, když potřebujete kombinovat předvídatelnost a férovost. Enterprise pricing dává smysl, když zákazník nekupuje jen software, ale také bezpečnost, smlouvu, podporu, integrace a snížení rizika.
+
+Paddle ve svém průvodci rozlišuje pricing model jako rámec účtování, například per-user, tiered nebo usage-based, a pricing strategy jako úvahu, proč jsou ceny nastavené právě tak a pro jaké segmenty ([Paddle: SaaS Pricing Models and Strategies](https://www.paddle.com/blog/saas-pricing-models-strategies-fltr)). To je dobré praktické rozdělení. Model je mechanika. Strategie je důvod.
+
+### Začněte hodnotovou metrikou
+
+Hodnotová metrika je jednotka, podle které zákazník nejlépe chápe růst hodnoty produktu. Nemusí to být totéž co technická spotřeba. U týmového nástroje to mohou být aktivní uživatelé. U e-mailové platformy počet kontaktů nebo odeslaných zpráv. U API počet volání. U AI produktu počet zpracovaných dokumentů, minut, tokenů nebo dokončených úkolů. U compliance nástroje počet entit, auditů, klientů nebo reportů.
+
+Dobrá hodnotová metrika má čtyři vlastnosti:
+
+- Zákazník jí rozumí bez vysvětlování.
+- Roste spolu s hodnotou, kterou zákazník dostává.
+- Dá se přesně měřit a auditovat.
+- Neodměňuje chování, které nechcete podporovat.
+
+Příklad: pokud prodáváte klientský portál pro servisní týmy, můžete účtovat podle počtu interních uživatelů, klientů, projektů nebo měsíčních reportů. Každá volba mění chování zákazníka. Per-seat může vést k tomu, že tým sdílí jeden účet. Cena za klienta může brzdit rozšíření portálu na více zákazníků. Cena za report může být férová, pokud report je skutečný výstup hodnoty, ale musí být srozumitelná a předvídatelná.
+
+Nejdřív si proto napište:
+
+1. Kdy zákazník jasně získá hodnotu?
+2. Co se u úspěšného zákazníka přirozeně zvětšuje?
+3. Co zákazník umí předem odhadnout?
+4. Co umíte měřit bez šmírování a bez sběru zbytečných dat?
+5. Která metrika zachovává zdravou marži i při intenzivním používání?
+
+Codyho komentář: nejhorší pricing metrika je ta, která vypadá hezky v ceníku, ale trestá zákazníka za úspěšné používání produktu. Pak si tým gratuluje, že má "monetizaci", a zákazník mezitím hledá workaround. Gratulace, právě jste nacenili vlastní obcházení.
+
+### Per-seat: jednoduchý, ale ne vždy spravedlivý
+
+Per-seat pricing účtuje podle počtu uživatelů. Stripe v dokumentaci popisuje licensed usage tak, že množství subscription itemu zůstává nastavené pro fakturační období a zákazník platí cena krát množství, například tři uživatelé krát cena za uživatele ([Stripe Docs: Usage types - licensed usage](https://docs.stripe.com/billing/subscriptions/usage-based-legacy/pricing-models?locale=en-GB#usage-types)). Pro B2B SaaS je to tradičně srozumitelné, protože firmy chápou účty, role a rozpočty na tým.
+
+Per-seat funguje dobře, když:
+
+- každý uživatel má vlastní pracovní hodnotu,
+- produkt je každodenní nástroj týmu,
+- náklady na dalšího uživatele nejsou výrazně proměnlivé,
+- zákazník má jasný interní rozpočet na lidi nebo licence,
+- bezpečnost vyžaduje individuální účty a audit stopu.
+
+Per-seat selhává, když:
+
+- chcete, aby produkt vidělo hodně lidí, ale platba za každého brzdí adopci,
+- skutečné náklady vznikají spíš spotřebou než počtem uživatelů,
+- zákazník má mnoho občasných uživatelů,
+- hodnota je týmová nebo datová, ne individuální,
+- zákazník začne sdílet účty, aby neplatil za okrajové role.
+
+Praktický příklad: interní nástroj pro projektové řízení může per-seat pricing unést, protože každý člen týmu aktivně pracuje. Klientský portál pro reportování už je citlivější. Pokud chcete, aby klient přizval finance, právníka a vedení, cena za každého externího uživatele může zabít přesně tu transparentnost, kterou prodáváte. Lepší může být platform fee plus určitý počet interních seatů a neomezené nebo levné klientské přístupy s omezenými právy.
+
+Per-seat pricing proto neberte jako výchozí pravdu. Berte ho jako dobrou volbu tam, kde uživatel rovná se hodnota.
+
+### Usage-based: férový, ale náročný na důvěru
+
+Usage-based pricing účtuje podle spotřeby. Stripe u metered usage popisuje účtování zpětně podle množství spotřebovaného během období a upozorňuje, že používání musíte zaznamenávat a reportovat ([Stripe Docs: Metered usage](https://docs.stripe.com/billing/subscriptions/usage-based-legacy/pricing-models?locale=en-GB#metered-usage)). U AI a API produktů je to často přirozenější než per-seat, protože náklady i hodnota mohou růst s počtem volání, tokenů, výpočtů nebo zpracovaných dokumentů.
+
+Usage-based funguje dobře, když:
+
+- zákazník snadno chápe jednotku spotřeby,
+- náklady produktu skutečně rostou se spotřebou,
+- zákazníci mají velmi rozdílný objem používání,
+- nechcete malé zákazníky nutit do vysokého paušálu,
+- umíte dát zákazníkovi průběžný přehled, limity a upozornění.
+
+Usage-based selhává, když:
+
+- zákazník neumí předem odhadnout účet,
+- metrika je technická a nesouvisí s vnímanou hodnotou,
+- fakturace vyžaduje složitou rekonstrukci událostí,
+- neexistují limity proti náhodnému přestřelení,
+- zákaznická podpora pak vysvětluje každou fakturu ručně.
+
+Příklad: AI nástroj může účtovat podle tokenů, ale zákazník často nepřemýšlí v tokenech. Přemýšlí v dokumentech, konverzacích, analýzách nebo vyřešených požadavcích. Tokeny jsou nákladová jednotka. Hodnotová jednotka může být "zpracovaný dokument do 50 stran" nebo "uzavřený případ". Někdy je rozumné držet tokeny interně pro marži a zákazníkovi ukázat jednodušší balíček kreditů.
+
+U usage-based pricingu je důvěra součást produktu. Zákazník musí vidět:
+
+- aktuální spotřebu,
+- odhad měsíční faktury,
+- jasné limity,
+- historii účtovaných událostí,
+- export pro kontrolu,
+- upozornění před překročením rozpočtu.
+
+Bez toho usage-based působí jako taxametr v autě bez displeje. Jede to, ale nikdo není klidný.
+
+### Hybrid: často nejlepší kompromis
+
+Hybridní pricing kombinuje základní paušál s další proměnnou složkou. Stripe uvádí, že podporuje modely jako subscriptions, usage-based, credit-based, tiered a hybridní přístupy kombinující více modelů ([Stripe: Usage-Based Billing](https://stripe.com/gb/billing/usage-based-billing)). V praxi je hybrid častý u produktů, které potřebují předvídatelné minimum tržeb a zároveň férově zpoplatnit vysoké využití.
+
+Typické hybridy:
+
+- základní platform fee plus seaty,
+- základní tarif plus overage za spotřebu,
+- seat-based tým plus kredity na AI nebo API,
+- paušál podle plánu plus usage-based složka pro velké objemy,
+- enterprise kontrakt s commitovaným minimem a doplatkem za překročení.
+
+Hybrid funguje dobře, když zákazník potřebuje rozpočtovou jistotu a dodavatel potřebuje chránit marži. Základní paušál platí za dostupnost, podporu, bezpečnost, vývoj a provoz. Spotřební složka platí za to, co se opravdu mění s používáním.
+
+Příklad pro privacy-first SaaS:
+
+- Starter: měsíční paušál pro malý tým, omezený počet projektů, základní export.
+- Pro: vyšší paušál, více interních seatů, klientské přístupy, audit log, integrace.
+- Business: platform fee, větší objem reportů, role, SSO, datová mapa, prioritní podpora.
+- Enterprise: smluvní minimum, vlastní limity, DPA, SLA, bezpečnostní review, samostatný tenant nebo dedikované prostředí podle potřeby.
+
+Hybrid ale nesmí být matematická džungle. Když ceník vyžaduje kalkulačku, právníka a malý rituál v zasedačce, je čas zjednodušit. Zákazník má pochopit, co spouští vyšší cenu a proč je to férové.
+
+### Enterprise: zákazník kupuje snížení rizika
+
+Enterprise pricing není jen "zavolejte nám", protože neumíme napsat cenu. U enterprise zákazníků často prodáváte víc než přístup do aplikace. Prodáváte jistotu, že produkt zapadne do jejich provozu, bezpečnosti, nákupu, právního rámce a podpory.
+
+Enterprise zákazník typicky řeší:
+
+- SSO a správu identit,
+- audit logy a role,
+- DPA, bezpečnostní dotazníky a právní podmínky,
+- SLA, podporu a eskalace,
+- fakturaci přes objednávky a roční kontrakty,
+- datovou lokalitu a subdodavatele,
+- integrace s existujícími systémy,
+- exporty, retenční politiky a ukončení spolupráce.
+
+To všechno má cenu. Ne proto, že enterprise zákazník má větší peněženku, ale protože dodavatel přebírá víc práce a rizika. Pokud malý tým přislíbí enterprise požadavky za cenu běžného self-serve tarifu, zadělává si na drahou podporu, bezpečnostní dluh a nekonečné výjimky.
+
+Praktický přístup:
+
+1. Nechte veřejný ceník pro self-serve segmenty.
+2. Enterprise nabídku popište jako rozsah schopností, ne jen jako tajnou cenu.
+3. Definujte minimální roční kontrakt, který pokryje náklady na onboarding, právní práci a podporu.
+4. Oddělte standardní enterprise funkce od placených profesionálních služeb.
+5. V každé smlouvě hlídejte datové povinnosti, export, ukončení a odpovědnosti.
+
+Privacy-first hodnota je u enterprise silná, pokud je konkrétní. Nestačí říct "bereme soukromí vážně". Ukažte datovou mapu, seznam subdodavatelů, region provozu, retenční lhůty, způsob exportu a kdo má přístup k produkčním datům. Tady se evropský provoz mění z morálního postoje na obchodní výhodu.
+
+### Ceník má prodávat i filtrovat
+
+Pricing page není jen výloha. Je to kvalifikační mechanismus. Dobrý ceník pomáhá správným zákazníkům vybrat vhodný plán a špatným zákazníkům pochopit, že produkt pro ně není. To je v pořádku. Každý zákazník není dobrý zákazník.
+
+Dobrý ceník má:
+
+- jasně pojmenované plány podle typu zákazníka nebo fáze,
+- krátké vysvětlení, pro koho plán je,
+- hodnotové rozdíly, ne jen dlouhou tabulku funkcí,
+- férově popsané limity,
+- viditelné informace o datech a soukromí,
+- jednoduché CTA podle nákupního režimu: začít, domluvit demo, poslat dotaz,
+- FAQ k fakturaci, změnám plánu, zrušení, exportu a podpoře.
+
+Špatný ceník:
+
+- schovává zásadní limity do poznámek,
+- používá plány jen jako psychologickou hru bez vazby na segmenty,
+- slibuje "neomezeně" tam, kde existují interní limity,
+- nutí každého do sales callu,
+- neříká nic o datech, exportu a zrušení účtu.
+
+U privacy-first produktů má smysl přidat krátkou sekci přímo do ceníku: "Co se děje s daty". Ne právní román. Praktický přehled:
+
+- provozní region,
+- analytika bez reklamních trackerů,
+- fakturační poskytovatel,
+- export dat,
+- možnost smazání nebo ukončení,
+- odkaz na podrobné zásady.
+
+Tato sekce může snížit konverzi u lidí, kteří ji neřeší? Možná. Ale zvýší důvěru u těch, kteří ji řeší hodně. A to jsou často lepší zákazníci pro evropský B2B SaaS.
+
+### První cena je hypotéza
+
+První pricing nebude dokonalý. Cílem není trefit finální tabulku navždy. Cílem je vytvořit hypotézu, kterou lze ověřit bez chaosu. Stripe Atlas v průvodci low-touch SaaS pricingem popisuje běžné balení do více plánů v pricing gridu a práci s rozdílným přístupem k funkcím nebo limitům podle plánu ([Stripe Atlas: Pricing low-touch SaaS](https://stripe.com/en-my/guides/atlas/saas-pricing)). Pro začátek je to praktické: tři plány jsou často srozumitelnější než vlastní kalkulátor pro každého.
+
+Postup pro první pricing:
+
+1. Vyberte jeden hlavní segment.
+2. Sepište hodnotu v penězích, čase, riziku nebo reputaci.
+3. Vyberte hodnotovou metriku.
+4. Navrhněte jednoduché tři plány: vstupní, hlavní, vyšší.
+5. Určete, co je v plánech podle hodnoty, ne podle náhodného seznamu funkcí.
+6. Spočítejte hrubou marži včetně podpory, infrastruktury, AI nákladů, plateb a provozu.
+7. Ověřte cenu v reálných sales rozhovorech.
+8. Sledujte, kde lidé váhají: cena, hodnota, důvěra, funkce nebo nákupní proces.
+9. Měňte pricing plánovaně, s verzemi a férovou komunikací stávajícím zákazníkům.
+
+Neptal bych se zákazníka "kolik byste platili?". Lepší je ukázat konkrétní nabídku a sledovat reakci. Rozhovor nad skutečnou cenou je jiný než abstraktní anketa. Zákazník najednou řeší rozpočet, schválení a návratnost. Přesně tam pricing žije.
+
+### Sleva není strategie
+
+Slevy jsou nástroj, ne cenová identita. Pokud každý zákazník dostane slevu, veřejná cena není cena. Je to divadelní kulisa. U B2B SaaS se slevám někdy nevyhnete, hlavně u ročních kontraktů, pilotů nebo enterprise nákupu. Musí ale mít pravidla.
+
+Rozumné důvody pro slevu:
+
+- roční platba předem,
+- omezený pilot s jasným rozsahem a koncem,
+- referenční zákazník s konkrétní protihodnotou,
+- větší commit nebo objem,
+- neziskový nebo vzdělávací program, pokud to odpovídá strategii.
+
+Špatné důvody:
+
+- zákazník zatlačil,
+- obchodník chce zavřít měsíc,
+- produkt neumí vysvětlit hodnotu,
+- bojíte se říct cenu nahlas,
+- konkurence je levnější, ale neřeší totéž.
+
+Sleva má mít konec, důvod a záznam. Jinak se pricing rozpadne do výjimek, které nikdo neumí spravovat.
+
+### Privacy-first billing: fakturace je také datový tok
+
+Billing není jen finanční proces. Je to datový tok s osobními údaji, firemními údaji, platebními informacemi, usage eventy, fakturami a podporou. Pokud produkt stavíte privacy-first, pricing a billing architektura musí odpovídat stejným hodnotám jako zbytek aplikace.
+
+Minimum:
+
+- Sbírejte jen údaje potřebné pro platbu, fakturaci a provoz účtu.
+- Oddělte billing identitu od produktových dat tam, kde to dává smysl.
+- Do payment providera neposílejte obsahová data, která nepotřebuje.
+- Usage eventy agregujte, pokud fakturace nepotřebuje detailní obsah.
+- V administraci ukažte, kdo má přístup k fakturám a billing nastavení.
+- Dokumentujte subdodavatele a regiony.
+- Umožněte export faktur, smluv a přehledu spotřeby.
+- Mějte jasný proces ukončení účtu a smazání nebo retence dat.
+
+Příklad: AI SaaS účtuje podle počtu zpracovaných dokumentů. Billing systém nepotřebuje znát obsah dokumentů, jména lidí v dokumentu ani výsledek analýzy. Potřebuje čas, tenant, typ účtované jednotky, počet jednotek, tarif a případně technický identifikátor pro audit. Čím méně citlivých dat opustí produktovou hranici, tím menší je riziko.
+
+Privacy-first pricing také znamená, že ceník nemá nutit zákazníka do zbytečného sledování. Nepřidávejte reklamní pixely jen proto, že "pricing page musí být optimalizovaná". Měřte návštěvnost, kliknutí na plán, dokončení checkoutu a dotazy z formuláře. To stačí pro rozhodování. Pro špionážní operu si najděte jiné divadlo.
+
+### Praktický pricing workshop
+
+Vyhraďte si půl dne a vyplňte jednu tabulku. Neřešte barvy ceníku. Řešte logiku.
+
+Otázky:
+
+1. Kdo je první segment?
+2. Jaký výsledek produkt dodává?
+3. Jak zákazník měří hodnotu dnes?
+4. Jaké jsou současné alternativy a jejich cena v penězích, čase nebo riziku?
+5. Jaká metrika nejlépe roste s hodnotou?
+6. Jaké jsou variabilní náklady produktu?
+7. Kde vzniká podpora a onboarding?
+8. Co musí být v levném plánu, aby byl užitečný?
+9. Co patří do vyššího plánu, protože generuje vyšší hodnotu nebo vyšší náklady?
+10. Co je enterprise požadavek, ne běžná funkce?
+11. Jak zákazník uvidí spotřebu a limity?
+12. Jak minimalizujete billing data a subdodavatele?
+
+Potom napište první verzi:
+
+- Plán A: pro koho je, hlavní hodnota, limit, cena, CTA.
+- Plán B: pro koho je, hlavní hodnota, limit, cena, CTA.
+- Plán C: pro koho je, hlavní hodnota, limit, cena, CTA.
+- Enterprise: pro koho je, co typicky zahrnuje, jak začít rozhovor.
+
+Nakonec si položte nepříjemnou otázku: kdyby zákazník viděl jen pricing page a žádné vaše vysvětlení, pochopil by, proč má platit víc? Pokud ne, problém nemusí být cena. Může to být packaging.
+
+### Checklist kapitoly
+
+- Máte jasnou hodnotovou metriku?
+- Roste cena spolu s hodnotou, ne jen s interní náhodou?
+- Umíte vysvětlit, proč používáte per-seat, usage-based, hybrid nebo enterprise model?
+- Neodrazujete pricingem adopci lidí, kteří mají produkt používat?
+- Chrání pricing marži při intenzivním používání, hlavně u AI a datově náročných funkcí?
+- Vidí zákazník spotřebu, limity a odhad účtu před fakturou?
+- Má enterprise plán skutečné enterprise schopnosti, ne jen schovanou cenu?
+- Je ceník srozumitelný bez obchodního hovoru?
+- Máte pravidla pro slevy?
+- Billing sbírá jen data, která fakturace opravdu potřebuje?
+- Dokumentujete subdodavatele, regiony, export a ukončení účtu?
+- Umíte pricing měnit verzovaně a férově vůči stávajícím zákazníkům?
+
+Pricing je živý systém. První verze má být dost jednoduchá, aby ji zákazník pochopil, a dost promyšlená, aby nezničila marži. Nehledejte dokonalou tabulku. Hledejte férovou vazbu mezi hodnotou, používáním, náklady a důvěrou. To je méně sexy než "growth hack", ale výrazně lépe se podle toho platí faktury.
+
+### Zdroje kapitoly
+
+- [Paddle: SaaS Pricing Models and Strategies](https://www.paddle.com/blog/saas-pricing-models-strategies-fltr)
+- [Stripe Docs: Model usage-based pricing](https://docs.stripe.com/billing/subscriptions/usage-based-legacy/pricing-models?locale=en-GB)
+- [Stripe: Usage-Based Billing](https://stripe.com/gb/billing/usage-based-billing)
+- [Stripe Atlas: Pricing low-touch SaaS](https://stripe.com/en-my/guides/atlas/saas-pricing)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -3433,3 +3715,4 @@ Výběr trhu a positioning jsou disciplína odmítání. Odmítáte příliš š
 - 2026-05-05: Dopsána kapitola 13 o AI ve webových produktech: vhodné a nevhodné use casy, náklady, architektura, RAG, bezpečnost, privacy-first provoz, EU AI Act kontext a evals.
 - 2026-05-05: Dopsána kapitola 14 o bezpečnosti a provozu: rizika, bezpečný vývoj, tenant izolace, tajemství, zálohy, monitoring, logy, incident response a vulnerability disclosure.
 - 2026-05-05: Dopsána kapitola 15 o výběru trhu a positioningu: segment, bolest, alternativy, tržní kategorie, hodnotová nabídka, privacy-first diferenciace a praktický workshop.
+- 2026-05-05: Dopsána kapitola 16 o SaaS pricingu: hodnotová metrika, per-seat, usage-based, hybrid, enterprise, ceník, slevy a privacy-first billing.
