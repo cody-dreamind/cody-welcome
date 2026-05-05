@@ -4022,6 +4022,285 @@ Onboarding je první provozní slib produktu. Ukazuje, jestli opravdu rozumíte 
 - [EUR-Lex: General Data Protection Regulation, Article 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1670531008195&uri=CELEX%3A32016R0679)
 - [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
 
+## Kapitola 18: Retence: proč churn není jen problém podpory
+
+Retence není oddělení, které se probudí ve chvíli, kdy zákazník klikne na "zrušit". Retence je výsledek toho, jestli produkt dlouhodobě dodává slíbenou hodnotu, jestli zákazník chápe další krok, jestli cena odpovídá výsledku a jestli provoz nepřidává zbytečné tření. Support umí zachytit část problémů. Nemůže ale zachránit produkt, který byl prodaný špatnému segmentu, slibuje nejasnou hodnotu nebo se po onboardingu přestane zajímat, jestli zákazník něco skutečně vyřešil.
+
+Churn je jen viditelný konec příběhu. Zákazník často odchází mnohem dřív, než zruší předplatné. Přestane zvát kolegy, přestane používat klíčovou funkci, začne exportovat data, otevře víc support ticketů, sníží plán, přestane reagovat na onboarding nebo účet používá jen jeden člověk místo celého týmu. Kdo řeší churn až v cancellation flow, čte poslední stránku knihy a diví se, že nezná děj.
+
+Retence proto potřebuje tři disciplíny:
+
+1. Produktovou: zákazník se opakovaně dostává k hodnotě.
+2. Obchodní: cena, segment a očekávání dávají smysl.
+3. Provozní: billing, podpora, komunikace a data netvoří zbytečné riziko.
+
+### Nejprve oddělte typy churnu
+
+Ne každý odchod znamená totéž. Když odejde malý trial účet, který nikdy nedosáhl aktivace, je to jiný problém než ztráta velkého zákazníka po roce používání. Když zákazník nezaplatí kvůli expiraci karty, není to stejný signál jako vědomé zrušení kvůli chybějící funkci. A když zákazník sníží plán, nejde o logo churn, ale o ztracenou hodnotu.
+
+Základní členění:
+
+- Logo churn: zákazník nebo účet končí.
+- Revenue churn: odchází opakovaný příjem.
+- Contraction: zákazník zůstává, ale platí méně.
+- Expansion: zákazník zůstává a platí více, protože získává větší hodnotu.
+- Voluntary churn: zákazník aktivně ruší nebo neprodlužuje.
+- Involuntary churn: platba selže, účet spadne do dunningu nebo neproběhne obnova.
+
+Stripe ve své dokumentaci k subscription analytics rozlišuje churned subscribers, churned revenue, contraction, expansion a retention cohorts; revenue retention může díky expanzi přesáhnout 100 % ([Stripe Docs: Subscription analytics](https://docs.stripe.com/billing/subscriptions/analytics?locale=en-GB)). ChartMogul popisuje Net Revenue Retention jako retenci příjmů včetně expanze a uvádí vzorec `(Starting MRR + Expansion MRR - Contraction MRR - Churn MRR) / Starting MRR`; Gross Revenue Retention naopak expanzi nepočítá ([ChartMogul Help: Benchmarks](https://help.chartmogul.com/article/138-benchmarks)).
+
+Prakticky: logo churn říká, kolik zákazníků ztrácíte. Revenue churn říká, jak moc to bolí. GRR ukazuje, jak dobře držíte existující příjem bez přikrášlení expanzí. NRR ukazuje, jestli stávající zákazníci jako celek rostou. Všechny metriky jsou užitečné, pokud víte, co znamenají. Jedna metrika bez segmentace je jen číslo s kravatou.
+
+### Retence začíná před registrací
+
+Nejlevnější churn je ten, který nikdy nevznikne, protože nepřivedete špatného zákazníka. Pokud marketing slíbí "automatizaci celého provozu za den" a produkt ve skutečnosti řeší úzký reportingový workflow, churn není chyba podpory. Je to chyba slibu. Pokud sales prodá enterprise zákazníkovi integrace, které tým nemá kapacitu dodat, churn se narodí už při podpisu smlouvy.
+
+Před akvizicí si hlídejte:
+
+- Homepage říká konkrétní segment a konkrétní výsledek.
+- Ceník neprodává plán lidem, pro které produkt ještě není vhodný.
+- Demo neukazuje ručně připravené kouzlo, které běžný účet neumí zopakovat.
+- Sales poznámky se předávají do onboardingu.
+- Zákazník ví, co bude potřeba z jeho strany: data, lidé, integrace, rozhodnutí.
+- Privacy-first sliby jsou pravdivé i v produktu, ne jen na webu.
+
+Příklad: SaaS pro klientské portály prodá "rychlé sdílení stavu zakázek" týmu, který ve skutečnosti potřebuje komplexní ERP integraci, schvalovací workflow a vlastní datové sklady. Obchod vypadá dobře první měsíc. Třetí měsíc se všichni diví, že zákazník "nemá adopci". Nemá ji proto, že nekoupil produkt. Koupil představu.
+
+### Health score není věštecká koule
+
+Customer health score může pomoct, ale jen pokud vychází z reálných signálů hodnoty. Špatný health score sčítá náhodné aktivity: přihlášení, počet kliknutí, otevření e-mailu, návštěvu dashboardu. To může měřit nervozitu, ne hodnotu. Dobrý health score sleduje, jestli účet opakovaně dokončuje práci, kvůli které produkt platí.
+
+Signály zdravého B2B účtu:
+
+- První aktivační událost proběhla v očekávaném čase.
+- Produkt používá správná role, ne jen jeden zvědavý tester.
+- Vznikají nové pracovní objekty: projekty, reporty, případy, automaty.
+- Výstupy se sdílí s kolegy nebo klienty.
+- Integrace běží bez opakovaných chyb.
+- Admin udržuje role, přístupy a bezpečnostní nastavení.
+- Zákazník používá exporty a reporting jako součást workflow, ne jen před odchodem.
+- Support dotazy se posouvají od "jak to funguje" k "jak rozšířit použití".
+
+Varovné signály:
+
+- Aktivovaný účet po prvním týdnu ztichne.
+- Používání zůstane jen u zakladatele nebo jednoho šampiona.
+- Klíčová integrace opakovaně padá.
+- Účet má hodně ručních workaroundů mimo produkt.
+- Zákazník otevírá dotazy k exportu, smazání nebo ukončení bez předchozí expanze.
+- Opakují se billing problémy.
+- Většina hodnoty je závislá na ruční práci vašeho týmu.
+
+Codyho komentář: health score má být budík, ne autopilot. Pokud zákazník svítí červeně, automatická sekvence pěti e-mailů není péče. Je to zvuk požárního alarmu přehrávaný jako podcast.
+
+### Měřte hodnotu, ne šmírování
+
+Privacy-first retence neznamená, že neměříte nic. Znamená, že měříte to, co potřebujete pro zlepšení produktu a péči o zákazníka, bez sběru obsahu, který k tomu nepotřebujete. GDPR stojí mimo jiné na principu minimalizace dat: osobní údaje mají být omezené na to, co je nezbytné pro daný účel ([EUR-Lex: GDPR, článek 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)). EDPB ve vodítkách k data protection by design and by default popisuje ochranu dat jako návrhovou povinnost, která se má promítat do technických i organizačních opatření ([EDPB: Guidelines 4/2019 on Article 25](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)).
+
+Dobrá eventová sada pro retenci může obsahovat:
+
+- `account_activated`
+- `weekly_core_workflow_completed`
+- `report_shared`
+- `integration_failed`
+- `integration_recovered`
+- `teammate_invited`
+- `role_updated`
+- `billing_payment_failed`
+- `billing_payment_recovered`
+- `plan_downgraded`
+- `export_requested`
+- `cancellation_started`
+- `cancellation_reason_submitted`
+
+Všimněte si, co v ní není: obsah dokumentu, text komentáře, jméno klienta, citlivá pole z importu nebo kompletní historie klikání. Pro retenci obvykle potřebujete vědět, že workflow proběhl, ne číst jeho obsah. Pokud potřebujete analyzovat obsah pro produktovou funkci, oddělte to od behaviorální analytiky a jasně vysvětlete účel, retenci a přístupy.
+
+### Cancellation flow má být poctivý, ne zákeřný
+
+Zrušení účtu je bolestivé, ale není to důvod udělat z produktu únikovou místnost. Dark patterns v cancel flow krátkodobě sníží rušení a dlouhodobě zničí důvěru. Zákazník, který chce odejít, má mít jasnou cestu. Zároveň je fér nabídnout lepší alternativu, pokud skutečně řeší jeho situaci.
+
+Poctivý cancellation flow:
+
+- jasně ukáže, co se stane po zrušení,
+- nabídne export dat před ukončením,
+- vysvětlí retenční lhůty a mazání,
+- zeptá se na důvod jednou, stručně a volitelně,
+- nabídne pauzu nebo downgrade tam, kde to dává smysl,
+- neskrývá tlačítko za podporu, pokud produkt byl koupen self-serve,
+- po zrušení pošle potvrzení bez marketingového nátlaku.
+
+Dobré důvody k nabídce alternativy:
+
+- Zákazník odchází kvůli sezónnosti: nabídněte pauzu.
+- Zákazník platí za příliš velký plán: nabídněte downgrade.
+- Zákazník nemá čas na nastavení: nabídněte jednorázovou onboarding pomoc.
+- Zákazník řeší chybějící integraci: nabídněte realistický termín nebo férový export.
+
+Špatné důvody:
+
+- Sleva jen proto, že klikl na zrušit.
+- Nekonečné potvrzovací obrazovky.
+- Povinný telefonát pro self-serve účet.
+- Strašení ztrátou dat bez jasného exportu.
+- Přidání do marketingové sekvence bez souhlasu.
+
+Odchod je poslední zkušenost zákazníka s produktem. Pokud je férová, může se vrátit. Pokud je manipulativní, vrátí se maximálně v interním příkladu "takhle to nedělejme".
+
+### Involuntary churn je provozní dluh
+
+Část churnu není produktové odmítnutí. Je to selhaná platba, expirovaná karta, chybějící 3D Secure potvrzení, špatný fakturační kontakt, zpožděná objednávka nebo interní schvalování. Stripe v revenue recovery dokumentaci doporučuje řešit opakované platby pomocí recovery analytics, Smart Retries, zákaznických e-mailů a automatizací ([Stripe Docs: Revenue recovery](https://docs.stripe.com/billing/revenue-recovery?locale=en-GB)). Paddle u subscription renewal dunning popisuje stav `past_due`, automatické opakované pokusy, upozornění a rozhodnutí, zda po vyčerpání pokusů účet pozastavit nebo zrušit ([Paddle Developer: Subscription past due](https://developer.paddle.com/build/lifecycle/subscription-renewal-dunning)).
+
+Praktické minimum:
+
+- Sledujte `past_due` účty odděleně od skutečných zrušení.
+- Posílejte srozumitelný odkaz pro aktualizaci platební metody.
+- U B2B účtů oddělte uživatele produktu od fakturačního kontaktu.
+- U ročních kontraktů připomínejte obnovu včas, ne den po splatnosti.
+- Neodpojujte účet okamžitě, pokud jde o zákazníka s historií plateb.
+- Mějte jasný stav: aktivní, past due, grace period, paused, canceled.
+- Logujte billing události tak, aby podpora viděla, co se stalo.
+
+Privacy-first poznámka: billing recovery nepotřebuje vědět, co zákazník v produktu dělá. Potřebuje fakturační stav, kontakt pro platbu, bezpečný odkaz a historii pokusů. Čím méně produktových dat protlačíte do billing nástroje, tím lépe.
+
+### Expansion je zdravá retence, pokud vychází z hodnoty
+
+Retence není jen bránit odchodům. U dobrého SaaS zákazník časem rozšiřuje používání: přidá tým, propojí integraci, zvýší objem, koupí vyšší plán, pozve další oddělení nebo začne používat nový workflow. To je zdravá expanze. Není to totéž jako agresivní upsell.
+
+Dobrá expanze se nabízí, když:
+
+- zákazník narazil na limit, který odpovídá růstu hodnoty,
+- další plán řeší jasný problém,
+- nový modul navazuje na existující workflow,
+- zákazník už dosáhl hodnoty v původním použití,
+- existuje interní šampion i kupující,
+- data a bezpečnost jsou vysvětlené pro širší nasazení.
+
+Špatná expanze:
+
+- produkt tlačí upgrade před první hodnotou,
+- limit je uměle nízký a frustruje běžné použití,
+- vyšší plán obsahuje základní bezpečnostní funkce, které by měly být standard,
+- obchod prodává další modul zákazníkovi, který ještě nezvládl první,
+- upsell e-maily ignorují reálné chování účtu.
+
+U privacy-first SaaS je expanze často spojená s důvěrou. Zákazník začne na jednom use casu a rozšíří se teprve ve chvíli, kdy vidí, že data zůstávají pod kontrolou, export funguje, role dávají smysl a audit log není jen položka v ceníku.
+
+### Churn interview: ptejte se na minulost, ne na dojmy
+
+Exit survey je užitečný filtr, ale málokdy stačí. Lidé vybírají nejbližší možnost, píšou zdvořilé věty nebo nechtějí trávit čas vysvětlováním. Pokud ztratíte důležitý účet, udělejte krátký churn interview. Ne proto, abyste zákazníka přesvědčili k návratu za každou cenu. Proto, abyste pochopili, co se stalo.
+
+Otázky:
+
+1. Co jste od produktu očekávali při nákupu?
+2. Kdy jste poprvé cítili, že se očekávání nenaplňuje?
+3. Který workflow měl fungovat a nefungoval?
+4. Co jste používali místo produktu?
+5. Kdo v týmu produkt přestal používat jako první?
+6. Byl problém v hodnotě, použitelnosti, ceně, důvěře, interním procesu nebo technice?
+7. Co by muselo být jinak, aby dávalo smysl pokračovat?
+8. Jaké řešení používáte teď?
+9. Bylo zrušení a export dat srozumitelné?
+
+Po rozhovoru zařaďte důvod do jedné z kategorií:
+
+- špatný segment,
+- špatný slib,
+- nedosažená aktivace,
+- chybějící klíčová funkce,
+- technická nespolehlivost,
+- slabá týmová adopce,
+- cena nebo packaging,
+- billing problém,
+- bezpečnost nebo právní riziko,
+- projekt u zákazníka skončil.
+
+Jednotlivý churn bolí. Vzor opakovaného churnu je produktová mapa. Ignorovat ji je jako vypnout kontrolku motoru, protože ruší atmosféru palubní desky.
+
+### Praktický retenční rytmus
+
+Retence potřebuje pravidelnou provozní kadenci. Ne roční strategickou prezentaci. Krátký rytmus, kde se míchají data, support, produkt a obchod.
+
+Týdně:
+
+- projít nové churny, downgrady a past due účty,
+- označit důvod u každého významného případu,
+- zkontrolovat účty s červenými health signály,
+- předat opakující se problémy do produktu,
+- ověřit, zda billing recovery běží a není rozbitý.
+
+Měsíčně:
+
+- vyhodnotit cohort retention podle segmentu,
+- porovnat aktivované a neaktivované účty,
+- zkontrolovat GRR a NRR odděleně,
+- projít top expansion příležitosti,
+- upravit onboarding, messaging nebo packaging podle zjištění.
+
+Kvartálně:
+
+- udělat retenční review podle segmentů,
+- zkontrolovat, jestli pricing neodměňuje špatné chování,
+- projít bezpečnostní a privacy dotazy zákazníků,
+- vyhodnotit, které funkce skutečně drží hodnotu,
+- rozhodnout, co přestat prodávat.
+
+Pro malé týmy stačí jedna tabulka a jeden dashboard. Důležitější než nástroj je disciplína: každý churn má důvod, každý důvod má kategorii a opakované kategorie mají vlastníka.
+
+### Praktický retenční workshop
+
+Vezměte posledních deset zrušených nebo downgradovaných účtů a posledních deset nejlepších aktivních účtů. Neporovnávejte dojmy. Porovnejte cestu.
+
+Otázky:
+
+1. Z jakého segmentu účet přišel?
+2. Jaký slib slyšel před nákupem?
+3. Dosáhl aktivační události?
+4. Jak dlouho trvala první hodnota?
+5. Kolik lidí z účtu produkt reálně používalo?
+6. Který workflow se opakoval?
+7. Jaké support dotazy vznikly v prvních 30 dnech?
+8. Proběhly billing problémy?
+9. Nastala expanze, stagnace nebo downgrade?
+10. Byl důvod odchodu produktový, obchodní, provozní nebo externí?
+11. Co mají nejlepší účty společné?
+12. Co mají churned účty společné?
+
+Potom napište tři rozhodnutí:
+
+- Koho přestat aktivně získávat, protože churnuje z předvídatelného důvodu.
+- Co změnit v onboardingu, aby správný zákazník rychleji dosáhl hodnoty.
+- Jaký jeden provozní problém odstranit, aby neodcházel zákazník, který jinak produkt chce.
+
+Tohle je retenční práce. Ne magická sekvence e-mailů, ne "AI churn prediction" před tím, než máte základní data, a ne sleva jako univerzální náplast.
+
+### Checklist kapitoly
+
+- Rozlišujete logo churn, revenue churn, contraction, expansion a involuntary churn?
+- Sledujete GRR a NRR odděleně?
+- Segmentujete retenci podle trhu, plánu, kanálu a aktivačního stavu?
+- Umíte říct, které zákazníky raději nepřivádět?
+- Navazuje onboarding na slib z webu a sales procesu?
+- Máte health signály napojené na skutečnou hodnotu, ne jen na klikání?
+- Měříte retenční eventy bez sběru citlivého obsahu?
+- Má zákazník férový cancellation flow, export a informace o mazání dat?
+- Oddělujete past due účty od vědomého zrušení?
+- Máte nastavené platební retry, upozornění a jasný grace period?
+- Děláte churn interview u významných účtů?
+- Překlápíte opakované churn důvody do produktových nebo obchodních rozhodnutí?
+- Nabízíte expanzi až po dosažené hodnotě?
+- Máte týdenní nebo měsíční retenční rytmus?
+
+Retence není snaha udržet každého za každou cenu. Je to schopnost opakovaně dodávat hodnotu správným zákazníkům a férově se rozloučit s těmi, pro které produkt není. Zdravý SaaS nepotřebuje pasti na odcházející uživatele. Potřebuje jasný slib, dobrou aktivaci, spolehlivý provoz, poctivé měření a produkt, který má důvod používat i po prvním nadšení.
+
+### Zdroje kapitoly
+
+- [Stripe Docs: Subscription analytics](https://docs.stripe.com/billing/subscriptions/analytics?locale=en-GB)
+- [Stripe Docs: Revenue recovery](https://docs.stripe.com/billing/revenue-recovery?locale=en-GB)
+- [ChartMogul Help: Benchmarks and retention metrics](https://help.chartmogul.com/article/138-benchmarks)
+- [Paddle Developer: Subscription past due and dunning](https://developer.paddle.com/build/lifecycle/subscription-renewal-dunning)
+- [EUR-Lex: General Data Protection Regulation, Article 5](https://eur-lex.europa.eu/legal-content/CS/TXT/?uri=CELEX%3A32016R0679)
+- [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -4041,3 +4320,4 @@ Onboarding je první provozní slib produktu. Ukazuje, jestli opravdu rozumíte 
 - 2026-05-05: Dopsána kapitola 15 o výběru trhu a positioningu: segment, bolest, alternativy, tržní kategorie, hodnotová nabídka, privacy-first diferenciace a praktický workshop.
 - 2026-05-05: Dopsána kapitola 16 o SaaS pricingu: hodnotová metrika, per-seat, usage-based, hybrid, enterprise, ceník, slevy a privacy-first billing.
 - 2026-05-05: Dopsána kapitola 17 o SaaS onboardingu: první výsledek, aktivační událost, segmentace, trial, týmové signály, privacy-first data flow a praktický workshop.
+- 2026-05-05: Dopsána kapitola 18 o retenci a churnu: typy churnu, health signály, cancellation flow, involuntary churn, expanze, churn interviews a privacy-first měření.
