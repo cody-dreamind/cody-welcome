@@ -212,7 +212,176 @@ Vezměte jednu důležitou stránku a projděte ji bez interní shovívavosti:
 
 Když web projde tímto testem, nemusí být dokonalý. Bude ale použitelný, měřitelný a obchodně srozumitelný. A to je lepší základ než další redesign, který jen přemaluje stejné nejasnosti.
 
+## Kapitola 3: Technický základ: doména, hosting, DNS, SSL, e-mail, analytika
+
+Technický základ webu je jako účetnictví. Když funguje, nikdo ho neoslavuje. Když nefunguje, najednou stojí obchod, marketing i důvěra. Doména expiruje, e-maily padají do spamu, formulář neodesílá poptávky, certifikát je prošlý, DNS záznamy nikdo nechápe a analytika měří všechno kromě toho, co potřebujete rozhodnout.
+
+Dobrá zpráva: technický základ nemusí být složitý. Musí být záměrný, zdokumentovaný a kontrolovatelný. V malém týmu je největší riziko, že kritické věci visí na jednom člověku, jedné schránce nebo jedné zapomenuté kartě u registrátora. Technická kvalita začíná tím, že víte, kde co běží, kdo k tomu má přístup a co se stane, když něco selže.
+
+Prakticky řešte šest vrstev:
+
+1. Doména: vlastnictví, expirace, přístupy a kontakty.
+2. Hosting: kde běží web, kdo spravuje server a kde jsou data.
+3. DNS: záznamy, změnový proces, DNSSEC a záloha konfigurace.
+4. HTTPS/TLS: automatické certifikáty, přesměrování a bezpečnostní hlavičky.
+5. E-mail: doručitelnost, SPF, DKIM, DMARC a oddělení transakčních zpráv.
+6. Analytika: měřit méně věcí, ale měřit je čistě, s respektem k soukromí.
+
+### Doména: vlastnictví je provozní riziko
+
+Doména není jen adresa. Je to klíč k webu, e-mailu, reputaci a často i k přihlášení do dalších služeb. Když ztratíte kontrolu nad doménou, ztrácíte víc než homepage. Můžete přijít o příchozí poptávky, interní komunikaci, reset hesel a důvěru zákazníků.
+
+Minimum pro každou důležitou doménu:
+
+- Registrátor je jasně zapsaný v interním přehledu.
+- Doména je vlastněná firmou, ne bývalým dodavatelem nebo osobním účtem někoho z týmu.
+- Expirace má zapnuté automatické obnovení a platná platební metoda není vázaná na jednoho člověka.
+- Administrativní e-mail vede na sdílenou nebo dlouhodobě spravovanou adresu.
+- Přístup k registrátorovi má dvoufaktorové ověření.
+- Existuje export nebo screenshot DNS záznamů pro rychlou obnovu.
+
+Příklad: firma má doménu `example.cz`, web u jednoho dodavatele, e-mail u druhého a DNS u registrátora. Pokud odejde člověk, který to nastavoval, nikdo neví, kde změnit TXT záznam pro ověření nové služby. Výsledek? Zbytečný den čekání, panika a improvizace. Řešení není heroické. Stačí jednoduchá tabulka: doména, registrátor, DNS správce, hosting, e-mail, odpovědná osoba, datum poslední kontroly.
+
+### Hosting: kde běží web a kde končí data
+
+Hosting vybírejte podle typu projektu, ne podle toho, co je zrovna populární. Statický marketingový web nepotřebuje stejnou infrastrukturu jako SaaS aplikace s účty, fakturací a audit logy. Naopak SaaS produkt by neměl běžet jako křehký experiment, kde nikdo neví, jak obnovit databázi.
+
+Pro běžný web řešte:
+
+- Umístění dat a provozu, ideálně v EU nebo alespoň s jasným regionem.
+- Zálohy a obnovu, nejen slib, že "nějaké zálohy jsou".
+- Přístupová práva pro tým a dodavatele.
+- Logy: co se ukládá, jak dlouho a kdo k nim má přístup.
+- Možnost odejít: export webu, databáze, médií a konfigurace.
+- Základní monitoring dostupnosti.
+
+Privacy-first hosting není náboženství. Je to disciplína. Když můžete provozovat evropský projekt u evropského poskytovatele a data držet v evropském regionu, dává to obchodní i provozní smysl. Není potřeba posílat každou návštěvu přes půl planety jen proto, že se to ve výchozím tutoriálu dělá takhle.
+
+Codyho komentář: nejlevnější hosting je často drahý ve chvíli, kdy potřebujete obnovit web v pátek večer. A nejdražší platforma není automaticky profesionální, pokud kvůli ní ztratíte kontrolu nad daty, logy a vendor lock-inem. Hezký dashboard není strategie.
+
+### DNS: změny dělejte jako v produkci
+
+DNS je nudné přesně do chvíle, než není. Jeden špatný záznam může shodit web, e-mail nebo ověření externích služeb. Proto DNS nepatří do režimu "kliknu a uvidíme". Patří do režimu: víme, co měníme, proč to měníme, kdy se to projeví a jak to vrátit.
+
+U každé domény si hlídejte hlavně:
+
+- `A` a `AAAA` záznamy pro web.
+- `CNAME` záznamy pro aliasy a subdomény.
+- `MX` záznamy pro e-mail.
+- `TXT` záznamy pro ověření domény, SPF, DKIM a DMARC.
+- TTL hodnoty před migrací a po migraci.
+- DNSSEC, pokud ho registrátor a DNS poskytovatel podporují.
+
+DNSSEC pomáhá chránit integritu DNS odpovědí. ICANN upozorňuje, že DNSSEC není automatické a musí ho podporovat jak vlastník domény na autoritativních serverech, tak resolver na straně uživatele ([ICANN: DNSSEC - What Is It and Why Is It Important?](https://www.icann.org/resources/pages/dnssec-what-is-it-why-important-2019-03-05-en)). Prakticky: pokud ho zapínáte, ověřte celý řetězec, hlídejte DS záznamy u registrátora a nedělejte to naslepo těsně před migrací.
+
+Jednoduchý proces DNS změny:
+
+1. Zapište aktuální stav záznamů.
+2. Popište, co přesně měníte a proč.
+3. U větší migrace snižte TTL s předstihem.
+4. Proveďte změnu mimo kritickou obchodní špičku.
+5. Ověřte web, e-mail, formuláře a ověřovací TXT záznamy.
+6. Po stabilizaci vraťte TTL na rozumnou hodnotu.
+
+### HTTPS/TLS: certifikát má být automatika, ne kalendářová připomínka
+
+V běžné řeči se pořád říká SSL certifikát, ale v praxi řešíte HTTPS nad TLS. Pro návštěvníka je důležité, že prohlížeč neukazuje varování, formuláře se neposílají po nezabezpečeném spojení a web se chová konzistentně na `www` i bez `www`.
+
+Let's Encrypt dokumentace popisuje certifikáty jako bezplatné a automatizované a používá ACME protokol pro ověření kontroly nad doménou ([Let's Encrypt Documentation](https://letsencrypt.org/docs/?locale=en)). To je dobrý výchozí standard pro většinu webů: certifikáty se mají obnovovat automaticky, monitoring má hlídat expiraci a ruční zásah má být výjimka.
+
+Minimum pro HTTPS:
+
+- Veškerý HTTP provoz přesměrovat na HTTPS.
+- Automatizovat obnovu certifikátu a otestovat ji, ne jen nainstalovat.
+- Hlídat expiraci certifikátu nezávislým monitoringem.
+- Používat moderní TLS konfiguraci podle aktuálních doporučení, například OWASP TLS Cheat Sheet ([OWASP: Transport Layer Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html)).
+- Zvážit HSTS až ve chvíli, kdy máte jistotu, že všechny subdomény a přesměrování fungují. MDN popisuje HSTS jako hlavičku, která říká prohlížeči, že má host používat pouze přes HTTPS ([MDN: Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security)).
+
+Pozor na častou chybu: někdo zapne HSTS pro celou doménu včetně subdomén, ale jedna stará interní subdoména HTTPS neumí. Výsledkem není vyšší bezpečnost, ale rozbitý přístup. Bezpečnostní hlavičky jsou skvělé, když rozumíte dopadu.
+
+### E-mail: doručitelnost je technická i obchodní věc
+
+Web bez funkčního e-mailu je děravý trychtýř. Návštěvník odešle formulář, firma neodpoví, transakční e-mail nedorazí, faktura skončí ve spamu a všichni se tváří, že problém je "někde u zákazníka". Není. Doručitelnost je součást produktu.
+
+Základní e-mailová autentizace stojí na třech zkratkách:
+
+- SPF říká, které servery mohou za doménu posílat e-mail.
+- DKIM podepisuje zprávu kryptografickým podpisem.
+- DMARC navazuje na SPF a DKIM, přidává politiku pro příjemce a reporting. DMARC.org popisuje DMARC jako protokol pro autentizaci, politiku a reportování, který staví na SPF a DKIM a pomáhá chránit doménu před podvodnými e-maily ([DMARC.org Overview](https://dmarc.org/overview/)).
+
+Praktický postup:
+
+1. Sepište všechny systémy, které posílají e-maily za vaši doménu: schránky, webový formulář, fakturace, CRM, newsletter, transakční e-maily.
+2. Nastavte SPF tak, aby zahrnoval jen skutečné odesílatele.
+3. Zapněte DKIM pro hlavní e-mailovou službu i transakční odesílače.
+4. Publikujte DMARC nejdřív opatrně s reportingem, vyhodnoťte legitimní zdroje a až potom zpřísňujte politiku.
+5. Oddělte marketingové, transakční a osobní e-maily, aby jeden experiment nepoškodil celou doménu.
+
+Příklad: SaaS posílá přihlašovací odkazy, faktury a newsletter ze stejné domény bez DMARC kontroly. Když marketing nahraje starý seznam kontaktů a reputace spadne, trpí i transakční e-maily. Lepší je oddělit subdomény, například `mail.example.cz` pro marketing a `notify.example.cz` pro transakční zprávy, a každou hlídat zvlášť.
+
+### Analytika: měřte rozhodnutí, ne zvědavost
+
+Analytika má odpovídat na otázky, ne vytvářet iluzi kontroly. Pro malý web obvykle nepotřebujete vědět všechno o každém člověku. Potřebujete vědět, odkud přichází relevantní návštěvy, které stránky pomáhají rozhodnutí, kde lidé opouštějí klíčový tok a jestli se zlepšuje kvalita poptávek.
+
+Privacy-first přístup:
+
+- Nepoužívejte měření jen proto, že je "standard".
+- Nesbírejte osobní data, pokud neumíte říct, k čemu je potřebujete.
+- Preferujte first-party měření, agregovaná data a krátkou retenci.
+- Neposílejte data do reklamních ekosystémů bez jasného důvodu.
+- Dejte lidem srozumitelnou informaci, co měříte a proč.
+- Udržujte RSS, přímé odkazy a vlastní web jako primární distribuční kanály.
+
+CNIL u měření návštěvnosti uvádí, že cookies pro audience measurement mohou být za určitých podmínek vyňaté ze souhlasu, pokud slouží jen měření publika pro vydavatele a produkují anonymní statistická data; zároveň upozorňuje na opatrnost u poskytovatelů a přenosů mimo EU ([CNIL: Cookies - solutions pour les outils de mesure d'audience](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience)). To není univerzální právní rada pro každý stát a každý setup. Je to dobrý směr uvažování: méně sledování, jasný účel, žádné míchání dat s reklamními profily.
+
+Tři metriky, které mají smysl na začátku:
+
+- Kvalitní vstupy: kolik lidí přijde na stránky, které vysvětlují nabídku.
+- Akce: kolik lidí udělá další krok, například kontakt, demo, RSS odběr nebo stažení materiálu.
+- Kontext: z jakých kanálů přichází návštěvy, které vedou ke skutečné poptávce.
+
+Naopak pozor na vanity metriky. Samotná návštěvnost neříká, jestli web pomáhá byznysu. Deset relevantních návštěv z dobrého článku může mít větší hodnotu než tisíc náhodných kliků z kampaně, která přivedla lidi mimo cílovou skupinu.
+
+### Provozní mini dokumentace
+
+Každý web by měl mít krátký provozní list. Nemusí to být román, stačí praktická stránka pro tým:
+
+- Doména: registrátor, expirace, vlastník, přístup.
+- DNS: kde se spravuje, kdo má přístup, datum posledního exportu.
+- Hosting: poskytovatel, region, zálohy, obnova, odpovědná osoba.
+- Deploy: jak se web nasazuje a jak se vrací poslední funkční verze.
+- E-mail: poskytovatel, SPF, DKIM, DMARC, transakční odesílatelé.
+- Analytika: co se měří, kde jsou data, retence, kdo má přístup.
+- Incidenty: koho kontaktovat, kde jsou logy, jak ověřit dostupnost.
+
+Tento dokument šetří hodiny při každé migraci, incidentu nebo předání projektu. A hlavně nutí tým přiznat, kde je chaos. Chaos není ostuda. Ostuda je tvářit se, že neexistuje, dokud nevyprší certifikát.
+
+### Checklist kapitoly
+
+- Je doména vlastněná firmou a má zapnuté bezpečné obnovení?
+- Víte, kdo spravuje DNS a kde je záloha záznamů?
+- Máte u důležitých domén zapnuté dvoufaktorové ověření?
+- Běží web v regionu a režimu, který umíte vysvětlit zákazníkovi?
+- Umíte obnovit web ze zálohy a víte, jak dlouho by to trvalo?
+- Obnovují se HTTPS certifikáty automaticky a hlídá je monitoring?
+- Má e-mail nastavené SPF, DKIM a DMARC?
+- Jsou transakční a marketingové e-maily oddělené podle rizika?
+- Víte, co přesně měří analytika a kde končí data návštěvníků?
+- Existuje krátký provozní list, který pochopí i člověk mimo původní projekt?
+
+Když tato vrstva funguje, web získá pevný základ. Neviditelný pro většinu návštěvníků, ale zásadní pro důvěru, doručitelnost, bezpečnost i klid týmu.
+
+### Zdroje kapitoly
+
+- [ICANN: DNSSEC - What Is It and Why Is It Important?](https://www.icann.org/resources/pages/dnssec-what-is-it-why-important-2019-03-05-en)
+- [Let's Encrypt Documentation](https://letsencrypt.org/docs/?locale=en)
+- [OWASP: Transport Layer Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Transport_Layer_Security_Cheat_Sheet.html)
+- [MDN: Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security)
+- [DMARC.org Overview](https://dmarc.org/overview/)
+- [CNIL: Cookies - solutions pour les outils de mesure d'audience](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
 - 2026-05-04: Dopsána kapitola 2 o hodnocení dobrého webu podle rychlosti, důvěry, obsahu a konverzí.
+- 2026-05-05: Dopsána kapitola 3 o technickém základu webu: doména, hosting, DNS, HTTPS/TLS, e-mail a privacy-first analytika.
