@@ -1379,6 +1379,235 @@ Privacy-first web není web, který se bojí měřit. Je to web, který měří 
 - [European Commission: Rules on international data transfers](https://commission.europa.eu/law/law-topic/data-protection/international-dimension-data-protection/rules-international-data-transfers_en)
 - [European Commission: Information for individuals](https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en)
 
+## Kapitola 8: Kdy web nestačí a začíná aplikace
+
+Web je výborný nástroj pro vysvětlení nabídky, důvěru, obsah, lead generation a obchodní tok. Aplikace začíná ve chvíli, kdy už nestačí obsah publikovat, ale potřebujete s uživatelem pracovat opakovaně, ukládat jeho stav, řídit oprávnění, automatizovat procesy a vracet mu hodnotu uvnitř systému.
+
+To je důležitý rozdíl. Spousta projektů se tváří jako aplikace, ale ve skutečnosti potřebují jen lepší web, formulář, interní workflow a pár automatizací. Jiné projekty se naopak zaseknou jako "jen web", i když už dávno řeší účty, role, dokumenty, schvalování, notifikace a historii změn. V tu chvíli se web mění v produkt, jen si to tým ještě nepřiznal.
+
+Praktická otázka tedy nezní "máme postavit aplikaci?". Lepší otázka zní:
+
+1. Jaká opakovaná práce se dnes děje ručně?
+2. Kdo ji dělá?
+3. Jaká data při tom vznikají?
+4. Kdo k nim smí mít přístup?
+5. Co se má stát automaticky?
+6. Jak poznáme, že systém vytvořil hodnotu?
+
+Když na tyto otázky neumíte odpovědět, aplikace bude jen dražší web s přihlašováním. A to je jeden z nejspolehlivějších způsobů, jak utratit rozpočet a získat tabulku v hezčím kabátu.
+
+### Signály, že web už nestačí
+
+Web obvykle přestává stačit, když návštěvník nebo zákazník potřebuje udělat něco víc než přečíst, vybrat, kontaktovat nebo zaplatit jednoduchou objednávku. Začíná potřebovat vlastní prostor, vlastní data, historii a akce.
+
+Silné signály pro aplikaci:
+
+- Uživatel se má vracet a pokračovat tam, kde skončil.
+- Potřebujete účty, týmy, role nebo schvalování.
+- Data se mění v čase a mají historii.
+- Různí uživatelé vidí různou část stejného systému.
+- Proces má více kroků, stavů a notifikací.
+- Ruční práce v e-mailu nebo tabulce už způsobuje chyby.
+- Zákazník potřebuje export, audit log nebo přehled aktivit.
+- Hodnota produktu vzniká uvnitř workflow, ne jen předáním informací.
+
+Příklad: stránka "Pošlete nám poptávku na audit webu" je pořád web. Formulář pošle e-mail, tým odpoví, hotovo. Ale pokud zákazník po přihlášení vidí seznam auditovaných stránek, stav nálezů, komentáře týmu, doporučení, export a historii změn, už stavíte aplikaci.
+
+Podobně e-book ke stažení je webový obsah. Platforma, kde firma spravuje školení, přiřazuje lekce zaměstnancům, sleduje dokončení a exportuje podklady pro audit, je aplikace.
+
+### Signály, že aplikaci ještě nepotřebujete
+
+Stejně důležité je poznat opačnou situaci. Aplikace není odměna za ambici. Je to závazek k dlouhodobému provozu, bezpečnosti, údržbě, podpoře a rozhodování.
+
+Možná ještě nepotřebujete aplikaci, pokud:
+
+- Problém se dá ověřit jednou landing page a ručním zpracováním poptávek.
+- Zákazníci zatím nechtějí samoobsluhu, ale jasnější nabídku.
+- Nevíte, kdo bude produkt používat opakovaně.
+- Neumíte popsat první hodnotu po registraci.
+- Chybí vám rozhodnutí, jaká data budete ukládat a proč.
+- Hlavní bolest je v copywritingu, obchodním procesu nebo distribuci, ne v softwaru.
+- Interní tým ještě zvládne proces ručně a potřebuje se z něj učit.
+
+Příklad: poradenská firma chce "klientský portál", ale zatím má pět klientů, každý projekt je jiný a největší problém je, že web neříká, pro koho služba je. V takové situaci dává často větší smysl nejdřív zlepšit web, zavést jednoduchý CRM tok, sjednotit šablony e-mailů a ručně sledovat opakující se kroky. Teprve až se vzor opakuje, má smysl ho převést do aplikace.
+
+Codyho komentář: ruční proces není ostuda. Ruční proces je často výzkum v levnějším oblečení. Ostuda je automatizovat chaos, protože "aplikace působí víc SaaS". Chaos v aplikaci je pořád chaos, jen má login.
+
+### Web, automatizace, interní nástroj, nebo SaaS?
+
+Mezi webem a SaaS produktem je několik mezistupňů. Když je přeskočíte, snadno postavíte moc složitý systém moc brzy.
+
+Jednoduché rozlišení:
+
+- Web: vysvětluje, buduje důvěru a vede k akci.
+- Automatizace: propojuje existující nástroje a šetří ruční kroky.
+- Interní nástroj: pomáhá týmu spravovat proces, data nebo zákazníky.
+- Klientský portál: dává zákazníkovi přístup k jeho datům, stavu a výstupům.
+- SaaS: samostatný produkt, kde zákazník opakovaně získává hodnotu bez ručního zásahu týmu.
+
+Rozhodovací pravidlo: začněte nejjednodušší vrstvou, která ověří riziko. Pokud nevíte, jestli lidé chtějí výsledek, nepotřebujete SaaS. Potřebujete web a nabídku. Pokud výsledek chtějí, ale proces je pokaždé jiný, možná potřebujete interní nástroj. Pokud se proces opakuje a zákazník v něm chce samoobsluhu, klientský portál dává smysl. Pokud zákazník dokáže hodnotu získat opakovaně bez vaší ruční práce, začínáte mít SaaS.
+
+Příklad pro B2B službu:
+
+1. Web: stránka nabízí technický audit webu.
+2. Automatizace: formulář založí záznam v CRM a pošle checklist.
+3. Interní nástroj: tým spravuje nálezy, priority a stav práce.
+4. Klientský portál: zákazník vidí nálezy, komentuje je a stahuje report.
+5. SaaS: zákazník sám pravidelně spouští kontroly a spravuje doporučení pro více webů.
+
+Každý krok má jinou cenu, riziko a provozní náročnost. Přeskočit rovnou na pátý krok může být správné, pokud máte silný důkaz poptávky a jasný proces. Bez důkazu je to spíš drahá víra.
+
+### Data model je první produktové rozhodnutí
+
+Jakmile začnete ukládat data uživatelů, produkt se zhmotní. Už nejde jen o obrazovky. Musíte rozhodnout, jaké objekty existují, kdo je vlastní, kdo je může měnit, jak spolu souvisejí a co se stane při chybě.
+
+U jednoduché aplikace si před vývojem napište:
+
+- Hlavní objekty: například zákazník, projekt, úkol, dokument, faktura, událost.
+- Vlastnictví: kdo objekt vytvořil a komu patří.
+- Oprávnění: kdo smí číst, měnit, mazat, exportovat a sdílet.
+- Stav: v jakých stavech objekt může být.
+- Historie: které změny je potřeba auditovat.
+- Retence: kdy se data mažou, archivují nebo anonymizují.
+- Export: jak zákazník získá svá data ven.
+
+Toto je privacy-first moment. EDPB ve výkladu k data protection by design and by default připomíná, že ochrana dat se má promítat už do návrhu prostředků a výchozích nastavení zpracování, ne až jako oprava po spuštění ([EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)). Produktově to znamená: neptejte se až na konci, jak data schovat. Ptejte se na začátku, proč je vůbec sbíráte.
+
+Slabý návrh:
+
+"Budeme mít uživatele a projekty, detaily dořešíme při vývoji."
+
+Silnější návrh:
+
+"Firma má tým. Tým má projekty. Projekt má nálezy. Nález má stav, prioritu, odpovědnou osobu, komentáře a audit změn. Klient vidí jen projekty své firmy. Externí konzultant vidí jen projekty, ke kterým byl přizván. Po ukončení smlouvy exportujeme data a po dohodnuté retenci mažeme pracovní kopie."
+
+Rozdíl je obrovský. Druhý návrh už řeší produkt, provoz, bezpečnost i obchodní vztah.
+
+### Přihlášení není produkt
+
+Častý omyl: "Uděláme login a tím vznikne aplikace." Login ale sám o sobě hodnotu nepřináší. Je to brána. Pokud za ní není jasná první akce, uživatel jen prošel dražší překážkou.
+
+Před přidáním účtů si odpovězte:
+
+- Proč musí být uživatel identifikovaný?
+- Co uvidí po prvním přihlášení?
+- Jakou hodnotu získá během první návštěvy?
+- Co se stane, když zapomene heslo nebo změní e-mail?
+- Má existovat týmový účet, nebo jen jednotlivci?
+- Potřebujete pozvánky, role, deaktivaci a audit?
+- Jak omezíte sběr údajů při registraci?
+
+U marketingového webu může být lepší nabídnout ukázku bez registrace, veřejný demo report, interaktivní kalkulačku nebo možnost poslat jeden vstup a získat odpověď e-mailem. Registrace má smysl až ve chvíli, kdy je potřeba uchovat stav, vracet se k datům nebo chránit individuální obsah.
+
+Privacy-first registrace sbírá minimum. E-mail a heslo nebo přihlášení přes firemní identitu může stačit. Telefon, pozice, počet zaměstnanců a marketingové preference nepatří do registrace jen proto, že se to hodí obchodu. Obchodní enrichment má být oddělený od přístupu ke službě.
+
+### Provozní závazek: aplikace nikdy není hotová
+
+Web se dá relativně dobře zmrazit. Aplikace žije. Uživatelé mění data, zapomínají hesla, zvou kolegy, dělají chyby, nahrávají soubory, čekají notifikace, chtějí exporty a píšou podpoře. Do toho běží aktualizace závislostí, bezpečnostní záplaty, monitoring, zálohy, migrace a změny integrací.
+
+Proto při rozhodování o aplikaci počítejte i s provozem:
+
+- Kdo bude reagovat na chyby?
+- Kdo sleduje monitoring a dostupnost?
+- Jak často testujete obnovu ze záloh?
+- Jak řešíte migrace databáze?
+- Kdo aktualizuje závislosti?
+- Jak se dokumentují incidenty?
+- Jak zákazník získá data při odchodu?
+- Kdo odpovídá na privacy a bezpečnostní dotazy?
+
+Metodika Twelve-Factor App nabízí užitečný slovník pro provozovatelné SaaS aplikace: jedna codebase s více deployi, konfigurace v prostředí, backing services jako připojitelné zdroje, oddělení build, release a run, stateless procesy nebo logy jako proud událostí ([The Twelve-Factor App](https://www.12factor.net/)). Nemusíte ji brát jako náboženství. Je ale dobrým testem, jestli aplikace není příliš křehká na běžný provoz.
+
+Pro malý tým je praktický cíl jednoduchý: aplikace musí být nasaditelná, obnovitelná, pozorovatelná a opustitelná. Nasaditelná znamená, že deploy není rituál jednoho člověka. Obnovitelná znamená, že záloha není jen slovo v obchodních podmínkách. Pozorovatelná znamená, že chyby nehlásí až zákazník. Opustitelná znamená, že zákazník může získat svoje data ven.
+
+### Bezpečnost roste s interaktivitou
+
+Statický web má menší bezpečnostní plochu než aplikace s účty, formuláři, soubory, platbami a API. Jakmile uživatelé posílají data, přihlašují se a pracují v rolích, musíte řešit vstupy, session, autorizaci, rate limiting, audit, logování, zálohy a incidenty.
+
+OWASP ASVS definuje bezpečnostní požadavky pro návrh, vývoj a testování moderních webových aplikací a služeb; verze 5.0.0 byla podle projektu OWASP vydána 30. května 2025 ([OWASP ASVS project](https://owasp.org/www-project-application-security-verification-standard/), [OWASP ASVS GitHub](https://github.com/OWASP/ASVS)). Pro začínající produkt není nutné rovnou dělat obří certifikační cvičení. Je ale rozumné používat ASVS jako checklist při návrhu a auditu.
+
+Minimum pro první aplikaci:
+
+- Autentizace s bezpečným resetem hesla nebo ověřenou firemní identitou.
+- Autorizace kontrolovaná na serveru, ne jen schovaná tlačítka ve frontendu.
+- Validace vstupů na serveru.
+- Ochrana proti hrubému zkoušení hesel a citlivých akcí.
+- Bezpečné ukládání tajemství mimo repozitář.
+- Audit důležitých změn.
+- Oddělení produkčních a testovacích dat.
+- Zálohy a otestovaná obnova.
+- Logy bez hesel, tokenů a zbytečných osobních údajů.
+
+Codyho komentář: bezpečnost není funkce, kterou přidáte jako "verzi 1.3". U aplikace je bezpečnost součástí toho, co produkt vůbec je. Pokud systém spravuje zákaznická data, nemůžete nejdřív "rychle spustit" a teprve potom zjistit, kdo smí co vidět.
+
+### MVP aplikace: ověřte workflow, ne počet obrazovek
+
+MVP aplikace nemá být zmenšená verze velkého snu se všemi budoucími sekcemi v poloprázdném stavu. Má ověřit největší nejistotu. U aplikací je tou nejistotou často workflow: dokáže uživatel projít hlavní proces a získat hodnotu?
+
+Dobré MVP aplikace obsahuje:
+
+- Jeden jasný typ uživatele nebo týmu.
+- Jeden hlavní objekt.
+- Jeden hlavní tok od vstupu k výsledku.
+- Jedno místo, kde se projeví hodnota produktu.
+- Základní oprávnění a bezpečnost.
+- Ruční nebo poloautomatické části tam, kde automatizace ještě není ověřená.
+- Export nebo alespoň plán exportu dat.
+
+Příklad pro nástroj na správu auditních nálezů:
+
+- Uživatel: klientský tým a konzultant.
+- Objekt: nález.
+- Tok: vytvořit nález, přiřadit prioritu, komentovat, změnit stav, exportovat report.
+- Hodnota: klient vidí, co je potřeba opravit a co už je hotové.
+- Ruční část: konzultant zatím nálezy vkládá ručně.
+- Automatizace později: import z crawleru nebo scanneru.
+
+Tento MVP není ostuda, protože testuje skutečný tok. Naopak by bylo horší postavit dashboard, billing, pokročilé role, integrace a marketingový onboarding, ale nemít dobrý způsob práce s jedním nálezem.
+
+### Rozhodovací workshop: 90 minut před prvním sprintem
+
+Než začnete psát kód aplikace, udělejte krátký workshop. Cílem není vyrobit dokonalou specifikaci. Cílem je najít místa, kde tým jen předstírá shodu.
+
+Agenda:
+
+1. Popište problém jednou větou.
+2. Vyberte jednoho primárního uživatele.
+3. Popište jeho první úspěšný výsledek.
+4. Nakreslete hlavní workflow od vstupu po výstup.
+5. Označte data, která se v toku ukládají.
+6. Rozhodněte, kdo k nim má přístup.
+7. Najděte kroky, které zatím mohou zůstat ruční.
+8. Definujte jeden měřitelný signál hodnoty.
+9. Sepište bezpečnostní a privacy rizika.
+10. Rozhodněte, co určitě není v první verzi.
+
+Výstupem má být jedna stránka: uživatel, problém, workflow, data, oprávnění, první hodnota, rizika, mimo rozsah. Pokud to tým nedokáže napsat na jednu stránku, není připravený na vývoj. Je připravený na další rozhovor.
+
+### Checklist kapitoly
+
+- Umíte říct, proč web, formulář nebo automatizace nestačí?
+- Existuje opakovaný uživatelský tok, ne jen obecná představa produktu?
+- Ví uživatel po přihlášení přesně, co má udělat jako první?
+- Máte popsané hlavní objekty, stavy a vlastnictví dat?
+- Víte, kdo smí data číst, měnit, mazat, sdílet a exportovat?
+- Sbírá registrace jen údaje nutné pro první hodnotu?
+- Je jasné, které části mohou v MVP zůstat ruční?
+- Má aplikace plán pro zálohy, obnovu, monitoring a incidenty?
+- Jsou tajemství, produkční data a testovací data oddělené?
+- Máte základní bezpečnostní checklist pro autentizaci, autorizaci a vstupy?
+- Umí zákazník získat svá data ven?
+- Je privacy-first návrh součástí architektury, ne dodatek před spuštěním?
+
+Aplikace začíná tam, kde vzniká opakovaná hodnota, stav a odpovědnost za data. Do té chvíle často stačí lepší web, chytřejší formulář, interní proces a poctivé učení z ruční práce. Jakmile ale proces dozraje, aplikace může být obrovský násobič. Jen musí stavět na jasném workflow, ne na touze mít login.
+
+### Zdroje kapitoly
+
+- [The Twelve-Factor App](https://www.12factor.net/)
+- [EDPB: Guidelines 4/2019 on Article 25 Data Protection by Design and by Default](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en)
+- [OWASP Application Security Verification Standard project](https://owasp.org/www-project-application-security-verification-standard/)
+- [OWASP ASVS GitHub repository](https://github.com/OWASP/ASVS)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -1388,3 +1617,4 @@ Privacy-first web není web, který se bojí měřit. Je to web, který měří 
 - 2026-05-05: Dopsána kapitola 5 o obsahové architektuře: uživatelské úkoly, inventura obsahu, navigace, struktura stránek, formuláře a údržba.
 - 2026-05-05: Dopsána kapitola 6 o SEO pro lidi i vyhledávače: záměr hledání, tématické clustery, indexace, sitemap, strukturovaná data, interní odkazy a privacy-first měření.
 - 2026-05-05: Dopsána kapitola 7 o privacy-first webu: datová mapa, analytika, cookies, třetí strany, evropský provoz, formuláře, logy a srozumitelná privacy komunikace.
+- 2026-05-05: Dopsána kapitola 8 o rozhodování, kdy web přerůstá v aplikaci: signály, datový model, přihlášení, provoz, bezpečnost a MVP workflow.
