@@ -581,9 +581,305 @@ Frontend je dobrý ve chvíli, kdy mizí z cesty. Návštěvník se nemusí uči
 - [Your Europe: Services, goods and their digital accessibility](https://europa.eu/youreurope/business/selling-in-eu/selling-goods-services/accessibility/index_en.htm)
 - [web.dev: Web Vitals](https://web.dev/articles/vitals?hl=en)
 
+## Kapitola 5: Obsahová architektura: jak návštěvníka dovést k akci
+
+Obsahová architektura je rozhodnutí, co má být na webu, kde to má být, jak se to jmenuje a v jakém pořadí se to člověku ukáže. Není to jen sitemapa. Je to způsob, jak web přemění chaos firmy na srozumitelnou cestu pro zákazníka.
+
+Špatná obsahová architektura často nevypadá jako technický problém. Web může být rychlý, hezký a responzivní, ale návštěvník se pořád ztrácí. Neví, jaký typ služby vybrat, jestli je produkt pro něj, kde najde cenu, proč má vyplnit formulář a co bude následovat. Firma pak problém řeší dalšími sekcemi, dalšími tlačítky a dalšími texty. Tím ale často jen přidá další patro do domu, který nemá schody.
+
+Dobrá obsahová architektura dělá tři věci:
+
+1. Pomáhá návštěvníkovi rychle poznat, jestli je na správném místě.
+2. Řadí informace podle rozhodovacího procesu zákazníka, ne podle interní organizační struktury.
+3. Vede k dalšímu kroku bez nátlaku, mlhy a zbytečných datových požadavků.
+
+GOV.UK content design metodika staví obsah na uživatelských potřebách: každá část webu a každý publikovaný obsah má naplňovat platnou potřebu uživatele ([GOV.UK: User needs](https://www.gov.uk/guidance/content-design/user-needs)). Pro komerční weby to platí stejně. Rozdíl je jen v tom, že vedle uživatelské potřeby musí být jasný i obchodní účel.
+
+### Začněte úkolem, ne menu
+
+Častá chyba je začít navigací: "Dáme tam O nás, Služby, Reference, Blog, Kontakt." To může být v pořádku jako výsledek, ale je to špatný začátek. Menu není strategie. Menu je zkrácený odraz toho, co má návštěvník udělat.
+
+Lepší začátek je seznam úkolů návštěvníka:
+
+- Chci zjistit, jestli tato firma řeší můj typ problému.
+- Chci porovnat službu s tím, co už používám.
+- Chci vědět, jak vypadá první krok spolupráce.
+- Chci najít důkaz, že firma zvládla podobný projekt.
+- Chci pochopit cenu nebo alespoň cenový model.
+- Chci si ověřit, jak firma nakládá s daty.
+- Chci kontaktovat tým bez toho, aby mě někdo nahnal do newsletteru.
+
+Z těchto úkolů vzniká struktura. Ne naopak. Pokud návštěvník potřebuje porozumět procesu před kontaktem, stránka "Jak spolupráce probíhá" může mít větší hodnotu než obecná stránka "O nás". Pokud zákazníci často řeší bezpečnost dat, stránka o provozu, bezpečnosti a soukromí není právní přívěsek. Je to prodejní argument.
+
+Příklad pro firmu, která vyvíjí interní aplikace:
+
+Slabá struktura:
+
+- O nás
+- Služby
+- Technologie
+- Reference
+- Blog
+- Kontakt
+
+Silnější struktura:
+
+- Co stavíme
+- Pro koho je to vhodné
+- Jak probíhá první analýza
+- Ukázky řešení
+- Bezpečnost a provoz v EU
+- Praktické články
+- Domluvit úvodní hovor
+
+Druhá varianta není magicky správná pro každý web. Je ale blíž otázkám, které zákazník řeší před rozhodnutím. A přesně tam má obsahová architektura začínat.
+
+### Inventura obsahu: nejdřív zjistěte, co už máte
+
+Před redesignem nebo novou strukturou udělejte inventuru obsahu. Ne v hlavě. Do tabulky. Každá existující stránka, článek, PDF, případová studie, landing page, formulář a často i důležitý e-mail patří do přehledu.
+
+U každé položky si napište:
+
+- URL nebo umístění.
+- Typ obsahu: stránka služby, článek, case study, formulář, dokumentace, právní text.
+- Primární uživatelský úkol.
+- Obchodní účel.
+- Cílová skupina nebo fáze zákazníka.
+- Hlavní další krok.
+- Stav: ponechat, sloučit, přepsat, smazat, archivovat.
+- Vlastník obsahu a datum poslední kontroly.
+
+Tento krok bývá nepříjemný, protože ukáže duplicity a historické kompromisy. To je dobře. Obsah, který nikdo nevlastní a nikomu nepomáhá, je provozní dluh. Zhoršuje navigaci, SEO, důvěru i údržbu.
+
+Praktické pravidlo: pokud stránka nemá jasný úkol, buď ji přepište, sloučte s jinou stránkou, nebo ji odstraňte. Web není sklad. Každá stránka má stát námahu, kterou vyžaduje její údržba.
+
+Codyho komentář: největší obsahový luxus není psát víc. Největší luxus je mazat. Smazat stránku, která kdysi vznikla kvůli jedné kampani, ale dnes mate zákazníky, je tichý produktový úklid. Nikdo vám za něj netleská, ale web se najednou lépe dýchá.
+
+### Stránky podle fáze rozhodování
+
+Návštěvníci nejsou ve stejné fázi. Někdo problém teprve pojmenovává. Někdo porovnává dodavatele. Někdo už chce poslat poptávku. Když web mluví na všechny stejně, působí buď příliš obecně, nebo příliš agresivně.
+
+Užitečné je rozdělit obsah podle čtyř fází:
+
+1. Orientace: člověk zjišťuje, co problém znamená a jaké má možnosti.
+2. Vhodnost: ověřuje, jestli vaše řešení sedí na jeho situaci.
+3. Důvěra: hledá důkazy, proces, zkušenost, bezpečnost a rizika.
+4. Akce: chce udělat konkrétní další krok.
+
+Pro každou fázi se hodí jiný obsah:
+
+- Orientace: vysvětlující články, slovníky, srovnání přístupů, praktické checklisty.
+- Vhodnost: stránky pro konkrétní segmenty, use casy, příklady problémů, limity řešení.
+- Důvěra: případové studie, ukázky práce, proces spolupráce, bezpečnost, privacy-first provoz, tým.
+- Akce: kontaktní stránka, demo, audit, kalkulace, onboarding, jasné potvrzení po odeslání.
+
+Příklad pro SaaS nástroj:
+
+- Článek: "Jak poznat, že už tabulka nestačí na řízení projektů" pomáhá orientaci.
+- Stránka: "Pro malé výrobní firmy" řeší vhodnost.
+- Case study: "Jak tým zkrátil schvalování zakázek z pěti dnů na jeden" buduje důvěru.
+- Demo stránka: "Vyzkoušet ukázkový workflow bez registrace" vede k akci.
+
+Ne každá firma potřebuje všechny typy hned. Ale každá firma by měla vědět, kterou fázi její web pokrývá dobře a kde má díru.
+
+### Navigace: méně položek, více významu
+
+Navigace má pomáhat orientaci, ne ukázat kompletní organizační mapu firmy. Lidé nečtou menu jako interní tým. Hledají slova, která odpovídají jejich situaci. Nielsen Norman Group ve svých heuristikách připomíná, že rozhraní má mluvit jazykem uživatele a používat pojmy, které jsou mu známé ([NN/g: 10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/)). To platí i pro názvy položek v navigaci.
+
+Dobrá navigace:
+
+- Používá konkrétní názvy, ne interní kódy a módní zkratky.
+- Má omezený počet hlavních položek.
+- Odděluje primární akci od běžné navigace.
+- Nezakrývá důležité stránky jen proto, že se nevešly do původního menu.
+- Na mobilu zůstává použitelná a nepůsobí jako rozbalený archiv.
+
+Slabé názvy:
+
+- Solutions
+- Platforma
+- Inovace
+- Resources
+- Kontaktujte nás
+
+Silnější názvy:
+
+- Weby a aplikace
+- SaaS MVP
+- Provoz v EU
+- Případové studie
+- Praktické články
+- Domluvit hovor
+
+Názvy nemusí být nudné. Musí být rozpoznatelné. Kreativní navigace je často zábavná hlavně pro tým, který ji vymyslel. Návštěvník za ni platí pozorností.
+
+### Struktura stránky: odpovědi ve správném pořadí
+
+Obsahová architektura není jen strom webu. Je to i struktura jednotlivé stránky. Dobrá stránka má vnitřní dramaturgii: řadí otázky tak, aby člověk mohl postupně říct "ano, chápu, tohle je pro mě, věřím tomu, vím co dál".
+
+U stránky služby funguje jednoduchý rámec:
+
+1. Jasný slib: co řešíte a pro koho.
+2. Situace zákazníka: kdy tato služba dává smysl.
+3. Výsledek: co zákazník získá.
+4. Proces: jak spolupráce probíhá.
+5. Důkazy: reference, ukázky, čísla, zkušenosti.
+6. Rizika a limity: kdy to vhodné není nebo co je potřeba připravit.
+7. Soukromí a provoz: jak zacházíte s daty.
+8. Další krok: konkrétní akce a co se stane po ní.
+
+U produktové stránky může být pořadí jiné:
+
+1. Problém a cílový uživatel.
+2. Hlavní workflow.
+3. Ukázka produktu.
+4. Integrace a data.
+5. Bezpečnost, role, audit logy.
+6. Pricing nebo způsob nacenění.
+7. Demo, trial nebo konzultace.
+
+Důležité je nevysypat všechno najednou. Každá sekce má odpovědět na konkrétní otázku. Pokud sekce neumí být pojmenovaná otázkou nebo jasným účelem, pravděpodobně je jen výplň.
+
+### Nadpisy jako mapa
+
+Nadpisy nejsou dekorace. Jsou mapa stránky. Pomáhají lidem skenovat obsah, čtečkám obrazovky orientovat se ve struktuře a vyhledávačům pochopit vztahy mezi částmi textu. W3C Web Accessibility Initiative doporučuje nadpisy vnořovat podle úrovní a používat je k označení sekcí podle vztahu a důležitosti ([W3C WAI: Headings](https://www.w3.org/WAI/tutorials/page-structure/headings/)). Obecný tutorial ke struktuře stránky vysvětluje, že dobře strukturovaný obsah pomáhá navigaci a orientaci ([W3C WAI: Page Structure Tutorial](https://www.w3.org/WAI/tutorials/page-structure/)).
+
+Praktický test: přečtěte si jen nadpisy stránky. Bez odstavců. Dává stránka smysl? Je jasné, komu pomáhá, jakou hodnotu slibuje, jaké důkazy nabízí a co má člověk udělat dál?
+
+Slabá struktura nadpisů:
+
+- Moderní řešení
+- Naše výhody
+- Proč my
+- Jak to funguje
+- Kontakt
+
+Silnější struktura:
+
+- Interní aplikace pro týmy, které přerostly tabulky
+- Kdy dává vlastní aplikace smysl
+- Co získáte po prvních čtyřech týdnech
+- Jak chráníme data a provozujeme systém v Evropě
+- Jak probíhá úvodní analýza
+- Domluvte první technický hovor
+
+Silnější nadpisy nesou obsah i bez okolního textu. To je dobré pro lidi, přístupnost i interní tým. Když nadpis neumí nic říct, často pod ním nebude mnoho hodnoty.
+
+### Formuláře a datové požadavky patří do architektury
+
+Formulář není jen komponenta na konci stránky. Je to součást obsahové architektury, protože rozhoduje, kdy a kolik důvěry po návštěvníkovi chcete.
+
+Privacy-first přístup tady znamená:
+
+- Ptát se jen na údaje potřebné pro první odpověď.
+- Jasně říct, co se stane po odeslání.
+- Oddělit kontakt od marketingového odběru.
+- Nepoužívat skryté trackery a enrichment služby bez jasného důvodu.
+- U citlivějších projektů vysvětlit, jak se s poptávkou a přílohami zachází.
+
+Slabý formulář na konci stránky:
+
+- Jméno
+- Firma
+- E-mail
+- Telefon
+- Rozpočet
+- Termín
+- Počet zaměstnanců
+- Jak jste se o nás dozvěděli
+- Souhlas s obchodními podmínkami
+- Souhlas s marketingem
+- Zpráva
+
+Silnější první kontakt:
+
+- E-mail
+- Co chcete zlepšit nebo postavit?
+- URL existujícího webu nebo produktu, pokud existuje
+- Volitelně: preferovaný termín odpovědi
+
+Vedle formuláře:
+
+"Ozveme se s návrhem dalšího kroku. Nepřidáme vás do marketingového seznamu a údaje použijeme jen k odpovědi na poptávku."
+
+To není jen hezká věta. Je to obsahové rozhodnutí, které snižuje nejistotu a sbírá méně dat.
+
+### Provoz obsahu: kdo to bude udržovat
+
+Obsahová architektura bez údržby stárne rychle. Změní se služby, tým, ceny, integrace, reference, právní texty, hosting, produktové screenshoty a interní proces. Pokud nikdo nemá odpovědnost, web začne lhát omylem.
+
+U každého důležitého typu obsahu určete:
+
+- Kdo je vlastník.
+- Jak často se kontroluje.
+- Jak poznáte, že je obsah zastaralý.
+- Kde se evidují změny.
+- Kdo schvaluje právní, bezpečnostní a privacy-first tvrzení.
+
+Praktické intervaly:
+
+- Homepage a hlavní služby: kontrola jednou za kvartál.
+- Case studies: kontrola při významné změně nabídky nebo po roce.
+- Pricing: kontrola při každé produktové změně.
+- Privacy, cookies a provozní informace: kontrola při každé změně nástroje, hostingu nebo měření.
+- Blogové články s návody: kontrola podle rizika zastarání.
+
+U evergreen článků stačí občasný refresh. U článků o právu, nástrojích, cenách a konkrétních technologiích musí být revize přísnější. Zastaralý článek může být horší než žádný článek, protože působí důvěryhodně a přitom vede špatným směrem.
+
+### Praktický workshop obsahové architektury
+
+Pro malý web stačí devadesát minut a tabule. Cíl není vytvořit dokonalou sitemapu. Cíl je zjistit, co má web skutečně říct a co překáží.
+
+Postup:
+
+1. Sepište tři nejdůležitější typy návštěvníků.
+2. Ke každému napište pět otázek, které má před kontaktem.
+3. Označte otázky, na které současný web odpovídá dobře.
+4. Označte otázky, které web neřeší nebo schovává příliš hluboko.
+5. Seřaďte otázky podle toho, jak zákazník rozhoduje.
+6. Navrhněte stránky nebo sekce, které na tyto otázky odpoví.
+7. Ke každé stránce napište jeden hlavní další krok.
+8. Vyhoďte nebo sloučte obsah, který nemá jasný úkol.
+
+Výstup může být jednoduchý:
+
+- Homepage: jasná nabídka, segmenty, důkaz, privacy-first provoz, CTA.
+- Služba: co řeší, pro koho, proces, výstup, důkazy, další krok.
+- Provoz a data: EU hosting, analytika, zálohy, bezpečnostní principy.
+- Případové studie: konkrétní problém, postup, výsledek, co se dá zopakovat.
+- Články: orientace, vysvětlení, checklisty, návody.
+- Kontakt: minimum polí, jasné očekávání, žádný automatický marketing.
+
+Taková mapa je lepší než desetistránková strategie, kterou nikdo nepoužije. Stačí, když pomůže týmu psát, mazat a řadit obsah s větší disciplínou.
+
+### Checklist kapitoly
+
+- Vychází struktura webu z uživatelských úkolů, ne jen z interních oddělení?
+- Má každá důležitá stránka jasný primární účel?
+- Víte, ve které fázi rozhodování návštěvník na stránku přichází?
+- Odpovídá navigace slovníku zákazníka?
+- Dávají nadpisy smysl i bez čtení odstavců?
+- Má každá stránka jeden hlavní další krok?
+- Máte inventuru existujícího obsahu a rozhodnutí: ponechat, přepsat, sloučit, smazat?
+- Sbírají formuláře jen data potřebná pro první odpověď?
+- Je privacy-first provoz vysvětlený jako součást důvěry, ne schovaný jen v právních textech?
+- Má každý klíčový obsah vlastníka a interval kontroly?
+- Umíte říct, které stránky by měly zmizet, protože už nikomu nepomáhají?
+
+Obsahová architektura je dobrá tehdy, když návštěvník nemusí hádat. Web mu postupně odpovídá, ukazuje důkazy, nechává prostor na rozhodnutí a nabízí férový další krok. Méně křiku, více orientace. To je pro obchod často účinnější než další banner s velkým slibem.
+
+### Zdroje kapitoly
+
+- [GOV.UK: Content design - User needs](https://www.gov.uk/guidance/content-design/user-needs)
+- [GOV.UK Service Manual: Learning about users and their needs](https://www.gov.uk/service-manual/user-centred-design/user-needs)
+- [Nielsen Norman Group: 10 Usability Heuristics for User Interface Design](https://www.nngroup.com/articles/ten-usability-heuristics/)
+- [W3C WAI: Page Structure Tutorial](https://www.w3.org/WAI/tutorials/page-structure/)
+- [W3C WAI: Headings](https://www.w3.org/WAI/tutorials/page-structure/headings/)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
 - 2026-05-04: Dopsána kapitola 2 o hodnocení dobrého webu podle rychlosti, důvěry, obsahu a konverzí.
 - 2026-05-05: Dopsána kapitola 3 o technickém základu webu: doména, hosting, DNS, HTTPS/TLS, e-mail a privacy-first analytika.
 - 2026-05-05: Dopsána kapitola 4 o praktickém frontendu: UX, přístupnost, responzivita, výkon, komponenty a testování.
+- 2026-05-05: Dopsána kapitola 5 o obsahové architektuře: uživatelské úkoly, inventura obsahu, navigace, struktura stránek, formuláře a údržba.
