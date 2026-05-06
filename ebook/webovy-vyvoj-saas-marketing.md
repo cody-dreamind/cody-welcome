@@ -12614,6 +12614,166 @@ U interního playbooku stačí jednoduchý pracovní log. U veřejného e-booku 
 
 Dobrý e-book není jen dlouhý text. Je to produkt. Má cílového uživatele, onboarding, užitečný výsledek, distribuci, měření, podporu a údržbu. Když se k němu takhle chováte, přestane být jednorázovou kampaní a začne pracovat jako dlouhodobé aktivum.
 
+## Příloha M: Distribuční plán pro e-book bez závislosti na platformách
+
+Publikovat e-book je polovina práce. Druhá polovina je dostat ho k lidem, kterým opravdu pomůže, aniž by se z něj stal další lead magnet přivázaný k formuláři, pixelům a náhodnému algoritmu. Distribuce nemá být hon na co nejvíc kliků. Má být řízený systém: jasná cílová skupina, vlastní zdroj pravdy, několik použitelných formátů, opakovaná komunikace a měření signálů, podle kterých umíte zlepšovat obsah i obchod.
+
+Tato příloha navazuje na předpublikační checklist. Předpokládá, že text je připravený, má jasného čtenáře a existuje URL, na kterou lze dlouhodobě odkazovat. Cílem je vytvořit distribuční plán, který funguje i tehdy, když sociální síť změní dosah, reklamní účet zdraží nebo někdo v týmu zapomene, kde je původní PDF.
+
+### 1. Zdroj pravdy je vlastní URL
+
+Každý dlouhý obsah potřebuje jedno místo, které je autoritativní. Ne příspěvek na LinkedInu, ne příloha v e-mailu, ne soubor v náhodné složce. Vlastní URL na webu je místo, kde čtenář najde aktuální verzi, changelog, přímé odkazy a související materiály.
+
+Minimum pro stránku e-booku:
+
+- název a krátký slib v jedné až dvou větách,
+- jasné sdělení, pro koho text je,
+- přímý odkaz na webovou verzi nebo Markdown,
+- volitelný odkaz na PDF, pokud dává smysl pro offline čtení,
+- obsah nebo rychlou navigaci podle částí,
+- tři praktické ukázky: checklist, šablona, příklad,
+- datum poslední aktualizace,
+- RSS nebo jiný přímý způsob sledování nových verzí,
+- stručné privacy vysvětlení: co se měří a co se nesbírá.
+
+Vlastní URL neznamená, že se e-book nemá sdílet jinde. Znamená to, že všechny cesty vedou zpět na místo, které kontrolujete. Sociální příspěvek může zmizet v proudu. URL může pracovat roky, pokud ji udržujete.
+
+### 2. Distribuční balíček připravte před oznámením
+
+Nejhorší moment pro přípravu komunikace je pět minut po publikaci. Tým je unavený, text je dlouhý a vznikne jeden obecný post typu "vydali jsme nový e-book". To je málo. Distribuční balíček má rozdělit hodnotu e-booku na menší části, které se dají poslat správným lidem ve správném kontextu.
+
+Praktický balíček:
+
+- Hlavní landing page: zdroj pravdy, odkazy, obsah, changelog.
+- Krátká anotace: dvě věty pro homepage, blog nebo interní doporučení.
+- Delší anotace: odstavec pro blogový článek, RSS záznam nebo newsletter.
+- Tři výřezy: jeden checklist, jedna šablona, jeden konkrétní příklad.
+- Sales poznámka: komu e-book posílat, v jaké fázi a s jakým doprovodným textem.
+- Interní FAQ: co text řeší, co neřeší a kam čtenáře poslat dál.
+- Sada přímých odkazů: kapitoly nebo přílohy, které řeší časté otázky.
+- Krátká aktualizační zpráva: co se změnilo proti minulé verzi.
+
+Příklad anotace:
+
+`Praktický e-book pro malé B2B týmy, které chtějí zpřesnit web, SaaS produkt, marketing a privacy-first provoz bez nekonečného redesignu. Obsahuje checklisty, šablony a pracovní postupy pro první konkrétní zlepšení.`
+
+Taková anotace je použitelná na webu, v e-mailu i ve zprávě zákazníkovi. Není dokonalá, ale je konkrétnější než "komplexní průvodce digitální transformací". To druhé zní jako věta, kterou napsal výbor a pak se šel omluvit kávovaru.
+
+### 3. Rozdělte distribuci podle situace čtenáře
+
+Stejný e-book může mít několik vstupních bodů. Zakladatel SaaS nebude otevírat stejnou kapitolu jako marketingový specialista nebo technický vedoucí. Distribuce proto nemá posílat všechny na začátek. Má jim nabídnout nejbližší užitečný kus.
+
+Příklad rozdělení:
+
+- Zakladatel nebo CEO: positioning, pricing, metriky, devadesátidenní plán.
+- Marketing: obsahový marketing, SEO, lead generation, RSS, distribuční plán.
+- Produkt: MVP, datový model, onboarding, retence, produktová strategie.
+- Technický tým: hosting, DNS, bezpečnost, provoz, datová mapa, technický audit.
+- Sales: prodejní web, kvalifikační dotazník, případová studie, sales proces.
+- Privacy nebo compliance role: privacy-first web, analytika, datová mapa, dodavatelé.
+
+Když e-book sdílíte, přidejte jednu větu kontextu:
+
+`Posílám hlavně kapitolu o datové mapě a Přílohu H k rozhodovacímu logu; zbytek může počkat.`
+
+Tím šetříte čtenáři čas. A zároveň zvyšujete šanci, že materiál opravdu použije místo toho, aby ho uložil do mentální složky "někdy".
+
+### 4. Vlastní kanály před algoritmem
+
+Distribuční pořadí je důležité. Nejprve vlastní web, RSS, přímé odkazy, zákaznická komunikace a interní kanály. Teprve potom sociální sítě a placená distribuce. Ne proto, že sociální sítě jsou zlo. Protože nejsou spolehlivý archiv ani primární vztah se čtenářem.
+
+Praktický postup pro vydání:
+
+1. Publikujte e-book na vlastní URL.
+2. Přidejte záznam do RSS nebo blogu.
+3. Pošlete přímý odkaz relevantním zákazníkům, partnerům nebo leadům s osobním kontextem.
+4. Dejte materiál do interní sales a support dokumentace.
+5. Rozdělte e-book na několik menších článků nebo ukázek.
+6. Sdílejte výřezy na vybraných sociálních sítích s odkazem zpět na web.
+7. Po týdnu vyhodnoťte, které části lidé opravdu otevírají, komentují nebo používají v obchodních hovorech.
+
+Privacy-first poznámka: pro sdílení nepotřebujete social share skripty, fingerprinting ani externí widgety. Stačí normální odkazy, dobré titulky a měření agregovaných signálů. Když někdo chce materiál poslat dál, udělá to i bez tlačítka, které kvůli ikoně načítá cizí JavaScript.
+
+### 5. Měřte užitečnost, ne jen provoz
+
+U dlouhého obsahu je počet zobrazení slabý signál. Může říct, že odkaz někdo otevřel. Neřekne, jestli text pomohl. Lepší je kombinovat několik lehkých signálů, které ukazují skutečné použití.
+
+Užitečné signály:
+
+- kliky na konkrétní kapitoly nebo přílohy,
+- stažení PDF, pokud existuje,
+- přímé odpovědi nebo otázky čtenářů,
+- zmínky v sales hovorech,
+- použití checklistu v interním workshopu,
+- nové kvalifikované poptávky, které odkazují na téma e-booku,
+- opakované návraty na šablony nebo přílohy,
+- části, které support posílá zákazníkům opakovaně.
+
+Signály, které často matou:
+
+- samotný počet impresí na sociální síti,
+- návštěvnost bez kvality,
+- počet stažení výměnou za e-mail,
+- průměrný čas na stránce bez kontextu,
+- komentáře typu "super", ze kterých nejde odvodit další krok.
+
+Měření nastavte tak, aby se z něj dalo rozhodovat:
+
+```text
+Otázka:
+Jak poznáme odpověď:
+Jaký signál měříme:
+Kde jsou data:
+Jak dlouho data držíme:
+Kdo je vyhodnocuje:
+Co uděláme podle výsledku:
+```
+
+Příklad:
+
+```text
+Otázka: Pomáhá e-book kvalifikovat poptávky na nový web nebo SaaS MVP?
+Jak poznáme odpověď: Lead v poptávce zmíní konkrétní kapitolu, checklist nebo privacy-first požadavek.
+Jaký signál měříme: Zdroj poptávky, odkazovaná část e-booku, typ požadavku.
+Kde jsou data: CRM a agregovaná analytika webu.
+Jak dlouho data držíme: Podle interní retenční politiky pro obchodní komunikaci.
+Kdo je vyhodnocuje: Sales nebo zakladatel jednou měsíčně.
+Co uděláme podle výsledku: Doplníme nejčastěji používané části na landing page a do sales materiálů.
+```
+
+### 6. Vytvořte rytmus opakované distribuce
+
+Jedno oznámení nestačí. Dlouhý obsah má pracovat opakovaně, ale ne spamově. Rozumný rytmus je rozdělit e-book do témat a každý týden nebo měsíc vytáhnout jednu praktickou část: checklist, šablonu, příklad nebo krátké doporučení.
+
+Jednoduchý čtyřtýdenní rytmus:
+
+- Týden 1: hlavní oznámení a přímý odkaz na e-book.
+- Týden 2: samostatný checklist s krátkým komentářem.
+- Týden 3: praktický příklad nebo anonymizovaný scénář.
+- Týden 4: shrnutí nejčastější otázky, která po publikaci přišla.
+
+Pak cyklus zopakujte pro jiné téma. Například jednou pro web, jednou pro SaaS MVP, jednou pro marketing, jednou pro privacy-first provoz. Každý výstup má vést na vlastní URL a zároveň má být užitečný i sám o sobě.
+
+Codyho komentář: dobrá distribuce není pokřik "přečtěte si náš e-book" každý druhý den. Je to trpělivé vytahování užitečných kousků přesně ve chvíli, kdy je někdo může použít. Když je obsah dobrý, nemusí se tvářit jako kampaň se sirénou.
+
+### 7. Checklist distribučního plánu
+
+- Existuje jedna vlastní URL jako zdroj pravdy?
+- Je na stránce jasné, pro koho e-book je a s čím pomáhá?
+- Má e-book přímý odkaz bez povinného sběru kontaktu?
+- Je připravený krátký i delší popis materiálu?
+- Existují alespoň tři samostatně použitelné výřezy?
+- Jsou připravené odkazy pro různé typy čtenářů?
+- Je e-book přidaný do RSS nebo jiného vlastního distribučního kanálu?
+- Ví sales a support, kdy materiál posílat?
+- Neobsahuje stránka zbytečné trackery, pixely nebo social share skripty?
+- Měří se signály, podle kterých umíte zlepšovat obsah nebo obchod?
+- Je určený člověk nebo role pro měsíční vyhodnocení?
+- Existuje plán opakované distribuce na čtyři týdny?
+- Je jasné, kdy se bude e-book aktualizovat a jak se oznámí nová verze?
+
+Distribuce je součást produktu. Když ji necháte na náhodu, i dobrý e-book se ztratí. Když ji postavíte na vlastním webu, přímých odkazech, RSS, užitečných výřezech a střídmém měření, obsah začne pracovat dlouhodobě. Ne jako kampaň na jeden týden, ale jako knihovna rozhodnutí, ke které se tým i zákazníci vracejí.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -12754,3 +12914,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha J se šablonou případové studie pro web, SaaS a služby: struktura příběhu, rozhovor se zákazníkem, výsledky, privacy-first kontrola, sales verze a checklist.
 - 2026-05-06: Doplněna Příloha K s dvanáctitýdenním implementačním plánem pro převod e-booku do konkrétních týdenních změn webu, produktu, marketingu a privacy-first provozu.
 - 2026-05-06: Doplněna Příloha L s předpublikačním checklistem pro e-book, playbook nebo dlouhý obsah: čtenář, struktura, redakční průchod, privacy-first publikování, distribuce a údržba verzí.
+- 2026-05-06: Doplněna Příloha M s distribučním plánem pro e-book bez závislosti na platformách: vlastní URL, distribuční balíček, segmentované vstupy, vlastní kanály, měření užitečnosti a opakovaný rytmus.
