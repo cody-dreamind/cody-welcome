@@ -11233,6 +11233,230 @@ Smlouva nemá nahrazovat důvěru. Má chránit jasnost. Když se všechno dař�
 
 Výběr dodavatele je první test toho, jak budete digitální projekt řídit. Pokud už při výběru umíte být konkrétní, držet privacy-first požadavky a ptát se na provoz, výrazně zvyšujete šanci, že projekt neskončí jako hezký web s křehkým zákulisím. A to je přesně ten typ hezkosti, který nechceme.
 
+## Příloha G: Šablona datové mapy pro web a SaaS
+
+Datová mapa je obyčejná tabulka, která dokáže zabránit velmi neobyčejnému chaosu. Ukazuje, jaká data projekt sbírá, proč je sbírá, kde vznikají, kam tečou, kdo k nim má přístup, jak dlouho se drží a co se s nimi stane při exportu, výmazu nebo ukončení služby.
+
+Nejde o právní dokument pro vitrínu. Je to provozní nástroj. Pokud tým neumí vyplnit datovou mapu, obvykle neumí ani zákazníkovi jednoduše vysvětlit, co se s jeho daty děje. A pokud to neumí vysvětlit, je dost možné, že to ani sám nemá pod kontrolou.
+
+Datová mapa se hodí hlavně při:
+
+- spuštění nového webu,
+- přidání formuláře, analytiky nebo newsletteru,
+- návrhu SaaS MVP,
+- výběru dodavatele nebo nástroje,
+- technickém a privacy auditu,
+- incidentu,
+- předání projektu novému týmu.
+
+### Jednostránková verze
+
+Začněte krátkou tabulkou. Nečekejte na dokonalý katalog všech systémů. První verze má zachytit nejdůležitější datové toky a odhalit místa, kde tým neví odpověď.
+
+```text
+Projekt:
+Vlastník datové mapy:
+Datum poslední revize:
+
+Data / tok | Účel | Kde vznikají | Kde leží | Osobní údaje? | Externí služba | Region | Přístup | Retence | Export / výmaz | Poznámka
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+Kontaktní formulář | odpověď na poptávku | web | CRM / inbox | ano | CRM, e-mail | EU preferováno | sales | podle obchodního účelu | ručně přes CRM | neposílat do analytiky
+page_view | agregovaná návštěvnost | web | analytika | ne / omezeně | analytika | EU | marketing | 13 měsíců | agregace | bez reklamního profilu
+activation_reached | měření první hodnoty | aplikace | produktová analytika | pseudonym | analytika | EU | produkt | 24 měsíců | agregace | bez obsahu zákaznických dat
+```
+
+U každého prázdného pole napište `ověřit`, ne odhad. Odhad v datové mapě je budoucí incident v lepším oblečení.
+
+### Sloupce, které dávají smysl
+
+Datová mapa nemusí mít sto sloupců. Potřebuje jen ty, podle kterých jde jednat.
+
+**Data / tok**
+
+Pojmenujte konkrétní datový tok, ne systém obecně. `CRM` je moc široké. Lepší je `lead z kontaktního formuláře`, `poznámka ze sales hovoru`, `newsletter odběr`, `billing kontakt`, `support příloha`, `audit log změny role`.
+
+**Účel**
+
+Napište, proč tok existuje. Pokud účel zní "pro jistotu", tok je podezřelý. Dobrý účel je například:
+
+- odpověď na poptávku,
+- doručení faktury,
+- bezpečnostní audit,
+- měření aktivace,
+- debug chyby,
+- zaslání dobrovolného newsletteru,
+- export dat zákazníka.
+
+**Kde vznikají**
+
+Formulář, aplikace, API, support e-mail, import, analytický skript, ruční zadání do CRM, integrace třetí strany. Toto pole pomáhá najít místa, kde data vznikají mimo hlavní produktový tok.
+
+**Kde leží**
+
+Databáze, CRM, inbox, analytika, helpdesk, object storage, logovací nástroj, billing systém, lokální export. Pokud data leží na více místech, napište všechna. Kopie jsou často větší riziko než původní systém.
+
+**Osobní údaje?**
+
+Stačí praktická odpověď: `ano`, `ne`, `pseudonym`, `může obsahovat`. U komentářů, support ticketů a volných textů je často správná odpověď `může obsahovat`, protože uživatel do nich může napsat něco nečekaného.
+
+**Externí služba**
+
+Každý dodavatel je datová hranice. Napište název služby a účel. Pokud služba dostává jen agregované technické eventy, napište to. Pokud dostává obsah zákaznické práce, zvýrazněte to.
+
+**Region**
+
+Uveďte, kde má služba data provozovat nebo ukládat. Pokud region nevíte, napište `ověřit`. Privacy-first provoz nestojí na dojmu, že "to bude asi někde v Evropě".
+
+**Přístup**
+
+Kdo data vidí: marketing, sales, support, vývoj, finance, admin, externí dodavatel, zákaznický admin. Toto pole rychle ukáže přístupy, které vznikly historicky a už nedávají smysl.
+
+**Retence**
+
+Jak dlouho data držíte a co se stane potom: smazání, anonymizace, agregace, archivace. Pokud retence neexistuje, napište `nenastaveno` a dejte tomu prioritu. `Navždy` je málokdy dobrá odpověď.
+
+**Export / výmaz**
+
+Jak data dostanete ven nebo smažete. Ne každá operace musí být automatizovaná od první verze, ale tým musí vědět, jak ji provede a kdo za ni odpovídá.
+
+### Webová datová mapa
+
+U běžného marketingového webu začněte těmito toky:
+
+```text
+Tok | Co zkontrolovat
+Návštěvnost | nástroj, cookies, region, retence, reklamní propojení
+CTA kliky | zda neobsahují osobní údaje
+Kontaktní formulář | pole, příjemce, CRM, potvrzení, retence
+Newsletter odběr | souhlas, zdroj, odhlášení, poskytovatel
+RSS | zda neobsahuje neveřejný obsah nebo interní URL
+Serverové logy | IP, user agent, URL parametry, retence, přístup
+Externí fonty / mapy / videa | jaké domény se načítají a proč
+Sociální odkazy | obyčejné odkazy vs. embed widgety
+```
+
+Příklad vyplnění:
+
+```text
+Data / tok: contact_submitted
+Účel: měřit dokončení formuláře podle stránky
+Kde vznikají: webový formulář
+Kde leží: webová analytika jako event, CRM jako obsah poptávky
+Osobní údaje: event ne, CRM ano
+Externí služba: analytika, CRM
+Region: EU / ověřit u CRM
+Přístup: marketing vidí event, sales vidí obsah
+Retence: event 13 měsíců, CRM podle obchodního účelu
+Export / výmaz: CRM podle kontaktu, event jen agregovaně
+Poznámka: do eventu neposílat e-mail, telefon ani text zprávy
+```
+
+Tento zápis je praktický, protože odděluje měření od obsahu. Marketing ví, že formulář funguje. Sales může odpovědět na poptávku. Analytika ale nedostává osobní obsah, který nepotřebuje.
+
+### SaaS datová mapa
+
+U SaaS produktu přidejte produktové, bezpečnostní a provozní toky:
+
+```text
+Tok | Co zkontrolovat
+Registrace | e-mail, tenant, ověření, marketingové souhlasy odděleně
+Členství a role | kdo může zvát, měnit role, deaktivovat uživatele
+Zákaznické objekty | tenant vlastnictví, export, mazání, retence
+Audit log | akce, actor, objekt, výsledek, citlivé hodnoty maskovat
+Produktová analytika | aktivace a workflow bez obsahu zákaznických dat
+Billing | fakturační údaje, usage agregace, platební poskytovatel
+Support | tickety, screenshoty, přílohy, interní poznámky, retence
+Integrace | API klíče, webhooky, scope, region, odpojení
+AI funkce | prompty, výstupy, embeddingy, retence, možnost vypnutí
+Logy | debug, access, security, audit, oddělené účely
+```
+
+Příklad pro audit log:
+
+```text
+Data / tok: role_updated
+Účel: dohledatelnost změn oprávnění
+Kde vznikají: aplikace při změně role
+Kde leží: audit log tabulka
+Osobní údaje: pseudonym / uživatelské ID, e-mail podle potřeby v UI
+Externí služba: žádná
+Region: stejný jako produkční databáze
+Přístup: tenant admin, support s omezeným přístupem
+Retence: podle bezpečnostního a smluvního pravidla
+Export / výmaz: součást tenant exportu, mazání řešit opatrně kvůli integritě auditu
+Poznámka: neukládat staré ani nové heslo, tokeny ani citlivý obsah
+```
+
+Audit log má být paměť důležitých akcí, ne druhá kopie citlivé databáze. To je rozdíl, který se vyplatí držet od začátku.
+
+### Otázky pro každou novou službu
+
+Když chcete přidat nový nástroj, datová mapa má být povinný mezikrok. Ne velká brzda. Pět minut disciplíny.
+
+```text
+1. Jaký konkrétní problém nástroj řeší?
+2. Jaká data do něj pošleme?
+3. Existuje méně invazivní způsob, jak dosáhnout stejného rozhodnutí?
+4. Kde budou data uložena?
+5. Kdo k nim bude mít přístup?
+6. Jak dlouho je nástroj drží?
+7. Používá data pro vlastní účely, reklamu, benchmarking nebo trénování?
+8. Jak data exportujeme nebo smažeme?
+9. Jak nástroj vypneme bez rozbití hlavního toku?
+10. Kdo je vlastník nástroje a kdy proběhne revize?
+```
+
+Pokud odpověď na většinu otázek zní `nevíme`, nástroj zatím nenasazujte do produkce. Nevědomost není technický detail. Je to provozní stav.
+
+### Mini audit existující datové mapy
+
+Jednou za měsíc nebo kvartál projděte krátkou kontrolu:
+
+1. Přibyl nový formulář, skript, embed, integrace nebo export?
+2. Přibyl nový osobní údaj nebo volné textové pole?
+3. Posíláme nějaká data novému dodavateli?
+4. Změnil se region, retence nebo subdodavatel u existující služby?
+5. Jsou v mapě toky, které už neexistují?
+6. Jsou v projektu toky, které v mapě chybí?
+7. Má každý tok vlastníka?
+8. Existují přístupy lidí, kteří je už nepotřebují?
+9. Držíme data déle, než je potřeba pro účel?
+10. Umíme mapu vysvětlit zákazníkovi bez interního žargonu?
+
+Výstup revize má být konkrétní:
+
+```text
+Revize 2026-05-06:
+- odstraněn starý social embed z homepage,
+- doplněn tok newsletter_preference_updated,
+- zkrácena retence debug logů,
+- ověřit region CRM do příští revize.
+```
+
+To je lepší než napsat "privacy audit hotov". Audit bez změny nebo ověření je často jen dekorativní sebeuklidnění.
+
+### Codyho komentář
+
+Můj pohled: datová mapa je jedna z nejlepších protivah proti digitálnímu bordelu. Ne proto, že je elegantní. Ale protože nutí tým říct nahlas: toto sbíráme, proto to sbíráme, tady to leží a tento člověk za to odpovídá. Většina zbytečných trackerů, formulářových polí a exportů nemá ráda světlo. Datová mapa je obyčejná baterka.
+
+### Datová mapa checklist
+
+- Má projekt jednu aktuální datovou mapu?
+- Má mapa vlastníka a datum poslední revize?
+- Jsou v ní formuláře, analytika, CRM, support, newsletter, logy a integrace?
+- Je u každého toku jasný účel?
+- Je u každého toku jasné, zda obsahuje osobní nebo citlivá data?
+- Ví tým, kde data leží a kdo k nim má přístup?
+- Je u externích služeb zapsaný region nebo úkol ho ověřit?
+- Má každý tok retenci nebo úkol retenci doplnit?
+- Je jasné, jak data exportovat nebo smazat?
+- Neobsahuje mapa hesla, tokeny ani tajemství?
+- Odděluje mapa analytické eventy od obsahu formulářů a zákaznické práce?
+- Prochází každý nový nástroj přes krátké otázky k účelu, datům a vypnutí?
+- Probíhá pravidelná revize a po ní vzniká konkrétní změna nebo ověření?
+
+Datová mapa nemá vyřešit celý privacy-first provoz sama. Má ale dát týmu společnou pravdu. A společná pravda je v digitálním projektu překvapivě vzácná, takže ji stojí za to mít napsanou.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -11367,3 +11591,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha D se slovníkem praktických pojmů pro sjednocení jazyka týmu napříč produktem, marketingem, metrikami, provozem a privacy-first prací.
 - 2026-05-06: Doplněna Příloha E s kvalifikačním dotazníkem pro nový web nebo SaaS projekt: základní otázky, rozšíření pro web a MVP, signály špatného fitu, jednostránkový výstup a checklist.
 - 2026-05-06: Doplněna Příloha F o výběru dodavatele webu nebo SaaS projektu: discovery, nabídka, cena, privacy-first otázky, předání, reference, scorecard a smluvní checklist.
+- 2026-05-06: Doplněna Příloha G se šablonou datové mapy pro web a SaaS: datové toky, účely, přístupy, retence, export, revize a checklist pro nové nástroje.
