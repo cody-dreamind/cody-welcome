@@ -10478,6 +10478,171 @@ Tohle je malá iterace. Ale po měsíci je web konkrétnější, datová stopa m
 
 Měsíční review je nenápadná rutina. Ale právě rutiny rozhodují, jestli se z webu, produktu a marketingu stane systém, nebo hromada historických rozhodnutí s hezkou fasádou. Jedna hodina měsíčně je levná cena za to, že tým neztratí kontakt s realitou, zákazníkem ani vlastními daty.
 
+## Příloha C: Workshop první praktické iterace
+
+E-book je užitečný jen tehdy, když po něm vznikne lepší rozhodnutí nebo konkrétní změna. Nestačí si odnést pocit, že "by se měl zlepšit web, marketing a produkt". To ví každý. Důležité je vybrat jednu první iteraci, která má rozumný dopad, malý rozsah a jasné kritérium hotovo.
+
+Tato příloha je krátký workshop pro tým nebo jednotlivce. Cíl: během 90 minut vybrat jednu konkrétní změnu na příštích sedm až čtrnáct dní. Může to být úprava prodejní stránky, zjednodušení formuláře, vyčištění analytiky, doplnění důkazu, oprava onboardingu, provozní dokumentace nebo nový obsahový kus. Ne pět věcí najednou. Jedna hotová věc.
+
+### Výstup workshopu
+
+Na konci má vzniknout jedna stránka:
+
+```text
+První iterace:
+Vlastník:
+Termín:
+
+1. Jaký problém řešíme:
+2. Pro koho je změna důležitá:
+3. Co přesně upravíme:
+4. Co vědomě neupravíme:
+5. Jak poznáme hotovo:
+6. Jaký signál zkontrolujeme po vydání:
+7. Jaká data při tom sbíráme nebo naopak odstraníme:
+8. Kdo musí změnu schválit nebo vědět:
+```
+
+Když tuto stránku nejde vyplnit, iterace je pravděpodobně moc velká, moc nejasná nebo moc vzdálená zákaznické realitě.
+
+### Agenda na 90 minut
+
+Prvních 15 minut: vybrat oblast tření.
+
+Každý účastník napíše tři pozorování z posledních týdnů. Ne názory typu "web je slabý", ale konkrétní signály:
+
+- zákazníci se opakovaně ptají na cenu a rozsah,
+- lidé přijdou z článku, ale nepřejdou na stránku služby,
+- trial účty vznikají, ale nedokončí první workflow,
+- obchodní tým přepisuje stejné vysvětlení do e-mailů,
+- ve formuláři sbíráme telefon, ale nikdy ho nepoužíváme,
+- v analytice běží eventy, které nikdo nečte.
+
+Dalších 20 minut: převést signály na problém.
+
+U každého silného signálu se zeptejte:
+
+- Kdo tím trpí?
+- Jak často se to děje?
+- Jaký má problém dopad na důvěru, konverzi, provoz nebo soukromí?
+- Co by se stalo, kdybychom to další měsíc neřešili?
+- Je to problém webu, produktu, marketingu, provozu, nebo hranice mezi nimi?
+
+Nejlepší první iterace často leží na hranici. Například prodejní stránka slibuje rychlý onboarding, ale produkt první krok nevysvětluje. Nebo marketing přivádí relevantní lidi, ale formulář sbírá moc dat a nepíše, co se stane po odeslání.
+
+Dalších 20 minut: vybrat nejmenší užitečnou změnu.
+
+Použijte pravidlo jednoho tahu. Změna má být tak malá, aby šla dokončit bez velké reorganizace, ale tak užitečná, aby ji zákazník nebo tým poznal.
+
+Dobré první iterace:
+
+- přepsat jednu stránku služby podle pěti nejčastějších otázek ze sales hovorů,
+- zkrátit kontaktní formulář a doplnit větu, co se stane po odeslání,
+- doplnit jednu konkrétní case study nebo anonymizovaný příklad,
+- vyčistit analytické eventy na tři rozhodovací metriky,
+- sepsat provozní list pro doménu, hosting, DNS, e-mail a formuláře,
+- upravit onboarding tak, aby první hodnota byla vidět do deseti minut,
+- odstranit jeden externí skript bez rozhodovací hodnoty.
+
+Slabé první iterace:
+
+- kompletně předělat web,
+- zlepšit SEO,
+- napsat víc obsahu,
+- vyřešit analytiku,
+- vymyslet produktovou strategii,
+- udělat redesign aplikace.
+
+Slabé nejsou proto, že by byly špatné. Jsou slabé proto, že nejsou iterace. Jsou to krabice s mnoha rozhodnutími uvnitř.
+
+Dalších 20 minut: definovat hotovo.
+
+Kritérium hotovo musí být ověřitelné. Ne "stránka je lepší", ale:
+
+```text
+Hotovo znamená:
+- stránka služby má nový hero text, sekci průběhu, tři námitky a jedno hlavní CTA,
+- formulář sbírá jen e-mail, firmu a krátký kontext,
+- po odeslání se ukáže jasné potvrzení dalšího kroku,
+- starý heatmap skript je odstraněný,
+- analytika měří pouze zobrazení stránky, klik na CTA a odeslání formuláře bez obsahu zprávy.
+```
+
+Toto kritérium drží rozsah. Když během práce někoho napadne další nápad, patří do backlogu, ne do aktuální iterace. Backlog je užitečný sluha a špatný řidič.
+
+Posledních 15 minut: privacy-first kontrola.
+
+Každá iterace má projít krátkou kontrolou dat:
+
+- Přidáváme nové osobní údaje?
+- Posíláme data nové externí službě?
+- Zvětšujeme retenci dat?
+- Vzniká nový skript, pixel, embed nebo widget?
+- Dá se stejné rozhodnutí udělat s menším sběrem dat?
+- Umíme návštěvníkovi jednoduše vysvětlit, co měříme a proč?
+
+Pokud iterace snižuje datovou stopu, napište to do výstupu. Je to hodnota, ne technická poznámka.
+
+### Příklad vyplněné iterace
+
+```text
+První iterace:
+Zpřesnit stránku "Technický audit webu"
+
+Vlastník:
+Marketing + technický konzultant
+
+Termín:
+10 pracovních dní
+
+1. Jaký problém řešíme:
+Poptávky často nevědí, co audit obsahuje, jak dlouho trvá a co dostanou na konci.
+
+2. Pro koho je změna důležitá:
+B2B firmy s existujícím webem nebo SaaS produktem, které řeší výkon, SEO, přístupnost, bezpečnost nebo privacy-first provoz.
+
+3. Co přesně upravíme:
+Hero text, průběh auditu, ukázku výstupu, tři typické nálezy, kratší formulář a sekci práce s daty.
+
+4. Co vědomě neupravíme:
+Nebudeme měnit celý design webu, ceník ani blogové články.
+
+5. Jak poznáme hotovo:
+Stránka je publikovaná, má jedno hlavní CTA, formulář sbírá minimum údajů, starý embed je odstraněný a sales tým má odkaz na stránku pro follow-up.
+
+6. Jaký signál zkontrolujeme po vydání:
+Kvalitu příchozích poptávek a počet opakovaných otázek na rozsah auditu v prvních deseti hovorech.
+
+7. Jaká data při tom sbíráme nebo odstraníme:
+Odstraníme heatmap widget, necháme jen agregované eventy page_view, audit_cta_clicked a audit_form_submitted bez obsahu formuláře.
+
+8. Kdo musí změnu schválit nebo vědět:
+Technický vlastník kvůli přesnosti slibů a sales kvůli návaznosti na hovory.
+```
+
+Tento příklad není velká strategie. Je to praktický krok, který zlepší důvěru, sníží opakované vysvětlování a zároveň zmenší datovou stopu. Přesně tak má první iterace vypadat.
+
+### Codyho komentář
+
+Můj pohled: týmy často přeceňují motivaci a podceňují uzavřenost práce. Nadšení z workshopu vydrží pár dní. Dobře definovaná iterace vydrží do vydání. Pokud první krok nejde dokončit za dva týdny, není první. Je to převlečený projekt.
+
+### Workshop checklist
+
+- Vybrali jste jeden konkrétní problém, ne obecnou oblast?
+- Opírá se problém o reálný signál ze zákazníků, provozu nebo dat?
+- Je jasné, pro koho je iterace důležitá?
+- Je rozsah tak malý, aby šel dokončit za sedm až čtrnáct dní?
+- Má iterace vlastníka a termín?
+- Je napsané, co se vědomě neupravuje?
+- Má kritérium hotovo konkrétní položky?
+- Je jasné, jaký signál zkontrolujete po vydání?
+- Prošla iterace privacy-first kontrolou?
+- Odstraní nebo zmenší nějaký zbytečný sběr dat?
+- Vznikl z workshopu jednostránkový záznam?
+- Je další krok tak jasný, že může začít hned po workshopu?
+
+Workshop není důležitý tím, že trvá 90 minut. Důležitý je tím, že končí jednou dokončenou změnou. Digitální systém se nezlepší tím, že o něm tým lépe mluví. Zlepší se tím, že pravidelně opravuje konkrétní tření.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -10608,3 +10773,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněn závěr e-booku s návodem, jak rukopis používat jako pracovní systém, devadesátidenním plánem a závěrečným checklistem.
 - 2026-05-06: Doplněna Příloha A s provozním listem digitálního projektu: kritické akce, datová mapa, integrace, incidentní mini runbook a revizní rytmus.
 - 2026-05-06: Doplněna Příloha B s měsíčním review webu, produktu a marketingu: agenda, vstupy, rozhodnutí, šablona záznamu a checklist.
+- 2026-05-06: Doplněna Příloha C s workshopem první praktické iterace: agenda, jednostránkový výstup, příklad, privacy-first kontrola a checklist.
