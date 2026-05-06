@@ -7074,6 +7074,384 @@ Prodejní web nemusí být agresivní, aby prodával. Musí být konkrétní, d�
 - [European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en)
 - [EDPB: Guidelines 03/2022 on deceptive design patterns](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media_en)
 
+## Kapitola 29: Sales proces pro malé týmy
+
+Sales proces pro malý tým nemá být divadlo s deseti pipeline, třiceti poli v CRM a poradou, kde se všichni tváří, že "commit forecast" je normální lidská věta. Má být jednoduchý systém, který pomáhá správně vybrat zákazníky, vést konzistentní rozhovory, neztrácet další kroky a učit se z každé příležitosti.
+
+Malý tým má typicky tři omezení:
+
+1. Má málo času na ruční prodej.
+2. Má málo dat na velké závěry.
+3. Každý špatný zákazník bolí víc než u velké firmy.
+
+Proto musí být sales proces krátký, disciplinovaný a propojený s produktem. Nejde jen o to "zavřít deal". Jde o to zjistit, jestli zákazník opravdu patří do cílového trhu, jestli problém má prioritu, jestli produkt zvládne slíbený výsledek a jestli obchod nevytváří provozní dluh, který později zaplatí support, vývoj nebo důvěra.
+
+Privacy-first prodej k tomu přidává ještě jednu vrstvu: sbírat jen data potřebná pro obchodní rozhodnutí, nepoužívat agresivní tracking jako náhradu za jasnou nabídku, oddělit obchodní komunikaci od marketingového souhlasu a umět vysvětlit, kde končí data z formulářů, CRM, e-mailů a call poznámek.
+
+### Sales proces začíná kvalifikací, ne prezentací
+
+Nejrychlejší způsob, jak ztratit čas, je prezentovat produkt každému, kdo řekne "zní to zajímavě". Zájem není totéž co priorita. Malý tým musí kvalifikovat brzy a slušně.
+
+Kvalifikace má odpovědět na pět otázek:
+
+- Je zákazník v cílovém segmentu?
+- Má problém, který produkt opravdu řeší?
+- Je problém dost naléhavý?
+- Existuje člověk nebo tým, který změnu vlastní?
+- Umí zákazník udělat další krok v rozumném čase?
+
+To neznamená být arogantní. Znamená to chránit čas obou stran. Pokud někdo hledá enterprise řešení s desetiměsíčním procurementem, vlastní regionální instalací a certifikacemi, které nemáte, je lepší to říct brzy. Pokud někdo potřebuje agenturní službu, ale vy prodáváte samoobslužný SaaS, také je lepší to zjistit dřív než po třech demo hovorech.
+
+Praktický kvalifikační rámec pro první hovor:
+
+- Kontext: co zákazník dělá a jaký tým problém řeší.
+- Současný stav: jak to řeší dnes.
+- Bolest: co přesně nefunguje a jak často.
+- Dopad: kolik času, peněz, rizika nebo reputace to stojí.
+- Rozhodnutí: kdo musí změnu schválit.
+- Čas: proč se to řeší teď.
+- Omezení: data, bezpečnost, integrace, rozpočet, právní požadavky.
+
+Slabý kvalifikační hovor:
+
+"Ukážeme vám náš produkt, projdeme funkce a na konci se zeptáme, jestli máte otázky."
+
+Silnější hovor:
+
+"Nejdřív chci pochopit, jak dnes řešíte reportování klientských zakázek, kde se to láme a kdo rozhoduje o změně. Pokud bude dávat smysl pokračovat, ukážu jen ty části produktu, které s tím souvisejí."
+
+Rozdíl je obrovský. První hovor prodává naslepo. Druhý hovor zjišťuje, jestli má prodej vůbec smysl.
+
+Codyho komentář: demo bez kvalifikace je obchodní karaoke. Něco se odprezentuje, občas to zní dobře, ale nikdo si není jistý, jestli to patřilo k písničce zákazníka.
+
+### Pipeline má odrážet rozhodování zákazníka
+
+Pipeline není interní rituál. Má popsat, kde je zákazník ve svém rozhodnutí. Pokud fáze pipeline odrážejí jen aktivitu prodejce, tým začne měřit práci místo pokroku.
+
+Slabé fáze:
+
+- Kontaktován
+- Demo odesláno
+- Follow-up
+- Nabídka
+- Vyhrané/prohrané
+
+Silnější fáze:
+
+- Fit neověřený: máme kontakt, ale nevíme, zda problém a segment sedí.
+- Problém potvrzený: zákazník popsal konkrétní bolest a současný workaround.
+- Hodnota ověřená: zákazník chápe, jak řešení pomůže jeho workflow.
+- Nákupní proces známý: víme, kdo rozhoduje, kdo blokuje a jaký je další krok.
+- Pilot nebo nabídka: existuje konkrétní rozsah, termín a kritéria úspěchu.
+- Uzavřeno: vyhráno, prohráno, odloženo nebo nevhodný fit.
+
+Každá fáze má mít vstupní podmínku. Ne pocit. Podmínku.
+
+Příklad:
+
+- Do "Problém potvrzený" se příležitost posune až ve chvíli, kdy zákazník popsal konkrétní poslední situaci a dopad.
+- Do "Nákupní proces známý" se posune až ve chvíli, kdy víte, kdo rozhoduje a co se musí stát před nákupem.
+- Do "Pilot nebo nabídka" se posune až ve chvíli, kdy existuje jasné očekávání výstupu, ne jen "pošlete nám cenu".
+
+Tím zabráníte pipeline optimismu. Pipeline optimismu se pozná tak, že všichni dealy vypadají slibně, dokud tiše nezemřou. Malý tým nepotřebuje kosmeticky pěknou pipeline. Potřebuje pravdivou pipeline.
+
+### Discovery: rozhovor, který má najít pravdu
+
+Discovery není výslech ani příprava na prezentaci. Je to rozhovor, který má zjistit, jestli produkt může dodat hodnotu v reálném kontextu zákazníka.
+
+Dobré discovery otázky:
+
+- Kdy jste tento problém řešili naposledy?
+- Co se přesně stalo?
+- Kdo byl zapojený?
+- Jak dlouho to trvalo?
+- Co se stane, když se to nezlepší?
+- Jaký workaround používáte dnes?
+- Co jste už zkoušeli?
+- Co by muselo být pravda, aby změna dávala smysl?
+- Kdo bude produkt používat denně?
+- Kdo ponese odpovědnost, pokud projekt nevyjde?
+
+Špatné discovery otázky:
+
+- Líbí se vám tahle funkce?
+- Používali byste to?
+- Kolik byste za to dali?
+- Chcete i integraci s X?
+
+Hypotetické otázky vyrábějí zdvořilé odpovědi. Minulé chování vyrábí důkazy. Pokud zákazník nikdy neměl konkrétní incident, nikdy nehledal alternativu a nikdo za problém nemá odpovědnost, nejspíš nemáte sales příležitost. Máte příjemný rozhovor. Ty jsou hezké, ale špatně se z nich platí server.
+
+Po discovery byste měli umět vyplnit krátkou kartu:
+
+- Segment:
+- Problém:
+- Současné řešení:
+- Dopad:
+- Rozhodovatel:
+- Uživatel:
+- Rizika:
+- Další krok:
+- Proč teď:
+
+Pokud karta nejde vyplnit, ještě neprodávejte. Doptávejte se, nebo příležitost odložte.
+
+### Demo má být odpověď, ne prohlídka muzea
+
+Demo často selže, protože tým ukazuje produkt podle menu, ne podle problému. "Tady máme dashboard, tady nastavení, tady reporty, tady integrace." To je prohlídka muzea funkcí. Zákazník pak obdivně kývá, ale v hlavě pořád neví, jak to vyřeší jeho konkrétní situaci.
+
+Dobré demo má tři části:
+
+1. Připomenutí problému: "Říkali jste, že každý pátek skládáte klientský report z e-mailu a tabulky."
+2. Ukázka workflow: "Tady vznikne zakázka, tady se přidají nálezy, tady klient vidí stav a tady exportujete report."
+3. Ověření hodnoty: "Která část tohoto toku by u vás nahradila dnešní ruční práci a kde by to narazilo?"
+
+Demo nemusí ukázat všechno. Naopak. Čím víc funkcí ukazujete bez kontextu, tím víc zákazník přemýšlí, co všechno by se ještě musel naučit. U malého SaaS je silnější ukázat jeden dobře vybraný scénář než patnáct obrazovek bez dramatického oblouku.
+
+Praktický demo scénář:
+
+- Před hovorem si napište zákazníkův problém jednou větou.
+- Vyberte maximálně tři části produktu, které s problémem přímo souvisejí.
+- Ukažte výchozí workflow, ne nastavení.
+- Ptejte se průběžně, kde je rozdíl proti dnešnímu procesu.
+- Na konci potvrďte další krok, ne obecný zájem.
+
+Věta na konci dema:
+
+"Dává smysl pokračovat jen pokud tento tok řeší váš páteční report bez nové ruční práce. Co byste potřebovali ověřit v pilotu, aby šlo rozhodnout?"
+
+To je lepší než:
+
+"Tak co na to říkáte?"
+
+Druhá otázka zve k názoru. První zve k rozhodnutí.
+
+### Nabídka: pište rozhodnutí, ne katalog
+
+Nabídka pro malý SaaS nebo službu nemá být obecný PDF katalog. Má být shrnutí konkrétní dohody: co zákazník řeší, co dostane, jak poznáte úspěch, kolik to stojí, co není součástí a co se stane dál.
+
+Dobrá nabídka obsahuje:
+
+- Kontext: co jsme pochopili o problému.
+- Cíl: jaký výsledek má spolupráce nebo produkt přinést.
+- Rozsah: co je součástí první fáze.
+- Mimo rozsah: co vědomě neděláme teď.
+- Kritéria úspěchu: jak poznáme, že pilot nebo nákup dává smysl.
+- Cena a platební model: jasně a bez hádanek.
+- Data a provoz: kde služba běží, co se zpracovává, kdo má přístup.
+- Další krok: kdo co udělá a do kdy.
+
+U privacy-first produktu přidejte krátkou datovou část:
+
+"V pilotu budeme zpracovávat e-mailové adresy uživatelů, názvy projektů, komentáře a auditní události. Data poběží v evropském regionu, nepoužijeme reklamní trackery a po ukončení pilotu nabídneme export a smazání pracovních dat podle dohody."
+
+To není právní román. Je to obchodní důkaz, že víte, co děláte. Zákazník nemusí čekat na bezpečnostní dotazník, aby zjistil, že nad daty někdo přemýšlel.
+
+Slabá nabídka:
+
+"Naše platforma obsahuje dashboard, notifikace, reporty, role, integrace a podporu."
+
+Silnější nabídka:
+
+"V první fázi ověříme průběžné reportování deseti klientských zakázek. Cílem je nahradit páteční ruční e-mail jedním sdíleným stavem, exportem a auditní historií. Pilot trvá 30 dní a úspěch znamená, že alespoň tři account manažeři použijí portál pro reálný klientský report bez ručního skládání v tabulce."
+
+Nabídka má udělat rozhodnutí jednodušší. Ne dodat zákazníkovi další dokument k luštění.
+
+### Follow-up: další krok musí mít vlastníka
+
+Většina dealů neumře dramaticky. Umře v mlze. "Ozveme se", "pošlete nám info", "probereme interně", "vrátíme se k tomu". To nejsou další kroky. To jsou obchodní uspávanky.
+
+Další krok má mít:
+
+- konkrétní akci,
+- vlastníka,
+- termín,
+- důvod.
+
+Slabý follow-up:
+
+"Děkujeme za čas, kdyby cokoliv, dejte vědět."
+
+Silnější follow-up:
+
+"Díky za dnešní hovor. Shrnul jsem, že hlavní problém je ruční skládání měsíčního klientského reportu z e-mailu a tabulky. Do pátku vám pošlu návrh 30denního pilotu pro 5 klientů. Vy mezitím ověříte s finance týmem, jestli potřebují export PDF nebo stačí sdílený přehled. V pondělí v 10:00 si řekneme, zda pilot spustíme."
+
+Follow-up není obtěžování, pokud navazuje na dohodnutý krok. Obtěžování je posílat pět "jen se připomínám" e-mailů člověku, který nikdy nepotvrdil problém ani další akci.
+
+Praktický rytmus:
+
+- Po každém hovoru pošlete shrnutí do 24 hodin.
+- V prvním odstavci zopakujte problém a dohodnutý další krok.
+- Nepřidávejte nové sliby, které na hovoru nezazněly.
+- Pokud zákazník nereaguje, pošlete jednu konkrétní otázku, ne obecnou připomínku.
+- Po dvou až třech marných pokusech deal uzavřete jako odložený nebo ztracený.
+
+Ztracený deal není selhání, pokud víte proč. Mrtvý deal bez důvodu je ztracené učení.
+
+### CRM: méně polí, více pravdy
+
+CRM pro malý tým má být paměť, ne trest. Pokud po každém hovoru vyplňujete dvacet polí, tým začne lhát CRM stejně jako lidé lžou formulářům s povinným telefonem. Výsledkem nejsou lepší data. Výsledkem je administrativní fikce.
+
+Minimum polí pro malé SaaS CRM:
+
+- Firma nebo organizace.
+- Kontaktní osoba a role.
+- Segment.
+- Problém jednou větou.
+- Současný workaround.
+- Fáze pipeline.
+- Další krok, vlastník a datum.
+- Rozhodovatel a uživatel.
+- Odhadovaná hodnota nebo plán.
+- Rizika: data, integrace, timing, budget, fit.
+- Důvod výhry nebo prohry.
+
+Privacy-first CRM pravidla:
+
+- Neukládejte osobní poznámky, které nejsou relevantní pro obchodní vztah.
+- Neimportujte náhodné databáze kontaktů bez jasného původu a právního základu.
+- Oddělte obchodní komunikaci od marketingového odběru.
+- Držte retenci: staré neaktivní leady po rozumné době smažte nebo anonymizujte.
+- Omezte přístup v týmu podle potřeby, ne podle zvědavosti.
+- Do CRM neposílejte obsah zákaznických dokumentů, pokud stačí odkaz nebo shrnutí.
+
+Evropská komise u GDPR vysvětluje, že osobní data lze zpracovávat jen při splnění některého právního základu a že zpracování má respektovat účel, přiměřenost a práva osob ([European Commission: When can personal data be processed?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-can-personal-data-be-processed_en), [European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en)). Prakticky: CRM není bezedný sklad "kontaktů pro jistotu". Je to systém pro konkrétní obchodní účel.
+
+EDPB ve vodítkách k oprávněnému zájmu popisuje, že správce musí určit legitimní zájem, ověřit nezbytnost zpracování a provést vyvážení proti právům a svobodám subjektu údajů ([EDPB: Guidelines 1/2024 on processing based on Article 6(1)(f) GDPR](https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2024/guidelines-12024-processing-personal-data-based_en)). U obchodních aktivit to znamená: "hodilo by se nám to" nestačí. Musíte umět obhájit účel, rozsah a očekávání člověka.
+
+### Outbound bez spamu
+
+Outbound může být užitečný, pokud je přesný, relevantní a respektuje člověka. Může být také nejrychlejší cesta, jak poškodit značku. Rozdíl je v cílení, kontextu a souhlasu s tím, že druhá strana není položka v sekvenci.
+
+Privacy-first outbound:
+
+- Oslovuje úzký segment s jasným důvodem.
+- Pracuje s veřejně dostupným obchodním kontextem, ne s pochybnou databází.
+- Nepředstírá osobní vztah, který neexistuje.
+- Nevyužívá skryté tracking pixely v e-mailu jako výchozí režim.
+- Dává jednoduchou možnost říct "ne".
+- Neukládá kontakt navždy, pokud nereaguje a není relevantní důvod pokračovat.
+
+ePrivacy směrnice v článku 13 řeší nevyžádanou komunikaci pro přímý marketing a v některých případech nechává členským státům volbu mezi režimem souhlasu nebo opt-out pro určité typy komunikace ([EUR-Lex: Directive 2002/58/EC, Article 13](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058)). Vedle toho GDPR řeší právní základ a práva osob. Prakticky: pravidla pro B2B oslovení se mohou lišit podle země a kanálu. Pokud děláte outbound v Evropě, ověřte konkrétní národní pravidla a nespoléhejte na univerzální "B2B je přece v pohodě".
+
+Dobrá outbound zpráva:
+
+```text
+Dobrý den,
+
+všiml jsem si, že váš tým publikuje měsíční klientské reporty ručně v PDF. Stavíme privacy-first portál pro evropské B2B servisní týmy, který nahrazuje ruční skládání reportů sdíleným stavem, komentáři a auditní historií.
+
+Pokud je pro vás reportování klientům aktuální téma, rád pošlu krátký příklad workflow. Pokud ne, nebudu se připomínat.
+```
+
+Špatná outbound zpráva:
+
+```text
+Ahoj,
+
+jsem nadšený, že vám můžu představit revoluční AI platformu, která transformuje váš růst. Máte 15 minut tento týden?
+```
+
+Ta druhá zpráva je tak obecná, že by šla poslat i botanické zahradě. To není personalizace. To je hromadná mlha.
+
+### Handoff z prodeje do delivery nebo customer success
+
+Malý tým často prodává a dodává ve stejných lidech. I tak potřebuje handoff. Jinak se sliby z obchodního hovoru ztratí a zákazník začne opakovat všechno znovu.
+
+Handoff má obsahovat:
+
+- Proč zákazník koupil.
+- Jaký problém chce vyřešit jako první.
+- Jaká kritéria úspěchu zazněla.
+- Kdo je rozhodovatel, kdo uživatel a kdo technický kontakt.
+- Jaké jsou limity, sliby a věci mimo rozsah.
+- Jaká data bude zákazník předávat.
+- Jaké bezpečnostní, privacy nebo integrační požadavky jsou důležité.
+- Jaký je první onboarding krok.
+
+Příklad handoff poznámky:
+
+```text
+Zákazník koupil pilot kvůli ručnímu reportování klientských zakázek. Úspěch po 30 dnech: 5 klientů dostane průběžný stav přes portál místo pátečního PDF. Rozhodovatel: vedoucí delivery. Denní uživatelé: 3 account manažeři. Citlivost: klientské komentáře a stav zakázek, žádné finanční údaje v pilotu. Slíbeno: export CSV a PDF, EU provoz, žádné reklamní trackery. Neslíbeno: integrace s účetnictvím v pilotu.
+```
+
+Tato poznámka šetří nedorozumění. A hlavně chrání tým před tím, aby onboarding začal větou "tak nám ještě jednou řekněte, co vlastně potřebujete". Zákazník to už řekl. Jen to nesmí zmizet v obchodním éteru.
+
+### Win/loss review: učte se z obchodů, ne z nálad
+
+Každý vyhraný i prohraný deal má být zdroj učení. Ne velká analýza. Krátká, poctivá poznámka.
+
+U výhry si napište:
+
+- Proč zákazník koupil teď?
+- Jakou alternativu porazil produkt?
+- Který důkaz nebo moment rozhodl?
+- Co bylo v procesu zbytečné?
+- Jaký slib musíme opravdu dodat?
+
+U prohry si napište:
+
+- Byl špatný segment, špatný timing, špatná cena, chybějící funkce, důvěra, nebo nákupní proces?
+- Prohráli jsme se skutečným konkurentem, statusem quo, interním vývojem, nebo neřešením?
+- Byla příležitost vůbec kvalifikovaná?
+- Co by muselo být jinak, aby dávalo smysl pokračovat?
+
+Toto učení propojte s produktem a marketingem:
+
+- Pokud lidé opakovaně nerozumí hodnotě, přepište web.
+- Pokud opakovaně chybí stejný důkaz, vytvořte case study.
+- Pokud dealy padají na integraci, rozhodněte, jestli je to segmentový požadavek nebo odchylka.
+- Pokud zákazníci nechtějí posílat data do cizích nástrojů, udělejte z privacy-first provozu viditelnější argument.
+- Pokud cena padá u správných zákazníků, vraťte se k hodnotové metrice.
+
+Sales proces má krmit produktovou strategii. Pokud prodej jen tlačí víc aktivit bez učení, tým běží rychleji do stejné zdi. To je sport, ne strategie.
+
+### Praktický sales playbook pro malé týmy
+
+Jednostránkový playbook stačí. Měl by obsahovat:
+
+- ICP: pro koho prodáváme teď.
+- Nevhodný fit: komu vědomě neprodáváme.
+- Hlavní problém: jedna až tři situace, které řešíme.
+- Kvalifikační otázky: co musíme zjistit před demem.
+- Demo scénář: jeden hlavní workflow.
+- Důkazy: case study, reference, screenshot, bezpečnostní shrnutí.
+- Pricing pravidlo: jak vysvětlujeme cenu a limity.
+- Privacy shrnutí: jak mluvíme o datech, provozu, trackingu a exportu.
+- Pipeline fáze: definice a vstupní podmínky.
+- Follow-up šablona: shrnutí, další krok, vlastník, termín.
+- Win/loss důvody: standardní kategorie pro učení.
+
+Playbook nemusí být dokonalý. Má být živý. Každý měsíc ho aktualizujte podle reálných hovorů. Pokud se v hovorech pořád objevuje otázka, která v playbooku není, doplňte ji. Pokud se část dema nikdy nepoužívá, vyhoďte ji. Pokud privacy-first argument zavírá námitky u regulovanějších zákazníků, posuňte ho dřív v procesu.
+
+### Checklist kapitoly
+
+- Máte jasně definovaný cílový segment pro aktuální sales úsilí?
+- Umíte zákazníka kvalifikovat před demem?
+- Má pipeline fáze podle rozhodování zákazníka, ne jen podle aktivity prodejce?
+- Má každá příležitost konkrétní problém, dopad, rozhodovatele a další krok?
+- Ukazuje demo zákaznický workflow, ne celý produkt podle menu?
+- Obsahuje nabídka cíl, rozsah, mimo rozsah, kritéria úspěchu a další krok?
+- Má follow-up vlastníka, termín a důvod?
+- Je CRM krátké, pravdivé a užitečné pro tým?
+- Sbíráte v CRM jen data potřebná pro obchodní účel?
+- Oddělujete obchodní komunikaci od marketingového souhlasu?
+- Má outbound jasný kontext, relevanci a jednoduchou možnost odmítnutí?
+- Ověřujete národní pravidla pro nevyžádanou B2B komunikaci v zemích, kde oslovujete?
+- Existuje handoff z prodeje do onboardingu nebo delivery?
+- Děláte stručný win/loss review u důležitých obchodů?
+- Propisují se poznatky ze sales hovorů do webu, produktu, pricingu a obsahu?
+
+Sales proces pro malý tým má být střízlivý systém pravdy. Pomáhá rychle poznat dobrý fit, férově odmítnout špatný fit, ukázat hodnotu v kontextu a neztratit další krok. Když je navržený privacy-first, neprodává jen produkt. Prodává i způsob práce: méně šumu, méně sběru dat, více důvěry a jasnější odpovědnost.
+
+### Zdroje kapitoly
+
+- [European Commission: When can personal data be processed?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-can-personal-data-be-processed_en)
+- [European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en)
+- [European Commission: When is consent valid?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en)
+- [European Commission: Can data received from a third party be used for marketing?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/can-data-received-third-party-be-used-marketing_en)
+- [EDPB: Guidelines 1/2024 on processing of personal data based on Article 6(1)(f) GDPR](https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2024/guidelines-12024-processing-personal-data-based_en)
+- [EUR-Lex: Directive 2002/58/EC on privacy and electronic communications](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -7104,3 +7482,4 @@ Prodejní web nemusí být agresivní, aby prodával. Musí být konkrétní, d�
 - 2026-05-05: Dopsána kapitola 26 o e-mailu, newsletterech a RSS: typy zpráv, souhlas, RSS feedy, doručitelnost, segmentace, minimalistické měření a privacy-first distribuce.
 - 2026-05-06: Dopsána kapitola 27 o sociálních sítích bez závislosti na algoritmu: vlastní web jako zdroj pravdy, POSSE, měření signálů, výběr platforem, privacy-first distribuce a krizový plán.
 - 2026-05-06: Dopsána kapitola 28 o prodejním webu: copywriting, důkazy, case studies, CTA, formuláře, námitky a privacy-first prodejní tok.
+- 2026-05-06: Dopsána kapitola 29 o sales procesu pro malé týmy: kvalifikace, pipeline, discovery, demo, nabídky, follow-up, CRM, outbound, handoff a privacy-first obchodní data.
