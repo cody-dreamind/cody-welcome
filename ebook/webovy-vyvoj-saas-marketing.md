@@ -8612,6 +8612,332 @@ Privacy-first analytika je ve výsledku jednoduchá disciplína: méně dat, lep
 - [CNIL: Cookies - solutions pour les outils de mesure d'audience](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience)
 - [EDPB: Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
 
+## Kapitola 33: Checklist pro launch
+
+Launch není slavnostní okamžik, kdy se hotový produkt konečně ukáže světu. Launch je řízené vystavení reality. Zákazníci kliknou jinak, než jste čekali. Formulář vyplní jinými slovy. Integrace spadne přesně tam, kde demo fungovalo. Někdo přijde z mobilu na pomalé síti, někdo z firemního proxy, někdo se starým heslem a někdo s otázkou, kterou web vůbec neřeší.
+
+Dobře připravený launch proto není o tom, že se nic nepokazí. Je o tom, že víte, co spouštíte, komu, jak poznáte problém, kdo ho řeší a jak rychle se dá vrátit poslední dobrý stav. Bez tohoto rámce se launch mění v improvizované divadlo: všichni koukají do chatu, někdo refreshuje homepage, někdo hledá přístupy a někdo právě zjistil, že kontaktní formulář posílá e-maily na člověka, který už ve firmě není. Klasika, ale ne ta dobrá.
+
+Tento checklist je pro tři typy launchů:
+
+1. Nový marketingový web nebo větší redesign.
+2. Nový SaaS produkt, MVP nebo pilotní verze.
+3. Větší produktová změna, pricing změna nebo nový onboarding.
+
+### 1. Definujte rozsah launchu
+
+Než začnete kontrolovat detaily, napište jednou větou, co přesně se spouští. Ne "nový web". To je mlha. Lepší je: "spouštíme nový web pro B2B poptávky na SaaS MVP, s kontaktním formulářem, třemi službovými stránkami, blogem, RSS a privacy-first analytikou".
+
+U SaaS produktu napište:
+
+- kdo dostane přístup,
+- jestli jde o veřejný launch, privátní betu nebo pilot,
+- které funkce jsou součástí první verze,
+- které funkce jsou záměrně mimo rozsah,
+- jaký je hlavní aktivační moment,
+- jaký je plán podpory během prvních dnů.
+
+Příklad dobrého vymezení:
+
+```text
+Launchujeme pilot pro 5 B2B týmů. Uživatel se může přihlásit, vytvořit projekt, pozvat kolegu, dokončit hlavní workflow a exportovat výsledek. Billing, veřejná registrace a pokročilé role nejsou součástí pilotu.
+```
+
+Toto zní méně efektně než "launchujeme platformu", ale je to mnohem užitečnější. Tým ví, co testuje. Zákazník ví, co čekat. A při problému se dá rozlišit bug od funkce, která nikdy neměla být součástí první verze.
+
+### 2. Napište launch kritéria
+
+Launch kritéria jsou podmínky, bez kterých nespouštíte. Nemají být nekonečná. Mají chránit důvěru, provoz a obchodní smysl.
+
+Pro marketingový web:
+
+- homepage vysvětluje nabídku, cílovou skupinu a další krok,
+- hlavní stránky mají title, meta description, H1 a kanonickou URL,
+- kontaktní formulář funguje a potvrzení říká, co bude dál,
+- RSS, sitemap a robots jsou v pořádku,
+- analytika měří jen domluvené eventy,
+- externí skripty mají vlastníka a účel,
+- privacy stránka odpovídá realitě,
+- existuje plán rollbacku nebo rychlé opravy.
+
+Pro SaaS MVP:
+
+- uživatel projde hlavní workflow bez ručního zásahu týmu,
+- onboarding vede k první hodnotě,
+- role a přístupy odpovídají datovému modelu,
+- tenant hranice jsou otestované,
+- transakční e-maily dorazí,
+- základní monitoring a logy existují,
+- support ví, kam zapisovat problémy,
+- existuje rozhodnutí, co měří úspěch pilotu.
+
+Codyho komentář: launch kritéria nejsou seznam přání. Pokud je položka "bylo by hezké mít", patří do backlogu. Pokud je položka "bez toho se rozbije důvěra nebo rozhodování", patří do launch kritérií. Rozdíl je zdravý a často zachrání týmu víkend.
+
+### 3. Zkontrolujte obsah jako zákazník
+
+Obsah před launchem nečtěte jako autor. Čtěte ho jako člověk, který o vás slyší poprvé, má málo času a nechce luštit interní terminologii.
+
+Projděte hlavní stránky a u každé odpovězte:
+
+- Je jasné, pro koho stránka je?
+- Je jasné, jaký problém řeší?
+- Je vidět konkrétní výsledek nebo přínos?
+- Jsou důkazy dostatečně blízko hlavního slibu?
+- Jsou pojmenovaná rizika, limity nebo předpoklady?
+- Je další krok konkrétní?
+- Je jasné, co se stane po kliknutí nebo odeslání?
+
+Typická chyba před launchem je přepsat web interním jazykem. Tým chce ukázat technologie, procesy, hodnoty, historii, frameworky a filozofii. Zákazník chce hlavně vědět: "Je to pro mě? Vyřeší to můj problém? Můžu vám věřit? Co mám udělat dál?"
+
+Praktický test:
+
+1. Otevřete homepage na mobilu.
+2. Dejte si 30 sekund.
+3. Napište jednou větou, co firma nebo produkt nabízí.
+4. Napište, jaký další krok byste udělali.
+5. Pokud odpověď není jasná, neopravujte design. Nejdřív opravte sdělení.
+
+U SaaS produktu udělejte totéž v aplikaci. První prázdný stav, první tlačítko a první potvrzení po akci musí dávat smysl bez školení. Pokud uživatel po přihlášení vidí prázdnou tabulku a nic víc, launch začíná zbytečně studeně.
+
+### 4. Projděte technický smoke test
+
+Smoke test není kompletní QA. Je to rychlá kontrola, že hlavní věci opravdu žijí. Má být napsaný tak, aby ho zvládl projít i člověk, který danou část nestavěl.
+
+Pro web:
+
+- otevřít homepage přes HTTPS,
+- ověřit variantu s `www` i bez `www`,
+- projít hlavní navigaci,
+- otevřít klíčové službové stránky,
+- otevřít blog a konkrétní článek,
+- odeslat testovací formulář,
+- zkontrolovat doručení e-mailu,
+- otevřít potvrzovací stránku nebo stav,
+- ověřit `robots.txt`, `sitemap.xml` a RSS,
+- zkontrolovat 404 stránku,
+- zkontrolovat mobilní menu,
+- otestovat klávesnici u navigace a formuláře.
+
+Pro SaaS:
+
+- vytvořit účet nebo pozvat testovacího uživatele,
+- přihlásit se a odhlásit,
+- projít zapomenuté heslo nebo magic link,
+- vytvořit hlavní objekt,
+- dokončit hlavní workflow,
+- pozvat člena týmu,
+- ověřit základní role,
+- vyvolat validaci formuláře,
+- otestovat export nebo notifikaci,
+- ověřit prázdný stav,
+- ověřit chybový stav API,
+- zkontrolovat logy a monitoring po testu.
+
+Každý smoke test zapisujte do jednoduchého seznamu: krok, očekávaný výsledek, skutečný výsledek, vlastník opravy. Když je problém kritický, launch se zastaví. Když je kosmetický, jde do post-launch backlogu. Bez této disciplíny se tým začne hádat podle pocitu.
+
+### 5. Připravte měření bez datového hluku
+
+Launch bez měření je drahý odhad. Launch s přeměřením všeho je drahý chaos. Potřebujete několik signálů, které řeknou, jestli lidé chápou nabídku, dokončí klíčový tok a kde se láme důvěra.
+
+Pro web stačí na začátku:
+
+- návštěvy hlavních vstupních stránek,
+- kliky na primární CTA,
+- odeslání kontaktního formuláře,
+- technické chyby formuláře,
+- návštěvy privacy/provozní stránky,
+- RSS odběr nebo přechod na obsah,
+- zdroj návštěv agregovaně.
+
+Pro SaaS MVP:
+
+- vytvoření účtu,
+- dosažení aktivační události,
+- dokončení hlavního workflow,
+- pozvání kolegy,
+- selhání hlavní integrace,
+- počet support dotazů podle tématu,
+- účty, které uvízly v onboardingu.
+
+Privacy-first pravidlo: eventy měří rozhodnutí, ne osobní obsah. Do analytiky neposílejte text poptávky, e-mail, telefon, obsah projektu, názvy zákaznických dat ani citlivé přílohy. Pokud potřebujete řešit konkrétního zákazníka, patří to do CRM nebo support systému s omezeným přístupem, ne do obecného dashboardu.
+
+Příklad launch dashboardu:
+
+```text
+Otázka: Chápou návštěvníci nabídku a dělají další krok?
+Metriky: CTA kliky, odeslané formuláře, bounce na službových stránkách, čtenost case studies.
+Akce: pokud lidé čtou službu, ale neklikají na kontakt, zkontrolovat důkazy, CTA a formulářový závazek.
+```
+
+Bez otázky by to byl jen graf. S otázkou je to nástroj řízení.
+
+### 6. Zkontrolujte privacy-first provoz
+
+Launch je nejlepší okamžik odstranit datové zlozvyky, protože ještě nejsou zabetonované. Jakmile web nebo produkt běží půl roku, každý zbytečný skript začne mít svého obhájce: "co kdyby se nám hodil". Nehodil. Jen nikdo nechce uklízet.
+
+Před spuštěním ověřte:
+
+- jaké externí domény se načítají,
+- které cookies vznikají a proč,
+- zda analytika odpovídá datové mapě,
+- zda formuláře neposílají osobní údaje do analytiky,
+- zda je marketingový souhlas oddělený od kontaktu,
+- zda privacy stránka popisuje skutečný stav,
+- zda jsou data v EU regionu, pokud je to slib nebo požadavek projektu,
+- zda existuje vlastník každého nástroje,
+- zda jsou přístupy omezené podle role,
+- zda víte, jak data exportovat nebo smazat.
+
+U SaaS produktu přidejte:
+
+- tenant izolace,
+- audit logy pro důležité akce,
+- role a oprávnění,
+- retence logů,
+- zacházení s přílohami,
+- support přístup k zákaznickým datům,
+- proces pro ukončení účtu a export dat.
+
+Privacy-first není jen checkbox v patičce. Je to schopnost říct zákazníkovi pravdu: co sbíráme, proč, kde to běží, kdo k tomu má přístup a jak se toho dá zbavit. Pokud to tým neumí vysvětlit, není připravený to spustit.
+
+### 7. Připravte rollback a incident režim
+
+Launch plán bez rollbacku je optimismus převlečený za projektové řízení. I malý web potřebuje vědět, jak se vrátit zpět, když se rozbije kontakt, DNS, e-mail, deploy nebo klíčová stránka.
+
+Minimum pro rollback:
+
+- víte, jaká verze je poslední stabilní,
+- víte, kdo může deploy vrátit,
+- víte, kde jsou přístupy,
+- víte, jak ověřit, že rollback fungoval,
+- víte, komu dát vědět, pokud se launch odkládá,
+- máte připravené stručné interní sdělení.
+
+Incident režim:
+
+- jeden člověk řídí situaci,
+- jeden zapisuje časovou osu,
+- jeden řeší technickou opravu,
+- ostatní neposílají paralelní domněnky do deseti chatů,
+- po vyřešení vznikne krátké postmortem.
+
+Postmortem nemusí být velký dokument. Stačí:
+
+```text
+Co se stalo:
+Dopad:
+Čas zjištění:
+Čas opravy:
+Příčina:
+Co měníme:
+Vlastník:
+Termín:
+```
+
+Codyho komentář: když při incidentu všichni mluví a nikdo nepíše, vzniká akorát drahá mlha. Zapisovat timeline není byrokracie. Je to paměť týmu ve chvíli, kdy mozek běží na kávu a adrenalin.
+
+### 8. Připravte obchodní a support reakce
+
+Launch není jen technika. Někdo bude odpovídat na dotazy, kvalifikovat leady, řešit nejasnosti, posílat demo, vysvětlovat cenu a sbírat zpětnou vazbu. Pokud tyto odpovědi vznikají až po spuštění, tým bude pokaždé improvizovat jinak.
+
+Připravte krátké šablony:
+
+- odpověď na novou poptávku,
+- potvrzení domluveného hovoru,
+- odpověď na dotaz k ceně,
+- odpověď na dotaz k datům a provozu,
+- odpověď na bug report,
+- odpověď pro člověka, který není vhodný zákazník,
+- follow-up po demu nebo pilotu.
+
+Každá šablona má být lidská, krátká a upravitelná. Ne automatický korporátní beton. Cílem je konzistence, ne sterilita.
+
+Příklad odpovědi na poptávku:
+
+```text
+Díky za zprávu. Prošel jsem kontext a dává smysl začít krátkým technicko-produktovým hovorem. Cílem bude upřesnit uživatele, hlavní workflow, datové hranice a provozní rizika. Nepřidáváme vás do marketingového seznamu; údaje použijeme jen k odpovědi na poptávku.
+```
+
+Tato odpověď dělá tři věci: potvrzuje přijetí, nastavuje další krok a posiluje důvěru v zacházení s daty.
+
+### 9. Naplánujte první týden po launchi
+
+První týden po launchi není čas na velké nové funkce. Je to čas na pozorování, opravy a učení. Pokud tým hned přepne do dalšího sprintu, ztratí nejcennější signály.
+
+Denní rytmus prvního týdne:
+
+1. Ráno zkontrolovat dostupnost, formuláře, e-maily a hlavní metriky.
+2. Projít nové leady, registrace a support dotazy.
+3. Označit problémy podle závažnosti.
+4. Opravit kritické chyby.
+5. Zapsat otázky, které se opakují.
+6. Upravit obsah nebo onboarding, pokud lidé narážejí na stejnou nejasnost.
+7. Na konci dne udělat krátký souhrn: co funguje, co brzdí, co měníme.
+
+Závažnost problémů:
+
+- P0: web nebo hlavní produktový tok nefunguje.
+- P1: funguje, ale brání konverzi, aktivaci nebo důvěře.
+- P2: zhoršuje použitelnost, ale má obcházení.
+- P3: kosmetika nebo drobné zlepšení.
+
+Tento jednoduchý rámec chrání tým před tím, aby se v den launchu řešila barva ikonky místo rozbitého e-mailu. Ano, ikonka taky jednou přijde na řadu. Ale ne když faktury chodí do spamu.
+
+### 10. Rozhodněte, co znamená úspěch
+
+Úspěch launchu není "byli jsme venku". Venku je i rozbitá stránka. Úspěch musí být navázaný na cíl.
+
+Příklady:
+
+- Marketingový web: získat prvních 10 kvalifikovaných poptávek za měsíc.
+- Obsahový launch: ověřit, že nový cluster přivádí relevantní návštěvy a vede na službové stránky.
+- SaaS pilot: 4 z 5 pilotních týmů dokončí hlavní workflow do 14 dnů.
+- Onboarding změna: zvýšit podíl účtů, které dosáhnou aktivace bez support zásahu.
+- Pricing změna: snížit počet nejasných dotazů před demem a zlepšit kvalitu leadů.
+
+Ke každému cíli doplňte:
+
+- jak ho měříte,
+- odkud data berete,
+- kdo je vyhodnotí,
+- kdy padne rozhodnutí,
+- jaké jsou možné další kroky.
+
+Příklad:
+
+```text
+Cíl: 4 z 5 pilotních zákazníků dokončí hlavní workflow do 14 dnů.
+Data: produktový event activation_reached, support poznámky, krátký rozhovor po pilotu.
+Rozhodnutí: pokud 3 nebo méně týmů dosáhne aktivace, další sprint nejde do nových funkcí, ale do onboardingu a workflow.
+```
+
+Toto je launch jako experiment, ne jako ohňostroj. Méně dramatické, víc užitečné.
+
+### Jednostránkový launch checklist
+
+- Je jednou větou jasné, co přesně se spouští?
+- Je jasné, pro koho launch je a kdo přístup nemá?
+- Máte launch kritéria, která chrání důvěru, provoz a obchodní smysl?
+- Prošli jste hlavní obsah očima nového zákazníka?
+- Má každá klíčová stránka nebo obrazovka jeden jasný další krok?
+- Funguje hlavní formulář, e-mail, potvrzení a follow-up?
+- Prošel web nebo produkt technickým smoke testem?
+- Jsou title, meta description, sitemap, robots, RSS a základní SEO v pořádku?
+- Funguje mobil, klávesnice, prázdné stavy a chybové stavy?
+- Měříte jen signály, které podporují konkrétní rozhodnutí?
+- Neposíláte osobní obsah formulářů nebo zákaznická data do analytiky?
+- Znáte všechny externí skripty, cookies, domény a jejich vlastníky?
+- Odpovídá privacy stránka skutečnému provozu?
+- Víte, kde běží data a kdo k nim má přístup?
+- Máte rollback plán a víte, kdo ho provede?
+- Máte incident režim a jednoduchou šablonu postmortem?
+- Jsou připravené obchodní a support odpovědi?
+- Je naplánovaný první týden po launchi?
+- Je definované, co znamená úspěch a kdy ho vyhodnotíte?
+- Máte seznam věcí, které záměrně nejdou do launchu?
+
+Launch je dobrý, když po něm tým ví víc než před ním. Ne když se všichni jen tváří, že všechno bylo připravené. Spouštějte menší věci s jasnějším cílem, měřte méně dat, sbírejte lepší signály a opravujte realitu podle toho, co se skutečně stalo.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -8646,3 +8972,4 @@ Privacy-first analytika je ve výsledku jednoduchá disciplína: méně dat, lep
 - 2026-05-06: Dopsána kapitola 30 jako praktický checklist pro nový web: záměr, nabídka, struktura, obsah, UX, technický základ, privacy-first nastavení, SEO, testování a launch.
 - 2026-05-06: Dopsána kapitola 31 jako checklist pro SaaS MVP: segment, problém, workflow, rozsah, data, role, aktivace, pilot, technický základ, měření, support a rozhodnutí po MVP.
 - 2026-05-06: Dopsána kapitola 32 jako checklist pro privacy-first analytiku: rozhodovací otázky, datová mapa, eventy, formuláře, cookies, retence, přístupy, dodavatelé, SaaS produktová analytika a kvartální audit.
+- 2026-05-06: Dopsána kapitola 33 jako checklist pro launch: rozsah, kritéria, obsah, smoke test, měření, privacy-first provoz, rollback, incident režim, support a vyhodnocení úspěchu.
