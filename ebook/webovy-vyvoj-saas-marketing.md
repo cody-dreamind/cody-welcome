@@ -11695,6 +11695,344 @@ Nesnažte se z logu udělat muzeum. Starší rozhodnutí mohou zestárnout. To j
 
 Rozhodovací log není záruka, že tým nikdy neudělá špatnou volbu. Je to záruka, že se z rozhodnutí dá učit. A to je přesně rozdíl mezi týmem, který produkt řídí, a týmem, který jen postupně zapomíná, proč je systém tak složitý.
 
+## Příloha I: Obsahový brief pro článek, landing page nebo case study
+
+Obsah bez briefu má tendenci růst jako improvizace. Někdo chce článek, protože "bychom měli být víc vidět". Někdo chce landing page, protože "kampaň už běží". Někdo chce případovou studii, ale nechce říct konkrétní čísla, proces ani rozhodovací situaci zákazníka. Výsledek pak bývá text, který zní slušně, ale nepracuje: neodpovídá na skutečnou otázku, nemá jasný další krok a nedá se rozumně vyhodnotit.
+
+Obsahový brief je malý pracovní kontrakt. Říká, proč text vzniká, komu má pomoct, jakou otázku řeší, jaký důkaz použije, co nemá sbírat za zbytečná data a jak poznáme, že splnil účel. Není to byrokracie. Je to pojistka proti tomu, aby tým vyráběl další obsah jen proto, že kalendář vypadá prázdně a marketing má hlad.
+
+Tuto šablonu použijte pro:
+
+- odborný článek na blog,
+- landing page pro službu nebo produkt,
+- případovou studii,
+- srovnávací stránku,
+- launch oznámení,
+- lead magnet,
+- dokumentační nebo help článek, který má snížit počet dotazů na podporu.
+
+### Jednostránková šablona briefu
+
+Držte brief na jedné až dvou stránkách. Pokud potřebuje deset stran, pravděpodobně ještě nemáte jasno v zadání.
+
+```text
+Název pracovně:
+
+Typ obsahu:
+Článek / landing page / case study / help článek / srovnání / launch oznámení
+
+Primární čtenář:
+Kdo přesně to má číst? Role, typ firmy, situace, úroveň znalostí.
+
+Hlavní otázka čtenáře:
+Na jakou konkrétní otázku má obsah odpovědět?
+
+Obchodní nebo produktový účel:
+Jaké rozhodnutí má obsah podpořit?
+
+Slib obsahu:
+Co si má čtenář odnést za praktickou hodnotu?
+
+Důkazy:
+Jaké příklady, data, screenshoty, citace, reference nebo zkušenosti použijeme?
+
+Zdroje k ověření:
+Která tvrzení je nutné ověřit před publikací?
+
+Privacy-first poznámka:
+Sbírá obsah nějaká data? Používá formulář, embed, video, externí skript nebo měření?
+
+Primární další krok:
+Co má čtenář udělat po dočtení?
+
+Distribuce:
+Kde obsah zveřejníme a jak ho pošleme dál bez závislosti na jednom algoritmu?
+
+Měření:
+Jak poznáme, že obsah pomohl? Které signály stačí?
+
+Vlastník a revize:
+Kdo obsah vlastní a kdy ho znovu zkontroluje?
+```
+
+### Primární čtenář: nepište pro dav
+
+Nejhorší cílová skupina je "firmy". Druhá nejhorší je "startupisté". To nejsou čtenáři, ale mlha. Obsah má být napsaný pro situaci, ve které se člověk opravdu nachází.
+
+Slabé vymezení:
+
+- Majitelé firem, kteří chtějí lepší web.
+
+Silnější vymezení:
+
+- Zakladatel B2B SaaS v Evropě, který má první platící zákazníky, ale onboarding pořád stojí na ručních hovorech a neví, co automatizovat jako první.
+
+Ještě praktičtější vymezení:
+
+- Zakladatel B2B SaaS s pěti až dvaceti zákazníky, který chce zkrátit čas od registrace k první hodnotě, ale nechce přidat invazivní produktovou analytiku ani poslat data do nástrojů mimo EU bez jasného důvodu.
+
+Čím konkrétnější čtenář, tím snadněji rozhodnete, co do textu patří. Není cílem vyloučit všechny ostatní. Cílem je napsat text tak jasně, aby správný člověk poznal: tohle je o mně.
+
+### Hlavní otázka: jedna věta, žádná mlha
+
+Každý kus obsahu by měl mít jednu hlavní otázku. Ne téma. Otázku.
+
+Téma:
+
+- SaaS onboarding.
+
+Otázka:
+
+- Jak poznám, co automatizovat v SaaS onboardingu jako první?
+
+Téma:
+
+- Privacy-first analytika.
+
+Otázka:
+
+- Jak měřit konverze na webu bez zbytečného sledování návštěvníků?
+
+Téma:
+
+- Výběr dodavatele.
+
+Otázka:
+
+- Jak poznám, že mi dodavatel webu předá projekt tak, abych nebyl závislý na jeho účtu a nástroji?
+
+Otázka drží text pohromadě. Když odstavec na otázku neodpovídá, pryč s ním nebo do jiného článku. Tvrdé, ale zdravé. Text není půda na uskladnění všech nápadů.
+
+### Slib obsahu: co čtenář získá
+
+Slib není clickbait. Je to pracovní dohoda se čtenářem. Říká, proč má věnovat pozornost právě tomuto textu.
+
+Slabý slib:
+
+- V tomto článku si řekneme něco o SEO.
+
+Silnější slib:
+
+- Po přečtení budete umět upravit jednu službovou stránku tak, aby odpovídala na rozhodovací otázky zákazníka, měla jasný další krok a šla měřit bez reklamních trackerů.
+
+Silný slib má tři části:
+
+1. Konkrétní výstup.
+2. Kontext použití.
+3. Omezení nebo hodnotu, která je pro cílového čtenáře důležitá.
+
+U Dreamind stylu je privacy-first hodnota často součástí slibu. Ne jako povinná věta na konci, ale jako způsob práce: měřit jen to, co podporuje rozhodnutí, preferovat evropský provoz, držet kontrolu nad daty, nepřidávat zbytečné skripty.
+
+### Důkazy: ukažte, že text stojí na realitě
+
+Obsah pro web, SaaS a marketing nesmí být jen názor poskládaný do odstavců. Pokud text tvrdí, že něco funguje, měl by ukázat proč.
+
+Použitelné důkazy:
+
+- konkrétní příklad před a po,
+- anonymizovaný projektový scénář,
+- screenshot nebo schéma workflow,
+- krátký výpočet dopadu,
+- checklist z reálného procesu,
+- výsledek zákaznického rozhovoru,
+- zdroj z dokumentace, studie nebo oficiální instituce,
+- citace zákaznické námitky nebo otázky,
+- provozní zkušenost označená jako Codyho komentář.
+
+U případové studie je důkaz jádro textu. Pokud nemůžete uvést jméno zákazníka ani čísla, pořád můžete ukázat strukturu:
+
+- výchozí situace,
+- omezení,
+- rozhodnutí,
+- implementovaný postup,
+- změna v provozu,
+- co se tým naučil,
+- co by příště udělal jinak.
+
+Anonymizovaná case study bez konkrétnosti je jen pohádka v obleku. Anonymizovaná case study s procesem, kompromisy a měřitelným typem výsledku už může být užitečná.
+
+### Zdroje a ověřování
+
+Před publikací označte všechna tvrzení, která se mohou měnit nebo mají právní, finanční či technický dopad. Typicky:
+
+- právní povinnosti,
+- ceny a limity nástrojů,
+- benchmarky a statistiky,
+- aktuální trendy,
+- produktové funkce konkrétních služeb,
+- bezpečnostní doporučení,
+- požadavky platforem, vyhledávačů nebo obchodů s aplikacemi.
+
+U každého takového tvrzení doplňte zdroj přímo do textu nebo do sekce zdrojů. Pokud jde o právní povinnosti, používejte primární nebo autoritativní zdroje a nepište z toho univerzální právní radu. Praktická formulace:
+
+"Tento text nenahrazuje právní posouzení konkrétního případu, ale pro produktové rozhodování ukazuje, jak o riziku uvažovat."
+
+Codyho komentář: neověřený fakt je jako levný plugin. Vypadá, že šetří čas, dokud nerozbije důvěru. A důvěra se opravuje hůř než překlep v nadpisu.
+
+### Struktura podle rozhodování
+
+Text řaďte podle toho, jak čtenář přemýšlí, ne podle toho, jak tým interně vyráběl obsah.
+
+Pro praktický článek často funguje:
+
+1. Situace: kdo má problém a jak se projevuje.
+2. Riziko: co se stane, když se problém neřeší.
+3. Princip: podle čeho se rozhodovat.
+4. Postup: konkrétní kroky.
+5. Příklad: jak to může vypadat v praxi.
+6. Privacy-first kontrola: kde jsou data, měření, formuláře a třetí strany.
+7. Checklist: jak čtenář pozná, že má hotovo.
+8. Další krok: co udělat po dočtení.
+
+Pro landing page často funguje:
+
+1. Jasný slib a pro koho je.
+2. Hlavní problém v jazyce zákazníka.
+3. Jak řešení funguje.
+4. Důkazy a příklady.
+5. Proces spolupráce nebo onboarding.
+6. Bezpečnost, provoz a práce s daty.
+7. Cena, model nebo aspoň způsob nacenění.
+8. Námitky a odpovědi.
+9. Jeden hlavní další krok.
+
+Pro případovou studii:
+
+1. Kontext zákazníka.
+2. Problém a omezení.
+3. Rozhodnutí, která tým udělal.
+4. Implementace bez přehnaného heroismu.
+5. Výsledek.
+6. Co se nepovedlo nebo co bylo těžké.
+7. Poučení pro podobné týmy.
+8. Další krok pro čtenáře.
+
+### Privacy-first kontrola obsahu
+
+Každý obsah má datovou stopu. I obyčejný článek může načítat externí fonty, video embed, analytiku, formulář, komentáře, chat nebo share widgety. Brief má proto obsahovat krátkou privacy-first kontrolu.
+
+Ptejte se:
+
+- Načítá stránka externí skripty, obrázky, fonty, video nebo iframe?
+- Posílá se návštěvnické chování do nástrojů třetích stran?
+- Je formulář opravdu nutný, nebo stačí přímý kontakt či RSS?
+- Pokud formulář sbírá data, jsou všechna pole potřebná pro první odpověď?
+- Kde data skončí a kdo k nim má přístup?
+- Jak dlouho data držíme?
+- Dá se stejný cíl splnit s menším sběrem dat?
+- Je měření agregované a navázané na rozhodnutí, ne na zvědavost?
+
+Příklad: článek obsahuje vložené video z externí platformy. Privacy-first varianta může být vlastní statický náhled bez automatického načítání embed skriptu, přímý odkaz na video nebo hostování média v prostředí, které tým kontroluje. Ne vždy je to nejpohodlnější. Často je to ale férovější.
+
+### Měření: signály, které stačí
+
+Obsah nepotřebuje měřit každý pohyb myši. Potřebuje odpovědět, jestli pomohl rozhodnutí.
+
+U článku mohou stačit:
+
+- počet relevantních návštěv z vlastních a přímých kanálů,
+- kliky na související praktický další krok,
+- dotazy, které článek vyvolal,
+- citace nebo odkazy z jiných webů,
+- pokles opakovaných dotazů na supportu,
+- počet kvalifikovaných poptávek, které článek zmínily.
+
+U landing page:
+
+- návštěvy ze správných zdrojů,
+- kliky na primární CTA,
+- odeslané kvalifikované formuláře,
+- poměr dobrých a špatných leadů,
+- otázky a námitky v prvním hovoru,
+- rychlost přechodu z návštěvy do dalšího kroku.
+
+U case study:
+
+- použití v sales procesu,
+- odpovědi zákazníků v discovery hovorech,
+- odkazy z nabídek,
+- kvalita leadů, kteří case study četli,
+- nové námitky nebo otázky, které ukazují, co doplnit.
+
+Měření má být dostatečné, ne vševědoucí. Když kvůli jednomu článku zapnete tři nové trackery, možná měříte víc, ale rozumíte méně.
+
+### Praktický vyplněný brief
+
+```text
+Název pracovně:
+Jak zkrátit SaaS onboarding bez invazivního trackingu
+
+Typ obsahu:
+Praktický článek
+
+Primární čtenář:
+Zakladatel B2B SaaS v Evropě s prvními platícími zákazníky a ručním onboardingem.
+
+Hlavní otázka čtenáře:
+Co mám automatizovat jako první, aby nový zákazník rychleji zažil hodnotu?
+
+Obchodní nebo produktový účel:
+Ukázat kompetenci v produktovém a privacy-first návrhu SaaS onboardingu.
+
+Slib obsahu:
+Čtenář si odnese postup, jak vybrat jednu aktivační událost, zjednodušit první tok a měřit ho minimem dat.
+
+Důkazy:
+Anonymizovaný příklad onboardingu, checklist první hodnoty, ukázka event slovníku.
+
+Zdroje k ověření:
+Pouze pokud text bude uvádět aktuální právní nebo benchmarkové tvrzení.
+
+Privacy-first poznámka:
+Žádné embed skripty. Měření jen agregované: návštěva článku, klik na konzultaci, zmínka v poptávce.
+
+Primární další krok:
+Domluvit úvodní audit onboardingu.
+
+Distribuce:
+Web, RSS, přímý odkaz stávajícím kontaktům, krátký post na relevantní síti bez závislosti na platformě.
+
+Měření:
+Kvalifikované poptávky a otázky v prvním hovoru, ne samotná návštěvnost.
+
+Vlastník a revize:
+Marketing + produkt. Revize za 90 dní podle dotazů z obchodních hovorů.
+```
+
+Takový brief není dokonalý, ale stačí k práci. Autor ví, pro koho píše. Vývojář ví, že nemá přidávat embed a zbytečné měření. Obchod ví, jak článek použít v konverzaci. A tým má datum, kdy se k textu vrátit.
+
+### Údržba obsahu
+
+Publikace není konec. U praktického obsahu je často největší hodnota v pravidelné údržbě. Zastaralý článek může škodit víc než žádný článek, protože vytváří falešnou jistotu.
+
+Jednoduchý režim:
+
+- U každého důležitého obsahu nastavte datum revize.
+- Označte části, které se rychle mění.
+- Sbírejte otázky z obchodních hovorů, podpory a e-mailů.
+- Jednou měsíčně vyberte jeden starší text a upravte ho podle nových signálů.
+- Pokud text přestal dávat smysl, sloučte ho, přesměrujte nebo archivujte.
+- U case studies doplňujte, co se změnilo po třech nebo šesti měsících, pokud to lze sdílet.
+
+Obsahová údržba je méně vidět než publikace nového článku. Ale z byznysového pohledu často vyhrává. Jeden přesný, aktualizovaný a dobře odkazovaný článek může dělat lepší práci než pět rychle napsaných textů, které nikdo neudržuje.
+
+### Obsahový brief checklist
+
+- Je jasné, kdo přesně má obsah číst?
+- Má obsah jednu hlavní otázku, ne jen obecné téma?
+- Umí slib obsahu říct, co si čtenář prakticky odnese?
+- Jsou předem vybrané důkazy, příklady nebo zdroje?
+- Jsou označená tvrzení, která je nutné ověřit před publikací?
+- Má obsah jeden hlavní další krok?
+- Je jasné, kde bude obsah distribuovaný kromě sociálních sítí?
+- Nepřidává stránka zbytečné externí skripty, embed prvky nebo trackery?
+- Sbírá formulář jen data potřebná pro první odpověď?
+- Měříte signály, které podporují rozhodnutí, ne jen zvědavost?
+- Má obsah vlastníka a datum revize?
+- Ví tým, kdy obsah upravit, sloučit nebo vyřadit?
+
+Dobře napsaný brief nezaručí dobrý text. Zaručí ale, že tým ví, co se snaží vytvořit. A to je dost podstatný rozdíl oproti obsahu, který vzniká stylem "něco o tom napiš". Něco je totiž přesně ten druh výsledku, který nikdo nepotřebuje.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -11831,3 +12169,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha F o výběru dodavatele webu nebo SaaS projektu: discovery, nabídka, cena, privacy-first otázky, předání, reference, scorecard a smluvní checklist.
 - 2026-05-06: Doplněna Příloha G se šablonou datové mapy pro web a SaaS: datové toky, účely, přístupy, retence, export, revize a checklist pro nové nástroje.
 - 2026-05-06: Doplněna Příloha H s rozhodovacím logem pro web a SaaS: šablona záznamu, kritéria, privacy-first dopad, příklady rozhodnutí a checklist údržby.
+- 2026-05-06: Doplněna Příloha I s obsahovým briefem pro článek, landing page nebo case study: čtenář, otázka, slib, důkazy, zdroje, privacy-first kontrola, měření a údržba.
