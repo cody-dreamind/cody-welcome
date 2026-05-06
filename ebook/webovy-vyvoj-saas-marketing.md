@@ -10077,6 +10077,207 @@ Marketingový plán je dobrý tehdy, když zmenšuje počet náhodných aktivit 
 - [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en)
 - [ÚOOÚ: Často kladené otázky k zákonu č. 480/2004 Sb.](https://uoou.gov.cz/cinnost/obchodni-sdeleni/casto-kladene-otazky-k-zakonu-c-4802004-sb)
 
+## Příloha A: Provozní list digitálního projektu
+
+Když se web, SaaS produkt a marketing začnou používat v reálném provozu, největší riziko často není jedna chyba v kódu. Větší riziko je, že nikdo přesně neví, kde co běží, kdo za co odpovídá, jaká data se sbírají, kam se posílají a co udělat, když se něco rozbije.
+
+Provozní list je jednoduchý dokument, který drží tyto odpovědi pohromadě. Není to bezpečnostní politika na čtyřicet stran. Je to pracovní mapa projektu. Má být tak stručná, aby ji tým opravdu aktualizoval, a tak konkrétní, aby podle ní šlo jednat v pátek odpoledne, kdy formulář neposílá poptávky a někdo se právě ptá, kdo má přístup k DNS.
+
+### K čemu provozní list slouží
+
+Provozní list pomáhá hlavně ve čtyřech situacích:
+
+- onboarding nového člověka nebo dodavatele,
+- audit webu, marketingu nebo produktu,
+- incident, výpadek nebo podezřelé chování,
+- plánování změn, migrace nebo ukončení služby.
+
+Bez provozního listu se informace rozpadnou mezi chat, e-mail, správce hesel, faktury, staré issue a hlavu člověka, který si "nějak pamatuje", jak se to kdysi nastavovalo. To není provozní znalost. To je sázka na paměť. A paměť má špatné SLA.
+
+Codyho komentář: dobrý provozní list není dokument pro manažerský šuplík. Je to checklist proti chaosu. Když ho nikdo nechce číst, je moc dlouhý. Když podle něj nejde nic opravit, je moc obecný.
+
+### Jednostránková šablona
+
+Začněte touto verzí. Detailní runbooky, diagramy a přístupové postupy mohou být přílohy, ale základ má být rychle čitelný.
+
+```text
+Projekt:
+URL:
+Vlastník projektu:
+Technický vlastník:
+Obchodní vlastník:
+Datum poslední revize:
+
+1. Účel projektu:
+2. Hlavní uživatelé / segment:
+3. Kritické uživatelské akce:
+4. Doména a DNS:
+5. Hosting a region provozu:
+6. Databáze a úložiště:
+7. E-mail a transakční zprávy:
+8. Analytika a měřené eventy:
+9. Formuláře a osobní údaje:
+10. Integrace a externí služby:
+11. Zálohy a obnova:
+12. Monitoring a alerty:
+13. Přístupy a odpovědnosti:
+14. Privacy-first poznámky:
+15. Incidentní kontakt a první kroky:
+16. Co se má příště zkontrolovat:
+```
+
+Pokud tým vyplní jen tuto jednu stránku, už udělal víc než většina projektů, které žijí z nepsaného provozního folkloru.
+
+### Kritické uživatelské akce
+
+Nejdřív popište, co musí fungovat, aby projekt plnil obchodní účel. U marketingového webu to nebude sto obrazovek. Obvykle stačí pár toků.
+
+Příklad:
+
+```text
+Kritické akce:
+- návštěvník otevře homepage a přejde na stránku služby,
+- návštěvník odešle kontaktní formulář,
+- čtenář otevře článek a pokračuje na související checklist,
+- zájemce se přihlásí k RSS nebo newsletteru,
+- obchodník najde zdroj poptávky v CRM.
+```
+
+U SaaS produktu může být seznam jiný:
+
+```text
+Kritické akce:
+- uživatel vytvoří účet a tenant,
+- admin pozve člena týmu,
+- uživatel dokončí první workflow,
+- systém odešle transakční notifikaci,
+- zákazník exportuje data,
+- support dohledá auditní stopu změny.
+```
+
+Tyto akce jsou základ smoke testu. Když nasadíte změnu, nemusíte ručně procházet celý produkt. Ale tyto toky musí projít vždy.
+
+### Datová mapa v provozním listu
+
+Privacy-first provoz potřebuje jednoduchou datovou mapu. Ne proto, aby měla firma hezký dokument. Proto, aby tým věděl, co se děje s daty lidí.
+
+Šablona:
+
+```text
+Data | Proč je sbíráme | Kde vznikají | Kde leží | Kdo má přístup | Retence | Export / smazání
+E-mail z formuláře | odpověď na poptávku | web formulář | CRM / inbox | sales | podle CRM pravidel | ručně přes CRM
+Analytický event contact_clicked | měření zájmu | web | analytika | marketing | agregovaně | bez osobních údajů
+Audit log změny role | bezpečnost a dohledatelnost | aplikace | databáze | admin / support | dle provozních pravidel | export tenantu
+```
+
+Do provozního listu nepatří hesla ani tajné klíče. Patří tam informace, kde se bezpečně spravují. Třeba: "Tajemství jsou ve správci hesel / secrets manageru, přístup má technický vlastník a produkční admin." Nikdy nevyrábějte dokument, který se stane katalogem úniku.
+
+### Integrace a externí služby
+
+U každé externí služby napište důvod existence. Pokud ho neumíte napsat, služba je kandidát na odstranění.
+
+Šablona:
+
+```text
+Služba | Účel | Typ dat | Region / provoz | Vlastník | Riziko | Náhrada / export
+Analytika | měření CTA a formulářů | agregované eventy bez PII | EU | marketing | špatně navržené eventy | CSV export
+E-mail provider | transakční zprávy | e-mail, šablona, metadata | EU preferováno | produkt | doručitelnost | SMTP fallback
+CRM | evidence obchodních příležitostí | kontakty, firmy, poznámky | ověřit | sales | retenční chaos | export kontaktů
+```
+
+Privacy-first otázky:
+
+- Posíláme do služby osobní údaje?
+- Posíláme do ní obsah zákaznické práce?
+- Víme, kde jsou data fyzicky nebo smluvně provozována?
+- Umíme data exportovat?
+- Umíme službu vypnout bez rozbití základního toku?
+- Je služba nutná, nebo jen pohodlná?
+
+Poslední otázka bývá nepříjemná, protože pohodlí se umí tvářit jako strategie. Ale provozní disciplína začíná právě tam.
+
+### Incidentní mini runbook
+
+Provozní list má obsahovat první kroky pro běžné incidenty. Ne kompletní krizový manuál. První kroky, které zastaví paniku.
+
+```text
+Když web nejede:
+1. Ověřit dostupnost hlavní URL a stav hostingu.
+2. Zkontrolovat poslední deploy a monitoring.
+3. Ověřit DNS a certifikát, pokud chyba vypadá síťově.
+4. Pokud je problém v aplikaci, použít rollback nebo poslední stabilní build.
+5. Zapsat čas, dopad, příčinu a nápravné opatření.
+
+Když nechodí formuláře:
+1. Odeslat testovací formulář.
+2. Zkontrolovat log aplikace a e-mail provider.
+3. Ověřit, jestli se zpráva ukládá do CRM nebo inboxu.
+4. Zkontrolovat změny v antispamu, DNS e-mail záznamech a šablonách.
+5. Pokud se mohly ztratit poptávky, připravit ruční dohledání z logů bez zbytečného čtení osobních zpráv.
+
+Když se objeví podezření na únik dat:
+1. Zastavit další sběr nebo přístup, pokud to jde bezpečně.
+2. Zachovat relevantní logy.
+3. Informovat technického a obchodního vlastníka.
+4. Popsat dotčené systémy, typ dat, časový rozsah a první opatření.
+5. Neposílat interní detaily do veřejných kanálů.
+```
+
+Tento runbook nemá nahrazovat právní nebo bezpečnostní posouzení. Má zajistit, že první reakce bude klidná, dohledatelná a nebude vyrábět další škodu.
+
+### Revizní rytmus
+
+Provozní list stárne rychle. Doména se přesune, přibude formulář, někdo přidá nový skript, CRM dostane nové pole, tým změní e-mail provider. Pokud list nikdo nereviduje, po pár měsících se promění v historický román.
+
+Proto má mít provozní list vlastníka, datum poslední revize a jednu konkrétní položku, která se zkontroluje příště. Bez toho se z něj snadno stane dokument, který všichni respektují tím, že ho nikdy neotevřou.
+
+Rozumný rytmus:
+
+- měsíčně: zkontrolovat kritické akce, formuláře, analytické eventy a nové externí skripty,
+- kvartálně: projít integrace, přístupy, retence, zálohy a monitoring,
+- po každém větším deployi: aktualizovat změny v infrastruktuře, datech nebo incidentních postupech,
+- po odchodu člověka nebo dodavatele: ověřit přístupy, vlastníky a sdílené účty.
+
+### Vyplněný krátký příklad
+
+```text
+Projekt: Privacy-first web a klientský portál
+URL: example.cz
+Vlastník projektu: Ondřej
+Technický vlastník: vývojový tým
+Obchodní vlastník: sales / founder
+Datum poslední revize: 2026-05-06
+
+Účel: vysvětlit službu, sbírat kvalifikované poptávky a provozovat klientské workflow.
+Kritické akce: homepage -> služba -> formulář, přihlášení do portálu, dokončení prvního workflow, export dat.
+Hosting: EU region, přístup přes týmové účty, produkční změny přes Git.
+Analytika: jen agregované webové eventy, bez e-mailů a textu poptávky.
+Formuláře: jméno, e-mail, firma, krátký kontext; žádný automatický newsletter bez samostatné volby.
+Integrace: e-mail provider, CRM, monitoring, zálohy.
+Zálohy: databáze denně, obnova testována kvartálně.
+Incident: nejdřív ověřit dostupnost, poslední deploy, logy, formulářový tok a DNS.
+Příští kontrola: projít retenci CRM kontaktů a odstranit staré testovací eventy.
+```
+
+Takový list není perfektní. Ale když existuje, projekt má paměť. A projekt s pamětí se provozuje levněji než projekt, který při každé změně znovu objevuje vlastní anatomii.
+
+### Provozní list checklist
+
+- Má projekt jasného obchodního a technického vlastníka?
+- Jsou popsané kritické uživatelské akce?
+- Je jasné, kde běží doména, DNS, hosting, databáze a e-mail?
+- Existuje datová mapa pro formuláře, analytiku, CRM, produkt a support?
+- Ví tým, které externí služby zpracovávají data a proč?
+- Neobsahuje dokument hesla, tokeny ani tajné klíče?
+- Jsou popsané zálohy a postup obnovy?
+- Existuje jednoduchý smoke test po deployi?
+- Má incidentní část první konkrétní kroky?
+- Je zapsané, kdo má přístup k čemu a kde se přístupy spravují?
+- Jsou privacy-first pravidla konkrétní, ne jen deklarativní?
+- Má list datum poslední revize a datum další kontroly?
+
+Provozní list je drobná věc s velkým dopadem. Nedělá produkt hezčí. Nedělá marketing hlasitější. Ale snižuje počet situací, kdy tým improvizuje v mlze. A to je přesně ten typ nudné profesionality, který zákazníci ocení nejvíc ve chvíli, kdy jde o jejich data, provoz a důvěru.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -10205,3 +10406,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Dopsána kapitola 35 jako šablona produktové strategie: segment, problém, hodnotová nabídka, produktové hranice, business model, go-to-market, privacy-first principy, metriky, rizika a roadmapa.
 - 2026-05-06: Dopsána kapitola 36 jako šablona marketingového plánu: segment, otázky zákazníka, positioning, důkazy, kanály, obsahové pilíře, měření, privacy-first pravidla a měsíční rytmus.
 - 2026-05-06: Doplněn závěr e-booku s návodem, jak rukopis používat jako pracovní systém, devadesátidenním plánem a závěrečným checklistem.
+- 2026-05-06: Doplněna Příloha A s provozním listem digitálního projektu: kritické akce, datová mapa, integrace, incidentní mini runbook a revizní rytmus.
