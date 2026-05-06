@@ -8938,6 +8938,324 @@ Toto je launch jako experiment, ne jako ohňostroj. Méně dramatické, víc už
 
 Launch je dobrý, když po něm tým ví víc než před ním. Ne když se všichni jen tváří, že všechno bylo připravené. Spouštějte menší věci s jasnějším cílem, měřte méně dat, sbírejte lepší signály a opravujte realitu podle toho, co se skutečně stalo.
 
+## Kapitola 34: Checklist pro technický audit
+
+Technický audit není hon na chyby kvůli tomu, aby se někdo cítil chytřeji než původní tým. Dobrý audit má zjistit, jestli web nebo aplikace plní svůj účel bezpečně, rychle, srozumitelně a provozně udržitelně. Výstupem nemá být tlustý dokument plný strašidelných slov. Výstupem má být prioritizovaný seznam rozhodnutí: co opravit hned, co naplánovat, co sledovat a co vědomě neřešit.
+
+Technický audit se hodí před redesignem, před launchem, po převzetí projektu, před větší kampaní, po incidentu, při podezření na pomalost, při růstu SaaS produktu nebo při změně dodavatele. Největší hodnota auditu je často v tom, že oddělí skutečná rizika od pocitů. "Web je pomalý" se změní na "největší LCP prvek je neoptimalizovaný hero obrázek a tři marketingové skripty blokují interaktivitu". S tím už se dá pracovat. S pocitem se dá maximálně dlouze debatovat.
+
+Technický audit má sedm vrstev:
+
+1. Cíl a rozsah: co auditujeme a proč.
+2. Dostupnost a infrastruktura: doména, DNS, HTTPS, hosting, zálohy.
+3. Frontend kvalita: výkon, přístupnost, responzivita, UX chyby.
+4. SEO a indexace: metadata, sitemap, robots, canonical, interní odkazy.
+5. Bezpečnost: hlavičky, autentizace, autorizace, vstupy, tajemství.
+6. Data a privacy: formuláře, analytika, cookies, externí skripty, retence.
+7. Provoz: monitoring, logy, incidenty, ownership a technický dluh.
+
+### 1. Rozsah auditu: nejdřív otázka, potom nástroj
+
+Audit nezačínejte nástrojem. Nástroj rád najde stovky položek, ale neřekne, které bolí byznys. Nejdřív napište, co potřebujete rozhodnout.
+
+Příklady dobrých auditních otázek:
+
+- Může web bezpečně zvládnout spuštění kampaně?
+- Brání technický stav SEO a indexaci?
+- Ztrácíme poptávky kvůli formuláři, výkonu nebo důvěře?
+- Je SaaS připravený na první platící B2B zákazníky?
+- Umíme převzít projekt od dodavatele bez provozního rizika?
+- Tečou data návštěvníků nebo zákazníků do nástrojů, které neumíme obhájit?
+
+Slabé zadání:
+
+```text
+Udělejte technický audit webu.
+```
+
+Silnější zadání:
+
+```text
+Ověřte, zda je marketingový web připravený na B2B lead generation: rychlost na mobilu, funkční formuláře, SEO indexace, privacy-first analytika, externí skripty, bezpečnostní hlavičky a provozní dokumentace.
+```
+
+Druhé zadání automaticky říká, co je důležité. Audit pak neprodukuje univerzální seznam "všeho možného", ale odpovídá na konkrétní riziko.
+
+Codyho komentář: audit bez otázky je jako jít do železářství a říct "dejte mi nářadí". Dostanete něco těžkého, ale pořád nevíte, co opravujete.
+
+### 2. Inventura: co vůbec existuje
+
+Před měřením udělejte inventuru. Zní to nudně, ale bez ní audit často mine největší problém: nikdo neví, kde co běží.
+
+Zapište:
+
+- Domény a subdomény.
+- DNS správce a registrátora.
+- Hosting, region a odpovědnou osobu.
+- Repozitáře, větve a deploy proces.
+- CMS, databáze, storage a média.
+- E-mailové služby a formulářové backendy.
+- Analytiku, tag manager, reklamní skripty, chat, mapy, video embedy.
+- Produkční, staging a testovací prostředí.
+- Monitoring, logy, zálohy a incident kontakty.
+
+Praktický výstup:
+
+```text
+Aktivum | Účel | Vlastník | Přístup | Region | Riziko | Poznámka
+example.cz | hlavní web | marketing + vývoj | registrar účet | CZ/EU | vysoké | doména, DNS, formuláře
+analytics | návštěvnost | marketing | 2 admini | EU | střední | bez reklamních profilů
+```
+
+Pokud inventura ukáže, že doménu drží bývalý dodavatel, formulář posílá data do osobní schránky a DNS nikdo neumí změnit, našli jste zásadnější problém než chybějící meta description. Priorita není vždy technicky nejzajímavější věc. Priorita je věc s největším dopadem.
+
+### 3. Dostupnost, DNS a HTTPS
+
+Základní provozní kontrola:
+
+- Doména je ve vlastnictví firmy a neexpiruje za týden.
+- DNS záznamy jsou zdokumentované a změny mají vlastníka.
+- `A`, `AAAA`, `CNAME`, `MX` a `TXT` záznamy dávají smysl.
+- Neexistují opuštěné subdomény s rizikem převzetí.
+- HTTPS funguje na všech variantách domény.
+- HTTP se přesměrovává na HTTPS.
+- Certifikát se obnovuje automaticky.
+- HSTS je nastavené jen tam, kde tým chápe dopad.
+- E-mailová autentizace SPF, DKIM a DMARC odpovídá skutečným odesílatelům.
+
+OWASP Web Security Testing Guide zahrnuje v konfiguraci a deployment testování mimo jiné HSTS, HTTP metody, admin rozhraní, cloud storage a subdomain takeover ([OWASP WSTG: Configuration and Deployment Management Testing](https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/README)). To je dobrý rámec i pro menší web: audit není jen Lighthouse skóre. Je to i kontrola, jestli z produkce nečouhá starý admin, veřejný bucket nebo zapomenutá subdoména.
+
+### 4. Výkon: měřte reálnou stránku, ne pocit
+
+Výkon auditujte na hlavních stránkách a hlavních tocích. Homepage sama nestačí. U e-shopu kontrolujte kategorii, detail a košík. U SaaS marketingu homepage, pricing, demo stránku a formulář. U aplikace onboarding, hlavní workflow a export.
+
+Core Web Vitals dnes sledují LCP pro načtení hlavního obsahu, INP pro interaktivitu a CLS pro stabilitu layoutu; web.dev uvádí doporučené prahy LCP do 2,5 s, INP do 200 ms a CLS do 0,1 na 75. percentilu návštěv ([web.dev: Web Vitals](https://web.dev/articles/vitals?hl=en)). Prakticky z toho plyne:
+
+- LCP: co je hlavní prvek a proč se načítá pomalu?
+- INP: co blokuje reakci na klik, psaní nebo otevření menu?
+- CLS: co posouvá obsah pod rukou?
+
+Kontrolujte:
+
+- Velikosti obrázků a moderní formáty.
+- Lazy loading tam, kde nepoškozuje hlavní obsah.
+- JavaScript bundle a zbytečné klientské renderování.
+- Fonty, počet řezů a zdroj načítání.
+- Externí skripty: analytika, chat, tag manager, embedy.
+- Cache hlavičky pro statická aktiva.
+- Mobilní výkon na pomalejší síti.
+
+Praktický závěr auditu nemá znít "skóre je 62". Má znít:
+
+```text
+Největší brzda je hero obrázek 2,8 MB a tag manager se čtyřmi skripty, z nichž dva nemají vlastníka. První oprava: převést obrázek do responzivních variant a odstranit nepoužívané tagy. Očekávaný dopad: rychlejší LCP, méně externích požadavků, menší datová stopa.
+```
+
+Takhle se z metriky stane práce.
+
+### 5. Přístupnost a UX: auditujte tok, ne jen kontrast
+
+Automatický accessibility skener najde část problémů. Nenajde ale všechno. Technický audit má obsahovat ruční průchod hlavními scénáři.
+
+Zkontrolujte:
+
+- Nadpisy tvoří logickou strukturu.
+- Odkazy a tlačítka mají srozumitelný název.
+- Formulářová pole mají viditelné a programově spojené labely.
+- Chybové hlášky říkají, co opravit.
+- Navigace, modal, menu a formuláře fungují z klávesnice.
+- Focus je viditelný.
+- Kontrast textu a akčních prvků je čitelný.
+- Důležitý obsah není dostupný jen hoverem.
+- Mobilní layout nepřekrývá CTA, formulář ani cookie volby.
+
+WCAG 2.2 je doporučení W3C pro přístupnost webového obsahu a rozšiřuje WCAG 2.1 ([W3C: WCAG 2.2](https://www.w3.org/TR/wcag/)). Pro běžný audit není potřeba začít právnickým výkladem. Začněte tím, jestli člověk zvládne hlavní úkol bez myši, bez dokonalého zraku a bez znalosti interního jazyka firmy.
+
+Praktický test:
+
+1. Otevřete web na mobilu.
+2. Najděte hlavní nabídku.
+3. Dojděte ke kontaktu.
+4. Vyplňte formulář s chybou.
+5. Opravte chybu.
+6. Odešlete formulář.
+7. Zapište, kde jste museli hádat.
+
+Místa, kde uživatel hádá, jsou auditní nálezy. Ne vždy kritické, ale vždy užitečné.
+
+### 6. SEO a indexace: technický audit viditelnosti
+
+SEO audit v technickém checklistu neřeší celý obsahový marketing. Řeší, jestli vyhledávače mohou stránku najít, pochopit a správně zařadit.
+
+Zkontrolujte:
+
+- Důležité stránky vrací HTTP `200`.
+- Přesměrování nejsou řetězená a nekončí chybou.
+- `robots.txt` je dostupný a neblokuje důležité části.
+- Sitemap obsahuje jen důležité kanonické URL.
+- Každá důležitá stránka má title, meta description, H1 a canonical.
+- Interní odkazy jsou normální odkazy, ne jen JavaScript akce.
+- Open Graph data odpovídají obsahu.
+- Strukturovaná data jsou pravdivá a validní.
+- Staré URL mají přesměrování.
+- Staging nebo interní prostředí není indexovatelné.
+
+Google dokumentace k robots.txt připomíná, že robots pravidla řídí crawling, ne bezpečné skrytí obsahu; disallow může zabránit procházení, ale URL se za určitých okolností může ve výsledcích objevit bez snippetu ([Google Search Central: robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt)). Prakticky: neveřejný obsah nepatří za `robots.txt`. Patří za autentizaci, oprávnění nebo mimo veřejné prostředí.
+
+Typický auditní nález:
+
+```text
+Sitemap obsahuje 46 URL, z toho 12 vrací 301, 4 vrací 404 a 3 jsou staging stránky. Doporučení: generovat sitemap jen z kanonických indexovatelných URL a přidat kontrolu do release checklistu.
+```
+
+Tohle je malá oprava s velkým dopadem na pořádek.
+
+### 7. Bezpečnost: baseline před pentestem
+
+Ne každý audit je penetrační test. Ale každý technický audit má obsahovat bezpečnostní baseline. OWASP ASVS poskytuje otevřený standard pro ověřování technických bezpečnostních kontrol webových aplikací; ASVS se dá použít jako měřítko, vývojové vodítko i podklad pro požadavky ([OWASP ASVS](https://owasp.org/www-project-application-security-verification-standard/)). OWASP WSTG zase popisuje metodiku testování webových aplikací ([OWASP WSTG: Web Application Security Testing](https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/)).
+
+Pro běžný web kontrolujte:
+
+- Admin rozhraní není veřejně dohledatelné bez ochrany.
+- Produkce neukazuje debug informace.
+- Formuláře mají validaci na serveru.
+- Uploady mají omezení typu, velikosti a přístupu.
+- Závislosti nejsou zjevně zastaralé s kritickými zranitelnostmi.
+- Tajemství nejsou v repozitáři, frontendu ani logách.
+- Bezpečnostní hlavičky jsou nastavené rozumně.
+- Cookies mají `HttpOnly`, `Secure` a vhodný `SameSite`, pokud jde o session.
+- CORS není otevřené na `*` tam, kde běží autentizované API.
+
+OWASP HTTP Headers Cheat Sheet popisuje bezpečnostní hlavičky jako praktickou vrstvu proti třídám rizik typu XSS, clickjacking nebo information disclosure a uvádí doporučení pro hlavičky jako `X-Content-Type-Options`, `Referrer-Policy`, HSTS, CSP nebo Permissions-Policy ([OWASP: HTTP Headers Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html)).
+
+Pro SaaS přidejte:
+
+- Autentizace a reset hesla.
+- MFA pro administrátory.
+- Autorizace na serveru pro každý citlivý endpoint.
+- Tenant izolace v API, exportech, cache, souborech a background jobech.
+- Audit log změn rolí, exportů, API klíčů a admin přístupu.
+- Rate limiting pro přihlášení, pozvánky a API.
+- Rotace API klíčů a webhook secretů.
+
+Bezpečnostní auditní nález musí obsahovat dopad. "Chybí CSP" je málo. Lepší:
+
+```text
+Web načítá několik externích skriptů a nemá Content Security Policy. Dopad: při kompromitaci některého skriptu nebo XSS je menší kontrola nad tím, co může stránka spouštět a kam posílat data. Doporučení: začít report-only CSP, postupně zpřísnit zdroje skriptů a odstranit skripty bez vlastníka.
+```
+
+### 8. Privacy-first audit: datová stopa webu
+
+Privacy audit je součást technického auditu, ne samostatný právní přívěsek. Kontroluje, co se opravdu děje v prohlížeči, formulářích, logách a nástrojích.
+
+Zkontrolujte:
+
+- Jaké externí domény se načítají před souhlasem.
+- Jaké cookies vznikají a proč.
+- Zda formulářové eventy neposílají osobní data do analytiky.
+- Zda newsletter souhlas není schovaný v kontaktním formuláři.
+- Zda chat, mapy, video embedy nebo social widgety posílají data třetím stranám.
+- Zda privacy stránka odpovídá skutečnému provozu.
+- Zda existuje datová mapa nástrojů, regionů a retence.
+- Zda RSS a přímé odkazy fungují jako alternativa k newsletteru a sociálním sítím.
+
+Praktický nález:
+
+```text
+Pricing stránka načítá reklamní pixel a session replay nástroj, ale tým neumí říct, jaké rozhodnutí podle nich dělá. Doporučení: vypnout oba skripty, ponechat agregovanou analytiku CTA a měřit kvalitu poptávek v CRM.
+```
+
+To je přesně typ opravy, která pomůže výkonu, soukromí i důvěře. Vzácná trojkombinace, žádná magie, jen úklid.
+
+### 9. Provoz: audit nekončí u kódu
+
+Technický audit má ověřit, zda tým dokáže web nebo produkt provozovat.
+
+Zkontrolujte:
+
+- Existuje monitoring dostupnosti.
+- Někdo dostává alerty a ví, co s nimi.
+- Certifikáty, domény a zálohy mají kontrolu expirace.
+- Zálohy se netvoří jen "někde", ale byla otestovaná obnova.
+- Deploy proces je popsaný.
+- Rollback je možný a někdo ho umí provést.
+- Incident postup existuje aspoň v krátké podobě.
+- Logy jsou použitelné, ale neobsahují zbytečně citlivý obsah.
+- Přístupy bývalých lidí a dodavatelů jsou odebrané.
+- Kritické části mají vlastníka a náhradníka.
+
+Pro marketingový web může být provozní audit krátký. Pro SaaS musí být hlubší. Jakmile produkt drží zákaznická data, audit bez záloh, obnovy, logů, oprávnění a incident procesu je poloviční práce.
+
+### 10. Prioritizace: nález bez priority je jen poznámka
+
+Každý nález označte podle dopadu a náročnosti. Nepoužívejte jen "high/medium/low" bez vysvětlení.
+
+Jednoduchý model:
+
+- P0: aktivní incident, únik dat, nefunkční hlavní tok, kritická bezpečnostní chyba.
+- P1: vysoké riziko pro důvěru, konverzi, bezpečnost nebo provoz.
+- P2: významné zlepšení, ale s obcházením nebo menším dopadem.
+- P3: kosmetika, údržba, dlouhodobý dluh.
+
+U každého nálezu zapište:
+
+```text
+Nález:
+Dopad:
+Důkaz:
+Doporučení:
+Priorita:
+Vlastník:
+Odhad:
+Jak ověříme opravu:
+```
+
+Příklad:
+
+```text
+Nález: Kontaktní formulář při chybě API ukáže jen obecnou chybu a neuloží request_id.
+Dopad: Uživatel neví, zda poptávka odešla, support neumí problém dohledat.
+Důkaz: Test 2026-05-06, simulovaný výpadek API.
+Doporučení: Přidat jasný chybový stav, request_id a interní log bez obsahu zprávy.
+Priorita: P1.
+Ověření: Smoke test formuláře při úspěchu i selhání.
+```
+
+Takhle audit končí akcí, ne smutným PDF.
+
+### Jednostránkový technický audit checklist
+
+- Je jasný rozsah auditu a rozhodnutí, které má podpořit?
+- Existuje inventura domén, DNS, hostingu, repozitářů, nástrojů a vlastníků?
+- Doména, DNS, HTTPS, certifikáty a e-mailová autentizace jsou v pořádku?
+- Neexistují opuštěné subdomény, veřejné adminy nebo citlivé soubory?
+- Hlavní stránky a toky mají změřený výkon na mobilu i desktopu?
+- Víte, co brzdí LCP, INP a CLS u důležitých stránek?
+- Navigace, formuláře a hlavní CTA fungují na mobilu i z klávesnice?
+- Stránky mají title, meta description, H1, canonical a čitelné URL?
+- Sitemap, robots, RSS a přesměrování odpovídají realitě?
+- Bezpečnostní hlavičky jsou nastavené vědomě, ne náhodou?
+- Server kontroluje vstupy, oprávnění a tenant hranice tam, kde existují?
+- Tajemství nejsou v repozitáři, klientském kódu ani logách?
+- Formuláře neposílají osobní obsah do analytiky?
+- Externí skripty mají účel, vlastníka, region a záznam v datové mapě?
+- Privacy stránka odpovídá skutečnému měření a provozu?
+- Zálohy existují a obnova byla otestovaná?
+- Monitoring, alerty, logy a incident postup mají vlastníka?
+- Každý nález má dopad, důkaz, doporučení, prioritu a způsob ověření opravy?
+
+Technický audit má být praktický. Není cílem dokázat, že web není dokonalý. To víme, žádný není. Cílem je najít věci, které opravdu brání rychlosti, důvěře, bezpečnosti, provozu a růstu. Když audit skončí kratším seznamem jasných oprav, menší datovou stopou a lepší provozní kontrolou, splnil účel.
+
+### Zdroje kapitoly
+
+- [OWASP Web Security Testing Guide: Configuration and Deployment Management Testing](https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/02-Configuration_and_Deployment_Management_Testing/README)
+- [OWASP Web Security Testing Guide: Web Application Security Testing](https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/)
+- [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+- [OWASP HTTP Headers Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/HTTP_Headers_Cheat_Sheet.html)
+- [web.dev: Web Vitals](https://web.dev/articles/vitals?hl=en)
+- [W3C: Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/wcag/)
+- [Google Search Central: How Google interprets robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -8973,3 +9291,4 @@ Launch je dobrý, když po něm tým ví víc než před ním. Ne když se všic
 - 2026-05-06: Dopsána kapitola 31 jako checklist pro SaaS MVP: segment, problém, workflow, rozsah, data, role, aktivace, pilot, technický základ, měření, support a rozhodnutí po MVP.
 - 2026-05-06: Dopsána kapitola 32 jako checklist pro privacy-first analytiku: rozhodovací otázky, datová mapa, eventy, formuláře, cookies, retence, přístupy, dodavatelé, SaaS produktová analytika a kvartální audit.
 - 2026-05-06: Dopsána kapitola 33 jako checklist pro launch: rozsah, kritéria, obsah, smoke test, měření, privacy-first provoz, rollback, incident režim, support a vyhodnocení úspěchu.
+- 2026-05-06: Dopsána kapitola 34 jako checklist pro technický audit: rozsah, inventura, dostupnost, výkon, přístupnost, SEO, bezpečnost, privacy-first datová stopa, provoz a prioritizace nálezů.
