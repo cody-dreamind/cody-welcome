@@ -12233,6 +12233,234 @@ Tato verze není náhrada veřejného článku. Je to praktický nástroj do obc
 
 Dobrá případová studie není pomník projektu. Je to most mezi zkušeností a rozhodnutím dalšího zákazníka. Má být pravdivá, konkrétní a použitelná. Když čtenář po dočtení ví, jak by podobný postup mohl vypadat u něj, case study splnila práci.
 
+## Příloha K: Dvanáctitýdenní implementační plán
+
+E-book je užitečný jen tehdy, když podle něj někdo něco změní. Tato příloha převádí hlavní myšlenky do dvanáctitýdenního plánu pro malý tým, freelancera, agenturu nebo SaaS projekt. Nejde o univerzální recept. Je to pracovní rytmus, který pomáhá postupně zpřesnit web, produkt, marketing a provoz bez toho, aby se z toho stal nekonečný redesign nebo sbírka dobrých úmyslů.
+
+Plán počítá s tím, že tým má omezený čas. Každý týden proto končí jedním konkrétním výstupem. Ne "pracovali jsme na strategii", ale hotový dokument, upravená stránka, nasazené měření, zkrácený formulář, vyčištěný obsah nebo rozhodnutí v backlogu.
+
+### Jak plán používat
+
+Vyberte jednoho vlastníka. Nemusí dělat všechno, ale musí držet rytmus, svolat krátké review a rozhodnout, co se dokončí. Bez vlastníka se plán rychle změní v sdílený dokument, který všichni respektují tak moc, že ho nikdo neotevře.
+
+Každý týden dodržte stejný cyklus:
+
+1. Vyberte jednu slabinu, kterou tento týden opravíte.
+2. Určete výstup, který půjde ukázat nebo použít.
+3. Udělejte změnu v nejmenším rozumném rozsahu.
+4. Zapište rozhodnutí, otevřené otázky a další krok.
+5. Na konci týdne smažte nebo odložte věci, které do cíle nepatří.
+
+Privacy-first pravidlo platí v každém týdnu: když přidáváte nástroj, měření, formulář, integraci nebo externí embed, zapište, jaká data sbírá, proč jsou potřeba, kde jsou uložená, kdo k nim má přístup a kdy se mažou.
+
+### Týdny 1 až 3: zpřesnit základ
+
+První tři týdny nejsou o nových funkcích. Jsou o tom, aby tým věděl, co vlastně prodává, komu a přes jaký první krok.
+
+Týden 1: segment a slib.
+
+Výstup: jednostránkový positioning.
+
+Napište:
+
+- komu konkrétně pomáháte,
+- jakou situaci řeší,
+- jaký problém je pro něj bolestivý právě teď,
+- jakou alternativu používá dnes,
+- proč je vaše řešení lepší nebo bezpečnější,
+- jaký první krok po něm chcete.
+
+Slabá věta: "Pomáháme firmám s digitalizací."
+
+Silnější věta: "Pomáháme B2B týmům převést ruční schvalování požadavků z e-mailu a tabulek do jednoduchého zákaznického portálu s auditní historií a evropským provozem."
+
+Týden 2: homepage a hlavní stránka nabídky.
+
+Výstup: upravený hero blok, důkazy a hlavní CTA.
+
+Zkontrolujte, jestli návštěvník do deseti sekund pochopí:
+
+- co nabízíte,
+- pro koho to je,
+- proč vám má věřit,
+- co má udělat dál,
+- co se stane po kliknutí nebo odeslání formuláře.
+
+Nepřepisujte celý web. Opravte nejviditelnější nerozhodnost. Přidejte konkrétnější headline, krátké vysvětlení, jeden důkaz, jeden hlavní další krok a férovou větu u formuláře.
+
+Týden 3: obsahová inventura.
+
+Výstup: tabulka stránek s rozhodnutím ponechat, upravit, sloučit nebo smazat.
+
+U každé důležité stránky zapište:
+
+- účel stránky,
+- cílového čtenáře,
+- hlavní otázku,
+- další krok,
+- vlastníka,
+- datum poslední revize,
+- privacy riziko, pokud stránka sbírá data nebo načítá externí prvky.
+
+Codyho komentář: mazání obsahu je podceňovaná marketingová práce. Starý, neurčitý nebo duplicitní obsah nevytváří autoritu. Vytváří šum s URL adresou.
+
+### Týdny 4 až 6: zlepšit důvěru a měření
+
+Druhá fáze má udělat z webu použitelný obchodní nástroj. To znamená důkazy, měření a méně zbytečných datových stop.
+
+Týden 4: důkazy.
+
+Výstup: jedna případová studie, anonymizovaný příklad, ukázka workflow nebo stránka s referenčním důkazem.
+
+Použijte šablonu z Přílohy J. Pokud nemůžete zveřejnit zákazníka, ukažte anonymizovaný scénář. Důležité je popsat výchozí stav, zásah, výsledek a poučení. Důkaz nemusí být velký. Musí být konkrétní.
+
+Týden 5: měření rozhodnutí.
+
+Výstup: seznam měřených událostí a jednoduchý měsíční report.
+
+Vyberte maximálně pět signálů:
+
+- návštěva klíčové stránky,
+- klik na hlavní CTA,
+- odeslaný kvalifikační formulář,
+- otevřené demo nebo trial,
+- kvalifikovaný lead,
+- aktivační událost v produktu,
+- odpověď na follow-up.
+
+Ke každému signálu napište, jaké rozhodnutí díky němu uděláte. Pokud žádné, neměřte ho. Měření bez rozhodnutí je jen hezčí forma zvědavosti.
+
+Týden 6: datová stopa a externí služby.
+
+Výstup: zjednodušená datová mapa a seznam služeb k ponechání, omezení nebo odstranění.
+
+Projít web a produkt znamená zjistit:
+
+- jaké skripty se načítají,
+- jaké cookies nebo local storage položky vznikají,
+- kam odcházejí formuláře,
+- jaké logy obsahují osobní údaje,
+- kdo má přístupy,
+- které nástroje nemají jasný účel,
+- kde je možné preferovat EU provoz nebo přímý odkaz místo embedu.
+
+Tady se často najde rychlé vítězství: odstranit starý pixel, zrušit nepoužívaný chat widget, nahradit embed obyčejným odkazem, zkrátit retenci logů nebo doplnit srozumitelnou privacy větu k formuláři.
+
+### Týdny 7 až 9: zlepšit produkt a prodejní tok
+
+Třetí fáze řeší, co se děje po prvním zájmu. Web může fungovat skvěle, ale pokud demo, trial, nabídka nebo onboarding vytváří tření, obchodní systém pořád ztrácí energii.
+
+Týden 7: kvalifikace.
+
+Výstup: krátký kvalifikační dotazník a pravidla, kdy lead přijmout, odmítnout nebo poslat do nurturingu.
+
+Použijte Přílohu E. Cílem není získat co nejvíc údajů. Cílem je zjistit, jestli má smysl pokračovat. U webu se ptejte na cíl, cílovou skupinu, obsah, termín, provoz a odpovědnosti. U SaaS se ptejte na workflow, uživatele, data, role, integrace, bezpečnost a měřitelný první výsledek.
+
+Týden 8: první hodina po konverzi.
+
+Výstup: popsaný tok od odeslání formuláře, registrace nebo žádosti o demo po první užitečný výsledek.
+
+Zapište všechny kroky:
+
+- co vidí uživatel po odeslání,
+- kdy přijde první odpověď,
+- kdo ji vlastní,
+- jaké informace se předávají,
+- kde vzniká zpoždění,
+- co se dá automatizovat bez ztráty lidského kontextu,
+- kdy se mažou nebo archivují nepotřebná data.
+
+Pak opravte jednu největší překážku. Typicky to bývá nejasná děkovací stránka, pomalý follow-up, chybějící shrnutí poptávky, zbytečně dlouhý formulář nebo demo bez jasného scénáře.
+
+Týden 9: nabídka a handoff.
+
+Výstup: šablona nabídky nebo sales handoff dokument.
+
+Dobrá nabídka nepřepisuje discovery hovor do PDF. Má ukázat:
+
+- pochopený problém,
+- navržený výsledek,
+- rozsah první iterace,
+- co není součástí,
+- rizika a předpoklady,
+- privacy-first rozhodnutí,
+- cenu nebo způsob nacenění,
+- další krok.
+
+U SaaS produktu stejný týden využijte na handoff mezi marketingem, sales a produktem: jaké signály z leadů se vrací do roadmapy, dokumentace a onboardingových úprav.
+
+### Týdny 10 až 12: vytvořit opakovatelný rytmus
+
+Poslední fáze brání tomu, aby se změny po třech měsících rozpadly. Cílem je zavést rytmus, který tým zvládne opakovat.
+
+Týden 10: obsahový systém.
+
+Výstup: tři obsahové pilíře a dva hotové briefy.
+
+Ke každému pilíři napište:
+
+- jakou otázku zákazníka řeší,
+- v jaké fázi rozhodování se objevuje,
+- jaký typ důkazu potřebuje,
+- jaký další krok má obsah nabídnout,
+- kde se bude distribuovat mimo sociální sítě,
+- jak se bude měřit užitečnost.
+
+Použijte RSS, vlastní web a přímé odkazy jako základ. Sociální sítě jsou distribuce, ne archiv a ne jediný zdroj pravdy.
+
+Týden 11: provozní dokumentace.
+
+Výstup: vyplněný provozní list projektu.
+
+Zapište:
+
+- doménu, registrátora a expiraci,
+- DNS správce,
+- hosting a region provozu,
+- e-mailovou konfiguraci,
+- analytiku,
+- zálohy a obnovu,
+- kritické akce,
+- incidentní kontakty,
+- přístupy a vlastníky,
+- datum další revize.
+
+Když se něco rozbije, tým nemá lovit odpovědi v historii chatu. Má otevřít provozní list a vědět, kde začít.
+
+Týden 12: měsíční review a další cyklus.
+
+Výstup: záznam review a backlog pro další měsíc.
+
+Na review projděte:
+
+- co se opravdu zlepšilo,
+- které signály tomu odpovídají,
+- kde je pořád tření,
+- které nástroje nebo stránky nemají jasný účel,
+- co přestáváte dělat,
+- co bude jedna hlavní změna příští měsíc.
+
+Nesnažte se naplánovat dalších dvanáct týdnů do detailu. Vyberte další třítýdenní blok podle největšího omezení: positioning, web, důvěra, měření, produkt, sales, obsah nebo provoz.
+
+### Implementační checklist
+
+- Má plán jednoho vlastníka?
+- Je pro každý týden jasný konkrétní výstup?
+- Končí každý týden rozhodnutím, co se ponechá, změní nebo zruší?
+- Je homepage zpřesněná podle segmentu, důkazu a dalšího kroku?
+- Existuje obsahová inventura s vlastníky a revizemi?
+- Má web nebo produkt alespoň jeden konkrétní důkaz důvěry?
+- Měříte jen signály, podle kterých umíte rozhodovat?
+- Je datová mapa aktuální a zahrnuje externí služby?
+- Je kvalifikační tok krátký a férový?
+- Je popsaná první hodina po poptávce, registraci nebo demu?
+- Existuje šablona nabídky nebo sales handoff?
+- Má obsahový plán vlastní kanály, RSS nebo přímé odkazy?
+- Má projekt provozní list s doménou, DNS, hostingem, e-mailem, zálohami a incidenty?
+- Proběhlo měsíční review a vznikl další konkrétní krok?
+
+Dvanáct týdnů stačí na viditelnou změnu, pokud tým nepředstírá, že každé zlepšení vyžaduje kompletní restart. Většina práce je obyčejná: zpřesnit větu, zkrátit formulář, doplnit důkaz, odstranit tracker, popsat proces, zapsat rozhodnutí. Právě proto funguje.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -12371,3 +12599,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha H s rozhodovacím logem pro web a SaaS: šablona záznamu, kritéria, privacy-first dopad, příklady rozhodnutí a checklist údržby.
 - 2026-05-06: Doplněna Příloha I s obsahovým briefem pro článek, landing page nebo case study: čtenář, otázka, slib, důkazy, zdroje, privacy-first kontrola, měření a údržba.
 - 2026-05-06: Doplněna Příloha J se šablonou případové studie pro web, SaaS a služby: struktura příběhu, rozhovor se zákazníkem, výsledky, privacy-first kontrola, sales verze a checklist.
+- 2026-05-06: Doplněna Příloha K s dvanáctitýdenním implementačním plánem pro převod e-booku do konkrétních týdenních změn webu, produktu, marketingu a privacy-first provozu.
