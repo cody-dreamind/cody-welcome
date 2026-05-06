@@ -12033,6 +12033,206 @@ Obsahová údržba je méně vidět než publikace nového článku. Ale z byzny
 
 Dobře napsaný brief nezaručí dobrý text. Zaručí ale, že tým ví, co se snaží vytvořit. A to je dost podstatný rozdíl oproti obsahu, který vzniká stylem "něco o tom napiš". Něco je totiž přesně ten druh výsledku, který nikdo nepotřebuje.
 
+## Příloha J: Šablona případové studie pro web, SaaS a služby
+
+Případová studie je jeden z nejsilnějších důkazů na webu. Ne proto, že má hezkou grafiku a logo zákazníka, ale protože ukazuje skutečný problém, rozhodování, postup, kompromisy a výsledek. Dobrá case study pomáhá zákazníkovi říct: "Tohle je podobné mojí situaci. Ten tým rozumí problému. Vím, co bych mohl čekat."
+
+Špatná případová studie je často jen delší reference. Začíná větou o moderním řešení, pokračuje seznamem technologií a končí spokojeným klientem. To je málo. Pokud má případová studie prodávat služby, SaaS nebo konzultaci, musí ukázat konkrétní cestu od problému k výsledku.
+
+Tato šablona je použitelná pro agenturu, produktové studio, SaaS firmu i interní produktový tým. Můžete ji použít pro veřejnou case study, anonymizovaný příklad, sales materiál nebo interní post-mortem úspěšného projektu.
+
+### Kdy případovou studii psát
+
+Ne každý projekt si zaslouží veřejnou případovou studii. To není urážka projektu. Je to ochrana času. Case study má vzniknout ve chvíli, kdy umí posílit konkrétní obchodní nebo produktovou otázku.
+
+Dobří kandidáti:
+
+- projekt řešil problém, který mají i další zákazníci,
+- existuje měřitelný nebo alespoň pozorovatelný výsledek,
+- tým umí popsat výchozí stav a změnu,
+- zákazník souhlasí s publikací nebo lze příběh rozumně anonymizovat,
+- projekt ukazuje důležitou specializaci, například SaaS MVP, migraci, onboarding, privacy-first analytiku nebo provoz v EU,
+- výsledek se dá ukázat bez vyzrazení citlivých dat.
+
+Slabí kandidáti:
+
+- projekt nemá jasný problém ani výsledek,
+- zákazník nechce sdílet žádný kontext,
+- tým by musel tvrzení nafukovat,
+- hlavní hodnota je jen "dodali jsme web",
+- case study by prozradila interní procesy, obchodní čísla nebo bezpečnostní detaily, které nemají být veřejné.
+
+Codyho komentář: nejhorší case study je ta, která vypadá jako vítězný projev po předání projektu, ale zákazníkovi nepomůže rozhodnout vůbec nic. Pochvala je fajn. Rozhodovací důkaz je lepší.
+
+### Struktura případové studie
+
+Použijte tento rámec. Nemusíte ho držet otrocky, ale každá část má mít jasnou práci.
+
+```text
+Název:
+[Konkrétní změna nebo výsledek] pro [typ zákazníka]
+
+Krátké shrnutí:
+Ve 3 až 5 větách: kdo, jaký problém, co se změnilo, proč je to relevantní.
+
+Zákazník nebo kontext:
+Typ firmy, segment, velikost týmu, země nebo trh, pokud je možné sdílet.
+
+Výchozí stav:
+Co nefungovalo před projektem? Jaké byly dopady?
+
+Cíl:
+Jaké rozhodnutí nebo výsledek měl projekt umožnit?
+
+Omezení:
+Čas, rozpočet, legacy systém, regulace, data, interní kapacity, bezpečnost.
+
+Postup:
+Jaké kroky tým udělal a proč právě v tomto pořadí?
+
+Řešení:
+Co vzniklo: web, produkt, workflow, datový model, integrace, měření, provoz.
+
+Privacy-first část:
+Jak se pracovalo s daty, hostingem, analytikou, přístupy, retencí a nástroji.
+
+Výsledek:
+Co se zlepšilo? Čísla, kvalitativní signály, kratší proces, méně ruční práce, lepší důvěra.
+
+Co se dá zopakovat:
+Obecné principy, které si může odnést podobný zákazník.
+
+Další krok:
+Co má udělat čtenář, který řeší podobný problém?
+```
+
+Tento rámec drží text u země. Nutí tým popsat nejen výsledek, ale i výchozí stav a omezení. Právě omezení dělají případovou studii uvěřitelnou. Dokonalý projekt bez kompromisů neexistuje. Pokud text tvrdí opak, návštěvník buď nevěří, nebo by měl nevěřit.
+
+### Otázky pro rozhovor se zákazníkem
+
+Než začnete psát, udělejte krátký rozhovor. Ideálně s člověkem, který problém cítil před projektem a používá výsledek po projektu. Nestačí mluvit jen s interním account manažerem. Ten často zná harmonogram, ale ne reálnou bolest.
+
+Zeptejte se:
+
+- Co byl první signál, že je potřeba něco změnit?
+- Co se dělo před projektem ručně, pomalu nebo nespolehlivě?
+- Co by se stalo, kdyby se problém neřešil?
+- Jaké alternativy jste zvažovali?
+- Čeho jste se před začátkem báli?
+- Co bylo pro rozhodnutí nejdůležitější: rychlost, cena, bezpečnost, kontrola dat, specializace, reference?
+- Který krok projektu měl největší dopad?
+- Co se změnilo po nasazení?
+- Jak poznáte, že výsledek funguje?
+- Co byste příště udělali stejně a co jinak?
+- Jakou část příběhu můžeme veřejně sdílet?
+- Jsou nějaké údaje, názvy, obrazovky nebo procesy, které nemají být publikované?
+
+U anonymizované case study se ptejte ještě přímo:
+
+- Jak přesně smíme zákazníka popsat?
+- Smíme uvést obor, velikost firmy, zemi nebo typ týmu?
+- Smíme popsat původní problém konkrétně, pokud vynecháme název firmy?
+- Smíme ukázat ukázkový workflow na fiktivních datech?
+
+Anonymizace nesmí být jen odstranění loga. Pokud je kombinace oboru, regionu, velikosti a detailu projektu snadno identifikovatelná, pořád může jít o citlivou informaci.
+
+### Jak psát výsledek bez nafukování
+
+Výsledek nemusí být vždy číslo. Čísla jsou skvělá, pokud jsou pravdivá a metodicky poctivá. Ale slabé nebo nepřesné číslo škodí víc než kvalitativní výsledek.
+
+Silné výsledky:
+
+- zkrácení konkrétního procesu,
+- méně ruční práce v týmu,
+- rychlejší první odpověď zákazníkovi,
+- lepší doručitelnost nebo spolehlivost,
+- snížení počtu podpůrných dotazů,
+- větší podíl kvalifikovaných poptávek,
+- jasnější onboarding,
+- lepší kontrola nad daty a dodavateli,
+- snazší audit nebo předání projektu.
+
+Slabé výsledky:
+
+- "modernější web",
+- "vyšší efektivita",
+- "lepší uživatelská zkušenost",
+- "digitální transformace",
+- "inovativní řešení".
+
+Slabá formulace:
+
+"Klientovi jsme dodali moderní SaaS platformu, která zefektivnila jeho procesy."
+
+Silnější formulace:
+
+"Tým dřív schvaloval nové požadavky v e-mailu a tabulce. Po nasazení MVP má každý požadavek vlastní stav, odpovědnou osobu, historii změn a audit log. Manažer vidí blokery bez ručního sbírání reportů."
+
+Druhá verze nemusí obsahovat žádné citlivé číslo, a přesto je konkrétnější. Čtenář si umí představit změnu.
+
+### Privacy-first kontrola před publikací
+
+Případová studie často obsahuje nejcennější obchodní informace. Proto musí projít privacy-first kontrolou stejně jako analytika nebo formulář.
+
+Zkontrolujte:
+
+- Obsahuje text osobní údaje, interní jména, e-maily nebo screenshoty reálných uživatelů?
+- Jsou v ukázkách skutečná zákaznická data?
+- Neprozrazuje text interní proces, bezpečnostní detail nebo dodavatelskou konfiguraci?
+- Je jasné, zda zákazník souhlasil s použitím názvu, loga, citace a screenshotů?
+- Pokud je case study anonymizovaná, nejde zákazník snadno identifikovat kombinací detailů?
+- Nejsou ve screenshotu tokeny, URL administrace, interní komentáře, ceny nebo neveřejné moduly?
+- Je popsané, kde data běží a proč to bylo pro projekt důležité?
+- Nevyužívá stránka embed, video, heatmapu nebo marketingový skript, který by byl v rozporu se slibem o soukromí?
+
+Praktické pravidlo: screenshoty dělejte raději z demo prostředí s fiktivními daty. Pokud to nejde, anonymizujte je ručně a nechte je zkontrolovat někým, kdo nebyl v projektu ponořený. Člověk z projektu snadno přehlédne detail, který externí čtenář pozná okamžitě.
+
+### Jednostránková verze pro sales
+
+Ne každá case study musí být dlouhý článek. Pro obchodní hovor se hodí jednostránková verze:
+
+```text
+Situace:
+Komu jsme pomáhali a jaký problém řešil.
+
+Riziko:
+Co by se stalo, kdyby se problém nechal být.
+
+Zásah:
+Jaký nejmenší užitečný krok jsme zvolili jako první.
+
+Řešení:
+Co vzniklo a jak to zapadlo do provozu zákazníka.
+
+Výsledek:
+Co se změnilo v práci týmu, prodeji, provozu nebo kontrole dat.
+
+Poučení:
+Co by měl podobný zákazník vědět před začátkem.
+
+Další otázka:
+Kde je u vás podobné tření dnes?
+```
+
+Tato verze není náhrada veřejného článku. Je to praktický nástroj do obchodní konverzace. Pomáhá posunout hovor od "co všechno umíte" k "jak přemýšlíte o problému podobném tomu našemu".
+
+### Checklist případové studie
+
+- Je jasné, pro jaký typ zákazníka je příběh relevantní?
+- Popisuje text výchozí stav, ne jen finální řešení?
+- Je pojmenovaný skutečný problém nebo riziko?
+- Ukazuje studie rozhodnutí, kompromisy a postup?
+- Jsou výsledky konkrétní a poctivě formulované?
+- Je jasné, co si může podobný zákazník odnést?
+- Obsahuje text privacy-first část: data, provoz, přístupy, měření nebo minimalizace?
+- Má zákazník schválený název, logo, citace, screenshoty a rozsah detailů?
+- Jsou screenshoty bez osobních, interních a citlivých dat?
+- Existuje krátká sales verze pro obchodní tým?
+- Má případová studie jeden konkrétní další krok?
+- Má vlastník nastavené datum revize?
+
+Dobrá případová studie není pomník projektu. Je to most mezi zkušeností a rozhodnutím dalšího zákazníka. Má být pravdivá, konkrétní a použitelná. Když čtenář po dočtení ví, jak by podobný postup mohl vypadat u něj, case study splnila práci.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -12170,3 +12370,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha G se šablonou datové mapy pro web a SaaS: datové toky, účely, přístupy, retence, export, revize a checklist pro nové nástroje.
 - 2026-05-06: Doplněna Příloha H s rozhodovacím logem pro web a SaaS: šablona záznamu, kritéria, privacy-first dopad, příklady rozhodnutí a checklist údržby.
 - 2026-05-06: Doplněna Příloha I s obsahovým briefem pro článek, landing page nebo case study: čtenář, otázka, slib, důkazy, zdroje, privacy-first kontrola, měření a údržba.
+- 2026-05-06: Doplněna Příloha J se šablonou případové studie pro web, SaaS a služby: struktura příběhu, rozhovor se zákazníkem, výsledky, privacy-first kontrola, sales verze a checklist.
