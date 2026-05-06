@@ -10643,6 +10643,120 @@ Můj pohled: týmy často přeceňují motivaci a podceňují uzavřenost práce
 
 Workshop není důležitý tím, že trvá 90 minut. Důležitý je tím, že končí jednou dokončenou změnou. Digitální systém se nezlepší tím, že o něm tým lépe mluví. Zlepší se tím, že pravidelně opravuje konkrétní tření.
 
+## Příloha D: Slovník praktických pojmů
+
+Slovník není akademická část e-booku. Je to provozní pomůcka. Když tým používá stejná slova pro různé věci, vzniká drahý chaos: marketing říká lead, obchod myslí příležitost, produkt myslí trial, vývoj myslí uživatelský účet a finance čekají fakturu. Výsledek? Všichni mají pravdu ve své tabulce a nikdo neřídí stejnou realitu.
+
+Tato příloha shrnuje pojmy, které se v e-booku opakují. Definice jsou záměrně praktické. Nejsou náhradou za právní, účetní nebo bezpečnostní výklad. Mají pomoci týmu rychle se shodnout, co dané slovo znamená v běžném provozu webu, SaaS produktu a marketingu.
+
+### Produkt a SaaS
+
+**Aktivace**
+
+První měřitelný okamžik, kdy uživatel nebo účet zažije skutečnou hodnotu produktu. Registrace není aktivace. Přihlášení není aktivace. U B2B SaaS může být aktivace například vytvoření prvního projektu, pozvání kolegy a dokončení hlavního workflow.
+
+**Audit log**
+
+Záznam důležitých akcí v produktu: kdo co udělal, kdy, nad jakým objektem a s jakým výsledkem. Audit log není totéž co technický log. Technický log pomáhá provozu hledat chyby. Audit log pomáhá zákazníkovi i týmu doložit důležité změny.
+
+**Datový model**
+
+Způsob, jak produkt chápe objekty, vztahy, vlastnictví, stavy a životní cyklus dat. Není to jen databázové schema. Je to produktové rozhodnutí. Špatně pojmenovaný objekt nebo vztah se později projeví v oprávněních, exportech, billingu i UX.
+
+**MVP**
+
+Nejmenší ověřitelný produkt nebo proces, který testuje hlavní riziko. Dobré MVP není poloviční finální produkt. Je to cílený experiment: jeden segment, jeden problém, jeden workflow, jeden důkaz hodnoty.
+
+**Tenant**
+
+Hranice zákaznické organizace, týmu nebo workspace v SaaS produktu. Tenant není jen sloupec `tenant_id`. Musí se propsat do databáze, API, cache, souborů, logů, exportů, background jobů a administrace.
+
+**Workflow**
+
+Opakovaná cesta od vstupu k výsledku. U SaaS produktu je workflow důležitější než seznam obrazovek. Pokud tým neumí popsat workflow, často staví funkce bez jasné hodnoty.
+
+### Marketing a prodej
+
+**Case study**
+
+Praktický důkaz práce: kontext, problém, omezení, rozhodnutí, výsledek a poučení. Dobrá case study není reklamní pohádka. Ukazuje reálné trade-offy a pomáhá podobnému zákazníkovi poznat, že tým rozumí jeho situaci.
+
+**CTA**
+
+Call to action, tedy další krok, který má návštěvník nebo uživatel udělat. Dobré CTA je konkrétní a poctivé: "Domluvit úvodní konzultaci" je lepší než prázdné "Odeslat". Vedle CTA má často být vysvětlení, co se stane potom.
+
+**ICP**
+
+Ideal Customer Profile. Praktický popis zákazníka, pro kterého produkt nebo služba dává největší smysl právě teď. ICP není seznam všech možných zákazníků. Je to filtr pro marketing, sales, roadmapu a podporu.
+
+**Lead**
+
+Kontakt s relevantním kontextem: má fit, problém, signál zájmu a férový důvod k další komunikaci. Každý e-mail není lead. Stažení checklistu také není automaticky sales příležitost.
+
+**Positioning**
+
+Způsob, jak má cílový zákazník pochopit hodnotu produktu ve srovnání s alternativami. Silný positioning říká: pro koho to je, v jaké situaci, proti jaké alternativě, s jakou konkrétní hodnotou a důkazem.
+
+**RSS**
+
+Otevřený feed pro odběr nového obsahu bez e-mailu, platformového účtu a reklamního profilování. V privacy-first marketingu je RSS praktický kanál pro lidi, kteří chtějí kontrolu nad tím, co čtou.
+
+### Metriky a byznys
+
+**ARR**
+
+Annual Recurring Revenue. Roční run rate opakovaných příjmů. V jednoduchém SaaS pohledu se často počítá jako `MRR x 12`. Nepatří sem jednorázové služby, setup fees ani hotovost zaplacená dopředu bez rozpočítání.
+
+**CAC**
+
+Customer Acquisition Cost. Náklad na získání zákazníka. Má smysl jen tehdy, když tým ví, co do nákladů počítá: reklamu, obsah, sales práci, nástroje, provize, eventy nebo founder time. CAC bez segmentu a retence umí být velmi zavádějící.
+
+**Churn**
+
+Odchod zákazníka nebo příjmu. Logo churn říká, kolik zákazníků odešlo. Revenue churn říká, kolik opakovaného příjmu odešlo. Involuntary churn vzniká například kvůli selhané platbě, ne nutně kvůli odmítnutí produktu.
+
+**LTV**
+
+Lifetime Value. Odhad hodnoty zákazníka za dobu používání služby. Je to pracovní odhad, ne věštba. U malého počtu zákazníků nebo krátké historie s ním zacházejte opatrně.
+
+**MRR**
+
+Monthly Recurring Revenue. Normalizovaný měsíční opakovaný příjem ze subscription modelu. MRR není hotovost na účtu. Roční platbu je potřeba rozpočítat na měsíce a jednorázové služby oddělit.
+
+**Payback**
+
+Doba, za kterou se vrátí náklad na získání zákazníka. Prakticky: `CAC / měsíční hrubý zisk z účtu`. Krátký payback pomáhá cash flow. Dlouhý payback může dávat smysl u enterprise, ale je nebezpečný u levného self-serve produktu bez silné retence.
+
+### Provoz, bezpečnost a soukromí
+
+**Datová mapa**
+
+Přehled, jaká data vznikají, proč se sbírají, kde leží, kdo k nim má přístup, jak dlouho se drží a jak se exportují nebo mažou. Datová mapa je základ privacy-first provozu a praktický vstup pro audit.
+
+**Incident**
+
+Událost, která ohrožuje dostupnost, integritu, důvěrnost, bezpečnost nebo důvěru. Incident není jen výpadek serveru. Může to být i špatné oprávnění, únik dat, rozbitý billing, ztracené poptávky nebo podvržený webhook.
+
+**Privacy-first**
+
+Návrhový přístup, který sbírá méně dat, drží data pod kontrolou, preferuje evropský provoz, jasnou retenci, export, přímé odkazy, RSS a minimum trackerů. Privacy-first není zákaz měření. Je to požadavek, aby měření mělo jasný účel a přiměřený rozsah.
+
+**Retence dat**
+
+Pravidlo, jak dlouho data držíte a co se s nimi stane potom. Dobrá retence je napsaná už při návrhu eventu, formuláře, logu nebo CRM pole. "Navždy, protože se to může hodit" není retence. To je datový nepořádek s ambicemi.
+
+**Runbook**
+
+Krátký provozní návod pro opakovanou situaci: výpadek webu, nefunkční formulář, rollback, obnovu ze zálohy, billing problém nebo incident. Runbook nemusí být elegantní. Musí být použitelný ve chvíli, kdy tým nemá čas přemýšlet od nuly.
+
+**Toil**
+
+Opakovaná ruční práce, která roste s provozem a nepřidává dlouhodobou hodnotu. Typicky ruční importy, opakované support odpovědi, ruční billing výjimky nebo deploy kroky, které by měly být standardizované nebo automatizované.
+
+### Codyho komentář
+
+Můj pohled: slovník je podceňovaná produktová infrastruktura. Když se tým shodne na pojmech, zrychlí se rozhodování. Když se neshodne, všechno vypadá jako strategická debata, i když se lidé jen míjejí ve významu slov. To je zbytečně drahý sport.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -10774,3 +10888,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha A s provozním listem digitálního projektu: kritické akce, datová mapa, integrace, incidentní mini runbook a revizní rytmus.
 - 2026-05-06: Doplněna Příloha B s měsíčním review webu, produktu a marketingu: agenda, vstupy, rozhodnutí, šablona záznamu a checklist.
 - 2026-05-06: Doplněna Příloha C s workshopem první praktické iterace: agenda, jednostránkový výstup, příklad, privacy-first kontrola a checklist.
+- 2026-05-06: Doplněna Příloha D se slovníkem praktických pojmů pro sjednocení jazyka týmu napříč produktem, marketingem, metrikami, provozem a privacy-first prací.
