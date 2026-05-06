@@ -9650,6 +9650,433 @@ Produktová strategie má být živá, ale ne tekutá. Když se mění každý t
 - [GOV.UK Service Manual: Using performance data to improve your service](https://www.gov.uk/service-manual/measuring-success/using-data-to-improve-your-service-an-introduction)
 - [GOV.UK Service Manual: Measuring success](https://www.gov.uk/service-manual/measuring-success)
 
+## Kapitola 36: Šablona marketingového plánu
+
+Marketingový plán není kalendář příspěvků. Kalendář je až poslední vrstva. Marketingový plán má říct, komu budete pomáhat pochopit hodnotu, jakou otázku mu zodpovíte, jaký důkaz ukážete, kde ho oslovíte, jak změříte kvalitu a jak při tom neztratíte kontrolu nad daty.
+
+Malé týmy často dělají marketing podle energie: když je čas, napíše se článek; když je tlak, spustí se reklama; když je ticho, pošle se newsletter; když se objeví nový kanál, založí se profil. Výsledek vypadá aktivně, ale chybí mu systém. Marketing potom nepomáhá prodeji, produktu ani zákazníkovi. Jen vytváří další vrstvu práce.
+
+Dobrá šablona marketingového plánu má udržet jednoduchou disciplínu:
+
+1. Vyberte segment.
+2. Pojmenujte situaci a otázky zákazníka.
+3. Vytvořte obsah, důkazy a nabídky pro rozhodování.
+4. Distribuujte primárně přes vlastní kanály.
+5. Měřte kvalitu, ne hluk.
+6. Udržujte privacy-first datovou stopu.
+7. Každý měsíc z plánu něco zlepšete nebo smažte.
+
+Tato kapitola je pracovní šablona. Hodí se pro SaaS, odborné služby, webové studio, konzultanta i malý produktový tým. Není cílem vyplnit všechna políčka dokonale. Cílem je dostat marketing z mlhy do opakovatelného rytmu.
+
+### Jednostránková verze
+
+Začněte jednou stránkou. Pokud se marketingový plán nevejde do jedné stránky, tým ho pravděpodobně nebude používat. Detailní obsahový kalendář, výzkum, seznam článků a kampaně mohou být přílohy.
+
+```text
+Marketingový plán:
+Období:
+Vlastník:
+
+1. Cílový segment:
+2. Hlavní situace zákazníka:
+3. Prioritní otázky zákazníka:
+4. Nabídka a positioning:
+5. Hlavní důkazy:
+6. Primární kanály:
+7. Obsahové pilíře:
+8. Lead magnety nebo další kroky:
+9. Měření a metriky kvality:
+10. Privacy-first pravidla:
+11. Měsíční rytmus:
+12. Co tento kvartál vědomě neděláme:
+```
+
+Tuto stránku pravidelně aktualizujte. Ne proto, aby byla hezká. Protože marketing bez živé pracovní dohody se rychle vrací k náhodným aktivitám.
+
+Codyho komentář: "uděláme víc obsahu" není plán. To je přání s klávesnicí. Plán říká, komu obsah pomůže, jakou otázku vyřeší a co se po něm má stát.
+
+### 1. Segment a situace
+
+Marketing začíná výběrem. Pokud mluvíte na všechny, píšete obecně. Pokud píšete obecně, zákazník se musí v textu hledat. A zákazník má obvykle lepší věci na práci než dolovat význam z vašich odstavců.
+
+Šablona:
+
+```text
+Cílový segment:
+Typická firma:
+Primární role:
+Ekonomický kupující:
+Spouštěč potřeby:
+Současné řešení:
+Co zákazník nechce riskovat:
+Nevhodný fit:
+```
+
+Příklad:
+
+```text
+Cílový segment: Evropské B2B servisní firmy, které ručně reportují stav klientských zakázek.
+Typická firma: 20 až 150 lidí, opakované projekty, více account manažerů.
+Primární role: Vedoucí delivery nebo operations manager.
+Ekonomický kupující: COO, majitel nebo finanční ředitel.
+Spouštěč potřeby: Ruční reporting začíná brzdit tým a klienti se doptávají na stav.
+Současné řešení: E-mail, tabulka, PDF report, interní poznámky.
+Riziko: Ztráta důvěry klienta, chybný stav, chybějící auditní historie.
+Nevhodný fit: Týmy, které chtějí jen sociální plánovač nebo obecný task manager.
+```
+
+GOV.UK content design doporučuje stavět obsah na validní uživatelské potřebě a popisovat ji z pohledu člověka, který má splnit konkrétní úkol ([GOV.UK: User needs](https://www.gov.uk/guidance/content-design/user-needs)). Pro marketing to přeložte takto: nepište o tom, co chcete říct vy. Pište o tom, co zákazník potřebuje rozhodnout.
+
+### 2. Otázky zákazníka
+
+Marketingový plán by měl mít inventuru otázek. Ne jen seznam témat. Otázka je silnější než téma, protože ukazuje rozhodovací situaci.
+
+Šablona:
+
+```text
+Fáze rozhodování | Otázka zákazníka | Obsah / důkaz | Další krok
+Problém | ... | ... | ...
+Možnosti | ... | ... | ...
+Důvěra | ... | ... | ...
+Akce | ... | ... | ...
+```
+
+Příklad:
+
+```text
+Problém: Kdy už tabulka nestačí na klientské reportování?
+Obsah: článek s příklady signálů a checklist.
+Další krok: otevřený auditní checklist bez registrace.
+
+Možnosti: Máme postavit interní nástroj, klientský portál, nebo SaaS?
+Obsah: rozhodovací matice.
+Další krok: úvodní workshop.
+
+Důvěra: Jak řešíte role, audit logy a evropský provoz?
+Obsah: technická stránka "Provoz a data".
+Další krok: bezpečnostní shrnutí ke stažení nebo přímý dotaz.
+
+Akce: Co se stane po odeslání poptávky?
+Obsah: proces spolupráce a krátký formulář.
+Další krok: 30min konzultace.
+```
+
+Pokud obsah neodpovídá na otázku, často bude působit jako výplň. A výplň je na webu drahá: zabírá pozornost, ředí positioning a komplikuje údržbu.
+
+### 3. Nabídka a positioning
+
+Marketingový plán musí obsahovat pracovní positioning. Ne finální slogan. Pracovní formulaci, podle které tým pozná, co opakovaně vysvětlovat.
+
+Šablona:
+
+```text
+Pro [segment],
+který řeší [situace],
+nabízíme [produkt / služba],
+která pomáhá [výsledek],
+na rozdíl od [alternativa],
+protože [diferenciace].
+```
+
+Příklad:
+
+```text
+Pro evropské B2B servisní týmy, které ručně reportují stav klientských zakázek, nabízíme privacy-first klientský portál, který pomáhá nahradit páteční PDF report sdíleným workflow, rolemi, komentáři a auditní historií. Na rozdíl od e-mailu a tabulek drží stav, odpovědnosti a export na jednom místě bez reklamních trackerů a s provozem pod kontrolou týmu.
+```
+
+Tato věta se nemusí objevit přesně na webu. Má sjednotit marketing, sales, obsah a produkt. Když nový článek, kampaň nebo landing page nesouvisí s tímto positioningem, pravděpodobně patří do později.
+
+### 4. Důkazy a aktiva
+
+Marketing bez důkazů je jen hlasitější názor. Plán proto musí říct, jaké důkazy budete používat a které chybí.
+
+Typy důkazů:
+
+- Case study s kontextem, problémem, rozhodnutím a výsledkem.
+- Ukázka workflow nebo screenshot bez citlivých dat.
+- Technický popis architektury, bezpečnosti nebo provozu.
+- Reference s rolí člověka a konkrétním přínosem.
+- Checklist, šablona nebo playbook.
+- Demo scénář.
+- Stránka o datech, soukromí a provozu.
+
+Šablona:
+
+```text
+Důkaz | Kterou pochybnost snižuje | Kde se použije | Stav
+Case study klientského portálu | Umíte to pro podobnou firmu? | web, sales, newsletter | chybí
+Datová mapa provozu | Kam tečou data? | privacy stránka, nabídka | rozpracováno
+Demo workflow | Jak to funguje v praxi? | demo hovor, landing page | hotovo
+```
+
+Google u people-first obsahu doporučuje tvořit obsah primárně pro lidi a ukazovat jasnou hodnotu, zkušenost a důvěryhodnost ([Google Search Central: Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)). V marketingovém plánu to znamená: neplánujte jen publikace. Plánujte důkazy, které zákazník potřebuje, aby mohl udělat rozhodnutí.
+
+### 5. Kanály: vlastní základ, cizí dosah
+
+Kanálový plán má rozlišovat, kde obsah vlastníte a kde ho jen distribuujete.
+
+Šablona:
+
+```text
+Kanál | Účel | Frekvence | Vlastník | Metrika kvality | Privacy poznámka
+Web | zdroj pravdy a konverze | průběžně | marketing + web | kvalifikované další kroky | minimum skriptů
+Blog / znalostní báze | odpovědi a SEO | 2-4x měsíčně | editor | interní odkazy, poptávky, RSS | veřejné URL
+RSS | přímý odběr bez e-mailu | automaticky | web | odběry | bez profilování
+Newsletter | kurátorovaný vztah | 1x měsíčně | editor | odpovědi, kliky, odhlášení | dobrovolný souhlas
+LinkedIn | distribuce a konverzace | 2-3x týdně | marketing | relevantní komentáře, návštěvy | žádný social pixel defaultně
+Partnerské odkazy | důvěra a referral | podle příležitostí | sales | kvalifikované rozhovory | sdílet minimum dat
+```
+
+Sociální síť může být užitečný start konverzace. Nemá být archiv, CRM ani primární distribuční infrastruktura. Vlastní web, RSS a přímé odkazy drží dlouhodobou hodnotu pod vaší kontrolou.
+
+### 6. Obsahové pilíře
+
+Obsahové pilíře nejsou kategorie pro pořádek v CMS. Jsou to strategická témata, ve kterých chcete být důvěryhodní.
+
+Příklad pro Dreamind-like privacy-first web a SaaS práci:
+
+```text
+Pilíř 1: Web jako obchodní systém
+Otázky: Jak poznat dobrý web? Co měřit? Jak zkrátit formulář?
+Důkazy: audity, checklisty, case studies.
+
+Pilíř 2: SaaS MVP bez chaosu
+Otázky: Kdy začít aplikaci? Co patří do MVP? Jak navrhnout role?
+Důkazy: šablony, workflow diagramy, produktová strategie.
+
+Pilíř 3: Privacy-first provoz v Evropě
+Otázky: Kde jsou data? Co měřit? Jak bez zbytečných trackerů?
+Důkazy: datová mapa, analytický checklist, security stránka.
+
+Pilíř 4: Marketing a prodej bez manipulace
+Otázky: Jak získávat kvalitní leady? Jak psát prodejní web? Jak používat RSS?
+Důkazy: playbooky, šablony, příklady formulářů.
+```
+
+U každého pilíře si určete:
+
+- hlavní stránku,
+- podpůrné články,
+- interní odkazy,
+- důkaz,
+- CTA,
+- datum poslední revize.
+
+Tím se blog přestane chovat jako deník nápadů a začne fungovat jako znalostní mapa.
+
+### 7. Nabídky a další kroky
+
+Každý obsah nemusí tlačit obchodní hovor. Ale každý důležitý obsah má nabídnout další krok, který odpovídá fázi zákazníka.
+
+Možné další kroky:
+
+- přečíst související článek,
+- stáhnout checklist bez registrace,
+- odebírat RSS,
+- přihlásit se k dobrovolnému newsletteru,
+- otevřít demo workflow,
+- poslat krátkou poptávku,
+- domluvit audit nebo workshop.
+
+Šablona:
+
+```text
+Fáze | Nabídka | Data, která sbíráme | Co se stane dál
+Orientace | otevřený checklist | nic | čtenář si ho použije sám
+Vhodnost | rozhodovací matice | nic nebo dobrovolný e-mail pro aktualizace | čtenář porovná možnosti
+Důvěra | technické shrnutí provozu | nic | čtenář ověří data a bezpečnost
+Akce | úvodní konzultace | e-mail, kontext, URL | odpovíme s návrhem dalšího kroku
+```
+
+Privacy-first logika je jednoduchá: čím dřívější fáze, tím méně dat žádejte. E-mail za každým PDF není strategie. Často je to jen sběr kontaktů převlečený za hodnotu.
+
+### 8. Měření marketingu
+
+Měřte tak, aby se z dat dalo rozhodnout. GOV.UK Service Manual doporučuje přemýšlet o měření od začátku a používat výkonová data ke zlepšování služby a prioritizaci změn ([GOV.UK Service Manual: Using performance data to improve your service](https://www.gov.uk/service-manual/measuring-success/using-data-to-improve-your-service-an-introduction)). Pro marketing to znamená: nečekejte na konec kampaně, abyste zjistili, že jste měřili jen hluk.
+
+Rozumné metriky:
+
+- návštěvy klíčových stránek podle kanálu,
+- kliky na hlavní CTA,
+- odeslané formuláře podle stránky,
+- kvalifikované leady,
+- poměr lead -> příležitost,
+- poměr příležitost -> zákazník,
+- aktivace zákazníků podle zdroje,
+- odpovědi na newsletter,
+- RSS odběry,
+- support a sales otázky, které obsah pomohl vyřešit.
+
+Metriky, které berte opatrně:
+
+- celková návštěvnost bez kvality,
+- počet followerů,
+- počet impresí,
+- open rate jako hlavní KPI,
+- cena za lead bez informace, jestli lead sedí,
+- čas na stránce bez kontextu.
+
+Šablona:
+
+```text
+Metrika | Proč ji měříme | Rozhodnutí | Kde data leží | Co neposíláme
+contact_submitted | Které stránky přivádí poptávky | zlepšit CTA / formulář | web analytics + CRM | text zprávy do analytiky
+qualified_lead | Kvalita kanálu | posílit / vypnout kanál | CRM | osobní data do dashboardu
+activation_by_source | Který kanál přivádí dobré zákazníky | změnit investice | produkt + CRM agregace | obsah zákaznické práce
+```
+
+Marketingová analytika nemá být vševědoucí. Má být užitečná.
+
+### 9. Privacy-first pravidla plánu
+
+Marketingový plán musí mít vlastní privacy pravidla, jinak se privacy-first hodnota rozpadne při prvním tlaku na rychlé výsledky.
+
+Minimum:
+
+- Žádné reklamní pixely bez jasného účelu, vlastníka a datové mapy.
+- Žádné social share widgety, které načítají třetí strany bez interakce.
+- Formuláře sbírají jen data potřebná pro slíbený další krok.
+- Newsletter je oddělený od kontaktního formuláře.
+- RSS a přímé odkazy jsou dostupné jako alternativa k e-mailu.
+- Do analytiky neposílejte e-mail, telefon, text poptávky ani obsah zákaznických dat.
+- U každého nástroje víte region, retenci, subdodavatele a export.
+- Staré kontakty mají retenční pravidlo.
+- Odhlášení z newsletteru je jednoduché.
+- Při outboundu ověřujete pravidla pro danou zemi a kanál.
+
+Evropská komise u GDPR principů připomíná transparentnost, omezení účelu, minimalizaci dat a omezení uložení ([European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en)). ÚOOÚ u obchodních sdělení uvádí, že volně dostupné kontaktní údaje na internetu nelze použít k rozesílání reklamních nabídek e-mailem a že žádost o souhlas poslaná e-mailem může sama být obchodním sdělením ([ÚOOÚ: Často kladené otázky k zákonu č. 480/2004 Sb.](https://uoou.gov.cz/cinnost/obchodni-sdeleni/casto-kladene-otazky-k-zakonu-c-4802004-sb)). Praktický závěr: marketingový plán nesmí počítat se spamem jako akvizičním kanálem. To není odvaha. To je provozní riziko s mizerným vkusem.
+
+### 10. Měsíční rytmus
+
+Marketing funguje lépe jako rytmus než jako nárazová akce. Pro malý tým stačí jednoduchý měsíční cyklus.
+
+Týden 1: Učení
+
+- Projít nové leady, sales hovory a support dotazy.
+- Vybrat jednu opakovanou otázku zákazníků.
+- Zkontrolovat, jestli ji web nebo obsah už dobře řeší.
+
+Týden 2: Tvorba
+
+- Napsat nebo zlepšit jeden důležitý obsah.
+- Přidat důkaz, příklad, checklist nebo rozhodovací tabulku.
+- Zkontrolovat zdroje u aktuálních a právních tvrzení.
+
+Týden 3: Distribuce
+
+- Publikovat na vlastním webu.
+- Přidat do RSS.
+- Připravit sociální výtahy s přímým odkazem.
+- Poslat do newsletteru jen pokud to odpovídá slibu odběru.
+- Dát odkaz sales a supportu.
+
+Týden 4: Vyhodnocení a úklid
+
+- Zkontrolovat kvalitu návštěv, prokliků a leadů.
+- Dopsat interní poznámku: co fungovalo, co ne.
+- Odstranit jeden zbytečný skript, obsah nebo formulářové pole, pokud se najde.
+- Rozhodnout další otázku na příští měsíc.
+
+Tento rytmus není velkolepý. Právě proto je použitelný.
+
+### 11. Kvartální plán
+
+Kvartální marketingový plán by měl být dost krátký, aby přežil realitu.
+
+Šablona:
+
+```text
+Kvartál:
+Hlavní cíl:
+Primární segment:
+Hlavní obsahový pilíř:
+Klíčová nabídka:
+Hlavní důkaz, který vytvoříme:
+Kanál, který posílíme:
+Kanál, který omezíme nebo vypneme:
+Metriky úspěchu:
+Privacy úkol:
+Rizika:
+```
+
+Příklad:
+
+```text
+Hlavní cíl: Získat 8 kvalifikovaných rozhovorů s B2B firmami, které řeší klientské reportování.
+Obsahový pilíř: SaaS MVP a privacy-first provoz.
+Klíčová nabídka: otevřený checklist "Je váš interní proces připravený na klientský portál?"
+Hlavní důkaz: case study nebo anonymizovaný příklad workflow.
+Kanál k posílení: web + RSS + LinkedIn distribuce.
+Kanál k omezení: obecné posty bez odkazu na rozhodovací otázku.
+Metriky: kvalifikované poptávky, demo hovory, aktivované piloty, otázky ze sales.
+Privacy úkol: audit externích skriptů a formulářových eventů.
+```
+
+Jedna dobrá kvartální sázka je lepší než deset polovičních kampaní. Marketing nemá dokazovat, že tým umí být všude. Má dokazovat, že tým umí být relevantní.
+
+### 12. Co vědomě nedělat
+
+Plán bez seznamu "neděláme" je jen pozvánka k bobtnání.
+
+Příklady:
+
+- Nebudeme kupovat databáze kontaktů.
+- Nebudeme používat reklamní pixely na celý web.
+- Nebudeme zamykat základní checklisty za povinný e-mail.
+- Nebudeme zakládat nový sociální kanál bez vlastníka.
+- Nebudeme psát články mimo hlavní pilíře jen proto, že jsou trendy.
+- Nebudeme měřit session replay, pokud nemáme konkrétní výzkumný důvod a jasné privacy posouzení.
+- Nebudeme posílat newsletter lidem z kontaktního formuláře bez samostatné volby.
+
+Tento seznam šetří čas i důvěru. A občas také nervy, což je podceňovaná marketingová metrika.
+
+### Praktická vyplněná mini šablona
+
+```text
+Období: Q2 2026
+Segment: B2B firmy v Evropě, které chtějí převést ruční klientský reporting do portálu.
+Hlavní situace: tým skládá reporty z e-mailů, tabulek a interních poznámek.
+Positioning: privacy-first klientský portál pro opakované B2B reportování.
+Obsahové pilíře: SaaS MVP, privacy-first provoz, prodejní web, analytika bez šmírování.
+Hlavní důkaz: anonymizovaný workflow "od tabulky k portálu".
+Lead nabídka: otevřený checklist bez registrace + dobrovolná konzultace.
+Kanály: web, RSS, newsletter 1x měsíčně, LinkedIn výtahy, partnerské doporučení.
+Měření: CTA kliky, odeslané formuláře, kvalifikované leady, demo hovory, piloty.
+Privacy pravidla: žádné reklamní pixely, žádné osobní údaje v analytických eventech, oddělený newsletter souhlas.
+Měsíční rytmus: jedna zákaznická otázka -> jeden obsah -> jedna distribuce -> jedno vyhodnocení.
+Neděláme: koupě databází, povinný e-mail za checklist, nový kanál bez vlastníka.
+```
+
+Takový plán není dokonalý, ale dá se podle něj pracovat hned. A hlavně se dá po měsíci vyhodnotit.
+
+### Marketingový plán checklist
+
+- Má plán jeden hlavní segment?
+- Je popsaná konkrétní situace zákazníka, ne jen obor?
+- Máte inventuru rozhodovacích otázek zákazníka?
+- Je positioning napsaný jako pracovní věta?
+- Víte, jaké důkazy chybí a kde je použijete?
+- Má každý kanál jasný účel, vlastníka a metriku kvality?
+- Stavíte vlastní web, RSS a přímé odkazy jako základ distribuce?
+- Jsou obsahové pilíře propojené s produktovou strategií?
+- Má každý důležitý obsah přirozený další krok?
+- Měříte kvalitu leadů a aktivaci, ne jen návštěvnost a dosah?
+- Neposíláte osobní údaje do obecné analytiky?
+- Je newsletter oddělený od běžného kontaktu?
+- Máte pravidla pro obchodní sdělení, souhlas, odhlášení a retenci kontaktů?
+- Probíhá měsíční review, kde se něco zlepší nebo odstraní?
+- Existuje seznam aktivit, které tento kvartál vědomě neděláte?
+
+Marketingový plán je dobrý tehdy, když zmenšuje počet náhodných aktivit a zvětšuje počet užitečných rozhodnutí. Nemá udělat z týmu mediální továrnu. Má pomoci správným lidem najít správné odpovědi, získat důvěru a udělat další krok bez toho, aby se z nich stala surovina pro datový kombajn.
+
+### Zdroje kapitoly
+
+- [GOV.UK: Content design - User needs](https://www.gov.uk/guidance/content-design/user-needs)
+- [Google Search Central: Creating helpful, reliable, people-first content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)
+- [GOV.UK Service Manual: Using performance data to improve your service](https://www.gov.uk/service-manual/measuring-success/using-data-to-improve-your-service-an-introduction)
+- [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en)
+- [ÚOOÚ: Často kladené otázky k zákonu č. 480/2004 Sb.](https://uoou.gov.cz/cinnost/obchodni-sdeleni/casto-kladene-otazky-k-zakonu-c-4802004-sb)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -9687,3 +10114,4 @@ Produktová strategie má být živá, ale ne tekutá. Když se mění každý t
 - 2026-05-06: Dopsána kapitola 33 jako checklist pro launch: rozsah, kritéria, obsah, smoke test, měření, privacy-first provoz, rollback, incident režim, support a vyhodnocení úspěchu.
 - 2026-05-06: Dopsána kapitola 34 jako checklist pro technický audit: rozsah, inventura, dostupnost, výkon, přístupnost, SEO, bezpečnost, privacy-first datová stopa, provoz a prioritizace nálezů.
 - 2026-05-06: Dopsána kapitola 35 jako šablona produktové strategie: segment, problém, hodnotová nabídka, produktové hranice, business model, go-to-market, privacy-first principy, metriky, rizika a roadmapa.
+- 2026-05-06: Dopsána kapitola 36 jako šablona marketingového plánu: segment, otázky zákazníka, positioning, důkazy, kanály, obsahové pilíře, měření, privacy-first pravidla a měsíční rytmus.
