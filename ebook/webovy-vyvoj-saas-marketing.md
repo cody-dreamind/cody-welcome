@@ -8138,6 +8138,480 @@ Tento zápis je důležitější než pocit z demo hovoru. Pocity stárnou rychl
 
 SaaS MVP má být malý, ale dospělý ve správných místech. Může mít málo funkcí. Nemůže mít mlhavý segment, nechráněná data, žádnou aktivaci a neurčitý pilot. Nejlepší první verze není ta, která vypadá největší. Je to ta, která nejrychleji řekne pravdu.
 
+## Kapitola 32: Checklist pro privacy-first analytiku
+
+Privacy-first analytika není analytika bez čísel. Je to analytika, která začíná otázkou: jaké rozhodnutí potřebujeme udělat a jak málo dat k tomu stačí? Pokud tým nedokáže odpovědět, proč event existuje, jak dlouho se drží a kdo k němu má přístup, analytika se rychle změní z nástroje řízení na datovou půdu, kde roste všechno, jen ne důvěra.
+
+U webu a SaaS produktu se často sbírá víc dat, než je potřeba, protože nástroje to umí. Nahrávání session, heatmapy, reklamní pixely, cross-device identifikace, enrichment kontaktů, dlouhá retence, exporty do reklamních systémů. Všechno vypadá jako "lepší měření", dokud si někdo nepoloží jednoduchou otázku: co podle toho opravdu změníme?
+
+Evropská komise u GDPR principů připomíná omezení účelu, minimalizaci dat, omezení uložení, integritu, důvěrnost a odpovědnost ([European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en)). Prakticky: analytika má mít účel, přiměřený rozsah, časový limit a vlastníka. Ne jen hezký dashboard.
+
+Tento checklist je pro tři situace:
+
+1. Spouštíte nový web a chcete měřit, jestli funguje.
+2. Stavíte SaaS a potřebujete produktovou analytiku bez šmírování.
+3. Auditujete starý setup, kde už nikdo neví, proč běží tolik skriptů.
+
+### 1. Začněte rozhodnutím
+
+Nejprve napište seznam rozhodnutí, která má analytika podporovat. Ne seznam eventů. Ne seznam nástrojů. Rozhodnutí.
+
+Příklady dobrých otázek:
+
+- Které stránky vedou ke kvalifikované poptávce?
+- Kde lidé odpadávají v kontaktním formuláři?
+- Který článek pomáhá návštěvníkovi přejít na službu nebo demo?
+- Kolik účtů dosáhne aktivace do sedmi dnů?
+- Který onboarding krok brzdí první hodnotu?
+- Která integrace opakovaně selhává a ohrožuje retenci?
+
+Slabé otázky:
+
+- Co všechno lidé na webu dělají?
+- Jak dlouho se dívají na každou sekci?
+- Můžeme si nahrát návštěvy pro jistotu?
+- Co kdyby se nám jednou hodilo vědět víc?
+
+Analytika má začínat větou:
+
+```text
+Potřebujeme vědět [signál], abychom mohli rozhodnout [akce].
+```
+
+Příklad:
+
+```text
+Potřebujeme vědět, kolik návštěvníků z článku o SaaS MVP klikne na checklist nebo konzultaci, abychom rozhodli, jestli má smysl rozšířit tento obsahový cluster.
+```
+
+Tato věta automaticky omezuje rozsah. Nepotřebujete znát jméno návštěvníka, obsah jeho zprávy ani nahrávku obrazovky. Potřebujete vztah mezi stránkou, akcí a dalším krokem.
+
+Codyho komentář: dashboard bez rozhodovací otázky je akvárium pro čísla. Hezky se na to kouká, ale ryby vám firmu neřídí.
+
+### 2. Rozdělte webovou, produktovou a obchodní analytiku
+
+Jedna analytika nemá dělat všechno. Webová analytika, produktová analytika a CRM mají jiné účely a jiné datové hranice.
+
+Webová analytika odpovídá:
+
+- které stránky se čtou,
+- odkud přichází návštěvy,
+- které CTA funguje,
+- jestli formulář technicky prochází,
+- jaký obsah vede k dalšímu kroku.
+
+Produktová analytika odpovídá:
+
+- jestli účet dosáhl aktivace,
+- které workflow se dokončuje,
+- kde onboarding selhává,
+- které funkce drží retenci,
+- které provozní problémy brzdí hodnotu.
+
+Obchodní analytika odpovídá:
+
+- který lead se změnil v příležitost,
+- jaký segment konvertuje,
+- jaký kanál přivádí platící zákazníky,
+- jaké jsou důvody ztráty,
+- jak se mění MRR, CAC a payback.
+
+Tyto vrstvy propojujte jen tam, kde existuje jasný účel. Webová analytika nepotřebuje text poptávky. Produktová analytika nepotřebuje osobní poznámky obchodníka. CRM nepotřebuje každé kliknutí anonymního návštěvníka.
+
+Praktická hranice:
+
+- Do webové analytiky posílejte stránku, zdroj, typ akce a technický kontext.
+- Do produktové analytiky posílejte stav workflow, tenant, plán a anonymizované nebo pseudonymizované identifikátory podle potřeby.
+- Do CRM posílejte jen kontakty, které samy udělaly konkrétní obchodní krok, plus účel, zdroj a další krok.
+
+### 3. Udělejte mapu datových toků
+
+Před nasazením nebo auditem analytiky napište jednoduchou mapu. Stačí tabulka.
+
+```text
+Název dat | Účel | Nástroj | Osobní údaje? | Region | Retence | Přístup | Poznámka
+page_view | Agregovaná návštěvnost stránek | Web analytics | ne / omezeně | EU | 13 měsíců | marketing | bez reklamního profilu
+contact_submitted | Měření dokončení formuláře | Web analytics | ne | EU | 13 měsíců | marketing | neobsahuje text zprávy
+lead_contact | Odpověď na poptávku | CRM | ano | EU | podle obchodního účelu | sales | obsah formuláře jen v CRM
+activation_reached | Produktová aktivace | Product analytics | pseudonym | EU | 24 měsíců | produkt | bez obsahu zákaznických dat
+```
+
+U každého řádku se ptejte:
+
+- Proč data sbíráme?
+- Jaké rozhodnutí podporují?
+- Jsou osobní nebo citlivá?
+- Kde fyzicky a právně končí?
+- Kdo k nim má přístup?
+- Jak dlouho je držíme?
+- Jak je smažeme nebo exportujeme, pokud to bude potřeba?
+
+Evropská komise u principů zpracování uvádí, že organizace má sbírat jen osobní data nezbytná pro účel a uchovávat je jen po dobu potřebnou pro daný účel ([European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en)). Datová mapa je praktický způsob, jak tuto větu přeložit do provozu.
+
+### 4. Eventy navrhujte jako produktový jazyk
+
+Dobré eventy se čtou jako příběh produktu. Špatné eventy se čtou jako výpis technických kliků.
+
+Slabé eventy:
+
+```text
+button_clicked
+modal_opened
+section_viewed
+link_123_clicked
+```
+
+Silnější eventy:
+
+```text
+contact_started
+contact_submitted
+rss_subscribed
+demo_requested
+account_created
+sample_data_opened
+first_project_created
+teammate_invited
+activation_reached
+export_requested
+plan_downgraded
+```
+
+Event má mít:
+
+- název podle obchodního nebo produktového významu,
+- jasného vlastníka,
+- účel,
+- minimální properties,
+- pravidlo retence,
+- poznámku, jestli obsahuje osobní údaje.
+
+Příklad event specifikace:
+
+```text
+Event: contact_submitted
+Účel: měřit dokončení poptávkového formuláře podle stránky a segmentu
+Kdy vzniká: po úspěšném odeslání formuláře
+Properties: page_slug, form_type, segment_choice, has_project_url
+Co neposílat: e-mail, jméno, telefon, text zprávy
+Vlastník: marketing + web
+Retence: 13 měsíců
+```
+
+Toto je privacy-first analytika v praxi. Měříte obchodní signál, ale neukládáte osobní obsah do nástroje, který ho nepotřebuje.
+
+### 5. Formuláře: analytika nesmí kopírovat obsah zpráv
+
+Kontaktní formulář je častý únik dat do analytiky. Tým chce vědět, "který formulář funguje", a omylem začne posílat do eventů e-mail, jméno, telefon, název firmy, rozpočet nebo celý text poptávky. To je zbytečné a rizikové.
+
+Analytika formuláře má měřit:
+
+- z jaké stránky formulář přišel,
+- zda byl zahájen,
+- zda byl úspěšně odeslán,
+- zda nastala validační chyba,
+- jaký typ kontaktu člověk zvolil,
+- zda byla přiložena volitelná URL nebo soubor, pokud je to relevantní.
+
+Analytika formuláře nemá měřit:
+
+- e-mail,
+- telefon,
+- celé jméno,
+- obsah zprávy,
+- název firmy bez dobrého důvodu,
+- citlivé přílohy,
+- interní lead score navázané na osobu bez jasného účelu.
+
+Příklad bezpečnějšího eventu:
+
+```txt
+event: contact_submitted
+properties:
+  page_slug: "saas-mvp"
+  form_type: "consultation"
+  segment_choice: "b2b"
+  has_project_url: true
+```
+
+Obsah formuláře patří do systému pro zpracování poptávky, ne do obecné analytiky. Tam má mít omezený přístup, jasnou retenci a proces výmazu.
+
+### 6. Cookies a souhlas: nejdřív zmenšit potřebu souhlasu
+
+Cookie banner není strategie. Je to rozhraní pro volbu, pokud používáte technologie, které volbu vyžadují. Lepší první krok je zmenšit počet technologií, které souhlas vůbec potřebují.
+
+Rozhodovací strom:
+
+1. Je měření nutné pro službu, kterou uživatel výslovně chce použít?
+2. Pokud ne, jde o čistě agregované měření publika pro provozovatele webu?
+3. Používají se cookies nebo podobné identifikátory?
+4. Sleduje se člověk napříč weby nebo službami?
+5. Posílají se data do reklamních systémů?
+6. Spojují se data s CRM, e-mailem nebo produktovou identitou?
+7. Existuje méně invazivní způsob měření?
+
+CNIL u audience measurement uvádí, že některé analytické cookies mohou být za splnění přísných podmínek vyňaté ze souhlasu, například pokud slouží jen měření publika pro vydavatele, nepoužívají se ke sledování napříč weby a nevzniká kombinace s dalšími daty ([CNIL: Cookies - solutions pour les outils de mesure d'audience](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience)). To není univerzální rada pro každý stát, nástroj a setup. Je to ale dobrý směr: pokud chcete méně bannerů, nejdřív měřte méně invazivně.
+
+Pokud souhlas potřebujete:
+
+- přijetí a odmítnutí mají být stejně srozumitelné,
+- účely mají být konkrétní,
+- volby nemají být předem zaškrtnuté,
+- odmítnutí nesmí rozbít základní obsah, pokud nejde o nezbytnou technologii,
+- odvolání má být stejně snadné jako udělení.
+
+EDPB ve vodítkách k souhlasu pracuje s požadavkem svobodného, konkrétního, informovaného a jednoznačného souhlasu a připomíná, že odvolání má být snadné ([EDPB: Guidelines 05/2020 on consent](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)).
+
+### 7. Retence: nastavte konec datům už při vzniku
+
+Analytická data nemají zůstat navždy jen proto, že úložiště je levné. Levné úložiště není levná odpovědnost.
+
+Praktický návrh retence:
+
+- Webová agregovaná analytika: typicky 12-25 měsíců podle rozhodovacího cyklu.
+- Detailní technické logy: krátce, například dny až týdny podle provozní potřeby.
+- Bezpečnostní logy: podle rizika, právního a smluvního kontextu.
+- Produktové aktivační eventy: tak dlouho, aby šlo porovnat kohorty a retenci.
+- CRM leady: podle obchodního účelu a poslední relevantní interakce.
+- Exporty a debug přílohy: co nejkratší praktická doba.
+
+Napište si pravidlo:
+
+```text
+Data držíme [doba], protože potřebujeme [účel]. Po uplynutí doby je [mažeme / agregujeme / anonymizujeme].
+```
+
+Příklad:
+
+```text
+Detailní eventy onboardingového funnelu držíme 24 měsíců, protože porovnáváme roční kohorty a změny onboardingového toku. Po 24 měsících zůstává jen agregovaný report podle měsíce, segmentu a plánu.
+```
+
+Toto je dospělejší než "data máme, protože nástroj je má".
+
+### 8. Přístupy: dashboard není veřejná nástěnka
+
+Analytika často obsahuje víc informací, než si tým myslí: obchodní výkon, zdroje leadů, produktové používání, billing stav, technické chyby, někdy i pseudonymizované identifikátory. Ne každý v týmu potřebuje všechno.
+
+Nastavte role:
+
+- Marketing vidí webové agregace, kampaně, obsah a formulářové konverze.
+- Produkt vidí aktivaci, workflow a retenční signály.
+- Support vidí signály potřebné pro péči o konkrétní účet, ne obecné sledování lidí.
+- Sales vidí CRM a obchodní stav, ne každý anonymní pohyb na webu.
+- Finance vidí billing a revenue metriky.
+- Admin přístupy jsou omezené, auditované a pravidelně kontrolované.
+
+Checklist přístupů:
+
+- Má každý dashboard vlastníka?
+- Víme, kdo k němu má přístup?
+- Jsou sdílené odkazy zakázané nebo omezené?
+- Jsou externí agentury omezené jen na potřebný rozsah?
+- Máme offboarding checklist pro odebrání přístupů?
+- Je přístup k raw datům přísnější než k agregovanému reportu?
+
+Privacy-first analytika není jen o sběru. Je i o tom, kdo se na data dívá.
+
+### 9. Dodavatelé: každý analytický nástroj je příjemce dat
+
+Nástroj nevybírejte jen podle grafů. Ptejte se:
+
+- Kde jsou data uložena?
+- Je dostupný EU region nebo evropský poskytovatel?
+- Kdo jsou subdodavatelé?
+- Jaká je výchozí retence?
+- Používá poskytovatel data pro vlastní účely, benchmarking, AI trénování nebo reklamu?
+- Jak funguje export a výmaz?
+- Dá se nástroj provozovat first-party nebo self-hosted?
+- Jde vypnout nepotřebné funkce?
+- Má nástroj DPA nebo odpovídající smluvní dokumentaci?
+
+Privacy-first preference:
+
+- first-party měření,
+- EU region,
+- agregovaná data,
+- žádné reklamní profilování,
+- jasná retence,
+- jednoduchý export,
+- možnost provozovat bez cookies nebo s minimálními cookies,
+- žádné automatické sdílení s reklamními platformami.
+
+Není cílem mít ideologicky čistý stack za každou cenu. Cílem je vědět, proč nástroj používáte, jaká data dostává a jak ho vypnete, když přestane dávat smysl.
+
+### 10. Kontrola externích skriptů
+
+Před spuštěním a potom pravidelně projděte, co se na webu skutečně načítá. Ne co si myslíte, že se načítá. Skutečnost bývá kreativnější.
+
+Kontrolujte:
+
+- analytics skripty,
+- tag manager,
+- reklamní pixely,
+- chat widgety,
+- heatmapy,
+- session replay,
+- fonty,
+- mapy,
+- videa,
+- social embed prvky,
+- A/B testování,
+- error tracking,
+- customer support widgety.
+
+U každého skriptu napište:
+
+```text
+Skript:
+Účel:
+Vlastník:
+Data:
+Region:
+Souhlas potřeba:
+Alternativa:
+Rozhodnutí: ponechat / omezit / odstranit
+```
+
+Praktické pravidlo: pokud nikdo v týmu neumí vysvětlit, jaké rozhodnutí skript podporuje, skript odstraňte nebo vypněte dočasně a sledujte dopad. Většina webů je po takovém úklidu rychlejší, jednodušší a právně klidnější. Krásná kombinace, skoro podezřelá.
+
+### 11. Produktová analytika v SaaS: měřte hodnotu účtu, ne obsah zákazníka
+
+U SaaS produktu je lákavé měřit všechno, protože produkt "je náš". Jenže data uvnitř produktu jsou často zákaznická, citlivá a obchodně důvěrná. Produktová analytika má měřit, zda produkt dodává hodnotu, ne číst obsah práce zákazníka.
+
+Dobré produktové eventy:
+
+- `account_activated`
+- `core_workflow_completed`
+- `teammate_invited`
+- `integration_connected`
+- `integration_failed`
+- `report_exported`
+- `role_updated`
+- `api_key_rotated`
+- `billing_plan_changed`
+
+Riskantní eventy:
+
+- text komentáře,
+- název klienta,
+- obsah dokumentu,
+- e-mail v property,
+- celý vyhledávací dotaz, pokud může obsahovat osobní údaje,
+- URL s tokeny nebo citlivými parametry,
+- kompletní payload API requestu.
+
+U každého SaaS eventu se ptejte:
+
+- Pomáhá měřit aktivaci, retenci, bezpečnost nebo provoz?
+- Stačí tenant nebo anonymní ID?
+- Stačí počet, stav nebo typ místo obsahu?
+- Má zákazník v dokumentaci vysvětleno, co měříte?
+- Neodchází data do marketingového nástroje?
+
+### 12. AI, support a analytics: pozor na druhotné použití dat
+
+Moderní nástroje rády slibují "insights" ze všeho: support tiketů, nahrávek hovorů, formulářů, chatu, produktových eventů, CRM a dokumentace. To může být užitečné, ale také nebezpečně rozmazává účel.
+
+Před použitím AI nebo automatické analýzy nad zákaznickými daty si napište:
+
+- Jaký konkrétní problém řešíme?
+- Jaká data do analýzy vstupují?
+- Jsou mezi nimi osobní údaje, obchodní tajemství nebo citlivý obsah?
+- Kde se zpracovávají?
+- Používají se k trénování nebo zlepšování služby poskytovatele?
+- Jak dlouho se drží prompty, výstupy a embeddingy?
+- Jak zákazník zjistí, že se tato analýza používá?
+- Dá se funkce vypnout?
+
+Privacy-first analytika nemá používat zákaznický obsah jako surovinu pro "nějaké poznatky", pokud stačí agregované eventy a štítky. Pokud obsah opravdu potřebujete analyzovat, udělejte z toho samostatný účel, ne vedlejší efekt nástroje.
+
+### 13. Minimalistický dashboard
+
+Začněte jedním dashboardem pro web a jedním pro produkt.
+
+Webový dashboard:
+
+- návštěvy důležitých stránek,
+- zdroje návštěv agregovaně,
+- kliky na hlavní CTA,
+- odeslané formuláře podle stránky,
+- RSS odběry,
+- technické chyby formuláře,
+- top obsah podle dalšího kroku.
+
+Produktový dashboard:
+
+- nové účty podle segmentu,
+- aktivace do 7 nebo 14 dnů,
+- dokončení hlavního workflow,
+- pozvaní členové týmu,
+- selhání integrací,
+- exporty,
+- churn a downgrade signály,
+- support štítky podle oblasti.
+
+Ke každé metrice přidejte rozhodovací otázku:
+
+```text
+Metrika: activation_reached do 7 dnů
+Otázka: Zlepšuje onboarding první hodnotu pro správný segment?
+Akce při poklesu: projít účty, které uvízly, a upravit první krok nebo prázdný stav.
+```
+
+Bez akce je metrika jen dekorace.
+
+### 14. Audit privacy-first analytiky za 60 minut
+
+Jednou za kvartál projděte tento rychlý audit:
+
+1. Otevřete web v anonymním okně a zapište všechny externí domény.
+2. Zkontrolujte, které cookies vzniknou před souhlasem.
+3. Projděte tag manager a smažte historické tagy bez vlastníka.
+4. Ověřte, že formulářové eventy neobsahují osobní údaje.
+5. Zkontrolujte retenci ve webové analytice, CRM a produktové analytice.
+6. Ověřte, kdo má přístup k dashboardům a raw datům.
+7. Porovnejte realitu s datovou mapou.
+8. Zkontrolujte privacy stránku: odpovídá skutečnému měření?
+9. Vyberte jeden skript nebo event k odstranění.
+10. Zapište datum kontroly a vlastníka další revize.
+
+Výstup auditu má být konkrétní:
+
+```text
+Odstraňujeme starý heatmap tag, protože posledních 6 měsíců nepodpořil žádné rozhodnutí a posílá data třetí straně mimo náš hlavní analytický setup.
+```
+
+To je lepší než "audit proběhl". Audit, po kterém se nic nezmění, je často jen slavnostní čtení seznamu problémů.
+
+### Jednostránkový checklist privacy-first analytiky
+
+- Má každý event jasné rozhodnutí, které podporuje?
+- Rozlišujete webovou, produktovou a obchodní analytiku?
+- Existuje datová mapa: účel, nástroj, region, retence, přístup?
+- Sbíráte do analytiky jen data nutná pro daný účel?
+- Formulářové eventy neobsahují e-mail, telefon ani text zprávy?
+- Produktové eventy měří workflow, ne obsah zákaznické práce?
+- Víte, které cookies a podobné technologie vznikají před souhlasem?
+- Pokud používáte souhlas, je odmítnutí stejně snadné jako přijetí?
+- Má analytika nastavenou retenci a plán agregace nebo mazání?
+- Jsou dashboardy přístupné jen lidem, kteří je potřebují?
+- Má každý externí skript vlastníka, účel a záznam v datové mapě?
+- Neposíláte analytická data do reklamních platforem bez jasného důvodu?
+- Máte preferenci pro EU region, first-party měření a minimum třetích stran?
+- Kontrolujete pravidelně tag manager, cookies a externí domény?
+- Privacy stránka odpovídá skutečnému měření?
+- Umíte zákazníkovi jednou větou vysvětlit, co měříte a proč?
+
+Privacy-first analytika je ve výsledku jednoduchá disciplína: méně dat, lepší otázky, jasnější rozhodnutí. Když měříte méně invazivně, často získáte přesně to, co potřebujete: signál pro produkt, marketing a obchod. Ne iluzi vševědoucnosti. Ta je drahá, křehká a dost často i protivná.
+
+### Zdroje kapitoly
+
+- [European Commission: Principles of the GDPR](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en)
+- [European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en)
+- [CNIL: Cookies - solutions pour les outils de mesure d'audience](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience)
+- [EDPB: Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -8171,3 +8645,4 @@ SaaS MVP má být malý, ale dospělý ve správných místech. Může mít mál
 - 2026-05-06: Dopsána kapitola 29 o sales procesu pro malé týmy: kvalifikace, pipeline, discovery, demo, nabídky, follow-up, CRM, outbound, handoff a privacy-first obchodní data.
 - 2026-05-06: Dopsána kapitola 30 jako praktický checklist pro nový web: záměr, nabídka, struktura, obsah, UX, technický základ, privacy-first nastavení, SEO, testování a launch.
 - 2026-05-06: Dopsána kapitola 31 jako checklist pro SaaS MVP: segment, problém, workflow, rozsah, data, role, aktivace, pilot, technický základ, měření, support a rozhodnutí po MVP.
+- 2026-05-06: Dopsána kapitola 32 jako checklist pro privacy-first analytiku: rozhodovací otázky, datová mapa, eventy, formuláře, cookies, retence, přístupy, dodavatelé, SaaS produktová analytika a kvartální audit.
