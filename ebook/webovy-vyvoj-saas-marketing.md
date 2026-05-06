@@ -6514,6 +6514,265 @@ E-mail je dobrý sluha a protivný pán. Když ho používáte férově, s jasn�
 - [EDPB: Guidelines 05/2020 on consent under Regulation 2016/679](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-052020-consent-under-regulation-2016679_en)
 - [RSS Advisory Board: RSS 2.0 Specification](https://www.rssboard.org/rss-specification)
 
+## Kapitola 27: Sociální sítě bez závislosti na algoritmu
+
+Sociální sítě jsou užitečné, ale nepatří jim vaše publikum. Patří jim rozhraní, pravidla, dosah, účet, reklamní inventář a většina dat o chování lidí. Firma, která na nich staví celý marketing, často zjistí až pozdě, že nemá distribuční strategii. Má jen návyk publikovat do cizího systému a doufat, že algoritmus bude mít dobrou náladu.
+
+To neznamená, že máte sociální sítě ignorovat. Znamená to používat je jako distribuční vrstvu, ne jako primární domov obsahu. Primární domov má být vlastní web, vlastní doména, RSS feed, e-mailový seznam s jasným souhlasem a přímé vztahy se zákazníky. Sociální sítě pak slouží k objevování, konverzaci a opakovanému připomenutí, ale ne jako jediná cesta k publiku.
+
+Praktický cíl této kapitoly:
+
+1. Publikovat tak, aby obsah přežil změnu platformy.
+2. Měřit dopad bez zbytečného sledování lidí.
+3. Budovat komunitu a důvěru, ne jen honit dosah.
+4. Držet data, archiv a kontakty pod kontrolou firmy.
+5. Používat algoritmy jako bonus, ne jako základ obchodního modelu.
+
+Evropský kontext k tomu dává dobrý rámec. Digital Services Act vyžaduje u platforem větší transparentnost a dává uživatelům víc práv včetně vysvětlení doporučovacích systémů; velmi velké platformy musí nabídnout alespoň jednu možnost doporučování, která není založená na profilování ([European Commission: User rights under the Digital Services Act](https://digital-strategy.ec.europa.eu/en/factpages/user-rights-under-digital-services-act)). Digital Markets Act zase míří na férovější a otevřenější digitální trhy a u gatekeeperů řeší mimo jiné přístup k datům a portabilitu ([European Commission: Digital Markets Act](https://digital-markets-act.ec.europa.eu/index_en), [European Commission: DMA citizens Q&A](https://digital-markets-act.ec.europa.eu/citizens-and-whistleblower-portal/eu-citizens-qa_en)). Pro malou firmu z toho plyne jednoduchý závěr: i Evropa říká, že platformová moc není drobnost. Nespoléhejte na ni slepě.
+
+### Vlastní web je archiv i zdroj pravdy
+
+Každý důležitý obsah by měl mít stabilní URL na vlastním webu. Článek, case study, produktová novinka, checklist, návod, podcastová poznámka, záznam webináře i landing page. Sociální post může být krátký výtah, komentář nebo pozvánka, ale ne jediná kopie hodnoty.
+
+Proč:
+
+- Na vlastním webu rozhodujete o struktuře, URL, interních odkazech a aktualizacích.
+- Obsah se dá vyhledat, citovat, opravit a propojit s dalšími stránkami.
+- Můžete nabídnout RSS, přímé odkazy, kanonické URL a dostupnější formát.
+- Nepotřebujete, aby člověk měl účet na konkrétní platformě.
+- Měření lze nastavit privacy-first a agregovaně.
+- Při změně platformy nepřijdete o archiv.
+
+Praktické pravidlo: co má dlouhodobou hodnotu, patří nejdřív na web. Co má krátkodobý konverzační charakter, může jít nejdřív na sociální síť. I tam ale přemýšlejte, jestli by z dobrého vlákna, komentáře nebo odpovědi neměl vzniknout článek.
+
+Příklad:
+
+Slabý postup:
+"Napíšeme dlouhý LinkedIn post o tom, jak vybrat privacy-first analytiku, a uvidíme, jak se chytí."
+
+Silnější postup:
+"Napíšeme praktický článek na web: jak vybrat privacy-first analytiku. Na LinkedIn dáme tři konkrétní rozhodovací otázky a odkaz. Do RSS jde celý článek. V newsletteru za měsíc pošleme výběr tří podobných návodů."
+
+První postup sází na platformu. Druhý z platformy bere distribuci, ale hodnotu ukládá doma.
+
+### POSSE: publikujte doma, syndikujte ven
+
+IndieWeb používá zkratku POSSE: Publish on your Own Site, Syndicate Elsewhere. Princip je jednoduchý: primární publikace je na vlastním webu a kopie, upoutávky nebo výtahy jdou na další platformy ([IndieWeb: POSSE](https://indieweb.org/POSSE)).
+
+Pro firmu to není nostalgie po starém webu. Je to provozní disciplína:
+
+- Blog je zdroj pravdy.
+- Sociální sítě jsou distribuční kanály.
+- Newsletter je vztah s lidmi, kteří si ho vyžádali.
+- RSS je tichý kanál pro lidi, kteří chtějí kontrolu.
+- Obchodní CRM obsahuje jen data, která mají jasný účel.
+
+Jednoduchý POSSE workflow pro B2B firmu:
+
+1. Publikujte článek nebo novinku na vlastním webu.
+2. Připravte tři varianty sociálního postu podle platformy.
+3. V každé variantě dejte konkrétní hodnotu i bez kliknutí.
+4. Odkaz veďte na kanonickou URL, ne na zkracovač bez důvodu.
+5. Uložte sociální texty do repozitáře, CMS nebo content kalendáře.
+6. Po týdnu zapište, co fungovalo: otázky, odpovědi, kvalifikované návštěvy, ne jen lajky.
+7. Z dobrých komentářů doplňte FAQ, článek nebo další kapitolu obsahu.
+
+Tím sociální síť přestane být jednorázové vystřelení do prázdna. Stane se smyčkou zpětné vazby pro vlastní obsah.
+
+Codyho komentář: post, který zmizí za dva dny ve feedu, může být užitečný. Ale pokud v něm máte deset hodin know-how a nikde jinde neexistuje, je to obsahové hazardování. Algoritmus si kýchnul a vaše práce je pryč. Elegantní? Ani trochu. Běžné? Bohužel ano.
+
+### Nehonit dosah, měřit signály
+
+Dosah je svůdná metrika, protože vypadá velká. Pro byznys je ale často méně důležitý než kvalita signálu. Sto zobrazení od správných lidí může mít větší hodnotu než deset tisíc náhodných impresí.
+
+U sociálních sítí sledujte tři typy signálů:
+
+- Pozornost: zobrazení, přečtení, kliky, uložení, sdílení.
+- Důvěra: komentáře od relevantních lidí, odpovědi, citace, zmínky, přímé dotazy.
+- Obchodní dopad: kvalifikované návštěvy, demo poptávky, odpovědi na newsletter, rozhovory, návraty ke značce.
+
+Vanity metriky nejsou zakázané. Jen je nepleťte s výsledkem. Lajky mohou ukázat, že téma rezonuje. Samy o sobě ale neříkají, jestli lidé chápou nabídku, věří vám nebo se přiblížili rozhodnutí.
+
+Praktická tabulka pro vyhodnocení postu:
+
+```txt
+Téma:
+Platforma:
+Cílový čtenář:
+Primární cíl: povědomí / důvěra / návštěva / konverzace / lead
+Hlavní odkaz:
+Počet kvalifikovaných reakcí:
+Počet relevantních komentářů:
+Počet návštěv na vlastním webu:
+Počet navazujících dotazů:
+Co z toho doplníme do webu:
+Co příště zjednodušíme:
+```
+
+Tahle tabulka je méně sexy než graf dosahu. Ale pomůže rozhodovat.
+
+### Platformy vybírejte podle publika a kontroly
+
+Není potřeba být všude. Být všude často znamená být všude průměrně, nepravidelně a bez jasného důvodu. Vyberte platformy podle toho, kde je vaše publikum, jaký typ obsahu tam umíte dělat kvalitně a jak velké riziko platformové závislosti jste ochotní nést.
+
+Praktické otázky:
+
+- Jsou na platformě lidé, kteří skutečně rozhodují nebo ovlivňují nákup?
+- Umíte tam dlouhodobě publikovat formát, který nepůsobí nuceně?
+- Lze z platformy vést lidi na vlastní web bez zbytečného tření?
+- Dá se obsah exportovat nebo archivovat?
+- Jak platforma zachází s daty, měřením a reklamou?
+- Kolik času spolyká tvorba nativního obsahu oproti hodnotě výsledků?
+- Co se stane, když účet ztratí dosah nebo platforma změní pravidla?
+
+Pro české B2B SaaS nebo vývojářské studio může dávat smysl menší kombinace:
+
+- LinkedIn pro obchodní kontext, hiring, komentáře a case studies.
+- Vlastní blog pro evergreen obsah a SEO.
+- RSS pro technické a privacy-first publikum.
+- Newsletter pro výběr nejlepších materiálů.
+- Mastodon nebo jiný federovaný kanál pro otevřenější komunitní komunikaci, pokud tam publikum opravdu je.
+- YouTube nebo podcast jen tehdy, když máte sílu dělat pravidelně kvalitní formát.
+
+W3C ActivityPub je stabilní doporučení podporující interoperabilitu sociálního webu ([W3C: ActivityPub](https://www.w3.org/TR/activitypub/)). To neznamená, že každá firma má okamžitě zakládat federovaný server. Znamená to, že existuje jiný model než uzavřený feed jedné platformy. Pro privacy-first značku je dobré tyto modely sledovat a podle publika je prakticky zkoušet.
+
+### Obsah recyklujte, ale ne kopírováním
+
+Recyklace obsahu není lenost. Je to respekt k tomu, že lidé sledují různé kanály, mají různý kontext a ne každý viděl první verzi. Problém je, když tým jen zkopíruje stejný text všude a tváří se, že má multikanálovou strategii.
+
+Lepší přístup:
+
+- Z dlouhého článku udělejte krátký post s jednou tezí.
+- Z checklistu udělejte carousel nebo obrázkovou přílohu, pokud platforma ten formát podporuje.
+- Z komentářů udělejte FAQ.
+- Z interního rozhodovacího rámce udělejte veřejný návod.
+- Z případové studie udělejte sérii: problém, rozhodnutí, výsledek, poučení.
+- Z produktové změny udělejte changelog, krátký post a položku do newsletteru.
+
+Příklad pro článek "Jak nastavit privacy-first analytiku":
+
+- Blog: kompletní návod se zdroji a checklistem.
+- LinkedIn: tři otázky před výběrem analytiky.
+- RSS: celý článek nebo plný výpis podle strategie webu.
+- Newsletter: krátký úvod a odkaz ve výběru měsíce.
+- Sales materiál: jedna sekce do návrhu spolupráce.
+- Interní wiki: provozní checklist pro nové projekty.
+
+Jeden kus kvalitního obsahu tak obslouží více situací. Ne proto, že ho kopírujete, ale protože ho překládáte do různých rozhodovacích momentů.
+
+### Komentáře jsou výzkum, ne jen angažovanost
+
+Sociální sítě jsou silné tam, kde umožňují konverzaci. Komentáře, odpovědi, otázky a námitky jsou kvalitativní výzkum zadarmo. Ne vždy příjemný, občas chaotický, ale velmi užitečný.
+
+Sbírejte si:
+
+- Opakující se otázky.
+- Námitky proti ceně, složitosti nebo změně procesu.
+- Slova, která používají zákazníci místo vašeho interního žargonu.
+- Příklady situací, které jste v obsahu nepokryli.
+- Signály, že lidé nechápou rozdíl mezi službami.
+- Náměty na nové články, FAQ, demo nebo produktové funkce.
+
+Každý měsíc udělejte krátký review:
+
+1. Které téma vyvolalo nejkvalitnější komentáře?
+2. Jaká otázka se opakovala?
+3. Který post přivedl relevantní návštěvy na web?
+4. Který post měl velký dosah, ale žádný obchodní nebo obsahový dopad?
+5. Co doplníme do webu, aby příště nebylo nutné odpovídat ručně?
+
+Tady se sociální sítě mění z marketingového megafonu na produktový radar. A radar je výrazně užitečnější než křičet do feedu.
+
+### Privacy-first sociální distribuce
+
+Sociální sítě jsou často spojené s profilováním, remarketingem a reklamními pixely. Privacy-first přístup neříká, že reklama nebo placená distribuce nesmí nikdy existovat. Říká, že sběr a předávání dat musí mít jasný účel, přiměřený rozsah a obhajitelnou hodnotu pro firmu i uživatele.
+
+Výchozí pravidla:
+
+- Na web nedávejte sociální pixely jen proto, že je platforma nabízí.
+- Nepoužívejte social share widgety, které načítají třetí strany už při otevření stránky.
+- Preferujte obyčejné přímé odkazy na profily a sdílení.
+- U kampaní používejte rozumné UTM parametry bez osobních údajů.
+- Neimportujte zákaznické seznamy do reklamních systémů bez jasného právního a obchodního důvodu.
+- U lead formulářů na platformách zvažte, zda data raději nesbírat na vlastním webu s jasným vysvětlením.
+- Každý externí skript zapište do datové mapy: účel, poskytovatel, region, retence, přístup.
+
+Příklad: místo vloženého feedu z platformy na homepage použijte ručně vybraný blok "Z posledních poznámek" s odkazy na vlastní články nebo prosté odkazy na profily. Návštěvník nemusí při načtení webu posílat data platformě jen proto, aby viděl tři poslední příspěvky. Ano, není to tak automatické. Také to není tak invazivní. Zázrak rovnováhy, kdo by to čekal.
+
+### Krizový plán pro platformovou závislost
+
+Každý tým, který pravidelně publikuje na sociální síti, by měl mít jednoduchý plán pro případ, že se účet zablokuje, dosah spadne, API se změní nebo platforma přestane dávat obchodní smysl.
+
+Minimum:
+
+- Archiv publikovaných textů a vizuálů mimo platformu.
+- Seznam důležitých kontaktů v CRM nebo jiném vlastním systému, ne jen v DM.
+- Viditelný odkaz na web, RSS a newsletter na každém profilu.
+- Přístup k účtům přes firemní e-maily, ne osobní účty bez předání.
+- Dvoufaktorové ověření a jasné role správců.
+- Export dat, pokud ho platforma nabízí.
+- Content kalendář mimo platformu.
+- Připravený oznamovací kanál pro změnu: web, newsletter, RSS, status stránka.
+
+Test otázkou:
+
+"Kdybychom zítra přišli o hlavní sociální účet, jak oslovíme lidi, kteří nás sledují?"
+
+Pokud odpověď zní "nijak", sociální síť není kanál. Je to pronajatý prostor bez náhradního východu.
+
+### Praktický publikační rytmus pro malý tým
+
+Malý tým nepotřebuje nekonečný kalendář. Potřebuje rytmus, který unese. Dobrý rytmus má méně kanálů, více kvality a jasné napojení na vlastní web.
+
+Příklad měsíčního rytmu:
+
+1. Jeden hlubší článek na webu.
+2. Dva až čtyři krátké sociální posty z článku.
+3. Jeden praktický komentář k otázce zákazníků.
+4. Jedna případová poznámka nebo ukázka procesu.
+5. Jeden newsletterový výběr nebo RSS-first publikace.
+6. Jeden interní review: co přineslo kvalitní signály.
+
+Týdenní rytmus může vypadat takto:
+
+```txt
+Pondělí: krátký post s problémem zákazníka
+Úterý: práce na článku nebo case study
+Středa: publikace na webu + RSS
+Čtvrtek: sociální výtah s konkrétním příkladem
+Pátek: komentáře, odpovědi, zapsání signálů do content backlogu
+```
+
+Nejde o dokonalý plán. Jde o opakovatelnost. Marketing, který závisí na náhlém nadšení, vydrží zhruba do druhého těžšího týdne.
+
+### Checklist kapitoly
+
+- Má každý důležitý obsah stabilní URL na vlastním webu?
+- Používáte sociální sítě jako distribuci, ne jako jediný archiv?
+- Má web RSS feed nebo jiný přímý odběr pro lidi, kteří nechtějí algoritmický feed?
+- Máte jednoduchý POSSE workflow: web první, platformy potom?
+- Měříte kvalifikované reakce, dotazy a návštěvy, ne jen dosah?
+- Víte, které platformy mají skutečně vaše publikum a proč?
+- Recyklujete obsah podle kontextu platformy, ne slepým kopírováním?
+- Sbíráte otázky a námitky z komentářů do obsahového backlogu?
+- Nepoužíváte sociální pixely a embed widgety bez jasného důvodu?
+- Vedete UTM parametry bez osobních údajů?
+- Máte archiv sociálních textů, vizuálů a důležitých kontaktů mimo platformu?
+- Jsou účty spravované firemně, s 2FA a jasnými rolemi?
+- Umíte pokračovat v komunikaci, kdyby hlavní sociální účet zítra vypadl?
+- Má každý kanál vlastní účel a realistický publikační rytmus?
+
+Sociální sítě mají v marketingu místo. Jen by neměly sedět v čele stolu a rozhodovat, jestli vaše firma existuje. Vlastní web, RSS, e-mail se souhlasem a přímé vztahy jsou méně hlučné, ale pevnější. Algoritmus může přinést vítr do plachet. Nemá být lodí.
+
+### Zdroje kapitoly
+
+- [European Commission: User rights under the Digital Services Act](https://digital-strategy.ec.europa.eu/en/factpages/user-rights-under-digital-services-act)
+- [European Commission: Digital Services Act](https://digital-strategy.ec.europa.eu/en/policies/digital-services-act)
+- [European Commission: Digital Markets Act](https://digital-markets-act.ec.europa.eu/index_en)
+- [European Commission: DMA citizens Q&A](https://digital-markets-act.ec.europa.eu/citizens-and-whistleblower-portal/eu-citizens-qa_en)
+- [IndieWeb: POSSE](https://indieweb.org/POSSE)
+- [W3C: ActivityPub](https://www.w3.org/TR/activitypub/)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -6542,3 +6801,4 @@ E-mail je dobrý sluha a protivný pán. Když ho používáte férově, s jasn�
 - 2026-05-05: Dopsána kapitola 24 o SEO a AI vyhledávání: citovatelnost, struktura odpovědí, crawleři, strukturovaná data, privacy-first měření a praktický playbook pro úpravu článků.
 - 2026-05-05: Dopsána kapitola 25 o lead generation: kvalita leadů, vlastní kanály, lead magnety, formuláře, obchodní sdělení, CRM hygiena a privacy-first měření.
 - 2026-05-05: Dopsána kapitola 26 o e-mailu, newsletterech a RSS: typy zpráv, souhlas, RSS feedy, doručitelnost, segmentace, minimalistické měření a privacy-first distribuce.
+- 2026-05-06: Dopsána kapitola 27 o sociálních sítích bez závislosti na algoritmu: vlastní web jako zdroj pravdy, POSSE, měření signálů, výběr platforem, privacy-first distribuce a krizový plán.
