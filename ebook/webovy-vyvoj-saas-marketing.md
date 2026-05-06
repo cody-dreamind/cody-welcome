@@ -10278,6 +10278,206 @@ Takový list není perfektní. Ale když existuje, projekt má paměť. A projek
 
 Provozní list je drobná věc s velkým dopadem. Nedělá produkt hezčí. Nedělá marketing hlasitější. Ale snižuje počet situací, kdy tým improvizuje v mlze. A to je přesně ten typ nudné profesionality, který zákazníci ocení nejvíc ve chvíli, kdy jde o jejich data, provoz a důvěru.
 
+## Příloha B: Měsíční review webu, produktu a marketingu
+
+Digitální systém se nerozpadá najednou. Rozpadá se po malých tolerovaných odchylkách. Přidá se jeden skript bez vlastníka, jedna stránka bez účelu, jeden formulář se zbytečným polem, jedna metrika bez rozhodnutí, jedna integrace bez jasného důvodu. Nic z toho samo o sobě nevypadá dramaticky. Dohromady z toho vznikne web, produkt a marketing, které jsou těžší, pomalejší a méně čitelné než před měsícem.
+
+Měsíční review je jednoduchý způsob, jak tomu zabránit. Není to velký audit. Je to pracovní schůzka nebo samostatný blok, kde tým vybere pár skutečných signálů, rozhodne jednu až tři úpravy a něco také vědomě odstraní. Cíl není vytvořit další report. Cíl je udržet systém živý, pravdivý a provozně čistý.
+
+### Princip review
+
+Dobré review má tři pravidla:
+
+- řeší rozhodnutí, ne jen čísla,
+- končí konkrétními změnami,
+- chrání pozornost i data zákazníků.
+
+Když se tým jen podívá na návštěvnost, počet leadů a pár screenshotů z analytiky, nic se nutně nezlepší. Číslo samo není insight. Insight vzniká až ve chvíli, kdy se zeptáte: co to mění na našem příštím kroku?
+
+Příklad:
+
+```text
+Slabé review:
+"Návštěvnost blogu vzrostla, formulářů je stejně, příští měsíc napíšeme víc článků."
+
+Silnější review:
+"Články k technickému auditu přivádějí správné lidi, ale stránka služby po kliknutí neodpovídá na otázku ceny a rozsahu. Tento měsíc upravíme prodejní stránku, přidáme příklad auditu a změříme kliknutí na poptávku."
+```
+
+Rozdíl je v rozhodnutí. Druhá varianta říká, co se naučilo, kde je tření a co se změní.
+
+### Agenda na 60 minut
+
+Pro malý tým stačí jedna hodina měsíčně. Když review zabere půl dne, začne se odkládat. Když zabere deset minut, obvykle zůstane povrchní.
+
+Praktická agenda:
+
+```text
+0-10 min: Co se změnilo od minula?
+10-20 min: Web a obsah - co pomáhá rozhodování zákazníka?
+20-30 min: Produkt nebo služba - kde vzniká tření?
+30-40 min: Marketing a sales - jaká je kvalita signálů?
+40-50 min: Privacy-first provoz - co sbíráme, posíláme nebo držíme zbytečně?
+50-60 min: Rozhodnutí - co upravíme, co smažeme, co necháme být?
+```
+
+Pokud tým nemá SaaS produkt, nahradí produktovou část službou, onboardingem nebo delivery procesem. Princip je stejný: zákazník má nějakou cestu od prvního kontaktu k výsledku a vy hledáte největší tření na této cestě.
+
+### Vstupy do review
+
+Nepotřebujete dvacet dashboardů. Stačí pár vstupů, které ukazují skutečný provoz.
+
+Web a obsah:
+
+- nejnavštěvovanější vstupní stránky,
+- stránky s vysokým odchodem, pokud mají vést k akci,
+- dotazy, na které lidé přicházejí z vyhledávání,
+- stránky bez jasného dalšího kroku,
+- obsah, který už je zastaralý nebo duplicitní.
+
+Produkt nebo služba:
+
+- první krok, kde se zákazníci zasekávají,
+- nejčastější support dotazy,
+- ruční práce, která se opakuje,
+- části onboardingu, které potřebují vysvětlování,
+- workflow, které slibujete v prodeji, ale produkt nebo služba ho nedoručuje hladce.
+
+Marketing a sales:
+
+- počet kvalifikovaných poptávek, ne jen počet kontaktů,
+- zdroje leadů podle kvality,
+- námitky z discovery hovorů,
+- důkazy, které zákazníci chtěli vidět,
+- obsah nebo stránka, která pomohla posunout rozhodnutí.
+
+Privacy-first provoz:
+
+- nové externí skripty, integrace nebo widgety,
+- formuláře s novými poli,
+- analytické eventy, které mohou nést osobní údaje,
+- data v CRM, supportu nebo newsletteru bez jasné retence,
+- přístupy lidí nebo dodavatelů, kteří je už nepotřebují.
+
+Codyho komentář: review bez privacy části je jako úklid kanceláře, při kterém zametete jen viditelný stůl a necháte otevřený sklad se všemi dokumenty. Vypadá to uklizeně, dokud někdo neotevře správné dveře.
+
+### Tři typy rozhodnutí
+
+Každé review by mělo skončit třemi typy rozhodnutí: zlepšit, odstranit, ověřit.
+
+Zlepšit znamená upravit něco, co má jasnou hodnotu, ale dnes brzdí výsledek.
+
+Příklady:
+
+- přepsat hero sekci podle reálných otázek zákazníků,
+- doplnit case study k nejčastější námitce,
+- zjednodušit formulář na první odpověď,
+- přidat export dat do zákaznického workflow,
+- zpřesnit onboardingový e-mail po vytvoření účtu.
+
+Odstranit znamená zmenšit chaos.
+
+Příklady:
+
+- smazat stránku, která jen duplikuje jinou stránku,
+- vypnout tracker bez rozhodovací hodnoty,
+- odstranit pole ve formuláři, které nikdo nepoužívá,
+- zrušit segment newsletteru, který nemá vlastní obsah ani účel,
+- odebrat přístup bývalému dodavateli.
+
+Ověřit znamená nejdřív zjistit pravdu, než se začne stavět.
+
+Příklady:
+
+- zavolat třem zákazníkům, proč nedokončili onboarding,
+- otestovat novou strukturu stránky na pěti lidech mimo tým,
+- porovnat dvě varianty nabídky v sales hovorech,
+- projít support tickety a najít opakující se příčinu,
+- zkontrolovat, kam odchází data z nového widgetu.
+
+Když review končí jen seznamem úkolů typu "někdy zlepšit web", nefunguje. Každé rozhodnutí musí mít vlastníka, termín a kritérium hotovo.
+
+### Jednostránkový záznam review
+
+Po review stačí jedna stránka. Ne prezentace, ne deset tabulek. Jedna stránka, ke které se příští měsíc vrátíte.
+
+Šablona:
+
+```text
+Měsíční review: [měsíc / rok]
+Vlastník review:
+Datum:
+
+1. Co jsme změnili od minula:
+-
+-
+
+2. Co jsme se naučili:
+-
+-
+
+3. Největší tření:
+Web:
+Produkt / služba:
+Marketing / sales:
+Privacy-first provoz:
+
+4. Rozhodnutí:
+Zlepšit:
+Odstranit:
+Ověřit:
+
+5. Úkoly do příštího review:
+Úkol | Vlastník | Termín | Kritérium hotovo
+
+6. Co vědomě neděláme:
+-
+-
+
+7. Co zkontrolovat příště:
+-
+```
+
+Sekce "co vědomě neděláme" je důležitá. Malé týmy často netrpí nedostatkem nápadů, ale nedostatkem odmítnutí. Když každý měsíc přidáte pět nových aktivit a žádnou neukončíte, systém ztěžkne. Review má být i brzda.
+
+### Praktický příklad rozhodnutí po review
+
+Situace: B2B firma má web, pár článků a jednoduchý klientský portál. Poptávky chodí, ale často jsou nekvalifikované. Zákazníci se před hovorem ptají na stejné věci: rozsah spolupráce, typický průběh, data a bezpečnost.
+
+Záznam rozhodnutí:
+
+```text
+Zlepšit:
+Upravit stránku služby tak, aby obsahovala průběh spolupráce, příklad první fáze a sekci "jak pracujeme s daty".
+
+Odstranit:
+Vypnout starý heatmap widget, který nikdo poslední tři měsíce nepoužil pro rozhodnutí a zbytečně přidává externí skript.
+
+Ověřit:
+V příštích pěti discovery hovorech se zeptat, která informace na webu chyběla před odesláním formuláře.
+
+Kritérium hotovo:
+Nová stránka je publikovaná, formulář má kratší popis dalšího kroku, widget je odstraněný a poznámky z hovorů jsou shrnuté do tří opakujících se otázek.
+```
+
+Tohle je malá iterace. Ale po měsíci je web konkrétnější, datová stopa menší a obchodní tým ví víc o rozhodování zákazníka. Přesně takhle má review fungovat.
+
+### Review checklist
+
+- Proběhlo review podle skutečných signálů, ne jen podle pocitu?
+- Byly oddělené metriky webu, produktu, marketingu a provozu?
+- Vzniklo alespoň jedno rozhodnutí typu zlepšit?
+- Vzniklo alespoň jedno rozhodnutí typu odstranit?
+- Je jasné, co se má ověřit před další větší změnou?
+- Má každý úkol vlastníka, termín a kritérium hotovo?
+- Zkontrolovali jste nové skripty, integrace, formuláře a analytické eventy?
+- Snížilo review nějakou zbytečnou datovou stopu?
+- Přibylo něco, co pomůže zákazníkovi udělat lepší rozhodnutí?
+- Existuje seznam věcí, které tento měsíc vědomě neděláte?
+- Vrátíte se příště k minulým rozhodnutím místo toho, abyste začali od nuly?
+
+Měsíční review je nenápadná rutina. Ale právě rutiny rozhodují, jestli se z webu, produktu a marketingu stane systém, nebo hromada historických rozhodnutí s hezkou fasádou. Jedna hodina měsíčně je levná cena za to, že tým neztratí kontakt s realitou, zákazníkem ani vlastními daty.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -10407,3 +10607,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Dopsána kapitola 36 jako šablona marketingového plánu: segment, otázky zákazníka, positioning, důkazy, kanály, obsahové pilíře, měření, privacy-first pravidla a měsíční rytmus.
 - 2026-05-06: Doplněn závěr e-booku s návodem, jak rukopis používat jako pracovní systém, devadesátidenním plánem a závěrečným checklistem.
 - 2026-05-06: Doplněna Příloha A s provozním listem digitálního projektu: kritické akce, datová mapa, integrace, incidentní mini runbook a revizní rytmus.
+- 2026-05-06: Doplněna Příloha B s měsíčním review webu, produktu a marketingu: agenda, vstupy, rozhodnutí, šablona záznamu a checklist.
