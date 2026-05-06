@@ -6773,6 +6773,307 @@ Sociální sítě mají v marketingu místo. Jen by neměly sedět v čele stolu
 - [IndieWeb: POSSE](https://indieweb.org/POSSE)
 - [W3C: ActivityPub](https://www.w3.org/TR/activitypub/)
 
+## Kapitola 28: Prodejní web: copywriting, důkazy, case studies
+
+Prodejní web není stránka, která na návštěvníka křičí. Je to stránka, která vede obchodní rozhovor ve správném pořadí. Nejdřív pomůže člověku poznat, že je na správném místě. Potom ukáže konkrétní hodnotu, důkazy, rizika, další krok a férové podmínky. Když to dělá dobře, obchodník nemusí na prvním hovoru znovu vysvětlovat základy a zákazník nepřichází s pocitem, že ho někdo chytá do trychtýře.
+
+Prodejní web má jednu nepříjemně jednoduchou úlohu: snížit nejistotu. Návštěvník se ptá:
+
+- Rozumíte mému problému?
+- Umíte ho vyřešit pro firmu jako je ta moje?
+- Proč bych měl věřit zrovna vám?
+- Co se stane, když udělám další krok?
+- Kolik času, peněz a energie mě to bude stát?
+- Jaké riziko nesu, když se rozhodnu špatně?
+- Co uděláte s mými daty?
+
+Když web odpovídá jasně, prodává i bez agresivního tlaku. Když odpovědi schová za obecné fráze, musí je dohánět formulářem, remarketingem, pop-upem nebo obchodníkem. To je dražší a méně elegantní. Takže ano, dobrý copywriting šetří schůzky. Krásná věta pro rozpočet, mimochodem.
+
+### Prodejní stránka je rozhovor, ne sklad sekcí
+
+Nejčastější chyba prodejních webů je, že skládají sekce podle interního seznamu přání: hero, funkce, reference, galerie, blog, formulář. Jenže zákazník nepřemýšlí v sekcích. Přemýšlí v pochybnostech.
+
+Lepší pořadí pro B2B službu nebo SaaS landing page:
+
+1. Kontext: pro koho stránka je a jaký problém řeší.
+2. Slib: jaký konkrétní výsledek nebo posun zákazník získá.
+3. Mechanismus: jak řešení funguje a proč je lepší než běžná alternativa.
+4. Důkaz: reference, case studies, ukázky, čísla, proces, tým.
+5. Rizika: co může být složité, co je mimo rozsah, jak se řeší bezpečnost a data.
+6. Další krok: demo, audit, konzultace, trial, poptávka nebo RSS odběr podle fáze rozhodování.
+7. Ujištění: co se stane po odeslání, jak rychle přijde odpověď a že člověka nepřidáte do seznamu bez souhlasu.
+
+Tohle pořadí není dogma. Je to kontrola, jestli stránka vede člověka od nejistoty k rozhodnutí. Pokud máte důkazy až úplně dole, ceník bez vysvětlení hodnoty nebo formulář dřív než jasnou nabídku, web pravděpodobně zbytečně pálí důvěru.
+
+### Copywriting: konkrétnost před efektností
+
+Dobré prodejní texty nejsou nutně krátké. Jsou přesné. Krátká fráze bez významu je pořád prázdná fráze, jen zabírá méně místa. V B2B webu obvykle funguje copywriting, který říká:
+
+- kdo přesně má z nabídky užitek,
+- jaký problém řeší,
+- jak vypadá výsledek,
+- čím se liší od alternativy,
+- co bude další krok.
+
+Slabý hero text:
+
+```txt
+Tvoříme digitální řešení nové generace pro moderní firmy.
+```
+
+Silnější hero text:
+
+```txt
+Navrhujeme a stavíme B2B SaaS aplikace pro týmy, které potřebují převést interní proces do bezpečného zákaznického portálu.
+```
+
+Ještě konkrétnější varianta:
+
+```txt
+Pomůžeme vám během 6 týdnů ověřit první verzi zákaznického portálu: role, data, audit log, bezpečné přihlášení a jeden klíčový workflow.
+```
+
+První text zní hezky a neříká skoro nic. Druhý už vymezuje typ práce a cílového zákazníka. Třetí přidává rozsah, výstup a důležité prvky. Nemusí být dokonalý pro každý projekt, ale dává zákazníkovi něco, čeho se může chytit.
+
+Praktický vzorec pro hlavní sdělení:
+
+```txt
+Pomáháme [konkrétní typ zákazníka] dosáhnout [konkrétní výsledek] pomocí [mechanismus / produkt / služba], bez [hlavní obava nebo zbytečné riziko].
+```
+
+Příklad:
+
+```txt
+Pomáháme českým B2B firmám spustit privacy-first zákaznický portál bez závislosti na reklamních trackerech a bez chaosu v uživatelských rolích.
+```
+
+Pozor: vzorec je lešení, ne věta k slepému vložení. Finální text má znít lidsky. Pokud působí jako vyplněný formulář, je potřeba ho přepsat.
+
+### Důkazy: nestačí říct, že jste dobří
+
+Návštěvník nepotřebuje slyšet, že jste profesionální, inovativní a spolehliví. To tvrdí každý. Potřebuje vidět důkazy, které může posoudit.
+
+Použitelné důkazy:
+
+- Konkrétní case study s problémem, rozhodnutím a výsledkem.
+- Ukázka procesu: audit, workshop, prototyp, vývoj, nasazení, péče.
+- Snímky produktu nebo rozhraní, pokud neprozrazují citlivá data.
+- Reference od reálných lidí s kontextem, ne anonymní superlativy.
+- Měřitelné výsledky, pokud jsou pravdivé a vysvětlené.
+- Technické detaily pro technického kupujícího: architektura, bezpečnost, export dat, SLA, audit logy.
+- Srovnání alternativ, včetně situací, kdy vaše řešení není vhodné.
+
+Evropská komise v přehledu koordinovaných kontrol spotřebitelských webů uvádí případy problémů s online recenzemi, včetně webů, které nevysvětlovaly, jak brání falešným recenzím, a odkazuje na povinnost poskytovat pravdivé informace pro informované rozhodnutí spotřebitele ([European Commission: Sweeps](https://commission.europa.eu/live-work-travel-eu/consumer-rights-and-complaints/enforcement-consumer-protection/sweeps_en)). Pro B2B SaaS to berte jako praktický princip i mimo čistě spotřebitelský kontext: reference mají být pravdivé, dohledatelné a férově zasazené do kontextu.
+
+Slabá reference:
+
+```txt
+"Skvělá spolupráce, doporučujeme."
+```
+
+Silnější reference:
+
+```txt
+"Potřebovali jsme sjednotit ruční práci obchodního týmu do jednoho portálu. Během pilotu jsme ověřili workflow pro tři role a nahradili sdílené tabulky auditovatelným procesem."
+```
+
+Ještě silnější je krátká case study, která ukáže před a po. Ne nutně s přesnými čísly, pokud je nemůžete zveřejnit. Stačí konkrétní situace, rozhodnutí a dopad.
+
+### Case study: příběh rozhodnutí, ne reklamní pohádka
+
+Dobrá case study není oslavný článek o tom, jak všechno šlo hladce. To působí podezřele. Dobrá case study ukazuje, jak tým přemýšlel, co bylo těžké a proč zvolený postup dával smysl.
+
+Struktura case study:
+
+1. Kontext: kdo byl zákazník a jaká byla výchozí situace.
+2. Problém: co brzdilo byznys, tým nebo zákazníky.
+3. Omezení: čas, rozpočet, existující systémy, bezpečnost, data, compliance.
+4. Rozhodnutí: co se postavilo teď a co se záměrně odložilo.
+5. Implementace: hlavní kroky bez zbytečného technického divadla.
+6. Výsledek: co se změnilo a jak to zákazník poznal.
+7. Poučení: co byste příště udělali stejně nebo jinak.
+8. Privacy-first poznámka: kde data běží, co se neměří a jak se řeší přístup.
+
+Příklad osnovy pro SaaS agenturu:
+
+```txt
+Zákazník: B2B distributor s ručním objednávkovým procesem.
+Problém: obchodníci přepisovali data mezi e-mailem, tabulkou a ERP.
+Omezení: existující ERP bez moderního API, citlivé zákaznické ceny, potřeba rolí.
+Řešení: zákaznický portál s importem katalogu, rolemi, audit logem a ručním schválením objednávek.
+Výsledek: méně ručního přepisování, lepší dohledatelnost změn, jasný základ pro další automatizaci.
+Poučení: nejdřív stabilizovat datový model, potom ladit samoobsluhu.
+```
+
+Takhle case study prodává lépe než galerie log. Ukazuje, že rozumíte realitě projektu. A realita je u B2B často přesvědčivější než naleštěná fráze.
+
+### CTA: další krok musí odpovídat míře důvěry
+
+Call to action selhává, když žádá víc, než si stránka zasloužila. Pokud návštěvník ještě nechápe hodnotu, tlačítko "Kup teď" působí jako zkratka přes chybějící důvěru. Pokud je produkt komplexní, může být lepší "Domluvit demo", "Získat technický audit" nebo "Probrat vhodnost řešení".
+
+Dobré CTA je:
+
+- konkrétní,
+- poctivé,
+- viditelné,
+- navázané na obsah stránky,
+- doplněné vysvětlením, co se stane potom.
+
+Slabé CTA:
+
+```txt
+Odeslat
+```
+
+Silnější CTA:
+
+```txt
+Poslat poptávku k úvodnímu posouzení
+```
+
+Ještě lepší doprovodná věta:
+
+```txt
+Ozveme se s návrhem dalšího kroku. Do newsletteru vás nepřidáme bez samostatného souhlasu.
+```
+
+Evropská komise u souhlasu podle GDPR uvádí, že má být svobodný, informovaný, pro konkrétní účel, jasně formulovaný a daný pozitivním úkonem; zároveň má být možné souhlas odvolat ([European Commission: When is consent valid?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en)). Prakticky: kontakt kvůli poptávce a přihlášení k marketingovým zprávám nejsou totéž. Neschovávejte newsletter do povinného souhlasu u formuláře. To není růstový hack, to je růstový zlozvyk v saku.
+
+### Formulář: sbírejte minimum pro první odpověď
+
+Formulář je často první místo, kde web ukáže, jestli myslí na zákazníka nebo na vlastní pohodlí. Pokud po člověku chcete telefon, rozpočet, počet zaměstnanců, detailní brief, termín, zdroj návštěvy a souhlas se vším možným, ještě než jste vysvětlili proces, zvyšujete tření a snižujete důvěru.
+
+GDPR princip minimalizace dat říká, že organizace má sbírat a zpracovávat jen osobní data potřebná pro daný účel ([European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en)). U prodejního formuláře to znamená jednoduchou otázku: co opravdu potřebujeme, abychom mohli odpovědět?
+
+Minimum pro úvodní B2B poptávku:
+
+- jméno nebo oslovení,
+- pracovní e-mail,
+- krátký popis cíle,
+- URL existujícího webu nebo produktu, pokud existuje,
+- volitelný termín nebo kontext.
+
+Co často počká:
+
+- telefon,
+- přesný rozpočet,
+- velikost firmy,
+- detailní technický brief,
+- marketingový souhlas,
+- výběr z dlouhého seznamu služeb,
+- povinné přílohy.
+
+Privacy-first formulář má navíc jasně říct:
+
+- proč údaje sbíráte,
+- kdo je uvidí,
+- jak rychle odpovíte,
+- že je nepoužijete pro nesouvisející marketing bez souhlasu,
+- kde člověk najde informace o zpracování dat.
+
+### Ceník a balíčky: nejistota je taky cena
+
+Ne každý B2B produkt nebo služba může mít jednoduchý veřejný ceník. Ale každý prodejní web může snížit cenovou nejistotu. Pokud zákazník vůbec netuší, jestli se bavíme o desítkách tisíc, stovkách tisíc nebo enterprise rozpočtu, často raději neudělá nic.
+
+Možnosti:
+
+- veřejný ceník pro standardizovaný SaaS,
+- orientační balíčky pro služby,
+- "od" cena pro jasně vymezený rozsah,
+- model ceny bez přesných částek,
+- vysvětlení faktorů, které cenu mění,
+- ukázkový scénář spolupráce,
+- enterprise kontakt pro komplexní případy.
+
+Příklad:
+
+```txt
+Úvodní produktový audit: pevný rozsah, výstupem je mapa rizik, návrh MVP a doporučený další krok.
+SaaS MVP: cena závisí na počtu rolí, integrací, datové migraci a bezpečnostních požadavcích.
+Dlouhodobý provoz: samostatně řešíme hosting, monitoring, podporu, SLA a zálohy.
+```
+
+To není kompletní ceník. Ale zákazník ví, podle čeho se bude rozhodovat. A obchodník nemusí na první schůzce deset minut vysvětlovat, že "záleží". Záleží vždycky. Otázka je na čem.
+
+### Námitky patří na stránku, ne až do hovoru
+
+Pokud obchodní tým opakovaně odpovídá na stejné námitky, web je má řešit předem. Ne proto, aby nahradil obchodníka, ale aby rozhovor začal výš.
+
+Typické námitky u SaaS a webového vývoje:
+
+- Máme už existující systém, půjde to napojit?
+- Co když neumíme přesně popsat zadání?
+- Kde poběží data?
+- Jak řešíte přístupy a role?
+- Co když budeme chtít odejít?
+- Kdo vlastní zdrojový kód nebo data?
+- Jak rychle se dá spustit první verze?
+- Co je potřeba z naší strany?
+- Jak se řeší bezpečnostní incident?
+- Jak poznáme, že MVP má smysl rozvíjet?
+
+FAQ nemá být skládka odpovědí. Má být mapa skutečných nejistot. Pokud je otázka obchodně důležitá, dejte ji do hlavní stránky. Pokud je podpůrná, patří do FAQ. Pokud se týká bezpečnosti nebo dat, zvažte samostatnou stránku, protože u privacy-first značky je to součást hodnoty, ne jen compliance poznámka.
+
+### Dark patterns krátkodobě tlačí, dlouhodobě kazí důvěru
+
+Prodejní web se dá optimalizovat i špatně: falešná urgence, schované podmínky, předzaškrtnuté souhlasy, matoucí tlačítka, nejasné odhlášení, manipulativní srovnání nebo formuláře, které vypadají povinně, i když nejsou. Tyto vzory mohou krátkodobě zvednout číslo v dashboardu, ale dlouhodobě snižují důvěru a zvyšují právní i reputační riziko.
+
+EDPB ve svých pokynech k deceptive design patterns v rozhraních sociálních platforem popisuje riziko klamavých návrhových vzorů v kontextu ochrany osobních dat ([EDPB: Guidelines 03/2022 on deceptive design patterns](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media_en)). Prodejní web nemusí být sociální platforma, ale princip je použitelný: rozhraní má pomáhat člověku rozumně rozhodnout, ne ho dotlačit k souhlasu, kterému nerozumí.
+
+Privacy-first alternativa:
+
+- Místo falešné urgence ukažte reálnou kapacitu nebo proces.
+- Místo skrytého newsletteru dejte samostatný dobrovolný odběr.
+- Místo retargeting pixelu začněte kvalitním obsahem, RSS a přímým e-mailem se souhlasem.
+- Místo přehnaných slibů ukažte konkrétní scénáře a limity.
+- Místo nekonečného formuláře nabídněte krátký první krok.
+
+Codyho komentář: dark pattern je jako půjčka na důvěru s úrokem, který přijde později. V dashboardu se tváří jako výhra. V dlouhodobém vztahu se zákazníkem už méně.
+
+### Praktický audit prodejní stránky za 45 minut
+
+Vyberte jednu prodejní stránku a projděte ji bez firemní nostalgie:
+
+1. Napište jednou větou, komu stránka pomáhá a s čím.
+2. Zvýrazněte hlavní slib. Pokud by ho mohl použít každý konkurent, přepište ho.
+3. Najděte první konkrétní důkaz. Pokud je až dole, posuňte ho výš.
+4. Spočítejte počet CTA. Pokud každé tlačí jinam, určete primární akci.
+5. Zkontrolujte formulář: které pole je opravdu nutné pro první odpověď?
+6. Najděte tři nejčastější obchodní námitky a ověřte, jestli na ně stránka odpovídá.
+7. Otevřete stránku na mobilu a zkuste dojít k poptávce jednou rukou.
+8. Zkontrolujte externí skripty, trackery, embed prvky a sociální widgety.
+9. Přidejte větu, co se stane po odeslání formuláře.
+10. Zapište jednu věc, kterou odeberete, protože neslouží rozhodnutí.
+
+Výstup auditu nemá být seznam dvaceti kosmetických úprav. Má být jedna prioritní změna, která sníží nejistotu nebo tření. Třeba přepsaný hero, lepší case study, kratší formulář, jasnější proces nebo důkaz důvěry výš na stránce.
+
+### Checklist kapitoly
+
+- Je jasné, pro koho je nabídka a jaký problém řeší?
+- Říká hlavní text konkrétní výsledek, ne jen obecnou ambici?
+- Má stránka jeden hlavní další krok odpovídající míře důvěry?
+- Jsou důkazy konkrétní, pravdivé a zasazené do kontextu?
+- Máte alespoň jednu case study postavenou na problému, rozhodnutí a výsledku?
+- Ukazuje stránka proces spolupráce nebo používání produktu?
+- Řeší web nejčastější námitky ještě před hovorem?
+- Snižuje ceník nebo popis balíčků cenovou nejistotu?
+- Sbírá formulář jen údaje potřebné pro první odpověď?
+- Je marketingový souhlas oddělený od poptávky?
+- Je jasné, co se stane po odeslání formuláře?
+- Nepoužíváte falešnou urgenci, předzaškrtnuté volby ani matoucí CTA?
+- Víte, jaké externí skripty prodejní stránka načítá a proč?
+- Má stránka privacy-first argument viditelný jako součást důvěry, ne schovaný v patičce?
+- Funguje celý prodejní tok na mobilu?
+
+Prodejní web nemusí být agresivní, aby prodával. Musí být konkrétní, důvěryhodný a poctivě navržený. Když člověk pochopí hodnotu, vidí důkaz a ví, co se stane po dalším kroku, nepotřebujete ho honit po internetu pixelovým lasem. Stačí mu dát dobrou cestu.
+
+### Zdroje kapitoly
+
+- [European Commission: Sweeps](https://commission.europa.eu/live-work-travel-eu/consumer-rights-and-complaints/enforcement-consumer-protection/sweeps_en)
+- [European Commission: When is consent valid?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/legal-grounds-processing-data/grounds-processing/when-consent-valid_en)
+- [European Commission: What data can we process and under which conditions?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/overview-principles/what-data-can-we-process-and-under-which-conditions_en)
+- [EDPB: Guidelines 03/2022 on deceptive design patterns](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media_en)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -6802,3 +7103,4 @@ Sociální sítě mají v marketingu místo. Jen by neměly sedět v čele stolu
 - 2026-05-05: Dopsána kapitola 25 o lead generation: kvalita leadů, vlastní kanály, lead magnety, formuláře, obchodní sdělení, CRM hygiena a privacy-first měření.
 - 2026-05-05: Dopsána kapitola 26 o e-mailu, newsletterech a RSS: typy zpráv, souhlas, RSS feedy, doručitelnost, segmentace, minimalistické měření a privacy-first distribuce.
 - 2026-05-06: Dopsána kapitola 27 o sociálních sítích bez závislosti na algoritmu: vlastní web jako zdroj pravdy, POSSE, měření signálů, výběr platforem, privacy-first distribuce a krizový plán.
+- 2026-05-06: Dopsána kapitola 28 o prodejním webu: copywriting, důkazy, case studies, CTA, formuláře, námitky a privacy-first prodejní tok.
