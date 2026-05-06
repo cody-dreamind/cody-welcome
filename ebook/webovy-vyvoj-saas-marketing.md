@@ -9256,6 +9256,400 @@ Technický audit má být praktický. Není cílem dokázat, že web není dokon
 - [W3C: Web Content Accessibility Guidelines 2.2](https://www.w3.org/TR/wcag/)
 - [Google Search Central: How Google interprets robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/robots_txt)
 
+## Kapitola 35: Šablona produktové strategie
+
+Produktová strategie není slide deck pro investory ani přáníčko pro roadmapu. Je to pracovní dokument, který říká, pro koho produkt existuje, jaký problém řeší, proč má šanci vyhrát, jak bude vydělávat, co záměrně nedělá a podle čeho poznáte, že jdete správným směrem.
+
+Dobrá strategie zmenšuje počet náhodných rozhodnutí. Když přijde nový nápad, zákaznický požadavek, technologická možnost nebo tlak od obchodu, tým se nemusí pokaždé ptát "co teď". Porovná návrh se strategií. Sedí na segment? Řeší prioritní problém? Posouvá metriky? Nezvyšuje zbytečně datovou stopu? Pokud ne, možná je to zajímavé, ale ne teď.
+
+Tato kapitola je praktická šablona. Nevyplňujte ji jako školní formulář. Vyplňujte ji jako způsob, jak si vynutit jasné rozhodnutí. Když odpověď nevíte, napište hypotézu a způsob ověření. Prázdné místo je lepší než sebevědomá mlha.
+
+### Kdy strategii psát
+
+Produktovou strategii napište nebo obnovte hlavně ve chvíli, kdy:
+
+- Zakládáte nový SaaS nebo interní produkt.
+- Web přerůstá v aplikaci a začínáte řešit účty, role, data a provoz.
+- Tým má moc nápadů a málo společného směru.
+- Obchod prodává něco jiného, než vývoj skutečně staví.
+- Produkt má uživatele, ale růst, aktivace nebo retence stagnuje.
+- Přidáváte AI, integrace nebo enterprise funkce a roste provozní riziko.
+- Měníte segment, pricing, positioning nebo go-to-market.
+
+Strategie má být krátká. Ideálně 2 až 5 stran, které tým opravdu čte. Detailní research, rozhovory, technické návrhy a finanční model mohou být přílohy. Jádro strategie musí být použitelné v běžném rozhodování.
+
+Codyho komentář: když strategie potřebuje hodinovou prezentaci, aby ji někdo pochopil, není to strategie. Je to dokumentační úniková místnost. Strategie má být dost konkrétní na to, aby podle ní šlo říct "ano", "ne" a "ještě ne".
+
+### Jednostránková verze
+
+Pro rychlý začátek použijte tuto zkrácenou šablonu:
+
+```text
+Produkt:
+Verze strategie:
+Datum poslední revize:
+Vlastník:
+
+1. Pro koho produkt stavíme:
+2. Jaký prioritní problém řešíme:
+3. Jak zákazník problém řeší dnes:
+4. Proč je tento problém důležitý teď:
+5. Jaký výsledek slibujeme:
+6. Jaké klíčové workflow produkt umožní:
+7. Co záměrně neděláme:
+8. Jak budeme vydělávat:
+9. Jak produkt získá zákazníky:
+10. Jaké privacy-first principy jsou pevné:
+11. Jak změříme úspěch:
+12. Největší rizika a jak je ověříme:
+13. Další tři strategické kroky:
+```
+
+Pokud tým neumí tuto stránku vyplnit bez půldenní debaty, není to selhání šablony. Je to signál, že strategie zatím neexistuje. Právě proto ji píšete.
+
+### 1. Segment: pro koho to je
+
+Začněte úzkým segmentem. "Malé a střední firmy" je obvykle příliš široké. Lepší je popsat typ organizace, roli uživatele, situaci, rozpočet, existující alternativu a spouštěč nákupu.
+
+Šablona:
+
+```text
+Cílový segment:
+Typická firma:
+Primární uživatel:
+Ekonomický kupující:
+Technický schvalovatel:
+Spouštěč potřeby:
+Nevhodní zákazníci:
+```
+
+Příklad:
+
+```text
+Cílový segment: České a evropské B2B firmy s 20 až 150 lidmi, které řídí opakovaný schvalovací proces v tabulkách a e-mailech.
+Primární uživatel: Operations manager nebo vedoucí týmu.
+Ekonomický kupující: Majitel, COO nebo finanční ředitel.
+Technický schvalovatel: Interní IT nebo externí správce.
+Spouštěč potřeby: Proces začíná brzdit obchod, vznikají chyby a firma potřebuje auditovatelnost.
+Nevhodní zákazníci: Týmy, které chtějí jen další task manager bez potřeby workflow, rolí a datové kontroly.
+```
+
+Segment není vězení navždy. Je to startovní zaostření. Bez něj produkt snadno začne slibovat všechno všem, což v praxi znamená málo komu něco opravdu dobře.
+
+### 2. Problém, alternativa a naléhavost
+
+Produktová strategie musí popsat problém jazykem zákazníka, ne jazykem funkcí. Strategyzer Value Proposition Canvas pracuje se zákaznickými jobs-to-be-done, pains a gains a propojuje je s tím, jak produkt bolest snižuje a vytváří hodnotu ([Strategyzer: The Value Proposition Canvas](https://www.strategyzer.com/library/the-value-proposition-canvas)). Prakticky: nestačí napsat "potřebují dashboard". Je potřeba napsat, jaké rozhodnutí bez něj dnes nezvládnou, kolik času ztrácí a co se pokazí, když se nic nezmění.
+
+Šablona:
+
+```text
+Hlavní problém:
+Kdy se objevuje:
+Jak se řeší dnes:
+Proč současné řešení nestačí:
+Dopad problému:
+Co zákazník považuje za úspěch:
+Co by zákazník neakceptoval:
+```
+
+Příklad:
+
+```text
+Hlavní problém: Schvalování zakázek se rozpadá mezi e-mail, tabulku a účetní systém.
+Kdy se objevuje: Při více než 30 aktivních zakázkách měsíčně a více než třech schvalovatelích.
+Jak se řeší dnes: Sdílená tabulka, e-mailové vlákno, ruční připomínky.
+Proč současné řešení nestačí: Chybí auditní stopa, vlastník kroku, notifikace a přehled blokací.
+Dopad problému: Zpoždění zakázek, horší cash flow, chyby ve fakturaci, ztráta důvěry zákazníka.
+Úspěch: Schvalovatel vidí svoje úkoly, manažer vidí blokace a finance vidí stav bez ručního ptaní.
+```
+
+Naléhavost je důležitá. Produkt může řešit reálný problém, ale pokud ho zákazník necítí dost silně, nebude platit, migrovat data ani měnit návyky.
+
+### 3. Hodnotová nabídka
+
+Hodnotová nabídka má říct, jaký konkrétní výsledek produkt slibuje a proč je lepší než současná alternativa. Nepište ji jako seznam funkcí. Funkce jsou důkazní materiál, ne strategie.
+
+Šablona:
+
+```text
+Pro [segment],
+který řeší [problém],
+náš produkt umožní [výsledek],
+na rozdíl od [alternativa],
+protože [diferenciace].
+```
+
+Příklad:
+
+```text
+Pro B2B týmy, které řídí schvalování zakázek přes tabulky, náš produkt umožní převést opakovaný workflow do auditovatelného portálu s rolemi, notifikacemi a exportem dat. Na rozdíl od obecného task manageru drží produkt proces, oprávnění a provozní data v jednom kontrolovaném systému provozovaném v EU.
+```
+
+Diferenciace musí být obhajitelná. "Jednodušší", "modernější" a "AI-powered" samy o sobě nestačí. Silnější diferenciace může být:
+
+- Lepší workflow pro konkrétní segment.
+- Rychlejší nasazení díky šablonám.
+- Evropský provoz a jasná datová mapa.
+- Exportovatelnost dat bez vendor lock-inu.
+- Audit log a role už v základním plánu.
+- Integrace na systémy, které segment opravdu používá.
+
+Privacy-first diferenciace funguje jen tehdy, když je konkrétní. "Respektujeme soukromí" je slabé. "Provozujeme v EU, nepoužíváme reklamní pixely, formuláře neposíláme do analytiky, data lze exportovat a retence logů je popsaná" už je strategie.
+
+### 4. Produktová hranice: co stavíme a co ne
+
+Strategie musí obsahovat hranice. Bez nich roadmapa bobtná. Každý zákazník přinese oprávněný požadavek ze svého pohledu, ale produkt nemůže být zakázkový vývoj s předplatným.
+
+Šablona:
+
+```text
+Jádro produktu:
+Nutné funkce:
+Podpůrné funkce:
+Integrace:
+Co nebudeme stavět:
+Co možná postavíme později:
+```
+
+Příklad:
+
+```text
+Jádro produktu: Opakované schvalovací workflow s rolemi, stavem, audit logem a exportem.
+Nutné funkce: Tenanty, uživatelé, role, formulář zakázky, schvalovací kroky, notifikace, audit log, export CSV.
+Podpůrné funkce: Dashboard blokací, šablony workflow, komentáře.
+Integrace: E-mail, účetní systém přes export nebo API v druhé fázi.
+Nebudeme stavět: Obecný projektový management, interní chat, plnohodnotné CRM.
+Později: Pokročilé schvalovací podmínky, reporting, SSO pro enterprise.
+```
+
+Hranice chrání i zákazníka. Produkt, který slíbí všechno, se hůř udržuje, hůř vysvětluje a sbírá víc dat, než potřebuje.
+
+### 5. Business model a pricing
+
+Business model nemusí být dokonalý, ale musí být explicitní. Jak produkt vytvoří hodnotu, jak ji zachytí v ceně a jaké náklady porostou s používáním?
+
+Šablona:
+
+```text
+Kdo platí:
+Za co platí:
+Hodnotová metrika:
+Cenový model:
+Náklady, které škálují:
+Riziko neprofitabilního používání:
+Fakturační a daňové požadavky:
+```
+
+Příklad:
+
+```text
+Kdo platí: Firma, ne jednotlivý uživatel.
+Za co platí: Za počet aktivních workflow a objem zpracovaných zakázek.
+Hodnotová metrika: Počet aktivních schvalovaných procesů.
+Cenový model: Základní paušál + limity podle objemu, enterprise pro vyšší bezpečnostní požadavky.
+Náklady, které škálují: Ukládání dokumentů, notifikace, support, integrace, audit logy.
+Riziko: Levný tarif s vysokým objemem dokumentů může prodělávat.
+```
+
+Pricing musí odpovídat hodnotě i provozní realitě. U privacy-first SaaS počítejte i s náklady na evropský hosting, zálohy, monitoring, podporu exportů, audit logy a bezpečnostní požadavky. To nejsou "nice to have" položky. To je součást slibu.
+
+### 6. Go-to-market a kanály
+
+Produktová strategie má říct, jak se produkt dostane k zákazníkům. Ne detailní marketingový kalendář, ale realistický kanálový předpoklad.
+
+Šablona:
+
+```text
+Primární akviziční kanál:
+Sekundární kanály:
+Prodejní pohyb:
+První důkaz důvěry:
+Obsahová témata:
+Partneři:
+Co měříme:
+```
+
+Příklad:
+
+```text
+Primární kanál: Přímý prodej přes existující B2B vztahy a praktický obsah.
+Sekundární kanály: SEO články, případové studie, partnerské doporučení od účetních a IT správců.
+Prodejní pohyb: Konzultační demo, pilot na jednom workflow, potom rozšíření.
+První důkaz důvěry: Case study s konkrétní úsporou času a popisem provozu v EU.
+Obsahová témata: Schvalování zakázek, auditovatelnost, přechod z tabulek, privacy-first provoz.
+```
+
+Kanály musí sedět na segment. Pokud prodáváte enterprise produkt s bezpečnostním schvalováním, samotný self-serve trial možná nestačí. Pokud prodáváte jednoduchý nástroj pro freelancery, těžký konzultační sales proces bude brzda.
+
+### 7. Privacy-first principy
+
+Privacy-first část strategie má být stejně konkrétní jako pricing. Neřeší jen právní text. Řeší architekturu produktu, provoz, měření a důvěru.
+
+Šablona:
+
+```text
+Kde běží aplikace:
+Kde jsou zákaznická data:
+Jaká data nesbíráme:
+Jaká data potřebujeme a proč:
+Retence:
+Export a smazání:
+Analytika:
+Logy:
+Třetí strany:
+Bezpečnostní důkazy:
+```
+
+Příklad:
+
+```text
+Kde běží aplikace: EU region.
+Data nesbíráme: Zbytečné osobní profily, reklamní identifikátory, obsah formulářů v analytice.
+Analytika: Agregované produktové eventy pro aktivaci, retenci a chybové stavy.
+Logy: Technické logy bez obsahu zákaznických zpráv, omezená retence.
+Export: Tenant admin může stáhnout data ve strojově čitelném formátu.
+Třetí strany: Jen nutné služby se záznamem účelu, regionu, přístupu a retence.
+```
+
+Tato část má vliv na roadmapu. Pokud slibujete export dat, audit log a EU provoz, musí se objevit v architektuře od začátku. Dodělat to na konci bývá drahé a někdy skoro nemožné.
+
+### 8. Metriky a rozhodovací pravidla
+
+GOV.UK Service Manual doporučuje přemýšlet o měření od začátku projektu a používat data ke zlepšování služby a prioritizaci změn ([GOV.UK: Using performance data to improve your service](https://www.gov.uk/service-manual/measuring-success/using-data-to-improve-your-service-an-introduction)). Produktová strategie proto nemá končit sliby. Má říct, jak poznáte pokrok.
+
+Šablona:
+
+```text
+Aktivační metrika:
+Retenční metrika:
+Obchodní metrika:
+Kvalitativní signál:
+Privacy metrika:
+Guardrail metrika:
+Rozhodovací pravidlo:
+```
+
+Příklad:
+
+```text
+Aktivace: Tenant vytvoří první workflow, pozve alespoň dva uživatele a dokončí první schválení.
+Retence: Po 30 dnech existuje alespoň 10 dokončených schválení nebo aktivní rozšíření workflow.
+Obchod: Pilot se do 60 dnů změní na placený tarif.
+Kvalitativní signál: Uživatel umí popsat, co už nemusí dělat ručně.
+Privacy metrika: Žádný nový externí nástroj bez datové mapy a vlastníka.
+Guardrail: Support náročnost na tenant nepřekročí plánovaný limit.
+Rozhodovací pravidlo: Pokud 5 z 8 pilotů nedokončí první workflow bez asistence, neškálujeme prodej a opravujeme onboarding.
+```
+
+Metriky mají být použitelné pro rozhodnutí. Návštěvnost webu, počet registrací nebo počet funkcí v roadmapě nestačí, pokud neříkají, zda produkt přináší hodnotu.
+
+### 9. Rizika a experimenty
+
+Strategie bez rizik je jen optimistický příběh. Sepište největší nejistoty a ověřte je dřív, než investujete měsíce vývoje.
+
+Šablona:
+
+```text
+Riziko:
+Proč na něm záleží:
+Jak ho ověříme:
+Jaký výsledek nás přesvědčí:
+Co uděláme, když se hypotéza nepotvrdí:
+```
+
+Typická rizika:
+
+- Zákazník problém uznává, ale nebude za něj platit.
+- Uživatel chce flexibilitu tabulky, ale zároveň auditovatelnost systému.
+- Kupující požaduje integraci dřív, než produkt ukáže hodnotu.
+- Implementace je příliš náročná pro malý tým.
+- AI funkce vypadá dobře v demu, ale je drahá, nepřesná nebo riziková pro data.
+- Privacy-first provoz zvyšuje náklady víc, než pricing unese.
+
+Příklad experimentu:
+
+```text
+Riziko: Bez integrace na účetní systém zákazníci produkt nenasadí.
+Ověření: 10 discovery rozhovorů + pilot s exportem CSV místo API integrace.
+Přesvědčivý výsledek: Alespoň 4 z 6 relevantních zákazníků přijmou CSV export pro první pilot.
+Když ne: Integrace se přesune do MVP rozsahu nebo se změní cílový segment.
+```
+
+Experiment má chránit čas. Ne dokazovat, že původní nápad byl geniální. To je nepříjemné, ale levnější než rok stavět produkt, který všichni chválí a nikdo nepoužívá.
+
+### 10. Roadmapa jako sada sázek
+
+Roadmapa není seznam úkolů navždy. Je to sada strategických sázek v čase. Roman Pichler popisuje Product Vision Board jako nástroj pro zachycení a validaci produktové vize a strategie, včetně cílové skupiny, potřeb, klíčových funkcí a business cílů ([Roman Pichler: Product Vision Board](https://www.romanpichler.com/tools/product-vision-board/)). Prakticky: roadmapa má vycházet ze strategie, ne z inboxu.
+
+Jednoduchý formát:
+
+```text
+Teď:
+- Cíl:
+- Hypotéza:
+- Výstup:
+- Metrika:
+
+Další:
+- Cíl:
+- Hypotéza:
+- Výstup:
+- Metrika:
+
+Později:
+- Cíl:
+- Hypotéza:
+- Výstup:
+- Metrika:
+```
+
+Příklad:
+
+```text
+Teď:
+Cíl: Ověřit, že týmy dokončí první schvalovací workflow.
+Výstup: MVP s tenantem, rolemi, workflow, notifikací a audit logem.
+Metrika: 5 pilotů dokončí první proces do 14 dnů.
+
+Další:
+Cíl: Zlepšit opakovatelnost nasazení.
+Výstup: Šablony workflow a onboarding checklist.
+Metrika: Čas do aktivace klesne pod 3 dny.
+
+Později:
+Cíl: Zvýšit hodnotu pro větší zákazníky.
+Výstup: SSO, pokročilý audit log, API integrace.
+Metrika: Enterprise pipeline má kvalifikované příležitosti s bezpečnostním požadavkem.
+```
+
+Taková roadmapa nechává prostor na učení. Neříká, že přesně za šest měsíců bude konkrétní funkce. Říká, jaké strategické cíle se budou ověřovat.
+
+### Produktová strategie checklist
+
+- Je jasné, pro který segment produkt vzniká?
+- Umíte popsat problém jazykem zákazníka?
+- Víte, jak zákazník problém řeší dnes a proč mu to nestačí?
+- Je hodnotová nabídka konkrétní a odlišitelná?
+- Má produkt jasně popsané hranice: co ano, co ne, co později?
+- Sedí business model na hodnotu i provozní náklady?
+- Je go-to-market realistický pro daný segment?
+- Jsou privacy-first principy součást strategie, ne až právní dodatek?
+- Víte, jaká data sbíráte, proč, kde jsou a jak dlouho je držíte?
+- Má strategie aktivační, retenční, obchodní a guardrail metriky?
+- Jsou největší rizika napsaná jako ověřitelné hypotézy?
+- Vychází roadmapa ze strategických sázek, ne z náhodného seznamu funkcí?
+- Existuje vlastník strategie a datum další revize?
+- Umí podle strategie tým odmítnout dobrý nápad, který teď nesedí?
+
+Produktová strategie má být živá, ale ne tekutá. Když se mění každý týden, tým nemá strategii. Má počasí. Když se nemění nikdy, tým ignoruje realitu. Dobrý rytmus je revize po významném učení: pilot, změna segmentu, nový pricing, zásadní technické riziko nebo kvartální strategické vyhodnocení.
+
+### Zdroje kapitoly
+
+- [Strategyzer: The Value Proposition Canvas](https://www.strategyzer.com/library/the-value-proposition-canvas)
+- [Roman Pichler: The Official Product Vision Board](https://www.romanpichler.com/tools/product-vision-board/)
+- [GOV.UK Service Manual: Using performance data to improve your service](https://www.gov.uk/service-manual/measuring-success/using-data-to-improve-your-service-an-introduction)
+- [GOV.UK Service Manual: Measuring success](https://www.gov.uk/service-manual/measuring-success)
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -9292,3 +9686,4 @@ Technický audit má být praktický. Není cílem dokázat, že web není dokon
 - 2026-05-06: Dopsána kapitola 32 jako checklist pro privacy-first analytiku: rozhodovací otázky, datová mapa, eventy, formuláře, cookies, retence, přístupy, dodavatelé, SaaS produktová analytika a kvartální audit.
 - 2026-05-06: Dopsána kapitola 33 jako checklist pro launch: rozsah, kritéria, obsah, smoke test, měření, privacy-first provoz, rollback, incident režim, support a vyhodnocení úspěchu.
 - 2026-05-06: Dopsána kapitola 34 jako checklist pro technický audit: rozsah, inventura, dostupnost, výkon, přístupnost, SEO, bezpečnost, privacy-first datová stopa, provoz a prioritizace nálezů.
+- 2026-05-06: Dopsána kapitola 35 jako šablona produktové strategie: segment, problém, hodnotová nabídka, produktové hranice, business model, go-to-market, privacy-first principy, metriky, rizika a roadmapa.
