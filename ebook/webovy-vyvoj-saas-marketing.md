@@ -10757,6 +10757,205 @@ Opakovaná ruční práce, která roste s provozem a nepřidává dlouhodobou ho
 
 Můj pohled: slovník je podceňovaná produktová infrastruktura. Když se tým shodne na pojmech, zrychlí se rozhodování. Když se neshodne, všechno vypadá jako strategická debata, i když se lidé jen míjejí ve významu slov. To je zbytečně drahý sport.
 
+## Příloha E: Kvalifikační dotazník pro nový web nebo SaaS projekt
+
+Kvalifikace projektu není výslech zákazníka. Je to způsob, jak rychle zjistit, jestli má smysl pokračovat, co je hlavní riziko, jaký výsledek se očekává a jaká data se budou zpracovávat. Dobrý dotazník šetří čas oběma stranám. Špatný dotazník sbírá dvacet údajů, které nikdo nepoužije, a potom stejně začne první hovor otázkou "tak nám něco řekněte o projektu".
+
+Tato příloha je pracovní šablona pro první kontakt, discovery hovor nebo úvodní workshop. Hodí se pro web, SaaS MVP, klientský portál, interní aplikaci i marketingový systém. Cílem není získat perfektní zadání. Cílem je oddělit konkrétní záměr od mlhy.
+
+### Princip dotazníku
+
+Dotazník má být krátký, věcný a přiměřený fázi vztahu. Před prvním hovorem nepotřebujete kompletní obchodní plán, osobní data všech uživatelů ani přístup do interních systémů. Potřebujete porozumět situaci.
+
+Pravidla:
+
+- Ptejte se na rozhodnutí, ne na dekorace.
+- Sbírejte minimum údajů potřebných pro další krok.
+- Oddělte fakta, domněnky a přání.
+- Zeptejte se na alternativy, které zákazník používá dnes.
+- Hledejte omezení: čas, rozpočet, data, integrace, regulace, interní kapacity.
+- Neberte "potřebujeme nový web" jako diagnózu. Je to jen začátek rozhovoru.
+
+Codyho komentář: nejhorší zadání obvykle začíná větou "chceme něco moderního". Moderní je slovo, které může znamenat rychlý web, hezkou animaci, lepší copy, nový stack, SaaS dashboard nebo jen to, že konkurence vypadá méně unaveně. Dotazník má z toho slova udělat konkrétní práci.
+
+### Základní kvalifikační otázky
+
+Použijte je jako první filtr. Nemusí být všechny ve formuláři. Část může být v hovoru.
+
+```text
+1. Co se má změnit?
+Popište jednou až třemi větami, co dnes nefunguje nebo co chcete zlepšit.
+
+2. Pro koho je výsledek určený?
+Zákazníci, interní tým, partneři, administrátoři, veřejnost nebo konkrétní role.
+
+3. Jak dnes lidé problém řeší?
+Existující web, tabulky, e-maily, ruční proces, stará aplikace, konkurenční nástroj.
+
+4. Jak poznáme, že projekt uspěl?
+Konkrétní signál: kvalifikované poptávky, aktivace, kratší ruční práce, méně chyb, rychlejší onboarding.
+
+5. Jaký je první použitelný výstup?
+Stránka, audit, prototyp, MVP workflow, datový model, technický návrh, pilot.
+
+6. Co se nesmí rozbít?
+SEO, formuláře, e-mail, interní proces, data zákazníků, billing, přihlášení, exporty.
+
+7. Jaká data se budou zpracovávat?
+Kontakty, firmy, dokumenty, chování uživatelů, soubory, platební data, interní poznámky.
+
+8. Jaké systémy už používáte?
+CMS, CRM, e-mail, fakturace, analytika, identity provider, hosting, datové sklady.
+
+9. Kdo bude výsledek spravovat po spuštění?
+Marketing, produkt, vývoj, sales, support, externí dodavatel nebo konkrétní vlastník.
+
+10. Jaký je největší známý risk?
+Nejasný segment, technický dluh, migrace dat, právní posouzení, integrace, interní kapacita, termín.
+```
+
+Dobrá odpověď nemusí být dlouhá. Krátká konkrétní věta je lepší než odstavec bez rozhodnutí.
+
+### Rozšíření pro web
+
+U webu se ptejte hlavně na důvěru, obsah a další krok. Design se řeší později. Ne proto, že by nebyl důležitý, ale protože bez jasné nabídky a struktury bude design jen pěkný obal na nejistotu.
+
+```text
+Hlavní stránky:
+- Jaké tři stránky musí návštěvník najít bez přemýšlení?
+- Která stránka dnes nejvíc ovlivňuje obchodní výsledek?
+- Který obsah je zastaralý, duplicitní nebo bez vlastníka?
+
+Nabídka:
+- Jak zákazník pojmenovává problém vlastními slovy?
+- Jaké tři námitky řeší obchod nejčastěji?
+- Jaký důkaz chybí: reference, ukázka, čísla, proces, tým, bezpečnost?
+
+Konverze:
+- Co je hlavní další krok?
+- Co se má stát po odeslání formuláře?
+- Která pole ve formuláři jsou opravdu nutná pro první odpověď?
+
+Privacy-first:
+- Jaké externí skripty web načítá a proč?
+- Potřebuje web cookies souhlas, nebo jde měření navrhnout jednodušeji?
+- Kde končí formulářová data a kdo k nim má přístup?
+```
+
+Příklad dobrého zadání pro web:
+
+```text
+Chceme upravit prodejní web pro službu technického auditu. Dnes chodí poptávky, ale lidé nevědí, co audit obsahuje a jaký bude výstup. Potřebujeme jasnější stránku služby, ukázku anonymizovaného výstupu, kratší formulář a měření kliknutí na CTA bez osobních údajů v analytice. Nechceme měnit celý brand ani zakládat nový marketingový kanál.
+```
+
+Takové zadání už ukazuje problém, rozsah, důkaz, privacy hranici i to, co se vědomě nedělá.
+
+### Rozšíření pro SaaS MVP
+
+U SaaS MVP je hlavní otázka: jaký opakovaný workflow ověřujeme? Pokud tým nedokáže popsat workflow, často ve skutečnosti nemá produktový experiment, ale seznam funkcí.
+
+```text
+Segment a problém:
+- Jaký konkrétní typ firmy nebo týmu má problém?
+- Jak často problém vzniká?
+- Co dnes stojí čas, peníze, důvěru nebo chyby?
+
+Workflow:
+- Jaký je začátek a konec hlavního workflow?
+- Kdo do něj vstupuje a kdo dostává výsledek?
+- Který krok je dnes nejdražší nebo nejrizikovější?
+
+Produkt:
+- Co musí být v první verzi, aby šla ověřit hodnota?
+- Co může zůstat ruční, dokud se neověří poptávka?
+- Jaká je aktivační událost?
+
+Provoz:
+- Budou existovat tenanty, role a audit log?
+- Jak se zákazník dostane ke svým datům?
+- Jak se bude řešit support a incidenty v pilotu?
+
+Privacy-first:
+- Jaká data jsou citlivá nebo obchodně důvěrná?
+- Lze použít anonymizovaná nebo syntetická data pro pilot?
+- Které integrace nejsou nutné pro první ověření?
+```
+
+Příklad dobrého zadání pro SaaS MVP:
+
+```text
+Chceme ověřit klientský portál pro B2B reporting. Cílový segment jsou menší agentury, které každý měsíc skládají reporty z tabulek, e-mailů a interních poznámek. MVP má umožnit vytvořit klienta, nahrát report, pozvat jednoho klientského uživatele a dohledat audit změn. Billing, pokročilé šablony a veřejné API zatím odkládáme. Pilot poběží na třech zákaznících a bez reálných dat mimo schválené testovací projekty.
+```
+
+Tady je vidět segment, workflow, rozsah, odložené části, pilot i datová opatrnost. Vývoj má z čeho vycházet a obchod ví, co neslibovat.
+
+### Signály špatného fitu
+
+Ne každý projekt je dobrý projekt. Kvalifikace má pomoci poznat i to, kdy je lepší zpomalit, odmítnout nebo nejdřív udělat menší analýzu.
+
+Pozor, pokud:
+
+- cílová skupina je "všichni",
+- úspěch znamená "bude to modernější",
+- zákazník chce sbírat hodně dat, ale neví proč,
+- nikdo nechce vlastnit obsah po spuštění,
+- projekt stojí na integraci, ke které nikdo nemá přístup,
+- deadline je pevný, ale rozsah je tekutý,
+- MVP má už v první verzi pokrýt všechny výjimky,
+- marketing chce leady, ale neumí říct, co je kvalifikovaný lead,
+- tým nechce řešit provoz, zálohy, support ani retenci dat.
+
+Špatný fit neznamená automaticky konec. Často znamená, že první krok nemá být vývoj, ale workshop, audit, prototyp, datová mapa nebo přepsání nabídky. To je pořád práce. Jen poctivější.
+
+### Jednostránkový výstup kvalifikace
+
+Po prvním hovoru nebo dotazníku si napište jednu stránku. Pokud nejde vyplnit, projekt ještě není připravený na odhad.
+
+```text
+Projekt:
+Kontakt / firma:
+Datum:
+
+1. Situace:
+2. Cílový segment / uživatel:
+3. Současná alternativa:
+4. Hlavní problém:
+5. Navržený první výstup:
+6. Kritérium úspěchu:
+7. Věci mimo rozsah:
+8. Klíčová rizika:
+9. Data a privacy poznámky:
+10. Potřebné přístupy nebo vstupy:
+11. Doporučený další krok:
+12. Rozhodnutí:
+```
+
+Rozhodnutí může být jednoduché:
+
+- pokračovat do workshopu,
+- připravit návrh rozsahu,
+- udělat technický audit,
+- nejdřív vyčistit obsah nebo data,
+- odmítnout, protože není fit,
+- vrátit se později po doplnění vstupů.
+
+### Kvalifikační checklist
+
+- Je popsaný skutečný problém, ne jen požadované řešení?
+- Je jasné, pro koho projekt je?
+- Znáte současnou alternativu, kterou zákazník používá dnes?
+- Existuje konkrétní kritérium úspěchu?
+- Je první výstup dost malý na ověření?
+- Je napsané, co se vědomě nedělá?
+- Jsou známé kritické systémy a integrace?
+- Je jasné, jaká data se budou zpracovávat?
+- Sbírá dotazník jen údaje potřebné pro další krok?
+- Je určeno, kdo bude výsledek spravovat po spuštění?
+- Jsou pojmenovaná hlavní rizika?
+- Končí kvalifikace jedním doporučeným dalším krokem?
+
+Kvalifikace je malý filtr s velkým dopadem. Čím dřív tým pojmenuje skutečný problém, datové hranice a první užitečný výstup, tím méně času utratí za odhady, které vypadají přesně, ale stojí na písku.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -10889,3 +11088,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha B s měsíčním review webu, produktu a marketingu: agenda, vstupy, rozhodnutí, šablona záznamu a checklist.
 - 2026-05-06: Doplněna Příloha C s workshopem první praktické iterace: agenda, jednostránkový výstup, příklad, privacy-first kontrola a checklist.
 - 2026-05-06: Doplněna Příloha D se slovníkem praktických pojmů pro sjednocení jazyka týmu napříč produktem, marketingem, metrikami, provozem a privacy-first prací.
+- 2026-05-06: Doplněna Příloha E s kvalifikačním dotazníkem pro nový web nebo SaaS projekt: základní otázky, rozšíření pro web a MVP, signály špatného fitu, jednostránkový výstup a checklist.
