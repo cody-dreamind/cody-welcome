@@ -7452,6 +7452,324 @@ Sales proces pro malý tým má být střízlivý systém pravdy. Pomáhá rychl
 - [EDPB: Guidelines 1/2024 on processing of personal data based on Article 6(1)(f) GDPR](https://www.edpb.europa.eu/our-work-tools/documents/public-consultations/2024/guidelines-12024-processing-personal-data-based_en)
 - [EUR-Lex: Directive 2002/58/EC on privacy and electronic communications](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058)
 
+## Kapitola 30: Checklist pro nový web
+
+Nový web se dá pokazit dvěma opačnými způsoby. Buď se začne příliš rychle kreslit a programovat, takže nikdo nestihne rozhodnout, co má web vlastně dělat. Nebo se naopak měsíce plánuje, ladí a přepisuje, zatímco zákazník pořád nemá kde pochopit nabídku a udělat další krok.
+
+Praktický checklist drží tým u země. Neřeší web jako umělecké dílo, ale jako obchodní a provozní nástroj. Cílem není odškrtnout sto položek pro dobrý pocit. Cílem je spustit web, který je srozumitelný, důvěryhodný, technicky pevný, měřitelný a postavený s respektem k datům návštěvníků.
+
+Tento checklist používejte ve třech režimech:
+
+1. Před začátkem projektu: aby bylo jasné, co se má postavit.
+2. Před spuštěním: aby se nevynechaly kritické detaily.
+3. Měsíc po spuštění: aby se web upravil podle reality, ne podle dojmů z porady.
+
+### 1. Záměr: proč web existuje
+
+Než vznikne první návrh, napište jednu stránku zadání. Pokud to nejde stručně, tým pravděpodobně ještě nerozhodl dost.
+
+Minimum zadání:
+
+- Pro koho web je.
+- Jaký problém nebo potřebu návštěvníka řeší.
+- Jaká je primární akce: poptávka, demo, nákup, registrace, RSS odběr, stažení materiálu nebo kontakt.
+- Jaký je sekundární krok pro lidi, kteří ještě nejsou připraveni.
+- Jaké typy zákazníků nechcete přitahovat.
+- Jaké důkazy důvěry máte k dispozici.
+- Jaké informace musí být veřejné hned a co může přijít později.
+
+Příklad slabého zadání:
+
+```text
+Chceme moderní web, který bude lépe prezentovat naši firmu a služby.
+```
+
+Příklad použitelnějšího zadání:
+
+```text
+Web má přivádět B2B firmy, které chtějí převést ruční interní proces do zákaznického portálu. Primární akce je domluvit 30minutovou konzultaci. Sekundární akce je přečíst si příklad procesu a odebírat RSS. Web má jasně ukázat evropský provoz, minimum trackerů, zkušenost s datovými workflow a postup prvního pilotu.
+```
+
+Rozdíl je v rozhodnutí. Druhé zadání už říká, komu web slouží, co má člověk udělat a proč má nabídce věřit.
+
+Codyho komentář: "moderní web" je přání, ne zadání. Moderní může znamenat rychlý, přístupný, přehledný, odvážný, minimalistický nebo jen to, že se majiteli líbí jiné fonty než před pěti lety. Bez konkrétního cíle se modernost stane mlhou s pěkným gradientem.
+
+### 2. Nabídka: jedna věta, která neunavuje
+
+Každý nový web potřebuje jasnou odpověď na otázku: co děláte a pro koho? Tato věta nemusí být geniální. Musí být pravdivá, konkrétní a srozumitelná člověku mimo váš tým.
+
+Otestujte hlavní sdělení:
+
+- Dá se říct nahlas bez studu?
+- Obsahuje konkrétní cílovou skupinu?
+- Je jasné, jaký výsledek slibuje?
+- Neopírá se jen o slova jako inovativní, komplexní, moderní a individuální?
+- Rozuměl by tomu člověk, který firmu nezná?
+
+Slabé sdělení:
+
+```text
+Tvoříme digitální řešení pro růst vašeho podnikání.
+```
+
+Silnější sdělení:
+
+```text
+Stavíme privacy-first weby a SaaS portály pro evropské B2B týmy, které potřebují převést ruční procesy do spolehlivého online provozu.
+```
+
+Silnější verze není dokonalá pro každou firmu. Ale má hrany. Říká, co se staví, pro koho, v jakém provozním postoji a k jakému typu problému.
+
+### 3. Struktura: stránky podle rozhodování zákazníka
+
+Sitemapu nestavte podle interních oddělení. Stavte ji podle otázek zákazníka. Návštěvník nepotřebuje projít firemním organigramem. Potřebuje pochopit hodnotu, rizika, cenu, důkazy a další krok.
+
+Základní struktura pro servisní web:
+
+- Homepage: jasný slib, segment, důkazy, hlavní akce.
+- Služby nebo řešení: konkrétní problémy, výstupy, proces, vhodný a nevhodný fit.
+- Případové studie nebo ukázky: kontext, problém, postup, výsledek.
+- Proces spolupráce: co se stane po kontaktu, co musí dodat zákazník, jak vypadá první etapa.
+- O firmě: kdo za tím stojí, jak přemýšlí, proč je důvěryhodný.
+- Privacy a provoz: kde běží data, jaké nástroje se používají, jak se měří návštěvnost.
+- Kontakt: krátký formulář, očekávání odpovědi, alternativní kontakt.
+- Blog nebo znalostní báze: odpovědi na otázky, které zákazníci řeší před nákupem.
+
+Základní struktura pro SaaS web:
+
+- Homepage: problém, produkt, cílový uživatel, hlavní workflow.
+- Funkce: členěné podle práce uživatele, ne podle interní architektury.
+- Use cases: konkrétní scénáře podle segmentu nebo role.
+- Pricing: srozumitelný model, limity, co se děje při růstu.
+- Bezpečnost a soukromí: data, region, přístupy, logy, export.
+- Dokumentace nebo help: jak začít a jak řešit běžné situace.
+- Demo, trial nebo kontakt: první krok podle nákupního procesu.
+
+### 4. Obsah: nejdřív odpovědi, potom styl
+
+Před designem napište hrubý obsah hlavních stránek. Klidně ošklivě. Důležité je, aby text obsahoval rozhodnutí. Design bez obsahu často vytvoří hezké prázdné nádoby, které se později plní obecnými větami jen proto, aby se vešly do layoutu.
+
+U každé hlavní stránky si odpovězte:
+
+- Co má návštěvník pochopit jako první?
+- Jakou pochybnost bude pravděpodobně mít?
+- Jaký důkaz mu pomůže?
+- Jaký další krok dává smysl?
+- Jaké informace by neměly být schované až v patičce?
+
+Praktický obsahový minimum pro homepage:
+
+- Jedna věta nabídky.
+- Krátké vysvětlení pro koho je.
+- Jeden hlavní další krok.
+- Důkaz důvěry v první obrazovce nebo těsně pod ní.
+- Tři až pět konkrétních oblastí hodnoty.
+- Stručný proces spolupráce nebo začátku používání.
+- Privacy-first signál, pokud je pro zákazníka relevantní.
+- Kontakt nebo jasná cesta ke kontaktu.
+
+Nepřepisujte zákazníka do firemního jazyka. Když zákazník říká "měsíční reporty skládáme ručně", nepřepište to na "optimalizace reportingových procesů". Přesnost prodává líp než kancelářská mlha.
+
+### 5. Design a UX: rozhraní má vést, ne soupeřit
+
+Design nového webu má podporovat rozhodování. To znamená čitelnou typografii, jasnou hierarchii, konzistentní akce, dost prostoru pro důkazy a žádné vizuální efekty, které bojují s obsahem.
+
+Zkontrolujte:
+
+- Hlavní akce je vizuálně jasná a opakuje se v přirozených místech.
+- Sekundární akce nevypadají důležitější než primární.
+- Navigace používá pojmy, kterým zákazník rozumí.
+- Mobilní menu je jednoduché a nezakrývá důležité akce bez cesty zpět.
+- Texty v kartách, tlačítkách a formulářích se nelámou nehezky v češtině.
+- Dlouhé stránky mají logický rytmus: slib, důkaz, vysvětlení, detail, akce.
+- Důležité informace nejsou dostupné jen přes hover.
+- Formulář po odeslání jasně říká, co se stane dál.
+
+Příklad lepšího CTA:
+
+```text
+Domluvit úvodní konzultaci
+```
+
+Vedle něj:
+
+```text
+Ozveme se s návrhem dalšího kroku. Nepřidáme vás do newsletteru bez souhlasu.
+```
+
+To je malý text, ale mění očekávání. Návštěvník ví, že neposílá data do černé díry.
+
+### 6. Technický základ: nic kritického nesmí viset ve vzduchu
+
+Před spuštěním musí být jasné, kde web běží, kdo ho umí upravit a co se stane při problému.
+
+Technický checklist:
+
+- Doména je ve firemním vlastnictví a má zapnuté obnovení.
+- DNS záznamy jsou zdokumentované.
+- Hosting má jasný region, odpovědnou osobu a přístupový režim.
+- HTTPS funguje na všech variantách domény.
+- Přesměrování `www` / bez `www` je konzistentní.
+- Formuláře doručují zprávy na správné adresy.
+- E-mailová doména má nastavené SPF, DKIM a DMARC podle reálných odesílatelů.
+- Existuje jednoduchý postup nasazení a návratu poslední funkční verze.
+- Statická aktiva mají rozumné cache hlavičky.
+- Obrázky nejsou nahrané jako obří surové exporty.
+- Monitoring hlídá alespoň dostupnost hlavní stránky a expiraci certifikátu.
+
+U SaaS nebo webu napojeného na aplikaci přidejte:
+
+- Oddělené produkční a testovací prostředí.
+- Zálohy databáze a ověřenou obnovu.
+- Správu tajemství mimo repozitář.
+- Audit přístupů administrátorů.
+- Logy bez zbytečných osobních údajů.
+
+### 7. Privacy-first: sbírat méně, vysvětlit víc
+
+Privacy-first web není web bez dat. Je to web, který ví, proč data sbírá, drží je pod kontrolou a umí to vysvětlit normálním jazykem.
+
+Před spuštěním si udělejte datovou mapu:
+
+- Jaká data zadává návštěvník do formulářů?
+- Kam formulář data posílá?
+- Kdo k nim má přístup?
+- Jak dlouho se uchovávají?
+- Jaké externí skripty se načítají?
+- Jaká analytika běží a kde končí data?
+- Používají se reklamní pixely, heatmapy, chat widgety nebo embed prvky?
+- Je možné stejný účel splnit s menším sběrem dat?
+
+Privacy-first výchozí nastavení:
+
+- Měřte jen to, co pomáhá rozhodování.
+- Preferujte evropský provoz a poskytovatele s jasným regionem.
+- Nepřidávejte reklamní trackery jako automatický reflex.
+- Nepoužívejte skryté newsletterové souhlasy.
+- RSS a přímé odkazy držte jako čisté distribuční kanály.
+- V privacy textu pište lidsky: co sbíráme, proč, kde to běží, jak se ozvat.
+
+Příklad formulářové věty:
+
+```text
+Použijeme váš e-mail jen pro odpověď na tento dotaz. Do marketingového seznamu vás nepřidáme bez samostatného souhlasu.
+```
+
+Tohle není právní poezie. Je to důvěra v jedné větě.
+
+### 8. SEO a sdílení: web má být čitelný i pro stroje
+
+SEO u nového webu nezačíná trikem. Začíná tím, že stránky mají jasné téma, popisný titulek, rozumnou URL, interní odkazy a obsah, který odpovídá na skutečné otázky.
+
+Zkontrolujte:
+
+- Každá důležitá stránka má unikátní title a meta description.
+- URL jsou krátké, čitelné a stabilní.
+- Nadpis `h1` odpovídá tématu stránky.
+- Struktura nadpisů je logická.
+- Interní odkazy propojují související obsah.
+- Obrázky mají popisné názvy a alternativní text, pokud nesou význam.
+- Existuje `sitemap.xml` a `robots.txt`.
+- Kanonické URL jsou nastavené u stránek, kde hrozí duplicity.
+- Open Graph data dávají smysl při sdílení odkazu.
+- Staré URL mají přesměrování, pokud nahrazujete existující web.
+
+U článků a znalostních stránek přidejte:
+
+- Jednu jasnou otázku, na kterou stránka odpovídá.
+- Krátké shrnutí na začátku.
+- Praktické příklady.
+- Odkazy na související stránky.
+- Datum aktualizace, pokud obsah časem stárne.
+
+### 9. Přístupnost a kvalita: testujte reálný provoz
+
+Před spuštěním projděte web ručně. Automatický audit pomůže, ale nenahradí člověka, který zkusí objednat, vyplnit, přečíst a pochopit.
+
+Smoke test:
+
+- Homepage na mobilu a desktopu.
+- Navigace na mobilu.
+- Všechny hlavní CTA.
+- Kontaktní formulář v úspěšném i chybovém stavu.
+- Klávesnicové ovládání menu, tlačítek a formulářů.
+- Viditelný focus u interaktivních prvků.
+- Čitelnost textu a kontrast.
+- Chování při pomalé síti.
+- Přesměrování starých URL.
+- Stránka 404.
+- Souhlasové nebo informační prvky bez překrývání obsahu.
+- Externí odkazy a stažitelné soubory.
+
+Nezapomeňte na české detaily:
+
+- Dlouhá slova v tlačítkách.
+- Skloňování ve stavových hláškách.
+- Diakritiku v e-mailech, jménech a textech.
+- Formáty telefonu, IČO, DIČ, adresy a PSČ, pokud je sbíráte.
+
+### 10. Launch: spuštění není konec projektu
+
+Launch je přechod z interního přesvědčení do reality. Proto musí mít vlastní checklist a vlastní odpovědnost.
+
+Před spuštěním:
+
+- Je potvrzený obsah hlavních stránek.
+- Jsou nasazené přesměrování ze starého webu.
+- Funguje formulář a někdo ví, kdo odpovídá.
+- Je zapnutý monitoring dostupnosti.
+- Analytika měří primární akce bez zbytečného sledování.
+- Tým má přístupy, které potřebuje, a nemá přístupy, které nepotřebuje.
+- Je uložený provozní list: doména, DNS, hosting, deploy, kontakty.
+- Existuje plán první údržby po spuštění.
+
+První týden po spuštění:
+
+- Sledujte chyby formulářů a 404 stránky.
+- Ověřte, že se doručují e-maily.
+- Zkontrolujte, které stránky lidé skutečně navštěvují.
+- Zeptejte se obchodního týmu, jestli přichází lepší nebo horší dotazy.
+- Opravte největší nejasnosti v textech.
+- Nepřidávejte hned další trackery jen proto, že chcete vědět víc.
+
+První měsíc po spuštění:
+
+- Vyhodnoťte, jestli web přivádí správné lidi.
+- Projděte nahrané poptávky a otázky zákazníků.
+- Upravte hlavní sdělení podle reálných slov zákazníků.
+- Doplňte chybějící důkazy a odpovědi.
+- Odstraňte sekce, které nikdo nepotřebuje.
+- Zkontrolujte rychlost, indexaci a externí skripty.
+
+### Jednostránkový launch checklist
+
+Pro rychlé použití si před spuštěním projděte tuto zkrácenou verzi:
+
+- Cíl webu je napsaný jednou větou.
+- Primární akce je jasná na hlavních stránkách.
+- Nabídka říká, pro koho je a jaký problém řeší.
+- Homepage obsahuje důkaz důvěry.
+- Struktura odpovídá otázkám zákazníka.
+- Kontaktní formulář sbírá jen nezbytné údaje.
+- Po odeslání formuláře je jasné, co bude dál.
+- Doména, DNS, hosting a přístupy jsou zdokumentované.
+- HTTPS a přesměrování fungují.
+- E-mailová doručitelnost je otestovaná.
+- Analytika měří rozhodnutí, ne zvědavost.
+- Externí skripty mají jasný důvod.
+- Privacy text vysvětluje sběr dat lidsky.
+- RSS nebo jiný přímý odběr je dostupný, pokud publikujete obsah.
+- Stránky mají title, meta description, OG data a čitelné URL.
+- Sitemap a robots jsou nasazené.
+- Mobilní verze je otestovaná ručně.
+- Klávesnice a focus fungují.
+- 404 stránka pomáhá pokračovat.
+- Staré URL jsou přesměrované.
+- Monitoring dostupnosti běží.
+- Existuje plán kontroly po týdnu a po měsíci.
+
+Nový web není hotový ve chvíli, kdy se zveřejní. Hotový je až ve chvíli, kdy začne pomáhat správným lidem udělat správný krok a tým ví, co zlepšovat dál. Checklist tomu dává klidný rytmus: rozhodnout, postavit, ověřit, spustit, učit se.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -7483,3 +7801,4 @@ Sales proces pro malý tým má být střízlivý systém pravdy. Pomáhá rychl
 - 2026-05-06: Dopsána kapitola 27 o sociálních sítích bez závislosti na algoritmu: vlastní web jako zdroj pravdy, POSSE, měření signálů, výběr platforem, privacy-first distribuce a krizový plán.
 - 2026-05-06: Dopsána kapitola 28 o prodejním webu: copywriting, důkazy, case studies, CTA, formuláře, námitky a privacy-first prodejní tok.
 - 2026-05-06: Dopsána kapitola 29 o sales procesu pro malé týmy: kvalifikace, pipeline, discovery, demo, nabídky, follow-up, CRM, outbound, handoff a privacy-first obchodní data.
+- 2026-05-06: Dopsána kapitola 30 jako praktický checklist pro nový web: záměr, nabídka, struktura, obsah, UX, technický základ, privacy-first nastavení, SEO, testování a launch.
