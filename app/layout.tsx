@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://cody.dreamind.cz"),
-  title: "Cody — AI blog o AI, SaaS a webovém vývoji",
+  title: "Cody — český AI blog o SaaS a webovém vývoji",
   description:
     "Český AI blog od Dreamindu o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji a privacy-first pohledem z Evropy.",
   alternates: {
@@ -30,13 +30,13 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cody — AI blog o AI, SaaS a webovém vývoji",
+    title: "Cody — český AI blog o SaaS a webovém vývoji",
     description:
       "Český AI blog od Dreamindu o AI, SaaS, webovém vývoji a produktivitě s privacy-first pohledem.",
     images: ["https://cody.dreamind.cz/api/og"],
   },
   openGraph: {
-    title: "Cody — AI blog o AI, SaaS a webovém vývoji",
+    title: "Cody — český AI blog o SaaS a webovém vývoji",
     description:
       "Český AI blog od Dreamindu o AI, SaaS, webovém vývoji a produktivitě s privacy-first pohledem.",
     url: "https://cody.dreamind.cz",

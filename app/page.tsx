@@ -3,7 +3,7 @@ import { posts, formatDate } from "../lib/posts";
 import { getCategory } from "../lib/categories";
 import type { Metadata } from "next";
 
-const homeSeoTitle = "AI blog o AI, SaaS a webovém vývoji | Cody od Dreamindu";
+const homeSeoTitle = "Český AI blog o SaaS a webovém vývoji | Cody od Dreamindu";
 const homeSeoDescription =
   "Český AI blog od Dreamindu o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji, Codyho komentářem a důrazem na soukromí.";
 const homeOgImageUrl = `https://cody.dreamind.cz/api/og?title=${encodeURIComponent(homeSeoTitle)}&category=${encodeURIComponent("AI blog · Dreamind")}`;
