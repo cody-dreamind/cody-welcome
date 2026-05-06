@@ -7770,6 +7770,374 @@ Pro rychlé použití si před spuštěním projděte tuto zkrácenou verzi:
 
 Nový web není hotový ve chvíli, kdy se zveřejní. Hotový je až ve chvíli, kdy začne pomáhat správným lidem udělat správný krok a tým ví, co zlepšovat dál. Checklist tomu dává klidný rytmus: rozhodnout, postavit, ověřit, spustit, učit se.
 
+## Kapitola 31: Checklist pro SaaS MVP
+
+SaaS MVP není zmenšená verze vysněné platformy. Je to nejmenší ověřitelný systém, který ukáže, jestli konkrétní zákazník v konkrétní situaci získá opakovanou hodnotu. Když MVP obsahuje příliš mnoho funkcí, tým se učí pomalu a draze. Když je naopak ořezané tak moc, že uživatel nemůže dokončit skutečný workflow, tým testuje frustraci, ne produkt.
+
+Praktický checklist má hlídat jednu věc: aby první verze ověřovala správné riziko. Ne všechny nápady. Ne všechny segmenty. Ne všechny budoucí integrace. Jedno hlavní workflow, jeden jasný typ zákazníka, jeden důkaz hodnoty a provozní základ, který neohrozí data ani důvěru.
+
+Tento checklist používejte před prvním sprintem, před spuštěním pilotu a po prvních zákaznických testech. V každé fázi se ptejte: co jsme se opravdu naučili a co je jen hezky zabalený předpoklad?
+
+### 1. Segment: pro koho je první verze
+
+MVP pro "všechny firmy" je skoro vždy produkt bez ostré hrany. První verze má mít jasný segment, protože jen tak poznáte, jestli problém, jazyk, workflow a cena dávají smysl.
+
+Zapište si:
+
+- Jaký typ firmy nebo týmu řešíte.
+- Kdo je denní uživatel.
+- Kdo je kupující nebo rozhodovatel.
+- Kdo může nákup zablokovat.
+- Jaký současný workaround používají.
+- Proč se problém řeší teď, ne někdy neurčitě později.
+- Jaké požadavky na data, provoz a bezpečnost jsou pro segment důležité.
+
+Slabá definice:
+
+```text
+MVP je pro firmy, které chtějí lépe řídit projekty.
+```
+
+Silnější definice:
+
+```text
+MVP je pro menší B2B servisní týmy, které ručně skládají měsíční klientské reporty z e-mailů a tabulek. Denní uživatel je account manažer, kupující je vedoucí delivery a hlavní problém je ztráta přehledu o stavu zakázek.
+```
+
+Druhá definice už pomáhá rozhodovat. Víte, koho oslovit, jaké demo ukázat, jaký první workflow postavit a které požadavky zatím odmítnout.
+
+### 2. Problém: konkrétní situace, ne obecná bolest
+
+Produkt nezačíná funkcí. Začíná situací, ve které současný způsob práce selhává. Pokud neumíte popsat poslední reálný výskyt problému, pravděpodobně ještě nejste připraveni stavět.
+
+Před vývojem odpovězte:
+
+- Kdy zákazník problém řešil naposledy?
+- Co přesně se stalo?
+- Kdo byl zapojený?
+- Jak dlouho to trvalo?
+- Co se pokazilo nebo zpomalilo?
+- Co zákazník udělal místo vašeho budoucího produktu?
+- Co by bylo lepší, kdyby produkt existoval?
+
+Příklad:
+
+```text
+Každý pátek account manažer ručně projde e-maily, tabulku a interní poznámky, aby klientovi poslal stav práce. Trvá to 90 minut, často chybí poslední komentář a klient se stejně v pondělí doptává.
+```
+
+To je lepší vstup pro MVP než "potřebujeme dashboard". Dashboard je možná výstup. Problém je ruční skládání stavu a nedůvěra v aktuálnost informací.
+
+Codyho komentář: když někdo říká "potřebujeme SaaS", často tím myslí "máme opakovaný chaos". To je dobrá zpráva. Chaos se dá zkoumat. Jen ho nejdřív nebalte do dashboardu, dokud nevíte, co v něm má být.
+
+### 3. Hlavní workflow: jedna cesta od vstupu k výsledku
+
+MVP má ověřit workflow, ne počet obrazovek. Uživatel musí projít cestu, která začne konkrétním vstupem a skončí hodnotným výsledkem.
+
+Popište workflow v pěti až sedmi krocích:
+
+1. Co je vstup?
+2. Kdo ho zadá nebo vytvoří?
+3. Jaký objekt vznikne?
+4. Kdo s ním pracuje dál?
+5. Jak se mění stav?
+6. Jaký výstup vznikne?
+7. Jak zákazník pozná hodnotu?
+
+Příklad pro klientský reporting:
+
+1. Account manažer vytvoří projekt.
+2. Přidá klienta a interního kolegu.
+3. Vloží první stavový záznam.
+4. Označí prioritu a odpovědnou osobu.
+5. Klient vidí sdílený přehled.
+6. Tým exportuje měsíční report.
+7. Klient přestane žádat ruční update e-mailem.
+
+Toto workflow může mít jen pár obrazovek. Pokud funguje, máte důkaz. Pokud nefunguje, nepomůže ani pět dalších modulů v navigaci.
+
+### 4. Rozsah: co patří do MVP a co vědomě ne
+
+Rozsah MVP má být tvrdý. Ne proto, že tým nemá ambice, ale protože každá další funkce zamlžuje učení. Pokud první verze obsahuje onboarding, billing, dashboard, role, integrace, reporty, AI asistenta, veřejné API a administraci, už netestujete MVP. Testujete trpělivost.
+
+Do MVP obvykle patří:
+
+- jeden hlavní typ uživatele nebo týmu,
+- jeden hlavní objekt,
+- jeden hlavní workflow,
+- základní přihlášení,
+- minimální role, pokud produkt pracuje s více lidmi,
+- bezpečné uložení dat,
+- jednoduchý export nebo jasný plán ukončení pilotu,
+- audit důležitých akcí, pokud se řeší B2B data,
+- ruční podpora tam, kde automatizace ještě není ověřená.
+
+Do MVP často nepatří:
+
+- pokročilý billing,
+- marketplace integrací,
+- mobilní aplikace,
+- více jazyků,
+- komplexní role matrix,
+- veřejné API,
+- automatizace každé výjimky,
+- self-serve enterprise onboarding,
+- AI funkce bez jasného pracovního úkolu.
+
+Praktická věta:
+
+```text
+V první verzi ověřujeme, jestli account manažer dokáže vytvořit sdílený klientský report bez ručního pátečního e-mailu. Vše ostatní je mimo rozsah, pokud přímo nepomáhá tomuto workflow.
+```
+
+Taková věta chrání tým před hezkými nápady, které neověřují hlavní riziko.
+
+### 5. Data: co sbíráte, proč a komu patří
+
+Jakmile MVP ukládá zákaznická data, přestává být jen prototypem. Musíte vědět, co sbíráte, proč to potřebujete, kdo k tomu má přístup a co se stane po pilotu.
+
+Datový checklist:
+
+- Jaké hlavní objekty existují?
+- Kdo je vlastníkem každého objektu?
+- Která pole jsou osobní údaje?
+- Která pole jsou zákaznicky důvěrná?
+- Kdo může data číst, měnit, exportovat a mazat?
+- Jak dlouho data držíte po pilotu?
+- Jak zákazník získá export?
+- Co se maže, archivuje nebo anonymizuje?
+- Co se nesmí poslat do analytiky, supportu, AI služeb nebo billingu?
+
+Příklad:
+
+```text
+Objekt: klientský report
+Vlastník: organizace zákazníka
+Osobní údaje: e-maily členů týmu, komentáře mohou obsahovat jména
+Citlivý obsah: stav zakázky a interní poznámky
+Export: CSV a PDF na konci pilotu
+Retence: po pilotu podle dohody, testovací data se mažou
+Analytika: měříme dokončení workflow, ne obsah reportu
+```
+
+Privacy-first MVP nesbírá data pro jistotu. Sbírá data pro první hodnotu. Pokud údaj nepomáhá workflow, bezpečnosti, podpoře nebo fakturaci, nechte ho na později.
+
+### 6. Přístupy a role: minimum, které chrání workflow
+
+Role v MVP nemají být kompletní enterprise policy engine. Zároveň ale nesmí být ignorované, pokud produkt pracuje s týmem, klientem nebo citlivými daty. První verze potřebuje nejmenší model oprávnění, který chrání hranice.
+
+Často stačí:
+
+- Owner: spravuje účet, členy a export.
+- Editor: vytváří a upravuje pracovní objekty.
+- Viewer nebo Client: vidí jen sdílené položky.
+
+U každé role určete:
+
+- Co smí vytvořit?
+- Co smí číst?
+- Co smí upravit?
+- Co smí smazat?
+- Co smí exportovat?
+- Koho smí pozvat?
+- Jaké akce se zapisují do audit logu?
+
+Pozor na častou chybu: UI schová tlačítko, ale API akci povolí. Oprávnění musí kontrolovat server. Frontend má pomáhat použitelnosti, ne být jediným zámkem.
+
+### 7. Aktivace: první měřitelný důkaz hodnoty
+
+MVP potřebuje aktivační událost. Ne "uživatel se registroval". Ne "otevřel dashboard". Aktivace má být první měřitelný okamžik, kdy uživatel zažil hodnotu.
+
+Dobré aktivační události:
+
+- první projekt vytvořen a sdílen s klientem,
+- první report exportován,
+- první kolega přijal pozvánku a dokončil úkol,
+- první import dat proběhl a uživatel viděl výsledek,
+- první automatizace doběhla bez ručního zásahu,
+- první support návrh byl upraven a použit člověkem.
+
+U každé aktivační události si napište:
+
+- Proč znamená hodnotu?
+- Do kdy má nastat?
+- Které kroky k ní vedou?
+- Kde uživatelé odpadávají?
+- Jak ji změříme bez čtení citlivého obsahu?
+
+Příklad:
+
+```text
+Aktivace: účet vytvořil první klientský report a sdílel ho s alespoň jedním klientským uživatelem do 7 dnů od začátku pilotu.
+```
+
+Tato metrika je lepší než počet přihlášení. Přihlášení říká, že někdo otevřel dveře. Aktivace říká, že uvnitř něco použil.
+
+### 8. Pilot: pravidla před prvním zákazníkem
+
+Pilot není veřejný launch v menším měřítku. Je to řízený test s jasnými pravidly. Zákazník má vědět, co ověřujete, co dostane, co je ruční, co ještě není hotové a co se stane s daty.
+
+Pilotní karta:
+
+- Kdo se účastní.
+- Jak dlouho pilot trvá.
+- Jaký workflow testujete.
+- Jaká data zákazník poskytne.
+- Kdo k datům přistupuje.
+- Co je automatizované a co ruční.
+- Jaká jsou kritéria úspěchu.
+- Jak se sbírá zpětná vazba.
+- Jak vypadá export a ukončení.
+- Jak se rozhodne o pokračování.
+
+Příklad:
+
+```text
+Pilot trvá 30 dní. Ověřujeme reportování pěti klientských zakázek. Úspěch znamená, že tři account manažeři použijí portál pro reálný měsíční report a klienti potvrdí, že sdílený stav nahradil ruční e-mail. Integrace s účetnictvím není součástí pilotu.
+```
+
+Takový pilot je férový. Neprodává budoucnost jako hotovou věc a zároveň dává týmu jasné rozhodovací body.
+
+### 9. Technický základ: jednoduchý, ale provozovatelný
+
+MVP může být malé. Nemá být křehké. Pokud zákazník vloží reálná data, potřebujete základní provozní disciplínu.
+
+Technické minimum:
+
+- Produkce je oddělená od vývoje.
+- Tajemství nejsou v repozitáři.
+- Přihlášení a reset hesla fungují bezpečně.
+- Server kontroluje oprávnění.
+- Databáze má základní constraints.
+- Zálohy vznikají automaticky.
+- Obnova je alespoň jednou otestovaná.
+- Monitoring hlídá dostupnost a kritické chyby.
+- Logy neobsahují hesla, tokeny ani zbytečný obsah zákaznických dat.
+- Deploy je opakovatelný a není rituál jednoho člověka.
+
+U multi-tenant MVP přidejte:
+
+- Každý zákaznický objekt má tenant kontext.
+- Testujete, že tenant A nevidí data tenantu B.
+- Exporty, cache, soubory a background joby respektují tenant hranici.
+- Admin přístup je omezený a auditovaný.
+
+MVP bez provozního základu je nebezpečné hlavně tehdy, když se povede. Pokud produkt nikdo nepoužívá, problém je malý. Pokud ho zákazníci začnou používat a vy nevíte, jak obnovit data nebo odvolat přístup, úspěch se rychle změní v incident.
+
+### 10. Měření: málo eventů, jasná rozhodnutí
+
+MVP nepotřebuje analytiku o každém kliknutí. Potřebuje vědět, jestli zákazník prošel hlavním workflow, kde se zasekl a zda hodnota stojí za pokračování.
+
+Minimální eventy:
+
+- `account_created`
+- `pilot_started`
+- `main_object_created`
+- `teammate_invited`
+- `client_shared`
+- `core_workflow_completed`
+- `export_created`
+- `activation_reached`
+- `pilot_feedback_submitted`
+
+U každého eventu určete:
+
+- Jaké rozhodnutí ovlivňuje.
+- Jaký objekt nebo tenant se týká.
+- Zda obsahuje osobní nebo citlivá data.
+- Kdo má k metrice přístup.
+- Jak dlouho ji potřebujete držet.
+
+Špatné měření:
+
+```text
+Ukládáme každý klik, obsah formulářů, text komentářů a nahráváme session, abychom věděli, co se děje.
+```
+
+Silnější měření:
+
+```text
+Měříme dokončení hlavního workflow, pozvánky, export a aktivaci. Obsah reportů ani komentářů neposíláme do analytiky.
+```
+
+Měření má být lupa na rozhodnutí, ne kamera v každém rohu.
+
+### 11. Support: ruční práce jako zdroj učení
+
+U MVP je ruční support výhoda, pokud je strukturovaný. Každý dotaz může odhalit slabý text, nejasný tok, chybějící validaci nebo špatný předpoklad. Nesmí se ale ztratit v chatu.
+
+Značte support dotazy:
+
+- nepochopená hodnota,
+- problém s prvním krokem,
+- role a oprávnění,
+- import nebo data,
+- technická chyba,
+- požadavek mimo rozsah,
+- bezpečnost nebo privacy dotaz,
+- pricing nebo pokračování po pilotu.
+
+Po každém týdnu pilotu si projděte:
+
+- Který dotaz se opakuje?
+- Co má vyřešit produkt místo podpory?
+- Která část onboardingu je nejasná?
+- Který požadavek je signál cílového segmentu a který jen výjimka?
+- Co doplnit do dokumentace nebo UI?
+
+Ruční support nemá být permanentní náhrada produktu. Má být dočasný senzor.
+
+### 12. Rozhodnutí po MVP: pokračovat, změnit, nebo zastavit
+
+MVP bez rozhodnutí je jen levnější vývoj. Předem si určete, co se stane po pilotu.
+
+Možné výsledky:
+
+- Pokračovat: segment, problém a workflow se potvrdily.
+- Zúžit segment: hodnota existuje, ale jen pro konkrétnější typ zákazníka.
+- Změnit workflow: problém existuje, ale navržený tok neodpovídá realitě.
+- Automatizovat: ruční část se opakuje a má jasnou hodnotu.
+- Zastavit: problém není dost bolestivý nebo zákazník nechce měnit chování.
+- Odložit: technické, datové nebo obchodní riziko je zatím příliš vysoké.
+
+Rozhodovací zápis:
+
+```text
+Předpoklad:
+Co jsme pozorovali:
+Co zákazníci skutečně udělali:
+Co nezvládli bez pomoci:
+Co by zaplatili nebo podepsali:
+Jaká data a provozní rizika zůstávají:
+Další nejmenší test:
+Rozhodnutí:
+```
+
+Tento zápis je důležitější než pocit z demo hovoru. Pocity stárnou rychle. Zapsané důkazy vydrží další sprint.
+
+### Jednostránkový SaaS MVP checklist
+
+- Máte jeden konkrétní cílový segment.
+- Umíte popsat poslední reálný výskyt problému.
+- Existuje jeden hlavní workflow od vstupu k výsledku.
+- Víte, co je mimo rozsah první verze.
+- Hlavní objekty, vlastnictví a retence dat jsou popsané.
+- Sbíráte jen data nutná pro první hodnotu a provoz.
+- Role a oprávnění chrání základní hranice.
+- Server kontroluje oprávnění, ne jen frontend.
+- Máte definovanou aktivační událost.
+- Pilot má délku, pravidla, kritéria úspěchu a proces ukončení.
+- Produkce je oddělená od vývoje.
+- Tajemství jsou mimo repozitář.
+- Zálohy existují a obnova byla otestovaná.
+- Monitoring hlídá dostupnost a kritické chyby.
+- Logy a analytika neobsahují zbytečný citlivý obsah.
+- Tenant izolace je testovaná, pokud produkt obsluhuje více zákazníků.
+- Support dotazy se štítkují jako produktové signály.
+- Po pilotu vznikne jasné rozhodnutí, ne jen další seznam funkcí.
+
+SaaS MVP má být malý, ale dospělý ve správných místech. Může mít málo funkcí. Nemůže mít mlhavý segment, nechráněná data, žádnou aktivaci a neurčitý pilot. Nejlepší první verze není ta, která vypadá největší. Je to ta, která nejrychleji řekne pravdu.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -7802,3 +8170,4 @@ Nový web není hotový ve chvíli, kdy se zveřejní. Hotový je až ve chvíli
 - 2026-05-06: Dopsána kapitola 28 o prodejním webu: copywriting, důkazy, case studies, CTA, formuláře, námitky a privacy-first prodejní tok.
 - 2026-05-06: Dopsána kapitola 29 o sales procesu pro malé týmy: kvalifikace, pipeline, discovery, demo, nabídky, follow-up, CRM, outbound, handoff a privacy-first obchodní data.
 - 2026-05-06: Dopsána kapitola 30 jako praktický checklist pro nový web: záměr, nabídka, struktura, obsah, UX, technický základ, privacy-first nastavení, SEO, testování a launch.
+- 2026-05-06: Dopsána kapitola 31 jako checklist pro SaaS MVP: segment, problém, workflow, rozsah, data, role, aktivace, pilot, technický základ, měření, support a rozhodnutí po MVP.
