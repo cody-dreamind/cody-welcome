@@ -10956,6 +10956,283 @@ Rozhodnutí může být jednoduché:
 
 Kvalifikace je malý filtr s velkým dopadem. Čím dřív tým pojmenuje skutečný problém, datové hranice a první užitečný výstup, tím méně času utratí za odhady, které vypadají přesně, ale stojí na písku.
 
+## Příloha F: Jak vybrat dodavatele webu nebo SaaS projektu
+
+Výběr dodavatele není soutěž o nejhezčí portfolio, nejnižší cenu nebo nejsebevědomější prezentaci. Je to rozhodnutí, komu svěříte část obchodního systému, zákaznické zkušenosti a často i datové infrastruktury. Špatný dodavatel neumí jen dodat slabý design nebo pomalý web. Umí vytvořit provozní závislost, nejasné vlastnictví, zbytečné trackery, křehké nasazení a dokumentaci ve stylu "to ví Petr".
+
+Dobrý dodavatel nemusí být největší tým. Musí umět klást správné otázky, držet rozsah, vysvětlit technická rozhodnutí, pracovat s daty opatrně a předat výsledek tak, aby firma nebyla rukojmí. U webu to znamená doména, obsah, formuláře, SEO, analytika a provoz. U SaaS projektu přibývají účty, role, tenanty, zálohy, monitoring, export dat, support a incidentní režim.
+
+Tato příloha je praktický návod, jak dodavatele vybrat bez zbytečné magie. Neřeší jen cenu. Řeší fit, důvěru, provozní zralost a privacy-first hodnoty.
+
+### 1. Nejdřív si ujasněte, co vlastně kupujete
+
+Než začnete porovnávat nabídky, oddělte typ práce:
+
+- Redesign webu: hlavně nabídka, obsah, UX, SEO, rychlost, formuláře a měření.
+- Nový web: strategie, struktura, copywriting, design, implementace, provoz a první údržba.
+- SaaS MVP: segment, workflow, datový model, role, pilot, provozní základ a měření aktivace.
+- Technický audit: nálezy, dopad, priority, doporučení a ověření opravy.
+- Dlouhodobý rozvoj: pravidelný rytmus, backlog, monitoring, support a odpovědnost za změny.
+
+Slabé zadání:
+
+```text
+Potřebujeme nový moderní web. Pošlete nabídku.
+```
+
+Silnější zadání:
+
+```text
+Potřebujeme nový prodejní web pro B2B službu technického auditu. Cílem je přivádět kvalifikované poptávky, jasně vysvětlit rozsah auditu, ukázat důkazy a měřit kliky na CTA a odeslané formuláře bez osobních údajů v analytice. Součástí má být obsahová struktura, copywriting, implementace, RSS, SEO metadata, privacy-first analytika a provozní předání.
+```
+
+Dodavatel, který umí pracovat s druhým zadáním, bude pravděpodobně lepší partner než dodavatel, který po první větě okamžitě kreslí homepage.
+
+### 2. První hovor má být discovery, ne showreel
+
+Portfolio je užitečné, ale první hovor by neměl být jen přehlídka minulých projektů. Sledujte, na co se dodavatel ptá.
+
+Dobré otázky od dodavatele:
+
+- Pro koho web nebo produkt primárně je?
+- Co má návštěvník nebo uživatel udělat jako hlavní další krok?
+- Jak dnes poznáte kvalitní poptávku nebo aktivovaného zákazníka?
+- Jaké důkazy důvěry už máte?
+- Kde dnes vzniká největší tření: obsah, konverze, provoz, data, integrace?
+- Jaké systémy se mají napojit?
+- Jaká data se budou sbírat a kde mají běžet?
+- Kdo bude výsledek po spuštění spravovat?
+- Co musí být součástí první verze a co může počkat?
+
+Varovné signály:
+
+- Dodavatel mluví hlavně o nástroji nebo frameworku, ale ne o zákazníkovi.
+- Slíbí přesnou cenu bez pochopení rozsahu a rizik.
+- Tlačí rozsáhlý redesign, i když problém může být v copywritingu nebo formuláři.
+- Bere analytiku, reklamní pixely a cookie banner jako samozřejmost.
+- Neptá se na vlastnictví domény, hosting, e-mail, SEO přesměrování ani provoz po spuštění.
+- U SaaS projektu neřeší role, data, zálohy, monitoring, export ani tenant izolaci.
+
+Codyho komentář: dobrý dodavatel vás občas zpomalí. Ne proto, že by nechtěl dělat. Protože ví, že rychlý start špatným směrem je jen dražší způsob, jak se později omlouvat.
+
+### 3. Nabídka musí popsat výsledek, ne jen seznam aktivit
+
+Slabá nabídka vypíše položky:
+
+```text
+Analýza, UX, UI design, vývoj, testování, nasazení.
+```
+
+To není špatně, ale nestačí. Silnější nabídka říká:
+
+- Jaký problém řeší.
+- Jaký výstup vznikne.
+- Co je mimo rozsah.
+- Jaké jsou předpoklady na straně klienta.
+- Jak se bude schvalovat.
+- Jak se bude měřit úspěch.
+- Jak proběhne předání.
+- Jaká data se budou zpracovávat.
+- Co se stane po spuštění.
+
+U webu chtějte minimálně:
+
+- návrh informační architektury,
+- návrh hlavních sdělení nebo copywriting,
+- responzivní design,
+- implementaci s výkonem a přístupností jako požadavkem,
+- SEO metadata, sitemap, robots, Open Graph a přesměrování starých URL,
+- nastavení formulářů a doručitelnosti,
+- privacy-first analytiku,
+- provozní předání.
+
+U SaaS MVP chtějte minimálně:
+
+- popis hlavního workflow,
+- datový model na úrovni hlavních objektů,
+- základ rolí a oprávnění,
+- technický návrh provozu,
+- plán záloh, monitoringu a logů,
+- měření aktivace,
+- pilotní pravidla,
+- export nebo ukončení pilotu.
+
+### 4. Cena bez rozsahu je iluze přesnosti
+
+Nejnižší cena často znamená jednu ze tří věcí: menší rozsah, menší zralost nebo budoucí doplatky. Někdy je levnější dodavatel správná volba, pokud je projekt úzký a dobře definovaný. Problém je, když nabídky porovnáváte jen podle konečné částky a nevšimnete si, že každá obsahuje jiný projekt.
+
+Porovnávejte:
+
+- Co přesně je v ceně.
+- Kolik iterací návrhu je zahrnuto.
+- Kdo píše texty.
+- Kdo připravuje obsah a obrázky.
+- Jak je řešená migrace starého obsahu.
+- Jak se řeší SEO přesměrování.
+- Co znamená testování.
+- Co znamená nasazení.
+- Co je předání a dokumentace.
+- Jaká je cena údržby po spuštění.
+
+U SaaS navíc:
+
+- Kdo vlastní zdrojový kód.
+- Kdo vlastní data.
+- Jak se řeší licence knihoven.
+- Jak je naceněný provoz.
+- Jak se řeší změny rozsahu.
+- Kdo reaguje na incidenty.
+- Jaká je dostupnost podpory.
+
+Praktické pravidlo: pokud je jedna nabídka výrazně levnější, neoslavujte hned úsporu. Nejdřív napište, co v ní chybí proti dražším nabídkám. Teprve potom rozhodujte.
+
+### 5. Privacy-first otázky pro dodavatele
+
+Dodavatel, který staví web nebo SaaS produkt, se dotýká dat. Proto se ptejte konkrétně:
+
+- Kde bude web nebo aplikace hostovaná?
+- Kde budou uložená formulářová data?
+- Jaká analytika bude nasazená a proč?
+- Budou použité reklamní pixely, heatmapy, session replay nebo chat widgety?
+- Jaké externí služby budou načítané v prohlížeči návštěvníka?
+- Kdo bude mít přístup do administrace, CRM, analytiky a hostingu?
+- Jak se budou odebírat přístupy po skončení spolupráce?
+- Jaké logy vznikají a jak dlouho se drží?
+- Jak zákazník získá export dat?
+- Je možné použít RSS, přímé odkazy a agregovanou analytiku místo invazivnějšího měření?
+
+Dobrá odpověď nemusí být právní traktát. Má být konkrétní. Například:
+
+```text
+Formuláře půjdou do CRM, ne do obecné analytiky. Analytika bude měřit page_view, CTA klik a odeslaný formulář bez e-mailu a textu zprávy. Reklamní pixely nenasazujeme ve výchozím stavu. Hosting navrhujeme v EU regionu a přístupy budou přes týmové účty s 2FA.
+```
+
+To je odpověď, se kterou se dá pracovat. "To nějak nastavíme podle potřeby" je slabší. Někdy pravdivá, ale slabší.
+
+### 6. Ptejte se na předání už před podpisem
+
+Předání není závěrečná formalita. Je to část produktu. Pokud dodavatel po spuštění zmizí a vy nevíte, kde je doména, jak se nasazuje, kde jsou formuláře a kdo má klíče, projekt není hotový.
+
+Před podpisem si vyžádejte:
+
+- seznam systémů, které budou použité,
+- pravidla vlastnictví účtů,
+- plán předání přístupů,
+- základní provozní dokumentaci,
+- postup nasazení,
+- postup rollbacku,
+- popis analytiky a eventů,
+- přehled externích služeb,
+- seznam věcí, které bude potřeba pravidelně kontrolovat.
+
+Minimum provozního předání:
+
+```text
+Doména:
+DNS:
+Hosting:
+Repozitář:
+Deploy:
+Formuláře:
+E-mail:
+Analytika:
+Externí služby:
+Zálohy:
+Monitoring:
+Přístupy:
+Kontakt při incidentu:
+```
+
+Pokud dodavatel tvrdí, že dokumentace není potřeba, protože "všechno je jednoduché", zbystřete. Jednoduché věci se dokumentují nejlépe. Složité věci dokumentaci potřebují nejvíc.
+
+### 7. Reference čtěte podle podobnosti, ne podle loga
+
+Známé logo v portfoliu vypadá dobře. Důležitější je podobnost problému. Pokud potřebujete privacy-first B2B SaaS MVP, reference na krásný brandový web pro festival je fajn, ale neřeší vaše hlavní riziko.
+
+U reference se ptejte:
+
+- Jaký byl výchozí problém?
+- Jaký byl rozsah?
+- Co dodavatel konkrétně dělal?
+- Co bylo těžké?
+- Jak se řešil provoz po spuštění?
+- Kdo spravuje projekt dnes?
+- Jak se pracovalo se změnami rozsahu?
+- Jak dodavatel komunikoval, když něco nešlo podle plánu?
+
+Nejlepší reference není ta, kde všechno zní dokonale. Nejlepší reference je ta, která ukazuje, jak dodavatel přemýšlel při problému. Projekty bez problémů existují hlavně v prezentacích.
+
+### 8. Malý rozhodovací scorecard
+
+Použijte jednoduché skóre 1 až 5. Nesnažte se vyrobit falešně vědecký model. Cílem je strukturovat debatu.
+
+| Kritérium | Otázka | Skóre 1-5 |
+| --- | --- | --- |
+| Porozumění problému | Ptá se dodavatel na zákazníka, workflow a výsledek? | |
+| Relevantní zkušenost | Řešil podobný typ projektu nebo rizika? | |
+| Kvalita návrhu | Popisuje výstup, rozsah, mimo rozsah a předpoklady? | |
+| Technická zralost | Řeší výkon, SEO, přístupnost, provoz a bezpečnost? | |
+| Privacy-first fit | Umí vysvětlit data, nástroje, regiony, trackery a přístupy? | |
+| Komunikace | Odpovídá konkrétně, včas a bez mlhy? | |
+| Předání | Počítá s dokumentací, přístupy, monitoringem a údržbou? | |
+| Cena vs hodnota | Odpovídá cena rozsahu, riziku a kvalitě výstupu? | |
+
+Po vyplnění napište jednu větu:
+
+```text
+Tohoto dodavatele vybíráme, protože [důvod], a největší riziko spolupráce je [riziko], které ošetříme takto: [opatření].
+```
+
+Pokud větu neumíte napsat, rozhodnutí ještě není jasné.
+
+### 9. Co dát do smlouvy nebo objednávky
+
+Nejsem právník, takže to berte jako provozní checklist, ne právní stanovisko. Do smluvní nebo objednávkové části ale typicky patří:
+
+- jasný rozsah a výstupy,
+- harmonogram nebo milníky,
+- cena a pravidla změn rozsahu,
+- kdo dodává obsah, přístupy a podklady,
+- vlastnictví zdrojového kódu, designů, textů a dat,
+- licence použitých šablon, knihoven nebo assetů,
+- provozní předání,
+- záruční nebo hypercare období,
+- podpora po spuštění,
+- mlčenlivost a zacházení s daty,
+- bezpečnostní očekávání,
+- pravidla ukončení spolupráce a předání.
+
+U SaaS nebo aplikace navíc:
+
+- prostředí a hosting,
+- zálohy a obnova,
+- incidentní komunikace,
+- správa přístupů,
+- audit logy a export dat,
+- údržba závislostí,
+- SLA nebo realistická reakční doba, pokud je požadovaná.
+
+Smlouva nemá nahrazovat důvěru. Má chránit jasnost. Když se všechno daří, nikdo ji moc nečte. Když se něco pokazí, najednou je velmi příjemné mít napsané, co se vlastně mělo dodat.
+
+### Checklist výběru dodavatele
+
+- Máte jasně popsané, co kupujete: web, MVP, audit, nebo dlouhodobý rozvoj?
+- Dodavatel se ptal na segment, problém, workflow a měření úspěchu?
+- Nabídka popisuje výstup, rozsah, mimo rozsah a předpoklady?
+- Je jasné, kdo píše obsah a kdo dodává podklady?
+- Je řešené SEO, výkon, přístupnost, formuláře a mobilní použití?
+- U SaaS jsou řešené role, data, tenanty, zálohy, monitoring a export?
+- Víte, kde poběží web nebo aplikace a kde budou data?
+- Každý externí nástroj má účel a vlastníka?
+- Marketingové trackery nejsou nasazené jako automatický default?
+- Je domluvené provozní předání a dokumentace?
+- Je jasné vlastnictví kódu, designu, textů a dat?
+- Reference jsou podobné vašemu problému, ne jen hezké logo?
+- Rozhodnutí nevychází jen z nejnižší ceny?
+- Máte pojmenované hlavní riziko vybraného dodavatele a opatření?
+
+Výběr dodavatele je první test toho, jak budete digitální projekt řídit. Pokud už při výběru umíte být konkrétní, držet privacy-first požadavky a ptát se na provoz, výrazně zvyšujete šanci, že projekt neskončí jako hezký web s křehkým zákulisím. A to je přesně ten typ hezkosti, který nechceme.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -11089,3 +11366,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha C s workshopem první praktické iterace: agenda, jednostránkový výstup, příklad, privacy-first kontrola a checklist.
 - 2026-05-06: Doplněna Příloha D se slovníkem praktických pojmů pro sjednocení jazyka týmu napříč produktem, marketingem, metrikami, provozem a privacy-first prací.
 - 2026-05-06: Doplněna Příloha E s kvalifikačním dotazníkem pro nový web nebo SaaS projekt: základní otázky, rozšíření pro web a MVP, signály špatného fitu, jednostránkový výstup a checklist.
+- 2026-05-06: Doplněna Příloha F o výběru dodavatele webu nebo SaaS projektu: discovery, nabídka, cena, privacy-first otázky, předání, reference, scorecard a smluvní checklist.
