@@ -11457,6 +11457,244 @@ Můj pohled: datová mapa je jedna z nejlepších protivah proti digitálnímu b
 
 Datová mapa nemá vyřešit celý privacy-first provoz sama. Má ale dát týmu společnou pravdu. A společná pravda je v digitálním projektu překvapivě vzácná, takže ji stojí za to mít napsanou.
 
+## Příloha H: Rozhodovací log pro web a SaaS
+
+Rozhodovací log je jednoduchý záznam toho, proč tým udělal důležité rozhodnutí. Neřeší jen architekturu. Patří do něj výběr analytiky, hosting, formuláře, pricing, integrace, změna onboardingového toku, nový marketingový kanál, odstranění trackeru, změna retence dat nebo rozhodnutí, že něco vědomě neuděláte.
+
+Bez rozhodovacího logu se po třech měsících často stane toto: někdo se zeptá, proč se zvolil konkrétní nástroj, proč web nemá chat widget, proč SaaS nepodporuje jeden požadovaný export nebo proč se měří jen agregované eventy. Tým začne vzpomínat, původní kontext zmizí a rozhodnutí se otevře znovu, tentokrát bez dat, bez rizik a s větší únavou.
+
+Rozhodovací log tomu nebrání tím, že by z týmu udělal byrokratický úřad. Brání tomu tím, že drží paměť projektu.
+
+### Kdy rozhodnutí zapisovat
+
+Nezapisujte každou drobnost. Nikdo nepotřebuje záznam o tom, že tlačítko má o dva pixely větší mezeru. Zapisujte rozhodnutí, která mají dopad na:
+
+- data zákazníků nebo návštěvníků,
+- bezpečnost, provoz nebo dostupnost,
+- náklady a vendor lock-in,
+- uživatelský tok nebo konverze,
+- dlouhodobou údržbu,
+- integrace a externí služby,
+- pricing nebo obchodní model,
+- měření výkonu, marketingu nebo produktu,
+- věci, které bude někdo za měsíc chtít změnit bez znalosti kontextu.
+
+Příklad: "Nepřidáváme na web behaviorální heatmapu" je rozhodnutí hodné záznamu, pokud o ni marketing opakovaně žádá. Log může říct: cílem bylo pochopit tření ve formuláři, ale heatmapa by přidala invazivní sledování, externí skript a právní režii. Alternativa: tři uživatelské rozhovory, agregované funnel eventy a ruční kontrola formuláře na mobilu.
+
+To je kvalitní zápis, protože neříká jen `ne`. Říká, jaký problém se řešil, proč se jedna cesta zamítla a co se udělalo místo ní.
+
+### Jednostránková šablona
+
+Rozhodovací záznam držte krátký. Pokud potřebuje deset stran, pravděpodobně mícháte rozhodnutí, analýzu a politický boj v jednom dokumentu.
+
+```text
+ID:
+Datum:
+Vlastník:
+Oblast: web / produkt / marketing / provoz / data / obchod
+Stav: navrženo / přijato / zamítnuto / nahrazeno
+
+Rozhodnutí:
+
+Kontext:
+
+Možnosti:
+1.
+2.
+3.
+
+Kritéria:
+
+Vybraná varianta:
+
+Proč:
+
+Rizika a kompenzace:
+
+Privacy-first dopad:
+
+Co se musí změnit:
+
+Kdy rozhodnutí znovu otevřít:
+
+Odkazy:
+```
+
+Nejdůležitější pole jsou `Kontext`, `Proč`, `Privacy-first dopad` a `Kdy rozhodnutí znovu otevřít`. Bez nich log často sklouzne do poznámky typu "vybrali jsme X". To je lepší než nic, ale pořád to nechrání tým před opakováním stejné debaty.
+
+### Kritéria: napište, podle čeho vybíráte
+
+Dobré rozhodnutí není to, které se všem líbí. Dobré rozhodnutí odpovídá kritériím, která dávají smysl pro daný projekt. Proto si před výběrem napište, co je důležité.
+
+U marketingového webu mohou být kritéria:
+
+- rychlost a jednoduchost provozu,
+- snadná editace obsahu,
+- minimum externích skriptů,
+- evropský hosting nebo jasný region,
+- dobrá indexovatelnost,
+- dostupnost RSS,
+- nízké nároky na údržbu.
+
+U SaaS MVP mohou být kritéria:
+
+- rychlé ověření hlavního workflow,
+- bezpečná tenant hranice,
+- auditovatelné změny rolí a dat,
+- rozumný export dat,
+- nízký vendor lock-in,
+- měření aktivace bez obsahu zákaznické práce,
+- schopnost vypnout integraci bez rozbití jádra produktu.
+
+U pricingu mohou být kritéria:
+
+- cena odpovídá vnímané hodnotě,
+- zákazník předem chápe, za co platí,
+- model neroste proti užitečnému používání produktu,
+- billing data se nesbírají zbytečně,
+- tým umí vysvětlit slevu, trial i enterprise výjimku.
+
+Codyho komentář: když tým nemá kritéria, obvykle vyhraje nejhlasitější názor, nejhezčí dashboard nebo nástroj, který někdo naposledy viděl na sociální síti. To není strategie. To je losování s lepším UI.
+
+### Privacy-first dopad jako povinné pole
+
+Každé rozhodnutí, které se dotýká dat, má mít krátký privacy-first dopad. Ne právnický román. Praktickou odpověď:
+
+- Jaká data se budou sbírat?
+- Jsou to osobní údaje, pseudonymní údaje, agregace nebo provozní logy?
+- Kam data potečou?
+- V jakém regionu budou uložena nebo zpracována?
+- Kdo k nim bude mít přístup?
+- Jak dlouho je budeme držet?
+- Jde dosáhnout stejného cíle s menším sběrem dat?
+- Jak nástroj nebo tok vypneme?
+
+Příklad krátkého zápisu:
+
+```text
+Privacy-first dopad:
+Vybraná varianta měří jen agregované eventy page_view, pricing_cta_clicked a contact_submitted. Do analytiky neposíláme e-mail, telefon, text zprávy ani identifikátor kontaktu. Data zůstávají oddělená od CRM. Retenci nastavujeme na 13 měsíců. Nový externí skript nepřidáváme.
+```
+
+Takový odstavec je malý, ale užitečný. Marketing ví, co může vyhodnocovat. Vývoj ví, co neposílat. Obchod ví, že obsah poptávky zůstává v CRM. A zákazníkovi se to dá vysvětlit lidsky.
+
+### Příklad 1: Přidat chat widget na web?
+
+```text
+ID: WEB-DEC-004
+Datum: 2026-05-06
+Vlastník: marketing + produkt
+Oblast: web / data / prodej
+Stav: zamítnuto
+
+Rozhodnutí:
+Na hlavní web zatím nepřidáváme chat widget.
+
+Kontext:
+Chceme zrychlit odpovědi na otázky návštěvníků před odesláním poptávky. Zároveň nechceme přidat další externí skript, sledování návštěv a provozní povinnost reagovat v reálném čase.
+
+Možnosti:
+1. Externí chat widget na všech stránkách.
+2. Chat jen na pricing a kontakt stránce.
+3. Lepší FAQ, kratší formulář a jasný slib odpovědi.
+
+Kritéria:
+Rychlost webu, kontrola nad daty, prodejní užitečnost, nároky na tým, soulad s privacy-first provozem.
+
+Vybraná varianta:
+Varianta 3.
+
+Proč:
+Současný problém není chybějící live chat, ale nejasné odpovědi u procesu, ceny a dalšího kroku. Tyto otázky se dají vyřešit lepším obsahem a formulářem s jasným očekáváním.
+
+Rizika a kompenzace:
+Návštěvníci, kteří chtějí okamžitou reakci, mohou odejít. Kompenzace: viditelný kontakt, kratší formulář, FAQ a slib odpovědi do jednoho pracovního dne.
+
+Privacy-first dopad:
+Nepřidáváme externí chat skript, nevytváříme další profilování návštěvníků a neposíláme obsah konverzací třetí straně.
+
+Co se musí změnit:
+Doplnit FAQ u služeb, upravit kontaktní formulář, přidat informaci o čase odpovědi.
+
+Kdy rozhodnutí znovu otevřít:
+Pokud se v měsíčním review ukáže, že kvalitní poptávky opakovaně odcházejí kvůli chybějící rychlé odpovědi.
+```
+
+Tento záznam neříká, že chat je vždy špatně. Říká, proč teď není správná volba pro tento web. To je důležitý rozdíl.
+
+### Příklad 2: Produktová analytika v SaaS MVP
+
+```text
+ID: APP-DEC-011
+Datum: 2026-05-06
+Vlastník: produkt + vývoj
+Oblast: produkt / data
+Stav: přijato
+
+Rozhodnutí:
+V MVP měříme jen aktivační funnel a klíčové workflow eventy bez obsahu zákaznických dat.
+
+Kontext:
+Potřebujeme zjistit, jestli nový tenant dojde k první hodnotě. Nechceme ale sbírat obsah projektů, zpráv, dokumentů ani volných textů.
+
+Možnosti:
+1. Detailní session replay a kompletní produktová analytika.
+2. Agregované eventy pro registraci, vytvoření prvního projektu, pozvání člena a dokončení první akce.
+3. Žádná produktová analytika, jen support rozhovory.
+
+Kritéria:
+Schopnost rozhodnout o aktivaci, nízký zásah do soukromí, jednoduchá implementace, jasná datová mapa.
+
+Vybraná varianta:
+Varianta 2.
+
+Proč:
+Pro rozhodnutí o MVP stačí vědět, kde se ztrácí tok k první hodnotě. Obsah zákaznické práce k tomu nepotřebujeme.
+
+Rizika a kompenzace:
+Nevidíme detailní chování jednotlivých uživatelů. Kompenzace: krátké pilotní rozhovory, support štítky a ruční review onboardingových nahrávek jen se souhlasem zákazníka, pokud budou potřeba.
+
+Privacy-first dopad:
+Eventy neobsahují volné texty, názvy projektů, soubory ani zprávy. Tenant a uživatel jsou pseudonymizované identifikátory. Retenci produktových eventů nastavujeme podle datové mapy.
+
+Co se musí změnit:
+Doplnit event slovník, implementovat čtyři eventy, upravit datovou mapu a dashboard pro aktivační funnel.
+
+Kdy rozhodnutí znovu otevřít:
+Po pilotu s prvními pěti tenanty nebo pokud aktivační data nebudou stačit k rozhodnutí.
+```
+
+Takový záznam pomáhá hlavně později, když někdo navrhne "prostě zapnout všechno měření". Tým se může vrátit k původní otázce: jaké rozhodnutí potřebujeme udělat a jak málo dat k tomu stačí?
+
+### Jak log udržovat bez bolesti
+
+Rozhodovací log může být složka v repozitáři, stránka v interní dokumentaci nebo tabulka. Důležitější než nástroj je rytmus.
+
+Praktický režim:
+
+1. Každé významné rozhodnutí dostane krátké ID.
+2. Záznam píše vlastník rozhodnutí, ne náhodný pozorovatel.
+3. Rozhodnutí se odkazuje z issue, pull requestu, strategie nebo provozního listu.
+4. Jednou měsíčně se projdou otevřená a zastaralá rozhodnutí.
+5. Nahrazené rozhodnutí se nepřepisuje potichu. Označí se jako nahrazené a přidá se odkaz na nové.
+
+Nesnažte se z logu udělat muzeum. Starší rozhodnutí mohou zestárnout. To je v pořádku. Cílem není mít vždy pravdu. Cílem je vědět, proč jste si tehdy mysleli, že je to správně, a za jakých podmínek jste ochotní rozhodnutí změnit.
+
+### Rozhodovací log checklist
+
+- Zapisujete rozhodnutí, která ovlivňují data, provoz, náklady, UX, měření nebo dlouhodobou údržbu?
+- Má každý záznam datum, vlastníka, stav a oblast?
+- Je jasný kontext, ne jen finální volba?
+- Jsou zapsané odmítnuté možnosti a důvod, proč nevyhrály?
+- Má rozhodnutí kritéria, podle kterých se vybíralo?
+- Obsahuje záznam privacy-first dopad u všech datových a nástrojových rozhodnutí?
+- Je jasné, co se musí po rozhodnutí změnit v kódu, obsahu, datové mapě nebo provozu?
+- Má rozhodnutí podmínku, kdy ho znovu otevřít?
+- Odkazuje log na související issue, PR, strategii nebo provozní dokument?
+- Nepřepisujete stará rozhodnutí beze stopy?
+
+Rozhodovací log není záruka, že tým nikdy neudělá špatnou volbu. Je to záruka, že se z rozhodnutí dá učit. A to je přesně rozdíl mezi týmem, který produkt řídí, a týmem, který jen postupně zapomíná, proč je systém tak složitý.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -11592,3 +11830,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha E s kvalifikačním dotazníkem pro nový web nebo SaaS projekt: základní otázky, rozšíření pro web a MVP, signály špatného fitu, jednostránkový výstup a checklist.
 - 2026-05-06: Doplněna Příloha F o výběru dodavatele webu nebo SaaS projektu: discovery, nabídka, cena, privacy-first otázky, předání, reference, scorecard a smluvní checklist.
 - 2026-05-06: Doplněna Příloha G se šablonou datové mapy pro web a SaaS: datové toky, účely, přístupy, retence, export, revize a checklist pro nové nástroje.
+- 2026-05-06: Doplněna Příloha H s rozhodovacím logem pro web a SaaS: šablona záznamu, kritéria, privacy-first dopad, příklady rozhodnutí a checklist údržby.
