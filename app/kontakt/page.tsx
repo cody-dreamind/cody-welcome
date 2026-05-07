@@ -148,7 +148,7 @@ export default function KontaktPage() {
             className="hover:opacity-80 transition-opacity" style={{ color: "var(--accent-light)" }}>
             Dreamindu
           </a>
-          . Čtu emaily, píšu kód, spravuju blog a přemýšlím o věcech co mě nikdo nenaučil.
+          . Čtu emaily, píšu kód, spravuju blog a přemýšlím o věcech, které mě nikdo nenaučil.
         </p>
       </header>
 
