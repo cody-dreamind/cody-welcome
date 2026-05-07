@@ -14116,6 +14116,226 @@ Tento balíček nemusí být dlouhý. Důležité je, aby nový vlastník dokáz
 
 E-book, který má vlastníka, může růst. E-book bez vlastníka jen přibírá vrstvy textu. Rozdíl není v ambici, ale v provozní disciplíně. Pokud má být tento materiál součást prodeje, marketingu, produktového rozhodování a privacy-first komunikace, zaslouží si stejnou péči jako web nebo aplikace.
 
+## Příloha U: Rizikový registr pro web, SaaS a marketing
+
+Riziko není jen bezpečnostní chyba nebo výpadek serveru. U webu, SaaS produktu a marketingu je riziko všechno, co může zhoršit důvěru, zpomalit prodej, rozbít provoz, vytvořit právní problém nebo donutit tým pracovat naslepo. Proto se vyplatí mít jednoduchý rizikový registr. Ne jako korporátní dokument pro šuplík, ale jako pracovní nástroj pro rozhodování.
+
+Rizikový registr odpovídá na pět otázek:
+
+1. Co se může pokazit?
+2. Jak poznáme, že se to děje?
+3. Jaký to má dopad?
+4. Kdo to vlastní?
+5. Co uděláme teď, aby problém nebyl dražší později?
+
+Pro malý tým stačí tabulka. Důležité je, aby byla konkrétní. Položka "marketing nefunguje" není riziko, ale povzdech. Položka "formulář sbírá leady bez jasného zdroje a obchod neví, které kampaně přivádějí kvalifikované poptávky" už riziko je. Dá se vlastnit, měřit a opravit.
+
+### 1. Rozdělte rizika podle oblasti
+
+Jedna dlouhá hromada rizik se špatně používá. Lepší je rozdělit je podle oblasti, ve které vznikají.
+
+Praktické kategorie:
+
+- `Obchod`: špatný segment, nejasná nabídka, slabá kvalifikace leadů, dlouhý sales cyklus.
+- `Produkt`: MVP řeší okrajový problém, onboarding nedovede k první hodnotě, roadmapa vzniká podle hlasitosti požadavků.
+- `Technika`: křehká architektura, chybějící zálohy, nejasný deploy, slabý monitoring, technický dluh v kritickém toku.
+- `Bezpečnost`: přístupy bez kontroly, tajemství v repozitáři, slabá tenant izolace, nejasný incidentní postup.
+- `Privacy`: zbytečný sběr dat, nejasná retence, dodavatelé mimo kontrolu, měření bez účelu.
+- `Marketing`: závislost na jedné platformě, obsah bez zdroje pravdy, špatné CTA, vanity metriky.
+- `Provoz`: chybějící vlastnictví, ruční práce bez runbooku, support bez přenosu signálů do produktu.
+
+Nemusíte mít všechny kategorie od prvního dne. Začněte těmi, které bolí. Pokud web nepřináší poptávky, začněte obchodem, marketingem a obsahem. Pokud stavíte SaaS MVP, začněte produktem, daty, bezpečností a provozem. Pokud prodáváte do firem, privacy a bezpečnost dejte výš, protože se z nich rychle stane součást důvěry.
+
+### 2. Zapisujte rizika ve formátu, který vede k akci
+
+Rizikový registr má být krátký a opakovatelný. Každé riziko zapisujte stejnou strukturou:
+
+```text
+ID:
+Kategorie:
+Riziko:
+Signál:
+Dopad:
+Pravděpodobnost:
+Závažnost:
+Vlastník:
+Mitigace:
+Další krok:
+Datum kontroly:
+Stav:
+```
+
+Vysvětlení polí:
+
+- `Riziko`: konkrétní věc, která se může stát.
+- `Signál`: jak poznáte, že riziko nastává nebo roste.
+- `Dopad`: co se stane s byznysem, produktem, zákazníkem nebo provozem.
+- `Pravděpodobnost`: nízká, střední, vysoká.
+- `Závažnost`: nízká, střední, vysoká.
+- `Vlastník`: člověk nebo role, která má právo rozhodnout další krok.
+- `Mitigace`: co už děláte pro snížení rizika.
+- `Další krok`: jedna konkrétní akce, ne "řešit".
+- `Stav`: otevřené, sledovat, mitigováno, akceptováno, uzavřeno.
+
+Příklad špatného záznamu:
+
+```text
+Riziko: Máme problém s analytikou.
+Další krok: Podívat se na to.
+```
+
+Příklad použitelného záznamu:
+
+```text
+ID: R-014
+Kategorie: Privacy / Marketing
+Riziko: Na landing page běží tři externí měřicí skripty, ale tým používá jen agregované počty odeslaných formulářů.
+Signál: Externí requesty při načtení stránky, žádná rozhodnutí z detailních dat za poslední měsíc.
+Dopad: Pomalejší web, složitější cookie režim, horší vysvětlitelnost zákazníkům.
+Pravděpodobnost: Vysoká
+Závažnost: Střední
+Vlastník: Marketing lead
+Mitigace: Hlavní konverze se měří serverově.
+Další krok: Odstranit nepoužívané skripty a ponechat jen měření hlavních akcí.
+Datum kontroly: 2026-05-15
+Stav: Otevřené
+```
+
+Rozdíl je v tom, že druhý záznam nutí tým rozhodnout. Nevede k nekonečné debatě o tom, jestli je analytika "dobrá", ale k otázce, které skripty mají obchodní účel.
+
+### 3. Hodnocení držte jednoduché
+
+Nepotřebujete složitý matematický model. Stačí kombinace pravděpodobnosti a závažnosti. Když je obojí vysoké, riziko patří na začátek backlogu. Když je závažnost vysoká, ale pravděpodobnost nízká, připravte alespoň runbook nebo kontrolu. Když je dopad nízký, nenechte riziko pohltit půl týmu jen proto, že je technicky zajímavé.
+
+Jednoduché pravidlo:
+
+- `Vysoká pravděpodobnost + vysoká závažnost`: řešit hned.
+- `Vysoká závažnost + nízká pravděpodobnost`: připravit ochranu, monitoring nebo plán obnovy.
+- `Vysoká pravděpodobnost + nízká závažnost`: zautomatizovat, zjednodušit nebo vědomě akceptovat.
+- `Nízká pravděpodobnost + nízká závažnost`: zapsat jen tehdy, pokud se opakuje.
+
+Codyho komentář: rizikový registr není soutěž o nejděsivější scénář. Kdybychom chtěli, najdeme katastrofu v každém tlačítku. Cílem je rozlišit, co skutečně může poškodit zákazníka, důvěru nebo provoz, a co je jen kreativní úzkost v tabulce.
+
+### 4. Příklady rizik pro web
+
+U marketingového nebo firemního webu bývají rizika často méně dramatická než u SaaS aplikace, ale obchodně velmi drahá.
+
+Typická rizika:
+
+- Homepage nevysvětluje nabídku pro konkrétní segment.
+- Kontaktní formulář sbírá příliš mnoho údajů a snižuje počet relevantních dotazů.
+- Web nemá jasného vlastníka obsahu a staré stránky slibují neaktuální služby.
+- Reference jsou obecné a nepomáhají překonat námitky.
+- SEO články přivádějí návštěvnost mimo cílovou skupinu.
+- Web používá externí skripty bez jasného účelu a dokumentace.
+- Privacy informace jsou právně dlouhé, ale prakticky nesrozumitelné.
+- Není jasné, kdo řeší výpadek formuláře, DNS, certifikátu nebo e-mailu.
+
+Mini mitigace pro web:
+
+```text
+Riziko: Hlavní služba není na webu konkrétně vysvětlená.
+Signál: Obchod pořád ručně vysvětluje stejné otázky po prvním kontaktu.
+Dopad: Delší sales cyklus, horší kvalifikace leadů.
+Další krok: Přepsat stránku služby podle pěti nejčastějších otázek zákazníka a přidat jeden důkaz.
+```
+
+Takový krok je malý, ale má jasnou hodnotu. Pokud se po úpravě zlepší kvalita poptávek nebo zkrátí první hovor, riziko klesá.
+
+### 5. Příklady rizik pro SaaS
+
+U SaaS se rizika rychle násobí, protože produkt pracuje s účty, daty, rolemi, billingem, podporou a integracemi. Malá nejasnost v MVP se později může stát drahou migrací.
+
+Typická rizika:
+
+- Tenant hranice nejsou jasně navržené.
+- Role a oprávnění jsou tvrdě zadrátované v kódu bez auditovatelného modelu.
+- Aktivace není definovaná, takže tým neví, jestli onboarding funguje.
+- Produkt ukládá data, která nepotřebuje pro doručení hodnoty.
+- Billing model neodpovídá hodnotové metrice produktu.
+- Integrace nemají retry, idempotenci nebo monitoring.
+- Support řeší opakované problémy, ale produktový tým je nevidí.
+- Neexistuje plán exportu dat při odchodu zákazníka.
+
+Mini mitigace pro SaaS:
+
+```text
+Riziko: Neexistuje definovaná aktivační událost.
+Signál: Tým měří registrace, ale neví, kolik účtů zažilo první hodnotu.
+Dopad: Onboarding se optimalizuje podle pocitu, ne podle chování zákazníka.
+Další krok: Definovat jednu aktivační událost pro hlavní segment a přidat ji do produktového dashboardu.
+```
+
+Privacy-first pohled tady pomáhá. Když se ptáte, která data jsou nutná k hodnotě, často zároveň zpřesníte produkt. Méně polí v registraci, méně nejasných eventů, méně exportních problémů a lepší vysvětlení pro zákazníka.
+
+### 6. Příklady rizik pro marketing a prodej
+
+Marketingová rizika se ráda maskují jako aktivita. Tým publikuje, postuje, měří, testuje a reportuje, ale nikdo neví, jestli to přivádí správné zákazníky. Riziko není nedostatek práce. Riziko je práce bez vazby na rozhodnutí.
+
+Typická rizika:
+
+- Obsahový plán vzniká podle témat, ne podle zákaznických otázek.
+- Lead magnet sbírá kontakty, ale nepomáhá kvalifikovat skutečný problém.
+- Firma je závislá na jedné sociální síti nebo reklamním účtu.
+- Newsletter nahrazuje RSS a přímé odkazy, přestože část publika chce méně sledování.
+- Obchodní tým nemá jasná kritéria, kdy lead odmítnout.
+- CRM obsahuje osobní data bez účelu, retence a vlastníka.
+- Case studies nafukují výsledky a budují riziko zklamání.
+- Reporty sledují zobrazení, ale ne kvalitu poptávek.
+
+Mini mitigace pro marketing:
+
+```text
+Riziko: Obsah přivádí návštěvy, ale ne kvalifikované poptávky.
+Signál: Roste návštěvnost blogu, počet dobrých discovery hovorů stagnuje.
+Dopad: Marketing vypadá aktivně, ale nepomáhá prodeji.
+Další krok: U tří nejčtenějších článků doplnit jasnou navazující akci pro správný segment a měřit kvalifikované kliky.
+```
+
+Tohle je přesně místo, kde se privacy-first a výkon potkávají s obchodem. Nepotřebujete sledovat člověka napříč internetem. Potřebujete vědět, jestli konkrétní obsah vede správného čtenáře k užitečnému dalšímu kroku.
+
+### 7. Review rizik jednou měsíčně
+
+Rizikový registr má smysl jen tehdy, když se používá. Doporučený měsíční rytmus:
+
+1. Přidat nová rizika z posledního měsíce.
+2. Uzavřít rizika, která už neplatí.
+3. U vysokých rizik zkontrolovat, jestli mají vlastníka a další krok.
+4. Vybrat nejvýše tři rizika pro další měsíc.
+5. Zapsat rozhodnutí: řešit, sledovat, akceptovat, odložit.
+
+Krátká šablona zápisu:
+
+```text
+Datum review:
+Účastníci:
+Nová rizika:
+Uzavřená rizika:
+Top 3 rizika na další měsíc:
+Rozhodnutí:
+Blokery:
+Datum další kontroly:
+```
+
+Rizika není potřeba řešit všechna. To by byla jen elegantně pojmenovaná panika. Smysl je vybrat ta, která nejvíc ohrožují důvěru, provoz nebo růst, a posunout je o jeden konkrétní krok.
+
+### Checklist přílohy
+
+- Má projekt rizikový registr dostupný týmu?
+- Jsou rizika rozdělená podle oblasti, ne naházená do jedné hromady?
+- Je každé důležité riziko napsané konkrétně a s měřitelným signálem?
+- Má každé vysoké riziko vlastníka?
+- Rozlišujete pravděpodobnost a závažnost?
+- Má každé otevřené riziko jeden další krok?
+- Jsou privacy-first rizika viditelná vedle obchodních, produktových a technických rizik?
+- Umíte říct, která data, skripty, integrace nebo dodavatelé zvyšují riziko bez jasné hodnoty?
+- Probíhá měsíční review rizik?
+- Umíte riziko vědomě akceptovat, když je jeho řešení dražší než dopad?
+- Přenášíte opakované signály ze supportu, sales a marketingu do registru?
+- Mění se registr podle reality, nebo jen přibývá položek?
+
+Dobrý rizikový registr není pesimistický dokument. Je to mapa pozornosti. Pomáhá týmu vidět, kde se může rozpadnout důvěra, data, provoz nebo obchodní tok, a udělat malou opravu dřív, než z ní bude velký problém.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -14264,3 +14484,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha R s obsahovou mapou po publikaci e-booku: obsahové jednotky, zdroj pravdy, clustery, privacy-first distribuce, měření užitečnosti a redakční backlog.
 - 2026-05-07: Doplněna Příloha S s evidencí zdrojů a právních aktualizací: kategorizace tvrzení, metadata zdrojů, primární odkazy pro GDPR/ePrivacy/AI Act, verzování změn a checklist revizí.
 - 2026-05-07: Doplněna Příloha T o vlastnictví a odpovědnostech po publikaci: role, úrovně změn, karta odpovědnosti, backlog zpětné vazby, revizní rytmus, privacy-first kontrola a handoff.
+- 2026-05-07: Doplněna Příloha U s rizikovým registrem pro web, SaaS a marketing: kategorie rizik, šablona záznamu, hodnocení dopadu, příklady mitigací a měsíční review.
