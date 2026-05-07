@@ -13899,6 +13899,223 @@ Silnější verze je méně efektní. Také má mnohem menší šanci, že bude 
 
 Evidence zdrojů je malý provozní návyk s velkým dopadem. Udržuje důvěru, snižuje riziko zastaralých rad a pomáhá týmu psát sebevědomě bez toho, aby si pletl názor s faktem. Privacy-first text má být nejen slušný k datům, ale i poctivý ke čtenáři.
 
+## Příloha T: Vlastnictví a odpovědnosti po publikaci
+
+Publikace e-booku není konec práce. Je to okamžik, kdy se z rukopisu stává provozované aktivum. Lidé na něj začnou odkazovat, posílat ho kolegům, vytahovat z něj checklisty, používat ho v prodeji a občas podle něj dělat rozhodnutí. Pokud nikdo neví, kdo odpovídá za údržbu, kvalitu a další vývoj, začne text pomalu stárnout. Ne dramaticky. Jen po malých kouscích, takže si toho tým všimne až ve chvíli, kdy se v něm objeví tři staré odkazy, dvě neplatné formulace a jeden interní slib, který už produkt dávno neumí splnit.
+
+Vlastnictví obsahu proto není administrativní formalita. Je to provozní pojistka. Stejně jako má SaaS produkt vlastníka roadmapy, supportu a bezpečnosti, má mít dlouhodobý e-book vlastníka obsahu, zdrojů, publikace, distribuce a privacy-first pravidel.
+
+Praktický cíl této přílohy: nastavit jednoduchý systém odpovědností, aby e-book zůstal použitelný i po prvním vydání.
+
+### 1. Určete jednoho vlastníka publikace
+
+Každý dokument může mít více přispěvatelů, ale neměl by mít pět nejasných vlastníků. Vlastník publikace nemusí psát všechno sám. Jeho úkol je hlídat, že se s e-bookem zachází jako s produktem, ne jako s jednorázovým PDF.
+
+Vlastník publikace odpovídá za:
+
+- rozhodnutí, co je zdroj pravdy,
+- schválení větších obsahových změn,
+- rytmus revizí,
+- evidenci zdrojů a citlivých tvrzení,
+- propojení e-booku s webem, šablonami a marketingem,
+- řešení zpětné vazby,
+- archivaci starších verzí,
+- to, že privacy-first pravidla nejsou jen hezká věta v úvodu.
+
+To neznamená, že vlastník má dělat každou opravu. Znamená to, že když se někdo zeptá "kdo rozhodne, jestli tahle kapitola zůstává", existuje odpověď.
+
+Příklad:
+
+```text
+Vlastník publikace:
+Produktový nebo obsahový lead.
+
+Podpůrné role:
+Technický reviewer pro kapitoly o vývoji a provozu.
+Marketingový reviewer pro distribuci, positioning a sales použití.
+Privacy reviewer pro datové toky, formuláře, měření a dodavatele.
+Editor pro jazyk, strukturu a čitelnost.
+```
+
+Codyho komentář: obsah bez vlastníka se chová stejně jako backlog bez priorit. Každý ví, že existuje, občas do něj někdo přihodí dobrý nápad a po čase se z něj stane archeologická vrstva dobrých úmyslů.
+
+### 2. Oddělte odpovědnosti podle typu změny
+
+Ne každá změna potřebuje stejný proces. Oprava překlepu nemá čekat na meeting. Přepsání kapitoly o cookies, AI funkcích nebo dodavatelích už ale nemá projít jako "jen drobná úprava". Rozdíl je v dopadu.
+
+Použijte čtyři úrovně změn:
+
+| Úroveň | Příklad | Kdo může změnit | Kontrola |
+| --- | --- | --- | --- |
+| Drobná editace | Překlep, stylistická úprava, lepší formulace bez změny významu | Editor nebo vlastník publikace | Rychlá kontrola diffu |
+| Obsahové zpřesnění | Doplnění příkladu, checklistu nebo vysvětlení | Autor kapitoly nebo vlastník publikace | Obsahová kontrola |
+| Citlivá změna | Právní, compliance, bezpečnostní, cenové nebo produktové tvrzení | Vlastník publikace po ověření zdroje | Zdroj + datum ověření |
+| Strategická změna | Přidání nové části, změna pozice e-booku, přepsání závěru | Vlastník publikace + odpovědný lead | Schválení a log změn |
+
+Tahle tabulka šetří čas. Tým se nemusí dohadovat, jestli se kvůli jedné opravě otevírá proces, a zároveň se citlivé změny nepropašují do textu jako kosmetika.
+
+### 3. Vytvořte kartu odpovědnosti
+
+Ke každé veřejné verzi e-booku by měla existovat jednoduchá karta odpovědnosti. Nemusí být složitá. Může být přímo v repozitáři, v issue, v interní znalostní bázi nebo v release poznámce.
+
+Šablona:
+
+```markdown
+# Karta odpovědnosti e-booku
+
+Název:
+Veřejná URL:
+Zdroj pravdy:
+Vlastník publikace:
+Technický reviewer:
+Marketingový reviewer:
+Privacy reviewer:
+Editor:
+Datum poslední publikace:
+Datum další plánované revize:
+Kanály distribuce:
+Měřené signály:
+Seznam navazujících šablon:
+Seznam citlivých kapitol:
+Postup pro urgentní opravu:
+```
+
+Vyplněný příklad:
+
+```text
+Název:
+Od webu k SaaS
+
+Veřejná URL:
+/ebook/od-webu-k-saas
+
+Zdroj pravdy:
+Markdown v repozitáři.
+
+Vlastník publikace:
+Cody / odpovědný obsahový vlastník.
+
+Technický reviewer:
+Vývojový lead pro kapitoly o architektuře, provozu a bezpečnosti.
+
+Marketingový reviewer:
+Osoba odpovědná za web, distribuci a sales použití.
+
+Privacy reviewer:
+Osoba odpovědná za datovou mapu, měření, formuláře a dodavatele.
+
+Měřené signály:
+Kliky na stažení, přímé odkazy, RSS odběr, kvalifikované poptávky, použití checklistů v obchodních hovorech.
+
+Postup pro urgentní opravu:
+Opravit zdroj pravdy, zapsat změnu do pracovního logu, znovu publikovat, ověřit veřejnou URL.
+```
+
+### 4. Zpětnou vazbu berte jako vstup do backlogu
+
+Po publikaci začnou přicházet podněty. Některé budou užitečné. Některé budou subjektivní. Některé budou ve stylu "mně se nelíbí slovo marketing", což je informace, ale ne nutně úkol. Proto se vyplatí mít jednoduchý backlog zpětné vazby.
+
+Každý podnět zapisujte ve formátu:
+
+```text
+Datum:
+Zdroj podnětu:
+Kapitola / sekce:
+Typ:
+Popis:
+Dopad:
+Návrh akce:
+Rozhodnutí:
+```
+
+Typy podnětů:
+
+- `Chyba`: něco je věcně špatně, rozbité nebo zavádějící.
+- `Nejasnost`: čtenář nerozumí formulaci, příkladu nebo návaznosti.
+- `Doplnění`: chybí praktický příklad, checklist nebo šablona.
+- `Aktualizace`: změnily se okolnosti, nástroj, postup nebo zdroj.
+- `Distribuce`: e-book by měl být lépe propojený s webem, článkem, šablonou nebo sales materiálem.
+- `Privacy`: podnět se týká dat, měření, souhlasů, dodavatelů nebo veřejné komunikace soukromí.
+
+Priorita by neměla vznikat podle hlasitosti autora podnětu. Lepší kritéria:
+
+- Kolik čtenářů může být zmatených?
+- Může chyba vést ke špatnému rozhodnutí?
+- Dotýká se tvrzení právního, bezpečnostního nebo privacy-first tématu?
+- Pomůže úprava prodeji, onboardingu nebo lepší práci týmu?
+- Je změna malá a jasná, nebo vyžaduje větší revizi?
+
+### 5. Nastavte rytmus péče
+
+E-book nepotřebuje každodenní péči. Potřebuje rytmus. Bez rytmu se údržba děje jen tehdy, když něco hoří nebo když má někdo výčitky. Obojí je špatný projektový manažer.
+
+Doporučený provozní rytmus:
+
+- Týdně: projít nové podněty a opravit drobné chyby.
+- Měsíčně: vybrat jednu obsahovou část k vylepšení podle reálného použití.
+- Kvartálně: projít citlivé kapitoly, zdroje, odkazy a privacy-first tvrzení.
+- Před větší kampaní: zkontrolovat landing page, CTA, distribuční balíček, měření a formuláře.
+- Po větší změně produktu nebo nabídky: zkontrolovat, jestli e-book neslibuje starou realitu.
+
+Pro každý rytmus stačí jeden výstup:
+
+```text
+Co jsme zkontrolovali:
+Co jsme změnili:
+Co jsme odložili:
+Co je riziko:
+Kdy je další kontrola:
+```
+
+### 6. Privacy-first odpovědnost není jen právní role
+
+Privacy-first kontrola nemá být poslední razítko před publikací. Má být součást rozhodování o tom, jak e-book sbírá signály a jak se používá v marketingu.
+
+Při každé větší změně se ptejte:
+
+- Přidáváme nový formulář, měření, skript nebo externí službu?
+- Ví čtenář, co se stane po odeslání kontaktu nebo stažení materiálu?
+- Sbíráme jen data, která potřebujeme pro konkrétní účel?
+- Umíme vysvětlit, kde data končí a kdo k nim má přístup?
+- Dá se obsah odebírat nebo sledovat bez nuceného účtu a zbytečného trackingu?
+- Mají sales a marketing verze stejnou pravdu jako veřejný text?
+
+Praktický příklad: tým chce za e-book dát formulář s povinným telefonem, firmou, rolí, rozpočtem, velikostí týmu a souhlasem s marketingem. Privacy-first varianta začne otázkou, co je skutečně potřeba pro první odpověď. Možná stačí e-mail a volitelné pole "co řešíte". Pokud se e-book dá číst veřejně a formulář je jen pro navazující konzultaci, je to poctivější tok. Méně dat, méně tření, víc důvěry.
+
+### 7. Handoff: co musí vědět člověk, který e-book převezme
+
+Jednou se vlastník změní. Někdo odejde, změní roli nebo se e-book přesune do jiného týmu. Pokud je vše jen v hlavě jednoho člověka, převzetí bude drahé.
+
+Handoff balíček má obsahovat:
+
+- aktuální zdroj pravdy,
+- veřejné URL a distribuční kanály,
+- pracovní log a historii větších změn,
+- seznam citlivých kapitol a zdrojů,
+- seznam navazujících šablon, článků a landing pages,
+- přehled měřených signálů,
+- otevřený backlog podnětů,
+- postup publikace nové verze,
+- postup urgentní opravy,
+- privacy-first pravidla pro formuláře, měření a distribuci.
+
+Tento balíček nemusí být dlouhý. Důležité je, aby nový vlastník dokázal během jedné hodiny pochopit, kde je pravda, co je rozpracované a co se nesmí rozbít.
+
+### Checklist přílohy
+
+- Má e-book jednoho jasného vlastníka publikace?
+- Jsou oddělené drobné, obsahové, citlivé a strategické změny?
+- Existuje karta odpovědnosti s veřejnou URL, zdrojem pravdy a rolemi?
+- Má zpětná vazba vlastní backlog, ne jen náhodné zprávy v chatu?
+- Je jasné, kdo kontroluje zdroje, citlivá tvrzení a odkazy?
+- Probíhá měsíční nebo kvartální revize podle rizikovosti obsahu?
+- Má privacy-first kontrola vliv na formuláře, měření a distribuci?
+- Ví tým, co udělat při urgentní opravě veřejného textu?
+- Existuje handoff balíček pro nového vlastníka?
+- Zapisují se změny do pracovního logu i tehdy, když jsou "jen obsahové"?
+
+E-book, který má vlastníka, může růst. E-book bez vlastníka jen přibírá vrstvy textu. Rozdíl není v ambici, ale v provozní disciplíně. Pokud má být tento materiál součást prodeje, marketingu, produktového rozhodování a privacy-first komunikace, zaslouží si stejnou péči jako web nebo aplikace.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -14046,3 +14263,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha Q s publikačním plánem pro e-book na vlastní URL: zdroj pravdy, webová verze, landing page, publikační balíček, privacy-first měření, údržba a odvozené formáty.
 - 2026-05-07: Doplněna Příloha R s obsahovou mapou po publikaci e-booku: obsahové jednotky, zdroj pravdy, clustery, privacy-first distribuce, měření užitečnosti a redakční backlog.
 - 2026-05-07: Doplněna Příloha S s evidencí zdrojů a právních aktualizací: kategorizace tvrzení, metadata zdrojů, primární odkazy pro GDPR/ePrivacy/AI Act, verzování změn a checklist revizí.
+- 2026-05-07: Doplněna Příloha T o vlastnictví a odpovědnostech po publikaci: role, úrovně změn, karta odpovědnosti, backlog zpětné vazby, revizní rytmus, privacy-first kontrola a handoff.
