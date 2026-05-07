@@ -15772,6 +15772,229 @@ Můj pohled: dobrý workshop není ten, po kterém má zákazník pocit, že pro
 
 Workshopový balíček je most mezi textem a prací. Když se používá dobře, e-book přestane být "materiál k přečtení" a začne být nástroj k lepším rozhodnutím. Přesně tam má praktický obsah patřit.
 
+## Příloha AD: Sales enablement balíček pro e-book
+
+E-book může být víc než obsah na webu. Pro malý tým může fungovat jako obchodní nástroj, který zrychlí kvalifikaci, zpřesní rozhovory a sníží množství ručního vysvětlování. Ne tím, že se zákazníkovi pošle 150 stran s větou "tady si to přečtěte". To je jen elegantnější způsob, jak přesunout práci na druhou stranu. Sales enablement znamená vytáhnout z e-booku přesně ty části, které pomáhají v konkrétní fázi rozhodování.
+
+Dobře připravený balíček má tři cíle:
+
+1. Pomoci zákazníkovi pojmenovat problém.
+2. Ukázat, jak Dreamind nad webem, SaaS, marketingem a privacy-first provozem přemýšlí.
+3. Dovést obchodní rozhovor k dalšímu konkrétnímu kroku.
+
+Balíček nemá nahrazovat discovery. Má discovery zlepšit. Když zákazník před hovorem dostane správnou otázku, krátký výřez z e-booku nebo checklist, přijde připravenější. Hovor pak není prezentace, ale práce.
+
+### 1. Rozdělte e-book podle obchodních situací
+
+Nezačínejte obsahem. Začněte situacemi, ve kterých tým e-book použije. Typické situace:
+
+- Zákazník chce nový web, ale problém je ve skutečnosti nejasná nabídka.
+- Firma má web, který generuje poptávky, ale kvalita leadů je slabá.
+- Tým zvažuje SaaS MVP a neví, co patří do první verze.
+- Produkt už existuje, ale onboarding, metriky a support nejsou propojené.
+- Marketing sbírá návštěvnost, ale nedokáže ukázat obchodní přínos.
+- Zákazník řeší důvěru, data, evropský provoz a chce vědět, co je praktické minimum.
+
+Ke každé situaci vyberte tři až pět částí e-booku. Ne celý rukopis. Obchodní použití dlouhého obsahu stojí na přesnosti výběru.
+
+Příklad mapování:
+
+| Situace | Doporučené části e-booku | Obchodní cíl |
+| --- | --- | --- |
+| Nový web bez jasného zadání | Kapitoly 1, 2, 5, 28 a checklist 30 | Převést debatu z designu na rozhodování zákazníka |
+| SaaS MVP | Kapitoly 8, 9, 10, 11 a checklist 31 | Zúžit rozsah první verze a pojmenovat rizika |
+| Privacy-first audit | Kapitoly 7, 14, 32 a Příloha G | Ukázat datové toky, zbytečné skripty a provozní slabiny |
+| Obsahový marketing | Kapitoly 22, 23, 24, 26 a Příloha I | Vytvořit obsah podle otázek zákazníka, ne podle kalendáře |
+| Prodejní stránka | Kapitoly 2, 25, 28, 29 a Příloha J | Zpřesnit důkazy, CTA, námitky a kvalifikaci |
+
+### 2. Připravte krátké obchodní výřezy
+
+Obchodník nepotřebuje během hovoru listovat dlouhým Markdownem. Potřebuje krátký výřez, který lze poslat před hovorem, použít během hovoru nebo poslat po něm.
+
+Vytvořte pět typů výřezů:
+
+- Jednostránkový checklist.
+- Krátký vysvětlující úryvek k jednomu rozhodnutí.
+- Otázky pro discovery.
+- Příklad vyplněné šablony.
+- Follow-up doporučení po hovoru.
+
+Každý výřez má mít vlastní účel. Pokud nejde říct, kdy se použije, nepatří do sales balíčku.
+
+Praktická šablona výřezu:
+
+```text
+Název:
+
+Kdy použít:
+
+Pro koho:
+
+Jaká otázka se tím řeší:
+
+Odkaz na zdrojovou část e-booku:
+
+Krátké shrnutí pro zákazníka:
+
+Otázky pro hovor:
+-
+-
+-
+
+Další krok:
+```
+
+Příklad:
+
+```text
+Název:
+Checklist pro první SaaS MVP
+
+Kdy použít:
+Když zákazník přichází s nápadem na produkt, ale rozsah je zatím příliš široký.
+
+Pro koho:
+Zakladatel, produktový manažer nebo vedoucí týmu, který má interní proces převést do produktu.
+
+Jaká otázka se tím řeší:
+Co musí první verze ověřit, aby vývoj nebyl jen drahý seznam přání?
+
+Odkaz na zdrojovou část e-booku:
+Kapitola 9 a Kapitola 31.
+
+Krátké shrnutí pro zákazníka:
+MVP není malá verze finálního produktu. Je to experiment, který má ověřit segment, workflow, hodnotu a provozní rizika.
+
+Otázky pro hovor:
+- Jaký jeden workflow má první verze vyřešit?
+- Co dnes zákazník používá místo produktu?
+- Jak poznáme, že pilot stojí za pokračování?
+
+Další krok:
+90minutový MVP workshop s jednostránkovým výstupem.
+```
+
+### 3. Používejte e-book před hovorem, během hovoru i po hovoru
+
+Sales enablement funguje nejlépe, když obsah podporuje celý obchodní tok.
+
+Před hovorem:
+
+- Pošlete jen relevantní výřez, ne celý e-book.
+- Přidejte jednu větu, proč posíláte právě tuto část.
+- Položte jednu přípravnou otázku.
+- Neskrývejte obsah za formulář, pokud už s člověkem komunikujete přímo.
+
+Během hovoru:
+
+- Použijte checklist jako mapu rozhovoru.
+- Zapisujte rozhodnutí a nejistoty, ne každou větu.
+- Vracíte-li se k e-booku, citujte princip, ne dlouhou pasáž.
+- Když zákazník přeskočí k řešení, vraťte debatu k otázce, kterou má řešení ověřit.
+
+Po hovoru:
+
+- Pošlete krátký handoff se třemi body: co jsme pochopili, co doporučujeme jako první krok, co zatím nedělat.
+- Přidejte odkazy na dvě až tři části e-booku, které podporují doporučení.
+- Nevyužívejte otevření odkazu jako osobní sledovací signál. Stačí měřit, jestli typ výřezu pomáhá posouvat rozhodnutí.
+
+### 4. Privacy-first sales enablement
+
+Obchodní obsah často sklouzne k invazivnímu měření: kdo otevřel PDF, kolikrát scrolloval, kdy se vrátil, na jakém zařízení, jak dlouho koukal na stránku s ceníkem. Něco z toho může být lákavé. V privacy-first přístupu je ale lepší ptát se: jaké rozhodnutí tím opravdu uděláme?
+
+Praktické minimum:
+
+- Veřejné části e-booku dávejte na vlastní URL.
+- Nepřidávejte sledovací parametry, pokud podle nich neděláte konkrétní rozhodnutí.
+- Měřte agregovaně, které výřezy vedou k lepším hovorům, ne detailní chování jednotlivců.
+- U obchodních poznámek zapisujte relevantní kontext, ne osobní dojmy.
+- Pokud zákazník pošle citlivé informace, neschovávejte je v náhodném dokumentu nebo chatu.
+- Udržujte jeden zdroj pravdy pro výřezy, aby obchod neposílal staré verze.
+
+Codyho komentář: pokud potřebujete sledovat každý pohyb čtenáře, možná nemáte sales enablement, ale nervozitu převlečenou za analytiku. Dobrá otázka v e-mailu často řekne víc než deset pixelů.
+
+### 5. Jednostránkový sales enablement index
+
+Tým by měl mít jednoduchý index, kde rychle najde správný výřez.
+
+```text
+Situace zákazníka:
+
+Signály v rozhovoru:
+
+Doporučený výřez:
+
+Zdrojová kapitola nebo příloha:
+
+Otázka, kterou položit:
+
+Typický další krok:
+
+Co neposílat:
+
+Poznámka k datům a soukromí:
+```
+
+Vyplněný mini příklad:
+
+```text
+Situace zákazníka:
+Chce redesign webu, ale neumí říct, jak pozná úspěch.
+
+Signály v rozhovoru:
+Mluví hlavně o vzhledu, konkurenci a pocitu, ale nemá definovanou hlavní akci ani kvalitu poptávek.
+
+Doporučený výřez:
+Mini audit webu za 30 minut.
+
+Zdrojová kapitola nebo příloha:
+Kapitola 2 a Kapitola 30.
+
+Otázka, kterou položit:
+Co má návštěvník pochopit a udělat do deseti sekund od příchodu na hlavní stránku?
+
+Typický další krok:
+Audit homepage a hlavní služby s návrhem první iterace.
+
+Co neposílat:
+Celý e-book ani dlouhou část o SaaS architektuře.
+
+Poznámka k datům a soukromí:
+Při auditu zkontrolovat také externí skripty, formuláře a analytiku.
+```
+
+### 6. Údržba obchodního balíčku
+
+Sales enablement balíček stárne rychleji než e-book. Mění se nabídka, typické námitky, reference, pracovní postupy i nejčastější dotazy. Proto ho kontrolujte alespoň jednou měsíčně.
+
+Měsíční údržba:
+
+- Vyřadit výřezy, které obchod nepoužívá.
+- Doplnit části, které chyběly v posledních hovorech.
+- Zpřesnit otázky podle reálných odpovědí zákazníků.
+- Sloučit duplicity.
+- Ověřit, že odkazy vedou na aktuální verzi e-booku.
+- Zkontrolovat, že balíček neobsahuje zastaralé sliby, staré reference nebo interní poznámky.
+
+Dobré pravidlo: pokud obchodník výřez neupravovaně nepoužil tři měsíce, buď není potřeba, nebo není dost praktický. Obojí je důvod k revizi.
+
+### Checklist přílohy
+
+- Má e-book mapování na konkrétní obchodní situace?
+- Existuje krátký index výřezů pro obchodní tým?
+- Je každý výřez navázaný na jednu otázku zákazníka?
+- Posílá se před hovorem jen relevantní část, ne celý rukopis?
+- Pomáhá obsah discovery, místo aby ho nahrazoval?
+- Obsahuje follow-up jasné rozhodnutí, doporučený další krok a co zatím nedělat?
+- Jsou sales poznámky věcné, střídmé a bez zbytečných osobních dat?
+- Měříte užitečnost výřezů agregovaně, ne šmírováním jednotlivých čtenářů?
+- Je jasné, kdo sales enablement balíček udržuje?
+- Probíhá měsíční kontrola použitelnosti, odkazů a aktuálnosti?
+- Má každý výřez odkaz na zdrojovou část e-booku?
+- Neposílá tým zákazníkům staré PDF, když existuje aktuální vlastní URL?
+
+Když se e-book dostane do obchodního toku správně, nepůsobí jako marketingová brožura. Působí jako důkaz přemýšlení. Zákazník vidí, že tým neumí jen dodat obrazovky nebo kampaně, ale umí vést rozhodnutí. A to je v B2B často silnější než další efektní claim na homepage.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -15929,3 +16152,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha AA s QA balíčkem před aktivní distribucí e-booku: rizikové úrovně chyb, čtenářská cesta, kontrola odkazů, mobilní průchod, privacy-first brána a rozhodnutí o rozeslání.
 - 2026-05-07: Doplněna Příloha AB s první retrospektivou po distribuci e-booku: rozhodovací otázka, signály, matice změn, záznam retrospektivy, jedna další iterace a privacy-first kontrola.
 - 2026-05-07: Doplněna Příloha AC s workshopovým balíčkem pro použití e-booku se zákazníkem: agenda, příprava, otázky podle oblasti, matice první iterace, handoff a checklist.
+- 2026-05-07: Doplněna Příloha AD se sales enablement balíčkem pro e-book: obchodní situace, výřezy, follow-up, privacy-first měření, index a údržba.
