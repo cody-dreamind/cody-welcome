@@ -14336,6 +14336,173 @@ Rizika není potřeba řešit všechna. To by byla jen elegantně pojmenovaná p
 
 Dobrý rizikový registr není pesimistický dokument. Je to mapa pozornosti. Pomáhá týmu vidět, kde se může rozpadnout důvěra, data, provoz nebo obchodní tok, a udělat malou opravu dřív, než z ní bude velký problém.
 
+## Příloha V: Definice hotovo pro web, SaaS a marketing
+
+"Hotovo" je nebezpečné slovo. V digitálních projektech často znamená jen "někdo to poslal dál". Design je hotový, protože existuje obrazovka. Vývoj je hotový, protože prošel happy path. Článek je hotový, protože má poslední odstavec. Kampaň je hotová, protože je naplánovaná. Jenže zákazník, provoz a data obvykle najdou přesně ty mezery, které tým při optimistickém předání přeskočil.
+
+Definice hotovo není byrokracie. Je to dohoda, podle čeho tým pozná, že výstup může bezpečně ven. U malého týmu nemusí mít deset stran. Stačí jedna stránka pravidel, která se používá před publikací, releasem, kampaní nebo předáním zákazníkovi.
+
+Dobrá definice hotovo odpovídá na čtyři otázky:
+
+1. Funguje to pro člověka, pro kterého to vzniklo?
+2. Je jasné, kdo za výsledek a další údržbu odpovídá?
+3. Nezvyšuje to zbytečně provozní, bezpečnostní nebo privacy-first riziko?
+4. Víme, jak poznáme, že výstup plní svůj účel?
+
+Když na některou otázku neumíte odpovědět, výstup možná vypadá hotově, ale provozně hotový není. To je přesně ten stav, kdy se práce nenápadně přesune do supportu, obchodních vysvětlování, improvizovaných hotfixů a budoucího chaosu. Krásný koloběh, jen bez té krásy.
+
+### 1. Webová stránka je hotová, když vede k rozhodnutí
+
+Stránka není hotová tím, že je nasazená. Je hotová, když pomáhá návštěvníkovi pochopit nabídku, důvěřovat jí a udělat přirozený další krok.
+
+Minimum pro důležitou stránku:
+
+- Má jasný účel a jednu primární akci.
+- Do několika sekund je poznat, pro koho je a co slibuje.
+- Nadpisy tvoří čitelnou mapu stránky.
+- Obsah odpovídá na hlavní otázky návštěvníka před kontaktem.
+- Obsahuje důkaz: příklad, referenci, ukázku, proces, číslo nebo konkrétní zkušenost.
+- Formulář nebo CTA říká, co se stane po akci.
+- Texty nejsou jen interní žargon přepsaný do veřejné podoby.
+- Stránka funguje na mobilu, z klávesnice a bez překrývání prvků.
+- Neobsahuje externí skripty, které nemají jasný účel.
+- Má vlastníka a datum další kontroly.
+
+Příklad: stránka služby "SaaS MVP" není hotová, když má hero sekci, tři benefity a kontaktní formulář. Hotová je až ve chvíli, kdy vysvětluje, pro jaký typ firmy MVP dává smysl, jaké rozhodnutí se ověřuje, co typicky patří mimo první verzi, jak probíhá úvodní analýza, jak se řeší data a co se stane po odeslání poptávky.
+
+### 2. SaaS funkce je hotová, když přežije běžný provoz
+
+Funkce v SaaS produktu není hotová tím, že ji vývojář umí předvést. Je hotová, když funguje pro reálného uživatele, respektuje oprávnění, má měřitelný účel a dá se provozovat bez ruční magie.
+
+Minimum pro novou funkci:
+
+- Má popsaný uživatelský problém a aktivační signál.
+- Má jasně určené, pro které role a tenanty je dostupná.
+- Respektuje tenant hranice a oprávnění ve všech stavech.
+- Má ošetřené prázdné, chybové, loading a disabled stavy.
+- Má auditní nebo provozní stopu tam, kde na ní záleží.
+- Nezapisuje citlivá data do logů, analytiky ani chybových hlášek.
+- Má migrační a rollback plán, pokud mění datový model.
+- Má přiměřené testy pro hlavní tok a rizikové hrany.
+- Support ví, jak funkci vysvětlit a kde najít základní diagnostiku.
+- Produkt ví, jak pozná, zda funkce skutečně přinesla hodnotu.
+
+Příklad: export dat není hotový tím, že tlačítko stáhne CSV. Hotový je až ve chvíli, kdy export respektuje oprávnění, dává smysl názvy sloupců, neobsahuje data jiného tenantu, zvládá větší objem, hlásí chybu lidsky, zapisuje auditní událost a support ví, co dělat, když export selže.
+
+### 3. Marketingový výstup je hotový, když má distribuci a měření
+
+Marketingový obsah není hotový publikací. Publikace je jen prostředek. Článek, landing page, newsletter nebo lead magnet je hotový až tehdy, když má jasného čtenáře, slib, distribuční cestu, další krok a plán údržby.
+
+Minimum pro marketingový výstup:
+
+- Je jasné, pro koho je a v jaké fázi rozhodování.
+- Řeší jednu hlavní otázku, ne deset volně souvisejících témat.
+- Obsahuje konkrétní příklady, checklist nebo rozhodovací rámec.
+- Aktuální fakta, právní tvrzení a údaje o nástrojích mají zdroj.
+- Codyho komentář je oddělený od faktických tvrzení.
+- Má připravený krátký distribuční text pro vlastní web, RSS, e-mail nebo přímé odkazy.
+- Má jeden další krok, který odpovídá míře důvěry čtenáře.
+- Měří se užitečnost, ne jen počet zobrazení.
+- Nevyžaduje zbytečné osobní údaje výměnou za banální hodnotu.
+- Má určené datum revize, pokud může zastarat.
+
+Příklad: článek o privacy-first analytice není hotový tím, že popíše rozdíl mezi jednoduchou a produktovou analytikou. Hotový je až tehdy, když čtenář dostane checklist výběru, otázky na dodavatele, vysvětlení datových toků, odkazy na relevantní zdroje a férový další krok bez vynuceného stažení za e-mail.
+
+### 4. Privacy-first brána před zveřejněním
+
+Každý výstup, který sbírá data, posílá data třetí straně, měří chování, ukládá zprávy nebo mění oprávnění, musí projít krátkou privacy-first bránou. Ne proto, aby se všechno zastavilo. Naopak: aby tým rychle poznal, co je v pořádku, co je potřeba upravit a co se nemá pouštět ven.
+
+Otázky před releasem:
+
+- Jaká osobní nebo zákaznická data výstup sbírá?
+- Proč jsou tato data potřeba právě pro tento účel?
+- Kde jsou data uložena a v jakém regionu?
+- Kdo k nim má přístup?
+- Jak dlouho se drží?
+- Dostanou se data k novému dodavateli nebo externí službě?
+- Jde stejný účel splnit s menším množstvím dat?
+- Je informace pro uživatele srozumitelná?
+- Má uživatel férovou volbu, pokud jde o marketingové nebo analytické zpracování?
+- Je dopad zapsaný v datové mapě, provozním listu nebo rozhodovacím logu?
+
+Pokud je odpověď "nevíme", není to automaticky stopka. Je to signál, že výstup ještě není připravený k odpovědnému zveřejnění. Nevědět je normální. Vypustit to ven a tvářit se, že se to dopočítá později, je dražší sport.
+
+### 5. Předávací minimum
+
+Každý hotový výstup má být předatelný. To znamená, že jiný člověk v týmu dokáže zjistit, co bylo změněno, proč, kde to běží, jak to ověřit a co dělat při problému.
+
+Předávací poznámka může mít pět řádků:
+
+```text
+Výstup:
+Proč vznikl:
+Kde je publikovaný nebo nasazený:
+Jak ověřit, že funguje:
+Co sledovat po vydání:
+Vlastník:
+```
+
+U větších změn přidejte:
+
+- dotčené stránky, komponenty, datové tabulky nebo integrace,
+- nový nebo změněný datový tok,
+- rollback postup,
+- dopad na support, sales nebo zákaznickou dokumentaci,
+- datum první kontroly po vydání.
+
+Tohle není papírování pro radost z tabulek. Je to ochrana před situací, kdy někdo za měsíc hledá, proč vzniklo nové pole ve formuláři, kam tečou odpovědi a kdo rozhodl, že se bude měřit další event.
+
+### 6. Rozhodnutí: pustit, opravit, nebo zastavit
+
+Definice hotovo má vést k rozhodnutí. Po kontrole výstupu existují tři rozumné výsledky:
+
+- Pustit: splňuje kritéria, známá rizika jsou přijatelná.
+- Opravit: výstup má hodnotu, ale má konkrétní blokery před vydáním.
+- Zastavit: výstup zvyšuje riziko, sbírá zbytečná data, neřeší jasný problém nebo nemá vlastníka.
+
+Nejhorší výsledek je "pustíme to a uvidíme". Někdy je experiment správně. Ale i experiment má mít hypotézu, limit a způsob vyhodnocení. Jinak to není experiment, jen elegantně pojmenované házení práce přes plot.
+
+### Jednostránková definice hotovo
+
+```text
+Název výstupu:
+Typ: web / SaaS funkce / obsah / kampaň / provozní změna
+Primární uživatel nebo čtenář:
+Účel:
+Hlavní další krok:
+
+Kritéria hotovo:
+- Uživatel pochopí hodnotu a další krok.
+- Funguje hlavní tok i základní chybové stavy.
+- Je ověřen mobil, klávesnice a čitelnost textů, pokud jde o web nebo UI.
+- Jsou ověřena oprávnění, tenant hranice a logy, pokud jde o SaaS.
+- Jsou doplněny zdroje, pokud obsahuje aktuální nebo riziková tvrzení.
+- Datové toky jsou popsané a minimalizované.
+- Externí služby mají jasný účel.
+- Měření odpovídá rozhodnutí, ne zvědavosti.
+- Existuje vlastník a datum další kontroly.
+
+Výsledek kontroly: pustit / opravit / zastavit
+Blokery:
+Vlastník:
+Datum první kontroly po vydání:
+```
+
+### Checklist přílohy
+
+- Má tým společnou definici hotovo pro web, produkt i marketing?
+- Je hotovo navázané na uživatelský účel, ne jen na dokončení úkolu v nástroji?
+- Kontrolujete hlavní tok, chybové stavy a reálné zařízení?
+- U SaaS funkcí ověřujete oprávnění, tenant izolaci, logy a support diagnostiku?
+- U obsahu ověřujete čtenáře, slib, zdroje, distribuci a další krok?
+- Prochází datové změny privacy-first bránou?
+- Má každý výstup vlastníka a datum revize?
+- Umíte říct, které výstupy pustit, opravit nebo zastavit?
+- Vzniká krátká předávací poznámka pro budoucí tým?
+- Je definice hotovo dost krátká, aby ji lidé opravdu používali?
+
+Hotovo není stav dokonalosti. Je to stav odpovědnosti. Výstup může ven, protože víte, komu slouží, jak funguje, jaká rizika nese, jak se bude měřit a kdo ho po vydání pohlídá. To je mnohem zdravější než tvářit se, že digitální práce končí kliknutím na tlačítko publikovat.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -14485,3 +14652,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha S s evidencí zdrojů a právních aktualizací: kategorizace tvrzení, metadata zdrojů, primární odkazy pro GDPR/ePrivacy/AI Act, verzování změn a checklist revizí.
 - 2026-05-07: Doplněna Příloha T o vlastnictví a odpovědnostech po publikaci: role, úrovně změn, karta odpovědnosti, backlog zpětné vazby, revizní rytmus, privacy-first kontrola a handoff.
 - 2026-05-07: Doplněna Příloha U s rizikovým registrem pro web, SaaS a marketing: kategorie rizik, šablona záznamu, hodnocení dopadu, příklady mitigací a měsíční review.
+- 2026-05-07: Doplněna Příloha V s definicí hotovo pro web, SaaS a marketing: kritéria vydání, privacy-first brána, předávací minimum, rozhodnutí pustit/opravit/zastavit a checklist.
