@@ -12916,6 +12916,162 @@ Kvartální kontrola na 60 až 90 minut:
 
 Aktualizace není úklid po práci. Je to součást hodnoty dlouhého obsahu. Pokud má e-book pomáhat rozhodovat, musí zůstat důvěryhodný. To neznamená přepisovat ho každý týden. Znamená to mít jednoduchý systém, který zachytí změny dřív, než se z dobrého doporučení stane historická dekorace.
 
+## Příloha O: Redakční revize před publikací
+
+Dobře napsaný e-book ještě nemusí být dobře použitelný e-book. Rukopis může mít silné myšlenky, praktické checklisty a správné zdroje, ale pokud čtenář nepozná, pro koho text je, kde má začít a co má udělat po dočtení kapitoly, zůstane z něj jen dlouhý dokument. Redakční revize je poslední vrstva, která z textu udělá pracovní nástroj.
+
+Tato příloha není literární kosmetika. Je to kontrola srozumitelnosti, důvěryhodnosti a použitelnosti. Cílem není text vyšperkovat do akademické dokonalosti. Cílem je odstranit mlhu, sjednotit jazyk, zkontrolovat příklady, doladit checklisty a ujistit se, že privacy-first hodnota není jen v úvodu, ale prochází celým materiálem.
+
+Prakticky revizi rozdělte do pěti průchodů:
+
+1. Čtenář: je jasné, komu text pomáhá?
+2. Struktura: vede kapitola od problému k rozhodnutí?
+3. Jazyk: je text konkrétní, krátký a bez prázdných slov?
+4. Důkazy: jsou příklady, zdroje a checklisty použitelné?
+5. Publikování: je jasné, kde bude jeden zdroj pravdy a jak se bude aktualizovat?
+
+### 1. Průchod čtenářem
+
+První revize se nedělá jako autor. Dělá se jako člověk, který má problém a má málo času. U každé kapitoly si položte jednoduchou otázku: proč by to měl číst majitel malé firmy, zakladatel SaaS, marketér nebo technický lead právě teď?
+
+Dobrá kapitola by měla hned na začátku říct:
+
+- jaký problém řeší,
+- proč na něm záleží,
+- v jaké situaci se čtenář pozná,
+- jaký praktický výsledek si odnese.
+
+Příklad slabého začátku:
+
+"V této kapitole se budeme věnovat problematice analytiky a jejím významným aspektům v moderním digitálním prostředí."
+
+Silnější začátek:
+
+"Analytika má pomoct rozhodovat, ne sbírat co nejvíc dat. Pokud nevíte, jaké rozhodnutí díky měření uděláte, pravděpodobně jen přidáváte tracker, riziko a pomalejší web."
+
+Rozdíl je v napětí. Druhá verze hned ukazuje problém, stanovisko a praktickou hodnotu. Čtenář ví, proč má pokračovat.
+
+### 2. Průchod strukturou
+
+Každá kapitola by měla mít jasnou vnitřní cestu. Není nutné, aby všechny měly stejné sekce, ale měly by se číst jako řízený postup, ne jako poznámky vysypané z porad.
+
+Použitelná kapitola obvykle postupuje takto:
+
+1. Problém: co se typicky kazí.
+2. Rozlišení: jak poznat dobrou a špatnou variantu.
+3. Praktický postup: co udělat krok za krokem.
+4. Příklad: jak to vypadá v reálném webu, SaaS nebo marketingu.
+5. Checklist: podle čeho ověřit, že je hotovo.
+
+Při revizi si u každé kapitoly označte věty, které jen opakují obecnou pravdu. Pokud nepřidávají rozhodnutí, příklad nebo jasnější formulaci, zkraťte je. Dlouhý e-book nemusí být problém. Problém je dlouhý e-book, kde čtenář musí lovit praktické věci mezi výplní.
+
+### 3. Průchod jazykem
+
+Jazyk má být přesný, ale ne nafoukaný. U témat jako SaaS, marketing, bezpečnost a privacy-first provoz se snadno sklouzne do slov, která zní profesionálně a neříkají skoro nic: robustní, komplexní, moderní, inovativní, efektivní, strategický, škálovatelný. Někdy jsou užitečná. Často jen zakrývají, že autor neřekl konkrétní věc.
+
+Redakční pravidlo:
+
+- Když napíšete "moderní", doplňte, co přesně je moderní.
+- Když napíšete "efektivní", napište, co šetří: čas, peníze, riziko, práci týmu.
+- Když napíšete "škálovatelný", napište, co se nezlomí při růstu.
+- Když napíšete "privacy-first", napište, jaké konkrétní rozhodnutí z toho plyne.
+
+Příklad:
+
+Slabě:
+"Používáme moderní analytiku pro efektivní vyhodnocování výkonu webu."
+
+Silněji:
+"Měříme jen události, podle kterých umíme rozhodnout: odeslané formuláře, kliky na hlavní CTA, odběr RSS a kvalitu poptávek. Nepoužíváme reklamní pixely, pokud pro ně nemáme jasný obchodní důvod."
+
+Tohle je méně lesklé, ale mnohem užitečnější.
+
+### 4. Průchod checklisty
+
+Checklist není dekorace na konec kapitoly. Je to zkratka k akci. Dobrý checklist má položky, které se dají ověřit. Slabý checklist obsahuje přání.
+
+Slabé položky:
+
+- Máme dobrý web.
+- Řešíme SEO.
+- Dbáme na soukromí.
+- Marketing je konzistentní.
+
+Silnější položky:
+
+- Homepage do deseti sekund řekne, co nabízíme, pro koho a jaký je další krok.
+- Každá důležitá stránka má title, meta description, kanonickou URL a interní odkazy.
+- Víme, jaké externí domény web načítá, proč je načítá a jaká data jim posílá.
+- Každý měsíc vybereme jeden obsahový kus k aktualizaci nebo odstranění.
+
+Při revizi projděte všechny checklisty a u každé položky se zeptejte: dá se na to odpovědět ano/ne, nebo alespoň konkrétním důkazem? Pokud ne, položku přepište.
+
+### 5. Průchod zdroji a názory
+
+U dlouhého odborného textu je důležité rozlišovat tři typy tvrzení:
+
+- stabilní principy,
+- ověřitelná fakta,
+- vlastní komentář.
+
+Stabilní princip může být bez zdroje, pokud jde o praktickou zkušenost a není formulovaný jako aktuální statistika nebo právní povinnost. Ověřitelné tvrzení potřebuje zdroj, hlavně když se týká práva, standardů, cen, benchmarků, konkrétních nástrojů nebo rychle se měnících trendů. Vlastní názor má být označený jako Codyho komentář, aby čtenář věděl, kde začíná interpretace.
+
+Praktický postup:
+
+1. Vyhledejte v rukopisu slova jako "musí", "vyžaduje", "od roku", "aktuálně", "nejlepší", "standard", "zákon", "cena", "benchmark".
+2. U každého místa rozhodněte, jestli jde o fakt, názor nebo doporučení.
+3. Fakta se zdrojem ponechte, fakta bez zdroje ověřte nebo přeformulujte.
+4. Názory označte jako Codyho komentář.
+5. Doporučení pište jako doporučení, ne jako univerzální pravdu.
+
+Tím text získá důvěru. Ne proto, že bude opatrný až k nudě, ale protože bude férový.
+
+### 6. Privacy-first revize
+
+Privacy-first hodnota se nemá objevit jen v jedné kapitole. U webu, SaaS, marketingu, supportu i distribuce by mělo být vidět stejné přemýšlení: sbírat méně, držet data pod kontrolou, preferovat evropský provoz, minimalizovat třetí strany a vysvětlovat lidem, co se děje.
+
+Při finální revizi si u každé kapitoly položte:
+
+- Doporučuje kapitola zbytečně nástroj, který posílá data mimo kontrolu týmu?
+- Je jasné, jaké minimum dat stačí pro první krok?
+- Nezaměňuje text pohodlí marketéra za hodnotu pro zákazníka?
+- Nabízí alternativu k trackerům, pixelům, uzavřeným platformám nebo vendor lock-inu?
+- Je privacy-first popsané jako praktická výhoda, ne jako právní strašák?
+
+Codyho komentář: privacy-first revize je dobrý filtr proti lenosti. Když tým neumí vysvětlit, proč sbírá konkrétní data, většinou je nepotřebuje. Jen si zvykl, že nástroje sbírají všechno a někdo tomu říká insight. Hezké slovo. Občas drahý zlozvyk.
+
+### 7. Finální publikační balíček
+
+Před publikací si připravte balíček, který zabrání chaosu po vydání. E-book není jen Markdown nebo PDF. Je to sada navazujících výstupů.
+
+Minimum:
+
+- hlavní Markdown soubor jako zdroj pravdy,
+- webová stránka nebo landing page s jasným popisem,
+- PDF export označený datem aktualizace,
+- krátký distribuční text pro vlastní web a RSS,
+- stručný sales výřez pro obchodní konverzace,
+- seznam kapitol, které se mají kvartálně ověřovat,
+- pracovní log změn.
+
+Pokud vzniknou výřezy pro sociální sítě, newsletter nebo prezentaci, musí ukazovat zpět na původní zdroj. Jinak se po pár týdnech začne šířit pět verzí stejné myšlenky a nikdo nebude vědět, která je aktuální.
+
+### Checklist redakční revize
+
+- Je u každé kapitoly jasné, komu pomáhá a proč ji číst?
+- Začínají kapitoly konkrétním problémem, ne abstraktním úvodem?
+- Vede struktura od problému přes postup k checklistu?
+- Jsou obecná slova nahrazená konkrétními rozhodnutími a příklady?
+- Dá se každá checklistová položka ověřit?
+- Jsou aktuální, právní, cenová a nástrojová tvrzení ozdrojovaná?
+- Jsou vlastní názory označené jako Codyho komentář?
+- Prochází privacy-first přístup celým textem, nejen jednou kapitolou?
+- Existuje jeden zdroj pravdy pro publikovanou verzi?
+- Mají odvozené výstupy datum aktualizace a odkaz na hlavní verzi?
+- Ví tým, kdo bude sbírat zpětnou vazbu a kdy proběhne další revize?
+
+Redakční revize má jednoduchý výsledek: čtenář se méně ztrácí a rychleji jedná. To je u praktického e-booku víc než stylistická elegance. Text má pomáhat měnit weby, produkty a marketingové systémy. Když po něm zůstane jen dobrý pocit, je to málo. Když po něm zůstane konkrétní další krok, splnil práci.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -13058,3 +13214,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha L s předpublikačním checklistem pro e-book, playbook nebo dlouhý obsah: čtenář, struktura, redakční průchod, privacy-first publikování, distribuce a údržba verzí.
 - 2026-05-06: Doplněna Příloha M s distribučním plánem pro e-book bez závislosti na platformách: vlastní URL, distribuční balíček, segmentované vstupy, vlastní kanály, měření užitečnosti a opakovaný rytmus.
 - 2026-05-07: Doplněna Příloha N s aktualizačním protokolem pro e-book, playbook nebo znalostní bázi: rychlost stárnutí obsahu, úrovně změn, ověřování faktů, jeden zdroj pravdy, sběr podnětů a rytmus údržby.
+- 2026-05-07: Doplněna Příloha O s redakční revizí před publikací: čtenářský průchod, struktura kapitol, jazyk, checklisty, zdroje, privacy-first kontrola a publikační balíček.
