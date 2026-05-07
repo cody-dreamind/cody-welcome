@@ -13477,6 +13477,236 @@ Tím se z e-booku nestane jen jeden velký launch. Stane se knihovna argumentů,
 
 Publikování není konec práce. Je to okamžik, kdy text začne potkávat realitu. Čtenáři ukážou, kde je materiál užitečný, kde je moc obecný a které části si zaslouží vlastní stránku, šablonu nebo příklad. Když e-book držíte na vlastní URL, měříte rozumně a aktualizujete pravidelně, máte z něj dlouhodobé aktivum. Ne jen soubor, který někdo jednou nasdílel a pak statečně zapomněl.
 
+## Příloha R: Obsahová mapa po publikaci e-booku
+
+Publikovaný e-book je dobrý začátek, ale sám o sobě ještě netvoří obsahový systém. Dlouhý text potřebuje mapu: které části se mají proměnit v články, které v šablony, které v prodejní argumenty, které v interní checklisty a které zůstanou jen jako referenční materiál. Bez mapy se e-book snadno stane jedním velkým odkazem, který se jednou oznámí a pak pomalu mizí v archivu.
+
+Obsahová mapa má jednoduchý cíl: vytěžit z e-booku opakovaně použitelné jednotky bez toho, aby se text rozkopíroval do deseti nesourodých verzí. Zdroj pravdy zůstává jeden. Odvozené formáty mají jasný účel, vlastníka a odkaz zpět na hlavní verzi.
+
+Prakticky mapujte čtyři typy výstupů:
+
+1. Vstupní obsah: články, landing pages, FAQ a slovníkové stránky, které přivádějí čtenáře z vyhledávání, RSS a přímých odkazů.
+2. Pracovní obsah: checklisty, šablony a interní playbooky, které pomáhají týmu nebo zákazníkovi něco udělat.
+3. Prodejní obsah: případové studie, krátké argumenty, odpovědi na námitky a materiály pro discovery hovory.
+4. Údržbový obsah: changelog, revizní poznámky, seznam zastaralých tvrzení a backlog témat pro další aktualizace.
+
+### 1. Rozdělte e-book na obsahové jednotky
+
+Ne každá kapitola musí být samostatný článek. Některé kapitoly fungují lépe jako série krátkých odpovědí, jiné jako checklist, další jako stránka pro konkrétní službu. Začněte tím, že si vedle každé kapitoly napíšete, jakou práci může udělat mimo e-book.
+
+Jednoduchá tabulka:
+
+| Část e-booku | Hlavní otázka čtenáře | Nejlepší odvozený formát | Primární kanál | Další krok |
+| --- | --- | --- | --- | --- |
+| Kapitola o technickém základu | Máme web provozně pod kontrolou? | Auditní checklist | Web + RSS | Stáhnout provozní list |
+| Kapitola o SaaS MVP | Co máme ověřit před vývojem? | Workshopová šablona | Přímý odkaz pro leady | Domluvit discovery |
+| Kapitola o privacy-first analytice | Co můžeme měřit bez zbytečného sledování? | FAQ + checklist | Web + interní wiki | Udělat datovou mapu |
+| Příloha o výběru dodavatele | Jak poznat dobrého partnera? | Scorecard | Sales follow-up | Vyplnit před poptávkou |
+
+Tahle tabulka není redakční dekorace. Pomáhá rozhodnout, co má vzniknout první. Pokud kapitola nemá jasnou otázku čtenáře ani další krok, zatím ji nepřevádějte. Nechte ji jako součást e-booku.
+
+### 2. Z každé jednotky udělejte jeden vstup
+
+Odvozený obsah nesmí začínat větou "vezmeme kapitolu a zkrátíme ji". To obvykle vede k textu, který je pořád moc dlouhý, ale už nemá hloubku. Lepší je vybrat jeden vstupní úkol.
+
+Příklady vstupů:
+
+- Článek: "Jak zkontrolovat technický základ webu za jednu hodinu"
+- FAQ stránka: "Jaké cookies potřebuje malý B2B web?"
+- Šablona: "Datová mapa pro nový SaaS produkt"
+- Sales materiál: "Otázky k privacy-first provozu před podpisem nabídky"
+- Interní checklist: "Co zkontrolovat před publikací nové landing page"
+
+Každý vstup má mít:
+
+- jednu hlavní otázku,
+- jeden slib,
+- jeden praktický výstup,
+- jeden odkaz na zdrojovou část e-booku,
+- jednu navazující akci.
+
+Když se do jednoho článku snažíte nacpat tři otázky, pravděpodobně píšete tři články. Ano, bolí to méně, když si to přiznáte hned. Později to bolí v navigaci, SEO i při údržbě.
+
+### 3. Udržujte zdroj pravdy a krátké deriváty
+
+Největší riziko odvozených formátů je tichý rozpad. V e-booku opravíte doporučení, ale starý checklist v PDF, starý článek a stará prodejní prezentace dál říkají něco jiného. Proto musí mít každý derivát vazbu na zdroj.
+
+Pravidla:
+
+- Dlouhé vysvětlení patří do e-booku nebo znalostní stránky.
+- Článek má řešit jednu konkrétní situaci a odkazovat na širší kontext.
+- Šablona má být použitelná sama o sobě, ale musí mít verzi a odkaz na zdroj.
+- Sales materiál má používat stejné pojmy jako e-book, ne vlastní paralelní jazyk.
+- Starý derivát se buď aktualizuje, nebo archivuje. Nesmí tiše žít vedle nové pravdy.
+
+Praktická věta do patičky šablony:
+
+`Verze: 2026-05. Zdroj: Od webu k SaaS, Příloha G. Při změně datové mapy aktualizujte i tento checklist.`
+
+Tohle není byrokracie. Je to pojistka proti tomu, aby tým za půl roku netušil, odkud se formulář vzal a proč se v něm ptá na věci, které už nikdo nechce sbírat.
+
+### 4. Navrhněte obsahové clustery
+
+Obsahový cluster je skupina výstupů kolem jedné rozhodovací oblasti. Pro tento e-book dávají smysl například tyto clustery:
+
+| Cluster | Hlavní stránka | Odvozené výstupy | Typická akce |
+| --- | --- | --- | --- |
+| Nový web | Checklist pro nový web | Auditní článek, formulářová šablona, technický list | Objednat audit nebo konzultaci |
+| SaaS MVP | Checklist pro SaaS MVP | Workshop, datový model, aktivační metriky | Naplánovat discovery |
+| Privacy-first provoz | Privacy-first web a analytika | Datová mapa, cookies FAQ, dodavatelský scorecard | Zkontrolovat datové toky |
+| Marketing bez závislosti | Distribuční plán a RSS | Obsahový brief, měsíční review, POSSE postup | Nastavit redakční rytmus |
+| Prodej a důvěra | Prodejní web a case study | Námitky, reference, discovery otázky | Zlepšit sales materiály |
+
+Cluster pomáhá dvěma věcem. Čtenář najde související obsah bez lovu v archivu. Tým má jasnější plán, co publikovat dál a proč. Pokud cluster nemá hlavní stránku, odvozené články se často rozutečou do šumu.
+
+### 5. Distribuce bez kopírování celého obsahu na platformy
+
+Privacy-first distribuce nestojí na tom, že celý obsah odevzdáte platformám a budete doufat, že algoritmus bude mít dobrou náladu. Vlastní web je zdroj pravdy. Platformy mohou být ukazatele, ne hlavní úložiště.
+
+Praktický postup:
+
+1. Publikujte odvozený obsah na vlastní URL.
+2. Přidejte RSS nebo jiný přímý odběr.
+3. Na sociální sítě dejte krátký výtah, ne celý text.
+4. V newsletteru nebo e-mailu posílejte jasný odkaz a shrnutí hodnoty, ne sledovací labyrint.
+5. V sales komunikaci používejte přímé odkazy na relevantní části, ne přílohy bez kontextu.
+6. U každého kanálu měřte signály užitečnosti, ne jen počet zobrazení.
+
+Příklad krátkého distribučního textu:
+
+"Přidal jsem pracovní checklist pro technický základ webu: doména, DNS, HTTPS, e-mail, analytika a provozní list. Hodí se před migrací webu nebo předáním projektu dodavateli. Zdroj je tady: [URL]."
+
+Krátké. Konkrétní. Bez lovení osobních dat výměnou za PDF. Internet to přežije.
+
+### 6. Měření užitečnosti odvozeného obsahu
+
+U odvozeného obsahu nepotřebujete vědět, kdo přesně četl každý odstavec. Potřebujete poznat, jestli obsah pomáhá správným lidem udělat další krok.
+
+Sledujte:
+
+- kolik lidí otevře hlavní zdrojovou stránku,
+- kolik lidí klikne na šablonu, checklist nebo další kapitolu,
+- které odkazy používá sales tým v reálných konverzacích,
+- na které části se zákazníci ptají po přečtení,
+- které materiály snižují počet opakovaných vysvětlování,
+- které části vyvolávají kvalitnější poptávky.
+
+Nesledujte zbytečně:
+
+- individuální čtení bez jasného účelu,
+- detailní behaviorální profily,
+- sdílení dat do reklamních systémů jen kvůli pocitu kontroly,
+- heatmapy na každé stránce, pokud z nich nikdo nedělá rozhodnutí.
+
+Codyho komentář: dobrá metrika obsahu často není "kolik lidí to vidělo", ale "kolikrát jsme díky tomu nemuseli vysvětlovat stejnou věc od nuly". Pokud článek ušetří deset discovery hovorů měsíčně, je užitečný i bez ohňostroje v analytice.
+
+### 7. Redakční backlog po publikaci
+
+Po publikaci vznikne víc nápadů, než zvládnete rozumně udělat. To je normální. Backlog ale musí rozlišovat mezi nápadem, údržbou a skutečnou obchodní příležitostí.
+
+Jednoduché kategorie:
+
+- `Oprava`: nepřesnost, zastaralý odkaz, nejasná formulace, chybějící vysvětlení.
+- `Rozšíření`: část e-booku si zaslouží příklad, šablonu nebo samostatný článek.
+- `Distribuce`: materiál je dobrý, ale potřebuje lepší vstupní stránku, RSS položku nebo sales odkaz.
+- `Produkt`: obsah ukazuje opakovaný problém, ze kterého může vzniknout služba, audit nebo SaaS funkce.
+- `Archiv`: starý výstup už neodpovídá zdroji pravdy a má se stáhnout nebo přesměrovat.
+
+U každé položky si napište:
+
+- zdrojovou kapitolu nebo přílohu,
+- komu to pomůže,
+- jaký bude hotový výstup,
+- jaké riziko vznikne, když to neuděláte,
+- datum poslední revize.
+
+Backlog bez těchto polí se rychle změní na přání. Přání jsou fajn, ale špatně se podle nich plánuje pondělí.
+
+### Praktická šablona obsahové mapy
+
+Použijte ji pro každou kapitolu nebo přílohu, kterou chcete dostat do reálného provozu:
+
+```text
+Zdrojová část e-booku:
+Hlavní otázka čtenáře:
+Cílový segment:
+Odvozený formát:
+Primární URL:
+Navazující akce:
+Vlastník:
+Datum poslední revize:
+
+Co musí zůstat ve zdroji pravdy:
+Co může být krátký derivát:
+Co se nesmí kopírovat bez revize:
+
+Privacy-first kontrola:
+- Jaká data tento výstup sbírá?
+- Je sběr nutný pro slíbený další krok?
+- Kde data končí?
+- Jak dlouho se drží?
+- Je možné použít přímý odkaz nebo RSS místo uzamčeného formuláře?
+
+Měření užitečnosti:
+- Jak poznáme, že výstup pomohl?
+- Jaké signály stačí?
+- Co vědomě měřit nebudeme?
+```
+
+### Vyplněný mini příklad
+
+```text
+Zdrojová část e-booku:
+Kapitola 32: Checklist pro privacy-first analytiku
+
+Hlavní otázka čtenáře:
+Jak poznáme, co na webu měřit, aniž bychom sbírali zbytečná osobní data?
+
+Cílový segment:
+B2B firma s marketingovým webem a jednoduchým kontaktním formulářem.
+
+Odvozený formát:
+Krátká webová stránka + jednostránkový checklist.
+
+Primární URL:
+/privacy-first-analytika-checklist
+
+Navazující akce:
+Vyplnit datovou mapu nebo objednat audit měření.
+
+Co musí zůstat ve zdroji pravdy:
+Širší vysvětlení principů, rizik a vztah k ostatním kapitolám.
+
+Co může být krátký derivát:
+Seznam rozhodovacích otázek, tabulka eventů, kontrola retence a přístupů.
+
+Co se nesmí kopírovat bez revize:
+Jakékoli právní formulace, názvy nástrojů a tvrzení o cookies.
+
+Privacy-first kontrola:
+Checklist je dostupný bez povinného formuláře. Měří se jen otevření stránky a kliknutí na související šablonu.
+
+Měření užitečnosti:
+Počet použití v discovery hovorech, počet kliků na datovou mapu, kvalita navazujících dotazů.
+```
+
+### Checklist přílohy
+
+- Má každá důležitá kapitola určenou hlavní otázku čtenáře?
+- Víte, které části se mají stát článkem, šablonou, sales materiálem nebo interním playbookem?
+- Zůstává e-book jedním zdrojem pravdy?
+- Má každý odvozený výstup verzi, vlastníka a odkaz na zdroj?
+- Nepublikujete stejný obsah v pěti verzích bez revizního procesu?
+- Jsou obsahové clustery propojené hlavní stránkou a souvisejícími odkazy?
+- Používáte vlastní URL, RSS a přímé odkazy jako primární distribuci?
+- Posíláte na platformy jen výtahy a odkazy, ne celou hodnotu bez kontroly?
+- Měříte užitečnost podle rozhodnutí, poptávek a úspor vysvětlování?
+- Vyhýbáte se zbytečnému profilování čtenářů?
+- Má redakční backlog kategorie pro opravy, rozšíření, distribuci, produkt a archiv?
+- Umíte říct, který odvozený výstup má vzniknout jako další a proč?
+
+Obsahová mapa je most mezi rukopisem a provozem. Bez ní je e-book jeden velký kus práce. S ní se z něj stává systém článků, šablon, odkazů a rozhodnutí, který může živit web, sales i produktovou strategii měsíce po publikaci.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -13622,3 +13852,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha O s redakční revizí před publikací: čtenářský průchod, struktura kapitol, jazyk, checklisty, zdroje, privacy-first kontrola a publikační balíček.
 - 2026-05-07: Doplněna Příloha P o převodu e-booku do pracovních šablon: výběr opakovaných situací, akční formát, příklady vyplnění, vlastnictví, privacy-first kontrola a publikační sada šablon.
 - 2026-05-07: Doplněna Příloha Q s publikačním plánem pro e-book na vlastní URL: zdroj pravdy, webová verze, landing page, publikační balíček, privacy-first měření, údržba a odvozené formáty.
+- 2026-05-07: Doplněna Příloha R s obsahovou mapou po publikaci e-booku: obsahové jednotky, zdroj pravdy, clustery, privacy-first distribuce, měření užitečnosti a redakční backlog.
