@@ -14724,6 +14724,205 @@ Sloupec "co neumíme vysvětlit" je užitečný. Chrání tým před sebevědom�
 
 Dashboard má být pracovní plocha, ne oltář. Když z něj nevznikají rozhodnutí, zmenšete ho. Když z něj vznikají špatná rozhodnutí, opravte definice signálů. Když kvůli němu sbíráte víc dat, než umíte obhájit, vraťte se k účelu. Dobré měření není o tom vědět všechno. Je o tom vědět dost na další odpovědný krok.
 
+## Příloha X: Verze, changelog a archiv e-booku
+
+E-book, playbook nebo znalostní báze nejsou jednorázový PDF artefakt, který se po publikaci slavnostně uloží do složky a nechá stárnout. Pokud má dlouhý obsah sloužit jako pracovní systém, potřebuje verze, stručný changelog a archiv starších vydání. Jinak tým za půl roku neví, co se změnilo, proč se změnilo, jestli starý odkaz pořád platí a které doporučení už neodpovídá realitě.
+
+Verzování není jen technická disciplína pro vývojáře. Je to způsob, jak zachovat důvěru čtenáře. Když e-book obsahuje praktická doporučení pro web, SaaS, marketing a privacy-first provoz, změny budou přicházet pořád. Něco se zpřesní po zpětné vazbě. Něco zastará. Něco se přepíše, protože tým našel lepší příklad. Něco se musí aktualizovat kvůli právnímu, produktovému nebo provoznímu vývoji.
+
+Dobrá správa verzí odpovídá na pět otázek:
+
+1. Jakou verzi právě čtenář vidí?
+2. Co se od poslední verze změnilo?
+3. Proč se změna udělala?
+4. Kde je starší vydání, pokud ho někdo potřebuje dohledat?
+5. Kdo rozhoduje, kdy je změna dost významná na nové vydání?
+
+Bez těchto odpovědí se e-book časem změní v pohyblivý dokument bez paměti. A dokument bez paměti je skvělý způsob, jak se hádat o to, co tam "určitě bylo napsané minule". Moderní tým má lepší zábavu.
+
+### 1. Zaveďte jednoduché číslování verzí
+
+Pro praktický e-book stačí jednoduché schéma:
+
+- `0.x`: pracovní rukopis před první veřejnou verzí.
+- `1.0`: první publikovaná verze, kterou lze odkazovat z webu.
+- `1.1`, `1.2`: menší obsahové aktualizace, nové příklady, opravy struktury.
+- `2.0`: větší přepracování, nové části, změna publikační strategie nebo výrazný posun tématu.
+
+Nemusíte předstírat softwarový release proces, pokud ho dokument nepotřebuje. Smyslem není debatovat, jestli oprava odstavce je minor nebo patch release. Smyslem je, aby čtenář a tým poznali, jak moc se dokument změnil.
+
+Praktický zápis v hlavičce e-booku:
+
+```text
+Verze: 0.8 pracovní rukopis
+Datum poslední změny: 2026-05-07
+Vlastník: Cody / Dreamind
+Zdroj pravdy: Markdown v repozitáři
+Veřejná URL:
+Archiv:
+```
+
+U veřejné verze přidejte krátkou poznámku, že starší vydání jsou dostupná v archivu nebo přes Git historii. Pokud dokument obsahuje právní nebo rychle stárnoucí doporučení, přidejte i datum poslední faktické revize.
+
+### 2. Changelog pište pro lidi, ne pro diff
+
+Git diff je přesný, ale pro běžného čtenáře není čitelný. Changelog má shrnout význam změny lidsky. Nemá opisovat každý překlep. Má říct, co se změnilo v obsahu a jestli to mění doporučení.
+
+Dobrá položka changelogu:
+
+```text
+2026-05-07, verze 0.8
+- Přidána příloha o verzování, changelogu a archivu e-booku.
+- Doporučení: zavést hlavičku verze, měsíční changelog a archiv významných vydání.
+- Dopad na čtenáře: lepší dohledatelnost změn po publikaci.
+```
+
+Slabá položka:
+
+```text
+Upraven text.
+```
+
+To je sice technicky pravda, ale informačně prázdné. Pokud changelog neumí říct, proč změna stojí za pozornost, pravděpodobně patří jen do pracovního logu, ne do veřejné historie verzí.
+
+### 3. Oddělte pracovní log, veřejný changelog a interní poznámky
+
+Jedna chyba je míchat všechny typy záznamů dohromady. Pracovní log slouží autorovi a týmu. Veřejný changelog slouží čtenáři. Interní poznámky slouží provozu, právní kontrole nebo rozhodovacímu logu.
+
+Rozdělení může vypadat takto:
+
+- Pracovní log: každá dokončená iterace, i malá.
+- Veřejný changelog: jen změny, které mění strukturu, doporučení, šablony, zdroje nebo významné příklady.
+- Interní poznámky: důvody rozhodnutí, nejistoty, nepublikované podklady, zpětná vazba od zákazníků, právní nebo provozní komentáře.
+
+Příklad:
+
+```text
+Pracovní log:
+2026-05-07: Doplněna Příloha X o verzování a archivu.
+
+Veřejný changelog:
+0.8: Přidána pravidla pro správu verzí, changelog a archiv vydání.
+
+Interní poznámka:
+Před verzí 1.0 rozhodnout, zda bude archiv řešen přes statické HTML snapshoty, GitHub releases, nebo jen přes tagy v repozitáři.
+```
+
+Tím se zabrání tomu, aby veřejný dokument pro čtenáře obsahoval interní provozní šum, a zároveň se neztratí důležité rozhodovací souvislosti.
+
+### 4. Archivujte významná vydání, ne každé písmeno
+
+Archiv má chránit před ztrátou kontextu. Nemá být skládka každé drobné úpravy. U dlouhého obsahu obvykle stačí archivovat:
+
+- první veřejné vydání,
+- každou významnou strukturální verzi,
+- verzi před velkým přepsáním,
+- verzi použitou v kampani, školení nebo zákaznickém materiálu,
+- verzi obsahující citovaná právní nebo provozní doporučení.
+
+Praktické možnosti archivu:
+
+- Git tag pro každou významnou verzi.
+- Samostatná složka `archive/` s exportem Markdownu nebo HTML.
+- Veřejná stránka "Historie změn" s odkazy na vydání.
+- PDF export jen pro stabilní milestone verze, ne pro každou pracovní úpravu.
+
+Privacy-first poznámka: archiv nesmí omylem uchovávat osobní údaje, interní poznámky, neanonymizovanou zákaznickou zpětnou vazbu nebo neveřejné provozní detaily. Před archivací veřejné verze projděte dokument stejně jako před publikací. Starý obsah není automaticky bezpečný jen proto, že je starý.
+
+### 5. Rozhodněte, co se stane se starými odkazy
+
+Když e-book žije na vlastní URL, odkazy musí přežít změny struktury. Čtenář nechce řešit, že se kapitola přesunula, přejmenovala nebo rozdělila. Stabilita URL je součást důvěry.
+
+Praktická pravidla:
+
+- Hlavní URL e-booku držte stabilní.
+- Kapitoly a přílohy pojmenovávejte předvídatelně.
+- Pokud vzniknou samostatné stránky pro kapitoly, používejte trvalé slugy.
+- Při přejmenování kapitoly zvažte redirect nebo krátkou poznámku v historii změn.
+- Neodstraňujte veřejnou URL bez náhrady.
+- U zásadních změn přidejte do changelogu, kde čtenář najde přesunutý obsah.
+
+Příklad:
+
+```text
+Původně:
+/ebook/privacy-first-analytika
+
+Po rozdělení:
+/ebook/privacy-first-web
+/ebook/privacy-first-analytika
+/ebook/datova-mapa
+
+Changelog:
+Kapitola o privacy-first analytice byla rozdělena na webové měření a datovou mapu. Původní URL zůstává jako přehled s odkazy na nové části.
+```
+
+Tím chráníte odkazy z článků, RSS, interních dokumentů, newsletterů a sales materiálů. Vlastní web má být zdroj pravdy, ne zdroj 404 radosti.
+
+### 6. Kdy vydat novou verzi
+
+Ne každá úprava potřebuje novou verzi. Ale některé změny ji potřebují vždy:
+
+- mění se doporučení, podle kterého může čtenář upravit produkt, web, marketing nebo privacy-first provoz,
+- přibývá nová kapitola, příloha nebo šablona,
+- aktualizuje se právní, bezpečnostní nebo provozní část,
+- mění se zdroje u citlivých tvrzení,
+- opravuje se chyba, která mohla vést ke špatnému rozhodnutí,
+- dokument se používá veřejně v kampani nebo jako nabídka ke službě.
+
+Menší jazykové opravy mohou zůstat jen v pracovním logu. Pokud ale oprava mění význam, patří do changelogu. U privacy-first a právních témat je lepší být explicitní. Čtenář má vědět, že doporučení už není stejné.
+
+Codyho komentář: verze nejsou byrokracie, pokud díky nim někdo za rok pochopí, proč se změnil postup. Byrokracie začíná ve chvíli, kdy tým pečlivě verzí obsah, který nikdo nečte, nikdo nepoužívá a nikdo podle něj nerozhoduje. To není správa znalostí. To je muzeum tabulek.
+
+### 7. Jednostránková šablona správy verzí
+
+```text
+Název publikace:
+Zdroj pravdy:
+Veřejná URL:
+Vlastník:
+
+Aktuální verze:
+Datum vydání:
+Datum poslední faktické revize:
+
+Typ změny:
+- pracovní úprava / menší veřejná aktualizace / významné vydání / oprava rizikového tvrzení
+
+Co se změnilo:
+
+Proč se změna udělala:
+
+Dopad na čtenáře:
+
+Zdroje nebo podklady:
+
+Archivovat tuto verzi: ano / ne
+Veřejný changelog: ano / ne
+Potřebuje redirect nebo úpravu odkazů: ano / ne
+
+Další kontrola:
+```
+
+Tuto šablonu použijte při každém větším zásahu. Když ji neumíte vyplnit, změna možná ještě není promyšlená. Nebo je tak malá, že si nezaslouží veřejnou verzi.
+
+### Checklist přílohy
+
+- Má e-book nebo playbook viditelnou aktuální verzi?
+- Je jasné, kde je zdroj pravdy?
+- Existuje rozdíl mezi pracovním logem a veřejným changelogem?
+- Popisuje changelog dopad změn pro čtenáře?
+- Archivujete významná vydání, ne každou drobnou opravu?
+- Neobsahuje archiv osobní data, interní poznámky nebo neveřejné zákaznické informace?
+- Jsou stabilní hlavní URL a odkazy na důležité kapitoly?
+- Má tým pravidlo, kdy vydat novou verzi?
+- Jsou právní, bezpečnostní a privacy-first změny v changelogu označené jasně?
+- Umíte dohledat, proč se konkrétní doporučení změnilo?
+- Ví vlastník publikace, kdy má udělat další faktickou revizi?
+- Používáte verze jako službu čtenáři, ne jako samoúčelné papírování?
+
+Verzování je nudné přesně tím způsobem, jakým má být nudné zálohování. Když ho nepotřebujete, skoro si ho nevšimnete. Když ho potřebujete a nemáte ho, najednou je pozdě. Dobrý e-book proto nemá jen obsah. Má paměť.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -14875,3 +15074,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha U s rizikovým registrem pro web, SaaS a marketing: kategorie rizik, šablona záznamu, hodnocení dopadu, příklady mitigací a měsíční review.
 - 2026-05-07: Doplněna Příloha V s definicí hotovo pro web, SaaS a marketing: kritéria vydání, privacy-first brána, předávací minimum, rozhodnutí pustit/opravit/zastavit a checklist.
 - 2026-05-07: Doplněna Příloha W s rozhodovacím dashboardem pro web, SaaS a marketing: výběr signálů podle rozhodnutí, privacy-first minimum, měsíční review a checklist.
+- 2026-05-07: Doplněna Příloha X o verzích, changelogu a archivu e-booku: číslování verzí, veřejná historie změn, archiv významných vydání, stabilní URL a checklist správy.
