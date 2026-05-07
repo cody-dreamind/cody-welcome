@@ -14503,6 +14503,227 @@ Datum první kontroly po vydání:
 
 Hotovo není stav dokonalosti. Je to stav odpovědnosti. Výstup může ven, protože víte, komu slouží, jak funguje, jaká rizika nese, jak se bude měřit a kdo ho po vydání pohlídá. To je mnohem zdravější než tvářit se, že digitální práce končí kliknutím na tlačítko publikovat.
 
+## Příloha W: Rozhodovací dashboard pro web, SaaS a marketing
+
+Dashboard není nástěnka pro uklidnění vedení. Je to nástroj pro rozhodování. Když ukazuje třicet grafů, ale nikdo podle nich nic nemění, máte dekoraci. Když ukazuje pět signálů, které každý měsíc vedou k jasnému kroku, máte provozní systém.
+
+Malé týmy často sklouznou ke dvěma extrémům. Buď neměří skoro nic a rozhodují podle pocitu, nebo měří všechno, protože to nástroje umí. Ani jedno není dobré. Privacy-first přístup nabízí zdravější střed: měřit méně věcí, ale lépe popsaných, s jasným účelem, omezenou retencí a vazbou na rozhodnutí.
+
+Rozhodovací dashboard má odpovědět na čtyři otázky:
+
+1. Přivádíme správné lidi?
+2. Chápou hodnotu a udělají další krok?
+3. Doručuje produkt nebo služba první výsledek?
+4. Roste důvěra bez zbytečného sběru dat?
+
+Pokud metrika nepomáhá odpovědět ani na jednu z těchto otázek, pravděpodobně patří mimo hlavní dashboard. Může zůstat v diagnostice, ale nemá zabírat pozornost při pravidelném review.
+
+### 1. Začněte rozhodnutím, ne grafem
+
+Nejdřív napište rozhodnutí, která chcete dělat. Teprve potom vyberte signály. Typická rozhodnutí:
+
+- Upravit hlavní nabídku na webu.
+- Zkrátit formulář nebo změnit kvalifikační otázky.
+- Přepsat stránku služby podle námitek zákazníků.
+- Zlepšit onboarding, protože lidé nedocházejí k první hodnotě.
+- Omezit marketingový kanál, který přivádí špatný typ leadů.
+- Odstranit externí měřicí skript bez jasného přínosu.
+- Přidat dokumentaci nebo support odpověď k opakovanému problému.
+
+Špatná otázka zní: "Kolik metrik umíme zobrazit?" Lepší otázka zní: "Které tři věci budeme příští měsíc schopni změnit podle toho, co uvidíme?"
+
+Příklad:
+
+```text
+Rozhodnutí: Máme upravit kontaktní formulář?
+Signály:
+- počet odeslaných formulářů,
+- podíl kvalifikovaných poptávek,
+- nejčastější chybějící informace v prvním e-mailu,
+- počet lidí, kteří formulář začnou a nedokončí, pokud to umíme měřit bez zbytečného sledování.
+Možné kroky:
+- odebrat pole bez přímého účelu,
+- doplnit vysvětlení, co se stane po odeslání,
+- přidat jednu kvalifikační otázku, která šetří čas oběma stranám.
+```
+
+Dashboard má vést k takovému zápisu. Ne k debatě, jestli modrá křivka vypadá dost optimisticky.
+
+### 2. Oddělte obchodní, produktové a provozní signály
+
+Jedna obrazovka může spojovat web, SaaS i marketing, ale signály musí mít různé role. Jinak se smíchá návštěvnost, retence, support a incidenty do jedné mlhy.
+
+Obchodní signály říkají, jestli přicházejí správní lidé:
+
+- počet kvalifikovaných poptávek,
+- podíl poptávek z cílového segmentu,
+- zdroj prvního kontaktu na úrovni kanálu, ne sledování člověka,
+- počet discovery hovorů, které skončily jasným dalším krokem,
+- nejčastější námitky před nákupem.
+
+Produktové signály říkají, jestli lidé zažívají hodnotu:
+
+- aktivace podle jedné definované události,
+- dokončení klíčového workflow,
+- návrat uživatele po prvním úspěchu,
+- opakované chyby v onboardingu,
+- počet support dotazů k jedné funkci.
+
+Provozní signály říkají, jestli systém drží:
+
+- dostupnost kritických částí,
+- chybovost hlavních toků,
+- stav záloh a poslední obnova v testu,
+- počet incidentů a čas do první reakce,
+- otevřená vysoká rizika z registru.
+
+Marketingové signály říkají, jestli obsah a distribuce pomáhají rozhodování:
+
+- organické vstupy na klíčové stránky,
+- kliky na relevantní další krok,
+- odpovědi na newsletter nebo přímé reakce,
+- použití obsahu v sales procesu,
+- témata, která přinášejí kvalifikované hovory.
+
+Codyho komentář: metrika "návštěvnost webu" sama o sobě málokdy stačí. Je to jako vědět, kolik lidí prošlo kolem výlohy, ale netušit, jestli hledali právě váš typ služby, jestli pochopili nabídku a jestli se měli čeho chytit.
+
+### 3. Privacy-first minimum pro dashboard
+
+Dashboard nesmí být záminka pro plošné sledování. U každého signálu si napište účel, úroveň detailu a retenci. Často stačí agregovaná data za týden nebo měsíc. U rozhodnutí o obsahu většinou nepotřebujete vědět, co přesně dělal konkrétní člověk. Potřebujete vědět, jestli stránka jako celek vede k užitečnému dalšímu kroku.
+
+Praktická pravidla:
+
+- Preferujte agregovaná data před individuální stopou.
+- Měřte události, které souvisejí s rozhodnutím.
+- Neukládejte obsah formulářů do analytiky.
+- Nezapisujte osobní data do URL parametrů.
+- U produktových eventů používejte interní identifikátory, ne e-mail jako výchozí klíč.
+- Omezte retenci surových dat a delší dobu držte jen agregace.
+- Dokumentujte, který nástroj data sbírá a kde běží.
+- Každý nový event přidejte do datové mapy.
+
+Krátký zápis metriky:
+
+```text
+Název signálu:
+Rozhodnutí, kterému slouží:
+Zdroj dat:
+Úroveň detailu: agregace / účet / tenant / anonymizovaná událost
+Osobní data: ano / ne / nepřímo
+Retence:
+Vlastník:
+Kdy se metrika odstraní, pokud nebude užitečná:
+```
+
+Poslední řádek je důležitý. Metriky také stárnou. Co bylo užitečné při launchi, může být za půl roku jen šum.
+
+### 4. Navrhněte hlavní obrazovku pro měsíční review
+
+Hlavní dashboard pro vedení malého projektu by se měl vejít na jednu obrazovku nebo jednu stránku. Detailní diagnostika může být jinde. Měsíční review potřebuje rychlý přehled a prostor pro rozhodnutí.
+
+Příklad struktury:
+
+```text
+Období:
+Hlavní cíl měsíce:
+
+1. Správní lidé
+- kvalifikované poptávky:
+- podíl cílového segmentu:
+- nejčastější námitka:
+
+2. První hodnota
+- aktivace:
+- dokončený hlavní tok:
+- nejčastější onboardingový problém:
+
+3. Důvěra a obsah
+- nejpoužívanější obsah v sales:
+- stránka s největším třením:
+- nové nebo aktualizované důkazy:
+
+4. Provoz a privacy-first
+- incidenty:
+- vysoká otevřená rizika:
+- nové externí služby nebo skripty:
+- změny v datové mapě:
+
+Rozhodnutí pro další měsíc:
+1.
+2.
+3.
+```
+
+Tahle šablona není univerzální pravda. Je to start. U produktu s trialem přidáte trial konverzi a aktivaci. U agenturní služby dáte větší váhu kvalitě poptávek a sales cyklu. U obsahového webu budete sledovat užitečnost obsahu, přímé reakce a návraty na klíčové materiály.
+
+### 5. Vyhněte se metrikám bez vlastníka
+
+Každá metrika v hlavním dashboardu má mít vlastníka. Ne proto, aby se hledal viník. Protože bez vlastníka nikdo nepřipraví interpretaci a další krok.
+
+Jednoduché rozdělení:
+
+- Marketing vlastní signály obsahu, distribuce a kvality leadů.
+- Sales vlastní kvalifikaci, námitky a vývoj příležitostí.
+- Produkt vlastní aktivaci, retenci, hlavní workflow a feedback.
+- Technický tým vlastní dostupnost, chybovost, integrace a incidenty.
+- Privacy nebo provozní vlastník hlídá datové toky, dodavatele, retenci a přístupy.
+
+U malého týmu může jeden člověk držet více oblastí. Pořád ale musí být jasné, kdo na review řekne: "Tahle metrika znamená tohle a navrhuji tento krok."
+
+Metrika bez vlastníka se snadno stane rituálem. Všichni se na ni podívají, nikdo ji nezpochybní a žádná práce z ní nevznikne. To je přesně ten typ tichého odpadu, který postupně zahlcuje týmy.
+
+### 6. Měsíční rytmus práce s dashboardem
+
+Dashboard se má používat v rytmu. Doporučený postup:
+
+1. Před review vlastník doplní komentář k metrice.
+2. Tým vybere největší změnu, největší tření a největší riziko.
+3. U každé položky se rozhodne, jestli ji řešit, sledovat, nebo odstranit z pozornosti.
+4. Na konci vzniknou nejvýše tři akce pro další měsíc.
+5. Staré metriky se jednou za kvartál projdou a část se smaže nebo přesune do diagnostiky.
+
+Šablona zápisu z review:
+
+```text
+Datum:
+Období:
+Účastníci:
+
+Co se zlepšilo:
+Co se zhoršilo:
+Co neumíme vysvětlit:
+Největší obchodní signál:
+Největší produktový signál:
+Největší privacy/provozní riziko:
+
+Rozhodnutí:
+1.
+2.
+3.
+
+Metriky k odstranění nebo přesunutí do diagnostiky:
+Datum dalšího review:
+```
+
+Sloupec "co neumíme vysvětlit" je užitečný. Chrání tým před sebevědomým výkladem dat, která jsou ve skutečnosti neúplná, rozbitá nebo příliš hrubá. Někdy je správný další krok opravit kvalitu dat, ne optimalizovat produkt podle špatného měření.
+
+### Checklist přílohy
+
+- Má dashboard jasně popsaná rozhodnutí, kterým slouží?
+- Je hlavní obrazovka krátká a použitelná pro měsíční review?
+- Oddělujete obchodní, produktové, marketingové a provozní signály?
+- Má každá hlavní metrika vlastníka?
+- Umíte u každé metriky říct, jaký krok z ní může vzniknout?
+- Jsou osobní data v dashboardu minimalizovaná?
+- Neposíláte obsah formulářů, e-mailů nebo support zpráv do analytiky?
+- Má každý event nebo zdroj dat záznam v datové mapě?
+- Držíte surová data jen tak dlouho, jak je skutečně potřebujete?
+- Mažete nebo přesouváte metriky, které už nepomáhají rozhodovat?
+- Vznikají z review nejvýše tři konkrétní akce?
+- Umí tým říct, co se podle dashboardu změnilo v posledním měsíci?
+
+Dashboard má být pracovní plocha, ne oltář. Když z něj nevznikají rozhodnutí, zmenšete ho. Když z něj vznikají špatná rozhodnutí, opravte definice signálů. Když kvůli němu sbíráte víc dat, než umíte obhájit, vraťte se k účelu. Dobré měření není o tom vědět všechno. Je o tom vědět dost na další odpovědný krok.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -14653,3 +14874,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha T o vlastnictví a odpovědnostech po publikaci: role, úrovně změn, karta odpovědnosti, backlog zpětné vazby, revizní rytmus, privacy-first kontrola a handoff.
 - 2026-05-07: Doplněna Příloha U s rizikovým registrem pro web, SaaS a marketing: kategorie rizik, šablona záznamu, hodnocení dopadu, příklady mitigací a měsíční review.
 - 2026-05-07: Doplněna Příloha V s definicí hotovo pro web, SaaS a marketing: kritéria vydání, privacy-first brána, předávací minimum, rozhodnutí pustit/opravit/zastavit a checklist.
+- 2026-05-07: Doplněna Příloha W s rozhodovacím dashboardem pro web, SaaS a marketing: výběr signálů podle rozhodnutí, privacy-first minimum, měsíční review a checklist.
