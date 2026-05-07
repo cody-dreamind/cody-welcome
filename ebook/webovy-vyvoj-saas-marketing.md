@@ -15264,6 +15264,164 @@ Nejdůležitější řádek je "co nebudeme dělat". Každé vydání vytvoří 
 
 Startovací balíček má jednu výhodu: snižuje dramatičnost. Místo velkého "spouštíme něco zásadního" máte konkrétní seznam kroků. Publikovat, zkontrolovat, oznámit, posbírat signály, opravit jednu věc, rozhodnout o další verzi. To je méně efektní, ale mnohem použitelnější. A použitelnost je u e-booku lepší ambice než konfety.
 
+## Příloha AA: QA balíček před aktivní distribucí e-booku
+
+Mezi publikací a aktivní distribucí je krátké, ale důležité okno. E-book už existuje, URL funguje, text je čitelný, ale ještě ho neposíláte širšímu publiku, zákazníkům nebo partnerům. Právě tady se vyplatí udělat praktickou kontrolu kvality. Ne proto, aby se vydání odkládalo donekonečna. Naopak: aby se předešlo trapným chybám, rozbitým odkazům, nejasným formulářům a privacy-first přešlapům ve chvíli, kdy už lidé opravdu klikají.
+
+QA balíček není akademický audit. Je to krátký provozní průchod, který má odpovědět na otázku: můžeme tenhle e-book bez studu a bez zbytečného rizika poslat konkrétním lidem?
+
+### 1. Rozdělte kontrolu podle rizika
+
+Ne každá chyba má stejnou váhu. Překlep v odstavci je nepříjemný. Rozbitý formulář pro zpětnou vazbu je horší. Nepravdivé tvrzení o právních povinnostech, špatný odkaz na zdroj nebo zbytečný tracker na landing page je problém úplně jiné kategorie.
+
+Praktické úrovně:
+
+- Blokující: rozbitá hlavní URL, nefunkční formulář, chybějící privacy informace, neověřené právní tvrzení, neveřejná interní data v textu.
+- Vysoké: rozbité odkazy v důležitých kapitolách, špatné CTA, nečitelný mobilní layout, zásadní duplicita nebo chybějící zdroj u konkrétního tvrzení.
+- Střední: nepřesné formulace, slabý příklad, horší nadpis, chybějící interní odkaz, nejasná šablona.
+- Nízké: stylistika, drobný překlep, opakující se slovní obrat, kosmetické ladění.
+
+Distribuci zastavují jen blokující chyby. Vysoké chyby opravte před širším rozesláním, pokud jsou v hlavní cestě čtenáře. Střední a nízké chyby patří do backlogu, jinak se z QA stane záminka, proč nikdy nic nevydat.
+
+Codyho komentář: perfekcionismus je často jen strach v elegantním kabátě. QA má chránit čtenáře a důvěru, ne donekonečna leštit větu, kterou si stejně přečtou tři lidé a jeden z nich bude autor.
+
+### 2. Otestujte hlavní čtenářskou cestu
+
+Začněte jako čtenář, ne jako autor. Otevřete veřejnou URL v anonymním okně nebo čistém profilu a projděte cestu od první návštěvy po konkrétní akci.
+
+Scénář:
+
+1. Otevřu landing page nebo veřejnou stránku e-booku.
+2. Do deseti sekund chápu, pro koho materiál je.
+3. Vidím, co získám a co e-book záměrně neřeší.
+4. Najdu obsah, kapitoly nebo přehled částí.
+5. Otevřu jednu kapitolu a jeden checklist.
+6. Vrátím se na hlavní stránku bez bloudění.
+7. Najdu kontakt pro zpětnou vazbu.
+8. Rozumím tomu, jestli se něco měří a proč.
+
+Při průchodu si zapisujte jen věci, které brání rozhodnutí. Ne každou drobnost. Pokud se čtenář nedostane k obsahu, nepochopí hodnotu nebo neví, kam poslat připomínku, je to problém. Pokud by se dal nadpis o trochu zkrátit, je to práce na později.
+
+### 3. Zkontrolujte odkazy a zdroje
+
+Dlouhý e-book má velkou odkazovou plochu. Rozbité odkazy snižují důvěru a u zdrojů mohou změnit význam doporučení. Před aktivní distribucí zkontrolujte hlavně:
+
+- odkazy na zdroje u právních, bezpečnostních a technických doporučení,
+- interní odkazy na kapitoly, přílohy, checklisty a šablony,
+- odkazy z landing page na hlavní obsah,
+- odkazy z distribučních textů,
+- kontakt pro zpětnou vazbu,
+- odkazy na changelog, verzi nebo archiv, pokud existují.
+
+U zdrojů nestačí jen ověřit, že URL vrací stránku. Zkontrolujte, že odkaz pořád podporuje tvrzení v textu. Pokud zdroj změnil obsah, přesměroval na obecnou stránku nebo už neříká to, co potřebujete, upravte formulaci nebo najděte vhodnější primární zdroj.
+
+Šablona kontroly zdroje:
+
+```text
+Kapitola nebo příloha:
+Tvrzení:
+Odkaz:
+Zdroj stále podporuje tvrzení: ano / ne / částečně
+Je potřeba upravit text: ano / ne
+Riziko zastarání: nízké / střední / vysoké
+Další revize:
+```
+
+Privacy-first poznámka: u externích odkazů nepřidávejte sledovací parametry jen proto, že to umí marketingový nástroj. Pokud potřebujete měřit odchozí kliky, měřte agregovaně a jen u rozhodovacích odkazů. Čtenář nemá být balíček dat přivázaný k URL.
+
+### 4. Udělejte mobilní a čtecí průchod
+
+E-book se bude číst v různých situacích: na notebooku, telefonu, v kanceláři, ve vlaku, při přípravě workshopu i v rychlém sdílení přes chat. Proto nestačí zkontrolovat hlavní stránku na velkém monitoru.
+
+Mobilní minimum:
+
+- Hlavní nadpis se neláme absurdně.
+- Obsah nebo navigace kapitol je použitelná dotykem.
+- Kódové bloky a tabulky nepřetékají mimo obrazovku bez možnosti posunu.
+- CTA a odkazy mají rozumný dotykový prostor.
+- Formulář pro zpětnou vazbu se dá vyplnit z mobilní klávesnice.
+- Žádný sticky prvek nezakrývá čtení nebo tlačítko.
+
+Čtecí minimum:
+
+- Odstavce nejsou příliš široké.
+- Nadpisy tvoří mapu textu.
+- Checklisty se dají použít bez čtení celé kapitoly.
+- Kódové bloky, šablony a tabulky jsou vizuálně oddělené.
+- Interní odkazy nevytrhávají čtenáře z toku bez důvodu.
+- Dlouhé přílohy mají jasný účel hned v úvodu.
+
+Při čtecím průchodu vyberte jednu dlouhou kapitolu, jednu přílohu a závěr. Pokud fungují tyto tři typy obsahu, zbytek bude obvykle v pořádku nebo alespoň v opravitelném stavu.
+
+### 5. Projděte privacy-first bránu
+
+Před distribucí se zeptejte na data. Ne až potom, co někdo přidá formulář, analytiku, embed nebo share widget a řekne "to se nějak doplní do zásad". To je přesně ta věta, po které v dálce slyšitelně upadne compliance ze židle.
+
+Privacy-first QA otázky:
+
+- Jaké nástroje se načítají na stránce e-booku?
+- Které externí domény návštěvník kontaktuje?
+- Sbírá se analytika? Pokud ano, jaké události a proč?
+- Je měření agregované, přiměřené a vysvětlené?
+- Sbírá formulář jen data potřebná pro odpověď?
+- Je oddělená zpětná vazba od marketingového odběru?
+- Existuje retence pro připomínky a kontakty?
+- Kdo má přístup k odpovědím a exportům?
+- Neobsahuje e-book interní poznámky, neveřejné příklady nebo zákaznické detaily?
+- Jsou distribuční texty bez sledovacích parametrů, pokud nejsou opravdu potřeba?
+
+Výstup má být krátké rozhodnutí:
+
+```text
+Privacy-first brána:
+Stav: pustit / opravit před distribucí / zastavit
+Blokující nálezy:
+Opravy před rozesláním:
+Co vědomě neměříme:
+Vlastník:
+Datum další kontroly:
+```
+
+Nejdůležitější je řádek "co vědomě neměříme". Pomáhá odolat zvědavosti. Vědomě neměřit nahrávky relací, individuální profily nebo zbytečné marketingové identifikátory není nedostatek. Je to hodnota.
+
+### 6. Připravte rozhodnutí o rozeslání
+
+QA končí rozhodnutím, ne pocitem. Před aktivní distribucí vyplňte krátký záznam:
+
+```text
+Datum QA:
+Kontrolovaná verze:
+Kontrolované URL:
+Hlavní čtenářská cesta: prošla / neprošla
+Odkazy a zdroje: prošly / opravit
+Mobilní čtení: prošlo / opravit
+Privacy-first brána: prošla / opravit / zastavit
+Blokující nálezy:
+Opravy před rozesláním:
+Nálezy do backlogu:
+Rozhodnutí: rozeslat / rozeslat omezeně / odložit
+Vlastník distribuce:
+```
+
+"Rozeslat omezeně" je užitečná možnost. Znamená poslat e-book nejdřív menší skupině relevantních lidí, například partnerům, zákazníkům nebo internímu týmu, a teprve po prvních signálech ho šířit víc. Není to slabost. Je to rozumný mezikrok mezi šuplíkem a megafonem.
+
+### Checklist přílohy
+
+- Máte před distribucí jasně rozlišené blokující, vysoké, střední a nízké chyby?
+- Prošel někdo hlavní čtenářskou cestu jako nový návštěvník?
+- Je jasné, pro koho e-book je a co čtenář získá?
+- Fungují odkazy z landing page, obsahu, distribučních textů a zpětné vazby?
+- Podporují zdroje pořád tvrzení, ke kterým jsou připojené?
+- Dá se e-book pohodlně číst na mobilu?
+- Fungují checklisty a šablony i bez znalosti celého rukopisu?
+- Je jasné, jaké nástroje a externí domény se na stránce načítají?
+- Sbíráte jen data, která potřebujete pro rozhodnutí nebo odpověď?
+- Je zpětná vazba oddělená od marketingového odběru?
+- Existuje krátký záznam QA s rozhodnutím rozeslat, rozeslat omezeně nebo odložit?
+- Jsou neblokující nálezy v backlogu, aby nezdržovaly vydání?
+
+QA balíček má být praktická brzda jen pro věci, které by poškodily důvěru, použitelnost nebo kontrolu nad daty. Všechno ostatní patří do další iterace. E-book není socha. Je to pracovní nástroj, který má žít, zlepšovat se a přitom se nerozpadat pokaždé, když se ho někdo rozhodne ukázat světu.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -15418,3 +15576,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha X o verzích, changelogu a archivu e-booku: číslování verzí, veřejná historie změn, archiv významných vydání, stabilní URL a checklist správy.
 - 2026-05-07: Doplněna Příloha Y o sběru a zpracování zpětné vazby po publikaci e-booku: rozhodovací otázky, nízkotlaké kanály, feedback backlog, anonymizace, ediční cykly a měření užitečnosti.
 - 2026-05-07: Doplněna Příloha Z se startovacím balíčkem první veřejné verze e-booku: veřejná karta, launch checklist, distribuční texty, první týden po vydání, privacy-first měření a rozhodnutí o další verzi.
+- 2026-05-07: Doplněna Příloha AA s QA balíčkem před aktivní distribucí e-booku: rizikové úrovně chyb, čtenářská cesta, kontrola odkazů, mobilní průchod, privacy-first brána a rozhodnutí o rozeslání.
