@@ -17001,6 +17001,211 @@ Pokud board začne bobtnat, zjednodušte ho. Smažte sloupce, slučte typy změn
 
 Redakční board dává e-booku provozní paměť. Pomáhá rozhodovat, co psát dál, co opravit, co ověřit a co už nechat být. Díky tomu se z rukopisu nestane jen stále delší dokument, ale živý pracovní nástroj, který má vlastní rytmus, odpovědnost a kontrolu nad kvalitou.
 
+## Příloha AI: Produktizovaná služba postavená na e-booku
+
+E-book může být jen obsah. Nebo z něj může vzniknout produktizovaná služba: jasně ohraničená nabídka, která vezme jednu část problému zákazníka a dovede ji k hotovému výstupu. Pro malý tým je to často lepší než prodávat neurčité "konzultace", "vývoj na míru" nebo "marketingovou strategii". Ty věci mohou být hodnotné, ale zákazník před nákupem potřebuje pochopit rozsah, výsledek a riziko.
+
+Produktizovaná služba není krabicový produkt bez přemýšlení. Je to opakovatelný pracovní rámec. Má jasný vstup, jasný proces, jasný výstup a jasná pravidla, kdy zakázku odmítnout nebo posunout do větší spolupráce. E-book k tomu dává jazyk, checklisty a šablony. Služba z nich udělá něco, co zákazník dokáže koupit, použít a vyhodnotit.
+
+### 1. Vyberte jeden konkrétní problém
+
+Nezačínejte otázkou "co všechno umíme nabídnout". To vede k dlouhému seznamu schopností, který vypadá jako jídelní lístek bez kuchyně. Začněte problémem, který se opakuje a dá se uzavřít v krátkém cyklu.
+
+Dobré kandidáty:
+
+- Web nepřináší kvalitní poptávky a tým neví proč.
+- SaaS MVP má moc funkcí a chybí rozhodnutí, co má být v první verzi.
+- Marketing produkuje obsah, ale nikdo neví, jaký obchodní signál z něj vzniká.
+- Firma používá příliš mnoho trackerů a nástrojů bez jasné datové mapy.
+- Prodejní web má slabé důkazy, nejasné CTA a formuláře s vysokým třením.
+- Tým nemá provozní list pro domény, DNS, hosting, e-mail a kritické přístupy.
+
+Problém musí být dost úzký, aby šel vyřešit v jedné službě, ale dost důležitý, aby za něj zákazník chtěl zaplatit. "Zlepšíme digitální přítomnost" je mlha. "Do deseti pracovních dnů najdeme a prioritizujeme tři největší překážky v poptávkovém toku webu" je nabídka.
+
+### 2. Pojmenujte výsledek, ne aktivitu
+
+Zákazník nekupuje workshop, audit nebo konzultaci jen proto, že miluje kalendářové pozvánky. Kupuje lepší rozhodnutí. Proto popište výstup tak, aby bylo jasné, co bude mít v ruce.
+
+Slabé pojmenování:
+
+```text
+Konzultace webu a marketingu
+```
+
+Silnější pojmenování:
+
+```text
+Webový clarity audit: mapa překážek, priorit a první opravy pro poptávkový tok
+```
+
+Ještě konkrétnější výstup:
+
+```text
+Výstupem je jednostránkové shrnutí hlavního problému, seznam 10 nálezů, prioritizace podle dopadu a náročnosti, návrh prvních tří změn a privacy-first kontrola datového toku.
+```
+
+Tím zákazník vidí, co dostane. Vy zároveň chráníte rozsah. Pokud po auditu vznikne potřeba redesignu, vývoje nebo dlouhodobého marketingu, je to další rozhodnutí, ne skrytá součást původní služby.
+
+### 3. Nastavte pevné hranice rozsahu
+
+Produktizovaná služba funguje jen tehdy, když má hranice. Jinak se z ní stane klasický projekt v převleku. A klasický projekt v převleku je jako "rychlá malá úprava", která nakonec potřebuje databázovou migraci, copywriting a terapeutické sezení nad starým CRM.
+
+Příklad hranic pro webový audit:
+
+- Maximálně 5 klíčových URL.
+- Maximálně 2 hlavní konverzní toky.
+- Jeden úvodní hovor do 60 minut.
+- Jeden závěrečný hovor do 60 minut.
+- Jeden dokument s nálezy a prioritami.
+- Bez implementace změn v základním balíčku.
+- Bez právního posouzení; právní otázky se předávají odborníkovi.
+- Bez napojování nových trackerů nebo sběru dalších osobních údajů.
+
+Hranice nejsou neochota pomoci. Jsou to podmínky kvality. Když zákazník potřebuje víc, nabídněte rozšíření. Jen ho nemíchejte do základního balíčku, protože pak se rozpadne opakovatelnost.
+
+### 4. Složte službu z opakovatelných bloků
+
+Použijte e-book jako stavebnici. Každý blok má jasnou otázku a výstup.
+
+Příklad služby "Webový clarity audit":
+
+```text
+Blok 1: Kontext
+Otázka: Pro koho web pracuje a jaký obchodní výsledek má přinést?
+Výstup: Jedna cílová situace zákazníka a hlavní akce webu.
+
+Blok 2: První dojem
+Otázka: Je do deseti sekund jasné, co firma nabízí, komu a proč věřit?
+Výstup: Hodnocení hero sekce, důkazů a hlavního CTA.
+
+Blok 3: Konverzní tok
+Otázka: Kde návštěvník ztrácí jistotu nebo naráží na tření?
+Výstup: Mapa toku od vstupu po odeslání formuláře nebo objednávku.
+
+Blok 4: Privacy-first provoz
+Otázka: Jaká data web sbírá, proč, kde končí a co je zbytečné?
+Výstup: Krátká datová mapa a seznam zbytečných nebo nejasných skriptů.
+
+Blok 5: Prioritizace
+Otázka: Co opravit jako první, aby změna měla viditelný dopad?
+Výstup: Matice dopad / náročnost a tři doporučené iterace.
+```
+
+Takový rámec se dá použít opakovaně, ale výstup zůstává konkrétní pro daného zákazníka. To je rozdíl mezi šablonou a šablonovitostí. První pomáhá. Druhá jen zní levně.
+
+### 5. Přidejte privacy-first bránu
+
+Každá služba postavená na tomto e-booku má mít jednoduchou privacy-first bránu. Ne jako formalitu na konec, ale jako rozhodovací filtr.
+
+Praktické otázky:
+
+- Potřebujeme pro výstup osobní údaje, nebo stačí agregované a anonymizované signály?
+- Budeme chtít přístup do nástrojů zákazníka? Pokud ano, jaký nejmenší rozsah stačí?
+- Budeme pracovat s exportem dat? Pokud ano, kde bude uložen, kdo ho uvidí a kdy se smaže?
+- Navrhujeme nový tracker, nebo dokážeme rozhodnutí udělat z existujících dat?
+- Je doporučený nástroj provozně obhajitelný z pohledu dat, přístupů a vendor lock-inu?
+- Umíme zákazníkovi vysvětlit, proč je daný sběr dat nutný?
+
+Privacy-first brána často zjednoduší službu. Místo toho, abyste si vyžádali přístup do pěti systémů, začnete veřejnou částí webu, anonymizovaným exportem a krátkým rozhovorem. Pokud to stačí pro rozhodnutí, není potřeba tahat další data do procesu jen proto, že to jde.
+
+### 6. Připravte prodejní stránku služby
+
+Prodejní stránka produktizované služby nemusí být dlouhá. Musí odpovědět na praktické otázky.
+
+Struktura stránky:
+
+```text
+Název:
+Webový clarity audit
+
+Pro koho:
+B2B firmy, které mají web nebo SaaS landing page a chtějí zlepšit kvalitu poptávek bez další vrstvy trackerů.
+
+Kdy to dává smysl:
+Web má návštěvnost, ale málo kvalitních poptávek.
+Tým neví, jestli je problém v nabídce, důvěře, obsahu, UX nebo měření.
+Před redesignem chcete vědět, co skutečně opravit.
+
+Co dostanete:
+Mapa hlavního toku, seznam nálezů, prioritizace, tři první opravy, privacy-first datová kontrola.
+
+Jak to probíhá:
+Úvodní hovor, průchod webem, analýza, závěrečný hovor, předání dokumentu.
+
+Co není součástí:
+Implementace změn, právní posouzení, dlouhodobá správa analytiky, reklamní kampaně.
+
+Další krok:
+Pošlete URL webu a jednu větu, co má web obchodně přinést.
+```
+
+Cena může být pevná, pokud je pevný rozsah. Pokud rozsah kolísá, použijte cenové pásmo nebo kvalifikační formulář. Hlavní je neslibovat "audit všeho". Audit všeho je elegantní způsob, jak se utopit v ničem.
+
+### 7. Udělejte interní delivery checklist
+
+Produktizovaná služba potřebuje delivery checklist, aby výsledek nebyl závislý na náladě konkrétního dne.
+
+Příklad:
+
+```text
+Před začátkem:
+- Je potvrzený rozsah URL a hlavní cíl?
+- Máme jen nezbytné přístupy nebo anonymizované podklady?
+- Je jasné, kdo je kontaktní osoba?
+- Je domluvený termín závěrečného předání?
+
+Během práce:
+- Má každý nález konkrétní dopad na zákazníka nebo tým?
+- Je u nálezu ukázka, screenshot, citace z webu nebo konkrétní místo?
+- Je doporučení formulované jako akce, ne jako obecná rada?
+- Jsou nálezy prioritizované podle dopadu a náročnosti?
+- Je zkontrolovaný privacy-first dopad doporučení?
+
+Před předáním:
+- Obsahuje výstup shrnutí na jednu stránku?
+- Jsou první tři kroky realistické na nejbližší iteraci?
+- Je jasně oddělené "opravit teď", "ověřit" a "odložit"?
+- Neobsahuje dokument zbytečné osobní údaje nebo interní data?
+- Je připravený follow-up s možností implementace nebo dalšího workshopu?
+```
+
+Checklist drží kvalitu. Zákazník si nemusí všimnout, že jste ho použili. Všimne si ale, že výstup nepůsobí jako improvizace ve formátu "tady je 47 poznámek, hodně štěstí".
+
+### 8. Navrhněte cestu po doručení
+
+Produktizovaná služba má mít jasný konec a přirozený další krok. Ne agresivní upsell, ale logickou cestu.
+
+Možnosti po doručení:
+
+- Jednorázová implementace prvních tří oprav.
+- Dvoutýdenní sprint pro úpravu homepage, formuláře nebo klíčové landing page.
+- Měsíční review webu a marketingových signálů.
+- Workshop pro SaaS MVP, pokud audit ukáže, že problém není jen web, ale produktový rozsah.
+- Privacy-first datová mapa a úklid měření, pokud hlavní riziko leží v nástrojích a datech.
+
+Další krok musí vycházet z nálezu. Pokud audit ukáže, že web nemá jasnou nabídku, nenabízejte hned výkonnostní kampaně. Pokud se rozpadá datová mapa, nezačínejte novým dashboardem. Když je základ mokrý, nepřidává se koberec. Dobře, už mlčím.
+
+### Codyho komentář
+
+Můj pohled: produktizovaná služba je dobrý test podnikatelské dospělosti. Nutí vás říct, komu pomáháte, jaký problém řešíte, co přesně dodáte a co už je mimo rozsah. To je nepříjemné jen do chvíle, než zjistíte, že zákazníci kupují jasnost mnohem raději než neurčitou hromadu možností.
+
+E-book v tomhle není konečný produkt. Je to zásobník rozhodnutí. Pokud z něj umíte vytáhnout jednu opakovatelnou službu, získáte lepší prodejní příběh, rychlejší delivery a ostřejší zpětnou vazbu. A pokud ji neumíte popsat na jednu stránku, pravděpodobně ještě není dost konkrétní.
+
+### Checklist přílohy
+
+- Je vybraný jeden konkrétní problém, který se opakuje u zákazníků?
+- Je výsledek služby popsaný jako rozhodnutí nebo hotový výstup, ne jen aktivita?
+- Má služba jasné vstupy, proces, výstupy a hranice rozsahu?
+- Lze službu dodat v krátkém, opakovatelném cyklu?
+- Obsahuje nabídka privacy-first bránu pro data, přístupy a nástroje?
+- Je jasně napsané, co není součástí služby?
+- Existuje interní delivery checklist?
+- Umí zákazník pochopit další krok bez konzultačního divadla?
+- Vede služba k přirozenému pokračování, pokud výstup ukáže větší problém?
+- Dá se nabídka vysvětlit jednou větou bez slovní mlhy?
+
+Produktizovaná služba je most mezi obsahem a byznysem. E-book ukazuje, jak přemýšlet. Služba ukazuje, jak z toho udělat konkrétní změnu pro konkrétní firmu. Když je dobře ohraničená, chrání zákazníka před nekonečným projektem a tým před nekonečnou improvizací. To je fér obchod na obě strany.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -17163,3 +17368,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha AF s interním školicím balíčkem pro tým: onboarding trasy podle rolí, čtyři praktické workshopy, znalostní test, týmová dohoda a refresh rytmus.
 - 2026-05-07: Doplněna Příloha AG s rozhodovacím indexem pro rychlé použití e-booku: výběr trasy podle situace, pětiminutové triage, převod čtení do backlogu a privacy-first brzda.
 - 2026-05-07: Doplněna Příloha AH s redakčním boardem pro další iterace e-booku: typy změn, karta položky, týdenní a měsíční rytmus, měření užitečnosti a privacy-first kontrola.
+- 2026-05-07: Doplněna Příloha AI o produktizované službě postavené na e-booku: výběr problému, výsledek, rozsah, delivery bloky, privacy-first brána, prodejní stránka a checklist.
