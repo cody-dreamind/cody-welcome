@@ -14923,6 +14923,149 @@ Tuto šablonu použijte při každém větším zásahu. Když ji neumíte vypln
 
 Verzování je nudné přesně tím způsobem, jakým má být nudné zálohování. Když ho nepotřebujete, skoro si ho nevšimnete. Když ho potřebujete a nemáte ho, najednou je pozdě. Dobrý e-book proto nemá jen obsah. Má paměť.
 
+## Příloha Y: Zpětná vazba po publikaci bez šmírování
+
+Publikací e-book nekončí. Teprve po publikaci začne být vidět, které části lidem opravdu pomáhají, kde se ztrácí, co si chtějí odnést do praxe a které doporučení je sice hezky napsané, ale v reálném týmu se podle něj špatně jedná. Zpětná vazba proto není kosmetický doplněk. Je to provozní vstup pro další verzi.
+
+Špatný způsob je zapnout co nejvíc měření, sledovat každý pohyb kurzoru a tvářit se, že množství dat nahradí rozhovor se čtenářem. Dobrý způsob je jednodušší: předem si říct, jaká rozhodnutí chcete díky zpětné vazbě udělat, sbírat jen signály, které k nim vedou, a pravidelně je převádět na konkrétní úpravy.
+
+### 1. Začněte rozhodnutími, ne formulářem
+
+Než přidáte formulář, dotazník nebo analytickou událost, napište si tři otázky:
+
+- Která část e-booku je pro čtenáře nejméně jasná?
+- Který checklist lidé opravdu použili v práci?
+- Co čtenář po dočtení udělal jako další krok?
+
+Teprve potom vybírejte vstupy. Pokud chcete zjistit, jestli je kapitola srozumitelná, stačí krátká otázka pod kapitolou nebo odkaz na zpětnou vazbu. Pokud chcete zjistit, jestli e-book vede k poptávkám, sledujte kvalifikované kontakty a odkazy z relevantních částí. Pokud chcete zjistit, jestli čtenář něco implementoval, nejlepší signál často není klik, ale odpověď člověka: "Použili jsme checklist pro audit webu a našli tři věci k opravě."
+
+Příklad rozhodovací tabulky:
+
+```text
+Rozhodnutí:
+Zkrátit, rozdělit nebo ponechat kapitolu o SaaS metrikách.
+
+Signály:
+- čtenáři se ptají na vysvětlení pojmů,
+- kapitola se často cituje v obchodních hovorech,
+- checklist nikdo nepoužívá bez vysvětlení,
+- přichází návrhy na samostatnou šablonu.
+
+Akce:
+Přidat jednostránkový tahák metrik a z kapitoly odkázat na praktický příklad.
+```
+
+### 2. Používejte nízkotlaké kanály
+
+Zpětná vazba nemusí být agresivní pop-up. U dlouhého obsahu často fungují klidnější vstupy:
+
+- e-mailová adresa pro připomínky,
+- krátký formulář na vlastní doméně,
+- odkaz "Našli jste nejasnost?" u kapitol,
+- možnost poslat odpověď přes přímý kontakt,
+- interní poznámky ze sales a support hovoru,
+- veřejný changelog, kde lze odkázat na opravené části,
+- RSS oznámení nové verze místo nátlakového newsletteru.
+
+Privacy-first pravidlo: čím citlivější zpětná vazba, tím méně ji tlačte do cizích platforem. Pokud někdo popisuje problém ve firmě, zákaznická data nebo interní proces, nechcete, aby se z toho stal záznam v nástroji, který nemáte pod kontrolou. Vlastní formulář, vlastní inbox a jasná retence jsou často lepší než pohodlný SaaS widget nalepený na každé stránce.
+
+### 3. Oddělte signály podle kvality
+
+Ne každá zpětná vazba má stejnou váhu. Jedna hlasitá připomínka nemusí znamenat, že je kapitola špatně. Deset tichých lidí, kteří stejný checklist použili bez otázek, je také signál. Proto si zpětnou vazbu značte podle typu.
+
+Praktické kategorie:
+
+- Nejasnost: čtenář nerozumí pojmu, kroku nebo doporučení.
+- Chybějící příklad: text dává smysl, ale potřebuje ukázku.
+- Akční výsledek: čtenář podle textu něco opravil nebo spustil.
+- Námitka: čtenář nesouhlasí, má jinou zkušenost nebo vidí riziko.
+- Aktualizace: změnil se nástroj, právní kontext, rozhraní nebo provozní postup.
+- Obchodní signál: text vyvolal dotaz, poptávku, demo nebo workshop.
+- Distribuční signál: někdo sdílel konkrétní část, citoval ji nebo na ni odkázal.
+
+Takové členění brání tomu, aby se e-book upravoval jen podle poslední zprávy. Cílem není vyhovět každému komentáři. Cílem je rozpoznat vzor a rozhodnout, jestli změna pomůže dalším čtenářům.
+
+### 4. Zaveďte jednoduchý feedback backlog
+
+Zpětnou vazbu nenechávejte v e-mailech, chatech a hlavách lidí. Udělejte jeden backlog. Nemusí to být velký systém. Stačí tabulka, issue list nebo Markdown soubor.
+
+Šablona záznamu:
+
+```text
+Datum:
+Zdroj zpětné vazby:
+Kapitola nebo příloha:
+Typ signálu:
+Shrnutí:
+Dopad na čtenáře:
+Navržená akce:
+Priorita: nízká / střední / vysoká
+Potřebuje ověřit zdroj: ano / ne
+Obsahuje osobní nebo interní data: ano / ne
+Retence nebo anonymizace:
+Stav: nové / k ověření / zapracovat / odložit / hotovo
+```
+
+Důležité je pole "dopad na čtenáře". Bez něj se backlog rychle změní na seznam nápadů. Nápad "přidat víc příkladů" je mlhavý. Lepší záznam zní: "Tři čtenáři nerozlišili mezi MRR a cashflow; přidat krátký příklad, aby kapitola 19 nevedla k chybnému vyhodnocení růstu." To už je práce, kterou lze udělat.
+
+### 5. Chraňte lidi, kteří dávají zpětnou vazbu
+
+Zpětná vazba k webu, SaaS nebo marketingu často obsahuje citlivé informace. Čtenář může popsat interní proces, slabinu svého produktu, problém s dodavatelem, konkrétní metriky nebo obchodní situaci. To nepatří do veřejného changelogu ani do nástroje s neurčitou retencí.
+
+Pravidla:
+
+- Před uložením zpětné vazby odstraňte osobní údaje, pokud nejsou potřeba.
+- Interní příklady anonymizujte dřív, než z nich uděláte obsah.
+- Do veřejných poznámek nedávejte názvy firem bez souhlasu.
+- Citace používejte jen s výslovným svolením a jasným kontextem.
+- U feedback backlogu nastavte vlastníka, přístupy a retenci.
+- Pokud zpětná vazba obsahuje bezpečnostní problém, řešte ji mimo běžný obsahový backlog.
+- Pokud se týká právního nebo privacy-first doporučení, ověřte zdroj před úpravou textu.
+
+Codyho komentář: nejlepší zpětná vazba často přijde ve větě, kterou by člověk veřejně nikdy nenapsal. "Tady jsme se spálili." "Tohle nám rozbilo onboarding." "Tohle jsme neuměli vysvětlit vedení." Pokud s tím budete zacházet jako s marketingovým materiálem, příště vám lidé neřeknou nic. A právem.
+
+### 6. Převádějte zpětnou vazbu na ediční cykly
+
+Zpětná vazba má mít rytmus. Jinak se z ní stane buď chaos, nebo hřbitov dobrých poznámek. Doporučený režim:
+
+- Každý týden projít nové signály a označit ty, které potřebují reakci.
+- Jednou měsíčně vybrat tři až pět úprav do další pracovní verze.
+- Jednou za čtvrtletí zkontrolovat kapitoly s právním, bezpečnostním, provozním nebo nástrojovým dopadem.
+- Před významným vydáním projít feedback backlog proti changelogu.
+
+Praktické pravidlo: jedna verze nemusí opravit všechno. Má opravit nejdůležitější věci, které zlepší rozhodování čtenáře. Pokud zpětná vazba vede jen k dalšímu nafukování textu, zvažte raději šablonu, příklad nebo samostatnou přílohu.
+
+### 7. Měřte užitečnost, ne zvědavost
+
+Užitečné otázky pro vyhodnocení:
+
+- Které části e-booku vedly ke konkrétní akci?
+- Kde čtenáři potřebovali vysvětlení navíc?
+- Které checklisty se opakovaně používají v týmu nebo se zákazníky?
+- Které části generují kvalifikované dotazy?
+- Které kapitoly stárnou nejrychleji?
+- Kde text slibuje víc, než prakticky doručuje?
+- Co by se dalo zkrátit, protože to nikomu nepomáhá?
+
+Nevyhodnocujte e-book jen podle návštěvnosti. Návštěvnost může ukázat zájem, ale sama neříká, jestli text někomu pomohl udělat lepší rozhodnutí. U dlouhého praktického obsahu je lepší jeden konkrétní příklad použití než tisíc náhodných zobrazení bez dopadu. Ano, méně grafů. Více reality. Strašné, já vím.
+
+### Checklist přílohy
+
+- Má e-book jasný způsob, jak poslat zpětnou vazbu?
+- Ví čtenář, kam napsat nejasnost, chybu nebo návrh?
+- Sbíráte zpětnou vazbu podle rozhodnutí, ne podle zvědavosti?
+- Má feedback backlog jednoho vlastníka?
+- Rozlišujete nejasnosti, příklady, aktualizace, námitky a obchodní signály?
+- Anonymizujete citlivé nebo interní vstupy před dalším použitím?
+- Neposíláte zpětnou vazbu zbytečně do nástrojů mimo vaši kontrolu?
+- Máte pravidlo, kdy zpětná vazba vede ke změně textu?
+- Ověřujete zdroje před úpravou právních, bezpečnostních nebo privacy-first doporučení?
+- Promítá se významná zpětná vazba do changelogu?
+- Umíte ukázat, které změny vznikly díky čtenářům?
+- Měříte praktický dopad, ne jen počet zobrazení?
+
+Zpětná vazba je nejlepší ve chvíli, kdy ji berete vážně, ale nepodléháte jí slepě. E-book má mít vlastní směr. Čtenáři vám pomáhají vidět slepá místa, ne přepisovat každou větu podle posledního komentáře. Když z toho uděláte rytmus, bude publikace živá, užitečná a pořád pod kontrolou.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -15075,3 +15218,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha V s definicí hotovo pro web, SaaS a marketing: kritéria vydání, privacy-first brána, předávací minimum, rozhodnutí pustit/opravit/zastavit a checklist.
 - 2026-05-07: Doplněna Příloha W s rozhodovacím dashboardem pro web, SaaS a marketing: výběr signálů podle rozhodnutí, privacy-first minimum, měsíční review a checklist.
 - 2026-05-07: Doplněna Příloha X o verzích, changelogu a archivu e-booku: číslování verzí, veřejná historie změn, archiv významných vydání, stabilní URL a checklist správy.
+- 2026-05-07: Doplněna Příloha Y o sběru a zpracování zpětné vazby po publikaci e-booku: rozhodovací otázky, nízkotlaké kanály, feedback backlog, anonymizace, ediční cykly a měření užitečnosti.
