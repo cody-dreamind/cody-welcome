@@ -16792,6 +16792,215 @@ Index aktualizujte při měsíčním review. Když zjistíte, že se k nějaké 
 
 Rozhodovací index je malá vrstva, ale mění způsob používání celého rukopisu. Místo velké knihy vznikne praktická navigace pro konkrétní situace. A to je přesně režim, ve kterém e-book přestává být obsahem a začíná být pracovním systémem.
 
+## Příloha AH: Redakční board pro další iterace e-booku
+
+Ve chvíli, kdy má e-book desítky kapitol, příloh, checklistů a pracovních šablon, se objevuje nové riziko: další práce se začne řídit tím, co zrovna někoho napadne. To může chvíli fungovat, ale u dlouhého rukopisu rychle vznikne obsahový dluh. Některé části se opakují, jiné stárnou, někde chybí zdroje, jinde je dobrý text bez jasného použití.
+
+Redakční board je jednoduchý systém pro řízení dalších iterací. Není to velká procesní mašina. Je to jedna tabulka nebo nástěnka, která odpovídá na otázku: co má být další konkrétní zlepšení e-booku a proč právě ono?
+
+Použijte ho hlavně po první veřejné verzi. V té chvíli už cílem není jen dopisovat další text. Cílem je udržet rukopis užitečný, čitelný, ověřený a použitelný v obchodě, produktu, marketingu i interním provozu.
+
+### 1. Rozdělte práci podle typu změny
+
+Ne každá úprava e-booku má stejnou váhu. Když tým hází všechny nápady do jednoho seznamu, drobná jazyková oprava soutěží s právní aktualizací, novou šablonou a přepsáním kapitoly. Výsledek je chaos s hezkým názvem backlog.
+
+Rozdělte položky do pěti typů:
+
+```text
+1. Oprava:
+Překlep, nejasná věta, rozbitý odkaz, drobná nepřesnost.
+
+2. Zpřesnění:
+Lepší příklad, konkrétnější checklist, kratší vysvětlení, jasnější doporučení.
+
+3. Aktualizace:
+Změna zdroje, právního kontextu, nástroje, doporučení nebo odkazu.
+
+4. Rozšíření:
+Nová podkapitola, příloha, šablona, pracovní list nebo praktický scénář.
+
+5. Smazání nebo sloučení:
+Duplicitní část, slabý odstavec, zastaralý příklad, šablona bez použití.
+```
+
+Každá položka v boardu musí mít typ. Když typ nejde vybrat, položka je pravděpodobně moc neurčitá. Přepište ji, než ji pustíte dál.
+
+Příklad:
+
+```text
+Špatně:
+Zlepšit kapitolu o privacy-first analytice.
+
+Lépe:
+Typ: Zpřesnění
+Položka: Doplnit do kapitoly 32 příklad, jak vybrat tři měřené eventy pro B2B SaaS trial.
+Výstup: Jeden konkrétní příklad plus mini checklist.
+```
+
+### 2. Každá položka potřebuje důvod
+
+E-book se nemá zvětšovat jen proto, že umíme psát. Každá změna má mít důvod, který souvisí s užitkem pro čtenáře, obchodní použití, provozní jistotu nebo privacy-first kvalitu.
+
+Použijte čtyři otázky:
+
+1. Komu tato změna pomůže?
+2. V jaké situaci ji použije?
+3. Jaké rozhodnutí nebo práci mu zjednoduší?
+4. Co se stane, když ji neuděláme?
+
+Pokud odpověď zní "bude to působit kompletněji", je to slabý důvod. Kompletnost je podezřele pohodlná past. Užitečnost je lepší měřítko.
+
+Codyho komentář: dlouhý obsah má zvláštní schopnost tvářit se hodnotně jen svou délkou. Jenže čtenář neplatí pozorností za kila textu. Platí za zkratku k lepšímu rozhodnutí. Když odstavec nepomáhá rozhodnout, opravit, vysvětlit nebo prodat, měl by se začít bát o svou existenci.
+
+### 3. Dejte boardu jednoduché sloupce
+
+Redakční board má být tak jednoduchý, aby ho tým opravdu používal. Doporučené sloupce:
+
+```text
+Nápady
+K ověření
+Připraveno
+Rozpracováno
+Ke kontrole
+Hotovo
+Odloženo nebo smazáno
+```
+
+Význam sloupců:
+
+- Nápady: syrové podněty bez závazku.
+- K ověření: položky, u kterých chybí zdroj, rozhodnutí, příklad nebo jasný užitek.
+- Připraveno: položky s typem, důvodem, výstupem a vlastníkem.
+- Rozpracováno: právě probíhající úprava.
+- Ke kontrole: změna je napsaná, ale potřebuje redakční, faktickou nebo privacy-first kontrolu.
+- Hotovo: změna je dokončená, zalogovaná a zahrnutá do další verze.
+- Odloženo nebo smazáno: vědomě neřešené položky, aby se nevracely jako bumerang v horší náladě.
+
+Limitujte rozpracované položky. Pro malý tým stačí jedna až tři najednou. Pokud je rozpracováno deset věcí, ve skutečnosti není rozpracováno skoro nic. Jen se to rozprostřelo po stole a čeká, kdo první ztratí nervy.
+
+### 4. Použijte kartu redakční položky
+
+Každý větší zásah má mít krátkou kartu. Nemusí být krásná. Musí zabránit tomu, aby změna ztratila kontext.
+
+```text
+Název:
+Typ změny:
+Dotčená část e-booku:
+Pro koho to je:
+Situace použití:
+Proč teď:
+Navržený výstup:
+Zdroje nebo podklady:
+Privacy-first dopad:
+Kritérium hotovo:
+Vlastník:
+Termín:
+Rozhodnutí po kontrole:
+```
+
+Ukázka:
+
+```text
+Název:
+Doplnit příklad měření kvality leadů bez zbytečných osobních dat
+
+Typ změny:
+Zpřesnění
+
+Dotčená část e-booku:
+Kapitola 25, Kapitola 32, Příloha W
+
+Pro koho to je:
+B2B tým, který má poptávkový formulář a neumí vyhodnotit kvalitu leadů.
+
+Situace použití:
+Měsíční marketingové review.
+
+Proč teď:
+V sales hovorech se opakuje dotaz, jak měřit kvalitu poptávek bez rozšiřování formuláře.
+
+Navržený výstup:
+Jeden praktický příklad eventu, kvalifikačního štítku a měsíčního rozhodnutí.
+
+Zdroje nebo podklady:
+Interní poznámky z review, anonymizované dotazy zákazníků.
+
+Privacy-first dopad:
+Preferovat agregované signály a ruční kvalifikační štítky před sběrem dalších osobních údajů.
+
+Kritérium hotovo:
+Text obsahuje příklad, checklist a nevyžaduje žádný nový tracker.
+
+Vlastník:
+Marketing + sales
+
+Termín:
+Do dalšího měsíčního review.
+
+Rozhodnutí po kontrole:
+Publikovat v nejbližší menší verzi.
+```
+
+Karta pomáhá hlavně ve chvíli, kdy změna čeká. Bez ní se za dva týdny nikdo nepamatuje, proč položka vznikla a co měla opravit. S ní jde rozhodnout rychle: udělat, zmenšit, odložit, nebo smazat.
+
+### 5. Nastavte týdenní a měsíční rytmus
+
+Redakční board nepotřebuje každodenní schůzku. Stačí dva rytmy.
+
+Týdenní krátký průchod:
+
+```text
+1. Co je rozpracované?
+2. Co se dá tento týden dokončit?
+3. Co čeká na zdroj, příklad nebo rozhodnutí?
+4. Co se má smazat nebo odložit?
+5. Přibyla nějaká privacy-first nebo právní aktualizace, která má přednost?
+```
+
+Měsíční hlubší review:
+
+```text
+1. Které části e-booku se opravdu používaly?
+2. Kde čtenáři nebo tým naráželi na nejasnost?
+3. Které checklisty vedly ke konkrétní akci?
+4. Které přílohy se opakují nebo překrývají?
+5. Které zdroje, odkazy nebo právní poznámky potřebují ověřit?
+6. Jaká jedna změna má největší užitek pro další měsíc?
+```
+
+Po měsíčním review vyberte maximálně tři priority. Jednu velkou, jednu střední a jednu drobnou. Víc priorit zní ambiciózně, ale u redakční práce často znamená jen víc rozpracovaných vět.
+
+### 6. Měřte užitečnost boardu
+
+Board sám o sobě není hodnota. Hodnota je lepší e-book. Proto jednou za měsíc zkontrolujte, jestli board pomáhá.
+
+Praktické signály:
+
+- Dokončené změny mají jasný důvod a vlastníka.
+- Položky nezůstávají dlouho v "Rozpracováno".
+- U aktualizací je jasné, odkud pochází zdroj nebo podnět.
+- Staré nápady se pravidelně mažou nebo odkládají.
+- Změny se zapisují do pracovního logu nebo changelogu.
+- Privacy-first dopad není prázdné políčko, ale skutečné rozhodnutí.
+- Board vede k menším hotovým iteracím, ne k věčnému přepisování celého rukopisu.
+
+Pokud board začne bobtnat, zjednodušte ho. Smažte sloupce, slučte typy změn, zkraťte kartu. Proces má sloužit textu. Jakmile text začne sloužit procesu, je čas vzít koště. Metaforické, žádné dekorativní drama.
+
+### Checklist přílohy
+
+- Má každá redakční položka typ změny?
+- Je jasné, komu změna pomůže a v jaké situaci?
+- Má položka konkrétní výstup, ne jen obecný nápad?
+- Existuje sloupec pro ověření zdrojů a podkladů?
+- Je u větších změn zapsaný privacy-first dopad?
+- Jsou rozpracované položky omezené na realistický počet?
+- Probíhá krátký týdenní průchod boardem?
+- Probíhá měsíční review užitečnosti e-booku?
+- Mažou se staré nápady, které už nedávají smysl?
+- Zapisují se dokončené změny do pracovního logu nebo changelogu?
+
+Redakční board dává e-booku provozní paměť. Pomáhá rozhodovat, co psát dál, co opravit, co ověřit a co už nechat být. Díky tomu se z rukopisu nestane jen stále delší dokument, ale živý pracovní nástroj, který má vlastní rytmus, odpovědnost a kontrolu nad kvalitou.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -16953,3 +17162,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha AE s customer success balíčkem pro e-book: onboarding karta, support výřezy, privacy-first komunikace, měření zdraví spolupráce a smyčka zpět do rukopisu.
 - 2026-05-07: Doplněna Příloha AF s interním školicím balíčkem pro tým: onboarding trasy podle rolí, čtyři praktické workshopy, znalostní test, týmová dohoda a refresh rytmus.
 - 2026-05-07: Doplněna Příloha AG s rozhodovacím indexem pro rychlé použití e-booku: výběr trasy podle situace, pětiminutové triage, převod čtení do backlogu a privacy-first brzda.
+- 2026-05-07: Doplněna Příloha AH s redakčním boardem pro další iterace e-booku: typy změn, karta položky, týdenní a měsíční rytmus, měření užitečnosti a privacy-first kontrola.
