@@ -13707,6 +13707,198 @@ Počet použití v discovery hovorech, počet kliků na datovou mapu, kvalita na
 
 Obsahová mapa je most mezi rukopisem a provozem. Bez ní je e-book jeden velký kus práce. S ní se z něj stává systém článků, šablon, odkazů a rozhodnutí, který může živit web, sales i produktovou strategii měsíce po publikaci.
 
+## Příloha S: Evidence zdrojů a právních aktualizací
+
+E-book o webu, SaaS, marketingu a privacy-first provozu má jednu nepříjemnou vlastnost: část textu stárne rychleji než autorovo sebevědomí po prvním právním review. Doporučení k obsahu, UX nebo sales procesu vydrží měsíce až roky. Tvrzení o regulaci, cookies, AI, konkrétních nástrojích, cenách nebo platformách může zastarat během jedné produktové změny, metodického stanoviska nebo legislativní aktualizace.
+
+Proto nestačí mít v textu odkazy. Potřebujete evidenci zdrojů: kde se tvrzení vzalo, kdy bylo ověřené, jak rychle stárne, kdo ho má znovu zkontrolovat a co se stane, když zdroj změní význam.
+
+Praktický cíl není vytvořit akademický aparát. Cíl je zabránit tomu, aby e-book za půl roku sebevědomě radil věc, která už neplatí.
+
+### 1. Rozdělte tvrzení podle rizika
+
+Ne každé tvrzení potřebuje stejnou péči. Věta "homepage má rychle vysvětlit hodnotu" je pracovní doporučení. Věta o tom, kdy se použije souhlas s cookies, je právně citlivé tvrzení. Věta o ceně konkrétního nástroje je provozně nestabilní. Věta o termínech účinnosti AI Actu je aktuální právní fakt a bez zdroje do textu nepatří.
+
+Použijte čtyři kategorie:
+
+| Kategorie | Příklad | Zdroj | Revize |
+| --- | --- | --- | --- |
+| Praktické doporučení | Zkraťte formulář na data nutná pro první odpověď. | Interní zkušenost nebo Codyho komentář | Při redakční revizi |
+| Technické tvrzení | Sitemap pomáhá crawlerům najít důležité URL. | Dokumentace nebo standard | Jednou za 6 až 12 měsíců |
+| Právní nebo compliance tvrzení | Osobní data a cookies mohou spadat pod EU pravidla ochrany dat a soukromí. | Primární právní text, regulátor nebo EU instituce | Při každé publikaci a kvartálně |
+| Aktuální produktové tvrzení | Nástroj nabízí EU region, konkrétní cenu nebo funkci. | Oficiální ceník nebo dokumentace dodavatele | Před každou publikací |
+
+Pokud si nejste jistí kategorií, zařaďte tvrzení výš. Přehnaná opatrnost u zdrojů je levnější než přepis veřejně publikovaného playbooku.
+
+### 2. Ke každému citlivému tvrzení zapište minimální metadata
+
+Evidence zdrojů nemusí být složitá. Může to být tabulka v Markdownu, issue v repozitáři nebo stránka v interní znalostní bázi. Důležité je, aby z ní bylo poznat, co je potřeba ověřit a proč.
+
+Minimální pole:
+
+```text
+ID tvrzení:
+Kapitola / sekce:
+Krátké tvrzení:
+Typ tvrzení:
+Zdroj:
+Datum ověření:
+Rychlost stárnutí:
+Kdo odpovídá za revizi:
+Co se má zkontrolovat příště:
+Poznámka k textu:
+```
+
+Vyplněný příklad:
+
+```text
+ID tvrzení:
+SRC-PRIVACY-001
+
+Kapitola / sekce:
+Privacy-first web, cookies a analytika
+
+Krátké tvrzení:
+U webového měření je potřeba rozlišovat osobní data, ukládání informací do zařízení uživatele a účel zpracování.
+
+Typ tvrzení:
+Právní / compliance
+
+Zdroj:
+European Commission - Data protection; EUR-Lex - ePrivacy Directive 2002/58/EC
+
+Datum ověření:
+2026-05-07
+
+Rychlost stárnutí:
+Kvartální revize nebo při změně právního výkladu.
+
+Kdo odpovídá za revizi:
+Vlastník publikace + právní konzultace u veřejné verze.
+
+Co se má zkontrolovat příště:
+Zda se nezměnil výklad cookies, souhlasu, analytics exemption nebo národní implementace.
+
+Poznámka k textu:
+Nepsat jako právní radu. Držet se principu minimalizace a odkázat na primární zdroje.
+```
+
+### 3. Primární zdroje mají přednost před shrnujícími články
+
+U citlivých témat je lákavé použít blogový článek, protože bývá čitelnější. To je v pořádku pro orientaci, ale ne jako hlavní zdroj pravdy. U právních a compliance tvrzení patří do evidence primární zdroj: právní text, úřad, regulátor, oficiální dokumentace nebo metodika.
+
+Praktické pořadí zdrojů:
+
+1. Primární právní text nebo oficiální instituce.
+2. Metodika regulátora nebo dozorového orgánu.
+3. Oficiální dokumentace nástroje nebo platformy.
+4. Kvalitní odborný komentář, jasně označený jako komentář.
+5. Blogy, návody a srovnávače jen jako pomocný kontext.
+
+Příklad pro privacy-first web v Evropě:
+
+- Pro obecný rámec ochrany osobních dat používejte stránku Evropské komise k ochraně dat: https://commission.europa.eu/law/law-topic/data-protection_en
+- Pro principy GDPR používejte oficiální vysvětlení principů: https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr_en
+- Pro konkrétní text ePrivacy směrnice používejte EUR-Lex, například konsolidovaný text směrnice 2002/58/EC: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A02002L0058-20091219
+- Pro AI Act používejte oficiální stránku Evropské komise k regulačnímu rámci pro AI: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+
+Ověřeno pro tuto přílohu: 2026-05-07. Právní odkazy berte jako zdroje pro orientaci a revizi textu, ne jako náhradu právní konzultace pro konkrétní projekt. Ano, tohle je přesně ta věta, která je nudná, ale zachraňuje pondělky.
+
+### 4. V textu rozlišujte fakta, doporučení a Codyho komentář
+
+Čtenář má poznat, kdy říkáte ověřený fakt, kdy praktické doporučení a kdy názor z praxe. Míchání těchto vrstev zvyšuje důvěryhodnost asi jako graf bez popisků os.
+
+Používejte jednoduché značky:
+
+- `Fakt`: ověřené tvrzení se zdrojem.
+- `Doporučení`: praktický postup založený na zkušenosti a kontextu.
+- `Codyho komentář`: vlastní interpretace, názor nebo záměrně subjektivní pohled.
+- `Nutné ověřit`: tvrzení, které nesmí do veřejné verze bez kontroly.
+
+Příklad:
+
+```text
+Fakt: AI Act podle Evropské komise vstoupil v platnost 1. srpna 2024 a plná použitelnost je plánovaná od 2. srpna 2026 s výjimkami pro některé části pravidel.
+Zdroj: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
+
+Doporučení: Pokud SaaS produkt používá AI funkce, vytvořte interní evidenci use casů, vstupních dat, výstupů, rizik a odpovědnosti ještě před tím, než AI vložíte do kritického workflow.
+
+Codyho komentář: AI compliance se bude mnoha týmům řešit lépe přes produktový inventář než přes panický audit na konci vývoje. Překvapivě pomáhá vědět, co vlastně stavíte.
+```
+
+### 5. Zdroje verzujte stejně jako text
+
+Když změníte právní nebo produktové tvrzení, neměla by se změnit jen věta v kapitole. Změňte i evidenci zdroje a pracovní log. Jinak za měsíc nikdo nepozná, proč text říká něco jiného.
+
+Praktický postup při úpravě:
+
+1. Najděte tvrzení v kapitole.
+2. Otevřete evidenci zdrojů.
+3. Ověřte primární zdroj.
+4. Zapište datum ověření a stručnou poznámku.
+5. Upravte text kapitoly.
+6. Pokud změna ovlivní checklist nebo šablonu, upravte i je.
+7. Do pracovního logu přidejte, co se změnilo a proč.
+
+U veřejné verze se vyplatí mít i krátký changelog typu:
+
+```text
+2026-05-07:
+- Aktualizována sekce k AI Actu podle oficiální stránky Evropské komise.
+- Doplněna poznámka, že právní odkazy nejsou právní poradenství.
+- Zkontrolovány odkazy na GDPR principy a ePrivacy směrnici.
+```
+
+Tohle čtenáře neobtěžuje. Naopak. Ukazuje to, že obsah někdo udržuje a nepředstírá věčnou pravdu vytesanou do Markdownu.
+
+### 6. Když zdroj zmizí nebo změní význam
+
+Odkazy se rozbíjejí. Dokumentace se přepisuje. Dodavatelé mění ceníky. Regulátoři vydávají nové pokyny. Proto má evidence zdrojů obsahovat i reakci na změnu.
+
+Pravidla:
+
+- Pokud zdroj zmizí, najděte primární náhradu. Nepřepisujte automaticky podle náhodného blogu.
+- Pokud zdroj změnil význam, označte dotčené části jako `Nutné ověřit`.
+- Pokud šlo o produktovou funkci nebo cenu, raději text zobecněte a odkažte na aktuální dokumentaci dodavatele.
+- Pokud jde o právní interpretaci, oddělte technický popis od právního závěru.
+- Pokud nejde rychle ověřit přesnost, veřejný text musí být opatrnější.
+
+Příklad úpravy:
+
+Slabé:
+"Tento nástroj je nejlevnější privacy-first analytics pro EU weby."
+
+Silnější:
+"Při výběru analytics nástroje ověřte aktuální cenu, region zpracování dat, režim cookies, export dat, retenci, role a podmínky zpracování. Cena i funkce se mohou měnit, proto je nepište do dlouhodobého playbooku bez data ověření."
+
+Silnější verze je méně efektní. Také má mnohem menší šanci, že bude za tři měsíce trapně špatně.
+
+### Praktická šablona evidence zdrojů
+
+```markdown
+| ID | Kapitola | Tvrzení | Typ | Zdroj | Ověřeno | Revize | Poznámka |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| SRC-001 | Privacy-first web | GDPR rámec a principy ochrany dat | Právní | European Commission data protection | 2026-05-07 | Kvartálně | Nepsat jako právní radu |
+| SRC-002 | Cookies a analytika | ePrivacy směrnice a ukládání informací do zařízení | Právní | EUR-Lex 2002/58/EC | 2026-05-07 | Kvartálně | Ověřit i národní implementaci |
+| SRC-003 | AI ve webových produktech | AI Act timeline a výjimky | Právní / produktové | European Commission AI Act | 2026-05-07 | Při každé aktualizaci AI kapitoly | Kontrolovat implementační změny |
+| SRC-004 | Nástroje | Funkce, region, cena nebo SLA konkrétní služby | Produktové | Oficiální dokumentace dodavatele | YYYY-MM-DD | Před publikací | Pokud nejde ověřit, zobecnit |
+```
+
+### Checklist přílohy
+
+- Má každé právní, compliance, cenové nebo produktové tvrzení zdroj?
+- Je u zdroje datum posledního ověření?
+- Rozlišujete fakta, doporučení a Codyho komentář?
+- Používáte primární zdroje pro právní a regulatorní části?
+- Neopíráte dlouhodobý text o blogový článek bez primárního odkazu?
+- Máte označené části, které rychle stárnou?
+- Víte, kdo odpovídá za další revizi?
+- Umíte při změně zdroje najít všechny dotčené kapitoly, checklisty a šablony?
+- Jsou právní odkazy formulované jako orientační zdroje, ne jako právní poradenství?
+- Je pracovní log aktualizovaný při každé významnější změně faktického tvrzení?
+
+Evidence zdrojů je malý provozní návyk s velkým dopadem. Udržuje důvěru, snižuje riziko zastaralých rad a pomáhá týmu psát sebevědomě bez toho, aby si pletl názor s faktem. Privacy-first text má být nejen slušný k datům, ale i poctivý ke čtenáři.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -13853,3 +14045,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha P o převodu e-booku do pracovních šablon: výběr opakovaných situací, akční formát, příklady vyplnění, vlastnictví, privacy-first kontrola a publikační sada šablon.
 - 2026-05-07: Doplněna Příloha Q s publikačním plánem pro e-book na vlastní URL: zdroj pravdy, webová verze, landing page, publikační balíček, privacy-first měření, údržba a odvozené formáty.
 - 2026-05-07: Doplněna Příloha R s obsahovou mapou po publikaci e-booku: obsahové jednotky, zdroj pravdy, clustery, privacy-first distribuce, měření užitečnosti a redakční backlog.
+- 2026-05-07: Doplněna Příloha S s evidencí zdrojů a právních aktualizací: kategorizace tvrzení, metadata zdrojů, primární odkazy pro GDPR/ePrivacy/AI Act, verzování změn a checklist revizí.
