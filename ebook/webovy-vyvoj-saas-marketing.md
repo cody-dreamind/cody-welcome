@@ -16221,6 +16221,284 @@ Z každého review vyberte maximálně jednu úpravu e-booku. Ne proto, že osta
 
 Customer success balíček dělá z e-booku provozní nástroj. Pomáhá zákazníkovi vědět, co se bude dít, a týmu šetří opakované vysvětlování. Když se používá dobře, není to další dokument navíc. Je to společný jazyk pro práci, rozhodnutí a další iteraci.
 
+## Příloha AF: Interní školicí balíček pro tým
+
+E-book má největší hodnotu ve chvíli, kdy se podle něj tým skutečně rozhoduje. Ne když existuje jako dlouhý dokument, který si všichni "někdy přečtou". Interní školicí balíček převádí rukopis do krátkého, opakovatelného programu pro nové lidi, projektové týmy a pravidelné refresh workshopy.
+
+Cíl není udělat z každého člověka experta na webový vývoj, SaaS architekturu, marketing, právo a provoz zároveň. Cíl je vytvořit společný jazyk. Když designer, vývojář, marketér, obchodník a customer success člověk používají stejná slova pro segment, aktivaci, datovou mapu, retenci, privacy-first provoz a definici hotovo, tým dělá méně nedorozumění a víc hotové práce.
+
+Interní balíček pomáhá hlavně ve čtyřech situacích:
+
+1. Do týmu přichází nový člověk a potřebuje rychle pochopit způsob práce.
+2. Projektový tým se rozchází v názorech na priority, rozsah nebo měření.
+3. Opakují se stejné chyby: moc široké MVP, nejasné CTA, zbytečné trackery, chybějící provozní dokumentace.
+4. Firma chce udržet privacy-first standard i ve chvíli, kdy roste počet projektů a nástrojů.
+
+### 1. Udělejte z e-booku onboarding trasu
+
+Nový člověk nepotřebuje první den přečíst celý rukopis. Potřebuje vědět, které části mu pomohou v jeho roli a jak se podle nich u týmu rozhoduje.
+
+Praktická onboarding trasa:
+
+| Role | První čtení | Praktický výstup |
+| --- | --- | --- |
+| Vývojář | Kapitoly 3, 10, 11, 12, 14 a Přílohy A, G, V | Návrh technického minima pro první iteraci |
+| Designer nebo UX | Kapitoly 2, 4, 5, 28 a Přílohy C, I | Návrh hlavního toku a kontrola formuláře |
+| Marketér | Kapitoly 6, 22, 23, 24, 25, 26 a Přílohy I, M, R | Obsahový brief a distribuční plán bez závislosti na platformách |
+| Obchodník | Kapitoly 15, 16, 28, 29 a Přílohy E, F, AD | Kvalifikační karta a follow-up výřez |
+| Customer success | Kapitoly 17, 18, 20, 21 a Přílohy B, AE | Onboarding karta a měsíční záznam zdraví spolupráce |
+| Projektový lead | Kapitoly 9, 19, 30 až 36 a Přílohy H, U, W | Rozhodovací log, dashboard a definice hotovo |
+
+Onboarding má končit malým artefaktem. Ne pocitem, že člověk "něco četl". Nový člen týmu má vybrat jeden skutečný projekt, vyplnit jednu šablonu a projít ji s někým zkušenějším. Tím se rychle ukáže, jestli rozumí principům, slovníku a úrovni konkrétnosti.
+
+### 2. Zaveďte čtyři krátká školení
+
+Místo jednoho velkého školení udělejte čtyři devadesátiminutové bloky. Každý blok má mít jednu otázku, jeden praktický výstup a jednu privacy-first kontrolu.
+
+#### Blok 1: Jak poznáme dobrý web
+
+Otázka:
+
+```text
+Umí konkrétní stránka vysvětlit hodnotu, důvěru a další krok bez zbytečného tření?
+```
+
+Vstup:
+
+- Jedna existující homepage, landing page nebo stránka služby.
+- Kapitoly 2, 4, 5, 28 a 30.
+
+Cvičení:
+
+1. Každý účastník napíše jednou větou, co stránka slibuje.
+2. Tým označí hlavní důkaz důvěry a hlavní CTA.
+3. Tým najde tři prvky, které zvyšují tření.
+4. Tým navrhne jednu změnu, kterou lze dokončit do týdne.
+
+Privacy-first kontrola:
+
+- Které formulářové údaje jsou opravdu nutné pro první odpověď?
+- Jaké externí skripty stránka načítá a proč?
+- Dá se hlavní konverze měřit bez detailního sledování člověka?
+
+Výstup:
+
+```text
+Stránka:
+Hlavní slib:
+Hlavní důkaz:
+Hlavní CTA:
+Tři třecí místa:
+Jedna týdenní úprava:
+Privacy-first poznámka:
+Vlastník:
+Datum kontroly:
+```
+
+#### Blok 2: Jak navrhnout MVP bez nafukování
+
+Otázka:
+
+```text
+Jaký nejmenší produktový krok ověří skutečné riziko, místo aby jen přidal funkce?
+```
+
+Vstup:
+
+- Nápad na nový produkt, interní aplikaci nebo větší rozšíření.
+- Kapitoly 8, 9, 10, 11, 17, 19 a Přílohy C, H, U.
+
+Cvičení:
+
+1. Tým popíše segment a situaci zákazníka.
+2. Tým pojmenuje největší neověřené riziko.
+3. Tým rozdělí požadavky na "nutné pro ověření", "později" a "ne teď".
+4. Tým určí aktivační událost.
+5. Tým zapíše rozhodnutí do rozhodovacího logu.
+
+Privacy-first kontrola:
+
+- Jaká data MVP opravdu potřebuje?
+- Kde budou data uložena a kdo k nim bude mít přístup?
+- Co se stane s daty po pilotu, pokud se projekt zastaví?
+
+Výstup:
+
+```text
+Segment:
+Situace:
+Riziko k ověření:
+MVP rozsah:
+Mimo rozsah:
+Aktivační událost:
+Data a přístupy:
+Rozhodnutí po pilotu:
+```
+
+#### Blok 3: Jak měřit bez šumu a šmírování
+
+Otázka:
+
+```text
+Které signály povedou k lepšímu rozhodnutí příští měsíc?
+```
+
+Vstup:
+
+- Jeden web, produktový tok nebo marketingová aktivita.
+- Kapitoly 7, 19, 22, 25, 32 a Přílohy B, W.
+
+Cvičení:
+
+1. Tým napíše rozhodnutí, které chce za měsíc udělat.
+2. Vybere maximálně pět signálů, které toto rozhodnutí podpoří.
+3. U každého signálu určí zdroj dat, vlastníka a rytmus kontroly.
+4. Tým odstraní metriky, které vypadají zajímavě, ale nevedou k akci.
+
+Privacy-first kontrola:
+
+- Sbíráme osobní data, nebo stačí agregovaný signál?
+- Jak dlouho data držíme?
+- Umíme čtenáři, uživateli nebo zákazníkovi vysvětlit, co měříme?
+
+Výstup:
+
+```text
+Rozhodnutí:
+Signál 1:
+Signál 2:
+Signál 3:
+Signál 4:
+Signál 5:
+Co záměrně neměříme:
+Retence dat:
+Měsíční review:
+```
+
+#### Blok 4: Jak držet provozní odpovědnost
+
+Otázka:
+
+```text
+Víme, kdo vlastní kritické části projektu a co se stane při výpadku, změně nebo předání?
+```
+
+Vstup:
+
+- Jeden reálný web nebo SaaS projekt.
+- Kapitoly 3, 12, 14, 21 a Přílohy A, G, T, U, V.
+
+Cvičení:
+
+1. Tým vyplní provozní list: doména, DNS, hosting, e-mail, zálohy, analytika, incidenty.
+2. U každé položky určí vlastníka a zástup.
+3. Tým vybere tři největší provozní rizika.
+4. Tým rozhodne jednu mitigaci, kterou dokončí před dalším review.
+
+Privacy-first kontrola:
+
+- Kde vznikají kopie zákaznických nebo návštěvnických dat?
+- Které přístupy jsou sdílené, zastaralé nebo bez vlastníka?
+- Co by bylo potřeba smazat, exportovat nebo předat při ukončení spolupráce?
+
+Výstup:
+
+```text
+Projekt:
+Kritická aktiva:
+Vlastníci:
+Zástupy:
+Top 3 rizika:
+Mitigace do dalšího review:
+Incidentní kontakt:
+Datum další kontroly:
+```
+
+### 3. Používejte krátký znalostní test
+
+Test nemá lidi nachytat. Má odhalit, kde tým používá stejná slova pro jiné věci.
+
+Ukázkové otázky:
+
+1. Jaký je rozdíl mezi návštěvností a kvalifikovaným leadem?
+2. Proč není MVP seznam nejlevnějších funkcí?
+3. Co je aktivační událost a proč nestačí registrace?
+4. Kdy je formulář příliš dlouhý?
+5. Proč má mít každá důležitá stránka jeden primární další krok?
+6. Co patří do provozního listu webu?
+7. Proč nestačí říct, že "analytika je anonymní"?
+8. Kdy je lepší RSS nebo přímý odkaz než sociální síť?
+9. Co je rozhodovací log a kdy ho použít?
+10. Jak poznáte, že support otázka má přejít do produktu nebo obsahu?
+
+Hodnocení dělejte prakticky:
+
+- Zelená: člověk umí princip použít na skutečném příkladu.
+- Žlutá: chápe slova, ale potřebuje pomoc s aplikací.
+- Červená: odpověď je obecná nebo vede k rizikovému rozhodnutí.
+
+Codyho komentář: test, který jen ověří, jestli si někdo pamatuje zkratky, je trochu divadlo. Dobrý test ukáže, jestli člověk umí zastavit špatný nápad dřív, než z něj vznikne sprint, faktura a omluvný e-mail.
+
+### 4. Vytvořte týmovou dohodu
+
+Interní školení má končit dohodou o pracovních návycích. Krátkou, konkrétní a opakovatelnou.
+
+Šablona:
+
+```text
+Týmová dohoda pro web, SaaS a marketing
+
+1. Každá důležitá změna má jasný účel a vlastníka.
+2. MVP ověřuje riziko, ne ambici týmu.
+3. Každá stránka má jeden primární další krok.
+4. Měříme signály, podle kterých uděláme rozhodnutí.
+5. Nesbíráme data jen proto, že to nástroj umí.
+6. Nový externí nástroj musí mít zapsaný účel, data, region, přístupy a exit plán.
+7. Rozhodnutí s dopadem na data, provoz nebo zákazníka zapisujeme do rozhodovacího logu.
+8. Před předáním projektu existuje provozní list a definice hotovo.
+9. Opakované otázky ze supportu převádíme do obsahu, produktu nebo procesu.
+10. Každý měsíc dokončíme jednu konkrétní iteraci místo pěti rozepsaných záměrů.
+```
+
+Tato dohoda nemá viset na zdi jako firemní poezie. Má se používat při review, odhadu rozsahu, výběru nástroje, změně formuláře, spuštění kampaně a předání projektu.
+
+### 5. Zařaďte refresh rytmus
+
+Jednorázové školení postupně vyprchá. Tým potřebuje krátký rytmus, který drží principy v praxi.
+
+Navržený rytmus:
+
+- Každý měsíc: třicetiminutové review jedné kapitoly nebo přílohy proti reálnému projektu.
+- Každý kvartál: devadesátiminutový workshop na jednu slabinu systému.
+- Po každém větším incidentu nebo neúspěšném launchi: návrat k relevantní kapitole a doplnění jedné konkrétní šablony.
+- Při nástupu nového člověka: onboarding trasa podle role a jeden praktický artefakt.
+- Před aktivní distribucí e-booku nebo playbooku: QA balíček, privacy-first brána a vlastník aktualizací.
+
+Pravidlo pro refresh:
+
+```text
+Jedno setkání = jedna dokončená změna nebo jedno zapsané rozhodnutí.
+```
+
+Pokud workshop skončí jen obecnou diskuzí, je to drahá schůzka s lepším názvem. Výstup má být vidět v backlogu, obsahu, provozní dokumentaci, šabloně nebo rozhodovacím logu.
+
+### Checklist přílohy
+
+- Má každá role doporučenou onboarding trasu e-bookem?
+- Končí onboarding praktickým artefaktem, ne jen přečtením textu?
+- Existují čtyři krátké školicí bloky pro web, MVP, měření a provoz?
+- Má každý blok jednu otázku, cvičení, výstup a privacy-first kontrolu?
+- Používá tým znalostní test k odhalení nejasných pojmů?
+- Umí lidé principy použít na skutečný projekt?
+- Má tým krátkou dohodu o práci s webem, SaaS, marketingem a daty?
+- Je u nových nástrojů povinně zapsaný účel, data, region, přístupy a exit plán?
+- Probíhá měsíční nebo kvartální refresh podle skutečných slabin?
+- Končí každé školení jednou dokončenou změnou nebo rozhodnutím?
+- Vrací se poznatky ze školení zpět do e-booku a šablon?
+- Pomáhá školení týmu jednat konkrétněji, ne jen mluvit stejnými buzzwordy?
+
+Interní školicí balíček je pojistka proti tomu, aby e-book zůstal izolovaný od praxe. Dává týmu společný jazyk, krátké rituály a konkrétní výstupy. A hlavně připomíná, že privacy-first provoz není kapitola v dokumentu. Je to každodenní návyk v tom, co sbíráme, jak měříme, jak předáváme práci a jak vysvětlujeme rozhodnutí zákazníkům.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -16380,3 +16658,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha AC s workshopovým balíčkem pro použití e-booku se zákazníkem: agenda, příprava, otázky podle oblasti, matice první iterace, handoff a checklist.
 - 2026-05-07: Doplněna Příloha AD se sales enablement balíčkem pro e-book: obchodní situace, výřezy, follow-up, privacy-first měření, index a údržba.
 - 2026-05-07: Doplněna Příloha AE s customer success balíčkem pro e-book: onboarding karta, support výřezy, privacy-first komunikace, měření zdraví spolupráce a smyčka zpět do rukopisu.
+- 2026-05-07: Doplněna Příloha AF s interním školicím balíčkem pro tým: onboarding trasy podle rolí, čtyři praktické workshopy, znalostní test, týmová dohoda a refresh rytmus.
