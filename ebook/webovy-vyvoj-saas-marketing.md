@@ -17206,6 +17206,241 @@ E-book v tomhle není konečný produkt. Je to zásobník rozhodnutí. Pokud z n
 
 Produktizovaná služba je most mezi obsahem a byznysem. E-book ukazuje, jak přemýšlet. Služba ukazuje, jak z toho udělat konkrétní změnu pro konkrétní firmu. Když je dobře ohraničená, chrání zákazníka před nekonečným projektem a tým před nekonečnou improvizací. To je fér obchod na obě strany.
 
+## Příloha AJ: Pilot produktizované služby s prvními zákazníky
+
+Produktizovaná služba vypadá na papíře čistě. Má název, rozsah, výstup, cenu, checklist a privacy-first bránu. Skutečný test ale přijde až u prvních zákazníků. Tam se ukáže, jestli zákazník rozumí slibu, jestli vstupní podklady stačí, jestli delivery neteče mimo rozsah a jestli výstup vede k rozhodnutí, ne jen k dalšímu dokumentu v interním šuplíku.
+
+Pilot není sleva za nejistotu. Je to řízený experiment. Cílem není prodat co nejvíc práce, ale ověřit, zda služba opakovaně doručuje hodnotu ve stejném rámci. Proto má mít jasný počet zákazníků, jasnou hypotézu, jasné podmínky a jasné rozhodnutí po skončení.
+
+### 1. Napište pilotní hypotézu
+
+Bez hypotézy se pilot rychle změní v běžnou zakázku. Tým sice něco dodá, zákazník snad bude spokojený, ale nikdo nebude vědět, co se vlastně ověřilo. Hypotéza má spojit problém, segment, výstup a měřitelné rozhodnutí.
+
+Příklad:
+
+```text
+Věříme, že B2B firmy s existujícím webem a nejasnou kvalitou poptávek dokážou během 10 pracovních dnů získat použitelné rozhodnutí z Webového clarity auditu: tři prioritizované změny, které zlepší srozumitelnost nabídky, důvěru a první krok bez zavedení dalších trackerů.
+```
+
+Dobrá hypotéza říká:
+
+- Pro koho pilot je.
+- Jaký problém řeší.
+- Jaký výstup zákazník dostane.
+- Jak rychle má služba proběhnout.
+- Co znamená, že pilot uspěl.
+- Jak privacy-first přístup omezuje zbytečný sběr dat.
+
+Slabá hypotéza zní: "Zkusíme nabídnout audit webu a uvidíme." To není hypotéza. To je kalendářní dobrodružství s fakturou.
+
+### 2. Vyberte tři až pět vhodných zákazníků
+
+První pilotní zákazníci nemají být náhodní. Neberte každého, kdo projeví zájem. Potřebujete situace, které odpovídají zamýšlenému rozsahu služby. Pokud vezmete příliš složité případy, budete ladit enterprise projekt. Pokud vezmete příliš malé případy, služba se nebude dát zaplatit.
+
+Kritéria vhodného pilotního zákazníka:
+
+- Má konkrétní problém, který služba řeší.
+- Má existující web, landing page, SaaS MVP nebo marketingový tok, který lze analyzovat.
+- Má jednu odpovědnou osobu, která umí dodat kontext a rozhodovat.
+- Nečeká kompletní redesign, právní posouzení nebo měsíční strategii v ceně pilotu.
+- Je ochotný dát zpětnou vazbu k procesu i výstupu.
+- Souhlasí s minimálním sdílením dat a jasnými pravidly práce s podklady.
+
+Příklad špatného fitu:
+
+```text
+Firma chce "nějak celkově zlepšit marketing", nemá vybraný segment, nemá žádný hlavní webový tok a očekává, že pilot rovnou vyřeší positioning, nový web, kampaně i CRM.
+```
+
+Příklad dobrého fitu:
+
+```text
+B2B firma má službu pro jasný segment, web generuje poptávky, ale tým neví, proč je část leadů nekvalitní. Chce vědět, zda je problém v nabídce, důkazech, CTA, formuláři nebo měření.
+```
+
+Pilot má chránit učení. Když už na vstupu vidíte, že zákazník potřebuje jinou službu, řekněte to. Krátkodobě možná přijdete o zakázku. Dlouhodobě si ušetříte výstup, který nebude fér ani pro jednu stranu.
+
+### 3. Nastavte pilotní nabídku bez chaosu
+
+Pilotní nabídka má být téměř stejná jako budoucí služba. Můžete přidat víc zpětné vazby, detailnější rozhovor nebo výhodnější cenu, ale nerozbíjejte základní rozsah. Jinak otestujete něco, co potom nebudete schopni opakovat.
+
+Jednoduchá struktura pilotní nabídky:
+
+```text
+Název:
+Pilot Webového clarity auditu
+
+Pro koho:
+B2B firma s existujícím webem nebo SaaS landing page, která chce zlepšit kvalitu poptávek a první krok zákazníka.
+
+Rozsah:
+Maximálně 5 URL, 2 konverzní toky, jeden úvodní hovor, jeden závěrečný hovor, jeden výstupní dokument.
+
+Výstup:
+Mapa hlavního toku, 10 až 15 nálezů, prioritizace, tři doporučené změny, privacy-first kontrola datového toku.
+
+Pilotní podmínka:
+Zákazník poskytne zpětnou vazbu k procesu a výstupu. Bez souhlasu nebudou zveřejněna žádná interní data ani identita.
+
+Co není součástí:
+Implementace, právní posouzení, nastavení nové analytiky, dlouhodobá strategie, přístup do systémů nad nezbytné minimum.
+```
+
+Důležité je nepoužívat pilot jako omluvu pro neurčitost. "Pilotně to nějak projdeme" zní přátelsky, ale vytváří očekávání, že rozsah se dá natahovat podle nálady. Lepší je říct: "Pilotujeme službu, ne vaši trpělivost."
+
+### 4. Použijte vstupní bránu
+
+Každý pilot začněte krátkou vstupní bránou. Jejím cílem není zákazníka vyslýchat, ale ověřit, že služba může dodat výsledek.
+
+Vstupní otázky:
+
+- Jaký obchodní výsledek má web nebo landing page podporovat?
+- Kdo je hlavní cílový zákazník?
+- Jaký je hlavní další krok návštěvníka?
+- Které 3 až 5 URL jsou pro rozhodnutí nejdůležitější?
+- Jak dnes poznáte kvalitní poptávku?
+- Kde podle vás vzniká největší tření?
+- Jaká data můžeme použít a která data používat nechcete?
+- Existují právní, bezpečnostní nebo interní hranice, které musíme respektovat?
+
+Výsledek vstupní brány:
+
+```text
+Pilot pokračuje:
+Rozsah odpovídá službě, problém je konkrétní, výstup může vést k rozhodnutí.
+
+Pilot upravit:
+Je potřeba snížit počet URL, zpřesnit segment nebo nejdřív dodat chybějící kontext.
+
+Pilot odmítnout:
+Zákazník potřebuje jiný typ práce, například positioning workshop, technický audit, právní posouzení nebo implementační sprint.
+```
+
+Tahle brána je malá, ale důležitá. Když ji přeskočíte, pilot začne až ve chvíli, kdy už jste v problému po kolena. A to je pozdě, i když máte hezké boty.
+
+### 5. Chraňte data od prvního kontaktu
+
+Pilot je často lákavý tím, že "si rychle pošleme přístupy a podklady". To je přesně místo, kde má privacy-first přístup brzdit nadšení. Ne proto, aby zpomaloval práci, ale aby udržel důvěru a kontrolu.
+
+Pravidla pro pilot:
+
+- Začněte veřejně dostupnými URL a ručně dodaným kontextem.
+- Pokud potřebujete data z analytiky, chtějte agregovaný export, ne plný přístup, pokud to není nutné.
+- Nepřebírejte databázové exporty, seznamy leadů ani osobní údaje, pokud nejsou pro výstup nezbytné.
+- Pokud zákazník sdílí screenshoty, zkontrolujte, zda neobsahují osobní údaje, interní poznámky nebo citlivé obchodní informace.
+- Podklady ukládejte jen na domluvené místo s omezeným přístupem.
+- Na konci pilotu určete, co se archivuje, co se smaže a co může sloužit jako anonymizovaný vzor.
+
+Privacy-first věta do pilotní nabídky:
+
+```text
+Pro pilot používáme jen podklady potřebné k rozhodnutí. Preferujeme veřejné URL, anonymizované nebo agregované signály a minimální přístupy. Bez výslovného souhlasu nepoužijeme interní data ani identitu zákazníka v žádné veřejné ukázce.
+```
+
+Tohle není právnická poezie. Je to provozní dohoda. Zákazník ví, co se bude dít. Tým ví, kde jsou hranice. A nikdo nemusí po třech týdnech lovit citlivé soubory v pěti náhodných chatech.
+
+### 6. Měřte proces i výsledek
+
+Pilot neslouží jen k ověření, zda byl zákazník spokojený. Spokojenost je důležitá, ale nestačí. Potřebujete vědět, jestli služba funguje jako opakovatelný produkt.
+
+Měřte čtyři vrstvy:
+
+1. Prodej: rozumí zákazník nabídce bez dlouhého vysvětlování?
+2. Vstup: dodá zákazník potřebné podklady rychle a bezpečně?
+3. Delivery: vejde se práce do slibovaného rozsahu a času?
+4. Výstup: vede dokument k rozhodnutí a konkrétní další akci?
+
+Jednoduchý záznam po každém pilotu:
+
+```text
+Zákazník:
+[interní označení nebo anonymizovaný název]
+
+Segment:
+[např. B2B SaaS, odborná služba, agentura, výrobní firma]
+
+Problém:
+[jedna věta]
+
+Co šlo hladce:
+[3 body]
+
+Kde vzniklo tření:
+[3 body]
+
+Co zákazník pochopil hned:
+[1 až 2 body]
+
+Co bylo potřeba dovysvětlit:
+[1 až 2 body]
+
+Nejhodnotnější výstup:
+[konkrétní část výstupu]
+
+Co změnit ve službě:
+[proces, rozsah, prodejní stránka, checklist, cena]
+
+Privacy-first poznámka:
+[podklady, přístupy, retence, anonymizace]
+```
+
+Po třech až pěti pilotech už by se měly opakovat vzory. Pokud se pokaždé rozpadá jiná část, služba je možná moc široká. Pokud zákazníci stále nechápou výstup, je problém v pojmenování nebo prodejní stránce. Pokud se delivery nevejde do času, rozsah je větší, než si tým přiznal.
+
+### 7. Udělejte rozhodnutí po pilotu
+
+Pilot musí skončit rozhodnutím. Ne neurčitým "bylo to zajímavé". To je sice civilizovaná věta, ale obchodně má výživovou hodnotu mokrého ubrousku.
+
+Možná rozhodnutí:
+
+- Zachovat službu: rozsah, výstup a cena fungují, stačí drobné úpravy.
+- Zúžit službu: problém je hodnotný, ale rozsah je příliš široký.
+- Rozdělit službu: zákazníci kupují dvě různé potřeby, které nemají být v jednom balíčku.
+- Změnit segment: služba funguje lépe pro jiný typ zákazníka, než jste čekali.
+- Změnit prodejní stránku: hodnota je jasná až po hovoru, takže web neumí vysvětlit nabídku.
+- Zastavit službu: pilot neukázal opakovatelnou hodnotu nebo by delivery byla neudržitelná.
+
+Šablona rozhodnutí:
+
+```text
+Rozhodnutí:
+[zachovat / zúžit / rozdělit / změnit segment / upravit prodej / zastavit]
+
+Proč:
+[3 konkrétní důvody z pilotů]
+
+Co měníme:
+[rozsah, vstupní otázky, výstup, cenu, checklist, privacy pravidla]
+
+Co neměníme:
+[části, které fungovaly]
+
+Další iterace:
+[kolik zákazníků, jaký termín, jaké kritérium úspěchu]
+```
+
+Rozhodnutí má být krátké a tvrdé. Pilot bez rozhodnutí je jen drahá forma pocitu. Pilot s rozhodnutím posouvá službu o úroveň výš.
+
+### Codyho komentář
+
+Můj pohled: první zákazníci produktizované služby nejsou jen zdroj tržeb. Jsou test reality. Ukážou, kde je vaše nabídka srozumitelná, kde se tváří chytře jen interně a kde jste si do rozsahu nenápadně schovali celý vesmír. Čím dřív to zjistíte, tím levněji to opravíte.
+
+Nejlepší piloty nejsou ty, kde všechno proběhne dokonale. Nejlepší piloty jsou ty, kde se opakuje stejný vzor a tým díky tomu ví, co upravit. Když po pěti pilotních zákaznících neumíte službu popsat lépe než před nimi, neposlouchali jste dost pozorně.
+
+### Checklist přílohy
+
+- Má pilot jasnou hypotézu, segment, výstup a kritérium úspěchu?
+- Jsou vybraní zákazníci podobní budoucím ideálním zákazníkům?
+- Je pilotní nabídka skoro stejná jako budoucí služba, ne výjimka na všechno?
+- Má služba vstupní bránu, která umí pilot přijmout, upravit nebo odmítnout?
+- Pracujete jen s nezbytnými podklady a minimálními přístupy?
+- Je jasně domluvené, co se po pilotu archivuje, smaže nebo anonymizuje?
+- Měříte prodej, vstup, delivery i užitečnost výstupu?
+- Existuje krátký záznam po každém pilotním zákazníkovi?
+- Skončí pilot konkrétním rozhodnutím o službě?
+- Umíte po pilotu upravit prodejní stránku, checklist a rozsah podle skutečných dat?
+
+Pilot produktizované služby je malý laboratorní provoz. Má být dost skutečný, aby odhalil problémy, a dost ohraničený, aby tým nesežral. Když ho vezmete vážně, získáte víc než první zákazníky. Získáte důkaz, že obsah z e-booku umí přejít do opakovatelné práce, která má obchodní hodnotu a pořád respektuje data lidí na druhé straně.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -17369,3 +17604,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha AG s rozhodovacím indexem pro rychlé použití e-booku: výběr trasy podle situace, pětiminutové triage, převod čtení do backlogu a privacy-first brzda.
 - 2026-05-07: Doplněna Příloha AH s redakčním boardem pro další iterace e-booku: typy změn, karta položky, týdenní a měsíční rytmus, měření užitečnosti a privacy-first kontrola.
 - 2026-05-07: Doplněna Příloha AI o produktizované službě postavené na e-booku: výběr problému, výsledek, rozsah, delivery bloky, privacy-first brána, prodejní stránka a checklist.
+- 2026-05-07: Doplněna Příloha AJ s pilotem produktizované služby pro první zákazníky: hypotéza, výběr účastníků, pilotní nabídka, vstupní brána, privacy-first práce s daty, měření a rozhodnutí po pilotu.
