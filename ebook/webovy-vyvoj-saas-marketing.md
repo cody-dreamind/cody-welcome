@@ -15995,6 +15995,232 @@ Dobré pravidlo: pokud obchodník výřez neupravovaně nepoužil tři měsíce,
 
 Když se e-book dostane do obchodního toku správně, nepůsobí jako marketingová brožura. Působí jako důkaz přemýšlení. Zákazník vidí, že tým neumí jen dodat obrazovky nebo kampaně, ale umí vést rozhodnutí. A to je v B2B často silnější než další efektní claim na homepage.
 
+## Příloha AE: Customer success balíček pro e-book
+
+E-book nekončí podpisem nabídky, objednávkou nebo prvním workshopem. Právě po začátku spolupráce může být nejpraktičtější. Nový zákazník potřebuje pochopit, jak tým přemýšlí, co se bude dít dál, jaké otázky bude potřeba rozhodnout a kde jsou hranice práce. Pokud se e-book používá jen před prodejem, zůstane část jeho hodnoty ležet na stole.
+
+Customer success balíček převádí dlouhý rukopis do krátkých materiálů pro onboarding, pravidelnou komunikaci, support a rozšiřování spolupráce. Cíl není zákazníka zahltit metodikou. Cíl je snížit nejistotu a opakované vysvětlování.
+
+Dobře připravený balíček pomáhá ve čtyřech situacích:
+
+1. Zákazník začíná projekt a potřebuje vědět, co od něj bude tým potřebovat.
+2. Během práce se opakují stejné otázky nebo námitky.
+3. Support vidí signály, které by měly přejít do produktu, obsahu nebo roadmapy.
+4. Po dokončení první iterace je potřeba rozhodnout, co má být další užitečný krok.
+
+### 1. Rozdělte e-book podle fáze zákazníka
+
+Obchodní tým používá e-book podle situace před rozhodnutím. Customer success ho používá podle fáze vztahu. Jiný obsah pomůže zákazníkovi první den, jiný po měsíci provozu a jiný při revizi výsledků.
+
+Praktická mapa:
+
+| Fáze | Potřeba zákazníka | Doporučené části e-booku | Výstup |
+| --- | --- | --- | --- |
+| Start spolupráce | Pochopit postup, role a vstupy | Kapitoly 2, 5, 30 a Příloha E | Onboarding karta projektu |
+| První iterace | Vybrat malý dokončitelný krok | Kapitoly 9, 31, 33 a Příloha C | Jednostránkový plán iterace |
+| Provoz | Vědět, kdo hlídá domény, data, zálohy a incidenty | Kapitoly 3, 7, 14 a Příloha A | Provozní list |
+| Produktové rozšíření | Rozhodnout, co přidat a co nechat být | Kapitoly 10, 11, 18, 19 a Příloha H | Rozhodovací záznam |
+| Marketing a obsah | Vytvořit obsah podle otázek zákazníků | Kapitoly 22, 23, 24, 26 a Příloha I | Obsahový brief |
+| Revize spolupráce | Zhodnotit dopad, tření a další krok | Kapitoly 20, 21, 32 a Příloha B | Měsíční nebo kvartální review |
+
+Tahle mapa má být interně živá. Když se v supportu třikrát zopakuje stejná otázka, neznamená to automaticky, že zákazník špatně čte. Často to znamená, že chybí lepší výřez, příklad nebo onboardingová věta.
+
+### 2. Připravte onboarding kartu projektu
+
+Onboarding karta je krátký dokument, který novému zákazníkovi ukáže, jak bude spolupráce fungovat. Nemá opisovat smlouvu. Má přeložit metodiku do praktického startu.
+
+Šablona:
+
+```text
+Název projektu:
+
+Hlavní cíl první iterace:
+
+Co chceme ověřit:
+
+Co od zákazníka potřebujeme:
+-
+-
+-
+
+Co dodá Dreamind:
+-
+-
+-
+
+Rozhodnutí, která nás čekají:
+-
+-
+-
+
+Relevantní části e-booku:
+-
+-
+
+Privacy-first poznámka:
+
+Co zatím vědomě neděláme:
+
+Další kontrola:
+```
+
+Vyplněný mini příklad:
+
+```text
+Název projektu:
+Audit a první iterace poptávkového webu.
+
+Hlavní cíl první iterace:
+Zpřesnit hlavní nabídku, zkrátit cestu ke kontaktu a odstranit zbytečný sběr dat.
+
+Co chceme ověřit:
+Jestli návštěvník do deseti sekund pochopí, pro koho služba je, jaký problém řeší a co se stane po odeslání formuláře.
+
+Co od zákazníka potřebujeme:
+- Přístup k aktuálnímu webu nebo export obsahu.
+- Tři příklady dobrých poptávek a tři příklady špatných poptávek.
+- Seznam nástrojů, které dnes běží na webu.
+
+Co dodá Dreamind:
+- Audit hlavní stránky a formuláře.
+- Návrh upraveného textu a struktury.
+- Privacy-first doporučení pro měření a externí skripty.
+
+Rozhodnutí, která nás čekají:
+- Jaký bude hlavní další krok na stránce.
+- Která pole ve formuláři jsou nutná pro první odpověď.
+- Které externí služby ponechat.
+
+Relevantní části e-booku:
+Kapitola 2, Kapitola 7, Kapitola 28 a Kapitola 30.
+
+Privacy-first poznámka:
+Nebudeme přidávat nové sledovací nástroje, dokud není jasné rozhodnutí, které mají podpořit.
+
+Co zatím vědomě neděláme:
+Kompletní redesign, nový vizuální systém a dlouhou obsahovou strategii.
+
+Další kontrola:
+Po nasazení první úpravy a po vyhodnocení prvních relevantních poptávek.
+```
+
+### 3. Převádějte opakované otázky na support výřezy
+
+Support a customer success jsou dobrý radar. Pokud se zákazníci opakovaně ptají na stejné věci, e-book by měl mít krátkou odpověď použitelnou v e-mailu, dokumentaci nebo po hovoru.
+
+Typické otázky:
+
+- Proč nezačínáme kompletním redesignem?
+- Proč nestačí měřit návštěvnost?
+- Proč nechceme do MVP přidat všechny role a integrace hned?
+- Proč řešíme datovou mapu tak brzy?
+- Proč je lepší jedna konkrétní případová studie než pět obecných blogpostů?
+- Proč posíláme RSS nebo vlastní URL místo toho, abychom všechno tlačili přes sociální sítě?
+
+Šablona support výřezu:
+
+```text
+Otázka zákazníka:
+
+Krátká odpověď:
+
+Praktický důvod:
+
+Co uděláme teď:
+
+Co tím zatím neřešíme:
+
+Odkaz na hlubší vysvětlení v e-booku:
+
+Poznámka pro tým:
+```
+
+Pravidlo: support výřez má být odpověď, ne malá přednáška. Pokud se do něj nevejde podstata na několik odstavců, rozdělte téma na víc situací.
+
+### 4. Udržujte privacy-first komunikaci i po prodeji
+
+Po začátku spolupráce se snadno sbírá víc dat, než je potřeba. V tiketech se objeví osobní údaje, v nahrávkách schůzek zůstanou citlivé informace, v náhodném dokumentu leží přístupy nebo screenshoty interních systémů. Customer success balíček má proto obsahovat i pravidla pro práci s kontextem.
+
+Praktické minimum:
+
+- V onboarding kartě napište, jaké vstupy opravdu potřebujete.
+- Neposílejte přístupy přes náhodné chaty nebo dlouhá e-mailová vlákna.
+- V support poznámkách zapisujte problém, dopad a rozhodnutí, ne osobní detaily.
+- Screenshoty anonymizujte, pokud konkrétní osobní údaj není nutný k řešení.
+- Zákaznické příklady pro obsah používejte jen po odsouhlasení a v dohodnutém rozsahu.
+- U každého nového nástroje se ptejte, jestli přidává hodnotu nebo jen další kopii dat.
+
+Codyho komentář: customer success není licence k tomu vědět o zákazníkovi všechno. Dobrá spolupráce stojí na kontextu, ne na datovém syslení. Když tým neví, proč informaci potřebuje, pravděpodobně ji nemá sbírat.
+
+### 5. Měřte zdraví spolupráce bez šmírování
+
+Customer success svádí k tabulkám se skóre, barevnými štítky a pocitem kontroly. To může být užitečné, pokud skóre vede k lepšímu rozhodnutí. Pokud ale tým jen sbírá signály, aniž by podle nich něco měnil, vzniká další vrstva provozního hluku.
+
+Lepší otázky:
+
+- Dostal zákazník první užitečný výsledek?
+- Ví zákazník, co je další krok a proč?
+- Zmenšil se počet opakovaných dotazů?
+- Máme jasně zapsaná rozhodnutí a hranice rozsahu?
+- Vrací se stejné tření u více zákazníků?
+- Je některý support signál důvodem k úpravě produktu, webu nebo e-booku?
+
+Jednoduchý měsíční záznam:
+
+```text
+Zákazník nebo projekt:
+
+Hlavní posun za měsíc:
+
+Největší tření:
+
+Opakované otázky:
+
+Rozhodnutí, která padla:
+
+Obsah nebo šablona, které pomohly:
+
+Co je potřeba upravit v e-booku:
+
+Privacy-first poznámka:
+
+Další krok:
+```
+
+Takový záznam je užitečnější než detailní sledování, kdo kdy otevřel jaký odkaz. Pomáhá totiž zlepšovat práci, ne pozorovat člověka.
+
+### 6. Smyčka zpět do e-booku
+
+Customer success balíček má mít návratovou cestu do rukopisu. Jinak se stane vedlejším dokumentem, který postupně zastará.
+
+Jednou měsíčně projděte:
+
+- Které otázky se opakovaly?
+- Který výřez zákazníkům opravdu pomohl?
+- Která část byla moc obecná?
+- Kde chyběl příklad?
+- Co zákazníci pochopili jinak, než bylo zamýšleno?
+- Kterou kapitolu nebo přílohu je potřeba zpřesnit?
+
+Z každého review vyberte maximálně jednu úpravu e-booku. Ne proto, že ostatní nejsou důležité. Protože rukopis zůstane užitečný jen tehdy, když se změny skutečně dokončí.
+
+### Checklist přílohy
+
+- Existuje mapa e-booku podle fáze zákazníka?
+- Má nový zákazník krátkou onboarding kartu projektu?
+- Vysvětluje karta cíl první iterace, vstupy, rozhodnutí a co se zatím nedělá?
+- Převádíte opakované otázky na krátké support výřezy?
+- Má každý výřez odkaz na hlubší část e-booku?
+- Sbírá support jen kontext potřebný k řešení problému?
+- Jsou citlivé údaje, screenshoty a přístupy řešené kontrolovaně?
+- Měří customer success posun, tření a rozhodnutí, ne detailní chování čtenáře?
+- Vrací se poznatky ze spolupráce zpět do e-booku?
+- Má měsíční review jeden vybraný ediční výstup?
+- Pomáhá e-book zákazníkovi lépe spolupracovat, ne jen obdivovat rozsah metodiky?
+- Je jasné, kdo customer success balíček udržuje?
+
+Customer success balíček dělá z e-booku provozní nástroj. Pomáhá zákazníkovi vědět, co se bude dít, a týmu šetří opakované vysvětlování. Když se používá dobře, není to další dokument navíc. Je to společný jazyk pro práci, rozhodnutí a další iteraci.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -16153,3 +16379,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha AB s první retrospektivou po distribuci e-booku: rozhodovací otázka, signály, matice změn, záznam retrospektivy, jedna další iterace a privacy-first kontrola.
 - 2026-05-07: Doplněna Příloha AC s workshopovým balíčkem pro použití e-booku se zákazníkem: agenda, příprava, otázky podle oblasti, matice první iterace, handoff a checklist.
 - 2026-05-07: Doplněna Příloha AD se sales enablement balíčkem pro e-book: obchodní situace, výřezy, follow-up, privacy-first měření, index a údržba.
+- 2026-05-07: Doplněna Příloha AE s customer success balíčkem pro e-book: onboarding karta, support výřezy, privacy-first komunikace, měření zdraví spolupráce a smyčka zpět do rukopisu.
