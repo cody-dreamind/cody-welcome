@@ -13263,6 +13263,220 @@ Každá sada má mít vlastní index. U každé šablony uveďte, kdy ji použí
 
 E-book vysvětluje principy. Šablony mění chování. Když se z dobrého textu nestane pracovní návyk, zůstane jen hezkým materiálem v archivu. Cílem je opačný výsledek: méně improvizace, jasnější rozhodnutí a víc konkrétních kroků, které se opravdu dokončí.
 
+## Příloha Q: Publikační plán pro e-book na vlastní URL
+
+E-book není hotový ve chvíli, kdy má poslední kapitolu. Hotový je až ve chvíli, kdy má čtenář jednoduchou cestu k obsahu, tým ví, jak ho aktualizovat, a distribuce nestojí na tom, že algoritmus bude mít zrovna dobrou náladu. Publikování je produktová práce: balení, navigace, důvěra, měření, údržba a respekt k datům.
+
+Pro privacy-first značku dává největší smysl vlastní URL jako zdroj pravdy. Sociální sítě, newslettery, PDF uploady a komunitní platformy mohou být užitečné jako vstupy, ale nemají být hlavní domov obsahu. Hlavní domov má být místo, které tým ovládá: vlastní doména, vlastní analytika, jasná datová stopa, přímé odkazy, RSS a možnost opravit chybu bez prosby u cizí platformy.
+
+Tato příloha popisuje praktický plán, jak z rukopisu udělat publikovatelný webový materiál bez přehnané produkce. Cíl není vytvořit pompézní launch. Cíl je dát e-booku stabilní pracovní podobu, kterou lze poslat zákazníkovi, sdílet v článku, použít v obchodním hovoru a průběžně zlepšovat.
+
+### 1. Zvolte jeden zdroj pravdy
+
+Nejdřív rozhodněte, kde žije hlavní verze. U tohoto e-booku je pracovní zdroj Markdown soubor v repozitáři. Veřejná verze může být stránka na webu, případně sada stránek podle kapitol. Důležité je, aby bylo jasné, odkud se generují ostatní formáty.
+
+Praktický model:
+
+- Markdown v repozitáři je redakční zdroj.
+- Webová stránka je primární veřejná verze.
+- PDF je export pro lidi, kteří chtějí číst offline.
+- Kratší články, checklisty a šablony jsou odvozeniny.
+- Sociální příspěvky jsou jen distribuční anotace, ne kopie pravdy.
+
+Když existuje pět rovnocenných verzí, časem se rozejdou. Jedna bude mít starý odkaz, druhá starý checklist, třetí opravené zdroje a čtvrtá novou formulaci. To je přesně ten typ chaosu, který vypadá nevinně, dokud někdo neposílá klientovi zastaralý materiál.
+
+Zapište si:
+
+- Kde je zdrojový soubor.
+- Jak se z něj publikuje webová verze.
+- Kdo schvaluje větší úpravy.
+- Kde se evidují návrhy změn.
+- Jak se pozná aktuální veřejná verze.
+
+### 2. Udělejte z e-booku čitelnou webovou stránku
+
+Webová verze nemá být jen obří text nalepený do šablony. Dlouhý obsah potřebuje navigaci, orientaci a rytmus. Čtenář nemusí začít od začátku. Často přijde kvůli konkrétní kapitole: pricing, analytika, checklist pro MVP, výběr dodavatele nebo privacy-first provoz.
+
+Minimum pro veřejnou stránku:
+
+- Jasný titulek a krátký popis, pro koho e-book je.
+- Obsah s odkazy na kapitoly a přílohy.
+- Viditelná informace o verzi nebo datu poslední aktualizace.
+- Krátké vysvětlení, jak e-book používat.
+- Přímý odkaz na RSS nebo stránku s novinkami.
+- Možnost stáhnout PDF, pokud existuje.
+- Kontakt nebo zpětná vazba bez nuceného marketingového souhlasu.
+
+U dlouhého textu pomáhá rozdělit čtení do částí. Ne nutně technicky do samostatných URL hned první den, ale alespoň vizuálně: části, kapitoly, přílohy, checklisty. Pokud se později ukáže, že některé kapitoly získávají vlastní návštěvnost, mohou se stát samostatnými landing pages nebo články.
+
+Příklad dobré navigace:
+
+```text
+Začněte podle situace:
+
+- Potřebuji opravit web: kapitoly 1 až 7, checklist 30, audit 34.
+- Stavím SaaS MVP: kapitoly 8 až 14, checklist 31, strategie 35.
+- Řeším marketing a prodej: kapitoly 15 až 29, plán 36.
+- Chci privacy-first provoz: kapitoly 7, 14, 32, přílohy G a Q.
+```
+
+Taková navigace respektuje realitu. Nikdo si ráno neřekne: "Dnes mám chuť na kapitolu 17." Lidé řeší situaci. Web jim má pomoct najít správnou část podle problému.
+
+### 3. Připravte landing page bez nafukování
+
+Landing page e-booku má dělat tři věci: vysvětlit hodnotu, dát důkaz a pustit člověka k obsahu. Nemá stavět zeď z formuláře jen proto, že se tomu říká lead magnet. U privacy-first přístupu je lepší nabídnout obsah otevřeně a případný kontakt nechat jako dobrovolný další krok.
+
+Struktura landing page:
+
+1. Název e-booku a jedna věta hodnoty.
+2. Pro koho je a pro koho není.
+3. Co čtenář po přečtení zvládne.
+4. Ukázka obsahu: kapitoly, checklisty, přílohy.
+5. Přímé akce: číst online, stáhnout PDF, odebírat RSS.
+6. Privacy poznámka: žádné zbytečné trackery, žádné nucené přidání do seznamu.
+7. Zpětná vazba: krátký kontakt nebo odkaz na formulář s minimem polí.
+
+Slabé CTA:
+
+```text
+Stáhnout zdarma po zadání e-mailu
+```
+
+Silnější privacy-first CTA:
+
+```text
+Číst e-book online
+Stáhnout PDF
+Odebírat nové kapitoly přes RSS
+```
+
+E-mail může být volitelná cesta, ne mýtná brána. Když někdo chce dát kontakt, ať ví proč: například kvůli oznámení větších aktualizací nebo nabídce konzultace. Ale obsah samotný nemusí být rukojmí formuláře. Důvěra často vzniká právě tím, že člověku dáte hodnotu bez okamžitého sběru dat.
+
+Codyho komentář: gated content často vypadá jako obchodní zkratka, ale někdy je to jen způsob, jak nasbírat studené kontakty lidí, kteří chtěli jednu věc a dostali pět follow-upů. To není vztah. To je digitální past s hezkým tlačítkem.
+
+### 4. Vytvořte publikační balíček
+
+Distribuce je jednodušší, když si připravíte základní balíček předem. Nejde o marketingovou parádu. Jde o to, aby každý odkaz, anotace a krátký popis říkal totéž.
+
+Publikační balíček:
+
+- Krátký popis do 160 znaků.
+- Delší anotace na 500 až 800 znaků.
+- Jednovětý popis pro obchodní e-mail.
+- Seznam tří až pěti hlavních přínosů.
+- Odkaz na online verzi.
+- Odkaz na PDF, pokud existuje.
+- Doporučené kapitoly podle situace čtenáře.
+- Obrázek nebo náhled pro sdílení, pokud web používá Open Graph.
+- Interní poznámka, komu se e-book hodí poslat.
+
+Příklad krátké anotace:
+
+```text
+Praktický český e-book o webovém vývoji, SaaS, marketingu a privacy-first provozu v Evropě. Místo buzzwordů nabízí checklisty, šablony a rozhodovací postupy pro malé týmy.
+```
+
+Příklad obchodního kontextu:
+
+```text
+Posílám e-book jako pracovní mapu k tématům, která řešíme: web, SaaS MVP, měření, marketing a kontrola nad daty. Nejrelevantnější pro vás budou kapitoly 8, 31 a příloha G.
+```
+
+Rozdíl mezi spamem a užitečným sdílením je kontext. Stejný odkaz může být otrava i pomoc. Záleží, jestli člověku vysvětlíte, proč ho posíláte právě jemu a kde má začít.
+
+### 5. Měřte signály bez šmírovacího cirkusu
+
+U e-booku není potřeba sledovat každý pohyb myši. Stačí měřit signály, které pomáhají rozhodovat:
+
+- Kolik lidí otevře hlavní stránku e-booku.
+- Které kapitoly získávají přímé návštěvy.
+- Kolik lidí klikne na PDF nebo RSS.
+- Které odkazy přivedou relevantní čtenáře.
+- Kolik lidí po přečtení udělá dobrovolný další krok.
+- Jaké připomínky a otázky přicházejí zpětně.
+
+Prakticky stačí agregovaná analytika, serverové logy s rozumnou retencí a pár událostí pro klíčové akce. Pokud neumíte říct, jaké rozhodnutí díky metrice uděláte, nejspíš ji nepotřebujete.
+
+Dobrá rozhodovací otázka:
+
+```text
+Které kapitoly čtenáři nejčastěji otevírají z obchodních follow-upů a měly by dostat samostatnou landing page?
+```
+
+Slabá rozhodovací otázka:
+
+```text
+Kolik přesně času strávil každý čtenář na každé části?
+```
+
+První otázka pomáhá zlepšit strukturu a distribuci. Druhá často jen posiluje iluzi přesnosti. Dlouhý obsah se navíc čte nepravidelně: někdo čte po částech, někdo si otevře PDF, někdo pošle odkaz kolegovi. Měřte užitečnost, ne falešnou kontrolu.
+
+### 6. Vytvořte rytmus údržby
+
+Publikovaný e-book začne stárnout. Některé části pomalu, jiné rychle. Kapitoly o principech UX nebo obsahové architektuře vydrží déle. Kapitoly o právních povinnostech, konkrétních nástrojích, cenách, AI regulaci nebo technických standardech potřebují přísnější kontrolu.
+
+Údržbový rytmus:
+
+- Po publikaci: opravit překlepy a nejasnosti z prvních reakcí.
+- Po 30 dnech: zkontrolovat navigaci, nejčtenější části a zpětnou vazbu.
+- Každý měsíc: přidat jednu konkrétní úpravu, šablonu nebo příklad.
+- Každý kvartál: projít zdroje, odkazy, právní a nástrojové zmínky.
+- Jednou za rok: rozhodnout, jestli e-book potřebuje novou verzi.
+
+U každé významnější změny zapište:
+
+- Co se změnilo.
+- Proč se to změnilo.
+- Jestli se změnil praktický závěr.
+- Kdo změnu provedl.
+- Datum změny.
+
+Není nutné dělat z e-booku akademickou publikaci s verzováním každé čárky. Ale pokud text slouží jako pracovní materiál, musí být vidět, že žije. Zastaralý e-book je horší než žádný e-book, protože vypadá důvěryhodně i ve chvíli, kdy už rozhoduje podle staré reality.
+
+### 7. Rozdělte e-book na opakovaně použitelné vstupy
+
+Jeden dlouhý materiál může sloužit jako základ pro menší formáty. Důležité je nevyrábět obsah jen proto, aby "něco bylo na sítích". Každá odvozenina má mít konkrétní úkol.
+
+Možné odvozeniny:
+
+- Série článků podle částí e-booku.
+- Samostatné checklisty ke stažení nebo vložení do stránky.
+- Krátké playbooky pro sales follow-up.
+- Workshopová agenda pro první konzultaci.
+- Interní auditní šablony.
+- RSS série: každý týden jedna praktická část.
+- Stránka "Začněte tady" podle situace čtenáře.
+
+Příklad recyklace bez ztráty kvality:
+
+```text
+Kapitola o privacy-first analytice
+-> samostatný článek pro web
+-> checklist pro audit
+-> krátký sales follow-up pro zákazníka řešící cookies
+-> interní šablona datové mapy
+-> RSS oznámení s jedním konkrétním doporučením
+```
+
+Tím se z e-booku nestane jen jeden velký launch. Stane se knihovna argumentů, postupů a šablon, které tým používá opakovaně. To je mnohem větší hodnota než jednorázové oznámení a tři dny pozornosti.
+
+### Checklist přílohy
+
+- Má e-book jeden jasný zdroj pravdy?
+- Je veřejná verze dostupná na vlastní URL?
+- Má stránka čitelný obsah s odkazy na kapitoly a přílohy?
+- Je jasné, pro koho e-book je a kde má čtenář začít?
+- Existuje možnost číst online bez povinného formuláře?
+- Jsou PDF, RSS a přímé odkazy připravené jako samostatné distribuční cesty?
+- Má landing page privacy-first vysvětlení měření a kontaktu?
+- Existuje publikační balíček s krátkou anotací, delším popisem a obchodním kontextem?
+- Měříte jen signály, které vedou k rozhodnutí?
+- Má e-book rytmus údržby a revize zdrojů?
+- Umíte z kapitol vytvářet menší formáty bez kopírovacího chaosu?
+- Víte, kdo odpovídá za další aktualizaci?
+
+Publikování není konec práce. Je to okamžik, kdy text začne potkávat realitu. Čtenáři ukážou, kde je materiál užitečný, kde je moc obecný a které části si zaslouží vlastní stránku, šablonu nebo příklad. Když e-book držíte na vlastní URL, měříte rozumně a aktualizujete pravidelně, máte z něj dlouhodobé aktivum. Ne jen soubor, který někdo jednou nasdílel a pak statečně zapomněl.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -13407,3 +13621,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha N s aktualizačním protokolem pro e-book, playbook nebo znalostní bázi: rychlost stárnutí obsahu, úrovně změn, ověřování faktů, jeden zdroj pravdy, sběr podnětů a rytmus údržby.
 - 2026-05-07: Doplněna Příloha O s redakční revizí před publikací: čtenářský průchod, struktura kapitol, jazyk, checklisty, zdroje, privacy-first kontrola a publikační balíček.
 - 2026-05-07: Doplněna Příloha P o převodu e-booku do pracovních šablon: výběr opakovaných situací, akční formát, příklady vyplnění, vlastnictví, privacy-first kontrola a publikační sada šablon.
+- 2026-05-07: Doplněna Příloha Q s publikačním plánem pro e-book na vlastní URL: zdroj pravdy, webová verze, landing page, publikační balíček, privacy-first měření, údržba a odvozené formáty.
