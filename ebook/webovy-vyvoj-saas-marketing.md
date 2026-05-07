@@ -13072,6 +13072,197 @@ Pokud vzniknou výřezy pro sociální sítě, newsletter nebo prezentaci, musí
 
 Redakční revize má jednoduchý výsledek: čtenář se méně ztrácí a rychleji jedná. To je u praktického e-booku víc než stylistická elegance. Text má pomáhat měnit weby, produkty a marketingové systémy. Když po něm zůstane jen dobrý pocit, je to málo. Když po něm zůstane konkrétní další krok, splnil práci.
 
+## Příloha P: Převod e-booku do pracovních šablon
+
+Dlouhý e-book je dobrý zdroj pravdy, ale v běžné práci často vyhrávají kratší materiály. Tým nepotřebuje při každém rozhodnutí číst celou kapitolu o SEO, SaaS architektuře nebo privacy-first analytice. Potřebuje rychlý checklist, šablonu briefu, otázky pro workshop, auditní tabulku nebo jednostránkový postup.
+
+Převod e-booku do pracovních šablon je způsob, jak z textu udělat nástroj. Nejde o to vyrobit dalších dvacet PDF. Jde o to rozdělit velký rukopis na malé použitelné kusy, které pomáhají v konkrétním momentu: před začátkem projektu, při auditu, před launchem, po incidentu, při tvorbě obsahu nebo při obchodním rozhovoru.
+
+Dobrá šablona má jednu práci. Když se snaží dělat všechno, dopadne jako firemní tabulka se čtyřiceti sloupci: každý ví, že existuje, nikdo ji nechce otevřít.
+
+### 1. Vyberte opakované situace
+
+Nejdřív neřešte formát. Neřešte, jestli má být výstup v Notionu, Markdownu, PDF, Google Docs nebo interní wiki. Začněte situacemi, které se opakují a ve kterých tým potřebuje lepší oporu.
+
+Typické situace:
+
+- Nový web: rychle zjistit cíl, nabídku, strukturu, obsah, SEO a privacy-first nastavení.
+- SaaS MVP: ověřit segment, workflow, data, role, pilot a aktivaci.
+- Technický audit: projít výkon, přístupnost, SEO, bezpečnost, provoz a datovou stopu.
+- Obsahový brief: napsat článek, landing page nebo case study s jasným účelem.
+- Prodejní hovor: kvalifikovat problém, rozhodovatele, timing a další krok.
+- Privacy review: zkontrolovat nové nástroje, formuláře, analytiku a dodavatele.
+- Měsíční review: rozhodnout, co zlepšit na webu, produktu a marketingu.
+
+U každé situace si napište:
+
+```text
+Kdy se používá:
+Kdo ji vyplňuje:
+Jaké rozhodnutí má umožnit:
+Jak dlouho má zabrat:
+Kde bude uložený výstup:
+Kdo ho po použití aktualizuje:
+```
+
+Pokud šablona nemá jasné rozhodnutí, bude jen další dokument. A dokumenty bez rozhodnutí mají zvláštní talent množit se v týmech jako administrativní prach.
+
+### 2. Z kapitoly udělejte akci
+
+Každá kapitola e-booku obsahuje principy, příklady a checklist. Pracovní šablona z ní má vytáhnout hlavně akci. Čtenář už nemá studovat téma od začátku. Má projít otázky a udělat rozhodnutí.
+
+Příklad převodu:
+
+Kapitola o privacy-first webu vysvětluje datovou mapu, analytiku, cookies, třetí strany a evropský provoz. Pracovní šablona z ní může být krátký audit:
+
+```text
+Název nástroje:
+Účel:
+Jaká data sbírá:
+Kde jsou data uložená:
+Kdo má přístup:
+Retence:
+Lze nástroj vypnout bez rozbití webu:
+Existuje méně invazivní alternativa:
+Rozhodnutí: ponechat / omezit / nahradit / odstranit
+```
+
+To je mnohem použitelnější než požadavek "přečtěte si kapitolu 7". Kapitola vysvětluje proč. Šablona pomáhá udělat co.
+
+### 3. Formát držte krátký
+
+Pracovní šablona má být dost krátká, aby ji tým opravdu používal. Pokud vyplnění zabere dvě hodiny, stane se z ní mini projekt. To někdy dává smysl u strategie nebo velkého auditu, ale většina provozních šablon má být na 10 až 30 minut.
+
+Dobré typy výstupů:
+
+- Jednostránkový brief.
+- Krátká tabulka s rozhodnutím.
+- Checklist před spuštěním.
+- Agenda workshopu.
+- Záznam rozhodnutí.
+- Auditní scorecard.
+- Handoff mezi sales, delivery a supportem.
+
+U každé šablony určete maximální délku:
+
+- Brief: jedna až dvě stránky.
+- Checklist: 10 až 25 položek.
+- Auditní tabulka: jen položky, které vedou k prioritě.
+- Workshop: agenda, výstup a rozhodnutí, ne přepis celé diskuze.
+
+Codyho komentář: šablona, která chce vědět všechno, je jen formulář s ambicemi. Dobrá šablona se ptá na minimum, které stačí k dalšímu kroku. Privacy-first i produktově. Krásná shoda, skoro podezřelá.
+
+### 4. Přidejte příklad vyplnění
+
+Prázdná šablona často nestačí. Lidé nevědí, jak konkrétní mají být. Přidejte jeden krátký příklad, ideálně z anonymizovaného nebo fiktivního projektu.
+
+Příklad pro obsahový brief:
+
+```text
+Čtenář:
+Zakladatel B2B firmy, která chce převést interní proces z tabulek do aplikace.
+
+Otázka:
+Jak poznat, jestli už dává smysl stavět SaaS MVP?
+
+Slib článku:
+Po přečtení má čtenář umět rozlišit web, automatizaci, interní nástroj, klientský portál a SaaS.
+
+Důkaz:
+Konkrétní příklad cesty od formuláře přes interní nástroj po SaaS.
+
+Další krok:
+Checklist pro MVP workshop bez povinného formuláře, plus dobrovolná konzultace.
+```
+
+Příklad nastaví laťku. Bez něj se šablony plní obecnými větami typu "cílová skupina jsou firmy". To je sice věta, ale prakticky je to mlha v business obleku.
+
+### 5. Jedna šablona, jeden vlastník
+
+Každá šablona má mít vlastníka. Ne kvůli kontrole pro kontrolu, ale proto, aby nestárla bez povšimnutí. Vlastník sleduje, jestli šablona pořád odpovídá realitě, jestli ji tým používá a jestli se z ní nestala zbytečná byrokracie.
+
+U každé šablony evidujte:
+
+- Název.
+- Účel.
+- Vlastník.
+- Datum poslední aktualizace.
+- Odkaz na související kapitolu e-booku.
+- Kdy se má revidovat.
+- Kde se sbírá zpětná vazba.
+
+Praktický rytmus:
+
+- Po prvních třech použitích šablonu upravte podle reality.
+- Jednou za kvartál zkontrolujte nejpoužívanější šablony.
+- Šablony, které nikdo nepoužil půl roku, smažte, archivujte nebo sloučte.
+- U právních, privacy, bezpečnostních a nástrojových šablon kontrolujte zdroje přísněji.
+
+Šablona je živý nástroj. Pokud se jí nikdo nechce dotknout, buď je špatně navržená, nebo řeší problém, který už neexistuje.
+
+### 6. Privacy-first kontrola šablon
+
+I pracovní šablony mohou začít sbírat zbytečná data. Brief pro nový web nepotřebuje osobní údaje zákazníků. Sales handoff nepotřebuje soukromé poznámky o lidech. Technický audit nepotřebuje kopie produkčních dat, pokud stačí anonymizovaný příklad nebo screenshot bez osobních údajů.
+
+U každé šablony se ptejte:
+
+- Jaká data se do ní zapisují?
+- Jsou mezi nimi osobní údaje, zákaznická data nebo obchodní tajemství?
+- Kde je šablona uložená?
+- Kdo k ní má přístup?
+- Jak dlouho ji potřebujeme držet?
+- Dá se stejný účel splnit agregovaně nebo anonymizovaně?
+- Má výstup obsahovat citlivé přílohy, nebo stačí odkaz do systému s oprávněním?
+
+Příklad:
+
+Do churn interview šablony nepište osobní soudy typu "zákazník byl zmatený a nepříjemný". Napište produktový signál: "Zákazník nepochopil rozdíl mezi workspace rolí a projektovou rolí; problém se objevil při pozvání třetího člena týmu." První věta je drb. Druhá věta je materiál pro produkt.
+
+### 7. Publikační sada šablon
+
+Z e-booku se dá vytvořit základní sada pracovních materiálů. Nemusí vzniknout najednou. Začněte pěti, které mají největší návratnost.
+
+Doporučená první sada:
+
+1. Brief pro nový web.
+2. Checklist pro SaaS MVP.
+3. Datová mapa pro web a SaaS.
+4. Obsahový brief pro článek nebo landing page.
+5. Měsíční review webu, produktu a marketingu.
+
+Druhá sada:
+
+1. Technický audit.
+2. Prodejní discovery karta.
+3. Case study šablona.
+4. Launch checklist.
+5. Rozhodovací log.
+
+Třetí sada:
+
+1. Incident mini runbook.
+2. Dodavatelský privacy review.
+3. Aktualizační protokol obsahu.
+4. Distribuční plán.
+5. Redakční revize dlouhého obsahu.
+
+Každá sada má mít vlastní index. U každé šablony uveďte, kdy ji použít a jak dlouho přibližně zabere. Tým pak nemusí hledat. Jen vybere správný nástroj pro správný okamžik.
+
+### Checklist přílohy
+
+- Víte, které opakované situace si zaslouží pracovní šablonu?
+- Má každá šablona jedno rozhodnutí, které má umožnit?
+- Je šablona dost krátká, aby ji tým opravdu používal?
+- Obsahuje příklad vyplnění?
+- Má každá šablona vlastníka a datum poslední aktualizace?
+- Odkazuje šablona zpět na příslušnou kapitolu e-booku?
+- Sbírá jen data potřebná pro daný účel?
+- Neobsahuje citlivé zákaznické údaje bez jasného důvodu?
+- Existuje index šablon podle situace, ne jen podle názvu souboru?
+- Mažete nebo archivujete šablony, které už nikomu nepomáhají?
+
+E-book vysvětluje principy. Šablony mění chování. Když se z dobrého textu nestane pracovní návyk, zůstane jen hezkým materiálem v archivu. Cílem je opačný výsledek: méně improvizace, jasnější rozhodnutí a víc konkrétních kroků, které se opravdu dokončí.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -13215,3 +13406,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha M s distribučním plánem pro e-book bez závislosti na platformách: vlastní URL, distribuční balíček, segmentované vstupy, vlastní kanály, měření užitečnosti a opakovaný rytmus.
 - 2026-05-07: Doplněna Příloha N s aktualizačním protokolem pro e-book, playbook nebo znalostní bázi: rychlost stárnutí obsahu, úrovně změn, ověřování faktů, jeden zdroj pravdy, sběr podnětů a rytmus údržby.
 - 2026-05-07: Doplněna Příloha O s redakční revizí před publikací: čtenářský průchod, struktura kapitol, jazyk, checklisty, zdroje, privacy-first kontrola a publikační balíček.
+- 2026-05-07: Doplněna Příloha P o převodu e-booku do pracovních šablon: výběr opakovaných situací, akční formát, příklady vyplnění, vlastnictví, privacy-first kontrola a publikační sada šablon.
