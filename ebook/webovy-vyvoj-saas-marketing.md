@@ -12774,6 +12774,148 @@ Codyho komentář: dobrá distribuce není pokřik "přečtěte si náš e-book"
 
 Distribuce je součást produktu. Když ji necháte na náhodu, i dobrý e-book se ztratí. Když ji postavíte na vlastním webu, přímých odkazech, RSS, užitečných výřezech a střídmém měření, obsah začne pracovat dlouhodobě. Ne jako kampaň na jeden týden, ale jako knihovna rozhodnutí, ke které se tým i zákazníci vracejí.
 
+## Příloha N: Aktualizační protokol pro e-book, playbook nebo znalostní bázi
+
+Dlouhý obsah stárne jinak než blogový článek. Některé části vydrží roky, protože popisují principy: jasný segment, dobrý formulář, datovou mapu, provozní odpovědnost. Jiné části stárnou rychle: názvy nástrojů, legislativní povinnosti, ceny, rozhraní platforem, doporučené technické postupy nebo marketingové kanály. Pokud s tím nepočítáte, z praktického e-booku se postupně stane archiv dobrých úmyslů a starých screenshotů.
+
+Aktualizační protokol je jednoduchý způsob, jak udržet materiál použitelný. Nemá z dokumentu udělat akademický standard. Má zajistit, že tým ví, kdy text znovu otevřít, co ověřit, jak poznat zastaralou část a jak změnu zapsat.
+
+### 1. Rozdělte obsah podle rychlosti stárnutí
+
+Ne všechny kapitoly potřebují stejnou péči. Proto je užitečné přiřadit každé větší části jednoduchý typ:
+
+```text
+Část:
+Typ obsahu: princip / postup / nástroj / právní nebo compliance kontext / interní šablona
+Riziko zastarání: nízké / střední / vysoké
+Interval revize:
+Kdo revizi dělá:
+Co se musí ověřit:
+```
+
+Příklad:
+
+```text
+Část: Privacy-first analytika
+Typ obsahu: postup + právní nebo compliance kontext + nástroje
+Riziko zastarání: vysoké
+Interval revize: kvartálně
+Kdo revizi dělá: produkt nebo provoz + člověk odpovědný za privacy
+Co se musí ověřit: účely měření, seznam služeb, retenční doby, text cookies/privacy, odkazy na zdroje
+```
+
+Naopak kapitola o tom, že homepage má jasně říct, co firma dělá a pro koho, může mít nižší riziko. Tam se většinou nemění princip. Mění se příklady, jazyk a kontext trhu.
+
+### 2. Zaveďte tři úrovně změn
+
+Bez rozlišení změn se aktualizace rychle promění v nekonečné leštění. Stačí tři úrovně:
+
+- Drobná oprava: překlep, nejasná věta, doplněný příklad, upravený odkaz.
+- Věcná aktualizace: změna doporučení, nový postup, přepracovaný checklist, opravené tvrzení.
+- Nová verze: větší přepis kapitoly, nové přílohy, změna struktury nebo zásadní posun v doporučeních.
+
+Každá úroveň má jiný zápis. Drobnou opravu stačí uvést v pracovním logu. Věcná aktualizace má krátce říct, proč se měnila. Nová verze by měla mít vlastní poznámku pro čtenáře: co je nové, co se změnilo a komu se vyplatí vrátit se ke čtení.
+
+Praktická šablona:
+
+```text
+Datum:
+Typ změny: drobná oprava / věcná aktualizace / nová verze
+Dotčené části:
+Proč se mění:
+Co se změnilo:
+Je potřeba aktualizovat web, PDF, RSS nebo sales materiály?
+```
+
+### 3. Ověřujte fakta před úpravou, ne po publikaci
+
+Když text obsahuje aktuální data, právní povinnosti, ceny, benchmarky, názvy funkcí nebo konkrétní nástroje, ověření patří před psaní. Nestačí si pamatovat, jak to bylo minule. U rychle se měnících věcí je paměť pohodlná zkratka do průšvihu.
+
+Minimální pravidlo:
+
+- Každé rychle stárnoucí tvrzení má zdroj nebo je formulované obecněji.
+- U právních a compliance pasáží je jasné, že text není právní poradenství.
+- U nástrojů je uvedeno, proč jsou zmíněné, ne jen že existují.
+- U cen a limitů je uvedeno datum ověření, pokud je vůbec dává smysl uvádět.
+- U trendů je lepší popsat dopad na rozhodování než lovit efektní číslo.
+
+Codyho komentář: pokud máte chuť napsat "dnes už všichni používají...", zastavte se. Většinou to znamená "viděl jsem to ve své bublině". To je slabý zdroj i slabý argument. Lepší je napsat, pro jaký typ týmu nebo situace dává daný postup smysl.
+
+### 4. Udržujte jeden zdroj pravdy
+
+Největší praktický problém dlouhého obsahu není psaní. Je to rozpad verzí. Markdown v repozitáři říká jedno, web druhé, PDF třetí, sales prezentace čtvrté a někdo v týmu pořád posílá starý export z plochy. Takhle vzniká obsahový chaos.
+
+Jednoduché pravidlo:
+
+- Zdroj pravdy je jeden soubor nebo jedna publikovaná URL.
+- PDF, články, prezentace a výřezy jsou odvozené výstupy.
+- Každý odvozený výstup má datum generování nebo aktualizace.
+- Když se změní zdroj pravdy, existuje checklist, co se musí znovu publikovat.
+- Staré verze se buď archivují s jasným označením, nebo se odstraní z běžné distribuce.
+
+Privacy-first poznámka: udržovat jeden zdroj pravdy pomáhá i soukromí. Když neexistuje pět kopií stejného materiálu v pěti externích nástrojích, je jednodušší vědět, kde jsou data, kdo k nim má přístup a co se má smazat nebo aktualizovat.
+
+### 5. Sbírejte podněty bez sledovací mašinerie
+
+Kvalitní aktualizace nevznikají jen od stolu. Vznikají z otázek čtenářů, sales hovorů, supportu, interních workshopů a provozních problémů. Není potřeba sledovat každého čtenáře po internetu. Stačí mít místo, kam se zapisují užitečné signály.
+
+Šablona podnětu:
+
+```text
+Datum:
+Zdroj podnětu: zákazník / interní tým / support / sales / analytics / audit
+Které části se týká:
+Co nebylo jasné nebo užitečné:
+Navržená úprava:
+Priorita:
+Odpovědná osoba:
+```
+
+Příklady podnětů:
+
+- Zákazník se po přečtení kapitoly o MVP ptá, jak přesně vypadá pilotní dohoda.
+- Sales tým opakovaně posílá kapitolu o prodejním webu, ale chybí mu krátká verze pro první e-mail.
+- Produktový tým používá datovou mapu, ale potřebuje samostatný příklad pro AI funkci.
+- Analytika ukazuje návraty na checklist pro launch, ale lidé neklikají na distribuční plán.
+
+Z takových signálů se dá rozhodovat. Z anonymního přehledu "někdo byl na stránce 47 sekund" už méně.
+
+### 6. Měsíční a kvartální rytmus údržby
+
+Údržba dlouhého obsahu se dá držet lehce, pokud má rytmus. Měsíčně řešte použitelnost. Kvartálně řešte věcnou přesnost.
+
+Měsíční kontrola na 30 minut:
+
+- Projít nové podněty od čtenářů a týmu.
+- Vybrat jednu až tři drobné úpravy s největším dopadem.
+- Opravit nejasné formulace, chybějící odkazy a slabé příklady.
+- Zapsat změny do pracovního logu.
+- Zkontrolovat, jestli se změna musí promítnout do odvozených výstupů.
+
+Kvartální kontrola na 60 až 90 minut:
+
+- Projít části s vysokým rizikem zastarání.
+- Ověřit aktuální zdroje u právních, technických a nástrojových tvrzení.
+- Zkontrolovat privacy-first doporučení proti skutečné praxi týmu.
+- Rozhodnout, jestli je potřeba nová verze nebo jen věcná aktualizace.
+- Vybrat jedno místo, kde e-book neodpovídá realitě a upravit ho.
+
+### 7. Checklist aktualizačního protokolu
+
+- Má každá větší část určené riziko zastarání?
+- Je jasné, které části vyžadují pravidelné ověření zdrojů?
+- Rozlišujete drobné opravy, věcné aktualizace a nové verze?
+- Existuje šablona záznamu změny?
+- Je jeden zdroj pravdy pro aktuální verzi e-booku?
+- Jsou PDF, webové stránky a sales výřezy označené datem aktualizace?
+- Má tým místo pro podněty od čtenářů, sales, supportu a produktových workshopů?
+- Dají se aktualizace dělat bez zbytečného sledování čtenářů?
+- Máte měsíční rytmus drobných úprav?
+- Máte kvartální rytmus ověření rychle stárnoucích částí?
+- Je v pracovním logu jasně vidět, co se změnilo a proč?
+
+Aktualizace není úklid po práci. Je to součást hodnoty dlouhého obsahu. Pokud má e-book pomáhat rozhodovat, musí zůstat důvěryhodný. To neznamená přepisovat ho každý týden. Znamená to mít jednoduchý systém, který zachytí změny dřív, než se z dobrého doporučení stane historická dekorace.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -12915,3 +13057,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-06: Doplněna Příloha K s dvanáctitýdenním implementačním plánem pro převod e-booku do konkrétních týdenních změn webu, produktu, marketingu a privacy-first provozu.
 - 2026-05-06: Doplněna Příloha L s předpublikačním checklistem pro e-book, playbook nebo dlouhý obsah: čtenář, struktura, redakční průchod, privacy-first publikování, distribuce a údržba verzí.
 - 2026-05-06: Doplněna Příloha M s distribučním plánem pro e-book bez závislosti na platformách: vlastní URL, distribuční balíček, segmentované vstupy, vlastní kanály, měření užitečnosti a opakovaný rytmus.
+- 2026-05-07: Doplněna Příloha N s aktualizačním protokolem pro e-book, playbook nebo znalostní bázi: rychlost stárnutí obsahu, úrovně změn, ověřování faktů, jeden zdroj pravdy, sběr podnětů a rytmus údržby.
