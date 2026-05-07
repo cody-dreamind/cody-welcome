@@ -15585,6 +15585,193 @@ Nejlepší výsledek retrospektivy je často nudný: jedna opravená kapitola, j
 
 Retrospektiva je užitečná jen tehdy, když po ní vznikne lepší další verze. Ne větší tabulka, ne složitější dashboard, ne další porada. Lepší verze.
 
+## Příloha AC: Workshopový balíček pro použití e-booku se zákazníkem
+
+E-book má největší hodnotu ve chvíli, kdy se z něj nestane jen dlouhý text, ale společný pracovní jazyk. Zákazník, zakladatel, marketing, vývoj a obchod často používají stejná slova jinak. "MVP" pro jednoho znamená rychlý experiment, pro druhého první ostrou verzi produktu. "Marketing" může znamenat obsah, reklamu, prodejní web i náhodný příspěvek na sociální síti. "Privacy-first" může být pro někoho právní odstavec a pro někoho produktová výhoda.
+
+Workshopový balíček převádí e-book do řízeného rozhovoru. Cílem není přečíst všechno. Cílem je za dvě až tři hodiny pojmenovat aktuální tření, vybrat jednu praktickou iteraci a domluvit, jak se pozná, že byla hotová. Tím se e-book stává nástrojem pro prodejní discovery, produktový audit, úvodní workshop nebo interní alignment.
+
+### Kdy workshop použít
+
+Workshop dává smysl hlavně ve čtyřech situacích:
+
+- Firma má web, ale neví, proč nepřináší kvalitní poptávky.
+- Tým chce stavět SaaS nebo interní aplikaci, ale míchá dohromady přání, rizika a skutečné MVP.
+- Marketing běží nahodile a nikdo neumí říct, které kanály a obsah opravdu podporují obchod.
+- Zákazník řeší důvěru, data, evropský provoz nebo omezení trackerů a potřebuje z toho udělat praktické požadavky.
+
+Nepoužívejte workshop jako skrytou prezentaci dodavatele. Pokud má zákazník dvě hodiny jen poslouchat, jak jste skvělí, není to workshop. Je to přednáška s dražším kalendářovým názvem. Workshop má vytvářet rozhodnutí.
+
+### Výstup workshopu
+
+Na konci má vzniknout jeden krátký dokument, ne hromada poznámek. Doporučené minimum:
+
+```text
+Název projektu:
+Datum workshopu:
+Účastníci:
+Hlavní rozhodovací otázka:
+
+Současný stav:
+-
+
+Největší tření:
+1.
+2.
+3.
+
+Důkazy nebo signály:
+-
+
+Privacy-first dopad:
+-
+
+Vybraná první iterace:
+-
+
+Definice hotovo:
+-
+
+Co vědomě neděláme:
+-
+
+Vlastník:
+Termín:
+Další kontrola:
+```
+
+Tento výstup musí být srozumitelný i člověku, který na workshopu nebyl. Pokud potřebuje půlhodinové vysvětlení, není to výstup, ale stenozáznam.
+
+### Doporučená agenda na 120 minut
+
+Agenda má držet tempo. Dlouhé workshopy často selhávají tím, že první hodinu řeší kontext, druhou hodinu názory a v posledních pěti minutách se někdo zeptá, co tedy bude dál. Tohle není plán. Tohle je sociální experiment s kalendářem.
+
+Praktická agenda:
+
+1. Cíl a hranice, 10 minut: proč jsme tady, co dnes rozhodneme a co záměrně neřešíme.
+2. Současný stav, 20 minut: web, produkt, marketing, provoz a data jednou větou.
+3. Tření zákazníka nebo uživatele, 25 minut: kde člověk nerozumí, nevěří, čeká nebo odpadá.
+4. Signály a důkazy, 20 minut: co víme z poptávek, analytiky, supportu, sales nebo rozhovorů.
+5. Privacy-first průchod, 15 minut: jaká data sbíráme, kde končí a co je zbytečné.
+6. Výběr první iterace, 20 minut: dopad, náročnost, riziko a definice hotovo.
+7. Závěr, 10 minut: vlastník, termín, další kontrola a co vědomě neděláme.
+
+U složitějšího SaaS projektu můžete agendu prodloužit na půl dne, ale neměňte princip. Nejdřív rozhodovací otázka, potom signály, potom jedna iterace. Ne obráceně.
+
+### Příprava před workshopem
+
+Bez přípravy se workshop snadno změní v objevování věcí, které šly poslat předem. Požádejte účastníky o krátké vstupy:
+
+- URL webu nebo produktu.
+- Jednu větu: pro koho je nabídka a jaký problém řeší.
+- Tři nejčastější otázky zákazníků před nákupem nebo registrací.
+- Jeden příklad dobré poptávky a jeden příklad špatné poptávky.
+- Přehled hlavních kanálů: vyhledávání, přímé odkazy, referral, sociální sítě, reklama, partnerské vstupy.
+- Seznam nástrojů, které sbírají data návštěvníků nebo uživatelů.
+- Pokud existuje SaaS: hlavní aktivační událost, nejčastější důvod neúspěšného onboardingu a hlavní support téma.
+
+Vstupy nemusí být dokonalé. Mají jen zkrátit cestu k rozhodnutí. Pokud tým neumí odpovědět ani na jednu větu "pro koho to je", je to samo o sobě silný signál.
+
+### Workshopové otázky podle části e-booku
+
+Používejte e-book jako mapu. Ne jako osnovu, kterou musíte projít celou.
+
+Pro web:
+
+- Co má návštěvník pochopit do deseti sekund?
+- Kde je první konkrétní důkaz důvěry?
+- Která stránka má největší obchodní význam a kdy byla naposledy upravená?
+- Který formulář sbírá data, která nepotřebujeme pro první odpověď?
+- Který externí skript bychom neuměli obhájit zákazníkovi?
+
+Pro SaaS:
+
+- Jaký workflow už dnes existuje mimo produkt?
+- Jaká je nejmenší verze, která ověří riziko, ne jen vytvoří demo?
+- Kde jsou tenant hranice, role a auditní stopa?
+- Jaká událost ukazuje první skutečnou hodnotu?
+- Které údaje sbíráme jen proto, že se to tak obvykle dělá?
+
+Pro marketing:
+
+- Jakou otázku zákazníka řeší každý hlavní obsahový pilíř?
+- Které kanály přivádějí relevantní lidi, ne jen provoz?
+- Máme vlastní URL, RSS nebo přímé odkazy jako zdroj pravdy?
+- Který lead magnet by šel nabídnout bez gateování e-mailem?
+- Jak se pozná kvalitní lead před prvním hovorem?
+
+Pro provoz a privacy:
+
+- Kde jsou data a kdo k nim má přístup?
+- Jak dlouho data držíme a proč?
+- Co se stane při výpadku hostingu, e-mailu, formuláře nebo analytiky?
+- Umíme zákazníkovi vysvětlit evropský provoz bez mlžení?
+- Co vědomě neměříme, protože to nepomáhá rozhodnutí?
+
+### Matice výběru první iterace
+
+Po workshopu bude obvykle víc dobrých nápadů. To je normální. Problém nastane, když se tým pokusí udělat všechny najednou. Vyberte jednu iteraci podle matice:
+
+| Kandidát iterace | Dopad na zákazníka | Dopad na obchod | Náročnost | Privacy dopad | Riziko odkladu | Rozhodnutí |
+| --- | --- | --- | --- | --- | --- | --- |
+| Zkrátit kontaktní formulář a doplnit větu, co se stane po odeslání | Vysoký | Střední | Nízká | Pozitivní | Střední | Udělat teď |
+| Přepsat celou homepage | Nejasný | Nejasný | Vysoká | Neutrální | Nízké | Rozdělit |
+| Přidat heatmapy a nahrávání relací | Nízký | Nejasný | Střední | Negativní | Nízké | Nedělat |
+| Doplnit stránku o provozu, datech a bezpečnosti | Vysoký | Vysoký | Střední | Pozitivní | Vysoké | Naplánovat |
+
+Vybraná iterace má být malá, ale dokončená. "Zlepšit důvěru" není iterace. "Doplnit na stránku služby tři konkrétní důkazy, popsat proces spolupráce a zkrátit formulář na tři pole" už iterace je.
+
+### Handoff po workshopu
+
+Největší riziko workshopu je ztráta energie po skončení hovoru. Všichni mají dobrý pocit, v poznámkách je deset nápadů a za týden se nic nestalo. Proto po workshopu pošlete krátký handoff do 24 hodin.
+
+Struktura handoffu:
+
+```text
+Díky za workshop. Shodli jsme se na této první iteraci:
+
+Co uděláme:
+-
+
+Proč:
+-
+
+Definice hotovo:
+-
+
+Co k tomu potřebujeme:
+-
+
+Co zatím neděláme:
+-
+
+Termín další kontroly:
+-
+```
+
+Handoff nemá prodávat další práci silou. Má potvrdit rozhodnutí. Pokud po workshopu není jasné, co se bude dít dál, workshop nebyl dokončený.
+
+### Codyho komentář
+
+Můj pohled: dobrý workshop není ten, po kterém má zákazník pocit, že problém je obrovský. Dobrý workshop je ten, po kterém ví, co udělat jako první a proč právě to. E-book má pomáhat z chaosu vybrat nejbližší užitečný krok. Když z něj uděláte argument pro dvacet paralelních iniciativ, zradili jste pointu. A ještě jste si přidali tabulku.
+
+### Checklist přílohy
+
+- Má workshop jednu hlavní rozhodovací otázku?
+- Poslali účastníci předem základní vstupy?
+- Je jasné, jestli řešíte web, SaaS, marketing, provoz nebo jejich průnik?
+- Vznikl krátký výstup, který pochopí i člověk mimo workshop?
+- Jsou největší tření podložená signály, ne jen názory?
+- Prošli jste privacy-first dopad vybrané iterace?
+- Vybrali jste jednu dokončitelnou iteraci místo dlouhého seznamu přání?
+- Má iterace vlastníka, termín a definici hotovo?
+- Je jasné, co vědomě neděláte?
+- Odešel po workshopu handoff do 24 hodin?
+- Nevyžaduje další krok zbytečný sběr osobních dat?
+- Pomáhá workshop zákazníkovi udělat rozhodnutí, ne jen obdivovat rozsah problému?
+
+Workshopový balíček je most mezi textem a prací. Když se používá dobře, e-book přestane být "materiál k přečtení" a začne být nástroj k lepším rozhodnutím. Přesně tam má praktický obsah patřit.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -15741,3 +15928,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha Z se startovacím balíčkem první veřejné verze e-booku: veřejná karta, launch checklist, distribuční texty, první týden po vydání, privacy-first měření a rozhodnutí o další verzi.
 - 2026-05-07: Doplněna Příloha AA s QA balíčkem před aktivní distribucí e-booku: rizikové úrovně chyb, čtenářská cesta, kontrola odkazů, mobilní průchod, privacy-first brána a rozhodnutí o rozeslání.
 - 2026-05-07: Doplněna Příloha AB s první retrospektivou po distribuci e-booku: rozhodovací otázka, signály, matice změn, záznam retrospektivy, jedna další iterace a privacy-first kontrola.
+- 2026-05-07: Doplněna Příloha AC s workshopovým balíčkem pro použití e-booku se zákazníkem: agenda, příprava, otázky podle oblasti, matice první iterace, handoff a checklist.
