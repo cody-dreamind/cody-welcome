@@ -15066,6 +15066,204 @@ Nevyhodnocujte e-book jen podle návštěvnosti. Návštěvnost může ukázat z
 
 Zpětná vazba je nejlepší ve chvíli, kdy ji berete vážně, ale nepodléháte jí slepě. E-book má mít vlastní směr. Čtenáři vám pomáhají vidět slepá místa, ne přepisovat každou větu podle posledního komentáře. Když z toho uděláte rytmus, bude publikace živá, užitečná a pořád pod kontrolou.
 
+## Příloha Z: Startovací balíček první veřejné verze
+
+První veřejná verze e-booku není konec práce. Je to okamžik, kdy se interní rukopis stává veřejným pracovním nástrojem. V tu chvíli už nestačí mít dobrý text v Markdownu. Potřebujete vědět, co přesně publikujete, komu to posíláte, jak vysvětlíte hodnotu, jak zachytíte zpětnou vazbu a jak zabráníte tomu, aby se kolem vydání vytvořil marketingový chaos.
+
+Startovací balíček je sada krátkých podkladů, které umožní e-book vydat bez improvizace. Není to kampaňová bible na třicet stran. Je to praktická složka, kterou otevřete před publikací a podle které zkontrolujete, že má vydání jasnou verzi, vlastní URL, stručný popis, distribuční texty, měření a plán dalších kroků.
+
+Cíl je jednoduchý: první veřejná verze má být použitelná, dohledatelná, sdílitelná a udržovatelná.
+
+### 1. Definujte vydání jednou větou
+
+Před publikací napište jednu větu, která říká, co tato verze je. Ne slogan. Ne reklamní claim. Provozní definici.
+
+Příklady:
+
+- "První veřejná pracovní verze českého e-booku pro malé týmy, které chtějí stavět weby, SaaS a marketing privacy-first způsobem."
+- "Praktický rukopis s checklisty pro zakladatele, agentury a produktové týmy, který bude dál průběžně aktualizovaný."
+- "Verze 0.9 určená pro čtení, připomínky a první použití ve workshopech."
+
+Tato věta pomáhá držet očekávání. Když řeknete "pracovní verze", čtenář snáz pochopí, že text se bude vyvíjet. Když řeknete "praktický rukopis", neslibujete akademickou definitivnost. Když řeknete "pro malé týmy", nebudete se omlouvat, že nepokrývá enterprise právní oddělení s pětadvaceti procesními vrstvami.
+
+### 2. Připravte veřejnou kartu e-booku
+
+Každý delší obsah potřebuje stručnou kartu. Použijete ji na landing page, v interním přehledu, v krátkých distribučních textech i v changelogu.
+
+Šablona:
+
+```text
+Název:
+Podtitulek:
+Verze:
+Datum vydání:
+Primární čtenář:
+Problém, který e-book řeší:
+Co čtenář získá:
+Co e-book záměrně neřeší:
+Formát:
+Zdroj pravdy:
+Kontakt pro zpětnou vazbu:
+Privacy-first poznámka:
+```
+
+Vyplněný mini příklad:
+
+```text
+Název: Od webu k SaaS
+Podtitulek: Praktická příručka pro stavbu, prodej a růst digitálních produktů
+Verze: 0.9 pracovní veřejná verze
+Datum vydání: doplnit při publikaci
+Primární čtenář: zakladatel, agentura nebo malý produktový tým
+Problém, který e-book řeší: jak propojit web, SaaS, marketing a provoz do jednoho použitelného systému
+Co čtenář získá: kapitoly, checklisty a šablony pro rozhodování a implementaci
+Co e-book záměrně neřeší: právní poradenství, detailní účetnictví, kompletní vývojový kurz
+Formát: webová verze plus Markdown zdroj
+Zdroj pravdy: vlastní URL v repozitáři a webová publikace
+Kontakt pro zpětnou vazbu: vlastní inbox nebo formulář na vlastní doméně
+Privacy-first poznámka: žádné zbytečné trackery, měření jen pro rozhodování o užitečnosti obsahu
+```
+
+Důležité je pole "co e-book záměrně neřeší". Dobře nastavené hranice chrání text před nafukováním. Pokud se každá připomínka promění v novou kapitolu, e-book rychle přestane být příručka a začne být sklad materiálu, kam se všichni bojí sáhnout.
+
+### 3. Udělejte launch checklist pro obsah, ne pro ego
+
+První vydání se snadno zvrhne v řešení věcí, které vypadají důležitě, ale čtenáři nepomohou. Animovaný hero, nekonečné ladění banneru, tři varianty obrázku, pět oznámení pro pět platforem a nula odpovědí na otázku, proč by to měl někdo číst.
+
+Obsahový launch checklist:
+
+- Je jasné, pro koho je e-book napsaný?
+- Má veřejná stránka jednu konkrétní větu, co čtenář získá?
+- Je vidět, že jde o praktický materiál, ne sbírku obecných rad?
+- Jsou hlavní kapitoly nebo části snadno proklikatelné?
+- Má e-book stabilní URL, která se nebude měnit s každým redesignem?
+- Existuje krátký changelog nebo alespoň pracovní log?
+- Je jasné, kam poslat připomínku?
+- Jsou kapitoly, které mohou zastarat, označené k budoucí revizi?
+- Není publikace závislá na sociální síti jako jediném distribučním kanálu?
+- Je připraven RSS nebo jiný vlastní kanál pro oznámení aktualizací?
+
+Codyho komentář: launch je test provozní dospělosti. Když tým dokáže vydat dlouhý obsah klidně, s jasnými hranicemi a bez sledovacího cirkusu, často to něco říká i o tom, jak bude stavět produkt. Když se vydání změní v paniku kolem tlačítka, také to něco říká. Jen méně lichotivě.
+
+### 4. Připravte tři distribuční texty
+
+Nepřipravujte jeden univerzální text pro všechny. Připravte tři krátké verze podle situace čtenáře. Každá má jinou práci.
+
+Krátká verze pro přímou zprávu:
+
+```text
+Vydal jsem pracovní verzi českého e-booku Od webu k SaaS. Je pro malé týmy, které chtějí propojit web, produkt, marketing a privacy-first provoz do jednoho praktického systému. Pokud řešíš web, SaaS nebo marketing bez zbytečných trackerů, bude se hodit.
+```
+
+Verze pro vlastní web nebo RSS:
+
+```text
+Od webu k SaaS je praktický český e-book o webovém vývoji, SaaS produktech, marketingu, produktivitě a privacy-first provozu v Evropě. Najdete v něm kapitoly, checklisty a šablony pro rozhodování od technického základu webu přes MVP až po distribuci, měření a údržbu obsahu. Text je pracovní verze a bude se dál aktualizovat podle zpětné vazby.
+```
+
+Verze pro zákazníka nebo partnera:
+
+```text
+Připravil jsem praktický e-book, který může sloužit jako společný jazyk pro webové a SaaS projekty: co má web vysvětlit, jak ověřovat MVP, jak měřit smysluplné signály a jak přitom držet kontrolu nad daty. Berte ho jako pracovní podklad pro lepší zadání, audit nebo první workshop.
+```
+
+Tyto texty nejsou tesané do kamene. Jsou start. Důležité je, že každý říká, pro koho obsah je, co přináší a jaký další krok dává smysl. Žádné "revoluční průvodce digitální transformací". Lidsky, konkrétně, bez nafukování.
+
+### 5. Nastavte první týden po vydání
+
+První týden po vydání není hon za čísly. Je to sběr signálů. V plánu má být málo věcí, ale každá má mít vlastníka.
+
+Praktický sedmidenní plán:
+
+1. Den vydání: publikovat webovou verzi, zkontrolovat URL, interní odkazy, čitelnost na mobilu a kontakt pro zpětnou vazbu.
+2. Den 1: poslat oznámení přes vlastní kanály, ideálně web, RSS, přímé odkazy a cílené zprávy relevantním lidem.
+3. Den 2: zkontrolovat technické signály: dostupnost stránky, chyby, rozbité odkazy, odeslání formuláře.
+4. Den 3: projít první reakce a rozdělit je na nejasnosti, chybějící příklady, pochvaly, námitky a aktualizace.
+5. Den 4: vybrat jednu malou opravu, která zlepší čtení nebo důvěru, a zapsat ji do changelogu.
+6. Den 5: vybrat dvě až tři části vhodné pro samostatné navazující články nebo šablony.
+7. Den 7: udělat krátké review: co fungovalo, co nikdo nepoužil, co opravit před další verzí.
+
+Tento režim chrání tým před dvěma extrémy. První extrém je vydat a zmizet. Druhý extrém je vydat a hned přepisovat všechno podle prvních tří reakcí. Ani jedno není dobrý obsahový provoz.
+
+### 6. Měřte jen signály, které povedou k rozhodnutí
+
+U dlouhého e-booku je lákavé měřit všechno. Zobrazení stránky, scroll, kliknutí, čas na stránce, zdroje návštěv, návraty, konverze, heatmapy, nahrávky relací, počet stažení a ještě barvu ponožek čtenáře, když už jsme u toho. Nedělejte z toho datovou skládku.
+
+Stačí několik rozhodovacích signálů:
+
+- Dostali se čtenáři k hlavnímu obsahu?
+- Klikají na kapitoly nebo šablony, které jsou pro byznys důležité?
+- Posílají připomínky, nejasnosti nebo dotazy?
+- Používají checklisty v reálné práci?
+- Vznikají kvalifikované obchodní konverzace?
+- Které části potřebují údržbu nebo doplnění příkladu?
+
+Privacy-first minimum:
+
+- Nepřidávejte sledovací nástroje jen kvůli zvědavosti.
+- Nesbírejte osobní údaje, pokud nejsou nutné pro odpověď.
+- Pokud používáte analytiku, měřte agregované signály a jasné události.
+- Vysvětlete, co měříte a proč.
+- U formulářů nastavte retenci a odpovědnost za data.
+- Citlivou zpětnou vazbu držte ve vlastním prostředí nebo v nástroji, kterému rozumíte.
+
+Měření má odpovědět na otázku "co máme zlepšit dál". Pokud odpovídá jen na otázku "kolik lidí se mihlo kolem", je to hezké číslo na nástěnku, ale slabý podklad pro rozhodnutí.
+
+### 7. Uzavřete vydání rozhodnutím
+
+Každá první veřejná verze by měla skončit krátkým rozhodnutím. Ne pocitem. Rozhodnutím.
+
+Šablona rozhodnutí po prvním týdnu:
+
+```text
+Verze:
+Období review:
+Co jsme vydali:
+Kde je zdroj pravdy:
+Nejsilnější signál:
+Největší nejasnost:
+Co opravíme hned:
+Co odložíme:
+Co nebudeme dělat:
+Další verze:
+Vlastník:
+```
+
+Příklad:
+
+```text
+Verze: 0.9
+Období review: první týden po publikaci
+Co jsme vydali: webovou pracovní verzi e-booku s kapitolami, přílohami a checklisty
+Kde je zdroj pravdy: vlastní repozitář a veřejná URL
+Nejsilnější signál: čtenáři používají checklisty pro audit webu a MVP
+Největší nejasnost: část o měření potřebuje více příkladů pro malé týmy
+Co opravíme hned: doplnit jeden ukázkový dashboard a zkrátit úvod landing page
+Co odložíme: PDF export, dokud nebude stabilní verze textu
+Co nebudeme dělat: nepřidáme cizí share widgety ani nahrávání relací
+Další verze: 0.9.1 s drobnými opravami a jedním praktickým příkladem
+Vlastník: jméno nebo role
+```
+
+Nejdůležitější řádek je "co nebudeme dělat". Každé vydání vytvoří chuť přidávat. Další formáty, další platformy, další měření, další automatizace. Něco z toho bude dobré. Něco bude jen pohyb. Když si dopředu řeknete, co záměrně nepřidáte, chráníte kvalitu i privacy-first hodnotu.
+
+### Checklist přílohy
+
+- Má první veřejná verze jednu jasnou definiční větu?
+- Existuje veřejná karta e-booku s názvem, verzí, čtenářem a zdrojem pravdy?
+- Je jasné, co e-book záměrně neřeší?
+- Má publikace stabilní URL a čitelnou webovou podobu?
+- Je připraven kontakt nebo formulář pro zpětnou vazbu?
+- Jsou připravené tři distribuční texty pro různé situace?
+- Má první týden po vydání jednoduchý plán kontroly a zpětné vazby?
+- Měříte jen signály, které povedou k rozhodnutí?
+- Nepřidáváte cizí trackery, share widgety nebo nahrávání relací jen kvůli zvědavosti?
+- Má zpětná vazba vlastní backlog a pravidla anonymizace?
+- Existuje rozhodnutí po prvním týdnu: opravit, odložit, nedělat, další verze?
+- Je jasné, kdo je vlastník dalšího vydání?
+
+Startovací balíček má jednu výhodu: snižuje dramatičnost. Místo velkého "spouštíme něco zásadního" máte konkrétní seznam kroků. Publikovat, zkontrolovat, oznámit, posbírat signály, opravit jednu věc, rozhodnout o další verzi. To je méně efektní, ale mnohem použitelnější. A použitelnost je u e-booku lepší ambice než konfety.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -15219,3 +15417,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha W s rozhodovacím dashboardem pro web, SaaS a marketing: výběr signálů podle rozhodnutí, privacy-first minimum, měsíční review a checklist.
 - 2026-05-07: Doplněna Příloha X o verzích, changelogu a archivu e-booku: číslování verzí, veřejná historie změn, archiv významných vydání, stabilní URL a checklist správy.
 - 2026-05-07: Doplněna Příloha Y o sběru a zpracování zpětné vazby po publikaci e-booku: rozhodovací otázky, nízkotlaké kanály, feedback backlog, anonymizace, ediční cykly a měření užitečnosti.
+- 2026-05-07: Doplněna Příloha Z se startovacím balíčkem první veřejné verze e-booku: veřejná karta, launch checklist, distribuční texty, první týden po vydání, privacy-first měření a rozhodnutí o další verzi.
