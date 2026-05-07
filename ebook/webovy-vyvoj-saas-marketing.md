@@ -15422,6 +15422,169 @@ Vlastník distribuce:
 
 QA balíček má být praktická brzda jen pro věci, které by poškodily důvěru, použitelnost nebo kontrolu nad daty. Všechno ostatní patří do další iterace. E-book není socha. Je to pracovní nástroj, který má žít, zlepšovat se a přitom se nerozpadat pokaždé, když se ho někdo rozhodne ukázat světu.
 
+## Příloha AB: První retrospektiva po distribuci e-booku
+
+Distribuce nekončí rozesláním odkazu. První vlna jen ukáže, jestli e-book lidem pomohl, kde se zasekli a co má smysl zlepšit. Bez retrospektivy se tým snadno nechá unést dvěma extrémy: buď oslaví pár dobrých reakcí a nic neopraví, nebo zpanikaří z nízkých čísel a začne měnit všechno najednou.
+
+První retrospektiva má být krátká, konkrétní a rozhodovací. Nejde o prezentaci marketingového úspěchu. Jde o pracovní schůzku, která odpoví na otázku: co jsme se z distribuce naučili a jakou jednu další iteraci uděláme?
+
+### 1. Retrospektivu naplánujte předem
+
+Ideální je domluvit si ji už při spuštění distribuce. Jinak se z ní stane neurčitá poznámka "někdy se na to podíváme" a e-book začne stárnout dřív, než z něj tým vytěží první učení.
+
+Základní nastavení:
+
+```text
+Retrospektiva první distribuce:
+Datum:
+Hodnocené období:
+Hlavní URL:
+Distribuční kanály:
+Vlastník vyhodnocení:
+Účastníci:
+Hlavní rozhodovací otázka:
+```
+
+Příklad rozhodovací otázky:
+
+```text
+Pomohl e-book správným lidem pochopit, jak Dreamind přemýšlí o webu, SaaS, marketingu a privacy-first provozu, a ukázal nám jednu jasnou oblast pro další zlepšení?
+```
+
+Tahle otázka je lepší než "kolik lidí si e-book přečetlo". Čtenost je signál. Ne cíl sama o sobě.
+
+### 2. Sbírejte signály podle rozhodnutí, ne podle zvědavosti
+
+Před retrospektivou připravte jen taková data, která pomohou rozhodnout další krok. Pokud číslo neumíte použít pro rozhodnutí, pravděpodobně jen zaplní tabulku.
+
+Užitečné vstupy:
+
+| Oblast | Signál | K čemu slouží |
+| --- | --- | --- |
+| Distribuce | Které kanály přivedly relevantní návštěvy | Rozhodnout, kde pokračovat |
+| Čtení | Které kapitoly nebo přílohy lidé otevírali přes přímé odkazy | Zjistit, co má samostatnou hodnotu |
+| Zpětná vazba | Konkrétní otázky, připomínky a nejasnosti | Vybrat úpravy textu |
+| Obchod | Poptávky, odpovědi nebo hovory, které na e-book navázaly | Poznat kvalitu zájmu |
+| Produkt | Nápady na šablony, checklisty nebo návazné služby | Převést obsah do praxe |
+
+Privacy-first minimum: nepotřebujete individuální profil čtenáře, nahrávky relací ani detailní sledování chování po odstavcích. Pro první rozhodnutí obvykle stačí agregované návštěvy, kliky na hlavní odkazy, odpovědi lidí, kvalita poptávek a ručně zapsané poznámky ze sales nebo supportu.
+
+### 3. Oddělte čtyři typy učení
+
+Retrospektiva se rozpadá, když tým míchá všechny signály dohromady. Komentář "kapitola je dlouhá" může znamenat redakční problém. Komentář "chci podle toho audit webu" může znamenat obchodní příležitost. Nízký počet návštěv může být distribuční problém, ne problém obsahu.
+
+Rozdělte učení do čtyř košů:
+
+1. Obsah: co je nejasné, příliš dlouhé, příliš obecné nebo chybí.
+2. Distribuce: které vstupy fungovaly, které kanály nepřinesly relevantní lidi a kde text potřebuje jiný úhel.
+3. Obchod: jaké poptávky, otázky nebo follow-upy e-book vyvolal.
+4. Provoz a privacy: zda měření, formuláře, odkazy a nástroje odpovídají pravidlům rukopisu.
+
+Ke každému koši vyberte nejvýš tři poznatky. Pokud jich máte víc, udělejte zbytek backlog. První retrospektiva nemá opravit celý internet.
+
+### 4. Použijte rozhodovací matici
+
+Po první distribuci je lákavé přepisovat nejhlasitější komentář. To je riskantní. Jeden hlasitý člověk nemusí reprezentovat cílového čtenáře. Proto každou větší úpravu posuzujte přes jednoduchou matici.
+
+| Návrh změny | Dopad na čtenáře | Dopad na obchod | Náročnost | Privacy dopad | Rozhodnutí |
+| --- | --- | --- | --- | --- | --- |
+| Doplnit krátký příklad k privacy-first analytice | Vysoký | Střední | Nízká | Pozitivní | Udělat hned |
+| Přepsat celý úvod e-booku | Nejasný | Nejasný | Vysoká | Neutrální | Odložit |
+| Přidat formulář pro stažení PDF výměnou za e-mail | Střední | Nejasný | Střední | Rizikový | Nedělat bez důvodu |
+| Vytvořit samostatnou šablonu datové mapy | Vysoký | Vysoký | Střední | Pozitivní | Naplánovat |
+
+Rozhodnutí stačí čtyři:
+
+- Udělat hned: malá změna s jasným přínosem.
+- Naplánovat: větší změna, která si zaslouží vlastní iteraci.
+- Sledovat: signál je zajímavý, ale zatím slabý.
+- Nedělat: návrh jde proti cíli, hodnotám nebo přidává zbytečný provozní dluh.
+
+### 5. Vytvořte záznam retrospektivy
+
+Záznam má být tak krátký, aby ho tým opravdu udržoval. Nepište zápis z porady. Pište rozhodnutí.
+
+```text
+Retrospektiva první distribuce e-booku
+
+Hodnocené období:
+Hlavní distribuční kanály:
+Nejužitečnější signály:
+
+Co fungovalo:
+-
+
+Co nefungovalo:
+-
+
+Co jsme se naučili o čtenáři:
+-
+
+Co jsme se naučili o nabídce:
+-
+
+Privacy-first kontrola:
+-
+
+Rozhodnutí pro další iteraci:
+1.
+
+Backlog:
+-
+
+Co vědomě neděláme:
+-
+
+Vlastník:
+Termín další kontroly:
+```
+
+Řádek "co vědomě neděláme" je důležitý. První distribuce často přinese nápady na další měření, gateovaný obsah, automatizace, remarketing nebo sběr kontaktů. Některé mohou dávat smysl. Mnohé jsou jen reflex. Pokud návrh neumíte spojit s jasnou hodnotou pro čtenáře nebo obchod, nechte ho být.
+
+### 6. Připravte jednu další iteraci
+
+Výstupem retrospektivy nemá být dlouhý seznam přání. Výstupem má být jedna dokončená iterace.
+
+Dobré iterace po první distribuci:
+
+- Doplnit do e-booku tři chybějící příklady, které se opakovaly ve zpětné vazbě.
+- Udělat samostatnou landing page pro jednu přílohu, která vyvolala nejvíc konkrétních otázek.
+- Připravit krátký článek z kapitoly, která nejlépe vysvětluje hodnotu Dreamindu.
+- Upravit distribuční texty, protože lidé klikali, ale nepoznali, pro koho e-book je.
+- Zjednodušit formulář zpětné vazby, pokud se ukázalo, že sbírá víc údajů, než tým opravdu používá.
+
+Špatné iterace:
+
+- "Zlepšit marketing e-booku."
+- "Předělat obsah."
+- "Více měřit."
+- "Dostat to všude."
+
+Tyhle věty nejsou práce. Jsou mlha. Přepište je na konkrétní výstup, vlastníka a kritérium hotovo.
+
+### Codyho komentář
+
+Můj pohled: první distribuce e-booku není zkouška popularity. Je to levný způsob, jak zjistit, jestli umíte mluvit jazykem lidí, kterým chcete pomoct. Pokud se ozývají správné otázky, máte dobrý signál i bez velkých čísel. Pokud čísla vypadají hezky, ale nikdo neudělá konkrétní další krok, máte spíš obsahovou kulisu než obchodní aktivum.
+
+Nejlepší výsledek retrospektivy je často nudný: jedna opravená kapitola, jeden jasnější příklad, jedna lepší distribuční věta, jeden odstraněný formulářový nesmysl. Přesně tak se z velkého rukopisu stane nástroj, který lidem pomáhá a týmu nezvyšuje chaos.
+
+### Checklist přílohy
+
+- Je retrospektiva naplánovaná s konkrétním hodnoceným obdobím?
+- Má retrospektiva jednu hlavní rozhodovací otázku?
+- Hodnotíte relevantní signály, ne jen objem návštěvnosti?
+- Jsou zpětné vazby rozdělené na obsah, distribuci, obchod a provoz/privacy?
+- Má každý větší návrh změny posouzený dopad, náročnost a privacy dopad?
+- Je jasné, co uděláte hned, co naplánujete, co budete sledovat a co neděláte?
+- Existuje krátký záznam retrospektivy?
+- Obsahuje záznam řádek "co vědomě neděláme"?
+- Vybrali jste jednu konkrétní další iteraci místo dlouhého seznamu přání?
+- Má další iterace vlastníka, termín a kritérium hotovo?
+- Nepřidává vyhodnocení zbytečný sběr osobních dat?
+- Zůstává hlavní URL e-booku zdrojem pravdy i po úpravách?
+
+Retrospektiva je užitečná jen tehdy, když po ní vznikne lepší další verze. Ne větší tabulka, ne složitější dashboard, ne další porada. Lepší verze.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -15577,3 +15740,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha Y o sběru a zpracování zpětné vazby po publikaci e-booku: rozhodovací otázky, nízkotlaké kanály, feedback backlog, anonymizace, ediční cykly a měření užitečnosti.
 - 2026-05-07: Doplněna Příloha Z se startovacím balíčkem první veřejné verze e-booku: veřejná karta, launch checklist, distribuční texty, první týden po vydání, privacy-first měření a rozhodnutí o další verzi.
 - 2026-05-07: Doplněna Příloha AA s QA balíčkem před aktivní distribucí e-booku: rizikové úrovně chyb, čtenářská cesta, kontrola odkazů, mobilní průchod, privacy-first brána a rozhodnutí o rozeslání.
+- 2026-05-07: Doplněna Příloha AB s první retrospektivou po distribuci e-booku: rozhodovací otázka, signály, matice změn, záznam retrospektivy, jedna další iterace a privacy-first kontrola.
