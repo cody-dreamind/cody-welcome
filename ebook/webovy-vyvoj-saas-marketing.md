@@ -16499,6 +16499,299 @@ Pokud workshop skončí jen obecnou diskuzí, je to drahá schůzka s lepším n
 
 Interní školicí balíček je pojistka proti tomu, aby e-book zůstal izolovaný od praxe. Dává týmu společný jazyk, krátké rituály a konkrétní výstupy. A hlavně připomíná, že privacy-first provoz není kapitola v dokumentu. Je to každodenní návyk v tom, co sbíráme, jak měříme, jak předáváme práci a jak vysvětlujeme rozhodnutí zákazníkům.
 
+## Příloha AG: Rozhodovací index pro rychlé použití e-booku
+
+E-book má největší hodnotu ve chvíli, kdy pomůže vybrat další konkrétní krok. Ne když si tým řekne, že "by si to měl někdy celé projít". To je hezký plán, který obvykle skončí mezi odloženými záložkami, starými exporty a souborem `final-final-v3.md`.
+
+Rozhodovací index je krátká navigační vrstva nad celým rukopisem. Pomáhá člověku říct: teď řeším tuto situaci, proto otevřu tyto kapitoly, vyplním tuto šablonu a do sedmi dnů dokončím tento výstup.
+
+Použijte ho ve třech situacích:
+
+- Když nevíte, kde v e-booku začít.
+- Když tým mluví o problému obecně, ale neumí z něj udělat akci.
+- Když chcete zkrátit workshop, sales hovor nebo interní review na praktický výsledek.
+
+### 1. Začněte rozhodovací otázkou
+
+Nejdřív si napište jednu otázku, kterou má práce s e-bookem zodpovědět. Otázka musí vést k rozhodnutí, ne k nekonečnému studiu.
+
+Slabé otázky:
+
+- Jak zlepšit web?
+- Jak dělat lepší marketing?
+- Jak využít e-book v týmu?
+- Jak být víc privacy-first?
+
+Silnější otázky:
+
+- Kterou stránku upravit tento týden, aby přinesla kvalitnější poptávky?
+- Jaký první SaaS workflow ověřit před vývojem dalších funkcí?
+- Které tři externí skripty na webu neumíme obhájit?
+- Jaký materiál poslat zákazníkovi po úvodním hovoru, aby lépe pochopil další krok?
+- Jakou jednu týmovou dohodu zavést, aby se rozhodnutí o datech neztrácela v chatu?
+
+Dobrá otázka má čtyři vlastnosti:
+
+1. Má vlastníka.
+2. Má časový horizont.
+3. Má měřitelný nebo pozorovatelný výstup.
+4. Dá se podle ní říct ano, ne, nebo ještě nevíme.
+
+Codyho komentář: pokud otázka nejde převést na rozhodnutí, není špatná. Jen je pravděpodobně moc velká. Zmenšete ji, než z ní vznikne workshop, který všichni přežijí a nikdo nepoužije.
+
+### 2. Vyberte trasu podle situace
+
+Tato matice slouží jako rychlý rozcestník. Nemá nahradit čtení celých kapitol. Má zabránit tomu, aby tým začínal pokaždé od nuly.
+
+```text
+Situace:
+Web nepřináší kvalitní poptávky.
+
+Čtěte:
+Kapitola 2, 5, 6, 25, 28, 30
+
+Použijte:
+Checklist pro nový web, obsahový brief, rozhodovací dashboard
+
+Výstup do 7 dnů:
+Upravená jedna klíčová stránka s jasným slibem, důkazem, CTA a měřením kvality leadu.
+```
+
+```text
+Situace:
+Produktový tým chce stavět další funkce, ale není jasné, co ověřuje.
+
+Čtěte:
+Kapitola 8, 9, 10, 11, 17, 31
+
+Použijte:
+Checklist pro SaaS MVP, šablonu produktové strategie, rozhodovací log
+
+Výstup do 7 dnů:
+Jedna MVP hypotéza, jeden ověřovaný workflow, aktivační událost a stop pravidlo pro pilot.
+```
+
+```text
+Situace:
+Marketing běží, ale nikdo neví, co opravdu funguje.
+
+Čtěte:
+Kapitola 22, 23, 24, 25, 26, 27, 36
+
+Použijte:
+Šablonu marketingového plánu, obsahový brief, měsíční review
+
+Výstup do 7 dnů:
+Tři obsahové pilíře, jedna prioritní otázka zákazníka a měření signálu, který ovlivní další měsíc.
+```
+
+```text
+Situace:
+Tým přidal nástroje, ale neví, kde končí data.
+
+Čtěte:
+Kapitola 3, 7, 12, 14, 32, Příloha G
+
+Použijte:
+Datovou mapu, privacy-first analytický checklist, rizikový registr
+
+Výstup do 7 dnů:
+Seznam datových toků, účelů, přístupů, retencí a tří nástrojů k ponechání, omezení nebo odstranění.
+```
+
+```text
+Situace:
+E-book má pomáhat sales nebo customer success týmu.
+
+Čtěte:
+Kapitola 15, 20, 28, 29, Příloha AD, Příloha AE
+
+Použijte:
+Sales enablement index, onboarding kartu projektu, support výřezy
+
+Výstup do 7 dnů:
+Jeden obchodní výřez, jeden follow-up text a jedna onboarding karta pro konkrétní typ zákazníka.
+```
+
+```text
+Situace:
+Rukopis je připravený k publikaci nebo aktivní distribuci.
+
+Čtěte:
+Příloha L, M, N, O, Q, Z, AA, AB
+
+Použijte:
+Předpublikační checklist, publikační plán, QA balíček, retrospektivu
+
+Výstup do 7 dnů:
+Rozhodnutí publikovat, opravit nebo odložit, včetně vlastníka, stabilní URL a prvního review termínu.
+```
+
+### 3. Udělejte pětiminutové triage
+
+Před workshopem, review nebo samostatnou prací projděte pět otázek. Každá odpověď má být krátká. Pokud potřebujete dlouze vysvětlovat, pravděpodobně ještě neřešíte správnou úroveň problému.
+
+```text
+1. Co přesně se má změnit pro zákazníka nebo čtenáře?
+2. Jak poznáme, že změna pomohla?
+3. Která část systému je největší brzda: web, produkt, marketing, sales, provoz, data, tým?
+4. Jaký nejmenší dokončený výstup dá smysl do sedmi dnů?
+5. Jaké data budeme muset sbírat nebo použít, a jde to udělat s menší stopou?
+```
+
+Výsledkem triage má být jedna věta:
+
+```text
+Tento týden použijeme [část e-booku] k tomu, abychom dokončili [výstup], protože potřebujeme rozhodnout [otázka].
+```
+
+Příklad:
+
+```text
+Tento týden použijeme kapitoly o prodejním webu a lead generation k tomu,
+abychom upravili stránku "SaaS MVP" a měřili kvalitu poptávek,
+protože potřebujeme rozhodnout, jestli současný slib přivádí správný typ firem.
+```
+
+### 4. Převádějte čtení na backlog
+
+Čtení e-booku nemá končit poznámkami typu "dobré nápady". To je hřbitov užitečných věcí. Každý poznatek převeďte do backlogové položky ve stejném formátu.
+
+```text
+Název:
+Problém:
+Kapitola nebo příloha:
+Navržený výstup:
+Vlastník:
+Termín:
+Privacy-first dopad:
+Kritérium hotovo:
+Rozhodnutí po dokončení:
+```
+
+Příklad:
+
+```text
+Název:
+Zkrátit poptávkový formulář pro audit webu
+
+Problém:
+Formulář sbírá telefon, rozpočet a termín dřív, než návštěvník ví, co dostane.
+
+Kapitola nebo příloha:
+Kapitola 2, Kapitola 28, Příloha V
+
+Navržený výstup:
+Nová verze formuláře s e-mailem, URL webu, krátkým cílem a vysvětlením dalšího kroku.
+
+Vlastník:
+Marketing + vývoj
+
+Termín:
+7 dnů
+
+Privacy-first dopad:
+Méně osobních údajů v prvním kontaktu, jasnější účel sběru.
+
+Kritérium hotovo:
+Formulář je nasazený, odeslání otestované, event měří jen dokončený kontakt.
+
+Rozhodnutí po dokončení:
+Po 30 dnech porovnat kvalitu poptávek a počet zbytečných follow-up otázek.
+```
+
+Tento formát nutí tým myslet na výstup, vlastníka a datovou stopu. Bez toho se e-book snadno změní na inspiraci bez provozní odpovědnosti.
+
+### 5. Použijte privacy-first brzdu
+
+U každé akce z e-booku se zastavte u dat. Ne proto, aby se nic nemohlo dělat, ale aby se dělaly věci, které lze obhájit.
+
+Privacy-first brzda má pět otázek:
+
+1. Jaká data kvůli této změně vzniknou?
+2. Jsou všechna potřebná pro rozhodnutí nebo provoz?
+3. Kde budou uložená a kdo k nim má přístup?
+4. Jak dlouho je budeme držet?
+5. Umíme stejný cíl splnit s menším sběrem, agregací nebo kratší retencí?
+
+Pokud tým neumí odpovědět, změna nemusí být zastavená navždy. Ale nemá se tvářit jako hotová. Přidejte úkol: doplnit datovou mapu, zkrátit formulář, odstranit skript, upravit retenci, nebo přepsat vysvětlení pro uživatele.
+
+Praktické pravidlo:
+
+```text
+Žádná nová metrika bez rozhodnutí.
+Žádný nový formulářový údaj bez účelu.
+Žádný nový externí nástroj bez datové mapy.
+Žádný nový distribuční kanál bez plánu, co se stane, když přestane fungovat.
+```
+
+### 6. Vytvořte jednostránkový index pro tým
+
+Na konec interní dokumentace si dejte krátkou stránku, která mapuje opakované situace na části e-booku. Nepište tam všechno. Jen věci, které tým opravdu řeší.
+
+Šablona:
+
+```text
+Rozhodovací index e-booku
+
+1. Když řešíme kvalitu poptávek:
+   Kapitoly:
+   Šablony:
+   Typický výstup:
+   Vlastník:
+
+2. Když řešíme nové SaaS funkce:
+   Kapitoly:
+   Šablony:
+   Typický výstup:
+   Vlastník:
+
+3. Když řešíme marketingový plán:
+   Kapitoly:
+   Šablony:
+   Typický výstup:
+   Vlastník:
+
+4. Když řešíme data, analytiku nebo externí nástroje:
+   Kapitoly:
+   Šablony:
+   Typický výstup:
+   Vlastník:
+
+5. Když řešíme publikaci, distribuci nebo aktualizaci e-booku:
+   Kapitoly:
+   Šablony:
+   Typický výstup:
+   Vlastník:
+```
+
+Ukázkové vyplnění:
+
+```text
+Když řešíme kvalitu poptávek:
+Kapitoly: 2, 5, 25, 28, 30
+Šablony: obsahový brief, checklist pro nový web, rozhodovací dashboard
+Typický výstup: jedna upravená landing page, kratší formulář, nový důkaz a měření kvality leadu
+Vlastník: marketing
+```
+
+Index aktualizujte při měsíčním review. Když zjistíte, že se k nějaké situaci opakovaně vracíte, přidejte ji. Když se něco nepoužívá, smažte to. Interní navigace má být krátká a živá, ne encyklopedie.
+
+### Checklist přílohy
+
+- Má práce s e-bookem jednu rozhodovací otázku?
+- Vede otázka k akci do sedmi dnů?
+- Vybrali jste kapitoly a přílohy podle situace, ne podle pořadí v obsahu?
+- Má výstup vlastníka, termín a kritérium hotovo?
+- Převádíte poznatky z čtení do backlogových položek?
+- Má každá položka zapsaný privacy-first dopad?
+- Zastavíte se před novým sběrem dat, metrikou, formulářem nebo externím nástrojem?
+- Existuje jednostránkový index pro nejčastější týmové situace?
+- Aktualizuje se index podle toho, co tým opravdu používá?
+- Končí každé použití e-booku rozhodnutím: udělat, opravit, odložit, nebo smazat?
+
+Rozhodovací index je malá vrstva, ale mění způsob používání celého rukopisu. Místo velké knihy vznikne praktická navigace pro konkrétní situace. A to je přesně režim, ve kterém e-book přestává být obsahem a začíná být pracovním systémem.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -16659,3 +16952,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha AD se sales enablement balíčkem pro e-book: obchodní situace, výřezy, follow-up, privacy-first měření, index a údržba.
 - 2026-05-07: Doplněna Příloha AE s customer success balíčkem pro e-book: onboarding karta, support výřezy, privacy-first komunikace, měření zdraví spolupráce a smyčka zpět do rukopisu.
 - 2026-05-07: Doplněna Příloha AF s interním školicím balíčkem pro tým: onboarding trasy podle rolí, čtyři praktické workshopy, znalostní test, týmová dohoda a refresh rytmus.
+- 2026-05-07: Doplněna Příloha AG s rozhodovacím indexem pro rychlé použití e-booku: výběr trasy podle situace, pětiminutové triage, převod čtení do backlogu a privacy-first brzda.
