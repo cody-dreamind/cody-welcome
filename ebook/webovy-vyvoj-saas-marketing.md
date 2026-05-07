@@ -17441,6 +17441,285 @@ Nejlepší piloty nejsou ty, kde všechno proběhne dokonale. Nejlepší piloty 
 
 Pilot produktizované služby je malý laboratorní provoz. Má být dost skutečný, aby odhalil problémy, a dost ohraničený, aby tým nesežral. Když ho vezmete vážně, získáte víc než první zákazníky. Získáte důkaz, že obsah z e-booku umí přejít do opakovatelné práce, která má obchodní hodnotu a pořád respektuje data lidí na druhé straně.
 
+## Příloha AK: Převod pilotu do opakovatelného delivery systému
+
+Pilot ukáže, jestli produktizovaná služba dává smysl. Další krok je méně romantický a mnohem důležitější: udělat z ní opakovatelný delivery systém. Tedy způsob práce, který nezávisí na tom, že jeden člověk drží všechno v hlavě, pamatuje si všechny výjimky a po nocích lepí dokumenty dohromady jako poslední obránce civilizace.
+
+Opakovatelnost neznamená rigiditu. Znamená, že tým ví, co se stane po prodeji, jaké podklady potřebuje, kde vznikají rozhodnutí, jak se chrání data, co zákazník dostane a kdy je práce hotová. Díky tomu může služba růst bez toho, aby každá další zakázka začínala od nuly.
+
+### 1. Udělejte post-pilot inventuru
+
+Než začnete psát nový proces, projděte pilotní zkušenost jako materiál. Nehledejte jen chyby. Hledejte opakující se vzory: co zákazníci chápali hned, kde se ptali pořád dokola, které vstupy chyběly, kde tým improvizoval a které části výstupu vedly k rozhodnutí.
+
+Inventuru udělejte nad čtyřmi oblastmi:
+
+- Prodej: jak zákazník pochopil nabídku, cenu, rozsah a výstup.
+- Vstup: jak rychle a bezpečně dodal podklady.
+- Delivery: kde vznikala práce navíc, čekání nebo nejasné vlastnictví.
+- Výstup: co zákazník skutečně použil pro rozhodnutí nebo další krok.
+
+Jednoduchá šablona inventury:
+
+```text
+Služba:
+[název produktizované služby]
+
+Počet pilotů:
+[např. 4]
+
+Opakující se hodnota:
+[co zákazníci považovali za nejužitečnější]
+
+Opakující se tření:
+[kde se zasekával prodej, vstup, delivery nebo výstup]
+
+Části, které ponechat:
+[proces, šablona, checklist, hovor, formát výstupu]
+
+Části, které zjednodušit:
+[příliš složité otázky, dlouhý dokument, moc nálezů, nejasné role]
+
+Části, které odstranit:
+[věci bez dopadu na rozhodnutí]
+
+Privacy-first poznámky:
+[přístupy, exporty, retence, anonymizace, sdílení výstupů]
+```
+
+Důležité pravidlo: pokud něco vzniklo jen proto, že jeden zákazník měl výjimečný kontext, nedávejte to hned do standardního procesu. Výjimky patří do poznámek, ne do hlavní nabídky. Jinak si z jedné zvláštní zakázky vyrobíte trvalý závazek.
+
+### 2. Rozdělte delivery na pevné fáze
+
+Produktizovaná služba potřebuje jednoduché fáze. Zákazník má vědět, co se děje. Tým má vědět, co se má dokončit, než se jde dál. Fáze nemusí být složité, ale musí mít vstup, výstup a vlastníka.
+
+Praktický model:
+
+```text
+0. Kvalifikace
+Ověřit, že zákazník patří do rozsahu služby.
+
+1. Start
+Potvrdit cíl, rozsah, podklady, odpovědné osoby a privacy pravidla.
+
+2. Sběr kontextu
+Získat jen nezbytné URL, exporty, odpovědi a dokumenty.
+
+3. Analýza
+Projít tok, data, obsah, technická rizika nebo proces podle služby.
+
+4. Prioritizace
+Oddělit zásadní nálezy od šumu a spojit je s obchodním dopadem.
+
+5. Předání
+Vysvětlit výstup, rozhodnutí a doporučené další kroky.
+
+6. Uzavření
+Zaznamenat zpětnou vazbu, smazání nebo archivaci podkladů a interní učení.
+```
+
+Každá fáze má mít definici hotovo. Bez ní se delivery rozmazává. "Analýza probíhá" může znamenat cokoliv od dvou poznámek v dokumentu po týden hlubokého ponoru. Lepší je napsat přesně, co musí existovat, aby fáze skončila.
+
+Příklad definice hotovo pro fázi analýzy:
+
+- Jsou zkontrolované všechny URL nebo toky uvedené ve vstupním rozsahu.
+- Každý nález má dopad, důkaz a doporučenou akci.
+- Nálezy jsou rozdělené podle priority.
+- Není použitý žádný podklad mimo dohodnutý rozsah.
+- Citlivé informace jsou anonymizované nebo vynechané.
+- Je jasné, které tři změny doporučujeme jako první.
+
+### 3. Vytvořte delivery kit
+
+Delivery kit je sada šablon a checklistů, která drží službu pohromadě. Nemá to být interní muzeum dokumentů. Má to být praktická výbava, kterou tým otevře pokaždé, když službu prodá.
+
+Minimum delivery kitu:
+
+- Prodejní karta služby: komu je služba určená, co řeší, výstup, rozsah, co není součástí.
+- Kvalifikační otázky: krátký seznam pro ověření fitu.
+- Startovací e-mail: co zákazník dostane, co má dodat, kam a do kdy.
+- Vstupní dotazník: jen otázky, které skutečně pomáhají delivery.
+- Privacy-first dohoda: jaké podklady se používají, kde jsou uložené a kdy se mažou.
+- Interní checklist fází: co má být hotové v každé fázi.
+- Šablona výstupu: jednotná struktura dokumentu nebo prezentace.
+- Šablona předávacího hovoru: agenda, rozhodnutí, další kroky.
+- Retrospektivní záznam: co zlepšit po každé dodávce.
+
+Startovací e-mail může být velmi jednoduchý:
+
+```text
+Dobrý den,
+
+potvrzuji start služby [název]. Cílem je dodat [výstup] do [termín].
+
+Pro začátek potřebujeme:
+- [podklad 1]
+- [podklad 2]
+- [odpověď na 3 až 5 vstupních otázek]
+
+Pracujeme jen s podklady potřebnými pro výstup. Pokud narazíme na citlivá nebo osobní data, nepoužijeme je bez jasného důvodu a domluvy. Po uzavření služby potvrdíme, co se archivuje a co smažeme.
+
+Další krok:
+[datum a forma startovacího hovoru / potvrzení podkladů]
+```
+
+Dobrá šablona šetří energii, ale nesmí zakrýt úsudek. Pokud zákazník pošle něco citlivého, co není potřeba, šablona vás sama nezachrání. Tým musí mít pravidlo: zbytečná data se neukládají jen proto, že přišla.
+
+### 4. Nastavte vlastnictví a kapacitu
+
+Služba se nerozbije jen kvůli špatnému procesu. Často se rozbije kvůli nejasnému vlastnictví. Každý ví, že "někdo" měl poslat dotazník, "někdo" měl zkontrolovat výstup a "někdo" měl potvrdit smazání podkladů. Ten někdo je obvykle nejdražší neviditelný člen týmu.
+
+Pro každou službu určete role:
+
+- Owner služby: drží nabídku, rozsah, kvalitu a ekonomiku.
+- Delivery lead: vede konkrétní zakázku a komunikuje se zákazníkem.
+- Reviewer: kontroluje výstup před předáním.
+- Privacy owner: hlídá podklady, přístupy, retenci a anonymizaci.
+- Sales owner: zajišťuje, že se služba neprodává mimo rozsah.
+
+V malém týmu může jedna osoba držet víc rolí. To je v pořádku. Důležité je, aby role byly pojmenované. Když role nejsou pojmenované, nedá se poznat, kde proces selhal.
+
+Kapacitu počítejte jednoduše:
+
+```text
+Standardní delivery čas:
+[např. 18 hodin práce týmu]
+
+Kalendářní délka:
+[např. 10 pracovních dnů]
+
+Nutné role:
+[delivery lead, reviewer]
+
+Úzké hrdlo:
+[např. review výstupu seniorním člověkem]
+
+Maximální počet běžících služeb:
+[např. 2 současně]
+
+Signál přetížení:
+[zpoždění předání, vynechaný review, ruční nahánění podkladů]
+```
+
+Služba, která vypadá ziskově jen proto, že nepočítá koordinaci, review a komunikaci, není zisková. Jen si půjčuje čas z budoucího chaosu.
+
+### 5. Standardizujte výstup, ne myšlení
+
+Opakovatelná služba nesmí být továrna na prázdné dokumenty. Standardizujte formát, strukturu a rozhodovací logiku. Nestandardizujte závěry tak, aby každý zákazník dostal stejnou odpověď s vyměněným logem.
+
+Dobrá šablona výstupu obsahuje:
+
+- Shrnutí situace jednou stránkou.
+- Cíl služby a rozsah kontroly.
+- Použité podklady bez zbytečných detailů.
+- Hlavní nálezy seřazené podle dopadu.
+- Doporučené první tři kroky.
+- Rizika a předpoklady.
+- Privacy-first poznámku: data, přístupy, externí nástroje, retence.
+- Rozhodnutí pro zákazníka: co udělat teď, co později, co nedělat.
+
+Příklad formulace nálezu:
+
+```text
+Nález:
+Hlavní CTA na stránce služby vede na obecný kontakt, ne na konkrétní další krok.
+
+Dopad:
+Návštěvník neví, zda má čekat konzultaci, nabídku, demo nebo jen potvrzení přijetí.
+
+Důkaz:
+CTA text, formulář a následná komunikace používají tři různé sliby.
+
+Doporučení:
+Sjednotit CTA na "Domluvit 30min konzultaci", upravit formulář na 4 pole a po odeslání ukázat konkrétní další krok.
+
+Privacy-first poznámka:
+Není potřeba přidávat další sledovací skripty. Stačí měřit odeslání formuláře a kvalitu následných poptávek v CRM.
+```
+
+Tahle struktura nutí tým říct, proč na nálezu záleží. Bez dopadu je nález jen názor. Bez doporučení je nález jen stížnost. Bez privacy poznámky se i dobré doporučení může zvrhnout v další zbytečný sběr dat.
+
+### 6. Zaveďte smyčku zlepšování po každé dodávce
+
+Po předání výstupu bývá největší pokušení službu zavřít a jít dál. Jenže právě po předání máte nejčerstvější data: co zákazník pochopil, co použil, kde se ptal, co bylo zbytečné a co chybělo.
+
+Po každé dodávce udělejte patnáctiminutový interní záznam:
+
+```text
+Zakázka:
+[interní označení]
+
+Co zákazník ocenil:
+[1 až 3 body]
+
+Co bylo nejasné:
+[1 až 3 body]
+
+Kde jsme překročili rozsah:
+[konkrétně]
+
+Co šablona nepokryla:
+[konkrétně]
+
+Co upravíme před další dodávkou:
+[jedna změna]
+
+Co zatím neměníme:
+[a proč]
+
+Privacy-first kontrola:
+[smazání podkladů, archivace výstupu, anonymizace, přístupy]
+```
+
+Pravidlo jedné změny je důležité. Po každé zakázce neupravujte všechno. Vyberte jednu věc, která sníží tření nebo zvýší hodnotu. Jinak si proces rozbijete rychleji, než ho stihnete pochopit.
+
+### 7. Rozhodněte, kdy službu škálovat
+
+Ne každá služba po pilotu zaslouží větší marketing. Nejdřív musí být dodavatelná. Pokud prodej funguje, ale delivery stojí na hrdinství jednoho člověka, škálování jen zvětší problém. Pokud delivery funguje, ale zákazníci nechápou nabídku bez dlouhého hovoru, potřebujete lepší prodejní stránku. Pokud obojí funguje, můžete službu opatrně posílit.
+
+Signály připravenosti:
+
+- Zákazníci rozumí nabídce bez dlouhého vysvětlování.
+- Vstupní podklady chodí v domluveném formátu.
+- Delivery se vejde do plánovaného času s rozumnou rezervou.
+- Výstup opakovaně vede k rozhodnutí nebo konkrétní změně.
+- Tým umí službu dodat podle checklistu, ne podle paměti jednoho člověka.
+- Privacy-first pravidla jsou součástí procesu, ne ruční dodatek na konci.
+- Po každé dodávce vzniká malá, řízená úprava služby.
+
+Signály, že škálování počká:
+
+- Každý zákazník potřebuje zásadně jiný rozsah.
+- Výstup se pokaždé přepisuje od nuly.
+- Review nestíhá a kvalita kolísá.
+- Zákazník posílá citlivá data mimo domluvené kanály a tým to neřeší.
+- Cena neodpovídá skutečné časové náročnosti.
+- Prodejní slib je širší než delivery kapacita.
+
+Škálování produktizované služby nemusí znamenat reklamu a velkou kampaň. Může znamenat jen to, že ji přidáte na web, připravíte dvě case-friendly anonymizované ukázky, dáte ji do sales enablement balíčku a nabídnete ji dalším pěti vhodným zákazníkům. To je často lepší než hlasitý launch, který přivede lidi mimo fit.
+
+### Codyho komentář
+
+Můj pohled: většina týmů nechce opakovatelný systém, dokud nezačne bolet chaos. Jenže systém není nepřítel kreativity. Je to způsob, jak kreativitu nenechat umřít v administrativě. Když máte jasný start, vstupy, výstup, review a privacy pravidla, zbývá víc energie na skutečné přemýšlení.
+
+Produktizovaná služba má být nudná v dobrém slova smyslu. Zákazník nemá obdivovat, jak dramaticky tým improvizuje. Má dostat jasný výsledek, který mu pomůže rozhodnout. Tým nemá po každé zakázce znovu vynalézat proces. Má zlepšovat službu o malé, přesné změny.
+
+### Checklist přílohy
+
+- Proběhla po pilotu inventura hodnoty, tření, rozsahu a privacy poznámek?
+- Jsou oddělené běžné vzory od jednorázových výjimek?
+- Má služba pevné fáze od kvalifikace po uzavření?
+- Má každá fáze vstup, výstup, vlastníka a definici hotovo?
+- Existuje delivery kit: prodejní karta, dotazník, startovací e-mail, šablona výstupu a retrospektiva?
+- Jsou pojmenované role pro prodej, delivery, review a privacy?
+- Je spočítaná reálná kapacita včetně komunikace, review a koordinace?
+- Je výstup standardizovaný ve formátu, ale ne v závěrech?
+- Obsahuje každý nález dopad, důkaz, doporučení a privacy-first poznámku?
+- Probíhá po každé dodávce krátká smyčka zlepšení?
+- Měníte po každé zakázce jednu konkrétní věc, ne celý systém najednou?
+- Máte jasné signály, kdy službu škálovat a kdy ještě počkat?
+
+Převod pilotu do opakovatelného delivery systému je okamžik, kdy se z dobrého nápadu stává obchodní aktivum. Ne proto, že všechno zabalíte do hezké šablony, ale protože umíte službu dodat víckrát, s podobnou kvalitou, bez zbytečného sběru dat a bez toho, aby tým pokaždé shořel na detailech. To je přesně typ práce, který e-book nemá jen popisovat, ale umožnit.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -17605,3 +17884,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha AH s redakčním boardem pro další iterace e-booku: typy změn, karta položky, týdenní a měsíční rytmus, měření užitečnosti a privacy-first kontrola.
 - 2026-05-07: Doplněna Příloha AI o produktizované službě postavené na e-booku: výběr problému, výsledek, rozsah, delivery bloky, privacy-first brána, prodejní stránka a checklist.
 - 2026-05-07: Doplněna Příloha AJ s pilotem produktizované služby pro první zákazníky: hypotéza, výběr účastníků, pilotní nabídka, vstupní brána, privacy-first práce s daty, měření a rozhodnutí po pilotu.
+- 2026-05-07: Doplněna Příloha AK o převodu pilotu do opakovatelného delivery systému: post-pilot inventura, fáze delivery, delivery kit, role, kapacita, standard výstupu, smyčka zlepšování a škálování.
