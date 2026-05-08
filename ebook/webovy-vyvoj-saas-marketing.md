@@ -22214,6 +22214,304 @@ Bez standardizace je tým odsouzený k tomu, že bude pořád znovu objevovat vl
 
 Standardizace je poslední krok jedné iterace a první krok lepšího systému. Díky ní se web, produkt a marketing nemění jen podle posledního nápadu v místnosti, ale podle ověřeného učení, které někdo převedl do praxe.
 
+## Příloha BA: Katalog pracovních šablon a playbooků
+
+Jakmile začnete používat checklisty, experimentální karty, rozhodovací logy, datové mapy, sales výřezy a provozní runbooky, vznikne nový problém: kde to všechno najít a podle čeho poznat, co je aktuální. Bez katalogu se i dobré šablony promění v archeologii. Někdo má poslední verzi v poznámkách, někdo ve složce projektu, někdo v dokumentu s názvem `final_v3_opravdu_final` a nový člověk v týmu raději začne od nuly.
+
+Katalog šablon není složitý systém. Je to jedna přehledná mapa pracovních materiálů, které tým používá opakovaně. Má odpovědět na pět otázek:
+
+- K čemu šablona slouží?
+- Kdy ji použít?
+- Kdo ji vlastní?
+- Kde je aktuální verze?
+- Kdy se má zkontrolovat nebo vyřadit?
+
+Smysl katalogu není sbírat dokumenty. Smysl je zkrátit cestu od situace k použitelnému nástroji. Když tým řeší nový web, má hned najít kvalifikační dotazník, obsahový brief, technický provozní list a privacy-first datovou mapu. Když řeší incident, má najít incidentní drill, komunikační plán, post-mortem a plán obnovy důvěry. Když řeší další iteraci produktu, má najít experimentální kartu, měření dopadu, uzavření experimentu a standardizaci změny.
+
+### 1. Začněte situacemi, ne názvy dokumentů
+
+Katalog nebude fungovat, pokud ho postavíte jen jako seznam souborů. Lidé nehledají "Přílohu AX". Hledají odpověď na situaci: spouštíme změnu, předáváme projekt, vybíráme dodavatele, uzavíráme experiment, připravujeme launch, řešíme incident.
+
+Rozdělte katalog podle pracovních situací:
+
+- Nový web nebo redesign.
+- SaaS MVP a pilot.
+- Marketingová kampaň nebo obsahový plán.
+- Launch a změna v produkci.
+- Incident, chyba nebo ztráta důvěry.
+- Měsíční, kvartální a roční review.
+- Dodavatelé, přístupy a datové toky.
+- Experiment, vyhodnocení a standardizace.
+- Předání, 30denní kontrola a další roadmapa.
+
+U každé situace napište krátký balíček šablon. Ne dvacet položek. Tři až sedm věcí, které člověk opravdu potřebuje.
+
+Příklad:
+
+```text
+Situace:
+Spouštíme jednu produktovou nebo marketingovou změnu.
+
+Použij:
+- experimentální kartu,
+- měření dopadu změny,
+- uzavření experimentu,
+- standardizaci změny,
+- rozhodovací log.
+
+Výstup:
+Tým ví, co se mění, proč se to měří, kdy se rozhodne a kam se výsledek propíše.
+```
+
+Tím se katalog stane navigací podle práce, ne archivem podle autorů.
+
+### 2. Karta šablony
+
+Každá šablona v katalogu má mít krátkou kartu. Stačí jednoduchý formát:
+
+```text
+Název:
+
+K čemu slouží:
+
+Kdy použít:
+
+Kdy nepoužít:
+
+Vlastník:
+
+Aktuální umístění:
+
+Navazuje na:
+
+Vyžaduje privacy-first kontrolu:
+ano/ne + proč
+
+Poslední revize:
+
+Další revize:
+
+Stav:
+aktivní / návrh / archivováno
+```
+
+Nejdůležitější pole jsou "kdy nepoužít" a "vlastník". Šablony bez hranic se používají na všechno a pak přestanou pomáhat. Šablony bez vlastníka stárnou potichu.
+
+Příklad vyplnění:
+
+```text
+Název:
+Experimentální karta pro jednu další změnu.
+
+K čemu slouží:
+Pomáhá před spuštěním změny zapsat rozhodovací otázku, hypotézu, rozsah, signály, datové minimum a review okno.
+
+Kdy použít:
+Před změnou webu, onboardingu, kampaně, formuláře, pricingové prezentace nebo produktového workflow, pokud chceme vědět, jestli změna pomohla.
+
+Kdy nepoužít:
+Na urgentní incident, čistě technickou opravu bez produktového dopadu nebo drobnou textovou korekturu.
+
+Vlastník:
+Produktový nebo marketingový vlastník podle typu změny.
+
+Aktuální umístění:
+E-book, Příloha AX.
+
+Navazuje na:
+Příloha AV, AY a AZ.
+
+Vyžaduje privacy-first kontrolu:
+Ano, pokud změna přidává měření, formulářové pole, dodavatele, export nebo nový datový tok.
+
+Poslední revize:
+2026-05-08.
+
+Další revize:
+Po třech použitích nebo při měsíčním review.
+
+Stav:
+Aktivní.
+```
+
+Taková karta ušetří spoustu vysvětlování. Nový člověk nemusí hádat, jestli je šablona povinná, volitelná, stará nebo jen nápad.
+
+### 3. Stav šablony: návrh, aktivní, archivováno
+
+Ne každá šablona má stejnou váhu. Proto katalog potřebuje stav.
+
+- `Návrh`: materiál se testuje, ještě není týmový standard.
+- `Aktivní`: výchozí šablona pro danou situaci.
+- `Archivováno`: už se nepoužívá, ale nechává se kvůli historii nebo starším projektům.
+
+Archivace je důležitá. Když staré šablony jen smažete, ztratíte kontext. Když je necháte bez označení vedle aktuálních, lidé je budou dál používat. Archivovaná šablona má mít nahoře větu:
+
+```text
+Tato šablona je archivovaná. Pro nové projekty použijte [název aktuální šablony].
+```
+
+To je malá provozní slušnost. A ano, dokumenty si slušnost zaslouží. Hlavně ty, které už jednou způsobily zmatek.
+
+### 4. Privacy-first vrstva katalogu
+
+Katalog šablon je nenápadné místo, kde se dá držet privacy-first disciplína. U každé šablony si označte, jestli může ovlivnit data, souhlas, měření, přístupy nebo dodavatele.
+
+Privacy štítky:
+
+- `Data`: šablona pracuje s osobními, zákaznickými nebo provozními daty.
+- `Měření`: šablona nastavuje eventy, analytiku, signály nebo reporting.
+- `Dodavatel`: šablona řeší externí nástroj, integraci nebo službu.
+- `Přístup`: šablona řeší role, účty, oprávnění nebo klíče.
+- `Komunikace`: šablona může obsahovat citlivé interní nebo zákaznické informace.
+- `Bez dopadu`: šablona datový tok nemění.
+
+Příklad:
+
+```text
+Šablona:
+Obsahový brief pro článek, landing page nebo case study.
+
+Privacy štítky:
+Komunikace, Měření.
+
+Kontrola:
+Ověřit, že case study neprozrazuje interní data zákazníka bez schválení a že měření úspěchu nevyžaduje zbytečné profilování návštěvníků.
+```
+
+Tím se privacy-first práce nedělá až na konci. Je vidět už při výběru šablony.
+
+### 5. Balíčky podle rolí
+
+Různé role potřebují různé vstupy. Katalog může mít i rychlé trasy:
+
+Pro zakladatele nebo vedení:
+
+- produktová strategie,
+- positioning,
+- pricing,
+- kvartální roadmapa,
+- roční audit,
+- rizikový registr.
+
+Pro marketing:
+
+- obsahový brief,
+- distribuční plán,
+- měření dopadu změny,
+- lead generation checklist,
+- prodejní web,
+- feedback backlog.
+
+Pro produkt a vývoj:
+
+- SaaS MVP checklist,
+- datová mapa,
+- datový model,
+- tenant izolace,
+- definice hotovo,
+- incidentní drill.
+
+Pro obchod a customer success:
+
+- kvalifikační dotazník,
+- sales enablement balíček,
+- předávací balíček,
+- 30denní kontrola,
+- customer success výřezy,
+- obnova důvěry.
+
+Pro provoz a privacy:
+
+- provozní list,
+- dodavatelská hygiena,
+- přístupy a data,
+- ukončení nebo migrace systému,
+- roční audit,
+- evidence zdrojů a právních aktualizací.
+
+Role nejsou pevné škatulky. Jsou zkratky. Malý tým má často jednoho člověka ve třech rolích. Katalog mu má pomoct přepnout kontext, ne mu připomínat, že má málo lidí.
+
+### 6. Revizní rytmus katalogu
+
+Katalog stárne stejně jako obsah. Nastavte jednoduchý rytmus:
+
+- Týdně: při uzavření práce doplnit novou nebo změněnou šablonu, pokud vznikla.
+- Měsíčně: projít aktivní šablony použité v posledních projektech a opravit tření.
+- Kvartálně: archivovat nepoužívané šablony, sloučit duplicity a ověřit vlastníky.
+- Ročně: zkontrolovat celý katalog proti strategii, provozu, datům, právním změnám a reálným pracovním tokům.
+
+Praktické pravidlo: pokud šablona nebyla použitá šest měsíců a nikdo ji neplánuje použít, má jít do archivu nebo pryč z hlavní navigace. Katalog má být pracovní plocha, ne muzeum dobrých úmyslů.
+
+### 7. Minimální katalog pro tento e-book
+
+Pro první veřejnou nebo interní verzi e-booku bych vytvořil tento minimální katalog:
+
+```text
+01 Strategie a směr
+- produktová strategie,
+- positioning,
+- marketingový plán,
+- rizikový registr.
+
+02 Web a obsah
+- checklist pro nový web,
+- obsahový brief,
+- případová studie,
+- SEO checklist,
+- prodejní web.
+
+03 SaaS a produkt
+- SaaS MVP checklist,
+- datový model,
+- SaaS architektura,
+- onboarding,
+- metriky.
+
+04 Privacy-first provoz
+- datová mapa,
+- privacy-first analytika,
+- dodavatelská hygiena,
+- provozní list,
+- ukončení a migrace.
+
+05 Iterace a experimenty
+- experimentální karta,
+- měření dopadu,
+- uzavření experimentu,
+- standardizace změny,
+- rozhodovací log.
+
+06 Předání a dlouhodobá údržba
+- předávací balíček,
+- 30denní kontrola,
+- kvartální roadmapa,
+- roční audit,
+- katalog šablon.
+```
+
+Tento katalog není nutné hned převádět do složité znalostní báze. Stačí jedna stránka na webu, v interním dokumentu nebo v repozitáři. Důležité je, aby měla jedno stabilní umístění a aby tým věděl, že právě tam začíná hledání.
+
+### 8. Codyho komentář
+
+Můj pohled: opakovatelnost není o tom, že tým přestane přemýšlet. Je o tom, že nemusí pokaždé znovu stavět stůl, než začne pracovat. Dobrá šablona nebere lidem úsudek. Jen jim připomíná otázky, které by byla škoda znovu zapomenout.
+
+Katalog šablon je taková nudná infrastruktura kvality. Nikdo kvůli němu neudělá slavnostní screenshot. Ale když za tři měsíce nový projekt začne rychleji, sbírá méně zbytečných dat, má jasnější předání a lepší měření, přesně tady se ten rozdíl projeví.
+
+### Checklist přílohy
+
+- Má tým jedno místo, kde najde aktuální šablony a playbooky?
+- Je katalog řazený podle pracovních situací, ne jen podle názvů dokumentů?
+- Má každá šablona vlastníka?
+- Je u každé šablony jasné, kdy ji použít a kdy ne?
+- Rozlišujete stav `návrh`, `aktivní` a `archivováno`?
+- Mají šablony privacy štítky podle dopadu na data, měření, dodavatele, přístupy a komunikaci?
+- Existují rychlé trasy podle rolí nebo typů práce?
+- Má katalog revizní rytmus?
+- Archivujete duplicity a nepoužívané šablony?
+- Umí nový člen týmu podle katalogu najít správný balíček pro web, SaaS, marketing, incident nebo experiment?
+
+Katalog šablon je poslední kousek systému, který převádí e-book z textu do praxe. Kapitoly vysvětlují principy. Přílohy dávají pracovní nástroje. Katalog zajišťuje, že ty nástroje nezmizí přesně ve chvíli, kdy je tým potřebuje použít.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -22394,3 +22692,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AX s experimentální kartou pro jednu další změnu: rozhodovací otázka, hypotéza, rozsah, signály, datové minimum, review okno a checklist.
 - 2026-05-08: Doplněna Příloha AY o uzavření experimentu a rozhodnutí o změně: vyhodnocení signálů, ochranné kontroly, dopad do datové mapy, šablona záznamu a checklist.
 - 2026-05-08: Doplněna Příloha AZ o standardizaci změny po experimentu: typ standardu, šablona záznamu, pracovní místa, privacy-first brána, kontrola použití a checklist.
+- 2026-05-08: Doplněna Příloha BA s katalogem pracovních šablon a playbooků: situace použití, karta šablony, stav, privacy štítky, role, revizní rytmus a minimální katalog e-booku.
