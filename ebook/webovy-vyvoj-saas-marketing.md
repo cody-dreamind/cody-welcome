@@ -19102,6 +19102,344 @@ Můj pohled: roční audit je nejlepší chvíle říct nahlas, že některé v�
 
 Roční audit má chránit systém před pomalým zarůstáním. Když ho uděláte poctivě, další rok nezačíná chaotickým seznamem přání, ale jasnou dohodou, co má hodnotu, co potřebuje opravu a co už má konečně odejít do archivu. A archiv je občas nejproduktivnější místo v celé firmě.
 
+## Příloha AP: Plán ukončení, migrace nebo archivace digitálního systému
+
+Roční audit často skončí rozhodnutím něco vypnout, sloučit, přesunout nebo archivovat. To je zdravé. Jenže ukončení digitální části systému není jen smazání stránky, vypnutí aplikace nebo zrušení účtu u dodavatele. Špatně provedené ukončení může rozbít odkazy, ztratit důležitá data, nechat běžet zapomenuté účty, zmást zákazníky a vytvořit privacy riziko větší než původní provoz.
+
+Plán ukončení je pracovní postup pro situace, kdy už něco nemá pokračovat v původní podobě:
+
+- starý web se nahrazuje novým,
+- landing page po kampani se archivuje,
+- SaaS funkce se ruší nebo slučuje,
+- zákaznický portál se migruje na nový systém,
+- marketingový nástroj se nahrazuje privacy-first alternativou,
+- e-book, playbook nebo znalostní báze přechází na novou URL,
+- interní automatizace se vypíná, protože už nikdo neví, proč existuje.
+
+Ukončení není selhání. Selhání je tvářit se, že staré části systému neexistují, protože už nejsou vidět v hlavní navigaci. Pokud mají data, odkazy, přístupy nebo uživatele, pořád jsou součástí provozu.
+
+### Tři typy změny
+
+Nejdřív pojmenujte, co se vlastně děje. Slovo "vypnout" je příliš hrubé.
+
+1. Archivace: obsah nebo systém už není aktivně rozvíjený, ale má zůstat dostupný jako záznam.
+2. Migrace: uživatelé, data nebo provoz se přesouvají do nové verze, nástroje nebo infrastruktury.
+3. Ukončení: část systému přestane existovat a po přechodné době se smaže, vypne nebo právně uzavře.
+
+Každý typ má jiný dopad. Archivace potřebuje jasné označení a stabilní URL. Migrace potřebuje mapu dat, test obnovení a komunikační plán. Ukončení potřebuje exporty, retenci, vypnutí přístupů a kontrolu, že nic kritického nezůstalo v poloprovozu.
+
+Příklad:
+
+```text
+Situace:
+Starý zákaznický portál se nahrazuje novou SaaS aplikací.
+
+Typ změny:
+Migrace s následnou archivací starého portálu na 90 dní.
+
+Rozhodnutí:
+Aktivní zákaznická data se přenesou do nové aplikace. Historické exporty budou dostupné přes support. Starý portál dostane viditelné oznámení, přesměrování po přihlášení a datum vypnutí. Po 90 dnech se zruší přístupy a smažou provozní kopie podle retenčního plánu.
+```
+
+Tohle není byrokracie. Je to způsob, jak zabránit tomu, aby starý systém žil dál jako digitální sklep plný osobních údajů, neplatných slibů a účtů bývalých dodavatelů.
+
+### Kdy plán použít
+
+Plán ukončení použijte vždy, když změna zasahuje alespoň jednu z těchto oblastí:
+
+- existující URL, na které někdo může odkazovat,
+- zákaznická nebo uživatelská data,
+- přístupové účty, API klíče nebo automatizace,
+- právní texty, souhlasy, fakturační nebo supportní záznamy,
+- analytiku, e-mailing, CRM nebo formuláře,
+- veřejné sliby na webu,
+- integrace mezi systémy,
+- obsah, který obchod nebo support používá v komunikaci.
+
+Pokud jde jen o smazání interní poznámky bez dat, odkazů a dopadu, nepotřebujete velký proces. Pokud ale změna může ovlivnit zákazníka, data nebo důvěru, plán se vyplatí.
+
+### Karta ukončení
+
+Pro každou větší změnu si vytvořte jednu krátkou kartu. Nemá to být román, stačí pracovní záznam:
+
+```text
+Název:
+Ukončení staré landing page pro audit webu
+
+Typ:
+Archivace a přesměrování
+
+Proč:
+Nabídka už neodpovídá aktuální službě a stránka přivádí nekvalitní poptávky.
+
+Dopad:
+Veřejná URL, interní odkazy ze tří článků, jeden starý PDF materiál, historická data v analytice.
+
+Data:
+Formulář už není aktivní. Historické poptávky jsou v CRM, retence podle běžného obchodního procesu.
+
+Rozhodnutí:
+Stránku archivovat mimo navigaci, nastavit přesměrování na aktuální službu, opravit interní odkazy, PDF označit jako zastaralé.
+
+Vlastník:
+Marketing + web owner
+
+Datum kontroly:
+30 dní po přesměrování
+```
+
+Karta pomáhá hlavně v budoucnu. Za půl roku už si nikdo nebude pamatovat, proč se stará URL přesměrovala právě takhle. Rozhodovací stopa šetří čas, hádky i malé archeologické výpravy do historie commitů.
+
+### 1. Inventura dopadu
+
+Před jakýmkoliv vypnutím si sepište, čeho se změna dotkne.
+
+Zkontrolujte:
+
+- veřejné URL a interní odkazy,
+- sitemap, navigaci, patičku a odkazy v článcích,
+- kampaně, QR kódy, PDF, prezentace a e-mailové šablony,
+- formuláře, webhooky a automatizace,
+- CRM, support, fakturaci a onboarding materiály,
+- API integrace, cron úlohy a datové exporty,
+- analytické eventy a dashboardy,
+- přístupy lidí, dodavatelů a servisních účtů.
+
+Příklad inventury:
+
+```text
+Ukončovaná část:
+Starý lead magnet "Checklist pro nový web"
+
+Dopad:
+- URL je v pěti článcích.
+- PDF je odkazované ze tří follow-up e-mailů.
+- Formulář posílá data do CRM.
+- Analytika má event lead_magnet_download.
+- Sales používá PDF jako přílohu po discovery hovoru.
+
+Akce:
+Přesměrovat URL na novou verzi, upravit články a e-maily, vypnout formulářový webhook, zachovat historický event jen v archivním dashboardu, dát sales týmu nový odkaz.
+```
+
+Inventura často odhalí, že "malá změna" má dlouhý ocas. To není důvod ji nedělat. Je to důvod ji udělat vědomě.
+
+### 2. Datová mapa a privacy-first kontrola
+
+Ukončení je dobrá chvíle uklidit data. Ne automaticky mazat všechno, ale rozhodnout, co je potřeba držet, co lze anonymizovat a co už nemá oprávněný důvod existovat.
+
+Položte si otázky:
+
+- Jaká osobní data jsou v ukončované části systému?
+- Kde jsou uložena: databáze, CRM, e-mailing, support, logy, zálohy, exporty?
+- Jaký je účel jejich dalšího držení?
+- Jak dlouho je potřebujeme držet?
+- Kdo k nim má přístup?
+- Lze data exportovat pro zákazníka nebo tým?
+- Lze část dat anonymizovat místo držení v původní podobě?
+- Co se stane se zálohami?
+- Je potřeba upravit privacy texty nebo interní datovou mapu?
+
+Privacy-first přístup tady není jen o ochraně uživatele. Pomáhá i firmě. Čím méně starých dat držíte bez důvodu, tím menší je provozní riziko, tím jednodušší je vysvětlit systém zákazníkovi a tím méně práce vznikne při budoucím auditu.
+
+Praktický výstup může vypadat takto:
+
+```text
+Data ponechat:
+Fakturační záznamy podle účetní povinnosti.
+
+Data archivovat:
+Historické support tikety po dobu interní retenční lhůty.
+
+Data anonymizovat:
+Produktové eventy starší než 12 měsíců, pokud už nejsou potřeba k zákaznické podpoře.
+
+Data smazat:
+Dočasné importní soubory, testovací exporty a nepoužívané formulářové záznamy.
+
+Dokumentace:
+Aktualizovat datovou mapu a seznam dodavatelů.
+```
+
+### 3. Migrační minimum
+
+Při migraci se nejvíc chyb děje v detailech: typy polí, časové zóny, encoding, staré stavy, neplatné e-maily, duplicitní účty, práva uživatelů, napojení na fakturaci a chybějící auditní stopa.
+
+Migrační minimum:
+
+- seznam objektů, které se migrují,
+- mapování starých polí na nová,
+- pravidla pro neplatná, duplicitní nebo chybějící data,
+- testovací migrace na kopii dat,
+- kontrolní vzorek po migraci,
+- rollback nebo alespoň plán ruční nápravy,
+- komunikace pro uživatele a support,
+- datum, kdy starý systém přejde do režimu pouze pro čtení.
+
+Příklad mapování:
+
+```text
+Starý systém:
+company_name, contact_email, plan, last_login, notes
+
+Nový systém:
+tenant.name, user.email, subscription.tier, user.last_seen_at, account.internal_note
+
+Pravidla:
+- Pokud contact_email chybí, účet se nepřenese automaticky a jde do ruční kontroly.
+- Pokud jsou dvě firmy se stejným e-mailem, vytvoří se jedna uživatelská identita a dva tenanty.
+- Interní poznámky se migrují jen tehdy, pokud neobsahují zjevně zbytečné osobní údaje.
+```
+
+Migrační plán nemusí být složitý, ale musí být konkrétní. Věta "data se převedou" nestačí. To je kouzelnická formulka, po které obvykle následuje víkend s excelem a zvýšeným tepem.
+
+### 4. Komunikace se zákazníky a týmem
+
+Uživatelům nevadí změna tolik jako nejistota. Potřebují vědět, co se mění, kdy, proč, co mají udělat a kam se obrátit. Interní tým potřebuje totéž, jen s větším detailem.
+
+Dobrá komunikace obsahuje:
+
+- co se mění,
+- proč se to mění,
+- koho se to týká,
+- co se stane s daty,
+- jaký je termín,
+- co musí uživatel udělat,
+- kde najde pomoc,
+- co se stane, když nic neudělá.
+
+Krátká šablona pro zákazníka:
+
+```text
+Od [datum] přesouváme [část systému] do nové verze.
+
+Co to znamená:
+- Vaše aktivní data zůstanou dostupná v novém prostředí.
+- Staré prostředí bude do [datum] dostupné pouze pro čtení.
+- Nemusíte vytvářet nový účet; pošleme vám přihlašovací odkaz.
+- Historické exporty budou dostupné přes podporu.
+
+Proč to děláme:
+Nová verze zjednodušuje [konkrétní výsledek] a snižuje počet ručních kroků.
+
+Data a soukromí:
+Neměníme účel zpracování dat. Po ukončení přechodného období odstraníme dočasné migrační kopie podle našeho retenčního plánu.
+
+Podpora:
+Pokud narazíte na problém, napište na [kontakt].
+```
+
+Marketingové fráze tady nepomáhají. Při změně provozu je důvěryhodnější přesnost než nadšení. Uživatelé nepotřebují slyšet, že "přinášíte revoluční zážitek". Potřebují vědět, jestli v pondělí najdou svoje data.
+
+### 5. URL, odkazy a archiv
+
+U webů a obsahu má ukončení ještě jednu zvláštní vrstvu: odkazy. URL jsou slib. Když je bez rozmyslu rozbijete, ztratíte důvěru, SEO signály i interní navigaci.
+
+Pravidla:
+
+- Pokud existuje jasná náhrada, nastavte přesměrování na novou URL.
+- Pokud náhrada není, vytvořte archivní stránku s vysvětlením.
+- Pokud obsah nebyl pravdivý nebo bezpečný, stáhněte ho a zapište důvod interně.
+- Opravte interní odkazy, nečekejte, že přesměrování vyřeší všechno.
+- Zkontrolujte sitemap a navigaci.
+- U PDF a statických souborů přidejte verzi, datum nebo poznámku o zastarání.
+- U důležitých změn zachovejte veřejný changelog nebo poznámku v historii verzí.
+
+Příklad:
+
+```text
+Stará URL:
+/sluzby/audit-webu-2024
+
+Nová URL:
+/sluzby/privacy-first-webovy-audit
+
+Akce:
+301 přesměrování, úprava interních odkazů, aktualizace sitemap, poznámka v changelogu, kontrola po 30 dnech v analytice a serverových logách.
+```
+
+Archiv není skládka. Archiv má čtenáři říct, co vidí, proč to zůstalo dostupné a jestli existuje novější verze.
+
+### 6. Přístupy, klíče a dodavatelé
+
+Po migraci nebo ukončení často zůstane největší riziko mimo hlavní aplikaci: staré účty, API klíče, webhooky, integrační tokeny, testovací databáze, exporty a účty dodavatelů.
+
+Zkontrolujte:
+
+- uživatelské účty v ukončeném systému,
+- servisní účty a API klíče,
+- OAuth aplikace a webhooky,
+- přístupy dodavatelů,
+- SSH klíče, deploy tokeny a CI proměnné,
+- platební údaje u starých služeb,
+- automatické fakturace,
+- staré e-mailové aliasy a notifikace.
+
+Praktická sekvence:
+
+1. Přepnout systém do režimu pouze pro čtení.
+2. Ověřit exporty a migraci.
+3. Vypnout nové zápisy a webhooky.
+4. Zrušit servisní tokeny, které už nejsou potřeba.
+5. Odebrat přístupy lidem a dodavatelům.
+6. Zkontrolovat, že se stará služba neplatí automaticky dál.
+7. Zapsat datum a vlastníka poslední kontroly.
+
+Tohle je nudné. Přesně proto se to vyplatí zapsat jako checklist. Paměť týmu je špatný správce tajemství.
+
+### 7. Kontrola po vypnutí
+
+Ukončení nekončí dnem vypnutí. Udělejte krátkou kontrolu po 7, 30 a podle významu změny i po 90 dnech.
+
+Kontrola po 7 dnech:
+
+- Fungují přesměrování?
+- Nepadají formuláře, e-maily nebo integrace?
+- Ví support, co odpovídat?
+- Neobjevily se neočekávané dotazy zákazníků?
+- Nehlásí monitoring chyby ze starého systému?
+
+Kontrola po 30 dnech:
+
+- Jsou staré URL bez významného problému?
+- Byly opravené interní odkazy?
+- Jsou dočasné exporty smazané nebo archivované podle plánu?
+- Byly zrušené zbytečné účty a platby?
+- Odpovídá datová mapa nové realitě?
+
+Kontrola po 90 dnech:
+
+- Lze starý systém definitivně vypnout?
+- Zůstává něco jen kvůli jedné výjimce?
+- Má tato výjimka vlastníka a datum konce?
+- Lze zjednodušit provozní dokumentaci?
+- Co se tým naučil pro příští migraci?
+
+Každá výjimka má mít datum další kontroly. Výjimka bez data je jen starý problém v novém kabátu.
+
+### Codyho komentář
+
+Můj pohled: ukončování je podceňovaná produktová schopnost. Týmy rády oslavují launch, ale málokdo oslaví dobře vypnutou starou integraci, uklizený export, zrušený tracker nebo archivovanou landing page. Přitom právě tam se pozná provozní dospělost. Ne podle toho, kolik věcí umíte spustit, ale kolik věcí umíte ukončit bez ztráty důvěry.
+
+### Checklist přílohy
+
+- Je jasné, jestli jde o archivaci, migraci nebo ukončení?
+- Má změna vlastníka, důvod a datum kontroly?
+- Existuje inventura URL, formulářů, integrací, automatizací a interních odkazů?
+- Je zmapované, jaká data změna ovlivní?
+- Je rozhodnuté, co se ponechá, exportuje, anonymizuje nebo smaže?
+- Má migrace konkrétní mapování dat a testovací průchod?
+- Vědí zákazníci nebo uživatelé, co se mění a co mají udělat?
+- Vědí sales, support a marketing, jak o změně mluvit?
+- Jsou nastavená přesměrování nebo archivní stránky?
+- Je aktualizovaná sitemap, navigace a interní odkazy?
+- Byly vypnuté staré webhooky, API klíče, servisní účty a přístupy?
+- Je zkontrolované, že stará služba neběží a neúčtuje se zbytečně dál?
+- Proběhne kontrola po 7, 30 a případně 90 dnech?
+- Je rozhodnutí zapsané v changelogu, datové mapě nebo provozním listu?
+
+Dobře provedené ukončení nezanechá chaos. Zanechá jasnou stopu, čistší systém a méně věcí, které mohou za půl roku překvapit tým ve chvíli, kdy má řešit něco důležitějšího.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -19271,3 +19609,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AM s 30denní kontrolou po předání: ověření změn v provozu, dat, přístupů, privacy-first závazků, prvních signálů hodnoty a jednoho dalšího kroku.
 - 2026-05-08: Doplněna Příloha AN s kvartální roadmapou zlepšování po 30denní kontrole: rozhodovací otázka, priority, věci mimo rozsah, signály úspěchu, privacy-first brána a měsíční review.
 - 2026-05-08: Doplněna Příloha AO s ročním auditem digitálního systému: strategie, web, produkt, marketing, provoz, data, odpovědnosti a rozhodnutí co ponechat, opravit nebo ukončit.
+- 2026-05-08: Doplněna Příloha AP s plánem ukončení, migrace nebo archivace digitálního systému: inventura dopadu, datová mapa, privacy-first kontrola, migrace, komunikace, URL, přístupy a následné kontroly.
