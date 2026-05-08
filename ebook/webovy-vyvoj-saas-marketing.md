@@ -19440,6 +19440,250 @@ Můj pohled: ukončování je podceňovaná produktová schopnost. Týmy rády o
 
 Dobře provedené ukončení nezanechá chaos. Zanechá jasnou stopu, čistší systém a méně věcí, které mohou za půl roku překvapit tým ve chvíli, kdy má řešit něco důležitějšího.
 
+## Příloha AQ: Obnova důvěry po chybě, incidentu nebo nepovedené kampani
+
+Digitální systém občas selže. Web po deployi ukáže rozbitý formulář. SaaS funkce pustí zákazníka do matoucího stavu. Newsletter odejde se špatným odkazem. Kampaň slíbí víc, než produkt umí dodat. Support odpoví pozdě. Analytika ukáže, že tým měsíc měřil špatnou akci. To nejsou příjemné situace, ale samy o sobě nemusejí zničit důvěru.
+
+Důvěru obvykle neničí jen chyba. Ničí ji mlžení, pomalá reakce, přehazování odpovědnosti, ticho a opakování stejného problému. Proto se vyplatí mít jednoduchý postup obnovy důvěry. Ne jako krizový manuál o padesáti stranách, ale jako pracovní rámec pro chvíli, kdy už nejde jen opravit bug. Je potřeba opravit i vztah mezi týmem, zákazníkem a realitou.
+
+Praktický cíl této přílohy: po chybě rychle stabilizovat situaci, říct pravdu v přiměřeném detailu, minimalizovat dopad na data a zákazníky, poučit se a změnit systém tak, aby se stejný problém nevracel.
+
+### 1. Nejdřív stabilizujte dopad
+
+První reakce nemá být dlouhé vysvětlování. Nejdřív zastavte škodu. Pokud formulář neposílá poptávky, opravte příjem nebo dočasně dejte viditelný e-mail. Pokud integrace posílá špatná data, vypněte zápis a nechte čtení. Pokud kampaň vede na neplatnou stránku, přesměrujte URL a opravte distribuční odkazy.
+
+Stabilizační otázky:
+
+- Co přesně je rozbité?
+- Koho se to týká?
+- Probíhá problém právě teď?
+- Je potřeba něco vypnout, přesměrovat, vrátit nebo zastavit?
+- Dotýká se problém osobních, zákaznických nebo obchodně citlivých dat?
+- Kdo je vlastník reakce na příští hodinu?
+- Jaký je nejmenší krok, který sníží dopad?
+
+Příklad:
+
+```text
+Situace:
+Po úpravě landing page neodchází formulářové zprávy do e-mailu ani CRM.
+
+Stabilizace:
+Na stránku se přidá dočasný kontakt, formulář se označí jako dočasně nedostupný, tým zkontroluje serverové logy a po opravě odešle ruční potvrzení lidem, jejichž zpráva mohla spadnout.
+
+Vlastník:
+Web owner do vyřešení příjmu poptávek.
+```
+
+Tohle je lepší než hodinu řešit, jestli problém patří vývoji, marketingu nebo dodavateli. V první fázi patří komukoli, kdo ho umí zastavit.
+
+### 2. Rozdělte chyby podle dopadu na důvěru
+
+Ne každá chyba vyžaduje stejnou komunikaci. Překlep v článku opravíte a zapíšete. Výpadek přihlášení, ztracený formulář nebo špatně nastavené oprávnění už vyžaduje jasnější postup.
+
+Použijte čtyři úrovně:
+
+| Úroveň | Příklad | Reakce |
+| --- | --- | --- |
+| Drobná chyba | Překlep, špatný interní odkaz, drobná vizuální chyba | Opravit, zapsat podle potřeby |
+| Funkční problém | Nefunkční formulář, rozbitý export, chybné CTA | Opravit, ověřit dopad, informovat dotčený tým |
+| Zákaznický dopad | Uživatel nemohl dokončit klíčový tok, dostal špatnou informaci nebo přišel o čas | Opravit, informovat dotčené lidi, nabídnout další krok |
+| Citlivý incident | Data, oprávnění, bezpečnost, soukromí, fakturace nebo veřejný slib | Zastavit dopad, zapojit odpovědné role, dokumentovat, komunikovat přesně |
+
+Tahle tabulka pomáhá hlavně proti dvěma extrémům. Jedním je panika z každé drobnosti. Druhým je bagatelizace problému, který zákazník vnímá jako zásah do důvěry.
+
+### 3. Komunikujte podle toho, kdo potřebuje rozhodnout
+
+Dobrá komunikace po chybě není divadlo pokory. Je to služba příjemci. Každý potřebuje jiný detail.
+
+Interní tým potřebuje:
+
+- co se stalo,
+- co je dopad,
+- kdo je vlastník,
+- co je dočasné řešení,
+- co se nesmí slibovat zákazníkům,
+- kdy bude další update.
+
+Zákazník potřebuje:
+
+- zda se ho problém týká,
+- co se změnilo pro něj,
+- co má udělat,
+- zda jsou jeho data v pořádku,
+- kdy dostane další zprávu,
+- kde může položit dotaz.
+
+Veřejnost nebo čtenáři potřebují jen tehdy, když je problém veřejný:
+
+- stručné vysvětlení,
+- opravený stav,
+- odkaz na aktuální verzi,
+- případně poznámku v changelogu.
+
+Šablona krátké zprávy zákazníkovi:
+
+```text
+Dobrý den,
+
+dnes mezi [čas] a [čas] nefungoval formulář na stránce [URL]. Vaše zpráva se proto nemusela doručit.
+
+Co jsme udělali:
+- formulář jsme opravili,
+- ověřili jsme příjem nových zpráv,
+- doplnili jsme kontrolu, která nás na podobný problém upozorní.
+
+Co můžete udělat:
+Pokud jste nám v tomto čase psali, pošlete prosím zprávu znovu na [kontakt]. Omlouváme se za zdržení.
+
+Data:
+Podle naší kontroly se problém týkal doručení zprávy, ne zveřejnění nebo sdílení dat.
+```
+
+Tón má být klidný, konkrétní a bez marketingových frází. "Omlouváme se za způsobené komplikace" nestačí, pokud člověk neví, co se vlastně stalo.
+
+### 4. Privacy-first postup při citlivé chybě
+
+Jakmile chyba může souviset s daty, oprávněními, trackingem, formuláři, CRM, supportem, exporty nebo dodavatelem, přepněte do privacy-first režimu.
+
+Krátká kontrola:
+
+- Jaká data mohla být dotčená?
+- Byla data jen nedostupná, nebo mohla být zpřístupněná někomu jinému?
+- Jde o osobní data, zákaznická data, obchodní tajemství nebo interní poznámky?
+- Které systémy a dodavatelé se problému dotýkají?
+- Existují logy, které pomohou určit rozsah bez dalšího zbytečného sběru dat?
+- Kdo má právo rozhodnout o komunikaci?
+- Je potřeba právní nebo bezpečnostní konzultace?
+- Je potřeba aktualizovat datovou mapu, incidentní log nebo seznam rizik?
+
+Praktický princip: nepište do komunikace víc jistoty, než opravdu máte. Lepší je říct "ověřujeme rozsah a další update pošleme v 15:00" než tvrdit, že je všechno v pořádku, a večer to opravovat.
+
+Codyho komentář: privacy-first reakce není o tom, že se tým tváří dokonale. Je o tom, že umí rychle zjistit rozsah, nešíří paniku, nezametá problém pod koberec a nepřidává další sběr dat jen proto, aby si připadal víc pod kontrolou.
+
+### 5. Udělejte krátký post-mortem
+
+Po stabilizaci přijde nejdůležitější část: zjistit, co změnit v systému. Post-mortem nemá hledat viníka. Má hledat mechanismus, který chybu umožnil.
+
+Šablona:
+
+```text
+Název události:
+Datum:
+Vlastník záznamu:
+
+Co se stalo:
+Koho se to dotklo:
+Jak jsme to zjistili:
+Co fungovalo dobře:
+Co selhalo:
+Kořenová příčina:
+Co bylo jen příznak:
+
+Okamžitá oprava:
+Preventivní změna:
+Změna v checklistu, testu nebo dokumentaci:
+Vlastník:
+Termín:
+Datum kontroly:
+```
+
+Dobrý post-mortem rozlišuje příčinu a příznak.
+
+Slabé:
+
+```text
+Příčina:
+Vývojář zapomněl otestovat formulář.
+```
+
+Silnější:
+
+```text
+Příčina:
+Předpublikační checklist neobsahoval smoke test formuláře po deployi a monitoring nekontroloval doručení zprávy do cílové schránky.
+
+Preventivní změna:
+Doplnit smoke test formuláře do launch checklistu, přidat testovací odeslání po deployi a nastavit týdenní kontrolu doručitelnosti.
+```
+
+Druhá verze vede ke změně systému. První verze jen zhorší náladu.
+
+### 6. Přeneste poučení do existujících šablon
+
+Poučení po chybě nesmí zůstat v jedné poznámce. Jinak se za tři měsíce zopakuje. Přeneste ho do míst, kde tým pracuje.
+
+Typické cíle:
+
+- předpublikační checklist,
+- definice hotovo,
+- provozní list,
+- datová mapa,
+- rizikový registr,
+- rozhodovací log,
+- support šablony,
+- onboarding dokumentace,
+- sales enablement materiály,
+- changelog nebo veřejná poznámka k verzi.
+
+Příklad:
+
+```text
+Událost:
+Newsletter odkazoval na starou verzi e-booku.
+
+Poučení:
+Distribuční balíček musí obsahovat kontrolu kanonické URL, veřejné verze a přesměrování.
+
+Změny:
+- doplněna položka do Přílohy M o distribučním plánu,
+- přidána kontrola do QA balíčku,
+- aktualizována šablona newsletteru.
+```
+
+To je rozdíl mezi "už si dáme pozor" a skutečnou změnou. Pozor je slabá strategie. Checklist, vlastník a kontrola jsou lepší.
+
+### 7. Sledujte návrat důvěry
+
+Po chybě nestačí vědět, že je technicky opravená. Potřebujete poznat, jestli se obnovil normální provoz a jestli lidé zase věří dalšímu kroku.
+
+Signály podle situace:
+
+- formulář znovu přivádí relevantní zprávy,
+- support dotazy k problému klesají,
+- zákazníci potvrzují, že náhradní postup funguje,
+- chybovost hlavního toku se vrátila k normálu,
+- lidé klikají na opravenou URL,
+- sales přestal ručně vysvětlovat stejnou chybu,
+- interní tým používá novou kontrolu bez připomínání.
+
+Krátká kontrola po 7 dnech:
+
+```text
+Je oprava stále nasazená?
+Nevznikl vedlejší problém?
+Dorazila další zpětná vazba?
+Byla preventivní změna skutečně dokončena?
+Má někdo pořád nejistotu, co říkat zákazníkům?
+```
+
+Obnova důvěry není pocit autora opravy. Je to stav, kdy dotčení lidé vědí, co se stalo, co se změnilo a proč se mohou znovu spolehnout na další krok.
+
+### Checklist přílohy
+
+- Umí tým rychle určit, co je rozbité a koho se to týká?
+- Existuje vlastník první reakce?
+- Stabilizujete dopad dřív, než píšete dlouhé vysvětlení?
+- Rozlišujete drobné chyby, funkční problémy, zákaznický dopad a citlivé incidenty?
+- Komunikujete jinak interně, zákazníkům a veřejně?
+- Říkáte jen to, co víte, a dáváte čas dalšího updatu?
+- Má citlivá chyba privacy-first kontrolu dat, přístupů, dodavatelů a logů?
+- Děláte krátký post-mortem bez hledání viníka?
+- Převádíte poučení do checklistů, dokumentace, rizikového registru nebo datové mapy?
+- Kontrolujete po týdnu, jestli se důvěra a provoz opravdu vrátily?
+
+Chyba je drahá hlavně tehdy, když po ní systém zůstane stejný. Dobrá reakce chybu nezkrášluje, ale promění ji v lepší proces, přesnější komunikaci a menší riziko pro příště. V digitálním provozu je to jedna z nejpraktičtějších forem důvěry.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -19610,3 +19854,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AN s kvartální roadmapou zlepšování po 30denní kontrole: rozhodovací otázka, priority, věci mimo rozsah, signály úspěchu, privacy-first brána a měsíční review.
 - 2026-05-08: Doplněna Příloha AO s ročním auditem digitálního systému: strategie, web, produkt, marketing, provoz, data, odpovědnosti a rozhodnutí co ponechat, opravit nebo ukončit.
 - 2026-05-08: Doplněna Příloha AP s plánem ukončení, migrace nebo archivace digitálního systému: inventura dopadu, datová mapa, privacy-first kontrola, migrace, komunikace, URL, přístupy a následné kontroly.
+- 2026-05-08: Doplněna Příloha AQ o obnově důvěry po chybě, incidentu nebo nepovedené kampani: stabilizace dopadu, komunikace, privacy-first kontrola, post-mortem, převod poučení do šablon a kontrola návratu důvěry.
