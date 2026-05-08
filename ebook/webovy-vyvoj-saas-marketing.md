@@ -20498,6 +20498,314 @@ Můj pohled: největší produktivní iluze malých týmů je věta "to se něja
 
 Kapacitní plán je ochrana před chaosem převlečeným za ambici. Pomáhá říct ano správným věcem, ne slušně odložit a nebezpečné "ještě to tam přidejme" zastavit dřív, než poškodí provoz, kvalitu nebo důvěru zákazníků.
 
+## Příloha AU: Komunikační plán změny pro web, SaaS a marketing
+
+Změna není hotová ve chvíli, kdy je nasazená. Je hotová ve chvíli, kdy o ní vědí správní lidé, rozumí jejímu dopadu a umí podle ní jednat. Nová landing page nepomůže sales týmu, pokud nikdo neví, jaký slib stránka dává. Nový onboarding nepomůže zákazníkům, pokud support neví, co se změnilo. Nové měření nepomůže rozhodování, pokud tým neví, jaké otázky má z dat číst. A privacy-first úprava nepomůže důvěře, pokud zůstane schovaná v interním commitu.
+
+Komunikační plán změny není PR kampaň. Je to provozní pomůcka, která brání tomu, aby dobrá práce zůstala neviditelná, špatně pochopená nebo používaná jinak, než tým zamýšlel. U malých týmů má být krátký, praktický a napojený na konkrétní změnu.
+
+Praktický výsledek této přílohy: vytvořit jednoduchý komunikační plán pro každou změnu, která ovlivňuje zákazníka, obchod, marketing, produkt, support, provoz nebo práci s daty.
+
+### 1. Nejdřív pojmenujte typ změny
+
+Ne každá změna potřebuje stejnou komunikaci. Oprava překlepu v patičce nepotřebuje briefing pro celý tým. Nový formulář, změna ceníku, nový onboarding, úprava datové stopy nebo změna trialu už ano.
+
+Rozlišujte alespoň pět typů změn:
+
+- obsahová změna: nová stránka, článek, case study, úprava copywritingu,
+- obchodní změna: ceník, nabídka, kvalifikační otázky, follow-up, demo workflow,
+- produktová změna: funkce, onboarding, role, integrace, billing, export,
+- provozní změna: hosting, monitoring, formulář, doména, e-mail, incidentní proces,
+- privacy-first změna: data ve formuláři, analytika, retence, přístupy, externí skripty.
+
+Každý typ změny má jiné publikum. Obsahovou změnu potřebuje znát marketing a sales. Produktovou změnu potřebuje znát support a zákazníci, kterých se dotkne. Provozní změnu potřebuje znát tým, který drží dostupnost. Privacy-first změnu potřebují znát lidé, kteří odpovídají zákazníkům na otázky o datech.
+
+Praktické pravidlo:
+
+```text
+Pokud změna mění slib, proces, data nebo očekávání zákazníka, potřebuje komunikační plán.
+```
+
+### 2. Napište jednu větu změny
+
+První test komunikace je jednoduchý: umí tým říct jednou větou, co se změnilo a proč? Pokud ne, komunikace se rozpadne do detailů, které každý pochopí trochu jinak.
+
+Šablona:
+
+```text
+Měníme [co], aby [pro koho] mohl [lepší výsledek], bez toho aby [důležitá hranice].
+```
+
+Příklady:
+
+```text
+Měníme poptávkový formulář, aby menší B2B firmy mohly rychleji popsat projekt, bez toho aby hned musely posílat zbytečně citlivé interní detaily.
+
+Měníme onboarding pilotního zákazníka, aby tým viděl první hodnotu během prvního týdne, bez toho aby musel předem migrovat celý historický dataset.
+
+Měníme landing page pro SaaS MVP, aby lépe filtrovala firmy s konkrétním workflow, bez toho aby slibovala hotový enterprise produkt.
+```
+
+Jedna věta není marketingová ozdoba. Je to pojistka proti rozmlžení. Když se nevejde do jedné věty, změna možná ještě není dost rozhodnutá.
+
+### 3. Určete publikum podle dopadu
+
+Komunikační plán se často pokazí tím, že tým pošle jednu obecnou zprávu všem. Výsledek: lidé, kteří potřebují detail, ho nedostanou. Lidé, kterých se změna netýká, dostanou šum. A zákazník slyší buď moc technický popis, nebo příliš nadšený slib bez praktického dopadu.
+
+Použijte jednoduchou mapu publika:
+
+```text
+Interně:
+- zakladatelé a vedení,
+- sales,
+- marketing,
+- support,
+- produkt a vývoj,
+- provoz a bezpečnost.
+
+Externě:
+- stávající zákazníci,
+- pilotní zákazníci,
+- noví leadé,
+- partneři,
+- odběratelé RSS nebo newsletteru,
+- veřejní čtenáři webu.
+```
+
+Ke každému publiku napište:
+
+- co musí vědět,
+- co má udělat,
+- co nemá slibovat,
+- kam se má podívat pro detail,
+- kdo odpovídá na otázky.
+
+Příklad pro nový lead magnet:
+
+```text
+Sales:
+Musí vědět, pro koho je materiál, jaký problém řeší a jak navázat bez nátlaku.
+
+Marketing:
+Musí vědět, kde je zdroj pravdy, jaké UTM nebo měření se používá a kdy se vyhodnocuje kvalita leadů.
+
+Support:
+Musí vědět, že stažení materiálu neznamená zákaznický požadavek ani slib individuální konzultace.
+
+Lead:
+Musí vědět, co dostane, proč zadává kontakt a že nebude automaticky tlačený do agresivního prodeje.
+```
+
+### 4. Oddělte interní detail od veřejného sdělení
+
+Interní komunikace má být přesná. Veřejná komunikace má být srozumitelná. To nejsou stejné texty.
+
+Interní detail může obsahovat:
+
+- důvod změny,
+- vazbu na metriku nebo rozhodovací otázku,
+- technické omezení,
+- rizika a rollback,
+- dopad na support,
+- dopad na data a přístupy,
+- vlastníka a datum review.
+
+Veřejné sdělení má obsahovat:
+
+- co se pro člověka mění,
+- jaký problém změna řeší,
+- co má udělat dál,
+- kde najde detail,
+- co se neděje, pokud by mohlo dojít k nedorozumění.
+
+Příklad:
+
+```text
+Interní:
+Zkrátili jsme formulář z 9 polí na 4. Cíl je zvýšit počet kvalifikovaných poptávek bez sběru zbytečných údajů. Kvalitu hodnotíme podle odpovědi sales po prvním kontaktu, ne podle počtu odeslání.
+
+Veřejně:
+Poptávku teď můžete poslat rychleji. Ptáme se jen na základní kontext projektu a další detaily řešíme až v navazující odpovědi.
+```
+
+Privacy-first hodnota tady není schovaná. Kratší formulář je uživatelský přínos i datová disciplína. Jen není potřeba z toho dělat právnickou operu o sedmi dějstvích.
+
+### 5. Připravte minimální komunikační balíček
+
+Pro větší změny se hodí malý balíček, který tým použije napříč kanály. Nemá být dlouhý. Má zabránit tomu, aby každý psal změnu od nuly a trochu jinak.
+
+Šablona balíčku:
+
+```text
+Název změny:
+
+Jedna věta:
+
+Pro koho je důležitá:
+
+Co se mění:
+
+Co se nemění:
+
+Hlavní přínos:
+
+Privacy-first poznámka:
+
+Interní poznámka pro sales/support:
+
+Veřejný krátký text:
+
+Odkaz na zdroj pravdy:
+
+Vlastník:
+
+Review datum:
+```
+
+Ukázka:
+
+```text
+Název změny:
+Nová stránka pro audit SaaS MVP
+
+Jedna věta:
+Zpřesňujeme nabídku auditu SaaS MVP, aby firmy před vývojem viděly rizika v rozsahu, datech, onboardingu a provozu.
+
+Pro koho je důležitá:
+Zakladatelé B2B SaaS, sales, marketing, delivery tým.
+
+Co se mění:
+Nová landing page, nový kvalifikační formulář, nový follow-up e-mail.
+
+Co se nemění:
+Neslibujeme kompletní vývoj aplikace v rámci auditu.
+
+Hlavní přínos:
+Zákazník rychleji pochopí, jestli potřebuje audit před vývojem nebo rovnou implementaci.
+
+Privacy-first poznámka:
+Formulář sbírá jen kontext projektu, ne přístupy, exporty dat ani interní dokumenty.
+
+Interní poznámka pro sales/support:
+Neptejme se na citlivé technické detaily před prvním hovorem. Pokud je zákazník nabízí, pošleme mu bezpečnější postup předání.
+
+Veřejný krátký text:
+Přidali jsme praktickou stránku pro audit SaaS MVP. Pomůže rychle zjistit, kde je riziko v rozsahu, datech, onboardingu a provozu ještě před začátkem vývoje.
+
+Odkaz na zdroj pravdy:
+URL landing page a interní brief.
+
+Vlastník:
+Marketing + delivery lead.
+
+Review datum:
+Za 30 dní podle kvality poptávek.
+```
+
+### 6. Vyberte kanály podle vztahu, ne podle pohodlí
+
+Ne každá změna patří na sociální sítě. Ne každá změna patří do e-mailu. Ne každá změna musí být oznámení. Kanál vybírejte podle toho, komu změna pomůže a jaký vztah s ním máte.
+
+Praktické rozdělení:
+
+- interní changelog: pro tým a budoucí dohledání,
+- Slack, Teams nebo interní chat: pro rychlé upozornění,
+- CRM poznámka: pro sales a follow-up,
+- help centrum nebo dokumentace: pro opakované dotazy,
+- webová stránka: jako veřejný zdroj pravdy,
+- RSS: pro lidi, kteří chtějí sledovat novinky bez algoritmu,
+- e-mail: pro změny, které přímo ovlivní konkrétní zákazníky,
+- sociální sítě: pro distribuci, ne jako jediný zdroj pravdy.
+
+Privacy-first přístup preferuje kanály, které nevyžadují zbytečné sledování člověka. Vlastní URL, RSS a přímý odkaz jsou často čistší než honba za tím, aby se každá změna narodila jako post na platformě. Sociální síť může být ukazatel směru. Zdroj pravdy má být u vás.
+
+### 7. Vysvětlete, co se nemění
+
+Dobrá komunikace změny neříká jen novinku. Říká také hranice. Lidé si totiž změny často vyloží šířeji, než tým zamýšlel.
+
+Příklady:
+
+- Nový formulář neznamená, že bereme každý projekt.
+- Nová integrace neznamená, že podporujeme všechny use casy daného nástroje.
+- Nový pricing neznamená, že rušíme existující dohody bez komunikace.
+- Nový onboarding neznamená, že zákazník musí migrovat všechna data hned první den.
+- Nový obsahový formát neznamená, že přestáváme aktualizovat staré články.
+- Nové měření neznamená, že budeme sbírat osobní data jen proto, že to jde.
+
+Řádek "co se nemění" je malý, ale šetří hodně nedorozumění. Hodí se hlavně u změn, které mohou vyvolat obavu nebo přehnané očekávání.
+
+### 8. Přidejte otázky a odpovědi
+
+U změn, které se dotýkají zákazníka nebo sales procesu, připravte krátké FAQ. Stačí pět otázek. Ne kvůli SEO, ale kvůli konzistenci.
+
+Šablona:
+
+```text
+Otázka:
+
+Krátká odpověď:
+
+Kdy eskalovat:
+
+Odkaz na detail:
+```
+
+Příklad:
+
+```text
+Otázka:
+Musím do formuláře nahrát export dat?
+
+Krátká odpověď:
+Ne. Pro první odpověď stačí stručný popis problému, typu zákazníků a současného workflow.
+
+Kdy eskalovat:
+Pokud zákazník potřebuje předat citlivé technické podklady, nejdřív domluvit bezpečný postup.
+
+Odkaz na detail:
+Interní brief k auditu SaaS MVP.
+```
+
+FAQ je dobré místo pro privacy-first hranice. Ne jako strašení, ale jako klidné vysvětlení: nepotřebujeme sbírat víc, než je nutné pro další krok.
+
+### 9. Naplánujte komunikaci před spuštěním
+
+Komunikace se nemá vymýšlet až po nasazení, kdy už tým řeší první dotazy. Zařaďte ji do definice hotovo.
+
+Minimální checklist před spuštěním:
+
+- Je napsaná jedna věta změny?
+- Víme, koho změna ovlivní?
+- Má sales nebo support interní poznámku?
+- Je veřejný text srozumitelný bez interního kontextu?
+- Existuje zdroj pravdy?
+- Jsou vyjasněné privacy-first dopady?
+- Je jasné, kdo odpovídá na dotazy?
+- Je nastavené review datum?
+
+Pokud chybí komunikace, změna není připravená. Možná je technicky hotová, ale provozně ještě ne.
+
+### Codyho komentář
+
+Můj pohled: týmy často podceňují komunikaci, protože ji považují za měkkou práci. Jenže špatně vysvětlená změna umí zničit i dobré rozhodnutí. Vývoj dodá funkci, marketing ji přejmenuje, sales ji slíbí jinému segmentu, support se o ní dozví od zákazníka a někdo do toho ještě přidá tracker "jen pro jistotu". Gratuluji, máme inovaci s příchutí chaosu. Komunikační plán je levný způsob, jak tomu předejít.
+
+### Checklist přílohy
+
+- Má každá významná změna jednu srozumitelnou větu?
+- Je jasné, zda jde o obsahovou, obchodní, produktovou, provozní nebo privacy-first změnu?
+- Víte, koho změna ovlivní interně i externě?
+- Má každé publikum jasně napsané, co má vědět a udělat?
+- Oddělujete interní detail od veřejného sdělení?
+- Existuje krátký komunikační balíček se zdrojem pravdy?
+- Je uvedené, co se změnou nemění?
+- Má sales a support připravené odpovědi na nejpravděpodobnější otázky?
+- Volíte kanály podle vztahu a dopadu, ne podle pohodlí?
+- Je vlastní URL nebo interní dokument zdrojem pravdy místo sociální sítě?
+- Je privacy-first dopad vysvětlený prakticky a srozumitelně?
+- Je komunikace součástí definice hotovo?
+
+Komunikační plán změny drží web, produkt, marketing a provoz pohromadě. Neprodlužuje práci kvůli ceremonii. Zkracuje cestu od hotové změny k tomu, aby ji lidé správně pochopili, použili a vyhodnotili.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -20672,3 +20980,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AR s incidentním drillem pro web, SaaS a marketing: scénáře, role, časová osa, dopad, komunikace, dokumentace, preventivní změny a opakovaný rytmus.
 - 2026-05-08: Doplněna Příloha AS s dodavatelskou hygienou pro web, SaaS a marketing: registr nástrojů, kritičnost, data, přístupy, licence, exit plán, vstupní brána a kvartální úklid.
 - 2026-05-08: Doplněna Příloha AT s kapacitním plánem pro web, SaaS a marketing: měsíční karta, pevné závazky, rezerva, privacy-first práce, stop pravidla a review dokončení.
+- 2026-05-08: Doplněna Příloha AU s komunikačním plánem změny pro web, SaaS a marketing: typy změn, publika, interní a veřejné sdělení, kanály, FAQ, privacy-first hranice a checklist před spuštěním.
