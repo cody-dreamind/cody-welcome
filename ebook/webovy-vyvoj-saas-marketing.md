@@ -21083,6 +21083,321 @@ Tím se e-book mění z textu na operační systém práce. Každá iterace zlep
 
 Měření dopadu změny má být malé, ale poctivé. Nejde o to mít dokonalou analytiku. Jde o to, aby tým nedělal změny naslepo, nevybíral si vítězné metriky zpětně a nesbíral data jen z nervozity. Dobrá iterace má slib, signál, hranici a rozhodnutí. Bez toho je to jen další položka v changelogu.
 
+## Příloha AW: Převod poznatků do backlogu a další iterace
+
+Poznatek, který neskončí v rozhodnutí, je jen zajímavá poznámka. Tým udělá review, zjistí, že nový formulář přinesl kvalitnější poptávky, onboarding pořád drhne u pozvání kolegů, článek přivádí správné publikum a jeden externí skript nemá jasný přínos. Pak se všichni rozejdou a za měsíc řeší stejné věci znovu. To není nedostatek inteligence. To je chybějící systém pro převod poznatků do práce.
+
+Backlog není skladiště nápadů. Je to místo, kde se poznatek mění na konkrétní rozhodnutí: udělat, odložit, zahodit, ověřit, nebo zařadit do větší změny. U webu, SaaS a marketingu je to obzvlášť důležité, protože signály přicházejí z různých stran: analytika, sales hovory, support, provozní logy, privacy-first kontroly, obsahové review, zákaznické rozhovory a interní zkušenost týmu.
+
+Praktický výsledek této přílohy: vytvořit jednoduchý převodník mezi zjištěním a další iterací, aby tým každý týden věděl, co se naučil, co z toho udělá a co vědomě nechá být.
+
+### 1. Oddělte poznatek od úkolu
+
+Poznatek a úkol nejsou totéž. Poznatek říká, co jsme zjistili. Úkol říká, co uděláme. Když je smícháte, tým začne skákat rovnou k řešení a přeskočí rozhodnutí, jestli problém vůbec stojí za práci.
+
+Slabý zápis:
+
+```text
+Upravit onboarding.
+```
+
+Silnější zápis:
+
+```text
+Poznatek:
+Noví uživatelé se zastaví u pozvání kolegů, protože nerozumí rozdílu mezi rolí správce a člena týmu.
+
+Možná iterace:
+Doplnit do onboarding kroku krátké vysvětlení rolí a výchozí doporučení.
+```
+
+Ještě lepší je přidat důkaz:
+
+```text
+Důkaz:
+3 z 5 posledních support dotazů po registraci se ptaly na oprávnění. V záznamu z pilotu se stejná nejasnost objevila dvakrát.
+```
+
+Takový zápis chrání tým před úkoly, které vznikly jen z dojmu. Ne každá připomínka je problém. Ne každý problém potřebuje novou funkci. Někdy stačí text, někdy odstranění zbytečného kroku, někdy lepší kvalifikace před demo hovorem.
+
+### 2. Používejte kartu poznatku
+
+Karta poznatku má být krátká. Jejím cílem není nahradit projektovou dokumentaci, ale zachytit minimum potřebné pro rozhodnutí.
+
+Šablona:
+
+```text
+Název poznatku:
+
+Zdroj:
+
+Co jsme zjistili:
+
+Koho se to týká:
+
+Důkaz nebo příklad:
+
+Dopad:
+
+Privacy-first dopad:
+
+Možné řešení:
+
+Rozhodnutí:
+
+Vlastník:
+
+Review datum:
+```
+
+Ukázka:
+
+```text
+Název poznatku:
+Leadé z článku o SaaS MVP posílají příliš obecné poptávky.
+
+Zdroj:
+Sales review a formuláře za posledních 30 dní.
+
+Co jsme zjistili:
+Čtenáři rozumí, že potřebují MVP, ale nepopisují konkrétní workflow ani cílového uživatele.
+
+Koho se to týká:
+Zakladatelé B2B SaaS a sales tým.
+
+Důkaz nebo příklad:
+U 7 z 12 poptávek sales musel doplnit otázku na hlavní workflow.
+
+Dopad:
+Delší kvalifikace a méně přesný první návrh dalšího kroku.
+
+Privacy-first dopad:
+Formulář nemá přidávat citlivá pole ani žádat interní dokumenty.
+
+Možné řešení:
+Doplnit do článku a formuláře jednu otázku: "Jaký opakovaný workflow chcete zjednodušit?"
+
+Rozhodnutí:
+Upravit formulář a článek, měřit počet doplňujících otázek sales.
+
+Vlastník:
+Marketing + sales.
+
+Review datum:
+Za 30 dní.
+```
+
+Karta drží poznatek v kontextu. Tým vidí zdroj, dopad i hranici. Díky tomu nevznikne reflex "přidejme další pole", když cílem je naopak sbírat méně a lépe.
+
+### 3. Třiďte poznatky podle rozhodnutí
+
+Backlog se rychle zahltí, pokud do něj padá všechno bez třídění. Proto u každého poznatku zvolte jednu z pěti cest:
+
+- udělat teď: malá jasná změna s vysokým přínosem,
+- ověřit: signál je zajímavý, ale důkaz je slabý,
+- sloučit: poznatek patří k větší rozpracované změně,
+- odložit: problém existuje, ale nemá teď prioritu,
+- zahodit: poznatek není dost důležitý, opakovaný nebo podložený.
+
+Příklady:
+
+```text
+Udělat teď:
+Na stránce služby chybí informace, co se stane po odeslání formuláře. Doplnit jednu větu.
+
+Ověřit:
+Dva lidé zmínili, že nerozumí ceně auditu. Zkontrolovat další hovory, než přepíšeme pricing.
+
+Sloučit:
+Support dotazy k rolím patří do plánované úpravy onboardingu.
+
+Odložit:
+Nápad na interaktivní kalkulačku je zajímavý, ale tento měsíc nemáme kapacitu ani data pro údržbu.
+
+Zahodit:
+Jednorázová připomínka k barvě tlačítka bez dopadu na pochopení nebo akci.
+```
+
+Třídění není administrativní dekorace. Je to obrana proti tomu, aby každý signál automaticky vytvořil práci. Malý tým nepotřebuje větší backlog. Potřebuje jasnější filtr.
+
+### 4. Dejte každému úkolu rozhodovací větu
+
+Jakmile z poznatku vznikne úkol, napište k němu rozhodovací větu. Ta říká, proč úkol existuje a podle čeho poznáte, že byl užitečný.
+
+Šablona:
+
+```text
+Děláme [změna], protože jsme zjistili [poznatek], a čekáme [výsledek], bez toho aby [hranice].
+```
+
+Příklady:
+
+```text
+Doplňujeme vysvětlení rolí do onboardingu, protože noví uživatelé nerozumí rozdílu mezi správcem a členem týmu, a čekáme méně support dotazů po registraci, bez toho aby onboarding chtěl víc dat.
+
+Přepisujeme úvod článku o privacy-first analytice, protože čtenáři nechápou rozdíl mezi agregovaným měřením a reklamním trackingem, a čekáme delší čtení navazujícího checklistu, bez toho aby článek sklouzl do právní mlhy.
+
+Odstraňujeme nepoužívaný chat widget, protože nepřináší kvalifikované dotazy a zpomaluje stránku, a čekáme jednodušší datovou stopu, bez toho aby se zhoršila možnost kontaktu.
+```
+
+Rozhodovací věta šetří čas při review. Když ji úkol nemá, po dokončení se těžko pozná, jestli uspěl. A když ji nejde napsat, úkol možná není připravený.
+
+### 5. Nechte privacy-first poznatky soutěžit férově
+
+Poznatky o soukromí, přístupech, retenci nebo dodavatelích často vypadají méně urgentně než nové obchodní nápady. Nemají hezký screenshot. Nevypadají jako růst. Přesto mohou být důležitější než další landing page, protože chrání důvěru a provozní kontrolu.
+
+Proto u každého backlog review vyhraďte samostatnou část pro privacy-first poznatky:
+
+- sbírá některý formulář víc údajů, než potřebuje?
+- zůstal na webu externí skript bez vlastníka?
+- ukládají se poptávky, exporty nebo logy déle, než dává smysl?
+- má příliš mnoho lidí přístup k analytice, CRM nebo support nástroji?
+- přibyl nový dodavatel bez zápisu v datové mapě?
+- existuje jednodušší varianta, která dá stejný signál s menším sběrem dat?
+
+Praktické pravidlo:
+
+```text
+Každé backlog review musí mít alespoň jednu otázku na datovou stopu, i když se z ní nestane úkol.
+```
+
+Tím se soukromí nepřilepí až na konec projektu. Stane se normální součástí prioritizace. A ano, někdy vyhraje růstová položka. To je v pořádku. Důležité je, aby privacy-first práce nebyla neviditelná.
+
+### 6. Prioritizujte podle dopadu, důkazu a ceny pozornosti
+
+Jednoduché skóre stačí. U každé položky se zeptejte:
+
+- Dopad: co se zlepší, pokud to uděláme?
+- Důkaz: jak jisté je, že problém existuje?
+- Cena pozornosti: kolik koordinace, údržby a následné práce to přidá?
+- Riziko: co se může zhoršit?
+- Privacy-first dopad: sbíráme méně, stejně, nebo víc dat?
+
+Rychlá matice:
+
+```text
+Vysoký dopad + silný důkaz + nízká cena:
+Udělat co nejdřív.
+
+Vysoký dopad + slabý důkaz:
+Ověřit menším experimentem.
+
+Nízký dopad + vysoká cena:
+Odložit nebo zahodit.
+
+Vysoký dopad + vyšší sběr dat:
+Hledat méně invazivní řešení nebo jasně zdůvodnit hranici.
+```
+
+Tento filtr je lepší než hlasitost v místnosti. Pomáhá týmům, kde má každý jiný pohled: sales chce rychlejší follow-up, marketing lepší obsah, produkt méně friction, provoz méně rizika a privacy-first hlas méně zbytečných dat. Backlog má tyto hlasy srovnat na jednu stránku.
+
+### 7. Držte backlog krátký
+
+Dlouhý backlog působí produktivně, ale často jen maskuje nerozhodnost. Pokud má tým stovky položek, ve skutečnosti nemá plán. Má historický sediment.
+
+Praktická pravidla pro údržbu:
+
+- Každá položka má vlastníka nebo je kandidát na smazání.
+- Položky bez pohybu po třech review kolech se odloží nebo smažou.
+- Duplicitní poznatky se sloučí pod jeden problém.
+- Staré nápady bez aktuálního důkazu se neuctívají, jen proto, že přežily dlouho.
+- Backlog má samostatnou sekci "teď", "později", "ověřit" a "zahodit".
+
+Codyho komentář: backlog není muzeum dobrých úmyslů. Pokud v něm položka přežívá rok bez vlastníka, není to strategická trpělivost. Je to digitální prach. Smazání starého úkolu je někdy nejlevnější produktivní čin dne.
+
+### 8. Uzavřete smyčku po dokončení
+
+Když je úkol hotový, vraťte se k původnímu poznatku. Ne kvůli ceremonii. Kvůli učení.
+
+Krátký záznam po dokončení:
+
+```text
+Původní poznatek:
+
+Co jsme udělali:
+
+Co se změnilo:
+
+Co se nezměnilo:
+
+Co jsme se naučili:
+
+Další rozhodnutí:
+```
+
+Ukázka:
+
+```text
+Původní poznatek:
+Leadé z článku o SaaS MVP nepopisovali konkrétní workflow.
+
+Co jsme udělali:
+Doplnili jsme jednu otázku do formuláře a příklad workflow do článku.
+
+Co se změnilo:
+Sales dostává konkrétnější první odpovědi.
+
+Co se nezměnilo:
+Pořád přicházejí dotazy od firem, které hledají hotové krabicové řešení.
+
+Co jsme se naučili:
+Článek musí jasněji říct, kdy dává zakázkové MVP smysl a kdy ne.
+
+Další rozhodnutí:
+Doplnit sekci "kdy to není vhodné" místo přidání dalšího formulářového pole.
+```
+
+Tím se tým učí bez toho, aby z každé změny dělal velkou retrospektivu. Stačí zachytit rozhodnutí a přenést ho do šablon, checklistů nebo další iterace.
+
+### 9. Týdenní rytmus převodu poznatků
+
+Pro malý tým stačí třicet minut týdně. Cíl není vyřešit celý backlog. Cíl je nenechat poznatky hnít v poznámkách, chatech a hlavách lidí.
+
+Agenda:
+
+```text
+1. Nové poznatky za týden.
+2. Tři nejdůležitější signály z webu, produktu, sales nebo supportu.
+3. Privacy-first kontrola datové stopy.
+4. Rozhodnutí: udělat, ověřit, sloučit, odložit, zahodit.
+5. Výběr jedné až tří položek pro další iteraci.
+6. Zápis vlastníka, očekávaného signálu a review data.
+```
+
+Výstup týdne může být velmi malý:
+
+```text
+Vybráno:
+1. Doplnit vysvětlení rolí do onboardingu.
+2. Odstranit starý marketingový skript z landing page.
+3. Ověřit, jestli článek o pricingu přivádí správný segment.
+
+Odloženo:
+Interaktivní kalkulačka ceny, protože nemáme kapacitu na údržbu a validaci.
+
+Zahozeno:
+Nápad na povinný telefon ve formuláři, protože zvyšuje sběr dat a neřeší hlavní problém.
+```
+
+Takový rytmus drží tým v pohybu. Nevyžaduje dokonalou metodiku. Vyžaduje jen poctivost: co jsme zjistili, co s tím uděláme a co necháme být.
+
+### Checklist přílohy
+
+- Oddělujete poznatek od úkolu?
+- Má každý důležitý poznatek zdroj, dopad a příklad?
+- Používáte kartu poznatku pro opakované signály?
+- Třídíte položky na udělat, ověřit, sloučit, odložit a zahodit?
+- Má každý vybraný úkol rozhodovací větu?
+- Je u každé položky jasný privacy-first dopad?
+- Prioritizujete podle dopadu, důkazu, ceny pozornosti a rizika?
+- Mažete nebo archivujete staré položky bez vlastníka?
+- Uzavíráte smyčku po dokončení změny?
+- Převádíte poučení do checklistů, šablon nebo datové mapy?
+- Má tým krátký týdenní rytmus pro převod poznatků do další iterace?
+- Umíte říct, které dobré nápady vědomě neděláte?
+
+Převod poznatků do backlogu je místo, kde se z e-booku stává praktická práce. Nestačí měřit, psát poznámky a mít názory. Tým musí umět vybrat další malou změnu, udělat ji, vyhodnotit a přepsat svůj systém. Tak vzniká pokrok, který není závislý na heroickém redesignu ani na náhodné inspiraci v úterý večer.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -21259,3 +21574,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AT s kapacitním plánem pro web, SaaS a marketing: měsíční karta, pevné závazky, rezerva, privacy-first práce, stop pravidla a review dokončení.
 - 2026-05-08: Doplněna Příloha AU s komunikačním plánem změny pro web, SaaS a marketing: typy změn, publika, interní a veřejné sdělení, kanály, FAQ, privacy-first hranice a checklist před spuštěním.
 - 2026-05-08: Doplněna Příloha AV o měření dopadu změny po spuštění: rozhodovací otázka, hlavní/podpůrný/ochranný signál, baseline, privacy-first minimum dat, review okno a rozhodnutí po vyhodnocení.
+- 2026-05-08: Doplněna Příloha AW o převodu poznatků do backlogu a další iterace: karta poznatku, třídění rozhodnutí, privacy-first priorita, údržba backlogu a týdenní rytmus.
