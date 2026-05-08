@@ -20195,6 +20195,309 @@ Můj pohled: nástroje jsou jako malé organizační půjčky. Na začátku pomo
 
 Dodavatelská hygiena není administrativní zábava pro lidi, kteří mají podezřele rádi tabulky. Je to způsob, jak udržet web, SaaS a marketing ovladatelný. Když víte, komu svěřujete data a proč, můžete stavět rychleji bez toho, aby se z růstu stal nepřehledný sklad náhodných nástrojů.
 
+## Příloha AT: Kapacitní plán pro web, SaaS a marketing
+
+Digitální systém se nerozbíjí jen kvůli špatnému kódu. Často se rozbije kvůli přetížení. Tým slíbí redesign, novou landing page, dvě integrace, tři kampaně, onboarding pro pilotní zákazníky, opravu technického dluhu, bezpečnostní úklid, obsahový plán a ještě "něco s AI". Všechno zní rozumně samostatně. Dohromady je to fronta práce, kterou nikdo reálně neutáhne.
+
+Kapacitní plán je jednoduchý způsob, jak spojit ambici s kalendářem. Nejde o byrokratické plánování na kvartály dopředu. Jde o poctivou odpověď na otázku: kolik změn dokážeme dokončit bez toho, aby se začal rozpadat provoz, kvalita, privacy-first pravidla a běžná péče o zákazníky?
+
+Praktický výsledek této přílohy: vytvořit měsíční kapacitní plán, který rozdělí práci na provoz, růst, produkt, obsah, údržbu a rezervu. Tým díky němu pozná, co může slíbit, co musí odložit a kde už další nápad není příležitost, ale riziko.
+
+### 1. Kapacita není jen počet hodin
+
+Nejhorší kapacitní plán je tabulka, která počítá lidi jako stoprocentně dostupné jednotky. Vývojář není osm hodin denně čistý vývoj. Marketér není osm hodin denně tvorba obsahu. Zakladatel není osm hodin denně strategická práce. Do reality vstupují schůzky, support, opravy, komunikace, review, čekání na podklady, incidenty, administrace, rozhodování a únava.
+
+Prakticky rozlišujte čtyři druhy kapacity:
+
+- soustředěná práce: psaní, vývoj, design, analýza, příprava kampaně,
+- koordinační práce: schůzky, handoff, review, zpětná vazba, rozhodnutí,
+- provozní práce: support, monitoring, opravy, aktualizace, bezpečnost, přístupy,
+- rezerva: neočekávané chyby, změny priorit, čekání na zákazníka, menší incidenty.
+
+Pokud plán počítá jen se soustředěnou prací, bude pořád vypadat optimisticky a pořád selhávat. Zní to banálně, ale mnoho týmů plánuje přesně tak: "Tohle je práce na dva dny" a zapomene, že ty dva dny nikdy neleží vedle sebe jako čistý blok.
+
+Praktické pravidlo:
+
+```text
+Neplánujte měsíc na 100 %. Pokud nemáte rezervu, máte jen skrytý dluh.
+```
+
+Rezerva není lenost. Rezerva je provozní pojištění. Bez ní se každá malá změna stane výmluvou, proč se nestihlo něco důležitého.
+
+### 2. Rozdělte práci podle typu dopadu
+
+Kapacitní plán má chránit systém jako celek. Proto nestačí mít jeden seznam úkolů. Rozdělte práci podle toho, co ovlivňuje.
+
+Základní typy práce:
+
+```text
+Provoz:
+Domény, hosting, DNS, certifikáty, monitoring, zálohy, incidenty, přístupy.
+
+Produkt:
+Funkce, onboarding, billing, integrace, datový model, kvalita aplikace.
+
+Web:
+Stránky, formuláře, copywriting, technické SEO, rychlost, přístupnost.
+
+Marketing:
+Obsah, distribuce, kampaně, sales materiály, CRM hygiena, měření signálů.
+
+Privacy-first a bezpečnost:
+Datová mapa, externí skripty, přístupy, retence, dodavatelé, audit logy.
+
+Údržba:
+Refaktor, aktualizace závislostí, odstranění starého obsahu, dokumentace.
+```
+
+Každý měsíc by měl mít viditelnou rovnováhu. Pokud plán obsahuje jen růstové položky a žádnou údržbu, systém se bude tvářit rychle, ale začne chátrat. Pokud plán obsahuje jen údržbu, obchod a produkt ztratí tah. Pokud plán obsahuje jen produkt, marketing nebude mít co pravdivě vysvětlovat. Pokud plán obsahuje jen marketing, zákazník narazí na produktovou realitu.
+
+Codyho komentář: kapacita je brutálně upřímný překladač strategie. Firma může říkat, že jí záleží na bezpečnosti, datech a kvalitě. Ale jestli v plánu není ani jedna položka pro přístupy, zálohy, datovou mapu nebo odstranění zbytečných skriptů, tak jí na tom zatím záleží hlavně rétoricky.
+
+### 3. Nejdřív odečtěte pevné závazky
+
+Před plánováním nových iniciativ sepište práci, která se musí stát tak jako tak. Tým ji často nevidí, protože není sexy. Jenže právě ona požírá kapacitu.
+
+Pevné závazky mohou být:
+
+- support a odpovědi zákazníkům,
+- běžné opravy chyb,
+- pravidelné aktualizace obsahu,
+- fakturace, billing a administrace předplatných,
+- monitoring, zálohy a kontrola incidentů,
+- bezpečnostní a přístupové revize,
+- příprava newsletteru nebo RSS publikačního rytmu,
+- obchodní follow-upy a demo hovory,
+- měsíční review metrik, backlogu a rizik.
+
+Jednoduchý zápis:
+
+```text
+Měsíc:
+Květen
+
+Pevné závazky:
+- 8 support bloků
+- 4 obsahové aktualizace
+- 1 měsíční review webu a marketingu
+- 1 kontrola přístupů a dodavatelů
+- 2 demo hovory týdně
+- běžné opravy chyb podle priority
+
+Dostupná kapacita pro nové změny:
+Omezená. Vejdou se dvě větší položky a tři menší.
+```
+
+Tento zápis nemusí být přesný na hodiny. Důležité je, aby tým viděl, že nový projekt nepřichází do prázdného prostoru. Přichází do běžícího provozu.
+
+### 4. Použijte měsíční kapacitní kartu
+
+Měsíční kapacitní karta je jednostránkový plán, který drží rozsah při zemi. Měla by se vejít do jednoho dokumentu, bez složitého nástroje.
+
+Šablona:
+
+```text
+Měsíc:
+
+Hlavní rozhodovací otázka:
+
+Pevné závazky:
+
+Větší změny:
+1.
+2.
+
+Menší změny:
+1.
+2.
+3.
+
+Privacy-first a bezpečnostní minimum:
+
+Údržba:
+
+Rezerva:
+
+Co vědomě neděláme:
+
+Kritérium hotovo:
+
+Review datum:
+```
+
+Ukázka:
+
+```text
+Měsíc:
+Květen
+
+Hlavní rozhodovací otázka:
+Zlepší nová stránka pro SaaS MVP kvalitu poptávek?
+
+Pevné závazky:
+Support, demo hovory, měsíční review, kontrola formulářů.
+
+Větší změny:
+1. Přepsat a nasadit landing page pro SaaS MVP.
+2. Upravit onboarding pilotního zákazníka podle aktivační události.
+
+Menší změny:
+1. Zkrátit poptávkový formulář.
+2. Doplnit jeden důkaz do case study.
+3. Odebrat nepoužívaný marketingový skript.
+
+Privacy-first a bezpečnostní minimum:
+Aktualizovat datovou mapu formuláře a zkontrolovat přístupy v CRM.
+
+Údržba:
+Opravit tři staré interní odkazy a sjednotit názvy CTA.
+
+Rezerva:
+Jeden blok týdně bez plánované práce.
+
+Co vědomě neděláme:
+Nový newsletterový nástroj, redesign blogu, další reklamní kanál.
+
+Kritérium hotovo:
+Stránka je nasazená, formulář otestovaný, měření sleduje jen kvalitu poptávky a výsledek je zapsaný v rozhodovacím logu.
+
+Review datum:
+Poslední pracovní pátek v měsíci.
+```
+
+Nejdůležitější řádek je "Co vědomě neděláme". Bez něj se plán změní v přání. Odložené věci nejsou selhání. Jsou cena za dokončení těch důležitých.
+
+### 5. Chraňte privacy-first práci před vytlačením
+
+Privacy-first práce často prohrává, protože nemá naléhavý vizuální výstup. Nová sekce na webu je vidět. Kratší retence logů vidět není. Přístupová revize vidět není. Odstranění starého skriptu vidět není. Jenže právě tyto neviditelné práce drží důvěru a provozní kontrolu.
+
+Proto dejte do každého měsíčního plánu minimálně jednu privacy-first položku. Nemusí být velká.
+
+Příklady:
+
+- projít všechny formuláře a odstranit zbytečná pole,
+- zkontrolovat externí skripty na hlavních stránkách,
+- aktualizovat datovou mapu po změně CRM nebo analytiky,
+- odebrat staré účty v marketingových nástrojích,
+- zkrátit retenci testovacích exportů,
+- doplnit vysvětlení měření do interní dokumentace,
+- ověřit, že nový obsah neodkazuje na zbytečné trackované landing stránky,
+- projít práva lidí, kteří dělají support nebo sales.
+
+Praktické pravidlo:
+
+```text
+Každý růstový plán musí mít jednu položku pro kontrolu datové stopy.
+```
+
+Tím se z privacy-first přístupu nestane brzda na konci. Stane se součástí plánování. A to je mnohem levnější než později zjišťovat, kam se data dostala.
+
+### 6. Nastavte stop pravidla
+
+Kapacitní plán potřebuje pravidla pro zastavení. Jinak se každá nová příležitost tváří jako výjimka, která se "nějak vejde". V malém týmu se obvykle nevejde. Jen vytlačí něco, co nebylo dost hlasité.
+
+Stop pravidla mohou vypadat takto:
+
+- Nová větší položka se přidá jen výměnou za jinou větší položku.
+- Nový externí nástroj se nenasadí, dokud není zapsaná datová stopa a vlastník.
+- Nová kampaň se nespustí, dokud není jasný follow-up a kapacita sales.
+- Nová funkce se nezačne, dokud není rozhodnuté, jak se pozná aktivace.
+- Nový obsah se nepíše, dokud není jasné, kde bude publikovaný, distribuovaný a měřený.
+- Nová metrika se nepřidá, dokud neexistuje rozhodnutí, které podle ní uděláme.
+
+Stop pravidlo není zákaz tvořit. Je to ochrana před tím, aby se tým utopil ve vlastních nápadech.
+
+### 7. Sledujte rozpočet pozornosti, ne jen faktury
+
+Nástroj může být levný v penězích a drahý v pozornosti. Kampaň může mít nízký mediální rozpočet a vysokou cenu v přípravě, follow-upu a vyhodnocení. Funkce může být malá v kódu, ale velká v supportu. Proto kapacitní plán nesmí řešit jen peněžní náklady.
+
+U větších položek si položte pět otázek:
+
+1. Kdo ji připraví?
+2. Kdo ji zkontroluje?
+3. Kdo ji bude provozovat po spuštění?
+4. Kdo odpoví zákazníkům, když se něco pokazí?
+5. Co se kvůli tomu tento měsíc neudělá?
+
+Příklad:
+
+```text
+Nápad:
+Spustit nový lead magnet.
+
+Skrytá kapacita:
+- napsat obsah,
+- vytvořit landing page,
+- připravit formulář,
+- otestovat doručení,
+- zapsat datovou stopu,
+- připravit follow-up,
+- vyhodnotit kvalitu leadů,
+- aktualizovat CRM pravidla,
+- po měsíci rozhodnout, jestli pokračovat.
+
+Rozhodnutí:
+Spustit jen pokud sales potvrdí kapacitu na follow-up a marketing zruší jednu méně důležitou obsahovou položku.
+```
+
+Takto z nápadu nezmizí energie. Jen dostane skutečnou cenu.
+
+### 8. Dělejte měsíční review dokončení
+
+Na konci měsíce nehodnoťte jen to, kolik položek se odškrtlo. Hodnoťte, co bylo opravdu dokončeno a co se naučilo.
+
+Otázky pro review:
+
+- Které změny jsou hotové podle kritéria hotovo?
+- Které položky zůstaly rozpracované a proč?
+- Co bylo podceněné v kapacitě?
+- Kolik práce vzniklo neplánovaně?
+- Která privacy-first nebo bezpečnostní položka se dokončila?
+- Které věci jsme správně odmítli nebo odložili?
+- Co příště zmenšíme, spojíme nebo nebudeme plánovat vůbec?
+
+Výstup review:
+
+```text
+Dokončeno:
+Landing page, kratší formulář, aktualizovaná datová mapa.
+
+Nedokončeno:
+Case study - chybí schválení zákazníka.
+
+Podceněno:
+Follow-up po formuláři zabral víc času než samotná úprava stránky.
+
+Poučení:
+Příště plánovat sales kapacitu společně s marketingovou změnou.
+
+Další měsíc:
+Jedna větší produktová položka, jedna obsahová položka, jedna přístupová revize.
+```
+
+Kapacitní plán se zlepšuje jen tehdy, když tým přizná rozdíl mezi plánem a realitou. Bez toho je každý měsíc stejná pohádka s novým názvem.
+
+### Codyho komentář
+
+Můj pohled: největší produktivní iluze malých týmů je věta "to se nějak zvládne". Někdy ano. Většinou se tím myslí, že někdo večer dodělá práci, kterou nikdo nechtěl naplánovat. Dlouhodobě to není výkon, ale účetní trik s lidskou pozorností. Dobrý kapacitní plán není pomalý. Je pravdivý.
+
+### Checklist přílohy
+
+- Má tým měsíční kapacitní kartu?
+- Jsou v ní pevné závazky, ne jen nové iniciativy?
+- Rozlišujete provoz, produkt, web, marketing, privacy-first práci a údržbu?
+- Má každý měsíc viditelnou rezervu?
+- Je jasné, co tento měsíc vědomě neděláte?
+- Má každá větší položka vlastníka, kritérium hotovo a review datum?
+- Je v plánu alespoň jedna privacy-first nebo bezpečnostní položka?
+- Mají nové nástroje, kampaně, formuláře a metriky stop pravidla?
+- Počítáte cenu pozornosti, ne jen faktury?
+- Hodnotíte na konci měsíce skutečné dokončení, ne jen aktivitu?
+- Převádíte poučení z review do dalšího plánu?
+- Chrání plán tým před rozpracovaností, kterou nikdo neumí dokončit?
+
+Kapacitní plán je ochrana před chaosem převlečeným za ambici. Pomáhá říct ano správným věcem, ne slušně odložit a nebezpečné "ještě to tam přidejme" zastavit dřív, než poškodí provoz, kvalitu nebo důvěru zákazníků.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -20368,3 +20671,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AQ o obnově důvěry po chybě, incidentu nebo nepovedené kampani: stabilizace dopadu, komunikace, privacy-first kontrola, post-mortem, převod poučení do šablon a kontrola návratu důvěry.
 - 2026-05-08: Doplněna Příloha AR s incidentním drillem pro web, SaaS a marketing: scénáře, role, časová osa, dopad, komunikace, dokumentace, preventivní změny a opakovaný rytmus.
 - 2026-05-08: Doplněna Příloha AS s dodavatelskou hygienou pro web, SaaS a marketing: registr nástrojů, kritičnost, data, přístupy, licence, exit plán, vstupní brána a kvartální úklid.
+- 2026-05-08: Doplněna Příloha AT s kapacitním plánem pro web, SaaS a marketing: měsíční karta, pevné závazky, rezerva, privacy-first práce, stop pravidla a review dokončení.
