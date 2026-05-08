@@ -23257,6 +23257,213 @@ Archiv má chránit paměť, ne vytvářet muzeum. Pokud se do něj nikdo nikdy 
 
 Měření přínosu šablon má držet tým při zemi. Šablony nejsou cíl. Jsou lešení. Jakmile nepomáhají stavět lepší web, produkt, marketing nebo provoz, mají se upravit, zjednodušit nebo sundat. Dospělý systém se nepozná podle počtu dokumentů, ale podle toho, kolik jasných rozhodnutí díky nim vzniklo.
 
+## Příloha BE: Redakční zkrácení první veřejné verze
+
+Dlouhý e-book může být silný zdroj důvěry. Může ale také čtenáře unavit dřív, než mu pomůže. Když rukopis roste postupně, snadno se do něj dostanou skvělé části, dobré části, opakované části a části, které byly užitečné při psaní, ale veřejné verzi už překážejí. Redakční zkrácení proto není kosmetika. Je to produktová práce s pozorností čtenáře.
+
+Cílem zkrácení není udělat z e-booku leták. Cílem je zachovat hodnotu a snížit tření. Čtenář má rychleji pochopit, kde začít, kterou část použít pro své rozhodnutí a co může přeskočit. Pokud musí nejdřív projít les příloh, aby našel jednu šablonu pro audit webu, e-book mu práci neusnadnil. Jen mu přidal další dokument do světa, kde dokumentů už teď není málo.
+
+Redakční zkrácení řešte jako samostatnou iteraci:
+
+1. Určete, pro koho je první veřejná verze.
+2. Vyberte hlavní čtenářské trasy.
+3. Označte části podle užitečnosti a duplicity.
+4. Zkraťte, slučte nebo přesuňte opakující se obsah.
+5. Nechte praktické checklisty a šablony snadno najít.
+6. Zkontrolujte, že privacy-first hodnota zůstala viditelná, ne jen právně přítomná.
+
+### 1. Vyberte primárního čtenáře
+
+První veřejná verze nemusí sloužit všem stejně. Pokud se snažíte uspokojit zakladatele SaaS, marketingového manažera, vývojáře, obchodníka, agenturní tým i právní audit najednou, výsledkem bude těžký rukopis bez jasného vstupu. To neznamená, že ostatní role nejsou důležité. Znamená to, že první verze potřebuje dominantní perspektivu.
+
+Vyberte jednu hlavní větu:
+
+```text
+Tato verze e-booku je primárně pro:
+
+Hlavní situace čtenáře:
+
+Rozhodnutí, se kterým mu má pomoci:
+
+Co po přečtení udělá jinak:
+```
+
+Příklad:
+
+```text
+Tato verze e-booku je primárně pro: zakladatele a malé B2B týmy v Evropě.
+
+Hlavní situace čtenáře: mají web, první produkt nebo službu, ale digitální systém roste chaoticky.
+
+Rozhodnutí, se kterým mu má pomoci: co zlepšit jako první, aby web, produkt a marketing začaly fungovat jako jeden systém.
+
+Co po přečtení udělá jinak: vybere jednu praktickou iteraci, zkrátí datovou stopu a nastaví měsíční rytmus zlepšování.
+```
+
+Taková věta okamžitě pomůže při škrtání. Část, která je zajímavá, ale nepomáhá této situaci, může jít do pozdější verze, blogového článku nebo interní šablony.
+
+### 2. Udělejte mapu čtenářských tras
+
+Dlouhý e-book nemusí každý číst od první stránky. Veřejná verze by měla nabídnout několik tras podle situace. Trasa je kratší než obsah a praktičtější než kapitola. Říká čtenáři: pokud řešíte toto, začněte tady.
+
+Základní trasy:
+
+- Nový web: kapitoly o dobrém webu, technickém základu, obsahové architektuře, SEO, privacy-first provozu a checklist pro nový web.
+- První SaaS MVP: kapitoly o aplikaci, MVP, architektuře, datovém modelu, integracích, bezpečnosti a checklist pro MVP.
+- Marketing a prodej: positioning, pricing, onboarding, obsahový marketing, lead generation, e-mail, RSS, prodejní web a sales proces.
+- Provozní stabilita: bezpečnost, support, škálování, technický audit, provozní list, rizikový registr a incidentní drill.
+- Privacy-first audit: privacy-first web, analytika, formuláře, logy, dodavatelé, datová mapa a měření bez zbytečného sledování.
+
+Každá trasa by měla mít jednu větu výsledku:
+
+```text
+Po průchodu touto trasou budete mít:
+```
+
+Příklad:
+
+```text
+Po průchodu trasou Privacy-first audit budete mít seznam sbíraných dat, externích skriptů, retencí, dodavatelů a tři konkrétní kroky, jak snížit datovou stopu bez ztráty užitečného měření.
+```
+
+Trasy pomáhají zachovat rozsah e-booku, aniž by čtenář musel nést celý rozsah najednou.
+
+### 3. Použijte čtyři štítky pro každou část
+
+Při redakčním průchodu nehodnoťte text pocitově. Každé kapitole, podkapitole nebo příloze dejte jeden ze čtyř štítků:
+
+- Ponechat: část přímo pomáhá hlavnímu čtenáři rozhodnout nebo konat.
+- Zkrátit: část je užitečná, ale opakuje známý vzorec nebo je příliš rozvláčná.
+- Přesunout: část je dobrá, ale patří do přílohy, blogu, interní šablony nebo pozdější verze.
+- Vyřadit: část nepřidává rozhodnutí, příklad, checklist ani důkaz.
+
+U každé části doplňte důvod. Bez důvodu se škrtání změní v náladu.
+
+```text
+Část:
+Štítek: ponechat / zkrátit / přesunout / vyřadit
+Důvod:
+Co čtenář získá:
+Co se stane, když část zmizí:
+```
+
+Užitečná otázka: kdyby tato část zmizela, zhorší se schopnost čtenáře udělat lepší rozhodnutí? Pokud ne, je pravděpodobně kandidát na zkrácení nebo přesun.
+
+### Codyho komentář
+
+Můj pohled: autor se často bojí škrtat, protože si pamatuje práci, kterou text stál. Čtenář si ji nepamatuje. Čtenář platí pozorností jen za hodnotu, kterou dostane teď. To je trochu kruté, ale velmi zdravé pravidlo. Každý odstavec by měl pomáhat rozhodnout, vysvětlit, ověřit, použít nebo prodat. Pokud jen dokazuje, že autor měl ještě jednu myšlenku, má problém.
+
+### 4. Hledejte opakování podle funkce, ne podle slov
+
+Opakování nemusí vypadat stejně. Jedna kapitola může říkat "měřte jen to, co vede k rozhodnutí", jiná "analytika má odpovídat na otázky" a třetí "dashboard bez rozhodnutí je šum". Všechno může být pravda. Ale pokud se stejná myšlenka vrací bez nového kontextu, čtenář začne mít pocit, že chodí v kruhu.
+
+Hledejte opakování v těchto funkcích:
+
+- stejná definice problému,
+- stejný privacy-first argument,
+- stejný postup rozhodování,
+- stejný typ checklistu,
+- stejná varování před vanity metrikami,
+- stejný příklad formuláře, měření nebo dodavatelského rizika.
+
+Ne každé opakování je špatně. Některé principy se mají vracet, protože drží knihu pohromadě. Rozdíl je v tom, jestli se vracejí s novou praktickou aplikací. Privacy-first pohled v kapitole o analytice je jiný než v kapitole o supportu, protože má jiný datový tok a jiné riziko. Pokud se ale jen znovu říká "nesbírejte zbytečná data", zkraťte to a odkažte na konkrétní playbook.
+
+### 5. Zkraťte dlouhé části podle pevného postupu
+
+Při zkracování nepřepisujte náhodně. Použijte pevný postup:
+
+1. Zachovejte hlavní rozhodovací větu.
+2. Nechte jeden konkrétní příklad.
+3. Nechte checklist nebo šablonu.
+4. Odstraňte druhý a třetí argument, pokud říkají totéž.
+5. Přesuňte detail do přílohy, pokud je užitečný jen pro část čtenářů.
+6. Doplňte odkaz na související kapitolu místo opakování vysvětlení.
+
+Příklad zkrácení:
+
+Původní funkce části:
+"Vysvětlit, proč je nutné před přidáním nástroje vědět, jaká data sbírá, kam je posílá a kdo k nim má přístup."
+
+Zkrácená verze:
+"Každý nový nástroj projděte třemi otázkami: jaká data sbírá, kde končí a kdo k nim má přístup. Pokud odpověď neznáte, nástroj zatím nepatří do produkce."
+
+Tím se neztratí princip. Jen zmizí ozvěna.
+
+### 6. Oddělte veřejný e-book od interního pracovního balíčku
+
+Některé části jsou výborné pro tým, ale těžké pro veřejného čtenáře. Například dlouhé interní šablony, scorecards, revizní rytmy a příklady vyplněných karet mohou být pro zákazníka příliš detailní. To neznamená, že jsou zbytečné. Znamená to, že možná patří do samostatného pracovního balíčku.
+
+Rozdělte materiál na tři vrstvy:
+
+- Veřejný e-book: vysvětluje principy, dává příklady a vede k prvním rozhodnutím.
+- Pracovní šablony: samostatné kopírovatelné dokumenty pro audit, workshop, datovou mapu, backlog nebo experiment.
+- Interní delivery kit: detailní postupy, předávací checklisty, scorecards a provozní rytmus pro tým, který službu doručuje.
+
+Toto rozdělení pomáhá prodeji i čtení. Veřejný e-book nemusí nést každou provozní šablonu v plné délce. Může na ně odkazovat jako na doplňky.
+
+### 7. Chraňte privacy-first hodnotu při zkrácení
+
+Při škrtání dejte pozor, aby z rukopisu nezmizel charakter. Privacy-first hodnota se nemá opakovat mechanicky v každé druhé větě, ale má zůstat viditelná v klíčových rozhodnutích:
+
+- jak vybíráte hosting a dodavatele,
+- jak nastavujete analytiku,
+- co sbíráte ve formulářích,
+- jak řešíte support a customer success,
+- jak měříte marketing,
+- jak připravujete export, retenci a mazání dat,
+- jak komunikujete se zákazníkem.
+
+Redakční pravidlo:
+
+```text
+Každá hlavní trasa musí obsahovat alespoň jedno konkrétní privacy-first rozhodnutí, ne jen obecné prohlášení.
+```
+
+Příklad:
+
+- Místo "dbáme na soukromí" napište "u poptávkového formuláře sbíráme jen e-mail, cíl a volitelné URL; telefon necháváme až na domluvený hovor".
+- Místo "měříme eticky" napište "měříme odeslání formuláře a kvalifikované poptávky, ne individuální pohyb člověka po každé stránce".
+- Místo "preferujeme evropské nástroje" napište "u každého dodavatele zapisujeme region zpracování, přístup k datům, retenci a exit plán".
+
+Konkrétnost přežije zkrácení lépe než deklarace.
+
+### 8. Udělejte zkrácenou veřejnou osnovu
+
+Po redakčním průchodu si napište cílovou veřejnou osnovu. Nemusí kopírovat pracovní rukopis.
+
+Jedna možná struktura:
+
+```text
+1. Proč web, produkt a marketing patří k sobě
+2. Jak poznat dobrý web
+3. Technický a privacy-first základ
+4. Od webu k SaaS MVP
+5. SaaS provoz, bezpečnost a metriky
+6. Marketing, prodej a distribuce bez závislosti na platformách
+7. Praktické checklisty pro první iteraci
+8. Devadesátidenní plán zlepšení
+9. Pracovní šablony ke stažení
+```
+
+Tato osnova není lepší jen proto, že je kratší. Je lepší, pokud odpovídá prvnímu veřejnému použití. Plná interní verze může zůstat bohatší. Veřejná verze má být průchodná.
+
+### 9. Redakční průchod jako checklist
+
+Před publikací projděte rukopis jedním praktickým checklistem:
+
+- Má první veřejná verze jasně určeného primárního čtenáře?
+- Existují čtenářské trasy podle situace, ne jen dlouhý obsah?
+- Je u každé hlavní části jasné, jaké rozhodnutí pomáhá udělat?
+- Jsou duplicitní vysvětlení sloučená nebo zkrácená?
+- Zůstaly v textu konkrétní příklady a checklisty?
+- Jsou dlouhé šablony oddělené od hlavního čtení?
+- Je privacy-first hodnota viditelná v praktických rozhodnutích?
+- Jsou zdroje a aktuální tvrzení ponechané u částí, kde jsou potřeba?
+- Má závěr jasný další krok, ne jen hezké rozloučení?
+- Dá se e-book použít během jedné pracovní iterace, nebo vyžaduje hrdinskou výdrž?
+
+Redakční zkrácení je úklid před tím, než pozvete lidi dovnitř. Nejde o to schovat práci. Jde o to ukázat ji v pořadí, které čtenáři pomůže. Dobrý e-book nemusí říct všechno najednou. Musí říct správnou věc ve chvíli, kdy podle ní někdo může jednat.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -23441,3 +23648,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha BB s kontrolou použitelnosti šablon po zavedení: inventura reálného použití, stavy použitelnosti, skóre tření, privacy-first kontrola dat a checklist.
 - 2026-05-08: Doplněna Příloha BC s provozním rytmem pro šablony a playbooky: spouštěče, týdenní/měsíční/kvartální review, pracovní fronta, vlastnictví, privacy-first brána a checklist.
 - 2026-05-08: Doplněna Příloha BD o měření přínosu šablon a playbooků: rozhodnutí, signály hodnoty, zastavená práce, privacy-first metrika, scorecard a archivace.
+- 2026-05-08: Doplněna Příloha BE o redakčním zkrácení první veřejné verze: primární čtenář, čtenářské trasy, štítky pro části, práce s duplicitami, oddělení šablon a privacy-first kontrola.
