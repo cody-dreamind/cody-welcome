@@ -17720,6 +17720,462 @@ Produktizovaná služba má být nudná v dobrém slova smyslu. Zákazník nemá
 
 Převod pilotu do opakovatelného delivery systému je okamžik, kdy se z dobrého nápadu stává obchodní aktivum. Ne proto, že všechno zabalíte do hezké šablony, ale protože umíte službu dodat víckrát, s podobnou kvalitou, bez zbytečného sběru dat a bez toho, aby tým pokaždé shořel na detailech. To je přesně typ práce, který e-book nemá jen popisovat, ale umožnit.
 
+## Příloha AL: Předávací balíček po auditu, MVP nebo produktizované službě
+
+Dobrá práce nekončí odesláním dokumentu, nasazením webu nebo předáním odkazu na demo. Končí až ve chvíli, kdy zákazník rozumí výsledku, ví, co má udělat dál, má přístup k potřebným podkladům a tým ví, co bylo slíbeno, co bylo dodáno a co zůstává mimo rozsah. Bez předávacího balíčku se i kvalitní výstup může ztratit v e-mailu, v poznámkách z hovoru nebo v hlavě člověka, který projekt vedl.
+
+Předání je součást produktu. U webu chrání provoz a další údržbu. U SaaS MVP chrání data, přístupy a rozhodnutí po pilotu. U produktizované služby chrání opakovatelnost a důvěru. Pokud zákazník po spolupráci neví, kde jsou výstupy, kdo má přístupy, jak se data mažou, jak se navazuje další etapou a co přesně bylo doporučeno, práce není uzavřená. Je jen doručená.
+
+Předávací balíček má tři cíle:
+
+1. Převést výstup do rozhodnutí: co zákazník ví a co má udělat.
+2. Převést projekt do provozu: kde jsou systémy, data, přístupy a odpovědnosti.
+3. Převést spolupráci do dalšího kroku: co pokračuje, co končí a co se vědomě odkládá.
+
+### Kdy balíček připravit
+
+Předávací balíček použijte pokaždé, když výstup může mít provozní nebo obchodní dopad. Typicky:
+
+- po technickém auditu webu,
+- po spuštění nového webu nebo landing page,
+- po dokončení SaaS MVP nebo pilotu,
+- po delivery produktizované služby,
+- po nastavení analytiky, CRM, newsletteru nebo marketingového systému,
+- po privacy-first auditu nástrojů a datových toků,
+- po větším refaktoru, migraci nebo změně dodavatele.
+
+Nejde o velikost projektu. Jde o následky. I malá změna formuláře může mít dopad na leady, CRM, souhlas, retenci a support. Pokud má výstup pokračovat v provozu, potřebuje předání.
+
+Codyho komentář: předání je místo, kde se často pozná rozdíl mezi "dodali jsme" a "zákazník to opravdu může používat". Odkaz na Google Drive není předávací proces. Je to digitální obdoba položení krabice přede dveře.
+
+### Jednostránková šablona
+
+Začněte jednou stránkou. Detailní přílohy mohou být odkazy pod ní.
+
+```text
+Předávací balíček:
+Projekt:
+Datum předání:
+Vlastník na straně dodavatele:
+Vlastník na straně zákazníka:
+
+1. Co bylo dodáno:
+2. Proč to bylo dodáno:
+3. Hlavní rozhodnutí nebo doporučení:
+4. Co je mimo rozsah:
+5. Kde jsou výstupy:
+6. Jak se výstup používá:
+7. Přístupy a odpovědnosti:
+8. Data a privacy-first poznámky:
+9. Provozní kontrola:
+10. Rizika a otevřené otázky:
+11. Doporučený další krok:
+12. Datum další kontroly:
+```
+
+Tato stránka má fungovat i za měsíc, kdy už nikdo nemá v hlavě celý kontext. Když ji otevře nový člověk, má pochopit, co se stalo a kde pokračovat.
+
+### 1. Co bylo dodáno
+
+Popište výstup konkrétně. Ne "audit", "web", "MVP" nebo "strategie". To jsou jen názvy. Zákazník potřebuje vědět, co přesně existuje.
+
+Slabé:
+
+```text
+Dodali jsme technický audit webu.
+```
+
+Silnější:
+
+```text
+Dodali jsme technický audit hlavního webu example.cz: rychlost, dostupnost, SEO indexace, formuláře, externí skripty, privacy-first analytika a provozní rizika. Výstup obsahuje 18 nálezů, z toho 4 prioritní opravy před kampaní.
+```
+
+U webu napište:
+
+- jaké stránky nebo komponenty vznikly,
+- jaké formuláře a integrace byly nastavené,
+- jaké SEO a sdílecí prvky jsou hotové,
+- jaká analytika běží,
+- kde je provozní dokumentace.
+
+U SaaS MVP napište:
+
+- jaký workflow je funkční,
+- jaké role existují,
+- jaká data se ukládají,
+- jak se měří aktivace,
+- jak funguje export nebo ukončení pilotu,
+- co je ruční a co automatizované.
+
+U služby napište:
+
+- jaký problém řešila,
+- jaké vstupy zákazník dodal,
+- jaký výstup dostal,
+- jaké doporučení je nejdůležitější,
+- co je připravené pro další iteraci.
+
+### 2. Proč to bylo dodáno
+
+Výstup bez účelu rychle zestárne. Do předání proto napište, jaké rozhodnutí měl podpořit.
+
+Příklad:
+
+```text
+Cílem auditu bylo ověřit, jestli je web připravený na placenou B2B kampaň. Největší riziko nebyla rychlost, ale nejasná stránka služby a kontaktní formulář bez potvrzení dalšího kroku.
+```
+
+Nebo:
+
+```text
+Cílem MVP bylo ověřit, jestli account manažer dokáže vytvořit sdílený klientský report bez pátečního ručního e-mailu. Pilot neměl ověřovat billing, enterprise SSO ani plnou integraci s účetnictvím.
+```
+
+Tato část chrání rozsah. Pokud se později někdo zeptá, proč výstup neobsahuje další modul, odpověď je jasná: nebyl součástí ověřovaného rozhodnutí.
+
+### 3. Hlavní rozhodnutí a doporučení
+
+Předávací balíček nesmí být jen archiv. Má říct, co z výstupu plyne. Vyberte maximálně tři až pět hlavních doporučení.
+
+Struktura doporučení:
+
+```text
+Doporučení:
+Důvod:
+Dopad:
+Další krok:
+Priorita:
+```
+
+Příklad:
+
+```text
+Doporučení:
+Zkrátit kontaktní formulář na e-mail, URL projektu a krátký kontext.
+
+Důvod:
+Současný formulář žádá telefon, rozpočet, velikost firmy a marketingový souhlas už při prvním kontaktu. To zvyšuje tření a sbírá data dřív, než jsou potřeba.
+
+Dopad:
+Nižší tření, lepší důvěra, menší datová stopa.
+
+Další krok:
+Upravit formulář a měřit jen contact_started a contact_submitted bez obsahu zprávy v analytice.
+
+Priorita:
+P1 před další kampaní.
+```
+
+Nedávejte zákazníkovi dvacet stejně důležitých doporučení. To je jen elegantní způsob, jak neříct, co má udělat první. Pokud je vše priorita, nic není priorita. Ano, tahle věta je stará. Pořád má pravdu, mrcha.
+
+### 4. Co je mimo rozsah
+
+Mimo rozsah neznamená "zapomněli jsme". Znamená to "vědomě jsme to nedělali". Tato sekce chrání obě strany.
+
+Příklad:
+
+```text
+Mimo rozsah této iterace:
+- redesign celého webu,
+- implementace nového CRM,
+- placené kampaně,
+- právní revize privacy policy,
+- automatizace reportů mimo pilotní workflow.
+```
+
+U SaaS MVP:
+
+```text
+Mimo rozsah pilotu:
+- veřejná registrace,
+- billing,
+- SSO,
+- plné API,
+- pokročilé role,
+- import z účetního systému.
+```
+
+Tato část je zvlášť důležitá u produktizovaných služeb. Pomáhá udržet opakovatelnost. Pokud po každé zakázce potichu přibude dalších deset "malých" věcí, služba přestane být produktizovaná a vrátí se do zakázkového chaosu.
+
+### 5. Kde jsou výstupy
+
+Zákazník nemá hledat výstupy v pěti e-mailech. V předání uveďte stabilní místa.
+
+```text
+Výstupy:
+- Finální report:
+- Provozní list:
+- Datová mapa:
+- Backlog doporučení:
+- Zdrojové soubory:
+- Repozitář:
+- Demo / staging:
+- Produkce:
+- Nahrávka předávacího hovoru:
+```
+
+U každého odkazu napište, kdo k němu má přístup. Pokud výstup obsahuje citlivá data, nepoužívejte veřejně sdílené odkazy bez omezení. Přístup je součást předání, ne vedlejší detail.
+
+Privacy-first pravidlo: předávací balíček nesmí obsahovat hesla, tokeny, neveřejné API klíče ani osobní údaje, které nejsou pro předání nutné. Místo toho napište, kde se tajemství bezpečně spravují a kdo může přístup udělit.
+
+### 6. Jak se výstup používá
+
+Předání má říct nejen co existuje, ale jak s tím pracovat.
+
+Pro audit:
+
+```text
+Jak používat audit:
+1. Nejdřív vyřešit P0 a P1 nálezy.
+2. P2 nálezy naplánovat do měsíčního review.
+3. P3 nálezy řešit jen při související práci.
+4. Po každé opravě ověřit konkrétním testem uvedeným u nálezu.
+```
+
+Pro web:
+
+```text
+Jak používat nový web:
+1. Nové články publikovat přes CMS a kontrolovat title, description, OG a RSS.
+2. Nové formuláře nepřidávat bez datové mapy.
+3. Externí skripty přidávat jen přes rozhodovací log.
+4. Každý měsíc projít poptávky a otázky zákazníků.
+```
+
+Pro SaaS MVP:
+
+```text
+Jak používat pilot:
+1. Každý nový tenant založit ručně podle pilotního checklistu.
+2. Aktivaci měřit eventem activation_reached.
+3. Support dotazy štítkovat podle onboarding, role, data, export, bug.
+4. Po 30 dnech udělat rozhodnutí: pokračovat, zúžit, změnit workflow, nebo zastavit.
+```
+
+Bez této části může zákazník dostat dobrý výstup a stejně ho nepoužít. Ne proto, že by byl líný. Protože výstup bez návodu snadno prohraje s běžným provozem.
+
+### 7. Přístupy a odpovědnosti
+
+Předání musí vyřešit, kdo co vlastní. Nestačí říct "předáno".
+
+Tabulka:
+
+```text
+Oblast | Vlastník | Přístup kde | Co má dělat | Revize
+Doména / DNS | | | změny domény, DNS záznamy | kvartálně
+Hosting | | | provoz, deploy, logy | měsíčně
+CMS | | | obsah, stránky, média | průběžně
+Analytika | | | eventy, dashboard, retence | měsíčně
+CRM / formuláře | | | poptávky, odpovědi, retence | měsíčně
+Produkt / aplikace | | | roadmapa, bugy, release | týdně
+Support | | | dotazy, štítky, eskalace | týdně
+```
+
+Zvlášť zkontrolujte:
+
+- přístupy jsou na firemní účty, ne osobní účty dodavatele,
+- dvoufaktorové ověření je zapnuté u kritických nástrojů,
+- bývalé nebo dočasné přístupy mají datum odebrání,
+- admin přístup má minimum lidí,
+- existuje náhradník pro kritické oblasti.
+
+Předání bez odebrání nepotřebných přístupů není hotové. Je jen optimistické.
+
+### 8. Data a privacy-first poznámky
+
+Tato část shrnuje datovou stopu výstupu. Nemusí nahrazovat plnou datovou mapu, ale musí říct hlavní věci.
+
+```text
+Jaká data vznikají:
+Kde se ukládají:
+Kdo k nim má přístup:
+Jak dlouho se drží:
+Jak se exportují:
+Jak se mažou:
+Které externí služby je zpracovávají:
+Co se záměrně neměří:
+```
+
+Příklad:
+
+```text
+Web měří agregovanou návštěvnost, kliky na hlavní CTA a odeslané formuláře. Do analytiky neposíláme e-mail, telefon ani text zprávy. Obsah poptávky jde jen do CRM a e-mailové schránky pro odpověď. Newsletter souhlas je oddělený od kontaktního formuláře. RSS je dostupné bez registrace.
+```
+
+U SaaS pilotu:
+
+```text
+Pilot ukládá e-maily členů týmu, názvy projektů, stav workflow, komentáře a auditní události. Produktová analytika měří dokončení workflow a aktivaci, ne obsah komentářů. Po pilotu zákazník dostane export dat a podle rozhodnutí se pracovní data smažou nebo převedou do další fáze.
+```
+
+Tato část je obchodně důležitá. Zákazník si nemá domýšlet, co se s daty děje. Když to umíte říct stručně, působíte dospěleji než desetistránkovým dokumentem bez provozní reality.
+
+### 9. Provozní kontrola
+
+Před uzavřením udělejte poslední kontrolu hlavních toků. Zapište výsledek do balíčku.
+
+Pro web:
+
+- homepage se načítá přes HTTPS,
+- kontaktní formulář odešle testovací zprávu,
+- potvrzení po odeslání je srozumitelné,
+- e-mail dorazí správnému příjemci,
+- `robots.txt`, `sitemap.xml` a RSS fungují,
+- hlavní CTA fungují na mobilu,
+- analytika měří domluvené eventy,
+- nejsou přidané nezdokumentované externí skripty.
+
+Pro SaaS MVP:
+
+- testovací uživatel se přihlásí,
+- vytvoří hlavní objekt,
+- dokončí hlavní workflow,
+- pozve člena týmu,
+- role omezí přístup podle očekávání,
+- export funguje,
+- audit log zaznamená důležité akce,
+- monitoring a logy zachytí testovací průchod.
+
+Pro službu:
+
+- finální výstup má jasné priority,
+- doporučení mají vlastníky nebo navržené vlastníky,
+- zákazník rozumí dalšímu kroku,
+- citlivé podklady jsou smazané, archivované nebo vrácené podle dohody,
+- backlog navazujících věcí je oddělený od hotového výstupu.
+
+### 10. Rizika a otevřené otázky
+
+Nepředstírejte, že předáním zmizela všechna rizika. Lepší je říct je otevřeně.
+
+```text
+Riziko:
+Dopad:
+Doporučené opatření:
+Kdo má rozhodnout:
+Do kdy:
+```
+
+Příklad:
+
+```text
+Riziko:
+CRM region a retence nejsou potvrzené ve smluvní dokumentaci.
+
+Dopad:
+Není možné zákazníkům přesně vysvětlit celý datový tok poptávek.
+
+Doporučené opatření:
+Ověřit dokumentaci CRM, doplnit datovou mapu a případně změnit nastavení retence.
+
+Kdo má rozhodnout:
+Obchodní vlastník + technický vlastník.
+
+Do kdy:
+Před další kampaní.
+```
+
+Otevřená otázka není ostuda. Ostuda je tvářit se, že neexistuje, dokud se nevrátí jako urgentní problém s předmětem e-mailu "rychlý dotaz".
+
+### 11. Doporučený další krok
+
+Každé předání má končit jedním doporučeným dalším krokem. Ne deseti možnostmi. Jedním hlavním krokem a případně dvěma podpůrnými.
+
+Příklad po auditu:
+
+```text
+Další krok:
+Do 10 pracovních dnů opravit P1 nálezy: formulář, hero text služby, odstranění starého trackeru a základní monitoring. Potom spustit měsíční review kvality poptávek.
+```
+
+Příklad po MVP:
+
+```text
+Další krok:
+Spustit 30denní pilot se třemi zákazníky podle připravené pilotní karty. Nové funkce nepřidávat, dokud nebude vyhodnocena aktivace a support dotazy.
+```
+
+Příklad po produktizované službě:
+
+```text
+Další krok:
+Převést tři nejčastější doporučení do veřejné prodejní stránky služby a připravit anonymizovanou ukázku výstupu pro sales hovory.
+```
+
+Tím se z předání stane most, ne konec. Konec bez dalšího kroku je často jen hezky zabalená pauza.
+
+### Předávací e-mail
+
+Krátký předávací e-mail může vypadat takto:
+
+```text
+Předmět:
+Předání výstupů: [projekt]
+
+Dobrý den,
+
+posílám předávací balíček k projektu [název]. Najdete v něm finální výstupy, hlavní doporučení, provozní poznámky, datové toky a navržený další krok.
+
+Nejdůležitější doporučení:
+1.
+2.
+3.
+
+Doporučený další krok:
+[jedna konkrétní věta]
+
+Privacy-first poznámka:
+[stručně: co se měří / kde jsou data / co se záměrně nesbírá]
+
+Navrhuji krátký předávací hovor, kde projdeme priority, otevřené otázky a odpovědnosti.
+```
+
+E-mail nemá suplovat balíček. Má ho uvést a říct, co je nejdůležitější. Pokud příjemce musí hledat hlavní doporučení v příloze na straně 37, předání selhalo v ergonomii.
+
+### Předávací hovor
+
+Předávací hovor držte krátký a rozhodovací. Typicky 45 až 60 minut.
+
+Agenda:
+
+```text
+0-10 min: Kontext a co bylo dodáno
+10-25 min: Hlavní doporučení a priority
+25-35 min: Data, přístupy, provoz a otevřené otázky
+35-45 min: Další krok, vlastníci a termíny
+45-60 min: Dotazy a potvrzení předání
+```
+
+Po hovoru pošlete stručné shrnutí:
+
+- co zákazník převzal,
+- co se rozhodlo,
+- kdo vlastní další krok,
+- co se má zkontrolovat příště,
+- jak budou řešena data a přístupy.
+
+Bez tohoto shrnutí se i dobrý hovor rychle rozpustí v běžném provozu. Lidská paměť je krásná věc, ale jako projektový systém je dost drzá.
+
+### Předávací checklist
+
+- Je jasně napsané, co bylo dodáno?
+- Je vysvětlené, proč výstup vznikl a jaké rozhodnutí podporuje?
+- Jsou hlavní doporučení omezená na tři až pět priorit?
+- Je popsáno, co bylo mimo rozsah?
+- Jsou všechny výstupy na stabilních místech s omezeným přístupem?
+- Neobsahuje balíček hesla, tokeny ani zbytečné osobní údaje?
+- Je jasné, jak se výstup používá v provozu?
+- Jsou popsány přístupy, vlastníci a odpovědnosti?
+- Je shrnuté, jaká data vznikají, kde leží, kdo k nim má přístup a jak dlouho se drží?
+- Proběhl smoke test hlavních toků nebo kontrola výstupu?
+- Jsou rizika a otevřené otázky pojmenované, ne zametené pod koberec?
+- Je doporučený jeden hlavní další krok?
+- Proběhl nebo je naplánovaný předávací hovor?
+- Po předání existuje krátké shrnutí rozhodnutí a odpovědností?
+
+Předávací balíček je malá věc, která výrazně zvyšuje šanci, že práce přežije vlastní doručení. Zákazník nemusí hádat. Dodavatel nemusí znovu vysvětlovat. Tým má paměť. Data mají hranice. Další krok má vlastníka. To je docela slušný výsledek na dokument, který se vejde na pár stránek.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -17885,3 +18341,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha AI o produktizované službě postavené na e-booku: výběr problému, výsledek, rozsah, delivery bloky, privacy-first brána, prodejní stránka a checklist.
 - 2026-05-07: Doplněna Příloha AJ s pilotem produktizované služby pro první zákazníky: hypotéza, výběr účastníků, pilotní nabídka, vstupní brána, privacy-first práce s daty, měření a rozhodnutí po pilotu.
 - 2026-05-07: Doplněna Příloha AK o převodu pilotu do opakovatelného delivery systému: post-pilot inventura, fáze delivery, delivery kit, role, kapacita, standard výstupu, smyčka zlepšování a škálování.
+- 2026-05-08: Doplněna Příloha AL s předávacím balíčkem po auditu, MVP nebo produktizované službě: výstupy, doporučení, přístupy, data, provozní kontrola, rizika, další krok a předávací checklist.
