@@ -19684,6 +19684,261 @@ Obnova důvěry není pocit autora opravy. Je to stav, kdy dotčení lidé věd�
 
 Chyba je drahá hlavně tehdy, když po ní systém zůstane stejný. Dobrá reakce chybu nezkrášluje, ale promění ji v lepší proces, přesnější komunikaci a menší riziko pro příště. V digitálním provozu je to jedna z nejpraktičtějších forem důvěry.
 
+## Příloha AR: Incidentní drill pro web, SaaS a marketing
+
+Incidentní drill je krátké cvičení, ve kterém tým nanečisto projde nepříjemnou situaci: výpadek webu, nefunkční formulář, chybu v kampani, rozbitý export, únik interního odkazu, selhání integrace nebo podezření na problém s daty. Cíl není hrát divadlo na krizový štáb. Cíl je zjistit, jestli tým ví, kdo rozhoduje, kde jsou informace, jak se ověřuje dopad a co se řekne zákazníkům.
+
+Většina malých týmů nemá incidentní problém proto, že by neuměla opravit bug. Problém je v tom, že při stresu neví, kde začít. Někdo hledá přístupy, někdo řeší wording, někdo píše do chatu deset domněnek, někdo už opravuje produkci, ale nikdo neví, zda se problém týká dat. Incidentní drill dělá z paniky pracovní postup.
+
+Praktický výsledek této přílohy: jednou za měsíc nebo kvartál projít jeden realistický scénář, ověřit provozní dokumentaci, zapsat mezery a převést je do checklistů, runbooků nebo backlogu. Bez velkých prezentací. Bez hrdinského pózování. Prostě zkouška, jestli systém drží.
+
+### 1. Vyberte scénář, který by opravdu bolel
+
+Drill má smysl jen tehdy, když simuluje reálné riziko. Nevybírejte scénář podle toho, co se dobře vypráví na poradě. Vyberte situaci, která by zastavila obchod, poškodila důvěru nebo vytvořila privacy-first problém.
+
+Dobré scénáře pro web:
+
+- homepage běží, ale kontaktní formulář neodesílá zprávy,
+- po deployi zmizela hlavní CTA z mobilní verze,
+- důležitá landing page vrací chybu 404,
+- sitemap obsahuje staré URL a přesměrování nefungují,
+- analytika měsíc neměřila hlavní konverzi,
+- starý tracker se vrátil přes externí embed.
+
+Dobré scénáře pro SaaS:
+
+- uživatelé se nemohou přihlásit,
+- nově vytvořený tenant nevidí data nebo vidí špatný prázdný stav,
+- billing webhook se zpozdil a část účtů má špatný tarif,
+- export obsahuje neúplná data,
+- integrace posílá duplicitní události,
+- support dostal dotaz, který může znamenat problém s oprávněním.
+
+Dobré scénáře pro marketing:
+
+- newsletter odešel se špatným odkazem,
+- placená kampaň vede na zastaralou nabídku,
+- case study obsahuje údaj, který neměl být veřejný,
+- lead magnet sbírá víc údajů, než bylo schváleno,
+- sales používá staré PDF bez aktuální privacy informace,
+- sociální post slibuje funkci, která ještě není dostupná.
+
+Scénář napište jednou větou. Pokud potřebuje půl stránky vysvětlování, je moc široký.
+
+```text
+Scénář:
+Po ranním deployi nefunguje formulář na hlavní produktové stránce. Web běží, ale zprávy se nedostávají do CRM ani e-mailu.
+```
+
+### 2. Určete role dřív, než začne cvičení
+
+Incidentní drill se rozpadne, když všichni dělají všechno. I malý tým potřebuje jednoduché role. Jedna osoba může mít více rolí, ale odpovědnosti musí být jasné.
+
+Minimum rolí:
+
+- vlastník incidentu: drží přehled, rozhoduje o prioritě a ukončení drillu,
+- technický vlastník: ověřuje systém, logy, deploy, integrace a opravu,
+- komunikační vlastník: připravuje interní a zákaznické sdělení,
+- privacy vlastník: hlídá data, přístupy, dodavatele, retenci a nutnost eskalace,
+- zapisovatel: vede časovou osu, rozhodnutí a úkoly.
+
+V malém týmu to může vypadat takto:
+
+```text
+Vlastník incidentu:
+Produktový lead
+
+Technický vlastník:
+Vývojář, který zná deploy a integrace
+
+Komunikace:
+Marketing nebo customer success
+
+Privacy kontrola:
+Osoba odpovědná za datovou mapu
+
+Zápis:
+Kdokoli mimo technickou opravu
+```
+
+Důležité je, aby technický vlastník nemusel současně psát veřejné sdělení a držet časovou osu. Když je člověk v logách, nemá být zároveň tiskový mluvčí, právní analýza a lidský semafor v jednom.
+
+### 3. Spusťte časovou osu
+
+Drill začíná ve chvíli, kdy někdo nahlásí problém. Od té chvíle zapisujte čas, domněnky, ověření a rozhodnutí. Ne kvůli byrokracii. Kvůli tomu, že paměť během incidentu rychle vyrábí kreativní fikci.
+
+Jednoduchá časová osa:
+
+```text
+09:00 - Support hlásí, že nepřišla žádná poptávka z formuláře od včerejšího deploye.
+09:03 - Vlastník incidentu potvrzuje drill a přiděluje role.
+09:07 - Technický vlastník ověřuje formulář na produkci: odeslání končí chybou.
+09:11 - Privacy vlastník potvrzuje, že zatím nejde o zveřejnění dat, ale může jít o ztracené zprávy.
+09:15 - Komunikace připravuje interní update pro sales a support.
+09:22 - Dočasně přidán kontaktní e-mail na stránku.
+09:35 - Nalezena chyba v CRM webhooku po změně proměnné prostředí.
+09:48 - Oprava nasazena, testovací zpráva dorazila do CRM i e-mailu.
+10:00 - Sepsán seznam preventivních změn.
+```
+
+Zápis má být konkrétní. Ne "řešilo se CRM", ale "testovací zpráva nedorazila do CRM". Později se podle toho lépe hledá, co se skutečně stalo a co si tým jen myslel.
+
+### 4. Ověřte dopad, ne jen příznak
+
+Technická chyba je často viditelná jen jako příznak. Formulář nefunguje, ale skutečná otázka zní: kolik zpráv mohlo zmizet, zda obsahovaly osobní data, jestli existuje serverový záznam, zda je možné lidi kontaktovat a jestli se problém týkal jen jedné stránky.
+
+Kontrola dopadu:
+
+- Od kdy problém pravděpodobně běží?
+- Které URL, funkce nebo zákaznické segmenty ovlivňuje?
+- Je problém aktivní, nebo už skončil?
+- Existují logy nebo fronta, které ukazují ztracené pokusy?
+- Dotýká se problém osobních nebo zákaznických dat?
+- Je potřeba dočasné řešení pro nové návštěvníky?
+- Které týmy musí okamžitě vědět, co neslibovat?
+
+Příklad:
+
+```text
+Příznak:
+Formulář neodesílá zprávy.
+
+Dopad:
+Od deploye v 18:20 mohlo selhat 7 odeslání. Serverový log obsahuje čas a technickou chybu, ale neukládá obsah zpráv. Návštěvníci nedostali potvrzení. Sales a support mají používat náhradní kontaktní adresu do potvrzení opravy.
+```
+
+Privacy-first pohled tady pomáhá. Tým rychle rozliší, zda jde o ztrátu dostupnosti, ztrátu doručení, chybné zpracování nebo možné zpřístupnění dat. Každá situace má jinou komunikaci a jiné další kroky.
+
+### 5. Připravte tři zprávy
+
+I u interního cvičení napište zprávy tak, jako by je bylo možné použít. Ne nutně poslat. Napsat. Tím zjistíte, jestli máte fakta, nebo jen mlhavý pocit, že "něco nějak opravíme".
+
+Interní update:
+
+```text
+Stav:
+Kontaktní formulář na produktové stránce po včerejším deployi neodesílal zprávy do CRM.
+
+Dopad:
+Ověřujeme období od 18:20. Zatím nejde o zveřejnění dat, ale některé zprávy se nemusely doručit.
+
+Dočasný postup:
+Používejte kontakt [e-mail]. Nové zákazníky neposílejte na formulář, dokud nepotvrdíme opravu.
+
+Další update:
+V 10:30.
+```
+
+Zákaznická zpráva, pokud je potřeba:
+
+```text
+Dobrý den,
+
+mezi [čas] a [čas] nemusel správně fungovat formulář na stránce [URL]. Pokud jste nám v tomto období psali a nepřišlo vám potvrzení, pošlete prosím zprávu znovu na [kontakt].
+
+Formulář jsme opravili a doplnili kontrolu doručení po deployi. Podle dostupných logů problém nesouvisel se zveřejněním dat, ale s doručením zprávy.
+```
+
+Veřejná poznámka, pokud je problém veřejný:
+
+```text
+Krátká provozní poznámka:
+Dnes dopoledne jsme opravili doručování formuláře na stránce [URL]. Pokud jste formulář použili a nedostali potvrzení, napište prosím na [kontakt]. Děkujeme za trpělivost.
+```
+
+Zpráva bez faktů je nebezpečná. Zpráva s příliš mnoha interními detaily také. Cílem je dát příjemci možnost rozhodnout: mám něco udělat, týká se mě to, kdy přijde další informace?
+
+### 6. Zkontrolujte nástroje, přístupy a dokumentaci
+
+Drill často ukáže, že problém není v samotném incidentu, ale v přípravě. Přístup do monitoringu má člověk, který je na dovolené. Runbook odkazuje na starou URL. CRM webhook je pojmenovaný tak, že nikdo neví, co dělá. Datová mapa nezmiňuje nový lead magnet. To jsou skvělé nálezy, protože je lze opravit dřív, než opravdu hoří termín.
+
+Při drillu zkontrolujte:
+
+- je jasné, kde se ověřuje dostupnost webu,
+- existuje přístup k deploy logům a chybovým logům,
+- někdo umí vrátit poslední funkční verzi,
+- formuláře mají testovací scénář,
+- CRM nebo e-mailing má vlastníka,
+- datová mapa odpovídá realitě,
+- seznam dodavatelů obsahuje aktuální kontakty,
+- support ví, kde najít poslední schválenou odpověď,
+- monitoring hlídá skutečný tok, ne jen HTTP 200.
+
+Poslední bod je důležitý. Web může vracet `200 OK` a přitom obchodně nefungovat. Pokud formulář, demo registrace nebo checkout nejde dokončit, samotná dostupnost homepage je slabá útěcha.
+
+### 7. Ukončete drill rozhodnutím
+
+Drill nekončí větou "dobrý, prošli jsme si to". Končí rozhodnutím, co se změní. Jinak je to jen netradiční meeting s horším cateringem.
+
+Závěrečný záznam:
+
+```text
+Scénář:
+Nefunkční formulář po deployi.
+
+Co fungovalo:
+Tým rychle našel vlastníka incidentu a dočasný kontakt.
+
+Co selhalo:
+Runbook neměl krok pro test doručení do CRM. Monitoring hlídal jen dostupnost stránky, ne funkčnost formuláře.
+
+Preventivní změny:
+1. Doplnit smoke test formuláře do launch checklistu.
+2. Přidat testovací odeslání po deployi.
+3. Zapsat vlastníka CRM webhooku do provozního listu.
+4. Upravit support šablonu pro situaci ztracené poptávky.
+
+Vlastníci a termíny:
+[jméno] do [datum]
+```
+
+Každá preventivní změna musí mít vlastníka. Úkol bez vlastníka je přání. Přání se v backlogu tváří pracovitě, ale samo se neudělá.
+
+### 8. Opakujte s rozumným rytmem
+
+Incidentní drill nemusí být dlouhý. Pro malý tým stačí 45 až 60 minut. Důležité je pravidelné střídání scénářů.
+
+Navržený rytmus:
+
+- měsíčně: jeden krátký scénář z webu, SaaS nebo marketingu,
+- kvartálně: větší scénář s daty, přístupy nebo dodavatelem,
+- po každém skutečném incidentu: krátká retrospektiva a aktualizace šablon,
+- před velkým launchem: drill hlavního obchodního toku.
+
+Střídejte typy problémů:
+
+- dostupnost,
+- doručitelnost,
+- data a oprávnění,
+- billing,
+- integrace,
+- obsah a veřejná komunikace,
+- privacy-first riziko,
+- dodavatelský výpadek.
+
+Tým se tím učí jednu důležitou věc: incident není výjimka z práce. Je to součást provozu. Když je provoz připravený, chyba pořád bolí, ale méně často se z ní stane chaos.
+
+### Codyho komentář
+
+Můj pohled: drill je nejlepší levná pojistka proti falešné jistotě. Dokud si tým nanečisto nezkusí najít přístup, napsat zákaznickou zprávu a ověřit datový dopad, jen doufá, že to při skutečném problému nějak dopadne. Doufání je fajn u počasí. U produkčního webu, SaaS a zákaznických dat bych radši viděl checklist.
+
+### Checklist přílohy
+
+- Máte vybraný jeden realistický scénář s obchodním nebo důvěrovým dopadem?
+- Jsou předem určené role: vlastník incidentu, technika, komunikace, privacy kontrola a zápis?
+- Vede někdo časovou osu s ověřenými fakty a rozhodnutími?
+- Rozlišujete příznak a skutečný dopad?
+- Umíte určit, zda se problém týká osobních, zákaznických nebo obchodně citlivých dat?
+- Máte dočasný postup, který sníží dopad na nové návštěvníky nebo zákazníky?
+- Připravili jste interní, zákaznickou a případně veřejnou zprávu?
+- Ověřili jste, že provozní dokumentace, přístupy a kontakty odpovídají realitě?
+- Hlídá monitoring klíčový tok, nejen dostupnost homepage?
+- Končí drill seznamem preventivních změn s vlastníky a termíny?
+- Přenášíte výstupy do launch checklistu, runbooků, datové mapy nebo support šablon?
+- Opakujete drill pravidelně a střídáte typy scénářů?
+
+Incidentní drill není o pesimismu. Je to praktická forma respektu k zákazníkům, týmu i datům. Když víte, jak reagovat na špatný den, nemusíte předstírat, že žádný špatný den nikdy nepřijde.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -19855,3 +20110,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AO s ročním auditem digitálního systému: strategie, web, produkt, marketing, provoz, data, odpovědnosti a rozhodnutí co ponechat, opravit nebo ukončit.
 - 2026-05-08: Doplněna Příloha AP s plánem ukončení, migrace nebo archivace digitálního systému: inventura dopadu, datová mapa, privacy-first kontrola, migrace, komunikace, URL, přístupy a následné kontroly.
 - 2026-05-08: Doplněna Příloha AQ o obnově důvěry po chybě, incidentu nebo nepovedené kampani: stabilizace dopadu, komunikace, privacy-first kontrola, post-mortem, převod poučení do šablon a kontrola návratu důvěry.
+- 2026-05-08: Doplněna Příloha AR s incidentním drillem pro web, SaaS a marketing: scénáře, role, časová osa, dopad, komunikace, dokumentace, preventivní změny a opakovaný rytmus.
