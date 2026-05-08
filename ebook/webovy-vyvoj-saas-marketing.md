@@ -21398,6 +21398,332 @@ Takový rytmus drží tým v pohybu. Nevyžaduje dokonalou metodiku. Vyžaduje j
 
 Převod poznatků do backlogu je místo, kde se z e-booku stává praktická práce. Nestačí měřit, psát poznámky a mít názory. Tým musí umět vybrat další malou změnu, udělat ji, vyhodnotit a přepsat svůj systém. Tak vzniká pokrok, který není závislý na heroickém redesignu ani na náhodné inspiraci v úterý večer.
 
+## Příloha AX: Experimentální karta pro jednu další změnu
+
+Backlog je užitečný jen do chvíle, kdy z něj tým umí vybrat jednu položku a bezpečně ji převést do praxe. Jakmile se z backlogu stane dlouhý seznam přání, začne mít opačný efekt: uklidňuje tým pocitem, že se na věcech pracuje, i když se ve skutečnosti jen přesouvají poznámky mezi sloupci.
+
+Experimentální karta je malý formát pro jednu konkrétní změnu. Neřeší roční strategii, kompletní redesign ani velkou produktovou sázku. Řeší otázku: co teď změníme, proč to děláme, jak poznáme dopad a kde jsou hranice, za které nepůjdeme.
+
+Používejte ji pro změny typu:
+
+- upravit jednu landing page,
+- zjednodušit formulář,
+- doplnit důkaz důvěry do prodejní stránky,
+- změnit onboardingový krok,
+- otestovat nový obsahový formát,
+- odstranit zbytečný tracker nebo widget,
+- přepsat část ceníku,
+- upravit kvalifikační otázku v sales procesu,
+- vyzkoušet jiný follow-up po demu.
+
+Karta má chránit tým před dvěma extrémy. První extrém je improvizace: "zkusíme něco a uvidíme". Druhý extrém je přepálená metodika, kde malá změna potřebuje víc dokumentace než práce. Správná karta se vejde na jednu stránku a dá se přečíst během pěti minut.
+
+### 1. Rozhodovací otázka
+
+Každý experiment začíná otázkou, ne úkolem. Úkol říká, co uděláme. Otázka říká, co se potřebujeme dozvědět.
+
+Slabé zadání:
+
+```text
+Přidat sekci s benefity na homepage.
+```
+
+Silnější zadání:
+
+```text
+Pomůže konkrétní sekce s typickými výsledky zákazníkům rychleji pochopit, jestli je služba pro ně?
+```
+
+Rozdíl je praktický. U slabého zadání může tým splnit úkol a nic se nenaučit. U silnějšího zadání je jasné, že změna má ověřit porozumění a relevanci. Možná se ukáže, že sekce benefitů nestačí a problém je v nejasném segmentu. To je užitečnější poznatek než další hezký blok na stránce.
+
+Dobrá rozhodovací otázka:
+
+- je konkrétní,
+- souvisí s chováním zákazníka nebo kvalitou signálu,
+- dá se vyhodnotit v rozumném čase,
+- nevyžaduje sběr zbytečných osobních dat,
+- vede k dalšímu rozhodnutí.
+
+### 2. Hypotéza bez divadla
+
+Hypotéza nemusí znít vědecky. Stačí poctivá věta:
+
+```text
+Věříme, že [změna] pomůže [komu] udělat [konkrétní krok], protože [důvod].
+Poznáme to podle [signál].
+```
+
+Příklad pro webovou službu:
+
+```text
+Věříme, že doplnění anonymizovaného příkladu projektu pomůže technickým ředitelům rychleji posoudit důvěryhodnost služby, protože dnes nevidí konkrétní průběh spolupráce. Poznáme to podle kvalitnějších poptávek a častějších dotazů na úvodní workshop místo obecných dotazů na cenu.
+```
+
+Příklad pro SaaS onboarding:
+
+```text
+Věříme, že kratší první nastavení pomůže novým uživatelům vytvořit první projekt během jedné návštěvy, protože současný onboarding chce příliš mnoho detailů před první hodnotou. Poznáme to podle vyššího podílu účtů, které vytvoří první projekt a pozvou alespoň jednoho kolegu.
+```
+
+Hypotéza nemá dokazovat, že tým měl pravdu. Má dát týmu rámec, podle kterého pozná, co se naučil. Když experiment nevyjde, ale zlepší rozhodování, nebyl zbytečný.
+
+### 3. Rozsah změny
+
+Největší riziko malých experimentů je tiché bobtnání. Začnete jednou úpravou formuláře a za dvě hodiny už někdo navrhuje redesign celé stránky, nové ikony, novou integraci a změnu CRM. Takhle nevzniká rychlost. Takhle vzniká bažina.
+
+Do karty napište tři hranice:
+
+```text
+Uděláme:
+
+Neuděláme:
+
+Nesmí se rozbít:
+```
+
+Příklad:
+
+```text
+Uděláme:
+Doplníme na stránku SaaS MVP jeden konkrétní anonymizovaný příklad workflow, upravíme hlavní CTA a přidáme otázku "Jaký proces chcete převést do aplikace?" do formuláře.
+
+Neuděláme:
+Nebudeme měnit celý design stránky, nepřidáme nový lead magnet, nezavedeme další analytický nástroj.
+
+Nesmí se rozbít:
+Formulář musí zůstat krátký, stránka se nesmí zpomalit a nesmíme sbírat citlivé informace o interních procesech bez jasného důvodu.
+```
+
+Třetí řádek je nejdůležitější. Připomíná, že zlepšení jedné metriky nesmí rozbít důvěru, výkon, přístupnost nebo privacy-first standard.
+
+### 4. Signály úspěchu a ochranné signály
+
+Experiment nepotřebuje dvacet metrik. Potřebuje jeden hlavní signál, několik podpůrných signálů a ochranné signály, které říkají, kdy změna škodí.
+
+Struktura:
+
+```text
+Hlavní signál:
+
+Podpůrné signály:
+
+Ochranné signály:
+
+Co nebudeme měřit:
+```
+
+Příklad:
+
+```text
+Hlavní signál:
+Vyšší podíl kvalifikovaných poptávek, které popisují konkrétní workflow.
+
+Podpůrné signály:
+Více odpovědí na otázku ve formuláři, méně obecných dotazů "kolik stojí aplikace", delší čtení případového příkladu.
+
+Ochranné signály:
+Pokles odeslání formuláře kvůli příliš složité otázce, horší rychlost stránky, dotazy zákazníků na zbytečně citlivé informace.
+
+Co nebudeme měřit:
+Nebudeme nahrávat sessions, nepřidáme heatmapu a nebudeme spojovat čtení stránky s konkrétní identitou člověka bez důvodu.
+```
+
+Tento poslední řádek je privacy-first brzda. Ne každá zvědavost si zaslouží měření. Pokud rozhodnutí zvládnete udělat z agregovaných dat, kvalifikovaných poptávek a ručního čtení odpovědí, nepotřebujete sledovat každý pohyb myši.
+
+### 5. Datové minimum
+
+Před spuštěním experimentu napište, jaká data skutečně potřebujete. Ne jaká data by byla zajímavá. Skutečně potřebná.
+
+Otázky:
+
+- Jaké rozhodnutí chceme po experimentu udělat?
+- Jaký nejmenší signál k tomu stačí?
+- Dá se signál sbírat agregovaně?
+- Dá se vyhodnotit ručně z existujících poptávek, support tiketů nebo sales poznámek?
+- Přidáváme nový nástroj, skript nebo integraci?
+- Mění se datová mapa, retence nebo přístupová práva?
+- Je potřeba aktualizovat privacy komunikaci?
+
+Příklad datového minima:
+
+```text
+Potřebujeme:
+Počet odeslaných formulářů, ruční označení kvality poptávky v CRM, odpověď na jednu novou volitelnou otázku.
+
+Nepotřebujeme:
+Session recording, reklamní retargeting, identifikaci čtenářů článku, dlouhodobé ukládání IP adres.
+
+Dopad do datové mapy:
+Přibývá jedna volitelná textová odpověď ve formuláři. Retence a přístupy zůstávají stejné.
+```
+
+Takhle se privacy-first přístup stává provozní rutinou, ne slavnostním odstavcem v patičce.
+
+### 6. Review okno a rozhodnutí
+
+Experiment musí mít datum vyhodnocení. Bez něj se změna stane permanentní jen proto, že na ni všichni zapomněli.
+
+Pro malé webové změny obvykle stačí jedno až čtyři týdny podle návštěvnosti a počtu poptávek. U SaaS onboardingu může být potřeba delší okno, protože aktivace a retence se projeví později. Důležité je napsat si review předem.
+
+Šablona:
+
+```text
+Spuštění:
+
+Review:
+
+Kdo vyhodnotí:
+
+Možná rozhodnutí:
+1. Ponechat.
+2. Upravit.
+3. Vrátit.
+4. Rozšířit.
+5. Zahodit a zapsat poučení.
+```
+
+Příklad:
+
+```text
+Spuštění:
+2026-05-08
+
+Review:
+2026-05-22
+
+Kdo vyhodnotí:
+Marketing + sales vlastník.
+
+Možná rozhodnutí:
+Ponechat novou otázku ve formuláři, pokud zvyšuje kvalitu odpovědí bez poklesu dokončení. Upravit text, pokud lidé otázku nechápou. Vrátit změnu, pokud formulář sbírá víc dat, ale nepomáhá kvalifikaci.
+```
+
+Rozhodnutí "zahodit" není prohra. Je to údržba systému. Horší je nechat slabou změnu žít roky, protože kdysi někomu přišla jako dobrý nápad.
+
+### 7. Jednostránková šablona experimentální karty
+
+```text
+Název experimentu:
+
+Rozhodovací otázka:
+
+Hypotéza:
+Věříme, že...
+Poznáme to podle...
+
+Komu změna pomáhá:
+
+Uděláme:
+
+Neuděláme:
+
+Nesmí se rozbít:
+
+Hlavní signál:
+
+Podpůrné signály:
+
+Ochranné signály:
+
+Co nebudeme měřit:
+
+Datové minimum:
+
+Dopad do datové mapy:
+
+Spuštění:
+
+Review:
+
+Vlastník:
+
+Možná rozhodnutí po review:
+Ponechat / upravit / vrátit / rozšířit / zahodit.
+
+Poučení po review:
+```
+
+### 8. Vyplněný příklad
+
+```text
+Název experimentu:
+Konkrétnější CTA a otázka na workflow u stránky SaaS MVP.
+
+Rozhodovací otázka:
+Pomůže konkrétnější první krok přivést poptávky, které už umí popsat proces vhodný pro MVP?
+
+Hypotéza:
+Věříme, že CTA "Popsat proces pro MVP" a jedna volitelná otázka na workflow pomůže B2B firmám lépe formulovat poptávku, protože dnešní obecné CTA vede k dotazům bez kontextu. Poznáme to podle vyšší kvality prvních odpovědí.
+
+Komu změna pomáhá:
+Zakladatelům, provozním manažerům a technickým ředitelům, kteří chtějí převést interní proces do aplikace.
+
+Uděláme:
+Upravíme CTA, doplníme jeden příklad workflow a přidáme volitelnou otázku do formuláře.
+
+Neuděláme:
+Nebudeme měnit ceník, přidávat chat widget ani spouštět novou reklamní kampaň.
+
+Nesmí se rozbít:
+Rychlost stránky, jednoduchost formuláře, srozumitelné privacy sdělení.
+
+Hlavní signál:
+Kvalifikované poptávky s popsaným workflow.
+
+Podpůrné signály:
+Méně obecných odpovědí, lepší discovery hovory, více odkazů na konkrétní stránku v prvním e-mailu.
+
+Ochranné signály:
+Pokles dokončení formuláře, odpovědi s citlivými daty, které nepotřebujeme, nebo opakované dotazy, proč se na workflow ptáme.
+
+Co nebudeme měřit:
+Nebudeme přidávat session recording ani spojovat čtení stránky s osobní identitou návštěvníka.
+
+Datové minimum:
+Odeslání formuláře, volitelná textová odpověď, ruční štítek kvality leadu.
+
+Dopad do datové mapy:
+Přibývá jedna volitelná odpověď ve formuláři. Přístupy, retence i účel zůstávají stejné.
+
+Spuštění:
+Pondělí.
+
+Review:
+Za dva týdny nebo po deseti relevantních poptávkách.
+
+Vlastník:
+Jeden člověk z marketingu, jeden člověk ze sales.
+
+Možná rozhodnutí po review:
+Ponechat otázku, upravit wording, přesunout příklad výš, nebo změnu vrátit.
+
+Poučení po review:
+Doplní se po vyhodnocení.
+```
+
+### 9. Codyho komentář
+
+Můj pohled: experimenty se často kazí tím, že se tváří moc slavnostně. Tým pak začne řešit metodiku místo zákazníka. Dobrá experimentální karta je obyčejný provozní nástroj. Umí říct: tady je malá změna, tady je důvod, tady je hranice a tady je datum, kdy se přestaneme tvářit, že máme věčný čas.
+
+Nejlepší experimenty nejsou ty, které vždycky vyjdou. Nejlepší jsou ty, které zmenší nejistotu bez toho, aby přidaly chaos. A pokud navíc odstraní jeden tracker, zkrátí jeden formulář nebo zpřesní jednu stránku, tak se svět nezhroutí. Naopak bude o kousek méně otravný. To je za mě solidní KPI.
+
+### Checklist přílohy
+
+- Začíná změna rozhodovací otázkou, ne jen úkolem?
+- Má experiment jednoduchou hypotézu?
+- Je jasné, komu změna pomáhá?
+- Je napsané, co uděláte a co vědomě neuděláte?
+- Máte ochranné signály pro výkon, důvěru, přístupnost a soukromí?
+- Měříte jen data potřebná k rozhodnutí?
+- Ví tým, jestli se mění datová mapa nebo privacy komunikace?
+- Má experiment vlastníka a review datum?
+- Jsou předem jasná možná rozhodnutí po vyhodnocení?
+- Umíte změnu vrátit, pokud škodí?
+- Zapíšete poučení zpět do backlogu, checklistu nebo šablony?
+- Neudělali jste z malého experimentu skrytý redesign?
+
+Experimentální karta dává týmu disciplínu bez zbytečného divadla. Pomáhá vybrat jednu další změnu, provést ji v rozumném rozsahu, vyhodnotit signál a zachovat kontrolu nad daty. Přesně tak má vypadat praktický růst webu, SaaS produktu i marketingového systému.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -21575,3 +21901,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AU s komunikačním plánem změny pro web, SaaS a marketing: typy změn, publika, interní a veřejné sdělení, kanály, FAQ, privacy-first hranice a checklist před spuštěním.
 - 2026-05-08: Doplněna Příloha AV o měření dopadu změny po spuštění: rozhodovací otázka, hlavní/podpůrný/ochranný signál, baseline, privacy-first minimum dat, review okno a rozhodnutí po vyhodnocení.
 - 2026-05-08: Doplněna Příloha AW o převodu poznatků do backlogu a další iterace: karta poznatku, třídění rozhodnutí, privacy-first priorita, údržba backlogu a týdenní rytmus.
+- 2026-05-08: Doplněna Příloha AX s experimentální kartou pro jednu další změnu: rozhodovací otázka, hypotéza, rozsah, signály, datové minimum, review okno a checklist.
