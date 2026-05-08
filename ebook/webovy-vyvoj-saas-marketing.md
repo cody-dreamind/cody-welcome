@@ -22769,6 +22769,249 @@ Můj pohled: nejlepší šablony jsou skoro neviditelné. Ne proto, že by nebyl
 
 Kontrola použitelnosti šablon uzavírá smyčku mezi teorií a praxí. E-book dodá principy. Přílohy dodají pracovní nástroje. Ale až pravidelná kontrola ukáže, jestli ty nástroje opravdu pomáhají týmu dělat lepší rozhodnutí s menším chaosem a menší datovou stopou.
 
+## Příloha BC: Provozní rytmus pro šablony a playbooky
+
+Po katalogu šablon a kontrole použitelnosti přichází nejméně okázalá, ale nejdůležitější část: rytmus. Pokud šablony nemají místo v běžném týdnu, zůstanou ležet vedle práce. Tým o nich ví, občas je pochválí, ale v rozhodující chvíli sáhne po starém zvyku, prázdném dokumentu nebo improvizaci v chatu.
+
+Provozní rytmus není další schůzka pro radost z kalendáře. Je to dohoda, kdy se šablony používají, kdo je aktualizuje, podle čeho se pozná, že pomáhají, a kdy se šablona vyhodí z cesty. Dobrý rytmus je lehký. Má pár jasných spouštěčů, krátké review a jedno místo, kam se zapisují změny.
+
+Tato příloha převádí katalog pracovních šablon do pravidelného provozu pro web, SaaS, marketing a privacy-first správu dat.
+
+### 1. Začněte spouštěči, ne kalendářem
+
+Nejdřív si napište situace, ve kterých se má šablona automaticky použít. Když začnete kalendářem, snadno vytvoříte pravidelnou schůzku bez jasného důvodu. Když začnete spouštěči, rytmus se napojí na reálnou práci.
+
+Typické spouštěče:
+
+- vzniká nová landing page,
+- mění se formulář nebo sběr dat,
+- přidává se nový externí nástroj,
+- spouští se experiment,
+- končí experiment a rozhoduje se o změně,
+- předává se projekt zákazníkovi nebo internímu týmu,
+- řeší se incident nebo významná chyba,
+- připravuje se nová kampaň,
+- vzniká nová integrace,
+- blíží se měsíční nebo kvartální review.
+
+Ke každému spouštěči přiřaďte jednu primární šablonu. Ne pět. Když se při každé změně otevře celý katalog, lidé si oprávněně najdou zkratku. Primární šablona může odkazovat na doplňkové nástroje, ale první krok musí být zřejmý.
+
+Příklad:
+
+```text
+Spouštěč: změna formuláře na webu
+Primární šablona: experimentální karta
+Doplňkové šablony: datová mapa, měření dopadu změny
+Vlastník spuštění: člověk, který změnu navrhuje
+Povinné minimum: účel změny, sbíraná pole, ochranný signál, datum vyhodnocení
+```
+
+Takový zápis je krátký, ale brání dvěma častým problémům: změna se neudělá bez jasného důvodu a nové pole ve formuláři nepřibude jen proto, že "by se mohlo hodit".
+
+### 2. Rozdělte rytmus na týden, měsíc a kvartál
+
+Každá úroveň má jinou práci. Týden řeší tok aktuálních změn. Měsíc hodnotí dopad a úklid. Kvartál kontroluje, jestli systém pořád odpovídá strategii, kapacitě a privacy-first pravidlům.
+
+Týdenní rytmus:
+
+- projít nové změny a přiřadit správnou šablonu,
+- ověřit, že otevřené experimenty mají datum vyhodnocení,
+- zachytit blokery, které brání dokončení,
+- rozhodnout, co se tento týden nepustí.
+
+Měsíční rytmus:
+
+- vyhodnotit dokončené změny,
+- aktualizovat katalog šablon,
+- archivovat duplicity a nepoužívané materiály,
+- zapsat poznatky do backlogu,
+- zkontrolovat, jestli nové nebo upravené šablony nesbírají zbytečná data.
+
+Kvartální rytmus:
+
+- zkontrolovat, jestli šablony podporují aktuální priority,
+- projít dodavatele, nástroje a datové toky,
+- ověřit odpovědnosti a vlastníky,
+- vybrat jednu až tři systémové slabiny pro další kvartál,
+- rozhodnout, co přestat dělat.
+
+Nesnažte se všechno řešit týdně. Týdenní rytmus má být lehký a operační. Pokud se z něj stane strategická debata o všem, přestane fungovat. Velké otázky patří do měsíčního nebo kvartálního review.
+
+### 3. Zaveďte pracovní frontu šablon
+
+Katalog říká, jaké nástroje existují. Pracovní fronta říká, co se s nimi právě děje. Stačí jednoduchý seznam se čtyřmi stavy:
+
+```text
+Nový podnět
+- změna, problém nebo nápad čeká na výběr správné šablony.
+
+V přípravě
+- šablona je otevřená, doplňuje se minimum pro rozhodnutí.
+
+K vyhodnocení
+- práce proběhla a čeká se na signály, review nebo rozhodnutí.
+
+Uzavřeno
+- rozhodnutí je zapsané, výstup předaný a navazující úkoly jsou v backlogu.
+```
+
+Fronta nemusí být nový nástroj. Může to být board v existujícím projektovém systému, stránka v repozitáři nebo tabulka. Důležité je, aby měla jednoho vlastníka a aby v ní nebyly osobní údaje, které tam nemají co dělat. U pracovních položek obvykle stačí odkaz na výstup, stav, odpovědná osoba, termín a privacy štítek.
+
+Příklad položky:
+
+```text
+Název: zkrácení kontaktního formuláře pro audit webu
+Spouštěč: změna formuláře
+Primární šablona: experimentální karta
+Stav: k vyhodnocení
+Odpovědná osoba: marketing lead
+Datum review: 2026-06-05
+Privacy štítek: formulář, osobní údaje, analytika
+Ochranný signál: nezvýšit počet nekvalifikovaných poptávek
+Výstup: rozhodnutí ponechat kratší formulář nebo vrátit kvalifikační otázku
+```
+
+Tento formát drží pozornost na rozhodnutí. Ne na dokumentu samotném.
+
+### 4. Určete vlastníka rytmu
+
+Každá šablona má mít vlastníka, ale provozní rytmus také potřebuje svého správce. Nemusí to být manažer. Může to být člověk, který hlídá, že se změny neztrácí, review probíhá a katalog nezarůstá prachem.
+
+Správce rytmu neřídí všechna rozhodnutí. Hlídá systém:
+
+- spouštěče mají přiřazené šablony,
+- otevřené položky mají další krok,
+- šablony mají vlastníky,
+- archivované materiály nejsou používány omylem,
+- měsíční review má krátký zápis,
+- privacy-first otázky se řeší před spuštěním, ne až po něm.
+
+U malého týmu může tuto roli zastávat founder, product lead nebo delivery lead. U většího týmu je rozumné oddělit obsahovou, produktovou a provozní odpovědnost, ale pořád držet jeden společný katalog.
+
+### 5. Privacy-first brána v rytmu
+
+Privacy-first kontrola nesmí být samostatný dokument, který se vyplní na konci. To je pozdě. Musí být vložená do spouštěčů a stavů.
+
+Při přesunu položky do stavu `v přípravě` se ptejte:
+
+- Jaká data se budou sbírat nebo měnit?
+- Je každé pole nutné pro aktuální rozhodnutí?
+- Kde budou data uložená?
+- Kdo k nim bude mít přístup?
+- Jak dlouho se budou držet?
+- Přibývá nový dodavatel, skript, integrace nebo export?
+- Existuje jednodušší varianta s menší datovou stopou?
+
+Při přesunu do stavu `uzavřeno` se ptejte:
+
+- Byla datová mapa aktualizována, pokud se změnil tok dat?
+- Zůstalo po experimentu nějaké dočasné měření, které se má vypnout?
+- Byly odebrány dočasné přístupy?
+- Jsou výstupy anonymizované tam, kde není potřeba identita konkrétního člověka?
+- Je jasné, co se má s daty stát po skončení review období?
+
+Codyho komentář: privacy-first brána je nejúčinnější, když je trochu nudná a hodně pravidelná. Velké prohlášení o ochraně dat na webu je fajn, ale skutečná kvalita vzniká u malých rozhodnutí: nepřidat pole, zkrátit retenci, vypnout dočasný export, nepoužít tracker jen proto, že má pěkný dashboard.
+
+### 6. Šablona týdenního průchodu
+
+Týdenní průchod by měl být krátký. Ideálně 20 až 30 minut. Pokud trvá hodinu a půl, pravděpodobně se v něm řeší moc věcí najednou.
+
+```text
+Datum:
+Účastníci:
+
+1. Nové spouštěče od posledního průchodu
+- co vzniklo:
+- jaká šablona se použije:
+- kdo je vlastník:
+
+2. Otevřené položky v přípravě
+- co blokuje dokončení:
+- jaké minimum chybí:
+- je potřeba privacy-first kontrola:
+
+3. Položky k vyhodnocení
+- jaký signál už máme:
+- kdy padne rozhodnutí:
+- co se má vypnout, uklidit nebo předat:
+
+4. Změny katalogu
+- nová šablona:
+- úprava šablony:
+- archivace:
+
+5. Jedno rozhodnutí týdne
+- ponechat:
+- upravit:
+- zastavit:
+- další krok:
+```
+
+Jedno rozhodnutí týdne je důležité. Bez něj se review snadno změní v přehled aktivit. Aktivita není výsledek. Výsledek je rozhodnutí, změna, odstraněné tření nebo vědomé zastavení práce, která už nedává smysl.
+
+### 7. Vyplněný příklad rytmu
+
+```text
+Datum: 2026-05-08
+Účastníci: product lead, marketing lead, developer
+
+1. Nové spouštěče od posledního průchodu
+- nový návrh landing page pro audit webu
+- změna kontaktního formuláře
+- požadavek na přidání remarketingového skriptu
+
+Použité šablony:
+- obsahový brief pro landing page
+- experimentální karta pro formulář
+- dodavatelská hygiena pro skript
+
+2. Otevřené položky v přípravě
+- landing page čeká na konkrétní důkaz a ukázku výstupu
+- formulář má návrh tří povinných polí
+- skript zastaven do doby, než bude jasný účel, data a alternativa bez třetí strany
+
+3. Položky k vyhodnocení
+- kratší formulář vyhodnotit po 14 dnech podle dokončení a kvality poptávek
+
+4. Změny katalogu
+- přidat krátkou variantu formulářové privacy kontroly
+
+5. Jedno rozhodnutí týdne
+- nepřidávat remarketingový skript bez jasného rozhodnutí, které neumíme získat privacy-first způsobem
+```
+
+Tady rytmus chrání jak výkon týmu, tak data návštěvníků. Landing page pokračuje, formulář se testuje, skript nejde do webu jen setrvačností. Není to zákaz marketingu. Je to požadavek na smysluplné měření.
+
+### 8. Signály, že rytmus bobtná
+
+Každý systém se časem snaží ztloustnout. Poznáte to podle několika příznaků:
+
+- lidé vyplňují šablony až zpětně,
+- review řeší stav úkolů, ale ne rozhodnutí,
+- každá výjimka vytváří novou šablonu,
+- katalog má víc archivních než aktivních položek, ale nikdo ho nečistí,
+- privacy kontrola se obchází jako formalita,
+- stejná informace se zapisuje do tří míst,
+- nový člen týmu neví, kde začít,
+- šablony rostou, ale výstupy se nezlepšují.
+
+Když se to stane, nehledejte nový nástroj. Nejdřív zkraťte rytmus. Vyberte pět nejčastějších spouštěčů, ke každému jednu primární šablonu a zbytek přesuňte do doplňkové vrstvy. Pak archivujte šablony, které nemají reálné použití.
+
+### Checklist přílohy
+
+- Máte jasné spouštěče, kdy se šablona musí použít?
+- Má každý spouštěč jednu primární šablonu?
+- Rozlišujete týdenní, měsíční a kvartální rytmus?
+- Existuje pracovní fronta šablon se stavy `nový podnět`, `v přípravě`, `k vyhodnocení` a `uzavřeno`?
+- Má provozní rytmus svého správce?
+- Probíhá privacy-first kontrola před spuštěním změny?
+- Kontrolujete po uzavření, jestli nezůstaly dočasné exporty, měření nebo přístupy?
+- Má týdenní průchod jedno konkrétní rozhodnutí?
+- Umíte poznat, kdy rytmus bobtná?
+- Archivujete nebo zjednodušujete šablony dřív, než katalog ztratí důvěru?
+
+Provozní rytmus je rozdíl mezi tím, že e-book inspiroval tým na jednu schůzku, a tím, že se stal součástí práce. Nemusí být složitý. Naopak: čím jednodušší je první verze rytmu, tím větší šance, že ho lidé budou používat i ve chvíli, kdy je práce moc, termíny krátké a improvizace láká jako vždycky.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -22951,3 +23194,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AZ o standardizaci změny po experimentu: typ standardu, šablona záznamu, pracovní místa, privacy-first brána, kontrola použití a checklist.
 - 2026-05-08: Doplněna Příloha BA s katalogem pracovních šablon a playbooků: situace použití, karta šablony, stav, privacy štítky, role, revizní rytmus a minimální katalog e-booku.
 - 2026-05-08: Doplněna Příloha BB s kontrolou použitelnosti šablon po zavedení: inventura reálného použití, stavy použitelnosti, skóre tření, privacy-first kontrola dat a checklist.
+- 2026-05-08: Doplněna Příloha BC s provozním rytmem pro šablony a playbooky: spouštěče, týdenní/měsíční/kvartální review, pracovní fronta, vlastnictví, privacy-first brána a checklist.
