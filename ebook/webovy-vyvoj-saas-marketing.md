@@ -20806,6 +20806,283 @@ Můj pohled: týmy často podceňují komunikaci, protože ji považují za měk
 
 Komunikační plán změny drží web, produkt, marketing a provoz pohromadě. Neprodlužuje práci kvůli ceremonii. Zkracuje cestu od hotové změny k tomu, aby ji lidé správně pochopili, použili a vyhodnotili.
 
+## Příloha AV: Měření dopadu změny po spuštění
+
+Změna bez měření dopadu je jen dobrý pocit s datem nasazení. Tým něco upraví, pošle oznámení, pár lidí kývne a za měsíc už nikdo neví, jestli změna opravdu pomohla. Nový formulář měl zvýšit kvalitu poptávek. Nový onboarding měl zkrátit cestu k první hodnotě. Nová stránka měla lépe vysvětlit nabídku. Nový privacy-first postup měl snížit množství zbytečně sbíraných dat. Pokud ale předem nevíte, jaký signál budete sledovat, skončíte u dojmu.
+
+Měření dopadu změny není výmluva pro další dashboard. Je to krátký provozní návyk: před spuštěním říct, co se má změnit, jak to poznáme, kdy se podíváme na výsledek a jaké rozhodnutí uděláme potom. U malého týmu stačí jedna stránka. Důležité je, aby spojovala produkt, marketing, obchod, support a privacy-first provoz.
+
+Praktický výsledek této přílohy: pro každou významnější změnu připravit jednoduchý plán měření dopadu, který chrání tým před náhodným vyhodnocováním a zbytečným sběrem dat.
+
+### 1. Začněte rozhodovací otázkou
+
+Nejdřív si napište otázku, na kterou má měření odpovědět. Ne metriku. Otázku.
+
+Slabé zadání:
+
+```text
+Chceme měřit nový formulář.
+```
+
+Silnější zadání:
+
+```text
+Pomohl kratší poptávkový formulář získat víc relevantních poptávek bez toho, aby sales potřeboval více doplňujících e-mailů?
+```
+
+Rozdíl je zásadní. První věta vede k počítání odeslání formuláře. Druhá věta nutí sledovat kvalitu, práci sales týmu a datovou minimalizaci. To je přesně rozdíl mezi měřením aktivity a měřením dopadu.
+
+Dobrá rozhodovací otázka má čtyři části:
+
+- co se změnilo,
+- komu to mělo pomoct,
+- jaký výsledek čekáme,
+- jakou hranici nechceme porušit.
+
+Šablona:
+
+```text
+Pomohla změna [co] skupině [komu] dosáhnout [výsledek], bez toho aby [riziko nebo hranice]?
+```
+
+Příklady:
+
+```text
+Pomohla nová landing page zakladatelům B2B SaaS pochopit nabídku auditu rychleji, bez toho aby slibovala implementaci mimo rozsah?
+
+Pomohl nový onboarding pilotním zákazníkům vytvořit první projekt během týdne, bez toho aby museli předat celý historický dataset?
+
+Pomohlo odstranění heatmapového nástroje udržet užitečné měření konverzí, bez toho aby tým ztratil schopnost rozhodovat o obsahu stránky?
+```
+
+### 2. Oddělte signál od šumu
+
+Ne všechno, co jde měřit, pomáhá rozhodovat. Po změně se často zvedne nebo spadne několik čísel najednou. Návštěvnost, kliky, čas na stránce, odeslání formuláře, odpovědi supportu, kvalita leadů, aktivace, počet dotazů. Když tým předem neví, co je hlavní signál, vybere si po spuštění metriku, která se mu zrovna hodí.
+
+Rozlišujte tři typy signálů:
+
+- hlavní signál: číslo nebo pozorování, podle kterého rozhodnete, jestli změna pomohla,
+- podpůrný signál: kontext, který vysvětluje proč,
+- ochranný signál: metrika nebo kontrola, která hlídá vedlejší škodu.
+
+Příklad pro kratší poptávkový formulář:
+
+```text
+Hlavní signál:
+Podíl poptávek, které sales označí jako relevantní po první odpovědi.
+
+Podpůrný signál:
+Počet doplňujících otázek, které sales musí poslat před úvodním hovorem.
+
+Ochranný signál:
+Formulář nesmí začít sbírat citlivé interní dokumenty, přístupy nebo exporty dat.
+```
+
+Příklad pro nový onboarding:
+
+```text
+Hlavní signál:
+Podíl nových týmů, které dokončí první hodnotovou akci do sedmi dnů.
+
+Podpůrný signál:
+Nejčastější krok, kde se tým zastaví.
+
+Ochranný signál:
+Onboarding nesmí nutit zákazníka nahrát víc dat, než je potřeba pro první užitečný výsledek.
+```
+
+Tato trojice je praktičtější než velký dashboard. Hlavní signál řekne, jestli změna funguje. Podpůrný signál pomůže pochopit příčinu. Ochranný signál brání tomu, aby tým vyhrál jednu metriku a poškodil důvěru.
+
+### 3. Zapište výchozí stav
+
+Bez výchozího stavu se změna hodnotí podle paměti. A paměť týmu bývá překvapivě tvárná, hlavně když se blíží review. Stačí krátký baseline záznam před spuštěním.
+
+Šablona:
+
+```text
+Změna:
+
+Datum spuštění:
+
+Rozhodovací otázka:
+
+Výchozí stav:
+
+Hlavní signál:
+
+Podpůrný signál:
+
+Ochranný signál:
+
+Kdy vyhodnotíme:
+
+Jaké rozhodnutí uděláme:
+```
+
+Ukázka:
+
+```text
+Změna:
+Zkrácení poptávkového formuláře pro audit SaaS MVP.
+
+Datum spuštění:
+2026-05-08.
+
+Rozhodovací otázka:
+Pomohl kratší formulář získat víc relevantních poptávek bez sběru zbytečně citlivých detailů?
+
+Výchozí stav:
+Poptávky často obsahují dlouhé technické popisy, ale chybí obchodní cíl. Sales posílá v průměru dvě doplňující otázky před domluvou hovoru.
+
+Hlavní signál:
+Podíl poptávek označených jako relevantní po první odpovědi.
+
+Podpůrný signál:
+Počet doplňujících otázek před úvodním hovorem.
+
+Ochranný signál:
+Žádné nové pole nesbírá přístupy, exporty dat ani interní dokumenty.
+
+Kdy vyhodnotíme:
+Po 30 dnech nebo po 20 poptávkách, podle toho, co nastane dřív.
+
+Jaké rozhodnutí uděláme:
+Ponechat formulář, upravit otázky, nebo vrátit jedno kvalifikační pole.
+```
+
+Výchozí stav nemusí být perfektně kvantifikovaný. I kvalitativní baseline je lepší než nic, pokud je konkrétní. "Sales má moc práce" je mlha. "Sales posílá dvě doplňující otázky před hovorem, protože chybí cíl projektu a typ zákazníka" už je použitelný signál.
+
+### 4. Měřte nejmenší užitečné minimum
+
+Privacy-first měření začíná otázkou: jak málo dat stačí k rozhodnutí? Pokud potřebujete poznat kvalitu poptávky, často nepotřebujete sledovat detailní chování konkrétní osoby napříč webem. Stačí zdroj stránky, odeslání formuláře, následné označení kvality v CRM a poznámka, proč lead nebyl dobrý.
+
+Praktická pravidla:
+
+- Měřte události, které odpovídají rozhodovací otázce.
+- Nepřidávejte identifikátory jen proto, že to nástroj umožňuje.
+- Agregujte tam, kde nepotřebujete pracovat s jednotlivcem.
+- Zkraťte retenci surových dat, pokud po review už nejsou potřeba.
+- Oddělte obsah formuláře od analytických eventů.
+- Interní poznámky pište bez zbytečných osobních údajů.
+- U každého nového eventu napište účel a datum revize.
+
+Příklad minimalistického eventu:
+
+```text
+Event:
+lead_form_submitted
+
+Vlastnosti:
+form_type, page_type, source_group
+
+Co do eventu nepatří:
+jméno, e-mail, telefon, text zprávy, interní dokumenty, IP adresa jako analytický identifikátor.
+```
+
+Pokud potřebujete kvalitu leadu, nepřenášejte obsah poptávky do analytiky. Označte kvalitu v obchodním systému a vyhodnocujte agregovaně. Analytika má říct, který tok pomáhá rozhodnutí. Nemá se stát skladištěm osobních a obchodně citlivých dat.
+
+### 5. Spojte čísla s lidským pozorováním
+
+Čísla bez kontextu často lžou slušněji než lidé. Počet odeslání formuláře může růst, ale kvalita klesat. Aktivace může vypadat dobře, protože uživatelé kliknou na první akci, ale po týdnu se nevrátí. Nový článek může mít nižší návštěvnost, ale přivádět přesně ty zákazníky, které chcete.
+
+Proto ke každému vyhodnocení přidejte krátké lidské pozorování:
+
+- Co říká sales po prvních hovorech?
+- Jaké dotazy dostal support?
+- Kde se uživatelé zasekli?
+- Co lidé pochopili špatně?
+- Jaká námitka se opakovala?
+- Změnil se typ poptávky?
+
+Ukázka review poznámky:
+
+```text
+Čísla:
+Počet odeslání formuláře klesl o 15 %, ale podíl relevantních poptávek vzrostl zhruba o třetinu.
+
+Pozorování:
+Sales posílá méně doplňujících otázek. Častá nejasnost je rozdíl mezi auditem MVP a kompletním vývojem.
+
+Rozhodnutí:
+Formulář ponechat, na landing page přidat krátkou sekci "co audit není".
+```
+
+Takové vyhodnocení je užitečnější než graf bez závěru. Tým ví, co se stalo, proč to pravděpodobně nastalo a co udělá dál.
+
+### 6. Nastavte review okno
+
+Každá změna potřebuje čas, ale ne nekonečno. Když review okno není předem dané, změna buď vyhodnocená nebude, nebo se bude hodnotit podle prvních tří náhodných reakcí.
+
+Volte review podle typu změny:
+
+- obsahová změna: první kontrola po 14 až 30 dnech,
+- formulář nebo landing page: po 20 až 50 relevantních interakcích nebo po 30 dnech,
+- onboarding: po jedné až dvou vlnách nových uživatelů,
+- support proces: po dvou týdnech nebo po uzavření několika podobných tiketů,
+- provozní změna: po prvním monitorovacím cyklu a znovu po měsíci,
+- privacy-first změna: po ověření, že rozhodovací signál zůstal použitelný i s menším sběrem dat.
+
+Nejde o tvrdé univerzální normy. Jde o to nedělat závěr moc brzy ani ho neodkládat tak dlouho, že změna zapadne. U menších týmů pomáhá jednoduché pravidlo: každá významná změna má review datum už při spuštění.
+
+### 7. Rozhodněte: ponechat, upravit, vrátit, nebo rozšířit
+
+Vyhodnocení bez rozhodnutí je jen zápis do kroniky. Na konci review by mělo padnout jedno ze čtyř rozhodnutí:
+
+- ponechat: změna funguje dost dobře a nepotřebuje další zásah,
+- upravit: směr je správný, ale jedna část brzdí výsledek,
+- vrátit: změna zhoršila hlavní nebo ochranný signál,
+- rozšířit: změna funguje a dává smysl použít ji i jinde.
+
+Příklady:
+
+```text
+Ponechat:
+Nové CTA snížilo počet náhodných dotazů a nezhoršilo kvalitu leadů.
+
+Upravit:
+Nový onboarding zlepšil aktivaci, ale support dostává opakovaný dotaz k rolím. Přidáme vysvětlení do kroku pozvání týmu.
+
+Vrátit:
+Nový embed zvýšil čas na stránce, ale přidal externí skript bez jasného přínosu a zpomalil načtení. Odstraňujeme.
+
+Rozšířit:
+Kratší formulář zlepšil kvalitu poptávek u auditu. Stejný princip použijeme u stránky pro produktizovanou službu.
+```
+
+Codyho komentář: nejhorší výsledek není změna, která nefungovala. Nejhorší výsledek je změna, u které se tým bojí říct, co se naučil. Vrátit nebo upravit věc není ostuda. Ostuda je držet špatné rozhodnutí při životě jen proto, že už má hezký interní název.
+
+### 8. Přeneste poučení do systému
+
+Jedna dobrá změna nemá zůstat izolovaná. Pokud se ukáže, že kratší formulář zvedl kvalitu poptávek, aktualizujte definici hotovo pro formuláře. Pokud zákazníci nerozuměli novému slibu, upravte komunikační balíček. Pokud privacy-first úprava zachovala užitečné měření s menší datovou stopou, zapište to jako nový standard.
+
+Po review aktualizujte:
+
+- checklist nebo definici hotovo,
+- šablonu formuláře, landing page nebo onboarding kroku,
+- provozní list nebo datovou mapu,
+- sales/support poznámky,
+- redakční backlog,
+- rizikový registr, pokud se objevilo nové riziko,
+- rozhodovací log, pokud šlo o významné rozhodnutí.
+
+Tím se e-book mění z textu na operační systém práce. Každá iterace zlepšuje nejen konkrétní stránku nebo proces, ale i způsob, jak tým dělá další změny.
+
+### Checklist přílohy
+
+- Má změna jasnou rozhodovací otázku?
+- Je napsané, komu má změna pomoct a jaký výsledek čekáte?
+- Máte hlavní, podpůrný a ochranný signál?
+- Je zapsaný výchozí stav před spuštěním?
+- Sbíráte jen data potřebná pro rozhodnutí?
+- Neobsahují analytické eventy osobní údaje nebo obsah formulářů?
+- Je jasné review datum nebo review hranice podle počtu interakcí?
+- Kombinujete čísla s pozorováním sales, supportu nebo uživatelů?
+- Končí review rozhodnutím: ponechat, upravit, vrátit nebo rozšířit?
+- Přenášíte poučení do checklistů, šablon, datové mapy nebo provozních pravidel?
+- Umíte vysvětlit, proč měření podporuje privacy-first hodnotu místo zbytečného sledování?
+
+Měření dopadu změny má být malé, ale poctivé. Nejde o to mít dokonalou analytiku. Jde o to, aby tým nedělal změny naslepo, nevybíral si vítězné metriky zpětně a nesbíral data jen z nervozity. Dobrá iterace má slib, signál, hranici a rozhodnutí. Bez toho je to jen další položka v changelogu.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -20981,3 +21258,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AS s dodavatelskou hygienou pro web, SaaS a marketing: registr nástrojů, kritičnost, data, přístupy, licence, exit plán, vstupní brána a kvartální úklid.
 - 2026-05-08: Doplněna Příloha AT s kapacitním plánem pro web, SaaS a marketing: měsíční karta, pevné závazky, rezerva, privacy-first práce, stop pravidla a review dokončení.
 - 2026-05-08: Doplněna Příloha AU s komunikačním plánem změny pro web, SaaS a marketing: typy změn, publika, interní a veřejné sdělení, kanály, FAQ, privacy-first hranice a checklist před spuštěním.
+- 2026-05-08: Doplněna Příloha AV o měření dopadu změny po spuštění: rozhodovací otázka, hlavní/podpůrný/ochranný signál, baseline, privacy-first minimum dat, review okno a rozhodnutí po vyhodnocení.
