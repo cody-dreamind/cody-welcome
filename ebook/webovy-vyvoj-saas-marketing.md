@@ -18176,6 +18176,320 @@ Bez tohoto shrnutí se i dobrý hovor rychle rozpustí v běžném provozu. Lids
 
 Předávací balíček je malá věc, která výrazně zvyšuje šanci, že práce přežije vlastní doručení. Zákazník nemusí hádat. Dodavatel nemusí znovu vysvětlovat. Tým má paměť. Data mají hranice. Další krok má vlastníka. To je docela slušný výsledek na dokument, který se vejde na pár stránek.
 
+## Příloha AM: 30denní kontrola po předání
+
+Předání výstupu je důležité, ale samo o sobě ještě neříká, jestli práce opravdu pomohla. Skutečný test přichází po několika týdnech. Zákazník se vrátil do běžného provozu, tým narazil na první detaily, některá doporučení se provedla, jiná zapadla, někdo možná přidal nový nástroj, někdo možná pořád čeká na přístup a některé původní předpoklady se ukázaly jako nepřesné.
+
+Proto má smysl dělat 30denní kontrolu po předání. Není to další velký audit. Je to krátký provozní návrat k tomu, co bylo slíbeno, dodáno a doporučeno. Cílem je zjistit, jestli výstup přežil kontakt s realitou.
+
+30denní kontrola má tři jednoduché otázky:
+
+1. Co se od předání skutečně změnilo?
+2. Co pořád blokuje hodnotu?
+3. Jaký jeden další krok má největší smysl?
+
+To je celé. Žádná poradenská mlha, žádné slavnostní restartování strategie. Jen dospělé zjištění, jestli se práce proměnila v lepší web, produkt, marketing, provoz nebo rozhodnutí.
+
+### Kdy kontrolu dělat
+
+Kontrolu plánujte rovnou při předání. Pokud se na ni vzpomene až po měsíci, bude to působit jako dodatečná snaha něco prodat. Když je součástí procesu, působí jako normální péče o výsledek.
+
+Hodí se hlavně po:
+
+- spuštění nového webu nebo landing page,
+- technickém nebo privacy-first auditu,
+- dokončení SaaS MVP nebo pilotu,
+- předání produktizované služby,
+- nastavení analytiky, CRM, e-mailu nebo RSS distribuce,
+- větší změně obsahu, SEO struktury nebo prodejního toku,
+- migraci hostingu, domény, DNS, e-mailu nebo dat.
+
+U malého výstupu stačí 30 minut. U většího MVP nebo auditu dejte 60 minut a připravte si krátký předvyplněný záznam. Kontrola nemá suplovat nový projekt. Má rozhodnout, co se má stát dál.
+
+Codyho komentář: největší hodnota 30denní kontroly často není v novém doporučení. Je v tom, že někdo konečně řekne: "Tohle jsme neudělali, protože nebyl vlastník." To není selhání. To je provozní pravda. A provozní pravda je výrazně levnější než další motivační workshop.
+
+### Vstupy před kontrolou
+
+Nepřicházejte na kontrolu s prázdnou hlavou a nadějí, že se to nějak vyvine. Pět až deset minut přípravy zlepší hovor víc než další slide.
+
+Připravte:
+
+- předávací balíček,
+- seznam hlavních doporučení,
+- rozhodnutí, která měla vzniknout,
+- stav doporučených P1 nebo urgentních úkolů,
+- dostupná měření: formuláře, poptávky, aktivace, support dotazy, chyby, uptime,
+- změny v nástrojích, přístupech, datech nebo dodavatelích,
+- otevřené otázky z předání,
+- jednu poznámku, co se překvapivě povedlo nebo nepovedlo.
+
+U privacy-first kontroly přidejte:
+
+- zda byly odebrané dočasné přístupy,
+- zda se smazaly nebo archivovaly podklady podle dohody,
+- zda nepřibyly nové trackery nebo externí skripty,
+- zda se nezměnilo ukládání formulářů, CRM nebo analytiky,
+- zda někdo ví, kde jsou data a kdo k nim má přístup.
+
+Příprava nemá být detektivka. Pokud nejde rychle zjistit, kde je výstup, kdo má přístupy a které doporučení se udělalo, už to je nález.
+
+### Jednostránkový záznam
+
+Použijte jednu stránku. Opravdu jednu. Pokud kontrola vyrobí desetistránkový dokument, právě jste si z malého provozního rytmu udělali další věc, kterou nikdo nebude číst.
+
+```text
+30denní kontrola po předání
+
+Projekt:
+Datum předání:
+Datum kontroly:
+Vlastník na straně zákazníka:
+Vlastník na straně dodavatele:
+
+1. Co se mělo změnit:
+2. Co se skutečně změnilo:
+3. Co se nepodařilo:
+4. Co překvapilo:
+5. Stav hlavních doporučení:
+6. Stav dat, přístupů a privacy-first závazků:
+7. Nová rizika nebo otevřené otázky:
+8. Jeden doporučený další krok:
+9. Vlastník a termín:
+10. Co vědomě neděláme:
+```
+
+Tato šablona nutí tým oddělit realitu od přání. "Zákazník má výstup" není totéž jako "zákazník podle něj změnil web". "Analytika běží" není totéž jako "analytika pomohla udělat rozhodnutí". "MVP je nasazené" není totéž jako "pilotní uživatelé zažili první hodnotu".
+
+### 1. Co se mělo změnit
+
+Na začátku si připomeňte původní záměr. Bez toho se kontrola zvrhne na seznam náhodných dojmů.
+
+Příklad po auditu webu:
+
+```text
+Cílem bylo připravit web na B2B kampaň. Po předání měly být opravené čtyři P1 nálezy: nejasné CTA, dlouhý formulář, starý tracker a chybějící potvrzení po odeslání poptávky.
+```
+
+Příklad po SaaS MVP:
+
+```text
+Cílem bylo ověřit, jestli tři pilotní zákazníci dokončí hlavní workflow bez ručního vedení. Neověřovali jsme billing, veřejnou registraci ani enterprise role.
+```
+
+Příklad po produktizované službě:
+
+```text
+Cílem bylo dodat rozhodovací výstup pro prioritizaci prvních úprav webu a převést tři doporučení do backlogu na následující sprint.
+```
+
+Tím nastavíte měřítko. Nekontrolujete všechno. Kontrolujete to, kvůli čemu práce vznikla.
+
+### 2. Co se skutečně změnilo
+
+Tady buďte konkrétní. Ne "pracuje se na tom". Co se změnilo v produkci, v procesu, v datech, v obsahu, v zákaznické komunikaci nebo v rozhodování?
+
+Dobré odpovědi:
+
+- Formulář byl zkrácen z osmi polí na tři.
+- Starý marketingový tracker byl odstraněn.
+- Homepage má nový hero text a jasné CTA.
+- Do CRM přibylo pole pro kvalitu leadu a zdroj poptávky.
+- Pilotní zákazník dokončil první workflow za 18 minut.
+- Support začal štítkovat dotazy podle onboarding, data, role a export.
+- RSS feed byl přidán do patičky a distribučního balíčku.
+
+Slabé odpovědi:
+
+- Web jsme řešili.
+- Něco jsme upravili.
+- Analytika se bude nastavovat.
+- Produkt je skoro hotový.
+- Zákazníkům se to líbí.
+
+Slabé odpovědi nejsou zakázané proto, že jsou nehezké. Jsou nebezpečné, protože nevedou k rozhodnutí.
+
+### 3. Co se nepodařilo
+
+Tato část musí být bezpečná. Pokud se z ní stane obviňování, lidé začnou mlžit. Cílem není najít viníka, ale překážku.
+
+Typické důvody:
+
+- Nebyl vlastník doporučení.
+- Doporučení bylo moc velké pro jeden sprint.
+- Chyběl přístup do nástroje.
+- Zákazník neměl kapacitu dodat podklady.
+- Doporučení narazilo na právní, bezpečnostní nebo obchodní otázku.
+- Metrika nebyla nastavená před změnou.
+- Tým zjistil, že původní předpoklad byl špatný.
+
+Praktická formulace:
+
+```text
+Nepodařilo se odebrat starý chat widget, protože není jasné, kdo vlastní smlouvu s dodavatelem a kde se nastavuje jeho vypnutí. Další krok: do pátku určit vlastníka nástroje, ověřit datové toky a rozhodnout odstranit nebo zdokumentovat.
+```
+
+To je lepší než:
+
+```text
+Chat widget se zatím nevyřešil.
+```
+
+Druhá věta je pravda bez směru. První věta je provozní úkol.
+
+### 4. Stav dat, přístupů a privacy-first závazků
+
+Tady se často ukáže, jestli privacy-first byla hodnota, nebo jen odstavec v nabídce. Po měsíci zkontrolujte, co se opravdu stalo s daty a přístupy.
+
+Otázky:
+
+- Byly odebrané dočasné přístupy dodavatelů?
+- Jsou kritické nástroje pod firemními účty?
+- Je zapnuté dvoufaktorové ověření u domény, hostingu, CMS, analytiky a CRM?
+- Byly smazané podklady, které už nejsou potřeba?
+- Je jasné, co se archivuje a proč?
+- Nepřibyl nový externí skript bez rozhodovacího logu?
+- Nezačal formulář sbírat nové údaje bez důvodu?
+- Je newsletter stále oddělený od poptávky?
+- Měří analytika jen domluvené eventy?
+- Umí tým vysvětlit, kde jsou data a kdo k nim má přístup?
+
+Příklad dobrého záznamu:
+
+```text
+Dočasný přístup dodavatele do CMS byl odebrán. Přístup do analytiky zůstává pro delivery lead do konce kvartálu kvůli vyhodnocení kampaně. Podklady z auditu byly smazané ze sdíleného úložiště, finální anonymizovaný report zůstává v projektové složce. Nepřibyl žádný nový externí skript.
+```
+
+Tohle je krátké, konkrétní a auditovatelné. Krása nudného pořádku.
+
+### 5. Signály hodnoty
+
+Po 30 dnech nemusíte mít definitivní výsledky. Měli byste ale mít první signály.
+
+U webu sledujte:
+
+- změnu kvality poptávek,
+- počet dokončených formulářů,
+- dotazy zákazníků po změně copy,
+- kliky na hlavní CTA,
+- nejčastější vstupní stránky,
+- technické chyby formuláře,
+- zpětnou vazbu od sales.
+
+U SaaS MVP sledujte:
+
+- dokončení hlavního workflow,
+- čas k první hodnotě,
+- počet support dotazů na jednu aktivaci,
+- místa, kde uživatelé potřebovali ruční pomoc,
+- pozvání dalších členů týmu,
+- export nebo použití výsledku v reálném procesu,
+- důvody, proč pilotní zákazník pokračuje nebo končí.
+
+U produktizované služby sledujte:
+
+- jestli zákazník použil doporučení,
+- která doporučení byla příliš těžká,
+- zda výstup vedl k rozhodnutí,
+- kolik komunikace bylo potřeba po předání,
+- zda šablona výstupu fungovala,
+- jestli cena odpovídala reálné práci,
+- zda nevznikl zbytečný sběr dat.
+
+Pozor na falešnou přesnost. Po 30 dnech nemusíte dokazovat celou návratnost. Stačí poznat, jestli směr dává smysl a kde je další překážka.
+
+### 6. Jeden další krok
+
+Kontrola má skončit jedním dalším krokem. Pokud skončí deseti úkoly, nikdo si nebude jistý, co je hlavní.
+
+Struktura:
+
+```text
+Další krok:
+Proč:
+Vlastník:
+Termín:
+Jak poznáme hotovo:
+Co zatím neděláme:
+```
+
+Příklad:
+
+```text
+Další krok:
+Zkrátit stránku služby a přesunout důkaz důvěry nad formulář.
+
+Proč:
+Poptávky se zlepšily po zkrácení formuláře, ale sales pořád hlásí, že lidé nerozumí prvnímu kroku spolupráce.
+
+Vlastník:
+Marketing owner + vývojář webu.
+
+Termín:
+Do 10 pracovních dnů.
+
+Jak poznáme hotovo:
+Nová stránka je publikovaná, CTA vede na stejný formulář, měří se contact_started a contact_submitted, sales dostane nový follow-up text.
+
+Co zatím neděláme:
+Nepřidáváme chat widget ani remarketingový pixel.
+```
+
+Tohle je dobrý výstup kontroly. Je malý, konkrétní a drží privacy-first hranici.
+
+### 7. Co vědomě neděláme
+
+Tato sekce je překvapivě důležitá. Po předání často vzniká chuť otevřít všechno najednou: redesign, nové kampaně, automatizace, AI funkce, newsletter, CRM migrace, dashboard, nový pricing. Něco z toho může být správně. Ne všechno najednou.
+
+Zapište, co vědomě odkládáte:
+
+- nové trackery,
+- rozšíření formuláře,
+- veřejný launch MVP,
+- billing v pilotu,
+- SSO,
+- redesign celé homepage,
+- nový newsletter,
+- migraci CRM,
+- automatizaci, dokud není jasný proces.
+
+Příklad:
+
+```text
+Vědomě neděláme:
+Nepřidáváme další marketingovou analytiku, dokud nevyhodnotíme kvalitu poptávek z aktuálních eventů. Nepouštíme veřejný trial, dokud tři pilotní zákazníci nedokončí hlavní workflow bez ručního vedení.
+```
+
+Odmítnutí je práce. Jen se hůř ukazuje v tabulce, protože nevypadá jako aktivita. Přitom často ušetří nejvíc času.
+
+### Mini agenda 30denního hovoru
+
+```text
+0-5 min: připomenutí cíle předání
+5-15 min: co se změnilo a co se nepodařilo
+15-25 min: data, přístupy, privacy-first kontrola
+25-35 min: signály hodnoty a nové překážky
+35-45 min: jeden další krok, vlastník, termín
+```
+
+U většího projektu přidejte deset minut na otázky. Nepřidávejte deset lidí bez role. Hovor má být rozhodovací, ne divácký sport.
+
+### Checklist přílohy
+
+- Byla 30denní kontrola naplánovaná už při předání?
+- Má kontrola jasný původní cíl, podle kterého se hodnotí výsledek?
+- Je zapsané, co se skutečně změnilo v provozu, produktu, webu nebo marketingu?
+- Jsou pojmenované věci, které se nepodařily, bez obviňování a mlhy?
+- Je jasné, kdo vlastní otevřené překážky?
+- Proběhla kontrola dat, přístupů, dočasných účtů, retence a externích skriptů?
+- Nepřibyl nový nástroj bez datové mapy nebo rozhodovacího logu?
+- Existují první signály hodnoty, i kdyby ještě nebyly definitivní?
+- Končí kontrola jedním hlavním dalším krokem?
+- Má další krok vlastníka, termín a definici hotovo?
+- Je zapsané, co vědomě neděláte, aby nevznikl další chaos?
+- Vznikl jednostránkový záznam, který pochopí i člověk mimo původní projekt?
+
+30denní kontrola je malý rituál proti ztrátě hodnoty. Pomáhá ověřit, že výstup neskončil jako hezký dokument, že data nezůstala ležet bez vlastníka, že přístupy nejsou otevřené z pohodlnosti a že další práce má směr. Není to velký proces. Je to jen návrat k realitě ve správný čas. Což je v digitálních projektech skoro luxus.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -18342,3 +18656,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha AJ s pilotem produktizované služby pro první zákazníky: hypotéza, výběr účastníků, pilotní nabídka, vstupní brána, privacy-first práce s daty, měření a rozhodnutí po pilotu.
 - 2026-05-07: Doplněna Příloha AK o převodu pilotu do opakovatelného delivery systému: post-pilot inventura, fáze delivery, delivery kit, role, kapacita, standard výstupu, smyčka zlepšování a škálování.
 - 2026-05-08: Doplněna Příloha AL s předávacím balíčkem po auditu, MVP nebo produktizované službě: výstupy, doporučení, přístupy, data, provozní kontrola, rizika, další krok a předávací checklist.
+- 2026-05-08: Doplněna Příloha AM s 30denní kontrolou po předání: ověření změn v provozu, dat, přístupů, privacy-first závazků, prvních signálů hodnoty a jednoho dalšího kroku.
