@@ -19939,6 +19939,262 @@ Můj pohled: drill je nejlepší levná pojistka proti falešné jistotě. Dokud
 
 Incidentní drill není o pesimismu. Je to praktická forma respektu k zákazníkům, týmu i datům. Když víte, jak reagovat na špatný den, nemusíte předstírat, že žádný špatný den nikdy nepřijde.
 
+## Příloha AS: Dodavatelská hygiena pro web, SaaS a marketing
+
+Digitální systém málokdy běží jen na vlastním kódu. I jednoduchý web může mít registrátora domény, DNS službu, hosting, e-mail, formuláře, analytiku, monitoring, platební bránu, CRM, helpdesk, nástroj pro plánování obsahu a několik interních automatizací. Každý dodavatel přidává schopnost. Každý dodavatel také přidává závislost, přístup, datový tok, fakturační vztah a budoucí migrační otázku.
+
+Dodavatelská hygiena je pravidelná kontrola, jestli nástroje pořád slouží záměru. Nejde o hon na všechny externí služby. Jde o to vědět, co používáte, proč to používáte, jaká data tím protékají, kdo má přístup, kolik to stojí provozní pozornosti a co se stane, když nástroj zítra přestane vyhovovat.
+
+Praktický výsledek této přílohy: vytvořit jednoduchý registr dodavatelů, jednou za měsíc zkontrolovat kritické změny, jednou za kvartál projít privacy-first dopad a před každým prodloužením licence rozhodnout, jestli nástroj ponechat, omezit, nahradit nebo vypnout.
+
+### 1. Začněte inventurou, ne dojmem
+
+Týmy často řeší dodavatele až ve chvíli, kdy přijde faktura, incident nebo dotaz zákazníka. To je pozdě. Inventura má být jednoduchý seznam, ne auditní román. Důležité je zachytit všechny služby, které mohou ovlivnit dostupnost, data, komunikaci nebo obchodní tok.
+
+Rozdělte nástroje podle oblasti:
+
+- identita: doména, DNS, e-mail, správce hesel, přihlašování,
+- provoz: hosting, databáze, storage, monitoring, logy, zálohy,
+- produkt: platební brána, autentizace, integrace, notifikace, API gateway,
+- marketing: analytika, formuláře, e-mailing, CRM, plánování obsahu, reklamní účty,
+- podpora: helpdesk, chat, dokumentace, status page,
+- interní práce: projektový nástroj, úložiště souborů, automatizace, poznámky.
+
+U každého nástroje zapište minimum:
+
+```text
+Nástroj:
+Umami
+
+Účel:
+Privacy-first webová analytika
+
+Kde běží / kdo provozuje:
+[dodavatel nebo vlastní provoz]
+
+Jaká data zpracovává:
+Agregované návštěvy, URL, referrery, technické údaje
+
+Kdo má přístup:
+Marketing, vedení, technický vlastník
+
+Vlastník u nás:
+[jméno nebo role]
+
+Kritičnost:
+Střední - výpadek neblokuje web, ale omezuje vyhodnocení
+
+Alternativa / plán odchodu:
+Export reportů, přechod na vlastní instanci nebo jiný EU-friendly nástroj
+```
+
+Inventura má odpovědět na otázku "víme, co všechno jsme si pustili do systému?". Pokud odpověď zní ne, žádné další optimalizace ještě nezačínejte.
+
+### 2. Určete kritičnost podle dopadu
+
+Ne všechny nástroje mají stejnou váhu. Když vypadne plánovač sociálních postů, je to nepříjemné. Když vypadne DNS, e-mail, přihlášení nebo platební brána, může stát obchod i důvěra. Kritičnost neurčujte podle oblíbenosti nástroje, ale podle dopadu na zákazníka a tým.
+
+Jednoduchá stupnice:
+
+- kritická: bez nástroje nejde web, produkt, přihlášení, platba, doručení e-mailu nebo bezpečný provoz,
+- vysoká: výpadek výrazně zpomalí prodej, podporu, onboarding nebo hlavní reporting,
+- střední: výpadek je řešitelný ručně nebo dočasnou náhradou,
+- nízká: nástroj zlepšuje pohodlí, ale neblokuje klíčový tok.
+
+Příklad:
+
+```text
+DNS:
+Kritická služba. Výpadek ovlivní web, e-mail i ověřování domény.
+
+Newsletterový editor:
+Střední služba. Kampaň lze odložit nebo poslat jiným kanálem.
+
+Heatmap nástroj:
+Nízká až střední služba. Pokud navíc sbírá citlivější data, může mít vyšší privacy riziko než provozní kritičnost.
+```
+
+Poslední příklad je důležitý. Kritičnost a privacy riziko nejsou totéž. Některý nástroj není provozně důležitý, ale sbírá hodně dat. Takový nástroj si zaslouží přísnější otázky než služba, která jen posílá technické uptime upozornění.
+
+### 3. Zkontrolujte data, přístupy a retenci
+
+Privacy-first dodavatelská hygiena stojí na třech otázkách: jaká data služba dostává, kdo se k nim dostane a jak dlouho tam zůstávají. Pokud tým neumí odpovědět, nemá nástroj pod kontrolou.
+
+U každého dodavatele projděte:
+
+- Jaká osobní, zákaznická, obchodní nebo technická data služba zpracovává?
+- Posíláte do ní data ručně, přes formulář, přes API, přes skript nebo přes automatizaci?
+- Má služba administrátory, běžné uživatele a technické tokeny oddělené podle rolí?
+- Existují staré účty lidí, kteří už nástroj nepotřebují?
+- Používáte sdílené přihlášení, které nejde dohledat ke konkrétní osobě?
+- Dá se nastavit kratší retence logů nebo událostí?
+- Umíte data exportovat a smazat?
+- Víte, jestli nástroj vkládá další skripty, subdodavatele nebo externí prvky?
+
+Praktický zápis:
+
+```text
+Datová stopa:
+Kontaktní formulář posílá jméno, e-mail, zprávu, URL stránky a čas odeslání.
+
+Přístupy:
+Admin: technický vlastník
+Čtení: sales a support
+API token: serverová integrace, uložená v secrets manageru
+
+Retence:
+Poptávky se drží v CRM po dobu aktivního obchodního vztahu nebo do ručního smazání podle interního pravidla.
+
+Riziko:
+Formulář nesmí posílat data do marketingového seznamu bez samostatného souhlasu.
+```
+
+Nepotřebujete dokonalý právní dokument pro každou interní kontrolu. Potřebujete praktický provozní záznam, podle kterého tým pozná, zda se nástroj chová tak, jak slibujete zákazníkům.
+
+### 4. Před prodloužením licence udělejte rozhodnutí
+
+Obnova licence je skvělý moment pro kontrolu. Ne proto, že by každá faktura měla spustit strategické drama. Proto, že nástroje se umí v systému usadit jen setrvačností. Nikdo je nepoužívá, ale pořád mají přístup. Nikdo neví proč, ale pořád běží skript. Nikdo nemá rád report, ale pořád se exportuje.
+
+Před prodloužením položte pět otázek:
+
+- Jaké rozhodnutí nebo práci nám nástroj za poslední období reálně zlepšil?
+- Používá ho někdo pravidelně a odpovědně?
+- Je datová stopa přiměřená hodnotě?
+- Existuje jednodušší, evropsky provozovaná nebo vlastní alternativa?
+- Co se stane, když nástroj vypneme na 30 dní?
+
+Výsledek nemusí být vždy "zrušit". Často vyjde něco praktičtějšího:
+
+- ponechat, protože nástroj je kritický a dobře spravovaný,
+- omezit rozsah, protože některé funkce nejsou potřeba,
+- snížit počet uživatelů a odebrat staré přístupy,
+- vypnout skript na webu, ale ponechat interní použití,
+- nahradit nástroj při nejbližším kvartálním plánování,
+- archivovat data a službu ukončit.
+
+Rozhodnutí zapište krátce:
+
+```text
+Rozhodnutí:
+Nástroj ponecháváme, ale omezujeme sběr událostí jen na tři konverzní cíle.
+
+Proč:
+Report pomáhá rozhodovat o obsahu, ale detailní eventy se nepoužívaly.
+
+Další krok:
+Do pátku odebrat nepoužívané eventy, zkontrolovat dokumentaci a aktualizovat datovou mapu.
+```
+
+### 5. Připravte exit plán dřív, než ho potřebujete
+
+Vendor lock-in nevzniká jen technicky. Vzniká i v hlavách. Tým si zvykne, že "takhle to prostě funguje", a po dvou letech zjistí, že nástroj drží formuláře, automatizace, reporting, historická data, šablony e-mailů, billing i kus zákaznické komunikace. Vypnutí pak bolí víc než samotná licence.
+
+Exit plán má být krátký popis, jak se z nástroje odchází:
+
+- Jaká data potřebujeme exportovat?
+- V jakém formátu export existuje?
+- Které integrace se musí přepojit?
+- Které odkazy, formuláře nebo skripty je nutné odstranit z webu?
+- Kdo musí dostat informaci o změně?
+- Jak ověříme, že starý nástroj už nedostává data?
+- Co archivujeme kvůli historii rozhodnutí?
+
+Příklad pro marketingový formulář:
+
+```text
+Exit plán:
+1. Exportovat posledních 12 měsíců poptávek do interního úložiště.
+2. Přepojit formulář na vlastní endpoint.
+3. Otestovat doručení do e-mailu a CRM.
+4. Odebrat externí skript z landing pages.
+5. Zrušit API token.
+6. Ověřit v prohlížeči, že stránka už nenačítá doménu dodavatele.
+7. Aktualizovat datovou mapu a provozní list.
+```
+
+Exit plán neznamená, že musíte odejít. Znamená, že můžete. To je velký rozdíl. Možnost odejít dává týmu vyjednávací sílu, technický klid a lepší kontrolu nad daty.
+
+### 6. Mějte pravidlo pro nové nástroje
+
+Nejlepší dodavatelská hygiena začíná před nákupem. Jakmile je nástroj nasazený, lidé si na něj zvyknou. Proto se vyplatí mít krátkou vstupní bránu. Ne složitou komisi. Jen pár otázek, které zabrání tomu, aby se na web dostal další tracker nebo aby zákaznická data odtekla do služby, kterou nikdo nezkontroloval.
+
+Vstupní brána pro nový nástroj:
+
+- Jaký konkrétní problém řeší?
+- Jak poznáme, že funguje?
+- Jaká data bude sbírat nebo zpracovávat?
+- Lze stejný výsledek získat s menším sběrem dat?
+- Běží v Evropě nebo existuje evropsky provozovaná alternativa?
+- Potřebuje skript na veřejném webu, nebo stačí serverová/interní integrace?
+- Kdo bude vlastníkem nástroje?
+- Kdy proběhne první review?
+- Jak ho vypneme, když nepřinese hodnotu?
+
+Praktické pravidlo:
+
+```text
+Nový nástroj nesmí být nasazený na veřejný web, dokud nemá vlastníka, účel, datovou stopu, plán vyhodnocení a způsob vypnutí.
+```
+
+Tohle pravidlo může znít přísně. Ve skutečnosti šetří čas. Tým nemusí za půl roku hádat, proč se načítá neznámý skript z cizí domény a kdo ho vlastně chtěl.
+
+### 7. Udělejte kvartální úklid
+
+Jednou za kvartál projděte registr dodavatelů jako součást provozního review. Neřešte všechno do hloubky. Hledejte změny, rizika a nástroje bez vlastníka.
+
+Kvartální agenda na 60 minut:
+
+1. Otevřít registr dodavatelů.
+2. Označit nové nástroje přidané od poslední kontroly.
+3. Najít nástroje bez vlastníka nebo bez jasného účelu.
+4. Zkontrolovat kritické služby: doména, DNS, hosting, e-mail, zálohy, platby, přihlášení.
+5. Projít nástroje s osobními nebo zákaznickými daty.
+6. Odebrat staré účty a nepoužívané tokeny.
+7. Vybrat jednu službu k omezení, migraci nebo vypnutí.
+8. Aktualizovat datovou mapu, provozní list a rozhodovací log.
+
+Výstup má být malý:
+
+```text
+Kvartální dodavatelský review
+
+Ponecháváme:
+DNS, hosting, monitoring, analytiku, CRM.
+
+Omezujeme:
+E-mailing - odebrat neaktivní segmenty a nepoužívané formuláře.
+
+Vypínáme:
+Starý heatmap skript z landing page.
+
+Riziko:
+API token pro CRM nemá jasně popsanou rotaci.
+
+Další krok:
+Technický vlastník do konce měsíce doplní token do secrets registru a nastaví datum kontroly.
+```
+
+### Codyho komentář
+
+Můj pohled: nástroje jsou jako malé organizační půjčky. Na začátku pomohou rychle koupit čas. Když je ale nikdo nespravuje, začnou vybírat úroky v podobě chaosu, datové nejistoty, pomalého webu, faktur, přístupů a migrační bolesti. Privacy-first tým nemusí být asketický. Musí být účetně poctivý v tom, co si do systému pouští.
+
+### Checklist přílohy
+
+- Máte jeden registr všech důležitých dodavatelů a nástrojů?
+- Je u každého nástroje jasný účel, vlastník a kritičnost?
+- Víte, jaká data nástroj zpracovává a jak se do něj dostávají?
+- Jsou přístupy rozdělené podle rolí a nejsou v nich staré účty?
+- Umíte odlišit provozní kritičnost od privacy rizika?
+- Kontrolujete dodavatele před prodloužením licence?
+- Má každý kritický nebo datově citlivý nástroj exit plán?
+- Existuje pravidlo pro nasazení nového nástroje na veřejný web?
+- Preferujete evropský provoz, vlastní kontrolu dat a menší datovou stopu tam, kde to dává smysl?
+- Vypínáte nepoužívané skripty, tokeny, formuláře a automatizace?
+- Aktualizujete po změně datovou mapu, provozní list a rozhodovací log?
+- Děláte kvartální úklid dodavatelů jako běžnou součást provozu?
+
+Dodavatelská hygiena není administrativní zábava pro lidi, kteří mají podezřele rádi tabulky. Je to způsob, jak udržet web, SaaS a marketing ovladatelný. Když víte, komu svěřujete data a proč, můžete stavět rychleji bez toho, aby se z růstu stal nepřehledný sklad náhodných nástrojů.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -20111,3 +20367,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AP s plánem ukončení, migrace nebo archivace digitálního systému: inventura dopadu, datová mapa, privacy-first kontrola, migrace, komunikace, URL, přístupy a následné kontroly.
 - 2026-05-08: Doplněna Příloha AQ o obnově důvěry po chybě, incidentu nebo nepovedené kampani: stabilizace dopadu, komunikace, privacy-first kontrola, post-mortem, převod poučení do šablon a kontrola návratu důvěry.
 - 2026-05-08: Doplněna Příloha AR s incidentním drillem pro web, SaaS a marketing: scénáře, role, časová osa, dopad, komunikace, dokumentace, preventivní změny a opakovaný rytmus.
+- 2026-05-08: Doplněna Příloha AS s dodavatelskou hygienou pro web, SaaS a marketing: registr nástrojů, kritičnost, data, přístupy, licence, exit plán, vstupní brána a kvartální úklid.
