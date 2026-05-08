@@ -23464,6 +23464,193 @@ Před publikací projděte rukopis jedním praktickým checklistem:
 
 Redakční zkrácení je úklid před tím, než pozvete lidi dovnitř. Nejde o to schovat práci. Jde o to ukázat ji v pořadí, které čtenáři pomůže. Dobrý e-book nemusí říct všechno najednou. Musí říct správnou věc ve chvíli, kdy podle ní někdo může jednat.
 
+## Příloha BF: Release kandidát první veřejné verze
+
+Redakčně zkrácený e-book ještě není veřejná verze. Je to materiál, který může být dobrý, ale pořád se může rozpadnout na detailech: nejasná cílová stránka, starý odkaz, chybějící vlastník, přehnaný sběr dat, slabý úvod, rozbité PDF, nedotažený follow-up nebo tým, který neví, co má po publikaci sledovat. Release kandidát je poslední pracovní zastávka před tím, než text začnete aktivně posílat lidem.
+
+Smysl release kandidáta není oddalovat publikaci. Smysl je udělat jedno klidné rozhodnutí: tato verze je dostatečně jasná, použitelná, pravdivá a provozně připravená na veřejné použití.
+
+### 1. Definujte rozsah release kandidáta
+
+Nejdřív napište, co přesně je součástí první veřejné verze. Bez toho se kontrola změní v nekonečné "ještě bychom mohli". A ano, mohli. Vždycky. Internet je plný týmů, které mohly ještě něco doplnit a místo publikace tři měsíce leštily nadpis.
+
+Rozsah release kandidáta může vypadat takto:
+
+```text
+Název verze: Web, SaaS a marketing v praxi - veřejná verze 1.0 RC1
+Cílový čtenář: zakladatel nebo vedoucí malého B2B týmu, který řeší web, SaaS produkt nebo marketingový systém
+Součástí verze:
+- veřejný e-book na vlastní URL
+- zkrácené PDF pro offline čtení
+- landing page s jasným slibem a obsahem
+- RSS oznámení nebo blogový zápis
+- 3-5 přímých distribučních textů pro vybrané publikum
+- interní checklist pro follow-up a sběr zpětné vazby
+Mimo rozsah:
+- placená kampaň
+- automatizovaný newsletter funnel
+- gated download za e-mail
+- nové analytické nástroje mimo schválené privacy-first minimum
+```
+
+Mimo rozsah pište stejně pečlivě jako rozsah. Právě tam se nejčastěji schovává chaos. Pokud něco není potřeba pro první veřejné ověření, nepatří to do release kandidáta.
+
+### 2. Zamrazte text a povolte jen tři typy změn
+
+V release kandidátovi už neřešte, jestli by se dalo napsat ještě lepší vysvětlení SaaS metrik, delší kapitola o SEO nebo vtipnější úvod. Dalo. Ale teď kontrolujete vydání, ne rozšiřujete knihu.
+
+Povolte jen tři typy změn:
+
+- Oprava chyby: překlep, nefunkční odkaz, chybné tvrzení, duplicitní věta, rozbitá struktura.
+- Zpřesnění rizika: nejasná právní, privacy-first, bezpečnostní nebo provozní formulace.
+- Zlepšení průchodu: úprava, bez které čtenář nepochopí, co má udělat dál.
+
+Vše ostatní patří do backlogu další verze. Release kandidát není skládka dobrých nápadů. Je to kontrola, jestli už dobrý nápad může opustit dílnu.
+
+### 3. Projděte čtenářskou cestu od prvního kontaktu po další krok
+
+Nekontrolujte jen soubor. Kontrolujte cestu člověka, který e-book uvidí poprvé.
+
+Minimální průchod:
+
+1. Čtenář uvidí odkaz v článku, zprávě nebo přímém doporučení.
+2. Otevře landing page.
+3. Do deseti sekund pochopí, pro koho e-book je a co mu pomůže rozhodnout.
+4. Najde obsah nebo ukázku bez registrace.
+5. Může číst na webu nebo si stáhnout soubor.
+6. Ví, jak poslat zpětnou vazbu nebo navázat spolupráci.
+7. Není nucený přijmout zbytečné cookies, trackery nebo marketingové přihlášení.
+
+Praktický test: pošlete release kandidát jednomu člověku, který neviděl pracovní verzi, a dejte mu jediný úkol: "Najdi část, která by ti pomohla s tvým aktuálním webem nebo produktem, a řekni mi, co bys podle ní udělal jako první." Pokud odpoví obecně, cesta je pořád moc mlhavá.
+
+### 4. Připravte rozhodovací kartu vydání
+
+Release kandidát má skončit rozhodnutím, ne pocitem. Použijte krátkou kartu:
+
+```text
+Release kandidát:
+Datum:
+Vlastník:
+
+Publikační cíl:
+
+Kontrolované výstupy:
+- Webová verze:
+- PDF:
+- Landing page:
+- RSS / blog oznámení:
+- Distribuční texty:
+- Zpětná vazba:
+
+Blokery:
+
+Neblokující nedostatky:
+
+Privacy-first kontrola:
+- Data sbíraná při čtení:
+- Analytika:
+- Formuláře:
+- Retence:
+- Dodavatelé:
+
+Rozhodnutí:
+[ ] Publikovat
+[ ] Opravit blokery a udělat RC2
+[ ] Zastavit a přepracovat rozsah
+
+Další kontrola:
+```
+
+Rozdíl mezi blockerem a neblokujícím nedostatkem musí být tvrdý. Bloker je věc, kvůli které by publikace poškodila důvěru, pravdivost, použitelnost nebo provoz. Neblokující nedostatek je něco, co by bylo hezké zlepšit, ale veřejné použití tím netrpí.
+
+### 5. Privacy-first brána před publikací
+
+U e-booku je snadné začít nevinně: přidáme formulář, měření scrollu, remarketingový pixel, heatmapu, chat widget a pár UTM parametrů. Najednou se z privacy-first materiálu stane ukázka toho, před čím text varuje. To je elegantní druh trapasu, ale pořád trapas.
+
+Před publikací si položte pět otázek:
+
+- Musí být e-book za e-mailem, nebo stačí volně dostupná verze a dobrovolný kontakt?
+- Jaká data opravdu potřebujeme k vyhodnocení užitečnosti první verze?
+- Kde jsou analytická data uložena a kdo k nim má přístup?
+- Jak dlouho držíme zpětnou vazbu a obsahuje osobní nebo zákaznické údaje?
+- Umíme čtenáři jednoduše říct, co měříme a proč?
+
+Privacy-first minimum pro první vydání:
+
+- Veřejná URL bez povinné registrace.
+- RSS nebo blogové oznámení místo nátlakového newsletteru.
+- Přímé distribuční odkazy bez social share skriptů.
+- Analytika jen pro základní rozhodnutí: návštěva stránky, otevření klíčových částí, klik na stažení, dobrovolný kontakt.
+- Formulář zpětné vazby s jasným účelem a bez zbytečných polí.
+
+### 6. Připravte krátkou veřejnou poznámku k verzi
+
+Veřejná poznámka k verzi nemusí být velká tisková zpráva. Má čtenáři říct, co dostává, pro koho to je, jak s tím pracovat a jak se verze bude udržovat.
+
+Šablona:
+
+```text
+Vydali jsme první veřejnou verzi e-booku [název].
+
+Je určený pro [cílový čtenář], který řeší [situace]. Najdete v něm praktické kapitoly a checklisty k webu, SaaS, marketingu, provozu a privacy-first práci s daty.
+
+Nejde o hotovou učebnici. Je to pracovní příručka, kterou budeme dál zpřesňovat podle zpětné vazby a změn v praxi. E-book je dostupný na vlastní URL bez povinné registrace. Pokud vám pomůže nebo v něm najdete slabé místo, pošlete nám konkrétní poznámku.
+```
+
+Tón držte věcný. Nepředstírejte, že první verze vyřeší všechny problémy digitálního podnikání. Stačí, když bude jasně užitečná pro první okruh čtenářů.
+
+### 7. Vyplněný příklad rozhodnutí
+
+```text
+Release kandidát: Web, SaaS a marketing v praxi - 1.0 RC1
+Datum: 2026-05-08
+Vlastník: Cody / Dreamind
+
+Publikační cíl:
+Ověřit, jestli zkrácený e-book pomáhá malým B2B týmům vybrat první konkrétní zlepšení webu, produktu nebo marketingu.
+
+Kontrolované výstupy:
+- Webová verze: připravena, čitelná na mobilu
+- PDF: připraveno, zkontrolována velikost a obsah
+- Landing page: jasný slib, obsah, přímé odkazy
+- RSS / blog oznámení: připraveno
+- Distribuční texty: 4 varianty podle publika
+- Zpětná vazba: jednoduchý kontakt bez povinného účtu
+
+Blokery:
+- chybí veřejná poznámka, jak se bude verze aktualizovat
+
+Neblokující nedostatky:
+- některé přílohy mají podobný rytmus checklistů
+- chybí kratší jednostránkový výtah pro sales použití
+
+Privacy-first kontrola:
+- Data sbíraná při čtení: základní návštěvnost a kliky na hlavní odkazy
+- Analytika: privacy-first analytika v EU režimu
+- Formuláře: dobrovolná zpětná vazba, minimum polí
+- Retence: zpětná vazba revidovaná kvartálně
+- Dodavatelé: bez nových marketingových trackerů
+
+Rozhodnutí:
+Opravit veřejnou poznámku k aktualizacím a udělat RC2 bez rozšiřování obsahu.
+```
+
+### 8. Codyho komentář
+
+Můj pohled: release kandidát je moment, kdy se pozná rozdíl mezi péčí a strachem. Péče opraví chyby, zkontroluje odkazy, ohlídá data a zpřístupní text lidem. Strach přidá další kapitolu, další podmínku, další interní kolečko a další týden ticha. Publikace nemusí být dramatická. Stačí vydat verzi, za kterou se dá stát, a potom poctivě reagovat na realitu.
+
+### Checklist přílohy
+
+- Je přesně napsané, co je součástí první veřejné verze?
+- Je stejně jasné, co je mimo rozsah?
+- Jsou v release kandidátovi povolené jen opravy chyb, rizik a průchodu?
+- Prošel někdo celou čtenářskou cestu od odkazu po další krok?
+- Existuje rozhodovací karta s blockery a neblokujícími nedostatky?
+- Je privacy-first brána splněná bez nových zbytečných trackerů?
+- Má veřejná verze poznámku, pro koho je a jak se bude udržovat?
+- Je rozhodnutí publikovat, opravit RC2 nebo přepracovat rozsah zapsané konkrétně?
+- Jsou nápady mimo vydání uložené do backlogu další verze?
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -23649,3 +23836,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha BC s provozním rytmem pro šablony a playbooky: spouštěče, týdenní/měsíční/kvartální review, pracovní fronta, vlastnictví, privacy-first brána a checklist.
 - 2026-05-08: Doplněna Příloha BD o měření přínosu šablon a playbooků: rozhodnutí, signály hodnoty, zastavená práce, privacy-first metrika, scorecard a archivace.
 - 2026-05-08: Doplněna Příloha BE o redakčním zkrácení první veřejné verze: primární čtenář, čtenářské trasy, štítky pro části, práce s duplicitami, oddělení šablon a privacy-first kontrola.
+- 2026-05-08: Doplněna Příloha BF s release kandidátem první veřejné verze: rozsah, zmrazení textu, čtenářská cesta, rozhodovací karta, privacy-first brána a publikační checklist.
