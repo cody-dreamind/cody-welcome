@@ -18490,6 +18490,322 @@ U většího projektu přidejte deset minut na otázky. Nepřidávejte deset lid
 
 30denní kontrola je malý rituál proti ztrátě hodnoty. Pomáhá ověřit, že výstup neskončil jako hezký dokument, že data nezůstala ležet bez vlastníka, že přístupy nejsou otevřené z pohodlnosti a že další práce má směr. Není to velký proces. Je to jen návrat k realitě ve správný čas. Což je v digitálních projektech skoro luxus.
 
+## Příloha AN: Kvartální roadmapa zlepšování po 30denní kontrole
+
+30denní kontrola ukáže, co se po předání opravdu stalo. Kvartální roadmapa řeší další otázku: co s tím uděláte, aby z jedné dobré iterace nevznikl další náhodný seznam úkolů.
+
+Roadmapa v tomto smyslu není slib, že za tři měsíce bude všechno hotové. Je to pracovní dohoda, jak tým vybere několik důležitých změn, udrží je v rozumném rozsahu a pravidelně zkontroluje, jestli pořád dávají smysl. U webu, SaaS a marketingu je to praktické hlavně proto, že každá oblast umí rychle přitáhnout nové nápady. Někdo chce nový landing page, někdo integraci do CRM, někdo AI funkci, někdo newsletter, někdo nový dashboard. Všechno může znít rozumně. Ne všechno má být v tomto kvartálu.
+
+Kvartální roadmapa má pět otázek:
+
+1. Jaké rozhodnutí nebo výsledek je pro příštích 90 dní nejdůležitější?
+2. Jaké tři až pět změn k němu nejvíc pomůže?
+3. Co musí zůstat mimo rozsah?
+4. Jak poznáme, že se zlepšujeme?
+5. Jak udržíme kontrolu nad daty, provozem a přístupy?
+
+Pokud roadmapa neumí odpovědět na těchto pět otázek, není to roadmapa. Je to wishlist v hezčím kabátu. Wishlist je fajn na sběr nápadů. Na řízení práce je to trochu jako navigace, která místo trasy ukazuje všechna města v Evropě.
+
+### Kdy roadmapu sestavit
+
+Roadmapu dělejte po 30denní kontrole, po větším auditu, po pilotu, po významné kampani nebo ve chvíli, kdy tým cítí, že dělá hodně věcí, ale nedokáže říct, která z nich mění výsledek.
+
+Hodí se hlavně pro:
+
+- web, který už funguje, ale potřebuje zlepšit kvalitu poptávek,
+- SaaS MVP, které prošlo pilotem a má se stabilizovat,
+- marketingový systém, který má obsah, ale nemá rytmus a měření,
+- privacy-first provoz, kde existují pravidla, ale nejsou pravidelně kontrolovaná,
+- tým, který má mnoho drobných požadavků a málo jasných priorit.
+
+Nedělejte kvartální roadmapu jako divadelní dokument pro vedení. Má pomáhat rozhodovat v úterý dopoledne, ne zdobit prezentaci. Dobrá roadmapa se vejde na jednu až dvě stránky a každý bod má vlastníka, důvod a kritérium hotovo.
+
+### Vstupy pro roadmapu
+
+Před plánováním připravte jen tolik podkladů, kolik opravdu použijete. Čím víc materiálu přinesete bez struktury, tím větší šance, že se schůzka promění v archeologii.
+
+Užitečné vstupy:
+
+- záznam 30denní kontroly,
+- hlavní doporučení z auditu nebo předávacího balíčku,
+- aktuální backlog webu, produktu a marketingu,
+- signály z analytiky, formulářů, aktivace, supportu nebo sales,
+- seznam otevřených rizik a rozhodnutí,
+- datová mapa a seznam externích nástrojů,
+- seznam věcí, které tým vědomě odložil.
+
+U každého vstupu si položte otázku: jaké rozhodnutí nám to pomáhá udělat? Pokud odpověď neexistuje, podklad nechte stranou. Roadmapa nemá být všechno, co víte. Má být to, podle čeho budete jednat.
+
+### Jednostránková šablona
+
+```text
+Kvartální roadmapa zlepšování
+
+Kvartál:
+Hlavní vlastník:
+Tým:
+Datum sestavení:
+Datum review:
+
+1. Hlavní rozhodovací otázka:
+2. Hlavní výsledek kvartálu:
+3. Tři až pět priorit:
+4. Co vědomě neděláme:
+5. Signály úspěchu:
+6. Privacy-first brána:
+7. Rizika:
+8. Měsíční kontrolní body:
+9. Rozhodnutí na konci kvartálu:
+```
+
+Příklad hlavní otázky:
+
+```text
+Dokážeme zlepšit kvalitu B2B poptávek bez přidání nových trackerů a bez rozšíření formuláře?
+```
+
+Příklad hlavního výsledku:
+
+```text
+Web přináší méně nejasných poptávek, sales rozumí kontextu leadu a tým umí každý měsíc vyhodnotit, které stránky pomáhají rozhodnutí zákazníka.
+```
+
+To je lepší než "zlepšit web". Zlepšit web může znamenat cokoli. Hlavní výsledek musí určit směr, jinak se do něj vejde každý nápad a roadmapa ztratí zuby.
+
+### 1. Vyberte hlavní rozhodovací otázku
+
+Kvartál nemá začínat seznamem úkolů. Má začínat otázkou, kterou potřebujete zodpovědět nebo posunout.
+
+Příklady:
+
+- Dokáže nová struktura služby snížit počet nekvalifikovaných poptávek?
+- Umí pilotní uživatelé dokončit hlavní workflow bez ručního vedení?
+- Které tři obsahové formáty nejlépe podporují sales hovory?
+- Kde ztrácíme důvěru: v copy, důkazech, ceně, onboardingu nebo provozní komunikaci?
+- Umíme měřit aktivaci bez zbytečného sběru osobních údajů?
+- Je produktizovaná služba opakovatelná bez toho, aby pálila seniorní kapacitu na každém detailu?
+
+Otázka má být dost úzká, aby šla během 90 dní posunout. "Jak vyhrát trh" je strategická ambice. "Jak zlepšit první demo pro segment účetních týmů" je práce.
+
+### 2. Omezte priority na tři až pět věcí
+
+Tři priority jsou ideál. Pět je maximum. Pokud jich máte osm, ve skutečnosti nemáte priority. Máte frontu požadavků a trochu optimismu navíc.
+
+Každou prioritu napište ve formátu:
+
+```text
+Priorita:
+Proč teď:
+Výstup:
+Vlastník:
+Kritérium hotovo:
+Privacy-first dopad:
+```
+
+Příklad pro web:
+
+```text
+Priorita:
+Přepsat hlavní stránku služby podle rozhodovacích otázek zákazníka.
+
+Proč teď:
+Sales hlásí, že lidé rozumí výsledku až po hovoru. Web má část vysvětlování převzít předem.
+
+Výstup:
+Nová struktura stránky, tři důkazy, jasný první krok a kratší formulář.
+
+Vlastník:
+Marketing owner.
+
+Kritérium hotovo:
+Stránka je publikovaná, měří se klik na hlavní CTA a odeslání formuláře, sales má připravený follow-up text.
+
+Privacy-first dopad:
+Nepřidáváme nový tracker. Formulář sbírá jen jméno, e-mail, firmu a stručný kontext.
+```
+
+Příklad pro SaaS:
+
+```text
+Priorita:
+Zjednodušit aktivaci nového tenantu.
+
+Proč teď:
+Pilotní zákazníci potřebovali ruční pomoc při prvním nastavení.
+
+Výstup:
+Průvodce první konfigurací, ukázková data, jasný stav dokončení a support poznámky.
+
+Vlastník:
+Product lead.
+
+Kritérium hotovo:
+Tři noví uživatelé dokončí hlavní workflow bez společného hovoru.
+
+Privacy-first dopad:
+Ukázková data neobsahují reálné osobní údaje a onboarding nevyžaduje zbytečné informace.
+```
+
+Tento formát nutí tým říct nejen co chce dělat, ale proč, jak pozná konec a jaký dopad má změna na data.
+
+### 3. Pojmenujte věci mimo rozsah
+
+Roadmapa bez explicitního "ne" je slabá. Každý nový nápad se bude tvářit jako drobnost, dokud z kvartálu nezůstane deset nedokončených začátků.
+
+Typické věci mimo rozsah:
+
+- nový redesign celé značky,
+- další marketingový tracker,
+- veřejný trial před dokončením pilotu,
+- rozšíření formuláře bez jasného důvodu,
+- AI funkce bez ověřené úspory času,
+- migrace CRM uprostřed kampaně,
+- nový newsletter, dokud není obsahový rytmus,
+- enterprise funkce pro zákazníka, který ještě nepotvrdil hodnotu,
+- dashboard, který nikdo nebude používat k rozhodnutí.
+
+Zápis může být krátký:
+
+```text
+Tento kvartál neděláme:
+Nepřidáváme nové měřicí skripty, nespouštíme veřejný trial, nepřepisujeme celý design systém a nerozšiřujeme formuláře. Soustředíme se na kvalitu poptávek, aktivaci a odstranění dvou provozních rizik.
+```
+
+Tato věta ušetří několik schůzek. Což je skoro forma veřejné služby.
+
+### 4. Nastavte signály úspěchu
+
+Signály úspěchu nejsou jen metriky v dashboardu. Jsou to pozorovatelné změny, podle kterých tým pozná, že roadmapa vede k výsledku.
+
+Pro web:
+
+- vyšší podíl poptávek s konkrétním kontextem,
+- méně dotazů na věci, které má vysvětlit stránka,
+- více kliků na hlavní CTA z relevantních stránek,
+- rychlejší první odpověď díky lepším vstupním informacím,
+- méně externích skriptů a jasnější datová mapa.
+
+Pro SaaS:
+
+- kratší čas k první hodnotě,
+- méně ruční podpory v onboardingu,
+- více dokončených hlavních workflow,
+- méně chyb v opakovaných provozních tocích,
+- jasnější audit log a přístupová práva.
+
+Pro marketing:
+
+- obsah častěji odpovídá na sales námitky,
+- články mají jasné interní odkazy na další krok,
+- distribuce stojí víc na vlastních kanálech a RSS,
+- tým umí říct, které formáty pomáhají rozhodnutí,
+- měření sleduje užitečnost, ne jen provozní hluk.
+
+Nepřehánějte přesnost. Kvartální roadmapa má řídit směr, ne vyrábět falešnou matematiku. Pokud máte málo dat, používejte i kvalitativní signály ze sales, supportu a rozhovorů. Jen je zapisujte konkrétně.
+
+### 5. Přidejte privacy-first bránu
+
+Každá priorita musí projít jednoduchou kontrolou:
+
+```text
+Jaká nová data vzniknou?
+Jsou opravdu nutná?
+Kde budou uložená?
+Kdo k nim bude mít přístup?
+Jak dlouho je budeme držet?
+Přidáváme nového dodavatele nebo skript?
+Umíme změnu vysvětlit zákazníkovi lidskou řečí?
+```
+
+Pokud tým neumí odpovědět, priorita není připravená. To neznamená, že je špatná. Znamená to, že chybí provozní dospělost.
+
+Příklad:
+
+```text
+Nápad:
+Přidat heatmap nástroj na landing page.
+
+Privacy-first brána:
+Nejdřív ověřit, jestli rozhodnutí nejde udělat z existujících eventů, formulářů a kvalitativních rozhovorů. Pokud ne, nástroj musí mít jasný účel, omezenou retenci, evropské zpracování dat, vypnuté nahrávání citlivých polí a zápis v datové mapě.
+```
+
+V mnoha případech zjistíte, že nový nástroj není potřeba. Někdy potřeba je. Rozdíl je v tom, že rozhodnutí nevznikne z pohodlnosti, ale z jasné potřeby.
+
+### 6. Rozdělte kvartál na tři měsíční kontroly
+
+Roadmapu nenechávejte tři měsíce ležet. Stačí krátké měsíční review.
+
+Agenda na 45 minut:
+
+```text
+0-5 min: připomenutí hlavní otázky
+5-15 min: stav priorit
+15-25 min: signály úspěchu a nové překážky
+25-35 min: privacy-first kontrola dat, přístupů a nástrojů
+35-45 min: rozhodnutí ponechat, upravit nebo zastavit
+```
+
+U každé priority vyberte jeden stav:
+
+- ponechat: pořád dává smysl,
+- zúžit: rozsah je moc velký,
+- zastavit: nepodporuje hlavní výsledek,
+- převést: patří do jiného týmu nebo dalšího kvartálu,
+- dokončeno: výstup splnil kritérium hotovo.
+
+Nečekejte na konec kvartálu, abyste přiznali, že něco nedává smysl. Zastavená priorita není prohra. Prohra je pokračovat jen proto, že už je v plánu.
+
+### 7. Udělejte konečné rozhodnutí
+
+Na konci kvartálu nedělejte jen status report. Udělejte rozhodnutí.
+
+Možnosti:
+
+- pokračovat stejným směrem,
+- zúžit segment,
+- změnit hlavní nabídku,
+- posílit onboarding,
+- přepsat prodejní stránku,
+- odstranit nástroj nebo integraci,
+- stabilizovat provoz před dalším růstem,
+- spustit další pilot,
+- převést výstup do produktizované služby,
+- uzavřít iniciativu, protože nepřinesla dost signálů.
+
+Stručný záznam:
+
+```text
+Co jsme se naučili:
+Co se změnilo:
+Co mělo hodnotu:
+Co zastavujeme:
+Co pokračuje:
+Jaký je další kvartální výsledek:
+```
+
+Tím se z roadmapy stane paměť týmu. Bez paměti tým opakuje stejné debaty každé tři měsíce, jen s jinými lidmi a čerstvou kávou.
+
+### Codyho komentář
+
+Můj pohled: roadmapa má být méně o ambici a víc o disciplíně. Ambice je snadná. Stačí přidat slova jako platforma, škálování, AI a růst. Disciplína je těžší: vybrat tři věci, napsat proč, odmítnout zbytek, změřit výsledek a přiznat, když to nefungovalo. Právě tam se láme rozdíl mezi týmem, který něco posouvá, a týmem, který jen hezky organizuje chaos.
+
+### Checklist přílohy
+
+- Má kvartál jednu hlavní rozhodovací otázku?
+- Je hlavní výsledek konkrétnější než obecné "zlepšit web", "růst" nebo "optimalizovat produkt"?
+- Je priorit maximálně pět?
+- Má každá priorita důvod, vlastníka, výstup a kritérium hotovo?
+- Je u každé priority popsán privacy-first dopad?
+- Je jasně napsané, co tento kvartál neděláte?
+- Jsou signály úspěchu navázané na rozhodnutí, ne jen na počet zobrazení nebo aktivit?
+- Proběhne měsíční kontrola roadmapy?
+- Umí tým prioritu zúžit nebo zastavit bez dramatu?
+- Kontrolujete nové nástroje, skripty, data, přístupy a retenci?
+- Vznikne na konci kvartálu krátký záznam toho, co se tým naučil?
+- Převádí roadmapa poznatky z 30denní kontroly do konkrétní práce?
+
+Kvartální roadmapa je jednoduchý most mezi operativou a strategií. Bere realitu z 30denní kontroly, převádí ji do několika rozumných priorit a chrání tým před tím, aby každé nové přání okamžitě dostalo vlastní projekt. Není to velké plánování. Je to pravidelná údržba směru. A směr je u digitálních produktů překvapivě konkurenční výhoda.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -18657,3 +18973,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-07: Doplněna Příloha AK o převodu pilotu do opakovatelného delivery systému: post-pilot inventura, fáze delivery, delivery kit, role, kapacita, standard výstupu, smyčka zlepšování a škálování.
 - 2026-05-08: Doplněna Příloha AL s předávacím balíčkem po auditu, MVP nebo produktizované službě: výstupy, doporučení, přístupy, data, provozní kontrola, rizika, další krok a předávací checklist.
 - 2026-05-08: Doplněna Příloha AM s 30denní kontrolou po předání: ověření změn v provozu, dat, přístupů, privacy-first závazků, prvních signálů hodnoty a jednoho dalšího kroku.
+- 2026-05-08: Doplněna Příloha AN s kvartální roadmapou zlepšování po 30denní kontrole: rozhodovací otázka, priority, věci mimo rozsah, signály úspěchu, privacy-first brána a měsíční review.
