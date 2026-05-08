@@ -23651,6 +23651,136 @@ Můj pohled: release kandidát je moment, kdy se pozná rozdíl mezi péčí a s
 - Je rozhodnutí publikovat, opravit RC2 nebo přepracovat rozsah zapsané konkrétně?
 - Jsou nápady mimo vydání uložené do backlogu další verze?
 
+## Příloha BG: Veřejná poznámka k aktualizacím e-booku
+
+Release kandidát v předchozí příloze ukázal jeden konkrétní blocker: první veřejná verze potřebuje krátce a srozumitelně říct, jak se bude e-book udržovat. Není to detail pro patičku. Je to součást důvěry. Čtenář má vědět, jestli čte jednorázový text, živý pracovní materiál, marketingové PDF bez péče, nebo příručku, která se bude opravovat podle praxe.
+
+Veřejná poznámka k aktualizacím má tři úkoly:
+
+1. Nastavit očekávání, že e-book je praktický rukopis, ne definitivní zákon vytesaný do kamene.
+2. Vysvětlit, jak se budou řešit opravy, nové verze, zdroje a změny v právním nebo technickém kontextu.
+3. Udržet privacy-first hodnotu i při sběru zpětné vazby: minimum dat, žádný povinný newsletter, žádné skryté sledování čtenářů.
+
+Bez této poznámky může být obsah kvalitní, ale čtenář pořád neví, co se stane, když najde chybu, zastaralý odkaz nebo silnější příklad z praxe. A tým neví, jaké typy změn může udělat hned a co patří do další veřejné verze.
+
+### 1. Co má veřejná poznámka obsahovat
+
+Krátká poznámka nemusí opisovat celý aktualizační protokol z přílohy N. Má být tak stručná, aby ji člověk opravdu přečetl, a tak konkrétní, aby tým podle ní jednal.
+
+Minimum:
+
+- Název a číslo aktuální veřejné verze.
+- Datum poslední významné aktualizace.
+- Pro koho je e-book určený.
+- Co se bude opravovat průběžně: překlepy, nefunkční odkazy, nejasné formulace, chybné nebo zastaralé zdroje.
+- Co se bude měnit jen ve větších verzích: struktura kapitol, nové kapitoly, výrazné přepsání doporučení, nové šablony.
+- Jak může čtenář poslat zpětnou vazbu.
+- Jaká data se při zpětné vazbě sbírají a jak se s nimi pracuje.
+- Kde najde changelog nebo poznámky k vydání.
+
+Příklad krátké veřejné poznámky:
+
+```text
+Toto je první veřejná verze e-booku Od webu k SaaS. Je určená pro zakladatele, malé B2B týmy a lidi, kteří chtějí stavět weby, SaaS produkty a marketingové systémy s důrazem na praktický výsledek, provozní kontrolu a privacy-first přístup.
+
+E-book průběžně udržujeme. Opravujeme překlepy, nefunkční odkazy, nepřesné formulace a zastaralé zdroje. Větší změny, jako nové kapitoly nebo výrazné přepsání struktury, zapisujeme do changelogu.
+
+Pokud najdete chybu nebo máte konkrétní zkušenost z praxe, pošlete nám poznámku. Zpětnou vazbu používáme jen ke zlepšení e-booku a služeb kolem něj. Nevyžadujeme registraci, nepřidáváme vás automaticky do newsletteru a nesbíráme víc údajů, než je nutné pro odpověď.
+```
+
+Tato verze je dostatečně konkrétní pro čtenáře a zároveň neotvírá slib, který tým neumí splnit. Neříká "budeme aktualizovat každý týden", pokud takový rytmus není jistý. Neříká "všechno je aktuální", protože u webu, SaaS, marketingu a privacy regulace je to podezřele odvážná věta. Říká, jak se bude s textem zacházet.
+
+### 2. Kam poznámku umístit
+
+Poznámka k aktualizacím má být viditelná dřív, než čtenář začne podle e-booku jednat.
+
+Praktické umístění:
+
+- Na landing page pod hlavní slib nebo do krátkého bloku "O této verzi".
+- Na začátek webové verze e-booku, ideálně hned za úvodní metadata.
+- Do PDF na první nebo druhou stranu.
+- Do changelogu jako odkaz na aktuální verzi.
+- Do patičky nebo závěru jako krátká připomínka, kde poslat zpětnou vazbu.
+
+Nepatří jen do právních podmínek. Tam ji nikdo nebude hledat ve chvíli, kdy řeší praktickou chybu. Právní text může popsat zpracování osobních údajů, ale poznámka k aktualizacím je produktová komunikace: "Takhle pečujeme o text, který vám dáváme do ruky."
+
+### 3. Co nepsat
+
+Slabá poznámka obvykle padá do jedné ze tří pastí.
+
+První past je mlhavý slib:
+
+```text
+E-book budeme pravidelně aktualizovat.
+```
+
+To zní dobře, ale nic neříká. Pravidelně může znamenat jednou týdně, jednou za rok nebo pokaždé, když se někdo cítí provinile při pohledu na backlog.
+
+Druhá past je falešná definitivnost:
+
+```text
+Tento e-book obsahuje kompletní a aktuální návod pro web, SaaS a marketing.
+```
+
+To je obchodně lákavé a prakticky podezřelé. Lepší je slíbit poctivý pracovní materiál než dokonalost.
+
+Třetí past je datová mlha:
+
+```text
+Pro zlepšování obsahu můžeme zpracovávat vaše údaje.
+```
+
+Jaké údaje? Proč? Jak dlouho? Kdo k nim má přístup? Pokud e-book mluví o privacy-first provozu, poznámka sama musí být důkazem, ne výjimkou.
+
+Silnější formulace:
+
+```text
+Když nám pošlete poznámku, použijeme ji k opravě nebo zpřesnění e-booku. Pokud uvedete kontakt, použijeme ho jen pro případnou odpověď. Zpětnou vazbu pravidelně třídíme, zbytečné osobní údaje nemažeme až "někdy", ale při revizi backlogu.
+```
+
+U poslední věty si tým musí doplnit skutečný rytmus, například měsíční nebo kvartální. Veřejná poznámka nemá vyrábět lež jen proto, že se hezky čte.
+
+### 4. Interní pravidla pro údržbu poznámky
+
+Veřejná poznámka má svého vlastníka. Jinak časem zestárne stejně jako každý dobrý úmysl v dokumentaci.
+
+Interní pravidla:
+
+- Při každém větším vydání zkontrolovat číslo verze, datum a odkaz na changelog.
+- Při přidání nového kanálu zpětné vazby ověřit, jaká data sbírá a kde jsou uložená.
+- Při změně analytiky zkontrolovat, jestli poznámka pořád odpovídá realitě.
+- Při přidání nové právní nebo technické kapitoly zkontrolovat, jestli zdroje nejsou jen historický ornament.
+- Při archivaci starší verze zachovat poznámku k tehdejší verzi, aby bylo jasné, co čtenář v daném čase dostal.
+
+Praktický záznam do changelogu:
+
+```text
+Verze: 1.0 RC2
+Datum: 2026-05-08
+Změna: Doplněna veřejná poznámka k aktualizacím e-booku.
+Důvod: RC1 měl blocker - čtenář nevěděl, jak se bude text udržovat a jak poslat zpětnou vazbu bez zbytečného sběru dat.
+Privacy-first dopad: Bez nových trackerů a bez povinné registrace. Zpětná vazba zůstává dobrovolná a účelově omezená.
+```
+
+Tento zápis není pro parádu. Pomáhá později pochopit, proč změna vznikla. A až někdo za půl roku navrhne gated download za e-mail, bude jasné, že by to nebyla drobná marketingová úprava, ale změna veřejného slibu.
+
+### 5. Codyho komentář
+
+Můj pohled: poznámka k aktualizacím je malý text s velkým dopadem. Když ji napíšete poctivě, chrání čtenáře před falešnou jistotou a tým před chaosem. Když ji napíšete marketingově, bude znít hezky přesně do chvíle, než se někdo zeptá, co vlastně znamená "pravidelně aktualizujeme". A to je nepříjemná otázka hlavně proto, že je dobrá.
+
+### Checklist přílohy
+
+- Má veřejná verze jasně uvedené číslo nebo název verze?
+- Je vidět datum poslední významné aktualizace?
+- Ví čtenář, pro koho je e-book určený a jak s ním pracovat?
+- Je napsané, jaké změny se opravují průběžně a jaké patří do větší verze?
+- Existuje veřejný changelog nebo alespoň stručná historie významných změn?
+- Je zpětná vazba dobrovolná a bez povinného marketingového přihlášení?
+- Je jasné, jaká data se při zpětné vazbě sbírají a proč?
+- Nepřidává poznámka sliby, které tým neumí provozně splnit?
+- Je poznámka umístěná na landing page, v e-booku i v PDF dostatečně brzy?
+- Má někdo odpovědnost za kontrolu poznámky při každém větším vydání?
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -23837,3 +23967,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha BD o měření přínosu šablon a playbooků: rozhodnutí, signály hodnoty, zastavená práce, privacy-first metrika, scorecard a archivace.
 - 2026-05-08: Doplněna Příloha BE o redakčním zkrácení první veřejné verze: primární čtenář, čtenářské trasy, štítky pro části, práce s duplicitami, oddělení šablon a privacy-first kontrola.
 - 2026-05-08: Doplněna Příloha BF s release kandidátem první veřejné verze: rozsah, zmrazení textu, čtenářská cesta, rozhodovací karta, privacy-first brána a publikační checklist.
+- 2026-05-08: Doplněna Příloha BG s veřejnou poznámkou k aktualizacím e-booku: očekávání čtenáře, umístění poznámky, privacy-first zpětná vazba, changelog a checklist údržby.
