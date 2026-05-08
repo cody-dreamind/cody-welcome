@@ -23012,6 +23012,251 @@ Když se to stane, nehledejte nový nástroj. Nejdřív zkraťte rytmus. Vyberte
 
 Provozní rytmus je rozdíl mezi tím, že e-book inspiroval tým na jednu schůzku, a tím, že se stal součástí práce. Nemusí být složitý. Naopak: čím jednodušší je první verze rytmu, tím větší šance, že ho lidé budou používat i ve chvíli, kdy je práce moc, termíny krátké a improvizace láká jako vždycky.
 
+## Příloha BD: Měření přínosu šablon a playbooků
+
+Šablony a playbooky mají smysl jen tehdy, když zlepšují práci. Ne když vypadají hezky v katalogu. Po několika týdnech provozu je proto potřeba položit nepříjemnou otázku: pomáhají nám šablony dělat lepší rozhodnutí, rychleji předávat práci a držet privacy-first standard, nebo jsme si jen vyrobili sofistikovanější administrativu?
+
+Měření přínosu šablon není o tom, kolik dokumentů tým vyplnil. To je aktivita, ne výsledek. Výsledek je například kratší doba od nápadu ke spuštění, méně zapomenutých kontrol, lepší předání zákazníkovi, čistší datová mapa, méně opakovaných chyb nebo rychlejší rozhodnutí, že něco nedává smysl.
+
+Tato příloha dává jednoduchý rámec, jak hodnotit užitečnost šablon pro web, SaaS, marketing a provoz bez toho, aby se z měření stal další samostatný projekt.
+
+### 1. Začněte rozhodnutím, které měla šablona zlepšit
+
+Každá šablona by měla pomáhat jednomu nebo několika konkrétním rozhodnutím. Pokud neumíte říct jakým, je šablona podezřelá. Možná je moc obecná, možná vznikla z dobrého pocitu a možná jen kopíruje práci, kterou už děláte jinde.
+
+Příklady rozhodnutí:
+
+- pustit nebo nepustit novou landing page,
+- přidat nebo nepřidat nové pole do formuláře,
+- pokračovat v experimentu, upravit ho nebo zastavit,
+- vybrat dodavatele, nástroj nebo integraci,
+- předat projekt zákazníkovi jako hotový,
+- převést poznatek z retrospektivy do backlogu,
+- archivovat šablonu, která se nepoužívá.
+
+U každé aktivní šablony si napište jednu větu:
+
+```text
+Tato šablona pomáhá rozhodnout, jestli...
+```
+
+Příklad:
+
+```text
+Experimentální karta pomáhá rozhodnout, jestli má jedna konkrétní změna prokazatelný přínos a nepřidává nepřiměřené riziko pro data, provoz nebo důvěru.
+```
+
+Když věta nejde napsat bez mlhy, šablona potřebuje zjednodušit. Nebo odejít do archivu, čest její památce, ale bez slz.
+
+### 2. Rozlišujte tři typy přínosu
+
+Šablony obvykle nepřinášejí hodnotu jedním způsobem. Některé šetří čas. Jiné zlepšují kvalitu rozhodnutí. Další chrání tým před riziky, která nejsou vidět hned. Proto je dobré měřit tři vrstvy:
+
+1. Rychlost: práce se posune rychleji od podnětu k rozhodnutí.
+2. Kvalita: rozhodnutí je konkrétnější, lépe podložené a snáze předatelné.
+3. Kontrola: tým méně často zapomene na data, přístupy, rizika, měření nebo údržbu.
+
+Příklad pro obsahový brief:
+
+- Rychlost: autor nezačíná prázdnou stránkou a má jasný slib textu.
+- Kvalita: článek odpovídá na skutečnou otázku zákazníka a má důkazy.
+- Kontrola: text má zdroje, vlastníka, privacy-first kontrolu a plán revize.
+
+Příklad pro dodavatelskou hygienu:
+
+- Rychlost: tým rychleji zjistí, jestli nástroj vůbec stojí za hlubší posouzení.
+- Kvalita: rozhodnutí obsahuje účel, data, přístupy, alternativy a exit plán.
+- Kontrola: nový dodavatel se nedostane do provozu bez záznamu v registru.
+
+Ne každá šablona musí excelovat ve všech třech vrstvách. Ale pokud nepomáhá ani jedné, je to dekorace v převleku za proces.
+
+### 3. Měřte signály, které nezabijí práci
+
+Dobré měření šablon musí být lehké. Pokud tým stráví víc času měřením šablony než používáním šablony, systém se obrátil proti sobě. Měřte proto jen několik signálů, které se dají získat z běžné práce.
+
+Užitečné signály:
+
+- kolikrát byla šablona použita u reálné změny,
+- kolikrát vedla k rozhodnutí `pustit`, `upravit`, `zastavit` nebo `archivovat`,
+- kolikrát zachytila privacy-first nebo provozní riziko před spuštěním,
+- kolikrát se po použití šablony muselo vracet k chybějícím informacím,
+- jak dlouho trvalo od otevření šablony k rozhodnutí,
+- jestli výstup pochopil člověk mimo původní tým,
+- jestli šablona snížila počet opakovaných dotazů při předání.
+
+Stačí jednoduchá měsíční tabulka:
+
+```text
+Šablona:
+Počet použití:
+Typická situace:
+Počet rozhodnutí:
+Zachycená rizika:
+Nejčastější tření:
+Co zkrátit:
+Co doplnit:
+Rozhodnutí: ponechat / upravit / sloučit / archivovat
+```
+
+Tato tabulka nemá být reporting pro vitrínu. Má říct, co se má s šablonou stát dál.
+
+### 4. Hodnoťte i zastavenou práci
+
+Jedna z největších hodnot dobré šablony je práce, která se díky ní neudělala. To se špatně prodává v týdenním reportu, protože neexistuje hezký screenshot. Přesto je to často největší úspora.
+
+Příklady dobrého zastavení:
+
+- nepřidali jste tracker, protože neměl jasné rozhodnutí ani privacy-first alternativu,
+- nezvětšili jste formulář o další povinná pole,
+- nespustili jste landing page bez důkazu a měření dopadu,
+- nevybrali jste nástroj bez exit plánu,
+- nezavedli jste novou šablonu, protože by jen duplikovala existující.
+
+Do měsíčního review proto přidejte otázku:
+
+```text
+Jakou práci jsme díky šablonám vědomě neudělali?
+```
+
+To není negativita. To je ochrana kapacity. Malý tým neroste jen tím, že dělá víc. Roste tím, že umí říct ne věcem, které by přidaly složitost bez jasného přínosu.
+
+### 5. Sledujte tření při používání
+
+Šablona může mít dobrý záměr a špatné provedení. Poznáte to podle tření. Lidé ji otevřou, ale nedokončí. Vyplní ji zpětně. Přeskakují stejné části. Kopírují staré výstupy bez přemýšlení. Nebo se ptají v chatu na věci, které měla šablona vysvětlit.
+
+Typické zdroje tření:
+
+- šablona chce moc informací před prvním rozhodnutím,
+- používá interní pojmy, kterým nový člen týmu nerozumí,
+- míchá strategii, operativu a právní kontrolu do jednoho dokumentu,
+- nemá jasné minimum pro stav `hotovo`,
+- neříká, kdo má výstup převzít,
+- neobsahuje příklad vyplnění,
+- sbírá osobní nebo zákaznická data, která pro rozhodnutí nejsou nutná.
+
+Při revizi nepřidávejte automaticky další pole. Nejdřív se ptejte, co lze odebrat. Dobrá šablona často zraje zkracováním.
+
+### 6. Privacy-first metrika: méně dat se stejnou nebo lepší kvalitou rozhodnutí
+
+U privacy-first provozu je lákavé měřit jen to, jestli tým splnil kontrolní body. To nestačí. Skutečná otázka zní: dokážeme dělat stejně dobrá nebo lepší rozhodnutí s menším množstvím dat, kratší retencí a menším počtem dodavatelů?
+
+Praktické signály:
+
+- počet polí ve formulářích po revizi šablon klesl nebo se nezvyšuje bez důvodu,
+- dočasné exporty a přístupy mají datum zrušení,
+- nové nástroje mají zapsaný účel, data, region, přístupy a exit plán,
+- reporting používá agregované signály tam, kde není potřeba identita člověka,
+- experimenty mají ochranný signál a jasné vypnutí dočasného měření,
+- katalog šablon označuje, které výstupy mohou obsahovat osobní údaje.
+
+Codyho komentář: nejlepší privacy-first metrika je někdy nudná věta: "Tahle data nepotřebujeme." Je krátká, levná a umí zabránit půlce budoucích problémů. Ano, nevejde se do motivační prezentace s raketou, ale aspoň kvůli ní nemusíte za půl roku vysvětlovat, proč máte v tabulce údaje, které nikdo neumí obhájit.
+
+### 7. Měsíční scorecard šablony
+
+Pro důležité šablony použijte jednoduché skóre od 1 do 5. Ne kvůli přesnosti na desetinná místa. Kvůli porovnání trendu a rychlému rozhodnutí, co upravit.
+
+```text
+Název šablony:
+Období:
+Vlastník:
+
+Rychlost rozhodnutí: 1-5
+Kvalita výstupu: 1-5
+Srozumitelnost pro další tým: 1-5
+Privacy-first kontrola: 1-5
+Míra tření při použití: 1-5
+
+Co fungovalo:
+Co brzdilo:
+Co odebrat:
+Co doplnit:
+Rozhodnutí pro další měsíc:
+```
+
+Pozor: u `míry tření` si předem určete, jestli vyšší číslo znamená méně tření nebo více tření. Ideálně ať vyšší číslo vždy znamená lepší stav. Tedy `5` je šablona lehká, použitelná a bez zbytečného odporu. Tým pak nemusí přemýšlet, jestli je pětka pochvala nebo požární hlášení.
+
+### 8. Příklad vyhodnocení
+
+```text
+Název šablony: Experimentální karta
+Období: květen 2026
+Vlastník: product lead
+
+Použití:
+- zkrácení kontaktního formuláře,
+- nový blok důkazů na landing page,
+- změna aktivačního e-mailu v SaaS trialu.
+
+Rozhodnutí:
+- formulář ponechat a doplnit kvalifikační otázku jako volitelnou,
+- blok důkazů upravit podle zpětné vazby ze sales,
+- e-mail zastavit, protože přidal měření bez jasného rozhodnutí.
+
+Rychlost rozhodnutí: 4
+Kvalita výstupu: 4
+Srozumitelnost pro další tým: 3
+Privacy-first kontrola: 5
+Míra tření při použití: 3
+
+Co fungovalo:
+- každá změna měla datum vyhodnocení,
+- zachytilo se zbytečné měření v e-mailu,
+- výstupy se daly převést do backlogu.
+
+Co brzdilo:
+- lidé nevěděli, jak přesně definovat ochranný signál,
+- část "dopad na support" se vyplňovala jen odhadem.
+
+Rozhodnutí:
+- ponechat šablonu,
+- doplnit dva příklady ochranných signálů,
+- zkrátit část o supportu na jednu otázku.
+```
+
+Takové vyhodnocení je dostatečně konkrétní, aby vedlo k úpravě šablony. Zároveň není tak těžké, aby ho tým začal nenávidět, což je překvapivě užitečný provozní cíl.
+
+### 9. Kdy šablonu archivovat
+
+Archivace není selhání. Je to údržba systému. Šablona mohla být užitečná v určité fázi a později ztratit smysl. Problém není archivovat. Problém je nechat starou šablonu dál kolovat, aby někdo omylem použil neplatný postup.
+
+Archivujte šablonu, když:
+
+- nebyla použita v posledních několika relevantních cyklech,
+- duplikuje jinou šablonu,
+- má nízkou srozumitelnost a nikdo ji nechce vlastnit,
+- vznikla pro jednorázovou situaci,
+- sbírá příliš citlivé údaje vzhledem k přínosu,
+- její rozhodnutí už pokrývá jiný proces nebo nástroj,
+- tým ji obchází, protože je příliš těžká.
+
+Při archivaci ponechte krátký záznam:
+
+```text
+Šablona:
+Datum archivace:
+Důvod:
+Nahrazeno čím:
+Co z ní ponechat:
+Kdo schválil:
+```
+
+Archiv má chránit paměť, ne vytvářet muzeum. Pokud se do něj nikdo nikdy nemá podívat, stačí stručný záznam a odkaz na poslední platnou verzi.
+
+### Checklist přílohy
+
+- Má každá aktivní šablona jasné rozhodnutí, které pomáhá zlepšit?
+- Měříte rychlost, kvalitu a kontrolu, ne jen počet vyplněných dokumentů?
+- Máte lehkou měsíční tabulku pro vyhodnocení nejdůležitějších šablon?
+- Zapisujete i práci, kterou šablony pomohly vědomě zastavit?
+- Sledujete tření při používání a zkracujete šablony podle reality?
+- Umíte vyhodnotit, jestli šablony snižují datovou stopu místo jejího růstu?
+- Používáte scorecard jen pro rozhodnutí, ne pro okrasný reporting?
+- Máte pravidla, kdy šablonu upravit, sloučit nebo archivovat?
+- Zůstává po archivaci jasné, co šablonu nahradilo?
+- Pomáhá celý systém týmu dělat lepší práci, nebo už jen dokazuje, že má systém?
+
+Měření přínosu šablon má držet tým při zemi. Šablony nejsou cíl. Jsou lešení. Jakmile nepomáhají stavět lepší web, produkt, marketing nebo provoz, mají se upravit, zjednodušit nebo sundat. Dospělý systém se nepozná podle počtu dokumentů, ale podle toho, kolik jasných rozhodnutí díky nim vzniklo.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -23195,3 +23440,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha BA s katalogem pracovních šablon a playbooků: situace použití, karta šablony, stav, privacy štítky, role, revizní rytmus a minimální katalog e-booku.
 - 2026-05-08: Doplněna Příloha BB s kontrolou použitelnosti šablon po zavedení: inventura reálného použití, stavy použitelnosti, skóre tření, privacy-first kontrola dat a checklist.
 - 2026-05-08: Doplněna Příloha BC s provozním rytmem pro šablony a playbooky: spouštěče, týdenní/měsíční/kvartální review, pracovní fronta, vlastnictví, privacy-first brána a checklist.
+- 2026-05-08: Doplněna Příloha BD o měření přínosu šablon a playbooků: rozhodnutí, signály hodnoty, zastavená práce, privacy-first metrika, scorecard a archivace.
