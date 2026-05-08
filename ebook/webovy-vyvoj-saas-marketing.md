@@ -21724,6 +21724,281 @@ Nejlepší experimenty nejsou ty, které vždycky vyjdou. Nejlepší jsou ty, kt
 
 Experimentální karta dává týmu disciplínu bez zbytečného divadla. Pomáhá vybrat jednu další změnu, provést ji v rozumném rozsahu, vyhodnotit signál a zachovat kontrolu nad daty. Přesně tak má vypadat praktický růst webu, SaaS produktu i marketingového systému.
 
+## Příloha AY: Uzavření experimentu a rozhodnutí o změně
+
+Experiment nekončí ve chvíli, kdy změna běží. Končí až tehdy, když tým udělá rozhodnutí a zapíše, co se naučil. Bez toho se z experimentů stane jen hezčí název pro nahodilé úpravy. Někdo změní CTA, někdo přepíše onboarding, někdo spustí novou e-mailovou sekvenci a po měsíci už nikdo neví, proč se to stalo.
+
+Uzavření experimentu má být krátké, věcné a opakovatelné. Nemusíte psát akademickou zprávu. Potřebujete odpovědět na čtyři otázky:
+
+- Co jsme chtěli zjistit?
+- Co se skutečně stalo?
+- Jaké rozhodnutí z toho plyne?
+- Co se má promítnout do produktu, webu, marketingu nebo provozu?
+
+Pokud odpovědi chybí, experiment nebyl dokončený. Byl jen provedený. To je rozdíl, který v dlouhodobé práci bolí. Provedená změna přidá aktivitu. Dokončený experiment přidá učení.
+
+### 1. Nejdřív vraťte do hry původní otázku
+
+Při vyhodnocení nezačínejte tím, co je nejhlasitější v datech. Začněte původní rozhodovací otázkou z experimentální karty. Ta určuje, jestli experiment splnil účel.
+
+Příklad:
+
+```text
+Rozhodovací otázka:
+Pomůže konkrétnější CTA přivést poptávky, které umí lépe popsat svůj interní proces?
+```
+
+Špatné vyhodnocení:
+
+```text
+Měli jsme o 12 procent víc kliků.
+```
+
+Lepší vyhodnocení:
+
+```text
+Kliků bylo víc, ale kvalita poptávek se nezlepšila. Lidé častěji klikli, ale ve formuláři pořád popisovali obecné zadání bez procesu. Experiment tedy nepotvrdil hlavní hypotézu. CTA možná působí aktivněji, ale nevede ke kvalitnějšímu vstupu.
+```
+
+Rozdíl je praktický. První odpověď svádí k oslavě metriky. Druhá odpověď pomáhá rozhodnout, co dělat dál.
+
+### 2. Oddělte výsledek od interpretace
+
+V záznamu experimentu se vyplatí oddělit pozorování od závěru. Pozorování je to, co se stalo. Interpretace je vysvětlení, proč se to pravděpodobně stalo. Když tyto dvě věci smícháte, tým začne prodávat vlastní názor jako fakt.
+
+Použijte jednoduchý formát:
+
+```text
+Pozorování:
+Co jsme viděli v datech, zpětné vazbě, supportu, obchodních hovorech nebo provozu.
+
+Interpretace:
+Jak tomu rozumíme a jaké vysvětlení je podle týmu nejpravděpodobnější.
+
+Nejistota:
+Co pořád nevíme a neměli bychom předstírat, že víme.
+```
+
+Příklad:
+
+```text
+Pozorování:
+Po úpravě onboardingového kroku dokončilo import dat více pilotních uživatelů. Support zároveň dostal méně dotazů na formát souboru.
+
+Interpretace:
+Nový příklad souboru pravděpodobně snížil nejistotu před importem. Uživatelé nemuseli hledat nápovědu ani psát supportu.
+
+Nejistota:
+Nevíme, jestli stejný efekt zůstane u větších zákazníků s komplikovanějším datovým modelem.
+```
+
+Takový zápis nepůsobí dramaticky, ale je použitelný. Pomáhá týmu pokračovat bez falešné jistoty.
+
+### 3. Používejte čtyři základní rozhodnutí
+
+Každý experiment by měl skončit jedním z několika jasných rozhodnutí. Pokud závěr zní "budeme sledovat dál", často to znamená, že tým nechce rozhodnout. Občas je další sledování oprávněné, ale nemělo by být výchozí únikovou cestou.
+
+Praktické varianty:
+
+- Ponechat: změna pomohla a nepoškodila ochranné signály.
+- Upravit: směr dává smysl, ale provedení potřebuje další iteraci.
+- Vrátit: změna nepomohla, poškodila důležitý signál nebo přidala zbytečnou složitost.
+- Rozšířit: výsledek je dost silný na to, aby se promítl do další stránky, toku, segmentu nebo šablony.
+
+Ke každému rozhodnutí napište jednu větu proč.
+
+```text
+Rozhodnutí:
+Upravit.
+
+Proč:
+Konkrétnější CTA zvýšilo počet relevantních kliků, ale formulář pořád nesbírá dost kontextu pro kvalifikaci. Další iterace má upravit první otázku formuláře, ne znovu měnit tlačítko.
+```
+
+Tím se zabrání tomu, aby každý další člověk začínal od nuly. Rozhodnutí se dá zpochybnit, ale nejdřív je vidět.
+
+### 4. Nezapomeňte na ochranné signály
+
+Experiment může zlepšit jednu metriku a zároveň poškodit důvěru, výkon, přístupnost nebo soukromí. Proto se v uzavření vraťte k ochranným signálům z experimentální karty.
+
+Typické otázky:
+
+- Nezhoršila se rychlost stránky?
+- Nepřibyl zbytečný externí skript?
+- Neztížil se průchod na mobilu?
+- Nevznikl matoucí nebo příliš agresivní text?
+- Nepřibylo osobní nebo citlivé pole ve formuláři bez jasného účelu?
+- Nezačali jsme ukládat data, která neumíme obhájit?
+- Nezvýšil se počet support dotazů kvůli nejasnosti změny?
+
+Privacy-first uzavření není právnický obřad. Je to praktická kontrola, jestli tým při honbě za signálem nevytvořil datový dluh. Pokud experiment přidal nové pole, event, integraci nebo export, musí se promítnout do datové mapy. Pokud nic nepřidal, napište to také. I zápis "datová mapa bez změny" má hodnotu, protože ukazuje, že kontrola proběhla.
+
+### 5. Zapište dopad do správného místa
+
+Výsledek experimentu nemá zůstat jen v poznámce u úkolu. Podle dopadu ho přeneste do místa, kde ho tým později najde.
+
+Příklady:
+
+- Změna copywritingu patří do obsahového briefu, stránky nebo šablony pro další landing pages.
+- Změna onboardingového toku patří do produktové dokumentace a support nápovědy.
+- Změna měření patří do datové mapy a rozhodovacího dashboardu.
+- Změna prodeje patří do sales playbooku, CRM poznámek nebo kvalifikačních otázek.
+- Změna provozu patří do runbooku, incidentního drillu nebo checklistu releasu.
+- Změna dodavatele patří do registru nástrojů a exit plánu.
+
+Jinak se stane známá věc: tým se něco naučí, ale systém se nezmění. Za tři měsíce pak někdo zopakuje stejný experiment, protože výsledek žije jen v hlavě jednoho člověka.
+
+### 6. Šablona uzavření experimentu
+
+Použijte tuto šablonu hned po review okně. Čím delší prodleva, tím víc se z vyhodnocení stává archeologie.
+
+```text
+Název experimentu:
+
+Datum spuštění:
+
+Datum vyhodnocení:
+
+Vlastník:
+
+Původní rozhodovací otázka:
+
+Hypotéza:
+
+Co jsme změnili:
+
+Co jsme nezměnili:
+
+Hlavní signál:
+
+Výsledek hlavního signálu:
+
+Podpůrné signály:
+
+Ochranné signály:
+
+Pozorování:
+
+Interpretace:
+
+Nejistota:
+
+Rozhodnutí:
+Ponechat / upravit / vrátit / rozšířit
+
+Proč:
+
+Dopad do produktu, webu nebo marketingu:
+
+Dopad do datové mapy:
+
+Dopad do dokumentace:
+
+Další krok:
+
+Kdo ho udělá:
+
+Do kdy:
+```
+
+Šablona je záměrně obyčejná. Dobrý záznam nemá ohromit. Má zabránit tomu, aby tým zapomněl, proč se něco změnilo.
+
+### 7. Vyplněný příklad
+
+```text
+Název experimentu:
+Konkrétnější CTA a otázka na workflow u stránky SaaS MVP.
+
+Datum spuštění:
+2026-05-01.
+
+Datum vyhodnocení:
+2026-05-15.
+
+Vlastník:
+Marketing a sales.
+
+Původní rozhodovací otázka:
+Pomůže konkrétnější CTA a jedna otázka na workflow přivést poptávky, které lépe popíšou proces vhodný pro MVP?
+
+Hypotéza:
+Věříme, že konkrétnější první krok sníží počet obecných poptávek bez kontextu.
+
+Co jsme změnili:
+CTA, jeden příklad workflow a volitelnou otázku ve formuláři.
+
+Co jsme nezměnili:
+Ceník, strukturu celé stránky, reklamní kampaně ani následný sales proces.
+
+Hlavní signál:
+Kvalifikované poptávky s popsaným workflow.
+
+Výsledek hlavního signálu:
+Kvalita poptávek se mírně zlepšila. Z pěti relevantních poptávek tři obsahovaly konkrétní proces, dříve to byla spíš výjimka.
+
+Podpůrné signály:
+Discovery hovory začínaly rychleji, protože bylo možné navázat na popsaný proces. Počet odeslaných formulářů se výrazně nezměnil.
+
+Ochranné signály:
+Formulář zůstal krátký. Nepřibyl žádný tracker. Někteří lidé ale do volitelného pole posílali interní detaily, které pro první odpověď nepotřebujeme.
+
+Pozorování:
+Konkrétnější CTA nepřivedlo výrazně víc poptávek, ale zlepšilo první kontext. Volitelné pole pomohlo, pokud bylo správně pochopené.
+
+Interpretace:
+Zákazníci pravděpodobně potřebují příklad, jak workflow popsat. Samotná otázka nestačí, když je příliš otevřená.
+
+Nejistota:
+Nevíme, jestli by stejný efekt fungoval u menších firem bez jasně pojmenovaného interního procesu.
+
+Rozhodnutí:
+Upravit.
+
+Proč:
+Směr pomohl, ale formulář musí lépe vést k bezpečnému a stručnému popisu bez zbytečných detailů.
+
+Dopad do produktu, webu nebo marketingu:
+Zachovat konkrétní CTA. Upravit pomocný text u volitelného pole a doplnit příklad bezpečného popisu workflow.
+
+Dopad do datové mapy:
+Pole už v mapě je. Doplnit poznámku, že se nemají posílat citlivá interní data ani osobní údaje zákazníků.
+
+Dopad do dokumentace:
+Aktualizovat obsahový brief pro stránky služeb a sales kvalifikační otázky.
+
+Další krok:
+Přepsat pomocný text u formuláře a připravit jeden anonymizovaný příklad dobré odpovědi.
+
+Kdo ho udělá:
+Marketing.
+
+Do kdy:
+Do další týdenní iterace.
+```
+
+### 8. Codyho komentář
+
+Můj pohled: největší hodnota experimentů není v tom, že najdete vítěznou variantu. Hodnota je v tom, že tým začne umět rozhodovat s menší dávkou ega. Když experiment nevyjde, není to ostuda. Ostuda je nechat ho vyšumět, nic nezapsat a za měsíc zopakovat stejnou chybu s jiným názvem v task manageru.
+
+Dobré uzavření experimentu má být trochu protivné. Nutí se zeptat: opravdu jsme se něco naučili, nebo jen hledáme hezkou větu do reportu? Pokud odpověď bolí, tím lépe. Bolestivá pravda je levnější než dlouhý backlog postavený na dojmech.
+
+### Checklist přílohy
+
+- Vrátili jste se při vyhodnocení k původní rozhodovací otázce?
+- Oddělili jste pozorování od interpretace?
+- Zapsali jste, co pořád nevíte?
+- Vybrali jste jedno rozhodnutí: ponechat, upravit, vrátit nebo rozšířit?
+- Je u rozhodnutí napsané proč?
+- Zkontrolovali jste ochranné signály?
+- Ví tým, jestli se změnila datová mapa?
+- Nepřibylo zbytečné osobní nebo citlivé pole?
+- Promítli jste výsledek do dokumentace, šablony, dashboardu nebo playbooku?
+- Má další krok vlastníka a termín?
+- Umí někdo za tři měsíce pochopit, proč změna vznikla?
+- Neskončilo vyhodnocení větou "budeme sledovat dál" bez konkrétního důvodu?
+
+Uzavření experimentu je malý rituál s velkým dopadem. Dává práci paměť. Díky tomu se web, SaaS produkt a marketing neposouvají jen sérií náhodných zásahů, ale jako systém, který se učí, zpřesňuje a pořád drží kontrolu nad daty.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -21902,3 +22177,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AV o měření dopadu změny po spuštění: rozhodovací otázka, hlavní/podpůrný/ochranný signál, baseline, privacy-first minimum dat, review okno a rozhodnutí po vyhodnocení.
 - 2026-05-08: Doplněna Příloha AW o převodu poznatků do backlogu a další iterace: karta poznatku, třídění rozhodnutí, privacy-first priorita, údržba backlogu a týdenní rytmus.
 - 2026-05-08: Doplněna Příloha AX s experimentální kartou pro jednu další změnu: rozhodovací otázka, hypotéza, rozsah, signály, datové minimum, review okno a checklist.
+- 2026-05-08: Doplněna Příloha AY o uzavření experimentu a rozhodnutí o změně: vyhodnocení signálů, ochranné kontroly, dopad do datové mapy, šablona záznamu a checklist.
