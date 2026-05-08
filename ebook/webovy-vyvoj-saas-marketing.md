@@ -24029,6 +24029,178 @@ E-book pak zůstane vysvětlující vrstva. Šablony budou pracovní vrstva. To 
 - Víte, které checklisty a šablony mají být oddělené jako samostatné pracovní nástroje?
 - Má někdo odpovědnost za další publikační revizi?
 
+## Příloha BI: Seriál z e-booku bez tlakových funnelů
+
+E-book může být dlouhý, užitečný a pořád pro část čtenářů příliš velký první krok. Někdo chce přečíst jednu kapitolu, někdo potřebuje checklist, někdo si chce téma nechat dávkovat po menších blocích. Z toho vzniká přirozený formát: seriál.
+
+Seriál ale nemá být trik, jak čtenáře zatlačit do automatu se sedmnácti e-maily a postupným přitápěním. Má být čitelná cesta tématem. Každý díl má pomoct udělat jedno rozhodnutí, zkontrolovat jednu oblast nebo spustit jednu malou změnu. Když seriál funguje, čtenář nepotřebuje hádat, proč mu další zpráva přišla.
+
+### 1. Začněte účelem seriálu
+
+Nejdřív určete, co má seriál řešit. Ne "zvýšit engagement". To je interní přání. Účel má být formulovaný z pohledu čtenáře.
+
+Dobré účely:
+
+- Pomoci zakladateli zkontrolovat web před prvním větším prodejem.
+- Provést tým od nápadu k realistickému SaaS MVP.
+- Naučit firmu měřit marketing bez zbytečného sběru osobních údajů.
+- Převést dlouhý e-book do dvanácti týdenních pracovních kroků.
+- Připravit tým na audit webu, produktu a datových toků.
+
+Slabé účely:
+
+- Poslat lidem obsah, aby na nás nezapomněli.
+- Vytěžit e-book pro newsletter.
+- Zahřát leady před obchodním hovorem.
+- Automatizovat nurture sekvenci.
+
+Ty slabé věty nejsou vždycky nelegitimní obchodně, ale jsou špatným zadáním pro obsah. Vedou k textům, které slouží hlavně odesílateli. Dobrý seriál má nejdřív sloužit čtenáři. Obchodní efekt potom vzniká z důvěry, ne z tlaku.
+
+### 2. Vyberte jednu trasu, ne celý e-book
+
+Nesnažte se z e-booku udělat lineární školení od první kapitoly po poslední přílohu. To by byl jen dlouhý text rozsekaný na menší porce. Seriál má mít vlastní logiku.
+
+Příklady tras:
+
+- Nový web za 30 dní: kapitoly o hodnotě webu, homepage, obsahu, SEO, privacy-first analytice a launch checklistu.
+- SaaS MVP bez chaosu: rozhodnutí web versus aplikace, MVP, datový model, role, onboarding, metriky a support.
+- Marketingový systém pro malý tým: positioning, obsahové pilíře, lead generation, sales proces, měření a měsíční review.
+- Privacy-first provoz v Evropě: datová mapa, formuláře, analytika, dodavatelé, logy, incidenty a veřejná komunikace.
+
+Každá trasa by měla mít osm až dvanáct dílů. Méně často nestačí na změnu chování. Více už snadno působí jako povinnost, kterou si čtenář uloží do složky "někdy" a už ji nikdy neuvidí. Digitální verze šuplíku, gratuluji.
+
+### 3. Každý díl musí mít jedno rozhodnutí
+
+Nejčastější chyba seriálů je, že každý díl obsahuje malé shrnutí velkého tématu. To je příjemné na čtení, ale slabé pro práci. Praktický díl má skončit rozhodnutím nebo akcí.
+
+Struktura jednoho dílu:
+
+1. Situace: kdy je díl relevantní.
+2. Problém: co se obvykle pokazí.
+3. Princip: jak o tom přemýšlet.
+4. Příklad: krátká konkrétní ukázka.
+5. Úkol: jedna věc na 20 až 60 minut.
+6. Kontrola: podle čeho poznat, že je hotovo.
+7. Odkaz: kapitola nebo šablona pro hlubší práci.
+
+Příklad dílu:
+
+```text
+Název: Zkraťte první formulář
+Situace: Web sbírá poptávky, ale lidé formulář často nedokončí.
+Úkol: Vyškrtněte všechna pole, která nepotřebujete pro první odpověď.
+Kontrola: Formulář jde vyplnit do dvou minut a jasně říká, co se stane po odeslání.
+Odkaz: Kapitola o prodejním webu a příloha s privacy-first analytikou.
+```
+
+Tohle je užitečnější než tři odstavce o důležitosti konverzí. Čtenář ví, co má udělat.
+
+### 4. RSS jako první kanál, e-mail jako volitelný kanál
+
+Privacy-first seriál má fungovat i bez povinného e-mailu. Základní verze může být veřejná na webu a distribuovaná přes RSS. E-mail je doplněk pro lidi, kteří ho chtějí, ne brána k obsahu.
+
+Minimální kanály:
+
+- veřejný archiv všech dílů,
+- RSS feed pro nové díly,
+- přímé odkazy na jednotlivé díly,
+- volitelný e-mailový odběr aktualizací,
+- krátká landing page s trasou seriálu,
+- odkazy z relevantních kapitol e-booku.
+
+E-mailový odběr má mít jasné sdělení:
+
+```text
+Pošleme vám jeden díl seriálu týdně. E-mail použijeme jen pro tento odběr a odhlášení bude v každé zprávě.
+```
+
+Není potřeba slibovat "exkluzivní tajemství". Když je obsah dobrý, nemusí se tvářit jako zamčená truhla.
+
+### 5. Privacy-first pravidla pro seriál
+
+Seriál může být marketingový nástroj a zároveň respektovat soukromí. Klíč je v tom nesbírat data jen proto, že nástroj umí hezký graf.
+
+Sbírejte jen signály, které pomáhají rozhodnout:
+
+- počet zobrazení veřejných dílů,
+- kliky na navazující kapitoly nebo checklisty,
+- dobrovolné přihlášení k odběru,
+- odhlášení z odběru,
+- odpovědi nebo zpětnou vazbu,
+- kvalifikovaný kontakt, pokud ho čtenář sám zahájí.
+
+Nesbírejte:
+
+- skryté osobní identifikátory v odkazech,
+- detailní profilování čtenářů napříč webem,
+- údaje o firmě bez jasného účelu,
+- telefon jen kvůli odběru obsahu,
+- remarketingové publikum z běžného čtení,
+- data z e-mailu, která nikdy nepoužijete k lepšímu rozhodnutí.
+
+U každého eventu si napište větu:
+
+```text
+Tento signál používáme k rozhodnutí: ...
+```
+
+Když větu neumíte doplnit, event zatím neměřte. Vývojářům tím ušetříte práci, čtenářům soukromí a dashboardu další graf, na který se nikdo nebude dívat.
+
+### 6. Veřejný archiv místo mizejících zpráv
+
+Seriál nemá žít jen v inboxu. Inbox je dočasný prostor. Veřejný archiv je dlouhodobé aktivum. Každý díl má mít vlastní URL, název, krátký popis, datum publikace a odkazy na předchozí a další díl.
+
+Archiv seriálu by měl obsahovat:
+
+- přehled všech dílů,
+- komu je seriál určen,
+- co čtenář po dokončení zvládne,
+- doporučený rytmus práce,
+- odkaz na plný e-book,
+- odkaz na RSS,
+- volitelný odběr e-mailem,
+- changelog, pokud se díly významně mění.
+
+Tím se ze seriálu stane SEO a sales asset, ne jen jednorázová sekvence. Obchodník může poslat konkrétní díl po hovoru. Support může odkázat na checklist. Čtenář se může vrátit k části, kterou právě potřebuje. A nikdo nemusí lovit starý e-mail s předmětem "Díl 4/9".
+
+### 7. Příklad dvanáctidílného seriálu
+
+Trasa: "Web, SaaS a marketing jako jeden systém".
+
+1. Co má digitální systém rozhodnout.
+2. Homepage jako filtr důvěry.
+3. Formuláře bez zbytečného sběru dat.
+4. Datová mapa pro web a produkt.
+5. Kdy web přerůstá v aplikaci.
+6. MVP workflow a aktivační událost.
+7. Onboarding první hodnoty.
+8. Obsahové pilíře podle zákaznických otázek.
+9. Lead generation bez objemové posedlosti.
+10. Privacy-first analytika pro rozhodnutí.
+11. Měsíční review webu, produktu a marketingu.
+12. Jedna další iterace na základě signálů.
+
+Každý díl by měl mít jeden pracovní výstup: upravenou větu na homepage, zkrácený formulář, první datovou mapu, seznam eventů, obsahový brief, experimentální kartu nebo rozhodnutí po review. Bez výstupu je seriál jen pomalý blog.
+
+### 8. Codyho komentář
+
+Můj pohled: nejlepší obsahové seriály nejsou ty, které nejlépe automatizují marketing. Jsou to ty, které čtenáři dovolí udělat pokrok bez toho, aby si musel koupit celý váš svět. Dejte mu hodnotu veřejně, srozumitelně a bez nátlaku. Když potom přijde poptávka, bude kvalitnější, protože nezačíná z manipulace, ale z praktické důvěry.
+
+### Checklist přílohy
+
+- Má seriál jasný účel z pohledu čtenáře?
+- Je vybraná jedna trasa místo celého e-booku najednou?
+- Má každý díl jedno rozhodnutí nebo jeden pracovní výstup?
+- Existuje veřejný archiv dílů s přímými URL?
+- Je RSS základní distribuční kanál?
+- Je e-mailový odběr volitelný a jasně popsaný?
+- Sbíráte jen signály, které pomáhají rozhodovat?
+- Neobsahují odkazy osobní identifikátory nebo zbytečné sledování?
+- Má každý díl odkaz na hlubší kapitolu nebo šablonu?
+- Je možné seriál použít v sales, supportu nebo onboardingové práci bez kopírování z inboxu?
+- Má seriál vlastní revizní rytmus a odpovědného vlastníka?
+- Umíte po dokončení říct, co se díky seriálu změnilo pro čtenáře?
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -24217,3 +24389,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha BF s release kandidátem první veřejné verze: rozsah, zmrazení textu, čtenářská cesta, rozhodovací karta, privacy-first brána a publikační checklist.
 - 2026-05-08: Doplněna Příloha BG s veřejnou poznámkou k aktualizacím e-booku: očekávání čtenáře, umístění poznámky, privacy-first zpětná vazba, changelog a checklist údržby.
 - 2026-05-08: Doplněna Příloha BH o převodu e-booku do webové a PDF verze: zdroj pravdy, landing page, navigace podle práce čtenáře, privacy-first distribuce, exportní kontrola a oddělení šablon.
+- 2026-05-08: Doplněna Příloha BI o seriálu z e-booku bez tlakových funnelů: účel, trasy, díly s jedním rozhodnutím, RSS, veřejný archiv, privacy-first měření a checklist.
