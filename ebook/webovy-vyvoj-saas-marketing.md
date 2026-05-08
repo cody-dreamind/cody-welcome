@@ -18806,6 +18806,302 @@ Můj pohled: roadmapa má být méně o ambici a víc o disciplíně. Ambice je 
 
 Kvartální roadmapa je jednoduchý most mezi operativou a strategií. Bere realitu z 30denní kontroly, převádí ji do několika rozumných priorit a chrání tým před tím, aby každé nové přání okamžitě dostalo vlastní projekt. Není to velké plánování. Je to pravidelná údržba směru. A směr je u digitálních produktů překvapivě konkurenční výhoda.
 
+## Příloha AO: Roční audit digitálního systému
+
+Měsíční review drží provoz v chodu. Kvartální roadmapa drží směr. Roční audit řeší hlubší otázku: pořád stavíte správný systém, nebo jen pečlivě udržujete rozhodnutí, která už přestala platit?
+
+U webu, SaaS produktu a marketingu se během roku nahromadí spousta drobných změn. Přibude pár landing pages, nový formulář, další segment, nové integrace, upravený onboarding, několik článků, změna ceníku, jiný support proces a možná i nový analytický event. Každá změna mohla být rozumná samostatně. Dohromady ale může vzniknout systém, který je těžší vysvětlit, měřit, provozovat a předat.
+
+Roční audit není účetní uzávěrka pro digitální projekt. Je to vědomé zastavení, při kterém se tým podívá na celek:
+
+1. Komu dnes opravdu sloužíme?
+2. Co nám za poslední rok přineslo hodnotu?
+3. Co už jen udržujeme ze zvyku?
+4. Kde vznikl provozní, obsahový nebo datový dluh?
+5. Co musíme zjednodušit, aby další rok nebyl dražší než ten předchozí?
+
+Pokud audit skončí jen seznamem nových úkolů, minul se účinkem. Dobrá roční revize má stejně často mazat, slučovat, archivovat a zpřesňovat jako přidávat. Digitální systém zraje tím, že se učí říkat ne.
+
+### Kdy roční audit dává smysl
+
+Roční audit udělejte jednou za rok, ale ne nutně 1. ledna. Lepší je navázat ho na přirozený rytmus firmy: po hlavní sezoně, po uzavření většího produktu, po rozpočtovém plánování nebo před novým strategickým cyklem.
+
+Hodí se hlavně ve chvíli, kdy:
+
+- web nebo produkt funguje, ale tým neví, co přesně zlepšovat dál,
+- marketing publikuje pravidelně, ale není jasné, co z toho pomáhá obchodu,
+- SaaS má víc funkcí, než kolik jich nový uživatel umí pochopit,
+- přibyly integrace, ale nikdo nemá aktuální datovou mapu,
+- support řeší stejné problémy dokola,
+- sales používá jiné argumenty než web,
+- privacy-first sliby na webu se musí zkontrolovat proti skutečnému provozu.
+
+Audit není trest za chaos. Je to servisní prohlídka. Auto taky nemusí hořet, abyste zkontrolovali brzdy. U digitálního systému se jen častěji předstírá, že všechno drží pohromadě silou dobré vůle a posledního člověka, který si pamatuje DNS.
+
+### Rozsah auditu
+
+Neaudituje se všechno stejně hluboko. To by skončilo únavou a tabulkou, kterou nikdo neotevře podruhé. Rozdělte audit na šest oblastí:
+
+1. Strategie a positioning.
+2. Web a obsah.
+3. Produkt a onboarding.
+4. Marketing a distribuce.
+5. Provoz, bezpečnost a data.
+6. Týmový rytmus a odpovědnosti.
+
+U každé oblasti hledejte tři typy zjištění:
+
+- ponechat: funguje a má vlastníka,
+- opravit: má hodnotu, ale potřebuje zásah,
+- ukončit: už nepomáhá nebo přidává zbytečnou složitost.
+
+Tato trojice je důležitá. Týmy často umí pojmenovat, co přidat. Hůř se jim říká, co ukončit. Jenže bez ukončování systém tloustne, až začne být pomalý, drahý a nečitelný.
+
+### 1. Strategie a positioning
+
+Začněte otázkou, jestli pořád platí základní obchodní předpoklady.
+
+Zkontrolujte:
+
+- Kdo je dnes nejlepší zákazník nebo uživatel?
+- Jaký problém mu skutečně řešíte?
+- Jaké alternativy používá, když vás nekoupí?
+- Které segmenty přinesly nejlepší spolupráci, retenci nebo učení?
+- Které segmenty braly nejvíc energie a nejméně hodnoty?
+- Je hlavní nabídka na webu shodná s tím, co reálně prodává sales?
+- Dokážete jednou větou říct, proč by si vás měl vybrat právě tento segment?
+
+Příklad z auditu:
+
+```text
+Zjištění:
+Web pořád mluví na "malé a střední firmy", ale nejlepší zákazníci za poslední rok byly B2B týmy s interním workflow, které přerostlo tabulky.
+
+Rozhodnutí:
+Zúžit homepage, služby a případové studie na B2B workflow a interní aplikace. Obecné texty přesunout do podpůrných článků nebo archivovat.
+```
+
+To není kosmetická změna. Je to strategické vyčištění. Když positioning neodpovídá realitě, celý zbytek systému měří a optimalizuje špatnou věc.
+
+### 2. Web a obsah
+
+Web auditujte jako obchodní a provozní nástroj, ne jako galerii stránek.
+
+U každé důležité stránky se ptejte:
+
+- Má stránka jasný účel?
+- Odpovídá na otázku zákazníka ve správné fázi rozhodování?
+- Má aktuální důkazy, příklady nebo odkazy?
+- Vede k férovému dalšímu kroku?
+- Je obsah pořád pravdivý?
+- Není stránka duplicitní s jinou stránkou?
+- Je privacy-first provoz vysvětlený konkrétně a aktuálně?
+
+Roční audit je dobrý moment pro odstranění obsahového šumu. Typické kandidáty:
+
+- staré landing pages bez návštěvnosti a bez jasného účelu,
+- články s návody, které už neodpovídají realitě,
+- reference, které neukazují dnešní typ práce,
+- formuláře, které sbírají příliš mnoho údajů,
+- sekce s obecnými sliby bez důkazů,
+- stránky, které vznikly kvůli jedné kampani a zůstaly viset v navigaci.
+
+Praktický výstup:
+
+```text
+Ponechat:
+12 stránek, které mají jasný účel a vlastníka.
+
+Opravit:
+5 stránek služeb, kde chybí konkrétní důkaz a jasnější CTA.
+
+Sloučit:
+4 články o podobném tématu do jednoho silnějšího průvodce.
+
+Archivovat:
+7 starých landing pages po kampaních.
+```
+
+Mazání obsahu není prohra. Je to udržování důvěry. Zastaralý obsah je tichý způsob, jak návštěvníkovi slíbit něco, co už tým nedělá.
+
+### 3. Produkt a onboarding
+
+U SaaS nebo webové aplikace roční audit nesmí skončit u marketingu. Produkt samotný musí projít otázkou: dostane nový uživatel rychle hodnotu, nebo jsme mu za rok přidali jen víc možností?
+
+Zkontrolujte:
+
+- Jaká je dnešní aktivační událost?
+- Kolik kroků vede k první hodnotě?
+- Které funkce uživatelé skutečně používají?
+- Které funkce existují hlavně kvůli historickým požadavkům?
+- Kde support nejčastěji pomáhá ručně?
+- Jsou role, oprávnění a audit logy srozumitelné?
+- Umí uživatel exportovat svá data?
+- Jsou prázdné, chybové a loading stavy pořád užitečné?
+
+Příklad:
+
+```text
+Zjištění:
+Nový tenant má sedm konfiguračních kroků, ale první hodnotu uživatel zažije až po importu dat. Support proto skoro vždy posílá ruční návod.
+
+Rozhodnutí:
+Připravit ukázková data, zkrátit první konfiguraci na tři kroky a přesunout pokročilá nastavení až za první dokončený workflow.
+```
+
+Roční audit má právo otevřít i nepříjemnou věc: některé funkce by možná měly zmizet. Pokud funkce komplikuje onboarding, generuje support a nepřináší hodnotu správnému segmentu, není to aktivum. Je to závazek s tlačítkem.
+
+### 4. Marketing a distribuce
+
+Marketing auditujte podle kvality signálů, ne podle objemu aktivit.
+
+Otázky:
+
+- Které kanály přivedly lidi, kteří opravdu odpovídají segmentu?
+- Které články nebo materiály pomohly v sales hovorech?
+- Které kampaně přinesly jen šum?
+- Má tým vlastní kanály, nebo je závislý na platformách?
+- Funguje RSS, přímé odkazy a web jako zdroj pravdy?
+- Měříte užitečnost obsahu bez zbytečného sledování lidí?
+- Je distribuční rytmus udržitelný pro tým?
+
+Marketing často trpí tím, že úspěch zaměňuje za aktivitu. Publikovat víc není strategie. Strategie je vědět, které otázky zákazníků chcete vlastnit a jak jim budete opakovaně odpovídat.
+
+Roční výstup může vypadat takto:
+
+```text
+Pokračovat:
+Praktické články odpovídající na sales námitky.
+
+Zúžit:
+Sociální distribuci jen na kanály, kde vzniká relevantní dialog.
+
+Ukončit:
+Formáty, které mají vysokou produkční náročnost a nepřináší kvalifikované signály.
+
+Posílit:
+RSS, interní odkazy, evergreen aktualizace a přímé follow-up materiály pro obchod.
+```
+
+Privacy-first marketing není ticho. Je to marketing, který nestaví růst na tom, že o člověku sbírá víc dat, než potřebuje.
+
+### 5. Provoz, bezpečnost a data
+
+Tahle část auditu bývá nejméně sexy a nejvíc zachraňuje reputaci. Cílem není vystrašit tým. Cílem je zjistit, jestli provozní realita odpovídá tomu, co tvrdíte zákazníkům a sobě.
+
+Zkontrolujte:
+
+- aktuální seznam domén, DNS, hostingu a kritických služeb,
+- přístupy lidí, dodavatelů a servisních účtů,
+- zálohy a poslední ověřenou obnovu,
+- monitoring dostupnosti, chyb a expirací,
+- datovou mapu: co sbíráte, proč, kde, kdo k tomu má přístup a jak dlouho,
+- externí skripty a integrace,
+- incidentní postup,
+- retenci logů, formulářů, support tiketů a marketingových dat.
+
+Privacy-first brána pro roční audit:
+
+```text
+Za poslední rok:
+Přibyl nějaký nový nástroj, skript nebo dodavatel?
+Změnil se region zpracování dat?
+Rozšířily se formuláře nebo eventy?
+Vznikla nová kategorie osobních údajů?
+Mají dočasní lidé nebo dodavatelé pořád přístup?
+Umíme zákazníkovi jednoduše vysvětlit, kde jeho data jsou?
+```
+
+Pokud odpověď není jasná, je to nález. Ne katastrofa. Nález znamená, že víte, co opravit dřív, než se z toho stane incident nebo nepříjemný dotaz od zákazníka.
+
+### 6. Týmový rytmus a odpovědnosti
+
+Poslední oblast je způsob práce. Systém může mít dobrý web, dobrý produkt a dobré nástroje, ale pokud nikdo nevlastní rozhodnutí, postupně se rozpadne.
+
+Zkontrolujte:
+
+- Kdo vlastní web?
+- Kdo vlastní obsah?
+- Kdo vlastní produktové metriky?
+- Kdo vlastní privacy-first kontrolu nových nástrojů?
+- Kdo rozhoduje o ukončení starých stránek, funkcí nebo kampaní?
+- Kde je rozhodovací log?
+- Jak se podněty ze sales, supportu a analytiky dostávají do backlogu?
+- Probíhá měsíční a kvartální review, nebo existuje jen v dokumentu?
+
+Příklad rozhodnutí:
+
+```text
+Zjištění:
+Obsah aktualizuje každý, ale nikdo nevlastní přesnost tvrzení po publikaci.
+
+Rozhodnutí:
+Každý klíčový obsah dostane vlastníka, datum poslední kontroly a revizní interval. Obsah s právními, bezpečnostními nebo provozními tvrzeními bude mít přísnější kontrolu.
+```
+
+Vlastnictví není byrokracie. Je to ochrana před větou "myslel jsem, že to řeší někdo jiný".
+
+### Jednodenní agenda ročního auditu
+
+Pokud chcete audit udělat bez velkého procesu, použijte tento rámec:
+
+```text
+09:00-09:30
+Cíl auditu, hlavní otázka roku, pravidla rozhodování.
+
+09:30-10:30
+Strategie a positioning: segmenty, nabídka, nejlepší a nejhorší fit.
+
+10:45-12:00
+Web a obsah: stránky, články, formuláře, důkazy, navigace.
+
+13:00-14:00
+Produkt a onboarding: aktivace, funkce, support signály, export dat.
+
+14:15-15:00
+Marketing a distribuce: kanály, obsah, sales enablement, vlastní média.
+
+15:15-16:00
+Provoz, bezpečnost a data: přístupy, integrace, datová mapa, incidenty.
+
+16:00-16:45
+Rozhodnutí: ponechat, opravit, ukončit, přesunout do kvartální roadmapy.
+
+16:45-17:00
+Vlastníci, termíny, první další krok.
+```
+
+Výstup nemá být dlouhý. Stačí pět částí:
+
+```text
+1. Co jsme se naučili.
+2. Co ponecháváme.
+3. Co opravíme v příštím kvartálu.
+4. Co ukončíme nebo archivujeme.
+5. Jaká rozhodnutí potřebují vlastníka.
+```
+
+### Codyho komentář
+
+Můj pohled: roční audit je nejlepší chvíle říct nahlas, že některé věci byly dobrý nápad v minulém roce, ale nejsou dobrý závazek pro další rok. To není selhání. To je dospělost. Digitální projekty se nerozbíjejí jen špatným kódem. Rozbíjejí se i tím, že nikdo nemá odvahu vypnout starou kampaň, sloučit podobné stránky, zjednodušit onboarding nebo přiznat, že nový tracker vlastně nic nerozhoduje.
+
+### Checklist přílohy
+
+- Má roční audit jednu hlavní otázku, kterou má zodpovědět?
+- Jsou připravené vstupy jen v rozsahu, který tým opravdu použije?
+- Kontrolujete strategii, web, produkt, marketing, provoz i odpovědnosti?
+- Umíte rozdělit zjištění na ponechat, opravit a ukončit?
+- Je jasné, které segmenty a nabídky se za rok osvědčily?
+- Má každá důležitá stránka účel, vlastníka a aktuální důkaz?
+- Ví SaaS tým, kde vzniká první hodnota a kde onboarding zbytečně drhne?
+- Vyhodnocujete marketing podle kvality signálů, ne jen podle aktivity?
+- Je datová mapa aktuální po všech změnách za poslední rok?
+- Jsou zkontrolované přístupy, dodavatelé, retence, zálohy a incidentní postupy?
+- Vznikl seznam věcí, které ukončíte nebo archivujete?
+- Převádí audit jen několik důležitých rozhodnutí do další kvartální roadmapy?
+
+Roční audit má chránit systém před pomalým zarůstáním. Když ho uděláte poctivě, další rok nezačíná chaotickým seznamem přání, ale jasnou dohodou, co má hodnotu, co potřebuje opravu a co už má konečně odejít do archivu. A archiv je občas nejproduktivnější místo v celé firmě.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -18974,3 +19270,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AL s předávacím balíčkem po auditu, MVP nebo produktizované službě: výstupy, doporučení, přístupy, data, provozní kontrola, rizika, další krok a předávací checklist.
 - 2026-05-08: Doplněna Příloha AM s 30denní kontrolou po předání: ověření změn v provozu, dat, přístupů, privacy-first závazků, prvních signálů hodnoty a jednoho dalšího kroku.
 - 2026-05-08: Doplněna Příloha AN s kvartální roadmapou zlepšování po 30denní kontrole: rozhodovací otázka, priority, věci mimo rozsah, signály úspěchu, privacy-first brána a měsíční review.
+- 2026-05-08: Doplněna Příloha AO s ročním auditem digitálního systému: strategie, web, produkt, marketing, provoz, data, odpovědnosti a rozhodnutí co ponechat, opravit nebo ukončit.
