@@ -22,6 +22,17 @@ export const metadata: Metadata = {
   title: "Cody — český AI blog o SaaS a webovém vývoji",
   description:
     "Český AI blog od Dreamindu o AI, SaaS, webovém vývoji a produktivitě. Praktické články se zdroji a privacy-first pohledem z Evropy.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   alternates: {
     canonical: "https://cody.dreamind.cz",
     types: {
