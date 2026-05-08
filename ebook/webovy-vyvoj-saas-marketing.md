@@ -23781,6 +23781,254 @@ Můj pohled: poznámka k aktualizacím je malý text s velkým dopadem. Když ji
 - Je poznámka umístěná na landing page, v e-booku i v PDF dostatečně brzy?
 - Má někdo odpovědnost za kontrolu poznámky při každém větším vydání?
 
+## Příloha BH: Převod e-booku do webové a PDF verze
+
+Rukopis v Markdownu je dobrý zdroj pravdy. Není ale automaticky dobrá veřejná verze. Čtenář nechce přemýšlet, jestli má otevřít syrový soubor v repozitáři, dlouhou stránku na webu, PDF, krátký výtah nebo šablonu. Publikační formát má odpovídat tomu, jak člověk e-book použije.
+
+Webová verze je nejlepší pro čtení, vyhledávání, interní odkazy, aktualizace, RSS a sdílení konkrétních kapitol. PDF je dobré pro archivaci, předání klientovi, offline čtení a formální verzi k určitému datu. Markdown je dobrý pro údržbu, diff, review a další iterace. Každý formát má jinou práci. Chyba je tvářit se, že jeden export vyřeší všechno.
+
+Praktický cíl této přílohy: převést e-book do veřejné podoby tak, aby zůstal čitelný, udržovatelný, citovatelný a privacy-first. Žádné povinné e-mailové brány, žádné těžké embed skripty, žádný "stáhněte si PDF a pak vás čeká sedm e-mailů, protože růst".
+
+### 1. Jeden zdroj pravdy
+
+Nejdřív určete, odkud se veřejné formáty generují. Pokud se webová verze upravuje ručně, PDF se exportuje z jiného dokumentu a Markdown žije vlastním životem, časem vzniknou tři různé e-booky. To je rychlá cesta k tomu, že někdo opraví právní poznámku v jednom formátu a ve druhém zůstane stará.
+
+Pravidlo:
+
+```text
+Zdroj pravdy: Markdown soubor v repozitáři.
+Webová verze: generovaná nebo ručně sestavená ze stejného Markdownu.
+PDF verze: exportovaná z webové verze nebo ze stejného zdroje.
+Ruční změny: vždy zpět do Markdownu, ne jen do výstupu.
+```
+
+U každého vydání zapište:
+
+- název verze,
+- datum exportu,
+- commit nebo interní revizní odkaz,
+- seznam formátů, které byly vytvořené,
+- kdo výstup zkontroloval.
+
+Bez toho se veřejná verze nedá spolehlivě rekonstruovat. A když e-book mluví o provozní disciplíně, měl by ji sám trochu předvést. Trapné, když checklist káže pořádek a PDF vzniklo jako "finální-final-opraveno2.pdf".
+
+### 2. Webová verze: číst, hledat, odkazovat
+
+Webová verze má být primární veřejná forma. Důvod je jednoduchý: dá se aktualizovat, má stabilní URL, kapitoly se dají odkazovat, vyhledávače ji mohou indexovat a čtenář nemusí stahovat soubor jen proto, aby se podíval na jednu kapitolu.
+
+Minimum webové verze:
+
+- stabilní landing page e-booku,
+- obsah s kotvami na kapitoly a přílohy,
+- čitelné URL pro hlavní části,
+- datum poslední významné aktualizace,
+- veřejná poznámka k aktualizacím,
+- odkazy na RSS nebo jiný přímý odběr změn,
+- možnost stáhnout PDF jako volitelný formát,
+- žádné povinné přihlášení pro běžné čtení.
+
+U dlouhého e-booku zvažte rozdělení:
+
+- jedna landing page s přehledem a CTA,
+- samostatné stránky pro hlavní kapitoly,
+- samostatný index příloh,
+- zvláštní stránka pro changelog,
+- zvláštní stránka pro šablony, pokud se z e-booku oddělují jako pracovní nástroje.
+
+Jedna obří stránka je jednoduchá na publikaci, ale horší na čtení, výkon, sdílení i interní odkazy. Pokud ji použijete, alespoň přidejte dobrý obsah, kotvy a rychlé načítání. Čtenář nemá za trest scrollovat celou encyklopedii pokaždé, když chce najít checklist pro formulář.
+
+### 3. PDF verze: archiv, ne hlavní produkt
+
+PDF má být snapshot. Verze k určitému datu. Ne jediný živý formát. Pokud se čtenář k PDF vrátí za půl roku, má vědět, jestli čte aktuální verzi, nebo historický export.
+
+PDF minimum:
+
+- titulní strana s názvem, autorem, verzí a datem,
+- krátká poznámka "aktuální webová verze je na této URL",
+- obsah s odkazy,
+- čísla stránek,
+- funkční interní odkazy,
+- funkční externí odkazy,
+- čitelná typografie i na mobilu a tabletu,
+- přiměřená velikost souboru,
+- metadata dokumentu: title, author, subject,
+- jasné označení, pokud jde o pracovní nebo release candidate verzi.
+
+PDF nemá obsahovat:
+
+- trackovací odkazy s osobními identifikátory,
+- skryté formuláře,
+- vložené externí skripty,
+- obrázky v zbytečně obřím rozlišení,
+- neveřejné interní poznámky,
+- staré kontakty nebo adresy pro zpětnou vazbu.
+
+Codyho komentář: PDF je skvělé, když potřebujete stabilní artefakt. Je hrozné, když z něj uděláte živou dokumentaci. Jakmile někdo začne říkat "pošlu ti aktuální PDF", systém už tiše pláče do rohu.
+
+### 4. Landing page e-booku
+
+Landing page nemá být agresivní prodejní stránka. Má čtenáři rychle říct, co e-book je, pro koho je, jak ho použít a jaké formáty jsou dostupné.
+
+Struktura landing page:
+
+1. Název e-booku.
+2. Jednovětý slib: co čtenář po přečtení umí lépe rozhodnout.
+3. Pro koho je: zakladatelé, produktové týmy, marketéři, vývojáři, menší B2B firmy.
+4. Co obsahuje: web, SaaS, marketing, produktivita, privacy-first provoz v Evropě.
+5. Jak číst: celé, podle kapitol, podle checklistů, podle rolí.
+6. Formáty: webová verze, PDF, Markdown zdroj, případně šablony.
+7. Aktualizace: verze, datum, changelog.
+8. Zpětná vazba: dobrovolný kanál bez povinného marketingu.
+9. Privacy poznámka: co se měří a co se nesbírá.
+
+Příklad věty:
+
+```text
+E-book je veřejný pracovní průvodce pro týmy, které chtějí stavět weby, SaaS produkty a marketingové systémy s kontrolou nad daty, evropským provozem a menším množstvím zbytečných trackerů.
+```
+
+To je lepší než:
+
+```text
+Stáhněte si ultimátní e-book a odemkněte svůj digitální růst.
+```
+
+Slovo "odemkněte" si nechte pro dveře. Tady prodává jasnost.
+
+### 5. Navigace podle práce čtenáře
+
+Ne každý bude e-book číst od začátku. Veřejná verze má nabídnout trasy podle situace:
+
+- Stavím nový web.
+- Připravuji SaaS MVP.
+- Řeším privacy-first analytiku.
+- Potřebuji zlepšit marketing a lead generation.
+- Chci auditovat technický provoz.
+- Potřebuji šablony pro tým.
+- Chystám launch nebo předání zákazníkovi.
+
+Každá trasa může obsahovat:
+
+- doporučené kapitoly,
+- relevantní přílohy,
+- jeden checklist,
+- jeden první praktický krok.
+
+Příklad:
+
+```text
+Trasa: Stavím SaaS MVP
+Číst: kapitoly 8-14, 17, 19
+Použít: checklist SaaS MVP, šablonu datové mapy, experimentální kartu
+První krok: sepsat jeden hlavní workflow a aktivační událost
+```
+
+Taková navigace zkracuje cestu k hodnotě. E-book pak není jen dlouhý text, ale pracovní nástroj.
+
+### 6. Privacy-first distribuce
+
+E-book se dá šířit bez toho, aby každý čtenář musel odevzdat e-mail. To neznamená, že nesmíte nabídnout odběr aktualizací. Znamená to, že základní hodnota není schovaná za formulářem.
+
+Distribuční minimum:
+
+- veřejná URL,
+- RSS položka při vydání a významných aktualizacích,
+- přímý odkaz na webovou verzi,
+- volitelné stažení PDF,
+- volitelný odběr aktualizací,
+- krátké distribuční texty pro sociální sítě,
+- odkazy do relevantních článků a službových stránek.
+
+Nesbírejte:
+
+- e-mail jen kvůli zobrazení běžné verze,
+- telefon pro stažení PDF,
+- firmu a roli bez jasného účelu,
+- osobní identifikátory v analytických eventech,
+- remarketingové publikum bez jasného důvodu a souhlasu.
+
+Měřte:
+
+- návštěvy landing page,
+- otevření webové verze,
+- stažení PDF,
+- RSS odběr,
+- klik na relevantní kapitolu nebo checklist,
+- dobrovolnou zpětnou vazbu,
+- kvalifikovaný kontakt, pokud ho čtenář sám zahájí.
+
+Privacy-first distribuce není slabší. Jen odmítá předstírat, že čtenář je lead jen proto, že si chce přečíst kapitolu.
+
+### 7. Kontrola před exportem
+
+Před veřejným exportem projděte krátkou kontrolu:
+
+- Neobsahuje text interní poznámky, TODO nebo neveřejné informace?
+- Jsou odkazy funkční a vedou na veřejné stránky?
+- Je u právních, aktuálních nebo technických tvrzení jasný zdroj, pokud je potřeba?
+- Je jasné datum a verze?
+- Funguje obsah a interní odkazy?
+- Nejsou obrázky příliš těžké?
+- Je PDF čitelné bez vodorovného scrollování?
+- Je webová verze použitelná na mobilu?
+- Nejsou v URL nebo UTM parametrech osobní údaje?
+- Odpovídá privacy poznámka skutečnému měření?
+
+U každé veřejné verze si uložte jednoduchý záznam:
+
+```text
+Verze:
+Datum:
+Zdrojový commit:
+Webová URL:
+PDF URL:
+Kontrola odkazů:
+Kontrola privacy:
+Známé limity:
+Další plánovaná revize:
+```
+
+### 8. Kdy oddělit šablony od e-booku
+
+Jak rukopis roste, šablony a checklisty začnou být hodnotnější jako samostatné pracovní artefakty. Čtenář nechce pokaždé hledat "datovou mapu" v dlouhém textu. Potřebuje otevřít konkrétní šablonu a použít ji.
+
+Oddělte šablony, když:
+
+- se opakovaně používají v práci se zákazníkem,
+- mají vlastní revizní rytmus,
+- potřebují kratší formát,
+- existuje víc variant podle situace,
+- mají být dostupné týmu bez čtení celé kapitoly.
+
+Minimální katalog šablon:
+
+- název,
+- kdy ji použít,
+- vstupy,
+- výstup,
+- vlastník,
+- datum poslední revize,
+- privacy štítek: jaká data může obsahovat.
+
+E-book pak zůstane vysvětlující vrstva. Šablony budou pracovní vrstva. To je zdravé oddělení.
+
+### Checklist přílohy
+
+- Existuje jeden zdroj pravdy pro text e-booku?
+- Je jasné, jak vzniká webová verze a PDF?
+- Má každá veřejná verze číslo, datum a odkaz na aktuální webovou verzi?
+- Má landing page jasně řečeno, pro koho e-book je a jak ho použít?
+- Jde číst podle tras, ne jen od první kapitoly do poslední?
+- Je PDF považované za snapshot, ne za živý zdroj pravdy?
+- Fungují interní a externí odkazy ve webu i PDF?
+- Je běžné čtení dostupné bez povinného e-mailu?
+- Je odběr aktualizací dobrovolný a srozumitelný?
+- Měříte užitečnost e-booku bez osobních údajů v analytice?
+- Neobsahují exporty interní poznámky, neveřejná data nebo osobní identifikátory v odkazech?
+- Máte záznam o exportu: verze, datum, zdroj, výstupy, kontrola?
+- Víte, které checklisty a šablony mají být oddělené jako samostatné pracovní nástroje?
+- Má někdo odpovědnost za další publikační revizi?
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -23968,3 +24216,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha BE o redakčním zkrácení první veřejné verze: primární čtenář, čtenářské trasy, štítky pro části, práce s duplicitami, oddělení šablon a privacy-first kontrola.
 - 2026-05-08: Doplněna Příloha BF s release kandidátem první veřejné verze: rozsah, zmrazení textu, čtenářská cesta, rozhodovací karta, privacy-first brána a publikační checklist.
 - 2026-05-08: Doplněna Příloha BG s veřejnou poznámkou k aktualizacím e-booku: očekávání čtenáře, umístění poznámky, privacy-first zpětná vazba, changelog a checklist údržby.
+- 2026-05-08: Doplněna Příloha BH o převodu e-booku do webové a PDF verze: zdroj pravdy, landing page, navigace podle práce čtenáře, privacy-first distribuce, exportní kontrola a oddělení šablon.
