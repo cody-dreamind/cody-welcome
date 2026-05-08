@@ -22512,6 +22512,263 @@ Katalog šablon je taková nudná infrastruktura kvality. Nikdo kvůli němu neu
 
 Katalog šablon je poslední kousek systému, který převádí e-book z textu do praxe. Kapitoly vysvětlují principy. Přílohy dávají pracovní nástroje. Katalog zajišťuje, že ty nástroje nezmizí přesně ve chvíli, kdy je tým potřebuje použít.
 
+## Příloha BB: Kontrola použitelnosti šablon po zavedení
+
+Katalog šablon je dobrý začátek, ale sám o sobě nezaručuje, že tým začne pracovat lépe. Šablony se velmi snadno promění v knihovnu hezkých dokumentů, které všichni uznávají a skoro nikdo nepoužívá. Po zavedení proto potřebujete jednoduchou kontrolu použitelnosti: ověřit, jestli šablony pomáhají v reálné práci, kde drhnou a které jen přidávají administrativu.
+
+Tato příloha je praktický postup pro první kontrolu po 30 až 60 dnech od zavedení katalogu. Nejde o audit ve smyslu hledání viníků. Jde o servisní prohlídku pracovního systému. Pokud lidé šablonu obcházejí, často to není lenost. Často je šablona moc dlouhá, špatně pojmenovaná, schovaná, duplicitní, nebo neodpovídá skutečnému rozhodnutí, které tým potřebuje udělat.
+
+### 1. Nehodnoťte šablony podle existence
+
+Nejhorší metrika katalogu je počet vytvořených šablon. Počet dokumentů neříká nic o tom, jestli tým pracuje lépe. Naopak může maskovat problém: čím víc šablon máte, tím těžší je vybrat tu správnou.
+
+Lepší otázky:
+
+- Pomohla šablona udělat konkrétní rozhodnutí rychleji?
+- Zabránila opakované chybě?
+- Zkrátila předání mezi lidmi?
+- Snížila množství dat, které tým zbytečně sbírá?
+- Zlepšila kvalitu výstupu bez toho, aby přidala zbytečný proces?
+- Umí ji použít člověk, který nebyl u jejího vzniku?
+
+Pokud na tyto otázky neumíte odpovědět, šablona zatím není pracovní nástroj. Je to hypotéza o pracovním nástroji. A hypotézy se musí testovat, jinak se z nich stávají interní dekorace. Velmi úřední dekorace, takže radost dvojnásobná.
+
+### 2. Udělejte inventuru skutečného použití
+
+První kontrola by měla začít jednoduchou inventurou. Vezměte posledních několik projektů, změn, kampaní, incidentů nebo workshopů a u každého zapište, které šablony se opravdu použily.
+
+Použijte tabulku:
+
+```text
+Pracovní situace:
+Datum:
+Použitá šablona:
+Kdo ji použil:
+Kdy byla použita:
+Co pomohla rozhodnout:
+Co chybělo:
+Co bylo navíc:
+Navazující výstup:
+Poznámka k datům a privacy:
+```
+
+Důležité je sledovat i okamžik použití. Šablona pro discovery, která se vyplní až po schůzce, už nepomáhá vést rozhovor. Šablona pro incident, která se otevře až po vyřešení dopadu, může být dobrá pro post-mortem, ale ne pro stabilizaci. Šablona pro marketingový plán, kterou tým vyplní jednou a pak ji tři měsíce neotevře, není plán. Je to jednorázové cvičení v optimismu.
+
+Příklad:
+
+```text
+Pracovní situace: úprava onboardingového formuláře
+Použitá šablona: experimentální karta, datová mapa, měření dopadu změny
+Kdy byla použita: před implementací a při vyhodnocení po 14 dnech
+Co pomohla rozhodnout: zkrátit formulář na tři povinná pole a sledovat dokončení kroku
+Co chybělo: jasnější pravidlo, kdy aktualizovat help text v aplikaci
+Co bylo navíc: část o obchodním dopadu byla pro malou změnu příliš rozsáhlá
+Poznámka k datům a privacy: odstraněno pole "telefon" z prvního kroku
+```
+
+Takový záznam ukazuje víc než obecné "šablona se hodí". Ukazuje konkrétní dopad, slabinu a drobnou úpravu pro další verzi.
+
+### 3. Rozlišujte čtyři stavy použitelnosti
+
+Každou důležitou šablonu po kontrole zařaďte do jednoho ze čtyř stavů.
+
+```text
+Používat beze změny
+- šablona je srozumitelná,
+- používá se ve správný moment,
+- výstup pomáhá navazující práci,
+- nepřidává zbytečný sběr dat.
+
+Zjednodušit
+- lidé ji používají, ale přeskakují části,
+- obsahuje moc polí,
+- opakuje informace z jiného dokumentu,
+- vyžaduje detail, který v daném momentu nikdo rozumně neví.
+
+Sloučit
+- překrývá se s jinou šablonou,
+- tým neví, kterou z podobných verzí použít,
+- stejné otázky se vyplňují na více místech.
+
+Archivovat
+- nikdo ji nepoužil,
+- řeší situaci, která už není aktuální,
+- podporuje starý proces,
+- vede k horšímu rozhodnutí nebo zbytečnému sběru dat.
+```
+
+Archivace není selhání. Je to úklid. Pokud tým neumí šablony mazat nebo archivovat, katalog postupně ztratí důvěru. Lidé pak přestanou hledat nejlepší nástroj a začnou si tvořit vlastní kopie. Vznikne dokumentový stínový provoz: podobné názvy, staré verze, nejasná odpovědnost a drobné odchylky, které se po půl roce prodraží.
+
+### 4. Ptejte se uživatelů šablon, ne jen jejich vlastníků
+
+Vlastník šablony často ví, proč dokument vznikl. Uživatel šablony ví, kde bolí. Při kontrole proto oslovte lidi, kteří šablonu skutečně používali: vývojáře, marketéra, obchodníka, projektového člověka, support nebo zákaznický tým.
+
+Stačí pět otázek:
+
+1. Kdy jsi šablonu otevřel?
+2. Co ti pomohla ujasnit?
+3. Kterou část jsi přeskočil a proč?
+4. Co jsi musel doplnit mimo šablonu?
+5. Sbírala šablona nějaká data, která pro rozhodnutí nebyla potřeba?
+
+Poslední otázka je důležitá. Šablony často nenápadně normalizují sběr dat. Do formuláře se přidá telefon, velikost firmy, odhad rozpočtu, počet uživatelů, IP adresa, interní poznámka, screenshot a "pro jistotu" export z analytiky. Jednotlivě to vypadá nevinně. Dohromady vzniká datový nepořádek, který nikdo nechtěl vlastnit.
+
+Privacy-first kontrola použitelnosti proto neřeší jen to, jestli je šablona pohodlná. Řeší i to, jestli vede tým k datové střídmosti.
+
+### 5. Sledujte navazující práci
+
+Dobrá šablona nekončí vyplněním. Má vytvořit výstup, který někdo použije dál. Pokud výstup nikam nevede, šablona pravděpodobně jen vytváří pocit kontroly.
+
+U každé aktivní šablony si napište:
+
+- Kdo je čtenář výstupu?
+- Jaké rozhodnutí podle výstupu udělá?
+- Kam se výstup ukládá?
+- Kdy se k němu tým vrátí?
+- Co se stane, když výstup nevznikne?
+
+Příklad rozdílu:
+
+Slabý výstup:
+"Vyplněný marketingový plán je uložen ve složce."
+
+Silnější výstup:
+"Marketingový plán určuje tři obsahové pilíře, hlavní distribuční kanály, privacy-first pravidla měření a měsíční review otázky. Z plánu vzniká backlog konkrétních obsahových úkolů a jednou měsíčně se podle něj rozhoduje, co zastavit, ponechat nebo upravit."
+
+První varianta popisuje existenci dokumentu. Druhá popisuje pracovní tok.
+
+### 6. Zaveďte skóre tření
+
+Pro rychlé porovnání šablon použijte jednoduché skóre tření od 1 do 5.
+
+```text
+1 = šablona se používá snadno a zlepšuje výsledek
+2 = drobné nejasnosti, ale celkově pomáhá
+3 = použitelná, ale vyžaduje vysvětlování nebo obcházení
+4 = často se přeskakuje, duplikuje práci nebo vzniká pozdě
+5 = tým ji nepoužívá, protože brzdí nebo nedává smysl
+```
+
+Skóre samo o sobě není verdikt. Je to začátek rozhovoru. Když má šablona skóre 4, neptejte se "proč ji lidé ignorují". Ptejte se:
+
+- Je moc dlouhá?
+- Vzniká ve špatné fázi práce?
+- Chybí příklad vyplnění?
+- Je schovaná mimo pracovní nástroje?
+- Má nejasného vlastníka?
+- Míchá strategii, exekuci a reporting do jednoho dokumentu?
+- Nutí tým sbírat osobní nebo provozní data bez jasného účelu?
+
+Často stačí malá úprava: zkrátit povinnou část, přidat vyplněný příklad, oddělit rychlou a detailní verzi, nebo šablonu přesunout tam, kde tým skutečně pracuje.
+
+### 7. Šablona záznamu kontroly použitelnosti
+
+Použijte jednu stránku. Kontrola má být krátká, jinak sama potřebuje kontrolu použitelnosti, což už zavání procesním humorem.
+
+```text
+Název šablony:
+Vlastník:
+Pracovní situace:
+Datum kontroly:
+Počet reálných použití od poslední kontroly:
+
+Co šablona pomohla rozhodnout:
+
+Kde vznikalo tření:
+
+Které části lidé přeskakovali:
+
+Co chybělo:
+
+Co bylo navíc:
+
+Dopad na data a privacy:
+
+Navazující výstup:
+
+Skóre tření 1-5:
+
+Rozhodnutí:
+[ ] ponechat
+[ ] zjednodušit
+[ ] sloučit
+[ ] archivovat
+
+Další krok:
+Odpovědná osoba:
+Termín:
+```
+
+Tento záznam patří do stejného místa jako katalog šablon. Udržujte ho stručný. Smyslem není vytvořit auditní román, ale jasně říct, co se s pracovním nástrojem stane dál.
+
+### 8. Vyplněný příklad
+
+```text
+Název šablony: Kvalifikační dotazník pro nový web
+Vlastník: obchod a delivery lead
+Pracovní situace: první kontakt s potenciálním zákazníkem
+Datum kontroly: 2026-05-08
+Počet reálných použití od poslední kontroly: 6
+
+Co šablona pomohla rozhodnout:
+Rychleji oddělila projekty vhodné pro audit od projektů, kde zákazník potřebuje nejdřív zpřesnit zadání.
+
+Kde vznikalo tření:
+Část o technickém stacku byla pro první hovor příliš detailní.
+
+Které části lidé přeskakovali:
+Otázky na budoucí integrace, protože zákazník je v prvním hovoru často nezná.
+
+Co chybělo:
+Jedna otázka na interního vlastníka webu po spuštění.
+
+Co bylo navíc:
+Povinné pole pro telefon v úvodní verzi dotazníku.
+
+Dopad na data a privacy:
+Telefon přesunout mezi volitelná pole. Do první fáze stačí e-mail a preferovaný způsob kontaktu.
+
+Navazující výstup:
+Jednostránkové shrnutí fitu, rizik a doporučeného dalšího kroku.
+
+Skóre tření 1-5: 2
+
+Rozhodnutí:
+Zjednodušit.
+
+Další krok:
+Rozdělit dotazník na "první hovor" a "technické doplnění před nabídkou".
+
+Odpovědná osoba:
+delivery lead
+
+Termín:
+do příštího měsíčního review
+```
+
+Na příkladu je vidět zdravý typ úpravy. Šablona funguje, ale má špatně načasovanou technickou hloubku a jedno zbytečné osobní pole. Není potřeba ji přepisovat celou. Stačí odstranit tření v místě, kde skutečně vzniká.
+
+### 9. Codyho komentář
+
+Můj pohled: nejlepší šablony jsou skoro neviditelné. Ne proto, že by nebyly důležité, ale proto, že přesně sedí na práci. Člověk je otevře ve správný moment, vyplní jen to, co pomůže rozhodnout, a výstup přirozeně pokračuje do dalšího kroku.
+
+Špatná šablona naopak chce být vidět. Má moc sekcí, moc instrukcí, moc polí a trochu se tváří, že když ji vyplníte, problém poslušně zmizí. Nezmizí. Jen bude mít nadpis, datum a možná logo v záhlaví.
+
+### Checklist přílohy
+
+- Kontrolujete šablony podle reálného použití, ne podle počtu vytvořených dokumentů?
+- Umíte u každé aktivní šablony říct, jaké rozhodnutí pomáhá udělat?
+- Sledujete, kdy se šablona používá v pracovním toku?
+- Ptáte se lidí, kteří šablony opravdu používají?
+- Rozlišujete stavy `ponechat`, `zjednodušit`, `sloučit` a `archivovat`?
+- Má každá šablona jasný navazující výstup?
+- Měříte skóre tření a řešíte jeho příčinu?
+- Kontrolujete, jestli šablona nevede ke zbytečnému sběru dat?
+- Máte krátký záznam kontroly použitelnosti?
+- Archivujete šablony, které už nepomáhají?
+
+Kontrola použitelnosti šablon uzavírá smyčku mezi teorií a praxí. E-book dodá principy. Přílohy dodají pracovní nástroje. Ale až pravidelná kontrola ukáže, jestli ty nástroje opravdu pomáhají týmu dělat lepší rozhodnutí s menším chaosem a menší datovou stopou.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -22693,3 +22950,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha AY o uzavření experimentu a rozhodnutí o změně: vyhodnocení signálů, ochranné kontroly, dopad do datové mapy, šablona záznamu a checklist.
 - 2026-05-08: Doplněna Příloha AZ o standardizaci změny po experimentu: typ standardu, šablona záznamu, pracovní místa, privacy-first brána, kontrola použití a checklist.
 - 2026-05-08: Doplněna Příloha BA s katalogem pracovních šablon a playbooků: situace použití, karta šablony, stav, privacy štítky, role, revizní rytmus a minimální katalog e-booku.
+- 2026-05-08: Doplněna Příloha BB s kontrolou použitelnosti šablon po zavedení: inventura reálného použití, stavy použitelnosti, skóre tření, privacy-first kontrola dat a checklist.
