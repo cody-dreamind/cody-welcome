@@ -26140,6 +26140,254 @@ Tohle není marketingová fanfára. Je to důkaz údržby. Čtenář vidí, že 
 
 Další verze e-booku nemá být reakce na tlak. Má být rozhodnutí. Když po prvním týdnu vyberete jednu užitečnou změnu, jasně řeknete proč a udržíte privacy-first hranice, začne se z veřejné verze stávat živý pracovní systém. Ne proto, že se pořád mění, ale protože se mění s rozumem.
 
+## Příloha BS: Měsíční ediční sprint veřejné verze
+
+Po první veřejné verzi a prvním týdnu reakcí přichází méně nápadná, ale důležitější práce: pravidelný ediční sprint. To je krátký měsíční cyklus, ve kterém se e-book zlepší o jednu konkrétní věc a zároveň se nezmění v nekonečný dokument, který nikdo neumí udržovat.
+
+Měsíční sprint není další meeting pro meeting. Je to ochrana před dvěma extrémy. První extrém je nechat e-book po vydání zestárnout. Druhý extrém je přepisovat ho při každém novém podnětu. Dobrý rytmus říká: sbíráme signály průběžně, rozhodujeme jednou za měsíc a vydáváme jen to, co má jasný účel.
+
+Cílem této přílohy je dát týmu jednoduchý formát pro měsíční práci s veřejnou verzí e-booku, navazujícími šablonami, landing page a distribučním obsahem.
+
+### 1. Sprint začíná jednou otázkou
+
+Každý ediční sprint potřebuje jednu rozhodovací otázku. Bez ní se tým rychle rozpadne do drobných úprav, které sice vypadají užitečně, ale dohromady neposunou čtenáře ani byznys.
+
+Dobré otázky:
+
+- Pomůže nová verze čtenáři rychleji najít správnou trasu?
+- Snížíme počet nejasností u SaaS MVP části?
+- Zpřesníme privacy-first argument tak, aby byl použitelný v obchodním hovoru?
+- Převodíme nejčtenější kapitolu do praktické šablony?
+- Opravíme část, která podle zpětné vazby budí nejvíc pochybností?
+
+Slabé otázky:
+
+- Co všechno bychom mohli zlepšit?
+- Neměli bychom to celé trochu osvěžit?
+- Co kdybychom přidali nové kapitoly o všem, co nás napadlo?
+- Jak využijeme každý komentář z posledního měsíce?
+
+Rozdíl je v rozhodnutí. Dobrá otázka pomáhá vybrat. Slabá otázka otevírá šuplík se vším.
+
+### 2. Vstupy do sprintu
+
+Měsíční sprint pracuje jen s několika vstupy. Čím víc zdrojů přidáte, tím víc času strávíte tříděním místo úpravou.
+
+Minimální vstupy:
+
+- feedback backlog z posledního měsíce,
+- agregované signály z webové verze, landing page a PDF,
+- obchodní dotazy, kde e-book pomohl nebo naopak nestačil,
+- interní poznámky z workshopů, auditů nebo supportu,
+- seznam právních, technických nebo nástrojových tvrzení, která mohou stárnout,
+- předchozí rozhodovací karta a changelog.
+
+Privacy-first pravidlo: do edičního sprintu netahejte zbytečné osobní údaje. Pro rozhodnutí obvykle stačí agregovaný signál, anonymizovaný citát nebo stručný popis situace. Pokud je potřeba použít konkrétní zákaznický příklad, nejdřív ho anonymizujte a zkontrolujte, že neprozrazuje interní informace.
+
+Příklad vstupu:
+
+```text
+Signál:
+Čtenáři z menších B2B firem často otevřou kapitolu o MVP, ale potom se ptají, jak to převést do prvního workshopu.
+
+Důkaz:
+4 podobné dotazy za měsíc, 2 obchodní hovory, 1 interní poznámka z auditu.
+
+Možná změna:
+Doplnit krátký workshopový rozcestník mezi MVP kapitolou, šablonou produktové strategie a kvalifikačním dotazníkem.
+```
+
+Takový vstup je použitelný. Neříká jen "někdo něco chtěl", ale ukazuje opakovaný problém, kontext a možný další krok.
+
+### 3. Třífázový průběh sprintu
+
+Měsíční ediční sprint držte krátký. Ideálně se vejde do jednoho až dvou pracovních bloků.
+
+Fáze 1: triage.
+
+- Projděte vstupy z posledního měsíce.
+- Spojte duplicitní podněty.
+- Označte položky jako chyba, nejasnost, mezera, obchodní signál, privacy signál nebo nápad.
+- Vyberte maximálně tři kandidáty na změnu.
+
+Fáze 2: rozhodnutí.
+
+- Ke každému kandidátovi napište dopad, náročnost a privacy-first riziko.
+- Vyberte jednu hlavní změnu sprintu.
+- Určete, co záměrně zůstává mimo rozsah.
+- Zapište rozhodovací kartu.
+
+Fáze 3: vydání.
+
+- Upravte rukopis nebo navazující materiál.
+- Zkontrolujte odkazy, čtenářskou trasu a logiku změny.
+- Aktualizujte pracovní log, changelog a případně landing page.
+- Zapište, podle čeho za měsíc poznáte, jestli změna pomohla.
+
+Sprint, který končí jen seznamem nápadů, nebyl sprint. Byl to brainstorming v kostýmu procesu. Výstupem má být vydaná změna, nebo vědomé rozhodnutí nic nevydat.
+
+### 4. Šablona měsíčního sprintu
+
+Tuto šablonu lze držet přímo v redakčním boardu nebo v samostatném záznamu.
+
+```markdown
+# Měsíční ediční sprint
+
+Měsíc:
+Verze před sprintem:
+Rozhodovací otázka:
+
+## Vstupy
+- Feedback backlog:
+- Agregované signály:
+- Obchodní signály:
+- Interní poznámky:
+- Zdroje nebo právní aktualizace:
+
+## Kandidáti
+1. Kandidát:
+   Dopad:
+   Náročnost:
+   Privacy-first riziko:
+   Verdikt:
+
+2. Kandidát:
+   Dopad:
+   Náročnost:
+   Privacy-first riziko:
+   Verdikt:
+
+3. Kandidát:
+   Dopad:
+   Náročnost:
+   Privacy-first riziko:
+   Verdikt:
+
+## Rozhodnutí
+Hlavní změna:
+Co měníme:
+Co neměníme:
+Vlastník:
+Termín:
+Signál úspěchu:
+
+## Vydání
+Nová verze:
+Datum vydání:
+Aktualizované soubory nebo stránky:
+Poznámka do changelogu:
+Kontrola po vydání:
+```
+
+Šablona je záměrně suchá. Nemá inspirovat ke slohovému cvičení. Má donutit tým říct, proč se něco mění a jak pozná, že to nebyla jen kosmetika.
+
+### 5. Příklad vyplněného sprintu
+
+```text
+Měsíc:
+2026-06
+
+Verze před sprintem:
+v1.1
+
+Rozhodovací otázka:
+Pomůžeme čtenáři převést e-book do prvního zákaznického workshopu bez vysvětlování navíc?
+
+Vstupy:
+- 5 dotazů na použití e-booku v auditu nebo workshopu.
+- 2 obchodní hovory, kde lidé pochopili kapitoly, ale nevěděli, jak začít prakticky.
+- Interní poznámka: přílohy jsou užitečné, ale je těžké vybrat první tři.
+
+Kandidáti:
+1. Nová kapitola o workshopech: vysoký dopad, vysoká náročnost, nízké privacy riziko.
+2. Krátký workshopový rozcestník: střední až vysoký dopad, nízká náročnost, nízké privacy riziko.
+3. Video walkthrough: nejasný dopad, střední náročnost, nové otázky kolem hostingu a měření.
+
+Rozhodnutí:
+Vydáme krátký workshopový rozcestník a doplníme odkazy do landing page.
+
+Co neměníme:
+Nepřidáváme video, nepřepisujeme všechny přílohy, nezavádíme nový formulář.
+
+Signál úspěchu:
+V dalších hovorech bude méně dotazů "kde začít" a více konkrétních dotazů k prvnímu workshopu.
+```
+
+Tento příklad je schválně malý. Právě malé, dobře dokončené sprinty drží e-book živý. Velké plány bez vydání jsou jen elegantně zapsaný dluh.
+
+### 6. Jak zacházet s právními a rychle stárnoucími tématy
+
+Ne každý měsíční sprint musí ověřovat všechny právní a technické odkazy. To by bylo neefektivní. Ale každý sprint by měl mít krátkou kontrolu, jestli se nepracuje s částí, která může rychle stárnout.
+
+Zvýšenou pozornost věnujte tvrzením o:
+
+- cookies, souhlasech, GDPR, ePrivacy a AI regulaci,
+- cenách nástrojů, plánů a cloudových služeb,
+- benchmarkách výkonu, konverzí nebo SaaS metrik,
+- konkrétních nástrojích, API, limitech a podmínkách,
+- právních povinnostech pro newslettery, analytiku, data processing a automatizované rozhodování.
+
+Pokud sprint zasahuje takové téma, ověřte zdroje před vydáním. Pokud nezasahuje, stačí označit, že právní a rychle stárnoucí část nebyla měněna.
+
+Praktický zápis:
+
+```text
+Kontrola zdrojů:
+Sprint mění pouze navigaci a rozcestník. Nemění právní tvrzení, ceny, nástroje ani regulační doporučení. Nové externí zdroje nejsou potřeba.
+```
+
+Nebo:
+
+```text
+Kontrola zdrojů:
+Sprint mění část o cookies a analytice. Před vydáním ověřit aktuální text u ÚOOÚ, EDPB a relevantní dokumentaci používaného analytického nástroje.
+```
+
+Tím se z ověřování faktů nestane byrokracie, ale cílená brzda tam, kde by chyba bolela.
+
+### 7. Distribuce změny bez nafukování
+
+Každá měsíční změna nepotřebuje velkou kampaň. Potřebuje správné oznámení správným lidem.
+
+Pro malou opravnou nebo použitelnostní verzi stačí:
+
+- zápis do changelogu,
+- krátká poznámka na landing page nebo v patičce e-booku,
+- interní zmínka týmu, který e-book používá v obchodu nebo delivery.
+
+Pro obsahovou nebo produktovou verzi přidejte:
+
+- krátký článek nebo poznámku na webu,
+- RSS položku,
+- přímý odkaz lidem, kteří se ptali na dané téma,
+- aktualizovaný sales nebo workshopový výřez,
+- jednu větu pro follow-up v obchodním hovoru.
+
+Nezavádějte nový newsletter jen proto, že vyšla menší verze. Nepřidávejte povinný formulář jen proto, že chcete měřit zájem. Pokud má změna hodnotu, přímý odkaz, RSS a jasná landing page často stačí. Ano, je to méně dramatické. Přesně proto to bývá zdravější.
+
+### 8. Codyho komentář
+
+Můj pohled: největší riziko dlouhého e-booku není, že bude mít málo stran. Riziko je, že bude mít moc rozhodnutí bez vlastnictví. Každá nová příloha, šablona a landing page něco slibuje. Měsíční sprint je způsob, jak se ptát: pořád to slouží čtenáři, nebo už jen dokazujeme, že umíme přidávat další text?
+
+Dobrá údržba je trochu nudná. Má kalendář, vlastníka, changelog a stop pravidla. Ale právě tím chrání tvůrčí práci. Bez údržby se z e-booku stane skladiště nápadů. S údržbou zůstává nástrojem.
+
+### 9. Checklist přílohy
+
+- Má měsíční sprint jednu rozhodovací otázku?
+- Vstupují do něj jen relevantní signály, ne každá náhodná poznámka?
+- Jsou osobní a zákaznické údaje anonymizované nebo vynechané?
+- Jsou kandidáti změn hodnocení podle dopadu, náročnosti a privacy-first rizika?
+- Je vybraná jedna hlavní změna sprintu?
+- Je jasné, co se v tomto měsíci záměrně nemění?
+- Má změna vlastníka, termín a signál úspěchu?
+- Proběhla kontrola, zda se nemění právní, cenová nebo rychle stárnoucí tvrzení?
+- Je po vydání aktualizovaný pracovní log, changelog a relevantní landing page?
+- Je distribuce změny přiměřená její velikosti?
+- Zůstává čtení e-booku dostupné bez povinné registrace nebo zbytečného sledování?
+- Dokáže tým za měsíc říct, jestli sprint pomohl?
+
+Měsíční ediční sprint dává veřejnému e-booku rytmus. Nehoní každou připomínku, ale ani nenechá text zapadat prachem. Jednou za měsíc vybere jednu důležitou změnu, vydá ji, zapíše proč a zkontroluje, že kvůli tomu nepřibylo zbytečné datové nebo provozní břemeno. To je přesně ten typ obyčejné disciplíny, který z obsahu dělá dlouhodobě použitelný produkt.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -26338,3 +26586,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BP s návrhem landing page pro veřejnou verzi e-booku: první obrazovka, čtenářské trasy, formáty, formuláře, privacy-first měření, SEO minimum a publikační checklist.
 - 2026-05-09: Doplněna Příloha BQ s plánem prvního týdne po zveřejnění veřejné verze e-booku: operační karta, den nula kontrola, denní rytmus, scoreboard signálů, triage zpětné vazby a sedmidenní review.
 - 2026-05-09: Doplněna Příloha BR o rozhodnutí další verze po prvním týdnu: třídění signálů, typy iterací, rozhodovací karta, hranice rozsahu, privacy-first brána a checklist vydání.
+- 2026-05-09: Doplněna Příloha BS s měsíčním edičním sprintem veřejné verze: rozhodovací otázka, vstupy, průběh, šablona sprintu, kontrola stárnoucích témat, distribuce změny a checklist.
