@@ -26937,6 +26937,150 @@ Privacy-first minimum: měřte agregovaně, držte krátkou retenci, nepodmiňuj
 
 Publikační balíček uzavírá smyčku mezi psaním a použitím. Díky němu není iterace hotová ve chvíli, kdy přibude odstavec. Je hotová ve chvíli, kdy čtenář ví, kde ho najít, tým ví, jak ho použít, a měření respektuje soukromí místo toho, aby z každé aktualizace dělalo datový vysavač.
 
+## Příloha BW: Kontrola odkazů, rozcestníků a přesměrování po iteraci
+
+Živý e-book se časem nerozbíjí jen špatným textem. Rozbíjí se i tím, že staré odkazy vedou na neaktuální části, nové přílohy nejsou dostupné z rozcestníků, veřejná landing page slibuje starý rozsah a interní tým posílá zákazníkům výřezy, které už nejsou nejlepší odpovědí. To je tichý druh nepořádku. Neudělá dramatickou chybu v den publikace, ale postupně snižuje důvěru a použitelnost.
+
+Kontrola odkazů po iteraci je malý úklid po každé větší změně. Jejím cílem není přepsat celý e-book. Cílem je zajistit, aby nová část byla dohledatelná, staré odkazy nebyly matoucí a veřejná distribuce odpovídala skutečnému stavu rukopisu.
+
+Použijte ji po těchto změnách:
+
+- přibyla nová kapitola, příloha, šablona nebo veřejný výřez,
+- změnil se název části,
+- sloučily se nebo odstranily podobné části,
+- upravila se landing page, rozcestník nebo čtenářská trasa,
+- změnil se doporučený další krok pro sales, support nebo workshop,
+- vznikl nový veřejný odkaz, který má tým posílat zákazníkům.
+
+### 1. Najděte vstupní místa
+
+Každá důležitá část e-booku má mít alespoň jedno jasné vstupní místo. Pokud nová příloha existuje jen v dlouhém Markdown souboru a nikdo na ni neodkazuje, pro většinu čtenářů prakticky neexistuje.
+
+Zkontrolujte:
+
+- hlavní obsah nebo rozcestník e-booku,
+- landing page veřejné verze,
+- čtenářské trasy podle situace,
+- interní sales a support odkazy,
+- RSS nebo changelog položku,
+- případný veřejný index šablon,
+- odkazy z navazujících kapitol.
+
+Praktická otázka:
+
+```text
+Kdyby čtenář řešil přesně tuto situaci, odkud by se na novou část dostal?
+```
+
+Pokud odpověď zní "musel by ji najít fulltextem", přidejte odkaz z relevantního rozcestníku nebo kapitoly. Fulltext je dobrá záchrana. Není to navigační strategie.
+
+### 2. Ověřte staré odkazy na podobné části
+
+Nová příloha často nevzniká ve vzduchoprázdnu. Navazuje na starší kapitoly, checklisty nebo šablony. Právě tam vznikají duplicity a slepé cesty.
+
+U každé nové části se ptejte:
+
+- Existuje starší část, která řeší podobnou situaci?
+- Má na novou část odkazovat?
+- Má nová část odkazovat zpět?
+- Není starší text přesnější pro jiný typ čtenáře?
+- Nemá se starší část označit jako základ a nová jako pokročilé použití?
+- Nemá se něco sloučit nebo zkrátit?
+
+Příklad:
+
+```text
+Nová příloha řeší kontrolu odkazů po iteraci.
+Navazuje na publikační balíček, revizní kalendář, landing page a distribuční plán.
+Tyto části by ji měly zmiňovat jako poslední kontrolu před uzavřením změny.
+```
+
+Tím nevzniká jen více odkazů. Vzniká mapa práce. Čtenář pochopí, že jedna část pomáhá změnu napsat, druhá ji vydat a třetí zkontrolovat, jestli se dá najít.
+
+### 3. Rozlišujte kanonický odkaz a pracovní odkaz
+
+U dlouhého živého dokumentu se hodí rozlišit dva typy odkazů:
+
+- Kanonický odkaz: stabilní veřejné místo, které má používat čtenář, zákazník nebo partner.
+- Pracovní odkaz: interní odkaz na konkrétní soubor, větev, návrh, issue nebo poznámku.
+
+Do veřejné distribuce patří kanonický odkaz. Pracovní odkazy patří do interního procesu. Když zákazník dostane odkaz na rozpracovaný soubor nebo nestabilní interní URL, vzniká zbytečné riziko: odkaz se změní, přístup selže, nebo člověk uvidí kontext, který pro něj nebyl určený.
+
+Jednoduché pravidlo:
+
+```text
+Veřejný čtenář dostává stabilní URL.
+Interní tým může používat pracovní odkazy, ale jen tam, kde je jasný vlastník a účel.
+```
+
+Privacy-first poznámka: veřejný odkaz nemá vyžadovat registraci, pokud obsah nemá dobrý důvod být omezený. Pokud odkaz vede přes nástroj, který sleduje jednotlivce, přesměrovává přes reklamní systém nebo vyžaduje nejasný souhlas, není to neutrální distribuční rozhodnutí.
+
+### 4. Zkontrolujte přesměrování a názvy
+
+Když se mění názvy kapitol, příloh nebo veřejných výřezů, zkontrolujte, jestli staré odkazy nezmizí bez náhrady. U Markdown souboru to může znamenat opravit interní anchor odkazy. U webové verze to může znamenat nastavit přesměrování ze staré URL na novou.
+
+Kontrola:
+
+- Starý název se v textu stále nevyskytuje jako doporučený cíl.
+- Staré veřejné URL má přesměrování nebo jasnou archivní poznámku.
+- Nový název je použitý konzistentně v pracovním logu, rozcestníku i distribuci.
+- Anchor odkazy fungují po exportu do webu nebo PDF.
+- Pokud se část archivovala, je jasné proč a kam jít místo ní.
+
+Nejhorší varianta je tiché smazání. Čtenář klikne na starý odkaz a narazí na chybu. Lepší je přesměrování. Ještě lepší je krátká poznámka: "Tato část byla nahrazena novější šablonou X, protože Y."
+
+### 5. Ověřte interní použití
+
+Odkaz není hotový jen tím, že funguje technicky. Musí být použitelný v reálné práci.
+
+Zeptejte se:
+
+- Který tým má novou část používat?
+- Má připravený krátký popis, kdy ji poslat?
+- Je odkaz dostupný v CRM, helpdesku, interní wiki nebo sales playbooku?
+- Neexistuje starší šablona, kterou tým pořád používá ze zvyku?
+- Ví někdo, že se doporučený výřez změnil?
+
+Příklad interní poznámky:
+
+```text
+Pro dotazy zákazníků k publikaci e-booku po úpravě posílejte nově Přílohu BV a BW. BV vysvětluje publikační balíček, BW slouží jako kontrola odkazů a rozcestníků před uzavřením iterace.
+```
+
+Taková věta šetří více času než dlouhé oznámení. Říká, kdy odkaz použít a proč.
+
+### 6. Mini audit po větší iteraci
+
+Po každé významnější iteraci projděte desetiminutový audit:
+
+1. Nová část má jasný název.
+2. Nová část je uvedená v pracovním logu.
+3. Existuje alespoň jeden vstupní odkaz z relevantního rozcestníku nebo kapitoly.
+4. Navazující starší části odkazují na novou část, pokud to pomáhá čtenáři.
+5. Veřejná landing page neslibuje zastaralý rozsah.
+6. Interní sales/support odkazy nevedou na horší starší odpověď.
+7. Staré URL nebo anchor odkazy mají přesměrování, opravu nebo archivní poznámku.
+8. Měření nové části je agregované a nevyžaduje zbytečné osobní údaje.
+9. Existuje jeden doporučený další krok pro čtenáře.
+10. Je jasné, kdo odkaz zkontroluje při další větší revizi.
+
+### 7. Jednostránkový checklist
+
+- Má nová část alespoň jedno jasné vstupní místo?
+- Je dostupná z relevantní čtenářské trasy?
+- Odkazují na ni starší související části, pokud to pomáhá?
+- Nezůstaly v textu staré názvy, které čtenáře matou?
+- Je veřejný odkaz stabilní a vhodný pro zákazníka?
+- Nevede veřejná distribuce přes zbytečný tracker, formulář nebo uzavřenou platformu?
+- Fungují interní anchor odkazy po exportu do webu nebo PDF?
+- Mají staré URL přesměrování, archivní poznámku nebo jasnou náhradu?
+- Ví sales, support nebo delivery, kdy novou část použít?
+- Je pracovní log aktualizovaný?
+- Je měření užitečnosti agregované a přiměřené?
+- Má další revize jasného vlastníka?
+
+Kontrola odkazů je drobná práce, která chrání velkou věc: důvěru, že e-book je živý, ale ne chaotický. Když čtenář klikne na správné místo a dostane aktuální odpověď, dokument působí jako systém. Když odkazy vedou do starých verzí, slepých uliček a rozpadlých výřezů, i dobrý obsah začne vypadat unaveně.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -27139,3 +27283,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BT se stop pravidly pro živý e-book: kdy změnu nepřidávat, jak rozlišit podnět od důvodu, kdy mazat nebo slučovat a jak držet privacy-first brzdu.
 - 2026-05-09: Doplněna Příloha BU s prioritizační frontou pro živý e-book: stavy položek, karta podnětu, jednoduché skórování, týdenní triage, privacy-first brána a definition of done.
 - 2026-05-09: Doplněna Příloha BV s publikačním balíčkem pro jednu hotovou iteraci: karta změny, veřejná poznámka, distribuce, interní použití, privacy-first měření a checklist.
+- 2026-05-09: Doplněna Příloha BW s kontrolou odkazů, rozcestníků a přesměrování po iteraci: vstupní místa, kanonické odkazy, staré URL, interní použití a privacy-first distribuce.
