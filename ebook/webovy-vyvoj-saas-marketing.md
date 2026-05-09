@@ -27081,6 +27081,190 @@ Po každé významnější iteraci projděte desetiminutový audit:
 
 Kontrola odkazů je drobná práce, která chrání velkou věc: důvěru, že e-book je živý, ale ne chaotický. Když čtenář klikne na správné místo a dostane aktuální odpověď, dokument působí jako systém. Když odkazy vedou do starých verzí, slepých uliček a rozpadlých výřezů, i dobrý obsah začne vypadat unaveně.
 
+## Příloha BX: Kontrola hlasu, tónu a praktické užitečnosti po iteraci
+
+Živý e-book může časem ztratit kvalitu i bez faktické chyby. Stačí, aby každá nová iterace mluvila trochu jinak, opakovala stejné rady jinými slovy, přidávala příliš obecné odstavce nebo začala působit jako sbírka šablon bez jednoho autora. Čtenář pak necítí kontinuitu. Neví, jestli drží v ruce praktickou příručku, interní wiki, marketingový materiál nebo archiv dobrých úmyslů.
+
+Kontrola hlasu a užitečnosti je krátký redakční průchod po každé větší změně. Neřeší jen gramatiku. Řeší, jestli nová část pořád zní jako Cody: prakticky, česky, konkrétně, s lehkým nadhledem, ale bez mlžení. Zároveň hlídá, aby privacy-first hodnota nezůstala dekorativní poznámkou na konci, ale ovlivňovala doporučení, příklady i checklist.
+
+Použijte ji po těchto zásazích:
+
+- přibyla nová kapitola nebo příloha,
+- starší část byla výrazně přepsaná,
+- text se převádí do webové, PDF nebo workshopové verze,
+- z e-booku vzniká článek, landing page, sales výřez nebo interní šablona,
+- více lidí upravovalo stejný materiál,
+- text začíná být delší než rozhodnutí, které má čtenáři pomoct udělat.
+
+### 1. Ověřte jednu čtenářskou situaci
+
+Každá část má mít jasnou situaci použití. Nestačí, že téma je zajímavé. Čtenář má po dočtení vědět, co má udělat jinak.
+
+Před redakčním průchodem doplňte jednu větu:
+
+```text
+Tato část pomáhá člověku, který právě řeší: [konkrétní situace].
+```
+
+Příklady:
+
+- "Tato část pomáhá týmu, který po iteraci e-booku neví, jestli má změnu veřejně distribuovat."
+- "Tato část pomáhá founderovi, který chce zkrátit formulář, ale bojí se ztráty obchodního kontextu."
+- "Tato část pomáhá marketingu, který má obsah, ale neumí z něj vybrat jeden praktický výřez pro zákazníka."
+
+Pokud věta nejde napsat konkrétně, text je pravděpodobně moc obecný. Nejdřív zpřesněte situaci, potom upravujte odstavce.
+
+### 2. Smažte odstavec bez rozhodnutí
+
+Praktický text nemusí být krátký. Musí ale nést práci. Každý větší odstavec by měl dělat alespoň jednu z těchto věcí:
+
+- vysvětlit rozhodnutí,
+- ukázat příklad,
+- pojmenovat riziko,
+- nabídnout postup,
+- dodat kontrolní otázku,
+- zpřesnit hranici, kdy něco nedělat.
+
+Odstavec, který jen opakuje, že "je důležité myslet strategicky", většinou nepomáhá. Buď ho přepište do konkrétního doporučení, nebo ho smažte. Ano, i když zní hezky. Hezký šum je pořád šum, jen má lepší účes.
+
+Rychlý test:
+
+```text
+Co může čtenář po tomto odstavci udělat, zkontrolovat nebo rozhodnout?
+```
+
+Pokud odpověď není jasná, odstavec není hotový.
+
+### 3. Držte jeden hlas
+
+Codyho hlas v tomto e-booku má být:
+
+- praktický, ne akademický,
+- konkrétní, ne buzzwordový,
+- přátelský, ale ne rozkecaný,
+- sebevědomý, ale ne arogantní,
+- privacy-first, ale ne moralizující,
+- podnikatelsky použitelný, ne jen technicky správný.
+
+To neznamená, že každá věta má mít stejný rytmus. Znamená to, že čtenář nemá skákat mezi tónem právní směrnice, agenturní nabídky, vývojářského ticketu a motivačního plakátu.
+
+Typické signály rozbitého hlasu:
+
+- příliš mnoho abstraktních slov bez příkladu,
+- dlouhé věty, které schovávají jednoduché doporučení,
+- náhlé marketingové superlativy,
+- zbytečně tvrdý tón tam, kde stačí jasné vysvětlení,
+- vtip, který ruší vážnou část místo toho, aby uvolnil napětí,
+- privacy-first zmínka přilepená na konec bez dopadu do doporučení.
+
+Lepší je méně efektu a více přesnosti. Čtenář ocení větu, která mu šetří práci, víc než odstavec, který dokazuje, že autor umí používat slovo "strategický" ve třech pádech.
+
+### 4. Zkontrolujte konkrétnost příkladů
+
+Příklady jsou místo, kde se ukáže, jestli text opravdu rozumí praxi. Obecný příklad jen opakuje teorii. Konkrétní příklad ukazuje situaci, vstupy, rozhodnutí a výsledek.
+
+Slabý příklad:
+
+```text
+Firma by měla zlepšit onboarding a měřit aktivaci.
+```
+
+Silnější příklad:
+
+```text
+B2B SaaS pro správu servisních zakázek zjistí, že noví uživatelé končí po registraci. Tým proto definuje aktivaci jako vytvoření první zakázky, pozvání jednoho technika a odeslání prvního servisního protokolu. Onboarding se zkrátí na tyto tři kroky a zbytek nastavení se přesune až po první hodnotě.
+```
+
+Silnější příklad nemusí být delší vždy. Je ale konkrétnější. Má objekt, situaci a rozhodnutí. To je rozdíl mezi radou a použitelným nástrojem.
+
+### 5. Privacy-first musí měnit doporučení
+
+Privacy-first hodnota není věta "myslete na soukromí" vložená před checklist. Má měnit návrh řešení.
+
+Při redakční kontrole se ptejte:
+
+- Doporučuje text sbírat méně dat, pokud víc dat není potřeba?
+- Preferuje vlastní web, RSS, přímé odkazy a agregované měření tam, kde to dává smysl?
+- Vysvětluje, kde data vznikají, kam tečou a kdo k nim má přístup?
+- Nepropaguje zbytečné trackery jako výchozí řešení?
+- U formulářů sbírá jen údaje potřebné pro první krok?
+- U automatizací rozlišuje pohodlí týmu a dopad na člověka, jehož data zpracováváte?
+
+Příklad rozdílu:
+
+Slabé doporučení:
+
+```text
+Přidejte analytiku, heatmapu a remarketing, abyste měli více dat.
+```
+
+Silnější privacy-first doporučení:
+
+```text
+Nejdřív měřte agregovaně hlavní akce: návštěvu stránky, klik na CTA, odeslaný formulář a kvalitu poptávky. Heatmapu nebo detailní záznam chování přidejte jen pro konkrétní výzkumnou otázku, s jasnou retencí a kontrolou dat.
+```
+
+To není méně ambiciózní. Je to přesnější. A přesnost je v provozu levnější než datový hlad.
+
+### 6. Vraťte text k akci
+
+Každá kapitola, příloha nebo výřez má skončit tak, aby čtenář věděl, co udělat dál. Nemusí to být velká výzva. Často stačí malý pracovní krok.
+
+Dobré konce:
+
+- checklist s konkrétními otázkami,
+- jednostránková šablona,
+- doporučený první krok,
+- rozhodovací pravidlo,
+- hranice, kdy změnu odložit,
+- vazba na předchozí nebo další část e-booku.
+
+Slabé konce:
+
+- shrnutí bez akce,
+- obecné přání "buďte konzistentní",
+- další sada abstraktních principů,
+- odkaz na pět různých dalších částí bez priority.
+
+Pravidlo:
+
+```text
+Po dočtení má být jasný jeden nejmenší užitečný krok.
+```
+
+U této přílohy je nejmenší krok jednoduchý: vezměte novou část, napište její čtenářskou situaci a smažte nebo přepište jeden odstavec, který nepomáhá rozhodnutí.
+
+### 7. Jednostránkový redakční průchod
+
+Použijte tento průchod po každé větší iteraci:
+
+1. Napište jednu čtenářskou situaci, kterou část řeší.
+2. Označte hlavní rozhodnutí nebo pracovní krok pro čtenáře.
+3. Najděte tři nejdelší odstavce a ověřte, jestli každý nese rozhodnutí, příklad nebo riziko.
+4. Nahraďte obecné sliby konkrétním postupem.
+5. Zkontrolujte, že příklady mají situaci, vstup a výsledek.
+6. Upravte tón, pokud text zní jako právní dokument, prodejní brožura nebo interní ticket.
+7. Ověřte, že privacy-first princip změnil alespoň jedno doporučení, ne jen závěrečnou větu.
+8. Zkraťte duplicity vůči starším částem.
+9. Doplňte checklist nebo doporučený první krok.
+10. Přidejte pracovní log a ověřte, že nová část zapadá do rozcestníků a odkazů.
+
+### 8. Checklist kapitoly
+
+- Je jasné, komu nová část pomáhá a v jaké situaci?
+- Má čtenář po dočtení jeden konkrétní další krok?
+- Není text jen opakováním starší přílohy jinými slovy?
+- Zní část jako Cody: prakticky, česky, konkrétně a bez zbytečného divadla?
+- Obsahuje příklad, postup nebo checklist, ne jen názor?
+- Jsou abstraktní tvrzení převedená na rozhodnutí nebo kontrolní otázky?
+- Je humor použitý střídmě a neruší důvěru?
+- Ovlivňuje privacy-first hodnota reálné doporučení?
+- Neobsahuje text zbytečná aktuální tvrzení bez zdroje?
+- Je nová část dost krátká na použití a dost konkrétní na akci?
+- Má pracovní log stručný a přesný záznam změny?
+
+Konzistence hlasu není kosmetika. Je to způsob, jak udržet důvěru v dlouhém dokumentu, který roste po malých iteracích. Čtenář nemusí znát historii všech úprav. Má ale cítit, že každá nová část patří do stejného systému, mluví stejným jazykem a šetří mu čas. Přesně o to tady jde.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -27284,3 +27468,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BU s prioritizační frontou pro živý e-book: stavy položek, karta podnětu, jednoduché skórování, týdenní triage, privacy-first brána a definition of done.
 - 2026-05-09: Doplněna Příloha BV s publikačním balíčkem pro jednu hotovou iteraci: karta změny, veřejná poznámka, distribuce, interní použití, privacy-first měření a checklist.
 - 2026-05-09: Doplněna Příloha BW s kontrolou odkazů, rozcestníků a přesměrování po iteraci: vstupní místa, kanonické odkazy, staré URL, interní použití a privacy-first distribuce.
+- 2026-05-09: Doplněna Příloha BX s kontrolou hlasu, tónu a praktické užitečnosti po iteraci: čtenářská situace, konkrétnost, Codyho hlas, privacy-first dopad a redakční checklist.
