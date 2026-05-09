@@ -24672,6 +24672,192 @@ Zdroje nejsou dekorace. Jsou to servisní dvířka textu. Když se něco pokazí
 - Umíte tvrzení bez zdroje upravit, označit jako názor nebo odstranit?
 - Je výsledek faktické kontroly zapsaný do pracovního logu nebo changelogu?
 
+## Příloha BL: Zdrojová knihovna pro e-book a navazující obsah
+
+Zdrojová knihovna je místo, kde se evidují odkazy, citace, právní podklady, metodiky, výzkumy, příklady a interní poznámky použité v e-booku nebo navazujících článcích. Není to akademická bibliografie pro krásu. Je to provozní nástroj, který pomáhá udržet text pravdivý, dohledatelný a aktualizovatelný.
+
+Bez zdrojové knihovny se dlouhý obsah začne rozpadat. Jeden článek odkazuje na starou metodiku, druhý používá novější interpretaci, třetí cituje blogpost bez data a čtvrtý má v textu "podle studie", kterou nikdo neumí najít. Když potom přijde aktualizace, právní změna nebo dotaz od zákazníka, tým hledá v historii commitů, chatu a paměti. To je romantické asi jako ruční merge konfliktu v pátek večer.
+
+Dobrá knihovna má tři cíle:
+
+1. Rychle dohledat, odkud tvrzení pochází.
+2. Poznat, které zdroje stárnou a potřebují revizi.
+3. Použít stejný zdroj konzistentně napříč e-bookem, webem, články a šablonami.
+
+### 1. Evidujte zdroje podle rozhodnutí, ne jen podle odkazu
+
+Samotný seznam URL nestačí. Odkaz bez kontextu neříká, proč byl použitý, pro jakou kapitolu, jaké tvrzení podpírá a kdy se má znovu zkontrolovat. Každý důležitý zdroj proto evidujte jako kartu.
+
+Minimální karta zdroje:
+
+```text
+ID zdroje:
+Název:
+Autor / organizace:
+URL:
+Typ zdroje:
+Použito v:
+Podpírá tvrzení:
+Rizikovost tvrzení:
+Datum ověření:
+Další revize:
+Poznámka k použití:
+```
+
+Typ zdroje může být například:
+
+- primární dokument,
+- metodika,
+- technická dokumentace,
+- výzkum,
+- článek,
+- produktová dokumentace,
+- právní nebo regulatorní text,
+- interní poznámka,
+- zákaznický výstup s anonymizací.
+
+Praktický příklad:
+
+```text
+ID zdroje: SRC-privacy-analytics-001
+Název: CNIL audience measurement guidance
+Autor / organizace: CNIL
+URL: https://www.cnil.fr/...
+Typ zdroje: regulatorní metodika
+Použito v: Kapitola 3, Kapitola 7, Příloha BK
+Podpírá tvrzení: audience measurement může být za splnění podmínek méně invazivní než reklamní tracking
+Rizikovost tvrzení: vysoká
+Datum ověření: 2026-05-09
+Další revize: při změně cookie/analytics nastavení nebo za 6 měsíců
+Poznámka k použití: nepoužívat jako univerzální právní závěr pro všechny země a konfigurace
+```
+
+Karta nutí autora říct, proč zdroj používá. To je důležitější než mít dlouhý seznam odkazů, který vypadá autoritativně, ale nikdo mu nerozumí.
+
+### 2. Oddělte veřejné a interní zdroje
+
+Ne každý zdroj patří do veřejného textu. Veřejné zdroje mají být dostupné čtenáři: dokumentace, metodiky, standardy, oficiální stránky, veřejné specifikace a články bez zbytečných překážek. Interní zdroje mohou být poznámky z workshopu, zákaznický kontext, anonymizované poznatky z delivery nebo interní rozhodnutí.
+
+Rozlišení:
+
+- Veřejný zdroj: může být přímo odkázaný v e-booku nebo článku.
+- Interní zdroj: může inspirovat příklad, ale nesmí prozradit důvěrné informace.
+- Citlivý zdroj: nesmí být použitý bez anonymizace, souhlasu nebo právní kontroly.
+
+Privacy-first pravidlo: pokud by odkaz nebo příklad mohl prozradit zákazníka, projekt, interní rozhodnutí, incident nebo obchodní informaci, nepatří do veřejného textu v původní podobě. Použijte anonymizovaný vzor, obecný princip nebo fiktivní příklad označený jako modelová situace.
+
+### 3. Zaveďte rizikovost zdrojů
+
+Všechny zdroje nejsou stejně křehké. Některé jsou stabilní roky, jiné se mohou změnit každý kvartál. Knihovna má pomáhat poznat, co je potřeba hlídat.
+
+Jednoduché štítky:
+
+- Nízké riziko: obecný princip, slovník, historický kontext, vlastní framework.
+- Střední riziko: produktová dokumentace, metodika, doporučení nástroje, technický návod.
+- Vysoké riziko: právní povinnost, regulace, aktuální stav standardu, cena, benchmark, konkrétní schopnost nástroje.
+
+Podle rizika nastavte revizi:
+
+- Nízké riziko: při větší redakční aktualizaci.
+- Střední riziko: každých 6 až 12 měsíců nebo při změně používaného nástroje.
+- Vysoké riziko: před každou veřejnou publikací, kampaní nebo obchodním použitím.
+
+Tento rytmus chrání text před falešnou jistotou. Starý odkaz může pořád fungovat, ale obsah už nemusí platit. Funkční URL není důkaz aktuálnosti.
+
+### 4. Používejte jeden zdroj pravdy pro opakovaná tvrzení
+
+U dlouhého e-booku se některá témata vracejí: GDPR principy, cookie souhlas, Web Vitals, OWASP, WCAG, AI Act, tenant izolace, audit logy, RSS, privacy-first měření. Pokud každá kapitola používá jiný zdroj pro stejnou věc, vzniká nekonzistence.
+
+U opakovaných témat zaveďte preferovaný zdroj:
+
+```text
+Téma:
+Preferovaný veřejný zdroj:
+Záložní zdroj:
+Kde se používá:
+Poznámka k formulaci:
+```
+
+Příklad:
+
+```text
+Téma: Přístupnost webu
+Preferovaný veřejný zdroj: W3C WAI / WCAG
+Záložní zdroj: oficiální evropské stránky k digitální přístupnosti
+Kde se používá: Kapitola 4, technický audit, předpublikační checklist
+Poznámka k formulaci: nerozšiřovat právní dopad na všechny weby bez ověření konkrétní situace
+```
+
+To neznamená, že nesmíte přidat další zdroj. Znamená to, že základní tvrzení stojí na stabilním místě a tým ví, kde ho revidovat.
+
+### 5. Knihovna má podporovat citovatelné výřezy
+
+Pokud z e-booku vznikají články, seriál, PDF, sales materiály a příspěvky na sociální sítě, zdroje musí cestovat s výřezem. Výřez bez zdroje je nebezpečný hlavně u právních, bezpečnostních, technických a benchmarkových tvrzení.
+
+U každého citovatelného výřezu si poznamenejte:
+
+- původní kapitolu nebo přílohu,
+- hlavní tvrzení,
+- použitý zdroj,
+- datum posledního ověření,
+- zda je výřez bezpečný pro veřejné použití,
+- zda vyžaduje zkrácení, anonymizaci nebo kontext.
+
+Praktické pravidlo: pokud výřez obsahuje číslo, právní povinnost, aktuální stav nástroje nebo technickou normu, nesmí opustit e-book bez zdrojové kontroly. Hezká věta bez kontextu umí nadělat víc škody než dlouhý odstavec s opatrným vysvětlením.
+
+### 6. Šablona zdrojové knihovny
+
+Pro začátek stačí jednoduchá tabulka:
+
+```text
+ID | Téma | Název | URL | Typ | Riziko | Použito v | Ověřeno | Revize | Poznámka
+SRC-001 | Přístupnost | WCAG 2.2 | ... | standard | vysoké | Kap. 4 | 2026-05-09 | před publikací | používat jako technický standard, právní dopad ověřit zvlášť
+SRC-002 | SEO | Google helpful content | ... | dokumentace | střední | Kap. 6 | 2026-05-09 | 6 měsíců | nepsat jako garanci rankingu
+SRC-003 | Incidenty | EDPB data breaches | ... | regulatorní průvodce | vysoké | Kap. 14 | 2026-05-09 | před publikací | rozlišit správce a zpracovatele
+```
+
+Pokud tabulka naroste, rozdělte ji podle oblastí:
+
+- `privacy-a-pravo`,
+- `bezpecnost-a-provoz`,
+- `seo-a-obsah`,
+- `saas-produkt`,
+- `marketing-a-sales`,
+- `ai-a-automatizace`,
+- `interni-priklady`.
+
+Názvy nemusí být krásné. Musí být použitelné. Knihovna, kterou nikdo neotevře, je jen další police na chaos.
+
+### 7. Revizní workflow
+
+Zdrojová knihovna má mít jednoduchý provozní rytmus:
+
+1. Nový rizikový zdroj dostane kartu.
+2. Autor zapíše, které tvrzení zdroj podpírá.
+3. Editor ověří, že formulace není silnější než zdroj.
+4. Před publikací se zkontrolují všechny vysokorizikové zdroje.
+5. Po publikaci se revize plánují podle rizikovosti.
+6. Při změně zdroje se zapíše dopad do changelogu e-booku.
+7. Pokud zdroj zmizí, najde se náhrada nebo se tvrzení přepíše.
+
+Nejdůležitější je bod 3. Text často neselže tím, že nemá zdroj. Selže tím, že ze zdroje vyvodí příliš silný závěr. Když zdroj říká "za určitých podmínek", text nesmí tvrdit "vždy". Když zdroj popisuje doporučení, text nesmí tvrdit povinnost. Když dokumentace popisuje funkci nástroje, text nesmí slibovat obchodní výsledek.
+
+### 8. Codyho komentář
+
+Můj pohled: zdroje nejsou ozdoba na konec kapitoly. Jsou brzdy proti sebevědomému blábolení. A protože internet umí blábolit s výrobní kapacitou menší továrny, dobrá zdrojová knihovna je konkurenční výhoda. Ne proto, že čtenář zkontroluje každý odkaz. Ale proto, že autor ví, kdy si může dovolit být přímý a kdy má být opatrný.
+
+### Checklist přílohy
+
+- Má každý důležitý zdroj kartu s účelem, rizikem a datem ověření?
+- Rozlišujete veřejné, interní a citlivé zdroje?
+- Jsou vysokorizikové zdroje kontrolované před publikací nebo obchodním použitím?
+- Existuje preferovaný zdroj pro opakovaná témata jako privacy, bezpečnost, SEO, AI a přístupnost?
+- Cestují zdroje s citovatelnými výřezy a navazujícím obsahem?
+- Je jasné, co dělat, když zdroj zmizí nebo se změní?
+- Nepoužívá text silnější formulaci, než zdroj skutečně podporuje?
+- Chrání zdrojování interní a zákaznické informace?
+- Má knihovna vlastníka a revizní rytmus?
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -24863,3 +25049,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha BI o seriálu z e-booku bez tlakových funnelů: účel, trasy, díly s jedním rozhodnutím, RSS, veřejný archiv, privacy-first měření a checklist.
 - 2026-05-09: Doplněna Příloha BJ s knihovnou citovatelných výřezů z e-booku: typy výřezů, metadata, výběr, kanály použití, privacy-first pravidla, údržba a checklist.
 - 2026-05-09: Doplněna Příloha BK o ověření faktů a zdrojů před publikací: rizikovost tvrzení, zdrojové karty, právní a regulační odkazy, kontrola stárnutí zdrojů a privacy-first zdrojování.
+- 2026-05-09: Doplněna Příloha BL se zdrojovou knihovnou pro e-book a navazující obsah: karty zdrojů, rizikovost, veřejné a interní zdroje, citovatelné výřezy a revizní workflow.
