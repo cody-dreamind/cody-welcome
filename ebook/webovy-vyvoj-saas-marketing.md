@@ -24858,6 +24858,215 @@ Můj pohled: zdroje nejsou ozdoba na konec kapitoly. Jsou brzdy proti sebevědom
 - Chrání zdrojování interní a zákaznické informace?
 - Má knihovna vlastníka a revizní rytmus?
 
+## Příloha BM: Revizní kalendář pro dlouhodobě živý e-book
+
+Revizní kalendář je jednoduchý systém, který říká, kdy se má e-book znovu otevřít, co se má ověřit a jak poznat, že text pořád slouží čtenáři. Není to redakční byrokracie pro lidi s příliš velkou láskou k tabulkám. Je to pojistka proti tomu, aby se z praktického rukopisu stal hezky formátovaný sklad starých doporučení.
+
+Dlouhý obsah stárne nerovnoměrně. Kapitola o základním positioningu může vydržet roky. Kapitola o analytice, cookies, AI nástrojích, cloudu, bezpečnostních postupech nebo právním kontextu může potřebovat kontrolu mnohem dřív. Když se všechno reviduje stejným tempem, tým buď plýtvá časem, nebo přehlédne nejrizikovější části.
+
+Revizní kalendář má tři cíle:
+
+1. Udržet text užitečný bez toho, aby se pořád přepisoval celý.
+2. Včas zachytit zastarávající tvrzení, odkazy a příklady.
+3. Zapisovat změny tak, aby čtenář i tým věděli, co se změnilo a proč.
+
+### 1. Rozdělte obsah podle rychlosti stárnutí
+
+První krok je označit části e-booku podle toho, jak rychle mohou zastarat. Není potřeba přesná věda. Stačí praktické štítky.
+
+Nízká rychlost stárnutí:
+
+- principy dobrého webu,
+- práce se zákaznickou otázkou,
+- copywritingové základy,
+- rozhodovací checklisty,
+- týmové role a vlastnictví,
+- obecné playbooky pro workshop nebo review.
+
+Střední rychlost stárnutí:
+
+- SEO doporučení,
+- provozní postupy,
+- metriky a analytické modely,
+- výběr nástrojů podle kategorie,
+- bezpečnostní hygieny,
+- workflow pro podporu, sales nebo onboarding.
+
+Vysoká rychlost stárnutí:
+
+- právní a regulatorní odkazy,
+- cookie a analytická pravidla,
+- konkrétní produktové funkce nástrojů,
+- ceny, limity, tarify a dostupnost regionů,
+- AI modely, benchmarky a schopnosti nástrojů,
+- bezpečnostní doporučení navázaná na aktuální hrozby.
+
+Praktické pravidlo: čím víc by čtenář mohl podle tvrzení udělat drahé, právní, bezpečnostní nebo technické rozhodnutí, tím kratší má být revizní interval. Text o tom, že homepage má být konkrétní, není potřeba kontrolovat každý měsíc. Text o tom, jaký nástroj má EU region a jaké má limity, ano.
+
+### 2. Používejte revizní štítky přímo u pracovních poznámek
+
+Každá kapitola nebo příloha může mít v interní evidenci jednoduchý štítek:
+
+```text
+Část:
+Rychlost stárnutí:
+Riziková tvrzení:
+Poslední revize:
+Další revize:
+Vlastník:
+Poznámka:
+```
+
+Příklad:
+
+```text
+Část: Kapitola 7 - Privacy-first web
+Rychlost stárnutí: vysoká
+Riziková tvrzení: cookies, analytika, třetí strany, EU provoz
+Poslední revize: 2026-05-09
+Další revize: před veřejnou publikací a pak kvartálně
+Vlastník: editor e-booku
+Poznámka: právní formulace nepoužívat jako poradenství; ověřit proti aktuálním zdrojům
+```
+
+Tato karta nemusí být veřejná. Je to interní servisní vrstva. Veřejný čtenář potřebuje čistý text, zdroje a changelog důležitých změn. Tým potřebuje vědět, co má hlídat.
+
+### 3. Nastavte tři typy revizí
+
+Jeden typ kontroly nestačí. Rychlá kontrola odkazů řeší něco jiného než obsahová revize kapitoly.
+
+Rychlá technická revize:
+
+- nefunkční odkazy,
+- rozbité kotvy,
+- duplicitní nadpisy,
+- zjevné překlepy,
+- chybějící datum u pracovního logu,
+- neplatné interní odkazy mezi kapitolami.
+
+Obsahová revize:
+
+- jestli kapitola pořád odpovídá na správnou otázku,
+- jestli checklist vede k akci,
+- jestli příklady nejsou zavádějící,
+- jestli se neopakuje stejná rada v pěti různých přílohách,
+- jestli text nezměkl do obecných frází.
+
+Riziková faktická revize:
+
+- právní a regulatorní tvrzení,
+- ceny, limity, regiony a funkce nástrojů,
+- benchmarky a aktuální trendy,
+- bezpečnostní doporučení,
+- tvrzení opřená o zdroje, které se mohly změnit.
+
+Tým často udělá chybu, že nazve "revizí" jen přečtení textu. To nestačí. Pokud kapitola obsahuje vysokoriziková tvrzení, musí někdo otevřít zdroje, zkontrolovat datum a rozhodnout, jestli formulace pořád sedí.
+
+### 4. Revizní rytmus držte malý a pravidelný
+
+Revize dlouhého e-booku se nesmí stát projektem, který se odkládá, protože je příliš velký. Lepší je malý rytmus:
+
+- Týdně: opravit jednu drobnou slabinu nebo nefunkční část.
+- Měsíčně: projít jednu kapitolu, přílohu nebo čtenářskou trasu.
+- Kvartálně: zkontrolovat všechny vysokorizikové oblasti.
+- Před veřejnou kampaní: ověřit zdroje, odkazy, CTA, landing page a privacy-first měření.
+- Po větší změně trhu nebo nástroje: zkontrolovat části, které se změny dotýkají.
+
+Tento rytmus je schválně obyčejný. E-book nepotřebuje dramatický restart každé čtvrtletí. Potřebuje pravidelné malé zásahy, které zabrání tomu, aby zestárl potichu.
+
+### 5. Každá revize musí skončit rozhodnutím
+
+Revize bez rozhodnutí je jen čtení s lepším názvem. Každý průchod by měl skončit jedním z těchto výsledků:
+
+- Ponechat beze změny.
+- Upravit formulaci.
+- Doplnit zdroj.
+- Přesunout tvrzení do Codyho komentáře.
+- Odstranit zastaralou část.
+- Rozdělit dlouhou část na veřejný text a interní šablonu.
+- Zapsat větší úkol do redakčního backlogu.
+
+U rizikových tvrzení přidejte důvod:
+
+```text
+Rozhodnutí: upravit formulaci
+Důvod: původní text zněl jako obecná povinnost, zdroj popisuje podmíněnou možnost
+Dopad: kapitola 7, příloha BK, zdrojová knihovna
+Zapsat do changelogu: ano, pokud už byla verze veřejná
+```
+
+Takový záznam chrání tým před opakováním stejné debaty. Když se za dva měsíce někdo zeptá, proč je formulace opatrnější, odpověď neleží v paměti jednoho člověka.
+
+### 6. Privacy-first revize se netýká jen textu
+
+Když e-book vyjde na webu, revize nesmí kontrolovat jen obsah. Musí se podívat i na způsob distribuce a měření.
+
+Kontrolujte:
+
+- jestli veřejná URL neobsahuje zbytečné tracking parametry,
+- jestli stažení PDF nevyžaduje víc údajů, než je nutné,
+- jestli formulář zpětné vazby sbírá jen minimum dat,
+- jestli analytika měří agregované signály užitečnosti,
+- jestli externí embed nebo skript nepřidal nové datové toky,
+- jestli jsou RSS, přímé odkazy a veřejný changelog pořád dostupné.
+
+Privacy-first provoz se dá rozbít i dobrým úmyslem. Někdo chce "jen změřit, kdo četl kterou kapitolu", přidá agresivní tracking a najednou se z e-booku o důvěře stane malá sledovací aparatura. To je produktová ironie, kterou si můžeme odpustit.
+
+### 7. Šablona měsíční revize
+
+Pro jednu měsíční revizi stačí tento formát:
+
+```text
+Datum:
+Kontrolovaná část:
+Typ revize:
+Hlavní otázka:
+Nálezy:
+Rozhodnutí:
+Změny provedené hned:
+Úkoly do backlogu:
+Zdroje k ověření:
+Privacy-first dopad:
+Zapsat do veřejného changelogu:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-09
+Kontrolovaná část: přílohy BK-BM
+Typ revize: obsahová a provozní
+Hlavní otázka: pomáhají přílohy udržet e-book aktuální po publikaci?
+Nálezy: zdrojování je pokryté, chyběl samostatný revizní kalendář
+Rozhodnutí: doplnit přílohu BM
+Změny provedené hned: přidána nová příloha a pracovní log
+Úkoly do backlogu: později převést šablony do samostatných pracovních souborů
+Zdroje k ověření: žádné nové aktuální zdroje
+Privacy-first dopad: přidána kontrola distribuce a měření bez zbytečného trackingu
+Zapsat do veřejného changelogu: ano při další veřejné verzi
+```
+
+Šablona má být krátká. Pokud se z měsíční revize stane slohová práce, nikdo ji nebude dělat. A pokud ji nikdo nebude dělat, e-book se bude aktualizovat jen ve chvíli, kdy už něco začne bolet.
+
+### 8. Codyho komentář
+
+Můj pohled: dlouhý obsah neumírá tím, že by najednou přestal být pravda. Umírá pomalu. Jeden odkaz zastará, jeden příklad přestane sedět, jeden nástroj změní podmínky, jedna kapitola začne opakovat starší formulaci. A pak se tým diví, že materiál sice existuje, ale nikdo mu už úplně nevěří.
+
+Revizní kalendář je nudný, což je jeho nejlepší vlastnost. Nudné systémy vyhrávají nad heroickými opravami. Jedna malá kontrola měsíčně je méně sexy než velký redesign e-booku, ale taky má mnohem menší šanci skončit v backlogu pod štítkem "až bude klid". Klid nebude. Proto existuje kalendář.
+
+### Checklist přílohy
+
+- Jsou kapitoly a přílohy rozdělené podle rychlosti stárnutí?
+- Mají vysokoriziková tvrzení kratší revizní interval?
+- Existuje karta revize pro kapitoly s právními, technickými nebo produktovými tvrzeními?
+- Rozlišujete technickou, obsahovou a rizikovou faktickou revizi?
+- Končí každá revize konkrétním rozhodnutím?
+- Zapisujete důvod změny u citlivých nebo veřejně viditelných úprav?
+- Kontrolujete nejen text, ale i distribuci, formuláře, analytiku a externí skripty?
+- Je jasné, co se zapíše do pracovního logu a co do veřejného changelogu?
+- Dá se měsíční revize udělat bez velkého projektu kolem?
+- Chrání revizní proces privacy-first hodnotu e-booku i po publikaci?
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -25050,3 +25259,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BJ s knihovnou citovatelných výřezů z e-booku: typy výřezů, metadata, výběr, kanály použití, privacy-first pravidla, údržba a checklist.
 - 2026-05-09: Doplněna Příloha BK o ověření faktů a zdrojů před publikací: rizikovost tvrzení, zdrojové karty, právní a regulační odkazy, kontrola stárnutí zdrojů a privacy-first zdrojování.
 - 2026-05-09: Doplněna Příloha BL se zdrojovou knihovnou pro e-book a navazující obsah: karty zdrojů, rizikovost, veřejné a interní zdroje, citovatelné výřezy a revizní workflow.
+- 2026-05-09: Doplněna Příloha BM s revizním kalendářem pro dlouhodobě živý e-book: rychlost stárnutí obsahu, typy revizí, měsíční šablona, rozhodnutí po kontrole a privacy-first revizní pravidla.
