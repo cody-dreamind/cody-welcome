@@ -24201,6 +24201,282 @@ Můj pohled: nejlepší obsahové seriály nejsou ty, které nejlépe automatizu
 - Má seriál vlastní revizní rytmus a odpovědného vlastníka?
 - Umíte po dokončení říct, co se díky seriálu změnilo pro čtenáře?
 
+## Příloha BJ: Knihovna citovatelných výřezů z e-booku
+
+Dlouhý e-book je užitečný jako zdroj pravdy, ale v každodenní práci se málokdy posílá celý. Obchodník potřebuje jeden odstavec po discovery hovoru. Produktový člověk potřebuje checklist k MVP. Zakladatel chce rychle ukázat týmu, proč se zkracuje formulář. Support posílá zákazníkovi vysvětlení, proč se nesbírá zbytečný telefon. Marketing chce použít část kapitoly jako krátký post, ale bez toho, aby z textu udělal clickbaitovou kaši.
+
+Knihovna citovatelných výřezů je most mezi rukopisem a praxí. Nejde o nový obsahový kanál. Jde o kurátorskou vrstvu: malé, přesné, samostatně použitelné části e-booku, které mají vlastní kontext, přímý odkaz a jasné pravidlo použití.
+
+Když knihovna funguje, tým přestane opisovat stejné myšlenky pokaždé znovu. Používá ověřené formulace, odkazuje na zdroj pravdy a drží jednotný jazyk napříč webem, obchodem, supportem i produktovou prací. To je méně efektní než další nový tool, ale podstatně užitečnější.
+
+### 1. Co je citovatelný výřez
+
+Citovatelný výřez je krátká část e-booku, která obstojí i mimo původní kapitolu. Může to být odstavec, checklist, příklad, rozhodovací otázka, šablona nebo Codyho komentář. Musí ale splnit tři podmínky:
+
+1. Má samostatnou pointu.
+2. Nevyžaduje půl kapitoly kontextu, aby dával smysl.
+3. Vede na hlubší zdroj, pokud čtenář potřebuje detail.
+
+Dobré výřezy:
+
+- čtyři otázky pro test homepage,
+- ukázka slabého a silnějšího textu služby,
+- checklist pro zkrácení formuláře,
+- vysvětlení, proč měřit jen signály navázané na rozhodnutí,
+- definice aktivační události,
+- krátký argument pro RSS a přímé odkazy,
+- tabulka s kritérii dodavatelské hygieny,
+- šablona experimentální karty.
+
+Slabé výřezy:
+
+- obecný úvod kapitoly bez praktického závěru,
+- inspirativní citát bez dalšího kroku,
+- odstavec závislý na předchozí terminologii,
+- seznam pojmů bez vysvětlení,
+- věta vytržená tak, že zní tvrději nebo obecněji než v rukopisu.
+
+Výřez má být poctivá zkratka, ne manipulativní trailer. Pokud se bez původního kontextu mění význam, není to dobrý výřez. Ano, marketing tím přijde o pár dramatických vět. Přežije to.
+
+### 2. Základní typy výřezů
+
+Knihovna nemusí být složitá. Stačí rozlišit několik typů podle toho, jak se používají.
+
+**Rozhodovací otázka**
+
+Krátká otázka, která pomáhá týmu nebo zákazníkovi vybrat další krok.
+
+```text
+Měříme tento signál proto, že podle něj uděláme konkrétní rozhodnutí?
+```
+
+Použití: workshop, audit, interní review, komentář k dashboardu.
+
+**Praktický princip**
+
+Jedna myšlenka, která vysvětluje způsob práce.
+
+```text
+Konverze není manipulace. Je to odstranění zbytečného tření mezi zájmem a akcí.
+```
+
+Použití: sales follow-up, článek, onboarding týmu, návrh změny webu.
+
+**Mini checklist**
+
+Tři až sedm bodů pro rychlou kontrolu.
+
+```text
+Formulář před spuštěním:
+- chce jen údaje potřebné pro první odpověď,
+- říká, co se stane po odeslání,
+- neobsahuje skrytý marketingový souhlas,
+- má vlastníka a test odeslání.
+```
+
+Použití: pull request, projektová karta, launch kontrola, support doporučení.
+
+**Příklad před a po**
+
+Krátká ukázka slabé a silnější verze.
+
+Použití: copywriting, workshop s klientem, interní školení, návrh homepage.
+
+**Šablona**
+
+Vyplnitelný blok pro konkrétní práci.
+
+Použití: audit, experiment, obsahový brief, rozhodovací log, post-mortem.
+
+**Codyho komentář**
+
+Jasně označený názorový výřez. Hodí se tam, kde je potřeba přidat tón a postoj, ne předstírat neutrální normu.
+
+Použití: blogový post, interní školení, závěr kapitoly, sales materiál s osobností.
+
+### 3. Metadata pro každý výřez
+
+Bez metadat se knihovna rychle změní v další složku s hezkými úryvky. Každý výřez proto potřebuje malou kartu.
+
+```text
+ID: excerpt-form-privacy-001
+Název: Formulář má chtít jen data pro první odpověď
+Typ: mini checklist
+Zdroj: Kapitola 28 / Prodejní web
+Primární použití: web audit, sales follow-up
+Publikum: zakladatel, marketing, produktový tým
+Stav: schváleno
+Poslední revize: 2026-05-09
+Citlivost: veřejné
+Privacy dopad: připomíná minimalizaci dat
+Přímý odkaz: /ebook/webovy-vyvoj-saas-marketing#...
+```
+
+Minimální metadata:
+
+- ID,
+- název,
+- typ,
+- zdroj v e-booku,
+- doporučené použití,
+- publikum,
+- stav,
+- datum poslední revize,
+- citlivost,
+- přímý odkaz.
+
+Citlivost je důležitá. Některé výřezy mohou být veřejné bez omezení. Jiné jsou vhodné jen pro interní práci, protože obsahují pracovní formulaci, neveřejný příklad nebo procesní doporučení, které nechcete posílat zákazníkovi bez kontextu. Knihovna má týmu práci zjednodušit, ne vyrobit únik interního kontextu v hezkém Markdownu.
+
+### 4. Jak výřezy vybírat
+
+Nejlepší výřezy vznikají z míst, kde čtenář udělá mentální zastávku: "tohle bych měl někomu poslat". Při revizi e-booku proto nehledejte nejhezčí věty. Hledejte pracovní použitelnost.
+
+Postup výběru:
+
+1. Projděte jednu kapitolu nebo přílohu.
+2. Označte části, které řeší samostatnou situaci.
+3. U každé části napište, komu by pomohla.
+4. Zkraťte ji tak, aby neztratila význam.
+5. Doplňte jeden odkaz zpět na plný kontext.
+6. Zařaďte ji do knihovny se stavem `návrh`.
+7. Použijte ji jednou v praxi a teprve potom ji označte jako `schváleno`.
+
+Stavy mohou být jednoduché:
+
+- `návrh`: výřez je vybraný, ale ještě neprošel použitím,
+- `test`: výřez byl použitý v konkrétní situaci a čeká na zpětnou vazbu,
+- `schváleno`: výřez funguje a může ho používat tým,
+- `upravit`: pointa je dobrá, formulace potřebuje zpřesnit,
+- `archiv`: výřez už neodpovídá aktuálnímu rukopisu nebo způsobu práce.
+
+Tím se knihovna drží při zemi. Nejde o archiv všeho hezkého. Jde o pracovní sadu věcí, které někdo reálně používá.
+
+### 5. Příklad karty výřezu
+
+```text
+ID: excerpt-rss-direct-links-001
+Název: RSS a přímé odkazy jako základ distribuce
+Typ: praktický princip
+Zdroj: Kapitola 26 a Příloha BI
+Publikum: marketing, zakladatel, obsahový tým
+Primární použití: návrh distribuční strategie
+Stav: schváleno
+Citlivost: veřejné
+Privacy dopad: podporuje distribuci bez profilování čtenářů
+
+Výřez:
+Privacy-first seriál má fungovat i bez povinného e-mailu. Základní verze může být veřejná na webu a distribuovaná přes RSS. E-mail je doplněk pro lidi, kteří ho chtějí, ne brána k obsahu.
+
+Kdy použít:
+- při plánování seriálu,
+- při vysvětlování, proč nezamykat obsah za formulář,
+- jako argument pro vlastní archiv dílů,
+- při revizi distribučního plánu.
+
+Navazující akce:
+Zkontrolovat, zda má seriál veřejný archiv, RSS feed a přímé URL jednotlivých dílů.
+```
+
+Taková karta není dlouhá, ale je použitelná. Člověk hned ví, co cituje, proč, komu a co má následovat.
+
+### 6. Kanály použití
+
+Knihovna má smysl jen tehdy, když je napojená na reálnou práci. Jinak se stane sbírkou interních pokladů, které všichni pochválí a nikdo nepoužije.
+
+Typické kanály:
+
+- odpověď po obchodním hovoru,
+- follow-up po workshopu,
+- komentář v projektovém řízení,
+- interní školení nového člověka,
+- návrh úpravy webu,
+- support odpověď,
+- krátký blogový post,
+- příprava newsletteru,
+- rozšíření dokumentace,
+- checklist před spuštěním změny.
+
+Ke každému kanálu si napište pravidlo. Například:
+
+```text
+Sales follow-up: posíláme maximálně dva výřezy a vždy doplníme vlastní větu, proč jsou relevantní pro danou situaci.
+```
+
+```text
+Support: výřez používáme jen tehdy, když odpovídá na konkrétní dotaz. Neposíláme obecné vzdělávací bloky místo odpovědi.
+```
+
+```text
+Marketing: výřez může být základem postu, ale musí obsahovat odkaz na plný kontext a nesmí měnit význam původního textu.
+```
+
+Tohle je malá disciplína, ale zabraňuje tomu, aby se z knihovny stal generátor polopravd. Krátký text je silný právě proto, že drží přesnost.
+
+### 7. Privacy-first pravidla pro knihovnu
+
+Knihovna výřezů je obsahový systém, ale pořád pracuje s daty. Ne nutně osobními, ale s provozními stopami, odkazy, metadaty a někdy i zpětnou vazbou od zákazníků. Proto má mít vlastní privacy-first pravidla.
+
+Praktické minimum:
+
+- Nepřidávejte do sdílených odkazů osobní identifikátory.
+- Nepoužívejte výřezy jako záminku k profilování jednotlivých čtenářů.
+- U výřezů se zákaznickými příklady anonymizujte kontext, pokud nemáte výslovný souhlas.
+- Neexportujte interní poznámky do veřejné knihovny.
+- U každého veřejného výřezu ověřte, že neodkazuje na neveřejnou část rukopisu.
+- Pokud měříte použití výřezů, měřte agregovaně a navázaně na rozhodnutí.
+- Udržujte jeden zdroj pravdy: výřez má odkazovat na e-book, ne žít jako nekonečně kopírovaná větev.
+
+Dobrá rozhodovací otázka:
+
+```text
+Pomůže nám měření tohoto výřezu zlepšit obsah nebo práci týmu, nebo jen uspokojí zvědavost?
+```
+
+Pokud odpověď zní "jen zvědavost", neměřte to. Zvědavost je fajn, ale není automatický právní, produktový ani morální důvod ke sběru dat.
+
+### 8. Údržba knihovny
+
+Knihovna má stárnout pomaleji než sociální posty, ale rychleji než e-book. Jakmile se změní kapitola, šablona nebo produktový postoj, některé výřezy mohou být nepřesné. Proto je potřeba revizní rytmus.
+
+Měsíční kontrola:
+
+- přidat nové výřezy z posledních úprav e-booku,
+- archivovat nepoužívané nebo zastaralé výřezy,
+- opravit odkazy na změněné sekce,
+- zkontrolovat, zda výřezy nemění význam původního textu,
+- vybrat tři nejpoužívanější výřezy a zpřesnit jejich karty.
+
+Kvartální kontrola:
+
+- projít citlivost a veřejnost výřezů,
+- porovnat knihovnu s aktuálním positioningem,
+- zkontrolovat, zda se výřezy používají v sales, supportu a obsahu,
+- vyhodnotit, které výřezy vedly k lepším otázkám nebo rozhodnutím,
+- odstranit duplicitní formulace.
+
+Knihovna výřezů má mít vlastníka. Ne nutně jednoho autora, ale člověka nebo roli, která hlídá kvalitu. Bez vlastníka se z ní stane digitální kompost. Tedy kompost může být užitečný, ale většina týmů ho nechce mít v marketingové složce.
+
+### 9. Codyho komentář
+
+Můj pohled: citovatelné výřezy jsou test kvality e-booku. Když z kapitoly nejde vytáhnout žádná samostatně použitelná myšlenka, pravděpodobně je příliš obecná. Když jde vytáhnout dvacet výřezů, ale žádný nevede k akci, je možná hezky napsaná, ale pracovně slabá.
+
+Dobrá knihovna výřezů nedělá z obsahu munici pro spam. Dělá z něj společný jazyk. A společný jazyk je v malém týmu podceňovaná infrastruktura. Když obchod, produkt, marketing a support používají stejné přesné pojmy, méně času se ztrácí vysvětlováním a více času zůstává na práci.
+
+### Checklist přílohy
+
+- Má knihovna jasně definované typy výřezů?
+- Má každý výřez ID, název, typ, zdroj a doporučené použití?
+- Je u každého výřezu jasné publikum?
+- Existuje stav `návrh`, `test`, `schváleno`, `upravit` nebo `archiv`?
+- Má každý veřejný výřez přímý odkaz na plný kontext?
+- Nejsou výřezy vytržené tak, že mění význam původního textu?
+- Má knihovna pravidla pro sales, support, marketing a interní použití?
+- Nepoužívají odkazy osobní identifikátory nebo zbytečné trackování?
+- Jsou zákaznické příklady anonymizované nebo schválené?
+- Má knihovna vlastníka a pravidelný revizní rytmus?
+- Měříte jen agregované signály, které vedou k rozhodnutí?
+- Umíte říct, které výřezy opravdu pomohly v práci, ne jen které vypadají dobře?
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -24390,3 +24666,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha BG s veřejnou poznámkou k aktualizacím e-booku: očekávání čtenáře, umístění poznámky, privacy-first zpětná vazba, changelog a checklist údržby.
 - 2026-05-08: Doplněna Příloha BH o převodu e-booku do webové a PDF verze: zdroj pravdy, landing page, navigace podle práce čtenáře, privacy-first distribuce, exportní kontrola a oddělení šablon.
 - 2026-05-08: Doplněna Příloha BI o seriálu z e-booku bez tlakových funnelů: účel, trasy, díly s jedním rozhodnutím, RSS, veřejný archiv, privacy-first měření a checklist.
+- 2026-05-09: Doplněna Příloha BJ s knihovnou citovatelných výřezů z e-booku: typy výřezů, metadata, výběr, kanály použití, privacy-first pravidla, údržba a checklist.
