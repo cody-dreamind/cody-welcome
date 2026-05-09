@@ -27774,6 +27774,180 @@ Když se nevejdete do devadesáti minut, nejspíš jste si vybrali moc širokou 
 
 Živý e-book potřebuje přidávání i ubírání. Přidávání rozšiřuje užitečnost. Ubírání chrání srozumitelnost. Konsolidace drží obě síly v rovnováze, aby z materiálu zůstal pracovní systém, ne jen kronika dobrých nápadů.
 
+## Příloha CB: Release mapa veřejné edice po konsolidaci
+
+Po kvartální konsolidaci často vznikne zvláštní mezistav. Rukopis je lepší, ale tým ještě neví, jak ho ukázat ven. V hlavě je jasné, že „něco vydáme“, jenže veřejná verze potřebuje konkrétnější rozhodnutí: co je hlavní vstupní stránka, jaké trasy dostane čtenář, co zůstane v přílohách, co se bude měřit a kdo bude hlídat další údržbu.
+
+Release mapa je krátký dokument mezi rukopisem a publikací. Není to marketingový plán na půl roku. Je to jedna pracovní stránka, která zabrání tomu, aby se e-book po konsolidaci zase rozpadl na hromadu odkazů, šablon a dobrých úmyslů.
+
+### 1. Začněte rozhodnutím, pro koho je první veřejná edice
+
+Veřejná edice nemusí obsloužit všechny možné čtenáře stejně dobře. Pokud se snaží být hlavním materiálem pro zakladatele SaaS, marketingový checklist pro agentury, interní školení pro vývojáře a praktický přehled privacy-first provozu najednou, bude působit těžce. Ne proto, že by obsah nebyl užitečný, ale protože vstupní rozhodnutí je rozmazané.
+
+Vyberte jednu primární situaci:
+
+- Zakladatel nebo malý tým chce udělat pořádek ve webu, produktu a marketingu.
+- B2B firma připravuje první SaaS MVP a potřebuje praktický rámec.
+- Agentura chce mít pracovní playbook pro audit a následné iterace.
+- Interní tým chce sjednotit jazyk kolem privacy-first provozu v Evropě.
+
+Sekundární čtenáři mohou existovat, ale release mapa musí říct, kdo je první. Podle toho se rozhodne název, podtitul, první obrazovka landing page, pořadí rozcestníků i doporučený první checklist.
+
+### 2. Určete veřejný slib e-booku
+
+Veřejný slib není reklamní slogan. Je to praktická věta, podle které čtenář pozná, jestli má pokračovat.
+
+Slabý slib:
+
+„Komplexní e-book o webovém vývoji, SaaS, marketingu a produktivitě.“
+
+Silnější slib:
+
+„Praktický playbook pro malé týmy, které chtějí z webu, SaaS produktu a marketingu udělat jeden měřitelný systém bez zbytečného sběru dat.“
+
+Silnější slib má tři výhody:
+
+- Říká, pro koho text je.
+- Říká, jaký výsledek má čtenář získat.
+- Nese privacy-first hodnotu jako součást produktu, ne jako poznámku pod čarou.
+
+Pokud slib neumíte napsat jednou větou, e-book je pravděpodobně pořád příliš široký. To není ostuda. Je to signál, že release mapa má nejdřív zpřesnit vstup, ne přidávat další sekce.
+
+### 3. Navrhněte tři čtenářské vstupy
+
+Dlouhý e-book potřebuje vstupy podle práce čtenáře. Ne každý má začít první kapitolou a číst lineárně. Veřejná edice by měla nabídnout tři až pět cest, ale pro první vydání stačí tři.
+
+Praktické minimum:
+
+1. Rychlý audit webu: pro čtenáře, který chce během jednoho týdne zlepšit homepage, formulář, důvěru a měření.
+2. SaaS MVP bez chaosu: pro tým, který potřebuje zpřesnit segment, workflow, datový model, role, pilot a aktivaci.
+3. Privacy-first provoz: pro firmu, která chce zmapovat data, nástroje, analytiku, logy, přístupy a dodavatelská rizika.
+
+Každý vstup má mít vlastní krátký popis:
+
+- Pro koho je.
+- Co bude výsledkem po dokončení.
+- Které kapitoly a přílohy použít.
+- Jaký je první konkrétní krok.
+- Co čtenář nemá dělat hned.
+
+Příklad:
+
+Rychlý audit webu začíná kapitolami 1, 2, 3, 5, 7 a checklistem kapitoly 30. První krok není kompletní redesign. První krok je otevřít homepage na mobilu, odpovědět na čtyři otázky z kapitoly 1 a vybrat jednu stránku k opravě.
+
+### 4. Oddělte veřejnou vrstvu od pracovních šablon
+
+Veřejná verze má být čitelná. Pracovní šablony mají být použitelné. To jsou podobné, ale ne stejné cíle. Když do hlavního toku nacpete všechny šablony, čtenář se utopí. Když šablony schováte příliš hluboko, tým ztratí praktickou hodnotu.
+
+Dobré rozdělení:
+
+- Hlavní text vysvětluje principy, rozhodnutí a příklady.
+- Rozcestníky vedou čtenáře podle situace.
+- Šablony jsou samostatné pracovní materiály s jasným názvem a účelem.
+- Přílohy mají štítky: audit, MVP, marketing, provoz, data, publikace, údržba.
+- Každá šablona má jedno doporučené použití, ne deset neurčitých možností.
+
+Příklad: datová mapa nemusí být vložená v plné délce do každé kapitoly o soukromí. Stačí hlavní text, který vysvětlí proč ji dělat, a jasný odkaz na pracovní šablonu. Čtenář tak chápe smysl a zároveň má nástroj po ruce.
+
+### 5. Udělejte privacy-first release kontrolu
+
+Před vydáním veřejné edice zkontrolujte, jestli samotná distribuce nepopírá hodnoty e-booku. Je zvláštní psát o kontrole nad daty a potom publikovat materiál přes formulář, který sbírá telefon, firmu, velikost týmu, rozpočet a souhlas s pěti marketingovými účely. To je obsahová gymnastika. Hezký výkon, špatný směr.
+
+Release kontrola:
+
+- Je e-book dostupný na vlastní URL bez povinného odevzdání e-mailu?
+- Pokud existuje formulář, sbírá jen data potřebná pro daný účel?
+- Je jasné, jestli jde o stažení, RSS odběr, kontakt nebo obchodní poptávku?
+- Jsou externí skripty omezené na minimum a umíte vysvětlit každý z nich?
+- Je měření agregované a navázané na rozhodovací otázky?
+- Má čtenář možnost použít přímý odkaz nebo RSS místo newsletterového funnelu?
+- Jsou veřejné ukázky anonymizované a neprozrazují interní nebo zákaznické informace?
+
+Privacy-first release není pomalejší. Jen nutí tým přestat sbírat data „pro jistotu“. A „pro jistotu“ je v digitálním provozu často jen hezčí název pro budoucí nepořádek.
+
+### 6. Karta release mapy
+
+Použijte krátkou kartu. Jedna stránka stačí.
+
+```markdown
+## Release mapa veřejné edice
+
+Datum:
+Vlastník:
+Verze:
+
+## Primární čtenář
+- Kdo:
+- Situace:
+- Co chce po přečtení udělat:
+
+## Veřejný slib
+- Jedna věta:
+- Co tím neslibujeme:
+
+## Čtenářské vstupy
+1. Vstup:
+   - Pro koho:
+   - Výsledek:
+   - Kapitoly/přílohy:
+   - První krok:
+2. Vstup:
+   - Pro koho:
+   - Výsledek:
+   - Kapitoly/přílohy:
+   - První krok:
+3. Vstup:
+   - Pro koho:
+   - Výsledek:
+   - Kapitoly/přílohy:
+   - První krok:
+
+## Veřejná vrstva
+- Kanonická URL:
+- Landing page:
+- RSS nebo feed:
+- Doporučené interní odkazy:
+
+## Šablony
+- Co je veřejné:
+- Co je interní:
+- Co se zatím nepublikuje:
+
+## Privacy-first kontrola
+- Jaká data sbíráme:
+- Proč:
+- Kde jsou:
+- Jak dlouho:
+- Kdo má přístup:
+- Co záměrně neměříme:
+
+## Po vydání
+- První kontrola:
+- Signály užitečnosti:
+- Další rozhodnutí:
+```
+
+Karta má být vyplněná konkrétně. Pokud v ní zůstávají věty jako „zlepšíme povědomí“, „oslovíme širší publikum“ nebo „budeme sledovat engagement“, vraťte se o krok zpět. Release mapa má říkat, jakou práci má e-book udělat a jak poznáte, že pomáhá.
+
+### 7. Codyho komentář
+
+Můj pohled: e-book už v této fázi nepotřebuje víc ambicí. Potřebuje lepší vstupní dveře. Dlouhé praktické materiály neumírají proto, že by měly málo obsahu. Umírají proto, že čtenář neví, kde začít, tým neví, co propagovat, a každý další nápad se tváří jako nutný doplněk. Release mapa je brzda proti tomuhle nadšení. Ano, brzda. Užitečná věc, když jedete z kopce na kole plném checklistů.
+
+### 8. Checklist přílohy
+
+- Je vybraný jeden primární čtenář první veřejné edice?
+- Má e-book veřejný slib v jedné konkrétní větě?
+- Existují tři jasné čtenářské vstupy podle práce, kterou chce člověk udělat?
+- Má každý vstup doporučené kapitoly, přílohy a první krok?
+- Jsou hlavní text, rozcestníky a pracovní šablony oddělené?
+- Je jasné, co bude veřejné, interní a zatím nepublikované?
+- Je e-book dostupný bez povinného datového obchodu za e-mail?
+- Měříte jen signály, které pomohou rozhodnout o další iteraci?
+- Jsou veřejné příklady očištěné od interních a zákaznických detailů?
+- Má release mapa vlastníka, datum a první kontrolu po vydání?
+
+Dobrá release mapa nezaručí popularitu. Zaručí ale, že veřejná edice má konkrétní vstup, praktický slib a provozní disciplínu. To je lepší než vydat velký dokument s nadějí, že si každý nějak najde svoji cestu.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -27981,3 +28155,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BY o převodu hotové iterace do interní znalostní báze: výběr interního použití, jeden zdroj pravdy, privacy-first kontrola, verze pro různá publika a workflow po iteraci.
 - 2026-05-09: Doplněna Příloha BZ o úklidu a archivaci zastaralých šablon po iteraci: hledání kolizí, stavy materiálů, náhrady, privacy-first úklid, přesměrování pozornosti a checklist.
 - 2026-05-09: Doplněna Příloha CA s kvartální konsolidací živého e-booku: hlavní konsolidační otázka, stavy částí, čtenářské trasy, shoda se šablonami, privacy-first úklid a krátká agenda.
+- 2026-05-09: Doplněna Příloha CB s release mapou veřejné edice po konsolidaci: primární čtenář, veřejný slib, čtenářské vstupy, oddělení šablon, privacy-first kontrola a karta vydání.
