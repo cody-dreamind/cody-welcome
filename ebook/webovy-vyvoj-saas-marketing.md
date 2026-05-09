@@ -28754,6 +28754,207 @@ Jedno dobré rozhodnutí měsíčně stačí. Upravit rozcestník, sloučit dvě
 
 Dlouhodobý provoz je méně atraktivní než vydání. Ale právě tam se ukáže, jestli e-book opravdu funguje jako pracovní systém. Veřejná edice nemá být pomník. Má být živý nástroj, který zůstává konkrétní, udržovaný a férový k lidem i jejich datům.
 
+## Příloha CG: Roční rozhodnutí o veřejné edici
+
+Jakmile e-book běží delší dobu, nestačí jen měsíční údržba. Jednou za rok je potřeba položit nepříjemnější otázku: má veřejná edice pořád stejnou roli, nebo se změnila nabídka, trh, tým a způsob práce natolik, že materiál potřebuje nové rozhodnutí?
+
+Roční rozhodnutí není kosmetická revize. Nemá řešit, jestli přepsat tři věty a doplnit jeden odkaz. Má určit, jestli e-book zůstává hlavním veřejným materiálem, jestli se má rozdělit na menší playbooky, jestli se z něj má stát interní znalostní báze, nebo jestli některé části už poctivě dosloužily.
+
+Cíl je jednoduchý: udržet e-book jako užitečné aktivum, ne jako veřejný závazek, který tým ze setrvačnosti táhne za sebou.
+
+### 1. Začněte otázkou, ne seznamem úprav
+
+Roční revize se snadno zvrhne v nekonečný seznam drobností. To je pohodlné, protože drobnosti se dají odškrtávat. Jenže hlavní rozhodnutí tím často uteče.
+
+Začněte jednou otázkou:
+
+- Pomáhá tato veřejná edice pořád lidem, kterým chceme pomáhat?
+
+Pak přidejte čtyři podpůrné otázky:
+
+- Odpovídá e-book aktuální nabídce služeb nebo produktu?
+- Vede čtenáře ke správným dalším krokům?
+- Používá tým e-book v obchodě, supportu, marketingu nebo delivery?
+- Nepřidává údržba víc složitosti než hodnoty?
+
+Pokud odpovědi nejsou jasné, není to selhání. Je to signál, že e-book dozrál do další fáze a potřebuje vědomé rozhodnutí.
+
+### 2. Udělejte inventuru reálného použití
+
+Roční rozhodnutí nesmí stát jen na pocitu autora. Potřebuje jednoduchou inventuru toho, kde e-book skutečně žije.
+
+Projděte pět míst:
+
+- Veřejný web: odkud na e-book vedou odkazy a jakou roli tam má.
+- Obchod: které části se posílají zákazníkům před schůzkou nebo po ní.
+- Delivery: které checklisty a šablony tým opravdu používá.
+- Support a zpětná vazba: na co se lidé ptají a co jim pomáhá.
+- Interní znalosti: kde vznikly odvozené materiály, prezentace nebo pracovní listy.
+
+Zapište zjištění stručně:
+
+```markdown
+# Inventura použití veřejné edice
+
+Datum:
+Vlastník:
+
+## Kde se e-book používá
+-
+
+## Které části mají největší hodnotu
+-
+
+## Které části nikdo nepoužívá
+-
+
+## Kde vznikly odvozené materiály
+-
+
+## Kde se e-book rozchází s realitou týmu
+-
+```
+
+Důležité je nehodnotit jen viditelnost. Část, která má málo návštěv, může být klíčová pro jeden drahý obchodní rozhovor. A část, která má hodně zobrazení, může být jen hezký vstup bez dopadu.
+
+### 3. Rozdělte obsah podle budoucí role
+
+Po inventuře rozdělte části e-booku do pěti kategorií:
+
+- Ponechat: část je aktuální, používaná a zapadá do veřejného slibu.
+- Zjednodušit: část je užitečná, ale je příliš dlouhá, duplicitní nebo těžká na použití.
+- Rozšířit: část řeší důležitý problém, ale chybí jí příklad, checklist nebo jasnější postup.
+- Vyjmout do šablony: část je praktická, ale ve veřejném e-booku zabírá moc prostoru.
+- Archivovat: část už neodpovídá nabídce, realitě provozu nebo způsobu práce.
+
+Příklad rozhodnutí:
+
+```markdown
+# Roční karta části
+
+Část:
+Současná role:
+Reálné použití:
+Problém:
+Budoucí role: ponechat / zjednodušit / rozšířit / vyjmout / archivovat
+Dopad na čtenářské trasy:
+Dopad na odvozené šablony:
+Privacy-first dopad:
+Další krok:
+```
+
+Tahle karta brání tomu, aby se z roční revize stal literární kroužek. Každá část dostane rozhodnutí, ne jen komentář.
+
+### 4. Zkontrolujte shodu s aktuální nabídkou
+
+E-book může být kvalitní a přesto obchodně matoucí. Stačí, aby popisoval starý typ práce, který už tým nechce prodávat. Nebo aby zdůrazňoval oblast, která je sice zajímavá, ale není hlavní směr.
+
+Roční kontrola nabídky:
+
+- Jaký problém dnes chceme, aby si čtenář spojil s Dreamindem?
+- Které kapitoly tento problém podporují?
+- Které kapitoly odvádějí pozornost jinam?
+- Jaký další krok má čtenář udělat po dočtení?
+- Je tento další krok viditelný na webové verzi?
+- Odpovídají příklady typu zákazníků, se kterými chceme pracovat?
+
+Codyho komentář: veřejný obsah má být užitečný, ne manipulativní. Ale užitečnost neznamená, že musí pokrýt všechno, co umíte. Dobrý e-book klidně nechá některé znalosti mimo záběr, protože čtenář potřebuje jasnou cestu, ne mapu celého mozku autora.
+
+### 5. Proveďte privacy-first roční bránu
+
+Roční rozhodnutí je dobrý moment zkontrolovat, jestli se kolem e-booku nenabalily datové zlozvyky.
+
+Privacy-first roční brána:
+
+- Je e-book dostupný bez nuceného předání e-mailu?
+- Jsou formuláře kolem e-booku dobrovolné a srozumitelné?
+- Nepřibyly analytické skripty, které tým neumí obhájit?
+- Jsou feedback kanály nastavené tak, aby nesbíraly zbytečná osobní data?
+- Mají odvozené šablony pravidla pro ukládání vyplněných odpovědí?
+- Jsou staré exporty, seznamy a pracovní kopie uklizené?
+- Umí tým vysvětlit, proč sbírá každý typ dat související s e-bookem?
+
+Pokud ne, roční revize má zahrnout i úklid datových toků. Přidat novou kapitolu je méně důležité než odstranit zbytečný formulář, který kazí důvěru.
+
+### 6. Vyberte jedno rozhodnutí pro další rok
+
+Na konci roční revize nesmí zůstat jen poznámky. Vyberte jedno hlavní rozhodnutí:
+
+- Pokračovat: veřejná edice zůstává hlavním materiálem a dostane běžnou údržbu.
+- Zkrátit: veřejná edice se zjednoduší na kratší, čitelnější verzi.
+- Rozdělit: vzniknou samostatné playbooky podle čtenářských tras.
+- Produktizovat: e-book se stane základem konkrétní služby, workshopu nebo auditu.
+- Archivovat část: vybrané kapitoly se přesunou do archivu nebo interní báze.
+- Přepsat pozici: e-book zůstane, ale změní se jeho veřejný slib a rozcestníky.
+
+Šablona rozhodnutí:
+
+```markdown
+# Roční rozhodnutí o veřejné edici
+
+Datum:
+Vlastník:
+
+## Hlavní rozhodnutí
+
+Pokračovat / zkrátit / rozdělit / produktizovat / archivovat část / přepsat pozici
+
+## Proč
+-
+
+## Co se změní
+-
+
+## Co zůstává stejné
+-
+
+## Dopad na čtenáře
+-
+
+## Dopad na tým
+-
+
+## Privacy-first dopad
+-
+
+## První další krok
+-
+```
+
+Jedno rozhodnutí pro další rok je lepší než deset ambicí bez vlastníka. Veřejný materiál nepotřebuje každoročně revoluci. Potřebuje poctivou odpověď, proč má dál existovat.
+
+### 7. Naplánujte první malý krok
+
+Roční rozhodnutí má skončit konkrétní akcí do dvou týdnů. Jinak zůstane v dokumentu a tým se k němu vrátí až při další únavě.
+
+Dobré první kroky:
+
+- upravit hlavní rozcestník,
+- označit části k archivaci,
+- zkrátit jednu nejdelší trasu,
+- oddělit jednu šablonu do samostatného pracovního listu,
+- doplnit jeden chybějící příklad,
+- uklidit zastaralé exporty,
+- odstranit zbytečný formulář nebo měření,
+- přepsat veřejný popis e-booku podle aktuální nabídky.
+
+První krok musí být dost malý, aby se opravdu stal. Roční strategie bez první malé změny je jen dekorace v repozitáři.
+
+### Checklist přílohy
+
+- Má roční revize jednu hlavní otázku?
+- Proběhla inventura reálného použití e-booku?
+- Ví tým, které části se používají v obchodě, delivery, supportu a marketingu?
+- Jsou části rozdělené na ponechat, zjednodušit, rozšířit, vyjmout nebo archivovat?
+- Odpovídá e-book aktuální nabídce a typu zákazníků?
+- Je jasné, jaký další krok má čtenář udělat?
+- Proběhla privacy-first kontrola formulářů, analytiky, feedbacku a odvozených šablon?
+- Existuje jedno roční rozhodnutí o budoucí roli veřejné edice?
+- Má rozhodnutí vlastníka a první krok do dvou týdnů?
+- Je zapsané, co se nemění, aby se z revize nestal nekonečný redesign?
+
+Roční rozhodnutí drží e-book dospělý. Neptá se, kolik dalšího obsahu jde přidat. Ptá se, jak má veřejná edice dál sloužit lidem, týmu a důvěře, kterou značka staví. To je praktičtější než přidat dalších dvacet stran jen proto, že se ještě vejdou do Markdownu.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -28966,3 +29167,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha CD s vydávací bránou veřejné edice: zmrazení rozsahu, třídění nálezů, test čtenářských cest, privacy-first kontrola, rozhodovací karta a review po vydání.
 - 2026-05-09: Doplněna Příloha CE s podpůrným oknem po vydání veřejné edice: triage podnětů, rychlé opravy, odpovědi na dotazy, privacy-first podpora, denní poznámka a uzavírací rozhodnutí.
 - 2026-05-09: Doplněna Příloha CF o přechodu veřejné edice do dlouhodobého provozu: zdroj pravdy, údržba podle stárnutí, pracovní šablony, privacy-first rozšiřování, měření užitečnosti a provozní rytmus.
+- 2026-05-09: Doplněna Příloha CG s ročním rozhodnutím o veřejné edici: inventura použití, budoucí role částí, shoda s nabídkou, privacy-first brána a první malý krok.
