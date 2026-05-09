@@ -27586,6 +27586,194 @@ I tehdy ale nesmí zůstat bez označení. Přidejte stav, důvod a datum kontro
 
 Dobrá iterace nepřidává jen nový obsah. Uklízí za sebou. Díky tomu e-book, šablony a interní znalostní báze rostou jako systém, ne jako hromada podobných dokumentů s různým datem a stejnou ambicí. Přidat novou věc umí každý. Udržet pořádek po přidání je teprve provozní dospělost.
 
+## Příloha CA: Kvartální konsolidace živého e-booku
+
+Živý e-book se po několika týdnech nebo měsících začne chovat jako produkt. Má nové části, drobné opravy, odvozené šablony, zpětnou vazbu, interní odkazy a veřejné vstupy. To je dobrá zpráva. Horší zpráva je, že každý živý produkt potřebuje občas konsolidaci. Jinak se z postupného zlepšování stane jen slušně vedené hromadění.
+
+Konsolidace není další sprint na přidávání obsahu. Je to kontrola, jestli celek pořád drží pohromadě: jestli čtenář najde správnou trasu, jestli staré části neopakují totéž novými slovy, jestli šablony odpovídají zdroji pravdy a jestli měření i zpětná vazba respektují privacy-first pravidla.
+
+Praktický rytmus: jednou za kvartál si vyhraďte krátký blok a neptejte se "co ještě dopíšeme?". Ptejte se "co má zůstat, co sloučit, co zkrátit a co přestat používat?".
+
+### 1. Začněte jednou konsolidační otázkou
+
+Bez hlavní otázky se konsolidace změní na čtení vlastního textu s neurčitým pocitem, že by se něco mělo opravit. To není plán. Vyberte jednu otázku pro celý kvartál.
+
+Příklady:
+
+- Pomáhá e-book novým čtenářům rychle vybrat správnou čtenářskou trasu?
+- Neopakuje se privacy-first analytika v příliš mnoha podobných přílohách?
+- Jsou šablony pořád použitelné v reálné práci, nebo jen vypadají kompletně?
+- Odpovídá veřejná verze tomu, co tým skutečně posílá zákazníkům?
+- Nezůstaly v textu části, které patří spíš do interní wiki než do veřejného e-booku?
+
+Dobrá otázka má vést ke konkrétnímu rozhodnutí. Slabá otázka zní "je to ještě dobré?". Silnější otázka zní "které tři části čtenáře nejvíc zdržují v cestě od problému k akci?".
+
+### 2. Rozdělte části podle dalšího osudu
+
+Vezměte kapitoly, přílohy a šablony, kterých se konsolidační otázka týká. U každé napište jeden ze čtyř stavů:
+
+| Stav | Co znamená | Typická akce |
+| --- | --- | --- |
+| Ponechat | Část je jasná, aktuální a má vlastní účel. | Jen kontrola odkazu, verze a navazující akce. |
+| Sloučit | Dvě nebo více částí řeší stejnou situaci. | Vybrat silnější zdroj a druhou část převést na odkaz nebo archiv. |
+| Přepsat | Účel je správný, ale text je moc dlouhý, obecný nebo nepřesný. | Zkrátit, doplnit příklad, vyměnit pořadí, zpřesnit checklist. |
+| Archivovat | Část už nemá jasnou práci nebo odporuje novější verzi. | Označit jako nahrazenou, odebrat z rozcestníků, ponechat jen kvůli historii. |
+
+Tahle tabulka chrání před dvěma extrémy. První extrém je mazat moc rychle jen proto, že text působí starší. Druhý extrém je nechat všechno, protože "se to jednou může hodit". V praxi se jednou hodí hlavně jasné rozhodnutí.
+
+### 3. Projděte čtenářské trasy, ne jen obsah
+
+E-book může mít kvalitní jednotlivé části a přesto špatně fungovat jako celek. Čtenář nepřemýšlí podle interní struktury. Přichází se situací.
+
+Otestujte alespoň čtyři trasy:
+
+1. Zakladatel řeší nový B2B web a chce vědět, co opravit první.
+2. Malý tým staví SaaS MVP a potřebuje udržet rozsah pod kontrolou.
+3. Marketing chce získávat leady bez zbytečného trackingu.
+4. Zákazník se ptá, jak Dreamind pracuje s daty, provozem a evropským kontextem.
+
+U každé trasy si zapište:
+
+- kde člověk začne,
+- jaké tři odkazy mají následovat,
+- jaký praktický výstup má získat,
+- kde se může zaseknout,
+- který starší text ho může zmást,
+- jaký další krok dává smysl.
+
+Pokud trasa vyžaduje otevřít deset příloh, není to trasa. Je to lov. V takovém případě vytvořte rozcestník, zkraťte vstupní část nebo přesuňte detail do šablony.
+
+### 4. Zkontrolujte shodu mezi e-bookem a šablonami
+
+Po více iteracích se často stane, že e-book říká jednu věc a šablona druhou. Ne proto, že by někdo udělal chybu schválně. Prostě se jedna část zlepšila a druhá zůstala ve starém stavu.
+
+Zkontrolujte hlavně:
+
+- názvy metrik a událostí,
+- role a odpovědnosti,
+- privacy-first formulace,
+- definice hotovo,
+- stav checklistů,
+- odkazy na kapitoly,
+- doporučené pořadí kroků,
+- příklady v sales a support materiálech.
+
+Praktické pravidlo: pokud e-book změní doporučení, musí se zkontrolovat i šablony, které z něj vycházejí. Pokud šablona změnila praxi, musí se zkontrolovat, jestli e-book ještě popisuje realitu.
+
+Jednoduchý záznam:
+
+```text
+Kontrolovaná část:
+Navazující šablony:
+Rozpor nalezen:
+Rozhodnutí:
+Vlastník:
+Datum kontroly:
+```
+
+### 5. Udělejte privacy-first úklid signálů
+
+Konsolidace není jen redakční práce. Je to i dobrý moment podívat se, jaká data kolem e-booku a navazujících materiálů sbíráte.
+
+Položte si otázky:
+
+- Měříme pořád jen signály, které pomáhají rozhodovat?
+- Nepřibyl formulář, který sbírá víc údajů, než potřebuje?
+- Nezačali jsme posílat čtenáře na platformu, která zbytečně bere kontrolu nad daty?
+- Jsou feedback poznámky anonymizované, pokud obsahují zákaznický kontext?
+- Má někdo přístup k podkladům, který už ho nepotřebuje?
+- Držíme staré exporty, screenshoty nebo nahrávky déle, než dává smysl?
+
+Codyho komentář: privacy-first hodnota se neztrácí jedním velkým rozhodnutím. Často se rozpadne po malých pohodlných výjimkách. Jeden formulář navíc, jeden export "pro jistotu", jeden externí skript kvůli grafu, který nikdo nepoužívá. Kvartální konsolidace je dobré místo, kde tyhle malé úniky zastavit.
+
+### 6. Vydejte konsolidační poznámku
+
+Po kvartální kontrole nevyrábějte dlouhou zprávu. Stačí krátká poznámka, která řekne, co se změnilo a jak se má s e-bookem dál pracovat.
+
+Šablona:
+
+```text
+Kvartální konsolidace e-booku
+
+Hlavní otázka:
+
+Co jsme ponechali:
+
+Co jsme sloučili:
+
+Co jsme přepsali:
+
+Co jsme archivovali:
+
+Co se mění pro čtenáře:
+
+Co se mění pro tým:
+
+Privacy-first kontrola:
+
+Další kontrola:
+```
+
+Příklad stručné poznámky:
+
+```text
+V této konsolidaci jsme sloučili duplicitní rozcestníky pro veřejnou verzi, zkrátili trasu pro SaaS MVP a archivovali starší interní checklist k distribuci. Veřejná landing page se nemění. Tým má od teď používat nový index šablon a při sales follow-upu posílat trasu podle situace zákazníka, ne celý e-book bez kontextu.
+```
+
+Taková poznámka pomůže víc než tiché změny. Tým nemusí hádat, co je nové. Čtenář nemusí řešit interní historii.
+
+### 7. Devadesátiminutová agenda konsolidace
+
+Když nechcete z konsolidace udělat velký projekt, použijte tento krátký formát.
+
+Prvních 15 minut: vyberte hlavní otázku.
+
+- Jaká část e-booku dnes nejvíc brání použití?
+- Která trasa je nejdůležitější pro příští kvartál?
+- Kde vzniká nejvíc duplicit nebo nejasností?
+
+Dalších 25 minut: projděte dotčené části.
+
+- Označte ponechat, sloučit, přepsat, archivovat.
+- Neschovávejte každou poznámku do backlogu.
+- Vyberte jen změny, které mají jasný dopad.
+
+Dalších 20 minut: ověřte šablony a odkazy.
+
+- Sedí navazující materiály?
+- Existují staré odkazy?
+- Nejsou v interní wiki staré kopie?
+
+Dalších 15 minut: udělejte privacy-first kontrolu.
+
+- Data, přístupy, formuláře, exporty, feedback.
+- Co se může smazat?
+- Co se má anonymizovat?
+
+Posledních 15 minut: zapište rozhodnutí.
+
+- Co bude hotové teď?
+- Co jde do dalšího sprintu?
+- Co se vědomě nedělá?
+- Kdo hlídá další kvartální kontrolu?
+
+Když se nevejdete do devadesáti minut, nejspíš jste si vybrali moc širokou otázku. Zúžení rozsahu není selhání. Je to způsob, jak konsolidaci opravdu dokončit.
+
+### Checklist přílohy
+
+- Má kvartální konsolidace jednu hlavní otázku?
+- Je jasné, které části e-booku a šablon kontrolujete?
+- Má každá kontrolovaná část stav: ponechat, sloučit, přepsat nebo archivovat?
+- Prošli jste čtenářské trasy podle situací, ne jen pořadí kapitol?
+- Zkontrolovali jste shodu mezi e-bookem, šablonami, sales materiály a interní wiki?
+- Odstranili nebo označili jste staré odkazy a duplicitní verze?
+- Udělali jste privacy-first úklid signálů, formulářů, exportů a přístupů?
+- Vznikla krátká konsolidační poznámka?
+- Je jasné, co se mění pro čtenáře a co pro tým?
+- Má další kvartální kontrola vlastníka a datum?
+
+Živý e-book potřebuje přidávání i ubírání. Přidávání rozšiřuje užitečnost. Ubírání chrání srozumitelnost. Konsolidace drží obě síly v rovnováze, aby z materiálu zůstal pracovní systém, ne jen kronika dobrých nápadů.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -27792,3 +27980,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BX s kontrolou hlasu, tónu a praktické užitečnosti po iteraci: čtenářská situace, konkrétnost, Codyho hlas, privacy-first dopad a redakční checklist.
 - 2026-05-09: Doplněna Příloha BY o převodu hotové iterace do interní znalostní báze: výběr interního použití, jeden zdroj pravdy, privacy-first kontrola, verze pro různá publika a workflow po iteraci.
 - 2026-05-09: Doplněna Příloha BZ o úklidu a archivaci zastaralých šablon po iteraci: hledání kolizí, stavy materiálů, náhrady, privacy-first úklid, přesměrování pozornosti a checklist.
+- 2026-05-09: Doplněna Příloha CA s kvartální konsolidací živého e-booku: hlavní konsolidační otázka, stavy částí, čtenářské trasy, shoda se šablonami, privacy-first úklid a krátká agenda.
