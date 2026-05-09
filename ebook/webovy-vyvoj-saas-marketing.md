@@ -26580,6 +26580,198 @@ Stop karta nemá být hřbitov nápadů. Má zabránit tomu, aby se stejná disk
 
 Stop pravidla jsou brzda, která chrání rychlost. Bez nich se živý e-book postupně zanese dobrými nápady, které dohromady vytvoří špatnou zkušenost. S nimi může tým každý měsíc zlepšovat text a zároveň si dovolit říct: tohle teď neděláme, protože čtenář potřebuje jasnost víc než další vrstvu.
 
+## Příloha BU: Prioritizační fronta pro živý e-book
+
+Jakmile má e-book veřejnou verzi, nestačí mít jen seznam nápadů. Seznam nápadů bobtná rychle, protože každý čtenář, obchodní hovor, interní workshop nebo nový trend může přinést další podnět. Bez prioritizační fronty se tým brzy dostane do režimu "něco přidáme", ale neví proč, komu to pomůže a co kvůli tomu zůstane nedodělané.
+
+Prioritizační fronta je jednoduchý pracovní systém pro rozhodování, co se s e-bookem stane příště. Neřeší jen nové kapitoly. Patří do ní úpravy textu, sloučení duplicit, aktualizace zdrojů, nové výřezy, šablony, landing page změny, interní návody i stop karty.
+
+Cíl fronty je praktický:
+
+- držet jeden zdroj pravdy pro podněty,
+- rozlišit nápad od rozhodnutí,
+- vybrat jednu kvalitní iteraci místo pěti rozdělaných,
+- chránit čtenářskou trasu před zbytečným šumem,
+- udržet privacy-first hodnotu při každé změně.
+
+### 1. Stav položky
+
+Každá položka ve frontě má mít jeden z těchto stavů:
+
+- Podnět: někdo něco navrhl, ale není jasné, jestli je to důvod ke změně.
+- Ověřit: potřebujeme zjistit, jestli se problém opakuje nebo má obchodní dopad.
+- Připraveno: víme, co změnit, proč a jaký je nejmenší užitečný výstup.
+- Ve sprintu: změna se právě dělá.
+- Hotovo: změna je vydaná, zapsaná v logu a propojená s relevantními částmi.
+- Stop: změna se teď nedělá a existuje krátké vysvětlení proč.
+- Archiv: položka už není relevantní, ale má hodnotu pro historii.
+
+Nejdůležitější pravidlo: položka nemá přeskočit z podnětu rovnou do sprintu jen proto, že zní zajímavě. Zajímavost není priorita. Priorita vzniká z opakovaného signálu, čtenářské hodnoty, provozního rizika nebo z jasné obchodní potřeby.
+
+### 2. Karta položky
+
+Každý nápad zapište krátce a stejně. Dlouhé zadání často maskuje nejasnost. Dobrá karta se vejde na jednu obrazovku.
+
+```markdown
+# Položka fronty
+
+Název:
+Stav:
+Datum:
+Vlastník:
+
+## Podnět
+Co změnu spustilo:
+
+## Čtenářská práce
+Jakou konkrétní práci čtenáři usnadní:
+
+## Důvod
+Proč nestačí nechat e-book beze změny:
+
+## Nejmenší užitečný výstup
+Co přesně vznikne:
+
+## Dopad do struktury
+Kapitola, příloha, landing page, šablona, výřez, interní odkaz:
+
+## Privacy-first kontrola
+Přidává změna data, formulář, měření, nástroj nebo externí službu?
+
+## Rozhodnutí
+Přidat, upravit, sloučit, archivovat, stop:
+```
+
+Karta nutí tým pojmenovat hodnotu před prací. Pokud nejde vyplnit část "čtenářská práce", položka zatím nepatří do sprintu. Může zůstat v podnětech, ale nemá brát kapacitu.
+
+### 3. Skórování bez falešné přesnosti
+
+Fronta nepotřebuje složitý scoring model. Stačí pět otázek s hodnotou 0 až 2:
+
+- Čtenářská hodnota: pomůže změna dokončit konkrétní úkol?
+- Opakování signálu: objevil se problém více než jednou?
+- Dopad na důvěru: zlepší změna důkaz, jasnost nebo bezpečnost tvrzení?
+- Údržba: bude změna levná na dlouhodobou revizi?
+- Privacy-first soulad: nezhorší změna datovou stopu, měření nebo závislost na platformě?
+
+Výklad skóre:
+
+- 0: slabé nebo nejasné,
+- 1: střední, potřebuje doplnit,
+- 2: silné a konkrétní.
+
+Pozor: vysoké skóre není automatické schválení. Je to pomůcka pro rozhovor. Položka s vysokou čtenářskou hodnotou, ale špatnou údržbou může být dobrý kandidát na menší výřez místo nové kapitoly. Položka s nízkou privacy-first kompatibilitou má projít stop pravidly, i kdyby zněla marketingově lákavě.
+
+### 4. Tři typy priorit
+
+Aby fronta nebyla jen soutěž o nejhlasitější nápad, rozdělte priority do tří typů:
+
+- Oprava: něco je nepřesné, zastaralé, duplicitní nebo matoucí.
+- Zlepšení: existující část může lépe sloužit čtenářské trase.
+- Rozšíření: vzniká nová kapitola, příloha, šablona nebo veřejný výřez.
+
+Pořadí je záměrné. Opravy mají často vyšší hodnotu než rozšíření, protože chrání důvěru. Pokud e-book obsahuje zastaralé právní tvrzení, rozbitý odkaz nebo nejasný checklist, nová příloha počká. Nejlepší další iterace bývá ta, která odstraní tření, ne ta, která přidá nejvíc textu.
+
+Příklad:
+
+```text
+Podnět:
+Čtenář se ptal, jak rychle najít správnou kapitolu pro svůj problém.
+
+Typ:
+Zlepšení.
+
+Rozhodnutí:
+Upravit existující rozcestníky a doplnit přímé odkazy, nepřidávat novou kapitolu.
+
+Proč:
+Problém je navigace, ne nedostatek obsahu.
+
+Privacy-first kontrola:
+Bez nového měření a bez formuláře. Pouze lepší struktura veřejné stránky.
+```
+
+Takové rozhodnutí je malé, ale přesné. Tým neřeší symptom větším obsahem, ale opravuje cestu.
+
+### 5. Týdenní triage
+
+Jednou týdně projděte frontu v krátkém bloku. Třicet minut stačí, pokud se držíte rozhodnutí a neutíkáte do detailního psaní.
+
+Postup:
+
+1. Přidejte nové podněty z feedbacku, sales, supportu a interních workshopů.
+2. Sloučte duplicity.
+3. U každé nové položky doplňte čtenářskou práci.
+4. Označte položky, které vyžadují ověření zdrojů nebo právních tvrzení.
+5. Vyberte jednu až tři položky do dalšího edičního sprintu.
+6. U každé vybrané položky napište nejmenší užitečný výstup.
+7. Zbytek nechte ve frontě nebo stopněte.
+
+Triage není místo pro nekonečnou debatu. Pokud se tým neumí shodnout, položka se vrátí do stavu "ověřit" s konkrétní otázkou. Například: "Objevuje se tato nejasnost i u čtenářů mimo obchodní tým?" nebo "Má tato změna nahradit opakovanou ruční práci?"
+
+### 6. Privacy-first brána
+
+Každá položka před sprintem projde privacy-first bránou. Ne až před publikací. Před sprintem. Jinak tým napíše text, připraví landing page, vymyslí formulář a teprve potom zjistí, že změna stojí na zbytečném sběru dat.
+
+Brána má pět otázek:
+
+- Přidává změna nový formulář nebo novou povinnou registraci?
+- Přidává měření jednotlivců místo agregovaných signálů?
+- Zavádí externí službu, skript nebo platformu?
+- Posílá citlivější data mimo vlastní kontrolu?
+- Dá se stejná čtenářská hodnota dodat veřejným odkazem, RSS, statickou stránkou nebo anonymizovaným feedbackem?
+
+Pokud odpověď na první čtyři otázky zní ano a pátá nabízí jednodušší cestu, zvolte jednodušší cestu. Veřejný e-book nemá fungovat jako past na kontakty. Má být důvěryhodné pracovní aktivum.
+
+Codyho komentář: nejhorší věta v obsahovém provozu je "když už to máme, pojďme to změřit pořádně". Překlad bývá: nemáme rozhodovací otázku, ale nástroj umí dashboard. Dashboard bez rozhodnutí je jen akvárium pro čísla.
+
+### 7. Definition of ready
+
+Položka je připravená do sprintu, když splňuje tyto podmínky:
+
+- Má jasnou čtenářskou práci.
+- Má jedno rozhodnutí: přidat, upravit, sloučit, archivovat nebo stop.
+- Je známý nejmenší užitečný výstup.
+- Je jasné, kde se změna objeví v e-booku nebo na webu.
+- Má vlastníka a realistický rozsah.
+- Rychle stárnoucí tvrzení mají plán ověření.
+- Privacy-first brána neukázala zásadní problém.
+- Je jasné, co se kvůli této změně nedělá.
+
+Bez těchto bodů položka není připravená. To není byrokracie. Je to ochrana kapacity. Každá nejasná položka ve sprintu se později promění v rozmazanou práci, dlouhou debatu nebo text, který nikdo nechce udržovat.
+
+### 8. Definition of done
+
+Změna je hotová až ve chvíli, kdy je použitelné celé okolí, ne jen nový text.
+
+Hotovo znamená:
+
+- Text je dopsaný nebo upravený.
+- Interní odkazy, rozcestníky a landing page nejsou rozbité.
+- Zdroje jsou ověřené, pokud se změna opírá o aktuální tvrzení.
+- Checklist nebo příklad odpovídá nové části.
+- Pracovní log má stručný záznam.
+- Pokud vznikl veřejný výřez, má jasnou URL nebo umístění.
+- Pokud se něco odstranilo, nezůstala po tom slepá trasa.
+- Privacy-first dopad je stále v pořádku.
+
+U živého e-booku je "hotovo" hlavně čtenářský stav. Nestačí, že je nový odstavec napsaný. Musí být jasné, jak ho někdo najde, proč tam je a co s ním udělá.
+
+### 9. Checklist přílohy
+
+- Máte jednu prioritizační frontu místo několika rozházených seznamů?
+- Má každá položka stav a vlastníka?
+- Rozlišujete podnět, ověření, připravenou práci, hotovo, stop a archiv?
+- Umíte u každé vybrané položky říct konkrétní čtenářskou práci?
+- Dáváte přednost opravám důvěry a navigace před novým obsahem?
+- Prochází každá položka privacy-first bránou před sprintem?
+- Nezavádíte formuláře, tracking nebo nástroje jen kvůli lepšímu pocitu z měření?
+- Má sprint maximálně několik jasných položek, které lze dokončit?
+- Je definition of done širší než samotné napsání textu?
+- Zapisujete stop rozhodnutí, aby se stejná debata nevracela pořád dokola?
+
+Prioritizační fronta dělá z e-booku řízený produkt, ne nekonečný dokument. Pomáhá týmu říct: toto je další nejlepší změna, toto počká a toto vědomě neděláme. Díky tomu může veřejná verze růst pomalu, ale kvalitně. U dlouhého odborného textu je přesně tahle nudná disciplína to, co čtenářům šetří čas.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -26780,3 +26972,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BR o rozhodnutí další verze po prvním týdnu: třídění signálů, typy iterací, rozhodovací karta, hranice rozsahu, privacy-first brána a checklist vydání.
 - 2026-05-09: Doplněna Příloha BS s měsíčním edičním sprintem veřejné verze: rozhodovací otázka, vstupy, průběh, šablona sprintu, kontrola stárnoucích témat, distribuce změny a checklist.
 - 2026-05-09: Doplněna Příloha BT se stop pravidly pro živý e-book: kdy změnu nepřidávat, jak rozlišit podnět od důvodu, kdy mazat nebo slučovat a jak držet privacy-first brzdu.
+- 2026-05-09: Doplněna Příloha BU s prioritizační frontou pro živý e-book: stavy položek, karta podnětu, jednoduché skórování, týdenní triage, privacy-first brána a definition of done.
