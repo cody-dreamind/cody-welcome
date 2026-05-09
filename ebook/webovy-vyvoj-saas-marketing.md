@@ -28140,6 +28140,207 @@ Třicet minut stačí, pokud je audit opravdu úzký. Cílem není projít celý
 
 Kanonická navigace není dekorace kolem e-booku. Je to způsob, jak dlouhý praktický text proměnit v použitelný systém. Čtenář má najít správný vstup, tým má posílat správné odkazy a privacy-first hodnota má platit i v distribuci. Teprve pak se z e-booku stává nástroj, ne jen hodně dlouhý soubor s dobrými úmysly.
 
+## Příloha CD: Vydávací brána veřejné edice
+
+Po release mapě a kanonické navigaci přichází nejtěžší část: říct, že první veřejná edice je připravená. Ne dokonalá. Připravená. To je rozdíl, který u dlouhých materiálů rozhoduje o tom, jestli se text opravdu dostane ke čtenářům, nebo se bude dalších šest týdnů leštit ve jménu „ještě jedné drobnosti“.
+
+Vydávací brána je krátký rozhodovací proces před zveřejněním. Chrání tým před dvěma opačnými chybami. První chyba je vydat materiál, který má rozbité odkazy, nejasný slib, interní poznámky a formulář sbírající zbytečná data. Druhá chyba je nikdy nevydat nic, protože každý průchod najde další možné vylepšení.
+
+Cílem brány není najít všechny teoretické problémy. Cílem je ověřit, že veřejná edice má jasný účel, čtenář se v ní neztratí, privacy-first slib platí i v distribuci a tým ví, co bude po vydání sledovat.
+
+### 1. Nejdřív zmrazte rozsah
+
+Bez zmrazení rozsahu se vydávací brána rozpadne. Každá kontrola začne generovat nové nápady a tým ztratí schopnost rozlišit mezi chybou, vylepšením a budoucí iterací.
+
+Zmrazení rozsahu znamená:
+
+- nepřidávat nové kapitoly,
+- nepřidávat nové čtenářské trasy,
+- neměnit veřejný slib bez explicitního rozhodnutí,
+- neopravovat styl napříč celým e-bookem, pokud nejde o kritickou čitelnost,
+- zapisovat nové nápady do backlogu, ne do aktuální verze.
+
+Praktická věta pro tým:
+
+„Tato verze má pomoct čtenáři vybrat správnou trasu a udělat první praktický krok. Všechno, co tento cíl neblokuje, jde do další iterace.“
+
+To zní tvrdě jen do chvíle, než si uvědomíte, že veřejná edice bez hranice rozsahu nikdy nebude veřejná. Bude jen pracovním dokumentem s lepšími nadpisy.
+
+### 2. Rozdělte nálezy podle dopadu
+
+Při finální kontrole nevzniká jeden seznam úkolů. Vznikají tři typy nálezů:
+
+- Blokátor: problém, kvůli kterému verzi nevydat.
+- Oprava před vydáním: menší věc, kterou lze rychle opravit bez rozšíření rozsahu.
+- Backlog: užitečný nápad, který neblokuje první veřejnou verzi.
+
+Blokátory:
+
+- nefunkční hlavní odkaz,
+- nejasný nebo rozporný veřejný slib,
+- interní nebo zákaznická informace ve veřejném textu,
+- povinný formulář pro čtení bez jasného důvodu,
+- chybějící privacy informace u sběru dat,
+- rozbitá hlavní čtenářská trasa,
+- zásadně neaktuální právní nebo bezpečnostní tvrzení.
+
+Opravy před vydáním:
+
+- překlep v hlavním nadpisu,
+- chybějící popis u důležitého odkazu,
+- duplicitní formulace v rozcestníku,
+- šablona bez jasného prvního kroku,
+- nejednotný název stejné trasy na dvou místech.
+
+Backlog:
+
+- další případová studie,
+- nový formát PDF,
+- hlubší SEO rozšíření,
+- další šablona pro interní tým,
+- překlad do angličtiny,
+- video verze nebo workshopový deck.
+
+Codyho komentář: backlog není hřbitov. Je to parkoviště pro věci, které by jinak unesly aktuální vydání. Když má tým dobrý backlog, může říct „ne teď“ bez pocitu, že zahazuje dobrý nápad. To je produktová dospělost, jen méně instagramová.
+
+### 3. Ověřte tři čtenářské cesty
+
+Veřejnou edici netestujte jen od titulku po konec. Testujte ji podle práce, kterou má čtenář udělat.
+
+Vyberte tři cesty:
+
+1. Nový čtenář přijde na landing page a chce zjistit, jestli je e-book pro něj.
+2. Čtenář s konkrétním problémem otevře situační index a vybírá trasu.
+3. Čtenář po doporučení od týmu otevře jednu šablonu a má ji použít bez dalšího vysvětlování.
+
+U každé cesty projděte:
+
+- ví čtenář, kde je,
+- rozumí slibu,
+- najde první praktický krok,
+- nedostane se do slepé uličky,
+- nemusí odevzdat zbytečná data,
+- vidí, jak se vrátit na hlavní rozcestník,
+- chápe, co teď nemá dělat.
+
+Výsledek testu má být konkrétní. Ne „působí to dobře“, ale třeba:
+
+„Trasa pro SaaS MVP vede na správné kapitoly, ale chybí u ní první krok. Doplnit jednu větu: začněte vyplněním checklistu kapitoly 31 a vyškrtněte tři věci, které do MVP nepatří.“
+
+### 4. Udělejte privacy-first bránu
+
+Privacy-first brána není právní razítko. Je to kontrola, jestli způsob vydání odpovídá hodnotám e-booku.
+
+Zkontrolujte:
+
+- Je veřejná verze dostupná bez povinného e-mailu?
+- Pokud existuje odběr nebo formulář, je jasné, k čemu slouží?
+- Sbírá formulář jen data potřebná pro daný účel?
+- Je oddělený kontakt, feedback a marketingový odběr?
+- Jsou externí skripty omezené na minimum?
+- Je měření nastavené podle rozhodovacích otázek, ne podle zvědavosti?
+- Nevedou odkazy přes zbytečné zkracovače nebo cizí přesměrování?
+- Neobsahují příklady interní názvy projektů, zákaznické detaily nebo osobní údaje?
+- Ví tým, kde končí data z formulářů, logů a analytiky?
+
+Praktické rozhodnutí:
+
+Pokud e-book nejde číst bez odevzdání kontaktu, musí existovat silný důvod. „Chceme leady“ není silný důvod. Silný důvod může být třeba uzavřený zákaznický materiál, interní školení nebo placený produkt. Veřejný e-book, který učí privacy-first provoz, má být dostupný přes vlastní URL a přímé odkazy. Ano, i když marketingový trychtýř smutně popotáhne. Přežije to.
+
+### 5. Připravte rozhodovací kartu vydání
+
+Před publikací vyplňte jednu kartu. Ne proto, aby vznikla další administrativa, ale aby bylo jasné, co se vydává a podle čeho se bude hodnotit úspěch.
+
+```markdown
+# Rozhodovací karta vydání
+
+Verze:
+Datum plánovaného vydání:
+Vlastník:
+
+## Co vydáváme
+- Veřejný slib:
+- Primární čtenář:
+- Hlavní čtenářské trasy:
+- Kanonická URL:
+
+## Co je hotové
+- Text:
+- Navigace:
+- Šablony:
+- Privacy-first kontrola:
+- Odkazy:
+
+## Známé nedostatky
+- Neopravujeme teď:
+- Proč to neblokuje vydání:
+- Kdy se k tomu vrátíme:
+
+## Signály po vydání
+- Hlavní signál užitečnosti:
+- Podpůrné signály:
+- Co záměrně neměříme:
+- První review:
+
+## Rozhodnutí
+- Vydat / nevydat:
+- Podmínky:
+- Kdo potvrzuje:
+```
+
+Karta má být krátká a pravdivá. Pokud se do ní tým bojí napsat známé nedostatky, brána nefunguje. Každá první veřejná verze má nedostatky. Důležité je vědět, které neblokují čtenářskou hodnotu.
+
+### 6. Den vydání bez paniky
+
+Vydání dlouhého materiálu nemusí být velký launch. U první veřejné edice často stačí klidný, dobře zkontrolovaný start.
+
+Minimální den vydání:
+
+1. Ověřit produkční URL.
+2. Otevřít landing page v anonymním okně.
+3. Projít tři hlavní trasy.
+4. Ověřit RSS nebo veřejný changelog, pokud existuje.
+5. Zkontrolovat formuláře a potvrzovací zprávy.
+6. Ověřit, že analytika neměří víc, než bylo schváleno.
+7. Poslat interně kanonické odkazy a pravidla použití.
+8. Publikovat krátkou veřejnou poznámku na vlastní web.
+9. Distribuovat přímé odkazy do vybraných kanálů.
+10. Zapsat datum první kontroly.
+
+Nepotřebujete v den vydání vyčerpat všechny platformy. Lepší je první týden sledovat, jestli lidé nachází správné vstupy a jestli materiál pomáhá v reálných situacích. Distribuce bez zpětné vazby je jen hlasitější nejistota.
+
+### 7. První review po vydání
+
+První review udělejte krátce po vydání. Nečekejte na dokonalá data. Cílem je zachytit očividné tření.
+
+Otázky:
+
+- Které odkazy lidé skutečně používají?
+- Kde se ptají na věci, které měla vysvětlit landing page?
+- Která trasa vyžaduje nejvíc ručního dovysvětlení?
+- Fungují formuláře a přímé odkazy?
+- Nepřibyly zbytečné datové sběry během posledních úprav?
+- Co je jedna oprava, která zlepší použití hned?
+- Co je větší téma pro další ediční sprint?
+
+Výstup review má být jedna malá oprava a jeden záznam do backlogu. Pokud review skončí seznamem dvaceti priorit, nebylo to review. Byl to návrat do chaosu v lepším oblečení.
+
+### Checklist přílohy
+
+- Je rozsah veřejné edice zmrazený?
+- Umíte rozlišit blokátor, opravu před vydáním a backlog?
+- Jsou hlavní čtenářské cesty projité podle reálné situace?
+- Má každá trasa jasný první krok?
+- Je e-book dostupný bez povinného sběru kontaktu, pokud nejde o záměrně uzavřený materiál?
+- Jsou formuláře, analytika, logy a odkazy zkontrolované privacy-first pohledem?
+- Neobsahuje veřejná verze interní, zákaznické nebo osobní údaje?
+- Existuje rozhodovací karta vydání?
+- Jsou známé nedostatky zapsané a neblokující?
+- Má den vydání krátký kontrolní postup?
+- Je naplánované první review po vydání?
+
+Vydávací brána má jednoduchý účel: dostat užitečný materiál ven bez zbytečného rizika a bez nekonečného odkládání. První veřejná edice má být použitelná, důvěryhodná a měřitelná. Zbytek patří do dalších iterací. Ano, i ten skvělý nápad, který někoho napadl pět minut před publikací. Hlavně ten.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -28349,3 +28550,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha CA s kvartální konsolidací živého e-booku: hlavní konsolidační otázka, stavy částí, čtenářské trasy, shoda se šablonami, privacy-first úklid a krátká agenda.
 - 2026-05-09: Doplněna Příloha CB s release mapou veřejné edice po konsolidaci: primární čtenář, veřejný slib, čtenářské vstupy, oddělení šablon, privacy-first kontrola a karta vydání.
 - 2026-05-09: Doplněna Příloha CC s kanonickou navigací a indexem veřejné edice: vstupy, čtenářské trasy, situační index, kanonické odkazy, týmová pravidla a privacy-first kontrola.
+- 2026-05-09: Doplněna Příloha CD s vydávací bránou veřejné edice: zmrazení rozsahu, třídění nálezů, test čtenářských cest, privacy-first kontrola, rozhodovací karta a review po vydání.
