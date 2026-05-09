@@ -25259,6 +25259,253 @@ Nenechte test přerůst do nekonečné validace. Cílem není dokázat, že e-bo
 - Neodkládáte publikaci kvůli nápadům, které patří do pozdější verze?
 - Zapisujete výsledky testu do pracovního logu, changelogu nebo redakčního backlogu podle dopadu?
 
+## Příloha BO: Čtenářské trasy a rozcestníky pro veřejnou verzi
+
+Dlouhý praktický e-book potřebuje víc než obsah. Potřebuje čtenářské trasy. Obsah říká, co v dokumentu je. Trasa říká, kudy má člověk jít, když řeší konkrétní situaci a nemá chuť stát před dvaceti pěti tisíci řádky textu jako před regálem bez štítků.
+
+Rozcestník není marketingová dekorace. Je to navigační nástroj, který snižuje tření mezi problémem čtenáře a použitelnou částí rukopisu. Když někdo přijde s otázkou "potřebujeme opravit web", nemá začínat tím, že bude luštit celou strukturu e-booku. Má dostat krátkou trasu: přečti toto, použij tento checklist, udělej tento výstup, vrať se k těmto přílohám.
+
+Dobrá čtenářská trasa má čtyři části:
+
+1. Situace: proč sem čtenář přišel.
+2. Doporučené části: kapitoly a přílohy, které dávají smysl číst jako první.
+3. Pracovní výstup: co má po průchodu vzniknout.
+4. Stop pravidlo: kde přestat číst a začít dělat.
+
+Bez stop pravidla se e-book snadno změní v nekonečnou přípravu. Čtení má vést k práci, ne nahrazovat práci.
+
+### 1. Trasa: opravit web, který nepřináší kvalitní poptávky
+
+Tato trasa je pro tým, který už má web, ale není jasné, jestli pomáhá obchodu. Typický signál: lidé chodí na stránky, ale poptávky jsou slabé, nekvalifikované nebo žádné. Další signál: obchodní tým musí pořád vysvětlovat základní věci, které by měl web zvládnout před prvním hovorem.
+
+Doporučený průchod:
+
+1. Kapitola 2: Jak poznat dobrý web.
+2. Kapitola 5: Obsahová architektura.
+3. Kapitola 28: Prodejní web.
+4. Kapitola 30: Checklist pro nový web.
+5. Příloha E: Kvalifikační dotazník.
+6. Příloha C: Workshop první praktické iterace.
+
+Pracovní výstup:
+
+```text
+Hlavní cílový segment:
+Nejčastější důvod návštěvy:
+Hlavní stránka nebo stránka služby:
+Co má návštěvník pochopit do 10 sekund:
+Hlavní důkaz důvěry:
+Primární další krok:
+Tři největší tření:
+Jedna změna na tento týden:
+```
+
+Stop pravidlo: jakmile máte jednu stránku, jeden segment, tři tření a jednu změnu na tento týden, přestaňte číst. Udělejte změnu, otestujte ji na mobilu a po týdnu se vraťte k dalšímu checklistu.
+
+Codyho komentář: největší chyba u opravy webu je snaha opravit všechno najednou. Výsledek bývá nový chaos ve vyšším rozlišení. Začněte jednou důležitou stránkou a jednou měřitelnou akcí.
+
+### 2. Trasa: připravit SaaS MVP bez nafouknutého rozsahu
+
+Tato trasa je pro zakladatele, produktový tým nebo agenturu, která má nápad na SaaS a potřebuje z něj udělat první ověřitelnou verzi. Cílem není napsat kompletní specifikaci na rok vývoje. Cílem je rozhodnout, co musí existovat, aby šlo ověřit hodnotu, rizika a ochotu používat produkt.
+
+Doporučený průchod:
+
+1. Kapitola 8: Kdy web nestačí a začíná aplikace.
+2. Kapitola 9: MVP bez iluzí.
+3. Kapitola 10: SaaS architektura.
+4. Kapitola 11: Datový model jako produktové rozhodnutí.
+5. Kapitola 17: Onboarding.
+6. Kapitola 31: Checklist pro SaaS MVP.
+7. Příloha AJ: Pilot produktizované služby pro první zákazníky, pokud MVP vzniká jako placený pilot.
+
+Pracovní výstup:
+
+```text
+Segment:
+Konkrétní workflow:
+Uživatelé a role:
+Data, která opravdu potřebujeme:
+Aktivační událost:
+Co záměrně není v MVP:
+Pilotní zákazníci:
+Riziko, které ověřujeme jako první:
+Rozhodnutí po pilotu:
+```
+
+Stop pravidlo: když neumíte jednou větou popsat aktivační událost, nepište další features. Vraťte se k problému a workflow. SaaS bez jasné první hodnoty je jen databáze s loginem a optimismem.
+
+Privacy-first poznámka: u MVP je lákavé sbírat "raději všechno, kdyby se to hodilo". Nedělejte to. Minimální datový model není jen levnější na vývoj. Je také lépe vysvětlitelný zákazníkovi, bezpečnější při pilotu a jednodušší na pozdější audit.
+
+### 3. Trasa: postavit marketingový systém bez závislosti na platformách
+
+Tato trasa je pro tým, který publikuje nahodile, měří hlavně dosah a neumí říct, co marketing skutečně zlepšuje. Cílem není vyrábět víc obsahu. Cílem je vytvořit systém, který odpovídá na otázky zákazníků, vede je k dalšímu kroku a zůstává pod kontrolou firmy.
+
+Doporučený průchod:
+
+1. Kapitola 22: Marketing bez kouřové clony.
+2. Kapitola 23: Obsahový marketing pro SaaS a služby.
+3. Kapitola 24: SEO a AI vyhledávání.
+4. Kapitola 25: Lead generation.
+5. Kapitola 26: E-mail, newslettery a RSS.
+6. Kapitola 27: Sociální sítě bez závislosti na algoritmu.
+7. Kapitola 36: Šablona marketingového plánu.
+8. Příloha M: Distribuční plán pro e-book bez závislosti na platformách.
+
+Pracovní výstup:
+
+```text
+Primární segment:
+Tři otázky před nákupem:
+Obsahový pilíř 1:
+Obsahový pilíř 2:
+Obsahový pilíř 3:
+Vlastní kanály:
+Podpůrné platformy:
+Signály kvality:
+Co přestaneme dělat:
+```
+
+Stop pravidlo: pokud po průchodu vznikne víc než tři obsahové pilíře, vraťte se zpět. Malý tým nepotřebuje mapu celého internetu. Potřebuje několik témat, která umí dlouhodobě vysvětlovat lépe než konkurence.
+
+Privacy-first poznámka: vlastní web, RSS, přímé odkazy a rozumně nastavený e-mail jsou stabilnější než honba za každým trendem v sociálních sítích. Platformy používejte jako distribuční vrstvu, ne jako místo, kde žije jediná kopie hodnotného obsahu.
+
+### 4. Trasa: zkontrolovat privacy-first provoz a datovou stopu
+
+Tato trasa je pro tým, který chce vědět, kde jsou data, kdo k nim má přístup a jestli nástroje odpovídají hodnotám firmy. Není určená jen právníkům. Je pro každého, kdo rozhoduje o webu, produktu, analytice, formulářích, supportu nebo integracích.
+
+Doporučený průchod:
+
+1. Kapitola 7: Privacy-first web.
+2. Kapitola 12: Integrace, API a automatizace.
+3. Kapitola 14: Bezpečnost a provoz.
+4. Kapitola 32: Checklist pro privacy-first analytiku.
+5. Příloha G: Šablona datové mapy.
+6. Příloha AS: Dodavatelská hygiena.
+7. Příloha BK: Ověření faktů a zdrojů před publikací, pokud komunikujete právní nebo regulační tvrzení.
+
+Pracovní výstup:
+
+```text
+Kritické datové toky:
+Externí skripty na webu:
+Analytika:
+Formuláře:
+Support nástroje:
+Dodavatelé s přístupem k datům:
+Retence:
+Nejbližší cleanup:
+Vlastník datové mapy:
+```
+
+Stop pravidlo: nesnažte se první den vyřešit celou organizaci. Najděte jeden tok s největším rizikem nebo největším provozním dopadem, například formuláře, analytiku nebo support. Ten zmapujte, zpřesněte a teprve potom pokračujte dál.
+
+Codyho komentář: privacy-first není samolepka do patičky. Je to schopnost odpovědět na nepříjemně jednoduchou otázku: "Kde přesně jsou naše data a proč?" Pokud odpověď zní "asi v nějakém nástroji", máme práci.
+
+### 5. Trasa: použít e-book při workshopu se zákazníkem
+
+Tato trasa je pro konzultanta, agenturu nebo interního facilitátora. E-book nemá být poslaný zákazníkovi jako domácí úkol s přáním hodně štěstí. Má sloužit jako zdroj pracovních šablon, otázek a rozhodovacích rámců.
+
+Doporučený průchod:
+
+1. Příloha AC: Workshopový balíček pro použití e-booku se zákazníkem.
+2. Příloha E: Kvalifikační dotazník.
+3. Příloha C: Workshop první praktické iterace.
+4. Příloha H: Rozhodovací log.
+5. Příloha AL: Předávací balíček po auditu, MVP nebo produktizované službě.
+6. Relevantní kapitoly podle tématu workshopu.
+
+Pracovní výstup:
+
+```text
+Cíl workshopu:
+Účastníci:
+Rozhodnutí, které musí vzniknout:
+Vstupy před workshopem:
+Použité kapitoly a přílohy:
+Výstup pro zákazníka:
+Interní výstup:
+Další krok:
+Co nebudeme řešit:
+```
+
+Stop pravidlo: workshop má mít jedno hlavní rozhodnutí. Pokud agenda obsahuje deset cílů, není ambiciózní. Je rozbitá. Vraťte se k otázce, jaké rozhodnutí musí po setkání existovat.
+
+Privacy-first poznámka: pro zákaznický workshop oddělte interní poznámky od sdíleného výstupu. Ne všechno, co tým potřebuje vědět pro práci, má být součástí veřejného dokumentu. A už vůbec ne osobní nebo provozně citlivé detaily, které nemají jasný účel.
+
+### 6. Trasa: udržovat e-book jako živý systém
+
+Tato trasa je pro vlastníka rukopisu. Jakmile je e-book publikovaný, práce nekončí. Začne údržba: oprava nejasností, aktualizace zdrojů, zkracování duplicit, přidávání výřezů, sledování zpětné vazby a rozhodování, co nechat být.
+
+Doporučený průchod:
+
+1. Příloha N: Aktualizační protokol.
+2. Příloha AH: Redakční board.
+3. Příloha BK: Ověření faktů a zdrojů před publikací.
+4. Příloha BL: Zdrojová knihovna.
+5. Příloha BM: Revizní kalendář.
+6. Příloha BN: Čtenářský test veřejné verze.
+7. Příloha X: Verze, changelog a archiv.
+
+Pracovní výstup:
+
+```text
+Aktuální verze:
+Nejbližší revizní okno:
+Tři části s nejvyšším rizikem stárnutí:
+Zpětná vazba k vyřízení:
+Zdrojové karty k ověření:
+Rozhodnutí pro další verzi:
+Co zůstává mimo rozsah:
+Veřejná poznámka ke změnám:
+```
+
+Stop pravidlo: každá revize má skončit rozhodnutím o konkrétní verzi. Buď změnu vydáte, odložíte, nebo odmítnete. Nenechávejte poznámky v neurčitém stavu "někdy se k tomu vrátíme", protože "někdy" je v redakční práci elegantní název pro skládku.
+
+### 7. Jak rozcestník umístit do veřejné verze
+
+Rozcestník má být vidět dřív než dlouhý obsah. Prakticky může být hned za úvodem e-booku nebo jako samostatná webová stránka vedle kapitoly s obsahem.
+
+Minimální struktura veřejného rozcestníku:
+
+```text
+Co právě řešíte?
+
+1. Potřebujeme opravit web.
+   Začněte kapitolami 2, 5, 28 a checklistem 30.
+
+2. Stavíme SaaS MVP.
+   Začněte kapitolami 8, 9, 10, 11, 17 a checklistem 31.
+
+3. Chceme zlepšit marketing.
+   Začněte kapitolami 22 až 27 a šablonou 36.
+
+4. Řešíme data, analytiku a privacy-first provoz.
+   Začněte kapitolami 7, 12, 14, 32 a přílohou G.
+
+5. Chceme e-book použít se zákazníkem.
+   Začněte přílohou AC, E, C, H a AL.
+
+6. Udržujeme e-book nebo playbook po publikaci.
+   Začněte přílohami N, AH, BK, BL, BM, BN a X.
+```
+
+Každá trasa by měla mít odkaz na první krok a očekávaný výstup. Nestačí jen vypsat názvy kapitol. Čtenář musí vědět, proč je má otevřít a kdy má přestat.
+
+### 8. Checklist přílohy
+
+- Má veřejná verze e-booku rozcestník podle situací čtenáře, ne jen obsah podle kapitol?
+- Má každá trasa jasnou situaci, doporučené části, pracovní výstup a stop pravidlo?
+- Jsou trasy krátké natolik, aby je šlo projít během jednoho pracovního bloku?
+- Pomáhá rozcestník lidem najít první praktický krok bez znalosti interní struktury Dreamindu?
+- Oddělujete trasy pro web, SaaS, marketing, privacy-first provoz, zákaznický workshop a údržbu rukopisu?
+- Má každá trasa jeden konkrétní výstup, který lze po průchodu ukázat týmu?
+- Nevede žádná trasa k tomu, že čtenář musí přečíst celý e-book před první akcí?
+- Jsou privacy-first poznámky napojené na obchodní a provozní hodnotu, ne schované jako právní dovětek?
+- Umíte po čtenářském testu upravit rozcestník bez přepisování celého rukopisu?
+- Je rozcestník umístěný dost vysoko, aby ho lidé našli před tím, než se ztratí?
+
+Rozcestník je malá věc s velkým dopadem. Když funguje, e-book přestane být "dlouhý dokument" a začne být pracovní nástroj pro různé situace. A to je přesně směr, kterým má takový materiál růst.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -25453,3 +25700,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BL se zdrojovou knihovnou pro e-book a navazující obsah: karty zdrojů, rizikovost, veřejné a interní zdroje, citovatelné výřezy a revizní workflow.
 - 2026-05-09: Doplněna Příloha BM s revizním kalendářem pro dlouhodobě živý e-book: rychlost stárnutí obsahu, typy revizí, měsíční šablona, rozhodnutí po kontrole a privacy-first revizní pravidla.
 - 2026-05-09: Doplněna Příloha BN s čtenářským testem veřejné verze e-booku: testovací úkoly, výběr testerů, scénář, signály použitelnosti, převod zpětné vazby do rozhodnutí a privacy-first pravidla.
+- 2026-05-09: Doplněna Příloha BO s čtenářskými trasami a rozcestníky pro veřejnou verzi e-booku: trasy pro web, SaaS MVP, marketing, privacy-first provoz, zákaznický workshop a dlouhodobou údržbu.
