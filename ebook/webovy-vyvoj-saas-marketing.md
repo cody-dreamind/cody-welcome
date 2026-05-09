@@ -25506,6 +25506,223 @@ Každá trasa by měla mít odkaz na první krok a očekávaný výstup. Nestač
 
 Rozcestník je malá věc s velkým dopadem. Když funguje, e-book přestane být "dlouhý dokument" a začne být pracovní nástroj pro různé situace. A to je přesně směr, kterým má takový materiál růst.
 
+## Příloha BP: Landing page pro veřejnou verzi e-booku
+
+Veřejná landing page e-booku nemá být past na e-mail. Má být rychlý vstup do praktického materiálu. Člověk přijde z odkazu, článku, doporučení, RSS nebo obchodního follow-upu a potřebuje během pár sekund pochopit tři věci: co e-book řeší, pro koho je a kde má začít.
+
+Pokud je e-book dlouhý, landing page musí fungovat jako editor. Neříká všechno. Vybere, seřadí a nabídne cestu. Když se první obrazovka snaží prodat celý obsah najednou, vznikne textová výkladní skříň, ve které se nikdo nechce hrabat. Lepší je ukázat jasný slib, několik čtenářských situací a férový přístup ke stažení nebo čtení.
+
+Landing page má čtyři cíle:
+
+1. Vysvětlit praktickou hodnotu e-booku bez přehánění.
+2. Dovést různé čtenáře na správnou trasu.
+3. Nabídnout čtení, PDF a navazující šablony bez nátlaku.
+4. Měřit užitečnost privacy-first způsobem, ne sbírat data pro radost z tabulky.
+
+### 1. První obrazovka: jasný slib a žádná mlha
+
+Hero sekce má být konkrétní. Ne "komplexní digitální průvodce pro moderní firmy", protože to může znamenat skoro cokoli. Lepší je říct, že jde o praktický e-book pro týmy, které chtějí zlepšit web, připravit SaaS MVP, zpřesnit marketing a držet kontrolu nad daty v Evropě.
+
+Minimální obsah první obrazovky:
+
+- Název e-booku.
+- Jedna věta, co pomůže rozhodnout nebo udělat.
+- Pro koho je určený.
+- Hlavní akce: číst online.
+- Vedlejší akce: stáhnout PDF nebo otevřít čtenářské trasy.
+- Krátká privacy poznámka: žádný povinný newsletter, žádné zbytečné trackery.
+
+Příklad:
+
+```text
+Od webu k SaaS
+
+Praktický český e-book pro malé týmy, které chtějí stavět weby, SaaS produkty a marketing tak, aby jim vznikal použitelný obchodní systém, ne jen hezká digitální kulisa.
+
+[Číst online] [Vybrat čtenářskou trasu] [Stáhnout PDF]
+
+Bez povinného e-mailu. Vlastní web, přímé odkazy, minimum měření.
+```
+
+Tato sekce nesmí slibovat víc, než text doručí. Pokud e-book není právní příručka, landing page nemá naznačovat, že vyřeší právní jistotu. Pokud je to praktický pracovní materiál, má to říct přímo.
+
+### 2. Čtenářské trasy patří vysoko
+
+U dlouhého e-booku je čtenářská trasa často důležitější než klasický obsah. Obsah ukazuje rozsah. Trasa ukazuje rozhodnutí. Proto by na landing page měly být situace čtenáře viditelné brzy, ideálně hned po úvodním slibu.
+
+Praktická sada tras:
+
+- Potřebuji opravit web, který nepřináší kvalitní poptávky.
+- Připravuji SaaS MVP a nechci nafouknout rozsah.
+- Chci postavit marketingový systém bez závislosti na platformách.
+- Chci zkontrolovat privacy-first provoz a datovou stopu.
+- Chci e-book použít v zákaznickém workshopu.
+- Chci udržovat e-book, šablony nebo playbook po publikaci.
+
+Každá karta trasy má mít stejnou strukturu:
+
+```text
+Situace:
+Pro koho:
+Začněte zde:
+Výstup po 60-90 minutách:
+Stop pravidlo:
+```
+
+Příklad karty:
+
+```text
+Situace: Web nepřináší kvalitní poptávky
+Pro koho: majitel, marketing nebo obchodní tým
+Začněte zde: kapitola 2, kapitola 5, kapitola 28, checklist 30
+Výstup: jedna prioritní stránka, tři tření, jeden další krok
+Stop pravidlo: po výběru jedné změny přestaňte číst a upravte stránku
+```
+
+To je užitečnější než karta s textem "Kapitoly o webu". Čtenář nepotřebuje obdivovat rozsah. Potřebuje se pohnout.
+
+### 3. Nabídněte více formátů, ale držte jeden zdroj pravdy
+
+Veřejná verze může mít několik podob:
+
+- webová verze pro čtení, odkazy a vyhledávání,
+- PDF pro offline použití a sdílení,
+- samostatné šablony pro workshop, audit nebo plán,
+- krátký seriál článků pro postupné čtení,
+- changelog pro významné aktualizace.
+
+To ale neznamená, že má vzniknout pět samostatně udržovaných obsahů. Jeden zdroj pravdy musí zůstat jasný. Pokud je hlavní rukopis Markdown v repozitáři, webová verze, PDF a šablony mají vznikat z něj nebo z explicitně označených výřezů. Jinak se po třech aktualizacích začne lišit kapitola, PDF, landing page a sales materiál. A někdo pak bude s vážnou tváří tvrdit, že "to jen rychle sjednotí". Nesjednotí. Bude to výlet do sklepa s baterkou.
+
+Pravidlo:
+
+- Landing page popisuje e-book a směruje na čtení.
+- Webová verze je primární veřejná verze.
+- PDF je export označený datem nebo verzí.
+- Šablony jsou pracovní výřezy s odkazem na původní kapitolu.
+- Changelog říká, co se změnilo v publikované verzi.
+
+### 4. Sociální důkaz bez přehnané teatrálnosti
+
+E-book může mít důkazy důvěry i bez log cizích firem a bez nafouknutých tvrzení. U pracovního materiálu často fungují lépe konkrétní ukázky než obecné pochvaly.
+
+Na landing page můžete použít:
+
+- ukázku checklistu,
+- krátký výřez z kapitoly,
+- anonymizovaný příklad výstupu z workshopu,
+- seznam situací, ve kterých e-book pomáhá,
+- informaci o průběžných aktualizacích,
+- odkaz na veřejný changelog,
+- jasné autorství: Cody, AI asistent od Dreamindu.
+
+Slabý důkaz:
+
+```text
+Kompletní návod pro digitální růst.
+```
+
+Silnější důkaz:
+
+```text
+Každá kapitola končí checklistem. Přílohy obsahují šablony pro audit webu, SaaS MVP, marketingový plán, privacy-first analytiku, předání projektu a revize po publikaci.
+```
+
+To není pompézní. Je to ověřitelné. A ověřitelnost je pro důvěru lepší než velké slovo napsané velkým fontem.
+
+### 5. Formulář není povinná vstupenka
+
+Pokud má e-book nést privacy-first hodnotu, landing page nesmí začít tím, že zamkne užitečný obsah za formulář. E-mailový odběr může existovat, ale jako volitelná možnost, ne jako mýtná brána.
+
+Férové varianty:
+
+- Číst online bez formuláře.
+- Stáhnout PDF bez formuláře nebo s jasně volitelným odběrem aktualizací.
+- Nabídnout RSS pro aktualizace e-booku.
+- Nabídnout přímý odkaz na changelog.
+- Nabídnout kontakt pro workshop odděleně od odběru.
+
+Pokud přidáte formulář pro zpětnou vazbu, držte ho krátký:
+
+```text
+Která část vám pomohla?
+Co chybí nebo je nejasné?
+Můžeme vás kontaktovat kvůli doplnění? E-mail volitelně.
+```
+
+Vedle formuláře napište, co se s odpovědí stane. Například: "Použijeme ji jen k úpravě e-booku. Nepřidáme vás do newsletteru bez samostatného souhlasu." Tohle není právnický román. Je to obyčejná slušnost v produktovém rozhraní.
+
+### 6. Privacy-first měření landing page
+
+Landing page potřebuje měření, ale ne sledovací aparát. Cíl není vědět, co každý člověk četl v půl jedenácté večer. Cíl je zjistit, jestli stránka pomáhá lidem vybrat správnou cestu.
+
+Měřte hlavně agregované signály:
+
+- zobrazení landing page,
+- kliknutí na čtení online,
+- kliknutí na jednotlivé čtenářské trasy,
+- stažení PDF,
+- otevření changelogu,
+- odeslanou zpětnou vazbu,
+- kliknutí na RSS nebo přímý odběr aktualizací.
+
+Neměřte bez dobrého důvodu:
+
+- individuální čtenářské profily,
+- detailní heatmapy,
+- přehrávání relací,
+- enrichment návštěvníků podle firmy,
+- automatické přidávání do reklamních publik.
+
+Praktická otázka před každým eventem: jaké rozhodnutí díky tomu uděláme? Pokud odpověď zní "bude to zajímavé", event nepotřebujete. Zajímavost je drahá metrika. Často se platí rychlostí, soukromím a pozorností týmu.
+
+### 7. SEO a sdílení bez honby za triky
+
+Landing page má být dohledatelná a sdílitelná. To nevyžaduje SEO akrobacii. Vyžaduje jasný title, popis, čitelné URL, nadpisy, interní odkazy a obrázek pro sdílení.
+
+Praktické minimum:
+
+- URL typu `/ebook/webovy-vyvoj-saas-marketing/`.
+- Title s názvem e-booku a tématem.
+- Meta description, která říká pro koho materiál je.
+- H1 shodný s hlavním názvem e-booku.
+- Odkazy na webovou verzi, PDF, trasy, changelog a RSS.
+- Náhledový obrázek, který nepůsobí jako generická stock grafika.
+- Viditelné datum poslední aktualizace.
+
+Příklad title:
+
+```text
+Od webu k SaaS: český e-book o webu, SaaS a privacy-first marketingu
+```
+
+Příklad meta description:
+
+```text
+Praktický e-book od Codyho z Dreamindu: webový vývoj, SaaS MVP, marketing, produktivita, provoz v Evropě, checklisty a pracovní šablony.
+```
+
+Neslibujte "kompletní návod na všechno". Kompletismus je podezřelý sport. Slibte praktický materiál, který pomáhá rozhodovat a dělat další krok.
+
+### 8. Redakční checklist landing page
+
+Před publikací projděte stránku jako člověk, který e-book nezná:
+
+- Je do deseti sekund jasné, co e-book řeší?
+- Je jasné, pro koho je a pro koho není?
+- Je hlavní akce číst online, ne odevzdat e-mail?
+- Jsou čtenářské trasy viditelné brzy?
+- Má každá trasa situaci, doporučený začátek, výstup a stop pravidlo?
+- Je PDF označené verzí nebo datem exportu?
+- Odkazuje landing page na changelog a RSS nebo jiný přímý způsob aktualizací?
+- Neobsahuje stránka zbytečné externí skripty, embedy nebo trackery?
+- Měří analytika jen signály, podle kterých opravdu něco rozhodnete?
+- Je formulář zpětné vazby volitelný, krátký a srozumitelný?
+- Jsou veřejné formulace opatrné u právních, bezpečnostních a aktuálních tvrzení?
+- Dá se stránka pohodlně použít na mobilu?
+- Fungují odkazy na kapitoly, přílohy, PDF a šablony?
+
+Landing page je první pracovní rozhraní e-booku. Když je dobrá, čtenář nemusí obcházet dokument jako neoznačenou budovu. Ví, kudy dovnitř, co si vzít a kdy začít pracovat. Přesně o to tady jde.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -25701,3 +25918,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BM s revizním kalendářem pro dlouhodobě živý e-book: rychlost stárnutí obsahu, typy revizí, měsíční šablona, rozhodnutí po kontrole a privacy-first revizní pravidla.
 - 2026-05-09: Doplněna Příloha BN s čtenářským testem veřejné verze e-booku: testovací úkoly, výběr testerů, scénář, signály použitelnosti, převod zpětné vazby do rozhodnutí a privacy-first pravidla.
 - 2026-05-09: Doplněna Příloha BO s čtenářskými trasami a rozcestníky pro veřejnou verzi e-booku: trasy pro web, SaaS MVP, marketing, privacy-first provoz, zákaznický workshop a dlouhodobou údržbu.
+- 2026-05-09: Doplněna Příloha BP s návrhem landing page pro veřejnou verzi e-booku: první obrazovka, čtenářské trasy, formáty, formuláře, privacy-first měření, SEO minimum a publikační checklist.
