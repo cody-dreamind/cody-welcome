@@ -24477,6 +24477,201 @@ Dobrá knihovna výřezů nedělá z obsahu munici pro spam. Dělá z něj spole
 - Měříte jen agregované signály, které vedou k rozhodnutí?
 - Umíte říct, které výřezy opravdu pomohly v práci, ne jen které vypadají dobře?
 
+## Příloha BK: Ověření faktů a zdrojů před publikací
+
+Dlouhý e-book začne být nebezpečný ve chvíli, kdy obsahuje dobré rady smíchané s neověřenými tvrzeními. Čtenář často nepozná rozdíl mezi praktickou zkušeností, právní povinností, benchmarkem, trendem, cenou nástroje a Codyho komentářem. Autor ho poznat musí. Jinak se z užitečného materiálu stane sebevědomý generátor polopravd. A těch má internet dost, díky, máme plno.
+
+Kontrola faktů není akademická otrava na konec. Je to provozní vrstva publikování. U webového vývoje, SaaS, marketingu a privacy-first provozu se některé věci mění rychle: regulace, platformní pravidla, ceny nástrojů, API limity, dostupnost funkcí, technické standardy i interpretace dobré praxe. Pokud má e-book pomáhat při rozhodování, musí být jasné, která tvrzení jsou stabilní principy a která vyžadují pravidelnou revizi.
+
+### 1. Rozdělte tvrzení podle rizika
+
+Před publikací neověřujte všechno stejnou silou. Věta "homepage má rychle vysvětlit hodnotu" nepotřebuje stejný režim jako věta o právních povinnostech při zpracování osobních údajů. Praktický postup je projít text a označit tvrzení jedním ze čtyř štítků.
+
+Nízké riziko:
+
+- řemeslné doporučení,
+- názor označený jako Codyho komentář,
+- interní metodika,
+- checklist bez právního nebo číselného tvrzení.
+
+Střední riziko:
+
+- doporučení ke konkrétním nástrojům,
+- technický postup závislý na verzi frameworku nebo služby,
+- obecné tvrzení o chování uživatelů,
+- marketingový trend bez číselného benchmarku.
+
+Vysoké riziko:
+
+- právní povinnost,
+- bezpečnostní doporučení s dopadem na ochranu dat,
+- tvrzení o cenách, limitech, dostupnosti regionů nebo funkcí,
+- benchmark výkonu, konverze, retence, CAC, LTV nebo paybacku.
+
+Kritické riziko:
+
+- rady k incidentům, únikům dat, souhlasu, cookies, profilování, AI systému nebo přeshraničnímu předávání dat,
+- tvrzení, které může čtenáře vést k porušení smlouvy, zákona nebo bezpečnostního standardu,
+- doporučení, které by mohlo poškodit zákazníky, pokud je zastaralé.
+
+U nízkého rizika stačí redakční kontrola. U středního rizika stačí jeden dobrý zdroj nebo jasné označení názoru. U vysokého a kritického rizika musí být zdroj primární, aktuální a dohledatelný.
+
+### 2. Používejte zdrojovou kartu
+
+Každý důležitý zdroj má mít malou kartu. Ne kvůli byrokracii, ale proto, aby se za tři měsíce dalo poznat, co přesně zdroj podporoval.
+
+Šablona:
+
+```text
+ID zdroje:
+Název:
+URL:
+Vydavatel / autorita:
+Datum publikace nebo poslední kontroly:
+Použito pro tvrzení:
+Typ tvrzení: právní / technické / produktové / tržní / metodické
+Riziko zastarání: nízké / střední / vysoké
+Datum další kontroly:
+Poznámka:
+```
+
+Příklad:
+
+```text
+ID zdroje: SRC-GDPR-PRINCIPLES
+Název: Data protection explained
+URL: https://commission.europa.eu/law/law-topic/data-protection/data-protection-explained_en
+Vydavatel / autorita: European Commission
+Datum kontroly: 2026-05-09
+Použito pro tvrzení: GDPR principy, práva subjektů údajů, vztah k osobním údajům
+Typ tvrzení: právní
+Riziko zastarání: střední
+Datum další kontroly: před veřejným vydáním a potom kvartálně
+Poznámka: Pro konkrétní právní závěr ověřit ještě lokální výklad nebo právníka.
+```
+
+Důležité je nepoužívat zdroj jako talisman. Odkaz na autoritativní stránku neznamená, že z ní můžete odvodit libovolný závěr. Karta má říct, které tvrzení zdroj skutečně podpírá.
+
+### 3. Právní a regulační tvrzení pište opatrně
+
+Privacy-first e-book se právu nevyhne, ale nemá předstírat, že je právní kancelář. U GDPR, cookies, zpracovatelů, souhlasu, automatizovaného rozhodování nebo AI Actu pište prakticky, ale s jasnou hranicí.
+
+Bezpečný styl:
+
+- "Před nasazením nástroje si ověřte, jaká osobní data zpracovává, kde jsou uložena a kdo je zpracovatel."
+- "U souhlasu kontrolujte, zda je konkrétní, informovaný a odvolatelný."
+- "U AI funkcí si zapište účel, vstupní data, výstup, rizika a lidskou kontrolu."
+
+Rizikový styl:
+
+- "Tento typ cookies nikdy nepotřebuje souhlas."
+- "Tahle analytika je vždy GDPR-safe."
+- "AI Act se na malé SaaS týmy netýká."
+- "Stačí anonymizovat IP adresu a máte hotovo."
+
+První sada pomáhá rozhodovat. Druhá sada svádí ke zkratce. U právních témat je zkratka lákavá, ale drahá. Pokud je potřeba konkrétní závěr, patří do textu formulace typu "ověřte podle vlastního kontextu" a odkaz na primární zdroj.
+
+Užitečné primární vstupy pro evropský kontext:
+
+- European Commission: [Data protection explained](https://commission.europa.eu/law/law-topic/data-protection/data-protection-explained_en)
+- European Commission: [Information for individuals under GDPR](https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en)
+- European Commission: [What information must be given to individuals whose data is collected](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/principles-gdpr/what-information-must-be-given-individuals-whose-data-collected_en)
+- European Commission: [Can someone else process the data on my organisation's behalf?](https://commission.europa.eu/law/law-topic/data-protection/rules-business-and-organisations/obligations/controllerprocessor/can-someone-else-process-data-my-organisations-behalf_en)
+- European Commission: [AI Act overview](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai)
+
+### 4. Oddělte fakta, zkušenost a názor
+
+Čtenář potřebuje vědět, z čeho doporučení vychází. Jedna praktická kapitola může obsahovat tři různé typy sdělení:
+
+Fakt:
+
+```text
+GDPR pracuje s principy jako zákonnost, transparentnost, omezení účelu, minimalizace dat, omezení uložení, přesnost, integrita, důvěrnost a odpovědnost.
+Zdroj: European Commission, Data protection explained.
+```
+
+Zkušenost:
+
+```text
+V malých týmech bývá největší problém neexistující vlastník datové mapy, ne samotná tabulka.
+```
+
+Názor:
+
+```text
+Codyho komentář: pokud neumíte vysvětlit, proč data sbíráte, pravděpodobně je sbíráte ze zvyku.
+```
+
+Všechny tři typy jsou užitečné. Problém vzniká, když názor vypadá jako fakt nebo když fakt nemá zdroj. Dobré označení chrání autora i čtenáře.
+
+### 5. Kontrolujte stárnutí zdrojů
+
+Ne každý zdroj stárne stejně. Principy obsahu a dobré UX mohou vydržet roky. Ceny SaaS nástroje mohou být zastaralé za měsíc. Právní výklad může změnit rozhodnutí úřadu, nová metodika nebo novelizace. Technický návod může zestárnout s jedním major releasem.
+
+Praktický revizní rytmus:
+
+- Právní a regulační zdroje: kontrola před publikací a potom kvartálně.
+- Ceny, limity, regiony a produktové funkce: kontrola vždy před zveřejněním konkrétního tvrzení.
+- Technické návody: kontrola při každé větší aktualizaci frameworku, platformy nebo dependency.
+- Marketingové benchmarky: kontrola před použitím v prodejním textu.
+- Vlastní metodiky a checklisty: kontrola po každém větším projektu nebo retrospektivě.
+
+Do textu je lepší dát méně konkrétních čísel a více rozhodovacích pravidel. Pokud číslo není nutné pro rozhodnutí, často jen přidává budoucí údržbu. Když nutné je, musí mít zdroj a datum.
+
+### 6. Udělejte předpublikační průchod faktů
+
+Před veřejným vydáním projděte rukopis jako audit, ne jako čtení pro radost. Cílem není přepsat celý e-book. Cílem je odstranit nebezpečné neurčitosti.
+
+Postup:
+
+1. Vyexportujte seznam všech odkazů.
+2. Zkontrolujte, že odkazy fungují a vedou na očekávaný obsah.
+3. Označte právní, bezpečnostní, cenová, produktová a benchmarková tvrzení.
+4. Ke každému vysokorizikovému tvrzení přiřaďte primární zdroj.
+5. U tvrzení bez zdroje rozhodněte: doplnit zdroj, změkčit formulaci, přesunout do Codyho komentáře, nebo odstranit.
+6. Zkontrolujte, jestli žádný zdroj nepodporuje víc, než skutečně říká.
+7. U nástrojů zapište datum kontroly dostupnosti funkcí, regionu a ceny, pokud je zmiňujete.
+8. U právních tvrzení přidejte poznámku, že nejde o právní poradenství, pokud text míří k veřejné distribuci.
+9. Zapište výsledek do pracovního logu nebo veřejného changelogu podle povahy změny.
+
+Tento průchod je nudný přesně tak, jak má být. Nudná kontrola před publikací je levnější než sebevědomá oprava po publikaci.
+
+### 7. Privacy-first kontrola zdrojování
+
+I zdroje a měření odkazů mohou porušit privacy-first hodnotu. Pokud z e-booku děláte webovou verzi, neznamená to, že každý odkaz musí být obalený UTM parametry, redirectem a sledovacím skriptem. Čtenář nepotřebuje být stopován jen proto, že klikl na zdroj.
+
+Pravidla:
+
+- Preferujte přímé odkazy na primární zdroje.
+- Nepřidávejte osobní identifikátory do URL.
+- Nepoužívejte zkracovače odkazů, pokud nejsou nutné.
+- U interních zdrojů zveřejňujte jen to, co má být veřejné.
+- Pokud měříte kliky na zdroje, měřte agregovaně a vysvětlete proč.
+- Udržujte veřejný seznam aktualizací místo tichých změn právních nebo faktických tvrzení.
+
+Privacy-first zdrojování má ještě jednu výhodu: zvyšuje důvěryhodnost. Přímý odkaz na oficiální zdroj říká víc než marketingový redirect s parametry dlouhý jako účtenka z hobby marketu.
+
+### 8. Codyho komentář
+
+Můj pohled: dobrý e-book nemusí mít zdroj za každou větou. Musí ale být poctivý v tom, co ví, co si myslí a co si má čtenář ověřit podle svého kontextu. Nejhorší kombinace je sebevědomý tón a líné zdrojování. To vypadá dobře jen do chvíle, než podle toho někdo udělá rozhodnutí.
+
+Zdroje nejsou dekorace. Jsou to servisní dvířka textu. Když se něco pokazí, chcete je otevřít a zjistit, odkud tvrzení přišlo. Bez nich jen hádáte. A hádání je skvělé u tajenky, ne u privacy-first provozu SaaS produktu v Evropě.
+
+### Checklist přílohy
+
+- Jsou tvrzení rozdělena podle rizika?
+- Mají právní, bezpečnostní, cenová a benchmarková tvrzení zdroj?
+- Jsou primární zdroje preferované před blogy a shrnutími?
+- Je u každého důležitého zdroje jasné, které tvrzení podporuje?
+- Jsou názory označené jako Codyho komentář nebo jasně formulované jako pohled autora?
+- Neobsahuje text absolutní právní tvrzení bez kontextu?
+- Jsou ceny, limity, regiony a produktové funkce ověřené před publikací?
+- Existuje datum kontroly u zdrojů, které rychle stárnou?
+- Nejsou odkazy obalené zbytečným trackováním?
+- Je jasné, kdy se má zdroj znovu zkontrolovat?
+- Umíte tvrzení bez zdroje upravit, označit jako názor nebo odstranit?
+- Je výsledek faktické kontroly zapsaný do pracovního logu nebo changelogu?
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -24667,3 +24862,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-08: Doplněna Příloha BH o převodu e-booku do webové a PDF verze: zdroj pravdy, landing page, navigace podle práce čtenáře, privacy-first distribuce, exportní kontrola a oddělení šablon.
 - 2026-05-08: Doplněna Příloha BI o seriálu z e-booku bez tlakových funnelů: účel, trasy, díly s jedním rozhodnutím, RSS, veřejný archiv, privacy-first měření a checklist.
 - 2026-05-09: Doplněna Příloha BJ s knihovnou citovatelných výřezů z e-booku: typy výřezů, metadata, výběr, kanály použití, privacy-first pravidla, údržba a checklist.
+- 2026-05-09: Doplněna Příloha BK o ověření faktů a zdrojů před publikací: rizikovost tvrzení, zdrojové karty, právní a regulační odkazy, kontrola stárnutí zdrojů a privacy-first zdrojování.
