@@ -26388,6 +26388,198 @@ Dobrá údržba je trochu nudná. Má kalendář, vlastníka, changelog a stop p
 
 Měsíční ediční sprint dává veřejnému e-booku rytmus. Nehoní každou připomínku, ale ani nenechá text zapadat prachem. Jednou za měsíc vybere jednu důležitou změnu, vydá ji, zapíše proč a zkontroluje, že kvůli tomu nepřibylo zbytečné datové nebo provozní břemeno. To je přesně ten typ obyčejné disciplíny, který z obsahu dělá dlouhodobě použitelný produkt.
 
+## Příloha BT: Stop pravidla pro živý e-book
+
+Živý e-book potřebuje nejen rytmus přidávání, ale i pravidla pro zastavení. Jakmile má text veřejnou verzi, šablony, landing page, čtenářské trasy a distribuční výřezy, každá další změna může pomoci, ale také přidat šum. Stop pravidla chrání čtenáře před přebujelým obsahem a tým před tím, aby z údržby vznikl nekonečný vedlejší projekt.
+
+Stop pravidlo není negativní rozhodnutí. Je to způsob, jak říct: tahle změna nemá dostatečný důvod, nemáme pro ni kapacitu, nebo by zhoršila privacy-first hodnotu e-booku. Dospělý obsahový systém umí nejen publikovat, ale i nepřidat.
+
+Tato příloha slouží jako praktická brána před novou kapitolou, přílohou, šablonou, formulářem, měřením nebo distribučním kanálem.
+
+### 1. Kdy změnu zastavit
+
+Změnu zastavte nebo vraťte do backlogu, pokud platí některý z těchto signálů:
+
+- Neřeší konkrétní otázku čtenáře.
+- Opakuje už existující kapitolu jen jinými slovy.
+- Vznikla z jedné náhodné poznámky bez opakovaného signálu.
+- Vyžaduje nové měření, formulář nebo nástroj, ale nepřináší jasné rozhodnutí.
+- Přidává právní, cenové nebo nástrojové tvrzení, které tým neumí pravidelně revidovat.
+- Zhoršuje čtenářskou trasu tím, že přidá další rozcestník místo lepšího výběru.
+- Nemá vlastníka po vydání.
+- Nedá se vysvětlit jednou větou.
+
+Příklad: někdo navrhne novou přílohu o všech možných AI nástrojích pro marketing. To může znít užitečně, ale rychle stárne, vyžaduje neustálé ověřování a snadno sklouzne k seznamu nástrojů bez rozhodovací hodnoty. Lepší stop rozhodnutí: nepřidávat katalog nástrojů. Pokud se téma opakuje, doplnit raději krátký rozhodovací rámec: kdy AI nástroj vůbec zavádět, jak ověřit data, region, retenci a přínos.
+
+### 2. Rozdíl mezi podnětem a důvodem
+
+Podnět je něco, co se stalo. Důvod je vysvětlení, proč kvůli tomu měnit e-book.
+
+Podněty:
+
+- Jeden čtenář se ptal na nový pojem.
+- Obchodník chtěl kratší PDF pro follow-up.
+- Tým našel zajímavý trend na síti.
+- Vznikla nová interní šablona.
+
+Důvody:
+
+- Stejná nejasnost se objevila u více typů čtenářů.
+- Existující trasa brání dokončení konkrétního úkolu.
+- Chybějící část zhoršuje obchodní nebo delivery práci.
+- Právní nebo technické tvrzení už není bezpečné ponechat bez revize.
+- Kratší výřez nahradí opakované ruční vysvětlování.
+
+Praktické pravidlo: podnět patří do backlogu. Důvod patří do sprintu. Pokud tým neumí podnět převést na důvod, změna zatím nemá projít.
+
+### 3. Stop otázky před novou přílohou
+
+Před každou novou přílohou si položte osm otázek:
+
+1. Jakou konkrétní práci čtenáři usnadní?
+2. Kde v e-booku dnes tato práce selhává nebo chybí?
+3. Proč nestačí upravit existující kapitolu, checklist nebo rozcestník?
+4. Jaký je nejmenší užitečný výstup?
+5. Kdo bude část aktualizovat za měsíc nebo za kvartál?
+6. Obsahuje nová část rychle stárnoucí tvrzení?
+7. Přidává nová část datový tok, měření, formulář nebo externí nástroj?
+8. Co kvůli této změně záměrně neuděláme?
+
+Pokud odpověď na třetí otázku není jasná, nová příloha pravděpodobně není potřeba. Často stačí doplnit odstavec, příklad nebo odkaz do existující části. To je méně viditelné, ale čtenářsky lepší.
+
+Codyho komentář: přidat novou přílohu je lákavé, protože působí jako pokrok. Sloučit dvě nejasné části do jedné lepší je méně efektní, ale většinou užitečnější. Obsah není sbírka trofejí. Je to nástroj.
+
+### 4. Stop pravidla pro měření a formuláře
+
+Živý e-book může svádět k měření všeho: kdo otevřel PDF, kdo četl jakou kapitolu, kdo klikl na výřez, kdo se vrátil, kdo stáhl šablonu. Některé signály jsou užitečné. Mnoho z nich je jen zvědavost s technickým dluhem.
+
+Nové měření zastavte, pokud:
+
+- neumíte říct, jaké rozhodnutí podle něj uděláte,
+- vyžaduje identifikaci jednotlivce bez jasného důvodu,
+- posílá data do externí služby jen kvůli pohodlnému dashboardu,
+- vyžaduje cookie souhlas, ale přínos je slabý,
+- duplikuje existující agregovaný signál,
+- někdo ho navrhuje jen proto, že nástroj funkci nabízí.
+
+Nový formulář zastavte, pokud:
+
+- je potřeba jen kvůli distribuci obsahu, který může být dostupný přímým odkazem,
+- míchá běžnou zpětnou vazbu s marketingovým odběrem,
+- sbírá jméno, telefon nebo firmu dřív, než je to nutné,
+- nemá jasnou retenci a vlastníka,
+- zhoršuje přístupnost nebo použitelnost veřejné verze.
+
+Privacy-first výchozí volba: veřejný obsah je dostupný bez registrace. Zpětná vazba může být dobrovolná, krátká a oddělená od marketingu. Měření má být agregované a navázané na rozhodnutí, ne na sledování jednotlivců.
+
+### 5. Kdy místo přidání mazat
+
+Někdy je nejlepší iterace odstranění. Mazání je správné, pokud část:
+
+- opakuje stejné doporučení v horší formě,
+- odkazuje na zastaralý nástroj nebo proces,
+- vytváří falešný dojem právní jistoty,
+- má vysokou údržbu a nízké použití,
+- ruší hlavní čtenářskou trasu,
+- existuje jen proto, že kdysi dávala smysl v interním kontextu.
+
+Mazání nemusí znamenat ztrátu. Důležitou větu lze přesunout do relevantní kapitoly. Šablonu lze archivovat. Výřez lze ponechat interně. Veřejný e-book má držet to, co čtenáři pomáhá teď, ne všechno, co kdy tým vytvořil.
+
+Praktický zápis pro odstranění:
+
+```text
+Část:
+Příloha nebo sekce k odstranění:
+
+Důvod:
+Duplicitní, zastaralá, málo používaná, vysoká údržba, privacy riziko:
+
+Kam přesunout hodnotné části:
+
+Co aktualizovat:
+Interní odkazy, landing page, rozcestníky, pracovní log, archiv:
+
+Kontrola:
+Nevznikla rozbitá čtenářská trasa?
+```
+
+### 6. Rozhodnutí: přidat, upravit, sloučit, archivovat
+
+Každý větší podnět zařaďte do jedné ze čtyř kategorií:
+
+- Přidat: chybí celá pracovní pomůcka a existuje opakovaný důvod.
+- Upravit: existující část stačí, ale potřebuje zpřesnit příklad, jazyk nebo checklist.
+- Sloučit: dvě nebo více částí řeší podobnou situaci a čtenář mezi nimi ztrácí čas.
+- Archivovat: část už neslouží veřejné verzi, ale může zůstat v interní historii.
+
+Příklad rozhodnutí:
+
+```text
+Podnět:
+Čtenáři chtějí kratší verzi pro první obchodní hovor.
+
+Rozhodnutí:
+Upravit, nepřidávat.
+
+Proč:
+E-book už má sales enablement balíček a čtenářské trasy. Stačí doplnit krátký výřez "první hovor" a odkázat ho z landing page. Nová příloha by duplikovala existující obsah.
+
+Privacy-first kontrola:
+Nezavádíme formulář, tracking ani gated PDF. Výřez bude veřejná stránka nebo přímý odkaz.
+```
+
+Takové rozhodnutí je malé, ale důležité. Chrání strukturu a zároveň řeší potřebu.
+
+### 7. Stop karta
+
+Stop karta je krátký záznam, proč se změna nedělá. Hodí se hlavně u nápadů, které se budou vracet.
+
+```markdown
+# Stop karta
+
+Název nápadu:
+Datum:
+Navrhl:
+
+## Podnět
+Co změnu spustilo:
+
+## Proč teď ne
+- Čtenářská hodnota:
+- Náročnost:
+- Údržba:
+- Privacy-first dopad:
+- Riziko duplicity:
+
+## Co uděláme místo toho
+Menší úprava:
+Backlog:
+Archiv:
+Žádná akce:
+
+## Kdy se k tomu vrátit
+Spouštěč:
+Datum revize:
+Vlastník:
+```
+
+Stop karta nemá být hřbitov nápadů. Má zabránit tomu, aby se stejná diskuse vedla každé dva týdny znovu. Pokud se objeví nový důkaz, karta se může otevřít. Pokud ne, nápad zůstává mimo rozsah.
+
+### 8. Checklist přílohy
+
+- Umíte u navržené změny říct konkrétní čtenářskou práci?
+- Je jasné, proč nestačí upravit existující část?
+- Existuje opakovaný signál, nebo jde jen o jednorázový podnět?
+- Má změna vlastníka a revizní rytmus?
+- Nepřidává zbytečný formulář, měření nebo externí službu?
+- Neobsahuje rychle stárnoucí tvrzení bez plánu kontroly?
+- Zvažovali jste úpravu, sloučení nebo archivaci místo přidání?
+- Je privacy-first dopad zapsaný před rozhodnutím?
+- Má stopnutý nápad krátkou kartu, pokud se pravděpodobně vrátí?
+- Zůstává veřejná verze e-booku jednodušší pro čtenáře, ne jen bohatší pro tým?
+
+Stop pravidla jsou brzda, která chrání rychlost. Bez nich se živý e-book postupně zanese dobrými nápady, které dohromady vytvoří špatnou zkušenost. S nimi může tým každý měsíc zlepšovat text a zároveň si dovolit říct: tohle teď neděláme, protože čtenář potřebuje jasnost víc než další vrstvu.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -26587,3 +26779,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BQ s plánem prvního týdne po zveřejnění veřejné verze e-booku: operační karta, den nula kontrola, denní rytmus, scoreboard signálů, triage zpětné vazby a sedmidenní review.
 - 2026-05-09: Doplněna Příloha BR o rozhodnutí další verze po prvním týdnu: třídění signálů, typy iterací, rozhodovací karta, hranice rozsahu, privacy-first brána a checklist vydání.
 - 2026-05-09: Doplněna Příloha BS s měsíčním edičním sprintem veřejné verze: rozhodovací otázka, vstupy, průběh, šablona sprintu, kontrola stárnoucích témat, distribuce změny a checklist.
+- 2026-05-09: Doplněna Příloha BT se stop pravidly pro živý e-book: kdy změnu nepřidávat, jak rozlišit podnět od důvodu, kdy mazat nebo slučovat a jak držet privacy-first brzdu.
