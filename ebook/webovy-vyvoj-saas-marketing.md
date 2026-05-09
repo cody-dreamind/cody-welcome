@@ -27948,6 +27948,198 @@ Můj pohled: e-book už v této fázi nepotřebuje víc ambicí. Potřebuje lep�
 
 Dobrá release mapa nezaručí popularitu. Zaručí ale, že veřejná edice má konkrétní vstup, praktický slib a provozní disciplínu. To je lepší než vydat velký dokument s nadějí, že si každý nějak najde svoji cestu.
 
+## Příloha CC: Kanonická navigace a index veřejné edice
+
+Jakmile má e-book release mapu, přichází méně nápadná, ale hodně důležitá práce: udělat z dlouhého textu materiál, ve kterém se člověk neztratí. Dobrý obsah nestačí, když se k němu čtenář nedostane ve správný moment. Kanonická navigace je dohoda, odkud se do e-booku vstupuje, jaké jsou hlavní trasy, jak se pojmenovávají části a kde tým udržuje jeden zdroj pravdy pro odkazy.
+
+Není to jen UX detail. Je to provozní disciplína. Bez ní začne každý posílat jiný odkaz, v prezentacích zůstanou staré názvy, interní wiki bude odkazovat na archivní šablony a landing page se promění v seznam všeho, co "by se mohlo hodit". To je přesný okamžik, kdy užitečný e-book začne působit jako knihovna bez regálů.
+
+### 1. Určete kanonické vstupy
+
+Kanonický vstup je oficiální místo, kam má směřovat čtenář. Nemusí být jediné, ale musí být jasné, které odkazy jsou primární a které podpůrné.
+
+Praktické minimum:
+
+- hlavní landing page e-booku,
+- webová verze e-booku,
+- rozcestník podle čtenářských situací,
+- samostatná stránka se šablonami,
+- changelog nebo poznámka k aktualizacím,
+- RSS nebo jiný přímý odběr novinek.
+
+Každý vstup má mít vlastní práci. Landing page vysvětluje slib a pomáhá rozhodnout, jestli e-book otevřít. Webová verze slouží ke čtení. Rozcestník pomáhá vybrat trasu. Stránka šablon pomáhá pracovat. Changelog říká, co se změnilo. RSS dává možnost sledovat aktualizace bez závislosti na algoritmu nebo newsletterovém tlaku.
+
+Příklad:
+
+```text
+Kanonické vstupy
+
+Hlavní stránka:
+Účel: vysvětlit slib e-booku a nabídnout tři čtenářské trasy.
+
+Webová verze:
+Účel: čtení a odkazování na konkrétní kapitoly.
+
+Šablony:
+Účel: rychlé použití pracovních materiálů bez nutnosti číst celý e-book.
+
+Changelog:
+Účel: ukázat nové verze, významné změny a archiv.
+
+RSS:
+Účel: přímý odběr aktualizací bez platformové závislosti.
+```
+
+Když někdo v týmu neví, který odkaz poslat zákazníkovi, kanonická navigace selhala. Když to ví každý, e-book se používá konzistentněji a méně lidí musí vysvětlovat totéž ručně.
+
+### 2. Pojmenujte trasy podle práce čtenáře
+
+Trasa nemá být pojmenovaná podle interní struktury. "Část II a Příloha G" je dobrý údaj pro navigaci, ale špatný název pro člověka, který řeší problém. Trasa má odpovědět na situaci čtenáře.
+
+Lepší názvy:
+
+- Opravit web za jeden týden.
+- Udržet SaaS MVP pod kontrolou.
+- Zmapovat data a privacy-first provoz.
+- Připravit launch bez chaosu.
+- Převést e-book do zákaznického workshopu.
+
+Každá trasa by měla mít krátký blok:
+
+```markdown
+### Opravit web za jeden týden
+
+Pro koho:
+Malý tým, který má web, ale neumí z něj dostat kvalitní poptávky.
+
+Výsledek:
+Jedna opravená stránka, jasnější CTA, zkontrolovaný formulář a minimum měření pro další rozhodnutí.
+
+Použijte:
+- Kapitola 1: Proč web pořád rozhoduje
+- Kapitola 2: Jak poznat dobrý web
+- Kapitola 5: Obsahová architektura
+- Kapitola 28: Prodejní web
+- Kapitola 30: Checklist pro nový web
+
+První krok:
+Otevřete homepage na mobilu a napište jednu větu, co má návštěvník pochopit do deseti sekund.
+
+Co teď nedělat:
+Nezačínejte kompletním redesignem, dokud nevíte, která stránka a která akce jsou nejdůležitější.
+```
+
+Tenhle formát je záměrně krátký. Trasa není další kapitola. Je to navigační rozhodnutí.
+
+### 3. Vytvořte index podle situací, ne podle abecedy
+
+Abecední index je užitečný pro slovník. Pro pracovní e-book je lepší situační index. Čtenář obvykle nehledá heslo "aktivace". Hledá odpověď na "lidé se zaregistrují, ale nezačnou produkt používat".
+
+Situační index může vypadat takto:
+
+| Situace | Kam jít jako první | Praktický výstup |
+| --- | --- | --- |
+| Homepage nevysvětluje nabídku | Kapitoly 1, 2 a 28 | Přepsaná první obrazovka a jasné CTA |
+| Formuláře sbírají moc údajů | Kapitoly 7, 25 a 30 | Kratší formulář a účel každého pole |
+| MVP se nafukuje | Kapitoly 9, 10 a 31 | Oříznutý rozsah a aktivační událost |
+| Není jasné, co měřit | Kapitoly 19, 32 a příloha W | Rozhodovací dashboard |
+| Tým posílá zákazníkům různé materiály | Přílohy AD, BO a CC | Jednotné trasy a kanonické odkazy |
+| Nástroje se množí bez kontroly | Kapitoly 7, 14 a příloha AS | Dodavatelský registr a úklid přístupů |
+
+Tento index má být praktický, ne kompletní. Pokud má padesát řádků, čtenář zase jen hledá v seznamu. Začněte deseti nejčastějšími situacemi a přidávejte jen ty, které se v praxi opakují.
+
+### 4. Držte jeden zdroj pravdy pro odkazy
+
+U dlouhých materiálů se odkazy rychle rozjedou. Někde je starý slug, jinde přímý odkaz na PDF, někdo posílá pracovní dokument, někdo archivní verzi. Řešení není prosit tým, ať si dává pozor. Řešení je mít malou tabulku kanonických odkazů.
+
+Šablona:
+
+```markdown
+## Kanonické odkazy e-booku
+
+| Název | Kanonická URL | Účel | Kdo ji používá | Poznámka |
+| --- | --- | --- | --- | --- |
+| Landing page |  | Veřejný vstup | Marketing, sales, web | Hlavní odkaz pro nové čtenáře |
+| Webová verze |  | Čtení a citace | Všichni | Odkazy na kapitoly |
+| Šablony |  | Praktická práce | Delivery, sales, support | Jen aktuální veřejné šablony |
+| Changelog |  | Historie změn | Tým, vracející se čtenáři | Vysvětluje významné změny |
+| RSS |  | Přímý odběr | Čtenáři | Bez newsletterové povinnosti |
+```
+
+Tabulka nemusí být veřejná celá. Důležité je, aby tým věděl, odkud brát odkazy a kdy je změnit. Pokud se změní URL, nejdřív se aktualizuje kanonický seznam, potom landing page, interní materiály a až nakonec distribuční texty. Opačný postup vyrábí malé chaosy s dlouhou životností.
+
+### 5. Přidejte navigační pravidla pro tým
+
+Kanonická navigace funguje jen tehdy, když se používá. Proto pomáhá pár jednoduchých pravidel.
+
+Pravidla:
+
+- Novému čtenáři posílejte landing page, ne náhodnou přílohu.
+- Zákazníkovi po workshopu posílejte konkrétní trasu a šablonu, ne celý e-book bez kontextu.
+- Do veřejných příspěvků dávejte odkazy na kanonické URL, ne na pracovní dokumenty.
+- Pokud odkazujete na kapitolu, přidejte jednu větu, proč ji má člověk otevřít.
+- Staré PDF používejte jen jako archiv, ne jako hlavní distribuční formát.
+- Při změně názvu trasy zkontrolujte sales materiály, support odpovědi a interní wiki.
+
+Příklad špatného předání:
+
+```text
+Tady je náš e-book, mrkněte na něj.
+```
+
+Lepší předání:
+
+```text
+Pro váš aktuální problém dává smysl trasa "Udržet SaaS MVP pod kontrolou". Začněte kapitolou o MVP a potom vyplňte checklist pro SaaS MVP. Cílem není přečíst všechno, ale rozhodnout, co do první verze nepatří.
+```
+
+Druhá verze šetří čas oběma stranám. Čtenář ví, kde začít, a tým nemusí později vysvětlovat, proč někdo četl úplně jinou část.
+
+### 6. Privacy-first kontrola navigace
+
+Navigace může vypadat jako nevinná redakční věc, ale i tady vzniká datová stopa. Každý externí redirect, zkracovač odkazů, heatmapa, newsletterový mezikrok nebo platformový dokument přidává další místo, kde se něco sleduje nebo ukládá.
+
+Před zveřejněním navigace zkontrolujte:
+
+- Jsou hlavní odkazy na vlastní doméně?
+- Nepoužíváte zkracovače, které zbytečně sbírají kliky mimo vaši kontrolu?
+- Je e-book dostupný bez povinného účtu u třetí platformy?
+- Nevede trasa přes formulář, pokud člověk chce jen číst?
+- Umíte vysvětlit, jaké kliky měříte a proč?
+- Mají interní pracovní dokumenty oddělené odkazy od veřejných materiálů?
+- Neobsahují ukázkové trasy zákaznické detaily nebo interní názvy projektů?
+
+Codyho komentář: nejrychlejší cesta k privacy-first průšvihu je říct "to je jen odkaz". Odkaz často není jen odkaz. Může nést identifikátor kampaně, vést přes cizí redirect, otevřít dokument s přístupovým logem nebo prozradit interní strukturu. Není potřeba z toho dělat paranoiu, jen normální hygienu.
+
+### 7. Mini audit navigace za 30 minut
+
+Jednou za měsíc projděte navigaci krátkým auditem:
+
+1. Otevřete hlavní landing page jako nový čtenář.
+2. Vyberte jednu trasu a sledujte, jestli do tří kliknutí vede k praktickému kroku.
+3. Zkontrolujte, jestli názvy tras odpovídají aktuálnímu release mapě.
+4. Ověřte, že šablony vedou na aktuální verze.
+5. Najděte jeden starý nebo duplicitní odkaz a rozhodněte, jestli ho přesměrovat, opravit nebo archivovat.
+6. Zkontrolujte, jestli navigace nenutí čtenáře odevzdat data bez jasného důvodu.
+7. Zapište jednu změnu, kterou uděláte hned, a jednu větší věc do backlogu.
+
+Třicet minut stačí, pokud je audit opravdu úzký. Cílem není projít celý e-book. Cílem je zachytit, jestli se vstupní dveře nezačaly křivit.
+
+### Checklist přílohy
+
+- Má veřejná edice jasně určené kanonické vstupy?
+- Je zřejmé, kdy posílat landing page, webovou verzi, šablony, changelog nebo RSS?
+- Jsou čtenářské trasy pojmenované podle situace, ne podle interní struktury?
+- Má každá hlavní trasa popis pro koho je, výsledek, doporučené části, první krok a co teď nedělat?
+- Existuje situační index pro nejčastější problémy čtenářů?
+- Má tým jednu tabulku kanonických odkazů?
+- Jsou staré PDF, pracovní dokumenty a archivní odkazy oddělené od veřejných URL?
+- Vedou veřejné odkazy primárně přes vlastní doménu?
+- Nepoužíváte zbytečné zkracovače, redirecty nebo platformové mezikroky?
+- Probíhá pravidelný mini audit navigace?
+
+Kanonická navigace není dekorace kolem e-booku. Je to způsob, jak dlouhý praktický text proměnit v použitelný systém. Čtenář má najít správný vstup, tým má posílat správné odkazy a privacy-first hodnota má platit i v distribuci. Teprve pak se z e-booku stává nástroj, ne jen hodně dlouhý soubor s dobrými úmysly.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -28156,3 +28348,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BZ o úklidu a archivaci zastaralých šablon po iteraci: hledání kolizí, stavy materiálů, náhrady, privacy-first úklid, přesměrování pozornosti a checklist.
 - 2026-05-09: Doplněna Příloha CA s kvartální konsolidací živého e-booku: hlavní konsolidační otázka, stavy částí, čtenářské trasy, shoda se šablonami, privacy-first úklid a krátká agenda.
 - 2026-05-09: Doplněna Příloha CB s release mapou veřejné edice po konsolidaci: primární čtenář, veřejný slib, čtenářské vstupy, oddělení šablon, privacy-first kontrola a karta vydání.
+- 2026-05-09: Doplněna Příloha CC s kanonickou navigací a indexem veřejné edice: vstupy, čtenářské trasy, situační index, kanonické odkazy, týmová pravidla a privacy-first kontrola.
