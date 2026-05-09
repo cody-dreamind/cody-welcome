@@ -28341,6 +28341,213 @@ Výstup review má být jedna malá oprava a jeden záznam do backlogu. Pokud re
 
 Vydávací brána má jednoduchý účel: dostat užitečný materiál ven bez zbytečného rizika a bez nekonečného odkládání. První veřejná edice má být použitelná, důvěryhodná a měřitelná. Zbytek patří do dalších iterací. Ano, i ten skvělý nápad, který někoho napadl pět minut před publikací. Hlavně ten.
 
+## Příloha CE: Podpůrné okno po vydání veřejné edice
+
+Vydáním práce nekončí. Jen se změní typ práce. Před publikací tým řeší, jestli je materiál připravený. Po publikaci řeší, jestli lidem opravdu pomáhá a jestli se někde netvoří zbytečné tření.
+
+Podpůrné okno je krátké období po vydání, typicky první týden až dva, kdy tým vědomě sleduje dotazy, chyby, nejasnosti a signály použití. Není to marketingová horečka. Je to provozní služba čtenářům. Pokud e-book učí praktickou práci s webem, SaaS, marketingem a privacy-first provozem, musí se stejně prakticky chovat i jeho první veřejná verze.
+
+Cíl podpůrného okna je jednoduchý: zachytit problémy, které brání použití, opravit malé věci rychle, větší věci zapsat do další iterace a nenechat tým sklouznout do chaotického přepisování celého materiálu.
+
+### 1. Určete délku a odpovědnost
+
+Podpůrné okno musí mít konec. Jinak se z něj stane nekonečný režim „ještě jen odpovíme na tohle“ a tým nikdy nepřejde k normálnímu rytmu údržby.
+
+Praktické nastavení:
+
+- Délka: 7 až 14 dní podle rozsahu distribuce.
+- Vlastník: jedna osoba, která drží přehled o podnětech.
+- Zástup: kdo reaguje, když vlastník není dostupný.
+- Denní kontrola: krátký průchod dotazy a chybami.
+- Uzavření: krátké vyhodnocení a rozhodnutí o další verzi.
+
+V malém týmu není potřeba stavět podporu jako samostatné oddělení. Stačí jasné pravidlo, kdo se dívá na příchozí signály a kdy. Bez vlastníka se zpětná vazba rozpadne mezi chaty, e-maily, poznámky a dobré úmysly. To je místo, kde dobré úmysly obvykle zakopnou o kabel.
+
+### 2. Rozdělte příchozí signály podle práce
+
+Po vydání nepřichází jen „feedback“. Přichází směs dotazů, chyb, nápadů, pochval, obchodních signálů a občas i věcí, které s e-bookem nesouvisí. Pokud to všechno spadne do jednoho seznamu, tým začne řešit nejhlasitější položky místo nejdůležitějších.
+
+Použijte jednoduché kategorie:
+
+- Dotaz: čtenář něčemu nerozumí nebo hledá správnou trasu.
+- Chyba: něco je rozbité, nejasné, chybně odkázané nebo zavádějící.
+- Tření: čtenář se dostane k cíli, ale zbytečně složitě.
+- Nápad: návrh na rozšíření, nový formát nebo další kapitolu.
+- Obchodní signál: někdo chce pomoc, konzultaci, audit nebo implementaci.
+- Riziko: problém s daty, soukromím, právním tvrzením, bezpečností nebo reputací.
+
+Každá položka má mít jednu další akci. Ne celou debatu.
+
+```markdown
+# Podnět po vydání
+
+Datum:
+Kanál:
+Kategorie:
+Popis:
+Dopad na čtenáře:
+Rozhodnutí:
+Další akce:
+Vlastník:
+Termín:
+```
+
+Pokud položka nemá dopad na čtenáře, produkt nebo důvěru, nepatří do podpůrného okna. Může do backlogu. Podpůrné okno není skladiště všech nápadů, které se někomu líbí.
+
+### 3. Opravujte malé blokery rychle
+
+Rychlé opravy po vydání jsou v pořádku. Problém nastává, když tým začne pod názvem „rychlá oprava“ dělat nové rozhodnutí o produktu.
+
+Dobré rychlé opravy:
+
+- nefunkční odkaz,
+- překlep v důležitém názvu,
+- chybějící návrat na rozcestník,
+- nejasná věta u hlavního CTA,
+- formulář bez potvrzení,
+- špatně pojmenovaná čtenářská trasa,
+- poznámka, která omylem zůstala interní.
+
+Nevhodné rychlé opravy:
+
+- přepsat celý positioning,
+- přidat novou kapitolu,
+- měnit strukturu všech příloh,
+- rozdělit e-book na nový produkt,
+- zavést nový nástroj jen kvůli jednomu signálu,
+- spustit nový sběr dat bez kontroly účelu.
+
+Pravidlo:
+
+Pokud oprava mění rozsah, slib, datový tok nebo způsob distribuce, nejde o drobnou opravu. Potřebuje rozhodnutí, záznam a pravděpodobně další iteraci.
+
+### 4. Připravte odpovědi na opakované dotazy
+
+První dotazy po vydání jsou cenné, protože ukazují, kde text nestačí sám. Neodpovídejte pokaždé od nuly. Po třetím podobném dotazu už máte kandidáta na lepší navigaci, FAQ nebo krátký doprovodný článek.
+
+Typické dotazy:
+
+- „Kde mám začít, když mám jen web a žádný SaaS?“
+- „Který checklist je nejlepší pro první týden?“
+- „Můžu použít šablony pro zákaznický workshop?“
+- „Jak poznám, že už řeším moc metrik?“
+- „Jak to celé použít bez newsletteru a tracking pixelů?“
+
+Odpověď má být krátká a odkazovat na kanonické místo:
+
+```text
+Začněte trasou „Opravit web za jeden týden“ v kanonickém indexu. První praktický krok je projít checklist pro nový web a vybrat tři slabiny, ne opravovat všechno najednou.
+```
+
+Pokud odpověď vyžaduje pět odstavců, materiál pravděpodobně potřebuje lepší vstupní bod. To není selhání. To je přesně důvod, proč podpůrné okno existuje.
+
+### 5. Držte privacy-first podporu
+
+Podpora po vydání umí potichu rozbít privacy-first slib. Stačí, aby se zpětná vazba sbírala přes náhodný formulář, dotazy končily v cizím CRM bez pravidel nebo tým začal kopírovat celé zprávy do interních nástrojů.
+
+Privacy-first pravidla podpůrného okna:
+
+- Sbírejte jen údaje potřebné pro reakci.
+- Oddělte veřejný feedback od obchodních poptávek.
+- Nepřepisujte osobní údaje do veřejného backlogu.
+- U interních ukázek anonymizujte jména, firmy a konkrétní projekty.
+- Neposílejte čtenáře přes zbytečné zkracovače odkazů.
+- Pokud používáte formulář, vysvětlete účel a další práci s odpovědí.
+- Pokud stačí veřejný changelog nebo RSS, nedělejte z toho newsletterovou past.
+
+Codyho komentář: podpora není záminka ke sběru dat. Když někdo položí otázku, neznamená to, že se dobrovolně přihlásil do marketingového vesmíru. Odpovězte na otázku, zapište anonymizovaný poznatek a pokračujte jako civilizovaní lidé s přístupem k internetu.
+
+### 6. Veďte denní poznámku místo velkého reportu
+
+Podpůrné okno nepotřebuje velký dashboard. Potřebuje krátkou denní poznámku, ze které je vidět, co se stalo a co se rozhodlo.
+
+Šablona:
+
+```markdown
+# Denní poznámka podpůrného okna
+
+Datum:
+
+## Co přišlo
+- Dotazy:
+- Chyby:
+- Tření:
+- Obchodní signály:
+- Rizika:
+
+## Co jsme opravili hned
+-
+
+## Co jde do backlogu
+-
+
+## Co neměníme
+-
+
+## Privacy-first kontrola
+- Přibyl nový sběr dat?
+- Změnil se formulář, analytika nebo nástroj?
+- Je potřeba aktualizovat datovou mapu?
+```
+
+Na konci okna z těchto poznámek vznikne vyhodnocení bez archeologie. Tým nemusí lovit, kdo co napsal v chatu a proč se něco změnilo. Stačí projít krátké záznamy.
+
+### 7. Uzavřete podpůrné okno rozhodnutím
+
+Podpůrné okno nesmí vyšumět. Musí skončit rozhodnutím, co se stane dál.
+
+Možná rozhodnutí:
+
+- Veřejná edice zůstává beze změny, další kontrola podle revizního kalendáře.
+- Vydáme malou opravnou verzi s chybami a navigačními úpravami.
+- Připravíme obsahovou iteraci zaměřenou na jednu čtenářskou trasu.
+- Oddělíme šablony do samostatné pracovní knihovny.
+- Změníme landing page, protože lidé nechápou první slib.
+- Pozastavíme distribuci, protože se objevil blokátor důvěry nebo privacy riziko.
+
+Krátká uzavírací karta:
+
+```markdown
+# Uzavření podpůrného okna
+
+Období:
+Vlastník:
+
+## Nejčastější signály
+-
+
+## Opraveno během okna
+-
+
+## Přesunuto do backlogu
+-
+
+## Privacy-first změny
+-
+
+## Rozhodnutí
+- Stav veřejné edice:
+- Další iterace:
+- Termín další kontroly:
+```
+
+Dobré uzavření neznamená, že je všechno hotové. Znamená, že tým ví, co se naučil, co opravil, co vědomě nechává být a kdy se k materiálu vrátí.
+
+### Checklist přílohy
+
+- Má podpůrné okno jasnou délku a vlastníka?
+- Jsou příchozí signály rozdělené podle typu práce?
+- Umíte rozlišit rychlou opravu od změny rozsahu?
+- Mají opakované dotazy kanonickou odpověď nebo plán úpravy navigace?
+- Sbírá podpora jen data potřebná pro reakci?
+- Jsou osobní, zákaznické a interní informace anonymizované?
+- Existuje krátká denní poznámka místo roztříštěných chatových útržků?
+- Je jasné, co se opravilo hned a co jde do backlogu?
+- Má podpůrné okno uzavírací rozhodnutí?
+- Je naplánovaná další kontrola veřejné edice?
+
+Podpůrné okno drží první veřejnou verzi při zemi. Pomáhá čtenářům, chrání tým před chaosem a dává e-booku šanci stárnout jako živý pracovní systém, ne jako jednorázové PDF, které někdo hrdinně vypustil a pak se tvářil, že už se ho to netýká.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -28551,3 +28758,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha CB s release mapou veřejné edice po konsolidaci: primární čtenář, veřejný slib, čtenářské vstupy, oddělení šablon, privacy-first kontrola a karta vydání.
 - 2026-05-09: Doplněna Příloha CC s kanonickou navigací a indexem veřejné edice: vstupy, čtenářské trasy, situační index, kanonické odkazy, týmová pravidla a privacy-first kontrola.
 - 2026-05-09: Doplněna Příloha CD s vydávací bránou veřejné edice: zmrazení rozsahu, třídění nálezů, test čtenářských cest, privacy-first kontrola, rozhodovací karta a review po vydání.
+- 2026-05-09: Doplněna Příloha CE s podpůrným oknem po vydání veřejné edice: triage podnětů, rychlé opravy, odpovědi na dotazy, privacy-first podpora, denní poznámka a uzavírací rozhodnutí.
