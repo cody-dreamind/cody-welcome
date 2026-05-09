@@ -25942,6 +25942,204 @@ Den 6 je záměrně klidný. Po publikaci je snadné získat pocit, že se musí
 
 První týden po zveřejnění má e-book ukázat, jestli umí žít venku. Ne jestli je dokonalý. Pokud lidé najdou správný vstup, pochopí hodnotu, použijí checklist a pošlou podnět bez ztráty důvěry, veřejná verze splnila první úkol. Další práce už je iterace, ne panika.
 
+## Příloha BR: Rozhodnutí o další verzi po prvním týdnu
+
+Po prvním týdnu už máte první signály. Ne dokonalá data, ne definitivní pravdu, ale dost vstupů na to, abyste přestali hádat. V tu chvíli vzniká nejdůležitější otázka: co má být další verze e-booku?
+
+Špatná odpověď je "zapracujeme všechno". Stejně špatná odpověď je "nic neměníme, protože první verze je venku". První varianta rozbije fokus, druhá zabije učení. Dobrá odpověď je vybrat jednu jasnou iteraci, která zlepší použitelnost, důvěru nebo obchodní hodnotu bez toho, aby vytvořila nový chaos.
+
+Tato příloha navazuje na první týden po zveřejnění. Cílem je převést podněty, signály a drobné opravy do rozhodnutí o další verzi.
+
+### 1. Nejdřív oddělte signály od šumu
+
+První týden přináší směs různých reakcí. Některé jsou věcné. Některé jsou náhodné. Některé vypadají naléhavě jen proto, že přišly od hlasitého člověka. Než začnete plánovat další verzi, rozdělte vstupy do tří skupin.
+
+```text
+Silný signál:
+Opakuje se, blokuje hlavní čtenářskou cestu, zhoršuje důvěru nebo ukazuje na obchodní příležitost.
+
+Slabý signál:
+Je zajímavý, ale zatím jednorázový, subjektivní nebo bez jasného dopadu.
+
+Šum:
+Nevede k rozhodnutí, neodpovídá cíli e-booku nebo by z textu udělal něco jiného, než má být.
+```
+
+Příklad:
+
+```text
+Silný signál:
+Tři lidé nenašli trasu pro SaaS MVP a jeden obchodní kontakt se ptal, kde začít s produktem.
+
+Slabý signál:
+Jeden čtenář navrhl video verzi všech kapitol.
+
+Šum:
+Někdo by chtěl, aby e-book byl obecná učebnice programování od HTML po Kubernetes.
+```
+
+Silný signál neznamená automaticky velkou změnu. Znamená jen, že stojí za rozhodnutí. Někdy stačí přesunout rozcestník výš, přepsat tři věty nebo doplnit jeden praktický příklad.
+
+### 2. Vyberte typ další verze
+
+Další verze nemusí být velký release. U živého e-booku dává smysl rozlišovat typy iterací podle dopadu.
+
+| Typ verze | Kdy dává smysl | Příklad výstupu |
+| --- | --- | --- |
+| Opravná verze | Chyby, odkazy, export, nejasné CTA | v1.0.1 s opravenými odkazy a poznámkou v changelogu |
+| Použitelnostní verze | Lidé nenacházejí správný vstup nebo trasu | lepší rozcestník, krátké úvody tras, úprava landing page |
+| Obsahová verze | Chybí praktický příklad, checklist nebo šablona | nová podkapitola nebo příloha k opakovanému problému |
+| Důvěryhodnostní verze | Je potřeba doplnit zdroje, vysvětlení dat nebo hranice tvrzení | doplněné zdrojové karty, privacy-first vysvětlení, aktualizovaný changelog |
+| Produktová verze | E-book má sloužit jako vstup do služby, workshopu nebo auditu | balíček pro zákaznický workshop, landing page nabídky, follow-up šablony |
+
+V jednom cyklu vyberte primární typ. Můžete opravit překlepy bokem, ale nemíchejte velkou obsahovou změnu, nový prodejní balíček, novou analytiku a redesign landing page do jednoho "menšího update". To není menší update. To je projekt bez názvu.
+
+### 3. Použijte rozhodovací kartu
+
+Rozhodnutí o další verzi by mělo být krátké a dohledatelné. Ideálně tak krátké, aby ho tým opravdu vyplnil.
+
+```markdown
+# Rozhodnutí o další verzi
+
+Datum:
+Aktuální verze:
+Navržená další verze:
+Primární typ iterace:
+Hlavní signál:
+Rozhodovací otázka:
+Co změníme:
+Co záměrně nezměníme:
+Privacy-first dopad:
+Vlastník:
+Termín:
+Jak poznáme, že změna pomohla:
+```
+
+Vyplněný příklad:
+
+```text
+Datum:
+2026-05-09
+
+Aktuální verze:
+v1.0
+
+Navržená další verze:
+v1.1
+
+Primární typ iterace:
+Použitelnostní verze
+
+Hlavní signál:
+Čtenáři s cílem "stavíme SaaS MVP" přeskakují rozcestník a ptají se, kde začít.
+
+Rozhodovací otázka:
+Dokáže čtenář vybrat správnou trasu do 30 sekund bez vysvětlování v chatu?
+
+Co změníme:
+Přidáme krátký rozcestník na landing page, zvýrazníme trasu pro SaaS MVP a doplníme odkazy na kapitoly 8, 9, 10, 11, 17 a 31.
+
+Co záměrně nezměníme:
+Nepřepisujeme kapitoly o architektuře ani nepřidáváme nový obsah o technologiích.
+
+Privacy-first dopad:
+Neměníme měření. Sledujeme jen agregované kliknutí na trasu.
+
+Vlastník:
+Vlastník publikace.
+
+Termín:
+Do konce týdne.
+
+Jak poznáme, že změna pomohla:
+Méně dotazů "kde začít", více kliků na trasu pro SaaS MVP a lepší kvalita navazujících workshopových dotazů.
+```
+
+Takový záznam chrání tým před zpětným přepisováním reality. Za měsíc bude jasné, proč se změna udělala, co měla zlepšit a co se tehdy vědomě nechalo mimo rozsah.
+
+### 4. Nastavte hranici rozsahu
+
+Každá další verze potřebuje hranici. Bez ní se z opravy čtenářské trasy stane redesign webu, přepsání PDF exportu, nový newsletter a debata o názvu celé knihy.
+
+Praktická hranice rozsahu:
+
+```text
+V této verzi děláme:
+- jednu hlavní čtenářskou nebo obchodní změnu,
+- drobné opravy chyb nalezených během práce,
+- aktualizaci pracovního logu a changelogu.
+
+V této verzi neděláme:
+- nové velké kapitoly mimo hlavní rozhodnutí,
+- změnu celého positioningu,
+- nový analytický stack,
+- nové povinné formuláře,
+- úpravy podle jednorázových preferencí bez signálu.
+```
+
+Pokud je potřeba větší změna, nevadí. Jen ji pojmenujte jako větší změnu. E-book může mít roadmapu stejně jako produkt. Není ostuda říct: "Tohle je samostatná verze 1.2, ne rychlá oprava."
+
+### 5. Privacy-first brána pro další verzi
+
+Každá další verze má projít krátkou privacy-first kontrolou. Ne proto, že každá textová úprava mění právní režim. Protože právě malé navazující změny často nenápadně přidají nový formulář, nový skript, nový export nebo nový seznam kontaktů.
+
+Před vydáním další verze se zeptejte:
+
+- Přidáváme novou formu sběru dat?
+- Měníme účel existujícího formuláře?
+- Přidáváme nový nástroj, embed, měřicí skript nebo automatizaci?
+- Přesouváme zpětnou vazbu do CRM, newsletteru nebo obchodního workflow?
+- Má čtenář pořád možnost číst bez povinného e-mailu?
+- Zůstává měření agregované a svázané s rozhodnutím?
+- Je v textu jasné, co je fakt, doporučení a Codyho komentář?
+
+Pokud odpověď na první čtyři otázky zní ano, nejde jen o redakční změnu. Je potřeba aktualizovat datovou mapu, popis účelu a případně interní odpovědnost. Malá obsahová iterace nesmí potichu zavést velký datový dluh.
+
+### 6. Jak vybrat jednu nejlepší změnu
+
+Když máte více kandidátů, nepoužívejte hlasování podle nálady. Použijte jednoduché skóre.
+
+| Kritérium | Otázka | Skóre 1 až 3 |
+| --- | --- | --- |
+| Dopad na čtenáře | Pomůže změna najít správnou odpověď nebo udělat rozhodnutí? | 1 nízký, 3 vysoký |
+| Dopad na důvěru | Sníží nejasnost, riziko nebo pochybnost? | 1 nízký, 3 vysoký |
+| Obchodní návaznost | Pomůže kvalifikovat poptávku, workshop nebo službu? | 1 nízký, 3 vysoký |
+| Náročnost | Dá se změna dokončit v jednom cyklu? | 1 těžké, 3 lehké |
+| Privacy-first čistota | Nepřidává zbytečný sběr dat ani závislost na platformě? | 1 problematické, 3 čisté |
+
+Vyberte změnu s nejlepším poměrem dopadu a náročnosti. Pokud má změna vysoký obchodní dopad, ale nízkou privacy-first čistotu, nejdřív ji přepracujte. Ne každá užitečná obchodní myšlenka musí přijít s horším sběrem dat.
+
+### 7. Výstup další verze má být viditelný
+
+Iterace, kterou nikdo nevidí, se špatně vyhodnocuje. Po vydání další verze proto aktualizujte minimálně tři místa:
+
+- pracovní log v rukopisu,
+- veřejný changelog nebo poznámku k aktualizacím,
+- interní rozhodovací kartu nebo redakční board.
+
+Veřejná poznámka může být velmi krátká:
+
+```text
+2026-05-09: Zpřesnili jsme čtenářskou trasu pro SaaS MVP, doplnili odkazy na související kapitoly a opravili několik nejasností v landing page. Čtení zůstává dostupné bez povinného e-mailu.
+```
+
+Tohle není marketingová fanfára. Je to důkaz údržby. Čtenář vidí, že e-book žije, a tým má záznam, ke kterému se dá vrátit.
+
+### 8. Checklist přílohy
+
+- Jsou vstupy z prvního týdne rozdělené na silné signály, slabé signály a šum?
+- Vybrali jste jeden primární typ další verze?
+- Existuje rozhodovací karta s hlavním signálem, otázkou, rozsahem a vlastníkem?
+- Je jasné, co se v této verzi záměrně nezmění?
+- Prošla změna privacy-first branou?
+- Nepřidává iterace nový formulář, skript nebo automatizaci bez datové mapy?
+- Má změna měřitelný signál úspěchu?
+- Je výstup zapsaný v pracovním logu a changelogu?
+- Zůstává jeden zdroj pravdy pro text, PDF, landing page a navazující šablony?
+- Je další krok dost malý na dokončení, ale dost důležitý na to, aby stál za vydání?
+
+Další verze e-booku nemá být reakce na tlak. Má být rozhodnutí. Když po prvním týdnu vyberete jednu užitečnou změnu, jasně řeknete proč a udržíte privacy-first hranice, začne se z veřejné verze stávat živý pracovní systém. Ne proto, že se pořád mění, ale protože se mění s rozumem.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -26139,3 +26337,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BO s čtenářskými trasami a rozcestníky pro veřejnou verzi e-booku: trasy pro web, SaaS MVP, marketing, privacy-first provoz, zákaznický workshop a dlouhodobou údržbu.
 - 2026-05-09: Doplněna Příloha BP s návrhem landing page pro veřejnou verzi e-booku: první obrazovka, čtenářské trasy, formáty, formuláře, privacy-first měření, SEO minimum a publikační checklist.
 - 2026-05-09: Doplněna Příloha BQ s plánem prvního týdne po zveřejnění veřejné verze e-booku: operační karta, den nula kontrola, denní rytmus, scoreboard signálů, triage zpětné vazby a sedmidenní review.
+- 2026-05-09: Doplněna Příloha BR o rozhodnutí další verze po prvním týdnu: třídění signálů, typy iterací, rozhodovací karta, hranice rozsahu, privacy-first brána a checklist vydání.
