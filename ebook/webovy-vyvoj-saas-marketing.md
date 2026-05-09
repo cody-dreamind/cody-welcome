@@ -27433,6 +27433,159 @@ Tento workflow má chránit dvě věci najednou: hodnotu e-booku a pozornost tý
 
 Dobrá znalostní báze není muzeum všeho, co se kdy napsalo. Je to sada použitelných pracovních pomůcek, které mají vlastníka, účel a životnost. E-book může být výborný zdroj, ale jen tehdy, když se z něj do interního provozu přenáší rozhodnutí, ne celé balíky textu bez kontextu.
 
+## Příloha BZ: Úklid a archivace zastaralých šablon po iteraci
+
+Každá nová iterace e-booku může vytvořit užitečný výstup: checklist, odpověď pro zákazníka, brief, workshopovou kartu nebo interní pravidlo. Jenže nový výstup často zároveň znamená, že něco staršího už není nejlepší doporučená verze. Pokud staré šablony zůstanou volně dostupné bez kontextu, tým začne používat různé odpovědi podle toho, co mu zrovna vyskočí ve vyhledávání.
+
+Úklid po iteraci není byrokracie. Je to ochrana před tím, aby znalostní báze přestala být pracovní nástroj a stala se archeologickým nalezištěm. Nová šablona má hodnotu až ve chvíli, kdy je jasné, co nahrazuje, co zůstává platné a co se má archivovat.
+
+Použijte tuto přílohu pokaždé, když:
+
+- vznikne nová interní šablona z e-booku,
+- výrazně se změní doporučení ve veřejné části,
+- sales, support nebo delivery dostane novou odpověď,
+- starší checklist obsahuje jiné kroky než nová verze,
+- tým neví, kterou verzi materiálu má posílat zákazníkovi,
+- stejná rada existuje ve více dokumentech s drobnými rozdíly.
+
+### 1. Nejdřív najděte kolize
+
+Nový výstup neporovnávejte jen s jedním zdrojovým textem. Porovnejte ho s reálnými místy, kde tým pracuje. Často zjistíte, že starší verze žije v CRM poznámce, šabloně e-mailu, interní wiki, onboardingovém dokumentu nebo starém odkazu v projektu.
+
+Projděte minimálně:
+
+- interní znalostní bázi,
+- sales a support šablony,
+- onboardingové materiály,
+- veřejné rozcestníky a landing pages,
+- odkazy v e-booku,
+- projektové checklisty,
+- uložené odpovědi v nástrojích, které tým používá denně.
+
+Kontrolní otázka:
+
+```text
+Kde by dnes člověk z týmu našel starší odpověď na stejnou pracovní situaci?
+```
+
+Pokud takové místo existuje, rozhodněte o něm hned. Neodkládejte to na "až bude čas". Nebude. Staré šablony mají zvláštní schopnost přežít přesně v těch místech, kde nadělají nejvíc škody.
+
+### 2. Rozdělte staré materiály do tří stavů
+
+Každý nalezený materiál zařaďte do jednoho ze tří stavů:
+
+1. Ponechat: pořád je platný a řeší jinou situaci.
+2. Nahradit: nová verze je lepší doporučený zdroj.
+3. Archivovat: materiál už nemá být běžně používán.
+
+Nepřidávejte čtvrtý stav "možná se hodí". To je maskované rozhodnutí nic nerozhodnout.
+
+Příklad:
+
+```text
+Nová iterace:
+Příloha BZ zavádí pravidla pro archivaci starých šablon.
+
+Ponechat:
+Příloha BY, protože řeší převod nové iterace do znalostní báze.
+
+Nahradit:
+Starý interní checklist "Co dělat po nové příloze", pokud neřeší archivaci.
+
+Archivovat:
+Starou poznámku v CRM, která doporučuje posílat neaktuální šablonu zákazníkům.
+```
+
+Rozdíl mezi nahradit a archivovat je důležitý. Nahrazený materiál může mít přesměrování nebo poznámku na novou verzi. Archivovaný materiál má zůstat dostupný jen kvůli historii, ne kvůli použití.
+
+### 3. U každé náhrady zapište důvod
+
+Když starou šablonu jen smažete nebo přepíšete, tým ztratí kontext. Když u ní necháte krátkou poznámku, budoucí čtenář pochopí, proč už se nemá používat.
+
+Stačí jednoduchý zápis:
+
+```markdown
+> Stav: nahrazeno
+> Nahrazuje: [název nové šablony nebo přílohy]
+> Důvod: Nová verze lépe rozlišuje veřejné, interní a zákaznické použití.
+> Datum: 2026-05-09
+> Vlastník: [role nebo jméno]
+```
+
+Tato poznámka je užitečná i při auditu. Ukazuje, že změna nebyla náhodná. Někdo se rozhodl, proč starý materiál končí a kam má tým jít místo něj.
+
+### 4. Privacy-first úklid
+
+Archivace je dobrý moment zkontrolovat, jestli staré materiály neobsahují data, která už nemají důvod existovat. Zastaralé šablony často obsahují staré příklady, jména zákazníků, interní poznámky, screenshoty nebo exporty, které se kdysi hodily a pak zůstaly ležet.
+
+Při úklidu se ptejte:
+
+- Obsahuje starý dokument osobní údaje, které už nejsou potřeba?
+- Je v něm zákaznický kontext, který má být v projektovém systému, ne ve znalostní bázi?
+- Neobsahuje screenshot s e-maily, tokeny, URL s parametry nebo interními identifikátory?
+- Má archiv omezený přístup jen pro lidi, kteří ho potřebují?
+- Je jasné, jak dlouho má archiv existovat?
+- Dá se starý příklad anonymizovat místo držení konkrétních údajů?
+
+Privacy-first úklid není jen mazání. Někdy je správné starý materiál ponechat, ale anonymizovat ho, zkrátit nebo přesunout do bezpečnějšího místa. Důležité je nenechat citlivý obsah přežívat jen proto, že "už tam byl".
+
+### 5. Nastavte přesměrování pozornosti
+
+Technické přesměrování URL je jedna věc. Stejně důležité je přesměrování pozornosti v týmu. Pokud lidé používají starý materiál ze zvyku, nová verze se neuchytí sama.
+
+Po náhradě pošlete nebo zapište krátkou interní poznámku:
+
+```text
+Od teď pro kontrolu šablon po nové iteraci používejte Přílohu BZ. Starý checklist v CRM je označený jako nahrazený a zůstává jen kvůli historii. Pro zákaznické výstupy používejte novou verzi bez interních poznámek.
+```
+
+To stačí. Není potřeba slavnostní oznámení, procesní festival ani třístránkový memoár. Cílem je, aby člověk při práci věděl, kam sáhnout.
+
+### 6. Malý úklidový rituál po iteraci
+
+Po každé větší iteraci projděte tento krátký postup:
+
+1. Napište název nové části nebo šablony.
+2. Určete jednu pracovní situaci, kterou řeší.
+3. Vyhledejte starší materiály ke stejné situaci.
+4. Každý zařaďte jako ponechat, nahradit nebo archivovat.
+5. U nahrazených materiálů přidejte odkaz na novou verzi.
+6. U archivovaných materiálů ověřte přístupy a citlivá data.
+7. Aktualizujte rozcestníky, interní odkazy a uložené odpovědi.
+8. Informujte jen týmy, kterých se změna týká.
+9. Zapište změnu do pracovního logu.
+10. Při další měsíční revizi ověřte, jestli se stará verze nepoužívá dál.
+
+Tento rituál má být rychlý. Pokud se z něj stane půldenní inventura, znamená to, že znalostní báze už dlouho nebyla uklizená. Pak je problém větší než jedna iterace a zaslouží si vlastní úklidový sprint.
+
+### 7. Kdy nemazat hned
+
+Někdy je lepší starou verzi krátce ponechat. Například když:
+
+- na ni odkazuje aktivní zákaznický projekt,
+- slouží jako důkaz rozhodnutí v probíhající práci,
+- nová verze ještě nebyla otestovaná v praxi,
+- existuje veřejný odkaz, který potřebuje přesměrování,
+- archiv má hodnotu pro retrospektivu nebo právní dokumentaci.
+
+I tehdy ale nesmí zůstat bez označení. Přidejte stav, důvod a datum kontroly. Neoznačený starý dokument se tváří jako platný. Označený starý dokument říká: "pozor, historie, používej novější zdroj".
+
+### 8. Checklist přílohy
+
+- Má nová iterace jasně určenou pracovní situaci?
+- Byly nalezené starší materiály ke stejné situaci?
+- Je u každého starého materiálu rozhodnuto: ponechat, nahradit nebo archivovat?
+- Mají nahrazené materiály odkaz na novou verzi?
+- Je u archivovaných materiálů jasný důvod, vlastník a datum kontroly?
+- Neobsahuje archiv zbytečné osobní, zákaznické nebo interně citlivé údaje?
+- Jsou aktualizované rozcestníky, uložené odpovědi a interní odkazy?
+- Ví dotčený tým, kterou verzi má používat?
+- Nezůstala stará šablona v nástroji, který tým používá denně?
+- Je změna zapsaná v pracovním logu?
+- Existuje kontrola, že se stará verze po měsíci nepoužívá dál?
+
+Dobrá iterace nepřidává jen nový obsah. Uklízí za sebou. Díky tomu e-book, šablony a interní znalostní báze rostou jako systém, ne jako hromada podobných dokumentů s různým datem a stejnou ambicí. Přidat novou věc umí každý. Udržet pořádek po přidání je teprve provozní dospělost.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -27638,3 +27791,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BW s kontrolou odkazů, rozcestníků a přesměrování po iteraci: vstupní místa, kanonické odkazy, staré URL, interní použití a privacy-first distribuce.
 - 2026-05-09: Doplněna Příloha BX s kontrolou hlasu, tónu a praktické užitečnosti po iteraci: čtenářská situace, konkrétnost, Codyho hlas, privacy-first dopad a redakční checklist.
 - 2026-05-09: Doplněna Příloha BY o převodu hotové iterace do interní znalostní báze: výběr interního použití, jeden zdroj pravdy, privacy-first kontrola, verze pro různá publika a workflow po iteraci.
+- 2026-05-09: Doplněna Příloha BZ o úklidu a archivaci zastaralých šablon po iteraci: hledání kolizí, stavy materiálů, náhrady, privacy-first úklid, přesměrování pozornosti a checklist.
