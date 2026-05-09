@@ -26772,6 +26772,171 @@ U živého e-booku je "hotovo" hlavně čtenářský stav. Nestačí, že je nov
 
 Prioritizační fronta dělá z e-booku řízený produkt, ne nekonečný dokument. Pomáhá týmu říct: toto je další nejlepší změna, toto počká a toto vědomě neděláme. Díky tomu může veřejná verze růst pomalu, ale kvalitně. U dlouhého odborného textu je přesně tahle nudná disciplína to, co čtenářům šetří čas.
 
+## Příloha BV: Publikační balíček pro jednu hotovou iteraci
+
+Živý e-book se nezlepšuje tím, že se do něj jednou za čas přisype další text. Zlepšuje se tím, že každá dokončená iterace má jasný výstup, jasné umístění, jasné oznámení a jasný způsob, jak poznat, jestli pomohla. Bez toho se změny ztrácejí. Něco se upraví, někdo si toho možná všimne, ale tým neví, komu to mělo sloužit a co má udělat dál.
+
+Publikační balíček je malý soubor věcí, které připravíte vždy, když e-book dostane novou významnější změnu. Nemá z jedné podkapitoly dělat velkou kampaň. Má zabránit tomu, aby dobrá práce skončila schovaná v dlouhém dokumentu.
+
+Balíček odpovídá na šest otázek:
+
+1. Co se změnilo?
+2. Komu to pomáhá?
+3. Kde to čtenář najde?
+4. Jaký je nejmenší doporučený další krok?
+5. Jak změnu oznámíme bez nátlakového funnelu?
+6. Jaké signály budeme sledovat bez zbytečného sběru dat?
+
+Pokud na tyto otázky neumíte odpovědět, změna možná ještě není hotová. Možná je napsaná, ale není publikovatelná.
+
+### 1. Kdy balíček použít
+
+Publikační balíček se nehodí pro každou překlepovou opravu. Použijte ho, když změna ovlivňuje čtenářskou trasu, veřejnou distribuci nebo způsob použití e-booku.
+
+Typické situace:
+
+- přibyla nová kapitola, příloha nebo pracovní šablona,
+- upravila se landing page nebo veřejný rozcestník,
+- vznikl nový citovatelný výřez,
+- změnila se odpověď na častou otázku zákazníků,
+- aktualizovalo se rychle stárnoucí téma,
+- sloučily se nebo odstranily části, které měnily navigaci,
+- vznikl materiál pro sales, support, workshop nebo onboarding.
+
+Naopak pro drobnou jazykovou úpravu stačí pracovní log. E-book nemá kolem každé čárky stavět proces. To by byl hezký způsob, jak si z jednoduché publikace vyrobit administrativní posilovnu.
+
+### 2. Karta změny
+
+Každá větší iterace má mít krátkou kartu změny. Ta může být interní, ale část z ní se dá použít i jako veřejná poznámka k aktualizaci.
+
+```markdown
+# Karta publikované iterace
+
+Název změny:
+Datum:
+Vlastník:
+Typ změny:
+Oprava, zlepšení, rozšíření, archivace:
+
+## Co se změnilo
+Jedna až tři věty:
+
+## Komu to pomáhá
+Primární čtenářská trasa:
+Praktická situace:
+
+## Kde to najít
+Kapitola, příloha, URL nebo výřez:
+Navazující části:
+
+## Doporučený další krok
+Co má čtenář udělat po přečtení:
+
+## Privacy-first kontrola
+Přibyl formulář, měření, externí služba nebo nový datový tok?
+Pokud ano, proč je nezbytný a jak je omezený?
+
+## Distribuce
+Vlastní web:
+RSS:
+Přímé odkazy:
+Interní použití:
+
+## Signály užitečnosti
+Jak poznáme, že změna pomohla:
+```
+
+Smysl karty není vytvořit další dokument pro dokument. Smysl je vynutit si krátké rozhodnutí před tím, než změna vyrazí ven. Dobrý text bez distribuce je skrytý nástroj. Dobrá distribuce bez jasného účelu je jen hluk.
+
+### 3. Veřejná poznámka k aktualizaci
+
+Veřejná poznámka má být krátká. Čtenář nechce číst interní historii sprintu. Chce vědět, jestli se ho změna týká.
+
+Jednoduchý formát:
+
+```text
+Aktualizace:
+Doplnili jsme [co] pro [koho/situaci]. Pomůže hlavně při [praktická práce]. Najdete ji v části [umístění]. Doporučený další krok: [jedna akce].
+```
+
+Příklad:
+
+```text
+Aktualizace:
+Doplnili jsme publikační balíček pro jednu hotovou iteraci e-booku. Pomůže hlavně týmům, které chtějí změny nejen napsat, ale také je srozumitelně vydat, odkázat a vyhodnotit. Najdete ho v Příloze BV. Doporučený další krok: u příští větší úpravy vyplňte kartu publikované iterace.
+```
+
+Tato poznámka může být na landing page, v changelogu, v RSS položce nebo v interním týdenním shrnutí. Nemusí být na všech kanálech. Důležité je, aby existovalo jedno veřejné místo, kde se změna dá dohledat.
+
+### 4. Distribuce bez závislosti na platformách
+
+Privacy-first distribuce začíná vlastním webem. Sociální sítě mohou pomoct, ale nemají být jediným místem, kde změna žije. Pokud aktualizaci oznámíte jen v feedu, který za dva dny zmizí pod dalšími příspěvky, nevytváříte znalostní aktivum. Vytváříte šum s krátkou trvanlivostí.
+
+Základní pořadí:
+
+1. Aktualizovat zdroj pravdy v e-booku.
+2. Přidat stručnou poznámku do pracovního logu nebo changelogu.
+3. Pokud změna pomáhá veřejné orientaci, upravit landing page nebo rozcestník.
+4. Publikovat RSS položku nebo krátký update na vlastním webu.
+5. Poslat přímý odkaz relevantním lidem, kteří z toho mají užitek.
+6. Teprve potom udělat odvozené příspěvky pro platformy.
+
+Přímý odkaz je podceňovaný distribuční nástroj. Když obchodník pošle zákazníkovi přesnou část e-booku, která odpovídá na jeho otázku, je to často užitečnější než obecný post pro všechny. A hlavně: nevyžaduje sledovací pixel, skrytý formulář ani povinné přihlášení.
+
+Codyho komentář: když je obsah dobrý jen tehdy, když ho algoritmus zrovna ukáže, není to distribuce. Je to přání. Vlastní URL, RSS a přímé odkazy nejsou tak sexy, ale mají jednu výhodu: fungují i ve chvíli, kdy platforma zrovna mění náladu.
+
+### 5. Interní použití změny
+
+Každá dobrá iterace by měla mít jasné interní použití. Ne nutně velké. Stačí vědět, kdo ji má používat a v jaké situaci.
+
+Příklady:
+
+- Sales tým použije výřez jako follow-up po prvním hovoru.
+- Support pošle checklist zákazníkovi, který řeší konkrétní provozní otázku.
+- Delivery tým použije šablonu na začátku workshopu.
+- Marketing z nové části vytvoří krátký článek a RSS update.
+- Produktový tým zapíše přílohu jako standard pro další release e-booku.
+
+Pokud změna nemá žádné interní použití a zároveň nemá jasnou veřejnou čtenářskou trasu, zeptejte se, proč vzniká. Možná je to dobrý nápad na později. Možná je to jen textová verze pocitu, že by se "něco mělo doplnit".
+
+### 6. Měření bez datového přejídání
+
+U publikačního balíčku měřte užitečnost, ne zvědavost. Není nutné vědět, který konkrétní člověk četl kterou větu. Stačí sbírat signály, které pomáhají rozhodnout, jestli iterace stojí za další práci.
+
+Rozumné signály:
+
+- počet přístupů na veřejný výřez nebo rozcestník v agregované analytice,
+- kolikrát sales nebo support použil přímý odkaz,
+- zda se opakovaná otázka čtenářů snížila,
+- jestli nová část zkrátila přípravu workshopu,
+- zda se podle šablony podařilo dokončit konkrétní práci,
+- kolik kvalitních podnětů přišlo po zveřejnění.
+
+Slabé signály:
+
+- obecný počet zobrazení bez kontextu,
+- individuální sledování čtenářů bez jasného důvodu,
+- otevření e-mailu jako hlavní měřítko hodnoty,
+- dlouhé dashboardy, které nevedou k rozhodnutí,
+- sběr dat jen proto, že nástroj je umí sbírat.
+
+Privacy-first minimum: měřte agregovaně, držte krátkou retenci, nepodmiňujte veřejný obsah registrací a nepropojujte čtení e-booku s marketingovým profilem bez skutečného důvodu a jasného souhlasu.
+
+### 7. Checklist před uzavřením iterace
+
+- Je jasné, co se změnilo a proč?
+- Víme, komu změna pomáhá a v jaké praktické situaci?
+- Dá se změna najít z relevantní čtenářské trasy?
+- Existuje stručná veřejná poznámka nebo záznam v changelogu?
+- Má změna jeden doporučený další krok?
+- Je jasné, jestli ji má používat sales, support, delivery, marketing nebo produkt?
+- Nezavedli jsme zbytečný formulář, gated obsah nebo sledování jednotlivců?
+- Jsou odkazy, rozcestníky a pracovní log aktualizované?
+- Máme jeden až tři signály užitečnosti, ne deset metrik pro dobrý pocit?
+- Je jasné, kdy se k dopadu změny vrátíme?
+
+Publikační balíček uzavírá smyčku mezi psaním a použitím. Díky němu není iterace hotová ve chvíli, kdy přibude odstavec. Je hotová ve chvíli, kdy čtenář ví, kde ho najít, tým ví, jak ho použít, a měření respektuje soukromí místo toho, aby z každé aktualizace dělalo datový vysavač.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -26973,3 +27138,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BS s měsíčním edičním sprintem veřejné verze: rozhodovací otázka, vstupy, průběh, šablona sprintu, kontrola stárnoucích témat, distribuce změny a checklist.
 - 2026-05-09: Doplněna Příloha BT se stop pravidly pro živý e-book: kdy změnu nepřidávat, jak rozlišit podnět od důvodu, kdy mazat nebo slučovat a jak držet privacy-first brzdu.
 - 2026-05-09: Doplněna Příloha BU s prioritizační frontou pro živý e-book: stavy položek, karta podnětu, jednoduché skórování, týdenní triage, privacy-first brána a definition of done.
+- 2026-05-09: Doplněna Příloha BV s publikačním balíčkem pro jednu hotovou iteraci: karta změny, veřejná poznámka, distribuce, interní použití, privacy-first měření a checklist.
