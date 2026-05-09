@@ -25723,6 +25723,225 @@ Před publikací projděte stránku jako člověk, který e-book nezná:
 
 Landing page je první pracovní rozhraní e-booku. Když je dobrá, čtenář nemusí obcházet dokument jako neoznačenou budovu. Ví, kudy dovnitř, co si vzít a kdy začít pracovat. Přesně o to tady jde.
 
+## Příloha BQ: První týden po zveřejnění veřejné verze
+
+První týden po zveřejnění e-booku není závod v počtu zobrazení. Je to provozní test. Ověří se, jestli lidé rozumí slibu, najdou správnou trasu, otevřou PDF, použijí checklist a umí poslat zpětnou vazbu bez toho, aby museli projít formulářovým labyrintem.
+
+Největší chyba po publikaci je okamžitě přepisovat všechno podle prvních reakcí. První reakce jsou signály, ne rozsudek. Některé ukazují skutečné tření. Některé jsou osobní preference. Některé patří do další verze. Úkolem prvního týdne je sbírat, třídit a udělat několik malých oprav, které zlepší použitelnost bez rozkývání celého rukopisu.
+
+Cíl prvního týdne:
+
+1. Ověřit, že veřejná cesta funguje technicky.
+2. Zjistit, jestli lidé chápou, pro koho e-book je.
+3. Najít největší tření ve čtení, navigaci a stažení.
+4. Zachytit první užitečnou zpětnou vazbu.
+5. Neudělat z publikace sledovací projekt.
+
+### 1. Připravte operační kartu před zveřejněním
+
+Ještě před prvním veřejným odkazem by měla existovat jednoduchá karta. Ne proto, aby tým předstíral enterprise proces, ale aby v prvních dnech nikdo nehledal, kdo má opravit rozbitý odkaz, PDF nebo formulář.
+
+```text
+Název vydání:
+Veřejná URL:
+Primární formát: web / PDF / obojí
+Datum zveřejnění:
+Vlastník publikace:
+Vlastník technického provozu:
+Vlastník obsahu:
+Kanál pro zpětnou vazbu:
+Changelog:
+RSS nebo přímý odběr aktualizací:
+Měřené signály:
+Co záměrně neměříme:
+Stop pravidlo pro rychlé úpravy:
+```
+
+Stop pravidlo je důležité. Například: "První týden opravujeme chyby, odkazy, nejasné vstupy a navigaci. Nepřepisujeme strategické kapitoly bez rozhodnutí v redakčním boardu." Bez tohoto pravidla se z publikace stane otevřená operace na běžícím systému.
+
+### 2. Den nula: technická a redakční kontrola
+
+Den nula je poslední kontrola před šířením odkazu. Cílem není dokonalost. Cílem je odstranit chyby, které by zbytečně poškodily první zkušenost.
+
+Projít ručně:
+
+- Otevře se landing page z čistého prohlížeče?
+- Funguje hlavní tlačítko pro čtení online?
+- Funguje stažení PDF, pokud existuje?
+- Mají čtenářské trasy správné odkazy?
+- Otevírá se changelog nebo poznámka k aktualizacím?
+- Je vidět datum poslední aktualizace?
+- Funguje formulář zpětné vazby nebo kontaktní odkaz?
+- Nevyžaduje žádná primární cesta povinný e-mail?
+- Na mobilu je první obrazovka čitelná a hlavní akce dosažitelná?
+- Nejsou na stránce zbytečné externí skripty přidané "pro jistotu"?
+
+Při kontrole si zapisujte jen nálezy, které brání použití nebo matou čtenáře. Typografie, která by šla zlepšit "až bude čas", nepatří do blokujícího seznamu. První veřejná verze má být použitelná, ne nekonečně leštěná.
+
+### 3. Denní rytmus prvního týdne
+
+První týden stačí krátký rytmus. Pokud se z něj stane dvouhodinový meeting, e-book začal řídit tým místo toho, aby týmu sloužil.
+
+Ranní kontrola:
+
+- Dostupnost URL a PDF.
+- Nové chyby v odkazech nebo navigaci.
+- Nová zpětná vazba.
+- Signály, které vyžadují reakci dnes.
+
+Odpolední triage:
+
+- Opravit drobné chyby.
+- Zařadit zpětnou vazbu do backlogu.
+- Odpovědět lidem, pokud čekají reakci.
+- Zapsat rozhodnutí do pracovního logu nebo redakčního boardu.
+
+Konec dne:
+
+- Jedna věta: co jsme se naučili?
+- Jedna věta: co jsme změnili?
+- Jedno rozhodnutí: co necháme být?
+
+To poslední je podceňované. "Co necháme být" chrání text před tím, aby se rozpadl pod tlakem nahodilých podnětů.
+
+### 4. Scoreboard signálů bez sledovacího aparátu
+
+Měření prvního týdne má odpovědět na provozní otázky. Ne na zvědavost. Nepotřebujete individuální profily čtenářů. Potřebujete vědět, jestli veřejná cesta funguje.
+
+Praktický scoreboard:
+
+| Signál | Otázka | Rozhodnutí |
+| --- | --- | --- |
+| Návštěvy landing page | Přicházejí lidé na správnou URL? | Zda distribuce vede na jeden zdroj pravdy |
+| Kliknutí na čtení online | Je hlavní akce srozumitelná? | Zda upravit první obrazovku |
+| Kliknutí na čtenářské trasy | Umí si lidé vybrat začátek? | Zda přesunout rozcestník výš |
+| Stažení PDF | Má offline formát smysl? | Zda PDF udržovat jako prioritní výstup |
+| Otevření changelogu | Zajímá lidi živost dokumentu? | Zda zviditelnit aktualizace |
+| Zpětná vazba | Kde je reálné tření? | Co opravit v další iteraci |
+| Dotazy na workshop | Je e-book obchodně použitelný? | Zda připravit navazující nabídku |
+
+Privacy-first minimum:
+
+- Měřte agregované akce, ne osobní profily.
+- Nepřidávejte nástroj jen proto, že umí hezčí graf.
+- U formulářů jasně řekněte, k čemu odpověď použijete.
+- Nepřelévejte zpětnou vazbu automaticky do marketingových seznamů.
+- Surová data nemažte "někdy", ale podle jednoduchého retenčního pravidla.
+
+Codyho komentář: pokud tým neumí říct, jaké rozhodnutí udělá podle konkrétní metriky, metrika je dekorace. A dekorace v analytice bývá drahá, i když má bezplatný tarif.
+
+### 5. Jak třídit první zpětnou vazbu
+
+Zpětná vazba v prvním týdnu bývá různorodá. Někomu chybí téma. Někdo nerozumí názvu. Někdo upozorní na překlep. Někdo by chtěl video, šablonu, kurz, konzultaci nebo úplně jinou knihu. Všechno si zaslouží pozornost, ale ne všechno si zaslouží okamžitou změnu.
+
+Použijte jednoduché typy:
+
+```text
+BUG: rozbitý odkaz, špatný export, nefunkční formulář
+NEJASNOST: člověk nechápe slib, trasu, pojem nebo další krok
+MEZERA: chybí důležité téma nebo příklad
+PŘÁNÍ: užitečný nápad, ale mimo aktuální vydání
+OBCHODNÍ SIGNÁL: poptávka po workshopu, auditu, konzultaci nebo šabloně
+PRIVACY SIGNÁL: dotaz nebo obava k datům, měření, formulářům nebo nástrojům
+```
+
+Priorita pro první týden:
+
+1. Opravit `BUG`, který brání použití.
+2. Opravit `NEJASNOST`, která se opakuje u více lidí nebo blokuje hlavní cestu.
+3. Zapsat `MEZERU` do redakčního backlogu.
+4. Poděkovat za `PŘÁNÍ`, ale neslibovat termín bez rozhodnutí.
+5. Převést `OBCHODNÍ SIGNÁL` do samostatné obchodní práce.
+6. Řešit `PRIVACY SIGNÁL` veřejně nebo srozumitelně, pokud může ovlivnit důvěru dalších čtenářů.
+
+### 6. Odpovědi lidem: krátce, jasně, bez přehnaných slibů
+
+Když někdo pošle podnět, odpověď nemusí být dlouhá. Má ale ukázat, že zpětná vazba nezmizela v černé díře.
+
+Vzor pro chybu:
+
+```text
+Díky za upozornění. Odkaz opravím v nejbližší aktualizaci a změnu zapíšu do pracovního logu.
+```
+
+Vzor pro návrh:
+
+```text
+Díky, tohle dává smysl jako kandidát do další verze. Zařadím to do redakčního backlogu a porovnám s ostatními podněty po prvním týdnu.
+```
+
+Vzor pro dotaz k datům:
+
+```text
+Díky za dotaz. Veřejná verze má být dostupná bez povinného e-mailu. Zpětnou vazbu používáme pro úpravy e-booku a nepřidáváme ji automaticky do marketingového seznamu.
+```
+
+Tón odpovědí má být praktický. Není potřeba dramatizovat každou připomínku ani se tvářit, že každá věta v e-booku je vytesaná do kamene.
+
+### 7. Co měnit hned a co nechat do další verze
+
+První týden rozlišujte tři druhy změn.
+
+Rychlá oprava:
+
+- rozbitý odkaz,
+- překlep v nadpisu nebo CTA,
+- nefunkční PDF,
+- matoucí formulace na landing page,
+- chybějící odkaz na čtenářské trasy,
+- špatná informace v publikačním balíčku.
+
+Malá obsahová úprava:
+
+- doplnění věty, která vysvětlí kontext,
+- zpřesnění příkladu,
+- přesunutí odkazu výš,
+- doplnění krátké poznámky k privacy-first měření,
+- přejmenování karty trasy, pokud lidé nechápou, pro koho je.
+
+Odložená změna:
+
+- nová kapitola,
+- přepis positioningu celého e-booku,
+- změna struktury příloh,
+- nový formát distribuce,
+- nový nástroj pro analytiku,
+- nové automatizace kolem formulářů.
+
+Odložená změna není odmítnutá změna. Jen nepatří do nervózního prvního týdne. Dejte jí kartu v backlogu, vlastníka a rozhodovací datum.
+
+### 8. Sedmidenní plán
+
+Praktický průběh může vypadat takto:
+
+| Den | Fokus | Výstup |
+| --- | --- | --- |
+| 0 | Technická kontrola | potvrzená URL, PDF, trasy, formulář a měření |
+| 1 | První veřejné odkazy | stručné sdělení, přímé odkazy, kontrola hlavní cesty |
+| 2 | Navigace a trasy | úprava nejasných vstupů, pokud se objeví |
+| 3 | Zpětná vazba | triage podnětů, odpovědi, opravy blokujících chyb |
+| 4 | Distribuční balíček | výřezy pro články, newsletter, RSS a obchodní follow-up |
+| 5 | Obchodní signály | oddělení poptávek od redakční zpětné vazby |
+| 6 | Redakční klid | žádné velké změny, jen zápis poznatků |
+| 7 | Review týdne | rozhodnutí o další verzi, backlog, krátký changelog |
+
+Den 6 je záměrně klidný. Po publikaci je snadné získat pocit, že se musí pořád něco dít. Nemusí. Někdy je nejlepší práce počkat, až se signály usadí a tým přestane reagovat na každý nový komentář jako na požární hlášení.
+
+### 9. Checklist přílohy
+
+- Existuje operační karta veřejného vydání s URL, vlastníky, kanálem zpětné vazby a měřenými signály?
+- Proběhla den nula kontrola landing page, webové verze, PDF, tras, formuláře a mobilního průchodu?
+- Je jasně řečeno, co první týden opravujete hned a co patří do další verze?
+- Měříte jen agregované signály, podle kterých umíte udělat rozhodnutí?
+- Má zpětná vazba typy jako bug, nejasnost, mezera, přání, obchodní signál a privacy signál?
+- Odpovídáte lidem stručně a bez slibů, které nemáte rozhodnuté?
+- Nevyžaduje čtení e-booku povinný e-mail nebo zbytečnou registraci?
+- Jsou obchodní podněty oddělené od redakčního backlogu?
+- Má sedmý den jasné review a rozhodnutí o další iteraci?
+- Zůstává jeden zdroj pravdy pro rukopis, PDF, landing page a šablony?
+
+První týden po zveřejnění má e-book ukázat, jestli umí žít venku. Ne jestli je dokonalý. Pokud lidé najdou správný vstup, pochopí hodnotu, použijí checklist a pošlou podnět bez ztráty důvěry, veřejná verze splnila první úkol. Další práce už je iterace, ne panika.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -25919,3 +26138,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BN s čtenářským testem veřejné verze e-booku: testovací úkoly, výběr testerů, scénář, signály použitelnosti, převod zpětné vazby do rozhodnutí a privacy-first pravidla.
 - 2026-05-09: Doplněna Příloha BO s čtenářskými trasami a rozcestníky pro veřejnou verzi e-booku: trasy pro web, SaaS MVP, marketing, privacy-first provoz, zákaznický workshop a dlouhodobou údržbu.
 - 2026-05-09: Doplněna Příloha BP s návrhem landing page pro veřejnou verzi e-booku: první obrazovka, čtenářské trasy, formáty, formuláře, privacy-first měření, SEO minimum a publikační checklist.
+- 2026-05-09: Doplněna Příloha BQ s plánem prvního týdne po zveřejnění veřejné verze e-booku: operační karta, den nula kontrola, denní rytmus, scoreboard signálů, triage zpětné vazby a sedmidenní review.
