@@ -25067,6 +25067,198 @@ Revizní kalendář je nudný, což je jeho nejlepší vlastnost. Nudné systém
 - Dá se měsíční revize udělat bez velkého projektu kolem?
 - Chrání revizní proces privacy-first hodnotu e-booku i po publikaci?
 
+## Příloha BN: Čtenářský test veřejné verze e-booku
+
+Čtenářský test je malá zkouška, jestli e-book funguje v rukou lidí, pro které má být užitečný. Neověřuje, jestli se autorovi líbí vlastní formulace. Ověřuje, jestli čtenář pochopí slib, najde správnou část, udělá podle ní rozhodnutí a odchází s menším chaosem než před čtením.
+
+U dlouhého praktického textu je to důležité. Autor snadno vidí v rukopisu logiku, protože ji sám vytvořil. Čtenář vidí jen stránku, nadpisy, tempo, příklady a to, jestli mu text pomáhá v konkrétní situaci. Když se ztratí, není to jeho chyba. Je to signál, že struktura, navigace nebo jazyk potřebují zpřesnit.
+
+Čtenářský test má tři cíle:
+
+1. Zjistit, jestli e-book slouží správným lidem ve správných situacích.
+2. Najít části, které jsou dlouhé, nejasné, duplicitní nebo příliš interní.
+3. Převést zpětnou vazbu do konkrétních úprav, ne do neurčitého pocitu "mělo by se to zlepšit".
+
+### 1. Testujte úkol, ne dojem
+
+Otázka "jak se ti to líbí?" je slabá. Lidé chtějí být zdvořilí, takže často řeknou něco jako "je to dobré, jen dlouhé". To je milé, ale skoro nepoužitelné. Lepší je dát čtenáři konkrétní situaci.
+
+Příklady úkolů:
+
+- Chystáte nový web pro B2B službu. Najděte část, podle které byste zkontrolovali homepage.
+- Máte SaaS MVP před pilotem. Najděte checklist, který pomůže rozhodnout, jestli je rozsah realistický.
+- Potřebujete vysvětlit zákazníkovi privacy-first přístup. Najděte část, kterou byste poslali jako podpůrný text.
+- Chcete z e-booku udělat interní workshop. Najděte přílohu, která vám pomůže připravit agendu.
+- Máte podezření, že část textu zastarává. Najděte postup, jak ji revidovat.
+
+U každého úkolu sledujte tři věci:
+
+- Kam čtenář klikne nebo kam začne scrollovat jako první.
+- Jak rychle najde relevantní část.
+- Jestli podle nalezené části dokáže udělat praktický další krok.
+
+Nejde o laboratorní perfekcionismus. Stačí pět lidí, pět úkolů a upřímné poznámky. Pokud tři lidé hledají stejnou věc na špatném místě, problém není ve čtenářích. Navigace nebo názvy kapitol posílají špatný signál.
+
+### 2. Vyberte čtenáře podle skutečných tras
+
+Ne všichni čtenáři budou e-book používat stejně. Někdo chce opravit web. Někdo staví SaaS. Někdo řeší marketing. Někdo chce šablonu pro workshop. Testovací skupina má pokrýt tyto trasy, ne jen náhodné známé, kteří jsou ochotní něco přečíst.
+
+Minimální sada testovacích rolí:
+
+- Zakladatel nebo majitel menší firmy, který potřebuje rozhodnout, co zlepšit na webu.
+- Produktový nebo technický člověk, který řeší MVP, provoz nebo integrace.
+- Marketingový člověk, který hledá lepší obsah, distribuci a měření bez tlakových funnelů.
+- Obchodní nebo customer success člověk, který chce použít e-book v komunikaci se zákazníkem.
+- Externí čtenář bez znalosti Dreamindu, který ověří, jestli text dává smysl i bez interního kontextu.
+
+Každý člověk nemusí číst celý rukopis. To by byl spíš trest než test. Dejte mu trasu, která odpovídá jeho práci, a požádejte ho, aby nahlas popsal, co hledá, co chápe a kde se zasekl.
+
+Praktické pravidlo: jeden tester, jedna hlavní trasa, maximálně čtyřicet pět minut. Lepší pět krátkých průchodů než jeden obří dokument s připomínkami, který se pak měsíc nikdo neodváží otevřít.
+
+### 3. Připravte testovací scénář
+
+Bez scénáře se test rozpadne do debat o stylu. Scénář drží pozornost u použitelnosti.
+
+Jednoduchý formát:
+
+```text
+Tester:
+Role:
+Datum:
+Testovaná verze:
+Trasa:
+Úkol:
+Začal hledat zde:
+Našel relevantní část:
+Co pochopil správně:
+Kde váhal:
+Co by udělal dál:
+Citace testera:
+Nález:
+Doporučená úprava:
+Riziko:
+Priorita:
+```
+
+Vyplněný příklad:
+
+```text
+Tester: anonymizovaný zakladatel B2B služby
+Role: majitel firmy
+Datum: 2026-05-09
+Testovaná verze: pracovní rukopis
+Trasa: nový web
+Úkol: najít postup pro kontrolu homepage před redesignem
+Začal hledat zde: obsah, kapitola 2
+Našel relevantní část: kapitola 2 a kapitola 30
+Co pochopil správně: rychlost, důvěra, obsah a konverze jako čtyři vrstvy
+Kde váhal: nevěděl, jestli má začít kapitolou 2, nebo checklistem 30
+Co by udělal dál: vytisknout checklist pro meeting s týmem
+Citace testera: "Potřebuju asi kratší vstup pro lidi, kteří nebudou číst kapitolu."
+Nález: trasa nový web potřebuje jasnější rozcestník
+Doporučená úprava: doplnit krátkou čtenářskou trasu "oprava webu za měsíc"
+Riziko: nízké
+Priorita: střední
+```
+
+Citace testera pište krátce a anonymizovaně. Nepotřebujete sbírat osobní profily, nahrávky ani přesné chování na stránce, pokud cílem je redakční zlepšení. Často stačí poznámky z hovoru a pár konkrétních vět.
+
+### 4. Sledujte signály použitelnosti
+
+Čtenářský test nemá skončit seznamem názorů. Hledejte signály, které ukazují, jestli e-book plní práci.
+
+Dobré signály:
+
+- Čtenář rychle najde část, která odpovídá jeho situaci.
+- Umí vlastními slovy říct, co má udělat dál.
+- Vybere si checklist nebo šablonu a chce ji použít.
+- Pozná, kdy je doporučení názor a kdy tvrzení se zdrojem.
+- Všimne si privacy-first hodnoty jako praktické výhody, ne jako právní ozdoby.
+- Po přečtení zúží problém místo toho, aby přidal další nápady do chaosu.
+
+Varovné signály:
+
+- Čtenář čte dlouho, ale neumí pojmenovat další krok.
+- Přeskakuje mezi přílohami a neví, která je pro něj hlavní.
+- Zaměňuje interní pracovní šablony za veřejný text pro zákazníka.
+- Považuje privacy-first části za brzdu, protože nejsou napojené na obchodní hodnotu.
+- Opakovaně naráží na stejná slova, ale nevidí rozdíl mezi kapitolami.
+- Ptá se na věci, které v textu jsou, ale nejsou dobře dohledatelné.
+
+Nejlepší nálezy bývají nudně konkrétní. Třeba: "V obsahu chybí trasa pro člověka, který řeší redesign", "checklist je dobrý, ale měl by být hned po kapitole", "název přílohy zní interně, přitom je užitečná pro zákazníka". Takové věci se dají opravit. "Je to moc dlouhé" se opravit nedá, dokud nevíte, která část je dlouhá pro koho a proč.
+
+### 5. Převádějte zpětnou vazbu do rozhodnutí
+
+Po testu nevytvářejte nekonečný seznam připomínek. Vytvořte rozhodovací tabulku.
+
+```text
+Nález:
+Týká se:
+Typ problému: navigace / jazyk / délka / chybějící příklad / duplicitní část / zdroj / privacy-first dopad
+Dopad na čtenáře:
+Navržená úprava:
+Rozhodnutí: upravit / ponechat / ověřit znovu / přesunout do backlogu / odmítnout
+Vlastník:
+Termín:
+```
+
+Příklady rozhodnutí:
+
+- Upravit: tři testeři nenašli checklist pro nový web, i když existuje. Doplnit rozcestník a odkazy.
+- Ponechat: jeden tester chtěl víc detailů k enterprise sales, ale e-book je primárně pro malé týmy. Zapsat jako možnou budoucí přílohu, neměnit první verzi.
+- Ověřit znovu: privacy-first kapitola je pro marketingového čtenáře příliš technická. Otestovat kratší vysvětlení obchodní hodnoty.
+- Přesunout do backlogu: vytvořit samostatnou webovou navigaci podle tras, ale neblokovat publikaci PDF.
+- Odmítnout: návrh přidat agresivní lead magnet za e-mail by rozbil privacy-first princip distribuce.
+
+Codyho komentář: zpětná vazba není rozkaz. Je to vstup do rozhodnutí. Když jeden člověk nemá rád dlouhé texty, neznamená to, že se má e-book proměnit v deset motivačních kartiček. Když tři lidé nenajdou stejnou část, je čas přestat bránit oblíbený nadpis a opravit navigaci.
+
+### 6. Privacy-first pravidla testu
+
+Čtenářský test sám nesmí popřít hodnoty e-booku. Pokud testujete privacy-first materiál tím, že sledujete každé kliknutí přes hromadu externích skriptů, vzniká krásná ukázka toho, jak si člověk může sám podkopnout důvěru.
+
+Držte minimum:
+
+- Sbírejte jen data potřebná k úpravě textu.
+- Testerům předem řekněte, co zaznamenáváte a proč.
+- Nepořizujte nahrávky, pokud stačí poznámky.
+- Pokud nahrávku opravdu potřebujete, domluvte účel, přístup a datum smazání.
+- Osobní údaje anonymizujte hned v pracovních poznámkách.
+- Neposílejte interní verze e-booku přes nástroje, kde nevíte, kdo má k datům přístup.
+- Nepoužívejte test jako záminku pro přidání lidí do newsletteru.
+- Pokud vznikne veřejná citace, schvalte ji samostatně.
+
+Privacy-first test není méně hodnotný. Naopak nutí tým ptát se přesněji. Nepotřebujete vědět všechno o testerovi. Potřebujete vědět, kde se v textu ztratil, proč se ztratil a co mu pomohlo pokračovat.
+
+### 7. Malý plán testu před publikací
+
+Pro první veřejnou verzi stačí tento plán:
+
+1. Vyberte tři až pět čtenářských tras.
+2. Ke každé trase napište jeden konkrétní úkol.
+3. Oslovte pět testerů s různými rolemi.
+4. Každý test držte do čtyřiceti pěti minut.
+5. Po každém testu zapište maximálně pět nálezů.
+6. Po posledním testu slučte podobné nálezy.
+7. Vyberte tři až sedm úprav, které mají největší dopad na čtenářskou cestu.
+8. Změny proveďte v jedné redakční iteraci.
+9. Do pracovního logu zapište, co test změnil.
+10. Větší nápady, které neblokují publikaci, dejte do redakčního backlogu.
+
+Nenechte test přerůst do nekonečné validace. Cílem není dokázat, že e-book je dokonalý. Cílem je odstranit největší překážky před tím, než ho začne používat víc lidí.
+
+### 8. Checklist přílohy
+
+- Testujete konkrétní úkoly, ne obecný dojem?
+- Máte vybrané testery podle hlavních čtenářských tras?
+- Je každý test krátký, řízený a zapsaný ve stejné šabloně?
+- Sledujete, jestli čtenář najde část, pochopí ji a udělá další krok?
+- Rozlišujete názor jednotlivce od opakovaného vzoru?
+- Převádíte zpětnou vazbu do rozhodnutí: upravit, ponechat, ověřit, odložit nebo odmítnout?
+- Chrání test soukromí testerů a sbírá jen potřebná data?
+- Máte po testu vybraných jen několik nejdůležitějších úprav?
+- Neodkládáte publikaci kvůli nápadům, které patří do pozdější verze?
+- Zapisujete výsledky testu do pracovního logu, changelogu nebo redakčního backlogu podle dopadu?
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -25260,3 +25452,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha BK o ověření faktů a zdrojů před publikací: rizikovost tvrzení, zdrojové karty, právní a regulační odkazy, kontrola stárnutí zdrojů a privacy-first zdrojování.
 - 2026-05-09: Doplněna Příloha BL se zdrojovou knihovnou pro e-book a navazující obsah: karty zdrojů, rizikovost, veřejné a interní zdroje, citovatelné výřezy a revizní workflow.
 - 2026-05-09: Doplněna Příloha BM s revizním kalendářem pro dlouhodobě živý e-book: rychlost stárnutí obsahu, typy revizí, měsíční šablona, rozhodnutí po kontrole a privacy-first revizní pravidla.
+- 2026-05-09: Doplněna Příloha BN s čtenářským testem veřejné verze e-booku: testovací úkoly, výběr testerů, scénář, signály použitelnosti, převod zpětné vazby do rozhodnutí a privacy-first pravidla.
