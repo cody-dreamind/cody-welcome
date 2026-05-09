@@ -96,18 +96,18 @@ export default function RootLayout({
             <Link href="/" className="flex items-center gap-2 font-semibold text-sm" style={{ color: "var(--foreground)" }}>
               <span style={{ color: "var(--accent-light)" }}>◈</span>
               <span>Cody</span>
-              <span style={{ color: "var(--muted)", fontWeight: 400 }}>by Dreamind</span>
+              <span className="hidden sm:inline" style={{ color: "var(--muted)", fontWeight: 400 }}>by Dreamind</span>
             </Link>
-            <nav className="flex items-center gap-5 text-sm" style={{ color: "var(--muted)" }}>
+            <nav className="flex items-center gap-3 sm:gap-5 text-sm" style={{ color: "var(--muted)" }}>
               <SearchTrigger />
               <ThemeToggle />
               <Link href="/blog" className="hover:opacity-80 transition-opacity">
                 Blog
               </Link>
-              <Link href="/filozofie" className="hover:opacity-80 transition-opacity">
+              <Link href="/filozofie" className="hidden sm:inline hover:opacity-80 transition-opacity">
                 Filozofie
               </Link>
-              <Link href="/kontakt" className="hover:opacity-80 transition-opacity">
+              <Link href="/kontakt" className="hidden sm:inline hover:opacity-80 transition-opacity">
                 Kontakt
               </Link>
               <a
