@@ -28548,6 +28548,212 @@ Dobré uzavření neznamená, že je všechno hotové. Znamená, že tým ví, c
 
 Podpůrné okno drží první veřejnou verzi při zemi. Pomáhá čtenářům, chrání tým před chaosem a dává e-booku šanci stárnout jako živý pracovní systém, ne jako jednorázové PDF, které někdo hrdinně vypustil a pak se tvářil, že už se ho to netýká.
 
+## Příloha CF: Přechod veřejné edice do dlouhodobého provozu
+
+Po podpůrném okně přichází méně viditelná, ale důležitější fáze: běžný provoz veřejné edice. Už nejde o první reakce, rychlé opravy a denní kontrolu. Jde o to, aby e-book zůstal použitelný, důvěryhodný a obchodně užitečný i ve chvíli, kdy kolem něj není launchová energie.
+
+Tahle fáze bývá zrádná. Tým má pocit, že vydáním a prvním týdnem je hotovo. Jenže veřejný materiál začíná žít vlastním životem. Někdo ho používá v sales hovoru. Někdo z něj udělá interní checklist. Někdo na něj odkáže v článku. Někdo najde starý údaj za půl roku. Pokud neexistuje dlouhodobý provozní režim, e-book se potichu změní z aktiva na muzeum dobrých úmyslů.
+
+Cíl dlouhodobého provozu není pořád přepisovat. Cíl je udržet jasný zdroj pravdy, kontrolovat stárnoucí části, převádět poznatky do praktických šablon a chránit privacy-first hodnotu i při postupném rozšiřování.
+
+### 1. Změňte režim z podpory na údržbu
+
+Podpůrné okno je intenzivní. Údržba je rytmická. Jakmile skončí první veřejné období, tým by měl vědomě přepnout režim.
+
+Praktický rozdíl:
+
+- Podpůrné okno řeší blokery, dotazy a rychlé opravy.
+- Dlouhodobá údržba řeší stárnutí, konzistenci, priority a použitelnost.
+- Podpůrné okno má denní kontrolu.
+- Dlouhodobá údržba má týdenní triage a měsíční revizi.
+- Podpůrné okno chrání první dojem.
+- Dlouhodobá údržba chrání důvěru v čase.
+
+Přechod si zapište jako rozhodnutí:
+
+```markdown
+# Přechod do dlouhodobého provozu
+
+Datum:
+Vlastník veřejné edice:
+Stav po podpůrném okně:
+Otevřené blokery:
+Pravidelný rytmus:
+Nejbližší revize:
+Kde je zdroj pravdy:
+Kde je backlog:
+```
+
+Bez tohoto kroku se snadno stane, že všichni předpokládají, že e-book "někdo hlídá". To je elegantní cesta k tomu, aby ho nehlídal nikdo.
+
+### 2. Udržujte jeden zdroj pravdy
+
+Živý e-book se rychle rozpadne, pokud existuje víc verzí bez jasného vztahu. Markdown v repozitáři, webová verze, PDF, interní šablony, citovatelné výřezy, slidedeck pro workshop a poznámky v CRM mohou být užitečné. Ale jen pokud je jasné, co je kanonické.
+
+Minimální pravidla:
+
+- Kanonický zdroj je jeden soubor nebo jedna veřejně definovaná edice.
+- Odvozené formáty mají datum generování nebo odkaz na verzi.
+- Šablony a výřezy odkazují zpět na původní část.
+- Starší exporty nejsou upravované ručně bez zápisu do zdroje.
+- Pokud se změní význam části, aktualizují se i odvozené materiály.
+
+Příklad: pokud kapitola o privacy-first analytice dostane novou formulaci pro datovou mapu, nestačí upravit jen e-book. Zkontrolujte i checklist pro privacy-first analytiku, sales výřez pro důvěru a interní šablonu pro audit. Jinak tým začne používat tři různé verze stejného doporučení.
+
+Codyho komentář: jeden zdroj pravdy není posedlost pořádkem. Je to obrana proti firemnímu folkloru. Jakmile lidé začnou říkat "já mám někde starší PDF, tam to bylo jinak", obsah už neřídíte. Obsah řídí náhodné přílohy v chatu.
+
+### 3. Rozdělte údržbu podle rychlosti stárnutí
+
+Ne každá část e-booku stárne stejně. Některé principy vydrží roky. Jiné části potřebují pravidelnou kontrolu, protože se mění nástroje, právní prostředí, ceny, rozhraní nebo očekávání trhu.
+
+Použijte tři úrovně:
+
+- Stabilní: principy, otázky, rozhodovací rámce, checklisty bez konkrétních nástrojů.
+- Kontrolované: doporučení k provozu, měření, SEO, distribuci, bezpečnosti a workflow.
+- Rychle stárnoucí: konkrétní nástroje, právní povinnosti, benchmarky, ceny, integrační postupy a platformní pravidla.
+
+Každá úroveň má jiný rytmus:
+
+- Stabilní části kontrolujte při větších edicích.
+- Kontrolované části projděte měsíčně nebo kvartálně podle významu.
+- Rychle stárnoucí části ověřujte před každou veřejnou distribucí, citací nebo obchodním použitím.
+
+Praktická karta části:
+
+```markdown
+# Karta údržby části
+
+Část:
+Typ stárnutí: stabilní / kontrolované / rychle stárnoucí
+Poslední revize:
+Další revize:
+Vlastník:
+Zdroje:
+Odvozené materiály:
+Riziko při zastarání:
+```
+
+Tím se z údržby nestane nekonečné čtení celého rukopisu. Tým ví, které části jsou klidné a které potřebují pozornost před použitím.
+
+### 4. Převádějte poznatky do pracovních materiálů
+
+E-book má největší hodnotu ve chvíli, kdy pomáhá rozhodovat. To znamená, že dlouhodobý provoz nemá být jen redakční. Má sledovat, kde se text reálně používá.
+
+Typické převody:
+
+- Kapitola o dobrém webu se změní v mini audit pro úvodní konzultaci.
+- Checklist pro SaaS MVP se stane vstupním dokumentem pro discovery workshop.
+- Privacy-first kapitola se převede do datové mapy a otázek na dodavatele.
+- Část o lead generation se použije jako filtr pro marketingové experimenty.
+- Rozhodovací dashboard se přepíše do měsíčního review týmu.
+
+Každý převod by měl mít jasné omezení. Ne každá věta z e-booku patří do šablony. Šablona má vést k akci, ne připomínat, že e-book má hodně stran.
+
+Jednoduchý test:
+
+- Jaké rozhodnutí má šablona usnadnit?
+- Kdo ji vyplňuje?
+- Jaký výstup vznikne?
+- Co se stane po vyplnění?
+- Jaká data se při tom sbírají?
+- Kde se výstup uloží?
+
+Pokud neumíte odpovědět, šablona ještě není pracovní nástroj. Je to jen hezky ohraničený text.
+
+### 5. Držte privacy-first provoz i při rozšiřování
+
+Dlouhodobý provoz často přidává nové vrstvy: formulář pro feedback, export do PDF, interní knihovnu, workshopové materiály, měření čtenosti, obchodní výřezy, automatizace distribuce. Každá vrstva může nenápadně přidat nový datový tok.
+
+Privacy-first kontrola při každé nové vrstvě:
+
+- Přibývá nový formulář, cookie, log, skript nebo nástroj?
+- Sbírá se osobní údaj, který není nutný pro daný účel?
+- Je jasné, kde jsou data fyzicky nebo smluvně provozovaná?
+- Má někdo nový přístup k odpovědím, leadům nebo interním poznámkám?
+- Je retence dat časově omezená?
+- Umí tým data exportovat nebo smazat?
+- Je veřejná komunikace pořád srozumitelná pro normálního člověka?
+
+Příklad: pokud přidáte formulář "pošlete mi checklist", najednou neřešíte jen obsah. Řešíte souhlas, účel, doručování, retenci, přístup, odhlášení a bezpečnost. Někdy je lepší dát checklist přímo ke stažení bez formuláře. Méně dramat, víc důvěry. Ano, marketingový spreadsheet možná trochu zapláče, ale přežije to.
+
+### 6. Měřte užitečnost, ne ruch
+
+Veřejný e-book svádí k měření věcí, které vypadají dobře v reportu: zobrazení, stažení, sdílení, kliky, impresní grafy. Tyto signály nejsou zbytečné, ale samy o sobě neříkají, jestli e-book pomáhá.
+
+Lepší otázky:
+
+- Použili čtenáři konkrétní checklist?
+- Pomohla některá část zkrátit discovery nebo audit?
+- Přinesl e-book lepší obchodní rozhovory?
+- Vrací se lidé na rozcestníky a praktické přílohy?
+- Které části vyvolávají dotazy, protože nejsou dost jasné?
+- Které části tým reálně používá při práci?
+- Kde materiál snižuje počet ručních vysvětlování?
+
+Privacy-first měření může být střídmé:
+
+- anonymizované počty návštěv hlavních rozcestníků,
+- kliky na přímé odkazy na šablony,
+- ručně zapsané signály ze sales nebo supportu,
+- poznámky z workshopů bez osobních údajů,
+- měsíční skóre užitečnosti podle týmu.
+
+Není potřeba sledovat každý pohyb čtenáře. Potřebujete vědět, jestli materiál vede k lepším rozhodnutím. To se často pozná líp z pěti kvalitních poznámek než z tisíce anonymních událostí, které nikdo neumí interpretovat.
+
+### 7. Nastavte rytmus dlouhodobého provozu
+
+Dlouhodobý provoz má být lehký. Pokud se z něj stane další projektový moloch, tým ho přestane dělat. Stačí rytmus, který udrží kontrolu bez zbytečného divadla.
+
+Doporučený rytmus:
+
+- Týdně: triage nových podnětů a rychlé třídění do backlogu.
+- Měsíčně: kontrola priorit, stárnoucích částí a nejpoužívanějších šablon.
+- Kvartálně: konsolidace změn, kontrola čtenářských tras a odvozených materiálů.
+- Ročně: strategické rozhodnutí, jestli e-book pořád podporuje aktuální nabídku, positioning a provozní realitu.
+
+Měsíční provozní agenda na 30 minut:
+
+```markdown
+# Měsíční provoz veřejné edice
+
+Datum:
+Vlastník:
+
+## Nové podněty
+-
+
+## Části k revizi
+-
+
+## Odvozené materiály k aktualizaci
+-
+
+## Privacy-first kontrola
+-
+
+## Rozhodnutí pro další měsíc
+-
+```
+
+Jedno dobré rozhodnutí měsíčně stačí. Upravit rozcestník, sloučit dvě šablony, ověřit stárnoucí zdroj, zjednodušit formulář, doplnit příklad. Dlouhodobá kvalita vzniká z malých pravidelných oprav, ne z paniky jednou za rok.
+
+### Checklist přílohy
+
+- Je jasně ukončené podpůrné okno a nastavený režim údržby?
+- Má veřejná edice jednoho vlastníka?
+- Existuje jeden kanonický zdroj pravdy?
+- Mají odvozené formáty odkaz na verzi nebo datum generování?
+- Jsou části rozdělené podle rychlosti stárnutí?
+- Ví tým, které části ověřit před veřejnou citací nebo obchodním použitím?
+- Převádíte vybrané části do praktických šablon s jasným rozhodnutím?
+- Kontrolujete nové datové toky při každém rozšíření?
+- Měříte užitečnost, ne jen ruch kolem obsahu?
+- Má e-book týdenní, měsíční a kvartální provozní rytmus?
+- Existuje pravidlo, kdy obsah neměnit, jen zařadit do backlogu?
+- Umí tým vysvětlit, proč e-book pořád existuje a komu pomáhá?
+
+Dlouhodobý provoz je méně atraktivní než vydání. Ale právě tam se ukáže, jestli e-book opravdu funguje jako pracovní systém. Veřejná edice nemá být pomník. Má být živý nástroj, který zůstává konkrétní, udržovaný a férový k lidem i jejich datům.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -28759,3 +28965,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha CC s kanonickou navigací a indexem veřejné edice: vstupy, čtenářské trasy, situační index, kanonické odkazy, týmová pravidla a privacy-first kontrola.
 - 2026-05-09: Doplněna Příloha CD s vydávací bránou veřejné edice: zmrazení rozsahu, třídění nálezů, test čtenářských cest, privacy-first kontrola, rozhodovací karta a review po vydání.
 - 2026-05-09: Doplněna Příloha CE s podpůrným oknem po vydání veřejné edice: triage podnětů, rychlé opravy, odpovědi na dotazy, privacy-first podpora, denní poznámka a uzavírací rozhodnutí.
+- 2026-05-09: Doplněna Příloha CF o přechodu veřejné edice do dlouhodobého provozu: zdroj pravdy, údržba podle stárnutí, pracovní šablony, privacy-first rozšiřování, měření užitečnosti a provozní rytmus.
