@@ -33101,6 +33101,271 @@ Když review trvá déle než třicet minut, pravděpodobně řešíte příliš
 
 Backlog po změně nabídky je dobrý jen tehdy, když zjednodušuje rozhodování. Pokud přidává chaos, vraťte se o krok zpět: jedno pozorování, jedna interpretace, jedna změna, jedna kontrola. Malý tým nepotřebuje dokonalý systém řízení. Potřebuje dost disciplíny na to, aby se dobré poznatky neztratily a špatné nápady nedostaly do výroby jen proto, že zněly akčně na poradě.
 
+## Příloha CZ: Měsíční review nabídky po backlogových změnách
+
+Když tým začne po změně nabídky sbírat poznatky do backlogu, snadno vznikne pocit, že se systém zlepšuje. Někdy je to pravda. Jindy se jen přesunul chaos z webu do tabulky. Backlog není důkaz pokroku. Důkaz pokroku je, že dokončené změny zlepšily rozhodování zákazníka, snížily tření v sales nebo zjednodušily delivery.
+
+Proto má mít každá opakovatelná nabídka po větších úpravách měsíční review. Ne velkou strategickou poradu s dvaceti slidovou obětí bohům produktivity. Stačí krátké, pravidelné vyhodnocení: co jsme změnili, co to udělalo, co se potvrdilo, co se ukázalo jako šum a co už nebudeme dál tlačit.
+
+### 1. Začněte otázkou, ne seznamem úkolů
+
+Měsíční review má začít jednou rozhodovací otázkou. Pokud začnete seznamem hotových úkolů, tým bude obhajovat práci. Pokud začnete otázkou, tým bude hledat pravdu.
+
+Dobré otázky:
+
+- Je nabídka po úpravách srozumitelnější pro správný typ zákazníka?
+- Přicházejí do prvních hovorů lidé s realističtějším očekáváním?
+- Zkrátila se cesta od poptávky k rozhodnutí?
+- Ubylo vysvětlování stejné námitky pořád dokola?
+- Zlepšila se kvalita vstupů pro delivery?
+- Nepřidali jsme kvůli měření nebo kvalifikaci zbytečný sběr dat?
+
+Slabé otázky:
+
+- Kolik položek jsme dokončili?
+- Kolik jsme toho upravili na webu?
+- Líbí se nám nová stránka víc?
+- Máme v CRM víc polí?
+
+Ty druhé otázky měří aktivitu, ne výsledek. Aktivita je příjemná, protože se dá snadno vypsat do reportu. Výsledek je nepříjemnější, protože se občas ukáže, že pracovitě šlapeme vedle. Což je přesně důvod, proč review existuje.
+
+### 2. Vezměte jen změny z posledního měsíce
+
+Review se nemá vracet ke všem historickým rozhodnutím. Zaměřte se na změny, které byly dokončené od poslední kontroly. U každé změny napište krátkou kartu:
+
+```markdown
+# Dokončená změna nabídky
+
+Název:
+Datum dokončení:
+Kde se změna projevila:
+Původní signál:
+Očekávaný výsledek:
+Skutečný signál po změně:
+Datový dopad:
+Rozhodnutí:
+```
+
+Příklad:
+
+```markdown
+# Dokončená změna nabídky
+
+Název: Doplnění sekce "Co není součástí" na landing page
+Datum dokončení: 2026-05-10
+Kde se změna projevila: landing page, sales karta, follow-up e-mail
+Původní signál: 3 z 5 hovorů čekaly kompletní redesign
+Očekávaný výsledek: méně nejasností před prvním hovorem
+Skutečný signál po změně: 2 nové hovory bez této námitky, 1 dotaz na rozšíření rozsahu
+Datový dopad: žádný nový sběr
+Rozhodnutí: ponechat, doplnit krátký příklad výstupu
+```
+
+Tento formát je záměrně malý. Pokud vyplnění karty trvá půl hodiny, karta je moc složitá nebo tým sbírá špatná data. Review nabídky nemá být audit auditorského auditu. Ano, i to se v přírodě vyskytuje.
+
+### 3. Oddělte signály z webu, sales a delivery
+
+Jedna změna může vypadat dobře na webu a špatně v delivery. Nebo obráceně. Proto signály netahejte do jednoho pytle.
+
+Tři základní vrstvy:
+
+1. Web a poptávka: kvalita návštěv, kliknutí na hlavní akci, kvalita formulářů, konkrétnost dotazů.
+2. Sales: námitky, délka rozhodování, očekávání rozsahu, ochota sdílet potřebný kontext, důvody ztráty.
+3. Delivery: kvalita vstupů, opakovatelnost procesu, počet výjimek, množství práce mimo rozsah, použitelnost výstupu.
+
+Příklad vyhodnocení:
+
+```markdown
+Změna: Nový popis vstupní diagnostiky
+
+Web:
+Dotazy jsou konkrétnější, lidé častěji zmiňují vlastní proces místo obecného "potřebujeme web".
+
+Sales:
+Ubyla námitka "a bude v tom i implementace?", ale přibyl dotaz na cenu navazující práce.
+
+Delivery:
+Vstupní materiály od zákazníků jsou pořád neúplné, protože formulář se neptá na existující nástroje.
+
+Rozhodnutí:
+Text ponechat, sales kartu doplnit o navazující možnosti, formulář neměnit hned. Nejdřív přidat jednu nepovinnou otázku do discovery hovoru.
+```
+
+Tímto způsobem tým nepřecení jeden pozitivní signál. To, že nový text zní dobře, ještě neznamená, že zlepšil práci. A to, že se jeden zákazník ptal divně, ještě neznamená, že text musí okamžitě do dílny.
+
+### 4. Hodnoťte i to, co jste vědomě neudělali
+
+Dobré review neoslavuje jen dokončené změny. Kontroluje také věci, které tým správně odložil. V malém týmu je schopnost neudělat lákavou zbytečnost skoro stejně cenná jako schopnost udělat správnou změnu.
+
+Krátká sekce:
+
+```markdown
+# Co jsme tento měsíc vědomě neudělali
+
+Nápad:
+Proč vypadal lákavě:
+Proč jsme ho odložili:
+Kdy se k němu vrátíme:
+Co by muselo být pravda, aby dával smysl:
+```
+
+Příklady:
+
+- Nepřidali jsme povinné pole "rozpočet" do formuláře, protože by mohlo odradit relevantní poptávky a stejné rozhodnutí zvládneme v prvním hovoru.
+- Nepřepsali jsme celý positioning, protože problém byl v nejasném rozsahu jedné nabídky, ne v celé značce.
+- Nepřidali jsme další analytický nástroj, protože současné signály stačí pro rozhodnutí o další iteraci.
+- Nevyráběli jsme PDF brožuru, protože zákazníci potřebovali vidět ukázku výstupu, ne další leštěný materiál.
+
+Codyho komentář: "ne" není pasivita. Dobře odůvodněné "ne" je údržba systému. Špatně odůvodněné "ano" je dluh s hezkým názvem v backlogu.
+
+### 5. Udělejte privacy-first mini audit změn
+
+Každý měsíc si u změn nabídky projděte datovou stopu. Nečekejte až na roční audit. Když přidáte jedno CRM pole, jednu automatizaci, jeden nový formulář a jeden nový report každý měsíc, za půl roku máte malý datový sklad, který se tváří jako obchodní proces.
+
+Mini audit:
+
+- Přidali jsme nové pole do formuláře, CRM nebo support systému?
+- Začali jsme ukládat nový typ poznámek ze sales hovorů?
+- Změnili jsme, kdo má přístup k poptávkám nebo výstupům?
+- Přidali jsme nový nástroj, integraci nebo export?
+- Změnila se retence dat?
+- Ví zákazník, proč daný údaj potřebujeme?
+- Umíme údaj smazat nebo exportovat bez ruční archeologie?
+- Stačil by agregovaný signál místo osobního údaje?
+
+Výstup má být jednoduchý:
+
+```markdown
+Privacy-first výsledek měsíce:
+Nový sběr dat: ano/ne
+Nové přístupy: ano/ne
+Nový dodavatel: ano/ne
+Změna retence: ano/ne
+Potřebná aktualizace datové mapy:
+Potřebná úprava formuláře nebo privacy textu:
+Rozhodnutí:
+```
+
+Privacy-first hodnota není jen "nepoužíváme trackery". Je to schopnost říct, proč data existují, kdo je používá a kdy přestanou být potřeba. Pokud to tým neumí vysvětlit, nemá měření pod kontrolou. Má jen tabulku s optimismem.
+
+### 6. Rozhodněte o stavu nabídky
+
+Na konci měsíčního review má nabídka dostat jeden z pěti stavů:
+
+1. Ponechat: funguje dostatečně dobře, další změny by teď přidaly víc tření než hodnoty.
+2. Jemně upravit: jeden konkrétní problém, jedna malá změna, jasná kontrola.
+3. Zpřesnit důkaz: nabídka je pochopitelná, ale chybí ukázka, case study, výstup nebo konkrétní příklad.
+4. Zúžit rozsah: zákazníci nebo delivery opakovaně narážejí na příliš široký slib.
+5. Zastavit a přepsat rozhodnutí: signály ukazují, že problém není v textu, ale v samotné nabídce.
+
+Rozhodnutí zapište jednou větou:
+
+```markdown
+Stav nabídky po review:
+Jemně upravit.
+
+Proč:
+Nabídka je srozumitelnější, ale pořád vznikají otázky na navazující implementaci.
+
+Další změna:
+Doplnit do sales karty tři varianty dalšího kroku po auditu.
+
+Co teď neděláme:
+Neměníme cenu, nerozšiřujeme formulář, nepřepisujeme landing page.
+```
+
+Toto rozhodnutí je důležité i psychologicky. Ukončuje nekonečné "ještě bychom mohli". Ano, mohli. Tým může vždycky ještě něco. Otázka je, jestli to teď opravdu pomůže.
+
+### 7. Propojte review s veřejnými a interními materiály
+
+Když se nabídka mění, změna se často propsala jen do jednoho místa. Web se upraví, ale sales karta zůstane stará. Formulář se změní, ale follow-up e-mail pořád slibuje starý rozsah. Interní šablona se aktualizuje, ale landing page dál vede špatný typ poptávek.
+
+Po review projděte minimální mapu:
+
+- landing page nabídky,
+- homepage nebo rozcestník služeb,
+- formulář a potvrzovací zpráva,
+- sales karta,
+- follow-up e-mail,
+- ukázka výstupu,
+- delivery šablony,
+- interní znalostní báze,
+- changelog nabídky,
+- datová mapa.
+
+U každého místa stačí stav:
+
+```markdown
+Místo:
+Aktuální / vyžaduje úpravu / vyřadit / neplatí
+Poznámka:
+Vlastník:
+Termín:
+```
+
+Tento krok je nudný, takže je důležitý. Většina nekonzistence nevzniká tím, že by lidé neuměli vymyslet strategii. Vzniká tím, že se po změně zapomene uklidit pět malých míst, která zákazník reálně vidí.
+
+### 8. Šablona měsíčního review
+
+Použijte jednu stránku. Pokud se nevejdete, review je příliš široké.
+
+```markdown
+# Měsíční review nabídky
+
+Datum:
+Nabídka:
+Období:
+Účastníci:
+
+Rozhodovací otázka:
+
+Dokončené změny:
+- 
+
+Signály z webu:
+
+Signály ze sales:
+
+Signály z delivery:
+
+Co se potvrdilo:
+
+Co byl šum:
+
+Co jsme vědomě neudělali:
+
+Privacy-first kontrola:
+- nový sběr dat:
+- nové přístupy:
+- nový dodavatel:
+- změna retence:
+- potřebná aktualizace datové mapy:
+
+Stav nabídky:
+ponechat / jemně upravit / zpřesnit důkaz / zúžit rozsah / zastavit a přepsat rozhodnutí
+
+Jedna další změna:
+
+Co teď neděláme:
+
+Kontrola příště:
+```
+
+### Checklist přílohy
+
+- Začíná review jednou rozhodovací otázkou?
+- Hodnotíte jen změny dokončené od poslední kontroly?
+- Má každá změna původní signál, očekávaný výsledek a skutečný signál?
+- Oddělujete signály z webu, sales a delivery?
+- Zapisujete i věci, které jste vědomě neudělali?
+- Proběhla privacy-first kontrola nových dat, přístupů, dodavatelů a retence?
+- Dostala nabídka jasný stav: ponechat, upravit, doplnit důkaz, zúžit nebo zastavit?
+- Je vybraná jen jedna další změna?
+- Je jasně napsané, co teď neděláte?
+- Jsou aktualizované veřejné i interní materiály, kterých se změna týká?
+
+Měsíční review nabídky má chránit tým před dvěma extrémy. První extrém je měnit vše podle posledního dojmu. Druhý extrém je neměnit nic, protože "už jsme to přece jednou promysleli". Praktická cesta je mezi tím: malé dokončené změny, krátké vyhodnocení, jasné rozhodnutí a kontrola datové stopy. Tak nabídka zůstává živá, ale ne roztěkaná.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -33332,3 +33597,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CW o přepsání webu a sales materiálů po změně nabídky: mapa míst, nový slib, formuláře, sales karta, důkazy, staré odkazy a kontrola prvních rozhovorů.
 - 2026-05-10: Doplněna Příloha CX o kontrole dopadu po přepsání nabídky: hodnoticí okno, kvalita signálů, zákaznický sanity check, audit toku, rozhodnutí po review a aktualizace changelogu.
 - 2026-05-10: Obnoven plný rukopis po nechtěném zkrácení posledním commitem a doplněna Příloha CY o převodu zjištění z nabídky do produktového a marketingového backlogu.
+- 2026-05-10: Doplněna Příloha CZ s měsíčním review nabídky po backlogových změnách: rozhodovací otázka, signály z webu, sales a delivery, privacy-first mini audit, stav nabídky a checklist.
