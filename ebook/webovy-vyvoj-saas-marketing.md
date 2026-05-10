@@ -30430,6 +30430,195 @@ Další review:
 
 Vyhodnocení po distribuci uzavírá smyčku. Playbook vznikne z e-booku, projde pilotem, dostane se k lidem a potom se podle reálného použití zlepší, zúží nebo uklidí. Takhle se z obsahu nestává šum. Stává se z něj pracovní systém.
 
+## Příloha CO: Kdy z playbooku udělat nabídku, produkt nebo interní standard
+
+Úspěšný playbook často začne jako obsah. Někdo ho napíše, protože se stejná otázka opakuje v obchodních hovorech, auditech, onboardingu nebo supportu. Pak se ukáže, že lidem opravdu pomáhá: zkracuje vysvětlování, vede ke konkrétním výstupům a odhaluje opakované problémy. V tu chvíli přijde důležitá otázka: má playbook zůstat jen materiálem, nebo z něj má vzniknout opakovatelná nabídka, produktová funkce, interní standard či školení?
+
+Špatná odpověď je automaticky monetizovat všechno, co se trochu používá. Druhá špatná odpověď je nechat dobrý playbook ležet jako PDF, i když už kolem něj vzniká reálná poptávka. Cílem této přílohy je dát jednoduchý rozhodovací rámec. Ne každý playbook má být produkt. Každý dobrý playbook ale má být vědomě zařazený.
+
+### 1. Nejprve pojmenujte typ hodnoty
+
+Playbook může mít několik druhů hodnoty. Každý vede k jinému dalšímu kroku.
+
+- Edukační hodnota: čtenář lépe chápe problém a umí se rozhodnout.
+- Obchodní hodnota: playbook zrychluje kvalifikaci, follow-up nebo důvěru před nabídkou.
+- Delivery hodnota: tým podle něj opakovaně doručuje audit, workshop nebo implementaci.
+- Produktová hodnota: opakované kroky ukazují na funkci, automatizaci nebo datový model.
+- Interní hodnota: sjednocuje jazyk, kvalitu a rozhodování týmu.
+
+Příklad: playbook "Privacy-first audit měření webu" může být zároveň edukační článek, obchodní follow-up po úvodním hovoru, delivery osnova pro placený audit a produktový signál pro budoucí nástroj, který mapuje externí skripty. Pokud tyto role smícháte, vznikne nejasnost. Pokud je pojmenujete, můžete rozhodnout, která role má teď prioritu.
+
+### 2. Signály, že playbook má přerůst do nabídky
+
+Z playbooku dává smysl udělat službu nebo balíček, když lidé opakovaně chtějí pomoc s provedením. Nejen s pochopením.
+
+Silné signály:
+
+- Čtenáři se ptají, jestli jim s postupem pomůžete.
+- Po vyplnění šablony vzniká jasný další krok, který neumí nebo nechtějí udělat sami.
+- Tým už podle playbooku neformálně doručuje podobnou práci více klientům.
+- Výstup má definovatelnou podobu: audit, mapa, backlog, plán, workshop, rozhodovací karta.
+- Rozsah jde ohraničit tak, aby se z toho nestal neurčitý konzultační pytel.
+
+Slabý signál:
+
+"Lidem se to líbilo."
+
+Silnější signál:
+
+"Tři firmy podle playbooku našly zbytečné trackery, ale zastavily se u rozhodnutí, co odstranit, jak upravit formuláře a jak to zapsat do datové mapy."
+
+To už není jen pochvala. To je opakovaný problém, kolem kterého se dá postavit nabídka.
+
+### 3. Jak z playbooku udělat malý balíček
+
+Nezačínejte velkou produktovou stránkou. Začněte úzkým balíčkem s jasným výsledkem.
+
+Šablona nabídky:
+
+```markdown
+# Název balíčku
+
+Pro koho:
+Kdy dává smysl:
+Co dostanete:
+Co k tomu potřebujeme:
+Co není součástí:
+Jak dlouho to trvá:
+Jaký je výstup:
+Jak pracujeme s daty:
+Další krok:
+```
+
+Příklad:
+
+```markdown
+# Privacy-first audit měření webu
+
+Pro koho: B2B web nebo SaaS, který chce měřit poptávky bez zbytečných trackerů.
+Kdy dává smysl: před redesignem, po přidání marketingových nástrojů nebo před větší kampaní.
+Co dostanete: mapu měření, seznam zbytečných skriptů, návrh minimálního event plánu a doporučení pro formuláře.
+Co není součástí: právní stanovisko, kompletní implementace analytics stacku, přepis cookie policy.
+Jaký je výstup: krátký audit, prioritizovaný backlog a provozní karta dat.
+Jak pracujeme s daty: používáme jen přístupy a exporty nutné pro audit, citlivé údaje neukládáme do pracovních šablon.
+```
+
+Tento formát chrání obě strany. Zákazník ví, co kupuje. Tým ví, co nedoručuje. A privacy-first část není přilepená poznámka, ale součást rozsahu.
+
+### 4. Signály, že playbook má přerůst do produktu
+
+Produktový směr dává smysl, když se v playbooku opakují kroky, které jsou standardizovatelné, datově uchopitelné a uživatel je chce dělat opakovaně.
+
+Ptejte se:
+
+- Je problém opakovaný, nebo jednorázový?
+- Dá se výstup vytvořit bez velké expertní interpretace?
+- Vznikají strukturovaná data, se kterými lze pracovat dál?
+- Potřebuje uživatel historii, notifikace, schvalování, role nebo audit log?
+- Je ruční práce v playbooku drahá hlavně kvůli opakování, ne kvůli úsudku?
+- Umí produkt dodat část hodnoty bez toho, aby sbíral zbytečně citlivá data?
+
+Příklad: pokud playbook obsahuje jednorázový workshop k positioningu, možná má zůstat službou. Pokud ale opakovaně sbírá datové toky, nástroje, účely, retence, vlastníky a změny v čase, může z něj vzniknout interní nebo SaaS nástroj pro datovou mapu a dodavatelskou hygienu.
+
+Codyho komentář: ne všechno, co má tabulku, má být SaaS. Někdy je tabulka perfektní produkt. Pokud ale tabulka začne mít vlastní workflow, odpovědnosti, opakované revize, přístupy a historii změn, už vám tiše říká, že chce lepší domov.
+
+### 5. Signály, že playbook má zůstat interním standardem
+
+Některé playbooky nemají být veřejná nabídka ani produkt. Mají být interní laťka kvality. To je stejně cenné.
+
+Interním standardem by měl playbook zůstat, když:
+
+- popisuje způsob práce týmu,
+- snižuje chyby při předání projektu,
+- sjednocuje výstupy mezi lidmi,
+- obsahuje interní rozhodovací pravidla,
+- pracuje s neveřejnými informacemi,
+- jeho hodnota je hlavně ve spolehlivém doručení, ne v samostatném čtení.
+
+Příklad: "Definition of done pro privacy-first web" může být veřejně inspirovaný, ale interní verze bude obsahovat konkrétní kontrolní kroky, role, nástroje, přístupy a odpovědnosti. Tu není potřeba celou publikovat. Stačí veřejně říct principy a interně držet standard.
+
+### 6. Rozhodovací matice
+
+Použijte jednoduché skóre 1 až 3. Nejde o exaktní matematiku. Jde o to, aby tým musel říct nahlas, proč chce další krok.
+
+| Kritérium | 1 bod | 2 body | 3 body |
+| --- | --- | --- | --- |
+| Opakovatelnost | jednorázová situace | občasný vzor | častý a stabilní vzor |
+| Samostatnost čtenáře | potřebuje hodně vysvětlení | zvládne část | zvládne většinu kroků |
+| Ochota řešit | zajímavost | nepříjemnost | akutní obchodní nebo provozní problém |
+| Výstup | neurčitý | částečně strukturovaný | jasný dokument, rozhodnutí nebo stav |
+| Delivery rozsah | nejasný | ohraničitelný | dobře balíčkovatelný |
+| Produktový potenciál | hlavně úsudek | smíšené | opakované strukturované workflow |
+| Privacy-first riziko | vysoký sběr dat | zvládnutelné | datové minimum je přirozené |
+
+Vyhodnocení:
+
+- 7 až 10 bodů: ponechat jako obsah nebo interní pomůcku.
+- 11 až 15 bodů: upravit, doplnit příklady a dál sledovat použití.
+- 16 až 20 bodů: otestovat jako malou službu, workshop nebo interní standard.
+- 21 bodů a více: zvážit produktizaci, ale začít pilotem, ne vývojem od stolu.
+
+Matice není soudce. Je to brzda proti impulzivnímu "uděláme z toho produkt" i proti pohodlnému "necháme to být".
+
+### 7. Privacy-first brána před monetizací
+
+Jakmile z playbooku vzniká nabídka nebo produkt, roste tlak na sběr dat. Najednou se hodí formulář, CRM, onboarding, analytika, nahrávky workshopů, automatické e-maily a reporting. Právě tady je potřeba udělat brzdu.
+
+Před dalším krokem si odpovězte:
+
+1. Jaká data opravdu potřebujeme k doručení výsledku?
+2. Co můžeme ponechat u zákazníka a nezpracovávat vůbec?
+3. Co lze anonymizovat nebo agregovat?
+4. Jak dlouho potřebujeme pracovní podklady držet?
+5. Kdo k nim má přístup?
+6. Jak zákazník dostane výstup a může požádat o smazání pracovních materiálů?
+7. Je možné použít nabídku bez přihlášení do další platformy?
+8. Pokud vznikne produkt, kde bude provoz a data?
+
+Privacy-first monetizace není paradox. Je to konkurenční výhoda. Nabídka, která jasně říká "nepotřebujeme vaše interní dokumenty, stačí nám tento omezený export a po předání ho smažeme", působí profesionálněji než neurčitá prosba "pošlete nám všechno a nějak se v tom podíváme".
+
+### 8. První experiment bez přestavby systému
+
+Než začnete stavět novou stránku, automatizaci nebo SaaS modul, udělejte malý experiment.
+
+Varianty:
+
+- Přidat k playbooku větu: "Pokud chcete projít tento checklist nad konkrétním webem, napište nám."
+- Nabídnout jeden placený workshop podle playbooku.
+- Použít playbook jako follow-up po pěti obchodních hovorech a sledovat, co se stane.
+- Doručit interně jednu zakázku podle nové šablony a změřit tření.
+- Udělat prototyp produktové funkce v tabulce nebo jednoduchém formuláři, ale bez zbytečného sběru osobních dat.
+
+Experiment má mít krátký zápis:
+
+```markdown
+# Experiment s playbookem
+
+Playbook:
+Hypotéza:
+Komu ho nabídneme:
+Jaký výstup čekáme:
+Co měříme:
+Jaká data nesbíráme:
+Kdy rozhodneme:
+Možnosti po experimentu: ponechat / nabídka / interní standard / produktový backlog / archivovat
+```
+
+### Checklist přílohy
+
+- Víte, jaký typ hodnoty playbook dnes má?
+- Máte signály použití, ne jen pochvaly?
+- Umíte z playbooku popsat malý balíček s jasným výsledkem a hranicí rozsahu?
+- Poznáte rozdíl mezi službou, produktem a interním standardem?
+- Máte rozhodovací matici místo pocitu?
+- Nezačínáte vývojem produktu dřív než pilotem?
+- Je privacy-first brána součástí rozhodnutí, ne dodatek po prodeji?
+- Umíte říct, jaká data nepotřebujete sbírat?
+- Má další krok vlastníka, termín a jednoduché kritérium úspěchu?
+- Vrátí se výsledek experimentu zpět do e-booku, šablon nebo backlogu?
+
+Playbook je dobrý tehdy, když pomáhá dělat lepší práci. Někdy zůstane článkem. Někdy se promění v audit, workshop, interní standard nebo produktovou funkci. Důležité je nechat rozhodnutí vyrůst z použití, ne z nadšení. Obsah potom není marketingová dekorace. Je to výzkum trhu, delivery systém a produktové myšlení v jednom.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -30650,3 +30839,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CL o zapracování pilotních nálezů do samostatného playbooku: třídění nálezů, úprava čtenářské cesty, privacy-first brána, změnová karta a vydání verze.
 - 2026-05-10: Doplněna Příloha CM o distribuci samostatného playbooku bez ztráty kontroly: kanonická URL, distribuční situace, lead magnety, měření užitečnosti, verzování a zpětná smyčka do e-booku.
 - 2026-05-10: Obnoven plný rukopis po nechtěném zkrácení a doplněna Příloha CN o vyhodnocení samostatného playbooku po distribuci: hodnoticí okno, metriky užitečnosti, kvalita výstupů, privacy-first review a rozhodnutí dalšího stavu.
+- 2026-05-10: Doplněna Příloha CO o rozhodnutí, kdy z úspěšného playbooku udělat nabídku, produkt, interní standard nebo další experiment.
