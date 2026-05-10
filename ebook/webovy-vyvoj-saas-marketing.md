@@ -29226,6 +29226,195 @@ Tím se z e-booku nestane nekonečné staveniště. Zůstane to veřejný materi
 
 Druhá veřejná edice má být přesnější, ne větší za každou cenu. Dobrý e-book se nepozná podle počtu stran. Pozná se podle toho, že čtenář rychle najde správnou část, udělá lepší rozhodnutí a nemusí za to platit svými daty víc, než je nutné.
 
+## Příloha CI: Rozdělení e-booku na samostatné playbooky
+
+Jakmile e-book začne sloužit více skupinám lidí, objeví se praktický problém: jeden velký materiál už neodpovídá každé situaci stejně dobře. Zakladatel SaaS MVP nechce číst všechno o veřejné edici e-booku. Marketingový tým hledá obsahový plán, ne datový model. Klient před auditem potřebuje checklist, ne celou filozofii webového vývoje.
+
+To neznamená, že máte e-book rozřezat na kusy a ztratit kontrolu. Znamená to vytvořit samostatné playbooky, které vycházejí z jednoho zdroje pravdy, ale jsou kratší, situační a přímo použitelné.
+
+Playbook není jen kopie kapitoly do nového PDF. Je to pracovní materiál pro konkrétní rozhodnutí. Má jasného čtenáře, vstupní situaci, kroky, výstup a privacy-first pravidla. Pokud tohle chybí, vznikne jen další dokument, který se bude tvářit prakticky a stárnout stejně rychle jako všechno ostatní.
+
+### 1. Nejdřív určete situaci, ne formát
+
+Nezačínejte otázkou, jestli má být výstup PDF, webová stránka, Notion dokument nebo prezentace. Začněte situací, ve které má playbook pomoct.
+
+Dobré situace:
+
+- Majitel firmy chce rychle zkontrolovat, proč web nepřináší poptávky.
+- Zakladatel SaaS chce rozhodnout, co patří do MVP a co odložit.
+- Marketingový tým potřebuje naplánovat obsah na měsíc bez honby za algoritmem.
+- Obchodník chce poslat klientovi praktický materiál po úvodním hovoru.
+- Delivery tým potřebuje jednotný vstup pro technický audit.
+- Provozní člověk chce projít data, nástroje a přístupy bez právnické mlhy.
+
+Slabá situace zní: "uděláme playbook o marketingu." Silnější situace zní: "pomůžeme B2B týmu vybrat tři obsahové pilíře a jeden měsíční publikační rytmus bez povinného newsletterového funnelu." První je téma. Druhé je rozhodnutí.
+
+Codyho komentář: formát je nejčastější únik před rozhodnutím. Když tým neví, komu materiál slouží, začne řešit layout, titulku a barvy. To je hezké, ale pořád nevíme, proč to má někdo otevřít.
+
+### 2. Vyberte nejvýše pět playbooků
+
+Velký e-book může svádět k tomu, že z každé kapitoly vznikne samostatný playbook. To je rychlá cesta k obsahovému skladu, ne k lepšímu použití. Začněte nejvýše pěti playbooky, které pokrývají nejčastější rozhodovací situace.
+
+Praktický startovací balík:
+
+1. Web audit playbook: pro kontrolu nabídky, důvěry, rychlosti, SEO, formulářů a privacy-first stop.
+2. SaaS MVP playbook: pro výběr segmentu, workflow, rozsahu, dat, aktivace a pilotu.
+3. Marketingový playbook: pro positioning, obsahové pilíře, distribuci, RSS, vlastní kanály a měření užitečnosti.
+4. Privacy-first provozní playbook: pro datovou mapu, nástroje, formuláře, retenci, přístupy a dodavatele.
+5. Launch playbook: pro vydání webu, produktu, e-booku nebo větší změny bez provozního chaosu.
+
+Každý playbook musí mít vlastní krátký slib:
+
+- "Za 90 minut zjistíte, které tři věci na webu nejvíc brzdí důvěru a poptávky."
+- "Během jednoho workshopu vyberete rozsah SaaS MVP, který lze pilotovat bez zbytečných funkcí."
+- "Za měsíc vytvoříte publikační rytmus, který stojí na vlastním webu a přímých odkazech."
+- "Za půl dne zjistíte, jaká data sbíráte, kde jsou a co můžete zjednodušit."
+- "Před spuštěním projdete technickou, obsahovou, provozní a privacy-first bránu."
+
+Pokud playbook neumí slíbit konkrétní výsledek, ještě není připravený k vytažení z e-booku.
+
+### 3. Každý playbook postavte na stejné kostře
+
+Jednotná struktura šetří práci autorovi i čtenáři. Člověk si nemusí u každého materiálu zvykat na jinou logiku. Tým zároveň snáz udržuje kvalitu, zdroje a vazbu na hlavní e-book.
+
+Doporučená kostra:
+
+```markdown
+# Název playbooku
+
+Pro koho:
+Kdy použít:
+Co bude hotovo:
+Kolik času:
+Vstupy:
+Výstupy:
+
+## Rychlá orientace
+
+## Krok 1
+
+## Krok 2
+
+## Krok 3
+
+## Praktický příklad
+
+## Checklist hotovo
+
+## Privacy-first kontrola
+
+## Odkazy na zdrojové části e-booku
+
+## Datum poslední revize
+```
+
+Kostra není byrokracie. Je to pojistka, že playbook zůstane pracovní. "Pro koho" brání univerzální vatě. "Co bude hotovo" drží výsledek. "Privacy-first kontrola" hlídá, aby se praktický materiál nezměnil v další sběr osobních údajů. "Odkazy na zdrojové části" drží jeden zdroj pravdy.
+
+### 4. Nechte hlavní e-book jako kanonický zdroj
+
+Playbooky mají být vstupy do práce, ne konkurenční verze pravdy. Pokud playbook přepisuje princip z e-booku, musí buď odkazovat na kanonickou část, nebo mít jasně napsané, že jde o zjednodušený pracovní výřez.
+
+Pravidla kanonické vazby:
+
+- Hlavní principy zůstávají v e-booku.
+- Playbook obsahuje jen tolik teorie, kolik je potřeba pro dané rozhodnutí.
+- Každý playbook odkazuje na kapitoly nebo přílohy, ze kterých vychází.
+- Pokud se změní kanonická část, playbook se označí ke kontrole.
+- Playbook nemá vlastní definice, pokud už existují ve slovníku nebo hlavním textu.
+- Starší verze playbooku se archivují nebo přesměrují, ne nechají volně kolovat.
+
+Příklad: SaaS MVP playbook může shrnout aktivační událost do tří vět. Detailní vysvětlení ale zůstává v kapitole o onboardingu a metrikách. Když se později změní definice aktivace, kontrolujete jedno místo a navázané výřezy, ne pět samostatných textů, které se tváří jako původní pravda.
+
+### 5. Zkraťte, ne jen kopírujte
+
+Playbook má odstranit tření. Když vezmete kapitolu, vložíte ji do nového dokumentu a přidáte titulní stranu, čtenáři jste moc nepomohli. V lepším případě má stejný problém v hezčím balení. V horším případě má dvě verze stejného textu.
+
+Při převodu řežte tvrdě:
+
+- Dlouhé úvody nahraďte jednou situační větou.
+- Teoretické odstavce změňte na rozhodovací otázky.
+- Obecné rady přepište na kroky.
+- Duplicity nahraďte odkazem na zdrojovou část.
+- Příklady nechte jen ty, které pomáhají dané situaci.
+- Checklist zkraťte na položky, podle kterých lze opravdu rozhodnout.
+
+Příklad převodu:
+
+Původní věta v e-booku:
+"Obsahová architektura má návštěvníka dovést od první otázky k další akci tak, aby nemusel hádat, kde najde odpověď."
+
+Playbooková verze:
+"U každé hlavní stránky napište: jakou otázku návštěvník řeší, jaký důkaz potřebuje a jaký další krok má udělat."
+
+To je stejné myšlení, ale v pracovním tvaru.
+
+### 6. Privacy-first distribuce playbooků
+
+Samostatné playbooky často svádí k lead magnetům. Stáhněte PDF, zadejte e-mail, dostanete deset automatických zpráv, někde po cestě přibude tracking a za chvíli už nikdo neví, kde data skončila. Přesně tady má Dreamind držet jiný standard.
+
+Privacy-first distribuce:
+
+- Základní playbooky dejte na veřejnou URL bez povinného formuláře.
+- PDF export nabídněte jako pohodlnost, ne jako výkupné za e-mail.
+- RSS použijte pro oznámení nových nebo aktualizovaných playbooků.
+- Pokud sbíráte feedback, ptejte se na minimum údajů.
+- U každého formuláře napište, proč data potřebujete a co se stane po odeslání.
+- Nepřidávejte social share skripty; stačí přímé odkazy.
+- Měřte použití střídmě: návštěvy rozcestníku, kliky na šablonu, ručně zapsané signály z použití.
+
+To není marketingová slabost. Je to rozdíl mezi "chceme pomoct rozhodnout" a "chceme z každého čtenáře vytěžit kontakt". Důvěra se často rodí právě ve chvíli, kdy po člověku nechcete víc dat, než potřebujete.
+
+### 7. Udržujte playbooky jako malé produkty
+
+Každý playbook má vlastní životní cyklus. Má vydání, použití, zpětnou vazbu, revize a někdy i konec. Když to nehlídáte, playbooky začnou stárnout potichu a tým je přestane používat.
+
+Minimální karta playbooku:
+
+```markdown
+# Karta playbooku
+
+Název:
+Situace:
+Primární čtenář:
+Kanonické části e-booku:
+Vlastník:
+Veřejná URL:
+Poslední revize:
+Další revize:
+Signály použití:
+Známé problémy:
+Privacy-first poznámky:
+Stav: návrh / aktivní / ke kontrole / archiv
+```
+
+Review playbooku může trvat 20 minut:
+
+- Použil ho někdo v posledním měsíci nebo kvartálu?
+- Vedl k jasnému rozhodnutí?
+- Kde se čtenář zasekl?
+- Změnila se kanonická část e-booku?
+- Přibyl nový datový tok nebo formulář?
+- Má playbook pořád vlastníka?
+- Má smysl ho ponechat aktivní?
+
+Pokud playbook nikdo nepoužívá a nemá jasnou budoucí roli, archivujte ho. Archivace není prohra. Je to úklid, aby živé materiály nepřekrývaly ty mrtvé.
+
+### Checklist přílohy
+
+- Má každý playbook konkrétní rozhodovací situaci?
+- Je startovací sada omezená na nejvýše pět playbooků?
+- Má každý playbook vlastní krátký slib výsledku?
+- Používají playbooky jednotnou kostru?
+- Zůstává hlavní e-book kanonickým zdrojem pravdy?
+- Odkazuje každý playbook na zdrojové kapitoly nebo přílohy?
+- Byly texty zkrácené do pracovního tvaru místo prostého kopírování?
+- Má každý playbook privacy-first kontrolu?
+- Jsou playbooky dostupné přes vlastní URL bez povinného e-mailového gate?
+- Existuje karta playbooku s vlastníkem, revizí, stavem a vazbou na e-book?
+- Umí tým playbook archivovat, když už neslouží?
+
+Samostatné playbooky dávají e-booku druhý život. Ne jako další hromada obsahu, ale jako sada pracovních nástrojů pro opakované situace. Když zůstanou krátké, kanonicky navázané a privacy-first distribuované, pomáhají čtenářům i týmu. Když se rozrostou bez řízení, jen přesunou chaos z jednoho velkého dokumentu do pěti menších. A to by byla škoda. Markdown už toho unesl dost.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -29440,3 +29629,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha CF o přechodu veřejné edice do dlouhodobého provozu: zdroj pravdy, údržba podle stárnutí, pracovní šablony, privacy-first rozšiřování, měření užitečnosti a provozní rytmus.
 - 2026-05-09: Doplněna Příloha CG s ročním rozhodnutím o veřejné edici: inventura použití, budoucí role částí, shoda s nabídkou, privacy-first brána a první malý krok.
 - 2026-05-10: Doplněna Příloha CH s plánem druhé veřejné edice: vstupy, ediční balíky, čtyřtýdenní rytmus, changelog a privacy-first vydávací pravidla.
+- 2026-05-10: Doplněna Příloha CI o rozdělení e-booku na samostatné playbooky: situační výběr, kanonická vazba, zkrácení do pracovního tvaru, privacy-first distribuce a údržba.
