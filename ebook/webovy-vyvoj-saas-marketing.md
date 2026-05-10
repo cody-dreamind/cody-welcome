@@ -30887,6 +30887,238 @@ Karta má žít vedle playbooku. Playbook říká, jak se pracuje s problémem. 
 
 Ověřený playbook se nestává nabídkou tím, že dostane hezký název a tlačítko "objednat". Stává se jí ve chvíli, kdy má opakovatelný slib, pevný rozsah, doručitelný proces a rozumnou práci s daty. Pak už nejde jen o obsah. Jde o malý obchodní systém, který může růst bez toho, aby pokaždé spálil tým.
 
+## Příloha CQ: Kontrola kvality opakovatelné nabídky po prvních dodávkách
+
+Jakmile se z playbooku stane nabídka a proběhnou první dodávky, přijde další riziko: tým si zvykne, že "to nějak funguje". To je příjemný pocit a zároveň past. První zákazníci často odpustí nejasnosti, protože je drží osobní vztah, zvědavost nebo dobrá vůle. Opakovatelná nabídka ale musí obstát i bez toho, aby ji pokaždé zachraňoval seniorní člověk, dlouhý vysvětlující hovor nebo ruční improvizace v pozadí.
+
+Kontrola kvality po prvních dodávkách nemá hledat dokonalost. Má odpovědět na jednodušší otázku: lze nabídku doručit znovu, s podobným výsledkem, bez rozbití rozsahu, důvěry a datové hygieny? Pokud ano, můžete ji opatrně posilovat. Pokud ne, není ostuda. Jen jste našli místo, kde nabídka ještě není produktizovaná, ale pouze hezky pojmenovaná zakázková práce.
+
+Tato příloha navazuje na kartu opakovatelné nabídky. Vezměte ji po třech až pěti dodávkách, ideálně dřív, než začnete nabídku výrazně propagovat.
+
+### 1. Oddělte kvalitu výstupu od kvality procesu
+
+Tým často hodnotí nabídku podle toho, jestli zákazník dostal dobrý výstup. To je nutné, ale nestačí. Dobrý výstup může vzniknout i špatným procesem: přepálenými hodinami, doplňováním rozsahu zdarma, ručním dohledáváním podkladů, zbytečným sběrem dat nebo tím, že jeden člověk držel všechno v hlavě.
+
+Hodnoťte dvě roviny zvlášť:
+
+- Výstup: dostal zákazník použitelný výsledek?
+- Proces: vznikl výsledek způsobem, který lze zopakovat?
+
+Příklad:
+
+```markdown
+Výstup:
+Zákazník dostal prioritizovaný seznam změn a použil první dvě doporučení.
+
+Proces:
+Příprava trvala dvojnásobek plánovaného času, protože vstupní formulář nevyžadoval přístup k analytickému přehledu a chyběl seznam hlavních URL.
+
+Rozhodnutí:
+Nabídka má hodnotu, ale vstupní brána musí být přesnější.
+```
+
+Codyho komentář: spokojený zákazník je skvělý signál. Není to ale omluvenka pro interní chaos. Když tým pokaždé potichu dotuje nabídku vlastním večerem, není to kvalita. Je to účetní problém s hezkým úsměvem.
+
+### 2. Udělejte scorecard dodávky
+
+Po každé dodávce vyplňte krátkou scorecard. Nemá být akademická. Má rychle ukázat, co je stabilní a co se rozpadá.
+
+Navržené skóre od 1 do 5:
+
+- Srozumitelnost slibu: zákazník chápal, co kupuje.
+- Kvalita vstupu: podklady stačily pro práci bez zbytečného dohledávání.
+- Dodržení rozsahu: tým nemusel řešit věci mimo balíček.
+- Použitelnost výstupu: zákazník věděl, co udělat jako první.
+- Časová předvídatelnost: práce se vešla do plánovaného rámce.
+- Privacy-first disciplína: nesbírala se data, která nebyla potřeba.
+- Předání: zákazník pochopil další krok bez dlouhé asistence.
+- Interní opakovatelnost: další člověk by podle kitu zvládl dodat podobnou kvalitu.
+
+Jednoduchý formát:
+
+```markdown
+# Scorecard dodávky
+
+Nabídka:
+Zákazník / interní označení:
+Datum předání:
+Vlastník dodávky:
+
+Srozumitelnost slibu: /5
+Kvalita vstupu: /5
+Dodržení rozsahu: /5
+Použitelnost výstupu: /5
+Časová předvídatelnost: /5
+Privacy-first disciplína: /5
+Předání: /5
+Interní opakovatelnost: /5
+
+Největší tření:
+Co zopakovat:
+Co změnit před další dodávkou:
+Co vrátit do playbooku:
+```
+
+Scorecard nepoužívejte jako bič na tým. Používejte ji jako čidlo. Pokud tři dodávky po sobě padají na stejné položce, problém není v zákazníkovi. Problém je v nabídce, šabloně, prodeji nebo předání.
+
+### 3. Sledujte opakované odchylky
+
+Jednorázová odchylka je informace. Opakovaná odchylka je návrh na změnu systému. Pokud zákazníci opakovaně nechápou stejnou část, neposílejte jim delší e-mail. Přepište slib, vstupní instrukce nebo šablonu výstupu.
+
+Typické odchylky:
+
+- Zákazník čeká implementaci, i když nabídka slibuje audit.
+- Tým potřebuje více podkladů, než říká vstupní formulář.
+- Workshop se pravidelně nevejde do času.
+- Výstup je příliš dlouhý a zákazník se ptá, co je první krok.
+- V každé zakázce vzniká stejný "malý bonus" mimo rozsah.
+- Pro práci se žádají citlivější data, než byla původní představa.
+- Sales používá jiné formulace než delivery.
+
+Každou opakovanou odchylku převeďte do jednoho z pěti rozhodnutí:
+
+- Upravit prodejní text.
+- Upravit vstupní bránu.
+- Upravit delivery kit.
+- Upravit cenu nebo rozsah.
+- Ukončit konkrétní variantu nabídky.
+
+Nejhorší varianta je vědět o odchylce a nechat ji žít, protože "zatím to vždycky nějak vyřešíme". To je přesně věta, která malým týmům nenápadně krade kapacitu.
+
+### 4. Ověřte, že výstup vede k akci
+
+Dobrá opakovatelná nabídka nekončí předáním dokumentu. Končí tím, že zákazník ví, jaké rozhodnutí udělat nebo jakou první změnu spustit. Pokud výstup vypadá profesionálně, ale nevede k akci, je to spíš reportovací dekorace.
+
+Po předání si ověřte:
+
+- Dokáže zákazník vlastními slovy říct hlavní závěr?
+- Ví, co udělat jako první?
+- Má první krok vlastníka?
+- Je první krok dost malý na zahájení do jednoho týdne?
+- Je jasné, co nedělat, aby se nerozbil rozsah?
+- Rozumí zákazník privacy-first doporučením prakticky, ne jen právně?
+
+Krátký follow-up po sedmi až čtrnácti dnech může znít:
+
+```text
+Díky za spolupráci. Chci si ověřit, jestli byl výstup prakticky použitelný:
+
+1. Které doporučení jste použili nebo plánujete použít jako první?
+2. Co bylo nejasné nebo příliš obecné?
+3. Chyběl vám v předání nějaký kontext?
+4. Byla práce s podklady a daty přiměřená?
+```
+
+Nepotřebujete dlouhý dotazník spokojenosti. Potřebujete zjistit, zda výstup pohnul rozhodnutím. To je rozdíl mezi hezkou službou a užitečnou službou.
+
+### 5. Zkontrolujte datovou stopu dodávky
+
+Opakovatelnost nesmí znamenat, že se z každé zakázky stává větší hromada podkladů, nahrávek, poznámek a sdílených složek. Čím častěji nabídku dodáváte, tím důležitější je datová hygiena.
+
+Po každé dodávce projděte:
+
+- Které podklady zákazník poslal.
+- Které podklady byly opravdu použité.
+- Které podklady nebyly potřeba a příště je nechcete.
+- Kde leží pracovní poznámky.
+- Kdo má přístup ke sdílené složce.
+- Zda jsou dočasné odkazy stále otevřené.
+- Co se má smazat po předání.
+- Co se může anonymizovat do interní knihovny zjištění.
+
+Praktické pravidlo:
+
+"Pokud podklad nepomohl k rozhodnutí, příště ho nežádejte."
+
+Tohle pravidlo je jednoduché a překvapivě ostré. Nutí tým rozlišovat mezi daty, která zvyšují kvalitu výstupu, a daty, která jen vytváří pocit důkladnosti.
+
+### 6. Udělejte rozhodnutí o škálování
+
+Po prvních třech až pěti dodávkách nesmí být výsledek jen "pokračujeme". To je moc neurčité. Udělejte konkrétní rozhodnutí o dalším stavu nabídky.
+
+Možné stavy:
+
+- Stabilizovat: nabídka má hodnotu, ale ještě potřebuje lepší kit.
+- Zúžit: největší hodnota je v jedné části, zbytek přidává šum.
+- Rozdělit: diagnostika a implementace mají být dvě samostatné nabídky.
+- Zdražit: rozsah a hodnota neodpovídají ceně.
+- Omezit prodej: nabídka funguje jen pro užší segment.
+- Vrátit do experimentu: opakovatelnost zatím není dostatečná.
+- Archivovat: nabídka není dost žádaná nebo příliš zatěžuje tým.
+
+Rozhodnutí zapište jednou větou:
+
+```markdown
+Po pěti dodávkách nabídku zužujeme na audit hlavních webových toků, protože největší opakovaná hodnota vzniká v kombinaci formulářů, měření a privacy-first datové mapy. Implementaci oddělujeme jako navazující blok.
+```
+
+Jedna taková věta je lepší než hodinová porada bez závěru.
+
+### 7. Karta kontroly kvality nabídky
+
+Použijte tuto šablonu po třech až pěti dodávkách:
+
+```markdown
+# Karta kontroly kvality opakovatelné nabídky
+
+Název nabídky:
+Hodnocené období:
+Počet dodávek:
+Vlastník nabídky:
+
+Průměrné skóre:
+- Srozumitelnost slibu:
+- Kvalita vstupu:
+- Dodržení rozsahu:
+- Použitelnost výstupu:
+- Časová předvídatelnost:
+- Privacy-first disciplína:
+- Předání:
+- Interní opakovatelnost:
+
+Tři opakované silné stránky:
+1.
+2.
+3.
+
+Tři opakovaná tření:
+1.
+2.
+3.
+
+Co měníme před další dodávkou:
+
+Co měníme v prodejním textu:
+
+Co měníme ve vstupní bráně:
+
+Co měníme v delivery kitu:
+
+Co měníme v privacy-first pravidlech:
+
+Rozhodnutí:
+Stabilizovat / zúžit / rozdělit / zdražit / omezit prodej / vrátit do experimentu / archivovat
+
+Datum další kontroly:
+```
+
+Karta má být krátká. Pokud se nevejde na jednu až dvě stránky, tým pravděpodobně neřeší kontrolu kvality nabídky, ale píše další playbook. To může být užitečné, ale je to jiný úkol.
+
+### Checklist přílohy
+
+- Hodnotíte zvlášť kvalitu výstupu a kvalitu procesu?
+- Má každá dodávka krátkou scorecard?
+- Sledujete opakované odchylky místo jednorázových dojmů?
+- Přepisujete prodejní text, když zákazník čeká něco jiného?
+- Vede výstup k první konkrétní akci?
+- Kontrolujete po dodávce skutečnou datovou stopu?
+- Mažete dočasné podklady, které už nemají důvod existovat?
+- Vrací se anonymizovaná zjištění zpět do playbooku a šablon?
+- Udělali jste po třech až pěti dodávkách jasné rozhodnutí o dalším stavu nabídky?
+- Má nabídka vlastníka a datum další kontroly?
+
+Opakovatelná nabídka se nepozná podle toho, že má ceník a hezkou stránku. Pozná se podle toho, že ji tým dokáže dodat znovu, zákazník z ní dokáže jednat a data po cestě nezůstávají rozházená jako konfety po firemním večírku. Kvalita není tajemná aura kolem seniorního člověka. Je to několik opakovaných kontrol, které zabrání tomu, aby se z dobrého nápadu stal drahý zvyk.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -31109,3 +31341,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Obnoven plný rukopis po nechtěném zkrácení a doplněna Příloha CN o vyhodnocení samostatného playbooku po distribuci: hodnoticí okno, metriky užitečnosti, kvalita výstupů, privacy-first review a rozhodnutí dalšího stavu.
 - 2026-05-10: Doplněna Příloha CO o rozhodnutí, kdy z úspěšného playbooku udělat nabídku, produkt, interní standard nebo další experiment.
 - 2026-05-10: Doplněna Příloha CP o převodu ověřeného playbooku do opakovatelné nabídky: slib, rozsah, delivery kit, vstupní brána, standard výstupu, cena, privacy-first provoz a kalibrace prvních dodávek.
+- 2026-05-10: Doplněna Příloha CQ s kontrolou kvality opakovatelné nabídky po prvních dodávkách: scorecard, odchylky, akčnost výstupu, datová stopa a rozhodnutí o škálování.
