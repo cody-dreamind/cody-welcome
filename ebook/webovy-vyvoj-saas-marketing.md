@@ -32169,6 +32169,224 @@ Ukončení není selhání. Selhání je držet nabídku jen proto, že kdysi d�
 
 Dlouhodobá údržba je méně nápadná než launch nové nabídky, ale pro zdravý byznys je důležitější. Nová nabídka přinese pozornost. Udržovaná nabídka přináší opakovatelnou hodnotu. Pokud každý měsíc opravíte jedno malé tření, udržíte slib, data, tým i zákaznický výsledek v jednom systému. A přesně tam má opakovatelná služba žít.
 
+## Příloha CV: Rozhodnutí o zúžení, rozdělení nebo ukončení nabídky
+
+Každá opakovatelná nabídka časem narazí na otázku, kterou tým často odkládá: má se dál rozšiřovat, zúžit, rozdělit, nebo ukončit? První verze nabídky vzniká z energie. Další verze už musí vznikat z důkazů. Jinak se z jednoduchého slibu stane služba, která umí trochu všechno, ale špatně se prodává, těžko dodává a ještě hůř udržuje.
+
+Rozhodnutí o zúžení nebo ukončení není přiznání porážky. Je to provozní hygiena. Stejně jako u produktu má i služba svůj životní cyklus. Některé části dozrají do standardu, některé se oddělí do samostatné nabídky, některé zůstanou jen interním nástrojem a některé je lepší přestat nabízet. Pokud tým toto rozhodnutí nedělá vědomě, rozhodne za něj realita: scope creep, unavený delivery tým, nekonzistentní výstupy, zmatek v prodeji a datová stopa, kterou už nikdo neumí vysvětlit.
+
+Privacy-first pohled je tady užitečný filtr. Nabídku má smysl rozšiřovat jen tehdy, když přidaná hodnota odpovídá přidané datové, provozní a komunikační složitosti. Pokud nová část vyžaduje citlivější podklady, další nástroj, delší retenci nebo širší přístup v týmu, musí mít jasný důvod. Věta "zákazníci se na to občas ptají" sama o sobě nestačí.
+
+### 1. Začněte rozhodovací otázkou
+
+Než otevřete seznam možných úprav, napište jednu otázku, na kterou má review odpovědět. Bez ní se tým snadno ztratí v detailech a skončí u kompromisu, který zachová všechno.
+
+Dobré otázky:
+
+- Má nabídka pořád jeden jasný výsledek pro jednoho hlavního zákazníka?
+- Která část nabídky vytváří největší hodnotu a která jen spotřebovává kapacitu?
+- Máme dvě odlišné nabídky schované pod jedním názvem?
+- Které části zákazníci skutečně používají po předání?
+- Kde vzniká největší datové nebo provozní riziko?
+- Který krok bychom dnes nepřidali, kdybychom nabídku navrhovali znovu?
+
+Slabá otázka zní: "Co ještě můžeme přidat?" Silnější otázka zní: "Co má zůstat, aby nabídka byla srozumitelnější, dodavatelnější a užitečnější?" Rozdíl je zásadní. První otázka vyrábí seznam přání. Druhá vyrábí rozhodnutí.
+
+### 2. Udělejte inventuru částí nabídky
+
+Rozdělte nabídku na konkrétní části. Ne na obecné fáze typu discovery, workshop a report, ale na skutečné bloky práce, které spotřebovávají čas a vytvářejí výstup.
+
+Příklad pro audit webu a marketingu:
+
+```markdown
+# Inventura částí nabídky
+
+Nabídka:
+Verze:
+Datum:
+
+Část:
+Účel:
+Zákazník ji vidí jako hodnotu? Ano / Částečně / Ne
+Kolik bere kapacity:
+Jak často se používá:
+Jak často vzniká výjimka:
+Jaká data potřebuje:
+Jaký výstup vzniká:
+Co by se stalo, kdyby zmizela:
+Rozhodnutí:
+Ponechat / zkrátit / přesunout / zpoplatnit zvlášť / ukončit
+```
+
+Tuto kartu vyplňte pro každou podstatnou část. Pokud má tým problém část popsat, je to signál. Buď je příliš mlhavá, nebo se v ní schovalo více různých prací najednou.
+
+Praktické pravidlo: část nabídky má mít jasný vstup, jasnou práci a jasný výstup. Pokud má jen dobrý pocit, nechte ji projít tvrdším review.
+
+### 3. Rozlišujte čtyři typy rozhodnutí
+
+Po inventuře netlačte všechno do jedné kategorie. Nabídka obvykle nepotřebuje jedno velké rozhodnutí, ale několik malých.
+
+Ponechat:
+
+- část vytváří jasnou hodnotu,
+- zákazník ji chápe a používá,
+- tým ji umí dodat bez hrdinství,
+- datová stopa je přiměřená,
+- část podporuje hlavní slib nabídky.
+
+Zúžit:
+
+- část je užitečná, ale příliš široká,
+- výstup je delší, než zákazník reálně potřebuje,
+- práce pravidelně přetéká do výjimek,
+- stejná hodnota se dá dodat menším množstvím dat nebo kratším formátem,
+- tým ji neumí kontrolovat ve stejné kvalitě při více dodávkách.
+
+Rozdělit:
+
+- část slouží jinému segmentu nebo jiné fázi zákazníka,
+- má jiné vstupy, jiný výstup nebo jinou cenu,
+- vyžaduje jiné specialisty,
+- zvyšuje privacy-first nároky jen pro část zákazníků,
+- v prodeji se kvůli ní míchají dva různé sliby.
+
+Ukončit:
+
+- část zákazník nepoužívá,
+- tým ji dodává jen ze zvyku,
+- komplikuje prodejní sdělení,
+- přidává datové riziko bez odpovídající hodnoty,
+- existuje jednodušší náhrada: checklist, článek, šablona, krátký hovor nebo samostatný placený doplněk.
+
+Codyho komentář: nejtěžší bývá ukončit část, na kterou je tým pyšný. Jenže nabídka není galerie interního úsilí. Zákazník nekupuje, kolik práce jste do ní dokázali nacpat. Kupuje výsledek.
+
+### 4. Použijte jednoduchou rozhodovací matici
+
+Když jsou názory v týmu rozdělené, pomůže jednoduchá matice. Ne jako matematická pravda, ale jako způsob, jak přestat hlasovat podle hlasitosti.
+
+```markdown
+# Matice rozhodnutí o části nabídky
+
+Část nabídky:
+
+Hodnota pro zákazníka: nízká / střední / vysoká
+Srozumitelnost v prodeji: nízká / střední / vysoká
+Náročnost delivery: nízká / střední / vysoká
+Riziko výjimek: nízké / střední / vysoké
+Datová stopa: nízká / střední / vysoká
+Strategická shoda: nízká / střední / vysoká
+
+Návrh:
+Ponechat / zúžit / rozdělit / ukončit
+
+Proč:
+Co se změní pro zákazníka:
+Co se změní pro tým:
+Co se změní v datech, přístupech nebo retenci:
+Datum kontroly dopadu:
+```
+
+Typické vzory:
+
+- Vysoká hodnota, vysoká náročnost: zvažte vyšší cenu, lepší vstupní bránu nebo samostatný doplněk.
+- Nízká hodnota, vysoká datová stopa: ukončit nebo výrazně zjednodušit.
+- Vysoká hodnota, nízká srozumitelnost: přepsat prodejní stránku a sales kartu.
+- Střední hodnota, vysoké výjimky: zpřesnit rozsah nebo oddělit variantu pro pokročilé zákazníky.
+- Nízká strategická shoda: přesunout do archivu, i když část technicky funguje.
+
+### 5. Ošetřete dopad na web, sales a delivery
+
+Rozhodnutí nestačí zapsat do interní poznámky. Musí se propsat do všech míst, kde nabídka žije. Jinak vznikne nebezpečný mezistav: tým si myslí, že část skončila, ale web ji stále slibuje. Nebo sales prodává novou variantu, zatímco delivery používá starou šablonu.
+
+Po rozhodnutí projděte:
+
+- veřejnou stránku nabídky,
+- cenovou nebo orientační nabídku,
+- sales kartu a discovery otázky,
+- vstupní dotazník,
+- šablony workshopu,
+- šablonu výstupu,
+- datovou mapu,
+- seznam používaných nástrojů,
+- přístupy v týmu,
+- changelog a archiv.
+
+Krátká šablona změny:
+
+```markdown
+# Změna nabídky
+
+Co se mění:
+Typ změny: zúžení / rozdělení / ukončení / přesun do doplňku
+Platí od:
+
+Veřejná komunikace:
+Interní komunikace:
+Změna ve webu:
+Změna v sales:
+Změna v delivery:
+Změna v datech:
+Změna v ceně:
+
+Co se archivuje:
+Kdo kontroluje propsání:
+Datum kontroly:
+```
+
+Tento krok je nudný jen do chvíle, než se mu vyhnete. Pak je drahý.
+
+### 6. Komunikujte změnu bez dramatu
+
+Zúžení nebo ukončení části nabídky nemusí být velké veřejné oznámení. Často stačí přesná změna na webu, jasná poznámka v sales procesu a interní dohoda, jak odpovídat na dotazy.
+
+Dobrá komunikace říká:
+
+- co nově nabídka obsahuje,
+- co už neobsahuje,
+- proč je změna lepší pro výsledek,
+- jaké existují alternativy pro zákazníky, kteří potřebují starou část,
+- co se nemění v závazku kvality a práce s daty.
+
+Příklad:
+
+```markdown
+Nabídku jsme zúžili na audit hlavní prodejní cesty, protože právě tam zákazníci získávali nejrychlejší a nejpoužitelnější výstupy. Rozšířené SEO a obsahové mapování nově nabízíme jako samostatný navazující blok. Díky tomu má první audit kratší průběh, méně vstupních podkladů a jasnější výstup pro první iteraci webu.
+```
+
+To je lepší než mlhavé "optimalizovali jsme portfolio služeb". Lidé nepotřebují firemní mlhu. Potřebují vědět, co si kupují.
+
+### 7. Zkontrolujte dopad po jedné až třech dodávkách
+
+Po změně nabídky si neplánujte velké vítězství. Naplánujte kontrolu. Změna může vypadat dobře na papíře a přesto narazit v prodeji nebo delivery.
+
+Kontrolní otázky:
+
+- Je nabídka po změně snazší vysvětlit?
+- Trvá kvalifikace kratší dobu?
+- Ubyly výjimky?
+- Používá zákazník výstup lépe?
+- Je delivery stabilnější?
+- Zmenšila se datová stopa nebo je aspoň lépe vysvětlená?
+- Nevznikla díra, kterou musíme pokrýt jinou službou, článkem nebo šablonou?
+- Je cena pořád v souladu s výsledkem a pracností?
+
+Pokud změna pomohla, standardizujte ji. Pokud nepomohla, nevracejte automaticky starou verzi. Nejdřív zjistěte, jestli selhalo rozhodnutí, komunikace, cena, nebo jen první provedení.
+
+### Checklist přílohy
+
+- Má review jednu jasnou rozhodovací otázku?
+- Je nabídka rozdělená na konkrétní části s jasným vstupem, prací a výstupem?
+- Víte, které části ponechat, zúžit, rozdělit nebo ukončit?
+- Posuzujete hodnotu pro zákazníka i náročnost delivery?
+- Je datová stopa součástí rozhodnutí, ne až dodatečná poznámka?
+- Má každá změna dopad do webu, sales karty, šablon a datové mapy?
+- Umíte zákazníkovi srozumitelně říct, co se změnilo a proč?
+- Existuje datum kontroly dopadu po prvních dodávkách?
+- Archivujete starou verzi tak, aby se omylem nevrátila do prodeje?
+- Zůstává nabídka jasnější než před review?
+
+Dobrá nabídka nezraje tím, že každý měsíc přibere další část. Zraje tím, že tým umí chránit její výsledek. Někdy to znamená přidat. Častěji to znamená zkrátit, rozdělit nebo říct: tohle už nedává smysl. A ano, je to méně efektní než nový launch. Ale na rozdíl od mnoha launchů to opravdu pomáhá byznysu.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -32396,3 +32614,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CS o předání opakovatelné nabídky novému člověku: mapa rozhodnutí, stínování, hranice samostatnosti, příklady výstupů, kontrola prvních dodávek a privacy-first pravidla.
 - 2026-05-10: Doplněna Příloha CT o kontrole samostatnosti po předání nabídky: kontrolní okno, odchylky, potřeba pomoci, zákaznický sanity check, datová stopa a rozhodnutí po kontrole.
 - 2026-05-10: Doplněna Příloha CU o dlouhodobé údržbě opakovatelné nabídky: stabilní jádro, servisní kontrola, kanonická karta, signály únavy, cena, privacy-first rozšíření a rozhodnutí o zúžení nebo ukončení.
+- 2026-05-10: Doplněna Příloha CV o rozhodnutí, kdy opakovatelnou nabídku zúžit, rozdělit nebo ukončit: inventura částí, rozhodovací matice, dopady do webu, sales, delivery a privacy-first datové stopy.
