@@ -31648,6 +31648,269 @@ Toto pravidlo zní přísně, ale chrání škálování. Bez něj tým postupn�
 
 Předání opakovatelné nabídky je hotové teprve tehdy, když kvalita není závislá na tom, kdo má zrovna prostor v kalendáři. Neznamená to odstranit lidský úsudek. Znamená to dát mu oporu: rozhodovací pravidla, příklady, hranice a kontrolní rytmus. Pak může tým růst bez toho, aby s každým novým člověkem znovu vynalézal stejnou službu.
 
+## Příloha CT: Kontrola samostatnosti po předání nabídky
+
+Předání novému člověku je důležité, ale samo o sobě neříká, jestli systém opravdu funguje. První dodávky můžou dopadnout dobře proto, že byly jednoduché, zákazník byl trpělivý, původní autor stál pořád nablízku nebo nový člověk pracoval neudržitelně pečlivě. Skutečný test přichází až po několika týdnech, kdy nabídka běží v běžném provozu: v kalendáři jsou další zákazníci, podklady chodí v různé kvalitě, někdo se ptá na výjimku, někde chybí data a tým musí rozhodovat bez toho, aby všechno prošlo přes původního autora.
+
+Kontrola samostatnosti po předání má jednoduchý cíl: ověřit, jestli opakovatelná nabídka zůstává opakovatelná i bez intenzivního dohledu. Nejde o hodnocení člověka stylem školního testu. Jde o kontrolu systému. Pokud se kvalita rozpadá, problém může být ve vstupní bráně, dokumentaci, příkladech, rozsahu, prodejním slibu, kapacitě nebo v tom, že některá rozhodnutí pořád nejsou pojmenovaná.
+
+Privacy-first pohled je tady zvlášť praktický. Jakmile nový člověk začne pracovat samostatně, snadno se z pohodlí vytvoří nové zkratky: stáhnout si víc dat, nechat pracovní kopie v osobním úložišti, posílat si citlivé podklady přes špatný kanál, držet staré exporty "kdyby se hodily". Kontrola samostatnosti proto nemá řešit jen výstup pro zákazníka, ale i stopu, kterou po sobě dodávka nechává.
+
+### 1. Dejte kontrole konkrétní okno
+
+Samostatnost nejde ověřit jedním dojmem. Nastavte kontrolní okno, ve kterém sledujete několik reálných dodávek. Pro malý tým obvykle stačí 30 až 45 dní nebo tři až pět dokončených dodávek, podle toho, co nastane dřív. Důležité je dopředu říct, co se sleduje a kdy se udělá rozhodnutí.
+
+Krátká karta:
+
+```markdown
+# Kontrolní okno samostatnosti
+
+Nabídka:
+Nový vlastník / dodavatel:
+Původní autor:
+Začátek okna:
+Konec okna:
+Počet sledovaných dodávek:
+
+Sledujeme:
+- kvalitu výstupu,
+- dodržení rozsahu,
+- práci s výjimkami,
+- zákaznickou srozumitelnost,
+- privacy-first datovou stopu,
+- potřebu eskalací,
+- dopad na kapacitu týmu.
+
+Rozhodnutí po okně:
+Pokračovat samostatně / upravit předání / upravit nabídku / pozastavit škálování
+```
+
+Bez časového okna se kontrola snadno změní v trvalý pocit "ještě se na to podíváme". To je drahé pro obě strany. Nový člověk nemá jasnou hranici samostatnosti a původní autor zůstává neformálním schvalovatelem.
+
+### 2. Sledujte odchylky, ne jen chyby
+
+Ne každá odchylka je problém. Nový člověk může najít lepší formulaci, jednodušší postup nebo přesnější otázku. Kontrola samostatnosti má odlišit užitečnou odchylku od odchylky, která mění slib nabídky.
+
+Použijte čtyři kategorie:
+
+- V pořádku: jiný styl, stejná kvalita a stejný výsledek.
+- Zlepšení: jednodušší nebo přesnější postup, který stojí za zapsání do šablony.
+- Riziko: odchylka zatím nezhoršila výsledek, ale může rozbít rozsah, kvalitu nebo datovou hygienu.
+- Problém: odchylka už vedla ke slabému výstupu, zmatku zákazníka, zbytečné práci nebo špatné práci s daty.
+
+Příklad:
+
+```markdown
+Odchylka:
+Nový člověk přeskočil úvodní kontrolu vstupů a začal rovnou psát doporučení.
+
+Kategorie:
+Riziko.
+
+Proč:
+U jednoduché dodávky to prošlo, ale u složitějšího zákazníka by tým mohl stavět doporučení na neúplných datech.
+
+Úprava systému:
+Do vstupní brány přidat povinnou otázku: "Které tři podklady chybí pro spolehlivé doporučení?"
+```
+
+Tento přístup brání dvěma chybám. První je trestat všechno, co nový člověk dělá jinak. Druhá je přehlížet malé posuny, které postupně změní nabídku k horšímu.
+
+### 3. Měřte potřebu pomoci bez studu
+
+Samostatnost neznamená nikdy se nezeptat. Dobře nastavený systém naopak říká, kdy je dotaz správné chování. Pokud nový člověk eskaluje citlivá data, právní tvrzení nebo bezpečnostní nález, není to slabost. Je to důkaz, že hranice fungují.
+
+Sledujte ale typ pomoci:
+
+- Kontextová pomoc: chybí mu znalost zákazníka, segmentu nebo historického rozhodnutí.
+- Procesní pomoc: neví, jaký krok má následovat.
+- Rozhodovací pomoc: neví, podle čeho vybrat prioritu.
+- Kvalitativní pomoc: výstup je napsaný, ale není dost akční.
+- Privacy pomoc: není jasné, jaká data použít, uložit, anonymizovat nebo smazat.
+- Kapacitní pomoc: práce se nevejde do standardního rozsahu.
+
+Šablona záznamu:
+
+```markdown
+# Záznam potřeby pomoci
+
+Dodávka:
+Situace:
+Typ pomoci:
+Otázka:
+Rozhodnutí:
+Byla tato situace popsaná v dokumentaci? Ano / Ne / Částečně
+Co upravit:
+```
+
+Po několika dodávkách hledejte vzor. Jeden dotaz nic neznamená. Pět podobných dotazů znamená, že systém mlčí na důležitém místě.
+
+Codyho komentář: dobré předání nevypadá tak, že se nový člověk nikdy neptá. Vypadá tak, že se ptá na správné věci. Pokud se ptá, kde najde šablonu, dokumentace je slabá. Pokud se ptá, jestli konkrétní datový export patří do pracovního úložiště, hranice odpovědnosti pravděpodobně funguje.
+
+### 4. Udělejte malý zákaznický sanity check
+
+Kontrola samostatnosti nemá být jen interní. U opakovatelné nabídky je klíčové, jestli zákazník dostal jasný výsledek a věděl, co má udělat dál. Není potřeba velký dotazník. Stačí tři až pět otázek po předání.
+
+Příklad krátké zprávy:
+
+```markdown
+Díky za spolupráci. Pomůže nám krátká kontrola:
+
+1. Byl výstup srozumitelný bez dalšího vysvětlování?
+2. Je jasné, jaký první krok máte udělat?
+3. Chybělo vám něco podstatného pro rozhodnutí?
+4. Bylo z naší strany jasné, jak pracujeme s vašimi podklady a daty?
+5. Co by celý proces zjednodušilo?
+```
+
+Nesbírejte víc, než použijete. Pokud odpovědi slouží jen ke zlepšení nabídky, nepotřebujete je spojovat s osobními detaily navždy. Stačí zapsat anonymizovaný signál do backlogu:
+
+```markdown
+Signál:
+Zákazník nerozuměl rozdílu mezi rychlou opravou a větším projektem.
+
+Dopad:
+Výstup byl akční, ale další krok nebyl dost jasný.
+
+Úprava:
+Do závěru každého reportu přidat sekci "první týden / první měsíc / později".
+```
+
+Taková zpětná vazba je užitečnější než obecné skóre spokojenosti. Skóre řekne, že se něco líbilo nebo nelíbilo. Konkrétní odpověď řekne, co změnit.
+
+### 5. Porovnejte výstup se slibem nabídky
+
+Po předání se často stane nenápadná věc: nabídka se začne přizpůsobovat člověku, který ji dodává. Někdo je silný v analytice, takže výstupy jsou víc datové. Někdo je silný v copywritingu, takže víc řeší texty. Někdo má technické pozadí, takže zdůrazňuje architekturu. To může být přínos, pokud jádro nabídky zůstává stejné. Problém je, když zákazník kupuje jednu věc a dostává jinou.
+
+Vezměte prodejní stránku, sales kartu nebo interní popis nabídky a u každé sledované dodávky odpovězte:
+
+- Dodali jsme přesně ten výsledek, který slibujeme?
+- Nebyl výstup příliš široký nebo příliš úzký?
+- Dostaly všechny povinné části dostatečnou pozornost?
+- Nevznikla nová nepsaná specializace, kterou web neslibuje?
+- Je zákazník po předání blíž rozhodnutí nebo jen dostal další materiál ke čtení?
+- Zůstala privacy-first pravidla viditelná v procesu i výstupu?
+
+Scorecard může být jednoduchá:
+
+```markdown
+# Shoda výstupu se slibem
+
+Dodávka:
+Slib nabídky jednou větou:
+
+Výsledek pro zákazníka:
+0 / 1 / 2
+
+Konkrétnost doporučení:
+0 / 1 / 2
+
+Dodržení rozsahu:
+0 / 1 / 2
+
+Srozumitelný další krok:
+0 / 1 / 2
+
+Privacy-first práce s podklady:
+0 / 1 / 2
+
+Celkové rozhodnutí:
+V pořádku / upravit šablonu / upravit trénink / upravit nabídku
+```
+
+Nula znamená chybí, jedna znamená částečně, dvě znamená splněno. Nejde o krásnou metriku do dashboardu. Jde o opakovatelný rozhovor nad kvalitou.
+
+### 6. Zkontrolujte datovou stopu po každé dodávce
+
+Samostatná dodávka musí být čistá i po provozní stránce. Nestačí, že výstup vypadá dobře. Zkontrolujte, co se stalo s podklady, exporty, pracovními poznámkami a přístupy.
+
+Mini audit po dodávce:
+
+- Kde byly uloženy vstupní podklady?
+- Měl k nim přístup jen nezbytný okruh lidí?
+- Nevznikly kopie v osobních účtech, chatech nebo lokálních složkách bez důvodu?
+- Byla citlivá data anonymizovaná tam, kde nebyla nutná?
+- Byly do výstupu vloženy jen informace, které zákazník schválil nebo které jsou bezpečné sdílet?
+- Co se má archivovat pro obhajobu práce?
+- Co se má smazat po předání?
+- Je datová mapa nebo provozní list aktualizovaný, pokud vznikl nový tok?
+
+Krátký záznam:
+
+```markdown
+# Privacy-first uzávěrka dodávky
+
+Dodávka:
+Podklady:
+Úložiště:
+Přístupy:
+Kopie mimo standard:
+Anonymizace:
+Archiv:
+Smazání:
+Nový datový tok:
+Odpovědná osoba:
+Datum kontroly:
+```
+
+Tady se ukazuje, jestli privacy-first pravidla žijí v procesu. Pokud se kontrolují jen při návrhu nabídky, časem se rozpadnou. Ne z neochoty, ale z provozního pohodlí.
+
+### 7. Rozhodněte, co se změní po kontrolním okně
+
+Na konci kontrolního okna nepište dlouhou retrospektivu bez rozhodnutí. Vyberte jeden ze čtyř stavů.
+
+První stav: pokračovat samostatně. Kvalita drží, odchylky jsou malé, datová stopa je čistá a původní autor už není úzké hrdlo.
+
+Druhý stav: upravit předání. Nabídka je v pořádku, člověk je schopný, ale chybí dokumentace, příklady, rozhodovací mapa nebo lepší trénink v konkrétním místě.
+
+Třetí stav: upravit nabídku. Opakované problémy nejsou v člověku, ale v samotném slibu, rozsahu, vstupní bráně, ceně nebo procesu.
+
+Čtvrtý stav: pozastavit škálování. Kvalita nebo privacy-first pravidla se nedají udržet bez příliš velkého dohledu. Tým má nejdřív opravit systém a až potom přidávat další kapacitu.
+
+Šablona závěrečného rozhodnutí:
+
+```markdown
+# Rozhodnutí po kontrole samostatnosti
+
+Nabídka:
+Kontrolní okno:
+Počet dodávek:
+
+Co fungovalo:
+
+Co se opakovalo jako tření:
+
+Největší riziko:
+
+Privacy-first nález:
+
+Rozhodnutí:
+Pokračovat samostatně / upravit předání / upravit nabídku / pozastavit škálování
+
+Jedna změna do 7 dnů:
+
+Jedna změna do 30 dnů:
+
+Kdo vlastní aktualizaci systému:
+```
+
+Jedna změna do 7 dnů je důležitá. Bez ní se kontrola samostatnosti stane hezkým dokumentem, který nikdo nepromítne do reálné práce.
+
+### Checklist přílohy
+
+- Má kontrola samostatnosti konkrétní časové okno a počet dodávek?
+- Je dopředu jasné, co se sleduje?
+- Rozlišujete odchylky, zlepšení, rizika a skutečné problémy?
+- Zapisujete potřebu pomoci podle typu, ne jako neurčitý pocit?
+- Ptáte se zákazníka na srozumitelnost, první krok a práci s podklady?
+- Porovnáváte výstupy se slibem nabídky?
+- Kontrolujete datovou stopu po každé sledované dodávce?
+- Víte, co archivovat, co smazat a co anonymizovat?
+- Končí kontrolní okno konkrétním rozhodnutím?
+- Promítne se alespoň jedna změna do systému během 7 dnů?
+
+Samostatnost po předání není absence kontroly. Je to stav, kdy kontrola nemusí zachraňovat kvalitu pokaždé znovu. Dobrý systém poznáte podle toho, že nový člověk dokáže dodat výsledek svým stylem, ale ve stejném slibu, stejné kvalitě a se stejným respektem k datům. Teprve potom je opakovatelná nabídka opravdu připravená růst.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -31873,3 +32136,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CQ s kontrolou kvality opakovatelné nabídky po prvních dodávkách: scorecard, odchylky, akčnost výstupu, datová stopa a rozhodnutí o škálování.
 - 2026-05-10: Doplněna Příloha CR o škálování opakovatelné nabídky bez ztráty kontroly: jádro nabídky, úzká hrdla, vstupní brána, delivery kit, sales karta, ochranné signály a stop pravidla.
 - 2026-05-10: Doplněna Příloha CS o předání opakovatelné nabídky novému člověku: mapa rozhodnutí, stínování, hranice samostatnosti, příklady výstupů, kontrola prvních dodávek a privacy-first pravidla.
+- 2026-05-10: Doplněna Příloha CT o kontrole samostatnosti po předání nabídky: kontrolní okno, odchylky, potřeba pomoci, zákaznický sanity check, datová stopa a rozhodnutí po kontrole.
