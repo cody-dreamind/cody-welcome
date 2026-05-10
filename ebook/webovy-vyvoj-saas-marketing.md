@@ -33366,6 +33366,270 @@ Kontrola příště:
 
 Měsíční review nabídky má chránit tým před dvěma extrémy. První extrém je měnit vše podle posledního dojmu. Druhý extrém je neměnit nic, protože "už jsme to přece jednou promysleli". Praktická cesta je mezi tím: malé dokončené změny, krátké vyhodnocení, jasné rozhodnutí a kontrola datové stopy. Tak nabídka zůstává živá, ale ne roztěkaná.
 
+## Příloha DA: Automatizační mapa po review nabídky
+
+Když nabídka projde prvním měsíčním review, obvykle se objeví pokušení začít hned automatizovat. To je pochopitelné. Opakují se stejné otázky, stejné e-maily, stejné kroky v delivery a stejné ruční přepisy mezi nástroji. Jenže automatizace je dobrý sluha až ve chvíli, kdy víte, co přesně se má opakovat. Pokud zautomatizujete nejasný proces, nezískáte efektivitu. Získáte rychlejší chaos.
+
+Tato příloha pomáhá rozhodnout, co po review nabídky:
+
+1. standardizovat jako šablonu,
+2. automatizovat jako technický tok,
+3. ponechat ručně kvůli úsudku,
+4. odstranit, protože to vůbec nemá vznikat.
+
+Automatizace má navazovat na zralost nabídky. Ne na únavu týmu. Únava je signál, že něco drhne. Není sama o sobě důkaz, že řešením je skript, AI agent nebo nová integrace.
+
+### Vstupy z měsíčního review
+
+Než začnete kreslit automatizace, vezměte poslední měsíční review a vytáhněte z něj jen opakující se situace. Ne všechny nápady. Jen situace, které se staly dost často, aby měly provozní váhu.
+
+Použijte jednoduchou tabulku:
+
+- Situace: co se opakuje.
+- Spouštěč: kdy to začíná.
+- Vstup: jaké informace jsou potřeba.
+- Výstup: co má vzniknout.
+- Rozhodnutí: kde je potřeba lidský úsudek.
+- Data: jaká data se zpracují.
+- Riziko: co se stane, když automatizace udělá chybu.
+- Frekvence: kolikrát měsíčně se to děje.
+- Čas: kolik ruční práce to bere.
+- Stav: odstranit, šablonovat, automatizovat, ponechat ručně.
+
+Příklad situace:
+
+- Situace: po discovery hovoru vzniká shrnutí pro zákazníka a interní karta dalšího kroku.
+- Spouštěč: dokončený discovery hovor.
+- Vstup: poznámky z hovoru, web zákazníka, rozhodovací otázka, domluvený další krok.
+- Výstup: e-mail zákazníkovi, interní karta v backlogu, aktualizace CRM.
+- Rozhodnutí: co je skutečný problém, co je mimo rozsah, jak formulovat doporučení.
+- Data: obchodní informace zákazníka, kontaktní údaje, interní poznámky.
+- Riziko: špatné shrnutí poškodí důvěru nebo pošle interní informaci ven.
+- Frekvence: pětkrát měsíčně.
+- Čas: třicet až čtyřicet minut na případ.
+- Stav: šablonovat a částečně automatizovat, finální odeslání ponechat člověku.
+
+Takový záznam je lepší než obecné "automatizovat follow-up". Ukazuje hranici mezi rutinním přepisem a obchodním úsudkem.
+
+### Čtyři kategorie práce
+
+Po review rozdělte opakující se práci do čtyř kategorií.
+
+#### 1. Odstranit
+
+Nejlepší automatizace je ta, kterou nepotřebujete. Pokud krok nevytváří hodnotu, nemažte čas jeho zrychlováním. Smažte krok.
+
+Typické příklady:
+
+- Ruční report, který nikdo nečte.
+- Duplicitní evidence stejného údaje ve třech místech.
+- Kvalifikační otázka, kterou zákazník neumí zodpovědět a tým ji stejně nepoužije.
+- Interní schvalování, které vzniklo kvůli jedné staré chybě a dnes jen brzdí práci.
+
+Praktická otázka: kdyby tento krok zmizel, kdo by si toho všiml a jaké rozhodnutí by bylo horší?
+
+Pokud odpověď zní "asi nikdo", není to kandidát na automatizaci. Je to kandidát na mazání.
+
+#### 2. Šablonovat
+
+Šablona je vhodná tam, kde se opakuje struktura, ale obsah pořád vyžaduje úsudek. To je časté u nabídky, discovery, auditu, předání, podpory i interních review.
+
+Šablonujte:
+
+- e-mail po prvním hovoru,
+- osnovu nabídky,
+- kvalifikační kartu,
+- auditní záznam,
+- zákaznický handoff,
+- changelog změny,
+- měsíční review,
+- rozhodovací kartu po experimentu.
+
+Dobrá šablona nemá jen prázdná pole. Má i instrukci, jak poznat dobrou odpověď. Například:
+
+```text
+Hlavní problém zákazníka:
+Napiš jednou větou bez interního žargonu. Pokud věta začíná "potřebují systém na", pravděpodobně popisuješ řešení, ne problém.
+```
+
+To je užitečnější než samotné pole `Problém`.
+
+#### 3. Automatizovat
+
+Automatizace dává smysl tam, kde je vstup dostatečně strukturovaný, pravidla jsou stabilní a chyba má nízký nebo kontrolovatelný dopad.
+
+Dobří kandidáti:
+
+- vytvoření interní karty z formuláře,
+- připomenutí review po třiceti dnech,
+- kontrola chybějících polí v provozním listu,
+- vytvoření návrhu changelogu z uzavřených položek,
+- sběr odkazů na nově publikované materiály,
+- notifikace, že se blíží revize privacy dokumentu,
+- pravidelný export jednoduchých metrik do interního dashboardu.
+
+Slabí kandidáti:
+
+- automatické nacenění složité zakázky bez lidské kontroly,
+- automatické sliby termínů zákazníkům,
+- automatické odpovědi na citlivé obchodní námitky,
+- automatické posílání interních poznámek ven,
+- automatické obohacování leadů z externích databází bez jasného právního a privacy důvodu.
+
+Automatizace má mít vlastníka. Někdo musí vědět, proč existuje, kde běží, co se stane při chybě a kdy ji vypnout. Jinak se z ní stane skrytý proces, který nikdo nechce vlastnit, ale všichni se ho bojí smazat.
+
+#### 4. Ponechat ručně
+
+Některé kroky mají zůstat ruční, protože jejich hodnota je právě v úsudku, empatii nebo obchodní zodpovědnosti.
+
+Ručně ponechte:
+
+- finální rozhodnutí, jestli zákazník sedí na nabídku,
+- formulaci citlivého doporučení,
+- schválení veřejného tvrzení o výsledcích,
+- vyhodnocení, zda podnět patří do roadmapy,
+- rozhodnutí o výjimce z procesu,
+- komunikaci po incidentu,
+- odpověď na právně nebo datově citlivý dotaz.
+
+Ručně neznamená neorganizovaně. I ruční krok může mít šablonu, checklist a rozhodovací kritéria. Rozdíl je v tom, že poslední odpovědnost zůstává u člověka.
+
+### Privacy-first brána automatizace
+
+Každá nová automatizace musí projít privacy-first bránou. Ne proto, aby se zpomalila práce, ale aby se nerozšířil sběr dat jen proto, že to nástroj umí.
+
+Před spuštěním si odpovězte:
+
+- Jaká data automatizace čte?
+- Jaká data vytváří?
+- Kam data posílá?
+- Je poskytovatel v EU nebo má jasně popsaný region a právní rámec?
+- Potřebujeme osobní údaje, nebo stačí agregovaný či anonymizovaný vstup?
+- Jak dlouho data zůstávají v nástroji?
+- Kdo má k automatizaci a jejím logům přístup?
+- Umíme data exportovat nebo smazat?
+- Co se stane, když automatizace pošle informaci špatnému člověku?
+- Je automatizace vysvětlitelná zákazníkovi bez trapného kašlání do rukávu?
+
+Pokud poslední otázka bolí, zastavte se. To bývá dobrý signál.
+
+Codyho komentář: spousta automatizací se tváří jako produktivita, ale ve skutečnosti jen nenápadně zvětšuje počet míst, kde leží zákaznická data. Produktivita, kterou nejde vysvětlit zákazníkovi, není výhoda. Je to budoucí omluva.
+
+### Automatizační karta
+
+Každá automatizace nad nabídkou, sales nebo delivery by měla mít kartu. Stačí jedna stránka.
+
+```text
+Název automatizace:
+
+Problém:
+Jakou opakovanou práci nebo riziko řeší?
+
+Spouštěč:
+Kdy se spustí?
+
+Vstupy:
+Jaká data čte?
+
+Výstupy:
+Co vytvoří, změní nebo pošle?
+
+Lidská kontrola:
+Kde člověk schvaluje, upravuje nebo zastavuje výstup?
+
+Privacy-first kontrola:
+Kde jsou data, kdo k nim má přístup, jak dlouho se drží?
+
+Rizika:
+Co se může pokazit a jak se to pozná?
+
+Vypnutí:
+Jak automatizaci rychle zastavit?
+
+Vlastník:
+Kdo odpovídá za provoz a revizi?
+
+Datum další kontroly:
+Kdy ověříme, že pořád dává smysl?
+```
+
+Tato karta chrání tým před dvěma extrémy: před věčným ručním přepisem i před slepým přidáváním automatizačních vrstev. Pokud kartu neumíte vyplnit, automatizace ještě není připravená.
+
+### Příklad: follow-up po discovery hovoru
+
+U opakovatelné nabídky se často opakuje follow-up po úvodním hovoru. Tady dává smysl kombinace šablony a automatizace.
+
+Ruční část:
+
+- vyhodnotit, jestli zákazník sedí na nabídku,
+- pojmenovat skutečný problém,
+- rozhodnout, co je mimo rozsah,
+- doplnit konkrétní doporučení.
+
+Automatizovaná část:
+
+- vytvořit interní kartu z formuláře,
+- předvyplnit osnovu follow-upu,
+- připomenout odeslání do dalšího pracovního dne,
+- po schválení uložit odkaz na follow-up ke kartě zákazníka,
+- za třicet dní připomenout kontrolu dalšího kroku.
+
+Co neposílat automaticky:
+
+- finální e-mail zákazníkovi,
+- cenový slib,
+- závazný termín,
+- interní poznámky,
+- hodnocení zákazníka nebo rizikové komentáře.
+
+Tím se zrychlí rutina, ale důvěra zůstane pod lidskou kontrolou. Přesně o to jde.
+
+### Stop pravidla
+
+Automatizaci zastavte nebo nepouštějte, když:
+
+- opakovaně vytváří výstupy, které člověk celé přepisuje,
+- tým neumí vysvětlit, jaká data zpracovává,
+- přidává nový nástroj jen kvůli jednomu drobnému kroku,
+- zvyšuje počet ručních kontrol místo jejich snížení,
+- posílá data mimo dohodnutý provozní nebo geografický rámec,
+- zhoršuje zákaznický tón komunikace,
+- nahrazuje úsudek tam, kde ještě nemáte stabilní pravidla.
+
+Dobrá automatizace mizí do pozadí. Špatná automatizace se neustále připomíná tím, že ji někdo musí opravovat.
+
+### Měsíční kontrola automatizací
+
+Jednou měsíčně projděte aktivní automatizace společně s review nabídky.
+
+Krátká agenda:
+
+1. Která automatizace ušetřila reálný čas?
+2. Která snížila počet chyb?
+3. Která vytvořila nové tření?
+4. Která pracuje s daty, která už nepotřebuje?
+5. Kterou můžeme zjednodušit nebo vypnout?
+6. Kde stačí šablona místo technické integrace?
+7. Kde je ruční krok pořád správné rozhodnutí?
+
+Výstupem nemá být seznam dalších automatizací. Výstupem má být čistší provoz. Někdy to znamená přidat skript. Někdy přepsat formulář. Někdy smazat pole. Někdy říct: tady má rozhodovat člověk.
+
+### Checklist přílohy
+
+- Vychází automatizace z opakované situace, ne jen z pocitu únavy?
+- Má situace jasný spouštěč, vstup a výstup?
+- Víme, kde je potřeba lidský úsudek?
+- Zkusili jsme nejdřív odstranit zbytečný krok?
+- Stačila by šablona místo integrace?
+- Má automatizace vlastníka a kartu?
+- Prošla privacy-first bránou?
+- Umíme ji rychle vypnout?
+- Neposílá zákaznická nebo interní data do zbytečných nástrojů?
+- Měříme přínos podle času, chyb, kvality výstupu a nižšího tření?
+- Kontrolujeme automatizace měsíčně spolu s nabídkou?
+
+Automatizace má být závěr dobrého procesu, ne náhrada za přemýšlení. Když je nabídka jasná, data minimální, hranice rozhodnutí popsané a tým ví, co chce opakovat, automatizace pomůže. Když to jasné není, jen přidá další vrstvu mlhy. A mlhu už máme v digitálním světě dost, díky pěkně.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -33598,3 +33862,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CX o kontrole dopadu po přepsání nabídky: hodnoticí okno, kvalita signálů, zákaznický sanity check, audit toku, rozhodnutí po review a aktualizace changelogu.
 - 2026-05-10: Obnoven plný rukopis po nechtěném zkrácení posledním commitem a doplněna Příloha CY o převodu zjištění z nabídky do produktového a marketingového backlogu.
 - 2026-05-10: Doplněna Příloha CZ s měsíčním review nabídky po backlogových změnách: rozhodovací otázka, signály z webu, sales a delivery, privacy-first mini audit, stav nabídky a checklist.
+- 2026-05-10: Doplněna Příloha DA s automatizační mapou po review nabídky: třídění práce na odstranění, šablony, automatizace a ruční rozhodnutí, privacy-first brána, karta automatizace a stop pravidla.
