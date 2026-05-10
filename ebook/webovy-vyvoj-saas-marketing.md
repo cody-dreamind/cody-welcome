@@ -30044,6 +30044,205 @@ Taková věta je praktičtější než obecné "dbáme na soukromí". Čtenáři
 
 Zapracování pilotu je místo, kde se pozná, jestli tým opravdu poslouchá čtenáře. Ne podle toho, že přidá každou připomínku. Podle toho, že odstraní tření, zachová účel a vydá materiál, který pomůže udělat práci. Playbook po pilotu nemá být větší. Má být přesnější.
 
+## Příloha CM: Distribuce samostatného playbooku bez ztráty kontroly
+
+Opravený playbook po pilotu má hodnotu až ve chvíli, kdy se dostane ke správným lidem ve správné situaci. Distribuce ale nesmí rozbít to, kvůli čemu materiál vznikl: praktickou použitelnost, jasnou verzi, vazbu na kanonický e-book a privacy-first práci s daty.
+
+Špatná distribuce z playbooku rychle udělá další náhodný soubor. Jedna verze leží v PDF, druhá v interní složce, třetí v příloze e-mailu, čtvrtá v prezentaci a pátá jako zkopírovaný text v CRM. Po měsíci už nikdo neví, která verze platí. Po kvartálu tým upravuje zastaralé výřezy, zákazník dostane jiný checklist než obchodník a původní privacy poznámka se ztratí cestou.
+
+Cílem této přílohy je nastavit distribuci tak, aby playbook žil jako kontrolovaný pracovní materiál. Ne jako kampaňový leták. Ne jako uzamčený lead magnet za formulářem se sedmi poli. Jako užitečná, dohledatelná a udržovatelná pomůcka.
+
+### 1. Určete kanonickou URL
+
+Každý veřejný playbook má mít jednu kanonickou URL. To je hlavní místo, na které odkazují články, e-maily, obchodní follow-upy, interní poznámky i PDF exporty. Pokud se materiál změní, mění se zdroj pravdy, ne deset kopií.
+
+Minimum kanonické stránky:
+
+- název playbooku,
+- krátká věta, kdy ho použít,
+- verze a datum poslední revize,
+- vazba na zdrojový e-book nebo kapitolu,
+- pracovní kroky,
+- šablona nebo checklist,
+- privacy-first poznámka,
+- odkaz na zpětnou vazbu,
+- datum další plánované kontroly.
+
+Příklad:
+
+```text
+URL: /playbooky/audit-webu/
+Verze: 1.0
+Stav: veřejná pracovní verze
+Zdroj: Od webu k SaaS, kapitoly 2, 5, 7 a 30
+Další revize: 2026-07-01
+```
+
+Kanonická URL chrání materiál před rozkladem. PDF, prezentace nebo interní výřez mohou existovat, ale mají jasně říkat: aktuální verze je vždy na této adrese.
+
+### 2. Vyberte distribuční situace
+
+Distribuce nezačíná kanálem. Začíná situací, kdy playbook někomu pomůže. Pokud tu situaci neumíte pojmenovat, budete jen posílat odkazy a doufat.
+
+U každého playbooku napište tři až pět situací:
+
+- Po úvodním hovoru se zákazníkem, který potřebuje vybrat první krok.
+- Po článku, který vysvětluje problém, ale čtenář chce pracovní postup.
+- Před workshopem, aby účastníci připravili vstupy.
+- Po workshopu, aby tým dotáhl rozhodnutí do backlogu.
+- Interně při předání mezi obchodem, produktem a delivery týmem.
+
+Ke každé situaci doplňte:
+
+- kdo playbook dostane,
+- proč právě teď,
+- jaký výstup má vzniknout,
+- jak poznáte, že pomohl,
+- jaká data kvůli tomu sbíráte.
+
+Slabá distribuční situace:
+
+"Budeme playbook propagovat na LinkedInu."
+
+Silnější distribuční situace:
+
+"Po článku o privacy-first analytice nabídneme playbook jako další krok pro týmy, které chtějí za 60 minut zmapovat měření webu a odstranit zbytečné trackery."
+
+První věta řeší kanál. Druhá řeší práci čtenáře.
+
+### 3. Nedělejte z každého playbooku lead magnet
+
+Ne každý užitečný materiál musí být za formulářem. Někdy je silnější nechat playbook volně dostupný, indexovatelný, citovatelný a snadno sdílitelný. Pokud čtenář teprve získává důvěru, povinné zadání e-mailu může být zbytečné tření.
+
+Použijte formulář jen tehdy, když existuje férový důvod:
+
+- čtenář chce osobní vyhodnocení,
+- odesílá vlastní data k analýze,
+- registruje se na workshop,
+- chce dostat aktualizace materiálu,
+- nebo žádá navazující konzultaci.
+
+I pak držte minimum polí. Pro první kontakt obvykle stačí e-mail a krátký kontext. Marketingový odběr nepatří do stejného souhlasu jako stažení pracovního materiálu.
+
+Privacy-first varianta:
+
+"Playbook je dostupný bez registrace. Pokud chcete, pošlete nám vyplněný výstup a ozveme se s návrhem dalšího kroku. Údaje použijeme jen k odpovědi na tento dotaz."
+
+Codyho komentář: uzamknout každý checklist za formulář je marketingová lenost převlečená za strategii. Pokud je materiál dobrý, může budovat důvěru i bez toho, aby si na první dobrou řekl o kontakt. Někdy je nejlepší lead magnet ten, který se nechová jako past.
+
+### 4. Připravte distribuční balíček
+
+Kanonická stránka je základ, ale tým potřebuje i malé distribuční výřezy. Ne proto, aby vznikly nové verze obsahu, ale aby se playbook dal použít v běžných situacích bez improvizace.
+
+Distribuční balíček:
+
+- krátký popis do článku,
+- krátký popis do e-mailu po hovoru,
+- interní poznámka pro obchod nebo podporu,
+- text pro sociální síť bez slibů mimo obsah,
+- odkazovací věta pro jiné kapitoly nebo články,
+- jednořádková privacy poznámka,
+- screenshot nebo náhled, pokud pomáhá pochopit výstup,
+- pravidlo, kam posílat zpětnou vazbu.
+
+Příklad follow-up textu po úvodním hovoru:
+
+```text
+Posílám playbook pro rychlý audit webu. Cíl je vybrat tři slabiny, které nejvíc brzdí důvěru nebo poptávky, a jednu opravu na tento týden. Aktuální verze je tady: [URL]. Pokud mi pošlete výstup, použiju ho jen k návrhu dalšího kroku.
+```
+
+Příklad interní poznámky:
+
+```text
+Použij u firem, které mají web, ale neumí říct, proč nepřináší kvalitní poptávky. Neposílej jako univerzální materiál všem leadům. Pokud zákazník pracuje s reálnými poptávkami, připomeň anonymizaci.
+```
+
+Balíček má být krátký. Pokud potřebuje manuál k použití, playbook ještě není dost samostatný.
+
+### 5. Měřte užitečnost, ne jen zásah
+
+Distribuce playbooku svádí k měření stažení, prokliků a zobrazení. Tyto signály nejsou bezcenné, ale samy o sobě neříkají, jestli materiál pomohl. U playbooku je hlavní otázka: vznikl pracovní výstup nebo lepší rozhodnutí?
+
+Užitečné signály:
+
+- čtenář dokončil checklist nebo šablonu,
+- playbook vedl k jednomu konkrétnímu dalšímu kroku,
+- obchodník ho použil jako follow-up a zkrátil vysvětlování,
+- support díky němu odpověděl konzistentněji,
+- zákazník přišel na workshop lépe připravený,
+- materiál odhalil zbytečný sběr dat nebo špatný nástroj.
+
+Stačí jednoduchý měsíční záznam:
+
+```text
+Playbook:
+Období:
+Kde se distribuoval:
+Kolik vzniklo použitelných výstupů:
+Jaké tři typy tření se opakovaly:
+Jaký obchodní nebo produktový signál vznikl:
+Jaký privacy-first nález se objevil:
+Rozhodnutí pro další verzi:
+```
+
+Nemusíte sledovat jednotlivce. V mnoha případech stačí agregovaný počet použití, typy zpětné vazby a kvalita výstupů. Pokud nevíte, co byste s detailním sledováním dělali, nesbírejte ho.
+
+### 6. Držte verze pod kontrolou
+
+Jakmile playbook použijete ve více kanálech, vzniká riziko neřízených kopií. Proto každá odvozená verze musí mít jasné pravidlo.
+
+Pravidla:
+
+- PDF export má datum a odkaz na aktuální URL.
+- Prezentace má jen výřez a odkaz na celý playbook.
+- Interní šablona má vlastníka a datum poslední synchronizace.
+- E-mailové šablony obsahují kanonickou URL, ne vložený celý text.
+- Staré verze se archivují nebo přesměrují.
+- Pokud se změní privacy pravidlo, aktualizují se všechny distribuční výřezy.
+
+Praktická věta do PDF:
+
+"Tento export je verze 1.0 z 2026-05-10. Aktuální verze a případné opravy jsou vždy na: [URL]."
+
+Tohle vypadá jako detail. Není. U pracovních materiálů jsou zastaralé kopie jeden z nejrychlejších způsobů, jak si vyrobit chaos.
+
+### 7. Vraťte signály zpět do e-booku
+
+Samostatný playbook není odříznutý produkt. Je to výřez z e-booku, který se používá v praxi. Když distribuce ukáže nové otázky, opakované tření nebo lepší příklady, signál se má vrátit do zdrojového rukopisu.
+
+Zpětná smyčka:
+
+1. Zachyťte signál u distribuční karty playbooku.
+2. Rozhodněte, jestli patří do playbooku, hlavního e-booku, interní šablony nebo backlogu.
+3. Upravte kanonický zdroj.
+4. Aktualizujte distribuční výřezy.
+5. Zapište změnu do pracovního logu nebo changelogu.
+
+Příklad:
+
+- Tři zákazníci se ptají, jak anonymizovat vstupy do webového auditu.
+- Nález patří do playbooku i do kapitoly o privacy-first formulářích.
+- Doplní se krátký příklad anonymizace.
+- Follow-up šablona začne připomínat, že není potřeba posílat osobní údaje leadů.
+
+Tak se z distribuce stává učení, ne jen vysílání.
+
+### Checklist přílohy
+
+- Má playbook jednu kanonickou URL?
+- Je na stránce uvedená verze, stav, zdroj a datum další revize?
+- Víte, v jakých konkrétních situacích se má playbook distribuovat?
+- Nevyžadujete e-mail tam, kde není férový důvod?
+- Jsou marketingový odběr, konzultace a běžné použití materiálu oddělené?
+- Má tým krátký distribuční balíček pro článek, e-mail, obchod a interní použití?
+- Měříte vznik pracovních výstupů, ne jen zobrazení a stažení?
+- Mají PDF, prezentace a interní šablony odkaz na aktuální kanonickou verzi?
+- Existuje pravidlo pro archivaci nebo přesměrování starých verzí?
+- Vrací se poznatky z distribuce zpět do playbooku nebo hlavního e-booku?
+- Je privacy-first poznámka součástí distribučních textů, ne jen hlavní stránky?
+
+Distribuce dobrého playbooku nemá být hlučná. Má být přesná. Správný materiál, správná situace, jasná verze, minimum dat a cesta zpět k lepšímu zdroji. Tak playbook neztratí hodnotu tím, že se začne používat. Naopak: používáním se zlepší.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -30262,3 +30461,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CJ se scorecardem připravenosti samostatného playbooku: rozhodovací situace, čtenář, kroky, výstup, privacy-first kontrola a vydávací brána.
 - 2026-05-10: Doplněna Příloha CK s pilotem samostatného playbooku před veřejným vydáním: pilotní otázka, účastníci, tření, samostatnost materiálu, privacy-first pravidla a rozhodnutí po pilotu.
 - 2026-05-10: Doplněna Příloha CL o zapracování pilotních nálezů do samostatného playbooku: třídění nálezů, úprava čtenářské cesty, privacy-first brána, změnová karta a vydání verze.
+- 2026-05-10: Doplněna Příloha CM o distribuci samostatného playbooku bez ztráty kontroly: kanonická URL, distribuční situace, lead magnety, měření užitečnosti, verzování a zpětná smyčka do e-booku.
