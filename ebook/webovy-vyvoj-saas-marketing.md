@@ -32680,6 +32680,213 @@ Toto review držte krátké. Pokud objevíte deset problémů, vyberte jeden, kt
 
 Změna nabídky je hotová až ve chvíli, kdy ji trh potkává stejným způsobem, jak ji tým interně chápe. Web, sales karta, formulář, důkazy a delivery šablony musí říkat stejnou věc. Jinak se zákazník učí jednu nabídku, obchodník prodává druhou a tým dodává třetí. To není strategie. To je náklad, který se jen tváří jako flexibilita.
 
+## Příloha CX: Kontrola dopadu po přepsání nabídky
+
+Po přepsání webu a sales materiálů přichází nebezpečně klidná fáze. Stránka je upravená, formulář má nové otázky, sales karta existuje, staré PDF je v archivu a tým má pocit, že je hotovo. Jenže skutečná otázka nezní, jestli se změna propsala do dokumentů. Skutečná otázka zní, jestli změna zlepšila rozhodování zákazníků a práci týmu.
+
+Kontrola dopadu není velký analytický projekt. Je to krátké provozní review po několika reálných signálech: poptávkách, hovorech, odmítnutích, dodávkách nebo reakcích na nový materiál. Cílem není obhájit, že změna byla dobrý nápad. Cílem je zjistit, co se skutečně stalo, co zůstalo nejasné a jaký jeden další krok má největší smysl.
+
+Privacy-first pohled je tady důležitý, protože změna nabídky často mění i datovou stopu. Nový formulář může sbírat méně údajů, ale také může nechtěně přidat otázku, která není pro první odpověď potřeba. Nová sales karta může lépe vysvětlit evropský provoz, ale tým ji nemusí používat. Nová landing page může mít jasnější slib, ale měření může pořád sledovat jen návštěvnost místo kvality poptávek. Kontrola dopadu má tyto rozpory vytáhnout brzy, dokud jsou levné.
+
+### 1. Nastavte krátké hodnoticí okno
+
+Nečekejte půl roku. První kontrola má proběhnout ve chvíli, kdy máte dost signálů na orientační závěr, ale ne tolik, aby se špatný vzorec stihl zabydlet.
+
+Praktická okna:
+
+- po třech až pěti relevantních poptávkách,
+- po třech sales hovorech,
+- po první dodávce nové verze nabídky,
+- po čtrnácti až třiceti dnech od zveřejnění změny,
+- po první situaci, kdy tým musel říct ne špatnému fitu.
+
+Vyberte jedno okno dopředu. Pokud ho necháte neurčitě na "až bude čas", review se ztratí mezi běžnou prací. Nabídka pak bude žít podle náhodných dojmů, ne podle vědomého rozhodnutí.
+
+Krátká karta okna:
+
+```markdown
+# Kontrolní okno po přepsání nabídky
+
+Nabídka:
+Verze:
+Datum zveřejnění změny:
+
+Kontrolujeme po:
+- počtu poptávek:
+- počtu hovorů:
+- počtu dodávek:
+- nebo datu:
+
+Hlavní otázka review:
+Kdo sbírá signály:
+Kdo rozhodne další krok:
+```
+
+Hlavní otázka musí být konkrétní. Ne "funguje to?", ale třeba: "Chápou lidé nový užší rozsah auditu před prvním hovorem?" nebo "Pomáhá nová sales karta rychleji odmítnout poptávky mimo fit?"
+
+### 2. Sledujte kvalitu signálů, ne jen objem
+
+Po přepsání nabídky se tým snadno chytí nejviditelnější metriky: návštěvnost, počet formulářů, počet hovorů. Tyto údaje mají hodnotu, ale samy o sobě neřeknou, jestli je nabídka srozumitelnější.
+
+Lepší signály:
+
+- kolik lidí přišlo se správným očekáváním,
+- kolik lidí se ptalo na starý rozsah,
+- kolik poptávek šlo rychle kvalifikovat,
+- kolik poptávek šlo poctivě odmítnout bez dlouhého vysvětlování,
+- kolik lidí pochopilo navazující variantu,
+- kolik podkladů bylo opravdu potřeba pro první odpověď,
+- kolik výjimek vzniklo v delivery,
+- kolik interních dotazů měl tým k novému rozsahu.
+
+Příklad: pokud po přepsání stránky přijde méně poptávek, ale většina sedí na nový rozsah a hovory jsou kratší, může to být zlepšení. Pokud přijde víc poptávek, ale polovina chce starou službu, text pravděpodobně pořád prodává starý slib.
+
+Codyho komentář: objem je lákavý, protože se dobře ukazuje v grafu. Kvalita se hůř prodává v prezentaci, ale lépe platí účty. Pět dobrých poptávek je pro malý tým často zdravější než padesát rozhovorů, ze kterých vznikne jen únava a kreativní používání slova "možná".
+
+### 3. Přidejte zákaznický sanity check
+
+Interní review nestačí. Tým ví příliš mnoho. Čte text s kontextem, který zákazník nemá. Proto se po prvních reakcích vyplatí udělat krátký sanity check s lidmi, kteří nejsou autory nabídky.
+
+Stačí tři otázky:
+
+1. Co podle vás tato nabídka slibuje?
+2. Co byste čekali jako výstup?
+3. Co vám není jasné před tím, než byste poslali poptávku?
+
+Když respondent nedokáže zopakovat slib vlastními slovy, problém není v něm. Problém je v textu, struktuře nebo důkazech. Pokud čeká výstup, který už není v rozsahu, starý slib někde pořád prosvítá. Pokud se bojí poslat formulář kvůli příliš citlivým otázkám, vstupní brána je moc těžká.
+
+Privacy-first pravidlo pro sanity check: neukládejte zbytečné osobní detaily respondentů. Zapište roli, situaci, odpovědi a rozhodnutí. Nepotřebujete kompletní profil člověka, abyste věděli, že nerozuměl třetímu odstavci landing page.
+
+### 4. Porovnejte slib, formulář, hovor a dodávku
+
+Nejčastější problém po změně nabídky je rozpad mezi čtyřmi místy:
+
+- web něco slibuje,
+- formulář se ptá na něco jiného,
+- sales hovor prodává širší nebo užší věc,
+- delivery nakonec dodává podle starého návyku.
+
+Kontrola dopadu má projít celý tok, ne jen čísla. Vezměte jednu reálnou poptávku a sledujte ji od vstupu po výstup. Kde se změnil význam? Kde zákazník očekával něco jiného? Kde tým sáhl po staré šabloně? Kde se sbírala data, která nebyla potřeba?
+
+Mini audit toku:
+
+```markdown
+# Audit jednoho toku po změně nabídky
+
+Poptávka / projekt:
+Datum:
+
+Co zákazník viděl na webu:
+Co vyplnil ve formuláři:
+Co zaznělo v prvním hovoru:
+Co bylo slíbeno v nabídce:
+Co tým skutečně dodal:
+
+Kde vznikl nesoulad:
+Kde vznikla zbytečná datová stopa:
+Kde zákazník ocenil nový rozsah:
+Co upravit jako první:
+```
+
+Tento audit je praktický právě tím, že je konkrétní. Jedna skutečná cesta odhalí víc než deset abstraktních debat o tom, jestli je text "dost jasný".
+
+### 5. Rozlišujte čtyři výsledky review
+
+Po kontrole nedělejte automaticky další redesign. Výsledek může být jeden ze čtyř typů.
+
+Ponechat:
+
+- nový slib je srozumitelný,
+- poptávky sedí lépe než dřív,
+- tým umí nabídku prodat i dodat,
+- datová stopa je menší nebo lépe zdůvodněná,
+- stačí drobná údržba.
+
+Zpřesnit:
+
+- směr je správný,
+- ale zákazník se ptá na stejné nejasnosti,
+- formulář nebo FAQ potřebují úpravu,
+- sales karta potřebuje jednu novou námitku,
+- důkaz nebo ukázka výstupu chybí.
+
+Vrátit do rozhodování:
+
+- změna nevyřešila hlavní tření,
+- tým se vrací ke starému rozsahu,
+- zákazník nechápe, co vlastně kupuje,
+- nová varianta vytvořila víc výjimek než stará,
+- cena neodpovídá vnímané hodnotě.
+
+Ukončit nebo rozdělit další část:
+
+- review ukázalo, že problém není v textu,
+- ale v samotné konstrukci nabídky,
+- jedna část stále kazí srozumitelnost,
+- nebo datová stopa zůstává neúměrná hodnotě.
+
+Šablona rozhodnutí:
+
+```markdown
+# Rozhodnutí po kontrole dopadu
+
+Nabídka:
+Verze:
+Období kontroly:
+
+Hlavní zjištění:
+Rozhodnutí:
+Ponechat / zpřesnit / vrátit do rozhodování / dále zúžit nebo rozdělit
+
+Jedna změna webu:
+Jedna změna formuláře:
+Jedna změna sales karty:
+Jedna změna delivery:
+Jedna změna datové mapy:
+
+Co neděláme:
+Datum další kontroly:
+```
+
+Položka "Co neděláme" je důležitá. Bez ní se review změní na generátor práce. Smyslem není přidat deset úkolů. Smyslem je najít jednu nejmenší změnu, která zlepší tok.
+
+### 6. Zapište dopad do changelogu a datové mapy
+
+Když review změní web, formulář, sales kartu nebo delivery proces, musí vzniknout záznam. Ne kvůli byrokracii. Kvůli tomu, aby tým za tři měsíce věděl, proč změna vznikla.
+
+Minimum záznamu:
+
+- co bylo po kontrole upraveno,
+- jaký signál k tomu vedl,
+- jaký dopad čekáte,
+- kde se změna projevila,
+- zda se změnila datová stopa,
+- kdy proběhne další kontrola.
+
+Příklad:
+
+```markdown
+2026-05-10: Po prvních čtyřech poptávkách jsme upravili formulář auditu. Odebrali jsme otázku na interní rozpočet kampaní, protože nebyla potřeba pro první odpověď a odrazovala menší týmy. Přidali jsme volbu situace zákazníka, aby bylo snazší rozlišit rychlou diagnostiku od navazujícího bloku. Další kontrola po pěti hovorech.
+```
+
+Takový záznam chrání tým před návratem starých otázek jen proto, že "se to kdysi ptalo". Historie rozhodnutí je levná forma paměti.
+
+### Checklist přílohy
+
+- Má kontrola dopadu předem určené hodnoticí okno?
+- Je hlavní otázka review konkrétní?
+- Sledujete kvalitu poptávek a rozhovorů, ne jen jejich počet?
+- Umíte říct, jestli lidé chápou nový slib před hovorem?
+- Proběhl krátký zákaznický sanity check?
+- Zkontrolovali jste celý tok od webu přes formulář a sales až po delivery?
+- Víte, kde se vrací starý rozsah nebo starý jazyk?
+- Ověřili jste, že formulář nesbírá zbytečná data?
+- Rozhodli jste mezi ponechat, zpřesnit, vrátit do rozhodování nebo dále zúžit?
+- Má review jeden konkrétní další krok a seznam věcí, které teď neděláte?
+- Je změna zapsaná v changelogu, sales materiálech a datové mapě?
+
+Dobré review po přepsání nabídky není o dokazování, že tým měl pravdu. Je o tom, aby se nabídka postupně přibližovala realitě zákazníka, kapacitě týmu a přiměřené datové stopě. Když se to dělá pravidelně, web a sales materiály přestanou být jednorázová kampaň. Stanou se živým rozhraním mezi tím, co firma slibuje, a tím, co umí poctivě dodat.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -32909,3 +33116,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CU o dlouhodobé údržbě opakovatelné nabídky: stabilní jádro, servisní kontrola, kanonická karta, signály únavy, cena, privacy-first rozšíření a rozhodnutí o zúžení nebo ukončení.
 - 2026-05-10: Doplněna Příloha CV o rozhodnutí, kdy opakovatelnou nabídku zúžit, rozdělit nebo ukončit: inventura částí, rozhodovací matice, dopady do webu, sales, delivery a privacy-first datové stopy.
 - 2026-05-10: Doplněna Příloha CW o přepsání webu a sales materiálů po změně nabídky: mapa míst, nový slib, formuláře, sales karta, důkazy, staré odkazy a kontrola prvních rozhovorů.
+- 2026-05-10: Doplněna Příloha CX o kontrole dopadu po přepsání nabídky: hodnoticí okno, kvalita signálů, zákaznický sanity check, audit toku, rozhodnutí po review a aktualizace changelogu.
