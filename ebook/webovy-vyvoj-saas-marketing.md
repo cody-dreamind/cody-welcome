@@ -29415,6 +29415,223 @@ Pokud playbook nikdo nepoužívá a nemá jasnou budoucí roli, archivujte ho. A
 
 Samostatné playbooky dávají e-booku druhý život. Ne jako další hromada obsahu, ale jako sada pracovních nástrojů pro opakované situace. Když zůstanou krátké, kanonicky navázané a privacy-first distribuované, pomáhají čtenářům i týmu. Když se rozrostou bez řízení, jen přesunou chaos z jednoho velkého dokumentu do pěti menších. A to by byla škoda. Markdown už toho unesl dost.
 
+## Příloha CJ: Scorecard připravenosti samostatného playbooku
+
+Rozdělit e-book na samostatné playbooky je užitečné jen tehdy, když každý playbook obstojí sám o sobě. Čtenář nemá hádat, pro koho materiál je, co má udělat jako první, jaký výstup má vzniknout a kde najde hlubší vysvětlení. Pokud tohle není jasné, playbook není pracovní nástroj. Je to jen kratší kus textu s hezkým názvem.
+
+Scorecard připravenosti pomáhá rozhodnout, jestli playbook pustit ven, vrátit k úpravě, nebo zatím nechat v interním pracovním režimu. Není to akademické hodnocení. Je to praktická brána před publikací, sdílením se zákazníkem nebo zařazením do interního delivery systému.
+
+Použijte ji u každého samostatného playbooku, který vznikne z tohoto e-booku:
+
+- Web audit playbook.
+- SaaS MVP playbook.
+- Marketingový playbook.
+- Privacy-first provozní playbook.
+- Launch playbook.
+- Jakýkoli další výřez, který má fungovat jako samostatný pracovní materiál.
+
+Cílem není získat perfektní skóre. Cílem je najít slabiny dřív, než je najde čtenář v okamžiku, kdy potřebuje rozhodnout.
+
+### 1. Jedna rozhodovací situace
+
+První otázka zní: řeší playbook jednu konkrétní situaci, nebo se snaží být malou encyklopedií?
+
+Silný playbook má větu typu:
+
+"Použijte ho, když chcete během 90 minut zjistit, proč web nepřináší kvalitní poptávky a které tři změny mají největší prioritu."
+
+Slabý playbook má větu typu:
+
+"Tento materiál popisuje marketing, web a analytiku."
+
+Rozdíl je v práci. První věta říká, kdy materiál otevřít a co bude hotovo. Druhá jen vyjmenovává téma.
+
+Hodnocení:
+
+- 0 bodů: Situace není pojmenovaná.
+- 1 bod: Situace je obecná, ale čtenář zhruba tuší téma.
+- 2 body: Situace je konkrétní a odpovídá jedné opakované práci.
+- 3 body: Situace je konkrétní, má jasný výstup a hranici rozsahu.
+
+### 2. Čtenář pozná, jestli je to pro něj
+
+Playbook musí rychle filtrovat. Není nezdvořilé říct, pro koho materiál není. Naopak. Šetříte čas lidem, kteří by jinak četli deset stran a až potom zjistili, že řeší jiný problém.
+
+Minimum:
+
+- Pro koho je playbook.
+- Kdy ho použít.
+- Kdy ho nepoužít.
+- Jaké vstupy má mít čtenář připravené.
+- Jaký výstup má po práci vzniknout.
+
+Příklad:
+
+Pro koho: B2B tým, který má existující web a chce zlepšit kvalitu poptávek.
+
+Kdy nepoužít: když ještě není jasná nabídka, segment ani obchodní model. V takovém případě začněte positioningem, ne auditem webu.
+
+Tohle není odrazování. Je to poctivá navigace.
+
+Hodnocení:
+
+- 0 bodů: Playbook nemá jasného čtenáře.
+- 1 bod: Čtenář je popsaný jen rolí, například "markeťák".
+- 2 body: Čtenář je popsaný rolí i situací.
+- 3 body: Playbook říká i to, kdy ho nepoužít a co má být připravené předem.
+
+### 3. Kroky vedou k výstupu
+
+Každý krok má produkovat něco konkrétního: rozhodnutí, seznam, prioritu, návrh, mapu, checklist, otázku pro zákazníka nebo úkol do backlogu. Pokud krok jen říká "zamyslete se", potřebuje zpřesnit.
+
+Slabý krok:
+
+"Zamyslete se nad cílovou skupinou."
+
+Silnější krok:
+
+"Napište tři situace, ve kterých zákazník začne problém aktivně řešit. Ke každé doplňte spouštěč, alternativu, riziko neřešení a první otázku, kterou si zákazník klade."
+
+První krok vytváří atmosféru workshopu. Druhý vytváří pracovní výstup. Atmosféra je fajn, ale šablona má nosit výsledky, ne vonnou svíčku.
+
+Hodnocení:
+
+- 0 bodů: Kroky jsou obecné rady.
+- 1 bod: Některé kroky mají výstup, jiné jsou jen úvahy.
+- 2 body: Každý krok má jasný dílčí výstup.
+- 3 body: Dílčí výstupy na sebe navazují a vedou k jednomu finálnímu rozhodnutí.
+
+### 4. Teorie je jen v potřebné dávce
+
+Playbook nesmí nutit čtenáře znovu číst celou kapitolu, ze které vznikl. Zároveň nesmí ztratit smysl. Potřebuje krátké vysvětlení principu a odkaz na kanonickou část e-booku.
+
+Dobré pravidlo:
+
+- Jedna až tři věty principu.
+- Jeden praktický příklad.
+- Kroky a otázky.
+- Odkaz na hlubší část e-booku.
+
+Když playbook přebírá dlouhé odstavce, zeptejte se: pomáhá to teď rozhodnout, nebo si autor jen nechce vybrat? V pracovním materiálu je výběr služba čtenáři.
+
+Hodnocení:
+
+- 0 bodů: Playbook je kopie kapitoly.
+- 1 bod: Text je zkrácený, ale pořád převažuje vysvětlování.
+- 2 body: Teorie je krátká a podporuje kroky.
+- 3 body: Playbook používá minimum teorie, praktický příklad a jasné odkazy na zdroj.
+
+### 5. Privacy-first kontrola mění chování
+
+Privacy-first část nesmí být jen dekorativní závěrečná sekce. Musí měnit doporučení v playbooku. Pokud playbook navrhuje formulář, musí řešit datové minimum. Pokud navrhuje měření, musí říct, co se neměří. Pokud navrhuje distribuci, musí dát přednost vlastní URL, RSS a přímým odkazům před nátlakovým sběrem kontaktů.
+
+Otázky:
+
+- Jaká data playbook doporučuje sbírat?
+- Jsou všechna opravdu potřebná pro první rozhodnutí?
+- Kde budou data uložena?
+- Kdo k nim bude mít přístup?
+- Jak dlouho mají zůstat?
+- Dá se stejný výsledek získat s menším sběrem?
+- Je evropský provoz nebo evropský dodavatel prakticky preferovaný, ne jen zmíněný?
+
+Codyho komentář: privacy-first poznáte podle toho, že občas řekne "tohle neměřte". Pokud jen přidá odstavec o soukromí pod formulář, ale formulář pořád chce datum narození, telefon, obrat firmy, rozpočet a tři souhlasy navíc, tak jsme se moc neposunuli.
+
+Hodnocení:
+
+- 0 bodů: Privacy-first vrstva chybí.
+- 1 bod: Privacy-first je zmíněné, ale nemění kroky.
+- 2 body: Playbook má datové minimum, retenci a pravidla pro nástroje.
+- 3 body: Privacy-first doporučení aktivně zmenšují sběr dat, zjednodušují nástroje a chrání vlastní kanály.
+
+### 6. Playbook má hranici hotovo
+
+Bez hranice hotovo se z playbooku stane rozmazaný workshop. Čtenář projde kroky, ale neví, jestli má výsledek stačit, nebo pokračovat do nekonečna.
+
+Definice hotovo může být jednoduchá:
+
+- Vybrali jsme tři hlavní problémy webu.
+- Ke každému máme důkaz, dopad a první opravu.
+- Máme jednu změnu pro tento týden a dvě položky do backlogu.
+- Víme, co neměříme a proč.
+- Aktualizovali jsme provozní nebo obsahový záznam.
+
+Tím playbook končí. Další práce může začít, ale už není součástí téhle iterace.
+
+Hodnocení:
+
+- 0 bodů: Není jasné, kdy je práce hotová.
+- 1 bod: Hotovo je popsané obecně.
+- 2 body: Hotovo je měřitelné podle konkrétních výstupů.
+- 3 body: Hotovo zahrnuje výstup, další krok, vlastníka a privacy-first kontrolu.
+
+### 7. Rychlá rozhodovací tabulka
+
+Použijte součet bodů jako orientační bránu:
+
+| Skóre | Stav | Co udělat |
+| --- | --- | --- |
+| 0-7 | Nepouštět ven | Vrátit k přepsání situace, kroků a výstupu. |
+| 8-13 | Interní beta | Použít s týmem nebo jedním zákazníkem, sbírat tření. |
+| 14-18 | Vydatelné | Publikovat nebo sdílet, ale naplánovat první review. |
+
+Tabulka není náhrada úsudku. Pokud má playbook vysoké skóre, ale doporučuje zbytečný sběr osobních dat, nepublikujte ho. Privacy-first selhání není kosmetický detail. Je to chyba v návrhu.
+
+### 8. Jednostránková scorecard
+
+```markdown
+# Scorecard playbooku
+
+Název:
+Verze:
+Datum kontroly:
+Vlastník:
+Kanonické části e-booku:
+
+## Hodnocení
+
+1. Jedna rozhodovací situace: 0 / 1 / 2 / 3
+Poznámka:
+
+2. Čtenář pozná, jestli je to pro něj: 0 / 1 / 2 / 3
+Poznámka:
+
+3. Kroky vedou k výstupu: 0 / 1 / 2 / 3
+Poznámka:
+
+4. Teorie je jen v potřebné dávce: 0 / 1 / 2 / 3
+Poznámka:
+
+5. Privacy-first kontrola mění chování: 0 / 1 / 2 / 3
+Poznámka:
+
+6. Playbook má hranici hotovo: 0 / 1 / 2 / 3
+Poznámka:
+
+## Rozhodnutí
+
+Celkové skóre:
+Stav: nepouštět ven / interní beta / vydatelné
+Největší slabina:
+První oprava:
+Další review:
+```
+
+### Checklist přílohy
+
+- Má playbook jednu jasnou rozhodovací situaci?
+- Pozná čtenář do jedné minuty, jestli je materiál pro něj?
+- Má playbook vstupy, výstupy a hranici hotovo?
+- Vede každý krok k hmatatelnému výstupu?
+- Je teorie zkrácená na minimum potřebné pro práci?
+- Odkazuje playbook na kanonické části e-booku?
+- Mění privacy-first kontrola skutečná doporučení?
+- Jsou formuláře, měření a distribuce navržené s datovým minimem?
+- Má playbook vlastníka, verzi a datum další kontroly?
+- Je rozhodnutí o vydání zapsané, ne jen odmávané?
+
+Dobrá scorecard nebrzdí publikaci. Brání tomu, aby se z praktických materiálů stal další neudržovaný sklad. Pokud playbook projde tímto testem, má slušnou šanci být užitečný i mimo hlavu autora. A to je přesně pointa: méně vysvětlování, víc opakovatelné práce.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -29630,3 +29847,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha CG s ročním rozhodnutím o veřejné edici: inventura použití, budoucí role částí, shoda s nabídkou, privacy-first brána a první malý krok.
 - 2026-05-10: Doplněna Příloha CH s plánem druhé veřejné edice: vstupy, ediční balíky, čtyřtýdenní rytmus, changelog a privacy-first vydávací pravidla.
 - 2026-05-10: Doplněna Příloha CI o rozdělení e-booku na samostatné playbooky: situační výběr, kanonická vazba, zkrácení do pracovního tvaru, privacy-first distribuce a údržba.
+- 2026-05-10: Doplněna Příloha CJ se scorecardem připravenosti samostatného playbooku: rozhodovací situace, čtenář, kroky, výstup, privacy-first kontrola a vydávací brána.
