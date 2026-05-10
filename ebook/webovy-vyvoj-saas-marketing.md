@@ -29850,6 +29850,200 @@ Tahle šablona je schválně krátká. Pilotní dokumentace má pomoct rozhodnou
 
 Pilot není brzda veřejného vydání. Je to levná pojistka proti tomu, aby se slabý materiál tvářil hotově. Jeden dobrý pilot umí zachránit hodiny podpory, zmatků a vysvětlování. A pokud playbook pilotem projde, můžete ho pustit ven s mnohem větším klidem: ne proto, že je dokonalý, ale protože už prokazatelně pomohl někomu udělat práci.
 
+## Příloha CL: Zapracování pilotních nálezů do samostatného playbooku
+
+Pilot má hodnotu jen tehdy, když po něm přijde úprava materiálu. Jinak jste jen nasbírali zajímavé poznámky a dali jim hezký název. Zapracování pilotních nálezů není redakční kosmetika. Je to převod reálného tření do jasnějšího postupu, kratšího textu, lepších příkladů a pevnější privacy-first kontroly.
+
+Cílem této přílohy je vzít jeden pilotovaný playbook a dostat ho do vydatelného stavu. Ne do dokonalého stavu. Do stavu, kdy čtenář bez autora pochopí, pro koho materiál je, co má udělat, jaký výstup má vzniknout a jak s daty pracovat bez zbytečného sběru.
+
+### 1. Nejdřív oddělte nález od návrhu řešení
+
+Po pilotu bývá zápis plný vět typu "chybí příklad", "je to moc dlouhé", "nebylo jasné, co vyplnit" nebo "účastník přeskočil privacy část". To jsou užitečné signály, ale ještě nejsou řešení. Pokud je rovnou přepíšete do úkolů, snadno opravíte povrch a minete skutečný problém.
+
+Každý nález přepište do tří řádků:
+
+```text
+Nález:
+Co to pravděpodobně znamená:
+Jaké rozhodnutí musíme udělat:
+```
+
+Příklad:
+
+```text
+Nález: Účastník nevyplnil část "signály úspěchu".
+Co to pravděpodobně znamená: Není jasné, jaký rozdíl je mezi výstupem práce a signálem, že výstup pomohl.
+Jaké rozhodnutí musíme udělat: Přidat mikro příklad a omezit počet signálů na hlavní, podpůrný a ochranný.
+```
+
+Tím si vynutíte myšlení. Ne každá poznámka z pilotu znamená, že máte přidat další odstavec. Někdy je správná oprava smazat vysvětlení, přejmenovat krok nebo přesunout detail do poznámky pod čarou.
+
+### 2. Rozdělte nálezy podle typu zásahu
+
+Ne všechny nálezy mají stejnou váhu. Některé brání použití, jiné jen zlepšují čitelnost. Při zapracování použijte čtyři koše:
+
+1. Blokery: čtenář kvůli nim nedokončí práci nebo vytvoří špatný výstup.
+2. Zmatek: čtenář práci dokončí, ale musí hádat, co autor myslel.
+3. Redakční tření: text je delší, těžší nebo méně konkrétní, než musí být.
+4. Nápady navíc: užitečné podněty, které nepatří do první veřejné verze.
+
+Blokery opravte vždy. Zmatek opravte, pokud se týká hlavní čtenářské cesty. Redakční tření řešte zkrácením a zpřesněním. Nápady navíc dejte do backlogu, ne do playbooku.
+
+Codyho komentář: po pilotu má tým přirozenou chuť přidat "ještě jednu sekci, aby to bylo jasnější". Často je to past. Když materiál selhal kvůli nejasnosti, další text nemusí pomoct. Někdy je nejlepší oprava udělat z pěti odstavců jednu tabulku a z tabulky tři kroky. Ano, je to méně majestátní. A právě proto to funguje.
+
+### 3. Opravujte podle čtenářské cesty
+
+Playbook má být pracovní nástroj, ne archiv všech úvah. Při zapracování pilotu projděte materiál od začátku do konce a u každé části se ptejte:
+
+- Potřebuje to čtenář před prvním krokem?
+- Pomáhá to udělat rozhodnutí?
+- Vede to k výstupu?
+- Dá se to ukázat příkladem místo výkladu?
+- Patří to do playbooku, nebo do hlubší kapitoly e-booku?
+
+Typický postup úpravy:
+
+1. Zpřesnit vstup: pro koho playbook je a kdy ho nepoužít.
+2. Zkrátit úvod: čtenář má rychle pochopit situaci, ne historii tématu.
+3. Upravit kroky: každý krok má mít jasnou akci, vstup a výstup.
+4. Doplnit jeden příklad: raději jeden realistický než tři obecné.
+5. Zjednodušit šablonu: odstranit pole, která nikdo nepotřebuje pro první rozhodnutí.
+6. Přepsat checklist: položky musí testovat dokončenost, ne jen existenci textu.
+7. Zkontrolovat odkazy na kanonický e-book: playbook nesmí duplikovat celý rukopis.
+
+Příklad před úpravou:
+
+"Zamyslete se nad možnými metrikami, které by mohly ukázat, zda změna dopadla podle očekávání."
+
+Příklad po úpravě:
+
+"Vyberte tři signály: hlavní signál hodnoty, podpůrný signál chování a ochranný signál rizika. Příklad: více kvalifikovaných poptávek, více kliků na CTA, žádný nárůst zbytečně sbíraných osobních dat."
+
+Druhá verze je delší jen o trochu, ale je použitelnější. Říká, kolik signálů vybrat, jaké mají role a co může být konkrétní příklad.
+
+### 4. Privacy-first nálezy neodkládejte do poznámek
+
+Pokud pilot ukáže, že čtenář ignoruje datovou část, není to drobnost. Znamená to, že privacy-first pravidlo není dostatečně zabudované do pracovního toku. V dobrém playbooku není ochrana dat závěrečná dekorace. Je to brána, která může změnit rozsah, měření, formulář, nástroj nebo distribuci.
+
+Při zapracování si položte čtyři otázky:
+
+- Kde čtenář poprvé rozhoduje o sběru dat?
+- Je tam viditelná brzda proti zbytečnému sběru?
+- Má šablona pole pro účel, retenci, přístup a odstranění dat?
+- Umí čtenář dokončit práci i s menším množstvím dat?
+
+Pokud odpověď není jasná, upravte krok, ne jen závěrečný checklist.
+
+Slabá privacy část:
+
+"Zkontrolujte, že vše odpovídá privacy-first principům."
+
+Silnější privacy část:
+
+"U každého navrženého měření napište účel, datové minimum, místo uložení a datum smazání. Pokud neumíte účel pojmenovat jednou větou, měření do první verze nepatří."
+
+Tohle není právní rada. Je to provozní disciplína. Čtenář nemusí být právník, aby poznal, že neví, proč nějaké údaje sbírá.
+
+### 5. Udělejte změnovou kartu
+
+Každá opravená verze playbooku má mít krátkou změnovou kartu. Ne kvůli byrokracii, ale proto, aby tým později věděl, proč se materiál změnil. Bez karty se z živého playbooku stane text, který každý upravuje podle posledního dojmu.
+
+Použijte tuto šablonu:
+
+```text
+# Změnová karta playbooku
+
+Playbook:
+Verze před pilotem:
+Datum pilotu:
+Datum úpravy:
+Odpovědná osoba:
+
+## Co pilot ukázal
+
+1.
+2.
+3.
+
+## Co jsme změnili
+
+1.
+2.
+3.
+
+## Co jsme vědomě nezměnili
+
+1.
+2.
+
+## Privacy-first dopad
+
+Změnil se sběr dat:
+Změnila se retence:
+Změnily se přístupy:
+Změnil se dodavatel nebo nástroj:
+
+## Rozhodnutí
+
+Stav: vydat / zopakovat pilot / vrátit do návrhu / archivovat
+Další kontrola:
+```
+
+Pole "co jsme vědomě nezměnili" je důležité. Chrání playbook před tím, aby se do něj po každé zpětné vazbě přilepila další věc. Ne každý dobrý nápad patří do tohoto materiálu.
+
+### 6. Před vydáním proveďte druhý krátký průchod
+
+Po zapracování nálezů neplánujte další velký pilot, pokud první neukázal zásadní selhání. Stačí krátký průchod jedním člověkem, který neviděl předchozí verzi. Cíl je ověřit, že opravy nevytvořily nové tření.
+
+Dejte mu jednoduchý úkol:
+
+"Použij tento playbook na jednu konkrétní situaci a pošli výsledný výstup. Nehodnoť styl. Zapiš jen místa, kde jsi nevěděl, co udělat."
+
+Sledujte tři věci:
+
+- Dokáže čtenář začít bez vysvětlení autora?
+- Vznikne výstup, který jde použít v práci?
+- Nevynechá privacy-first bránu?
+
+Pokud ano, playbook je připravený k veřejné nebo interní distribuci. Pokud ne, opravte jen blokery. V této fázi už není cílem neustálé ladění tónu. Cílem je vydat použitelnou verzi a sbírat další signály v provozu.
+
+### 7. Publikujte s jasnou hranicí verze
+
+Samostatný playbook po pilotu musí mít jasnou hranici: verzi, datum, zdrojový e-book, stav a plán další revize. Bez toho čtenář neví, jestli se dívá na pracovní návrh, veřejnou verzi nebo zastaralý export.
+
+Minimum na začátek nebo konec playbooku:
+
+```text
+Verze: 1.0
+Stav: veřejná pracovní verze
+Zdroj: Od webu k SaaS, Příloha [konkrétní části]
+Datum poslední revize:
+Další revize:
+Zpětná vazba:
+Privacy poznámka:
+```
+
+Privacy poznámka má být konkrétní. Například:
+
+"Playbook nevyžaduje osobní údaje zákazníků. Pokud při použití pracujete s reálnými leady, anonymizujte příklady a neukládejte kontaktní údaje do veřejných poznámek."
+
+Taková věta je praktičtější než obecné "dbáme na soukromí". Čtenáři říká, co má udělat jinak.
+
+### Checklist přílohy
+
+- Jsou pilotní poznámky přepsané na nálezy, význam a rozhodnutí?
+- Rozdělili jste nálezy na blokery, zmatek, redakční tření a nápady navíc?
+- Opravili jste nejdřív čtenářskou cestu, ne jen formulace?
+- Má každý krok playbooku jasnou akci, vstup a výstup?
+- Přidali jste konkrétní příklad tam, kde pilot ukázal nejasnost?
+- Zkrátili jste části, které jen duplikují hlavní e-book?
+- Je privacy-first kontrola zabudovaná do kroků, ne schovaná na konci?
+- Vznikla změnová karta s tím, co se změnilo a co se vědomě nezměnilo?
+- Prošel opravený playbook krátkým druhým průchodem?
+- Má vydaná verze datum, stav, zdroj, plán revize a konkrétní privacy poznámku?
+
+Zapracování pilotu je místo, kde se pozná, jestli tým opravdu poslouchá čtenáře. Ne podle toho, že přidá každou připomínku. Podle toho, že odstraní tření, zachová účel a vydá materiál, který pomůže udělat práci. Playbook po pilotu nemá být větší. Má být přesnější.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -30067,3 +30261,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CI o rozdělení e-booku na samostatné playbooky: situační výběr, kanonická vazba, zkrácení do pracovního tvaru, privacy-first distribuce a údržba.
 - 2026-05-10: Doplněna Příloha CJ se scorecardem připravenosti samostatného playbooku: rozhodovací situace, čtenář, kroky, výstup, privacy-first kontrola a vydávací brána.
 - 2026-05-10: Doplněna Příloha CK s pilotem samostatného playbooku před veřejným vydáním: pilotní otázka, účastníci, tření, samostatnost materiálu, privacy-first pravidla a rozhodnutí po pilotu.
+- 2026-05-10: Doplněna Příloha CL o zapracování pilotních nálezů do samostatného playbooku: třídění nálezů, úprava čtenářské cesty, privacy-first brána, změnová karta a vydání verze.
