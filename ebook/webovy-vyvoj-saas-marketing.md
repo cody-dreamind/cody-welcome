@@ -32387,6 +32387,299 @@ Pokud změna pomohla, standardizujte ji. Pokud nepomohla, nevracejte automaticky
 
 Dobrá nabídka nezraje tím, že každý měsíc přibere další část. Zraje tím, že tým umí chránit její výsledek. Někdy to znamená přidat. Častěji to znamená zkrátit, rozdělit nebo říct: tohle už nedává smysl. A ano, je to méně efektní než nový launch. Ale na rozdíl od mnoha launchů to opravdu pomáhá byznysu.
 
+## Příloha CW: Přepsání webu a sales materiálů po změně nabídky
+
+Když tým zúží, rozdělí nebo ukončí opakovatelnou nabídku, práce ještě nekončí. Naopak začíná část, která rozhoduje, jestli se změna opravdu stane součástí byznysu. Nabídka může být interně promyšlená, ale pokud web stále slibuje starý rozsah, sales používá starou prezentaci a delivery má v šabloně původní kroky, trh ani tým žádnou změnu neuvidí. Uvidí jen rozpor.
+
+Přepsání webu a sales materiálů není kosmetika. Je to provozní dotažení rozhodnutí. Nový rozsah musí být vidět ve veřejném slibu, ve vstupní bráně, v cenové logice, v discovery otázkách, v ukázkách výstupu i v privacy-first komunikaci. Jinak se stará nabídka vrátí zadními dveřmi přes jeden e-mail, jednu výjimku nebo jeden zapomenutý odstavec.
+
+Privacy-first pohled je tady praktický kontrolní bod. Pokud jste nabídku zúžili kvůli menšímu množství podkladů, jednoduššímu provozu nebo nižší datové stopě, musí to být poznat. Pokud jste ji rozdělili na dvě varianty s jiným typem dat, musí zákazník i tým chápat rozdíl. A pokud jste část ukončili, nesmí po ní zůstat formulář, který dál sbírá data pro práci, kterou už neděláte.
+
+### 1. Začněte mapou míst, kde nabídka žije
+
+Nejdřív sepište všechna místa, kde se stará nabídka objevuje. Malé týmy často opraví hlavní stránku a zapomenou na zbytek. Jenže zákazník nepřichází vždy přes homepage. Může najít starý článek, PDF, slide deck, automatický e-mail, katalog služeb nebo follow-up šablonu.
+
+Typická místa:
+
+- homepage,
+- stránka služby nebo produktu,
+- ceník nebo orientační balíčky,
+- FAQ,
+- case studies a ukázky výstupů,
+- starší články s odkazem na nabídku,
+- lead magnet nebo playbook,
+- kontaktní formulář,
+- automatická odpověď po odeslání formuláře,
+- discovery dotazník,
+- obchodní prezentace,
+- sales karta,
+- návrh spolupráce,
+- smluvní příloha nebo statement of work,
+- interní delivery checklist,
+- šablona výstupu,
+- onboardingový e-mail zákazníkovi.
+
+Krátká inventura:
+
+```markdown
+# Mapa propsání změny nabídky
+
+Nabídka:
+Typ změny: zúžení / rozdělení / ukončení / nová varianta
+Platí od:
+
+Místo:
+Veřejné / interní:
+Obsahuje starý slib? Ano / Ne
+Obsahuje starý rozsah? Ano / Ne
+Sbírá stará data? Ano / Ne
+Priorita opravy: vysoká / střední / nízká
+Vlastník:
+Termín:
+```
+
+Prioritu dejte podle rizika. Veřejná stránka, formulář, ceník a sales karta mají vysokou prioritu. Starý interní dokument může počkat, pokud ho nikdo nepoužívá. Ale pokud je napojený na reálný prodej nebo předání zákazníkovi, patří do první vlny.
+
+### 2. Přepište slib nabídky, ne jen seznam položek
+
+Po změně rozsahu nestačí upravit odrážky. Nabídka potřebuje nový slib. Zákazník má pochopit, proč je změna lepší, ne jen co zmizelo.
+
+Slabé přepsání:
+
+```markdown
+Nově nabízíme kratší audit webu bez rozšířené SEO části.
+```
+
+Silnější přepsání:
+
+```markdown
+Audit jsme zúžili na hlavní prodejní cestu: první dojem, důvěru, obsah, formulář a měření poptávky. Díky tomu dostanete rychlejší výstup pro první praktickou iteraci webu. Rozšířené SEO mapování nabízíme jako navazující blok pro týmy, které už mají základní prodejní cestu vyřešenou.
+```
+
+Rozdíl je v kontextu. První verze oznamuje ubrání. Druhá říká, jaký výsledek zákazník kupuje a proč je rozsah záměrně menší.
+
+Šablona nového slibu:
+
+```markdown
+Pro koho je nabídka teď:
+
+Jaký problém řeší:
+
+Jaký konkrétní výsledek zákazník dostane:
+
+Co jsme zúžili, rozdělili nebo ukončili:
+
+Proč je to lepší pro zákazníka:
+
+Co je navazující varianta nebo alternativa:
+
+Jak se změnila práce s podklady a daty:
+```
+
+Codyho komentář: když tým neumí po změně jednou větou říct, co zákazník kupuje, změna ještě není hotová. Je to jen interní rozhodnutí bez trhu.
+
+### 3. Upravte vstupní bránu a formuláře
+
+Změna nabídky se musí projevit ve vstupní bráně. Pokud jste zúžili službu, formulář nemá dál sbírat podklady pro části, které už nejsou v rozsahu. Pokud jste nabídku rozdělili, formulář má pomoct rozlišit, která varianta dává smysl. Pokud jste část ukončili, nemá zůstat volba, která zákazníka pošle do slepé uličky.
+
+Kontrola formuláře:
+
+- Ptáme se jen na data potřebná pro první odpověď?
+- Odpovídají otázky novému rozsahu?
+- Neptáme se na citlivé nebo interní informace příliš brzy?
+- Umí formulář rozlišit varianty nabídky bez dlouhého dotazníku?
+- Je jasné, co se stane po odeslání?
+- Je automatická odpověď v souladu s novým slibem?
+- Má tým pravidlo, co dělat s poptávkou na ukončenou část?
+
+Praktická minimální vstupní brána pro změněnou nabídku:
+
+```markdown
+Jméno:
+E-mail:
+Firma:
+Web / produkt:
+Co chcete zlepšit:
+Která situace sedí nejvíc:
+- potřebujeme rychlou diagnostiku
+- potřebujeme navazující hlubší práci
+- nejsme si jistí
+Jaký výstup očekáváte:
+Souhlas se zpracováním pro odpověď:
+```
+
+U privacy-first formulářů platí jednoduché pravidlo: první formulář nemá nahrazovat discovery workshop. Má umožnit kvalifikovanou odpověď. Všechno ostatní patří až do bezpečnějšího a jasněji vysvětleného procesu.
+
+### 4. Srovnejte sales kartu s novou realitou
+
+Sales karta je most mezi webem a rozhovorem. Pokud zůstane stará, obchodník nebo zakladatel začne znovu prodávat starý rozsah, i když web už říká něco jiného.
+
+Aktualizovaná sales karta má obsahovat:
+
+- nový slib jednou větou,
+- pro koho nabídka je,
+- pro koho už není,
+- typické spouštěče nákupu,
+- jasné hranice rozsahu,
+- navazující varianty,
+- nejčastější námitky,
+- otázky pro kvalifikaci,
+- minimální podklady,
+- privacy-first vysvětlení práce s daty,
+- situace, kdy nabídku odmítnout nebo přesměrovat.
+
+Šablona:
+
+```markdown
+# Sales karta po změně nabídky
+
+Nabídka:
+Verze:
+Platí od:
+
+Slib jednou větou:
+Ideální zákazník:
+Nevhodný zákazník:
+
+Typické situace:
+Hlavní výsledek:
+Co je v rozsahu:
+Co už není v rozsahu:
+Navazující nabídka:
+
+Kvalifikační otázky:
+1.
+2.
+3.
+
+Minimální podklady:
+Data, která nepotřebujeme:
+Privacy-first vysvětlení:
+
+Námitky a odpovědi:
+Kdy odmítnout:
+Kdy eskalovat:
+```
+
+Karta má být krátká. Pokud se z ní stane desetistránkový dokument, tým ji nebude používat. Lepší je jedna stránka, která se otevře před hovorem, než dokonalý manuál v archivu.
+
+### 5. Aktualizujte důkazy a ukázky výstupu
+
+Po změně nabídky mohou být staré důkazy zavádějící. Case study, která ukazuje starý široký rozsah, může prodávat něco, co už nechcete dodávat. Ukázkový report může obsahovat kapitoly, které z nové verze zmizely. Reference může chválit část, kterou jste ukončili.
+
+Nemusíte všechno mazat. Musíte to označit a zasadit do správného kontextu.
+
+Možnosti:
+
+- upravit case study tak, aby odpovídala novému slibu,
+- přidat poznámku, že šlo o starší rozsah,
+- vytvořit novou anonymizovanou ukázku výstupu,
+- přesunout starý důkaz k navazující nebo pokročilé variantě,
+- odstranit důkaz, který by vyvolával špatné očekávání.
+
+Kontrola důkazů:
+
+```markdown
+# Kontrola důkazů po změně nabídky
+
+Důkaz / ukázka:
+Kde se používá:
+Odpovídá nové nabídce? Ano / Částečně / Ne
+Prodává starý rozsah? Ano / Ne
+Obsahuje citlivé nebo zastaralé informace? Ano / Ne
+Nové umístění:
+Úprava:
+Vlastník:
+```
+
+Tady se často ukáže, že tým potřebuje jednu novou ukázku víc než další odstavec copywritingu. Zákazník chce vidět, co dostane. Pokud ukázka neodpovídá realitě, text ji nezachrání.
+
+### 6. Ošetřete staré odkazy a interní používání
+
+Staré odkazy jsou nenápadný zdroj chaosu. Někdo pošle zákazníkovi staré PDF. Starý článek odkazuje na původní landing page. Interní poznámka vede na neaktuální dotazník. Vyhledávač najde archivní stránku a zákazník přijde s očekáváním, které už nechcete plnit.
+
+Po změně nabídky projděte:
+
+- staré URL,
+- interní odkazy,
+- přesměrování,
+- PDF a exporty,
+- uložené obchodní přílohy,
+- šablony e-mailů,
+- automatizace,
+- CRM poznámky,
+- sdílené složky.
+
+Rozhodnutí pro starý materiál:
+
+- nahradit novou verzí,
+- přesměrovat,
+- označit jako archiv,
+- ponechat jen interně,
+- smazat,
+- ponechat veřejně s jasnou poznámkou.
+
+Krátká archivní poznámka může znít:
+
+```markdown
+Tato stránka popisuje starší rozsah nabídky. Aktuální verzi najdete zde: [odkaz]. Původní materiál ponecháváme kvůli kontextu a návaznosti starších odkazů.
+```
+
+Pokud materiál sbírá data nebo vede na formulář, archivní poznámka nestačí. Takový tok se musí vypnout, přesměrovat nebo upravit.
+
+### 7. Udělejte kontrolu po prvních rozhovorech
+
+Nový web a sales materiály otestujte v realitě. Stačí první tři až pět relevantních rozhovorů nebo poptávek. Cílem není hned měřit konverzní zázrak. Cílem je zjistit, jestli lidé chápou nový slib a jestli tým nevrací starou nabídku do hry.
+
+Otázky po prvních rozhovorech:
+
+- Přišli lidé se správným očekáváním?
+- Ptali se na části, které už nejsou v rozsahu?
+- Pomohla nová sales karta zrychlit kvalifikaci?
+- Bylo snazší říct ne špatnému fitu?
+- Bylo jasné, kterou variantu nabídky doporučit?
+- Sbírali jsme méně nebo vhodnějších dat?
+- Vznikla nová námitka, kterou má web vysvětlit?
+- Je potřeba upravit formulář, FAQ nebo ukázku výstupu?
+
+Šablona krátkého review:
+
+```markdown
+# Review propsání změny nabídky
+
+Nabídka:
+Období:
+Počet relevantních rozhovorů / poptávek:
+
+Co lidé pochopili správně:
+Co bylo nejasné:
+Kde se vracel starý rozsah:
+Kde pomohla nová formulace:
+Privacy-first zjištění:
+
+Jedna úprava webu:
+Jedna úprava sales karty:
+Jedna úprava formuláře nebo dotazníku:
+Datum další kontroly:
+```
+
+Toto review držte krátké. Pokud objevíte deset problémů, vyberte jeden, který nejvíc zlepšuje srozumitelnost nabídky. Další položky dejte do backlogu.
+
+### Checklist přílohy
+
+- Máte mapu všech míst, kde se nabídka objevuje?
+- Je hlavní veřejný slib přepsaný podle nového rozsahu?
+- Vysvětluje text, proč je změna lepší pro zákazníka?
+- Jsou formuláře a vstupní brány v souladu s novou nabídkou?
+- Nesbíráte data pro části, které už nejsou v rozsahu?
+- Má sales karta aktuální hranice, kvalifikační otázky a námitky?
+- Odpovídají case studies a ukázky výstupu nové realitě?
+- Jsou staré odkazy, PDF a šablony přesměrované, archivované nebo vypnuté?
+- Ví tým, jak odpovídat na poptávky po ukončené části?
+- Proběhne kontrola po prvních rozhovorech nebo poptávkách?
+
+Změna nabídky je hotová až ve chvíli, kdy ji trh potkává stejným způsobem, jak ji tým interně chápe. Web, sales karta, formulář, důkazy a delivery šablony musí říkat stejnou věc. Jinak se zákazník učí jednu nabídku, obchodník prodává druhou a tým dodává třetí. To není strategie. To je náklad, který se jen tváří jako flexibilita.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -32615,3 +32908,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CT o kontrole samostatnosti po předání nabídky: kontrolní okno, odchylky, potřeba pomoci, zákaznický sanity check, datová stopa a rozhodnutí po kontrole.
 - 2026-05-10: Doplněna Příloha CU o dlouhodobé údržbě opakovatelné nabídky: stabilní jádro, servisní kontrola, kanonická karta, signály únavy, cena, privacy-first rozšíření a rozhodnutí o zúžení nebo ukončení.
 - 2026-05-10: Doplněna Příloha CV o rozhodnutí, kdy opakovatelnou nabídku zúžit, rozdělit nebo ukončit: inventura částí, rozhodovací matice, dopady do webu, sales, delivery a privacy-first datové stopy.
+- 2026-05-10: Doplněna Příloha CW o přepsání webu a sales materiálů po změně nabídky: mapa míst, nový slib, formuláře, sales karta, důkazy, staré odkazy a kontrola prvních rozhovorů.
