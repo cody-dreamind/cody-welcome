@@ -31911,6 +31911,264 @@ Jedna změna do 7 dnů je důležitá. Bez ní se kontrola samostatnosti stane h
 
 Samostatnost po předání není absence kontroly. Je to stav, kdy kontrola nemusí zachraňovat kvalitu pokaždé znovu. Dobrý systém poznáte podle toho, že nový člověk dokáže dodat výsledek svým stylem, ale ve stejném slibu, stejné kvalitě a se stejným respektem k datům. Teprve potom je opakovatelná nabídka opravdu připravená růst.
 
+## Příloha CU: Dlouhodobá údržba opakovatelné nabídky
+
+Když nabídka projde pilotem, prvními dodávkami, předáním novému člověku i kontrolou samostatnosti, vzniká příjemný problém: začne fungovat. Tým ji prodává opakovaně, zákazníci vědí, co kupují, delivery se dá plánovat a interní šablony konečně nejsou jen dokumenty pro dobrý pocit. Právě tady ale začíná další riziko. Fungující nabídka často přestane být aktivně řízená. Všichni ji používají, ale nikdo se neptá, jestli pořád odpovídá trhu, kapacitě týmu, kvalitě dat, ceně, slibu na webu a privacy-first pravidlům.
+
+Dlouhodobá údržba opakovatelné nabídky není redesign služby každý měsíc. Je to pravidelný rytmus malých kontrol, které chrání její jasnost. Nabídka má zůstat dostatečně stabilní, aby ji tým uměl prodat a dodat, ale zároveň dostatečně živá, aby nezůstala přilepená k první verzi. Pokud se údržba neděje, služba se začne měnit potichu: sales slíbí výjimku, delivery přidá nový krok, zákazník si vyžádá jiný formát, interní člověk si vytvoří vlastní kopii šablony a po pár měsících už nikdo neví, která verze je pravda.
+
+Privacy-first hodnota je v údržbě praktická brzda. Každé rozšíření nabídky se musí ptát: přidáváme nové typy dat? Potřebujeme delší retenci? Vzniká nový export, nový nástroj, nový přístup nebo nový kanál komunikace? Pokud ano, změna není jen obsahová nebo obchodní. Je provozní. A provozní změna musí být zapsaná.
+
+### 1. Určete, co je stabilní jádro a co je laditelná vrstva
+
+Opakovatelná nabídka potřebuje dvě části. Stabilní jádro drží slib zákazníkovi. Laditelná vrstva umožňuje zlepšování bez toho, aby se při každé změně rozpadla celá služba.
+
+Stabilní jádro obvykle obsahuje:
+
+- cílový segment,
+- problém, který nabídka řeší,
+- výsledek pro zákazníka,
+- vstupní bránu,
+- povinné fáze delivery,
+- minimální standard výstupu,
+- privacy-first pravidla pro práci s podklady,
+- hranice toho, co už není součástí nabídky.
+
+Laditelná vrstva může obsahovat:
+
+- formulace otázek v dotazníku,
+- pořadí workshopových aktivit,
+- podobu výstupní šablony,
+- konkrétní příklady v materiálech,
+- doplňkové sekce reportu,
+- způsob interní kontroly,
+- distribuční texty,
+- drobná zlepšení webové stránky nabídky.
+
+Krátké pravidlo:
+
+```markdown
+Jádro měníme jen vědomým rozhodnutím.
+Laditelnou vrstvu zlepšujeme průběžně, ale zapisujeme proč.
+```
+
+Toto rozlišení zabrání zmatku. Když někdo upraví nadpis v reportu, nemusí kvůli tomu svolávat strategickou poradu. Když ale chce změnit cílový segment, výsledek nebo typ zpracovávaných dat, už nejde o kosmetiku.
+
+### 2. Zaveďte měsíční servisní kontrolu nabídky
+
+Měsíční kontrola nemá trvat půl dne. Pro malý tým stačí 30 až 45 minut a jedna pracovní karta. Důležité je, aby se kontrola opakovala a aby z ní vždy vyšel konkrétní závěr.
+
+Agenda:
+
+1. Co jsme tento měsíc dodali?
+2. Kde vzniklo tření v prodeji?
+3. Kde vzniklo tření v delivery?
+4. Co se opakovalo ve zpětné vazbě zákazníků?
+5. Co se změnilo v datové stopě?
+6. Co musíme upravit v šablonách, webu nebo sales kartě?
+7. Co vědomě neměníme?
+
+Šablona:
+
+```markdown
+# Měsíční servisní kontrola nabídky
+
+Nabídka:
+Měsíc:
+Vlastník:
+
+Počet dodávek:
+Počet kvalifikovaných poptávek:
+Nejčastější námitka:
+Nejčastější delivery tření:
+Nejčastější zákaznický signál:
+
+Změna v rozsahu:
+Změna v datech nebo přístupech:
+Změna ve výstupní šabloně:
+Změna na webu / v sales kartě:
+
+Rozhodnutí:
+Ponechat / drobně upravit / otevřít větší revizi / pozastavit změny
+
+Jedna změna do příští kontroly:
+Kdo ji vlastní:
+```
+
+Měsíční kontrola je dobré místo pro malé opravy. Pokud se každý měsíc řeší stejná námitka, upravte web nebo sales kartu. Pokud se každý měsíc vrací stejný problém s podklady, upravte vstupní bránu. Pokud se každý měsíc ručně dohledává stejná informace, upravte šablonu.
+
+### 3. Držte jednu kanonickou verzi nabídky
+
+Opakovatelná nabídka se rozpadá ve chvíli, kdy existuje víc pravd. Jedna je na webu, druhá v obchodní prezentaci, třetí ve starém dokumentu, čtvrtá v hlavě člověka, který nabídku vymyslel, a pátá v posledním zákaznickém reportu. To je provozní dluh, jen není v kódu.
+
+Kanonická karta nabídky má být krátká:
+
+```markdown
+# Kanonická karta nabídky
+
+Název:
+Verze:
+Vlastník:
+Datum poslední revize:
+
+Pro koho je:
+Pro koho není:
+Problém:
+Slib:
+Výstup:
+Rozsah:
+Mimo rozsah:
+Vstupy od zákazníka:
+Fáze delivery:
+Standard kvality:
+Privacy-first pravidla:
+Používané šablony:
+Veřejná URL:
+Sales karta:
+Changelog:
+```
+
+Když se mění veřejná stránka, sales karta nebo delivery šablona, musí se změna propsat do kanonické karty. Ne proto, že dokumentace má být krásná. Protože někdo za tři měsíce potřebuje vědět, co tým vlastně slíbil.
+
+Codyho komentář: jestli máte z nabídky deset dokumentů a žádný není zdroj pravdy, nemáte systém. Máte archeologii. A archeologie je hezká věda, ale špatný provozní model pro službu, kterou chcete prodávat opakovaně.
+
+### 4. Sledujte signály únavy nabídky
+
+Nabídka může fungovat a přesto začít stárnout. Signály únavy nejsou vždy dramatické. Často vypadají jako drobné věty v týmu:
+
+- "Tohle už skoro vždycky děláme navíc."
+- "Zákazníci se ptají na něco trochu jiného než dřív."
+- "Ten dotazník už nám nepomáhá."
+- "Výstup je moc dlouhý, nikdo ho celý nečte."
+- "Tahle část se musí pokaždé vysvětlovat ručně."
+- "Bez nové šablony to nejde dodat efektivně."
+- "Za tu cenu už se to nevejde do kapacity."
+
+Tyto věty zapisujte jako signály, ne jako okamžité úkoly. Jeden signál nemusí znamenat nic. Opakovaný signál znamená, že se nabídka potkává s realitou a chce rozhodnutí.
+
+Karta signálu:
+
+```markdown
+# Signál únavy nabídky
+
+Datum:
+Kde se objevil:
+Popis:
+Opakuje se? Ano / Ne
+Dopad na zákazníka:
+Dopad na tým:
+Dopad na data / privacy:
+
+Možné rozhodnutí:
+Ignorovat / upravit šablonu / upravit rozsah / upravit cenu / rozdělit nabídku / ukončit část
+
+Další kontrola:
+```
+
+Tím se vyhnete reflexu přidávat všechno. Ne každá opakovaná otázka zákazníka patří do nabídky. Některé otázky patří do FAQ, některé do samostatné služby, některé do odmítnutí a některé do lepšího sales rozhovoru.
+
+### 5. Kontrolujte cenu proti realitě delivery
+
+Cena nabídky není jen obchodní číslo. Je to dohoda o rozsahu, kvalitě, riziku a kapacitě. Jakmile se delivery začne nafukovat, cena může přestat odpovídat realitě. Tým pak dotuje zákazníky vlastním časem, zhoršuje kvalitu nebo potichu zkracuje části, které byly původně důležité.
+
+Jednoduchá měsíční kontrola:
+
+- Kolik hodin zabrala typická dodávka?
+- Které kroky byly nejdražší?
+- Co bylo mimo původní rozsah?
+- Které výjimky jsme přijali a proč?
+- Které části zákazník skutečně použil?
+- Které části byly drahé, ale měly malý dopad?
+- Změnila se rizikovost práce s daty?
+
+Rozhodnutí po kontrole:
+
+- ponechat cenu i rozsah,
+- zpřesnit vstupní bránu,
+- odstranit slabou část výstupu,
+- přidat placený doplněk,
+- rozdělit nabídku na základní a pokročilou variantu,
+- zvýšit cenu,
+- pozastavit prodej, dokud se neupraví delivery.
+
+Nejhorší varianta je nechat cenu stejnou, rozsah větší a tvářit se, že to vyřeší produktivita. Občas ano. Častěji ne. Produktivita není kouzelný polštář na špatně řízený rozsah.
+
+### 6. Udělejte privacy-first revizi při každém rozšíření
+
+Každé rozšíření nabídky může změnit datovou stopu. Nová diagnostická otázka může sbírat citlivější informace. Nový report může obsahovat víc interních detailů zákazníka. Nový nástroj může přesunout data mimo původní prostředí. Nový člověk v týmu může potřebovat přístup, který dřív nebyl nutný.
+
+Mini brána před rozšířením:
+
+```markdown
+# Privacy-first brána rozšíření nabídky
+
+Co se mění:
+Proč:
+
+Nové typy dat:
+Nové úložiště:
+Nový nástroj:
+Nový přístup:
+Nový export:
+Nová retence:
+Nové sdílení mimo tým:
+
+Lze změnu dodat s menším množstvím dat?
+Co se bude mazat po dodávce?
+Co se musí propsat do datové mapy?
+Co se musí říct zákazníkovi srozumitelně?
+
+Rozhodnutí:
+Schválit / upravit / odmítnout
+```
+
+Tato brána nemá brzdit rozvoj nabídky. Má zabránit tomu, aby se nabídka rozšiřovala tak, že tým najednou pracuje s daty, o kterých nikdo nemluví, nikdo je nevlastní a nikdo neví, kdy zmizí.
+
+### 7. Rozhodněte, kdy nabídku rozdělit nebo ukončit
+
+Údržba neznamená jen přidávat. Někdy je nejlepší rozhodnutí nabídku rozdělit, zúžit nebo ukončit.
+
+Nabídku zvažte rozdělit, když:
+
+- dva typy zákazníků potřebují výrazně jiný výsledek,
+- jedna varianta je rychlá diagnostika a druhá hlubší implementace,
+- rozdílné datové nároky komplikují privacy-first provoz,
+- sales musí pořád vysvětlovat dvě hodnoty v jedné službě,
+- delivery používá dvě různé sady šablon.
+
+Nabídku zvažte zúžit, když:
+
+- většina hodnoty vzniká v jedné části,
+- zákazníci nepoužívají polovinu výstupu,
+- tým pravidelně nestíhá standard kvality,
+- privacy-first kontrola je zbytečně složitá kvůli okrajovým částem,
+- nabídka se špatně vysvětluje na webu.
+
+Nabídku zvažte ukončit, když:
+
+- už neodpovídá strategii týmu,
+- nepřináší kvalitní zákazníky,
+- vyžaduje neúměrně mnoho výjimek,
+- riziko práce s daty neodpovídá hodnotě,
+- existuje lepší forma: šablona, článek, audit, workshop nebo produkt.
+
+Ukončení není selhání. Selhání je držet nabídku jen proto, že kdysi dávala smysl.
+
+### Checklist přílohy
+
+- Má nabídka jasně oddělené stabilní jádro a laditelnou vrstvu?
+- Probíhá měsíční servisní kontrola s jedním konkrétním rozhodnutím?
+- Existuje kanonická karta nabídky jako zdroj pravdy?
+- Propisují se změny do webu, sales karty, šablon a changelogu?
+- Zapisujete signály únavy nabídky místo okamžitého přidávání úkolů?
+- Kontrolujete cenu proti reálné pracnosti a rozsahu?
+- Má každé rozšíření privacy-first bránu?
+- Víte, kdy nabídku zúžit, rozdělit nebo ukončit?
+- Zůstává jasné, jaký výsledek zákazník kupuje?
+- Umíte vysvětlit, co se za poslední měsíc změnilo a proč?
+
+Dlouhodobá údržba je méně nápadná než launch nové nabídky, ale pro zdravý byznys je důležitější. Nová nabídka přinese pozornost. Udržovaná nabídka přináší opakovatelnou hodnotu. Pokud každý měsíc opravíte jedno malé tření, udržíte slib, data, tým i zákaznický výsledek v jednom systému. A přesně tam má opakovatelná služba žít.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -32137,3 +32395,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CR o škálování opakovatelné nabídky bez ztráty kontroly: jádro nabídky, úzká hrdla, vstupní brána, delivery kit, sales karta, ochranné signály a stop pravidla.
 - 2026-05-10: Doplněna Příloha CS o předání opakovatelné nabídky novému člověku: mapa rozhodnutí, stínování, hranice samostatnosti, příklady výstupů, kontrola prvních dodávek a privacy-first pravidla.
 - 2026-05-10: Doplněna Příloha CT o kontrole samostatnosti po předání nabídky: kontrolní okno, odchylky, potřeba pomoci, zákaznický sanity check, datová stopa a rozhodnutí po kontrole.
+- 2026-05-10: Doplněna Příloha CU o dlouhodobé údržbě opakovatelné nabídky: stabilní jádro, servisní kontrola, kanonická karta, signály únavy, cena, privacy-first rozšíření a rozhodnutí o zúžení nebo ukončení.
