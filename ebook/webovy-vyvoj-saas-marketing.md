@@ -31119,6 +31119,288 @@ Karta má být krátká. Pokud se nevejde na jednu až dvě stránky, tým pravd
 
 Opakovatelná nabídka se nepozná podle toho, že má ceník a hezkou stránku. Pozná se podle toho, že ji tým dokáže dodat znovu, zákazník z ní dokáže jednat a data po cestě nezůstávají rozházená jako konfety po firemním večírku. Kvalita není tajemná aura kolem seniorního člověka. Je to několik opakovaných kontrol, které zabrání tomu, aby se z dobrého nápadu stal drahý zvyk.
 
+## Příloha CR: Škálování opakovatelné nabídky bez ztráty kontroly
+
+Když opakovatelná nabídka projde prvními dodávkami a kontrolou kvality, objeví se další lákavá myšlenka: prodat ji víc lidem. To je správný směr, pokud nabídka skutečně funguje. Ale škálování není jen silnější marketing. Je to test, jestli slib, proces, tým, data a předání unesou větší objem bez toho, aby se kvalita začala tiše rozpadat.
+
+Malý tým často škáluje nabídku nepozorovaně. Přijde pár dalších poptávek, přidá se jeden prodejní kanál, někdo slíbí rychlejší termín, někdo jiný zkrátí úvodní analýzu a za měsíc je z produktizované nabídky zase zakázková práce. Jen má pevnou cenu, takže bolí víc.
+
+Tato příloha pomáhá rozhodnout, jak nabídku rozšiřovat opatrně: přes kapacitu, segment, kvalitu, data a signály, ne přes nadšení z prvních úspěchů.
+
+### 1. Neškálujte dřív, než víte co přesně škálujete
+
+Před růstem si napište, co je skutečné jádro nabídky. Ne název. Ne landing page. Jádro je opakovaný výsledek, kvůli kterému zákazník nabídku kupuje.
+
+Odpovězte jednou větou:
+
+```markdown
+Tato nabídka opakovaně pomáhá [komu] udělat [jaké rozhodnutí nebo změnu] pomocí [jakého výstupu] v rámci [jakého rozsahu].
+```
+
+Příklad:
+
+```markdown
+Tato nabídka opakovaně pomáhá B2B firmám zjistit, kde jejich web ztrácí kvalifikované poptávky, pomocí auditního reportu hlavních toků, formulářů, měření a privacy-first datové mapy během dvoutýdenního bloku.
+```
+
+Pokud tuto větu neumíte napsat bez závorek, pravděpodobně ještě neškálujete nabídku. Škálujete nejasnost. A nejasnost se škáluje překvapivě dobře, jen potom faktura za opravy chodí později.
+
+### 2. Rozlišujte tři typy růstu
+
+Ne každý růst znamená víc zákazníků. U opakovatelné nabídky existují nejméně tři různé směry:
+
+- Objem: stejnou nabídku doručíte vícekrát.
+- Hloubka: ke stejné nabídce přidáte navazující blok nebo implementaci.
+- Segment: stejný rámec použijete pro jiný typ zákazníka.
+
+Každý směr má jiné riziko.
+
+Objem zatěžuje kapacitu a předvídatelnost. Hloubka zatěžuje rozsah, cenu a očekávání. Segment zatěžuje positioning, jazyk, vstupní podklady a relevanci výstupu.
+
+Praktické pravidlo:
+
+- Pokud máte problémy s dodržením rozsahu, neškálujte hloubku.
+- Pokud máte problémy s kvalitou předání, neškálujte objem.
+- Pokud máte problémy se srozumitelností slibu, neškálujte do nového segmentu.
+
+Codyho komentář: růst je skvělý filtr na lhaní sobě samému. Co bylo v malém "drobná odchylka", je ve větším "provozní problém". Co bylo v první zakázce "milý bonus", je u desáté zakázky neplacený standard.
+
+### 3. Kapacitu počítejte podle úzkého hrdla
+
+Kapacita nabídky není počet lidí v týmu. Je to kapacita nejvzácnějšího kroku. U produktizované služby to často bývá seniorní analýza, úvodní workshop, kontrola výstupu, bezpečnostní posouzení, zákaznické předání nebo follow-up.
+
+U každého kroku napište:
+
+- Kdo ho umí udělat dnes.
+- Kolik trvá v běžné dodávce.
+- Co se stane, když krok přeskočíte.
+- Která část se dá šablonovat.
+- Která část musí zůstat lidským rozhodnutím.
+- Jak poznáte, že kvalita klesla.
+
+Příklad:
+
+```markdown
+Úzké hrdlo:
+Seniorní prioritizace nálezů.
+
+Dnes:
+Umí ji dělat jeden člověk, trvá 90 až 120 minut na dodávku.
+
+Riziko:
+Bez ní výstup obsahuje moc doporučení a zákazník neví, co má udělat první.
+
+Škálovací krok:
+Vytvořit prioritizační rubricu a druhý člověk připraví první návrh. Senior kontroluje jen top 10 doporučení a sporné položky.
+```
+
+Škálování často nezačíná náborem. Začíná tím, že úzké hrdlo přestanete maskovat celkovou vytížeností týmu.
+
+### 4. Standardizujte vstup dřív než výstup
+
+Týmy rády šablonují výstup, protože je vidět. Report, prezentace, checklist, dashboard. Ale u opakovatelných nabídek se kvalita často láme na vstupu. Když pokaždé dostanete jiná data, jiný kontext a jiná očekávání, výstup bude pokaždé vyžadovat improvizaci.
+
+Před škálováním zpevněte vstupní bránu:
+
+- Kdo je vhodný zákazník.
+- Kdy nabídka není vhodná.
+- Jaké podklady jsou nutné.
+- Jaké podklady naopak nechcete.
+- Kdo na straně zákazníka musí být zapojený.
+- Jak vypadá první rozhodnutí po předání.
+- Jaké datové limity platí pro citlivé informace.
+
+Silnější vstupní instrukce:
+
+```markdown
+Pro audit potřebujeme URL hlavních stránek, přístup k agregovanému přehledu návštěvnosti, seznam hlavních konverzních akcí a popis obchodního cíle. Neposílejte exporty se jmény návštěvníků, kompletní CRM databázi ani nahrávky obrazovky, pokud jsme se na tom výslovně nedomluvili.
+```
+
+To je lepší než obecné:
+
+```markdown
+Pošlete nám prosím vše, co k webu máte.
+```
+
+Druhá věta zní ochotně, ale vyrábí datový nepořádek. Privacy-first nabídka musí umět říct nejen co potřebuje, ale i co nepotřebuje.
+
+### 5. Vytvořte tři úrovně delivery kitu
+
+Delivery kit by neměl být jeden obří dokument. Při škálování se hodí rozdělit ho na tři úrovně:
+
+- Minimum: věci, bez kterých nabídka nesmí odejít.
+- Standard: doporučený postup pro běžnou dodávku.
+- Expert vrstva: poznámky pro složitější situace, výjimky a rozhodování.
+
+Minimum chrání kvalitu. Standard chrání efektivitu. Expert vrstva chrání úsudek.
+
+Příklad pro audit webu:
+
+```markdown
+Minimum:
+- potvrzený segment zákazníka,
+- seznam hlavních URL,
+- kontrola formulářů,
+- kontrola externích skriptů,
+- prioritizovaný seznam 5 až 10 doporučení,
+- privacy-first datová poznámka,
+- první krok na příští týden.
+
+Standard:
+- struktura workshopu,
+- šablona reportu,
+- scorecard hlavních toků,
+- příklady doporučení,
+- handoff e-mail.
+
+Expert vrstva:
+- jak řešit konfliktní signály,
+- kdy doporučit technický audit,
+- kdy odmítnout práci s citlivými daty,
+- kdy nabídku rozdělit na diagnostiku a implementaci.
+```
+
+Tento model pomáhá zaučit další lidi bez toho, aby se z nabídky stala mechanická továrna na dokumenty.
+
+### 6. Prodej nesmí slibovat rychleji, než delivery umí doručit
+
+Škálování často selže mezi prodejem a dodávkou. Prodej slyší, co zákazník chce. Delivery ví, co lze dodat kvalitně. Pokud mezi nimi není společný slovník, nabídka se začne ohýbat podle každé poptávky.
+
+Zaveďte krátkou prodejní kartu:
+
+```markdown
+# Prodejní karta nabídky
+
+Komu nabídku prodáváme:
+Komu ji neprodáváme:
+Hlavní slib:
+Co zákazník dostane:
+Co zákazník nedostane:
+Typická doba dodání:
+Co musí zákazník dodat:
+Kdy eskalovat před uzavřením:
+Která data nikdy nežádat v první fázi:
+Navazující nabídka:
+```
+
+Tato karta chrání obě strany. Sales nemusí vymýšlet odpovědi. Delivery nedostává překvapení zabalené jako prodaný projekt. Zákazník ví, co kupuje.
+
+### 7. Měřte škálování ochrannými signály
+
+Při růstu nestačí sledovat počet prodaných balíčků nebo tržby. Potřebujete ochranné signály, které ukážou, že růst nezačal ničit kvalitu.
+
+Užitečné signály:
+
+- Průměrný čas dodávky.
+- Podíl dodávek s rozsahem mimo balíček.
+- Počet zákazníků, kteří po předání nevěděli první krok.
+- Počet dodávek, kde chyběly nutné vstupy.
+- Počet privacy-first výjimek nebo dodatečných datových požadavků.
+- Podíl výstupů, které prošly interní kontrolou bez zásadních úprav.
+- Počet opakovaných dotazů, které značí nejasný slib.
+- Vytížení úzkého hrdla.
+
+Jednoduchý měsíční záznam:
+
+```markdown
+# Scoreboard škálování nabídky
+
+Období:
+Počet dodávek:
+Nové poptávky:
+Dokončené dodávky:
+Průměrná doba dodání:
+Dodávky mimo rozsah:
+Nejasný první krok po předání:
+Chybějící vstupy:
+Privacy-first výjimky:
+Úzké hrdlo:
+Rozhodnutí na příští měsíc:
+```
+
+Ochranné signály nejsou brzda růstu. Jsou kontrolka, že růst zatím nerozebírá to, co dělalo nabídku dobrou.
+
+### 8. Škálujte jen jednu proměnnou najednou
+
+Nejhorší kombinace je současně zvýšit počet zákazníků, změnit segment, přidat implementační blok, zapojit nového člověka a spustit nový marketingový kanál. Když se něco pokazí, nevíte proč.
+
+Bezpečnější postup:
+
+1. Nechte stejný segment a stejnou nabídku, zvyšte objem o malé číslo.
+2. Vyhodnoťte kapacitu, kvalitu a datovou stopu.
+3. Teprve potom přidejte navazující blok nebo nový segment.
+4. Každou změnu zapište jako experiment s datem kontroly.
+
+Příklad rozhodnutí:
+
+```markdown
+Příští měsíc neměníme segment ani rozsah nabídky. Zvyšujeme kapacitu ze 3 na 5 dodávek měsíčně a sledujeme úzké hrdlo v seniorní prioritizaci, počet výjimek mimo rozsah a první krok po předání.
+```
+
+Tohle je nudnější než "jdeme do růstu". Ale nudná přesnost je při škálování levnější než heroický chaos.
+
+### 9. Karta škálovacího rozhodnutí
+
+Použijte tuto kartu před každým větším rozšířením nabídky:
+
+```markdown
+# Karta škálovacího rozhodnutí
+
+Název nabídky:
+Vlastník:
+Období:
+
+Co chceme škálovat:
+Objem / hloubku / segment / tým / kanál
+
+Proč teď:
+
+Důkaz, že současná nabídka funguje:
+
+Největší úzké hrdlo:
+
+Co zůstává beze změny:
+
+Co se mění:
+
+Ochranné signály:
+- kvalita:
+- kapacita:
+- rozsah:
+- privacy-first:
+- zákaznický první krok:
+
+Stop pravidlo:
+
+Datum kontroly:
+
+Rozhodnutí po kontrole:
+Pokračovat / zpomalit / zúžit / vrátit změnu / rozdělit nabídku
+```
+
+Stop pravidlo je důležité. Například:
+
+```markdown
+Pokud dvě dodávky po sobě vyžadují více než 30 procent práce mimo balíček, zastavíme propagaci a upravíme vstupní bránu nebo cenu.
+```
+
+Bez stop pravidla bude tým pokračovat, dokud ho nezastaví únava, zákaznické tření nebo kalendář. To jsou dost drahé metody řízení.
+
+### Checklist přílohy
+
+- Umíte jednou větou popsat jádro nabídky?
+- Víte, jestli škálujete objem, hloubku, segment, tým nebo kanál?
+- Znáte úzké hrdlo dodávky a jeho kapacitu?
+- Je vstupní brána přesnější než "pošlete vše, co máte"?
+- Má delivery kit minimum, standard a expert vrstvu?
+- Má sales kartu, která říká i to, co nabídka nedělá?
+- Sledujete ochranné signály kvality, rozsahu a datové hygieny?
+- Neměníte najednou příliš mnoho proměnných?
+- Má škálovací krok stop pravidlo a datum kontroly?
+- Zůstává privacy-first přístup součástí procesu, ne jen textem na webu?
+
+Škálování opakovatelné nabídky není závod v tom, kolik práce tým unese. Je to disciplína v tom, kolik hodnoty dokáže doručit opakovaně, čitelně a bez zbytečné datové stopy. Dobrý růst nezvětšuje chaos. Zvětšuje systém, který už funguje.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -31342,3 +31624,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CO o rozhodnutí, kdy z úspěšného playbooku udělat nabídku, produkt, interní standard nebo další experiment.
 - 2026-05-10: Doplněna Příloha CP o převodu ověřeného playbooku do opakovatelné nabídky: slib, rozsah, delivery kit, vstupní brána, standard výstupu, cena, privacy-first provoz a kalibrace prvních dodávek.
 - 2026-05-10: Doplněna Příloha CQ s kontrolou kvality opakovatelné nabídky po prvních dodávkách: scorecard, odchylky, akčnost výstupu, datová stopa a rozhodnutí o škálování.
+- 2026-05-10: Doplněna Příloha CR o škálování opakovatelné nabídky bez ztráty kontroly: jádro nabídky, úzká hrdla, vstupní brána, delivery kit, sales karta, ochranné signály a stop pravidla.
