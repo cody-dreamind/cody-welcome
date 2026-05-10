@@ -260,7 +260,7 @@ export default async function PostPage({
             </h1>
 
             <div className="flex items-center gap-4 text-sm" style={{ color: "var(--muted)" }}>
-              <span>{formatDate(post.date)}</span>
+              <time dateTime={post.date}>{formatDate(post.date)}</time>
               <span style={{ opacity: 0.4 }}>·</span>
               <span>{post.readingTime} min čtení</span>
               <span style={{ opacity: 0.4 }}>·</span>
