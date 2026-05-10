@@ -28955,6 +28955,277 @@ První krok musí být dost malý, aby se opravdu stal. Roční strategie bez pr
 
 Roční rozhodnutí drží e-book dospělý. Neptá se, kolik dalšího obsahu jde přidat. Ptá se, jak má veřejná edice dál sloužit lidem, týmu a důvěře, kterou značka staví. To je praktičtější než přidat dalších dvacet stran jen proto, že se ještě vejdou do Markdownu.
 
+## Příloha CH: Plán druhé veřejné edice
+
+První veřejná edice má jeden hlavní úkol: dostat materiál ven v použitelné podobě. Druhá veřejná edice má jiný úkol. Má z obsahu udělat přesnější, čitelnější a obchodně použitelnější systém, který už nevzniká jen z autorské energie, ale ze zpětné vazby, reálného použití a jasného rozhodnutí, komu má dál sloužit.
+
+Druhá edice není výmluva pro kompletní přepis. Pokud se tým po vydání znovu zavře na tři měsíce do dokumentu, pravděpodobně jen opakuje starou chybu v luxusnější podobě. Správný postup je menší a tvrdší: vybrat, co se osvědčilo, odstranit co překáží, zjednodušit čtenářské cesty a doplnit jen ty části, které prokazatelně chybí.
+
+Cíl druhé veřejné edice:
+
+- zpřesnit slib e-booku,
+- zkrátit nebo přesunout nadbytečné části,
+- posílit nejpoužívanější checklisty a šablony,
+- doplnit příklady tam, kde čtenář potřebuje vidět konkrétní použití,
+- sjednotit navigaci, rozcestníky a odkazy,
+- zachovat privacy-first distribuci bez nátlakových formulářů,
+- připravit rytmus dalších menších verzí.
+
+### 1. Nejdřív rozhodněte, co druhá edice není
+
+Než začnete přidávat úkoly, napište tři až pět věcí, které do druhé edice nepatří. Tohle je praktická obrana proti tomu, aby se z revize stala další kniha uvnitř knihy.
+
+Příklad stop seznamu:
+
+- Nebudeme přidávat nové kapitoly jen proto, že téma souvisí s webem nebo SaaS.
+- Nebudeme rozšiřovat právní výklad bez ověřených primárních zdrojů.
+- Nebudeme zavádět e-mail gate ani povinný formulář pro stažení.
+- Nebudeme přepisovat části, které fungují a nemají jasný problém.
+- Nebudeme dělat nové šablony, pokud už existuje použitelná starší.
+
+Codyho komentář: druhá edice je zkouška dospělosti. První verze odpovídá na otázku "umíme to vydat?". Druhá musí odpovědět na otázku "umíme to udržet užitečné bez toho, aby nám z toho narostl obsahový plevel?" Ano, plevel v Markdownu je pořád plevel, jen má nadpisy.
+
+### 2. Vezměte pouze tři vstupy
+
+Druhá edice nepotřebuje všechna data světa. Potřebuje tři dobré vstupy:
+
+1. Signály čtenářů: co lidé používají, kde se ztrácejí a na co se ptají.
+2. Signály týmu: které části pomáhají v obchodě, delivery, supportu nebo interním vzdělávání.
+3. Signály provozu: kde stárnou odkazy, zdroje, šablony, formuláře a datové toky.
+
+Každý vstup zapište stručně. Ne jako román, ale jako pracovní materiál:
+
+```markdown
+# Vstupy pro druhou veřejnou edici
+
+Datum:
+Vlastník:
+
+## Signály čtenářů
+-
+
+## Signály týmu
+-
+
+## Signály provozu
+-
+
+## Největší tření
+-
+
+## Největší hodnota
+-
+```
+
+Pokud nemáte žádné signály čtenářů, druhá edice nemá začínat velkým přepisem. Začněte raději čtenářským testem, rozcestníkem nebo zveřejněním části, která je už dnes použitelná. Přepis bez signálu je jen autorský pocit v pracovním kabátě.
+
+### 3. Rozdělte práci do čtyř balíků
+
+Druhou edici držte ve čtyřech balících. Každý má jiný typ práce a jiný druh rozhodnutí.
+
+**Balík A: Čtenářská cesta**
+
+Tady se řeší, jestli člověk ví, kde začít a kam pokračovat. Výstupem může být lepší úvod, kratší rozcestník, jasnější index, doporučené trasy nebo odkazy mezi částmi.
+
+Typické úkoly:
+
+- zjednodušit první stránku e-booku,
+- přidat "začněte tady" podle situace čtenáře,
+- sjednotit názvy tras,
+- odstranit duplicitní rozcestníky,
+- doplnit odkazy z kapitol na praktické šablony.
+
+**Balík B: Redakční kvalita**
+
+Tady se řeší čitelnost, konkrétnost a opakování. Cílem není uhladit hlas do korporátní mlhy. Cílem je, aby každá část rychle řekla, komu pomáhá, co má čtenář udělat a jak pozná hotovo.
+
+Typické úkoly:
+
+- zkrátit dlouhé úvody,
+- sloučit opakující se odstavce,
+- doplnit chybějící příklad,
+- přepsat obecný odstavec na konkrétní postup,
+- ověřit, že každá kapitola končí použitelným checklistem.
+
+**Balík C: Zdroje a stárnutí**
+
+Tady se řeší části, které mohou rychle zastarat: právní povinnosti, nástroje, ceny, benchmarky, trendy, technické platformy a regulatorní odkazy. Pravidlo je jednoduché: co může změnit rozhodnutí čtenáře, musí mít zdroj a datum kontroly.
+
+Typické úkoly:
+
+- ověřit právní a regulatorní odkazy,
+- označit části, které jsou názor nebo zkušenost,
+- doplnit datum poslední kontroly u citlivých tvrzení,
+- odstranit zmínky o nástrojích, které nejsou nutné,
+- přesunout rychle stárnoucí doporučení do samostatné zdrojové knihovny.
+
+**Balík D: Privacy-first provoz**
+
+Tady se řeší, jak se druhá edice publikuje, měří a distribuuje. Není moc užitečné napsat e-book o důvěře a pak ho schovat za agresivní formulář s pěti trackery. To je jako napsat kuchařku o zdravém jídle a poslat ji zabalenou v cukrové vatě.
+
+Typické úkoly:
+
+- potvrdit, že e-book je dostupný na vlastní URL,
+- ponechat RSS a přímé odkazy jako primární distribuci,
+- měřit jen události, které pomáhají rozhodovat,
+- nepřidávat povinný e-mail gate,
+- ověřit, že feedback formuláře sbírají jen nezbytná data,
+- uklidit staré exporty a pracovní kopie s osobními údaji.
+
+### 4. Použijte ediční mapu místo velkého backlogu
+
+Velký backlog druhé edice rychle ztratí ostrost. Lepší je ediční mapa na jednu stránku.
+
+```markdown
+# Ediční mapa druhé veřejné edice
+
+Datum:
+Vlastník:
+Cílové vydání:
+
+## Primární čtenář
+-
+
+## Hlavní slib druhé edice
+-
+
+## Co se musí zlepšit
+1.
+2.
+3.
+
+## Co se nebude řešit
+1.
+2.
+3.
+
+## Balík A: Čtenářská cesta
+- Úkol:
+- Výstup:
+- Hotovo znamená:
+
+## Balík B: Redakční kvalita
+- Úkol:
+- Výstup:
+- Hotovo znamená:
+
+## Balík C: Zdroje a stárnutí
+- Úkol:
+- Výstup:
+- Hotovo znamená:
+
+## Balík D: Privacy-first provoz
+- Úkol:
+- Výstup:
+- Hotovo znamená:
+
+## Rizika
+-
+
+## Rozhodnutí o vydání
+Vydat / odložit / zúžit rozsah
+```
+
+Ediční mapa má být krátká schválně. Pokud se nevejde na jednu obrazovku, pravděpodobně se snažíte udělat třetí, čtvrtou a pátou edici najednou.
+
+### 5. Nastavte čtyřtýdenní rytmus
+
+Druhá edice se dá připravit ve čtyřech týdnech, pokud tým drží rozsah.
+
+Týden 1: rozhodnutí a mapa.
+
+- Projděte vstupy.
+- Vyberte primárního čtenáře.
+- Napište stop seznam.
+- Sestavte ediční mapu.
+- Vyberte nejvýše tři hlavní zlepšení.
+
+Týden 2: čtenářská cesta a struktura.
+
+- Upravte úvodní orientaci.
+- Zkontrolujte rozcestníky a index.
+- Doplněte odkazy mezi hlavními kapitolami a šablonami.
+- Označte části, které půjdou ven, do archivu nebo do samostatných pracovních listů.
+
+Týden 3: redakční průchod a zdroje.
+
+- Zkraťte opakující se pasáže.
+- Doplňte konkrétní příklady tam, kde chybí.
+- Ověřte citlivá tvrzení a zdroje.
+- Označte Codyho komentáře tam, kde jde o vlastní názor.
+- Zkontrolujte checklisty.
+
+Týden 4: vydávací brána.
+
+- Projděte webovou verzi nebo export.
+- Otestujte hlavní čtenářské trasy.
+- Zkontrolujte odkazy, přesměrování, RSS a metadata.
+- Proveďte privacy-first kontrolu měření a formulářů.
+- Napište krátký changelog a veřejnou poznámku k edici.
+
+Čtyři týdny nejsou dogma. Jsou pojistka proti rozpliznutí. Pokud druhá edice potřebuje víc času, nejdřív zúžte rozsah a teprve potom prodlužujte termín.
+
+### 6. Vydání musí mít jasný changelog
+
+Čtenář nemusí znát interní drama kolem revize. Potřebuje vědět, co se zlepšilo a proč by se měl k materiálu vrátit.
+
+Krátký changelog druhé edice:
+
+```markdown
+# Co je nové ve druhé veřejné edici
+
+Datum vydání:
+
+## Zlepšená orientace
+-
+
+## Doplněné praktické části
+-
+
+## Zkrácené nebo přesunuté části
+-
+
+## Ověřené zdroje a aktualizace
+-
+
+## Privacy-first změny
+-
+
+## Co plánujeme dál
+-
+```
+
+Veřejný changelog držte lidský. Není potřeba vypisovat každou čárku. Stačí ukázat, že materiál má péči, směr a respekt k času čtenáře.
+
+### 7. Po vydání nezakládejte hned třetí edici
+
+Po druhé edici dejte materiálu čas v provozu. Minimálně dva až čtyři týdny sbírejte signály a opravujte jen drobné chyby, rozbité odkazy nebo zjevné nejasnosti. Větší nápady patří do fronty, ne rovnou do rukopisu.
+
+Pravidlo po vydání:
+
+- Kritické chyby opravte hned.
+- Nejasnosti v navigaci opravte během týdne.
+- Nové kapitoly nezačínejte bez jasného důvodu.
+- Zpětnou vazbu třiďte podle dopadu na čtenářskou cestu.
+- Privacy-first problémy mají přednost před kosmetickými úpravami.
+
+Tím se z e-booku nestane nekonečné staveniště. Zůstane to veřejný materiál, který se vyvíjí, ale pořád se dá používat.
+
+### Checklist přílohy
+
+- Má druhá edice jasně napsané, co nebude řešit?
+- Existují tři vstupy: čtenáři, tým a provoz?
+- Je práce rozdělená na čtenářskou cestu, redakční kvalitu, zdroje a privacy-first provoz?
+- Vejde se ediční mapa na jednu stránku?
+- Má edice nejvýše tři hlavní zlepšení?
+- Jsou rychle stárnoucí části označené ke kontrole?
+- Je dostupnost bez povinného e-mailu stále výchozí pravidlo?
+- Jsou RSS, přímé odkazy a vlastní URL součástí vydání?
+- Má vydání krátký veřejný changelog?
+- Existuje období po vydání, kdy se sbírají signály místo okamžitého přepisování?
+
+Druhá veřejná edice má být přesnější, ne větší za každou cenu. Dobrý e-book se nepozná podle počtu stran. Pozná se podle toho, že čtenář rychle najde správnou část, udělá lepší rozhodnutí a nemusí za to platit svými daty víc, než je nutné.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -29168,3 +29439,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-09: Doplněna Příloha CE s podpůrným oknem po vydání veřejné edice: triage podnětů, rychlé opravy, odpovědi na dotazy, privacy-first podpora, denní poznámka a uzavírací rozhodnutí.
 - 2026-05-09: Doplněna Příloha CF o přechodu veřejné edice do dlouhodobého provozu: zdroj pravdy, údržba podle stárnutí, pracovní šablony, privacy-first rozšiřování, měření užitečnosti a provozní rytmus.
 - 2026-05-09: Doplněna Příloha CG s ročním rozhodnutím o veřejné edici: inventura použití, budoucí role částí, shoda s nabídkou, privacy-first brána a první malý krok.
+- 2026-05-10: Doplněna Příloha CH s plánem druhé veřejné edice: vstupy, ediční balíky, čtyřtýdenní rytmus, changelog a privacy-first vydávací pravidla.
