@@ -30619,6 +30619,274 @@ Možnosti po experimentu: ponechat / nabídka / interní standard / produktový 
 
 Playbook je dobrý tehdy, když pomáhá dělat lepší práci. Někdy zůstane článkem. Někdy se promění v audit, workshop, interní standard nebo produktovou funkci. Důležité je nechat rozhodnutí vyrůst z použití, ne z nadšení. Obsah potom není marketingová dekorace. Je to výzkum trhu, delivery systém a produktové myšlení v jednom.
 
+## Příloha CP: Převod ověřeného playbooku do opakovatelné nabídky
+
+Jakmile playbook projde pilotem, distribucí a rozhodnutím, že má hodnotu jako služba, přichází nenápadně nebezpečná fáze: převod do opakovatelné nabídky. Ne proto, že by nabídka byla složitá na napsání. Složitá je disciplína kolem ní. Tým najednou musí udržet stejný výsledek pro různé zákazníky, nepřekročit rozsah, nepřidat zbytečný sběr dat a nenechat každou zakázku sklouznout do unikátní konzultantské improvizace.
+
+Opakovatelná nabídka není šablona, která ignoruje kontext zákazníka. Je to pevný rámec, ve kterém se kontext zpracuje předvídatelně. Zákazník ví, co dostane. Tým ví, co má doručit. Sales ví, co slibovat. Delivery ví, kde práce začíná a končí. Marketing ví, jak o nabídce mluvit bez mlhy. A privacy-first pravidla nejsou právní dodatek, ale součást samotného způsobu doručení.
+
+Tato příloha navazuje na předchozí práci s playbookem. Cílem není vytvořit velký produkt. Cílem je udělat z ověřeného materiálu malou, srozumitelnou a doručitelnou nabídku, kterou lze prodat, provést, vyhodnotit a zlepšit.
+
+### 1. Definujte slib jednou větou
+
+První věta nabídky musí říct výsledek, ne metodu. Playbook může být interně založený na auditu, workshopu, checklistu, skórování a konzultaci. Zákazník ale nekupuje metodiku. Kupuje posun ze stavu A do stavu B.
+
+Slabý slib:
+
+"Projdeme s vámi náš privacy-first webový playbook a připravíme doporučení."
+
+Silnější slib:
+
+"Během dvou týdnů zjistíte, které části webu brzdí důvěru, konverzi a kontrolu nad daty, a dostanete prioritizovaný plán prvních pěti oprav."
+
+Druhá věta může doplnit metodu:
+
+"Použijeme strukturovaný audit obsahu, technického základu, formulářů, měření a provozních datových toků."
+
+Pravidlo: když první věta nejde říct bez interního názvu playbooku, nabídka ještě není dost srozumitelná.
+
+### 2. Ohraničte rozsah jako produkt
+
+Opakovatelná nabídka potřebuje jasné hranice. Bez nich se každá dodávka rozroste podle posledního hovoru, posledního e-mailu nebo nejhlasitějšího stakeholdera. Hranice nejsou neochota pomoci. Jsou podmínka kvality.
+
+Popište:
+
+- Vstup: co zákazník dodá před začátkem.
+- Proces: jaké kroky proběhnou a v jakém pořadí.
+- Výstup: co přesně zákazník dostane.
+- Čas: kdy začíná práce, kdy je workshop, kdy je předání.
+- Role: kdo je na straně zákazníka potřeba.
+- Mimo rozsah: co nabídka vědomě neřeší.
+- Další krok: jak se naváže, pokud výstup ukáže větší problém.
+
+Příklad hranice:
+
+"Audit pokrývá hlavní web, jednu produktovou nebo službovou stránku, kontaktní tok, analytiku a základní technický provoz. Neobsahuje implementaci změn, redesign, právní revizi dokumentů ani kompletní bezpečnostní penetrační test."
+
+Taková věta nezmenšuje hodnotu. Naopak zabraňuje tomu, aby se audit prodával jako všechno pro všechny. A to je přesně typ slibu, který bývá nejdražší pro tým i zákazníka.
+
+### 3. Vytvořte delivery kit
+
+Delivery kit je sada materiálů, díky které lze nabídku doručit opakovaně bez pokaždé nového vynalézání. Nemusí být složitý. Má jen snížit tření a chránit kvalitu.
+
+Minimum delivery kitu:
+
+- Prodejní karta nabídky: slib, pro koho je, výstup, cena nebo cenový rámec, typický čas.
+- Vstupní formulář: minimum informací potřebných pro přípravu.
+- Interní checklist přípravy: co zkontrolovat před prvním hovorem.
+- Agenda workshopu nebo auditu: časové bloky, otázky, rozhodnutí.
+- Šablona výstupu: struktura doporučení, priority, rizika, další kroky.
+- Privacy-first karta: jaká data potřebujeme, co nepotřebujeme, retence, přístupy.
+- Předávací e-mail: stručné shrnutí, odkaz na výstup, co se stane dál.
+- Interní retro karta: co zafungovalo, co drhlo, co upravit v playbooku.
+
+Důležité: kit má obsahovat i příklady vyplnění. Prázdná šablona často nestačí. Příklad ukáže úroveň detailu, tón, rozsah a způsob rozhodování.
+
+### 4. Připravte vstupní bránu
+
+Ne každý zákazník je dobrý fit. U opakovatelné nabídky je to ještě důležitější než u obecné konzultace. Pokud vezmete špatný vstup, výstup bude slabý nebo drahý. Vstupní brána má včas říct, zda nabídka sedí.
+
+Fit signály:
+
+- Zákazník má konkrétní web, produkt, proces nebo rozhodnutí.
+- Existuje odpovědná osoba, která výstup použije.
+- Problém je dost úzký na balíček.
+- Zákazník chápe, že výstup není kouzelná implementace všeho.
+- Data potřebná pro práci lze dodat bezpečně a v omezeném rozsahu.
+
+Anti-fit signály:
+
+- Zákazník chce "jen obecný názor" bez rozhodnutí.
+- Očekává kompletní redesign, právní audit nebo vývoj v ceně diagnostiky.
+- Neumí zajistit přístup k podkladům ani člověka pro workshop.
+- Trvá na předání zbytečně citlivých dat, která pro práci nepotřebujete.
+- Neexistuje čas nebo vůle výstup po předání použít.
+
+Vstupní brána může být krátký dotazník, patnáctiminutový kvalifikační hovor nebo jednoduchá interní scorecard. Cílem není zákazníka vyšetřovat jako na letišti. Cílem je předejít situaci, kdy se dobrá nabídka použije na špatný problém.
+
+### 5. Zaveďte standard výstupu
+
+Výstup nabídky musí být použitelný bez hodinového vysvětlování. Pokud zákazník dostane dlouhý dokument, který vypadá chytře, ale neříká co udělat v pondělí ráno, nabídka selhala.
+
+Dobře strukturovaný výstup obsahuje:
+
+- Kontext: proč se práce dělala a jaký byl rozsah.
+- Shrnutí: tři až pět nejdůležitějších zjištění.
+- Priority: co opravit teď, co později a co nedělat.
+- Doporučení: konkrétní změny s důvodem.
+- Rizika: co se stane, pokud se věc neřeší.
+- Privacy-first dopad: kde se sbírají data, co omezit, co vysvětlit.
+- Další krok: první akce, vlastník, termín, kritérium hotovo.
+
+Praktický formát priority:
+
+```markdown
+## Doporučení 1: Zkrátit kontaktní formulář
+
+Problém:
+Formulář sbírá telefon, rozpočet, termín, newsletter souhlas a obecný souhlas už v prvním kontaktu.
+
+Dopad:
+Zvyšuje tření a sbírá data, která nejsou nutná pro první odpověď.
+
+Doporučení:
+Nechat e-mail, krátký popis cíle a volitelné URL. Telefon žádat až při domluvě hovoru.
+
+První krok:
+Přepsat formulář a potvrzovací text do pátku.
+
+Hotovo poznáme podle:
+Nová verze je nasazená, text po odeslání říká, kdy se tým ozve, a analytika měří pouze odeslání formuláře.
+```
+
+Takový výstup nevyhrává literární cenu. To je dobře. Má vést k práci.
+
+### 6. Nastavte cenu podle rozhodnutí, ne podle hodin
+
+Pokud je nabídka opravdu opakovatelná, neměla by se prodávat jen jako neurčitý počet hodin. Hodinová sazba je někdy praktická pro interní kalkulaci, ale zákazník potřebuje rozumět výsledku. Cena má odrážet hodnotu rozhodnutí a jistotu dodání.
+
+Pro první verzi stačí tři úrovně:
+
+- Diagnostika: rychlé zmapování problému a první prioritizace.
+- Audit nebo workshop: strukturovaný výstup s doporučeními a rozhodnutím.
+- Doprovodná implementace: omezený blok navazující práce, pokud se tým rozhodne pomoci s prvními změnami.
+
+U každé úrovně napište:
+
+- Co je zahrnuto.
+- Co není zahrnuto.
+- Jak dlouho trvá dodání.
+- Jaký výstup zákazník dostane.
+- Jaká data budete potřebovat.
+- Jaká data nebudete chtít.
+
+Codyho komentář: cena bez hranice rozsahu je pozvánka k dobrodružství. Dobrodružství je fajn v knize, horší ve fakturaci. U malé produktizované nabídky je férovější říct menší slib přesně než velký slib mlhavě.
+
+### 7. Privacy-first provoz nabídky
+
+U opakovatelné nabídky se privacy-first pravidla musí dostat do provozu, ne jen do textu. Jinak se při třetí zakázce začnou podklady hromadit v osobních schránkách, nahrávky ležet bez retence, sdílené odkazy zůstávat otevřené a interní poznámky se budou míchat s materiály zákazníka.
+
+Pro každou nabídku určete:
+
+1. Kde jsou vstupní podklady uložené.
+2. Kdo k nim má přístup.
+3. Jaké typy dat vůbec nechcete přijímat.
+4. Jak dlouho se pracovní materiály drží.
+5. Jak se předává finální výstup.
+6. Kdy a jak se mažou dočasné soubory.
+7. Jak se anonymizované poznatky mohou vrátit do e-booku nebo šablon.
+
+Příklad pravidla:
+
+"Pro audit nepotřebujeme export zákaznických osobních dat. Stačí screenshoty obrazovek, veřejné URL, popis procesu a anonymizovaný příklad typické poptávky. Dočasné pracovní poznámky mažeme po předání a interně si necháváme jen anonymizovanou kartu zjištění."
+
+Tohle je praktická důvěra. Ne plakát s nápisem "bereme soukromí vážně", ale konkrétní omezení sběru.
+
+### 8. Prodejní stránka bez přehánění
+
+Prodejní stránka opakovatelné nabídky má být krátká a konkrétní. Jejím cílem není vyčerpat čtenáře, ale pomoct mu poznat, zda je nabídka pro něj.
+
+Struktura:
+
+1. Slib jednou větou.
+2. Pro koho nabídka je.
+3. Jaký problém řeší.
+4. Co zákazník dostane.
+5. Jak proces probíhá.
+6. Co není součástí.
+7. Privacy-first pravidla práce s daty.
+8. Příklad výstupu nebo anonymizovaná ukázka.
+9. Další krok.
+
+Pozor na fráze:
+
+- "Komplexní řešení na míru" bez hranice.
+- "Pomůžeme vám růst" bez konkrétního mechanismu.
+- "Data-driven" bez vysvětlení, jaká data se sbírají.
+- "Bez starostí" tam, kde zákazník musí dodat podklady a rozhodnutí.
+
+Lepší je suchá konkrétnost:
+
+"Na konci dostanete prioritizovaný seznam deseti nálezů, návrh prvních tří změn, privacy-first poznámku k měření a třicetiminutové předání pro tým."
+
+### 9. Prvních pět dodávek berte jako kalibraci
+
+I ověřený playbook se po převodu do nabídky změní. Prvních pět placených nebo interně ostrých dodávek je kalibrační období. Nejde jen o doručení zákazníkům. Jde o zpřesnění nabídky.
+
+Po každé dodávce si zapište:
+
+- Kde vzniklo tření před začátkem.
+- Která otázka se opakovala.
+- Co zákazník pochopil jinak, než jste čekali.
+- Která část výstupu byla nejpoužitelnější.
+- Co bylo mimo rozsah a mělo být řečeno dřív.
+- Jaká data nebyla potřeba sbírat.
+- Co změnit v prodejní stránce, vstupním formuláři nebo šabloně výstupu.
+
+Po pěti dodávkách udělejte jedno rozhodnutí:
+
+- Ponechat nabídku beze změny a škálovat pomalu.
+- Zúžit rozsah, protože dodání je moc široké.
+- Rozdělit nabídku na diagnostiku a navazující implementaci.
+- Zvednout cenu, protože hodnota a náročnost jsou vyšší.
+- Vrátit ji do experimentu, protože fit je slabý.
+- Archivovat ji, pokud se neukazuje opakovatelná potřeba.
+
+### 10. Karta opakovatelné nabídky
+
+Použijte tuto šablonu jako jednostránkový záznam:
+
+```markdown
+# Karta opakovatelné nabídky
+
+Název:
+Slib jednou větou:
+Pro koho je:
+Kdy ji doporučujeme:
+Kdy ji nedoporučujeme:
+
+Vstup zákazníka:
+Proces:
+Výstup:
+Časový rámec:
+Role na straně zákazníka:
+
+Zahrnuto:
+Mimo rozsah:
+Navazující možnosti:
+
+Privacy-first pravidla:
+- Data, která potřebujeme:
+- Data, která nechceme:
+- Uložení:
+- Přístupy:
+- Retence:
+- Anonymizované poznatky:
+
+Cena nebo cenový rámec:
+První krok:
+Kritérium úspěchu:
+Revize po kolika dodávkách:
+```
+
+Karta má žít vedle playbooku. Playbook říká, jak se pracuje s problémem. Karta nabídky říká, jak se tato práce prodává, doručuje a udržuje pod kontrolou.
+
+### Checklist přílohy
+
+- Umíte popsat výsledek nabídky jednou větou bez interního žargonu?
+- Má nabídka jasný vstup, proces, výstup, čas a hranici rozsahu?
+- Existuje delivery kit, který chrání kvalitu opakované práce?
+- Máte vstupní bránu pro dobrý a špatný fit?
+- Je výstup použitelný bez dlouhého vysvětlování?
+- Prodáváte rozhodnutí a výsledek, ne neurčité hodiny?
+- Jsou privacy-first pravidla součástí provozu nabídky?
+- Ví zákazník, jaká data nepotřebujete a proč?
+- Má prodejní stránka konkrétní slib, ukázku výstupu a jasný další krok?
+- Berete prvních pět dodávek jako kalibraci, ne definitivní model?
+- Vrací se poznatky z dodání zpět do playbooku, e-booku a šablon?
+
+Ověřený playbook se nestává nabídkou tím, že dostane hezký název a tlačítko "objednat". Stává se jí ve chvíli, kdy má opakovatelný slib, pevný rozsah, doručitelný proces a rozumnou práci s daty. Pak už nejde jen o obsah. Jde o malý obchodní systém, který může růst bez toho, aby pokaždé spálil tým.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -30840,3 +31108,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CM o distribuci samostatného playbooku bez ztráty kontroly: kanonická URL, distribuční situace, lead magnety, měření užitečnosti, verzování a zpětná smyčka do e-booku.
 - 2026-05-10: Obnoven plný rukopis po nechtěném zkrácení a doplněna Příloha CN o vyhodnocení samostatného playbooku po distribuci: hodnoticí okno, metriky užitečnosti, kvalita výstupů, privacy-first review a rozhodnutí dalšího stavu.
 - 2026-05-10: Doplněna Příloha CO o rozhodnutí, kdy z úspěšného playbooku udělat nabídku, produkt, interní standard nebo další experiment.
+- 2026-05-10: Doplněna Příloha CP o převodu ověřeného playbooku do opakovatelné nabídky: slib, rozsah, delivery kit, vstupní brána, standard výstupu, cena, privacy-first provoz a kalibrace prvních dodávek.
