@@ -29632,6 +29632,224 @@ Další review:
 
 Dobrá scorecard nebrzdí publikaci. Brání tomu, aby se z praktických materiálů stal další neudržovaný sklad. Pokud playbook projde tímto testem, má slušnou šanci být užitečný i mimo hlavu autora. A to je přesně pointa: méně vysvětlování, víc opakovatelné práce.
 
+## Příloha CK: Pilot samostatného playbooku před veřejným vydáním
+
+Scorecard řekne, jestli playbook vypadá připraveně na papíře. Pilot řekne, jestli funguje v ruce člověka, který nemá autora vedle sebe. To je zásadní rozdíl. Materiál může mít jasnou strukturu, hezký checklist a slušný slib, ale v praxi se čtenář zasekne u první nejasné otázky, přeskočí privacy-first kontrolu nebo skončí s výstupem, který nejde použít.
+
+Pilot samostatného playbooku je malá, řízená zkouška. Nejde o velký launch, focus group ani sběr pochval. Cílem je zjistit, jestli playbook pomáhá udělat konkrétní rozhodnutí bez zbytečného vysvětlování. Pokud ne, opraví se dřív, než začne veřejně kolovat jako "hotový materiál".
+
+Použijte pilot u každého playbooku, který má být:
+
+- zveřejněný na vlastní URL,
+- posílaný zákazníkům po úvodním hovoru,
+- používaný ve workshopu,
+- součástí interního delivery procesu,
+- nebo převedený do PDF, šablony, formuláře či checklistu.
+
+Pilot má být malý. Jeden až tři účastníci často odhalí většinu největších tření. Pokud potřebujete dvacet lidí, abyste zjistili, zda je materiál srozumitelný, pravděpodobně už testujete marketingovou distribuci, ne použitelnost playbooku.
+
+### 1. Určete jednu pilotní otázku
+
+Pilot nezačínejte obecným "chceme zpětnou vazbu". To je pozvánka k náhodným názorům. Začněte jednou otázkou, která odpovídá slibu playbooku.
+
+Příklady:
+
+- Dokáže majitel firmy sám vybrat tři největší slabiny webu a první opravu?
+- Dokáže zakladatel SaaS oddělit MVP rozsah od pozdějších funkcí?
+- Dokáže marketingový tým vytvořit měsíční publikační plán bez povinného sběru e-mailů?
+- Dokáže provozní člověk doplnit datovou mapu bez právnické mlhy?
+- Dokáže obchodník použít playbook jako follow-up bez toho, aby zákazníka zahltil?
+
+Pilotní otázka drží rozsah. Když se během testu objeví deset dalších témat, zapíšou se do backlogu, ale nerozbijí aktuální iteraci.
+
+Slabá pilotní otázka:
+
+"Líbí se lidem náš nový playbook?"
+
+Silnější pilotní otázka:
+
+"Dokáže cílový čtenář do 60 minut vyplnit pracovní výstup a vybrat jeden další krok bez asistence autora?"
+
+První otázka sbírá vkus. Druhá testuje práci.
+
+### 2. Vyberte správné pilotní účastníky
+
+Pilot nemusí být reprezentativní statisticky. Musí být reprezentativní situačně. Účastník má řešit problém, pro který playbook vznikl, nebo má být blízko člověku, který ho bude používat.
+
+Dobří účastníci:
+
+- mají reálnou situaci, ne jen teoretický zájem,
+- znají vlastní kontext a dokážou pracovat s příklady,
+- nejsou autorem ani člověkem, který text už desetkrát četl,
+- nejsou tak daleko od cílové skupiny, že testují úplně jiný problém,
+- dokážou dát konkrétní signál: kde se zasekli, co přeskočili, co jim pomohlo.
+
+U interního playbooku stačí jeden člověk z týmu, který podle něj má skutečně pracovat. U zákaznického playbooku je lepší jeden bezpečný pilot se známým klientem než deset anonymních stažení bez kontextu. Stažení není použití. Použití je chvíle, kdy podle materiálu vznikne rozhodnutí.
+
+Codyho komentář: nejhorší pilotní skupina jsou lidé, kteří chtějí být hodní. Řeknou "super, pěkné, dává smysl" a vy nemáte nic. Hledejte lidi, kteří vám klidně řeknou, že třetí krok je mlha. Mlha je drahá, když se dostane do veřejné verze.
+
+### 3. Připravte minimální pilotní balíček
+
+Pilotní balíček má obsahovat jen to, co účastník potřebuje k práci. Pokud musíte přibalit dlouhý e-mail s vysvětlením, playbook zatím neobstál. Materiál má nést většinu kontextu sám.
+
+Minimum:
+
+- aktuální verze playbooku,
+- krátká věta, kdy ho použít,
+- instrukce, kolik času má účastník věnovat,
+- pracovní výstup, který má vzniknout,
+- jednoduchý formulář nebo e-mail pro zpětnou vazbu,
+- informaci, jak bude zpětná vazba použita,
+- privacy-first poznámku k tomu, jaká data sbíráte a jak dlouho je držíte.
+
+Příklad úvodní zprávy:
+
+"Posílám pilotní verzi Web audit playbooku. Cíl je během 60 minut vybrat tři největší slabiny jedné webové stránky a jednu opravu na tento týden. Prosím projděte ho bez našeho vysvětlování a pošlete jen tři věci: kde jste se zasekli, co bylo užitečné a jaký výstup vám vznikl. Zpětnou vazbu použijeme k úpravě playbooku, nebudeme ji zveřejňovat bez souhlasu."
+
+To stačí. Žádný desetiodstavcový onboarding. Playbook má být pracovní, ne křehký.
+
+### 4. Sledujte tření, ne komplimenty
+
+Zpětná vazba má největší hodnotu tam, kde ukazuje tření. Tření je okamžik, kdy čtenář váhá, přeskočí část, špatně pochopí zadání, vytvoří nepoužitelný výstup nebo se musí doptat.
+
+Sledujte hlavně:
+
+- Kde účastník potřeboval další vysvětlení.
+- Který krok přeskočil a proč.
+- Které slovo nebo pojem nebyl jasný.
+- Jestli výstup odpovídá slibu playbooku.
+- Jestli časový odhad sedí realitě.
+- Jestli privacy-first kontrola změnila rozhodnutí.
+- Jestli účastník ví, co má udělat po dokončení.
+
+Otázky po pilotu:
+
+1. V jakém kroku jste se poprvé zasekli?
+2. Co jste vyplnili nebo rozhodli konkrétně?
+3. Která část byla zbytečně dlouhá?
+4. Která část chyběla?
+5. Co byste potřebovali před začátkem připravit?
+6. Jaký jeden další krok z playbooku vznikl?
+7. Sbíral playbook nějaká data nebo informace, které nebyly potřeba?
+
+Pozor na větu "všechno bylo jasné". Pokud po ní nevznikl žádný výstup, nebylo to jasné. Bylo to jen příjemné čtení. Příjemné čtení není selhání, ale playbook má především vést k práci.
+
+### 5. Testujte samostatnost materiálu
+
+Pilot má ověřit, jestli playbook funguje bez autora. Proto během pilotu nevysvětlujte každý krok. Pokud účastník položí otázku, neodpovídejte hned úpravou významu. Nejdřív si zapište, že otázka vznikla. Až potom pomozte, pokud je to nutné.
+
+Rozlišujte tři typy dotazů:
+
+- Chybí informace: playbook něco neříká.
+- Je nejasná instrukce: playbook říká věc moc obecně.
+- Je nejasný kontext: playbook má špatně popsané, kdy ho použít.
+
+Každý typ se opravuje jinak. Chybějící informace doplníte. Nejasnou instrukci přepíšete na konkrétní krok. Špatný kontext může znamenat, že playbook míří na příliš širokou situaci a potřebuje zúžit.
+
+Příklad:
+
+Dotaz účastníka:
+"Co přesně myslíte kvalitou leadu?"
+
+Možné opravy:
+
+- doplnit definici kvalifikovaného leadu,
+- přidat příklad dobrého a špatného leadu,
+- odkázat na kapitolu o lead generation,
+- přepsat krok na konkrétní otázku: "Které tři poptávky z posledního měsíce byste chtěli zopakovat a proč?"
+
+Poslední varianta je často nejlepší, protože mění abstrakci na práci.
+
+### 6. Privacy-first pravidla pilotu
+
+Pilot je sběr zpětné vazby, takže i tady platí datové minimum. Nepotřebujete všechno nahrávat, transkribovat, posílat do cizí analytiky a spojovat s profilem účastníka. Potřebujete zjistit, jestli materiál funguje.
+
+Pravidla:
+
+- Sbírejte jen data potřebná k úpravě playbooku.
+- Nepublikujte citace ani výstupy účastníků bez souhlasu.
+- U zákaznických pilotů anonymizujte interní názvy, čísla a citlivé detaily.
+- Pokud používáte formulář, držte minimum polí.
+- Pokud vznikne nahrávka workshopu, napište proč, kde bude uložena, kdo ji uvidí a kdy se smaže.
+- Zpětnou vazbu ukládejte u karty playbooku, ne v osobních poznámkách autora.
+- Po uzavření pilotu odstraňte surová data, která už nejsou potřeba.
+
+Privacy-first pilot má jednu výhodu: nutí tým přemýšlet, jaký signál opravdu potřebuje. Často stačí výstup účastníka, seznam tření a rozhodnutí o úpravě. Všechno ostatní je jen pohodlné hromadění.
+
+### 7. Vyhodnoťte pilot rozhodnutím, ne náladou
+
+Po pilotu má vzniknout rozhodnutí. Ne "bylo to fajn". Rozhodnutí.
+
+Možné stavy:
+
+| Stav | Kdy použít | Další krok |
+| --- | --- | --- |
+| Pustit ven | Účastník dokončil výstup, tření je drobné a privacy-first kontrola funguje. | Zapracovat drobnosti, publikovat a naplánovat review. |
+| Upravit a zopakovat | Výstup vznikl, ale některé kroky jsou nejasné nebo příliš dlouhé. | Opravit největší tření a udělat druhý malý pilot. |
+| Vrátit do návrhu | Účastník nepochopil situaci, výstup nevznikl nebo materiál sbírá zbytečná data. | Zúžit slib, přepsat kroky a znovu projít scorecard. |
+| Archivovat | Situace není dost častá nebo playbook nepřináší samostatnou hodnotu. | Zapsat důvod a případně ponechat jen výřez v hlavním e-booku. |
+
+Rozhodnutí zapište hned. Pokud se nechá "na později", playbook často skončí v šedé zóně: není hotový, ale už se používá. To je nejhorší kombinace, protože chyby se začnou opakovat v praxi.
+
+### 8. Šablona pilotního záznamu
+
+```markdown
+# Pilot playbooku
+
+Název playbooku:
+Verze:
+Datum pilotu:
+Vlastník:
+Pilotní otázka:
+Účastník / typ účastníka:
+Použitý scénář:
+
+## Výstup pilotu
+
+Co mělo vzniknout:
+Co skutečně vzniklo:
+Čas:
+Dokončeno: ano / částečně / ne
+
+## Tření
+
+1.
+2.
+3.
+
+## Privacy-first kontrola
+
+Jaká data byla sbírána:
+Byla všechna potřebná:
+Co se smaže po vyhodnocení:
+Co se uloží ke kartě playbooku:
+
+## Rozhodnutí
+
+Stav: pustit ven / upravit a zopakovat / vrátit do návrhu / archivovat
+První oprava:
+Vlastník opravy:
+Termín:
+Další review:
+```
+
+Tahle šablona je schválně krátká. Pilotní dokumentace má pomoct rozhodnout, ne vytvořit další práci, kterou bude tým obcházet.
+
+### Checklist přílohy
+
+- Má pilot jednu konkrétní otázku?
+- Testuje skutečnou situaci, ne obecný dojem z textu?
+- Vybrali jste účastníka, který odpovídá cílovému čtenáři?
+- Dostane účastník jen minimální instrukce potřebné k práci?
+- Sledujete, kde vzniká tření, ne jen jestli se materiál líbí?
+- Vznikl po pilotu konkrétní pracovní výstup?
+- Ověřili jste, že playbook funguje bez vysvětlování autora?
+- Změnila privacy-first kontrola nějaké rozhodnutí nebo sběr dat?
+- Máte zapsané, co se z pilotních dat uloží a co smaže?
+- Skončil pilot jasným rozhodnutím: pustit, upravit, vrátit, nebo archivovat?
+
+Pilot není brzda veřejného vydání. Je to levná pojistka proti tomu, aby se slabý materiál tvářil hotově. Jeden dobrý pilot umí zachránit hodiny podpory, zmatků a vysvětlování. A pokud playbook pilotem projde, můžete ho pustit ven s mnohem větším klidem: ne proto, že je dokonalý, ale protože už prokazatelně pomohl někomu udělat práci.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -29848,3 +30066,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CH s plánem druhé veřejné edice: vstupy, ediční balíky, čtyřtýdenní rytmus, changelog a privacy-first vydávací pravidla.
 - 2026-05-10: Doplněna Příloha CI o rozdělení e-booku na samostatné playbooky: situační výběr, kanonická vazba, zkrácení do pracovního tvaru, privacy-first distribuce a údržba.
 - 2026-05-10: Doplněna Příloha CJ se scorecardem připravenosti samostatného playbooku: rozhodovací situace, čtenář, kroky, výstup, privacy-first kontrola a vydávací brána.
+- 2026-05-10: Doplněna Příloha CK s pilotem samostatného playbooku před veřejným vydáním: pilotní otázka, účastníci, tření, samostatnost materiálu, privacy-first pravidla a rozhodnutí po pilotu.
