@@ -33910,6 +33910,239 @@ To je dobrý výsledek. Automatizace nepřevzala obchodní úsudek. Jen odstrani
 
 Automatizace je užitečná až ve chvíli, kdy unese běžný provoz. Pilot je levný způsob, jak to zjistit bez velkého gesta a bez zbytečného rizika. Když projde, máte čistší proces. Když neprojde, máte pořád cenné zjištění: problém možná potřebuje lepší šablonu, jednodušší formulář nebo odvážné smazání kroku.
 
+## Příloha DC: Vyhodnocení pilotu automatizace a rozhodnutí o trvalém provozu
+
+Pilot automatizace nekončí tím, že se nic nerozbilo. To je jen nejnižší laťka. Skutečný konec pilotu nastává až ve chvíli, kdy tým umí říct, jestli automatizace šetří práci, drží kvalitu, nepřidává skryté riziko a má jasného vlastníka pro další provoz.
+
+Bez vyhodnocení se z pilotu stane další položivá integrace. Někde běží, někdo se jí bojí vypnout, někdo ji občas opraví, ale nikdo přesně neví, jestli pořád pomáhá. Tak vzniká automatizační dluh: méně viditelný než technický dluh, ale stejně protivný. Jen místo rozbitého kódu máte proces, který vypadá moderně a přitom tiše vyrábí výjimky.
+
+Dobré vyhodnocení má jeden cíl: převést pilot na rozhodnutí.
+
+Možná rozhodnutí jsou čtyři:
+
+1. Ponechat automatizaci v trvalém provozu.
+2. Upravit ji a spustit krátký druhý pilot.
+3. Vrátit se k šabloně nebo ručnímu kroku.
+4. Zrušit automatizaci i původní krok, protože práce neměla dostatečnou hodnotu.
+
+Poslední varianta je důležitá. Automatizace někdy odhalí, že problém nebyl pomalý proces, ale zbytečný proces. To je výborný nález. Když nemusíte dělat práci vůbec, je to lepší než dělat ji rychleji.
+
+### Hodnoticí okno
+
+Vyhodnocení plánujte už při spuštění pilotu. Jinak budete na konci hledat signály dodatečně a snadno si vyberete jen ty, které podporují oblíbený závěr. Hodnoticí okno má být dost dlouhé na reálné případy, ale dost krátké na to, aby pilot nezůstal viset měsíce.
+
+Praktická pravidla:
+
+- U častého procesu vyhodnocujte po deseti až dvaceti případech.
+- U méně častého procesu vyhodnocujte po pevně daném období, například po dvou až čtyřech týdnech.
+- U rizikového procesu vyhodnocujte po každé výjimce, ne až na konci.
+- U automatizace se zákaznickým dopadem mějte vedle interních signálů i zákaznický sanity check.
+
+Do hodnoticího okna patří:
+
+- datum začátku a konce,
+- počet zpracovaných případů,
+- počet ručních zásahů,
+- počet chyb nebo výjimek,
+- odhad ušetřeného času,
+- dopad na kvalitu výstupu,
+- dopad na data, přístupy a logy,
+- seznam změn, které se během pilotu provedly.
+
+Pokud se automatizace během pilotu třikrát přepsala, není to špatně. Jen to nesmí zmizet z paměti. Vyhodnocujete totiž poslední podobu, ale potřebujete vědět, kolik údržby stálo se k ní dostat.
+
+### Evidence místo dojmů
+
+Při vyhodnocení oddělte tři typy informací:
+
+- fakta: co se stalo,
+- interpretace: co si myslíme, že to znamená,
+- rozhodnutí: co kvůli tomu uděláme.
+
+Fakta jsou například:
+
+- automatizace vytvořila 18 karet,
+- ve 3 případech chyběl segment zákazníka,
+- 2 karty musel obchodník celé přepsat,
+- průměrná ruční kontrola zabrala 4 minuty,
+- nevznikl žádný nový externí nástroj,
+- do logu se ukládal jen identifikátor poptávky a stav zpracování.
+
+Interpretace:
+
+- vstupní formulář má slabé pole pro segment,
+- automatizace dobře přenáší strukturovaná data,
+- automatické shrnutí zatím není dost spolehlivé pro přímý follow-up,
+- ruční kontrola je pořád levnější než oprava špatně odeslané zprávy.
+
+Rozhodnutí:
+
+- ponechat vytváření karty,
+- doplnit validaci segmentu do formuláře,
+- nespouštět automatické odesílání zákazníkovi,
+- zkontrolovat kvalitu znovu po třiceti dalších případech.
+
+Tento rozklad chrání tým před debatou typu "mně to přijde dobré". Pocit je užitečný signál, ale špatný důkaz. Automatizace se má hodnotit podle práce, kterou reálně zlepšila nebo zhoršila.
+
+### Scorecard pilotu
+
+Pro vyhodnocení stačí jednoduchá scorecard. Každou oblast označte stavem `zelená`, `žlutá` nebo `červená`.
+
+Oblasti:
+
+- Úspora času: ubývá opakované ruční práce?
+- Kvalita výstupu: je výstup konzistentní a použitelný?
+- Výjimky: jsou výjimky vzácné, pochopitelné a řešitelné?
+- Kontrola: ví člověk, kdy má zasáhnout?
+- Údržba: je automatizace srozumitelná a opravitelná?
+- Data: sbírá jen nezbytné údaje?
+- Přístupy: používá minimální potřebná oprávnění?
+- Logy: je dohledatelné, co se stalo, bez zbytečného ukládání obsahu?
+- Zákaznický dopad: nezhoršuje komunikaci, slib ani důvěru?
+- Vlastnictví: je jasné, kdo automatizaci hlídá?
+
+Příklad:
+
+| Oblast | Stav | Poznámka |
+| --- | --- | --- |
+| Úspora času | zelená | Obchodník nepřepisuje základní údaje z formuláře do CRM. |
+| Kvalita výstupu | žlutá | Shrnutí cíle je dobré u jednoduchých poptávek, slabé u nejasných zadání. |
+| Výjimky | žlutá | Chybí segment u části poptávek. Potřeba upravit formulář. |
+| Data | zelená | Nevzniklo nové datové pole ani nový externí dodavatel. |
+| Zákaznický dopad | zelená | Automatizace neposílá nic ven bez lidské kontroly. |
+| Vlastnictví | červená | Není určeno, kdo bude kontrolovat chyby po pilotu. |
+
+Taková scorecard neříká automaticky "spustit" nebo "zastavit". Ukazuje, kde je riziko. V příkladu by nedávalo smysl spouštět trvalý provoz bez vlastníka. Ne proto, že automatizace technicky nefunguje, ale protože by neměla provozní odpovědnost.
+
+### Privacy-first review
+
+Každá automatizace mění datovou stopu. Někdy jen málo, jindy zásadně. Proto vyhodnocení pilotu musí obsahovat privacy-first review, i když automatizace působí nevinně.
+
+Otázky:
+
+- Přibylo nové osobní nebo obchodně citlivé dato?
+- Přibyl nový systém, dodavatel nebo přenos mimo původní prostředí?
+- Změnila se retence dat?
+- Změnilo se, kdo má k datům přístup?
+- Ukládají logy obsah zpráv, nebo jen technický stav?
+- Lze výstup automatizace smazat nebo opravit stejně snadno jako ruční výstup?
+- Je zákazníkovi férově popsáno, co se s jeho daty děje?
+- Nezačala automatizace spojovat data, která byla dříve oddělená?
+
+Privacy-first rozhodnutí nemusí automatizaci zastavit. Často ji jen zúží do čistší podoby. Místo ukládání celého textu poptávky do logu stačí uložit ID, čas, stav a chybu. Místo posílání dat do nového nástroje stačí použít existující interní systém. Místo automatického enrichování kontaktu stačí nechat člověka doplnit kontext ručně, pokud je opravdu potřeba.
+
+Codyho komentář: nejnebezpečnější automatizace nejsou ty velké. Ty si aspoň někdo všimne. Nebezpečné jsou malé "jen si to někam zkopírujeme" kroky. Za půl roku nikdo neví, proč se data kopírují, kdo je čte a co se má smazat. A pak se tomu říká legacy. Velmi elegantní slovo pro "nikdo to nechce uklidit".
+
+### Rozhodovací matice
+
+Po scorecardu udělejte rozhodnutí podle jednoduché matice.
+
+Ponechat v trvalém provozu:
+
+- automatizace šetří opakovanou práci,
+- kvalita je stabilní,
+- výjimky jsou vzácné a mají vlastníka,
+- datová stopa je minimální a popsaná,
+- existuje monitoring nebo pravidelná kontrola,
+- tým ví, jak automatizaci vypnout.
+
+Upravit a zopakovat krátký pilot:
+
+- hodnota je viditelná,
+- jedna nebo dvě oblasti jsou žluté,
+- problém je konkrétní a opravitelný,
+- úprava nemění celý rozsah,
+- druhý pilot má jasně kratší okno.
+
+Vrátit na šablonu nebo ruční krok:
+
+- automatizace vyžaduje příliš mnoho kontroly,
+- výstup je nepředvídatelný,
+- úspora času mizí v opravách,
+- provozní vlastnictví není realistické,
+- privacy-first dopad je větší než přínos.
+
+Zrušit celý krok:
+
+- práce se dělala ze zvyku,
+- nikdo výstup reálně nepoužívá,
+- zákazníkovi ani týmu nepomáhá,
+- její automatizace by jen zrychlila zbytečnost.
+
+Rozhodnutí zapište jednou větou:
+
+`Automatizaci [název] ponecháváme/upravujeme/vracíme/rušíme, protože [hlavní důvod], za další kontrolu odpovídá [role] a další review proběhne [datum nebo spouštěč].`
+
+Tato věta je malá, ale důležitá. Bez ní se tým vrátí k mlze.
+
+### Převod do trvalého provozu
+
+Pokud automatizaci ponecháte, neznamená to "hotovo". Znamená to převést ji z experimentu do provozu.
+
+Minimum pro trvalý provoz:
+
+- vlastník automatizace,
+- stručný popis účelu,
+- spouštěč a rozsah,
+- seznam vstupů a výstupů,
+- datová stopa a retence,
+- oprávnění a přístupy,
+- logy a monitoring,
+- postup při chybě,
+- postup pro vypnutí,
+- interval kontroly.
+
+Praktická karta automatizace:
+
+| Pole | Obsah |
+| --- | --- |
+| Název | Vytvoření CRM karty z poptávky |
+| Účel | Odstranit ruční přepis a sjednotit první kvalifikaci |
+| Spouštěč | Odeslání kontaktního formuláře pro službu |
+| Výstup | Návrh CRM karty ve stavu `ke kontrole` |
+| Lidská kontrola | Obchodník před prvním follow-upem |
+| Data | E-mail, URL, popis cíle, interní segment |
+| Logy | ID poptávky, čas, stav, chyba bez obsahu zprávy |
+| Vlastník | Sales ops nebo odpovědná osoba za pipeline |
+| Review | Po 30 případech nebo při 3 chybách za týden |
+| Vypnutí | Přepnout formulář na ruční notifikaci a vypnout webhook |
+
+Tato karta nemusí být dlouhá. Musí být použitelná ve chvíli, kdy automatizace selže, někdo odejde z týmu nebo se mění formulář.
+
+### Příklad rozhodnutí po pilotu
+
+Situace: tým testoval automatické vytvoření CRM karty z poptávkového formuláře. Pilot běžel na 20 poptávkách.
+
+Zjištění:
+
+- 17 karet bylo použitelných bez větší úpravy.
+- 3 karty měly špatně určený segment.
+- Automatizace ušetřila ruční přepis základních údajů.
+- Automatické shrnutí cíle bylo užitečné jako interní návrh, ale ne dost přesné pro komunikaci zákazníkovi.
+- Nevznikl nový dodavatel ani nové osobní údaje.
+- Chyběl vlastník pravidelné kontroly.
+
+Rozhodnutí:
+
+`Automatizaci vytvoření CRM karty ponecháváme v trvalém provozu jen pro interní návrh karty. Automatické zákaznické odpovědi nespouštíme. Do formuláře doplníme přesnější výběr segmentu, vlastníkem kontroly bude sales ops a další review proběhne po 30 dalších poptávkách.`
+
+To je zdravé rozhodnutí. Neoslavuje automatizaci jako vítězství samo o sobě. Bere si hodnotu, omezuje riziko a nechává lidský úsudek tam, kde má obchodní dopad.
+
+### Checklist přílohy
+
+- Má pilot jasně uzavřené hodnoticí okno?
+- Znáte počet zpracovaných případů, chyb, výjimek a ručních zásahů?
+- Oddělili jste fakta, interpretace a rozhodnutí?
+- Vyhodnotili jste úsporu času i kvalitu výstupu?
+- Má automatizace scorecard přes čas, kvalitu, výjimky, údržbu, data, přístupy a vlastnictví?
+- Proběhlo privacy-first review datové stopy, logů, retence a dodavatelů?
+- Víte, jestli automatizaci ponechat, upravit, vrátit na ruční krok nebo zrušit celý krok?
+- Je rozhodnutí zapsané jednou srozumitelnou větou?
+- Má trvalý provoz vlastníka, monitoring, postup při chybě a postup pro vypnutí?
+- Je další review navázané na datum, počet případů nebo chybový spouštěč?
+
+Vyhodnocení pilotu je místo, kde se ukáže dospělost týmu. Ne podle toho, kolik věcí umí automatizovat, ale podle toho, kolik věcí dokáže nepustit do provozu bez důvodu. Dobrá automatizace má šetřit pozornost. Špatná ji jen přesune z ruční práce do skrytého dohledu.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -34144,3 +34377,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CZ s měsíčním review nabídky po backlogových změnách: rozhodovací otázka, signály z webu, sales a delivery, privacy-first mini audit, stav nabídky a checklist.
 - 2026-05-10: Doplněna Příloha DA s automatizační mapou po review nabídky: třídění práce na odstranění, šablony, automatizace a ruční rozhodnutí, privacy-first brána, karta automatizace a stop pravidla.
 - 2026-05-10: Doplněna Příloha DB s pilotem jedné automatizace před trvalým provozem: výběr kandidáta, pilotní otázka, režimy testu, privacy-first kontrola, stop pravidla a rozhodnutí po pilotu.
+- 2026-05-10: Doplněna Příloha DC o vyhodnocení pilotu automatizace a rozhodnutí o trvalém provozu: hodnoticí okno, evidence, scorecard, privacy-first review, rozhodovací matice a karta automatizace.
