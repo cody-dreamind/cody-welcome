@@ -33630,6 +33630,286 @@ Výstupem nemá být seznam dalších automatizací. Výstupem má být čistš�
 
 Automatizace má být závěr dobrého procesu, ne náhrada za přemýšlení. Když je nabídka jasná, data minimální, hranice rozhodnutí popsané a tým ví, co chce opakovat, automatizace pomůže. Když to jasné není, jen přidá další vrstvu mlhy. A mlhu už máme v digitálním světě dost, díky pěkně.
 
+## Příloha DB: Pilot jedné automatizace před trvalým provozem
+
+Automatizační mapa pomůže rozhodnout, co má smysl automatizovat. Další chyba ale přichází hned potom: tým vybere slibný krok a rovnou ho pustí do ostrého provozu. To je rychlé, ale často zbytečně riskantní. U automatizace nestačí, že funguje v ukázce. Musí fungovat v reálném rytmu práce, s reálnými výjimkami, reálnými daty a reálnou odpovědností.
+
+Pilot jedné automatizace je krátké kontrolované období, ve kterém ověříte tři věci:
+
+1. zda automatizace řeší správný problém,
+2. zda šetří čas bez zhoršení kvality,
+3. zda nepřidává nepřijatelnou datovou nebo provozní stopu.
+
+Pilot nemá dokazovat, že nápad byl chytrý. Má zjistit, jestli automatizace patří do trvalého provozu.
+
+### Vyberte jen jednu automatizaci
+
+Pro první pilot nevybírejte největší bolest. Vyberte krok, který je dost častý, dost jasný a dost bezpečný.
+
+Dobrý kandidát:
+
+- opakuje se alespoň několikrát za měsíc,
+- má jasný spouštěč,
+- pracuje s omezeným množstvím dat,
+- má výstup, který člověk umí rychle zkontrolovat,
+- chyba je viditelná a vratná,
+- nepřepisuje obchodní úsudek ani zákaznický slib.
+
+Slabý kandidát:
+
+- děje se výjimečně,
+- každý případ je výrazně jiný,
+- vstupy jsou chaotické,
+- chyba může poslat špatnou informaci zákazníkovi,
+- automatizace potřebuje citlivá data bez jasného důvodu,
+- nikdo nechce být vlastník.
+
+První pilot má být nudný. Například vytvoření interní karty z formuláře, připomenutí třicetidenní kontroly, předvyplnění osnovy follow-upu nebo kontrola chybějících polí v provozním listu. Nuda je v pilotu výhoda. Učí tým provozní disciplínu bez velkého rizika.
+
+### Pilotní otázka
+
+Každý pilot začněte jednou větou:
+
+```text
+Ověřujeme, jestli automatizace [konkrétní krok] sníží [konkrétní tření] bez zhoršení [kvalita, důvěra, privacy-first hranice].
+```
+
+Příklad:
+
+```text
+Ověřujeme, jestli automatizace vytvoření interní karty po discovery formuláři sníží ruční přepis o deset minut na případ bez zhoršení kvality zadání a bez posílání zákaznických dat do nového nástroje.
+```
+
+Taková otázka drží rozsah. Neřešíte najednou CRM, celý sales proces, follow-up, reporting a AI shrnutí hovorů. Řešíte jeden krok.
+
+### Minimální provozní scénář
+
+Pilot popište jako malý provozní scénář. Měl by se vejít na jednu stránku.
+
+```text
+Název pilotu:
+
+Pilotní otázka:
+
+Spouštěč:
+Co přesně automatizaci spustí?
+
+Vstup:
+Jaká data čte a odkud?
+
+Výstup:
+Co vytvoří, kam to uloží a kdo to uvidí?
+
+Lidská kontrola:
+Kdo výstup schvaluje nebo upravuje?
+
+Pilotní okno:
+Od kdy do kdy pilot běží a kolik případů chceme vidět?
+
+Ochranné pravidlo:
+Kdy pilot okamžitě zastavíme?
+
+Měřené signály:
+Jak poznáme úsporu, kvalitu, chyby a privacy-first dopad?
+
+Vlastník:
+Kdo odpovídá za vyhodnocení?
+```
+
+Pilotní okno může být krátké. U častých kroků stačí týden. U méně častých kroků dejte dva až čtyři týdny nebo minimální počet případů. Důležité je nenechat pilot viset v neurčitém stavu "zatím to zkoušíme". To je jen trvalý provoz bez odpovědnosti.
+
+### Režimy pilotu
+
+Automatizaci nemusíte hned pustit tak, aby sama měnila provoz. Použijte jeden ze tří režimů.
+
+#### 1. Suchý běh
+
+Automatizace se spustí nad testovacími nebo anonymizovanými vstupy a nikam neposílá reálné výstupy. Hodí se pro první kontrolu pravidel, formátu a datových polí.
+
+Použijte, když:
+
+- si nejste jistí mapováním dat,
+- výstup může obsahovat citlivé informace,
+- chcete ověřit, jestli pravidla dávají smysl,
+- potřebujete ukázat výsledek týmu bez dopadu na zákazníka.
+
+#### 2. Stínový režim
+
+Automatizace běží vedle ruční práce. Člověk pořád dělá krok původním způsobem, ale tým porovnává, co by vytvořila automatizace.
+
+Použijte, když:
+
+- chcete porovnat kvalitu výstupu,
+- ruční proces zatím nechcete měnit,
+- potřebujete zjistit typické výjimky,
+- chyba automatizace by v ostrém provozu bolela.
+
+Stínový režim je výborný pro follow-upy, interní karty, návrhy changelogů nebo kontrolu chybějících polí. Není efektivní hned první den, ale rychle ukáže, jestli automatizace rozumí realitě.
+
+#### 3. Omezený ostrý režim
+
+Automatizace už vytváří reálný výstup, ale jen pro omezený rozsah a s lidským schválením.
+
+Použijte, když:
+
+- suchý běh i stínový režim dopadly dobře,
+- výstup je vratný,
+- člověk má jasné místo kontroly,
+- existuje jednoduchý způsob vypnutí.
+
+Omezený ostrý režim neznamená "pusťme to všem". Znamená třeba pět případů, jeden typ zákazníka, jeden formulář, jeden kanál nebo jeden interní tým.
+
+### Privacy-first kontrola pilotu
+
+Pilot svádí k výmluvě: "Je to jen test." Jenže i test umí zkopírovat zákaznická data do nástroje, který v trvalém provozu nechcete. Proto má pilot stejnou datovou disciplínu jako ostré nasazení.
+
+Před pilotem si zapište:
+
+- zda používáte reálná, anonymizovaná nebo testovací data,
+- kde data fyzicky a smluvně končí,
+- kdo uvidí vstupy, výstupy a logy,
+- jak dlouho se pilotní data drží,
+- jak se po pilotu smažou nebo zařadí do běžné retence,
+- zda výstup může omylem obsahovat osobní nebo interní údaje,
+- zda se mění datová mapa projektu,
+- zda je potřeba upravit interní dokumentaci nebo informaci pro zákazníka.
+
+Pokud automatizace potřebuje nový externí nástroj, položte tvrdou otázku: opravdu kvůli tomuto kroku stojí za to přidat dalšího dodavatele do datové mapy? Často je lepší použít existující evropský provoz, server-side skript, interní databázi nebo jednodušší šablonu.
+
+Codyho komentář: pilot není omluvenka pro horší privacy. Je to naopak nejlepší chvíle zachytit zbytečný sběr dat dřív, než se z něj stane "historický důvod", který už nikdo nechce otevírat.
+
+### Co měřit
+
+Měřte jen signály, které pomohou rozhodnout, jestli automatizaci ponechat.
+
+Praktické signály:
+
+- úspora času na jeden případ,
+- počet ručních oprav výstupu,
+- typy chyb,
+- počet případů, kde automatizace nebyla použitelná,
+- počet výjimek mimo pravidla,
+- dopad na zákaznický tón nebo srozumitelnost,
+- počet nových datových polí nebo nástrojů,
+- počet lidí, kteří musí výstup kontrolovat,
+- čas potřebný na údržbu automatizace.
+
+Pozor na falešné vítězství. Pokud automatizace ušetří deset minut jednomu člověku, ale přidá patnáct minut kontroly jinému, není to úspora. Pokud vytvoří hezký výstup, který se nedá zákazníkovi poslat bez kompletního přepsání, není to hotový výstup. Pokud zrychlí obchod, ale posílá data do nástroje bez jasného účelu, není to dobrý provoz.
+
+### Ochranná pravidla
+
+Každý pilot má mít stop pravidla předem. Ne až ve chvíli, kdy něco teče do produkce.
+
+Pilot zastavte, když:
+
+- automatizace pošle nebo připraví výstup pro nesprávného příjemce,
+- výstup opakovaně obsahuje interní poznámky,
+- tým neumí vysvětlit, kde jsou data,
+- většina výstupů vyžaduje zásadní přepis,
+- automatizace mění zdrojová data bez kontroly,
+- přidává nový typ osobních údajů bez jasného účelu,
+- vlastník nemá čas pilot vyhodnotit,
+- pilotní rozsah se začal samovolně rozšiřovat.
+
+Stop pravidlo není prohra. Je to důkaz, že tým bere provoz vážně.
+
+### Vyhodnocení po pilotu
+
+Na konci pilotu nepište dlouhý report. Stačí rozhodovací karta.
+
+```text
+Automatizace:
+
+Pilotní okno:
+
+Počet případů:
+
+Co fungovalo:
+
+Co nefungovalo:
+
+Úspora nebo přínos:
+
+Chyby a výjimky:
+
+Privacy-first dopad:
+
+Údržba:
+
+Rozhodnutí:
+Ponechat / upravit / vrátit na šablonu / ukončit.
+
+Další kontrola:
+```
+
+Rozhodnutí má čtyři běžné výsledky.
+
+Ponechat: automatizace dává smysl a má vlastníka, dokumentaci, vypnutí a revizní datum.
+
+Upravit: problém je správný, ale pravidla, vstupy, kontrola nebo rozsah potřebují změnu.
+
+Vrátit na šablonu: struktura pomáhá, technická automatizace je zatím moc křehká nebo datově zbytečně drahá.
+
+Ukončit: automatizace nešetří práci, zvyšuje riziko nebo řeší problém, který by měl zmizet.
+
+### Příklad pilotu: karta po poptávkovém formuláři
+
+Situace: z webového formuláře chodí poptávky na opakovatelnou nabídku. Tým ručně vytváří interní kartu, doplňuje segment, rozhodovací otázku, další krok a odkaz na zdroj.
+
+Pilotní otázka:
+
+```text
+Ověřujeme, jestli automatické vytvoření interní karty z formuláře sníží ruční přepis bez zhoršení kvalifikace poptávky a bez přidání nového externího nástroje.
+```
+
+Rozsah pilotu:
+
+- jen jeden formulář,
+- jen interní karta,
+- žádný automatický e-mail zákazníkovi,
+- žádné obohacování leadu z externích databází,
+- pilot na deset poptávek nebo dva týdny.
+
+Lidská kontrola:
+
+- obchodník zkontroluje segment,
+- upraví hlavní problém,
+- rozhodne, jestli poptávka sedí na nabídku,
+- ručně odešle odpověď.
+
+Měřené signály:
+
+- kolik minut trvalo vytvoření karty před pilotem a během pilotu,
+- kolik polí bylo správně vyplněno,
+- kolik polí musel člověk přepsat,
+- zda karta pomohla rychleji rozhodnout další krok,
+- zda automatizace nevytvořila novou datovou stopu mimo existující provoz.
+
+Možné rozhodnutí:
+
+- ponechat automatické vytvoření karty,
+- nepřidávat automatické posílání follow-upu,
+- doplnit validaci dvou povinných polí ve formuláři,
+- zkontrolovat po třiceti dnech, jestli karta stále odpovídá sales procesu.
+
+To je dobrý výsledek. Automatizace nepřevzala obchodní úsudek. Jen odstranila přepis a zlepšila konzistenci vstupu.
+
+### Checklist přílohy
+
+- Vybrali jste jednu konkrétní automatizaci, ne celý proces?
+- Má pilot jednu rozhodovací otázku?
+- Je jasný spouštěč, vstup, výstup a vlastník?
+- Běží pilot v suchém, stínovém nebo omezeném ostrém režimu?
+- Je pilotní okno časově nebo počtem případů omezené?
+- Má automatizace lidskou kontrolu tam, kde jde o úsudek, slib nebo citlivá data?
+- Jsou popsána data, logy, přístupy, retence a mazání po pilotu?
+- Nepřidává pilot zbytečného dodavatele nebo nové datové pole?
+- Měříte úsporu, kvalitu, chyby, výjimky a údržbu?
+- Máte předem stop pravidla?
+- Na konci vznikne rozhodnutí: ponechat, upravit, vrátit na šablonu nebo ukončit?
+
+Automatizace je užitečná až ve chvíli, kdy unese běžný provoz. Pilot je levný způsob, jak to zjistit bez velkého gesta a bez zbytečného rizika. Když projde, máte čistší proces. Když neprojde, máte pořád cenné zjištění: problém možná potřebuje lepší šablonu, jednodušší formulář nebo odvážné smazání kroku.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -33863,3 +34143,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Obnoven plný rukopis po nechtěném zkrácení posledním commitem a doplněna Příloha CY o převodu zjištění z nabídky do produktového a marketingového backlogu.
 - 2026-05-10: Doplněna Příloha CZ s měsíčním review nabídky po backlogových změnách: rozhodovací otázka, signály z webu, sales a delivery, privacy-first mini audit, stav nabídky a checklist.
 - 2026-05-10: Doplněna Příloha DA s automatizační mapou po review nabídky: třídění práce na odstranění, šablony, automatizace a ruční rozhodnutí, privacy-first brána, karta automatizace a stop pravidla.
+- 2026-05-10: Doplněna Příloha DB s pilotem jedné automatizace před trvalým provozem: výběr kandidáta, pilotní otázka, režimy testu, privacy-first kontrola, stop pravidla a rozhodnutí po pilotu.
