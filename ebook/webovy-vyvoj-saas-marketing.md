@@ -31401,6 +31401,253 @@ Bez stop pravidla bude tým pokračovat, dokud ho nezastaví únava, zákaznick�
 
 Škálování opakovatelné nabídky není závod v tom, kolik práce tým unese. Je to disciplína v tom, kolik hodnoty dokáže doručit opakovaně, čitelně a bez zbytečné datové stopy. Dobrý růst nezvětšuje chaos. Zvětšuje systém, který už funguje.
 
+## Příloha CS: Předání opakovatelné nabídky novému člověku
+
+Ve chvíli, kdy nabídku dokáže dodat jen jeden člověk, ještě nejde o skutečně opakovatelný systém. Může to být výborná služba, může mít šablony, landing page i pevnou cenu, ale pořád stojí na tichém úsudku jednoho člověka. To je v malém týmu běžné. Problém začne, když se tým tváří, že stačí předat dokumenty a nový člověk automaticky doručí stejnou kvalitu.
+
+Předání opakovatelné nabídky není jen onboarding. Je to test, jestli nabídka obsahuje dost rozhodovacích pravidel, příkladů, hranic a kontrol, aby kvalita nepřežívala jen v hlavě původního autora. Cílem není udělat z nového člověka robota na šablony. Cílem je předat mu kontext, ve kterém umí samostatně poznat, co je standard, co je výjimka a kdy má eskalovat.
+
+Privacy-first rozměr je tady důležitý. Nový člověk se nesmí učit metodou "pošli si všechna data a nějak se v tom zorientuj". Musí vědět, jaké podklady jsou nutné, které nejsou potřeba, kde leží pracovní poznámky, co se po dodávce maže a jak mluvit se zákazníkem o citlivých informacích.
+
+### 1. Nejdřív oddělte znalost od zvyku
+
+Původní autor nabídky často dělá spoustu věcí správně, ale neumí je pojmenovat. Pozná slabý vstup, vycítí riziko mimo rozsah, upraví workshop, zkrátí report a po předání zákazníkovi řekne přesně tu větu, která pomůže k akci. To všechno je znalost. Pokud není zapsaná, pro nového člověka vypadá jako magie nebo osobní styl.
+
+Před předáním si u každé fáze napište:
+
+- Co je povinný krok.
+- Co je doporučený krok.
+- Co je jen osobní zvyk původního autora.
+- Jak poznáme, že krok dopadl dobře.
+- Jaká chyba v této fázi nejčastěji zhorší výsledek.
+- Kdy nový člověk nesmí improvizovat bez konzultace.
+
+Příklad:
+
+```markdown
+Fáze:
+Prioritizace doporučení po auditu webu.
+
+Povinné:
+Vybrat 5 až 10 doporučení, která mají jasný dopad na důvěru, konverzi, provoz nebo datovou stopu.
+
+Doporučené:
+Rozdělit doporučení na rychlé opravy, rozhodnutí pro tým a větší projekt.
+
+Osobní zvyk:
+Autor si nejdřív píše všechny nálezy do dlouhého seznamu. To není povinné, pokud nový člověk umí dojít ke stejné prioritizaci jinou cestou.
+
+Kvalitní výsledek:
+Zákazník ví, co udělat jako první během příštího týdne.
+
+Eskalace:
+Pokud doporučení vyžaduje práci s citlivými daty, změnu právního textu nebo zásah do produkční analytiky.
+```
+
+Tohle oddělení je praktické, protože chrání systém před dvěma extrémy: slepým kopírováním stylu a volnou improvizací bez hranic.
+
+### 2. Předejte nabídku přes stínování, ne přes dokument
+
+Dokumentace je nutná, ale nestačí. Nový člověk potřebuje vidět reálnou dodávku a pochopit, jak se rozhoduje v nejasných místech. Nejrychlejší je krátký stínovací cyklus.
+
+Jednoduchý postup:
+
+1. Nový člověk sleduje jednu kompletní dodávku a zapisuje otázky.
+2. Původní autor nahlas vysvětluje rozhodnutí, ne jen kroky.
+3. Nový člověk připraví část výstupu nanečisto.
+4. Autor porovná rozdíly a vysvětlí, které jsou v pořádku a které mění kvalitu.
+5. Nový člověk vede další dodávku s kontrolou v kritických bodech.
+6. Třetí dodávku už vede samostatně, ale s krátkou retrospektivou po předání.
+
+Kritické body nejsou každý detail. Typicky stačí:
+
+- schválení vstupu a vhodnosti zákazníka,
+- návrh hlavní diagnózy nebo priorit,
+- kontrola privacy-first datové stopy,
+- kontrola finálního výstupu před předáním,
+- rozhodnutí o dalším kroku po dodávce.
+
+Codyho komentář: předat nabídku jen tak, že někomu pošlete složku se šablonami, je optimistické. A optimismus je fajn na pondělní kávu, ne na řízení kvality. U služeb se nepředává jen soubor. Předává se úsudek.
+
+### 3. Udělejte mapu rozhodnutí
+
+Nový člověk nepotřebuje znát všechny historické diskuze. Potřebuje vědět, která rozhodnutí bude během dodávky dělat a podle čeho.
+
+Vytvořte mapu rozhodnutí:
+
+```markdown
+# Mapa rozhodnutí pro nabídku
+
+1. Je zákazník vhodný pro tuto nabídku?
+Kritéria:
+Eskalace:
+
+2. Jsou vstupy dostatečné?
+Minimum:
+Co nežádat:
+Eskalace:
+
+3. Jak vybrat hlavní problém?
+Signály:
+Časté falešné stopy:
+
+4. Jak prioritizovat doporučení?
+Rubrika:
+Stop pravidla:
+
+5. Jak předat výstup?
+Povinné části:
+První krok:
+
+6. Jak uzavřít data po dodávce?
+Co archivovat:
+Co smazat:
+Co anonymizovat:
+```
+
+Mapa rozhodnutí je užitečnější než dlouhý procesní manuál, protože služba málokdy běží přesně podle ideálního scénáře. Když se objeví výjimka, nový člověk se má opřít o kritéria, ne o domněnku, co by asi udělal původní autor.
+
+### 4. Dejte příklady dobrého a slabého výstupu
+
+Šablona říká, kam co napsat. Příklad ukazuje, jak dobrý výstup skutečně zní. Bez příkladů nový člověk často vyplní správné kolonky, ale výsledek bude buď příliš obecný, nebo příliš dlouhý.
+
+U každé důležité části výstupu připravte:
+
+- jeden silný příklad,
+- jeden slabý příklad,
+- krátké vysvětlení rozdílu,
+- hranici, kdy je potřeba individuální úprava.
+
+Příklad:
+
+Slabé doporučení:
+
+```markdown
+Zlepšit formulář a analytiku.
+```
+
+Silnější doporučení:
+
+```markdown
+Zkraťte první kontaktní formulář na e-mail, cíl poptávky a volitelné URL. Oddělte souhlas s newsletterem od běžného kontaktu a měřte jen odeslání formuláře, ne obsah zprávy. První kontrolu udělejte po 30 dnech podle počtu kvalifikovaných poptávek.
+```
+
+Rozdíl:
+
+```markdown
+Silnější verze říká, co přesně změnit, proč je to privacy-first a podle čeho poznat dopad.
+```
+
+Tím se nový člověk učí standard konkrétnosti. Ne styl původního autora, ale kvalitu rozhodnutí.
+
+### 5. Nastavte hranice samostatnosti
+
+Předání se rozpadá, když není jasné, co může nový člověk rozhodnout sám. Buď se ptá na všechno a tým získá další úzké hrdlo, nebo improvizuje i tam, kde je riziko vysoké.
+
+Rozdělte rozhodnutí na tři úrovně:
+
+- Samostatně: běžné úpravy výstupu, formulace doporučení, práce se standardními vstupy.
+- Konzultovat: nejasný segment, chybějící podklady, větší změna priority, zákazník s nestandardním provozem.
+- Eskalovat: citlivá data, právní tvrzení, bezpečnostní incident, změna ceny, změna rozsahu, výjimka z privacy-first pravidel.
+
+Krátká karta:
+
+```markdown
+# Hranice samostatnosti
+
+Můžeš rozhodnout sám:
+-
+-
+
+Konzultuj před pokračováním:
+-
+-
+
+Eskaluj okamžitě:
+-
+-
+
+Nikdy nedělej bez schválení:
+-
+-
+```
+
+Tato karta šetří energii oběma stranám. Nový člověk nemusí hádat, kdy se ptát. Původní autor nemusí kontrolovat každý detail.
+
+### 6. Kontrolujte první tři samostatné dodávky
+
+První samostatná dodávka není důkaz, že předání funguje. Může být dobrá díky náhodě, velké péči nebo jednoduchému zákazníkovi. Sledujte alespoň tři dodávky a hledejte opakované signály.
+
+Po každé dodávce vyplňte krátké review:
+
+```markdown
+# Review předané dodávky
+
+Nabídka:
+Dodávka:
+Vedl:
+Kontroloval:
+
+Co nový člověk zvládl samostatně:
+
+Kde potřeboval kontext:
+
+Kde se lišil od standardu a bylo to v pořádku:
+
+Kde se lišil od standardu a zhoršilo to kvalitu:
+
+Privacy-first kontrola:
+- sbíraná data:
+- zbytečná data:
+- smazání / archivace:
+
+Co upravit v mapě rozhodnutí:
+
+Co upravit v příkladech:
+
+Rozhodnutí:
+Pokračovat samostatně / ponechat kontrolu kritických bodů / vrátit část předání zpět do tréninku
+```
+
+Tady se ukáže, jestli problém leží v člověku, dokumentaci, šablonách nebo samotné nabídce. Často zjistíte, že nový člověk neudělal chybu. Jen narazil na místo, které původní autor nikdy nemusel vysvětlit.
+
+### 7. Předání aktualizujte jako součást produktu
+
+Když se nabídka mění, musí se měnit i předávací materiály. Jinak vznikne nebezpečný rozpor: web slibuje novou verzi, delivery kit říká starý postup a nový člověk se učí podle historických příkladů.
+
+Po každé větší změně nabídky aktualizujte:
+
+- prodejní kartu,
+- vstupní bránu,
+- mapu rozhodnutí,
+- příklady výstupů,
+- privacy-first pravidla,
+- scorecard dodávky,
+- hranice samostatnosti.
+
+Stačí krátké pravidlo:
+
+```markdown
+Žádná změna nabídky není hotová, dokud není promítnutá do předávacího balíčku.
+```
+
+Toto pravidlo zní přísně, ale chrání škálování. Bez něj tým postupně prodává jednu věc, dodává druhou a dokumentuje třetí. To je rychlá cesta k nespolehlivé službě.
+
+### Checklist přílohy
+
+- Je jasné, které části dodávky jsou povinné a které jsou jen osobní styl?
+- Viděl nový člověk reálnou dodávku před vlastní samostatnou prací?
+- Existuje mapa rozhodnutí pro vhodnost, vstupy, prioritizaci, předání a datovou stopu?
+- Má nový člověk příklady silného a slabého výstupu?
+- Jsou zapsané hranice samostatnosti, konzultace a eskalace?
+- Kontrolujete první tři samostatné dodávky podle stejné scorecard?
+- Vrací se zjištění z předání zpět do šablon a playbooku?
+- Ví nový člověk, která data nežádat, kde je ukládat a kdy je mazat?
+- Je předávací balíček aktualizovaný při každé změně nabídky?
+- Umí nabídku dodat víc než jeden člověk bez toho, aby se změnil slib zákazníkovi?
+
+Předání opakovatelné nabídky je hotové teprve tehdy, když kvalita není závislá na tom, kdo má zrovna prostor v kalendáři. Neznamená to odstranit lidský úsudek. Znamená to dát mu oporu: rozhodovací pravidla, příklady, hranice a kontrolní rytmus. Pak může tým růst bez toho, aby s každým novým člověkem znovu vynalézal stejnou službu.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -31625,3 +31872,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha CP o převodu ověřeného playbooku do opakovatelné nabídky: slib, rozsah, delivery kit, vstupní brána, standard výstupu, cena, privacy-first provoz a kalibrace prvních dodávek.
 - 2026-05-10: Doplněna Příloha CQ s kontrolou kvality opakovatelné nabídky po prvních dodávkách: scorecard, odchylky, akčnost výstupu, datová stopa a rozhodnutí o škálování.
 - 2026-05-10: Doplněna Příloha CR o škálování opakovatelné nabídky bez ztráty kontroly: jádro nabídky, úzká hrdla, vstupní brána, delivery kit, sales karta, ochranné signály a stop pravidla.
+- 2026-05-10: Doplněna Příloha CS o předání opakovatelné nabídky novému člověku: mapa rozhodnutí, stínování, hranice samostatnosti, příklady výstupů, kontrola prvních dodávek a privacy-first pravidla.
