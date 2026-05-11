@@ -36903,6 +36903,175 @@ Když se ukáže, že lekce je nesrozumitelná, není to selhání nového člov
 
 Schválená lekce má hodnotu jen tehdy, když změní budoucí práci. Onboarding a revize jsou dvě místa, kde se to pozná nejrychleji. Nový člověk ukáže, jestli je pravidlo srozumitelné. Pravidelné review ukáže, jestli je pořád pravdivé. Když lekce projde oběma místy, přestává být interní poznámkou a stává se součástí provozní kultury.
 
+## Příloha DS: Kontrola účinnosti onboardingu po zavedení lekcí
+
+Přidat lekce do onboardingu je jen první půlka práce. Druhá půlka je ověřit, jestli se podle nich nový člověk opravdu umí rozhodnout. Onboarding totiž často vypadá dobře na papíře: existuje stránka, checklist, pár odkazů a někdo zkušený řekne "kdyby něco, ptej se". Jenže skutečná kvalita se ukáže až ve chvíli, kdy člověk narazí na první konkrétní úkol, výjimku nebo citlivé rozhodnutí.
+
+Tato příloha pomáhá po převodu lekcí do onboardingu udělat kontrolu účinnosti. Nejde o školní test. Jde o provozní zpětnou vazbu: které části onboardingu novému člověku pomohly, které jen zabraly čas a kde pořád vzniká tichá závislost na neformálním vysvětlování.
+
+### 1. Neověřujte přečtení, ověřujte rozhodnutí
+
+Nejslabší metrika onboardingu je počet přečtených stránek. Člověk může odškrtnout všechno a přesto netušit, jak by postupoval při reálné situaci. Lepší je vybrat několik rozhodnutí, která má onboarding umožnit.
+
+Příklady rozhodnutí:
+
+- Marketing: která pole patří do prvního poptávkového formuláře a která už jsou zbytečný sběr dat?
+- Sales: kdy je lead kvalifikovaný a kdy je lepší ho slušně odmítnout?
+- Engineering: jak ověřit, že export dat neporušuje tenant hranici?
+- Support: kdy stačí odpověď v tiketu a kdy je potřeba eskalace do produktu?
+- Operations: kdy nový nástroj vyžaduje dodavatelskou kontrolu a záznam do datové mapy?
+
+Pro každé rozhodnutí napište krátký scénář. Ne obecnou otázku, ale situaci:
+
+```text
+Situace: Marketing chce na landing page přidat pole "počet zaměstnanců", "telefon" a "rozpočet".
+Úkol: Rozhodni, která pole jsou nutná pro první odpověď, která patří až do obchodního hovoru a jak se změna promítne do datové mapy.
+Očekávaný výstup: návrh formuláře, krátké zdůvodnění, privacy-first poznámka.
+```
+
+Když člověk zvládne situaci vysvětlit a udělat výstup, onboarding splnil svůj účel lépe než deset potvrzených checkboxů.
+
+### 2. Udělejte kontrolu ve třech okamžicích
+
+Účinnost onboardingu se nedá poznat jedním dotazníkem na konci prvního dne. První den člověk ještě neví, co mu chybí. Po měsíci už některé tření zapomene nebo si vytvoří vlastní workaround. Praktické je použít tři krátké kontroly.
+
+První kontrola: konec prvního týdne.
+
+- Co bylo jasné bez doplňujícího vysvětlení?
+- Který odkaz, checklist nebo příklad chyběl ve chvíli, kdy byl potřeba?
+- Kde člověk musel požádat o kontext mimo onboarding?
+- Která privacy-first pravidla pochopil prakticky, ne jen teoreticky?
+
+Druhá kontrola: po prvním reálném úkolu.
+
+- Dokázal člověk najít správný pracovní artefakt?
+- Použil lekci ve správné situaci?
+- Vznikl výstup v kvalitě, kterou tým umí převzít?
+- Byla potřeba oprava kvůli nejasnému standardu, nebo kvůli běžné nezkušenosti?
+
+Třetí kontrola: po 30 dnech.
+
+- Které části onboardingu už člověk reálně použil?
+- Které materiály nikdy neotevřel, protože nejsou napojené na práci?
+- Kde se opakuje stejná otázka u více nových lidí?
+- Která lekce má být přepsána, přesunuta nebo archivována?
+
+Tyto kontroly mají být krátké. Patnáct až třicet minut stačí, pokud se řeší konkrétní situace, ne obecné dojmy.
+
+### 3. Sledujte skrytou ruční podporu
+
+Onboarding může vypadat funkčně, protože ho zachraňuje zkušený člověk. Ten pošle správný odkaz, doplní chybějící kontext, vysvětlí výjimku a opraví výstup. To není špatně. Špatně je, když se tato podpora tváří jako přirozená součást zaučení a nikdy se nepřevede zpět do materiálů.
+
+Zapisujte si skrytou podporu:
+
+```text
+Kdo pomohl:
+S čím pomohl:
+Proč onboarding nestačil:
+Chyběl příklad, rozhodovací pravidlo, odkaz, kontext nebo oprávnění?
+Má se upravit onboarding, checklist, runbook nebo lesson pack?
+Je v pomoci citlivý zákaznický nebo osobní detail, který se nemá veřejně opisovat?
+```
+
+Codyho komentář: když nový člověk třikrát dostane stejnou radu bokem, není to jeho problém. Je to nedopsaný onboarding. A pokud tu radu pokaždé dává nejvytíženější člověk v týmu, právě jste našli malé provozní riziko v hezkém svetru.
+
+### 4. Ověřte privacy-first pochopení na konkrétním toku dat
+
+Privacy-first pravidla se špatně učí jako abstraktní hodnoty. "Sbíráme minimum dat" zní hezky, ale člověk musí vědět, co to znamená při formuláři, exportu, supportním tiketu, sales poznámce nebo testovacím datasetu.
+
+Do onboardingu proto dejte aspoň jeden praktický datový tok:
+
+```text
+Tok: návštěvník odešle poptávkový formulář
+Kroky: web -> formulář -> e-mail/CRM -> obchodní odpověď -> archivace nebo smazání
+Úkol: označ osobní údaje, účel sběru, místo uložení, přístupy, retenci a zbytečná pole
+Výstup: jedna věta pro zákazníka a jedna interní poznámka do datové mapy
+```
+
+U SaaS produktu může být tok složitější:
+
+```text
+Tok: uživatel exportuje data svého účtu
+Kroky: UI -> API -> background job -> dočasný soubor -> stažení -> smazání
+Úkol: ověř tenant hranici, expiraci souboru, logování, oprávnění a chování při chybě
+Výstup: testovací scénář a případná úprava runbooku
+```
+
+Taková kontrola ukáže, jestli člověk chápe data jako provozní odpovědnost, ne jen jako text v zásadách ochrany osobních údajů.
+
+### 5. Rozlišujte chybu člověka od chyby systému
+
+Při kontrole onboardingu se snadno řekne: nový člověk si toho měl všimnout. Někdy ano. Ale často je chyba v systému. Materiál je moc dlouhý, důležitý příklad je schovaný, dvě šablony si odporují, starý checklist není archivovaný nebo se používá interní slang, kterému rozumí jen původní tým.
+
+U každého problému se ptejte:
+
+- Bylo pravidlo napsané tam, kde ho člověk potřeboval?
+- Byl příklad dost podobný reálnému úkolu?
+- Nebyla instrukce v konfliktu s jiným artefaktem?
+- Bylo jasné, kdo rozhoduje při výjimce?
+- Měl člověk potřebný přístup, nebo musel improvizovat?
+- Nechyběla informace o datové stopě, retenci nebo zákaznickém dopadu?
+
+Pokud se stejná nejasnost objeví u dvou lidí, opravte systém. Pokud se objeví jednou, i tak zvažte malou úpravu. Dobrý onboarding nemá dokazovat, že nový člověk byl pozorný. Má snižovat šanci, že udělá drahou chybu z nejasného zadání.
+
+### 6. Vytvořte onboardingovou scorecard
+
+Scorecard nemusí být složitá. Stačí pět oblastí hodnocených slovně: dobré, použitelné s úpravou, slabé. Smyslem není vytvářet další reporting, ale rychle poznat, kde onboarding drží a kde jen předstírá kompletnost.
+
+```text
+Role nebo situace:
+Kontrolované období:
+Hlavní úkol:
+
+Srozumitelnost: dobré / použitelné s úpravou / slabé
+Najitelnost správných artefaktů: dobré / použitelné s úpravou / slabé
+Schopnost udělat rozhodnutí: dobré / použitelné s úpravou / slabé
+Privacy-first pochopení: dobré / použitelné s úpravou / slabé
+Množství skryté ruční podpory: nízké / přijatelné / vysoké
+
+Co ponechat:
+Co upravit:
+Co odstranit:
+Co doplnit do lesson packu:
+Vlastník změny:
+Datum další kontroly:
+```
+
+Scorecard má být použitelná po prvním týdnu i po prvním měsíci. Pokud vyžaduje hodinovou schůzku a tři tabulky, je příliš těžká. Onboarding se zlepší jen tehdy, když se jeho kontrola dá opakovat bez dramatu.
+
+### 7. Převádějte zjištění zpět do týmové paměti
+
+Kontrola onboardingu je další zdroj lekcí. Ne každé zjištění se má stát pravidlem, ale každé opakované tření má projít triage. Tím se uzavírá smyčka: provozní zkušenost vstoupí do týmové paměti, schválená lekce se dostane do onboardingu a onboarding se po použití znovu vyhodnotí.
+
+Jednoduchý zápis:
+
+```text
+Zjištění z onboardingu:
+Kde se projevilo:
+Dopad na práci:
+Navržená změna:
+Patří do týmové paměti, checklistu, runbooku, lesson packu nebo archivu?
+Privacy-first dopad:
+Rozhodnutí:
+```
+
+Tím se onboarding nestává statickým dokumentem. Stává se provozním nástrojem, který se učí z práce. To je přesně ten typ nudné disciplíny, který později ušetří hodiny vysvětlování, chybné leady, špatné exporty a zbytečné sběry dat.
+
+### 8. Checklist přílohy
+
+- Ověřujeme praktická rozhodnutí, ne jen přečtení materiálů?
+- Má onboarding krátké scénáře podle reálných rolí a situací?
+- Děláme kontrolu po prvním týdnu, po prvním reálném úkolu a po 30 dnech?
+- Zapisujeme skrytou ruční podporu, která zachraňuje nedopsané materiály?
+- Umí nový člověk vysvětlit konkrétní tok dat včetně účelu, přístupů, retence a zbytečných polí?
+- Rozlišujeme chybu jednotlivce od chyby systému?
+- Máme lehkou scorecard s jasným vlastníkem změn?
+- Převádíme opakované tření zpět do týmové paměti, checklistů nebo lesson packů?
+- Mažeme nebo archivujeme části onboardingu, které nikdo nepoužívá?
+- Zůstává onboarding praktický, krátký a napojený na reálnou práci?
+
+Onboarding není hotový dokument. Je to první test toho, jestli tým umí předat svůj způsob práce bez šeptané historie a skrytých zkratek. Když nový člověk podle materiálů zvládne udělat dobré rozhodnutí, onboarding funguje. Když potřebuje tajný výklad zkušeného kolegy, máte skvělou příležitost napsat další lepší lekci. Ano, zase práce. Ale tentokrát práce, která se vrací.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -37153,3 +37322,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DP o převodu provozní zkušenosti do týmové paměti: karty lekcí, třídění vzorů, rozhodnutí, onboarding, review a privacy-first pravidla.
 - 2026-05-11: Doplněna Příloha DQ o triage týmové paměti: stavy lekcí, slučování vzorů, převod do zdroje pravdy, privacy-first kontrola a checklist.
 - 2026-05-11: Doplněna Příloha DR o převodu schválených lekcí do onboardingu a revizí: publikum lekcí, pracovní artefakty, lesson packy, malé dávky změn, ověření použití a privacy-first kontrola.
+- 2026-05-11: Doplněna Příloha DS o kontrole účinnosti onboardingu po zavedení lekcí: rozhodovací scénáře, kontrolní okamžiky, skrytá ruční podpora, privacy-first datové toky, scorecard a smyčka zpět do týmové paměti.
