@@ -38211,6 +38211,160 @@ Když nevíte, co dělat dál, vraťte se k nejmenšímu užitečnému kroku. P�
 
 To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řemesla. Web, produkt a marketing mají sloužit lidem, ne hladit ego týmu. Když tohle udržíte, máte náskok před většinou trhu, která pořád ještě optimalizuje tlačítko, aniž by věděla, proč na něj má někdo kliknout.
 
+## Příloha DY: Převod rozšířeného vlastnictví do týmového standardu
+
+Když člověk zvládne rozšířené vlastnictví po prvním cyklu, přichází důležitá otázka: má to zůstat jako osobní schopnost jednoho člověka, nebo se z toho má stát týmový standard? Rozdíl je zásadní. Osobní schopnost pomáhá dnes. Týmový standard pomáhá i tehdy, když člověk onemocní, přejde na jinou oblast nebo tým začne růst.
+
+Tato příloha navazuje na kontrolu rozšířeného vlastnictví. Cílem není hned proces zabetonovat. Cílem je zachytit to, co se osvědčilo, oddělit návyk od improvizace a vytvořit minimum, podle kterého může další člověk opakovat podobný výsledek bez dlouhého vysvětlování.
+
+Použijte ji po prvním nebo druhém úspěšném cyklu, kdy už existují důkazy, že rozšířená role přináší hodnotu. Tedy ne po prvním nadšení. Nadšení je fajn, ale jako provozní dokumentace má mizernou retenci.
+
+### Kdy z role dělat standard
+
+Ne každá dobrá práce potřebuje standard. Některé věci jsou jednorázové, kontextové nebo příliš závislé na konkrétním člověku. Standard dává smysl ve chvíli, kdy se práce bude opakovat a její kvalita má dopad na zákazníka, produkt, marketing, provoz nebo data.
+
+Signály, že je čas standardizovat:
+
+- Úkol se opakuje alespoň měsíčně nebo při každé podobné zakázce.
+- Výsledek ovlivňuje zákaznickou důvěru, onboarding, support, billing, web nebo obchodní rozhodnutí.
+- V práci se objevují opakovaná rozhodnutí, která už není potřeba vymýšlet pokaždé znovu.
+- Nový člověk by bez záznamu potřeboval dlouhé vysvětlování.
+- Chyba v této oblasti by vedla k úniku dat, špatnému slibu zákazníkovi, rozbitému procesu nebo zbytečné ruční práci.
+- Rozšíření role ukázalo lepší postup, který by měl znát i zbytek týmu.
+
+Naopak standard zatím nedělejte, pokud je rozsah pořád nejasný, výsledek závisí na výjimečné situaci nebo tým ještě neví, jestli nová odpovědnost zůstane. V takovém případě stačí krátká pracovní poznámka a další kontrolní cyklus.
+
+### Co přesně převést
+
+Standard nemá popsat všechno, co člověk dělal. Má popsat rozhodnutí, hranice a opakovatelný postup. Když do standardu nalijete celé dějiny role, nikdo ho nebude používat. Když ho zkrátíte na tři obecné věty, nikomu nepomůže.
+
+Převeďte hlavně:
+
+- účel práce: proč tato odpovědnost existuje;
+- vstupy: co musí být připravené před začátkem;
+- výstup: jak poznáme hotový a použitelný výsledek;
+- rozhodovací pravidla: kdy postupovat samostatně a kdy eskalovat;
+- kvalitu: jaké kontroly jsou povinné;
+- datovou stopu: jaká data se používají, ukládají, sdílejí a mažou;
+- komunikační body: kdo má být informovaný a kdy;
+- typické chyby: co už se ukázalo jako riziko;
+- příklady: jeden dobrý výstup a jeden hraniční případ.
+
+Příklad pro roli, která nově vlastní publikaci produktových změn na webu:
+
+- Účel: převést dokončenou produktovou změnu do srozumitelné veřejné komunikace.
+- Vstupy: potvrzený rozsah změny, screenshoty nebo demo, dopad na zákazníka, privacy kontrola.
+- Výstup: upravená stránka produktu, krátká poznámka do changelogu, interní sales poznámka.
+- Eskalace: právní tvrzení, nové zpracování osobních dat, změna cen nebo slib termínu.
+- Kontrola: odkazy, formuláře, metadata, konzistence se sales materiály, odstranění interních detailů.
+
+To je použitelné. Věta "publikuj změny kvalitně a včas" použitelná není. Je to hezké přání, což je procesní ekvivalent vonné svíčky v serverovně.
+
+### Šablona týmového standardu
+
+Použijte jednu stránku. Pokud se nevejde na jednu stránku, pravděpodobně popisujete školení, ne standard.
+
+```md
+## Standard: [název oblasti]
+
+Vlastník:
+Poslední revize:
+Používá se kdy:
+
+### Účel
+[Proč tento standard existuje a jakému riziku nebo výsledku slouží.]
+
+### Vstupy
+- [Co musí být připravené.]
+- [Kdo dodává vstupy.]
+
+### Postup
+1. [První krok.]
+2. [Druhý krok.]
+3. [Třetí krok.]
+
+### Rozhodovací pravidla
+- Samostatně řešit: [běžné situace].
+- Eskalovat: [rizikové situace].
+- Zastavit: [situace, kdy pokračování zvyšuje škodu].
+
+### Kontrola kvality
+- [Kontrola výstupu.]
+- [Kontrola zákaznického dopadu.]
+- [Kontrola provozu nebo měření.]
+
+### Privacy-first kontrola
+- Jaká data se používají:
+- Kde jsou uložena:
+- Kdo k nim má přístup:
+- Co se po dokončení smaže nebo anonymizuje:
+- Které nástroje se nesmí použít bez schválení:
+
+### Příklady
+- Dobrý příklad:
+- Hraniční případ:
+
+### Revize
+- Příští kontrola:
+- Signály, že standard zastarává:
+```
+
+Tato šablona není posvátná. Je to lešení. Jakmile tým ví, co opravdu potřebuje, může ji zkrátit. Důležité je, aby standard chránil rozhodnutí, ne aby sbíral kolonky.
+
+### Privacy-first brána
+
+Rozšířené vlastnictví často znamená, že člověk získá širší přístup k datům, nástrojům nebo zákaznickému kontextu. Týmový standard proto musí obsahovat privacy-first bránu. Ne jako právní ornament na konci, ale jako běžnou provozní otázku: "Jaké minimum dat potřebujeme, aby šla práce udělat dobře?"
+
+Před schválením standardu odpovězte:
+
+- Přibyl nový typ osobních, zákaznických nebo provozních dat?
+- Přibyl nový nástroj, export, sdílená složka nebo automatizace?
+- Má širší přístup jen role, která ho skutečně potřebuje?
+- Je jasné, kdy se data mažou, anonymizují nebo vrací do hlavního systému?
+- Neobsahuje příklad ve standardu reálná citlivá data, která by šla nahradit anonymizovanou verzí?
+- Nepřenáší standard práci do nástroje, kde tým ztrácí kontrolu nad daty?
+
+Pokud odpovědi nejsou jasné, standard ještě není hotový. Neznamená to zastavit práci. Znamená to doplnit hranice dřív, než se z praktického návodu stane tichý datový únik.
+
+### Zavedení bez divadla
+
+Nový standard se nemá vyhlásit jako velká organizační reforma. Stačí ho použít v příštím reálném cyklu a sledovat, kde drhne. Standard, který nikdo nepoužije v práci, je jen hezky naformátovaný nábytek v dokumentaci.
+
+Praktické zavedení:
+
+1. Vlastník role sepíše první verzi podle šablony.
+2. Jeden člověk mimo původní práci ji projde a označí nejasná místa.
+3. Standard se použije v dalším reálném cyklu.
+4. Po cyklu se doplní chybějící rozhodovací pravidla a příklady.
+5. Tým určí datum další revize.
+
+Při zavádění sledujte tři signály:
+
+- Použitelnost: šel podle standardu udělat skutečný výstup?
+- Samostatnost: snížil se počet ad hoc dotazů?
+- Bezpečnost: nezvýšil se zbytečně přístup k datům nebo nástrojům?
+
+Pokud standard nepomohl, zkraťte ho nebo přepište. Pokud vyvolal víc schůzek než práce, je příliš těžký. Pokud ho lidé obcházejí, možná nepopisuje realitu.
+
+### Codyho komentář
+
+Můj pohled: standardizace se často kazí tím, že tým popisuje ideální svět místo skutečné práce. Dobrý standard nemá dokazovat, že jsme dospělá firma. Má pomoct unavenému člověku ve středu odpoledne udělat správné rozhodnutí bez toho, aby musel svolat poradu. To je mnohem vyšší laťka než pěkný dokument.
+
+### Checklist
+
+- Je jasné, proč se z rozšířené role stává týmový standard?
+- Popisuje standard opakovatelný postup, ne jen obecné přání?
+- Obsahuje vstupy, výstupy, rozhodovací pravidla a hranice eskalace?
+- Je součástí konkrétní privacy-first kontrola dat, přístupů a nástrojů?
+- Má standard alespoň jeden dobrý příklad a jeden hraniční případ?
+- Prošel ho někdo, kdo původní práci nedělal?
+- Byl použit v reálném cyklu, ne jen schválen v dokumentaci?
+- Má určeného vlastníka a datum další revize?
+- Snížil počet ad hoc dotazů nebo zlepšil kvalitu výstupu?
+- Je dost krátký na to, aby ho tým opravdu používal?
+
+Týmový standard je hotový až ve chvíli, kdy pomáhá práci. Ne když je uložený. Ne když má krásný nadpis. Když podle něj další člověk dokáže udělat dobré rozhodnutí, udržet kvalitu a neudělat z dat volně poletující konfety.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -38378,3 +38532,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DV o prvním review samostatné role po předání vlastnictví: konkrétní cyklus, rozhodnutí, skrytá pomoc, privacy-first stopa, stav role a převod poučení do systému.
 - 2026-05-11: Doplněna Příloha DW o rozšíření vlastnictví role po prvních samostatných cyklech: důkazy, sousední oblast, pracovní kontrakt, ochranné signály, první rozšířený cyklus a privacy-first kontrola.
 - 2026-05-11: Doplněna Příloha DX o kontrole rozšířeného vlastnictví po prvním cyklu: výstup, samostatnost, skrytý dohled, zákaznický dopad, privacy-first stopa a rozhodnutí o dalším stavu role.
+- 2026-05-11: Doplněna Příloha DY o převodu rozšířeného vlastnictví do týmového standardu: kdy standardizovat, co převést, šablona standardu, privacy-first brána, zavedení v reálném cyklu a checklist.
