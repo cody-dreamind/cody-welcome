@@ -34703,6 +34703,137 @@ Dobrá automatizace je pokorná. Ví, co dělá, ví, co nedělá, a umí se zas
 
 Revize po změně procesu chrání automatizaci před nejběžnější formou stárnutí: tichým nesouladem s realitou. Když ji uděláte včas, oprava bývá malá. Když ji přeskočíte, tým si zvykne na ruční obcházení, duplicitní kontroly a výstupy, kterým nikdo úplně nevěří. To už potom není automatizace. To je procesní dluh s tlačítkem "run".
 
+## Příloha DG: Vypnutí nebo nahrazení automatizace bez chaosu
+
+Automatizace není slib na věčnost. Někdy splní účel, někdy začne překážet a někdy ji nahradí jednodušší proces. Problém není vypnout automatizaci. Problém je vypnout ji tak, že tým ztratí signály, zákazník nedostane odpověď, data zůstanou viset v cizím nástroji a nikdo neví, která pravidla ještě platí.
+
+Dobré vypnutí automatizace je malý provozní projekt. Má vlastníka, datum, plán návratu, kontrolu dat a jasnou komunikaci. Není to rychlé smazání workflow v pátek odpoledne, protože "už to stejně nikdo nepoužívá". To je oblíbená cesta k pondělnímu překvapení, a překvapení v provozu bývají dražší než nudná příprava.
+
+### Kdy automatizaci vypnout
+
+Vypnutí zvažte ve chvíli, kdy automatizace už nepomáhá rozhodovat ani šetřit práci. Typické signály:
+
+- Tým výsledky automatizace pravidelně ignoruje.
+- Výstupy se musí ručně přepisovat, ověřovat nebo opravovat.
+- Automatizace podporuje starý proces, který už neodpovídá realitě.
+- Kvůli automatizaci sbíráte víc dat, než dnes potřebujete.
+- Pravidla jsou tak složitá, že se jich tým bojí dotknout.
+- Nástroj změnil cenu, podmínky, region ukládání dat nebo dostupnost exportu.
+- Existuje jednodušší řešení: šablona, ruční kontrola, menší formulář nebo lepší produktová změna.
+
+Ne každá unavená automatizace se musí hned mazat. Někdy stačí zúžit rozsah, snížit počet notifikací nebo změnit vlastníka. Ale pokud už automatizace vytváří víc provozní nejistoty než hodnoty, držet ji "pro jistotu" je jen odložené rozhodnutí.
+
+### Udělejte mapu dopadu
+
+Před vypnutím si napište jednu stránku:
+
+- Co automatizace spouští?
+- Jaké vstupy čte?
+- Jaké výstupy vytváří?
+- Komu posílá zprávy, úkoly, e-maily nebo webhooky?
+- Jaká data ukládá a kde?
+- Které navazující procesy na ni spoléhají?
+- Co se stane, když se na týden vypne?
+
+Tato mapa nemusí být krásná. Musí být pravdivá. Pokud nevíte, co automatizace dělá, nejdřív ji nepřepisujte. Dejte ji do monitorovaného režimu, zkontrolujte poslední běhy a zjistěte, jestli existují skryté závislosti.
+
+Příklad: automatizace po poptávkovém formuláři vytváří kartu v CRM, posílá upozornění obchodníkovi, zapisuje zdroj poptávky, přidává tag podle segmentu a po třech dnech připomíná follow-up. Když ji vypnete bez náhrady, nezmizí jen tag. Může zmizet celý první obchodní krok. Proto se nevypíná "automatizace". Vypínají se konkrétní odpovědnosti, které musí někdo převzít nebo vědomě ukončit.
+
+### Připravte náhradní režim
+
+Každé vypnutí má mít dočasný nebo trvalý náhradní režim. Může být ruční, ale musí být popsaný.
+
+Dočasný ruční režim:
+
+- Kdo kontroluje vstupy?
+- Jak často?
+- Kam zapisuje výsledek?
+- Koho informuje?
+- Kdy se vyhodnotí, jestli ruční režim stačí?
+
+Trvalá náhrada:
+
+- Jaký proces nebo nástroj přebírá práci?
+- Které části původní automatizace se vědomě ruší?
+- Jak se ověří, že zákaznický tok pořád funguje?
+- Kde je nová kanonická dokumentace?
+- Kdy se smažou stará pravidla, staré tagy a staré přístupy?
+
+Náhradní režim nemusí kopírovat původní automatizaci. Často je správné zjistit, že polovina kroků byla jen historický sediment. Když automatizace tři roky posílala pět notifikací, neznamená to, že nová verze musí posílat pět notifikací v lepším fontu.
+
+### Privacy-first vypínací kontrola
+
+Vypnutí automatizace je dobrý okamžik pro úklid dat. Neřešte jen workflow. Řešte stopu, kterou po sobě nechalo.
+
+Zkontrolujte:
+
+- Jaká osobní nebo firemní data automatizace zpracovávala.
+- Zda existují kopie dat v logách, tabulkách, nástrojích, e-mailech nebo notifikacích.
+- Kdo má přístup k historii běhů a výstupům.
+- Jak dlouho má být historie zachovaná kvůli provozu, auditu nebo zákaznické podpoře.
+- Co lze bezpečně smazat, anonymizovat nebo exportovat.
+- Zda vypnutím nevznikne nový ruční proces, který bude data kopírovat ještě hůř než původní automatizace.
+
+Privacy-first vypnutí není jen "smazali jsme integraci". Je to odpověď na otázku: zůstala po této automatizaci data, která už nemají účel? Pokud ano, rozhodněte o nich. Data bez účelu nejsou archiv. Jsou závazek, který si necháváte na stole.
+
+### Vypínací plán
+
+Použijte jednoduchý plán:
+
+1. Zmrazit změny automatizace.
+2. Zapsat aktuální účel, vstupy, výstupy a navazující procesy.
+3. Vybrat náhradní režim.
+4. Informovat lidi, kterých se změna týká.
+5. Vypnout automatizaci v kontrolovaném okně.
+6. Ověřit první běžný scénář bez automatizace.
+7. Ověřit hraniční scénář a chybný vstup.
+8. Zkontrolovat data, logy, přístupy a retenci.
+9. Aktualizovat dokumentaci, changelog a datovou mapu.
+10. Po jednom týdnu rozhodnout, jestli je vypnutí stabilní.
+
+U důležitějších automatizací přidejte rollback. Ne nutně proto, abyste se k původní verzi chtěli vracet. Spíš proto, abyste věděli, co dělat, když náhrada selže. Rollback může být i ruční: "dočasně obnovit staré upozornění obchodníkovi a ručně zapisovat segment do CRM". Důležité je, aby to nebyla improvizace ve chvíli, kdy už něco hoří.
+
+### Komunikace týmu
+
+Lidem neříkejte jen "workflow bylo vypnuto". Řekněte:
+
+- Proč se vypíná.
+- Co se mění v jejich práci.
+- Co se nemění.
+- Kde najdou nový postup.
+- Jak poznají problém.
+- Komu ho mají hlásit.
+- Kdy proběhne kontrola.
+
+Krátká zpráva stačí:
+
+`Od 2026-05-15 vypínáme automatické přiřazování poptávek podle starých segmentů. Důvod: segmenty už neodpovídají nové nabídce a vznikaly ruční opravy. Dočasně bude nové poptávky kontrolovat obchodník při ranním triage a zapisovat segment ručně do CRM. Po týdnu vyhodnotíme, jestli stačí ruční režim, nebo vytvoříme jednodušší pravidlo. Historii starých tagů necháváme jen pro uzavřené obchody a nové tagy už nevytváříme.`
+
+Tým díky tomu ví, co se stalo a co má dělat. Bez této zprávy vznikne neformální detektivka: někdo si všimne, že nepřišla notifikace, někdo jiný najde prázdné pole v CRM a třetí člověk začne vyrábět vlastní náhradu v tabulce. To je přesně ten typ kreativity, který raději nepotřebujete.
+
+### Codyho komentář
+
+Můj pohled: vypnutí automatizace je známka dospělosti. Začátečníci automatizace jen přidávají. Zkušenější tým je umí i mazat, zjednodušovat a nahrazovat obyčejným postupem, když to dává smysl. Někdy je nejlepší automatizace ta, kterou po třech měsících smažete, protože vás naučila, jak proces funguje, a teď už stačí lepší formulář nebo jasnější odpovědnost.
+
+Ne všechno, co běží samo, je pokrok. Občas je to jen zapomenuté rozhodnutí s pravidelným spouštěčem.
+
+### Checklist přílohy
+
+- Máte jasný důvod vypnutí, zúžení nebo nahrazení automatizace?
+- Zmapovali jste vstupy, výstupy, příjemce, uložená data a navazující procesy?
+- Víte, co se stane při týdenním výpadku automatizace?
+- Má vypnutí vlastníka a kontrolní datum?
+- Existuje dočasný nebo trvalý náhradní režim?
+- Je popsáno, kdo přebírá ruční práci a jak dlouho?
+- Zkontrolovali jste osobní data, logy, historii běhů, přístupy a retenci?
+- Smažete nebo anonymizujete data, která už nemají účel?
+- Aktualizujete datovou mapu, dokumentaci, changelog a případné sales/support materiály?
+- Je tým stručně informovaný o tom, co se mění a jak hlásit problém?
+- Ověřili jste běžný scénář, hraniční scénář a chybný vstup po vypnutí?
+- Máte po týdnu plán kontroly, jestli je nový režim stabilní?
+
+Vypnutí automatizace by mělo zanechat systém jednodušší, ne méně čitelný. Když po vypnutí nevíte, kdo co dělá, nebylo to vypnutí. Bylo to odstranění viditelné části procesu a přesunutí zbytku do lidských hlav. Dobrá iterace končí tím, že práce, data i odpovědnosti jsou srozumitelnější než předtím.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -34941,3 +35072,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DD o standardizaci automatizace po schválení trvalého provozu: provozní karta, technická mapa, změnová pravidla, lidská kontrola, monitoring a privacy-first provozní brána.
 - 2026-05-11: Doplněna Příloha DE o první měsíční kontrole automatizace v trvalém provozu: scorecard hodnoty, kvality, výjimek, provozu a datové stopy, kontrola skryté ruční práce, změn vstupů a privacy-first hranic.
 - 2026-05-11: Doplněna Příloha DF o revizi automatizace po změně procesu: spouštěče revize, mapa předpokladů, test starých i nových scénářů, kontrola oprávnění, rozhodovací pravidla a checklist.
+- 2026-05-11: Doplněna Příloha DG o vypnutí nebo nahrazení automatizace bez chaosu: mapa dopadu, náhradní režim, privacy-first úklid dat, vypínací plán, komunikace týmu a checklist.
