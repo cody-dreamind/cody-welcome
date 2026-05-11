@@ -38525,6 +38525,246 @@ Můj pohled: týmové standardy se mají chovat jako dobré nástroje v dílně.
 
 Kontrola po prvních použitích chrání tým před dvěma extrémy: chaosem bez pravidel a pravidly bez života. Dobrý standard není tvrdý proto, že se nesmí změnit. Je silný proto, že se umí měnit podle skutečné práce a pořád drží kvalitu, odpovědnost a kontrolu nad daty.
 
+## Příloha EA: Portfoliová revize týmových standardů
+
+Jeden dobrý standard týmu pomůže. Deset dobrých standardů už může začít tým brzdit, pokud mezi nimi není pořádek. Po několika měsících provozu se často stane, že vedle sebe existuje standard pro publikaci změny, standard pro předání role, standard pro privacy-first kontrolu, standard pro incident, standard pro onboarding a ještě několik šablon, které vznikly z konkrétní potřeby. Každý z nich mohl být v době vzniku užitečný. Dohromady ale mohou vytvářet zmatek.
+
+Portfoliová revize standardů není velká dokumentační čistka. Je to rozhodnutí, které standardy mají dál žít, které se mají sloučit, které stačí zkrátit a které už jen zabírají pozornost. Cílem není mít méně dokumentů za každou cenu. Cílem je, aby člověk v konkrétní pracovní situaci rychle poznal, podle čeho má postupovat.
+
+Privacy-first hodnota je tady velmi praktická. Pokud má každý standard vlastní datová pravidla, vlastní úložiště, vlastní formulář a vlastní kontrolní otázky, tým časem ztratí přehled, kde se jaká data používají. Portfoliová revize proto neřeší jen čitelnost dokumentace. Řeší i to, zda se datové toky, přístupy a retence neduplikují nebo nerozcházejí.
+
+### 1. Udělejte inventuru podle situace, ne podle názvu
+
+Začněte seznamem všech standardů, playbooků a šablon, které tým skutečně používá nebo by podle dohody používat měl. Nehodnoťte je hned. Nejdřív je přepište do pracovního přehledu podle situace, kterou řeší.
+
+Šablona inventury:
+
+```md
+## Inventura standardu
+
+Název:
+Vlastník:
+Poslední aktualizace:
+
+Kdy se používá:
+Kdo ho používá:
+Jaký výstup má vzniknout:
+Které rozhodnutí chrání:
+
+Vstupní data:
+Nástroje:
+Přístupy:
+Retence / úklid dat:
+
+Navazuje na:
+Překrývá se s:
+Stav:
+Ponechat / zkrátit / sloučit / archivovat / zrušit / přepsat
+```
+
+Důležité je pole "kdy se používá". Pokud standard neumíte popsat jako pracovní situaci, například "před publikací produktové změny" nebo "po prvním samostatném cyklu nové role", pravděpodobně je příliš abstraktní. Abstraktní standardy vypadají moudře, ale v provozu se špatně hledají.
+
+### 2. Najděte duplicity v rozhodnutích
+
+Duplicitní standardy nejsou problém jen proto, že zabírají místo. Problém je, že mohou dávat dvě mírně odlišné odpovědi na stejné rozhodnutí. Jeden dokument říká "zapište změnu do changelogu", druhý říká "pošlete interní oznámení", třetí říká "aktualizujte kanonickou kartu". Všechny kroky mohou být správné, ale člověk neví, který je pro danou situaci povinný.
+
+Hledejte hlavně duplicity v těchto oblastech:
+
+- schvalování změn;
+- kontrola kvality výstupu;
+- předání práce mezi rolemi;
+- privacy-first kontrola dat;
+- komunikace zákazníkovi nebo týmu;
+- uzavření cyklu a úklid po práci;
+- převod poučení zpět do systému.
+
+U každé duplicity rozhodněte, jestli jde o stejnou věc, nebo jen o podobnou věc v jiném kontextu.
+
+Příklad:
+
+```md
+Duplicitní rozhodnutí:
+Kdo schvaluje veřejnou změnu před publikací.
+
+Dokumenty:
+- Standard publikace změny
+- Marketingový release checklist
+- Privacy-first brána
+
+Rozhodnutí:
+Sloučit schvalovací krok do jedné vydávací karty.
+Marketingový checklist bude odkazovat na vydávací kartu.
+Privacy-first brána zůstane samostatná jen pro změny s novými daty.
+```
+
+Tím se nesnižuje disciplína. Naopak. Člověk má jedno místo, kde najde rozhodnutí, a další dokumenty se nestanou konkurenčními zdroji pravdy.
+
+### 3. Rozlišujte standard, šablonu a příklad
+
+Mnoho týmů má přeplněnou dokumentaci proto, že všechno nazývá standardem. Standard má říkat pravidla práce. Šablona má pomoct vytvořit výstup. Příklad má ukázat kvalitu nebo hranici. Když se tyto tři věci smíchají, dokumenty jsou dlouhé a těžko se udržují.
+
+Použijte jednoduché třídění:
+
+- Standard: kdy se práce dělá, kdo ji vlastní, jaké jsou povinné kroky a hranice.
+- Šablona: prázdný pracovní formát, který člověk vyplní.
+- Příklad: vyplněná ukázka dobrého, slabého nebo hraničního výstupu.
+
+Při revizi si u každého dokumentu napište:
+
+```md
+Primární typ:
+Standard / šablona / příklad / kombinace
+
+Co má člověk po otevření udělat:
+
+Co by mělo být přesunuto jinam:
+```
+
+Kombinace není automaticky špatná. U malého týmu může být jeden krátký dokument praktičtější než tři oddělené soubory. Problém nastává ve chvíli, kdy člověk hledá šablonu a musí číst dlouhou teorii, nebo hledá pravidlo a najde jen vyplněný příklad bez rozhodovací hranice.
+
+### 4. Zaveďte kanonický index standardů
+
+Jakmile standardů přibude, tým potřebuje rozcestník. Ne knihovnu s krásnou strukturou složek. Rozcestník podle práce, kterou člověk právě řeší.
+
+Kanonický index může být krátký:
+
+```md
+# Index týmových standardů
+
+## Když připravuješ veřejnou změnu
+- Vydávací karta
+- Privacy-first brána změny
+- Veřejná poznámka k aktualizaci
+
+## Když předáváš práci nebo roli
+- Předávací karta role
+- Kontrola prvního samostatného cyklu
+- Lesson pack pro onboarding
+
+## Když řešíš provozní problém
+- Incidentní drill
+- Ruční fallback
+- Post-fallback review
+
+## Když měníš standard
+- Kontrola standardu po použití
+- Archivace nebo sloučení standardu
+- Portfoliová revize standardů
+```
+
+Index nemá opisovat obsah dokumentů. Má odpovědět na otázku "kam mám sáhnout teď". Pokud člověk potřebuje znát interní historii, changelog nebo důvod vzniku, najde ho až v konkrétním standardu.
+
+Codyho komentář: dobrý index standardů je jako mapa nářadí. Neříká, jak funguje šroubovák. Říká, ve které zásuvce je. Když musíte před každou prací číst celou příručku dílny, systém je moc těžký.
+
+### 5. Nastavte stavy standardů
+
+Bez stavů se dokumentace tváří, že všechno má stejnou váhu. To je nebezpečné. Starý draft vypadá stejně jako schválený postup. Experimentální šablona se začne používat jako pravidlo. Archivovaný dokument se vrátí do oběhu, protože ho někdo našel ve vyhledávání.
+
+Použijte jednoduché stavy:
+
+- Návrh: existuje pracovní verze, nepoužívat jako závazný postup.
+- Pilot: používá se v omezeném okně a sbírá se zpětná vazba.
+- Aktivní: platný standard pro danou situaci.
+- V revizi: standard platí, ale čeká ho úprava nebo sloučení.
+- Archiv: historický záznam, nepoužívat pro novou práci.
+- Nahrazeno: dokument zůstává kvůli historii, ale odkazuje na nový zdroj pravdy.
+
+Krátká hlavička standardu:
+
+```md
+Stav:
+Vlastník:
+Platí od:
+Další revize:
+Nahrazuje:
+Nahrazeno čím:
+```
+
+Tato hlavička je malá věc, ale šetří hodně nejistoty. Člověk hned ví, jestli má dokument použít, nebo jen pochopit historický kontext.
+
+### 6. Udělejte privacy-first sjednocení
+
+Portfoliová revize je dobrý okamžik na sjednocení datových pravidel. Ne proto, že každý standard musí mít identickou privacy sekci. Ale proto, že stejné typy práce nemají pokaždé vymýšlet jinou datovou logiku.
+
+Zkontrolujte:
+
+- kde standardy požadují stejné podklady;
+- kde vznikají dočasné exporty;
+- kde se opakují přístupy do nástrojů;
+- kde se liší pravidla pro mazání a archivaci;
+- kde se používají osobní nebo zákaznická data v příkladech;
+- kde standard odkazuje na nástroj, který už tým nechce používat;
+- kde chybí minimální pravidlo "nežádat data, která nepotřebujeme".
+
+Výstupem nemá být delší právní odstavec. Výstupem má být jednotná datová karta, na kterou mohou ostatní standardy odkazovat.
+
+```md
+## Datová karta pro týmové standardy
+
+Minimum dat:
+Zakázané zkratky:
+Povolená úložiště:
+Dočasné kopie:
+Retence:
+Anonymizace příkladů:
+Odpovědnost za úklid:
+Eskalace:
+```
+
+Když standard potřebuje výjimku z datové karty, musí ji pojmenovat. Skrytá výjimka je horší než přiznaná složitost.
+
+### 7. Vyberte jednu změnu po revizi
+
+Portfoliová revize snadno vyrobí dlouhý seznam práce. To je normální. Nebezpečné je pokusit se všechno opravit najednou. Tým pak stráví měsíc úklidem dokumentace a reálná práce stojí.
+
+Po revizi vyberte jednu změnu s největším dopadem:
+
+- sloučit dva standardy, které si konkurují;
+- archivovat dokument, který se stále plete do práce;
+- vytvořit kanonický index;
+- doplnit stavy a vlastníky;
+- sjednotit privacy-first datovou kartu;
+- zkrátit nejpoužívanější standard;
+- přidat chybějící příklad pro hraniční situaci.
+
+Šablona rozhodnutí:
+
+```md
+## Rozhodnutí po portfoliové revizi
+
+Datum:
+Rozsah revize:
+Počet standardů:
+
+Největší zmatek:
+Největší privacy-first riziko:
+Nejpoužívanější standard:
+Nejméně užitečný standard:
+
+Jedna změna do 7 dnů:
+Vlastník:
+
+Co vědomě odkládáme:
+Další revize:
+```
+
+Věta "co vědomě odkládáme" je důležitá. Chrání tým před pocitem, že nedokončený seznam znamená selhání. Neznamená. Znamená to, že revize vyrobila pořadí.
+
+### Checklist
+
+- Máte seznam všech aktivních standardů, šablon a příkladů?
+- Je u každého dokumentu jasné, kdy se používá?
+- Našli jste duplicity v rozhodnutích, ne jen podobné názvy?
+- Rozlišili jste standard, šablonu a příklad?
+- Existuje kanonický index podle pracovních situací?
+- Má každý standard stav, vlastníka a další revizi?
+- Jsou archivované nebo nahrazené dokumenty jasně označené?
+- Sjednotili jste základní privacy-first pravidla pro data, přístupy a úklid?
+- Vybrali jste jednu změnu, která se udělá do 7 dnů?
+- Ví tým, které dokumenty jsou zdroj pravdy pro novou práci?
+
+Portfoliová revize standardů je údržba operačního systému týmu. Nedělá práci za lidi, ale brání tomu, aby se dobré procesy proměnily v les odkazů, výjimek a starých verzí. Když člověk rychle najde správný standard, použije minimum potřebných dat a ví, co je aktuální, dokumentace konečně slouží práci místo toho, aby si říkala o vlastní péči.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -38694,3 +38934,4 @@ Kontrola po prvních použitích chrání tým před dvěma extrémy: chaosem be
 - 2026-05-11: Doplněna Příloha DX o kontrole rozšířeného vlastnictví po prvním cyklu: výstup, samostatnost, skrytý dohled, zákaznický dopad, privacy-first stopa a rozhodnutí o dalším stavu role.
 - 2026-05-11: Doplněna Příloha DY o převodu rozšířeného vlastnictví do týmového standardu: kdy standardizovat, co převést, šablona standardu, privacy-first brána, zavedení v reálném cyklu a checklist.
 - 2026-05-11: Doplněna Příloha DZ o kontrole týmového standardu po prvních použitích: signály použitelnosti, varovné signály, mini retro, kontrolní záznam, privacy-first datová stopa a rozhodnutí po kontrole.
+- 2026-05-11: Doplněna Příloha EA o portfoliové revizi týmových standardů: inventura, duplicity, kanonický index, stavy dokumentů, privacy-first sjednocení a výběr jedné změny po revizi.
