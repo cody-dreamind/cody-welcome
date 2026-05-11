@@ -34143,6 +34143,208 @@ To je zdravé rozhodnutí. Neoslavuje automatizaci jako vítězství samo o sob�
 
 Vyhodnocení pilotu je místo, kde se ukáže dospělost týmu. Ne podle toho, kolik věcí umí automatizovat, ale podle toho, kolik věcí dokáže nepustit do provozu bez důvodu. Dobrá automatizace má šetřit pozornost. Špatná ji jen přesune z ruční práce do skrytého dohledu.
 
+## Příloha DD: Standardizace automatizace po schválení trvalého provozu
+
+Schválená automatizace ještě není standard. Je to jen automatizace, která prošla rozhodnutím, že má smysl ji dál používat. Standard z ní vznikne teprve ve chvíli, kdy tým ví, jak ji provozovat, měnit, kontrolovat, vysvětlit novému člověku a bezpečně vypnout.
+
+Bez standardizace se dobrý pilot časem promění ve zvláštní rituál. Všichni vědí, že "něco běží", ale nikdo přesně neví, kde je spouštěč, co se loguje, kdo dostává chyby, co se stane při změně formuláře a jestli se původní privacy-first omezení pořád dodržují. Automatizace pak sice šetří pár minut, ale přidává provozní mlhu. A mlha je drahá, protože se v ní špatně rozhoduje.
+
+Cíl standardizace je jednoduchý: udělat z automatizace normální součást provozu, ne tajemnou zkratku vedle něj.
+
+Standardizace má čtyři vrstvy:
+
+1. Provozní karta: co automatizace dělá, proč existuje a kdo ji vlastní.
+2. Technická mapa: odkud kam tečou data, jaké systémy jsou zapojené a kde jsou hranice.
+3. Pracovní pravidla: kdy člověk zasahuje, co kontroluje a co se nesmí automatizovat.
+4. Revizní rytmus: jak často se ověřuje hodnota, kvalita, přístupy, logy a datová stopa.
+
+Když tyto vrstvy chybí, tým není rychlejší. Jen přesunul ruční práci do infrastruktury, kterou neumí pořádně držet.
+
+### Provozní karta jako zdroj pravdy
+
+Každá trvale používaná automatizace má mít jednu kartu. Ne prezentaci, ne román, ne komentář v náhodném skriptu. Jednu kartu, kterou najde nový člověk a během pěti minut pochopí, co se děje.
+
+Minimální pole:
+
+| Pole | Co zapsat |
+| --- | --- |
+| Název | Krátký název, kterému rozumí obchod, produkt i technický tým. |
+| Účel | Jakou ruční práci automatizace nahrazuje nebo zjednodušuje. |
+| Vlastník | Role nebo člověk odpovědný za kvalitu a revize. |
+| Spouštěč | Událost, která automatizaci spouští. |
+| Vstupy | Jaká data automatizace čte. |
+| Výstupy | Co automatizace vytvoří, změní nebo odešle. |
+| Lidská kontrola | Kdy je vyžadovaný ruční zásah. |
+| Systémy | Zapojené aplikace, API, webhooky nebo databáze. |
+| Přístupy | Použité účty, role a rozsah oprávnění. |
+| Logy | Co se ukládá pro dohledání běhu. |
+| Retence | Jak dlouho se drží výstupy a logy. |
+| Vypnutí | Jak automatizaci bezpečně zastavit. |
+| Review | Datum nebo spouštěč další kontroly. |
+
+Příklad provozní karty:
+
+| Pole | Obsah |
+| --- | --- |
+| Název | Předvyplnění kvalifikační karty leadu |
+| Účel | Převést kontaktní formulář do jednotné interní karty bez ručního přepisu |
+| Vlastník | Sales ops |
+| Spouštěč | Odeslání formuláře na stránce služby |
+| Vstupy | E-mail, firma, URL, popis potřeby, vybraný segment |
+| Výstupy | Interní karta ve stavu `ke kontrole` |
+| Lidská kontrola | Obchodník kontroluje kartu před prvním follow-upem |
+| Systémy | Webový formulář, interní CRM, notifikace v týmovém kanálu |
+| Přístupy | API token jen pro vytvoření karty, bez práva mazat nebo exportovat |
+| Logy | ID formuláře, čas, stav, chyba; bez ukládání textu zprávy |
+| Retence | Technické logy 30 dní, karta podle CRM pravidel |
+| Vypnutí | Vypnout webhook a posílat formulář na ruční frontu |
+| Review | Každý měsíc nebo při třech chybách za týden |
+
+Karta je provozní minimum. Když ji neumíte vyplnit, automatizace není připravená na trvalý provoz. Možná funguje. Ale funguje hlavně díky tomu, že si někdo pamatuje detaily. Paměť jednoho člověka není dokumentace, jen dočasně zapůjčený disk.
+
+### Technická mapa bez zbytečného divadla
+
+Automatizace nepotřebuje architektonický plakát přes celou zeď. Potřebuje čitelnou mapu toku:
+
+- spouštěč,
+- zdroj dat,
+- zpracování,
+- výstup,
+- log,
+- ruční kontrola,
+- chybová cesta,
+- možnost vypnutí.
+
+Pro jednoduchou automatizaci stačí textový zápis:
+
+`Formulář služby -> webhook -> validace polí -> vytvoření CRM karty -> notifikace obchodníkovi -> ruční kontrola -> první odpověď zákazníkovi`
+
+Chybová cesta:
+
+`Formulář služby -> webhook selže -> uložit technický stav bez obsahu zprávy -> poslat interní upozornění -> karta se vytvoří ručně podle e-mailové kopie formuláře`
+
+Privacy-first kontrola:
+
+`Žádný nový externí systém. Log neobsahuje text poptávky. API token nemá právo číst celý CRM export. Zákaznická odpověď není automatická.`
+
+Taková mapa je nudná správným způsobem. Říká týmu, kde hledat chybu, co se stane při výpadku a kde končí automatická část. U automatizací s osobními údaji nebo obchodně citlivým obsahem je hranice automatické části zásadní. Ne všechno, co lze technicky poslat dál, se má posílat dál.
+
+### Pravidla pro změny
+
+Největší riziko standardizované automatizace často nevznikne při spuštění. Vznikne o dva měsíce později, když někdo "jen přidá jedno pole", "jen přesměruje notifikaci" nebo "jen zapne nový export". Malá změna může rozbít kvalitu, datovou minimalizaci i odpovědnost.
+
+Proto má mít automatizace jednoduchá změnová pravidla.
+
+Změna bez review je povolená, pokud:
+
+- upravuje text interní notifikace bez změny dat,
+- opravuje překlep v názvu interního pole,
+- nemění spouštěč, vstupy, výstupy, dodavatele, přístupy ani retenci,
+- nezvyšuje zákaznický dopad.
+
+Krátké review je nutné, pokud:
+
+- přibývá nové pole z formuláře,
+- mění se mapování do CRM nebo produktového systému,
+- mění se chybová notifikace,
+- rozšiřuje se okruh lidí, kteří výstup vidí,
+- automatizace začne ovlivňovat další tým.
+
+Plné review je nutné, pokud:
+
+- přibývá nový nástroj nebo dodavatel,
+- data opouštějí původní prostředí,
+- mění se právní nebo privacy popis vůči zákazníkovi,
+- automatizace začne posílat zprávy zákazníkovi bez lidské kontroly,
+- mění se retence, export, mazání nebo rozsah oprávnění.
+
+Tato pravidla nejsou brzda. Jsou pojistka proti postupnému rozlézání automatizace. Když má tým jasné hranice, nemusí každou drobnou úpravu dramatizovat. A když změna hranici překročí, ví, že se má zastavit a podívat se na dopad.
+
+### Lidská kontrola není ostuda
+
+Dobře navržená automatizace nemusí být stoprocentně bez člověka. U obchodních, podpůrných, právních nebo zákaznicky citlivých procesů je lidská kontrola často nejlepší součást návrhu. Automatizace připraví strukturu, člověk udělá úsudek.
+
+Příklady rozumné lidské kontroly:
+
+- CRM karta vznikne automaticky, ale první odpověď píše člověk.
+- Support ticket dostane návrh kategorie, ale prioritu potvrzuje support.
+- Fakturační upozornění se připraví automaticky, ale nestandardní případ kontroluje finance.
+- Shrnutí rozhovoru vznikne automaticky, ale zákazníkovi se posílá až po editaci.
+- Lead scoring navrhne prioritu, ale obchodník může důvod přepsat.
+
+Špatný signál není to, že člověk kontroluje výstup. Špatný signál je, když člověk musí výstup pokaždé opravovat od nuly. Pak automatizace nešetří práci, jen vyrábí povinnost ověřovat něco, čemu nikdo nevěří.
+
+Codyho komentář: věta "tohle už celé pošleme automaticky" by měla v týmu spustit malou kontrolku. Někdy je to správně. Ale pokud jde o důvěru, peníze, osobní údaje nebo první dojem zákazníka, člověk v procesu není selhání. Je to pojistka proti tomu, aby rychlost předběhla soudnost.
+
+### Monitoring a signály únavy
+
+Automatizace se po standardizaci nesmí ztratit z radaru. Potřebuje pár jednoduchých signálů, které ukážou, jestli pořád pomáhá.
+
+Sledujte:
+
+- počet běhů za období,
+- počet chyb,
+- počet ručních zásahů,
+- počet výstupů vrácených k opravě,
+- čas do lidské kontroly,
+- změny vstupních dat,
+- počet nových výjimek,
+- stížnosti nebo nejasnosti od lidí, kteří výstup používají.
+
+Signály únavy:
+
+- lidé automatizaci obcházejí,
+- výstupy se přepisují ručně,
+- chyby se řeší v chatu, ale nezapisují do karty,
+- vlastník neví, kdy proběhlo poslední review,
+- nikdo nechce změnit formulář, protože "by se něco rozbilo",
+- logy jsou buď prázdné, nebo naopak ukládají zbytečně moc obsahu,
+- automatizace běží pro proces, který už není prioritní.
+
+U každého signálu si položte otázku: je problém v automatizaci, v procesu, ve vstupních datech, nebo v tom, že práce už nemá hodnotu? Ne každá únava se má řešit dalším skriptem. Někdy se má zrušit krok, zjednodušit formulář nebo vrátit rozhodnutí člověku.
+
+### Privacy-first provozní brána
+
+Při standardizaci zopakujte privacy-first kontrolu v provozním režimu. Pilot může být čistý, ale trvalý provoz přidává objem, rutinu a riziko zapomnění.
+
+Provozní otázky:
+
+- Je pořád pravda, že sbíráme jen data potřebná pro účel automatizace?
+- Nepřibyl nový příjemce dat?
+- Nepoužívá se osobní účet místo týmového nebo servisního účtu?
+- Jsou oprávnění omezena na minimum?
+- Mají logy jasnou retenci?
+- Umíme výstup dohledat, opravit a smazat?
+- Je v dokumentaci uvedené, co automatizace nedělá?
+- Je zákaznická komunikace pořád pravdivá vůči reálnému toku dat?
+
+Zvlášť důležitá je věta "co automatizace nedělá". Například:
+
+- neposílá automatickou odpověď zákazníkovi,
+- nepředává data do externího enrichment nástroje,
+- neukládá plný text zprávy do technického logu,
+- neexportuje CRM kontakty,
+- nerozhoduje o obchodní prioritě bez člověka.
+
+Tyto negativní hranice chrání tým před pozdějším rozšiřováním. Když je hranice zapsaná, změna je vidět. Když není zapsaná, rozšíření se tváří jako drobnost.
+
+### Checklist standardizace
+
+- Má automatizace jednu provozní kartu jako zdroj pravdy?
+- Je jasný účel, vlastník, spouštěč, vstup, výstup a rozsah?
+- Existuje jednoduchá technická mapa včetně chybové cesty?
+- Je popsaný postup vypnutí a návrat na ruční režim?
+- Jsou přístupy omezené na minimální potřebná oprávnění?
+- Logují se jen údaje nutné pro provozní dohledání?
+- Má automatizace pravidla pro malé, střední a zásadní změny?
+- Je jasné, kde zůstává lidská kontrola a proč?
+- Sledujete počet běhů, chyb, ručních zásahů a kvalitu výstupů?
+- Proběhla privacy-first provozní brána pro data, retenci, dodavatele a komunikaci?
+- Je zapsané nejen co automatizace dělá, ale i co vědomě nedělá?
+- Má automatizace další review podle data, objemu nebo chybového spouštěče?
+
+Standardizace není byrokracie, pokud chrání pozornost týmu. Dobrá automatizace má být jako dobře popsaný nástroj v dílně: každý ví, k čemu je, kdo ho spravuje, kdy ho použít a kdy ho raději nechat ležet. Jakmile se z ní stane černá skříňka, přestává být pomocníkem a začíná být dalším systémem, o který se někdo musí bát.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -34378,3 +34580,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha DA s automatizační mapou po review nabídky: třídění práce na odstranění, šablony, automatizace a ruční rozhodnutí, privacy-first brána, karta automatizace a stop pravidla.
 - 2026-05-10: Doplněna Příloha DB s pilotem jedné automatizace před trvalým provozem: výběr kandidáta, pilotní otázka, režimy testu, privacy-first kontrola, stop pravidla a rozhodnutí po pilotu.
 - 2026-05-10: Doplněna Příloha DC o vyhodnocení pilotu automatizace a rozhodnutí o trvalém provozu: hodnoticí okno, evidence, scorecard, privacy-first review, rozhodovací matice a karta automatizace.
+- 2026-05-11: Doplněna Příloha DD o standardizaci automatizace po schválení trvalého provozu: provozní karta, technická mapa, změnová pravidla, lidská kontrola, monitoring a privacy-first provozní brána.
