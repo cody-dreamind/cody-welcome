@@ -38365,6 +38365,166 @@ Můj pohled: standardizace se často kazí tím, že tým popisuje ideální sv�
 
 Týmový standard je hotový až ve chvíli, kdy pomáhá práci. Ne když je uložený. Ne když má krásný nadpis. Když podle něj další člověk dokáže udělat dobré rozhodnutí, udržet kvalitu a neudělat z dat volně poletující konfety.
 
+## Příloha DZ: Kontrola týmového standardu po prvních použitích
+
+Nový týmový standard má po prvních použitích jednu nepříjemnou vlastnost: začne ukazovat, kde byl dokument chytřejší než realita. To není chyba. To je přesně důvod, proč se standard nemá po sepsání uzamknout jako muzeální exponát. První reálné použití je test, jestli standard pomáhá člověku udělat práci lépe, rychleji a bezpečněji.
+
+Tato příloha navazuje na převod rozšířeného vlastnictví do týmového standardu. Použijte ji po dvou až třech reálných cyklech, ve kterých standard použil někdo jiný než jeho původní autor. Cílem není hledat viníka, když něco nefungovalo. Cílem je zjistit, zda je standard dost jasný, krátký, bezpečný a použitelný pro běžnou práci.
+
+První kontrola standardu má být malá. Jeden pracovní blok, konkrétní výstupy, pár rozhodnutí. Pokud se z ní stane velká revize celého procesu, tým pravděpodobně standardizoval moc brzy nebo moc široce.
+
+### Co kontrolovat
+
+Kontrola standardu není redakční korektura. Pravopis je hezký bonus, ale důležitější je, jestli podle standardu vznikl použitelný výstup. Sledujte reálnou práci, ne estetiku dokumentace.
+
+Zkontrolujte hlavně:
+
+- zda člověk věděl, kdy standard použít;
+- zda byly vstupy opravdu dostupné;
+- zda postup odpovídal skutečné posloupnosti práce;
+- zda rozhodovací pravidla pokryla běžné situace;
+- zda bylo jasné, kdy eskalovat;
+- zda kontrola kvality zachytila důležité chyby;
+- zda privacy-first část odpovídala reálným datům a nástrojům;
+- zda standard zkrátil komunikaci, nebo ji naopak nafoukl;
+- zda výstup obstál u zákazníka, týmu nebo provozu.
+
+Typická chyba je ptát se jen: "Použil jsi standard?" Lepší otázka je: "Kde ti standard pomohl a kde ses musel rozhodnout mimo něj?" První otázka vede k odškrtnutí kolonky. Druhá vede ke zlepšení systému.
+
+### Signály dobrého standardu
+
+Dobrý standard po prvních použitích obvykle nevypadá dokonale. Má pár doplněných poznámek, jeden nový příklad, možná zkrácený postup a zpřesněnou eskalaci. To je zdravé. Důležité je, že snižuje nejistotu a chrání kvalitu.
+
+Pozitivní signály:
+
+- nový nebo méně zkušený člověk dokázal udělat výstup bez dlouhého vysvětlování;
+- dotazy se přesunuly od "co mám dělat" k "tady je hraniční případ, platí pravidlo A nebo B";
+- výstupy jsou konzistentnější než před standardem;
+- tým méně zapomíná na kontrolní kroky;
+- rizikové situace se eskalují dřív;
+- datová stopa je menší, jasnější nebo lépe uklizená;
+- standard se dá přečíst těsně před prací a pořád dává smysl.
+
+Příklad: standard pro publikaci produktové změny říká, že každá změna musí mít veřejný popis, interní sales poznámku a privacy kontrolu. Po prvních dvou použitích tým zjistí, že u malých oprav není potřeba samostatná sales poznámka, ale stačí řádek v interním changelogu. To není selhání. To je zpřesnění hranice, aby standard nepřidával zbytečnou práci.
+
+### Varovné signály
+
+Standard je problém, pokud lidé sice tvrdí, že ho používají, ale skutečná práce běží bokem. Dokument pak nedrží kvalitu. Jen vytváří dojem kontroly. To je nejhorší kombinace: papírový klid a provozní chaos.
+
+Varovné signály:
+
+- lidé standard otevřou až po dokončení práce, aby si zpětně odškrtli splnění;
+- postup je tak dlouhý, že se z něj stala samostatná administrativa;
+- rozhodovací pravidla jsou obecná a nepomáhají v hraničních situacích;
+- každý výstup stejně vyžaduje zásah původního autora standardu;
+- standard obsahuje nástroje, přístupy nebo datové exporty, které už nejsou aktuální;
+- privacy-first kontrola je formální a nikdo neumí říct, jaká data se skutečně použila;
+- standard zvyšuje počet schůzek místo kvality rozhodnutí;
+- tým se bojí standard upravit, protože "už byl schválený".
+
+Když se objeví dva nebo tři tyto signály, nehledejte rychlejší disciplínu. Nejdřív zjednodušte standard. Dobrý pracovní návod má být opora, ne další projekt v přestrojení za proces.
+
+### Mini retro po prvních použitích
+
+Po dvou až třech použitích udělejte krátkou retrospektivu. Stačí třicet až čtyřicet pět minut. Přizvěte vlastníka standardu, člověka, který podle něj pracoval, a někoho, kdo přebíral výstup. Více lidí obvykle znamená více názorů, ne nutně lepší standard.
+
+Agenda:
+
+1. Vyberte jeden konkrétní cyklus práce, ne obecný dojem.
+2. Projděte vstupy: co chybělo, co bylo zbytečné a co přišlo pozdě.
+3. Projděte postup: kde člověk standard následoval a kde improvizoval.
+4. Projděte výstup: co bylo dobré, co se muselo opravit a co chybělo.
+5. Projděte privacy-first část: jaká data se použila, kde skončila a co se uklidilo.
+6. Rozhodněte jednu až tři změny standardu.
+7. Určete další kontrolní okamžik.
+
+Do retrospektivy nepatří osobní hodnocení výkonu. Pokud člověk udělal chybu, ptejte se, zda mu standard pomohl chybu zachytit. Pokud ne, je to systémová informace. Pokud ano a člověk ho ignoroval, je to jiný typ problému. Míchat tyto dvě věci dohromady je výborný způsob, jak z lidí dostat ticho místo pravdy.
+
+### Šablona kontrolního záznamu
+
+Kontrolní záznam držte krátký. Má umožnit další úpravu standardu, ne založit paralelní dokumentaci k dokumentaci.
+
+```md
+## Kontrola standardu: [název]
+
+Datum:
+Kontrolovaný cyklus:
+Standard použil:
+Výstup přebíral:
+
+### Co fungovalo
+- [Konkrétní část standardu, která pomohla.]
+
+### Kde standard nestačil
+- [Situace, kterou nepokryl.]
+
+### Kde byl standard zbytečně těžký
+- [Krok, kontrola nebo vstup, který nepřidal hodnotu.]
+
+### Privacy-first kontrola
+- Použitá data:
+- Nové nebo změněné přístupy:
+- Data k odstranění/anonymizaci:
+- Nejasnosti:
+
+### Změny standardu
+1. [Konkrétní úprava.]
+2. [Konkrétní úprava.]
+
+### Rozhodnutí
+- Ponechat beze změny / upravit / zjednodušit / sloučit / zrušit:
+- Další kontrola:
+```
+
+Tento záznam má smysl jen tehdy, když vede ke změně standardu nebo k vědomému rozhodnutí nic neměnit. Záznam bez rozhodnutí je jen provozní deníček. Milé čtení na dlouhé zimní večery, ale proces to nezlepší.
+
+### Privacy-first kontrola po použití
+
+Standard může na papíře vypadat privacy-first a přesto v praxi vytvářet zbytečnou datovou stopu. První použití často ukáže, že lidé exportují víc dat, než potřebují, sdílejí odkazy moc široce nebo si vytvářejí pracovní kopie bez jasného mazání.
+
+Po prvních použitích se zeptejte:
+
+- Stačila pro práci menší sada dat?
+- Vznikly dočasné exporty, screenshoty, tabulky nebo kopie?
+- Jsou dočasná data po dokončení smazaná nebo anonymizovaná?
+- Nepřibyl neformální kanál, kde se sdílejí zákaznické informace?
+- Mají přístup jen lidé, kteří ho potřebují pro danou roli?
+- Obsahují příklady ve standardu anonymizovaná data?
+- Je jasné, kdo odpovídá za úklid datové stopy po každém cyklu?
+
+Pokud standard vyžaduje export celé zákaznické tabulky kvůli jedné kontrole, není privacy-first. Je pohodlný. Pohodlí není automaticky špatné, ale když stojí na zbytečných datech, časem se změní v riziko.
+
+### Rozhodnutí po kontrole
+
+Po první kontrole neexistuje jen možnost "standard schválit". Prakticky máte pět rozhodnutí:
+
+- Ponechat: standard funguje, stačí další běžná revize.
+- Zpřesnit: doplnit rozhodovací pravidlo, příklad nebo hranici eskalace.
+- Zjednodušit: odstranit kroky, které nepřidávají hodnotu.
+- Sloučit: spojit s existujícím standardem, protože vznikla duplicita.
+- Zrušit: standard byl předčasný nebo popisuje práci, která se neopakuje.
+
+Nejčastější dobré rozhodnutí je zpřesnit a zjednodušit zároveň. Tedy přidat konkrétní pravidlo pro hraniční situaci a odstranit obecný odstavec, který nikdo nepoužil. Standard pak není delší. Je ostřejší.
+
+### Codyho komentář
+
+Můj pohled: týmové standardy se mají chovat jako dobré nástroje v dílně. Když je používáte, rychle poznáte, jestli sedí v ruce. Pokud je nástroj moc těžký, moc křehký nebo ho všichni obcházejí, nepomůže cedulka "povinné". Pomůže úprava nástroje. U procesů je to stejné, jen se u toho víc píše do tabulek.
+
+### Checklist
+
+- Proběhla kontrola po dvou až třech reálných použitích standardu?
+- Standard použil někdo jiný než jeho původní autor?
+- Kontrolovali jste konkrétní cyklus práce, ne obecné dojmy?
+- Je jasné, kde standard pomohl a kde člověk improvizoval?
+- Zpřesnili jste vstupy, výstupy nebo rozhodovací pravidla podle reality?
+- Odstranili jste kroky, které nepřidaly hodnotu?
+- Ověřili jste datovou stopu, přístupy, dočasné exporty a úklid dat?
+- Přibyly anonymizované příklady pro hraniční situace?
+- Padlo rozhodnutí: ponechat, zpřesnit, zjednodušit, sloučit nebo zrušit?
+- Má standard další kontrolní okamžik?
+
+Kontrola po prvních použitích chrání tým před dvěma extrémy: chaosem bez pravidel a pravidly bez života. Dobrý standard není tvrdý proto, že se nesmí změnit. Je silný proto, že se umí měnit podle skutečné práce a pořád drží kvalitu, odpovědnost a kontrolu nad daty.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -38533,3 +38693,4 @@ Týmový standard je hotový až ve chvíli, kdy pomáhá práci. Ne když je ul
 - 2026-05-11: Doplněna Příloha DW o rozšíření vlastnictví role po prvních samostatných cyklech: důkazy, sousední oblast, pracovní kontrakt, ochranné signály, první rozšířený cyklus a privacy-first kontrola.
 - 2026-05-11: Doplněna Příloha DX o kontrole rozšířeného vlastnictví po prvním cyklu: výstup, samostatnost, skrytý dohled, zákaznický dopad, privacy-first stopa a rozhodnutí o dalším stavu role.
 - 2026-05-11: Doplněna Příloha DY o převodu rozšířeného vlastnictví do týmového standardu: kdy standardizovat, co převést, šablona standardu, privacy-first brána, zavedení v reálném cyklu a checklist.
+- 2026-05-11: Doplněna Příloha DZ o kontrole týmového standardu po prvních použitích: signály použitelnosti, varovné signály, mini retro, kontrolní záznam, privacy-first datová stopa a rozhodnutí po kontrole.
