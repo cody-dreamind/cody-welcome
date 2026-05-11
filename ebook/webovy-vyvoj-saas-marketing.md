@@ -37072,6 +37072,183 @@ Tím se onboarding nestává statickým dokumentem. Stává se provozním nástr
 
 Onboarding není hotový dokument. Je to první test toho, jestli tým umí předat svůj způsob práce bez šeptané historie a skrytých zkratek. Když nový člověk podle materiálů zvládne udělat dobré rozhodnutí, onboarding funguje. Když potřebuje tajný výklad zkušeného kolegy, máte skvělou příležitost napsat další lepší lekci. Ano, zase práce. Ale tentokrát práce, která se vrací.
 
+## Příloha DT: Revize lesson packu po prvním měsíci samostatné práce
+
+Kontrola onboardingu ukáže, jestli nový člověk pochopil základní rozhodnutí. První měsíc samostatné práce ukáže něco důležitějšího: jestli lesson pack obstojí bez ochranné sítě. V reálném provozu už nejsou úkoly učebnicově čisté. Přijde nejasný lead, starý zákaznický kontext, chybějící datová mapa, výjimka v procesu, slabý brief, rychlý launch nebo požadavek na nový nástroj. A právě tam se pozná, jestli onboarding předal principy, nebo jen seznam odkazů.
+
+Tato příloha pomáhá po prvním měsíci samostatné práce zrevidovat lesson pack pro roli. Cíl není hodnotit člověka jako ve škole. Cíl je zjistit, které lekce skutečně pomohly, které se minuly s realitou a kde tým pořád spoléhá na ústní tradici. Pokud lesson pack po měsíci upravíte podle skutečné práce, začne být živým nástrojem místo uvítacího balíčku, který si člověk jednou otevře a pak už nikdy.
+
+### 1. Oddělte výkon člověka od kvality systému
+
+První měsíc nového člověka je citlivý. Snadno se stane, že každý zádrhel bude vypadat jako chyba jednotlivce. Někdy to tak je. Často ale člověk jen narazil na nejasné pravidlo, chybějící příklad, skrytý proces nebo dokument, který existuje, ale nedá se najít.
+
+Při revizi rozlišujte tři typy problému:
+
+- Dovednost: člověk ještě neumí něco, co role vyžaduje.
+- Kontext: člověk nerozumí firemnímu nebo zákaznickému pozadí.
+- Systém: lesson pack, checklist, šablona nebo runbook mu nedal dostatečnou oporu.
+
+Příklad:
+
+```text
+Situace: Nový člověk v marketingu nechal v návrhu landing page telefon jako povinné pole.
+Možná dovednost: neumí rozlišit kvalifikaci leadu a první kontakt.
+Možný kontext: nevěděl, že sales telefon používá až po prvním e-mailu.
+Možný systém: lesson pack neobsahoval příklad zkrácení formuláře a dopad do datové mapy.
+Rozhodnutí: doplnit praktický scénář do lesson packu, ne jen říct "příště na to mysli".
+```
+
+Tento rozdíl je důležitý. Když systémový problém označíte jako slabinu člověka, nezlepšíte onboarding. Jen přidáte opatrnost a další neformální vysvětlování bokem.
+
+### 2. Sbírejte důkazy z reálné práce
+
+Revize lesson packu nemá stát na pocitu. Vezměte několik reálných situací z prvního měsíce a podívejte se, kde lesson pack pomohl nebo selhal. Nepotřebujete velkou analýzu. Stačí deset až patnáct konkrétních momentů.
+
+Hledejte hlavně:
+
+- úkoly, které člověk zvládl bez pomoci,
+- úkoly, kde potřeboval doplňující výklad,
+- místa, kde použil špatný dokument nebo starou šablonu,
+- situace, kde se ptal na pravidlo, které mělo být v lesson packu,
+- rozhodnutí, která udělal správně díky konkrétní lekci,
+- případy, kde pravidlo pochopil, ale chyběl mu příklad,
+- privacy-first rozhodnutí, kde si nebyl jistý účelem, retencí nebo přístupem k datům.
+
+Krátká šablona záznamu:
+
+```text
+Situace:
+Role:
+Jaký artefakt člověk použil:
+Co mu pomohlo:
+Co musel dohledat nebo se doptat:
+Byla potřeba ruční podpora:
+Privacy-first dopad:
+Změna lesson packu:
+```
+
+Pokud takový záznam nejde vyplnit, pravděpodobně hodnotíte dojem, ne provozní skutečnost. Dojem může být užitečný začátek, ale nemá sám rozhodovat o úpravě standardu.
+
+### 3. Najděte chybějící rozhodovací situace
+
+Lesson pack má obsahovat situace, ve kterých člověk potřebuje jednat správně bez dlouhého čekání na zkušenějšího kolegu. Po měsíci už bývá vidět, které situace v balíčku chyběly.
+
+Typické mezery:
+
+- Marketing má lekci o obsahu, ale ne o tom, kdy odmítnout nový tracker.
+- Sales má kvalifikační otázky, ale ne hranici, kdy lead není dobrý fit.
+- Engineering má release checklist, ale ne příklad bezpečného exportu zákaznických dat.
+- Support má eskalační pravidlo, ale ne anonymizovanou ukázku správného předání problému.
+- Operations má registr nástrojů, ale ne rozhodnutí, kdy dočasný export smazat.
+
+Pro každou mezeru napište jednu rozhodovací kartu:
+
+```text
+Název situace:
+Kdy nastává:
+Jaké rozhodnutí má člověk udělat:
+Jaký artefakt má použít:
+Jak vypadá dobrý výstup:
+Co je častá chyba:
+Privacy-first hranice:
+```
+
+Karta nemusí být dlouhá. Má být použitelná. Jeden dobrý příklad často naučí víc než stránka pravidel.
+
+### 4. Zkraťte části, které nikdo nepoužil
+
+Revize není jen doplňování. Je to i škrtání. Pokud lesson pack po měsíci bobtná, bude se používat hůř. Nový člověk nepotřebuje archiv všech možných pravd. Potřebuje balíček, který mu pomůže při prvních reálných rozhodnutích.
+
+Zvažte odstranění nebo přesun, když část:
+
+- nikdo při práci neotevřel,
+- vysvětluje historii místo současného pravidla,
+- duplikuje jiný checklist,
+- nevede k žádnému rozhodnutí,
+- obsahuje příliš mnoho interního kontextu pro nováčka,
+- míchá veřejné a citlivé informace,
+- je užitečná jen pro jednu výjimečnou situaci.
+
+Přesun není selhání. Některé věci patří do rozšířené znalostní báze, ne do prvního lesson packu. Balíček pro první měsíc má být ostrý, ne kompletní. Kompletní dokumenty často vypadají zodpovědně, ale v praxi se hůř používají. To je taková ta firemní varianta: "Máme to zdokumentované, jen to nikdo neumí najít." Výborně, papír vyhrál nad člověkem.
+
+### 5. Upravte lesson pack podle rolí, ne podle oddělení
+
+Oddělení není vždy nejlepší jednotka pro onboarding. Dva lidé v marketingu mohou dělat úplně jiná rozhodnutí. Jeden píše obsah, druhý spravuje kampaně, třetí řeší webové formuláře a měření. Stejný lesson pack pro všechny pak buď zahlcuje, nebo vynechá důležité situace.
+
+Po prvním měsíci se ptejte:
+
+- Jaké rozhodnutí člověk dělal opakovaně?
+- Které části lesson packu byly pro jeho práci okrajové?
+- Chyběl balíček pro konkrétní situaci místo celé role?
+- Má člověk dost praktických příkladů pro práci s daty?
+- Má samostatný vstup pro privacy-first rozhodnutí, nebo je soukromí schované v obecném dokumentu?
+
+Příklad lepšího rozdělení:
+
+- Marketing obecně: hlas značky, obsahové pilíře, distribuční pravidla.
+- Landing page editor: formuláře, CTA, měření, datová mapa, přístupnost.
+- Obsahový autor: zdroje, citace, aktualizace, interní a veřejné informace.
+- Campaign owner: UTM pravidla, retence dat, schvalování nástrojů, stop pravidla.
+
+Menší balíčky se lépe udržují. A člověk má menší šanci přehlédnout část, která se ho skutečně týká.
+
+### 6. Doplněné lekce hned otestujte na jednom úkolu
+
+Úprava lesson packu není hotová uložením dokumentu. Hotová je až po prvním použití. Vyberte jeden malý úkol, kde se doplněná lekce projeví, a ověřte, že podle ní člověk dokáže pracovat bez dalšího výkladu.
+
+Příklady testu:
+
+- Nová marketingová lekce: zrevidovat jeden formulář a označit zbytečná pole.
+- Nová sales lekce: vyplnit kvalifikační kartu pro hraniční lead.
+- Nová engineering lekce: projít scénář exportu s kontrolou tenant hranice.
+- Nová support lekce: přepsat citlivý zákaznický příklad do anonymizované eskalace.
+- Nová operations lekce: doplnit nový nástroj do registru včetně dat, přístupů a exit plánu.
+
+Záznam z testu:
+
+```text
+Nová nebo upravená lekce:
+Testovací úkol:
+Výsledek:
+Co bylo jasné:
+Co pořád drhlo:
+Je potřeba další úprava:
+Datum další revize:
+```
+
+Tento test držte malý. Pokud se z něj stane další velký audit, tým ho přestane dělat. Cílem je rychle zjistit, jestli změna pomohla.
+
+### 7. Privacy-first kontrola po prvním měsíci
+
+První měsíc samostatné práce často vytvoří nové datové stopy: poznámky, exporty, testovací tabulky, ukázkové screenshoty, kopie leadů, lokální soubory, pracovní dokumenty. To je normální. Nebezpečné je, když o nich po měsíci nikdo neví.
+
+Privacy-first kontrola:
+
+- Vznikly dočasné exporty nebo kopie dat?
+- Mají vlastníka a datum smazání?
+- Obsahují onboardingové příklady osobní nebo zákaznické údaje, které lze anonymizovat?
+- Nepřibylo nové pole ve formuláři bez jasného účelu?
+- Nepoužil člověk neschválený nástroj jen proto, že byl pohodlný?
+- Ví, kde se evidují nové datové toky?
+- Umí vysvětlit, proč se konkrétní data sbírají a kdy se mažou?
+
+Tato kontrola není nedůvěra k novému člověku. Je to ochrana systému. Když tým učí privacy-first provoz jen v teorii a nekontroluje první reálné návyky, začne se soukromí rozpadat v malých pohodlných výjimkách.
+
+### 8. Checklist přílohy
+
+- Rozlišili jsme dovednost člověka, chybějící kontext a chybu systému?
+- Vybrali jsme konkrétní situace z prvního měsíce, ne jen obecné dojmy?
+- Víme, které lekce člověku opravdu pomohly při rozhodnutí?
+- Našli jsme rozhodovací situace, které v lesson packu chyběly?
+- Doplnili jsme praktické příklady tam, kde samotné pravidlo nestačilo?
+- Zkrátili jsme nebo přesunuli části, které nikdo nepoužil?
+- Upravili jsme balíček podle reálné role nebo situace, ne jen podle oddělení?
+- Otestovali jsme změnu na jednom malém reálném úkolu?
+- Zkontrolovali jsme dočasné exporty, poznámky, screenshoty a kopie dat z prvního měsíce?
+- Má lesson pack vlastníka, datum další revize a jasný vztah k týmové paměti?
+
+Lesson pack po prvním měsíci nemá být delší za každou cenu. Má být přesnější. Když odstraníte nepoužité části, doplníte chybějící rozhodovací situace a ověříte privacy-first návyky na reálné práci, onboarding začne dělat to nejdůležitější: převádět zkušenost týmu do samostatného, odpovědného rozhodování.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -37323,3 +37500,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DQ o triage týmové paměti: stavy lekcí, slučování vzorů, převod do zdroje pravdy, privacy-first kontrola a checklist.
 - 2026-05-11: Doplněna Příloha DR o převodu schválených lekcí do onboardingu a revizí: publikum lekcí, pracovní artefakty, lesson packy, malé dávky změn, ověření použití a privacy-first kontrola.
 - 2026-05-11: Doplněna Příloha DS o kontrole účinnosti onboardingu po zavedení lekcí: rozhodovací scénáře, kontrolní okamžiky, skrytá ruční podpora, privacy-first datové toky, scorecard a smyčka zpět do týmové paměti.
+- 2026-05-11: Doplněna Příloha DT o revizi lesson packu po prvním měsíci samostatné práce: oddělení výkonu člověka od kvality systému, důkazy z reálné práce, chybějící rozhodovací situace, zkrácení balíčku, úpravy podle role a privacy-first kontrola prvních návyků.
