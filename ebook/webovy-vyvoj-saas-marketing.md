@@ -37473,6 +37473,203 @@ Takový backlog pomáhá držet růst role v práci, ne v obecných slibech. "Zl
 
 Přechod z onboardingu do samostatnosti je bod, kde se ukáže zralost týmu. Slabý tým nechá člověka "nějak plavat" nebo ho drží v nekonečné kontrole. Silnější tým předá vlastnictví postupně, s jasnými hranicemi a výstupními kritérii. Výsledek je klidnější provoz: méně čekání, méně překvapení, méně zbytečných dat a víc práce, kterou jde svěřit bez drama manuálu.
 
+## Příloha DV: První review samostatné role po předání vlastnictví
+
+Předání role nekončí tím, že člověk dostane vlastní oblast a tým mu popřeje hodně štěstí. Skutečná kontrola přichází po prvním samostatném cyklu. Teprve tehdy je vidět, jestli hranice samostatnosti fungují, jestli výstupy splňují standard, jestli se správně eskaluje a jestli role nezískala skrytou ruční podporu, o které nikdo nemluví.
+
+Tato příloha navazuje na přechod z onboardingu do dlouhodobé samostatnosti. Pomáhá udělat první review po předání vlastnictví tak, aby z něj nevznikl osobní pohovor plný dojmů, ale praktické rozhodnutí: rozšířit samostatnost, nechat ji beze změny, zpřesnit mantinely, doplnit oporu, nebo část vlastnictví vrátit do dočasné kontroly.
+
+### 1. Hodnoťte konkrétní cyklus, ne obecný pocit
+
+Review má vycházet z jedné dokončené pracovní smyčky. Ne z toho, jestli člověk "působí samostatně". Pocit je užitečný signál, ale špatný podklad pro rozhodnutí. Vyberte cyklus, který měl jasný výsledek, hranice rozsahu a alespoň jeden dopad na web, produkt, zákazníka, provoz nebo interní systém.
+
+Příklady vhodných cyklů:
+
+- publikovaná landing page včetně formuláře a měření,
+- menší release od úkolu po changelog,
+- týden supportu se štítkováním a návrhem dokumentační změny,
+- vyhodnocení jedné kampaně a převod zjištění do backlogu,
+- kontrola jednoho dodavatele včetně datové stopy a exit plánu.
+
+Šablona vstupu:
+
+```text
+Role:
+Samostatný cyklus:
+Výsledek:
+Datum začátku a konce:
+Co bylo v rozsahu:
+Co bylo mimo rozsah:
+Které rozhodnutí člověk udělal sám:
+Které rozhodnutí eskaloval:
+Které artefakty změnil:
+Kde vznikla datová stopa:
+```
+
+Bez takového vstupu review snadno sklouzne k osobnosti. "Bylo to dobré" nebo "bylo to trochu nejisté" není provozní informace. "Člověk správně eskaloval nové pole ve formuláři, ale nezapsal změnu měření do datové mapy" je informace, se kterou jde pracovat.
+
+### 2. Rozdělte výsledek na práci, rozhodnutí a provozní stopu
+
+U prvního review nestačí zkontrolovat, jestli byl úkol hotový. Samostatnost role má tři vrstvy:
+
+- Práce: výstup existuje a splňuje definici hotovo.
+- Rozhodnutí: člověk správně rozlišil, co může rozhodnout, co má nechat zkontrolovat a co musí eskalovat.
+- Provozní stopa: změna nezanechala chaos v datech, přístupech, dokumentaci, měření nebo komunikaci.
+
+Příklad pro landing page:
+
+```text
+Práce:
+- stránka má jasný slib, důkaz, CTA a použitelný formulář,
+- texty odpovídají nabídce,
+- stránka je propojená interními odkazy.
+
+Rozhodnutí:
+- člověk sám upravil copy a strukturu sekcí,
+- nechal zkontrolovat změnu hlavního CTA,
+- správně eskaloval otázku nového formulářového pole.
+
+Provozní stopa:
+- měřicí event je popsaný,
+- formulář sbírá jen nutná data,
+- datová mapa je aktualizovaná,
+- starý interní odkaz nepřivádí lidi na neaktuální slib.
+```
+
+Tento rozklad chrání tým před falešným úspěchem. Stránka může vypadat hotově, ale pokud kvůli ní vznikne nový tracker, zbytečné pole ve formuláři a nikdo neví, kdo sleduje kvalitu leadů, samostatnost ještě není zdravá.
+
+### 3. Najděte skrytou pomoc a zbytečné čekání
+
+První samostatný cyklus často ukáže dva typy tření. První je skrytá pomoc: člověk sice úkol dokončil, ale jen díky neplánovaným zprávám, ad hoc kontrolám, ručnímu dohledávání kontextu nebo zásahu někoho seniorního. Druhý je zbytečné čekání: člověk měl prostor rozhodnout sám, ale čekal na potvrzení, protože mantinely nebyly dost jasné.
+
+Při review se zeptejte:
+
+- Kolikrát musel člověk hledat kontext mimo dohodnuté artefakty?
+- Které otázky nebyly pokryté checklistem, lesson packem nebo definicí hotovo?
+- Kde čekal na kontrolu, která nebyla nutná?
+- Kde naopak provedl změnu, kterou měl nejdřív eskalovat?
+- Kdo dělal neviditelnou práci, aby cyklus dopadl dobře?
+
+Skrytá pomoc není důvod někoho shodit. Je to signál, že systém předání ještě není hotový. Pokud se stejná otázka řešila třikrát bokem, nemá zůstat v hlavě seniora. Patří do checklistu, runbooku, šablony nebo hranic eskalace.
+
+Codyho komentář: dobré review není hledání viníka s tabulkou v ruce. Je to hledání míst, kde systém předstírá, že je samostatnější, než je. To je nepohodlné, ale užitečné. Firemní dospělost je mimo jiné schopnost říct: "Tady jsme člověku předali práci, ale nepředali jsme mu rozhodovací kontext."
+
+### 4. Udělejte privacy-first kontrolu reálné stopy
+
+Samostatnost bez privacy-first návyků je riziko. Proto review neřeší jen kvalitu výstupu, ale i datovou stopu, která při práci vznikla. Ne obecně. Na konkrétním cyklu.
+
+Kontrolujte:
+
+- Jaká osobní, zákaznická nebo interní data se použila.
+- Jestli byla nutná pro daný účel.
+- Kde vznikly dočasné kopie, exporty, screenshoty nebo pracovní poznámky.
+- Kdo k nim měl přístup.
+- Jestli se změnil formulář, analytika, logování, CRM pole nebo reporting.
+- Jestli je změna zapsaná ve správném zdroji pravdy.
+- Kdy se dočasná data smažou nebo anonymizují.
+
+Šablona privacy review:
+
+```text
+Cyklus:
+Datová stopa:
+Účel:
+Byla data nezbytná?
+Kdo měl přístup:
+Kde jsou uložena:
+Retence nebo datum smazání:
+Změna v datové mapě:
+Co příště sbírat méně:
+```
+
+Příklad:
+
+```text
+Cyklus: týden supportu
+Datová stopa: tři screenshoty zákaznického nastavení, export seznamu tiketů
+Účel: reprodukce chyby a štítkování opakovaných problémů
+Byla data nezbytná? screenshoty ano, export šel zúžit
+Kdo měl přístup: support a engineering lead
+Kde jsou uložena: interní ticket systém, dočasná složka
+Retence: screenshoty smazat po uzavření bugfixu, export do 7 dnů
+Změna v datové mapě: žádná změna produktu, doplnit supportní postup
+Co příště sbírat méně: exportovat jen anonymizované ID a kategorii problému
+```
+
+Privacy-first tady není brzda. Je to způsob, jak zabránit tomu, aby každý nový samostatný pracovní cyklus vyráběl malé datové skládky.
+
+### 5. Rozhodněte o dalším stavu role
+
+Review musí skončit rozhodnutím. Jinak je to jen příjemný rozhovor s poznámkami, které za týden nikdo nenajde.
+
+Použijte pět možných stavů:
+
+- Rozšířit samostatnost: člověk zvládl cyklus, správně rozhodoval a stopa je čistá.
+- Ponechat beze změny: výsledek je dobrý, ale potřebujete ještě jeden cyklus pro jistotu.
+- Zpřesnit mantinely: největší problém byly nejasné hranice rozhodování.
+- Doplnit oporu: chybí příklad, checklist, přístup, kontext nebo znalostní artefakt.
+- Dočasně vrátit kontrolu: dopad byl příliš rizikový nebo se opakovaly zásadní chyby.
+
+Rozhodovací karta:
+
+```text
+Role:
+Cyklus:
+Výsledek review:
+Stav role:
+Co se mění v samostatnosti:
+Co se mění v artefaktech:
+Kdo vlastní úpravu:
+Další kontrola:
+Ochranný signál:
+```
+
+Příklad:
+
+```text
+Role: marketing specialist
+Cyklus: landing page pro nový audit
+Výsledek review: výstup kvalitní, ale chyběla aktualizace datové mapy a měřicího eventu
+Stav role: zpřesnit mantinely
+Co se mění v samostatnosti: změny měření a formulářů vždy před publikací kontroluje growth lead
+Co se mění v artefaktech: do checklistu landing page přidat datovou mapu a event naming
+Kdo vlastní úpravu: growth lead
+Další kontrola: po další publikované landing page
+Ochranný signál: žádné nové pole ani event bez popsaného účelu
+```
+
+Důležité je rozhodnout malou změnu, ne přepsat celou roli. První review nemá být reorganizace. Má odstranit jedno největší tření, které brání zdravé samostatnosti.
+
+### 6. Přepište systém, ne jen člověka
+
+Když review najde problém, ptejte se nejdřív, kde se má změnit systém. Člověk samozřejmě nese odpovědnost za práci, ale opakované nejasnosti obvykle ukazují slabý artefakt: chybějící šablonu, neaktuální checklist, nejasnou definici hotovo, starý runbook, špatné oprávnění nebo skrytý zdroj pravdy.
+
+Typické převody:
+
+- Otázka se opakovala: doplnit FAQ nebo rozhodovací příklad.
+- Chyběla kontrola před publikací: upravit checklist.
+- Člověk čekal na zbytečné schválení: rozšířit hranici samostatného rozhodnutí.
+- Vznikl zbytečný export: upravit postup práce s daty.
+- Senior zachránil výstup bokem: zapsat chybějící pravidlo do lesson packu.
+- Zákazník dostal nejasnou odpověď: doplnit supportní šablonu nebo eskalační pravidlo.
+
+Tím se review vrací zpět do týmové paměti. Ne jako další složka plná poznámek, ale jako jedna konkrétní úprava zdroje pravdy.
+
+### 7. Checklist přílohy
+
+- Vybrali jsme jeden konkrétní samostatný cyklus, ne obecný pocit z role?
+- Má cyklus jasný výsledek, rozsah, rozhodnutí a změněné artefakty?
+- Oddělili jsme kvalitu práce, kvalitu rozhodování a provozní stopu?
+- Našli jsme skrytou pomoc, která nemá zůstat bokem?
+- Našli jsme zbytečné čekání způsobené nejasnými mantinely?
+- Zkontrolovali jsme reálnou datovou stopu včetně exportů, screenshotů, měření a formulářů?
+- Rozhodli jsme o jednom z pěti stavů role: rozšířit, ponechat, zpřesnit, doplnit oporu, nebo dočasně vrátit kontrolu?
+- Zapsali jsme, co se mění v samostatnosti a co v artefaktech?
+- Má úprava vlastníka a datum další kontroly?
+- Vrací se poučení do checklistu, lesson packu, runbooku nebo týmové paměti?
+
+První review samostatné role má jednoduchý cíl: proměnit předání práce v opakovatelný provoz. Když review skončí jen pochvalou nebo výtkou, systém se moc nenaučil. Když skončí zpřesněním hranic, úpravou artefaktu, čistší datovou stopou a jasným dalším cyklem, role se stává opravdu samostatnější. A tým získává víc než jednoho zaučeného člověka: získává lepší způsob předávání odpovědnosti.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -37726,3 +37923,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DS o kontrole účinnosti onboardingu po zavedení lekcí: rozhodovací scénáře, kontrolní okamžiky, skrytá ruční podpora, privacy-first datové toky, scorecard a smyčka zpět do týmové paměti.
 - 2026-05-11: Doplněna Příloha DT o revizi lesson packu po prvním měsíci samostatné práce: oddělení výkonu člověka od kvality systému, důkazy z reálné práce, chybějící rozhodovací situace, zkrácení balíčku, úpravy podle role a privacy-first kontrola prvních návyků.
 - 2026-05-11: Doplněna Příloha DU o přechodu z onboardingu do dlouhodobé samostatnosti role: mapa vlastnictví, hranice eskalace, kontrola výstupů, první samostatný cyklus, privacy-first návyky a rozvojový backlog.
+- 2026-05-11: Doplněna Příloha DV o prvním review samostatné role po předání vlastnictví: konkrétní cyklus, rozhodnutí, skrytá pomoc, privacy-first stopa, stav role a převod poučení do systému.
