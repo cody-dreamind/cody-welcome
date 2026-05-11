@@ -35014,6 +35014,234 @@ Pokud po návratu neumíte říct, co se během fallbacku stalo, nouzový režim
 
 Ruční fallback není porážka automatizace. Je to důkaz, že tým rozumí vlastnímu provozu i bez ní. Když umíte kritický tok na chvíli převzít ručně, máte lepší proces, lepší dokumentaci a menší závislost na nástrojích. Automatizace pak není berlička pro nepochopený systém, ale zrychlení něčeho, co tým umí vysvětlit.
 
+## Příloha DI: Návrat z fallbacku do běžného provozu
+
+Fallback je užitečný jen tehdy, když z něj umíte bezpečně odejít. Nouzový režim má chránit službu, zákazníka a data během problému. Nemá se stát novým neoficiálním procesem, který běží vedle normálního systému ještě tři měsíce, protože "v té tabulce se nám to teď vlastně docela hodí".
+
+Návrat z fallbacku je samostatná práce. Nestačí říct, že nástroj už zase funguje. Je potřeba ověřit, že hlavní tok je spolehlivý, ruční položky jsou uzavřené, dočasná data uklizená, tým ví, co platí, a příčina výpadku se promítla do lepšího procesu. Jinak fallback jen přesune chaos z incidentu do běžného provozu.
+
+Dobře zvládnutý návrat má pět cílů:
+
+1. Obnovit hlavní proces bez skrytých duplicit.
+2. Doplnit nebo označit vše, co se během fallbacku vyřídilo ručně.
+3. Uklidit dočasná data, přístupy a pracovní seznamy.
+4. Zapsat poučení do dokumentace, monitoringu nebo automatizace.
+5. Dát týmu jasný signál, že nouzový režim skončil.
+
+### Nejprve ověřte stabilitu, ne jen dostupnost
+
+Zelená kontrolka neznamená, že je proces připravený. Služba může odpovídat, ale pořád posílat špatné e-maily, neukládat metadata, duplikovat záznamy nebo selhávat v méně častém scénáři. Proto návrat začíná ověřením celého toku, ne jen technickým pingem.
+
+U webového formuláře nestačí otevřít stránku. Otestujte:
+
+- odeslání běžné poptávky,
+- validaci chybného e-mailu,
+- potvrzení pro návštěvníka,
+- doručení interní notifikace,
+- vytvoření záznamu v CRM nebo jiném zdroji pravdy,
+- souhlas a privacy texty, pokud jsou součástí toku,
+- stav bez zbytečných marketingových přihlášení.
+
+U SaaS funkce otestujte aspoň běžný scénář, hraniční scénář a zakázaný scénář. Pokud fallback řešil export dat, nestačí ověřit jeden export administrátorem. Ověřte také uživatele bez oprávnění, prázdná data, větší objem a způsob předání výsledku.
+
+Codyho komentář: návrat z fallbacku je přesně místo, kde se vyplatí být nudný. Nudný checklist je lepší než sebevědomé "už to jede", po kterém se za dva dny zjistí, že polovina ručních zásahů zůstala mimo systém. Hrdinství si necháme na horší sporty.
+
+### Uzavřete vstup do nouzového režimu
+
+Jakmile je hlavní tok ověřený, zastavte příjem nových položek do fallbacku. To musí být explicitní. Pokud část týmu dál zapisuje do tabulky a část už pracuje v CRM, vznikne nejhorší kombinace: dva zdroje pravdy a žádný skutečný zdroj pravdy.
+
+Praktický postup:
+
+1. Označte přesný čas ukončení fallbacku.
+2. Informujte tým, že nové položky se odteď přijímají jen hlavním procesem.
+3. Zamkněte nebo označte dočasný seznam jako uzavřený.
+4. Nechte jednu odpovědnou osobu dořešit přenos a úklid.
+5. U delšího fallbacku udělejte krátké překryvné okno, kdy se kontrolují oba systémy, ale nové položky už vznikají jen v jednom.
+
+Příklad oznámení týmu:
+
+```text
+Fallback pro webové poptávky končí dnes v 14:30.
+Nové poptávky od 14:30 řešíme už jen přes CRM.
+Dočasnou tabulku zamykám pro nové položky a do konce dne doplním ručně vyřízené kontakty.
+Pokud najdete novou položku mimo CRM, neposílejte ji do chatu, označte mě v incident kartě.
+```
+
+Krátké a konkrétní. Žádná porada kvůli oznámení, žádný román v interním kanálu.
+
+### Sloučení dat bez výroby nového nepořádku
+
+Po fallbacku bývá pokušení přenést do hlavního systému všechno. To není vždy správně. Do zdroje pravdy patří jen data, která mají účel a mají tam být i za normálního provozu. Nouzové poznámky, duplicitní řádky, technické komentáře a dočasné interní zkratky se nemají stát trvalou historií zákazníka.
+
+U každé položky z fallbacku rozhodněte:
+
+- Přenést: položka je stále relevantní a patří do hlavního systému.
+- Označit jako vyřízené ručně: kvůli historii stačí minimální záznam.
+- Sloučit: existuje duplicitní položka v hlavním systému.
+- Nepřenášet: položka byla testovací, chybná nebo bez dalšího účelu.
+- Smazat po kontrole: dočasný údaj už není potřeba.
+
+Do hlavního systému doplňujte hlavně:
+
+- identifikátor zákazníka nebo kontaktu,
+- datum a období fallbacku,
+- výsledek ručního kroku,
+- odpovědnou osobu,
+- další krok, pokud existuje,
+- poznámku, že položka prošla fallbackem.
+
+Nepřenášejte všechno, co se během stresu napsalo do poznámky. Interní úvahy typu "asi VIP, rychle řešit" nebo "divný požadavek" mohou být užitečné v okamžiku triage, ale nemusí patřit do dlouhodobého zákaznického záznamu. Zdroj pravdy má být přesný, ne ukecaný.
+
+### Privacy-first úklid po fallbacku
+
+Největší riziko po fallbacku je zbytková datová stopa. Během nouzového režimu vznikají dočasné tabulky, exporty, screenshoty, pracovní seznamy, ruční e-maily a kopie souborů. Pokud se po obnově provozu neuklidí, stane se z nich tichý compliance dluh.
+
+Privacy-first úklid:
+
+- Najděte všechny dočasné seznamy, exporty a soubory vytvořené kvůli fallbacku.
+- U každého určete účel: přenést, archivovat podle pravidel, nebo smazat.
+- Smažte lokální kopie, které už nemají účel.
+- Zrušte dočasné přístupy, pokud byly vytvořené.
+- Zkontrolujte sdílení dokumentů a odkazů.
+- U citlivějších dat zapište, kdo s nimi během fallbacku pracoval.
+- Aktualizujte datovou mapu, pokud fallback odhalil nový tok nebo nové riziko.
+
+Příklad: během výpadku CRM vznikla dočasná tabulka s poptávkami. Po obnově se relevantní kontakty doplní do CRM, uzavřené testovací řádky se smažou, tabulka se exportuje jen tehdy, pokud existuje jasný archivační důvod, a sdílení se zruší. Pokud žádný důvod není, tabulka se smaže. "Pro jistotu si ji necháme" není účel. To je začátek digitální půdy.
+
+### Kontrola zákaznického dopadu
+
+Fallback může technicky proběhnout správně a přesto zanechat špatný dojem. Někdo čekal déle na odpověď. Někdo dostal ruční export místo samoobslužného. Někdo viděl dočasnou poznámku na webu. Návrat do normálu má proto zahrnout kontrolu zákaznického dopadu.
+
+Zeptejte se:
+
+- Kdo byl fallbackem zasažen?
+- Kdo čekal déle než obvykle?
+- Kdo dostal náhradní výstup nebo ruční odpověď?
+- Je potřeba poslat stručné dovysvětlení?
+- Má support připravenou odpověď, pokud se zákazník zeptá?
+- Nezůstala někde veřejná informace o omezení, která už neplatí?
+
+U menšího výpadku stačí interní kontrola. U významnějšího dopadu je lepší poslat krátkou věcnou zprávu, bez dramatické omáčky:
+
+```text
+Dobrý den,
+váš požadavek jsme během krátkého výpadku zpracovali ručně a nyní je už propsaný v našem běžném systému.
+Na vaší straně není potřeba nic dělat.
+```
+
+Pokud došlo k riziku pro data, bezpečnost nebo smluvní závazky, řeší se to podle incidentního procesu, ne jako běžná servisní poznámka. Fallback karta nemá nahrazovat incident response. Má na něj navazovat.
+
+### Poučení převeďte do změny
+
+Po fallbacku je tým často rád, že problém skončil, a chce se vrátit k práci. To je pochopitelné. Ale právě teď je nejlevnější chvíle zlepšit systém, protože bolest je čerstvá a konkrétní.
+
+Krátké review by mělo odpovědět:
+
+- Co spustilo fallback?
+- Bylo spuštění dost rychlé?
+- Věděl tým, kdo rozhoduje?
+- Byl ruční postup jasný?
+- Kde vznikly duplicity nebo nejistota?
+- Která data se kopírovala zbytečně?
+- Co chybělo v monitoringu?
+- Co změnit v hlavním procesu?
+- Co změnit ve fallback kartě?
+
+Výstupem nemá být dlouhý zápis. Výstupem mají být jedna až tři konkrétní změny. Například:
+
+- přidat monitoring doručení formulářových e-mailů,
+- zkrátit fallback kartu a doplnit zakázané zkratky,
+- upravit CRM integraci tak, aby selhání vytvořilo viditelnou frontu,
+- doplnit test exportu dat pro uživatele bez oprávnění,
+- vytvořit šablonu krátkého oznámení týmu.
+
+Když review nevytvoří žádnou změnu, pravděpodobně šlo jen o ventilaci. Ta má taky lidskou hodnotu, ale systém neopraví.
+
+### Rozhodnutí: obnovit, upravit, nebo nahradit
+
+Ne každý návrat musí skončit úplnou obnovou původního procesu. Fallback může ukázat, že původní automatizace byla křehká, zbytečně složitá nebo špatně navržená. Někdy je správné obnovit ji beze změny. Jindy upravit. A občas ji raději nahradit jednodušším tokem.
+
+Použijte jednoduchou matici:
+
+```text
+Obnovit:
+Příčina byla jasná, opravená, testy prošly a proces dává dál smysl.
+
+Upravit:
+Proces funguje, ale fallback odhalil slabé místo v monitoringu, dokumentaci, oprávněních nebo datovém toku.
+
+Nahradit:
+Proces je opakovaně nespolehlivý, sbírá zbytečná data, závisí na nevhodném dodavateli nebo tým neumí vysvětlit jeho výstupy.
+
+Zastavit:
+Proces není potřeba, jeho hodnota je nízká a údržba převyšuje přínos.
+```
+
+Toto rozhodnutí je zvlášť důležité u automatizací. Pokud se automatizace po každém menším problému obchází ručně a nikdo jí nevěří, není to automatizace. Je to drahý generátor podezření.
+
+### Šablona návratové karty
+
+Pro opakované použití si držte jednoduchou návratovou kartu. Navazuje na fallback kartu, ale soustředí se na uzavření.
+
+```text
+Tok:
+Období fallbacku:
+Kdo ukončení schválil:
+Čas zastavení nových položek ve fallbacku:
+
+Ověřené scénáře:
+- běžný:
+- hraniční:
+- zakázaný/chybový:
+
+Položky během fallbacku:
+Celkem:
+Přeneseno do zdroje pravdy:
+Sloučeno jako duplicita:
+Vyřízeno ručně:
+Smazáno jako dočasné/testovací:
+
+Dočasná data:
+Kde vznikla:
+Co bylo smazáno:
+Co bylo archivováno a proč:
+Kdo zrušil dočasné přístupy:
+
+Zákaznický dopad:
+Zasažené skupiny:
+Nutná komunikace:
+Hotovo kdy:
+
+Poučení:
+Změna hlavního procesu:
+Změna fallback karty:
+Změna monitoringu nebo testů:
+
+Rozhodnutí:
+Obnovit / upravit / nahradit / zastavit
+Vlastník další změny:
+Termín:
+```
+
+Karta vypadá formálně, ale šetří čas. Při dalším incidentu už tým neřeší, co se má po fallbacku uklidit. Jen vyplní konkrétní odpovědi.
+
+### Checklist přílohy
+
+- Ověřili jste celý hlavní tok, ne jen dostupnost nástroje?
+- Je jasný přesný čas ukončení fallbacku?
+- Vznikají nové položky už jen ve zdroji pravdy?
+- Je dočasný seznam zamčený nebo označený jako uzavřený?
+- Rozhodli jste u každé položky, zda přenést, sloučit, označit, nepřenášet nebo smazat?
+- Přenášíte jen data, která mají trvalý účel?
+- Uklidili jste dočasné tabulky, exporty, screenshoty a lokální kopie?
+- Zrušili jste dočasná oprávnění a sdílené odkazy?
+- Zkontrolovali jste zákaznický dopad a případnou komunikaci?
+- Zapsali jste jednu až tři konkrétní změny do procesu, monitoringu nebo fallback karty?
+- Rozhodli jste, zda původní proces obnovit, upravit, nahradit nebo zastavit?
+- Má další změna vlastníka a termín?
+
+Návrat z fallbacku je závěrečná zkouška provozní dospělosti. Nejde o to, že se nic nerozbije. Rozbije se toho dost, weby a aplikace nejsou porcelán ve vitríně. Jde o to, jestli po problému zůstane čistší systém, lepší karta, menší datová stopa a tým, který ví, co příště udělá rychleji.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -35254,3 +35482,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DF o revizi automatizace po změně procesu: spouštěče revize, mapa předpokladů, test starých i nových scénářů, kontrola oprávnění, rozhodovací pravidla a checklist.
 - 2026-05-11: Doplněna Příloha DG o vypnutí nebo nahrazení automatizace bez chaosu: mapa dopadu, náhradní režim, privacy-first úklid dat, vypínací plán, komunikace týmu a checklist.
 - 2026-05-11: Doplněna Příloha DH o ručním fallbacku pro web, SaaS a marketing: spouštěče, fallback karta, náhradní režimy pro poptávky, support a distribuci, privacy-first pravidla a návrat do normálu.
+- 2026-05-11: Doplněna Příloha DI o návratu z fallbacku do běžného provozu: ověření stability, uzavření nouzového režimu, sloučení dat, privacy-first úklid, kontrola zákaznického dopadu a rozhodnutí, zda proces obnovit, upravit, nahradit nebo zastavit.
