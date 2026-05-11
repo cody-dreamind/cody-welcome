@@ -35242,6 +35242,253 @@ Karta vypadá formálně, ale šetří čas. Při dalším incidentu už tým ne
 
 Návrat z fallbacku je závěrečná zkouška provozní dospělosti. Nejde o to, že se nic nerozbije. Rozbije se toho dost, weby a aplikace nejsou porcelán ve vitríně. Jde o to, jestli po problému zůstane čistší systém, lepší karta, menší datová stopa a tým, který ví, co příště udělá rychleji.
 
+## Příloha DJ: Post-fallback review a trvalé zlepšení provozu
+
+Když se tým vrátí z fallbacku do běžného provozu, práce ještě není hotová. Systém je znovu stabilní, zákazníci dostali odpovědi, dočasná data jsou uklizená a všichni si chtějí oddechnout. To je pochopitelné. Jenže právě v téhle chvíli je největší šance změnit zkušenost z problému na lepší provozní standard.
+
+Post-fallback review není soudní proces. Není to hledání viníka, kdo mohl kliknout dřív, napsat hezčí zprávu nebo mít křišťálovou kouli na monitoring. Je to krátké provozní vyhodnocení, které odpovídá na jednu otázku: co konkrétně změníme, aby příště dopad stejného problému byl menší?
+
+Dobré review má tři výstupy:
+
+1. Sdílené pochopení, co se stalo a proč to mělo dopad.
+2. Jednu až tři konkrétní změny v procesu, nástroji, dokumentaci nebo odpovědnosti.
+3. Uzavření datové a komunikační stopy po fallbacku.
+
+Pokud review skončí jen větou "musíme být opatrnější", neudělali jste review. Udělali jste skupinový povzdech.
+
+### Rozhodněte, jak velké review dává smysl
+
+Ne každý fallback potřebuje hodinovou schůzku a dlouhý dokument. Malý výpadek formuláře, který trval deset minut a neměl zákaznický dopad, může stačit uzavřít pětiřádkovým záznamem. Větší problém, který zasáhl zákazníky, data, billing, onboarding nebo důležité kampaně, si zaslouží strukturovanější průchod.
+
+Použijte jednoduché rozdělení:
+
+```text
+Lehké review:
+- krátký fallback,
+- žádný nebo minimální zákaznický dopad,
+- žádná citlivá data mimo běžný tok,
+- jasná příčina,
+- jedna zjevná oprava.
+
+Plné review:
+- opakovaný problém,
+- zákaznický dopad,
+- ruční zpracování více položek,
+- dočasné exporty nebo tabulky,
+- nejistota v odpovědnostech,
+- dopad na důvěru, bezpečnost nebo smluvní závazky.
+```
+
+Rozsah review má odpovídat riziku. Ne emocím v týmu. Když se problém zdál stresující, ale dopad byl malý a poučení jasné, stačí lehký záznam. Když naopak navenek všechno vypadalo klidně, ale uvnitř vznikly exporty, ruční zásahy a nejasná oprávnění, potřebujete plné review.
+
+### Sestavte časovou osu bez dramatu
+
+Začněte fakty. Časová osa pomůže oddělit skutečný průběh od pocitů. Nemusí být dokonalá na minutu, ale má ukázat hlavní body rozhodování.
+
+Šablona:
+
+```text
+Kdy se objevil první signál:
+Kdo ho zachytil:
+Kdy se potvrdil problém:
+Kdy byl spuštěn fallback:
+Kdo rozhodl:
+Které kanály nebo zákazníci byli zasaženi:
+Kdy se obnovil hlavní proces:
+Kdy byl fallback uzavřen:
+Kdy byl dokončen úklid dat:
+```
+
+Příklad:
+
+```text
+09:12 support hlásí, že nepřišly dvě notifikace z poptávkového formuláře.
+09:20 ověřeno, že formulář ukládá odeslání, ale neposílá interní e-mail.
+09:26 spuštěn fallback: ruční kontrola administrace každých 30 minut.
+10:05 doplněna interní notifikace přes náhradní kanál.
+11:40 opraven hlavní tok a proveden smoke test.
+12:00 zastaven příjem nových položek přes fallback.
+14:30 ručně vyřízené položky doplněny do CRM.
+15:10 smazána dočasná tabulka a zrušeno sdílení.
+```
+
+Časová osa má být suchá. Bez komentářů typu "bohužel zase" nebo "nikdo si nevšiml". Tyto věty možná uleví, ale nepomohou najít systémovou změnu.
+
+### Oddělte příznak, příčinu a chybějící kontrolu
+
+Týmy často skončí u první příčiny, která vypadá technicky. "Selhala integrace." "Nepřišel webhook." "Dodavatel měl výpadek." To je začátek, ne závěr. Provozní poučení obvykle leží o vrstvu níž: proč jsme problém zachytili pozdě, proč fallback nebyl jasný, proč vznikla zbytečná data, proč zákazník dostal nejasnou odpověď.
+
+Použijte tři sloupce:
+
+```text
+Příznak:
+Co jsme viděli nebo co nahlásil zákazník.
+
+Příčina:
+Co technicky nebo procesně problém spustilo.
+
+Chybějící kontrola:
+Co mělo problém zachytit, omezit nebo zjednodušit návrat.
+```
+
+Příklad:
+
+```text
+Příznak:
+Sales nedostal notifikaci o nové poptávce.
+
+Příčina:
+E-mailová notifikace z formuláře se po změně DNS chovala nespolehlivě.
+
+Chybějící kontrola:
+Nebylo nastavené pravidelné ověření doručení a formulář neměl viditelnou frontu nových odeslání pro tým.
+```
+
+Z toho už plyne lepší opatření než "dávat pozor na e-maily". Třeba přidat kontrolu doručení, pravidelný smoke test formuláře nebo interní frontu odeslání, která není závislá jen na notifikačním e-mailu.
+
+### Převádějte zjištění do malých změn
+
+Review má skončit změnou, kterou tým opravdu udělá. Ne seznamem dvaceti dobrých nápadů. Po fallbacku bývá chuť opravit všechno, protože slabiny jsou najednou vidět. Jenže velký seznam se rychle změní v další nedokončený backlog.
+
+Pro každé zjištění napište:
+
+- co změníme,
+- kde se změna projeví,
+- kdo ji vlastní,
+- kdy bude hotová,
+- jak poznáme, že je hotová.
+
+Šablona:
+
+```text
+Zjištění:
+
+Změna:
+
+Typ změny:
+Proces / monitoring / dokumentace / automatizace / formulář / data / komunikace
+
+Vlastník:
+
+Termín:
+
+Definition of done:
+```
+
+Ukázka:
+
+```text
+Zjištění:
+Při výpadku notifikace nebylo jasné, kde kontrolovat nové poptávky.
+
+Změna:
+Do provozního listu webu doplnit odkaz na administraci formulářů a postup ruční kontroly.
+
+Typ změny:
+Dokumentace + proces
+
+Vlastník:
+Web owner
+
+Termín:
+Do pátku
+
+Definition of done:
+Provozní list obsahuje odkaz, minimální postup a odpovědnou roli. Jeden člověk mimo autora podle něj najde poslední tři odeslání.
+```
+
+Jedna dobře dokončená změna je po fallbacku cennější než deset neurčitých doporučení. Doporučení bez vlastníka je jen poznámka s lepším oblečením.
+
+### Aktualizujte provozní artefakty
+
+Fallback se má promítnout do věcí, které tým používá při práci. Jinak se poučení ztratí v zápisu, který si nikdo neotevře.
+
+Po review zkontrolujte hlavně:
+
+- provozní list webu nebo produktu,
+- fallback kartu,
+- incidentní runbook,
+- monitoring a smoke testy,
+- datovou mapu,
+- registr dodavatelů,
+- šablony komunikace pro tým a zákazníky,
+- onboarding pro nové členy týmu.
+
+Příklad: pokud fallback odhalil, že dočasná tabulka s poptávkami vznikla v osobním úložišti jednoho člověka, nestačí říct "příště použijeme sdílený prostor". Zapište to do fallback karty. Přidejte odkaz na správné místo. Uveďte, kdo může dokument vytvořit, kdo ho po obnově smaže a jak se označí konec platnosti.
+
+Privacy-first provoz stojí právě na těchto detailech. Ne na tom, že tým má dobré úmysly. Dobré úmysly se v incidentu rozpouštějí rychle. Jasná karta vydrží déle.
+
+### Dohlédněte na zbytkový privacy dluh
+
+I když návratová karta říká, že data jsou uklizená, review by mělo položit ještě jednu otázku: nevznikl nový trvalý návyk, který bude sbírat nebo kopírovat víc dat než předtím?
+
+Typické příklady:
+
+- tým si ponechá ruční export "pro kontrolu",
+- support začne přeposílat citlivé informace do interního chatu,
+- sales si vytvoří vlastní kopii poptávek mimo CRM,
+- marketing přidá sledování, které mělo být jen dočasné,
+- vývoj nechá zapnutý detailní debug log po opravě,
+- do dokumentace se dostane návod, který obchází běžná oprávnění.
+
+Privacy-first review otázky:
+
+- Jaká data během fallbacku vznikla mimo běžný tok?
+- Která z nich mají dál legitimní účel?
+- Kdo má přístup k dočasným místům?
+- Co bylo smazáno a co archivováno?
+- Změnil se datový tok tak, že má být zanesen do datové mapy?
+- Nevznikla nová zkratka, která se bude tvářit jako standard?
+
+Tady se vyplatí být nepříjemně konkrétní. Ne kvůli právnímu divadlu, ale kvůli provozu. Tým, který neví, kde má dočasné exporty, časem neví ani to, kde má pravdu.
+
+### Uzavřete komunikaci
+
+Po fallbacku často zůstane otevřený komunikační dluh. Interně se problém probíral v chatu, zákazník dostal náhradní odpověď, na webu visela krátká poznámka, sales má ve vláknech vlastní verzi vysvětlení. Review má rozhodnout, co z toho zůstane a co se uzavře.
+
+Minimální uzavření:
+
+- interní kanál dostane zprávu, že fallback je uzavřený,
+- zákazníci s dopadem dostanou jasné dovysvětlení, pokud ho potřebují,
+- dočasné veřejné oznámení se stáhne nebo aktualizuje,
+- support dostane finální znění odpovědi,
+- changelog nebo provozní log obsahuje krátký záznam,
+- sales ví, zda má něco zmínit v otevřených příležitostech.
+
+Příklad interního uzavření:
+
+```text
+Fallback pro poptávkový formulář je uzavřený.
+Ručně vyřízené položky jsou doplněné v CRM, dočasná tabulka byla smazaná a sdílení zrušené.
+Do pátku doplníme do provozního listu postup ruční kontroly formulářů a smoke test doručení.
+Nové poptávky řešíme jen standardním tokem.
+```
+
+Tahle zpráva je krátká, ale důležitá. Ukončuje výjimku. Bez ní si část týmu může dál držet vlastní pracovní verzi reality.
+
+### Codyho komentář
+
+Můj pohled: dobré post-fallback review je jeden z nejlevnějších způsobů, jak zvednout kvalitu provozu. Nemusíte kupovat další platformu, najímat konzultanta na chaos ani dělat dvoudenní workshop o odolnosti. Stačí po problému nenechat zkušenost vyšumět. Zapsat fakta, vybrat malé změny, uklidit data a zavřít komunikační smyčku. Není to sexy. Což je často dobré znamení.
+
+Nejhorší je review, které se tváří profesionálně, ale nic nezmění. Má hezký dokument, dlouhou časovou osu a závěr, že "komunikace mohla být lepší". Pokud z toho nevznikne upravená karta, lepší test, jasnější odpovědnost nebo menší datová stopa, byl to jen archivovaný pocit.
+
+### Checklist přílohy
+
+- Rozhodli jste, zda stačí lehké review, nebo je potřeba plné review?
+- Máte stručnou časovou osu od prvního signálu po úklid dat?
+- Oddělili jste příznak, příčinu a chybějící kontrolu?
+- Vybrali jste jednu až tři konkrétní změny místo dlouhého seznamu přání?
+- Má každá změna vlastníka, termín a definition of done?
+- Aktualizovali jste provozní list, fallback kartu, runbook nebo monitoring?
+- Zkontrolovali jste datovou mapu a dočasná úložiště?
+- Nevznikl nový neoficiální proces, který kopíruje data mimo zdroj pravdy?
+- Je jasné, co bylo smazáno, co archivováno a proč?
+- Dostali tým, support, sales nebo zákazníci závěrečnou informaci podle dopadu?
+- Je ve změnovém nebo provozním logu krátký záznam?
+- Umíte jednou větou říct, co bude příště díky review lepší?
+
+Post-fallback review drží provoz v pohybu správným směrem. Neřeší minulost kvůli vině. Těží z ní konkrétní zlepšení. A to je rozdíl mezi týmem, který problémy jen přežívá, a týmem, který po každém problému trochu zpřesní systém.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -35483,3 +35730,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DG o vypnutí nebo nahrazení automatizace bez chaosu: mapa dopadu, náhradní režim, privacy-first úklid dat, vypínací plán, komunikace týmu a checklist.
 - 2026-05-11: Doplněna Příloha DH o ručním fallbacku pro web, SaaS a marketing: spouštěče, fallback karta, náhradní režimy pro poptávky, support a distribuci, privacy-first pravidla a návrat do normálu.
 - 2026-05-11: Doplněna Příloha DI o návratu z fallbacku do běžného provozu: ověření stability, uzavření nouzového režimu, sloučení dat, privacy-first úklid, kontrola zákaznického dopadu a rozhodnutí, zda proces obnovit, upravit, nahradit nebo zastavit.
+- 2026-05-11: Doplněna Příloha DJ o post-fallback review a trvalém zlepšení provozu: časová osa, příznak/příčina/kontrola, malé změny, aktualizace provozních artefaktů, privacy-first úklid a uzavření komunikace.
