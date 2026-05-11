@@ -36700,6 +36700,209 @@ Pokud lekce obsahuje citlivý detail, neznamená to, že ji musíte zahodit. Zna
 
 Triage týmové paměti je malý provozní návyk. Nepotřebuje složitý nástroj. Potřebuje disciplínu zavírat otevřené poznatky. Jakmile lekce dostane stav, rozhodnutí a cestu do zdroje pravdy, přestává být poznámkou a začíná být zlepšením.
 
+## Příloha DR: Převod schválených lekcí do onboardingu a revizí
+
+Triage týmové paměti rozhodne, které lekce mají hodnotu. Další krok je důležitější: dostat tyto lekce do míst, kde ovlivní chování lidí. Pokud schválená lekce zůstane jen v knihovně poznatků, tým si může gratulovat k dobré evidenci, ale provoz se nezmění. Lekce musí skončit v onboardingu, pravidelných revizích, šablonách a praktických kontrolách.
+
+Tato příloha je most mezi "víme, co jsme se naučili" a "pracujeme podle toho". Pomáhá rozhodnout, která lekce patří do prvního týdne nového člověka, která do měsíčního review, která do checklistu před spuštěním a která jen do archivu.
+
+### 1. Rozlišujte, komu má lekce změnit práci
+
+Ne každá lekce je pro celý tým. Některá patří vývojáři, jiná člověku v marketingu, jiná supportu, obchodníkovi nebo provozní roli. Když všechno pošlete všem, lidé přestanou rozlišovat, co se jich týká. Lepší je u každé schválené lekce určit jedno hlavní publikum a jedno místo dopadu.
+
+Praktické otázky:
+
+- Kdo podle této lekce musí příště jednat jinak?
+- Kdy se s touto situací potká?
+- Jaký dokument, obrazovku nebo checklist v tu chvíli otevře?
+- Má lekci vidět už při onboardingu, nebo stačí při pravidelném review?
+- Je lekce provozní, produktová, marketingová, bezpečnostní, obchodní nebo privacy-first?
+
+Příklad:
+
+```text
+Lekce: Poptávkový formulář sbíral pole, která obchod v prvním hovoru nepoužíval.
+Hlavní publikum: marketing a sales
+Místo dopadu: checklist pro landing page a revize formulářů
+Onboarding: ano, pro marketingovou roli
+Review: měsíční review lead kvality
+Privacy-first dopad: zkrácení datové stopy a snížení tření pro návštěvníka
+```
+
+Takový zápis je praktický, protože rovnou říká, kde se má změna projevit. Tým nemusí přemýšlet, jestli je lekce zajímavá. Musí poznat, kde se podle ní změní práce.
+
+### 2. Vytvořte mapu lekce na pracovní artefakt
+
+Schválená lekce má mít adresu. Bez adresy se z ní stane poznámka "měli bychom". Adresa znamená konkrétní artefakt: onboardingová stránka, checklist, runbook, šablona, provozní karta, datová mapa, sales karta, QA scénář nebo měsíční agenda.
+
+Mapa dopadu:
+
+```text
+Lekce:
+Hlavní rozhodnutí:
+Pracovní artefakt, který se mění:
+Konkrétní změna:
+Kdo artefakt vlastní:
+Kdo změnu zkontroluje:
+Kdy se změna poprvé použije:
+Jak poznáme, že je změna pochopitelná:
+```
+
+Příklad pro SaaS:
+
+```text
+Lekce: Tenant hranice byly popsány v architektuře, ale ne v QA scénářích exportu.
+Hlavní rozhodnutí: Každý export musí mít test izolace tenantů.
+Pracovní artefakt, který se mění: QA checklist pro releasy
+Konkrétní změna: Přidat test "tenant A nevidí export tenant B" pro UI, API i background job.
+Kdo artefakt vlastní: engineering lead
+Kdo změnu zkontroluje: QA nebo druhý vývojář
+Kdy se změna poprvé použije: při dalším releasu exportu
+Jak poznáme, že je změna pochopitelná: nový člověk umí test provést bez vysvětlování bokem
+```
+
+Codyho komentář: pokud lekci neumíte připojit ke konkrétnímu artefaktu, pravděpodobně ještě není připravená k zavedení. Možná je to jen zajímavý postřeh. To nevadí, ale nemá se tvářit jako provozní pravidlo.
+
+### 3. Onboarding má učit vzory, ne historii firmy
+
+Noví lidé nepotřebují znát všechny staré příběhy. Potřebují pochopit vzory rozhodování. Proto do onboardingu nepatří dlouhý archiv lekcí, ale malý výběr těch, které vysvětlují, jak tým pracuje.
+
+Dobrá onboardingová lekce má ukázat:
+
+- typickou situaci,
+- chybu nebo tření, které se už objevilo,
+- pravidlo, které z toho vzniklo,
+- aktuální standard nebo šablonu,
+- jeden krátký úkol, na kterém si nový člověk pravidlo vyzkouší.
+
+Příklad onboardingového bloku pro marketing:
+
+```text
+Téma: Formuláře a minimalizace dat
+Lekce: Delší formulář nezlepšil kvalifikaci leadů, jen snížil počet dokončených poptávek a přidal zbytečná pole do CRM.
+Aktuální pravidlo: První formulář sbírá jen údaje potřebné pro kvalifikovanou odpověď.
+Úkol: Projdi jednu landing page a označ pole, která nejsou potřeba pro první reakci.
+Výstup: návrh zkrácení formuláře a dopad do datové mapy.
+```
+
+Takový blok učí postoj i praxi. Nový člověk nečte pravidlo izolovaně. Vidí, proč existuje, kde se používá a jak ho ověřit.
+
+### 4. Revize mají ověřit, jestli lekce pořád platí
+
+Lekce může být správná v době, kdy vznikla, a slabá o půl roku později. Změní se produkt, trh, tým, zákaznický segment, nástroje nebo provozní rytmus. Proto musí mít vybrané lekce revizní cyklus. Ne všechny. Jen ty, které ovlivňují pravidelné rozhodování nebo práci s daty.
+
+Lekci dejte do revize, když:
+
+- mění standard používaný každý týden,
+- upravuje práci se zákaznickými nebo osobními daty,
+- souvisí s bezpečností, přístupy nebo incidenty,
+- ovlivňuje prodejní nebo onboardingový proces,
+- mění měření, reporting nebo automatizaci,
+- vznikla z výjimky, která se může opakovat.
+
+Mini agenda revize:
+
+1. Platí situace, ze které lekce vznikla?
+2. Používá tým pravidlo, které z lekce vzniklo?
+3. Snížilo se tření nebo riziko?
+4. Nevznikla nová datová stopa nebo nový ruční workaround?
+5. Má se lekce ponechat, upravit, sloučit nebo archivovat?
+
+Revize nesmí být sentimentální. To, že lekce kdysi pomohla, neznamená, že má zůstat navždy. Užitečná týmová paměť se nebojí škrtat.
+
+### 5. Zavádějte lekce po malých dávkách
+
+Jedna chyba po dobré triage je pokusit se zavést dvacet změn najednou. To vypadá akčně, ale v praxi to často znamená, že nikdo neví, co je opravdu důležité. Schválené lekce převádějte do práce po dávkách.
+
+Pravidlo pro malé týmy:
+
+- nejvýše tři onboardingové změny za jeden cyklus,
+- nejvýše tři změny v provozních checklistech za jeden cyklus,
+- jedna privacy-first změna musí mít jasného vlastníka a kontrolu dopadu,
+- každá změna má být použitelná bez dlouhého vysvětlování.
+
+Příklad dávky:
+
+```text
+Cyklus: květen 2026
+Onboarding: doplnit blok "dočasné exporty mají datum smazání"
+Checklist: přidat kontrolu polí ve formuláři před launchi landing page
+Runbook: doplnit anonymizaci supportních ukázek před interní eskalací
+Kontrola účinku: zkontrolovat při dalším měsíčním review webu, supportu a datové mapy
+```
+
+Malá dávka se dá dokončit. Velký seznam se dá jen přesunout na další schůzku.
+
+### 6. Vytvořte krátký "lesson pack" pro role
+
+Lesson pack je malý výběr lekcí pro konkrétní roli nebo pracovní situaci. Není to nový systém. Je to rozcestník: pět až deset lekcí, které člověk potřebuje vidět, aby chápal hlavní provozní pravidla.
+
+Příklady balíčků:
+
+- Marketing: formuláře, tracking, RSS, landing page checklist, distribuce bez tlakových funnelů.
+- Sales: kvalifikace leadů, zápis do CRM, citlivé informace z hovorů, předání do delivery.
+- Engineering: tenant izolace, exporty, logy, tajemství, rollback, release checklist.
+- Support: anonymizace ukázek, eskalace, štítkování tiketů, zpětná vazba do produktu.
+- Operations: dodavatelé, přístupy, dočasné tabulky, retence, exit plán nástrojů.
+
+Šablona balíčku:
+
+```text
+Role nebo situace:
+Proč balíček existuje:
+Lekce 1:
+Lekce 2:
+Lekce 3:
+Navázané standardy:
+Praktický úkol:
+Kdy balíček revidovat:
+Vlastník:
+```
+
+Privacy-first pravidlo: lesson pack nemá obsahovat citlivé příklady jen proto, že jsou "názorné". Pokud příklad potřebuje reálný detail, anonymizujte ho nebo odkažte na omezený interní záznam.
+
+### 7. Kontrolujte, že se lekce opravdu používají
+
+Zavedená lekce není hotová ve chvíli, kdy ji někdo přidá do dokumentu. Hotová je až ve chvíli, kdy podle ní někdo pracoval a nepotřeboval k tomu neformální vysvětlení od člověka, který ji psal.
+
+Ověření použití:
+
+- nový člověk projde úkol z onboardingového balíčku,
+- tým použije aktualizovaný checklist při reálném launchi,
+- support podle nové šablony eskaluje jeden tiket,
+- marketing podle pravidla upraví jeden formulář,
+- engineering podle doplněného QA scénáře ověří jeden export,
+- operations po měsíci zkontroluje, že dočasné artefakty mají vlastníka a konec.
+
+Záznam o použití má být krátký:
+
+```text
+Lekce:
+Kde byla použita:
+Kdo ji použil:
+Co bylo jasné:
+Co drhlo:
+Vznikla další změna:
+Privacy-first poznámka:
+```
+
+Když se ukáže, že lekce je nesrozumitelná, není to selhání nového člověka. Je to informace o kvalitě artefaktu. Upravte text, příklad nebo místo, kde se lekce zobrazuje.
+
+### 8. Checklist přílohy
+
+- Má každá schválená lekce určené publikum a místo dopadu?
+- Víme, který onboarding, checklist, runbook, šablona nebo review agenda se má změnit?
+- Převádíme lekce do pracovních artefaktů, ne jen do dalších poznámek?
+- Učí onboarding praktické vzory rozhodování, ne jen historii starých problémů?
+- Má vybraná lekce revizní cyklus, pokud ovlivňuje data, bezpečnost, provoz nebo pravidelnou práci?
+- Zavádíme změny po malých dávkách, které jde dokončit a ověřit?
+- Má každá role krátký lesson pack s nejdůležitějšími provozními vzory?
+- Neobsahují onboardingové příklady zbytečné osobní, zákaznické nebo obchodně citlivé údaje?
+- Ověřili jsme aspoň jedním reálným použitím, že lekce je pochopitelná?
+- Umíme lekci po čase upravit, sloučit nebo archivovat bez nostalgie?
+
+Schválená lekce má hodnotu jen tehdy, když změní budoucí práci. Onboarding a revize jsou dvě místa, kde se to pozná nejrychleji. Nový člověk ukáže, jestli je pravidlo srozumitelné. Pravidelné review ukáže, jestli je pořád pravdivé. Když lekce projde oběma místy, přestává být interní poznámkou a stává se součástí provozní kultury.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -36949,3 +37152,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DO o kontrole reaktivovaného standardu po prvním ostrém použití: výsledek, proces, skrytá ruční práce, datová stopa, rozhodnutí a checklist.
 - 2026-05-11: Doplněna Příloha DP o převodu provozní zkušenosti do týmové paměti: karty lekcí, třídění vzorů, rozhodnutí, onboarding, review a privacy-first pravidla.
 - 2026-05-11: Doplněna Příloha DQ o triage týmové paměti: stavy lekcí, slučování vzorů, převod do zdroje pravdy, privacy-first kontrola a checklist.
+- 2026-05-11: Doplněna Příloha DR o převodu schválených lekcí do onboardingu a revizí: publikum lekcí, pracovní artefakty, lesson packy, malé dávky změn, ověření použití a privacy-first kontrola.
