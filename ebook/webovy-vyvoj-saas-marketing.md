@@ -36214,6 +36214,181 @@ Tím zabráníte tomu, aby se tým časem ptal, jestli jde o původní dokument,
 
 Reaktivace je užitečná, když tým využije historickou zkušenost bez historického nepořádku. Starý standard může ušetřit čas, ale jen pokud ho necháte projít dnešní realitou. Jinak se do provozu nevrací znalost. Vrací se minulost v čistém formátování.
 
+## Příloha DO: Kontrola reaktivovaného standardu po prvním ostrém použití
+
+Reaktivovaný standard se neověří tím, že ho tým znovu zveřejní ve znalostní bázi. Ověří se až ve chvíli, kdy podle něj někdo udělá reálnou práci: odbaví poptávku, vyřeší supportní případ, spustí fallback, zpracuje incidentní komunikaci, připraví auditní výstup nebo předá zákazníkovi další krok. První ostré použití je nejlepší test. Ukáže, jestli standard pomáhá, nebo jestli jen dobře vypadá po redakční úpravě.
+
+Tato příloha navazuje na reaktivaci archivovaného standardu. Pomáhá po prvním reálném použití rychle zjistit, co fungovalo, co bylo nejasné, kde vznikla ruční práce navíc a jestli se do provozu nevrátil starý datový nepořádek. Cíl není vyrobit další schůzku. Cíl je udělat malou kontrolu dřív, než se z reaktivovaného postupu stane tichý zvyk.
+
+### 1. Kontrolu udělejte hned po prvním použití
+
+Nečekejte měsíc. Po prvním ostrém použití má tým ještě v hlavě, kde se zasekl, co musel obejít a co mu v dokumentu chybělo. Za dva týdny už zůstane jen obecný pocit, že "to nějak šlo". To je slabý vstup pro zlepšení.
+
+Krátké kontrolní okno:
+
+- do 24 hodin u incidentů, fallbacků a zákaznické komunikace,
+- do 3 pracovních dnů u sales, marketingu a interních workflow,
+- do 7 dnů u složitějších delivery postupů, kde se výsledek ukáže až po předání.
+
+Kontrola nemusí být dlouhá. Stačí 30 až 45 minut s lidmi, kteří standard opravdu použili. Pokud se do ní nevejde rozhodnutí, sepište aspoň nálezy a určete vlastníka dopracování.
+
+### 2. Oddělte výsledek od pocitu z procesu
+
+Standard může doručit dobrý výsledek a přitom být bolestivý. Nebo může být příjemný pro tým, ale slabý pro zákazníka. Kontrola proto potřebuje dvě vrstvy.
+
+Výsledek:
+
+- Byl zákazník nebo interní příjemce obsloužen správně?
+- Neztratil se žádný krok, data, rozhodnutí nebo odpovědnost?
+- Byl výstup srozumitelný bez dodatečného vysvětlování?
+- Splnil postup časové, kvalitativní nebo bezpečnostní minimum?
+
+Proces:
+
+- Bylo jasné, co má kdo udělat?
+- Musel někdo hledat chybějící informaci mimo standard?
+- Vznikla ruční práce, která nebyla předem očekávaná?
+- Byly pojmy, názvy polí, odkazy a role aktuální?
+- Šel postup dokončit bez neformálních zkratek?
+
+Praktický zápis:
+
+```text
+Výsledek: Poptávky během migrace CRM nebyly ztracené a zákazníci dostali odpověď do 1 pracovního dne.
+Proces: Tým musel ručně dohledávat vlastníka u 4 z 18 záznamů, protože standard neříká, jak řešit poptávky bez segmentu.
+Rozhodnutí: Doplnit pravidlo pro poptávky bez segmentu a přidat jeden stav do fallback tabulky.
+```
+
+Bez tohoto oddělení se tým snadno pohádá o dojem. Jeden člověk řekne, že to fungovalo, protože zákazník nic nepoznal. Druhý řekne, že to nefungovalo, protože strávil večer ručním dohledáváním. Oba mohou mít pravdu.
+
+### 3. Najděte neviditelnou ruční práci
+
+Největší riziko reaktivovaných standardů je práce, která se tváří jako výjimka, ale ve skutečnosti drží celý postup pohromadě. Jeden člověk si pamatuje starý kontext. Druhý ví, kde je historická tabulka. Třetí umí odhadnout, komu přiřadit nejasný případ. Standard pak vypadá funkčně jen proto, že někdo doplnil chybějící logiku vlastní hlavou.
+
+Ptejte se konkrétně:
+
+- Které kroky jste udělali jinak, než je napsáno?
+- Kde jste se rozhodovali podle zkušenosti, ne podle standardu?
+- Co by nový člověk bez historické paměti nezvládl?
+- Co jste zapsali bokem do poznámky, chatu nebo vlastní tabulky?
+- Který krok by při dvojnásobném objemu práce praskl jako první?
+
+Šablona pro zachycení skryté práce:
+
+```text
+Skrytá práce:
+Kdo ji udělal:
+Proč nebyla ve standardu:
+Jak často se asi zopakuje:
+Má být doplněna do standardu, automatizována, nebo odstraněna:
+```
+
+Codyho komentář: skrytá práce není selhání lidí. Je to signál, že dokument ještě nepopisuje realitu. Problém začne až ve chvíli, kdy tým skrytou práci normalizuje a nechá ji žít v hlavách.
+
+### 4. Udělejte privacy-first stopu po použití
+
+Reaktivovaný standard často sahá na data, protože se vrací z minulého provozu: exporty, dočasné seznamy, sdílené složky, supportní poznámky, ruční kontroly nebo krizové komunikační seznamy. Po prvním ostrém použití proto udělejte malou datovou stopu.
+
+Kontrolní otázky:
+
+- Jaká osobní, zákaznická nebo obchodně citlivá data postup reálně zpracoval?
+- Kde vznikly kopie, exporty, screenshoty, přílohy nebo dočasné seznamy?
+- Kdo k nim získal přístup a byl ten přístup nutný?
+- Která data už splnila účel a mají být smazána, sloučena nebo anonymizována?
+- Je potřeba upravit datovou mapu, registr nástrojů nebo předávací checklist?
+- Nevznikl nový zvyk posílat citlivé údaje přes chat nebo e-mail, protože to bylo v pilotu rychlé?
+
+Mini zápis:
+
+```text
+Data použitá při reaktivaci:
+Dočasná místa:
+Přístupy:
+Co se smaže:
+Co se přesune do hlavního systému:
+Co se doplní do datové mapy:
+Vlastník úklidu:
+Termín:
+```
+
+Pravidlo je jednoduché: první ostré použití může mít kontrolovanou improvizaci, ale nesmí po sobě nechat nekontrolovaný datový odpad. Pokud něco vzniklo bokem, musí to mít konec.
+
+### 5. Rozhodněte jednou větou, co se stane dál
+
+Po kontrole musí vzniknout rozhodnutí, ne jen seznam připomínek. Reaktivovaný standard má po prvním použití přejít do jednoho ze stavů.
+
+Možné stavy:
+
+- Ponechat beze změny pro další použití.
+- Ponechat s drobnou úpravou do 48 hodin.
+- Ponechat jen pro omezený scénář.
+- Vrátit do pilotu a použít ještě na několik případů.
+- Sloučit do jiného aktivního standardu.
+- Znovu archivovat, protože neodpovídá dnešní realitě.
+- Zrušit a nahradit novým postupem.
+
+Rozhodovací karta:
+
+```text
+Standard:
+První ostré použití:
+Výsledek:
+Největší tření:
+Datová stopa:
+Rozhodnutí:
+Kdo upraví dokument:
+Dokdy:
+Další kontrola:
+```
+
+Příklad:
+
+```text
+Standard: Ruční fallback poptávek při CRM migraci
+První ostré použití: 18 poptávek během 5 pracovních dnů
+Výsledek: Žádná ztracená poptávka, odpovědi v cílovém čase
+Největší tření: Nejasné přiřazení poptávek bez segmentu
+Datová stopa: Jedna dočasná tabulka, smazat po importu a kontrole duplicit
+Rozhodnutí: Ponechat pro omezený scénář a doplnit pravidlo pro segment
+Kdo upraví dokument: Operations
+Dokdy: Pátek
+Další kontrola: Po dalším použití nebo nejpozději za 30 dnů
+```
+
+Tahle jedna karta často stačí. Nemusíte vytvářet obsáhlý report. Potřebujete zachytit, co jste se naučili a co se má změnit.
+
+### 6. Přepište standard podle reálného použití
+
+Úprava standardu po prvním použití má být chirurgická. Nepřepisujte celý dokument jen proto, že jste našli tři slabiny. Upravte konkrétní místa, která při práci způsobila tření.
+
+Typické úpravy:
+
+- doplnit vstupní podmínky,
+- zpřesnit roli vlastníka,
+- přidat rozhodovací pravidlo pro výjimku,
+- odstranit zastaralý nástroj nebo odkaz,
+- přidat stop pravidlo,
+- zkrátit zbytečně dlouhý krok,
+- doplnit úklid dat po dokončení,
+- přidat jeden konkrétní příklad.
+
+Každá úprava má odpovědět na otázku: pomůže to dalšímu člověku dokončit práci bez historické paměti? Pokud ne, je to možná jen redakční leštění.
+
+### 7. Checklist přílohy
+
+- Proběhla kontrola brzy po prvním ostrém použití?
+- Byli u ní lidé, kteří standard opravdu použili?
+- Oddělili jsme výsledek pro zákazníka nebo tým od pocitu z procesu?
+- Zapsali jsme skrytou ruční práci a neformální zkratky?
+- Víme, které kroky by nový člověk bez historické paměti nezvládl?
+- Prošli jsme datovou stopu: kopie, exporty, přístupy, dočasná místa a úklid?
+- Má každé dočasné místo vlastníka a termín smazání nebo sloučení?
+- Vzniklo jedno jasné rozhodnutí o dalším stavu standardu?
+- Jsou úpravy standardu konkrétní a svázané s reálným třením?
+- Má standard datum další kontroly po dalším použití nebo po omezeném čase?
+
+Reaktivovaný standard je po prvním použití pořád čerstvý materiál. Když ho zkontrolujete včas, získáte provozní znalost. Když kontrolu vynecháte, získáte jen další dokument, kterému lidé časem přestanou věřit. Důvěra ve standard nevzniká tím, že je uložený na správném místě. Vzniká tím, že podle něj jde udělat práce bez zbytečných zkratek a bez zbytečné datové stopy.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -36460,3 +36635,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DL s kontrolou životnosti provozního standardu: reálné použití, tření, scorecard, zdroj pravdy, privacy-first kontrola a rozhodnutí ponechat, zjednodušit, sloučit nebo zrušit.
 - 2026-05-11: Doplněna Příloha DM o archivaci nebo sloučení provozního standardu: důvody změny, stavy standardu, nový zdroj pravdy, privacy-first úklid, komunikace změny a kontrola odkazů.
 - 2026-05-11: Doplněna Příloha DN o reaktivaci archivovaného standardu: důvod návratu, rozdílová kontrola, pilotní okno, privacy-first brána, nová verze a checklist.
+- 2026-05-11: Doplněna Příloha DO o kontrole reaktivovaného standardu po prvním ostrém použití: výsledek, proces, skrytá ruční práce, datová stopa, rozhodnutí a checklist.
