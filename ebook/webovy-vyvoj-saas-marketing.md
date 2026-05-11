@@ -37877,6 +37877,251 @@ Rozšíření vlastnictví má týmu zjednodušit provoz. Pokud po něm lidé ne
 
 Rozšíření vlastnictví role je zdravé tehdy, když tým získá víc samostatnosti bez ztráty kontroly. Nejde o to přidat člověku další úkoly. Jde o to předat mu kus systému tak, aby ho uměl zlepšovat, udržovat a chránit. Když je nové vlastnictví malé, jasné a vyhodnocené, role roste přirozeně. A tým se učí škálovat odpovědnost, ne jen počet položek v backlogu.
 
+## Příloha DX: Kontrola rozšířeného vlastnictví po prvním cyklu
+
+Rozšířit vlastnictví role je jen první polovina změny. Druhá polovina je ověřit, jestli nové vlastnictví opravdu zlepšilo provoz, nebo jen přesunulo práci do jiného místa. První rozšířený cyklus proto nesmí skončit tichým "nějak to dopadlo". Musí skončit krátkou kontrolou, která oddělí výsledek, rozhodnutí, týmový dopad a privacy-first stopu.
+
+Tato kontrola se hodí po prvním měsíci, prvním releasu, první kampani, prvním sales cyklu nebo prvním support review, které už role vedla v rozšířeném rozsahu. Není to hodnoticí pohovor v převleku. Je to provozní review systému: co nové vlastnictví umožnilo, co zkomplikovalo, co je potřeba zpřesnit a jestli má tým roli rozšířit dál, ponechat, zúžit nebo vrátit do užší kontroly.
+
+Dobré review rozšířeného vlastnictví má jednu hlavní otázku: může tato role držet novou oblast opakovaně bez toho, aby kolem ní rostl skrytý dohled, datový nepořádek nebo zákaznické riziko?
+
+### 1. Hodnoťte skutečný cyklus, ne ambici role
+
+Rozšíření role často doprovází dobrá energie. Člověk chce ukázat, že nové vlastnictví zvládne. Tým chce věřit, že se uvolní kapacita. Jenže review nemá hodnotit energii ani ambici. Má hodnotit jeden konkrétní cyklus práce.
+
+Začněte záznamem:
+
+```text
+Role:
+Nově rozšířená oblast:
+Kontrolované období:
+Konkrétní cyklus:
+Výsledek cyklu:
+Rozhodnutí, která role udělala sama:
+Rozhodnutí, která eskalovala:
+Rozhodnutí, která měla eskalovat, ale neeskalovala:
+Hlavní výstupy:
+Ochranné signály:
+Závěr review:
+```
+
+Příklad:
+
+```text
+Role: vlastník landing pages
+Nově rozšířená oblast: měsíční review výkonu landing pages
+Kontrolované období: duben
+Konkrétní cyklus: kontrola tří stránek a návrh jedné úpravy formuláře
+Výsledek cyklu: návrh úpravy CTA a odstranění jednoho zbytečného pole
+Rozhodnutí sama: úprava interních odkazů, označení zastaralého odstavce
+Eskalovala: změnu hlavního slibu stránky
+Měla eskalovat, ale neeskalovala: žádné
+Ochranné signály: žádný nový tracker, méně polí ve formuláři
+Závěr: ponechat rozšíření a zopakovat cyklus
+```
+
+Když review začne obecnými dojmy, rychle sklouzne k osobním interpretacím. Když začne konkrétním cyklem, tým má nad čím přemýšlet. Ne "jaký z toho máme pocit", ale "co se stalo, co to změnilo a co to znamená pro další cyklus".
+
+### 2. Oddělte výstup, samostatnost a dopad
+
+Jedna věc je doručit dobrý výstup. Druhá věc je doručit ho samostatně. Třetí věc je doručit ho tak, aby zlepšil práci okolního systému. Tyto tři vrstvy se nesmí slévat.
+
+Rozdělte review na tři otázky:
+
+- Výstup: vzniklo to, co mělo vzniknout, v použitelné kvalitě?
+- Samostatnost: musel někdo průběžně zachraňovat rozhodnutí, kontext nebo komunikaci?
+- Dopad: ubylo týmu tření, čekání, dvojí práce nebo nejasností?
+
+Scorecard může být jednoduchá:
+
+```text
+Výstup:
+0 = nepoužitelné
+1 = použitelné po výrazných opravách
+2 = použitelné po drobných opravách
+3 = použitelné bez zásadních oprav
+
+Samostatnost:
+0 = cyklus stál na neviditelné pomoci
+1 = role často čekala nebo se ptala na známé věci
+2 = role eskalovala správně, s menším třením
+3 = role držela hranice a eskalace samostatně
+
+Dopad:
+0 = okolí má víc práce nebo rizika
+1 = práce se jen přesunula jinam
+2 = část tření ubyla
+3 = tým má jasnější vstupy, rozhodnutí nebo provozní stopu
+```
+
+Nízké skóre není automaticky selhání člověka. Může znamenat, že kontrakt role byl nejasný, ochranné signály byly špatně zvolené, zdroj pravdy není použitelný nebo první cyklus byl moc velký. Review má opravit systém, ne vyrábět hrdinu a viníka.
+
+### 3. Najděte skrytý dohled
+
+Rozšířené vlastnictví je zdravé jen tehdy, když se nezmění ve skrytou práci seniornějšího člověka. Skrytý dohled bývá nenápadný: někdo "jen rychle koukl" na výstup, "jen připomněl" pravidlo, "jen upravil" formulář, "jen napsal" odpověď zákazníkovi. Jednou to nevadí. Když se to opakuje, vlastnictví není předané.
+
+Ptejte se konkrétně:
+
+- Kdo během cyklu pomohl mimo domluvené kontrolní body?
+- Jaká rozhodnutí se řešila v chatu místo ve zdroji pravdy?
+- Kdo držel kontext, který měl být v artefaktu?
+- Kde role čekala na potvrzení, i když měla rozhodnout sama?
+- Kde někdo opravil výstup bez zpětné vazby do systému?
+
+Záznam skrytého dohledu:
+
+```text
+Situace:
+Kdo pomohl:
+Proč byla pomoc potřeba:
+Byla pomoc domluvená:
+Co chybělo v kontraktu nebo artefaktu:
+Jak tomu zabráníme příště:
+```
+
+Codyho komentář: "jen jsem to rychle doladil" je v týmu někdy nejdražší věta. Vypadá laskavě, ale když se nezapíše proč to bylo potřeba, systém se nic nenaučí. A příště se to doladí znovu. Gratuluju, právě jste vynalezli ruční automatizaci, nejméně oblíbený druh automatizace.
+
+### 4. Zkontrolujte zákaznický a obchodní dopad
+
+Rozšíření vlastnictví role se nesmí hodnotit jen interně. Web, SaaS, marketing, support i delivery existují kvůli zákazníkovi a obchodnímu výsledku. Proto se podívejte, jestli nový rozsah role nezměnil slib, kvalitu komunikace, rychlost reakce nebo očekávání zákazníka.
+
+Pro web a marketing zkontrolujte:
+
+- nezměnil se slib stránky bez návaznosti na delivery,
+- CTA pořád odpovídá reálnému dalšímu kroku,
+- formulář nesbírá víc dat, než je potřeba pro první odpověď,
+- sales rozumí novým vstupům z webu,
+- zákazník po odeslání ví, co bude následovat.
+
+Pro SaaS a produkt zkontrolujte:
+
+- release poznámky odpovídají skutečné změně,
+- support ví, co se změnilo a kde najde kontext,
+- změna nepřidala nejasné výjimky v rolích nebo oprávněních,
+- monitoring ukazuje relevantní signály,
+- dokumentace nebo onboarding drží krok s novým stavem.
+
+Pro opakovatelnou službu zkontrolujte:
+
+- nabídka neslibuje víc, než tým umí stabilně dodat,
+- předávací výstup je pořád srozumitelný,
+- zákazník dostal jasné další kroky,
+- interní šablona odpovídá realitě delivery,
+- nevznikla závislost na jedné osobní improvizaci.
+
+Pokud se obchodní nebo zákaznický dopad zhoršil, neřešte to jako detail. Rozšířené vlastnictví má zlepšit opakovatelnost, ne posílat lepší dojem zákazníka do loterie.
+
+### 5. Udělejte privacy-first kontrolu rozšířeného rozsahu
+
+Každé rozšíření vlastnictví může změnit datovou stopu. Člověk má najednou přístup k dalším nástrojům, exportům, formulářům, analytice, zákaznickým poznámkám, support tiketům nebo dodavatelským účtům. I když se nemění kód, mění se provozní realita.
+
+Privacy-first kontrola po prvním cyklu:
+
+- Jaké nové datové zdroje role použila?
+- Přibyl nový přístup, export, report, automatizace nebo sdílená složka?
+- Obsahují pracovní poznámky osobní údaje, které tam být nemusí?
+- Zůstaly po cyklu dočasné soubory, screenshoty nebo kopie dat?
+- Je jasné, kde je zdroj pravdy a co se má smazat?
+- Změnila se retence, účel zpracování nebo okruh lidí s přístupem?
+- Je datová mapa pořád pravdivá?
+
+Krátká privacy karta:
+
+```text
+Nové datové zdroje:
+Nové přístupy:
+Dočasné exporty:
+Osobní údaje v poznámkách:
+Změna účelu zpracování:
+Potřebná aktualizace datové mapy:
+Co smažeme:
+Co ponecháme:
+Kdo kontrolu uzavírá:
+```
+
+Privacy-first hodnota není jen ve velkých rozhodnutích o hostingu nebo analytice. Je i v malých provozních návycích: netahat data do tabulek bez důvodu, neukládat screenshoty zákaznických údajů, nepřidávat lidi do nástrojů "pro jistotu" a po cyklu uklidit pracovní stopy. Nudné? Ano. Užitečné? Bohužel taky ano.
+
+### 6. Rozhodněte o dalším stavu role
+
+Review musí skončit rozhodnutím. Bez něj se tým tváří, že kontrola proběhla, ale ve skutečnosti nechá vlastnictví plavat. Použijte čtyři možné stavy:
+
+```text
+Rozšířit dál:
+Role zvládla výstup, samostatnost, dopad i privacy-first hranice.
+Další krok: přidat jednu sousední oblast nebo větší objem stejné práce.
+
+Ponechat:
+Role zvládla cyklus, ale potřebuje ještě opakování.
+Další krok: zopakovat stejný rozsah s jednou drobnou úpravou systému.
+
+Zúžit:
+Výstup byl použitelný, ale skrytý dohled, tření nebo datová stopa jsou moc velké.
+Další krok: vrátit část rozhodnutí ke kontrole a opravit kontrakt.
+
+Vrátit do kontroly:
+Nové vlastnictví vytvořilo riziko pro zákazníka, provoz, data nebo tým.
+Další krok: dočasně odebrat rozšíření, udělat rozbor příčiny a připravit menší pilot.
+```
+
+Rozhodovací záznam:
+
+```text
+Stav po review:
+Proč:
+Co se mění v kontraktu role:
+Co se mění v artefaktech:
+Jaký bude další cyklus:
+Kdo je fallback:
+Kdy proběhne další kontrola:
+```
+
+Nejčastější zdravé rozhodnutí je "ponechat". Ne proto, že tým nemá ambice, ale protože první cyklus je jen první důkaz. Opakovatelnost se pozná až v dalším kole, kdy už opadne novost a práce se přiblíží běžnému provozu.
+
+### 7. Přepište systém podle review
+
+Když review najde problém a nezmění artefakty, problém se vrátí. Po kontrole proto aktualizujte konkrétní místa, kde vlastnictví žije.
+
+Typické úpravy:
+
+- zpřesnit pracovní kontrakt role,
+- doplnit jednu hranici eskalace,
+- upravit checklist hotovo,
+- přidat nebo odebrat ochranný signál,
+- zapsat novou lekci do týmové paměti,
+- aktualizovat datovou mapu,
+- odebrat zbytečný přístup,
+- opravit šablonu reportu,
+- oznámit změnu navazujícím lidem.
+
+Mini checklist změn po review:
+
+```text
+Kontrakt role aktualizován:
+Zdroj pravdy aktualizován:
+Checklist upraven:
+Datová mapa zkontrolována:
+Přístupy zkontrolovány:
+Tým informován:
+Další review naplánováno:
+```
+
+Review bez změny systému je jen společenský rituál. Někdy příjemný, někdy únavný, ale provozně slabý. Smysl má až ve chvíli, kdy se z něj stane lepší hranice, lepší šablona, lepší checklist nebo lepší rozhodnutí.
+
+### 8. Checklist přílohy
+
+- Hodnotíme konkrétní první rozšířený cyklus?
+- Máme zapsaný výsledek, rozhodnutí, eskalace a ochranné signály?
+- Oddělili jsme kvalitu výstupu, samostatnost a dopad do týmu?
+- Našli jsme případný skrytý dohled nebo neviditelnou pomoc?
+- Víme, jestli rozšíření zlepšilo zákaznický nebo obchodní tok?
+- Udělali jsme privacy-first kontrolu nových přístupů, exportů, poznámek a datových stop?
+- Aktualizujeme datovou mapu nebo přístupy, pokud se změnila realita?
+- Rozhodli jsme jasně: rozšířit dál, ponechat, zúžit, nebo vrátit do kontroly?
+- Přepsali jsme pracovní kontrakt, checklisty nebo zdroj pravdy podle review?
+- Je naplánované další kontrolní okno?
+
+Kontrola rozšířeného vlastnictví má jednoduchý účel: zabránit tomu, aby se růst role stal růstem neviditelného chaosu. Když první cyklus vyhodnotíte konkrétně, role může růst s důvěrou. Když ho necháte vyšumět, tým si často všimne problému až ve chvíli, kdy už je nový rozsah považovaný za normální. A normální chaos je nejhorší chaos, protože ho nikdo nehlásí jako incident.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -38132,3 +38377,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DU o přechodu z onboardingu do dlouhodobé samostatnosti role: mapa vlastnictví, hranice eskalace, kontrola výstupů, první samostatný cyklus, privacy-first návyky a rozvojový backlog.
 - 2026-05-11: Doplněna Příloha DV o prvním review samostatné role po předání vlastnictví: konkrétní cyklus, rozhodnutí, skrytá pomoc, privacy-first stopa, stav role a převod poučení do systému.
 - 2026-05-11: Doplněna Příloha DW o rozšíření vlastnictví role po prvních samostatných cyklech: důkazy, sousední oblast, pracovní kontrakt, ochranné signály, první rozšířený cyklus a privacy-first kontrola.
+- 2026-05-11: Doplněna Příloha DX o kontrole rozšířeného vlastnictví po prvním cyklu: výstup, samostatnost, skrytý dohled, zákaznický dopad, privacy-first stopa a rozhodnutí o dalším stavu role.
