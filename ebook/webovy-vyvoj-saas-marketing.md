@@ -34345,6 +34345,198 @@ Tyto negativní hranice chrání tým před pozdějším rozšiřováním. Když
 
 Standardizace není byrokracie, pokud chrání pozornost týmu. Dobrá automatizace má být jako dobře popsaný nástroj v dílně: každý ví, k čemu je, kdo ho spravuje, kdy ho použít a kdy ho raději nechat ležet. Jakmile se z ní stane černá skříňka, přestává být pomocníkem a začíná být dalším systémem, o který se někdo musí bát.
 
+## Příloha DE: První měsíční kontrola automatizace v trvalém provozu
+
+Automatizace, která prošla pilotem a standardizací, si zaslouží ještě jednu věc: první tvrdou kontrolu po reálném provozu. Ne po jednom ukázkovém běhu. Ne po týdnu, kdy ji všichni sledují se zvýšenou pozorností. Po měsíci, kdy se začnou ukazovat běžné výjimky, zapomenuté ruční zásahy, změny vstupů a drobné provozní tření.
+
+První měsíční kontrola má odpovědět na jednoduchou otázku:
+
+`Pomáhá automatizace pořád víc, než kolik stojí v kontrole, údržbě, riziku a datové stopě?`
+
+Když odpověď zní ano, automatizace zůstává v provozu a dostane normální revizní rytmus. Když odpověď zní "ano, ale", upravíte pravidla dřív, než se z drobného tření stane nový standard. Když odpověď zní ne, automatizaci zúžíte, vrátíte na ruční režim nebo zrušíte. To není selhání. To je údržba systému, který nemá běžet jen proto, že už jednou vznikl.
+
+### Co si připravit před kontrolou
+
+Měsíční kontrola má být krátká a konkrétní. Nepotřebujete prezentaci, potřebujete fakta.
+
+Připravte:
+
+- provozní kartu automatizace,
+- technickou mapu toku,
+- počet běhů za období,
+- počet chyb a typy chyb,
+- počet ručních zásahů,
+- příklady dobrých a špatných výstupů,
+- změny ve formuláři, nabídce, procesu nebo datech,
+- seznam lidí, kteří s výstupem pracovali,
+- privacy-first poznámky: data, logy, přístupy, retence, dodavatelé.
+
+Pokud tato data neumíte získat, je to první nález. Automatizace možná běží, ale není pozorovatelná. A nepozorovatelná automatizace je provozní dluh s hezkým názvem.
+
+### Scorecard po prvním měsíci
+
+Vyhodnoťte automatizaci v pěti oblastech. Nepotřebujete složité bodování. Stačí zelená, žlutá, červená a jedna věta důkazu.
+
+| Oblast | Otázka | Signál |
+| --- | --- | --- |
+| Hodnota | Šetří automatizace reálnou práci nebo zrychluje důležitý tok? | čas, počet ušetřených kroků, méně ručního přepisu |
+| Kvalita | Jsou výstupy použitelné bez velkých oprav? | poměr přijatých, opravených a odmítnutých výstupů |
+| Výjimky | Jsou chybové scénáře vzácné a srozumitelné? | typy chyb, opakované příčiny, ruční zásahy |
+| Provoz | Ví tým, kdo je vlastník a jak automatizaci vypnout? | reakční čas, runbook, kontrola přístupů |
+| Data | Drží automatizace původní privacy-first hranice? | datová stopa, logy, retence, dodavatelé |
+
+Příklad vyplnění:
+
+| Oblast | Stav | Důkaz |
+| --- | --- | --- |
+| Hodnota | Zelená | 42 běhů, obchodní tým nevyplňoval základní CRM pole ručně. |
+| Kvalita | Žlutá | 9 karet mělo slabě určený segment, hlavně u nejasných formulářových zpráv. |
+| Výjimky | Zelená | 2 technické chyby, obě zachycené notifikací a ručně dořešené. |
+| Provoz | Žlutá | Vlastník je jasný, ale postup vypnutí není otestovaný. |
+| Data | Zelená | Logy ukládají jen ID, čas, stav a chybu; žádný nový dodavatel. |
+
+Z takové tabulky už vzniká rozhodnutí. Ne pocit, že "to asi funguje".
+
+### Hledejte skrytou ruční práci
+
+Automatizace může vypadat úspěšně, protože spouští běhy bez chyb. Jenže skutečná práce se může přesunout jinam. Obchodník musí výstup pokaždé přepsat. Support musí zákazníkovi vysvětlovat nejasnou zprávu. Vývojář musí každý týden opravovat výjimku. Někdo kontroluje logy ručně, protože alerty nejsou nastavené.
+
+Ptejte se lidí, kteří automatizaci používají:
+
+- Co vám automatizace ušetřila?
+- Co musíte dělat nově?
+- Kdy výstupu nevěříte?
+- Které chyby opravujete opakovaně?
+- Co by se stalo, kdyby se automatizace na týden vypnula?
+- Víte, kam nahlásit problém?
+- Víte, co automatizace vědomě nedělá?
+
+Skrytá ruční práce je důležitější než samotný počet chyb. Pokud automatizace "funguje", ale každý výstup vyžaduje pět minut kontroly a dvě minuty opravy, možná jste jen přesunuli práci z tvorby do dohledu. To někdy pořád dává smysl. Ale musí to být vědomé rozhodnutí, ne kouřová clona.
+
+Codyho komentář: nejzrádnější věta u automatizací je "ono to tak nějak běží". To je provozní ekvivalent pokrčení ramen. Buď víme, jak to běží a proč to stojí za to, nebo máme jen malý stroj na budoucí překvapení.
+
+### Zkontrolujte změny vstupů
+
+Automatizace často neselhává proto, že se změnil kód. Selhává proto, že se změnil vstupní svět.
+
+Typické změny:
+
+- formulář má nové pole,
+- marketing změnil jazyk nabídky,
+- přibyl nový segment zákazníků,
+- obchod začal jinak kvalifikovat leady,
+- produkt změnil názvy plánů nebo funkcí,
+- tým přidal novou službu,
+- zákazníci začali posílat jiné typy příloh nebo dotazů,
+- interní CRM změnilo povinná pole.
+
+Při první měsíční kontrole porovnejte původní předpoklady s realitou. Pokud automatizace vznikla pro jednoduché poptávky na web, ale polovina nových vstupů jsou komplexní integrace, nemusí být problém v automatizaci. Problém je, že se změnil rozsah práce, kterou má automatizace obsloužit.
+
+Rozhodnutí může být:
+
+- upravit formulář, aby lépe strukturoval vstup,
+- zúžit automatizaci jen na jeden typ poptávky,
+- přidat stav `vyžaduje ruční třídění`,
+- změnit pravidla mapování do CRM,
+- zrušit automatickou část u vstupů s vysokou nejistotou.
+
+Nejlepší oprava automatizace někdy není lepší skript. Někdy je to jasnější formulář, lepší text nabídky nebo rozhodnutí, že některé případy mají zůstat ruční.
+
+### Privacy-first měsíční kontrola
+
+Po měsíci už máte objem. A objem mění riziko. Jednorázový pilot s dvaceti případy může být čistý, ale trvalý provoz se stovkami běhů už vytváří historii, logy, přístupy a návyky.
+
+Zkontrolujte:
+
+- Nezačaly logy ukládat víc, než bylo schválené?
+- Nepřibyly kopie dat v notifikacích, e-mailech nebo chatu?
+- Nepoužívá někdo osobní export jako náhradní kontrolu?
+- Nevidí výstupy víc lidí, než je nutné?
+- Nezměnil se účel zpracování bez zápisu v datové mapě?
+- Je pořád jasné, jak data smazat nebo opravit?
+- Nezačala automatizace slučovat data z více zdrojů bez nového rozhodnutí?
+- Je zákaznická komunikace pořád pravdivá vůči tomu, co systém dělá?
+
+Zvlášť si hlídejte notifikace. Malá automatizace často začne nevinně posílat "jen interní zprávu". Za měsíc v ní může být celý text poptávky, e-mail, telefon, segment, interní odhad hodnoty a poznámka obchodníka. Pokud to končí v nástroji bez jasné retence a přístupů, privacy-first hodnota se tiše rozpouští.
+
+Praktické pravidlo: notifikace má říct, že se něco stalo a kde to oprávněný člověk najde. Nemusí kopírovat celý obsah.
+
+### Rozhodnutí po prvním měsíci
+
+Na konci kontroly neodcházejte s neurčitým "budeme sledovat". Zapište jedno z pěti rozhodnutí.
+
+Ponechat beze změny:
+
+- hodnota je jasná,
+- kvalita stabilní,
+- výjimky zvládnuté,
+- datová stopa čistá,
+- další review je naplánované.
+
+Ponechat s drobnou úpravou:
+
+- automatizace funguje,
+- jeden konkrétní problém má jasnou opravu,
+- úprava nemění účel, dodavatele, retenci ani rozsah oprávnění.
+
+Zúžit rozsah:
+
+- automatizace je dobrá jen pro část vstupů,
+- u složitějších případů přidává riziko nebo opravy,
+- ruční režim pro výjimky je levnější než komplikovat celý systém.
+
+Vrátit do pilotu:
+
+- hodnota existuje, ale kvalita nebo provoz jsou nestabilní,
+- změna je větší než drobná oprava,
+- potřebujete další kontrolované období.
+
+Vypnout:
+
+- úspora je malá,
+- kontrola je drahá,
+- výstupům nikdo nevěří,
+- privacy-first dopad je větší než přínos,
+- proces už nemá hodnotu.
+
+Šablona rozhodnutí:
+
+`Po prvním měsíci automatizaci [název] [ponecháváme/upravujeme/zužujeme/vracíme do pilotu/vypínáme], protože [důkaz]. Do [datum] uděláme [konkrétní změna], vlastníkem je [role] a další kontrola proběhne [spouštěč].`
+
+### Příklad měsíční kontroly
+
+Automatizace: předvyplnění kvalifikační karty leadu z webového formuláře.
+
+Data za měsíc:
+
+- 42 běhů,
+- 3 technické chyby,
+- 9 ručních oprav segmentu,
+- 0 automatických zákaznických odpovědí,
+- žádný nový dodavatel,
+- notifikace posílala příliš dlouhý výřez poptávky.
+
+Rozhodnutí:
+
+`Automatizaci ponecháváme s drobnou úpravou. Hodnota je jasná, protože obchodní tým přestal ručně přepisovat základní údaje u většiny poptávek. Do 7 dnů zkrátíme interní notifikaci na ID, e-mail a odkaz do CRM, doplníme do formuláře přesnější výběr segmentu a otestujeme postup vypnutí. Další kontrola proběhne po 50 dalších bězích nebo při pěti chybách za týden.`
+
+To je dobrý výsledek. Ne proto, že je automatizace dokonalá. Protože tým našel reálný přínos, opravil datovou stopu a nenechal provozní detail vyrůst v budoucí problém.
+
+### Checklist přílohy
+
+- Proběhla kontrola po dostatečném reálném období, ne jen po ukázkovém spuštění?
+- Máte počet běhů, chyb, ručních zásahů a příklady výstupů?
+- Vyhodnotili jste hodnotu, kvalitu, výjimky, provoz a datovou stopu?
+- Mluvili jste s lidmi, kteří s výstupem skutečně pracují?
+- Našli jste skrytou ruční práci nebo kontrolu, která nebyla v původním plánu?
+- Porovnali jste původní vstupy s tím, co do automatizace reálně chodí?
+- Zkontrolovali jste notifikace, logy, kopie dat, retenci a přístupy?
+- Je jasné, co automatizace pořád vědomě nedělá?
+- Vzniklo jedno rozhodnutí: ponechat, upravit, zúžit, vrátit do pilotu nebo vypnout?
+- Má rozhodnutí vlastníka, termín a další kontrolní spouštěč?
+
+První měsíční kontrola je ochrana před samovolným provozem. Automatizace nemá získat právo existovat jen tím, že se kdysi povedla. Má si průběžně obhajovat hodnotu, kvalitu a datovou stopu. Když to dokáže, zaslouží si zůstat. Když ne, je lepší ji opravit nebo vypnout včas, dokud je to pořád malý zásah.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -34581,3 +34773,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha DB s pilotem jedné automatizace před trvalým provozem: výběr kandidáta, pilotní otázka, režimy testu, privacy-first kontrola, stop pravidla a rozhodnutí po pilotu.
 - 2026-05-10: Doplněna Příloha DC o vyhodnocení pilotu automatizace a rozhodnutí o trvalém provozu: hodnoticí okno, evidence, scorecard, privacy-first review, rozhodovací matice a karta automatizace.
 - 2026-05-11: Doplněna Příloha DD o standardizaci automatizace po schválení trvalého provozu: provozní karta, technická mapa, změnová pravidla, lidská kontrola, monitoring a privacy-first provozní brána.
+- 2026-05-11: Doplněna Příloha DE o první měsíční kontrole automatizace v trvalém provozu: scorecard hodnoty, kvality, výjimek, provozu a datové stopy, kontrola skryté ruční práce, změn vstupů a privacy-first hranic.
