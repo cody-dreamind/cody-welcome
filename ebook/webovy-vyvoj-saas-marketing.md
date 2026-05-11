@@ -35798,6 +35798,250 @@ Nejlepší rozhodnutí bývá malé. Jedna úprava, jeden přesun, jedno zrušen
 
 Provozní standard je živý jen tehdy, když pomáhá v reálné práci. Jakmile začne překážet, rozcházet se s praxí nebo vytvářet falešný pocit kontroly, je čas ho zkrátit, sloučit nebo ukončit. Dobrá údržba dokumentace není v tom, že všechno schováte navždy. Je v tom, že tým vždycky najde právě tolik pravdy, kolik potřebuje pro správné rozhodnutí.
 
+## Příloha DM: Archivace nebo sloučení provozního standardu
+
+Kontrola životnosti standardu často skončí nepříjemným, ale zdravým zjištěním: dokument už nemá zůstat samostatně. Někdy je příliš dlouhý. Někdy popisuje proces, který se změnil. Někdy se překrývá s jiným standardem. Někdy ho tým používá jen proto, že "už tu je". A někdy byl užitečný v krizi, ale pro běžný provoz vytváří víc hluku než hodnoty.
+
+Archivace není selhání. Je to normální konec jedné provozní verze. Sloučení není ústup. Je to způsob, jak snížit počet míst, kde musí tým hledat pravdu. Zjednodušení není ztráta kontroly. Často je to jediná cesta, jak kontrolu udržet i ve chvíli, kdy práce přibývá.
+
+Tato příloha pomáhá rozhodnout, kdy standard ponechat, zkrátit, sloučit, archivovat nebo nahradit. Hodí se po měsíční nebo kvartální kontrole provozních pravidel, po incidentu, po změně nabídky, po změně nástroje, po předání práce novému člověku nebo po zjištění, že tým dokumentaci obchází.
+
+### 1. Nejdřív pojmenujte důvod změny
+
+Nezačínejte otázkou "kam to přesuneme". Začněte otázkou, proč standard už nefunguje jako samostatný provozní artefakt.
+
+Typické důvody:
+
+- Standard se nepoužívá při reálné práci.
+- Tým používá jiný dokument nebo neformální postup.
+- Standard obsahuje zastaralé kroky, názvy nástrojů, role nebo odkazy.
+- Dubluje pravidla, která už jsou v provozní kartě, runbooku nebo šabloně.
+- Je příliš detailní pro běžné použití a příliš obecný pro krizovou situaci.
+- Sbírá nebo doporučuje sběr dat, který už není potřeba.
+- Má nejasného vlastníka.
+- Vytváří rozdílné interpretace mezi sales, delivery, supportem nebo vývojem.
+
+Jedna věta stačí:
+
+```text
+Standard archivujeme, protože popisuje starý ruční fallback pro poptávky, který byl nahrazen novým provozním runbookem a už se tři měsíce nepoužil.
+```
+
+Bez důvodu se z archivace stane úklid podle nálady. S důvodem je to rozhodnutí, ke kterému se dá vrátit.
+
+### 2. Rozlište pět možných stavů
+
+Ne každý slabý standard se má zahodit. Někdy stačí ořezat. Někdy sloučit. Někdy ponechat jako historický záznam, protože vysvětluje, proč se tým rozhodl určitým způsobem.
+
+Používejte pět stavů:
+
+- Ponechat: standard je stále používaný a srozumitelný.
+- Zjednodušit: jádro platí, ale text je delší než práce, kterou podporuje.
+- Sloučit: obsah patří do jiného kanonického artefaktu.
+- Archivovat: standard už není aktivní, ale historicky může být užitečný.
+- Zrušit: standard už nemá provozní ani historickou hodnotu.
+
+Příklad:
+
+```text
+Název: Měsíční kontrola automatizace
+Stav: Sloučit
+Kam: Provozní karta automatizace / sekce Revize
+Důvod: Samostatný dokument se nepoužívá, ale scorecard je užitečná.
+Vlastník: Operations
+Datum změny: 2026-05-11
+```
+
+Tím se vyhnete binárnímu rozhodnutí "nechat nebo smazat". Provozní realita je pestřejší. Bohužel. Kdyby nebyla, měli bychom všichni méně tabulek.
+
+### 3. Sloučení musí určit nový zdroj pravdy
+
+Sloučení je nebezpečné, pokud po něm vzniknou dvě polopravdy. Starý dokument zůstane někde v záložkách, nový dokument převezme jen část obsahu a tým neví, čemu věřit.
+
+Při sloučení zapište:
+
+- Nový kanonický zdroj.
+- Části, které se přenášejí.
+- Části, které se vědomě nepřenášejí.
+- Důvod, proč starý standard končí.
+- Datum, kdy se starý odkaz nahradí.
+- Kdo ověří, že staré odkazy nevedou tým špatně.
+
+Krátká šablona:
+
+```text
+Sloučený standard:
+Nový zdroj pravdy:
+Přenesené části:
+Vynechané části:
+Důvod vynechání:
+Staré odkazy k nahrazení:
+Vlastník kontroly:
+Datum kontroly:
+```
+
+Příklad:
+
+```text
+Sloučený standard: Kontrola fallbacku po návratu do provozu
+Nový zdroj pravdy: Incidentní runbook / sekce Návrat do normálu
+Přenesené části: privacy-first úklid, kontrola duplicitních záznamů, zákaznický dopad
+Vynechané části: starý ruční export z formuláře
+Důvod vynechání: export se už nepoužívá a nemá být doporučovaný jako běžný postup
+Staré odkazy k nahrazení: sales karta, support checklist, onboarding nového člověka
+Vlastník kontroly: Operations
+Datum kontroly: 2026-05-25
+```
+
+Největší chyba sloučení je přenést všechno. Pak se jen přesune chaos do nového obalu. Sloučení má zmenšit počet rozhodnutí, která musí člověk při práci držet v hlavě.
+
+### 4. Archivace musí zabránit náhodnému použití
+
+Archivovaný standard nesmí vypadat jako aktivní. Jinak se stane provozní pastí: někdo ho najde přes vyhledávání, použije starý postup a tým pak řeší chybu, která už měla být dávno minulostí.
+
+Archivovaný dokument označte hned nahoře:
+
+```text
+Stav: Archivováno
+Datum archivace:
+Důvod archivace:
+Nahrazeno čím:
+Nepoužívat pro nový provoz:
+Vlastník historického záznamu:
+```
+
+Pokud dokument zůstává veřejný nebo zákaznicky dostupný, buďte ještě opatrnější. Staré provozní sliby, popisy bezpečnosti, formulářové postupy, analytické nastavení nebo integrační návody mohou vytvářet nedorozumění. U veřejných materiálů často nestačí archivovat. Je potřeba přesměrovat čtenáře na aktuální verzi nebo starý text stáhnout z běžné navigace.
+
+Praktická pravidla:
+
+- Archiv nemá být v hlavní navigaci interní znalostní báze.
+- Starý dokument má odkazovat na aktuální náhradu.
+- Název souboru nebo nadpis má obsahovat stav archivace.
+- Pokud je stará verze ponechaná kvůli auditu, musí být jasné, že nejde o návod.
+- Staré šablony se nesmí dál kopírovat jako výchozí materiál.
+
+Archiv je paměť, ne kuchařka. V provozu chcete lidem nabídnout aktuální postup, ne historickou archeologii.
+
+### 5. Privacy-first úklid je součást archivace
+
+Archivace standardu není jen práce s textem. Často se kolem něj vážou data: staré exporty, ukázkové soubory, formulářové odpovědi, screenshoty, logy, nahrávky workshopů, odkazy do ticketů, kopie tabulek nebo přístupy k nástrojům.
+
+Privacy-first kontrola při archivaci:
+
+- Obsahuje standard příklady s reálnými osobními údaji?
+- Odkazuje na staré exporty dat, které už nemají účel?
+- Popisuje sběr dat, který už byl zrušen?
+- Zůstaly po něm formuláře, inboxy, sdílené složky nebo automatizace?
+- Mají k archivovaným materiálům přístup lidé, kteří ho už nepotřebují?
+- Je jasné, jak dlouho historický záznam držet?
+- Je potřeba anonymizovat příklady před ponecháním v archivu?
+
+Příklad:
+
+```text
+Standard: Ruční zpracování poptávek při výpadku CRM
+Rozhodnutí: Archivovat
+Privacy-first úklid:
+- Smazat dočasný CSV export ze sdílené složky.
+- Odebrat přístup externímu konzultantovi.
+- V archivu ponechat jen anonymizovaný postup bez konkrétních poptávek.
+- Aktualizovat datovou mapu: ruční export už není běžný zpracovatelský tok.
+```
+
+Codyho komentář: největší privacy dluh často neleží v databázi, ale v "dočasných" pracovních souborech. Dočasný soubor je zvláštní druh optimismu. Vznikne na deset minut a přežije tři reorganizace.
+
+### 6. Komunikujte změnu podle dopadu
+
+Ne každá archivace potřebuje oznámení celému týmu. Ale každá změna, která může ovlivnit práci, musí dojít k lidem, kteří podle starého standardu jednali.
+
+Rozlišujte tři úrovně:
+
+- Tichá archivace: dokument se nepoužíval, nemá externí dopad, stačí záznam v changelogu.
+- Týmové oznámení: standard ovlivňuje běžný postup týmu, pošlete krátké shrnutí.
+- Provozní změna: standard ovlivňuje zákazníky, data, podporu, sales nebo incidenty, připravte jasný komunikační mini plán.
+
+Krátká týmová zpráva:
+
+```text
+Archivovali jsme starý standard pro ruční fallback newsletteru. Aktuální postup je nově v Provozní kartě distribuce, sekce Nouzový režim. Starý dokument zůstává v archivu jen jako historický záznam a nemá se používat pro nové rozesílky.
+```
+
+Dobrá zpráva má říct:
+
+- Co se změnilo.
+- Proč se to změnilo.
+- Kde je aktuální zdroj pravdy.
+- Co tým už nemá používat.
+- Koho se zeptat při nejasnosti.
+
+Bez této věty se změna spoléhá na to, že všichni najdou správnou verzi sami. To je roztomilá víra v lidskou navigaci, ale špatný provozní model.
+
+### 7. Po archivaci udělejte krátkou kontrolu odkazů
+
+Standard málokdy žije sám. Bývá odkazovaný z onboardingového checklistu, sales karty, interní wiki, backlogu, šablon, runbooků, starých ticketů nebo veřejné dokumentace. Když archivujete jen hlavní dokument, staré odkazy dál vedou lidi do minulosti.
+
+Mini kontrola:
+
+1. Najděte interní odkazy na starý standard.
+2. Rozdělte je na aktivní pracovní místa a historické zmínky.
+3. Aktivní pracovní místa přesměrujte na nový zdroj pravdy.
+4. Historické zmínky ponechte jen tehdy, když dávají kontext.
+5. U veřejných odkazů zvažte přesměrování nebo poznámku o aktuální verzi.
+6. Zapište změnu do pracovního logu nebo changelogu.
+
+Pokud nemáte vyhledávání přes všechny znalostní zdroje, začněte ručně u míst, která mají největší dopad: onboarding, provozní runbooky, zákaznické šablony, sales materiály a formuláře.
+
+### 8. Rozhodovací karta archivace
+
+Použijte jednu kartu pro každou změnu. Nemusí být dlouhá. Důležité je zachytit rozhodnutí tak, aby se k němu tým nemusel za měsíc vracet od nuly.
+
+```text
+Název standardu:
+Současný vlastník:
+Rozhodnutí: ponechat / zjednodušit / sloučit / archivovat / zrušit
+Důvod:
+Nový zdroj pravdy:
+Co se přenáší:
+Co se vědomě nepřenáší:
+Privacy-first úklid:
+Odkazy k opravě:
+Koho informovat:
+Datum změny:
+Kontrola po změně:
+```
+
+Příklad:
+
+```text
+Název standardu: Ruční kontrola exportu leadů
+Současný vlastník: Marketing ops
+Rozhodnutí: Zrušit
+Důvod: Export byl nahrazen agregovaným měřením bez osobních údajů.
+Nový zdroj pravdy: Dashboard kvality leadů
+Co se přenáší: Definice kvalifikovaného leadu
+Co se vědomě nepřenáší: CSV export kontaktů pro měsíční report
+Privacy-first úklid: Smazat staré exporty, odebrat sdílenou složku, aktualizovat datovou mapu
+Odkazy k opravě: Marketingový plán, měsíční review, onboarding marketéra
+Koho informovat: Marketing, sales
+Datum změny: 2026-05-11
+Kontrola po změně: 2026-06-11
+```
+
+### 9. Checklist přílohy
+
+- Má změna jasně popsaný důvod?
+- Rozlišili jste, jestli standard ponechat, zjednodušit, sloučit, archivovat nebo zrušit?
+- Existuje jeden nový zdroj pravdy, pokud se obsah sloučil?
+- Je u archivovaného dokumentu jasně uvedeno, že se nemá používat pro nový provoz?
+- Přenesli jste jen části, které mají aktuální hodnotu?
+- Zapsali jste, co se vědomě nepřenáší a proč?
+- Proběhla privacy-first kontrola starých dat, exportů, screenshotů, příkladů a přístupů?
+- Zkontrolovali jste odkazy z onboardingů, runbooků, sales materiálů, šablon a veřejných stránek?
+- Dostali informaci lidé, kteří starý standard mohli používat?
+- Je naplánovaná krátká kontrola po změně?
+
+Archivace a sloučení jsou nenápadné práce. Nejsou tak vidět jako nová šablona nebo nový proces. Ale právě tady se rozhoduje, jestli provozní systém zůstane použitelný. Tým nepotřebuje víc dokumentů. Potřebuje méně míst, kde může najít zastaralou pravdu.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -36042,3 +36286,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DJ o post-fallback review a trvalém zlepšení provozu: časová osa, příznak/příčina/kontrola, malé změny, aktualizace provozních artefaktů, privacy-first úklid a uzavření komunikace.
 - 2026-05-11: Doplněna Příloha DK o převodu post-fallback zlepšení do provozního standardu: karta změny, aktualizace artefaktů, vlastnictví, mini drill, privacy-first kontrola a ověření po 14 až 30 dnech.
 - 2026-05-11: Doplněna Příloha DL s kontrolou životnosti provozního standardu: reálné použití, tření, scorecard, zdroj pravdy, privacy-first kontrola a rozhodnutí ponechat, zjednodušit, sloučit nebo zrušit.
+- 2026-05-11: Doplněna Příloha DM o archivaci nebo sloučení provozního standardu: důvody změny, stavy standardu, nový zdroj pravdy, privacy-first úklid, komunikace změny a kontrola odkazů.
