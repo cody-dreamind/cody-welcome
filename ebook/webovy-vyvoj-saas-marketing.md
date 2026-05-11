@@ -37249,6 +37249,230 @@ Tato kontrola není nedůvěra k novému člověku. Je to ochrana systému. Kdy�
 
 Lesson pack po prvním měsíci nemá být delší za každou cenu. Má být přesnější. Když odstraníte nepoužité části, doplníte chybějící rozhodovací situace a ověříte privacy-first návyky na reálné práci, onboarding začne dělat to nejdůležitější: převádět zkušenost týmu do samostatného, odpovědného rozhodování.
 
+## Příloha DU: Přechod z onboardingu do dlouhodobé samostatnosti role
+
+První měsíc samostatné práce je důležitý filtr. Ukáže, jestli lesson pack sedí realitě, jestli člověk chápe rozhodovací vzory a kde tým pořád doplňuje kontext bokem. Po této revizi ale přichází další krok: přestat řídit nového člověka jako nového člověka. Pokud onboarding fungoval, role se má přesunout do běžného provozního rytmu, kde má jasné vlastnictví, hranice samostatnosti, kontrolní body a prostor pro zlepšování.
+
+Tato příloha pomáhá udělat přechod z onboardingu do dlouhodobé samostatnosti role. Nejde o formální "proběhlo zaučení, hotovo". Jde o praktické rozhodnutí: co už člověk vlastní, kde ještě potřebuje oporu, jaké situace smí řešit sám, kdy má eskalovat a jak se jeho zkušenost vrací zpět do systému.
+
+### 1. Změňte otázku z "umí to?" na "co už vlastní?"
+
+Onboarding často hodnotí schopnost zvládnout úkol. Dlouhodobá samostatnost hodnotí vlastnictví. Rozdíl je zásadní. Člověk může umět připravit landing page, ale ještě nemusí vlastnit kvalitu formulářů, privacy-first kontrolu datové stopy nebo pravidelné vyhodnocení leadů. Může umět opravit bug, ale ještě nemusí vlastnit celý release checklist.
+
+Po revizi lesson packu proto sepište mapu vlastnictví:
+
+```text
+Role:
+Oblast práce:
+Co člověk už vlastní samostatně:
+Co vlastní s kontrolou:
+Co zatím jen sleduje:
+Kdo je fallback:
+Kdy se vlastnictví znovu vyhodnotí:
+```
+
+Příklad pro marketing:
+
+```text
+Role: marketing specialist
+Oblast práce: landing pages a poptávkové formuláře
+Samostatně vlastní: návrh struktury stránky, první verzi copy, kontrolu CTA
+Vlastní s kontrolou: nová pole ve formuláři, změnu měření, napojení do CRM
+Zatím sleduje: vyhodnocení kvality leadů po sales hovorech
+Fallback: growth lead
+Další kontrola: po dvou dalších publikovaných stránkách
+```
+
+Taková mapa zabraňuje dvěma extrémům. První extrém je mikromanagement, kdy nový člověk pořád čeká na potvrzení každého kroku. Druhý extrém je předčasná volnost, kdy dostane odpovědnost za dopady, na které ještě nemá kontext.
+
+### 2. Definujte hranice samostatnosti a eskalace
+
+Samostatnost neznamená, že člověk všechno řeší sám. Znamená, že ví, které rozhodnutí může udělat, které má oznámit a které má eskalovat předem. Bez této hranice vzniká tiché riziko: lidé buď zbytečně čekají, nebo naopak provedou změnu, která zasáhne data, zákazníka, billing, bezpečnost nebo reputaci.
+
+Použijte tři úrovně:
+
+- Můžeš rozhodnout a provést.
+- Můžeš navrhnout, ale před spuštěním potřebuješ kontrolu.
+- Zastav a eskaluj před jakoukoli změnou.
+
+Příklad pro web a marketing:
+
+```text
+Rozhodnout a provést:
+- upravit nadpis nebo text sekce bez změny slibu nabídky,
+- doplnit interní odkaz na existující relevantní obsah,
+- zjednodušit mikrocopy tlačítka bez změny toku.
+
+Navrhnout a nechat zkontrolovat:
+- přidat nové pole do formuláře,
+- změnit hlavní CTA na prodejní stránce,
+- přidat nový měřicí event,
+- publikovat case study s konkrétním zákaznickým kontextem.
+
+Zastavit a eskalovat:
+- přidat nový externí tracker nebo marketingový skript,
+- změnit právní texty, souhlas nebo privacy komunikaci,
+- exportovat osobní nebo zákaznická data mimo běžný systém,
+- slíbit veřejně parametr služby, který není potvrzený delivery týmem.
+```
+
+Příklad pro SaaS engineering:
+
+```text
+Rozhodnout a provést:
+- opravit izolovaný UI bug bez změny datového modelu,
+- doplnit test k existujícímu chování,
+- zpřesnit interní runbook podle ověřeného postupu.
+
+Navrhnout a nechat zkontrolovat:
+- změnit oprávnění role,
+- upravit export dat,
+- přidat nový log nebo auditní událost,
+- měnit retry chování integrace.
+
+Zastavit a eskalovat:
+- změnit tenant hranici,
+- přesunout data do nového nástroje,
+- měnit retenci, mazání nebo obnovu dat,
+- obejít bezpečnostní nebo privacy-first pravidlo kvůli rychlosti.
+```
+
+Codyho komentář: hranice samostatnosti nejsou nedůvěra. Jsou to mantinely pro rychlost. Když lidé vědí, kde mohou jednat sami, pracují rychleji. Když vědí, kde mají zastavit, tým později méně uklízí. To je méně heroismu a víc zdravého provozu. Ano, méně dramatické. Přesně o to jde.
+
+### 3. Přesuňte kontrolu z člověka na výstup
+
+Po onboardingu už nemá hlavní otázka znít "kontrolujeme nováčka?". Lepší otázka je "splňuje výstup standard?". Tím se role dostává do normálního pracovního režimu. Kontrola není osobní dohled, ale ověření kvality výstupu proti dohodnutým kritériím.
+
+Pro každou opakovanou oblast vytvořte krátkou výstupní definici:
+
+```text
+Typ výstupu:
+Kdy je hotovo:
+Který checklist se používá:
+Kdo kontroluje první 2 až 3 výstupy:
+Kdy se kontrola sníží:
+Jaké chyby vrací práci zpět:
+Privacy-first brána:
+```
+
+Příklad pro případovou studii:
+
+```text
+Typ výstupu: veřejná case study
+Kdy je hotovo: jasný problém, postup, výsledek, anonymizace nebo schválené citace, interní kontrola faktů
+Checklist: šablona případové studie a předpublikační checklist
+Kontrola prvních výstupů: marketing lead a člověk odpovědný za zákaznický vztah
+Kontrola se sníží: po dvou publikovaných studiích bez zásadních vratek
+Vrací práci zpět: nepodložený výsledek, citlivý detail, nejasný slib, chybějící privacy kontrola
+Privacy-first brána: žádné osobní ani obchodně citlivé údaje bez jasného schválení a účelu
+```
+
+Tento přístup je fér. Člověk ví, co se posuzuje. Tým nehodnotí dojem, ale výstup. A když se stejná chyba opakuje, neznamená to automaticky problém člověka. Může to znamenat slabou definici hotovo, nejasný checklist nebo chybějící příklad.
+
+### 4. Zaveďte první samostatný cyklus
+
+Přechod do samostatnosti má být vidět na konkrétním cyklu práce. Vyberte jednu oblast, kterou člověk během dvou až čtyř týdnů povede od začátku do konce. Ne příliš kritickou, ale reálnou. Umělý test toho moc neukáže.
+
+Příklady:
+
+- Marketing: připravit, publikovat a vyhodnotit jednu landing page pro konkrétní nabídku.
+- Sales: vést kvalifikaci několika inbound leadů podle pipeline a zapsat zpětnou vazbu do CRM.
+- Engineering: převzít malý release od ticketu přes testy až po poznámku do changelogu.
+- Support: vyřešit sérii tiketů včetně štítkování, anonymizované eskalace a návrhu dokumentační úpravy.
+- Operations: projít jeden nástroj v dodavatelském registru, ověřit přístupy, data, retenci a exit plán.
+
+Šablona cyklu:
+
+```text
+Samostatný cyklus:
+Výsledek:
+Hranice rozsahu:
+Kontrolní body:
+Co člověk rozhoduje sám:
+Co se má eskalovat:
+Jaké artefakty se aktualizují:
+Jak se vyhodnotí dopad:
+```
+
+Kontrolní body mají být krátké. Například úvodní sanity check rozsahu, rychlá kontrola před publikací nebo releasem a závěrečné review výstupu. Cílem není převzít práci zpět. Cílem je zachytit chyby včas a zároveň nechat člověka nést skutečné vlastnictví.
+
+### 5. Hlídejte privacy-first návyky jako součást role
+
+Privacy-first práce nesmí zůstat onboardingovým tématem, které se odškrtne první týden. Má být součástí běžné role. Po přechodu do samostatnosti proto ověřte, jestli člověk drží datové návyky bez připomínání.
+
+Sledujte hlavně:
+
+- Nepřidává zbytečná pole do formulářů.
+- Neposílá zákaznická data do neověřených nástrojů.
+- U dočasných exportů uvádí vlastníka a datum smazání.
+- U screenshotů, supportních ukázek a case studies anonymizuje citlivé údaje.
+- U nových eventů nebo reportů umí říct, jaké rozhodnutí díky nim uděláme.
+- U nového dodavatele se ptá, kde jsou data, kdo k nim má přístup a jaký je exit plán.
+- U veřejné komunikace nerozkrývá interní detaily, které zákazník nepotřebuje vědět.
+
+Praktický test:
+
+```text
+Vyber jeden reálný výstup z posledních dvou týdnů.
+Kde vznikla datová stopa?
+Byla nutná pro účel práce?
+Kdo k ní má přístup?
+Kdy se smaže nebo archivuje?
+Je zapsaná ve správném artefaktu?
+Co by šlo příště sbírat méně?
+```
+
+Když člověk umí odpovědět bez paniky a bez hledání tajného znalce, privacy-first hodnota se začala stávat provozním návykem. Přesně tam ji chcete mít.
+
+### 6. Uzavřete onboarding otevřením rozvojového backlogu
+
+Onboarding končí, ale učení ne. Rozdíl je v tom, že další zlepšování už nemá být řízené uvítacím plánem. Má být součástí rozvoje role. Po prvním samostatném cyklu proto vytvořte malý rozvojový backlog.
+
+Nemá to být osobní seznam slabin. Má to být praktický plán, jak zvýšit samostatnost, kvalitu výstupů a dopad role.
+
+```text
+Role:
+Co už funguje samostatně:
+Kde je potřeba opakovaná kontrola:
+Která rozhodnutí jsou další kandidát na předání:
+Jaký pracovní artefakt je potřeba zlepšit:
+Jaká dovednost nebo kontext chybí:
+Privacy-first návyk k posílení:
+Další samostatný cyklus:
+Datum review:
+```
+
+Příklad:
+
+```text
+Role: support specialist
+Funguje samostatně: běžné tikety, štítkování, návrhy krátkých odpovědí
+Potřebuje kontrolu: eskalace produktových patternů do roadmapy
+Další rozhodnutí k předání: kdy z tiketu vzniká dokumentační změna
+Artefakt ke zlepšení: eskalační šablona s anonymizovaným příkladem
+Chybí: lepší kontext k billing výjimkám
+Privacy-first návyk: mazání lokálních screenshotů po uzavření tiketu
+Další cyklus: převzít jeden týdenní support review
+Datum review: za 30 dní
+```
+
+Takový backlog pomáhá držet růst role v práci, ne v obecných slibech. "Zlepšit samostatnost" je mlha. "Převzít týdenní support review a doplnit anonymizovanou eskalační šablonu" je práce.
+
+### 7. Checklist přílohy
+
+- Má role po onboardingu jasně napsané, co člověk vlastní samostatně?
+- Víme, co vlastní s kontrolou a co zatím jen sleduje?
+- Jsou hranice samostatnosti rozdělené na rozhodnout, navrhnout ke kontrole a eskalovat?
+- Přesunuli jsme kontrolu z osoby na kvalitu výstupu a definici hotovo?
+- Má první samostatný cyklus reálný výsledek, hranice rozsahu a krátké kontrolní body?
+- Jsou privacy-first návyky ověřené na reálném výstupu, ne jen připomenuté v dokumentu?
+- Existuje fallback člověk nebo role pro nejisté situace?
+- Má člověk rozvojový backlog navázaný na konkrétní pracovní artefakty?
+- Vracíme opakované nejasnosti zpět do lesson packu, checklistů nebo týmové paměti?
+- Umíme po 30 dnech říct, jestli se samostatnost zvýšila konkrétním způsobem?
+
+Přechod z onboardingu do samostatnosti je bod, kde se ukáže zralost týmu. Slabý tým nechá člověka "nějak plavat" nebo ho drží v nekonečné kontrole. Silnější tým předá vlastnictví postupně, s jasnými hranicemi a výstupními kritérii. Výsledek je klidnější provoz: méně čekání, méně překvapení, méně zbytečných dat a víc práce, kterou jde svěřit bez drama manuálu.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -37501,3 +37725,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DR o převodu schválených lekcí do onboardingu a revizí: publikum lekcí, pracovní artefakty, lesson packy, malé dávky změn, ověření použití a privacy-first kontrola.
 - 2026-05-11: Doplněna Příloha DS o kontrole účinnosti onboardingu po zavedení lekcí: rozhodovací scénáře, kontrolní okamžiky, skrytá ruční podpora, privacy-first datové toky, scorecard a smyčka zpět do týmové paměti.
 - 2026-05-11: Doplněna Příloha DT o revizi lesson packu po prvním měsíci samostatné práce: oddělení výkonu člověka od kvality systému, důkazy z reálné práce, chybějící rozhodovací situace, zkrácení balíčku, úpravy podle role a privacy-first kontrola prvních návyků.
+- 2026-05-11: Doplněna Příloha DU o přechodu z onboardingu do dlouhodobé samostatnosti role: mapa vlastnictví, hranice eskalace, kontrola výstupů, první samostatný cyklus, privacy-first návyky a rozvojový backlog.
