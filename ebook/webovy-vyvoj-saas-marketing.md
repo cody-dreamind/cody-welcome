@@ -35626,6 +35626,178 @@ Výstup kontroly má být krátký. Jedna věta o stavu a jedna další akce. Po
 
 Provozní standardy mají být lehké, ale skutečné. Nejlepší standard není ten nejdelší. Je to ten, který tým použije ve chvíli, kdy má málo času, neúplné informace a potřebuje udělat správný další krok.
 
+## Příloha DL: Kontrola životnosti provozního standardu
+
+Zavést provozní standard je jednodušší než ho udržet živý. První verze často vznikne po incidentu, fallbacku, předání nebo bolestivé chybě. Tým má energii, problém si pamatuje a všichni souhlasí, že "tohle už se nesmí opakovat". O měsíc později je realita klidnější. Standard leží v dokumentaci, proces běží trochu jinak a nikdo si není jistý, jestli je nový postup pomoc, nebo jen další vrstva práce.
+
+Proto se vyplatí dělat kontrolu životnosti. Neptá se, jestli standard existuje. Ptá se, jestli se používá, jestli snižuje riziko, jestli nezvyšuje zbytečnou práci a jestli pořád odpovídá tomu, jak tým skutečně funguje.
+
+Kontrola životnosti má čtyři výsledky:
+
+1. Ponechat standard beze změny.
+2. Zjednodušit standard, protože je moc těžký.
+3. Sloučit standard s jiným artefaktem, protože vytváří duplicitu.
+4. Zrušit standard, protože už neřeší reálné riziko.
+
+To poslední je důležité. Zrušit standard není selhání. Selhání je držet dokument jen proto, že jeho vytvoření stálo práci. Dokumentace, kterou nikdo nepoužívá, není bezpečnostní síť. Je to šum, který zhoršuje hledání pravdy ve chvíli, kdy tým potřebuje jednat rychle.
+
+### 1. Zeptejte se na reálné použití
+
+První otázka není "je standard správně napsaný?". První otázka je "kdy ho někdo naposledy použil?". Pokud standard za poslední měsíc nikdo neotevřel, může to znamenat dvě věci: buď nenastala situace, pro kterou vznikl, nebo standard není zapojený do pracovního toku.
+
+Krátká kontrola použití:
+
+- Kdo standard použil?
+- V jaké situaci?
+- Pomohl rozhodnout další krok?
+- Zkrátil práci, nebo ji prodloužil?
+- Bylo jasné, kde najít aktuální verzi?
+- Vznikla po použití nová poznámka, oprava nebo otázka?
+
+Příklad: po fallbacku poptávkového formuláře vznikl standard pro ruční zpracování leadů. Kontrola po měsíci ukáže, že formulář od té doby nespadl, takže standard nebyl použit v ostré situaci. To neznamená, že je zbytečný. Zkuste krátký drill: vezměte testovací poptávku, projděte ruční režim a změřte, jestli tým ví, kam zprávu zapsat, kdo odpovídá a jak se později data sloučí zpět.
+
+Pokud se standard nepoužil ani v testu, protože nikdo neví, kde je, problém není v obsahu. Problém je v dostupnosti.
+
+### 2. Měřte tření, ne počet odstavců
+
+Standard může být stručný a přesto nepoužitelný. Může být dlouhý a přesto užitečný, pokud vede tým přes složitou situaci. Délka sama o sobě není dobrá metrika. Sledujte tření.
+
+Signály tření:
+
+- Lidé standard obcházejí a ptají se v chatu.
+- Stejná otázka se opakuje i po zavedení standardu.
+- Vznikají kopie dokumentu, screenshoty nebo soukromé poznámky.
+- Standard vyžaduje údaje, které tým při práci nemá.
+- Kroky jsou napsané pro ideální stav, ne pro běžnou realitu.
+- Není jasné, kdo může udělat výjimku.
+- Privacy-first část je obecná, takže nevede k rozhodnutí o datech.
+
+Když najdete tření, neopravujte hned celý dokument. Vyberte jedno místo, kde se práce zasekává. Často stačí přidat příklad, odstranit dvě zbytečná pole nebo přesunout odkaz do nástroje, kde práce skutečně vzniká.
+
+Codyho komentář: mnoho týmů zaměňuje "máme standard" za "máme vyřešeno". Standard je jen návrh chování. Dokud ho člověk pod tlakem nepoužije bez dlouhého přemýšlení, je to spíš přání ve formátu Markdown.
+
+### 3. Udělejte scorecard životnosti
+
+Pro kontrolu stačí jednoduchá scorecard. Nejde o akademické hodnocení. Jde o rychlé rozhodnutí, zda standard ponechat, upravit, sloučit nebo zrušit.
+
+```text
+Název standardu:
+Vlastník:
+Situace, pro kterou vznikl:
+Datum zavedení:
+Datum kontroly:
+
+Použití za poslední období: žádné / test / ostrý provoz
+Srozumitelnost: nízká / střední / vysoká
+Tření při použití: nízké / střední / vysoké
+Snížení rizika: nejasné / částečné / jasné
+Dopad na data a privacy-first provoz: nezměněn / zlepšen / zhoršen
+Duplicitní artefakty: ne / ano
+
+Rozhodnutí: ponechat / zjednodušit / sloučit / zrušit
+Další krok:
+Vlastník dalšího kroku:
+Datum další kontroly:
+```
+
+Příklad vyplnění:
+
+```text
+Název standardu: Ruční zpracování poptávek při výpadku formuláře
+Vlastník: Operations lead
+Situace, pro kterou vznikl: formulář neodesílá zprávy do CRM
+Datum zavedení: 2026-05-11
+Datum kontroly: 2026-06-10
+
+Použití za poslední období: test
+Srozumitelnost: střední
+Tření při použití: střední
+Snížení rizika: částečné
+Dopad na data a privacy-first provoz: zlepšen
+Duplicitní artefakty: ano
+
+Rozhodnutí: sloučit
+Další krok: Přesunout ruční formulářový postup do hlavního incidentního runbooku a odstranit samostatnou kopii v marketingové složce.
+Vlastník dalšího kroku: Operations lead
+Datum další kontroly: 2026-07-10
+```
+
+Takový zápis je dost krátký, aby vznikl během deseti minut, a dost konkrétní, aby zabránil mlhavému "ještě to někdy doladíme".
+
+### 4. Zkontrolujte zdroj pravdy
+
+Nejčastější smrt provozního standardu je tichá duplicita. Standard je v e-booku, v interní wiki, v issue, ve sdíleném dokumentu, v komentáři u pull requestu a ještě ve zprávě v chatu. Každé místo obsahuje trochu jinou verzi. Při klidné práci to jen obtěžuje. Při incidentu to škodí.
+
+Kontrola zdroje pravdy:
+
+- Existuje jedna kanonická verze?
+- Odkazují ostatní místa na ni, nebo obsah kopírují?
+- Je u standardu datum poslední změny?
+- Je jasné, kdo může standard upravit?
+- Jsou staré verze označené jako archiv?
+- Je standard dostupný i člověku, který nezná interní historii?
+
+Praktické pravidlo: pokud standard musí být na více místech, nechť je na jednom místě obsah a jinde jen krátký odkaz s kontextem. Například v backlogu může být odkaz "při výpadku formuláře postupujte podle incidentního runbooku". Nemá tam být zkopírovaných patnáct kroků, které se za měsíc rozejdou s pravdou.
+
+### 5. Privacy-first kontrola životnosti
+
+Standardy často mění práci s daty nenápadně. Přidají ruční export. Dočasnou tabulku. Nouzový e-mailový postup. Nový přístup pro support. Kopii dat pro kontrolu. Každá z těchto věcí může být rozumná, ale nesmí zůstat viset po vyřešení původního problému.
+
+Při kontrole životnosti se ptejte:
+
+- Vznikla kvůli standardu nová kopie osobních nebo zákaznických dat?
+- Je tato kopie pořád potřebná?
+- Má jasného vlastníka a retenci?
+- Byly dočasné přístupy odebrané?
+- Nezůstaly testovací exporty, screenshoty nebo přílohy v chatu?
+- Neobchází standard běžné oprávnění jen proto, že to bylo rychlejší?
+- Je ruční proces bezpečnější než původní improvizace, nebo jen lépe popsaný?
+
+Privacy-first standard není ten, který má na konci větu "dodržujte GDPR". Je to standard, který konkrétně říká, jaká data se používají, kde se zapisují, kdo k nim má přístup a kdy se mažou. Pokud to neříká, není připravený na dlouhodobý provoz.
+
+### 6. Rozhodnutí po kontrole
+
+Po kontrole nesmí zůstat jen dobrý pocit. Vyberte jeden ze čtyř výsledků.
+
+`Ponechat`: standard je používaný, srozumitelný a snižuje riziko. Zapište datum další kontroly a neměňte ho jen proto, že se dá formulace vylepšit.
+
+`Zjednodušit`: standard funguje, ale má moc polí, moc kroků nebo moc výjimek. Odstraňte části, které lidé nepotřebují k rozhodnutí.
+
+`Sloučit`: standard řeší stejnou situaci jako jiný artefakt. Přesuňte užitečné části do kanonického dokumentu a staré místo nahraďte odkazem.
+
+`Zrušit`: standard už neodpovídá realitě, riziko zmizelo nebo existuje lepší proces. Archivujte ho s krátkou poznámkou, proč skončil, aby se za půl roku nevrátil jako zapomenutý nápad.
+
+Šablona rozhodnutí:
+
+```text
+Standard:
+Kontrolované období:
+Hlavní zjištění:
+Rozhodnutí:
+Co se změní:
+Co se odstraní:
+Dopad na data, přístupy a dokumentaci:
+Vlastník:
+Termín:
+```
+
+Nejlepší rozhodnutí bývá malé. Jedna úprava, jeden přesun, jedno zrušení duplicity. Tým má po kontrole cítit méně chaosu, ne větší dokumentační dluh.
+
+### Checklist přílohy
+
+- Má každý nový provozní standard datum první kontroly?
+- Ptáte se na reálné použití, ne jen na existenci dokumentu?
+- Umíte udělat krátký drill, pokud standard zatím nebyl použit v provozu?
+- Sledujete tření při použití: opakované otázky, obcházení, duplicity a chybějící vstupy?
+- Má standard scorecard životnosti s rozhodnutím ponechat, zjednodušit, sloučit nebo zrušit?
+- Existuje jedna kanonická verze a ostatní místa na ni jen odkazují?
+- Odstraňujete staré kopie, screenshoty a soukromé poznámky?
+- Kontrolujete dočasné exporty, přístupy, tabulky a retenci dat?
+- Umíte standard zrušit bez pocitu, že tím mažete užitečnou práci?
+- Zapisujete po kontrole jeden konkrétní další krok?
+
+Provozní standard je živý jen tehdy, když pomáhá v reálné práci. Jakmile začne překážet, rozcházet se s praxí nebo vytvářet falešný pocit kontroly, je čas ho zkrátit, sloučit nebo ukončit. Dobrá údržba dokumentace není v tom, že všechno schováte navždy. Je v tom, že tým vždycky najde právě tolik pravdy, kolik potřebuje pro správné rozhodnutí.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -35869,3 +36041,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DI o návratu z fallbacku do běžného provozu: ověření stability, uzavření nouzového režimu, sloučení dat, privacy-first úklid, kontrola zákaznického dopadu a rozhodnutí, zda proces obnovit, upravit, nahradit nebo zastavit.
 - 2026-05-11: Doplněna Příloha DJ o post-fallback review a trvalém zlepšení provozu: časová osa, příznak/příčina/kontrola, malé změny, aktualizace provozních artefaktů, privacy-first úklid a uzavření komunikace.
 - 2026-05-11: Doplněna Příloha DK o převodu post-fallback zlepšení do provozního standardu: karta změny, aktualizace artefaktů, vlastnictví, mini drill, privacy-first kontrola a ověření po 14 až 30 dnech.
+- 2026-05-11: Doplněna Příloha DL s kontrolou životnosti provozního standardu: reálné použití, tření, scorecard, zdroj pravdy, privacy-first kontrola a rozhodnutí ponechat, zjednodušit, sloučit nebo zrušit.
