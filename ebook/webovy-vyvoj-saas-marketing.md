@@ -36566,6 +36566,140 @@ Privacy-first hodnota se pozná i podle toho, jak tým zachází s vlastními po
 
 Týmová paměť má být provozní pomůcka, ne muzeum minulých problémů. Když je krátká, konkrétní a napojená na rozhodnutí, pomáhá týmu růst bez toho, aby pokaždé znovu platil stejnou školní daň. A když drží privacy-first hranice, nezlepšuje proces na úkor důvěry lidí, jejichž data se v procesu objevila.
 
+## Příloha DQ: Triage týmové paměti bez znalostního skladu
+
+Jakmile tým začne zapisovat provozní lekce, objeví se druhé riziko: lekcí je moc, nejsou roztříděné a nikdo neví, které mají změnit práci. Z dobrého nápadu se stane znalostní sklad. Všechno je uloženo, nic není použito. Tým má pocit, že se učí, ale v praxi jen vyrábí další místo, které je potřeba spravovat.
+
+Triage týmové paměti je krátký pravidelný proces, který rozhoduje, co se s novými lekcemi stane. Neřeší detailní editaci textu. Řeší stav: použít, sloučit, převést do standardu, odložit, archivovat nebo smazat. Cíl je jednoduchý: žádná lekce nemá zůstat viset bez rozhodnutí.
+
+### 1. Nastavte týdenní nebo dvoutýdenní rytmus
+
+Triage nemusí být dlouhá schůzka. Pro malý tým stačí 25 minut jednou týdně nebo jednou za dva týdny. Důležité je, aby měla pevný vstup a jasný výstup. Pokud se triage dělá jen "až bude čas", nebude se dělat. Čas se v provozu nevyskytuje volně v přírodě, musí se objednat.
+
+Minimální agenda:
+
+1. Projít nové lekce od poslední triage.
+2. Vyřadit duplicitní nebo slabé záznamy.
+3. Vybrat lekce, které mění budoucí rozhodnutí.
+4. Převést je do konkrétní akce.
+5. Zkontrolovat privacy-first dopad.
+6. Uzavřít stav každé lekce.
+
+Výstupem nemá být pocit, že jste si hezky popovídali. Výstupem má být seznam rozhodnutí s vlastníkem, místem změny a termínem.
+
+### 2. Používejte jednoduché stavy
+
+Každá lekce má mít jeden stav. Ne deset sloupců, ne barevné rituály, ne projektové divadlo. Jeden stav, podle kterého každý pozná, co se s lekcí děje.
+
+Praktické stavy:
+
+- Nová: čeká na první triage.
+- Použitelná: má jasný vzor, dopad a možné rozhodnutí.
+- Sloučit: opakuje existující lekci nebo patří do širšího vzoru.
+- Převést do standardu: musí upravit checklist, runbook, onboarding nebo šablonu.
+- Ověřit: chybí data, kontext nebo dopad.
+- Archivovat: poučení je už zachycené jinde nebo není akční.
+- Smazat: obsahuje citlivé, duplicitní nebo nepoužitelné informace.
+
+Příklad:
+
+```text
+Lekce: Při ručním importu poptávek chybělo pravidlo deduplikace.
+Stav: Převést do standardu
+Změna: Doplnit krok "ověřit duplicity podle e-mailu a firmy" do fallback karty pro CRM.
+Vlastník: Operations
+Termín: do dalšího importu
+Privacy-first kontrola: neukládat pomocný export déle než 7 dní po sloučení
+```
+
+Takový stav je hned použitelný. Není to poznámka na někdy. Je to malý provozní závazek.
+
+### 3. Nechte slabé lekce odejít
+
+Ne každá poznámka si zaslouží trvalý život. Týmová paměť má pomáhat rozhodovat, ne sbírat vše, co se kdy stalo. Slabá lekce často popisuje náladu, jednorázovou výjimku nebo detail bez dopadu. Pokud ji necháte v systému, zhoršuje vyhledávání a bere pozornost lekcím, které opravdu mění práci.
+
+Lekci archivujte nebo smažte, když:
+
+- nemá jasnou situaci,
+- nemá dopad na budoucí práci,
+- opakuje už existující pravidlo,
+- popisuje osobní frustraci místo provozního vzoru,
+- obsahuje příliš citlivý detail,
+- nedá se převést do rozhodnutí,
+- nikdo neumí říct, kde by se měla projevit.
+
+Codyho komentář: mazání poznámek není ztráta znalostí. Často je to jediný způsob, jak ty důležité znalosti vůbec najít. Znalostní báze, kde se všechno ponechává "pro jistotu", se po čase mění na digitální půdu. Všechno tam je, ale nikdo tam nechce lézt.
+
+### 4. Slabé opakování slučujte do silného vzoru
+
+Jedna lekce může být malá. Tři podobné lekce už mohou ukazovat systémový problém. Triage má hledat právě tyto vzory. Pokud se pořád objevuje stejný typ potíže, neopravujte jen jednotlivé projevy. Upravte pravidlo, které je spojuje.
+
+Příklad opakování:
+
+- po launchi zůstala aktivní dočasná analytická událost,
+- po fallbacku zůstala pomocná tabulka,
+- po auditu zůstal sdílený export bez vlastníka.
+
+To nejsou tři oddělené drobnosti. Je to jeden vzor: dočasné pracovní artefakty nemají konec. Výsledná změna by proto neměla být "uklidit tři soubory", ale přidat pravidlo, že každý dočasný artefakt musí mít účel, vlastníka, datum smazání a místo evidence.
+
+Šablona pro sloučení:
+
+```text
+Spojovaný vzor:
+Lekce, které do něj patří:
+Společná příčina:
+Který standard se mění:
+Nové pravidlo:
+Kdo ho zavede:
+Kdy ověříme účinek:
+```
+
+Tím se týmová paměť mění z archivu incidentů na mapu provozních vzorů.
+
+### 5. Každou změnu připojte ke zdroji pravdy
+
+Největší chyba triage je vytvořit rozhodnutí, ale nepromítnout ho do místa, kde tým skutečně pracuje. Pokud se pravidlo změní jen v zápisu z triage, lidé ho při další práci neuvidí. Změna musí skončit ve zdroji pravdy: checklistu, runbooku, šabloně, onboardingové stránce, provozní kartě, datové mapě nebo sales materiálu.
+
+U každého rozhodnutí se ptejte:
+
+- Kde tým tuto práci reálně vykonává?
+- Který dokument nebo nástroj lidé otevřou jako první?
+- Co se má změnit v checklistu nebo šabloně?
+- Kdo ověří, že stará verze už není používána?
+- Je potřeba upozornit tým nebo stačí tichá úprava?
+
+Příklad: lekce říká, že support při eskalaci posílal příliš mnoho zákaznických detailů do interního chatu. Správná změna není jen poznámka "dávat pozor". Správná změna je upravit supportní runbook: jak anonymizovat ukázku, kam uložit detail, kdo má oprávnění a jak dlouho se záznam drží.
+
+### 6. Privacy-first triage je samostatný krok
+
+Týmová paměť často obsahuje provozní realitu, a ta umí být citlivá. Při triage proto vždy udělejte krátkou privacy-first kontrolu. Ne až jednou za kvartál, kdy už jsou citlivé detaily dávno zkopírované do pěti míst.
+
+Kontrolní otázky:
+
+- Obsahuje lekce osobní údaje, obchodní tajemství nebo interní incidentní detaily?
+- Je konkrétní jméno zákazníka nutné, nebo stačí anonymní popis segmentu?
+- Neobsahuje ukázka token, URL s parametry, interní ID nebo screenshot citlivého systému?
+- Má lekce správně omezené publikum?
+- Má rozhodnutí dopad na datovou mapu, retenci nebo přístupy?
+- Vznikl při řešení dočasný export, tabulka nebo kopie dat, kterou je potřeba smazat?
+
+Pokud lekce obsahuje citlivý detail, neznamená to, že ji musíte zahodit. Znamená to, že máte oddělit poučení od důkazního materiálu. Poučení patří do obecné týmové paměti. Detail patří do omezeného incidentního nebo provozního záznamu podle interních pravidel.
+
+### 7. Checklist přílohy
+
+- Má tým pevný rytmus triage nových provozních lekcí?
+- Má každá nová lekce stav, vlastníka dalšího kroku a jasné rozhodnutí?
+- Umíme slabé, duplicitní nebo neakční lekce smazat nebo archivovat?
+- Slučujeme opakované drobnosti do provozních vzorů?
+- Převádíme důležité lekce do checklistů, runbooků, šablon nebo onboardingových materiálů?
+- Kontrolujeme, že změna skončila ve zdroji pravdy, který tým opravdu používá?
+- Děláme u každé lekce privacy-first kontrolu citlivých detailů, přístupů, retence a dočasných kopií?
+- Máme pravidlo, kdy lekce patří do obecné týmové paměti a kdy do omezeného incidentního záznamu?
+- Ověřujeme po čase, jestli změna z lekce skutečně snížila opakování problému?
+- Držíme knihovnu lekcí dost krátkou na to, aby ji lidé používali?
+
+Triage týmové paměti je malý provozní návyk. Nepotřebuje složitý nástroj. Potřebuje disciplínu zavírat otevřené poznatky. Jakmile lekce dostane stav, rozhodnutí a cestu do zdroje pravdy, přestává být poznámkou a začíná být zlepšením.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -36814,3 +36948,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DN o reaktivaci archivovaného standardu: důvod návratu, rozdílová kontrola, pilotní okno, privacy-first brána, nová verze a checklist.
 - 2026-05-11: Doplněna Příloha DO o kontrole reaktivovaného standardu po prvním ostrém použití: výsledek, proces, skrytá ruční práce, datová stopa, rozhodnutí a checklist.
 - 2026-05-11: Doplněna Příloha DP o převodu provozní zkušenosti do týmové paměti: karty lekcí, třídění vzorů, rozhodnutí, onboarding, review a privacy-first pravidla.
+- 2026-05-11: Doplněna Příloha DQ o triage týmové paměti: stavy lekcí, slučování vzorů, převod do zdroje pravdy, privacy-first kontrola a checklist.
