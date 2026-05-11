@@ -37670,6 +37670,213 @@ Tím se review vrací zpět do týmové paměti. Ne jako další složka plná p
 
 První review samostatné role má jednoduchý cíl: proměnit předání práce v opakovatelný provoz. Když review skončí jen pochvalou nebo výtkou, systém se moc nenaučil. Když skončí zpřesněním hranic, úpravou artefaktu, čistší datovou stopou a jasným dalším cyklem, role se stává opravdu samostatnější. A tým získává víc než jednoho zaučeného člověka: získává lepší způsob předávání odpovědnosti.
 
+## Příloha DW: Rozšíření vlastnictví role po prvních samostatných cyklech
+
+První review samostatné role řeší, jestli předání vlastnictví funguje. Další krok je citlivější: rozhodnout, jestli se má vlastnictví rozšířit. Ne proto, že člověk "už je dobrý", ale protože reálné cykly ukázaly, že umí držet kvalitu výstupu, rozhodovací hranice, provozní stopu a privacy-first návyky bez neviditelné záchranné sítě.
+
+Rozšíření vlastnictví není odměna za snahu. Je to změna provozního systému. Když někomu přidáte větší oblast, přidáváte mu i dopady: na zákazníka, data, rozpočet, marketingové sliby, technické rozhodnutí, dodavatele nebo support. Pokud se to udělá jen pocitově, tým si zadělá na tichý chaos. Pokud se to udělá přes důkazy, role roste zdravě a tým se nezasekne v permanentním schvalování.
+
+Tato příloha pomáhá rozhodnout, kdy a jak rozšířit vlastnictví role po několika samostatných cyklech. Hodí se pro web, SaaS, marketing, support, operations i delivery. Princip je stejný: nejdřív ověřit stabilitu, potom přidat jednu sousední oblast, jasně popsat hranice a po krátkém okně vyhodnotit dopad.
+
+### 1. Nerozšiřujte roli podle kapacity, ale podle důkazů
+
+Častá chyba je přidat vlastnictví člověku, který "má prostor". Volná kapacita ale neříká, že role zvládne větší rozhodovací dopad. Lepší otázka zní: co už člověk opakovaně zvládl tak, že tým nemusel dodatečně uklízet výstup, data ani komunikaci?
+
+Hledejte konkrétní důkazy:
+
+- dokončil alespoň dva podobné cykly bez zásadního vracení,
+- správně eskaloval hraniční rozhodnutí,
+- aktualizoval zdroj pravdy, ne jen vlastní poznámky,
+- držel definici hotovo i bez připomínání,
+- nezanechal dočasné exporty, screenshoty nebo měření bez vlastníka,
+- uměl říct, co bylo mimo rozsah a proč,
+- po review navrhl jednu systémovou úpravu, ne jen osobní vysvětlení.
+
+Šablona důkazů:
+
+```text
+Role:
+Oblast aktuálního vlastnictví:
+Poslední 2 až 3 cykly:
+Kvalita výstupů:
+Kvalita rozhodnutí:
+Provozní stopa:
+Skrytá pomoc:
+Opakované tření:
+Privacy-first návyky:
+Závěr:
+```
+
+Pokud důkazy chybí, nerozšiřujte roli jen proto, že to organizačně láká. Přidejte ještě jeden menší cyklus s jasným review. To je pomalejší jen na papíře. Ve skutečnosti je to rychlejší než pozdější opravy.
+
+### 2. Vyberte sousední oblast, ne celý nový svět
+
+Dobré rozšíření role navazuje na existující vlastnictví. Marketingový člověk, který vlastní landing pages, může převzít i měsíční kontrolu kvality poptávek z těchto stránek. Nemusí rovnou vlastnit celý pricing, CRM a kampaně. Engineer, který drží menší release, může převzít část release poznámek a monitoring po vydání. Nemusí hned vlastnit incident response pro celý produkt.
+
+Sousední oblast má tři vlastnosti:
+
+- používá podobné artefakty,
+- navazuje na stejné rozhodovací situace,
+- má omezený dopad při chybě.
+
+Příklad pro web a marketing:
+
+```text
+Aktuální vlastnictví: publikace landing page podle checklistu
+Sousední rozšíření: měsíční review výkonu landing pages a návrh jedné úpravy
+Zatím nerozšiřovat: změna hlavního slibu nabídky, nový analytický nástroj, pricing
+```
+
+Příklad pro SaaS engineering:
+
+```text
+Aktuální vlastnictví: malé UI releasy v existujícím workflow
+Sousední rozšíření: post-release kontrola chyb, changelog a návrh jedné dokumentační úpravy
+Zatím nerozšiřovat: změny oprávnění, tenant izolace, retence dat
+```
+
+Codyho komentář: růst role není sprint do většího chaosu. Je to přidávání odpovědnosti po malých kusech, které spolu souvisí. Když člověk skvěle spravuje formuláře, neznamená to automaticky, že má zítra vybírat nový CRM systém. To není kariérní růst, to je provozní hazard s hezčím názvem.
+
+### 3. Popište nové vlastnictví jako pracovní kontrakt
+
+Rozšíření role musí být napsané. Ne do formálního HR dokumentu plného mlhy, ale do krátké pracovní dohody, kterou člověk i tým opravdu použijí.
+
+Pracovní kontrakt:
+
+```text
+Nové vlastnictví:
+Proč se rozšiřuje:
+Jaký výsledek má role doručovat:
+Co člověk rozhoduje sám:
+Co navrhuje ke kontrole:
+Co musí eskalovat:
+Které artefakty vlastní:
+Jaké signály sleduje:
+Privacy-first hranice:
+Fallback:
+První review:
+```
+
+Příklad:
+
+```text
+Nové vlastnictví: měsíční review landing pages
+Proč: role opakovaně zvládla publikaci stránek a kontrolu formulářů
+Výsledek: jednou měsíčně návrh jedné konkrétní úpravy podle kvality poptávek
+Rozhoduje sám: interní odkazy, drobné copy úpravy, označení stránek k revizi
+Ke kontrole: změna hlavního CTA, nový event, nové pole formuláře
+Eskalovat: nový tracker, změna privacy textu, slib nové služby
+Artefakty: checklist landing page, datová mapa formulářů, měsíční poznámka
+Signály: odeslané formuláře, kvalita leadů, dotazy ze sales, tření ve formuláři
+Privacy-first hranice: žádné osobní údaje v analytice, žádný automatický newsletter
+Fallback: growth lead
+První review: po jednom měsíčním cyklu
+```
+
+Tato dohoda chrání obě strany. Člověk ví, kde má prostor. Tým ví, co může čekat. A když se něco pokazí, review řeší konkrétní hranici nebo artefakt, ne neurčité "měli jsme si to říct".
+
+### 4. Přidejte ochranné signály
+
+Čím větší vlastnictví, tím důležitější jsou ochranné signály. Nejsou to metriky úspěchu. Jsou to brzdy, které říkají: pozor, rozšíření možná vytváří vedlejší škodu.
+
+Ochranné signály pro web a marketing:
+
+- přibyla formulářová pole bez jasného účelu,
+- roste počet externích skriptů,
+- sales hlásí horší kvalitu leadů,
+- stránka slibuje víc, než delivery umí doručit,
+- privacy texty nebo datová mapa nestíhají změny.
+
+Ochranné signály pro SaaS:
+
+- přibyly výjimky v oprávněních,
+- support častěji vysvětluje stejný workflow,
+- logy obsahují zbytečný obsah zákaznických dat,
+- release poznámky neodpovídají skutečné změně,
+- zákazník nemá jasný export nebo stav dat po ukončení.
+
+Ochranný signál má mít vlastníka a akci:
+
+```text
+Signál:
+Kdo ho sleduje:
+Kdy se kontroluje:
+Co znamená varování:
+Jaká je první reakce:
+Kdy se vlastnictví dočasně zúží:
+```
+
+Bez ochranných signálů se rozšíření role hodnotí jen podle toho, jestli "se stíhá práce". To je málo. Role může stíhat víc úkolů a zároveň zhoršovat kvalitu dat, důvěru, onboarding nebo provozní pořádek.
+
+### 5. Nechte první rozšířený cyklus malý
+
+První cyklus po rozšíření vlastnictví nemá dokazovat všechno. Má ověřit jednu věc: jestli nové hranice fungují v reálné práci. Proto ho držte malý, časově omezený a dobře pozorovatelný.
+
+Příklady prvního rozšířeného cyklu:
+
+- Marketing: jeden měsíční review landing pages a návrh jedné úpravy.
+- Sales: převzetí kvalifikačního review pro jeden segment leadů.
+- Engineering: post-release kontrola jedné menší změny včetně changelogu a monitoringu.
+- Support: týdenní souhrn opakovaných dotazů a návrh jedné úpravy dokumentace.
+- Operations: kontrola jednoho dodavatele v registru včetně dat, přístupů a exit plánu.
+
+Šablona cyklu:
+
+```text
+Rozšířené vlastnictví:
+První cyklus:
+Co se má stát:
+Co je mimo rozsah:
+Kontrolní body:
+Ochranné signály:
+Co se zapíše do zdroje pravdy:
+Datum review:
+```
+
+Po prvním cyklu se neptejte jen, jestli se výstup povedl. Ptejte se, jestli je nové vlastnictví opakovatelné bez ručního dohledu. To je rozdíl mezi jednorázovým výkonem a skutečnou rolí.
+
+### 6. Vyhodnoťte dopad do týmu
+
+Rozšíření role mění práci okolních lidí. Někdo má méně schvalovat, někdo má dostat lepší vstup, někdo má přestat držet kontext v hlavě. Pokud se dopad nevyhodnotí, rozšíření může jen přesunout práci do méně viditelného místa.
+
+Zeptejte se:
+
+- Ubylo čekání na seniorní kontrolu?
+- Zlepšila se kvalita vstupů pro navazující tým?
+- Přibyly nejasnosti, protože ostatní nevědí, co role nově vlastní?
+- Změnily se přístupy, artefakty nebo notifikace?
+- Ví fallback, kdy má zasáhnout?
+- Přestaly se některé věci dělat duplicitně?
+
+Krátký týmový záznam:
+
+```text
+Co se přesunulo:
+Komu ubyla práce:
+Komu přibyl nový vstup:
+Kde vzniklo tření:
+Co je potřeba oznámit týmu:
+Co se mění v artefaktech:
+```
+
+Rozšíření vlastnictví má týmu zjednodušit provoz. Pokud po něm lidé nevědí, kdo rozhoduje, kde je zdroj pravdy a kdo drží privacy-first kontrolu, nebylo to rozšíření. Byl to jen přesun mlhy.
+
+### 7. Checklist přílohy
+
+- Máme důkazy z několika samostatných cyklů, ne jen pocit kapacity?
+- Je nová oblast sousední k současnému vlastnictví?
+- Víme, co zatím zůstává mimo rozsah?
+- Je nové vlastnictví napsané jako pracovní kontrakt?
+- Jsou jasné hranice: rozhodnout sám, navrhnout ke kontrole, eskalovat?
+- Má role vlastní artefakty, signály a fallback?
+- Existují ochranné signály pro kvalitu, data, zákazníka a provoz?
+- Je první rozšířený cyklus malý, reálný a časově omezený?
+- Vyhodnotíme dopad do navazujících lidí a týmových artefaktů?
+- Zkontrolujeme privacy-first stopu po prvním rozšířeném cyklu?
+- Víme, kdy vlastnictví rozšířit dál, ponechat, zúžit nebo vrátit do kontroly?
+
+Rozšíření vlastnictví role je zdravé tehdy, když tým získá víc samostatnosti bez ztráty kontroly. Nejde o to přidat člověku další úkoly. Jde o to předat mu kus systému tak, aby ho uměl zlepšovat, udržovat a chránit. Když je nové vlastnictví malé, jasné a vyhodnocené, role roste přirozeně. A tým se učí škálovat odpovědnost, ne jen počet položek v backlogu.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -37924,3 +38131,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DT o revizi lesson packu po prvním měsíci samostatné práce: oddělení výkonu člověka od kvality systému, důkazy z reálné práce, chybějící rozhodovací situace, zkrácení balíčku, úpravy podle role a privacy-first kontrola prvních návyků.
 - 2026-05-11: Doplněna Příloha DU o přechodu z onboardingu do dlouhodobé samostatnosti role: mapa vlastnictví, hranice eskalace, kontrola výstupů, první samostatný cyklus, privacy-first návyky a rozvojový backlog.
 - 2026-05-11: Doplněna Příloha DV o prvním review samostatné role po předání vlastnictví: konkrétní cyklus, rozhodnutí, skrytá pomoc, privacy-first stopa, stav role a převod poučení do systému.
+- 2026-05-11: Doplněna Příloha DW o rozšíření vlastnictví role po prvních samostatných cyklech: důkazy, sousední oblast, pracovní kontrakt, ochranné signály, první rozšířený cyklus a privacy-first kontrola.
