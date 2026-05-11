@@ -34537,6 +34537,172 @@ To je dobrý výsledek. Ne proto, že je automatizace dokonalá. Protože tým n
 
 První měsíční kontrola je ochrana před samovolným provozem. Automatizace nemá získat právo existovat jen tím, že se kdysi povedla. Má si průběžně obhajovat hodnotu, kvalitu a datovou stopu. Když to dokáže, zaslouží si zůstat. Když ne, je lepší ji opravit nebo vypnout včas, dokud je to pořád malý zásah.
 
+## Příloha DF: Revize automatizace po změně procesu
+
+Automatizace se často nerozbije proto, že by přestal fungovat kód. Rozbije se proto, že se změnil proces kolem ní. Přibyl nový typ zákazníka, formulář dostal další pole, sales tým začal jinak kvalifikovat poptávky, produkt změnil onboarding nebo zákaznická podpora začala používat nový štítek. Automatizace dál poslušně běží, ale pracuje se starými předpoklady. To je nebezpečnější než viditelný výpadek, protože chyba se tváří jako normální provoz.
+
+Po každé větší změně procesu proto nedělejte jen technický smoke test. Udělejte revizi předpokladů. Zeptejte se: platí ještě důvod, proč automatizace existuje? Dostává stejné vstupy? Posílá výstup stejným lidem? Pomáhá pořád stejnému rozhodnutí? A nezvětšila se její datová stopa jen proto, že někdo přidal pole "pro jistotu"?
+
+Tato příloha navazuje na první měsíční kontrolu automatizace. Tam ověřujete, jestli automatizace přežila přechod z pilotu do trvalého provozu. Tady řešíte chvíli, kdy se kolem ní změnil svět.
+
+### Kdy revizi spustit
+
+Revize automatizace po změně procesu nemá běžet každý týden jen proto, aby vznikla další tabulka. Spouštějte ji při konkrétních změnách, které mohou změnit smysl vstupu, výstupu nebo odpovědnosti.
+
+Typické spouštěče:
+
+- mění se formulář, který automatizace čte;
+- mění se CRM pipeline, štítky, vlastník leadu nebo kvalifikační pravidla;
+- přidává se nový segment zákazníků, nový balíček služby nebo nová cenová úroveň;
+- mění se onboarding, support workflow nebo handoff mezi týmy;
+- automatizace začíná pracovat s novým nástrojem, úložištěm nebo typem dat;
+- přibývá nová notifikace, kopie výstupu nebo interní příjemce;
+- zákazníci nebo tým začali výstup interpretovat jinak než původně;
+- došlo k incidentu, chybné eskalaci nebo sérii ručních oprav.
+
+Jednoduché pravidlo: když by změna procesu vyžadovala vysvětlení novému člověku, pravděpodobně vyžaduje i revizi automatizace.
+
+### Mapa předpokladů
+
+Každá automatizace má skrytou smlouvu s realitou. Předpokládá, že určitá data znamenají určitou věc, že určitý stav je konečný, že určitý člověk má převzít další krok a že určitá chyba se může ignorovat. Při změně procesu je potřeba tuto smlouvu znovu přečíst.
+
+Použijte krátkou mapu předpokladů:
+
+| Oblast | Otázka | Příklad rizika |
+|---|---|---|
+| Vstup | Co automatizace očekává na vstupu? | Nové pole ve formuláři není povinné, ale automatizace ho bere jako rozhodovací signál. |
+| Význam | Co jednotlivé hodnoty znamenají? | Štítek "enterprise" dřív znamenal velikost firmy, teď typ balíčku. |
+| Výstup | Kdo výstup používá a k čemu? | Sales bere automatický souhrn jako kvalifikaci, i když měl být jen poznámkou. |
+| Výjimky | Co se stane, když vstup nesedí? | Chybějící telefon přeskočí celý lead místo toho, aby vytvořil úkol ke kontrole. |
+| Data | Jaká data se ukládají, kam a na jak dlouho? | Nová notifikace posílá osobní údaje do kanálu s širším přístupem. |
+| Odpovědnost | Kdo může automatizaci změnit nebo vypnout? | Úpravu udělal člověk, který nezná dopad na support. |
+
+Mapa nemusí být dlouhá. Má být dost konkrétní na to, aby odhalila změnu významu. Když se tým u jedné položky začne hádat, je to dobrý signál. Automatizace nemá běžet přes nevyjasněný pojem.
+
+### Testujte staré i nové scénáře
+
+Po změně procesu nestačí vyzkoušet jeden ideální průchod. Potřebujete porovnat starý a nový svět.
+
+Minimální sada testů:
+
+1. Starý běžný scénář: automatizace má pořád zvládnout typický případ, pro který vznikla.
+2. Nový běžný scénář: automatizace má rozpoznat nový proces bez ručního vysvětlování.
+3. Hraniční scénář: chybí nové pole, je vybrána kombinace staré a nové hodnoty nebo se používá starý odkaz.
+4. Chybný scénář: vstup je neúplný, duplicitní nebo ve stavu, který by neměl projít.
+5. Vypnutí: tým ví, jak automatizaci dočasně zastavit bez rozbití celého procesu.
+
+U každého testu zapisujte tři věci: vstup, očekávaný výstup a skutečný výstup. Neřešte jen, jestli automatizace "proběhla". Řešte, jestli pomohla správnému rozhodnutí.
+
+Příklad:
+
+`Nový formulář má pole "typ projektu". Automatizace vytváří kartu v CRM a posílá shrnutí do sales kanálu. Test ukáže, že u hodnoty "audit" se karta správně vytvoří, ale notifikace pořád používá starý text "nové MVP". Technicky vše běží. Procesně je to chyba, protože obchodník očekává jiný typ přípravy.`
+
+Toto je přesně typ problému, který monitoring dostupnosti neodhalí. Automatizace je zelená, ale realita už je oranžová.
+
+### Zkontrolujte příjemce a oprávnění
+
+Změny procesu často rozšiřují publikum výstupu. Přidá se nový kanál, nový tým, nový dodavatel nebo nový manažerský report. To může být užitečné, ale privacy-first kontrola se nesmí přeskočit.
+
+Položte si otázky:
+
+- Kdo nově vidí výstup automatizace?
+- Potřebuje vidět celý obsah, nebo stačí odkaz, ID a stav?
+- Obsahuje výstup osobní údaje, obchodní citlivé údaje nebo interní poznámky?
+- Je kanál nebo nástroj vhodný pro tento typ dat?
+- Má výstup retenční pravidlo, nebo tam zůstane navždy?
+- Lze výstup zkrátit bez ztráty užitečnosti?
+
+Privacy-first prakticky znamená, že notifikace nemá být skládka. Ve většině případů stačí poslat minimum: identifikátor, kontext, odpovědnou osobu a odkaz do systému, který má správná oprávnění. Pokud někdo potřebuje detail, má jít za zdrojem pravdy, ne do kopie v chatu.
+
+### Revidujte rozhodovací pravidla
+
+Největší riziko mají automatizace, které něco třídí, prioritizují nebo eskalují. Tam změna procesu snadno změní i význam pravidel.
+
+Příklad pravidla před změnou:
+
+`Pokud firma uvede více než 50 zaměstnanců, označ lead jako enterprise a pošli ho seniornímu obchodníkovi.`
+
+Po změně nabídky ale "enterprise" už nemusí znamenat jen velikost. Může znamenat bezpečnostní požadavky, více tenantů, integrační rozsah nebo právní nároky. Staré pravidlo pak posílá některé správné leady špatně a některé špatné leady příliš vysoko v prioritě.
+
+Při revizi pravidel použijte čtyři otázky:
+
+1. Jaké rozhodnutí pravidlo dělá?
+2. Podle jakého signálu ho dělá?
+3. Je signál pořád dobrý zástupce reality?
+4. Kdo má právo pravidlo změnit?
+
+Pokud pravidlo nejde vysvětlit jednou větou, rozdělte ho. Automatizace, které v sobě schovávají produktovou strategii, sales politiku a provozní výjimky najednou, se špatně kontrolují. A když se špatně kontrolují, začne jim tým buď slepě věřit, nebo je tiše obcházet. Obojí je špatně.
+
+### Rozhodnutí po revizi
+
+Výstupem revize nemá být pocit, že "se na to někdo podíval". Výstupem má být jedno z pěti rozhodnutí.
+
+Možnosti:
+
+- Ponechat beze změny: proces se změnil, ale automatizace pořád odpovídá realitě.
+- Upravit pravidla: automatizace dává smysl, ale rozhodovací logika potřebuje nový význam.
+- Zúžit rozsah: automatizace zůstane jen pro scénáře, kde je spolehlivá.
+- Vrátit do pilotu: změna procesu je tak velká, že automatizace potřebuje další testovací období.
+- Vypnout: hodnota už neodpovídá riziku, údržbě nebo datové stopě.
+
+Ke každému rozhodnutí doplňte vlastníka, termín a kontrolní signál. Bez toho se revize rychle změní na hezkou poznámku bez provozního dopadu.
+
+### Šablona záznamu revize
+
+Použijte jednoduchý záznam:
+
+```text
+Automatizace:
+Datum revize:
+Spouštěč revize:
+Změna procesu:
+Původní účel automatizace:
+Co se nezměnilo:
+Co se změnilo na vstupu:
+Co se změnilo na výstupu:
+Co se změnilo v oprávněních nebo datové stopě:
+Výsledky testů:
+Nálezy:
+Rozhodnutí:
+Vlastník dalšího kroku:
+Termín:
+Kontrolní signál:
+```
+
+Příklad zkráceného záznamu:
+
+```text
+Automatizace: vytvoření CRM karty z poptávkového formuláře
+Spouštěč revize: nový typ nabídky "privacy audit"
+Změna procesu: formulář rozlišuje MVP, audit a konzultaci
+Nález: notifikace do sales kanálu používá starý text a posílá celý popis problému
+Rozhodnutí: upravit pravidla a zkrátit notifikaci
+Vlastník: operations
+Termín: tento týden
+Kontrolní signál: 20 nových poptávek bez ručního přepisování typu nabídky
+```
+
+### Codyho komentář
+
+Můj pohled: automatizace by neměla mít větší autoritu než dokumentovaný proces. Když proces nikdo neumí vysvětlit, automatizace ho nezachrání. Jen ho zrychlí. A zrychlený zmatek je pořád zmatek, jen s hezčí notifikací.
+
+Dobrá automatizace je pokorná. Ví, co dělá, ví, co nedělá, a umí se zastavit. Špatná automatizace se tváří jako infrastruktura, i když je to jen stará domněnka zabalená do workflow builderu.
+
+### Checklist přílohy
+
+- Spustili jste revizi při konkrétní změně procesu, ne jen náhodně?
+- Je jasné, jaký původní účel automatizace měla?
+- Zkontrolovali jste vstupy, význam hodnot, výstupy, výjimky, data a odpovědnosti?
+- Otestovali jste starý běžný scénář, nový běžný scénář, hraniční scénář, chybný scénář a vypnutí?
+- Ověřili jste, kdo nově vidí výstup automatizace?
+- Zkrátili jste notifikace na minimum potřebné pro rozhodnutí?
+- Revidovali jste pravidla, která třídí, prioritizují nebo eskalují práci?
+- Je jasné, kdo může pravidla změnit?
+- Vzniklo jedno rozhodnutí: ponechat, upravit, zúžit, vrátit do pilotu nebo vypnout?
+- Má další krok vlastníka, termín a kontrolní signál?
+
+Revize po změně procesu chrání automatizaci před nejběžnější formou stárnutí: tichým nesouladem s realitou. Když ji uděláte včas, oprava bývá malá. Když ji přeskočíte, tým si zvykne na ruční obcházení, duplicitní kontroly a výstupy, kterým nikdo úplně nevěří. To už potom není automatizace. To je procesní dluh s tlačítkem "run".
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -34774,3 +34940,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-10: Doplněna Příloha DC o vyhodnocení pilotu automatizace a rozhodnutí o trvalém provozu: hodnoticí okno, evidence, scorecard, privacy-first review, rozhodovací matice a karta automatizace.
 - 2026-05-11: Doplněna Příloha DD o standardizaci automatizace po schválení trvalého provozu: provozní karta, technická mapa, změnová pravidla, lidská kontrola, monitoring a privacy-first provozní brána.
 - 2026-05-11: Doplněna Příloha DE o první měsíční kontrole automatizace v trvalém provozu: scorecard hodnoty, kvality, výjimek, provozu a datové stopy, kontrola skryté ruční práce, změn vstupů a privacy-first hranic.
+- 2026-05-11: Doplněna Příloha DF o revizi automatizace po změně procesu: spouštěče revize, mapa předpokladů, test starých i nových scénářů, kontrola oprávnění, rozhodovací pravidla a checklist.
