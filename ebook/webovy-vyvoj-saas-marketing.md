@@ -35489,6 +35489,143 @@ Nejhorší je review, které se tváří profesionálně, ale nic nezmění. Má
 
 Post-fallback review drží provoz v pohybu správným směrem. Neřeší minulost kvůli vině. Těží z ní konkrétní zlepšení. A to je rozdíl mezi týmem, který problémy jen přežívá, a týmem, který po každém problému trochu zpřesní systém.
 
+## Příloha DK: Převod post-fallback zlepšení do provozního standardu
+
+Post-fallback review je užitečné jen tehdy, když se jeho závěry dostanou do běžné práce. Jinak vznikne hezký dokument, pár správných vět na poradě a za tři měsíce stejný problém v trochu jiném kostýmu. Provozní standard není trest za incident. Je to způsob, jak z jednorázového poučení udělat opakovatelnou ochranu.
+
+Cíl této přílohy je jednoduchý: vzít jednu až tři změny z post-fallback review a převést je do runbooků, checklistů, monitoringů, šablon nebo rozhodovacích pravidel tak, aby je tým skutečně používal.
+
+### 1. Rozlišujte opravu, změnu procesu a nový standard
+
+Ne každé zjištění má skončit jako nový standard. Některé věci stačí opravit jednou. Jiné potřebují upravit proces. A jen část má být povýšená na trvalé pravidlo.
+
+Praktické rozlišení:
+
+- Oprava: chyba byla konkrétní a jednorázová. Například chyběl odkaz v interní dokumentaci nebo byl špatně nastavený alert.
+- Změna procesu: problém vznikl opakovatelně v toku práce. Například obchod sliboval termíny bez potvrzení kapacity delivery.
+- Provozní standard: problém má vysoký dopad nebo se může vracet v různých podobách. Například každá nová automatizace musí mít vlastníka, fallback režim a datovou mapu.
+
+Příklad: během fallbacku se ukáže, že tým neví, kdo má přístup k exportu poptávek. Jednorázová oprava je doplnit přístup konkrétnímu člověku. Procesní změna je kontrolovat přístupy při měsíční revizi. Provozní standard je pravidlo, že každý kritický tok musí mít uvedený primární a záložní přístup v provozní kartě.
+
+### 2. Udělejte kartu změny
+
+Každá změna po review potřebuje krátkou kartu. Ne kvůli byrokracii, ale kvůli tomu, aby po týdnu nebylo nejasné, co se vlastně mělo změnit.
+
+Karta změny:
+
+- Název změny:
+- Původní problém:
+- Typ změny: oprava / proces / standard
+- Vlastník:
+- Kde se změna projeví: web / SaaS / marketing / support / sales / provoz
+- Dotčené dokumenty:
+- Dotčená data a přístupy:
+- Definition of done:
+- Datum kontroly účinnosti:
+
+Slabý záznam:
+
+"Zlepšit fallback formulářů."
+
+Použitelný záznam:
+
+"Doplnit ruční režim pro poptávkové formuláře: když formulář nejde odeslat déle než 15 minut, support přepne kontaktní stránku na statický e-mailový fallback, zapíše incident do provozního logu a po návratu služby sloučí ručně přijaté poptávky do CRM. Hotovo bude ve chvíli, kdy je postup v runbooku, otestovaný a má vlastníka."
+
+Rozdíl je v akčnosti. První věta přeje lepší budoucnost. Druhá popisuje práci.
+
+### 3. Aktualizujte jen místa, kde změna žije
+
+Po incidentu je lákavé přepsat půl dokumentace. To často vytvoří nový problém: příliš mnoho změn, které nikdo nepřečte. Lepší je upravit přesně ta místa, která tým používá při reálné práci.
+
+Typická místa:
+
+- Provozní karta projektu.
+- Fallback karta.
+- Incident runbook.
+- Checklist pro launch nebo změnu procesu.
+- Datová mapa.
+- Registr nástrojů a dodavatelů.
+- Sales karta nabídky.
+- Support makra a interní odpovědi.
+- Onboarding checklist pro nového člověka.
+
+Pokud změna není v žádném používaném artefaktu, pravděpodobně nebude žít. Interní poznámka v chatu není standard. Je to stopa, kterou někdo za měsíc nenajde.
+
+### 4. Přiřaďte vlastníka provozu, ne jen vlastníka úkolu
+
+Vlastník úkolu zajistí, že se změna zavede. Vlastník provozu hlídá, že změna zůstane užitečná. To jsou dvě různé odpovědnosti.
+
+U každého nového standardu určete:
+
+- Kdo změnu zavede.
+- Kdo ji bude používat.
+- Kdo ji bude kontrolovat.
+- Kdo ji může změnit.
+- Kdy se má znovu otevřít.
+
+Příklad: vývojář doplní monitoring dostupnosti exportu. To je vlastník zavedení. Provoz nebo support ale musí vědět, co alert znamená, kdy je to incident a jaký je první krok. Jinak monitoring jen přesune problém z ticha do hluku.
+
+Codyho komentář: alert bez vlastníka je jako budík v prázdném bytě. Technicky funguje, společensky je k ničemu.
+
+### 5. Ověřte změnu malým drillem
+
+Nový standard není hotový tím, že je napsaný. Je hotový až ve chvíli, kdy podle něj někdo dokáže udělat práci. Proto po zavedení udělejte krátký drill.
+
+Mini drill na 20 minut:
+
+1. Vezměte jeden reálný scénář z review.
+2. Dejte člověku, který změnu bude používat, nový postup.
+3. Nechte ho nahlas projít první tři kroky.
+4. Sledujte, kde váhá, hledá přístup nebo narazí na nejasné slovo.
+5. Upravte postup hned, dokud je problém čerstvý.
+
+Drill nemusí být divadlo s krizovým štábem. Stačí ověřit, že postup není napsaný pro ideální svět, kde všichni vědí všechno, mají všechny přístupy a nikdo zrovna není na dovolené.
+
+### 6. Privacy-first kontrola standardu
+
+Každé provozní zlepšení může nechtěně přidat datovou stopu. Nový log, nový export, nový monitoring, nový formulář nebo nový ruční fallback může znamenat další místo, kde končí osobní údaje nebo obchodně citlivé informace.
+
+Před uzavřením změny zkontrolujte:
+
+- Přidává změna nové ukládání dat?
+- Mění se okruh lidí s přístupem?
+- Vzniká dočasný export, spreadsheet nebo inbox?
+- Je jasné, kdy se dočasná data smažou?
+- Jsou v runbooku uvedené hranice, co se nesmí kopírovat do chatu nebo externích nástrojů?
+- Zůstává kanonický zdroj pravdy stejný?
+- Umí tým vysvětlit zákazníkovi, co se s jeho daty při fallbacku děje?
+
+Privacy-first standard má být praktický. Ne "nikdy nic nedělat", ale "dělat to s minimem dat, jasným účelem, omezeným přístupem a úklidem po skončení".
+
+### 7. Kontrola po 14 až 30 dnech
+
+Změna po review potřebuje krátkou kontrolu po reálném používání. Nečekejte kvartál, pokud změna chrání kritický tok. Po dvou až čtyřech týdnech se zeptejte:
+
+- Použil někdo nový postup?
+- Pokud ano, pomohl?
+- Pokud ne, věděl tým, že existuje?
+- Vznikla nová ruční práce?
+- Přibyly falešné alerty nebo zbytečné kroky?
+- Zůstala datová stopa pod kontrolou?
+- Má standard zůstat, zjednodušit se, nebo sloučit s jiným postupem?
+
+Výstup kontroly má být krátký. Jedna věta o stavu a jedna další akce. Pokud standard funguje, nechte ho žít. Pokud je moc těžký, zkraťte ho. Pokud ho nikdo nepoužívá, vraťte se k problému: buď standard neřeší skutečnou práci, nebo není zapojený do místa, kde práce vzniká.
+
+### Checklist přílohy
+
+- Vybrali jste maximálně jednu až tři změny z post-fallback review?
+- Rozlišili jste jednorázovou opravu, změnu procesu a provozní standard?
+- Má každá změna kartu s vlastníkem, dopadem a definition of done?
+- Aktualizovali jste konkrétní používané artefakty, ne jen obecnou poznámku?
+- Je jasné, kdo změnu zavede, kdo ji používá a kdo ji bude udržovat?
+- Ověřili jste nový postup krátkým drillem nebo ručním průchodem?
+- Zkontrolovali jste dopad na data, přístupy, exporty a retenci?
+- Nevznikl nový neoficiální zdroj pravdy?
+- Má změna datum kontroly po 14 až 30 dnech?
+- Je ve změnovém logu stručně napsané, proč standard vznikl?
+
+Provozní standardy mají být lehké, ale skutečné. Nejlepší standard není ten nejdelší. Je to ten, který tým použije ve chvíli, kdy má málo času, neúplné informace a potřebuje udělat správný další krok.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -35731,3 +35868,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DH o ručním fallbacku pro web, SaaS a marketing: spouštěče, fallback karta, náhradní režimy pro poptávky, support a distribuci, privacy-first pravidla a návrat do normálu.
 - 2026-05-11: Doplněna Příloha DI o návratu z fallbacku do běžného provozu: ověření stability, uzavření nouzového režimu, sloučení dat, privacy-first úklid, kontrola zákaznického dopadu a rozhodnutí, zda proces obnovit, upravit, nahradit nebo zastavit.
 - 2026-05-11: Doplněna Příloha DJ o post-fallback review a trvalém zlepšení provozu: časová osa, příznak/příčina/kontrola, malé změny, aktualizace provozních artefaktů, privacy-first úklid a uzavření komunikace.
+- 2026-05-11: Doplněna Příloha DK o převodu post-fallback zlepšení do provozního standardu: karta změny, aktualizace artefaktů, vlastnictví, mini drill, privacy-first kontrola a ověření po 14 až 30 dnech.
