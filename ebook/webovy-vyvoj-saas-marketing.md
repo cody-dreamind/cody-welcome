@@ -36389,6 +36389,183 @@ Každá úprava má odpovědět na otázku: pomůže to dalšímu člověku doko
 
 Reaktivovaný standard je po prvním použití pořád čerstvý materiál. Když ho zkontrolujete včas, získáte provozní znalost. Když kontrolu vynecháte, získáte jen další dokument, kterému lidé časem přestanou věřit. Důvěra ve standard nevzniká tím, že je uložený na správném místě. Vzniká tím, že podle něj jde udělat práce bez zbytečných zkratek a bez zbytečné datové stopy.
 
+## Příloha DP: Převod provozní zkušenosti do týmové paměti
+
+Jedna dobře udělaná kontrola standardu pomůže konkrétnímu postupu. Týmová paměť vzniká až ve chvíli, kdy se opakované poznatky nepohřbí v jednotlivých dokumentech, ale začnou ovlivňovat další webové, produktové, marketingové a provozní rozhodování. Tato příloha pomáhá převést zkušenost z použití standardu do krátké provozní knihovny, ze které jde čerpat při plánování, onboardingu i auditech.
+
+Cíl není vytvořit další interní encyklopedii. Cíl je zachytit věci, které by jinak zůstaly v hlavách lidí: proč se určitý postup osvědčil, kde opakovaně vzniká tření, jaká data se nesmí rozlézt bokem a jaké pravidlo má tým použít příště.
+
+### 1. Rozlišujte záznam standardu a záznam lekce
+
+Standard říká, jak se má práce udělat. Lekce říká, co jsme se naučili, když jsme ji dělali. Když se tyto dvě vrstvy smíchají, dokumenty bobtnají a lidé přestanou vidět, co je závazný postup a co je kontext.
+
+Standard má obsahovat:
+
+- kroky práce,
+- odpovědnosti,
+- vstupní a výstupní podmínky,
+- stop pravidla,
+- privacy-first kontrolu,
+- odkazy na aktuální nástroje a zdroj pravdy.
+
+Lekce má obsahovat:
+
+- situaci, ve které poznatek vznikl,
+- co překvapilo tým nebo zákazníka,
+- jaký dopad to mělo na výsledek, čas, kvalitu nebo data,
+- co má tým příště udělat jinak,
+- jestli se má změnit standard, onboarding, šablona, checklist nebo nástroj.
+
+Praktické pravidlo: pokud má být informace použita při každém provedení, patří do standardu. Pokud vysvětluje, proč se tým rozhodl něco změnit nebo čemu se příště vyhnout, patří do lekce.
+
+### 2. Zaveďte malou kartu provozní lekce
+
+Karta lekce má být krátká. Pokud potřebuje tři stránky, pravděpodobně popisujete incident, ne běžnou provozní zkušenost. Pro týmovou paměť stačí jeden blok, který jde přečíst za dvě minuty.
+
+Šablona:
+
+```text
+Název lekce:
+Zdroj: standard, incident, audit, launch, zákaznické předání, fallback, support
+Datum:
+Situace:
+Co jsme čekali:
+Co se stalo:
+Dopad:
+Kořenový vzor:
+Co měníme:
+Kde se změna projeví:
+Privacy-first dopad:
+Vlastník:
+Datum kontroly účinku:
+```
+
+Příklad:
+
+```text
+Název lekce: Dočasné tabulky potřebují konec už při založení
+Zdroj: fallback při CRM migraci
+Datum: 2026-05-11
+Situace: Při ručním fallbacku vznikla pomocná tabulka pro poptávky bez segmentu.
+Co jsme čekali: Tabulka bude smazána po importu.
+Co se stalo: Vlastník úklidu nebyl určen, takže tabulka zůstala aktivní i po návratu do normálu.
+Dopad: Riziko duplicitní práce a zbytečné datové stopy.
+Kořenový vzor: Dočasné pracovní místo nemělo pravidlo ukončení.
+Co měníme: Každá fallback tabulka musí mít vlastníka, účel a datum smazání už při založení.
+Kde se změna projeví: Fallback karta, datová mapa, onboarding operations.
+Privacy-first dopad: Menší riziko neřízených kopií osobních a obchodních dat.
+Vlastník: Operations
+Datum kontroly účinku: po dalším fallbacku nebo za 30 dnů
+```
+
+Tahle karta není byrokracie. Je to pojistka proti tomu, aby se stejná chyba řešila pokaždé znovu, jen s jinými lidmi a jinou tabulkou.
+
+### 3. Třiďte lekce podle vzoru, ne podle oddělení
+
+Když lekce uložíte jen podle týmu, ztratíte opakovatelné vzory. Marketing si bude řešit svoje formuláře, support svoje tikety, vývoj svoje incidenty a operations svoje tabulky. Jenže mnoho problémů má stejný kořen: nejasný vlastník, zbytečný sběr dat, chybějící stop pravidlo, neaktuální odkaz, nedopsaná výjimka nebo nástroj bez exit plánu.
+
+Užitečné štítky:
+
+- vlastnictví,
+- ruční práce,
+- datová stopa,
+- onboarding,
+- zákaznická komunikace,
+- měření,
+- nástroj nebo integrace,
+- změna procesu,
+- kvalita výstupu,
+- bezpečnost,
+- privacy-first hranice.
+
+Příklad: pokud tři různé týmy narazí na problém "nebylo jasné, kdo smí exportovat data", nejde o tři lokální drobnosti. Je to vzor pro přístupová práva, datovou mapu a onboarding. Jedna dobrá lekce pak může upravit víc standardů najednou.
+
+### 4. Převádějte lekce do rozhodnutí
+
+Lekce bez rozhodnutí je jen hezky uložený povzdech. Každá karta má skončit jednou akcí nebo jasným rozhodnutím, že akce nebude. Tým nemusí opravovat všechno. Musí ale vědět, proč něco opravuje, odkládá nebo vědomě nechává být.
+
+Možné výstupy:
+
+- upravit standard,
+- doplnit checklist,
+- změnit onboarding,
+- přidat příklad do šablony,
+- odstranit zastaralý krok,
+- změnit oprávnění,
+- omezit nebo zrušit nástroj,
+- doplnit monitoring,
+- přidat privacy-first kontrolu,
+- založit samostatný experiment,
+- žádná změna, jen archivace poznatku.
+
+Rozhodovací zápis:
+
+```text
+Lekce:
+Rozhodnutí:
+Proč:
+Dopad na práci:
+Dopad na data:
+Kde se upraví zdroj pravdy:
+Kdo to udělá:
+Dokdy:
+Jak poznáme, že změna pomohla:
+```
+
+Codyho komentář: dobrá týmová paměť není o tom, že si pamatujete všechno. Je o tom, že se k vám důležité poučení vrátí ve chvíli, kdy znovu děláte podobné rozhodnutí. Jinak je to jen archiv s lepším názvem.
+
+### 5. Napojte lekce na onboarding a review
+
+Provozní lekce mají největší hodnotu pro nové lidi a pro pravidelné revize. Nový člověk nepotřebuje slyšet historky o tom, jak se něco kdysi rozbilo. Potřebuje vědět, jaké praktické pravidlo z toho vzniklo. Review zase nemá začínat od nuly. Má se ptát, jestli staré lekce pořád platí.
+
+Napojení na onboarding:
+
+- ke každé roli vyberte 5 až 10 lekcí, které vysvětlují nejčastější provozní vzory,
+- u každé lekce ukažte aktuální standard, který z ní vychází,
+- nechte nového člověka projít jeden reálný příklad,
+- po prvním měsíci se zeptejte, které lekce mu pomohly a které byly nesrozumitelné.
+
+Napojení na měsíční review:
+
+- projděte nové lekce za poslední období,
+- spojte duplicitní nebo podobné vzory,
+- ověřte, jestli z nich vznikla konkrétní změna,
+- zavřete lekce, které už nemají dopad,
+- vyberte jednu opakovanou slabinu pro další iteraci.
+
+Týmová paměť nesmí být oddělená od práce. Pokud se do ní jen zapisuje, ale nikdo z ní nečte, je to obsahový hřbitov. Malý, důsledně používaný soubor lekcí je lepší než obří znalostní báze, kterou všichni obcházejí.
+
+### 6. Držte privacy-first pravidla i u interní paměti
+
+Provozní lekce často vznikají z reálných situací: zákaznický problém, supportní tiket, chybné předání, incident, export, migrace, obchodní rozhovor. Právě proto nesmí být knihovna lekcí skladištěm citlivých detailů.
+
+Pravidla:
+
+- Nepište do lekcí osobní údaje, pokud nejsou nezbytné.
+- Zákazníky anonymizujte, pokud konkrétní jméno není nutné pro interní provoz.
+- Nepřikládejte screenshoty s osobními nebo obchodně citlivými daty.
+- Neopisujte celé e-maily, tikety nebo interní chaty.
+- U každé lekce určete, kdo ji smí číst.
+- Lekce s bezpečnostním nebo právním dopadem ukládejte podle interních pravidel, ne do obecného dokumentu.
+- Staré lekce pravidelně čistěte, slučujte nebo archivujte.
+
+Privacy-first hodnota se pozná i podle toho, jak tým zachází s vlastními poznámkami. Pokud při zlepšování procesu vytváříte nové kopie citlivých dat, jen přesouváte riziko z jednoho místa na druhé.
+
+### 7. Checklist přílohy
+
+- Máme oddělený standard od lekce?
+- Zachycujeme jen poznatky, které mohou změnit budoucí práci?
+- Má každá lekce situaci, dopad, kořenový vzor a rozhodnutí?
+- Třídíme lekce podle opakovaných vzorů, ne jen podle týmů?
+- Umíme z lekce určit, který standard, checklist, onboarding nebo nástroj se má změnit?
+- Má každá změna vlastníka, termín a způsob ověření účinku?
+- Používáme vybrané lekce v onboardingu nových lidí?
+- Vracíme se k lekcím při měsíčním nebo kvartálním review?
+- Neukládáme do týmové paměti zbytečné osobní, zákaznické nebo obchodně citlivé údaje?
+- Mažeme, slučujeme nebo archivujeme lekce, které už nepomáhají rozhodovat?
+
+Týmová paměť má být provozní pomůcka, ne muzeum minulých problémů. Když je krátká, konkrétní a napojená na rozhodnutí, pomáhá týmu růst bez toho, aby pokaždé znovu platil stejnou školní daň. A když drží privacy-first hranice, nezlepšuje proces na úkor důvěry lidí, jejichž data se v procesu objevila.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -36636,3 +36813,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DM o archivaci nebo sloučení provozního standardu: důvody změny, stavy standardu, nový zdroj pravdy, privacy-first úklid, komunikace změny a kontrola odkazů.
 - 2026-05-11: Doplněna Příloha DN o reaktivaci archivovaného standardu: důvod návratu, rozdílová kontrola, pilotní okno, privacy-first brána, nová verze a checklist.
 - 2026-05-11: Doplněna Příloha DO o kontrole reaktivovaného standardu po prvním ostrém použití: výsledek, proces, skrytá ruční práce, datová stopa, rozhodnutí a checklist.
+- 2026-05-11: Doplněna Příloha DP o převodu provozní zkušenosti do týmové paměti: karty lekcí, třídění vzorů, rozhodnutí, onboarding, review a privacy-first pravidla.
