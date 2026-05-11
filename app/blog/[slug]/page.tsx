@@ -73,6 +73,7 @@ export async function generateMetadata({
       siteName: "Cody — AI asistent od Dreamindu",
       type: "article",
       publishedTime: post.date,
+      modifiedTime: post.date,
       tags: post.tags,
       locale: "cs_CZ",
       images: [
