@@ -34834,6 +34834,186 @@ Ne všechno, co běží samo, je pokrok. Občas je to jen zapomenuté rozhodnut�
 
 Vypnutí automatizace by mělo zanechat systém jednodušší, ne méně čitelný. Když po vypnutí nevíte, kdo co dělá, nebylo to vypnutí. Bylo to odstranění viditelné části procesu a přesunutí zbytku do lidských hlav. Dobrá iterace končí tím, že práce, data i odpovědnosti jsou srozumitelnější než předtím.
 
+## Příloha DH: Ruční fallback pro web, SaaS a marketing
+
+Ruční fallback je plán pro chvíli, kdy automatizace, formulář, integrace, SaaS funkce nebo marketingový nástroj dočasně nefunguje. Není to návrat do chaosu. Je to domluvený nouzový režim, ve kterém tým ví, co má dělat ručně, jak dlouho, s jakými daty a podle čeho pozná, že se může vrátit do běžného provozu.
+
+Malé týmy fallback často podceňují, protože si říkají, že při problému se prostě "nějak domluví". To funguje u jednoho e-mailu. Nefunguje to u poptávek z webu, zákaznických účtů, plateb, supportu, newsletteru nebo datových exportů. Když kritický tok vypadne, improvizace rychle vytvoří duplicity, ztracené zprávy, osobní data v chatu a rozhodnutí bez záznamu.
+
+Fallback má tři cíle:
+
+1. Udržet službu nebo komunikaci v přijatelném režimu.
+2. Neztratit důležité vstupy, zákaznické požadavky a obchodní signály.
+3. Nezhoršit bezpečnost ani privacy-first pravidla jen proto, že tým spěchá.
+
+### Kdy fallback spustit
+
+Fallback se nespouští jen při technickém incidentu. Spouští se vždy, když běžný proces přestane být spolehlivý a hrozí, že zákazník, obchod nebo tým ztratí důležitý krok.
+
+Typické spouštěče:
+
+- kontaktní formulář neodesílá poptávky,
+- CRM integrace nevytváří leady nebo úkoly,
+- automatické přiřazení support tiketů dává špatné výsledky,
+- platební nebo billing tok nejde dokončit,
+- onboardingová automatizace posílá špatné instrukce,
+- newsletterový nástroj neodešle důležitou aktualizaci,
+- analytika je mimo provoz a tým nevidí základní signály,
+- dodavatel změní dostupnost, region dat nebo oprávnění,
+- tým po změně procesu ztratí důvěru ve výstupy automatizace.
+
+Praktické pravidlo: pokud by výpadek mohl způsobit ztracenou poptávku, neobslouženého zákazníka, špatnou odpověď nebo únik dat do nesprávného nástroje, fallback má být připravený předem.
+
+### Fallback karta
+
+Pro každý kritický tok stačí jedna karta. Nemusí být dlouhá, ale musí být použitelná v době, kdy lidé nemají klid číst desetistránkový dokument.
+
+```text
+Tok:
+Kdy fallback spustit:
+Kdo rozhoduje o spuštění:
+Co se dělá ručně:
+Kdo ruční krok provádí:
+Kam se zapisuje výsledek:
+Jak často se kontroluje fronta:
+Co se nesmí dělat:
+Jaká data se smí kopírovat:
+Jak poznáme návrat do normálu:
+Kdo fallback ukončuje:
+Co se po ukončení doplní zpět do systému:
+```
+
+Nejdůležitější řádek je `Co se nesmí dělat`. V nouzovém režimu lidé snadno začnou posílat celé poptávky do chatu, kopírovat exporty na lokální disk nebo zakládat paralelní tabulky bez vlastníka. Fallback má říct, která zkratka je zakázaná i pod tlakem.
+
+### Web a poptávky
+
+U webu je nejčastější fallback pro poptávkový tok. Formulář selže, e-mailová doručitelnost zlobí nebo CRM integrace přestane vytvářet záznamy. Cílem není hned opravit celý svět. Cílem je neztratit žádný relevantní kontakt a nesbírat víc dat, než je potřeba.
+
+Fallback pro poptávky:
+
+- Na webu zobrazit náhradní kontakt nebo krátkou poznámku, pokud formulář nefunguje.
+- Určit jednu schránku nebo systém jako dočasný vstup.
+- Každou novou poptávku zapsat do jednoho dočasného seznamu s minimem polí.
+- Přidat stav: nové, odpovězeno, čeká na doplnění, uzavřeno.
+- Po obnovení CRM doplnit jen potřebné záznamy, ne celý nouzový šum.
+- Po incidentu zkontrolovat, jestli někde nezůstala kopie osobních údajů bez účelu.
+
+Dočasný seznam může mít tato pole:
+
+```text
+Datum:
+Kontakt:
+Firma nebo projekt:
+Stručný problém:
+Zdroj:
+Odpovědný člověk:
+Stav:
+Další krok:
+```
+
+Nepřidávejte tam interní odhady hodnoty, detailní poznámky z hovoru nebo citlivé údaje jen proto, že tabulka má volné sloupce. Nouzový seznam má být most, ne nové CRM.
+
+### SaaS produkt a support
+
+U SaaS produktu fallback často znamená, že část práce musí dočasně převzít support, operations nebo technický tým. Tady je největší riziko v oprávněních a auditovatelnosti. Ruční zásah do zákaznického účtu může být správný, ale musí být dohledatelný.
+
+Fallback pro SaaS:
+
+- Určit, které zákaznické akce se dají udělat ručně a které ne.
+- Vypsat role, které smí ruční zásah provést.
+- Zapsat každý zásah: kdo, kdy, pro jakého zákazníka, proč a s jakým výsledkem.
+- Nikdy neposílat citlivá zákaznická data do běžného chatu jako náhradu za admin nástroj.
+- U hromadných oprav připravit vzorek, kontrolu a rollback.
+- Po obnovení produktu porovnat ruční změny se stavem v systému.
+
+Příklad:
+
+```text
+Tok: zákazník nemůže dokončit export dat
+Fallback: support založí interní žádost, technický vlastník ověří oprávnění a vygeneruje export ručně
+Zakázáno: posílat export jako přílohu do týmového chatu
+Záznam: ID zákazníka, důvod exportu, kdo ověřil oprávnění, kdo export vytvořil, kde byl bezpečně předán
+Návrat do normálu: exportní funkce projde testem pro běžný, prázdný, velký a neoprávněný scénář
+```
+
+To není přehnaná opatrnost. Export dat je důvěrový moment. Když se pokazí, zákazník si nevšimne jen chyby. Všimne si, jestli tým pracuje s jeho daty disciplinovaně.
+
+### Marketing a distribuce
+
+Marketingový fallback bývá méně dramatický, ale umí poškodit důvěru. Newsletter se neodešle, RSS feed nepublikuje, landing page má špatný odkaz, plánovaný příspěvek vede na starou verzi nebo se rozbije měření kampaně. Reakce nemá být panické přeposílání přes všechny kanály.
+
+Fallback pro distribuci:
+
+- Ověřit kanonickou URL a veřejnou verzi obsahu.
+- Pokud selže jeden kanál, použít nejprve vlastní web, RSS nebo přímý odkaz.
+- U e-mailu neposílat opakovaně stejnou zprávu bez jasného důvodu.
+- U sociálních sítí opravit veřejný odkaz nebo doplnit krátkou opravu, ne mazat vše bez záznamu.
+- Pokud selže měření, zapsat období výpadku a nepředstírat přesná data.
+- U lead magnetu zachovat přístup k obsahu i tehdy, když dočasně nefunguje formulář.
+
+Codyho komentář: když se rozbije distribuční nástroj, nejlepší první krok je často obyčejný přímý odkaz. Ne další nástroj, ne nový funnel, ne dramatická omluva. Jen funkční cesta k obsahu a stručný záznam, co se stalo.
+
+### Privacy-first pravidla fallbacku
+
+Nouzový režim nesmí být výmluva pro datový nepořádek. Právě během fallbacku vznikají nejhorší stopy: exporty v osobních stažených souborech, celé texty poptávek v chatu, screenshoty administrace, duplikované tabulky a ruční seznamy bez retence.
+
+Držte tato pravidla:
+
+- Kopírujte jen data potřebná pro další krok.
+- Používejte jeden dočasný seznam, ne pět osobních kopií.
+- U citlivých dat ukládejte odkaz do oprávněného systému, ne samotný obsah.
+- Každý dočasný seznam má vlastníka a datum smazání nebo sloučení.
+- Po ukončení fallbacku smažte data, která už nemají účel.
+- Zapište, pokud fallback změnil účel zpracování, příjemce nebo retenci.
+- Nezavádějte nový externí nástroj jen proto, že je rychlý, pokud nevíte, kde drží data.
+
+Privacy-first fallback je praktický: méně kopírování znamená méně úklidu, méně rizika a méně vysvětlování později.
+
+### Návrat do normálu
+
+Fallback nekončí ve chvíli, kdy se hlavní nástroj znovu rozsvítí zeleně. Končí až tehdy, když jsou dořešené vstupy, data, odpovědnosti a záznamy.
+
+Návratový postup:
+
+1. Ověřit hlavní tok na běžném a hraničním scénáři.
+2. Zastavit přijímání nových položek do dočasného režimu.
+3. Doplnit potřebné položky do zdroje pravdy.
+4. Označit položky, které byly vyřízené ručně.
+5. Smazat nebo archivovat dočasná data podle účelu a retence.
+6. Informovat tým, že fallback skončil.
+7. Zapsat krátké poučení: co chybělo, co fungovalo a co změnit v kartě fallbacku.
+
+Mini záznam po fallbacku:
+
+```text
+Tok:
+Období fallbacku:
+Počet položek:
+Ztracené nebo duplicitní položky:
+Ruční zásahy:
+Privacy-first nálezy:
+Co změnit v běžném procesu:
+Co změnit ve fallback kartě:
+```
+
+Pokud po návratu neumíte říct, co se během fallbacku stalo, nouzový režim byl jen improvizace s lepším názvem. Příště bude bolet víc.
+
+### Checklist přílohy
+
+- Má každý kritický tok fallback kartu?
+- Je jasné, kdo fallback spouští a kdo ho ukončuje?
+- Je popsané, co se dělá ručně a kam se zapisuje výsledek?
+- Existuje pravidlo, co se v nouzovém režimu nesmí dělat?
+- U webových poptávek víte, jak neztratit kontakt bez zakládání nového chaosu?
+- U SaaS ručních zásahů zapisujete kdo, kdy, proč a s jakým výsledkem?
+- U marketingu umíte použít vlastní web, RSS a přímé odkazy jako základní náhradní cestu?
+- Kopírujete během fallbacku jen minimum dat?
+- Má každý dočasný seznam vlastníka, účel a datum úklidu?
+- Je po návratu do normálu jasné, co se doplní do zdroje pravdy?
+- Proběhne po fallbacku krátké review a úprava karty?
+
+Ruční fallback není porážka automatizace. Je to důkaz, že tým rozumí vlastnímu provozu i bez ní. Když umíte kritický tok na chvíli převzít ručně, máte lepší proces, lepší dokumentaci a menší závislost na nástrojích. Automatizace pak není berlička pro nepochopený systém, ale zrychlení něčeho, co tým umí vysvětlit.
+
 ## Závěr: udělejte z webu pracovní systém
 
 Pokud si z tohoto e-booku máte odnést jednu věc, tak tuto: web, SaaS produkt a marketing nejsou tři oddělené světy. Jsou to vrstvy jednoho systému. Web vysvětluje hodnotu a sbírá důvěru. Produkt doručuje výsledek. Marketing přivádí správné lidi ke správné odpovědi. Provoz, bezpečnost a privacy-first pravidla drží celý systém pohromadě, aby se nerozpadl při prvním růstu, auditu nebo personální změně.
@@ -35073,3 +35253,4 @@ To je celé kouzlo. Ne ve smyslu magie, spíš ve smyslu nudně funkčního řem
 - 2026-05-11: Doplněna Příloha DE o první měsíční kontrole automatizace v trvalém provozu: scorecard hodnoty, kvality, výjimek, provozu a datové stopy, kontrola skryté ruční práce, změn vstupů a privacy-first hranic.
 - 2026-05-11: Doplněna Příloha DF o revizi automatizace po změně procesu: spouštěče revize, mapa předpokladů, test starých i nových scénářů, kontrola oprávnění, rozhodovací pravidla a checklist.
 - 2026-05-11: Doplněna Příloha DG o vypnutí nebo nahrazení automatizace bez chaosu: mapa dopadu, náhradní režim, privacy-first úklid dat, vypínací plán, komunikace týmu a checklist.
+- 2026-05-11: Doplněna Příloha DH o ručním fallbacku pro web, SaaS a marketing: spouštěče, fallback karta, náhradní režimy pro poptávky, support a distribuci, privacy-first pravidla a návrat do normálu.
