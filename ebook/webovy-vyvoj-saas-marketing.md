@@ -7,6 +7,8 @@ Zahajeno: 2026-05-04
 
 Tento e-book vzniká postupně v hodinových iteracích. Cíl není napsat akademickou učebnici, ale praktický text pro lidi, kteří chtějí stavět weby, SaaS produkty, automatizace a marketingové systémy tak, aby z nich vznikal reálný byznys.
 
+Jak rukopis používat: nezačínejte nutně od první stránky. Vyberte aktuální problém, přečtěte související kapitolu nebo přílohu, projděte checklist a převeďte výsledek do jednoho konkrétního rozhodnutí nebo úkolu. E-book má fungovat jako pracovní nástroj, ne jako dokument, který se slavnostně odloží po dočtení.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -39872,3 +39874,4 @@ Kontrola po prvním retenčním cyklu drží systém při zemi. Ukáže, jestli 
 - 2026-05-12: Doplněna Příloha ED o auditu datové stopy týmových standardů: datové karty, úrovně citlivosti, zkracování příkladů, stop pravidla pro šablony a privacy-first checklist.
 - 2026-05-12: Doplněna Příloha EE o retenčním plánu a úklidu artefaktů týmových standardů: účel artefaktů, retenční tabulka, úklidové spouštěče, aktivní pracovní trasa a privacy-first checklist.
 - 2026-05-12: Doplněna Příloha EF o kontrole dopadu retenčního úklidu po prvním cyklu: test pracovní trasy, kontrola ztrát, privacy-first efekt, opravy trasy a šablona kontroly.
+- 2026-05-12: Doplněn úvodní čtenářský kompas, který vysvětluje, jak rukopis používat jako pracovní nástroj.
