@@ -44148,8 +44148,264 @@ Workshop nesmí skončit větou "rozšíříme to všude". Má skončit konkrét
 
 Dobré rozšíření změny je klidné. Vezme to, co se osvědčilo, najde pár míst s největším dopadem a po prvním použití se znovu podívá na realitu. Takhle vzniká systém, který se učí, ale nepřibírá zbytečnou váhu.
 
+## Příloha EX: Kontrola rozšířené portfoliové změny po prvním cyklu
+
+Rozšíření ověřené změny do více pracovních míst ještě není důkaz, že změna opravdu sedí systému. Je to jen první větší nasazení. Skutečný test přijde až ve chvíli, kdy ji tým použije v běžném cyklu: při reálném projektu, reálném předání, reálné revizi nebo reálné zákaznické situaci.
+
+Tahle příloha řeší právě ten okamžik. Neptá se "líbí se nám nová pravidla?", ale "pomohla rozšířená změna lidem udělat práci lépe, rychleji, s menším rizikem a bez zbytečného sběru dat?"
+
+Kontrola po prvním cyklu má být krátká, konkrétní a trochu nepříjemně poctivá. Pokud se změna rozšířila do tří míst, ale dvě z nich nikdo nepoužil, není to tragédie. Je to signál. Pokud ji lidé použili, ale museli si vedle ní vytvořit vlastní poznámku, je to také signál. Pokud přidala nový formulář, novou evidenci a nový reporting, ale žádné lepší rozhodnutí, je čas brzdit.
+
+### Kdy kontrolu spustit
+
+Kontrolu nespouštějte podle kalendáře jen proto, že uběhl měsíc. Spusťte ji po prvním dokončeném cyklu, ve kterém se rozšířená změna opravdu použila.
+
+Cyklus může být:
+
+- první dokončený zákaznický audit,
+- první onboarding nového člověka,
+- první měsíční review,
+- první delivery blok nové nabídky,
+- první aktualizace webu nebo playbooku,
+- první incidentní nebo provozní situace,
+- první revize portfolia standardů.
+
+Pokud se změna nepoužila vůbec, kontrola se nezruší. Jen má jinou otázku: proč se nepoužila? Možná nebyla potřeba, možná ji nikdo nenašel, možná byla moc složitá, možná čekala na situaci, která zatím nenastala.
+
+Praktické pravidlo: jedna kontrola má posuzovat jeden rozšířený balíček. Ne celé portfolio. Když do toho vezmete všechno, skončíte u obecného dojmu a nic neopravíte.
+
+### 1. Připomeňte původní slib změny
+
+Začněte původní větou, proč se změna rozšiřovala. Bez ní se kontrola rychle promění v debatu o detailech.
+
+Šablona:
+
+```markdown
+Rozšířená změna:
+Původní slib:
+Kam se rozšířila:
+První reálný cyklus:
+Co se mělo zlepšit:
+Co se nemělo měnit:
+Privacy-first hranice:
+```
+
+Příklad:
+
+```markdown
+Rozšířená změna:
+Jednověté rozhodnutí u portfoliových poučení.
+
+Původní slib:
+Tým má po auditu rychle poznat, které poučení se převádí do změny, které zůstává v backlogu a které se archivuje.
+
+Kam se rozšířila:
+Kanonický index standardů, onboardingová trasa editorů a měsíční review portfolia.
+
+První reálný cyklus:
+Měsíční review tří standardů po zákaznickém auditu.
+
+Co se mělo zlepšit:
+Méně dohledávání důvodů a méně duplicitních poznámek.
+
+Co se nemělo měnit:
+Neměla vzniknout nová evidence mimo kanonický index.
+
+Privacy-first hranice:
+Bez ukládání osobních hodnocení lidí; pracujeme jen s artefakty a rozhodnutími.
+```
+
+Tahle karta je brzda proti pocitům. Když někdo řekne "mně to přijde lepší", karta se zeptá: lepší vůči čemu?
+
+### 2. Sledujte reálnou trasu, ne jen hotový výstup
+
+Hotový výstup může vypadat čistě, i když cesta k němu byla chaotická. Proto kontrolujte nejen výsledek, ale i trasu práce.
+
+Ptejte se:
+
+- Kde člověk začal?
+- Našel správný artefakt bez cizí pomoci?
+- Použil novou část tak, jak byla zamýšlená?
+- Kde se zastavil?
+- Co si musel vysvětlit mimo dokument?
+- Co si zapsal bokem?
+- Jaké rozhodnutí díky změně udělal?
+- Co by bez změny pravděpodobně trvalo déle?
+
+Nepotřebujete z toho dělat sledování lidí. Stačí projít práci s člověkem po dokončení cyklu a nechat ho ukázat, kudy šel. Cílem není hodnotit výkon jednotlivce. Cílem je zjistit, jestli systém pomáhá.
+
+Privacy-first pravidlo: neukládejte záznam typu "Jana nevěděla, kam kliknout". Ukládejte záznam typu "onboardingová trasa neukazuje, že rozhodnutí po auditu patří do kanonického indexu". Kritizujte trasu, ne člověka.
+
+### 3. Rozdělte nálezy podle dopadu
+
+Po prvním cyklu obvykle najdete směs drobností, dobrých signálů a skutečných problémů. Nedávejte je do jednoho pytle.
+
+Použijte čtyři kategorie:
+
+- `Funguje`: změna splnila slib a není potřeba ji hned upravovat.
+- `Tření`: změna pomohla, ale některé místo je nejasné, dlouhé nebo špatně umístěné.
+- `Vedlejší efekt`: změna vytvořila nové chování, které nebylo v plánu.
+- `Stop signál`: změna přidává riziko, duplicitní evidenci, zbytečná data nebo špatné rozhodnutí.
+
+Příklad třídění:
+
+```markdown
+Funguje:
+- Jednověté rozhodnutí zrychlilo měsíční review. Tým nemusel znovu číst celý audit.
+
+Tření:
+- V onboardingové trase není jasné, jestli má editor zapsat rozhodnutí před nebo po úpravě šablony.
+
+Vedlejší efekt:
+- Dva lidé začali kopírovat rozhodnutí také do projektových poznámek, aby ho našli později.
+
+Stop signál:
+- V jedné šabloně se objevila kolonka "kdo udělal chybu", která svádí k osobnímu hodnocení místo ke zlepšení systému.
+```
+
+Stop signál řešte hned. Tření může počkat do malé opravy. Vedlejší efekt nejdřív pochopte: někdy ukazuje skutečnou potřebu, jindy jen nervozitu z nového procesu.
+
+### 4. Zkontrolujte, jestli rozšíření nezvětšilo systém víc, než mělo
+
+Rozšířené změny mají jednu častou nemoc: začnou jako malá oprava a po prvním cyklu mají tři nové šablony, dvě nové povinnosti a další review. Systém pak nepomáhá. Jen se tváří důležitě.
+
+Projděte tři otázky:
+
+1. Přibylo nové místo, kam člověk musí něco zapisovat?
+2. Přibylo nové rozhodnutí, které nikdo nepotřeboval?
+3. Přibylo nové pravidlo, které jen opakuje starší pravidlo jinými slovy?
+
+Pokud ano, hledejte redukci.
+
+Příklad redukce:
+
+- Místo nové tabulky pro stav poučení přidejte jeden sloupec do existujícího kanonického indexu.
+- Místo nového měsíčního meetingu přidejte jednu otázku do existujícího review.
+- Místo nové šablony přidejte krátký blok do šablony, kterou tým už používá.
+- Místo povinného reportu použijte changelog s jednou větou.
+
+Codyho komentář: nejlepší známka dobré provozní změny není, že má vlastní dokument. Nejlepší známka je, že člověk udělá správnou věc ve chvíli, kdy ji potřebuje, a nemusí kvůli tomu hledat svatý archiv procesních moudrostí.
+
+### 5. Udělejte privacy-first kontrolu po skutečném použití
+
+Privacy-first brána před rozšířením je nutná, ale nestačí. Teprve první cyklus ukáže, jak lidé s daty opravdu pracují.
+
+Zkontrolujte:
+
+- Zůstala data v původně zamýšleném místě?
+- Nevznikla kopie citlivého příkladu v poznámkách, chatu nebo prezentaci?
+- Nepřibylo sledování výkonu jednotlivců tam, kde stačí hodnotit artefakty?
+- Má nový výstup jasnou retenci?
+- Je jasné, kdo má k výstupu přístup?
+- Dá se použít anonymizovaný nebo zkrácený příklad?
+- Nevznikla závislost na nástroji, který posílá data mimo zamýšlený provozní rámec?
+
+Privacy-first zápis po cyklu může být velmi krátký:
+
+```markdown
+Datová stopa po prvním cyklu:
+- Použité artefakty zůstaly v kanonickém indexu a měsíčním záznamu.
+- Projektové poznámky obsahovaly duplicitní kopii rozhodnutí; po kontrole se ruší.
+- Jeden citlivý zákaznický detail byl nahrazen obecným popisem situace.
+- Retence měsíčního záznamu zůstává 12 měsíců.
+
+Rozhodnutí:
+Změna může pokračovat, ale bez kopírování rozhodnutí do projektových poznámek.
+```
+
+Tohle není právnické cvičení. Je to provozní hygiena. Každá zbytečná kopie dnes je budoucí úklid, riziko nebo trapná otázka.
+
+### 6. Rozhodněte jednou větou
+
+Po kontrole nesmí zůstat mlha. Změna má dostat stav.
+
+Použijte jednu z pěti možností:
+
+- `Ponechat`: změna splnila slib a není potřeba další zásah.
+- `Upravit`: princip funguje, ale je potřeba jedna konkrétní oprava.
+- `Zúžit`: změna funguje jen v části míst, kam se rozšířila.
+- `Pozastavit`: není dost reálných důkazů nebo vznikl vedlejší efekt.
+- `Vrátit`: změna přidala víc tření nebo rizika než hodnoty.
+
+Šablona:
+
+```markdown
+Rozhodnutí:
+Stav:
+Jednovětý důvod:
+Jedna další akce:
+Vlastník:
+Termín kontroly:
+```
+
+Příklad:
+
+```markdown
+Rozhodnutí:
+Stav: Upravit
+Jednovětý důvod: Změna zrychlila review, ale onboardingová trasa neříká, kdy přesně se rozhodnutí zapisuje.
+Jedna další akce: Doplnit do onboardingové trasy krok "zapiš rozhodnutí až po úpravě primárního artefaktu".
+Vlastník: editor portfolia
+Termín kontroly: po dalším měsíčním review
+```
+
+Jedna další akce znamená jedna. Ne "a rovnou přepíšeme celý index". Pokud kontrola po prvním cyklu odhalí deset věcí, vyberte tu, která nejvíc brání práci nebo chrání data.
+
+### 7. Uzavřete smyčku v artefaktech
+
+Kontrola má cenu jen tehdy, když se její výsledek dostane zpět do míst, kde tým opravdu pracuje.
+
+Po rozhodnutí upravte:
+
+- kanonický index, pokud se mění stav nebo umístění změny,
+- primární artefakt, pokud se mění konkrétní instrukce,
+- onboardingovou trasu, pokud se změna týká nových lidí,
+- changelog, aby šlo dohledat, co se změnilo,
+- backlog, pokud vznikl podnět mimo aktuální rozsah.
+
+Nezakládejte nový "report kontroly rozšíření", pokud ho nikdo nebude používat. Stačí krátký záznam:
+
+```markdown
+2026-05-12:
+- Po prvním měsíčním review ověřeno rozšíření jednovětého rozhodnutí do kanonického indexu a onboardingu.
+- Změna zůstává, onboardingová trasa dostává přesnější krok pro okamžik zápisu.
+- Duplicitní kopírování rozhodnutí do projektových poznámek se ruší.
+```
+
+Tři věty často stačí. Systém má být čitelný, ne slavnostní.
+
+### Mini workshop: 30 minut na kontrolu po prvním cyklu
+
+1. Pět minut: otevřete původní kartu rozšíření a připomeňte slib.
+2. Pět minut: projděte reálnou trasu člověka nebo týmu v prvním cyklu.
+3. Pět minut: rozdělte nálezy na funguje, tření, vedlejší efekt a stop signál.
+4. Pět minut: zkontrolujte, jestli nepřibyla zbytečná evidence nebo datová stopa.
+5. Pět minut: napište jednověté rozhodnutí a jednu další akci.
+6. Pět minut: aktualizujte kanonické místo a changelog.
+
+Pokud workshop potřebuje hodinu a půl, kontrolujete moc věcí najednou. Zmenšete rozsah.
+
+### Checklist
+
+- Kontrolujete jeden rozšířený balíček, ne celé portfolio?
+- Je jasný původní slib změny?
+- Proběhl první reálný cyklus, nebo víte, proč změna nebyla použita?
+- Sledujete pracovní trasu, nejen hotový výstup?
+- Třídíte nálezy na funguje, tření, vedlejší efekt a stop signál?
+- Řešíte stop signály hned?
+- Nevznikla nová evidence, která jen kopíruje existující zdroj pravdy?
+- Nezvětšila změna počet schůzek, šablon nebo povinných zápisů bez jasné hodnoty?
+- Proběhla privacy-first kontrola skutečné datové stopy?
+- Ukládáte poznatky o systému, ne osobní hodnocení lidí?
+- Má změna jeden z pěti stavů: ponechat, upravit, zúžit, pozastavit nebo vrátit?
+- Existuje přesně jedna další akce s vlastníkem?
+- Je výsledek zapsaný v kanonickém místě a changelogu?
+
+Dobrá kontrola po prvním cyklu není audit pro audit. Je to způsob, jak zabránit tomu, aby se z dobré malé změny stal další kus procesního nábytku. Změna má zůstat jen tehdy, když reálně pomáhá práci, snižuje riziko a drží datovou stopu pod kontrolou.
+
 ## Pracovní log
 
+- 2026-05-12: Doplněna Příloha EX o kontrole rozšířené portfoliové změny po prvním cyklu: původní slib, reálná pracovní trasa, třídění nálezů, redukce zbytečné evidence, privacy-first kontrola, jednověté rozhodnutí a uzavření smyčky v artefaktech.
 - 2026-05-12: Doplněna Příloha EW o rozšíření ověřené portfoliové změny do dalších pracovních míst: typy rozšíření, výběr tří míst, přenos principu, rozšiřovací balíček, privacy-first kontrola a ověření prvního použití.
 - 2026-05-12: Doplněna Příloha EV o ověření hotové portfoliové změny po prvním použití: reálná ověřovací situace, pozorování práce, třídění nálezů, privacy-first kontrola, jednověté rozhodnutí a uzavření smyčky v artefaktech.
 - 2026-05-12: Doplněna Příloha EU o převodu čtvrtletního auditu portfoliových poučení do jedné hotové změny: změnová věta, primární artefakt, rušení duplicit, pracovní jazyk, privacy-first kontrola, změnový balíček a první ověření.
