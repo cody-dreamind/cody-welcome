@@ -39699,6 +39699,139 @@ Vyplnění by mělo trvat půl hodiny, ne půl dne. Pokud je kontrola sama těž
 
 Kontrola po prvním retenčním cyklu drží systém při zemi. Ukáže, jestli úklid opravdu pomohl lidem pracovat, nebo jen přesunul chaos do jiné složky. Dobrý standard po ní není delší. Je srozumitelnější, méně rizikový a o něco nudnější na používání. V provozu je to pochvala, ne urážka.
 
+## Příloha EG: Opakovaný retenční rytmus pro týmové standardy
+
+První retenční úklid je užitečný, ale sám o sobě nestačí. Tým po něm chvíli cítí úlevu, protože aktivní trasa je kratší, archivy jsou oddělené a staré šablony už nepřekážejí. Jenže pokud se nezmění rytmus práce, standardy začnou znovu bobtnat. Každý nový incident, onboarding, zákaznický dotaz nebo změna nabídky přidá další dokument. Nikdo nechce vytvářet chaos. Chaos prostě využije volné místo, jako každý dobře vychovaný provozní plevel.
+
+Opakovaný retenční rytmus drží standardy v pracovním tvaru. Neřeší jen otázku "co smažeme", ale hlavně "co má zůstat živé, protože to lidem pomáhá dělat lepší rozhodnutí". Cílem není minimalistický archiv pro archiváře. Cílem je týmová paměť, která je dost krátká na používání a dost přesná na samostatnou práci.
+
+### 1. Nastavte pevný rytmus, ne náhodný úklid
+
+Retence se nesmí spouštět jen ve chvíli, kdy už je systém bolestivě nepřehledný. To je pozdě. V tu chvíli lidé většinou nechtějí čistit, ale zachraňovat konkrétní práci. Lepší je lehký pravidelný rytmus:
+
+- týdenně: zachytit nové artefakty, které vznikly mimo kanonický index,
+- měsíčně: zkontrolovat jednu vybranou oblast standardů,
+- kvartálně: udělat portfoliovou revizi duplicit, archivů a privacy rizik,
+- po incidentu nebo větší změně: ověřit, jestli přibylo poučení, které má patřit do živého standardu.
+
+Týdenní kontrola má být krátká. Stačí otázka: "Vznikl tento týden dokument, který někdo bude hledat za měsíc?" Pokud ano, musí dostat stav: návrh, živý standard, příklad, archiv nebo smazat po splnění účelu. Bez stavu se z dokumentu stane tichý dluh.
+
+### 2. Rozlišujte čtyři typy retenční práce
+
+Ne každá údržba je stejná. Když tým hází všechno do jedné kategorie "uklidit dokumentaci", úkol je moc velký a nikdo se do něj nepustí. Rozdělte práci na čtyři typy:
+
+1. Prořezání: odstranění duplicit, starých návrhů a vyplněných pracovních kopií.
+2. Sloučení: spojení podobných šablon, které řeší stejnou rozhodovací situaci.
+3. Zkrácení: ponechání smyslu, ale odstranění omáčky, starých detailů a citlivých příkladů.
+4. Reaktivace: návrat archivovaného standardu do živého provozu, když se situace znovu opakuje.
+
+Každý typ má jiné výstupy. Prořezání končí menším počtem položek. Sloučení končí novým zdrojem pravdy. Zkrácení končí použitelnější verzí. Reaktivace končí pilotem a kontrolou po prvním ostrém použití. Když výstup nejde pojmenovat, úkol je nejspíš moc vágní.
+
+### 3. Měsíční retenční průchod
+
+Měsíční průchod by měl trvat jednu až dvě hodiny a zaměřit se na jednu oblast. Ne na celý systém. Vyberte třeba onboarding, incidenty, sales handoff, webové změny nebo privacy-first kontroly. Potom projděte tuto jednoduchou trasu:
+
+1. Otevřít kanonický index a vybrat oblast.
+2. Najít všechny živé standardy, šablony, příklady a archivy k této oblasti.
+3. U každé položky určit stav: ponechat, zkrátit, sloučit, archivovat, smazat.
+4. Zkontrolovat citlivá data v příkladech a vyplněných kartách.
+5. Ověřit, jestli nový člověk najde správný postup bez vysvětlování.
+6. Udělat jednu malou úpravu hned a větší změny dát do backlogu.
+
+Pravidlo: měsíční průchod nesmí otevřít deset nových redakčních projektů. Má zlepšit jednu pracovní trasu. Pokud objevíte větší problém, zapište ho jako samostatnou položku s vlastníkem a datem návratu.
+
+### 4. Karta měsíčního retenčního průchodu
+
+Použijte jednoduchý záznam. Důležité je, aby z něj bylo jasné, co se změnilo a proč.
+
+```md
+Měsíční retenční průchod
+
+Oblast:
+Datum:
+Kontroloval:
+
+Hlavní pracovní situace:
+[například: nový člověk přebírá první zákaznický audit]
+
+Položky v kanonickém indexu:
+- [název] - [ponechat / zkrátit / sloučit / archivovat / smazat]
+
+Nalezené duplicity:
+- [co se překrývá]
+
+Nalezená citlivá data:
+- [co zkrátit, anonymizovat nebo přesunout]
+
+Jedna rychlá oprava provedená hned:
+- [konkrétní změna]
+
+Větší změny do backlogu:
+- [změna] - [vlastník] - [termín návratu]
+
+Rozhodnutí:
+[oblast je v pořádku / potřebuje druhý průchod / potřebuje sloučení / potřebuje nový standard]
+
+Další kontrola:
+```
+
+Tato karta nemá dokazovat, že tým pilně dokumentuje dokumentaci. Má udržet stopu rozhodnutí. Za tři měsíce musí být jasné, proč něco zůstalo živé a proč něco skončilo v archivu.
+
+### 5. Privacy-first retence jako výchozí pravidlo
+
+Retence není jen pořádek. Je to ochrana datové stopy. Týmové standardy často obsahují víc citlivých informací, než si lidé připouštějí: konkrétní zákaznické situace, interní chyby, screenshoty nástrojů, jména lidí, exporty tabulek, technické detaily provozu, části komunikace nebo vyplněné formuláře z pilotů.
+
+Privacy-first rytmus znamená:
+
+- v živých šablonách držet obecné příklady, ne reálné zákaznické detaily,
+- vyplněné karty archivovat odděleně od prázdných šablon,
+- po skončení účelu smazat pracovní kopie, které už nikdo nepotřebuje,
+- screenshoty nahrazovat textovým popisem, pokud obrázek nese zbytečná data,
+- přístupy k archivům držet užší než přístupy k veřejným nebo onboardingovým materiálům,
+- při reaktivaci starého standardu znovu zkontrolovat, jestli jeho příklady nejsou příliš konkrétní.
+
+Codyho komentář: nejlepší privacy-first dokumentace je často trochu nudná. Neobsahuje dramatické historky, celé konverzace ani screenshoty všeho, co se kdy pokazilo. Obsahuje rozhodnutí, pravidlo, anonymizovaný příklad a další krok. Méně šťávy pro zvědavost, víc užitku pro práci.
+
+### 6. Stop pravidla pro přidávání nových standardů
+
+Nejlepší retenční systém je ten, který nemusí mazat tolik věcí, protože tým nepřidává každou myšlenku jako nový standard. Před založením nové položky se zeptejte:
+
+- Řeší to opakovanou situaci, nebo jen jeden konkrétní případ?
+- Nestačí doplnit existující standard?
+- Je jasné, kdo to bude používat?
+- Má položka rozhodovací pravidlo, nebo jen popisuje, co se stalo?
+- Víme, kdy ji zkontrolujeme nebo smažeme?
+- Neobsahuje citlivá data, která do živého standardu nepatří?
+
+Pokud odpověď není jasná, nevytvářejte nový standard. Vytvořte pracovní poznámku s datem expirace. To je menší závazek a zdravější výchozí stav.
+
+### 7. Kvartální rozhodnutí: zúžit, ponechat nebo rozdělit
+
+Jednou za kvartál se vyplatí podívat na celé portfolio standardů. Ne detailně všechno přepisovat, ale udělat rozhodnutí o směru. Výstupem mohou být tři typy změn:
+
+- Zúžit: standard je moc široký a lidé v něm hledají těžko.
+- Ponechat: standard funguje, má vlastníka a používá se.
+- Rozdělit: jedna položka ve skutečnosti řeší dvě rozdílné pracovní situace.
+
+Příklad: "Standard pro onboarding" může být příliš široký. Jiný postup potřebuje člověk, který přebírá obsahový web, jiný člověk pro SaaS support a jiný pro provozní monitoring. Rozdělení má smysl, pokud tím zkrátíte konkrétní pracovní trasu. Pokud jen vytvoříte tři podobné dokumenty s jinými nadpisy, gratuluji, právě jste vyrobili duplicitu s příplatkem.
+
+### Checklist
+
+- Má tým pevný týdenní, měsíční a kvartální rytmus retenční práce?
+- Dostávají nové artefakty stav hned, ne až při velkém úklidu?
+- Rozlišujete prořezání, sloučení, zkrácení a reaktivaci?
+- Zaměřuje se měsíční průchod vždy na jednu konkrétní pracovní oblast?
+- Má retenční průchod krátký záznam rozhodnutí?
+- Končí každý průchod jednou hotovou opravou nebo jasnou backlog položkou?
+- Neobsahují živé standardy zbytečně konkrétní zákaznická nebo interní data?
+- Jsou vyplněné pracovní karty oddělené od prázdných šablon?
+- Existují stop pravidla pro zakládání nových standardů?
+- Umí nový člověk najít správnou trasu bez ústního vysvětlování?
+- Má kvartální review právo standard zúžit, sloučit nebo zrušit?
+- Je retenční rytmus dost lehký na to, aby přežil běžný provoz?
+
+Opakovaná retence dělá ze standardů živý pracovní systém. Ne tím, že tým víc dokumentuje, ale tím, že častěji rozhoduje, co už dokumentovat nemusí. V malém týmu je to rozdíl mezi znalostní bází, která pomáhá, a skladem textů, kam se chodí jen s pocitem viny.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -39875,3 +40008,4 @@ Kontrola po prvním retenčním cyklu drží systém při zemi. Ukáže, jestli 
 - 2026-05-12: Doplněna Příloha EE o retenčním plánu a úklidu artefaktů týmových standardů: účel artefaktů, retenční tabulka, úklidové spouštěče, aktivní pracovní trasa a privacy-first checklist.
 - 2026-05-12: Doplněna Příloha EF o kontrole dopadu retenčního úklidu po prvním cyklu: test pracovní trasy, kontrola ztrát, privacy-first efekt, opravy trasy a šablona kontroly.
 - 2026-05-12: Doplněn úvodní čtenářský kompas, který vysvětluje, jak rukopis používat jako pracovní nástroj.
+- 2026-05-12: Doplněna Příloha EG o opakovaném retenčním rytmu pro týmové standardy: týdenní, měsíční a kvartální kontroly, privacy-first retence, stop pravidla a checklist.
