@@ -40490,6 +40490,213 @@ Tento zápis je malý, ale důležitý. Ukazuje, že standardy nejsou statické 
 
 Ověření po prvním použití je malá brzda proti falešnému pocitu hotova. Pomáhá týmu poznat, jestli oprava skutečně zlepšila práci, nebo jen přepsala text v indexu. Když se tento cyklus opakuje, standardy se zlepšují podle reality. Pomalu, prakticky a bez velkých znalostních přestaveb, které vypadají důležitě hlavně v kalendáři.
 
+## Příloha EK: Standardizace úspěšné opravy indexu
+
+Když oprava kanonického indexu projde prvním reálným použitím, tým má lákavý reflex: udělat z ní hned nové pravidlo pro všechny podobné situace. Někdy je to správně. Jindy vznikne jen další vrstva procesu, která vyřešila jeden lokální problém a pak začne překážet všude jinde.
+
+Standardizace má přijít až ve chvíli, kdy oprava prokazatelně zlepšila opakovanou pracovní situaci. Nestačí, že působí elegantně. Nestačí, že se líbí autorovi změny. Musí zkrátit hledání, snížit chyby, zpřesnit rozhodnutí nebo ochránit data v situaci, která se bude vracet.
+
+Codyho komentář: dobrý standard je nudný v tom nejlepším smyslu. Člověk ho použije, udělá práci a nejde o něm vyprávět na tři slidy. Pokud standard potřebuje motivační projev, aby ho tým používal, je dost možné, že standardizujete vlastní nadšení, ne skutečnou potřebu.
+
+### 1. Rozlišujte opravu, vzor a standard
+
+Ne každá dobrá oprava musí být standard. Pomáhá rozlišit tři úrovně:
+
+1. Oprava: konkrétní změna v jednom místě, například přejmenování položky v indexu.
+2. Vzor: opakovatelný princip, například "názvy položek začínají pracovním slovesem".
+3. Standard: závazné pravidlo, které se používá při každé nové nebo upravované položce.
+
+Příklad:
+
+```text
+Oprava:
+"Formuláře" se změnily na "Zkontrolovat změnu webového formuláře".
+
+Vzor:
+Položka indexu má popsat pracovní situaci, ne interní kategorii.
+
+Standard:
+Každá nová položka v kanonickém indexu musí obsahovat sloveso, objekt práce a výstup.
+```
+
+Toto rozlišení šetří tým před přeregulováním. Oprava řeší jeden bolavý bod. Vzor pomáhá přemýšlet o podobných bodech. Standard určuje, jak se bude pracovat dál.
+
+### 2. Standardizujte jen opakovanou situaci
+
+Než z opravy uděláte pravidlo, položte jednoduchou otázku: kde přesně se bude stejná situace opakovat?
+
+Dobré odpovědi:
+
+- Při každém přidání nové položky do indexu.
+- Při měsíční kontrole standardů.
+- Při předání nové role do samostatné práce.
+- Při změně formuláře, který sbírá zákaznická data.
+
+Slabé odpovědi:
+
+- Mohlo by se to hodit.
+- Bude to působit profesionálněji.
+- Ať máme jednotný systém.
+- Jednou jsme se v tom ztratili.
+
+Jednotnost sama o sobě není hodnota. Hodnota je, když jednotnost zrychlí práci, sníží riziko nebo usnadní předání. Pokud tým použije opravu jednou za rok, často stačí poznámka v changelogu. Pokud se situace vrací každý týden, standard už může dávat smysl.
+
+### 3. Přepište opravu do pravidla chování
+
+Standard nemá popisovat historii opravy. Má popisovat budoucí chování.
+
+Slabý standard:
+
+```text
+V minulosti jsme zjistili, že položka "Formuláře" byla nejasná, proto by měly být názvy položek lepší.
+```
+
+Použitelný standard:
+
+```text
+Při přidání nebo úpravě položky v kanonickém indexu pojmenujte položku jako pracovní akci:
+[sloveso] + [objekt práce] + [výstup nebo rozhodnutí].
+Příklad: "Zkontrolovat změnu webového formuláře před publikací".
+```
+
+Rozdíl je v použitelnosti. První text vysvětluje, co se kdysi stalo. Druhý text říká, co má člověk udělat teď.
+
+### 4. Přidejte jeden dobrý a jeden špatný příklad
+
+Standard bez příkladů je často jen přání. Jeden dobrý a jeden špatný příklad udělají víc než dlouhý odstavec vysvětlování.
+
+```text
+Dobře:
+"Vyhodnotit dopad změny cenové stránky po prvním týdnu"
+
+Špatně:
+"Ceník"
+
+Proč:
+První název říká, jakou práci člověk dělá a kdy ji použije.
+Druhý název je jen téma. Nepomůže rozhodnout, co otevřít.
+```
+
+U privacy-first standardů je příklad ještě důležitější, protože lidé si jinak snadno odnesou jen obecnou větu "pozor na data". Ta je pravdivá, ale slabá.
+
+```text
+Dobře:
+Do příkladu vložte anonymizovanou strukturu formuláře, ne skutečné odpovědi zákazníků.
+
+Špatně:
+Do šablony vložte screenshot reálné poptávky, aby bylo vidět, jak to vypadá.
+```
+
+Konkrétní příklad chrání tým před tím, aby se citlivá data dostala do dokumentace jen proto, že někdo chtěl být názorný.
+
+### 5. Určete místo, kde standard žije
+
+Standardizace neznamená přidat text na pět míst. Znamená vybrat jeden zdroj pravdy a ostatní místa na něj odkázat.
+
+Praktický zápis:
+
+```text
+Standard: Pojmenování položek v kanonickém indexu
+Zdroj pravdy: /standards/kanonicky-index.md
+Používá se při: přidání položky, úpravě položky, měsíční kontrole indexu
+Vlastník: osoba odpovědná za znalostní bázi
+Revize: měsíčně při kontrole indexu
+```
+
+Když stejný standard zkopírujete do onboardingového dokumentu, checklistu, šablony a interní wiki, vytvoříte čtyři budoucí nesrovnalosti. Lepší je krátký odkaz s jasnou větou:
+
+```text
+Pro názvy položek použij standard "Pojmenování položek v kanonickém indexu".
+```
+
+To není lenost. To je hygiena.
+
+### 6. Zaveďte standard jen v nejbližším pracovním cyklu
+
+Nový standard se má poprvé použít tam, kde má nejbližší reálnou práci. Ne ve velké oznamovací kampani. Ne v hodinové prezentaci. Stačí jeden konkrétní cyklus:
+
+- příští přidání položky do indexu,
+- nejbližší měsíční kontrola,
+- první onboarding nové role,
+- první úprava šablony, která pracuje s daty.
+
+Po tomto použití zapište krátký výsledek:
+
+```text
+První použití standardu: úprava položky pro změnu webového formuláře.
+Fungovalo: název položky byl rychleji pochopitelný pro člověka mimo původní tým.
+Tření: chyběla definice výstupu, doplněno do vzoru názvu.
+Rozhodnutí: standard ponechat, další kontrola za měsíc.
+```
+
+Standard bez prvního použití je jen dokumentační dluh s lepším názvem.
+
+### 7. Chraňte index před inflací pravidel
+
+Kanonický index má lidem pomáhat najít správnou pracovní trasu. Pokud se kolem něj vytvoří příliš mnoho pravidel, začne být pomalejší než problém, který řeší.
+
+Použijte jednoduchou brzdu:
+
+```text
+Nový standard přidáme jen tehdy, když splní alespoň dvě podmínky:
+- řeší opakované tření,
+- snižuje riziko chyby nebo ztráty dat,
+- zrychluje práci ve více než jedné roli,
+- zlepšuje předání práce novému člověku,
+- má jasné místo v existujícím cyklu kontroly.
+```
+
+Pokud oprava splňuje jen jednu podmínku, často stačí nechat ji jako lokální vylepšení. To není prohra. Je to disciplína.
+
+### 8. Udělejte malou standardizační kartu
+
+Pro úspěšnou opravu, která má přerůst do standardu, stačí jedna krátká karta:
+
+```text
+Název standardu:
+Pojmenování položek v kanonickém indexu
+
+Problém, který řeší:
+Lidé otevírali nesprávné položky, protože názvy popisovaly témata místo pracovních situací.
+
+Pravidlo:
+Název položky má obsahovat sloveso, objekt práce a očekávaný výstup.
+
+Používá se při:
+Přidání položky, úpravě položky, měsíční kontrole indexu.
+
+Dobrý příklad:
+"Zkontrolovat změnu webového formuláře před publikací"
+
+Špatný příklad:
+"Formuláře"
+
+Privacy-first poznámka:
+Příklady nesmí obsahovat skutečné zákaznické odpovědi, interní identifikátory ani citlivé screenshoty.
+
+První kontrola:
+Po nejbližším reálném použití.
+```
+
+Taková karta je dost krátká na použití a dost konkrétní na předání. Nepotřebuje vlastní metodiku, úvodní kapitolu ani slavnostní logo. Tedy může mít logo, pokud vás baví trávit pátek v grafickém pekle, ale pro práci to většinou není kritická infrastruktura.
+
+### Checklist
+
+- Prošla oprava prvním reálným použitím?
+- Je jasné, jakou opakovanou situaci má standard řešit?
+- Rozlišili jste opravu, vzor a závazný standard?
+- Popisuje standard budoucí chování, ne jen historii problému?
+- Obsahuje jeden dobrý a jeden špatný příklad?
+- Má standard jeden zdroj pravdy?
+- Jsou ostatní dokumenty jen odkazy, ne kopie stejného textu?
+- Je privacy-first pravidlo konkrétní, ne jen obecné varování?
+- Proběhne první použití v nejbližším pracovním cyklu?
+- Má standard vlastníka a revizní rytmus?
+- Splňuje standard alespoň dvě podmínky pro přidání nového pravidla?
+- Je standard dost krátký na to, aby ho člověk použil během práce?
+
+Standardizace úspěšné opravy je dobrý sluha a špatný šéf. Pomáhá, když zachytí opakovaný vzor a zjednoduší budoucí práci. Škodí, když z jedné zkušenosti vyrobí nové pravidlo pro všechny. Cílem není mít víc standardů. Cílem je mít méně opakovaných nejasností.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -40670,3 +40877,4 @@ Ověření po prvním použití je malá brzda proti falešnému pocitu hotova. 
 - 2026-05-12: Doplněna Příloha EH o kontrole kvality kanonického indexu po retenčním rytmu: test pracovních situací, scorecard, privacy-first kontrola a checklist.
 - 2026-05-12: Doplněna Příloha EI o převodu nálezů z kontroly kanonického indexu do jedné hotové opravy: třídění tření, výběr podle reálného použití, omezení rozsahu, privacy-first brzda, ověření scénářem a changelog.
 - 2026-05-12: Doplněna Příloha EJ o ověření opravy kanonického indexu po prvním reálném použití: očekávané zlepšení, karta prvního použití, výstup, privacy-first kontrola a uzavření v changelogu.
+- 2026-05-12: Doplněna Příloha EK o standardizaci úspěšné opravy kanonického indexu: rozlišení opravy, vzoru a standardu, první použití, zdroj pravdy, privacy-first příklady a checklist.
