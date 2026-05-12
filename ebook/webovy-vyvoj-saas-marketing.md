@@ -40697,6 +40697,231 @@ Taková karta je dost krátká na použití a dost konkrétní na předání. Ne
 
 Standardizace úspěšné opravy je dobrý sluha a špatný šéf. Pomáhá, když zachytí opakovaný vzor a zjednoduší budoucí práci. Škodí, když z jedné zkušenosti vyrobí nové pravidlo pro všechny. Cílem není mít víc standardů. Cílem je mít méně opakovaných nejasností.
 
+## Příloha EL: Kontrola standardizované opravy po prvním měsíci
+
+Když se oprava kanonického indexu změní ve standard, práce nekončí. Naopak začíná nenápadně nebezpečná fáze: tým si zvyká na nové pravidlo, ale ještě není jisté, jestli pravidlo opravdu pomáhá. První měsíc je dost dlouhý na několik reálných použití a dost krátký na to, aby šlo standard opravit bez velkého dramatu.
+
+Měsíční kontrola nemá dokazovat, že rozhodnutí bylo geniální. Má zjistit, jestli standard zjednodušil práci, snížil chyby a nezaložil nový zdroj tření. Pokud se ukáže, že standard nepomáhá, není ostuda ho změnit nebo zahodit. Ostuda je tvářit se, že papír má pravdu, zatímco lidé kolem něj chodí velkým obloukem.
+
+### 1. Začněte původním slibem standardu
+
+Každý nový standard měl vzniknout kvůli konkrétní opakované situaci. První otázka proto není "dodržovali jsme pravidlo?", ale "splnilo pravidlo slib, kvůli kterému vzniklo?".
+
+Zapište kontrolu takto:
+
+```text
+Standard:
+Pojmenování položek v kanonickém indexu
+
+Původní problém:
+Lidé otevírali nesprávné položky, protože názvy popisovaly témata místo pracovních situací.
+
+Slib standardu:
+Člověk mimo původní tým má do dvou minut poznat, kterou položku otevřít pro konkrétní pracovní situaci.
+
+Kontrolní období:
+První měsíc od zavedení.
+```
+
+Tím kontrolu ukotvíte ve výsledku, ne v dojmu. Standard není dobrý proto, že je hezky napsaný. Je dobrý tehdy, když v reálné práci zmenší zmatek.
+
+### 2. Sbírejte důkazy z práce, ne z porad
+
+Porada často vyrobí zdvořilé odpovědi. Reálná práce ukáže pravdu rychleji. Pro kontrolu standardu stačí tři až pět malých důkazů:
+
+- nově přidané položky v indexu,
+- upravené názvy starších položek,
+- dotazy lidí, kteří nevěděli, kterou položku použít,
+- případy, kdy někdo použil nesprávný standard,
+- situace, kdy pravidlo pomohlo bez dodatečného vysvětlování.
+
+Nepotřebujete sledovat každé kliknutí ani vytvářet výkonovou metriku pro jednotlivce. To by z kontrolního mechanismu udělalo špehovací nástroj. Stačí pracovní artefakty a krátké poznámky z použití.
+
+Privacy-first pravidlo: sbírejte důkazy na úrovni situací a výstupů, ne na úrovni osobního monitoringu. Když potřebujete příklad, anonymizujte zákazníka, člověka i interní identifikátory.
+
+### 3. Udělejte test "nový člověk, starý problém"
+
+Nejlepší test standardu je člověk, který nebyl u jeho vzniku. Dejte mu jednu běžnou pracovní situaci a sledujte, jestli se díky standardu dostane ke správnému rozhodnutí.
+
+Příklad scénáře:
+
+```text
+Situace:
+Na webu se má změnit kontaktní formulář. Potřebujeme vědět, kterou položku v indexu použít, jak se má změna zkontrolovat a co zapsat do changelogu.
+
+Úkol:
+Najdi správnou položku v kanonickém indexu a řekni, co bys udělal jako první.
+
+Limit:
+5 minut bez nápovědy.
+```
+
+Sledujte tři věci:
+
+1. Našel člověk správnou položku?
+2. Pochopil z názvu a krátkého popisu, kdy ji použít?
+3. Věděl, jaký výstup má vzniknout?
+
+Pokud se zasekne na názvosloví, problém není v člověku. Pravděpodobně standard stále mluví jazykem původního autora místo jazykem práce.
+
+### 4. Rozlišujte nedodržení a nepoužitelnost
+
+Když lidé standard nepoužívají, může to mít dva úplně jiné důvody.
+
+První možnost: standard je dobrý, ale nebyl zaveden do pracovního toku. Lidé o něm nevědí, není odkázaný ze správného místa nebo se k němu dostanou až po práci.
+
+Druhá možnost: standard je špatný. Je moc dlouhý, moc abstraktní, neodpovídá reálným situacím nebo vyžaduje víc ruční práce, než kolik šetří.
+
+Rozlište to jednoduchou tabulkou:
+
+```text
+Pozorování:
+Nové položky v indexu stále používají tematické názvy.
+
+Možná příčina A:
+Autoři neviděli standard při přidávání položky.
+
+Možná příčina B:
+Vzor názvu je moc složitý a lidé nevědí, jak ho použít.
+
+Ověření:
+Požádat autora jedné položky, aby podle standardu přepsal název bez vysvětlování.
+
+Rozhodnutí:
+Pokud to zvládne, zlepšit umístění odkazu na standard.
+Pokud ne, zjednodušit pravidlo a doplnit příklad.
+```
+
+Tahle drobnost chrání tým před falešným závěrem. Někdy není potřeba školit lidi. Někdy je potřeba napsat lepší pravidlo.
+
+### 5. Změřte tření ve čtyřech bodech
+
+Standard má snižovat tření, ne ho přesouvat na jiné místo. Po prvním měsíci zkontrolujte čtyři body:
+
+- Nalezení: jak rychle člověk najde správnou položku nebo pravidlo?
+- Pochopení: je jasné, kdy standard použít a kdy ne?
+- Použití: dá se standard použít během práce bez samostatného workshopu?
+- Údržba: nevzniká kvůli standardu další dokumentační práce, která nemá jasný výstup?
+
+Stačí jednoduché hodnocení:
+
+```text
+0 = nefunguje
+1 = funguje s pomocí
+2 = funguje samostatně
+
+Nalezení: 1
+Pochopení: 2
+Použití: 1
+Údržba: 2
+
+Největší tření:
+Standard je v indexu, ale není vidět v šabloně pro přidání nové položky.
+
+Jedna oprava:
+Doplnit krátký odkaz na standard přímo do šablony nové položky.
+```
+
+Nepočítejte průměr jen proto, že tabulka vypadá důležitěji s číslem. Hledejte nejslabší místo a opravte ho.
+
+### 6. Zkontrolujte, jestli standard nezvětšil index
+
+Úspěšný standard někdy spustí zvláštní reflex: tým začne standardizovat všechno, co se aspoň jednou pohnulo. To je cesta k indexu, který je formálně čistý a prakticky nepoužitelný.
+
+Po měsíci si položte brzdicí otázky:
+
+- Přibyly kvůli jednomu standardu další tři podpůrné standardy?
+- Musí člověk při běžné práci otevřít víc dokumentů než předtím?
+- Vznikly nové výjimky, které nikdo neumí vysvětlit jednou větou?
+- Přesunul se problém z nejasných názvů do nejasných pravidel?
+- Je standard pořád kratší než chyba, kterou řeší?
+
+Codyho komentář: standard, který potřebuje vlastní onboardingovou akademii, je podezřelý. Výjimky existují, jasně. Ale pokud k pojmenování položek v indexu potřebujete tříúrovňový certifikační program, problém není v lidech. Problém je v tom, že dokumentace snědla práci.
+
+### 7. Udělejte jednu z pěti věcí
+
+Měsíční kontrola má skončit rozhodnutím. Ne pocitem, ne "vrátíme se k tomu", ne tajemným zápisem v poznámkách. Vyberte jednu z pěti možností:
+
+```text
+Ponechat:
+Standard funguje samostatně a nepotřebuje změnu.
+
+Zjednodušit:
+Standard pomáhá, ale má zbytečné kroky nebo slova.
+
+Přesunout:
+Standard je dobrý, ale lidé ho nevidí ve správném pracovním místě.
+
+Sloučit:
+Standard se překrývá s jiným pravidlem a má být součástí jednoho zdroje pravdy.
+
+Zrušit:
+Standard neřeší opakovanou situaci nebo vytváří víc tření než hodnoty.
+```
+
+Každé rozhodnutí doplňte jednou větou proč. Ta věta je důležitější než samotný štítek, protože umožní budoucímu člověku pochopit kontext bez archeologického výkopu v historii chatu.
+
+### 8. Zapište kontrolu do changelogu standardu
+
+Kontrola bez záznamu se za měsíc vypaří. Záznam nemusí být dlouhý:
+
+```text
+Datum kontroly:
+2026-06-12
+
+Standard:
+Pojmenování položek v kanonickém indexu
+
+Kontrolní otázka:
+Pomáhá standard novému člověku vybrat správnou položku bez vysvětlování?
+
+Důkazy:
+- 4 nové položky v indexu použily nový vzor názvu.
+- 1 člověk mimo původní tým našel správnou položku za 3 minuty.
+- 2 položky měly pořád tematický název bez očekávaného výstupu.
+
+Rozhodnutí:
+Zjednodušit.
+
+Jedna změna:
+Přidat do šablony nové položky větu: "Název má obsahovat sloveso, objekt práce a výstup."
+
+Privacy-first poznámka:
+Příklady byly anonymizované, bez zákaznických dat a bez osobního hodnocení konkrétních lidí.
+```
+
+Takový záznam drží kontinuitu. Nepotřebujete vědět, kdo měl pravdu na poradě. Potřebujete vědět, co se změnilo, proč a podle jakých důkazů.
+
+### Mini workshop: 45 minut po prvním měsíci
+
+Pokud chcete kontrolu udělat rychle, použijte tento rytmus:
+
+1. Pět minut: připomeňte původní problém a slib standardu.
+2. Deset minut: projděte tři až pět pracovních důkazů.
+3. Deset minut: udělejte test "nový člověk, starý problém".
+4. Deset minut: ohodnoťte nalezení, pochopení, použití a údržbu.
+5. Pět minut: vyberte jedno rozhodnutí z pěti možností.
+6. Pět minut: zapište changelog a jednu další změnu.
+
+Pravidlo workshopu: neřešte celou dokumentaci. Kontrolujete jeden standard po prvním měsíci. Jakmile se debata rozleze do obecné filozofie znalostní báze, vraťte ji k otázce: pomohlo toto pravidlo v této práci?
+
+### Checklist
+
+- Je jasně zapsaný původní problém a slib standardu?
+- Kontrolujete reálné pracovní důkazy, ne jen dojmy z porady?
+- Proběhl test s člověkem, který nebyl u vzniku standardu?
+- Rozlišili jste nedodržení standardu od jeho nepoužitelnosti?
+- Změřili jste tření při nalezení, pochopení, použití a údržbě?
+- Zkontrolovali jste, jestli standard nezvětšil index zbytečnými pravidly?
+- Vybrali jste jedno rozhodnutí: ponechat, zjednodušit, přesunout, sloučit nebo zrušit?
+- Má rozhodnutí jednu větu vysvětlení?
+- Je případná oprava omezená na jeden konkrétní další krok?
+- Neobsahují důkazy osobní monitoring, zákaznická data ani citlivé interní detaily?
+- Je kontrola zapsaná v changelogu standardu?
+- Je jasné, kdy proběhne další kontrola nebo proč už není potřeba?
+
+První měsíční kontrola je malá pojistka proti dokumentační samolibosti. Standard se nemá obhajovat sám sebou. Má obstát v práci. Když obstojí, nechte ho žít. Když drhne, zkraťte ho. Když škodí, zrušte ho bez obřadu. Tým potřebuje spolehlivou pracovní paměť, ne muzeum rozhodnutí, která se kdysi zdála rozumná.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -40878,3 +41103,4 @@ Standardizace úspěšné opravy je dobrý sluha a špatný šéf. Pomáhá, kdy
 - 2026-05-12: Doplněna Příloha EI o převodu nálezů z kontroly kanonického indexu do jedné hotové opravy: třídění tření, výběr podle reálného použití, omezení rozsahu, privacy-first brzda, ověření scénářem a changelog.
 - 2026-05-12: Doplněna Příloha EJ o ověření opravy kanonického indexu po prvním reálném použití: očekávané zlepšení, karta prvního použití, výstup, privacy-first kontrola a uzavření v changelogu.
 - 2026-05-12: Doplněna Příloha EK o standardizaci úspěšné opravy kanonického indexu: rozlišení opravy, vzoru a standardu, první použití, zdroj pravdy, privacy-first příklady a checklist.
+- 2026-05-12: Doplněna Příloha EL o kontrole standardizované opravy po prvním měsíci: původní slib standardu, pracovní důkazy, test novým člověkem, měření tření, rozhodnutí a changelog.
