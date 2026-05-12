@@ -39398,6 +39398,152 @@ Termín kontroly: příští měsíční review
 
 Audit datové stopy není brzda dokumentace. Je to způsob, jak udržet standardy použitelné, konkrétní a zároveň přiměřené. Tým má mít dost informací, aby pracoval lépe. Nemá si stavět interní muzeum všech chyb, screenshotů a detailů, které už dávno nepotřebuje.
 
+## Příloha EE: Retenční plán a úklid artefaktů týmových standardů
+
+Audit datové stopy ukáže, co týmové standardy vytvářejí. Další krok je rozhodnout, jak dlouho to má žít. Bez retenčního plánu se i dobře napsané standardy časem obalí starými kartami, exporty, screenshoty, poznámkami z review a archivními verzemi, které už nikdo nepoužívá, ale pořád mohou obsahovat citlivý kontext.
+
+Retence není jen otázka "kdy něco smazat". Je to otázka účelu. Některé artefakty mají zůstat dlouho, protože drží paměť rozhodnutí. Jiné mají zmizet rychle, protože sloužily jen k jedné kontrole. Některé nemají zmizet celé, ale mají se zkrátit na poučení. Privacy-first provoz není posedlost mazáním všeho. Je to disciplína držet jen to, co má pořád práci.
+
+### 1. Začněte účelem artefaktu
+
+Každý artefakt u standardu má mít jednu větu, proč existuje. Pokud ji neumíte napsat, pravděpodobně držíte odpad nebo sentiment.
+
+Příklady účelu:
+
+- Vyplněná kontrolní karta ukazuje, že konkrétní cyklus prošel definovanou bránou.
+- Scorecard používání standardu pomáhá rozhodnout, jestli standard zjednodušit, ponechat nebo zrušit.
+- Retrospektivní poznámka převádí provozní zkušenost do jedné systémové lekce.
+- Screenshot slouží jako dočasný důkaz chyby před opravou.
+- Archivní verze standardu vysvětluje, proč se změnil postup.
+
+Jakmile znáte účel, dá se rozhodnout retence. Dočasný důkaz nepotřebuje žít stejně dlouho jako kanonické rozhodnutí. Pracovní poznámka z workshopu nemá stejnou hodnotu jako schválený standard. Starý export logů není totéž co anonymizované poučení pro onboarding.
+
+Codyho komentář: "mohlo by se to někdy hodit" není účel. Je to pozvánka k nekonečnému skladu. Pokud tým neumí říct, komu artefakt pomůže a v jakém rozhodnutí, má se zkrátit, archivovat s jasným důvodem, nebo odstranit.
+
+### 2. Použijte retenční tabulku
+
+Retenční tabulka nemusí být složitá. Stačí přehled typů artefaktů, vlastníků, obvyklé doby držení a úklidové akce.
+
+```md
+| Artefakt | Účel | Citlivost | Kde žije | Vlastník | Retence | Akce po retenci |
+| --- | --- | --- | --- | --- | --- | --- |
+| Kanonický standard | Zdroj pravdy pro práci | nízká až střední | index standardů | vlastník standardu | dokud platí | revidovat, sloučit nebo archivovat |
+| Vyplněná pracovní karta | Doklad průchodu konkrétní situací | střední | pracovní prostor týmu | vlastník cyklu | do dalšího review | zkrátit na lekci nebo smazat |
+| Incidentní příloha | Důkaz pro řešení problému | vysoká | omezený prostor | provozní vlastník | podle potřeby incidentu | ponechat jen poučení a rozhodnutí |
+| Scorecard používání | Rozhodnutí o užitečnosti standardu | střední | revizní složka | vlastník standardu | 1 až 2 revizní cykly | agregovat a smazat detail |
+| Ukázkový příklad | Pomoc novému člověku | nízká | standard nebo lesson pack | editor standardu | dokud je aktuální | aktualizovat nebo nahradit anonymizovaným vzorem |
+| Archivní verze | Historie změny postupu | nízká až střední | archiv standardů | správce indexu | dokud vysvětluje změnu | ponechat minimum, odstranit přílohy |
+```
+
+Čísla si nastavte podle vlastní reality. Důležitější než přesná délka je to, že tabulka existuje, má vlastníka a používá se při review. Bez vlastníka se retence rychle změní v dobrý úmysl, který nikdo neotevře.
+
+### 3. Rozlišujte smazat, zkrátit, archivovat a převést
+
+Úklid není jen tlačítko delete. U týmových standardů jsou čtyři běžné akce:
+
+- Smazat: artefakt už nemá účel, obsahuje zbytečné detaily a nic z něj není potřeba.
+- Zkrátit: surový záznam se převede na rozhodnutí, poučení nebo agregovaný vzor.
+- Archivovat: artefakt má historickou hodnotu, ale nemá být v aktivní pracovní trase.
+- Převést: obsah se přesune do lepšího formátu, například z poznámek do lesson packu nebo z incidentu do provozního standardu.
+
+Příklad:
+
+```md
+Původní artefakt:
+Tři vyplněné karty po prvních cyklech nové role, včetně osobních poznámek, nejasností a interních komentářů.
+
+Úklidová akce:
+Zkrátit.
+
+Výsledek:
+- jedna anonymizovaná lekce o nejasné hranici eskalace,
+- aktualizovaná šablona předání role,
+- smazané osobní pracovní poznámky,
+- záznam v pracovním logu standardu.
+```
+
+Tím se zachová systémové učení a odstraní se zbytečná osobní stopa. To je přesně typ kompromisu, který privacy-first provoz potřebuje: nezapomenout důležité, ale nepřenášet dál všechno.
+
+### 4. Nastavte úklidové spouštěče
+
+Retence funguje lépe, když není závislá na náhodném velkém úklidu. Přidejte spouštěče do běžného rytmu práce.
+
+Praktické spouštěče:
+
+- Standard prošel měsíční nebo kvartální revizí.
+- Role, proces nebo nabídka se změnily.
+- Automatizace se vypnula, nahradila nebo přešla do trvalého provozu.
+- Incident nebo fallback byl uzavřen.
+- Lesson pack se použil v onboardingu a prošel prvním review.
+- Archivní verze standardu se nahrazuje novou kanonickou verzí.
+- Vyplněné karty dosáhly retenčního období.
+
+Ke každému spouštěči přidejte jednu otázku: co z toho musí zůstat pro další rozhodnutí? Všechno ostatní je kandidát na zkrácení, přesun nebo smazání.
+
+### 5. Chraňte aktivní pracovní trasu
+
+Největší škoda starých artefaktů není jen datová stopa. Je to zmatek. Nový člověk otevře složku, najde pět starých šablon, dvě archivní verze, tři ukázky a jeden neplatný checklist. Pak si vybere špatný materiál a tým se diví, že standard "nefunguje".
+
+Pravidla aktivní trasy:
+
+- V indexu standardů má být vidět jen aktuální kanonická verze.
+- Archiv má být oddělený od běžné práce.
+- Staré odkazy mají vést na aktuální zdroj pravdy nebo jasnou archivní poznámku.
+- Ukázkové příklady mají mít datum revize.
+- Vyplněné pracovní karty nemají být ve stejné složce jako prázdné šablony.
+- Citlivé přílohy nemají být připojené k veřejněji sdílenému standardu.
+
+Když tým potřebuje starší kontext, najde ho v archivu. Když chce pracovat, nemá se probírat historií. Pracovní trasa má být krátká, čistá a nudně jednoznačná.
+
+### 6. Mini rituál: 30 minut úklidu po revizi
+
+Po každé větší revizi standardu si dejte krátký úklidový blok. Nečekejte na velkou administrativní akci.
+
+Agenda:
+
+1. Otevřete kanonický standard a jeho vyplněné artefakty.
+2. Označte, co je aktuální, archivní, dočasné a citlivé.
+3. Vyberte tři položky k akci: smazat, zkrátit, archivovat nebo převést.
+4. Zkontrolujte, že aktivní index ukazuje na správnou verzi.
+5. Odstraňte nebo omezte přístup k přílohám, které už nejsou potřeba.
+6. Zapište jednu větu do pracovního logu standardu.
+
+Výstup:
+
+```md
+Úklid po revizi standardu
+
+Standard:
+Datum:
+Aktuální verze:
+Smazáno:
+Zkráceno:
+Archivováno:
+Převedeno do lesson packu nebo standardu:
+Změna přístupů:
+Zbývající riziko:
+Další kontrola:
+```
+
+Nejde o dokonalost. Jde o pravidelné malé snížení chaosu a datové stopy. Třicet minut měsíčně často udělá víc než jeden hrdinský úklid po roce.
+
+### Checklist
+
+- Má každý typ artefaktu jasný účel?
+- Existuje retenční tabulka pro standardy, pracovní karty, scorecardy, přílohy a archivní verze?
+- Rozlišujete smazání, zkrácení, archivaci a převod do lekce?
+- Má retence vlastníka, ne jen obecné přání?
+- Spouští se úklid po revizi, incidentu, fallbacku, změně role nebo změně nabídky?
+- Je aktivní pracovní trasa oddělená od archivu?
+- Nejsou vyplněné pracovní karty smíchané s prázdnými šablonami?
+- Mají ukázkové příklady datum revize a bezpečnou anonymizaci?
+- Jsou citlivé přílohy mimo běžně sdílené standardy?
+- Zůstává po úklidu systémové poučení, ne zbytečné osobní nebo zákaznické detaily?
+- Umí nový člověk najít aktuální standard bez historického bloudění?
+- Je v pracovním logu vidět, co se uklidilo a proč?
+
+Retenční plán je praktická údržba paměti týmu. Bez něj se standardy mění ve vrstvy starých rozhodnutí, která nikdo neumí vyložit. S ním zůstává týmová paměť použitelná: dost konkrétní na práci, dost krátká na čtení a dost zdrženlivá na to, aby zbytečně nenosila cizí data do budoucnosti.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -39571,3 +39717,4 @@ Audit datové stopy není brzda dokumentace. Je to způsob, jak udržet standard
 - 2026-05-12: Doplněna Příloha EB o provozu kanonického indexu standardů: pracovní situace, brzda přidávání položek, měsíční prořezávání, privacy-first kontrola, onboardingové trasy a changelog změn.
 - 2026-05-12: Doplněna Příloha EC o měření používání standardů bez špehování týmu: rozhodovací otázky, agregované signály, scorecard, mini experimenty, retence a privacy-first hranice měření.
 - 2026-05-12: Doplněna Příloha ED o auditu datové stopy týmových standardů: datové karty, úrovně citlivosti, zkracování příkladů, stop pravidla pro šablony a privacy-first checklist.
+- 2026-05-12: Doplněna Příloha EE o retenčním plánu a úklidu artefaktů týmových standardů: účel artefaktů, retenční tabulka, úklidové spouštěče, aktivní pracovní trasa a privacy-first checklist.
