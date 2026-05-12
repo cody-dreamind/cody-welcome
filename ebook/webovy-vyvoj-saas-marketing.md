@@ -42656,8 +42656,315 @@ Workshop má skončit konkrétní změnou v indexu, šabloně, odkazu nebo pravi
 
 Měsíční kontrola není byrokracie. Je to poslední krok zjednodušení. Teprve tady se ukáže, jestli jste opravdu snížili počet míst, dat a rozhodnutí, nebo jen přejmenovali starý problém.
 
+## Příloha ES: Převod poučení z ukončeného standardu do portfolia
+
+Po měsíční kontrole ukončeného nebo sloučeného standardu máte několik konkrétních zjištění. Některá jsou drobné opravy. Některá ukazují opakovaný vzor. A právě ty druhé nemají zůstat jen v poznámce u jednoho standardu. Patří do portfolia pravidel, aby příští ukončení, sloučení nebo zjednodušení proběhlo lépe.
+
+Tato příloha navazuje na Přílohu ER. Tam jsme ověřili, jestli změna po prvním měsíci funguje. Tady z výsledku uděláme trvalé poučení pro celý systém standardů. Cílem není zakládat další governance vrstvu. Cílem je z jedné zkušenosti vytěžit jedno lepší pravidlo, jednu lepší šablonu nebo jednu lepší kontrolní otázku.
+
+Codyho komentář: když se stejná chyba opravuje potřetí, už to není chyba člověka. Je to chyba systému, který si neumí pamatovat.
+
+### 1. Rozlišujte lokální opravu a portfoliové poučení
+
+Ne každé zjištění má být nové pravidlo. Pokud z každé drobnosti uděláte standard, portfolio se znovu nafoukne. Nejdřív proto rozhodněte, jestli jde o lokální opravu, nebo opakovatelný vzor.
+
+Použijte krátké třídění:
+
+```markdown
+# Třídění poučení po ukončení standardu
+
+Zjištění:
+Kde vzniklo:
+Je to jednorázová chyba?
+Může se to stát u jiných standardů?
+Má to dopad na práci, data, zákazníka nebo rozhodnutí?
+Stačí lokální oprava?
+Patří to do portfoliového pravidla?
+```
+
+Příklad lokální opravy:
+
+```markdown
+Zjištění:
+V jedné staré šabloně zůstal odkaz na archivovaný standard.
+
+Rozhodnutí:
+Lokální oprava.
+
+Důvod:
+Odkaz je jen v jedné šabloně, nemá dopad na jiné části systému a nejde o opakovaný vzor.
+```
+
+Příklad portfoliového poučení:
+
+```markdown
+Zjištění:
+Při sloučení standardu se opakovaně zapomíná na automatické připomínky v kalendáři a nástrojích.
+
+Rozhodnutí:
+Přidat do mapy dopadu novou kontrolní otázku.
+
+Důvod:
+Týká se více standardů a vytváří skrytou práci i po formálním ukončení dokumentu.
+```
+
+Dobré pravidlo je malé. Nemá zachytit všechno. Má zachytit jednu věc, která by se bez něj pravděpodobně zopakovala.
+
+### 2. Zapište poučení jako kartu vzoru
+
+Portfoliové poučení musí být použitelné i za tři měsíce. Nestačí věta "příště lépe zkontrolovat odkazy". Zapište vzor tak, aby podle něj šel upravit checklist, šablona nebo pracovní rytmus.
+
+Šablona karty:
+
+```markdown
+# Karta portfoliového poučení
+
+Název vzoru:
+Vzniklo po změně:
+Problém:
+Jak se problém projevil:
+Kde se může opakovat:
+Nové pravidlo:
+Který artefakt se má upravit:
+Vlastník úpravy:
+Termín:
+Jak ověříme, že pravidlo pomohlo:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název vzoru:
+Kontrola automatických připomínek při archivaci standardu.
+
+Problém:
+Po sloučení standardu zůstaly běžet dvě automatické připomínky na staré review.
+
+Jak se problém projevil:
+Tým dostal zbytečné notifikace a jeden člověk začal vyplňovat starou šablonu.
+
+Kde se může opakovat:
+U všech standardů s měsíčním nebo kvartálním rytmem.
+
+Nové pravidlo:
+Při ukončení standardu zkontrolovat dokumenty, šablony, kanonický index, kalendáře, automatické připomínky a navázané automatizace.
+
+Který artefakt se má upravit:
+Mapa dopadu v příloze pro ukončení nebo sloučení standardu.
+```
+
+Karta má vést ke změně v systému, ne k archivaci zajímavé historky.
+
+### 3. Upravte jen jeden zdroj pravdy
+
+Když poučení patří do portfolia, najděte jedno místo, kde má žít. Nepřidávejte stejnou větu do pěti dokumentů. To by jen vytvořilo budoucí rozpor.
+
+Typická místa pro zápis:
+
+- kanonický index standardů,
+- šablona pro ukončení nebo sloučení standardu,
+- mapa dopadu,
+- privacy-first checklist,
+- onboardingová trasa pro vlastníky standardů,
+- revizní rytmus portfolia,
+- changelog provozních pravidel.
+
+Rozhodovací pravidlo:
+
+```text
+Pokud poučení mění rozhodování, patří do checklistu nebo šablony.
+Pokud mění navigaci, patří do indexu.
+Pokud mění odpovědnost, patří do karty vlastnictví.
+Pokud mění datovou stopu, patří do privacy-first pravidel.
+Pokud je jen historickým kontextem, patří do changelogu.
+```
+
+Příklad:
+
+```markdown
+Poučení:
+Při archivaci standardu zůstávají staré screenshoty ve školení.
+
+Špatné řešení:
+Přidat poznámku do každého školícího dokumentu.
+
+Lepší řešení:
+Upravit privacy-first část mapy dopadu o otázku: "Existují screenshoty, exporty nebo zákaznické příklady v onboardingových a školících materiálech?"
+```
+
+Tím se z jedné zkušenosti stane lepší kontrolní mechanismus.
+
+### 4. Chraňte portfolio před návratem složitosti
+
+Ukončení standardu často selže ne proto, že by tým nic neudělal, ale proto, že stará složitost najde novou cestu zpět. Někdo založí novou šablonu, přidá nový štítek, obnoví schůzku nebo začne držet pomocný dokument bokem.
+
+Proto má každé portfoliové poučení projít stop pravidlem:
+
+```markdown
+# Stop pravidlo pro nové portfoliové poučení
+
+Přidáváme nové pravidlo, nebo zjednodušujeme staré?
+Které staré pravidlo se tím ruší, slučuje nebo zkracuje?
+Kolik míst bude po změně existovat?
+Kdo změnu za měsíc ověří v reálné práci?
+Co se stane, když poučení nepomůže?
+```
+
+Praktický příklad:
+
+```markdown
+Návrh:
+Založit nový checklist pro kontrolu archivovaných standardů.
+
+Stop otázka:
+Proč to není úprava existující mapy dopadu?
+
+Rozhodnutí:
+Nový checklist nezakládat. Přidat tři otázky do mapy dopadu a jednu poznámku do kanonického indexu.
+```
+
+Méně artefaktů znamená méně míst, kde se může pravda rozdělit.
+
+### 5. Privacy-first poučení pište bez citlivých stop
+
+Poučení z provozu často vzniká kolem konkrétních ticketů, zákaznických zpráv, screenshotů, exportů nebo interních komentářů. Do portfolia ale většinou nepatří původní detail. Patří tam pravidlo, které z detailu vzniklo.
+
+Před zápisem si položte otázky:
+
+- Potřebujeme původní příklad, nebo stačí syntetická ukázka?
+- Obsahuje záznam jméno zákazníka, e-mail, název firmy, ticket, screenshot nebo interní hodnocení?
+- Je poučení srozumitelné i bez těchto detailů?
+- Má původní důkaz retenční lhůtu a vlastníka?
+- Dá se citlivá stopa smazat po převodu pravidla?
+
+Příklad převodu:
+
+```markdown
+Původní zjištění:
+Ve školení byl screenshot ticketu od konkrétního zákazníka, který ukazoval starý postup.
+
+Portfoliové poučení:
+Při archivaci standardu kontrolovat i školící materiály a zákaznické příklady. Pokud příklad zůstává, musí mít aktuální účel, anonymizaci a retenční rozhodnutí.
+```
+
+Tohle je praktická privacy-first práce. Nejde jen o souhlas nebo právní text. Jde o schopnost převádět zkušenost do pravidla bez zbytečného přenášení osobních a obchodně citlivých dat.
+
+### 6. Udělejte malou portfoliovou změnu a ověřte ji
+
+Každé poučení má skončit jednou konkrétní změnou. Ne debatou, ne plánem na velkou revizi. Jednou změnou.
+
+Možné změny:
+
+- přidat jednu otázku do existující šablony,
+- přejmenovat položku v kanonickém indexu,
+- zkrátit starý odstavec,
+- sloučit dvě duplicitní pravidla,
+- přidat stop pravidlo do revizního rytmu,
+- odstranit zbytečný příklad,
+- upravit onboardingovou trasu pro nového vlastníka.
+
+Karta změny:
+
+```markdown
+# Portfoliová změna po poučení
+
+Poučení:
+Změněný artefakt:
+Konkrétní úprava:
+Co se tím ruší nebo zkracuje:
+Kdo změnu používá:
+Kdy ověřit první použití:
+Očekávaný signál:
+```
+
+Vyplněný příklad:
+
+```markdown
+Poučení:
+Při ukončení standardu se zapomíná na staré automatické připomínky.
+
+Změněný artefakt:
+Mapa dopadu pro ukončení standardu.
+
+Konkrétní úprava:
+Přidána otázka na kalendáře, notifikace a automatizace.
+
+Co se tím ruší nebo zkracuje:
+Samostatná poznámka v chatu.
+
+Kdy ověřit první použití:
+Při dalším sloučení nebo archivaci standardu.
+```
+
+Ověření nemusí být složité. Stačí při příštím použití zkontrolovat, jestli nová otázka zachytila problém dřív, než se dostal do provozu.
+
+### 7. Uzavřete smyčku v changelogu
+
+Na konci zapište krátký changelog. Ne kvůli historii pro historii, ale kvůli tomu, aby další člověk pochopil, proč se pravidlo změnilo.
+
+Formát:
+
+```markdown
+Datum:
+Poučení:
+Změněný artefakt:
+Důvod:
+Očekávaný dopad:
+Kdy ověřit:
+```
+
+Příklad:
+
+```markdown
+Datum:
+2026-05-12
+
+Poučení:
+Při sloučení standardu se mohou ztratit automatické připomínky a kalendářové rytmy.
+
+Změněný artefakt:
+Mapa dopadu ukončení standardu.
+
+Důvod:
+Po posledním sloučení zůstala aktivní stará měsíční připomínka.
+
+Očekávaný dopad:
+Méně zbytkové práce po archivaci standardů.
+
+Kdy ověřit:
+Při dalším ukončení nebo sloučení standardu.
+```
+
+Changelog má být krátký. Pokud potřebuje dlouhé vysvětlení, pravidlo je nejspíš moc komplikované.
+
+### Mini workshop: 30 minut na portfoliové poučení
+
+1. Pět minut: vyberte jedno zjištění z měsíční kontroly.
+2. Pět minut: rozhodněte, jestli jde o lokální opravu, nebo opakovatelný vzor.
+3. Deset minut: vyplňte kartu portfoliového poučení.
+4. Pět minut: určete jeden zdroj pravdy a jednu konkrétní úpravu.
+5. Pět minut: zapište changelog a termín ověření.
+
+Workshop má skončit změnou v existujícím artefaktu. Pokud končí založením dalšího dokumentu, vraťte se ke stop pravidlu.
+
+### Checklist
+
+- Je jasné, které zjištění z měsíční kontroly řešíte?
+- Rozlišili jste lokální opravu od portfoliového poučení?
+- Má poučení kartu vzoru s problémem, projevem a místem opakování?
+- Vybrali jste jeden zdroj pravdy pro změnu?
+- Nepřidáváte nové pravidlo tam, kde stačí upravit existující šablonu?
+- Je jasné, co se změnou ruší, slučuje nebo zkracuje?
+- Privacy-first poučení neobsahuje zbytečné zákaznické, osobní ani interně citlivé detaily?
+- Původní důkazy mají účel, retenci nebo plán smazání?
+- Změna má vlastníka a první okamžik ověření?
+- Changelog vysvětluje důvod změny jednou nebo dvěma větami?
+
+Portfolio standardů se zlepšuje tehdy, když si pamatuje vzory, ne když skladuje všechny detaily. Jedno dobré poučení má snížit budoucí práci. Pokud ji jen přesune do dalšího dokumentu, není to poučení, ale nový dluh.
+
 ## Pracovní log
 
+- 2026-05-12: Doplněna Příloha ES o převodu poučení z ukončeného standardu do portfolia: třídění lokálních oprav a opakovatelných vzorů, karta poučení, jeden zdroj pravdy, stop pravidla, privacy-first zápis a changelog.
 - 2026-05-12: Doplněna Příloha ER o kontrole ukončeného nebo sloučeného standardu po prvním měsíci: reálné průchody, zbytky starého systému, nový zdroj pravdy, privacy-first dočištění, rozhodnutí dalšího stavu a checklist.
 - 2026-05-12: Doplněna Příloha EQ o ukončení nebo sloučení standardu po roční inventuře: typ změny, mapa dopadu, archivní karta, nový zdroj pravdy, odkazy, privacy-first úklid a ověření při prvním použití.
 - 2026-05-12: Doplněna Příloha EP o roční inventuře provozních cyklů standardů: seznam aktivních rytmů, duplicity, stavy rozhodnutí, privacy-first úklid důkazů, portfoliová změna a checklist.
