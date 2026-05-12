@@ -43262,8 +43262,327 @@ Workshop má skončit změnou v jednom artefaktu. Ne plánem na velké "až bude
 
 Čtvrtletní audit portfoliových poučení drží systém živý. Ne tím, že přidává další pravidla, ale tím, že se ptá, která pravidla si zasloužila zůstat. To je rozdíl mezi pamětí týmu a skladem poznámek.
 
+## Příloha EU: Převod auditu portfoliových poučení do jedné hotové změny
+
+Čtvrtletní audit portfoliových poučení má smysl jen tehdy, když po něm vznikne jedna dokončená změna v pracovním systému. Ne zápis, ne dobrý pocit, ne seznam dvaceti doporučení. Jedna změna, kterou někdo použije při reálné práci a která sníží tření, riziko nebo datovou stopu.
+
+Tato příloha navazuje na Přílohu ET. Tam tým prošel poučení za poslední čtvrtletí, změřil tření, našel duplicity a vybral jednu portfoliovou opravu. Tady ji převede do provozu tak, aby se neztratila mezi poznámkami a zároveň z ní nevznikla další vrstva pravidel.
+
+Codyho komentář: audit bez hotové změny je trochu jako uklizená tabulka s názvem "problémy". Vypadá zodpovědně, ale pořád je to jen muzeum práce, která ještě nezačala.
+
+### 1. Přepište výsledek auditu do jedné změnové věty
+
+Nezačínejte rovnou editací dokumentů. Nejdřív napište jednu větu, která říká, co přesně měníte a proč.
+
+Dobrá změnová věta má tento tvar:
+
+```markdown
+Po čtvrtletním auditu [upravíme / sloučíme / odstraníme / přesuneme] [konkrétní pravidlo nebo artefakt], protože [zjištění z auditu], a ověříme dopad při [konkrétní pracovní situaci].
+```
+
+Příklady:
+
+```markdown
+Po čtvrtletním auditu sloučíme tři pravidla pro kontrolu starých odkazů do jedné otázky v mapě dopadu, protože týmy kontrolují stejné odkazy ve třech různých chvílích, a ověříme dopad při dalším sloučení standardu.
+```
+
+```markdown
+Po čtvrtletním auditu přesuneme pravidlo pro anonymizaci příkladů ze samostatné poznámky do privacy-first části šablony, protože lidé ho hledají při psaní příkladu, ne při čtení portfoliového indexu.
+```
+
+Pokud věta potřebuje tři odstavce vysvětlení, oprava je nejspíš moc široká. Zmenšete ji. Portfoliová změna má být malý zásah do místa, kde se práce skutečně děje.
+
+### 2. Vyberte primární artefakt
+
+Po auditu bývá lákavé upravit všechno, kde se poučení objevuje. To ale často vytvoří další koordinaci a riziko rozporů. Vyberte jeden primární artefakt, který změna opravdu zlepší.
+
+Možné primární artefakty:
+
+- mapa dopadu,
+- checklist ukončení standardu,
+- kanonický index,
+- onboardingová trasa,
+- privacy-first šablona,
+- changelog pravidel,
+- karta vlastnictví,
+- review agenda.
+
+Rozhodovací pravidlo:
+
+```text
+Primární artefakt je místo, kde se člověk rozhoduje nebo jedná.
+Sekundární artefakty jsou místa, která na změnu jen odkazují.
+```
+
+Příklad:
+
+```markdown
+Zjištění z auditu:
+Při archivaci standardu se zapomíná na staré automatické připomínky.
+
+Primární artefakt:
+Mapa dopadu ukončení standardu.
+
+Sekundární artefakty:
+Kanonický index a changelog.
+
+Co neměníme hned:
+Onboardingovou prezentaci pro vlastníky standardů. Tu zkontrolujeme až po prvním použití upravené mapy dopadu.
+```
+
+Tím se změna dostane do toku práce, ne do dalšího vysvětlujícího textu bokem.
+
+### 3. Určete, co se změnou ruší
+
+Každá dobrá portfoliová oprava má něco odstranit, zkrátit, sloučit nebo přesunout. Pokud jen přidáváte nové pravidlo a nic neubíráte, portfolio bude za rok znovu přerostlé.
+
+Do změnové karty proto vždy napište:
+
+```markdown
+Co přidáváme:
+Co rušíme:
+Co slučujeme:
+Co přesouváme:
+Co už nebude samostatné pravidlo:
+```
+
+Příklad:
+
+```markdown
+Co přidáváme:
+Jednu otázku do mapy dopadu: "Existují kalendářové události, notifikace nebo automatizace navázané na starý standard?"
+
+Co rušíme:
+Samostatnou poznámku v changelogu "příště nezapomenout na připomínky".
+
+Co slučujeme:
+Kontrolu kalendáře a kontrolu automatizací do jedné sekce "pracovní spouštěče".
+
+Co už nebude samostatné pravidlo:
+Ručně připomínat vlastníkovi standardu, aby zkontroloval kalendář.
+```
+
+Taková oprava přidá jednu otázku, ale odstraní neformální ruční hlídání. To je dobrý obchod.
+
+### 4. Napište změnu v pracovním jazyce
+
+Portfoliová poučení často sklouzávají do abstraktních formulací: zlepšit návaznost, posílit kontrolu, zajistit konzistenci, reflektovat datovou stopu. To zní bezpečně, ale člověk podle toho neví, co udělat.
+
+Přepisujte pravidla do pracovního jazyka:
+
+```markdown
+Slabé:
+Zohlednit dopad archivace na navázané provozní mechanismy.
+
+Lepší:
+Před archivací standardu zkontroluj, jestli na něj odkazuje kalendář, automatická připomínka, skript, checklist nebo šablona.
+```
+
+```markdown
+Slabé:
+Dbát na minimalizaci citlivých dat v příkladech.
+
+Lepší:
+Pokud příklad obsahuje jméno zákazníka, e-mail, screenshot, ticket nebo interní komentář, nahraď ho syntetickou ukázkou nebo zapiš, proč musí zůstat.
+```
+
+Pracovní jazyk není méně profesionální. Je jen méně mlhavý. A mlha je v provozu drahá, protože ji lidé kompenzují schůzkami.
+
+### 5. Udělejte privacy-first kontrolu změny
+
+I malá portfoliová oprava může omylem rozšířit datovou stopu. Třeba když do nového pravidla přenesete konkrétní zákaznický příklad, starý screenshot nebo interní komentář z retrospektivy.
+
+Před dokončením změny projděte krátkou kontrolu:
+
+```markdown
+# Privacy-first kontrola portfoliové opravy
+
+Obsahuje změna zákaznický název, jméno, e-mail nebo ticket?
+Obsahuje screenshot, export nebo odkaz do omezeného systému?
+Je příklad nutný, nebo stačí syntetická ukázka?
+Vzniká nový log, nová tabulka nebo nová evidence?
+Má nová evidence účel, vlastníka a retenci?
+Snižuje změna datovou stopu oproti původnímu stavu?
+```
+
+Příklad lepšího převodu:
+
+```markdown
+Původní auditní zjištění:
+Při kontrole školení jsme našli screenshot z konkrétního support ticketu.
+
+Špatná změna:
+Přidat screenshot jako varovný příklad do portfoliového pravidla.
+
+Lepší změna:
+Do privacy-first části mapy dopadu přidat otázku: "Jsou ve školení nebo šablonách zákaznické screenshoty, exporty nebo citace, které už lze nahradit syntetickým příkladem?"
+```
+
+Pravidlo se zlepší a citlivý důkaz se nepřenese dál. Přesně tak má privacy-first provoz vypadat v praxi.
+
+### 6. Připravte malý změnový balíček
+
+Hotová portfoliová oprava by měla mít tři části:
+
+- upravený primární artefakt,
+- krátký changelog,
+- první ověřovací situaci.
+
+Šablona:
+
+```markdown
+# Změnový balíček po čtvrtletním auditu
+
+Změnová věta:
+
+Primární artefakt:
+
+Konkrétní úprava:
+
+Co se ruší nebo slučuje:
+
+Sekundární odkazy k úpravě:
+
+Privacy-first kontrola:
+
+První ověřovací situace:
+
+Vlastník:
+
+Termín uzavření:
+
+Changelog:
+```
+
+Vyplněný příklad:
+
+```markdown
+Změnová věta:
+Po čtvrtletním auditu sloučíme kontrolu starých odkazů do jedné otázky v mapě dopadu, protože se opakuje v indexu, checklistu i měsíčním review.
+
+Primární artefakt:
+Mapa dopadu ukončení nebo sloučení standardu.
+
+Konkrétní úprava:
+Přidat otázku: "Kde zůstávají aktivní odkazy na starý standard: index, šablony, onboarding, automatizace, veřejné URL?"
+
+Co se ruší nebo slučuje:
+Ruší se samostatná poznámka v měsíčním review.
+
+Privacy-first kontrola:
+Otázka nevyžaduje ukládání nových důkazů, jen záznam rozhodnutí.
+
+První ověřovací situace:
+Další archivace nebo sloučení standardu.
+```
+
+Balíček držte krátký. Jeho úkolem je provést změnu, ne obhájit existenci auditu.
+
+### 7. Ověřte změnu v prvním použití, ne v dalším auditu
+
+Nečekejte čtvrt roku. Jakmile nastane první pracovní situace, kde se nová otázka, šablona nebo pravidlo použije, ověřte ho.
+
+Krátká karta ověření:
+
+```markdown
+# První použití portfoliové opravy
+
+Oprava:
+Pracovní situace:
+Kdo ji použil:
+
+Našel člověk upravený artefakt bez pomoci?
+Vedla změna k jasnějšímu rozhodnutí?
+Snížila duplicitu nebo ruční práci?
+Zachytila riziko dřív než starý systém?
+Nevytvořila novou datovou stopu bez účelu?
+
+Rozhodnutí:
+Ponechat / drobně upravit / vrátit / otevřít nový problém
+```
+
+Příklad:
+
+```markdown
+Oprava:
+Nová otázka na automatické připomínky v mapě dopadu.
+
+Pracovní situace:
+Sloučení dvou review rytmů.
+
+Výsledek:
+Otázka zachytila starou kalendářovou událost a jednu notifikaci v nástroji.
+
+Rozhodnutí:
+Ponechat. Drobně upravit formulaci z "kalendář" na "kalendáře a notifikační pravidla".
+```
+
+Tohle je ideální výsledek: malá změna, reálný dopad, drobná korekce a uzavření.
+
+### 8. Zabraňte návratu do velkého projektu
+
+Portfoliová oprava má svádět k dalšímu úklidu. Při editaci jedné šablony najdete tři staré odkazy, dvě špatná slova a jeden nápad na nový index. Všechno může být pravda. Ne všechno patří do této iterace.
+
+Použijte parkoviště s hranicí:
+
+```markdown
+# Parkoviště mimo tuto opravu
+
+Nález:
+Proč není součástí této změny:
+Riziko odložení:
+Kam patří:
+Kdy se vrátit:
+```
+
+Příklad:
+
+```markdown
+Nález:
+Onboardingová trasa pro vlastníky standardů má starý screenshot.
+
+Proč není součástí této změny:
+Aktuální oprava řeší mapu dopadu pro ukončení standardu.
+
+Riziko odložení:
+Nízké, screenshot není v aktivním pracovním toku.
+
+Kam patří:
+Do příští privacy-first kontroly onboardingových materiálů.
+```
+
+Parkoviště má chránit fokus, ne skladovat výčitky. Pokud se k položce nikdo nevrátí, možná nebyla dost důležitá.
+
+### Mini workshop: 35 minut na jednu hotovou portfoliovou opravu
+
+1. Pět minut: napište jednu změnovou větu.
+2. Pět minut: vyberte primární artefakt.
+3. Pět minut: určete, co se ruší, slučuje nebo přesouvá.
+4. Deset minut: upravte pravidlo v pracovním jazyce a projděte privacy-first kontrolu.
+5. Pět minut: vyplňte změnový balíček.
+6. Pět minut: určete první ověřovací situaci a parkoviště pro věci mimo rozsah.
+
+Workshop má skončit hotovou úpravou jednoho artefaktu. Pokud skončí plánem "připravit návrh změny", zmenšete rozsah a dokončete alespoň jednu otázku, jeden odkaz nebo jedno pravidlo.
+
+### Checklist
+
+- Máte jednu změnovou větu z čtvrtletního auditu?
+- Vybrali jste jeden primární artefakt, kde se práce skutečně děje?
+- Je jasné, co se změnou ruší, slučuje, přesouvá nebo zkracuje?
+- Je nové pravidlo napsané pracovním jazykem?
+- Nepřenáší změna zbytečné zákaznické, osobní nebo interně citlivé detaily?
+- Nevzniká nová evidence bez účelu, vlastníka a retence?
+- Má změna krátký balíček: artefakt, changelog a první ověření?
+- Je určeno, kdo změnu vlastní a kdy se uzavře?
+- Ověříte dopad při prvním reálném použití, ne až při dalším auditu?
+- Věci mimo rozsah jsou v parkovišti s jasným důvodem a termínem návratu?
+- Nevznikl z jedné opravy nový dokumentační projekt?
+
+Jedna hotová portfoliová oprava je malá, ale důležitá jednotka údržby. Udržuje systém v kondici bez velkých reorganizací. Když každé čtvrtletí dokončíte jednu takovou změnu, portfolio poučení bude postupně lehčí, přesnější a méně hladové po pozornosti.
+
 ## Pracovní log
 
+- 2026-05-12: Doplněna Příloha EU o převodu čtvrtletního auditu portfoliových poučení do jedné hotové změny: změnová věta, primární artefakt, rušení duplicit, pracovní jazyk, privacy-first kontrola, změnový balíček a první ověření.
 - 2026-05-12: Doplněna Příloha ET o čtvrtletním auditu portfoliových poučení: inventura, reálné použití, duplicity, scorecard tření, privacy-first kontrola, jedna oprava a rozhodnutí o stavu portfolia.
 - 2026-05-12: Doplněna Příloha ES o převodu poučení z ukončeného standardu do portfolia: třídění lokálních oprav a opakovatelných vzorů, karta poučení, jeden zdroj pravdy, stop pravidla, privacy-first zápis a changelog.
 - 2026-05-12: Doplněna Příloha ER o kontrole ukončeného nebo sloučeného standardu po prvním měsíci: reálné průchody, zbytky starého systému, nový zdroj pravdy, privacy-first dočištění, rozhodnutí dalšího stavu a checklist.
