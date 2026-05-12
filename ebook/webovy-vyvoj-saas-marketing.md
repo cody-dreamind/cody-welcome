@@ -43580,8 +43580,319 @@ Workshop má skončit hotovou úpravou jednoho artefaktu. Pokud skončí plánem
 
 Jedna hotová portfoliová oprava je malá, ale důležitá jednotka údržby. Udržuje systém v kondici bez velkých reorganizací. Když každé čtvrtletí dokončíte jednu takovou změnu, portfolio poučení bude postupně lehčí, přesnější a méně hladové po pozornosti.
 
+## Příloha EV: Ověření hotové portfoliové změny po prvním použití
+
+Hotová portfoliová změna není hotová tím, že se objeví v dokumentu. Hotová je až ve chvíli, kdy ji někdo použije při skutečné práci a systém se podle ní chová lépe než předtím. Příloha EU řešila převod auditu do jedné konkrétní úpravy. Tato příloha uzavírá další krok: první použití, krátké ověření a rozhodnutí, jestli změna zůstane, upraví se, nebo půjde zpět.
+
+Smyslem není udělat další audit. Smyslem je chytit realitu dřív, než se z nové opravy stane další vrstva procesní omítky. Jedna otázka může pomoct. Jedna otázka může také překážet. Rozdíl poznáte až v provozu.
+
+Codyho komentář: změna, kterou nikdo nepoužil, je zatím jen optimistická hypotéza v pěkném kabátě. A hypotézy patří do ověření, ne do síně slávy.
+
+### 1. Najděte první přirozenou situaci, ne umělý test
+
+První ověření má proběhnout ve chvíli, kdy by se upravený artefakt použil i bez testu. Pokud jste změnili mapu dopadu pro ukončení standardu, ověřujte ji při dalším ukončení nebo sloučení standardu. Pokud jste upravili privacy-first otázku v šabloně, ověřujte ji při nejbližší reálné editaci šablony.
+
+Neověřujte změnu tak, že si tým sedne a bude předstírat práci. Simulace může najít hrubé chyby, ale neukáže běžné tření: hledání správného místa, nejasné formulace, přehlédnuté odkazy, chybějící vlastníka nebo zbytečné opisování stejné informace.
+
+Krátká definice ověřovací situace:
+
+```markdown
+# První ověřovací situace
+
+Změna:
+Kde se má použít:
+Jaká reálná práce ji spustí:
+Kdo ji pravděpodobně použije:
+Co má být po použití jednodušší:
+Co nesmí vzniknout navíc:
+```
+
+Příklad:
+
+```markdown
+Změna:
+Nová otázka v mapě dopadu: "Existují kalendáře, notifikace nebo automatizace navázané na starý standard?"
+
+Kde se má použít:
+Při sloučení dvou review rytmů.
+
+Jaká reálná práce ji spustí:
+Vlastník standardu připravuje mapu dopadu před archivací starého rytmu.
+
+Co má být po použití jednodušší:
+Zachytit navázané připomínky před archivací, ne až po prvním zmatku v týmu.
+
+Co nesmí vzniknout navíc:
+Nová tabulka automatizací jen kvůli jedné kontrole.
+```
+
+Tím si dopředu nastavíte hranice. Ověření nebude hodnotit, jestli je změna hezká. Bude hodnotit, jestli pomohla v konkrétním okamžiku.
+
+### 2. Sledujte chování člověka, ne jen výsledek
+
+Portfoliové opravy často selžou nenápadně. Výsledek nakonec nějak vznikne, ale člověk mezitím hledá starý dokument, ptá se kolegy, opisuje data do dvou míst nebo ignoruje novou otázku, protože neví, co znamená. Pokud měříte jen dokončený výstup, tohle neuvidíte.
+
+Při prvním použití sledujte tři jednoduché věci:
+
+- našel člověk upravený artefakt bez nápovědy,
+- pochopil novou formulaci bez doplňujícího vysvětlování,
+- vedla změna k rozhodnutí nebo k dalším otázkám.
+
+Záznam má být krátký:
+
+```markdown
+# Pozorování prvního použití
+
+Pracovní situace:
+Použitý artefakt:
+Kdo pracoval:
+
+Našel artefakt bez pomoci? Ano / Ne
+Pochopil změnu bez vysvětlování? Ano / Ne / Částečně
+Co udělal jinak než před změnou:
+Kde se zasekl:
+Co musel hledat bokem:
+```
+
+Příklad:
+
+```markdown
+Co udělal jinak než před změnou:
+Před archivací starého rytmu zkontroloval kalendář a notifikační pravidla.
+
+Kde se zasekl:
+Nevěděl, jestli se "automatizace" vztahují i na ruční opakované připomínky v projektovém nástroji.
+
+Co musel hledat bokem:
+Seznam aktivních připomínek v pracovním boardu.
+```
+
+To je užitečnější než věta "změna použita". Ukazuje konkrétní tření a zároveň neotevírá zbytečně velké téma.
+
+### 3. Oddělte chybu změny od chyby okolního systému
+
+První použití často odhalí problém, který s novou změnou souvisí jen nepřímo. Například nová otázka je jasná, ale kanonický index vede na starou verzi šablony. Nebo šablona funguje, ale nikdo neví, kdo má ověření zavřít. Pokud všechno označíte jako chybu portfoliové opravy, začnete upravovat špatné místo.
+
+Použijte jednoduché třídění:
+
+```markdown
+# Třídění nálezu po prvním použití
+
+Nález:
+
+Typ:
+- chyba formulace,
+- chyba umístění,
+- chybějící vlastník,
+- starý odkaz,
+- duplicita,
+- chybějící příklad,
+- zbytečná datová stopa,
+- okolní systém mimo rozsah.
+
+Patří do aktuální opravy? Ano / Ne
+Proč:
+Nejmenší další krok:
+```
+
+Příklad:
+
+```markdown
+Nález:
+Člověk použil starou šablonu, protože kanonický index odkazoval na archivní dokument.
+
+Typ:
+Starý odkaz.
+
+Patří do aktuální opravy?
+Ano, protože oprava měla zlepšit mapu dopadu a bez správného odkazu se k ní člověk nedostane.
+
+Nejmenší další krok:
+Opravit odkaz v kanonickém indexu a přidat changelog položku.
+```
+
+Jiný příklad:
+
+```markdown
+Nález:
+Při práci vyšlo najevo, že tým nemá sjednocený seznam všech interních školení.
+
+Typ:
+Okolní systém mimo rozsah.
+
+Patří do aktuální opravy?
+Ne. Aktuální změna řeší kontrolu navázaných připomínek při archivaci standardu.
+
+Nejmenší další krok:
+Zapsat do parkoviště pro příští audit týmových materiálů.
+```
+
+Tohle rozlišení chrání malou opravu před tím, aby se rozrostla do nového projektu.
+
+### 4. Proveďte privacy-first kontrolu reálného použití
+
+Privacy-first kontrola v Příloze EU řešila návrh změny. Po prvním použití ověřte, co se stalo doopravdy. Lidé někdy neporuší pravidlo z nedbalosti, ale protože si zkrátí cestu: přiloží screenshot, zkopírují ticket, pošlou export do chatu nebo si vytvoří pomocnou tabulku se jmény zákazníků.
+
+Krátká kontrola:
+
+```markdown
+# Privacy-first kontrola po prvním použití
+
+Vznikl nový dokument, tabulka, screenshot nebo export?
+Obsahuje zákaznická, osobní nebo interně citlivá data?
+Bylo nutné tato data použít, nebo šlo použít syntetický příklad?
+Má nový artefakt účel, vlastníka a retenci?
+Zůstala data v evropském provozu a v nástroji, který pro daný účel používáme?
+Snížila změna datovou stopu oproti starému postupu?
+Co se má s dočasnými důkazy stát po uzavření ověření?
+```
+
+Příklad dobrého uzavření:
+
+```markdown
+Při prvním použití vznikl jen krátký záznam v changelogu. Nebyly přiloženy screenshoty ani zákaznické příklady. Dočasná poznámka z pracovního boardu byla po uzavření zkrácena na syntetický příklad.
+```
+
+Příklad varování:
+
+```markdown
+Člověk přiložil screenshot konkrétního zákaznického ticketu, aby ukázal, proč je nové pravidlo potřeba. Screenshot nepřenášet do portfolia. Nahradit syntetickým příkladem a v ověřovací kartě ponechat jen typ rizika.
+```
+
+Privacy-first provoz není jen výběr nástrojů. Je to disciplína při každém malém předání kontextu.
+
+### 5. Rozhodněte jednou větou
+
+Po prvním použití nesmí zůstat otevřený stav typu "uvidíme". Buď změna funguje, funguje s drobnou úpravou, nefunguje, nebo odhalila jiný problém. Rozhodnutí napište jednou větou a přidejte nejmenší další krok.
+
+Rozhodovací matice:
+
+```markdown
+Ponechat:
+Změna pomohla a nevytvořila nové významné tření.
+
+Drobně upravit:
+Změna pomohla, ale formulace, odkaz nebo umístění potřebuje malou opravu.
+
+Vrátit:
+Změna nepomohla, zvýšila tření nebo vytvořila zbytečnou datovou stopu.
+
+Otevřít nový problém:
+Změna funguje, ale první použití odhalilo samostatný problém mimo její rozsah.
+```
+
+Šablona:
+
+```markdown
+# Rozhodnutí po prvním použití
+
+Rozhodnutí:
+Jednověté zdůvodnění:
+Nejmenší další krok:
+Vlastník:
+Termín:
+Changelog:
+```
+
+Vyplněný příklad:
+
+```markdown
+Rozhodnutí:
+Drobně upravit.
+
+Jednověté zdůvodnění:
+Nová otázka zachytila starou notifikaci, ale slovo "automatizace" lidé chápali příliš úzce.
+
+Nejmenší další krok:
+Změnit formulaci na "kalendáře, notifikace, opakované připomínky nebo automatizace".
+
+Vlastník:
+Vlastník kanonického indexu standardů.
+
+Termín:
+Do konce týdne.
+
+Changelog:
+Upraveno po prvním použití při sloučení review rytmů.
+```
+
+Krátké rozhodnutí má jednu výhodu: dá se najít, pochopit a později zpochybnit. To je přesně to, co od živého provozního systému chcete.
+
+### 6. Uzavřete smyčku v artefaktech
+
+Po rozhodnutí aktualizujte jen místa, která jsou nutná pro další použití. Typicky to budou:
+
+- primární artefakt,
+- kanonický index,
+- changelog,
+- případně krátká poznámka v parkovišti.
+
+Nedělejte plošnou revizi všech šablon jen proto, že jste jednu změnu ověřili. Pokud první použití ukázalo širší téma, založte nový podnět do portfolia poučení. Aktuální smyčku ale uzavřete.
+
+Minimální uzavření:
+
+```markdown
+# Uzavření smyčky
+
+Primární artefakt aktualizován:
+Kanonický index aktualizován:
+Changelog doplněn:
+Dočasné důkazy uklizeny:
+Parkoviště doplněno:
+Další ověření potřeba? Ano / Ne
+```
+
+Příklad:
+
+```markdown
+Primární artefakt aktualizován:
+Ano, otázka v mapě dopadu má přesnější formulaci.
+
+Kanonický index aktualizován:
+Ano, odkaz vede na aktuální verzi mapy.
+
+Changelog doplněn:
+Ano, včetně důvodu změny.
+
+Dočasné důkazy uklizeny:
+Ano, pracovní poznámka byla zkrácena a neobsahuje zákaznická data.
+
+Další ověření potřeba?
+Ne. Stačí běžný kvartální audit.
+```
+
+Tím je změna skutečně dokončená. Ne proto, že se vše vyřešilo navždy, ale protože aktuální iterace má jasný konec.
+
+### Mini workshop: 30 minut na ověření první portfoliové změny
+
+1. Pět minut: připomeňte si původní změnovou větu a očekávané zlepšení.
+2. Pět minut: popište první reálnou situaci, kde se změna použila.
+3. Pět minut: zapište pozorování člověka při práci.
+4. Pět minut: roztřiďte nálezy na chybu změny, chybu umístění a okolní systém.
+5. Pět minut: projděte privacy-first kontrolu reálného použití.
+6. Pět minut: napište jednověté rozhodnutí a uzavřete changelog.
+
+Workshop nesmí skončit seznamem otevřených debat. Má skončit jedním rozhodnutím: ponechat, drobně upravit, vrátit nebo otevřít nový problém.
+
+### Checklist
+
+- Ověřili jste změnu v reálné pracovní situaci, ne v umělé simulaci?
+- Je jasné, kdo změnu použil a kde?
+- Našel člověk upravený artefakt bez pomoci?
+- Byla nová formulace srozumitelná bez vysvětlování?
+- Víme, co změna skutečně zlepšila?
+- Oddělili jste chyby změny od problémů okolního systému?
+- Nevznikla nová tabulka, screenshot, export nebo evidence bez účelu?
+- Byla dočasná data uklizena nebo zkrácena?
+- Rozhodli jste jednou větou: ponechat, upravit, vrátit nebo otevřít nový problém?
+- Je aktualizovaný primární artefakt, index a changelog?
+- Má aktuální iterace jasný konec?
+
+Dobré ověření první portfoliové změny je krátké, konkrétní a trochu nekompromisní. Neptá se, jestli změna vypadá rozumně. Ptá se, jestli při práci opravdu pomohla, jestli nezvětšila datovou stopu a jestli je další použití jednodušší než to předchozí.
+
 ## Pracovní log
 
+- 2026-05-12: Doplněna Příloha EV o ověření hotové portfoliové změny po prvním použití: reálná ověřovací situace, pozorování práce, třídění nálezů, privacy-first kontrola, jednověté rozhodnutí a uzavření smyčky v artefaktech.
 - 2026-05-12: Doplněna Příloha EU o převodu čtvrtletního auditu portfoliových poučení do jedné hotové změny: změnová věta, primární artefakt, rušení duplicit, pracovní jazyk, privacy-first kontrola, změnový balíček a první ověření.
 - 2026-05-12: Doplněna Příloha ET o čtvrtletním auditu portfoliových poučení: inventura, reálné použití, duplicity, scorecard tření, privacy-first kontrola, jedna oprava a rozhodnutí o stavu portfolia.
 - 2026-05-12: Doplněna Příloha ES o převodu poučení z ukončeného standardu do portfolia: třídění lokálních oprav a opakovatelných vzorů, karta poučení, jeden zdroj pravdy, stop pravidla, privacy-first zápis a changelog.
