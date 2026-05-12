@@ -38765,6 +38765,214 @@ Věta "co vědomě odkládáme" je důležitá. Chrání tým před pocitem, že
 
 Portfoliová revize standardů je údržba operačního systému týmu. Nedělá práci za lidi, ale brání tomu, aby se dobré procesy proměnily v les odkazů, výjimek a starých verzí. Když člověk rychle najde správný standard, použije minimum potřebných dat a ví, co je aktuální, dokumentace konečně slouží práci místo toho, aby si říkala o vlastní péči.
 
+## Příloha EB: Provoz kanonického indexu standardů
+
+Kanonický index standardů není jednorázová stránka, kterou tým vytvoří po portfoliové revizi a pak ji nechá stárnout v rohu znalostní báze. Je to navigační vrstva nad tím, jak tým opravdu pracuje. Když je dobrý, člověk nemusí znát interní historii dokumentace, aby našel správný postup. Když je slabý, tým má sice hodně standardů, ale každý používá jiný, protože hledání je únavnější než improvizace.
+
+Tahle příloha řeší provoz indexu po jeho založení: kdo ho udržuje, jak se do něj přidávají nové položky, kdy se něco skrývá, jak index pomáhá při onboardingu a jak držet privacy-first hodnotu i ve zdánlivě nevinných odkazech a příkladech.
+
+### 1. Index je podle práce, ne podle organizační struktury
+
+Nejčastější chyba je udělat index podle týmů, nástrojů nebo složek. To vypadá uklizeně pro autora dokumentace, ale nepomáhá člověku, který právě řeší úkol. V reálné práci se neptá "co všechno máme v marketingové složce". Ptá se "co mám použít, když zveřejňuji změnu", "jak předám roli" nebo "jak uzavřu incident".
+
+Proto index stavte podle pracovních situací:
+
+- když připravuješ veřejnou změnu;
+- když zakládáš nový web nebo SaaS projekt;
+- když vybíráš nástroj nebo dodavatele;
+- když předáváš práci jinému člověku;
+- když řešíš provozní problém;
+- když měníš existující standard;
+- když používáš zákaznická nebo osobní data;
+- když archivuješ starý materiál.
+
+Každá situace má obsahovat jen několik nejdůležitějších odkazů. Index není katalog všeho. Je to první pomoc. Pokud má sekce dvacet položek, už to není rozcestník, ale jen další seznam, kterým se musí člověk prokousat. Tam se rodí dokumentační únava, a ta má v týmu větší sílu než krásná taxonomie.
+
+Codyho komentář: pokud index potřebuje návod, jak ho používat, je moc chytrý. Dobrý index má být trochu nudný. Otevřu ho, poznám svoji situaci, kliknu na správný standard a jdu pracovat. Dokumentace nemusí vyhrávat designové ceny. Stačí, když nezdržuje.
+
+### 2. Každá položka má mít pracovní slib
+
+Odkaz bez kontextu nutí čtenáře hádat. Název dokumentu často nestačí, protože týmy si zvyknou na interní zkratky. Položka v indexu má proto obsahovat krátký pracovní slib: kdy ji použít a jaký výstup z ní vznikne.
+
+Slabý záznam:
+
+```md
+- Vydávací karta
+- Privacy brána
+- Changelog
+```
+
+Lepší záznam:
+
+```md
+- Vydávací karta: použij před veřejnou změnou webu, nabídky nebo playbooku; výstupem je rozhodnutí pustit, opravit nebo odložit.
+- Privacy-first brána změny: použij, když změna sbírá nová data, mění nástroj, přidává měření nebo posílá data mimo původní tok.
+- Changelog veřejné edice: použij po schválení změny; výstupem je krátký záznam pro čtenáře i tým.
+```
+
+Ten rozdíl je praktický. Člověk neotevírá tři dokumenty jen proto, aby zjistil, který byl správný. Index mu rovnou řekne, kdy odkaz dává smysl.
+
+### 3. Přidávání nových položek musí mít brzdu
+
+Index se zhoršuje nenápadně. Ne tím, že někdo udělá jednu špatnou změnu. Spíš tím, že každý dobrý dokument dostane vlastní odkaz, protože "by se mohl hodit". Po pár měsících index neukazuje cestu, ale odráží pocit, že tým chce zachovat všechno.
+
+Před přidáním nové položky položte čtyři otázky:
+
+1. V jaké konkrétní pracovní situaci má být použita?
+2. Nahrazuje nebo duplikuje už existující položku?
+3. Má jasného vlastníka a stav?
+4. Pomůže najít správné rozhodnutí rychleji než současný index?
+
+Pokud odpověď na první otázku není konkrétní, položka do indexu nepatří. Může zůstat ve znalostní bázi, v archivu nebo jako příklad u jiného standardu, ale nemá zabírat hlavní navigační prostor.
+
+Šablona návrhu nové položky:
+
+```md
+## Návrh položky do kanonického indexu
+
+Název položky:
+Pracovní situace:
+Kdo ji použije:
+Výstup po použití:
+Stav dokumentu:
+Vlastník:
+
+Nahrazuje:
+Souvisí s:
+
+Privacy-first dopad:
+Potřebuje nová data?
+Mění přístupy nebo nástroje?
+Vznikají dočasné kopie?
+
+Rozhodnutí:
+Přidat / nepřidat / sloučit / jen odkázat z existujícího standardu
+```
+
+Brzda není byrokracie. Je to ochrana proti tomu, aby se z indexu stal sklad dobrých úmyslů.
+
+### 4. Sekce indexu pravidelně prořezávejte
+
+Když tým něco používá často, zaslouží si to viditelnost. Když to nepoužívá nikdo, nemá to být na hlavní trase. To neznamená dokument smazat. Znamená to přestat ho vydávat za běžnou pracovní cestu.
+
+Jednou měsíčně projděte index a u každé sekce zkontrolujte:
+
+- jestli první položka odpovídá nejčastější práci v dané situaci;
+- jestli některé odkazy vedou na archiv, návrh nebo starou verzi;
+- jestli se dvě položky nepřekrývají;
+- jestli sekce nemá moc odkazů;
+- jestli nechybí privacy-first kontrola tam, kde vznikají data;
+- jestli názvy odpovídají tomu, jak tým o práci opravdu mluví.
+
+Praktické pravidlo: pokud položku nikdo za poslední měsíc nepoužil a není povinná kvůli riziku, odsuňte ji mimo hlavní index. Pokud je povinná kvůli riziku, napište její účel jasněji. Povinné věci se nemají schovávat za nudný název.
+
+### 5. Privacy-first kontrola indexu
+
+Index sám často neobsahuje citlivá data, ale může k nim vést. Proto má privacy-first kontrola indexu dvě vrstvy: co index odhaluje a k jaké práci člověka navádí.
+
+Zkontrolujte:
+
+- zda názvy odkazů neprozrazují interní zákaznické názvy, incidenty nebo obchodní detaily;
+- zda příklady u odkazovaných dokumentů nepoužívají skutečná osobní data;
+- zda index nevede na staré nástroje, které tým nechce používat;
+- zda jsou u datově citlivých situací viditelné odkazy na datovou mapu, retenci a přístupová pravidla;
+- zda je u exportů a dočasných kopií jasné, kam patří a kdy se mažou;
+- zda noví lidé při onboardingu nevidí odkazy, ke kterým nemají mít přístup.
+
+Privacy-first provoz není jen volba analytiky nebo hostingu. Je to i způsob, jak tým vede lidi k práci s daty. Když index normalizuje zbytečné exporty, screenshoty s osobními údaji nebo kopírování zákaznických informací do neřízených dokumentů, problém není až v nástroji. Problém začal v navigaci.
+
+### 6. Index jako onboardingová mapa
+
+Nový člověk nepotřebuje znát všechny standardy. Potřebuje bezpečně udělat první reálnou práci. Kanonický index proto používejte jako mapu pro onboarding: vyberte tři až pět situací, které bude role řešit nejčastěji, a nechte člověka projít jen ty.
+
+Příklad pro roli, která pomáhá s webem a obsahem:
+
+```md
+## Onboardingová trasa: web a obsah
+
+1. Připravuješ úpravu stránky
+   - Obsahový brief
+   - Vydávací karta
+   - SEO minimum
+
+2. Publikuješ změnu
+   - Checklist před publikací
+   - Privacy-first brána změny
+   - Changelog veřejné edice
+
+3. Vyhodnocuješ dopad
+   - Měření dopadu změny
+   - Triage zpětné vazby
+   - Převod poznatků do backlogu
+```
+
+Tím se onboarding posune z "přečti si naši dokumentaci" na "projdi tři pracovní situace a ukaž výstup". To je férovější pro nového člověka a užitečnější pro tým.
+
+### 7. Jedna změna indexu má mít vlastní záznam
+
+Když se index mění potichu, tým ztrácí orientaci. Někdo hledá starý standard, jiný používá nový, třetí vůbec neví, že se něco změnilo. Proto větší změny indexu zapisujte stručně do changelogu.
+
+Záznam nemusí být dlouhý:
+
+```md
+## Změna kanonického indexu
+
+Datum:
+Co se změnilo:
+Proč:
+Koho se to týká:
+Nahrazené odkazy:
+Nový zdroj pravdy:
+Privacy-first dopad:
+Co má tým udělat jinak:
+```
+
+Nezapisujte každou drobnou opravu překlepu. Zapisujte změny, které mění cestu práce: nová sekce, sloučení standardů, archivace starého postupu, změna datové brány, nový zdroj pravdy.
+
+### 8. Kdy index rozdělit
+
+Jeden index je dobrý začátek. Časem ale může být potřeba rozdělení podle publika nebo režimu použití. Nedělejte to podle velikosti souboru, ale podle rozhodovací situace.
+
+Rozdělení dává smysl, když:
+
+- veřejná edice potřebuje jinou navigaci než interní provoz;
+- zákaznický workshop nemá ukazovat interní standardy;
+- role mají odlišné první pracovní trasy;
+- některé odkazy vyžadují omezené přístupy;
+- index je správný, ale pro běžnou práci moc široký.
+
+Rozdělení nedává smysl, když se tým jen snaží skrýt nepořádek. Pokud má každá role vlastní index, ale standardy se duplikují, problém se jen přestěhoval. Nejdřív vyjasněte zdroje pravdy, až potom dělejte role-based navigaci.
+
+### Mini workshop: 45 minut nad indexem
+
+Jednou za měsíc si vezměte aktuální index a projděte ho bez ambice přepsat všechno.
+
+Agenda:
+
+1. Vyberte jednu pracovní situaci, která v posledním měsíci bolela.
+2. Otevřete její sekci v indexu.
+3. Zeptejte se: našel by nový člověk správný první krok?
+4. Odstraňte nebo přepište jednu matoucí položku.
+5. Zkontrolujte, jestli nechybí privacy-first brzda.
+6. Zapište jednu změnu a vlastníka.
+
+Výstupem workshopu není čistý index. Výstupem je jedna lepší cesta. To je přesně ten typ zlepšení, který se dá dělat dlouhodobě bez velkého dokumentačního festivalu.
+
+### Checklist
+
+- Je index členěný podle pracovních situací, ne podle týmů nebo složek?
+- Má každá položka krátký pracovní slib?
+- Je u nové položky jasné, co nahrazuje nebo doplňuje?
+- Neobsahuje žádná sekce víc položek, než člověk reálně použije při první volbě?
+- Jsou archivované a nahrazené dokumenty mimo hlavní cestu?
+- Vede index u datově citlivých situací na datovou mapu, retenci a přístupová pravidla?
+- Neprozrazuje index interní zákaznické, provozní nebo obchodní detaily?
+- Existuje onboardingová trasa pro nejčastější role?
+- Má větší změna indexu vlastní krátký changelog?
+- Proběhla v posledním měsíci aspoň jedna malá revize nejpoužívanější sekce?
+
+Kanonický index je dobrý, když si ho tým skoro nevšímá, protože prostě funguje. Vede lidi k aktuálním standardům, snižuje zbytečné dotazy, chrání data a zkracuje cestu od "nevím, jak se to tady dělá" k hotovému výstupu. Jakmile se z něj stane další dokument, který musí někdo složitě vysvětlovat, je čas ho zkrátit, zpřesnit a vrátit zpátky k práci.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -38935,3 +39143,4 @@ Portfoliová revize standardů je údržba operačního systému týmu. Nedělá
 - 2026-05-11: Doplněna Příloha DY o převodu rozšířeného vlastnictví do týmového standardu: kdy standardizovat, co převést, šablona standardu, privacy-first brána, zavedení v reálném cyklu a checklist.
 - 2026-05-11: Doplněna Příloha DZ o kontrole týmového standardu po prvních použitích: signály použitelnosti, varovné signály, mini retro, kontrolní záznam, privacy-first datová stopa a rozhodnutí po kontrole.
 - 2026-05-11: Doplněna Příloha EA o portfoliové revizi týmových standardů: inventura, duplicity, kanonický index, stavy dokumentů, privacy-first sjednocení a výběr jedné změny po revizi.
+- 2026-05-12: Doplněna Příloha EB o provozu kanonického indexu standardů: pracovní situace, brzda přidávání položek, měsíční prořezávání, privacy-first kontrola, onboardingové trasy a changelog změn.
