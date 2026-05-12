@@ -42359,8 +42359,306 @@ Workshop má skončit změnovou kartou, ne pocitem, že "se na tom bude pracovat
 
 Ukončení standardu je dobrá práce, když po něm systém působí menší a jasnější. Ne když máte pocit, že jste "uklidili dokumentaci". Výsledek se pozná v okamžiku, kdy člověk řeší běžnou situaci a bez ptaní najde platnou odpověď.
 
+## Příloha ER: Kontrola ukončeného standardu po prvním měsíci
+
+Ukončit nebo sloučit standard nestačí. První měsíc ukáže, jestli změna opravdu zjednodušila práci, nebo jen přesunula zmatek na jiné místo. Tým může mít nový zdroj pravdy, archivní kartu i přesměrované odkazy, ale pořád může žít starý návyk: někdo použije uloženou šablonu, otevře starou záložku, zeptá se podle starého názvu nebo zopakuje kontrolu, která už měla skončit.
+
+Tato příloha navazuje na Přílohu EQ. Tam jsme standard ukončili, sloučili, zkrátili nebo zmrazili. Tady po jednom měsíci ověříme, jestli se změna usadila v provozu. Cílem není velký audit. Cílem je krátká kontrola, která odhalí zbytky starého systému dřív, než se z nich stane nová neviditelná práce.
+
+Codyho komentář: dobré zjednodušení poznáte podle toho, že se lidé méně ptají, ne podle toho, že dokumentace vypadá uklizeněji.
+
+### 1. Začněte původním slibem změny
+
+Nejdřív si připomeňte, proč standard skončil nebo se sloučil. Bez toho budete hodnotit pocity, ne výsledek.
+
+Použijte krátkou kartu:
+
+```markdown
+# Měsíční kontrola ukončeného standardu
+
+Ukončený nebo sloučený standard:
+Datum změny:
+Typ změny:
+Nový zdroj pravdy:
+Původní slib změny:
+Kde se měla práce zjednodušit:
+Kdo změnu vlastní:
+Kdo změnu v praxi použil:
+```
+
+Příklad:
+
+```markdown
+Ukončený nebo sloučený standard:
+Samostatná měsíční kontrola support šablon.
+
+Typ změny:
+Sloučeno do kanonického indexu standardů.
+
+Původní slib změny:
+Jedna kontrola šablon místo dvou paralelních rytmů.
+
+Kde se měla práce zjednodušit:
+Méně meetingů, méně duplicitních zápisů, jeden zdroj pravdy pro onboardingové a support šablony.
+```
+
+Pokud neumíte původní slib napsat jednou větou, vraťte se k archivní kartě z Přílohy EQ. Možná změna nebyla dost konkrétní.
+
+### 2. Zkontrolujte tři reálné průchody
+
+Papírová kontrola nestačí. Vezměte tři situace z posledního měsíce, ve kterých by se starý standard dřív použil.
+
+Hledejte například:
+
+- nový člověk hledal postup,
+- někdo aktualizoval šablonu,
+- proběhlo měsíční review,
+- zákazník poslal dotaz,
+- automatizace použila pravidlo,
+- vznikla nová položka v backlogu,
+- tým připravoval předání nebo onboarding.
+
+U každého průchodu odpovězte:
+
+```markdown
+Průchod:
+Kdo ho dělal:
+Jaký výstup vznikl:
+
+Našel člověk nový zdroj pravdy?
+Použil někdo starý dokument?
+Vznikla otázka, která dřív byla ve starém standardu?
+Bylo potřeba ruční vysvětlení?
+Zůstala někde duplicita?
+Zmenšila se datová stopa?
+```
+
+Vyplněný mini příklad:
+
+```markdown
+Průchod:
+Úprava support šablony pro odpověď na fakturační dotaz.
+
+Našel člověk nový zdroj pravdy?
+Ano, přes kanonický index.
+
+Použil někdo starý dokument?
+Ne, ale starý odkaz byl pořád v jedné interní poznámce.
+
+Bylo potřeba ruční vysvětlení?
+Ano, nebylo jasné, jestli se anonymizují i krátké citace z ticketů.
+
+Zmenšila se datová stopa?
+Částečně. Screenshoty se už nepřenášejí, ale citace z ticketů potřebují jasnější pravidlo.
+```
+
+Tři průchody obvykle stačí. Pokud nenajdete ani jeden reálný průchod, standard možná nebyl důležitý. To je taky užitečné zjištění.
+
+### 3. Hledejte zbytky starého systému
+
+Po měsíci už by mělo být vidět, co přežilo ze setrvačnosti. Nehledejte jen dokumenty. Hledejte pracovní návyky.
+
+Typické zbytky:
+
+- starý název standardu v interní komunikaci,
+- uložené záložky a odkazy ve šablonách,
+- opakující se meeting, který měl skončit,
+- automatická připomínka na zrušenou kontrolu,
+- duplicitní položka v checklistu,
+- starý příklad ve školení,
+- screenshot nebo export bez aktuálního účelu,
+- staré rozhodovací kritérium v sales nebo delivery materiálech.
+
+Zapište jen zbytky, které mají dopad na práci:
+
+```markdown
+# Zbytek starého systému
+
+Kde je:
+Jak se projevil:
+Koho mate:
+Jak často se použil:
+Riziko:
+Navržená oprava:
+Vlastník:
+Termín:
+```
+
+Rozlišujte drobnost od systémového problému. Jedna zapomenutá zmínka v historické poznámce nemusí vadit. Starý checklist v aktivní šabloně vadí hodně, protože vrací do práce neplatná pravidla.
+
+### 4. Ověřte nový zdroj pravdy
+
+Nový zdroj pravdy musí být nejen správný, ale použitelný. Po měsíci si položte pět otázek:
+
+- Dá se najít z běžné pracovní situace?
+- Je kratší nebo jasnější než starý stav?
+- Obsahuje všechny rozhodovací otázky, které tým opravdu potřeboval?
+- Neobsahuje historický balast ze starého standardu?
+- Má jasného vlastníka a další revizní okamžik?
+
+Pokud nový zdroj pravdy funguje jen proto, že jeden člověk ví, kde je, změna ještě není hotová.
+
+Příklad opravy:
+
+```markdown
+Problém:
+Nový zdroj pravdy je správně v kanonickém indexu, ale název je příliš obecný.
+
+Oprava:
+Přejmenovat položku z "Šablony" na "Kontrola support a onboarding šablon".
+
+Důvod:
+Lidé hledají podle pracovní situace, ne podle interní kategorie.
+```
+
+Tady se vyplatí malé přejmenování víc než další vysvětlující odstavec. Navigace je také obsah.
+
+### 5. Udělejte privacy-first dočištění
+
+První měsíc po ukončení standardu často odhalí data, která nebyla vidět při původní mapě dopadu. Někdo najde starý export, sdílenou složku, screenshot ve školení nebo kopii příkladu v poznámkách.
+
+Dočištění veďte přes účel:
+
+```markdown
+# Privacy-first dočištění po měsíci
+
+Artefakt:
+Kde je:
+Jaká data obsahuje:
+Původní účel:
+Platí účel ještě dnes?
+Rozhodnutí:
+Kdo provede:
+Kdy ověřit:
+```
+
+Možná rozhodnutí:
+
+- smazat,
+- anonymizovat,
+- zkrátit na pravidlo,
+- přesunout do omezeného archivu,
+- ponechat s jasným účelem a retencí,
+- nahradit syntetickým příkladem.
+
+Praktický příklad:
+
+```markdown
+Artefakt:
+Screenshot starého ticketu ve školení.
+
+Původní účel:
+Ukázat, jak rozpoznat citlivé údaje v support komunikaci.
+
+Platí účel ještě dnes?
+Ano, ale screenshot není nutný.
+
+Rozhodnutí:
+Nahradit syntetickým příkladem a původní screenshot smazat.
+```
+
+Codyho komentář: po ukončení standardu se ptejte tvrději než při jeho vzniku. Když už pravidlo neběží, většina důkazů má menší hodnotu a větší riziko.
+
+### 6. Rozhodněte další stav
+
+Po kontrole nepište dlouhý report. Vyberte jeden z pěti stavů:
+
+- Uzavřeno: změna funguje, zbytky jsou opravené, další kontrola není potřeba.
+- Drobné opravy: systém funguje, ale je potřeba upravit odkazy, názvy nebo jednu šablonu.
+- Další měsíc sledovat: změna zatím nemá dost reálných průchodů.
+- Částečně vrátit: některá část starého standardu chybí a musí se přenést do nového zdroje.
+- Znovu otevřít rozhodnutí: původní ukončení bylo předčasné nebo mělo špatný nový zdroj pravdy.
+
+Šablona rozhodnutí:
+
+```markdown
+# Rozhodnutí po měsíční kontrole
+
+Stav:
+Důvod:
+Co opravíme hned:
+Co už nebudeme řešit:
+Dopad na kanonický index:
+Dopad na šablony:
+Dopad na privacy-first úklid:
+Kdy se k tomu vrátíme:
+```
+
+Vyplněný příklad:
+
+```markdown
+Stav:
+Drobné opravy.
+
+Důvod:
+Nový zdroj pravdy se používá, ale starý odkaz zůstal ve dvou šablonách a anonymizační pravidlo pro citace je nejasné.
+
+Co opravíme hned:
+Aktualizovat odkazy ve dvou šablonách a přidat jednu větu k citacím z ticketů.
+
+Co už nebudeme řešit:
+Historické zápisy starého meetingu zůstanou v archivu bez dalšího čištění.
+
+Kdy se k tomu vrátíme:
+Při příštím měsíčním review kanonického indexu.
+```
+
+Dobré rozhodnutí má hranici. Neotvírá znovu celý standard, pokud stačí opravit dvě pracovní cesty.
+
+### 7. Přepište poučení do systému
+
+Jestli se při kontrole ukáže opakovaný vzor, přeneste ho do pravidla pro příští ukončení standardu. Jinak budete stejnou chybu opravovat znovu.
+
+Příklady poučení:
+
+- Při každém ukončení standardu kontrolovat automatické připomínky.
+- Do mapy dopadu přidat uložené šablony v sales materiálech.
+- Přechodová poznámka musí obsahovat pracovní situaci, nejen název nového dokumentu.
+- Archivní karta musí říct, jestli se mohou používat staré příklady.
+- Po měsíci vždy ověřit alespoň jednu onboardingovou trasu.
+
+Poučení zapisujte krátce:
+
+```markdown
+Nové pravidlo pro příště:
+Při sloučení standardu zkontrolovat nejen odkazy v dokumentech, ale i opakované kalendářové události a automatické připomínky.
+
+Důvod:
+Po posledním sloučení běžel starý měsíční rytmus ještě tři týdny.
+```
+
+Tím se jednotlivá chyba mění na lepší provozní systém.
+
+### Mini workshop: 40 minut po prvním měsíci
+
+1. Pět minut: připomeňte původní slib změny.
+2. Deset minut: projděte tři reálné pracovní průchody.
+3. Deset minut: sepište zbytky starého systému a privacy-first dočištění.
+4. Pět minut: vyberte stav změny.
+5. Pět minut: určete jednu okamžitou opravu.
+6. Pět minut: zapište poučení pro příští ukončení nebo sloučení standardu.
+
+Workshop má skončit konkrétní změnou v indexu, šabloně, odkazu nebo pravidle. Pokud skončí jen debatou, kontrola nebyla dost praktická.
+
+### Checklist
+
+- Máte původní slib ukončení nebo sloučení standardu?
+- Prošli jste alespoň tři reálné pracovní situace z posledního měsíce?
+- Je jasné, jestli lidé našli nový zdroj pravdy bez pomoci?
+- Nezůstaly aktivní odkazy na starý standard?
+- Nezůstala běžet zrušená schůzka, připomínka nebo automatizace?
+- Nový zdroj pravdy je pojmenovaný podle pracovní situace?
+- Chybějící otázky ze starého standardu byly buď přeneseny, nebo vědomě odmítnuty?
+- Staré screenshoty, exporty a zákaznické příklady mají nový účel, anonymizaci, omezený archiv nebo smazání?
+- Je vybraný další stav: uzavřeno, drobné opravy, sledovat, částečně vrátit, nebo znovu otevřít?
+- Existuje jedna konkrétní okamžitá oprava?
+- Poučení z kontroly se propsalo do pravidla pro příští ukončení standardu?
+
+Měsíční kontrola není byrokracie. Je to poslední krok zjednodušení. Teprve tady se ukáže, jestli jste opravdu snížili počet míst, dat a rozhodnutí, nebo jen přejmenovali starý problém.
+
 ## Pracovní log
 
+- 2026-05-12: Doplněna Příloha ER o kontrole ukončeného nebo sloučeného standardu po prvním měsíci: reálné průchody, zbytky starého systému, nový zdroj pravdy, privacy-first dočištění, rozhodnutí dalšího stavu a checklist.
 - 2026-05-12: Doplněna Příloha EQ o ukončení nebo sloučení standardu po roční inventuře: typ změny, mapa dopadu, archivní karta, nový zdroj pravdy, odkazy, privacy-first úklid a ověření při prvním použití.
 - 2026-05-12: Doplněna Příloha EP o roční inventuře provozních cyklů standardů: seznam aktivních rytmů, duplicity, stavy rozhodnutí, privacy-first úklid důkazů, portfoliová změna a checklist.
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
