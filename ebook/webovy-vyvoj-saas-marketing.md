@@ -38973,6 +38973,221 @@ Výstupem workshopu není čistý index. Výstupem je jedna lepší cesta. To je
 
 Kanonický index je dobrý, když si ho tým skoro nevšímá, protože prostě funguje. Vede lidi k aktuálním standardům, snižuje zbytečné dotazy, chrání data a zkracuje cestu od "nevím, jak se to tady dělá" k hotovému výstupu. Jakmile se z něj stane další dokument, který musí někdo složitě vysvětlovat, je čas ho zkrátit, zpřesnit a vrátit zpátky k práci.
 
+## Příloha EC: Měření používání standardů bez špehování týmu
+
+Jakmile má tým kanonický index, standardy, šablony a onboardingové trasy, objeví se další otázka: funguje to vůbec? Ne jako pocit autora dokumentace, ale v reálné práci. Používají lidé správné standardy? Najdou je včas? Zkracují práci, nebo jen přidávají další povinnou zastávku před tím, než člověk stejně improvizuje?
+
+Odpověď nejde získat tím, že tým začne sledovat každé kliknutí každého člověka. To je přesně ten typ měření, který vypadá manažersky užitečně, ale rychle rozbije důvěru. U interní dokumentace je cílem pochopit tření systému, ne kontrolovat lidi. Měřte proto práci, výstupy a místa zmatku. Ne osobní mikropohyby.
+
+Tahle příloha ukazuje, jak poznat užitečnost standardů privacy-first způsobem: s minimem dat, bez individuálního dohledu, s jasným rozhodnutím, co se podle signálů změní.
+
+### 1. Nejdřív rozhodovací otázka
+
+Měření bez otázky se rychle změní na sběr čísel pro dobrý pocit. U standardů se neptejte obecně "kolik lidí čte dokumentaci". To skoro nic neříká. Důležitější je, jestli dokumentace pomohla v konkrétní pracovní situaci.
+
+Dobré otázky:
+
+- Najde nový člověk správný standard pro první samostatný úkol?
+- Snižuje vydávací karta počet vratek před publikací?
+- Používá tým datovou kartu dřív, než zavede nový nástroj?
+- Pomáhá incidentní runbook zkrátit čas do stabilizace?
+- Vede index lidi ke kanonickému standardu místo starých kopií?
+- Ubývá opakovaných dotazů na stejný postup?
+
+Slabé otázky:
+
+- Kolikrát byl dokument otevřen?
+- Kdo ho otevřel nejčastěji?
+- Kdo ho nečetl?
+- Kolik času v něm lidé strávili?
+
+Počet otevření může být podpůrný signál, ale sám o sobě nerozhoduje. Dokument může mít málo otevření, protože je perfektně jasný a používá se jen u vzácné situace. Nebo může mít hodně otevření, protože je matoucí a lidé se do něj pořád vracejí. Číslo bez kontextu je tady velmi ochotný lhář. To umí i tabulka, když má špatný den.
+
+### 2. Měřte situace, ne jednotlivce
+
+Privacy-first měření interních standardů má stát na agregovaných signálech. Nechcete vědět, že konkrétní člověk otevřel konkrétní dokument v 9:42. Chcete vědět, že sekce "publikace změny" má vysoké tření, protože se lidé opakovaně ptají na stejný krok nebo vracejí výstupy k přepracování.
+
+Praktické signály:
+
+- počet opakovaných dotazů ke stejné pracovní situaci;
+- počet vratek výstupu kvůli chybějícímu kroku ve standardu;
+- počet incidentů nebo chyb, kde byl standard nejasný, skrytý nebo zastaralý;
+- počet návrhů na úpravu standardu;
+- počet použitých šablon v daném cyklu;
+- počet starých odkazů nalezených v komunikaci nebo znalostní bázi;
+- počet úkolů dokončených bez dodatečného vysvětlování postupu.
+
+Tohle jsou signály o systému. Ne o tom, kdo je "šikovný" nebo "nepozorný". Pokud se tři lidé ptají na stejnou věc, problém pravděpodobně není ve třech lidech. Problém je v cestě, názvu, příkladu nebo v tom, že standard neodpovídá realitě.
+
+Codyho komentář: měření dokumentace se má používat jako diagnostika, ne jako policejní kamera. Když z něj uděláte kontrolní nástroj na lidi, tým se naučí metriky obcházet. A pak budete mít krásné grafy a horší pravdu. Gratuluji, to je takový malý enterprise speedrun.
+
+### 3. Minimální scorecard užitečnosti
+
+Jednou měsíčně stačí krátká scorecard pro nejdůležitější standardy. Nehodnoťte všechny dokumenty. Vyberte ty, které chrání největší riziko nebo se používají nejčastěji: vydávání změn, práce s daty, incidenty, předání role, výběr nástroje, zákaznický workshop.
+
+Šablona:
+
+```md
+## Scorecard standardu
+
+Standard:
+Období:
+Pracovní situace:
+Vlastník:
+
+Použití v období:
+Typické výstupy:
+Opakované dotazy:
+Vratky nebo chyby:
+Nejasné kroky:
+Zastaralé odkazy:
+Privacy-first nálezy:
+
+Skóre:
+- Najitelnost: 1-5
+- Srozumitelnost: 1-5
+- Použitelnost v reálné práci: 1-5
+- Datová přiměřenost: 1-5
+
+Jedna změna do dalšího období:
+Co neměříme a proč:
+```
+
+Věta "co neměříme a proč" je důležitá. Nutí tým říct nahlas, kde je hranice. Například: neměříme individuální čtení dokumentu, protože cílem je zlepšit standard, ne hodnotit poslušnost. Neměříme čas strávený na stránce, protože u pracovního postupu je rychlé opuštění často dobré znamení.
+
+### 4. Zdroje signálů bez zbytečných trackerů
+
+U interních standardů často nepotřebujete žádný nový měřicí nástroj. Hodně užitečných signálů už vzniká v běžné práci. Jen je potřeba je zachytit bez osobních detailů a bez přehnané instrumentace.
+
+Vhodné zdroje:
+
+- retrospektivy po projektu nebo vydání;
+- komentáře v úkolech a pull requestech;
+- support nebo interní dotazy, pokud se anonymizují;
+- post-mortem incidentů;
+- onboardingové poznámky nových lidí;
+- měsíční review standardů;
+- ruční počet vratek u vybrané pracovní situace;
+- seznam zastaralých odkazů nalezených při běžné práci.
+
+Nevhodné zdroje:
+
+- detailní clickstream jednotlivých lidí;
+- nahrávání obrazovky při interní práci;
+- skryté sledování času v dokumentech;
+- individuální žebříčky používání standardů;
+- export osobních zpráv jen kvůli analýze zmatku;
+- kopírování zákaznických dat do ukázkových příkladů.
+
+Privacy-first pravidlo: pokud signál dokážete získat jako agregovaný počet nebo anonymizovaný vzor, nedělejte z něj osobní záznam. Osobní detail přidávejte jen tehdy, když je nezbytný pro odpovědnost, bezpečnost nebo řešení konkrétního incidentu.
+
+### 5. Jak poznat, že standard škodí
+
+Standard nemusí být špatný jen proto, že je starý. Škodí ve chvíli, kdy systematicky vede lidi ke špatné práci nebo vytváří falešný pocit kontroly.
+
+Varovné signály:
+
+- lidé standard obcházejí, protože je delší než samotná práce;
+- stejný krok se vysvětluje pokaždé jinak;
+- checklist požaduje data, která nejsou potřeba;
+- šablona nutí vyplňovat prázdné sekce jen kvůli formě;
+- standard odkazuje na nástroje, které tým už nepoužívá;
+- nový člověk po přečtení neví, jaký má být první výstup;
+- standard chrání minulý proces, ne současné riziko;
+- "hotovo" podle standardu neznamená hotovo pro zákazníka, provoz ani tým.
+
+Když se objeví dva nebo tři signály najednou, nedávejte standardu další vysvětlující odstavec. Nejdřív zkraťte cestu: přepište první krok, doplňte příklad, odstraňte nepotřebná pole, přesuňte okrajové věci do přílohy nebo standard sloučte s aktuálním zdrojem pravdy.
+
+### 6. Mini experiment místo velké reformy
+
+Měření má vést ke změně, ne k prezentaci. Když scorecard ukáže problém, vyberte jeden malý experiment na další měsíc.
+
+Příklady:
+
+- přejmenovat sekci v indexu podle skutečné pracovní situace;
+- přidat jeden vyplněný příklad pro nejčastější hraniční případ;
+- zkrátit checklist z 25 bodů na 10 rozhodovacích bodů;
+- přesunout staré varianty do archivu;
+- přidat privacy-first bránu přímo do první části šablony;
+- sjednotit dva konkurenční postupy;
+- změnit výstup standardu z dlouhého dokumentu na jednostránkovou kartu.
+
+Experiment popište jednoduše:
+
+```md
+## Experiment se standardem
+
+Standard:
+Problém:
+Změna:
+Hypotéza:
+Jak poznáme zlepšení:
+Co nesmíme měřit:
+Období:
+Rozhodnutí po období:
+```
+
+Příklad:
+
+```md
+## Experiment se standardem
+
+Standard: Vydávací karta veřejné změny
+Problém: Lidé vyplňují kartu až po dokončení práce.
+Změna: Přesunout rozhodnutí "pustit / opravit / odložit" na začátek šablony.
+Hypotéza: Karta se začne používat před prací, ne jako administrativní doslov.
+Jak poznáme zlepšení: Méně vratek kvůli nejasnému rozsahu a datové stopě.
+Co nesmíme měřit: Individuální počet otevření šablony.
+Období: 30 dnů.
+Rozhodnutí po období: Ponechat, upravit nebo vrátit.
+```
+
+Tím se standardy zlepšují stejně jako produkt: malými změnami, důkazy a jasným rozhodnutím. Ne velkým dokumentačním převratem, po kterém všichni hledají starý odkaz v chatu.
+
+### 7. Měření má mít vlastní retenci
+
+I měření standardů vytváří data. A data bez retence se postupně mění v nepořádek. U interní dokumentace držte jen to, co pomáhá dlouhodobému zlepšování.
+
+Navržená retence:
+
+- měsíční scorecardy: držet 12 měsíců;
+- anonymizované vzory tření: držet, dokud jsou relevantní pro standard;
+- detailní pracovní poznámky z review: zkrátit do rozhodnutí a smazat nebo archivovat podle interních pravidel;
+- incidentní záznamy: držet podle provozní a právní potřeby, odděleně od běžného měření standardů;
+- osobní poznámky z onboardingu: převést na anonymizované vzory a zbytek smazat.
+
+Retence není úklid pro úklid. Chrání tým před tím, aby z dobrého záměru vznikl archiv interních slabých míst, osobních detailů a historických polopravd.
+
+### Mini workshop: 30 minut nad jedním standardem
+
+Vyberte jeden standard, který tým používá často nebo u něj cítí tření.
+
+Agenda:
+
+1. Pojmenujte pracovní situaci, kterou standard řeší.
+2. Seberte tři agregované signály z posledního měsíce.
+3. Najděte první místo, kde člověk pravděpodobně zaváhá.
+4. Zkontrolujte, jestli standard nežádá zbytečná data.
+5. Vyberte jednu změnu na 30 dnů.
+6. Zapište, co nebudete měřit, aby měření zůstalo férové.
+
+Výstupem je jedna malá úprava a jedna jasná hypotéza. Pokud workshop skončí tím, že "by se mělo přepsat všechno", vraťte se o krok zpět. To není výstup, to je únavový kouř.
+
+### Checklist
+
+- Má měření standardu konkrétní rozhodovací otázku?
+- Sledujete situace a výstupy, ne jednotlivé lidi?
+- Používáte agregované nebo anonymizované signály všude, kde to stačí?
+- Je jasné, které signály by byly příliš invazivní?
+- Má scorecard vlastníka a období?
+- Vede každý měřený problém k jedné konkrétní změně?
+- Nevyžaduje standard data, která nejsou potřeba pro první rozhodnutí?
+- Má měření vlastní retenci a úklid?
+- Umí nový člověk podle standardu vytvořit konkrétní výstup?
+- Zůstává cílem zlepšení systému, ne kontrola poslušnosti?
+
+Měření používání standardů má být tiché, přiměřené a užitečné. Když pomůže najít zbytečné tření, zkrátit cestu a chránit data, splnilo účel. Když začne vyrábět dohled nad lidmi, minulo směr. Privacy-first tým nepotřebuje vědět všechno. Potřebuje vědět dost na to, aby příště pracoval lépe.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -39144,3 +39359,4 @@ Kanonický index je dobrý, když si ho tým skoro nevšímá, protože prostě 
 - 2026-05-11: Doplněna Příloha DZ o kontrole týmového standardu po prvních použitích: signály použitelnosti, varovné signály, mini retro, kontrolní záznam, privacy-first datová stopa a rozhodnutí po kontrole.
 - 2026-05-11: Doplněna Příloha EA o portfoliové revizi týmových standardů: inventura, duplicity, kanonický index, stavy dokumentů, privacy-first sjednocení a výběr jedné změny po revizi.
 - 2026-05-12: Doplněna Příloha EB o provozu kanonického indexu standardů: pracovní situace, brzda přidávání položek, měsíční prořezávání, privacy-first kontrola, onboardingové trasy a changelog změn.
+- 2026-05-12: Doplněna Příloha EC o měření používání standardů bez špehování týmu: rozhodovací otázky, agregované signály, scorecard, mini experimenty, retence a privacy-first hranice měření.
