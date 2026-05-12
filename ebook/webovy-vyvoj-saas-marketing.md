@@ -42061,8 +42061,307 @@ Výstupem má být jeden zásah, jedno archivování nebo jedno sloučení. Poku
 
 Roční inventura má udržet systém lehký. Standardy mají pomáhat lidem dělat lepší práci, ne dokazovat, že tým umí vyrábět pravidla. Když inventura zmenší počet kontrol, zkrátí cestu k odpovědi a uklidí citlivé důkazy, udělala přesně to, co měla.
 
+## Příloha EQ: Ukončení nebo sloučení standardu po roční inventuře
+
+Roční inventura často skončí správným, ale nepříjemným závěrem: některý standard už nemá běžet samostatně. Může se sloučit s jiným, přesunout do pracovní šablony, zjednodušit na krátké pravidlo nebo úplně archivovat. To je zdravé. Horší je nechat starý standard dál žít jen proto, že jeho vypnutí vyžaduje trochu přesnosti.
+
+Ukončení standardu není mazání dokumentu. Je to řízená změna pracovního systému. Cílem je, aby člověk po změně pořád věděl, kam jít, co platí a co už nemá používat. Pokud standard zmizí beze stopy, tým ztratí důvěru ve zdroj pravdy. Pokud zůstane všechno, tým ztratí orientaci. Dobré ukončení drží prostředek: staré pravidlo už neplete práci, ale důvod a náhrada jsou dohledatelné.
+
+Tato příloha navazuje na Přílohu EP. Tam jsme vybrali portfoliovou změnu. Tady ji provedeme tak, aby po ní nezůstaly rozbité odkazy, duplicitní checklisty ani zbytečné citlivé důkazy.
+
+### 1. Rozhodněte, co se se standardem skutečně děje
+
+Slovo "ukončit" bývá moc hrubé. Než něco smažete nebo přesunete, pojmenujte typ změny.
+
+Použijte jednu z těchto možností:
+
+- Sloučit: dva nebo více standardů řeší stejnou pracovní situaci a vznikne jeden zdroj pravdy.
+- Zkrátit: standard zůstává, ale ztratí historický balast, dlouhé vysvětlování a nepoužívané větve.
+- Přesunout do šablony: pravidlo má být vidět přímo při práci, ne v samostatném dokumentu.
+- Převést na checklist: plný standard je zbytečný, stačí krátká kontrola před vydáním nebo předáním.
+- Archivovat: pracovní situace zanikla nebo má jiný vlastník a standard už nemá aktivní použití.
+- Zmrazit: standard se dočasně nemění, protože tým čeká na větší provozní nebo produktové rozhodnutí.
+
+Příklad rozhodnutí:
+
+```markdown
+Standard:
+Měsíční kontrola obsahu onboardingových šablon.
+
+Zjištění:
+Stejná kontrola probíhá v měsíčním review kanonického indexu. Samostatný rytmus poslední tři měsíce nepřinesl žádné rozhodnutí.
+
+Typ změny:
+Sloučit.
+
+Nový zdroj pravdy:
+Kanonický index standardů, sekce "Onboardingové trasy".
+
+Co zůstává:
+Jedna otázka v měsíčním review indexu: "Změnila se některá onboardingová trasa nebo šablona?"
+
+Co končí:
+Samostatný měsíční meeting a samostatný zápis.
+```
+
+Rozhodnutí má být tak konkrétní, aby podle něj někdo mohl upravit odkazy a šablony bez další porady.
+
+### 2. Udělejte mapu dopadu
+
+Před změnou zjistěte, kde se starý standard používá. Nehledejte dokonalou inventuru. Hledejte místa, kde by člověk po změně narazil na rozpor.
+
+Minimální mapa dopadu:
+
+```markdown
+# Mapa dopadu ukončení nebo sloučení standardu
+
+Starý standard:
+Nový zdroj pravdy:
+Typ změny:
+Vlastník změny:
+Termín:
+
+Odkazy ve veřejném webu:
+Odkazy v interní znalostní bázi:
+Odkazy v onboardingových materiálech:
+Odkazy v šablonách:
+Odkazy v sales nebo delivery materiálech:
+Automatizace, které standard používají:
+Místa s citlivými příklady nebo důkazy:
+Místa, kde je potřeba vysvětlit změnu:
+```
+
+U každého místa doplňte stav:
+
+- ponechat a přesměrovat,
+- upravit text,
+- sloučit do nového zdroje,
+- archivovat,
+- smazat po kontrole,
+- ručně ověřit při prvním použití.
+
+Codyho komentář: největší riziko není, že zapomenete jeden starý odkaz. Největší riziko je, že po změně budou dva dokumenty tvrdit různé věci a oba budou vypadat platně.
+
+### 3. Zachovejte rozhodnutí, ne historický šum
+
+Když standard ukončujete, nemusíte uchovat každou verzi, každý komentář a každou starou kontrolu. Potřebujete uchovat důvod rozhodnutí, náhradu a případně auditní stopu, pokud má provozní nebo právní význam.
+
+Krátká archivní karta stačí:
+
+```markdown
+# Archivní karta standardu
+
+Název standardu:
+Původní účel:
+Datum ukončení nebo sloučení:
+Rozhodnutí:
+Nový zdroj pravdy:
+Důvod:
+Co bylo přeneseno:
+Co bylo odstraněno:
+Co obsahovalo citlivá data a jak se s tím naložilo:
+Kdo rozhodl:
+Kdy se ověří, že změna funguje:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název standardu:
+Kontrola příkladů v support šablonách.
+
+Rozhodnutí:
+Sloučeno do kvartálního auditu datové stopy týmových standardů.
+
+Důvod:
+Samostatná kontrola řešila jen podmnožinu stejného privacy-first rizika a nevytvářela vlastní rozhodnutí.
+
+Co bylo přeneseno:
+Otázka na zákaznické detaily v příkladech a pravidlo anonymizace.
+
+Co bylo odstraněno:
+Staré screenshoty tiketů a duplicitní zápisy z kontrol.
+
+Kdy se ověří:
+Při příštím kvartálním auditu datové stopy.
+```
+
+Taková karta pomáhá novému člověku pochopit, proč starý standard nevidí v aktivním indexu. Zároveň zbytečně nedrží citlivý provozní odpad.
+
+### 4. Před sloučením vyberte silnější zdroj pravdy
+
+Při slučování standardů nevytvářejte mechanický slepenec. Vyberte jeden zdroj pravdy a do něj přeneste jen to, co podporuje rozhodnutí v reálné práci.
+
+Silnější zdroj pravdy obvykle splňuje víc z těchto podmínek:
+
+- lidé ho už používají při práci,
+- má jasného vlastníka,
+- má kratší cestu od problému k rozhodnutí,
+- obsahuje aktuálnější příklady,
+- má lepší privacy-first pravidla pro důkazy,
+- je napojený na kanonický index,
+- má jednodušší revizní rytmus,
+- nejméně duplikuje jiné dokumenty.
+
+Příklad špatného sloučení:
+
+```markdown
+Vezmeme oba standardy, vložíme je pod sebe a přidáme nový úvod.
+```
+
+Příklad lepšího sloučení:
+
+```markdown
+Z prvního standardu ponecháme rozhodovací otázky.
+Z druhého standardu ponecháme checklist před vydáním.
+Historické příklady nahradíme jedním anonymizovaným příkladem.
+Staré dokumenty dostanou archivní kartu a odkaz na nový zdroj pravdy.
+```
+
+Sloučení má snížit počet míst, ne vytvořit jeden dlouhý dokument, kterému se lidé začnou vyhýbat.
+
+### 5. Ošetřete odkazy a pracovní trasy
+
+Po změně musí být jasné, co se stane, když někdo otevře starou cestu. V interním systému obvykle nestačí starý dokument smazat. Lepší je krátká přechodová poznámka.
+
+Přechodová poznámka může vypadat takto:
+
+```markdown
+Tento standard byl 2026-05-12 sloučen do "Kanonického indexu standardů".
+Aktivní pravidla jsou nově v sekci "Review šablon".
+Tento dokument už nepoužívejte pro nová rozhodnutí.
+Archivní důvod změny je uveden níže.
+```
+
+U veřejných materiálů buďte ještě opatrnější. Pokud stará URL má návštěvnost, interní odkazy nebo citace, nenechte ji končit prázdnou chybou. Udržte přesměrování nebo krátkou vysvětlující stránku s odkazem na aktuální verzi.
+
+Checklist odkazů:
+
+- starý dokument odkazuje na nový zdroj pravdy,
+- kanonický index ukazuje jen na aktivní verzi,
+- onboardingové trasy nepoužívají archivní dokument jako doporučený krok,
+- šablony nemají staré názvy polí,
+- automatizace a připomínky nevolají zrušený rytmus,
+- veřejné URL mají přesměrování nebo srozumitelný přechod,
+- archiv je jasně označený jako archiv.
+
+Nejhorší stav je archiv bez označení. Vypadá jako platný dokument a tiše vrací staré chování do provozu.
+
+### 6. Udělejte privacy-first úklid při změně
+
+Ukončení standardu je dobrý okamžik pro úklid datové stopy. Staré standardy často obsahují ukázky zákaznických situací, screenshoty, exporty, jména lidí, interní komentáře nebo odkazy na sdílené složky. Pokud standard končí, znovu se ptejte, co má zůstat.
+
+Praktická pravidla:
+
+- Přenášejte pravidlo, ne surový důkaz.
+- Nahrazujte zákaznické ukázky anonymizovanými vzory.
+- Mažte screenshoty, pokud už neslouží aktivnímu učení nebo auditu.
+- Zkraťte historické zápisy na rozhodnutí a důvod.
+- Omezte přístup k archivu, pokud obsahuje citlivé provozní detaily.
+- Zkontrolujte staré sdílené odkazy.
+- Do nové verze nepřenášejte data jen proto, že "by se mohla hodit".
+
+Codyho komentář: privacy-first provoz není jen volba nástrojů. Je to schopnost včas říct: tenhle důkaz už nepotřebujeme.
+
+### 7. Ověřte změnu v prvním reálném použití
+
+Po sloučení nebo ukončení standardu nečekejte rok na další inventuru. Ověřte změnu při první pracovní situaci, kde by se starý standard dřív použil.
+
+Šablona krátkého ověření:
+
+```markdown
+# Ověření po ukončení nebo sloučení standardu
+
+Změna:
+První reálné použití:
+Kdo postup použil:
+
+Našel člověk nový zdroj pravdy bez pomoci?
+Bylo jasné, že starý standard je archivní?
+Chyběla nějaká otázka ze starého standardu?
+Vznikla duplicita nebo rozpor?
+Byla privacy-first stopa menší než dřív?
+Co upravíme hned:
+Co necháme do dalšího review:
+```
+
+Příklad:
+
+```markdown
+První reálné použití:
+Nový kolega aktualizoval onboardingovou trasu pro support.
+
+Výsledek:
+Našel kanonický index, ale stará šablona v interní složce pořád obsahovala původní odkaz.
+
+Okamžitá oprava:
+Upravit odkaz v šabloně a přidat archivní poznámku ke starému dokumentu.
+```
+
+Jedno reálné použití často odhalí víc než hodinová debata nad dokumentací.
+
+### 8. Kdy změnu zastavit
+
+Někdy při ukončování zjistíte, že standard ještě nejde zrušit. To není selhání. Selhání je pokračovat v mazání, když už víte, že rozbijete práci.
+
+Změnu zastavte nebo vraťte do menšího rozsahu, pokud:
+
+- neumíte pojmenovat nový zdroj pravdy,
+- starý standard používá automatizace, které nemají náhradu,
+- týká se aktivního zákaznického závazku,
+- obsahuje právně nebo bezpečnostně důležitou kontrolu bez jasného vlastníka,
+- tým se neshodne, která pracovní situace má po změně platit,
+- při mapě dopadu najdete víc kolizí, než lze bezpečně opravit v jedné iteraci.
+
+V takovém případě změňte rozhodnutí na "zmrazit" nebo "zkrátit" a napište další krok:
+
+```markdown
+Původní plán:
+Archivovat standard.
+
+Nové rozhodnutí:
+Zmrazit na 30 dní.
+
+Důvod:
+Standard používá automatizace pro předpublikační kontrolu a není jasné, odkud budou brát nová pravidla.
+
+Další krok:
+Nejdřív vybrat nový zdroj pravdy pro automatizaci, potom zopakovat mapu dopadu.
+```
+
+Pragmatické zmenšení rozsahu je lepší než sebevědomé rozbití systému.
+
+### Mini workshop: 45 minut na ukončení nebo sloučení standardu
+
+1. Pět minut: pojmenujte typ změny a očekávaný nový zdroj pravdy.
+2. Deset minut: vyplňte mapu dopadu.
+3. Deset minut: rozhodněte, co se přenáší, co archivuje a co maže.
+4. Deset minut: napište archivní kartu a přechodovou poznámku.
+5. Pět minut: vyberte první reálné použití pro ověření.
+6. Pět minut: určete vlastníka odkazů, šablon a privacy-first úklidu.
+
+Workshop má skončit změnovou kartou, ne pocitem, že "se na tom bude pracovat". Pokud neumíte zapsat nový zdroj pravdy, nejste připraveni standard ukončit.
+
+### Checklist
+
+- Je jasné, jestli standard slučujete, zkracujete, přesouváte, archivujete nebo zmrazujete?
+- Má změna jednoho vlastníka?
+- Existuje nový zdroj pravdy?
+- Máte mapu dopadu přes odkazy, šablony, onboarding, automatizace a veřejné materiály?
+- Přenesli jste jen pravidla a rozhodovací otázky, které se opravdu používají?
+- Starý dokument je jasně označený jako archivní nebo přesměrovaný?
+- Kanonický index ukazuje na aktivní verzi?
+- Staré šablony už neobsahují neplatné názvy, odkazy ani rytmy?
+- Citlivé příklady, screenshoty a exporty byly odstraněny, anonymizovány nebo vědomě ponechány s účelem?
+- Je zapsaná archivní karta s důvodem změny?
+- Je naplánované ověření při prvním reálném použití?
+- Víte, kdy změnu zastavit a zmenšit rozsah?
+
+Ukončení standardu je dobrá práce, když po něm systém působí menší a jasnější. Ne když máte pocit, že jste "uklidili dokumentaci". Výsledek se pozná v okamžiku, kdy člověk řeší běžnou situaci a bez ptaní najde platnou odpověď.
+
 ## Pracovní log
 
+- 2026-05-12: Doplněna Příloha EQ o ukončení nebo sloučení standardu po roční inventuře: typ změny, mapa dopadu, archivní karta, nový zdroj pravdy, odkazy, privacy-first úklid a ověření při prvním použití.
 - 2026-05-12: Doplněna Příloha EP o roční inventuře provozních cyklů standardů: seznam aktivních rytmů, duplicity, stavy rozhodnutí, privacy-first úklid důkazů, portfoliová změna a checklist.
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
 - 2026-05-04: Dopsána kapitola 2 o hodnocení dobrého webu podle rychlosti, důvěry, obsahu a konverzí.
