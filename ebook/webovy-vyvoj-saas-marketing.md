@@ -41242,6 +41242,264 @@ Výstup workshopu má být jedna provozní karta, ne další dlouhý dokument. P
 
 Ověřená oprava má hodnotu až ve chvíli, kdy přestane být "tou opravenou věcí" a začne tiše pomáhat v normální práci. Provozní rytmus není byrokracie. Je to místo, kde se standard potkává s realitou. Když je to místo malé, konkrétní a privacy-first, standard vydrží déle než nadšení z jeho napsání.
 
+## Příloha EN: Kvartální kontrola provozního rytmu standardu
+
+Když se ověřená oprava dostane do běžného provozního rytmu, vzniká pocit stability. Standard má vlastníka, je ve správné šabloně, má kontrolní otázku a tým ví, kdy podle něj pracovat. To je dobrý stav. Jenže po několika týdnech až měsících se může stát nenápadná věc: rytmus začne žít sám pro sebe.
+
+Na začátku chránil konkrétní kvalitu. Po čase se z něj může stát položka v agendě, kterou lidé odkliknou bez rozhodnutí. Nebo naopak začne bobtnat, protože se do něj přidávají další a další kontroly. Kvartální kontrola má jeden účel: ověřit, jestli provozní rytmus standardu pořád pomáhá reálné práci, nebo jestli se z něj stává dokumentační hluk.
+
+Tato příloha navazuje na Přílohu EM. Tam jsme standard dostali do provozu. Tady kontrolujeme, jestli si provoz zaslouží pozornost, kterou od týmu bere.
+
+### 1. Začněte původním slibem
+
+Kvartální kontrola nemá začínat otázkou, jestli lidé vyplnili všechny položky. Má začínat původním slibem standardu.
+
+Ptejte se:
+
+- Jaké tření měl standard odstranit?
+- Jakou chybu měl zabránit opakovat?
+- Které rozhodnutí měl zrychlit nebo zpřesnit?
+- Kterou část práce měl udělat předatelnější?
+- Jaký privacy-first problém měl ohlídat?
+
+Pokud tým na tyto otázky neumí odpovědět, rytmus se pravděpodobně odpojil od smyslu. To neznamená, že standard je špatný. Znamená to, že je potřeba vrátit ho k pracovní situaci, kvůli které vznikl.
+
+Příklad:
+
+```markdown
+Standard:
+Kontrola názvů v kanonickém indexu.
+
+Původní slib:
+Nový člověk má do dvou minut najít správný standard podle pracovní situace.
+
+Kvartální otázka:
+Pomáhají současné názvy a kontrolní otázka skutečně rychlejšímu nalezení standardu, nebo jen udržujeme formální pravidlo?
+```
+
+To je lepší otázka než "dodržujeme šablonu?". Šablona je prostředek. Rychlé nalezení správné věci je výsledek.
+
+### 2. Zkontrolujte tři reálné pracovní průchody
+
+Neberte jako důkaz jen to, že standard existuje a má poslední datum kontroly. Vezměte tři konkrétní situace z posledního kvartálu, kde měl rytmus standardu pomoct.
+
+Průchod může být například:
+
+- nová položka v kanonickém indexu,
+- aktualizovaný sales materiál,
+- předání auditu jinému člověku,
+- úprava formuláře,
+- onboarding nového člena týmu,
+- review zákaznického výstupu,
+- vypnutí staré šablony.
+
+U každého průchodu se ptejte:
+
+1. Narazil člověk na standard ve správný okamžik?
+2. Bylo jasné, co má udělat?
+3. Vzniklo díky standardu lepší rozhodnutí?
+4. Ušetřil standard vysvětlování, nebo ho přidal?
+5. Zůstala datová stopa přiměřená účelu?
+
+Tři průchody stačí. Cílem není auditovat celý život týmu. Cílem je zachytit vzorec. Když se stejný problém objeví třikrát, je to signál. Když se neobjeví ani jednou, není potřeba vyrábět drama jen proto, aby schůzka měla obsah. Drama jako služba je špatný business model.
+
+### 3. Oddělte kvalitu standardu od kvality disciplíny
+
+Když standard nefunguje, týmy často rychle řeknou: "Lidé ho nedodržují." Někdy je to pravda. Často ale standard není ve správném místě, je moc dlouhý, má nejasný jazyk nebo vyžaduje data, která člověk v daný okamžik nemá.
+
+Rozlišujte:
+
+- Problém disciplíny: lidé vědí, co mají udělat, mají k tomu podmínky, ale opakovaně to ignorují.
+- Problém designu standardu: lidé chtějí práci udělat dobře, ale standard je zpomaluje, mate nebo přichází pozdě.
+- Problém rytmu: standard je užitečný, ale kontrola probíhá ve špatnou chvíli.
+- Problém vlastnictví: nikdo neví, kdo má změnu schválit.
+- Problém rozsahu: standard řeší víc situací, než má.
+
+Příklad zápisu:
+
+```markdown
+Pozorování:
+Při přidávání nových položek do indexu lidé vynechávají kontrolu názvu.
+
+Není to:
+Nedostatek disciplíny.
+
+Je to:
+Kontrolní otázka je až v měsíčním review, ale název vzniká už při založení položky.
+
+Oprava:
+Přesunout otázku do šablony nové položky a v měsíčním review kontrolovat jen výjimky.
+```
+
+Tím se z kontroly nestane hledání viníka. Stane se z ní oprava systému.
+
+### 4. Udělejte scorecard rytmu
+
+Jednoduchá scorecard pomůže oddělit pocit od rozhodnutí. Nepotřebujete složitý dashboard. Stačí čtyři oblasti a krátké hodnocení.
+
+```markdown
+# Kvartální scorecard provozního rytmu
+
+Standard:
+Rytmus:
+Kontrolované období:
+Vlastnická role:
+
+1. Užitečnost:
+0 = nepřineslo rozhodnutí
+1 = občas pomohlo
+2 = opakovaně pomohlo konkrétní práci
+
+2. Náročnost:
+0 = bere nepřiměřeně času
+1 = přijatelná cena
+2 = lehké, přirozené, bez zbytečné režie
+
+3. Předatelnost:
+0 = bez výkladu nejde použít
+1 = použitelné s drobnou pomocí
+2 = použitelné samostatně
+
+4. Privacy-first stopa:
+0 = sbíráme zbytečná data
+1 = stopa je přijatelná, ale chce úklid
+2 = sbíráme minimum a víme proč
+
+Rozhodnutí:
+Ponechat / zjednodušit / přesunout / sloučit / vyndat z rytmu / archivovat
+```
+
+Důležité je, aby scorecard vedla k rozhodnutí. Pokud na konci není jasný další krok, kontrola byla jen hezky formátované povzdechnutí.
+
+### 5. Zkraťte dřív, než přidáte
+
+Kvartální kontrola často odhalí nové okrajové scénáře. Přirozená reakce je přidat další pravidlo. Tady opatrně. Každé nové pravidlo zvyšuje cenu používání standardu.
+
+Než něco přidáte, zkuste jednu z těchto akcí:
+
+- zkrátit úvod,
+- přesunout detail do příkladu,
+- sloučit dvě podobné otázky,
+- odstranit kontrolu, která tři měsíce nepřinesla rozhodnutí,
+- změnit pořadí kroků,
+- přepsat abstraktní větu na konkrétní akci,
+- doplnit jeden dobrý příklad místo dalšího odstavce.
+
+Codyho komentář: dobrý standard se časem často nezlepšuje tím, že roste. Zlepšuje se tím, že se zbaví všeho, co už lidem nepomáhá rozhodnout. Štíhlost není estetika. Je to provozní vlastnost.
+
+### 6. Privacy-first kontrola důkazů po kvartálu
+
+Po jednom kvartálu už bývá vidět, jaké důkazy tým ve skutečnosti ukládá. To je ideální chvíle na úklid. Neřešte jen to, co bylo v původním pravidle. Podívejte se, co se děje v praxi.
+
+Zkontrolujte:
+
+- Kde vznikají poznámky z review.
+- Jestli obsahují osobní údaje, které standard nepotřebuje.
+- Jestli příklady neobsahují zákaznické detaily mimo účel.
+- Kdo má ke vzorkům výstupů přístup.
+- Jak dlouho se drží pracovní poznámky.
+- Jestli existuje místo, kam se kopírují celé konverzace místo anonymizovaných vzorů.
+- Jestli se dá stejné poučení uložit menší stopou.
+
+Praktická věta do rozhodnutí:
+
+```markdown
+Privacy-first změna:
+Od dalšího kvartálu ukládáme u tohoto standardu jen anonymizovaný vzor problému, dopad a změnu šablony. Kompletní zákaznické ukázky se do provozního logu nevkládají.
+```
+
+Tím se standard učí z reality, ale nedělá z reality sklad citlivých detailů.
+
+### 7. Vyberte jeden další zásah
+
+Kvartální kontrola nemá skončit seznamem deseti vylepšení. To je jen backlog s oblekem. Vyberte jeden zásah, který nejvíc zlepší poměr užitek/cena.
+
+Dobré zásahy:
+
+- přesunout kontrolní otázku do správné šablony,
+- zkrátit standard o třetinu,
+- doplnit jeden vyplněný příklad,
+- odebrat standard z rytmu, kde nepřináší rozhodnutí,
+- sloučit dvě podobné kontroly,
+- změnit vlastnickou roli,
+- upravit retenční pravidlo pro pracovní důkazy.
+
+Šablona rozhodnutí:
+
+```markdown
+Zjištění:
+Standard pomáhá při zakládání nové položky, ale měsíční kontrola opakuje stejnou otázku bez nových rozhodnutí.
+
+Zásah:
+Kontrolní otázka zůstává v šabloně nové položky. Z měsíčního review se odstraňuje, kromě případů, kdy vznikla výjimka.
+
+Očekávaný efekt:
+Méně formální kontroly, stejná ochrana kvality.
+
+Kontrola:
+Za měsíc ověřit tři nové položky a jednu výjimku, pokud vznikne.
+```
+
+Jedna hotová změna je pro provoz cennější než deset poznámek, ke kterým se nikdo nevrátí.
+
+### 8. Kdy rytmus ukončit
+
+Některé rytmy mají skončit. To není selhání. Je to známka toho, že se standard přesunul do nástroje, šablony nebo návyku, případně že původní riziko zmizelo.
+
+Rytmus ukončete, když:
+
+- tři kontroly po sobě nepřinesly žádné rozhodnutí,
+- kontrola jen potvrzuje, že šablona funguje,
+- práce se přesunula jinam,
+- standard byl sloučen do širšího provozního pravidla,
+- ochranný signál už hlídá automatizace nebo formulář,
+- cena kontroly je vyšší než hodnota rozhodnutí.
+
+Zápis ukončení:
+
+```markdown
+Rozhodnutí:
+Kvartální kontrolu tohoto standardu ukončujeme. Kontrolní otázka zůstává přímo v šabloně nové položky a případné výjimky se řeší v běžné měsíční kontrole indexu.
+
+Důvod:
+Poslední tři kontroly nepřinesly nové rozhodnutí a standard je použitelný přímo v pracovním toku.
+
+Návrat:
+Rytmus obnovit pouze při změně šablony, vlastnické role nebo při opakovaném výskytu špatně pojmenovaných položek.
+```
+
+Takhle se znalostní systém udržuje živý. Ne tím, že všechno kontroluje navždy, ale tím, že si vybírá, co ještě potřebuje pozornost.
+
+### Mini workshop: 35 minut na kvartální kontrolu rytmu
+
+Použijte pro standard, který je alespoň jeden kvartál v provozním rytmu.
+
+1. Pět minut: připomeňte původní slib standardu.
+2. Deset minut: projděte tři reálné pracovní průchody.
+3. Pět minut: vyplňte scorecard užitečnosti, náročnosti, předatelnosti a datové stopy.
+4. Pět minut: určete, jestli problém leží ve standardu, rytmu, vlastnictví nebo rozsahu.
+5. Pět minut: vyberte jeden zásah.
+6. Pět minut: zapište rozhodnutí, kontrolní termín a privacy-first dopad.
+
+Výstup má být krátký rozhodovací záznam. Ne zápis z porady, který zachytí každý názor. Provoz potřebuje vědět, co se mění, proč a kdy se ověří efekt.
+
+### Checklist
+
+- Je jasný původní slib standardu?
+- Prošli jste tři reálné pracovní průchody, ne jen existenci dokumentu?
+- Rozlišili jste problém disciplíny, designu standardu, rytmu, vlastnictví a rozsahu?
+- Máte scorecard pro užitečnost, náročnost, předatelnost a privacy-first stopu?
+- Vedla kontrola ke konkrétnímu rozhodnutí?
+- Zkusili jste standard nejdřív zkrátit nebo přesunout, než jste přidali nové pravidlo?
+- Zkontrolovali jste, jaké důkazy tým skutečně ukládá?
+- Odstranili jste zbytečné osobní, zákaznické nebo interně citlivé detaily?
+- Vybrali jste jeden další zásah, ne dlouhý seznam přání?
+- Je jasné, kdy se účinek zásahu ověří?
+- Víte, za jakých podmínek rytmus ukončit?
+- Je změna zapsaná v changelogu standardu nebo kanonickém indexu?
+
+Kvartální kontrola provozního rytmu je pojistka proti dvěma extrémům: zapomenutému standardu a standardu, který se drží při životě jen silou zvyku. Dobrá kontrola neoslavuje proces. Ptá se, jestli proces pořád chrání kvalitu práce s rozumnou cenou a minimální datovou stopou.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -41425,3 +41683,4 @@ Ověřená oprava má hodnotu až ve chvíli, kdy přestane být "tou opravenou 
 - 2026-05-12: Doplněna Příloha EK o standardizaci úspěšné opravy kanonického indexu: rozlišení opravy, vzoru a standardu, první použití, zdroj pravdy, privacy-first příklady a checklist.
 - 2026-05-12: Doplněna Příloha EL o kontrole standardizované opravy po prvním měsíci: původní slib standardu, pracovní důkazy, test novým člověkem, měření tření, rozhodnutí a changelog.
 - 2026-05-12: Doplněna Příloha EM o převodu ověřené opravy standardu do běžného provozního rytmu: provozní háčky, vlastnictví role, ochranné signály, privacy-first důkazy a checklist.
+- 2026-05-12: Doplněna Příloha EN o kvartální kontrole provozního rytmu standardu: původní slib, reálné průchody, scorecard, zkracování pravidel, privacy-first úklid důkazů a rozhodnutí o dalším zásahu.
