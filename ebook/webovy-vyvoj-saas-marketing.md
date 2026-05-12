@@ -40040,6 +40040,236 @@ Jedna dobrá oprava indexu často ušetří víc času než nová šablona. Šab
 
 Kanonický index je tichá infrastruktura týmové práce. Když funguje, nikdo o něm moc nemluví. Lidé prostě najdou správnou trasu, udělají rozhodnutí, zanechají čistý výstup a nepřidají zbytečná data. To je přesně ten druh nenápadné kvality, který se v malém týmu násobí každý týden.
 
+## Příloha EI: Převod nálezů z indexu do jedné hotové opravy
+
+Kontrola kanonického indexu má smysl jen tehdy, když po ní vznikne lepší pracovní trasa. Ne lepší pocit, ne delší seznam zjištění, ne tři nové tabulky. Jedna konkrétní oprava, která příště zkrátí cestu k rozhodnutí, sníží počet omylů nebo odstraní zbytečnou datovou stopu.
+
+Po kontrole indexu bývá lákavé otevřít velký úklid znalostní báze. To je většinou past. Velký úklid se rychle promění v projekt, který konkuruje reálné práci. Lepší je zavést pravidlo: každá kontrola končí jednou malou hotovou opravou a jednou větší položkou do backlogu, pokud je opravdu potřeba.
+
+Tato příloha popisuje, jak z nálezů po kontrole indexu vybrat jednu opravu, udělat ji bez rozkmitání systému a ověřit, že pomohla.
+
+### 1. Rozdělte nálezy podle typu tření
+
+Ne všechny nálezy jsou stejné. Když je naházíte do jednoho seznamu, začne se řešit to, co je nejhlasitější, ne to, co nejvíc pomůže. Po kontrole indexu proto nálezy roztřiďte podle typu tření:
+
+- Najitelnost: člověk neví, kde začít nebo jakou položku otevřít.
+- Srozumitelnost: název položky nebo popis situace je nejasný.
+- Důvěryhodnost: není vidět stav, vlastník, datum revize nebo zdroj pravdy.
+- Použitelnost: standard se otevře, ale nejde podle něj samostatně pracovat.
+- Výstup: není jasné, co po použití standardu zůstane v systému.
+- Privacy-first stopa: trasa vede ke zbytečnému sběru, kopírování nebo ukládání dat.
+- Duplicita: dvě položky vedou k podobnému rozhodnutí a lidé si vybírají náhodně.
+
+Příklad:
+
+```text
+Nález:
+Při změně formuláře tester otevřel obecný standard pro webové změny, ne kontrolu formulářových dat.
+
+Typ tření:
+Najitelnost + srozumitelnost
+
+Pravděpodobná příčina:
+Položka "Formuláře" neříká, kdy se použije. Obecný standard má v názvu "webové změny", což zní relevantněji.
+```
+
+Takový zápis je užitečnější než věta "index je nejasný". Nejasný kde? Pro koho? V jaké situaci? Bez této přesnosti se oprava snadno změní v přepis celého systému.
+
+### 2. Vyberte opravu podle dalšího reálného použití
+
+Nejlepší oprava není vždy ta největší. Nejlepší oprava je ta, která pomůže při nejbližší pravděpodobné práci.
+
+Ptejte se:
+
+1. Která situace se zopakuje nejdřív?
+2. Kde chyba způsobí největší ztrátu času nebo datové riziko?
+3. Která oprava se dá dokončit do třiceti minut?
+4. Která oprava sníží potřebu ústního vysvětlování?
+5. Která oprava zlepší výstup, ne jen vzhled indexu?
+
+Příklad rozhodnutí:
+
+```text
+Vybraná oprava:
+Přejmenovat položku "Formuláře" na "Kontrola změny webového formuláře" a doplnit "použít když / nepoužívat když".
+
+Proč právě teď:
+Tým má příští týden upravovat poptávkový formulář. Špatná volba standardu by mohla obejít datovou mapu.
+
+Co se nemění:
+Nepřepisujeme celý standard. Teď opravujeme vstupní bod v indexu.
+```
+
+Codyho komentář: pokud se po každé kontrole pustíte do reformy celého systému, tým se naučí kontroly nenávidět. Malá oprava, která se příští týden opravdu použije, je lepší než monumentální přestavba, která čeká na "až bude čas". Čas se v kalendáři většinou neobjeví sám a bez pozvánky.
+
+### 3. Definujte opravu jako změnu chování
+
+Oprava indexu nemá být popsána jen jako edit textu. Má říkat, jaké chování se má změnit.
+
+Slabý popis:
+
+```text
+Upravit položku Formuláře.
+```
+
+Silnější popis:
+
+```text
+Když někdo mění pole ve webovém formuláři, má z indexu do 30 sekund najít kontrolu změny formuláře, ověřit dopad do datové mapy a zapsat rozhodnutí pustit / upravit / zastavit.
+```
+
+Takový popis pomáhá vybrat správnou opravu. Možná stačí přejmenovat položku. Možná je potřeba doplnit příklad. Možná standard existuje, ale chybí výstup. Důležité je, aby oprava směřovala k pracovnímu výsledku.
+
+Praktická šablona:
+
+```text
+Oprava indexu
+
+Situace:
+
+Současné tření:
+
+Požadované chování:
+
+Konkrétní změna v indexu:
+
+Co zůstává mimo rozsah:
+
+Privacy-first kontrola:
+
+Jak ověříme:
+
+Vlastník:
+
+Datum kontroly:
+```
+
+Tato šablona je záměrně krátká. Pokud na opravu indexu potřebujete třístránkový brief, pravděpodobně neřešíte jednu opravu, ale nový standard.
+
+### 4. Udržte rozsah malý
+
+Oprava indexu má mít jasný konec. Typické malé opravy:
+
+- přejmenovat jednu položku podle pracovní situace,
+- doplnit "použít když" a "nepoužívat když",
+- označit zdroj pravdy,
+- změnit stav položky z aktivní na archivní,
+- přesunout odkaz na vyplněný příklad mimo hlavní trasu,
+- doplnit očekávaný výstup po použití standardu,
+- sloučit dvě duplicitní položky do jedné,
+- přidat privacy štítek k položce, která mění data nebo dodavatele.
+
+Co už obvykle není malá oprava:
+
+- přepsat celý standard,
+- změnit strukturu všech kategorií,
+- zavést nový nástroj pro znalostní bázi,
+- migrovat staré dokumenty,
+- měnit vlastnictví celé oblasti,
+- vymýšlet nový proces schvalování.
+
+Tyto věci mohou být správné. Jen nepatří do stejného kroku. Dejte je do backlogu jako samostatnou změnu s vlastníkem a důvodem. Index má po kontrole zůstat použitelnější, ne rozkopaný.
+
+### 5. Zkontrolujte privacy-first dopad opravy
+
+I malá změna indexu může změnit tok dat. Když přidáte odkaz na příklad, může vést do vyplněného zákaznického dokumentu. Když doplníte "použít když", můžete nechtěně navést tým ke sběru údajů, které pro rozhodnutí nepotřebuje. Když sloučíte dvě položky, můžete ztratit speciální kontrolu pro citlivější data.
+
+Před uložením opravy projděte krátkou brzdu:
+
+- Nepřibyl do indexu odkaz na zákaznická, osobní nebo incidentní data?
+- Nevede nová trasa k vyplňování příliš konkrétních údajů?
+- Je jasné, kdy se má aktualizovat datová mapa?
+- Je vidět, kdo rozhoduje o změně sbíraných polí, logů, analytiky nebo dodavatelů?
+- Nezmizela při sloučení samostatná privacy-first kontrola?
+- Má archivní položka jasné označení, aby se dál nepoužívala jako živá?
+
+Privacy-first oprava není jen odstranění citlivého odkazu. Někdy je to i doplnění jedné věty:
+
+```text
+Pokud změna přidává nové pole, event, log nebo externí nástroj, aktualizujte datovou mapu před nasazením.
+```
+
+Tahle věta může zabránit třem následným opravám. A to je přesně typ textu, který má v indexu hodnotu.
+
+### 6. Ověřte opravu stejným scénářem
+
+Po úpravě neříkejte jen "hotovo". Vezměte původní scénář a projděte ho znovu.
+
+Příklad:
+
+```text
+Původní scénář:
+Chceme změnit pole v poptávkovém formuláři pro audit webu.
+
+Očekávaný průchod po opravě:
+1. Otevřu kanonický index.
+2. Najdu položku "Kontrola změny webového formuláře".
+3. Vidím, kdy ji použít a kdy ne.
+4. Otevřu zdroj pravdy.
+5. Vidím, že při změně polí mám aktualizovat datovou mapu.
+6. Po změně zapíšu rozhodnutí a datum vyhodnocení dopadu.
+```
+
+Pokud průchod pořád drhne, neznamená to, že oprava selhala. Znamená to, že jste našli další nález. Ten ale nemusí být součástí stejné změny. Zapište ho a rozhodněte, jestli je potřeba opravit hned, nebo stačí backlog.
+
+### 7. Zapište změnu do changelogu indexu
+
+Kanonický index potřebuje vlastní malou historii. Ne kvůli administrativě, ale kvůli důvěře. Lidé mají vědět, proč se položka přejmenovala, proč je něco archivní a kde je nový zdroj pravdy.
+
+Krátký záznam stačí:
+
+```text
+2026-05-12
+Změna: Položka "Formuláře" přejmenována na "Kontrola změny webového formuláře".
+Důvod: Tester při scénáři změny formuláře otevřel obecný standard webových změn.
+Dopad: Doplněno "použít když / nepoužívat když" a odkaz na aktualizaci datové mapy.
+Vlastník: marketing lead + privacy owner
+Další kontrola: při příští změně formuláře nebo měsíčním průchodu indexu
+```
+
+Changelog nemá být kronika každého překlepu. Má zachytit změny, které ovlivňují pracovní trasu nebo důvěru ve zdroj pravdy.
+
+### 8. Kdy opravu zastavit
+
+Někdy kontrola ukáže, že nález je skutečný, ale oprava teď není dobrý nápad. To je legitimní výsledek.
+
+Zastavte opravu, pokud:
+
+- nemáte vlastníka oblasti,
+- není jasné, který dokument je zdroj pravdy,
+- změna by otevřela citlivá data širšímu publiku,
+- dotčený standard se právě mění v jiném pracovním cyklu,
+- nález se týká procesu, který možná brzy zanikne,
+- oprava by vyžadovala schválení mimo tým.
+
+Zastavení neznamená ignorování. Znamená to zapsat rozhodnutí:
+
+```text
+Nález potvrzen, oprava odložena.
+Důvod: není jasný zdroj pravdy pro formulářové změny.
+Další krok: určit vlastníka a zdroj pravdy v měsíčním review webových standardů.
+Do té doby: používat obecný standard webových změn a ručně přidat kontrolu datové mapy.
+```
+
+Tím chráníte tým před poloviční úpravou, která vypadá jako řešení, ale přidá další nejistotu.
+
+### Checklist
+
+- Jsou nálezy rozdělené podle typu tření?
+- Vybrali jste jednu opravu podle nejbližšího reálného použití?
+- Je oprava popsaná jako změna chování, ne jen edit textu?
+- Má jasně určený rozsah a konec?
+- Víte, co zůstává mimo rozsah a případně jde do backlogu?
+- Prošla oprava privacy-first kontrolou?
+- Nepřibyl do indexu odkaz na citlivý vyplněný dokument?
+- Nezmizela při sloučení důležitá kontrola dat, dodavatelů nebo retence?
+- Ověřili jste opravu stejným scénářem, který odhalil problém?
+- Má změna krátký changelog záznam?
+- Je jasné, kdy opravu zastavit místo polovičního řešení?
+- Pomůže oprava příště člověku najít, použít a uzavřít správný standard rychleji?
+
+Dobrá oprava kanonického indexu je malá, ale mění chování. Příště člověk méně hledá, méně se ptá, méně kopíruje data a rychleji zanechá čistý výstup. Přesně tak se z dokumentace stává provozní výhoda, ne povinná výzdoba procesu.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -40218,3 +40448,4 @@ Kanonický index je tichá infrastruktura týmové práce. Když funguje, nikdo 
 - 2026-05-12: Doplněn úvodní čtenářský kompas, který vysvětluje, jak rukopis používat jako pracovní nástroj.
 - 2026-05-12: Doplněna Příloha EG o opakovaném retenčním rytmu pro týmové standardy: týdenní, měsíční a kvartální kontroly, privacy-first retence, stop pravidla a checklist.
 - 2026-05-12: Doplněna Příloha EH o kontrole kvality kanonického indexu po retenčním rytmu: test pracovních situací, scorecard, privacy-first kontrola a checklist.
+- 2026-05-12: Doplněna Příloha EI o převodu nálezů z kontroly kanonického indexu do jedné hotové opravy: třídění tření, výběr podle reálného použití, omezení rozsahu, privacy-first brzda, ověření scénářem a changelog.
