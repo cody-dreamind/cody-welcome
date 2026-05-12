@@ -40922,6 +40922,326 @@ Pravidlo workshopu: neřešte celou dokumentaci. Kontrolujete jeden standard po 
 
 První měsíční kontrola je malá pojistka proti dokumentační samolibosti. Standard se nemá obhajovat sám sebou. Má obstát v práci. Když obstojí, nechte ho žít. Když drhne, zkraťte ho. Když škodí, zrušte ho bez obřadu. Tým potřebuje spolehlivou pracovní paměť, ne muzeum rozhodnutí, která se kdysi zdála rozumná.
 
+## Příloha EM: Převod ověřené opravy standardu do běžného provozního rytmu
+
+Když standardizovaná oprava přežije první měsíc, je lákavé prohlásit hotovo. Nový postup funguje, lidé ho našli, první reálné použití neskončilo zmatkem a kontrola ukázala, že oprava skutečně snížila tření. Jenže právě tady vzniká další riziko: oprava zůstane jako samostatný dokumentační úspěch, ale nedostane se do běžného rytmu práce.
+
+Tým potom má dobrý standard, ale používá ho jen tehdy, když si na něj někdo vzpomene. V praxi to znamená, že se kvalita postupně vrátí k původnímu stavu. Noví lidé dostanou odkaz pozdě, obchod použije starou formulaci, delivery si vytvoří vlastní kopii a provozní review se standardu nedotkne, protože nemá místo v agendě.
+
+Tato příloha řeší poslední krok po první měsíční kontrole: převést ověřenou opravu do provozního rytmu. Ne jako další velký proces. Jako malé, pravidelné místo, kde standard pomáhá rozhodovat, předávat práci a udržovat kvalitu.
+
+### 1. Rozlište dokument, standard a rytmus
+
+Dokument je text. Standard je dohoda, podle které tým pracuje. Rytmus je opakovaný okamžik, kdy se dohoda používá, kontroluje nebo upravuje.
+
+Bez rytmu standard postupně stárne. Ne proto, že by byl špatně napsaný, ale protože práce kolem něj se mění. Přijde nový typ zákazníka, nový nástroj, jiný kanál, rychlejší tempo, jiná role nebo jiný způsob předání. Pokud standard nemá místo v pravidelné práci, změna se do něj nedostane včas.
+
+Příklad:
+
+- Dokument: "Jak připravit privacy-first audit webu."
+- Standard: "Každý audit má minimální vstupní bránu, datovou kartu a výstup s prvními třemi prioritami."
+- Rytmus: "Každý pátek se v delivery review projdou nové audity a jedna položka: co změnit v auditu, šabloně nebo vstupním formuláři."
+
+První položka může ležet v knihovně. Druhá drží kvalitu. Třetí brání tomu, aby standard zestárl potichu.
+
+### 2. Najděte přirozené místo v práci
+
+Nejhorší způsob zavedení ověřené opravy je vytvořit pro ni novou schůzku bez jasného účelu. Standard má vstoupit tam, kde se už rozhoduje, předává nebo kontroluje práce.
+
+Hledejte existující rytmy:
+
+- týdenní plánování,
+- delivery review,
+- sales pipeline review,
+- support triage,
+- měsíční produktové review,
+- onboarding nového člověka,
+- retrospektiva po dodávce,
+- kvartální úklid nástrojů a dat,
+- kontrola webu nebo marketingových kanálů.
+
+U každého rytmu si položte otázku:
+
+"Kde by tato oprava zabránila opakování staré chyby?"
+
+Příklad: pokud oprava standardu řešila špatně pojmenované položky v kanonickém indexu, její místo není samostatná dokumentační porada. Patří do chvíle, kdy se do indexu přidává nový standard. Stačí jedna kontrolní otázka v šabloně nové položky:
+
+"Obsahuje název sloveso, objekt práce a výstup?"
+
+To je lepší než pětiminutová prezentace o tom, proč jsou názvy důležité. Standard pomůže přesně ve chvíli, kdy může změnit výsledek.
+
+### 3. Zaveďte minimum provozních háčků
+
+Provozní háček je malý bod v procesu, který připomene standard ve správný čas. Nemá otravovat. Má snížit pravděpodobnost, že se tým vrátí ke starému návyku.
+
+Typy háčků:
+
+- Pole v šabloně.
+- Jedna otázka v review agendě.
+- Kontrolní řádek v definition of done.
+- Odkaz v onboardingové trase.
+- Stav v kanonickém indexu.
+- Předávací věta v sales nebo support šabloně.
+- Krátká kontrola při měsíčním úklidu.
+
+Příklad pro standard kolem privacy-first formulářů:
+
+```markdown
+## Kontrola formuláře před nasazením
+
+- Jaký je účel formuláře?
+- Která pole jsou nutná pro první odpověď?
+- Která pole můžeme přesunout až do dalšího kroku?
+- Jak dlouho držíme odeslané údaje?
+- Kdo má k odpovědím přístup?
+- Je marketingový souhlas oddělený od žádosti o kontakt?
+```
+
+Takový háček nezvětšuje proces zásadně. Přitom včas zastaví typické sklouznutí: přidat do formuláře další pole, protože "by se mohlo hodit".
+
+### 4. Přepište vlastnictví z autora na roli
+
+Dokud standard drží konkrétní autor, je křehký. Autor může mít dovolenou, změnit roli nebo přestat sledovat detail, který už pro něj není aktuální. Po první měsíční kontrole proto přepište vlastnictví na roli nebo pracovní oblast.
+
+Místo:
+
+"Vlastník: Ondřej"
+
+lepší:
+
+"Vlastník: role odpovědná za delivery auditů"
+
+Nebo ještě konkrétněji:
+
+"Vlastník: člověk, který vede měsíční delivery review"
+
+Vlastnictví má znamenat tři věci:
+
+1. Standard má kdo změnit.
+2. Standard má kdo zkontrolovat v rytmu.
+3. Standard má kdo zrušit, pokud přestal pomáhat.
+
+Codyho komentář: dokument bez vlastníka není svoboda. Je to čekání na zastarání. Ale vlastník nemá být osobní hrdina dokumentace. Má být přirozený správce místa, kde se podle standardu opravdu pracuje.
+
+### 5. Udělejte provozní kartu standardu
+
+Po první měsíční kontrole už standard nepotřebuje dlouhou historii v hlavě. Potřebuje malou provozní kartu, která říká, kde žije a jak se používá.
+
+Šablona:
+
+```markdown
+# Provozní karta standardu
+
+Název standardu:
+Kanonický odkaz:
+Stav: aktivní / sledovaný / zjednodušit / archivovat
+Pracovní situace:
+Vlastnická role:
+
+Kde se používá:
+- Rytmus:
+- Agenda nebo šablona:
+- Kontrolní otázka:
+
+Co standard chrání:
+Jak poznáme, že pomáhá:
+Jak poznáme, že škodí nebo stárne:
+
+Privacy-first poznámka:
+- Jaká data standard zpracovává:
+- Jaká data nesmí vyžadovat:
+- Retence pracovních důkazů:
+
+Poslední kontrola:
+Další kontrola:
+Changelog:
+```
+
+Provozní karta má být krátká. Její účel není opakovat celý standard. Jejím účelem je zabránit tomu, aby standard ztratil kontext.
+
+### 6. Přidejte standard do správné trasy, ne všude
+
+Ověřená oprava může svádět k tomu, že ji začnete ukazovat všem. To většinou vede k informačnímu šumu. Standard patří do tras, kde lidé řeší odpovídající situaci.
+
+Ptejte se:
+
+- Kdo podle standardu opravdu pracuje?
+- Kdo potřebuje standard znát jen orientačně?
+- Kdo ho nepotřebuje vůbec?
+- Kde by odkaz pomohl v okamžiku práce?
+- Kde by odkaz jen přidal další položku do seznamu?
+
+Příklad:
+
+Standard pro kontrolu názvů v kanonickém indexu patří:
+
+- do šablony pro novou položku indexu,
+- do onboardingové trasy člověka, který spravuje standardy,
+- do měsíční kontroly indexu.
+
+Nepatří:
+
+- do obecného firemního úvodu pro každého,
+- do všech sales materiálů,
+- do každého checklistu webu,
+- do zákaznického playbooku, pokud s indexem nepracuje.
+
+Dobrá znalostní báze není ta, kde je každý standard všude. Dobrá znalostní báze je ta, kde standard potkáte přesně ve chvíli, kdy podle něj máte jednat.
+
+### 7. Nastavte ochranné signály
+
+Jakmile standard vstoupí do provozního rytmu, potřebuje jednoduché ochranné signály. Ne metriky pro velký dashboard. Jen včasné známky, že se standard používá špatně, přestal sedět nebo zbytečně zatěžuje práci.
+
+Ochranné signály:
+
+- Lidé standard obcházejí a vytvářejí vlastní kopie.
+- Stejná otázka se vrací i po zavedení opravy.
+- Review pravidelně přeskočí kontrolní otázku.
+- Standard se cituje jako pravidlo, ale nikdo neví proč vznikl.
+- Kvůli standardu se sbírají podklady, které nejsou potřeba.
+- Nový člověk standard najde, ale nedokáže ho použít bez výkladu.
+- Vlastník neví, kdy proběhla poslední kontrola.
+
+Každý ochranný signál má mít předem malou reakci:
+
+```markdown
+Signál:
+Noví lidé standard najdou, ale neumí ho použít.
+
+Reakce:
+Doplnit jeden vyplněný příklad a zkrátit úvod na tři věty.
+
+Co nedělat:
+Nepřidávat další obecné vysvětlení ani novou schůzku.
+```
+
+Tím se standard opravuje přiměřeně. Malé tření nemá automaticky spustit velkou reorganizaci.
+
+### 8. Privacy-first provozní kontrola
+
+Standardy často začnou jako nástroj kvality a skončí jako sběrné místo interních důkazů. Lidé chtějí ukázat, že se standard používá, a začnou ukládat ukázky, screenshoty, zákaznické komentáře, záznamy hovorů nebo exporty. To může být užitečné, ale jen pokud je jasné proč, na jak dlouho a v jaké podobě.
+
+U každého standardu v provozním rytmu nastavte:
+
+- Jaké důkazy o použití potřebujeme.
+- Které důkazy stačí agregovat nebo anonymizovat.
+- Které důkazy se nesmí ukládat.
+- Kde se uchovává changelog.
+- Jak dlouho se drží pracovní poznámky z review.
+- Kdo má přístup ke vzorkům výstupů.
+
+Praktické pravidlo:
+
+"Pro zlepšení standardu ukládáme vzor, ne kompletní zákaznický příběh."
+
+Příklad:
+
+Místo uložení celé zákaznické poptávky stačí anonymizovaná poznámka:
+
+```markdown
+Vzor:
+Uživatel nepochopil rozdíl mezi auditním výstupem a implementací.
+
+Dopad:
+Sales musel po nabídce vysvětlovat rozsah.
+
+Změna:
+Do prodejní karty přidat sekci "Co není součástí" před popis navazující práce.
+```
+
+Tým dostane poučení. Zákaznická data nezůstávají zbytečně v interní dokumentaci.
+
+### 9. Příklad převodu do rytmu
+
+Situace:
+
+Po první měsíční kontrole se ukázalo, že oprava názvů v kanonickém indexu funguje. Lidé rychleji najdou správný standard a nové položky jsou srozumitelnější.
+
+Převod do rytmu:
+
+```markdown
+Standard:
+Pojmenování položek v kanonickém indexu
+
+Pracovní situace:
+Přidání, sloučení nebo přejmenování standardu.
+
+Rytmus:
+Měsíční kontrola indexu a každé vytvoření nové položky.
+
+Háček:
+V šabloně nové položky je povinná věta:
+"Název obsahuje sloveso, objekt práce a výstup."
+
+Vlastnická role:
+Správce kanonického indexu.
+
+Ochranný signál:
+Nové položky mají názvy typu "Proces", "Checklist" nebo "Poznámky".
+
+Reakce:
+Přejmenovat položku před publikací a doplnit jeden lepší příklad do šablony.
+
+Privacy-first poznámka:
+Příklady názvů nesmí obsahovat jména zákazníků, interní konflikty ani osobní hodnocení práce.
+```
+
+Tento převod je malý. Právě proto má šanci přežít. Nevznikla nová schůzka, nový systém ani velká metodika. Jen se ověřená oprava dostala do místa, kde zabrání návratu staré chyby.
+
+### 10. Kdy standard z rytmu vyndat
+
+Ani úspěšný standard nemá mít trvalé právo na pozornost. Pokud už chráněné riziko zmizelo, proces se změnil nebo se standard stal samozřejmým návykem, může z rytmu odejít.
+
+Vyndejte standard z aktivního rytmu, když:
+
+- poslední tři kontroly nenašly žádné tření,
+- standard se přesunul do nástroje nebo šablony a není potřeba ho ručně připomínat,
+- pracovní situace už neexistuje,
+- kontrola zabírá čas, ale nepřináší rozhodnutí,
+- standard se sloučil do širšího pravidla,
+- vznikl nový zdroj pravdy.
+
+Důležité: vyndání z rytmu není totéž co archivace. Standard může zůstat aktivní, jen už nepotřebuje pravidelnou ruční kontrolu.
+
+Zápis:
+
+```markdown
+Rozhodnutí:
+Standard zůstává aktivní v šabloně, ale odstraňujeme ho z měsíční review agendy. Poslední tři kontroly nenašly tření a kontrolní otázka je už součástí formuláře pro novou položku.
+```
+
+To je zdravý provoz. Ne každé pravidlo musí být navždy připomínané.
+
+### Mini workshop: 30 minut na zařazení standardu do rytmu
+
+Použijte po první měsíční kontrole, pokud standard obstál.
+
+1. Pět minut: připomeňte, jaké tření oprava odstranila.
+2. Pět minut: vyberte pracovní situaci, kde se standard má používat.
+3. Pět minut: najděte existující rytmus, šablonu nebo agendu.
+4. Pět minut: napište jeden provozní háček.
+5. Pět minut: určete vlastnickou roli a ochranný signál.
+6. Pět minut: zapište privacy-first pravidla pro důkazy a příklady.
+
+Výstup workshopu má být jedna provozní karta, ne další dlouhý dokument. Pokud po třiceti minutách nemáte jasné místo použití, standard pravděpodobně ještě není připravený na provozní rytmus. Nechte ho sledovaný a vraťte se k němu po dalším reálném použití.
+
+### Checklist
+
+- Je jasné, jaký starý problém ověřená oprava odstranila?
+- Rozlišili jste dokument, standard a provozní rytmus?
+- Našli jste existující místo v práci místo nové zbytečné schůzky?
+- Má standard jeden nebo dva malé provozní háčky?
+- Je vlastnictví navázané na roli nebo pracovní oblast, ne jen na autora?
+- Existuje krátká provozní karta standardu?
+- Je standard v relevantní trase, ne všude?
+- Máte ochranné signály pro obcházení, zastarávání nebo zbytečné tření?
+- Je jasné, jaké důkazy o použití ukládat a jaké neukládat?
+- Obsahují příklady minimum dat a žádné zbytečné osobní nebo zákaznické detaily?
+- Víte, kdy standard z aktivního rytmu vyndat?
+- Je změna zapsaná v changelogu nebo pracovním logu standardu?
+
+Ověřená oprava má hodnotu až ve chvíli, kdy přestane být "tou opravenou věcí" a začne tiše pomáhat v normální práci. Provozní rytmus není byrokracie. Je to místo, kde se standard potkává s realitou. Když je to místo malé, konkrétní a privacy-first, standard vydrží déle než nadšení z jeho napsání.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -41104,3 +41424,4 @@ První měsíční kontrola je malá pojistka proti dokumentační samolibosti. 
 - 2026-05-12: Doplněna Příloha EJ o ověření opravy kanonického indexu po prvním reálném použití: očekávané zlepšení, karta prvního použití, výstup, privacy-first kontrola a uzavření v changelogu.
 - 2026-05-12: Doplněna Příloha EK o standardizaci úspěšné opravy kanonického indexu: rozlišení opravy, vzoru a standardu, první použití, zdroj pravdy, privacy-first příklady a checklist.
 - 2026-05-12: Doplněna Příloha EL o kontrole standardizované opravy po prvním měsíci: původní slib standardu, pracovní důkazy, test novým člověkem, měření tření, rozhodnutí a changelog.
+- 2026-05-12: Doplněna Příloha EM o převodu ověřené opravy standardu do běžného provozního rytmu: provozní háčky, vlastnictví role, ochranné signály, privacy-first důkazy a checklist.
