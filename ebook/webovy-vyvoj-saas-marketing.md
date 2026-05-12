@@ -39188,6 +39188,216 @@ Výstupem je jedna malá úprava a jedna jasná hypotéza. Pokud workshop skonč
 
 Měření používání standardů má být tiché, přiměřené a užitečné. Když pomůže najít zbytečné tření, zkrátit cestu a chránit data, splnilo účel. Když začne vyrábět dohled nad lidmi, minulo směr. Privacy-first tým nepotřebuje vědět všechno. Potřebuje vědět dost na to, aby příště pracoval lépe.
 
+## Příloha ED: Audit datové stopy týmových standardů
+
+Jakmile tým začne mít standardy, šablony, playbooky, scorecardy a měření jejich používání, vznikne nová vrstva dat. Není to produktová databáze ani marketingová analytika, ale pořád je to stopa o práci lidí, zákaznících, chybách, rozhodnutích a provozních slabých místech. Pokud se nehlídá, začne růst tiše. A tiché interní dokumenty umí být překvapivě výmluvné.
+
+Audit datové stopy týmových standardů má jednoduchý cíl: zjistit, jaká data standardy vytvářejí, jestli jsou potřeba, kdo k nim má přístup, jak dlouho zůstávají a jestli nepřetékají do míst, kde být nemají.
+
+Nejde o právní divadlo. Jde o provozní hygienu. Privacy-first tým nemá jen chránit data zákazníků v aplikaci. Má stejnou disciplínu držet i v interních postupech, protože právě tam často vznikají kopie, příklady, screenshoty, exporty, incidentní poznámky a komentáře, které nikdo nikdy neuklidí.
+
+### 1. Co všechno patří do auditu
+
+Do auditu nepatří jen dokument s názvem "standard". Patří tam každý artefakt, který standard používá nebo vytváří.
+
+Typické položky:
+
+- kanonický index standardů;
+- jednotlivé šablony a checklisty;
+- vyplněné pracovní karty;
+- scorecardy užitečnosti standardů;
+- poznámky z retrospektiv a workshopů;
+- incidentní a fallback záznamy;
+- onboardingové lesson packy;
+- příklady vyplnění;
+- screenshoty a exporty použité jako důkaz;
+- backlog podnětů ke změnám standardů;
+- staré odkazy na archivované verze.
+
+První pravidlo: auditujte i příklady. Právě příklady se často berou jako neškodný doplněk, ale mohou obsahovat jména zákazníků, interní e-maily, URL neveřejných systémů, části ticketů, screenshoty s osobními údaji nebo obchodní kontext, který nemá cestovat dál.
+
+Codyho komentář: ukázkový příklad s reálným zákazníkem je lákavý, protože působí konkrétně. Taky je to skvělý způsob, jak za půl roku zjistit, že interní šablona nechtěně obsahuje malý román o cizím provozu. Konkrétnost ano. Zbytečné detaily ne.
+
+### 2. Datová karta standardu
+
+Každý důležitý standard by měl mít krátkou datovou kartu. Ne další obří dokument. Jen jasnou odpověď na otázku, jakou stopu standard vytváří.
+
+Šablona:
+
+```md
+## Datová karta standardu
+
+Standard:
+Vlastník:
+Pracovní situace:
+
+Vstupní data:
+Výstupní artefakty:
+Možné osobní údaje:
+Možná zákaznická nebo interní citlivost:
+Kde se ukládá:
+Kdo má přístup:
+Retence:
+Způsob anonymizace nebo zkrácení:
+Co se nesmí vkládat:
+Kontrola při archivaci:
+Datum poslední revize:
+```
+
+Příklad pro standard "post-fallback review":
+
+```md
+## Datová karta standardu
+
+Standard: Post-fallback review
+Vlastník: Provozní lead
+Pracovní situace: Uzavření ručního režimu po výpadku automatizace
+
+Vstupní data: časová osa, dopad, ruční kroky, rozhodnutí
+Výstupní artefakty: review karta, změnový úkol, aktualizovaný runbook
+Možné osobní údaje: jména interních vlastníků, kontakty v incidentní komunikaci
+Možná zákaznická nebo interní citlivost: popis dopadu, chyby procesu, názvy systémů
+Kde se ukládá: interní znalostní báze a issue tracker
+Kdo má přístup: tým provozu a vedení projektu
+Retence: plný záznam podle incidentní potřeby, zkrácená lekce v týmové paměti
+Způsob anonymizace nebo zkrácení: převést osoby na role, zákazníky na segmenty
+Co se nesmí vkládat: tokeny, celé exporty logů, nezačerněné screenshoty, osobní komunikace mimo nutný kontext
+Kontrola při archivaci: zůstává jen rozhodnutí, poučení a odkaz na oprávněný zdroj
+Datum poslední revize: 2026-05-12
+```
+
+Datová karta pomáhá hlavně ve chvíli, kdy standard začne používat víc lidí. Nový člověk nemusí hádat, jestli může přidat screenshot, citovat zákaznický ticket nebo vložit export z analytiky. Vidí hranice hned.
+
+### 3. Tři úrovně citlivosti
+
+Ne každý standard potřebuje stejnou přísnost. Praktické je rozdělit datovou stopu do tří úrovní.
+
+Nízká citlivost:
+
+- obecné checklisty bez vyplněných dat;
+- anonymní příklady;
+- veřejně publikované šablony;
+- interní principy bez provozních detailů.
+
+Střední citlivost:
+
+- vyplněné pracovní karty;
+- scorecardy standardů;
+- agregované signály z retrospektiv;
+- popis procesních slabin;
+- anonymizované zákaznické vzory.
+
+Vysoká citlivost:
+
+- incidentní záznamy;
+- exporty logů;
+- screenshoty interních systémů;
+- konkrétní zákaznické problémy;
+- osobní poznámky z onboardingu;
+- záznamy o přístupech, rolích a chybách v oprávnění.
+
+Pravidlo: vysoká citlivost nepatří do běžných ukázkových šablon. Pokud ji potřebujete kvůli auditu nebo odpovědnosti, držte ji odděleně, s omezeným přístupem a jasnou retencí. Do standardu se má dostat poučení, ne celé surové zákulisí.
+
+### 4. Auditní průchod krok za krokem
+
+Audit dělejte nad malým vzorkem, jinak se z něj stane nekonečný úklid. Začněte standardy, které se používají často nebo pracují s vyšším rizikem: incidenty, data, zákaznické handoffy, onboarding, automatizace, výběr dodavatele a publikace změn.
+
+Postup:
+
+1. Vyberte pět až deset standardů k prvnímu průchodu.
+2. Ke každému najděte vyplněné výstupy z posledního období.
+3. Sepište, jaká data vstupují a jaká vznikají.
+4. Označte osobní, zákaznická, provozní a obchodní citlivá data.
+5. Zkontrolujte, jestli všechna tato data mají jasný účel.
+6. Najděte kopie: screenshoty, přílohy, exporty, staré odkazy, duplicitní karty.
+7. Ověřte přístupy: kdo dokument vidí a kdo ho opravdu potřebuje.
+8. Doplňte nebo opravte retenci.
+9. Přepište příklady tak, aby byly konkrétní, ale bezpečné.
+10. Zapište jednu změnu, která sníží datovou stopu bez ztráty užitečnosti.
+
+Výstupem nemá být seznam třiceti morálních výčitek. Výstupem má být několik konkrétních změn: odstranit screenshoty, přepsat příklad, zkrátit kartu, přesunout incidentní detaily do omezeného prostoru, doplnit retenci, nebo zavřít přístup k archivu.
+
+### 5. Jak zkracovat bez ztráty hodnoty
+
+Nejlepší interní standardy jsou dost konkrétní na práci a dost zdrženlivé na data. To není rozpor. Většinou stačí převést detail na vzor.
+
+Před úpravou:
+
+"Zákazník ACME poslal v pondělí screenshot s e-mailem jana.novakova@example.com, kde bylo vidět, že integrace X spadla po změně tokenu v systému Y."
+
+Po úpravě:
+
+"Zákazník z B2B segmentu nahlásil výpadek integrace po změně přístupu v navazujícím systému. Poučení: standard musí obsahovat kontrolu rotace přístupů a potvrzení transakčních notifikací."
+
+Druhá verze je pořád užitečná. Říká, co se stalo jako pracovní vzor a co se má změnit. Nešíří jméno, e-mail, konkrétního zákazníka ani interní názvy mimo nutný kontext.
+
+Zkracovací techniky:
+
+- jména lidí nahraďte rolí;
+- jména zákazníků nahraďte segmentem;
+- přesné URL nahraďte typem systému;
+- screenshot nahraďte textovým popisem;
+- export logu nahraďte shrnutím příznaku;
+- dlouhou konverzaci nahraďte rozhodnutím;
+- staré přílohy nahraďte odkazem do oprávněného archivu.
+
+### 6. Stop pravidla pro nové šablony
+
+Každá nová šablona by měla projít krátkou privacy-first bránou ještě před zavedením.
+
+Stop pravidla:
+
+- Šablona žádá osobní údaj, ale neumí říct proč.
+- Šablona má pole "poznámky" bez hranic a příkladů.
+- Šablona doporučuje vkládat screenshoty bez začernění.
+- Šablona míchá zákaznické detaily s interním hodnocením lidí.
+- Šablona ukládá incidentní detaily do prostoru s širokým přístupem.
+- Šablona nemá retenci pro vyplněné karty.
+- Šablona má být veřejně sdílená, ale obsahuje interní provozní příklady.
+
+Když některé pravidlo spadne, šablonu nezavádějte v původní podobě. Upravte otázky, přidejte hranice, rozdělte veřejnou a interní verzi, nebo změňte místo uložení.
+
+### Mini workshop: 45 minut nad datovou stopou standardu
+
+Vyberte jeden standard, který se používá v reálné práci a už má několik vyplněných výstupů.
+
+Agenda:
+
+1. Pojmenujte pracovní situaci a výstup standardu.
+2. Otevřete jeden vyplněný příklad a označte datové typy.
+3. Najděte tři detaily, které nejsou nutné pro rozhodnutí.
+4. Přepište jeden příklad do bezpečnější podoby.
+5. Doplňte datovou kartu standardu.
+6. Rozhodněte jednu změnu šablony nebo přístupu.
+
+Příklad rozhodnutí:
+
+```md
+## Rozhodnutí po auditu datové stopy
+
+Standard: Kontrola prvního cyklu nové role
+Nález: Vyplněné karty obsahují příliš konkrétní osobní poznámky z onboardingu.
+Změna: Oddělit osobní rozvojové poznámky od systémových lekcí. Do týmové paměti převádět jen anonymizované vzory.
+Vlastník: Role lead
+Termín kontroly: příští měsíční review
+```
+
+### Checklist
+
+- Má každý důležitý standard datovou kartu?
+- Je jasné, jaká vstupní data standard používá?
+- Je jasné, jaké výstupy standard vytváří?
+- Neobsahují příklady reálné osobní, zákaznické nebo provozní detaily bez důvodu?
+- Jsou screenshoty a exporty omezené, začerněné nebo nahrazené popisem?
+- Má každý vyplněný artefakt vlastní retenci?
+- Vidí citlivé standardy jen lidé, kteří je opravdu potřebují?
+- Jsou incidentní a auditní detaily oddělené od běžných šablon?
+- Umí nový člověk poznat, co do šablony nevkládat?
+- Převádíte poučení do systému bez zbytečného šíření zákulisí?
+- Existuje jednoduché stop pravidlo pro nové šablony?
+
+Audit datové stopy není brzda dokumentace. Je to způsob, jak udržet standardy použitelné, konkrétní a zároveň přiměřené. Tým má mít dost informací, aby pracoval lépe. Nemá si stavět interní muzeum všech chyb, screenshotů a detailů, které už dávno nepotřebuje.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -39360,3 +39570,4 @@ Měření používání standardů má být tiché, přiměřené a užitečné.
 - 2026-05-11: Doplněna Příloha EA o portfoliové revizi týmových standardů: inventura, duplicity, kanonický index, stavy dokumentů, privacy-first sjednocení a výběr jedné změny po revizi.
 - 2026-05-12: Doplněna Příloha EB o provozu kanonického indexu standardů: pracovní situace, brzda přidávání položek, měsíční prořezávání, privacy-first kontrola, onboardingové trasy a changelog změn.
 - 2026-05-12: Doplněna Příloha EC o měření používání standardů bez špehování týmu: rozhodovací otázky, agregované signály, scorecard, mini experimenty, retence a privacy-first hranice měření.
+- 2026-05-12: Doplněna Příloha ED o auditu datové stopy týmových standardů: datové karty, úrovně citlivosti, zkracování příkladů, stop pravidla pro šablony a privacy-first checklist.
