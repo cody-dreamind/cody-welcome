@@ -40270,6 +40270,226 @@ Tím chráníte tým před poloviční úpravou, která vypadá jako řešení, 
 
 Dobrá oprava kanonického indexu je malá, ale mění chování. Příště člověk méně hledá, méně se ptá, méně kopíruje data a rychleji zanechá čistý výstup. Přesně tak se z dokumentace stává provozní výhoda, ne povinná výzdoba procesu.
 
+## Příloha EJ: Ověření opravy indexu po prvním použití
+
+Oprava kanonického indexu není hotová ve chvíli, kdy je uložený nový název položky, doplněné pravidlo "použít když" nebo přesunutý odkaz. Hotová je až ve chvíli, kdy ji někdo použije v reálné práci a systém se zachová lépe než předtím. Bez tohoto ověření může tým jen doufat, že změna pomohla. A doufání je slabý provozní nástroj, i když má hezké odrážky.
+
+První použití opravy je malé kontrolní okno. Nejde o audit celé znalostní báze. Jde o to zjistit, jestli jedna konkrétní úprava opravdu zkrátila cestu, snížila počet dotazů, zabránila špatnému výběru standardu nebo omezila zbytečnou datovou stopu.
+
+Tato příloha navazuje na převod nálezů do jedné hotové opravy a popisuje, jak ověřit, že oprava funguje v provozu.
+
+### 1. Předem určete, co má oprava zlepšit
+
+Každá oprava indexu má mít jednoduché očekávání. Ne "index bude lepší", ale konkrétní změnu chování.
+
+Příklady:
+
+- Člověk najde správný standard do jedné minuty bez ptaní v chatu.
+- Při změně formuláře se před nasazením aktualizuje datová mapa.
+- Archivní položka se už neotevírá jako živý postup.
+- Výstup z použití standardu skončí na správném místě, ne v osobní poznámce.
+- Nový člověk pozná, kdy standard nepoužít.
+
+Bez takového očekávání nejde opravu vyhodnotit. Tým pak hodnotí pocit. Pocit může být užitečný signál, ale nesmí být jediný důkaz.
+
+Praktický zápis před opravou:
+
+```text
+Oprava:
+Přejmenovat položku "Formuláře" na "Kontrola změny webového formuláře" a doplnit pravidlo pro aktualizaci datové mapy.
+
+Očekávané zlepšení:
+Při další změně webového formuláře člověk otevře správnou kontrolu a před nasazením zapíše dopad do datové mapy.
+
+Jak poznáme, že to fungovalo:
+V rozhodovacím záznamu bude odkaz na kontrolu formuláře, aktualizovaná datová mapa a rozhodnutí pustit / upravit / zastavit.
+```
+
+Tři věty stačí. Důležité je, aby byly napsané před prvním použitím, ne dodatečně podle toho, co se zrovna povedlo.
+
+### 2. Sledujte první reálné použití, ne laboratorní ukázku
+
+Testovací scénář je dobrý pro rychlé ověření po editaci. První reálné použití je ale silnější důkaz. Ukáže, co se stane, když člověk pracuje pod běžným tlakem, s běžnými přerušeními a neúplnými informacemi.
+
+Při prvním použití sledujte:
+
+- odkud člověk do indexu přišel,
+- jakou položku otevřel jako první,
+- jestli pochopil stav a zdroj pravdy,
+- jestli potřeboval ústní vysvětlení,
+- jestli provedl privacy-first kontrolu ve správný moment,
+- kde zanechal výstup,
+- co by příště udělal jinak.
+
+Nesledujete výkon člověka. Sledujete výkon trasy. Pokud člověk otevře špatnou položku, není to důkaz, že "nečetl". Je to signál, že index pořád nabízí špatnou zkratku nebo nedostatečně rozlišuje situace.
+
+Codyho komentář: dobrý provozní systém nepočítá s tím, že lidé budou mít ideální soustředění, kontext a paměť. Počítá s tím, že budou mít čtyři notifikace, rozjetý call a chuť udělat práci rychle. Pokud index funguje i tehdy, něco se povedlo.
+
+### 3. Použijte krátkou kartu prvního použití
+
+Po prvním reálném použití opravy vyplňte krátkou kartu. Nemá z ní vzniknout další standard. Má jen zachytit, jestli oprava přežila kontakt s provozem.
+
+```md
+Kontrola prvního použití opravy indexu
+
+Oprava:
+Datum opravy:
+Datum prvního použití:
+Pracovní situace:
+Použil:
+
+Očekávané zlepšení:
+
+Co se stalo v praxi:
+
+Kde oprava pomohla:
+
+Kde trasa pořád drhla:
+
+Privacy-first kontrola:
+- Nevznikla zbytečná kopie dat?
+- Aktualizovala se datová mapa, pokud měla?
+- Nevedl index na vyplněný citlivý příklad?
+
+Výstup po použití:
+[kde je rozhodnutí, karta, zápis nebo aktualizace]
+
+Rozhodnutí:
+ponechat / doplnit drobnou úpravu / vrátit do backlogu / zastavit opravu
+
+Další kontrola:
+```
+
+Vyplnění má trvat deset minut. Pokud karta vyžaduje půlhodinové vysvětlování, oprava pravděpodobně nebyla dost konkrétní.
+
+### 4. Rozlišujte čtyři výsledky
+
+Po prvním použití mohou nastat čtyři rozumné výsledky.
+
+První: oprava funguje. Člověk našel správnou trasu, udělal požadované rozhodnutí a výstup zůstal na správném místě. V tom případě opravu ponechte a zapište krátký záznam do changelogu.
+
+Druhý: oprava pomohla, ale zůstalo malé tření. Například název už funguje, ale chybí jedna věta u výstupu. Udělejte drobnou úpravu hned, pokud nezvyšuje riziko ani rozsah.
+
+Třetí: oprava odhalila větší problém. Například položka je srozumitelná, ale samotný standard je zastaralý. Neopravujte všechno najednou. Zapište backlog položku s vlastníkem.
+
+Čtvrtý: oprava nepomohla nebo zhoršila trasu. Vraťte se k původnímu nálezu a přiznejte, že hypotéza byla špatná. To není selhání. Selhání by bylo nechat nefunkční opravu jen proto, že už je hotová.
+
+Příklad rozhodnutí:
+
+```text
+Výsledek:
+Oprava částečně pomohla. Tester otevřel správnou položku, ale nezapsal výstup do rozhodovacího logu.
+
+Drobná úprava:
+Doplnit do indexu pole "Výstup: rozhodovací log + aktualizovaná datová mapa".
+
+Backlog:
+Zkrátit samotný standard kontroly formuláře, protože má příliš dlouhý úvod.
+```
+
+Tím se drží rozdíl mezi opravou trasy a větší revizí obsahu.
+
+### 5. Nechte výstup mluvit za sebe
+
+Nejlepší důkaz, že oprava fungovala, není pochvala v retrospektivě. Je to čistý výstup po použití.
+
+U změny formuláře to může být:
+
+- rozhodnutí, proč se pole mění,
+- aktualizovaná datová mapa,
+- potvrzení, že se nesbírá víc údajů, než je potřeba,
+- datum vyhodnocení dopadu změny,
+- odkaz na nasazenou verzi nebo tiket.
+
+U marketingového experimentu:
+
+- hypotéza,
+- rozsah a stop pravidla,
+- privacy-first měření,
+- datum vyhodnocení,
+- rozhodnutí pokračovat, upravit nebo zastavit.
+
+U onboardingového standardu:
+
+- vyplněná karta role,
+- jasná hranice samostatnosti,
+- první kontrolní cyklus,
+- anonymizované poučení zpět do lesson packu.
+
+Když výstup není čistý, oprava indexu možná jen pomohla najít dokument, ale nepomohla dokončit práci. To je důležitý rozdíl.
+
+### 6. Privacy-first kontrola po použití
+
+První použití opravy je dobrý moment zkontrolovat, jestli se datová stopa opravdu zmenšila nebo zpřesnila. Nečekejte na kvartální audit.
+
+Krátká kontrola:
+
+- Nevznikly nové pracovní kopie s osobními nebo zákaznickými daty?
+- Neskončily citlivé příklady v běžně dostupném indexu?
+- Nevyžaduje opravená trasa sběr údajů, které nejsou potřeba pro rozhodnutí?
+- Je aktualizovaná datová mapa, pokud se změnila pole, eventy, logy nebo dodavatelé?
+- Je jasné, kdy se vyplněný výstup archivuje nebo smaže?
+- Má citlivější výstup užší přístup než prázdná šablona?
+
+Privacy-first ověření má být praktické. Nejde o to přidat právnickou mlhu. Jde o to, aby oprava indexu neposunula tým k pohodlnějšímu, ale datově horšímu chování.
+
+### 7. Udělejte jen jednu navazující změnu
+
+Po prvním použití skoro vždy najdete další nápady. To je normální. Nebezpečné je začít je všechny rovnou realizovat. Oprava indexu má zůstat malý provozní cyklus, ne nekonečný refaktor znalostí.
+
+Pravidlo:
+
+- jednu drobnou navazující úpravu můžete udělat hned,
+- jednu větší změnu zapište do backlogu,
+- zbytek ignorujte, dokud se neobjeví znovu jako reálné tření.
+
+Příklad:
+
+```text
+Hned:
+Doplnit do položky očekávaný výstup.
+
+Backlog:
+Zkrátit standard kontroly formuláře na jednu stránku.
+
+Ignorovat zatím:
+Nápad rozdělit celý webový index na pět kategorií. Zatím není důkaz, že to řeší opakované tření.
+```
+
+Tato disciplína chrání systém před tím, aby se každá kontrola stala záminkou k přestavbě. Malý tým vyhrává tím, že dokončuje malé úpravy, ne tím, že má nejambicióznější backlog.
+
+### 8. Uzavřete cyklus v changelogu
+
+Když oprava projde prvním použitím, zapište výsledek. Krátce a provozně:
+
+```text
+2026-05-12
+Oprava: položka "Kontrola změny webového formuláře".
+První použití: úprava auditního formuláře.
+Výsledek: člověk otevřel správný standard, aktualizoval datovou mapu a zapsal rozhodnutí.
+Drobná úprava po použití: doplněno pole "Výstup".
+Další kontrola: při příští změně formuláře nebo v měsíčním průchodu webových standardů.
+```
+
+Tento zápis je malý, ale důležitý. Ukazuje, že standardy nejsou statické texty. Jsou to pracovní nástroje, které se po použití ladí podle reality.
+
+### Checklist
+
+- Měla oprava předem určené očekávané zlepšení?
+- Ověřili jste ji při prvním reálném použití, ne jen v testovacím scénáři?
+- Sledujete výkon trasy, ne výkon člověka?
+- Je jasné, jestli oprava fungovala, částečně pomohla, odhalila větší problém nebo selhala?
+- Zůstal po použití čistý výstup na správném místě?
+- Proběhla privacy-first kontrola nové pracovní trasy?
+- Nevznikly zbytečné kopie citlivých dat?
+- Aktualizovala se datová mapa, pokud se změnila sbíraná data, eventy, logy nebo dodavatelé?
+- Udělali jste maximálně jednu drobnou navazující úpravu hned?
+- Větší změna skončila v backlogu s vlastníkem?
+- Je výsledek prvního použití zapsaný v changelogu?
+- Ví tým, kdy se k opravě vrátí znovu?
+
+Ověření po prvním použití je malá brzda proti falešnému pocitu hotova. Pomáhá týmu poznat, jestli oprava skutečně zlepšila práci, nebo jen přepsala text v indexu. Když se tento cyklus opakuje, standardy se zlepšují podle reality. Pomalu, prakticky a bez velkých znalostních přestaveb, které vypadají důležitě hlavně v kalendáři.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -40449,3 +40669,4 @@ Dobrá oprava kanonického indexu je malá, ale mění chování. Příště čl
 - 2026-05-12: Doplněna Příloha EG o opakovaném retenčním rytmu pro týmové standardy: týdenní, měsíční a kvartální kontroly, privacy-first retence, stop pravidla a checklist.
 - 2026-05-12: Doplněna Příloha EH o kontrole kvality kanonického indexu po retenčním rytmu: test pracovních situací, scorecard, privacy-first kontrola a checklist.
 - 2026-05-12: Doplněna Příloha EI o převodu nálezů z kontroly kanonického indexu do jedné hotové opravy: třídění tření, výběr podle reálného použití, omezení rozsahu, privacy-first brzda, ověření scénářem a changelog.
+- 2026-05-12: Doplněna Příloha EJ o ověření opravy kanonického indexu po prvním reálném použití: očekávané zlepšení, karta prvního použití, výstup, privacy-first kontrola a uzavření v changelogu.
