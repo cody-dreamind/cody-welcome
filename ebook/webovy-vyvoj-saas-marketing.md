@@ -41842,8 +41842,228 @@ Výstup workshopu má být karta cyklu a jeden konkrétní zásah. Pokud odcház
 
 Kvartální kontrola má chránit kvalitu, ne vyrábět provozní mlhu. Další cyklus je místo, kde se ukáže rozdíl mezi "něco jsme prodiskutovali" a "jednu věc jsme zlepšili". Udržte cyklus malý, důkazy střídmé a rozhodnutí viditelné. Standard pak nebude další dokument na poličce, ale tichá opora práce.
 
+## Příloha EP: Roční inventura provozních cyklů standardů
+
+Měsíční a kvartální rytmy drží standardy při životě. Roční inventura má jiný úkol: podívat se na celý systém z větší výšky a rozhodnout, co už si pozornost nezaslouží, co se má sloučit, co patří do automatizace a co se má vrátit blíž k reálné práci.
+
+Bez roční inventury se i dobře navržený systém začne plnit drobnými povinnostmi. Každá sama o sobě dává smysl. Dohromady ale vytvoří provozní daň: lidé čtou víc pravidel, vyplňují víc kontrol, přeskakují víc logů a pomaleji najdou správnou odpověď. Roční inventura není velká reorganizace. Je to úklid, který chrání použitelnost.
+
+Tato příloha navazuje na Přílohy EN a EO. Tam jsme kontrolovali jeden standard a převáděli závěr do dalšího cyklu. Tady kontrolujeme celé portfolio provozních cyklů.
+
+### 1. Udělejte inventuru aktivních rytmů
+
+Nezačínejte debatou, co komu vadí. Nejdřív sepište, co skutečně běží.
+
+Tabulka může být jednoduchá:
+
+```markdown
+Standard | Rytmus | Vlastník | Poslední rozhodnutí | Poslední změna | Další kontrola | Stav
+Kanonický index | měsíčně | správce indexu | zjednodušit | 2026-05-12 | 2026-06-12 | aktivní
+Kontrola datové stopy | kvartálně | privacy owner | ponechat | 2026-04-20 | 2026-07-20 | aktivní
+Review šablon | měsíčně | editor | bez rozhodnutí 3 cykly | 2026-02-10 | 2026-06-01 | kandidát na ukončení rytmu
+```
+
+U každého rytmu se ptejte:
+
+- Kdy naposledy přinesl rozhodnutí?
+- Která pracovní situace ho spouští?
+- Kdo ho používá?
+- Co by se stalo, kdyby rytmus na měsíc zmizel?
+- Jakou datovou stopu při kontrole vytváří?
+- Je výsledek stále lepší než cena kontroly?
+
+Pokud tým neumí odpovědět, rytmus možná zůstal v systému jen ze setrvačnosti. Setrvačnost je v provozu tichý náklad. Nikdo ji neschválil, ale všichni ji platí.
+
+### 2. Hledejte duplicity mezi standardy
+
+Po roce se často ukáže, že několik standardů řeší stejnou situaci jinými slovy. Jeden hlídá názvy, druhý index, třetí onboardingovou trasu, čtvrtý changelog. Každý vznikl oprávněně. Jenže pokud člověk musí při jedné změně otevřít čtyři dokumenty, systém už nepomáhá.
+
+Typické duplicity:
+
+- dvě šablony se ptají na stejný účel,
+- dva checklisty kontrolují stejné privacy-first riziko,
+- jeden standard říká "zapiš do changelogu" a druhý má vlastní změnový log,
+- onboarding role odkazuje na starší verzi pracovního postupu,
+- sales materiál a delivery standard používají jiné názvy pro stejný výstup.
+
+Rozhodovací otázka:
+
+```markdown
+Kdyby nový člověk řešil tuto pracovní situaci, našel by jeden zdroj pravdy, nebo by musel skládat odpověď ze tří míst?
+```
+
+Pokud odpověď zní "ze tří míst", sloučení nebo kanonický odkaz má vyšší hodnotu než další vysvětlování.
+
+### 3. Rozdělte rytmy podle stavu
+
+Nepoužívejte jen stav aktivní/neaktivní. To je moc hrubé. Roční inventura potřebuje praktičtější stavy:
+
+- Aktivní a hodnotný: rytmus pravidelně vede k rozhodnutí.
+- Aktivní, ale zkrátit: pomáhá, ale bere moc času.
+- Přesunout do šablony: kontrola má probíhat při práci, ne na schůzce.
+- Sloučit: podobný rytmus už existuje jinde.
+- Automatizovat kontrolu: ruční kontrola hlídá stabilní, technicky zjistitelnou věc.
+- Ukončit rytmus: standard zůstává, ale pravidelná kontrola už nepřináší hodnotu.
+- Archivovat standard: pracovní situace zanikla nebo má nový zdroj pravdy.
+
+Příklad:
+
+```markdown
+Standard:
+Kontrola externích skriptů na webu.
+
+Roční zjištění:
+Ručně se opakuje stejná kontrola domén, ale výstup se dá získat ze smoke testu a deploy pipeline.
+
+Stav:
+Automatizovat kontrolu.
+
+Rozhodnutí:
+Z kvartální ruční kontroly ponechat jen vyhodnocení nových domén a vlastníka. Seznam domén generovat automaticky při auditu.
+```
+
+Takové rozhodnutí snižuje režii a zároveň nechává lidské posouzení tam, kde má hodnotu: proč doména existuje a jestli je obhajitelná.
+
+### 4. Zkontrolujte privacy-first stopu celého systému
+
+Každý standard může být sám o sobě privacy-first. Celý systém přesto může ukládat příliš mnoho důkazů: kopie zákaznických ukázek, interní poznámky, screenshoty, exporty, záznamy z review a staré příklady.
+
+Roční inventura má projít hlavně:
+
+- kde leží důkazy z kontrol,
+- jestli mají vlastníka,
+- jak dlouho se drží,
+- zda obsahují osobní nebo zákaznicky citlivá data,
+- jestli existuje anonymizovaná varianta,
+- zda staré příklady pořád učí něco užitečného,
+- kdo má přístup k historickým záznamům,
+- jestli staré artefakty nejsou dostupné přes zapomenuté odkazy.
+
+Praktické pravidlo:
+
+```markdown
+Pokud důkaz už neslouží učení, auditu, provoznímu rozhodnutí ani právní povinnosti, nemá v živém systému co dělat.
+```
+
+Codyho komentář: archiv není místo, kam se posílá nepříjemné rozhodnutí "smazat". Archiv má mít účel. Jinak je to jen sklep s vyhledáváním.
+
+### 5. Vyberte jednu portfoliovou změnu
+
+Roční inventura pravděpodobně najde víc problémů. Neřešte všechny najednou. Vyberte jednu portfoliovou změnu, která nejvíc zlepší orientaci nebo sníží režii.
+
+Dobré portfoliové změny:
+
+- sloučit dva opakující se review rytmy,
+- vytvořit jeden kanonický index pro všechny provozní standardy,
+- přesunout nejčastější kontrolu přímo do pracovní šablony,
+- odstranit staré důkazy s osobními údaji,
+- zkrátit nejpoužívanější standard,
+- zavést společnou změnovou kartu místo pěti různých logů,
+- automatizovat technickou kontrolu, která se ručně jen opisuje.
+
+Špatné portfoliové změny:
+
+- "přepíšeme všechno",
+- "sjednotíme všechny standardy do nového systému",
+- "uděláme velkou taxonomii",
+- "přidáme povinné review pro každou změnu",
+- "vytvoříme nový dashboard nad všemi standardy", když nikdo neumí říct, jaké rozhodnutí podpoří.
+
+Velké přepisování dokumentace často vypadá jako pořádek, ale ve skutečnosti jen odloží práci. Roční inventura má zmenšovat tření, ne vyrábět nový migrační projekt.
+
+### 6. Udělejte roční rozhodovací zápis
+
+Zápis má být krátký a použitelný. Ne kronika všeho, co se probíralo.
+
+```markdown
+# Roční inventura provozních cyklů
+
+Období:
+Vlastník inventury:
+
+Počet aktivních rytmů:
+Počet rytmů s rozhodnutím za poslední kvartál:
+Počet rytmů bez rozhodnutí za poslední tři cykly:
+
+Co funguje:
+
+Co bere moc pozornosti:
+
+Duplicitní nebo kolizní standardy:
+
+Privacy-first nález:
+
+Jedna portfoliová změna:
+
+Co archivujeme nebo ukončujeme:
+
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```markdown
+Jedna portfoliová změna:
+Sloučíme měsíční review šablon a měsíční review kanonického indexu do jedné 30min kontroly, protože obě kontroly řeší stejný problém: najít zastaralé nebo špatně pojmenované pracovní artefakty.
+
+Privacy-first nález:
+Staré příklady v review šablonách obsahují zákaznické názvy. Do 14 dnů je nahradíme anonymizovanými vzory.
+```
+
+To je dost konkrétní, aby se podle toho dalo jednat.
+
+### 7. Kdy roční inventuru přeskočit
+
+Nepřeskakujte ji jen proto, že "není čas". Přeskočte ji pouze tehdy, když by byla falešná.
+
+Roční inventuru odložte, pokud:
+
+- standardy ještě neběžely alespoň několik měsíců,
+- tým právě prochází zásadní změnou a inventura by jen potvrdila chaos,
+- nemáte data o použití ani pracovní příklady,
+- hlavní zdroj pravdy se právě migruje.
+
+I pak udělejte alespoň mini variantu:
+
+```markdown
+Co aktivně používáme?
+Co nikdo nepoužil poslední tři měsíce?
+Co obsahuje citlivé příklady a potřebuje úklid?
+Co musíme zachovat do další plné inventury?
+```
+
+Mini inventura je lepší než žádná, pokud vede k jednomu rozhodnutí. Je horší než žádná, pokud se jen přidá jako další rituál bez dopadu.
+
+### Mini workshop: 60 minut na roční inventuru
+
+1. Deset minut: sepište aktivní rytmy a vlastníky.
+2. Deset minut: označte rytmy, které poslední tři cykly nepřinesly rozhodnutí.
+3. Deset minut: najděte duplicity a kolize mezi standardy.
+4. Deset minut: projděte privacy-first stopu důkazů a příkladů.
+5. Deset minut: vyberte jednu portfoliovou změnu.
+6. Deset minut: zapište rozhodnutí, vlastníka a první ověření.
+
+Výstupem má být jeden zásah, jedno archivování nebo jedno sloučení. Pokud workshop skončí jen seznamem "měli bychom", inventura selhala elegantně. To je pořád selhání.
+
+### Checklist
+
+- Máte seznam všech aktivních provozních rytmů standardů?
+- Víte, kdy každý rytmus naposledy přinesl rozhodnutí?
+- Označili jste rytmy bez rozhodnutí za poslední tři cykly?
+- Našli jste duplicity mezi standardy, šablonami, checklisty a indexem?
+- Rozdělili jste rytmy na ponechat, zkrátit, přesunout, sloučit, automatizovat, ukončit nebo archivovat?
+- Zkontrolovali jste datovou stopu důkazů, příkladů a review poznámek?
+- Odstranili nebo anonymizovali jste zbytečné zákaznické a osobní detaily?
+- Vybrali jste jednu portfoliovou změnu místo velké reorganizace?
+- Je jasné, kdo změnu provede a kdy se ověří první dopad?
+- Je roční rozhodnutí zapsané v kanonickém indexu nebo changelogu?
+- Víte, které rytmy už se příští rok nemají vrátit jen ze zvyku?
+
+Roční inventura má udržet systém lehký. Standardy mají pomáhat lidem dělat lepší práci, ne dokazovat, že tým umí vyrábět pravidla. Když inventura zmenší počet kontrol, zkrátí cestu k odpovědi a uklidí citlivé důkazy, udělala přesně to, co měla.
+
 ## Pracovní log
 
+- 2026-05-12: Doplněna Příloha EP o roční inventuře provozních cyklů standardů: seznam aktivních rytmů, duplicity, stavy rozhodnutí, privacy-first úklid důkazů, portfoliová změna a checklist.
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
 - 2026-05-04: Dopsána kapitola 2 o hodnocení dobrého webu podle rychlosti, důvěry, obsahu a konverzí.
 - 2026-05-05: Dopsána kapitola 3 o technickém základu webu: doména, hosting, DNS, HTTPS/TLS, e-mail a privacy-first analytika.
