@@ -39544,6 +39544,159 @@ Nejde o dokonalost. Jde o pravidelné malé snížení chaosu a datové stopy. T
 
 Retenční plán je praktická údržba paměti týmu. Bez něj se standardy mění ve vrstvy starých rozhodnutí, která nikdo neumí vyložit. S ním zůstává týmová paměť použitelná: dost konkrétní na práci, dost krátká na čtení a dost zdrženlivá na to, aby zbytečně nenosila cizí data do budoucnosti.
 
+## Příloha EF: Kontrola dopadu retenčního úklidu po prvním cyklu
+
+Retenční plán je užitečný až ve chvíli, kdy po něm práce skutečně zůstane jednodušší. Nestačí říct, že se něco smazalo, archivovalo nebo zkrátilo. Po prvním úklidovém cyklu je potřeba ověřit, jestli tým rychleji najde aktuální standard, jestli se zmenšila citlivá datová stopa a jestli úklid nezničil kontext, který lidé potřebují pro správné rozhodnutí.
+
+Tohle je malá, ale důležitá kontrola. Když ji vynecháte, retence se může zvrhnout do dvou opačných extrémů. Buď tým nemaže skoro nic, protože se bojí ztráty historie. Nebo naopak uklízí příliš agresivně a za měsíc nikdo neví, proč se standard změnil. Dobrá kontrola drží prostředek: méně šumu, pořád dost paměti.
+
+### 1. Ptejte se na dopad, ne na pocit uklizenosti
+
+Po prvním retenčním cyklu si nepište jen seznam smazaných souborů. Začněte otázkami, které ukážou, jestli úklid pomohl práci:
+
+- Najde nový člověk aktuální standard rychleji než před úklidem?
+- Je v indexu méně duplicitních nebo neplatných položek?
+- Zmizely citlivé přílohy z míst, kde je tým nepotřebuje?
+- Zůstala zachovaná rozhodnutí, která vysvětlují současný postup?
+- Neztratily se příklady, které lidé opravdu používali?
+- Umí vlastník standardu říct, co se bude čistit příště?
+
+Pokud odpověď zní "máme méně souborů", je to slabý výsledek. Pokud odpověď zní "nový člověk našel správný checklist bez dotazu a v archivu zůstala jen stručná historie změny", je to už provozní hodnota.
+
+Codyho komentář: uklizená složka může být klidně špatný systém v hezčím kabátě. Retence má snížit tření a riziko, ne vyrobit pocit, že jsme administrativně ctnostní. Jo, i dokumentace umí předstírat pořádek. Velmi důstojně.
+
+### 2. Udělejte test čtenářské trasy
+
+Vyberte jednu reálnou situaci a projděte ji tak, jak by ji řešil člověk, který nebyl u posledních revizí. Například:
+
+```md
+Situace:
+Nový kolega má poprvé použít standard pro předání opakovatelné nabídky.
+
+Úkol:
+Najít aktuální checklist, zjistit hranici eskalace a vyplnit pracovní kartu.
+
+Sledujeme:
+- kde začal hledat,
+- jestli se dostal do kanonického indexu,
+- kolik archivních materiálů ho mátlo,
+- jestli pochopil rozdíl mezi šablonou a vyplněným příkladem,
+- jestli narazil na citlivý detail, který pro úkol nepotřeboval,
+- jakou otázku musel položit týmu.
+```
+
+Test nemusí být formální. Stačí dvacet minut, sdílená obrazovka a někdo, kdo jen sleduje tření. Neopravujte člověka během průchodu. Poznamenejte, kde systém selhal. Pokud musí někdo vysvětlovat, "tuhle verzi ignoruj, správná je tady", problém není v člověku. Problém je v trase.
+
+### 3. Zkontrolujte tři typy ztráty
+
+Po úklidu nehrozí jen to, že něco zůstalo navíc. Hrozí i to, že se ztratilo něco důležitého. Kontrolujte tři typy ztráty:
+
+- Ztráta rozhodnutí: standard platí, ale není jasné, proč se změnil.
+- Ztráta příkladu: obecné pravidlo zůstalo, ale zmizel praktický vzor použití.
+- Ztráta odpovědnosti: artefakt má nový stav, ale nikdo neví, kdo ho udržuje.
+
+Příklad:
+
+```md
+Nález:
+Archivní verze standardu byla odstraněna celá.
+
+Dopad:
+Tým už nevidí, proč byla zrušena ruční kontrola každého výstupu a nahrazena vzorkováním.
+
+Oprava:
+Nevracet celý archiv. Doplnit do changelogu jednu větu:
+"Kontrola všech výstupů byla nahrazena vzorkováním, protože po třech cyklech nebyly nalezeny kritické odchylky a plná kontrola blokovala kapacitu seniorního člověka."
+```
+
+Tím se obnoví rozhodovací paměť bez návratu starého šumu. To je dobrý výsledek: ne všechno zpět, jen přesně tolik kontextu, kolik systém potřebuje.
+
+### 4. Ověřte privacy-first efekt
+
+Retenční úklid má mít viditelný dopad na datovou stopu. Po prvním cyklu proto projděte malou privacy kontrolu:
+
+- Kolik citlivých příloh zůstalo v aktivní pracovní trase?
+- Jsou příklady anonymizované dost na to, aby neprozrazovaly zákazníka, člověka nebo interní situaci?
+- Zůstávají osobní poznámky tam, kde už stačí agregované poučení?
+- Mají vyplněné pracovní karty jasnou retenci?
+- Jsou přístupy k archivům užší než přístupy k běžným šablonám?
+- Nepřesunul se problém jen z jedné složky do druhé?
+
+Privacy-first výsledek nemusí znamenat nulová data. Znamená, že data mají účel, vlastníka, omezený přístup a plán dalšího života. Pokud po úklidu zůstaly citlivé detaily v aktivním standardu jen proto, že "se to tak zdědilo", úklid ještě není hotový.
+
+### 5. Rozlišujte opravu trasy a opravu obsahu
+
+Nálezy po úklidu spadají do dvou skupin. Některé jsou o trase: špatný odkaz, nejasný index, archiv moc blízko aktivní práci, chybějící štítek aktuální verze. Jiné jsou o obsahu: standard je dlouhý, příklad je zastaralý, checklist neodpovídá nové realitě.
+
+Nemíchejte je do jedné hromady. Trasa se má opravit rychle, protože blokuje používání. Obsahové změny patří do revizního backlogu, pokud nejsou kritické.
+
+```md
+Rychlá oprava trasy:
+- přesměrovat starý odkaz na kanonický standard,
+- přejmenovat archivní složku,
+- doplnit datum platnosti,
+- oddělit vyplněné karty od prázdných šablon.
+
+Obsahová změna do backlogu:
+- zkrátit dlouhý checklist,
+- přepsat příklad podle nové nabídky,
+- sloučit dvě podobné šablony,
+- doplnit chybějící rozhodovací pravidlo.
+```
+
+Tento rozdíl chrání tým před tím, aby se z malé kontroly stal další nekonečný přepis. Rychle odblokovat práci, potom plánovaně zlepšovat obsah.
+
+### 6. Šablona kontroly po prvním cyklu
+
+Použijte krátký záznam. Má zachytit rozhodnutí, ne vytvářet další dokumentační vrstvu.
+
+```md
+Kontrola dopadu retenčního úklidu
+
+Standard nebo oblast:
+Datum úklidu:
+Datum kontroly:
+Kontroloval:
+
+Co se po úklidu zlepšilo:
+
+Kde se lidé pořád ztrácejí:
+
+Co zůstalo zbytečně citlivé:
+
+Co se ztratilo a musí se vrátit jako stručné poučení:
+
+Rychlé opravy trasy:
+- [doplnit]
+
+Obsahové změny do backlogu:
+- [doplnit]
+
+Rozhodnutí:
+[ponechat retenční pravidla / zpřesnit retenci / vrátit část kontextu / udělat další úklidový cyklus]
+
+Další kontrola:
+```
+
+Vyplnění by mělo trvat půl hodiny, ne půl dne. Pokud je kontrola sama těžká, znamená to, že retenční systém je moc složitý. Zjednodušte ho dřív, než začne vyrábět vlastní administrativní dluh.
+
+### Checklist
+
+- Ověřili jste dopad úklidu na reálné pracovní trase?
+- Najde nový člověk aktuální standard bez vysvětlování od týmu?
+- Je kanonický index čistší než před úklidem?
+- Zůstala zachovaná rozhodnutí, která vysvětlují platný postup?
+- Nezmizely praktické příklady, které tým opravdu používá?
+- Snížila se citlivá datová stopa v aktivní pracovní trase?
+- Jsou archivy oddělené přístupem i umístěním od běžných šablon?
+- Má každý nalezený problém jasný typ: trasa, obsah, odpovědnost nebo privacy?
+- Opravili jste rychlé blokery hned?
+- Skončily větší změny v backlogu, ne v chaotickém přepisování během kontroly?
+- Je jasné, kdy proběhne další kontrola?
+- Je výsledek zapsaný stručně, aby se sám nestal dalším artefaktem k úklidu?
+
+Kontrola po prvním retenčním cyklu drží systém při zemi. Ukáže, jestli úklid opravdu pomohl lidem pracovat, nebo jen přesunul chaos do jiné složky. Dobrý standard po ní není delší. Je srozumitelnější, méně rizikový a o něco nudnější na používání. V provozu je to pochvala, ne urážka.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -39718,3 +39871,4 @@ Retenční plán je praktická údržba paměti týmu. Bez něj se standardy mě
 - 2026-05-12: Doplněna Příloha EC o měření používání standardů bez špehování týmu: rozhodovací otázky, agregované signály, scorecard, mini experimenty, retence a privacy-first hranice měření.
 - 2026-05-12: Doplněna Příloha ED o auditu datové stopy týmových standardů: datové karty, úrovně citlivosti, zkracování příkladů, stop pravidla pro šablony a privacy-first checklist.
 - 2026-05-12: Doplněna Příloha EE o retenčním plánu a úklidu artefaktů týmových standardů: účel artefaktů, retenční tabulka, úklidové spouštěče, aktivní pracovní trasa a privacy-first checklist.
+- 2026-05-12: Doplněna Příloha EF o kontrole dopadu retenčního úklidu po prvním cyklu: test pracovní trasy, kontrola ztrát, privacy-first efekt, opravy trasy a šablona kontroly.
