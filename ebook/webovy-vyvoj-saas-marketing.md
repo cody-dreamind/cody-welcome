@@ -43890,8 +43890,267 @@ Workshop nesmí skončit seznamem otevřených debat. Má skončit jedním rozho
 
 Dobré ověření první portfoliové změny je krátké, konkrétní a trochu nekompromisní. Neptá se, jestli změna vypadá rozumně. Ptá se, jestli při práci opravdu pomohla, jestli nezvětšila datovou stopu a jestli je další použití jednodušší než to předchozí.
 
+## Příloha EW: Rozšíření ověřené portfoliové změny do dalších pracovních míst
+
+Ověřená portfoliová změna má po prvním použití jednu výhodu: už není jen dobrý nápad. Má za sebou konkrétní pracovní situaci, pozorování, rozhodnutí a uzavřenou smyčku v artefaktech. To ale ještě neznamená, že ji máte okamžitě rozšířit všude. Právě po prvním úspěchu bývá tým nejvíc náchylný k tomu, že vezme funkční úpravu a udělá z ní plošné pravidlo dřív, než ví, kde opravdu pomáhá.
+
+Rozšíření změny má být řízené. Ne proto, aby vznikla další schvalovací vrstva, ale aby se dobrá oprava nezměnila v nový druh tření. Cílem je přenést ověřenou změnu do dalších pracovních míst tak, aby zůstala srozumitelná, měla vlastníka, nezvětšila datovou stopu a šla po prvním rozšíření znovu zkontrolovat.
+
+Praktický cíl této přílohy: vzít jednu ověřenou změnu a bezpečně rozhodnout, kam patří dál.
+
+### 1. Nejprve pojmenujte typ rozšíření
+
+Ne každá ověřená změna má stejný další krok. Některá patří jen do jednoho artefaktu. Jiná má být vzorem pro další šablony. Další ukazuje, že chybí nové pravidlo v onboardingové trase nebo revizním rytmu.
+
+Použijte čtyři typy rozšíření:
+
+| Typ | Kdy použít | Příklad | Riziko |
+| --- | --- | --- | --- |
+| Lokální rozšíření | Změna pomáhá ve stejném pracovním toku | Stejná otázka se doplní do dvou podobných review karet | Duplicitní formulace bez jednoho zdroje pravdy |
+| Vzor pro šablony | Změna odhalila opakovatelný způsob přemýšlení | Nový blok "co se stane po rozhodnutí" se přidá do více šablon | Mechanické kopírování bez kontextu |
+| Standard role | Změna mění způsob práce konkrétní role | Editor má při každé větší úpravě kontrolovat dopad do indexu | Nové očekávání bez času a vlastnictví |
+| Provozní rytmus | Změna patří do pravidelné kontroly | Kvartální review má ověřit, jestli portfoliové poučení pořád žije | Další meeting bez rozhodnutí |
+
+Pokud nevíte, který typ vybrat, začněte lokálně. Dobrá změna nemusí hned získat status standardu. Často stačí, že opraví jedno místo a teprve opakované použití ukáže, jestli má širší hodnotu.
+
+### 2. Vyberte maximálně tři pracovní místa
+
+Rozšíření nemá začít plošným vyhledáním všech výskytů podobného textu. Začněte třemi místy, kde změna pravděpodobně pomůže nejvíc.
+
+Kandidáti:
+
+- šablona, která se používá často,
+- rozhodovací karta, kde vznikalo stejné tření,
+- onboardingový materiál pro roli, která změnu bude používat,
+- kanonický index, pokud lidé nevěděli, kde artefakt hledat,
+- checklist, který má hlídat dokončení stejného typu práce,
+- revizní agenda, pokud změna vyžaduje pravidelnou kontrolu.
+
+U každého kandidáta napište jednu větu:
+
+```text
+Tuhle změnu sem přidáváme proto, aby člověk při práci dokázal:
+```
+
+Příklad:
+
+```text
+Tuhle změnu přidáváme do onboardingové trasy editora proto, aby nový editor při první větší úpravě věděl, že má zkontrolovat i kanonický index, changelog a navazující šablony.
+```
+
+Pokud takovou větu neumíte napsat konkrétně, místo zatím přeskočte. "Mohlo by se hodit" není důvod pro rozšiřování standardu.
+
+### 3. Přenášejte princip, ne celé odstavce
+
+Nejhorší způsob rozšíření je zkopírovat hotový text na pět míst. Na chvíli to vypadá rychle. Později máte pět podobných formulací, z nichž každá zestárne jinak.
+
+Při přenosu si oddělte:
+
+- princip,
+- pracovní otázku,
+- konkrétní krok,
+- důkaz dokončení,
+- odkaz na zdroj pravdy.
+
+Příklad principu:
+
+```text
+Po změně portfoliového artefaktu musí být jasné, kde je primární verze, kdo ji použije příště a jak se pozná, že změna pomohla.
+```
+
+Přenos do checklistu:
+
+```markdown
+- Je jasné, který artefakt je po změně zdroj pravdy?
+- Ví další člověk, kde změnu najde?
+- Má změna jednověté rozhodnutí v changelogu?
+```
+
+Přenos do onboardingové trasy:
+
+```markdown
+Při první větší úpravě standardu zkontroluj tři místa: primární artefakt, kanonický index a changelog. Pokud změna ovlivňuje šablonu používanou zákaznicky nebo obchodně, přidej i krátkou poznámku pro vlastníka dané trasy.
+```
+
+Přenos do review agendy:
+
+```markdown
+Vyberte jednu změnu z posledního měsíce a ověřte, zda je dohledatelná, použitelná a nezvětšila datovou stopu.
+```
+
+Princip je stejný. Text se přizpůsobí místu, kde bude člověk opravdu pracovat.
+
+### 4. Vytvořte malý rozšiřovací balíček
+
+Rozšíření změny má mít vlastní balíček, aby bylo jasné, co se upravilo a proč. Stačí krátký záznam.
+
+```markdown
+# Rozšiřovací balíček portfoliové změny
+
+Původní ověřená změna:
+Proč ji rozšiřujeme:
+Typ rozšíření:
+Pracovní místa:
+Co se mění:
+Co se nemění:
+Vlastník:
+První kontrola:
+Privacy-first poznámka:
+```
+
+Vyplněný příklad:
+
+```markdown
+Původní ověřená změna:
+Do mapy dopadu byla doplněna otázka, jak se změna projeví v kanonickém indexu.
+
+Proč ji rozšiřujeme:
+Stejné tření se objevuje při úpravách šablon, onboardingových tras a revizních agend.
+
+Typ rozšíření:
+Vzor pro šablony + standard role editora.
+
+Pracovní místa:
+Checklist změny artefaktu, onboarding editorů, měsíční review portfolia.
+
+Co se mění:
+Přidává se kontrola primárního artefaktu, indexu a changelogu.
+
+Co se nemění:
+Nevzniká nový samostatný report ani nová evidence použití po lidech.
+
+Vlastník:
+Vlastník kanonického indexu.
+
+První kontrola:
+Po první další větší úpravě standardu.
+
+Privacy-first poznámka:
+Kontrola používá pracovní důkazy bez osobních hodnocení jednotlivců.
+```
+
+Rozšiřovací balíček chrání rozsah. Když se při úpravě objeví další nápady, necpěte je dovnitř. Dejte je do parkoviště nebo backlogu.
+
+### 5. Privacy-first kontrola rozšíření
+
+Rozšiřování dobrých změn často nenápadně zvětšuje datovou stopu. Jeden checklist chce víc důkazů. Jedna agenda chce víc pozorování. Jedna role chce víc reportingových polí. Po třech iteracích už tým měří lidi místo systému.
+
+Před rozšířením se ptejte:
+
+- Přidáváme nový záznam o konkrétním člověku?
+- Potřebujeme důkaz, nebo stačí rozhodnutí?
+- Lze použít agregovaný signál místo individuálního sledování?
+- Přidáváme screenshoty, exporty nebo zákaznické příklady bez jasného účelu?
+- Má nový artefakt retenci, vlastníka a místo uložení?
+- Dá se změna ověřit pozorováním práce bez invazivního měření?
+
+Silnější formulace:
+
+```text
+Změna se ověří jednou měsíčně na dvou reálných úpravách standardů. Kontroluje se dohledatelnost artefaktu, kvalita rozhodnutí a dopad do indexu. Nevyhodnocuje se výkon jednotlivých lidí.
+```
+
+Slabší formulace:
+
+```text
+Budeme sledovat, kdo používá nový postup a jak často.
+```
+
+Codyho komentář: pokud kvůli každému zlepšení přidáte další sledování lidí, tým se nenaučí lépe pracovat. Naučí se lépe vypadat ve sledování.
+
+### 6. Ověřte první rozšířené použití
+
+Rozšíření je hotové až po prvním použití v novém místě. Nestačí upravit šablonu. Někdo ji musí použít v reálné práci a tým musí vědět, jestli změna pomohla.
+
+Kontrolní otázky po prvním rozšířeném použití:
+
+- Našel člověk nové pravidlo ve správném okamžiku?
+- Byla formulace kratší než vysvětlování, které nahrazuje?
+- Pomohla změna udělat rozhodnutí, nebo jen přidala další otázku?
+- Vznikl lepší výstup než před změnou?
+- Musel někdo neplánovaně pomáhat?
+- Zůstala datová stopa stejná nebo menší?
+- Je jasné, jestli změnu ponechat, upravit, nerozšiřovat dál nebo vrátit?
+
+Šablona rozhodnutí:
+
+```markdown
+# První rozšířené použití
+
+Kde se změna použila:
+Kdo byl uživatel role:
+Co šlo lépe:
+Co drhlo:
+Co se nesmí rozšiřovat dál:
+Privacy-first dopad:
+Rozhodnutí:
+Další kontrola:
+```
+
+Možná rozhodnutí:
+
+- `Ponechat`: změna pomohla a nepotřebuje úpravu.
+- `Upravit`: princip je správný, ale text nebo umístění drhne.
+- `Zastavit rozšiřování`: změna funguje lokálně, ale nemá být širší standard.
+- `Vrátit`: změna přidává víc tření než hodnoty.
+- `Otevřít nový problém`: první použití ukázalo větší téma mimo aktuální rozsah.
+
+Rozhodnutí musí být jednověté. Pokud potřebuje půl stránky obhajoby, tým pravděpodobně nemá dost důkazů.
+
+### 7. Aktualizujte jen kanonická místa
+
+Po úspěšném rozšíření upravte jen místa, která skutečně drží systém pohromadě:
+
+- primární artefakt,
+- kanonický index,
+- onboardingovou trasu nebo checklist, kde se změna používá,
+- changelog,
+- případně parkoviště pro nápady mimo rozsah.
+
+Nevytvářejte novou souhrnnou stránku jen proto, že změna proběhla dobře. Pokud už existuje portfoliový index, použijte ho. Pokud existuje changelog, zapište změnu tam. Pokud existuje onboardingová trasa, doplňte ji tam, kde člověk opravdu pracuje.
+
+Minimální záznam:
+
+```markdown
+2026-05-12:
+- Ověřená změna z mapy dopadu byla rozšířena do checklistu změny artefaktu a onboardingové trasy editora.
+- První použití potvrdilo, že kontrola primárního artefaktu, indexu a changelogu snižuje dohledávání.
+- Další rozšiřování se pozastavuje do měsíčního review.
+```
+
+Tohle je dost. Dobrá dokumentace po sobě nezanechá hromadu slavnostních poznámek. Zanechá jasnou stopu, podle které další člověk pochopí, co se změnilo a proč.
+
+### Mini workshop: 35 minut na rozšíření jedné ověřené změny
+
+1. Pět minut: připomeňte si původní změnu a rozhodnutí po prvním použití.
+2. Pět minut: určete typ rozšíření.
+3. Pět minut: vyberte maximálně tři pracovní místa.
+4. Pět minut: napište pro každé místo větu "přidáváme to proto, aby člověk dokázal".
+5. Pět minut: proveďte privacy-first kontrolu rozšíření.
+6. Pět minut: sestavte rozšiřovací balíček.
+7. Pět minut: určete první reálné použití a datum kontroly.
+
+Workshop nesmí skončit větou "rozšíříme to všude". Má skončit konkrétním balíčkem, omezeným rozsahem a prvním ověřením.
+
+### Checklist
+
+- Je jasné, jaký typ rozšíření děláte?
+- Vybrali jste maximálně tři pracovní místa?
+- Má každé místo vlastní důvod ve větě "aby člověk dokázal"?
+- Přenášíte princip, ne slepě celý odstavec?
+- Existuje rozšiřovací balíček s vlastníkem a první kontrolou?
+- Víte, co se při rozšíření nemění?
+- Nevzniká nové sledování lidí bez účelu?
+- Má nový nebo upravený artefakt retenci, vlastníka a zdroj pravdy?
+- Ověříte první použití v reálné práci?
+- Umíte rozhodnout ponechat, upravit, zastavit rozšiřování, vrátit nebo otevřít nový problém?
+- Aktualizujete jen kanonická místa, ne další paralelní evidenci?
+
+Dobré rozšíření změny je klidné. Vezme to, co se osvědčilo, najde pár míst s největším dopadem a po prvním použití se znovu podívá na realitu. Takhle vzniká systém, který se učí, ale nepřibírá zbytečnou váhu.
+
 ## Pracovní log
 
+- 2026-05-12: Doplněna Příloha EW o rozšíření ověřené portfoliové změny do dalších pracovních míst: typy rozšíření, výběr tří míst, přenos principu, rozšiřovací balíček, privacy-first kontrola a ověření prvního použití.
 - 2026-05-12: Doplněna Příloha EV o ověření hotové portfoliové změny po prvním použití: reálná ověřovací situace, pozorování práce, třídění nálezů, privacy-first kontrola, jednověté rozhodnutí a uzavření smyčky v artefaktech.
 - 2026-05-12: Doplněna Příloha EU o převodu čtvrtletního auditu portfoliových poučení do jedné hotové změny: změnová věta, primární artefakt, rušení duplicit, pracovní jazyk, privacy-first kontrola, změnový balíček a první ověření.
 - 2026-05-12: Doplněna Příloha ET o čtvrtletním auditu portfoliových poučení: inventura, reálné použití, duplicity, scorecard tření, privacy-first kontrola, jedna oprava a rozhodnutí o stavu portfolia.
