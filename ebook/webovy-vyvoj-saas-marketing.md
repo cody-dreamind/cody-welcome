@@ -42962,8 +42962,309 @@ Workshop má skončit změnou v existujícím artefaktu. Pokud končí založen�
 
 Portfolio standardů se zlepšuje tehdy, když si pamatuje vzory, ne když skladuje všechny detaily. Jedno dobré poučení má snížit budoucí práci. Pokud ji jen přesune do dalšího dokumentu, není to poučení, ale nový dluh.
 
+## Příloha ET: Čtvrtletní audit portfoliových poučení
+
+Když začnete převádět poučení z ukončených standardů do portfolia, systém se zlepší. Ale jen chvíli. Po několika měsících hrozí, že se z dobrého návyku stane nová hromada pravidel. Každé poučení vypadalo v okamžiku vzniku rozumně. Dohromady ale mohou vytvořit další vrstvu, kterou nikdo nechce číst, nikdo neumí vlastnit a všichni ji obcházejí.
+
+Tato příloha navazuje na Přílohu ES. Tam jsme řešili, jak z jedné zkušenosti udělat lepší pravidlo. Tady řešíme opačnou stranu stejné disciplíny: jak po čtvrtletí poznat, která poučení opravdu pomohla, která se mají zkrátit, která patří do šablony a která je lepší archivovat.
+
+Codyho komentář: portfolio poučení je jako zahrada. Když jen sázíte a nikdy neprořezáváte, za chvíli se ke dveřím nedostane nikdo kromě člověka s mačetou. A ten v týmu většinou nebývá ve sprintu.
+
+### 1. Začněte inventurou nových poučení
+
+Nejdřív sepište všechna portfoliová poučení přidaná za poslední čtvrtletí. Neřešte zatím kvalitu. Jen dostaňte na jedno místo, co přibylo, kde to žije a proč to vzniklo.
+
+Šablona inventury:
+
+```markdown
+# Inventura portfoliových poučení
+
+Období:
+Poučení:
+Vzniklo z:
+Změněný artefakt:
+Kdo ho používá:
+Kdy se použilo naposledy:
+Viditelný přínos:
+Viditelné tření:
+Stav:
+```
+
+Stavy držte jednoduché:
+
+- ponechat,
+- zkrátit,
+- sloučit,
+- přesunout,
+- archivovat,
+- ověřit v dalším cyklu.
+
+Praktický příklad:
+
+```markdown
+Poučení:
+Při archivaci standardu kontrolovat i automatické připomínky.
+
+Změněný artefakt:
+Mapa dopadu ukončení standardu.
+
+Kdy se použilo naposledy:
+Při sloučení support šablony.
+
+Viditelný přínos:
+Zachytila se stará měsíční připomínka ještě před archivací.
+
+Stav:
+Ponechat.
+```
+
+Inventura nemá být trestní řízení. Má jen ukázat, jestli poučení žijí v práci, nebo jen v dokumentu.
+
+### 2. Ověřte použití v reálných situacích
+
+Poučení je platné až tehdy, když pomohlo v konkrétní pracovní situaci. Pokud se za čtvrtletí nepoužilo, nemusí být špatné. Možná jen čeká na vzácný scénář. Ale pokud se nepoužívá často používané pravidlo, je potřeba zjistit proč.
+
+Pro každé důležitější poučení si položte otázky:
+
+- Kdo měl pravidlo použít?
+- V jaké situaci se mělo objevit?
+- Našel ho člověk bez vysvětlování?
+- Zrychlilo rozhodnutí?
+- Zachytilo riziko dřív než starý systém?
+- Nevytvořilo další ruční práci bez jasné hodnoty?
+
+Příklad vyhodnocení:
+
+```markdown
+Poučení:
+Při změně standardu ověřit onboardingovou trasu.
+
+Reálné použití:
+Nový člen týmu hledal postup pro první měsíční review.
+
+Výsledek:
+Našel správný zdroj pravdy, ale narazil na dva podobné názvy.
+
+Rozhodnutí:
+Poučení ponechat, ale přejmenovat položku v indexu a sloučit duplicitní popis.
+```
+
+Tady není problém v pravidle. Problém je v navigaci. Audit má rozlišit, co opravit.
+
+### 3. Hledejte duplicitní pravidla
+
+Portfolio poučení se často nafukuje tím, že stejný princip dostane tři různé formulace. Jednou jako otázka v checklistu, podruhé jako poznámka v šabloně, potřetí jako položka v indexu. Každá verze sama o sobě dává smysl. Dohromady ale tvoří šum.
+
+Hledejte hlavně duplicity v těchto oblastech:
+
+- kontrola odkazů,
+- privacy-first úklid příkladů,
+- vlastnictví standardu,
+- kalendářové a automatizační připomínky,
+- onboardingové trasy,
+- changelog změn,
+- rozhodnutí ponechat, sloučit nebo archivovat.
+
+Rozhodovací pravidlo:
+
+```text
+Pokud dvě pravidla vedou ke stejnému rozhodnutí, slučte je.
+Pokud jedno pravidlo vysvětluje a druhé vede akci, nechte akční pravidlo.
+Pokud pravidlo patří do checklistu, nedržte ho znovu jako samostatný odstavec.
+Pokud pravidlo nikdo nedokáže najít, problém není délka, ale umístění.
+```
+
+Příklad sloučení:
+
+```markdown
+Původní pravidla:
+1. Při archivaci ověřit staré odkazy.
+2. Při sloučení ověřit odkazy v indexu.
+3. Po měsíci zkontrolovat odkazy v aktivních šablonách.
+
+Nové pravidlo:
+Při změně stavu standardu ověřit odkazy v kanonickém indexu, aktivních šablonách a pracovních trasách.
+```
+
+Jedno širší pravidlo je tady lepší než tři podobná. Ne proto, že je elegantnější, ale protože má menší šanci, že se některá část zapomene.
+
+### 4. Změřte tření, ne poslušnost
+
+Cílem auditu není zjistit, jestli lidé pravidla "dodržují". Cílem je zjistit, jestli pravidla pomáhají dělat lepší práci s menším třením. Měření poslušnosti vytváří divadlo. Měření tření vytváří lepší systém.
+
+Použijte jednoduchou scorecard:
+
+```markdown
+# Scorecard portfoliového poučení
+
+Poučení:
+Najitelnost 1-5:
+Srozumitelnost 1-5:
+Akčnost 1-5:
+Snížení rizika 1-5:
+Snížení ruční práce 1-5:
+Privacy-first přínos 1-5:
+Poznámka:
+Rozhodnutí:
+```
+
+Jak číst výsledek:
+
+- Nízká najitelnost znamená problém v indexu nebo názvu.
+- Nízká srozumitelnost znamená moc abstraktní formulaci.
+- Nízká akčnost znamená, že pravidlo neříká, co udělat.
+- Nízké snížení rizika znamená, že pravidlo možná jen popisuje samozřejmost.
+- Nízké snížení ruční práce znamená, že pravidlo přidává kontrolu bez hodnoty.
+
+Příklad:
+
+```markdown
+Poučení:
+Při práci s příklady ověřit citlivé údaje.
+
+Najitelnost:
+4
+
+Akčnost:
+2
+
+Poznámka:
+Pravidlo je správné, ale neříká, co znamená "citlivé" u zákaznických screenshotů.
+
+Rozhodnutí:
+Přidat tři konkrétní příklady a jeden syntetický vzor. Nevytvářet nový dokument.
+```
+
+Dobrá scorecard nevyhrává vysokými čísly. Vyhrává tím, že vede k malé opravě.
+
+### 5. Udělejte privacy-first audit samotných poučení
+
+Poučení mají chránit data, ale i ony samy mohou nést zbytečnou datovou stopu. Čtvrtletní audit je dobrý okamžik zjistit, jestli v portfoliu nezůstaly konkrétní interní příklady, které už nejsou potřeba.
+
+Zkontrolujte:
+
+- jména zákazníků,
+- e-maily,
+- názvy ticketů,
+- screenshoty,
+- konkrétní chyby jednotlivců,
+- interní komentáře z retrospektiv,
+- obchodně citlivé situace,
+- odkazy na uzavřené nebo omezené dokumenty.
+
+Převod na bezpečnější tvar:
+
+```markdown
+Původní zápis:
+Při projektu pro konkrétního zákazníka jsme zapomněli smazat export ze starého auditu.
+
+Lepší zápis:
+Při ukončení standardu zkontrolovat dočasné exporty vzniklé během auditu. Export musí mít vlastníka, účel a termín smazání.
+```
+
+Výsledné pravidlo je lepší, protože je použitelné i bez citlivého kontextu. A méně se tváří jako archiv cizích chyb, což je bonus pro týmovou důvěru.
+
+### 6. Vyberte jednu portfoliovou opravu
+
+Čtvrtletní audit nesmí skončit seznamem dvaceti doporučení. Vyberte jednu opravu, která zlepší nejvíc reálné práce nebo odstraní největší riziko.
+
+Kritéria výběru:
+
+- pravidlo se používá často,
+- pravidlo ovlivňuje citlivá data,
+- pravidlo blokuje onboarding nového člověka,
+- pravidlo se duplikuje ve více artefaktech,
+- pravidlo vytváří zbytečnou ruční práci,
+- oprava se dá dokončit během jednoho krátkého cyklu.
+
+Šablona rozhodnutí:
+
+```markdown
+# Jedna portfoliová oprava
+
+Vybrané poučení:
+Problém:
+Proč právě teď:
+Konkrétní změna:
+Co se tím ruší nebo slučuje:
+Kdo ověří první použití:
+Kdy:
+```
+
+Příklad:
+
+```markdown
+Vybrané poučení:
+Kontrola privacy-first příkladů ve školení.
+
+Problém:
+Pravidlo je správné, ale rozdělené mezi dvě šablony a jednu poznámku v indexu.
+
+Konkrétní změna:
+Sloučit ho do jedné otázky v mapě dopadu a odstranit duplicitní poznámku z indexu.
+
+Kdo ověří první použití:
+Vlastník onboardingové trasy při dalším update školení.
+```
+
+Jedna hotová oprava má větší hodnotu než rozsáhlý audit, který nikdo nedotáhne.
+
+### 7. Uzavřete audit rozhodnutím
+
+Na konci vyberte stav portfolia:
+
+- Stabilní: poučení pomáhají a stačí drobná údržba.
+- Užitečné, ale přerostlé: je potřeba slučovat a zkracovat.
+- Nepřehledné: nejdřív opravit index a názvy.
+- Rizikové: řešit citlivé příklady, retenci nebo přístupy.
+- Neověřené: další čtvrtletí sbírat reálné použití.
+
+Krátký zápis:
+
+```markdown
+# Čtvrtletní rozhodnutí portfolia poučení
+
+Období:
+Stav portfolia:
+Nejužitečnější poučení:
+Poučení k odstranění nebo sloučení:
+Privacy-first nález:
+Jedna hotová oprava:
+Kdy ověřit dopad:
+```
+
+Zápis má být krátký a použitelný. Pokud potřebuje dlouhý úvod, pravděpodobně audit nevedl k rozhodnutí.
+
+### Mini workshop: 45 minut na čtvrtletní audit
+
+1. Deset minut: sepište poučení přidaná za poslední čtvrtletí.
+2. Deset minut: vyberte tři nejpoužívanější nebo nejrizikovější poučení.
+3. Deset minut: projděte scorecard tření.
+4. Pět minut: zkontrolujte citlivou datovou stopu poučení.
+5. Pět minut: vyberte jednu portfoliovou opravu.
+6. Pět minut: zapište rozhodnutí a termín ověření.
+
+Workshop má skončit změnou v jednom artefaktu. Ne plánem na velké "až bude čas". Ten čas se obvykle maskuje jako zaneprázdněný kalendář a nikdy nepřijde.
+
+### Checklist
+
+- Máte seznam poučení přidaných za poslední čtvrtletí?
+- U každého víte, kde žije a jaký artefakt změnilo?
+- Ověřili jste alespoň tři reálná použití?
+- Našli jste duplicitní pravidla nebo podobné formulace?
+- Měřili jste tření, ne poslušnost?
+- Má každé důležité poučení jasnou akci?
+- Neobsahuje portfolio zbytečné zákaznické, osobní nebo interně citlivé detaily?
+- Jsou původní důkazy buď smazané, anonymizované, nebo mají jasnou retenci?
+- Vybrali jste jednu opravu místo seznamu přání?
+- Je jasné, co se po opravě ruší, slučuje nebo zkracuje?
+- Má audit krátké rozhodnutí a termín ověření dopadu?
+
+Čtvrtletní audit portfoliových poučení drží systém živý. Ne tím, že přidává další pravidla, ale tím, že se ptá, která pravidla si zasloužila zůstat. To je rozdíl mezi pamětí týmu a skladem poznámek.
+
 ## Pracovní log
 
+- 2026-05-12: Doplněna Příloha ET o čtvrtletním auditu portfoliových poučení: inventura, reálné použití, duplicity, scorecard tření, privacy-first kontrola, jedna oprava a rozhodnutí o stavu portfolia.
 - 2026-05-12: Doplněna Příloha ES o převodu poučení z ukončeného standardu do portfolia: třídění lokálních oprav a opakovatelných vzorů, karta poučení, jeden zdroj pravdy, stop pravidla, privacy-first zápis a changelog.
 - 2026-05-12: Doplněna Příloha ER o kontrole ukončeného nebo sloučeného standardu po prvním měsíci: reálné průchody, zbytky starého systému, nový zdroj pravdy, privacy-first dočištění, rozhodnutí dalšího stavu a checklist.
 - 2026-05-12: Doplněna Příloha EQ o ukončení nebo sloučení standardu po roční inventuře: typ změny, mapa dopadu, archivní karta, nový zdroj pravdy, odkazy, privacy-first úklid a ověření při prvním použití.
