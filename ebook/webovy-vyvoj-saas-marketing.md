@@ -44403,8 +44403,235 @@ Pokud workshop potřebuje hodinu a půl, kontrolujete moc věcí najednou. Zmen�
 
 Dobrá kontrola po prvním cyklu není audit pro audit. Je to způsob, jak zabránit tomu, aby se z dobré malé změny stal další kus procesního nábytku. Změna má zůstat jen tehdy, když reálně pomáhá práci, snižuje riziko a drží datovou stopu pod kontrolou.
 
+## Příloha EY: Převod ověřeného rozšíření do běžného provozního rytmu
+
+Rozšířená portfoliová změna prošla prvním cyklem, kontrola neukázala zásadní stop signál a tým ví, že změna pomáhá. To je dobrý moment, ale ještě ne konec práce. Právě tady často vzniká nenápadný problém: ověřená změna zůstane závislá na člověku, který ji protlačil, připomíná ji na schůzkách a ručně kontroluje, jestli ji ostatní používají.
+
+Převod do běžného provozního rytmu znamená něco jiného. Změna se má stát součástí normální práce, ne dalším speciálním projektem. Má mít jasné místo, lehký revizní okamžik, odpovědnost a stop pravidla. Pokud potřebuje neustálé vysvětlování, ještě není provozní standard. Je to jen dobrý nápad s vysokými nároky na paměť týmu.
+
+Cílem této přílohy je vzít jednu ověřenou rozšířenou změnu a uložit ji do systému tak, aby:
+
+- nezmizela po dvou týdnech,
+- nevytvořila další zbytečnou evidenci,
+- měla přirozený kontrolní rytmus,
+- šla snadno předat novému člověku,
+- držela privacy-first hranice i při rutinním používání.
+
+### 1. Rozhodněte, zda změna patří do rytmu
+
+Ne každá ověřená změna má být trvalý rytmus. Některé změny jsou jednorázové opravy. Některé patří jen do onboardingového materiálu. Některé mají zůstat jako doporučení, ne jako povinný proces.
+
+Před převodem si odpovězte:
+
+- Bude se tato situace opakovat alespoň několikrát za rok?
+- Hrozí bez změny opakované tření, ztráta kontextu nebo datové riziko?
+- Pomáhá změna více lidem, nebo jen jednomu konkrétnímu vlastníkovi?
+- Dá se změna vysvětlit krátkým pravidlem?
+- Má kontrola změny jasný okamžik v existující práci?
+
+Pokud odpověď na většinu otázek zní ne, nedělejte z toho rytmus. Zapište změnu do poučení nebo poznámky k artefaktu a nechte ji být. Provozní rytmus je už závazek.
+
+Příklad:
+
+```markdown
+Změna: Každá nová šablona v portfoliu má jednověté rozhodnutí, proč vznikla.
+Opakování: při každé nové nebo větší upravené šabloně.
+Riziko bez změny: portfolio plné šablon bez jasného důvodu.
+Kontrolní okamžik: měsíční triage šablon.
+Rozhodnutí: převést do běžného rytmu.
+```
+
+### 2. Najděte existující rytmus, ne nový kalendář
+
+Nejlevnější provozní rytmus je ten, který už existuje. Pokud tým má měsíční review, týdenní triage, release checklist nebo kvartální audit, změna se má připojit tam. Nová schůzka je poslední možnost, ne první nápad.
+
+Hledejte přirozené háčky:
+
+- když vzniká nový artefakt,
+- když se uzavírá sprint nebo měsíční cyklus,
+- když se předává práce mezi rolemi,
+- když se aktualizuje kanonický index,
+- když se dělá privacy-first úklid dat,
+- když se mění veřejný web, nabídka nebo playbook.
+
+Dobrá formulace:
+
+```markdown
+Při měsíční triage portfolia zkontrolujeme u nových položek pouze dvě věci:
+1. mají jednověté rozhodnutí,
+2. mají jasný zdroj pravdy.
+```
+
+Špatná formulace:
+
+```markdown
+Každý měsíc vytvoříme nový report o kvalitě všech rozhodnutí napříč portfoliem.
+```
+
+Ten druhý zápis zní důkladně, ale prakticky zakládá další práci. A další práce se často tváří jako kvalita, dokud někomu nesní půl dne.
+
+### 3. Zkraťte změnu na provozní pravidlo
+
+Změna, která měla v pilotu pět odstavců vysvětlení, musí v provozu zhubnout. Rutinní pravidlo má být krátké, konkrétní a použitelné bez historického příběhu.
+
+Převod může vypadat takto:
+
+```markdown
+Pilotní poznatek:
+Lidé při rozšiřování šablon kopírovali celé bloky textu a nevěděli, co je původní princip. Vznikaly duplicity a rozdílné verze stejného pravidla.
+
+Provozní pravidlo:
+Při rozšíření šablony přenášej princip, ne odstavec. Nové místo musí mít vlastní krátké znění a odkaz na kanonický zdroj.
+```
+
+Pravidlo má odpovědět na tři otázky:
+
+- Kdy ho použít?
+- Co přesně udělat?
+- Kde je zdroj pravdy?
+
+Pokud potřebuje čtyři výjimky, tři definice a samostatnou stránku FAQ, ještě není zralé pro běžný provoz. Nejdřív ho zjednodušte.
+
+Codyho komentář: proces, který nejde vysvětlit jednou pracovní větou, často není hluboký. Často je jen nedovařený. Ano, někdy je realita složitá. Ale i složitá realita si zaslouží krátké vstupní dveře.
+
+### 4. Přiřaďte vlastníka rytmu, ne policistu
+
+Vlastník provozního rytmu nemá hlídat lidi. Má hlídat systém. Jeho práce není ptát se "kdo to zase nevyplnil", ale sledovat, jestli pravidlo zůstává použitelné, krátké a napojené na reálnou práci.
+
+Vlastník má tři povinnosti:
+
+- jednou v daném rytmu zkontrolovat, zda se pravidlo použilo tam, kde mělo,
+- zachytit tření nebo výjimky,
+- navrhnout jednu úpravu, pokud pravidlo přestává pomáhat.
+
+Nemá přidávat další formuláře jen proto, aby měl důkaz. Důkazem může být už existující artefakt: upravený index, hotová karta, změněná šablona, uzavřený checklist nebo krátký záznam v changelogu.
+
+Praktický zápis vlastnictví:
+
+```markdown
+Rytmus: měsíční triage portfolia šablon
+Pravidlo: nové nebo rozšířené šablony mají jednověté rozhodnutí a zdroj pravdy
+Vlastník rytmu: editor portfolia
+Kontrola: první pondělí v měsíci při triage
+Důkaz: aktualizovaný kanonický index a krátký changelog
+Stop pravidlo: pokud kontrola trvá déle než 15 minut, rozsah je moc velký
+```
+
+### 5. Udržte privacy-first minimum v rutinním provozu
+
+Rutinní rytmus je nebezpečný v jedné věci: postupně normalizuje sběr dat, která nikdo nepřezkoumává. Na začátku změny tým opatrně řeší, co zapisuje. Po pár měsících se z toho může stát tabulka plná jmen, detailů zákaznických situací, interních chyb a historických poznámek.
+
+Proto má každé převedení do rytmu obsahovat malou privacy-first brzdu:
+
+- Jaká data pro kontrolu opravdu potřebujeme?
+- Můžeme používat agregovaný signál místo detailního záznamu?
+- Musíme zapisovat jména lidí, zákazníků nebo konkrétní incidenty?
+- Jak dlouho má kontrolní záznam zůstat uložený?
+- Je zdroj pravdy v evropsky provozovaném a kontrolovaném systému?
+- Kdo má k rytmu a důkazům přístup?
+
+Minimalistický kontrolní záznam:
+
+```markdown
+2026-05:
+- Zkontrolováno 6 nových nebo upravených šablon.
+- 5 mělo jednověté rozhodnutí a zdroj pravdy.
+- 1 vrácena k úpravě kvůli duplicitnímu zdroji.
+- Nebyly ukládány zákaznické detaily ani osobní hodnocení lidí.
+```
+
+To stačí. Není potřeba zapisovat, kdo přesně udělal chybu, pokud cílem není řešit výkon člověka, ale kvalitu systému.
+
+### 6. Nastavte revizi životnosti
+
+Provozní rytmus nesmí být věčný jen proto, že kdysi dával smysl. Každý rytmus má mít okamžik, kdy se ptáte, zda ještě pomáhá.
+
+Praktické revizní otázky:
+
+- Použili jsme pravidlo v posledních dvou nebo třech cyklech?
+- Zkrátilo rozhodování, nebo jen přidalo kontrolu?
+- Vznikla díky němu lepší kvalita výstupů?
+- Nezdvojilo práci s jiným rytmem?
+- Nepřibyla datová stopa, kterou už nepotřebujeme?
+- Umí nový člověk pravidlo pochopit bez výkladu autora?
+
+Stavy po revizi:
+
+- `Ponechat`: pravidlo pomáhá a nezatěžuje.
+- `Zjednodušit`: smysl platí, ale zápis nebo kontrola jsou moc těžké.
+- `Sloučit`: pravidlo se překrývá s jiným rytmem.
+- `Pozastavit`: situace se teď neopakuje.
+- `Zrušit`: pravidlo už nemá hodnotu nebo vytváří víc tření než užitku.
+
+Zrušení pravidla není selhání. Je to údržba. Systém, který neumí mazat, časem začne připomínat půdu plnou krabic bez štítků. A tam nechce bydlet žádný rozumný tým.
+
+### 7. Uzavřete převod jednou kartou
+
+Na konci převodu nevyrábějte dokument o převodu. Stačí jedna provozní karta v kanonickém místě.
+
+Šablona:
+
+```markdown
+Název rytmu:
+Jaké pravidlo drží:
+Kdy se spouští:
+Kde je zdroj pravdy:
+Kdo vlastní rytmus:
+Jaký je minimální důkaz:
+Jaká data se nesbírají:
+Kdy proběhne revize životnosti:
+Stop pravidlo:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název rytmu: Měsíční triage portfolia šablon
+Jaké pravidlo drží: Nové a rozšířené šablony mají jednověté rozhodnutí a zdroj pravdy.
+Kdy se spouští: První pondělí v měsíci při kontrole portfolia.
+Kde je zdroj pravdy: Kanonický index šablon.
+Kdo vlastní rytmus: Editor portfolia.
+Jaký je minimální důkaz: Aktualizovaný index a jeden řádek v changelogu.
+Jaká data se nesbírají: Osobní hodnocení autorů, zákaznické detaily, kopie pracovních poznámek.
+Kdy proběhne revize životnosti: Po třech měsíčních cyklech.
+Stop pravidlo: Pokud triage vyžaduje samostatný report, rytmus se zjednoduší nebo sloučí.
+```
+
+Taková karta má být krátká. Když se nevejde na jednu obrazovku, už pravděpodobně vysvětluje víc historie než provozu.
+
+### Mini workshop: 35 minut na převod do provozního rytmu
+
+1. Pět minut: připomeňte ověřené rozšíření a jeho původní slib.
+2. Pět minut: rozhodněte, zda se situace bude opakovat a zaslouží rytmus.
+3. Pět minut: najděte existující pracovní rytmus, ke kterému změnu připojit.
+4. Pět minut: zkraťte změnu na jedno provozní pravidlo.
+5. Pět minut: určete vlastníka, minimální důkaz a stop pravidlo.
+6. Pět minut: proveďte privacy-first kontrolu rutinní datové stopy.
+7. Pět minut: zapište provozní kartu a termín revize životnosti.
+
+Když workshop skončí bez provozní karty, nebylo hotovo. Když skončí s novým dlouhým dokumentem, bylo toho moc.
+
+### Checklist
+
+- Je jasné, že změna má opakované použití?
+- Nepřevádíte jednorázové poučení do trvalého procesu?
+- Připojujete změnu k existujícímu rytmu místo nové schůzky?
+- Dá se pravidlo vysvětlit jednou pracovní větou?
+- Má pravidlo jasný zdroj pravdy?
+- Je vlastník odpovědný za kvalitu systému, ne za hlídání lidí?
+- Je minimální důkaz už součástí existující práce?
+- Má rytmus stop pravidlo pro přílišnou administrativu?
+- Sbíráte jen data potřebná ke kontrole pravidla?
+- Nezapisujete osobní hodnocení, zákaznické detaily ani zbytečné historické poznámky?
+- Je jasně dané, kdy se ověří životnost rytmu?
+- Existují stavy ponechat, zjednodušit, sloučit, pozastavit nebo zrušit?
+- Je převod uzavřený jednou provozní kartou v kanonickém místě?
+
+Ověřené rozšíření má skutečnou hodnotu až tehdy, když funguje bez svého autora. Převod do provozního rytmu není slavnostní povýšení pravidla. Je to tichá zkouška, jestli se změna vejde do běžné práce, nezvětší systém a pořád chrání data.
+
 ## Pracovní log
 
+- 2026-05-12: Doplněna Příloha EY o převodu ověřeného rozšíření do běžného provozního rytmu: rozhodnutí, zda změna rytmus zaslouží, napojení na existující pracovní cyklus, zkrácení na provozní pravidlo, vlastnictví, privacy-first minimum, revize životnosti a provozní karta.
 - 2026-05-12: Doplněna Příloha EX o kontrole rozšířené portfoliové změny po prvním cyklu: původní slib, reálná pracovní trasa, třídění nálezů, redukce zbytečné evidence, privacy-first kontrola, jednověté rozhodnutí a uzavření smyčky v artefaktech.
 - 2026-05-12: Doplněna Příloha EW o rozšíření ověřené portfoliové změny do dalších pracovních míst: typy rozšíření, výběr tří míst, přenos principu, rozšiřovací balíček, privacy-first kontrola a ověření prvního použití.
 - 2026-05-12: Doplněna Příloha EV o ověření hotové portfoliové změny po prvním použití: reálná ověřovací situace, pozorování práce, třídění nálezů, privacy-first kontrola, jednověté rozhodnutí a uzavření smyčky v artefaktech.
