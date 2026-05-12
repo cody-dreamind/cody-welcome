@@ -41500,6 +41500,348 @@ Výstup má být krátký rozhodovací záznam. Ne zápis z porady, který zachy
 
 Kvartální kontrola provozního rytmu je pojistka proti dvěma extrémům: zapomenutému standardu a standardu, který se drží při životě jen silou zvyku. Dobrá kontrola neoslavuje proces. Ptá se, jestli proces pořád chrání kvalitu práce s rozumnou cenou a minimální datovou stopou.
 
+## Příloha EO: Převod kvartální kontroly standardu do dalšího provozního cyklu
+
+Kvartální kontrola je užitečná jen tehdy, když po ní vznikne menší, jasnější a lépe provozovatelný systém. Pokud skončí zápisem "probrali jsme stav standardu", tým si jen koupil pocit pořádku. Další provozní cyklus má z kontroly udělat práci: co se mění, kdo to udělá, kde se změna projeví a jak poznáme, že jsme si nevytvořili další vrstvu údržby.
+
+Tato příloha navazuje na Přílohu EN. Tam tým zjistil, jestli provozní rytmus standardu pořád dává smysl. Tady z toho udělá konkrétní cyklus na další měsíc nebo kvartál.
+
+### 1. Rozhodnutí z kontroly přepište do jedné věty
+
+Po kvartální kontrole často vznikne hodně slov: poznámky, dojmy, návrhy, malé výjimky a jeden člověk, který by "jen doplnil ještě tuhle sekci". Nezačínejte backlogem. Začněte rozhodovací větou.
+
+Dobrá rozhodovací věta má tento tvar:
+
+```markdown
+V dalším cyklu [ponecháme / zjednodušíme / přesuneme / sloučíme / ukončíme] tento standard, protože [hlavní zjištění], a ověříme to na [konkrétní pracovní situaci].
+```
+
+Příklady:
+
+```markdown
+V dalším cyklu zjednodušíme kontrolu názvů v kanonickém indexu, protože měsíční review opakuje otázku, která patří do šablony nové položky, a ověříme to na prvních třech nových standardech.
+```
+
+```markdown
+V dalším cyklu přesuneme privacy-first kontrolu příkladů z kvartální agendy do předpublikační šablony, protože citlivé detaily vznikají při psaní příkladu, ne až při review.
+```
+
+Jedna věta nutí tým vybrat směr. Když ji nejde napsat, kontrola ještě neskončila. Máte poznámky, ne rozhodnutí.
+
+### 2. Rozlišujte šest výsledků kontroly
+
+Kvartální kontrola nemusí vždy znamenat změnu textu standardu. Někdy stačí změnit místo použití, někdy vlastnictví a někdy je nejlepší standard přestat ručně kontrolovat.
+
+Používejte šest stavů:
+
+- Ponechat: standard funguje, jen se zapíše potvrzení a další kontrolní datum.
+- Zjednodušit: standard je užitečný, ale má příliš mnoho kroků nebo kontrolních otázek.
+- Přesunout: standard je správný, ale objevuje se ve špatném okamžiku práce.
+- Sloučit: dvě pravidla řeší stejný problém a tým je používá odděleně jen ze zvyku.
+- Ukončit rytmus: standard zůstává aktivní, ale už nepotřebuje pravidelnou kontrolu.
+- Archivovat: pracovní situace zmizela nebo standard nahrazuje lepší zdroj pravdy.
+
+Každý stav má jiný typ práce. To je důležité, protože týmy často řeší všechno jako "upravíme dokument". Jenže problém nemusí být v dokumentu.
+
+Příklad:
+
+```markdown
+Zjištění:
+Standard pro pojmenování položek je krátký a použitelný, ale lidé ho najdou až při měsíční kontrole.
+
+Správný stav:
+Přesunout.
+
+Práce:
+Doplnit kontrolní otázku do šablony nové položky a z měsíční kontroly ponechat jen výjimky.
+
+Co nedělat:
+Nepřidávat další odstavec do standardu. Dokument není hlavní problém.
+```
+
+Codyho komentář: když má tým v ruce jen kladivo, každá oprava vypadá jako další odstavec. Provoz ale často potřebuje přesunout otázku o dvě obrazovky dřív, ne napsat krásnější metodiku.
+
+### 3. Vytvořte kartu dalšího cyklu
+
+Karta cyklu je krátký provozní záznam. Není to projektový plán na dvacet řádků. Má odpovědět na otázku: co přesně se během dalšího cyklu stane a podle čeho poznáme, že změna pomohla?
+
+Šablona:
+
+```markdown
+# Karta dalšího cyklu standardu
+
+Standard:
+
+Rozhodnutí z kvartální kontroly:
+Ponechat / zjednodušit / přesunout / sloučit / ukončit rytmus / archivovat
+
+Proč:
+
+Jedna změna v tomto cyklu:
+
+Kde se projeví:
+
+Vlastník:
+
+Termín:
+
+Ověření:
+
+Privacy-first kontrola:
+
+Changelog:
+```
+
+Vyplněný příklad:
+
+```markdown
+# Karta dalšího cyklu standardu
+
+Standard:
+Pojmenování položek v kanonickém indexu
+
+Rozhodnutí z kvartální kontroly:
+Přesunout
+
+Proč:
+Kontrolní otázka pomáhá, ale přichází až při měsíčním review. Název vzniká už při založení položky.
+
+Jedna změna v tomto cyklu:
+Doplnit větu "Název obsahuje sloveso, objekt práce a výstup" přímo do šablony nové položky.
+
+Kde se projeví:
+Šablona nové položky v kanonickém indexu a měsíční review agenda.
+
+Vlastník:
+Správce indexu standardů.
+
+Termín:
+Do příštího týdenního provozního bloku.
+
+Ověření:
+Zkontrolovat první tři nové položky a jednu přejmenovanou položku.
+
+Privacy-first kontrola:
+Příklady názvů neobsahují zákaznická jména, interní konflikty ani osobní hodnocení.
+
+Changelog:
+Zapsat přesun otázky a datum první kontroly.
+```
+
+Taková karta je dostatečně konkrétní pro práci a dostatečně krátká pro čtení. Přesně tahle kombinace bývá v provozu vzácná, takže si ji chraňte jako poslední dobrou propisku v kanceláři.
+
+### 4. Změňte jen jeden pracovní artefakt najednou
+
+Po kvartální kontrole se snadno objeví chuť uklidit všechno: standard, index, onboarding, šablonu, checklist i sales materiál. To vypadá efektivně, ale často to zamlží dopad. Když se po měsíci něco zlepší nebo rozbije, nevíte proč.
+
+Pro další cyklus vyberte jeden primární artefakt:
+
+- šablonu,
+- checklist,
+- kanonický index,
+- onboardingovou trasu,
+- review agendu,
+- provozní kartu,
+- formulář,
+- sales nebo delivery materiál.
+
+Ostatní artefakty jen označte jako "navazující". Upravte je až po ověření primární změny, pokud to není nezbytné pro konzistenci.
+
+Příklad rozhodnutí:
+
+```markdown
+Primární artefakt:
+Šablona nové položky.
+
+Navazující artefakty:
+Měsíční review agenda a onboardingová poznámka pro správce indexu.
+
+Pravidlo cyklu:
+V tomto cyklu měníme pouze šablonu. Review agendu upravíme až po ověření prvních tří použití.
+```
+
+Výjimka: když by ponechání starého textu v jiném artefaktu tým aktivně mátlo, opravte i tento konflikt. Ale nezabalte to jako "když už jsme v tom". To je věta, která v provozu otevírá portál do nekonečna.
+
+### 5. Vlastník nemá být jen editor
+
+Vlastník dalšího cyklu nemá jen přepsat dokument. Má pohlídat, že změna skutečně přejde do práce. To jsou dvě různé věci.
+
+Vlastník cyklu odpovídá za:
+
+- vyjasnění rozhodovací věty,
+- úpravu primárního artefaktu,
+- zápis do changelogu,
+- krátké oznámení lidem, kteří standard používají,
+- ověření prvního použití,
+- privacy-first kontrolu důkazů,
+- uzavření cyklu rozhodnutím.
+
+Není nutné, aby všechno dělal sám. Musí ale držet vlákno. Když vlastnictví končí commitem do dokumentu, změna často zůstane v textu a do práce nedojde.
+
+Praktická věta do karty:
+
+```markdown
+Vlastník cyklu neodpovídá jen za editaci standardu, ale za první ověřené použití upraveného standardu v reálné práci.
+```
+
+Tohle je malý rozdíl v textu a velký rozdíl v chování.
+
+### 6. Komunikujte změnu podle dopadu
+
+Ne každá změna standardu potřebuje oznámení celému týmu. Zároveň některé změny nejde schovat jen do changelogu. Použijte jednoduché rozlišení.
+
+Nízký dopad:
+
+- drobné zkrácení textu,
+- oprava příkladu,
+- lepší název,
+- odstranění duplicitní otázky.
+
+Komunikace:
+
+- changelog,
+- případně zmínka v nejbližším provozním review.
+
+Střední dopad:
+
+- přesun otázky do jiné šablony,
+- změna vlastnické role,
+- nový kontrolní okamžik,
+- sloučení dvou standardů.
+
+Komunikace:
+
+- changelog,
+- krátká zpráva dotčeným lidem,
+- aktualizace kanonického indexu.
+
+Vysoký dopad:
+
+- archivace standardu,
+- změna povinného postupu,
+- dopad na zákaznický výstup,
+- dopad na sběr nebo retenci dat.
+
+Komunikace:
+
+- rozhodovací záznam,
+- jasné datum účinnosti,
+- informace vlastníkům navazujících artefaktů,
+- kontrola starých odkazů a šablon.
+
+Privacy-first pravidlo: v oznámení změny nepoužívejte konkrétní zákaznické příběhy, pokud nejsou nezbytné. Většinou stačí vzor problému. Lidé nepotřebují znát celý incident, aby pochopili nové pravidlo.
+
+### 7. Ověřte změnu v prvním reálném použití
+
+Další cyklus nemá čekat tři měsíce na další velkou kontrolu. První ověření má přijít při prvním reálném použití upraveného standardu.
+
+Krátká karta ověření:
+
+```markdown
+# První použití po kvartální změně
+
+Standard:
+Změna:
+Datum použití:
+Pracovní situace:
+
+Pomohla změna?
+Ano / částečně / ne
+
+Kde vzniklo tření:
+
+Co nebylo jasné:
+
+Byla datová stopa přiměřená:
+Ano / ne / upravit
+
+Rozhodnutí:
+Ponechat změnu / drobně upravit / vrátit / otevřít nový problém
+```
+
+Nesbírejte román. Stačí signál. Cílem je rychle zjistit, jestli kvartální rozhodnutí přežilo kontakt s normální prací.
+
+Příklad:
+
+```markdown
+Pomohla změna?
+Ano.
+
+Kde vzniklo tření:
+Název byl lepší, ale autor nevěděl, jestli má použít sloveso "vyhodnotit" nebo "zkontrolovat".
+
+Rozhodnutí:
+Ponechat změnu a doplnit jeden příklad názvu do šablony.
+```
+
+To je přesně typ drobné korekce, která drží standard živý bez velké schůzky.
+
+### 8. Uzavřete cyklus, jinak zůstane otevřená smyčka
+
+Každý cyklus musí mít konec. Ne proto, že máme rádi administrativu, ale protože otevřené smyčky žerou pozornost. Po ověření první změny zapište krátké uzavření.
+
+Šablona:
+
+```markdown
+# Uzavření cyklu
+
+Rozhodnutí z kvartální kontroly:
+
+Provedená změna:
+
+Ověření:
+
+Výsledek:
+Funguje / funguje s úpravou / nefunguje / přesunuto do dalšího cyklu
+
+Co se mění v provozu:
+
+Co se už nebude řešit:
+
+Další kontrola:
+```
+
+Důležitá je položka "Co se už nebude řešit". Bez ní se staré poznámky vracejí jako pracovní dluh. Tým má vědět, že daná věc je uzavřená, odložená nebo převedená jinam.
+
+Příklad:
+
+```markdown
+Co se už nebude řešit:
+Nebudeme znovu otevírat otázku, jestli kontrola názvu patří do měsíčního review. Patří do šablony nové položky. Review řeší jen výjimky a opakované problémy.
+```
+
+Tohle je provozní úklid. Bez fanfár, ale s efektem.
+
+### Mini workshop: 30 minut na převod kvartální kontroly do cyklu
+
+Použijte hned po kvartální kontrole, dokud jsou zjištění čerstvá.
+
+1. Pět minut: napište jednu rozhodovací větu.
+2. Pět minut: vyberte stav výsledku kontroly: ponechat, zjednodušit, přesunout, sloučit, ukončit rytmus nebo archivovat.
+3. Pět minut: vyplňte kartu dalšího cyklu.
+4. Pět minut: určete jeden primární artefakt, který se změní.
+5. Pět minut: napište krátké oznámení podle dopadu.
+6. Pět minut: domluvte první reálné použití a způsob uzavření cyklu.
+
+Výstup workshopu má být karta cyklu a jeden konkrétní zásah. Pokud odcházíte s pěti úkoly, vyberte jeden jako závazný a zbytek dejte do parkoviště. Parkoviště není hřbitov nápadů, pokud má vlastníka a datum návratu. Bez toho je to jen hezčí koš.
+
+### Checklist
+
+- Máte jednu rozhodovací větu z kvartální kontroly?
+- Je jasné, jestli standard ponecháváte, zjednodušujete, přesouváte, slučujete, vyndáváte z rytmu nebo archivujete?
+- Vybrali jste jeden primární artefakt pro další cyklus?
+- Má cyklus vlastníka, termín a ověření prvního použití?
+- Je vlastník odpovědný za přechod do práce, ne jen za editaci textu?
+- Zapsali jste privacy-first kontrolu důkazů a příkladů?
+- Je komunikace přiměřená dopadu změny?
+- Aktualizovali jste changelog nebo kanonický index?
+- Ověříte změnu při prvním reálném použití, ne až za další kvartál?
+- Má cyklus jasné uzavření?
+- Je uvedeno, co se už nebude řešit?
+- Nevznikl z kvartální kontroly zbytečný mini projekt?
+
+Kvartální kontrola má chránit kvalitu, ne vyrábět provozní mlhu. Další cyklus je místo, kde se ukáže rozdíl mezi "něco jsme prodiskutovali" a "jednu věc jsme zlepšili". Udržte cyklus malý, důkazy střídmé a rozhodnutí viditelné. Standard pak nebude další dokument na poličce, ale tichá opora práce.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -41684,3 +42026,4 @@ Kvartální kontrola provozního rytmu je pojistka proti dvěma extrémům: zapo
 - 2026-05-12: Doplněna Příloha EL o kontrole standardizované opravy po prvním měsíci: původní slib standardu, pracovní důkazy, test novým člověkem, měření tření, rozhodnutí a changelog.
 - 2026-05-12: Doplněna Příloha EM o převodu ověřené opravy standardu do běžného provozního rytmu: provozní háčky, vlastnictví role, ochranné signály, privacy-first důkazy a checklist.
 - 2026-05-12: Doplněna Příloha EN o kvartální kontrole provozního rytmu standardu: původní slib, reálné průchody, scorecard, zkracování pravidel, privacy-first úklid důkazů a rozhodnutí o dalším zásahu.
+- 2026-05-12: Doplněna Příloha EO o převodu kvartální kontroly standardu do dalšího provozního cyklu: rozhodovací věta, karta cyklu, vlastnictví, komunikace změny, první ověření a uzavření smyčky.
