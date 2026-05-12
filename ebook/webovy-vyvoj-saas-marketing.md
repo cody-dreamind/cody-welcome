@@ -39832,6 +39832,214 @@ Příklad: "Standard pro onboarding" může být příliš široký. Jiný postu
 
 Opakovaná retence dělá ze standardů živý pracovní systém. Ne tím, že tým víc dokumentuje, ale tím, že častěji rozhoduje, co už dokumentovat nemusí. V malém týmu je to rozdíl mezi znalostní bází, která pomáhá, a skladem textů, kam se chodí jen s pocitem viny.
 
+## Příloha EH: Kontrola kvality kanonického indexu po retenčním rytmu
+
+Kanonický index standardů může na první pohled vypadat čistě: má názvy, odkazy, vlastníky, stavy a datum poslední revize. To ale ještě neznamená, že opravdu pomáhá. Dobrý index není seznam dokumentů. Je to navigace pro práci. Člověk podle něj pozná, co má otevřít, kdy to má použít, co je zdroj pravdy a co už je jen archivní stopa.
+
+Po zavedení retenčního rytmu se proto vyplatí udělat samostatnou kontrolu kvality indexu. Ne další velký úklid. Spíš praktický test, jestli se tým po úklidu dostane rychleji ke správnému rozhodnutí. Pokud ne, index je sice upravený, ale pořád není provozní nástroj.
+
+Tato příloha navazuje na retenční rytmus a převádí ho do kontroly použitelnosti kanonického indexu pro web, SaaS, marketing a privacy-first provoz.
+
+### 1. Testujte index podle pracovních situací
+
+Neprocházejte index odshora dolů jako tabulku. To svádí k povrchové kontrole názvů a odkazů. Místo toho si vezměte tři až pět konkrétních situací, které v týmu skutečně nastávají:
+
+- nový člověk přebírá zákaznický audit,
+- mění se formulář na webu,
+- spouští se malý marketingový experiment,
+- vrací se starší provozní incident jako podobný problém,
+- vzniká nová automatizace,
+- upravuje se opakovatelná nabídka,
+- zákazník žádá export nebo smazání dat.
+
+U každé situace otestujte čtyři kroky:
+
+1. Najít správný standard.
+2. Rozhodnout, jestli je aktuální.
+3. Použít ho bez dalšího ústního vysvětlování.
+4. Uzavřít výstup tak, aby se neztratil v dalším dokumentu.
+
+Pokud se člověk zasekne hned v prvním kroku, problém je v navigaci. Pokud standard najde, ale neví, jestli mu má věřit, problém je ve stavu a vlastnictví. Pokud ho otevře a pořád potřebuje někoho vyzpovídat, problém je v obsahu. Pokud výstup skončí v chatu bez odkazu zpět, problém je v uzavírání práce.
+
+### 2. Čtyři otázky kvality
+
+Kanonický index držte proti čtyřem jednoduchým otázkám:
+
+- Co mám použít právě teď?
+- Proč mám použít právě tohle?
+- Kdo odpovídá za změnu, když standard nesedí?
+- Co se stane s výstupem po použití?
+
+Jestli index odpovídá jen na první otázku, je to katalog. Jestli odpovídá na všechny čtyři, začíná fungovat jako provozní systém.
+
+Příklad slabého záznamu:
+
+```text
+Název: Formulářová kontrola
+Odkaz: /standardy/formulare
+Stav: aktivní
+```
+
+Příklad použitelného záznamu:
+
+```text
+Název: Kontrola změny formuláře
+Pracovní situace: přidání, odebrání nebo změna pole ve webovém formuláři
+Použít když: změna ovlivní data, kvalifikaci poptávky nebo měření
+Nepoužívat když: jde jen o opravu překlepu v textu
+Zdroj pravdy: /standardy/formulare/kontrola-zmeny
+Vlastník: marketing lead + privacy owner
+Výstup: rozhodnutí pustit / upravit / zastavit a aktualizovaná datová mapa
+Stav: živý standard
+Poslední revize: 2026-05-12
+Další kontrola: měsíční retenční průchod webových změn
+```
+
+Druhý záznam je delší, ale šetří čas. Ne proto, že má víc polí, ale protože odstraňuje dohady v momentě použití.
+
+### 3. Sledujte známky falešné čistoty
+
+Po retenčním úklidu často vznikne dobrý pocit, že je hotovo. Index je kratší, staré dokumenty jsou v archivu a odkazy fungují. Falešná čistota se pozná podle toho, že systém vypadá uklizeně, ale lidé ho pořád obcházejí.
+
+Varovné signály:
+
+- lidé posílají odkazy na standardy přes chat místo toho, aby našli index,
+- dva lidé otevřou pro stejnou situaci jiné dokumenty,
+- archivovaný standard se používá dál, protože má lepší příklady než živá verze,
+- nový člověk chápe názvy standardů až po vysvětlení od někoho zkušenějšího,
+- výstupy z použití standardu nemají jasné místo,
+- privacy-first kontrola je v indexu jako samostatná položka, ale v reálné práci se otevírá až na konci,
+- u standardů chybí rozhodnutí, kdy je nepoužít.
+
+Codyho komentář: čistý index není ten, který má nejméně položek. Čistý index je ten, kde se člověk nesplete v důležitém momentu. Někdy to znamená položku smazat. Někdy naopak přidat jednu větu: "nepoužívat pro kampaně, použijte marketingový experiment".
+
+### 4. Scorecard kanonického indexu
+
+Jednou měsíčně stačí krátké bodování. Ne jako manažerská hra, ale jako způsob, jak si všimnout opakovaného tření.
+
+```text
+Kontrola kanonického indexu
+
+Datum:
+Kontrolovaná pracovní trasa:
+Testoval:
+
+1. Najitelnost
+Skóre 1-5:
+Poznámka:
+
+2. Srozumitelnost názvů
+Skóre 1-5:
+Poznámka:
+
+3. Stav a důvěryhodnost
+Skóre 1-5:
+Poznámka:
+
+4. Navazující výstup
+Skóre 1-5:
+Poznámka:
+
+5. Privacy-first vložení do práce
+Skóre 1-5:
+Poznámka:
+
+Největší tření:
+
+Jedna oprava hned:
+
+Větší změna do backlogu:
+
+Rozhodnutí:
+ponechat / zjednodušit trasu / přejmenovat položky / sloučit standardy / doplnit chybějící výstup
+```
+
+Skóre 5 neznamená dokonalost. Znamená, že člověk bez zvláštní znalosti systému projde trasu samostatně a nevytvoří zbytečnou datovou stopu. Skóre 3 znamená použitelné, ale s třením. Skóre 1 znamená, že index existuje hlavně pro lidi, kteří už vědí, co hledají.
+
+### 5. Praktický test "najdi a použij"
+
+Nechte jednou za čas index otestovat člověka, který danou oblast nevlastní. Dejte mu konkrétní scénář a stopněte jen orientační čas. Nesledujete výkon člověka. Sledujete výkon systému.
+
+Příklad scénáře:
+
+```text
+Situace:
+Chceme zkrátit poptávkový formulář pro audit webu. Má zmizet telefon a přibýt nepovinné pole "největší problém s webem".
+
+Úkol:
+Najdi správný standard, zjisti, jaké rozhodnutí musí padnout před změnou, a napiš, jaký výstup má po změně zůstat v systému.
+
+Očekávaný výstup:
+- otevřená kontrola změny formuláře,
+- aktualizovaná datová mapa, pokud se mění sbíraná pole,
+- rozhodnutí, jestli nové pole opravdu slouží aktuálnímu účelu,
+- datum vyhodnocení dopadu změny,
+- záznam, že telefon už není povinný nebo se nesbírá vůbec.
+```
+
+Pokud tester najde jiný standard, neptejte se nejdřív, proč špatně hledal. Ptejte se, proč ho index navedl jinam. Názvy, štítky a "použít když" pravidla jsou součást produktu. Když nefungují, opravte je.
+
+### 6. Privacy-first kontrola indexu
+
+Index sám o sobě může nést citlivé informace. Často se do něj dostanou názvy zákazníků, odkazy na vyplněné výstupy, interní incidenty, konkrétní exporty nebo poznámky typu "problém u klienta X". To je zbytečné. Kanonický index má vést k práci, ne sloužit jako veřejný rozcestník interních detailů.
+
+Privacy-first pravidla pro index:
+
+- používejte obecné názvy situací místo jmen zákazníků,
+- odkazujte na prázdné šablony a kanonické standardy, ne na vyplněné zákaznické kopie,
+- citlivé příklady držte odděleně s užším přístupem,
+- u každé položky mějte jasný privacy štítek, pokud se týká osobních údajů, analytiky, supportu nebo dodavatelů,
+- neukládejte do indexu poznámky, které patří do incidentního záznamu nebo zákaznického spisu,
+- archivované položky viditelně označte, aby se nepoužívaly omylem.
+
+Dobrý index člověka dovede ke správné kontrole. Nemá sám obsahovat všechno, co se kdy v kontrole řešilo.
+
+### 7. Kdy index rozdělit
+
+Jeden společný index je užitečný, dokud lidem pomáhá najít správnou trasu. Jakmile začne být moc široký, zvažte rozdělení podle pracovních vstupů:
+
+- web a obsah,
+- SaaS produkt a provoz,
+- marketing a sales,
+- privacy-first data a dodavatelé,
+- onboarding a týmové standardy.
+
+Rozdělení ale dělejte až ve chvíli, kdy existuje reálné tření. Ne proto, že tabulka vypadá dlouhá. Dlouhý index s dobrými filtry může být lepší než pět menších indexů, mezi kterými nikdo neví, kam patří hraniční situace.
+
+Stop pravidlo: pokud po rozdělení lidé začnou zakládat stejné položky ve dvou indexech, vraťte se ke společnému zdroji pravdy a přidejte pohledy podle role. Duplicitní navigace je jen jiný druh nepořádku.
+
+### 8. Minimální opravy s vysokým dopadem
+
+Když kontrola ukáže tření, nezačínejte velkým redesignem znalostní báze. Většinou stačí několik malých úprav:
+
+- přejmenovat položku podle situace, ne podle interního názvu dokumentu,
+- doplnit pole "použít když" a "nepoužívat když",
+- označit zdroj pravdy a archiv,
+- přesunout vyplněné příklady mimo běžnou trasu,
+- doplnit vlastníka a datum další kontroly,
+- sloučit dvě položky, které vedou ke stejnému rozhodnutí,
+- přidat očekávaný výstup po použití standardu,
+- odstranit odkazy na staré návrhy, které jen matou.
+
+Jedna dobrá oprava indexu často ušetří víc času než nová šablona. Šablona pomáhá až po otevření. Index rozhoduje, jestli se k ní člověk vůbec dostane.
+
+### Checklist
+
+- Testovali jste index podle reálných pracovních situací?
+- Umí člověk najít správný standard bez znalosti historie týmu?
+- Má každá důležitá položka jasné "použít když" a "nepoužívat když"?
+- Je vidět, co je zdroj pravdy a co je archiv?
+- Má položka vlastníka a datum další kontroly?
+- Je u standardu jasný navazující výstup?
+- Neobsahuje index zbytečné zákaznické, incidentní nebo osobní detaily?
+- Jsou privacy-first kontroly vložené do pracovních tras, ne až na konec?
+- Pozná tým podle indexu, kdy standard nepoužít?
+- Opravujete po kontrole jednu malou věc hned?
+- Končí větší změny v backlogu s vlastníkem?
+- Nevede rozdělení indexu k novým duplicitám?
+
+Kanonický index je tichá infrastruktura týmové práce. Když funguje, nikdo o něm moc nemluví. Lidé prostě najdou správnou trasu, udělají rozhodnutí, zanechají čistý výstup a nepřidají zbytečná data. To je přesně ten druh nenápadné kvality, který se v malém týmu násobí každý týden.
+
 ## Pracovní log
 
 - 2026-05-04: Založena osnova e-booku a rozepsána první kapitola.
@@ -40009,3 +40217,4 @@ Opakovaná retence dělá ze standardů živý pracovní systém. Ne tím, že t
 - 2026-05-12: Doplněna Příloha EF o kontrole dopadu retenčního úklidu po prvním cyklu: test pracovní trasy, kontrola ztrát, privacy-first efekt, opravy trasy a šablona kontroly.
 - 2026-05-12: Doplněn úvodní čtenářský kompas, který vysvětluje, jak rukopis používat jako pracovní nástroj.
 - 2026-05-12: Doplněna Příloha EG o opakovaném retenčním rytmu pro týmové standardy: týdenní, měsíční a kvartální kontroly, privacy-first retence, stop pravidla a checklist.
+- 2026-05-12: Doplněna Příloha EH o kontrole kvality kanonického indexu po retenčním rytmu: test pracovních situací, scorecard, privacy-first kontrola a checklist.
