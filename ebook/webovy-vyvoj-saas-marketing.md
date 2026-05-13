@@ -45416,8 +45416,213 @@ Když se nevejdete do 25 minut, kontrolujete moc široce. Vraťte se k původní
 
 Zavedená změna je důvěryhodná až po prvním použití. Do té doby je to jen dobrý úmysl s hezkou kartou. První kontrola nemá tým unavit dalším procesem. Má rychle ukázat, jestli změna opravdu odstranila tření, drží jeden zdroj pravdy a nepřenáší zbytečná data do nových koutů systému.
 
+## Příloha FC: Převod první kontroly do trvalého provozního zvyku
+
+První kontrola po zavedení změny odpoví na otázku, jestli změna přežila kontakt s realitou. To je užitečné, ale samo o sobě to nestačí. Pokud po kontrole nevznikne jednoduchý provozní zvyk, tým se po pár týdnech vrátí k improvizaci: někdo si zase založí vlastní tabulku, někdo bude čekat na připomínku v chatu a někdo začne starý postup používat "jen pro jistotu".
+
+Trvalý provozní zvyk není nový proces s fanfárami. Je to malé pravidlo, které se přirozeně připojí k existující práci. Má jasný spouštěč, jednoho vlastníka, minimální zápis, krátký rytmus kontroly a stop pravidlo. Když tohle chybí, změna zůstane závislá na paměti lidí. A paměť lidí je výborná na narozeniny kolegů, horší na retenční úklid pracovních artefaktů.
+
+Smyslem této přílohy je převést výsledek první kontroly do zvyku, který nebude překážet práci. Nejde o další vrstvu řízení. Jde o to, aby dobrá oprava nezmizela mezi meetingy, backlogy a osobními poznámkami.
+
+### 1. Vyberte jeden zvyk, ne celý program
+
+Po první kontrole často vznikne seznam drobných zlepšení. Odolejte pokušení z nich udělat velký program. Vezměte jen jednu věc, která brání návratu staré práce nebo chrání zdroj pravdy.
+
+Dobré kandidáty na provozní zvyk:
+
+- při každé měsíční triage doplnit jednovětý důvod rozhodnutí,
+- při sloučení šablony odstranit starý odkaz z kanonického indexu,
+- po každé změně formuláře zkontrolovat, jestli se nesbírá zbytečný údaj,
+- jednou měsíčně projít aktivní pracovní artefakty a označit ty bez vlastníka,
+- po každém incidentním review převést jedno poučení do existujícího runbooku.
+
+Špatní kandidáti:
+
+- "zlepšit dokumentaci",
+- "víc komunikovat",
+- "lépe hlídat kvalitu",
+- "udělat pořádek v datech",
+- "zavést pravidelnou disciplínu".
+
+Ty druhé věty znějí rozumně, ale nedají se provést bez dalšího překladu. Zvyk musí být poznatelný v kalendáři, kartě, checklistu nebo pracovním výstupu.
+
+Příklad převodu:
+
+```markdown
+Nález z první kontroly:
+Editor si psal důvod sloučení do osobní poznámky, protože v indexu nebylo místo pro rozhodovací větu.
+
+Trvalý zvyk:
+Při každé měsíční triage indexu má každá sloučená nebo odstraněná položka pole "Důvod rozhodnutí" s limitem jedna věta.
+```
+
+Tím se problém neřeší obecným školením. Řeší se přímo tam, kde vznikal.
+
+### 2. Připojte zvyk k existujícímu spouštěči
+
+Zvyk bez spouštěče je jen přání. Spouštěč říká, kdy se má pravidlo aktivovat. Nejlepší spouštěče už v práci existují: měsíční review, vydání nové verze, uzavření incidentu, předání zákaznického výstupu, aktualizace ceníku, publikace článku nebo triage backlogu.
+
+Dobré spouštěče:
+
+- `při každé měsíční triage standardů`,
+- `před publikací nové landing page`,
+- `po sloučení dvou šablon`,
+- `při uzavření supportního tématu`,
+- `před předáním auditního výstupu zákazníkovi`,
+- `po ukončení experimentu`.
+
+Slabé spouštěče:
+
+- `průběžně`,
+- `až bude čas`,
+- `když si někdo vzpomene`,
+- `jednou za čas`,
+- `podle potřeby`.
+
+Privacy-first provoz stojí na dobrých spouštěčích. Pokud například kontrolujete datovou stopu jen "průběžně", velmi rychle se z toho stane nekontrolovaný archiv. Pokud ji kontrolujete při každém novém formuláři a při každém sloučení šablony, vznikne malé, ale skutečné pravidlo.
+
+Praktický zápis spouštěče:
+
+```markdown
+Spouštěč: měsíční triage kanonického indexu.
+Akce: u každé sloučené, odstraněné nebo přejmenované položky doplnit jednu větu "Důvod rozhodnutí".
+Výstup: aktualizovaný index a jeden changelogový řádek.
+```
+
+### 3. Určete vlastníka bez mikromanagementu
+
+Každý provozní zvyk potřebuje vlastníka. Vlastník neznamená člověka, který všechno ručně hlídá a připomíná ostatním. Znamená člověka, který ví, kde pravidlo žije, jak se pozná splnění a kdy se má pravidlo zjednodušit nebo zrušit.
+
+Dobrá formulace vlastnictví:
+
+```markdown
+Vlastník: editor kanonického indexu.
+Odpovědnost: při měsíční triage ověřit, že změněné položky mají jednovětý důvod rozhodnutí a že nevznikl paralelní report.
+Není odpovědný za: zpětné dopisování historických důvodů do starých archivů.
+```
+
+Ta poslední věta je důležitá. Bez hranice se z malého zvyku stane úklid celého světa. A úklid celého světa má špatnou návratnost, i kdyby měl krásný štítek v backlogu.
+
+Vlastník má mít tři praktické možnosti:
+
+- ponechat zvyk beze změny,
+- navrhnout drobnou úpravu,
+- říct, že zvyk už nedává smysl a má se zrušit nebo sloučit.
+
+Tím se z vlastnictví nestane doživotní trest za to, že člověk jednou napsal dobrou šablonu.
+
+### 4. Zkraťte zápis na minimum
+
+Trvalý zvyk má mít zápis tak krátký, aby ho lidé skutečně používali. Pokud každé použití vyžaduje dlouhý formulář, tým si brzy vytvoří neoficiální zkratku. A neoficiální zkratky jsou místo, kde se ztrácí kontext, odpovědnost i kontrola nad daty.
+
+Minimum zápisu:
+
+- co se změnilo,
+- proč se to změnilo,
+- kdo je vlastník,
+- kdy se to zkontroluje znovu,
+- jestli změna přidala nebo ubrala datovou stopu.
+
+Šablona pro malý provozní zvyk:
+
+```markdown
+Název zvyku:
+Spouštěč:
+Akce:
+Vlastník:
+Výstup:
+Důvod existence:
+Datová stopa:
+Stop pravidlo:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název zvyku: Jednovětý důvod rozhodnutí v indexu
+Spouštěč: měsíční triage kanonického indexu
+Akce: u sloučené, odstraněné nebo přejmenované položky doplnit pole "Důvod rozhodnutí"
+Vlastník: editor indexu
+Výstup: aktualizovaný index a changelogový řádek
+Důvod existence: brání návratu osobních poznámek a paralelního reportu
+Datová stopa: jedna věta bez zákaznických detailů a bez interních komentářů
+Stop pravidlo: pokud se pole tři cykly nepoužije pro žádné rozhodnutí, zrušit nebo sloučit s changelogem
+Další kontrola: po třech měsíčních triage
+```
+
+Tohle stačí. Není potřeba nový dashboard, nové barevné stavy ani speciální rituál. Jedna karta, jeden spouštěč, jeden výstup.
+
+### 5. Přidejte stop pravidlo hned na začátku
+
+Každý zvyk by měl mít podmínku, kdy se zruší. Bez stop pravidla se provozní systém jen zvětšuje. Nejprve přibude malý checklist, pak kontrolní pole, pak měsíční review, pak tabulka metrik a nakonec někdo navrhne audit auditu. Tady už obvykle pomůže káva, ale lepší je stop pravidlo.
+
+Dobrá stop pravidla:
+
+- pokud zvyk tři cykly nepřinesl žádné rozhodnutí, sloučit nebo zrušit,
+- pokud se zápis začne dublovat v jiném artefaktu, ponechat jen jeden zdroj pravdy,
+- pokud zvyk přidává citlivá data bez rozhodovací hodnoty, zastavit a přepsat,
+- pokud ho plní jen vlastník ručně za ostatní, vrátit se ke spouštěči a zjednodušit,
+- pokud pravidlo vyžaduje samostatný meeting, ověřit, zda nejde připojit k existujícímu rytmu.
+
+Stop pravidlo není pesimismus. Je to ochrana kvality. Dobrý systém se umí zlepšovat i zmenšovat.
+
+### 6. Ověřte zvyk po třech cyklech
+
+První kontrola ukáže, jestli změna funguje jednou. Tři cykly ukážou, jestli funguje jako zvyk. Po třech opakováních už obvykle vidíte, zda pravidlo lidem pomáhá, nebo jestli ho jen poslušně obcházejí.
+
+Otázky po třech cyklech:
+
+- Spustil se zvyk pokaždé ve správný moment?
+- Byl výstup dohledatelný ve zdroji pravdy?
+- Nevznikla paralelní evidence?
+- Pomohl zápis k rozhodnutí, nebo jen přidal administrativu?
+- Zmenšila se datová stopa, nebo se jen přesunula jinam?
+- Ví vlastník, kdy má zvyk upravit nebo zrušit?
+
+Rozhodnutí po třech cyklech:
+
+```markdown
+Po třech cyklech zvyk [ponecháváme / zjednodušujeme / slučujeme / rušíme], protože [konkrétní důkaz]. Další krok je [jedna akce].
+```
+
+Příklad:
+
+```markdown
+Po třech cyklech zvyk ponecháváme, protože u všech sloučených položek byl dohledatelný důvod rozhodnutí a nevznikl žádný paralelní report. Další krok je ponechat kontrolu v měsíční triage a znovu ji otevřít až při kvartálním review standardů.
+```
+
+### Mini workshop: 30 minut na převod do zvyku
+
+1. Pět minut: přečtěte rozhodnutí z první kontroly.
+2. Pět minut: vyberte jeden zvyk, který brání návratu staré práce.
+3. Pět minut: napojte ho na existující spouštěč.
+4. Pět minut: určete vlastníka a hranice odpovědnosti.
+5. Pět minut: napište minimální kartu zvyku včetně datové stopy.
+6. Pět minut: přidejte stop pravidlo a datum kontroly po třech cyklech.
+
+Když se workshop rozpadne do debaty o všech procesech firmy, vraťte se k jedné větě: jaký konkrétní starý problém se nesmí vrátit? Všechno ostatní je zatím jen zajímavé rozptýlení.
+
+### Checklist
+
+- Vychází zvyk z konkrétního nálezu první kontroly?
+- Řeší jednu věc, ne celý provozní systém?
+- Má jasný spouštěč v existující práci?
+- Je vlastník pojmenovaný rolí nebo funkcí, ne jen náhodným člověkem?
+- Je jasné, za co vlastník odpovídá a za co ne?
+- Je výstup zvyku dohledatelný v jednom zdroji pravdy?
+- Nevyžaduje zvyk nový meeting, pokud stačí existující rytmus?
+- Je zápis kratší než problém, který má řešit?
+- Obsahuje datová stopa jen údaje nutné pro rozhodnutí?
+- Má zvyk stop pravidlo?
+- Je naplánovaná kontrola po třech cyklech?
+- Nevznikla kvůli zvyku paralelní tabulka nebo osobní archiv?
+
+Trvalý zvyk je dobrý tehdy, když si ho tým po pár opakováních skoro přestane všímat, ale výsledek zůstane lepší. Méně návratů staré práce, méně neřízených poznámek, jasnější zdroj pravdy a menší datová stopa. Přesně ten typ nudného provozního vítězství, ze kterého se ve firmách skládá skutečná stabilita.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FC o převodu první kontroly do trvalého provozního zvyku: výběr jednoho zvyku, spouštěč, vlastnictví, minimální zápis, stop pravidlo, ověření po třech cyklech, workshop a checklist.
 - 2026-05-13: Doplněna Příloha FB o kontrole zavedené změny po prvním použití: ověření reálného cyklu, porovnání se slibem změny, hledání návratu staré práce, privacy-first kontrola datové stopy, rozhodovací věta, drobná oprava a kontrolní karta.
 - 2026-05-13: Doplněna Příloha FA o zavedení změny rytmu po kontrole tří cyklů: změnová věta, mapa dopadu, aktualizace zdroje pravdy, pracovní komunikace týmu, privacy-first úklid datové stopy, první ověření a změnová karta.
 - 2026-05-13: Doplněna Příloha EZ o kontrole provozního rytmu po prvních třech cyklech: návrat k původnímu slibu, reálné průchody, třídění tření, vlastnictví bez mikromanagementu, privacy-first datová stopa, rozhodnutí o stavu rytmu a aktualizace provozní karty.
