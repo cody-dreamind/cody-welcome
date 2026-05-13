@@ -45931,8 +45931,351 @@ Po kontrole napište jednu pracovní větu pro lidi, kteří u workshopu nebyli.
 
 Zvyk, který po třech cyklech obstojí, už nemusí být zajímavý. A to je dobře. Provozní kvalita se často pozná podle toho, že se o ní nemusí pořád mluvit. Když dobrý zvyk tiše drží jeden zdroj pravdy, šetří čas a nevyrábí zbytečná data, zaslouží si zůstat. Když ne, zaslouží si zjednodušit nebo odejít bez sentimentu.
 
+## Příloha FE: Převod ověřeného zvyku do rolového standardu
+
+Zvyk, který po třech cyklech obstál, má před sebou další riziko: stane se nepsaným pravidlem jednoho člověka. V praxi to vypadá nevinně. Někdo ví, kdy zkontrolovat changelog, jak zkrátit zápis, kam dát rozhodovací větu a kdy uklidit dočasné poznámky. Tým je spokojený, protože věci fungují. Jenže když dotyčný odjede, změní roli nebo začne dělat něco důležitějšího, zvyk se začne rozpadat.
+
+Rolový standard není další tlustý proces. Je to krátké pojmenování toho, co má role dělat, kdy to má dělat, podle čeho se rozhoduje a kde zůstává výstup. Smyslem není zabetonovat práci. Smyslem je přenést ověřený zvyk z osobní paměti do pracovního systému tak, aby ho zvládl další člověk bez dlouhého zasvěcení.
+
+Tato příloha navazuje na kontrolu po třech cyklech. Použijte ji jen pro zvyky, které byly rozhodnutím `ponechat` nebo `zjednodušit`. Pokud byl zvyk sloučen nebo ukončen, nevyrábějte mu standard na rozloučenou. To by bylo jako dávat archivní krabici vlastní onboarding.
+
+### 1. Rozhodněte, zda zvyk standardizaci opravdu potřebuje
+
+Ne každý dobrý zvyk si zaslouží standard. Některé věci jsou tak malé a jasné, že stačí zůstat jako položka v checklistu. Standardizaci použijte až ve chvíli, kdy zvyk splňuje alespoň jednu z těchto podmínek:
+
+- bude ho dělat víc než jeden člověk,
+- navazuje na zákaznický dopad, provozní riziko nebo právní citlivost,
+- vytváří záznam, který se později používá pro rozhodování,
+- při chybě se práce začne dublovat bokem,
+- zvyk je součástí onboardingu nové role,
+- zvyk chrání privacy-first principy, například minimalizaci dat nebo úklid osobních poznámek.
+
+Krátký test:
+
+```markdown
+Když současný vlastník zvyku nebude příští měsíc k dispozici, dokáže někdo jiný provést zvyk správně podle existujících artefaktů?
+```
+
+Pokud odpověď zní ano, možná nepotřebujete nový standard. Stačí doplnit odkaz do existujícího checklistu. Pokud odpověď zní ne, napište rolový standard. Ne proto, aby tým vypadal dospěle. Proto, aby práce nepřežila jen díky konkrétnímu mozku v konkrétní židli.
+
+Codyho komentář: dobrý standard má být nudně užitečný. Jakmile z něj někdo cítí "procesní slavnost", je moc velký. Nejlepší standard je ten, který nový člověk použije bez obřadů a starý člověk u něj neprotočí oči tak silně, že by se z toho dal napájet menší dashboard.
+
+### 2. Pojmenujte roli, ne člověka
+
+Standard patří roli. Ne Petrovi, ne Lucii, ne "tomu, kdo to vždycky dělal". Lidé se mění, role zůstává alespoň trochu stabilní. Když standard navážete na člověka, vytváříte skryté provozní riziko. Když ho navážete na roli, dáváte týmu možnost práci předat.
+
+Použijte jednoduchou větu:
+
+```markdown
+Tento standard vlastní role [název role], protože tato role má kontext a pravomoc rozhodnout [typ rozhodnutí].
+```
+
+Příklady:
+
+```markdown
+Tento standard vlastní role editor indexu, protože tato role rozhoduje o slučování, přejmenování a archivaci šablon.
+```
+
+```markdown
+Tento standard vlastní role product owner, protože tato role rozhoduje, zda signál z podpory patří do roadmapy, dokumentace nebo do žádné akce.
+```
+
+```markdown
+Tento standard vlastní role provozní správce webu, protože tato role rozhoduje, zda změna formuláře vyžaduje úpravu datové mapy a textu o soukromí.
+```
+
+U každé role doplňte dvě hranice:
+
+- kdy role rozhoduje sama,
+- kdy má eskalovat.
+
+Příklad:
+
+```markdown
+Role rozhoduje sama: drobné přejmenování položky, sloučení duplicit, zkrácení zápisu.
+Role eskaluje: odstranění aktivně používané šablony, změna retenčního pravidla, nový typ sbíraných údajů.
+```
+
+Bez těchto hranic standard často sklouzne do čekání na souhlas. A čekání je drahý způsob, jak předstírat bezpečnost.
+
+### 3. Zkraťte zvyk na provozní větu
+
+Ověřený zvyk už má historii, příklady a kontrolní poznámky. To všechno nemusí být ve standardu. Rolový standard má obsahovat jen to, co člověk potřebuje při práci.
+
+Zapište zvyk jako jednu provozní větu:
+
+```markdown
+Když nastane [spouštěč], role [vlastník] udělá [akce] ve [zdroj pravdy], aby [důvod].
+```
+
+Příklady:
+
+```markdown
+Když při měsíční triage vznikne sloučení nebo odstranění šablony, role editor indexu zapíše jednovětý důvod do kanonického indexu a changelogu, aby později nevznikaly osobní vysvětlivky bokem.
+```
+
+```markdown
+Když se po změně formuláře objeví nový sbíraný údaj, role provozní správce webu ověří datovou mapu a text u formuláře, aby návštěvník věděl, proč údaj posílá.
+```
+
+```markdown
+Když support třikrát zachytí stejnou nejasnost v onboardingu, role customer success owner přidá jeden agregovaný signál do review, aby se rozhodlo mezi úpravou produktu, dokumentace nebo prodejního slibu.
+```
+
+Tato věta je jádro standardu. Všechno ostatní je podpůrné. Pokud větu neumíte napsat bez tří odstavců, zvyk ještě není dost jasný. Vraťte se k předchozí kontrole a zjednodušte ho.
+
+### 4. Přidejte minimální pracovní postup
+
+Rolový standard má člověku pomoct udělat práci, ne popsat celou filozofii. Stačí tři až pět kroků. Každý krok má být pozorovatelný a dokončitelný.
+
+Dobrá struktura:
+
+```markdown
+1. Otevři [zdroj pravdy].
+2. Najdi [konkrétní místo].
+3. Proveď [konkrétní akce].
+4. Zkontroluj [ochranné pravidlo].
+5. Zapiš [výstup nebo rozhodnutí].
+```
+
+Příklad pro standard jednovětého důvodu v indexu:
+
+```markdown
+1. Otevři kanonický index šablon.
+2. Najdi položku, která se slučuje, přejmenovává nebo archivuje.
+3. Zapiš jednu větu ve tvaru: "Změna, protože důkaz. Další místo je odkaz."
+4. Zkontroluj, že věta neobsahuje zákaznické ani osobní detaily.
+5. Přidej stejnou změnu do changelogu, pokud mění veřejně používanou trasu.
+```
+
+Příklad pro standard kontroly formuláře:
+
+```markdown
+1. Otevři změněný formulář a datovou mapu.
+2. Porovnej každé pole s účelem sběru.
+3. Odstraň pole, které není nutné pro první odpověď nebo provoz služby.
+4. U citlivějších údajů ověř text u formuláře a retenční pravidlo.
+5. Zapiš rozhodnutí do changelogu změny formuláře.
+```
+
+Když má postup deset kroků, rozdělte ho. Buď popisujete víc zvyků najednou, nebo se snažíte do standardu uložit jistotu, kterou má zajistit dobré vlastnictví.
+
+### 5. Připojte privacy-first bránu
+
+Každý rolový standard má mít jednu privacy-first kontrolu. Ne právnický odstavec. Jednu praktickou brzdu, která se dá použít ve chvíli práce.
+
+Vyberte jednu hlavní otázku:
+
+- Sbíráme tímto zvykem nový údaj?
+- Přepisujeme zákaznický detail do místa, kde nemusí být?
+- Vzniká paralelní export, screenshot nebo osobní poznámka?
+- Je výstup agregovaný dost na to, aby pomohl rozhodnutí bez zbytečných detailů?
+- Víme, kdy se dočasný záznam smaže?
+- Zůstává zdroj pravdy v evropském provozu nebo v kontrolovaném prostředí týmu?
+
+Příklad privacy-first brány ve standardu:
+
+```markdown
+Privacy-first brána:
+Do standardu se zapisuje důvod rozhodnutí a dopad na práci, ne celé zákaznické sdělení. Pokud je potřeba citace, použije se anonymizovaný výřez a po review se odstraní dočasné poznámky.
+```
+
+Jiný příklad:
+
+```markdown
+Privacy-first brána:
+Nové pole ve formuláři musí mít jasný účel, minimální rozsah a viditelné vysvětlení pro návštěvníka. Pokud účel nejde napsat jednou větou, pole se do výchozího formuláře nepřidá.
+```
+
+Tady se privacy-first hodnota dostává z prohlášení do rutiny. To je její skutečný domov. Ne patička webu, ale okamžik, kdy někdo řekne: "Tohle už nepotřebujeme sbírat."
+
+### 6. Určete důkaz správného použití
+
+Standard bez důkazu použití je jen přání. Důkaz ale nemusí být velká metrika. Stačí signál, že role standard použila a výstup skončil ve správném místě.
+
+Vyberte jeden důkaz:
+
+- rozhodovací věta v changelogu,
+- aktualizovaná karta v indexu,
+- odkaz na upravenou datovou mapu,
+- agregovaný signál v měsíčním review,
+- odstraněná dočasná poznámka,
+- zkrácený formulář nebo zrušené pole,
+- uzavřená položka v provozním checklistu.
+
+Šablona:
+
+```markdown
+Důkaz použití standardu:
+Kde žije:
+Kdo ho kontroluje:
+Jak často:
+Kdy se maže nebo archivuje:
+```
+
+Příklad:
+
+```markdown
+Důkaz použití standardu: jednovětý důvod sloučení šablony
+Kde žije: kanonický index a měsíční changelog
+Kdo ho kontroluje: editor indexu při měsíční triage
+Jak často: při každé změně položky
+Kdy se maže nebo archivuje: při archivaci verze indexu podle retenčního plánu
+```
+
+Nevytvářejte důkaz jen pro důkaz. Pokud výstup nepomůže kontrole, předání nebo rozhodnutí, je to jen další šum. A šum má zvláštní talent tvářit se jako práce.
+
+### 7. Přidejte standard do onboardingu role
+
+Jakmile je zvyk rolovým standardem, musí se objevit tam, kde se role učí pracovat. Jinak jste jen přesunuli znalost z jedné hlavy do jednoho zapomenutého dokumentu.
+
+Do onboardingu přidejte:
+
+- název standardu,
+- provozní větu,
+- odkaz na zdroj pravdy,
+- jeden vyplněný příklad,
+- hranici samostatného rozhodování,
+- privacy-first bránu,
+- první cvičný průchod.
+
+První cvičný průchod má být reálný nebo skoro reálný. Ne test typu "přečti si dokument a potvrď". Lepší je dát novému člověku jednu situaci:
+
+```markdown
+Situace:
+V indexu jsou dvě šablony pro stejný typ review. Jedna se používala naposledy před půl rokem, druhá je aktivní. Rozhodni, zda je sloučit, archivovat nebo ponechat. Zapiš rozhodovací větu bez zákaznických detailů.
+```
+
+Po cvičném průchodu se nekontroluje, jestli člověk opsal standard. Kontroluje se, jestli pochopil rozhodovací hranici. To je rozdíl mezi učením práce a učením formuláře.
+
+### 8. Nastavte lehkou kontrolu po prvním předání
+
+Rolový standard je hotový až po prvním předání. Dokud ho používá původní vlastník, nevíte, jestli je standard srozumitelný. První použití jiným člověkem je nejlepší test.
+
+Kontrolní otázky po prvním předání:
+
+- Věděl nový vlastník, kdy standard použít?
+- Našel zdroj pravdy bez vysvětlování bokem?
+- Dokázal rozhodnout v běžných hranicích role?
+- Zapsal výstup dost stručně?
+- Nevznikla nová datová stopa mimo standard?
+- Co potřebovalo doplnit původní vysvětlení?
+- Je problém ve standardu, v onboardingu, nebo v nejasné roli?
+
+Krátká karta:
+
+```markdown
+Standard:
+Nový vlastník nebo role:
+První situace:
+Co šlo bez pomoci:
+Kde vzniklo tření:
+Privacy-first nález:
+Úprava standardu:
+Další kontrola:
+```
+
+Příklad:
+
+```markdown
+Standard: jednovětý důvod změny v indexu
+Nový vlastník nebo role: nový editor indexu
+První situace: archivace nepoužívané šablony
+Co šlo bez pomoci: nalezení indexu, rozhodnutí o archivaci
+Kde vzniklo tření: nebylo jasné, kdy přidat řádek do changelogu
+Privacy-first nález: v první verzi věty byl konkrétní zákaznický detail
+Úprava standardu: doplněn příklad anonymizovaného zápisu a pravidlo pro changelog
+Další kontrola: při příští měsíční triage
+```
+
+Tato kontrola není zkouška člověka. Je to test systému. Když nový člověk tápe, první podezřelý má být standard, ne jeho schopnosti.
+
+### Šablona rolového standardu
+
+```markdown
+Název standardu:
+Role vlastníka:
+Provozní věta:
+
+Kdy se spouští:
+Kde je zdroj pravdy:
+Kdy role rozhoduje sama:
+Kdy role eskaluje:
+
+Postup:
+1.
+2.
+3.
+
+Privacy-first brána:
+Důkaz správného použití:
+Příklad dobrého zápisu:
+Příklad špatného zápisu:
+
+Onboardingový průchod:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název standardu: Důvod změny v kanonickém indexu
+Role vlastníka: editor indexu
+Provozní věta: Když se položka v indexu slučuje, přejmenovává nebo archivuje, editor zapíše jednu rozhodovací větu do indexu, aby tým nemusel důvod dohledávat v osobních poznámkách.
+
+Kdy se spouští: při každé změně položky v indexu
+Kde je zdroj pravdy: kanonický index a měsíční changelog
+Kdy role rozhoduje sama: drobné sloučení, přejmenování, archivace nepoužívané položky
+Kdy role eskaluje: odstranění aktivní trasy, změna retenčního pravidla, nový typ citlivého obsahu
+
+Postup:
+1. Najdi měněnou položku v indexu.
+2. Zapiš jednu větu: změna, důvod, další místo.
+3. Odstraň dočasné poznámky a případné zákaznické detaily.
+
+Privacy-first brána: do indexu patří rozhodovací důvod, ne celé zákaznické sdělení.
+Důkaz správného použití: aktualizovaná položka v indexu a řádek v changelogu.
+Příklad dobrého zápisu: Sloučeno s šablonou měsíčního review, protože obě řešily stejný pracovní krok a nová verze má jasnější rozhodovací výstup.
+Příklad špatného zápisu: Sloučeno, protože klient X si stěžoval v dlouhém e-mailu a poslal konkrétní interní kontext.
+
+Onboardingový průchod: archivuj jednu nepoužívanou šablonu ve cvičném indexu.
+Další kontrola: po prvním použití novým editorem.
+```
+
+### Mini workshop: 35 minut na převod zvyku do rolového standardu
+
+1. Pět minut: potvrďte, že zvyk po třech cyklech opravdu obstál.
+2. Pět minut: rozhodněte, zda standardizace má hodnotu.
+3. Pět minut: pojmenujte roli a rozhodovací hranice.
+4. Sedm minut: napište provozní větu a tři až pět kroků.
+5. Pět minut: přidejte privacy-first bránu.
+6. Pět minut: určete důkaz správného použití.
+7. Tři minuty: napojte standard na onboarding nebo kanonický index.
+
+Výstup workshopu má být jedna hotová karta standardu. Ne seznam nápadů, ne návrh budoucího procesu, ne rozpačitý dokument ve stavu "ještě doplníme". Buď je standard použitelný v další reálné situaci, nebo workshop neskončil.
+
+### Checklist
+
+- Zvyk po třech cyklech obstál nebo byl zjednodušen?
+- Je jasné, proč standardizace dává smysl?
+- Není standard zbytečný pro příliš malý zvyk?
+- Je vlastník pojmenovaný jako role, ne jako konkrétní člověk?
+- Role ví, kdy rozhoduje sama a kdy eskaluje?
+- Má standard jednu provozní větu?
+- Má postup tři až pět konkrétních kroků?
+- Je zdroj pravdy jednoznačný?
+- Je privacy-first brána praktická a použitelná při práci?
+- Je důkaz použití přirozeným výstupem, ne novou evidencí navíc?
+- Je standard přidaný do onboardingu role?
+- Existuje jeden vyplněný příklad dobrého zápisu?
+- Je jasné, co se po prvním předání zkontroluje?
+- Nevznikl nový paralelní dokument, který bude stárnout bokem?
+
+Rolový standard je dobrý tehdy, když zmenší závislost na konkrétním člověku a nezvětší byrokracii. Vytáhne z ověřeného zvyku jen to, co pomáhá opakované práci: spouštěč, roli, rozhodovací hranici, zdroj pravdy, privacy-first brzdu a důkaz. Všechno ostatní má zůstat venku. Ne proto, že by detaily nebyly zajímavé, ale protože standard má sloužit práci, ne sbírat suvenýry z minulých debat.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FE o převodu ověřeného provozního zvyku do rolového standardu: výběr vhodného zvyku, vlastnictví role, provozní věta, krátký postup, privacy-first brána, důkaz použití, onboarding a kontrola po prvním předání.
 - 2026-05-13: Doplněno krátké týmové shrnutí do Přílohy FD, aby rozhodnutí po kontrole zvyku šlo převést do jedné pracovní věty pro lidi mimo workshop.
 - 2026-05-13: Doplněna Příloha FD o kontrole trvalého provozního zvyku po třech cyklech: návrat k původnímu slibu, průchod třemi cykly, odlišení problému zvyku od spouštěče, privacy-first kontrola, jednověté rozhodnutí, aktualizace zdroje pravdy, karta, workshop a checklist.
 - 2026-05-13: Doplněna Příloha FC o převodu první kontroly do trvalého provozního zvyku: výběr jednoho zvyku, spouštěč, vlastnictví, minimální zápis, stop pravidlo, ověření po třech cyklech, workshop a checklist.
