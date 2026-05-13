@@ -49563,8 +49563,300 @@ Workshop držte krátký. Pokud začne růst, je to signál, že neověřujete j
 
 Dobré ověření opravy onboardingového balíčku je malé, věcné a nepřehání vlastní důležitost. Neřeší všechno, ale zavře jednu smyčku. Tým pak ví, jestli konkrétní úprava skutečně pomohla, a nový člověk má o něco jasnější cestu bez další vrstvy tichého dohledu.
 
+## Příloha FQ: Standardizace ověřené opravy onboardingového balíčku
+
+Ověřená oprava je pořád jen oprava. Pomohla v jednom reálném průchodu, snížila tření a prošla privacy-first uzavřením. To je dobrý výsledek, ale ještě to neznamená, že se má automaticky stát trvalou součástí onboardingového balíčku. Mezi "fungovalo to jednou" a "toto je nový standard" je malý, ale důležitý krok: standardizace.
+
+Standardizace neznamená vytvořit slavnostní dokument o dokumentu. Znamená rozhodnout, co přesně se stává platnou verzí, kde to lidé najdou, co se tím nahrazuje, jak se pozná další problém a kdy se má balíček znovu zkontrolovat. Pokud tento krok přeskočíte, tým začne žít ve dvou verzích pravdy: jedna je v balíčku, druhá v hlavě člověka, který byl na posledním review. To je výborný způsob, jak si vyrobit budoucí zmatek. Takový ten nenápadný, co nevypadá jako problém, dokud se neobjeví ve špatnou chvíli.
+
+Standardizace má čtyři cíle:
+
+1. Převést ověřenou opravu do kanonické verze balíčku.
+2. Odstranit nebo označit starou verzi, aby nepůsobila platně.
+3. Nastavit minimální kontrolu dalšího použití.
+4. Uklidit datovou stopu po ověřování.
+
+### 1. Rozhodněte, zda oprava patří do standardu
+
+Ne každá funkční oprava si zaslouží stát se trvalým pravidlem. Některé opravy jsou dočasná berle pro konkrétní situaci, jiné jen pomohly odhalit větší problém. Standardizujte jen to, co splňuje tři podmínky:
+
+- řeší opakovatelnou pracovní situaci,
+- pomohlo to bez výrazného navýšení složitosti,
+- dá se to vysvětlit člověku, který nebyl u původního review.
+
+Praktický test:
+
+```text
+Oprava:
+Doplněna rozhodovací tabulka pro rozlišení běžného supportního dotazu, hraničního dotazu a povinné eskalace.
+
+Má se standardizovat?
+Ano.
+
+Proč:
+Situace se opakuje u každého nového support člověka. Tabulka zkrátila dotazování na vlastníka a nevytvořila novou datovou stopu.
+```
+
+Jiný příklad:
+
+```text
+Oprava:
+Doplněna poznámka k jedné specifické zákaznické výjimce z posledního měsíce.
+
+Má se standardizovat?
+Ne, patří do dočasné provozní poznámky.
+
+Proč:
+Nejde o opakovatelný onboardingový vzor. Pokud se výjimka začne opakovat, vrátí se jako nový nález.
+```
+
+Codyho komentář: standardizace je brzda proti dokumentačnímu optimismu. To, že něco pomohlo jednou, ještě neznamená, že to má být navždy vytesané do týmové tabulky. Dokumentace nemá být muzeum všech poučení. Má být pracovní nástroj.
+
+### 2. Přepište opravu do jazyka běžného použití
+
+Text z ověřovací karty často popisuje, co se změnilo. Onboardingový balíček ale musí říkat, co má nový člověk udělat. To jsou dvě různé věci.
+
+Slabý standard:
+
+```text
+Po kontrole 2026-05-13 jsme zjistili, že lidé někdy neví, kdy eskalovat hraniční supportní dotazy. Doplnili jsme příklad, který byl ověřen v prvním průchodu.
+```
+
+Silnější standard:
+
+```text
+Když supportní dotaz zasahuje do práv, fakturace, bezpečnosti, mazání dat nebo změny přístupů, neodpovídejte sami. Zapište krátké shrnutí, označte typ rizika a předejte dotaz vlastníkovi supportu.
+```
+
+První verze je historie opravy. Druhá verze je pracovní pravidlo. Historie patří do changelogu, pracovní pravidlo patří do balíčku.
+
+Při přepisu se ptejte:
+
+- Co má člověk poznat?
+- Jaké rozhodnutí má udělat?
+- Jaký je první krok?
+- Kdy má zastavit a eskalovat?
+- Kam má výsledek zapsat?
+- Co nemá zapisovat kvůli soukromí a minimalizaci dat?
+
+Pokud odpověď potřebuje pět odstavců, možná nejde o pravidlo, ale o chybějící proces. V takovém případě je lepší vytvořit krátkou mapu rozhodnutí než přidávat další vysvětlující text.
+
+### 3. Udržte jedno pracovní místo
+
+Ověřená oprava má skončit na jednom primárním místě. Ne ve třech kopiích: v onboardingu, interní wiki, chatu a ještě v prezentaci z workshopu. Kopie vypadají prakticky jen první týden. Pak jedna zestárne, druhá se upraví, třetí se zapomene a tým začne losovat, která verze je pravda.
+
+Pravidlo:
+
+- Kanonický text je jen v onboardingovém balíčku.
+- Changelog obsahuje důvod změny a odkaz na kanonický text.
+- Kanonický index ukazuje na platnou verzi.
+- Ostatní materiály odkazují, neopisují.
+
+Ukázka aktualizace indexu:
+
+```text
+Support onboarding / Eskalace dotazů
+Platná verze: onboarding/support/eskalace-dotazu.md
+Stav: standardizováno po ověření
+Poslední ověření: 2026-05-13
+Nahrazuje: starý odstavec "kdy se zeptat vlastníka"
+Další kontrola: po třech použitích nebo při prvním chybném předání
+```
+
+Ukázka poznámky ve starém materiálu:
+
+```text
+Tento materiál je archivní. Platný postup pro eskalaci supportních dotazů je v onboarding/support/eskalace-dotazu.md.
+```
+
+Tohle je nudné. A právě proto to funguje. Dobré provozní systémy nejsou závislé na tom, že si někdo pamatuje poslední dohodu z hovoru.
+
+### 4. Rozlište trvalý standard a kontrolní háček
+
+Standardizovaná oprava nesmí zůstat bez dalšího signálu. Zároveň není potřeba z ní udělat věčné měření. Stačí kontrolní háček: konkrétní okamžik, kdy se ověří, že nová verze pořád pomáhá.
+
+Typické háčky:
+
+- po třech použitích novým člověkem,
+- při prvním samostatném předání práce,
+- při prvním incidentu nebo chybném rozhodnutí v dané situaci,
+- při měsíční kontrole onboardingového rytmu,
+- při změně nástroje, role nebo datového toku.
+
+Kontrolní háček má být krátký:
+
+```text
+Kontrolní háček:
+Po třech použitích zkontrolovat, zda nová rozhodovací tabulka snížila počet doplňujících dotazů na vlastníka a zda nevznikají zbytečné screenshoty zákaznických dat.
+```
+
+Špatný háček:
+
+```text
+Budeme průběžně sledovat kvalitu onboardingu.
+```
+
+To není háček. To je mlha v reflexní vestě.
+
+### 5. Uklidte staré varianty
+
+Největší riziko po standardizaci není špatný nový text. Největší riziko je přežívající stará verze. Pokud se starý materiál tváří platně, někdo ho použije. Ne protože je neopatrný, ale protože systém mu dovolil vybrat špatnou cestu.
+
+Po standardizaci projděte:
+
+- staré odkazy v kanonickém indexu,
+- staré šablony v onboardingu,
+- interní prezentace používané při zaškolení,
+- checklisty v projektových nástrojích,
+- uložené odpovědi v support nástroji,
+- poznámky v chatu nebo znalostní bázi,
+- dočasné výřezy z ověřování.
+
+U každé staré varianty rozhodněte:
+
+```text
+Smazat:
+Materiál nemá samostatnou hodnotu a jen duplikuje platný postup.
+
+Archivovat:
+Materiál je potřeba kvůli historii rozhodnutí, ale musí být jasně označený jako neplatný.
+
+Přesměrovat:
+Materiál má návštěvnost nebo je na něj zvyklý tým, proto obsahuje jen odkaz na platnou verzi.
+
+Sloučit:
+Materiál obsahuje jeden užitečný příklad, který patří do platného balíčku.
+```
+
+Privacy-first poznámka: staré varianty často obsahují konkrétní jména, screenshoty, zákaznické výřezy nebo pracovní poznámky, které už nepotřebujete. Standardizace je dobrý okamžik je smazat, anonymizovat nebo zkrátit. Nečekejte na velký úklid. Ten se v týmech často odkládá tak dlouho, až už nikdo neví, co je vlastně bezpečné smazat.
+
+### 6. Zapište standardizační kartu
+
+Standardizační karta je krátký záznam, který říká, proč se oprava stala součástí balíčku. Není to další dokument k pravidlu. Je to provozní stopa pro budoucí rozhodování.
+
+```text
+Standardizační karta
+
+Název opravy:
+
+Původní nález:
+
+Ověření:
+- datum:
+- pracovní situace:
+- výsledek:
+
+Rozhodnutí:
+standardizovat / nestandardizovat / vrátit do revize
+
+Kanonické místo:
+
+Co se změnilo v balíčku:
+
+Co bylo odstraněno nebo archivováno:
+
+Privacy-first úklid:
+- dočasné poznámky:
+- screenshoty / exporty:
+- přístupy:
+- osobní údaje:
+
+Kontrolní háček:
+
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Standardizační karta
+
+Název opravy:
+Rozlišení supportní eskalace
+
+Původní nález:
+Nový člověk neuměl rozlišit běžný dotaz od povinné eskalace a ptal se vlastníka i u rutinních situací.
+
+Ověření:
+- datum: 2026-05-13
+- pracovní situace: první samostatné zpracování supportního dotazu
+- výsledek: běžný dotaz vyřešen samostatně, hraniční dotaz správně eskalován
+
+Rozhodnutí:
+standardizovat
+
+Kanonické místo:
+onboarding/support/eskalace-dotazu.md
+
+Co se změnilo v balíčku:
+Přidána krátká rozhodovací tabulka a stop pravidlo pro právní, bezpečnostní a datové dotazy.
+
+Co bylo odstraněno nebo archivováno:
+Starý odstavec "když si nejsi jistý, zeptej se" nahrazen konkrétní tabulkou.
+
+Privacy-first úklid:
+- dočasné poznámky: převedeny do této karty a smazány
+- screenshoty / exporty: nevznikly
+- přístupy: beze změny
+- osobní údaje: žádné nové
+
+Kontrolní háček:
+Po třech použitích ověřit počet doplňujících dotazů a datovou stopu.
+
+Vlastník:
+vlastník support onboardingu
+```
+
+### 7. Předejte změnu bez slavnostního hluku
+
+Tým potřebuje vědět, že platí nová verze. Nepotřebuje k tomu dlouhou prezentaci. Stačí pracovní oznámení, které říká, co se změnilo, kde je zdroj pravdy a co se má odteď dělat jinak.
+
+Krátké oznámení:
+
+```text
+Aktualizovali jsme onboarding supportní role v části eskalace dotazů. Platná verze je v kanonickém balíčku. Starý odstavec "když si nejsi jistý, zeptej se" je nahrazen rozhodovací tabulkou. Při právních, bezpečnostních, datových a fakturačních dotazech se teď vždy zapisuje krátké shrnutí a dotaz jde vlastníkovi supportu.
+```
+
+Ještě kratší varianta do changelogu:
+
+```text
+2026-05-13: Standardizována ověřená oprava eskalace supportních dotazů. Přidána rozhodovací tabulka, starý obecný odstavec odstraněn, kontrola po třech použitích.
+```
+
+Tady platí jednoduché pravidlo: čím menší změna, tím kratší komunikace. Pokud k malé opravě píšete interní román, možná tím kompenzujete, že není jasné, co se vlastně změnilo.
+
+### Mini workshop: 30 minut ke standardizaci
+
+1. Pět minut: přečíst ověřovací kartu a stav opravy.
+2. Pět minut: rozhodnout, zda oprava patří do standardu.
+3. Sedm minut: přepsat text do jazyka běžného použití.
+4. Pět minut: určit kanonické místo a staré varianty.
+5. Čtyři minuty: zapsat privacy-first úklid.
+6. Dvě minuty: nastavit kontrolní háček.
+7. Dvě minuty: napsat krátké týmové oznámení.
+
+Když workshop nestihnete za půl hodiny, pravděpodobně standardizujete příliš širokou věc. Vraťte se k jedné opravě, jednomu pracovnímu místu a jednomu rozhodnutí.
+
+### Checklist
+
+- Je jasné, proč se oprava má stát standardem?
+- Řeší oprava opakovatelnou pracovní situaci?
+- Je nový text napsaný jako pracovní pravidlo, ne jako historie review?
+- Existuje jedno kanonické místo?
+- Je aktualizovaný kanonický index?
+- Jsou staré verze smazané, archivované nebo přesměrované?
+- Je v changelogu zapsané datum, důvod a dopad změny?
+- Je nastavený konkrétní kontrolní háček?
+- Byly uklizeny dočasné poznámky, screenshoty, exporty a přístupy?
+- Neobsahuje standardizační karta zbytečné osobní hodnocení nového člověka?
+- Ví tým, co odteď platí?
+- Je změna dost malá na to, aby ji nový člověk použil bez vysvětlení v chatu?
+
+Standardizovaná oprava onboardingového balíčku má jednu jednoduchou ambici: aby příští člověk nemusel znovu objevovat stejnou hranu. Ne proto, že tým napsal víc dokumentace, ale proto, že správná verze je na správném místě, staré varianty nepřekážejí a další kontrola má jasný spouštěč.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FQ o standardizaci ověřené opravy onboardingového balíčku: rozhodnutí, zda oprava patří do standardu, přepis do pracovního pravidla, jedno kanonické místo, kontrolní háček, úklid starých variant, standardizační karta, krátké předání týmu, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FP o ověření opravy onboardingového balíčku po prvním použití: návrat ke kritériu úspěchu, výběr reálného průchodu, sledování práce místo člověka, tři signály rozhodnutí/samostatnosti/datové stopy, stav opravy, privacy-first uzavření, artefakty, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FO o převodu kontroly onboardingového rytmu do jedné opravy balíčku: výběr problému podle samostatnosti, opravná věta, jedno pracovní místo, zkracování místo nabalování, privacy-first kontrola, ověření na reálném průchodu, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FN o kontrole trvalého onboardingového rytmu po prvních použitích: kontrolní okno, původní slib, oddělení problému člověka od problému systému, skrytá pomoc, privacy-first datová stopa, lehké signály, rozhodnutí stavu rytmu, uzavření v artefaktech a checklist.
