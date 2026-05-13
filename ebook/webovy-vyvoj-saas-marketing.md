@@ -47220,8 +47220,264 @@ Na workshopu nemá vzniknout dlouhý protokol. Má vzniknout karta, podle které
 
 Měsíční měření přínosu standardu je zdravá brzda proti dvěma extrémům. První extrém je slepá víra, že standard pomáhá, protože je napsaný. Druhý extrém je nekonečné měření, které práci samo dusí. Dobrý standard si po měsíci zaslouží krátkou, věcnou odpověď: co zlepšil, co zhoršil, co smažeme, co upravíme a podle čeho příště poznáme, že je pořád užitečný.
 
+## Příloha FI: Úprava rolového standardu po měsíční kontrole
+
+Měsíční kontrola standardu nemá končit hezkým zápisem. Má končit změnou, která další použití zjednoduší. Pokud kontrola ukázala, že standard funguje, ale drhne v jedné části, upravte tu jednu část. Pokud ukázala, že standard vytváří zbytečnou evidenci, zkraťte evidenci. Pokud ukázala, že lidé standard obcházejí, zjistěte proč a opravte pracovní trasu, ne jen tón instrukce.
+
+Tahle příloha navazuje na měsíční měření přínosu. Jejím cílem není přepsat celý standard. Cílem je převést nález z kontroly do jedné hotové úpravy, která má vlastníka, datum, první ověření a jasnou stopu v changelogu.
+
+Praktické pravidlo: po měsíční kontrole měňte nejmenší část standardu, která sníží největší tření. Všechno ostatní patří do backlogu.
+
+### 1. Začněte rozhodovací větou
+
+Než otevřete dokument standardu, napište jednu větu, co se mění a proč. Pokud to nejde říct jednou větou, ještě nemáte rozhodnutí, ale jen sbírku pocitů.
+
+Šablona:
+
+```text
+Po měsíční kontrole upravujeme [část standardu], protože [konkrétní signál], aby [pracovní přínos].
+```
+
+Příklady:
+
+```text
+Po měsíční kontrole upravujeme důkaz použití standardu, protože lidé přikládají screenshoty do chatu, aby trvalý záznam zůstal u datové mapy a dočasné podklady šly smazat.
+```
+
+```text
+Po měsíční kontrole zkracujeme krok schvalování formulářových polí, protože u drobných změn zpomaluje práci bez snížení rizika, aby editor mohl bezpečně upravit text pole podle existující datové mapy.
+```
+
+```text
+Po měsíční kontrole doplňujeme spouštěč eskalace, protože nová role nepozná, kdy už změna zasahuje do privacy-first hranice, aby se citlivé změny dostaly k reviewerovi včas.
+```
+
+Rozhodovací věta chrání rozsah. Když se během úpravy objeví deset dalších nápadů, vraťte se k větě. Pokud nápad nepomáhá této větě, nepatří do aktuální iterace.
+
+### 2. Najděte nejmenší pracovní část k úpravě
+
+Rolový standard se obvykle skládá z několika částí. Každá může drhnout jiným způsobem.
+
+Typické části standardu:
+
+- spouštěč: kdy se standard používá,
+- vlastník: kdo standard provádí,
+- hranice role: co role smí rozhodnout sama,
+- postup: konkrétní kroky práce,
+- výstup: co má po práci existovat,
+- důkaz použití: jak poznáte, že standard proběhl,
+- eskalace: kdy se volá další role,
+- privacy-first pravidlo: jak se zachází s daty, podklady a dočasnými kopiemi,
+- údržba: kdy se standard znovu kontroluje.
+
+Nepřepisujte všechny části najednou. Vyberte tu, která způsobila největší pracovní problém.
+
+Příklad:
+
+```text
+Nález z kontroly:
+Nová role používá standard správně, ale neví, kam zapsat odkaz na datovou mapu.
+
+Špatná reakce:
+Přepsat celý standard a doplnit obecnou sekci o dokumentaci.
+
+Lepší reakce:
+Do části "Výstup" doplnit jednu větu a příklad zápisu odkazu na datovou mapu.
+```
+
+Malá úprava má výhodu: dá se ověřit při příštím použití. Velká přestavba často vytvoří nový standard, který zase nikdo pořádně nezná.
+
+### 3. Rozdělte nálezy na teď, příště a backlog
+
+Měsíční kontrola může odhalit víc problémů. To neznamená, že je musíte všechny opravit v jednom běhu. Standard se má zlepšovat, ne nafukovat.
+
+Použijte tři koše:
+
+| Koš | Co sem patří | Výstup |
+| --- | --- | --- |
+| Teď | Jedno tření, které blokuje další použití nebo vytváří zbytečné riziko | Hotová úprava standardu |
+| Příští použití | Signál, který potřebuje ověřit v reálné práci | Kontrolní otázka |
+| Backlog | Užitečný nápad bez jasného dopadu na aktuální standard | Položka s kontextem |
+
+Příklad třídění:
+
+```text
+Teď:
+Doplnit příklad, kam zapisovat odkaz na datovou mapu.
+
+Příští použití:
+Sledovat, jestli po doplnění příkladu mizí screenshoty z chatu.
+
+Backlog:
+Zvážit samostatnou šablonu pro formulářové změny větší než tři pole.
+```
+
+Tahle triage je důležitá hlavně u týmů, které rády každou kontrolu promění v nový systém. Systém není lepší tím, že má víc položek. Je lepší tím, že další práce vyžaduje méně vysvětlování bokem.
+
+### 4. Přepište pravidlo do jazyka role
+
+Standard často selže ne proto, že je špatný, ale proto, že mluví jazykem autora, ne člověka v roli. Po měsíci už víte, kde člověk zaváhal. Tam patří úprava.
+
+Slabá formulace:
+
+```text
+Po změně formuláře aktualizujte související dokumentaci.
+```
+
+Lepší formulace:
+
+```text
+Po změně formuláře přidejte do datové mapy řádek pro nové nebo upravené pole a do changelogu vložte odkaz na tento řádek.
+```
+
+Ještě lepší formulace s hranicí:
+
+```text
+Po změně formuláře přidejte do datové mapy řádek pro nové nebo upravené pole. Pokud měníte účel pole, retenci, povinnost vyplnění nebo předání dodavateli, zastavte změnu a požádejte privacy review.
+```
+
+Rozdíl je v použitelnosti. První věta zní rozumně, ale nechává člověka hádat. Druhá věta říká konkrétní výstup. Třetí věta přidává hranici, kdy už role nemá rozhodovat sama.
+
+Codyho komentář: dobrý standard nevyžaduje, aby si člověk pamatoval úmysl autora. Má mu v pracovní chvíli říct, co udělat, kde to zapsat a kdy zvednout ruku.
+
+### 5. Privacy-first úprava má mazat, nejen přidávat
+
+Po měsíční kontrole se často ukáže, že standard sice chrání data, ale zároveň vytváří dočasné kopie, screenshoty, exporty nebo dlouhé komentáře v chatu. To je typické. Lidé chtějí dokázat, že práci udělali, a nejrychlejší důkaz bývá kopie něčeho citlivého.
+
+Úprava standardu má proto řešit dvě věci:
+
+1. Jaký důkaz opravdu potřebujeme.
+2. Co po ověření smažeme nebo zkrátíme.
+
+Privacy-first pravidlo po úpravě může vypadat takto:
+
+```text
+Trvalý důkaz změny je odkaz na řádek v datové mapě a krátká věta v changelogu.
+Dočasné screenshoty formuláře se používají jen při review a po uzavření změny se mažou.
+Do chatu se nevkládají osobní údaje z reálných poptávek. Pro příklady používejte testovací hodnoty nebo anonymizovaný popis.
+```
+
+Tohle je praktičtější než obecné "dbejte na ochranu dat". Lidé nepotřebují další morální apel. Potřebují vědět, který artefakt je trvalý, který je dočasný a kam nesmí dávat osobní údaje.
+
+Mini checklist privacy-first úpravy:
+
+- Přidává úprava nový záznam, export, screenshot nebo kopii dat?
+- Je jasné, co je trvalý výstup a co je dočasný podklad?
+- Je u dočasných podkladů pravidlo smazání?
+- Dá se důkaz práce zapsat odkazem, agregovaně nebo testovacími daty?
+- Nevzniká kvůli měření standardu víc dat než kvůli samotné práci?
+- Ví role, kdy změnu zastavit a požádat o privacy review?
+
+### 6. Udělejte první ověření po úpravě
+
+Úprava standardu není hotová zápisem do dokumentu. Hotová je až po prvním použití, které ukáže, že úprava řeší původní tření.
+
+Stačí krátká karta:
+
+```text
+Standard:
+Verze úpravy:
+Původní tření:
+Co jsme změnili:
+První použití:
+Kdo použil:
+Výsledek:
+Zůstalo tření:
+Vzniklo nové riziko:
+Dočasné podklady smazány:
+Rozhodnutí:
+Datum další kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Změna formulářových polí
+
+Verze úpravy:
+2026-05-13
+
+Původní tření:
+Nová role nevěděla, kam zapsat odkaz na datovou mapu.
+
+Co jsme změnili:
+Do části "Výstup" jsme přidali příklad řádku v datové mapě a větu do changelogu.
+
+První použití:
+Úprava nepovinného pole "velikost týmu" na landing page.
+
+Výsledek:
+Odkaz na datovou mapu byl zapsán bez vysvětlování bokem.
+
+Zůstalo tření:
+Role si nebyla jistá, kdy změna povinnosti pole potřebuje review.
+
+Vzniklo nové riziko:
+Ne.
+
+Dočasné podklady smazány:
+Ano, screenshot po review odstraněn.
+
+Rozhodnutí:
+Úprava funguje, doplnit při další iteraci hranici pro povinnost pole.
+```
+
+První ověření má být krátké. Pokud z něj vznikne dvouhodinová retrospektiva, standard možná potřebuje zjednodušit ještě víc.
+
+### 7. Komunikujte změnu jako pracovní rozdíl
+
+Lidé nepotřebují oznámení, že "standard byl aktualizován". Potřebují vědět, co mají zítra udělat jinak.
+
+Krátká zpráva týmu:
+
+```text
+Upravili jsme standard pro změny formulářů. Nově se po změně pole zapisuje odkaz na řádek v datové mapě přímo do changelogu. Screenshoty slouží jen pro review a po uzavření změny se mažou. Při změně účelu, retence, povinnosti pole nebo dodavatele se změna zastaví a jde na privacy review.
+```
+
+To je celé. Žádný slavnostní release standardu. Jen pracovní rozdíl, důvod a hranice.
+
+Pokud má tým kanonický index standardů, aktualizujte i ten:
+
+```text
+Standard:
+Změna formulářových polí
+
+Aktuální verze:
+2026-05-13
+
+Co se změnilo:
+Doplněn výstup do datové mapy, pravidlo mazání screenshotů a hranice privacy review.
+
+Kde se používá:
+Landing pages, kontaktní formuláře, lead magnety, onboarding formuláře.
+
+Další kontrola:
+Po třech dalších formulářových změnách nebo za měsíc.
+```
+
+### Checklist
+
+- Má úprava jednu rozhodovací větu?
+- Vybrali jste nejmenší část standardu, která opravdu snižuje tření?
+- Neskončila kontrola přepisem celého dokumentu bez jasného důvodu?
+- Jsou ostatní nálezy rozdělené na teď, příští použití a backlog?
+- Je pravidlo napsané jazykem role, která ho má použít?
+- Obsahuje úprava konkrétní výstup, ne jen obecný apel?
+- Je jasné, kdy role pokračuje sama a kdy eskaluje?
+- Snižuje privacy-first část zbytečné kopie, screenshoty a exporty?
+- Má dočasný podklad pravidlo smazání?
+- Zůstává trvalý důkaz u zdroje pravdy?
+- Proběhne první ověření po úpravě v reálné práci?
+- Má ověřovací karta původní tření, výsledek a rozhodnutí?
+- Komunikujete týmu pracovní rozdíl, ne jen informaci o aktualizaci?
+- Je změna zapsaná v kanonickém indexu nebo changelogu?
+
+Úprava rolového standardu po měsíci je malá provozní dovednost. Bez ní se standardy mění buď příliš málo, takže stárnou, nebo příliš mnoho, takže jim lidé přestanou věřit. Dobrý rytmus je střízlivější: jeden nález, jedna změna, jedno ověření, jeden zápis. Tak standard zůstává živý, ale nezačne řídit víc práce, než kolik jí zlepšuje.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FI o úpravě rolového standardu po měsíční kontrole: rozhodovací věta, výběr nejmenší pracovní části, třídění nálezů, přepis pravidla do jazyka role, privacy-first mazání dočasných podkladů, první ověření a checklist.
 - 2026-05-13: Doplněna Příloha FH o měření přínosu rolového standardu po měsíci provozu: návrat k původnímu slibu, pracovní signály, oddělení přínosu a tření, privacy-first měření, rozhodnutí o dalším stavu, měsíční karta a checklist.
 - 2026-05-13: Doplněna Příloha FG o zařazení ověřeného rolového standardu do provozního rytmu: výběr přirozeného rytmu, provozní háček, minimální výstup, zdroj pravdy, ochranný signál, privacy-first úklid, revize životnosti a checklist.
 - 2026-05-13: Doplněna Příloha FF o kontrole rolového standardu po prvních použitích: návrat k původnímu slibu, spouštěče v provozu, kontrola výstupů, skrytá práce, privacy-first datová stopa, rozhodnutí o stavu standardu, aktualizace pracovních míst a checklist.
