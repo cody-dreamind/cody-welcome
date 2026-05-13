@@ -50970,8 +50970,274 @@ Pravidla:
 
 Převod kvartální kontroly do dalšího cyklu je malý provozní most. Na jedné straně je kontrola, která našla pravdu o standardu. Na druhé straně je běžná práce, kde se má pravda projevit. Když most chybí, kontrola zůstane zápisem. Když je most krátký, jasný a privacy-first, standard se opravdu zlepší bez toho, aby tým získal další vrstvu zbytečné administrativy.
 
+## Příloha FV: Uzavření dalšího cyklu onboardingového standardu po prvním ověření
+
+Další cyklus po kvartální kontrole nesmí zůstat otevřený donekonečna. Pokud Příloha FU vytvořila most z kontroly do běžné práce, tato příloha řeší poslední krok: jak poznat, že změna opravdu fungovala, jak ji uzavřít a jak zabránit tomu, aby se z jedné drobné úpravy stal nový permanentní režim sledování.
+
+Uzavření cyklu není velká retrospektiva. Je to krátké rozhodnutí po prvním reálném ověření. Tým se podívá na výsledek, privacy-first dopad, míru tření a další krok. Pak standard buď vrátí do běžného režimu, lehce opraví, znovu otevře, nebo ukončí. Hotovo znamená rozhodnuto, ne "někde o tom víme".
+
+Tato příloha se hodí hlavně ve chvíli, kdy jste po kvartální kontrole udělali jednu konkrétní změnu: přesunuli příklad blíž k pracovní šabloně, zkrátili pravidlo, smazali starou kopii, doplnili hraniční situaci nebo upravili privacy-first brzdu. Teď potřebujete zjistit, jestli změna pomohla v práci, ne jen v dokumentu.
+
+### 1. Vraťte se k původnímu slibu změny
+
+Nezačínejte otázkou "co všechno jsme našli". Začněte otázkou "co měla tato jedna změna zlepšit". Bez toho se první ověření rozteče do obecné debaty o onboardingu, supportu, dokumentaci a všem, co tým zrovna štve. To může být užitečné jindy. Tady potřebujete uzavřít konkrétní cyklus.
+
+Původní slib napište jednou větou:
+
+```markdown
+Změna měla zajistit, aby nový člověk při odpovědi na onboardingový dotaz použil anonymizovaný hraniční příklad přímo v support šabloně a nekopíroval zákaznickou zprávu do interních poznámek.
+```
+
+Silný slib obsahuje:
+
+- pracovní situaci,
+- očekávané chování,
+- výstup nebo rozhodnutí,
+- privacy-first důvod,
+- hranici, co se neověřuje.
+
+Slabý slib zní například:
+
+```markdown
+Zlepšit práci se standardem.
+```
+
+To není slib, to je mlha v kravatě. Nedá se podle ní rozhodnout, jestli cyklus skončil.
+
+### 2. Ověřujte na reálné práci, ne na názoru
+
+První ověření má stát na konkrétní pracovní stopě. Nemusí být rozsáhlá. Stačí jeden až tři průchody, pokud jsou skutečné.
+
+Vhodné ověřovací podklady:
+
+- tři odpovědi vytvořené pomocí upravené šablony,
+- jeden onboardingový průchod nové role,
+- jedna support situace s hraničním příkladem,
+- záznam z měsíčního review vlastníka standardu,
+- konkrétní použití kanonického odkazu místo staré kopie,
+- výsledek krátkého shadowingu bez citlivých detailů.
+
+Nevhodné ověřovací podklady:
+
+- "lidé říkali, že je to lepší",
+- "vypadá to přehledněji",
+- "nikdo si nestěžoval",
+- "máme pocit, že se to používá",
+- počet otevření dokumentu bez vazby na pracovní výsledek.
+
+Příklad ověření:
+
+```markdown
+Ověřeno na:
+Tři onboardingové odpovědi z posledního týdne.
+
+Pozorování:
+Ve dvou odpovědích byl použit nový anonymizovaný příklad přímo ze šablony.
+V jedné odpovědi člověk stále hledal starý dokument, protože odkaz z onboarding checklistu zůstal na archivní stránce.
+```
+
+To je užitečné, protože z toho vyplývá konkrétní další krok. Není potřeba nová metodika. Stačí opravit odkaz v checklistu.
+
+### 3. Oddělte výsledek, tření a vedlejší efekt
+
+Při uzavírání cyklu sledujte tři věci zvlášť.
+
+Výsledek říká, jestli změna splnila svůj pracovní slib. Tření říká, jestli to lidi stálo zbytečnou energii. Vedlejší efekt říká, jestli změna něco rozbila, prodloužila nebo přenesla problém jinam.
+
+Krátká tabulka:
+
+```markdown
+Výsledek:
+Nový člověk použil správný příklad bez kopírování zákaznické zprávy.
+
+Tření:
+Musel jednou hledat, která šablona je aktuální.
+
+Vedlejší efekt:
+Žádný nový sběr dat, ale starý odkaz v checklistu stále vede na archiv.
+```
+
+Když tyto věci smícháte, snadno uděláte špatné rozhodnutí. Dobrá změna s drobným třením nepotřebuje restart celého standardu. Potřebuje malou opravu. Špatná změna bez tření je pořád špatná změna. Lidé ji sice snadno použijí, ale pokud vede ke zbytečnému ukládání zákaznických dat, není hotovo.
+
+Codyho komentář: "snadno použitelné" není automaticky dobře. I špatný formulář může být krásně rychlý. Jen rychle sbírá věci, které nikdy sbírat neměl. Gratuluji, postavili jsme efektivní problém.
+
+### 4. Udělejte privacy-first kontrolu uzavření
+
+Každý cyklus standardu po sobě zanechá nějakou stopu: poznámky, screenshoty, příklady, kopie šablon, komentáře, dočasné exporty nebo pracovní záznamy. Při uzavření zkontrolujte, co má zůstat a co má zmizet.
+
+Privacy-first uzavření:
+
+- ponechte jen výstup, který má jasný provozní účel,
+- anonymizujte příklady, které se budou používat v onboardingu,
+- smažte dočasné screenshoty a kopie zákaznických zpráv,
+- omezte přístup k interním poznámkám, pokud obsahují citlivý kontext,
+- nepřidávejte nové měření, pokud neodpovídá na rozhodovací otázku,
+- zapište retenční pravidlo pro artefakty z ověření.
+
+Praktický zápis:
+
+```markdown
+Datová stopa ověření:
+- pracovní poznámka vlastníka standardu: ponechat 30 dní,
+- anonymizovaný příklad v šabloně: ponechat,
+- screenshot zákaznické zprávy: smazán,
+- stará kopie standardu v osobních poznámkách: smazána,
+- odkaz v onboarding checklistu: opraven na kanonické místo.
+```
+
+Tento krok je malý, ale důležitý. Standardy často stárnou ne proto, že se zapomene pravidlo, ale proto, že kolem nich zůstane hromada dočasných materiálů. Ty pak vypadají oficiálně, i když měly žít jen týden.
+
+### 5. Rozhodněte jednou větou
+
+Po ověření napište jedno hlavní rozhodnutí. Ne dlouhý zápis, ne kompromisní odstavec, který nechce nikoho urazit. Jednu větu.
+
+Možné stavy:
+
+- ponechat v běžném režimu,
+- ponechat a opravit jednu drobnost,
+- vrátit na jeden cyklus do opravného režimu,
+- sloučit s jiným standardem,
+- archivovat,
+- odložit rozhodnutí, protože nebylo reálné použití.
+
+Příklady rozhodnutí:
+
+```markdown
+Standard ponecháváme v běžném režimu; jediná oprava je aktualizace odkazu v onboarding checklistu.
+```
+
+```markdown
+Standard vracíme na jeden opravný cyklus, protože nový příklad sice snížil kopírování dat, ale lidé stále nevědí, kdy ho použít.
+```
+
+```markdown
+Rozhodnutí odkládáme o měsíc, protože od kvartální změny nenastalo žádné reálné použití standardu.
+```
+
+Odložené rozhodnutí není ostuda, pokud je poctivě zdůvodněné. Ostuda je předstírat uzavření bez důkazu. Tým pak věří, že standard funguje, protože má hezký zápis. Zápis ale zákaznická data neochrání a novému člověku neporadí.
+
+### 6. Uzavřete nebo otevřete jen jeden další úkol
+
+Pokud změna fungovala, uzavřete cyklus. Pokud našla drobný problém, otevřete jeden další úkol. Ne pět. Ne "revizi onboardingu". Jeden konkrétní úkol, který přímo souvisí s ověřením.
+
+Dobré další úkoly:
+
+- opravit odkaz v onboarding checklistu,
+- smazat starou kopii šablony,
+- zkrátit příklad o citlivý detail,
+- přidat jednu rozhodovací větu do pracovní šablony,
+- přesunout kanonický odkaz blíž k místu použití.
+
+Špatné další úkoly:
+
+- kompletně předělat interní wiki,
+- vytvořit nový dashboard používání standardů,
+- přidat povinné schvalování každé odpovědi,
+- zavést další meeting ke standardům,
+- otevřít výběr nového support systému bez jasného důvodu.
+
+Pravidlo je jednoduché: první ověření má buď cyklus zavřít, nebo opravit překážku, kterou samo odhalilo. Nemá vyrábět nový provozní aparát.
+
+### 7. Přeneste poučení do správného místa
+
+Po uzavření se zeptejte, kam patří poučení. Ne každé poučení patří do standardu samotného. Někdy patří do šablony, někdy do checklistu, někdy do onboardingové trasy a někdy jen do pracovního logu.
+
+Rozhodovací mapa:
+
+- Pokud poučení pomáhá při konkrétní práci, patří do pracovní šablony.
+- Pokud pomáhá novému člověku najít cestu, patří do onboarding checklistu.
+- Pokud mění pravidlo pro všechny, patří do kanonického standardu.
+- Pokud jen vysvětluje historický důvod, patří do changelogu.
+- Pokud obsahuje citlivý detail, nepatří do veřejné ani onboardingové ukázky bez anonymizace.
+
+Příklad:
+
+```markdown
+Poučení:
+Nový člověk nehledal obecný standard, ale šablonu odpovědi.
+
+Kam patří:
+Do support šablony přidat pracovní zkratku.
+Do kanonického standardu ponechat plné pravidlo.
+Do changelogu zapsat důvod změny.
+```
+
+Tak se poučení dostane k člověku ve chvíli, kdy ho potřebuje. To je lepší než přidat další odstavec do centrální dokumentace a doufat, že si ho někdo najde mezi kávou a panikou.
+
+### Šablona uzavření cyklu
+
+```markdown
+# Uzavření dalšího cyklu onboardingového standardu
+
+Standard:
+Kanonické místo:
+Datum kvartální změny:
+Datum prvního ověření:
+Vlastník:
+
+Původní slib změny:
+
+Ověřeno na:
+
+Výsledek:
+
+Tření:
+
+Vedlejší efekt:
+
+Privacy-first kontrola:
+- co ponechat:
+- co anonymizovat:
+- co smazat:
+- co přesunout:
+- retenční pravidlo:
+
+Rozhodnutí:
+
+Jeden další úkol, pokud existuje:
+
+Kam přenést poučení:
+
+Kdy se k tomu vrátíme:
+```
+
+### Mini workshop: 20 minut na uzavření
+
+Agenda:
+
+1. 4 minuty: připomenout původní slib změny.
+2. 5 minut: projít jeden až tři reálné průchody.
+3. 4 minuty: oddělit výsledek, tření a vedlejší efekt.
+4. 3 minuty: udělat privacy-first úklidovou kontrolu.
+5. 2 minuty: napsat jednověté rozhodnutí.
+6. 2 minuty: určit maximálně jeden další úkol nebo cyklus zavřít.
+
+Pravidla:
+
+- Neotevírejte širší audit onboardingu.
+- Nehodnoťte člověka, hodnoťte standard a pracovní trasu.
+- Nepoužívejte citlivá zákaznická data jako ilustrační materiál, pokud nejsou nutná a povolená.
+- Pokud nebylo reálné použití, rozhodnutí poctivě odložte.
+- Pokud změna funguje, zavřete cyklus a nepřidávejte další kontrolu jen ze zvyku.
+
+### Checklist
+
+- Máte původní slib změny napsaný jednou větou?
+- Ověřujete na reálné práci, ne jen na pocitu?
+- Oddělili jste výsledek, tření a vedlejší efekt?
+- Zkontrolovali jste datovou stopu ověření?
+- Smazali jste dočasné materiály, které nemají další účel?
+- Je rozhodnutí po ověření jasné a jednověté?
+- Otevřeli jste maximálně jeden další úkol?
+- Přenesli jste poučení do správného pracovního místa?
+- Nezvětšili jste standard kvůli jedné drobné opravě?
+- Je jasné, kdy se k tématu vrátit, pokud vůbec?
+
+Uzavření cyklu je drobná provozní hygiena, která brání nekonečnému rozpracování. Standard má pomáhat práci, ne vyrábět další vrstvu starostí. Když po prvním ověření umíte říct, co fungovalo, co se smaže, co se opraví a co se zavírá, tým získá klid. A klid v provozu je podceňovaná konkurenční výhoda. Není efektní na konferenci, ale je krásně praktický v pondělí ráno.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FV o uzavření dalšího cyklu onboardingového standardu po prvním ověření: návrat k původnímu slibu změny, ověření na reálné práci, oddělení výsledku, tření a vedlejšího efektu, privacy-first úklid, jednověté rozhodnutí, přenos poučení, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FU o převodu kvartální kontroly onboardingového standardu do dalšího cyklu: stav po kontrole, kanonické místo, ověřovací háček, uzavření privacy-first nálezů, vědomé neřešení širšího rozsahu, předání změny, první ověření, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FT o kvartální kontrole trvalého onboardingového standardu: návrat k pracovnímu slibu, tři reálné průchody, rozlišení dodržení, užitečnosti a ceny, kontrola stárnutí standardu, privacy-first kontrola výstupů, hledání obcházení, jednověté rozhodnutí, jedna malá změna, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FS o převodu stabilizované onboardingové opravy do trvalého standardu: výběr opakovatelného výsledku, kanonické místo podle okamžiku použití, stabilní jazyk pravidla, uzavření opravného režimu, životnost standardu, napojení na onboarding nové role, privacy-first úklid, šablona, mini workshop a checklist.
