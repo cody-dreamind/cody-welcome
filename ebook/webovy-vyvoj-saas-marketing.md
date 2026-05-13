@@ -46905,8 +46905,324 @@ Výstup workshopu je provozní karta zařazení standardu. Pokud na konci není 
 
 Zařazení standardu do provozního rytmu je okamžik, kdy se pravidlo stává normální prací. Ne proto, že ho někdo slavnostně schválil, ale proto, že se objeví ve správný čas, na správném místě a zanechá jen takovou stopu, která pomáhá dalšímu rozhodnutí. To je dobrý stav: méně připomínání, méně improvizace, méně datového nepořádku a víc práce, která se dá předat.
 
+## Příloha FH: Měření přínosu rolového standardu po měsíci provozu
+
+Standard zařazený do provozního rytmu má po měsíci ukázat dvě věci: jestli opravdu pomáhá práci a jestli nevyrábí nový nepořádek. Nestačí, že existuje v checklistu. Nestačí ani to, že ho někdo jednou použil. Po měsíci se ptejte, zda standard změnil chování v běžných situacích.
+
+Měření přínosu standardu není audit lidí. Není to ani dashboard pro mikromanagement. Je to krátká provozní kontrola, která porovná původní slib se skutečností: méně improvizace, jasnější rozhodnutí, lepší předání, méně zbytečných dat a rychlejší návrat ke zdroji pravdy.
+
+Tuto přílohu použijte přibližně po prvním měsíci od zařazení standardu do rytmu, případně po třech až pěti relevantních použitích. Když za měsíc žádná relevantní situace nenastala, neměřte přínos naslepo. Zapište jen, že standard nebyl spuštěn, a ověřte, zda je jeho spouštěč pořád reálný.
+
+### 1. Vraťte se k původnímu slibu
+
+Každý standard vznikl kvůli nějakému slibu. Ten slib bývá praktičtější než název standardu. Může znít například:
+
+- nové formulářové pole se nepublikuje bez účelu, vlastníka a úklidu dat,
+- support signál se dostane k produktu bez přenášení zákaznických detailů,
+- změna v indexu má jasný důvod a nejde dohledávat v chatu,
+- onboarding nové role nevyžaduje tři soukromé vysvětlovací hovory,
+- marketingová kampaň má před spuštěním známé datové stopy a měření.
+
+Začněte otázkou:
+
+```markdown
+Co měl standard zlepšit v práci, předání nebo ochraně dat?
+```
+
+Pak napište jednu větu:
+
+```markdown
+Po měsíci chceme vidět, že [konkrétní pracovní situace] probíhá [lepší stav] bez [nežádoucí vedlejší efekt].
+```
+
+Příklad:
+
+```markdown
+Po měsíci chceme vidět, že změny formulářů procházejí launch checklistem s jasným účelem sběru dat bez toho, aby si tým ukládal screenshoty a exporty zákaznických odpovědí do pracovních chatů.
+```
+
+Tahle věta je kotva. Bez ní se kontrola snadno rozpadne na dojmy: někdo má pocit, že standard pomáhá, někdo má pocit, že zdržuje, a nikdo neví, podle čeho rozhodnout.
+
+### 2. Sledujte pracovní signály, ne osobní aktivitu
+
+Dobrý signál popisuje práci, ne člověka. Nechcete měřit, kolikrát kdo klikl, jak dlouho byl v dokumentu nebo kdo přesně co nestihl. Chcete vědět, zda se zlepšila pracovní trasa.
+
+Užitečné signály:
+
+- méně dotazů na to, kdo rozhoduje,
+- méně rozhodnutí ztracených v chatu,
+- kratší čas od spouštěče k prvnímu použitelnému výstupu,
+- méně dočasných kopií a screenshotů,
+- více odkazů na zdroj pravdy místo opisování pravidel,
+- méně zákaznických detailů v trvalých zápisech,
+- rychlejší onboarding člověka, který standard používá poprvé,
+- méně výjimek, které musí řešit někdo mimo roli.
+
+Slabé signály:
+
+- počet otevření dokumentu,
+- počet komentářů bez vyhodnocení kvality,
+- subjektivní známka bez příkladu,
+- obecné tvrzení "standard se používá",
+- seznam lidí, kteří udělali chybu.
+
+Příklad pracovní scorecard:
+
+```markdown
+Standard: Kontrola nového pole ve formuláři
+Původní slib: žádné nové pole bez účelu, vlastníka, retence a vysvětlení pro uživatele.
+
+Signál 1: Každá změna pole má odkaz na datovou mapu.
+Stav: splněno ve 3 ze 4 změn
+
+Signál 2: Dočasné screenshoty byly smazány po review.
+Stav: splněno ve 2 ze 4 změn
+
+Signál 3: Role nepotřebovala vysvětlení bokem.
+Stav: nesplněno u jedné nové osoby
+```
+
+Scorecard má vést k rozhodnutí, ne k divadlu s čísly. Tři dobré signály stačí. Když jich máte deset, často měříte víc vlastní úzkost než přínos standardu.
+
+### 3. Oddělte přínos, tření a vedlejší škody
+
+Po měsíci se skoro vždycky objeví tři typy nálezů. Nemíchejte je dohromady.
+
+**Přínos** je změna, kvůli které standard stojí za udržení.
+
+Příklady:
+
+- rozhodnutí je dohledatelné bez ptaní,
+- role ví, kdy standard spustit,
+- zákaznický detail se nepřenáší do trvalého výstupu,
+- onboarding nové osoby potřeboval méně vysvětlování,
+- změna šla předat mezi lidmi bez ztráty kontextu.
+
+**Tření** je náklad, který může být přijatelný, pokud je menší než přínos.
+
+Příklady:
+
+- standard přidá dvě minuty práce při změně formuláře,
+- role musí jednou měsíčně doplnit rozhodovací větu,
+- reviewer musí zkontrolovat, zda odkaz vede na správný zdroj pravdy.
+
+**Vedlejší škoda** je signál, že standard zlepšil jednu věc, ale poškodil jinou.
+
+Příklady:
+
+- kvůli standardu vznikají nové kopie dokumentů,
+- lidé raději obcházejí změnovou bránu,
+- do trvalého zápisu se dostává víc osobních nebo zákaznických detailů než dřív,
+- role čeká na schválení i u drobností, které měla řešit samostatně,
+- standard vytlačil jednoduchý úsudek a nahradil ho mechanickým vyplňováním.
+
+Krátká tabulka:
+
+```markdown
+| Nález | Typ | Co s tím |
+| --- | --- | --- |
+| Rozhodnutí u změny pole je nově v datové mapě | přínos | ponechat |
+| Role se ptá, kam patří odkaz na zdroj pravdy | tření | doplnit příklad |
+| Tým ukládá screenshoty do chatu kvůli "důkazu" | vedlejší škoda | upravit privacy-first pravidlo a smazat kopie |
+```
+
+Codyho komentář: tření není automaticky problém. Nulové tření často znamená, že standard nic nedělá. Problém je tření bez přínosu nebo přínos koupený datovým nepořádkem.
+
+### 4. Měřte privacy-first způsobem
+
+Měření přínosu nesmí zradit hodnotu standardu. Pokud standard chrání data, nemá jeho kontrola vytvářet ještě větší datovou stopu. To se děje překvapivě snadno: exporty tiketů, kopie konverzací, screenshoty formulářů, tabulky s lidmi, ruční sběr detailů "pro jistotu".
+
+Privacy-first měření má čtyři pravidla:
+
+1. Měřte agregovaně, pokud nepotřebujete konkrétní případ.
+2. Konkrétní příklady anonymizujte nebo zkraťte na pracovní vzor.
+3. Dočasné podklady mažte po vyhodnocení.
+4. Trvalý výstup držte u zdroje pravdy, ne v osobních poznámkách.
+
+Příklad dobrého zápisu:
+
+```markdown
+Ve 2 ze 4 změn formuláře zůstaly dočasné screenshoty v chatu i po review. Neobsahovaly zákaznické odpovědi, ale obsahovaly interní pracovní kontext. Opatření: přidat do standardu řádek "screenshot smaž po uzavření review" a přesunout kontrolu do launch checklistu.
+```
+
+Příklad slabého zápisu:
+
+```markdown
+Přikládáme všechny screenshoty a konverzace, aby bylo vidět, kdo co udělal.
+```
+
+Druhá verze možná vypadá důkladně, ale je horší provoz. Vyrábí archiv, který nikdo nepotřebuje, a zvyšuje riziko úniku kontextu. Přínos standardu se má měřit tak, aby po měření zůstalo méně zbytečných dat, ne víc.
+
+### 5. Rozhodněte o dalším stavu standardu
+
+Po měsíční kontrole musí padnout rozhodnutí. Bez něj je kontrola jen další poznámka v dokumentu.
+
+Použijte jeden z těchto stavů:
+
+- `ponechat`: standard plní slib a tření je přiměřené,
+- `zjednodušit`: slib platí, ale postup je zbytečně těžký,
+- `zpřesnit spouštěč`: standard se spouští moc často, moc pozdě nebo moc brzy,
+- `doplnit příklad`: lidé rozumí směru, ale chybí jim ukázka výstupu,
+- `upravit privacy-first pravidlo`: standard pomáhá, ale zanechává špatnou datovou stopu,
+- `vrátit do pilotu`: dopad je nejasný a je potřeba menší ověření,
+- `sloučit`: stejný slib řeší jiný standard nebo checklist,
+- `ukončit`: standard neplní slib nebo řeší problém, který už není reálný.
+
+Rozhodovací věta:
+
+```markdown
+Po měsíci standard [stav], protože [hlavní důkaz]. Do další kontroly upravíme [jedna změna] a změříme [jeden signál].
+```
+
+Příklad:
+
+```markdown
+Po měsíci standard zjednodušit, protože změny formulářů už mají jasný účel a vlastníka, ale role pořád ukládá dočasné screenshoty mimo zdroj pravdy. Do další kontroly upravíme privacy-first pravidlo úklidu a změříme, zda po review zůstávají jen odkazy a agregovaný zápis.
+```
+
+Jedno rozhodnutí je lepší než pět neurčitých doporučení. Když se snažíte opravit všechno najednou, nikdo neví, co se vlastně změnilo.
+
+### 6. Aktualizujte jen místa, která rozhodnutí skutečně potřebují
+
+Měsíční kontrola často odhalí drobné změny v několika artefaktech. Neznamená to, že máte přepsat celý systém. Aktualizujte jen to, co ovlivní další použití.
+
+Typická místa:
+
+- karta standardu,
+- provozní háček v checklistu,
+- příklad výstupu,
+- privacy-first pravidlo úklidu,
+- onboarding role,
+- changelog standardu,
+- kanonický index standardů.
+
+Pravidlo:
+
+```markdown
+Když změna nepomůže dalšímu použití, předání nebo úklidu dat, nechte ji mimo trvalý systém.
+```
+
+Příklad drobné, ale užitečné aktualizace:
+
+```markdown
+Původní pravidlo:
+Dočasné podklady smaž po review.
+
+Upravené pravidlo:
+Dočasné screenshoty a exporty smaž po uzavření review; v changelogu ponech jen odkaz na zdroj pravdy a agregovanou rozhodovací větu.
+```
+
+Tohle je přesně ten typ změny, který zlepší provoz bez velké reorganizace. Malá věta, jasnější chování.
+
+### Měsíční karta přínosu standardu
+
+```markdown
+Název standardu:
+Role vlastníka:
+Provozní rytmus:
+Datum zařazení do rytmu:
+Období kontroly:
+
+Původní slib:
+Měřená pracovní situace:
+
+Signál 1:
+Stav:
+Důkaz bez zbytečných osobních nebo zákaznických detailů:
+
+Signál 2:
+Stav:
+Důkaz bez zbytečných osobních nebo zákaznických detailů:
+
+Signál 3:
+Stav:
+Důkaz bez zbytečných osobních nebo zákaznických detailů:
+
+Přínosy:
+Tření:
+Vedlejší škody:
+
+Privacy-first kontrola:
+Dočasné podklady k odstranění:
+Trvalý výstup:
+
+Rozhodnutí:
+Jedna úprava do další kontroly:
+Další signál ke sledování:
+Datum další kontroly:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název standardu: Kontrola nového pole ve formuláři
+Role vlastníka: provozní správce webu
+Provozní rytmus: launch checklist a změnová brána formulářů
+Datum zařazení do rytmu: 2026-05-13
+Období kontroly: první měsíc provozu
+
+Původní slib: nové pole nepůjde ven bez účelu, vlastníka, retence a srozumitelného vysvětlení.
+Měřená pracovní situace: změny veřejných formulářů na webu.
+
+Signál 1: každá změna pole má odkaz na datovou mapu
+Stav: splněno ve 3 ze 4 změn
+Důkaz bez zbytečných osobních nebo zákaznických detailů: odkazy na položky datové mapy
+
+Signál 2: po review nezůstávají dočasné screenshoty v chatu
+Stav: nesplněno ve 2 ze 4 změn
+Důkaz bez zbytečných osobních nebo zákaznických detailů: agregovaný počet, bez přiložených screenshotů
+
+Signál 3: role použila standard bez vysvětlení bokem
+Stav: splněno u zkušené role, nesplněno u nové role
+Důkaz bez zbytečných osobních nebo zákaznických detailů: poznámka z onboardingu bez jmen zákazníků
+
+Přínosy: účel a vlastník pole jsou dohledatelné.
+Tření: nová role neví, kam zapsat odkaz na datovou mapu.
+Vedlejší škody: dočasné screenshoty zůstávají v chatu déle, než je potřeba.
+
+Privacy-first kontrola: trvalý výstup je v datové mapě a changelogu; dočasné screenshoty smazat po review.
+Dočasné podklady k odstranění: screenshoty změn formuláře z pracovního chatu.
+Trvalý výstup: odkaz na datovou mapu a rozhodovací věta v changelogu.
+
+Rozhodnutí: zjednodušit a upravit privacy-first pravidlo.
+Jedna úprava do další kontroly: doplnit příklad zápisu odkazu na datovou mapu a větu o mazání screenshotů.
+Další signál ke sledování: po review zůstávají jen odkazy a agregovaný zápis.
+Datum další kontroly: po dalších třech změnách formuláře.
+```
+
+### Mini workshop: 30 minut na měsíční kontrolu
+
+1. Pět minut: přečtěte původní slib standardu.
+2. Pět minut: vyberte tři pracovní signály.
+3. Pět minut: zapište přínosy, tření a vedlejší škody.
+4. Pět minut: zkontrolujte dočasné podklady a trvalou datovou stopu.
+5. Pět minut: rozhodněte o stavu standardu.
+6. Pět minut: zapište jednu úpravu, jeden další signál a datum další kontroly.
+
+Na workshopu nemá vzniknout dlouhý protokol. Má vzniknout karta, podle které bude příští použití standardu jednodušší a čistší.
+
+### Checklist
+
+- Vrací se kontrola k původnímu slibu standardu?
+- Měříte pracovní situaci, ne osobní aktivitu lidí?
+- Máte nejvýše tři signály, které opravdu vedou k rozhodnutí?
+- Jsou důkazy zapsané bez zbytečných osobních nebo zákaznických detailů?
+- Rozlišili jste přínos, tření a vedlejší škodu?
+- Je jasné, které tření je přijatelné a které už ne?
+- Nevytváří měření víc screenshotů, exportů nebo kopií než samotná práce?
+- Máte pravidlo pro smazání dočasných podkladů?
+- Zůstává trvalý výstup u zdroje pravdy?
+- Padlo jedno konkrétní rozhodnutí o stavu standardu?
+- Je další úprava malá, pojmenovaná a proveditelná?
+- Je určen jeden signál pro další kontrolu?
+- Aktualizujete jen místa, která ovlivní další použití?
+- Dá se výsledek kontroly pochopit bez vysvětlování bokem?
+
+Měsíční měření přínosu standardu je zdravá brzda proti dvěma extrémům. První extrém je slepá víra, že standard pomáhá, protože je napsaný. Druhý extrém je nekonečné měření, které práci samo dusí. Dobrý standard si po měsíci zaslouží krátkou, věcnou odpověď: co zlepšil, co zhoršil, co smažeme, co upravíme a podle čeho příště poznáme, že je pořád užitečný.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FH o měření přínosu rolového standardu po měsíci provozu: návrat k původnímu slibu, pracovní signály, oddělení přínosu a tření, privacy-first měření, rozhodnutí o dalším stavu, měsíční karta a checklist.
 - 2026-05-13: Doplněna Příloha FG o zařazení ověřeného rolového standardu do provozního rytmu: výběr přirozeného rytmu, provozní háček, minimální výstup, zdroj pravdy, ochranný signál, privacy-first úklid, revize životnosti a checklist.
 - 2026-05-13: Doplněna Příloha FF o kontrole rolového standardu po prvních použitích: návrat k původnímu slibu, spouštěče v provozu, kontrola výstupů, skrytá práce, privacy-first datová stopa, rozhodnutí o stavu standardu, aktualizace pracovních míst a checklist.
 - 2026-05-13: Doplněna Příloha FE o převodu ověřeného provozního zvyku do rolového standardu: výběr vhodného zvyku, vlastnictví role, provozní věta, krátký postup, privacy-first brána, důkaz použití, onboarding a kontrola po prvním předání.
