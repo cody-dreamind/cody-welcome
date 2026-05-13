@@ -51235,8 +51235,269 @@ Pravidla:
 
 Uzavření cyklu je drobná provozní hygiena, která brání nekonečnému rozpracování. Standard má pomáhat práci, ne vyrábět další vrstvu starostí. Když po prvním ověření umíte říct, co fungovalo, co se smaže, co se opraví a co se zavírá, tým získá klid. A klid v provozu je podceňovaná konkurenční výhoda. Není efektní na konferenci, ale je krásně praktický v pondělí ráno.
 
+## Příloha FW: Převod uzavřeného onboardingového cyklu do týmové paměti
+
+Uzavřený onboardingový cyklus má hodnotu jen tehdy, když z něj zůstane použitelné poučení. Ne celá historie, ne každý komentář, ne kompletní sada pracovních poznámek. Poučení. Tedy něco, co příštímu člověku zkrátí cestu, vlastníkovi standardu usnadní rozhodnutí a týmu pomůže neopakovat stejnou chybu.
+
+Tato příloha navazuje na Přílohu FV. Tam jste cyklus uzavřeli: ověřili změnu, rozhodli stav, uklidili datovou stopu a případně otevřeli jeden další úkol. Teď řešíte poslední praktickou otázku: co z toho má přejít do týmové paměti a v jaké podobě.
+
+Týmová paměť není archiv všeho. Je to pracovní systém, který v pravý čas připomene správné rozhodnutí. Když do ní přidáte moc detailů, lidé ji přestanou používat. Když do ní nepřidáte nic, poučení zůstane v hlavě jednoho člověka a po měsíci se z něj stane legenda typu "něco jsme tehdy řešili". Legendy jsou fajn u táboráku. V provozu jsou drahé.
+
+### 1. Vyberte jen opakovatelný vzor
+
+Ne každé poučení si zaslouží místo v týmové paměti. Některé bylo jednorázové, dané konkrétní zakázkou, člověkem, migrací nebo špatně nastaveným odkazem. Týmová paměť má sbírat vzory, které se pravděpodobně vrátí.
+
+Ptejte se:
+
+- Může se tato situace objevit znovu u jiné role?
+- Pomůže poučení člověku rozhodnout rychleji?
+- Chrání poučení data, důvěru, kvalitu nebo čas týmu?
+- Dá se napsat bez citlivých detailů?
+- Je lepší ho vložit do existujícího místa než zakládat nové?
+
+Příklad opakovatelného vzoru:
+
+```markdown
+Když onboardingový příklad vychází ze zákaznické situace, musí být anonymizovaný a uložený přímo v pracovní šabloně, ne jako screenshot ve vlákně komentářů.
+```
+
+Příklad jednorázového detailu:
+
+```markdown
+V úterý 12. 5. byl v checklistu starý odkaz na archivní stránku.
+```
+
+První věta patří do paměti. Druhá patří do changelogu nebo ticketu, pokud už není opravená. Ne proto, že by nebyla pravdivá. Protože nepomáhá příštímu člověku dostatečně obecně.
+
+### 2. Přepište poučení do rozhodovací věty
+
+Poučení má být použitelné ve chvíli práce. Proto ho napište jako rozhodovací větu, ne jako retrospektivní poznámku. Rozhodovací věta říká, co dělat, kdy to dělat a proč.
+
+Struktura:
+
+```markdown
+Když [pracovní situace], udělej [konkrétní krok], aby [důvod nebo chráněná hodnota].
+```
+
+Příklady:
+
+```markdown
+Když nový člověk odpovídá na dotaz podle onboardingové šablony, použije anonymizovaný příklad přímo ze šablony, aby nemusel kopírovat zákaznický kontext do interních poznámek.
+```
+
+```markdown
+Když standard mění pracovní trasu, aktualizuje se nejdřív kanonický checklist a až potom podpůrné materiály, aby tým nepoužíval dvě verze pravidla.
+```
+
+```markdown
+Když se po prvním ověření najde jen drobná překážka, otevře se jeden konkrétní úkol, aby se z uzavření cyklu nestal nový audit.
+```
+
+Slabá formulace:
+
+```markdown
+Je potřeba dávat pozor na příklady a odkazy.
+```
+
+Ano, je. Také je potřeba pít vodu a neklikat na podezřelé přílohy. Slabá věta sice zní moudře, ale v práci nikoho nevede.
+
+### 3. Najděte správný domov poučení
+
+Poučení patří tam, kde ho člověk potřebuje. Ne automaticky do centrální wiki. Centrální wiki je dobrý index a zdroj pravdy, ale špatné místo pro každou drobnou pracovní připomínku. Pokud člověk řeší support odpověď, poučení má být v support šabloně. Pokud řeší první týden nové role, má být v onboarding checklistu. Pokud řeší pravidlo pro celý tým, má být v kanonickém standardu.
+
+Jednoduchá mapa:
+
+- Pracovní krok: šablona, checklist nebo formulář.
+- Vysvětlení pravidla: kanonický standard.
+- Historie změny: changelog.
+- Vzor pro jiné týmy: týmová paměť nebo index lekcí.
+- Dočasný detail: ticket, pracovní poznámka nebo nic po uzavření.
+
+Příklad:
+
+```markdown
+Poučení:
+Nový člověk nepoužil standard, protože ho nehledal ve wiki, ale přímo v šabloně odpovědi.
+
+Domov:
+- Support šablona: krátká rozhodovací věta.
+- Kanonický standard: plné pravidlo pro práci s příklady.
+- Changelog: důvod změny a datum.
+- Týmová paměť: obecný vzor "poučení dávej do místa použití".
+```
+
+Tím nevznikne další dokumentační vrstva. Vznikne krátká stopa ve čtyřech místech, kde každé má jinou roli. To je rozdíl mezi systémem a hromadou textů.
+
+### 4. Zkraťte příběh na pracovní minimum
+
+Týmová paměť nepotřebuje dramatický román o tom, jak vznikl problém. Potřebuje kontext v rozsahu, který stačí k lepšímu rozhodnutí.
+
+Pracovní minimum:
+
+- situace,
+- problém,
+- rozhodnutí,
+- důvod,
+- odkaz na kanonické místo,
+- datum nebo verze,
+- vlastník, pokud je potřeba.
+
+Příklad karty:
+
+```markdown
+Lekce: Příklady patří do místa použití
+
+Situace:
+Nový člověk měl použít anonymizovaný příklad pro support odpověď.
+
+Problém:
+Příklad byl v odděleném dokumentu, takže člověk hledal starou kopii a hrozilo kopírování zákaznického kontextu.
+
+Rozhodnutí:
+Anonymizovaný příklad je přímo v support šabloně. Kanonický standard drží pravidlo, šablona drží použitelný příklad.
+
+Důvod:
+Méně tření, méně kopií, nižší riziko práce s citlivými daty.
+
+Kanonické místo:
+Support šablona / Onboarding standard / Changelog
+```
+
+To stačí. Pokud karta potřebuje pět odstavců vysvětlení, pravděpodobně v ní mícháte poučení, historii, emoce a návrhy dalších změn. Rozdělte to.
+
+### 5. Proveďte privacy-first filtr před uložením
+
+Převod do týmové paměti je rizikový okamžik. Právě tady se často z dočasné poznámky stane trvalý materiál. A právě tady se do interních znalostí potichu dostávají zákaznické citace, screenshoty, osobní údaje, jména lidí, interní konflikty nebo technické detaily, které nemají být široce viditelné.
+
+Privacy-first filtr:
+
+- Nepřenášejte zákaznické citace, pokud nejsou nutné a povolené.
+- Nahraďte konkrétní jména rolí nebo anonymizovaným popisem.
+- Odstraňte identifikátory účtů, projektů, ticketů a interních URL, pokud nejsou potřeba.
+- Neskladujte screenshoty, když stačí textový vzor.
+- Omezte přístup ke kartě, pokud obsahuje interně citlivý provozní kontext.
+- Nastavte životnost poučení, pokud je dočasné.
+
+Codyho komentář: týmová paměť má chránit před opakováním chyb, ne konzervovat všechno, co se kdy povedlo opsat do poznámek. Pokud do ní uložíte citlivý detail jen proto, že "se může hodit", právě jste z užitečné lekce udělali malý datový sklad se sebevědomím poznámkového bloku.
+
+Dobrá anonymizace nemá zničit smysl poučení. Má odstranit zbytečnou identifikovatelnost. "Zákazník z regulovaného oboru poslal citlivý příklad v support dotazu" často stačí. Není nutné ukládat jeho jméno, doménu, screenshot a celý text zprávy.
+
+### 6. Připojte poučení k onboardingu nové role
+
+Pokud poučení vzniklo z onboardingového cyklu, ověřte, jestli ho uvidí další člověk ve stejné roli. Ne jako povinnou četbu na třetí obrazovce wiki, ale v momentu, kdy řeší podobné rozhodnutí.
+
+Praktické napojení:
+
+- Do onboarding checklistu přidejte odkaz jen tehdy, když má člověk v daném kroku poučení použít.
+- Do šablony vložte krátkou rozhodovací větu, ne dlouhé vysvětlení.
+- Do tréninkového příkladu dejte anonymizovanou situaci.
+- Do review prvního týdne přidejte jednu otázku, pokud poučení chrání důležité riziko.
+- Do týmové paměti vložte kartu až po úklidu citlivých detailů.
+
+Příklad otázky pro review prvního týdne:
+
+```markdown
+Narazil/a jsi na situaci, kdy byl příklad mimo pracovní šablonu nebo sis nebyl/a jistý/á, co lze kopírovat do interních poznámek?
+```
+
+To je lepší než obecné "bylo vše jasné?". Lidé často odpoví ano, protože chtějí být slušní, rychlí nebo nechtějí vypadat zmateně. Konkrétní otázka vytáhne konkrétní tření.
+
+### 7. Nastavte malý revizní háček
+
+Poučení v týmové paměti by nemělo žít navždy bez kontroly. Zároveň nepotřebuje vlastní meeting. Stačí malý háček v existujícím rytmu.
+
+Možnosti:
+
+- zkontrolovat kartu při další úpravě stejné šablony,
+- projít relevantní lekce při měsíčním review onboardingového standardu,
+- označit poučení datem expirace, pokud souvisí s dočasnou změnou,
+- sloučit podobné lekce při kvartální údržbě týmové paměti,
+- smazat kartu, pokud už je plně zapracovaná do standardu a nepřidává další hodnotu.
+
+Příklad revizního pravidla:
+
+```markdown
+Tuto lekci zkontrolujeme při nejbližší změně support šablony nebo nejpozději při kvartální kontrole onboardingových standardů. Pokud už je pravidlo plně obsažené v šabloně a nevznikají nové otázky, kartu archivujeme.
+```
+
+Archivace není prohra. Je to důkaz, že poučení splnilo práci. Některé lekce mají být přechodné lešení, ne další patro budovy.
+
+### Šablona karty týmové paměti
+
+```markdown
+# Lekce z onboardingového cyklu
+
+Název:
+Datum:
+Role nebo oblast:
+Vlastník:
+Kanonické místo:
+
+Situace:
+
+Problém:
+
+Rozhodovací věta:
+
+Co se změnilo:
+
+Privacy-first filtr:
+- co bylo anonymizováno:
+- co bylo smazáno:
+- co zůstává a proč:
+- kdo má přístup:
+- kdy se karta zkontroluje:
+
+Kam je poučení napojené:
+- šablona:
+- checklist:
+- standard:
+- changelog:
+
+Revizní háček:
+
+Stav:
+Aktivní / zapracováno / archivováno
+```
+
+### Mini workshop: 25 minut na převod do týmové paměti
+
+Agenda:
+
+1. 4 minuty: připomenout rozhodnutí z uzavření cyklu.
+2. 5 minut: vybrat jeden opakovatelný vzor.
+3. 4 minuty: přepsat ho do rozhodovací věty.
+4. 4 minuty: určit správný domov poučení.
+5. 4 minuty: projít privacy-first filtr.
+6. 2 minuty: napojit poučení na onboarding nové role.
+7. 2 minuty: nastavit revizní háček.
+
+Pravidla:
+
+- Nepřenášejte celé poznámky z ověření.
+- Nepište poučení jako obecnou moudrost.
+- Nezakládejte nový dokument, pokud existuje pracovní místo použití.
+- Neuchovávejte citlivé příklady jen kvůli pohodlí.
+- Každé poučení musí mít buď domov, revizi, nebo konec.
+
+### Checklist
+
+- Vybrali jste jen opakovatelný vzor, ne jednorázový detail?
+- Je poučení napsané jako rozhodovací věta?
+- Je uložené tam, kde ho člověk použije?
+- Je příběh zkrácený na pracovní minimum?
+- Prošlo poučení privacy-first filtrem?
+- Jsou zákaznické a osobní detaily odstraněné nebo anonymizované?
+- Je poučení napojené na onboarding další role?
+- Má karta vlastníka, kanonické místo a revizní háček?
+- Nezaložili jste novou vrstvu dokumentace bez důvodu?
+- Je jasné, kdy se poučení archivuje nebo zapracuje do standardu?
+
+Převod uzavřeného cyklu do týmové paměti je poslední krok, který mění jednorázové zlepšení v organizační schopnost. Tým se neučí tím, že má hodně dokumentů. Učí se tím, že dobrá rozhodnutí zůstanou dostupná ve správnou chvíli, ve správném tvaru a bez zbytečné datové zátěže.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FW o převodu uzavřeného onboardingového cyklu do týmové paměti: výběr opakovatelného vzoru, rozhodovací věta, správný domov poučení, privacy-first filtr, napojení na onboarding nové role, revizní háček, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FV o uzavření dalšího cyklu onboardingového standardu po prvním ověření: návrat k původnímu slibu změny, ověření na reálné práci, oddělení výsledku, tření a vedlejšího efektu, privacy-first úklid, jednověté rozhodnutí, přenos poučení, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FU o převodu kvartální kontroly onboardingového standardu do dalšího cyklu: stav po kontrole, kanonické místo, ověřovací háček, uzavření privacy-first nálezů, vědomé neřešení širšího rozsahu, předání změny, první ověření, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FT o kvartální kontrole trvalého onboardingového standardu: návrat k pracovnímu slibu, tři reálné průchody, rozlišení dodržení, užitečnosti a ceny, kontrola stárnutí standardu, privacy-first kontrola výstupů, hledání obcházení, jednověté rozhodnutí, jedna malá změna, šablona, mini workshop a checklist.
