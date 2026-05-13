@@ -47475,8 +47475,263 @@ Po třech dalších formulářových změnách nebo za měsíc.
 
 Úprava rolového standardu po měsíci je malá provozní dovednost. Bez ní se standardy mění buď příliš málo, takže stárnou, nebo příliš mnoho, takže jim lidé přestanou věřit. Dobrý rytmus je střízlivější: jeden nález, jedna změna, jedno ověření, jeden zápis. Tak standard zůstává živý, ale nezačne řídit víc práce, než kolik jí zlepšuje.
 
+## Příloha FJ: Stabilizace upraveného rolového standardu po prvním ověření
+
+První ověření upraveného standardu ukáže, jestli změna snížila tření. Stabilizace rozhoduje, co s tím udělat dál. Bez stabilizace tým často skončí v podivném mezistavu: standard je "nějak upravený", lidé o tom matně vědí, v chatu leží staré vysvětlení, v indexu je jiná verze a po měsíci už nikdo neví, co vlastně platí.
+
+Cílem této přílohy je převést první ověření do pevného provozního stavu. Ne do další velké revize. Do stavu, kdy role ví, jak pracovat, zdroj pravdy je aktuální, dočasné podklady jsou uklizené a další kontrola má jasný spouštěč.
+
+Praktické pravidlo: po prvním ověření upraveného standardu udělejte jedno ze čtyř rozhodnutí: ponechat, doladit, vrátit nebo rozdělit. Všechno ostatní je mlha s hezkým názvem.
+
+### 1. Začněte výsledkem ověření
+
+Nejprve se vraťte k ověřovací kartě z předchozí přílohy. Neřešte, co by se teoreticky mohlo zlepšit. Řešte, co se při prvním reálném použití skutečně stalo.
+
+Minimální vstupy:
+
+- původní tření,
+- konkrétní úprava standardu,
+- první použití,
+- výsledek práce,
+- zbylé tření,
+- nové riziko,
+- privacy-first dopad,
+- dočasné podklady a jejich stav.
+
+Z těchto vstupů napište jednu větu:
+
+```text
+Po prvním ověření upravený standard [funguje / potřebuje malé doladění / neřeší původní tření / míchá dvě různé situace], protože [konkrétní důkaz].
+```
+
+Příklady:
+
+```text
+Po prvním ověření upravený standard funguje, protože nová role zapsala změnu formulářového pole do datové mapy bez vysvětlování bokem.
+```
+
+```text
+Po prvním ověření standard potřebuje malé doladění, protože role chápe výstup, ale pořád nepozná hranici mezi změnou textu pole a změnou účelu zpracování.
+```
+
+```text
+Po prvním ověření standard míchá dvě různé situace, protože drobná textová úprava formuláře a přidání nového datového pole vyžadují jiný režim kontroly.
+```
+
+Tahle věta je brzda proti oblíbenému sportu: přepsat všechno, protože jsme zrovna našli jednu nepřesnost.
+
+### 2. Rozhodněte stav standardu
+
+Použijte jednoduchou rozhodovací tabulku.
+
+| Stav | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Ponechat | Úprava řeší původní tření a nevytváří nové riziko | Označit verzi jako platnou a nastavit další kontrolu |
+| Doladit | Úprava funguje, ale jedna formulace nebo hranice zůstává nejasná | Udělat jednu malou textovou nebo procesní korekci |
+| Vrátit | Úprava zhoršila práci nebo přesunula riziko jinam | Obnovit předchozí platné pravidlo a zapsat poučení |
+| Rozdělit | Jeden standard pokrývá dvě odlišné pracovní situace | Oddělit situace nebo přidat rozhodovací bránu |
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Doladit
+
+Důvod:
+Výstup do datové mapy funguje, ale chybí jasná hranice pro změnu povinnosti pole.
+
+Jedna korekce:
+Doplnit větu: "Změna povinnosti pole vždy vyžaduje privacy review, protože mění tlak na poskytnutí dat."
+```
+
+Rozhodnutí "doladit" nesmí být záminka pro další dlouhou revizi. Pokud korekce nejde popsat jednou větou, pravděpodobně nejde o doladění, ale o nový problém.
+
+### 3. Upevněte zdroj pravdy
+
+Stabilizace je hotová až tehdy, když existuje jedno platné místo, podle kterého lidé pracují. Ne zpráva v chatu, ne komentář v dokumentu, ne screenshot z workshopu.
+
+Zkontrolujte:
+
+- kanonický dokument standardu obsahuje aktuální verzi,
+- index standardů ukazuje na správné místo,
+- staré poznámky mají stav `nahrazeno` nebo jsou odstraněné,
+- onboarding role odkazuje na aktuální pravidlo,
+- šablony a checklisty neobsahují starou formulaci,
+- příklady používají testovací nebo anonymizovaná data.
+
+Krátký zápis do indexu:
+
+```text
+Standard:
+Změna formulářových polí
+
+Stav po ověření:
+Platný s drobnou korekcí
+
+Aktuální verze:
+2026-05-13
+
+Co je závazné:
+Po změně pole se aktualizuje datová mapa a changelog. Změna účelu, retence, povinnosti pole nebo dodavatele jde na privacy review.
+
+Další kontrola:
+Po třech dalších použitích nebo při první změně, která přidává nové osobní údaje.
+```
+
+Codyho komentář: pokud lidé musí hádat, která verze standardu platí, standard už selhal. Ne dramaticky. Jen takovým tím tichým kancelářským způsobem, kdy všichni přikyvují a pak si každý udělá vlastní variantu.
+
+### 4. Ukliďte přechodovou datovou stopu
+
+Úprava standardu často vytvoří víc stop než běžná práce: komentáře, screenshoty, dočasné exporty, kopie formulářů, testovací záznamy, poznámky z ověření. Něco z toho je užitečné při rozhodování. Málo z toho má zůstat navždy.
+
+Privacy-first stabilizace se ptá:
+
+- Který záznam je trvalý důkaz rozhodnutí?
+- Které podklady byly jen pro ověření?
+- Obsahují podklady osobní údaje, interní data nebo zákaznický kontext?
+- Dá se trvalý důkaz zkrátit na odkaz, agregovaný popis nebo anonymizovaný příklad?
+- Kdo má smazání nebo archivaci potvrdit?
+
+Praktické pravidlo:
+
+```text
+Trvalý záznam:
+Rozhodovací věta, aktuální verze standardu, datum a odkaz na zdroj pravdy.
+
+Dočasné podklady:
+Screenshoty, exporty, pracovní kopie, komentáře s konkrétními daty.
+
+Úklid:
+Dočasné podklady smazat po stabilizaci, pokud neexistuje konkrétní důvod je držet.
+```
+
+Tím se z privacy-first přístupu nestane přívěsek. Je přímo v provozním rytmu: po změně uklidit data, která změna vytvořila.
+
+### 5. Přeneste poučení do role, ne do obecné knihovny
+
+Po ověření často vznikne užitečné poučení. Ne každé poučení patří do centrální znalostní báze. Pokud se týká jedné role, dejte ho tam, kde role skutečně pracuje.
+
+Příklad:
+
+```text
+Poučení:
+Editor při změně formuláře potřebuje znát rozdíl mezi textovou úpravou pole a změnou účelu pole.
+
+Kam patří:
+Do standardu role editora a do onboardingového příkladu pro formulářové změny.
+
+Kam nepatří:
+Do obecné stránky "privacy zásady", kterou editor při práci neotevře.
+```
+
+Poučení má být blízko spouštěči práce. Jinak z něj vznikne znalostní dekorace. Hezká, dobře míněná, ale při reálné práci nepoužitá.
+
+### 6. Nastavte další kontrolu podle rizika
+
+Ne každý upravený standard potřebuje stejný kontrolní rytmus. Pokud úprava řeší drobnou formulaci, stačí kontrola po několika použitích. Pokud zasahuje do osobních údajů, oprávnění, zákaznické komunikace nebo billingového toku, kontrola má být dřív a konkrétnější.
+
+Použijte tři úrovně:
+
+- Nízké riziko: kontrola po třech až pěti použitích.
+- Střední riziko: kontrola po prvním použití a znovu za měsíc.
+- Vyšší riziko: kontrola při každém použití, dokud se standard neustálí.
+
+Příklady vyššího rizika:
+
+- standard mění práci s osobními údaji,
+- role dostává nové oprávnění,
+- mění se zákaznický slib nebo obchodní komunikace,
+- standard ovlivňuje incidentní reakci,
+- standard zasahuje do exportu, retence nebo mazání dat.
+
+Kontrolní spouštěč má být konkrétní:
+
+```text
+Další kontrola proběhne po třech formulářových změnách, z nichž alespoň jedna přidá nové pole, nebo nejpozději za měsíc.
+```
+
+To je lepší než "zkontrolujeme časem". Časem je místo, kde umírají dobré úmysly. A občas i dokumentace.
+
+### 7. Uzavřete změnu krátkou stabilizační kartou
+
+Na konci vytvořte krátký záznam. Má být dost konkrétní, aby se k němu šlo vrátit, ale ne tak dlouhý, aby se stal další administrativou.
+
+```text
+Standard:
+Upravená oblast:
+Původní tření:
+První ověření:
+Rozhodnutí:
+Platná verze:
+Zdroj pravdy:
+Co se doladilo:
+Co se neřeší teď:
+Dočasné podklady uklizeny:
+Poučení pro roli:
+Další kontrola:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Změna formulářových polí
+
+Upravená oblast:
+Výstup do datové mapy a hranice privacy review
+
+Původní tření:
+Role nevěděla, kam zapsat odkaz na datovou mapu.
+
+První ověření:
+Zápis proběhl správně, nejasná zůstala změna povinnosti pole.
+
+Rozhodnutí:
+Doladit jednou větou a označit verzi jako platnou.
+
+Co se doladilo:
+Doplněna hranice: změna povinnosti pole vyžaduje privacy review.
+
+Dočasné podklady uklizeny:
+Screenshoty z review smazány, trvalý důkaz je changelog a datová mapa.
+
+Další kontrola:
+Po třech dalších formulářových změnách nebo za měsíc.
+```
+
+### Mini workshop: 25 minut na stabilizaci po ověření
+
+Když standard používá víc lidí, udělejte krátký průchod:
+
+1. Pět minut: přečíst ověřovací kartu.
+2. Pět minut: vybrat stav standardu.
+3. Pět minut: zkontrolovat zdroj pravdy a staré odkazy.
+4. Pět minut: rozhodnout úklid dočasných podkladů.
+5. Pět minut: zapsat stabilizační kartu a další kontrolu.
+
+Výstupem není nová strategie. Výstupem je platný standard bez přechodového nepořádku.
+
+### Checklist
+
+- Máte jednu větu výsledku prvního ověření?
+- Rozhodli jste stav standardu: ponechat, doladit, vrátit nebo rozdělit?
+- Není "doladění" ve skutečnosti skrytá velká revize?
+- Je aktuální verze ve zdroji pravdy?
+- Odkazuje kanonický index na správný dokument?
+- Jsou staré poznámky, šablony a onboardingové odkazy sjednocené?
+- Je jasné, co je trvalý důkaz a co byl dočasný podklad?
+- Byly uklizené screenshoty, exporty a pracovní kopie, které už nejsou potřeba?
+- Zůstávají v příkladech jen testovací nebo anonymizovaná data?
+- Je poučení z ověření umístěné u role a pracovního spouštěče?
+- Má další kontrola konkrétní spouštěč, ne jen neurčitý termín?
+- Je vlastník standardu jasný i po stabilizaci?
+
+Stabilizace je nenápadná část práce. Právě proto se vyplatí. Dobrý standard nemá jen vzniknout a jednou se opravit. Má se po ověření usadit tak, aby lidem zjednodušil další průchod a nevytvořil kolem sebe vrstvu starých poznámek, dočasných kopií a neplatných výjimek.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FJ o stabilizaci upraveného rolového standardu po prvním ověření: rozhodnutí o stavu standardu, upevnění zdroje pravdy, privacy-first úklid přechodové datové stopy, přenos poučení do role, další kontrola a stabilizační karta.
 - 2026-05-13: Doplněna Příloha FI o úpravě rolového standardu po měsíční kontrole: rozhodovací věta, výběr nejmenší pracovní části, třídění nálezů, přepis pravidla do jazyka role, privacy-first mazání dočasných podkladů, první ověření a checklist.
 - 2026-05-13: Doplněna Příloha FH o měření přínosu rolového standardu po měsíci provozu: návrat k původnímu slibu, pracovní signály, oddělení přínosu a tření, privacy-first měření, rozhodnutí o dalším stavu, měsíční karta a checklist.
 - 2026-05-13: Doplněna Příloha FG o zařazení ověřeného rolového standardu do provozního rytmu: výběr přirozeného rytmu, provozní háček, minimální výstup, zdroj pravdy, ochranný signál, privacy-first úklid, revize životnosti a checklist.
