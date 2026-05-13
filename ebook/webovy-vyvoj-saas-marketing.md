@@ -44629,8 +44629,256 @@ Když workshop skončí bez provozní karty, nebylo hotovo. Když skončí s nov
 
 Ověřené rozšíření má skutečnou hodnotu až tehdy, když funguje bez svého autora. Převod do provozního rytmu není slavnostní povýšení pravidla. Je to tichá zkouška, jestli se změna vejde do běžné práce, nezvětší systém a pořád chrání data.
 
+## Příloha EZ: Kontrola provozního rytmu po prvních třech cyklech
+
+Nový provozní rytmus vypadá na papíře skoro vždy rozumně. Má vlastníka, spouštěč, zdroj pravdy, minimální důkaz a stop pravidlo. Skutečná otázka ale přijde až po několika opakováních: pomáhá rytmus práci, nebo jen přidal další věc, kterou tým poslušně obchází?
+
+První kontrolu nedělejte po jednom použití. Jeden cyklus často ukáže jen startovní zmatek. Po třech cyklech už ale bývá vidět, jestli rytmus sedí do práce, kde vzniká tření, kdo ho reálně drží a jestli se kvůli němu nezačala sbírat data jen proto, že je formulář unesl. To je dobrý okamžik na malou, ale poctivou revizi.
+
+Cílem této přílohy je zkontrolovat rytmus bez dramatu. Nehledáte viníka. Hledáte odpověď, jestli pravidlo stojí za další provoz ve stejné podobě.
+
+### Kdy tuto kontrolu použít
+
+Použijte ji u rytmů, které vznikly po ověřené změně, opravě standardu, portfoliové revizi, předání role nebo úklidu šablon. Typicky jde o pravidla jako:
+
+- měsíční triage kanonického indexu,
+- kvartální kontrola standardů,
+- review datové stopy šablon,
+- kontrola kvality nové pracovní trasy,
+- opakovaný sales nebo delivery handoff,
+- pravidelná revize privacy-first rozhodnutí.
+
+Kontrolu nespouštějte pokaždé, když má někdo špatný pocit. Spusťte ji tehdy, když rytmus proběhl aspoň třikrát, vznikl jasný signál tření, nebo se změnily okolnosti práce, ke které rytmus patří.
+
+Praktické pravidlo: pokud se rytmus za tři cykly ani jednou nespustil, není to selhání lidí. Je to signál, že spouštěč, vlastnictví nebo smysl rytmu nejsou dost silné.
+
+### 1. Vraťte se k původnímu slibu
+
+Začněte původní provozní kartou. Ne u pocitů, ne u kalendáře, ne u toho, kdo co zapomněl. Rytmus měl vzniknout kvůli jedné pracovní potřebě.
+
+Zapište jednu větu:
+
+```markdown
+Tento rytmus měl zajistit, že...
+```
+
+Příklady:
+
+```markdown
+Tento rytmus měl zajistit, že nové šablony nevznikají mimo kanonický index.
+```
+
+```markdown
+Tento rytmus měl zajistit, že zákaznické příklady ve standardech neobsahují zbytečné osobní nebo obchodně citlivé detaily.
+```
+
+```markdown
+Tento rytmus měl zajistit, že po změně nabídky nezůstávají na webu staré sliby a formuláře.
+```
+
+Když větu nejde napsat bez tří vedlejších vět, rytmus je pravděpodobně moc široký. Nejdřív ho zužte na jeden pracovní výsledek. Teprve potom ho hodnoťte.
+
+Codyho komentář: kontrola rytmu bez původního slibu je jako audit garáže bez seznamu věcí, které jste tam chtěli mít. Najdete hodně předmětů, trochu prachu a žádné rozhodnutí.
+
+### 2. Projděte tři reálné průchody
+
+Nevyhodnocujte rytmus podle šablony. Vyhodnoťte tři konkrétní průchody. U každého stačí krátký záznam:
+
+```markdown
+Cyklus:
+Spouštěč:
+Kdo rytmus otevřel:
+Jaký byl vstup:
+Jaký výstup vznikl:
+Co se díky tomu rozhodlo:
+Kde vzniklo tření:
+Jaká data se zapsala:
+Co se nemuselo zapisovat:
+```
+
+Vyplněný příklad:
+
+```markdown
+Cyklus: Dubnová triage indexu
+Spouštěč: První pondělí v měsíci
+Kdo rytmus otevřel: Editor standardů
+Jaký byl vstup: 4 nové šablony a 2 návrhy na úpravu existujícího standardu
+Jaký výstup vznikl: 2 šablony zařazené, 1 sloučená, 3 položky vrácené autorům
+Co se díky tomu rozhodlo: Nové onboardingové checklisty budou mít jeden zdroj pravdy
+Kde vzniklo tření: Autoři nevěděli, jak krátce popsat rozhodovací situaci
+Jaká data se zapsala: Název šablony, vlastník, stav, odkaz na zdroj pravdy
+Co se nemuselo zapisovat: Detailní historie komentářů z pracovních dokumentů
+```
+
+Hledejte opakování. Jedno zpoždění nevadí. Tři zpoždění ve stejném místě už jsou návrhový problém. Jedna nejasná položka nevadí. Tři nejasné položky znamenají, že šablona nebo jazyk rytmu potřebují opravu.
+
+### 3. Rozlište užitečné tření od zbytečné administrativy
+
+Ne každé tření je špatně. Dobré tření zabrání špatnému rozhodnutí, zbytečnému sběru dat nebo chaosu v dokumentech. Špatné tření jen nutí tým obsluhovat systém.
+
+U každého nalezeného tření se zeptejte:
+
+- Brání chybě, která má reálný dopad?
+- Pomáhá lepšímu rozhodnutí?
+- Chrání zákaznická, osobní nebo obchodní data?
+- Zkracuje budoucí práci?
+- Nebo jen vytváří záznam, který nikdo nepoužije?
+
+Příklad užitečného tření:
+
+```markdown
+Před přidáním nové šablony musí autor napsat jednu rozhodovací situaci.
+```
+
+To je dobré tření. Nutí vyjasnit, k čemu šablona slouží.
+
+Příklad špatného tření:
+
+```markdown
+Autor musí u každé šablony vyplnit pět polí o původu nápadu, i když se tato pole při revizi nepoužívají.
+```
+
+To je administrativní pěna. Vypadá svědomitě, ale zvyšuje náklady provozu.
+
+Rozdělení si zapište jednoduše:
+
+```markdown
+Užitečné tření ponechat:
+Zbytečné tření odstranit:
+Tření, které potřebuje zjednodušit:
+```
+
+### 4. Zkontrolujte vlastnictví bez mikromanagementu
+
+Vlastník rytmu nemá být člověk, který nahání ostatní. Má být člověk, který hlídá kvalitu systému. To je rozdíl, na kterém stojí dlouhodobá použitelnost.
+
+Dobré vlastnictví vypadá takto:
+
+- vlastník ví, kdy se rytmus spouští,
+- ví, kde je zdroj pravdy,
+- umí odmítnout položku mimo rozsah,
+- umí zjednodušit pravidlo, když se opakovaně zasekává,
+- nehodnotí lidi, ale kvalitu vstupů, výstupů a rozhodnutí.
+
+Varovné signály:
+
+- rytmus funguje jen když ho vlastník ručně připomene,
+- tým čeká na schválení i u banálních změn,
+- vlastník doplňuje chybějící informace za ostatní,
+- rozhodnutí se přesouvají do soukromých zpráv,
+- kontrola se mění v report o aktivitě lidí.
+
+Pokud rytmus stojí na osobní pečlivosti jednoho člověka, není ještě provozní. Je jen dobře hlídaný. To může krátkodobě stačit, ale nemá se to tvářit jako systém.
+
+### 5. Udělejte privacy-first průchod
+
+Opakovaný rytmus má jednu záludnost: co se jednou zdá jako neškodný detail, začne se po měsících hromadit. Proto kontrolujte datovou stopu hned po prvních třech cyklech.
+
+Projít stačí pět otázek:
+
+1. Jaká data se při rytmu opakovaně zapisují?
+2. Která z nich jsou nutná pro rozhodnutí?
+3. Která se zapisují jen ze zvyku nebo pro pocit úplnosti?
+4. Obsahují záznamy osobní údaje, zákaznické detaily nebo interní obchodní informace?
+5. Existuje jasná retence, archivace nebo mazání pracovních důkazů?
+
+Příklad opravy:
+
+```markdown
+Původně: Do review se kopírovaly celé zákaznické poznámky.
+Nově: Do review se zapisuje jen anonymizovaný vzor problému a odkaz na interní zdroj s omezeným přístupem.
+```
+
+Privacy-first rytmus nemá dokazovat, že tým pracoval. Má uchovat jen tolik informací, aby bylo možné udělat a později pochopit rozhodnutí.
+
+### 6. Rozhodněte stav rytmu
+
+Po třech cyklech nepište dlouhou retrospektivu. Vyberte jeden stav:
+
+| Stav | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Ponechat | Rytmus dává hodnotu a tření je přiměřené | Nechte ho běžet a nastavte další kontrolu |
+| Zjednodušit | Hodnota je jasná, ale proces je těžký | Odstraňte pole, kroky nebo schůzku |
+| Zúžit | Rytmus řeší moc situací najednou | Nechte jen nejsilnější pracovní případ |
+| Sloučit | Podobný rytmus už existuje jinde | Přesuňte pravidlo do existujícího cyklu |
+| Pozastavit | Hodnota není jasná, ale oblast ještě žije | Dejte rytmu jedno ověřovací okno |
+| Zrušit | Rytmus nemá použití nebo přidává jen práci | Archivujte kartu a ukliďte odkazy |
+
+Rozhodnutí má být krátké:
+
+```markdown
+Po třech cyklech rytmus zjednodušujeme: ponecháváme měsíční kontrolu indexu, rušíme samostatný report a do karty přidáváme jen stav, vlastníka a jednu rozhodovací větu.
+```
+
+To stačí. Dobrý provozní systém nepotřebuje slavnostní zápis s osmi přílohami. Potřebuje vědět, co platí od dalšího cyklu.
+
+### 7. Uzavřete změnu v provozní kartě
+
+Když rytmus pokračuje, aktualizujte jeho kartu. Když končí, archivujte ji. V obou případech má být jasné, co se stalo.
+
+Šablona kontroly:
+
+```markdown
+Název rytmu:
+Kontrolované období:
+Původní slib:
+Co fungovalo:
+Co nefungovalo:
+Jaké tření bylo odstraněno:
+Jaká datová stopa byla zkrácena:
+Rozhodnutí:
+Změna od dalšího cyklu:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název rytmu: Měsíční triage kanonického indexu
+Kontrolované období: Leden až březen
+Původní slib: Nové šablony nevznikají mimo kanonický index.
+Co fungovalo: Všechny nové šablony mají vlastníka a zdroj pravdy.
+Co nefungovalo: Autoři vyplňovali příliš dlouhý kontext, který se při triage nepoužíval.
+Jaké tření bylo odstraněno: Zrušena pole "historie podnětu" a "detailní komentáře".
+Jaká datová stopa byla zkrácena: Do indexu se zapisuje jen rozhodovací situace, stav a odkaz.
+Rozhodnutí: Rytmus ponechat a zjednodušit.
+Změna od dalšího cyklu: Triage běží bez samostatného reportu, výsledek je jen changelogový řádek.
+Další kontrola: Po dalším kvartálu.
+```
+
+### Mini workshop: 40 minut po třech cyklech
+
+1. Pět minut: přečtěte původní slib rytmu.
+2. Deset minut: projděte tři konkrétní průchody.
+3. Pět minut: rozdělte tření na užitečné, zbytečné a nejasné.
+4. Pět minut: ověřte, jestli vlastnictví neznamená ruční nahánění.
+5. Pět minut: zkraťte datovou stopu na minimum potřebné pro rozhodnutí.
+6. Pět minut: vyberte stav rytmu.
+7. Pět minut: aktualizujte provozní kartu.
+
+Když workshop odhalí deset možných změn, vyberte jednu. Kontrola rytmu sama nesmí vytvořit nový backlogový ohňostroj. Jeden rytmus, jedno rozhodnutí, jedna změna od dalšího cyklu.
+
+### Checklist
+
+- Proběhl rytmus aspoň třikrát?
+- Je jasný původní slib rytmu?
+- Hodnotíte reálné průchody, ne ideální šablonu?
+- Je vidět, jaké rozhodnutí rytmus umožnil?
+- Rozlišili jste užitečné tření od prázdné administrativy?
+- Nezávisí rytmus jen na osobní pečlivosti vlastníka?
+- Nevzniká skryté ruční doplňování informací?
+- Zůstává zdroj pravdy jeden?
+- Nesbírá rytmus osobní, zákaznické nebo interní detaily navíc?
+- Má datová stopa jasný účel a přiměřenou retenci?
+- Vybrali jste jeden stav: ponechat, zjednodušit, zúžit, sloučit, pozastavit nebo zrušit?
+- Je změna zapsaná v provozní kartě?
+- Je jasné, co platí od dalšího cyklu?
+
+Rytmus, který přežije první tři cykly, ještě není navždy správný. Je jen dostatečně ověřený, aby se s ním dalo pracovat jako s běžnou součástí systému. A to je přesně cílem: méně hrdinského hlídání, víc klidného provozu, méně zbytečných dat a víc rozhodnutí, která se opravdu dějí.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha EZ o kontrole provozního rytmu po prvních třech cyklech: návrat k původnímu slibu, reálné průchody, třídění tření, vlastnictví bez mikromanagementu, privacy-first datová stopa, rozhodnutí o stavu rytmu a aktualizace provozní karty.
 - 2026-05-12: Doplněna Příloha EY o převodu ověřeného rozšíření do běžného provozního rytmu: rozhodnutí, zda změna rytmus zaslouží, napojení na existující pracovní cyklus, zkrácení na provozní pravidlo, vlastnictví, privacy-first minimum, revize životnosti a provozní karta.
 - 2026-05-12: Doplněna Příloha EX o kontrole rozšířené portfoliové změny po prvním cyklu: původní slib, reálná pracovní trasa, třídění nálezů, redukce zbytečné evidence, privacy-first kontrola, jednověté rozhodnutí a uzavření smyčky v artefaktech.
 - 2026-05-12: Doplněna Příloha EW o rozšíření ověřené portfoliové změny do dalších pracovních míst: typy rozšíření, výběr tří míst, přenos principu, rozšiřovací balíček, privacy-first kontrola a ověření prvního použití.
