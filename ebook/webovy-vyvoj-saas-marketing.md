@@ -46273,8 +46273,331 @@ Výstup workshopu má být jedna hotová karta standardu. Ne seznam nápadů, ne
 
 Rolový standard je dobrý tehdy, když zmenší závislost na konkrétním člověku a nezvětší byrokracii. Vytáhne z ověřeného zvyku jen to, co pomáhá opakované práci: spouštěč, roli, rozhodovací hranici, zdroj pravdy, privacy-first brzdu a důkaz. Všechno ostatní má zůstat venku. Ne proto, že by detaily nebyly zajímavé, ale protože standard má sloužit práci, ne sbírat suvenýry z minulých debat.
 
+## Příloha FF: Kontrola rolového standardu po prvních použitích
+
+Rolový standard není hotový v okamžiku, kdy má pěknou šablonu. Hotový začíná být až ve chvíli, kdy ho role použije ve skutečné práci a výsledek obstojí bez původního autora za zády. První použití ukáže věci, které při psaní standardu skoro nejdou vidět: nejasný spouštěč, moc široké rozhodovací hranice, zbytečně dlouhý zápis, skrytý krok mimo zdroj pravdy nebo privacy-first pravidlo, které zní dobře, ale v praxi nikdo neví, kdy ho zmáčknout.
+
+Kontrola po prvních použitích není audit poslušnosti. Je to servisní prohlídka pracovního pravidla. Cílem není nachytat člověka, že standard neprovedl dokonale. Cílem je zjistit, jestli standard vede k lepší práci s menší závislostí na osobní paměti.
+
+Použijte tuto přílohu ve chvíli, kdy standard proběhl alespoň ve dvou až třech reálných situacích. Jedno použití může být náhoda. Tři použití už většinou ukážou vzor. Pokud standard běží jen jednou za kvartál, udělejte kontrolu po prvním ostrém použití, ale označte výsledek jako předběžný.
+
+### 1. Vraťte se k původnímu slibu standardu
+
+Každý rolový standard vznikl kvůli nějakému provoznímu slibu. Například:
+
+- změna v indexu bude mít dohledatelný důvod,
+- nový formulář nebude sbírat zbytečná data,
+- support signály se budou převádět do agregované podoby,
+- nová role zvládne rozhodnout bez čekání na původního vlastníka,
+- zákaznické detaily nebudou cestovat do šablon a osobních poznámek.
+
+Kontrolu nezačínejte otázkou, zda lidé "dodrželi proces". Začněte otázkou:
+
+```markdown
+Splnil standard slib, kvůli kterému vznikl?
+```
+
+Příklad:
+
+```markdown
+Standard: Důvod změny v kanonickém indexu
+Původní slib: Tým později pochopí, proč byla položka sloučena nebo archivována, bez dohledávání v chatu.
+První použití: dvě archivace a jedno sloučení šablon.
+Rychlý závěr: slib je splněný u archivací, ale u sloučení chybí odkaz na nové místo.
+```
+
+Takový závěr je užitečnější než obecné "standard funguje". Ukazuje, kde přesně funguje a kde potřebuje malou opravu.
+
+Codyho komentář: pokud kontrola standardu začne tabulkou se skóre a nikdo si nepamatuje, proč standard vůbec existuje, jste v procesním divadle. Hezké kulisy, drahé vstupenky, málo práce hotovo.
+
+### 2. Zkontrolujte spouštěč v reálném provozu
+
+Nejčastější slabina nového standardu není špatný postup, ale nejasný okamžik spuštění. Role možná ví, jak standard provést, ale neví, kdy ho použít. Pak vznikají dva typy chyb:
+
+- standard se používá příliš pozdě,
+- standard se používá na věci, které ho nepotřebují.
+
+Projděte poslední situace a u každé napište:
+
+```markdown
+Situace:
+Měl se standard spustit?
+Kdo to poznal?
+Kdy to poznal?
+Co pomohlo nebo chybělo?
+```
+
+Příklad pro formuláře:
+
+```markdown
+Situace: do poptávkového formuláře bylo přidáno pole "rozpočet".
+Měl se standard spustit? Ano.
+Kdo to poznal? Provozní správce webu až při předpublikační kontrole.
+Kdy to poznal? Pozdě, změna už byla připravená k vydání.
+Co chybělo? Spouštěč při změně formulářového pole v zadání, ne až při kontrole hotové stránky.
+```
+
+Oprava standardu pak může být velmi malá:
+
+```markdown
+Kdy se spouští: při návrhu, přidání, odstranění nebo přejmenování formulářového pole, ne až před publikací.
+```
+
+Tohle je typická dobrá oprava. Nemění celý proces. Jen přesune brzdu do místa, kde ještě není drahé couvnout.
+
+### 3. Sledujte výstup, ne výkon člověka
+
+Kontrola rolového standardu má pracovat s výstupy. Ne s dojmem, kdo byl šikovný, rychlý nebo "to pochopil". To patří do vedení lidí, ne do kontroly pracovního artefaktu.
+
+U každého použití standardu se dívejte na čtyři věci:
+
+- vznikl výstup ve správném místě,
+- výstup je dost krátký na opakované použití,
+- výstup obsahuje rozhodnutí, ne zbytečný průběh debaty,
+- další člověk podle výstupu pochopí, co se stalo.
+
+Příklad dobrého kontrolního zápisu:
+
+```markdown
+Použití: archivace nepoužívané šablony měsíčního review
+Výstup: řádek v kanonickém indexu a changelogu
+Co fungovalo: důvod je jednovětý, bez osobních detailů, odkazuje na novou trasu
+Co chybí: není jasné, zda se má stará šablona přesměrovat nebo jen archivovat
+Oprava: doplnit do standardu volbu "nahradit / archivovat bez náhrady"
+```
+
+Příklad slabého kontrolního zápisu:
+
+```markdown
+Editor to udělal skoro dobře, ale měl by být pečlivější.
+```
+
+Druhý zápis nic neopraví. Je to mlha ve větě. Pokud chcete zlepšit standard, potřebujete pojmenovat chybějící rozhodnutí, místo nebo příklad.
+
+### 4. Najděte skrytou práci okolo standardu
+
+Nový standard může na papíře vypadat lehce a v praxi vytvářet práci bokem. Tým si začne pomáhat dočasnými dokumenty, screenshoty, chatovými vysvětlivkami, osobními seznamy nebo duplicitními exporty. To je signál, že standard nezachytil něco důležitého.
+
+Při kontrole se ptejte:
+
+- Musel někdo před použitím standardu hledat kontext v chatu?
+- Vznikl dočasný dokument, který nikdo neuklidil?
+- Posílaly se zákaznické detaily mimo zdroj pravdy?
+- Musel původní autor standard vysvětlovat bokem?
+- Vznikla duplicitní evidence jen proto, aby si role byla jistá?
+- Je postup tak dlouhý, že si lidé dělají vlastní zkratku?
+
+Skrytá práce není vždy důvod standard zahodit. Často stačí doplnit jeden příklad, zkrátit krok nebo přesunout zdroj pravdy. Důležité je nenechat skrytou práci stát se novým zvykem.
+
+Příklad nálezu:
+
+```markdown
+Nález: nový editor před každou změnou indexu hledal staré rozhodnutí v chatu.
+Příčina: standard říká "najdi související položku", ale neříká, kde jsou starší důvody.
+Oprava: doplnit do postupu krok "zkontroluj poslední tři změny v changelogu".
+Privacy-first dopad: méně přepisování kontextu z chatu do dočasných poznámek.
+```
+
+Dobrá oprava snižuje počet míst, kde práce žije. Špatná oprava přidá další místo a tváří se, že vyřešila přehlednost.
+
+### 5. Udělejte privacy-first kontrolu datové stopy
+
+Rolové standardy často pracují s rozhodovacími důkazy. A rozhodovací důkaz se snadno zvrhne v nadbytečnou evidenci. Proto je potřeba po prvních použitích zkontrolovat, co po standardu zůstává.
+
+Privacy-first kontrola má čtyři otázky:
+
+```markdown
+Jaká data po použití standardu vznikla?
+Kde zůstala?
+Kdo k nim má přístup?
+Kdy se mažou, zkracují nebo archivují?
+```
+
+Neřešte jen osobní údaje v úzkém právním smyslu. Řešte i zákaznický kontext, interní rozhodování, citace z podpory, screenshoty, exporty, poznámky z workshopu a odkazy na konkrétní lidi. I když něco formálně "není problém", může to být zbytečná stopa.
+
+Příklad dobré privacy-first opravy:
+
+```markdown
+Původní zápis: Klient ABC psal, že se v onboardingu ztratil u kroku fakturace.
+Nový zápis: Opakovaný onboardingový signál: krok fakturace není jasný před prvním pozváním člena týmu.
+```
+
+První zápis je konkrétnější, ale zbytečně tahá zákaznický detail do provozního standardu. Druhý zápis stačí pro rozhodnutí a lépe drží datové minimum.
+
+Pokud při kontrole najdete dočasné poznámky, určete jejich osud hned:
+
+```markdown
+Dočasné poznámky z prvních použití:
+Ponechat jako příklad:
+Anonymizovat:
+Smazat:
+Přesunout do zdroje pravdy:
+Datum úklidu:
+```
+
+Privacy-first standard se pozná podle toho, že po něm nezůstává datový nepořádek. Ne podle toho, že má v nadpisu slovo privacy.
+
+### 6. Rozhodněte o stavu standardu
+
+Po prvních použitích nepište dlouhý report. Udělejte jedno rozhodnutí:
+
+- `ponechat`: standard funguje a stačí ho dál používat,
+- `zjednodušit`: slib platí, ale postup je zbytečně těžký,
+- `doplnit příklad`: standard je správný, chybí ukázka hraniční situace,
+- `zpřesnit spouštěč`: role neví dost jasně, kdy standard použít,
+- `upravit hranice role`: není jasné, kdy rozhodovat samostatně a kdy eskalovat,
+- `sloučit`: standard řeší totéž co jiný existující standard,
+- `zastavit`: standard nepřináší hodnotu nebo vytváří víc práce než jistoty.
+
+Šablona rozhodnutí:
+
+```markdown
+Standard:
+Počet prvních použití:
+Původní slib:
+Co funguje:
+Co drhne:
+Privacy-first nález:
+Rozhodnutí:
+Konkrétní změna:
+Kdo provede:
+Kontrola po změně:
+```
+
+Vyplněný příklad:
+
+```markdown
+Standard: Důvod změny v kanonickém indexu
+Počet prvních použití: 3
+Původní slib: změny v indexu mají dohledatelný důvod bez hledání v chatu
+Co funguje: archivace má krátký důvod a je v changelogu
+Co drhne: u sloučení není jasné, zda odkazovat na novou položku nebo jen popsat důvod
+Privacy-first nález: jeden zápis obsahoval konkrétní zákaznický detail
+Rozhodnutí: doplnit příklad a zpřesnit spouštěč changelogu
+Konkrétní změna: přidat dobrý a špatný příklad pro sloučení položek
+Kdo provede: editor indexu
+Kontrola po změně: při příštím sloučení položky
+```
+
+Rozhodnutí má být malé a dokončitelné. Pokud z kontroly vznikne pět změn, vyberte jednu, která nejvíc pomůže dalšímu použití. Zbytek dejte do backlogu nebo ho rovnou zahoďte. Ne každé pozorování si zaslouží vlastní úkol.
+
+### 7. Aktualizujte jen místa, která budou lidé opravdu používat
+
+Po kontrole může být lákavé upravit standard, onboarding, index, changelog, školící materiál, interní wiki a ještě napsat shrnutí do chatu. Tím se z malé opravy stane údržbový dluh s horší dohledatelností.
+
+Držte se pravidla tří míst:
+
+1. Zdroj pravdy standardu.
+2. Onboarding role, pokud se změnila rozhodovací hranice nebo první cvičný průchod.
+3. Changelog nebo kanonický index, pokud se změna týká dohledatelnosti.
+
+Všechno ostatní musí mít důvod. Pokud materiál není součástí reálné pracovní trasy, neaktualizujte ho jen proto, že existuje. Zastaralý vedlejší dokument je horší než žádný vedlejší dokument, protože budí falešnou jistotu.
+
+Krátký zápis změny:
+
+```markdown
+Změna standardu:
+Důvod:
+Kde upraveno:
+Kde neupravujeme a proč:
+Další ověření:
+```
+
+Příklad:
+
+```markdown
+Změna standardu: doplněn příklad anonymizovaného zápisu zákaznického signálu
+Důvod: první použití přeneslo konkrétní detail do indexu
+Kde upraveno: zdroj pravdy standardu a onboardingový průchod editora
+Kde neupravujeme a proč: školící prezentaci neudržujeme jako zdroj pravdy
+Další ověření: po příštím review zákaznických signálů
+```
+
+Tím se standard zlepší bez toho, aby se tým utopil v synchronizaci dokumentů.
+
+### Kontrolní karta rolového standardu
+
+```markdown
+Název standardu:
+Role vlastníka:
+Kontrolované období:
+Počet použití:
+
+Původní slib standardu:
+Kdy se standard skutečně spouštěl:
+Kdy se měl spustit a nespustil:
+Kdy se spustil zbytečně:
+
+Co fungovalo bez pomoci:
+Kde vzniklo tření:
+Jaká skrytá práce vznikla:
+Privacy-first nález:
+
+Rozhodnutí:
+Konkrétní změna:
+Upravená místa:
+Místa, která se záměrně neupravují:
+Další ověření:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název standardu: Kontrola nového pole ve formuláři
+Role vlastníka: provozní správce webu
+Kontrolované období: první tři změny formulářů
+Počet použití: 3
+
+Původní slib standardu: žádné nové formulářové pole bez jasného účelu, datové mapy a viditelného vysvětlení.
+Kdy se standard skutečně spouštěl: dvakrát před publikací, jednou už při návrhu zadání.
+Kdy se měl spustit a nespustil: při přejmenování pole "firma" na "organizace" bez kontroly textu u formuláře.
+Kdy se spustil zbytečně: při opravě překlepu v labelu.
+
+Co fungovalo bez pomoci: kontrola účelu pole a odstranění nepovinného telefonního čísla.
+Kde vzniklo tření: nebylo jasné, zda změna názvu pole vyžaduje aktualizaci datové mapy.
+Jaká skrytá práce vznikla: screenshoty formuláře v chatu.
+Privacy-first nález: screenshoty obsahovaly testovací osobní údaje.
+
+Rozhodnutí: zpřesnit spouštěč a smazat dočasné screenshoty.
+Konkrétní změna: standard se spouští při novém poli, změně účelu pole nebo změně textu, který vysvětluje účel sběru.
+Upravená místa: zdroj pravdy standardu, onboardingový příklad.
+Místa, která se záměrně neupravují: obecný launch checklist, protože odkazuje na zdroj pravdy.
+Další ověření: při další změně formuláře.
+```
+
+### Mini workshop: 30 minut na kontrolu prvních použití
+
+1. Pět minut: připomeňte původní slib standardu.
+2. Pět minut: projděte dvě až tři reálná použití.
+3. Pět minut: najděte nejasný spouštěč, zbytečné spuštění nebo pozdní spuštění.
+4. Pět minut: zkontrolujte výstupy a skrytou práci bokem.
+5. Pět minut: udělejte privacy-first kontrolu datové stopy.
+6. Pět minut: napište jedno rozhodnutí a jednu konkrétní změnu.
+
+Výstup workshopu není seznam připomínek. Výstup je upravený standard nebo jasné rozhodnutí, že se standard ponechává bez změny. Když workshop skončí větou "někdo by to měl dopracovat", workshop neskončil. Jen se přesunul do kalendáře budoucího zklamání.
+
+### Checklist
+
+- Proběhl standard alespoň ve dvou až třech reálných situacích?
+- Je jasný původní slib, kvůli kterému standard vznikl?
+- Ví role, kdy standard spustit?
+- Nespouští se standard zbytečně na malé změny bez rizika?
+- Vzniká výstup ve správném zdroji pravdy?
+- Je výstup krátký, rozhodovací a použitelný pro dalšího člověka?
+- Nevzniká skrytá práce v chatu, osobních poznámkách nebo dočasných dokumentech?
+- Jsou hranice samostatného rozhodování dost jasné?
+- Je privacy-first brána použitelná v okamžiku práce?
+- Nezůstaly po prvních použitích zbytečné zákaznické detaily, screenshoty nebo exporty?
+- Je rozhodnutí po kontrole jednověté a konkrétní?
+- Upravují se jen místa, která jsou součástí reálné pracovní trasy?
+- Je určeno další ověření po změně?
+- Nevznikl nový kontrolní proces jen proto, že se kontroloval starý proces?
+
+Kontrola prvních použití má standard zbavit dětských nemocí. Nemá z něj udělat složitější dokument. Když po kontrole standard zkrátíte, zpřesníte spouštěč, smažete dočasné poznámky a přidáte jeden dobrý příklad, je to úspěch. Rolový standard má pomáhat roli rozhodnout a udělat práci. Jakmile začne vyžadovat vlastní podpůrný aparát, je čas ho znovu zmenšit.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FF o kontrole rolového standardu po prvních použitích: návrat k původnímu slibu, spouštěče v provozu, kontrola výstupů, skrytá práce, privacy-first datová stopa, rozhodnutí o stavu standardu, aktualizace pracovních míst a checklist.
 - 2026-05-13: Doplněna Příloha FE o převodu ověřeného provozního zvyku do rolového standardu: výběr vhodného zvyku, vlastnictví role, provozní věta, krátký postup, privacy-first brána, důkaz použití, onboarding a kontrola po prvním předání.
 - 2026-05-13: Doplněno krátké týmové shrnutí do Přílohy FD, aby rozhodnutí po kontrole zvyku šlo převést do jedné pracovní věty pro lidi mimo workshop.
 - 2026-05-13: Doplněna Příloha FD o kontrole trvalého provozního zvyku po třech cyklech: návrat k původnímu slibu, průchod třemi cykly, odlišení problému zvyku od spouštěče, privacy-first kontrola, jednověté rozhodnutí, aktualizace zdroje pravdy, karta, workshop a checklist.
