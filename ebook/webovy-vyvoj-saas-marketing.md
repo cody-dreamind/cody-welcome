@@ -48665,8 +48665,327 @@ Výstupem není plán na velkou dokumentační reformu. Výstupem je jeden balí
 
 Trvalý onboardingový rytmus je dobrý tehdy, když se skoro ztratí v běžné práci. Nový člověk dostane aktuální trasu, tým po použití zapíše krátké rozhodnutí, vlastník uklidí zbytečnou datovou stopu a balíček se zlepší jen o to, co skutečně pomůže dalšímu předání. To je nudné správným způsobem. A v provozu je "nudné správným způsobem" často velmi dobrý kompliment.
 
+## Příloha FN: Kontrola trvalého onboardingového rytmu po prvních použitích
+
+Trvalý onboardingový rytmus je ověřený až ve chvíli, kdy přežije první reálná použití. Na papíře může vypadat elegantně: jasný vlastník, kanonický odkaz, stop pravidla, privacy-first úklid a krátký kontrolní výstup. Jenže onboarding se neděje na papíře. Děje se mezi lidmi, termíny, nejasnými otázkami, starými návyky a momenty, kdy někdo potřebuje rychle začít pracovat.
+
+Tato příloha řeší první kontrolu rytmu po několika průchodech. Nejde o audit člověka, který onboarding absolvoval. Jde o audit systému, který měl novému člověku pomoct.
+
+Dobrá kontrola odpoví na čtyři otázky:
+
+1. Pomohl rytmus novému člověku rychleji a bezpečněji pracovat?
+2. Vznikly po onboardingu stejné otázky nebo chyby jako dřív?
+3. Držel tým kanonickou trasu, nebo se vrátil k osobním poznámkám a improvizaci?
+4. Zůstala po onboardingu zbytečná datová stopa, přístupy nebo kopie?
+
+Pokud odpovědi nejsou perfektní, nevadí. Vadí jen to, když se z nich nestane konkrétní úprava systému.
+
+### 1. Vyberte kontrolní okno podle reality
+
+Kontrolu nedělejte po jednom dojmu. Jeden onboarding může být příliš hladký, příliš složitý nebo ovlivněný člověkem, který už část práce znal. Lepší je kontrolní okno po dvou až třech reálných použitích, případně po jednom použití u vysoce rizikové role.
+
+Příklady:
+
+```text
+Běžná obsahová role:
+Kontrola po třech onboardinzích nebo po dvou měsících.
+
+Role se změnou datových toků:
+Kontrola po prvním onboardingu a znovu po dalším samostatném cyklu.
+
+Support role s citlivými zákaznickými daty:
+Kontrola po prvním týdnu práce a po prvním uzavřeném případu.
+```
+
+Smyslem není čekat na statistickou jistotu. Smyslem je zachytit opakované tření dřív, než se z něj stane nový normál.
+
+### 2. Vraťte se k původnímu slibu rytmu
+
+Každý onboardingový rytmus měl důvod. Ten důvod musí být v kontrole první věc, jinak se tým snadno ztratí v detailech.
+
+Kontrolní věta:
+
+```text
+Rytmus měl zajistit, že nový editor formulářů rozpozná, kdy změna textu pole mění i účel sběru dat, a že po onboardingu nezůstanou zbytečné screenshoty ani rozšířená oprávnění.
+```
+
+Pak teprve má smysl se ptát:
+
+- Dokázal nový člověk rozhodnutí udělat bez seniora?
+- Věděl, kdy má změnu eskalovat?
+- Použil kanonický balíček, nebo dostal vedlejší instrukce?
+- Zapsal se minimální výstup kontroly?
+- Proběhl úklid dočasných dat a přístupů?
+
+Bez návratu ke slibu se kontrola změní na obecné povídání o tom, že "onboarding by mohl být lepší". To je pravda skoro vždycky, ale není to pracovní rozhodnutí.
+
+### 3. Oddělte problém člověka od problému systému
+
+Když se něco nepovede, tým často sklouzne k hodnocení nového člověka. To je pohodlné, ale ne vždy přesné. Onboardingový rytmus má chránit práci i v situaci, kdy člověk není expert, nezná interní zkratky a neumí číst mezi řádky.
+
+Rozlišujte tři typy nálezů:
+
+```text
+Nález A:
+Nový člověk nepoužil checklist, i když byl součástí balíčku.
+
+Možný systémový problém:
+Checklist byl schovaný pod třetím odkazem a nikdo neřekl, že je povinný.
+
+Nález B:
+Nový člověk se zeptal na rozdíl mezi změnou labelu a změnou účelu pole.
+
+Možný systémový problém:
+Balíček má definici, ale chybí hraniční příklad.
+
+Nález C:
+Nový člověk změnil pole bez kontroly datové mapy.
+
+Možný systémový problém:
+Rytmus nemá stop pravidlo pro změny formuláře.
+```
+
+Codyho komentář: když onboarding funguje jen s člověkem, který se ptá dokonale správně, není to onboarding. Je to test intuice. A test intuice je skvělý způsob, jak zjistit, že systém vlastně neexistuje.
+
+### 4. Zkontrolujte skrytou pomoc
+
+Nejnebezpečnější onboardingové tření je to, které se neobjeví v dokumentu, protože ho někdo potichu vyřešil bokem. Senior pošle starý screenshot. Vedoucí rychle upraví oprávnění. Kolega vysvětlí pravidlo v chatu. Nový člověk práci dokončí, takže navenek všechno vypadá dobře.
+
+Při kontrole se ptejte:
+
+- Kdo musel během onboardingu pomoct mimo balíček?
+- Co přesně vysvětloval?
+- Byla pomoc jednorázová, nebo odhalila chybějící část systému?
+- Vznikl z té pomoci nový soukromý dokument, chatové vlákno nebo screenshot?
+- Má se vysvětlení převést do kanonické trasy, nebo smazat?
+
+Praktický zápis:
+
+```text
+Skrytá pomoc:
+Senior dvakrát vysvětloval, kdy změna formulářového pole vyžaduje kontrolu datové mapy.
+
+Rozhodnutí:
+Doplnit do balíčku rozhodovací tabulku "text / povinnost / účel / příjemce dat".
+
+Úklid:
+Chatové vysvětlení nepřenášet celé. Převést jen anonymizované pravidlo a vlákno neukládat jako zdroj pravdy.
+```
+
+Skrytá pomoc není selhání lidí. Je to signál, kde systém ještě nemluví dost jasně.
+
+### 5. Projděte privacy-first stopu po onboardingu
+
+Onboarding často vytváří dočasné věci: testovací účty, exporty, screenshoty, přístupy, cvičné záznamy, kopie dokumentů a interní vysvětlení. Kontrola rytmu musí ověřit, že se tyto věci buď změnily na platný artefakt, nebo zmizely.
+
+Kontrolní seznam:
+
+- Zůstaly aktivní testovací účty?
+- Má nový člověk jen oprávnění, která opravdu potřebuje?
+- Nezůstaly v dokumentech produkční screenshoty s osobními nebo zákaznickými údaji?
+- Neexistují lokální kopie exportů?
+- Jsou ukázkové příklady anonymizované nebo syntetické?
+- Ví tým, kde je kanonická verze balíčku?
+- Neodkazuje balíček na dočasné chatové vlákno?
+
+Příklad rozhodnutí:
+
+```text
+Nález:
+V onboardingové složce zůstal export testovacích poptávek s reálnými e-maily.
+
+Dopad:
+Zbytečná datová stopa mimo provozní systém.
+
+Oprava:
+Export smazán, do balíčku doplněno pravidlo používat syntetická data. Vlastník kontroluje složku po každém onboardingu.
+```
+
+Privacy-first kontrola má být konkrétní. Nestačí napsat "data v pořádku". Pokud jste nic nezkontrolovali, napište raději "privacy kontrola neproběhla" a dejte to jako blokující nález. Je to nepříjemnější, ale pravdivější.
+
+### 6. Změřte rytmus lehkými signály
+
+Onboardingový rytmus nepotřebuje robustní dashboard. Potřebuje pár signálů, které ukážou, zda pomáhá.
+
+Použitelné signály:
+
+- Kolikrát se nový člověk vrátil ke stejné otázce?
+- Kolik skryté pomoci bylo potřeba mimo balíček?
+- Kolik chyb zachytilo stop pravidlo před dopadem do produkce?
+- Kolik dočasných přístupů nebo exportů zůstalo po onboardingu?
+- Jak dlouho trvalo první samostatné dokončení pracovního cyklu?
+- Která část balíčku byla použita a která ignorována?
+
+Nezapisujte osobní mikroměření výkonu. Cíl není sledovat člověka. Cíl je zlepšit systém.
+
+Jednoduchá scorecard:
+
+```text
+Srozumitelnost trasy:
+2 / 3
+
+Samostatnost po onboardingu:
+2 / 3
+
+Množství skryté pomoci:
+1 / 3
+
+Privacy-first úklid:
+2 / 3
+
+Kanonický zdroj pravdy:
+3 / 3
+
+Největší tření:
+Chybějící hraniční příklady pro změny formuláře.
+```
+
+Scorecard není věda. Je to způsob, jak se vyhnout dojmu, že "asi dobrý". Dojem je měkký. Jedna konkrétní známka tření je použitelnější.
+
+### 7. Rozhodněte stav rytmu
+
+Po kontrole musí následovat rozhodnutí. Nestačí seznam poznámek.
+
+Možné stavy:
+
+```text
+Ponechat:
+Rytmus funguje, stačí běžná další kontrola.
+
+Upravit:
+Rytmus funguje, ale potřebuje jednu konkrétní opravu.
+
+Vrátit do revize:
+Rytmus opakovaně selhal v klíčové části nebo vytvořil zbytečné riziko.
+
+Sloučit:
+Rytmus duplikuje jiný onboardingový nebo rolový standard.
+
+Ukončit:
+Balíček se už nepoužívá nebo role zanikla.
+```
+
+Příklad:
+
+```text
+Stav:
+Upravit
+
+Proč:
+Kanonická trasa fungovala, ale ve dvou průchodech chyběl hraniční příklad změny účelu pole.
+
+Oprava:
+Doplnit rozhodovací tabulku a jeden anonymizovaný příklad.
+
+Další kontrola:
+Po dalším onboardingu editora formulářů.
+```
+
+Rozhodnutí má být krátké. Pokud nejde napsat jednou větou, tým ještě nerozhodl.
+
+### 8. Uzavřete smyčku v artefaktech
+
+Kontrola je hotová až ve chvíli, kdy se změna dostane do míst, kde ji lidé opravdu použijí.
+
+Zkontrolujte:
+
+- onboardingový balíček,
+- kanonický index,
+- navazující rolový standard,
+- datovou mapu nebo privacy poznámku,
+- checklist přístupů,
+- changelog,
+- onboardingový backlog,
+- případné šablony nebo ukázkové příklady.
+
+Příklad uzavření:
+
+```text
+Změna:
+Doplněn hraniční příklad změny formulářového pole.
+
+Upravené artefakty:
+- onboardingový balíček editora formulářů,
+- rolový standard pro formuláře,
+- checklist privacy-first kontroly po onboardingu.
+
+Archiv:
+Starý screenshot s reálnými údaji smazán, nahrazen syntetickým příkladem.
+```
+
+Bez uzavření v artefaktech se kontrola stane jen schůzkou, která měla pravdu. A schůzka, která měla pravdu, ale nic nezměnila, je luxusní forma prokrastinace.
+
+### Šablona kontroly trvalého onboardingového rytmu
+
+```text
+Balíček:
+Role:
+Vlastník:
+Kontrolované období:
+Počet reálných použití:
+
+Původní slib rytmu:
+
+Co fungovalo:
+
+Kde vzniklo tření:
+
+Skrytá pomoc mimo balíček:
+
+Privacy-first kontrola:
+- dočasné podklady:
+- screenshoty:
+- exporty:
+- testovací účty:
+- přístupy:
+
+Scorecard:
+- srozumitelnost trasy:
+- samostatnost po onboardingu:
+- množství skryté pomoci:
+- privacy-first úklid:
+- kanonický zdroj pravdy:
+
+Rozhodnutí:
+Ponechat / upravit / vrátit do revize / sloučit / ukončit
+
+Jedna nejmenší oprava:
+
+Upravené artefakty:
+
+Další kontrola:
+```
+
+### Mini workshop: 45 minut na první kontrolu rytmu
+
+1. Pět minut: připomenout původní slib rytmu.
+2. Deset minut: projít dvě až tři reálná použití a vypsat tření.
+3. Pět minut: oddělit problém člověka od problému systému.
+4. Deset minut: najít skrytou pomoc a privacy-first datovou stopu.
+5. Pět minut: vyplnit lehkou scorecard.
+6. Pět minut: rozhodnout stav rytmu.
+7. Pět minut: určit jednu nejmenší opravu a artefakty, kam se propíše.
+
+Neřešte všechno najednou. Pokud kontrola odhalí pět problémů, vyberte ten, který nejvíc chrání samostatnost práce nebo data. Onboarding se zlepšuje opakováním, ne dokumentačním sprintem, po kterém nikdo nechce otevřít složku.
+
+### Checklist
+
+- Proběhla kontrola po reálném použití, ne jen podle pocitu vlastníka?
+- Je jasně napsaný původní slib onboardingového rytmu?
+- Oddělili jste problém člověka od problému systému?
+- Našli jste skrytou pomoc mimo kanonický balíček?
+- Zkontrolovali jste dočasné účty, screenshoty, exporty a přístupy?
+- Měříte rytmus lehkými signály, ne osobním špehováním?
+- Má rytmus rozhodnutý stav: ponechat, upravit, revidovat, sloučit nebo ukončit?
+- Je určená jedna nejmenší oprava?
+- Propíše se oprava do kanonických artefaktů?
+- Je další kontrola navázaná na další reálné použití?
+
+Trvalý onboardingový rytmus má hodnotu jen tehdy, když z něj nový člověk opravdu těží a tým po něm nemusí uklízet tiché škody. První kontrola po použití je chvíle, kdy se ukáže rozdíl mezi pěkným dokumentem a systémem, který drží práci pohromadě.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FN o kontrole trvalého onboardingového rytmu po prvních použitích: kontrolní okno, původní slib, oddělení problému člověka od problému systému, skrytá pomoc, privacy-first datová stopa, lehké signály, rozhodnutí stavu rytmu, uzavření v artefaktech a checklist.
 - 2026-05-13: Doplněna Příloha FM o zařazení ověřeného onboardingového balíčku do trvalého rytmu: výběr balíčku, napojení na pracovní okamžik, minimální výstup, vlastnictví role, kanonická trasa, privacy-first úklid, stop pravidla, onboardingový backlog a checklist.
 - 2026-05-13: Doplněna Příloha FL o kontrole onboardingového balíčku po prvních průchodech: kontrolní okno, návrat k onboardingové otázce, třídění tření, skrytá pomoc, privacy-first datová stopa, rozhodnutí o stavu, nejmenší oprava, changelog a checklist.
 - 2026-05-13: Doplněna Příloha FK o převodu stabilizovaného rolového standardu do onboardingového balíčku: výběr role a pracovní situace, onboardingová otázka, řízený první průchod, příklady, oprávnění, privacy-first testovací data, ověření balíčku a checklist.
