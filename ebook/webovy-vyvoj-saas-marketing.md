@@ -48983,8 +48983,271 @@ Neřešte všechno najednou. Pokud kontrola odhalí pět problémů, vyberte ten
 
 Trvalý onboardingový rytmus má hodnotu jen tehdy, když z něj nový člověk opravdu těží a tým po něm nemusí uklízet tiché škody. První kontrola po použití je chvíle, kdy se ukáže rozdíl mezi pěkným dokumentem a systémem, který drží práci pohromadě.
 
+## Příloha FO: Převod kontroly onboardingového rytmu do jedné opravy balíčku
+
+Kontrola onboardingového rytmu má skončit změnou, ne jen pocitem, že "něco by se mělo upravit". Po prvních použitích bývá lákavé otevřít celý balíček, přepsat postup, doplnit další příklady, změnit index a ještě přidat novou kontrolní schůzku. To vypadá jako pečlivost. Často je to ale jen další vrstva práce, kterou nový člověk musí unést.
+
+Smysl této přílohy je jednodušší: vzít výstup z první kontroly rytmu, vybrat jednu konkrétní opravu onboardingového balíčku a dovést ji do stavu, kdy ji další člověk použije bez vysvětlování bokem. Pokud oprava vyžaduje deset změn, pravděpodobně jste nevybrali opravu, ale malý redesign systému. Ten má také místo, jen ne v běžné hodinové údržbě.
+
+Prakticky postupujte takto:
+
+1. vraťte se k rozhodnutí z kontroly rytmu,
+2. vyberte jeden problém, který nejvíc brání samostatnosti nebo bezpečné práci,
+3. přepište ho do jedné opravné věty,
+4. určete jedno místo v balíčku, kde se oprava projeví,
+5. ověřte opravu na nejbližším reálném průchodu,
+6. ukliďte dočasné poznámky, příklady a přístupy.
+
+### 1. Začněte posledním rozhodnutím, ne novým dojmem
+
+První otázka nezní "co se nám na balíčku nelíbí". Zní: "jaké rozhodnutí padlo při poslední kontrole rytmu?" Bez návratu k rozhodnutí začne tým znovu diskutovat od nuly. A od nuly se dobře diskutuje hlavně tehdy, když máte přebytek času a toleranci k dokumentační gymnastice. Většina týmů nemá ani jedno.
+
+Vezměte poslední kontrolní kartu a najděte:
+
+- původní slib onboardingového rytmu,
+- největší tření z prvních použití,
+- skrytou pomoc, která se opakovala mimo balíček,
+- privacy-first nález, který vyžaduje úklid nebo zpřesnění,
+- rozhodnutí o stavu rytmu,
+- jednu nejmenší opravu navrženou při kontrole.
+
+Pokud karta žádnou nejmenší opravu nemá, nedoplňujte ji zpětně podle nálady. Udělejte pětiminutové mini rozhodnutí: "který jeden problém nejvíc brání dalšímu samostatnému průchodu?" Odpověď napište do karty jako dodatečné rozhodnutí, včetně data a vlastníka.
+
+Příklad:
+
+Slabý výstup kontroly:
+"Onboarding je trochu nejasný, musíme ho vylepšit."
+
+Použitelný výstup kontroly:
+"Nový člověk nepoznal, kdy má eskalovat zákaznický dotaz, protože balíček ukazuje běžný případ, ale ne hraniční situaci. Oprava: doplnit jeden hraniční příklad a eskalační větu do části 'první samostatný průchod'."
+
+Rozdíl je v pracovatelnosti. První věta otevírá debatu. Druhá otevírá editor.
+
+### 2. Vyberte problém podle dopadu na samostatnost
+
+Onboardingový balíček má novému člověku pomoct převzít konkrétní práci. Proto má prioritu problém, který brání samostatnosti nebo vytváří tiché riziko. Ne problém, který jen esteticky vadí vlastníkovi dokumentu.
+
+Dobří kandidáti na jednu opravu:
+
+- nový člověk se opakovaně ptal na stejný rozhodovací bod,
+- udělal správnou akci, ale špatně ji zdokumentoval,
+- použil zastaralý příklad,
+- nevěděl, kde je zdroj pravdy,
+- předal citlivá data do špatného artefaktu,
+- potřeboval neplánovanou pomoc kvůli chybějícímu hraničnímu případu,
+- dokončil práci, ale tým musel výstup ručně opravovat.
+
+Slabí kandidáti:
+
+- "mohlo by tam být víc kontextu",
+- "chtělo by to hezčí strukturu",
+- "přidáme ještě jeden checklist pro jistotu",
+- "radši popíšeme všechny výjimky",
+- "uděláme z toho detailní manuál".
+
+Víc textu není automaticky lepší onboarding. Často jen přesune nejistotu z hlavy vlastníka do očí nového člověka. Lepší je jeden ostrý rozhodovací příklad než pět odstavců obecného vysvětlování.
+
+### 3. Přepište nález do jedné opravné věty
+
+Opravná věta drží rozsah. Má říct, co přesně se změní, kde se to změní a jak poznáte, že změna pomohla.
+
+Použijte tvar:
+
+```text
+Protože [konkrétní nález], upravíme [jedno místo v balíčku] tak, aby [nový člověk mohl udělat konkrétní rozhodnutí nebo akci] bez [typ skryté pomoci nebo rizika].
+```
+
+Příklady:
+
+```text
+Protože nový člověk dvakrát eskaloval běžný supportní dotaz zbytečně, upravíme část "typické dotazy" tak, aby rozlišovala běžný dotaz, hraniční dotaz a povinnou eskalaci bez dalšího vysvětlování v chatu.
+```
+
+```text
+Protože se při prvním průchodu ukládaly screenshoty s osobními údaji do dočasné složky, upravíme část "testovací důkazy" tak, aby používala anonymizovaný výřez a po kontrole určovala datum smazání.
+```
+
+```text
+Protože nový člověk nevěděl, jestli má aktualizovat index nebo jen pracovní poznámku, doplníme do závěru balíčku jednu rozhodovací větu o tom, kdy se mění kanonický zdroj pravdy.
+```
+
+Codyho komentář: opravná věta je malý filtr proti týmové tvořivosti v nevhodnou chvíli. Tvořivost je skvělá při návrhu systému. Při údržbě onboardingového balíčku je často užitečnější disciplína a schopnost nezakládat další dokument jen proto, že máme klávesnici.
+
+### 4. Měňte jedno pracovní místo, ne celý balíček
+
+Jedna oprava má mít jedno primární místo. Pokud se musí propsat i do indexu nebo changelogu, je to doprovodná aktualizace, ne druhá oprava. Jakmile začnete měnit pět částí balíčku, ztrácíte možnost poznat, která změna pomohla.
+
+Typická místa opravy:
+
+- úvodní rozhodovací otázka,
+- první samostatný průchod,
+- hraniční příklad,
+- checklist před předáním,
+- privacy-first kontrola,
+- odkaz v kanonickém indexu,
+- závěrečné rozhodnutí, co aktualizovat po práci.
+
+Příklad mapy dopadu:
+
+```text
+Opravná věta:
+Protože nový člověk ukládal dočasné exporty bez data smazání, upravíme privacy-first kontrolu tak, aby každý export měl účel, vlastníka a datum úklidu.
+
+Primární místo:
+Onboardingový balíček > Privacy-first kontrola
+
+Doprovodná místa:
+Kanonický index: změnit popis balíčku na "obsahuje pravidlo pro dočasné exporty"
+Changelog: zapsat datum a důvod opravy
+
+Místa mimo rozsah:
+Celý retenční plán týmu
+Všechny starší šablony exportů
+Nové školení pro celý tým
+```
+
+Hranice "mimo rozsah" není lenost. Je to ochrana před tím, aby údržba jedné onboardingové věci neotevřela reorganizaci celé dokumentace.
+
+### 5. Zkraťte nebo nahraďte, nepřidávejte automaticky
+
+Když se v onboardingovém balíčku objeví díra, první reflex bývá přidat další odstavec. Někdy je to správně. Často je ale lepší nahradit slabý příklad silnějším, zkrátit dlouhé vysvětlení na rozhodovací větu nebo sloučit dvě podobné části.
+
+Před přidáním nového textu se zeptejte:
+
+- Můžeme nahradit obecný příklad konkrétním?
+- Můžeme odstranit větu, která už není potřeba?
+- Můžeme dát rozhodnutí blíž k místu, kde ho člověk potřebuje?
+- Můžeme snížit počet odkazů?
+- Můžeme z příkladu odstranit reálná nebo citlivá data?
+- Můžeme udělat hraniční případ kratší než běžný případ?
+
+Ukázka úpravy:
+
+Před:
+"V případě nejistoty kontaktujte vlastníka procesu a domluvte se na dalším postupu. Některé situace mohou vyžadovat eskalaci podle kontextu."
+
+Po:
+"Eskalujte pouze tehdy, když dotaz mění cenu, slib zákazníkovi, přístup k datům nebo veřejnou komunikaci. Běžný dotaz podle šablony vyřiďte samostatně a zapište odkaz na odpověď."
+
+První text zní rozumně, ale nepomáhá rozhodnout. Druhý text sice není kompletní právní ani provozní manuál, ale člověku dává konkrétní hranici.
+
+### 6. Proveďte privacy-first kontrolu opravy
+
+Každá oprava onboardingového balíčku může omylem zvětšit datovou stopu. Přidáte screenshot, příklad zákaznické zprávy, export z administrace, nahrávku průchodu nebo tabulku s poznámkami. Najednou má balíček víc citlivých stop než původní práce. To je špatný obchod: onboarding se zlepší, ale provozní hygiena se zhorší.
+
+Před uzavřením opravy projděte:
+
+- Neobsahuje nový příklad reálná osobní data?
+- Neobsahuje screenshot tokeny, e-maily, fakturační údaje nebo interní poznámky?
+- Má každý dočasný podklad účel a datum smazání?
+- Je jasné, kdo smí balíček číst?
+- Není oprava závislá na chatu, soukromé poznámce nebo lokálním souboru?
+- Nezůstaly staré verze balíčku na místech, kde je někdo může použít?
+- Je kanonický zdroj pravdy pořád jeden?
+
+Privacy-first oprava se pozná i tím, že snižuje počet míst, kde se data zbytečně povalují. Když kvůli onboardingu vzniknou tři dočasné složky a žádná nemá vlastníka, není to onboarding. Je to budoucí úklid s lepším názvem.
+
+### 7. Ověřte opravu na nejbližším skutečném průchodu
+
+Oprava není hotová v okamžiku, kdy je napsaná. Hotová je ve chvíli, kdy ji někdo použije a nepotřebuje obejít balíček bokem. Proto k opravě rovnou přidejte ověřovací okamžik.
+
+Lehké ověření může vypadat takto:
+
+- při dalším onboardingu nový člověk projde opravenou část samostatně,
+- vlastník sleduje jen výstup, ne každý krok,
+- po průchodu se zapíše jedna věta: pomohlo / nepomohlo / vytvořilo nové tření,
+- pokud oprava nepomohla, neotevírá se celý balíček, ale vrací se opravná věta do revize.
+
+Nepotřebujete velký testovací scénář. Stačí reálný pracovní okamžik a jasné kritérium:
+
+```text
+Oprava pomohla, pokud nový člověk správně rozliší běžný dotaz od eskalace bez dodatečné otázky na vlastníka.
+```
+
+```text
+Oprava pomohla, pokud se po průchodu nenajdou dočasné exporty bez data smazání.
+```
+
+```text
+Oprava pomohla, pokud se výstup zapíše do kanonického indexu, ne do vedlejší poznámky.
+```
+
+### Šablona opravy onboardingového balíčku
+
+```text
+Název opravy:
+
+Datum:
+Vlastník:
+Navazuje na kontrolu rytmu ze dne:
+
+Původní slib onboardingového rytmu:
+
+Konkrétní nález:
+
+Opravná věta:
+Protože ..., upravíme ..., aby ... bez ...
+
+Primární místo v balíčku:
+
+Doprovodná místa:
+- kanonický index:
+- changelog:
+- příklady:
+- checklist:
+
+Mimo rozsah:
+
+Privacy-first kontrola:
+- reálná data odstraněna/anonymizována:
+- dočasné podklady mají datum smazání:
+- přístupy beze změny / upraveny:
+- staré verze uklizeny:
+- jeden zdroj pravdy potvrzen:
+
+Ověření:
+- kdy:
+- na jakém průchodu:
+- kritérium úspěchu:
+- kdo vyhodnotí:
+
+Výsledek ověření:
+Pomohlo / nepomohlo / vytvořilo nové tření
+
+Další krok:
+Ponechat / upravit / vrátit do kontroly rytmu / sloučit / ukončit
+```
+
+### Mini workshop: 30 minut na jednu opravu
+
+1. Pět minut: přečíst poslední kontrolní kartu a původní slib rytmu.
+2. Pět minut: vybrat jeden problém podle dopadu na samostatnost nebo datovou stopu.
+3. Pět minut: napsat opravnou větu.
+4. Pět minut: určit primární místo úpravy a místa mimo rozsah.
+5. Pět minut: projít privacy-first kontrolu.
+6. Pět minut: naplánovat ověření na nejbližším reálném průchodu.
+
+Držte čas. Jakmile se workshop začne měnit v obecnou debatu o celé dokumentaci, vraťte se k otázce: "jaká jedna změna pomůže dalšímu člověku udělat jednu práci samostatněji a čistěji?" Všechno ostatní patří do backlogu, ne do této opravy.
+
+### Checklist
+
+- Vychází oprava z poslední kontroly onboardingového rytmu?
+- Je vybraný jeden problém, ne sada dojmů?
+- Dopadá problém na samostatnost, kvalitu výstupu nebo datovou stopu?
+- Má oprava jednu jasnou opravnou větu?
+- Je určeno jedno primární místo v balíčku?
+- Jsou doprovodné změny oddělené od hlavní opravy?
+- Je explicitně napsané, co je mimo rozsah?
+- Nahrazuje nebo zkracuje oprava starý text tam, kde to jde?
+- Nezvětšuje oprava zbytečně datovou stopu?
+- Má ověření konkrétní reálný průchod a kritérium úspěchu?
+- Propíše se výsledek do changelogu a kanonického indexu?
+
+Dobrá oprava onboardingového balíčku není ta, která nejvíc rozšíří dokument. Je to ta, která sníží počet bočních vysvětlení, nejasných rozhodnutí a dočasných datových stop. Nový člověk pak nedostane tlustší manuál, ale jasnější cestu. A tým má o jednu improvizaci méně.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FO o převodu kontroly onboardingového rytmu do jedné opravy balíčku: výběr problému podle samostatnosti, opravná věta, jedno pracovní místo, zkracování místo nabalování, privacy-first kontrola, ověření na reálném průchodu, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FN o kontrole trvalého onboardingového rytmu po prvních použitích: kontrolní okno, původní slib, oddělení problému člověka od problému systému, skrytá pomoc, privacy-first datová stopa, lehké signály, rozhodnutí stavu rytmu, uzavření v artefaktech a checklist.
 - 2026-05-13: Doplněna Příloha FM o zařazení ověřeného onboardingového balíčku do trvalého rytmu: výběr balíčku, napojení na pracovní okamžik, minimální výstup, vlastnictví role, kanonická trasa, privacy-first úklid, stop pravidla, onboardingový backlog a checklist.
 - 2026-05-13: Doplněna Příloha FL o kontrole onboardingového balíčku po prvních průchodech: kontrolní okno, návrat k onboardingové otázce, třídění tření, skrytá pomoc, privacy-first datová stopa, rozhodnutí o stavu, nejmenší oprava, changelog a checklist.
