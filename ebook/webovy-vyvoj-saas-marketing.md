@@ -48400,8 +48400,274 @@ Výstupem workshopu není seznam přání. Výstupem je stav balíčku a jedna d
 
 Onboardingový balíček je dobrý až ve chvíli, kdy unese realitu. První průchody nejsou formalita. Jsou test, jestli tým opravdu předává práci, nebo jen předává dokument. Rozdíl poznáte rychle: dobrý balíček zkracuje dotazy, chrání data a dává novému člověku klidné hranice samostatnosti.
 
+## Příloha FM: Zařazení ověřeného onboardingového balíčku do trvalého rytmu
+
+Ověřený onboardingový balíček je užitečný jen tehdy, když se z něj nestane soubor, který jednou pomohl a potom pomalu zestárnul. Onboarding se mění s produktem, týmem, nabídkou, nástroji i zákaznickými situacemi. Pokud balíček nemá vlastní provozní rytmus, začne žít ve třech verzích najednou: oficiální dokument, osobní poznámky zkušeného člověka a improvizace v chatu.
+
+Trvalý rytmus má jednoduchý cíl: udržet balíček krátký, aktuální, dohledatelný a použitelný při každém dalším předání role. Nejde o další schůzku pro radost z kalendáře. Jde o to, aby nový člověk nemusel lovit pravdu mezi dokumentací, interním chatem, starým videem a větou "tohle už děláme trochu jinak".
+
+### 1. Rozhodněte, který balíček si rytmus zaslouží
+
+Ne každý onboardingový materiál potřebuje formální rytmus. Pokud jde o jednorázový checklist pro malou změnu, stačí archivace po použití. Rytmus si zaslouží balíček, který se bude používat opakovaně nebo chrání důležitou hranici.
+
+Signály, že rytmus dává smysl:
+
+- balíček se používá při předání role,
+- souvisí s přístupem k datům, zákazníkům, produkci nebo fakturaci,
+- pomáhá rozlišovat běžnou práci od eskalace,
+- navazuje na rolový standard nebo provozní standard,
+- obsahuje rozhodovací pravidla, která se mohou měnit,
+- jeho selhání by vedlo k chybám v provozu nebo zbytečné datové stopě.
+
+Příklad:
+
+```text
+Balíček:
+Onboarding editora formulářů
+
+Proč má mít rytmus:
+Chrání hranici mezi textovou úpravou a změnou rozsahu sbíraných údajů. Používá se při každém předání obsahové role.
+
+Rytmus:
+Krátká kontrola po každém onboardingu a měsíční mini revize, pokud proběhla změna formulářů nebo datové mapy.
+```
+
+Balíček bez provozního dopadu rytmus nepotřebuje. Balíček, který chrání data nebo zákaznickou důvěru, ho potřebuje skoro vždy.
+
+### 2. Připojte kontrolu k existujícímu pracovnímu okamžiku
+
+Nezakládejte rytmus jako izolovanou aktivitu. Připojte ho k místu, kde už tým stejně pracuje:
+
+- konec onboardingu nové role,
+- měsíční review standardů,
+- retrospektiva po prvním samostatném cyklu,
+- review změn v produktu nebo webu,
+- kontrola datové mapy,
+- kvartální úklid přístupů a nástrojů.
+
+Špatný rytmus:
+
+```text
+Každé pondělí kontrolovat všechny onboardingové balíčky.
+```
+
+Lepší rytmus:
+
+```text
+Po každém dokončeném onboardingu zapsat jednu kontrolní větu:
+"Balíček pomohl / částečně pomohl / nepomohl a mění se toto."
+
+Jednou měsíčně projít jen balíčky, které byly použité nebo souvisí se změnou standardu.
+```
+
+Rytmus má sledovat realitu, ne vyrábět provozní divadlo. Pokud se balíček nepoužil a nic v jeho okolí se nezměnilo, často stačí zkontrolovat, že stále existuje vlastník a odkaz v indexu.
+
+### 3. Určete minimální kontrolní výstup
+
+Každý rytmus potřebuje malý, jasný výstup. Bez něj se kontrola rozpustí do pocitu, že "jsme se o tom bavili".
+
+Minimální výstup může vypadat takto:
+
+```text
+Balíček:
+Onboarding editora formulářů
+
+Poslední použití:
+2026-05-13
+
+Stav:
+Platný s drobnou opravou
+
+Změna:
+Doplněn hraniční příklad změny povinného telefonního čísla.
+
+Privacy-first kontrola:
+Žádné produkční screenshoty v onboardingových podkladech.
+
+Další kontrola:
+Po další změně datové mapy nebo nejpozději za měsíc.
+```
+
+Stačí krátká karta. Nepište zápis na tři stránky, pokud se změnila jedna věta. Dlouhé zápisy vytvářejí falešný pocit zralosti, ale onboarding potřebuje hlavně rozhodnutí a aktuální pracovní trasu.
+
+### 4. Vlastníkem je role, ne náhodný zachránce
+
+Trvalý rytmus se rozpadne, pokud balíček vlastní člověk, který "to kdysi napsal". Vlastníkem má být role, která nese odpovědnost za výsledek práce.
+
+Příklady:
+
+```text
+Balíček pro editora formulářů:
+Vlastník: vedoucí webového obsahu
+
+Balíček pro support práci s citlivým tiketem:
+Vlastník: customer success lead
+
+Balíček pro deployment checklist:
+Vlastník: technický lead
+```
+
+Vlastník nemusí vše psát sám. Musí ale rozhodnout, co je platné, co se mění a co se archivuje. Bez vlastníka se z onboardingového balíčku stane veřejná nástěnka, na kterou každý něco připíchne a nikdo neví, co z toho ještě platí.
+
+### 5. Držte jednu kanonickou trasu
+
+Onboardingový balíček má mít jednu kanonickou trasu. Může existovat krátká verze, detailní příklad nebo pracovní checklist, ale nový člověk musí vědět, kde začít a co je zdroj pravdy.
+
+Kontrolní otázky:
+
+- Je balíček uvedený v kanonickém indexu?
+- Vede z indexu na aktuální verzi?
+- Jsou starší verze jasně archivované?
+- Odkazuje balíček na aktuální standard, ne na kopii standardu?
+- Existují osobní poznámky, které by měly být převedené nebo smazané?
+- Je jasné, kde se zapisují změny po dalším použití?
+
+Příklad chyby:
+
+```text
+Nový člověk dostane odkaz na onboardingový dokument, ale senior mu pošle ještě "lepší verzi" ve vlastních poznámkách.
+```
+
+Oprava není přidat třetí dokument. Oprava je rozhodnout, co z osobních poznámek patří do kanonického balíčku, co je jen komentář a co se smaže.
+
+### 6. Privacy-first rytmus má mazat i zkracovat
+
+U onboardingových materiálů je snadné jen přidávat. Další příklad, další screenshot, další poznámka, další "pro jistotu". Privacy-first rytmus se ptá i opačně: co už nemusíme držet?
+
+Při každé kontrole projděte:
+
+- dočasné screenshoty,
+- exporty testovacích dat,
+- kopie zákaznických příkladů,
+- staré videozáznamy,
+- chatové vysvětlení s konkrétními údaji,
+- přístupy udělené kvůli onboardingu,
+- testovací účty a jejich oprávnění.
+
+Příklad:
+
+```text
+Nález:
+Po onboardingu zůstal testovací účet s rozšířeným oprávněním.
+
+Rozhodnutí:
+Oprávnění sníženo na běžnou roli, do balíčku doplněn krok "po prvním samostatném průchodu zkontrolovat oprávnění".
+```
+
+Codyho komentář: dobrý onboardingový rytmus není jen dokumentační hygiena. Je to bezpečnostní rutina v civilním oblečení. Čím méně nepotřebných kopií, účtů a screenshotů necháte po předání role, tím méně toho budete později vysvětlovat s výrazem člověka, který právě objevil starý export v nesprávné složce.
+
+### 7. Nastavte stop pravidla
+
+Balíček nemá zůstat v provozu za každou cenu. Stop pravidla říkají, kdy se má přestat používat samostatně a vrátit do pilotního nebo revizního režimu.
+
+Praktická stop pravidla:
+
+- stejná otázka se objevila u dvou onboardingů po sobě,
+- nový člověk udělal rozhodnutí, které balíček měl jasně pokrýt,
+- změnil se datový rozsah, nástroj nebo odpovědná role,
+- balíček odkazuje na neplatný standard,
+- vznikla zbytečná kopie citlivých dat,
+- vlastník balíčku není dostupný nebo není určený.
+
+Příklad:
+
+```text
+Stop pravidlo:
+Pokud se při onboardingu znovu objeví nejasnost, zda změna formulářového pole mění účel sběru údajů, balíček se nesmí použít pro samostatné předání další role. Nejdřív se doplní rozhodovací tabulka a anonymizovaný hraniční příklad.
+```
+
+Stop pravidlo chrání tým před tichým opakováním stejné chyby. Není to brzda práce. Je to brzda opakovaného chaosu.
+
+### 8. Propojte rytmus s onboardingovým backlogem
+
+Některé nálezy jsou malé a opravíte je hned. Jiné jsou větší: chybí ukázkové prostředí, role nemá jasné oprávnění, standard je příliš dlouhý, datová mapa není dostatečně praktická. Tyto věci nepatří do nekonečného komentáře pod dokumentem. Patří do onboardingového backlogu.
+
+Karta backlogu:
+
+```text
+Nález:
+Nový editor nerozlišuje změnu labelu a změnu účelu pole.
+
+Dopad:
+Riziko samostatné změny datového rozsahu bez kontroly.
+
+Typ:
+Rozhodovací pravidlo
+
+Nejmenší oprava:
+Doplnit tabulku tří typů změn a jeden hraniční příklad.
+
+Vlastník:
+Vedoucí webového obsahu
+
+Do kdy:
+Před dalším onboardingem editora
+```
+
+Backlog má být krátký. Pokud má onboardingový backlog dvacet položek a žádná se nezavírá, není to backlog. Je to parkoviště dobrých úmyslů.
+
+### Šablona provozního rytmu onboardingového balíčku
+
+```text
+Balíček:
+Role:
+Pracovní situace:
+Vlastník:
+Kanonický odkaz:
+Navazující standard:
+
+Kdy se kontroluje:
+- po každém onboardingu:
+- měsíčně, pokud:
+- kvartálně, pokud:
+
+Minimální výstup kontroly:
+
+Privacy-first kontrola:
+- dočasné podklady:
+- screenshoty:
+- testovací účty:
+- přístupy:
+- kopie dat:
+
+Stop pravidla:
+
+Onboardingový backlog:
+
+Poslední použití:
+Poslední změna:
+Další kontrola:
+```
+
+### Mini workshop: 30 minut na zařazení balíčku do rytmu
+
+1. Pět minut: rozhodnout, jestli balíček rytmus opravdu potřebuje.
+2. Pět minut: vybrat existující pracovní okamžik, ke kterému se kontrola připojí.
+3. Pět minut: určit vlastníka role a minimální kontrolní výstup.
+4. Pět minut: zkontrolovat kanonický odkaz, staré kopie a index.
+5. Pět minut: nastavit privacy-first úklid a stop pravidla.
+6. Pět minut: založit první položku onboardingového backlogu, pokud je potřeba.
+
+Výstupem není plán na velkou dokumentační reformu. Výstupem je jeden balíček, který má jasný rytmus, vlastníka, stop pravidla a další kontrolu.
+
+### Checklist
+
+- Je jasné, proč si balíček zaslouží trvalý rytmus?
+- Je kontrola napojená na existující pracovní okamžik?
+- Má rytmus minimální výstup, který jde rychle zapsat?
+- Vlastní balíček role, ne náhodný autor dokumentu?
+- Existuje jedna kanonická trasa pro nového člověka?
+- Jsou staré kopie archivované nebo smazané?
+- Kontroluje rytmus i zbytečné screenshoty, exporty, účty a přístupy?
+- Má balíček stop pravidla pro návrat do revize?
+- Je jasné, co se zapisuje do onboardingového backlogu?
+- Je další kontrola navázaná na reálné použití, ne jen na datum v kalendáři?
+
+Trvalý onboardingový rytmus je dobrý tehdy, když se skoro ztratí v běžné práci. Nový člověk dostane aktuální trasu, tým po použití zapíše krátké rozhodnutí, vlastník uklidí zbytečnou datovou stopu a balíček se zlepší jen o to, co skutečně pomůže dalšímu předání. To je nudné správným způsobem. A v provozu je "nudné správným způsobem" často velmi dobrý kompliment.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FM o zařazení ověřeného onboardingového balíčku do trvalého rytmu: výběr balíčku, napojení na pracovní okamžik, minimální výstup, vlastnictví role, kanonická trasa, privacy-first úklid, stop pravidla, onboardingový backlog a checklist.
 - 2026-05-13: Doplněna Příloha FL o kontrole onboardingového balíčku po prvních průchodech: kontrolní okno, návrat k onboardingové otázce, třídění tření, skrytá pomoc, privacy-first datová stopa, rozhodnutí o stavu, nejmenší oprava, changelog a checklist.
 - 2026-05-13: Doplněna Příloha FK o převodu stabilizovaného rolového standardu do onboardingového balíčku: výběr role a pracovní situace, onboardingová otázka, řízený první průchod, příklady, oprávnění, privacy-first testovací data, ověření balíčku a checklist.
 - 2026-05-13: Doplněna Příloha FJ o stabilizaci upraveného rolového standardu po prvním ověření: rozhodnutí o stavu standardu, upevnění zdroje pravdy, privacy-first úklid přechodové datové stopy, přenos poučení do role, další kontrola a stabilizační karta.
