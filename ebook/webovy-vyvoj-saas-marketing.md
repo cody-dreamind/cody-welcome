@@ -45620,8 +45620,316 @@ Když se workshop rozpadne do debaty o všech procesech firmy, vraťte se k jedn
 
 Trvalý zvyk je dobrý tehdy, když si ho tým po pár opakováních skoro přestane všímat, ale výsledek zůstane lepší. Méně návratů staré práce, méně neřízených poznámek, jasnější zdroj pravdy a menší datová stopa. Přesně ten typ nudného provozního vítězství, ze kterého se ve firmách skládá skutečná stabilita.
 
+## Příloha FD: Kontrola trvalého provozního zvyku po třech cyklech
+
+Trvalý zvyk má cenu až ve chvíli, kdy přežije několik běžných průchodů. Jedno úspěšné použití může být štěstí, přítomnost autora změny nebo prostě dobrý den. Tři cykly už ukážou víc: jestli zvyk opravdu zapadl do práce, jestli má správného vlastníka, jestli nezvětšuje datovou stopu a jestli lidé nepotřebují obcházet pravidlo soukromými poznámkami.
+
+Kontrola po třech cyklech není audit všeho, co se v týmu děje. Je to krátké ověření, zda malý provozní zvyk splnil svůj slib. Pokud ano, může zůstat skoro neviditelný. Pokud ne, je lepší ho zjednodušit nebo zrušit dřív, než kolem něj vyroste další vrstva procesního nábytku. Ten se pak špatně stěhuje a ještě hůř vysvětluje novým lidem.
+
+Smyslem této přílohy je dát týmu jednoduchý postup, jak po třech opakováních rozhodnout, jestli zvyk ponechat, upravit, sloučit nebo ukončit. Prakticky, bez divadla a s důrazem na jeden zdroj pravdy.
+
+### 1. Vraťte se k původnímu slibu zvyku
+
+Začněte tím, proč zvyk vůbec vznikl. Ne tím, kdo ho navrhl, jak zněla debata nebo kolik času mu tým už věnoval. Zvyk má mít původní slib: zabránit návratu staré práce, zmenšit zmatek, ochránit zdroj pravdy, snížit datovou stopu nebo zrychlit rozhodnutí.
+
+Dobrá kontrolní otázka:
+
+```markdown
+Jaký konkrétní problém měl tento zvyk po třech cyklech odstranit nebo držet pod kontrolou?
+```
+
+Příklady původního slibu:
+
+- u sloučených šablon bude vždy dohledatelný důvod rozhodnutí,
+- po změně formuláře nevznikne sběr zbytečných údajů,
+- každý zastaralý odkaz v indexu bude odstraněn při nejbližší triage,
+- po incidentu se jedno poučení dostane do runbooku a nezůstane jen v chatu,
+- měsíční review nebude produkovat druhý paralelní report.
+
+Špatný začátek kontroly je věta: "Používáme to?" Lepší je: "Vyřešilo to původní problém?" Používání samo o sobě nestačí. Tým může poslušně vyplňovat pole, které už nikomu nepomáhá. To je provozní ekvivalent zalévání umělé květiny.
+
+Krátký zápis:
+
+```markdown
+Původní slib zvyku:
+Problém, který se neměl vrátit:
+Očekávaný výstup po třech cyklech:
+```
+
+### 2. Projděte tři skutečné průchody
+
+Kontrola má stát na reálných průchodech, ne na pocitu vlastníka. Vezměte poslední tři cykly, ve kterých se měl zvyk spustit. Pokud se nespustil ani jednou, je to také zjištění. Buď byl špatně napojený na práci, nebo řeší situaci, která nastává vzácněji, než jste čekali.
+
+U každého cyklu si zapište jen minimum:
+
+- kdy se měl zvyk spustit,
+- zda se opravdu spustil,
+- jaký výstup vznikl,
+- zda byl výstup ve zdroji pravdy,
+- jestli někdo musel použít zkratku bokem,
+- co se stalo s datovou stopou.
+
+Šablona:
+
+```markdown
+Cyklus 1:
+Spouštěč:
+Výstup:
+Zdroj pravdy:
+Obcházení bokem:
+Datová stopa:
+
+Cyklus 2:
+Spouštěč:
+Výstup:
+Zdroj pravdy:
+Obcházení bokem:
+Datová stopa:
+
+Cyklus 3:
+Spouštěč:
+Výstup:
+Zdroj pravdy:
+Obcházení bokem:
+Datová stopa:
+```
+
+Příklad:
+
+```markdown
+Cyklus 1:
+Spouštěč: měsíční triage indexu
+Výstup: sloučené dvě šablony, u obou jednovětý důvod
+Zdroj pravdy: kanonický index
+Obcházení bokem: ne
+Datová stopa: beze změny, bez zákaznických detailů
+
+Cyklus 2:
+Spouštěč: měsíční triage indexu
+Výstup: přejmenovaná jedna položka, důvod chyběl
+Zdroj pravdy: index aktualizovaný, ale důvod v poznámce editora
+Obcházení bokem: ano
+Datová stopa: osobní poznámka bez retenčního pravidla
+
+Cyklus 3:
+Spouštěč: měsíční triage indexu
+Výstup: odstraněná zastaralá šablona, důvod v indexu
+Zdroj pravdy: kanonický index a changelog
+Obcházení bokem: ne
+Datová stopa: menší, starý odkaz odstraněn
+```
+
+Tři průchody dávají dost materiálu pro rozhodnutí, ale pořád drží kontrolu malou. Neotevírejte historické archivy, pokud zvyk vznikl pro budoucí práci. Historie je dobrá učitelka, ale mizerný důvod pro nekonečný úklid.
+
+### 3. Oddělte selhání zvyku od selhání spouštěče
+
+Když zvyk nefunguje, neznamená to automaticky, že je špatný. Často je problém ve spouštěči. Pravidlo může být užitečné, ale aktivuje se ve špatný moment, příliš pozdě nebo u člověka, který nemá kontext.
+
+Rozlište čtyři typy problému:
+
+- zvyk je správný, ale spouštěč je nejasný,
+- spouštěč je správný, ale akce je moc velká,
+- akce je správná, ale výstup nemá jasné místo,
+- místo je správné, ale zvyk nemá vlastníka s rozhodovací pravomocí.
+
+Praktická diagnostika:
+
+```markdown
+Kde přesně se zvyk rozpadl?
+[ ] Nikdo nevěděl, kdy ho spustit.
+[ ] Lidé věděli kdy, ale akce byla moc pracná.
+[ ] Akce proběhla, ale výstup skončil mimo zdroj pravdy.
+[ ] Výstup existuje, ale nikdo podle něj nerozhoduje.
+[ ] Zvyk funguje, ale přidal zbytečnou datovou stopu.
+```
+
+Příklady oprav podle problému:
+
+- nejasný spouštěč: napojit zvyk na existující měsíční triage místo "průběžně",
+- moc velká akce: zkrátit zápis na jednu větu a jeden stav,
+- chybějící místo: přidat pole do existujícího indexu, ne zakládat nový dokument,
+- slabé vlastnictví: pojmenovat roli, která smí rozhodnout o zrušení nebo sloučení,
+- datová stopa navíc: odstranit citlivé příklady a ponechat jen rozhodovací souhrn.
+
+Tady se vyplatí být přísný. Když je oprava zvyku větší než problém, který zvyk řeší, problém není v týmu. Problém je v návrhu zvyku.
+
+### 4. Udělejte privacy-first kontrolu bez dramatu
+
+Každý trvalý zvyk vytváří nějakou stopu. Někdy je to jedna věta v changelogu. Jindy stav v indexu, poznámka v šabloně, odkaz na výstup nebo malý záznam v review. To samo o sobě není problém. Problém je, když se datová stopa zvětšuje bez rozhodovací hodnoty.
+
+Kontrola po třech cyklech má položit jednoduché otázky:
+
+- Jaké údaje zvyk za tři cykly vytvořil?
+- Jsou všechny nutné pro rozhodnutí?
+- Neobsahují příklady osobní, zákaznické nebo interně citlivé detaily zbytečně?
+- Je jasné, kde záznam žije a kdy se uklidí?
+- Nevznikly osobní poznámky, exporty, screenshoty nebo paralelní tabulky?
+- Dá se výstup zkrátit bez ztráty rozhodovací hodnoty?
+
+Privacy-first oprava nemusí být velká. Často stačí změnit formulaci:
+
+```markdown
+Původní zápis:
+Zákazník X poslal konkrétní stížnost na formulář, opsali jsme celý text do triage poznámky.
+
+Lepší zápis:
+V jednom zákaznickém průchodu nebylo jasné, proč formulář vyžaduje telefon. Rozhodnutí: pole odstranit z výchozí verze a ponechat jen jako volitelné u kvalifikovaných poptávek.
+```
+
+Ten druhý zápis obsahuje důvod a rozhodnutí, ale netahá do provozního artefaktu víc detailů, než je nutné. Přesně o to jde. Privacy-first není poetická nálepka na webu. Je to každodenní návyk psát méně, ale užitečněji.
+
+### 5. Rozhodněte jednou větou
+
+Po třech cyklech má následovat rozhodnutí, ne esej. Rozhodnutí může mít čtyři základní stavy:
+
+- `ponechat`,
+- `zjednodušit`,
+- `sloučit`,
+- `ukončit`.
+
+Použijte tvar:
+
+```markdown
+Po třech cyklech zvyk [stav], protože [konkrétní důkaz]. Další krok je [jedna akce].
+```
+
+Příklady:
+
+```markdown
+Po třech cyklech zvyk ponecháváme, protože u všech sloučených položek byl důvod rozhodnutí dohledatelný v indexu a nevznikl paralelní report. Další krok je kontrolovat zvyk jen v kvartálním review standardů.
+```
+
+```markdown
+Po třech cyklech zvyk zjednodušujeme, protože výstup pomohl u dvou rozhodnutí, ale pole "dopad" se pokaždé opakovalo s důvodem rozhodnutí. Další krok je sloučit obě pole do jedné věty.
+```
+
+```markdown
+Po třech cyklech zvyk slučujeme s měsíčním changelogem, protože samostatná karta nepřinesla žádné další rozhodnutí. Další krok je přesunout stop pravidlo do existujícího changelogového checklistu.
+```
+
+```markdown
+Po třech cyklech zvyk ukončujeme, protože se nespustil ani jednou a původní riziko pokrývá nová předpublikační kontrola. Další krok je odstranit zvyk z kanonického indexu a ponechat odkaz v archivu změn.
+```
+
+Když se tým neumí shodnout na stavu, vraťte se ke třem průchodům. Neshoda často znamená, že se mluví o dojmech místo o výstupech.
+
+### 6. Aktualizujte zdroj pravdy a ukliďte zbytky
+
+Rozhodnutí po třech cyklech má být vidět tam, kde tým zvyk hledá. Pokud je zvyk ponechaný, stačí aktualizovat jeho kartu a další revizní datum. Pokud se zjednodušuje, upravte jen dotčené pole. Pokud se slučuje nebo ukončuje, odstraňte aktivní odkazy a ponechte krátkou archivní stopu.
+
+Minimální aktualizace pro stav `ponechat`:
+
+- potvrdit aktuální spouštěč,
+- ponechat vlastníka,
+- doplnit datum další kontroly,
+- zapsat rozhodovací větu,
+- odstranit dočasné poznámky z kontroly.
+
+Minimální aktualizace pro stav `zjednodušit`:
+
+- změnit jen problematické pole nebo krok,
+- zachovat zdroj pravdy,
+- zapsat, proč se rozsah zmenšil,
+- ověřit další cyklus už podle nové verze.
+
+Minimální aktualizace pro stav `sloučit` nebo `ukončit`:
+
+- označit původní zvyk jako neaktivní,
+- přidat odkaz na nový zdroj pravdy nebo archivní poznámku,
+- odstranit připomínky a checklisty, které by zvyk dál spouštěly,
+- uklidit osobní poznámky a dočasné kopie,
+- přidat jednu větu do changelogu.
+
+Příklad changelogového řádku:
+
+```markdown
+2026-08-05: Po třech cyklech sloučen zvyk "Důvod rozhodnutí v indexu" do měsíčního changelogu, protože samostatná karta nepřidávala další rozhodovací hodnotu.
+```
+
+Nejhorší výsledek kontroly je rozhodnutí, které zůstane jen v hlavách účastníků. To je jako zamknout zdroj pravdy do místnosti a klíč hodit do chatu.
+
+### Karta kontroly po třech cyklech
+
+```markdown
+Název zvyku:
+Původní slib:
+Spouštěč:
+Vlastník:
+
+Cyklus 1:
+Cyklus 2:
+Cyklus 3:
+
+Zvyk se spustil ve správný moment:
+Výstup byl ve zdroji pravdy:
+Vzniklo obcházení bokem:
+Datová stopa je přiměřená:
+Původní problém se vrátil:
+
+Rozhodnutí:
+Konkrétní důkaz:
+Jedna navazující akce:
+Další kontrola nebo archivace:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název zvyku: Jednovětý důvod rozhodnutí v indexu
+Původní slib: zabránit osobním poznámkám při slučování šablon
+Spouštěč: měsíční triage kanonického indexu
+Vlastník: editor indexu
+
+Cyklus 1: dvě sloučené šablony, důvod v indexu
+Cyklus 2: jedna přejmenovaná položka, důvod nejdřív v osobní poznámce
+Cyklus 3: jedna odstraněná šablona, důvod v indexu i changelogu
+
+Zvyk se spustil ve správný moment: ano
+Výstup byl ve zdroji pravdy: převážně ano
+Vzniklo obcházení bokem: jednou
+Datová stopa je přiměřená: po úklidu ano
+Původní problém se vrátil: částečně ve druhém cyklu
+
+Rozhodnutí: zjednodušit
+Konkrétní důkaz: lidé důvod píšou, ale samostatné pole "dopad" se nevyužívá
+Jedna navazující akce: sloučit "důvod" a "dopad" do jedné rozhodovací věty
+Další kontrola nebo archivace: ověřit při další měsíční triage
+```
+
+### Mini workshop: 30 minut na kontrolu zvyku
+
+1. Pět minut: připomeňte původní slib zvyku.
+2. Osm minut: projděte tři skutečné průchody.
+3. Pět minut: najděte přesné místo tření.
+4. Pět minut: udělejte privacy-first kontrolu datové stopy.
+5. Pět minut: napište jednověté rozhodnutí.
+6. Dvě minuty: určete jednu navazující akci.
+
+Když potřebujete víc času, pravděpodobně nekontrolujete jeden zvyk, ale celý provozní systém. To může být užitečné jindy. Tady držte rozsah malý, jinak se z kontroly stane další zvyk, který bude za tři měsíce potřebovat kontrolu. Ano, procesní had si umí ukousnout vlastní ocas, ale nemusíme mu nosit příbor.
+
+### Checklist
+
+- Je jasný původní slib zvyku?
+- Kontrolujete tři skutečné průchody, ne jen dojem vlastníka?
+- Víte, kdy se měl zvyk spustit?
+- Je jasné, jestli se opravdu spustil?
+- Byl výstup ve zdroji pravdy?
+- Nevznikla paralelní evidence?
+- Nevznikly osobní poznámky bez retenčního pravidla?
+- Přinesl zvyk rozhodovací hodnotu?
+- Je datová stopa menší, stejná nebo jasně odůvodněná?
+- Dá se zápis zkrátit bez ztráty smyslu?
+- Rozlišili jste problém zvyku od problému spouštěče?
+- Má rozhodnutí jeden ze stavů: ponechat, zjednodušit, sloučit, ukončit?
+- Je další krok jedna konkrétní akce?
+- Je zdroj pravdy aktualizovaný?
+- Jsou dočasné poznámky a staré připomínky uklizené?
+
+Zvyk, který po třech cyklech obstojí, už nemusí být zajímavý. A to je dobře. Provozní kvalita se často pozná podle toho, že se o ní nemusí pořád mluvit. Když dobrý zvyk tiše drží jeden zdroj pravdy, šetří čas a nevyrábí zbytečná data, zaslouží si zůstat. Když ne, zaslouží si zjednodušit nebo odejít bez sentimentu.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FD o kontrole trvalého provozního zvyku po třech cyklech: návrat k původnímu slibu, průchod třemi cykly, odlišení problému zvyku od spouštěče, privacy-first kontrola, jednověté rozhodnutí, aktualizace zdroje pravdy, karta, workshop a checklist.
 - 2026-05-13: Doplněna Příloha FC o převodu první kontroly do trvalého provozního zvyku: výběr jednoho zvyku, spouštěč, vlastnictví, minimální zápis, stop pravidlo, ověření po třech cyklech, workshop a checklist.
 - 2026-05-13: Doplněna Příloha FB o kontrole zavedené změny po prvním použití: ověření reálného cyklu, porovnání se slibem změny, hledání návratu staré práce, privacy-first kontrola datové stopy, rozhodovací věta, drobná oprava a kontrolní karta.
 - 2026-05-13: Doplněna Příloha FA o zavedení změny rytmu po kontrole tří cyklů: změnová věta, mapa dopadu, aktualizace zdroje pravdy, pracovní komunikace týmu, privacy-first úklid datové stopy, první ověření a změnová karta.
