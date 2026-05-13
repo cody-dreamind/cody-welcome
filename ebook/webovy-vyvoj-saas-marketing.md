@@ -47729,8 +47729,351 @@ Výstupem není nová strategie. Výstupem je platný standard bez přechodovéh
 
 Stabilizace je nenápadná část práce. Právě proto se vyplatí. Dobrý standard nemá jen vzniknout a jednou se opravit. Má se po ověření usadit tak, aby lidem zjednodušil další průchod a nevytvořil kolem sebe vrstvu starých poznámek, dočasných kopií a neplatných výjimek.
 
+## Příloha FK: Převod stabilizovaného rolového standardu do onboardingového balíčku
+
+Stabilizovaný standard je užitečný jen tehdy, když ho nový člověk dokáže použít bez dlouhého vysvětlování bokem. Tým často udělá těžkou práci: najde tření, upraví pravidlo, ověří ho, uklidí zdroj pravdy a zapíše další kontrolu. Pak ale standard zůstane v dokumentaci a onboarding dál jede ústně. Výsledek? Nový člověk slyší "máme na to standard", ale při první reálné situaci stejně píše do chatu: "Jak to přesně myslíme?"
+
+Cílem této přílohy je převést stabilizovaný rolový standard do malého onboardingového balíčku. Ne do školící akademie. Ne do třicetistránkového manuálu. Do balíčku, který novému člověku ukáže, kdy standard použít, co má být výstupem, kde jsou hranice rozhodnutí a jak vypadá dobrý první průchod.
+
+Praktické pravidlo: onboardingový balíček má nového člověka dovést k prvnímu správnému použití standardu. Pokud jen vysvětluje historii standardu, je to archiv. Pokud pomáhá udělat práci, je to onboarding.
+
+### 1. Vyberte jednu roli a jednu pracovní situaci
+
+Nepřevádějte stabilizovaný standard rovnou do obecného školení pro celý tým. Začněte rolí, která standard opravdu používá.
+
+Zapište:
+
+- kdo standard používá,
+- jaký pracovní spouštěč ho aktivuje,
+- co má role po použití dodat,
+- kde se role nejčastěji plete,
+- kdy má eskalovat místo samostatného rozhodnutí.
+
+Příklad:
+
+```text
+Role:
+Editor webu
+
+Pracovní situace:
+Mění existující formulářové pole nebo přidává nové pole na kontaktní stránce.
+
+Výstup:
+Upravený formulář, záznam v changelogu, aktualizovaná datová mapa nebo eskalace na privacy review.
+
+Typické tření:
+Editor nepozná rozdíl mezi textovou úpravou pole a změnou účelu zpracování.
+
+Eskalace:
+Nový typ osobních údajů, změna povinnosti pole, nový dodavatel nebo jiná retence.
+```
+
+Jedna role a jedna situace chrání balíček před rozpadem do obecné příručky. Obecné příručky se dobře schvalují a špatně používají.
+
+### 2. Přepište standard do onboardingové otázky
+
+Standard bývá psaný jako pravidlo. Onboarding potřebuje otázku, kterou si člověk položí v konkrétním momentu práce.
+
+Formát:
+
+```text
+Když [pracovní spouštěč], rozhodni nejdřív [otázka]. Podle odpovědi udělej [akce] nebo eskaluj [hranice].
+```
+
+Příklad:
+
+```text
+Když měníš formulářové pole, rozhodni nejdřív, jestli měníš jen text, nebo i účel, povinnost, rozsah dat, retenci či dodavatele. Pokud jde jen o text, zapiš změnu do changelogu. Pokud se mění některá datová hranice, aktualizuj datovou mapu a pošli změnu na privacy review.
+```
+
+Onboardingová otázka má být krátká. Člověk ji musí udržet v hlavě při práci, ne jen pochopit při čtení.
+
+Codyho komentář: dobrý standard je trochu jako dobrý návod na kávovar v kanceláři. Když ho člověk potřebuje číst šest minut, aby si udělal první kafe, bude radši mačkat tlačítka náhodně. U datových toků je náhodné mačkání o chlup méně roztomilé.
+
+### 3. Vytvořte tři části balíčku
+
+Onboardingový balíček nemusí být velký. Má mít tři praktické části:
+
+1. rychlý kontext,
+2. řízený první průchod,
+3. samostatný kontrolní checklist.
+
+Rychlý kontext odpovídá na otázku "proč to existuje":
+
+```text
+Tento standard chrání před tím, aby změny formulářů potichu měnily datové toky webu. Cílem není zpomalit editaci. Cílem je zachytit změny, které mají dopad na osobní údaje, dřív než se dostanou do produkce.
+```
+
+Řízený první průchod ukazuje práci krok za krokem:
+
+```text
+1. Otevři popis změny formuláře.
+2. Označ, jestli změna přidává pole, mění povinnost, mění text, mění účel nebo dodavatele.
+3. Pokud jde jen o text, zapiš změnu do changelogu.
+4. Pokud změna zasahuje do datové hranice, otevři datovou mapu a doplň návrh změny.
+5. Před publikací vyžádej privacy review.
+```
+
+Samostatný checklist pomáhá bez školitele:
+
+```text
+- Vím, jaké pole se mění?
+- Vím, jestli je pole povinné nebo volitelné?
+- Nemění se účel zpracování?
+- Nepřidávám nový typ osobních údajů?
+- Nezapojil se nový nástroj nebo dodavatel?
+- Je záznam v changelogu?
+- Je datová mapa aktuální, pokud se mění datový tok?
+- Vím, jestli mám publikovat, nebo eskalovat?
+```
+
+Tři části stačí. Pokud balíček potřebuje osm částí, standard pravděpodobně není připravený na onboarding.
+
+### 4. Přidejte jeden dobrý a jeden hraniční příklad
+
+Nový člověk se nejrychleji učí na konkrétním příkladu. Jeden hladký příklad ukáže normální práci. Jeden hraniční příklad ukáže, kdy se nemá tvářit statečně a má eskalovat.
+
+Hladký příklad:
+
+```text
+Změna:
+U pole "Firma" se upravuje popisek na "Název firmy".
+
+Vyhodnocení:
+Nemění se účel, povinnost, rozsah dat, retence ani dodavatel.
+
+Akce:
+Upravit text, zapsat změnu do changelogu, datovou mapu neměnit.
+```
+
+Hraniční příklad:
+
+```text
+Změna:
+Do poptávkového formuláře se přidává pole "Telefon" a má být povinné.
+
+Vyhodnocení:
+Přidává se nový údaj a mění se tlak na poskytnutí dat.
+
+Akce:
+Nepublikovat rovnou. Doplnit návrh do datové mapy, otevřít privacy review a zkontrolovat, zda je telefon skutečně nutný pro první odpověď.
+```
+
+Privacy-first onboarding má jednu důležitou vlastnost: neučí člověka jen "kam kliknout". Učí ho poznat moment, kdy se mění odpovědnost vůči uživateli.
+
+### 5. Oddělte znalost, rozhodnutí a oprávnění
+
+Nový člověk může standard znát, ale nemusí mít oprávnění udělat všechno sám. Onboardingový balíček má jasně oddělit tři vrstvy.
+
+| Vrstva | Co znamená | Příklad |
+| --- | --- | --- |
+| Znalost | Člověk rozumí pravidlu a pozná situaci | Editor ví, že povinné telefonní číslo je datová změna |
+| Rozhodnutí | Člověk smí rozhodnout běžný případ | Editor smí upravit text popisku a zapsat changelog |
+| Oprávnění | Člověk smí změnu provést v systému | Editor smí publikovat text, ale ne měnit produkční integraci formuláře |
+
+Praktický zápis do balíčku:
+
+```text
+Samostatně můžeš:
+- upravit text popisku,
+- opravit překlep,
+- zapsat změnu do changelogu.
+
+Po kontrole můžeš:
+- změnit povinnost pole,
+- přidat nové pole,
+- upravit datovou mapu.
+
+Nesmíš bez schválení:
+- zapojit nový formulářový nástroj,
+- měnit retenci dat,
+- posílat formulářová data do nové integrace.
+```
+
+Tím se sníží dvě rizika najednou: nový člověk nebude zbytečně čekat na každou drobnost a zároveň nebude samostatně dělat změny, které mají větší dopad.
+
+### 6. Použijte testovací data a zkrácené scénáře
+
+Onboarding často nevědomky vytváří novou datovou stopu. Screenshoty z produkce, exporty skutečných poptávek, kopie zákaznických záznamů, interní poznámky. Pro učení je to pohodlné. Pro privacy-first provoz je to zbytečně rizikové.
+
+Pravidla pro onboardingový balíček:
+
+- používejte testovací formuláře, ne produkční poptávky,
+- příklady pište s fiktivními osobami a firmami,
+- screenshoty ořežte tak, aby neobsahovaly reálné osobní údaje,
+- nepřikládejte exporty, pokud stačí krátký popis,
+- u každého podkladu určete, jestli je trvalý, nebo dočasný,
+- dočasné podklady mažte po ověření balíčku.
+
+Příklad bezpečného školícího scénáře:
+
+```text
+Testovací osoba:
+Jana Novakova, firma Demo s.r.o., e-mail jana@example.test
+
+Scénář:
+Jana posílá dotaz na konzultaci a nechce zadat telefon. Editor má rozhodnout, jestli má být telefon povinný.
+
+Očekávaný závěr:
+Telefon nemá být povinný, pokud první odpověď může proběhnout e-mailem.
+```
+
+Poznámka: doména `example.test` je záměrně testovací. V balíčku nechcete omylem vytvořit kontakt na skutečného člověka jen proto, že někdo použil "náhodný" e-mail, který náhodný nebyl.
+
+### 7. Ověřte balíček prvním samostatným průchodem
+
+Onboardingový balíček není hotový ve chvíli, kdy ho někdo napíše. Je hotový až po prvním použití člověkem, který standard nevytvářel.
+
+Ověřovací situace:
+
+```text
+Nový editor dostane testovací změnu formuláře:
+"Upravte popisek pole Firma a rozhodněte, zda přidání telefonu jako povinného pole může jít rovnou do publikace."
+```
+
+Sledujte:
+
+- našel správný standard bez pomoci?
+- pochopil pracovní spouštěč?
+- rozlišil běžnou a hraniční změnu?
+- zapsal správný výstup?
+- nepoužil reálná data tam, kde stačila testovací?
+- věděl, kdy eskalovat?
+- potřeboval vysvětlení, které v balíčku chybí?
+
+Záznam po ověření:
+
+```text
+Onboardingový balíček:
+Změna formulářových polí pro editora
+
+První průchod:
+Nový editor správně upravil textové pole a eskaloval povinný telefon.
+
+Tření:
+Nevěděl, kde je aktuální datová mapa.
+
+Úprava:
+Do balíčku doplněn odkaz na kanonickou datovou mapu a věta, že pracovní kopie nejsou zdroj pravdy.
+
+Stav:
+Platný pro další onboarding.
+```
+
+Ověření má být praktické, ne školní. Cílem není nachytat člověka. Cílem je zjistit, jestli balíček vede k dobré práci.
+
+### 8. Napojte balíček na kanonický index
+
+Onboardingový balíček nesmí žít jako osamělý dokument. Musí být napojený na stejný zdroj pravdy jako standard.
+
+Do indexu přidejte:
+
+```text
+Standard:
+Změna formulářových polí
+
+Role:
+Editor webu
+
+Onboardingový balíček:
+Změna formulářových polí pro editora
+
+Platná verze:
+2026-05-13
+
+Použít při:
+Prvním předání správy formulářů, změně role editora nebo po incidentu s formulářovou datovou stopou.
+
+Další kontrola:
+Po prvních dvou onboardingových průchodech nebo při změně formulářového nástroje.
+```
+
+Tím se balíček stane součástí provozu. Když se změní standard, je jasné, že se má zkontrolovat i onboarding. Když se změní onboarding, je jasné, že nesmí přepsat standard potichu.
+
+### 9. Udržujte balíček kratší než standard
+
+Onboardingový balíček není kompletní dokumentace. Má pomoct začít správně. Detaily zůstávají ve standardu, runbooku nebo datové mapě.
+
+Pravidlo pro zkrácení:
+
+- pokud věta nepomáhá prvnímu použití, patří pryč,
+- pokud detail řeší výjimku třetí úrovně, stačí odkaz,
+- pokud příklad obsahuje tři různé situace, rozdělte ho,
+- pokud balíček vysvětluje historii, nahraďte ji jednou větou "proč",
+- pokud nový člověk musí otevřít pět dokumentů, chybí rozcestník.
+
+Dobrá délka pro jeden rolový onboardingový balíček je často jedna až tři stránky. U složitých standardů může být delší, ale pořád má vést ke konkrétní první práci. Ne k pocitu, že člověk absolvoval interní konferenci.
+
+### Šablona onboardingového balíčku
+
+```text
+Název balíčku:
+Role:
+Pracovní spouštěč:
+Proč standard existuje:
+
+Onboardingová otázka:
+
+Samostatně můžeš:
+Po kontrole můžeš:
+Nesmíš bez schválení:
+
+První řízený průchod:
+1.
+2.
+3.
+
+Hladký příklad:
+
+Hraniční příklad:
+
+Checklist před dokončením:
+
+Kdy eskalovat:
+
+Zdroj pravdy:
+Související standard:
+Související datová mapa:
+
+Testovací data:
+
+První ověření balíčku:
+Další kontrola:
+Vlastník:
+```
+
+### Mini workshop: 30 minut na převod standardu do onboardingu
+
+1. Pět minut: vybrat roli a pracovní situaci.
+2. Pět minut: přepsat standard do onboardingové otázky.
+3. Deset minut: napsat řízený průchod a dva příklady.
+4. Pět minut: označit oprávnění a eskalační hranice.
+5. Pět minut: nastavit ověření prvním samostatným průchodem.
+
+Výstupem je první verze balíčku, ne dokonalý kurz. Dokonalé kurzy často vznikají tak dlouho, že je mezitím nikdo nepotřebuje.
+
+### Checklist
+
+- Je jasné, pro jakou roli balíček je?
+- Je popsaný konkrétní pracovní spouštěč?
+- Je standard přepsaný do jedné onboardingové otázky?
+- Obsahuje balíček rychlý kontext, řízený průchod a checklist?
+- Má balíček jeden hladký a jeden hraniční příklad?
+- Jsou oddělené znalosti, rozhodnutí a oprávnění?
+- Je jasné, co nový člověk smí udělat samostatně?
+- Je jasné, kdy má eskalovat?
+- Používají příklady testovací nebo anonymizovaná data?
+- Neobsahují screenshoty nebo podklady reálné osobní údaje bez důvodu?
+- Je balíček napojený na kanonický standard a index?
+- Je určený vlastník balíčku?
+- Proběhne první samostatný průchod s člověkem, který standard nevytvářel?
+- Má balíček další kontrolu po prvních onboardingových průchodech?
+
+Stabilizovaný standard je dobrý konec jedné změny. Onboardingový balíček je začátek jejího běžného života. Jakmile podle něj nový člověk zvládne první reálnou situaci bez tichých dohadů a bez zbytečné datové stopy, standard se přestal tvářit jako dokumentace a začal fungovat jako systém.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FK o převodu stabilizovaného rolového standardu do onboardingového balíčku: výběr role a pracovní situace, onboardingová otázka, řízený první průchod, příklady, oprávnění, privacy-first testovací data, ověření balíčku a checklist.
 - 2026-05-13: Doplněna Příloha FJ o stabilizaci upraveného rolového standardu po prvním ověření: rozhodnutí o stavu standardu, upevnění zdroje pravdy, privacy-first úklid přechodové datové stopy, přenos poučení do role, další kontrola a stabilizační karta.
 - 2026-05-13: Doplněna Příloha FI o úpravě rolového standardu po měsíční kontrole: rozhodovací věta, výběr nejmenší pracovní části, třídění nálezů, přepis pravidla do jazyka role, privacy-first mazání dočasných podkladů, první ověření a checklist.
 - 2026-05-13: Doplněna Příloha FH o měření přínosu rolového standardu po měsíci provozu: návrat k původnímu slibu, pracovní signály, oddělení přínosu a tření, privacy-first měření, rozhodnutí o dalším stavu, měsíční karta a checklist.
