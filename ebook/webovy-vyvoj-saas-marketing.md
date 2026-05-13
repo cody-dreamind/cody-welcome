@@ -48071,8 +48071,338 @@ Výstupem je první verze balíčku, ne dokonalý kurz. Dokonalé kurzy často v
 
 Stabilizovaný standard je dobrý konec jedné změny. Onboardingový balíček je začátek jejího běžného života. Jakmile podle něj nový člověk zvládne první reálnou situaci bez tichých dohadů a bez zbytečné datové stopy, standard se přestal tvářit jako dokumentace a začal fungovat jako systém.
 
+## Příloha FL: Kontrola onboardingového balíčku po prvních průchodech
+
+Onboardingový balíček se dá napsat pečlivě a stejně selhat v praxi. Ne proto, že by byl špatně míněný. Protože první reální lidé narazí na věci, které autor neviděl: nejasný odkaz, chybějící příklad, příliš dlouhý checklist, skrytou závislost na zkušeném kolegovi nebo situaci, kde standard říká "postupuj podle kontextu", což je krásná věta, dokud ten kontext nemáte.
+
+Kontrola po prvních průchodech má jednoduchý cíl: zjistit, jestli balíček skutečně pomáhá novému člověku dělat práci samostatně, správně a bez zbytečné datové stopy.
+
+Není to hodnocení člověka. Je to hodnocení systému, který mu tým dal do ruky. Pokud nový editor nedokáže najít datovou mapu, není první otázka "proč ji nenašel". První otázka je: "Kde jsme mu ji měli ukázat, aby ji našel bez magie a interní telepatie?"
+
+### 1. Vyberte správné kontrolní okno
+
+Kontrola má přijít brzy, ale ne okamžitě po prvním přečtení. Balíček potřebuje projít reálnou prací.
+
+Dobré kontrolní okno:
+
+- po prvních dvou až třech použitích balíčku,
+- po prvním samostatném průchodu bez stínování,
+- po první hraniční situaci,
+- nejpozději do třiceti dnů od zavedení balíčku,
+- vždy po incidentu, který souvisí s předávanou rolí.
+
+Příklad:
+
+```text
+Balíček:
+Změna formulářových polí pro editora
+
+Kontrolní okno:
+Po dvou testovacích změnách a jedné ostré změně popisku formuláře.
+
+Důvod kontroly:
+Ověřit, jestli editor pozná hranici mezi textovou úpravou a změnou datového rozsahu.
+```
+
+Příliš brzká kontrola měří spíš první dojem. Příliš pozdní kontrola už nechá vzniknout obcházení, lokální poznámky a "já to dělám radši takhle" postupy. A ty se potom uklízejí jako rozlitá káva v serverovně: jde to, ale nikdo z toho nemá radost.
+
+### 2. Vraťte se k původní onboardingové otázce
+
+Každý dobrý balíček má otázku, na kterou má novému člověku pomoct odpovědět.
+
+Například:
+
+```text
+Umím bezpečně rozhodnout, jestli změna formuláře mění jen text, nebo i datový rozsah?
+```
+
+Kontrola začíná tím, že se k této otázce vrátíte. Neřešte hned všechny drobnosti. Nejdřív ověřte, jestli balíček splnil hlavní slib.
+
+Tři možné odpovědi:
+
+```text
+Ano:
+Nový člověk zvládá běžnou situaci a správně eskaluje hranice.
+
+Částečně:
+Běžnou situaci zvládá, ale u hraničních případů potřebuje doplnit příklad nebo rozhodovací pravidlo.
+
+Ne:
+Balíček nevede k samostatné práci nebo vytváří riziko špatného rozhodnutí.
+```
+
+Částečné splnění není ostuda. Je to normální stav první verze. Nebezpečné je jen nechat ho bez rozhodnutí.
+
+### 3. Oddělte tři typy tření
+
+Při kontrole nesypte všechny problémy do jednoho seznamu. Jinak z toho vznikne neurčitá hromada "onboarding je moc složitý". Rozdělte tření podle povahy.
+
+Tři typy tření:
+
+- orientační tření: člověk neví, kde něco najít,
+- rozhodovací tření: člověk neví, jak vybrat správnou možnost,
+- provozní tření: člověk ví, co má udělat, ale systém mu to zbytečně komplikuje.
+
+Příklad:
+
+```text
+Orientační tření:
+Odkaz na datovou mapu je v jiné složce než standard.
+
+Rozhodovací tření:
+Balíček neříká, jestli změna povinnosti pole je běžná úprava, nebo eskalace.
+
+Provozní tření:
+Editor musí pro kontrolu formuláře ručně otevřít tři prostředí, i když stačí staging a testovací odeslání.
+```
+
+Každý typ tření se opravuje jinak. Orientační tření často spraví lepší rozcestník. Rozhodovací tření potřebuje pravidlo nebo příklad. Provozní tření může vyžadovat změnu nástroje, práv, workflow nebo šablony.
+
+### 4. Sledujte skrytou pomoc
+
+Onboarding může vypadat úspěšně, protože nový člověk práci dokončil. Jenže výsledek může stát na tiché pomoci zkušenějšího kolegy, soukromém chatu, staré poznámce nebo screenshotu mimo zdroj pravdy.
+
+Při kontrole se ptejte:
+
+- Kdy ses musel zeptat mimo balíček?
+- Co jsi našel až přes kolegu?
+- Kterou větu sis přeložil do vlastních slov?
+- Kde jsi měl strach udělat rozhodnutí?
+- Co sis poznamenal bokem, protože to v balíčku nebylo?
+- Použil jsi nějaký podklad, který není v kanonickém indexu?
+
+Skrytá pomoc není chyba člověka. Je to signál, že balíček nemá kompletní pracovní trasu.
+
+Příklad záznamu:
+
+```text
+Skrytá pomoc:
+Editor se dvakrát ptal seniora, jestli změna placeholderu ve formuláři vyžaduje kontrolu právního textu.
+
+Příčina:
+Balíček nerozlišuje placeholder, label a změnu účelu pole.
+
+Oprava:
+Doplnit tabulku "běžná textová úprava / změna datového významu / eskalace".
+```
+
+Toto je přesně typ malé opravy, která šetří budoucí čas. Jedna tabulka může nahradit deset opakovaných dotazů.
+
+### 5. Zkontrolujte privacy-first datovou stopu onboardingu
+
+První průchody často odhalí, že balíček sice učí správný postup, ale vytváří vedlejší datovou stopu: kopie produkčních formulářů, testovací e-maily na reálné adresy, screenshoty s osobními údaji, chatové vysvětlení s konkrétním zákazníkem nebo exporty uložené "jen na chvíli".
+
+Privacy-first kontrola se ptá:
+
+- Pracovalo se s testovacími daty tam, kde to stačilo?
+- Nevznikly kopie produkčních dat mimo schválené úložiště?
+- Neobsahují screenshoty osobní údaje, které nejsou potřeba?
+- Jsou dočasné podklady označené a smazané po kontrole?
+- Nevznikla nová neformální znalostní báze v chatu?
+- Je jasné, kde je kanonický záznam změny?
+
+Příklad:
+
+```text
+Nález:
+Nový editor si uložil screenshot produkční poptávky do osobní pracovní složky, aby měl příklad pro příště.
+
+Riziko:
+Zbytečná kopie osobních údajů mimo řízenou retenci.
+
+Oprava:
+Screenshot smazán, do balíčku doplněn anonymizovaný příklad a pravidlo: "Příklady pro onboarding nevytváříme z produkčních poptávek."
+```
+
+Codyho komentář: onboarding je jedno z míst, kde firmy zbytečně kazí vlastní privacy-first zásady. Ne ze zlého úmyslu. Z pohodlnosti. "Ukážu ti to na reálném zákazníkovi" je rychlé, ale často úplně zbytečné. Fiktivní scénář obvykle naučí totéž a nenechá po sobě datový nepořádek.
+
+### 6. Rozhodněte o stavu balíčku
+
+Po kontrole musí vzniknout rozhodnutí. Ne jen poznámky. Balíček má mít jasný stav, aby tým věděl, jestli se podle něj dá dál onboardovat.
+
+Použijte jednoduché stavy:
+
+```text
+Platný:
+Balíček funguje pro další onboarding bez zásadních změn.
+
+Platný s drobnou opravou:
+Balíček funguje, ale potřebuje jednu konkrétní úpravu.
+
+Pilotní:
+Balíček se může používat jen s kontrolou zkušenějšího člověka.
+
+Pozastavený:
+Balíček nevede k bezpečné samostatnosti a musí se přepracovat.
+```
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Platný s drobnou opravou
+
+Oprava:
+Doplnit tabulku typů změn formulářového pole.
+
+Do kdy:
+Do dalšího onboardingu editora.
+
+Vlastník:
+Vedoucí webového obsahu.
+
+Další kontrola:
+Po dalším samostatném průchodu s hraniční změnou.
+```
+
+Rozhodnutí má být krátké. Když pro vysvětlení stavu potřebujete půl stránky, pravděpodobně ještě nemáte rozhodnutí, ale zápis z dojmů.
+
+### 7. Upravte balíček nejmenší možnou změnou
+
+Po prvních průchodech bývá lákavé balíček přepsat celý. Často to není potřeba. Většina zlepšení je malá:
+
+- přesunout odkaz výš,
+- přidat jeden hraniční příklad,
+- zkrátit dlouhou teorii,
+- zpřesnit oprávnění,
+- přepsat vágní větu do rozhodovacího pravidla,
+- odstranit krok, který se v praxi nepoužívá,
+- doplnit anonymizovaný testovací scénář.
+
+Příklad malé úpravy:
+
+Původní věta:
+
+```text
+U změn s dopadem na data kontaktujte odpovědnou osobu.
+```
+
+Lepší věta:
+
+```text
+Pokud změna přidává nové pole, mění povinnost pole nebo mění účel sběru údajů, nepublikuj ji samostatně. Zapiš návrh do rozhodovacího logu a požádej vlastníka datové mapy o kontrolu.
+```
+
+Druhá věta je delší, ale použitelnější. Nevyžaduje, aby nový člověk už předem věděl, co znamená "dopad na data".
+
+### 8. Aktualizujte index, standard a changelog
+
+Úprava onboardingového balíčku nesmí zůstat jen v samotném balíčku. Zkontrolujte, jestli se změna má propsat i do dalších míst.
+
+Kontrolní otázky:
+
+- Změnil se jen onboarding, nebo i samotný standard?
+- Je v kanonickém indexu správná verze balíčku?
+- Má standard odkaz na nový příklad nebo rozhodovací pravidlo?
+- Je v changelogu zapsané, co se změnilo a proč?
+- Má další onboarding použít novou verzi?
+- Nezůstala stará kopie balíčku v jiné složce?
+
+Příklad changelogu:
+
+```text
+2026-05-13:
+Po prvních dvou průchodech onboardingem editora doplněna tabulka typů změn formulářového pole, anonymizovaný hraniční příklad a odkaz na datovou mapu v první části balíčku. Starý screenshot produkční poptávky odstraněn.
+```
+
+Changelog není byrokracie. Je to paměť systému. Když se za tři měsíce někdo zeptá, proč je v balíčku tak přísné pravidlo pro povinný telefon, odpověď bude dohledatelná.
+
+### 9. Připravte další onboarding bez improvizace
+
+Poslední krok kontroly je jednoduchý: určete, co se stane při dalším použití balíčku.
+
+```text
+Další použití:
+Nový editor obsahu v dalším měsíci.
+
+Režim:
+Samostatný průchod s krátkou kontrolou výstupu.
+
+Sledovaný signál:
+Pozná hranici mezi textovou úpravou formuláře a změnou datového rozsahu.
+
+Stop pravidlo:
+Pokud se znovu zeptá na stejnou hranici, balíček se vrací do pilotního stavu.
+```
+
+Tím se z kontroly nestane jednorázové "něco jsme probrali". Vznikne další ověřovací cyklus.
+
+### Šablona kontroly onboardingového balíčku
+
+```text
+Balíček:
+Role:
+Pracovní situace:
+Verze balíčku:
+Datum kontroly:
+
+Původní onboardingová otázka:
+
+Použití od zavedení:
+- průchod 1:
+- průchod 2:
+- hraniční situace:
+
+Splnění slibu:
+Ano / částečně / ne
+
+Orientační tření:
+
+Rozhodovací tření:
+
+Provozní tření:
+
+Skrytá pomoc:
+
+Privacy-first datová stopa:
+
+Rozhodnutí o stavu:
+Platný / platný s drobnou opravou / pilotní / pozastavený
+
+Jedna nejbližší oprava:
+
+Dopad do standardu:
+
+Dopad do indexu:
+
+Changelog:
+
+Další kontrola:
+Vlastník:
+```
+
+### Mini workshop: 35 minut na kontrolu prvních průchodů
+
+1. Pět minut: připomenout původní onboardingovou otázku.
+2. Osm minut: projít dvě až tři reálná použití balíčku.
+3. Sedm minut: roztřídit tření na orientační, rozhodovací a provozní.
+4. Pět minut: zkontrolovat privacy-first datovou stopu.
+5. Pět minut: vybrat jednu nejbližší opravu.
+6. Pět minut: zapsat stav, changelog a další kontrolu.
+
+Výstupem workshopu není seznam přání. Výstupem je stav balíčku a jedna dokončená oprava, která zlepší další onboarding.
+
+### Checklist
+
+- Proběhla kontrola po reálném použití balíčku, ne jen po přečtení?
+- Vrátili jste se k původní onboardingové otázce?
+- Je jasné, jestli balíček splnil svůj hlavní slib?
+- Jsou nálezy rozdělené na orientační, rozhodovací a provozní tření?
+- Zaznamenali jste skrytou pomoc mimo balíček?
+- Nevznikly při onboardingu zbytečné kopie produkčních dat?
+- Byly smazané dočasné podklady, které už nemají účel?
+- Má balíček jasný stav: platný, platný s opravou, pilotní nebo pozastavený?
+- Je vybraná jedna nejbližší oprava?
+- Je jasné, jestli se mění jen balíček, nebo i standard?
+- Je aktualizovaný kanonický index?
+- Je změna zapsaná v changelogu?
+- Je nastavená další kontrola po dalším použití?
+
+Onboardingový balíček je dobrý až ve chvíli, kdy unese realitu. První průchody nejsou formalita. Jsou test, jestli tým opravdu předává práci, nebo jen předává dokument. Rozdíl poznáte rychle: dobrý balíček zkracuje dotazy, chrání data a dává novému člověku klidné hranice samostatnosti.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FL o kontrole onboardingového balíčku po prvních průchodech: kontrolní okno, návrat k onboardingové otázce, třídění tření, skrytá pomoc, privacy-first datová stopa, rozhodnutí o stavu, nejmenší oprava, changelog a checklist.
 - 2026-05-13: Doplněna Příloha FK o převodu stabilizovaného rolového standardu do onboardingového balíčku: výběr role a pracovní situace, onboardingová otázka, řízený první průchod, příklady, oprávnění, privacy-first testovací data, ověření balíčku a checklist.
 - 2026-05-13: Doplněna Příloha FJ o stabilizaci upraveného rolového standardu po prvním ověření: rozhodnutí o stavu standardu, upevnění zdroje pravdy, privacy-first úklid přechodové datové stopy, přenos poučení do role, další kontrola a stabilizační karta.
 - 2026-05-13: Doplněna Příloha FI o úpravě rolového standardu po měsíční kontrole: rozhodovací věta, výběr nejmenší pracovní části, třídění nálezů, přepis pravidla do jazyka role, privacy-first mazání dočasných podkladů, první ověření a checklist.
