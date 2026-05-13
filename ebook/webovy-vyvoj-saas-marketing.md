@@ -50332,8 +50332,363 @@ Pravidla workshopu:
 
 Převod do trvalého standardu je malý rituál proti chaosu. Ne proto, aby tým vyráběl víc dokumentace, ale aby dobrá oprava přestala být zvláštní událost a začala být normální způsob práce. Když se to povede, další onboarding už nezačíná vysvětlováním staré chyby. Začíná lepším výchozím systémem.
 
+## Příloha FT: Kvartální kontrola trvalého onboardingového standardu
+
+Převod opravy do trvalého standardu je dobrý konec opravného režimu, ale není to konec odpovědnosti. Po jednom kvartálu už standard obvykle prošel několika běžnými situacemi: někdo ho použil při onboardingu, někdo podle něj upravil šablonu, někdo ho možná obešel a někdo si možná ani nevšiml, že existuje. To je přesně chvíle, kdy má smysl krátká kontrola.
+
+Kvartální kontrola nemá z trvalého standardu znovu udělat projekt. Má ověřit tři věci:
+
+1. Standard pořád pomáhá správnému rozhodnutí.
+2. Lidé ho najdou ve chvíli, kdy ho potřebují.
+3. Privacy-first pravidla nezůstala jen v textu, ale projevují se v pracovních výstupech.
+
+Pokud kontrola skončí velkým přepisem, pravděpodobně nebyl standard dost stabilní. Pokud skončí jednou drobnou úpravou nebo rozhodnutím "ponechat beze změny", je to dobrý výsledek. Ne každá revize má vyrábět novou práci. Někdy je nejlepší provozní zpráva: funguje, nechte to být.
+
+Tato příloha navazuje na Přílohu FS. Tam jsme opravu uzavřeli a převedli do trvalého standardu. Tady po prvním kvartálu ověříme, jestli se standard opravdu stal přirozenou součástí onboardingu.
+
+### 1. Vraťte se k pracovnímu slibu standardu
+
+Začněte původním slibem, ne dojmem z poslední porady. Standard má existovat proto, že pomáhá konkrétní pracovní situaci. Pokud už si tým nepamatuje, jakou situaci chrání, je to první nález.
+
+Krátká karta kontroly:
+
+```markdown
+# Kvartální kontrola trvalého onboardingového standardu
+
+Standard:
+Kanonické místo:
+Odpovědná role:
+Datum převodu do trvalého režimu:
+Původní pracovní slib:
+Situace, kde se standard používá:
+Privacy-first hranice:
+Počet reálných použití v kvartálu:
+Rozhodnutí po kontrole:
+```
+
+Příklad:
+
+```markdown
+Standard:
+Zákaznická data v onboardingových odpovědích.
+
+Původní pracovní slib:
+Nový člověk pozná, kdy použít anonymizovaný vzor a kdy eskalovat požadavek obsahující osobní nebo interní data.
+
+Situace:
+Odpověď na zákaznický dotaz během prvních samostatných support cyklů.
+
+Privacy-first hranice:
+Do onboardingových poznámek se nekopírují screenshoty ani plné zákaznické zprávy.
+```
+
+Tento návrat k původnímu slibu brání tomu, aby se kontrola rozutekla do obecné debaty o onboardingu. Kontrolujete jeden standard, ne celou práci týmu.
+
+### 2. Vyberte tři reálné průchody
+
+Nekontrolujte standard jen čtením dokumentu. Vyberte několik reálných použití. Nemusí jich být mnoho. Pro první kvartál obvykle stačí tři průchody, pokud reprezentují běžnou práci.
+
+Vyberte například:
+
+- jeden průchod nového člověka,
+- jeden průchod zkušeného člověka,
+- jeden hraniční případ, kde standard měl zabránit chybě nebo eskalovat rozhodnutí.
+
+U každého průchodu sledujte:
+
+- našel člověk standard bez pomoci,
+- pochopil, kdy ho má použít,
+- použil správnou šablonu nebo pracovní místo,
+- vznikl výstup v očekávané kvalitě,
+- nebyla zbytečně zkopírovaná citlivá data,
+- nevznikla nová ruční práce, kterou standard nepředpokládal.
+
+Nejde o kontrolu výkonu jednotlivce. Jde o kontrolu systému. Pokud nový člověk standard nenajde, není to automaticky jeho chyba. Možná je špatně pojmenovaný, uložený mimo pracovní trasu nebo odkazovaný z místa, kam se při práci reálně nechodí.
+
+Codyho komentář: standard, který funguje jen člověku, který ho napsal, není standard. Je to osobní poznámka s ambicí.
+
+### 3. Rozlišujte dodržení, užitečnost a cenu
+
+Kvartální kontrola by neměla skončit jen odpovědí "standard se dodržuje". Dodržení samo o sobě nestačí. Standard může být poslušně dodržovaný a přitom zbytečný, moc složitý nebo datově přehnaný.
+
+Hodnocení rozdělte na tři otázky:
+
+```markdown
+Dodržení:
+Použili lidé standard tak, jak byl napsaný?
+
+Užitečnost:
+Pomohl standard udělat lepší rozhodnutí nebo rychlejší samostatnou práci?
+
+Cena:
+Kolik pozornosti, zápisu, kontroly nebo datové stopy standard vyžadoval?
+```
+
+Příklad:
+
+```markdown
+Dodržení:
+Ano, všichni tři použili správnou šablonu.
+
+Užitečnost:
+Částečně. Dva lidé eskalovali správně, jeden eskaloval zbytečně, protože hranice "interní data" byla moc obecná.
+
+Cena:
+Nízká v práci, střední v dokumentaci. Standard odkazuje na dvě místa a jedno je historická poznámka z opravného režimu.
+```
+
+Výsledek není "špatně". Výsledek je konkrétní: zkrátit odkazovou cestu a zpřesnit hraniční příklad.
+
+### 4. Zkontrolujte, jestli standard nezestárl
+
+Za kvartál se může změnit víc věcí: produkt, zákaznický segment, typ dat, používaný nástroj, role v týmu nebo support proces. Standard může být napsaný dobře, ale pro starou realitu.
+
+Zkontrolujte změny:
+
+- změnil se typ zákaznických dotazů,
+- přibyl nový kanál podpory,
+- změnily se šablony odpovědí,
+- změnily se role nebo oprávnění,
+- změnil se nástroj, kde lidé pracují,
+- přibyl nový typ osobních nebo zákaznických dat,
+- změnil se způsob, jak se onboarding vyhodnocuje,
+- vznikl nový zdroj pravdy, který standard nezná.
+
+Praktická otázka:
+
+```markdown
+Kdybychom tento standard psali dnes od nuly, nechali bychom ho stejně?
+```
+
+Možné odpovědi:
+
+- Ano, beze změny.
+- Ano, ale zkrátit.
+- Ano, ale přesunout blíž k pracovnímu místu.
+- Ano, ale doplnit jeden hraniční příklad.
+- Ne, sloučit s novým zdrojem pravdy.
+- Ne, vrátit do opravného režimu.
+- Ne, archivovat, protože situace zanikla.
+
+Pozor na automatické doplňování. Když standard zestárl, první reakce bývá přidat další odstavec. Často je lepší odstranit starý kontext, zpřesnit jednu větu nebo přesunout pravidlo do šablony, kterou lidé opravdu používají.
+
+### 5. Udělejte privacy-first kontrolu výstupů
+
+Onboardingový standard může vypadat privacy-first na papíře, ale rozhoduje výstup. Podívejte se, co po kvartálu skutečně vzniklo.
+
+Kontrolujte hlavně:
+
+- onboardingové poznámky,
+- ukázkové odpovědi,
+- support šablony,
+- interní komentáře,
+- screenshoty a přílohy,
+- testovací účty,
+- exporty z nástrojů,
+- odkazy v kanonickém indexu.
+
+U každého typu výstupu si položte otázky:
+
+- Obsahuje osobní nebo zákaznicky citlivá data?
+- Je tam konkrétní účel, proč tam data jsou?
+- Dá se stejná hodnota zachovat anonymizovaně?
+- Má výstup vlastníka a retenci?
+- Má k němu přístup jen role, která ho potřebuje?
+- Nevznikla kopie stejného citlivého obsahu na více místech?
+
+Jednoduché pravidlo:
+
+```markdown
+Trvalý standard má snižovat citlivou stopu práce. Pokud ji po kvartálu zvyšuje, není dost dobrý.
+```
+
+Příklad nálezu:
+
+```markdown
+Nález:
+V onboardingových poznámkách zůstaly dvě ukázky zákaznických zpráv s interními názvy týmů.
+
+Rozhodnutí:
+Nahradit je fiktivním scénářem a ponechat jen typ problému. Do šablony přidat větu: "Ukázky pište jako fiktivní situaci, ne jako kopii zákaznické zprávy."
+```
+
+To je malá změna s velkým dopadem. Učí stejný princip a zároveň zmenšuje datové riziko.
+
+### 6. Hledejte skryté obcházení
+
+Když standard není použitelný, lidé ho často neodmítnou nahlas. Prostě si vytvoří zkratku: uloženou kopii šablony, vlastní poznámku, starý odkaz, neformální radu v chatu nebo ruční kontrolu mimo systém. Tyto zkratky jsou signál. Ne důvod k moralizování.
+
+Typické známky obcházení:
+
+- lidé se ptají na stejnou věc i po zavedení standardu,
+- používají starou šablonu, protože je rychlejší,
+- kopírují si části standardu do osobních poznámek,
+- support lead musí před odesláním pořád kontrolovat stejné chyby,
+- vznikly dvě verze stejného pravidla,
+- standard se používá jen při auditu, ne při práci,
+- nový člověk dostává ústní vysvětlení, které není v materiálu.
+
+Když najdete obcházení, ptejte se:
+
+```markdown
+Co zkratka řeší lépe než oficiální standard?
+```
+
+Možná je kratší. Možná je blíž pracovnímu místu. Možná používá lepší jazyk. Možná obsahuje příklad, který kanonický standard nemá. Dobrá kontrola nevezme zkratku jako neposlušnost. Vezme ji jako uživatelský výzkum vlastního systému.
+
+### 7. Rozhodněte jednou větou
+
+Po kontrole napište jedno hlavní rozhodnutí. Bez něj se kvartální kontrola změní na poznámkový zápis, který nikdo nepoužije.
+
+Možné rozhodovací věty:
+
+```markdown
+Standard ponecháváme beze změny, protože tři reálné průchody ukázaly samostatné použití bez nové datové stopy.
+```
+
+```markdown
+Standard zkrátíme a přesuneme hraniční příklad přímo do support šablony, protože nový člověk kanonický text nenašel při psaní odpovědi.
+```
+
+```markdown
+Standard vracíme na jeden cyklus do opravného režimu, protože nově vzniklý support kanál pracuje s jiným typem dat a současné pravidlo nechrání správnou hranici.
+```
+
+```markdown
+Standard archivujeme, protože pracovní situace se přesunula do automatizované vstupní brány a ruční onboardingové pravidlo už nemá samostatné použití.
+```
+
+Jedna věta nutí tým vybrat směr. Detaily mohou být pod ní, ale směr musí být jasný.
+
+### 8. Proveďte jednu malou změnu
+
+Kvartální kontrola často najde víc drobností. Neopravujte všechno. Vyberte jednu změnu, která nejvíc pomůže dalšímu reálnému použití.
+
+Dobré malé změny:
+
+- přejmenovat standard podle pracovní situace,
+- přesunout odkaz do šablony, kde člověk pracuje,
+- zkrátit úvod a nechat jen pravidlo s příkladem,
+- odstranit starou opravnou poznámku,
+- nahradit reálný příklad anonymizovaným,
+- přidat jeden hraniční příklad,
+- sloučit dvě duplicitní otázky,
+- aktualizovat vlastníka role.
+
+Špatné změny:
+
+- přidat další povinnou kontrolu,
+- vytvořit nový dashboard bez rozhodovací otázky,
+- rozšířit standard na všechny role,
+- sepsat dlouhé školení místo opravy pracovního místa,
+- založit nový projekt "revize onboardingu", když problém je jeden odkaz.
+
+Pravidlo pro rozsah:
+
+```markdown
+Změna má být ověřitelná při nejbližším použití standardu.
+```
+
+Pokud výsledek uvidíte až za půl roku, je změna pro tuto kontrolu příliš velká.
+
+### Šablona kvartální kontroly
+
+```markdown
+# Kvartální kontrola onboardingového standardu
+
+Standard:
+Kanonické místo:
+Odpovědná role:
+Kontrolované období:
+Původní slib:
+
+Reálné průchody:
+1.
+2.
+3.
+
+Co fungovalo:
+
+Kde vzniklo tření:
+
+Dodržení:
+
+Užitečnost:
+
+Cena:
+
+Privacy-first nález:
+
+Skryté obcházení:
+
+Rozhodnutí jednou větou:
+
+Jedna změna teď:
+
+Co vědomě neřešíme:
+
+Další ověření:
+```
+
+Příklad krátkého vyplnění:
+
+```markdown
+Co fungovalo:
+Nový člověk použil šablonu bez pomoci a správně anonymizoval zákaznický příklad.
+
+Kde vzniklo tření:
+Hraniční příklad je jen v kanonickém standardu, ne v support šabloně.
+
+Privacy-first nález:
+Jedna stará poznámka stále obsahuje interní název zákaznického týmu.
+
+Rozhodnutí jednou větou:
+Standard ponecháváme, ale přesouváme hraniční příklad přímo do support šablony a mažeme starou poznámku.
+
+Jedna změna teď:
+Upravit support šablonu a anonymizovat starý příklad.
+```
+
+### Mini workshop: 40 minut po prvním kvartálu
+
+Agenda:
+
+1. 5 minut: připomenout původní slib standardu.
+2. 10 minut: projít tři reálné průchody.
+3. 7 minut: vyhodnotit dodržení, užitečnost a cenu.
+4. 7 minut: udělat privacy-first kontrolu výstupů.
+5. 5 minut: najít případné obcházení nebo staré kopie.
+6. 3 minuty: napsat rozhodnutí jednou větou.
+7. 3 minuty: vybrat jednu malou změnu a vlastníka.
+
+Pravidla workshopu:
+
+- Nehodnoťte lidi, hodnoťte systém.
+- Neotevírejte celý onboarding, pokud kontrolujete jeden standard.
+- Nepřidávejte kontrolu jen proto, že někdo jednou zaváhal.
+- Každý privacy-first nález musí skončit rozhodnutím: ponechat s účelem, anonymizovat, smazat, nebo omezit přístup.
+- Pokud standard funguje, nechte ho žít bez další administrativy.
+
+### Checklist
+
+- Připomněli jste si původní pracovní slib standardu?
+- Vybrali jste tři reálné průchody místo pouhého čtení dokumentu?
+- Rozlišili jste dodržení, užitečnost a cenu standardu?
+- Ověřili jste, jestli se nezměnil nástroj, role, typ dat nebo pracovní situace?
+- Zkontrolovali jste reálné výstupy, ne jen text pravidla?
+- Odstranili nebo anonymizovali jste zbytečné citlivé příklady?
+- Našli jste případné obcházení a pochopili, co řeší lépe než standard?
+- Zapsali jste jedno hlavní rozhodnutí?
+- Vybrali jste maximálně jednu změnu pro nejbližší použití?
+- Je jasné, co vědomě neřešíte?
+- Má změna vlastníka a okamžik ověření?
+- Nezvětšili jste standard jen proto, že proběhla kontrola?
+
+Kvartální kontrola má chránit standard před dvěma extrémy. První je zapomenutí: pravidlo formálně existuje, ale nikdo ho nepoužívá. Druhý je bobtnání: každá kontrola přidá další odstavec, až se z praktického pravidla stane malá encyklopedie. Dobrý trvalý standard zůstává krátký, používaný a pravdivý. A když přestane být pravdivý, kvartální kontrola má odvahu ho zkrátit, přesunout nebo ukončit.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FT o kvartální kontrole trvalého onboardingového standardu: návrat k pracovnímu slibu, tři reálné průchody, rozlišení dodržení, užitečnosti a ceny, kontrola stárnutí standardu, privacy-first kontrola výstupů, hledání obcházení, jednověté rozhodnutí, jedna malá změna, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FS o převodu stabilizované onboardingové opravy do trvalého standardu: výběr opakovatelného výsledku, kanonické místo podle okamžiku použití, stabilní jazyk pravidla, uzavření opravného režimu, životnost standardu, napojení na onboarding nové role, privacy-first úklid, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FR o měsíční kontrole standardizované opravy onboardingového balíčku: návrat k původnímu důvodu, výběr reálného vzorku použití, sledování samostatnosti, skrytá podpora, privacy-first kontrola datové stopy, rozhodnutí stavu opravy, úprava kanonického místa, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FQ o standardizaci ověřené opravy onboardingového balíčku: rozhodnutí, zda oprava patří do standardu, přepis do pracovního pravidla, jedno kanonické místo, kontrolní háček, úklid starých variant, standardizační karta, krátké předání týmu, mini workshop a checklist.
