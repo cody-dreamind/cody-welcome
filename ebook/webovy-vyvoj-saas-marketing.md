@@ -50085,8 +50085,256 @@ Pravidla workshopu:
 
 První měsíční kontrola je protiváha dokumentačnímu optimismu. Oprava může být napsaná dobře, ale teprve provoz ukáže, jestli z ní vznikl pracovní návyk. Pokud ano, nechte ji být a nenechte tým přidávat další vrstvu jen z nervozity. Pokud ne, opravte nejmenší místo, které brání samostatné práci. Onboarding má růst schopnost lidí, ne hmotnost dokumentace.
 
+## Příloha FS: Převod stabilizované onboardingové opravy do trvalého standardu
+
+Měsíční kontrola standardizované opravy má jeden skrytý cíl: zabránit tomu, aby tým donekonečna žil v opravárenském režimu. Pokud oprava měsíc funguje, pomáhá samostatnosti a nezhoršuje datovou hygienu, nemá zůstat jako speciální projekt. Má se stát obyčejnou součástí standardu. Obyčejnost je tady kompliment.
+
+Trvalý standard není slavnostní dokument s razítkem. Je to pracovní pravidlo, které se objeví ve správném okamžiku, používá ho správná role a nezpůsobuje zbytečné dohledávání. Pokud nový člověk při onboardingu přemýšlí "kde je ta opravená verze", standardizace ještě není hotová. Pokud naopak opravu ani nevnímá jako opravu a prostě podle ní pracuje, tým vyhrál malou, nudnou a velmi užitečnou bitvu.
+
+Převod do trvalého standardu řešte až ve chvíli, kdy máte tři věci:
+
+1. Oprava byla použitá v reálné práci, ne jen schválená na poradě.
+2. Měsíční kontrola neukázala kritické tření ani novou datovou stopu.
+3. Existuje jasné kanonické místo, kde má pravidlo dál žít.
+
+Bez těchto tří podmínek standard nevzniká. Vzniká jen další vrstva textu, kterou bude někdo jednou archeologicky vysvětlovat.
+
+### 1. Rozhodněte, co přesně přechází do trvalého režimu
+
+Nepřevádějte do standardu celý příběh opravy. Převádějte jen výsledek, který má být opakovaně použitelný. Tým nepotřebuje při každém onboardingu číst historii všech pochybností. Potřebuje vědět, jak má postupovat teď.
+
+Z měsíční karty vytáhněte:
+
+- finální pracovní pravidlo,
+- konkrétní situaci, kdy se používá,
+- roli, která je za jeho použití odpovědná,
+- minimální důkaz, že pravidlo bylo použité správně,
+- privacy-first hranici, která se nesmí obejít.
+
+Příklad:
+
+Příliš historické znění:
+"Po opravě z 2026-05-13 a následné měsíční kontrole jsme zjistili, že nový člověk potřebuje lépe rozlišit, kdy může odpovědět sám a kdy má eskalovat zákaznický požadavek kvůli datům."
+
+Trvalé pracovní znění:
+"Pokud onboardingový pracovník narazí na zákaznický dotaz obsahující osobní nebo interní data, nejdřív použije anonymizovaný vzor odpovědi. Reálný obsah předá dál jen tehdy, když bez něj nejde rozhodnout další krok."
+
+První věta je zápis z procesu. Druhá věta je standard. Proces archivujte. Standard používejte.
+
+### 2. Vyberte domov standardu podle okamžiku použití
+
+Standard má bydlet tam, kde ho člověk potřebuje při práci. Ne tam, kde se hezky vyjímá v informační architektuře. Onboardingová oprava se může dotknout více míst, ale trvalý domov má být jeden.
+
+Možné domovy:
+
+- onboardingový balíček role,
+- kanonický index standardů,
+- checklist prvního samostatného cyklu,
+- šablona zákaznické odpovědi,
+- provozní karta pro konkrétní nástroj,
+- lesson pack pro danou roli.
+
+Výběr udělejte podle otázky: "Kde bude člověk stát ve chvíli, kdy pravidlo potřebuje?" Pokud bude psát zákaznickou odpověď, pravidlo patří k odpovědi. Pokud bude nastavovat přístup, patří k přístupovému checklistu. Pokud bude rozhodovat o eskalaci, patří k rozhodovací kartě.
+
+Codyho komentář: standard uložený na logicky krásném, ale pracovně nepoužitelném místě je jako hasicí přístroj zamčený v místnosti s nápisem "provozní governance". Formálně existuje. Prakticky přeju hodně štěstí.
+
+### 3. Přepište opravu do stabilního jazyka
+
+Opravný jazyk bývá dočasný: "doplnit", "ověřit", "nově upozornit", "po chybě kontrolovat". Trvalý standard má mluvit klidněji. Popisuje běžný způsob práce, ne nedávnou bolest.
+
+Nahrazujte:
+
+- "nově si dejte pozor" za "před odesláním zkontrolujte",
+- "po poslední chybě vždy" za "v této situaci",
+- "dočasně používejte" za "použijte",
+- "pokud si nejste jistí" za konkrétní eskalační pravidlo,
+- dlouhé vysvětlování důvodu za krátký příklad.
+
+Stabilní jazyk má tři vlastnosti:
+
+1. Je použitelný i za půl roku bez znalosti incidentu nebo opravy.
+2. Je dost konkrétní, aby nový člověk poznal správné rozhodnutí.
+3. Je krátký natolik, aby se dal použít v reálném pracovním tempu.
+
+Příklad stabilního přepisu:
+
+Opravný text:
+"Po kontrole jsme zjistili, že se v některých případech kopírovaly screenshoty z klientského účtu do onboardingových poznámek, takže je potřeba dávat větší pozor na data."
+
+Standard:
+"Do onboardingových poznámek nevkládejte screenshoty z klientských účtů. Pokud potřebujete ukázku, použijte anonymizovaný výřez nebo fiktivní scénář."
+
+Krátké, konkrétní, použitelné. Žádná mlha, žádné drama.
+
+### 4. Uzavřete opravný režim
+
+Když oprava přechází do trvalého standardu, zavřete opravnému režimu dveře. Jinak se stane, že v systému zůstane standard, měsíční karta, starý návrh, opravená šablona, dvě poznámky v chatu a někde bokem "dočasné" PDF. To není znalostní báze. To je úniková hra pro unavené lidi.
+
+Uzavření opravného režimu znamená:
+
+- v měsíční kartě označit stav `převedeno do trvalého standardu`,
+- odkázat na nové kanonické místo,
+- archivovat nebo odstranit pracovní kopie,
+- zavřít související úkoly v backlogu,
+- zapsat do changelogu jednu krátkou větu,
+- odstranit dočasná upozornění, která už standard nahrazuje.
+
+Nechte si jen tolik historie, kolik má hodnotu pro budoucí rozhodnutí. Pokud historie obsahuje citlivé příklady, ponechte raději anonymizované poučení než plný pracovní materiál.
+
+### 5. Nastavte životnost standardu
+
+Trvalý standard neznamená věčný standard. Znamená, že už není pod speciálním dohledem opravy a přechází do běžného revizního rytmu. Každé pravidlo má mít životnost nebo alespoň další přirozenou kontrolu.
+
+Rozlišujte:
+
+- Stabilní standard: kontrola při kvartální nebo roční revizi.
+- Rizikový standard: kontrola po dalších dvou až třech použitích.
+- Sezónní standard: kontrola před obdobím, kdy se znovu používá.
+- Dodavatelsky závislý standard: kontrola při změně nástroje, dodavatele nebo přístupů.
+- Datově citlivý standard: kontrola při změně typů dat, rolí nebo retenčních pravidel.
+
+Životnost zapište jednou větou:
+
+"Standard přechází do běžného kvartálního review onboardingových materiálů, další samostatná kontrola není potřeba."
+
+Nebo:
+
+"Standard zůstává v trvalém režimu, ale kvůli práci s klientskými daty se kontroluje po dalších třech použitích."
+
+Tím tým ví, že standard není zapomenutý. Jen už nežere pozornost každý týden.
+
+### 6. Napojte standard na onboarding nové role
+
+Pokud pravidlo vzniklo z onboardingové opravy, ověřte, že opravdu pomůže dalšímu novému člověku. Nejen současnému týmu, který už zná kontext.
+
+Praktický test:
+
+1. Dejte pravidlo člověku, který nebyl u původní opravy.
+2. Popište mu pracovní situaci bez dodatečného výkladu.
+3. Nechte ho říct, co by udělal.
+4. Sledujte, jestli najde správné místo a správnou hranici.
+5. Zapište jen tření, které by potkalo i dalšího člověka.
+
+Pokud test vyžaduje dlouhé ústní vysvětlení, standard ještě není samostatný. Upravte text, příklad nebo odkaz. Neplánujte školení jako náplast na nejasné pravidlo. Školení má ukázat systém v praxi, ne suplovat chybějící rozhodnutí.
+
+### 7. Proveďte finální privacy-first úklid
+
+Převod do trvalého standardu je ideální okamžik pro úklid dat. Opravný režim často vytvoří pracovní stopu: screenshoty, poznámky, příklady, dočasné exporty, záznamy hovorů, testovací účty nebo kopie dokumentů. Některé byly užitečné při ověřování. To neznamená, že mají zůstat navždy.
+
+Projděte:
+
+- pracovní složky s podklady k opravě,
+- chatová vlákna s ukázkami,
+- dočasné dokumenty a komentáře,
+- testovací účty a přístupy,
+- screenshoty z reálných systémů,
+- záznamy workshopů,
+- staré odkazy v indexu.
+
+U každé položky rozhodněte:
+
+- `ponechat`: má jasný účel, správné místo a přiměřenou retenci,
+- `anonymizovat`: hodnota je v poučení, ne v konkrétních datech,
+- `smazat`: účel skončil,
+- `omezit přístup`: materiál je potřeba, ale ne pro celý tým.
+
+Privacy-first standard má učit rozhodnutí bez zbytečné expozice dat. Když můžete ponechat fiktivní příklad, ponechte fiktivní příklad. Když musíte nechat reálný případ, zapište proč, kdo k němu má přístup a kdy se znovu zkontroluje.
+
+### 8. Předejte změnu jako provozní fakt
+
+Trvalý standard nepotřebuje velkou interní kampaň. Potřebuje, aby lidé věděli, co se změnilo, kde to najdou a co odteď nedělat postaru.
+
+Krátké předání může vypadat takto:
+
+"Oprava eskalace zákaznických dat v onboardingu je uzavřená a převedená do trvalého standardu. Kanonické místo je v onboardingovém balíčku support role, sekce `Zákaznická data v odpovědích`. Staré screenshotové příklady jsou nahrazené anonymizovaným scénářem. Další kontrola proběhne v kvartálním review."
+
+Tato věta řeší:
+
+- stav,
+- místo,
+- změnu,
+- privacy-first dopad,
+- další kontrolu.
+
+Neposílejte dlouhý esej do chatu. Pokud je potřeba esej, standard ještě není dost krátký.
+
+### Šablona převodu do trvalého standardu
+
+Název opravy:
+
+Původní problém:
+
+Výsledek měsíční kontroly:
+
+Rozhodnutí:
+
+Stav: `převést do trvalého standardu` / `ještě zjednodušit` / `vrátit do opravy`
+
+Trvalé pracovní pravidlo:
+
+Kdy se používá:
+
+Odpovědná role:
+
+Kanonické místo:
+
+Nahrazené materiály:
+
+- Starý dokument:
+- Dočasná poznámka:
+- Chatové vlákno:
+- Starý příklad:
+
+Privacy-first úklid:
+
+- Co zůstává:
+- Co se anonymizuje:
+- Co se maže:
+- Co má omezený přístup:
+
+Životnost standardu:
+
+Další kontrola:
+
+Krátká zpráva týmu:
+
+### Mini workshop: 35 minut na uzavření opravného režimu
+
+Agenda:
+
+1. 5 minut: připomenout výsledek měsíční kontroly.
+2. 7 minut: vybrat finální pracovní pravidlo.
+3. 7 minut: určit kanonické místo a nahradit staré materiály.
+4. 6 minut: projít privacy-first úklid.
+5. 5 minut: nastavit životnost a další kontrolu.
+6. 5 minut: napsat krátkou zprávu týmu.
+
+Pravidla workshopu:
+
+- Nepřepisujte historii do standardu, přepište jen opakovatelný výsledek.
+- Pokud pravidlo potřebuje půl stránky kontextu, rozdělte ho na pravidlo a příklad.
+- Každý starý materiál musí mít stav: ponechat, anonymizovat, smazat, nebo omezit.
+- Kanonické místo musí odpovídat okamžiku použití, ne organizační estetice.
+- Opravný režim končí až ve chvíli, kdy jsou zavřené i staré odkazy a dočasné kopie.
+
+### Checklist
+
+- Máte z měsíční kontroly jasné rozhodnutí, že oprava funguje?
+- Převádíte do standardu jen výsledek, ne celou historii opravy?
+- Je pravidlo napsané stabilním jazykem použitelným i za půl roku?
+- Vybrali jste jedno kanonické místo podle okamžiku použití?
+- Označili jste nebo odstranili staré verze, návrhy a dočasné poznámky?
+- Zavřeli jste související úkoly v backlogu?
+- Nastavili jste životnost standardu nebo další přirozenou kontrolu?
+- Ověřili jste pravidlo na člověku, který nezná původní kontext?
+- Provedli jste privacy-first úklid screenshotů, exportů, přístupů a příkladů?
+- Poslali jste týmu krátkou zprávu, která říká stav, místo, změnu a další kontrolu?
+
+Převod do trvalého standardu je malý rituál proti chaosu. Ne proto, aby tým vyráběl víc dokumentace, ale aby dobrá oprava přestala být zvláštní událost a začala být normální způsob práce. Když se to povede, další onboarding už nezačíná vysvětlováním staré chyby. Začíná lepším výchozím systémem.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FS o převodu stabilizované onboardingové opravy do trvalého standardu: výběr opakovatelného výsledku, kanonické místo podle okamžiku použití, stabilní jazyk pravidla, uzavření opravného režimu, životnost standardu, napojení na onboarding nové role, privacy-first úklid, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FR o měsíční kontrole standardizované opravy onboardingového balíčku: návrat k původnímu důvodu, výběr reálného vzorku použití, sledování samostatnosti, skrytá podpora, privacy-first kontrola datové stopy, rozhodnutí stavu opravy, úprava kanonického místa, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FQ o standardizaci ověřené opravy onboardingového balíčku: rozhodnutí, zda oprava patří do standardu, přepis do pracovního pravidla, jedno kanonické místo, kontrolní háček, úklid starých variant, standardizační karta, krátké předání týmu, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FP o ověření opravy onboardingového balíčku po prvním použití: návrat ke kritériu úspěchu, výběr reálného průchodu, sledování práce místo člověka, tři signály rozhodnutí/samostatnosti/datové stopy, stav opravy, privacy-first uzavření, artefakty, šablona, mini workshop a checklist.
