@@ -49245,8 +49245,327 @@ Držte čas. Jakmile se workshop začne měnit v obecnou debatu o celé dokument
 
 Dobrá oprava onboardingového balíčku není ta, která nejvíc rozšíří dokument. Je to ta, která sníží počet bočních vysvětlení, nejasných rozhodnutí a dočasných datových stop. Nový člověk pak nedostane tlustší manuál, ale jasnější cestu. A tým má o jednu improvizaci méně.
 
+## Příloha FP: Ověření opravy onboardingového balíčku po prvním použití
+
+Oprava onboardingového balíčku není ověřená tím, že ji někdo pečlivě napsal. Ověřená je až ve chvíli, kdy ji nový člověk použije v reálné práci a výsledek nevyžaduje skryté dovysvětlení, ruční záchranu nebo tichý úklid datové stopy. To je rozdíl mezi dokumentem, který dobře vypadá, a dokumentem, který skutečně nese práci.
+
+Po jedné opravě proto neotvírejte další velký redesign. Nejdřív zjistěte, jestli oprava splnila slib. Pokud měla pomoct rozlišit běžný dotaz od eskalace, ověřujte právě toto rozhodnutí. Pokud měla zabránit ukládání exportů bez data smazání, ověřujte právě datovou stopu. Jakmile do ověření přimícháte deset dalších očekávání, ztratíte jasnou odpověď.
+
+Praktický postup:
+
+1. vezměte opravu z předchozí přílohy a její ověřovací kritérium,
+2. vyberte první reálné použití, které opravenou část skutečně prověří,
+3. sledujte výstup a potřebnou pomoc, ne osobu jako takovou,
+4. zapište tři signály: rozhodnutí, samostatnost, datová stopa,
+5. rozhodněte, jestli opravu ponechat, zkrátit, upravit nebo vrátit do revize,
+6. uzavřete záznam v changelogu a kanonickém indexu.
+
+### 1. Vraťte se k ověřovacímu kritériu
+
+Každá dobrá oprava má mít předem napsané kritérium úspěchu. Bez něj tým po prvním použití snadno sklouzne k pocitům: "asi to bylo lepší", "ještě to doladíme", "možná to chce víc příkladů". To není ověření. To je mlha s odrážkami.
+
+Najděte v opravné kartě:
+
+- původní nález,
+- opravnou větu,
+- primární místo v balíčku,
+- kritérium úspěchu,
+- plánovaný reálný průchod,
+- vlastníka vyhodnocení.
+
+Příklad:
+
+```text
+Původní nález:
+Nový člověk dvakrát eskaloval běžný supportní dotaz, protože balíček nerozlišoval běžný dotaz, hraniční dotaz a povinnou eskalaci.
+
+Opravná věta:
+Upravíme část "typické dotazy" tak, aby nový člověk rozlišil tři úrovně dotazu bez dalšího vysvětlování v chatu.
+
+Kritérium úspěchu:
+Při dalším supportním průchodu nový člověk správně vyřídí běžný dotaz samostatně a eskaluje pouze dotaz, který mění cenu, slib zákazníkovi, přístup k datům nebo veřejnou komunikaci.
+```
+
+Takové kritérium je úzké. A právě proto je použitelné. Neřeší celou kvalitu supportu, osobní styl odpovědi ani kompletní zákaznickou zkušenost. Ověřuje jednu opravu.
+
+### 2. Vyberte první skutečný průchod, ne laboratorní scénku
+
+Opravu ověřujte v pracovním okamžiku, který by nastal i bez testu. Simulace může pomoct před nasazením, ale sama o sobě neukáže, jestli se balíček chová dobře v provozním tlaku: když běží čas, chybí ideální kontext a člověk nechce otravovat vlastníka každou drobností.
+
+Vhodný průchod:
+
+- nový nebo nově samostatný člověk použije opravenou část při běžné práci,
+- úkol má jasný výstup,
+- vlastník předem neprozrazuje správnou odpověď bokem,
+- práce proběhne v nástroji, kde by proběhla normálně,
+- po dokončení existuje kontrolovatelný výsledek.
+
+Nevhodný průchod:
+
+- vlastník sedí u každého kroku a průběžně napovídá,
+- test se odehraje na umělém příkladu, který neobsahuje skutečné rozhodovací tření,
+- hodnotí se celý onboarding místo jedné opravy,
+- výsledek skončí v soukromé poznámce, kterou tým později nenajde,
+- kvůli ověření vznikne nová sada osobních nebo zákaznických dat bez jasného účelu.
+
+Příklad: pokud oprava řeší ukládání dočasných exportů, neověřujte ji čtením textu na schůzce. Ověřte ji při reálném exportu testovacích dat nebo při práci se zákaznickým výřezem, který už tým potřeboval pro dodávku. Výsledkem má být odpověď: má každý dočasný soubor účel, vlastníka a datum smazání?
+
+### 3. Sledujte práci, ne člověka
+
+Ověření onboardingového balíčku nesmí působit jako zkouška osobnosti. Cíl není nachytat nového člověka, že něco neví. Cíl je zjistit, jestli systém dává dost opory pro samostatnou a bezpečnou práci.
+
+Sledujte hlavně:
+
+- kde člověk musel hádat,
+- kde hledal zdroj pravdy,
+- kde se zeptal bokem,
+- kde udělal správnou věc pomalu,
+- kde udělal špatnou věc proto, že balíček vedl nejasně,
+- kde se objevila zbytečná datová stopa,
+- kde výsledek vyžadoval ruční opravu vlastníkem.
+
+Nepište hodnocení typu:
+
+```text
+Petr tomu ještě nerozumí.
+```
+
+Pište pracovní signál:
+
+```text
+V části "hraniční dotazy" chybí příklad, kdy zákazník žádá změnu rozsahu bez změny ceny. Petr proto eskaloval dotaz, který měl podle standardu vyřídit samostatně.
+```
+
+Rozdíl je zásadní. První věta přesouvá problém na člověka. Druhá věta ukazuje, co může systém opravit.
+
+Codyho komentář: onboarding často selže tiše. Nový člověk je slušný, nechce obtěžovat, tak si věci domyslí. Tým je slušný, nechce být přísný, tak chyby opraví za něj. Výsledek je velmi zdvořilá továrna na skrytou práci. Roztomilé asi jako faktura bez čísla účtu.
+
+### 4. Zapište tři signály
+
+Po prvním použití stačí krátký záznam. Nemá z něj vzniknout diplomová práce o lidském učení. Potřebujete tři signály, které řeknou, jestli oprava pomohla.
+
+Použijte tuto trojici:
+
+```text
+Rozhodnutí:
+Dokázal člověk udělat rozhodnutí, kvůli kterému oprava vznikla?
+
+Samostatnost:
+Kolik skryté pomoci bylo potřeba mimo balíček?
+
+Datová stopa:
+Vznikla nová data, exporty, screenshoty, poznámky nebo přístupy, které je nutné uklidit?
+```
+
+Ukázka záznamu:
+
+```text
+Rozhodnutí:
+Běžný supportní dotaz vyřízen samostatně. Hraniční dotaz k ceně eskalován správně.
+
+Samostatnost:
+Jedna doplňující otázka k tónu odpovědi, ne k rozhodovací hranici. Oprava tedy splnila primární účel.
+
+Datová stopa:
+Bez nových exportů. V odpovědi nebyla kopírována interní poznámka. Není potřeba úklid.
+```
+
+Jiný příklad:
+
+```text
+Rozhodnutí:
+Nový člověk správně našel kanonický index, ale nevěděl, jestli má aktualizovat i changelog.
+
+Samostatnost:
+Potřeboval vysvětlení v chatu. Oprava pomohla najít zdroj pravdy, ale neuzavřela závěrečný krok.
+
+Datová stopa:
+Vznikla dočasná pracovní poznámka bez data smazání. Nutná drobná oprava privacy-first části.
+```
+
+Tento druh záznamu je krátký, ale užitečný. Ukazuje, jestli je potřeba upravit opravu, nebo jen doplnit drobnou navazující větu.
+
+### 5. Rozhodněte stav opravy
+
+Po ověření vyberte jeden stav. Ne "budeme sledovat". Ne "časem zlepšíme". Jeden stav, aby další člověk věděl, co platí.
+
+Použijte čtyři možnosti:
+
+```text
+Ponechat:
+Oprava splnila kritérium a nevytvořila nové tření ani zbytečnou datovou stopu.
+
+Zkrátit:
+Oprava pomohla, ale je delší nebo složitější, než je potřeba.
+
+Upravit:
+Oprava pomohla jen částečně nebo vytvořila jedno nové konkrétní tření.
+
+Vrátit do revize:
+Oprava nesplnila kritérium, problém byl špatně pochopený nebo zasahuje širší část balíčku.
+```
+
+Příklady rozhodnutí:
+
+```text
+Stav: Ponechat
+Důvod: Nový člověk správně rozlišil běžný a hraniční dotaz bez podpory. Bez nové datové stopy.
+```
+
+```text
+Stav: Zkrátit
+Důvod: Hraniční příklad fungoval, ale úvodní vysvětlení se při průchodu nečetlo. Nahradit tři odstavce jednou rozhodovací tabulkou.
+```
+
+```text
+Stav: Upravit
+Důvod: Oprava pomohla s eskalací, ale nezmiňuje zápis výsledku do changelogu. Doplnit jednu závěrečnou větu.
+```
+
+```text
+Stav: Vrátit do revize
+Důvod: Nový člověk problém nevyřešil ani po úpravě, protože chybí základní mapa rolí. Nejde o lokální opravu, ale o mezeru v onboardingové trase.
+```
+
+Rozhodnutí má být malé a konečné pro tuto iteraci. Když je stav "upravit", upravte jednu věc. Když je stav "vrátit do revize", nelepte rychle další odstavec jen proto, aby tabulka vypadala zeleně.
+
+### 6. Proveďte privacy-first uzavření
+
+Ověření často vytváří vedlejší materiály: poznámky z průchodu, screenshoty, exporty, komentáře v dokumentu, nahrávky obrazovky nebo dočasné přístupy. Tyto materiály jsou užitečné jen tehdy, když mají účel a konec. Jinak z nich vznikne druhá vrstva provozního nepořádku.
+
+Po ověření projděte:
+
+- Byly všechny poznámky převedeny do jedné ověřovací karty?
+- Obsahuje karta jen nezbytné minimum, ne osobní hodnocení člověka?
+- Jsou screenshoty anonymizované nebo smazané?
+- Mají dočasné exporty datum smazání?
+- Byly odebrány dočasné přístupy, pokud už nejsou potřeba?
+- Nezůstala správná odpověď jen v chatu?
+- Je aktualizovaný kanonický index, pokud se změnil platný balíček?
+
+Privacy-first uzavření může být velmi krátké:
+
+```text
+Privacy-first uzavření:
+Dočasný export smazán po kontrole. Screenshot nahrazen anonymizovaným výřezem. Ověřovací karta neobsahuje osobní hodnocení nového člověka. Kanonický index aktualizován.
+```
+
+Nebo:
+
+```text
+Privacy-first uzavření:
+Bez nových osobních dat. Jediný záznam je agregovaná ověřovací karta v onboardingovém changelogu.
+```
+
+Tady se láme kultura týmu. Buď se z onboardingových kontrol stane čistý systém učení, nebo archiv vedlejších stop, které nikdo nechtěl, ale všichni je tak nějak tolerovali.
+
+### 7. Uzavřete změnu v artefaktech
+
+Ověřená oprava musí být dohledatelná tam, kde lidé skutečně pracují. Nestačí, že si vlastník pamatuje, že se to minule povedlo. Paměť vlastníka není zdroj pravdy. Je to cache. A cache občas vyprší přesně ve chvíli, kdy potřebujete odpověď.
+
+Minimum uzavření:
+
+- v onboardingovém balíčku je aktuální text,
+- v changelogu je datum, důvod a stav opravy,
+- v kanonickém indexu je správný odkaz a krátký popis,
+- stará verze není dostupná jako zdánlivě platná,
+- další kontrola je naplánovaná jen pokud má jasný důvod.
+
+Ukázka changelogu:
+
+```text
+2026-05-13: Ověřena oprava části "typické supportní dotazy". Nový člověk správně rozlišil běžný dotaz a povinnou eskalaci bez podpory. Stav: ponechat. Bez nové datové stopy.
+```
+
+Ukázka aktualizace indexu:
+
+```text
+Onboarding supportní role:
+Obsahuje rozlišení běžného dotazu, hraničního dotazu a povinné eskalace. Poslední ověření: 2026-05-13. Stav: platné.
+```
+
+Tím se ověření zavře. Ne jako pocit, ale jako použitelná provozní informace.
+
+### Šablona ověření opravy
+
+```text
+Název opravy:
+
+Datum ověření:
+Vlastník ověření:
+Role / pracovní situace:
+
+Původní nález:
+
+Opravná věta:
+
+Kritérium úspěchu:
+
+Reálný průchod:
+- kdy:
+- kdo použil balíček:
+- jaký byl výstup:
+- kde se výstup kontroloval:
+
+Signál 1: rozhodnutí
+- rozhodnutí provedeno správně / částečně / špatně:
+- poznámka:
+
+Signál 2: samostatnost
+- bez pomoci / jedna doplňující otázka / skrytá pomoc / ruční záchrana:
+- kde pomoc vznikla:
+
+Signál 3: datová stopa
+- nová data nevznikla / vznikla a jsou uklizená / vznikla a vyžadují zásah:
+- co se uklidilo:
+- co ještě zůstává:
+
+Rozhodnutí o stavu:
+Ponechat / zkrátit / upravit / vrátit do revize
+
+Důvod rozhodnutí:
+
+Změny v artefaktech:
+- onboardingový balíček:
+- changelog:
+- kanonický index:
+- staré verze:
+
+Další kontrola:
+není potřeba / datum / spouštěč
+```
+
+### Mini workshop: 25 minut po prvním použití
+
+1. Tři minuty: přečíst opravnou větu a kritérium úspěchu.
+2. Pět minut: projít reálný výstup bez debat o celé roli.
+3. Pět minut: zapsat signál rozhodnutí, samostatnosti a datové stopy.
+4. Pět minut: vybrat stav opravy.
+5. Čtyři minuty: aktualizovat changelog a kanonický index.
+6. Tři minuty: smazat nebo označit dočasné podklady.
+
+Workshop držte krátký. Pokud začne růst, je to signál, že neověřujete jednu opravu, ale otevíráte širší problém. To může být legitimní, jen to patří do nové karty, ne do závěru této opravy.
+
+### Checklist
+
+- Má oprava jasné kritérium úspěchu zapsané před ověřením?
+- Proběhlo ověření v reálném pracovním okamžiku?
+- Hodnotil se výstup a systém, ne osobnost nového člověka?
+- Je zapsaný signál rozhodnutí?
+- Je zapsaný signál samostatnosti?
+- Je zapsaná datová stopa a její úklid?
+- Má oprava jeden stav: ponechat, zkrátit, upravit nebo vrátit do revize?
+- Pokud je potřeba úprava, je definovaná jako jedna konkrétní změna?
+- Je výsledek v changelogu?
+- Je kanonický index aktuální?
+- Jsou dočasné exporty, screenshoty, poznámky a přístupy uklizené?
+- Nezůstala klíčová znalost jen v chatu nebo hlavě vlastníka?
+
+Dobré ověření opravy onboardingového balíčku je malé, věcné a nepřehání vlastní důležitost. Neřeší všechno, ale zavře jednu smyčku. Tým pak ví, jestli konkrétní úprava skutečně pomohla, a nový člověk má o něco jasnější cestu bez další vrstvy tichého dohledu.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FP o ověření opravy onboardingového balíčku po prvním použití: návrat ke kritériu úspěchu, výběr reálného průchodu, sledování práce místo člověka, tři signály rozhodnutí/samostatnosti/datové stopy, stav opravy, privacy-first uzavření, artefakty, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FO o převodu kontroly onboardingového rytmu do jedné opravy balíčku: výběr problému podle samostatnosti, opravná věta, jedno pracovní místo, zkracování místo nabalování, privacy-first kontrola, ověření na reálném průchodu, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FN o kontrole trvalého onboardingového rytmu po prvních použitích: kontrolní okno, původní slib, oddělení problému člověka od problému systému, skrytá pomoc, privacy-first datová stopa, lehké signály, rozhodnutí stavu rytmu, uzavření v artefaktech a checklist.
 - 2026-05-13: Doplněna Příloha FM o zařazení ověřeného onboardingového balíčku do trvalého rytmu: výběr balíčku, napojení na pracovní okamžik, minimální výstup, vlastnictví role, kanonická trasa, privacy-first úklid, stop pravidla, onboardingový backlog a checklist.
