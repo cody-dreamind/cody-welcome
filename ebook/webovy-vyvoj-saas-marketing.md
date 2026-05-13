@@ -46595,8 +46595,319 @@ Výstup workshopu není seznam připomínek. Výstup je upravený standard nebo 
 
 Kontrola prvních použití má standard zbavit dětských nemocí. Nemá z něj udělat složitější dokument. Když po kontrole standard zkrátíte, zpřesníte spouštěč, smažete dočasné poznámky a přidáte jeden dobrý příklad, je to úspěch. Rolový standard má pomáhat roli rozhodnout a udělat práci. Jakmile začne vyžadovat vlastní podpůrný aparát, je čas ho znovu zmenšit.
 
+## Příloha FG: Zařazení ověřeného rolového standardu do provozního rytmu
+
+Rolový standard, který prošel prvními použitími, má za sebou nejtěžší test srozumitelnosti. Role ví, kdy ho použít, výstup vzniká ve správném místě a privacy-first brzda není jen ozdoba. Teď přichází méně viditelná, ale stejně důležitá práce: zařadit standard do běžného provozního rytmu tak, aby se používal přirozeně a nezávisel na tom, že si na něj někdo zrovna vzpomene.
+
+Provozní rytmus není kalendář plný kontrol. Je to dohoda, kdy se standard objeví v reálné práci. Může být napojený na týdenní triage, měsíční review, kvartální audit, launch checklist, onboarding role, support review nebo změnovou bránu. Důležité je, aby standard měl svoje pracovní místo. Bez něj se z ověřeného pravidla postupně stane archivní poznámka.
+
+Tuto přílohu použijte ve chvíli, kdy po kontrole prvních použití padlo rozhodnutí `ponechat`, `zjednodušit`, `doplnit příklad`, `zpřesnit spouštěč` nebo `upravit hranice role`. Pokud byl standard sloučen nebo zastaven, nezařazujte ho do rytmu. Nechte ho odejít a aktualizujte jen odkazy, které by za ním lidi zbytečně posílaly.
+
+### 1. Vyberte jeden přirozený pracovní rytmus
+
+Standard má žít tam, kde se práce už děje. Nevytvářejte nový meeting jen proto, že existuje nový standard. Nejdřív najděte existující rytmus, ve kterém se rozhodnutí standardu přirozeně objevuje.
+
+Možné rytmy:
+
+- týdenní triage obsahu, supportu nebo backlogu,
+- měsíční review webu, produktu a marketingu,
+- kvartální kontrola zdrojů, odkazů a privacy-first pravidel,
+- launch checklist před vydáním stránky, kampaně nebo funkce,
+- onboarding nové role,
+- změnová brána pro formuláře, data, měření nebo dodavatele,
+- incidentní nebo post-fallback review,
+- pravidelný úklid šablon, indexů a pracovních artefaktů.
+
+Krátký test:
+
+```markdown
+Kde by role standard použila, kdyby ho nikdo nepřipomněl zvlášť?
+```
+
+Pokud odpověď neexistuje, standard ještě nemá provozní místo. V takovém případě ho nenapojte na kalendář naslepo. Nejdřív určete pracovní situaci, která ho spouští.
+
+Příklad:
+
+```markdown
+Standard: Kontrola nového pole ve formuláři
+Přirozený rytmus: launch checklist a změnová brána formulářů
+Nevhodný rytmus: měsíční marketingový meeting, protože problém vzniká už při návrhu pole
+```
+
+Codyho komentář: standard připnutý na špatný rytmus je jako deštník uložený ve sklepě. Technicky existuje, ale když začne pršet, nikdo ho nemá po ruce.
+
+### 2. Zapište provozní háček
+
+Provozní háček je krátká věta, která říká, kdy se standard objeví v rytmu. Nemá vysvětlovat celý standard. Má jen propojit konkrétní pracovní situaci s konkrétní akcí.
+
+Tvar:
+
+```markdown
+Při [pracovní situace] role [vlastník] použije standard [název], pokud [spouštěč].
+```
+
+Příklady:
+
+```markdown
+Při launch checklistu provozní správce webu použije standard Kontrola nového pole ve formuláři, pokud se změnilo jakékoli pole, účel sběru nebo vysvětlení u formuláře.
+```
+
+```markdown
+Při měsíční triage editor indexu použije standard Důvod změny v kanonickém indexu, pokud se položka slučuje, přejmenovává, archivuje nebo nahrazuje novou trasou.
+```
+
+```markdown
+Při onboardingovém review customer success owner použije standard Agregace support signálu, pokud se stejná nejasnost objevila alespoň ve třech zákaznických situacích.
+```
+
+Háček má být viditelný v místě práce. Může být v checklistu, v šabloně review, v kartě role nebo v kanonickém indexu. Nemá být jen v dlouhém dokumentu standardu, protože tam ho člověk při práci často nehledá.
+
+### 3. Určete minimální výstup z rytmu
+
+Když standard vstoupí do provozního rytmu, musí po něm zůstat výstup. Ale jen takový, který pomůže rozhodnutí, předání nebo kontrole. Ne nová evidence pro pocit jistoty.
+
+Vyberte jeden minimální výstup:
+
+- řádek v changelogu,
+- rozhodovací věta v indexu,
+- aktualizovaná karta standardu,
+- odkaz na upravenou datovou mapu,
+- agregovaný signál v měsíčním review,
+- uzavřená položka v launch checklistu,
+- krátká poznámka v onboardingu role.
+
+Šablona:
+
+```markdown
+Rytmus:
+Standard:
+Minimální výstup:
+Kde žije:
+Kdo ho vytvoří:
+Kdo ho používá později:
+Kdy se archivuje nebo maže:
+```
+
+Vyplněný příklad:
+
+```markdown
+Rytmus: měsíční triage kanonického indexu
+Standard: Důvod změny v kanonickém indexu
+Minimální výstup: jedna rozhodovací věta u změněné položky
+Kde žije: kanonický index a měsíční changelog
+Kdo ho vytvoří: editor indexu
+Kdo ho používá později: nový editor, obsahový vlastník, reviewer šablon
+Kdy se archivuje nebo maže: při archivaci verze indexu podle retenčního plánu
+```
+
+Pokud výstup nikdo nepoužije později, zkraťte ho nebo ho zrušte. Standard nemá vyrábět památky na to, že se něco stalo. Má držet pracovní paměť v užitečném tvaru.
+
+### 4. Napojte standard na existující zdroj pravdy
+
+Ověřený standard má mít jedno kanonické místo. Provozní rytmus na něj má odkazovat, ne ho opisovat. Jakmile začnete kopírovat celý postup do pěti checklistů, vznikne budoucí rozpor. Někdo upraví jednu verzi, druhá zestárne a třetí bude pořád v chatu jako screenshot.
+
+Dobré napojení vypadá takto:
+
+```markdown
+Launch checklist:
+- Pokud se mění formulářové pole, použij standard Kontrola nového pole ve formuláři: [odkaz].
+```
+
+Slabé napojení vypadá takto:
+
+```markdown
+Launch checklist:
+- Zkontroluj formulářová pole, účely, datovou mapu, texty u formuláře, retenci, přístupy, screenshoty, changelog a případně další související dokumenty podle aktuální situace.
+```
+
+Druhá verze se tváří pečlivě, ale je moc široká. Člověk neví, kde je zdroj pravdy a co se má stát, když se pravidlo změní.
+
+Pravidlo:
+
+- V pracovním rytmu držte jen háček a odkaz.
+- Ve standardu držte postup, příklady, hranice role a privacy-first bránu.
+- V changelogu držte jen skutečné změny.
+- V onboardingu držte jen to, co nová role potřebuje pro první použití.
+
+Tím zmenšíte počet míst, která je nutné udržovat. To je často větší přínos než samotný standard.
+
+### 5. Přidejte ochranný signál
+
+Provozní rytmus má standard používat, ale také poznat, když standard začíná znovu drhnout. Proto přidejte jeden ochranný signál. Ne deset metrik. Jeden signál, který ukáže, že standard buď pomáhá, nebo se mění v břemeno.
+
+Příklady ochranných signálů:
+
+- standard se při relevantní situaci nespustil,
+- role potřebovala vysvětlení bokem,
+- výstup skončil mimo zdroj pravdy,
+- vznikly dočasné poznámky bez úklidu,
+- rozhodovací věta je delší než samotná změna,
+- privacy-first brána se přeskočila,
+- standard se spouští i na drobnosti bez rizika,
+- po standardu zůstávají zákaznické detaily, které nejsou nutné.
+
+Zápis signálu:
+
+```markdown
+Ochranný signál:
+Kdy ho kontrolujeme:
+Co uděláme, když se objeví:
+```
+
+Příklad:
+
+```markdown
+Ochranný signál: role posílá screenshoty formuláře do chatu místo odkazu na změnu ve zdroji pravdy.
+Kdy ho kontrolujeme: při měsíčním review změn formulářů.
+Co uděláme, když se objeví: doplníme do standardu pravidlo pro dočasné podklady a smažeme staré screenshoty po review.
+```
+
+Ochranný signál nemá být bič na roli. Má být včasná kontrolka, že standard potřebuje malé seřízení.
+
+### 6. Privacy-first rytmus držte jako úklid, ne jako archivaci všeho
+
+Když se standard stane součástí provozu, začne pravidelně vytvářet stopy. I malé stopy se časem nasčítají. Proto musí mít rytmus jasné pravidlo úklidu.
+
+Ptejte se:
+
+- Jaké podklady vznikají před použitím standardu?
+- Co zůstává jako trvalý výstup?
+- Co je jen dočasná pracovní pomůcka?
+- Kdy se mažou screenshoty, exporty, kopie a poznámky?
+- Zůstává v trvalém výstupu jen agregovaný nebo minimální kontext?
+- Je zdroj pravdy pod kontrolou týmu a v souladu s evropským provozem projektu?
+
+Praktická tabulka:
+
+```markdown
+| Typ stopy | Příklad | Stav po review | Vlastník úklidu |
+| --- | --- | --- | --- |
+| Trvalý výstup | rozhodovací věta v indexu | ponechat | editor indexu |
+| Dočasný podklad | screenshot formuláře | smazat po kontrole | provozní správce |
+| Citlivý detail | zákaznická citace | anonymizovat nebo nepřenášet | reviewer |
+| Odkaz na zdroj pravdy | karta standardu | ponechat | vlastník role |
+```
+
+Privacy-first provoz není o tom, že se nic nezapisuje. Je o tom, že každý zápis má účel, místo, vlastníka a konec životnosti. To je rozdíl mezi pracovní pamětí a datovou skládkou.
+
+### 7. Nastavte revizi životnosti standardu
+
+Každý standard má časem znovu zestárnout. Ne proto, že byl špatný. Změní se role, produkt, nabídka, zákaznické situace, nástroje nebo zdroj pravdy. Proto při zařazení do rytmu určete i další revizi.
+
+Jednoduché pravidlo:
+
+- po prvním měsíci provozu zkontrolujte tření,
+- po třech měsících zkontrolujte, zda standard pořád patří do rytmu,
+- při změně role, formuláře, datového toku, nabídky nebo zdroje pravdy spusťte mimořádnou revizi,
+- pokud se standard tři cykly nespustil, rozhodněte, zda je pořád potřeba.
+
+Šablona revize:
+
+```markdown
+Standard:
+Rytmus:
+Datum zařazení:
+První kontrola:
+Další pravidelná revize:
+Mimořádné spouštěče revize:
+Kritérium ukončení nebo sloučení:
+```
+
+Příklad:
+
+```markdown
+Standard: Kontrola nového pole ve formuláři
+Rytmus: launch checklist a změnová brána formulářů
+Datum zařazení: 2026-05-13
+První kontrola: po první změně formuláře
+Další pravidelná revize: kvartálně s datovou mapou
+Mimořádné spouštěče revize: nový typ formuláře, nový dodavatel, změna účelu sběru, změna veřejného textu o soukromí
+Kritérium ukončení nebo sloučení: standard bude sloučen, pokud se stane přirozenou částí širší změnové brány pro datové toky
+```
+
+Revize životnosti je malý zápis, který brání tomu, aby se provozní systém plnil pravidly bez konce.
+
+### Provozní karta zařazení standardu
+
+```markdown
+Název standardu:
+Role vlastníka:
+Původní slib:
+Rozhodnutí po prvních použitích:
+
+Vybraný provozní rytmus:
+Provozní háček:
+Zdroj pravdy standardu:
+Minimální výstup z rytmu:
+Ochranný signál:
+
+Privacy-first pravidlo úklidu:
+Trvalé výstupy:
+Dočasné podklady:
+Retence nebo archivace:
+
+První kontrola:
+Další pravidelná revize:
+Mimořádné spouštěče revize:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název standardu: Agregace support signálu
+Role vlastníka: customer success owner
+Původní slib: opakované nejasnosti ze supportu se dostanou do produktového rozhodování bez přenášení zákaznických detailů.
+Rozhodnutí po prvních použitích: ponechat a doplnit příklad anonymizovaného zápisu.
+
+Vybraný provozní rytmus: měsíční review support signálů
+Provozní háček: při měsíčním review se standard použije, pokud se stejná nejasnost objevila alespoň třikrát nebo má vysoký dopad na aktivaci.
+Zdroj pravdy standardu: karta standardu v indexu týmových postupů
+Minimální výstup z rytmu: jeden agregovaný signál s návrhem rozhodnutí
+Ochranný signál: do review se dostávají celé zákaznické citace místo agregovaného vzoru
+
+Privacy-first pravidlo úklidu: pracovní citace se po review smažou nebo anonymizují; trvale zůstává jen agregovaný vzor.
+Trvalé výstupy: agregovaný signál a rozhodnutí
+Dočasné podklady: výřezy tiketů, interní poznámky
+Retence nebo archivace: dočasné podklady smazat po uzavření review
+
+První kontrola: po dalším měsíčním review
+Další pravidelná revize: kvartálně
+Mimořádné spouštěče revize: změna support nástroje, nový onboardingový tok, nová role v customer success
+```
+
+### Mini workshop: 25 minut na zařazení standardu do rytmu
+
+1. Pět minut: připomeňte původní slib a rozhodnutí po prvních použitích.
+2. Pět minut: vyberte jeden existující provozní rytmus.
+3. Pět minut: napište provozní háček a minimální výstup.
+4. Pět minut: určete ochranný signál a privacy-first pravidlo úklidu.
+5. Pět minut: zapište první kontrolu, další revizi a mimořádné spouštěče.
+
+Výstup workshopu je provozní karta zařazení standardu. Pokud na konci není jasné, kde se standard v práci objeví, kdo ho použije a co po něm zůstane, standard ještě není zařazený. Jen má další odstavec.
+
+### Checklist
+
+- Je standard po prvních použitích rozhodnutý jako použitelný?
+- Nezařazujete standard, který měl být sloučen nebo zastaven?
+- Má standard jeden přirozený provozní rytmus?
+- Nevznikl kvůli standardu nový zbytečný meeting?
+- Je provozní háček krátký a viditelný v místě práce?
+- Odkazuje rytmus na zdroj pravdy místo opisování celého postupu?
+- Je minimální výstup užitečný pro pozdější rozhodnutí nebo předání?
+- Má výstup vlastníka a místo uložení?
+- Je určen jeden ochranný signál?
+- Je jasné, co se děje s dočasnými podklady, screenshoty, exporty a poznámkami?
+- Zůstává trvalý výstup bez zbytečných zákaznických nebo osobních detailů?
+- Je zdroj pravdy pod kontrolou týmu a v souladu s privacy-first provozem?
+- Má standard první kontrolu a pravidelnou revizi životnosti?
+- Jsou mimořádné spouštěče revize konkrétní?
+- Dá se celý standard použít bez vysvětlování bokem?
+
+Zařazení standardu do provozního rytmu je okamžik, kdy se pravidlo stává normální prací. Ne proto, že ho někdo slavnostně schválil, ale proto, že se objeví ve správný čas, na správném místě a zanechá jen takovou stopu, která pomáhá dalšímu rozhodnutí. To je dobrý stav: méně připomínání, méně improvizace, méně datového nepořádku a víc práce, která se dá předat.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FG o zařazení ověřeného rolového standardu do provozního rytmu: výběr přirozeného rytmu, provozní háček, minimální výstup, zdroj pravdy, ochranný signál, privacy-first úklid, revize životnosti a checklist.
 - 2026-05-13: Doplněna Příloha FF o kontrole rolového standardu po prvních použitích: návrat k původnímu slibu, spouštěče v provozu, kontrola výstupů, skrytá práce, privacy-first datová stopa, rozhodnutí o stavu standardu, aktualizace pracovních míst a checklist.
 - 2026-05-13: Doplněna Příloha FE o převodu ověřeného provozního zvyku do rolového standardu: výběr vhodného zvyku, vlastnictví role, provozní věta, krátký postup, privacy-first brána, důkaz použití, onboarding a kontrola po prvním předání.
 - 2026-05-13: Doplněno krátké týmové shrnutí do Přílohy FD, aby rozhodnutí po kontrole zvyku šlo převést do jedné pracovní věty pro lidi mimo workshop.
