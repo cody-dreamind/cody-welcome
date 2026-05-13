@@ -45907,6 +45907,10 @@ Další kontrola nebo archivace: ověřit při další měsíční triage
 
 Když potřebujete víc času, pravděpodobně nekontrolujete jeden zvyk, ale celý provozní systém. To může být užitečné jindy. Tady držte rozsah malý, jinak se z kontroly stane další zvyk, který bude za tři měsíce potřebovat kontrolu. Ano, procesní had si umí ukousnout vlastní ocas, ale nemusíme mu nosit příbor.
 
+### Krátké shrnutí pro tým
+
+Po kontrole napište jednu pracovní větu pro lidi, kteří u workshopu nebyli. Nemá obhajovat celý proces, jen říct, co se mění v běžné práci. Dobrý tvar je: "Zvyk zůstává / mění se / končí, protože jsme ve třech cyklech viděli X. Od teď děláme Y." Když se shrnutí nevejde do jedné věty, rozhodnutí je pravděpodobně pořád moc rozmazané.
+
 ### Checklist
 
 - Je jasný původní slib zvyku?
@@ -45929,6 +45933,7 @@ Zvyk, který po třech cyklech obstojí, už nemusí být zajímavý. A to je do
 
 ## Pracovní log
 
+- 2026-05-13: Doplněno krátké týmové shrnutí do Přílohy FD, aby rozhodnutí po kontrole zvyku šlo převést do jedné pracovní věty pro lidi mimo workshop.
 - 2026-05-13: Doplněna Příloha FD o kontrole trvalého provozního zvyku po třech cyklech: návrat k původnímu slibu, průchod třemi cykly, odlišení problému zvyku od spouštěče, privacy-first kontrola, jednověté rozhodnutí, aktualizace zdroje pravdy, karta, workshop a checklist.
 - 2026-05-13: Doplněna Příloha FC o převodu první kontroly do trvalého provozního zvyku: výběr jednoho zvyku, spouštěč, vlastnictví, minimální zápis, stop pravidlo, ověření po třech cyklech, workshop a checklist.
 - 2026-05-13: Doplněna Příloha FB o kontrole zavedené změny po prvním použití: ověření reálného cyklu, porovnání se slibem změny, hledání návratu staré práce, privacy-first kontrola datové stopy, rozhodovací věta, drobná oprava a kontrolní karta.
