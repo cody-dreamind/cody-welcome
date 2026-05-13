@@ -44876,8 +44876,306 @@ Když workshop odhalí deset možných změn, vyberte jednu. Kontrola rytmu sama
 
 Rytmus, který přežije první tři cykly, ještě není navždy správný. Je jen dostatečně ověřený, aby se s ním dalo pracovat jako s běžnou součástí systému. A to je přesně cílem: méně hrdinského hlídání, víc klidného provozu, méně zbytečných dat a víc rozhodnutí, která se opravdu dějí.
 
+## Příloha FA: Zavedení změny rytmu po kontrole tří cyklů
+
+Kontrola provozního rytmu po třech cyklech má hodnotu jen tehdy, když po ní něco skutečně změníte. Jinak je to jen kultivovaná retrospektiva: lidé řeknou chytré věci, vznikne zápis, všichni přikývnou a další měsíc se jede stejně. To je drahá forma dobrého pocitu.
+
+Tahle příloha pomáhá převést rozhodnutí z kontroly rytmu do jedné konkrétní provozní změny. Neřeší nový velký proces. Řeší malou úpravu, kterou tým od dalšího cyklu opravdu použije.
+
+Použijte ji, když jste u rytmu vybrali stav:
+
+- `ponechat`, ale s drobnou úpravou,
+- `zjednodušit`,
+- `zúžit`,
+- `sloučit`,
+- `pozastavit`,
+- `zrušit`.
+
+Výstupem má být změnová karta, aktualizovaný zdroj pravdy, krátké oznámení týmu a první ověření v dalším cyklu.
+
+### 1. Přepište rozhodnutí na jednu změnovou větu
+
+Nejdřív zkraťte rozhodnutí na jednu pracovní větu. Dokud to nejde říct krátce, tým nebude vědět, co se od dalšího cyklu mění.
+
+Šablona:
+
+```markdown
+Od dalšího cyklu měníme...
+Protože...
+Platí pro...
+Už neděláme...
+```
+
+Příklady:
+
+```markdown
+Od dalšího cyklu měníme měsíční triage indexu tak, že rušíme samostatný report a necháváme jen changelogový řádek.
+Protože report nikdo nepoužíval pro rozhodnutí.
+Platí pro všechny nové a upravené šablony.
+Už neděláme kopii komentářů z pracovních dokumentů.
+```
+
+```markdown
+Od dalšího cyklu slučujeme kontrolu datové stopy šablon s kvartální revizí standardů.
+Protože oba rytmy používaly stejné vstupy a vytvářely duplicitní zápisy.
+Platí pro šablony, playbooky a provozní karty.
+Už neděláme samostatnou měsíční tabulku citlivých příkladů.
+```
+
+```markdown
+Od dalšího cyklu pozastavujeme týdenní kontrolu feedback backlogu a ponecháváme jen měsíční triage.
+Protože za poslední tři týdny nevznikl dostatek podnětů pro týdenní rytmus.
+Platí pro e-book a navazující šablony.
+Už neděláme prázdné týdenní zápisy.
+```
+
+Codyho komentář: dobrá změnová věta má trochu bolet. Nutí vás říct, co konkrétně končí. Bez toho se změna často tváří jako zlepšení, ale ve skutečnosti jen přidá další vrstvu.
+
+### 2. Najděte všechna místa, kde rytmus žije
+
+Rytmus nebývá jen v jedné šabloně. Bývá v kalendáři, indexu, onboardingovém materiálu, checklistu, popisu role, automatizaci, poznámce v repozitáři nebo v hlavách lidí. Když aktualizujete jen jedno místo, vznikne rozpor.
+
+Projděte minimální mapu dopadu:
+
+```markdown
+Název rytmu:
+Hlavní zdroj pravdy:
+Kalendář nebo spouštěč:
+Šablony a checklisty:
+Indexy a rozcestníky:
+Onboarding nebo handoff materiály:
+Automatizace nebo připomínky:
+Měřené signály:
+Archivní nebo staré odkazy:
+Lidé a role, kterých se změna týká:
+```
+
+U každé položky zapište stav:
+
+- `upravit`,
+- `smazat`,
+- `sloučit`,
+- `ponechat`,
+- `není relevantní`.
+
+Příklad:
+
+```markdown
+Hlavní zdroj pravdy: upravit provozní kartu rytmu
+Kalendář nebo spouštěč: ponechat měsíční termín, zrušit týdenní připomínku
+Šablony a checklisty: smazat pole "detailní historie podnětu"
+Indexy a rozcestníky: upravit odkaz na nový sloučený rytmus
+Onboarding nebo handoff materiály: přidat jednu větu do role editora
+Automatizace nebo připomínky: vypnout automatické zakládání prázdného reportu
+Měřené signály: ponechat jen počet uzavřených rozhodnutí
+Archivní nebo staré odkazy: označit starou šablonu jako nahrazenou
+Lidé a role: editor, privacy reviewer, vlastník publikace
+```
+
+Smyslem není vyrobit dokonalou inventuru. Smyslem je zabránit tomu, aby staré pravidlo dál žilo v jednom zapomenutém formuláři.
+
+### 3. Upravte zdroj pravdy dřív než komunikaci
+
+Nejdřív změňte kanonické místo. Teprve potom změnu oznamujte. Když oznámíte změnu bez aktualizovaného zdroje pravdy, lidé se budou ptát, podle čeho mají pracovat. Když aktualizujete zdroj pravdy a nic neřeknete, změnu najdou jen ti nejpečlivější.
+
+Pořadí:
+
+1. Aktualizovat provozní kartu rytmu.
+2. Upravit šablony nebo checklisty.
+3. Odstranit nebo označit staré verze.
+4. Zapsat změnu do changelogu nebo pracovního logu.
+5. Oznámit týmu, co platí od dalšího cyklu.
+
+Krátký changelogový zápis:
+
+```markdown
+2026-05-13: Zjednodušen rytmus měsíční triage indexu. Ruší se samostatný report, důkazem je aktualizovaný index a jeden changelogový řádek. Staré reportovací pole "historie podnětu" bylo odstraněno.
+```
+
+Tohle stačí. Changelog nemá být román o tom, jak tým dospěl k moudrosti. Má říct, co se změnilo a kde je nová pravda.
+
+### 4. Komunikujte změnu jako pracovní instrukci
+
+Oznámení změny nemá prodávat, že proces bude lepší. Má říct, co má člověk příště udělat jinak.
+
+Šablona oznámení:
+
+```markdown
+Od kdy:
+Co se mění:
+Koho se to týká:
+Co už nedělat:
+Kde je nový zdroj pravdy:
+Kdy ověříme první použití:
+```
+
+Příklad:
+
+```markdown
+Od kdy: od červnové triage.
+Co se mění: u nových šablon už nevyplňujeme samostatný report; stačí aktualizovat index a přidat jeden řádek do changelogu.
+Koho se to týká: autorů šablon, editora portfolia a privacy reviewera.
+Co už nedělat: nekopírovat do reportu celé pracovní komentáře.
+Kde je nový zdroj pravdy: provozní karta "Měsíční triage indexu".
+Kdy ověříme první použití: po červnové triage.
+```
+
+Dobré oznámení nevyžaduje meeting. Pokud změna potřebuje půlhodinový výklad, je buď moc velká, nebo špatně napsaná.
+
+### 5. Udělejte privacy-first úklid staré datové stopy
+
+Zjednodušení rytmu často znamená, že některá data už nepotřebujete. To je dobrá chvíle je přestat sbírat a tam, kde to dává smysl, uklidit staré důkazy.
+
+Ptejte se:
+
+- Která pole už po změně nevyplňujeme?
+- Které staré reporty mají jen historickou hodnotu?
+- Obsahují staré záznamy osobní údaje, zákaznické detaily nebo interní citlivé poznámky?
+- Stačí ponechat agregovaný výstup místo detailních pracovních stop?
+- Je jasné, kdo smí archiv číst?
+- Má archiv datum dalšího úklidu?
+
+Praktický zápis:
+
+```markdown
+Datová stopa po změně:
+- Rušíme pole "detailní historie komentářů".
+- Staré reporty zůstávají jen jako interní archiv s omezeným přístupem.
+- Do aktivního indexu se přenáší jen stav, vlastník a odkaz na zdroj pravdy.
+- Po dalším kvartálu zkontrolujeme, jestli archiv ještě potřebujeme.
+```
+
+Privacy-first změna není jen přidání věty do zásad. Je to i schopnost říct: tato data už nepotřebujeme, přestaneme je vyrábět.
+
+### 6. Ověřte první použití bez další retrospektivy
+
+Změna rytmu se má ověřit v práci, ne v debatě. Po prvním dalším cyklu stačí krátký sanity check.
+
+Šablona:
+
+```markdown
+První použití změněného rytmu:
+Datum:
+Co mělo být jiné:
+Fungovalo to:
+Kde vzniklo tření:
+Vznikla stará práce znovu někde bokem:
+Zůstala datová stopa menší:
+Rozhodnutí:
+```
+
+Možná rozhodnutí:
+
+- `ponechat změnu`,
+- `drobně upravit`,
+- `vrátit část pravidla`,
+- `sloučit s jiným rytmem`,
+- `zastavit a znovu navrhnout`.
+
+Příklad:
+
+```markdown
+První použití změněného rytmu: Červnová triage indexu
+Co mělo být jiné: bez samostatného reportu, jen index a changelog
+Fungovalo to: ano, kontrola trvala 18 minut místo 35
+Kde vzniklo tření: jeden autor nevěděl, kam napsat důvod sloučení šablony
+Vznikla stará práce znovu někde bokem: ne
+Zůstala datová stopa menší: ano, nekopírovaly se komentáře z dokumentů
+Rozhodnutí: ponechat změnu a do indexu přidat pole "důvod sloučení"
+```
+
+Tohle je dostatečné ověření. Nepotřebujete druhou retrospektivu o retrospektivě. Potřebujete vidět, jestli změna přežila kontakt s prací.
+
+### 7. Kdy změnu raději zmenšit
+
+Někdy kontrola tří cyklů odhalí hodně problémů. Je lákavé opravit všechno najednou: kalendář, šablonu, index, roli, automatizaci i onboarding. Většinou je lepší zmenšit rozsah.
+
+Změnu zmenšete, pokud:
+
+- zasahuje více než tři pracovní místa,
+- vyžaduje nové role nebo novou schůzku,
+- mění zároveň pravidlo i nástroj,
+- není jasné, kdo ji ověří v dalším cyklu,
+- potřebuje migraci starých dat,
+- lidé neumí jednou větou říct, co už nemají dělat.
+
+Menší varianta může znít:
+
+```markdown
+Teď rušíme jen prázdný report a ponecháváme changelogový řádek. Sloučení s kvartální revizí vyhodnotíme až po dalším měsíci.
+```
+
+Malá změna, která se opravdu stane, je lepší než velká změna, která se bude tři cykly vysvětlovat.
+
+### Změnová karta
+
+```markdown
+Název rytmu:
+Datum změny:
+Původní stav:
+Rozhodnutí po kontrole:
+Jedna změnová věta:
+Co upravujeme:
+Co rušíme:
+Co zůstává stejné:
+Zdroj pravdy:
+Dotčené role:
+Privacy-first úklid:
+Oznámení týmu:
+První ověření:
+Stav po ověření:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název rytmu: Měsíční triage kanonického indexu
+Datum změny: 2026-05-13
+Původní stav: index + samostatný report + kopie pracovních komentářů
+Rozhodnutí po kontrole: zjednodušit
+Jedna změnová věta: Od dalšího cyklu rušíme samostatný report a ponecháváme jen aktualizovaný index a changelog.
+Co upravujeme: provozní kartu, checklist autorů, onboarding editora
+Co rušíme: pole "historie podnětu" a automatické zakládání prázdného reportu
+Co zůstává stejné: měsíční termín, vlastník rytmu, kontrola zdroje pravdy
+Zdroj pravdy: provozní karta rytmu v kanonickém indexu
+Dotčené role: editor, autoři šablon, privacy reviewer
+Privacy-first úklid: do aktivního indexu se nepřenášejí detailní komentáře ani zákaznické poznámky
+Oznámení týmu: krátká pracovní instrukce v interním kanálu
+První ověření: po další měsíční triage
+Stav po ověření: doplnit po použití
+```
+
+### Mini workshop: 30 minut na zavedení změny rytmu
+
+1. Pět minut: napište jednu změnovou větu.
+2. Pět minut: označte hlavní zdroj pravdy a dotčené artefakty.
+3. Pět minut: rozhodněte, co se upraví, smaže nebo ponechá.
+4. Pět minut: proveďte privacy-first úklid datové stopy.
+5. Pět minut: napište krátkou pracovní instrukci týmu.
+6. Pět minut: určete první ověření v dalším cyklu.
+
+Když se do třiceti minut nevejdete, změna je pravděpodobně moc široká. Zkraťte ji na jednu věc, která odstraní největší tření.
+
+### Checklist
+
+- Má rozhodnutí po kontrole jednu změnovou větu?
+- Je jasné, co od dalšího cyklu končí?
+- Je aktualizovaný hlavní zdroj pravdy?
+- Jsou upravené nebo označené staré šablony, checklisty a odkazy?
+- Nevznikají dvě souběžné verze rytmu?
+- Je oznámení napsané jako pracovní instrukce, ne jako dlouhé vysvětlení?
+- Je jasné, koho se změna týká?
+- Přestáváte sbírat data, která už rytmus nepotřebuje?
+- Mají staré záznamy jasný archivní režim nebo plán úklidu?
+- Je první ověření napojené na další reálný cyklus?
+- Dá se výsledek po prvním použití zapsat do pěti až deseti řádků?
+- Umí nový člověk podle karty poznat, co platí teď?
+
+Změna rytmu je hotová až tehdy, když starý způsob práce přestane mít lepší instrukce než nový. Pokud staré šablony, připomínky a reporty dál žijí, tým se nebude řídit vaším rozhodnutím. Bude se řídit nejbližším formulářem. Proto je zavedení změny hlavně úklid pravdy: jedna věta, jedno místo, jedna další kontrola.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FA o zavedení změny rytmu po kontrole tří cyklů: změnová věta, mapa dopadu, aktualizace zdroje pravdy, pracovní komunikace týmu, privacy-first úklid datové stopy, první ověření a změnová karta.
 - 2026-05-13: Doplněna Příloha EZ o kontrole provozního rytmu po prvních třech cyklech: návrat k původnímu slibu, reálné průchody, třídění tření, vlastnictví bez mikromanagementu, privacy-first datová stopa, rozhodnutí o stavu rytmu a aktualizace provozní karty.
 - 2026-05-12: Doplněna Příloha EY o převodu ověřeného rozšíření do běžného provozního rytmu: rozhodnutí, zda změna rytmus zaslouží, napojení na existující pracovní cyklus, zkrácení na provozní pravidlo, vlastnictví, privacy-first minimum, revize životnosti a provozní karta.
 - 2026-05-12: Doplněna Příloha EX o kontrole rozšířené portfoliové změny po prvním cyklu: původní slib, reálná pracovní trasa, třídění nálezů, redukce zbytečné evidence, privacy-first kontrola, jednověté rozhodnutí a uzavření smyčky v artefaktech.
