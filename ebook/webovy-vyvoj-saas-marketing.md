@@ -45173,8 +45173,252 @@ Když se do třiceti minut nevejdete, změna je pravděpodobně moc široká. Zk
 
 Změna rytmu je hotová až tehdy, když starý způsob práce přestane mít lepší instrukce než nový. Pokud staré šablony, připomínky a reporty dál žijí, tým se nebude řídit vaším rozhodnutím. Bude se řídit nejbližším formulářem. Proto je zavedení změny hlavně úklid pravdy: jedna věta, jedno místo, jedna další kontrola.
 
+## Příloha FB: Kontrola zavedené změny po prvním použití
+
+Změna rytmu zavedená po kontrole tří cyklů potřebuje první tvrdý dotek reality. Ne další velkou retrospektivu, ne hlasování o pocitech, ne nový reportovací rituál. Potřebuje krátkou kontrolu po prvním použití: skutečně lidé pracovali podle nové verze, nebo si starý proces našel zadní dveře?
+
+Tahle příloha navazuje na Přílohu FA. Použijte ji po prvním cyklu, ve kterém změněný rytmus opravdu proběhl. Cílem není dokazovat, že rozhodnutí bylo geniální. Cílem je zjistit, jestli změna snížila tření, zachovala hodnotu a nezvětšila datovou stopu někde bokem.
+
+Výstupem má být krátká karta ověření, jedno rozhodnutí a případně jedna drobná oprava. Nic víc. Pokud z kontroly vznikne pět nových projektů, rytmus se zase začal množit. A to jsme přece nechtěli, že.
+
+### 1. Ověřte, že šlo o reálné první použití
+
+Nejdřív si potvrďte, že kontrolujete skutečné použití, ne jen přípravu. Změna rytmu se neověří tím, že někdo aktualizoval šablonu. Ověří se tím, že podle ní někdo udělal práci.
+
+Krátká vstupní kontrola:
+
+- Proběhl změněný rytmus v reálném pracovním cyklu?
+- Byl použitý aktualizovaný zdroj pravdy?
+- Dotklo se to lidí nebo rolí, kterých se změna měla týkat?
+- Vznikl výstup, kvůli kterému rytmus existuje?
+- Bylo jasné, co se už podle starého způsobu nedělá?
+
+Pokud odpověď na první dvě otázky zní ne, nekontrolujte dopad. Nejdřív proveďte skutečný cyklus. Jinak budete hodnotit plakát, ne proces.
+
+Příklad:
+
+```markdown
+Rytmus: Měsíční triage kanonického indexu
+Změna: bez samostatného reportu, jen index a changelog
+První použití: květnová triage šablon
+Reálný výstup: aktualizovaný index, sloučené dvě duplicitní položky, jeden changelogový řádek
+Dotčené role: editor, autor šablony, privacy reviewer
+```
+
+Tento zápis stačí. Nepotřebujete přepisovat celou historii změny. Potřebujete vědět, co se opravdu stalo.
+
+### 2. Porovnejte nový průchod se slibem změny
+
+Každá dobrá změna měla původní slib. Třeba zkrátit práci, odstranit duplicitní report, zmenšit datovou stopu, zpřesnit vlastnictví nebo sloučit dva rytmy. První kontrola má tento slib vzít vážně.
+
+Použijte jednoduchou tabulku:
+
+```markdown
+Slib změny:
+Co se při prvním použití stalo:
+Důkaz:
+Verdikt:
+```
+
+Příklad:
+
+```markdown
+Slib změny: zrušit samostatný report, protože nepomáhal rozhodnutí.
+Co se při prvním použití stalo: report nevznikl, editor zapsal jen index a changelog.
+Důkaz: jeden changelogový řádek a aktualizovaný stav dvou položek.
+Verdikt: splněno.
+```
+
+```markdown
+Slib změny: zmenšit datovou stopu, protože staré reporty kopírovaly pracovní komentáře.
+Co se při prvním použití stalo: komentáře se nekopírovaly do aktivního indexu, ale autor si založil bokem poznámku s detaily.
+Důkaz: interní pracovní poznámka bez retenčního režimu.
+Verdikt: částečně splněno, potřeba doplnit místo pro stručný důvod rozhodnutí.
+```
+
+Tady je důležitý rozdíl: problém nemusí znamenat, že změna byla špatně. Může znamenat, že změna odstranila starý formulář, ale nedala lidem dostatečně malé místo pro skutečně potřebnou informaci.
+
+### 3. Hledejte návrat staré práce
+
+Starý proces se často nevrátí oficiálně. Vrátí se jako "jen pro jistotu" tabulka, osobní poznámka, kopie v chatu, vedlejší dokument nebo ruční kontrola mimo zdroj pravdy. To je důležitý signál.
+
+Ptejte se:
+
+- Vznikl starý výstup znovu pod jiným názvem?
+- Někdo si dělal kopii, protože nevěřil novému zdroji pravdy?
+- Musel vlastník rytmu ručně dohledávat informace mimo nový proces?
+- Přibylo neformální předávání v chatu nebo e-mailu?
+- Vznikla nová datová stopa bez jasného účelu?
+
+Příklad návratu staré práce:
+
+```markdown
+Starý report byl zrušen, ale editor si po triage napsal samostatné shrnutí do osobního dokumentu, protože v indexu chybělo pole "důvod rozhodnutí".
+```
+
+Dobrá reakce není vrátit celý report. Dobrá reakce je přidat jedno malé pole do kanonického místa:
+
+```markdown
+Důvod změny: duplicitní šablona, rozhodnutí převzato do hlavního checklistu.
+```
+
+Codyho komentář: když se stará práce vrací bokem, tým tím většinou neříká "milujeme byrokracii". Říká "nějaká potřebná informace nemá domov". Úkol není nadávat na lidi. Úkol je najít nejmenší domov pro tu informaci, nebo férově říct, že ji nepotřebujete.
+
+### 4. Zkontrolujte privacy-first dopad
+
+Změna rytmu má často provozní i datový dopad. Když rušíte report, slučujete rytmy nebo měníte zdroj pravdy, mění se i to, jaké údaje sbíráte, kdo je vidí a jak dlouho zůstávají.
+
+Privacy-first kontrola po prvním použití:
+
+- Sbíráme méně, stejně, nebo více údajů než před změnou?
+- Zmizely detailní pracovní komentáře z aktivního zdroje pravdy?
+- Nevznikl nový neřízený archiv bokem?
+- Jsou v novém zápisu jen údaje potřebné pro rozhodnutí?
+- Je jasné, kdo má k novému zdroji přístup?
+- Má starý archiv retenční nebo úklidový režim?
+
+Praktický zápis:
+
+```markdown
+Datová stopa po prvním použití:
+- Aktivní index obsahuje jen stav, vlastníka, důvod rozhodnutí a datum změny.
+- Neobsahuje kopie komentářů ani zákaznické příklady.
+- Staré reporty zůstávají v interním archivu do kvartálního úklidu.
+- Osobní pracovní poznámka editora byla nahrazena polem "důvod rozhodnutí" v indexu.
+```
+
+Tohle je přesně typ malé provozní hygieny, který drží evropský privacy-first provoz při zemi. Neřešíte soukromí až ve chvíli, kdy píšete právní text. Řešíte ho ve chvíli, kdy rozhodujete, jestli se pracovní poznámky budou kopírovat do další tabulky.
+
+### 5. Rozhodněte jednou větou
+
+Po prvním použití nepište esej. Vyberte jeden stav:
+
+- `ponechat beze změny`,
+- `ponechat a drobně upravit`,
+- `vrátit malou část`,
+- `sloučit s jiným rytmem`,
+- `pozastavit`,
+- `zastavit a navrhnout znovu`.
+
+Rozhodovací věta má mít tento tvar:
+
+```markdown
+Po prvním použití změnu [stav], protože [důkaz]. Další krok je [jedna konkrétní akce].
+```
+
+Příklady:
+
+```markdown
+Po prvním použití změnu ponecháváme beze změny, protože triage proběhla bez samostatného reportu a rozhodnutí bylo dohledatelné v indexu. Další krok je běžná kontrola při dalším měsíčním cyklu.
+```
+
+```markdown
+Po prvním použití změnu ponecháváme a drobně upravujeme, protože zrušení reportu fungovalo, ale chybělo místo pro stručný důvod sloučení. Další krok je přidat do indexu pole "důvod rozhodnutí".
+```
+
+```markdown
+Po prvním použití změnu pozastavujeme, protože nový sloučený rytmus neumožnil včas zachytit citlivé příklady v šablonách. Další krok je obnovit privacy kontrolu jako samostatný krok pro jeden další cyklus.
+```
+
+Jedna věta je důležitá. Když rozhodnutí potřebuje dlouhé vysvětlení, pravděpodobně není rozhodnutí, ale zápis z diskuze.
+
+### 6. Aktualizujte jen místa, kterých se rozhodnutí týká
+
+Po kontrole bývá pokušení znovu otevřít celý systém. Odolejte. Pokud první použití ukázalo drobný problém, opravte drobný problém.
+
+Typické malé opravy:
+
+- přidat jedno pole do kanonického indexu,
+- odstranit starý odkaz ze šablony,
+- doplnit jednu větu do onboardingové karty,
+- vypnout starou připomínku,
+- přejmenovat stav, kterému lidé nerozuměli,
+- zkrátit checklist o krok, který se ukázal jako prázdný.
+
+Co nedělat bez silného důvodu:
+
+- nezakládat nový měsíční meeting,
+- nevytvářet druhý paralelní report,
+- nemigrovat staré archivy jen kvůli estetice,
+- neměnit nástroj, pokud problém byl v pravidle,
+- nepřidávat měření, které nevede k rozhodnutí.
+
+Příklad malé opravy:
+
+```markdown
+Nález: po zrušení reportu chybí místo pro důvod sloučení položky.
+Oprava: v kanonickém indexu přidat pole "důvod rozhodnutí" s limitem jedna věta.
+Bez změny: měsíční termín, vlastník, changelog, archiv starých reportů.
+```
+
+Taková oprava je zdravá. Nezvětšuje systém. Jen zacelí místo, kde by jinak vznikla soukromá poznámka bokem.
+
+### Karta kontroly po prvním použití
+
+```markdown
+Název rytmu:
+Datum prvního použití:
+Původní změnová věta:
+Co mělo být jiné:
+Reálný výstup:
+Slib změny splněn:
+Kde vzniklo tření:
+Vrátila se stará práce bokem:
+Datová stopa po změně:
+Privacy-first nález:
+Rozhodnutí po prvním použití:
+Jedna drobná oprava:
+Kdy zkontrolujeme znovu:
+```
+
+Vyplněný příklad:
+
+```markdown
+Název rytmu: Měsíční triage kanonického indexu
+Datum prvního použití: 2026-06-03
+Původní změnová věta: Rušíme samostatný report a ponecháváme jen index a changelog.
+Co mělo být jiné: žádná kopie komentářů do reportu, kratší triage, jeden zdroj pravdy.
+Reálný výstup: aktualizovaný index, sloučené dvě šablony, jeden changelogový řádek.
+Slib změny splněn: částečně, report nevznikl, ale chyběl důvod sloučení.
+Kde vzniklo tření: editor si důvod napsal bokem do osobní poznámky.
+Vrátila se stará práce bokem: ano, ale jen v malé části.
+Datová stopa po změně: menší než dřív, bez kopií pracovních komentářů.
+Privacy-first nález: osobní poznámka nemá retenční režim.
+Rozhodnutí po prvním použití: ponechat a drobně upravit.
+Jedna drobná oprava: přidat do indexu pole "důvod rozhodnutí" s limitem jedna věta.
+Kdy zkontrolujeme znovu: při další měsíční triage.
+```
+
+### Mini workshop: 25 minut na první kontrolu
+
+1. Pět minut: potvrďte, že změna proběhla v reálném cyklu.
+2. Pět minut: porovnejte výsledek s původním slibem změny.
+3. Pět minut: najděte návrat staré práce bokem.
+4. Pět minut: projděte privacy-first dopad a datovou stopu.
+5. Pět minut: napište rozhodovací větu a jednu drobnou opravu.
+
+Když se nevejdete do 25 minut, kontrolujete moc široce. Vraťte se k původní změnové větě. První kontrola má ověřit jednu změnu, ne znovu otevřít celý operační systém týmu.
+
+### Checklist
+
+- Kontrolujete skutečný pracovní cyklus, ne jen aktualizovanou šablonu?
+- Je jasný původní slib změny?
+- Existuje konkrétní výstup prvního použití?
+- Porovnali jste nový průchod se starým problémem?
+- Hledali jste návrat staré práce bokem?
+- Nezaložil někdo neřízenou osobní poznámku nebo paralelní tabulku?
+- Zůstává zdroj pravdy jeden?
+- Je nová datová stopa menší nebo alespoň lépe odůvodněná?
+- Nevznikly zbytečné kopie interních, osobních nebo zákaznických detailů?
+- Má rozhodnutí po prvním použití jednu větu?
+- Je případná oprava malá a konkrétní?
+- Je jasné, kdy se rytmus zkontroluje znovu?
+
+Zavedená změna je důvěryhodná až po prvním použití. Do té doby je to jen dobrý úmysl s hezkou kartou. První kontrola nemá tým unavit dalším procesem. Má rychle ukázat, jestli změna opravdu odstranila tření, drží jeden zdroj pravdy a nepřenáší zbytečná data do nových koutů systému.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FB o kontrole zavedené změny po prvním použití: ověření reálného cyklu, porovnání se slibem změny, hledání návratu staré práce, privacy-first kontrola datové stopy, rozhodovací věta, drobná oprava a kontrolní karta.
 - 2026-05-13: Doplněna Příloha FA o zavedení změny rytmu po kontrole tří cyklů: změnová věta, mapa dopadu, aktualizace zdroje pravdy, pracovní komunikace týmu, privacy-first úklid datové stopy, první ověření a změnová karta.
 - 2026-05-13: Doplněna Příloha EZ o kontrole provozního rytmu po prvních třech cyklech: návrat k původnímu slibu, reálné průchody, třídění tření, vlastnictví bez mikromanagementu, privacy-first datová stopa, rozhodnutí o stavu rytmu a aktualizace provozní karty.
 - 2026-05-12: Doplněna Příloha EY o převodu ověřeného rozšíření do běžného provozního rytmu: rozhodnutí, zda změna rytmus zaslouží, napojení na existující pracovní cyklus, zkrácení na provozní pravidlo, vlastnictví, privacy-first minimum, revize životnosti a provozní karta.
