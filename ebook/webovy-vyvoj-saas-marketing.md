@@ -50686,8 +50686,293 @@ Pravidla workshopu:
 
 Kvartální kontrola má chránit standard před dvěma extrémy. První je zapomenutí: pravidlo formálně existuje, ale nikdo ho nepoužívá. Druhý je bobtnání: každá kontrola přidá další odstavec, až se z praktického pravidla stane malá encyklopedie. Dobrý trvalý standard zůstává krátký, používaný a pravdivý. A když přestane být pravdivý, kvartální kontrola má odvahu ho zkrátit, přesunout nebo ukončit.
 
+## Příloha FU: Převod kvartální kontroly onboardingového standardu do dalšího cyklu
+
+Kvartální kontrola má hodnotu jen tehdy, když po ní vznikne další provozní krok. Ne velký projekt, ne nová sada porad, ne interní pocit, že jsme "něco prošli". Jeden další cyklus, který vezme rozhodnutí z kontroly a převede ho do běžné práce.
+
+Tato příloha navazuje na Přílohu FT. Tam jsme ověřili, jestli trvalý onboardingový standard pořád pomáhá, jestli nezestárl a jestli nezvětšuje zbytečnou datovou stopu. Tady z výsledku uděláme další provozní rytmus: co se mění, kdo to vlastní, kdy se to ověří a co se vědomě nechává být.
+
+### 1. Přeložte rozhodnutí do stavu
+
+Po kvartální kontrole standard obvykle skončí v jednom z pěti stavů:
+
+- ponechat beze změny,
+- ponechat s jednou drobnou úpravou,
+- zkrátit nebo přesunout blíž k pracovnímu místu,
+- vrátit na jeden cyklus do opravného režimu,
+- archivovat nebo sloučit s jiným standardem.
+
+Stav musí být jasný, protože každý stav znamená jiný další krok. Pokud napíšete jen "standard zkontrolován", nikdo neví, jestli má něco udělat. To je provozní verze slovíčkaření. Vypadá hotově, ale práce se jen schovala.
+
+Praktická karta:
+
+```markdown
+# Stav po kvartální kontrole
+
+Standard:
+Datum kontroly:
+Rozhodnutí:
+Nový stav:
+Vlastník:
+Jedna změna:
+Kde se změna projeví:
+Kdy ověříme:
+Co vědomě neřešíme:
+```
+
+Příklad:
+
+```markdown
+Rozhodnutí:
+Standard ponecháváme, ale hraniční příklad přesouváme přímo do support šablony.
+
+Nový stav:
+Ponechat s jednou drobnou úpravou.
+
+Jedna změna:
+Doplnit anonymizovaný hraniční příklad do šablony odpovědi na onboardingový dotaz.
+
+Kdy ověříme:
+Při prvních třech použitích šablony v dalším měsíci.
+```
+
+Tento zápis je krátký, ale chrání před zmatkem. Z kontroly nevznikne mlhavý úkol "podívat se na standard". Vznikne konkrétní pracovní změna.
+
+### 2. Upravte kanonické místo, ne všechny kopie ručně
+
+Pokud standard existuje na více místech, problém není jen text. Problém je zdroj pravdy. Po kvartální kontrole vždy určete, kde je kanonická verze a které kopie mají zmizet, přesměrovat nebo zůstat jen jako odkaz.
+
+Kontrolní otázky:
+
+- Kde člověk standard reálně potřebuje při práci?
+- Je kanonické místo stejné jako pracovní místo?
+- Existují staré kopie v onboarding balíčku, support šablonách, interní wiki nebo osobních poznámkách?
+- Která kopie se má smazat a která jen odkázat na zdroj pravdy?
+- Jak poznáme, že nový člověk neskončí u staré verze?
+
+Nejčastější chyba je ručně opravit tři dokumenty a doufat, že se už nerozejdou. Rozejdou. Stačí měsíc, jedna drobná změna a jedno "rychle to zkopíruju". Lepší je mít jedno kanonické pravidlo a do šablon vkládat jen krátkou pracovní verzi nebo odkaz.
+
+Příklad:
+
+```markdown
+Kanonické místo:
+Onboarding / Support / Zákaznická data v odpovědích
+
+Pracovní zkratka v šabloně:
+"Nepřepisujte zákaznickou zprávu do poznámek. Popište typ problému a použijte anonymizovaný příklad."
+
+Staré kopie:
+- osobní poznámka support lead: smazat
+- onboarding checklist: nahradit odkazem
+- support šablona: ponechat jen pracovní zkratku
+```
+
+Codyho komentář: když má standard pět "zdrojů pravdy", nemá zdroj pravdy. Má malou občanskou válku dokumentů. A dokumenty, na rozdíl od lidí, málokdy samy uznají porážku.
+
+### 3. Přidejte ověřovací háček do běžné práce
+
+Další cyklus nesmí stát na tom, že si někdo za měsíc vzpomene. Vložte ověření tam, kde práce přirozeně probíhá.
+
+Ověřovací háček může být:
+
+- jedna otázka v týdenním support review,
+- položka v onboarding checklistu nové role,
+- krátká kontrola při prvních třech odpovědích nového člověka,
+- poznámka v šabloně, kterou člověk používá,
+- automatický odkaz z kanonického indexu,
+- měsíční pětiminutové review vlastníka standardu.
+
+Špatný háček:
+
+```markdown
+Za měsíc se k tomu vrátíme.
+```
+
+Silnější háček:
+
+```markdown
+Při prvních třech použitích support šablony vlastník zkontroluje, jestli nový hraniční příklad zabránil kopírování zákaznických zpráv do interních poznámek.
+```
+
+Háček má být malý a konkrétní. Pokud kvůli němu vznikne nová porada, nový dashboard a nová tabulka, přehnali jste to. Cílem je ověřit změnu v provozu, ne vyrábět nový proces kolem procesu.
+
+### 4. Ošetřete privacy-first nálezy jako uzavřené změny
+
+Privacy-first nález nesmí skončit jen jako poznámka v zápisu. Pokud kontrola našla zbytečná data, staré screenshoty, kopie zákaznické zprávy nebo nejasný přístup, uzavřete to konkrétně.
+
+U každého nálezu napište:
+
+```markdown
+Nález:
+Rozhodnutí: ponechat / anonymizovat / smazat / omezit přístup / přesunout
+Vlastník:
+Termín:
+Ověření:
+```
+
+Příklad:
+
+```markdown
+Nález:
+V jedné onboardingové ukázce zůstalo reálné jméno zákaznického projektu.
+
+Rozhodnutí:
+Anonymizovat a nahradit fiktivním názvem.
+
+Vlastník:
+Support lead.
+
+Ověření:
+Kontrola upravené šablony před dalším použitím v onboarding balíčku.
+```
+
+Privacy-first práce má být dokončitelná. Nestačí říct "příště si dáme pozor". Pozor je dobrý lidský úmysl, ale špatný systémový mechanismus. Pokud nechcete opakování, změňte šablonu, odkaz, příklad, oprávnění nebo retenční pravidlo.
+
+### 5. Zapište, co se nemění
+
+Po kontrole je stejně důležité napsat, co se měnit nebude. Tým tím chrání rozsah a snižuje pokušení přidávat práci jen proto, že se při kontrole objevily zajímavé nápady.
+
+Příklad:
+
+```markdown
+Co vědomě neřešíme:
+- Nepřepisujeme celý onboarding balíček.
+- Nepřidáváme novou povinnou kontrolu pro všechny role.
+- Neřešíme obecnou dokumentaci supportu.
+- Neotevíráme výběr nového support nástroje.
+```
+
+To není lenost. To je disciplína. Kvartální kontrola jednoho standardu nemá být tajný vstup do reorganizace celého týmu. Pokud se během ní objeví větší téma, zapište ho do backlogu zvlášť a vraťte se k němu mimo tento cyklus.
+
+### 6. Předejte změnu lidem, kteří ji skutečně použijí
+
+Změna standardu není hotová, dokud o ní neví lidé, kteří podle ní pracují. Neposílejte dlouhé oznámení všem. Pošlete krátkou informaci těm, kterých se týká.
+
+Dobrá zpráva:
+
+```markdown
+Upravili jsme onboardingovou support šablonu pro práci se zákaznickými daty.
+
+Změna:
+Hraniční příklad je nově přímo v šabloně, ne jen v kanonickém standardu.
+
+Proč:
+Při kvartální kontrole jsme zjistili, že nový člověk kanonický příklad při psaní odpovědi nehledal.
+
+Co dělat:
+Při příští odpovědi použijte novou verzi šablony a nekopírujte zákaznickou zprávu do interních poznámek.
+```
+
+Krátké, konkrétní, s důvodem. Lidé nemají hádat, co se změnilo a proč. Pokud je změna důležitá pro privacy-first provoz, napište to přímo.
+
+### 7. Uzavřete cyklus při prvním ověření
+
+Další cyklus má konec. Po prvním ověření napište, jestli změna fungovala.
+
+Možné závěry:
+
+- Funguje: ponechat v běžném režimu.
+- Částečně: udělat jednu drobnou korekci.
+- Nefunguje: vrátit do opravného režimu.
+- Není použití: zkontrolovat, jestli standard pořád odpovídá reálné práci.
+
+Krátký záznam:
+
+```markdown
+# Ověření po kvartální změně
+
+Změna:
+Ověřeno na:
+Výsledek:
+Privacy-first dopad:
+Rozhodnutí:
+Další kontrola:
+```
+
+Příklad:
+
+```markdown
+Výsledek:
+Ve třech odpovědích nebyly kopírované zákaznické zprávy do interních poznámek. Nový hraniční příklad byl použit dvakrát bez pomoci.
+
+Privacy-first dopad:
+Snížena citlivá stopa onboardingových výstupů.
+
+Rozhodnutí:
+Ponechat v běžném režimu, další kontrola za kvartál.
+```
+
+Tím se cyklus uzavře. Bez tohoto kroku se drobné změny hromadí bez důkazu, že pomohly.
+
+### Šablona převodu do dalšího cyklu
+
+```markdown
+# Převod kvartální kontroly do dalšího cyklu
+
+Standard:
+Kanonické místo:
+Datum kvartální kontroly:
+Rozhodnutí po kontrole:
+Nový stav:
+
+Jedna změna:
+Kde se projeví:
+Vlastník:
+Termín:
+
+Privacy-first nález:
+Rozhodnutí k nálezu:
+
+Kopie k úklidu:
+
+Ověřovací háček:
+
+Komu změnu oznámit:
+
+Co vědomě neřešíme:
+
+První ověření:
+
+Rozhodnutí po ověření:
+```
+
+### Mini workshop: 25 minut po kvartální kontrole
+
+Agenda:
+
+1. 5 minut: potvrdit stav standardu po kontrole.
+2. 5 minut: vybrat jednu změnu a kanonické místo.
+3. 5 minut: uzavřít privacy-first nálezy.
+4. 4 minuty: určit ověřovací háček.
+5. 3 minuty: zapsat, co se vědomě neřeší.
+6. 3 minuty: domluvit předání a první ověření.
+
+Pravidla:
+
+- Neotevírejte znovu celou kvartální kontrolu.
+- Každý privacy-first nález musí mít stav.
+- Jedna změna stačí, pokud je správná.
+- Pokud je potřeba velká oprava, vraťte standard do opravného režimu místo nafukování trvalého režimu.
+- Změna má být ověřitelná při reálné práci, ne jen při další poradě.
+
+### Checklist
+
+- Má standard po kvartální kontrole jasný stav?
+- Je rozhodnutí přeložené do jedné konkrétní změny nebo vědomého ponechání beze změny?
+- Je určeno kanonické místo standardu?
+- Jsou staré kopie smazané, odkázané nebo označené jako archiv?
+- Má privacy-first nález vlastní rozhodnutí, vlastníka a ověření?
+- Je jasné, kde se změna projeví v běžné práci?
+- Existuje ověřovací háček bez nové zbytečné administrativy?
+- Víte, komu změnu oznámit a komu ne?
+- Je zapsané, co se vědomě neřeší?
+- Má další cyklus jasný okamžik uzavření?
+
+Převod kvartální kontroly do dalšího cyklu je malý provozní most. Na jedné straně je kontrola, která našla pravdu o standardu. Na druhé straně je běžná práce, kde se má pravda projevit. Když most chybí, kontrola zůstane zápisem. Když je most krátký, jasný a privacy-first, standard se opravdu zlepší bez toho, aby tým získal další vrstvu zbytečné administrativy.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FU o převodu kvartální kontroly onboardingového standardu do dalšího cyklu: stav po kontrole, kanonické místo, ověřovací háček, uzavření privacy-first nálezů, vědomé neřešení širšího rozsahu, předání změny, první ověření, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FT o kvartální kontrole trvalého onboardingového standardu: návrat k pracovnímu slibu, tři reálné průchody, rozlišení dodržení, užitečnosti a ceny, kontrola stárnutí standardu, privacy-first kontrola výstupů, hledání obcházení, jednověté rozhodnutí, jedna malá změna, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FS o převodu stabilizované onboardingové opravy do trvalého standardu: výběr opakovatelného výsledku, kanonické místo podle okamžiku použití, stabilní jazyk pravidla, uzavření opravného režimu, životnost standardu, napojení na onboarding nové role, privacy-first úklid, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FR o měsíční kontrole standardizované opravy onboardingového balíčku: návrat k původnímu důvodu, výběr reálného vzorku použití, sledování samostatnosti, skrytá podpora, privacy-first kontrola datové stopy, rozhodnutí stavu opravy, úprava kanonického místa, šablona, mini workshop a checklist.
