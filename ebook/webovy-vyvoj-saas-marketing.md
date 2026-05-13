@@ -49854,8 +49854,240 @@ Když workshop nestihnete za půl hodiny, pravděpodobně standardizujete příl
 
 Standardizovaná oprava onboardingového balíčku má jednu jednoduchou ambici: aby příští člověk nemusel znovu objevovat stejnou hranu. Ne proto, že tým napsal víc dokumentace, ale proto, že správná verze je na správném místě, staré varianty nepřekážejí a další kontrola má jasný spouštěč.
 
+## Příloha FR: Kontrola standardizované opravy onboardingového balíčku po prvním měsíci
+
+Standardizovaná oprava onboardingového balíčku není hotová jen proto, že je zapsaná v kanonickém místě. Hotová začne být až ve chvíli, kdy ji lidé používají bez zvláštního připomínání, nový člověk podle ní projde reálnou situací a tým kvůli ní nevyrábí další skrytou podporu.
+
+První měsíční kontrola má proto jednoduchý cíl: ověřit, jestli oprava přežila běžný provoz. Ne laboratorní test. Ne nadšené "vypadá to líp". Skutečný měsíc, skuteční lidé, skutečné pracovní situace.
+
+Dobrá kontrola neřeší celý onboardingový systém znovu. Vrací se ke konkrétní standardizované opravě a ptá se:
+
+- Použila se v reálném onboardingu?
+- Pomohla novému člověku udělat správné rozhodnutí samostatněji?
+- Snížila počet dodatečných vysvětlení, oprav nebo improvizovaných zpráv?
+- Nevytvořila novou zbytečnou evidenci, kopie dat nebo výjimky?
+- Má zůstat beze změny, upravit se, nebo se má vrátit do experimentálního režimu?
+
+Měsíc je dost dlouhý na první provozní signály a dost krátký na to, aby se chyba nerozlezla do dalších rolí, šablon a zvyků.
+
+### 1. Začněte původním důvodem opravy
+
+Nezačínejte dojmem z posledního týdne. Začněte otázkou, proč oprava vůbec vznikla. Pokud si tým nepamatuje původní důvod, je to první varovný signál: standard možná nemá dost jasný zdroj pravdy.
+
+Vraťte se k poslední standardizační kartě a vytáhněte tři věci:
+
+- Jaký problém měla oprava odstranit.
+- V jaké pracovní situaci se měla použít.
+- Podle čeho se mělo poznat, že funguje.
+
+Příklad:
+
+Oprava: "Před prvním samostatným převzetím zákaznického dotazu musí nový člověk projít dvě hraniční ukázky: běžný dotaz a dotaz s privacy-first eskalací."
+
+Původní problém: nový člověk uměl odpovědět na jednoduchý dotaz, ale neuměl poznat, kdy už potřebuje eskalovat kvůli datům, přístupům nebo zákaznickému kontextu.
+
+Očekávaný signál: při prvních třech samostatných dotazech umí nový člověk správně rozlišit běžnou odpověď, interní ověření a eskalaci.
+
+Takto formulovaný návrat k důvodu drží kontrolu u práce, ne u nálady týmu.
+
+### 2. Vyberte měsíční vzorek použití
+
+Kontrola nepotřebuje velkou analytiku. Potřebuje poctivý vzorek. Vyberte jen situace, kde se oprava opravdu měla projevit.
+
+U onboardingového balíčku to může být:
+
+- První samostatný průchod nového člověka.
+- První zákaznický dotaz po onboardingu.
+- První práce s interní šablonou.
+- První předání výstupu ke kontrole.
+- První situace, kde měl nový člověk eskalovat.
+
+Ke každé situaci zapište minimum:
+
+- Datum nebo období.
+- Role nebo pracovní kontext, ne osobní hodnocení člověka.
+- Jaká část balíčku se použila.
+- Jaký výsledek vznikl.
+- Jestli byla potřeba dodatečná pomoc.
+
+Nesbírejte víc, než potřebujete k rozhodnutí. Měsíční kontrola nemá být výkonový profil nového člověka. Má být kontrola toho, jestli standardizovaná oprava pomáhá systému.
+
+### 3. Sledujte samostatnost, ne poslušnost
+
+Onboardingový standard není nástroj k tomu, aby lidé mechanicky odškrtávali kroky. Má jim pomoct dělat správná rozhodnutí ve správném kontextu. Proto při kontrole nesledujte jen otázku "dodržel postup?". Sledujte otázku "pomohl postup udělat lepší pracovní rozhodnutí?".
+
+U každého průchodu se ptejte:
+
+- Věděl nový člověk, jaký výstup se čeká?
+- Našel správné kanonické místo bez lovení v chatu?
+- Poznal hranici, kdy už má eskalovat?
+- Použil správný příklad nebo šablonu?
+- Nevyrobil zbytečnou kopii citlivých dat?
+- Uměl vysvětlit, proč postup zvolil?
+
+Pokud člověk postup přesně dodržel, ale pořád nevěděl proč, standard je křehký. Pokud postup mírně upravil, ale zachoval správné rozhodnutí, možná je standard příliš úzký nebo zbytečně detailní.
+
+Codyho komentář: onboarding není náboženský rituál se správným pořadím kliknutí. Je to most k samostatnosti. Když člověk projde most a pořád potřebuje, aby ho někdo nesl, tak ten most možná krásně vypadá, ale funkčně je to dekorace přes příkop.
+
+### 4. Najděte skrytou podporu
+
+Nejčastější selhání onboardingového balíčku se neukáže v dokumentu. Ukáže se v neviditelné práci kolem něj. Mentor dopíše vysvětlení do chatu. Vedoucí opraví výstup bez záznamu. Někdo pošle starý screenshot, protože "je to rychlejší". Tým vytvoří soukromou zkratku, která obchází kanonický postup.
+
+Proto během měsíční kontroly hledejte skrytou podporu:
+
+- Kolikrát se nový člověk ptal na věc, kterou měla oprava vyřešit?
+- Které odpovědi vznikly mimo kanonický balíček?
+- Opravoval někdo výstup opakovaně stejným způsobem?
+- Vznikla nová soukromá poznámka, dočasný dokument nebo kopie příkladu?
+- Použil tým starou verzi šablony, protože nová byla hůř dohledatelná?
+
+Skrytá podpora není ostuda. Je to diagnostika. Problém je, když ji tým nezapíše a další měsíc se tváří, že onboarding funguje sám.
+
+Praktické pravidlo: pokud se stejná doplňující věta objevila v chatu víc než dvakrát, buď patří do balíčku, nebo balíček neumí navést člověka ke správnému místu.
+
+### 5. Proveďte privacy-first kontrolu měsíční stopy
+
+Onboarding pracuje s příklady, screenshoty, zákaznickými situacemi, přístupy a někdy i s citlivým kontextem. První měsíc po opravě je dobrý okamžik zkontrolovat, jestli standard nezlepšil samostatnost tím, že potichu zhoršil datovou hygienu.
+
+Zkontrolujte:
+
+- Jestli se pro onboarding používala fiktivní nebo anonymizovaná data tam, kde to stačí.
+- Jestli nevznikly nové kopie zákaznických screenshotů.
+- Jestli pomocné poznámky neobsahují osobní údaje, tokeny, přístupy nebo interní detaily mimo nutný kontext.
+- Jestli má nový člověk jen přístupy potřebné pro roli.
+- Jestli byly dočasné přístupy a testovací účty po průchodu zrušené nebo omezené.
+- Jestli je jasné, kde je kanonický příklad a kde jen dočasná pracovní poznámka.
+
+Privacy-first onboarding má jednu zásadu: učit na nejméně citlivém materiálu, který ještě věrně simuluje rozhodnutí. Pokud fiktivní případ naučí totéž jako reálný zákaznický screenshot, použijte fiktivní případ. Reálná data nejsou výuková dekorace.
+
+### 6. Rozhodněte stav opravy
+
+Po měsíci nesmí kontrola skončit jen poznámkou "probráno". Potřebuje rozhodnutí. Stačí čtyři možné stavy:
+
+- `ponechat`: oprava funguje, nepřidává zbytečné tření a není potřeba zásah.
+- `zjednodušit`: princip funguje, ale text, příklad nebo postup je příliš těžký.
+- `doplnit`: chybí jedna konkrétní hraniční situace, ukázka nebo odkaz.
+- `vrátit do opravy`: standardizace byla předčasná a pravidlo potřebuje další reálné ověření.
+
+Rozhodnutí musí mít jednu větu:
+
+"Opravu ponecháváme, protože během prvního měsíce pomohla ve třech samostatných průchodech rozlišit běžnou odpověď od privacy-first eskalace bez dodatečných zákaznických dat."
+
+Nebo:
+
+"Opravu zjednodušujeme, protože nový člověk správně pochopil eskalační hranici, ale dvakrát hledal příklad ve špatné části balíčku."
+
+Jedna věta chrání tým před tím, aby z měsíční kontroly vznikl další neurčitý backlog.
+
+### 7. Upravte jen kanonické pracovní místo
+
+Když kontrola ukáže potřebu změny, upravte jedno kanonické místo. Ne pět kopií najednou bez rozmyslu. Ne nový dokument. Ne další vysvětlující vlákno v chatu jako "dočasné řešení", které tam za půl roku pořád bude čekat jako malá časovaná bomba v botách.
+
+Postup:
+
+1. Najděte kanonický onboardingový balíček.
+2. Upravte nejmenší část, která změnu nese.
+3. Zkontrolujte odkazy z indexu, standardu a changelogu.
+4. Označte staré kopie jako nahrazené nebo je odstraňte.
+5. Do měsíční karty napište, co se změnilo a proč.
+
+Pokud změna vyžaduje novou šablonu, nejdřív si ověřte, že nejde jen o lepší větu v existující šabloně. Většina onboardingových oprav nepotřebuje nový artefakt. Potřebuje méně mlhy.
+
+### 8. Připravte další kontrolu podle rizika
+
+Ne každá oprava potřebuje další měsíční review. Pokud funguje a týká se nízkorizikové situace, stačí ji zahrnout do běžného kvartálního rytmu standardů. Pokud se dotýká dat, přístupů, zákaznické komunikace nebo rozhodnutí s vyšším dopadem, nastavte kratší kontrolu.
+
+Jednoduché pravidlo:
+
+- Nízké riziko: další kontrola v běžném revizním rytmu.
+- Střední riziko: další kontrola po dalším reálném průchodu.
+- Vysoké riziko: kontrola po každém z prvních tří průchodů.
+
+Vysoké riziko neznamená drama. Znamená, že chyba by byla drahá, citlivá nebo viditelná pro zákazníka. Tady je lepší malá kontrola včas než velký úklid pozdě.
+
+### Šablona měsíční kontroly standardizované opravy
+
+Název opravy:
+
+Původní problém:
+
+Pracovní situace:
+
+Kanonické místo:
+
+Kontrolované období:
+
+Použití v praxi:
+
+- Průchod 1:
+- Průchod 2:
+- Průchod 3:
+
+Signály samostatnosti:
+
+- Co šlo bez pomoci:
+- Kde byla potřeba pomoc:
+- Jaké rozhodnutí bylo správně pochopené:
+
+Skrytá podpora:
+
+- Dotazy v chatu:
+- Tiché opravy:
+- Dočasné poznámky nebo kopie:
+
+Privacy-first kontrola:
+
+- Použitá data:
+- Dočasné přístupy:
+- Kopie a screenshoty:
+- Co se má smazat nebo omezit:
+
+Rozhodnutí:
+
+Stav: `ponechat` / `zjednodušit` / `doplnit` / `vrátit do opravy`
+
+Jednověté zdůvodnění:
+
+Změna v kanonickém místě:
+
+Další kontrola:
+
+### Mini workshop: 30 minut na měsíční kontrolu
+
+Agenda:
+
+1. 5 minut: připomenout původní důvod opravy.
+2. 8 minut: projít reálné měsíční použití.
+3. 7 minut: najít skrytou podporu a tření.
+4. 5 minut: udělat privacy-first kontrolu stopy.
+5. 5 minut: rozhodnout stav a zapsat další krok.
+
+Pravidla workshopu:
+
+- Nehodnoťte člověka, hodnoťte systém.
+- Nepřidávejte nový dokument, dokud nestačí upravit existující místo.
+- Každý nález převeďte na rozhodnutí: ponechat, zjednodušit, doplnit, nebo vrátit do opravy.
+- Smažte dočasné podpůrné materiály, které už nemají účel.
+- Pokud si nejste jistí, nastavte další kontrolu podle rizika, ne podle pocitu.
+
+### Checklist
+
+- Vrátili jste se k původnímu důvodu opravy?
+- Vybrali jste jen reálné průchody, kde se oprava měla projevit?
+- Sledujete samostatnost rozhodnutí, ne jen mechanické dodržení kroků?
+- Zapsali jste skrytou podporu z chatu, kontrol a tichých oprav?
+- Zkontrolovali jste datovou stopu, screenshoty, přístupy a dočasné poznámky?
+- Rozhodli jste stav opravy jednou jasnou větou?
+- Upravili jste pouze kanonické pracovní místo?
+- Odstranili jste nebo označili staré kopie a dočasné materiály?
+- Nastavili jste další kontrolu podle rizika?
+- Je výsledek srozumitelný i člověku, který u měsíční kontroly nebyl?
+
+První měsíční kontrola je protiváha dokumentačnímu optimismu. Oprava může být napsaná dobře, ale teprve provoz ukáže, jestli z ní vznikl pracovní návyk. Pokud ano, nechte ji být a nenechte tým přidávat další vrstvu jen z nervozity. Pokud ne, opravte nejmenší místo, které brání samostatné práci. Onboarding má růst schopnost lidí, ne hmotnost dokumentace.
+
 ## Pracovní log
 
+- 2026-05-13: Doplněna Příloha FR o měsíční kontrole standardizované opravy onboardingového balíčku: návrat k původnímu důvodu, výběr reálného vzorku použití, sledování samostatnosti, skrytá podpora, privacy-first kontrola datové stopy, rozhodnutí stavu opravy, úprava kanonického místa, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FQ o standardizaci ověřené opravy onboardingového balíčku: rozhodnutí, zda oprava patří do standardu, přepis do pracovního pravidla, jedno kanonické místo, kontrolní háček, úklid starých variant, standardizační karta, krátké předání týmu, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FP o ověření opravy onboardingového balíčku po prvním použití: návrat ke kritériu úspěchu, výběr reálného průchodu, sledování práce místo člověka, tři signály rozhodnutí/samostatnosti/datové stopy, stav opravy, privacy-first uzavření, artefakty, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FO o převodu kontroly onboardingového rytmu do jedné opravy balíčku: výběr problému podle samostatnosti, opravná věta, jedno pracovní místo, zkracování místo nabalování, privacy-first kontrola, ověření na reálném průchodu, šablona, mini workshop a checklist.
