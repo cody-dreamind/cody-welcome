@@ -53764,8 +53764,275 @@ Pravidla:
 
 První kontrola provozního standardu chrání tým před dokumentační iluzí. Standard není hotový tím, že existuje. Je hotový až tehdy, když pomůže v práci, jde najít včas, nevytvoří zbytečnou evidenci a dá se po prvním použití klidně opravit. To je dobrý provozní zvyk: méně velkých prohlášení, víc malých ověřených zlepšení.
 
+## Příloha GE: Převod první kontroly standardu do další provozní verze
+
+Po první kontrole provozního standardu máte v ruce něco cennějšího než názor na dokumentaci. Máte důkaz z práce. Vidíte, kde standard pomohl, kde se obešel, kde se nedal najít, kde vytvořil tření a kde by mohl zbytečně rozmnožit data. Další krok není založit novou metodiku. Další krok je převést nález do malé provozní verze standardu.
+
+Tato příloha navazuje na Přílohu GD. Tam jste ověřili standard v prvním pracovním cyklu. Tady z kontroly uděláte další verzi: jednu změnu standardu, jedno upravené pracovní místo, jasné zavření starých stop a jednoduché ověření v dalším cyklu.
+
+Dobrá další verze standardu má odpovědět na čtyři otázky:
+
+- Co přesně se mění?
+- Kde se změna projeví v práci?
+- Co tím naopak nepřepisujeme?
+- Jak poznáme v příštím cyklu, že změna pomohla?
+
+Když tyto čtyři odpovědi chybí, standard se začne rozpouštět do poznámek, výjimek a ústních dohod. Tým pak sice "něco zlepšil", ale za měsíc už nikdo neví, která verze platí.
+
+### 1. Rozlište opravu standardu od opravy okolí
+
+Ne každý nález patří přímo do textu standardu. Někdy je standard dobrý, ale chybí odkaz v checklistu. Někdy je problém v názvu. Někdy je špatně šablona, do které má člověk výsledek zapisovat. A někdy standard opravdu žádá práci, která nedává smysl.
+
+Rozlišujte čtyři typy změn:
+
+- Změna standardu: upravuje pravidlo, odpovědnost nebo povinný krok.
+- Změna pracovního místa: přidává odkaz, pole, alias nebo krátký příklad tam, kde člověk pracuje.
+- Změna podpůrného artefaktu: upravuje checklist, šablonu, index nebo onboardingový materiál.
+- Změna provozního zvyku: mění rytmus kontroly, předání nebo rozhodování.
+
+Příklad:
+
+```markdown
+Nález:
+Support tým při předání hledal pravidlo pro interní identifikátory až po dokončení poznámky.
+
+Špatná reakce:
+Přepsat celý standard o identifikátorech.
+
+Lepší reakce:
+Do support checklistu přidat krátký řádek "interní identifikátor jen jako odkaz do kanonického systému" a odkaz na standard.
+
+Typ změny:
+Změna pracovního místa.
+```
+
+Codyho komentář: když každé tření vyřešíte přepisem hlavního standardu, brzy budete mít standard, který sice odpovídá na všechno, ale nikdo ho nepoužije. Často stačí posunout správnou větu blíž k práci.
+
+### 2. Napište změnovou větu
+
+Změnová věta drží rozsah. Bez ní se malá oprava snadno promění v generální úklid dokumentace.
+
+Dobrá změnová věta:
+
+```markdown
+Po první kontrole upravujeme [konkrétní místo], aby [role] při [pracovní situaci] mohla [rozhodnutí nebo akce] bez [konkrétní tření nebo zbytečná datová stopa].
+```
+
+Příklady:
+
+```markdown
+Po první kontrole upravujeme support checklist, aby support specialista při předání eskalace věděl, kdy stačí odkaz na ticket, bez kopírování zákaznických údajů do pomocné tabulky.
+```
+
+```markdown
+Po první kontrole upravujeme kanonický index standardů, aby nový člen týmu našel pravidlo přes výrazy "screenshot", "ticket" a "zákaznická poznámka" bez znalosti interního názvu standardu.
+```
+
+```markdown
+Po první kontrole zkracujeme kartu standardu, aby vlastník projektu při měsíčním review viděl rozhodovací pravidlo na první obrazovce bez čtení historického kontextu.
+```
+
+Slabá změnová věta zní takto:
+
+```markdown
+Zlepšíme práci se standardy a doplníme dokumentaci.
+```
+
+To není věta pro provoz. To je mlha. Neříká, kdo bude dělat co, kde se změna projeví ani co už je hotovo.
+
+### 3. Aktualizujte jedno kanonické místo a napojené odkazy
+
+Další verze standardu musí mít jeden zdroj pravdy. Pokud změnu rozkopírujete do pěti dokumentů, získáte pět budoucích nesouladů. Změňte kanonické místo a napojené pracovní odkazy jen tam, kde jsou potřeba k použití.
+
+Minimální postup:
+
+1. Upravte hlavní standard nebo pracovní artefakt podle typu změny.
+2. Přidejte číslo nebo datum verze.
+3. Zapište jednu větu do changelogu.
+4. Aktualizujte odkazy v kanonickém indexu.
+5. Upravte nejbližší checklist, pokud je to místo reálného použití.
+6. Staré kopie označte jako nahrazené nebo je smažte.
+
+Příklad zápisu:
+
+```markdown
+Verze:
+2026-05-14
+
+Změna:
+Přidán alias "ticket v poznámce" do indexu a krátké pravidlo do support checklistu.
+
+Důvod:
+Při první kontrole jeden člověk standard nenašel v pracovním okamžiku.
+
+Kanonické místo:
+Provozní standard: interní identifikátory v supportu.
+
+Napojené místo:
+Support checklist pro eskalace.
+```
+
+Pozor na "rychlé kopie". Screenshot upraveného pravidla v chatu, přeposlaný export šablony nebo duplicitní poznámka v projektovém dokumentu jsou pohodlné jen první den. Potom z nich vznikne nejasnost, která verze platí.
+
+### 4. Zavřete starou stopu opravy
+
+Každá kontrola a oprava po sobě nechává pracovní stopu: poznámky z workshopu, dočasné tabulky, komentáře v dokumentech, testovací příklady, anonymizované ukázky, odkazy na tickety. Část je užitečná, část má po rozhodnutí zmizet.
+
+Po vydání další verze projděte:
+
+- dočasné poznámky z kontroly,
+- pomocné tabulky,
+- komentáře v dokumentu,
+- testovací příklady,
+- odkazy na citlivější interní záznamy,
+- staré verze checklistů,
+- zprávy v chatu, které obsahují pracovní kopie pravidla.
+
+Rozhodněte u každé položky:
+
+- ponechat jako součást changelogu,
+- ponechat jen anonymizovaný závěr,
+- přesunout do kanonického systému,
+- smazat po vydání verze,
+- nahradit odkazem.
+
+Privacy-first pravidlo: důkaz o rozhodnutí neznamená archiv všech podkladů. Často stačí anonymizovaný nález, změnová věta, odkaz na kanonický systém a datum další kontroly.
+
+### 5. Předejte změnu lidem, kteří ji použijí
+
+Změna standardu není hotová zápisem do dokumentu. Hotová je až tehdy, když člověk v pracovním okamžiku narazí na novou verzi a ví, co se od něj mění. Přenos má být krátký, konkrétní a navázaný na roli.
+
+Krátké oznámení:
+
+```markdown
+Změnili jsme support checklist pro eskalace.
+
+Co je nové:
+U interních identifikátorů zapisujeme do předávací poznámky jen anonymizovaný souhrn a odkaz do kanonického systému.
+
+Proč:
+Při první kontrole vznikala pomocná tabulka se zbytečnými kopiemi údajů.
+
+Kde to použít:
+Při každém předání eskalace.
+
+Kde je zdroj pravdy:
+[odkaz na support checklist]
+```
+
+Neposílejte lidem dlouhý zápis z kontroly, pokud ho nepotřebují. Pro uživatele standardu je důležité: co se mění, kde to najdu, kdy to použiju a koho se zeptám.
+
+### 6. Připravte ověření v dalším cyklu
+
+Další verzi standardu ověřujte v místě, kde měla změna pomoct. Nečekejte tři měsíce na velký audit, pokud se změna používá každý týden. Stačí krátká kontrola po jednom nebo dvou reálných průchodech.
+
+Ověřovací otázky:
+
+- Našel člověk upravené pravidlo rychleji?
+- Ubyla pomocná evidence?
+- Bylo rozhodnutí jasnější?
+- Nevznikl nový ruční krok?
+- Zůstala data v kanonickém systému?
+- Je potřeba další malá oprava, nebo je verze stabilní?
+
+Mini záznam:
+
+```markdown
+Ověřovací cyklus:
+Situace:
+Očekávané zlepšení:
+Co se stalo:
+Zbylé tření:
+Privacy-first stopa:
+Rozhodnutí:
+```
+
+Když změna nepomohla, není to ostuda. Je to důkaz. Vraťte se ke změnové větě a zeptejte se, jestli jste opravili správné místo.
+
+### Šablona provozní verze po první kontrole
+
+```markdown
+# Další provozní verze standardu
+
+Standard:
+Původní verze:
+Nová verze:
+Vlastník:
+Datum:
+
+Nález z první kontroly:
+
+Typ změny:
+- standard:
+- pracovní místo:
+- podpůrný artefakt:
+- provozní zvyk:
+
+Změnová věta:
+
+Kanonické místo změny:
+Napojené odkazy:
+Napojené checklisty:
+
+Co se nemění:
+
+Privacy-first úklid:
+- dočasné poznámky:
+- pomocné tabulky:
+- staré kopie:
+- citlivější odkazy:
+- retence podkladů:
+
+Krátké oznámení pro tým:
+
+Ověření v dalším cyklu:
+Kdo ověří:
+Kdy:
+Jaké signály sledujeme:
+
+Rozhodnutí po ověření:
+```
+
+### Mini workshop: 30 minut pro další verzi
+
+Agenda:
+
+1. 4 minuty: připomenout nález z první kontroly.
+2. 5 minut: určit, zda jde o změnu standardu, pracovního místa, podpůrného artefaktu nebo zvyku.
+3. 4 minuty: napsat změnovou větu.
+4. 6 minut: vybrat kanonické místo a napojené odkazy.
+5. 4 minuty: projít privacy-first úklid staré stopy.
+6. 4 minuty: připravit krátké oznámení pro tým.
+7. 3 minuty: domluvit ověření v dalším cyklu.
+
+Pravidla:
+
+- Neměňte víc než jednu věc, pokud k tomu nemáte silný důkaz.
+- Nepřidávejte novou evidenci jen proto, že oprava působí důležitě.
+- Nechte starý nález v changelogu, ne v pěti pracovních kopiích.
+- Oznámení pište pro lidi, kteří standard používají, ne pro autory dokumentace.
+- Ověření plánujte v reálném pracovním cyklu.
+
+### Checklist
+
+- Je jasné, který nález z první kontroly řešíte?
+- Rozlišili jste opravu standardu od opravy pracovního místa?
+- Má změna jednu konkrétní změnovou větu?
+- Existuje jeden zdroj pravdy pro novou verzi?
+- Jsou napojené jen ty odkazy, které pomáhají v práci?
+- Je zapsané, co se záměrně nemění?
+- Jsou staré kopie, poznámky a pomocné evidence uklizené?
+- Nevznikla nová zbytečná datová stopa?
+- Dostali lidé krátké oznámení v jazyce své role?
+- Je domluvené ověření v dalším reálném cyklu?
+- Má nová verze vlastníka?
+- Je změna zapsaná v changelogu?
+
+Převod první kontroly do další provozní verze je místo, kde se ukáže, jestli tým umí zlepšovat standardy bez dokumentačního bobtnání. Nevyhrává nejdelší pravidlo. Vyhrává taková verze, kterou člověk najde včas, použije bez zbytečné evidence a po dalším cyklu ji jde klidně znovu zpřesnit.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GE o převodu první kontroly provozního standardu do další provozní verze: rozlišení typů změn, změnová věta, kanonické místo, úklid staré stopy, předání týmu, ověření v dalším cyklu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GD o kontrole provozního standardu po prvním pracovním cyklu: vymezení cyklu, důkazy z reálné práce, dohledatelnost, rozlišení chyby použití a chyby standardu, skrytá práce, privacy-first datová stopa, jedna oprava, stav standardu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GC o převodu ověřeného pravidla do běžného provozního standardu: rozhodnutí, kdy standardizovat, napojení na existující rytmus, vlastnictví, standardová karta, první pracovní místo zavedení, změnové pravidlo, uzavření původní lekce v týmové paměti, šablona, mini workshop a checklist.
 - 2026-05-14: Zpřesněn úvodní návod k použití rukopisu o jednoduchou pracovní větu po každém čtení.
