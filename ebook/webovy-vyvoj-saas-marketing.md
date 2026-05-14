@@ -54835,8 +54835,351 @@ Pravidla:
 
 Kontrola stabilního revizního rytmu po prvním měsíci chrání tým před dvěma extrémy. První extrém je dokumentace bez života: standard existuje, ale nikdo ho nepoužívá. Druhý extrém je dokumentace jako neustálá administrativní zátěž. Dobrý rytmus je mezi tím: dost lehký, aby se opravdu dělal, a dost konkrétní, aby pomáhal rozhodovat.
 
+## Příloha GI: Převod nálezu z kontroly rytmu do jedné úpravy provozu
+
+Kontrola stabilního revizního rytmu má smysl jen tehdy, když po ní vznikne pracovní změna. Ne velká prezentace, ne pět nových pravidel a ne další složka "revize revizí", protože takové složky obvykle žijí stejně dlouho jako novoroční předsevzetí v kancelářské kuchyňce. Stačí jedna úprava, která sníží tření v příštím cyklu.
+
+Tato příloha navazuje na první měsíční kontrolu rytmu. Pomáhá převést nález do provozu tak, aby tým věděl:
+
+- co se mění,
+- proč se to mění,
+- kde se změna projeví,
+- kdo ji vlastní,
+- jak pozná, že pomohla,
+- jaká dočasná data se mají uklidit.
+
+Cíl není vytvořit nový standard. Cíl je opravit jeden slabý bod v tom, jak se standard používá.
+
+### 1. Vyberte jeden nález s nejvyšší provozní hodnotou
+
+Po kontrole rytmu může vzniknout několik nálezů. Některé jsou důležité, některé jen hlučné. Pro další iteraci vyberte jeden. Ne ten nejzajímavější pro diskusi, ale ten, který nejvíc zlepší další použití standardu.
+
+Dobří kandidáti:
+
+- revize probíhá pozdě,
+- vlastník neví, kdy má kontrolu otevřít,
+- tým standard najde až po dotazu v chatu,
+- kontrola vytváří zbytečné kopie,
+- výstup revize není rozhodnutí, ale poznámka bez dalšího kroku,
+- standard je v pořádku, ale není vložený do přirozené pracovní agendy.
+
+Slabí kandidáti:
+
+- "měli bychom to celé přepsat",
+- "někdy doplníme lepší příklady",
+- "někdo by měl být pečlivější",
+- "uděláme větší workshop",
+- "přidáme další tabulku, ať je to vidět".
+
+Příklad výběru:
+
+```markdown
+Všechny nálezy:
+- Revize proběhla o týden později.
+- V záznamu chyběla datová stopa.
+- Jeden člověk nevěděl, kde je kanonická karta standardu.
+
+Vybraný nález:
+Revize proběhla pozdě, protože nebyla v agendě měsíčního sales review.
+
+Proč právě tento:
+Když revize proběhne včas, tým hned zachytí i problém s datovou stopou a dohledatelností.
+```
+
+Codyho komentář: když máte tři nálezy, skoro vždy existuje jeden, který způsobuje nebo zesiluje ty ostatní. Začněte tam. Je to méně efektní než "komplexní transformační iniciativa", ale má to drobnou výhodu: funguje to.
+
+### 2. Napište změnovou větu
+
+Změna musí být srozumitelná bez schůzky. Pokud ji nejde říct jednou větou, ještě není dost jasná.
+
+Formát:
+
+```markdown
+Od příštího cyklu budeme [konkrétní změna] v [pracovní okamžik], aby [očekávaný přínos].
+```
+
+Příklady:
+
+```markdown
+Od příštího cyklu budeme kontrolu příloh u nabídek dělat jako pětiminutový bod měsíčního sales review, aby revize neprobíhala dodatečně po připomenutí.
+```
+
+```markdown
+Od příštího cyklu budeme zapisovat jen rozhodnutí a odkaz na kanonickou nabídku, aby revize nevytvářela screenshoty zákaznických dokumentů.
+```
+
+```markdown
+Od příštího cyklu bude kanonická karta standardu odkazovaná přímo v onboardingové trase role, aby nový člověk nemusel hledat poslední verzi v chatu.
+```
+
+Věta nesmí být obecná:
+
+```markdown
+Špatně:
+Zlepšíme revizní proces a dohledatelnost.
+
+Lépe:
+Přidáme odkaz na kanonickou kartu standardu do stálé agendy měsíčního sales review.
+```
+
+Obecná věta uklidňuje. Konkrétní věta mění práci.
+
+### 3. Určete místo zásahu
+
+Úprava rytmu se má objevit tam, kde tým opravdu pracuje. Ne v dokumentu, který nikdo neotevře v rozhodovací chvíli.
+
+Možná místa zásahu:
+
+- agenda pravidelného review,
+- šablona záznamu,
+- kanonický index standardů,
+- onboardingová trasa role,
+- checklist před odesláním nabídky,
+- provozní karta automatizace,
+- CRM etapa,
+- interní runbook,
+- issue šablona,
+- kalendářový popis pravidelné schůzky.
+
+Rozlišujte tři typy míst:
+
+| Místo | Kdy ho zvolit | Příklad |
+| --- | --- | --- |
+| Spouštěč práce | Tým zapomíná, že má standard použít | Bod v měsíčním review |
+| Pracovní nástroj | Tým standard používá, ale chybí mu správný krok | Pole v šabloně kontroly |
+| Navigace | Tým standard hledá nebo otevírá starou verzi | Odkaz v kanonickém indexu |
+
+Příklad:
+
+```markdown
+Nález:
+Revize probíhá pozdě.
+
+Místo zásahu:
+Agenda měsíčního sales review.
+
+Nezasahovat:
+Text standardu samotného, protože tým mu rozumí, když ho otevře včas.
+```
+
+Tím zabráníte tomu, aby se z každého provozního problému stal redakční úkol. Někdy dokument nepotřebuje lepší text. Potřebuje lepší místo v práci.
+
+### 4. Změňte minimum artefaktů
+
+Každá úprava má mít malý rozsah. Změňte jen artefakty, které musí nést novou pracovní realitu.
+
+Minimum může být:
+
+- jeden řádek v agendě,
+- jeden odkaz v indexu,
+- jedno pole v šabloně,
+- jedna věta v runbooku,
+- jedna položka v checklistu,
+- jedna krátká poznámka v changelogu standardu.
+
+Příklad změnového balíčku:
+
+```markdown
+Upravit:
+- Agenda měsíčního sales review: přidat bod "5 min: kontrola příloh u dvou nabídek".
+- Karta standardu: doplnit changelog.
+
+Neměnit:
+- Celý standard příloh.
+- Onboardingový materiál.
+- Sales playbook.
+- CRM pipeline.
+```
+
+Když změna vyžaduje úpravu pěti dokumentů, zastavte se. Buď je problém větší než jedna iterace, nebo jste do změny přibalili pohodlný úklid, který s nálezem přímo nesouvisí.
+
+### 5. Udělejte privacy-first úklid kontroly
+
+Kontrola rytmu často vytvoří dočasné podklady: poznámky, screenshoty, exporty, kopie záznamů, výřezy z chatu nebo pracovní tabulku. Po převodu nálezu do provozu je ukliďte.
+
+Rozhodněte u každého podkladu:
+
+- ponechat jako kanonický záznam,
+- anonymizovat a ponechat jako příklad,
+- shrnout do jedné věty a smazat detail,
+- smazat bez náhrady,
+- přesunout do místa s omezeným přístupem,
+- doplnit retenční datum.
+
+Příklad:
+
+```markdown
+Podklad:
+Screenshot konkrétní nabídky s údaji zákazníka.
+
+Rozhodnutí:
+Smazat screenshot, do záznamu ponechat jen větu:
+"U kontrolované nabídky chyběl doklad revize příloh."
+
+Proč:
+Pro rozhodnutí stačí signál, ne kopie zákaznického dokumentu.
+```
+
+Privacy-first provoz není jen otázka právních dokumentů. Je to návyk mazat pracovní otisky, které už neslouží rozhodnutí. Méně stop, méně rizika, méně budoucího archeologického výzkumu.
+
+### 6. Předání změny týmu
+
+Změna rytmu se nepředává vysvětlením celé historie. Tým potřebuje vědět, co má příště udělat jinak.
+
+Krátké předání:
+
+```markdown
+Co se mění:
+Kontrola příloh u nabídek je nově součástí měsíčního sales review.
+
+Proč:
+Samostatná připomínka vedla k pozdní kontrole.
+
+Co udělat příště:
+V review vybrat dvě nabídky, projít checklist příloh a zapsat jen rozhodnutí.
+
+Kde je zdroj pravdy:
+[odkaz na kanonickou kartu standardu]
+
+Co se nemaže:
+Kanonický záznam rozhodnutí.
+
+Co se maže:
+Dočasné screenshoty a pracovní exporty po kontrole.
+```
+
+Předání má být krátké, ale musí obsahovat zdroj pravdy. Bez zdroje pravdy se i dobrá změna rychle rozpadne na "někdo říkal, že teď to děláme jinak".
+
+### 7. Ověřte změnu v dalším cyklu
+
+Každá úprava rytmu potřebuje malé ověření. Ne nový audit. Stačí kontrola po příštím přirozeném použití.
+
+Ověřovací otázky:
+
+- Proběhla revize ve správném pracovním okamžiku?
+- Věděl vlastník, co má udělat?
+- Našel tým správný standard bez hledání?
+- Vznikl výstup, který umožnil rozhodnutí?
+- Byla datová stopa menší nebo čistší než minule?
+- Nevznikla nová skrytá práce?
+
+Příklad ověřovacího záznamu:
+
+```markdown
+Ověření:
+Příští měsíční sales review.
+
+Kritérium úspěchu:
+Kontrola dvou nabídek proběhne během review a výsledkem bude jedno rozhodnutí bez screenshotů zákaznických dokumentů.
+
+Co když ne:
+Pokud bod opět vypadne z agendy, problém není ve standardu, ale ve vlastnictví review.
+```
+
+Ověření má být napojené na práci. Když kvůli ověření zakládáte další schůzku, možná právě vyrábíte problém, který budete příští měsíc hrdinně optimalizovat.
+
+### Šablona převodu nálezu do úpravy provozu
+
+```markdown
+# Převod nálezu z kontroly rytmu do jedné úpravy provozu
+
+Standard:
+Vlastnická role:
+Datum kontroly rytmu:
+Kanonické místo:
+
+## Vybraný nález
+
+Nález:
+Proč je důležitý:
+Jaké tření způsobuje:
+Co se stane, pokud ho necháme být:
+
+## Změnová věta
+
+Od příštího cyklu budeme:
+V pracovním okamžiku:
+Aby:
+
+## Místo zásahu
+
+Primární artefakt:
+Typ místa: spouštěč práce / pracovní nástroj / navigace
+Co přesně upravit:
+Co zůstává beze změny:
+
+## Rozsah změny
+
+Artefakty k úpravě:
+Artefakty, které se nemění:
+Vlastník úpravy:
+Datum dokončení:
+
+## Privacy-first úklid
+
+Dočasné podklady:
+Co smazat:
+Co anonymizovat:
+Co ponechat:
+Retence:
+Přístup:
+
+## Předání týmu
+
+Krátké sdělení:
+Zdroj pravdy:
+Kdo změnu použije jako první:
+
+## Ověření
+
+Další pracovní cyklus:
+Kritérium úspěchu:
+Ochranný signál:
+Co udělat, pokud změna nepomůže:
+```
+
+### Mini workshop na 25 minut
+
+Agenda:
+
+1. 3 minuty: připomenout výsledek kontroly rytmu.
+2. 4 minuty: vybrat jeden nález s nejvyšší provozní hodnotou.
+3. 4 minuty: napsat změnovou větu.
+4. 4 minuty: určit místo zásahu.
+5. 3 minuty: vybrat minimum artefaktů k úpravě.
+6. 3 minuty: udělat privacy-first rozhodnutí o podkladech.
+7. 2 minuty: napsat krátké předání týmu.
+8. 2 minuty: určit ověření v dalším cyklu.
+
+Pravidla:
+
+- Řešte jeden nález, ne celý provozní systém.
+- Neotevírejte původní standard k přepisu, pokud nález není v jeho textu.
+- Každá změna musí mít pracovní místo, kde se opravdu projeví.
+- Dočasné podklady po kontrole mají mít rozhodnutý osud.
+- Předání týmu musí obsahovat zdroj pravdy.
+- Ověření napojte na další přirozený cyklus.
+
+### Checklist
+
+- Vybrali jste jeden nález, který nejvíc zlepší další použití standardu?
+- Umíte změnu říct jednou pracovní větou?
+- Je jasné, jestli měníte spouštěč práce, pracovní nástroj nebo navigaci?
+- Zasahujete jen minimum artefaktů?
+- Zůstává původní standard beze změny, pokud problém nebyl v jeho obsahu?
+- Má změna vlastníka a datum dokončení?
+- Uklidili jste dočasné podklady z kontroly?
+- Snížila se datová stopa místo toho, aby vznikly nové kopie?
+- Ví tým, co má příště udělat jinak?
+- Existuje odkaz na kanonické místo?
+- Je ověření napojené na další přirozený pracovní cyklus?
+- Máte kritérium, podle kterého poznáte, že úprava pomohla?
+
+Převod nálezu z kontroly rytmu do jedné úpravy provozu drží dokumentaci při zemi. Standardy nemají být sbírka chytrých textů. Mají být drobné kolejnice pro práci, která se opakuje. Když se kolejnice trochu křiví, neopravujte celé nádraží. Narovnejte ten jeden kus, po kterém tým příště opravdu pojede.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GI o převodu nálezu z kontroly stabilního revizního rytmu do jedné úpravy provozu: výběr nálezu, změnová věta, místo zásahu, minimální rozsah artefaktů, privacy-first úklid podkladů, předání týmu, ověření v dalším cyklu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GH o kontrole stabilního revizního rytmu po prvním měsíci: návrat ke slibu rytmu, reálné průchody, rozlišení problému rytmu od problému standardu, měření ceny revize, privacy-first datová stopa, jedna malá úprava, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GG o zařazení ověřené provozní verze do stabilního revizního rytmu: důkaz stabilizace, volba revizního rytmu, vlastnictví role, privacy-first úklid přechodové stopy, aktualizace indexu, stop pravidla, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GF o kontrole nové provozní verze po dalším cyklu: změnová věta, reálný průchod, scorecard, rozlišení chyby verze a zavedení, privacy-first datová kontrola, rozhodnutí, šablona, mini workshop a checklist.
