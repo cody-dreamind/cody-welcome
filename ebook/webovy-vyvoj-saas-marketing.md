@@ -51695,7 +51695,7 @@ Kanonické místo:
 Onboardingový standard pro support příklady.
 
 Pracovní místo:
-Support odpovědní šablona.
+Šablona support odpovědi.
 
 Změna:
 Doplněna věta o interních identifikátorech a osobních poznámkách.
@@ -51786,8 +51786,318 @@ Pravidla:
 
 Kontrola prvního použití týmové paměti drží znalosti při zemi. Poučení není cenné proto, že je uložené. Je cenné tehdy, když se v další podobné situaci promění v lepší rozhodnutí, menší datovou stopu a méně ručního vysvětlování.
 
+## Příloha FY: Převod nálezu z týmové paměti do malé opravy lekce
+
+První použití týmové paměti obvykle neskončí dramatem. Častěji ukáže drobnou, ale důležitou věc: lekce byla užitečná, jen člověku chyběla jedna hranice, jeden příklad, lepší umístění nebo kratší formulace. Právě tady se rozhoduje, jestli z týmové paměti vznikne živý pracovní systém, nebo jen další vrstva poznámek.
+
+Tato příloha navazuje na Přílohu FX. Tam jste ověřili, jestli lekce pomohla při prvním reálném použití. Teď vezmete jeden konkrétní nález a převedete ho do hotové opravy. Cílem není zlepšit všechno kolem dokumentace. Cílem je upravit přesně tu část, která člověku bránila udělat lepší rozhodnutí.
+
+Dobrá oprava lekce má tři vlastnosti:
+
+- je malá,
+- je dohledatelná v kanonickém místě,
+- snižuje budoucí tření bez zbytečného sběru dalších dat.
+
+Když je oprava větší než původní problém, systém si začíná sám přidávat práci. A to je spolehlivý způsob, jak z užitečné týmové paměti udělat slušně organizovanou únavu.
+
+### 1. Vyberte jeden nález, který stojí za opravu
+
+Po kontrole prvního použití můžete mít víc pozorování. Někdo špatně hledal kartu, někde chyběl příklad, někde se objevila nejasnost kolem citlivých dat, někde byl starý odkaz. Nepřevádějte všechno do jedné velké opravy. Vyberte nález, který nejvíc brání opakovanému použití lekce.
+
+Použijte jednoduchý filtr:
+
+1. Opakovatelnost: stane se to znovu u dalšího člověka?
+2. Dopad: může to vést k horšímu rozhodnutí, zdržení nebo riziku pro data?
+3. Velikost opravy: dá se to vyřešit jednou konkrétní změnou?
+4. Kanonické místo: víme, kde změnu udělat?
+
+Příklad:
+
+```markdown
+Nález:
+Nový support člověk nevěděl, jestli může interní ID ticketu vložit do pracovní poznámky.
+
+Opakovatelnost:
+Ano, podobné ticket ID se objevuje v každém support případu.
+
+Dopad:
+Střední. Nejde o zákaznický text, ale může vzniknout zbytečný identifikátor mimo kanonický systém.
+
+Velikost opravy:
+Jedna věta v support šabloně a jedna věta v kanonické lekci.
+
+Rozhodnutí:
+Opravit.
+```
+
+Slabý výběr nálezu:
+
+```markdown
+Nález:
+Dokumentace by mohla být přehlednější.
+```
+
+To může být pravda, ale není to oprava. Je to mlha. A mlha se špatně commituje.
+
+### 2. Přepište nález do opravné věty
+
+Nález popisuje problém. Opravná věta říká, co se odteď dělá jinak. Bez ní se týmy snadno zaseknou u debaty, jestli byla chyba v člověku, procesu, šabloně nebo náladě pondělního rána. Opravná věta vrací pozornost k práci.
+
+Dobrá opravná věta má tento tvar:
+
+```markdown
+Když nastane [situace], použij [pravidlo nebo postup], aby nevzniklo [konkrétní tření nebo riziko].
+```
+
+Příklad:
+
+```markdown
+Když support odpověď potřebuje interní identifikátor, ponech ho v ticket systému a do osobní poznámky nebo šablony vkládej jen anonymizovanou pracovní formulaci.
+```
+
+Tato věta je lepší než obecné pravidlo "pozor na citlivá data", protože říká:
+
+- v jaké situaci platí,
+- co člověk udělá,
+- čemu tím zabrání.
+
+Opravnou větu pište tak, aby šla rovnou vložit do pracovního místa. Pokud potřebuje vysvětlení na půl stránky, pravděpodobně ještě není dost ostrá.
+
+### 3. Rozhodněte, jestli jde o text, trasu, příklad nebo pravidlo
+
+Ne každá oprava patří do stejného místa. Když nález špatně zatřídíte, oprava bude sice napsaná, ale člověk ji příště neuvidí ve správnou chvíli.
+
+Rozlišujte čtyři typy oprav:
+
+- Text: stávající lekce je správně umístěná, ale věta je nejasná.
+- Trasa: lekce existuje, ale člověk ji hledá jinde.
+- Příklad: pravidlo je správné, ale chybí hranice na konkrétní situaci.
+- Pravidlo: první použití odhalilo novou rozhodovací hranici.
+
+Praktické rozhodování:
+
+```markdown
+Nález:
+Člověk našel lekci, ale nevěděl, jestli se pravidlo vztahuje i na interní ID.
+
+Typ opravy:
+Pravidlo a krátký příklad.
+
+Kam zasáhnout:
+Kanonická lekce: doplnit hranici.
+Support šablona: doplnit zkrácenou větu v místě použití.
+
+Kam nezasahovat:
+Neotevírat celý onboardingový balíček.
+Neměnit všeobecnou privacy policy.
+Nepřepisovat staré uzavřené kontroly.
+```
+
+Codyho komentář: nejdražší dokumentační opravy jsou ty, které neumí říct "tady končím". Jeden nález začne jako chybějící věta a skončí jako třídenní reorganizace wiki. Vypadá to produktivně, ale často je to jen úklidový cosplay s tabulkou.
+
+### 4. Upravte kanonické místo a jednu pracovní zkratku
+
+Oprava musí žít ve zdroji pravdy. Zároveň má být vidět tam, kde člověk pracuje. Proto často potřebujete dvě vrstvy:
+
+1. Kanonické místo: úplná, přesná verze lekce.
+2. Pracovní zkratka: krátká věta v šabloně, checklistu nebo onboardingovém kroku.
+
+Příklad:
+
+```markdown
+Kanonická lekce:
+Support příklady se ukládají jen v anonymizované podobě. Interní identifikátory zůstávají v ticket systému, pokud nejsou nezbytné pro řešení konkrétního provozního problému.
+
+Pracovní zkratka v šabloně:
+Do poznámky nevkládej zákaznický text ani interní ID, pokud nejsou nutné pro řešení ticketu.
+```
+
+Tento dvouvrstvý přístup brání dvěma extrémům. Kanonická lekce není zahlcená každou drobnou situací a pracovní šablona nenutí člověka číst dlouhý standard kvůli jedné odpovědi.
+
+Když existuje jen kanonické místo, lekce může být přesná, ale neviditelná. Když existuje jen pracovní zkratka, časem se odtrhne od zdroje pravdy. Udržujte obě vrstvy, ale jen tam, kde to má reálné použití.
+
+### 5. Udělejte privacy-first kontrolu opravy
+
+Každá oprava týmové paměti může nechtěně vytvořit novou datovou stopu. Stačí přidat "lepší příklad" a najednou se v interním dokumentu objeví zákaznický text, screenshot, jméno, e-mail, číslo smlouvy nebo interní identifikátor. To je přesně typ nenápadného odpadu, který se pak těžko uklízí.
+
+Před uložením opravy zkontrolujte:
+
+- Nepřidává příklad osobní nebo zákaznické údaje?
+- Stačí anonymizovaná situace místo reálného citátu?
+- Nevybízí opravená šablona ke kopírování dat mimo systém, kde mají zůstat?
+- Nevzniká další místo, které bude potřeba hlídat retenčně?
+- Má oprava jasné vlastníka a revizní háček?
+- Je stará nekanonická kopie smazaná nebo označená jako archiv?
+
+Příklad bezpečnějšího přepisu:
+
+```markdown
+Slabé:
+U zákazníka Novák s.r.o. jsme řešili ticket 4812, kde...
+
+Lepší:
+U zákaznického ticketu s provozním identifikátorem vznikla otázka, zda ID patří do pracovní poznámky mimo ticket systém.
+```
+
+V druhé verzi zůstává poučení, ale mizí zbytečné detaily. Tým nepotřebuje znát příběh v plné barvě. Potřebuje vědět, jak se příště rozhodnout.
+
+### 6. Zapište změnu jako hotovou, ne jako přání
+
+Oprava lekce má skončit záznamem, který dokáže přečíst i člověk mimo původní kontrolu. Ne proto, aby vznikla další administrativa. Proto, aby se za měsíc vědělo, proč se věta změnila a co se tím řešilo.
+
+Minimální changelog:
+
+```markdown
+Datum:
+Změna:
+Důvod:
+Kanonické místo:
+Pracovní zkratka:
+Privacy-first úklid:
+Další ověření:
+```
+
+Vyplněný příklad:
+
+```markdown
+Datum:
+2026-05-14
+
+Změna:
+Doplněna hranice pro interní ID v support šabloně a kanonické lekci.
+
+Důvod:
+První použití lekce ukázalo nejistotu, zda ID ticketu může být v osobní poznámce.
+
+Kanonické místo:
+Support standard: práce s anonymizovanými příklady.
+
+Pracovní zkratka:
+Šablona support odpovědi.
+
+Privacy-first úklid:
+Dočasná osobní poznámka s původním textem smazána, v záznamu zůstává anonymizovaný popis.
+
+Další ověření:
+Zkontrolovat při dalším support onboardingu.
+```
+
+Všimněte si, že záznam neobsahuje dlouhé zdůvodnění ani citace původních dat. Má být použitelný, ne vyčerpávající.
+
+### 7. Ověřte opravu při další podobné situaci
+
+Oprava není hotová tím, že ji někdo napsal. Je hotová tehdy, když při další podobné situaci sníží tření. Proto si rovnou nastavte malý ověřovací háček.
+
+Ověřovací háček může být:
+
+- první další support odpověď podle šablony,
+- další onboarding nového člověka,
+- měsíční review týmové paměti,
+- kontrola při uzavření dalšího podobného ticketu,
+- krátká otázka v retrospektivě: "Pomohla opravená věta?"
+
+Ověření má být krátké:
+
+```markdown
+Situace:
+Další support člověk použil opravenou šablonu.
+
+Výsledek:
+Nevznikla osobní kopie zákaznického textu ani interního ID.
+
+Tření:
+Žádné nové.
+
+Rozhodnutí:
+Oprava zůstává, další změna není potřeba.
+```
+
+Pokud se objeví další problém, nezačínejte nekonečný seriál drobných patchů bez konce. Po druhé nebo třetí podobné opravě se zeptejte, jestli už nejde o větší problém standardu, šablony nebo procesu.
+
+### Šablona malé opravy lekce
+
+```markdown
+# Malá oprava týmové lekce
+
+Lekce:
+Datum:
+Vlastník:
+Kanonické místo:
+Pracovní místo použití:
+
+Nález z prvního použití:
+
+Proč stojí za opravu:
+- opakovatelnost:
+- dopad:
+- velikost opravy:
+- privacy-first riziko:
+
+Opravná věta:
+Když nastane ..., použij ..., aby nevzniklo ...
+
+Typ opravy:
+Text / trasa / příklad / pravidlo
+
+Změna v kanonickém místě:
+
+Změna v pracovní zkratce:
+
+Co se nemění:
+
+Co se maže, anonymizuje nebo archivuje:
+
+Privacy-first kontrola:
+- nepřidává osobní údaje:
+- nepřidává zákaznický text:
+- nevytváří novou zbytečnou kopii:
+- má vlastníka:
+- má revizní háček:
+
+Changelog věta:
+
+Další ověření:
+```
+
+### Mini workshop: 25 minut na opravu lekce
+
+Agenda:
+
+1. 3 minuty: připomenout nález z prvního použití.
+2. 4 minuty: rozhodnout, jestli nález stojí za opravu.
+3. 4 minuty: napsat opravnou větu.
+4. 4 minuty: určit typ opravy a kanonické místo.
+5. 4 minuty: doplnit pracovní zkratku.
+6. 3 minuty: udělat privacy-first kontrolu.
+7. 2 minuty: zapsat changelog.
+8. 1 minuta: určit další ověření.
+
+Pravidla:
+
+- Jedna oprava, jeden vlastník, jedno kanonické místo.
+- Pokud oprava potřebuje více než jednu stránku vysvětlení, vraťte se k opravné větě.
+- Neopisujte reálná zákaznická data do příkladu.
+- Neměňte staré záznamy jen proto, aby vypadaly stejně.
+- Když nález neovlivní budoucí práci, nechte ho jako poznámku a neopravujte systém.
+
+### Checklist
+
+- Vybrali jste jeden konkrétní nález?
+- Je jasné, proč stojí za opravu?
+- Přepsali jste nález do opravné věty?
+- Rozhodli jste, jestli jde o text, trasu, příklad nebo pravidlo?
+- Upravili jste kanonické místo?
+- Doplnili jste pracovní zkratku jen tam, kde se skutečně použije?
+- Prošla oprava privacy-first kontrolou?
+- Nevznikla nová kopie citlivých dat?
+- Je stará nekanonická varianta smazaná nebo označená jako archiv?
+- Má oprava changelog, vlastníka a další ověření?
+
+Převod nálezu do malé opravy je nenápadná disciplína. Není tak viditelná jako nová kapitola, nový standard nebo velký workshop. Ale právě díky ní se týmová paměť nezasekne v režimu "máme poučení". Posune se do režimu "poučení se při další práci opravdu použilo a zlepšilo rozhodnutí". To je méně slavnostní, ale výrazně užitečnější. Což je u dokumentace skoro podezřele dobrý výsledek.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha FY o převodu nálezu z týmové paměti do malé opravy lekce: výběr jednoho nálezu, opravná věta, rozlišení textu, trasy, příkladu a pravidla, kanonické místo, pracovní zkratka, privacy-first kontrola, changelog, ověření, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha FX o kontrole týmové paměti po prvním použití: první skutečná situace, porovnání očekávání se skutečnou prací, trasa k poučení, oddělení problému lekce od problému systému, privacy-first kontrola, rozhodnutí stavu lekce, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FW o převodu uzavřeného onboardingového cyklu do týmové paměti: výběr opakovatelného vzoru, rozhodovací věta, správný domov poučení, privacy-first filtr, napojení na onboarding nové role, revizní háček, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FV o uzavření dalšího cyklu onboardingového standardu po prvním ověření: návrat k původnímu slibu změny, ověření na reálné práci, oddělení výsledku, tření a vedlejšího efektu, privacy-first úklid, jednověté rozhodnutí, přenos poučení, šablona, mini workshop a checklist.
