@@ -56518,8 +56518,315 @@ Pravidla:
 
 Kontrola dlouhodobého rozhodnutí chrání tým před dvěma krajnostmi: před slepým udržováním pravidel, která už nepomáhají, a před věčným otevíráním věcí, které už fungují. Dobrý provoz potřebuje obojí: odvahu pravidlo ponechat, když slouží, a disciplínu opravit jen tu část, která skutečně brzdí práci.
 
+## Příloha GO: Převod stabilního dlouhodobého rozhodnutí do roční inventury
+
+Stabilní dlouhodobé rozhodnutí nemá zůstat navždy samostatnou poznámkou v provozní paměti. Když se podle něj tým opakovaně řídí, nikdo ho nemusí vysvětlovat a nezvyšuje cenu práce, je čas rozhodnout, jak se objeví v roční inventuře. Ne proto, aby se kolem něj postavila slavnostní vitrína. Proto, aby se jednou za rok ověřilo, jestli pořád patří do systému.
+
+Roční inventura je jiný typ práce než průběžná kontrola. Průběžná kontrola se ptá: funguje rozhodnutí v nejbližším pracovním období? Roční inventura se ptá: má toto rozhodnutí pořád své místo v celém provozním systému webu, SaaS, marketingu nebo delivery? To je širší otázka. Neřeší jen jednu šablonu nebo jeden odkaz, ale vztah rozhodnutí k ostatním pravidlům, rolím, datům, nástrojům a obchodní realitě.
+
+Výstupem této přílohy je inventurní karta. Ta říká, které rozhodnutí vstupuje do roční inventury, proč je stabilní, kde se skutečně používá, s čím se překrývá, jakou má datovou stopu, kdo ho vlastní a co se má při ročním review ověřit. Dobrá karta je krátká. Pokud se z ní stane román, právě jste inventuru proměnili v další kus neudržované dokumentace. Gratuluji, přesně tomu se snažíme vyhnout.
+
+### 1. Ověřte, že rozhodnutí je opravdu stabilní
+
+Do roční inventury neposílejte každou čerstvou opravu. Roční inventura má chránit provozní systém, ne suplovat backlog nedodělků. Nejdřív ověřte, že rozhodnutí prošlo běžnou prací.
+
+Stabilní rozhodnutí má typicky tyto znaky:
+
+- bylo použito ve více než jednom reálném cyklu,
+- lidé vědí, kde ho najít,
+- nový nebo méně zkušený člověk ho dokáže použít bez dlouhého vysvětlování,
+- existuje jasný vlastník role, ne jen autor původní změny,
+- nevzniká vedle něj kopie v chatu, tabulce nebo osobních poznámkách,
+- cena použití je přiměřená hodnotě,
+- privacy-first pravidla k datové stopě jsou jasná.
+
+Příklad vstupní věty:
+
+```markdown
+Stabilní rozhodnutí:
+U stabilních položek v měsíční kontrole zapisujeme jen stav "ponechat"; důvod přidáváme pouze u výjimky, změny rozhodnutí nebo privacy-first dopadu.
+
+Důkaz stability:
+Použito ve třech měsíčních kontrolách, jednou při předání role a jednou při výjimce. Nový vlastník našel pravidlo v kanonickém indexu bez připomínání.
+```
+
+Pokud důkaz stability nemáte, nedávejte rozhodnutí do roční inventury jako hotové pravidlo. Nechte ho ještě v režimu ověření. Roční inventura není sušička na mokrá rozhodnutí. Nechcete do ní vkládat něco, co ještě teče.
+
+### 2. Určete inventurní otázku
+
+Každé rozhodnutí potřebuje jednu otázku, kterou se roční inventura bude zabývat. Bez otázky vznikne jen seznam pravidel. Seznam může vypadat spořádaně, ale sám o sobě nepomáhá rozhodovat.
+
+Dobrá inventurní otázka se ptá na životnost, překryv nebo cenu rozhodnutí.
+
+Příklady:
+
+- Pomáhá toto rozhodnutí pořád zkracovat měsíční kontrolu?
+- Nepřekrývá se s novějším standardem pro provozní revize?
+- Nevyžaduje širší datovou stopu, než dnes potřebujeme?
+- Je pořád umístěné v pracovním místě, kde ho tým hledá?
+- Mělo by zůstat samostatné, nebo se sloučit do hlavního standardu?
+- Nepatří už do onboardingu nové role místo do obecného indexu?
+
+Slabá otázka:
+
+```markdown
+Funguje to?
+```
+
+Lepší otázka:
+
+```markdown
+Snižuje pravidlo počet zbytečných vysvětlení v měsíční kontrole, aniž by lidé ztráceli dohledatelnost výjimek?
+```
+
+Rozdíl je praktický. Na první otázku každý odpoví podle nálady. Na druhou otázku můžete najít důkazy v práci.
+
+### 3. Zmapujte vztah k ostatním pravidlům
+
+Stabilní rozhodnutí se časem může stát duplicitou. To není chyba. Je to přirozený důsledek toho, že systém zraje. Některá pravidla vznikla jako lokální oprava. Později se stejný princip objevil v onboardingovém balíčku, šabloně review, provozním standardu nebo sales checklistu.
+
+Před vložením do roční inventury zapište vztah rozhodnutí k okolí:
+
+```markdown
+Vztahy:
+- Kanonický index standardů: hlavní zdroj pravdy.
+- Měsíční review šablona: používá pravidlo při zápisu stavu.
+- Onboarding vlastníka role: odkazuje na příklad výjimky.
+- Archiv staré šablony: obsahuje původní dlouhý zápis, má být uzavřen.
+```
+
+Hledejte hlavně tři typy překryvu:
+
+- Duplicitní pravidlo: dvě místa říkají totéž jinými slovy.
+- Rozpor: jedno místo říká zkracovat zápis, druhé vyžaduje dlouhý komentář.
+- Skrytá závislost: pravidlo funguje jen proto, že někdo zná starý kontext.
+
+Když překryv najdete, neřešte ho hned velkou konsolidací. Do inventurní karty napište nález a doporučený typ zásahu. Roční inventura pak rozhodne, jestli sloučit, ukončit, přesunout nebo ponechat.
+
+Codyho komentář: dokumentace obvykle neumírá tím, že je špatná. Umírá tím, že je dobrá na pěti místech najednou a každé místo stárne jinou rychlostí. To je pomalý, velmi administrativní horor.
+
+### 4. Přepište rozhodnutí do inventurního tvaru
+
+Inventurní tvar není stejný jako pracovní pravidlo. Pracovní pravidlo říká lidem, co mají udělat. Inventurní tvar říká, proč pravidlo existuje, kde žije a podle čeho se bude jednou za rok hodnotit.
+
+Použijte jednoduchou kartu:
+
+```markdown
+Název:
+Krátké rozhodnutí:
+Pracovní slib:
+Kanonické místo:
+Používá se při:
+Vlastník role:
+Inventurní otázka:
+Signály pro roční kontrolu:
+Možné překryvy:
+Privacy-first pravidlo:
+Stav:
+```
+
+Příklad:
+
+```markdown
+Název:
+Krátký zápis stabilních položek v měsíční kontrole
+
+Krátké rozhodnutí:
+U stabilních položek zapisujeme jen stav "ponechat"; důvod přidáváme pouze u výjimky, změny rozhodnutí nebo privacy-first dopadu.
+
+Pracovní slib:
+Zkrátit kontrolu a zachovat dohledatelnost výjimek.
+
+Kanonické místo:
+Kanonický index standardů -> měsíční kontrola.
+
+Používá se při:
+Měsíční kontrole standardů, předání role, výjimce ve stabilní položce.
+
+Vlastník role:
+Vlastník provozních standardů.
+
+Inventurní otázka:
+Snižuje pravidlo zbytečné vysvětlování bez ztráty dohledatelnosti výjimek?
+
+Signály pro roční kontrolu:
+Délka zápisů, počet výjimek s důvodem, dotazy nových vlastníků, existence vedlejších kopií.
+
+Možné překryvy:
+Onboarding vlastníka role a stará měsíční šablona.
+
+Privacy-first pravidlo:
+Do trvalého záznamu patří stav a obecný důvod výjimky, ne osobní nebo zákaznické detaily.
+
+Stav:
+Stabilní, zařadit do roční inventury.
+```
+
+Tento tvar je užitečný, protože odděluje každodenní použití od ročního posouzení. Tým nemusí při práci číst celou kartu. Ale při inventuře má jasné vodítko, co ověřovat.
+
+### 5. Nastavte lehké signály pro roční kontrolu
+
+Roční inventura nemá vyžadovat roční šmírování práce. Signály vybírejte tak, aby vznikaly přirozeně nebo se daly zkontrolovat na malém vzorku.
+
+Dobré signály:
+
+- tři až pět reálných použití za poslední období,
+- počet vedlejších kopií nebo starých odkazů,
+- dotazy lidí při použití pravidla,
+- délka a srozumitelnost zápisu,
+- existence výjimek a jejich důvod,
+- dopad na datovou stopu,
+- snadnost použití při onboardingu nové role.
+
+Slabé signály:
+
+- počet otevření dokumentu bez kontextu,
+- individuální sledování každého kroku člověka,
+- ruční reporting jen kvůli tomu, aby bylo co reportovat,
+- pocit vlastníka, že "už je to asi v pohodě".
+
+Privacy-first varianta měření:
+
+```markdown
+Signály sbíráme na vzorku tří reálných použití. Neukládáme jména lidí ani zákaznické detaily, jen typ situace, stav pravidla, překážku a doporučený další krok.
+```
+
+Tím zachováte užitečnost bez zbytečného dohledu. Cílem je zlepšit systém, ne vyrábět provozní kamerový záznam.
+
+### 6. Rozhodněte, kam se karta uloží
+
+Inventurní karta musí být tam, kde ji roční inventura skutečně najde. Pokud existuje kanonický index standardů, patří odkaz tam. Pokud má tým roční provozní review, patří karta do jeho vstupů. Pokud jde o marketingový proces, může patřit do marketingového operačního plánu. Hlavní pravidlo: jedno kanonické místo, ostatní jen odkazují.
+
+Zapište:
+
+```markdown
+Uložení:
+Karta rozhodnutí je v roční inventuře provozních standardů. Kanonický index obsahuje jen odkaz a stav. Měsíční review šablona odkazuje na pracovní pravidlo, ne na celou inventurní kartu.
+```
+
+Tím zabráníte dvěma chybám:
+
+- pracovní lidé čtou inventurní podklady při běžném úkolu,
+- inventura nevidí rozhodnutí, protože zůstalo schované v lokální šabloně.
+
+Pracovní pravidlo má být blízko práci. Inventurní karta má být blízko revizi systému. Když je smícháte, buď zatížíte každodenní práci, nebo oslepíte roční kontrolu.
+
+### 7. Uzavřete přechod ze stabilního rozhodnutí do inventury
+
+Na konci udělejte krátké uzavření. Ne "hotovo", ale jasnou větu, která říká, co se stalo s rozhodnutím.
+
+Příklad:
+
+```markdown
+Uzavření:
+Rozhodnutí o krátkém zápisu stabilních položek je stabilní a vstupuje do roční inventury provozních standardů. Pracovní pravidlo zůstává v měsíční kontrole, inventurní karta se ukládá do ročního review. Při roční kontrole ověříme překryv s onboardingem vlastníka role a starou měsíční šablonou.
+```
+
+Současně zavřete staré stopy:
+
+- starou kartu ověření označte jako stabilizovanou,
+- přidejte odkaz na inventurní kartu,
+- smažte dočasné screenshoty a pracovní exporty,
+- zrušte lokální kopie rozhodnutí,
+- do changelogu napište jednu větu.
+
+Tady je privacy-first hodnota velmi praktická: čím méně přechodových materiálů necháte ležet bokem, tím menší je riziko, že někdo za rok použije starou verzi nebo najde citlivý příklad, který už nemá žádný pracovní důvod existovat.
+
+### Šablona inventurní karty stabilního rozhodnutí
+
+```markdown
+# Inventurní karta stabilního rozhodnutí
+
+Název rozhodnutí:
+Datum zařazení do inventury:
+Vlastník role:
+Kanonické pracovní místo:
+Inventurní místo:
+
+## Stabilita
+
+Krátké rozhodnutí:
+Pracovní slib:
+Důkaz stability:
+Použito v obdobích:
+Hraniční situace ověřené:
+
+## Vztahy
+
+Napojené šablony:
+Napojené standardy:
+Onboardingové odkazy:
+Staré cesty k uzavření:
+Možné duplicity:
+Možné rozpory:
+
+## Roční otázka
+
+Inventurní otázka:
+Signály pro kontrolu:
+Vzorek ke kontrole:
+Ochranný signál:
+
+## Privacy-first pravidla
+
+Trvalý záznam:
+Krátká retence:
+Smazat po zařazení:
+Anonymizace:
+Přístupy:
+
+## Rozhodnutí
+
+Stav:
+Co zůstává v každodenní práci:
+Co vstupuje do roční inventury:
+Co se zavírá:
+Věta pro tým:
+Další kontrola:
+```
+
+### Mini workshop na 30 minut
+
+Agenda:
+
+1. 4 minuty: přečíst stabilní rozhodnutí a důkaz jeho použití.
+2. 4 minuty: určit jednu inventurní otázku.
+3. 5 minut: zmapovat vazby na šablony, standardy, onboarding a staré cesty.
+4. 5 minut: přepsat rozhodnutí do inventurní karty.
+5. 4 minuty: vybrat lehké signály pro roční kontrolu.
+6. 4 minuty: udělat privacy-first kontrolu trvalých a dočasných podkladů.
+7. 4 minuty: rozhodnout uložení, zavřít přechodové stopy a napsat větu pro tým.
+
+Pravidla:
+
+- Do roční inventury patří stabilní rozhodnutí, ne nedokončený experiment.
+- Každá karta má mít jednu inventurní otázku.
+- Pracovní pravidlo a inventurní karta nejsou totéž.
+- Měřte malým vzorkem reálných použití, ne plošným dohledem.
+- Jeden zdroj pravdy, ostatní místa jen odkazují.
+- Přechodové materiály po zařazení ukliďte.
+
+### Checklist
+
+- Má rozhodnutí důkaz stability z reálné práce?
+- Bylo použito ve více než jednom období nebo cyklu?
+- Umí ho použít nový člověk bez autora původní změny?
+- Má rozhodnutí jasnou inventurní otázku?
+- Je zmapovaný vztah k šablonám, standardům, onboardingu a starým cestám?
+- Neexistuje duplicitní nebo rozporné pravidlo, které by mělo jít do ročního review?
+- Je pracovní pravidlo oddělené od inventurní karty?
+- Jsou signály pro roční kontrolu lehké a založené na reálných použitích?
+- Nevzniká kvůli měření zbytečný dohled nad jednotlivci?
+- Je jasné, kde karta žije a odkud se na ni odkazuje?
+- Jsou dočasné podklady, screenshoty a exporty uklizené?
+- Zůstává v trvalém záznamu jen to, co má dlouhodobou hodnotu?
+- Má tým jednu větu, která vysvětluje změnu stavu?
+
+Převod stabilního rozhodnutí do roční inventury je známka dospělosti systému. Neznamená to, že rozhodnutí je navždy nedotknutelné. Znamená to, že už nepotřebuje opravný režim a bude se hodnotit v širším rytmu. Dobře vedená inventura pak nehlídá dokumenty pro dokumenty. Hlídá, aby web, SaaS, marketing a provoz nezarůstaly pravidly, která kdysi pomohla, ale dnes už jen zabírají místo.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GO o převodu stabilního dlouhodobého rozhodnutí do roční inventury: ověření stability, inventurní otázka, vztahy k ostatním pravidlům, inventurní karta, lehké signály pro roční kontrolu, uložení karty, privacy-first úklid, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GN o kontrole dlouhodobého rozhodnutí po dalším pracovním období: původní rozhodovací věta, reálné průchody, scorecard použití/výsledku/ceny, návrat starého chování, privacy-first kontrola období, rozhodnutí dalšího stavu, minimální aktualizace, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GM o převodu lehké revize do dlouhodobého rozhodnutí: oddělení nálezu od rozhodnutí, výběr dlouhodobého stavu, provozní věta, zavření starých cest, privacy-first uzavření podkladů, předání týmu, revizní háček, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GL o kontrole stabilizované provozní úpravy po první lehké revizi: návrat ke stabilizační větě, výběr skutečných průchodů, scorecard použití/samostatnosti/ceny, hledání návratu starého postupu, privacy-first kontrola stabilního režimu, rozhodnutí stavu pravidla, minimální aktualizace, šablona, mini workshop a checklist.
