@@ -52816,8 +52816,300 @@ Pravidla:
 
 Stabilizace ověřené opravy je okamžik, kdy se z drobného poučení stává součást systému. Když se udělá dobře, tým už neřeší stejný detail znovu, ale ani si nevyrábí další vrstvu dokumentace pro dokumentaci. Pravidlo je tam, kde ho člověk potřebuje, je dost konkrétní pro rozhodnutí a nezvětšuje datovou stopu. To je přesně ten typ tiché provozní práce, která se nehodí na plakát, ale hodí se do firmy, která chce fungovat i příští měsíc.
 
+## Příloha GB: Kontrola stabilizovaného pravidla po prvních použitích
+
+Stabilizované pravidlo je užitečné až ve chvíli, kdy přežije kontakt s běžnou prací. Nestačí, že vzniklo z dobré lekce, má kanonické místo a zní rozumně v dokumentaci. Potřebuje projít několika reálnými použitími, ideálně lidmi, kteří ho nepsali. Teprve tam se ukáže, jestli pravidlo opravdu snižuje nejistotu, nebo jen přidalo další větu do systému.
+
+Tato příloha navazuje na stabilizaci ověřené opravy lekce. Řeší další krok: jak po prvních použitích zkontrolovat, zda pravidlo funguje jako pracovní nástroj, nezvětšuje zbytečně datovou stopu a nemá vedlejší efekty, které původní autor neviděl.
+
+Kontrola má jednu hlavní otázku:
+
+```markdown
+Pomohlo stabilizované pravidlo člověku udělat lepší rozhodnutí v reálné práci bez zbytečného dohledu a bez nové datové zátěže?
+```
+
+Pokud odpověď neznáte, pravidlo ještě není skutečně stabilní. Je jen publikované. A publikovaná dokumentace není totéž co používaný systém.
+
+### 1. Vyberte první reálná použití
+
+Kontrola nemá začínat dotazem "četli jste pravidlo?". To je málo. Důležité je, jestli pravidlo člověk našel, pochopil a použil v okamžiku práce. Proto vyberte konkrétní průchody, ne obecné dojmy.
+
+Stačí malý vzorek:
+
+- první support případ, kde se pravidlo hodilo,
+- první onboardingový průchod nové role,
+- první revize šablony,
+- první zákaznické předání,
+- první incidentní záznam,
+- první změna v datové mapě,
+- první interní rozhodnutí, kde pravidlo mělo omezit kopírování citlivých detailů.
+
+Pro každý průchod si zapište minimum:
+
+```markdown
+Pravidlo:
+Kanonické místo:
+Pracovní situace:
+Kdo pravidlo použil:
+Použil ho autor pravidla? Ano / Ne
+Výsledek práce:
+Tření:
+Nová datová stopa:
+Rozhodnutí po kontrole:
+```
+
+Vzorek má být dost konkrétní na učení, ale dost malý na dokončení. Kontrola prvních použití není audit celého systému. Je to rychlý sanity check, jestli se z pravidla nestal hezky pojmenovaný kámen v cestě.
+
+### 2. Sledujte práci, ne poslušnost
+
+Špatná kontrola se ptá: "Dodrželi lidé pravidlo?" Lepší kontrola se ptá: "Pomohlo pravidlo udělat správnou práci jednodušeji?" Rozdíl je zásadní. Poslušnost může vypadat dobře i u pravidla, které je nešikovné, moc dlouhé nebo umístěné mimo pracovní tok.
+
+Sledujte tři vrstvy:
+
+1. Nalezení: našel člověk pravidlo bez zásahu autora?
+2. Použití: pochopil, co má udělat a co nedělat?
+3. Výsledek: vznikl lepší pracovní výstup než před pravidlem?
+
+Příklad dobrého signálu:
+
+```markdown
+Support člověk našel pravidlo v checklistu, ponechal identifikátor v ticket systému, do interní poznámky napsal anonymizovaný popis a nemusel se ptát autora pravidla.
+```
+
+Příklad varovného signálu:
+
+```markdown
+Člověk pravidlo dodržel až poté, co mu autor poslal odkaz do chatu. V checklistu ho přehlédl, protože je pod jiným názvem než pracovní situace.
+```
+
+V prvním případě pravidlo funguje. Ve druhém možná funguje obsah, ale nefunguje trasa k němu. To je jiný problém a potřebuje jinou opravu.
+
+Codyho komentář: dokumentace, kterou člověk najde jen přes autora, není dokumentace. Je to ústní tradice s lepším formátováním.
+
+### 3. Oddělte chybu pravidla od chyby umístění
+
+Když první použití drhne, nepřepisujte hned celé pravidlo. Nejdřív zjistěte, co přesně selhalo.
+
+Typy problému:
+
+- Pravidlo je správné, ale člověk ho nenašel.
+- Pravidlo je na správném místě, ale název neodpovídá pracovní situaci.
+- Pravidlo je příliš obecné a nepomáhá rozhodnout.
+- Pravidlo je příliš dlouhé pro rychlý provozní okamžik.
+- Pravidlo řeší výjimku jako normální případ.
+- Pravidlo vyžaduje data, která člověk nemá mít mimo kanonický systém.
+- Pravidlo koliduje s jiným checklistem nebo starší šablonou.
+
+Krátká diagnostika:
+
+```markdown
+Co měl člověk udělat?
+
+Kde pravidlo hledal?
+
+Jak pravidlo pojmenoval vlastními slovy?
+
+Která věta pomohla?
+
+Která věta zdržela nebo zmátla?
+
+Vznikla práce navíc?
+
+Vznikla nová kopie dat?
+
+Je problém v pravidle, umístění, názvu, příkladu, nebo staré duplicitě?
+```
+
+Teprve potom upravujte. Jinak hrozí, že opravíte text, který byl v pořádku, a necháte rozbitou navigaci. Nebo naopak přidáte další odstavce do pravidla, které potřebovalo spíš kratší název a lepší odkaz.
+
+### 4. Zkontrolujte datovou stopu po použití
+
+Stabilizované pravidlo může nechtěně vytvořit novou datovou stopu. Člověk si třeba začne dělat vlastní pomocnou tabulku, kopíruje příklady do osobních poznámek, ukládá screenshoty pro "jistotu" nebo posílá interní identifikátory v chatu, protože pravidlo není po ruce.
+
+Privacy-first kontrola po prvních použitích se ptá:
+
+- Zůstala citlivá data v kanonickém systému?
+- Nevznikla nová pomocná kopie?
+- Neobsahuje kontrolní záznam reálné zákaznické detaily, které nepotřebuje?
+- Jsou dočasné podklady smazané nebo mají jasnou retenci?
+- Nepřidal tým nový nástroj jen kvůli obejití pravidla?
+- Má pravidlo dostatečně jasné "nedělej", aby bránilo kopírování dat?
+
+Příklad nálezu:
+
+```markdown
+Pravidlo správně říká, že identifikátor má zůstat v ticket systému. Při prvním použití si ale člověk vytvořil osobní poznámku s číslem ticketu, protože v checklistu chyběla věta, kam dát odkaz. Oprava: doplnit "do poznámky vlož jen odkaz na ticket systém, ne identifikátor ani screenshot".
+```
+
+Tohle je přesně důvod, proč se kontrola dělá brzo. Malý vedlejší efekt se dá opravit jednou větou. Když se nechá žít tři měsíce, vznikne zvyk, který se opravuje hůř.
+
+### 5. Rozhodněte stav pravidla
+
+Po prvních použitích dejte pravidlu stav. Ne každé pravidlo musí rovnou růst. Někdy stačí potvrdit, že funguje. Jindy potřebuje drobnou opravu, přesun, zkrácení nebo archivaci.
+
+Praktické stavy:
+
+- `ponechat`: pravidlo fungovalo bez podstatného tření.
+- `upravit text`: obsah je správně, ale formulace brzdí.
+- `přesunout`: pravidlo je užitečné, ale není v pracovním místě.
+- `sloučit`: pravidlo duplikuje existující checklist nebo standard.
+- `zkrátit`: pravidlo je správné, ale moc dlouhé pro okamžik použití.
+- `rozšířit příklad`: lidé chápou princip, ale tápou ve výjimce.
+- `vrátit do experimentu`: pravidlo je předčasné, situace není dost opakovatelná.
+- `archivovat`: pravidlo nepomáhá nebo řeší problém, který už neexistuje.
+
+Rozhodnutí pište jednou větou:
+
+```markdown
+Po třech support použitích pravidlo ponecháváme, ale měníme název v checklistu z "Interní identifikátory" na "Když potřebuješ odkázat na ticket nebo incident", protože lidé hledali podle situace, ne podle datového typu.
+```
+
+Dobré rozhodnutí je dost konkrétní, aby šlo udělat. Slabé rozhodnutí zní třeba "dokumentaci zpřehlednit". To není rozhodnutí. To je povzdech.
+
+### 6. Udělejte jednu malou opravu
+
+Kontrola prvních použití nemá otevřít velký refaktor dokumentace. Vyberte jednu opravu, která nejvíc sníží tření v dalším použití.
+
+Možné malé opravy:
+
+- přejmenovat nadpis podle pracovní situace,
+- přesunout pravidlo o jednu úroveň výš v checklistu,
+- doplnit jednu větu "nedělej",
+- přidat krátký anonymizovaný příklad,
+- odstranit duplicitní starou formulaci,
+- přidat odkaz z onboardingového balíčku,
+- zkrátit pravidlo na tři kroky,
+- doplnit revizní háček po dalších třech použitích.
+
+Příklad malé opravy:
+
+```markdown
+Před:
+Práce s provozními identifikátory
+
+Po:
+Když v supportu potřebuješ odkázat na ticket, incident nebo objednávku
+```
+
+Obsah se nezměnil. Změnila se najitelnost. To často stačí.
+
+### 7. Uzavřete smyčku v týmové paměti
+
+Po kontrole pravidla zapište stručný výsledek tam, kde tým sleduje životnost pravidel. Neopisujte celý průchod. Stačí rozhodnutí, důvod a odkaz na kanonické místo.
+
+Záznam:
+
+```markdown
+Pravidlo:
+Práce s provozními identifikátory v supportu
+
+Kontrola:
+První tři použití
+
+Výsledek:
+Pravidlo pomohlo držet identifikátory v ticket systému, ale lidé ho hledali podle situace, ne podle názvu datového typu.
+
+Změna:
+Přejmenován nadpis v support checklistu a doplněna věta, že do pracovní poznámky patří odkaz na kanonický systém, ne screenshot.
+
+Privacy-first závěr:
+Nevznikla trvalá kopie zákaznických dat. Jedna dočasná osobní poznámka byla smazaná.
+
+Další kontrola:
+Po dalších třech použitích mimo autora pravidla.
+```
+
+Tím se pravidlo nestává těžším. Stává se dohledatelným. A to je rozdíl.
+
+### Šablona kontroly stabilizovaného pravidla
+
+```markdown
+# Kontrola stabilizovaného pravidla po prvních použitích
+
+Pravidlo:
+Kanonické místo:
+Datum stabilizace:
+Datum kontroly:
+Vlastník:
+
+Kontrolovaný vzorek:
+- použití 1:
+- použití 2:
+- použití 3:
+
+Použil pravidlo někdo jiný než autor?
+Ano / Ne
+
+Našel člověk pravidlo bez pomoci?
+Ano / Ne / Částečně
+
+Pomohlo pravidlo rozhodnout?
+Ano / Ne / Částečně
+
+Kde vzniklo tření:
+
+Co fungovalo dobře:
+
+Co se obcházelo:
+
+Privacy-first kontrola:
+- nevznikla nová trvalá kopie citlivých dat:
+- dočasné podklady jsou smazané nebo mají retenci:
+- příklady jsou anonymizované:
+- odkazy vedou do kanonických systémů:
+- pravidlo nevyžaduje zbytečná data:
+
+Rozhodnutí stavu:
+ponechat / upravit text / přesunout / sloučit / zkrátit / rozšířit příklad / vrátit do experimentu / archivovat
+
+Jedna malá oprava:
+
+Kanonické místo po opravě:
+
+Záznam do týmové paměti:
+
+Další revizní háček:
+```
+
+### Mini workshop: 25 minut na kontrolu prvních použití
+
+Agenda:
+
+1. 3 minuty: připomenout původní pravidlo a jeho slib.
+2. 5 minut: projít první reálná použití.
+3. 4 minuty: oddělit problém pravidla od problému umístění.
+4. 4 minuty: zkontrolovat datovou stopu.
+5. 3 minuty: rozhodnout stav pravidla.
+6. 4 minuty: vybrat jednu malou opravu.
+7. 2 minuty: zapsat výsledek a další revizní háček.
+
+Pravidla:
+
+- Nehodnoťte člověka, hodnoťte systém.
+- Neopravujte všechno najednou.
+- Sledujte, jestli pravidlo pomáhá v okamžiku práce.
+- Každý příklad anonymizujte.
+- Pokud pravidlo vyžaduje novou kopii dat, vraťte se k návrhu.
+
+### Checklist
+
+- Vybrali jste konkrétní první použití, ne jen obecný pocit?
+- Použil pravidlo někdo jiný než jeho autor?
+- Našel člověk pravidlo bez soukromé navigace od autora?
+- Pomohlo pravidlo rozhodnout, co udělat a co nedělat?
+- Oddělili jste problém textu od problému umístění?
+- Zkontrolovali jste, zda nevznikla nová kopie citlivých dat?
+- Máte jasný stav pravidla po kontrole?
+- Vybrali jste jednu malou opravu místo velkého refaktoru?
+- Zůstává kanonické místo jasné?
+- Zapsali jste stručný výsledek do týmové paměti?
+- Má pravidlo další revizní háček?
+
+Kontrola stabilizovaného pravidla po prvních použitích chrání tým před dvěma extrémy. První je slepě věřit, že publikované pravidlo funguje. Druhý je přepisovat dokumentaci pokaždé, když někdo narazí na drobné tření. Správný střed je praktický: podívat se na reálnou práci, vybrat jednu opravu, držet jeden zdroj pravdy a nezvětšovat datovou stopu. Tak se z pravidel nestává byrokracie, ale provozní opora.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GB o kontrole stabilizovaného pravidla po prvních použitích: výběr reálných průchodů, sledování práce místo poslušnosti, rozlišení chyby pravidla a umístění, privacy-first kontrola datové stopy, rozhodnutí stavu pravidla, jedna malá oprava, týmová paměť, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GA o stabilizaci ověřené opravy lekce do trvalého pravidla: rozhodnutí o opakovatelnosti, výběr kanonického místa, přepis do pracovního pravidla, zkrácení příběhu, úklid starých variant, revizní háček, předání týmu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha FZ o ověření malé opravy lekce po prvním použití: návrat k opravné větě, výběr reálné situace, sledování práce místo člověka, signály rozhodnutí, samostatnosti a datové stopy, privacy-first uzavření, stav opravy, uzavření v týmové paměti, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha FY o převodu nálezu z týmové paměti do malé opravy lekce: výběr jednoho nálezu, opravná věta, rozlišení textu, trasy, příkladu a pravidla, kanonické místo, pracovní zkratka, privacy-first kontrola, changelog, ověření, šablona, mini workshop a checklist.
