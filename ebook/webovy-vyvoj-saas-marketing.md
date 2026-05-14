@@ -53439,8 +53439,334 @@ Pravidla:
 
 Převod ověřeného pravidla do provozního standardu je malý, ale rozhodující krok. Bez něj zůstává dobrá lekce závislá na paměti několika lidí. S ním se z ní stane součást systému: má místo, vlastníka, rytmus, kontrolu a hranici. To je přesně rozdíl mezi dokumentací, která se jen čte, a standardem, který opravdu snižuje riziko v práci.
 
+## Příloha GD: Kontrola provozního standardu po prvním pracovním cyklu
+
+Provozní standard začne skutečně existovat až ve chvíli, kdy ho někdo použije v běžném pracovním tlaku. Karta standardu může být hezky napsaná, vlastník může být určený a odkaz může viset v kanonickém indexu. Pořád ale nevíte, jestli standard pomáhá. To zjistíte až v prvním cyklu: při support review, předání projektu, onboardingu nové role, incidentním drillu, publikační bráně nebo jiné situaci, kde má standard změnit práci.
+
+Tato příloha navazuje na Přílohu GC. Tam jste ověřené pravidlo převedli do provozního standardu. Teď kontrolujete, jestli se standard v prvním pracovním cyklu osvědčil. Cílem není hledat viníka, když ho někdo nepoužil. Cílem je zjistit, jestli standard leží na správném místě, je srozumitelný, nevyžaduje zbytečnou ruční práci a nevytváří novou datovou stopu.
+
+První kontrola má odpovědět na pět otázek:
+
+- Použil někdo standard v reálné práci?
+- Šel najít v okamžiku, kdy byl potřeba?
+- Pomohl udělat rozhodnutí, nebo jen přidal další text ke čtení?
+- Nevznikly kvůli kontrole nové kopie dat, screenshoty nebo pomocné evidence?
+- Stačí jedna malá oprava, nebo standard potřebuje vrátit do pilotního režimu?
+
+Když standard po prvním cyklu nikdo nepoužije, není to automaticky lenost týmu. Často je to signál, že standard není napojený na správné pracovní místo. Dokumentace, která čeká, až si na ni člověk vzpomene sám, má v provozu podobnou autoritu jako cedulka "uklízejte po sobě" v kuchyňce. Hezké přání, slabý systém.
+
+### 1. Vymezte první pracovní cyklus
+
+Kontrola bez jasného cyklu rychle sklouzne do dojmů. "Zavedli jsme standard a vypadá to dobře" není kontrola. "Během prvního měsíčního support review jsme prošli tři anonymizované situace, kde se odkazovalo na provozní identifikátory" už kontrola je.
+
+Použitelné cykly:
+
+- první měsíční support review,
+- první předání projektu po zavedení standardu,
+- první onboarding nové role,
+- první incidentní drill,
+- první publikační kontrola článku nebo landing page,
+- první kvartální kontrola datové mapy,
+- první delivery retro po zákaznickém výstupu.
+
+Záznam:
+
+```markdown
+Standard:
+Pracovní cyklus:
+Datum od:
+Datum do:
+Vlastník kontroly:
+Kde měl standard pomoci:
+Pracovní místo, kde byl standard dostupný:
+```
+
+Držte první kontrolu úzkou. Nemá dokázat, že standard vyřešil celý provoz. Má ověřit, jestli první zavedení funguje dost dobře na další cyklus.
+
+### 2. Sbírejte důkazy z práce, ne pocity z dokumentace
+
+Pro první kontrolu nepotřebujete novou analytiku ani složitou tabulku. Potřebujete pár důkazů z reálné práce. Ideálně takových, které už existují v kanonickém systému a nemusí se kopírovat jinam.
+
+Vhodné důkazy:
+
+- anonymizovaný popis situace,
+- odkaz na kanonický pracovní záznam, pokud má kontrolující oprávnění,
+- krátká poznámka, zda standard pomohl rozhodnout,
+- počet situací, kde se standard hodil,
+- jedna věta od člověka, který standard použil,
+- konkrétní tření: nejasný název, chybějící příklad, dlouhá karta, špatný odkaz.
+
+Nevhodné důkazy:
+
+- kopie zákaznických údajů do kontrolní tabulky,
+- screenshoty interních systémů bez důvodu,
+- dlouhé výpisy ticketů mimo ticket systém,
+- osobní poznámky s identifikátory,
+- měření jednotlivců tam, kde stačí agregovaný signál.
+
+Privacy-first pravidlo: do kontrolního dokumentu patří jen anonymizovaný závěr, odkaz a rozhodnutí. Detaily zůstávají v systému, kde mají oprávnění, audit a retenci.
+
+### 3. Otestujte dohledatelnost v pracovním okamžiku
+
+Standard může být dobře napsaný a přesto nepoužitelný, pokud ho člověk nenajde ve chvíli, kdy rozhoduje. Lidé nehledají interní názvy standardů. Hledají odpověď na konkrétní otázku: "můžu dát číslo ticketu do poznámky?", "kam patří screenshot?", "co smím poslat zákazníkovi?", "jak anonymizovat příklad do šablony?".
+
+Test dohledatelnosti:
+
+1. Vyberte člověka, který standard nepsal.
+2. Dejte mu reálnou pracovní situaci.
+3. Sledujte, kde začne hledat.
+4. Zapište první tři výrazy, které použije.
+5. Ověřte, jestli se ke standardu dostane do dvou minut.
+6. Zeptejte se, jestli po přečtení ví, co má udělat.
+
+Příklad:
+
+```markdown
+Situace:
+Support řeší eskalaci a chce do interní poznámky přidat odkaz na zákaznický ticket.
+
+Co člověk hledal:
+- ticket v poznámce
+- zákaznické údaje v supportu
+- identifikátory
+
+Výsledek:
+Standard našel přes support checklist, ne přes kanonický index.
+
+Oprava:
+Přidat do indexu aliasy "ticket v poznámce" a "zákaznické údaje v supportu".
+```
+
+Tohle je malá oprava s velkým dopadem. Standard, který nejde najít lidským jazykem, není provozní standard. Je to dokumentační parkoviště.
+
+### 4. Rozlište chybu použití od chyby standardu
+
+Když se standard nepoužije správně, první reakce bývá "lidé to nedodrželi". Někdy ano. Často ale standard selhal dřív: nebyl u pracovního místa, měl moc abstraktní název, chyběl mu příklad, žádal rozhodnutí mimo pravomoc role nebo přidal krok, který v reálném tempu nedává smysl.
+
+Rozlišujte:
+
+- Chyba dostupnosti: standard nebyl tam, kde člověk pracoval.
+- Chyba srozumitelnosti: člověk ho našel, ale nepochopil další krok.
+- Chyba pravomoci: standard chtěl rozhodnutí, které role nesmí udělat.
+- Chyba rozsahu: standard řešil moc situací najednou.
+- Chyba návyku: standard byl jasný a dostupný, ale obešel se.
+- Chyba datové stopy: použití standardu vedlo k nové zbytečné evidenci.
+
+Záznam:
+
+```markdown
+Pozorování:
+V jednom předání projektu vznikla pomocná tabulka s interními identifikátory.
+
+První dojem:
+Tým obešel standard.
+
+Kontrola:
+Standard říká "nezakládat pomocné evidence", ale předávací checklist nemá pole pro anonymizovaný souhrn rizika.
+
+Typ chyby:
+Chyba pracovního místa a srozumitelnosti.
+
+Oprava:
+Do předávacího checklistu přidat pole "anonymizovaný souhrn rizika" a odkaz na kanonický systém.
+```
+
+Codyho komentář: standard, který funguje jen tehdy, když si člověk v tlaku vzpomene na správnou větu v dokumentu, není standard. Je to přání s hezčím nadpisem.
+
+### 5. Zkontrolujte skrytou práci a datovou stopu
+
+Dobrý standard práci zpřesní. Špatný standard přidá ruční kolečko: zapiš sem, zkopíruj tam, potvrď ještě tady a jednou měsíčně to někdo ručně srovná. Takhle vzniká provozní únava a často i privacy-first problém.
+
+Ptejte se:
+
+- Přibyl nový ruční krok?
+- Je krok nutný pro rozhodnutí, nebo jen pro pocit kontroly?
+- Dá se nahradit odkazem na existující záznam?
+- Vzniká nová evidence, která potřebuje vlastníka a retenci?
+- Vede standard ke kopírování dat mezi systémy?
+- Je jasné, kdy se nový krok přestane dělat?
+
+Příklad:
+
+```markdown
+Standard:
+Každý předávací výstup má mít privacy-first kontrolu.
+
+Skrytá práce:
+Tým začal kopírovat stejné závěry do projektového dokumentu, interní tabulky a měsíčního review.
+
+Lepší řešení:
+Kanonický závěr zůstává v předávacím dokumentu. Měsíční review používá jen agregovaný počet kontrol a odkaz na vzorek.
+```
+
+U privacy-first standardů je to zvlášť důležité. Kontrola soukromí nesmí paradoxně vytvořit další místa, kde leží osobní údaje, screenshoty nebo interní identifikátory.
+
+### 6. Vyberte jednu opravu
+
+První kontrola obvykle odhalí víc drobností. Neopravujte všechno najednou. Vyberte jednu změnu, která nejvíc zlepší další použití standardu. Zbytek zapište do backlogu.
+
+Dobré první opravy:
+
+- přejmenovat standard lidským jazykem,
+- přidat alias do kanonického indexu,
+- doplnit jeden příklad "dělej / nedělej",
+- vložit odkaz do konkrétního checklistu,
+- zkrátit kartu o historické vysvětlování,
+- doplnit vlastníka a datum další kontroly,
+- zrušit pomocnou evidenci, která vznikla navíc.
+
+Slabé první opravy:
+
+- založit nový meeting,
+- rozkopírovat standard do všech dokumentů,
+- přidat pět povinných polí,
+- začít měřit jednotlivce,
+- přepsat celý standard bez důkazu z použití,
+- udělat z lokálního problému celofiremní pravidlo.
+
+Šablona rozhodnutí:
+
+```markdown
+Nález:
+Typ problému:
+Vybraná oprava:
+Proč právě tato oprava:
+Co záměrně neděláme:
+Kdo provede:
+Termín:
+Jak ověříme v dalším cyklu:
+```
+
+Jedna dobrá oprava po prvním cyklu je víc než velká reorganizace standardů. Ta by možná vypadala aktivně, ale týmu by jen přidala další mapu k mapě.
+
+### 7. Uzavřete kontrolu stavem standardu
+
+Kontrola bez rozhodnutí je poznámka. Na konci prvního cyklu má být jasné, co se se standardem děje dál.
+
+Možné stavy:
+
+- ponechat beze změny,
+- opravit jedno pracovní místo,
+- upravit standardovou kartu,
+- zkrátit standard,
+- přesunout standard do jiného rytmu,
+- sloučit se souvisejícím standardem,
+- vrátit do pilotního režimu,
+- archivovat, protože situace není dost opakovaná.
+
+Příklad:
+
+```markdown
+Rozhodnutí:
+Standard ponechat aktivní, ale upravit dohledatelnost.
+
+Důvod:
+Ve dvou ze tří situací pomohl rozhodnout. Jeden člověk ho nenašel přes kanonický index.
+
+Oprava:
+Přidat aliasy do indexu a odkaz ze support checklistu.
+
+Privacy-first závěr:
+Nevznikla nová pomocná evidence. Dočasný kontrolní záznam byl anonymizován a po review smazán.
+
+Další kontrola:
+Po příštím měsíčním support review.
+```
+
+Rozhodnutí nemusí být dramatické. Dobrá provozní práce je často nudně konkrétní: jedna úprava, jasný vlastník, další kontrola.
+
+### Šablona první kontroly standardu
+
+```markdown
+# První kontrola provozního standardu
+
+Standard:
+Vlastník standardu:
+Pracovní cyklus:
+Datum kontroly:
+Kontrolující:
+
+Kde měl standard pomoci:
+Kde byl standard dostupný:
+Počet reálných situací:
+
+Anonymizované příklady použití:
+-
+-
+
+Pomohl standard rozhodnout?
+Byl nalezitelný v pracovním okamžiku?
+
+Co lidé hledali:
+-
+-
+
+Tření:
+-
+-
+
+Typ problému:
+- dostupnost:
+- srozumitelnost:
+- pravomoc:
+- rozsah:
+- návyk:
+- datová stopa:
+
+Privacy-first kontrola:
+- nevznikla nová zbytečná evidence:
+- důkazy zůstaly v kanonických systémech:
+- kontrolní záznam je anonymizovaný:
+- dočasné podklady mají retenci nebo byly smazané:
+- standard nevede ke kopírování dat:
+
+Rozhodnutí:
+Jedna oprava:
+Co záměrně neřešíme:
+Vlastník opravy:
+Další kontrola:
+```
+
+### Mini workshop: 25 minut po prvním cyklu
+
+Agenda:
+
+1. 3 minuty: připomenout standard a první pracovní cyklus.
+2. 4 minuty: projít anonymizované příklady použití.
+3. 4 minuty: otestovat dohledatelnost přes reálný jazyk lidí.
+4. 4 minuty: rozlišit chybu použití od chyby standardu.
+5. 3 minuty: projít privacy-first stopu kontroly.
+6. 4 minuty: vybrat jednu opravu.
+7. 3 minuty: zapsat rozhodnutí a další kontrolu.
+
+Pravidla:
+
+- Nepište novou metodiku během kontroly.
+- Nezakládejte další evidenci, pokud stačí odkaz do kanonického systému.
+- Neřešte výkon jednotlivců, pokud problém leží v dostupnosti nebo srozumitelnosti standardu.
+- Vyberte jednu opravu s jasným vlastníkem.
+- Do changelogu patří rozhodnutí, ne celý příběh.
+
+### Checklist
+
+- Je první pracovní cyklus přesně vymezený?
+- Máte důkazy z reálné práce, ne jen dojmy z dokumentace?
+- Jsou příklady anonymizované a uložené jen v potřebném rozsahu?
+- Ověřili jste, zda standard šel najít v pracovním okamžiku?
+- Zapsali jste jazyk, kterým lidé standard skutečně hledají?
+- Rozlišili jste chybu použití od chyby dostupnosti, srozumitelnosti nebo pravomoci?
+- Zkontrolovali jste, zda standard nevytvořil skrytou ruční práci?
+- Nevznikla nová zbytečná datová stopa?
+- Vybrali jste jednu konkrétní opravu?
+- Je jasné, co záměrně neřešíte?
+- Má oprava vlastníka a termín?
+- Je zapsané rozhodnutí o dalším stavu standardu?
+
+První kontrola provozního standardu chrání tým před dokumentační iluzí. Standard není hotový tím, že existuje. Je hotový až tehdy, když pomůže v práci, jde najít včas, nevytvoří zbytečnou evidenci a dá se po prvním použití klidně opravit. To je dobrý provozní zvyk: méně velkých prohlášení, víc malých ověřených zlepšení.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GD o kontrole provozního standardu po prvním pracovním cyklu: vymezení cyklu, důkazy z reálné práce, dohledatelnost, rozlišení chyby použití a chyby standardu, skrytá práce, privacy-first datová stopa, jedna oprava, stav standardu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GC o převodu ověřeného pravidla do běžného provozního standardu: rozhodnutí, kdy standardizovat, napojení na existující rytmus, vlastnictví, standardová karta, první pracovní místo zavedení, změnové pravidlo, uzavření původní lekce v týmové paměti, šablona, mini workshop a checklist.
 - 2026-05-14: Zpřesněn úvodní návod k použití rukopisu o jednoduchou pracovní větu po každém čtení.
 - 2026-05-14: Doplněna Příloha GB o kontrole stabilizovaného pravidla po prvních použitích: výběr reálných průchodů, sledování práce místo poslušnosti, rozlišení chyby pravidla a umístění, privacy-first kontrola datové stopy, rozhodnutí stavu pravidla, jedna malá oprava, týmová paměť, šablona, mini workshop a checklist.
