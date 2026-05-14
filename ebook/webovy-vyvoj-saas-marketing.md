@@ -55363,8 +55363,284 @@ Pravidla:
 
 Kontrola po prvním dalším cyklu chrání tým před dvěma častými extrémy. První extrém: každou úpravu oslavit jako hotovou jen proto, že byla zapsaná. Druhý extrém: při prvním tření otevřít celý systém znovu. Praktický provoz potřebuje klidnější rytmus. Jedna změna, jeden skutečný průchod, jedno rozhodnutí. Žádná procesní opera o třech jednáních.
 
+## Příloha GK: Stabilizace úspěšné provozní úpravy po kontrole
+
+Když provozní úprava projde prvním dalším cyklem a kontrola ukáže, že opravdu pomohla, přichází nenápadná, ale důležitá práce: stabilizovat ji. Neznamená to udělat z každé drobné opravy nový velký standard. Znamená to zajistit, aby se dobrý nový návyk neztratil, až zmizí čerstvá energie z posledního review.
+
+Stabilizace je malý přechod z režimu "zkusili jsme" do režimu "takto to teď děláme". Pokud ho vynecháte, úprava často zůstane jen v zápisu z jedné schůzky. Za měsíc ji někdo najde, někdo ne, někdo bude pokračovat po staru a někdo si vytvoří vlastní verzi. A pak se tým diví, že dokumentace roste, ale jistota klesá. To je velmi lidské. Také dost otravné.
+
+Tato příloha pomáhá převést úspěšnou provozní úpravu do stabilního místa v práci. Praktický výstup je krátká stabilizační karta: co se stává trvalým pravidlem, kde je zdroj pravdy, kdo změnu vlastní, jak se bude revidovat a jak se uklidí dočasná stopa z pilotního ověření.
+
+### 1. Ověřte, že úprava opravdu zaslouží stabilizaci
+
+Ne každá úspěšná úprava má být stabilizovaná. Některé změny pomohou jen jednorázově, protože řešily konkrétní incident, přechodné období nebo dočasný projekt. Stabilizujte jen to, co má opakovanou hodnotu.
+
+Před stabilizací si napište odpovědi na čtyři otázky:
+
+- Bude se stejná situace opakovat?
+- Pomohla úprava bez nadměrné ruční podpory?
+- Snížila tření, chyby, čekání nebo datovou stopu?
+- Je levnější úpravu držet než ji pokaždé znovu vysvětlovat?
+
+Příklad:
+
+```markdown
+Úprava:
+Při měsíční kontrole standardů zapisujeme detail jen u výjimek, u stabilních položek pouze stav.
+
+Proč stabilizovat:
+Kontrola se opakuje měsíčně, nový zápis zkrátil review a nezhoršil rozhodování.
+
+Proč nestabilizovat jako nový velký standard:
+Stačí doplnit pravidlo do existující šablony měsíční kontroly.
+```
+
+Slabý důvod pro stabilizaci je "někomu se to líbilo". Silný důvod je "opakovaně to snížilo cenu práce a zachovalo kvalitu rozhodnutí".
+
+### 2. Rozhodněte, co přesně se stává trvalým
+
+Úspěšná úprava často obsahuje víc věcí: nový krok, zkrácenou šablonu, jiný čas kontroly, nové vlastnictví, jiný zápis, odkaz v indexu nebo pravidlo pro mazání podkladů. Do stabilního provozu nepřenášejte vše automaticky. Vyberte jen jádro, které skutečně pomohlo.
+
+Rozlišujte:
+
+| Prvek úpravy | Stabilizovat? | Proč |
+| --- | --- | --- |
+| Nový pracovní krok | Ano, pokud se opakuje a šetří rozhodování | Přidat do agendy nebo checklistu |
+| Dočasná pilotní poznámka | Ne | Stačí shrnout výsledek a archivovat |
+| Ruční připomenutí vlastníka | Ne jako pravidlo | Lepší je napojit změnu na přirozený rytmus |
+| Nové pole v šabloně | Ano, pokud bez něj vzniká nejasnost | Zkrátit a pojmenovat prakticky |
+| Screenshoty z ověření | Ne | Nahradit anonymizovaným závěrem |
+
+Příklad stabilizační věty:
+
+```markdown
+Trvalé pravidlo:
+U měsíční kontroly standardů se u položek beze změny zapisuje pouze stav "ponechat"; důvod se doplňuje jen u výjimek s právním, datovým, zákaznickým nebo provozním dopadem.
+```
+
+Tahle věta je lepší než "zkracujeme zápis". Říká, co se dělá, kdy se dělá výjimka a podle čeho se člověk rozhodne.
+
+### 3. Uložte pravidlo do místa, kde se práce opravdu děje
+
+Stabilizace není kopírování textu do dalšího dokumentu. Pravidlo musí být tam, kde ho tým potká v rozhodovací chvíli.
+
+Dobrá místa:
+
+- šablona měsíční kontroly,
+- agenda pravidelného review,
+- kanonický index standardů,
+- checklist před odesláním výstupu,
+- karta role nebo vlastnictví,
+- provozní runbook,
+- onboardingová trasa,
+- šablona ticketu nebo issue,
+- CRM etapa, pokud jde o obchodní práci.
+
+Špatná místa:
+
+- volná poznámka v chatu,
+- zápis ze schůzky bez odkazu z kanonického indexu,
+- kopie v osobní složce,
+- "dočasný" dokument, který přežije tři kvartály,
+- komentář v úkolu, který se po uzavření ztratí.
+
+Praktické pravidlo: pokud nový člověk začne za tři měsíce a nebude se ptát původního autora, musí pravidlo najít sám. Jinak není stabilizované, jen historicky doložené.
+
+### 4. Aktualizujte jen nezbytné artefakty
+
+Stabilizace má být lehká. Pokud kvůli jedné ověřené úpravě přepisujete pět playbooků, pravděpodobně jste do stabilizace přibalili úklid, který patří do samostatné iterace.
+
+Minimální stabilizační balíček:
+
+- jeden kanonický artefakt s novým pravidlem,
+- jeden odkaz v indexu nebo agendě, pokud je potřeba,
+- jeden krátký záznam do changelogu,
+- jedno rozhodnutí o dočasných podkladech.
+
+Příklad:
+
+```markdown
+Upravit:
+- Šablona měsíční kontroly standardů: doplnit pravidlo pro zápis detailu jen u výjimek.
+- Kanonický index: ponechat stejný odkaz, změnit datum poslední revize.
+- Changelog: zapsat stabilizaci úpravy po prvním cyklu.
+
+Neměnit:
+- Celý onboardingový balíček.
+- Všechny historické kontroly.
+- Obecný standard týmové dokumentace.
+```
+
+Tím držíte dokumentaci jako systém, ne jako lavinu. Laviny jsou dramatické, ale špatně se v nich hledá checklist.
+
+### 5. Zavřete pilotní stopu
+
+Úspěšná úprava po sobě často nechá pilotní materiály: pracovní tabulku, komentáře, exporty, screenshoty, dočasné kopie, testovací checklist, poznámky v chatu nebo příklady z reálných zákaznických situací. Stabilizace je správný okamžik je uklidit.
+
+Privacy-first úklid:
+
+- ponechte jen rozhodnutí a stručný důkaz, proč změna zůstává,
+- smažte dočasné kopie, které už nejsou potřeba,
+- anonymizujte příklady, pokud mají zůstat jako výukový materiál,
+- zkontrolujte přístupy k pilotním podkladům,
+- doplňte retenční datum u materiálů, které musí ještě chvíli zůstat,
+- nepřenášejte osobní ani zákaznické detaily do stabilního standardu.
+
+Příklad:
+
+```markdown
+Pilotní důkaz:
+V prvním měsíčním review se zkrácený zápis použil u 18 položek; detail byl potřeba u 3 výjimek.
+
+Kanonický záznam:
+Zkrácený zápis snížil režii kontroly a zachoval dohledatelnost výjimek.
+
+Smazat:
+Pracovní export s kompletním seznamem interních poznámek.
+```
+
+Codyho komentář: stabilizace bez úklidu je jako uklidit stůl tím, že všechno odnesete do jiné místnosti. Chvíli to vypadá dobře. Pak někdo otevře dveře.
+
+### 6. Předejte změnu jako nový normál
+
+Tým nepotřebuje slyšet celý příběh úpravy pokaždé znovu. Potřebuje vědět, co odteď platí.
+
+Krátké předání:
+
+```markdown
+Odteď platí:
+U stabilních položek v měsíční kontrole zapisujeme jen stav. Detail doplňujeme pouze u výjimek s právním, datovým, zákaznickým nebo provozním dopadem.
+
+Kde je zdroj pravdy:
+[odkaz na šablonu měsíční kontroly]
+
+Proč:
+V prvním ověření to snížilo zbytečný zápis a zachovalo kvalitu rozhodnutí.
+
+Co už neděláme:
+Nevytváříme vedlejší poznámkový dokument pro položky beze změny.
+
+Co se uklízí:
+Dočasné exporty z pilotu se smažou po zapsání rozhodnutí.
+```
+
+Předání má být konkrétní a krátké. Jakmile z něj uděláte přednášku o procesní zralosti, půlka týmu začne přemýšlet, co bude k obědu. A upřímně, někdy právem.
+
+### 7. Nastavte první lehkou revizi
+
+Stabilní neznamená navždy. Znamená: používáme to jako aktuální pravidlo, dokud data z práce neukážou, že je potřeba změna.
+
+Po stabilizaci nastavte lehkou revizi:
+
+- po jednom měsíci, pokud jde o častý provozní rytmus,
+- po dvou až třech použitích, pokud se situace opakuje nepravidelně,
+- po prvním incidentu nebo výjimce, pokud jde o bezpečnostní nebo privacy-first pravidlo,
+- při změně role, nástroje, právní povinnosti nebo zákaznického toku.
+
+Revizní otázky:
+
+- Používá se pravidlo bez ručního připomínání?
+- Nevrátil se starý workaround?
+- Je výjimka jasná?
+- Nevznikla nová datová stopa?
+- Pomáhá pravidlo novým lidem, nebo jen těm, kteří byli u zavedení?
+
+Lehká revize je pojistka proti zatuhnutí. Bez ní se i dobré pravidlo může za půl roku proměnit v rituál, který všichni dělají a nikdo neví proč.
+
+### Stabilizační karta
+
+```markdown
+# Stabilizace provozní úpravy
+
+Název úpravy:
+Původní změnová věta:
+Cyklus ověření:
+Rozhodnutí po kontrole:
+
+## Co se stabilizuje
+
+Trvalé pravidlo:
+Kdy se použije:
+Kdy se nepoužije:
+Výjimky:
+
+## Kanonické místo
+
+Zdroj pravdy:
+Artefakty upravené při stabilizaci:
+Artefakty ponechané beze změny:
+Odkazy aktualizované v indexu:
+
+## Vlastnictví
+
+Vlastník pravidla:
+Role, které pravidlo používají:
+Kdo schvaluje budoucí změny:
+
+## Privacy-first úklid
+
+Dočasné podklady z ověření:
+Co se smaže:
+Co se anonymizuje:
+Co zůstává jako kanonický záznam:
+Retence:
+Přístupy:
+
+## Předání týmu
+
+Krátké sdělení:
+Co odteď neděláme:
+Kde najít zdroj pravdy:
+
+## Revize
+
+První lehká revize:
+Revizní otázka:
+Ochranný signál:
+Co spustí dřívější revizi:
+```
+
+### Mini workshop na 30 minut
+
+Agenda:
+
+1. 4 minuty: připomenout původní změnovou větu a výsledek prvního ověření.
+2. 5 minut: rozhodnout, jestli úprava má opakovanou hodnotu.
+3. 5 minut: napsat trvalé pravidlo a výjimky.
+4. 5 minut: určit kanonické místo a minimum artefaktů k úpravě.
+5. 4 minuty: udělat privacy-first úklid pilotních podkladů.
+6. 4 minuty: napsat krátké předání týmu.
+7. 3 minuty: nastavit první lehkou revizi.
+
+Pravidla:
+
+- Stabilizujte jen jádro, které skutečně pomohlo.
+- Nepřepisujte širší systém, pokud funguje.
+- Pravidlo musí být v pracovním místě, ne jen v zápisu ze schůzky.
+- Do stabilního standardu nepatří pilotní surová data.
+- Předání týmu pište jako nový normál, ne jako historický román.
+- Revizi nastavte lehkou, ale konkrétní.
+
+### Checklist
+
+- Má úprava opakovanou hodnotu?
+- Prošla prvním reálným cyklem bez nadměrné ruční podpory?
+- Je jasné, co přesně se stává trvalým pravidlem?
+- Jsou popsané výjimky, aby pravidlo nebylo slepé?
+- Je pravidlo uložené v místě, kde tým opravdu pracuje?
+- Aktualizovali jste jen nezbytné artefakty?
+- Existuje krátký changelog záznam?
+- Uklidili jste dočasné pilotní podklady?
+- Nezůstaly v příkladech osobní, zákaznické nebo zbytečné interní detaily?
+- Ví tým, co odteď platí a co už nedělá?
+- Má pravidlo vlastníka?
+- Je nastavena první lehká revize nebo spouštěč revize?
+
+Stabilizace úspěšné provozní úpravy je drobná disciplína, která chrání dobré změny před zapomenutím. Neoslavuje proces. Ukládá užitečný návyk na správné místo, uklízí pilotní stopy a nechává týmu jasnou větu: takhle to teď děláme, dokud práce neukáže lepší způsob.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GK o stabilizaci úspěšné provozní úpravy po kontrole: ověření opakované hodnoty, výběr trvalého jádra, uložení do kanonického pracovního místa, minimální aktualizace artefaktů, privacy-first úklid pilotních podkladů, předání týmu, lehká revize, stabilizační karta, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GJ o kontrole provozní úpravy po prvním dalším cyklu: návrat ke změnové větě, ověření skutečného průchodu, rozlišení použití/přínosu/ceny, hledání návratu staré práce, privacy-first kontrola datové stopy, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GI o převodu nálezu z kontroly stabilního revizního rytmu do jedné úpravy provozu: výběr nálezu, změnová věta, místo zásahu, minimální rozsah artefaktů, privacy-first úklid podkladů, předání týmu, ověření v dalším cyklu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GH o kontrole stabilního revizního rytmu po prvním měsíci: návrat ke slibu rytmu, reálné průchody, rozlišení problému rytmu od problému standardu, měření ceny revize, privacy-first datová stopa, jedna malá úprava, šablona, mini workshop a checklist.
