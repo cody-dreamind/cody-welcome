@@ -57711,8 +57711,306 @@ Pravidla:
 
 První použití roční změny je malá brána mezi dobrým úmyslem a skutečným provozem. Když ji přeskočíte, systém se může tvářit opraveně, ale lidé budou dál používat staré cesty. Když ji uděláte poctivě, zjistíte rychle, jestli změna pomáhá, kde potřebuje drobnou opravu a které staré stopy konečně zavřít. To je přesně ten typ nenápadné disciplíny, ze které se časem skládá spolehlivý web, SaaS i marketing.
 
+## Příloha GS: Převod ověřené roční změny do nového stabilního bodu
+
+Když roční změna prošla prvním použitím, vzniká příjemně nebezpečný moment. Tým má pocit, že je hotovo. Jenže ověřená změna ještě sama o sobě není stabilní bod systému. Je to zatím dobrá oprava, která obstála v praxi. Aby se z ní stal nový referenční bod, musí být jasné, kam patří, co nahrazuje, kdo ji udržuje a jak poznáte, že se kolem ní nezačíná znovu tvořit stejný chaos.
+
+Stabilní bod není další dokument navíc. Je to místo, na které se tým vrací, když potřebuje rozhodnout. Může to být šablona, provozní karta, index, checklist, datová mapa, sales karta, onboardingová trasa nebo pravidlo v pracovním postupu. Důležité je, aby nebyl vedle práce, ale přímo v práci.
+
+Codyho komentář: mnoho týmů umí udělat dobrou opravu. Méně týmů umí zabránit tomu, aby se dobrá oprava stala pátou variantou stejné pravdy. Stabilita není luxus pro velké firmy. Je to obyčejná schopnost najít správné pravidlo v okamžiku, kdy člověk nemá čas hrabat se v archeologii dokumentů.
+
+### 1. Pojmenujte nový stabilní bod podle situace, ne podle projektu
+
+Název stabilního bodu má odpovídat tomu, kdy ho člověk použije. Interní názvy typu "roční změna 2026", "nová verze šablony" nebo "výstup z inventury" jsou srozumitelné autorovi, ale za pár měsíců budou působit jako skladová etiketa.
+
+Lepší názvy:
+
+- `Karta privacy-first distribuce obsahu`
+- `Checklist prvního SaaS onboardingu`
+- `Rozhodovací karta pro nový marketingový nástroj`
+- `Datová mapa pro produktovou analytiku`
+- `Sales handoff po úvodním hovoru`
+
+Slabší názvy:
+
+- `Update po roční kontrole`
+- `Nová šablona v2`
+- `Inventura výstup`
+- `Změna procesu marketing`
+- `Dokument pro tým`
+
+Praktické pravidlo:
+
+```markdown
+Název stabilního bodu má odpovědět na otázku:
+"Kdy po tom má člověk sáhnout?"
+```
+
+Příklad:
+
+```markdown
+Slabý název:
+Roční změna měření kampaní 2026
+
+Lepší název:
+Karta měření kampaní bez zbytečných trackerů
+
+Proč:
+Člověk ji nehledá při roční inventuře. Hledá ji ve chvíli, kdy připravuje kampaň a potřebuje rozhodnout, co měřit.
+```
+
+### 2. Určete, co nový bod nahrazuje
+
+Stabilizace není jen přidání správné věci. Je to také odstranění nebo zneviditelnění starých cest. Pokud nový bod nic nenahrazuje, často jste jen rozšířili knihovnu dokumentů.
+
+Projděte tři skupiny:
+
+- Primární náhrada: stará šablona, karta, checklist nebo postup, který už se nemá používat.
+- Vedlejší odkazy: indexy, onboardingy, interní wiki, předávací materiály a staré checklisty, které na původní variantu odkazují.
+- Mentální zkratky: věty, které tým pořád používá a které vrací práci do starého režimu.
+
+Příklad:
+
+```markdown
+Nový stabilní bod:
+Karta měření kampaní bez zbytečných trackerů.
+
+Nahrazuje:
+- starou kampaňovou šablonu s remarketingovou částí,
+- odkaz v marketingovém indexu,
+- část onboardingového checklistu pro nového člověka,
+- zvyk ptát se "jaký pixel přidáme?" místo "jaké rozhodnutí potřebujeme měřit?".
+```
+
+Poslední bod je důležitý. Některé staré postupy nejsou v dokumentech, ale v jazyce týmu. Když jazyk zůstane stejný, nový dokument bude pořád tahat za kratší konec provazu.
+
+### 3. Zkraťte historii na pracovní minimum
+
+Roční změna má za sebou inventuru, závěry, rozhodovací větu, první použití a možná drobnou opravu. To všechno je užitečné pro auditní stopu. Pro běžnou práci je toho moc.
+
+Stabilní bod má obsahovat jen to, co člověk potřebuje při použití:
+
+- kdy se používá,
+- jaké rozhodnutí pomáhá udělat,
+- jaký je správný postup,
+- co se výslovně nedělá,
+- jaké minimum dat se sbírá,
+- kdo je vlastník,
+- kdy se kontroluje.
+
+Historii nechte v changelogu nebo změnové kartě. Do pracovního bodu dejte jen krátkou poznámku:
+
+```markdown
+Poznámka:
+Tato karta nahrazuje starou kampaňovou šablonu s remarketingovou částí. První použití proběhlo 2026-05-14, po něm byla doplněna věta k UTM a odstraněn archivní odkaz z indexu.
+```
+
+To stačí. Čtenář ví, že nejde o náhodný experiment, ale nemusí číst celou historii. Kdyby každý stabilní bod nesl kompletní drama svého vzniku, tým by časem potřeboval mapu k mapě.
+
+### 4. Přidejte vlastnictví a rytmus údržby
+
+Stabilní bod bez vlastníka časem zestárne. Ne proto, že by lidé byli nezodpovědní, ale proto, že nikdo neví, kdo má právo ho změnit, zkrátit nebo vyhodit.
+
+Vlastnictví neznamená, že jeden člověk musí dělat vše. Znamená, že je jasné:
+
+- kdo drží poslední verzi,
+- kdo schvaluje významnou změnu,
+- kdo sbírá tření z používání,
+- kdo jednou za čas zkontroluje, jestli bod pořád odpovídá práci,
+- kdo může říct "tohle už neudržujeme".
+
+Jednoduchá karta:
+
+```markdown
+Stabilní bod:
+Karta měření kampaní bez zbytečných trackerů
+
+Vlastník:
+Marketing lead
+
+Používá se při:
+Přípravě nové kampaně, publikaci seriálu, vyhodnocení distribučního experimentu.
+
+Kontrolní rytmus:
+Lehká kontrola po třech použitích, potom kvartálně nebo při změně nástroje.
+
+Stop pravidlo:
+Pokud karta vyžaduje nový externí měřicí nástroj, musí projít datovou mapou a privacy-first bránou.
+```
+
+Rytmus údržby má být přiměřený riziku. Karta pro kampaně může stačit kvartálně. Datová mapa SaaS produktu se má kontrolovat při každé větší produktové změně. Incidentní runbook se ověřuje drillem, ne dobrým pocitem v pondělí ráno.
+
+### 5. Udělejte privacy-first stabilizaci
+
+Stabilní bod se často stává místem, odkud lidé kopírují postupy dál. Proto musí být čistý. Pokud v něm necháte dočasné údaje, zákaznické příklady, osobní data, screenshoty z ostrého systému nebo odkazy na externí nástroje bez rozhodnutí, bude se chyba násobit.
+
+Před uzavřením zkontrolujte:
+
+- Je pracovní příklad anonymizovaný nebo syntetický?
+- Neobsahuje karta tokeny, interní URL s citlivým kontextem nebo screenshoty nastavení?
+- Je jasné, jaké údaje se mají sbírat a proč?
+- Je uvedeno, co se nemá měřit?
+- Nevede karta k novému trackeru jen proto, že je to pohodlné?
+- Je u externího nástroje jasné, kde končí data a kdo k nim má přístup?
+- Má bod retenční pravidlo pro výstupy, které podle něj vznikají?
+
+Privacy-first stabilizace není právní dekorace. Je to provozní ochrana před tím, aby se z jedné dobré šablony stal tichý generátor zbytečných dat.
+
+Mini pravidlo:
+
+```markdown
+Stabilní bod nesmí vyžadovat víc dat než rozhodnutí, které má pomoct udělat.
+```
+
+Příklad:
+
+```markdown
+Rozhodnutí:
+Máme pokračovat v distribučním kanálu?
+
+Stačí:
+Počet kvalitních návštěv, počet relevantních odpovědí, kvalita poptávek, ruční poznámky ze sales/supportu.
+
+Nestačí ospravedlnit:
+Individuální profilování návštěvníků, remarketingový pixel, nahrávání session bez silného důvodu, trvalé ukládání surových exportů.
+```
+
+### 6. Proveďte krátké předání týmu
+
+Stabilní bod se nezavádí oznámením "je to v dokumentaci". To je věta, kterou dokumentace slyší ráda, ale lidé podle ní obvykle nic nezmění.
+
+Předání má mít jednu pracovní větu, jedno místo a jednu ukázku použití.
+
+Šablona předání:
+
+```markdown
+Od teď při [situace] používáme [stabilní bod].
+Nahrazuje [starý postup].
+Hlavní změna je [jedno rozhodnutí nebo pravidlo].
+První příklad použití je [odkaz nebo stručný popis].
+Pokud narazíte na tření, zapisujte ho k [místo].
+```
+
+Příklad:
+
+```markdown
+Od teď při přípravě nové obsahové distribuce používáme Kartu měření kampaní bez zbytečných trackerů. Nahrazuje starou kampaňovou šablonu s remarketingovou částí. Hlavní změna je, že nejdřív pojmenujeme rozhodnutí, které chceme měřit, a teprve potom volíme signál. První příklad je distribuce e-bookového seriálu z 2026-05-14. Tření zapisujte do marketingového backlogu pod štítek `kampanova-karta`.
+```
+
+Tohle je dost krátké na přečtení a dost konkrétní na použití. Ideální kombinace, vzácný druh.
+
+### 7. Zamkněte staré cesty bez ztráty dohledatelnosti
+
+Starý postup nemusí vždy zmizet fyzicky. Někdy ho potřebujete kvůli historii, auditu nebo porovnání. Ale nesmí zůstat v pracovní cestě.
+
+Možnosti:
+
+- Smazat: pokud starý postup nemá žádnou hodnotu a neobsahuje nutnou historii.
+- Archivovat: pokud má historickou hodnotu, ale nesmí se používat.
+- Přesměrovat: pokud na starou URL nebo dokument vedou odkazy.
+- Sloučit: pokud má starý postup jednu užitečnou část, která patří do nového bodu.
+- Označit jako nahrazené: pokud ho kvůli auditní stopě necháváte dostupný.
+
+Minimální archivní poznámka:
+
+```markdown
+Stav:
+Nahrazeno.
+
+Nový zdroj pravdy:
+Karta měření kampaní bez zbytečných trackerů.
+
+Nepoužívat pro nové kampaně.
+Ponecháno jen kvůli historii kampaní spuštěných před 2026-05-14.
+```
+
+Důležité je, aby vyhledávání, onboarding a běžné odkazy vedly na novou verzi. Archiv, který vyhrává interní vyhledávání, není archiv. Je to starý systém v převleku.
+
+### Šablona stabilního bodu po roční změně
+
+```markdown
+# Stabilní bod po roční změně
+
+Název:
+Datum stabilizace:
+Vlastník:
+Používá se při:
+Nahrazuje:
+
+## Pracovní pravidlo
+
+Když:
+Použij:
+Rozhodni:
+Nedělej:
+
+## Privacy-first minimum
+
+Jaká data se sbírají:
+Proč:
+Co se nesbírá:
+Kde jsou data:
+Kdo má přístup:
+Retence:
+
+## Údržba
+
+Kdy se kontroluje:
+Jak se zapisuje tření:
+Kdo schvaluje změny:
+Stop pravidlo:
+
+## Historie
+
+Původní změnová věta:
+První použití:
+Drobná oprava po prvním použití:
+Odkaz na změnovou kartu:
+```
+
+### Mini workshop na 25 minut
+
+Agenda:
+
+1. 3 minuty: připomenout ověřenou roční změnu a její první použití.
+2. 4 minuty: vybrat název podle pracovní situace.
+3. 4 minuty: určit, co nový bod nahrazuje a kde jsou staré odkazy.
+4. 4 minuty: zkrátit historii na pracovní minimum.
+5. 4 minuty: doplnit vlastníka, rytmus údržby a stop pravidlo.
+6. 4 minuty: udělat privacy-first kontrolu stabilního bodu.
+7. 2 minuty: napsat větu pro tým a zavřít staré cesty.
+
+Pravidla:
+
+- Stabilní bod musí být kratší než součet starých materiálů.
+- Název pište podle situace použití.
+- Starý postup buď smažte, archivujte, přesměrujte, nebo jasně označte jako nahrazený.
+- Historii držte v changelogu, ne v pracovním textu.
+- Každý stabilní bod musí mít vlastníka.
+- Pokud vzniká nový sběr dat, nejde o stabilizaci, ale o nové rozhodnutí.
+
+### Checklist
+
+- Má nový stabilní bod název podle reálné pracovní situace?
+- Je jasné, co nahrazuje?
+- Jsou staré odkazy odstraněné, přesměrované nebo označené jako nahrazené?
+- Je pracovní verze kratší než původní kombinace dokumentů?
+- Zůstala historie dostupná, ale nepřekáží běžnému použití?
+- Má stabilní bod vlastníka?
+- Je jasný rytmus údržby?
+- Existuje stop pravidlo pro rozšiřování nebo nový sběr dat?
+- Je pracovní příklad anonymizovaný nebo syntetický?
+- Je jasné, jaká data se sbírají, proč a jak dlouho?
+- Ví tým, kdy má nový bod použít?
+- Je tření z používání zapisované na jedno místo?
+- Nevyhrává starý postup interní vyhledávání, onboarding ani navigace?
+- Je nová verze připravená na kontrolu po několika použitích?
+
+Převod ověřené roční změny do stabilního bodu je malý akt provozní hygieny. Nejde o slavnostní zamykání dokumentu. Jde o to, aby příští člověk nemusel znovu řešit, která varianta je správná, proč existuje a jestli ji může použít. Dobrý stabilní bod šetří rozhodovací energii. A rozhodovací energie je v malém týmu dražší než další hezká šablona.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GS o převodu ověřené roční změny do nového stabilního bodu: pojmenování podle pracovní situace, nahrazení starých cest, zkrácení historie, vlastnictví a údržba, privacy-first stabilizace, předání týmu, archivace starých postupů, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GR o ověření roční změny systému po prvním použití: výběr první pracovní situace, sledování reálného toku, porovnání se změnovou větou, rozlišení problému změny/zavedení/okolního systému, privacy-first úklid podkladů, rozhodnutí dalšího stavu, uzavření smyčky, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GQ o převodu závěrů roční inventury do jedné roční změny systému: řazení nálezů podle pracovní ceny, výběr změny, změnová věta, omezení rozsahu, privacy-first uzavření starých stop, pracovní předání, první ověření, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GP o roční inventuře stabilních rozhodnutí bez zbytečné administrativy: inventurní seznam, vzorek reálných použití, scorecard hodnoty a ceny, kontrola driftu, privacy-first úklid podkladů, rozhodnutí dalšího stavu, aktualizace pracovních míst, šablona, mini workshop a checklist.
