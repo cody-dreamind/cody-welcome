@@ -57098,8 +57098,298 @@ Pravidla:
 
 Roční inventura má být nudně užitečná. Ne dramatická, ne slavnostní, ne nekonečná. Když je dobře vedená, tým po ní ví, která stabilní rozhodnutí pořád nesou hodnotu, která se mají zjednodušit a která už konečně mohou zmizet. A hlavně po ní zůstane čistší pracovní systém: méně duplicit, méně starých stop, méně nejasných pravidel a víc rozhodnutí, která lidem opravdu pomáhají pracovat.
 
+## Příloha GQ: Převod závěrů roční inventury do jedné roční změny systému
+
+Roční inventura stabilních rozhodnutí nekončí tím, že máte vyplněné karty a hezký seznam stavů. To je jen kontrola. Skutečná hodnota vzniká až ve chvíli, kdy z inventury vyberete jednu změnu, která zlepší pracovní systém na další rok.
+
+Jedna změna neznamená, že ostatní nálezy ignorujete. Znamená to, že nejdřív opravíte největší provozní tření, nejzbytečnější riziko nebo nejviditelnější duplicitu. Roční inventura často najde víc témat: staré šablony, zastaralý jazyk, zbytečné důkazy, přebujelé checklisty, nástroje bez vlastníka, onboardingové materiály mimo realitu, marketingové postupy, které už neodpovídají privacy-first provozu. Kdybyste se pokusili vyřešit všechno najednou, uděláte z inventury nový projekt. A nový projekt má nepříjemný zvyk sežrat práci, kterou měl původně zjednodušit.
+
+Výstupem této přílohy je roční změnová karta. Ta vezme závěry inventury a přepíše je do jednoho konkrétního zásahu: co se mění, proč právě to, kde se změna projeví, co zůstává mimo rozsah, jak se uklidí datová stopa a kdy se ověří první dopad.
+
+### 1. Seřaďte nálezy podle pracovní ceny
+
+Po inventuře odolejte pokušení začít nejzajímavější změnou. Zajímavost je špatný provozní kompas. Lepší je pracovní cena: kolik zbytečné pozornosti, rizika nebo opakované ruční práce daný problém vytváří.
+
+U každého nálezu si napište jednu větu:
+
+```markdown
+Nález:
+Stará šablona marketingové kampaně pořád předpokládá remarketingové publikum, i když současná distribuce stojí na RSS, přímých odkazech a agregovaných signálech kvality.
+
+Pracovní cena:
+Při každé nové kampani musí tým vysvětlovat, proč se tahle část nepoužívá, a hrozí návrat ke sběru dat, který už nemá pracovní důvod.
+```
+
+Pracovní cena může mít různé podoby:
+
+- lidé pravidlo opakovaně obcházejí,
+- nový člověk se učí starý postup,
+- v systému jsou dvě verze stejné pravdy,
+- checklist vede k nadbytečnému sběru dat,
+- support nebo sales používá jiný jazyk než produkt,
+- starý příklad obsahuje citlivější detail, než je dnes potřeba,
+- rozhodnutí se musí pořád vysvětlovat v chatu.
+
+Nález bez pracovní ceny většinou nepatří do první roční změny. Může zůstat v backlogu. Ne všechno, co je trochu nepořádné, si zaslouží zásah.
+
+### 2. Vyberte jednu změnu, která zmenší systém
+
+Dobrá roční změna systém spíš zmenšuje než zvětšuje. Maže duplicitu, slučuje dvě šablony, zkracuje pravidlo, zavírá starý kanál, přesouvá rozhodnutí blíž k práci nebo uklízí datovou stopu. Slabá roční změna přidává další vrstvu řízení nad vrstvu, která už byla moc těžká.
+
+Ptejte se:
+
+- Která změna sníží opakovanou práci nejvíc?
+- Která změna zmenší privacy nebo provozní riziko?
+- Která změna pomůže novému člověku nejrychleji pochopit systém?
+- Která změna odstraní duplicitu mezi webem, SaaS produktem, marketingem a delivery?
+- Která změna má jasné místo v existujícím pracovním rytmu?
+
+Příklad dobré roční změny:
+
+```markdown
+Sloučit starou šablonu marketingové kampaně s aktuálním privacy-first distribučním checklistem. Zachovat jednu kanonickou kampaňovou kartu, odstranit remarketingovou část, doplnit RSS a přímé odkazy jako výchozí distribuční režim.
+```
+
+Příklad slabé změny:
+
+```markdown
+Vytvořit nový dokument, který bude popisovat, jak používat starou i novou šablonu.
+```
+
+Ten druhý příklad je administrativní sedativum. Na chvíli uklidní pocit chaosu, ale systém ve skutečnosti zvětší.
+
+### 3. Napište změnovou větu
+
+Roční změna potřebuje jednu větu, kterou pochopí člověk mimo inventurní workshop. Věta má říct, co se mění, proč a jaký výsledek má být vidět.
+
+Šablona:
+
+```markdown
+Měníme [konkrétní pracovní místo] tak, aby [pracovní výsledek], protože [důvod z inventury].
+```
+
+Příklad:
+
+```markdown
+Měníme kampaňovou šablonu tak, aby odpovídala současné privacy-first distribuci přes RSS, přímé odkazy a agregované signály kvality, protože stará verze vrací tým k remarketingovému postupu, který už nepoužíváme.
+```
+
+Dobrá změnová věta má tři vlastnosti:
+
+- je konkrétní,
+- dá se ověřit při příštím použití,
+- nevyžaduje znalost celé historie inventury.
+
+Slabá věta:
+
+```markdown
+Zlepšíme marketingové procesy podle závěrů inventury.
+```
+
+To je věta do prezentace, ne do práce. Neříká, kde začít, co se má změnit ani jak poznat hotovo.
+
+### 4. Omezte rozsah na pracovní místa, kde změna opravdu žije
+
+Roční změna má často dopad do více míst, ale ne do celého systému. Přehnaný rozsah je hlavní důvod, proč se z malé opravy stane poloviční reorganizace dokumentace.
+
+Rozdělte místa na tři skupiny:
+
+```markdown
+Mění se:
+- kampaňová šablona,
+- distribuční checklist,
+- onboardingová poznámka pro marketingovou roli.
+
+Jen odkazuje:
+- kanonický index standardů,
+- měsíční marketingové review.
+
+Nemění se:
+- sales karta nabídky,
+- produktový roadmap backlog,
+- veřejné články, protože změna se týká interního postupu.
+```
+
+Toto rozdělení je důležité. Chrání tým před "když už jsme u toho" rozsahem. Tři slova, která umí pokazit víc provozních změn než špatný nástroj.
+
+U každého měněného místa si napište konkrétní zásah:
+
+- přepsat jednu sekci,
+- sloučit dvě položky,
+- smazat starý příklad,
+- nahradit odkaz,
+- upravit checklist,
+- přidat jednu kontrolní otázku,
+- zavřít archivní stopu.
+
+Pokud u místa neumíte napsat konkrétní zásah, pravděpodobně nemá být v rozsahu první změny.
+
+### 5. Udělejte privacy-first uzavření starých stop
+
+Roční změna je ideální příležitost uklidit stopy, které vznikly kolem starého rozhodnutí. Nejde jen o estetiku. Staré exporty, screenshoty, kopie šablon a pracovní komentáře často obsahují víc detailů, než dnešní pravidlo potřebuje.
+
+Použijte jednoduché rozhodnutí:
+
+```markdown
+Zůstává:
+Aktuální kampaňová karta, jednověté rozhodnutí, changelog změny a odkaz v kanonickém indexu.
+
+Anonymizuje se:
+Jeden příklad kampaně použitý pro vysvětlení rozdílu mezi starou a novou distribucí.
+
+Maže se:
+Dočasný export audience, starý screenshot nastavení kampaně, lokální kopie šablony a pracovní poznámky z inventury.
+```
+
+Privacy-first provoz se pozná podle toho, že umí zavírat minulost. Ne všechno musí zůstat jako důkaz, že jsme nad něčím přemýšleli. Důkazem dobrého systému je aktuální, použitelná a přiměřená dokumentace. Ne šanon digitálních stop.
+
+### 6. Předejte změnu jako pracovní instrukci, ne jako report
+
+Tým nepotřebuje dlouhý report z roční inventury. Potřebuje vědět, co se při další práci dělá jinak.
+
+Krátké předání může vypadat takto:
+
+```markdown
+Od další kampaně používáme jen novou kampaňovou kartu. Neobsahuje remarketingovou část. Výchozí distribuce je RSS, přímé odkazy a agregované signály kvality. Starou šablonu jsme archivovali a v indexu zůstává odkaz na novou kartu.
+```
+
+Předání má odpovědět na čtyři otázky:
+
+- Co mám použít příště?
+- Co už nemám používat?
+- Kde to najdu?
+- Kdy poznám, že změna nefunguje?
+
+Pokud předání vyžaduje pět odkazů a dvacet minut vysvětlování, změna je pravděpodobně moc velká nebo špatně umístěná.
+
+### 7. Ověřte první použití, ne pocit dokončení
+
+Roční změna je hotová až po prvním použití. Dokud jen leží v dokumentaci, nevíte, jestli zmenšila práci, nebo jen přesunula tření jinam.
+
+Nastavte krátké ověření:
+
+```markdown
+První ověření:
+Při další kampani nový vlastník použije kampaňovou kartu bez původního autora. Sledujeme, jestli najde správný distribuční režim, jestli nevznikne dotaz na remarketingovou část a jestli se do podkladů nepřidají zbytečné osobní nebo platformní exporty.
+
+Rozhodnutí po ověření:
+Ponechat, drobně upravit, vrátit část změny do inventurního backlogu, nebo eskalovat větší redesign marketingového procesu.
+```
+
+Ověření držte malé. Jeden reálný průchod často řekne víc než interní debata o tom, jestli je nová šablona "dost intuitivní". Intuitivní pro koho? Pro člověka, který ji právě psal? To je velmi nízká laťka.
+
+### Šablona roční změnové karty
+
+```markdown
+# Roční změnová karta
+
+Název změny:
+Datum rozhodnutí:
+Vlastník:
+Zdroj v roční inventuře:
+
+## Důvod
+
+Nález z inventury:
+Pracovní cena:
+Proč právě tato změna:
+Co se stane, když změnu neuděláme:
+
+## Změnová věta
+
+Měníme:
+Tak, aby:
+Protože:
+Očekávaný výsledek při dalším použití:
+
+## Rozsah
+
+Mění se:
+Jen odkazuje:
+Nemění se:
+Věci mimo rozsah:
+
+## Zásahy
+
+Pracovní místo 1:
+Konkrétní úprava:
+Vlastník:
+
+Pracovní místo 2:
+Konkrétní úprava:
+Vlastník:
+
+Staré cesty k uzavření:
+
+## Privacy-first uzavření
+
+Zůstává:
+Anonymizuje se:
+Maže se:
+Retence krátkodobých podkladů:
+Přístupy:
+
+## Předání
+
+Věta pro tým:
+Kde je nový zdroj pravdy:
+Co už se nepoužívá:
+Kdy eskalovat:
+
+## První ověření
+
+První pracovní situace:
+Kdo ověří:
+Co sledujeme:
+Ochranný signál:
+Datum kontroly:
+Rozhodnutí po ověření:
+```
+
+### Mini workshop na 35 minut
+
+Agenda:
+
+1. 5 minut: projít závěry roční inventury a vybrat tři nálezy s nejvyšší pracovní cenou.
+2. 5 minut: vybrat jednu změnu, která systém zmenší nebo zjednoduší.
+3. 4 minuty: napsat změnovou větu.
+4. 6 minut: rozdělit rozsah na "mění se", "jen odkazuje" a "nemění se".
+5. 5 minut: určit konkrétní zásahy v pracovních místech.
+6. 4 minuty: rozhodnout privacy-first uzavření starých stop.
+7. 3 minuty: napsat větu pro tým.
+8. 3 minuty: nastavit první ověření v reálné práci.
+
+Pravidla:
+
+- Z roční inventury vybírejte podle pracovní ceny, ne podle zajímavosti.
+- Jedna roční změna má mít jednu změnovou větu.
+- Preferujte změny, které mažou, slučují, zkracují nebo přesouvají blíž k práci.
+- Rozsah musí říct i to, co se nemění.
+- Staré datové stopy zavírejte současně se změnou, ne někdy později.
+- Změna je skutečně hotová až po prvním použití.
+
+### Checklist
+
+- Máte seznam nálezů z roční inventury?
+- Je u vybraného nálezu jasná pracovní cena?
+- Vybrali jste jednu změnu místo balíku volně souvisejících úprav?
+- Zmenšuje nebo zjednodušuje změna systém?
+- Má změna jednu srozumitelnou větu?
+- Je jasné, která pracovní místa se mění?
+- Je jasné, která místa jen odkazují?
+- Je jasné, co zůstává mimo rozsah?
+- Jsou konkrétní zásahy dost malé, aby šly dokončit v jedné iteraci?
+- Proběhlo privacy-first rozhodnutí o starých podkladech?
+- Jsou zbytečné exporty, screenshoty, lokální kopie a citlivé příklady smazané nebo anonymizované?
+- Dostane tým pracovní instrukci, ne jen report?
+- Existuje první reálné ověření změny?
+- Je předem jasné, co po ověření znamená ponechat, upravit, vrátit do backlogu nebo eskalovat?
+
+Převod závěrů roční inventury do jedné změny je rozdíl mezi dokumentačním rituálem a skutečným zlepšením provozu. Dobrá změna není největší. Je ta, která odebere kus zbytečné práce, sníží riziko a pomůže lidem při příštím reálném průchodu. Roční inventura tím dostane pointu: ne jen vědět, co v systému máme, ale každý rok ho o něco víc vyčistit.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GQ o převodu závěrů roční inventury do jedné roční změny systému: řazení nálezů podle pracovní ceny, výběr změny, změnová věta, omezení rozsahu, privacy-first uzavření starých stop, pracovní předání, první ověření, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GP o roční inventuře stabilních rozhodnutí bez zbytečné administrativy: inventurní seznam, vzorek reálných použití, scorecard hodnoty a ceny, kontrola driftu, privacy-first úklid podkladů, rozhodnutí dalšího stavu, aktualizace pracovních míst, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GO o převodu stabilního dlouhodobého rozhodnutí do roční inventury: ověření stability, inventurní otázka, vztahy k ostatním pravidlům, inventurní karta, lehké signály pro roční kontrolu, uložení karty, privacy-first úklid, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GN o kontrole dlouhodobého rozhodnutí po dalším pracovním období: původní rozhodovací věta, reálné průchody, scorecard použití/výsledku/ceny, návrat starého chování, privacy-first kontrola období, rozhodnutí dalšího stavu, minimální aktualizace, šablona, mini workshop a checklist.
