@@ -54529,8 +54529,315 @@ Pravidla:
 
 Zařazení ověřené provozní verze do stabilního rytmu je nenápadný, ale důležitý krok. Bez něj se každá oprava vleče jako poloviční experiment. S ním má tým jednoduchý systém: standard je ověřený, víme kde žije, víme kdo ho vlastní, víme kdy se na něj znovu podívat a víme, jak nenechat dokumentaci vyrůst přes hlavu.
 
+## Příloha GH: Kontrola stabilního revizního rytmu po prvním měsíci
+
+Stabilní revizní rytmus vypadá dobře v okamžiku, kdy ho zapisujete. Skutečný test přijde až později: když tým pracuje, řeší zákazníky, dokončuje nabídky, opravuje provozní drobnosti a standard už není novinka. Po prvním měsíci se ukáže, jestli se rytmus stal přirozenou součástí práce, nebo jen další položkou, kterou všichni slušně ignorují.
+
+Tato příloha navazuje na Přílohu GG. Tam jste ověřenou provozní verzi zařadili do stabilního revizního rytmu. Tady po prvním měsíci kontrolujete, jestli rytmus opravdu funguje: standard se dá najít, vlastník ví, co má hlídat, revize není zbytečně těžká a privacy-first úklid nezůstal jen hezkou větou v šabloně.
+
+Kontrola po prvním měsíci má odpovědět na sedm otázek:
+
+1. Proběhla plánovaná revize ve správném pracovním okamžiku?
+2. Použil tým standard bez návratu k autorovi původní změny?
+3. Pomohla revize rozhodnout, nebo jen vytvořila další zápis?
+4. Neobjevilo se opakované obcházení standardu?
+5. Nevznikla nová zbytečná evidence, kopie nebo datová stopa?
+6. Je revizní frekvence přiměřená hodnotě standardu?
+7. Stačí drobná úprava rytmu, nebo je potřeba vrátit se ke standardu samotnému?
+
+Cílem není oslavit, že v kalendáři proběhla schůzka. Cílem je zjistit, jestli rytmus pomáhá práci.
+
+### 1. Začněte slibem rytmu
+
+Nejdřív se vraťte k tomu, proč jste rytmus vůbec nastavili. Každý stabilní standard má mít pracovní důvod. Pokud důvod nedokážete říct jednou větou, budete kontrolovat aktivitu místo výsledku.
+
+Příklad:
+
+```markdown
+Standard:
+Kontrola příloh před odesláním nabídky.
+
+Slib revizního rytmu:
+Jednou měsíčně ověřit, že nabídky neodcházejí s chybějícími přílohami, citlivé podklady zůstávají v kanonickém systému a obchodník nemusí dohledávat pravidla v chatu.
+```
+
+Tahle věta drží kontrolu při zemi. Neptáte se, jestli je dokument hezký. Ptáte se, jestli nabídky odcházejí bezpečněji a s menším třením.
+
+Slabý slib rytmu:
+
+```markdown
+Pravidelně kontrolovat standard.
+```
+
+Silnější slib:
+
+```markdown
+Každý měsíc ověřit na dvou reálných nabídkách, že přílohy, datové odkazy a odpovědnost za kontrolu jsou jasné bez dodatečného vysvětlování.
+```
+
+Rozdíl je v použitelnosti. První věta vede k debatě. Druhá vede k práci.
+
+### 2. Zkontrolujte skutečné průchody, ne dobrou vůli
+
+Po měsíci vyberte jeden až tři reálné průchody, kde se měl standard použít. Nevybírejte nejlepší ukázku. Nevybírejte nejhorší drama. Vezměte běžné případy, protože právě ty ukazují, jestli standard patří do provozu.
+
+U každého průchodu si napište:
+
+- Kdy měl standard vstoupit do práce.
+- Kdo ho měl použít.
+- Kde ho našel.
+- Co podle něj udělal.
+- Jaký výstup vznikl.
+- Co musel dohledat mimo standard.
+- Jaká data nebo podklady při tom vznikly.
+
+Příklad záznamu:
+
+```markdown
+Průchod:
+Nabídka pro střední B2B firmu.
+
+Okamžik použití:
+Před finálním odesláním nabídky.
+
+Co fungovalo:
+Checklist byl přímo v šabloně nabídky a obchodník použil odkazy na přílohy v CRM.
+
+Tření:
+Nebyl jasný rozdíl mezi technickou přílohou a interní poznámkou z discovery.
+
+Datová stopa:
+Nevznikla nová kopie zákaznických souborů, ale v komentáři nabídky zůstalo jméno člověka z interního workshopu.
+```
+
+Takový záznam je lepší než obecné "standard se používá". Ukazuje konkrétní práci, konkrétní tření a konkrétní datovou stopu.
+
+### 3. Oddělte problém rytmu od problému standardu
+
+Když něco nefunguje, neskákejte hned k přepisování standardu. Někdy je pravidlo dobré, ale rytmus špatně napojený. Jindy je rytmus v pořádku, ale standard je moc dlouhý, schovaný nebo nejasný.
+
+Rozlišujte čtyři typy problému:
+
+| Typ problému | Příznak | Oprava |
+| --- | --- | --- |
+| Rytmus | Revize neproběhla nebo proběhla mimo práci | Připojit kontrolu k existujícímu review |
+| Dohledatelnost | Lidé standard hledají v chatu nebo starých odkazech | Opravit index a pracovní místo |
+| Srozumitelnost | Standard se najde, ale vyžaduje výklad autora | Zkrátit pravidlo, přidat příklad nebo rozhodovací větu |
+| Datová stopa | Revize vytváří zbytečné kopie, exporty nebo osobní údaje | Upravit kontrolu na anonymizovaný nebo agregovaný důkaz |
+
+Příklad:
+
+```markdown
+Nález:
+Sales lead revizi neudělal během měsíčního sales review, ale až o týden později po připomenutí.
+
+Není to problém standardu:
+Checklist příloh fungoval.
+
+Je to problém rytmu:
+Kontrola není pevně vložená do agendy sales review.
+
+Oprava:
+Přidat pětiminutový bod "kontrola příloh u dvou nabídek" do stálé agendy sales review.
+```
+
+Tím se vyhnete typické chybě: místo opravy rytmu přepíšete dokument. Dokument je pak delší, ale práce se nezlepší. To je klasická kancelářská alchymie: z malého problému vyrobit větší dokument.
+
+### 4. Změřte cenu revize
+
+Stabilní rytmus má mít přiměřenou cenu. Pokud revize malého standardu zabere půl hodiny třem lidem a výsledek je jedna věta "vše v pořádku", možná je rytmus moc těžký. Pokud kritický provozní standard nikdo měsíc neviděl, možná je rytmus moc slabý.
+
+Sledujte jednoduché signály:
+
+- Kolik minut revize reálně zabrala.
+- Kolik lidí muselo být u toho.
+- Kolik podkladů bylo potřeba otevřít.
+- Kolik nových zápisů vzniklo.
+- Jaké rozhodnutí revize umožnila.
+- Jaké riziko nebo tření se tím snížilo.
+
+Privacy-first pohled: cena revize není jen čas. Je to i datová stopa. Každý export, screenshot, kopie zákaznického souboru nebo detailní log zvyšuje provozní a bezpečnostní náklad. Pokud revize potřebuje důkaz, používejte minimum: anonymizovaný příklad, odkaz na kanonické místo, agregovaný signál nebo stručný výsledek bez osobních údajů.
+
+Příklad úpravy:
+
+```markdown
+Původní kontrola:
+Ke každé nabídce ukládat screenshot příloh do revizní složky.
+
+Lepší kontrola:
+U dvou nabídek zapsat jen ano/ne, zda byly přílohy zkontrolované podle šablony, a uložit odkaz na kanonickou nabídku bez kopírování souborů.
+```
+
+Méně důkazů neznamená méně kontroly, pokud důkaz pořád stačí pro rozhodnutí. Znamená to méně zbytečné stopy.
+
+### 5. Upravte jen jeden prvek rytmu
+
+Po prvním měsíci se držte malé změny. Stabilní rytmus potřebuje stabilitu, ne další redesign. Vyberte jeden prvek:
+
+- frekvenci,
+- pracovní okamžik,
+- vlastníka,
+- vstupní podklady,
+- výstup kontroly,
+- privacy-first pravidlo,
+- mimořádný spouštěč.
+
+Příklad:
+
+```markdown
+Změna:
+Kontrolu přesunout z konce měsíce do měsíčního sales review.
+
+Co se nemění:
+Standard, vlastník, kontrolované položky ani kanonické místo.
+
+Proč:
+Revize proběhla pozdě, protože nebyla součástí přirozeného pracovního rytmu.
+```
+
+Když změníte pět věcí najednou, za měsíc nepoznáte, co pomohlo. Malá změna má jednu výhodu: dá se ověřit bez detektivní práce.
+
+### 6. Uzavřete kontrolu rozhodnutím
+
+Kontrola po prvním měsíci má skončit stavem, ne dojmem. Použijte jeden z pěti stavů:
+
+- Ponechat beze změny.
+- Drobně upravit rytmus.
+- Drobně upravit standard.
+- Vrátit do opravného režimu.
+- Sloučit nebo zrušit rytmus, protože cena převyšuje přínos.
+
+Příklad rozhodnutí:
+
+```markdown
+Stav:
+Drobně upravit rytmus.
+
+Rozhodnutí:
+Standard funguje, ale revize musí být součástí měsíčního sales review, jinak probíhá pozdě.
+
+Změna:
+Přidat pětiminutový bod do agendy sales review a zrušit samostatnou připomínku.
+
+Další ověření:
+Po příštím sales review.
+```
+
+Tým tím získá jasný další krok. Žádné "ještě se na to podíváme". To je věta, která často znamená "uložíme to do mentálního sklepa".
+
+### Šablona kontroly stabilního rytmu po prvním měsíci
+
+```markdown
+# Kontrola stabilního revizního rytmu po prvním měsíci
+
+Standard:
+Vlastnická role:
+Kanonické místo:
+Revizní rytmus:
+Měsíc kontroly:
+
+## Slib rytmu
+
+Proč rytmus existuje:
+Jaké riziko nebo tření má snižovat:
+Jaký důkaz stačí:
+
+## Reálné průchody
+
+Průchod 1:
+Kdy měl standard vstoupit do práce:
+Kdo ho použil:
+Kde ho našel:
+Co vzniklo:
+Tření:
+Datová stopa:
+
+Průchod 2:
+Kdy měl standard vstoupit do práce:
+Kdo ho použil:
+Kde ho našel:
+Co vzniklo:
+Tření:
+Datová stopa:
+
+## Rozlišení problému
+
+Problém rytmu:
+Problém dohledatelnosti:
+Problém srozumitelnosti:
+Problém datové stopy:
+Problém standardu samotného:
+
+## Cena revize
+
+Čas:
+Počet lidí:
+Podklady:
+Nové zápisy:
+Vzniklé kopie:
+Hodnota rozhodnutí:
+
+## Privacy-first kontrola
+
+Zbytečná data:
+Dočasné kopie:
+Osobní nebo zákaznické údaje:
+Co smazat:
+Co anonymizovat:
+Co ponechat:
+
+## Rozhodnutí
+
+Stav:
+Ponechat beze změny / drobně upravit rytmus / drobně upravit standard / vrátit do opravy / sloučit nebo zrušit rytmus
+
+Jednověté rozhodnutí:
+Jedna změna:
+Vlastník změny:
+Kdy ověřit:
+```
+
+### Mini workshop na 30 minut
+
+Agenda:
+
+1. 3 minuty: připomenout slib revizního rytmu.
+2. 6 minut: projít jeden až tři reálné průchody.
+3. 5 minut: rozlišit problém rytmu, dohledatelnosti, srozumitelnosti, datové stopy a standardu.
+4. 5 minut: zhodnotit cenu revize.
+5. 4 minuty: udělat privacy-first úklid podkladů.
+6. 4 minuty: vybrat jeden stav rozhodnutí.
+7. 2 minuty: určit jednu změnu a vlastníka.
+8. 1 minuta: zapsat datum dalšího ověření, pokud je potřeba.
+
+Pravidla:
+
+- Nehodnoťte autora standardu. Hodnoťte práci, kterou standard umožňuje.
+- Neopravujte dokument během workshopu, pokud nejdřív nevíte, jestli je problém opravdu v dokumentu.
+- Neprodlužujte revizi, když problém vyřeší přesun do existující agendy.
+- Neponechávejte podklady z kontroly bez retence.
+- Pokud rytmus funguje, nechte ho být. I provozní disciplína může být dostatečně dobrá.
+
+### Checklist
+
+- Vrátili jste se k původnímu slibu revizního rytmu?
+- Kontrolovali jste reálné průchody, ne jen kalendářovou aktivitu?
+- Je jasné, jestli revize proběhla v přirozeném pracovním okamžiku?
+- Použil tým standard bez návratu k původnímu autorovi?
+- Rozlišili jste problém rytmu od problému standardu?
+- Změřili jste cenu revize v čase, lidech, podkladech a datové stopě?
+- Nevytváří kontrola zbytečné screenshoty, exporty nebo kopie?
+- Stačí anonymizovaný nebo agregovaný důkaz pro rozhodnutí?
+- Vybrali jste nejvýš jednu změnu rytmu nebo standardu?
+- Má rozhodnutí jasný stav?
+- Je další ověření naplánované jen tehdy, když něco měníte?
+- Je záznam uložený v kanonickém místě a staré podklady uklizené?
+
+Kontrola stabilního revizního rytmu po prvním měsíci chrání tým před dvěma extrémy. První extrém je dokumentace bez života: standard existuje, ale nikdo ho nepoužívá. Druhý extrém je dokumentace jako neustálá administrativní zátěž. Dobrý rytmus je mezi tím: dost lehký, aby se opravdu dělal, a dost konkrétní, aby pomáhal rozhodovat.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GH o kontrole stabilního revizního rytmu po prvním měsíci: návrat ke slibu rytmu, reálné průchody, rozlišení problému rytmu od problému standardu, měření ceny revize, privacy-first datová stopa, jedna malá úprava, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GG o zařazení ověřené provozní verze do stabilního revizního rytmu: důkaz stabilizace, volba revizního rytmu, vlastnictví role, privacy-first úklid přechodové stopy, aktualizace indexu, stop pravidla, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GF o kontrole nové provozní verze po dalším cyklu: změnová věta, reálný průchod, scorecard, rozlišení chyby verze a zavedení, privacy-first datová kontrola, rozhodnutí, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GE o převodu první kontroly provozního standardu do další provozní verze: rozlišení typů změn, změnová věta, kanonické místo, úklid staré stopy, předání týmu, ověření v dalším cyklu, šablona, mini workshop a checklist.
