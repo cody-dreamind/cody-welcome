@@ -58008,8 +58008,308 @@ Pravidla:
 
 Převod ověřené roční změny do stabilního bodu je malý akt provozní hygieny. Nejde o slavnostní zamykání dokumentu. Jde o to, aby příští člověk nemusel znovu řešit, která varianta je správná, proč existuje a jestli ji může použít. Dobrý stabilní bod šetří rozhodovací energii. A rozhodovací energie je v malém týmu dražší než další hezká šablona.
 
+## Příloha GT: Kontrola nového stabilního bodu po prvních použitích
+
+Nový stabilní bod začne být skutečně stabilní až ve chvíli, kdy ho lidé použijí bez autora změny za zády. Do té doby je to dobře připravený předpoklad. První použití ukáže, jestli název odpovídá situaci, jestli je pracovní pravidlo dost krátké, jestli staré cesty opravdu zmizely a jestli privacy-first minimum vydrželo v běžném provozu.
+
+Tato kontrola nemá být velký audit. Je to krátké ověření po několika reálných průchodech. Ideální okamžik je po třech až pěti použitích, nebo dřív, pokud se objeví tření. Čekat celý rok by bylo pohodlné, ale trochu zbabělé. Když se nový bod nepoužívá, je lepší to zjistit rychle.
+
+Codyho komentář: stabilní bod, který nikdo nepoužil, není stabilní. Je to dokument s ambicí. Ambice je hezká věc, ale zákazníkovi, týmu ani provozu sama o sobě nepomůže. Stabilitu poznáte podle toho, že člověk v konkrétní situaci ví, kam sáhnout, co udělat a co už nedělat.
+
+### 1. Vyberte reálné použití, ne ukázkový scénář
+
+Kontrolujte práci, která se opravdu stala. Ne ideální příklad, který autor stabilního bodu vybral, protože vypadá čistě. Reálné použití má drobné odchylky: někdo spěchal, někdo hledal starý dokument, někdo použil jiný název, někdo narazil na zákaznickou výjimku.
+
+Pro každý průchod si zapište:
+
+- kdo stabilní bod použil,
+- v jaké pracovní situaci,
+- jak se k němu dostal,
+- co podle něj rozhodl nebo udělal,
+- kde se zasekl,
+- jestli sáhl po staré cestě,
+- jaký výstup vznikl.
+
+Příklad:
+
+```markdown
+Stabilní bod:
+Karta měření kampaní bez zbytečných trackerů
+
+Použití:
+Příprava distribuce nového playbooku.
+
+Jak se k bodu člověk dostal:
+Přes marketingový index, ne přes vyhledávání.
+
+Výsledek:
+Vybrány tři agregované signály, žádný nový externí tracker.
+
+Tření:
+Nebyla jasná hranice mezi "kvalitní návštěvou" a "relevantní poptávkou".
+```
+
+Pokud se při kontrole bavíte jen o tom, jak byl dokument napsaný, míjíte cíl. Důležitější je, co s ním práce udělala.
+
+### 2. Sledujte cestu k bodu
+
+Stabilní bod může být věcně správný a přesto nepoužitelný, protože ho nikdo nenajde. To je častější problém než špatný obsah. Tým ví, že "někde něco je", ale ve chvíli rozhodnutí otevře starý dokument, zeptá se v chatu nebo improvizuje.
+
+Zkontrolujte tři vstupy:
+
+- Navigace: vede k bodu hlavní index, onboarding, checklist nebo pracovní šablona?
+- Vyhledávání: najde se podle slov, která lidé opravdu používají?
+- Kontext: je odkaz na bod tam, kde situace vzniká, například v ticketu, šabloně kampaně, sales handoffu nebo runbooku?
+
+Praktický test:
+
+```markdown
+Dejte člověku pracovní situaci a jednu větu:
+"Připravuješ novou obsahovou distribuci a potřebuješ rozhodnout, co měřit."
+
+Nesdělujte název dokumentu.
+Sledujte, kam jde a co hledá.
+```
+
+Pokud člověk bod nenajde do několika minut, problém není v člověku. Problém je v trase. Změňte název, přidejte odkaz do pracovního místa, upravte index nebo archivujte starou věc, která vyhrává pozornost.
+
+### 3. Porovnejte rozhodnutí s pracovním pravidlem
+
+Stabilní bod má pomoct udělat rozhodnutí nebo provést postup. Proto nekontrolujte jen to, jestli byl otevřen. Kontrolujte, jestli ovlivnil výstup.
+
+Ptejte se:
+
+- Jaké rozhodnutí mělo vzniknout?
+- Vzniklo rychleji nebo čistěji než dřív?
+- Byl výstup konzistentní s pravidlem?
+- Musel člověk doplnit hodně vlastního výkladu?
+- Zůstalo jasné, co se výslovně nedělá?
+- Pomohl bod zmenšit rozsah, nebo ho naopak rozšířil?
+
+Příklad dobrého signálu:
+
+```markdown
+Před změnou:
+Při každé kampani se znovu řešilo, jestli přidat remarketingový pixel.
+
+Po změně:
+Tým nejdřív napsal rozhodovací otázku, vybral agregované signály a pixel vůbec neotevřel jako výchozí možnost.
+```
+
+Příklad varovného signálu:
+
+```markdown
+Stabilní bod říká "sbírejte jen data potřebná pro rozhodnutí", ale člověk si pro jistotu uložil surový export všech návštěv.
+
+To není malá odchylka. To je návrat starého chování pod novým názvem.
+```
+
+### 4. Hledejte návrat starých cest
+
+Staré postupy se často vrací nenápadně. Ne jako vzpoura, ale jako pohodlí. Někdo má uloženou starou záložku, starý dokument má lepší název, starý export je v oblíbené složce, stará věta se pořád používá na poradě.
+
+Hledejte:
+
+- staré odkazy v indexech, onboardingových materiálech a šablonách,
+- duplicitní dokumenty s podobným názvem,
+- archivní položky, které se stále objevují ve vyhledávání,
+- staré zkratky v jazyce týmu,
+- dotazy v chatu typu "kde je ta původní tabulka?",
+- výstupy vytvořené podle starého postupu po datu stabilizace.
+
+Mini postup:
+
+1. Vezměte jeden reálný průchod.
+2. Zapište všechny dokumenty, odkazy a zkratky, které člověk použil.
+3. Označte, které patří do nové cesty a které jsou staré.
+4. Staré cesty smažte, archivujte, přesměrujte nebo jasně označte jako nahrazené.
+
+Nechte si jen historii, která má důvod. Historie má být dohledatelná, ne aktivní v každodenní práci.
+
+### 5. Udělejte privacy-first kontrolu skutečných výstupů
+
+Největší test privacy-first pravidla není text stabilního bodu, ale výstupy, které podle něj vznikly. Karta může říkat "minimum dat", ale člověk v praxi může přiložit screenshot ostrého systému, export kontaktů, detail zákaznického účtu nebo měření z nástroje, který nikdo neposoudil.
+
+Kontrolujte hotové výstupy:
+
+- Neobsahují zbytečná osobní data?
+- Jsou zákaznické příklady anonymizované nebo syntetické?
+- Nevznikl nový export bez retenčního pravidla?
+- Nepřibyl externí nástroj bez datové mapy?
+- Není v poznámkách token, interní URL s citlivým kontextem nebo screenshot nastavení?
+- Odpovídá sběr dat původnímu rozhodnutí?
+- Je jasné, kdy se pracovní podklady smažou nebo zkrátí?
+
+Příklad:
+
+```markdown
+Rozhodnutí:
+Vyhodnotit, jestli obsahový kanál přivádí relevantní poptávky.
+
+Správný výstup:
+Agregovaný počet kvalitních návštěv, počet odpovědí, ruční kvalita poptávek, poznámka ze sales.
+
+Špatný výstup:
+Surový export všech návštěv s identifikátory, uložený v obecné složce bez retence.
+```
+
+Privacy-first kontrola má být věcná. Nejde o to hledat vinu. Jde o to, aby dobré pravidlo nezačalo vyrábět špatnou datovou stopu.
+
+### 6. Rozhodněte stav bodu jednou větou
+
+Po prvních použitích nepište dlouhý report. Napište jedno rozhodnutí a proveďte odpovídající malý zásah.
+
+Možné stavy:
+
+- Ponechat: bod funguje, není potřeba změna.
+- Zpřesnit: bod funguje, ale potřebuje jednu větu, příklad nebo odkaz.
+- Přesunout: obsah je správný, ale je na špatném místě.
+- Přejmenovat: lidé ho nehledají správnými slovy.
+- Zkrátit: obsah je moc dlouhý pro pracovní situaci.
+- Sloučit: překrývá se s jiným bodem.
+- Vrátit do pilotu: pravidlo ještě není stabilní.
+- Archivovat: bod se nepoužívá nebo ztratil důvod.
+
+Příklady rozhodovacích vět:
+
+```markdown
+Ponechat:
+Karta měření kampaní bez zbytečných trackerů zůstává stabilním bodem, po třech použitích pomohla vybrat agregované signály bez nového externího měření.
+
+Zpřesnit:
+Karta zůstává stabilním bodem, doplníme jednu definici "kvalitní návštěvy", protože se ve dvou použitích vykládala rozdílně.
+
+Přesunout:
+Obsah karty je správný, ale přesouváme odkaz z archivu do marketingového indexu, protože lidé ji hledají při přípravě kampaně.
+
+Vrátit do pilotu:
+Karta zatím není stabilní, protože ve dvou ze tří použití vedla k ručnímu výkladu a návratu ke starému exportu.
+```
+
+Jedna věta drží tým u rozhodnutí. Reporty mají sklon vyrábět další práci. Věta má sklon práci ukončit.
+
+### 7. Aktualizujte jen pracovní místa, která kontrola skutečně odhalila
+
+Po kontrole nevylepšujte všechno. To je oblíbený způsob, jak z malé užitečné kontroly vyrobit další údržbový projekt. Aktualizujte jen místa, kde se objevilo konkrétní tření.
+
+Typické malé zásahy:
+
+- přejmenovat stabilní bod podle reálného hledání,
+- doplnit jeden příklad,
+- přidat odkaz do hlavního indexu,
+- odstranit starý odkaz z onboardingové trasy,
+- označit starý dokument jako nahrazený,
+- zkrátit úvodní vysvětlení,
+- doplnit retenční větu k výstupům,
+- přesunout detailní historii do changelogu.
+
+Stop pravidlo:
+
+```markdown
+Pokud kontrola vyžaduje víc než jednu malou změnu, nejdřív napište novou rozhodovací větu.
+Možná už nekontrolujete stabilní bod, ale otevíráte další změnu systému.
+```
+
+Tohle pravidlo chrání tým před nekonečnou optimalizací dokumentace. Dokumentace má sloužit práci, ne se živit sama sebou jako dobře organizovaný kompostér nápadů.
+
+### Šablona kontroly nového stabilního bodu
+
+```markdown
+# Kontrola nového stabilního bodu
+
+Stabilní bod:
+Datum stabilizace:
+Vlastník:
+Kontrolované období:
+Počet reálných použití:
+
+## Reálné průchody
+
+1. Situace:
+   Kdo použil:
+   Jak bod našel:
+   Výstup:
+   Tření:
+
+2. Situace:
+   Kdo použil:
+   Jak bod našel:
+   Výstup:
+   Tření:
+
+## Trasa k bodu
+
+Kde se hledal:
+Kde byl nalezen:
+Staré cesty:
+Potřebná úprava trasy:
+
+## Pracovní výsledek
+
+Jaké rozhodnutí mělo vzniknout:
+Co vzniklo:
+Co pravidlo zjednodušilo:
+Co zůstalo nejasné:
+
+## Privacy-first kontrola
+
+Jaká data vznikla:
+Co bylo zbytečné:
+Co se smaže nebo zkrátí:
+Vznikl nový nástroj nebo datový tok:
+
+## Rozhodnutí
+
+Stav:
+Jednověté rozhodnutí:
+Jedna malá změna:
+Kdy se znovu kontroluje:
+```
+
+### Mini workshop na 30 minut
+
+Agenda:
+
+1. 4 minuty: připomenout stabilní bod a jeho původní pracovní pravidlo.
+2. 6 minut: projít tři až pět reálných použití.
+3. 5 minut: zmapovat, jak se lidé k bodu dostali.
+4. 5 minut: porovnat výstupy s pracovním pravidlem.
+5. 4 minuty: najít návrat starých cest.
+6. 4 minuty: udělat privacy-first kontrolu skutečných výstupů.
+7. 2 minuty: napsat jednověté rozhodnutí a vybrat jednu malou změnu.
+
+Pravidla:
+
+- Nekontrolujte hypotetické scénáře.
+- Sledujte trasu k bodu, nejen jeho obsah.
+- Staré cesty řešte hned, protože jinak se vrátí.
+- Privacy-first kontrolujte podle výstupů, ne podle záměru.
+- Pokud vznikne víc změn, vyberte jednu a zbytek dejte do backlogu.
+- Výsledkem kontroly má být rozhodnutí, ne další složka poznámek.
+
+### Checklist
+
+- Máte tři až pět reálných použití, nebo jasný důvod pro dřívější kontrolu?
+- Víte, jak lidé stabilní bod našli?
+- Najde se bod podle slov, která tým opravdu používá?
+- Vedou na něj hlavní indexy, onboardingy a pracovní šablony?
+- Ovlivnil bod reálné rozhodnutí nebo výstup?
+- Bylo jasné, co se podle pravidla nedělá?
+- Nevrátil se starý dokument, stará záložka nebo starý export?
+- Jsou staré cesty smazané, archivované, přesměrované nebo označené jako nahrazené?
+- Neobsahují výstupy zbytečná osobní data?
+- Nevznikl nový externí nástroj nebo datový tok bez rozhodnutí?
+- Je u výstupů jasná retence?
+- Má kontrola jeden stav: ponechat, zpřesnit, přesunout, přejmenovat, zkrátit, sloučit, vrátit do pilotu nebo archivovat?
+- Je rozhodnutí napsané jednou větou?
+- Je vybraná jen jedna malá změna?
+- Je jasné, kdy se stabilní bod znovu kontroluje?
+
+Kontrola nového stabilního bodu je obyčejná zkouška toho, jestli systém opravdu zjednodušil práci. Když ano, nechte ho žít a jen zavřete drobné mezery. Když ne, opravte trasu, pravidlo nebo datovou stopu dřív, než se z další dobré myšlenky stane další nepoužívaný dokument. Malé týmy nepotřebují víc artefaktů. Potřebují méně nejasností.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GT o kontrole nového stabilního bodu po prvních použitích: reálné průchody, trasa k bodu, porovnání výstupu s pravidlem, návrat starých cest, privacy-first kontrola skutečných výstupů, jednověté rozhodnutí, minimální aktualizace, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GS o převodu ověřené roční změny do nového stabilního bodu: pojmenování podle pracovní situace, nahrazení starých cest, zkrácení historie, vlastnictví a údržba, privacy-first stabilizace, předání týmu, archivace starých postupů, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GR o ověření roční změny systému po prvním použití: výběr první pracovní situace, sledování reálného toku, porovnání se změnovou větou, rozlišení problému změny/zavedení/okolního systému, privacy-first úklid podkladů, rozhodnutí dalšího stavu, uzavření smyčky, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GQ o převodu závěrů roční inventury do jedné roční změny systému: řazení nálezů podle pracovní ceny, výběr změny, změnová věta, omezení rozsahu, privacy-first uzavření starých stop, pracovní předání, první ověření, šablona, mini workshop a checklist.
