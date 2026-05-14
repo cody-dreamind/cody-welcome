@@ -54030,8 +54030,227 @@ Pravidla:
 
 Převod první kontroly do další provozní verze je místo, kde se ukáže, jestli tým umí zlepšovat standardy bez dokumentačního bobtnání. Nevyhrává nejdelší pravidlo. Vyhrává taková verze, kterou člověk najde včas, použije bez zbytečné evidence a po dalším cyklu ji jde klidně znovu zpřesnit.
 
+## Příloha GF: Kontrola nové provozní verze po dalším cyklu
+
+Předchozí příloha řešila, jak převést první kontrolu provozního standardu do další verze. To je užitečné, ale pořád je to jen slib. Nová verze začne mít hodnotu až ve chvíli, kdy projde dalším reálným cyklem a tým pozná, jestli změna skutečně snížila tření, zlepšila rozhodování nebo jen přesunula práci do jiného rohu.
+
+Kontrola po dalším cyklu nemá být velká revize. Je to krátké ověření, zda poslední změna obstála v běžném provozu. Pokud se z toho stane další workshop o všem, tým brzy přestane standardům věřit. Lidé nepotřebují dokument, který se po každém použití otevře jako nekonečný projekt. Potřebují vědět, že když se pravidlo upraví, někdo zkontroluje, jestli pomohlo.
+
+Dobrá kontrola nové provozní verze odpovídá na pět otázek:
+
+1. Použil tým novou verzi ve správném pracovním okamžiku?
+2. Bylo jasné, co má člověk udělat bez dodatečného vysvětlování?
+3. Zmizelo tření, kvůli kterému se verze měnila?
+4. Nevznikla nová zbytečná práce, evidence nebo datová stopa?
+5. Má standard zůstat takto, drobně se upravit, nebo se má vrátit k širší revizi?
+
+Tato kontrola je malá, ale důležitá. Právě tady se odděluje užitečný provozní standard od dokumentačního rituálu.
+
+### Začněte změnovou větou
+
+Neotevírejte celou historii standardu. Začněte jednou větou z minulé iterace:
+
+`Změnili jsme X, aby v situaci Y člověk rychleji udělal Z.`
+
+Příklad:
+
+`Zkrátili jsme kontrolní kartu před odesláním nabídky, aby obchodník nemusel opisovat technické detaily do tří míst a přitom nezapomněl ověřit datovou stopu zákaznických podkladů.`
+
+Tato věta drží kontrolu při zemi. Neptáte se, jestli je celý sales proces dokonalý. Ptáte se, jestli konkrétní zkrácení karty pomohlo v konkrétní situaci.
+
+Pokud změnová věta není dohledatelná, nejdřív ji rekonstruujte. Bez ní hrozí, že tým začne hodnotit dojem, ne dopad. A dojem je skvělý sluha pro design tlačítka, ale mizerný správce provozních pravidel.
+
+### Vyberte jeden skutečný průchod
+
+Kontrola nové verze potřebuje reálný příklad. Ne ideální scénář z hlavy autora standardu. Vezměte jeden poslední průchod, kde se nová verze použila:
+
+- jedna poptávka,
+- jeden support tiket,
+- jedna interní změna,
+- jeden onboardingový krok,
+- jedna marketingová publikace,
+- jedna technická kontrola před nasazením.
+
+Projděte, co se skutečně stalo. Kdo standard našel, kdy ho otevřel, co podle něj udělal, kde se zastavil, co přeskočil a co musel doplnit mimo něj.
+
+Nejde o kontrolu člověka. Jde o kontrolu systému. Pokud někdo standard nepoužil, neptejte se hned, proč "nedodržel proces". Ptejte se, jestli se standard objevil ve správném pracovním místě, jestli byl pojmenovaný jazykem role a jestli se dal použít bez pátrání.
+
+### Sledujte tři druhy výsledku
+
+Novou verzi nehodnoťte jen podle toho, jestli byla použita. Použití samo o sobě ještě nic neříká. Tým může poslušně vyplnit zbytečný formulář a provoz nebude lepší. Sledujte tři výsledky.
+
+První výsledek je rozhodnutí. Pomohla nová verze člověku rychleji nebo jistěji rozhodnout? Například zda poptávku kvalifikovat, zda změnu pustit do produkce, zda si vyžádat doplnění podkladů, nebo zda stopnout automatizaci.
+
+Druhý výsledek je samostatnost. Ubylo dotazů, výjimek a ručního dovysvětlování? Pokud nová verze jen změnila text, ale člověk stejně musel volat autorovi pravidla, standard ještě není hotový.
+
+Třetí výsledek je datová stopa. Nevzniklo kvůli změně nové ukládání osobních údajů, zákaznických ukázek, interních poznámek nebo duplicitních screenshotů? Privacy-first provoz se pozná i podle toho, že standardy nepřidávají evidenci jen proto, aby se dobře kontrolovaly.
+
+### Mini scorecard nové verze
+
+Použijte jednoduché hodnocení 0 až 2. Nepotřebujete vědeckou přesnost, potřebujete rychlé rozhodnutí.
+
+| Oblast | 0 bodů | 1 bod | 2 body |
+| --- | --- | --- | --- |
+| Dohledatelnost | Člověk verzi nenašel | Našel ji přes zkratku nebo dotaz | Našel ji přirozeně v pracovním toku |
+| Srozumitelnost | Musel se ptát, co dělat | Pochopil postup, ale s váháním | Postup byl jasný bez vysvětlování |
+| Původní tření | Zůstalo stejné | Částečně se snížilo | Viditelně zmizelo nebo se zmenšilo |
+| Samostatnost | Přibyla ruční pomoc | Pomoc zůstala podobná | Ubyla pomoc, dotazy nebo výjimky |
+| Datová stopa | Přibyla zbytečná data | Stopa je podobná | Stopa se zmenšila nebo zpřehlednila |
+
+Výklad:
+
+- 0 až 4 body: změna pravděpodobně nefunguje, vraťte se k problému.
+- 5 až 7 bodů: změna je použitelná, ale potřebuje jednu malou opravu.
+- 8 až 10 bodů: nová verze obstála, stačí ji ponechat a naplánovat běžnou revizi.
+
+Scorecard nepoužívejte jako firemní KPI. Je to pracovní pomůcka pro rozhovor. Jakmile se z ní stane nástroj pro dokazování, že někdo "splnil standard na 80 %", můžete ji rovnou hodit do šuplíku vedle ostatních smutných tabulek.
+
+### Rozlište chybu verze od chyby zavedení
+
+Když nová verze nefunguje, bývají dvě hlavní příčiny.
+
+Chyba verze znamená, že samotné pravidlo je špatně napsané, příliš dlouhé, nejasné nebo řeší nesprávný problém.
+
+Chyba zavedení znamená, že pravidlo může být dobré, ale není na správném místě. Lidé o něm nevědí, odkaz vede na starou verzi, název neodpovídá pracovní situaci, nebo je schované v dokumentu, kam nikdo v danou chvíli nechodí.
+
+Příklad:
+
+- Obchodník u nové nabídky zapomněl privacy-first kontrolu příloh.
+- Pokud kontrola v kartě vůbec není, je to chyba verze.
+- Pokud kontrola v kartě je, ale karta není napojená na šablonu nabídky, je to chyba zavedení.
+- Pokud kontrola v kartě je a šablona na ni odkazuje, ale text je právnický šum, je to kombinace obojího.
+
+Toto rozlišení šetří čas. Bez něj tým často přepisuje pravidla, která stačilo lépe umístit, nebo naopak posílá další oznámení k pravidlu, které je ve skutečnosti nepoužitelné.
+
+### Privacy-first kontrola po dalším cyklu
+
+Každá nová provozní verze by měla po prvním dalším cyklu projít krátkým datovým sanity checkem:
+
+- Nevznikla nová kopie zákaznických dat?
+- Nepřesunuly se citlivé informace do nástroje, který pro ně není určený?
+- Nezůstaly dočasné podklady po kontrole bez vlastníka?
+- Nevyžaduje šablona údaje, které nejsou nutné pro rozhodnutí?
+- Je jasné, kdy se pracovní poznámky mažou nebo anonymizují?
+- Nezhoršila změna možnost zákazníkovi vysvětlit, kde jeho data končí?
+
+Tady nejde o právní pózu. Jde o provozní hygienu. Když standard při každé kontrole vytvoří další export, další screenshot a další sdílený dokument, firma si sama vyrábí budoucí úklid. Privacy-first standard má práci zjednodušovat, ne rozsévat drobné datové konfety po interních nástrojích.
+
+### Rozhodnutí po kontrole
+
+Po kontrole udělejte jedno ze čtyř rozhodnutí.
+
+`Ponechat`: Nová verze obstála. Není potřeba nic měnit. Zapište výsledek a vraťte standard do běžného rytmu.
+
+`Drobně opravit`: Změna pomohla, ale jeden detail brzdí použití. Opravte jen tento detail a naplánujte krátké ověření při dalším průchodu.
+
+`Vrátit k problému`: Změna neřeší původní tření. Nelepte na ni další odstavec. Vraťte se k otázce, co mělo být jednodušší, jistější nebo bezpečnější.
+
+`Sloučit nebo zrušit`: Kontrola ukázala, že standard duplikuje jiné pravidlo nebo už nemá samostatnou hodnotu. Přesuňte poučení na správné místo a starou větev ukončete.
+
+Rozhodnutí napište jednou větou:
+
+`Po dalším cyklu ponecháváme novou verzi beze změny, protože obchodník našel kontrolu příloh přímo v šabloně nabídky, nepotřeboval dodatečné vysvětlení a nevznikla nová kopie zákaznických dat.`
+
+Nebo:
+
+`Novou verzi drobně upravujeme: privacy-first kontrola zůstává, ale přesouváme ji z konce karty k bodu o přílohách, protože v reálném průchodu byla přečtena až po odeslání návrhu.`
+
+### Šablona kontroly nové provozní verze
+
+Použijte tento krátký zápis:
+
+```markdown
+## Kontrola nové provozní verze
+
+Standard:
+Verze:
+Datum kontroly:
+Kontrolovaný cyklus:
+Vlastník:
+
+### Změnová věta
+
+Změnili jsme:
+Aby v situaci:
+Člověk mohl:
+
+### Reálný průchod
+
+Použitá situace:
+Kdo standard použil:
+Kdy ho našel:
+Co podle něj udělal:
+Kde vzniklo tření:
+Co se obešlo mimo standard:
+
+### Scorecard
+
+Dohledatelnost:
+Srozumitelnost:
+Původní tření:
+Samostatnost:
+Datová stopa:
+Celkem:
+
+### Privacy-first kontrola
+
+Nová data:
+Dočasné kopie:
+Citlivé podklady:
+Retence nebo mazání:
+Potřebná oprava:
+
+### Rozhodnutí
+
+Stav: ponechat / drobně opravit / vrátit k problému / sloučit nebo zrušit
+Jednověté rozhodnutí:
+Další krok:
+Kdy ověřit:
+```
+
+Šablona má být kratší než samotná práce. Pokud její vyplnění trvá déle než použití standardu, šablona se stala problémem.
+
+### Mini workshop na 25 minut
+
+Agenda:
+
+1. 3 minuty: připomenout změnovou větu.
+2. 5 minut: projít jeden reálný průchod.
+3. 5 minut: vyplnit scorecard.
+4. 4 minuty: projít privacy-first datovou stopu.
+5. 4 minuty: rozlišit chybu verze od chyby zavedení.
+6. 3 minuty: napsat jednověté rozhodnutí.
+7. 1 minuta: určit další krok a vlastníka.
+
+Pravidla:
+
+- Nehodnoťte celý proces, jen novou verzi.
+- Nevybírejte výjimečný případ, pokud máte běžný.
+- Nehledejte viníka, hledejte pracovní tření.
+- Neměňte víc než jednu věc bez silného důkazu.
+- Nepřidávejte novou evidenci, pokud rozhodnutí stačí zapsat do existujícího changelogu.
+- Pokud změna obstála, nechte ji žít. I standard si zaslouží klid, aspoň chvilku.
+
+### Checklist
+
+- Máte dohledatelnou změnovou větu poslední verze?
+- Kontrolujete jeden skutečný průchod, ne hypotetický scénář?
+- Je jasné, kdo standard použil a v jakém pracovním okamžiku?
+- Zjistili jste, jestli se původní tření zmenšilo?
+- Ověřili jste samostatnost bez dodatečného vysvětlování?
+- Zkontrolovali jste, jestli nevznikla nová zbytečná datová stopa?
+- Rozlišili jste chybu verze od chyby zavedení?
+- Nepřepisujete celý standard kvůli jednomu drobnému tření?
+- Má rozhodnutí jeden ze čtyř stavů?
+- Je další krok menší než problém, který řeší?
+- Je záznam uložený na kanonickém místě?
+- Je naplánované další ověření jen tehdy, když je opravdu potřeba?
+
+Kontrola nové provozní verze po dalším cyklu je malý provozní reflex. Nedělá z dokumentace velkou událost, ale brání tomu, aby změny mizely bez důkazu. Tým tím získá jednoduchý rytmus: změnit, použít, ověřit, ponechat nebo opravit. Přesně takhle se z e-booku, playbooků a standardů stává živý systém, ne památník dobrých úmyslů.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GF o kontrole nové provozní verze po dalším cyklu: změnová věta, reálný průchod, scorecard, rozlišení chyby verze a zavedení, privacy-first datová kontrola, rozhodnutí, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GE o převodu první kontroly provozního standardu do další provozní verze: rozlišení typů změn, změnová věta, kanonické místo, úklid staré stopy, předání týmu, ověření v dalším cyklu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GD o kontrole provozního standardu po prvním pracovním cyklu: vymezení cyklu, důkazy z reálné práce, dohledatelnost, rozlišení chyby použití a chyby standardu, skrytá práce, privacy-first datová stopa, jedna oprava, stav standardu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GC o převodu ověřeného pravidla do běžného provozního standardu: rozhodnutí, kdy standardizovat, napojení na existující rytmus, vlastnictví, standardová karta, první pracovní místo zavedení, změnové pravidlo, uzavření původní lekce v týmové paměti, šablona, mini workshop a checklist.
