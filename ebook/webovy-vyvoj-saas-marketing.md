@@ -55177,8 +55177,195 @@ Pravidla:
 
 Převod nálezu z kontroly rytmu do jedné úpravy provozu drží dokumentaci při zemi. Standardy nemají být sbírka chytrých textů. Mají být drobné kolejnice pro práci, která se opakuje. Když se kolejnice trochu křiví, neopravujte celé nádraží. Narovnejte ten jeden kus, po kterém tým příště opravdu pojede.
 
+## Příloha GJ: Kontrola provozní úpravy po prvním dalším cyklu
+
+Když tým převede nález z kontroly rytmu do jedné úpravy provozu, práce ještě není hotová. Hotová je až ve chvíli, kdy úprava projde prvním dalším skutečným cyklem a tým ví, jestli pomohla, zůstala neviditelná, nebo jen přesunula tření jinam.
+
+Tohle je malý, ale důležitý rozdíl. Zavedená úprava v dokumentu často vypadá elegantně. V provozu ale narazí na kalendář, nejasné vlastnictví, starý návyk, chybějící vstup, špatné místo v nástroji nebo příliš složitý zápis. Proto nestačí napsat "upraveno". Potřebujete větu: "V dalším cyklu se změna použila takto a rozhodli jsme se s ní naložit takto."
+
+Praktický cíl této přílohy: po jedné provozní úpravě udělat krátkou kontrolu, která ověří skutečné použití, cenu změny, dopad na práci a datovou stopu. Nejde o audit celého systému. Jde o první důkaz, že změna buď patří do stabilního rytmu, potřebuje drobnou korekci, nebo se má zahodit dřív, než z ní vznikne další povinná ozdoba.
+
+### 1. Vraťte se k původní změnové větě
+
+Kontrolu nezačínejte dojmem. Začněte původní změnovou větou z předchozí přílohy. Ta má říkat, co se mění, kde se to projeví a jaký problém to má snížit.
+
+Příklad:
+
+`Při měsíční kontrole standardů už nebudeme zapisovat samostatný komentář ke každé šabloně; u položek beze změny zůstane jen stav "ponechat" a detail se píše pouze u výjimek.`
+
+Tahle věta dává kontrole jasnou osu. Neptáte se "líbí se nám nový postup?". Ptáte se:
+
+- Snížil nový postup množství zbytečného zápisu?
+- Bylo pořád jasné, proč se položka ponechává?
+- Nezmizel signál, který tým potřebuje pro další rozhodnutí?
+- Věděl vlastník rytmu, kdy detail doplnit?
+
+Když původní změnovou větu nemáte, kontrolu nejdřív zpomalte a dopište ji zpětně. Bez ní budete hodnotit mlhu. A mlha se hodnotí mizerně, i když má hezký název v backlogu.
+
+### 2. Ověřte jeden skutečný průchod
+
+První kontrola má stát na reálném použití. Ne na tom, že si někdo změnu přečetl a připadala mu rozumná. Vyberte první cyklus, ve kterém měla úprava normálně proběhnout, a projděte konkrétní důkazy.
+
+Hledejte:
+
+- Kdy změna měla nastat.
+- Kdo ji měl použít.
+- Jaký vstup byl k dispozici.
+- Jaký výstup vznikl.
+- Kolik dodatečného vysvětlování bylo potřeba.
+- Jestli se tým vrátil ke starému způsobu.
+- Jestli vznikla nová kopie, tabulka, poznámka nebo soukromý workaround.
+
+Příklad: změnili jste měsíční review marketingového plánu tak, že se má začínat jednou rozhodovací otázkou. V kontrole se neptejte jen "byla otázka napsaná?". Podívejte se, jestli otázka opravdu vedla výběr dat, diskuzi a rozhodnutí. Pokud otázka vznikla až na konci jako formální zápis, změna se v provozu ještě nechytla.
+
+### 3. Rozlište použití, přínos a cenu
+
+U každé úpravy oddělte tři věci:
+
+1. Použití: změna se opravdu stala.
+2. Přínos: změna zlepšila práci, rozhodnutí nebo výstup.
+3. Cena: změna nepřidala nepřiměřenou režii.
+
+Tyto tři body se rády pletou. Změna může být použitá, ale bez přínosu. Může mít přínos, ale být příliš drahá. Může být levná, ale neřešit původní problém. Kontrola má dát jednoduchý verdikt, ne liturgii nad procesem.
+
+Mini scorecard:
+
+| Oblast | Otázka | Stav |
+| --- | --- | --- |
+| Použití | Proběhla změna v reálném cyklu bez zvláštního tlačení? | ano / částečně / ne |
+| Přínos | Snížila původní tření nebo zlepšila rozhodnutí? | ano / částečně / ne |
+| Cena | Nepřidala novou zbytečnou práci? | ano / částečně / ne |
+| Srozumitelnost | Věděl vlastník, co má udělat? | ano / částečně / ne |
+| Datová stopa | Nevznikly nové zbytečné osobní nebo interní údaje? | ano / částečně / ne |
+
+Pokud je většina odpovědí "ano", změnu pravděpodobně nechte žít. Pokud je většina "částečně", udělejte jednu drobnou korekci. Pokud se objeví dvě nebo více "ne", nesnažte se změnu zachraňovat silou. Vraťte ji do pracovního režimu nebo ji zrušte.
+
+### 4. Hledejte návrat staré práce
+
+Nejlepší indikátor neúspěšné provozní úpravy je tichý návrat starého postupu. Lidé o tom často nebudou mluvit jako o odporu. Prostě si bokem udělají vlastní tabulku, dopíšou komentář do chatu, pošlou si soukromé shrnutí nebo obejdou nový formulář.
+
+To není morální selhání. Je to signál, že systém neodvedl dost práce.
+
+Ptejte se:
+
+- Kde se vedle nové úpravy objevila stará práce?
+- Kdo ji dělal a proč?
+- Co mu v novém postupu chybělo?
+- Byla stará práce nutná, nebo jen návyk?
+- Má se nový postup opravit, nebo se má starý artefakt vědomě zrušit?
+
+Příklad: zkrátili jste kontrolní zápis, aby se u položek beze změny psal jen stav. V dalším cyklu ale někdo vytvořil vedlejší dokument "poznámky k položkám", protože se bál, že bez komentářů nebude jasné, proč se nic nemění. To neznamená automaticky, že zkrácení bylo špatně. Možná chybí jedno pravidlo: u položek s rizikem stárnutí se dopíše krátký důvod, u stabilních položek ne.
+
+Codyho komentář: když se stará práce vrací bokem, nehádejte se s lidmi, že "to přece bylo domluvené". Radši zjistěte, co jim nový systém nedal. Proces, který funguje jen pod dozorem, není proces. Je to domácí úkol s logem firmy.
+
+### 5. Privacy-first kontrola po prvním cyklu
+
+Každá provozní úprava může nenápadně změnit datovou stopu. Přidá nový zápis, nový export, nový screenshot, novou poznámku o zákazníkovi, nové sdílení do chatu nebo nový přístup pro další roli. Po prvním cyklu proto udělejte krátkou privacy-first kontrolu.
+
+Zkontrolujte:
+
+- Nevznikla nová kopie dat mimo kanonické místo?
+- Neobsahuje výstup více osobních údajů, než je nutné pro rozhodnutí?
+- Nezůstaly dočasné podklady po kontrole v pracovním chatu nebo sdílené složce?
+- Nezískala nová role přístup k širším datům, než potřebuje?
+- Není v příkladech interní nebo zákaznický detail, který lze anonymizovat?
+- Je jasné, kdy se kontrolní podklady mažou nebo archivují?
+
+Praktický příklad: při kontrole onboardingového standardu tým použije reálné zákaznické ticket ID, jméno zákazníka a interní poznámku z podpory. Pro rozhodnutí ale stačí anonymní popis situace a odkaz na kanonický systém, kam mají přístup jen oprávnění lidé. Do e-bookového nebo týmového playbooku patří vzor, ne plná stopa konkrétního člověka.
+
+Privacy-first provoz není jen o cookies a analytice na webu. Je to i disciplína v interních stopách. Každý "jen pracovní" dokument může časem ztvrdnout v archiv, ke kterému se nikdo nehlásí.
+
+### 6. Rozhodněte jednou větou
+
+Kontrola má skončit rozhodnutím, ne seznamem pocitů. Po prvním cyklu použijte jednu z těchto vět:
+
+- `Ponechat beze změny, protože úprava snížila původní tření a nepřidala novou režii.`
+- `Ponechat s drobnou korekcí: doplníme jedno pravidlo pro výjimky a ověříme ho v příštím cyklu.`
+- `Vrátit do pracovního režimu, protože změna se použila jen díky ručnímu tlačení vlastníka.`
+- `Zrušit, protože neřeší původní problém a vytváří další zápis.`
+
+Dobré rozhodnutí je krátké, ale má obsahovat důvod. "Necháváme" nestačí. "Necháváme, protože..." už je použitelný záznam.
+
+Příklad rozhodnutí:
+
+`Ponechat s drobnou korekcí: u stabilních položek zůstane pouze stav, ale u položek se změnou právního, datového nebo zákaznického dopadu se dopíše jedna věta důvodu. Ověříme při příští měsíční kontrole.`
+
+Tohle je konkrétní. Tým ví, co se mění, kde je výjimka a kdy se to znovu podívá.
+
+### Šablona kontroly po prvním cyklu
+
+Použijte ji jako krátký zápis do kanonického místa:
+
+```md
+## Kontrola provozní úpravy po prvním cyklu
+
+Původní změnová věta:
+
+Cyklus, ve kterém byla změna ověřena:
+
+Kdo změnu použil:
+
+Výstup, který vznikl:
+
+Co fungovalo:
+
+Kde se objevilo tření:
+
+Vrátila se stará práce bokem?
+
+Privacy-first kontrola:
+- nové kopie dat:
+- osobní nebo citlivé údaje:
+- dočasné podklady:
+- přístupy:
+- retence:
+
+Rozhodnutí:
+
+Další ověření:
+```
+
+Šablonu zkracujte podle kontextu. Pokud se z ní stane další velký formulář, prohráli jste elegantně a s odrážkami.
+
+### Mini workshop na 25 minut
+
+Agenda:
+
+1. 5 minut: přečíst původní změnovou větu a připomenout původní problém.
+2. 7 minut: projít jeden reálný cyklus a důkazy použití.
+3. 5 minut: zapsat použití, přínos a cenu do mini scorecardu.
+4. 4 minuty: udělat privacy-first kontrolu stop, kopií a přístupů.
+5. 4 minuty: napsat rozhodovací větu a další ověření.
+
+Pravidla:
+
+- Neřešte širší standard, pokud kontrolujete jednu úpravu.
+- Nepřidávejte nový krok jen proto, že se někdo cítí nejistě.
+- Nejprve hledejte, kde se práce skutečně stala.
+- Starý workaround berte jako signál, ne jako neposlušnost.
+- Do kanonického záznamu pište jen to, co bude užitečné při dalším cyklu.
+- Dočasné podklady ukliďte hned po rozhodnutí.
+
+### Checklist
+
+- Máte původní změnovou větu?
+- Ověřujete skutečný pracovní cyklus, ne hypotetický scénář?
+- Je jasné, kdo změnu použil a jaký výstup vznikl?
+- Oddělili jste použití, přínos a cenu?
+- Zkontrolovali jste, jestli se bokem nevrátil starý postup?
+- Umíte říct, co novému postupu chybělo, pokud vznikl workaround?
+- Nevznikly nové zbytečné kopie dat?
+- Neobsahují kontrolní podklady více osobních nebo interních detailů, než je nutné?
+- Je rozhodnutí napsané jednou větou s důvodem?
+- Ví tým, jestli změnu ponechat, lehce upravit, vrátit do pracovního režimu, nebo zrušit?
+- Má další ověření konkrétní cyklus nebo datum?
+- Je kanonické místo aktualizované a dočasné podklady uklizené?
+
+Kontrola po prvním dalším cyklu chrání tým před dvěma častými extrémy. První extrém: každou úpravu oslavit jako hotovou jen proto, že byla zapsaná. Druhý extrém: při prvním tření otevřít celý systém znovu. Praktický provoz potřebuje klidnější rytmus. Jedna změna, jeden skutečný průchod, jedno rozhodnutí. Žádná procesní opera o třech jednáních.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GJ o kontrole provozní úpravy po prvním dalším cyklu: návrat ke změnové větě, ověření skutečného průchodu, rozlišení použití/přínosu/ceny, hledání návratu staré práce, privacy-first kontrola datové stopy, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GI o převodu nálezu z kontroly stabilního revizního rytmu do jedné úpravy provozu: výběr nálezu, změnová věta, místo zásahu, minimální rozsah artefaktů, privacy-first úklid podkladů, předání týmu, ověření v dalším cyklu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GH o kontrole stabilního revizního rytmu po prvním měsíci: návrat ke slibu rytmu, reálné průchody, rozlišení problému rytmu od problému standardu, měření ceny revize, privacy-first datová stopa, jedna malá úprava, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GG o zařazení ověřené provozní verze do stabilního revizního rytmu: důkaz stabilizace, volba revizního rytmu, vlastnictví role, privacy-first úklid přechodové stopy, aktualizace indexu, stop pravidla, šablona, mini workshop a checklist.
