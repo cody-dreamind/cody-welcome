@@ -56221,8 +56221,306 @@ Pravidla:
 
 Dlouhodobé rozhodnutí po lehké revizi je okamžik, kdy se z kontroly stane normální práce. Ne tím, že přidáte další vrstvu řízení. Tím, že odstraníte nejasnost, zavřete staré cesty a necháte týmu jednu větu, podle které se dá příště jednat.
 
+## Příloha GN: Kontrola dlouhodobého rozhodnutí po dalším pracovním období
+
+Dlouhodobé rozhodnutí není hotové ve chvíli, kdy se zapíše do šablony. Hotové je až tehdy, když podle něj tým opravdu pracuje v dalším období a nevzniká kolem něj nová neviditelná práce. Jedna věta v kanonickém indexu může vypadat skvěle, ale reálný provoz ukáže, jestli lidé vědí, kdy ji použít, kde najít aktuální zdroj pravdy a kdy udělat výjimku.
+
+Tato příloha pomáhá zkontrolovat první další období po dlouhodobém rozhodnutí. Může to být měsíc, kvartál, jedna kampaň, jeden onboardingový cyklus nebo tři opakovaná použití. Důležité není kalendářní kouzlo. Důležité je, aby rozhodnutí potkalo skutečnou práci.
+
+Výstupem není nový velký audit. Výstupem je krátká kontrolní karta: co rozhodnutí slibovalo, kde bylo použito, co se zlepšilo, co stálo víc energie než mělo, jaká datová stopa vznikla a zda pravidlo zůstává stabilní, potřebuje drobnou úpravu, nebo se má vrátit do ověřovacího režimu.
+
+### 1. Začněte původní rozhodovací větou
+
+Kontrolu nezačínejte dojmy. Začněte větou, kterou jste minule nechali týmu jako nový normál.
+
+Příklad:
+
+```markdown
+Původní rozhodnutí:
+U stabilních položek v měsíční kontrole zapisujeme jen stav "ponechat"; důvod přidáváme pouze u výjimky, změny rozhodnutí nebo privacy-first dopadu.
+```
+
+Vedle ní napište pracovní slib:
+
+```markdown
+Slib rozhodnutí:
+Zkrátit kontrolu, zachovat dohledatelnost rozhodnutí a snížit zbytečný sběr detailů.
+```
+
+Tento slib je důležitý. Bez něj budete hodnotit jen to, jestli lidé pravidlo formálně dodrželi. To nestačí. Dobré rozhodnutí má zlepšit práci, ne vyrobit poslušnost.
+
+U původní věty si položte tři otázky:
+
+- Je pořád srozumitelná bez vysvětlování autora?
+- Říká jasně, kdy se použije a kdy ne?
+- Dá se podle ní rozhodnout v běžném pracovním tlaku?
+
+Pokud odpověď zní ne, kontrola už našla první nález. Není to ostuda. Je to signál, že dlouhodobá věta byla možná napsaná moc kancelářsky a má se přiblížit skutečnému použití.
+
+### 2. Vyberte reálné průchody
+
+Kontrolujte konkrétní použití rozhodnutí. Ne obecný pocit, že "to asi funguje". Vyberte jeden až pět reálných průchodů podle velikosti týmu a četnosti práce.
+
+Dobrý průchod má:
+
+- skutečného vlastníka,
+- skutečný pracovní výsledek,
+- jasný začátek a konec,
+- dostupný kanonický záznam,
+- minimální nutný kontext bez surových osobních detailů.
+
+Příklad výběru:
+
+```markdown
+Průchody ke kontrole:
+1. Měsíční kontrola standardů za duben.
+2. První kontrola po předání role novému vlastníkovi.
+3. Výjimka, kdy se u stabilní položky doplnil důvod.
+```
+
+Nevybírejte jen nejlepší ukázky. Jeden hladký průchod ukáže, že rozhodnutí může fungovat. Jeden hraniční průchod ukáže, jestli pravidlo vydrží běžnou nejasnost. Právě hraniční situace bývá užitečnější než perfektní screenshot.
+
+Codyho komentář: když kontrolujete jen příklady, které vypadají dobře v prezentaci, nekontrolujete provoz. Kontrolujete schopnost týmu najít hezký příklad. To je jiná disciplína a bohužel má méně praktický výnos.
+
+### 3. Sledujte tři signály: použití, výsledek, cenu
+
+Dlouhodobé rozhodnutí hodnotíte podle tří signálů.
+
+Použití:
+
+- Našli lidé správné místo bez připomínání?
+- Použili správnou větu nebo šablonu?
+- Věděli, kdy udělat výjimku?
+- Nevznikla vedlejší dohoda v chatu, dokumentu nebo hlavě jednoho člověka?
+
+Výsledek:
+
+- Zrychlilo se rozhodnutí?
+- Snížil se počet zbytečných detailů?
+- Zůstala zachovaná dohledatelnost?
+- Pomohlo pravidlo novému nebo méně zkušenému člověku?
+
+Cena:
+
+- Kolik práce přibylo navíc?
+- Musel někdo pravidlo vysvětlovat opakovaně?
+- Přesunulo se tření do jiného místa?
+- Vznikly nové ruční kontroly, které rozhodnutí původně nemělo potřebovat?
+
+Zapište krátkou scorecard:
+
+```markdown
+Použití: 4/5
+Výsledek: 3/5
+Cena: 2/5
+
+Poznámka:
+Lidé našli kanonické místo, ale u výjimek pořád dopisují dlouhé vysvětlení, protože se bojí, že krátký záznam nebude později stačit.
+```
+
+Nízké skóre není automaticky důvod pravidlo zrušit. Je to důvod zjistit, co přesně selhalo. Možná je věta dobrá, ale špatně umístěná. Možná je umístění dobré, ale chybí příklad výjimky. Možná pravidlo řeší správný problém, ale přidává moc mentální práce.
+
+### 4. Hledejte návrat starého chování
+
+Nejlepší test dlouhodobého rozhodnutí je jednoduchý: vrátila se stará práce zadními dveřmi?
+
+Typické návraty:
+
+- lidé dál píšou dlouhé důvody "pro jistotu",
+- vzniká kopie šablony mimo zdroj pravdy,
+- výjimky se řeší v chatu místo v kanonickém záznamu,
+- nový vlastník se ptá autora, místo aby použil pravidlo,
+- starý checklist zůstává v onboardingu,
+- rozhodnutí se dodržuje jen při kontrole, ne při běžné práci.
+
+Když se staré chování vrátí, neberte to jako osobní selhání. Staré chování mělo nějakou funkci. Možná chránilo lidi před nejistotou, doplňovalo chybějící kontext, nebo nahrazovalo nejasné vlastnictví. Pokud tu funkci nové rozhodnutí nepřebralo, starý postup se vrátí.
+
+Příklad:
+
+```markdown
+Návrat starého chování:
+U dvou stabilních položek lidé znovu doplnili dlouhý důvod.
+
+Funkce starého chování:
+Potřebovali označit, že položka byla stabilní navzdory jedné nejasné výjimce.
+
+Možná úprava:
+Doplnit do pravidla krátký tvar "ponechat s poznámkou k výjimce" místo volného dlouhého důvodu.
+```
+
+Tím nevracíte starý proces. Přiznáváte, že měl jednu užitečnou funkci, a převedete ji do menšího, kontrolovanějšího tvaru.
+
+### 5. Udělejte privacy-first kontrolu období
+
+Každé pracovní období po rozhodnutí zanechá stopu. Kontrolní poznámky, screenshoty, příklady, komentáře, exporty, odkazy, staré verze dokumentů. Privacy-first přístup znamená, že po kontrole zůstane jen to, co má dlouhodobou hodnotu.
+
+Zkontrolujte:
+
+- jestli se do trvalého záznamu nedostaly osobní nebo zákaznické detaily bez důvodu,
+- jestli pomocné screenshoty a surové příklady mají retenční lhůtu,
+- jestli vedlejší chatové dohody byly převedené do zdroje pravdy nebo smazané,
+- jestli nový vlastník nepotřebuje přístup k širším datům, než práce vyžaduje,
+- jestli měření použití pravidla není zbytečně individuální.
+
+Praktická věta do karty:
+
+```markdown
+Privacy-first uzavření:
+Do trvalého záznamu ukládáme jen stav rozhodnutí, obecný důvod a odkaz na kanonické místo. Pracovní screenshoty z kontroly mažeme po uzavření změny. Příklady výjimek anonymizujeme na vzor, ne na konkrétní osobu nebo zákazníka.
+```
+
+Tady se ukazuje rozdíl mezi dohledatelností a hromaděním. Dohledatelnost říká, proč rozhodnutí existuje a jak ho použít. Hromadění drží všechno, protože se to možná jednou bude hodit. V provozu webu, SaaS i marketingu je druhý přístup lákavý, ale zvyšuje riziko, šum a odpovědnost.
+
+### 6. Rozhodněte další stav
+
+Po kontrole nepište jen "probráno". Rozhodněte stav.
+
+Použijte jednoduchou matici:
+
+| Stav | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Stabilní | rozhodnutí funguje a cena je přiměřená | ponechat, nastavit běžnou revizi |
+| Stabilní s drobnou úpravou | funguje, ale jedna věta nebo příklad brzdí práci | upravit minimum a zapsat změnu |
+| Přesunout | pravidlo je dobré, ale lidé ho hledají jinde | změnit pracovní umístění a odkazy |
+| Vrátit do ověření | signály jsou smíšené nebo hraniční situace selhávají | určit další konkrétní test |
+| Sloučit | pravidlo dubluje jiné rozhodnutí | vybrat zdroj pravdy a zavřít kopii |
+| Ukončit | rozhodnutí nepomáhá nebo vytváří víc práce než hodnoty | odstranit odkazy a vysvětlit důvod |
+
+Dobrá rozhodovací věta:
+
+```markdown
+Stav:
+Stabilní s drobnou úpravou. Pravidlo ponecháváme, ale doplňujeme krátký příklad výjimky, aby lidé nepřidávali dlouhé důvody u stabilních položek.
+```
+
+Slabá rozhodovací věta:
+
+```markdown
+Vypadá to dobře, jen to budeme dál sledovat.
+```
+
+Sledování bez otázky je jen odložené rozhodnutí. Pokud něco sledujete, napište přesně co, kdy a proč.
+
+### 7. Aktualizujte jen nezbytná místa
+
+Kontrola dlouhodobého rozhodnutí často svádí k velkému úklidu. Odolejte. Pokud je nález malý, změna má být malá.
+
+Aktualizujte jen:
+
+- kanonickou větu,
+- jeden příklad,
+- jeden odkaz nebo pracovní vstup,
+- changelog,
+- případně onboardingový krok, pokud by nový člověk narazil na starou verzi.
+
+Nedělejte z každé kontroly nový projekt. Dlouhodobý systém se udržuje drobnými přesnými změnami, ne nekonečným přepisováním.
+
+Příklad minimální změny:
+
+```markdown
+Změna:
+Do pravidla doplněn příklad "ponechat s výjimkou".
+
+Nezměněno:
+Struktura měsíční kontroly, vlastnictví, revizní rytmus, retenční pravidla.
+```
+
+Tato část je stejně důležitá jako samotná úprava. Říká týmu, co se nemění. Tím snižuje nejistotu a brání tomu, aby malý zásah vypadal jako nový proces.
+
+### Šablona kontroly dlouhodobého rozhodnutí
+
+```markdown
+# Kontrola dlouhodobého rozhodnutí
+
+Název rozhodnutí:
+Kanonické místo:
+Kontrolované období:
+Vlastník:
+
+## Původní rozhodnutí
+
+Rozhodovací věta:
+Slib rozhodnutí:
+Další revizní háček:
+
+## Reálné průchody
+
+Průchod 1:
+Průchod 2:
+Průchod 3:
+
+## Scorecard
+
+Použití:
+Výsledek:
+Cena:
+
+Co fungovalo:
+Co brzdilo práci:
+Kde se objevila výjimka:
+Kde se vrátilo staré chování:
+
+## Privacy-first kontrola
+
+Trvalý záznam:
+Krátká retence:
+Smazat:
+Anonymizovat:
+Přístupy:
+
+## Rozhodnutí po kontrole
+
+Stav:
+Co se mění:
+Co se nemění:
+Kanonické místo upraveno:
+Staré cesty zavřeny:
+Další revizní háček:
+Věta pro tým:
+```
+
+### Mini workshop na 25 minut
+
+Agenda:
+
+1. 3 minuty: přečíst původní rozhodovací větu a slib rozhodnutí.
+2. 4 minuty: vybrat reálné průchody z dalšího období.
+3. 5 minut: vyplnit scorecard použití, výsledku a ceny.
+4. 4 minuty: najít případný návrat starého chování.
+5. 3 minuty: udělat privacy-first kontrolu podkladů.
+6. 3 minuty: vybrat stav rozhodnutí.
+7. 3 minuty: napsat minimální změnu, větu pro tým a další revizní háček.
+
+Pravidla:
+
+- Kontrolujte práci, ne disciplínu lidí.
+- Nepřidávejte nový proces, pokud stačí opravit větu, příklad nebo odkaz.
+- Hraniční průchod je cennější než bezchybná ukázka.
+- Do trvalého záznamu ukládejte rozhodnutí, ne surový materiál.
+- Pokud se vrátil starý postup, najděte jeho funkci.
+- Změna musí být dost malá, aby se použila při příštím průchodu.
+
+### Checklist
+
+- Máte před sebou původní rozhodovací větu?
+- Je jasné, jaký pracovní slib měla splnit?
+- Vybrali jste reálné průchody, ne jen hezké příklady?
+- Hodnotíte použití, výsledek i cenu?
+- Je vidět, zda lidé našli kanonické místo bez připomínání?
+- Zjistili jste, jestli se nevrátil starý postup?
+- Umíte popsat funkci starého chování, pokud se vrátilo?
+- Je datová stopa po kontrole přiměřená a uklizená?
+- Zůstávají v trvalém záznamu jen informace nutné pro budoucí práci?
+- Má rozhodnutí po kontrole jasný stav?
+- Je případná úprava omezená na nejmenší užitečný zásah?
+- Ví tým, co se mění a co se nemění?
+- Existuje další revizní háček s konkrétní otázkou?
+
+Kontrola dlouhodobého rozhodnutí chrání tým před dvěma krajnostmi: před slepým udržováním pravidel, která už nepomáhají, a před věčným otevíráním věcí, které už fungují. Dobrý provoz potřebuje obojí: odvahu pravidlo ponechat, když slouží, a disciplínu opravit jen tu část, která skutečně brzdí práci.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GN o kontrole dlouhodobého rozhodnutí po dalším pracovním období: původní rozhodovací věta, reálné průchody, scorecard použití/výsledku/ceny, návrat starého chování, privacy-first kontrola období, rozhodnutí dalšího stavu, minimální aktualizace, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GM o převodu lehké revize do dlouhodobého rozhodnutí: oddělení nálezu od rozhodnutí, výběr dlouhodobého stavu, provozní věta, zavření starých cest, privacy-first uzavření podkladů, předání týmu, revizní háček, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GL o kontrole stabilizované provozní úpravy po první lehké revizi: návrat ke stabilizační větě, výběr skutečných průchodů, scorecard použití/samostatnosti/ceny, hledání návratu starého postupu, privacy-first kontrola stabilního režimu, rozhodnutí stavu pravidla, minimální aktualizace, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GK o stabilizaci úspěšné provozní úpravy po kontrole: ověření opakované hodnoty, výběr trvalého jádra, uložení do kanonického pracovního místa, minimální aktualizace artefaktů, privacy-first úklid pilotních podkladů, předání týmu, lehká revize, stabilizační karta, mini workshop a checklist.
