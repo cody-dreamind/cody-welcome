@@ -53109,8 +53109,339 @@ Pravidla:
 
 Kontrola stabilizovaného pravidla po prvních použitích chrání tým před dvěma extrémy. První je slepě věřit, že publikované pravidlo funguje. Druhý je přepisovat dokumentaci pokaždé, když někdo narazí na drobné tření. Správný střed je praktický: podívat se na reálnou práci, vybrat jednu opravu, držet jeden zdroj pravdy a nezvětšovat datovou stopu. Tak se z pravidel nestává byrokracie, ale provozní opora.
 
+## Příloha GC: Převod ověřeného pravidla do běžného provozního standardu
+
+Pravidlo, které prošlo prvními použitími, má za sebou důležitý test. Někdo ho našel, použil, udělal díky němu lepší rozhodnutí a nevznikla zbytečná datová stopa. To je dobrý signál. Pořád to ale neznamená, že se pravidlo automaticky stalo součástí běžného provozu. Mezi "funguje při prvních použitích" a "takhle u nás pracujeme" je ještě jeden krok: převést pravidlo do standardu, který má vlastníka, místo v rytmu práce a jasnou hranici životnosti.
+
+Tato příloha navazuje na Přílohu GB. Tam jste zkontrolovali první použití stabilizovaného pravidla. Teď rozhodujete, jak z ověřeného pravidla udělat provozní standard bez toho, aby tým dostal další dokument navíc, další tabulku navíc a další povinnost, kterou nikdo neudrží.
+
+Dobře převedený standard má pět vlastností:
+
+- používá se v konkrétním pracovním okamžiku,
+- má jednoho vlastníka,
+- je napojený na existující rytmus,
+- obsahuje minimum důkazů a dat,
+- má jasné podmínky pro úpravu, sloučení nebo zrušení.
+
+Cílem není udělat pravidlo důležitější na papíře. Cílem je, aby fungovalo i ve chvíli, kdy u toho není jeho autor, tým má normální provozní tlak a nikdo nemá čas číst tři historické přílohy.
+
+### 1. Rozhodněte, zda pravidlo patří do standardu
+
+Ne každé ověřené pravidlo musí být provozní standard. Některá pravidla stačí ponechat v checklistu nebo šabloně. Do standardu patří jen to, co má opakovaný provozní dopad, mění chování více lidí a potřebuje jasné vlastnictví.
+
+Ptejte se:
+
+- Vrací se situace pravidelně?
+- Použije pravidlo víc než jedna role?
+- Má chyba měřitelný dopad na zákazníka, provoz, data nebo důvěru?
+- Potřebuje pravidlo revizi při změně nástroje nebo procesu?
+- Je pravidlo dost důležité, aby mělo vlastníka?
+- Nevyřeší stejnou věc prostý odkaz v existujícím checklistu?
+
+Příklad vhodného kandidáta:
+
+```markdown
+Pravidlo:
+Provozní identifikátory zůstávají v kanonickém systému, mimo něj patří jen anonymizovaný popis a odkaz.
+
+Proč standard:
+Používá support, delivery i incidentní režim. Chyba vytváří zbytečné kopie citlivých provozních údajů. Pravidlo potřebuje kontrolu při změně ticket systému nebo znalostní báze.
+```
+
+Příklad nevhodného kandidáta:
+
+```markdown
+Pravidlo:
+U jedné starší šablony změnit pořadí dvou otázek.
+
+Proč ne standard:
+Jde o lokální redakční zlepšení. Stačí opravit šablonu a zapsat změnu do changelogu.
+```
+
+Standardizace má být vzácnější než zápis pravidla. Když se ze všeho stane standard, slovo standard přestane znamenat cokoliv konkrétního.
+
+### 2. Napojte standard na existující rytmus
+
+Nový standard nemá vytvářet nový meeting jen proto, že vznikl. Má se připojit k rytmu, který už tým má: měsíční support review, kvartální audit datové mapy, onboarding nové role, předpublikační kontrola, incidentní drill nebo delivery retro.
+
+Možné rytmy:
+
+- týdenní kontrola support vzorku,
+- měsíční review šablon,
+- kvartální audit standardů,
+- onboardingový průchod nové role,
+- revize datové mapy,
+- předání projektu zákazníkovi,
+- post-incident review,
+- publikační brána obsahu.
+
+Příklad napojení:
+
+```markdown
+Standard:
+Práce s provozními identifikátory
+
+Pracovní rytmus:
+Měsíční support review a kvartální audit datové mapy.
+
+Kontrolní otázka v support review:
+Zůstaly identifikátory v kanonickém systému a mimo něj jen anonymizovaný popis?
+
+Kontrolní otázka v auditu datové mapy:
+Nevznikl nový nástroj nebo poznámkový systém, kde se identifikátory kopírují mimo řízenou retenci?
+```
+
+Tím se standard dostane do provozu bez další vrstvy řízení. Když standard potřebuje úplně nový rytmus, je to varování: možná je příliš těžký, nebo řeší problém, který ještě není dost opakovaný.
+
+### 3. Určete vlastníka podle rozhodnutí, ne podle autora
+
+Autorem pravidla často bývá člověk, který objevil problém. Vlastníkem standardu má být člověk nebo role, která má pravomoc standard udržovat v provozu. To nemusí být stejná osoba.
+
+Vlastník standardu má odpovědět na čtyři věci:
+
+- kde je kanonické znění,
+- kdy se standard kontroluje,
+- kdo smí navrhnout změnu,
+- kdy se standard zjednoduší, sloučí nebo zruší.
+
+Příklad:
+
+```markdown
+Autor původní lekce:
+Support specialista.
+
+Vlastník standardu:
+Vlastník support procesu.
+
+Spoluvlastník pro privacy-first dopad:
+Člověk odpovědný za datovou mapu.
+
+Proč:
+Support proces rozhoduje o běžném použití, datová mapa hlídá, zda standard nevytváří novou datovou stopu.
+```
+
+Pokud standard nemá vlastníka, stane se z něj text bez údržby. A text bez údržby je budoucí rozpor, jen zatím hezky zarovnaný.
+
+### 4. Přepište pravidlo do standardové karty
+
+Standardová karta má být krátká. Neopisuje celou historii, ale dává dost kontextu pro práci, kontrolu a změnu. Dobrá karta se dá přečíst během jedné minuty a použít během práce.
+
+Minimální karta:
+
+```markdown
+# Standard: Práce s provozními identifikátory
+
+Použij, když:
+Support, delivery nebo incidentní poznámka potřebuje odkázat na ticket, objednávku, incident nebo jiný provozní záznam.
+
+Pravidlo:
+Identifikátor zůstává v kanonickém systému. Mimo něj používej anonymizovaný popis a odkaz do systému, kde má příjemce oprávnění.
+
+Nedělej:
+- nekopíruj identifikátory do osobních poznámek,
+- nevkládej screenshoty s identifikátory do dokumentace,
+- nevytvářej pomocné evidence bez schválené retence.
+
+Kanonické systémy:
+Ticket systém, incident log, zákaznický portál.
+
+Vlastník:
+Vlastník support procesu.
+
+Kontrolní rytmus:
+Měsíční support review, kvartální audit datové mapy.
+
+Privacy-first důvod:
+Omezujeme kopie provozních údajů mimo systémy s řízeným přístupem, auditem a retencí.
+
+Poslední revize:
+
+Další revize:
+```
+
+Taková karta je dost konkrétní, ale pořád lehká. Není potřeba přidávat celý příběh, seznam všech původních debat ani dlouhé právní vysvětlení. Pokud standard vyžaduje víc než jednu stránku, možná ve skutečnosti skrývá několik různých standardů.
+
+### 5. Zaveďte změnu na jednom pracovním místě
+
+Standard se má projevit tam, kde člověk pracuje. Nestačí uložit kartu do interní knihovny. První zavedení udělejte na jednom konkrétním pracovním místě:
+
+- support checklist,
+- onboarding role,
+- šablona incidentního záznamu,
+- delivery předávací checklist,
+- předpublikační kontrola,
+- CRM poznámka,
+- auditní otázka v měsíčním review.
+
+Příklad zavedení:
+
+```markdown
+Pracovní místo:
+Support checklist.
+
+Změna:
+Přidána otázka "Potřebuješ odkázat na ticket, incident nebo objednávku?" s odkazem na standard.
+
+Proč jen jedno místo:
+Support je nejčastější použití a další role se napojí po ověření v měsíčním review.
+```
+
+Jedno pracovní místo stačí pro první provozní zavedení. Pokud se standard hned rozkopíruje do deseti dokumentů, zvyšuje se riziko rozporů. Lepší je jeden kanonický standard a několik odkazů, ne pět lokálních variant s podobným textem.
+
+### 6. Nastavte změnové pravidlo
+
+Každý standard potřebuje jednoduché pravidlo, jak se mění. Jinak ho lidé buď neupraví nikdy, nebo ho začnou upravovat bokem. Obojí je problém.
+
+Změnové pravidlo může být jednoduché:
+
+```markdown
+Změnu standardu může navrhnout kdokoliv, kdo narazí na tření v reálné práci. Vlastník standardu rozhodne, zda jde o:
+- opravu textu,
+- doplnění příkladu,
+- přesun odkazu,
+- změnu procesu,
+- privacy-first riziko,
+- důvod pro archivaci.
+
+Každá změna musí zachovat jedno kanonické znění a zapsat krátký changelog.
+```
+
+U privacy-first standardů přidejte brzdu:
+
+```markdown
+Změna nesmí přidat nové osobní údaje, identifikátory, screenshoty nebo pomocné evidence bez jasného účelu, vlastníka a retence.
+```
+
+Tohle není byrokracie. Je to ochrana před tichým bobtnáním systému.
+
+### 7. Uzavřete původní pravidlo v týmové paměti
+
+Jakmile je standard zavedený, původní lekce nebo pravidlo v týmové paměti už nemá být aktivním pracovním místem. Má ukazovat na standard a držet krátký historický důvod.
+
+Záznam:
+
+```markdown
+Lekce:
+Práce s provozními identifikátory mimo kanonické systémy.
+
+Stav:
+Převedeno do provozního standardu.
+
+Standard:
+Práce s provozními identifikátory.
+
+Kanonické místo:
+Support standardy > Data a identifikátory.
+
+Provozní rytmus:
+Měsíční support review, kvartální audit datové mapy.
+
+Privacy-first poznámka:
+Původní ověřovací podklady byly smazané. V týmové paměti zůstává jen anonymizovaný důvod a odkaz.
+```
+
+Týmová paměť tím nezmizí. Přestane ale soutěžit se standardem o pozornost. To je zdravé. Paměť má vysvětlovat původ, standard má řídit práci.
+
+### Šablona převodu do provozního standardu
+
+```markdown
+# Převod ověřeného pravidla do provozního standardu
+
+Pravidlo:
+Kanonické místo pravidla:
+Datum kontroly prvních použití:
+Vlastník převodu:
+
+Proč standardizovat:
+
+Kdo standard používá:
+-
+-
+
+Pracovní situace:
+
+Riziko chyby:
+
+Existující rytmus, kam se standard napojí:
+
+Vlastník standardu:
+
+Spoluvlastníci:
+
+Standardová karta:
+
+Použij, když:
+
+Pravidlo:
+
+Nedělej:
+-
+-
+-
+
+Kanonické systémy nebo místa:
+
+Kontrolní rytmus:
+
+Změnové pravidlo:
+
+Privacy-first kontrola:
+- standard nepřidává novou zbytečnou evidenci:
+- příklady jsou anonymizované:
+- odkazy vedou do kanonických systémů:
+- dočasné podklady jsou smazané nebo mají retenci:
+- změnové pravidlo brání kopírování citlivých dat:
+
+První pracovní místo zavedení:
+
+Krátká zpráva týmu:
+
+Záznam do týmové paměti:
+
+První kontrola standardu:
+```
+
+### Mini workshop: 30 minut na převod pravidla do standardu
+
+Agenda:
+
+1. 4 minuty: připomenout ověřené pravidlo a výsledek prvních použití.
+2. 4 minuty: rozhodnout, zda pravidlo skutečně patří do standardu.
+3. 4 minuty: vybrat existující provozní rytmus.
+4. 4 minuty: určit vlastníka podle rozhodnutí.
+5. 6 minut: přepsat pravidlo do standardové karty.
+6. 3 minuty: vybrat první pracovní místo zavedení.
+7. 3 minuty: projít privacy-first kontrolu.
+8. 2 minuty: uzavřít původní lekci v týmové paměti.
+
+Pravidla:
+
+- Nezakládejte nový rytmus, pokud stačí napojení na existující review.
+- Nechte jeden kanonický standard a ostatní místa používejte jako odkazy.
+- Vlastník standardu není automaticky autor původní opravy.
+- Příklady držte anonymizované a krátké.
+- Standard má mít podmínky pro změnu i pro zrušení.
+
+### Checklist
+
+- Je jasné, proč pravidlo patří do provozního standardu?
+- Ověřili jste, že nestačí lokální checklist nebo šablona?
+- Napojili jste standard na existující pracovní rytmus?
+- Má standard vlastníka, který může rozhodovat o změnách?
+- Je standardová karta krátká a použitelná v běžné práci?
+- Má standard jasné "použij, když" a "nedělej"?
+- Zavedli jste standard nejdřív na jednom pracovním místě?
+- Nevzniklo více kanonických verzí stejného pravidla?
+- Má standard změnové pravidlo a první kontrolu?
+- Prošla standardizace privacy-first kontrolou?
+- Uzavřeli jste původní lekci v týmové paměti odkazem na standard?
+- Ví tým, co se od teď mění v práci?
+
+Převod ověřeného pravidla do provozního standardu je malý, ale rozhodující krok. Bez něj zůstává dobrá lekce závislá na paměti několika lidí. S ním se z ní stane součást systému: má místo, vlastníka, rytmus, kontrolu a hranici. To je přesně rozdíl mezi dokumentací, která se jen čte, a standardem, který opravdu snižuje riziko v práci.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GC o převodu ověřeného pravidla do běžného provozního standardu: rozhodnutí, kdy standardizovat, napojení na existující rytmus, vlastnictví, standardová karta, první pracovní místo zavedení, změnové pravidlo, uzavření původní lekce v týmové paměti, šablona, mini workshop a checklist.
 - 2026-05-14: Zpřesněn úvodní návod k použití rukopisu o jednoduchou pracovní větu po každém čtení.
 - 2026-05-14: Doplněna Příloha GB o kontrole stabilizovaného pravidla po prvních použitích: výběr reálných průchodů, sledování práce místo poslušnosti, rozlišení chyby pravidla a umístění, privacy-first kontrola datové stopy, rozhodnutí stavu pravidla, jedna malá oprava, týmová paměť, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GA o stabilizaci ověřené opravy lekce do trvalého pravidla: rozhodnutí o opakovatelnosti, výběr kanonického místa, přepis do pracovního pravidla, zkrácení příběhu, úklid starých variant, revizní háček, předání týmu, šablona, mini workshop a checklist.
