@@ -55638,8 +55638,272 @@ Pravidla:
 
 Stabilizace úspěšné provozní úpravy je drobná disciplína, která chrání dobré změny před zapomenutím. Neoslavuje proces. Ukládá užitečný návyk na správné místo, uklízí pilotní stopy a nechává týmu jasnou větu: takhle to teď děláme, dokud práce neukáže lepší způsob.
 
+## Příloha GL: Kontrola stabilizované provozní úpravy po první lehké revizi
+
+Stabilizovaná úprava ještě není definitivní pravda. Je to pracovní pravidlo, které dostalo šanci žít v běžném provozu. První lehká revize má ověřit, jestli změna opravdu zapadla do práce, nebo jestli jen přežila díky tomu, že si ji všichni ještě pamatují.
+
+Rozdíl je důležitý. Nová úprava často funguje první týden, protože je čerstvá, lidé jsou opatrní a vlastník ji připomíná. Skutečná kvalita se ukáže až ve chvíli, kdy se stane běžnou součástí rytmu. Když pravidlo funguje bez tlačení, je pravděpodobně dobře uložené. Když ho musí někdo pořád vysvětlovat, není stabilizované. Jen má hezký zápis.
+
+Tato příloha pomáhá udělat první lehkou revizi bez toho, aby se z ní stal nový audit všeho. Praktický výstup je krátká revizní karta: co se mělo používat, kde se to opravdu použilo, co pomohlo, co stálo moc energie, jaká je datová stopa a jestli pravidlo ponechat, zjednodušit, přesunout, nebo vrátit do pracovního režimu.
+
+### 1. Vraťte se ke stabilizační větě
+
+Začněte větou, která při stabilizaci popsala nový normál. Nezačínejte dojmy. Nezačínejte tím, co si kdo pamatuje z poslední schůzky. Vraťte se k tomu, co mělo platit.
+
+Dobrá stabilizační věta má tři části:
+
+- kdy se pravidlo použije,
+- co člověk udělá,
+- kdy platí výjimka.
+
+Příklad:
+
+```markdown
+Stabilizační věta:
+U stabilních položek v měsíční kontrole zapisujeme jen stav "ponechat"; důvod doplňujeme pouze u výjimek s právním, datovým, zákaznickým nebo provozním dopadem.
+```
+
+První revize se pak neptá obecně "jak nám to šlo". Ptá se přesněji:
+
+- Použilo se pravidlo ve chvíli, kdy mělo?
+- Poznali lidé výjimku?
+- Stačil krátký zápis pro pozdější rozhodnutí?
+- Nezačal někdo bokem vytvářet delší poznámky?
+
+Tím držíte kontrolu u konkrétní práce. Bez stabilizační věty se revize rychle rozpadne na pocity. Pocity mají v týmu místo, ale nejsou dobrý systém řízení standardů.
+
+### 2. Vyberte jeden až tři skutečné průchody
+
+Lehká revize nemá procházet celý archiv. Stačí malý vzorek skutečných použití. Důležité je, aby nešlo o ukázkový ideální případ, ale o běžnou práci.
+
+Vyberte například:
+
+- první použití po stabilizaci,
+- jedno běžné použití bez výjimky,
+- jednu situaci, kde výjimka vznikla nebo skoro vznikla.
+
+U každého průchodu si poznamenejte:
+
+```markdown
+Průchod:
+Datum nebo cyklus:
+Kdo pravidlo použil:
+Jaký výstup vznikl:
+Bylo potřeba ruční připomenutí?
+Vznikla výjimka:
+Vznikla vedlejší datová stopa:
+Co by nový člověk nepochopil:
+```
+
+Nejde o kontrolu lidí. Jde o kontrolu systému. Pokud někdo pravidlo nepoužil, první otázka není "proč neposlouchal". První otázka je "potkal pravidlo ve správném okamžiku práce?" Pokud ne, problém je pravděpodobně v umístění, pojmenování nebo návaznosti na rytmus.
+
+### 3. Sledujte tři signály: použití, samostatnost, cenu
+
+První lehká revize má dát rychlý, ale užitečný obraz. Stačí tři signály.
+
+Použití:
+
+- Pravidlo se použilo ve správných situacích.
+- Výjimky byly rozpoznané.
+- Výstupy jsou dohledatelné.
+
+Samostatnost:
+
+- Lidé pravidlo našli bez autora úpravy.
+- Nebylo potřeba opakované připomínání.
+- Nový nebo méně zapojený člověk by postup pochopil.
+
+Cena:
+
+- Pravidlo nezvyšuje zbytečně administrativu.
+- Nevznikají vedlejší tabulky, kopie nebo chatové dohody.
+- Kontrola nezabírá víc energie než problém, který řeší.
+
+Jednoduchá scorecard:
+
+| Signál | Stav | Důkaz |
+| --- | --- | --- |
+| Použití | funguje / drhne / nefunguje | konkrétní průchod |
+| Samostatnost | funguje / drhne / nefunguje | jestli bylo potřeba vysvětlení |
+| Cena | přijatelná / hraniční / vysoká | čas, počet artefaktů, opakované otázky |
+
+Codyho komentář: standard, který technicky funguje, ale všichni ho potichu obcházejí, není standard. Je to dekorace s autoritou. A dekorace s autoritou je jeden z nejotravnějších druhů dokumentace.
+
+### 4. Zkontrolujte, jestli se nevrátil starý postup
+
+Starý postup se často vrací nenápadně. Ne jako otevřený odpor, ale jako malý workaround:
+
+- "jen pro jistotu" vznikne vedlejší poznámka,
+- někdo si udělá vlastní kopii šablony,
+- výjimky se řeší v chatu mimo zdroj pravdy,
+- vlastník dál ručně připomíná pravidlo,
+- lidé zapisují víc detailů, než pravidlo vyžaduje,
+- kontrola se odkládá, protože působí těžkopádně.
+
+Tyto signály neberte jako selhání. Berte je jako diagnostiku. Starý postup se vrací tam, kde nový postup neřeší skutečné tření.
+
+Příklad:
+
+```markdown
+Pozorování:
+U dvou stabilních položek lidé pořád přidali dlouhý důvod.
+
+Možná příčina:
+Nevěří, že krátký stav "ponechat" bude stačit při kvartální kontrole.
+
+Malá oprava:
+Do šablony doplnit větu: "U položek bez změny stačí stav; detail je potřeba jen u výjimky nebo změny rozhodnutí."
+```
+
+To je lepší než nařídit "nepište dlouhé důvody". Příkaz může umlčet symptom, ale nevyřeší nejistotu, která ho vyvolala.
+
+### 5. Udělejte privacy-first kontrolu stabilního režimu
+
+Po stabilizaci se datová stopa někdy změní. Pilotní podklady sice byly uklizené, ale běžný provoz může začít vytvářet nové kopie. První lehká revize má ověřit, že pravidlo nevedlo k tichému rozšíření dat.
+
+Zkontrolujte:
+
+- jaké záznamy vznikly při běžném použití,
+- jestli obsahují osobní, zákaznické nebo interně citlivé detaily,
+- jestli jsou uložené v kanonickém místě,
+- jestli nevznikly vedlejší kopie v chatu, tabulkách nebo exportech,
+- kdo má k záznamům přístup,
+- kdy se dočasné podklady smažou,
+- jestli příklady pro onboarding mohou být anonymizované.
+
+Privacy-first otázka:
+
+```markdown
+Kdybychom tento způsob používali celý rok, nevznikne nám zbytečně větší datová stopa než problém, který řešíme?
+```
+
+Pokud odpověď není jasná, zjednodušte záznam. U provozních standardů často stačí stav, rozhodnutí a anonymizovaný důvod. Surové podklady patří do krátké retence nebo vůbec nikam.
+
+### 6. Rozhodněte stav pravidla jednou větou
+
+Lehká revize má skončit rozhodnutím, ne další frontou přání. Vyberte jeden stav:
+
+| Stav | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| Ponechat | pravidlo funguje, je samostatné a cena je přiměřená | jen zapsat revizi |
+| Zjednodušit | pravidlo pomáhá, ale je moc těžké | upravit jeden krok nebo pole |
+| Přesunout | pravidlo je dobré, ale lidé ho nepotkávají | změnit kanonické místo nebo odkaz |
+| Vrátit do pracovního režimu | není jasné, zda pravidlo funguje | dát mu další ověřovací cyklus |
+| Zrušit | pravidlo nepomáhá nebo vytváří víc tření než hodnoty | zavřít stopu a odstranit odkazy |
+
+Příklad rozhodnutí:
+
+```markdown
+Rozhodnutí:
+Pravidlo ponecháváme, ale zjednodušujeme formulaci výjimky, protože lidé chápou zkrácený zápis, jen si nejsou jistí, kdy doplnit důvod.
+```
+
+Tohle rozhodnutí je použitelné. Říká stav, důvod i hranici zásahu. Slabé rozhodnutí by bylo "ještě to doladíme". To je věta, která zní pracovně, ale často jen přesouvá mlhu do dalšího týdne.
+
+### 7. Aktualizujte jen to, co rozhodnutí vyžaduje
+
+Po revizi se snadno rozjede malý dokumentační festival. Nedělejte ho. Pokud stav zní "ponechat", stačí zapsat datum revize, výsledek a další revizní háček. Pokud stav zní "zjednodušit", upravte jedno místo. Pokud stav zní "přesunout", změňte odkaz a zavřete starou cestu.
+
+Minimální aktualizace podle stavu:
+
+- Ponechat: changelog, datum revize, další kontrola.
+- Zjednodušit: jedno pole, jeden příklad nebo jedna věta v kanonické šabloně.
+- Přesunout: nový odkaz v pracovním rytmu, staré místo označit jako archivované.
+- Vrátit do pracovního režimu: ověřovací otázka a konkrétní další cyklus.
+- Zrušit: odstranit odkazy, uzavřít důvod, uklidit datovou stopu.
+
+Pravidlo: aktualizujte nejmenší počet artefaktů, po kterém další použití nebude matoucí. Všechno navíc je kandidát na samostatnou iteraci.
+
+### Šablona lehké revize
+
+```markdown
+# Lehká revize stabilizované provozní úpravy
+
+Název pravidla:
+Stabilizační věta:
+Kanonické místo:
+Datum stabilizace:
+Datum revize:
+
+## Průchody
+
+Průchod 1:
+Výstup:
+Bylo potřeba připomenutí:
+Vznikla výjimka:
+Datová stopa:
+
+Průchod 2:
+Výstup:
+Bylo potřeba připomenutí:
+Vznikla výjimka:
+Datová stopa:
+
+## Scorecard
+
+Použití:
+Samostatnost:
+Cena:
+Návrat starého postupu:
+Privacy-first stav:
+
+## Rozhodnutí
+
+Stav pravidla:
+Důvod:
+Jedna nutná úprava:
+Co se nebude měnit:
+Další revize:
+
+## Úklid
+
+Dočasné podklady:
+Co se smaže:
+Co se anonymizuje:
+Kde je kanonický záznam:
+```
+
+### Mini workshop na 25 minut
+
+Agenda:
+
+1. 3 minuty: přečíst stabilizační větu a původní důvod změny.
+2. 5 minut: projít jeden až tři skutečné průchody.
+3. 5 minut: vyplnit scorecard použití, samostatnosti a ceny.
+4. 4 minuty: zkontrolovat návrat starého postupu.
+5. 3 minuty: udělat privacy-first kontrolu datové stopy.
+6. 3 minuty: rozhodnout stav pravidla jednou větou.
+7. 2 minuty: zapsat minimální aktualizaci a další revizní háček.
+
+Pravidla:
+
+- Neřešte celý standard, pokud revidujete jednu stabilizovanou úpravu.
+- Nepoužívejte ideální příklad, vyberte skutečný průchod.
+- Když se pravidlo nepoužilo, nejdřív zkontrolujte umístění a načasování.
+- Starý workaround berte jako informaci o tření.
+- Do revizního záznamu neukládejte surová data, pokud stačí anonymizovaný závěr.
+- Rozhodnutí musí říct stav pravidla, ne jen pocit z diskuze.
+
+### Checklist
+
+- Máte původní stabilizační větu?
+- Ověřili jste skutečné průchody, ne jen domněnky?
+- Je jasné, jestli se pravidlo použilo ve správné situaci?
+- Poznali lidé výjimku bez opakovaného vysvětlování?
+- Nevrátil se starý postup jako vedlejší poznámka, kopie nebo chatová dohoda?
+- Je cena pravidla přiměřená problému, který řeší?
+- Zkontrolovali jste novou datovou stopu běžného provozu?
+- Nevznikly zbytečné osobní, zákaznické nebo interní detaily v trvalém záznamu?
+- Umíte rozhodnout stav pravidla jednou větou?
+- Aktualizujete jen artefakty, které rozhodnutí opravdu vyžaduje?
+- Je další revize lehká, konkrétní a napojená na skutečný pracovní cyklus?
+- Ví tým, jestli pravidlo ponechat, zjednodušit, přesunout, vrátit do pracovního režimu, nebo zrušit?
+
+První lehká revize je malý test dospělosti provozní změny. Nehledá dokonalost. Hledá, jestli nový normál funguje bez heroismu, bez vedlejších kopií a bez zbytečného sběru dat. Když ano, nechte pravidlo žít. Když ne, opravte nejmenší věc, která brání práci. To je méně dramatické než velký procesní restart, a právě proto to bývá užitečnější.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GL o kontrole stabilizované provozní úpravy po první lehké revizi: návrat ke stabilizační větě, výběr skutečných průchodů, scorecard použití/samostatnosti/ceny, hledání návratu starého postupu, privacy-first kontrola stabilního režimu, rozhodnutí stavu pravidla, minimální aktualizace, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GK o stabilizaci úspěšné provozní úpravy po kontrole: ověření opakované hodnoty, výběr trvalého jádra, uložení do kanonického pracovního místa, minimální aktualizace artefaktů, privacy-first úklid pilotních podkladů, předání týmu, lehká revize, stabilizační karta, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GJ o kontrole provozní úpravy po prvním dalším cyklu: návrat ke změnové větě, ověření skutečného průchodu, rozlišení použití/přínosu/ceny, hledání návratu staré práce, privacy-first kontrola datové stopy, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GI o převodu nálezu z kontroly stabilního revizního rytmu do jedné úpravy provozu: výběr nálezu, změnová věta, místo zásahu, minimální rozsah artefaktů, privacy-first úklid podkladů, předání týmu, ověření v dalším cyklu, šablona, mini workshop a checklist.
