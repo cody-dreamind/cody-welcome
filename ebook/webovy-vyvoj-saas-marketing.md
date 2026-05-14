@@ -51495,8 +51495,300 @@ Pravidla:
 
 Převod uzavřeného cyklu do týmové paměti je poslední krok, který mění jednorázové zlepšení v organizační schopnost. Tým se neučí tím, že má hodně dokumentů. Učí se tím, že dobrá rozhodnutí zůstanou dostupná ve správnou chvíli, ve správném tvaru a bez zbytečné datové zátěže.
 
+## Příloha FX: Kontrola týmové paměti po prvním použití
+
+Poučení uložené do týmové paměti ještě není hotová práce. Je to jen dobře zabalený předpoklad: věříte, že příštímu člověku pomůže rozhodnout se rychleji, čistěji nebo bezpečněji. První reálné použití ukáže, jestli karta skutečně funguje, nebo jestli jste si jen vyrobili další slušně napsaný odstavec, který nikdo nepoužije.
+
+Tato příloha navazuje na Přílohu FW. Tam jste uzavřené poučení převedli do pracovního tvaru, našli mu domov a prošli privacy-first filtrem. Teď řešíte praktickou kontrolu: když se podobná situace objevila znovu, pomohla týmová paměť člověku udělat lepší rozhodnutí?
+
+První použití nehodnoťte podle toho, jestli si někdo pamatoval název karty. Hodnoťte práci. Člověk mohl kartu najít přes šablonu, checklist, onboardingový krok nebo kolegu. Důležité je, jestli poučení snížilo tření, zamezilo špatné kopii, ochránilo data nebo zkrátilo cestu k rozhodnutí.
+
+### 1. Najděte první skutečný okamžik použití
+
+Nečekejte na velký audit. Kontrola týmové paměti má začít v momentu, kdy se lekce poprvé potká s podobnou pracovní situací. Může to být nový člověk v onboardingu, support odpověď podle šablony, úprava standardu, předání role nebo první review po změně procesu.
+
+Hledejte konkrétní situaci:
+
+- někdo použil šablonu, do které byla lekce vložená,
+- někdo řešil rozhodnutí, na které karta upozorňuje,
+- nový člověk prošel onboardingovým krokem s napojeným poučením,
+- vlastník standardu aktualizoval kanonické místo,
+- tým narazil na podobné tření jako v původním cyklu.
+
+Příklad:
+
+```markdown
+Situace:
+Nový support člověk připravoval odpověď na dotaz s citlivým zákaznickým kontextem.
+
+Kde se lekce měla použít:
+Support šablona obsahuje rozhodovací větu o anonymizovaných příkladech.
+
+Kontrolní otázka:
+Pomohla šablona člověku odpovědět bez kopírování citlivých detailů do interních poznámek?
+```
+
+To je dostatečně konkrétní kontrola. Není potřeba měřit obecnou spokojenost s dokumentací. Ta by vám řekla hlavně to, kdo je trpělivý člověk a kdo už má alergii na interní wiki. Praktická kontrola sleduje pracovní výsledek.
+
+### 2. Porovnejte očekávanou pomoc se skutečnou prací
+
+Každá karta týmové paměti by měla mít pracovní slib. Ne marketingový slib typu "zlepšíme sdílení know-how", ale konkrétní větu: co má být po použití jednodušší, bezpečnější nebo jednoznačnější.
+
+Porovnejte tři věci:
+
+1. Očekávání: jak měla lekce pomoci?
+2. Skutečnost: co člověk udělal?
+3. Rozdíl: kde vzniklo tření, obcházení nebo nejistota?
+
+Příklad zápisu:
+
+```markdown
+Očekávání:
+Člověk najde anonymizovaný příklad přímo v support šabloně a nebude hledat staré screenshoty.
+
+Skutečnost:
+Příklad našel, ale nebylo jasné, jestli může doplnit interní ID ticketu do poznámky.
+
+Rozdíl:
+Lekce řeší zákaznický kontext, ale neříká nic o interních identifikátorech.
+```
+
+To není selhání. To je přesně typ nálezu, kvůli kterému první kontrolu děláte. Dobrá týmová paměť se nezlepšuje tím, že do ní přidáte všechno. Zlepšuje se tím, že doplníte jednu chybějící rozhodovací hranici.
+
+### 3. Sledujte, kudy se člověk k poučení dostal
+
+Použití lekce není jen otázka obsahu. Je to také otázka trasy. Pokud je poučení dobré, ale člověk ho našel až díky kolegovi, problém nemusí být v textu. Může být v umístění.
+
+Zapište trasu:
+
+- kde člověk začal,
+- co otevřel jako první,
+- kde očekával odpověď,
+- kde ji skutečně našel,
+- jestli musel přepínat mezi více dokumenty,
+- jestli použil starou kopii nebo nekanonický materiál.
+
+Příklad:
+
+```markdown
+Trasa:
+1. Onboarding checklist
+2. Support šablona
+3. Odkaz na kanonický standard
+
+Tření:
+Rozhodovací věta byla ve standardu, ale v šabloně byl jen obecný odkaz. Člověk musel číst delší text, aby udělal malý krok.
+
+Oprava:
+Do šablony přidat jednu větu: "Do interní poznámky nevkládej zákaznický text ani identifikátory, pokud nejsou nutné pro řešení ticketu."
+```
+
+Codyho komentář: když někdo musí otevřít tři dokumenty kvůli jedné odpovědi, systém si koleduje o obcházení. Lidé nejsou líní. Jen mají práci. A práce má nepříjemný zvyk probíhat i ve chvíli, kdy dokumentace zrovna medituje v jiné záložce.
+
+### 4. Oddělte problém lekce od problému systému
+
+První použití může odhalit několik typů problémů. Neslučujte je do jedné hromady, jinak skončíte u velkého refaktoru týmové paměti místo malé opravy.
+
+Rozlišujte:
+
+- Lekce je nejasná: věta neříká dost konkrétně, co udělat.
+- Lekce je na špatném místě: člověk ji potřeboval v šabloně, ale je jen v indexu.
+- Lekce je moc dlouhá: obsahuje historii místo rozhodnutí.
+- Lekce je zastaralá: odkazuje na starý proces nebo starou roli.
+- Systém má duplicitu: existují dvě podobné verze pravidla.
+- Chybí oprávnění: člověk nemohl otevřít kanonické místo.
+- Chybí příklad: pravidlo je správné, ale neumí ukázat hranici na reálné situaci.
+
+Každý typ vede k jiné opravě. Nejasnou větu přepíšete. Špatné umístění přesunete nebo zkrátíte do místa použití. Duplicitu sloučíte. Chybějící oprávnění vyřeší vlastník prostoru. Zastaralou lekci archivujete nebo aktualizujete.
+
+Praktická matice:
+
+```markdown
+Nález:
+Člověk nevěděl, zda může uložit interní ID ticketu.
+
+Typ:
+Chybí rozhodovací hranice v lekci.
+
+Oprava:
+Doplnit jednu větu do support šablony a kanonického standardu.
+
+Co nedělat:
+Nepřepisovat celý onboardingový balíček.
+```
+
+### 5. Udělejte privacy-first kontrolu skutečného použití
+
+Při prvním použití se ukáže, jestli privacy-first pravidla obstála v provozu. Ne v teorii, ne ve workshopu, ale ve chvíli, kdy někdo potřeboval dokončit práci.
+
+Zkontrolujte:
+
+- nevznikla nová kopie citlivého příkladu,
+- člověk nepřesunul zákaznický text do interní poznámky jen kvůli pohodlí,
+- šablona nevybízí ke sběru údajů, které nejsou nutné,
+- odkaz nevede do prostoru s příliš širokým přístupem,
+- screenshoty nebyly použité tam, kde stačí anonymizovaný text,
+- log kontroly neobsahuje víc osobních nebo zákaznických detailů než samotná lekce.
+
+Příklad privacy-first nálezu:
+
+```markdown
+Nález:
+Při ověření si člověk vložil původní zákaznický text do osobní poznámky, aby ho mohl přepsat.
+
+Riziko:
+Vznikla dočasná kopie citlivého obsahu mimo kanonické místo.
+
+Oprava:
+Do šablony přidat pracovní pole "anonymizovaná pracovní formulace" a doplnit pravidlo, že původní text se nepřepisuje přes osobní poznámky.
+
+Úklid:
+Osobní poznámka smazána, v kontrolním záznamu zůstává jen anonymizovaný popis situace.
+```
+
+Privacy-first kontrola není kosmetika na konec. Je to provozní brzda proti tomu, aby se z dobře míněné týmové paměti stal nenápadný sklad citlivých drobků.
+
+### 6. Rozhodněte stav lekce po prvním použití
+
+Po kontrole nedělejte dlouhý seznam "někdy zlepšit". Rozhodněte stav jednou větou. Stav má říct, jestli lekce funguje, potřebuje malou opravu, patří jinam, nebo má skončit.
+
+Možné stavy:
+
+- Ponechat: lekce pomohla a není potřeba měnit.
+- Zpřesnit: lekce pomohla, ale chybí jedna hranice nebo příklad.
+- Přesunout: lekce je správná, ale člověk ji potřebuje v jiném pracovním místě.
+- Sloučit: lekce duplikuje jiné pravidlo.
+- Archivovat: lekce už je plně zapracovaná nebo se ukázala jako jednorázová.
+- Otevřít opravu: nález je větší a zasahuje standard, šablonu nebo onboardingovou trasu.
+
+Příklad rozhodovací věty:
+
+```markdown
+Lekci ponecháváme aktivní, ale zpřesňujeme support šablonu o interní identifikátory, protože první použití ukázalo nejistotu při práci s ticket ID.
+```
+
+Slabé rozhodnutí:
+
+```markdown
+Je potřeba zlepšit dokumentaci kolem privacy.
+```
+
+To je pracovní kouř. Možná voní kompetentně, ale nedá se podle něj nic udělat.
+
+### 7. Upravte jen kanonická místa
+
+Když první použití ukáže potřebu opravy, upravujte zdroj pravdy a pracovní místo, ne všechny historické kopie. Jinak si vyrobíte novou nekonzistenci.
+
+Postup:
+
+1. Najděte kanonické místo lekce.
+2. Upravte nejmenší potřebnou část.
+3. Pokud má lekce zkrácenou verzi v šabloně, aktualizujte i ji.
+4. Do changelogu zapište, proč změna vznikla.
+5. Staré kopie buď smažte, nebo označte jako archiv.
+6. Pokud oprava mění onboarding, přidejte ji do nejbližšího review nového člověka.
+
+Příklad:
+
+```markdown
+Kanonické místo:
+Onboardingový standard pro support příklady.
+
+Pracovní místo:
+Support odpovědní šablona.
+
+Změna:
+Doplněna věta o interních identifikátorech a osobních poznámkách.
+
+Changelog:
+2026-05-14: Zpřesněno po prvním použití lekce v support onboardingu.
+```
+
+Tím kontrola končí hotovou změnou, ne pocitem, že by "někdo měl něco doplnit".
+
+### Šablona kontroly prvního použití lekce
+
+```markdown
+# Kontrola prvního použití týmové lekce
+
+Lekce:
+Datum kontroly:
+Role nebo oblast:
+Vlastník:
+Kanonické místo:
+
+První skutečná situace:
+
+Kde se lekce měla použít:
+
+Jaká byla očekávaná pomoc:
+
+Co se stalo v praxi:
+
+Trasa k poučení:
+- kde člověk začal:
+- kde očekával odpověď:
+- kde ji našel:
+- co musel obejít:
+
+Nálezy:
+- nejasnost:
+- špatné umístění:
+- duplicita:
+- chybějící příklad:
+- oprávnění:
+- privacy-first stopa:
+
+Rozhodnutí:
+Ponechat / zpřesnit / přesunout / sloučit / archivovat / otevřít opravu
+
+Jedna konkrétní změna:
+
+Co se nemaže:
+
+Co se maže nebo anonymizuje:
+
+Další kontrola:
+```
+
+### Mini workshop: 20 minut po prvním použití
+
+Agenda:
+
+1. 3 minuty: připomenout pracovní slib lekce.
+2. 4 minuty: projít první skutečnou situaci.
+3. 4 minuty: zapsat trasu k poučení.
+4. 3 minuty: oddělit problém textu, umístění a systému.
+5. 3 minuty: udělat privacy-first kontrolu vzniklé stopy.
+6. 2 minuty: rozhodnout stav lekce.
+7. 1 minuta: určit jednu hotovou opravu.
+
+Pravidla:
+
+- Nehodnoťte člověka, hodnoťte systém.
+- Nepřepisujte celou týmovou paměť kvůli jednomu nálezu.
+- Neuchovávejte kontrolní příklady s citlivými detaily.
+- Pokud lekce fungovala, nehledejte problém jen proto, aby workshop vypadal užitečně.
+- Každá kontrola musí skončit rozhodnutím, ne seznamem dojmů.
+
+### Checklist
+
+- Našli jste první skutečný okamžik použití lekce?
+- Je jasné, jak měla lekce pomoci?
+- Porovnali jste očekávání se skutečnou prací?
+- Zapsali jste trasu, kudy se člověk k poučení dostal?
+- Oddělili jste nejasný text, špatné umístění, duplicitu a systémový problém?
+- Prošla kontrola privacy-first filtrem?
+- Nevznikla nová zbytečná kopie citlivých dat?
+- Má lekce po kontrole jasný stav?
+- Upravili jste jen kanonické místo a nezbytné pracovní zkratky?
+- Je v changelogu vidět, proč změna vznikla?
+
+Kontrola prvního použití týmové paměti drží znalosti při zemi. Poučení není cenné proto, že je uložené. Je cenné tehdy, když se v další podobné situaci promění v lepší rozhodnutí, menší datovou stopu a méně ručního vysvětlování.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha FX o kontrole týmové paměti po prvním použití: první skutečná situace, porovnání očekávání se skutečnou prací, trasa k poučení, oddělení problému lekce od problému systému, privacy-first kontrola, rozhodnutí stavu lekce, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FW o převodu uzavřeného onboardingového cyklu do týmové paměti: výběr opakovatelného vzoru, rozhodovací věta, správný domov poučení, privacy-first filtr, napojení na onboarding nové role, revizní háček, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FV o uzavření dalšího cyklu onboardingového standardu po prvním ověření: návrat k původnímu slibu změny, ověření na reálné práci, oddělení výsledku, tření a vedlejšího efektu, privacy-first úklid, jednověté rozhodnutí, přenos poučení, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FU o převodu kvartální kontroly onboardingového standardu do dalšího cyklu: stav po kontrole, kanonické místo, ověřovací háček, uzavření privacy-first nálezů, vědomé neřešení širšího rozsahu, předání změny, první ověření, šablona, mini workshop a checklist.
