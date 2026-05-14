@@ -55901,8 +55901,329 @@ Pravidla:
 
 První lehká revize je malý test dospělosti provozní změny. Nehledá dokonalost. Hledá, jestli nový normál funguje bez heroismu, bez vedlejších kopií a bez zbytečného sběru dat. Když ano, nechte pravidlo žít. Když ne, opravte nejmenší věc, která brání práci. To je méně dramatické než velký procesní restart, a právě proto to bývá užitečnější.
 
+## Příloha GM: Převod lehké revize do dlouhodobého rozhodnutí
+
+Lehká revize je užitečná jen tehdy, když po ní nezůstane jen další poznámka. Musí změnit stav práce. Někdy stačí potvrdit, že pravidlo dál platí. Jindy je potřeba zjednodušit větu, přesunout šablonu, zavřít starou cestu, nebo pravidlo zrušit dřív, než se z něj stane povinná kulisa.
+
+Tato příloha pomáhá převést výsledek první lehké revize do dlouhodobého rozhodnutí. Neřeší další velký audit. Řeší jeden okamžik: revize ukázala nějaký stav a tým teď musí vědět, co se bude dít při dalším použití.
+
+Praktický výstup je rozhodovací záznam o jedné stránce: stav pravidla, důvod, další revizní háček, minimální změny v artefaktech, privacy-first úklid a věta pro tým. Pokud tento záznam nejde napsat krátce, revize pravděpodobně nebyla uzavřená. To není tragédie. Jen to znamená, že ještě nemáte rozhodnutí, ale surový materiál.
+
+### 1. Oddělte nález od rozhodnutí
+
+Nález popisuje, co jste viděli. Rozhodnutí říká, co bude platit dál. Tým často přeskočí z jednoho do druhého příliš rychle:
+
+```markdown
+Nález:
+Lidé u stabilních položek pořád dopisují dlouhé důvody.
+
+Unáhlené rozhodnutí:
+Zakážeme dlouhé důvody.
+```
+
+To je slabé, protože ignoruje příčinu. Lepší postup:
+
+```markdown
+Nález:
+Lidé u stabilních položek pořád dopisují dlouhé důvody.
+
+Interpretace:
+Nejsou si jistí, jestli krátký stav "ponechat" obstojí při pozdější kontrole.
+
+Rozhodnutí:
+Pravidlo ponecháváme, ale do šablony doplníme jednu větu, kdy je důvod potřeba a kdy ne.
+```
+
+Rozdíl je malý, ale důležitý. První reakce trestá symptom. Druhá zmenšuje nejistotu.
+
+U každého nálezu si proto napište:
+
+- co se stalo,
+- kde se to stalo,
+- jestli to ovlivnilo výsledek práce,
+- jestli šlo o chybu pravidla, umístění, zavedení, nebo starý zvyk,
+- co se změní při příštím použití.
+
+Pokud poslední bod neumíte vyplnit, ještě nemáte rozhodnutí. Máte pozorování.
+
+### 2. Vyberte jeden ze šesti dlouhodobých stavů
+
+Dlouhodobé rozhodnutí nepotřebuje složitou taxonomii. Stačí šest stavů:
+
+| Stav | Význam | Co udělat |
+| --- | --- | --- |
+| Platí | pravidlo funguje bez zásahu | zapsat revizi a další kontrolu |
+| Platí se zjednodušením | hodnota je jasná, cena je vyšší než nutná | zkrátit jeden krok, pole nebo formulaci |
+| Platí po přesunu | pravidlo je dobré, ale lidé ho nepotkávají | přesunout do pracovního toku nebo lepšího indexu |
+| Zůstává v ověření | signály jsou smíšené | určit další konkrétní cyklus ověření |
+| Slučuje se | pravidlo je duplicitní s jiným standardem | vybrat jeden zdroj pravdy a zavřít kopii |
+| Končí | pravidlo nepomáhá nebo zvyšuje tření | odstranit odkazy, uklidit stopu a vysvětlit důvod |
+
+Tento stav napište jednou větou:
+
+```markdown
+Dlouhodobý stav:
+Pravidlo platí se zjednodušením; ponecháváme zkrácený zápis stabilních položek, ale doplňujeme hranici výjimky, aby lidé nemuseli hádat, kdy přidat důvod.
+```
+
+Dobrá stavová věta má tři části:
+
+- stav,
+- co přesně se zachová nebo změní,
+- proč.
+
+Slabá věta zní:
+
+```markdown
+Ještě to budeme sledovat.
+```
+
+Někdy je sledování správné rozhodnutí, ale musí mít konkrétní tvar:
+
+```markdown
+Pravidlo zůstává v ověření do příští měsíční kontroly; ověříme, jestli nový vlastník najde šablonu bez připomenutí a jestli nevznikne vedlejší zápis v chatu.
+```
+
+To už je rozhodnutí, ne odklad v lepším obleku.
+
+### 3. Přepište pravidlo do provozní věty
+
+Lehká revize často odhalí, že původní pravidlo bylo srozumitelné autorovi, ale ne člověku v běžném provozu. Dlouhodobé rozhodnutí má proto skončit provozní větou.
+
+Provozní věta odpovídá na čtyři otázky:
+
+- kdy ji člověk použije,
+- co přesně udělá,
+- kde to udělá,
+- kdy pravidlo neplatí.
+
+Příklad:
+
+```markdown
+Provozní věta:
+Při měsíční kontrole standardů zapisujeme u položek bez změny jen stav "ponechat" do kanonického indexu; důvod doplňujeme pouze u výjimky, změny rozhodnutí nebo privacy-first dopadu.
+```
+
+Tato věta je lepší než abstraktní pravidlo "zkracujeme zápisy". Říká pracovní okamžik, akci, místo i výjimku.
+
+Codyho komentář: dobré pravidlo poznáte podle toho, že ho člověk použije ve chvíli, kdy má mokré ruce od práce. Pokud potřebuje nejdřív přečíst filozofii standardizace, pravidlo není provozní. Je literární.
+
+### 4. Zavřete staré cesty
+
+Když rozhodnutí vytvoří nový stabilní stav, staré cesty musí zmizet nebo být jasně označené. Jinak budou žít dál. Tým se pak netrápí kvůli špatnému pravidlu, ale kvůli dvěma pravidlům vedle sebe.
+
+Zkontrolujte hlavně:
+
+- staré šablony,
+- odkazy v indexu,
+- onboardingové materiály,
+- ukázkové příklady,
+- checklisty,
+- interní poznámky,
+- chatové připnuté zprávy,
+- automatizace nebo připomínky,
+- staré exporty a kopie.
+
+Nemusíte opravit všechno, co kdy existovalo. Musíte opravit všechno, co může člověk reálně potkat při další práci. To je důležitý rozdíl.
+
+Praktický postup:
+
+1. Najděte tři nejpravděpodobnější vstupy k pravidlu.
+2. U každého ověřte, jestli vede na nový stav.
+3. Staré místo označte jako archivované, nebo ho odstraňte.
+4. Pokud staré místo musí zůstat kvůli historii, přidejte odkaz na aktuální zdroj pravdy.
+5. Do changelogu napište, co se změnilo a od kdy.
+
+Příklad archivní poznámky:
+
+```markdown
+Archivováno 2026-05-14.
+Aktuální pravidlo je v kanonickém indexu standardů, sekce Měsíční kontrola.
+Tento záznam zůstává jen jako historie rozhodnutí.
+```
+
+Taková poznámka je nudná. Výborně. Archiv má být nudný.
+
+### 5. Udělejte privacy-first uzavření
+
+Dlouhodobé rozhodnutí nesmí jen říct, co bude platit. Musí také uklidit datovou stopu, která vznikla při ověřování. Revize často obsahuje pracovní poznámky, příklady, komentáře lidí, odkazy na zákaznické situace nebo snímky obrazovek. Něco z toho pomáhá rozhodnutí. Něco bylo užitečné jen při kontrole.
+
+Rozdělte podklady do tří skupin:
+
+- trvalý záznam: stav, důvod, datum, vlastník, další revize,
+- krátká retence: pracovní poznámky potřebné pro nejbližší ověření,
+- smazat nebo anonymizovat: surové příklady, osobní detaily, zákaznické detaily, duplicitní kopie.
+
+Praktická privacy-first otázka:
+
+```markdown
+Kdyby tento rozhodovací záznam četl nový člověk za půl roku, potřebuje vidět konkrétní osobu, zákazníka nebo surový detail, aby pravidlo správně použil?
+```
+
+Ve většině případů nepotřebuje. Potřebuje vzor, ne identitu. Potřebuje rozhodnutí, ne kompletní stopu diskuze.
+
+Do záznamu proto pište raději:
+
+```markdown
+Ve dvou průchodech vznikla vedlejší chatová dohoda mimo zdroj pravdy.
+```
+
+Ne:
+
+```markdown
+Petr poslal ve středu v 9:14 do chatu konkrétní text zákazníka XY, protože si nebyl jistý...
+```
+
+První verze stačí pro zlepšení systému. Druhá verze zbytečně rozšiřuje interní datovou stopu.
+
+### 6. Předejte rozhodnutí týmu jednou pracovní větou
+
+Rozhodnutí, které tým nepochopí při další práci, se nestalo. Nepotřebujete dlouhé oznámení. Potřebujete jednu větu, která říká, co se mění v praxi.
+
+Dobrá předávací věta:
+
+```markdown
+Od další měsíční kontroly zapisujeme u stabilních položek jen stav "ponechat"; důvod přidáváme pouze u výjimky, změny rozhodnutí nebo privacy-first dopadu.
+```
+
+Slabá předávací věta:
+
+```markdown
+Aktualizovali jsme standard podle výsledků lehké revize.
+```
+
+Druhá věta zní profesionálně, ale neřekne člověku nic užitečného.
+
+Předání by mělo obsahovat:
+
+- novou provozní větu,
+- odkaz na kanonické místo,
+- co už neplatí,
+- kdy se změna použije poprvé,
+- kdo zachytí první problém.
+
+Pokud rozhodnutí vyžaduje školení, pravděpodobně je příliš složité nebo zasahuje širší systém. To může být v pořádku, ale pak nejde o lehké uzavření revize. Je to samostatná změna.
+
+### 7. Nastavte další revizní háček, ne nekonečný dohled
+
+Dlouhodobé rozhodnutí potřebuje další kontrolu, ale ne trvalé hlídání. Rozdíl:
+
+- Revizní háček je konkrétní okamžik, kdy se ověří jedna otázka.
+- Nekonečný dohled je neurčitý pocit, že to někdo musí pořád sledovat.
+
+Dobré háčky:
+
+- po dalším měsíčním cyklu,
+- po třech použitích novým vlastníkem,
+- při první výjimce,
+- při změně nástroje nebo šablony,
+- při kvartální revizi standardů.
+
+Slabé háčky:
+
+- průběžně sledovat,
+- dávat pozor,
+- vrátit se k tomu někdy,
+- uvidíme podle situace.
+
+Příklad:
+
+```markdown
+Další revizní háček:
+Po příští měsíční kontrole ověří vlastník jen dvě věci: jestli lidé našli nové kanonické místo a jestli nevznikla vedlejší kopie zápisu.
+```
+
+To je dost konkrétní na akci a dost malé na to, aby se opravdu stalo.
+
+### Šablona dlouhodobého rozhodnutí
+
+```markdown
+# Dlouhodobé rozhodnutí po lehké revizi
+
+Název pravidla:
+Kanonické místo:
+Datum lehké revize:
+Vlastník:
+
+## Nález
+
+Co revize ukázala:
+Kde se to projevilo:
+Dopad na práci:
+
+## Rozhodnutí
+
+Dlouhodobý stav:
+Provozní věta:
+Co se zachovává:
+Co se mění:
+Co končí:
+Co se nebude řešit:
+
+## Artefakty
+
+Kanonické místo upraveno:
+Staré odkazy zavřeny:
+Onboarding nebo checklist upraven:
+Changelog:
+
+## Privacy-first uzavření
+
+Trvalý záznam:
+Krátká retence:
+Smazat:
+Anonymizovat:
+Přístup:
+
+## Předání
+
+Věta pro tým:
+První použití:
+Kdo zachytí problém:
+Další revizní háček:
+```
+
+### Mini workshop na 20 minut
+
+Agenda:
+
+1. 3 minuty: přečíst výsledek lehké revize a původní stabilizační větu.
+2. 4 minuty: oddělit nález, interpretaci a rozhodnutí.
+3. 3 minuty: vybrat dlouhodobý stav.
+4. 3 minuty: napsat provozní větu.
+5. 3 minuty: určit staré cesty k zavření.
+6. 2 minuty: udělat privacy-first uzavření podkladů.
+7. 2 minuty: napsat větu pro tým a další revizní háček.
+
+Pravidla:
+
+- Neotevírejte znovu celý standard.
+- Neřešte víc než jedno pravidlo najednou.
+- Rozhodnutí musí změnit příští použití, jinak je moc abstraktní.
+- Starou cestu buď zavřete, nebo jasně označte jako archiv.
+- Do trvalého záznamu patří rozhodnutí, ne surová diskuze.
+- Další revize musí mít okamžik a otázku.
+
+### Checklist
+
+- Je jasně oddělený nález od rozhodnutí?
+- Má pravidlo jeden dlouhodobý stav?
+- Umíte stav vysvětlit jednou větou?
+- Existuje provozní věta pro další použití?
+- Je jasné, co se zachovává, mění, končí a co se nebude řešit?
+- Jsou zavřené staré šablony, odkazy nebo pracovní vstupy, které by tým potkal?
+- Je kanonické místo opravdu místo, kde se práce děje?
+- Obsahuje trvalý záznam jen data potřebná pro budoucí použití?
+- Jsou surové příklady smazané, anonymizované nebo v krátké retenci?
+- Ví tým, co udělat při příštím použití?
+- Má další revize konkrétní pracovní háček?
+- Nevznikl z lehké revize nový těžký proces?
+
+Dlouhodobé rozhodnutí po lehké revizi je okamžik, kdy se z kontroly stane normální práce. Ne tím, že přidáte další vrstvu řízení. Tím, že odstraníte nejasnost, zavřete staré cesty a necháte týmu jednu větu, podle které se dá příště jednat.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GM o převodu lehké revize do dlouhodobého rozhodnutí: oddělení nálezu od rozhodnutí, výběr dlouhodobého stavu, provozní věta, zavření starých cest, privacy-first uzavření podkladů, předání týmu, revizní háček, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GL o kontrole stabilizované provozní úpravy po první lehké revizi: návrat ke stabilizační větě, výběr skutečných průchodů, scorecard použití/samostatnosti/ceny, hledání návratu starého postupu, privacy-first kontrola stabilního režimu, rozhodnutí stavu pravidla, minimální aktualizace, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GK o stabilizaci úspěšné provozní úpravy po kontrole: ověření opakované hodnoty, výběr trvalého jádra, uložení do kanonického pracovního místa, minimální aktualizace artefaktů, privacy-first úklid pilotních podkladů, předání týmu, lehká revize, stabilizační karta, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GJ o kontrole provozní úpravy po prvním dalším cyklu: návrat ke změnové větě, ověření skutečného průchodu, rozlišení použití/přínosu/ceny, hledání návratu staré práce, privacy-first kontrola datové stopy, rozhodovací věta, šablona, mini workshop a checklist.
