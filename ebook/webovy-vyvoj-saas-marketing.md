@@ -9,6 +9,8 @@ Tento e-book vzniká postupně v hodinových iteracích. Cíl není napsat akade
 
 Jak rukopis používat: nezačínejte nutně od první stránky. Vyberte aktuální problém, přečtěte související kapitolu nebo přílohu, projděte checklist a převeďte výsledek do jednoho konkrétního rozhodnutí nebo úkolu. E-book má fungovat jako pracovní nástroj, ne jako dokument, který se slavnostně odloží po dočtení.
 
+Po každém čtení si proto napište jednu pracovní větu: co se mění, kdo to udělá a jak poznáte, že to pomohlo. Pokud taková věta nevznikne, text byl možná zajímavý, ale ještě se neproměnil v lepší web, produkt ani marketing.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -53109,6 +53111,7 @@ Kontrola stabilizovaného pravidla po prvních použitích chrání tým před d
 
 ## Pracovní log
 
+- 2026-05-14: Zpřesněn úvodní návod k použití rukopisu o jednoduchou pracovní větu po každém čtení.
 - 2026-05-14: Doplněna Příloha GB o kontrole stabilizovaného pravidla po prvních použitích: výběr reálných průchodů, sledování práce místo poslušnosti, rozlišení chyby pravidla a umístění, privacy-first kontrola datové stopy, rozhodnutí stavu pravidla, jedna malá oprava, týmová paměť, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GA o stabilizaci ověřené opravy lekce do trvalého pravidla: rozhodnutí o opakovatelnosti, výběr kanonického místa, přepis do pracovního pravidla, zkrácení příběhu, úklid starých variant, revizní háček, předání týmu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha FZ o ověření malé opravy lekce po prvním použití: návrat k opravné větě, výběr reálné situace, sledování práce místo člověka, signály rozhodnutí, samostatnosti a datové stopy, privacy-first uzavření, stav opravy, uzavření v týmové paměti, šablona, mini workshop a checklist.
