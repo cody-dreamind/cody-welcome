@@ -56824,8 +56824,283 @@ Pravidla:
 
 Převod stabilního rozhodnutí do roční inventury je známka dospělosti systému. Neznamená to, že rozhodnutí je navždy nedotknutelné. Znamená to, že už nepotřebuje opravný režim a bude se hodnotit v širším rytmu. Dobře vedená inventura pak nehlídá dokumenty pro dokumenty. Hlídá, aby web, SaaS, marketing a provoz nezarůstaly pravidly, která kdysi pomohla, ale dnes už jen zabírají místo.
 
+## Příloha GP: Roční inventura stabilních rozhodnutí bez zbytečné administrativy
+
+Roční inventura stabilních rozhodnutí má jednu jednoduchou otázku: pomáhají nám tahle pravidla ještě dělat lepší práci, nebo už jen udržujeme památku na starý problém?
+
+To zní skoro banálně. Jenže právě stabilní rozhodnutí bývají nebezpečná tím, že na ně tým přestane sahat. Nikdo se jich nebojí, nikdo je neřeší, nikdo je nerozporuje. Leží v indexu, v šablonách, v onboardingu, v sales materiálech, v provozních kartách a časem začnou působit jako přírodní zákon. Přitom vznikla v konkrétní situaci, pro konkrétní tým, konkrétní produkt a konkrétní riziko.
+
+Roční inventura není audit pro audit. Je to úklid rozhodnutí, která se během roku ukázala jako dost stabilní na to, aby nepotřebovala měsíční nebo kvartální dohled. Cílem není všechno znovu otevřít. Cílem je ověřit, že stabilita pořád znamená užitečnost.
+
+Codyho komentář: nejhorší roční inventura je ta, kde se otevře sto dokumentů, všichni se unaví, nic se nerozhodne a na konci vznikne nový dokument s názvem "Závěry z inventury". Pokud inventura nepřepíše alespoň jednu pracovní větu, nesmaže alespoň jednu starou stopu nebo nepotvrdí jasný stav, byla to spíš firemní archeologie.
+
+### 1. Začněte inventurním seznamem, ne pocitem
+
+Nejdřív si vytáhněte seznam rozhodnutí, která během roku vstoupila do roční inventury. Nemá to být celý vesmír týmových dokumentů. Jen položky, které už prošly stabilizací a mají inventurní kartu.
+
+U každé položky potřebujete vidět:
+
+- název rozhodnutí,
+- původní pracovní slib,
+- kanonické pracovní místo,
+- vlastníka role,
+- datum zařazení do inventury,
+- poslední známý důkaz použití,
+- navázané šablony, standardy nebo onboardingové materiály,
+- inventurní otázku,
+- privacy-first pravidla pro trvalé a dočasné podklady.
+
+Praktický příklad:
+
+```markdown
+Rozhodnutí:
+U každé nové integrační automatizace ukládáme provozní kartu do jednoho kanonického indexu.
+
+Pracovní slib:
+Tým najde vlastníka, účel, datové toky, fallback a kontrolní rytmus bez hledání ve starých chatech.
+
+Inventurní otázka:
+Najde nový člověk během 10 minut správnou provozní kartu a pochopí, kdy automatizaci upravit, vypnout nebo eskalovat?
+```
+
+Taková karta se dá kontrolovat. Naproti tomu položka "zlepšit dokumentaci automatizací" je mlha. Mlha se špatně inventarizuje, leda byste chtěli měřit vlhkost porad.
+
+### 2. Vyberte malý vzorek skutečných použití
+
+Roční inventura nemusí číst každou větu každého standardu. To svádí k povrchnímu kliku "vypadá v pořádku". Lepší je vybrat malý vzorek reálných použití.
+
+Pro každé stabilní rozhodnutí zkontrolujte ideálně dva až čtyři průchody:
+
+- jeden běžný průchod, kde pravidlo mělo pomoci,
+- jeden hraniční průchod, kde mohlo dojít k nejasnosti,
+- jeden průchod nového člověka, pokud existuje,
+- jeden starší průchod z období těsně po zavedení, pokud potřebujete porovnat vývoj.
+
+Nesledujte lidi jako výkonové jednotky. Sledujte práci. Dobrá otázka není "kdo to nedodržel". Dobrá otázka je "kde systém přestal pomáhat".
+
+U webu to může být kontrola, jestli se při změně nabídky skutečně aktualizovala homepage, sales karta, formulář a navazující měření. U SaaS to může být kontrola, jestli nové oprávnění prošlo přes datovou mapu, audit log a support scénáře. U marketingu to může být kontrola, jestli nová distribuce obsahu nepřidala cizí tracker nebo sběr dat, který nikdo nepotřebuje.
+
+### 3. Ověřte, jestli rozhodnutí pořád šetří práci
+
+Stabilní rozhodnutí má mít provozní hodnotu. Pokud pouze existuje, ale nikomu nepomáhá, je to archivní dekorace.
+
+Ptejte se:
+
+- Zrychluje rozhodnutí konkrétní práci?
+- Snižuje počet ručních vysvětlování?
+- Brání opakované chybě?
+- Pomáhá novému člověku rozhodnout se bez autora původního pravidla?
+- Zmenšuje riziko v datech, provozu, zákaznické komunikaci nebo byznysu?
+- Je pořád srozumitelné v jazyce dnešního týmu?
+
+Scorecard může být jednoduchý:
+
+```markdown
+Hodnota rozhodnutí:
+0 = už se nepoužívá
+1 = občas pomůže, ale lidé ho hledají těžko
+2 = používá se, ale má tření nebo duplicity
+3 = používá se přirozeně a šetří práci
+
+Cena rozhodnutí:
+0 = téměř žádná údržba
+1 = malá údržba v běžném rytmu
+2 = vyžaduje opakované vysvětlování nebo ruční dohled
+3 = stojí víc pozornosti, než kolik vrací
+```
+
+Rozhodnutí s hodnotou 3 a cenou 0 nebo 1 pravděpodobně ponechte. Rozhodnutí s hodnotou 1 a cenou 3 je kandidát na zjednodušení, sloučení nebo archivaci. Rozhodnutí s hodnotou 0 není "možná se bude hodit". Je to pozvánka k úklidu.
+
+### 4. Hledejte drift: produkt, tým, data, kanály
+
+Rozhodnutí často nezestárne proto, že bylo špatné. Zestárne proto, že se změnilo okolí.
+
+Kontrolujte čtyři druhy driftu:
+
+- Produktový drift: produkt, služba nebo nabídka se posunula a pravidlo řeší starý tvar práce.
+- Týmový drift: změnily se role, odpovědnosti nebo zkušenost týmu.
+- Datový drift: změnily se datové toky, citlivost dat, dodavatelé, retence nebo přístupy.
+- Kanálový drift: změnil se způsob distribuce, prodeje, supportu nebo měření.
+
+Příklad:
+
+Původní pravidlo říká, že každá marketingová kampaň má mít landing page, UTM parametry, e-mailový follow-up a remarketingové publikum. O rok později tým z privacy-first důvodů nepoužívá remarketingové publikum, posílil RSS a přímé odkazy, a hlavní signál kvality je počet relevantních odpovědí od správného segmentu. Pravidlo není potřeba zahodit celé. Je potřeba ho přepsat tak, aby odpovídalo novému provozu a nevytahovalo tým zpět ke starému marketingovému reflexu.
+
+Drift se pozná i podle jazyka. Pokud pravidlo používá názvy rolí, nástrojů, kanálů nebo stavů, které už tým nepoužívá, lidé ho začnou mentálně překládat. Jakmile se pravidlo musí překládat, ztrácí část hodnoty.
+
+### 5. Udělejte privacy-first inventuru podkladů
+
+Roční inventura je ideální chvíle uklidit datovou stopu. Stabilní rozhodnutí často vznikala přes screenshoty, exporty, incidentní poznámky, ukázky zákaznických situací, support tikety nebo interní komentáře. Část těchto podkladů byla užitečná při rozhodování. To neznamená, že má ležet věčně vedle pravidla.
+
+U každé položky rozdělte podklady do čtyř kategorií:
+
+- Trvalý záznam: stručné rozhodnutí, pracovní slib, aktuální pravidlo, vlastník a revizní rytmus.
+- Krátkodobý důkaz: anonymizovaný vzorek použití, který držíte jen do uzavření inventury.
+- Archivní stopa: historický kontext bez citlivých detailů, pokud je potřeba kvůli návaznosti.
+- Smazat: screenshoty, exporty, osobní údaje, staré kopie, pracovní poznámky a duplicity bez další hodnoty.
+
+Privacy-first provoz není jen o tom, že nepoužijete velký cizí tracker. Je to i každodenní disciplína: nenechávat za sebou zbytečné stopy, protože "co kdyby se někdy hodily". Většina starých exportů se nehodí. Jen čeká, až někomu přidá práci nebo riziko.
+
+Mini pravidlo:
+
+```markdown
+Pokud podklad neumíme spojit s aktuálním rozhodnutím, jasnou retenční dobou a vlastníkem, nepatří do trvalého provozu.
+```
+
+### 6. Rozhodněte jeden stav, ne sedm poznámek
+
+Na konci inventury musí mít každé stabilní rozhodnutí jeden další stav.
+
+Použijte jednoduchou sadu:
+
+- Ponechat: rozhodnutí funguje a nepotřebuje změnu.
+- Zjednodušit: princip platí, ale pravidlo je moc dlouhé nebo těžké najít.
+- Sloučit: existuje duplicita s jiným standardem, šablonou nebo onboardingem.
+- Přepsat: změnil se produkt, tým, data nebo kanál.
+- Vrátit do kvartální kontroly: rozhodnutí je užitečné, ale znovu potřebuje bližší dohled.
+- Archivovat: rozhodnutí už nemá pracovní hodnotu.
+- Eskalovat: inventura našla riziko, které přesahuje redakční nebo provozní úklid.
+
+Každý stav přepište do jedné věty:
+
+```markdown
+Rozhodnutí o provozních kartách automatizací ponecháváme beze změny, protože ve třech kontrolovaných průchodech pomohlo najít vlastníka, datové toky a fallback do 10 minut; mažeme dočasné exporty z pilotu a další kontrola zůstává roční.
+```
+
+Nebo:
+
+```markdown
+Rozhodnutí o marketingové kampani přepisujeme, protože stará verze předpokládá remarketingové publikum a neodpovídá dnešní privacy-first distribuci přes RSS, přímé odkazy a agregované signály kvality.
+```
+
+Jedna věta nutí tým rozhodnout. Dlouhý odstavec často jen elegantně odkládá nejistotu.
+
+### 7. Aktualizujte jen místa, která rozhodnutí skutečně používají
+
+Po inventuře je lákavé rozeslat velkou zprávu a upravit všechno, co vzdáleně souvisí. Tím vzniká zbytečná práce a nové riziko rozbitých odkazů. Místo toho aktualizujte jen pracovní místa, kde se rozhodnutí opravdu používá.
+
+Typická místa:
+
+- kanonický index standardů,
+- konkrétní šablona nebo playbook,
+- onboardingová trasa,
+- provozní karta,
+- sales nebo support karta,
+- checklist před spuštěním,
+- veřejná poznámka nebo changelog, pokud má změna dopad na čtenáře nebo zákazníka.
+
+U každé aktualizace se ptejte:
+
+- Kdo tady rozhodnutí použije?
+- V jakém okamžiku práce?
+- Co potřebuje vědět, aby nemusel číst celou historii?
+- Jaký starý odkaz, příklad nebo podklad se má zavřít?
+
+Dobrá aktualizace je malá a ostrá. Člověk ji pozná ve chvíli práce. Ne až na poradě, kde se vysvětluje, že někde v dokumentaci proběhla roční inventura.
+
+### Šablona roční inventury stabilního rozhodnutí
+
+```markdown
+# Roční inventura stabilního rozhodnutí
+
+Název rozhodnutí:
+Datum inventury:
+Vlastník:
+Kanonické pracovní místo:
+Inventurní otázka:
+
+## Původní slib
+
+Rozhodovací věta:
+Jakou práci mělo rozhodnutí zlepšit:
+Jaké riziko mělo snížit:
+Kdy vstoupilo do roční inventury:
+
+## Vzorek použití
+
+Běžný průchod:
+Hraniční průchod:
+Průchod nového člověka:
+Starší průchod pro porovnání:
+
+## Hodnota a cena
+
+Hodnota 0-3:
+Cena 0-3:
+Co rozhodnutí zrychlilo:
+Co rozhodnutí zkomplikovalo:
+Kde lidé pravidlo obcházejí:
+
+## Drift
+
+Produktový drift:
+Týmový drift:
+Datový drift:
+Kanálový drift:
+Jazyk, který už neodpovídá realitě:
+
+## Privacy-first inventura
+
+Trvalý záznam:
+Krátkodobé důkazy:
+Archivní stopa:
+Smazat:
+Retenční rozhodnutí:
+Přístupy:
+
+## Rozhodnutí
+
+Stav:
+Jednověté rozhodnutí:
+Co se aktualizuje:
+Co se zavírá:
+Co se nemaže a proč:
+Další kontrola:
+Věta pro tým:
+```
+
+### Mini workshop na 40 minut
+
+Agenda:
+
+1. 5 minut: vybrat jedno stabilní rozhodnutí a přečíst původní slib.
+2. 6 minut: projít dva až čtyři skutečné průchody.
+3. 5 minut: vyplnit hodnotu a cenu rozhodnutí.
+4. 6 minut: najít produktový, týmový, datový nebo kanálový drift.
+5. 6 minut: rozdělit podklady na trvalé, krátkodobé, archivní a ke smazání.
+6. 5 minut: zvolit jeden stav rozhodnutí.
+7. 4 minuty: napsat jednověté rozhodnutí a větu pro tým.
+8. 3 minuty: určit přesné aktualizace a zavřít staré stopy.
+
+Pravidla:
+
+- Inventura kontroluje práci, ne poslušnost lidí.
+- Bez reálného průchodu není inventura, jen čtení dokumentů.
+- Stabilní rozhodnutí může zůstat beze změny, ale musí to být vědomé rozhodnutí.
+- Každá položka má na konci jeden stav.
+- Staré podklady bez účelu se mažou nebo anonymizují.
+- Do roční inventury nepatří velký redesign systému. Ten patří do samostatného rozhodnutí.
+
+### Checklist
+
+- Má inventura jasný seznam stabilních rozhodnutí?
+- Má každé rozhodnutí původní pracovní slib?
+- Kontrolovali jste reálné použití, ne jen text pravidla?
+- Je u každé položky vidět hodnota a cena?
+- Zkontrolovali jste produktový, týmový, datový a kanálový drift?
+- Nevrací pravidlo tým ke starému marketingovému, produktovému nebo provoznímu reflexu?
+- Má každá položka jeden další stav?
+- Je jasné, co se ponechává, zjednodušuje, slučuje, přepisuje, vrací do kontroly nebo archivuje?
+- Proběhl privacy-first úklid podkladů, screenshotů, exportů a starých kopií?
+- Zůstává v trvalém záznamu jen to, co má dlouhodobou pracovní hodnotu?
+- Aktualizují se jen místa, kde se rozhodnutí opravdu používá?
+- Má tým jednu srozumitelnou větu, která vysvětluje výsledek inventury?
+
+Roční inventura má být nudně užitečná. Ne dramatická, ne slavnostní, ne nekonečná. Když je dobře vedená, tým po ní ví, která stabilní rozhodnutí pořád nesou hodnotu, která se mají zjednodušit a která už konečně mohou zmizet. A hlavně po ní zůstane čistší pracovní systém: méně duplicit, méně starých stop, méně nejasných pravidel a víc rozhodnutí, která lidem opravdu pomáhají pracovat.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GP o roční inventuře stabilních rozhodnutí bez zbytečné administrativy: inventurní seznam, vzorek reálných použití, scorecard hodnoty a ceny, kontrola driftu, privacy-first úklid podkladů, rozhodnutí dalšího stavu, aktualizace pracovních míst, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GO o převodu stabilního dlouhodobého rozhodnutí do roční inventury: ověření stability, inventurní otázka, vztahy k ostatním pravidlům, inventurní karta, lehké signály pro roční kontrolu, uložení karty, privacy-first úklid, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GN o kontrole dlouhodobého rozhodnutí po dalším pracovním období: původní rozhodovací věta, reálné průchody, scorecard použití/výsledku/ceny, návrat starého chování, privacy-first kontrola období, rozhodnutí dalšího stavu, minimální aktualizace, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GM o převodu lehké revize do dlouhodobého rozhodnutí: oddělení nálezu od rozhodnutí, výběr dlouhodobého stavu, provozní věta, zavření starých cest, privacy-first uzavření podkladů, předání týmu, revizní háček, šablona, mini workshop a checklist.
