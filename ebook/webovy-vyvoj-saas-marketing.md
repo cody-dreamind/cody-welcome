@@ -52095,8 +52095,351 @@ Pravidla:
 
 Převod nálezu do malé opravy je nenápadná disciplína. Není tak viditelná jako nová kapitola, nový standard nebo velký workshop. Ale právě díky ní se týmová paměť nezasekne v režimu "máme poučení". Posune se do režimu "poučení se při další práci opravdu použilo a zlepšilo rozhodnutí". To je méně slavnostní, ale výrazně užitečnější. Což je u dokumentace skoro podezřele dobrý výsledek.
 
+## Příloha FZ: Ověření malé opravy lekce po prvním použití
+
+Malá oprava lekce je slib. Říká týmu: příště to bude jasnější, kratší, bezpečnější nebo snáz dohledatelné. Dokud ale opravu nikdo nepoužije v reálné práci, je to jen upravený text. Hezký text, možná dokonce velmi rozumný text, ale pořád text.
+
+Tato příloha navazuje na Přílohu FY. Tam jste vzali jeden nález z týmové paměti a převedli ho do hotové opravy. Teď je potřeba ověřit, jestli oprava při prvním použití skutečně snížila tření. Nejde o audit člověka, který podle opravy pracoval. Jde o kontrolu, jestli systém pomohl člověku udělat lepší rozhodnutí bez zbytečné podpory.
+
+Dobré ověření malé opravy má čtyři vlastnosti:
+
+- sleduje jednu konkrétní situaci,
+- porovnává práci s původním důvodem opravy,
+- hledá nové tření, ne viníka,
+- uzavírá privacy-first datovou stopu.
+
+Když po malé opravě nesledujete první použití, vzniká tichý dluh. Tým věří, že je opraveno, ale neví, jestli se změna v práci potkala s realitou. A realita má bohužel otravný zvyk nečíst naše changelogy.
+
+### 1. Vraťte se k původní opravné větě
+
+Ověření nezačínejte dojmem typu "zdá se, že to funguje". Začněte původní opravnou větou. Ta určuje, co se vlastně mělo změnit.
+
+Příklad:
+
+```markdown
+Opravná věta:
+Když support odpověď potřebuje interní identifikátor, ponech ho v ticket systému a do osobní poznámky nebo šablony vkládej jen anonymizovanou pracovní formulaci.
+
+Původní tření:
+Nový support člověk nevěděl, jestli může interní ID ticketu vložit do pracovní poznámky.
+
+Očekávaný výsledek:
+Člověk ví, kde interní ID zůstává, a nevytváří novou kopii mimo ticket systém.
+```
+
+Tím si ověření udrží měřítko. Nekontrolujete celou support dokumentaci, onboarding ani kvalitu všech poznámek. Kontrolujete jednu větu v jedné opakovatelné situaci.
+
+Slabý start ověření:
+
+```markdown
+Podíváme se, jestli je support dokumentace lepší.
+```
+
+Silnější start:
+
+```markdown
+Ověříme, jestli opravená věta zabránila kopírování interního ID mimo ticket systém při další podobné odpovědi.
+```
+
+První varianta otevře širokou debatu. Druhá vede k rozhodnutí.
+
+### 2. Vyberte první reálnou situaci, ne laboratorní ukázku
+
+Malou opravu ověřujte na skutečné práci. Ne na cvičném příkladu, který je napsaný tak, aby oprava vyšla. Laboratorní test se hodí při přípravě, ale první použití musí ukázat, co se stane v běžném tlaku, s běžným kontextem a běžnou mírou nedokonalosti.
+
+Vhodné ověřovací situace:
+
+- další support odpověď se stejným typem identifikátoru,
+- další onboardingový průchod nové role,
+- první vyplnění opravené šablony,
+- první review, kde se používá upravená rozhodovací věta,
+- další podobný zákaznický nebo provozní případ.
+
+Nevhodné ověřovací situace:
+
+- člověk si opravu jen přečetl,
+- někdo potvrdil, že "dává smysl",
+- vlastník dokumentace si opravu prošel sám,
+- testovací příklad byl vytvořen speciálně pro kontrolu.
+
+Příklad ověřovací karty:
+
+```markdown
+Oprava:
+Hranice pro interní ID v support lekci.
+
+První reálná situace:
+Support odpověď k dalšímu ticketu, kde bylo potřeba odkázat na provozní identifikátor.
+
+Kdo ověřuje:
+Vlastník support standardu.
+
+Co se sleduje:
+- zda člověk našel pracovní zkratku,
+- zda pochopil hranici,
+- zda nevznikla kopie interního ID mimo ticket systém,
+- zda bylo potřeba ruční vysvětlení.
+```
+
+Ověřovací karta má být krátká. Pokud se kvůli malé opravě zakládá velký kontrolní proces, oprava pravděpodobně začíná stát víc než původní problém.
+
+### 3. Sledujte práci, ne výkon člověka
+
+Ověření malé opravy se snadno zvrhne v hodnocení člověka. "Pochopil to?" "Neudělal chybu?" "Měl se zeptat?" To je špatný směr. Cílem je zjistit, jestli oprava dává člověku dost dobré vodítko v okamžiku práce.
+
+Ptejte se raději:
+
+- Našel člověk opravené místo bez zvláštní navigace?
+- Byla věta dost konkrétní pro rozhodnutí?
+- Potřeboval další vysvětlení?
+- Vedla oprava ke správnému omezení datové stopy?
+- Zpomalila práce kvůli opravě, nebo ji naopak zrychlila?
+- Objevil se nový okrajový případ?
+
+Praktický záznam:
+
+```markdown
+Pozorování:
+Člověk našel pracovní zkratku v support šabloně bez pomoci.
+
+Rozhodnutí:
+Interní ID ponechal v ticket systému, do poznámky vložil anonymizovaný popis.
+
+Tření:
+Krátce váhal, jestli může v interní poznámce použít typ systému. To není osobní údaj, ale v lekci to není jasně řečeno.
+
+Podpora:
+Jedna doplňující otázka vlastníkovi standardu.
+```
+
+Z toho vyplývá konkrétní poznatek: hlavní oprava funguje, ale možná chybí hranice pro typ systému. To je užitečné. Naopak věta "člověk si nebyl jistý" je příliš obecná a nepomůže další změně.
+
+Codyho komentář: když dokumentace po prvním použití potřebuje člověka, který ji vysvětluje, není to ostuda. Je to signál. Ostuda je tvářit se, že signál neexistuje, protože dokument má přece nadpis, checklist a rozumný odstavec.
+
+### 4. Porovnejte výsledek se třemi signály
+
+U malé opravy obvykle stačí tři signály:
+
+1. Rozhodnutí: udělal člověk správné pracovní rozhodnutí?
+2. Samostatnost: potřeboval méně ruční podpory než před opravou?
+3. Datová stopa: nevznikla nová zbytečná kopie citlivých nebo zákaznických dat?
+
+Příklad scorecardu:
+
+```markdown
+Rozhodnutí:
+Ano. Interní ID zůstalo v ticket systému.
+
+Samostatnost:
+Částečně. Člověk našel pravidlo, ale položil jednu doplňující otázku.
+
+Datová stopa:
+Ano. Nevznikla kopie zákaznického textu ani interního ID mimo kanonický systém.
+
+Předběžné rozhodnutí:
+Oprava funguje pro hlavní případ. Doplnit není potřeba hned, ale sledovat otázku kolem typu systému při dalším použití.
+```
+
+Signály držte malé. Není potřeba počítat metriky, grafy ani složité skóre. U týmové paměti často stačí vědět, jestli oprava pomohla rozhodnutí, snížila závislost na vysvětlování a nezhoršila práci s daty.
+
+### 5. Udělejte privacy-first uzavření ověření
+
+Ověření může nechtěně nasbírat víc dat než samotná oprava. V poznámkách z kontroly se objeví screenshot, citace ticketu, zákaznické jméno, e-mail, interní ID nebo konkrétní text odpovědi. To je zbytečné. Pro rozhodnutí o lekci většinou stačí anonymizovaný popis situace.
+
+Před uložením ověřovacího záznamu projděte:
+
+- Obsahuje záznam jen informace nutné pro rozhodnutí o opravě?
+- Nejsou v něm jména zákazníků, e-maily, čísla smluv nebo plné texty ticketů?
+- Zůstaly provozní identifikátory v systému, kam patří?
+- Jsou dočasné poznámky smazané nebo anonymizované?
+- Je jasné, kdo má záznam zkontrolovat při dalším review?
+- Má záznam retenční logiku, nebo bude ležet navždy?
+
+Bezpečnější záznam:
+
+```markdown
+Situace:
+Další support odpověď vyžadovala odkaz na provozní identifikátor.
+
+Výsledek:
+Identifikátor zůstal v ticket systému. V pracovní poznámce je jen anonymizovaný popis.
+
+Dočasné podklady:
+Screenshot ověření smazán po zapsání anonymizovaného výsledku.
+```
+
+Slabší záznam:
+
+```markdown
+U zákazníka [jméno] v ticketu [ID] člověk napsal...
+```
+
+Druhá varianta možná působí přesněji, ale většinou jen vytváří další místo, kde se musí hlídat data. Přesnost bez účelu je administrativní luxus.
+
+### 6. Rozhodněte stav opravy
+
+Po prvním použití má oprava dostat stav. Bez stavu se tým vrací k debatě pokaždé, když někdo narazí na podobný případ.
+
+Použijte čtyři jednoduché stavy:
+
+- Ponechat: oprava funguje, není potřeba další zásah.
+- Drobně upravit: hlavní směr funguje, ale chybí malá hranice nebo příklad.
+- Vrátit k přepracování: oprava nepomohla rozhodnutí nebo vytvořila nové tření.
+- Sloučit do větší změny: opakovaný problém ukazuje na širší standard, ne na jednu větu.
+
+Příklad rozhodnutí:
+
+```markdown
+Stav:
+Ponechat.
+
+Proč:
+Oprava zabránila kopírování interního ID mimo ticket systém a člověk našel pravidlo bez navigace.
+
+Co se nemění:
+Kanonická lekce ani support šablona.
+
+Co sledovat:
+Při dalším použití ověřit, jestli je jasná hranice pro typ systému.
+```
+
+Jiný příklad:
+
+```markdown
+Stav:
+Drobně upravit.
+
+Proč:
+Oprava pomohla s ID, ale člověk nevěděl, zda může v anonymizované poznámce uvést typ systému.
+
+Změna:
+Doplnit jednu větu: "Typ systému ponech, pokud sám o sobě neidentifikuje zákazníka ani konkrétní incident."
+
+Další ověření:
+Při další podobné odpovědi.
+```
+
+Důležité je rozhodnout. Nekonečné "ještě to budeme sledovat" zní rozumně, ale bez konkrétního háčku je to jen odložené nevíme.
+
+### 7. Uzavřete smyčku v týmové paměti
+
+Ověření má skončit tam, kde lidé hledají poučení. Ne v osobní poznámce vlastníka dokumentace. Ne v chatu, který za týden zapadne. Ne v dočasném dokumentu s názvem "final-final-kontrola". Stačí krátký záznam u lekce nebo v changelogu.
+
+Minimální uzavření:
+
+```markdown
+Datum ověření:
+Situace:
+Výsledek:
+Stav opravy:
+Privacy-first úklid:
+Další háček:
+```
+
+Vyplněný příklad:
+
+```markdown
+Datum ověření:
+2026-05-14
+
+Situace:
+První další support odpověď s provozním identifikátorem.
+
+Výsledek:
+Pracovní zkratka pomohla. Identifikátor zůstal v ticket systému.
+
+Stav opravy:
+Ponechat.
+
+Privacy-first úklid:
+Dočasný screenshot smazán, v lekci zůstává anonymizovaný popis.
+
+Další háček:
+Zkontrolovat hranici pro typ systému při dalším podobném případu.
+```
+
+Takový záznam má dvě výhody. Člověk, který přijde později, vidí, že oprava prošla realitou. A tým nemusí sbírat další důkazy jen proto, že nikdo neuzavřel poslední krok.
+
+### Šablona ověření malé opravy lekce
+
+```markdown
+# Ověření malé opravy lekce
+
+Lekce:
+Oprava:
+Datum opravy:
+Datum prvního použití:
+Vlastník:
+
+Původní opravná věta:
+
+Původní tření:
+
+První reálná situace:
+
+Co jsme sledovali:
+- rozhodnutí:
+- samostatnost:
+- datová stopa:
+
+Pozorování práce:
+
+Byla potřeba ruční podpora?
+
+Vzniklo nové tření?
+
+Privacy-first kontrola:
+- záznam je anonymizovaný:
+- nevznikla nová kopie citlivých dat:
+- dočasné podklady jsou smazané nebo přesunuté do kanonického systému:
+- další kontrola má vlastníka:
+
+Stav opravy:
+Ponechat / drobně upravit / vrátit k přepracování / sloučit do větší změny
+
+Jednověté rozhodnutí:
+
+Další háček:
+```
+
+### Mini workshop: 20 minut na ověření opravy
+
+Agenda:
+
+1. 2 minuty: přečíst původní opravnou větu.
+2. 3 minuty: popsat první reálnou situaci.
+3. 4 minuty: projít rozhodnutí, samostatnost a datovou stopu.
+4. 3 minuty: zapsat nové tření, pokud vzniklo.
+5. 3 minuty: udělat privacy-first úklid ověřovacích podkladů.
+6. 3 minuty: vybrat stav opravy.
+7. 2 minuty: zapsat jednověté rozhodnutí a další háček.
+
+Pravidla:
+
+- Nekontrolujte člověka, kontrolujte použitelnost opravy.
+- Neotevírejte celou dokumentaci kvůli jednomu pozorování.
+- Neukládejte reálná zákaznická data, pokud pro rozhodnutí stačí anonymizovaný popis.
+- Když oprava funguje, nechte ji být. Dokumentace nepotřebuje péči jen proto, že máme ruce na klávesnici.
+- Když oprava nefunguje, vraťte ji do malé opravy nebo ji sloučte do širší změny. Nelepte další větu naslepo.
+
+### Checklist
+
+- Vrátili jste se k původní opravné větě?
+- Ověřili jste opravu na první reálné situaci?
+- Sledovali jste práci, ne výkon člověka?
+- Porovnali jste rozhodnutí, samostatnost a datovou stopu?
+- Zapsali jste nové tření konkrétně, ne obecně?
+- Udělali jste privacy-first úklid ověřovacích podkladů?
+- Rozhodli jste stav opravy?
+- Uzavřeli jste výsledek v kanonickém místě nebo changelogu?
+- Má případný další háček vlastníka a jasnou situaci použití?
+- Nevznikla nová dlouhodobá evidence, kterou nikdo nebude udržovat?
+
+Ověření malé opravy je krátké, ale důležité. Chrání tým před dvěma extrémy: před vírou, že každá úprava textu automaticky pomohla, a před nekonečným laděním dokumentace bez dopadu na práci. Dobrý výsledek je prostý: člověk našel správné vodítko, udělal lepší rozhodnutí, nevytvořil zbytečnou datovou stopu a tým ví, jestli opravu ponechat. Na dokumentaci je to skoro až sportovní výkon. Bez medaile, ale s menším chaosem.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha FZ o ověření malé opravy lekce po prvním použití: návrat k opravné větě, výběr reálné situace, sledování práce místo člověka, signály rozhodnutí, samostatnosti a datové stopy, privacy-first uzavření, stav opravy, uzavření v týmové paměti, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha FY o převodu nálezu z týmové paměti do malé opravy lekce: výběr jednoho nálezu, opravná věta, rozlišení textu, trasy, příkladu a pravidla, kanonické místo, pracovní zkratka, privacy-first kontrola, changelog, ověření, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha FX o kontrole týmové paměti po prvním použití: první skutečná situace, porovnání očekávání se skutečnou prací, trasa k poučení, oddělení problému lekce od problému systému, privacy-first kontrola, rozhodnutí stavu lekce, šablona, mini workshop a checklist.
 - 2026-05-13: Doplněna Příloha FW o převodu uzavřeného onboardingového cyklu do týmové paměti: výběr opakovatelného vzoru, rozhodovací věta, správný domov poučení, privacy-first filtr, napojení na onboarding nové role, revizní háček, šablona, mini workshop a checklist.
