@@ -54248,8 +54248,290 @@ Pravidla:
 
 Kontrola nové provozní verze po dalším cyklu je malý provozní reflex. Nedělá z dokumentace velkou událost, ale brání tomu, aby změny mizely bez důkazu. Tým tím získá jednoduchý rytmus: změnit, použít, ověřit, ponechat nebo opravit. Přesně takhle se z e-booku, playbooků a standardů stává živý systém, ne památník dobrých úmyslů.
 
+## Příloha GG: Zařazení ověřené provozní verze do stabilního revizního rytmu
+
+Když nová provozní verze obstála po dalším cyklu, nejhorší další krok je nechat ji viset ve zvláštním režimu. Tým pak neví, jestli jde ještě o experiment, dočasnou opravu, nebo běžný standard. Výsledek je známý: lidé používají pravidlo, ale při každém dotazu znovu otevírají historii změny. Dokumentace se tváří stabilně, provoz se chová opatrně a autor standardu se stává živým vysvětlovacím widgetem. Levné to není, jen to nemá fakturu.
+
+Stabilní revizní rytmus neznamená, že standard už nikdy nezměníte. Znamená, že už nepotřebuje zvláštní pozornost po každém použití. Má vlastníka, kanonické místo, přiměřenou frekvenci kontroly, jasné spouštěče mimořádné revize a uklizenou datovou stopu po poslední opravě.
+
+Tato příloha navazuje na Přílohu GF. Tam jste ověřili novou provozní verzi po dalším cyklu. Tady ji uzavřete jako běžnou součást provozu.
+
+Dobré zařazení do stabilního rytmu odpovídá na šest otázek:
+
+1. Je verze opravdu ověřená, nebo jen přežila jeden pohodlný průchod?
+2. Kde je její jediný zdroj pravdy?
+3. Kdo ji vlastní v běžném provozu?
+4. Kdy se má revidovat znovu?
+5. Co spustí mimořádnou revizi mimo plán?
+6. Co se má po uzavření poslední opravy smazat, anonymizovat nebo archivovat?
+
+Pokud na tyto otázky odpovíte, standard přestane být "ta nová věc po workshopu" a stane se normální součástí práce.
+
+### 1. Ověřte, že verze už nepotřebuje opravný režim
+
+Než standard přesunete do stabilního rytmu, pojmenujte důkaz, že už není v opravě. Nestačí říct "nikdo si nestěžoval". Ticho není vždy spokojenost. Někdy je to jen únava z dalších dokumentů.
+
+Za stabilní kandidát považujte verzi, u které platí většina těchto signálů:
+
+- Byla použita v běžném pracovním cyklu, ne jen v ukázkovém případě.
+- Člověk ji našel bez dodatečné navigace od autora.
+- Pomohla udělat konkrétní rozhodnutí nebo krok.
+- Nevytvořila novou ruční evidenci mimo kanonický systém.
+- Nezvýšila množství osobních nebo zákaznických dat v pomocných dokumentech.
+- Po použití zbylo nanejvýš drobné tření, které neblokuje práci.
+
+Příklad:
+
+```markdown
+Standard:
+Kontrola příloh před odesláním nabídky.
+
+Důkaz stabilizace:
+Ve dvou běžných nabídkách obchodník našel kontrolu přímo v šabloně nabídky, použil jen odkaz na zákaznický podklad v kanonickém systému a nepotřeboval dodatečné vysvětlení.
+
+Závěr:
+Verze může opustit opravný režim a přejít do měsíčního revizního rytmu sales materiálů.
+```
+
+Pokud důkaz nemáte, nepřesouvejte standard do stabilního rytmu jen proto, že chcete mít hotovo. Hotovo bez důkazu je jen zavřená záložka v prohlížeči. Hezký pocit, sporný dopad.
+
+### 2. Vyberte jeden revizní rytmus
+
+Každý standard nepotřebuje stejnou frekvenci kontroly. Častá chyba je nastavit všemu měsíční review, protože to zní zodpovědně. Po třech měsících máte kalendář plný kontrol a tým začne standardy nenávidět zcela organicky.
+
+Vyberte rytmus podle rizika a rychlosti změny:
+
+| Typ standardu | Doporučený rytmus | Proč |
+| --- | --- | --- |
+| Kritický provoz, incidenty, bezpečnost | měsíčně nebo po každém incidentu | Malá chyba může mít velký dopad |
+| Sales a nabídky | měsíčně až kvartálně | Mění se námitky, segmenty a důkazy |
+| Support a customer success | měsíčně | Rychle se ukáže tření v reálné práci |
+| Interní onboarding | po každém nástupu a kvartálně | Používá se nepravidelně, ale dopad je vysoký |
+| Redakční a marketingové šablony | kvartálně | Stárnou pomaleji, ale snadno bobtnají |
+| Archivní nebo málo používané standardy | ročně nebo při spouštěči | Pravidelná kontrola může být dražší než přínos |
+
+Rytmus napište jednoduše:
+
+```markdown
+Revizní rytmus:
+Měsíční kontrola v rámci sales review.
+
+Další plánovaná kontrola:
+První pondělí dalšího měsíce.
+
+Mimořádná kontrola:
+Po změně šablony nabídky, po nové právní nebo datové otázce zákazníka, nebo po třech dotazech na stejný krok.
+```
+
+Revize má být navázaná na existující práci. Pokud kvůli standardu zakládáte novou schůzku, zeptejte se, jestli nejde kontrolu přidat do rytmu, který už tým má.
+
+### 3. Přesuňte vlastnictví z autora na roli
+
+Autor opravy nemusí být dlouhodobý vlastník standardu. Ve stabilním režimu má standard vlastnit role, která podle něj rozhoduje nebo nese dopad jeho nefunkčnosti.
+
+Špatně:
+
+```markdown
+Vlastník:
+Petr, protože to napsal.
+```
+
+Lépe:
+
+```markdown
+Vlastník:
+Sales lead, protože standard ovlivňuje kvalitu nabídek a předání zákaznických podkladů.
+```
+
+Vlastník nemusí všechno sám editovat. Má ale odpovědět na tři otázky:
+
+- Je standard pořád použitelný v reálné práci?
+- Nevzniká kvůli němu zbytečná datová stopa?
+- Kdy je potřeba změnu řešit hned a kdy počkat na běžné review?
+
+Toto rozlišení je důležité hlavně v malých týmech. Jinak se z každého dokumentu stane osobní zahrádka člověka, který ho kdysi založil. A jakmile ten člověk odejde, standard začne pomalu stárnout jako zapomenutý formulář na intranetu.
+
+### 4. Ukliďte přechodovou stopu po opravě
+
+Jakmile verze přechází do stabilního režimu, uzavřete přechodové materiály. Ne všechno patří do archivu. Ne všechno patří do koše. Rozhodně ale nemá všechno zůstat v chatu, poznámkách a dočasných tabulkách.
+
+Projít byste měli:
+
+- poznámky z ověření,
+- scorecardy z prvních použití,
+- screenshoty nebo exporty,
+- dočasné kopie standardu,
+- komentáře v dokumentu,
+- pracovní zkratky v chatu,
+- testovací data a ukázky,
+- odkazy na zákaznické nebo osobní údaje.
+
+Privacy-first úklid:
+
+```markdown
+Ponechat:
+Jednověté rozhodnutí, datum verze, anonymizovaný důvod změny.
+
+Přesunout:
+Odkaz na kanonický standard do indexu.
+
+Smazat:
+Dočasnou tabulku s příklady nabídek a screenshoty příloh.
+
+Anonymizovat:
+Ukázku support eskalace ponechat bez jména zákazníka a bez interního identifikátoru.
+```
+
+Codyho komentář: dobrý standard nepotřebuje kolem sebe muzeum vzniku. Potřebuje jasný zdroj pravdy a dost kontextu, aby příští člověk pochopil důvod pravidla. Všechno navíc je potenciální zmatek nebo zbytečná datová stopa.
+
+### 5. Přepište stav v kanonickém indexu
+
+Pokud používáte index standardů, změňte stav z opravného nebo ověřovacího režimu na stabilní. Index má být místo, kde člověk rychle pozná, čemu může věřit.
+
+Příklad řádku v indexu:
+
+```markdown
+Standard:
+Kontrola příloh před odesláním nabídky
+
+Stav:
+Stabilní
+
+Verze:
+2026-05-14
+
+Vlastník:
+Sales lead
+
+Revizní rytmus:
+Měsíčně v sales review
+
+Mimořádné spouštěče:
+Změna šablony nabídky, nový typ zákaznických dat, opakovaný dotaz na stejný krok
+
+Kanonické místo:
+[odkaz]
+```
+
+Nepopisujte v indexu celý standard. Index není encyklopedie. Je to rozcestník pro práci. Má člověka dovést na správné místo, říct stav a ukázat, kdy se pravidlo znovu kontroluje.
+
+### 6. Nastavte stop pravidla pro další změny
+
+Stabilní standard nemá být otevřený každému nápadu. Jinak znovu spadne do režimu nekonečné úpravy. Nastavte jednoduchá stop pravidla.
+
+Příklady:
+
+- Jednorázový dotaz neznamená automatickou změnu standardu.
+- Nový příklad se nepřidává, pokud neopakuje reálný vzor.
+- Pravidlo se neprodlužuje, pokud problém vyřeší odkaz v pracovním místě.
+- Citlivější ukázka se nepřidává do šablony, pokud stačí anonymizovaná varianta.
+- Mimořádná revize se spouští jen při dopadu na rozhodnutí, data, zákazníka nebo opakovanou chybu.
+
+Stop pravidla chrání standard před dobrými úmysly. To je důležitější, než se tváří. Většina dokumentace nebobtná kvůli zlým lidem. Bobtná kvůli ochotným lidem, kteří chtějí "jen přidat jednu větu".
+
+### Šablona stabilního zařazení provozní verze
+
+```markdown
+# Stabilní zařazení provozní verze
+
+Standard:
+Verze:
+Datum zařazení:
+Původní opravná nebo změnová věta:
+
+## Důkaz stabilizace
+
+Kontrolovaný cyklus:
+Co se použilo:
+Jaký výsledek vznikl:
+Zbylé tření:
+Privacy-first výsledek:
+
+## Stav
+
+Nový stav:
+Stabilní / stabilní s drobným sledováním / vrátit do opravy
+
+Kanonické místo:
+Index nebo rozcestník:
+Napojené pracovní místo:
+
+## Vlastnictví
+
+Vlastnická role:
+Zástup:
+Kdo smí měnit:
+Kdo má být informován:
+
+## Revizní rytmus
+
+Běžná frekvence:
+Další plánovaná kontrola:
+Mimořádné spouštěče:
+Co se při revizi kontroluje:
+
+## Úklid přechodové stopy
+
+Ponechat:
+Přesunout:
+Anonymizovat:
+Smazat:
+Retence:
+
+## Stop pravidla
+
+Co samo o sobě nespouští změnu:
+Co změnu spouští:
+Co se nesmí přidat kvůli privacy-first hranici:
+
+## Jednověté uzavření
+
+Od dne:
+Platí:
+Další kontrola:
+```
+
+### Mini workshop: 30 minut na zařazení do rytmu
+
+Agenda:
+
+1. 4 minuty: připomenout výsledek kontroly nové verze.
+2. 5 minut: potvrdit důkaz stabilizace.
+3. 4 minuty: vybrat revizní rytmus podle rizika.
+4. 4 minuty: určit vlastnickou roli.
+5. 5 minut: projít privacy-first úklid přechodové stopy.
+6. 4 minuty: upravit index a stav standardu.
+7. 3 minuty: napsat stop pravidla.
+8. 1 minuta: potvrdit datum další kontroly.
+
+Pravidla:
+
+- Nepřepisujte standard, pokud řešíte jen jeho stav.
+- Nezakládejte nový rytmus, pokud existuje vhodný provozní review okamžik.
+- Neponechávejte dočasné podklady jen proto, že by se "někdy mohly hodit".
+- Nepřidělujte vlastnictví autorovi, pokud dopad leží na jiné roli.
+- Nechte stabilní standard dýchat. Každá drobná úprava nemusí být událost.
+
+### Checklist
+
+- Máte konkrétní důkaz, že nová verze obstála v reálné práci?
+- Je jasné, že standard už nepotřebuje opravný režim?
+- Má standard jeden kanonický zdroj pravdy?
+- Je stav v indexu změněný na stabilní nebo jasně pojmenovanou variantu?
+- Je vlastník určený podle role, ne podle autora poslední opravy?
+- Je revizní rytmus navázaný na existující provozní cyklus?
+- Jsou definované mimořádné spouštěče revize?
+- Je uklizená přechodová datová stopa po ověření?
+- Zůstávají jen anonymizované nebo opravdu potřebné důkazy?
+- Jsou staré kopie a pracovní zkratky nahrazené odkazem na zdroj pravdy?
+- Jsou napsaná stop pravidla pro další změny?
+- Ví tým, od kdy stabilní verze platí?
+
+Zařazení ověřené provozní verze do stabilního rytmu je nenápadný, ale důležitý krok. Bez něj se každá oprava vleče jako poloviční experiment. S ním má tým jednoduchý systém: standard je ověřený, víme kde žije, víme kdo ho vlastní, víme kdy se na něj znovu podívat a víme, jak nenechat dokumentaci vyrůst přes hlavu.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GG o zařazení ověřené provozní verze do stabilního revizního rytmu: důkaz stabilizace, volba revizního rytmu, vlastnictví role, privacy-first úklid přechodové stopy, aktualizace indexu, stop pravidla, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GF o kontrole nové provozní verze po dalším cyklu: změnová věta, reálný průchod, scorecard, rozlišení chyby verze a zavedení, privacy-first datová kontrola, rozhodnutí, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GE o převodu první kontroly provozního standardu do další provozní verze: rozlišení typů změn, změnová věta, kanonické místo, úklid staré stopy, předání týmu, ověření v dalším cyklu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GD o kontrole provozního standardu po prvním pracovním cyklu: vymezení cyklu, důkazy z reálné práce, dohledatelnost, rozlišení chyby použití a chyby standardu, skrytá práce, privacy-first datová stopa, jedna oprava, stav standardu, šablona, mini workshop a checklist.
