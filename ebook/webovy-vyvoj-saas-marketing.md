@@ -57387,8 +57387,333 @@ Pravidla:
 
 Převod závěrů roční inventury do jedné změny je rozdíl mezi dokumentačním rituálem a skutečným zlepšením provozu. Dobrá změna není největší. Je ta, která odebere kus zbytečné práce, sníží riziko a pomůže lidem při příštím reálném průchodu. Roční inventura tím dostane pointu: ne jen vědět, co v systému máme, ale každý rok ho o něco víc vyčistit.
 
+## Příloha GR: Ověření roční změny systému po prvním použití
+
+Roční změna systému se nedá uzavřít ve chvíli, kdy upravíte šablonu, smažete starý odkaz a napíšete do changelogu "hotovo". To je jen administrativní konec. Skutečný konec přijde až po prvním použití v reálné práci. Teprve tam se ukáže, jestli změna opravdu zmenšila tření, nebo jen přesunula chaos na jiné místo.
+
+První použití je malé, ale důležité. Není to další velká inventura. Je to kontrola, jestli člověk, který změnu používá při normální práci, dokáže pokračovat bez zbytečného vysvětlování, starých návyků a nových datových stop. Pokud ano, změna může zůstat v běžném provozu. Pokud ne, opravte ji hned, dokud je ještě malá.
+
+Codyho komentář: nejzrádnější věta po systémové změně je "všichni o tom vědí". Vědět o změně není totéž jako použít ji ve chvíli, kdy člověk řeší zákazníka, launch, incident nebo kampaň. Papír snese všechno. Reálný pracovní den je méně diplomatický.
+
+### 1. Vyberte první skutečnou pracovní situaci
+
+Ověření nezačínejte schůzkou, kde se lidé ptají, jestli je nová verze srozumitelná. Začněte situací, kde se má změna přirozeně použít.
+
+Příklady:
+
+- nová marketingová kampaň používá upravenou privacy-first kampaňovou kartu,
+- nový obsahový díl jde přes zkrácený publikační checklist,
+- nový SaaS onboarding používá přepsaný provozní standard,
+- nový support případ ověřuje upravenou eskalační kartu,
+- nový interní automatizační návrh používá zjednodušenou datovou mapu.
+
+První situace má být dost reálná na to, aby ukázala tření, ale ne tak kritická, aby tým nemohl opravit drobnosti za běhu. Pokud změnu testujete poprvé na největším zákazníkovi roku, už to není ověření. To je adrenalin s tabulkou.
+
+Dobrá ověřovací situace má:
+
+- jasného vlastníka,
+- konkrétní pracovní úkol,
+- odkaz na nový zdroj pravdy,
+- viditelný starý postup, který se už nemá používat,
+- jednoduché kritérium úspěchu,
+- ochranný privacy-first signál.
+
+Příklad:
+
+```markdown
+První situace:
+Příprava dalšího dílu e-bookového seriálu na web.
+
+Použitá změna:
+Nová distribuční karta bez remarketingové části, s RSS, přímými odkazy a agregovaným měřením kvality.
+
+Kritérium úspěchu:
+Vlastník připraví distribuci bez dotazu na starou šablonu a bez přidání nového sledovacího skriptu.
+```
+
+### 2. Sledujte práci, ne dojem autora změny
+
+Ověření má být zaměřené na pracovní tok. Ne na to, jestli autor změny umí vysvětlit, proč je nová verze skvělá. Autor změny má tendenci vidět logiku, kterou ostatní nevidí, protože ji sám vytvořil.
+
+Sledujte:
+
+- kde člověk začne,
+- jestli najde správný zdroj pravdy,
+- jestli rozumí prvnímu kroku,
+- kdy se ptá na vysvětlení,
+- jestli sahá po staré šabloně nebo starém odkazu,
+- jestli změna vede k menšímu počtu polí, kroků nebo rozhodnutí,
+- jestli nevzniká nový vedlejší dokument,
+- jestli se nepřidává zbytečný sběr dat.
+
+Nesledujte:
+
+- rychlost člověka jako osobní výkon,
+- počet kliků jako izolovanou metriku,
+- poslušnost vůči dokumentaci,
+- estetický pocit z nové šablony,
+- snahu obhájit práci, která už byla udělaná.
+
+Dobrá otázka po průchodu:
+
+```markdown
+Kde změna pomohla rozhodnout rychleji a kde musel člověk doplnit kontext mimo nový zdroj pravdy?
+```
+
+Slabá otázka:
+
+```markdown
+Líbí se vám nová verze?
+```
+
+Líbí nelíbí patří k designu hrnku. U pracovního systému chcete vědět, jestli pomohl.
+
+### 3. Porovnejte výsledek se změnovou větou
+
+Vraťte se ke změnové větě z předchozí přílohy. Ta je kotva. Bez ní se ověření rozteče do obecného hodnocení.
+
+Šablona porovnání:
+
+```markdown
+Změnová věta:
+Měníme [pracovní místo] tak, aby [výsledek], protože [důvod].
+
+Co se stalo při prvním použití:
+
+Výsledek nastal:
+- ano / částečně / ne
+
+Co změna zjednodušila:
+
+Co zůstalo nejasné:
+
+Kde se objevil starý postup:
+
+Jaký nový problém vznikl:
+```
+
+Příklad:
+
+```markdown
+Změnová věta:
+Měníme kampaňovou šablonu tak, aby odpovídala privacy-first distribuci přes RSS, přímé odkazy a agregované signály kvality, protože stará verze vracela tým k remarketingu.
+
+První použití:
+Vlastník použil novou kartu, RSS a přímé odkazy nastavil bez dotazu. U měření ale hledal starou část s UTM pravidly a otevřel archivní šablonu.
+
+Závěr:
+Změna zafungovala v distribučním režimu, ale starý odkaz na archivní šablonu je pořád moc blízko práci. Je potřeba ho nahradit krátkou poznámkou v nové kartě.
+```
+
+Takový závěr je použitelný. Neříká jen "skoro dobré". Říká, co opravit.
+
+### 4. Rozlišujte tři typy problému
+
+Při prvním použití se skoro vždy něco objeví. To neznamená, že změna selhala. Důležité je rozlišit, jaký typ problému máte před sebou.
+
+První typ: problém změny.
+
+Změna sama je špatně navržená. Neodpovídá práci, chybí krok, používá špatný jazyk nebo řeší méně důležitou část než tu, která opravdu bolí.
+
+Příklad:
+
+```markdown
+Nová karta říká "vyber distribuční režim", ale nepopisuje, kdy použít RSS, přímé odkazy, partnerský odkaz nebo interní rozeslání.
+```
+
+Druhý typ: problém zavedení.
+
+Změna je v zásadě správná, ale lidé ji nenašli, starý odkaz zůstal v menu, onboarding pořád ukazuje starou variantu nebo index odkazuje na dvě verze.
+
+Příklad:
+
+```markdown
+Nová karta funguje, ale stará šablona je první výsledek v interním vyhledávání.
+```
+
+Třetí typ: problém okolního systému.
+
+Změna odkryla širší problém, který není fér opravovat v rámci malé roční změny. Například nejasné vlastnictví marketingových kanálů, chybějící datová mapa pro celý produkt nebo starý billing proces.
+
+Příklad:
+
+```markdown
+Kampaňová karta je v pořádku, ale tým nemá sjednocený slovník pro kvalifikovanou poptávku, takže neví, jak vyhodnotit kvalitu signálů.
+```
+
+Praktické rozhodnutí:
+
+- Problém změny opravte v dané kartě.
+- Problém zavedení opravte v odkazech, indexu a předání.
+- Problém okolního systému zapište jako samostatný nález, ale nerozšiřujte kvůli němu první změnu.
+
+### 5. Udělejte privacy-first kontrolu prvního průchodu
+
+První použití změny často vytvoří nové pracovní stopy: poznámky, screenshoty, kopie šablony, exporty, testovací data nebo komentáře v chatu. To je normální. Není normální nechat je po ověření ležet bez účelu.
+
+Zkontrolujte:
+
+- Nevznikla kopie staré šablony jen "pro jistotu"?
+- Nepřidal někdo nový externí nástroj kvůli pohodlí?
+- Neobsahují poznámky osobní údaje, zákaznické detaily nebo interní citlivý kontext, který není potřeba držet?
+- Nezůstaly v dočasném prostoru screenshoty nastavení, tokeny, e-maily nebo exporty?
+- Je jasné, co patří do changelogu a co se má smazat?
+- Je nový zdroj pravdy pořád kratší a čistší než stará kombinace dokumentů?
+
+Mini pravidlo:
+
+```markdown
+Z prvního ověření necháváme jen rozhodnutí, jednu větu poučení a případnou malou opravu. Dočasné podklady mažeme nebo anonymizujeme.
+```
+
+Privacy-first hodnota není jen v tom, jak web měří návštěvníky. Je i v tom, jak tým pracuje s vlastními provozními stopami. Čistý interní provoz se časem propíše do čistšího produktu.
+
+### 6. Rozhodněte další stav změny
+
+Po prvním použití nedělejte dlouhou retrospektivu. Vyberte jeden stav:
+
+- Ponechat: změna fungovala bez významného tření.
+- Drobně upravit: princip funguje, ale je potřeba opravit jazyk, odkaz, pořadí kroků nebo jeden chybějící detail.
+- Dovést zavedení: změna funguje, ale staré cesty pořád matou.
+- Vrátit část do backlogu: změna odkryla problém, který nejde řešit v této iteraci.
+- Eskalovat: první použití ukázalo riziko v datech, provozu, zákaznickém dopadu nebo odpovědnosti.
+- Zrušit změnu: změna zhoršila práci a není rozumné ji zachraňovat drobnou úpravou.
+
+Jednověté rozhodnutí:
+
+```markdown
+Roční změnu kampaňové karty ponecháváme s drobnou úpravou, protože první použití potvrdilo privacy-first distribuční tok, ale doplníme krátké pravidlo pro UTM a odstraníme archivní šablonu z interního indexu.
+```
+
+Nebo:
+
+```markdown
+Roční změnu vracíme do zavedení, protože nová šablona funguje, ale staré odkazy v onboardingu pořád vedou tým k původnímu postupu.
+```
+
+Rozhodnutí má říct nejen stav, ale i důvod a nejbližší akci. Bez toho je to jen štítek.
+
+### 7. Uzavřete smyčku v pracovním systému
+
+Po rozhodnutí aktualizujte jen nutná místa:
+
+- changelog roční změny,
+- kanonický index,
+- změněnou šablonu nebo kartu,
+- onboardingovou poznámku, pokud první použití ukázalo problém při předání,
+- backlog, pokud vznikl samostatný nález,
+- privacy-first úklid podkladů.
+
+Nepřidávejte nový "report z ověření", pokud ho nikdo nebude používat. Většinou stačí krátký záznam přímo u změnové karty:
+
+```markdown
+První použití:
+2026-05-14, příprava další distribuce obsahu.
+
+Výsledek:
+Distribuční část fungovala, měřicí část potřebovala doplnit jednu větu.
+
+Rozhodnutí:
+Drobně upravit. Doplněna věta k UTM, archivní šablona odstraněna z indexu. Dočasné poznámky smazány.
+```
+
+Tím se smyčka uzavře. Člověk, který změnu najde za půl roku, nemusí číst dlouhou historii. Uvidí, že změna prošla prvním použitím a co se po něm upravilo.
+
+### Šablona ověření roční změny po prvním použití
+
+```markdown
+# Ověření roční změny po prvním použití
+
+Název změny:
+Datum prvního použití:
+Vlastník ověření:
+Pracovní situace:
+Použitý zdroj pravdy:
+
+## Změnová věta
+
+Měníme:
+Tak, aby:
+Protože:
+
+## Průchod
+
+Kde člověk začal:
+Co našel bez pomoci:
+Kde potřeboval vysvětlení:
+Kde se objevil starý postup:
+Co změna zjednodušila:
+Co zůstalo nejasné:
+
+## Typ problému
+
+Problém změny:
+Problém zavedení:
+Problém okolního systému:
+
+## Privacy-first kontrola
+
+Nové dočasné podklady:
+Co zůstává:
+Co se anonymizuje:
+Co se maže:
+Vznikl nový externí nástroj nebo datový tok:
+Retence:
+
+## Rozhodnutí
+
+Stav změny:
+Jednověté rozhodnutí:
+Drobná úprava:
+Změna v indexu:
+Nález do backlogu:
+Další kontrola:
+Věta pro tým:
+```
+
+### Mini workshop na 30 minut
+
+Agenda:
+
+1. 4 minuty: připomenout změnovou větu a první pracovní situaci.
+2. 6 minut: projít, co se při použití skutečně stalo.
+3. 5 minut: označit problém změny, zavedení nebo okolního systému.
+4. 5 minut: udělat privacy-first kontrolu nových podkladů.
+5. 4 minuty: vybrat jeden další stav změny.
+6. 4 minuty: napsat jednověté rozhodnutí.
+7. 2 minuty: určit přesné aktualizace a co se maže.
+
+Pravidla:
+
+- Ověřujte na reálné práci, ne na dojmu z dokumentu.
+- Sledujte tok, ne výkon člověka.
+- První použití nemá otevřít celý systém znovu.
+- Starý postup, který se objeví při prvním použití, berte jako signál, ne jako selhání člověka.
+- Dočasné podklady po ověření ukliďte hned.
+- Pokud změna nefunguje, přiznejte to rychle. Malá vratka je levnější než rok obcházení.
+
+### Checklist
+
+- Má ověření konkrétní první pracovní situaci?
+- Je jasná původní změnová věta?
+- Použil změnu někdo v reálném toku, ne jen autor dokumentu?
+- Sledujete, kde člověk začal, co našel a kde potřeboval pomoc?
+- Objevil se starý postup, starý odkaz nebo stará šablona?
+- Rozlišili jste problém změny, zavedení a okolního systému?
+- Zůstala změna menší než původní systém?
+- Nevznikl nový vedlejší dokument bez vlastníka?
+- Nevznikl nový externí nástroj nebo datový tok bez rozhodnutí?
+- Proběhl privacy-first úklid dočasných poznámek, screenshotů a exportů?
+- Má změna jeden další stav?
+- Je jednověté rozhodnutí uložené u změnové karty?
+- Byly aktualizovány jen nutné odkazy, indexy a pracovní místa?
+- Je jasné, kdy se změna znovu kontroluje, nebo že už přechází do běžného provozu?
+
+První použití roční změny je malá brána mezi dobrým úmyslem a skutečným provozem. Když ji přeskočíte, systém se může tvářit opraveně, ale lidé budou dál používat staré cesty. Když ji uděláte poctivě, zjistíte rychle, jestli změna pomáhá, kde potřebuje drobnou opravu a které staré stopy konečně zavřít. To je přesně ten typ nenápadné disciplíny, ze které se časem skládá spolehlivý web, SaaS i marketing.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GR o ověření roční změny systému po prvním použití: výběr první pracovní situace, sledování reálného toku, porovnání se změnovou větou, rozlišení problému změny/zavedení/okolního systému, privacy-first úklid podkladů, rozhodnutí dalšího stavu, uzavření smyčky, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GQ o převodu závěrů roční inventury do jedné roční změny systému: řazení nálezů podle pracovní ceny, výběr změny, změnová věta, omezení rozsahu, privacy-first uzavření starých stop, pracovní předání, první ověření, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GP o roční inventuře stabilních rozhodnutí bez zbytečné administrativy: inventurní seznam, vzorek reálných použití, scorecard hodnoty a ceny, kontrola driftu, privacy-first úklid podkladů, rozhodnutí dalšího stavu, aktualizace pracovních míst, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GO o převodu stabilního dlouhodobého rozhodnutí do roční inventury: ověření stability, inventurní otázka, vztahy k ostatním pravidlům, inventurní karta, lehké signály pro roční kontrolu, uložení karty, privacy-first úklid, mini workshop a checklist.
