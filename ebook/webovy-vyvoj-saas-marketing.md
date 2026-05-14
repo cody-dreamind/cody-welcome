@@ -52437,8 +52437,388 @@ Pravidla:
 
 Ověření malé opravy je krátké, ale důležité. Chrání tým před dvěma extrémy: před vírou, že každá úprava textu automaticky pomohla, a před nekonečným laděním dokumentace bez dopadu na práci. Dobrý výsledek je prostý: člověk našel správné vodítko, udělal lepší rozhodnutí, nevytvořil zbytečnou datovou stopu a tým ví, jestli opravu ponechat. Na dokumentaci je to skoro až sportovní výkon. Bez medaile, ale s menším chaosem.
 
+## Příloha GA: Stabilizace ověřené opravy lekce do trvalého pravidla
+
+Ověřená oprava lekce ještě není trvalé pravidlo. Je to důkaz, že jedna konkrétní změna pomohla v jedné reálné situaci. To je cenné, ale pořád to neznamená, že má být všude, navždy a ve stejné podobě. Stabilizace začíná ve chvíli, kdy tým ví, že oprava řeší opakovatelný problém, a potřebuje ji převést z režimu "opravená poznámka" do režimu "běžný způsob práce".
+
+Tato příloha navazuje na Přílohu FZ. Tam jste ověřili malou opravu po prvním použití. Teď rozhodujete, jestli z ní udělat trvalé pravidlo, kam ho uložit, jak ho formulovat a jak uklidit staré stopy. Cílem není zvětšit dokumentaci. Cílem je, aby příští člověk nemusel objevovat stejnou hranici znovu.
+
+Dobrá stabilizace má čtyři výsledky:
+
+- pravidlo je krátké a použitelné v okamžiku práce,
+- má jedno kanonické místo,
+- staré varianty jsou smazané nebo označené jako archiv,
+- privacy-first datová stopa se nezvětšila jen kvůli dokumentování poučení.
+
+Pokud stabilizaci přeskočíte, vznikne zvláštní mezistav. Oprava existuje, někdo ji ověřil, ale tým ji pořád používá jen tehdy, když si na ni náhodou vzpomene. To je drahý způsob, jak říkat "máme znalost", zatímco v provozu se chováme, jako bychom ji neměli.
+
+### 1. Rozhodněte, zda oprava zaslouží trvalé pravidlo
+
+Ne každá ověřená oprava má skončit jako pravidlo. Některé opravy jsou lokální. Pomohly jedné větě, jednomu edge casu nebo jedné nové roli. Trvalé pravidlo si zaslouží jen oprava, která se pravděpodobně vrátí v podobné práci.
+
+Ptejte se:
+
+- Objeví se stejná situace znovu?
+- Bude ji řešit víc než jeden člověk?
+- Je chyba v této situaci drahá, riziková nebo těžko dohledatelná?
+- Pomůže pravidlo přímo v okamžiku rozhodnutí?
+- Nahradí pravidlo opakované vysvětlování?
+- Nezvětší pravidlo dokumentaci víc, než sníží tření?
+
+Příklad rozhodnutí:
+
+```markdown
+Oprava:
+Interní ID má zůstat v ticket systému a do pracovní poznámky patří jen anonymizovaný popis.
+
+První ověření:
+Oprava pomohla při další support odpovědi.
+
+Opakovatelnost:
+Ano. Podobné situace vznikají v supportu i při interním předávání incidentů.
+
+Riziko:
+Střední. Špatný postup může vytvořit zbytečnou kopii provozního identifikátoru mimo kanonický systém.
+
+Rozhodnutí:
+Převést do trvalého pravidla support práce s identifikátory.
+```
+
+Slabší kandidát:
+
+```markdown
+Oprava:
+V jedné staré případové studii byl nepřesný popis role zákazníka.
+
+První ověření:
+Po úpravě je konkrétní text jasnější.
+
+Opakovatelnost:
+Nízká. Nejde o vzor pro budoucí práci.
+
+Rozhodnutí:
+Nepřevádět do trvalého pravidla. Nechat jen jako hotovou redakční opravu.
+```
+
+Stabilizujte jen to, co se bude opakovat. Dokumentace má být paměť systému, ne muzeum všech drobných úprav.
+
+### 2. Najděte správný domov pravidla
+
+Trvalé pravidlo musí bydlet tam, kde ho člověk použije. Ne tam, kde se historicky zapsala oprava. Když pravidlo vzniklo z týmové paměti, nemusí v týmové paměti zůstat jako hlavní pracovní místo. Týmová paměť může držet původ a důvod. Pracovní pravidlo má být blízko akci.
+
+Možné domovy:
+
+- checklist před publikací,
+- support šablona,
+- onboardingový balíček role,
+- provozní standard,
+- datová mapa,
+- redakční pravidla,
+- karta nabídky,
+- QA kontrola,
+- interní rozhodovací index.
+
+Výběr domova podle otázky:
+
+```markdown
+Kdy člověk pravidlo potřebuje?
+Při psaní support odpovědi.
+
+Kde tehdy pracuje?
+V ticket systému a support šabloně.
+
+Kde hledá vodítko?
+V krátkém support checklistu.
+
+Kanonický domov:
+Support checklist: "Práce s identifikátory a zákaznickými daty".
+
+Stopa v týmové paměti:
+Krátký odkaz na důvod změny a datum stabilizace.
+```
+
+Špatný domov je ten, který vyhovuje autorovi dokumentace, ale ne člověku v práci. Když někdo řeší support odpověď, nebude hledat pravidlo v retrospektivě onboardingového cyklu. A pokud bude, tak už systém prohrál zbytečně brzy.
+
+Codyho komentář: kanonické místo není místo, kde text vypadá nejlépe. Je to místo, kde text nejvíc snižuje šanci na špatné rozhodnutí.
+
+### 3. Přepište opravu do pracovního pravidla
+
+Oprava často popisuje konkrétní situaci. Trvalé pravidlo musí být obecnější, ale nesmí ztratit ostrost. Nejhorší stabilizace je přepis konkrétního poučení do mlhavé věty typu "pracujte opatrně s daty". To je pravda, ale v okamžiku práce nepomáhá.
+
+Přepisujte ve třech vrstvách:
+
+1. Kdy pravidlo použít.
+2. Co přesně udělat.
+3. Co nedělat.
+
+Původní oprava:
+
+```markdown
+Když support odpověď potřebuje interní identifikátor, ponech ho v ticket systému a do osobní poznámky nebo šablony vkládej jen anonymizovanou pracovní formulaci.
+```
+
+Trvalé pravidlo:
+
+```markdown
+Práce s provozními identifikátory v supportu
+
+Použij, když odpověď nebo interní poznámka potřebuje odkázat na ticket, incident, objednávku nebo jiný provozní záznam.
+
+Udělej:
+- identifikátor ponech v kanonickém systému,
+- do pracovní poznámky napiš anonymizovaný popis situace,
+- odkaž člověka na systém, kde má oprávnění identifikátor vidět.
+
+Nedělej:
+- nekopíruj identifikátor do osobních poznámek,
+- nevkládej screenshoty s identifikátory do dokumentace,
+- nevytvářej pomocné tabulky, pokud pro rozhodnutí stačí odkaz na kanonický systém.
+```
+
+Takové pravidlo je delší než původní věta, ale není rozbředlé. Má spouštěč, akci a hranice. Člověk ho může použít bez toho, aby znal celý příběh opravy.
+
+Slabý přepis:
+
+```markdown
+Dávejte pozor na interní identifikátory a ukládejte je bezpečně.
+```
+
+To není pravidlo. To je přání s hezkým oblekem.
+
+### 4. Zachovejte důvod, ale zkraťte příběh
+
+Trvalé pravidlo nemá nést celý původní příběh. Potřebuje ale krátký důvod, aby lidé chápali, proč existuje. Bez důvodu se pravidla časem mění v rituál. Lidé je buď slepě plní, nebo je začnou obcházet, protože nechápou jejich cenu.
+
+Stačí krátká poznámka:
+
+```markdown
+Proč:
+Bráníme zbytečnému šíření provozních identifikátorů mimo systémy, kde máme řízený přístup, audit a retenci.
+```
+
+Není potřeba ukládat:
+
+- jméno zákazníka,
+- číslo reálného ticketu,
+- screenshot původního problému,
+- plný text support odpovědi,
+- osobní komentáře z ověření,
+- dlouhou historii debaty.
+
+V týmové paměti může zůstat stopa:
+
+```markdown
+Lekce:
+Práce s provozními identifikátory v supportu.
+
+Stav:
+Stabilizováno do support checklistu.
+
+Datum:
+2026-05-14
+
+Důvod:
+První ověření ukázalo, že krátké pravidlo pomáhá omezit kopírování identifikátorů mimo kanonický systém.
+
+Kanonické místo:
+Support checklist > Práce s identifikátory a zákaznickými daty.
+```
+
+To je dost. Historie má pomoct údržbě, ne tvořit druhý paralelní systém.
+
+### 5. Ukliďte staré varianty a pracovní zkratky
+
+Jakmile je pravidlo stabilizované, zkontrolujte staré texty. Malá oprava často vznikala postupně: poznámka v chatu, dočasná věta v šabloně, zápis v týmové paměti, pracovní zkratka v onboardingovém balíčku. Pokud je necháte všechny žít, vytvoříte z jednoho pravidla čtyři zdroje pravdy.
+
+Projít se vyplatí:
+
+- původní lekce v týmové paměti,
+- dočasná pracovní zkratka,
+- onboardingový materiál,
+- checklisty,
+- interní šablony,
+- staré příklady,
+- odkazy v rozhodovacím indexu.
+
+U každého místa rozhodněte:
+
+- ponechat jako kanonické,
+- nahradit odkazem na kanonické místo,
+- zkrátit na poznámku o původu,
+- označit jako archiv,
+- smazat.
+
+Příklad úklidu:
+
+```markdown
+Kanonické místo:
+Support checklist.
+
+Týmová paměť:
+Ponechat krátkou kartu s odkazem na checklist.
+
+Onboarding support role:
+Nahradit lokální formulaci odkazem na checklist a jednou větou, kdy pravidlo použít.
+
+Dočasná poznámka v revizním dokumentu:
+Smazat po zapsání změny do changelogu.
+
+Screenshot z ověření:
+Smazán.
+```
+
+Tohle je drobná práce, ale má velký dopad. Týmy často netrpí nedostatkem pravidel. Trpí tím, že stejné pravidlo existuje ve třech verzích a každá se tváří jako aktuální.
+
+### 6. Nastavte revizní háček
+
+Trvalé pravidlo neznamená věčné pravidlo. Znamená pravidlo, které má jasný domov, důvod a životnost. U každého stabilizovaného pravidla určete, kdy se znovu zkontroluje.
+
+Revizní háček může být:
+
+- po prvních třech použitích,
+- při měsíční kontrole role,
+- při kvartálním auditu standardů,
+- po změně nástroje,
+- po incidentu,
+- při změně datové mapy,
+- při onboardingovém review nové role.
+
+Příklad:
+
+```markdown
+Revizní háček:
+Zkontrolovat po třech support případech, kde pravidlo použil někdo jiný než autor stabilizace.
+
+Co sledovat:
+- našel člověk pravidlo bez pomoci,
+- vedlo pravidlo k rozhodnutí,
+- nevznikla nová kopie identifikátoru,
+- není pravidlo příliš dlouhé pro běžný support rytmus.
+
+Vlastník:
+Vlastník support standardu.
+```
+
+Revizní háček nemá být kalendářní ozdoba. Má být napojený na okamžik, kdy se ukáže, jestli pravidlo funguje i mimo první ověřenou situaci.
+
+### 7. Předejte pravidlo jako změnu chování
+
+Stabilizované pravidlo nestačí zapsat. Lidé musí vědět, co se od teď dělá jinak. Nepotřebují slavnostní oznámení. Potřebují krátkou pracovní zprávu.
+
+Dobré předání:
+
+```markdown
+Od teď při support práci s provozními identifikátory platí jedno pravidlo: identifikátor zůstává v kanonickém systému, mimo něj píšeme jen anonymizovaný popis. Pravidlo je v support checklistu v části "Práce s identifikátory a zákaznickými daty". Při dalším podobném případu ho použijte a případné tření zapište k reviznímu háčku.
+```
+
+Slabé předání:
+
+```markdown
+Aktualizovali jsme dokumentaci, prosím seznamte se.
+```
+
+Druhá varianta je pohodlná pro autora změny, ale ne pro tým. Neříká, kde změna je, kdy ji použít ani co se má dělat jinak.
+
+Privacy-first předání si hlídá ještě jednu věc: nesdílí reálný zákaznický detail jen proto, aby změna působila konkrétně. Konkrétní může být pracovní situace, ne citlivý obsah.
+
+### Šablona stabilizace ověřené opravy
+
+```markdown
+# Stabilizace ověřené opravy lekce
+
+Oprava:
+Datum opravy:
+Datum prvního ověření:
+Vlastník:
+
+Původní problém:
+
+Výsledek ověření:
+
+Má oprava opakovatelný vzor?
+Ano / Ne
+
+Proč stabilizovat:
+
+Kdy člověk pravidlo potřebuje:
+
+Kanonické místo:
+
+Pracovní pravidlo:
+
+Použij, když:
+
+Udělej:
+-
+-
+-
+
+Nedělej:
+-
+-
+-
+
+Krátký důvod pravidla:
+
+Staré varianty k úklidu:
+- místo:
+  stav:
+- místo:
+  stav:
+
+Privacy-first kontrola:
+- pravidlo neobsahuje reálná zákaznická data:
+- dočasné podklady jsou smazané:
+- identifikátory zůstaly v kanonickém systému:
+- týmová paměť obsahuje jen nutnou stopu:
+
+Revizní háček:
+
+Vlastník další kontroly:
+
+Jednověté oznámení týmu:
+```
+
+### Mini workshop: 30 minut na stabilizaci
+
+Agenda:
+
+1. 3 minuty: přečíst původní opravu a výsledek ověření.
+2. 4 minuty: rozhodnout, zda jde o opakovatelný vzor.
+3. 5 minut: vybrat kanonické místo podle okamžiku použití.
+4. 6 minut: přepsat opravu do pracovního pravidla.
+5. 4 minuty: projít staré varianty a rozhodnout úklid.
+6. 4 minuty: udělat privacy-first kontrolu podkladů.
+7. 2 minuty: nastavit revizní háček.
+8. 2 minuty: napsat jednověté předání týmu.
+
+Pravidla:
+
+- Nestabilizujte lokální opravu jen proto, že už je napsaná.
+- Pravidlo pište pro člověka v práci, ne pro archiv.
+- Nechte jeden zdroj pravdy a ostatní místa změňte na odkazy nebo archiv.
+- Neuchovávejte reálné zákaznické detaily, pokud pravidlo funguje bez nich.
+- Revizní háček napojte na použití, ne jen na datum.
+
+### Checklist
+
+- Je jasné, proč oprava zaslouží trvalé pravidlo?
+- Ověřili jste, že se situace bude opakovat?
+- Vybrali jste kanonické místo podle okamžiku použití?
+- Přepsali jste opravu do pravidla se spouštěčem, akcí a hranicí?
+- Zkrátili jste původní příběh na praktický důvod?
+- Uklidili jste staré varianty, dočasné poznámky a pracovní zkratky?
+- Zůstává v týmové paměti jen nutná stopa a odkaz?
+- Prošla stabilizace privacy-first kontrolou?
+- Nevznikla nová kopie citlivých nebo zákaznických dat?
+- Má pravidlo revizní háček a vlastníka?
+- Dostane tým krátkou zprávu, co se od teď dělá jinak?
+
+Stabilizace ověřené opravy je okamžik, kdy se z drobného poučení stává součást systému. Když se udělá dobře, tým už neřeší stejný detail znovu, ale ani si nevyrábí další vrstvu dokumentace pro dokumentaci. Pravidlo je tam, kde ho člověk potřebuje, je dost konkrétní pro rozhodnutí a nezvětšuje datovou stopu. To je přesně ten typ tiché provozní práce, která se nehodí na plakát, ale hodí se do firmy, která chce fungovat i příští měsíc.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GA o stabilizaci ověřené opravy lekce do trvalého pravidla: rozhodnutí o opakovatelnosti, výběr kanonického místa, přepis do pracovního pravidla, zkrácení příběhu, úklid starých variant, revizní háček, předání týmu, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha FZ o ověření malé opravy lekce po prvním použití: návrat k opravné větě, výběr reálné situace, sledování práce místo člověka, signály rozhodnutí, samostatnosti a datové stopy, privacy-first uzavření, stav opravy, uzavření v týmové paměti, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha FY o převodu nálezu z týmové paměti do malé opravy lekce: výběr jednoho nálezu, opravná věta, rozlišení textu, trasy, příkladu a pravidla, kanonické místo, pracovní zkratka, privacy-first kontrola, changelog, ověření, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha FX o kontrole týmové paměti po prvním použití: první skutečná situace, porovnání očekávání se skutečnou prací, trasa k poučení, oddělení problému lekce od problému systému, privacy-first kontrola, rozhodnutí stavu lekce, šablona, mini workshop a checklist.
