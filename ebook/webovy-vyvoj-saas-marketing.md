@@ -58307,8 +58307,306 @@ Pravidla:
 
 Kontrola nového stabilního bodu je obyčejná zkouška toho, jestli systém opravdu zjednodušil práci. Když ano, nechte ho žít a jen zavřete drobné mezery. Když ne, opravte trasu, pravidlo nebo datovou stopu dřív, než se z další dobré myšlenky stane další nepoužívaný dokument. Malé týmy nepotřebují víc artefaktů. Potřebují méně nejasností.
 
+## Příloha GU: Převod ověřeného stabilního bodu do běžné údržby
+
+Stabilní bod po prvních použitích nemá skončit v režimu "hotovo navždy". To je jen pomalejší cesta k zastarání. Správný další krok je převést ho do běžné údržby: určit, kdy se kontroluje, kdo za něj odpovídá, jak se hlídá jeho životnost a co se stane, když přestane šetřit práci.
+
+Běžná údržba nesmí z dobrého rozhodnutí udělat administrativní domácí úkol. Cílem není každý měsíc přepisovat dokument. Cílem je mít lehký rytmus, který včas zachytí, že se změnil produkt, tým, zákazníci, nástroje, právní prostředí, datové toky nebo způsob práce.
+
+Codyho komentář: nejhorší osud stabilního bodu není chyba. Chyba se dá najít. Horší je tiché stárnutí. Dokument pořád vypadá důležitě, lidé se na něj občas odkážou, ale ve skutečné práci už rozhodují jinak. To je firemní verze staré mapy v nové kanceláři: hezká, historicky zajímavá, prakticky lehce zákeřná.
+
+### 1. Rozlište údržbu od další změny
+
+Než nastavíte rytmus, pojmenujte, co vlastně udržujete. Údržba znamená, že stabilní bod pořád platí a potřebuje jen hlídat použitelnost. Další změna znamená, že se mění pravidlo, rozsah, datový tok nebo rozhodovací logika.
+
+Údržba typicky řeší:
+
+- jestli je odkaz na správném místě,
+- jestli název odpovídá tomu, jak lidé hledají,
+- jestli příklad pořád sedí,
+- jestli je retenční věta srozumitelná,
+- jestli staré cesty zůstaly zavřené,
+- jestli bod pořád šetří rozhodování.
+
+Další změna typicky začíná, když:
+
+- přibyl nový typ zákazníka nebo produktu,
+- změnil se nástroj nebo architektura,
+- stabilní bod vytváří nový sběr dat,
+- lidé pravidlo opakovaně obcházejí,
+- vznikl konflikt s jiným standardem,
+- rozhodnutí už neodpovídá skutečné strategii.
+
+Praktické pravidlo:
+
+```markdown
+Pokud zásah mění význam pravidla, není to údržba.
+Je to nová změna a potřebuje vlastní rozhodovací větu.
+```
+
+Tohle rozlišení chrání tým před dvěma extrémy. První extrém je zanedbání: "nechme to být, ono to nějak funguje". Druhý extrém je nekonečné ladění: "když už jsme tady, přepišme celou metodiku". Obojí je drahé. Údržba má být lehká, ale ne slepá.
+
+### 2. Vyberte přirozený rytmus kontroly
+
+Rytmus údržby má vycházet z toho, kdy stabilní bod reálně ovlivňuje práci. Ne z kalendářové úhlednosti. Některé body stačí kontrolovat kvartálně, jiné po každém launchi, jiné při změně dodavatele nebo při onboardingu nového člověka.
+
+Vyberte jeden hlavní spouštěč:
+
+- Časový: měsíčně, kvartálně, pololetně nebo ročně.
+- Událostní: po launchi, po incidentu, po kampani, po změně nástroje.
+- Používací: po pěti použitích, po prvních dvou předáních, po prvním zákaznickém průchodu.
+- Rizikový: při přidání datového toku, nového oprávnění, nové integrace nebo externího dodavatele.
+
+Příklad:
+
+```markdown
+Stabilní bod:
+Karta měření kampaní bez zbytečných trackerů
+
+Údržbový rytmus:
+Kontrola po každé větší distribuční kampani a kvartálně v marketingovém review.
+
+Spouštěč mimo rytmus:
+Jakýkoliv návrh na nový měřicí nástroj, remarketing, export identifikátorů nebo propojení s externí reklamní platformou.
+```
+
+Nesnažte se mít jeden rytmus pro všechno. Stabilní bod pro incidentní komunikaci má jinou životnost než stabilní bod pro strukturu případové studie. Pokud je rytmus stejný pro každý dokument, pravděpodobně neodráží skutečnou práci.
+
+### 3. Přidělte vlastnictví role, ne člověku jako hrdinovi
+
+Stabilní bod potřebuje vlastníka. Ne proto, aby všechno dělal sám, ale aby bylo jasné, kdo pozná, že bod stárne, kdo schválí drobnou údržbu a kdo zastaví změnu, která už patří do většího rozhodování.
+
+Dobré vlastnictví je navázané na roli:
+
+- marketingový vlastník pro měření kampaní,
+- produktový vlastník pro aktivační metriky,
+- technický vlastník pro provozní runbook,
+- privacy vlastník pro datové toky a retenci,
+- obchodní vlastník pro sales handoff.
+
+Špatné vlastnictví je "tohle kdysi napsal Petr". Petr může odejít, změnit roli, zapomenout nebo být zrovna na dovolené ve chvíli, kdy stabilní bod rozhoduje o důležitém zákaznickém toku. Role je stabilnější než hrdinský autor.
+
+Do stabilního bodu stačí přidat krátký blok:
+
+```markdown
+Vlastník:
+Role, ne jen jméno.
+
+Kdy kontroluje:
+Rytmus nebo spouštěč.
+
+Co může upravit bez širšího rozhodnutí:
+Název, odkaz, příklad, retenční větu, archivaci staré cesty.
+
+Co musí eskalovat:
+Změnu pravidla, nový sběr dat, nový nástroj, rozšíření rozsahu.
+```
+
+Tím se z údržby nestává mikromanagement. Je jasné, kde je autonomie a kde začíná riziko.
+
+### 4. Udržujte jen signály, které pomáhají rozhodnout
+
+Údržba stabilního bodu nepotřebuje velkou analytiku. Potřebuje pár signálů, které ukážou, jestli bod pořád slouží práci. Čím víc metrik přidáte, tím větší je šance, že budete měřit údržbu místo hodnoty.
+
+Užitečné signály:
+
+- počet reálných použití za období,
+- počet návratů ke staré cestě,
+- počet dotazů na vysvětlení,
+- čas do nalezení správného bodu,
+- počet výstupů s privacy-first problémem,
+- počet drobných údržbových zásahů,
+- rozhodnutí ponechat, zpřesnit, sloučit, vrátit do pilotu nebo archivovat.
+
+Nepotřebujete sledovat, kdo přesně kdy dokument otevřel, kolik sekund četl nebo na které odstavce klikl. U interních standardů je to často zbytečné a kulturně otravné. Privacy-first přístup platí i dovnitř týmu: měřte práci, ne špehování lidí.
+
+Jednoduchý záznam:
+
+```markdown
+Období:
+Použití:
+Návraty ke staré cestě:
+Dotazy:
+Privacy-first nálezy:
+Údržbový zásah:
+Rozhodnutí:
+```
+
+Pokud tento záznam vyplníte za dvě minuty, je rytmus udržitelný. Pokud k němu potřebujete půlhodinový meeting a tři exporty, právě jste vytvořili nový problém v kostýmu kontroly kvality.
+
+### 5. Udělejte privacy-first bránu pro každou údržbu
+
+I malá údržba může nenápadně změnit datovou stopu. Přidáte příklad s reálným zákazníkem. Doplníte screenshot ostrého nástroje. Odkážete na tabulku s kontakty. Přesunete dokument do širšího sdílení. Napojíte nový formulář. Samostatně to vypadá nevinně, dohromady vzniká riziko.
+
+Před každou údržbou položte pět otázek:
+
+1. Přidáváme do stabilního bodu nová osobní nebo zákaznická data?
+2. Rozšiřujeme přístup k citlivému kontextu?
+3. Vzniká nový export, screenshot nebo příloha?
+4. Mění se retence pracovních podkladů?
+5. Odkazujeme na nástroj nebo složku, která nebyla součástí původní datové mapy?
+
+Pokud je odpověď všude "ne", jde o běžnou údržbu. Pokud je někde "ano", zapište krátké rozhodnutí. Ne nutně právní román. Stačí věta, proč je změna potřeba, kde data jsou, kdo k nim má přístup a kdy se mažou nebo zkracují.
+
+Příklad:
+
+```markdown
+Údržba:
+Doplněn syntetický příklad kampaně místo screenshotu z reálného účtu.
+
+Privacy-first důvod:
+Příklad má ukázat rozhodovací logiku, ne zákaznická data.
+
+Retence:
+Žádné nové pracovní podklady nevznikly.
+```
+
+Tohle je přesně ten typ malé hygieny, která v Evropě odděluje dospělý provoz od sbírky "ono se to nějak posílalo v chatu".
+
+### 6. Nastavte stop pravidla pro rozšiřování
+
+Stabilní body mají tendenci bobtnat. Někdo chce doplnit výjimku, druhý přidá nový checklist, třetí vloží poznámku z callu, čtvrtý přidá další šablonu. Za chvíli z krátkého pracovního pravidla vznikne archiv všech debat, které nikdo nechtěl uzavřít.
+
+Stop pravidla:
+
+- Nepřidávejte nový odstavec, pokud stačí upravit jednu větu.
+- Nepřidávejte další příklad, pokud jen opakuje stejný princip.
+- Nepřidávejte výjimku bez rozhodnutí, kdy platí a kdo ji schvaluje.
+- Nepřidávejte nový měřicí signál bez otázky, kterou pomáhá rozhodnout.
+- Nepřidávejte nový odkaz, pokud není v pracovním toku opravdu používaný.
+- Nepřidávejte reálná data tam, kde stačí syntetický příklad.
+
+Dobrá údržba často znamená mazání. Pokud stabilní bod po roce obsahuje méně slov a lepší pravidlo, je to úspěch. Dokumentace nemusí růst, aby byla živá. Někdy je živá právě proto, že se pravidelně prořezává.
+
+### 7. Uzavřete údržbu krátkým changelogem
+
+Každá údržba má být dohledatelná, ale ne teatrální. Stačí krátký changelog u stabilního bodu nebo v kanonickém indexu. Důležité je, aby příští člověk věděl, co se změnilo a proč.
+
+Formát:
+
+```markdown
+Datum:
+Změna:
+Důvod:
+Typ:
+Privacy-first dopad:
+Další kontrola:
+```
+
+Příklad:
+
+```markdown
+Datum:
+2026-05-14
+
+Změna:
+Přejmenována karta z "Marketingové signály" na "Měření kampaní bez zbytečných trackerů".
+
+Důvod:
+Tým ji při přípravě kampaně hledal podle slov "měření" a "trackery".
+
+Typ:
+Běžná údržba, význam pravidla beze změny.
+
+Privacy-first dopad:
+Žádná nová data, žádné nové přístupy.
+
+Další kontrola:
+Po další větší kampani.
+```
+
+Changelog chrání paměť bez toho, aby z každé úpravy vznikla schůzka. A hlavně pomáhá rozlišit, jestli stabilní bod prochází přirozenou údržbou, nebo jestli se ve skutečnosti opakovaně přepisuje jeho smysl.
+
+### Šablona údržbového nastavení stabilního bodu
+
+```markdown
+# Údržbové nastavení stabilního bodu
+
+Stabilní bod:
+Pracovní pravidlo:
+Vlastník role:
+Kanonické místo:
+
+## Rytmus
+
+Hlavní spouštěč kontroly:
+Vedlejší spouštěče:
+Kdy se kontrola přeskočí:
+
+## Povolená údržba
+
+Co může vlastník upravit bez širšího rozhodnutí:
+Co musí eskalovat:
+Stop pravidla pro rozšiřování:
+
+## Signály
+
+Použití:
+Návrat staré cesty:
+Dotazy:
+Privacy-first nálezy:
+Údržbové zásahy:
+
+## Privacy-first brána
+
+Vznikají nová data:
+Rozšiřuje se přístup:
+Mění se retence:
+Přibývá nástroj nebo datový tok:
+Poznámka:
+
+## Changelog
+
+Datum:
+Změna:
+Důvod:
+Typ:
+Privacy-first dopad:
+Další kontrola:
+```
+
+### Mini workshop na 25 minut
+
+Agenda:
+
+1. 3 minuty: připomenout stabilní bod a výsledek první kontroly.
+2. 4 minuty: rozhodnout, jestli jde o údržbu, nebo další změnu.
+3. 4 minuty: vybrat hlavní rytmus nebo spouštěč kontroly.
+4. 4 minuty: určit vlastníka role a hranice autonomie.
+5. 4 minuty: vybrat tři až pět signálů, které opravdu pomáhají rozhodnout.
+6. 4 minuty: projít privacy-first bránu a stop pravidla.
+7. 2 minuty: zapsat údržbové nastavení a první changelog.
+
+Pravidla:
+
+- Nepřidávejte kontrolu, kterou nikdo nebude používat.
+- Vlastnictví dávejte roli, ne autorovi historického dokumentu.
+- Údržbu držte menší než změnu.
+- Privacy-first kontrolujte i u drobných úprav.
+- Když stabilní bod bobtná, nejdřív mažte a slučujte.
+- Výsledkem má být rytmus, který práci chrání, ne nový administrativní rituál.
+
+### Checklist
+
+- Je jasné, co je běžná údržba a co už je další změna?
+- Má stabilní bod přirozený rytmus kontroly nebo konkrétní spouštěč?
+- Je vlastník definovaný jako role?
+- Ví vlastník, co může upravit bez širšího rozhodnutí?
+- Je jasné, co musí eskalovat?
+- Sledují se jen signály, které pomáhají rozhodnout?
+- Nezavádí údržba sledování lidí místo sledování práce?
+- Má každá údržba privacy-first bránu?
+- Nevznikají nové exporty, screenshoty, přístupy nebo nástroje bez zápisu?
+- Existují stop pravidla proti bobtnání dokumentu?
+- Je changelog krátký, ale dohledatelný?
+- Je další kontrola navázaná na skutečnou práci?
+- Umí tým stabilní bod zkrátit, sloučit nebo archivovat, když přestane pomáhat?
+
+Převod stabilního bodu do běžné údržby je moment, kdy se z dobrého rozhodnutí stává provozní návyk. Ne velká ceremonie. Spíš tiché nastavení zábradlí: víme, kdo hlídá směr, kdy se podíváme znovu a kde je hranice, za kterou už nejde o údržbu, ale o nové rozhodnutí.
+
 ## Pracovní log
 
+- 2026-05-14: Doplněna Příloha GU o převodu ověřeného stabilního bodu do běžné údržby: rozlišení údržby a další změny, volba rytmu, vlastnictví role, lehké signály, privacy-first brána, stop pravidla, changelog, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GT o kontrole nového stabilního bodu po prvních použitích: reálné průchody, trasa k bodu, porovnání výstupu s pravidlem, návrat starých cest, privacy-first kontrola skutečných výstupů, jednověté rozhodnutí, minimální aktualizace, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GS o převodu ověřené roční změny do nového stabilního bodu: pojmenování podle pracovní situace, nahrazení starých cest, zkrácení historie, vlastnictví a údržba, privacy-first stabilizace, předání týmu, archivace starých postupů, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GR o ověření roční změny systému po prvním použití: výběr první pracovní situace, sledování reálného toku, porovnání se změnovou větou, rozlišení problému změny/zavedení/okolního systému, privacy-first úklid podkladů, rozhodnutí dalšího stavu, uzavření smyčky, šablona, mini workshop a checklist.
