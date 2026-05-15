@@ -61371,8 +61371,232 @@ Workshop končí jedním stavem a jednou další akcí. Pokud se objeví pět n�
 
 Kontrola běžného pravidla po několika použitích chrání tým před pomalým rozpadem dobrého rozhodnutí. Nevyžaduje velký audit ani další vrstvu řízení. Stačí vzít pár skutečných průchodů, podívat se, jestli pravidlo pomáhá práci, uklidit návrat starého chování a nenechat datovou stopu růst jen proto, že si jí nikdo nevšiml včas.
 
+## Příloha HG: Převod kontroly běžného pravidla do jedné udržovací změny
+
+Kontrola běžného pravidla má hodnotu až ve chvíli, kdy z ní vznikne malá dokončená změna. Jinak je to jen další poznámka v systému, který už tak pravděpodobně trpí tím, že má moc poznámek a málo rozhodnutí. Po několika použitích pravidla obvykle neuvidíte dramatický problém. Uvidíte drobné tření: starý odkaz, chybějící příklad, nejasné pole, návrat kopírování detailů nebo výstup, který jeden člověk chápe jinak než druhý.
+
+Tato příloha řeší, jak z takového nálezu udělat jednu udržovací změnu. Ne novou revizi celého systému. Ne workshop na půl dne. Jednu konkrétní úpravu, která sníží opakované tření a nezvětší provozní ani datovou stopu.
+
+Praktická otázka zní:
+
+```text
+Jakou nejmenší změnu pravidla, trasy nebo okolního artefaktu uděláme, aby se stejný problém při příštím použití neopakoval?
+```
+
+Dobrá udržovací změna má tři vlastnosti. Je blízko místu, kde problém vzniká. Je dost malá, aby šla udělat a ověřit rychle. A nemění význam pravidla, pokud problém neleží přímo ve významu. V běžném provozu je nejčastější chyba přepsat celé pravidlo kvůli nálezu, který by vyřešilo jedno lepší pole nebo odstranění starého odkazu.
+
+### 1. Vyberte nález podle opakované ceny
+
+Ne každý nález si zaslouží změnu. Některé jsou jednorázové, některé vznikly mimo běžný kontext a některé vypadají hlasitě jen proto, že je nahlásil nejviditelnější člověk v týmu. Při udržovací změně vybírejte podle ceny opakování.
+
+Položte si otázky:
+
+- Kdyby se tento problém stal ještě pětkrát, kolik času ztratíme?
+- Vytváří problém špatné rozhodnutí, nebo jen malou nepohodlnost?
+- Zvětšuje problém datovou stopu, kopie nebo přístupy?
+- Potřebuje kvůli tomu někdo zkušenější ručně opravovat výstupy?
+- Brání problém novému člověku použít pravidlo samostatně?
+- Má problém jasné místo zásahu?
+
+Příklad: při kontrole pravidla zjistíte tři věci. Jeden člověk použil starý odkaz, druhý se zeptal na výklad jednoho pole a třetí zkopíroval detail zákaznického požadavku do komentáře. Pokud starý odkaz pořád leží v šabloně, je to dobrý kandidát na okamžitý úklid. Pokud kopírování detailů vzniklo proto, že pravidlo nemá pole pro odkaz na primární záznam, je to ještě důležitější kandidát. Dotaz na výklad pole může počkat, pokud se stal jen jednou a výstup nebyl špatný.
+
+Codyho komentář: údržba není soutěž o nejchytřejší řešení. Je to disciplína v tom, že opravíte věc, která bude zítra nejspíš zase otravovat. Méně elegance, více klidu v provozu. Ano, zní to nudně. Přesně proto to funguje.
+
+### 2. Napište udržovací větu
+
+Než začnete upravovat text, šablonu nebo proces, napište jednu větu:
+
+```text
+Upravíme [konkrétní místo] tak, aby při [situace použití] nevznikalo [opakované tření nebo riziko] a výstup zůstal [požadovaný stav].
+```
+
+Příklad:
+
+```text
+Upravíme šablonu kontroly formuláře tak, aby při zápisu kontextu nevznikaly kopie zákaznických detailů a výstup obsahoval jen stav, odpovědnou roli a odkaz na primární záznam.
+```
+
+Udržovací věta chrání rozsah. Jakmile se během práce objeví nápad přepsat onboarding, rozšířit analytiku nebo změnit celý workflow, vraťte se k větě. Pokud nápad nepomáhá právě tomuto problému, patří jinam. Ne nutně do koše, ale mimo aktuální změnu.
+
+### 3. Zasáhněte nejbližší pracovní místo
+
+Udržovací změna má být co nejblíž okamžiku, kdy člověk pravidlo používá. Pokud problém vzniká ve formulářové šabloně, neopravujte primárně dlouhý metodický dokument. Pokud problém vzniká v komentáři úkolu, nepřidávejte další stránku do wiki. Pokud se lidé vracejí ke starému odkazu, odstraňte nebo přesměrujte starý odkaz.
+
+Typická pracovní místa:
+
+- pole ve formuláři,
+- název šablony,
+- výchozí text v úkolu,
+- krátký příklad u rozhodovacího pole,
+- odkaz v kanonickém indexu,
+- stav v nástroji pro práci,
+- předávací checklist,
+- retenční poznámka u artefaktu.
+
+Příklad: pravidlo říká "nepište citlivé detaily do úkolu, použijte odkaz na záznam". Lidé to stejně dělají, protože v šabloně je volné pole "kontext". Nejbližší změna není školení o privacy-first přístupu. Nejbližší změna je přejmenovat pole na "odkaz na primární záznam" a přidat příklad: "CRM-123, ne text požadavku".
+
+### 4. Rozlište typ udržovací změny
+
+Většina udržovacích změn spadá do jedné ze čtyř kategorií.
+
+Textová změna:
+
+```text
+Zkrátit, zpřesnit nebo přepsat instrukci tak, aby šla použít bez výkladu.
+```
+
+Polohová změna:
+
+```text
+Přesunout pravidlo, příklad nebo odkaz blíž k místu práce.
+```
+
+Úklidová změna:
+
+```text
+Odstranit staré odkazy, duplicitní šablony, dočasné poznámky nebo neplatné varianty.
+```
+
+Datová změna:
+
+```text
+Zmenšit, přesměrovat nebo omezit datovou stopu, kterou pravidlo vytváří.
+```
+
+Nesnažte se v jedné iteraci udělat všechny čtyři typy najednou. Pokud je potřeba text i úklid, vyberte primární problém a ostatní věci udělejte jen tehdy, když jsou přímo nutné pro dokončení. Udržovací změna má být malá, ale hotová. Poloviční změny jsou horší než žádné, protože vytvářejí další variantu reality.
+
+### 5. Ohlídejte privacy-first dopad před i po změně
+
+Udržovací změna může nechtěně zhoršit práci s daty. Tým například přidá nové pole "poznámka pro kontext", aby lidé méně tápali. Jenže do něj začnou kopírovat osobní údaje, zákaznické detaily nebo interní rozhodnutí, která mají zůstat v primárním systému. Tím se provoz na první pohled zjednoduší a dlouhodobě prodraží.
+
+Před změnou si proto odpovězte:
+
+- Jaká data se kvůli této změně budou nově zapisovat?
+- Stačí místo detailu stav, typ problému, role nebo odkaz?
+- Kde je primární zdroj pravdy?
+- Kdo nový výstup uvidí?
+- Jak dlouho má výstup existovat?
+- Co můžeme po změně odstranit?
+
+Po změně zkontrolujte:
+
+- nevzniklo nové volné pole bez jasného účelu,
+- stará kopie nebo šablona je opravdu pryč,
+- lidé vědí, kam patří detail a kam jen odkaz,
+- changelog neobsahuje citlivé konkrétnosti,
+- oprava nevyžaduje širší přístupy než původní pravidlo.
+
+Privacy-first údržba často znamená, že místo přidání dalšího textového pole přidáte lepší odkaz, stav nebo výběr z možností. Méně prostoru pro improvizaci může být pro tým osvobozující, pokud tím zároveň snížíte riziko a ruční dohled.
+
+### 6. Udělejte změnu a zavřete starou cestu
+
+Udržovací změna není hotová ve chvíli, kdy upravíte nové místo. Je hotová ve chvíli, kdy stará cesta přestane být lákavá.
+
+Zkontrolujte:
+
+- starý odkaz je odstraněný, přesměrovaný nebo označený jako archiv,
+- duplicitní šablona má jasný stav,
+- název nové varianty je jednoznačný,
+- kanonický index vede na správné místo,
+- tým nevidí dvě podobné instrukce vedle sebe,
+- v changelogu je krátce řečeno, co se změnilo a proč.
+
+Příklad changelogu:
+
+```text
+2026-05-15: V šabloně kontroly formuláře nahrazeno pole "kontext" polem "odkaz na primární záznam", aby se nekopírovaly zákaznické detaily mimo CRM. Starý příklad přesunut do archivu.
+```
+
+Changelog nemusí být dlouhý. Má ale říct dost na to, aby člověk za měsíc pochopil důvod změny bez archeologického výzkumu. Malá poznámka dnes ušetří velké hádání později.
+
+### 7. Připravte jedno ověření při příštím použití
+
+Každá udržovací změna potřebuje malé ověření. Ne velký audit. Jedno příští použití, kde zkontrolujete, zda se problém neopakuje.
+
+Ověřovací věta:
+
+```text
+Při příštím použití zkontrolujeme, zda [konkrétní změna] zabránila [původní problém] bez [nové riziko].
+```
+
+Příklad:
+
+```text
+Při příští kontrole formuláře zkontrolujeme, zda pole "odkaz na primární záznam" zabránilo kopírování zákaznických detailů bez toho, aby lidé ztráceli kontext pro rozhodnutí.
+```
+
+Pokud ověření dopadne dobře, změnu nechte splynout s běžným pravidlem. Pokud dopadne špatně, neznamená to automaticky další velkou revizi. Nejdřív zjistěte, zda selhala změna, umístění změny, komunikace změny, nebo původní předpoklad.
+
+### Šablona udržovací změny pravidla
+
+```text
+Původní pravidlo:
+Kanonické místo:
+Nález z kontroly:
+
+Cena opakování:
+Čas:
+Kvalita rozhodnutí:
+Datová stopa:
+Samostatnost týmu:
+
+Udržovací věta:
+
+Typ změny:
+Textová / polohová / úklidová / datová
+
+Místo zásahu:
+Co se přesně změní:
+Co se ruší nebo zavírá:
+
+Privacy-first kontrola:
+Nová data:
+Primární zdroj pravdy:
+Přístupy:
+Retence:
+Co se maže nebo archivuje:
+
+Changelog:
+Vlastník:
+Termín:
+
+Ověření při příštím použití:
+Co má být jiné:
+Jak poznáme, že se problém nevrací:
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst nálezy z kontroly běžného pravidla.
+2. Čtyři minuty: vybrat jeden nález podle opakované ceny.
+3. Tři minuty: napsat udržovací větu.
+4. Tři minuty: určit nejbližší pracovní místo zásahu.
+5. Tři minuty: udělat privacy-first kontrolu dopadu.
+6. Dvě minuty: rozhodnout, co se zavře nebo odstraní.
+7. Dvě minuty: zapsat ověření při příštím použití.
+
+Workshop končí konkrétní změnou, ne seznamem možností. Pokud tým nedokáže vybrat jeden nález, vezměte ten, který nejvíc zvětšuje datovou stopu nebo nutí zkušenějšího člověka k opakované ruční opravě.
+
+### Checklist kapitoly
+
+- Vybrali jste jeden nález podle ceny opakování?
+- Napsali jste udržovací větu v jedné větě?
+- Je změna blízko místu, kde problém vzniká?
+- Rozlišili jste, zda jde o textovou, polohovou, úklidovou nebo datovou změnu?
+- Neopravujete celý systém kvůli malému tření?
+- Ověřili jste, zda změna nepřidává zbytečná data?
+- Stačí stav, role nebo odkaz místo kopírování detailu?
+- Zavřeli jste starý odkaz, šablonu nebo volné pole?
+- Má změna krátký changelog?
+- Je jasné, kdo změnu dokončí?
+- Má příští použití konkrétní ověřovací otázku?
+- Vznikla jedna hotová úprava, ne nový seznam práce?
+
+Převod kontroly do udržovací změny drží pravidla živá bez toho, aby z každé drobnosti vznikal projekt. Nejlepší údržba je často skoro neviditelná: stará cesta zmizí, správná cesta je blíž práci, datová stopa je menší a další člověk už nemusí řešit stejnou otázku znovu.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HG o převodu kontroly běžného pravidla do jedné udržovací změny: výběr nálezu podle opakované ceny, udržovací věta, nejbližší pracovní místo, typy textových/polohových/úklidových/datových změn, privacy-first dopad, uzavření staré cesty, ověření při příštím použití, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HF o kontrole běžného pravidla po několika použitích: pracovní slib pravidla, výběr vzorku skutečných použití, signály nalezení/rozhodnutí/dokončení, návrat starého chování, privacy-first kontrola opakované datové stopy, stav pravidla, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HE o stabilizaci ověřené lehké revize do běžného pravidla: potvrzení stabilizovaného výsledku, přepis kanonického místa, uzavření revizních artefaktů, privacy-first úklid, pracovní předání, lehký kontrolní háček, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HD o ověření lehké revize pravidla po příštím použití: návrat k revizní větě, výběr prvního skutečného použití, sledování průchodu práce, čtyři stavy výsledku, privacy-first kontrola datové stopy, rozhodovací věta, šablona, mini workshop a checklist.
