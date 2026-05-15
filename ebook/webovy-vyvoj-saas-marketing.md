@@ -63979,8 +63979,289 @@ Workshop má skončit rozhodnutím, ne náladou. Pokud někdo řekne "asi dobrý
 
 Ověření malé korekce je malý provozní test reality. Ukáže, jestli změna opravdu pomohla v místě, kde měla, nebo jestli jen vypadala dobře při psaní. Když se tento krok dělá poctivě, tým postupně přestane hromadit "opravené" věci, které nikdo nikdy neviděl fungovat. A to je jedna z nejlevnějších forem kvality: nepovažovat hotové za hotové dřív, než to prošlo normální prací.
 
+## Příloha HQ: Stabilizace ověřené malé korekce do běžného pravidla
+
+Ověřená malá korekce je dobrý signál, ale ještě není stabilní pravidlo. Po prvním normálním použití víme, že změna zafungovala v konkrétní situaci. Teď ji musíme uložit tak, aby fungovala i bez autora změny, bez zvláštního připomínání a bez dočasných poznámek rozházených po chatu, úkolech nebo sdílených dokumentech.
+
+Tato příloha navazuje na Přílohu HP. Tam jsme ověřili, jestli korekce zabrala. Tady rozhodneme, co se s ní stane dál: zůstane jako drobná oprava, přejde do běžného pravidla, promítne se do šablony, nebo se uzavře jako jednorázový úklid. Cílem není vytvářet další standard pro každé přejmenování. Cílem je nenechat funkční korekci zmizet v historii.
+
+Praktická otázka zní:
+
+```text
+Co musí z ověřené malé korekce zůstat v běžné práci, aby se staré tření nevrátilo a nevznikla nová zbytečná datová stopa?
+```
+
+Pokud odpověď zní "nic, šlo jen o jednorázové zavření starého odkazu", je to v pořádku. Stabilizace neznamená vždy nové pravidlo. Znamená vědomě rozhodnout, co má přežít.
+
+### 1. Začněte výsledkem ověření
+
+Než začnete přepisovat dokumentaci, vraťte se k rozhodovací větě z Přílohy HP.
+
+```text
+Po prvním použití [stav]: korekce [co změnila] vedla k [výsledek], bez [staré tření/datové riziko]; další krok je [ponechat/doladit/vrátit do kontroly/založit samostatný podnět].
+```
+
+Z této věty vyberte dvě části:
+
+- co se skutečně zlepšilo,
+- co má zůstat viditelné pro další použití.
+
+Příklad:
+
+```text
+Korekce zabrala: nový rozcestník dovedl člověka ke kanonické šabloně bez starého odkazu.
+
+Co má zůstat:
+V onboardingovém rozcestníku má být jen kanonická šablona, stará šablona má být archivovaná a opakovaný úkol má používat stejný odkaz.
+```
+
+To je dost konkrétní pro stabilizaci. Není potřeba z toho dělat manifest o dokumentační kultuře, i když by se to krásně tvářilo na interním meetingu.
+
+### 2. Rozhodněte typ stabilizace
+
+Ověřená korekce může skončit pěti způsoby:
+
+```text
+Jednorázově uzavřít:
+Korekce odstranila starý odkaz, kopii nebo chybu a není potřeba pravidlo.
+
+Promítnout do šablony:
+Korekce mění místo, kde práce vzniká.
+
+Promítnout do checklistu:
+Korekce přidává nebo zpřesňuje kontrolní otázku před dokončením.
+
+Promítnout do kanonického pravidla:
+Korekce mění opakovaný způsob práce.
+
+Založit samostatný podnět:
+Ověření ukázalo sousední problém, který nepatří do této korekce.
+```
+
+Příklad rozhodnutí:
+
+| Výsledek ověření | Typ stabilizace | Co udělat |
+| --- | --- | --- |
+| Starý odkaz byl odstraněn a už se nepoužil | Jednorázově uzavřít | Zapsat do changelogu, archivní dokument označit jako uzavřený |
+| Lidé našli správnou šablonu z rozcestníku | Promítnout do šablony | Udržet odkaz v rozcestníku a opakovaném úkolu |
+| Výstup neobsahoval kopii zákaznických dat | Promítnout do checklistu | Přidat otázku "obsahuje výstup jen stav a odkaz?" |
+| Změnila se definice hotového výstupu | Promítnout do pravidla | Upravit kanonické pravidlo a příklad |
+| Objevil se problém v automatizaci | Samostatný podnět | Nechat korekci uzavřenou, založit nový úkol pro automatizaci |
+
+Nejhorší varianta je promítnout všechno všude. Tím se malá korekce nafoukne do systému, který bude příští měsíc sám potřebovat korekci. Krásný kruh, úplně zbytečný.
+
+### 3. Upravte nejbližší pracovní místo
+
+Stabilizace má začít tam, kde se práce spouští. Ne tam, kde se dokumentace nejlépe čte.
+
+Nejbližší pracovní místo může být:
+
+- opakovaný úkol,
+- onboardingový rozcestník,
+- šablona výstupu,
+- checklist před publikací,
+- formulář,
+- automaticky generovaný popis úkolu,
+- kanonický index,
+- provozní karta služby.
+
+Příklad:
+
+```text
+Ověřená korekce:
+Lidé mají v kontrole formulářů používat odkaz na primární CRM záznam místo screenshotu.
+
+Nejbližší pracovní místo:
+Šablona kontrolního výstupu.
+
+Stabilizace:
+Pole "screenshot" se ruší. Zůstává pole "odkaz na primární záznam" a "stav".
+```
+
+Když upravíte jen vzdálený standard, ale šablona dál vybízí ke screenshotu, systém bude dál vyrábět screenshoty. Lidé obvykle následují formulář před filozofií. Upřímně, kdo by jim to vyčítal.
+
+### 4. Zkraťte příběh na pracovní pravidlo
+
+Korekce má často zajímavou historii: co se pokazilo, kdo si toho všiml, proč to bylo matoucí, jak proběhlo ověření. Do běžného pravidla ale nepatří celá historie. Patří tam jen pracovní důvod a aktuální postup.
+
+Slabý zápis:
+
+```text
+Po problému z květnové kontroly, kdy se ukázalo, že starý odkaz z onboardingu vedl některé lidi na původní šablonu, jsme po ověření u nové operations role zjistili, že nový rozcestník funguje lépe.
+```
+
+Silnější pracovní pravidlo:
+
+```text
+Onboardingový rozcestník odkazuje pouze na kanonickou šablonu kontroly formulářů. Archivní šablony nesmí být uvedené jako pracovní cesta.
+```
+
+Historie může zůstat v changelogu. Pravidlo má pomáhat v práci, ne nutit nového člověka číst archeologii.
+
+### 5. Uklidte dočasné důkazy a staré varianty
+
+Stabilizace je dobrý okamžik na úklid. První ověření často vyrobí poznámky, screenshoty, dočasné odkazy, pracovní kopie nebo komentáře v úkolech. Pokud už splnily účel, zavřete je.
+
+Zkontrolujte:
+
+- dočasné ověřovací poznámky,
+- screenshoty a exporty,
+- staré šablony,
+- staré odkazy v úkolech,
+- archivní dokumenty,
+- osobní kopie pracovních materiálů,
+- komentáře s citlivými detaily,
+- přístupy k ověřovacím podkladům.
+
+Privacy-first pravidlo:
+
+```text
+Stabilizace nesmí zvětšit datovou stopu korekce. Co už neslouží rozhodnutí, učení, auditu nebo zákonné povinnosti, má dostat retenci, anonymizaci nebo konec.
+```
+
+Praktický příklad:
+
+```text
+Dočasná poznámka z ověření obsahovala jen stav průchodu a datum. Ponecháváme ji v changelogu.
+
+Screenshot staré chyby obsahoval zákaznický detail. Po stabilizaci pravidla se maže, protože už není potřeba jako důkaz.
+```
+
+Tohle je přesně moment, kdy se privacy-first hodnota projeví v provozu. Ne ve velkém prohlášení, ale v tom, že zbytečná kopie prostě nepřežije.
+
+### 6. Dejte změně lehký kontrolní háček
+
+Stabilizovaná korekce nepotřebuje další velký audit. Potřebuje jen malý háček, který ověří, že se starý problém nevrací.
+
+Příklady:
+
+- při dalším onboardingu zkontrolovat, že rozcestník vede jen na kanonickou šablonu,
+- při příští měsíční kontrole ověřit jeden výstup bez screenshotu,
+- po třech automaticky založených úkolech ověřit, že popis používá nový text,
+- při dalším publikačním cyklu zkontrolovat, že checklist neobsahuje staré pole,
+- za měsíc projít, zda archivní šablona není znovu odkazovaná.
+
+Háček napište krátce:
+
+```text
+Kontrolní háček:
+Při dalším měsíčním cyklu zkontrolovat jeden výstup a potvrdit, že obsahuje stav a odkaz na primární záznam, ne kopii obsahu.
+```
+
+Když háček nic nenajde, ruší se nebo přechází do běžného rytmu. Nenechávejte ho viset navždy. I malé háčky se umí časem změnit v síť, do které se chytá produktivita.
+
+### 7. Zapište stabilizaci do changelogu
+
+Changelog má zachytit změnu tak, aby budoucí člověk pochopil, proč pravidlo vypadá právě takto. Bez citlivých detailů, bez románu.
+
+Šablona:
+
+```text
+Datum:
+Korekce:
+Výsledek ověření:
+Stabilizace:
+Kde je zdroj pravdy:
+Co bylo archivováno nebo smazáno:
+Privacy-first úklid:
+Kontrolní háček:
+```
+
+Příklad:
+
+```text
+Datum:
+2026-05-15
+
+Korekce:
+Onboardingový rozcestník nově odkazuje jen na kanonickou šablonu kontroly formulářů.
+
+Výsledek ověření:
+Nový člověk použil správnou šablonu bez dotazu a bez starého odkazu.
+
+Stabilizace:
+Opakovaný úkol i onboarding používají stejný odkaz. Archivní šablona je označená jako neaktivní.
+
+Privacy-first úklid:
+Dočasný screenshot se zákaznickým detailem smazán, v changelogu zůstává jen stavový popis.
+
+Kontrolní háček:
+Ověřit při dalším onboardingu, že se stará cesta neobjevila.
+```
+
+To je dost informací pro budoucí údržbu a pořád málo na to, aby changelog začal fungovat jako skládka interních detailů.
+
+### Stabilizační karta malé korekce
+
+```text
+Malá korekce:
+
+Původní korekční věta:
+
+Výsledek ověření:
+Zabralo / zabralo s drobným třením / nezabralo / ukázalo jiný problém
+
+Co má zůstat v běžné práci:
+
+Typ stabilizace:
+Jednorázově uzavřít / šablona / checklist / kanonické pravidlo / samostatný podnět
+
+Nejbližší pracovní místo:
+
+Konkrétní úprava:
+
+Co se nepřenáší:
+
+Staré varianty:
+Smazat / archivovat / přesměrovat / ponechat s důvodem
+
+Privacy-first úklid:
+Kopie dat:
+Screenshoty / exporty:
+Přístupy:
+Retence:
+
+Kontrolní háček:
+Kdy:
+Kdo:
+Jaký signál:
+
+Changelog:
+```
+
+### Mini workshop na 20 minut
+
+1. Dvě minuty: přečíst rozhodovací větu z ověření korekce.
+2. Tři minuty: rozhodnout typ stabilizace.
+3. Tři minuty: vybrat nejbližší pracovní místo.
+4. Čtyři minuty: přepsat příběh korekce do krátkého pracovního pravidla nebo šablony.
+5. Tři minuty: uklidit staré varianty a dočasné důkazy.
+6. Tři minuty: udělat privacy-first kontrolu datové stopy.
+7. Dvě minuty: zapsat changelog a kontrolní háček.
+
+Výstupem nemá být "budeme to sledovat". Výstupem má být upravené pracovní místo, zavřená stará cesta a jasný záznam. Sledování bez změny je jen luxusní forma čekání.
+
+### Checklist kapitoly
+
+- Vycházíte z výsledku prvního normálního použití?
+- Je jasné, co se skutečně zlepšilo?
+- Rozhodli jste, zda korekci uzavřít, promítnout do šablony, checklistu, pravidla nebo oddělit jako nový podnět?
+- Upravili jste nejbližší pracovní místo, ne jen vzdálený dokument?
+- Přepsali jste historii korekce do krátkého pracovního pravidla?
+- Nezůstala stará šablona, starý odkaz nebo starý popis jako aktivní cesta?
+- Uklidili jste dočasné poznámky, screenshoty, exporty a pracovní kopie?
+- Nevznikla stabilizací nová zbytečná datová stopa?
+- Jsou přístupy k podkladům přiměřené?
+- Má stabilizace lehký kontrolní háček?
+- Je jasné, kdy se háček zruší nebo převede do běžného rytmu?
+- Je změna zapsaná v changelogu bez citlivých detailů?
+- Je zřejmé, co se už nebude řešit v rámci této korekce?
+
+Stabilizace ověřené malé korekce je poslední malý krok, který brání návratu starého tření. Když ho přeskočíte, korekce může fungovat jednou a pak se ztratit. Když ho nafouknete, z drobné opravy vznikne další vrstva systému. Správná cesta je nudnější a lepší: uložit změnu tam, kde se pracuje, uklidit stopy, nastavit lehký háček a jít dál.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HQ o stabilizaci ověřené malé korekce do běžného pravidla: výsledek ověření, typ stabilizace, nejbližší pracovní místo, zkrácení příběhu na pravidlo, úklid starých variant a datové stopy, kontrolní háček, changelog, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HP o ověření malé korekce po prvním normálním použití: návrat ke korekční větě, výběr skutečného průchodu, signály cesta/výstup/cena, kontrola staré cesty, privacy-first kontrola datové stopy, čtyři výsledky ověření, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HO o převodu kontroly stabilizovaného dalšího kroku do malé korekce: výběr jednoho nálezu, korekční věta, typy korekcí, úprava skutečného místa tření, zavření staré možnosti, ověření při nejbližší normální práci, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HN o kontrole stabilizovaného dalšího kroku po několika cyklech: kontrolní okno, reálné průchody, čtyři stavy stabilizace, cena změny, privacy-first kontrola opakování, jeden další pohyb, úprava nejbližšího pracovního místa, šablona, mini workshop a checklist.
