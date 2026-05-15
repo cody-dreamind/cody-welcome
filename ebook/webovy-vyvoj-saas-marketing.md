@@ -62623,8 +62623,284 @@ Držte workshop u jedné změny. Pokud se objeví deset nápadů, vyberte jeden,
 
 Převod závěru do dalšího kroku je nenápadná disciplína. Neprodukuje velké prezentace, ale drží provoz v pohybu. Tým se podívá na skutečnou práci, vybere jeden stav, opraví nejbližší místo, uklidí datovou stopu a zapíše, kdy se pozná výsledek. Právě tím se z dokumentace stává nástroj místo archivu dobrých úmyslů.
 
+## Příloha HL: Ověření dalšího kroku po prvním použití
+
+Další krok po kontrole prvního normálního cyklu není hotový ve chvíli, kdy je zapsaný v changelogu. Hotový je až tehdy, když ho někdo použije v běžné práci a systém se zachová lépe než předtím. Jinak má tým jen pěkně pojmenovaný záměr. A záměr je fajn věc, ale faktury, zákaznické výstupy ani méně chaotický provoz sám od sebe nevyrobí. Drzé, já vím.
+
+Tato příloha navazuje na Přílohu HK. Pomáhá ověřit, zda vybraný další krok opravdu snížil tření, riziko nebo nejasnost pravidla. Nejde o velký audit. Jde o krátkou kontrolu prvního reálného použití po změně.
+
+Praktická otázka zní:
+
+```text
+Potvrdilo první použití dalšího kroku, že změna pomohla práci, nebo jen přesunula problém na jiné místo?
+```
+
+Tato otázka je nepříjemně užitečná. Nutí tým sledovat výsledek v práci, ne pocit po úpravě dokumentu. Pokud se problém jen přesunul, je lepší to zjistit hned než po třech měsících, kdy už bude nová cesta působit jako tradice.
+
+### 1. Vraťte se k původnímu dalšímu kroku
+
+Nezačínejte novou debatou o celém pravidle. Otevřete kartu z Přílohy HK a přečtěte tři věci:
+
+- co byl jeden další krok,
+- kde se měl projevit,
+- podle čeho se mělo poznat, že smyčka skončila.
+
+Krátký návrat:
+
+```text
+Další krok:
+Přesměrovat opakovaný úkol na kanonickou šablonu.
+
+Očekávaný výsledek:
+Při další měsíční kontrole člověk otevře správnou šablonu bez hledání a bez starého odkazu.
+
+Kontrolní háček:
+Ověřit při prvním běžném měsíčním cyklu po změně.
+```
+
+Pokud původní další krok takhle zapsaný není, nejdřív ho dopište. Bez toho budete ověřovat mlhu. A mlha se špatně commitne, i když se na ni dá napsat působivý meeting note.
+
+### 2. Vyberte první normální použití
+
+Ověření má proběhnout na normálním použití, ne na ukázkovém průchodu pro autora změny. Ideální kandidát je situace, která by nastala i bez kontroly:
+
+- další zákaznický výstup,
+- další onboarding,
+- další měsíční kontrola,
+- další interní předání,
+- další použití šablony,
+- další automaticky založený úkol,
+- další publikace obsahu,
+- další provozní review.
+
+Neověřujte změnu na člověku, který ji napsal. Ten zná kontext, pamatuje si důvod a snadno doplní chybějící kusy hlavou. Potřebujete vidět, jestli změna funguje i pro někoho, kdo jen dělá práci.
+
+Příklad:
+
+```text
+Špatné ověření:
+Autor změny otevřel novou šablonu a potvrdil, že vypadá správně.
+
+Dobré ověření:
+Člověk odpovědný za měsíční kontrolu formulářů spustil běžný úkol, klikl na odkaz v úkolu, použil šablonu a odevzdal výstup bez dodatečné navigace.
+```
+
+Rozdíl je zásadní. První ověřuje existenci souboru. Druhé ověřuje provozní cestu.
+
+### 3. Sledujte tři signály: cesta, výstup, datová stopa
+
+Ověření dalšího kroku držte jednoduché. Stačí tři signály.
+
+```text
+Cesta:
+Našel člověk správné místo bez vysvětlení, starého odkazu nebo dotazu v chatu?
+
+Výstup:
+Vznikl výstup v kvalitě, kterou pravidlo slibovalo?
+
+Datová stopa:
+Nevznikly nové zbytečné kopie, screenshoty, exporty nebo přístupy?
+```
+
+Tyto signály pokrývají většinu reálných problémů. Změna může být obsahově správná, ale schovaná. Může být dobře umístěná, ale vést ke slabému výstupu. Nebo může fungovat pracovně, ale vyrábět zbytečnou datovou stopu. Privacy-first provoz neznamená, že se práce nesmí měřit. Znamená, že se měří přesně to, co je potřeba, a nevyrábí se k tomu vedlejší skládka dat.
+
+Krátká pozorovací karta:
+
+```text
+Použití:
+Kdo:
+Kdy:
+Pracovní situace:
+
+Cesta:
+Našel správné místo sám:
+Kde se zastavil:
+Použil starou cestu:
+
+Výstup:
+Výstup vznikl:
+Co chybělo:
+Co bylo lepší než minule:
+
+Datová stopa:
+Vznikly kopie:
+Vznikly nové přístupy:
+Co se uklidilo:
+```
+
+Kartu pište věcně. Nepotřebujete hodnotit člověka. Hodnotíte systém, který mu měl pomoci.
+
+### 4. Rozlište čtyři výsledky ověření
+
+Po prvním použití obvykle vyjde jeden ze čtyř stavů.
+
+```text
+Potvrzeno:
+Změna pomohla, výstup vznikl a datová stopa je čistší nebo přiměřená.
+
+Potvrzeno s drobným třením:
+Změna pomohla, ale jedna věta, odkaz nebo příklad ještě brzdí práci.
+
+Nepotvrzeno:
+Změna neřeší původní problém nebo ho přesunula jinam.
+
+Zastavit:
+Změna vytvořila nové riziko pro zákazníka, bezpečnost, data nebo důvěru.
+```
+
+Rozhodovací tabulka:
+
+| Signál z použití | Stav | Další reakce |
+| --- | --- | --- |
+| Člověk našel správné místo, výstup sedí, nevznikly kopie | Potvrzeno | Zapsat uzavření smyčky |
+| Správné místo našel, ale jedna formulace mátla | Potvrzeno s drobným třením | Opravit jednu větu a zapsat mini změnu |
+| Použil opět starou cestu, protože nový odkaz není v úkolu | Nepotvrzeno | Vrátit se k opravě trasy |
+| Šablona nově vyžaduje kopii zákaznického obsahu mimo zdroj pravdy | Zastavit | Odstranit riziko před dalším použitím |
+
+Codyho komentář: stav "potvrzeno s drobným třením" je past. Svádí k tomu otevřít další kolečko zlepšování. Často ale stačí opravit jednu větu a jít dál. Provoz nepotřebuje dramatický oblouk pokaždé, když někdo zakopne o špatně pojmenovaný odkaz.
+
+### 5. Uzavřete smyčku krátkým záznamem
+
+Když se další krok potvrdí, zapište uzavření. Changelog pak neukazuje jen změny, ale i to, které změny se v práci ověřily.
+
+Dobré uzavření:
+
+```text
+2026-05-15: Ověřeno první použití opravené trasy kontroly formulářů. Měsíční úkol vedl na kanonickou šablonu, výstup vznikl bez starého odkazu a bez nových kopií zákaznických odpovědí. Smyčka uzavřena.
+```
+
+Pokud se objevilo drobné tření:
+
+```text
+2026-05-15: Ověřeno první použití opravené trasy kontroly formulářů. Výstup vznikl, ale formulace "stav odpovědi" byla nejasná. V šabloně doplněn krátký příklad, bez změny procesu. Ověřit při dalším běžném cyklu jen průchod této věty.
+```
+
+Záznam má být krátký, ale konkrétní. Za měsíc musí být jasné, co se ověřilo, co se stalo a zda je smyčka zavřená.
+
+### 6. U privacy-first nálezů jednejte hned
+
+Pokud první použití ukáže zbytečnou datovou stopu, nečekejte na pravidelnou revizi. Snižte množství dat hned:
+
+- smažte dočasné exporty, které už nejsou potřeba,
+- nahraďte screenshoty odkazem na primární záznam,
+- odeberte přístup lidem, kteří ho pro další práci nepotřebují,
+- upravte šablonu tak, aby žádala stav, ne kopii obsahu,
+- anonymizujte příklad, pokud má zůstat v dokumentaci,
+- zapište retenční pravidlo pro opakované výstupy.
+
+Praktický příklad:
+
+```text
+Nález:
+Nový kontrolní výstup obsahuje kopii zákaznické odpovědi.
+
+Okamžitá oprava:
+Kopie smazána, výstup nově obsahuje jen odkaz na primární záznam a stav vyřízení.
+
+Změna šablony:
+Pole "vložit odpověď" nahrazeno polem "odkaz na záznam" a "stav".
+
+Kontrola:
+Při dalším použití ověřit, že nevzniká kopie obsahu.
+```
+
+Tohle je přesně ten typ malé věci, která odlišuje privacy-first provoz od privacy-first plakátu na webu. Hodnota není v tom, že o soukromí hezky mluvíte. Hodnota je v tom, že zbytečná data nevzniknou, nebo zmizí rychle.
+
+### 7. Rozhodněte, zda se pokračuje, nebo končí
+
+Na konci ověření napište jednu větu:
+
+```text
+Po prvním použití [stav], protože [důkaz]. Další akce je [nic / drobná oprava / návrat k trase / zastavení], vlastníkem je [role] a další kontrola [není potřeba / proběhne kdy].
+```
+
+Příklady:
+
+```text
+Po prvním použití je změna potvrzená, protože měsíční kontrola proběhla přes kanonickou šablonu a nevznikly nové kopie dat. Další akce není potřeba, smyčka je uzavřená.
+```
+
+```text
+Po prvním použití je změna potvrzená s drobným třením, protože výstup vznikl správně, ale pojem "stav odpovědi" byl nejasný. Další akce je doplnit příklad do šablony, vlastníkem je operations lead a kontrola proběhne při dalším měsíčním cyklu.
+```
+
+```text
+Po prvním použití změna není potvrzená, protože opakovaný úkol stále vedl na starou šablonu. Další akce je opravit zdroj odkazu v opakovaném úkolu, vlastníkem je operations lead a kontrola proběhne při příštím spuštění.
+```
+
+Jednověté rozhodnutí brání tomu, aby ověření skončilo jako volná poznámka. Buď smyčku zavřete, nebo ji vědomě posunete o jeden malý krok dál.
+
+### Šablona ověření dalšího kroku
+
+```text
+Původní pravidlo:
+Původní kontrola:
+Další krok z Přílohy HK:
+Kde se měl projevit:
+
+První normální použití:
+Datum:
+Role:
+Pracovní situace:
+
+Cesta:
+Našel člověk správné místo:
+Použil starou cestu:
+Kde vzniklo tření:
+
+Výstup:
+Výstup vznikl:
+Odpovídá slibu pravidla:
+Co chybělo:
+
+Datová stopa:
+Vznikly kopie:
+Vznikly nové přístupy:
+Co se uklidilo:
+
+Stav ověření:
+Potvrzeno / potvrzeno s drobným třením / nepotvrzeno / zastavit
+
+Rozhodovací věta:
+
+Changelog:
+
+Další kontrola:
+Není potřeba / při příštím použití / po odstranění rizika
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: přečíst původní další krok a kontrolní háček.
+2. Tři minuty: popsat první normální použití.
+3. Tři minuty: projít cestu, výstup a datovou stopu.
+4. Dvě minuty: vybrat jeden ze čtyř stavů ověření.
+5. Dvě minuty: rozhodnout okamžitý privacy-first úklid, pokud je potřeba.
+6. Dvě minuty: napsat rozhodovací větu a changelog.
+7. Jedna minuta: potvrdit, zda smyčka končí, nebo má další kontrolní háček.
+
+Držte workshop krátký. Pokud se během něj otevře větší téma, zapište ho jako samostatný podnět. Ověření dalšího kroku má zjistit, jestli konkrétní změna zabrala. Nemá suplovat kvartální strategii ani terapii dokumentačního systému.
+
+### Checklist kapitoly
+
+- Vrátili jste se k původnímu dalšímu kroku z Přílohy HK?
+- Je jasné, kde se měl další krok projevit?
+- Ověřovali jste první normální použití, ne demo autora změny?
+- Sledovali jste cestu, výstup a datovou stopu?
+- Našel člověk správné místo bez dodatečného vysvětlování?
+- Vznikl výstup, který odpovídá slibu pravidla?
+- Nevznikly nové zbytečné kopie, screenshoty, exporty nebo přístupy?
+- Rozlišili jste stav potvrzeno, drobné tření, nepotvrzeno nebo zastavit?
+- Pokud vznikl privacy-first nález, uklidili jste ho hned?
+- Má ověření krátkou rozhodovací větu?
+- Je v changelogu jasné, zda je smyčka uzavřená?
+- Pokud smyčka pokračuje, má další krok vlastníka a kontrolní háček?
+
+Ověření dalšího kroku je malý provozní návyk s velkým dopadem. Chrání tým před tím, aby si pletl zapsanou změnu s fungující změnou. První normální použití ukáže pravdu rychle: cesta buď vede, výstup buď pomáhá a datová stopa buď zůstává pod kontrolou, nebo je potřeba udělat ještě jeden malý poctivý krok.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HL o ověření dalšího kroku po prvním použití: návrat k původnímu kroku, výběr prvního normálního použití, sledování cesty, výstupu a datové stopy, čtyři stavy ověření, changelog, privacy-first okamžitý úklid, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HK o převodu závěru z prvního normálního cyklu do dalšího kroku: rozhodovací věta, pět provozních směrů, úprava nejbližšího pracovního místa, changelog, privacy-first úklid, kontrolní háček, uzavření staré cesty, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HJ o kontrole běžného pravidla po prvním normálním cyklu: výběr správného cyklu, sledování práce místo poslušnosti, návrat starého chování, skrytá administrativa, privacy-first kontrola skutečných výstupů, rozhodnutí stavu pravidla, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HI o stabilizaci ověřené udržovací změny do běžného pravidla: potvrzení důkazu, přepis kanonického pravidla, uzavření dočasných artefaktů, odstranění starých cest, privacy-first úklid, pracovní předání, lehký kontrolní háček, stabilizační karta, mini workshop a checklist.
