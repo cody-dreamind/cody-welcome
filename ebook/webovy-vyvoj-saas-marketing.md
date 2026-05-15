@@ -61127,8 +61127,253 @@ Workshop končí tím, že existuje jedno aktuální pravidlo a jedna krátká z
 
 Stabilizace ověřené lehké revize je malá disciplína s velkým dopadem. Chrání tým před tím, aby dobré drobné změny zůstaly jako poznámky na okraji, a zároveň brání tomu, aby každá změna vyrobila nový proces. Nejlepší výsledek je jednoduchý: pravidlo je aktuální, staré cesty jsou zavřené, datová stopa je uklizená a člověk při příští práci používá správnou verzi bez přemýšlení navíc.
 
+## Příloha HF: Kontrola běžného pravidla po několika použitích
+
+Pravidlo, které bylo stabilizované a několikrát použité, už nežije v režimu změny. To je dobře. Jenže právě v běžném provozu se často ukáže jiný typ problému: pravidlo se sice používá, ale pomalu se ohýbá, obchází, bobtná nebo vytváří drobné kopie dat na místech, kde to původně nikdo nechtěl.
+
+Tato příloha řeší kontrolu po několika běžných použitích. Nejde o návrat k velké revizi. Jde o krátký provozní test, zda pravidlo pořád pomáhá rozhodovat, zda se dá použít bez autora změny a zda nevyrábí tiché náklady, které v prvním ověření nebyly vidět.
+
+Praktická otázka zní:
+
+```text
+Drží běžné pravidlo po několika skutečných použitích svůj původní pracovní slib bez zbytečného tření, výjimek a datové stopy?
+```
+
+Dobré pravidlo po několika použitích poznáte podle nudných signálů. Lidé ho najdou tam, kde pracují. Nemusí se doptávat na skrytý výklad. Výstup vypadá podobně napříč lidmi. Staré varianty se nevrací. A když pravidlo není použitelné, chyba je vidět brzy, ne až při měsíčním hašení.
+
+### 1. Vraťte se k pracovnímu slibu pravidla
+
+Kontrolu nezačínejte tím, jestli je pravidlo hezky napsané. Začněte tím, proč existuje.
+
+Použijte jednu větu:
+
+```text
+Toto pravidlo má pomoci [komu] udělat [jaké rozhodnutí nebo výstup] v situaci [kdy] bez [jakého rizika nebo zbytečné práce].
+```
+
+Příklad:
+
+```text
+Toto pravidlo má pomoci člověku, který kontroluje nový formulář, rozhodnout stav formuláře, odpovědnou roli a další krok bez kopírování zákaznických detailů mimo primární systém.
+```
+
+Taková věta je užitečnější než název dokumentu. Název říká, kde jste. Pracovní slib říká, co se má stát. Pokud se při kontrole nedokážete na slibu shodnout, pravidlo možná funguje jen jako zvyk, ne jako záměr.
+
+Codyho komentář: pravidla bez slibu jsou jako tlačítka bez popisku. Někdo tvrdí, že jsou důležitá, někdo je mačká ze zvyku a nikdo nechce být první, kdo se zeptá proč. V provozu je tohle drahé, i když to vypadá nevinně.
+
+### 2. Vyberte malý vzorek skutečných použití
+
+Nekontrolujte všechno. Vyberte tři až pět posledních skutečných použití pravidla. Pokud pravidlo vzniká v nízké frekvenci, vezměte poslední dvě a jednu nejbližší další situaci přidejte jako kontrolní háček.
+
+Do vzorku patří:
+
+- běžné použití bez zvláštního dohledu,
+- použití jiným člověkem než autorem pravidla,
+- situace s mírným časovým tlakem nebo neúplným kontextem,
+- jeden případ, kde vzniklo tření nebo dotaz,
+- pokud existuje, jeden případ od nového člověka v týmu.
+
+Do vzorku nepatří:
+
+- školící demo,
+- ideální příklad připravený autorem pravidla,
+- starý případ před stabilizací pravidla,
+- výstup, který vznikl ručně mimo běžný pracovní tok,
+- extrémní incident, pokud se podle něj nemá měnit normální pravidlo.
+
+Smyslem vzorku není najít viníka. Smyslem je zjistit, co pravidlo dělá v reálném prostředí. První ověření obvykle ukáže, zda změna umí fungovat. Několik použití ukáže, zda umí fungovat opakovaně.
+
+### 3. Sledujte tři provozní signály
+
+U každého použití se dívejte na tři věci: nalezení, rozhodnutí a dokončení.
+
+Nalezení:
+
+- člověk věděl, kde pravidlo hledat,
+- odkaz nebo šablona vedly na aktuální verzi,
+- stará varianta nebyla lákavější než nová,
+- pravidlo bylo v pracovním místě, ne v oddělené dokumentaci daleko od akce.
+
+Rozhodnutí:
+
+- pravidlo pomohlo vybrat další krok,
+- člověk nemusel domýšlet skryté kritérium,
+- výstup byl dost konkrétní pro dalšího člověka,
+- nevznikl paralelní komentář, který pravidlo vysvětluje mimo systém.
+
+Dokončení:
+
+- výstup šel předat dál,
+- nevznikla ruční oprava jen proto, aby věc prošla,
+- nebylo nutné kopírovat data do dalšího místa,
+- výsledek je dohledatelný v primárním pracovním systému.
+
+Příklad: pravidlo pro formulářovou kontrolu říká, že výstupem je stav, odpovědná role a odkaz. Po třech použitích zjistíte, že dva lidé pravidlo našli v šabloně a vytvořili čistý výstup. Třetí člověk ale přidal volnou poznámku s celým textem požadavku, protože nevěděl, kam dát kontext. To není důvod přepsat celý proces. Je to signál, že pravidlo potřebuje jasnější pole "odkaz na primární záznam" nebo příklad bez kopírování detailu.
+
+### 4. Hledejte návrat starého chování
+
+Nejcennější část kontroly je hledání návratu starého chování. Stabilizované pravidlo může vypadat správně, ale tým se kousek po kousku vrací k předchozí práci.
+
+Typické signály:
+
+- lidé si vedou vlastní kopii šablony,
+- staré odkazy pořád kolují v úkolech nebo dokumentech,
+- rozhodnutí se zapisuje do komentářů místo do určeného pole,
+- citlivé detaily se znovu kopírují, protože je to rychlejší,
+- pravidlo se obchází u "malých výjimek", které už nejsou malé,
+- nový člověk dostane ústní vysvětlení místo kanonického místa.
+
+Návrat starého chování nemusí znamenat odpor týmu. Často znamená, že stará cesta je pořád pohodlnější. Pokud je špatný postup rychlejší než správný, lidé si časem vyberou rychlost. Provozní systém má udělat správnou cestu nejjednodušší.
+
+Praktická oprava může být velmi malá:
+
+- odstranit starý odkaz,
+- přejmenovat šablonu,
+- přesunout instrukci blíž k poli, kde se rozhoduje,
+- zkrátit pravidlo na tři kroky,
+- přidat jeden příklad dobrého výstupu,
+- zrušit volné pole, které svádí ke kopírování detailů.
+
+### 5. Udělejte privacy-first kontrolu opakování
+
+Po několika použitích se datová stopa kontroluje lépe než po jednom. Už vidíte vzor, ne jen jednorázovou chybu.
+
+Projďte otázky:
+
+- Vznikají opakovaně kopie osobních, zákaznických nebo interně citlivých údajů?
+- Ukládá pravidlo detail tam, kde by stačil stav, typ problému, role a odkaz?
+- Nepřibyl export, screenshot nebo pracovní poznámka, která nemá retenční pravidlo?
+- Nemá k výstupům přístup širší skupina lidí, než je potřeba?
+- Ví tým, kde je primární zdroj pravdy?
+- Dá se stará datová stopa uklidit bez ztráty pracovního kontextu?
+
+Privacy-first kontrola není brzda zlepšování. Je to způsob, jak zlepšování udržet levné. Každá zbytečná kopie dat je budoucí úklid, budoucí riziko a budoucí otázka "proč to tady vlastně máme". Když ji odstraníte brzy, nikdo ji nemusí řešit později v horším okamžiku.
+
+### 6. Rozhodněte jeden stav pravidla
+
+Po kontrole několika použití vyberte jeden stav:
+
+```text
+1. Pravidlo drží.
+2. Pravidlo drží, ale potřebuje drobný úklid.
+3. Pravidlo je použitelné jen s pomocí.
+4. Pravidlo se vrací do lehké revize.
+```
+
+Pravidlo drží:
+
+```text
+Lidé ho najdou, použijí a výstup odpovídá slibu. Datová stopa zůstává pod kontrolou.
+```
+
+Další krok: nechte pravidlo běžet a vraťte se k němu v běžném revizním rytmu.
+
+Pravidlo drží, ale potřebuje drobný úklid:
+
+```text
+Směr funguje, ale existuje starý odkaz, duplicitní šablona, nejasný příklad nebo dočasný artefakt.
+```
+
+Další krok: uklidit okolí pravidla bez změny principu.
+
+Pravidlo je použitelné jen s pomocí:
+
+```text
+Výstup vzniká, ale lidé se doptávají, autor pravidla doplňuje výklad nebo někdo ručně opravuje výsledek.
+```
+
+Další krok: přesunout instrukci blíž k práci, doplnit příklad nebo zkrátit pravidlo.
+
+Pravidlo se vrací do lehké revize:
+
+```text
+Opakovaně vzniká špatný výstup, větší datová stopa, obcházení nebo zmatek v odpovědnosti.
+```
+
+Další krok: vybrat jeden konkrétní nález a otevřít malou revizi. Ne celý systém.
+
+### Šablona kontroly běžného pravidla
+
+```text
+Název pravidla:
+Kanonické místo:
+Pracovní slib pravidla:
+
+Vzorek použití:
+Použití 1:
+Použití 2:
+Použití 3:
+Volitelně použití 4-5:
+
+Nalezení:
+Kde lidé pravidlo hledali:
+Kde narazili na starý odkaz nebo variantu:
+
+Rozhodnutí:
+Jaký výstup měl vzniknout:
+Jaký výstup skutečně vznikl:
+Kde bylo potřeba dovysvětlení:
+
+Dokončení:
+Šel výstup předat dál:
+Vznikla ruční oprava:
+Vznikla paralelní poznámka:
+
+Návrat starého chování:
+Jaký:
+Proč je stará cesta pořád lákavá:
+
+Privacy-first kontrola:
+Nové kopie dat:
+Zbytečné detaily:
+Přístupy:
+Retence:
+Co uklidit:
+
+Stav pravidla:
+Drží / drobný úklid / použitelné s pomocí / lehká revize
+
+Jedna oprava:
+Vlastník:
+Termín:
+Changelog:
+Další kontrolní háček:
+```
+
+Šablona má zůstat krátká. Pokud při kontrole vznikne potřeba dlouhého popisu, pravděpodobně jste našli větší problém. I tehdy ho převeďte do jednoho dalšího kroku. Provoz se nezlepší tím, že k nejasnému pravidlu přidáte dlouhý nejasný zápis.
+
+### Mini workshop na 25 minut
+
+1. Tři minuty: přečíst pracovní slib pravidla.
+2. Pět minut: projít tři až pět skutečných použití.
+3. Pět minut: vyhodnotit nalezení, rozhodnutí a dokončení.
+4. Čtyři minuty: najít návrat starého chování.
+5. Čtyři minuty: udělat privacy-first kontrolu opakované datové stopy.
+6. Dvě minuty: vybrat stav pravidla.
+7. Dvě minuty: zapsat jednu opravu nebo potvrdit, že pravidlo drží.
+
+Workshop končí jedním stavem a jednou další akcí. Pokud se objeví pět nápadů, vyberte ten, který nejvíc snižuje budoucí tření nebo datovou stopu. Zbytek patří do backlogu, ne do stejné kontroly.
+
+### Checklist kapitoly
+
+- Víte, jaký pracovní slib má pravidlo plnit?
+- Vybrali jste skutečná použití, ne školící příklady?
+- Je ve vzorku někdo jiný než autor pravidla?
+- Zkontrolovali jste, kde lidé pravidlo hledali?
+- Pomohlo pravidlo udělat rozhodnutí bez skrytého výkladu?
+- Šel výstup předat dál bez ruční opravy?
+- Hledali jste návrat starého chování?
+- Odstranili jste staré odkazy, duplicitní šablony nebo volná pole, která svádí k obcházení?
+- Zkontrolovali jste opakovanou datovou stopu?
+- Stačí stav, role a odkaz místo kopírování detailů?
+- Vybrali jste jeden stav pravidla?
+- Má případná oprava vlastníka, termín a changelog?
+
+Kontrola běžného pravidla po několika použitích chrání tým před pomalým rozpadem dobrého rozhodnutí. Nevyžaduje velký audit ani další vrstvu řízení. Stačí vzít pár skutečných průchodů, podívat se, jestli pravidlo pomáhá práci, uklidit návrat starého chování a nenechat datovou stopu růst jen proto, že si jí nikdo nevšiml včas.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HF o kontrole běžného pravidla po několika použitích: pracovní slib pravidla, výběr vzorku skutečných použití, signály nalezení/rozhodnutí/dokončení, návrat starého chování, privacy-first kontrola opakované datové stopy, stav pravidla, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HE o stabilizaci ověřené lehké revize do běžného pravidla: potvrzení stabilizovaného výsledku, přepis kanonického místa, uzavření revizních artefaktů, privacy-first úklid, pracovní předání, lehký kontrolní háček, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HD o ověření lehké revize pravidla po příštím použití: návrat k revizní větě, výběr prvního skutečného použití, sledování průchodu práce, čtyři stavy výsledku, privacy-first kontrola datové stopy, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HC o převodu kontroly stabilizovaného pravidla do lehké revize: výběr jednoho nálezu, revizní věta, nejbližší pracovní místo, typy textové/polohové/datové revize, minimum artefaktů, privacy-first dopad, ověření při příštím použití, šablona, mini workshop a checklist.
