@@ -64553,8 +64553,278 @@ Výstupem workshopu není dlouhý seznam "někdy by se mělo". Výstupem je jede
 
 Kontrola stabilizované malé korekce po prvních běžných cyklech je pojistka proti dvěma opačným chybám. První chyba je zapomenout, že korekce vůbec proběhla, a nechat staré tření pomalu vrátit. Druhá chyba je udělat z každého malého nálezu velkou systémovou změnu. Dobrá kontrola stojí uprostřed: vezme reálné průchody, zkontroluje výstupy, uklidí datovou stopu, rozhodne jeden další stav a nechá systém zase pracovat.
 
+## Příloha HS: Převod kontroly stabilizované malé korekce do udržovacího záznamu
+
+Kontrola z Přílohy HR skončí rozhodnutím. To je dobré, ale nestačí. Rozhodnutí se musí dostat na správné místo: někdy do changelogu, někdy do šablony, někdy do opakovaného úkolu a někdy jen do krátkého záznamu, že kontrolní háček je uzavřený. Pokud tento převod přeskočíte, tým sice "něco zjistil", ale pracovní systém se nezměnil. A pracovní systém má paměť přibližně jako člověk v pátek odpoledne: selektivní, kreativní a občas až moc optimistickou.
+
+Tato příloha navazuje na Přílohu HR. Neřeší další velkou opravu. Řeší poslední praktický krok po kontrole stabilizované malé korekce: zapsat výsledek tak, aby byl dohledatelný, použitelný a nepřidal novou administrativu.
+
+Praktická otázka zní:
+
+```text
+Kam přesně patří výsledek kontroly, aby při příští běžné práci pomohl a nepřekážel?
+```
+
+Nejčastější chyba je uložit kontrolu jako dlouhý poznámkový dokument. Ten vypadá odpovědně, ale obvykle se k němu nikdo nevrátí. Udržovací záznam má být kratší než samotná kontrola a blíž místu, kde práce vzniká.
+
+### 1. Začněte stavem, ne zápisem všeho
+
+Nejdřív vezměte rozhodnutí z Přílohy HR a přepište ho do jedné provozní věty.
+
+```text
+Po kontrole je stav [korekce drží / okolí mate / korekce je částečná / korekce neplatí] a další pracovní krok je [konkrétní akce].
+```
+
+Příklad:
+
+```text
+Po kontrole korekce drží: výstupy používají odkaz na primární CRM záznam místo screenshotu. Další krok je uzavřít kontrolní háček a ponechat měsíční kontrolu formulářů v běžném rytmu.
+```
+
+Jiný příklad:
+
+```text
+Po kontrole okolí mate: pravidlo je správné, ale opakovaný úkol stále odkazuje na starý checklist. Další krok je upravit text úkolu a ověřit příští průchod.
+```
+
+Tato věta je základ udržovacího záznamu. Všechno ostatní je podpůrné. Pokud se přistihnete, že přepisujete celou historii korekce, vraťte se k otázce: co má člověk vědět při příštím použití?
+
+### 2. Rozhodněte domov záznamu podle místa práce
+
+Udržovací záznam nepatří automaticky do nejbližšího dokumentu. Patří tam, kde při příští práci sníží tření.
+
+Možné domovy:
+
+- changelog u pravidla, pokud se korekce jen uzavírá,
+- opakovaný úkol, pokud se problém vracel přes pracovní rytmus,
+- checklist, pokud lidé zapomínali jednu kontrolní otázku,
+- šablona výstupu, pokud chyba vznikala při tvorbě artefaktu,
+- onboarding role, pokud starý postup přežíval u nových lidí,
+- datová mapa, pokud kontrola změnila způsob práce s daty,
+- backlog, pokud výsledek není malá údržba, ale samostatný problém.
+
+Praktické pravidlo:
+
+```text
+Záznam dejte co nejblíž okamžiku, kdy člověk rozhoduje nebo tvoří výstup.
+```
+
+Když se chyba objevila ve výstupu, záznam v interním zápisu z review nepomůže. Upravte šablonu výstupu. Když chyba vznikla tím, že opakovaný úkol vedl na starou cestu, upravte úkol. Když se problém týkal oprávnění, nepište román do checklistu; opravte přístupovou trasu a zapište důvod do technické nebo provozní karty.
+
+### 3. Vyberte typ převodu
+
+Po kontrole existuje několik typických převodů. Vyberte jeden hlavní. Kombinace je možná, ale jen pokud každý zápis má jinou funkci.
+
+```text
+1. Uzavírací záznam:
+Korekce drží a není potřeba další práce.
+
+2. Udržovací úprava:
+Pravidlo drží, ale jedno pracovní místo potřebuje zpřesnit.
+
+3. Návrat do korekce:
+Korekce je částečná nebo neplatí a potřebuje další malý zásah.
+
+4. Samostatný podnět:
+Kontrola odhalila širší problém mimo původní korekci.
+
+5. Zrušení:
+Stabilizace nepomohla nebo je dražší než původní tření.
+```
+
+Příklad rozhodovací tabulky:
+
+| Výsledek kontroly | Typ převodu | Kam zapsat |
+| --- | --- | --- |
+| Nová cesta funguje ve všech průchodech | Uzavírací záznam | Changelog pravidla |
+| Jeden úkol vede na starý odkaz | Udržovací úprava | Opakovaný úkol + changelog |
+| Lidé dál opisují citlivé údaje do poznámky | Návrat do korekce | Korekční karta |
+| Kontrola ukázala chybějící role v CRM | Samostatný podnět | Provozní backlog |
+| Nový postup zdvojnásobil čas bez přínosu | Zrušení | Changelog + náhradní pravidlo |
+
+Toto třídění chrání rozsah. Udržovací záznam nemá být nenápadný vstup do další reorganizace. Má uzavřít nebo přesně posunout jednu věc.
+
+### 4. Zkraťte důkaz na pracovní minimum
+
+Kontrola má důkazy, ale udržovací záznam nepotřebuje všechny. Potřebuje jen tolik, aby později bylo jasné, proč rozhodnutí vzniklo.
+
+Dobré minimum:
+
+```text
+Kontrolovány byly tři běžné průchody. Ve všech výstupech byl použit odkaz na primární záznam, screenshoty se nevrátily. Jeden opakovaný úkol měl starý text, ten byl upraven.
+```
+
+Slabé minimum:
+
+```text
+Vypadá to dobře.
+```
+
+Přestřelený záznam:
+
+```text
+Přiloženo 18 screenshotů, export komentářů, plné přepisy úkolů a osobní poznámky z každého průchodu.
+```
+
+Privacy-first pravidlo je jednoduché: ukládejte rozhodnutí, ne citlivé důkazy. Když potřebujete citovat příklad, anonymizujte ho nebo použijte strukturovaný popis bez osobních údajů. Udržovací záznam má pomoci budoucí práci, ne vytvořit archiv dat, která už nikdo nepotřebuje.
+
+### 5. Upravte pracovní místo dřív než dokumentaci okolo
+
+Pokud kontrola ukázala konkrétní tření, nejdřív opravte místo, kde tření vzniká. Teprve potom aktualizujte doprovodný záznam.
+
+Správné pořadí:
+
+1. Upravit opakovaný úkol, šablonu, odkaz nebo checklist.
+2. Odstranit starou variantu, pokud už nemá hodnotu.
+3. Zapsat krátký changelog.
+4. Nastavit nebo zrušit další kontrolní háček.
+
+Špatné pořadí:
+
+1. Napsat dlouhé review.
+2. Oznámit změnu týmu.
+3. Založit nový checklist.
+4. Zapomenout opravit starý odkaz v úkolu.
+
+Práce se mění v pracovním místě. Dokumentace změnu vysvětluje, ale sama ji nenahradí.
+
+### 6. Uzavřete nebo nastavte další háček
+
+Po převodu musí být jasné, jestli se ke korekci ještě vracíte.
+
+Možnosti:
+
+- `uzavřeno`: korekce drží, žádná zvláštní kontrola není potřeba,
+- `ověřit při příštím použití`: udělali jste malou udržovací úpravu,
+- `vráceno do korekce`: původní zásah nevyřešil problém,
+- `předáno do backlogu`: další práce je mimo rozsah této korekce,
+- `zrušeno`: korekce se nepoužije a starý nebo nový postup má jasnou náhradu.
+
+Příklad:
+
+```text
+Stav: ověřit při příštím použití.
+Důvod: upraven byl text opakovaného úkolu, samotné pravidlo drží.
+Háček: při příští měsíční kontrole ověřit, zda úkol vede na nový checklist.
+```
+
+Tento zápis je malý, ale zabraňuje zmatku. Bez něj se stejná věc za měsíc znovu otevře jako "možná bychom měli ještě něco zkontrolovat". Ano, měli. Ale jen pokud víme co.
+
+### 7. Udělejte privacy-first úklid po kontrole
+
+Kontrola často vytvoří dočasné podklady: poznámky, seznam průchodů, krátké výřezy, odkazy na výstupy. Po převodu rozhodněte, co s nimi.
+
+Zeptejte se:
+
+- Potřebujeme podklad ještě pro rozhodnutí, nebo už rozhodnutí vzniklo?
+- Obsahuje podklad osobní údaje, zákaznická data nebo interní citlivé detaily?
+- Dá se důkaz nahradit anonymizovaným shrnutím?
+- Má podklad jasnou retenci?
+- Nezůstaly kopie ve sdílených poznámkách, komentářích nebo osobních složkách?
+
+Privacy-first uzavírací věta:
+
+```text
+Do changelogu byl uložen jen anonymizovaný závěr. Dočasné kontrolní poznámky bez další hodnoty byly odstraněny / označeny k odstranění do [datum].
+```
+
+Není nutné dělat z každé kontroly právní ceremonii. Stačí nepěstovat malé hromádky dat jen proto, že "se to někdy může hodit". Většinou se to nehodí. Jen to čeká, až někomu přidá riziko.
+
+### Šablona udržovacího záznamu
+
+```text
+Název korekce:
+
+Původní slib:
+
+Výsledek kontroly:
+Korekce drží / okolí mate / korekce je částečná / korekce neplatí
+
+Krátký důkaz:
+
+Typ převodu:
+Uzavírací záznam / udržovací úprava / návrat do korekce / samostatný podnět / zrušení
+
+Upravené pracovní místo:
+
+Zrušená stará cesta:
+
+Privacy-first úklid:
+Co zůstává:
+Co se maže nebo zkracuje:
+Retence:
+
+Další háček:
+Žádný / ověřit při příštím použití / vráceno do korekce / předáno do backlogu
+
+Changelog věta:
+```
+
+### Příklad vyplněného záznamu
+
+```text
+Název korekce:
+Odkaz na CRM záznam místo screenshotu ve výstupech kontroly formulářů
+
+Původní slib:
+Měsíční kontrola formulářů má používat odkaz na primární CRM záznam a nekopírovat zákaznické údaje do screenshotů.
+
+Výsledek kontroly:
+Okolí mate.
+
+Krátký důkaz:
+Ve třech běžných průchodech výstupy už neobsahovaly screenshoty. Jeden opakovaný úkol ale stále odkazoval na starý checklist.
+
+Typ převodu:
+Udržovací úprava.
+
+Upravené pracovní místo:
+Text opakovaného měsíčního úkolu.
+
+Zrušená stará cesta:
+Starý odkaz na archivní checklist odstraněn z úkolu.
+
+Privacy-first úklid:
+Zůstává anonymizovaný závěr v changelogu. Dočasné poznámky z kontroly se mažou po příštím ověření.
+
+Další háček:
+Ověřit při příštím použití.
+
+Changelog věta:
+Po kontrole korekce drží ve výstupech, ale byl upraven opakovaný úkol, který vedl na starý checklist; příští průchod ověří nový odkaz.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst rozhodnutí z kontroly.
+2. Tři minuty: vybrat typ převodu.
+3. Čtyři minuty: určit nejbližší pracovní místo záznamu nebo úpravy.
+4. Čtyři minuty: zkrátit důkaz na pracovní minimum.
+5. Tři minuty: rozhodnout další háček.
+6. Tři minuty: udělat privacy-first úklid dočasných podkladů.
+
+Výstupem workshopu je jeden udržovací záznam a případně jedna hotová úprava pracovního místa. Pokud vznikne delší seznam úkolů, rozdělte ho: jeden patří k této korekci, zbytek do backlogu.
+
+### Checklist kapitoly
+
+- Máte jednovětý stav po kontrole?
+- Je zřejmé, kam výsledek patří při příští práci?
+- Vybrali jste jeden hlavní typ převodu?
+- Je důkaz kratší než původní kontrola?
+- Uložili jste rozhodnutí místo citlivých podkladů?
+- Upravili jste pracovní místo, kde tření skutečně vznikalo?
+- Odstranili jste starý odkaz, šablonu nebo cestu, pokud už nemá hodnotu?
+- Je jasné, zda se kontrolní háček ruší, ponechává nebo vrací do korekce?
+- Má privacy-first úklid konkrétní výsledek?
+- Nezaložili jste kvůli malé korekci zbytečný nový proces?
+- Je changelog věta srozumitelná člověku, který u kontroly nebyl?
+- Dá se podle záznamu za měsíc poznat, proč rozhodnutí vzniklo?
+
+Převod kontroly do udržovacího záznamu je malý krok, ale drží celý systém pohromadě. Bez něj se kontroly mění v dojmy a korekce v historky. S ním má tým krátkou paměť tam, kde ji potřebuje: u konkrétní práce, konkrétního rozhodnutí a konkrétní datové stopy.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HS o převodu kontroly stabilizované malé korekce do udržovacího záznamu: provozní věta stavu, domov záznamu podle místa práce, typy převodu, pracovní minimum důkazů, úprava pracovního místa, kontrolní háček, privacy-first úklid, šablona, příklad, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HR o kontrole stabilizované malé korekce po prvních běžných cyklech: původní slib korekce, výběr běžných průchodů, sledování práce místo poslušnosti, návrat starého chování, třídění nálezů, privacy-first kontrola výstupů, rozhodnutí dalšího stavu, kontrolní karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HQ o stabilizaci ověřené malé korekce do běžného pravidla: výsledek ověření, typ stabilizace, nejbližší pracovní místo, zkrácení příběhu na pravidlo, úklid starých variant a datové stopy, kontrolní háček, changelog, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HP o ověření malé korekce po prvním normálním použití: návrat ke korekční větě, výběr skutečného průchodu, signály cesta/výstup/cena, kontrola staré cesty, privacy-first kontrola datové stopy, čtyři výsledky ověření, rozhodovací věta, šablona, mini workshop a checklist.
