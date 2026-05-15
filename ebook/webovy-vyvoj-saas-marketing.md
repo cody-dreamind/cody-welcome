@@ -62898,8 +62898,277 @@ Držte workshop krátký. Pokud se během něj otevře větší téma, zapište 
 
 Ověření dalšího kroku je malý provozní návyk s velkým dopadem. Chrání tým před tím, aby si pletl zapsanou změnu s fungující změnou. První normální použití ukáže pravdu rychle: cesta buď vede, výstup buď pomáhá a datová stopa buď zůstává pod kontrolou, nebo je potřeba udělat ještě jeden malý poctivý krok.
 
+## Příloha HM: Stabilizace ověřeného dalšího kroku do běžného provozu
+
+Ověřený další krok má po prvním použití zvláštní křehkou chvíli. Už víte, že změna pomohla, ale ještě není samozřejmá. Pokud ji necháte jen jako položku v changelogu, časem se může ztratit mezi starými poznámkami, onboardingovými odkazy a lokálními zvyky jednotlivých lidí. Pokud z ní naopak uděláte velký nový standard, přidáte administrativu tam, kde stačila malá provozní úprava.
+
+Tato příloha navazuje na Přílohu HL. Pomáhá rozhodnout, co se má stát s ověřeným dalším krokem: jestli ho jen uzavřít, propsat do běžného pracovního místa, připojit ke stávajícímu pravidlu, nebo z něj vytvořit malý údržbový háček. Cílem není zvětšit dokumentaci. Cílem je zabránit návratu starého tření.
+
+Praktická otázka zní:
+
+```text
+Kam musí ověřený další krok tiše zapadnout, aby příště fungoval bez připomínání, bez nové schůzky a bez zbytečné datové stopy?
+```
+
+Tahle otázka je dobrá brzda. Nutí tým hledat místo, kde se práce opravdu děje, ne místo, kde by změna vypadala nejhezčeji v systému dokumentů. Provozní zlepšení má přežít tím, že je blízko práci.
+
+### 1. Začněte stavem z ověření
+
+Nejdřív se vraťte k výsledku z Přílohy HL. Stabilizovat dává smysl jen změnu, která byla potvrzená nebo potvrzená s drobným třením. Nepotvrzenou změnu nestabilizujte. Nejdřív ji opravte. Změnu zastavenou kvůli riziku už vůbec nepřepisujte do pravidla, dokud není riziko odstraněné.
+
+Krátké třídění:
+
+```text
+Potvrzeno:
+Změna se může propsat do běžného provozu.
+
+Potvrzeno s drobným třením:
+Nejdřív opravit drobnost, potom propsat.
+
+Nepotvrzeno:
+Vrátit se k dalšímu kroku, ne stabilizovat.
+
+Zastavit:
+Uzavřít dopad, uklidit data, znovu navrhnout bezpečnější cestu.
+```
+
+Příklad:
+
+```text
+Ověření:
+Měsíční kontrola formulářů proběhla přes kanonickou šablonu. Výstup vznikl bez starého odkazu a bez kopie zákaznických odpovědí.
+
+Stav:
+Potvrzeno.
+
+Stabilizační záměr:
+Nová trasa se stane běžnou součástí opakovaného měsíčního úkolu a stará šablona zůstane archivovaná s odkazem na aktuální verzi.
+```
+
+Tady není potřeba nový proces. Stačí zajistit, že příští měsíc začne práce ze stejného správného místa.
+
+### 2. Rozhodněte, zda jde o zápis, trasu, pravidlo, nebo rytmus
+
+Ověřený další krok může mít čtyři různé domovy. Vyberte jeden hlavní.
+
+```text
+Zápis:
+Změna byla jednorázová a stačí ji uzavřít v changelogu.
+
+Trasa:
+Změna opravila cestu k existujícímu pravidlu, šabloně nebo úkolu.
+
+Pravidlo:
+Změna zpřesnila, jak se má práce dělat.
+
+Rytmus:
+Změna přidala malý opakovaný kontrolní okamžik.
+```
+
+Rozhodovací tabulka:
+
+| Výsledek ověření | Domov | Co upravit |
+| --- | --- | --- |
+| Jednorázový úklid starých exportů | Zápis | Changelog a případně retenční poznámka |
+| Opravený odkaz na kanonickou šablonu | Trasa | Opakovaný úkol, onboarding, index |
+| Zpřesněná věta v checklistu | Pravidlo | Kanonický text pravidla a příklad |
+| Nutnost ověřit datovou stopu po každém exportu | Rytmus | Kontrolní háček v pravidelném úkolu |
+
+Codyho komentář: ne každá ověřená změna si zaslouží vlastní pravidlo. Někdy je nejprofesionálnější výsledek ten, že starý odkaz zmizí a nikdo už o něm nikdy nemluví. Dokumentační sláva je přeceňovaná.
+
+### 3. Stabilizujte nejbližší pracovní místo
+
+Stabilizace má proběhnout tam, kde člověk příště začne práci. Ne tam, kde je změna nejlépe vysvětlitelná.
+
+Typická místa:
+
+- opakovaný úkol,
+- checklist,
+- šablona zákaznického výstupu,
+- onboardingová stránka,
+- interní rozcestník,
+- provozní karta služby,
+- automatizovaný popis úkolu,
+- index pravidel,
+- krátká poznámka v šabloně, která se opravdu používá.
+
+Příklad stabilizace trasy:
+
+```text
+Ověřená změna:
+Kontrola formulářů nově používá kanonickou šablonu.
+
+Stabilizace:
+1. Opakovaný měsíční úkol obsahuje jen kanonický odkaz.
+2. Stará šablona má v první větě "Archivováno, používejte novou verzi".
+3. Interní index vede na kanonickou šablonu.
+4. Onboardingová stránka pro operations roli ukazuje stejnou trasu.
+```
+
+To je čtyřbodová stabilizace, ale pořád malá. Neřeší celou dokumentaci. Řeší místa, kudy se lidé k práci reálně dostávají.
+
+### 4. Zkraťte historii na pracovní důvod
+
+Při stabilizaci často vzniká pokušení ponechat u pravidla dlouhé vysvětlení: co se stalo, kdo co použil, kdy se šlo přes starou šablonu, jak se to ověřilo a proč to bylo celé poučné. To patří do changelogu nebo kontrolní karty, ne do běžného pracovního místa.
+
+V pracovním místě nechte jen důvod, který pomůže dalšímu použití:
+
+```text
+Dlouhé vysvětlení:
+Po kontrole prvního normálního cyklu jsme zjistili, že dva lidé použili starý onboardingový odkaz, protože opakovaný úkol nebyl aktualizovaný. Následně jsme ověřili první použití nové trasy a výstup vznikl bez chyb.
+
+Pracovní důvod:
+Používejte tuto kanonickou šablonu. Starší verze je archivovaná, aby výstupy nevznikaly ve dvou formátech.
+```
+
+Pracovní text má lidem pomáhat v okamžiku použití. Historie má být dohledatelná, ale nemá stát v cestě.
+
+### 5. Uzavřete staré cesty důsledněji než minule
+
+Příloha HK řešila starou cestu při převodu závěru do dalšího kroku. Po ověření je čas zkontrolovat, jestli stará cesta opravdu ztratila provozní sílu.
+
+Projít se vyplatí:
+
+- staré odkazy v opakovaných úkolech,
+- uložené záložky ve sdílených dokumentech,
+- onboardingové stránky,
+- šablony a jejich kopie,
+- příklady ve školení,
+- automatizace, které vytvářejí úkoly,
+- zákaznické odkazy, pokud se jich změna dotkla,
+- interní návody, které odkazují na starý název.
+
+Stará cesta nemusí vždy zmizet. Někdy má historickou nebo auditní hodnotu. Pak ji ale označte tak, aby ji nikdo nepoužil jako aktivní postup.
+
+```text
+Archivní značení:
+ARCHIV - nepoužívat pro nové kontroly.
+Aktuální postup je zde: [kanonická šablona].
+Archiv ponechán jen kvůli historii výstupů do 2026-05.
+```
+
+Archiv bez přesměrování je jen stará chyba v převleku. A převleky jsou fajn na večírek, ne do provozního systému.
+
+### 6. Udržte privacy-first minimum
+
+Stabilizace je správný okamžik pro finální privacy-first kontrolu. Nejde o velký audit. Jde o ověření, že nová běžná cesta nevyrábí víc dat, než potřebuje.
+
+Zkontrolujte:
+
+- zda šablona nežádá kopii obsahu, když stačí odkaz nebo stav,
+- zda opakovaný úkol nepřidává screenshoty jako důkaz,
+- zda přístup k nové složce nemá širší skupina než původní zdroj,
+- zda ukázkový příklad neobsahuje reálné osobní nebo zákaznické údaje,
+- zda dočasné podklady z ověření byly smazané nebo archivované podle účelu,
+- zda changelog neobsahuje zbytečné citlivé detaily.
+
+Praktická stabilizační věta:
+
+```text
+Stabilizovaná cesta pracuje s odkazem na primární záznam a stavem kontroly. Nevytváří kopie zákaznických odpovědí, screenshoty ani nový export mimo zdroj pravdy.
+```
+
+Tato věta je užitečná, protože říká nejen co se dělá, ale i co se vědomě nedělá.
+
+### 7. Předejte změnu jako pracovní fakt, ne oznámení pro oznámení
+
+Pokud se změna týká lidí, kteří ji budou používat, předejte ji krátce. Nepište dlouhý výklad. Řekněte, co se mění, kde to najdou a co už nemají používat.
+
+Krátké interní sdělení:
+
+```text
+Měsíční kontrola formulářů už běží přes kanonickou šablonu v opakovaném úkolu. Stará šablona je archivovaná a nemá se používat pro nové kontroly. Výstup má obsahovat stav a odkaz na primární záznam, ne kopii zákaznické odpovědi.
+```
+
+To stačí. Kdo potřebuje historii, najde ji v changelogu. Kdo dělá práci, ví, kam kliknout a čemu se vyhnout.
+
+### 8. Nastavte lehký signál návratu starého chování
+
+Stabilizace neznamená, že musíte všechno měřit navždy. Stačí jeden malý signál, který upozorní, že se staré tření vrací.
+
+Příklady signálů:
+
+- v dalším cyklu se objevil výstup ze staré šablony,
+- někdo se zeptal na odkaz, který měl být v úkolu,
+- v dokumentech vznikla nová kopie zákaznického obsahu,
+- onboarding znovu vede přes archivní stránku,
+- automatizace založila úkol se starým popisem,
+- zákaznický výstup má starý formát.
+
+Signál nemusí mít vlastní dashboard. Stačí ho přidat do existující kontroly:
+
+```text
+Při příštích dvou měsíčních kontrolách ověřit, zda výstup vznikl z kanonické šablony a bez kopie zákaznických odpovědí. Pokud ano, kontrolní háček zrušit.
+```
+
+Dobrá údržba není nekonečné sledování. Je to sledování tak dlouho, dokud je riziko návratu reálné.
+
+### Stabilizační karta
+
+```text
+Ověřený další krok:
+Výsledek ověření:
+Potvrzeno / potvrzeno s drobným třením
+
+Domov stabilizace:
+Zápis / trasa / pravidlo / rytmus
+
+Nejbližší pracovní místo:
+Co se upraví:
+Co se odstraní nebo archivuje:
+
+Pracovní důvod:
+
+Privacy-first minimum:
+Jaká data se nesbírají:
+Jaké kopie se ruší:
+Kdo má přístup:
+
+Předání týmu:
+Komu:
+Kde:
+Jedna pracovní věta:
+
+Lehký signál návratu starého chování:
+Kdy se zkontroluje:
+Kdy se háček zruší:
+
+Changelog:
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: přečíst výsledek ověření z Přílohy HL.
+2. Tři minuty: vybrat domov stabilizace: zápis, trasa, pravidlo, nebo rytmus.
+3. Tři minuty: určit nejbližší pracovní místo a konkrétní úpravu.
+4. Dvě minuty: rozhodnout, co se stane se starými cestami.
+5. Dvě minuty: projít privacy-first minimum.
+6. Dvě minuty: napsat jednu pracovní větu pro tým a changelog.
+7. Jedna minuta: nastavit lehký signál návratu starého chování.
+
+Pokud se během workshopu objeví větší problém, nezvětšujte stabilizaci. Zapište problém jako samostatný podnět. Stabilizace ověřeného kroku má zavřít jednu smyčku, ne otevřít další patro systému.
+
+### Checklist kapitoly
+
+- Stabilizujete jen potvrzený nebo téměř potvrzený další krok?
+- Nepropagujete nepotvrzenou změnu do běžného pravidla?
+- Vybrali jste správný domov: zápis, trasu, pravidlo, nebo rytmus?
+- Upravujete místo, kde lidé příště skutečně začnou práci?
+- Zkrátili jste historii na pracovní důvod?
+- Jsou staré odkazy, šablony a onboardingové cesty smazané, archivované nebo přesměrované?
+- Je archiv jasně označený jako neaktivní?
+- Nevzniká stabilizací nová zbytečná datová stopa?
+- Pracuje nová cesta s odkazy a stavy místo kopií zákaznického obsahu, pokud to stačí?
+- Má tým jednu krátkou pracovní větu, co se změnilo?
+- Existuje lehký signál návratu starého chování?
+- Je jasné, kdy se kontrolní háček zruší?
+- Je changelog konkrétní, ale bez zbytečných citlivých detailů?
+
+Stabilizace ověřeného dalšího kroku je poslední malý pohyb, který brání návratu starého problému. Nejde o velké vítězství ani nový proces. Jde o to, aby dobrá změna zapadla do běžné práce, stará cesta ztratila sílu a datová stopa zůstala menší než předtím. To je přesně ten typ nenápadné disciplíny, díky které se provoz postupně zlepšuje místo toho, aby jen vyráběl další poznámky o zlepšování.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HM o stabilizaci ověřeného dalšího kroku do běžného provozu: stav z ověření, výběr domova stabilizace, úprava nejbližšího pracovního místa, zkrácení historie na pracovní důvod, uzavření starých cest, privacy-first minimum, předání týmu, lehký signál návratu starého chování, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HL o ověření dalšího kroku po prvním použití: návrat k původnímu kroku, výběr prvního normálního použití, sledování cesty, výstupu a datové stopy, čtyři stavy ověření, changelog, privacy-first okamžitý úklid, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HK o převodu závěru z prvního normálního cyklu do dalšího kroku: rozhodovací věta, pět provozních směrů, úprava nejbližšího pracovního místa, changelog, privacy-first úklid, kontrolní háček, uzavření staré cesty, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HJ o kontrole běžného pravidla po prvním normálním cyklu: výběr správného cyklu, sledování práce místo poslušnosti, návrat starého chování, skrytá administrativa, privacy-first kontrola skutečných výstupů, rozhodnutí stavu pravidla, šablona, mini workshop a checklist.
