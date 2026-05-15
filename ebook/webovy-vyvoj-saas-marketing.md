@@ -64259,8 +64259,303 @@ Výstupem nemá být "budeme to sledovat". Výstupem má být upravené pracovn�
 
 Stabilizace ověřené malé korekce je poslední malý krok, který brání návratu starého tření. Když ho přeskočíte, korekce může fungovat jednou a pak se ztratit. Když ho nafouknete, z drobné opravy vznikne další vrstva systému. Správná cesta je nudnější a lepší: uložit změnu tam, kde se pracuje, uklidit stopy, nastavit lehký háček a jít dál.
 
+## Příloha HR: Kontrola stabilizované malé korekce po prvních běžných cyklech
+
+Stabilizovaná malá korekce vypadá po zápisu do pravidla hotově. Právě proto je zrádná. V dokumentu je uklizeno, stará cesta je zavřená, changelog má větu a kontrolní háček čeká na další použití. Jenže skutečný test nepřichází ve chvíli, kdy změnu zapíšete. Přichází až ve chvíli, kdy tým řeší běžnou práci, spěchá, nemá autora korekce po ruce a použije pravidlo bez slavnostního kontextu.
+
+Tato příloha navazuje na Přílohu HQ. Tam jsme ověřenou malou korekci stabilizovali do běžného pravidla, šablony, checklistu nebo jednorázového uzavření. Tady se vrátíme po prvních několika normálních cyklech a zkontrolujeme, jestli se korekce opravdu stala součástí práce, nebo jen hezkou větou v dokumentaci.
+
+Praktická otázka zní:
+
+```text
+Drží stabilizovaná korekce při běžné práci, nebo se staré tření vrací jinou cestou?
+```
+
+Kontrola nemá být nový audit celého systému. Má být krátká, konkrétní a přísně napojená na původní korekci. Když se při ní objeví větší problém, založte samostatný podnět. Nepřipisujte ho automaticky malé korekci jen proto, že jste ho našli cestou. To je oblíbený způsob, jak z drobné údržby udělat další nekonečný projekt.
+
+### 1. Vraťte se k původnímu slibu korekce
+
+Začněte stabilizační kartou nebo changelogem z Přílohy HQ. Potřebujete jednu větu, ne celé drama.
+
+```text
+Stabilizovaná korekce měla zajistit, že [pracovní situace] proběhne přes [nové pravidlo/šablonu/cestu] bez [staré tření/datové riziko/zbytečná varianta].
+```
+
+Příklad:
+
+```text
+Stabilizovaná korekce měla zajistit, že měsíční kontrola formulářů používá odkaz na primární CRM záznam, ne screenshot se zákaznickými údaji.
+```
+
+Tato věta nastavuje hranici kontroly. Neřešíte teď celé CRM, kvalitu všech formulářů ani to, jestli by šlo proces automatizovat. Řešíte, jestli konkrétní korekce drží.
+
+Pokud původní slib nejde napsat jednou větou, je to samo o sobě nález. Korekce možná nebyla dost přesná, nebo se během stabilizace nafoukla. V takovém případě nejdřív zkraťte slib. Bez něj budete kontrolovat dojem, ne práci.
+
+### 2. Vyberte dva až tři běžné průchody
+
+Kontrola po prvních cyklech nemá stát na vzpomínce typu "myslím, že to funguje". Vyberte konkrétní použití pravidla.
+
+Vhodný vzorek:
+
+- první použití po stabilizaci,
+- jedno použití bez přítomnosti autora korekce,
+- jedno použití v mírně odlišné situaci,
+- jeden výstup vytvořený novým člověkem,
+- jeden případ, kdy byl tým pod běžným časovým tlakem.
+
+Nevybírejte jen nejhezčí příklad. Když kontrolujete jen ideální průchod, ověřujete spíš štěstí než pravidlo.
+
+Příklad výběru:
+
+```text
+Vzorek:
+1. Dubnová kontrola formulářů vedená operations rolí.
+2. Květnová kontrola po změně jednoho formuláře.
+3. Kontrola nové landing page, kde autor původní korekce nebyl zapojený.
+```
+
+U každého průchodu si poznamenejte jen minimum:
+
+```text
+Datum:
+Pracovní situace:
+Kdo pravidlo použil:
+Výstup:
+Byla použita nová cesta?
+Objevila se stará cesta?
+Vznikla nová datová stopa?
+```
+
+To stačí. Nezakládejte k tomu složku screenshotů, pokud nejsou opravdu nutné pro rozhodnutí. Drobné kontroly mají mít drobnou stopu.
+
+### 3. Sledujte práci, ne poslušnost
+
+Cílem není zjistit, jestli lidé "dodrželi pravidlo". Cílem je zjistit, jestli pravidlo pomohlo dokončit práci lépe, kratší cestou a s menším rizikem.
+
+Ptejte se:
+
+- Našel člověk správné pracovní místo bez dotazu?
+- Vedla šablona nebo checklist ke správnému výstupu?
+- Bylo jasné, co se nemá dělat?
+- Nevznikla náhradní ruční práce?
+- Nevrátila se stará cesta pod jiným názvem?
+- Zůstala datová stopa menší než před korekcí?
+
+Slabý závěr:
+
+```text
+Pravidlo bylo použito.
+```
+
+Silnější závěr:
+
+```text
+Ve třech kontrolách lidé použili odkaz na primární záznam bez screenshotu. Jeden výstup ještě obsahoval zbytečný textový opis zákaznického detailu, takže korekce drží v odkazu, ale potřebuje doplnit formulaci výstupu.
+```
+
+Tady už je jasné, co se stalo a co případně opravit. Kontrola má produkovat rozhodnutí, ne obecné uspokojení.
+
+### 4. Hledejte návrat starého chování
+
+Staré chování se často nevrátí přes hlavní dveře. Neobjeví se jako původní šablona, ale jako "rychlá kopie", "jen pro jistotu", "dočasný screenshot", "interní poznámka" nebo "malá příloha". Proto kontrolujte nejen pravidlo, ale i okolní zkratky.
+
+Typické návraty:
+
+- starý odkaz zůstal v opakovaném úkolu,
+- archivní šablona je pořád dostupná jako pracovní varianta,
+- lidé si udělali osobní kopii starého postupu,
+- nový checklist se používá, ale výstup dál obsahuje starý typ dat,
+- automatizace vygenerovala starý popis,
+- někdo přidal screenshot jako "doplněk", i když pravidlo přešlo na odkaz,
+- starý postup přežil v onboardingu nové role.
+
+Praktická kontrolní věta:
+
+```text
+Kdybych dnes nevěděl, že korekce proběhla, navedl by mě systém sám na správnou cestu?
+```
+
+Pokud odpověď zní "ano, ale jen když si pamatuji kontext", korekce není stabilní. Pracovní systém nemá spoléhat na paměť lidí, kteří byli u změny.
+
+### 5. Oddělte čtyři typy nálezů
+
+Po několika cyklech obvykle najdete směs drobností. Neházejte je do jedné hromady. Rozdělte je podle toho, co znamenají pro stabilizovanou korekci.
+
+```text
+1. Korekce drží:
+Práce běží novou cestou a starý problém se nevrací.
+
+2. Korekce drží, ale okolí mate:
+Pravidlo je správné, ale navigace, úkol, onboarding nebo šablona kolem něj stále zvyšuje tření.
+
+3. Korekce je částečná:
+Vyřešila jeden projev problému, ale staré chování se vrací jiným kanálem.
+
+4. Korekce neplatí:
+Běžná práce ji obchází, protože je nepraktická, neviditelná nebo špatně umístěná.
+```
+
+Příklad:
+
+| Nález | Typ | Reakce |
+| --- | --- | --- |
+| Všechny výstupy používají odkaz místo screenshotu | Korekce drží | Uzavřít kontrolní háček |
+| Jeden úkol pořád odkazuje na starý checklist | Okolí mate | Upravit opakovaný úkol, pravidlo neměnit |
+| Screenshot zmizel, ale lidé opisují zákaznické údaje do poznámky | Korekce je částečná | Doplnit šablonu výstupu o datové minimum |
+| Lidé se vracejí ke screenshotům, protože odkaz nemají oprávnění otevřít | Korekce neplatí | Vrátit do korekce, řešit přístupy a pracovní tok |
+
+Toto třídění šetří energii. Ne každá chyba znamená špatné pravidlo. Někdy je špatně jen cesta k němu.
+
+### 6. Udělejte privacy-first kontrolu skutečných výstupů
+
+Stabilizovaná korekce často vznikla proto, aby snížila zbytečnou datovou stopu. Po prvních cyklech proto nekontrolujte jen dokumentaci, ale výstupy, které systém opravdu vytvořil.
+
+Zkontrolujte:
+
+- zda výstupy obsahují jen data nutná pro dané rozhodnutí,
+- zda se nevrátily screenshoty, exporty nebo kopie,
+- zda nové odkazy neotevírají příliš široký přístup,
+- zda dočasné poznámky nezůstaly jako trvalý archiv,
+- zda se citlivé detaily nepřesunuly do komentářů,
+- zda je retence jasná i pro nové artefakty.
+
+Privacy-first otázka:
+
+```text
+Je po stabilizaci jednodušší práci ověřit a zároveň těžší zbytečně kopírovat data?
+```
+
+Pokud ano, korekce posílila systém. Pokud je práce sice formálně čistší, ale lidé si kvůli ní vytvářejí vedlejší kopie, máte problém. Soukromí se neměří tím, jak hezky vypadá pravidlo, ale tím, co zůstává v reálných výstupech.
+
+### 7. Rozhodněte další stav
+
+Po kontrole vyberte jeden stav. Jeden. Ne pět navazujících iniciativ, protože jste zrovna v náladě uklízet.
+
+```text
+Uzavřít:
+Korekce drží, kontrolní háček se ruší.
+
+Doladit nejbližší pracovní místo:
+Pravidlo drží, ale jedna šablona, úkol nebo odkaz mate.
+
+Vrátit do malé korekce:
+Staré chování se vrací a potřebuje další přesný zásah.
+
+Založit samostatný podnět:
+Kontrola odhalila větší sousední problém, který nepatří do této korekce.
+
+Zrušit stabilizaci:
+Korekce se v běžné práci ukázala jako neužitečná nebo dražší než původní tření.
+```
+
+Rozhodovací věta:
+
+```text
+Po [počet] běžných cyklech je stav korekce [stav], protože [důkaz z práce]. Další krok je [konkrétní akce] a mimo rozsah zůstává [co se teď neřeší].
+```
+
+Příklad:
+
+```text
+Po třech běžných kontrolách je stav korekce "doladit nejbližší pracovní místo", protože výstupy už nepoužívají screenshoty, ale jeden opakovaný úkol stále odkazuje na starý checklist. Další krok je upravit text úkolu a ověřit ho při příští kontrole; mimo rozsah zůstává širší redesign CRM workflow.
+```
+
+To je rozhodnutí, se kterým se dá pracovat. Má důkaz, další krok i hranici.
+
+### 8. Upravte jen to, co kontrola skutečně ukázala
+
+Po kontrole bývá chuť přepsat všechno. Odolejte. Stabilizovaná malá korekce má zůstat malá, dokud důkaz neukáže opak.
+
+Dobrá úprava:
+
+- změní jeden odkaz,
+- zpřesní jednu větu v šabloně,
+- odstraní jednu starou variantu,
+- doplní jednu kontrolní otázku,
+- upraví jeden opakovaný úkol,
+- nastaví retenci pro jeden typ dočasného podkladu.
+
+Špatná úprava:
+
+- přepisuje celý standard kvůli jednomu nálezu,
+- zakládá nový dashboard bez rozhodovací otázky,
+- přidává další povinné pole, které nikdo nepotřebuje,
+- kopíruje pravidlo do pěti dokumentů,
+- zavádí další meeting jen proto, že kontrola něco našla.
+
+Codyho komentář: malá korekce je jako šroubek v pracovním systému. Když povolí, dotáhněte ho. Nerozebírejte kvůli němu celé patro budovy. Ano, vím, že přepsat všechno je lákavé. Taky vím, kam to obvykle vede: k dokumentaci, kterou nikdo nečte, protože je větší než práce samotná.
+
+### Kontrolní karta po prvních cyklech
+
+```text
+Stabilizovaná korekce:
+
+Původní slib:
+
+Vzorek průchodů:
+1.
+2.
+3.
+
+Signály práce:
+Správná cesta nalezena:
+Výstup odpovídá pravidlu:
+Stará cesta se nevrátila:
+Náhradní ruční práce:
+
+Privacy-first kontrola:
+Kopie dat:
+Screenshoty/exporty:
+Komentáře s citlivými detaily:
+Přístupy:
+Retence:
+
+Typ nálezu:
+Korekce drží / okolí mate / korekce je částečná / korekce neplatí
+
+Rozhodnutí:
+Uzavřít / doladit pracovní místo / vrátit do malé korekce / založit samostatný podnět / zrušit stabilizaci
+
+Další krok:
+
+Mimo rozsah:
+
+Changelog:
+```
+
+### Mini workshop na 25 minut
+
+1. Tři minuty: přečíst původní slib stabilizované korekce.
+2. Čtyři minuty: vybrat dva až tři běžné průchody.
+3. Pět minut: porovnat reálné výstupy s pravidlem.
+4. Čtyři minuty: hledat návrat starého chování nebo vedlejší kopie dat.
+5. Čtyři minuty: zařadit nálezy do čtyř typů.
+6. Tři minuty: vybrat jeden další stav.
+7. Dvě minuty: zapsat rozhodovací větu a případnou malou úpravu.
+
+Výstupem workshopu není dlouhý seznam "někdy by se mělo". Výstupem je jeden stav korekce a případně jedna úprava nejbližšího pracovního místa.
+
+### Checklist kapitoly
+
+- Máte jednovětý původní slib stabilizované korekce?
+- Kontrolujete skutečné běžné průchody, ne vzpomínky?
+- Je ve vzorku aspoň jeden průchod bez autora korekce?
+- Sledujete výsledek práce, ne jen formální dodržení pravidla?
+- Zkontrolovali jste, zda se stará cesta nevrátila pod jiným názvem?
+- Oddělili jste problém pravidla od problému okolního systému?
+- Zkontrolovali jste skutečné výstupy z pohledu datového minima?
+- Nevznikly nové screenshoty, exporty, komentáře nebo osobní kopie dat?
+- Je jasné, zda korekce drží, okolí mate, korekce je částečná, nebo neplatí?
+- Vybrali jste jeden další stav?
+- Je další krok menší než problém, který řeší?
+- Zapsali jste rozhodnutí do changelogu bez citlivých detailů?
+- Zavřeli jste kontrolní háček, pokud už není potřeba?
+
+Kontrola stabilizované malé korekce po prvních běžných cyklech je pojistka proti dvěma opačným chybám. První chyba je zapomenout, že korekce vůbec proběhla, a nechat staré tření pomalu vrátit. Druhá chyba je udělat z každého malého nálezu velkou systémovou změnu. Dobrá kontrola stojí uprostřed: vezme reálné průchody, zkontroluje výstupy, uklidí datovou stopu, rozhodne jeden další stav a nechá systém zase pracovat.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HR o kontrole stabilizované malé korekce po prvních běžných cyklech: původní slib korekce, výběr běžných průchodů, sledování práce místo poslušnosti, návrat starého chování, třídění nálezů, privacy-first kontrola výstupů, rozhodnutí dalšího stavu, kontrolní karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HQ o stabilizaci ověřené malé korekce do běžného pravidla: výsledek ověření, typ stabilizace, nejbližší pracovní místo, zkrácení příběhu na pravidlo, úklid starých variant a datové stopy, kontrolní háček, changelog, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HP o ověření malé korekce po prvním normálním použití: návrat ke korekční větě, výběr skutečného průchodu, signály cesta/výstup/cena, kontrola staré cesty, privacy-first kontrola datové stopy, čtyři výsledky ověření, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HO o převodu kontroly stabilizovaného dalšího kroku do malé korekce: výběr jednoho nálezu, korekční věta, typy korekcí, úprava skutečného místa tření, zavření staré možnosti, ověření při nejbližší normální práci, šablona, mini workshop a checklist.
