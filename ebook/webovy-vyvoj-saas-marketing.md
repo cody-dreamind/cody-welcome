@@ -58809,8 +58809,272 @@ Pokud workshop trvá hodinu, pravděpodobně řešíte víc než první kontrolu
 
 Kontrola po prvním cyklu je malá, ale důležitá brzda. Pomáhá zabránit tomu, aby se z dobrého stabilního bodu stal další interní rituál bez dopadu. Když po ní tým ví, co příště udělá jednodušeji, údržba plní svoji roli: drží systém použitelný, ne okázale spravovaný.
 
+## Příloha GW: Převod první údržbové opravy do dlouhodobého rytmu
+
+Po první kontrole běžné údržby často vznikne jedna malá oprava: kratší checklist, jasnější vlastník, lepší odkaz na zdroj pravdy, zrušení staré trasy nebo omezení zbytečných exportů. To je dobrý výsledek. Ještě to ale není dlouhodobý rytmus.
+
+Dlouhodobý rytmus vznikne až ve chvíli, kdy tým ví, jak se oprava projeví v příštích cyklech, kdo ji drží, co se má měřit, kdy se má znovu otevřít a kdy se už nemá rozšiřovat. Jinak se z první opravy stane jen další vrstva dokumentace. Hezká, aktuální, a za tři měsíce stejně podezřelá jako ta předchozí.
+
+Cílem této přílohy je převést jednu opravu po prvním cyklu do stabilního provozního režimu. Ne přidat velký proces. Jen zavřít smyčku:
+
+1. Oprava má konkrétní důvod.
+2. Je zapsaná na správném místě.
+3. Je napojená na další přirozený cyklus.
+4. Má hranici, kdy se má změnit, zkrátit nebo ukončit.
+5. Nevyrábí zbytečnou datovou stopu.
+
+### 1. Vraťte se k jedné opravě
+
+Začněte větou z minulé kontroly:
+
+```text
+Jedna oprava před dalším cyklem:
+```
+
+Pokud je v záznamu víc než jedna oprava, vyberte tu, která nejvíc snižuje pracovní tření nebo privacy riziko. V dlouhodobém rytmu se nevyplácí honit všechny drobnosti najednou. Tým potom neví, co vlastně změnilo výsledek.
+
+Příklad:
+
+```text
+Jedna oprava před dalším cyklem: přesměrovat starý checklist formuláře na kanonickou kartu formuláře.
+```
+
+Tahle oprava není velká. Ale pokud starý checklist posílal lidi ke špatnému seznamu polí, dlouhodobě šetří čas a snižuje riziko, že formulář začne znovu sbírat zbytečná data.
+
+Slabý převod do rytmu:
+
+> Aktualizovat dokumentaci formulářů.
+
+Silnější převod:
+
+> Při každé měsíční kontrole formuláře začíná vlastník v kanonické kartě formuláře. Starý checklist je nahrazen odkazem na kartu. Pokud se objeví další konkurenční dokument, vlastník ho buď smaže, nebo přesměruje při stejné kontrole.
+
+Rozdíl je v provozní přesnosti. První věta je úkol. Druhá věta je rytmus.
+
+### 2. Určete, kde oprava opravdu žije
+
+Každá dlouhodobá oprava potřebuje domov. Ne proto, aby měla kde bydlet jako smutná poznámka v Notionu, ale aby ji člověk našel v okamžiku práce.
+
+Možná místa:
+
+- Kanonická karta stabilního bodu.
+- Údržbový checklist.
+- Provozní kalendář.
+- Role karta vlastníka.
+- Datová mapa.
+- Incidentní nebo změnový runbook.
+- Interní index standardů.
+
+Pravidlo je jednoduché: oprava má být tam, kde začne příští průchod práce. Pokud se má kontrolovat formulář, oprava nepatří do retrospektivního zápisu schůzky. Patří do místa, odkud vlastník formulář příště opravdu otevře.
+
+Příklad pro web:
+
+- Špatně: oprava je jen v zápisu z měsíčního review.
+- Lépe: odkaz na kanonickou kartu formuláře je přímo v měsíčním checklistu webu.
+- Nejlépe: starý checklist už neexistuje jako samostatná cesta; buď je archivovaný, nebo přesměrovaný na kanonickou kartu.
+
+Příklad pro SaaS:
+
+- Špatně: poznámka "ověřit billing exporty" je v backlogu.
+- Lépe: billing údržba má krátký bod v měsíčním provozním kalendáři.
+- Nejlépe: karta billing údržby říká, jaký agregovaný signál stačí, kde se bere a kdy se export osobních dat nesmí používat.
+
+### 3. Přepište opravu do opakovatelného pravidla
+
+Oprava je reakce na nález. Pravidlo je návod pro příště. Přepis by měl být krátký a pracovní.
+
+Použijte tvar:
+
+```text
+Když [spouštěč], vlastník [role] udělá [akci] podle [zdroj pravdy], aby [výsledek]. Pokud [stop signál], [eskalace nebo změna].
+```
+
+Příklad:
+
+```text
+Když probíhá měsíční kontrola poptávkového formuláře, vlastník marketing operations začne v kanonické kartě formuláře, ověří aktuální pole, doručení a potvrzení pro uživatele, aby formulář zůstal funkční a sbíral jen nutná data. Pokud kontrola vyžaduje export zpráv zákazníků, vlastník nejdřív ověří, zda nestačí testovací odeslání nebo agregovaný souhrn.
+```
+
+Tohle pravidlo není literární skvost. Výborně. Provozní pravidla nemají vyhrávat soutěž o nejhebčí odstavec. Mají zkrátit cestu k dobrému rozhodnutí.
+
+### 4. Navázat rytmus na skutečný cyklus
+
+Dlouhodobý rytmus má kopírovat práci, ne kalendářovou estetiku. Měsíční, týdenní nebo kvartální frekvence je jen obal. Důležitější je spouštěč.
+
+Dobré spouštěče:
+
+- Po každém vydání větší změny na webu.
+- Po měsíčním uzávěrkovém průchodu SaaS metrik.
+- Před aktivní distribucí nové landing page.
+- Po prvním ostrém použití incidentního runbooku.
+- Před kvartálním review dodavatelů.
+- Při změně formuláře, CRM pole nebo automatizace.
+
+Slabé spouštěče:
+
+- "Jednou za čas."
+- "Až bude klid."
+- "Když si vzpomeneme."
+- "Každý pátek", i když se daný proces používá jednou za měsíc.
+
+Praktický test: pokud spouštěč neumíte poznat bez schůzky, je moc vágní. Rytmus má být viditelný v práci samotné.
+
+### 5. Udržte signály malé
+
+Po první opravě bývá lákavé přidat víc měření, aby bylo jasné, jestli se rytmus drží. Opatrně. Udržitelné signály jsou malé, opakovatelné a navázané na rozhodnutí.
+
+Pro dlouhodobý rytmus stačí tři typy signálů:
+
+1. Signál použití: proběhl cyklus ve správném místě?
+2. Signál výsledku: pomohl udržet stabilní bod použitelný?
+3. Signál ceny: nebyla údržba těžší než problém, kterému předchází?
+
+Příklad tabulky:
+
+| Signál | Stačí zaznamenat | Není potřeba |
+| --- | --- | --- |
+| Použití | datum cyklu a vlastník role | detailní časový deník |
+| Výsledek | ponechat / zkrátit / eskalovat | dlouhý zápis všech úvah |
+| Cena | odhad 10 / 20 / 40+ minut | stopování každého kroku |
+| Data | agregovaný souhrn nebo test | export komunikace zákazníků |
+
+Privacy-first pravidlo: pokud signál nevede k rozhodnutí, nemá v rytmu co dělat. Sběr "pro jistotu" je jen pomalý způsob, jak si vyrobit budoucí úklid.
+
+### 6. Nastavte hranice změny
+
+Dlouhodobý rytmus musí říkat, kdy se má pravidlo změnit. Jinak se buď nikdy neupraví, nebo se bude upravovat při každém drobném tření.
+
+Použijte tři hranice:
+
+- Drobné tření: vlastník může upravit formulaci, odkaz nebo pořadí kroků bez širší debaty.
+- Opakované tření: po dvou cyklech se otevře krátká revize pravidla.
+- Změna reality: při změně produktu, kanálu, datového toku, nástroje nebo odpovědnosti se pravidlo vrací do rozhodovacího režimu.
+
+Příklad:
+
+```text
+Drobné tření: chybějící odkaz nebo nejasný název pole opraví vlastník při kontrole.
+Opakované tření: pokud dvě kontroly po sobě trvají déle než 30 minut, zkrátíme checklist.
+Změna reality: pokud se formulář napojí na nové CRM nebo začne sbírat nový typ údajů, uděláme novou privacy-first kontrolu.
+```
+
+Tím se chrání dvě věci najednou: pravidlo není zabetonované, ale ani se nerozpadá při každé poznámce z chodby.
+
+### 7. Uzavřete původní kontrolu
+
+Převod do dlouhodobého rytmu má zavřít původní kontrolní záznam. Jinak budou vedle sebe existovat staré nálezy, nová oprava a nikdo nebude vědět, co je aktuální.
+
+Do původního záznamu doplňte:
+
+```text
+Stav opravy:
+Kde je oprava zavedena:
+Od kdy platí:
+Kdy se ověří v dalším cyklu:
+Staré artefakty uzavřeny:
+Privacy-first úklid hotov:
+```
+
+Příklad:
+
+```text
+Stav opravy: zavedeno do dlouhodobého rytmu
+Kde je oprava zavedena: kanonická karta poptávkového formuláře + měsíční checklist webu
+Od kdy platí: 2026-05-15
+Kdy se ověří v dalším cyklu: další měsíční kontrola formuláře
+Staré artefakty uzavřeny: starý checklist přesměrován na kanonickou kartu
+Privacy-first úklid hotov: žádné exporty zákaznických zpráv nevznikly
+```
+
+Uzavření je krátké, ale důležité. Bez něj se tým za měsíc vrátí k debatě, která už jednou proběhla. A to je druh administrativního cestování v čase, který nikomu nezlepší náladu.
+
+### Šablona převodu do dlouhodobého rytmu
+
+```text
+Stabilní bod:
+Původní údržbová věta:
+Nález z prvního cyklu:
+Jedna oprava:
+
+Kde oprava žije:
+Opakovatelné pravidlo:
+Spouštěč dalšího cyklu:
+Vlastník role:
+
+Signál použití:
+Signál výsledku:
+Signál ceny:
+Privacy-first minimum:
+
+Drobné tření může opravit:
+Opakované tření spouští:
+Změna reality spouští:
+
+Staré artefakty k uzavření:
+Datum dalšího ověření:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilní bod: měsíční kontrola poptávkového formuláře
+Původní údržbová věta: ověřit nutná data, mobilní funkčnost, doručení správné roli a férové potvrzení
+Nález z prvního cyklu: vlastník začal ve starém checklistu
+Jedna oprava: přesměrovat starý checklist na kanonickou kartu formuláře
+
+Kde oprava žije: kanonická karta formuláře a měsíční checklist webu
+Opakovatelné pravidlo: při měsíční kontrole vlastník začíná v kanonické kartě a staré trasy ruší nebo přesměruje
+Spouštěč dalšího cyklu: měsíční kontrola webových formulářů
+Vlastník role: marketing operations
+
+Signál použití: kontrola začala v kanonické kartě
+Signál výsledku: formulář funguje a sbírá jen potřebná data
+Signál ceny: kontrola se vešla do 20 minut
+Privacy-first minimum: testovací odeslání a seznam polí, žádný export zpráv
+
+Drobné tření může opravit: marketing operations
+Opakované tření spouští: zkrácení checklistu po dvou pomalých cyklech
+Změna reality spouští: nová privacy-first kontrola při změně CRM napojení
+
+Staré artefakty k uzavření: archivovaný checklist formuláře
+Datum dalšího ověření: příští měsíční kontrola
+```
+
+### Mini workshop na 20 minut
+
+Tento převod zvládne vlastník role s jedním člověkem, který výstup používá.
+
+1. Čtyři minuty: přečíst nález a jednu opravu z prvního cyklu.
+2. Čtyři minuty: určit, kde oprava opravdu žije.
+3. Čtyři minuty: přepsat opravu do opakovatelného pravidla.
+4. Čtyři minuty: vybrat tři malé signály.
+5. Dvě minuty: nastavit hranice změny.
+6. Dvě minuty: uzavřít původní záznam.
+
+Pokud se workshop zasekne na tom, že nikdo neví, kdo je vlastník, neřešte text pravidla. Nejdřív opravte vlastnictví. Bez vlastníka je dlouhodobý rytmus jen hezky pojmenované přání.
+
+### Checklist kapitoly
+
+- Vybrali jste opravdu jednu opravu z prvního cyklu?
+- Je jasné, jaký nález oprava řeší?
+- Má oprava domov v místě, kde začne příští práce?
+- Přepsali jste opravu do krátkého opakovatelného pravidla?
+- Je rytmus navázaný na skutečný pracovní cyklus?
+- Má pravidlo vlastníka role, ne jen jméno člověka v poznámce?
+- Sledujete jen signál použití, výsledku a ceny?
+- Nepřidali jste měření, které nevede k rozhodnutí?
+- Má rytmus privacy-first minimum dat?
+- Je jasné, co může vlastník opravit sám?
+- Je jasné, kdy opakované tření spouští revizi?
+- Je jasné, kdy změna reality vrací pravidlo do rozhodovacího režimu?
+- Uzavřeli jste staré artefakty a konkurenční cesty?
+- Je v původní kontrole doplněno, kde oprava platí a kdy se ověří?
+
+Převod první opravy do dlouhodobého rytmu je dobrý test zralosti týmu. Neptá se, jestli umíte napsat další dokument. Ptá se, jestli umíte udržet dobré pravidlo lehké, dohledatelné a živé i ve chvíli, kdy už kolem něj není energie z první opravy. To je méně efektní než velký redesign procesu, ale obvykle mnohem užitečnější.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha GW o převodu první údržbové opravy do dlouhodobého rytmu: výběr jedné opravy, kanonické místo, opakovatelné pravidlo, pracovní spouštěče, malé signály, hranice změny, uzavření původní kontroly, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GV o kontrole běžné údržby po prvním cyklu: návrat k údržbové větě, sledování průchodu práce, třídění nálezů, privacy-first datová stopa, scorecard, jedna oprava, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GU o převodu ověřeného stabilního bodu do běžné údržby: rozlišení údržby a další změny, volba rytmu, vlastnictví role, lehké signály, privacy-first brána, stop pravidla, changelog, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GT o kontrole nového stabilního bodu po prvních použitích: reálné průchody, trasa k bodu, porovnání výstupu s pravidlem, návrat starých cest, privacy-first kontrola skutečných výstupů, jednověté rozhodnutí, minimální aktualizace, šablona, mini workshop a checklist.
