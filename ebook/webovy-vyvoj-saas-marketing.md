@@ -60930,8 +60930,206 @@ Workshop končí rozhodnutím, ne seznamem postřehů. Pokud vznikne víc dobrý
 
 Ověření lehké revize chrání tým před dvěma extrémy. První extrém je věřit každé změně jen proto, že zněla rozumně. Druhý extrém je kvůli jednomu tření znovu otevřít celý systém. Lepší cesta je menší a přesnější: zkontrolovat první použití, rozhodnout stav, uklidit datovou stopu a pokračovat. Tak se z drobných revizí nestává chaos, ale normální provozní učení.
 
+## Příloha HE: Stabilizace ověřené lehké revize do běžného pravidla
+
+Lehká revize, která prošla prvním použitím, ještě není hotová. Je ověřená. To je důležitý rozdíl. Ověření říká, že změna fungovala v jedné skutečné situaci. Stabilizace říká, že změna se stane běžnou součástí práce a tým už ji nemusí držet jako dočasnou výjimku v hlavě.
+
+Tato příloha řeší okamžik po ověření. Máte revizi, která pomohla, nezvětšila datovou stopu a má jasný další stav. Teď ji potřebujete převést zpět do normálního pravidla, aniž by vznikla další vrstva dokumentace, paralelní verze nebo malý provozní dluh převlečený za zlepšení.
+
+Praktická otázka zní:
+
+```text
+Jak ověřenou lehkou revizi začleníme do běžného pravidla tak, aby člověk při příští práci nemusel vědět, že nějaká revize vůbec proběhla?
+```
+
+Dobrá stabilizace je pro uživatele pravidla nudná. Otevře pracovní místo, najde aktuální postup, udělá práci a jde dál. Nepotřebuje číst historii, ptát se autora změny ani porovnávat tři varianty šablony. Historie má zůstat dohledatelná, ale nemá stát v cestě.
+
+### 1. Potvrďte, co se opravdu stabilizuje
+
+Než začnete přepisovat pravidlo, pojmenujte přesný výsledek ověření. Stabilizovat se má jen to, co revize skutečně prokázala.
+
+Příklad:
+
+```text
+Ověřený výsledek:
+Tři stavy kontroly formuláře stačí pro rozhodnutí, kdo má další krok, a brání kopírování zákaznických detailů do poznámky.
+```
+
+To je stabilizovatelný výsledek. Není to pozvánka k tomu, abyste rovnou přepsali celý proces tvorby formulářů, všechny marketingové šablony a půlku CRM. Ano, mozek rád vidí vzory všude. Provoz za to ale potom platí.
+
+Pomůže jednoduché rozlišení:
+
+- stabilizujte konkrétní pravidlo, které bylo ověřené,
+- zaznamenejte související nápady bokem,
+- neměňte sousední procesy bez samostatného důvodu,
+- nepřidávejte obecné vysvětlení tam, kde stačí kratší pracovní instrukce.
+
+Codyho komentář: stabilizace není vítězný pochod dokumentací. Je to úklid po malé změně. Když po revizi zůstane víc textu, víc odkazů a víc rozhodování, možná jste nezavedli lepší pravidlo, ale jen hezčí složku pro budoucí zmatek.
+
+### 2. Přepište kanonické místo, ne okolní šum
+
+Každé pravidlo má mít jedno kanonické místo. To je místo, kde člověk hledá aktuální verzi, když ji potřebuje použít. Stabilizace ověřené revize znamená, že kanonické místo obsahuje novou verzi bez dočasných poznámek typu "pilot", "test", "zatím" nebo "revize po kontrole".
+
+Praktický postup:
+
+1. Otevřete kanonické pravidlo nebo šablonu.
+2. Nahraďte starou formulaci ověřenou verzí.
+3. Odstraňte dočasné komentáře, které patřily jen k ověření.
+4. Doplňte krátký changelog na konec nebo do interní historie.
+5. Zkontrolujte, že staré odkazy nevedou na paralelní variantu.
+
+Příklad:
+
+Před stabilizací:
+
+```text
+Kontrola formuláře:
+Vyplňte poznámku ke kontrole. Pilotně lze použít tři stavy: v pořádku / upravit / zastavit.
+```
+
+Po stabilizaci:
+
+```text
+Kontrola formuláře:
+Vyberte jeden stav: v pořádku / upravit / zastavit. Doplňte odpovědnou roli a odkaz na primární záznam. Zákaznické detaily do kontroly nekopírujte.
+```
+
+Rozdíl je malý, ale důležitý. Druhá verze už nepůsobí jako experiment. Je to normální pravidlo. Zároveň obsahuje privacy-first hranici přímo tam, kde člověk pracuje.
+
+### 3. Uzavřete revizní artefakty
+
+Během lehké revize obvykle vznikne několik pomocných věcí: karta nálezu, ověřovací poznámka, dočasná šablona, komentář v dokumentu, zápis z mini workshopu nebo seznam dotazů. Po stabilizaci musí být jasné, co zůstává a co mizí.
+
+Rozdělte artefakty do tří stavů:
+
+```text
+Zůstává jako aktuální pravidlo.
+Zůstává jako historický záznam.
+Maže se nebo zkracuje.
+```
+
+Aktuální pravidlo má být jen jedno. Historický záznam má vysvětlit, proč změna vznikla, ale nemá obsahovat zbytečné osobní, zákaznické nebo interně citlivé detaily. Věci k mazání jsou hlavně dočasné kopie, exporty, screenshoty, komentáře s detaily a pracovní poznámky, které už neslouží rozhodnutí.
+
+Privacy-first úklid tady není formalita. Revize často vznikají právě kolem reálných případů. A reálné případy umí nenápadně roznášet data do míst, kde nemají co dělat. Stabilizace je dobrý okamžik tyto stopy zkrátit.
+
+Ptejte se:
+
+- Potřebujeme v historii konkrétní zákaznický text, nebo stačí typ problému?
+- Potřebujeme jména lidí, nebo stačí role?
+- Potřebujeme screenshot, nebo stačí odkaz na primární systém?
+- Má ověřovací poznámka retenční dobu?
+- Ví někdo, že dočasná kopie má zmizet?
+
+### 4. Předejte změnu jako normální práci
+
+Po stabilizaci není potřeba velké školení. Většinou stačí krátké pracovní sdělení lidem, kteří pravidlo používají.
+
+Dobré sdělení má čtyři části:
+
+```text
+Co se změnilo:
+Kde je aktuální pravidlo:
+Co má člověk udělat příště:
+Co už nemá dělat:
+```
+
+Příklad:
+
+```text
+Kontrola nového formuláře je stabilizovaná. Aktuální pravidlo je přímo v šabloně formulářové kontroly. Příště vyberte jeden ze tří stavů, přidejte odpovědnou roli a odkaz na primární záznam. Do poznámky už nekopírujte zákaznický text.
+```
+
+To stačí. Nepotřebujete tříodstavcový příběh o tom, jak jsme k tomu došli, pokud ho člověk nepotřebuje k práci. Historie patří do changelogu, ne do každého předání.
+
+### 5. Nastavte další kontrolu jen jako lehký háček
+
+Stabilizované pravidlo nepotřebuje okamžitě další velkou revizi. Potřebuje lehký kontrolní háček, který zachytí, jestli změna drží v běžném rytmu.
+
+Vhodné háčky:
+
+- zkontrolovat při příštím měsíčním review šablon,
+- ověřit na dalších dvou použitích bez samostatného workshopu,
+- přidat jednu otázku do existujícího provozního checklistu,
+- podívat se při nejbližší kontrole datové stopy,
+- nechat pravidlo běžet a vrátit se k němu jen při konkrétním tření.
+
+Nevhodné háčky:
+
+- vytvořit nový pravidelný meeting jen kvůli jedné malé revizi,
+- měřit každé použití pravidla detailním formulářem,
+- požadovat ruční report od každého člověka,
+- ukládat ukázky práce s osobními nebo zákaznickými údaji jen proto, aby bylo co kontrolovat.
+
+Cílem je udržet pravidlo živé, ne kolem něj postavit malou administrativní pevnost. Ty mívají výborné hradby a mizernou návratnost.
+
+### Stabilizační karta ověřené lehké revize
+
+```text
+Název pravidla:
+Kanonické místo:
+Ověřená revizní věta:
+
+Co se stabilizuje:
+Co se nemění:
+
+Aktualizované pracovní místo:
+Staré místo nebo starý text:
+Nová stabilní formulace:
+
+Artefakty:
+Zůstává jako aktuální pravidlo:
+Zůstává jako historický záznam:
+Maže se nebo zkracuje:
+
+Privacy-first úklid:
+Odstraněné kopie dat:
+Zkrácené příklady:
+Přístupy:
+Retence:
+
+Předání:
+Komu:
+Kde:
+Krátká pracovní věta:
+
+Další kontrolní háček:
+Kdy:
+Jaký signál:
+Kdo sleduje:
+Changelog:
+```
+
+Tato karta nemá být další dokument navždy. U malých změn může být součástí changelogu. U důležitých pravidel ji uložte k historickému záznamu, ale aktuální práce má vždy vést do kanonického místa.
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst rozhodovací větu z ověření revize.
+2. Čtyři minuty: určit přesnou stabilní formulaci pravidla.
+3. Čtyři minuty: najít a uzavřít staré nebo dočasné varianty.
+4. Čtyři minuty: udělat privacy-first úklid artefaktů.
+5. Tři minuty: napsat krátké pracovní předání.
+6. Dvě minuty: nastavit lehký kontrolní háček.
+
+Workshop končí tím, že existuje jedno aktuální pravidlo a jedna krátká zpráva pro lidi, kterých se změna týká. Pokud se objeví větší téma, dejte ho do samostatné fronty. Stabilizace není správný okamžik pro rozšíření rozsahu.
+
+### Checklist kapitoly
+
+- Víte přesně, jaký výsledek ověření stabilizujete?
+- Neotevřeli jste sousední procesy bez samostatného důvodu?
+- Je nové pravidlo zapsané v jednom kanonickém pracovním místě?
+- Zmizely dočasné poznámky, pilotní varianty a paralelní šablony?
+- Je historie dohledatelná, ale nepřekáží běžnému použití?
+- Uklidili jste dočasné kopie, screenshoty a poznámky s citlivými detaily?
+- Stačí v historickém záznamu typ problému místo osobních nebo zákaznických údajů?
+- Dostali uživatelé pravidla krátké pracovní předání?
+- Je jasné, co se příště dělá a co už se nedělá?
+- Má pravidlo jen lehký kontrolní háček, ne novou administrativní zátěž?
+
+Stabilizace ověřené lehké revize je malá disciplína s velkým dopadem. Chrání tým před tím, aby dobré drobné změny zůstaly jako poznámky na okraji, a zároveň brání tomu, aby každá změna vyrobila nový proces. Nejlepší výsledek je jednoduchý: pravidlo je aktuální, staré cesty jsou zavřené, datová stopa je uklizená a člověk při příští práci používá správnou verzi bez přemýšlení navíc.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HE o stabilizaci ověřené lehké revize do běžného pravidla: potvrzení stabilizovaného výsledku, přepis kanonického místa, uzavření revizních artefaktů, privacy-first úklid, pracovní předání, lehký kontrolní háček, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HD o ověření lehké revize pravidla po příštím použití: návrat k revizní větě, výběr prvního skutečného použití, sledování průchodu práce, čtyři stavy výsledku, privacy-first kontrola datové stopy, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HC o převodu kontroly stabilizovaného pravidla do lehké revize: výběr jednoho nálezu, revizní věta, nejbližší pracovní místo, typy textové/polohové/datové revize, minimum artefaktů, privacy-first dopad, ověření při příštím použití, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HB o kontrole stabilizovaného pravidla po prvních použitích: výběr skutečných průchodů, signály nalezení, pochopení a dokončení, rozlišení chyby pravidla a okolního systému, privacy-first kontrola datové stopy, rozhodnutí dalšího stavu, šablona, mini workshop a checklist.
