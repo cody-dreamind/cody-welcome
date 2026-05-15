@@ -59072,8 +59072,331 @@ Pokud se workshop zasekne na tom, že nikdo neví, kdo je vlastník, neřešte t
 
 Převod první opravy do dlouhodobého rytmu je dobrý test zralosti týmu. Neptá se, jestli umíte napsat další dokument. Ptá se, jestli umíte udržet dobré pravidlo lehké, dohledatelné a živé i ve chvíli, kdy už kolem něj není energie z první opravy. To je méně efektní než velký redesign procesu, ale obvykle mnohem užitečnější.
 
+## Příloha GX: Kontrola dlouhodobého rytmu po několika cyklech
+
+Dlouhodobý rytmus se nesmí hodnotit po jednom hezkém průchodu. Jeden cyklus ukáže, jestli pravidlo jde použít. Několik cyklů ukáže, jestli pravidlo opravdu drží práci, nebo jen přežilo díky pozornosti lidí, kteří ho zavedli.
+
+Po třech až šesti opakováních se obvykle objeví věci, které v první kontrole nebyly vidět:
+
+- Rytmus je příliš častý a vyrábí administrativu.
+- Rytmus je příliš řídký a problém se vrací dřív než kontrola.
+- Vlastník pravidlo drží, ale ostatní role ho obcházejí.
+- Signály jsou moc detailní a nikdo je nechce vyplňovat.
+- Staré artefakty se znovu objevují v odkazech, šablonách nebo onboardingu.
+- Privacy-first minimum se rozlezlo do zbytečných exportů, screenshotů nebo kopií.
+
+Cílem této přílohy není udělat velký audit. Cílem je zjistit, jestli dlouhodobý rytmus stále pomáhá rozhodovat. Pokud ano, nechte ho být. Pokud ne, upravte jednu věc, která nejvíc snižuje tření nebo riziko.
+
+### 1. Začněte původním slibem rytmu
+
+Neotevírejte kontrolu otázkou "co všechno by šlo zlepšit". To je pozvánka k rozšiřování. Začněte původní větou:
+
+```text
+Tento rytmus existuje proto, aby...
+```
+
+Příklad:
+
+```text
+Tento rytmus existuje proto, aby poptávkové formuláře zůstaly funkční, srozumitelné a sbíraly jen nutná data.
+```
+
+Tahle věta je filtr. Všechno, co s ní nesouvisí, nepatří do kontroly rytmu. Může to být dobrý nápad, ale není to práce pro tuto chvíli.
+
+Praktická otázka:
+
+```text
+Kdybychom tento rytmus na dva měsíce vypnuli, co by se realisticky pokazilo?
+```
+
+Pokud odpověď není jasná, rytmus možná existuje ze setrvačnosti. To neznamená, že ho musíte hned zrušit. Znamená to, že další kontrola má ověřit jeho skutečnou hodnotu, ne jen správnost formulace.
+
+### 2. Vezměte tři poslední průchody
+
+Pro kontrolu dlouhodobého rytmu obvykle stačí tři poslední průchody. Nehledejte dokonalou statistiku. Hledejte vzor.
+
+Ke každému průchodu si napište:
+
+```text
+Datum:
+Spouštěč:
+Vlastník role:
+Výsledek:
+Cena práce:
+Nález:
+```
+
+Příklad:
+
+```text
+Datum: 2026-03-05
+Spouštěč: měsíční kontrola formulářů
+Vlastník role: marketing operations
+Výsledek: ponechat bez změny
+Cena práce: 15 minut
+Nález: žádný
+
+Datum: 2026-04-04
+Spouštěč: měsíční kontrola formulářů
+Vlastník role: marketing operations
+Výsledek: zkrátit potvrzovací text
+Cena práce: 20 minut
+Nález: potvrzení po odeslání bylo moc obecné
+
+Datum: 2026-05-06
+Spouštěč: měsíční kontrola formulářů
+Vlastník role: marketing operations
+Výsledek: eskalovat CRM pole
+Cena práce: 45 minut
+Nález: nové pole v CRM není v datové mapě
+```
+
+Tři průchody ukážou víc než dlouhý pocitový rozhovor. Pokud se cena práce zvyšuje, rytmus možná nabobtnal. Pokud se opakuje stejný nález, pravidlo neřeší příčinu. Pokud se střídají náhodné drobnosti, rytmus je možná v pořádku a stačí ho nezvětšovat.
+
+### 3. Rozlište zdravé tření od signálu k úpravě
+
+Ne každé tření je problém. Některé tření chrání kvalitu. Privacy-first kontrola má občas někoho zastavit. Kontrola formuláře má občas odhalit nepohodlnou otázku. Review dodavatele má občas připomenout, že pohodlný nástroj není automaticky dobrý provozní nástroj.
+
+Rozdělte nálezy do tří skupin:
+
+| Typ tření | Co znamená | Co dělat |
+| --- | --- | --- |
+| Zdravé tření | Rytmus zastavil zbytečné riziko nebo špatnou zkratku | Ponechat a jen zapsat příklad |
+| Provozní tření | Rytmus je užitečný, ale cesta je zbytečně těžká | Zkrátit krok, odkaz nebo šablonu |
+| Systémové tření | Rytmus opakovaně naráží na změnu reality | Vrátit pravidlo do rozhodovacího režimu |
+
+Příklad:
+
+- Zdravé tření: vlastník odmítl přidat nové pole do formuláře bez jasného účelu.
+- Provozní tření: kontrolní karta má tři duplicity a lidé vyplňují stejnou věc dvakrát.
+- Systémové tření: každý měsíc se řeší jiné CRM pole, protože obchodní proces se změnil, ale datová mapa ne.
+
+Codyho komentář: dobrý rytmus nemá být bez tření. Má mít správné tření. Bez něj se z provozu stane jen hladká cesta k neviditelným dluhům.
+
+### 4. Zkontrolujte, jestli se rytmus nerozlezl
+
+Dlouhodobé rytmy mají tichou tendenci růst. Někdo přidá jeden sloupec. Někdo přidá "jen pro jistotu" screenshot. Někdo chce mít v záznamu celý kontext, protože se bojí, že se za měsíc zapomene, proč rozhodnutí padlo.
+
+Kontrolní otázky:
+
+- Přibylo v rytmu něco, co nevede k rozhodnutí?
+- Vyžaduje rytmus víc dat než na začátku?
+- Kopírují se zákaznické zprávy, osobní údaje nebo interní citlivé poznámky tam, kde stačí agregovaný signál?
+- Vznikla druhá tabulka, druhý checklist nebo druhé místo pravdy?
+- Musí vlastník rytmu číst víc historie, než kolik potřebuje k aktuálnímu rozhodnutí?
+
+Pokud ano, nepište nový proces. Škrtněte. Dlouhodobý rytmus má být po několika cyklech lehčí než na začátku, ne těžší.
+
+Praktická redukce:
+
+```text
+Ponechat:
+Smazat:
+Sloučit:
+Nahradit odkazem:
+Přesunout do archivu:
+```
+
+Příklad:
+
+```text
+Ponechat: datum kontroly, výsledek, další krok
+Smazat: screenshot celé doručené zprávy z formuláře
+Sloučit: dva sloupce "poznámka" a "nález"
+Nahradit odkazem: detailní popis formuláře odkazem na kanonickou kartu
+Přesunout do archivu: starý checklist před zavedením kanonické karty
+```
+
+### 5. Ověřte vlastnictví bez závislosti na jednom člověku
+
+Rytmus je zdravý, když ho umí převzít role. Ne nutně libovolný člověk bez kontextu, ale někdo, kdo má danou odpovědnost a přiměřený přístup.
+
+Zeptejte se:
+
+- Je vlastník pořád role, ne konkrétní hrdina?
+- Ví zástup, kde rytmus začíná?
+- Jsou přístupy a oprávnění přiměřené?
+- Je jasné, kdy vlastník rozhoduje sám a kdy eskaluje?
+- Umí nový člověk pochopit pravidlo z kanonického místa bez lovení starých chatů?
+
+Mini test:
+
+```text
+Dejte zástupci pouze kanonickou kartu a poslední záznam kontroly. Pokud do deseti minut neumí říct, co by udělal v příštím cyklu, rytmus není dostatečně předatelný.
+```
+
+Tohle není test člověka. Je to test systému. Pokud zástup selže, nepište do závěru "zástup potřebuje víc kontextu". Napište, jaký kontext chybí v pracovním místě.
+
+### 6. Udělejte privacy-first kontrolu stop po několika cyklech
+
+Po jednom cyklu bývá datová stopa malá. Po několika cyklech už se může nasčítat. Proto kontrolujte nejen aktuální průchod, ale i historii, kterou rytmus nechává za sebou.
+
+Projděte:
+
+- Záznamy kontrol.
+- Přílohy, exporty a screenshoty.
+- Odkazy na zákaznickou komunikaci.
+- Testovací data.
+- Přístupy k pracovním tabulkám nebo dokumentům.
+- Staré kopie šablon.
+
+Ke každé stopě si napište:
+
+```text
+Účel:
+Nutnost:
+Citlivost:
+Retence:
+Vlastník úklidu:
+```
+
+Příklad:
+
+```text
+Účel: doložit, že formulář sbírá jen nutná pole
+Nutnost: stačí seznam polí a výsledek kontroly
+Citlivost: nízká, bez zákaznických zpráv
+Retence: ponechat poslední tři kontroly, starší shrnout
+Vlastník úklidu: marketing operations
+```
+
+Privacy-first provoz není jen o tom, co nesbíráte na webu. Je i o tom, co nevyrábíte při správě vlastních procesů. Interní tabulka s historickými poznámkami může být stejně zbytečná jako přebujelý tracking na landing page.
+
+### 7. Rozhodněte jednou větou
+
+Kontrola dlouhodobého rytmu má skončit jednou z pěti vět:
+
+```text
+Rytmus ponecháváme beze změny, protože...
+Rytmus zkracujeme, protože...
+Rytmus upravujeme v jednom kroku, protože...
+Rytmus vracíme do rozhodovacího režimu, protože...
+Rytmus ukončujeme, protože...
+```
+
+Příklady:
+
+```text
+Rytmus ponecháváme beze změny, protože tři poslední kontroly byly rychlé, našly jen drobné nálezy a nevytvořily zbytečnou datovou stopu.
+```
+
+```text
+Rytmus zkracujeme, protože dvě kontroly po sobě strávily většinu času vyplňováním duplicitních poznámek místo rozhodnutí.
+```
+
+```text
+Rytmus vracíme do rozhodovacího režimu, protože změna CRM procesu přidala nový datový tok, který původní pravidlo nepokrývá.
+```
+
+Nejhorší výsledek je dlouhý zápis bez rozhodnutí. Lepší je krátké "ponecháváme beze změny" než tři stránky úvah, po kterých nikdo neví, co se má příště stát.
+
+### Šablona kontroly dlouhodobého rytmu
+
+```text
+Název rytmu:
+Původní slib rytmu:
+Kontrolované období:
+Počet průchodů:
+
+Poslední tři průchody:
+1.
+2.
+3.
+
+Co funguje:
+Co se opakuje:
+Co zbytečně zdražuje práci:
+Co se změnilo v realitě:
+
+Zdravé tření:
+Provozní tření:
+Systémové tření:
+
+Privacy-first stopa po několika cyklech:
+Co ponechat:
+Co smazat:
+Co sloučit:
+Co nahradit odkazem:
+
+Vlastnictví:
+Zástup:
+Chybějící kontext:
+
+Rozhodnutí:
+Jedna změna před dalším cyklem:
+Datum další kontroly:
+```
+
+Vyplněný mini příklad:
+
+```text
+Název rytmu: měsíční kontrola poptávkových formulářů
+Původní slib rytmu: formuláře zůstávají funkční a sbírají jen nutná data
+Kontrolované období: březen až květen
+Počet průchodů: 3
+
+Poslední tři průchody:
+1. březen: bez změny, 15 minut
+2. duben: zkrácení potvrzovacího textu, 20 minut
+3. květen: eskalace nového CRM pole, 45 minut
+
+Co funguje: vlastník začíná v kanonické kartě
+Co se opakuje: CRM změny nejsou včas v datové mapě
+Co zbytečně zdražuje práci: duplicitní poznámkový sloupec
+Co se změnilo v realitě: obchod začal používat nové třídění poptávek
+
+Zdravé tření: odmítnutí nového pole bez účelu
+Provozní tření: duplicitní poznámky
+Systémové tření: CRM proces mimo datovou mapu
+
+Privacy-first stopa po několika cyklech: bez exportů zpráv, jeden starý screenshot smazat
+Co ponechat: poslední tři výsledky kontrol
+Co smazat: screenshot testovací zprávy
+Co sloučit: poznámka a nález
+Co nahradit odkazem: popis formuláře odkazem na kartu
+
+Vlastnictví: marketing operations
+Zástup: customer success operations
+Chybějící kontext: kdy obchod smí navrhnout nové CRM pole
+
+Rozhodnutí: rytmus upravujeme v jednom kroku, protože CRM změny potřebují jasnou vstupní bránu.
+Jedna změna před dalším cyklem: doplnit pravidlo, že nové CRM pole musí projít datovou mapou před úpravou formuláře.
+Datum další kontroly: po příštím měsíčním cyklu
+```
+
+### Mini workshop na 30 minut
+
+Kontrola dlouhodobého rytmu funguje nejlépe ve dvou až třech lidech: vlastník role, člověk používající výstup a někdo, kdo umí hlídat datovou stopu.
+
+1. Pět minut: přečíst původní slib rytmu.
+2. Šest minut: projít poslední tři průchody.
+3. Pět minut: rozdělit tření na zdravé, provozní a systémové.
+4. Pět minut: zkontrolovat, jestli rytmus nenarostl.
+5. Čtyři minuty: projít privacy-first stopu.
+6. Tři minuty: ověřit vlastnictví a zástup.
+7. Dvě minuty: napsat jednověté rozhodnutí.
+
+Pokud se během workshopu otevře velká debata o změně produktu, CRM, dodavatele nebo marketingového kanálu, je to užitečný nález. Ale není to důvod nafukovat kontrolu rytmu. Zapište, že rytmus se vrací do rozhodovacího režimu, a otevřete samostatnou změnu.
+
+### Checklist kapitoly
+
+- Začali jste původním slibem rytmu?
+- Kontrolovali jste několik skutečných průchodů, ne obecný dojem?
+- Rozlišili jste zdravé, provozní a systémové tření?
+- Ověřili jste, jestli rytmus nenarostl o zbytečné kroky?
+- Smazali nebo sloučili jste datové stopy, které už nemají účel?
+- Zůstává vlastník definovaný jako role?
+- Umí zástup najít kanonické místo a pochopit další krok?
+- Nevyžaduje rytmus exporty, screenshoty nebo kopie osobních dat bez jasného důvodu?
+- Skončili jste jednou rozhodovací větou?
+- Vybrali jste maximálně jednu změnu před dalším cyklem?
+- Je jasné, kdy se rytmus příště zkontroluje?
+
+Dlouhodobý rytmus je dobrý jen tehdy, když po čase zůstává lehký. Pokud se musí pokaždé znovu vysvětlovat, není to rytmus, ale skrytý projekt. A skryté projekty jsou drahé právě tím, že se tváří jako běžná práce.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha GX o kontrole dlouhodobého rytmu po několika cyklech: původní slib rytmu, poslední tři průchody, rozlišení tření, kontrola bobtnání, privacy-first datová stopa, vlastnictví, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GW o převodu první údržbové opravy do dlouhodobého rytmu: výběr jedné opravy, kanonické místo, opakovatelné pravidlo, pracovní spouštěče, malé signály, hranice změny, uzavření původní kontroly, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GV o kontrole běžné údržby po prvním cyklu: návrat k údržbové větě, sledování průchodu práce, třídění nálezů, privacy-first datová stopa, scorecard, jedna oprava, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GU o převodu ověřeného stabilního bodu do běžné údržby: rozlišení údržby a další změny, volba rytmu, vlastnictví role, lehké signály, privacy-first brána, stop pravidla, changelog, šablona, mini workshop a checklist.
