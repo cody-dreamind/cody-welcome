@@ -60211,8 +60211,224 @@ Výstup workshopu má být jedna aktualizovaná pracovní šablona, jedna krátk
 
 Stabilizace je nudná v tom nejlepším smyslu. Bere ověřenou změnu a dělá z ní normální součást práce. Bez dramatu, bez nového projektu a bez procesního konfetti. Když se to povede, tým si za pár cyklů ani nevzpomene, že se pravidlo kdysi zavádělo. Prostě podle něj pracuje. A to je přesně ten moment, kdy změna přestává být iniciativou a začíná být systémem.
 
+## Příloha HB: Kontrola stabilizovaného pravidla po prvních použitích
+
+Stabilizované pravidlo může vypadat čistě v dokumentu a přesto selhat v běžné práci. Ne proto, že by bylo špatně myšlené. Často selže proto, že se člověk v reálném okamžiku rozhodování potká s jinou situací, než jakou si tým představoval u stolu. Formulář má výjimku, zákaznický požadavek přijde ve spěchu, onboardingový krok udělá někdo nový, nebo se ukáže, že kanonické místo je správné pro vlastníka procesu, ale ne pro člověka, který pravidlo používá.
+
+Proto má po stabilizaci následovat malá kontrola prvních použití. Ne audit všeho. Ne návrat k debatě, jestli pravidlo mělo vzniknout. Jen ověření, zda pravidlo skutečně pomohlo v práci, zda nevyrábí zbytečné tření a zda neotevřelo novou datovou stopu.
+
+Praktická otázka této přílohy zní:
+
+```text
+Použilo se stabilizované pravidlo v reálné práci tak, jak jsme čekali, a co je potřeba upravit, aby zůstalo užitečné?
+```
+
+Odpověď má vést k jednomu ze čtyř stavů: ponechat, zpřesnit, přesunout, nebo stáhnout zpět do úpravy. Všechno ostatní je pravděpodobně moc velké na jednu kontrolu.
+
+### Vyberte první dvě až tři skutečná použití
+
+Nekontrolujte dojem z pravidla. Kontrolujte konkrétní průchody. Vyberte dvě až tři situace, kde se pravidlo mělo použít po stabilizaci.
+
+Příklady:
+
+- nový formulář prošel schvalovací šablonou,
+- měsíční kontrola nástrojů narazila na novou datovou cestu,
+- nový člověk použil onboardingový checklist,
+- marketingový experiment prošel privacy-first bránou,
+- support tým řešil zákaznický dotaz podle nové odpovědnostní mapy,
+- produktový backlog použil nové stop pravidlo.
+
+U každého průchodu si napište jen pracovní fakta:
+
+```text
+Situace:
+Kdo pravidlo použil:
+Kde ho našel:
+Jaký výstup vznikl:
+Co se rozhodlo:
+Kde vzniklo tření:
+```
+
+Nepotřebujete dlouhou retrospektivu. Potřebujete vidět, jestli pravidlo existuje v práci, nebo jen v dokumentu.
+
+### Sledujte tři signály: nalezení, pochopení, dokončení
+
+První kontrola stabilizovaného pravidla má být jednoduchá. Sledujte tři signály.
+
+První je nalezení. Člověk musí pravidlo najít v okamžiku, kdy ho potřebuje. Pokud ho hledá přes staré zápisy, chat nebo paměť kolegy, kanonické místo není dost kanonické.
+
+Druhý signál je pochopení. Člověk musí rozumět, co má udělat bez dalšího výkladu. Pokud pravidlo vyžaduje překlad od vlastníka procesu, je pořád moc abstraktní.
+
+Třetí signál je dokončení. Po použití pravidla musí vzniknout jasný výstup: stav, rozhodnutí, aktualizovaná karta, uzavřený checklist, nebo vědomé stop rozhodnutí. Pokud po použití pravidla vznikne jen pocit, že se o tom mluvilo, pravidlo nedrží práci.
+
+Krátká scorecard:
+
+```text
+Nalezení: ano / s pomocí / ne
+Pochopení: ano / s výkladem / ne
+Dokončení: ano / částečně / ne
+Tření:
+Jedna věc k úpravě:
+```
+
+Scorecard nepoužívejte k hodnocení lidí. Použijte ji k hodnocení pravidla. Když schopný člověk pravidlo nenajde nebo nedokončí, problém často není v něm. Problém je v umístění, jazyku nebo rozsahu.
+
+### Rozlište chybu pravidla od chyby okolního systému
+
+Ne každé tření znamená, že pravidlo je špatně. Někdy pravidlo odhalí starý problém, který byl jen schovaný.
+
+Typické rozdíly:
+
+```text
+Chyba pravidla:
+Pravidlo používá nejasný jazyk.
+Pravidlo je na špatném místě.
+Pravidlo nemá jasný výstup.
+Pravidlo požaduje víc práce, než je nutné pro rozhodnutí.
+
+Chyba okolního systému:
+Chybí vlastník procesu.
+Existují dvě konfliktní šablony.
+Nástroj neumožňuje uložit potřebný stav.
+Tým nemá dohodnuté, kdo rozhoduje výjimky.
+Staré odkazy pořád vedou na archivní verzi.
+```
+
+Toto rozlišení chrání před špatnou opravou. Když je problém v okolním systému, nepřepisujte pravidlo dokola. Upravte cestu, vlastnictví nebo odkaz. Když je problém v pravidle, neorganizujte školení. Zpřesněte text a výstup.
+
+Codyho komentář: školení je často drahý způsob, jak zakrýt špatně napsanou větu. Ne vždycky. Ale dost často na to, aby stálo za to nejdřív opravit větu.
+
+### Udělejte privacy-first kontrolu po použití
+
+Stabilizované pravidlo už není experiment. Právě proto je potřeba zkontrolovat, jakou datovou stopu začalo v běžném provozu vyrábět.
+
+U prvních použití ověřte:
+
+- Nevznikly kopie osobních údajů mimo schválené místo?
+- Neukládají se do checklistu konkrétní zákaznické detaily, když stačí stav?
+- Neobsahuje důkaz použití citlivější data než samotné rozhodnutí?
+- Je jasné, kdo má k výstupu přístup?
+- Má výstup rozumnou retenci?
+- Lze pro další použití zkrátit poznámku na stav, datum, roli a rozhodnutí?
+
+Příklad nadbytečné stopy:
+
+```text
+Do kontrolní karty kopírujeme celé znění zákaznického požadavku, aby bylo jasné, proč jsme zapnuli výjimku.
+```
+
+Lepší pracovní stopa:
+
+```text
+Kontrolní karta obsahuje typ výjimky, datum, odpovědnou roli, rozhodnutí a odkaz na primární záznam v systému, kde požadavek patří.
+```
+
+Privacy-first provoz není jen o tom, že neinstalujete další tracker. Je i o tom, že interní pravidla nevyrábí vlastní malé skládky dat. Každá nová šablona se umí tvářit nevinně. Pak do ní někdo začne kopírovat všechno, protože "se to může hodit". Většinou se to nehodí. Většinou to jen stárne a zvyšuje riziko.
+
+### Rozhodněte jeden další stav
+
+Po kontrole prvních použití neotvírejte obecný redesign procesu. Rozhodněte jeden další stav pravidla.
+
+```text
+Ponechat:
+Pravidlo bylo nalezeno, pochopeno a dokončeno bez zásadního tření.
+
+Zpřesnit:
+Pravidlo je na správném místě, ale jazyk nebo výstup potřebuje malou úpravu.
+
+Přesunout:
+Pravidlo dává smysl, ale člověk se s ním nepotká ve správný okamžik.
+
+Vrátit do úpravy:
+Pravidlo se ukázalo jako předčasné, příliš široké nebo závislé na nevyřešeném okolním systému.
+```
+
+Příklad rozhodovací věty:
+
+```text
+Pravidlo ponecháváme, ale zpřesníme výstup: místo volné poznámky bude karta obsahovat stav primárního záznamu, stav dočasné kopie a retenční rozhodnutí.
+```
+
+Nebo:
+
+```text
+Pravidlo přesouváme z obecného runbooku do schvalovací šablony nového formuláře, protože tam vzniká skutečné rozhodnutí.
+```
+
+Důležitá je konkrétnost. Když rozhodnutí končí větou "budeme na to dávat pozor", není to rozhodnutí. Je to přání v pracovním oblečení.
+
+### Šablona kontroly stabilizovaného pravidla
+
+```text
+Název pravidla:
+Kanonické místo:
+Datum stabilizace:
+Odpovědná role:
+
+Kontrolované použití 1:
+Situace:
+Kdo pravidlo použil:
+Nalezení:
+Pochopení:
+Dokončení:
+Výstup:
+Tření:
+
+Kontrolované použití 2:
+Situace:
+Kdo pravidlo použil:
+Nalezení:
+Pochopení:
+Dokončení:
+Výstup:
+Tření:
+
+Privacy-first kontrola:
+Nová datová stopa:
+Minimum dat:
+Nadbytečné údaje:
+Retence:
+Přístupy:
+
+Rozhodnutí:
+Stav pravidla:
+Jedna úprava:
+Kdo ji udělá:
+Do kdy:
+Další kontrolní háček:
+```
+
+Šablonu držte krátkou. Její hodnota je v tom, že uzavře první setkání pravidla s realitou. Pokud z kontroly vznikne dlouhý dokument, začali jste pravděpodobně řešit portfoliovou revizi pravidel. To je jiná práce.
+
+### Mini workshop na 25 minut
+
+1. Pět minut: vybrat dvě až tři skutečná použití pravidla.
+2. Pět minut: projít signály nalezení, pochopení a dokončení.
+3. Čtyři minuty: rozlišit chyby pravidla od chyb okolního systému.
+4. Čtyři minuty: udělat privacy-first kontrolu datové stopy.
+5. Čtyři minuty: napsat jedno rozhodnutí o stavu pravidla.
+6. Tři minuty: určit jednu úpravu a další kontrolní háček.
+
+Výstup workshopu má být jedna věta rozhodnutí a případně jedna malá úprava pravidla nebo jeho umístění. Nic víc. Pokud se objeví pět větších problémů, vyberte jeden, který nejvíc brání reálnému použití. Zbytek patří do backlogu, ne do této kontroly.
+
+### Checklist kapitoly
+
+- Vybrali jste skutečná použití pravidla, ne obecné dojmy?
+- Víte, jestli člověk pravidlo našel bez pomoci?
+- Bylo pravidlo pochopitelné bez dodatečného výkladu?
+- Vznikl po použití jasný pracovní výstup?
+- Rozlišili jste problém pravidla od problému okolního systému?
+- Zkontrolovali jste, jestli pravidlo nevytváří nadbytečnou datovou stopu?
+- Nahradili jste osobní nebo zákaznické detaily stavem tam, kde to stačí?
+- Rozhodli jste jeden další stav: ponechat, zpřesnit, přesunout nebo vrátit do úpravy?
+- Je případná úprava malá a navázaná na reálné tření?
+- Existuje další konkrétní kontrolní háček?
+
+První použití stabilizovaného pravidla je test reality. Nehledá viníka a neoslavuje dokument. Jen ukáže, jestli pravidlo pomáhá člověku udělat lepší rozhodnutí s menší datovou stopou. Když ano, nechte ho žít. Když ne, opravte nejbližší překážku. Dobrý provoz se nestaví na tom, že pravidla přibývají. Staví se na tom, že ta užitečná přežijí kontakt s prací.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HB o kontrole stabilizovaného pravidla po prvních použitích: výběr skutečných průchodů, signály nalezení, pochopení a dokončení, rozlišení chyby pravidla a okolního systému, privacy-first kontrola datové stopy, rozhodnutí dalšího stavu, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HA o stabilizaci ověřené úpravy dlouhodobého rytmu do pravidla: oddělení úpravy od pravidla, kanonické místo, jazyk práce, uzavření staré cesty, privacy-first stabilizace datové stopy, předání týmu, kontrolní háček, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Zpřesněn úvodní návod k používání rukopisu o kontrolu návaznosti nové pracovní věty na poslední rozhodnutí.
 - 2026-05-15: Doplněna Příloha GZ o ověření úpravy dlouhodobého rytmu po prvním cyklu: návrat ke změnové větě, první skutečný průchod, rozlišení problému úpravy a zavedení, privacy-first kontrola datové stopy, signály použití/výsledku/ceny, rozhodnutí dalšího stavu, šablona, mini workshop a checklist.
