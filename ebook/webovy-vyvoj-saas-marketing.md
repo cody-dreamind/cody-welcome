@@ -58604,8 +58604,214 @@ Pravidla:
 
 Převod stabilního bodu do běžné údržby je moment, kdy se z dobrého rozhodnutí stává provozní návyk. Ne velká ceremonie. Spíš tiché nastavení zábradlí: víme, kdo hlídá směr, kdy se podíváme znovu a kde je hranice, za kterou už nejde o údržbu, ale o nové rozhodnutí.
 
+## Příloha GV: Kontrola běžné údržby po prvním cyklu
+
+Běžná údržba se často nastaví dobře na papíře a začne se rozpadat až v prvním skutečném cyklu. Ne proto, že by tým byl líný. Spíš proto, že realita ukáže drobné tření: kontrola trvá déle, než měla, vlastník neví, kde hledat signál, zápis je moc dlouhý, starý dokument pořád někdo používá, nebo se z lehké údržby nenápadně stane další schůzka bez rozhodnutí.
+
+První cyklus je proto test provozní ceny. Nejde o audit ve smyslu "nachytat chyby". Jde o jednoduchou otázku: pomáhá nám údržba udržet stabilní bod použitelný, nebo jsme jen vytvořili další rituál?
+
+Dobrá kontrola po prvním cyklu má tři výsledky:
+
+1. Tým ví, jestli se údržba opravdu stala součástí práce.
+2. Vlastník ví, co příště udělat stejně, zkrátit nebo eskalovat.
+3. Stabilní bod se nezvětší zbytečnou dokumentací jen proto, že proběhla kontrola.
+
+### Co je první cyklus
+
+První cyklus není vždy měsíc. U každého stabilního bodu znamená něco jiného:
+
+- U týdenního marketingového review je první cyklus jeden týden.
+- U měsíční kontroly SaaS metrik je první cyklus jeden měsíční uzávěrkový průchod.
+- U kvartálního auditu dodavatelů je první cyklus jedno kvartální review.
+- U incidentního runbooku může být první cyklus první ostré použití nebo drill.
+- U onboardingového standardu je první cyklus první člověk, který podle něj opravdu prošel prací.
+
+Kontrola má navazovat na skutečnou práci, ne na kalendářovou netrpělivost. Pokud se stabilní bod ještě nepoužil, nekontrolujte kvalitu údržby. Zkontrolujte raději, proč se nepoužil.
+
+Příklad: tým si nastaví měsíční kontrolu formulářů na webu. Po dvou týdnech není co hodnotit, protože ještě neproběhl celý měsíc ani žádná změna formuláře. Po prvním měsíci už ale lze vidět, jestli někdo prošel odeslané poptávky, jestli formulář pořád sbírá jen potřebná data, jestli odpověď zákazníkovi přišla včas a jestli se neobjevilo nové tření.
+
+### Návrat k původní údržbové větě
+
+Kontrolu nezačínejte dojmy. Začněte původní větou, kvůli které údržba vznikla.
+
+Dobrá věta:
+
+> Jednou měsíčně ověříme, že hlavní poptávkový formulář sbírá jen nutná data, funguje na mobilu, posílá zprávu správné roli a má jasné potvrzení pro uživatele.
+
+Slabá věta:
+
+> Budeme kontrolovat formuláře.
+
+Rozdíl je v rozhodovací síle. První věta říká, co přesně znamená "v pořádku". Druhá věta otevírá nekonečnou debatu, jestli se má řešit design, copywriting, antispam, CRM, automatizace, analytika nebo všechno najednou. Tedy klasická porada, jen s hezčím názvem.
+
+Při kontrole si položte čtyři otázky:
+
+1. Je původní údržbová věta pořád správná?
+2. Proběhl cyklus podle této věty, nebo podle zvyku někoho v týmu?
+3. Vzniklo na konci rozhodnutí, nebo jen zápis?
+4. Byla cena kontroly přiměřená hodnotě stabilního bodu?
+
+Pokud neumíte odpovědět, problém není v lidech. Problém je v tom, že údržba nemá dost přesný tvar.
+
+### Sledujte průchod, ne disciplínu
+
+Kontrola po prvním cyklu nemá hodnotit, jestli vlastník "splnil úkol". To rychle vede k mikromanagementu a k obraně místo učení. Sledujte průchod:
+
+- Kde vlastník začal?
+- Jak našel správný zdroj pravdy?
+- Jaké signály použil?
+- Co musel dohledávat ručně?
+- Kde se zasekl?
+- Co zapsal?
+- Jaké rozhodnutí z kontroly vzniklo?
+
+Příklad: provozní vlastník má zkontrolovat, jestli RSS feed a veřejný archiv článků pořád fungují po změně publikace. Při kontrole se ukáže, že samotný feed je v pořádku, ale odkaz na archiv je ve starém interním checklistu. Vlastník tedy neudělal chybu. Systém má dvě trasy. Správná oprava není "příště si dej pozor", ale odstranit starou trasu nebo ji přesměrovat na kanonické místo.
+
+### Rozlište čtyři typy nálezů
+
+Po prvním cyklu se nálezy často míchají dohromady. Pomůže jednoduché třídění:
+
+1. Nález údržby: údržbový krok je nejasný, zbytečně dlouhý nebo špatně umístěný.
+2. Nález stabilního bodu: samotné pravidlo už neodpovídá realitě práce.
+3. Nález zavedení: pravidlo je dobré, ale tým neví, kde ho najít nebo kdy ho použít.
+4. Nález okolního systému: problém je v nástroji, přístupu, datech, formuláři, CRM nebo jiném místě.
+
+Toto rozlišení brání tomu, aby se všechno opravovalo v jednom dokumentu. Když formulář neposílá notifikace, nepřidávejte do údržbového checklistu další tři věty o ruční kontrole inboxu. Opravte notifikace. Checklist není skládka provozních bolestí.
+
+### Privacy-first kontrola prvního cyklu
+
+Údržba může nenápadně vyrábět novou datovou stopu. První kontrola musí ověřit, jestli kvůli ní nevzniklo víc citlivých podkladů, než je potřeba.
+
+Zeptejte se:
+
+- Vznikly screenshoty, exporty, kopie databází nebo seznamy zákazníků?
+- Jsou uložené na správném místě?
+- Mají omezený přístup?
+- Je jasné, kdy se smažou?
+- Dá se příště použít agregovaný signál místo detailních osobních dat?
+- Nevyžaduje údržba nový externí nástroj jen kvůli pohodlí?
+- Nezačal tým sledovat chování jednotlivých lidí místo kvality procesu?
+
+Privacy-first údržba neznamená, že nic neměříte. Znamená, že měření má účel, minimální rozsah a konec životnosti. Pokud k rozhodnutí stačí počet doručených poptávek a počet chyb, nepotřebujete export celé komunikace se zákazníky.
+
+Codyho komentář: největší past provozní údržby je věta "pro jistotu si to uložíme". To je nenápadný výrobník digitálního nepořádku. Jistota bez retenčního pravidla není jistota, ale budoucí auditní nepříjemnost v pěkném kabátku.
+
+### Scorecard prvního cyklu
+
+Pro první kontrolu stačí jednoduché hodnocení 0 až 2. Nula znamená problém, jednička částečně, dvojka v pořádku.
+
+| Oblast | Otázka | Skóre |
+| --- | --- | --- |
+| Použití | Proběhla údržba v reálném pracovním cyklu? | 0-2 |
+| Trasa | Našel vlastník správné místo bez hledání a ptaní? | 0-2 |
+| Rozhodnutí | Vzniklo jasné rozhodnutí, ne jen zápis? | 0-2 |
+| Cena | Byla kontrola dost lehká vzhledem k hodnotě? | 0-2 |
+| Data | Použila jen nezbytná data a správné místo uložení? | 0-2 |
+| Dopad | Pomohla udržet stabilní bod použitelný? | 0-2 |
+
+Interpretace:
+
+- 10 až 12 bodů: ponechat rytmus, jen zapsat drobné zlepšení.
+- 7 až 9 bodů: zkrátit nebo zpřesnit jeden krok.
+- 4 až 6 bodů: upravit údržbovou větu, trasu nebo vlastnictví.
+- 0 až 3 body: údržba není připravená pro běžný provoz; vraťte se k návrhu stabilního bodu.
+
+Scorecard nemá být další dokument pro archiv. Použijte ji jako krátké rozhodovací zrcadlo a přepište výsledek do jedné věty.
+
+### Jedna oprava po prvním cyklu
+
+Po první kontrole vyberte jednu opravu. Ne pět. První cyklus často odhalí víc drobností, ale když opravíte všechno najednou, nepoznáte, co pomohlo.
+
+Dobré opravy:
+
+- Zkrátit checklist z dvanácti bodů na šest.
+- Přesunout odkaz na zdroj pravdy do místa, kde práce začíná.
+- Doplnit jednu rozhodovací větu k vlastníkovi.
+- Zrušit starý dokument, který konkuruje novému postupu.
+- Nahradit detailní export agregovaným signálem.
+- Přidat stop pravidlo: pokud kontrola trvá déle než 20 minut, eskalovat návrh zjednodušení.
+
+Špatné opravy:
+
+- Přidat další schůzku bez změny procesu.
+- Přidat další tabulku jen proto, že něco nebylo jasné.
+- Přepsat celý stabilní bod po jednom slabém průchodu.
+- Rozšířit údržbu na související témata, která nikdo nepoptal.
+
+### Šablona záznamu kontroly
+
+Použijte krátký zápis:
+
+```text
+Stabilní bod:
+Původní údržbová věta:
+První reálný cyklus:
+Vlastník role:
+
+Co proběhlo hladce:
+Kde vzniklo tření:
+Typ nálezu: údržba / stabilní bod / zavedení / okolní systém
+Privacy-first poznámka:
+Skóre: __ / 12
+
+Rozhodnutí:
+Jedna oprava před dalším cyklem:
+Kdo ji udělá:
+Kdy se ověří:
+```
+
+Příklad vyplnění:
+
+```text
+Stabilní bod: měsíční kontrola poptávkového formuláře
+Původní údržbová věta: ověřit nutná data, mobilní funkčnost, doručení správné roli a férové potvrzení
+První reálný cyklus: dubnové poptávky
+Vlastník role: marketing operations
+
+Co proběhlo hladce: formulář funguje na mobilu, potvrzení je jasné
+Kde vzniklo tření: vlastník hledal správný seznam polí ve starém dokumentu
+Typ nálezu: zavedení
+Privacy-first poznámka: nebyl potřeba export jednotlivých zpráv, stačil souhrn polí a testovací odeslání
+Skóre: 9 / 12
+
+Rozhodnutí: rytmus ponechat, odstranit starou trasu k dokumentaci formuláře
+Jedna oprava před dalším cyklem: přesměrovat starý checklist na kanonickou kartu formuláře
+Kdo ji udělá: marketing operations
+Kdy se ověří: při další měsíční kontrole
+```
+
+### Mini workshop na 25 minut
+
+Stačí krátké setkání vlastníka a jednoho člověka, který výstup používá.
+
+1. Pět minut: přečíst původní údržbovou větu a popsat skutečný cyklus.
+2. Sedm minut: projít, kde práce tekla hladce a kde vzniklo tření.
+3. Pět minut: označit typ nálezu.
+4. Pět minut: vybrat jednu opravu.
+5. Tři minuty: zapsat rozhodnutí a datum dalšího ověření.
+
+Pokud workshop trvá hodinu, pravděpodobně řešíte víc než první kontrolu údržby. Zastavte se a pojmenujte, které rozhodnutí do této kontroly opravdu patří.
+
+### Checklist kapitoly
+
+- Proběhla kontrola po skutečném pracovním cyklu, ne jen po uplynutí data?
+- Vrátili jste se k původní údržbové větě?
+- Sledujete průchod práce místo disciplíny člověka?
+- Je jasné, kde vlastník začal a jak našel zdroj pravdy?
+- Vzniklo rozhodnutí, ne jen poznámka?
+- Rozlišili jste nález údržby, stabilního bodu, zavedení a okolního systému?
+- Neopravujete technický nebo nástrojový problém přidáním dalšího checklistu?
+- Ověřili jste datovou stopu prvního cyklu?
+- Nevznikly zbytečné exporty, screenshoty nebo kopie citlivých dat?
+- Vybrali jste jednu opravu před dalším cyklem?
+- Má oprava vlastníka a termín ověření?
+- Zůstává údržba lehčí než problém, kterému má předcházet?
+
+Kontrola po prvním cyklu je malá, ale důležitá brzda. Pomáhá zabránit tomu, aby se z dobrého stabilního bodu stal další interní rituál bez dopadu. Když po ní tým ví, co příště udělá jednodušeji, údržba plní svoji roli: drží systém použitelný, ne okázale spravovaný.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha GV o kontrole běžné údržby po prvním cyklu: návrat k údržbové větě, sledování průchodu práce, třídění nálezů, privacy-first datová stopa, scorecard, jedna oprava, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GU o převodu ověřeného stabilního bodu do běžné údržby: rozlišení údržby a další změny, volba rytmu, vlastnictví role, lehké signály, privacy-first brána, stop pravidla, changelog, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GT o kontrole nového stabilního bodu po prvních použitích: reálné průchody, trasa k bodu, porovnání výstupu s pravidlem, návrat starých cest, privacy-first kontrola skutečných výstupů, jednověté rozhodnutí, minimální aktualizace, šablona, mini workshop a checklist.
 - 2026-05-14: Doplněna Příloha GS o převodu ověřené roční změny do nového stabilního bodu: pojmenování podle pracovní situace, nahrazení starých cest, zkrácení historie, vlastnictví a údržba, privacy-first stabilizace, předání týmu, archivace starých postupů, šablona, mini workshop a checklist.
