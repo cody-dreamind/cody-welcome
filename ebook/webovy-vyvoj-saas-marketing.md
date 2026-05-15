@@ -59394,8 +59394,301 @@ Pokud se během workshopu otevře velká debata o změně produktu, CRM, dodavat
 
 Dlouhodobý rytmus je dobrý jen tehdy, když po čase zůstává lehký. Pokud se musí pokaždé znovu vysvětlovat, není to rytmus, ale skrytý projekt. A skryté projekty jsou drahé právě tím, že se tváří jako běžná práce.
 
+## Příloha GY: Převod kontroly dlouhodobého rytmu do jedné úpravy
+
+Kontrola dlouhodobého rytmu má cenu jen tehdy, když po ní vznikne jasná úprava nebo vědomé rozhodnutí nic neměnit. Nejčastější chyba je opačná: tým najde deset drobných nálezů, otevře tři širší debaty a na konci neví, co bude v příštím cyklu jiné.
+
+Tato příloha pomáhá převést nález z kontroly do jedné úpravy rytmu. Ne do nového projektu. Ne do velké přestavby. Do jedné změny, kterou lze použít v dalším skutečném průchodu.
+
+Dobrá úprava rytmu:
+
+- má jasný důvod,
+- mění konkrétní pracovní místo,
+- zkracuje nebo zpřesňuje rozhodnutí,
+- nevyžaduje zbytečná nová data,
+- jde ověřit v příštím cyklu,
+- nezakládá druhý zdroj pravdy.
+
+Codyho komentář: když se po kontrole rytmu narodí další pravidelná schůzka, pravděpodobně jste neléčili příčinu. Jen jste přidali hlídače k hlídači.
+
+### 1. Vyberte nález podle ceny opakování
+
+Nejdřív seřaďte nálezy podle toho, co bude nejdražší, když se to zopakuje ještě třikrát. Ne podle toho, co je nejviditelnější v zápisu.
+
+Použijte jednoduchou tabulku:
+
+| Nález | Co se stane při opakování | Cena opakování | Vybrat? |
+| --- | --- | --- | --- |
+| Duplicitní poznámkový sloupec | vlastník vyplňuje stejnou věc dvakrát | nízká až střední | možná |
+| Nové CRM pole mimo datovou mapu | formulář začne sbírat údaj bez jasného účelu | vysoká | ano |
+| Nejasné datum další kontroly | rytmus se může opozdit | střední | možná |
+
+Příklad vybraného nálezu:
+
+```text
+Nález: nové CRM pole se objevilo ve formulářové kontrole dřív, než prošlo datovou mapou.
+Cena opakování: formulář může sbírat zbytečný údaj, vlastník kontroly ztrácí čas dohledáváním účelu a vzniká privacy-first riziko.
+Vybráno: ano.
+```
+
+Pokud má nález nízkou cenu opakování, často stačí drobná úprava textu při běžné údržbě. Do samostatné úpravy rytmu patří věci, které opakovaně kazí rozhodnutí, zvyšují datovou stopu nebo zhoršují předatelnost.
+
+### 2. Napište změnovou větu
+
+Změnová věta drží rozsah. Bez ní se z jedné úpravy snadno stane obecná modernizace procesu.
+
+Použijte tvar:
+
+```text
+Upravíme [konkrétní místo] tak, aby [role] při [spouštěči] mohla [lepší rozhodnutí] bez [nežádoucí cena nebo riziko].
+```
+
+Příklad:
+
+```text
+Upravíme kanonickou kartu poptávkového formuláře tak, aby marketing operations při měsíční kontrole poznal, že nové CRM pole musí nejdřív projít datovou mapou, bez exportu zákaznických zpráv a bez lovení kontextu ve starém chatu.
+```
+
+Dobrá změnová věta říká:
+
+- kde se sáhne,
+- komu to pomůže,
+- v jakém okamžiku,
+- jaké rozhodnutí se zlepší,
+- jaké riziko nebo zbytečná práce se nemá opakovat.
+
+Slabá věta vypadá takto:
+
+```text
+Zlepšíme práci s CRM poli.
+```
+
+To je směr, ne úprava. Směr nepatří do checklistu pro příští cyklus. Úprava ano.
+
+### 3. Zasáhněte nejbližší pracovní místo
+
+Úprava rytmu má žít tam, kde příští práce začne. Pokud nález vznikl při kontrole formuláře, oprava nemá být jen v zápisu z retrospektivy. Má se objevit v kanonické kartě formuláře, checklistu kontroly nebo vstupní bráně pro změny polí.
+
+Vyberte jedno primární místo:
+
+- kanonická karta procesu,
+- checklist běžné kontroly,
+- rozhodovací šablona,
+- vstupní brána pro změnu,
+- onboardingová instrukce pro vlastníka role,
+- index pracovních standardů.
+
+Příklad rozhodnutí:
+
+```text
+Primární místo: kanonická karta poptávkového formuláře.
+Sekundární místo: měsíční checklist formulářů odkáže na stejnou kartu.
+Neopravujeme: staré poznámky v chatu, historické zápisy kontrol, obecný marketingový playbook.
+```
+
+Tím zabráníte tomu, že se stejná oprava napíše do pěti míst a za měsíc už nebude jasné, která verze platí. Jedno místo má nést pravidlo. Ostatní místa mají maximálně odkazovat.
+
+### 4. Udělejte nejmenší užitečnou změnu
+
+Při úpravě dlouhodobého rytmu platí: nejdřív zkraťte, až potom přidávejte. Nález často nevzniká proto, že něco chybí, ale proto, že existující pravidlo je špatně umístěné, dlouhé nebo nejasné.
+
+Možné typy úprav:
+
+| Typ úpravy | Kdy dává smysl | Příklad |
+| --- | --- | --- |
+| Zpřesnění věty | pravidlo existuje, ale dá se vyložit více způsoby | "nové pole" znamená i nové CRM pole, nejen pole ve webovém formuláři |
+| Přesun odkazu | lidé začínají na špatném místě | měsíční checklist odkazuje na kanonickou kartu |
+| Smazání kroku | rytmus zbytečně bobtná | ruší se duplicitní poznámkový sloupec |
+| Vstupní brána | změna reality přichází zvenku | nové CRM pole musí mít účel a datovou mapu před nasazením |
+| Eskalační pravidlo | vlastník neumí rozhodnout sám | nejasný účel pole jde na krátké product/ops rozhodnutí |
+
+Příklad malé změny:
+
+```text
+Do kanonické karty formuláře doplnit jednu větu:
+Nové pole ve formuláři nebo navazujícím CRM se nesmí přidat do ostrého toku, dokud nemá účel, vlastníka, retenční pravidlo a záznam v datové mapě.
+```
+
+To je lepší než nový třístránkový proces "správy CRM polí". Pokud se později ukáže, že jedna věta nestačí, další kontrola to ukáže. Teď opravujete nejmenší známou příčinu.
+
+### 5. Ohlídejte privacy-first dopad úpravy
+
+Úprava rytmu nesmí tiše zvýšit datovou stopu. To se stává hlavně tehdy, když tým chce "lépe dokazovat", že proces funguje. Najednou se začnou ukládat screenshoty, kopie zpráv, exporty tabulek nebo detailní historie rozhodnutí.
+
+Před zavedením úpravy si položte pět otázek:
+
+- Přidáváme nový sběr dat, nebo jen lepší rozhodovací pravidlo?
+- Stačí agregovaný signál místo konkrétních zákaznických údajů?
+- Potřebujeme ukládat důkaz, nebo stačí výsledek kontroly?
+- Má nová stopa retenci a vlastníka úklidu?
+- Neotevírá úprava přístup lidem, kteří ho pro práci nepotřebují?
+
+Příklad privacy-first rozhodnutí:
+
+```text
+Nové pravidlo nevyžaduje export CRM dat. Vlastník při kontrole zapisuje jen stav: pole má účel / nemá účel / čeká na rozhodnutí. Pokud je potřeba ukázka, použije se testovací záznam bez osobních údajů.
+```
+
+Tohle je přesně ten typ nudné věty, která v Evropě šetří dost budoucí práce. Dobrá privacy-first úprava nevypadá dramaticky. Jen zabrání tomu, aby se z provozní kontroly stala neřízená kopírka dat.
+
+### 6. Připravte ověření v příštím cyklu
+
+Úprava není hotová tím, že se zapíše. Hotová je až ve chvíli, kdy víte, jak poznáte, že pomohla.
+
+Pro příští cyklus zvolte tři malé signály:
+
+```text
+Signál použití:
+Signál výsledku:
+Signál ceny:
+```
+
+Příklad:
+
+```text
+Signál použití: vlastník při kontrole začne v kanonické kartě formuláře.
+Signál výsledku: nové CRM pole buď má záznam v datové mapě, nebo je zastaveno před nasazením.
+Signál ceny: kontrola nepřidala víc než 10 minut práce oproti běžnému průchodu.
+```
+
+Nepřidávejte složité měření. Úprava rytmu má v dalším cyklu odpovědět na jednoduchou otázku:
+
+```text
+Bylo díky změně rozhodnutí rychlejší, jasnější nebo bezpečnější?
+```
+
+Pokud ne, buď byla vybraná špatná příčina, nebo byla úprava moc slabá. To je užitečné zjištění. Jen ho držte v jednom dalším kroku, ne v nekonečné debatě.
+
+### 7. Uzavřete starý nález
+
+Každá úprava má uzavřít nález, ze kterého vznikla. Jinak se v backlogu začne hromadit směs hotových věcí, polootevřených poznámek a pocitů.
+
+Do kontrolního záznamu doplňte:
+
+```text
+Vybraný nález:
+Změnová věta:
+Primární místo úpravy:
+Co se nemění:
+Privacy-first dopad:
+Jak se ověří:
+Stav nálezu:
+```
+
+Vyplněný příklad:
+
+```text
+Vybraný nález: nové CRM pole se objevilo mimo datovou mapu
+Změnová věta: upravíme kartu formuláře tak, aby nové CRM pole prošlo účelem, vlastníkem, retencí a datovou mapou před nasazením
+Primární místo úpravy: kanonická karta poptávkového formuláře
+Co se nemění: celý CRM proces, struktura formuláře, historické zápisy
+Privacy-first dopad: žádný nový sběr dat, pouze pravidlo pro zastavení neověřeného pole
+Jak se ověří: v příští měsíční kontrole formulářů
+Stav nálezu: převedeno do jedné úpravy, čeká na ověření
+```
+
+Stav "čeká na ověření" je důležitý. Neříká, že změna je definitivně dobrá. Říká, že tým ví, co udělal a kde se k tomu vrátí.
+
+### Šablona jedné úpravy rytmu
+
+```text
+Rytmus:
+Kontrolované období:
+Vybraný nález:
+Cena opakování:
+
+Změnová věta:
+Primární pracovní místo:
+Sekundární odkazy:
+Co se nemění:
+
+Typ úpravy:
+Konkrétní text nebo krok změny:
+Vlastník zavedení:
+Datum zavedení:
+
+Privacy-first kontrola:
+Nová data:
+Retence:
+Přístupy:
+Úklid staré stopy:
+
+Ověření v příštím cyklu:
+Signál použití:
+Signál výsledku:
+Signál ceny:
+
+Stav původního nálezu:
+Datum další kontroly:
+```
+
+Vyplněný mini příklad:
+
+```text
+Rytmus: měsíční kontrola poptávkových formulářů
+Kontrolované období: březen až květen
+Vybraný nález: nové CRM pole se objevilo mimo datovou mapu
+Cena opakování: vysoká, protože může vzniknout zbytečný sběr údajů
+
+Změnová věta: upravíme kartu formuláře tak, aby marketing operations zastavil nové CRM pole bez účelu a datové mapy před nasazením
+Primární pracovní místo: kanonická karta poptávkového formuláře
+Sekundární odkazy: měsíční checklist formulářů
+Co se nemění: celý CRM proces a historické záznamy kontrol
+
+Typ úpravy: vstupní brána
+Konkrétní text nebo krok změny: nové formulářové nebo CRM pole musí mít účel, vlastníka, retenci a záznam v datové mapě
+Vlastník zavedení: marketing operations
+Datum zavedení: 2026-05-15
+
+Privacy-first kontrola: bez nového sběru dat
+Nová data: žádná
+Retence: ponechat jen stav kontroly
+Přístupy: beze změny
+Úklid staré stopy: smazat starý screenshot testovací zprávy
+
+Ověření v příštím cyklu: další měsíční kontrola formulářů
+Signál použití: kontrola začala v kanonické kartě
+Signál výsledku: nové pole má datovou mapu nebo je zastaveno
+Signál ceny: kontrola nepřidala víc než 10 minut
+
+Stav původního nálezu: převedeno do jedné úpravy, čeká na ověření
+Datum další kontroly: příští měsíční cyklus
+```
+
+### Mini workshop na 25 minut
+
+Tenhle workshop nedělejte ve velké skupině. Stačí vlastník rytmu, člověk z navazující role a někdo, kdo umí držet privacy-first hranici.
+
+1. Čtyři minuty: vybrat jeden nález podle ceny opakování.
+2. Čtyři minuty: napsat změnovou větu.
+3. Čtyři minuty: určit primární pracovní místo.
+4. Čtyři minuty: zvolit nejmenší užitečnou úpravu.
+5. Čtyři minuty: projít privacy-first dopad.
+6. Tři minuty: nastavit ověření v příštím cyklu.
+7. Dvě minuty: uzavřít původní nález.
+
+Pokud se nevejdete do 25 minut, pravděpodobně řešíte moc velký rozsah. Vraťte se k otázce: která jedna změna nejvíc sníží cenu dalšího opakování?
+
+### Checklist kapitoly
+
+- Vybrali jste jeden nález, ne celý seznam přání?
+- Řadili jste nálezy podle ceny opakování?
+- Má úprava jednu změnovou větu?
+- Je jasné, které pracovní místo se mění?
+- Nevzniká druhý zdroj pravdy?
+- Je úprava menší než nový proces?
+- Zkrátili jste nebo zpřesnili stávající rytmus dřív, než jste něco přidali?
+- Prošla úprava privacy-first kontrolou?
+- Nepřidáváte exporty, screenshoty ani kopie osobních dat bez důvodu?
+- Má úprava signál použití, výsledku a ceny?
+- Je jasné, kdy se ověří v příštím cyklu?
+- Uzavřeli jste původní nález stavem "čeká na ověření"?
+
+Jedna dobrá úprava rytmu má být skoro nenápadná. Příští člověk jen začne na správném místě, uvidí jasnější pravidlo a vyhne se zbytečné práci. Pokud kvůli úpravě potřebuje číst dlouhý vysvětlující dokument, úprava se nejspíš minula účinkem.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha GY o převodu kontroly dlouhodobého rytmu do jedné úpravy: výběr nálezu podle ceny opakování, změnová věta, pracovní místo, nejmenší užitečná změna, privacy-first dopad, ověření v příštím cyklu, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GX o kontrole dlouhodobého rytmu po několika cyklech: původní slib rytmu, poslední tři průchody, rozlišení tření, kontrola bobtnání, privacy-first datová stopa, vlastnictví, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GW o převodu první údržbové opravy do dlouhodobého rytmu: výběr jedné opravy, kanonické místo, opakovatelné pravidlo, pracovní spouštěče, malé signály, hranice změny, uzavření původní kontroly, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GV o kontrole běžné údržby po prvním cyklu: návrat k údržbové větě, sledování průchodu práce, třídění nálezů, privacy-first datová stopa, scorecard, jedna oprava, šablona, mini workshop a checklist.
