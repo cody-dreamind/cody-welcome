@@ -62353,8 +62353,279 @@ Workshop držte u jednoho pravidla. Pokud během něj najdete další problémy,
 
 Kontrola po prvním normálním cyklu chrání stabilizované pravidlo před dvěma opačnými chybami. První je slepě věřit, že hotový text znamená hotový provoz. Druhá je z každého drobného tření vyrábět novou velkou revizi. Dobrý provoz dělá něco střízlivějšího: podívá se na skutečnou práci, opraví nejbližší tření a nechá funkční pravidlo dál sloužit.
 
+## Příloha HK: Převod závěru z prvního normálního cyklu do dalšího kroku
+
+Kontrola běžného pravidla po prvním normálním cyklu má hodnotu jen tehdy, když po ní vznikne jasný další krok. Jinak tým udělá pěkný zápis, chvíli má pocit kontroly a za měsíc znovu řeší stejný problém v jiné podobě. To není provozní zralost. To je drahý způsob, jak vyrábět vzpomínky na schůzky.
+
+Tato příloha navazuje na Přílohu HJ. Pomáhá převést výsledek kontroly do jedné konkrétní akce: ponechat pravidlo v klidu, opravit trasu, opravit text, vrátit pravidlo do udržovací změny, nebo zastavit rizikový postup. Cílem není otevřít další velký projekt. Cílem je zavřít smyčku.
+
+Praktická otázka zní:
+
+```text
+Jaký jeden další krok po prvním normálním cyklu nejvíc sníží tření, riziko nebo nejasnost pravidla, aniž by zbytečně zvětšil systém?
+```
+
+Když si tým na tuto otázku neodpoví, začne se kontrola měnit v komentář. Komentář může být chytrý, ale práci neposune. Další krok musí být vlastněný, malý a zapsaný tam, kde ho další člověk najde při práci.
+
+### 1. Začněte rozhodovací větou
+
+Nepřepisujte celý zápis kontroly do dalšího dokumentu. Vezměte rozhodovací větu z konce Přílohy HJ a upravte ji do pracovního tvaru:
+
+```text
+Po prvním normálním cyklu [stav pravidla], protože [důkaz z práce]. Další krok je [konkrétní akce], vlastníkem je [role] a kontrola proběhne [kdy].
+```
+
+Příklad:
+
+```text
+Po prvním normálním cyklu opravujeme trasu pravidla, protože lidé výstup vytvořili správně, ale dva ze tří se k pravidlu dostali přes starý onboardingový odkaz. Další krok je přesměrovat onboarding na kanonickou verzi, vlastníkem je operations lead a kontrola proběhne při příštím onboardingu.
+```
+
+Dobrá rozhodovací věta obsahuje čtyři věci:
+
+- stav,
+- důkaz,
+- akci,
+- vlastníka a kontrolní okamžik.
+
+Když některá část chybí, zápis není připravený pro provoz. "Je potřeba to upravit" není rozhodnutí. "Operations lead do pátku přesměruje onboardingový odkaz a při dalším onboardingu zkontroluje použití" rozhodnutí je.
+
+### 2. Vyberte jeden z pěti provozních směrů
+
+Po prvním normálním cyklu obvykle existuje pět možných směrů. Vyberte jeden hlavní. Vedlejší poznámky patří do backlogu, ne do stejné změny.
+
+```text
+Ponechat:
+Pravidlo funguje, výstupy jsou použitelné, datová stopa je přiměřená.
+
+Opravit trasu:
+Pravidlo je dobré, ale lidé ho hledají špatně nebo narážejí na staré odkazy.
+
+Opravit text:
+Pravidlo je na správném místě, ale formulace vede k nejasnému výkladu.
+
+Vrátit do udržovací změny:
+Problém je větší než drobná oprava, ale není potřeba zastavit celý postup.
+
+Zastavit kvůli riziku:
+Pravidlo vytváří zákaznické, bezpečnostní, právní nebo privacy-first riziko.
+```
+
+Rozhodovací tabulka:
+
+| Signál z prvního cyklu | Pravděpodobný směr | Nejmenší další krok |
+| --- | --- | --- |
+| Lidé pravidlo našli a výstup fungoval | Ponechat | Zapsat stav do changelogu a nechat pravidlo žít |
+| Výstup byl správný, ale cesta vedla přes staré místo | Opravit trasu | Přesměrovat odkaz, archivovat starou šablonu |
+| Lidé našli správné místo, ale pochopili jinak důležitý pojem | Opravit text | Přepsat jednu větu a přidat příklad |
+| Pravidlo vyžaduje údaje, které v reálné práci nejsou dostupné | Vrátit do udržovací změny | Zúžit pravidlo a ověřit ho při příštím použití |
+| Vznikly kopie osobních nebo zákaznických dat mimo zdroj pravdy | Zastavit kvůli riziku | Odstranit kopie, zúžit přístup, upravit postup před dalším použitím |
+
+Codyho komentář: nejčastější chyba je z drobné opravy trasy udělat debatu o tom, jestli potřebujeme nový systém dokumentace. Většinou nepotřebujeme. Potřebujeme smazat starý odkaz a napsat lepší větu.
+
+### 3. Upravte nejbližší pracovní místo
+
+Další krok má být vidět tam, kde lidé skutečně pracují. Nestačí aktualizovat kanonický dokument, pokud se k němu nikdo při práci nedostane. Stejně tak nestačí napsat zprávu do chatu, která za dva dny zmizí pod dalšími zprávami.
+
+Typická pracovní místa:
+
+- checklist v úkolu,
+- onboardingová stránka,
+- šablona zákaznického výstupu,
+- interní index pravidel,
+- automaticky generovaný popis úkolu,
+- provozní karta služby,
+- formulář pro kontrolu,
+- changelog pravidel.
+
+Příklad opravy trasy:
+
+```text
+Nález:
+Dva lidé použili starou šablonu kontroly formuláře.
+
+Nejbližší pracovní místo:
+Úkol "Měsíční kontrola formulářů" pořád obsahuje starý odkaz.
+
+Další krok:
+Vyměnit odkaz v opakovaném úkolu, starou šablonu označit jako archiv a do kanonického indexu doplnit novou trasu.
+```
+
+Tím se řeší příčina. Kdybyste jen napsali týmu "používejte novou šablonu", vznikne závislost na paměti a disciplíně. To není systém. To je prosba.
+
+### 4. Nechte changelog pracovat
+
+Changelog má být krátký, ale konkrétní. Nezapisujte do něj celý příběh kontroly. Zapište změnu tak, aby za měsíc bylo jasné, proč se pravidlo pohnulo.
+
+Dobrá položka changelogu:
+
+```text
+2026-05-15: Po prvním normálním cyklu pravidla kontroly formulářů opravena trasa. Opakovaný úkol nově odkazuje na kanonickou šablonu, stará šablona je archivovaná. Důvod: lidé výstup vyplnili správně, ale hledali ho přes starý onboardingový odkaz. Kontrola při dalším měsíčním cyklu.
+```
+
+Špatná položka changelogu:
+
+```text
+2026-05-15: Aktualizována dokumentace.
+```
+
+Druhá věta je formálně pravda, ale provozně k ničemu. Neříká, co se změnilo, proč, kde a kdy se to ověří.
+
+### 5. Udělejte privacy-first úklid hned
+
+Pokud kontrola odhalila novou nebo zbytečnou datovou stopu, nečekejte na další revizi. Privacy-first opravy mají často největší hodnotu právě tehdy, když jsou malé a rychlé.
+
+Typické malé opravy:
+
+- nahradit screenshot odkazem na primární systém,
+- smazat dočasný export po dokončení cyklu,
+- odstranit osobní údaje z ukázkového příkladu,
+- zúžit přístup ke složce nebo dokumentu,
+- přesunout citlivý detail z volné poznámky do systému s retencí,
+- upravit šablonu tak, aby žádala stav místo kopie celého obsahu.
+
+Krátký privacy-first zápis:
+
+```text
+Nález:
+V kontrolním výstupu vznikly screenshoty zákaznických odpovědí.
+
+Oprava:
+Šablona nově vyžaduje odkaz na primární záznam a stav bez kopie obsahu.
+
+Úklid:
+Staré screenshoty z posledního cyklu smazány.
+
+Kontrola:
+Při dalším cyklu ověřit, zda nevznikají nové kopie.
+```
+
+Tady není potřeba velké prohlášení. Stačí snížit množství dat, zpřesnit místo pravdy a dát lidem lepší cestu.
+
+### 6. Nastavte kontrolní háček podle velikosti změny
+
+Každý další krok nepotřebuje samostatnou schůzku. Kontrola má odpovídat riziku a velikosti změny.
+
+Jednoduché pravidlo:
+
+- Drobná oprava odkazu: zkontrolovat při příštím běžném použití.
+- Drobná oprava textu: zkontrolovat u prvního člověka, který pravidlo použije bez vysvětlení.
+- Udržovací změna: ověřit podle Přílohy HH nebo podobného krátkého ověřovacího rámce.
+- Privacy-first oprava: zkontrolovat skutečný výstup a úklid dat.
+- Zastavení kvůli riziku: nejdřív potvrdit odstranění dopadu, potom řešit nové pravidlo.
+
+Kontrolní háček napište přímo k akci:
+
+```text
+Další krok:
+Přesměrovat opakovaný úkol na kanonickou šablonu.
+
+Kontrolní háček:
+Při příští měsíční kontrole ověřit, zda výstup vznikl z nové šablony a bez starého odkazu.
+```
+
+Bez háčku se akce snadno ztratí. S háčkem víte, kdy má smyčka skončit.
+
+### 7. Zavřete starou cestu
+
+Každá nová oprava je poloviční, pokud stará cesta zůstane dostupná a tváří se jako platná. U pravidel, checklistů a šablon to platí dvojnásob. Lidé se neřídí teorií kanonického zdroje. Řídí se tím, co najdou první.
+
+Při uzavření staré cesty zkontrolujte:
+
+- staré dokumenty,
+- staré odkazy v úkolech,
+- staré odkazy v onboardingu,
+- uložené šablony,
+- automatizace a opakované úkoly,
+- interní rozcestníky,
+- příklady v training materiálech,
+- veřejné nebo zákaznické odkazy, pokud existují.
+
+Stav staré cesty může být:
+
+```text
+Smazat:
+Není potřeba zachovat historii ani odkaz.
+
+Archivovat:
+Má historickou hodnotu, ale nesmí se používat jako aktivní postup.
+
+Přesměrovat:
+Lidé na ni pořád chodí, proto je lepší je dovést na nové místo.
+
+Sloučit:
+Obsah je částečně užitečný, ale má žít v kanonickém pravidle.
+```
+
+Archiv bez viditelného varování není archiv. Je to past s lepším názvem. Když dokument archivujete, dejte to do názvu nebo úvodu a přidejte odkaz na aktuální verzi.
+
+### Šablona převodu závěru do dalšího kroku
+
+```text
+Pravidlo:
+Kanonické místo:
+Kontrolovaný normální cyklus:
+
+Rozhodovací věta:
+
+Stav po kontrole:
+Ponechat / opravit trasu / opravit text / vrátit do udržovací změny / zastavit kvůli riziku
+
+Důkaz z práce:
+
+Jeden další krok:
+Vlastník:
+Termín:
+Nejbližší pracovní místo, které se upraví:
+
+Changelog:
+
+Privacy-first kontrola:
+Vznikla nová datová stopa:
+Co se uklidí:
+Co se změní v šabloně nebo přístupech:
+
+Stará cesta:
+Smazat / archivovat / přesměrovat / sloučit
+Kde:
+
+Kontrolní háček:
+Kdy se ověří:
+Podle čeho poznáme, že smyčka skončila:
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: přečíst výsledek kontroly z prvního normálního cyklu.
+2. Tři minuty: vybrat jeden z pěti stavů.
+3. Tři minuty: najít nejbližší pracovní místo, které se má upravit.
+4. Dvě minuty: zapsat privacy-first úklid, pokud je potřeba.
+5. Dvě minuty: rozhodnout, co se stane se starou cestou.
+6. Dvě minuty: napsat changelog a kontrolní háček.
+7. Jedna minuta: potvrdit vlastníka a termín.
+
+Držte workshop u jedné změny. Pokud se objeví deset nápadů, vyberte jeden, který nejvíc snižuje opakované tření nebo riziko. Zbytek zapište jako podněty. Provoz se zlepšuje opakovanými malými dokončeními, ne seznamem dalších seznamů.
+
+### Checklist kapitoly
+
+- Má výsledek kontroly jednu rozhodovací větu?
+- Vybrali jste jeden hlavní provozní směr?
+- Je další krok konkrétní, malý a vlastněný?
+- Upravujete místo, kde lidé skutečně pracují?
+- Je changelog srozumitelný i za měsíc?
+- Nezůstala stará cesta dostupná jako falešně platná?
+- Pokud vznikla zbytečná datová stopa, uklidili jste ji hned?
+- Nahrazujete kopie a screenshoty odkazy na primární zdroj pravdy?
+- Je kontrolní háček přiměřený velikosti změny?
+- Ví tým, podle čeho pozná, že smyčka skončila?
+- Neotevřeli jste z malé opravy zbytečně velký projekt?
+- Je nový stav vidět v kanonickém indexu, úkolu, šabloně nebo onboardingu?
+
+Převod závěru do dalšího kroku je nenápadná disciplína. Neprodukuje velké prezentace, ale drží provoz v pohybu. Tým se podívá na skutečnou práci, vybere jeden stav, opraví nejbližší místo, uklidí datovou stopu a zapíše, kdy se pozná výsledek. Právě tím se z dokumentace stává nástroj místo archivu dobrých úmyslů.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HK o převodu závěru z prvního normálního cyklu do dalšího kroku: rozhodovací věta, pět provozních směrů, úprava nejbližšího pracovního místa, changelog, privacy-first úklid, kontrolní háček, uzavření staré cesty, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HJ o kontrole běžného pravidla po prvním normálním cyklu: výběr správného cyklu, sledování práce místo poslušnosti, návrat starého chování, skrytá administrativa, privacy-first kontrola skutečných výstupů, rozhodnutí stavu pravidla, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HI o stabilizaci ověřené udržovací změny do běžného pravidla: potvrzení důkazu, přepis kanonického pravidla, uzavření dočasných artefaktů, odstranění starých cest, privacy-first úklid, pracovní předání, lehký kontrolní háček, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HH o ověření udržovací změny po příštím použití: návrat k udržovací větě, výběr prvního normálního použití, sledování průchodu bez zachraňování, čtyři stavy ověření, kontrola staré cesty, privacy-first záznam, rozhodovací věta, šablona, mini workshop a checklist.
