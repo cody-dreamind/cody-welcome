@@ -63708,8 +63708,280 @@ Když se workshop zasekne na velkém tématu, zmenšete změnu. Pokud zmenšení
 
 Malá korekce je praktický most mezi kontrolou a zlepšením. Nevyžaduje velkou změnu systému. Vyžaduje jen disciplínu vybrat jeden nález, trefit správné pracovní místo, uklidit starou možnost a ověřit výsledek v běžné práci. Právě tak se provoz zlepšuje bez toho, aby se z každého zlepšení stala další vrstva procesu.
 
+## Příloha HP: Ověření malé korekce po prvním normálním použití
+
+Malá korekce není hotová ve chvíli, kdy se přepíše odkaz, upraví šablona nebo smaže stará kopie. Hotová je až tehdy, když projde prvním normálním použitím a práce se opravdu zlepší. Bez tohoto kroku se z korekce snadno stane hezký zápis v changelogu, který nikdo neotestoval v situaci, pro kterou vznikl.
+
+Tato příloha navazuje na Přílohu HO. Pomáhá ověřit, jestli vybraná malá korekce odstranila opakované tření, nevytvořila novou objížďku a nepřidala datovou stopu, kterou by bylo lepší vůbec nemít. Cílem není další audit. Cílem je krátce se podívat na první skutečný průchod a rozhodnout, jestli korekci ponechat, doladit, vrátit do kontroly, nebo uzavřít jako zbytečnou.
+
+Praktická otázka zní:
+
+```text
+Pomohla malá korekce při nejbližší normální práci přesně tam, kde měla, bez nového tření a bez nové zbytečné datové stopy?
+```
+
+Slovo "normální" je důležité. Neověřujte korekci na ukázkovém průchodu autora změny. Autor ví, kam kliknout, co tím myslel a proč se to upravovalo. Ověřujte ji v běžné situaci, kde má pomoct člověku, týmu nebo automatizaci bez doprovodného komentáře.
+
+### 1. Vraťte se ke korekční větě
+
+Začněte větou z Přílohy HO. Pokud ji nemáte, napište ji zpětně. Bez ní budete ověřovat mlhavý pocit, že "se něco zlepšilo".
+
+Korekční věta má tvar:
+
+```text
+Protože [důkaz z kontroly], upravili jsme [jedno pracovní místo] tak, aby [očekávané chování], a ověřujeme to při [nejbližší normální situaci].
+```
+
+Příklad:
+
+```text
+Protože dva ze tří průchodů začaly přes starý onboardingový rozcestník, upravili jsme tento rozcestník tak, aby vedl na kanonickou šablonu kontroly formulářů, a ověřujeme to při dalším onboardingu operations role.
+```
+
+Tato věta je kotva. Při ověření se neptejte, jestli je celý onboarding dokonalý. Ptejte se, jestli člověk v daném průchodu našel správnou šablonu ze správného rozcestníku bez staré cesty. Zbytek může být důležitý, ale nepatří do tohoto ověření.
+
+### 2. Vyberte první skutečný průchod
+
+První skutečný průchod je situace, kde by se staré tření pravděpodobně objevilo. Nestačí otevřít upravený dokument a zkontrolovat, že odkaz funguje. To je technická kontrola změny. Ověření korekce musí sledovat práci.
+
+Vhodné průchody:
+
+- nový člověk použije onboardingový rozcestník,
+- tým spustí další měsíční kontrolu,
+- automatizace založí další úkol,
+- vznikne další zákaznický výstup ze šablony,
+- někdo vyplní formulář nebo checklist bez vysvětlení autora,
+- proběhne další publikace obsahu přes upravenou trasu.
+
+Nevhodné průchody:
+
+- autor změny si korekci sám prokliká,
+- tým si změnu projde na schůzce bez reálného výstupu,
+- někdo ručně zopakuje přesně instrukce z chatu,
+- ověřuje se jiná situace než ta, pro kterou korekce vznikla.
+
+Krátký zápis před ověřením:
+
+```text
+Korekce:
+Starý odkaz v onboardingovém rozcestníku nahrazen odkazem na kanonickou šablonu.
+
+První normální použití:
+Onboarding nové operations role v pondělním cyklu.
+
+Co sledujeme:
+Otevře člověk aktuální šablonu z rozcestníku bez dotazu a bez použití starého odkazu?
+```
+
+Když první normální situace ještě nenastala, neuzavírejte korekci jako hotovou. Nechte ji ve stavu "čeká na ověření". To je lepší než falešná jistota s hezkým razítkem.
+
+### 3. Sledujte tři signály: cesta, výstup, cena
+
+Ověření malé korekce nepotřebuje dlouhou analytiku. Stačí tři signály.
+
+```text
+Cesta:
+Začala práce ve správném místě a nevrátila se stará trasa?
+
+Výstup:
+Vznikl správný výstup bez ručního zachraňování?
+
+Cena:
+Byla práce jednodušší, stejně jednoduchá, nebo dražší než před korekcí?
+```
+
+Příklad:
+
+| Signál | Pozorování | Stav |
+| --- | --- | --- |
+| Cesta | Nový člověk otevřel aktuální šablonu z rozcestníku. | drží |
+| Výstup | Kontrola formuláře vznikla bez dotazu v chatu. | drží |
+| Cena | Odkaz našel rychle, ale název šablony je pořád moc obecný. | drobné tření |
+
+Z tohoto ověření nevzniká nový projekt. Vzniká jedno rozhodnutí: korekce zabrala a drobné pojmenování se buď opraví hned, nebo se nechá do další kontroly podle dopadu.
+
+Codyho komentář: ověřování korekce má být trochu nudné. Pokud z něj vznikne dramatická detektivka, korekce nejspíš mířila moc široce nebo jste objevili jiný problém. To není tragédie. Jen to nebalte do stejného závěru, jinak se vám provozní poznámky promění v guláš s verzováním.
+
+### 4. Zkontrolujte starou cestu
+
+Malá korekce často selže proto, že stará cesta pořád existuje ve vedlejší pracovní trase. Při prvním použití se proto nedívejte jen na nový stav. Podívejte se i na to, jestli stará možnost nezůstala blíž než správná.
+
+Zkontrolujte:
+
+- zda starý odkaz nezůstal v onboardingu, opakovaném úkolu nebo záložce,
+- zda archivní šablona není pořád první ve výsledcích hledání,
+- zda starý název nevypadá důvěryhodněji než nový,
+- zda automatizace nepoužívá starý popis,
+- zda lidé nemají starý soubor připnutý v osobním pracovním prostoru,
+- zda stará kopie dat není stále používaná jako "rychlejší" zdroj.
+
+Rozhodnutí může být jednoduché:
+
+```text
+Stará cesta:
+Neobjevila se v průchodu, ale archivní šablona je stále dohledatelná pod původním názvem.
+
+Malá úprava:
+Přejmenovat archivní šablonu na "ARCHIV - nepoužívat" a doplnit první větu s odkazem na aktuální verzi.
+```
+
+Tady je hranice: pokud stará cesta nemá hodnotu, zavřete ji. Pokud hodnotu má, přesměrujte ji nebo ji jasně označte. Nenechávejte ji jako provozní past jen proto, že "se třeba někdy bude hodit".
+
+### 5. Udělejte privacy-first kontrolu korekce
+
+Korekce může odstranit tření a zároveň vytvořit horší datovou stopu. To je špatný obchod. Při prvním použití proto zkontrolujte, co se kvůli korekci začalo ukládat, kopírovat nebo sdílet.
+
+Otázky:
+
+- Nahradila korekce kopii odkazem nebo stavem, pokud to stačilo?
+- Nevznikl nový screenshot zákaznických nebo osobních dat?
+- Nezačal někdo kvůli ověření ukládat pomocný export?
+- Zůstala oprávnění stejná nebo užší než před korekcí?
+- Jsou dočasné ověřovací poznámky bez citlivých detailů?
+- Je jasné, kdy se dočasný ověřovací podklad smaže nebo archivuje?
+
+Dobré privacy-first ověření:
+
+```text
+Datová stopa po korekci:
+Výstup obsahuje odkaz na primární záznam a stav vyřízení. Nevznikla kopie odpovědi ani screenshot. Ověřovací poznámka obsahuje jen stav průchodu a datum.
+```
+
+Slabé ověření:
+
+```text
+Pro jistotu jsme si stáhli export a dali ho do sdílené složky.
+```
+
+"Pro jistotu" je často nejdražší věta v privacy-first provozu. Pokud pro export není jasný účel, vlastník, retence a omezený přístup, nevyrábějte ho. Většina malých korekcí se dá ověřit stavem, odkazem a krátkou poznámkou bez kopírování obsahu.
+
+### 6. Rozlište čtyři výsledky ověření
+
+Po prvním normálním použití rozhodněte jeden stav.
+
+```text
+Zabralo:
+Korekce odstranila vybrané tření a nevytvořila nové riziko.
+
+Zabralo s drobným třením:
+Hlavní problém zmizel, ale jedna malá věc ještě zdržuje.
+
+Nezabralo:
+Stejné tření se vrátilo nebo práce dál potřebovala ruční zachraňování.
+
+Ukázalo jiný problém:
+Korekce byla v pořádku, ale průchod odhalil větší nebo sousední problém.
+```
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Zabralo s drobným třením.
+
+Důkaz:
+Nový člověk otevřel správnou šablonu z rozcestníku bez dotazu. Při výběru si ale nebyl jistý názvem "kontrola vstupů".
+
+Rozhodnutí:
+Korekci ponecháváme. Přejmenujeme šablonu na "kontrola formulářů a poptávek" a kontrolní háček rušíme po dalším onboardingu, pokud se dotaz nezopakuje.
+```
+
+Pokud korekce nezabrala, nepište "potřebujeme lepší disciplínu". Vraťte se k místu, kde chyba vznikla. Možná jste opravili dokument, ale problém byl v automatizaci. Možná jste přejmenovali šablonu, ale lidé chodí přes starou záložku. Systém se má učit z práce, ne vyčítat práci, že nečetla systém.
+
+### 7. Uzavřete korekci jednou větou
+
+Závěr má být krátký a použitelný. Ideálně jedna věta pro changelog nebo pracovní poznámku.
+
+Šablona:
+
+```text
+Po prvním použití [stav]: korekce [co změnila] vedla k [výsledek], bez [staré tření/datové riziko]; další krok je [ponechat/doladit/vrátit do kontroly/založit samostatný podnět].
+```
+
+Příklady:
+
+```text
+Po prvním onboardingu korekce zabrala: nový rozcestník dovedl člověka ke kanonické šabloně bez starého odkazu a bez dotazu v chatu; kontrolní háček rušíme po jednom dalším průchodu.
+```
+
+```text
+Po první měsíční kontrole korekce nezabrala: výstup pořád obsahoval screenshot zákaznické odpovědi, protože šablona sice změnila text, ale automatizace dál zakládá úkol se starým popisem; vracíme korekci k úpravě automatizace.
+```
+
+Taková věta chrání tým před dvěma extrémy: před předčasným vítězstvím a před nekonečným otevíráním všeho znovu.
+
+### Šablona ověření malé korekce
+
+```text
+Malá korekce:
+
+Korekční věta:
+
+První normální použití:
+Datum / cyklus:
+Kdo nebo co korekci použilo:
+
+Sledované signály:
+Cesta:
+Výstup:
+Cena:
+
+Stará cesta:
+Objevila se / neobjevila se:
+Co se s ní stalo:
+
+Privacy-first kontrola:
+Kopie dat:
+Screenshoty / exporty:
+Oprávnění:
+Dočasné podklady:
+Retence:
+
+Výsledek ověření:
+Zabralo / zabralo s drobným třením / nezabralo / ukázalo jiný problém
+
+Důkaz:
+
+Jeden další krok:
+Ponechat / drobně doladit / vrátit do korekce / založit samostatný podnět
+
+Rozhodovací věta do changelogu:
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: přečíst korekční větu a připomenout vybraný nález.
+2. Tři minuty: projít první normální použití krok za krokem.
+3. Tři minuty: vyhodnotit cestu, výstup a cenu.
+4. Dvě minuty: zkontrolovat starou cestu.
+5. Dvě minuty: udělat privacy-first kontrolu datové stopy.
+6. Dvě minuty: rozhodnout jeden ze čtyř výsledků.
+7. Jedna minuta: zapsat rozhodovací větu a další krok.
+
+Workshop má skončit rozhodnutím, ne náladou. Pokud někdo řekne "asi dobrý", převeďte to na stav, důkaz a další krok. "Asi dobrý" je fajn u výběru oběda, v provozu je to jen lístek do budoucího chaosu.
+
+### Checklist kapitoly
+
+- Máte původní korekční větu?
+- Ověřujete první normální použití, ne demo autora změny?
+- Je jasné, jaký starý problém měla korekce odstranit?
+- Sledujete cestu, výstup a cenu práce?
+- Nevzniklo nové ruční zachraňování?
+- Zkontrolovali jste, jestli se nevrátila stará cesta?
+- Není stará šablona, odkaz nebo export pořád blíž než správná možnost?
+- Drží privacy-first minimum i při skutečném použití?
+- Nevznikl nový screenshot, export nebo kopie zákaznických dat?
+- Jsou oprávnění stejná nebo užší než před korekcí?
+- Rozhodli jste jeden ze čtyř výsledků ověření?
+- Má závěr jednu rozhodovací větu?
+- Je jasné, jestli se korekce ponechá, doladí, vrátí do práce, nebo oddělí jako nový podnět?
+- Má changelog dost detailu pro budoucího člověka, ale bez citlivých dat?
+
+Ověření malé korekce je malý provozní test reality. Ukáže, jestli změna opravdu pomohla v místě, kde měla, nebo jestli jen vypadala dobře při psaní. Když se tento krok dělá poctivě, tým postupně přestane hromadit "opravené" věci, které nikdo nikdy neviděl fungovat. A to je jedna z nejlevnějších forem kvality: nepovažovat hotové za hotové dřív, než to prošlo normální prací.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HP o ověření malé korekce po prvním normálním použití: návrat ke korekční větě, výběr skutečného průchodu, signály cesta/výstup/cena, kontrola staré cesty, privacy-first kontrola datové stopy, čtyři výsledky ověření, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HO o převodu kontroly stabilizovaného dalšího kroku do malé korekce: výběr jednoho nálezu, korekční věta, typy korekcí, úprava skutečného místa tření, zavření staré možnosti, ověření při nejbližší normální práci, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HN o kontrole stabilizovaného dalšího kroku po několika cyklech: kontrolní okno, reálné průchody, čtyři stavy stabilizace, cena změny, privacy-first kontrola opakování, jeden další pohyb, úprava nejbližšího pracovního místa, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HM o stabilizaci ověřeného dalšího kroku do běžného provozu: stav z ověření, výběr domova stabilizace, úprava nejbližšího pracovního místa, zkrácení historie na pracovní důvod, uzavření starých cest, privacy-first minimum, předání týmu, lehký signál návratu starého chování, stabilizační karta, mini workshop a checklist.
