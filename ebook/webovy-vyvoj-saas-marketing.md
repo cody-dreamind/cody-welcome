@@ -63166,8 +63166,270 @@ Pokud se během workshopu objeví větší problém, nezvětšujte stabilizaci. 
 
 Stabilizace ověřeného dalšího kroku je poslední malý pohyb, který brání návratu starého problému. Nejde o velké vítězství ani nový proces. Jde o to, aby dobrá změna zapadla do běžné práce, stará cesta ztratila sílu a datová stopa zůstala menší než předtím. To je přesně ten typ nenápadné disciplíny, díky které se provoz postupně zlepšuje místo toho, aby jen vyráběl další poznámky o zlepšování.
 
+## Příloha HN: Kontrola stabilizovaného dalšího kroku po několika cyklech
+
+Stabilizovaný další krok má po čase projít malou kontrolou. Ne proto, že by bylo potřeba hlídat každé pravidlo navždy. Spíš proto, že první stabilizace často proběhne v ideálním rozpoložení: problém je čerstvý, lidé si pamatují důvod změny a stará cesta je viditelná. Po několika běžných cyklech už je situace poctivější. Ukáže se, jestli změna opravdu zapadla do práce, nebo jen do dokumentace.
+
+Tato příloha navazuje na Přílohu HM. Pomáhá zkontrolovat, jestli stabilizovaný další krok pořád plní svůj účel, nevyrábí novou administrativu a neztratil privacy-first disciplínu. Cílem není otevřít velký audit. Cílem je rychle rozhodnout, jestli změnu ponechat, zjednodušit, opravit, nebo uzavřít.
+
+Praktická otázka zní:
+
+```text
+Funguje stabilizovaný další krok po několika běžných cyklech sám od sebe, nebo už zase potřebuje připomínání, obcházení a ruční vysvětlování?
+```
+
+Dobrá kontrola se nedívá na to, jestli pravidlo existuje. Dívá se na to, jestli práce proběhla lépe než před změnou.
+
+### 1. Vyberte malé kontrolní okno
+
+Nečekejte rok. Zároveň nekontrolujte po každém kliknutí. Pro běžnou provozní změnu stačí dva až čtyři normální cykly podle toho, jak často se práce opakuje.
+
+Příklady:
+
+- týdenní kontrola formulářů: zkontrolujte po třech týdnech,
+- měsíční revize šablon: zkontrolujte po dvou měsících,
+- onboardingový krok: zkontrolujte po prvních dvou reálných onboardingových průchodech,
+- kvartální audit: zkontrolujte při dalším kvartálním průchodu,
+- opakovaná zákaznická dodávka: zkontrolujte po třech dodávkách.
+
+Kontrolní okno má být dost dlouhé na to, aby odhalilo návyk, ale dost krátké na to, aby se chyba nestala novým standardem.
+
+Krátký zápis:
+
+```text
+Stabilizovaný krok:
+Měsíční kontrola formulářů používá kanonickou šablonu a nevytváří kopie zákaznických odpovědí.
+
+Kontrolní okno:
+První tři měsíční kontroly po stabilizaci.
+
+Kontrolní otázka:
+Vznikly výstupy z kanonické šablony bez staré cesty a bez zbytečných kopií dat?
+```
+
+Tento zápis stačí. Pokud ke kontrole potřebujete dlouhý plán, pravděpodobně už nekontrolujete stabilizaci, ale navrhujete nový proces.
+
+### 2. Sledujte reálné průchody, ne ideální popis
+
+Při kontrole otevřete skutečné výstupy, úkoly, šablony a odkazy z posledních cyklů. Neptejte se jen týmu, jestli "se to dodrželo". Lidé často odpoví podle úmyslu, ne podle skutečné trasy práce. To není zlá vůle. To je normální lidská ekonomika pozornosti.
+
+Hledejte konkrétní stopy:
+
+- odkud člověk práci spustil,
+- jakou šablonu použil,
+- jaký výstup vznikl,
+- zda se objevila stará kopie,
+- zda někdo potřeboval ruční vysvětlení,
+- zda automatizace založila správný úkol,
+- zda onboarding vedl přes aktuální trasu,
+- zda se changelog nemusel používat jako náhradní návod.
+
+Rozdíl mezi popisem a průchodem bývá nejcennější část kontroly. Pokud dokument říká "použijte kanonickou šablonu", ale poslední dvě kontroly začaly ze staré záložky, problém není v morálce týmu. Problém je v trase.
+
+### 3. Rozlišujte čtyři stavy stabilizace
+
+Po kontrole nepište dlouhou retrospektivu. Rozhodněte jeden stav.
+
+```text
+Drží:
+Změna funguje bez připomínání a bez návratu staré cesty.
+
+Drží s třením:
+Změna funguje, ale lidé ztrácejí čas hledáním, ručním vysvětlením nebo drobnou opravou.
+
+Vrací se staré chování:
+Stará cesta se znovu používá, i když nová cesta existuje.
+
+Změna ztratila smysl:
+Práce se změnila natolik, že původní další krok už neodpovídá realitě.
+```
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Drží s třením.
+
+Důkaz:
+Všechny tři výstupy vznikly z kanonické šablony, ale dva lidé hledali odkaz přes starý onboardingový rozcestník.
+
+Rozhodnutí:
+Nezavádíme nové pravidlo. Opravíme onboardingový rozcestník a zrušíme kontrolní háček po příštím průchodu, pokud se dotaz nezopakuje.
+```
+
+Tady je důležité nezvětšit řešení. Jeden starý odkaz není důvod pro nový standard. Je to důvod odstranit starý odkaz.
+
+### 4. Změřte cenu stabilizace
+
+Stabilizace je dobrá jen tehdy, když snižuje cenu práce. Někdy se změna sice dodržuje, ale za cenu nové administrativy. To je tichý dluh. Vypadá ukázněně, ale ve skutečnosti jen přesouvá tření na lidi.
+
+Zeptejte se:
+
+- Kolik kroků přibylo oproti původní práci?
+- Musí někdo ručně přepisovat informace mezi systémy?
+- Vzniká kvůli kontrole nový dokument, který nikdo jinak nepoužívá?
+- Potřebuje tým připomínku pokaždé, když má změnu použít?
+- Je výstup kratší, jasnější nebo bezpečnější než před stabilizací?
+- Pomáhá změna rozhodnutí, nebo jen dokazuje, že se něco zkontrolovalo?
+
+Codyho komentář: nejzrádnější provozní změna je ta, která vypadá jako pořádek, ale přidává práci bez rozhodnutí. Tabulka navíc umí působit uklidňujícím dojmem. Bohužel tabulka sama o sobě ještě není management, jen mřížka s ambicemi.
+
+Jednoduchá scorecard:
+
+| Signál | Stav | Poznámka |
+| --- | --- | --- |
+| Cesta k práci je jasná | ano / částečně / ne |  |
+| Výstup vzniká bez ručního zachraňování | ano / částečně / ne |  |
+| Stará cesta se nepoužívá | ano / částečně / ne |  |
+| Datová stopa je menší nebo stejná | ano / částečně / ne |  |
+| Kontrola pomáhá rozhodnutí | ano / částečně / ne |  |
+
+Pokud má scorecard dvě nebo více odpovědí "ne", změna se nestabilizovala dobře. Vyberte jednu opravu a zbytek nechte jako pozorování.
+
+### 5. Udělejte privacy-first kontrolu opakování
+
+Po několika cyklech se nejlépe pozná, jestli privacy-first pravidlo funguje i mimo první pečlivé použití. Jednorázově se dá datová stopa ohlídat snadno. Opakování odhalí, kde lidé kvůli pohodlí začali kopírovat obsah, ukládat screenshoty, posílat exporty nebo rozšiřovat přístupy.
+
+Zkontrolujte:
+
+- zda se opravdu pracuje s odkazy a stavy místo kopií osobních nebo zákaznických dat,
+- zda nevznikla pomocná složka s exporty "jen pro jistotu",
+- zda má nová trasa stejné nebo užší oprávnění než původní zdroj,
+- zda ukázkové výstupy neobsahují reálná data,
+- zda se kontrolní poznámky dají pochopit bez citlivých detailů,
+- zda dočasné důkazy po ověření nezůstaly v aktivním pracovním prostoru.
+
+Praktické rozhodnutí:
+
+```text
+Privacy-first stav:
+Datová stopa drží. Výstupy obsahují stav kontroly a odkaz na primární záznam, ne kopie odpovědí. Jeden dočasný export z prvního cyklu byl smazán podle retenční poznámky.
+```
+
+Pokud najdete zbytečnou kopii dat, nečekejte na další review. Smažte ji nebo přesuňte podle retenčního pravidla hned a upravte pracovní trasu tak, aby kopie příště nevznikala.
+
+### 6. Rozhodněte jeden další pohyb
+
+Po kontrole vyberte jeden další pohyb. Ne tři, ne sedm. Jeden.
+
+Možnosti:
+
+```text
+Ponechat:
+Změna drží, kontrolní háček se ruší nebo prodlužuje jen lehce.
+
+Zjednodušit:
+Změna funguje, ale obsahuje zbytečný krok, pole, dokument nebo připomínku.
+
+Opravit trasu:
+Stará cesta se vrací kvůli odkazu, indexu, úkolu, onboardingu nebo automatizaci.
+
+Zpřesnit pravidlo:
+Lidé chápou cíl, ale nevědí, jak rozhodnout hraniční případ.
+
+Ukončit:
+Původní problém zmizel, práce se změnila nebo kontrola už nevytváří hodnotu.
+```
+
+Rozhodovací věta:
+
+```text
+Po třech cyklech změna drží s drobným třením: výstupy vznikají správně, ale onboarding stále vede přes starý rozcestník. Opravíme jen rozcestník, kontrolní háček ponecháme na jeden další cyklus a potom ho zrušíme, pokud se stará cesta nevrátí.
+```
+
+Taková věta je dostatečně konkrétní pro práci a dost krátká pro changelog.
+
+### 7. Upravte jen nejbližší místo
+
+Kontrola po několika cyklech často odhalí několik drobností. Nesnažte se je opravit všechny najednou. Změna má zasáhnout nejbližší místo, kde vzniká tření.
+
+Příklady nejmenší užitečné opravy:
+
+- změnit odkaz v opakovaném úkolu,
+- přejmenovat archivní šablonu jasněji,
+- odstranit starou stránku z onboardingu,
+- doplnit jednu rozhodovací větu do checklistu,
+- zrušit pole, které nikdo nepoužívá,
+- upravit automatizovaný popis úkolu,
+- smazat dočasnou složku po ověření,
+- zúžit oprávnění sdíleného dokumentu.
+
+Pokud oprava vyžaduje novou schůzku, novou tabulku a nový vlastnický model, pravděpodobně už nejde o opravu stabilizace. Zapište větší téma do backlogu a tuto kontrolu uzavřete malým pohybem.
+
+### Šablona kontroly po několika cyklech
+
+```text
+Stabilizovaný další krok:
+
+Původní důvod:
+
+Kontrolní okno:
+Počet reálných cyklů:
+
+Reálné průchody:
+1.
+2.
+3.
+
+Stav stabilizace:
+Drží / drží s třením / vrací se staré chování / změna ztratila smysl
+
+Důkazy:
+
+Cena stabilizace:
+Co práce ušetřila:
+Co práce přidala:
+
+Privacy-first kontrola:
+Kopie dat:
+Přístupy:
+Dočasné podklady:
+Retence:
+
+Jeden další pohyb:
+Ponechat / zjednodušit / opravit trasu / zpřesnit pravidlo / ukončit
+
+Konkrétní úprava nejbližšího pracovního místa:
+
+Kdy se kontrolní háček ruší nebo znovu hodnotí:
+
+Changelog:
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: připomenout původní stabilizovaný krok a kontrolní otázku.
+2. Čtyři minuty: projít poslední dva až čtyři reálné cykly.
+3. Tři minuty: určit stav stabilizace.
+4. Tři minuty: zhodnotit cenu práce a skrytou administrativu.
+5. Tři minuty: udělat privacy-first kontrolu opakování.
+6. Dvě minuty: vybrat jeden další pohyb.
+7. Dvě minuty: zapsat rozhodovací větu a aktualizovat nejbližší pracovní místo.
+
+Workshop končí ve chvíli, kdy existuje jedna úprava a jedna rozhodovací věta. Pokud diskuse pokračuje do většího návrhu systému, zastavte ji a založte samostatný podnět. Kontrola stabilizace má chránit běžnou práci před bobtnáním.
+
+### Checklist kapitoly
+
+- Vybrali jste malé kontrolní okno podle skutečné frekvence práce?
+- Kontrolujete reálné průchody, ne jen popis pravidla?
+- Vidíte, odkud lidé práci skutečně spouštějí?
+- Vznikly výstupy ze správné šablony, úkolu nebo trasy?
+- Nevrátila se stará cesta přes odkaz, onboarding, kopii nebo automatizaci?
+- Rozhodli jste jeden stav stabilizace?
+- Změřili jste cenu změny, nejen její dodržení?
+- Nevznikla nová tabulka, dokument nebo ruční přepis bez jasného rozhodnutí?
+- Drží datová stopa privacy-first minimum i po opakování?
+- Nevznikly zbytečné exporty, screenshoty nebo kopie zákaznických dat?
+- Vybrali jste jeden další pohyb místo seznamu přání?
+- Upravujete nejbližší pracovní místo, kde tření vzniká?
+- Je jasné, kdy se kontrolní háček zruší nebo znovu vyhodnotí?
+- Changelog obsahuje rozhodnutí bez zbytečných citlivých detailů?
+
+Kontrola po několika cyklech je malá, ale důležitá protiváha k provoznímu optimismu. První stabilizace říká: "Takhle by to mělo fungovat." Kontrola po několika cyklech říká: "Takhle to opravdu funguje, když se nikdo nedívá přes rameno." A právě tam se pozná, jestli změna zlepšila systém, nebo jen přidala další hezky pojmenovaný krok.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HN o kontrole stabilizovaného dalšího kroku po několika cyklech: kontrolní okno, reálné průchody, čtyři stavy stabilizace, cena změny, privacy-first kontrola opakování, jeden další pohyb, úprava nejbližšího pracovního místa, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HM o stabilizaci ověřeného dalšího kroku do běžného provozu: stav z ověření, výběr domova stabilizace, úprava nejbližšího pracovního místa, zkrácení historie na pracovní důvod, uzavření starých cest, privacy-first minimum, předání týmu, lehký signál návratu starého chování, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HL o ověření dalšího kroku po prvním použití: návrat k původnímu kroku, výběr prvního normálního použití, sledování cesty, výstupu a datové stopy, čtyři stavy ověření, changelog, privacy-first okamžitý úklid, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HK o převodu závěru z prvního normálního cyklu do dalšího kroku: rozhodovací věta, pět provozních směrů, úprava nejbližšího pracovního místa, changelog, privacy-first úklid, kontrolní háček, uzavření staré cesty, šablona, mini workshop a checklist.
