@@ -61856,8 +61856,266 @@ Workshop nemá vyrábět nový seznam přání. Pokud změna zabrala, zavřete j
 
 Ověření udržovací změny chrání tým před falešným pocitem hotova. Malá oprava má hodnotu jen tehdy, když pomůže v další skutečné práci. Když projde bez ručního výkladu, bez návratu staré cesty a bez nové datové stopy, nechte ji být. Stabilní provoz se skládá z přesně takových malých uzavřených smyček.
 
+## Příloha HI: Stabilizace ověřené udržovací změny do běžného pravidla
+
+Ověřená udržovací změna ještě není automaticky součástí provozu. Je to důkaz, že malá oprava zabrala při prvním skutečném použití. Stabilizace je krok, ve kterém z ní uděláte běžný stav: upravíte kanonické pravidlo, zavřete dočasné poznámky, odstraníte staré cesty a předáte změnu jako normální součást práce.
+
+Praktická otázka zní:
+
+```text
+Jak ověřenou udržovací změnu převést do běžného pravidla tak, aby zůstala použitelná, nevytvořila vedlejší dokumentaci a nezvětšila datovou stopu?
+```
+
+Stabilizace nemá být oslava ani nové kolečko revize. Je to úklid po malé opravě, která už prokázala hodnotu. Pokud tento krok přeskočíte, tým často skončí s dobrým záměrem rozhozeným mezi komentářem v úkolu, dočasnou šablonou, jednou zprávou v chatu a starým pravidlem, které pořád tvrdí něco jiného.
+
+### 1. Potvrďte, co se opravdu prokázalo
+
+Začněte ověřovací větou z předchozí přílohy. Nevycházejte z pocitu, že změna "asi funguje". Stabilizovat se má jen to, co prošlo reálným použitím a má jasný důkaz.
+
+Minimum pro stabilizaci:
+
+- původní problém se při prvním použití neopakoval,
+- práce prošla bez zvláštního zachraňování,
+- výstup byl použitelný pro dalšího člověka,
+- stará cesta se nevrátila jako hlavní volba,
+- datová stopa se nezvětšila,
+- další krok byl uzavřen nebo zúžen na drobný úklid.
+
+Příklad:
+
+```text
+Ověření:
+Udržovací změna zabrala, protože první další kontrola formuláře vytvořila stav, odpovědnou roli a odkaz na CRM záznam bez kopírování zákaznického detailu.
+
+Stabilizujeme:
+Pravidlo pro kontrolu formulářů bude nově vyžadovat stav, odpovědnou roli a odkaz na primární záznam. Volné kopírování detailu do komentáře se ruší.
+```
+
+Nestabilizujte širší závěr, než máte ověřený. Pokud jste ověřili jednu šablonu formuláře, nemáte tím automaticky ověřený celý support proces. Můžete si poznamenat širší hypotézu, ale do běžného pravidla převádějte jen konkrétní potvrzenou změnu.
+
+Codyho komentář: nejrychlejší cesta k dokumentačnímu bahnu je stabilizovat nadšení místo důkazu. Jedna povedená oprava neznamená, že jsme vynalezli nový operační systém firmy. Znamená to, že máme jednu věc přepsat na správné místo.
+
+### 2. Přepište kanonické pravidlo, ne historii opravy
+
+Kanonické pravidlo má říkat, jak se pracuje teď. Nemá čtenáři vyprávět celou archeologii problému. Historie může zůstat v changelogu, rozhodovacím logu nebo krátké poznámce, ale pracovní text má být čistý.
+
+Slabá stabilizace:
+
+```text
+Dříve jsme do komentáře kopírovali detail poptávky, ale po kontrole se ukázalo, že je lepší dávat odkaz na CRM, protože to snižuje datovou stopu. Proto by se měl ideálně vkládat odkaz, pokud je dostupný.
+```
+
+Silnější stabilizace:
+
+```text
+Do kontroly formuláře zapisujeme stav, odpovědnou roli a odkaz na primární CRM záznam. Zákaznický detail nekopírujeme do komentáře mimo primární systém.
+```
+
+Rozdíl je v pracovní síle textu. Druhá verze nevyžaduje interpretaci, neomlouvá se a nedává čtenáři tři únikové cesty. Říká, co se dělá.
+
+Při přepisu kanonického místa se dívejte na čtyři vrstvy:
+
+- název pravidla nebo šablony,
+- hlavní instrukci,
+- příklad správného výstupu,
+- nejbližší checklist nebo definici hotovo.
+
+Když upravíte jen hlavní odstavec, ale necháte starý příklad nebo starý checklist, tým se bude řídit tím, co je nejkonkrétnější. A nejkonkrétnější bývá právě příklad. Proto musí jít s pravidlem.
+
+### 3. Zavřete dočasné artefakty ověření
+
+Udržovací změna často vznikne v úkolu, komentáři, experimentální šabloně, dočasném dokumentu nebo krátké zprávě v interním kanálu. To je v pořádku během ověřování. Po stabilizaci ale dočasné artefakty nesmí dál soutěžit s kanonickým pravidlem.
+
+Projděte:
+
+- úkol, ve kterém změna vznikla,
+- ověřovací kartu,
+- dočasnou šablonu,
+- komentáře s instrukcí,
+- onboardingový odkaz,
+- interní checklist,
+- automatizaci, která generuje starý tvar úkolu,
+- veřejný nebo zákaznický text, pokud se ho pravidlo týká.
+
+U každého místa rozhodněte jeden stav:
+
+```text
+Přepsat do kanonického pravidla.
+Přesměrovat na kanonické pravidlo.
+Archivovat s odkazem na novou verzi.
+Smazat jako dočasný pracovní šum.
+Nechat beze změny, protože nejde o pracovní instrukci.
+```
+
+Největší riziko je nechat dočasnou instrukci "ještě pro jistotu". Lidé ji časem najdou přes vyhledávání a použijí, protože vypadá konkrétněji než pravidlo. Pokud má zůstat, musí jasně říkat, že je historická a kde je aktuální zdroj pravdy.
+
+### 4. Odstraňte starou cestu z míst, kde se práce skutečně spouští
+
+Stabilizace není hotová, dokud stará cesta pořád čeká na nejbližším pracovním místě. Nestačí přepsat dokument, pokud lidé začínají v nástroji, formuláři, checklistu nebo automaticky vytvořeném úkolu.
+
+Ptejte se:
+
+- Kde člověk poprvé narazí na tuto práci?
+- Jaký odkaz dostane v úkolu, kalendáři, CRM nebo šabloně?
+- Jaký příklad vidí při vyplňování?
+- Co se stane, když použije starý bookmark?
+- Jaký text se generuje automaticky?
+- Co najde nový člověk v onboardingu?
+
+Příklad: pravidlo říká, že do výstupu patří jen odkaz na primární záznam. Ale automatizace pořád vytváří úkol s polem "zkopíruj kontext požadavku". Výsledkem není stabilizované pravidlo. Výsledkem je konflikt mezi dokumentací a pracovním rozhraním. V takovém konfliktu obvykle vyhraje rozhraní, protože je blíž ruce.
+
+Praktická stabilizace proto často znamená malý zásah mimo dokument:
+
+- přejmenovat pole,
+- skrýt starou volnou poznámku,
+- upravit šablonu úkolu,
+- přesměrovat starý odkaz,
+- odstranit duplicitní checklist,
+- doplnit jeden správný příklad tam, kde lidé opravdu začínají.
+
+Držte rozsah malý. Cíl není předělat celý proces. Cíl je zajistit, aby ověřená oprava byla přirozená cesta nejmenšího odporu.
+
+### 5. Udělejte privacy-first úklid po stabilizaci
+
+Udržovací změny často opravují drobné datové návyky: kopírování detailů, příliš široké komentáře, exporty, screenshoty, duplicitní poznámky nebo přístupové zkratky. Stabilizace je vhodný okamžik zkontrolovat, zda po ověřování nezůstaly nové kopie.
+
+Krátká privacy-first kontrola:
+
+```text
+Primární zdroj pravdy:
+
+Kanonické pravidlo odkazuje na primární zdroj:
+Ano / ne
+
+Dočasné kopie během ověření:
+Nevznikly / vznikly kde:
+
+Co se po stabilizaci smaže nebo archivuje:
+
+Kdo má přístup k novému pravidlu:
+
+Je přístup širší než pracovní potřeba:
+Ne / ano, proč:
+
+Retence dočasných záznamů:
+Smazat / archivovat do:
+```
+
+Privacy-first hodnota tady není v tom, že budete mít nejdelší tabulku. Je v tom, že se ze stabilizace nestane zdroj nových kopií. Pokud stačí odkaz na primární záznam, nekopírujte detail. Pokud stačí agregovaný signál, neukládejte osobní příběh. Pokud dočasný záznam splnil účel, dejte mu konec.
+
+### 6. Předejte změnu jako normální práci
+
+Jakmile je změna stabilizovaná, nepředávejte ji jako velkou novinku, pokud velká není. Lidé nepotřebují slavnostní oznámení ke každému přejmenování pole. Potřebují vědět, kde je aktuální pravidlo a od kdy podle něj pracují.
+
+Dobrá předávací věta:
+
+```text
+Pravidlo pro kontrolu formulářů je aktualizované: do výstupu patří stav, odpovědná role a odkaz na primární CRM záznam; zákaznický detail se mimo CRM nekopíruje. Starý checklist je přesměrovaný na kanonickou verzi.
+```
+
+Stačí krátce říct:
+
+- co se odteď dělá,
+- kde je zdroj pravdy,
+- co se ruší,
+- koho se to týká,
+- kdy se pravidlo použije poprvé v běžném rytmu.
+
+Pokud změna ovlivňuje zákaznickou komunikaci, přidejte i jednu větu pro externí použití. Ne interní historii. Jen čistý pracovní výstup, který zní srozumitelně a neprozrazuje interní detaily.
+
+Příklad:
+
+```text
+V odpovědi pracujeme s odkazem na existující záznam požadavku, abychom zbytečně nekopírovali zákaznické údaje mezi systémy.
+```
+
+### 7. Nastavte lehký háček pro další kontrolu
+
+Stabilizované pravidlo nepotřebuje hned další projekt. Potřebuje jen háček, který zachytí, kdyby se starý problém vrátil. Háček má být lehký a navázaný na normální práci.
+
+Příklady háčků:
+
+- při další měsíční kontrole projít dva náhodné výstupy,
+- při onboardingu nového člověka ověřit, že najde správnou šablonu,
+- při nejbližší úpravě automatizace zkontrolovat generovaný text úkolu,
+- při kvartálním privacy review ověřit, že nevznikly nové kopie detailů,
+- po třech použitích zapsat jednovětý stav: funguje / drhne / vrací se stará cesta.
+
+Háček nesmí být větší než samotná změna. Pokud jste opravili jednu šablonu, nepotřebujete tříměsíční auditní program. Stačí malý bod v existujícím rytmu.
+
+### Stabilizační karta ověřené udržovací změny
+
+```text
+Název změny:
+Původní problém:
+Ověřovací věta:
+Důkaz z prvního použití:
+
+Kanonické pravidlo:
+Kde je uloženo:
+Co se v pravidle změnilo:
+Jaký příklad se aktualizoval:
+Jaký checklist se aktualizoval:
+
+Staré cesty:
+Co se přepsalo:
+Co se přesměrovalo:
+Co se archivovalo:
+Co se smazalo:
+
+Privacy-first kontrola:
+Primární zdroj pravdy:
+Dočasné kopie:
+Úklid dat:
+Přístupy:
+Retence:
+
+Předání:
+Koho se změna týká:
+Kde byla oznámena:
+Od kdy platí:
+
+Lehký kontrolní háček:
+Kdy:
+Kdo:
+Jaký signál:
+
+Changelog:
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst ověřovací větu a důkaz z prvního použití.
+2. Čtyři minuty: přepsat kanonické pravidlo do čisté pracovní instrukce.
+3. Tři minuty: najít staré odkazy, příklady a šablony.
+4. Tři minuty: rozhodnout, co přepsat, přesměrovat, archivovat nebo smazat.
+5. Tři minuty: udělat privacy-first kontrolu dočasných kopií a přístupů.
+6. Dvě minuty: napsat předávací větu.
+7. Dvě minuty: nastavit lehký kontrolní háček.
+
+Výstupem workshopu nemá být nový backlog. Výstupem má být jedno aktualizované pravidlo, uklizené staré cesty a jasný záznam v changelogu.
+
+### Checklist kapitoly
+
+- Stabilizujete jen to, co bylo skutečně ověřené?
+- Je kanonické pravidlo napsané jako současný pracovní postup, ne jako historie opravy?
+- Aktualizovali jste příklad, checklist nebo definici hotovo?
+- Zavřeli jste dočasné artefakty z ověřování?
+- Přesměrovali nebo archivovali jste staré odkazy?
+- Zmizela stará cesta z místa, kde se práce reálně spouští?
+- Nezůstala automatizace, která generuje starý tvar úkolu?
+- Nevznikly při stabilizaci nové kopie zákaznických nebo citlivých dat?
+- Je jasný primární zdroj pravdy?
+- Mají přístup jen lidé, kteří ho pro práci potřebují?
+- Dostali dotčení lidé krátkou pracovní informaci?
+- Je nastavený lehký kontrolní háček v existujícím rytmu?
+- Je změna zapsaná v changelogu?
+
+Stabilizace ověřené udržovací změny je malý, ale důležitý závěr. Dává opravě trvalé místo, maže provizorní stopy a brání návratu starého chování. Když ji uděláte dobře, tým si změny skoro nevšimne. Prostě začne pracovat správnější cestou. Což je přesně ten druh magie, který v provozu dává smysl.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HI o stabilizaci ověřené udržovací změny do běžného pravidla: potvrzení důkazu, přepis kanonického pravidla, uzavření dočasných artefaktů, odstranění starých cest, privacy-first úklid, pracovní předání, lehký kontrolní háček, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HH o ověření udržovací změny po příštím použití: návrat k udržovací větě, výběr prvního normálního použití, sledování průchodu bez zachraňování, čtyři stavy ověření, kontrola staré cesty, privacy-first záznam, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HG o převodu kontroly běžného pravidla do jedné udržovací změny: výběr nálezu podle opakované ceny, udržovací věta, nejbližší pracovní místo, typy textových/polohových/úklidových/datových změn, privacy-first dopad, uzavření staré cesty, ověření při příštím použití, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HF o kontrole běžného pravidla po několika použitích: pracovní slib pravidla, výběr vzorku skutečných použití, signály nalezení/rozhodnutí/dokončení, návrat starého chování, privacy-first kontrola opakované datové stopy, stav pravidla, šablona, mini workshop a checklist.
