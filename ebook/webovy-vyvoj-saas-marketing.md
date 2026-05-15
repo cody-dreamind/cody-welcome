@@ -60426,8 +60426,281 @@ Výstup workshopu má být jedna věta rozhodnutí a případně jedna malá úp
 
 První použití stabilizovaného pravidla je test reality. Nehledá viníka a neoslavuje dokument. Jen ukáže, jestli pravidlo pomáhá člověku udělat lepší rozhodnutí s menší datovou stopou. Když ano, nechte ho žít. Když ne, opravte nejbližší překážku. Dobrý provoz se nestaví na tom, že pravidla přibývají. Staví se na tom, že ta užitečná přežijí kontakt s prací.
 
+## Příloha HC: Převod kontroly stabilizovaného pravidla do lehké revize
+
+Kontrola stabilizovaného pravidla má skončit rozhodnutím. Jenže rozhodnutí samo o sobě ještě nic nezmění. Pokud z kontroly vyplyne, že pravidlo potřebuje zpřesnit nebo přesunout, další krok má být malý, konkrétní a rychle ověřitelný. Tady se často dělá chyba: tým najde jedno tření a otevře celé téma znovu. Začne přepisovat pravidlo, šablonu, proces, odpovědnosti i nástroje. Výsledek je větší než původní problém.
+
+Lehká revize má jiný účel. Nechce pravidlo znovu vymyslet. Chce odstranit nejbližší překážku, která se ukázala při prvních použitích.
+
+Praktická otázka této přílohy zní:
+
+```text
+Jakou jednu malou revizi pravidla uděláme, aby příští použití bylo snazší, jasnější nebo datově čistší?
+```
+
+Revize je dobrá, když se dá popsat jednou větou, provést v jednom pracovním místě a ověřit při dalším reálném průchodu. Pokud potřebuje projektový plán, není lehká. Pokud mění odpovědnost více týmů, není lehká. Pokud přidává tři nové formuláře, není lehká ani omylem, jen se tak tváří v kabátu produktivity.
+
+### Vyberte jeden nález, ne celý seznam
+
+Z kontroly pravidla obvykle vypadne víc nálezů. Něco je nejasné, něco je na špatném místě, někdo použil starou šablonu, někde vznikla nadbytečná poznámka se zákaznickými detaily. Všechno může být pravda. Ale jedna revize má řešit jeden hlavní nález.
+
+Vyberte nález podle ceny opakování:
+
+- Co bude bolet nejvíc, když se to zopakuje ještě pětkrát?
+- Co nejvíc brání samostatnému použití pravidla?
+- Co vytváří největší zbytečnou datovou stopu?
+- Co vede k chybnému rozhodnutí, ne jen k drobnému nepohodlí?
+- Co má nejbližší pracovní místo, kde se dá zasáhnout?
+
+Příklad špatného výběru:
+
+```text
+Zlepšíme celé schvalování nových formulářů, protože se ukázalo několik nejasností.
+```
+
+Příklad dobrého výběru:
+
+```text
+Zpřesníme výstup pravidla: po kontrole formuláře musí vzniknout jeden ze stavů schváleno, upravit, nebo zastavit.
+```
+
+Druhý příklad je menší, ale použitelný. Přesně víte, co se mění, kde se to mění a jak poznáte, že to pomohlo. První příklad je otevřená brána do nekonečného procesu. Tam mizí páteční odpoledne i vůle žít.
+
+### Napište revizní větu
+
+Lehká revize potřebuje jednu větu, která udrží rozsah. Bez ní se i malá oprava začne rozlévat.
+
+Použijte tvar:
+
+```text
+Měníme [konkrétní část pravidla nebo umístění], protože [nález z prvních použití], aby [příští pracovní výsledek].
+```
+
+Příklady:
+
+```text
+Měníme název pravidla v onboardingovém checklistu, protože noví lidé ho hledali pod pracovním úkolem, aby ho příště našli bez dotazu na vlastníka procesu.
+```
+
+```text
+Měníme výstup privacy-first kontroly z volné poznámky na tři stavy, protože první použití vedla ke kopírování zákaznických detailů, aby karta obsahovala jen stav, odpovědnou roli a odkaz na primární záznam.
+```
+
+```text
+Přesouváme pravidlo z obecného runbooku do šablony marketingového experimentu, protože rozhodnutí vzniká při přípravě experimentu, ne při měsíčním review.
+```
+
+Revizní věta je malá brzda proti přehánění. Když se do ní nevejde důvod ani výsledek, pravděpodobně ještě nevíte, co vlastně opravujete.
+
+### Zasáhněte nejbližší pracovní místo
+
+Pravidlo nežije tam, kde je nejlépe zdokumentované. Žije tam, kde ho člověk skutečně potřebuje. Lehká revize proto patří do nejbližšího pracovního místa.
+
+Typická pracovní místa:
+
+- checklist, který člověk otevírá při úkolu,
+- šablona, ze které vzniká nový výstup,
+- karta v backlogu nebo projektovém nástroji,
+- onboardingová trasa pro roli,
+- schvalovací formulář,
+- provozní runbook,
+- interní rozcestník nebo index,
+- potvrzovací text po odeslání formuláře,
+- krátká instrukce u pole, kde lidé dělají chybu.
+
+Pokud se pravidlo upraví jen v centrálním dokumentu, ale pracovní šablona zůstane stejná, příští použití se nezmění. Člověk nepůjde hledat pravdu do archivu jen proto, že byla aktualizována. V reálné práci použije to, co má pod rukou.
+
+Příklad:
+
+Kontrola ukázala, že tým sice zná pravidlo pro minimální sběr dat ve formuláři, ale při návrhu nového formuláře používá starou šablonu s polem "telefon" jako povinným údajem. Lehká revize není napsat další odstavec o minimalizaci. Lehká revize je upravit šablonu formuláře: telefon bude volitelný, pole dostane otázku "Je telefon nutný pro první odpověď?" a výchozí text u formuláře vysvětlí, co se stane po odeslání.
+
+### Rozlište textovou, polohovou a datovou revizi
+
+Ne každá revize je přepis pravidla. V praxi se opakují tři typy.
+
+Textová revize:
+
+```text
+Pravidlo je na správném místě, ale jazyk je nejasný, příliš obecný nebo bez výstupu.
+```
+
+Příklad: místo "zkontrolujte soukromí" napište "určete, zda se sbírá nový osobní údaj, kde se ukládá, kdo k němu má přístup a kdy se smaže".
+
+Polohová revize:
+
+```text
+Pravidlo dává smysl, ale člověk ho nepotká ve chvíli rozhodnutí.
+```
+
+Příklad: privacy-first pravidlo přesunete z měsíčního review do šablony nového nástroje, protože tam se rozhoduje, zda nástroj vůbec zavést.
+
+Datová revize:
+
+```text
+Pravidlo funguje, ale výstup vytváří větší datovou stopu, než je nutné.
+```
+
+Příklad: místo kopírování celé zákaznické zprávy do kontrolní karty ukládáte typ požadavku, stav rozhodnutí a odkaz na primární záznam.
+
+Toto rozlišení pomáhá vybrat správný zásah. Když je problém polohový, textové zpřesnění nepomůže. Když je problém datový, přesun pravidla bez změny výstupu jen přesune nepořádek na hezčí místo.
+
+### Upravte minimum artefaktů
+
+Lehká revize nemá přepsat celou dokumentaci. Má upravit minimum artefaktů, které přímo ovlivní další použití.
+
+Praktické pravidlo:
+
+- jeden kanonický zdroj pravdy,
+- jedno pracovní místo, kde se pravidlo používá,
+- jeden odkaz nebo rozcestník, pokud by jinak vedl na starou cestu,
+- jeden záznam v changelogu.
+
+Všechno další si musí zasloužit důvod. Pokud upravujete pět dokumentů, zeptejte se, jestli nemáte duplicitní systém. Pokud musíte poslat dlouhé vysvětlení do tří kanálů, možná pravidlo není na správném místě. Dobrá revize má být vidět hlavně v práci, ne ve vnitrofiremním zpravodajství.
+
+Codyho komentář: když změna potřebuje moc vysvětlování, často to není problém komunikace. Je to problém tvaru změny. Dobrá malá revize se dá ukázat na příštím úkolu: tady je nová otázka, tady je nový stav, tady je kratší cesta.
+
+### Ohlídejte privacy-first dopad revize
+
+Každá revize pravidla je příležitost snížit datovou stopu. Pokud revize přidává nové pole, nový záznam, nový důkaz nebo nový reporting, musí být jasné proč.
+
+Před dokončením si položte otázky:
+
+- Přidává revize nový typ uložených dat?
+- Opravdu potřebujeme konkrétní osobní nebo zákaznické údaje, nebo stačí stav?
+- Nevzniká kopie dat mimo primární systém?
+- Je jasné, kdo má k novému výstupu přístup?
+- Má výstup retenční pravidlo?
+- Lze důkaz použití zkrátit na datum, roli, stav a odkaz?
+- Nevzniká měření lidí tam, kde stačí měřit použitelnost pravidla?
+
+Příklad:
+
+Tým chce po každém použití pravidla ukládat jméno člověka, čas, celý popis situace a komentář vlastníka. To může znít jako dohledatelnost, ale často je to nadbytečné. Pro většinu provozních revizí stačí role, datum, stav, typ nálezu a odkaz na primární záznam. Cílem je zlepšit pravidlo, ne vytvářet interní sledování práce.
+
+Privacy-first revize má výsledek zjednodušit. Méně kopií, méně volného textu, jasnější vlastnictví a kratší retence. Pokud revize přidává data, měla by zároveň něco jiného odstranit nebo zpřesnit.
+
+### Připravte jedno ověření při příštím použití
+
+Lehká revize není hotová ve chvíli, kdy je přepsaný text. Je hotová až po prvním dalším použití. Proto si rovnou nastavte ověřovací háček.
+
+Stačí krátká karta:
+
+```text
+Revizní věta:
+Upravené místo:
+Co má být při příštím použití snazší:
+Jaký výstup má vzniknout:
+Co nesmí přibýt v datové stopě:
+Kdy se ověří:
+Kdo ověření uzavře:
+```
+
+Příklad:
+
+```text
+Revizní věta:
+Měníme výstup kontroly nového formuláře na tři stavy, protože první použití vedla k volným poznámkám se zákaznickými detaily, aby příští kontrola skončila jasným stavem bez kopírování osobních údajů.
+
+Upravené místo:
+Šablona návrhu formuláře.
+
+Ověření:
+Při dalším novém formuláři zkontrolujeme, zda vznikl stav schváleno/upravit/zastavit a zda karta neobsahuje kopii zákaznického požadavku.
+```
+
+Ověřovací háček musí být připojený k reálnému použití, ne ke kalendářové schůzce bez práce. Jinak tým jen zkontroluje, že se změna někam napsala. To je málo.
+
+### Uzavřete starý nález
+
+Když revizi provedete, vraťte se k původní kontrole pravidla a uzavřete nález. Ne dlouhým reportem. Jednou větou.
+
+```text
+Nález:
+Pravidlo bylo v prvních použitích nalezeno až přes vlastníka procesu.
+
+Revize:
+Přesunuto do onboardingového checklistu role a přidán odkaz z rozcestníku.
+
+Ověření:
+Příští nový člověk v roli projde checklist a ověříme, zda pravidlo našel bez dotazu.
+```
+
+Tím se uzavře smyčka. Nález nezůstane viset jako volná poznámka a revize nezmizí jako anonymní úprava dokumentu. Provozní systém si pamatuje, proč se něco změnilo, ale nenese s sebou román.
+
+### Šablona lehké revize pravidla
+
+```text
+Název pravidla:
+Kanonické místo:
+Původní kontrola:
+
+Vybraný nález:
+Cena opakování:
+Typ revize:
+Textová / polohová / datová
+
+Revizní věta:
+Měníme:
+Protože:
+Aby:
+
+Upravené artefakty:
+Zdroj pravdy:
+Pracovní místo:
+Odkaz nebo rozcestník:
+Changelog:
+
+Privacy-first kontrola:
+Nová data:
+Odstraněná nebo zkrácená data:
+Přístupy:
+Retence:
+Co se nesmí kopírovat:
+
+Ověření příštím použitím:
+Kdy:
+Kdo:
+Očekávaný výstup:
+Signál, že revize pomohla:
+Signál, že je potřeba další zásah:
+
+Uzavření nálezu:
+Stav:
+Další háček:
+```
+
+Šablonu nevyplňujte jako úřední formulář pro klid svědomí. Vyplňte ji jen tak podrobně, aby příští člověk pochopil, co se změnilo, proč a jak pozná, že to funguje.
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: vybrat jeden nález z kontroly pravidla.
+2. Tři minuty: určit cenu opakování a typ revize.
+3. Čtyři minuty: napsat revizní větu.
+4. Čtyři minuty: vybrat nejbližší pracovní místo a minimum artefaktů.
+5. Tři minuty: projít privacy-first dopad revize.
+6. Tři minuty: nastavit ověření při příštím použití a uzavřít původní nález.
+
+Výstupem workshopu není seznam dobrých nápadů. Výstupem je jedna provedená nebo okamžitě proveditelná revize. Pokud workshop skončí tím, že "bychom měli celý proces promyslet", pravděpodobně jste si vybrali moc velký nález.
+
+### Checklist kapitoly
+
+- Vybrali jste jeden nález z kontroly stabilizovaného pravidla?
+- Zvolili jste ho podle ceny opakování, ne podle hlasitosti debaty?
+- Má revize jednu větu ve tvaru co měníme, proč a k jakému výsledku?
+- Víte, jestli jde o textovou, polohovou nebo datovou revizi?
+- Zasahujete nejbližší pracovní místo, kde pravidlo skutečně žije?
+- Upravujete minimum artefaktů?
+- Odstranili jste starý odkaz nebo starou šablonu, pokud by vedla k návratu chyby?
+- Zkontrolovali jste, zda revize nepřidává nadbytečná data?
+- Zkrátili jste důkaz použití na stav, roli, datum a odkaz tam, kde to stačí?
+- Máte ověřovací háček při příštím reálném použití?
+- Uzavřeli jste původní nález jednou větou?
+
+Lehká revize je dobrá údržba. Neřeší všechno, ale zmenšuje tření tam, kde se ukázalo v práci. Díky tomu pravidlo nezůstane křehkým dokumentem, který se po první chybě buď ignoruje, nebo přepíše od nuly. Zůstane živé, malé a použitelné. Přesně takové pravidlo má v provozu šanci přežít.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HC o převodu kontroly stabilizovaného pravidla do lehké revize: výběr jednoho nálezu, revizní věta, nejbližší pracovní místo, typy textové/polohové/datové revize, minimum artefaktů, privacy-first dopad, ověření při příštím použití, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HB o kontrole stabilizovaného pravidla po prvních použitích: výběr skutečných průchodů, signály nalezení, pochopení a dokončení, rozlišení chyby pravidla a okolního systému, privacy-first kontrola datové stopy, rozhodnutí dalšího stavu, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HA o stabilizaci ověřené úpravy dlouhodobého rytmu do pravidla: oddělení úpravy od pravidla, kanonické místo, jazyk práce, uzavření staré cesty, privacy-first stabilizace datové stopy, předání týmu, kontrolní háček, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Zpřesněn úvodní návod k používání rukopisu o kontrolu návaznosti nové pracovní věty na poslední rozhodnutí.
