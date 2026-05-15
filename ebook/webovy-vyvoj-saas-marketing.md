@@ -11,6 +11,8 @@ Jak rukopis používat: nezačínejte nutně od první stránky. Vyberte aktuál
 
 Po každém čtení si proto napište jednu pracovní větu: co se mění, kdo to udělá a jak poznáte, že to pomohlo. Pokud taková věta nevznikne, text byl možná zajímavý, ale ještě se neproměnil v lepší web, produkt ani marketing.
 
+Když se k rukopisu vracíte opakovaně, porovnejte novou pracovní větu s posledním rozhodnutím. Pokud se navzájem tlučou, nejdřív uzavřete starší závěr nebo ho vědomě nahraďte; jinak z e-booku rychle vznikne sbírka dobrých rad, které táhnou každá jinam.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -59979,6 +59981,7 @@ Ověření po prvním cyklu má být krátké a věcné. Nehledá dokonalost. Hl
 
 ## Pracovní log
 
+- 2026-05-15: Zpřesněn úvodní návod k používání rukopisu o kontrolu návaznosti nové pracovní věty na poslední rozhodnutí.
 - 2026-05-15: Doplněna Příloha GZ o ověření úpravy dlouhodobého rytmu po prvním cyklu: návrat ke změnové větě, první skutečný průchod, rozlišení problému úpravy a zavedení, privacy-first kontrola datové stopy, signály použití/výsledku/ceny, rozhodnutí dalšího stavu, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GY o převodu kontroly dlouhodobého rytmu do jedné úpravy: výběr nálezu podle ceny opakování, změnová věta, pracovní místo, nejmenší užitečná změna, privacy-first dopad, ověření v příštím cyklu, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GX o kontrole dlouhodobého rytmu po několika cyklech: původní slib rytmu, poslední tři průchody, rozlišení tření, kontrola bobtnání, privacy-first datová stopa, vlastnictví, šablona, mini workshop a checklist.
