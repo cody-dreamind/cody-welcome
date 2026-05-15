@@ -59686,8 +59686,300 @@ Pokud se nevejdete do 25 minut, pravděpodobně řešíte moc velký rozsah. Vra
 
 Jedna dobrá úprava rytmu má být skoro nenápadná. Příští člověk jen začne na správném místě, uvidí jasnější pravidlo a vyhne se zbytečné práci. Pokud kvůli úpravě potřebuje číst dlouhý vysvětlující dokument, úprava se nejspíš minula účinkem.
 
+## Příloha GZ: Ověření úpravy dlouhodobého rytmu po prvním cyklu
+
+Úprava dlouhodobého rytmu není hotová v okamžiku, kdy se dopíše do šablony. To je jen administrativní část práce. Skutečná zkouška přijde až v dalším cyklu, kdy ji někdo použije pod běžným provozním tlakem, s reálnými vstupy a bez toho, aby měl autora změny po ruce.
+
+Tato příloha pomáhá ověřit, jestli úprava z Přílohy GY opravdu zlepšila práci. Nejde o velký audit. Jde o krátkou kontrolu prvního ostrého použití: změna se použila, rozhodnutí bylo jasnější, datová stopa se nezvětšila a cena práce zůstala přijatelná.
+
+Dobré ověření má odpovědět na čtyři otázky:
+
+- Použil tým nové pravidlo ve správném pracovním místě?
+- Vyřešilo pravidlo původní nález, nebo jen posunulo problém jinam?
+- Nepřidala úprava zbytečnou evidenci, schůzku nebo datovou kopii?
+- Má úprava zůstat, změnit se, nebo se vrátit do dalšího návrhu?
+
+Codyho komentář: první použití nové úpravy je jako první běh formuláře po deployi. Dokud tím neprojde skutečný člověk se skutečným problémem, máme jen hezky napsanou naději.
+
+### 1. Vraťte se k původní změnové větě
+
+Začněte tím, že si přečtete původní změnovou větu. Ne zápis celé debaty, ne všechny poznámky. Jen větu, která říká, co se mělo změnit.
+
+Použijte tvar:
+
+```text
+Upravili jsme [konkrétní místo] tak, aby [role] při [spouštěči] mohla [lepší rozhodnutí] bez [nežádoucí cena nebo riziko].
+```
+
+Příklad:
+
+```text
+Upravili jsme kanonickou kartu poptávkového formuláře tak, aby marketing operations při měsíční kontrole poznal, že nové CRM pole musí nejdřív projít datovou mapou, bez exportu zákaznických zpráv a bez lovení kontextu ve starém chatu.
+```
+
+Ověření musí držet tuto větu. Pokud začnete kontrolovat obecně "stav CRM", rozsah se rozpadne. Původní úprava měla zlepšit jedno pracovní rozhodnutí. Kontrolujte přesně to.
+
+### 2. Vyberte první skutečný průchod
+
+Ověřujte na reálné práci, ne na pocitu vlastníka. Ideální je první cyklus, ve kterém se změna měla přirozeně použít.
+
+Zapište:
+
+```text
+Rytmus:
+Datum cyklu:
+Kdo úpravu použil:
+Jaký spouštěč nastal:
+Jaký výstup měl vzniknout:
+Kde je výstup uložený:
+```
+
+Příklad:
+
+```text
+Rytmus: měsíční kontrola poptávkových formulářů
+Datum cyklu: 2026-06-03
+Kdo úpravu použil: marketing operations
+Spouštěč: nové pole "velikost firmy" v CRM návrhu
+Výstup: rozhodnutí, zda pole projde do ostrého formuláře
+Kde je výstup: kanonická karta formuláře a záznam měsíční kontroly
+```
+
+Pokud se úprava v prvním cyklu nepoužila, neznamená to automaticky selhání. Může to znamenat, že spouštěč nenastal. Rozlišujte:
+
+- spouštěč nenastal,
+- spouštěč nastal, ale tým pravidlo nenašel,
+- spouštěč nastal, pravidlo se našlo, ale nepomohlo,
+- spouštěč nastal a pravidlo pomohlo.
+
+Jen poslední tři stavy říkají něco o kvalitě úpravy. První stav říká hlavně to, že potřebujete další kontrolní okno.
+
+### 3. Sledujte práci, ne poslušnost
+
+Cílem není zjistit, jestli někdo mechanicky odškrtl nový krok. Cílem je zjistit, jestli se práce zlepšila.
+
+Ptejte se:
+
+- Začal člověk na správném místě?
+- Pochopil, co má rozhodnout?
+- Potřeboval hledat kontext jinde?
+- Musel se ptát autora změny?
+- Vznikl jasný výstup?
+- Zastavila úprava původní riziko?
+- Zůstala práce přiměřeně krátká?
+
+Příklad dobrého výsledku:
+
+```text
+Vlastník kontroly otevřel kanonickou kartu formuláře, našel pravidlo pro nové CRM pole, doplnil účel a retenci do datové mapy a pole schválil až potom. Nebylo potřeba exportovat poptávky ani dohledávat kontext ve starých zprávách.
+```
+
+Příklad slabého výsledku:
+
+```text
+Vlastník věděl, že nějaké pravidlo existuje, ale nenašel ho v checklistu. Nakonec se zeptal v chatu a někdo mu poslal screenshot z původní kontroly.
+```
+
+Druhý výsledek neznamená, že pravidlo je špatné. Znamená, že je možná špatně umístěné nebo špatně odkazované. To je jiný typ opravy.
+
+### 4. Rozlište problém úpravy od problému zavedení
+
+Po prvním použití se často objeví tření. Ne každé tření znamená, že úprava byla špatná.
+
+Použijte jednoduché rozlišení:
+
+| Problém | Jak vypadá | Typ dalšího kroku |
+| --- | --- | --- |
+| Problém umístění | člověk neví, kde pravidlo najít | opravit odkaz, index nebo kanonické místo |
+| Problém znění | pravidlo našel, ale vyložil ho různě | zpřesnit jednu větu nebo příklad |
+| Problém rozsahu | pravidlo řeší moc případů najednou | zúžit na jeden spouštěč |
+| Problém ceny | pravidlo funguje, ale přidává moc práce | zkrátit evidenci nebo odstranit duplicitní krok |
+| Problém reality | změnila se práce, pro kterou pravidlo vzniklo | otevřít nové rozhodnutí |
+
+Příklad:
+
+```text
+Nález po použití: vlastník vyplnil účel CRM pole, ale nevěděl, zda má doplnit i retenci.
+Typ problému: znění.
+Další krok: doplnit do pravidla větu "retence je povinná u každého pole, které může nést osobní údaj".
+```
+
+To je malá oprava. Není potřeba přestavovat celý rytmus.
+
+### 5. Privacy-first kontrola prvního použití
+
+Ověření úpravy musí zkontrolovat také datovou stopu, protože právě při kontrolách se často začnou ukládat zbytečné důkazy. Tým chce "mít jistotu", a tak přidá screenshot, export, kopii CRM záznamu nebo citaci zákaznické zprávy. Jistota dobrá, datový nepořádek špatný.
+
+Zapište:
+
+```text
+Vznikla nová data?
+Obsahují osobní nebo zákaznicky citlivé údaje?
+Byla nutná pro rozhodnutí?
+Kde jsou uložená?
+Kdo k nim má přístup?
+Kdy se smažou nebo agregují?
+Jde příště použít menší důkaz?
+```
+
+Příklad dobrého postupu:
+
+```text
+Kontrola uložila jen stav pole: "schváleno po doplnění účelu a retence". Nepřikládal se export CRM ani screenshot reálné poptávky.
+```
+
+Příklad špatného postupu:
+
+```text
+Do kontrolního záznamu byl vložen screenshot CRM detailu s e-mailem, telefonem a textem poptávky, i když rozhodnutí se týkalo jen existence pole.
+```
+
+V druhém případě neopravujte jen screenshot. Opravte pravidlo dokazování: příště se používá testovací záznam, maskovaný výřez nebo prostý stav bez osobních údajů.
+
+### 6. Vyhodnoťte tři signály
+
+U každé úpravy z Přílohy GY jste měli nastavit tři signály: použití, výsledek a cenu. Teď je vyhodnoťte.
+
+```text
+Signál použití:
+Očekávání:
+Skutečnost:
+Stav: splněno / částečně / nesplněno
+
+Signál výsledku:
+Očekávání:
+Skutečnost:
+Stav:
+
+Signál ceny:
+Očekávání:
+Skutečnost:
+Stav:
+```
+
+Vyplněný příklad:
+
+```text
+Signál použití:
+Očekávání: kontrola začne v kanonické kartě formuláře.
+Skutečnost: vlastník začal v měsíčním checklistu, který na kartu odkazoval.
+Stav: splněno.
+
+Signál výsledku:
+Očekávání: nové pole má datovou mapu nebo je zastaveno.
+Skutečnost: pole bylo zastaveno, dokud se nedoplnil účel a retence.
+Stav: splněno.
+
+Signál ceny:
+Očekávání: nepřidat víc než 10 minut práce.
+Skutečnost: kontrola přidala asi 7 minut.
+Stav: splněno.
+```
+
+Pokud jsou všechny tři signály splněné, úprava může zůstat. Pokud selhal signál výsledku, řešte pravidlo. Pokud selhal signál ceny, řešte zbytečnou evidenci. Pokud selhal signál použití, řešte umístění a zavedení.
+
+### 7. Rozhodněte další stav
+
+Po prvním cyklu vyberte jeden stav. Nerozepisujte obecné dojmy.
+
+Možné stavy:
+
+- `ponechat`: úprava funguje a cena je přiměřená,
+- `zpřesnit`: jádro funguje, ale věta nebo příklad potřebuje úpravu,
+- `přesunout`: pravidlo je dobré, ale je na špatném pracovním místě,
+- `zkrátit`: úprava přidala zbytečnou evidenci,
+- `vrátit k návrhu`: pravidlo neřeší původní problém,
+- `čekat na další cyklus`: spouštěč ještě nenastal.
+
+Rozhodovací věta:
+
+```text
+Po prvním cyklu úpravu [stav], protože [důkaz]. Další krok je [jedna konkrétní akce] do [termín].
+```
+
+Příklad:
+
+```text
+Po prvním cyklu úpravu ponecháváme, protože zastavila nové CRM pole před nasazením bez datové mapy a nepřidala víc než 10 minut práce. Další krok je doplnit krátký příklad retence do stejné karty do příští měsíční kontroly.
+```
+
+Tím je rozhodnutí uzavřené. Žádná mlha, žádné "budeme sledovat". Sledujte jen tehdy, když víte co, kde a kdy.
+
+### Šablona ověření po prvním cyklu
+
+```text
+Rytmus:
+Úprava:
+Původní změnová věta:
+Datum prvního ověření:
+Kontroloval:
+
+První skutečný průchod:
+Spouštěč:
+Role:
+Výstup:
+Kde je uložený:
+
+Signál použití:
+Očekávání:
+Skutečnost:
+Stav:
+
+Signál výsledku:
+Očekávání:
+Skutečnost:
+Stav:
+
+Signál ceny:
+Očekávání:
+Skutečnost:
+Stav:
+
+Privacy-first kontrola:
+Nová data:
+Citlivost:
+Retence:
+Přístupy:
+Úklid:
+
+Třídění problému:
+Umístění / znění / rozsah / cena / realita:
+
+Rozhodnutí dalšího stavu:
+Další krok:
+Termín:
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst původní změnovou větu.
+2. Tři minuty: popsat první skutečný průchod.
+3. Čtyři minuty: vyhodnotit signál použití, výsledku a ceny.
+4. Tři minuty: zkontrolovat privacy-first datovou stopu.
+5. Tři minuty: rozlišit typ problému, pokud nějaký vznikl.
+6. Čtyři minuty: napsat rozhodovací větu a další krok.
+
+Pokud workshop trvá déle, pravděpodobně jste otevřeli širší debatu o rytmu. Tu si klidně založte jako nový nález, ale nepleťte ji do ověření jedné úpravy.
+
+### Checklist kapitoly
+
+- Vrátili jste se k původní změnové větě?
+- Ověřujete skutečný pracovní průchod, ne jen dojem vlastníka?
+- Je jasné, zda spouštěč opravdu nastal?
+- Sledujete práci a výstup, ne jen odškrtnutí nového kroku?
+- Rozlišili jste problém umístění, znění, rozsahu, ceny a reality?
+- Zkontrolovali jste, zda nevznikla zbytečná datová kopie?
+- Nepoužili jste reálné osobní údaje jako důkaz, pokud stačil stav nebo testovací záznam?
+- Vyhodnotili jste signál použití, výsledku a ceny?
+- Má úprava jeden další stav: ponechat, zpřesnit, přesunout, zkrátit, vrátit k návrhu nebo čekat?
+- Vznikla jedna rozhodovací věta s konkrétním dalším krokem?
+- Je termín další kontroly nebo úpravy jasný?
+
+Ověření po prvním cyklu má být krátké a věcné. Nehledá dokonalost. Hledá důkaz, že malá úprava rytmu skutečně pomohla práci, nezvětšila datovou stopu a stojí za ponechání. Když tohle víte, systém se může zlepšovat bez dalších vrstev administrativy. Což je vzácná forma dospělosti: méně papíru, víc pravdy.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha GZ o ověření úpravy dlouhodobého rytmu po prvním cyklu: návrat ke změnové větě, první skutečný průchod, rozlišení problému úpravy a zavedení, privacy-first kontrola datové stopy, signály použití/výsledku/ceny, rozhodnutí dalšího stavu, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GY o převodu kontroly dlouhodobého rytmu do jedné úpravy: výběr nálezu podle ceny opakování, změnová věta, pracovní místo, nejmenší užitečná změna, privacy-first dopad, ověření v příštím cyklu, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GX o kontrole dlouhodobého rytmu po několika cyklech: původní slib rytmu, poslední tři průchody, rozlišení tření, kontrola bobtnání, privacy-first datová stopa, vlastnictví, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GW o převodu první údržbové opravy do dlouhodobého rytmu: výběr jedné opravy, kanonické místo, opakovatelné pravidlo, pracovní spouštěče, malé signály, hranice změny, uzavření původní kontroly, šablona, mini workshop a checklist.
