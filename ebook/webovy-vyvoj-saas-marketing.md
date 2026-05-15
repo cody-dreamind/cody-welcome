@@ -59979,8 +59979,241 @@ Pokud workshop trvá déle, pravděpodobně jste otevřeli širší debatu o ryt
 
 Ověření po prvním cyklu má být krátké a věcné. Nehledá dokonalost. Hledá důkaz, že malá úprava rytmu skutečně pomohla práci, nezvětšila datovou stopu a stojí za ponechání. Když tohle víte, systém se může zlepšovat bez dalších vrstev administrativy. Což je vzácná forma dospělosti: méně papíru, víc pravdy.
 
+## Příloha HA: Stabilizace ověřené úpravy dlouhodobého rytmu do pravidla
+
+Když úprava dlouhodobého rytmu projde prvním cyklem, přichází nenápadně nebezpečná chvíle. Tým má pocit, že je hotovo, protože změna fungovala. Jenže právě tady často vzniká budoucí chaos: úprava zůstane v poznámkách z kontroly, někdo ji používá, někdo ne, staré pravidlo pořád visí v šabloně a za tři měsíce se znovu řeší stejný problém.
+
+Stabilizace neznamená napsat další dokument. Znamená rozhodnout, co přesně se z ověřené úpravy stává běžným pravidlem, kde bude žít a co se má stát se starou verzí. Pokud to neuděláte, změna se sice může osvědčit, ale nezakoření. A nezakořeněná dobrá změna je jen dražší poznámka.
+
+Praktická otázka této přílohy zní:
+
+```text
+Co přesně se po ověření stává novým běžným pravidlem a kde se s tím člověk potká při práci?
+```
+
+Odpověď má být krátká. Ne román o tom, co jste zjistili. Jedna provozní věta, jeden zdroj pravdy, jedna trasa použití a jeden další kontrolní bod.
+
+### Nejdřív oddělte úpravu od pravidla
+
+Úprava je zásah, který jste testovali. Pravidlo je stabilní způsob práce, který po testu zůstane. Tyto dvě věci nejsou stejné.
+
+Příklad úpravy:
+
+```text
+Do měsíční kontroly nástrojů přidáme otázku, zda nový formulář nebo automatizace vytváří kopii osobních údajů mimo hlavní systém.
+```
+
+Příklad pravidla:
+
+```text
+Při měsíční kontrole nástrojů se u každé nové sběrné cesty ověřuje, zda nevznikla vedlejší kopie osobních údajů mimo schválený systém.
+```
+
+Rozdíl je malý, ale důležitý. Úprava mluví o tom, co přidáváte. Pravidlo mluví o tom, jak se odteď pracuje. Stabilní text má být použitelný i za půl roku, kdy už si nikdo nepamatuje původní diskusi.
+
+### Vyberte jedno kanonické místo
+
+Ověřená úprava nesmí zůstat na třech místech najednou: v zápisu z review, v dočasné kartě, v hlavní šabloně a ještě v něčí hlavě. Vyberte jedno pracovní místo, kde se pravidlo skutečně použije.
+
+Typická kanonická místa:
+
+- checklist měsíční kontroly,
+- karta nástroje nebo dodavatele,
+- šablona post-mortemu,
+- onboardingový balíček role,
+- provozní runbook,
+- redakční nebo produktový board,
+- datová mapa.
+
+Rozhodujte podle okamžiku použití, ne podle organizační logiky. Pokud se pravidlo má použít při schvalování nového formuláře, patří do schvalovací šablony. Pokud patří do měsíční kontroly, dejte ho tam. Pokud patří do obojího, pravděpodobně potřebujete hlavní pravidlo na jednom místě a na druhém jen odkaz nebo krátkou připomínku.
+
+Codyho komentář: pravidlo uložené tam, kde ho nikdo při práci nepotká, je dekorace. Možná hezká. Možná správně pojmenovaná. Ale pořád dekorace.
+
+### Přepište pravidlo do jazyka práce
+
+Stabilní pravidlo nemá znít jako interní právní vyhláška. Má říct člověku, co má udělat v konkrétní pracovní situaci.
+
+Slabé znění:
+
+```text
+Je nutné reflektovat možné dopady nových workflow na datovou minimalizaci a retenci.
+```
+
+Použitelné znění:
+
+```text
+U každého nového formuláře napiš, kde vzniká primární záznam, zda existuje dočasná kopie a kdy se smaže.
+```
+
+Druhá verze je méně vznešená a víc pomáhá. Přesně tak se pozná dobré pravidlo. Nechce po člověku interpretovat abstrakci, ale vede ho k ověřitelnému výstupu.
+
+U stabilizace používejte tři otázky:
+
+1. Kdy člověk pravidlo použije?
+2. Co má po použití existovat jako výstup?
+3. Jak pozná, že už stačí a nemá vyrábět další evidenci?
+
+Třetí otázka je důležitá. Dlouhodobé rytmy bobtnají hlavně proto, že přidávají povinnosti bez konce. Dobré pravidlo má i hranici hotovo.
+
+### Zavřete starou cestu
+
+Stabilizace není kompletní, dokud stará verze zůstává dostupná jako rovnocenná alternativa. Tým pak neví, jestli má následovat nový postup, starou šablonu nebo kombinaci obojího. Výsledek je nejednotný a při další kontrole se řeší falešný problém disciplíny.
+
+Praktický úklid:
+
+- Nahraďte starou větu v hlavní šabloně.
+- Z dočasné karty udělejte krátký changelog, ne druhý zdroj pravdy.
+- Pokud starý dokument musí zůstat kvůli historii, označte ho jako archiv.
+- Odkazy z pracovních míst veďte na novou verzi.
+- V týmu pojmenujte, od kdy platí nové pravidlo.
+
+Nepotřebujete velkou ceremonii. Stačí věta:
+
+```text
+Od kontroly 2026-05 používáme v měsíční kontrole nástrojů novou otázku na vedlejší kopie osobních údajů; stará verze checklistu je archivní.
+```
+
+To je provozně srozumitelné. Člověk ví, co se změnilo, od kdy a kde už nemá hledat pravdu.
+
+### Privacy-first stabilizace
+
+Privacy-first pravidlo se nesmí stabilizovat jen na úrovni textu. Musí se stabilizovat i datová stopa, kterou pravidlo vytváří. Jinak se snadno stane, že dobrý privacy proces paradoxně začne vyrábět další tabulky s citlivými údaji.
+
+Při stabilizaci ověřte:
+
+- Jaké minimum údajů pravidlo potřebuje k rozhodnutí?
+- Lze důkaz popsat stavem místo konkrétním osobním údajem?
+- Kde se ukládá výstup kontroly?
+- Kdo k němu má přístup?
+- Jak dlouho má výstup smysl držet?
+- Co se má smazat po stabilizaci testovací fáze?
+
+Příklad špatné stabilizace:
+
+```text
+Ke každému formuláři uložíme export několika reálných odpovědí jako důkaz, že kontrola proběhla.
+```
+
+Lepší stabilizace:
+
+```text
+Ke každému formuláři uložíme stav kontroly, datum, odpovědnou roli a poznámku, zda vzniká dočasná kopie. Reálné odpovědi se jako důkaz neukládají.
+```
+
+Privacy-first provoz není jen "máme méně trackerů". Je to návyk ptát se, jestli důkaz, který ukládáme, opravdu musí obsahovat data člověka. Často nemusí. Stačí stav, rozhodnutí a odpovědnost.
+
+### Předání týmu bez školení o všem
+
+Ověřenou úpravu není potřeba vysvětlovat jako celý příběh. Většinou stačí krátké předání lidem, kterých se pravidlo týká.
+
+Dobré předání má čtyři věty:
+
+```text
+Co se mění:
+Proč se to mění:
+Kde je nové pravidlo:
+Kdy poznáme, že funguje:
+```
+
+Příklad:
+
+```text
+Co se mění: V měsíční kontrole nástrojů přibyla otázka na vedlejší kopie osobních údajů.
+Proč se to mění: V posledních dvou úpravách formulářů vznikly dočasné exporty, které nikdo neměl ve své datové mapě.
+Kde je nové pravidlo: Checklist měsíční kontroly nástrojů, sekce Data.
+Kdy poznáme, že funguje: Nový formulář nepůjde schválit bez jasného stavu primárního záznamu, dočasné kopie a retence.
+```
+
+Takové předání je krátké, ale má kontext. Nepředstírá, že všichni potřebují znát celou historii změny. Dává jim přesně tolik, kolik potřebují pro práci.
+
+### Kontrolní háček pro další období
+
+Stabilizované pravidlo potřebuje jeden kontrolní háček. Ne proto, abyste ho věčně hlídali, ale abyste ověřili, že se po stabilizaci neztratilo v provozu.
+
+Háček může být jednoduchý:
+
+- zkontrolovat při další měsíční kontrole,
+- ověřit při prvním novém formuláři,
+- vrátit se k pravidlu při nejbližším onboardingu nové role,
+- porovnat stav po příštím kvartálním review,
+- přidat jednu otázku do následného post-mortemu.
+
+Nepište "budeme průběžně sledovat". To je věta, která obvykle znamená "nikdo neví kdy". Napište konkrétní okamžik.
+
+Příklad:
+
+```text
+Háček: při příštím schválení nového formuláře ověřit, zda autor našel pravidlo bez dotazu a vyplnil stav primárního záznamu, dočasné kopie a retence.
+```
+
+To je kontrola použitelnosti pravidla, ne kontrola člověka. Rozdíl je zdravý. Když člověk pravidlo nenajde, problém může být v umístění. Když mu nerozumí, problém může být ve znění. Když ho ignoruje, problém může být ve vlastnictví nebo v tom, že pravidlo přidává moc práce.
+
+### Stabilizační karta
+
+```text
+Ověřená úprava:
+Původní problém:
+Výsledek prvního ověření:
+
+Nové stabilní pravidlo:
+Kdy se použije:
+Kanonické místo:
+Odpovědná role:
+
+Staré místo / stará verze:
+Co se nahrazuje:
+Co se archivuje:
+Co se maže:
+
+Privacy-first kontrola:
+Minimum dat:
+Zakázané důkazy:
+Retence výstupu:
+Přístupy:
+
+Předání týmu:
+Komu:
+Kde:
+Datum účinnosti:
+
+Kontrolní háček:
+Kdy:
+Co ověřit:
+Možné další rozhodnutí:
+```
+
+Karta není další šablona pro šablonu. Je to pomůcka na jeden přechod: z ověřené úpravy do stabilního pravidla. Po stabilizaci může zůstat jen changelog a pravidlo v kanonickém místě. Kartu držte jen tehdy, pokud má reálnou hodnotu pro budoucí audit nebo onboarding.
+
+### Mini workshop na 25 minut
+
+1. Čtyři minuty: přečíst výsledek prvního ověření úpravy.
+2. Čtyři minuty: přepsat úpravu na stabilní pravidlo v jazyce práce.
+3. Čtyři minuty: vybrat jedno kanonické místo a pojmenovat starou cestu, kterou nahrazuje.
+4. Čtyři minuty: projít privacy-first kontrolu datové stopy.
+5. Čtyři minuty: napsat čtyřvětné předání týmu.
+6. Pět minut: určit kontrolní háček a další možné rozhodnutí.
+
+Výstup workshopu má být jedna aktualizovaná pracovní šablona, jedna krátká změnová poznámka a jeden kontrolní háček. Pokud vznikne pět nových úkolů, nejspíš jste otevřeli širší téma údržby. To může být užitečné, ale není to stabilizace jedné ověřené úpravy.
+
+### Checklist kapitoly
+
+- Rozlišili jste testovanou úpravu od stabilního pravidla?
+- Je nové pravidlo napsané v jazyce konkrétní práce?
+- Ví člověk, kdy pravidlo použít a jaký výstup má vzniknout?
+- Má pravidlo jasnou hranici hotovo?
+- Vybrali jste jedno kanonické místo?
+- Nahradili jste nebo označili starou verzi, aby nevznikly dvě pravdy?
+- Zkontrolovali jste, že pravidlo nevyrábí zbytečné osobní údaje jako důkaz?
+- Je jasná retence výstupu kontroly?
+- Dostali dotčení lidé krátké předání, ne historickou přednášku?
+- Existuje jeden konkrétní kontrolní háček pro další období?
+- Víte, co se smaže, archivuje nebo ponechá po stabilizaci?
+
+Stabilizace je nudná v tom nejlepším smyslu. Bere ověřenou změnu a dělá z ní normální součást práce. Bez dramatu, bez nového projektu a bez procesního konfetti. Když se to povede, tým si za pár cyklů ani nevzpomene, že se pravidlo kdysi zavádělo. Prostě podle něj pracuje. A to je přesně ten moment, kdy změna přestává být iniciativou a začíná být systémem.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HA o stabilizaci ověřené úpravy dlouhodobého rytmu do pravidla: oddělení úpravy od pravidla, kanonické místo, jazyk práce, uzavření staré cesty, privacy-first stabilizace datové stopy, předání týmu, kontrolní háček, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Zpřesněn úvodní návod k používání rukopisu o kontrolu návaznosti nové pracovní věty na poslední rozhodnutí.
 - 2026-05-15: Doplněna Příloha GZ o ověření úpravy dlouhodobého rytmu po prvním cyklu: návrat ke změnové větě, první skutečný průchod, rozlišení problému úpravy a zavedení, privacy-first kontrola datové stopy, signály použití/výsledku/ceny, rozhodnutí dalšího stavu, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha GY o převodu kontroly dlouhodobého rytmu do jedné úpravy: výběr nálezu podle ceny opakování, změnová věta, pracovní místo, nejmenší užitečná změna, privacy-first dopad, ověření v příštím cyklu, šablona, mini workshop a checklist.
