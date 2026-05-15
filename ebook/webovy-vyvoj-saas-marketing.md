@@ -61594,8 +61594,271 @@ Workshop končí konkrétní změnou, ne seznamem možností. Pokud tým nedoká
 
 Převod kontroly do udržovací změny drží pravidla živá bez toho, aby z každé drobnosti vznikal projekt. Nejlepší údržba je často skoro neviditelná: stará cesta zmizí, správná cesta je blíž práci, datová stopa je menší a další člověk už nemusí řešit stejnou otázku znovu.
 
+## Příloha HH: Ověření udržovací změny po příštím použití
+
+Udržovací změna je hotová až tehdy, když projde dalším skutečným použitím. Ne když ji někdo zapíše do šablony. Ne když ji tým odsouhlasí v komentáři. A už vůbec ne když se autor změny podívá na nový text a řekne si, že teď je to jasné. Jasnost se pozná až ve chvíli, kdy podle změny pracuje někdo jiný v normálním provozu.
+
+Tato příloha řeší krátké ověření po příštím použití udržovací změny. Cílem není otevřít další revizi. Cílem je zjistit, zda malá oprava opravdu snížila tření, nezavedla nový zmatek a nezvětšila datovou stopu. Pokud změna funguje, necháte ji být. Pokud nefunguje, rozhodnete jednu další malou akci.
+
+Praktická otázka zní:
+
+```text
+Pomohla udržovací změna při prvním skutečném použití odstranit původní problém bez nového tření, ručního dohledu a zbytečných dat?
+```
+
+Dobré ověření je krátké, konkrétní a navázané na původní udržovací větu. Nehodnotí celé pravidlo znovu. Hodnotí jen to, zda změna udělala práci, kvůli které vznikla.
+
+### 1. Vraťte se k původní udržovací větě
+
+Začněte tím, že si přečtete větu z předchozí změny:
+
+```text
+Upravíme [konkrétní místo] tak, aby při [situace použití] nevznikalo [opakované tření nebo riziko] a výstup zůstal [požadovaný stav].
+```
+
+Bez této věty se ověření rychle rozleze. Najednou budete řešit, jestli je celé pravidlo dobře napsané, jestli má tým správný nástroj, jestli by šla udělat automatizace nebo jestli by se neměla změnit odpovědnost. To všechno mohou být legitimní témata, ale nejsou to témata prvního ověření udržovací změny.
+
+Příklad ověřovacího rámce:
+
+```text
+Udržovací věta:
+Upravili jsme šablonu kontroly formuláře tak, aby při zápisu kontextu nevznikaly kopie zákaznických detailů a výstup obsahoval jen stav, odpovědnou roli a odkaz na primární záznam.
+
+Ověřujeme:
+Při první další kontrole formuláře vznikl výstup se stavem, rolí a odkazem, bez kopírování detailu do komentáře.
+```
+
+Codyho komentář: ověřování malé změny má být až nepříjemně úzké. Když po jedné úpravě šablony začnete hodnotit celý provozní systém, pravděpodobně jen odkládáte jednoduchou odpověď na otázku, jestli konkrétní oprava zabrala.
+
+### 2. Vyberte první normální použití, ne ideální demo
+
+Ověření potřebuje reálnou práci. Ideální demo od autora změny skoro nic neřekne. Hledejte první běžnou situaci, kde by původní problém mohl znovu vzniknout.
+
+Dobré ověřovací použití:
+
+- vzniklo v normálním pracovním toku,
+- použil ho člověk, který změnu nevymýšlel,
+- mělo běžný časový tlak,
+- používalo aktuální šablonu, odkaz nebo pravidlo,
+- skončilo konkrétním výstupem,
+- nevyžadovalo speciální vysvětlení předem.
+
+Slabé ověřovací použití:
+
+- autor změny si ho sám připravil,
+- člověk dostal dlouhé ústní vysvětlení,
+- šlo o školení bez skutečného dopadu,
+- výsledek se ručně opravil před kontrolou,
+- původní situace se ve skutečnosti vůbec neobjevila.
+
+Pokud první použití není vhodné, nezapisujte falešné ověření. Zapište stav "čeká na vhodné použití" a dejte mu termín nebo spouštěč. Lepší je počkat na skutečný průchod než si vyrobit pocit hotova.
+
+### 3. Sledujte průchod bez zachraňování
+
+Během prvního použití se dívejte na práci, ne na to, jestli člověk splní vaši představu. Pokud hned zasáhnete a vysvětlíte správný postup, ztratíte důkaz. Ověření má ukázat, zda změna nese část kontextu sama.
+
+Sledujte čtyři věci:
+
+Nalezení:
+
+- člověk našel nové místo bez lovení starého odkazu,
+- název šablony nebo pole byl srozumitelný,
+- stará cesta se neobjevila jako první volba.
+
+Použití:
+
+- člověk pochopil, co má vyplnit nebo udělat,
+- nový text, pole nebo příklad nevyvolal další otázku,
+- změna nezpomalila práci víc, než je rozumné.
+
+Výstup:
+
+- vznikl výstup odpovídající původnímu slibu,
+- další člověk by podle něj mohl pokračovat,
+- není potřeba ruční oprava jen kvůli formě.
+
+Datová stopa:
+
+- nevznikla nová kopie detailu,
+- citlivější kontext zůstal v primárním systému,
+- přístup k výstupu není širší, než potřebuje práce.
+
+Příklad: po přejmenování pole z "kontext" na "odkaz na primární záznam" člověk vloží odkaz na CRM záznam a stav formuláře. Nepřidá celý text požadavku do komentáře. To je dobrý signál. Pokud ale zároveň napíše detail do volné poznámky jinde, problém se jen přesunul. Změna možná opravila jedno pole, ale nechala otevřenou druhou cestu.
+
+### 4. Rozlište čtyři výsledky ověření
+
+Po prvním použití vyberte jeden stav. Nepište dlouhou esej. Stav má být dost jasný, aby z něj šel udělat další krok.
+
+Změna zabrala:
+
+```text
+Původní problém se neopakoval, práce prošla bez zvláštní pomoci a datová stopa zůstala menší nebo stejná.
+```
+
+Další krok: nechte změnu splynout s běžným pravidlem a uzavřete ověření.
+
+Změna zabrala částečně:
+
+```text
+Původní problém se zmenšil, ale zůstalo drobné tření, například nejasný název, chybějící příklad nebo starý odkaz v jednom místě.
+```
+
+Další krok: udělejte jednu doplňkovou udržovací změnu, pokud je malá a přímo souvisí s původním problémem.
+
+Změna nezabrala:
+
+```text
+Původní problém se zopakoval, nebo lidé dál potřebují ruční výklad.
+```
+
+Další krok: vraťte se k pracovnímu místu změny. Možná jste opravili dokumentaci, ale problém vzniká v šabloně, formuláři nebo starém odkazu.
+
+Změna vytvořila nové riziko:
+
+```text
+Původní problém se možná zmenšil, ale vznikla nová datová kopie, širší přístup, pomalejší práce nebo nejasná odpovědnost.
+```
+
+Další krok: zastavte rozšiřování změny a opravte nové riziko dřív, než se stane běžnou součástí práce.
+
+### 5. Zkontrolujte, zda stará cesta opravdu zmizela
+
+Mnoho udržovacích změn selže ne proto, že je nový postup špatný, ale protože starý postup pořád žije. Starý odkaz zůstane v bookmarku. Starý název šablony se objeví v onboardingovém dokumentu. Staré volné pole je pořád vidět v automaticky vytvořeném úkolu. Lidé pak nevolí špatně z neochoty. Volí cestu, kterou jim systém nechal před očima.
+
+Po prvním použití zkontrolujte:
+
+- kde člověk začal hledat,
+- zda narazil na starý odkaz,
+- jestli existuje duplicitní šablona,
+- zda stará instrukce není v jiném pracovním místě,
+- jestli automatizace nevytváří starý tvar úkolu,
+- zda onboarding nebo interní checklist neukazuje na minulou verzi.
+
+Pokud stará cesta zůstává, uzavřete ji hned, pokud to neohrozí běžnou práci. Archivujte, přesměrujte, přejmenujte nebo smažte. Nejasná koexistence starého a nového stavu je jeden z nejdražších druhů technického i provozního dluhu, protože ji lidé musí znovu a znovu vykládat.
+
+### 6. Udělejte krátký privacy-first záznam
+
+Ověření po prvním použití je dobrý okamžik pro kontrolu datové stopy. Nečekejte na kvartální audit. Pokud udržovací změna omylem vytvořila nové kopie dat, je nejlevnější je zachytit teď.
+
+Záznam může být velmi krátký:
+
+```text
+Nová data:
+Nevznikla / vznikla tato:
+
+Primární zdroj pravdy:
+
+Kopie mimo zdroj pravdy:
+Ne / ano, kde:
+
+Přístupy:
+Beze změny / změna:
+
+Retence:
+Beze změny / doplnit:
+
+Úklid:
+Co se smazalo, archivovalo nebo přesměrovalo:
+```
+
+Nejde o právní dokument. Jde o provozní hygienu. Tým má vědět, zda změna nezpůsobila přesně to, čemu měla zabránit: víc kopírování, víc volných poznámek, víc exportů, víc míst s nejasným účelem.
+
+### 7. Uzavřete ověření jednou rozhodovací větou
+
+Na konci napište jednu větu:
+
+```text
+Udržovací změna [zabrala / zabrala částečně / nezabrala / vytvořila nové riziko], protože [důkaz z prvního použití], a další krok je [ponechat / drobně doplnit / vrátit do opravy / zastavit a opravit riziko].
+```
+
+Příklady:
+
+```text
+Udržovací změna zabrala, protože první další kontrola formuláře vytvořila stav, odpovědnou roli a odkaz bez kopírování zákaznických detailů, a další krok je ponechat změnu jako součást běžného pravidla.
+```
+
+```text
+Udržovací změna zabrala částečně, protože kopírování detailů zmizelo ze šablony, ale starý odkaz zůstává v onboardingovém checklistu, a další krok je přesměrovat tento odkaz na kanonické místo.
+```
+
+Rozhodovací věta má uzavřít smyčku. Bez ní se i dobrá udržovací změna může změnit v neurčitý stav "asi hotovo". Provoz potřebuje jasné konce.
+
+### Šablona ověření udržovací změny
+
+```text
+Původní pravidlo:
+Kanonické místo:
+Udržovací věta:
+Co se změnilo:
+
+První skutečné použití:
+Datum:
+Situace:
+Kdo použil roli nebo tým:
+Výstup:
+
+Nalezení:
+Našel člověk správné místo:
+Objevil se starý odkaz nebo stará šablona:
+
+Použití:
+Byla změna pochopitelná:
+Bylo potřeba dovysvětlení:
+Kde vzniklo tření:
+
+Výstup:
+Odpovídá původnímu slibu:
+Byla potřeba ruční oprava:
+Může další člověk pokračovat:
+
+Privacy-first kontrola:
+Vznikla nová data:
+Vznikla kopie mimo zdroj pravdy:
+Změnily se přístupy:
+Co se uklidilo:
+
+Stav ověření:
+Zabrala / zabrala částečně / nezabrala / vytvořila nové riziko
+
+Rozhodovací věta:
+Další krok:
+Vlastník:
+Termín:
+Changelog:
+```
+
+### Mini workshop na 20 minut
+
+1. Dvě minuty: přečíst původní udržovací větu.
+2. Tři minuty: popsat první skutečné použití.
+3. Čtyři minuty: projít nalezení, použití a výstup.
+4. Čtyři minuty: zkontrolovat starou cestu a datovou stopu.
+5. Tři minuty: vybrat stav ověření.
+6. Dvě minuty: napsat rozhodovací větu.
+7. Dvě minuty: zapsat další krok nebo uzavření.
+
+Workshop nemá vyrábět nový seznam přání. Pokud změna zabrala, zavřete ji. Pokud zabrala částečně, vyberte jednu doplňkovou opravu. Pokud nezabrala, vraťte se k místu, kde problém skutečně vzniká. Pokud vytvořila nové riziko, nejdřív ho odstraňte.
+
+### Checklist kapitoly
+
+- Vrátili jste se k původní udržovací větě?
+- Ověřovali jste první normální použití, ne demo autora?
+- Použil změnu někdo jiný než člověk, který ji navrhl?
+- Sledovali jste průchod bez okamžitého zachraňování?
+- Zkontrolovali jste nalezení, použití a výstup?
+- Ví další člověk podle výstupu pokračovat?
+- Nevrátila se stará cesta přes odkaz, šablonu nebo onboarding?
+- Nevznikla nová kopie osobních, zákaznických nebo citlivých údajů?
+- Stačil stav, role nebo odkaz místo detailu?
+- Vybrali jste jeden ze čtyř stavů ověření?
+- Napsali jste rozhodovací větu?
+- Má další krok vlastníka, termín a changelog, pokud je potřeba?
+
+Ověření udržovací změny chrání tým před falešným pocitem hotova. Malá oprava má hodnotu jen tehdy, když pomůže v další skutečné práci. Když projde bez ručního výkladu, bez návratu staré cesty a bez nové datové stopy, nechte ji být. Stabilní provoz se skládá z přesně takových malých uzavřených smyček.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HH o ověření udržovací změny po příštím použití: návrat k udržovací větě, výběr prvního normálního použití, sledování průchodu bez zachraňování, čtyři stavy ověření, kontrola staré cesty, privacy-first záznam, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HG o převodu kontroly běžného pravidla do jedné udržovací změny: výběr nálezu podle opakované ceny, udržovací věta, nejbližší pracovní místo, typy textových/polohových/úklidových/datových změn, privacy-first dopad, uzavření staré cesty, ověření při příštím použití, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HF o kontrole běžného pravidla po několika použitích: pracovní slib pravidla, výběr vzorku skutečných použití, signály nalezení/rozhodnutí/dokončení, návrat starého chování, privacy-first kontrola opakované datové stopy, stav pravidla, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HE o stabilizaci ověřené lehké revize do běžného pravidla: potvrzení stabilizovaného výsledku, přepis kanonického místa, uzavření revizních artefaktů, privacy-first úklid, pracovní předání, lehký kontrolní háček, stabilizační karta, mini workshop a checklist.
