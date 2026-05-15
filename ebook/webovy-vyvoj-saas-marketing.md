@@ -63427,8 +63427,290 @@ Workshop končí ve chvíli, kdy existuje jedna úprava a jedna rozhodovací vě
 
 Kontrola po několika cyklech je malá, ale důležitá protiváha k provoznímu optimismu. První stabilizace říká: "Takhle by to mělo fungovat." Kontrola po několika cyklech říká: "Takhle to opravdu funguje, když se nikdo nedívá přes rameno." A právě tam se pozná, jestli změna zlepšila systém, nebo jen přidala další hezky pojmenovaný krok.
 
+## Příloha HO: Převod kontroly stabilizovaného dalšího kroku do malé korekce
+
+Kontrola stabilizovaného dalšího kroku má hodnotu až ve chvíli, kdy po ní vznikne malá konkrétní korekce. Bez ní se z kontroly stane jen provozní konstatování: něco drží, něco trochu drhne, někde se vrátil starý odkaz, někdo si pomohl vlastní zkratkou. To může být zajímavé, ale samo o sobě to nezlepší web, SaaS, marketing ani interní provoz.
+
+Tato příloha navazuje na Přílohu HN. Pomáhá vzít jeden nález z kontroly po několika cyklech a převést ho do malé změny, která sníží tření bez otevření nového procesu. Cílem není napsat další standard. Cílem je opravit nejbližší místo, kde práce zbytečně ztrácí čas, důvěru nebo privacy-first čistotu.
+
+Praktická otázka zní:
+
+```text
+Jaká nejmenší korekce odstraní opakované tření ze stabilizovaného kroku, aniž by přidala novou administrativu nebo novou datovou stopu?
+```
+
+Tahle otázka je záměrně malá. Po několika cyklech už často vidíte víc problémů najednou. Starý odkaz v onboardingu, nejasný název šablony, zbytečné pole ve výstupu, pomocný export, který se začal tvářit jako běžná praxe. Když se pokusíte opravit všechno najednou, z malé korekce se stane projekt. A projekt si pak velmi ochotně řekne o další meeting, další tabulku a další statečný pokus o pořádek.
+
+### 1. Vezměte jen jeden nález z kontroly
+
+Začněte výsledkem z Přílohy HN. Nečtěte ho jako seznam úkolů. Čtěte ho jako zdroj pro výběr jedné korekce.
+
+Dobří kandidáti:
+
+- opakované hledání stejného odkazu,
+- návrat jedné staré šablony,
+- nejasný pojem, který lidé vykládají různě,
+- ruční přepis mezi dvěma místy,
+- zbytečné pole v checklistu,
+- dočasný export, který se opakuje,
+- příklad s příliš konkrétními zákaznickými daty,
+- kontrolní háček, který už nepomáhá rozhodnutí.
+
+Slabí kandidáti:
+
+- obecný pocit, že dokumentace je moc dlouhá,
+- přání přepsat celý systém šablon,
+- nápad sjednotit všechny procesy najednou,
+- problém, který se objevil jen jednou a nemá dopad,
+- věc, kterou nikdo nepoužívá a nikomu nepřekáží.
+
+Příklad výběru:
+
+```text
+Nálezy z kontroly:
+1. Dva lidé hledali aktuální šablonu přes starý onboardingový rozcestník.
+2. Jeden výstup obsahoval zbytečný screenshot.
+3. Název pole "stav" je trochu nejasný.
+
+Vybraný nález:
+Starý onboardingový rozcestník, protože se objevil ve dvou ze tří cyklů a vede lidi na špatnou trasu.
+```
+
+Nejde o to vybrat nejzajímavější nález. Vyberte ten, který má nejvyšší opakovanou cenu. Cena může být čas, riziko chyby, datová stopa nebo zbytečné vysvětlování.
+
+### 2. Napište korekční větu
+
+Korekční věta drží změnu malou:
+
+```text
+Protože [důkaz z kontroly], upravíme [jedno pracovní místo] tak, aby [očekávané chování], a ověříme to při [nejbližší normální situaci].
+```
+
+Příklad:
+
+```text
+Protože dva ze tří průchodů začaly přes starý onboardingový rozcestník, upravíme jen tento rozcestník tak, aby vedl na kanonickou šablonu kontroly formulářů, a ověříme to při dalším onboardingu operations role.
+```
+
+Korekční věta má čtyři pojistky:
+
+- vychází z důkazu, ne z dojmu,
+- míří na jedno pracovní místo,
+- popisuje očekávané chování,
+- má konkrétní ověřovací okamžik.
+
+Když věta nejde napsat stručně, změna je pravděpodobně moc velká nebo špatně vybraná. Zkuste ji zmenšit. "Zpřehlednit dokumentaci" je přání. "Vyměnit starý odkaz v onboardingovém rozcestníku" je korekce.
+
+### 3. Určete typ korekce
+
+Malé korekce obvykle spadají do pěti typů:
+
+```text
+Trasa:
+Změní se cesta k existujícímu správnému místu.
+
+Text:
+Zpřesní se jedna věta, název nebo příklad.
+
+Pole:
+Přidá se, odstraní nebo přejmenuje jedno pole ve výstupu.
+
+Úklid:
+Smaže, archivuje nebo přesměruje se stará věc.
+
+Datové minimum:
+Nahradí se kopie, screenshot nebo export odkazem, stavem nebo agregovanou informací.
+```
+
+Rozhodovací tabulka:
+
+| Nález | Typ korekce | Nejmenší zásah |
+| --- | --- | --- |
+| Lidé chodí přes starý odkaz | Trasa | Vyměnit odkaz v rozcestníku |
+| Pojem se vykládá různě | Text | Doplnit jednu rozhodovací větu |
+| Výstup má nepoužívané pole | Pole | Pole odstranit nebo označit jako volitelné |
+| Archivní šablona se používá jako aktivní | Úklid | Přidat varování a odkaz na aktuální verzi |
+| Kontrola vyrábí screenshoty zákaznických dat | Datové minimum | Žádat odkaz na primární záznam a stav |
+
+Codyho komentář: korekce "datové minimum" bývá často nejméně okázalá a nejvíc profesionální. Nikdo vám za odstranění screenshotového zlozvyku nedá fanfáry, ale zákaznická data se přestanou válet tam, kde nemají. To je docela slušný obchod.
+
+### 4. Upravte místo, kde chyba opravdu vzniká
+
+Korekce má zasáhnout původ tření, ne jeho symptom. Pokud lidé pořád používají starou šablonu, samotná zpráva v chatu problém neřeší. Pokud ručně kopírují odpovědi do výstupu, domluva "nekopírujte to" problém neřeší. Změnit se musí pracovní místo, které je k tomu vede.
+
+Ptejte se:
+
+- Kde člověk poprvé narazí na starou cestu?
+- Kde se rozhoduje, co má výstup obsahovat?
+- Kde automatizace zakládá úkol nebo popis?
+- Kde onboarding ukazuje příklad?
+- Kde šablona žádá zbytečná data?
+- Kde se dá odstranit ruční přepis?
+
+Příklad:
+
+```text
+Symptom:
+Ve dvou výstupech vznikla kopie zákaznické odpovědi.
+
+Skutečné místo chyby:
+Šablona výstupu má pole "vložit odpověď zákazníka".
+
+Malá korekce:
+Pole nahradit dvěma poli: "odkaz na primární záznam" a "stav vyřízení".
+```
+
+Tím se změní chování bez dalšího školení. Lidé většinou dělají to, co jim pracovní prostředí nejvíc usnadňuje. Tak ať jim usnadňuje správnou věc.
+
+### 5. Zavřete starou možnost, pokud nemá hodnotu
+
+Malá korekce často selže, protože stará možnost zůstane lákavě dostupná. Nový odkaz existuje, ale starý je blíž. Nová šablona je správná, ale stará má známý název. Nové pole je bezpečnější, ale staré kopírování je rychlejší.
+
+U každé korekce rozhodněte, co se stane se starou možností:
+
+```text
+Smazat:
+Nemá historickou ani auditní hodnotu.
+
+Archivovat:
+Má historickou hodnotu, ale nesmí se použít pro novou práci.
+
+Přesměrovat:
+Lidé na ni pořád chodí, proto je potřeba je dovést na aktuální místo.
+
+Zneviditelnit z pracovních tras:
+Může zůstat dohledatelná, ale nemá být v rozcestníku, onboardingu ani úkolu.
+```
+
+Praktický zápis:
+
+```text
+Stará šablona:
+Archivovat.
+
+Úprava:
+Přejmenovat na "ARCHIV - nepoužívat pro nové kontroly" a do první věty přidat odkaz na aktuální šablonu.
+
+Pracovní trasy:
+Odstranit ze sdíleného rozcestníku a z onboardingové stránky.
+```
+
+Archivace není skládka. Pokud archivovaná věc zůstává v aktivní trase, není archivovaná. Jen dostala nalepovací štítek a čeká, až někoho znovu zdrží.
+
+### 6. Ověřte korekci při nejbližší normální práci
+
+Korekce se nemá ověřovat tím, že autor otevře dokument a řekne "vypadá to opraveně". Ověřuje se při nejbližší normální situaci, kde měla pomoci.
+
+Možnosti ověření:
+
+- další onboarding,
+- další měsíční kontrola,
+- další zákaznický výstup,
+- další spuštění automatizace,
+- další použití šablony,
+- další interní předání,
+- další publikace obsahu.
+
+Ověřovací věta:
+
+```text
+Při dalším [normální situace] ověříme, zda [očekávané chování] bez [staré tření nebo datové riziko].
+```
+
+Příklad:
+
+```text
+Při dalším onboardingu operations role ověříme, zda člověk otevře kanonickou šablonu z aktuálního rozcestníku bez starého odkazu a bez dotazu v chatu.
+```
+
+Kontrola má být krátká. Jedno použití často stačí, pokud korekce mířila na jasné místo. Pokud se problém týká opakovaného rizika s daty, ověřte ještě jeden další cyklus, ale nepřidávejte trvalý dohled automaticky.
+
+### 7. Zapište korekci bez nafukování historie
+
+Changelog má zachytit důvod, zásah a ověření. Nemá z něj být kronika celé debaty.
+
+Dobrá položka:
+
+```text
+2026-05-15: Po kontrole stabilizované trasy opravena onboardingová cesta ke kontrole formulářů. Starý rozcestník nově vede na kanonickou šablonu, archivní šablona je označená jako neaktivní. Důvod: dva ze tří průchodů začaly přes starý odkaz. Ověření při dalším onboardingu operations role.
+```
+
+Slabá položka:
+
+```text
+2026-05-15: Upraven onboarding.
+```
+
+Druhá položka šetří slova, ale nešetří budoucí práci. Za měsíc nikdo neví, co se upravilo, proč a podle čeho se pozná, že to zabralo.
+
+### Šablona malé korekce
+
+```text
+Stabilizovaný další krok:
+Kontrola z Přílohy HN:
+
+Vybraný nález:
+Důkaz z reálných cyklů:
+
+Korekční věta:
+
+Typ korekce:
+Trasa / text / pole / úklid / datové minimum
+
+Pracovní místo, kde vzniká tření:
+
+Konkrétní úprava:
+
+Stará možnost:
+Smazat / archivovat / přesměrovat / zneviditelnit z pracovních tras
+
+Privacy-first kontrola:
+Snižuje korekce datovou stopu:
+Nevznikají nové kopie:
+Přístupy zůstávají stejné nebo užší:
+Dočasné podklady se uklidí:
+
+Ověření:
+Nejbližší normální situace:
+Podle čeho poznáme, že korekce zabrala:
+Kdy se kontrolní háček zruší:
+
+Changelog:
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: přečíst stav a nálezy z Přílohy HN.
+2. Tři minuty: vybrat jeden nález s nejvyšší opakovanou cenou.
+3. Dvě minuty: napsat korekční větu.
+4. Dvě minuty: určit typ korekce a nejbližší pracovní místo.
+5. Dvě minuty: rozhodnout, co se stane se starou možností.
+6. Dvě minuty: projít privacy-first dopad.
+7. Dvě minuty: zapsat ověření a changelog.
+
+Když se workshop zasekne na velkém tématu, zmenšete změnu. Pokud zmenšení nejde, nejde o malou korekci. Je to nový problém a patří do backlogu. To není selhání, to je jen provozní dospělost v pracovním oblečení.
+
+### Checklist kapitoly
+
+- Vybrali jste jeden nález, ne celý seznam?
+- Má nález důkaz z reálných cyklů?
+- Je korekční věta krátká a konkrétní?
+- Míří korekce na jedno pracovní místo?
+- Rozlišili jste typ korekce: trasa, text, pole, úklid nebo datové minimum?
+- Opravujete příčinu tření, ne jen jeho symptom?
+- Rozhodli jste, co se stane se starou možností?
+- Není archivovaná věc dál v aktivní pracovní trase?
+- Snižuje korekce datovou stopu, nebo ji aspoň nezvětšuje?
+- Nahrazujete kopie, screenshoty a exporty odkazy, stavy nebo agregovanými informacemi, když to stačí?
+- Má korekce ověření při nejbližší normální práci?
+- Je jasné, kdy se kontrolní háček zruší?
+- Changelog říká co, proč, kde a kdy se ověří?
+
+Malá korekce je praktický most mezi kontrolou a zlepšením. Nevyžaduje velkou změnu systému. Vyžaduje jen disciplínu vybrat jeden nález, trefit správné pracovní místo, uklidit starou možnost a ověřit výsledek v běžné práci. Právě tak se provoz zlepšuje bez toho, aby se z každého zlepšení stala další vrstva procesu.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HO o převodu kontroly stabilizovaného dalšího kroku do malé korekce: výběr jednoho nálezu, korekční věta, typy korekcí, úprava skutečného místa tření, zavření staré možnosti, ověření při nejbližší normální práci, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HN o kontrole stabilizovaného dalšího kroku po několika cyklech: kontrolní okno, reálné průchody, čtyři stavy stabilizace, cena změny, privacy-first kontrola opakování, jeden další pohyb, úprava nejbližšího pracovního místa, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HM o stabilizaci ověřeného dalšího kroku do běžného provozu: stav z ověření, výběr domova stabilizace, úprava nejbližšího pracovního místa, zkrácení historie na pracovní důvod, uzavření starých cest, privacy-first minimum, předání týmu, lehký signál návratu starého chování, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HL o ověření dalšího kroku po prvním použití: návrat k původnímu kroku, výběr prvního normálního použití, sledování cesty, výstupu a datové stopy, čtyři stavy ověření, changelog, privacy-first okamžitý úklid, rozhodovací věta, šablona, mini workshop a checklist.
