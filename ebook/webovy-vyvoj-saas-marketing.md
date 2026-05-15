@@ -62113,8 +62113,249 @@ Výstupem workshopu nemá být nový backlog. Výstupem má být jedno aktualizo
 
 Stabilizace ověřené udržovací změny je malý, ale důležitý závěr. Dává opravě trvalé místo, maže provizorní stopy a brání návratu starého chování. Když ji uděláte dobře, tým si změny skoro nevšimne. Prostě začne pracovat správnější cestou. Což je přesně ten druh magie, který v provozu dává smysl.
 
+## Příloha HJ: Kontrola běžného pravidla po prvním normálním cyklu
+
+Stabilizované pravidlo začne být opravdu užitečné až ve chvíli, kdy přežije první normální cyklus. Ne pilot, ne ověřovací ukázku, ne situaci, kde autor pravidla sedí vedle týmu a všechno vysvětluje. Normální cyklus znamená běžnou práci: trochu spěchu, více lidí, jiné priority, drobné výjimky a žádný zvláštní reflektor.
+
+Praktická otázka zní:
+
+```text
+Použilo se nové běžné pravidlo v prvním normálním cyklu tak, aby práci zjednodušilo, nevytvořilo novou skrytou administrativu a udrželo privacy-first hranice?
+```
+
+Tato kontrola není další revize pravidla pro radost z dokumentace. Je to krátký sanity check. Má potvrdit, že stabilizovaná změna nezůstala jen hezky napsaná, ale skutečně funguje v rytmu, ve kterém má žít.
+
+### 1. Vyberte správný první cyklus
+
+Nejčastější chyba je kontrolovat moc brzy nebo moc pozdě. Moc brzy vidíte jen zavedení. Moc pozdě už se problém promíchá s dalšími změnami a nikdo neví, co způsobilo co.
+
+První normální cyklus může být například:
+
+- další týdenní kontrola poptávek,
+- další měsíční review webu,
+- první onboarding nového člověka po změně pravidla,
+- první běžné použití šablony v zákaznické práci,
+- další standardní úprava automatizace,
+- první kvartální privacy kontrola, kde se pravidlo přirozeně použije.
+
+Vyberte cyklus, ve kterém se pravidlo mělo použít bez zvláštního připomínání. Pokud se pravidlo neobjevilo ani tam, kde se objevit mělo, je to důležitý signál. Možná není problém v textu pravidla, ale v jeho umístění.
+
+Krátký záznam:
+
+```text
+Pravidlo:
+Kde je zdroj pravdy:
+První normální cyklus:
+Datum nebo období:
+Kdo pravidlo použil:
+Jaký výstup měl vzniknout:
+```
+
+### 2. Sledujte práci, ne poslušnost
+
+Kontrola nemá hledat, jestli lidé doslova zopakovali text pravidla. Má hledat, jestli pravidlo pomohlo práci projít lépe. Dobré pravidlo se někdy použije nenápadně: člověk najde správné místo, doplní správný stav, nekopíruje zbytečný detail, předá výstup dál a nikdo u toho nevede filozofický seminář.
+
+Sledujte čtyři věci:
+
+- nalezení: člověk pravidlo našel tam, kde ho při práci čekal,
+- rozhodnutí: pravidlo pomohlo rozhodnout bez eskalace,
+- výstup: vznikl výsledek použitelný pro další krok,
+- cena: pravidlo nepřidalo víc práce, než ušetřilo.
+
+Příklad:
+
+```text
+Pravidlo říká, že kontrola formuláře má obsahovat stav, odpovědnou roli a odkaz na primární CRM záznam.
+
+V prvním cyklu:
+- člověk otevřel správný checklist z úkolu,
+- do výstupu dal stav a roli,
+- místo kopírování detailu vložil odkaz na CRM,
+- další člověk podle výstupu navázal bez dotazování,
+- nevznikla nová poznámka s osobními údaji.
+```
+
+To je dobrý výsledek. Nemusí být dokonalý. Stačí, že pravidlo drží hlavní směr a nezvyšuje provozní nepořádek.
+
+### 3. Hledejte návrat starého chování
+
+Staré chování se často nevrací jako vzdor. Vrací se jako pohodlí. Někdo použije starý bookmark, zkopíruje starý příklad, automatizace vytvoří starý text úkolu nebo onboarding pořád odkazuje na původní šablonu.
+
+Při první kontrole se ptejte:
+
+- Objevil se starý odkaz?
+- Použil někdo starou šablonu?
+- Vznikl výstup ve starém formátu?
+- Musel někdo ručně vysvětlovat, že se postup změnil?
+- Generuje některý nástroj starou instrukci?
+- Učí onboarding pořád starou cestu?
+
+Pokud se staré chování vrátí jednou, neznamená to automaticky selhání pravidla. Znamená to, že někde zůstala stará trasa. Opravujte trasu, ne člověka.
+
+Codyho komentář: když systém nechá na stole dva checklisty a jeden z nich je starý, není to test disciplíny týmu. Je to test našeho úklidu. A systém právě dostal čtyřku.
+
+### 4. Zkontrolujte skrytou administrativu
+
+Některá pravidla vypadají dobře na papíře, ale v provozu vytvoří tiché náklady. Lidé je plní, ale bokem si vedou ještě jednu poznámku, protože pravidlo nepokrývá realitu. Nebo kopírují data do další tabulky, protože zdroj pravdy je moc daleko. Nebo vyplňují stav jen formálně, protože nikdo neví, co se podle něj rozhoduje.
+
+Varovné signály:
+
+- vznikla pomocná tabulka mimo zdroj pravdy,
+- lidé si posílají screenshoty místo odkazů,
+- pravidlo vyžaduje údaje, které nikdo nepoužije,
+- výstup je sice kompletní, ale nikdo podle něj nerozhoduje,
+- kontrola trvá déle než problém, který měla řešit,
+- výjimky se opakují tak často, že už nejsou výjimkami.
+
+U každého signálu se ptejte: je problém v pravidle, v nástroji, nebo v nejasném rozhodnutí? Pokud pravidlo chce odkaz na primární záznam, ale primární systém je pro tým těžko dostupný, lidé budou kopírovat. Ne proto, že jsou nedisciplinovaní. Protože cesta nejmenšího odporu vede špatně.
+
+### 5. Udělejte privacy-first kontrolu skutečných výstupů
+
+Privacy-first kontrola po prvním cyklu má pracovat se skutečnými výstupy, ne s ideálním záměrem. Vezměte malý vzorek a podívejte se, co opravdu vzniklo.
+
+Kontrolujte:
+
+- zda se osobní nebo zákaznické údaje nekopírovaly mimo primární systém,
+- zda odkazy vedou na místa s odpovídajícím přístupem,
+- zda nevznikly screenshoty, exporty nebo volné poznámky bez retence,
+- zda se nezvětšil počet lidí s přístupem k citlivým detailům,
+- zda je z výstupu jasný stav bez zbytečného obsahu navíc,
+- zda dočasné podklady po cyklu dostaly konec.
+
+Praktický zápis stačí krátký:
+
+```text
+Vzorek výstupů:
+Počet:
+
+Kopie mimo zdroj pravdy:
+Ne / ano:
+
+Zbytečně detailní údaje:
+Ne / ano:
+
+Přístupy:
+V pořádku / upravit:
+
+Retence dočasných podkladů:
+Není potřeba / smazat do / archivovat do:
+
+Jedna privacy-first oprava:
+```
+
+Jedna malá oprava je lepší než velký slib auditu. Pokud najdete zbytečné screenshoty, smažte nebo nahraďte screenshot odkazem. Pokud se kopíruje zákaznický detail, upravte šablonu tak, aby vyžadovala stav a odkaz. Pokud má přístup moc lidí, zužte ho. Nepište o tom román, pokud stačí zavřít kohoutek.
+
+### 6. Rozhodněte stav pravidla
+
+Po prvním normálním cyklu vyberte jeden stav:
+
+```text
+Ponechat beze změny.
+Lehce opravit trasu.
+Lehce opravit text pravidla.
+Vrátit do udržovací změny.
+Zastavit a vyřešit riziko.
+```
+
+Ponechat beze změny znamená, že pravidlo prošlo, výstupy jsou použitelné a nevznikla nová datová stopa.
+
+Lehce opravit trasu znamená, že pravidlo je dobré, ale lidé ho špatně hledají. Typicky chybí odkaz v úkolu, onboarding míří jinam nebo starý checklist pořád žije.
+
+Lehce opravit text pravidla znamená, že lidé našli správné místo, ale text nechává prostor pro špatný výklad.
+
+Vrátit do udržovací změny znamená, že problém je větší než drobný úklid, ale pořád řešitelný malou iterací.
+
+Zastavit a vyřešit riziko znamená, že pravidlo vytvořilo bezpečnostní, právní, datové nebo zákaznické riziko. V takovém případě nejdřív odstraňte dopad a až potom ladíte text.
+
+Rozhodovací věta:
+
+```text
+Pravidlo po prvním normálním cyklu [ponecháváme / opravujeme trasu / opravujeme text / vracíme do udržovací změny / zastavujeme kvůli riziku], protože [důkaz], a další krok je [konkrétní akce].
+```
+
+Příklad:
+
+```text
+Pravidlo po prvním normálním cyklu opravujeme trasu, protože výstupy byly správné, ale dva lidé se k checklistu dostali přes starý onboardingový odkaz; další krok je přesměrovat onboarding na kanonickou verzi a starý checklist archivovat.
+```
+
+### Šablona kontroly po prvním normálním cyklu
+
+```text
+Pravidlo:
+Kanonické místo:
+Stabilizační věta:
+
+První normální cyklus:
+Období:
+Situace:
+Zapojené role:
+Očekávaný výstup:
+
+Nalezení:
+Našli lidé správné místo:
+Kde vzniklo tření:
+Objevila se stará cesta:
+
+Použití:
+Pomohlo pravidlo rozhodnout:
+Bylo potřeba dovysvětlení:
+Vznikla skrytá administrativa:
+
+Výstup:
+Je použitelný pro další krok:
+Co chybělo:
+Co bylo navíc:
+
+Privacy-first kontrola:
+Vznikly kopie mimo zdroj pravdy:
+Vznikly screenshoty, exporty nebo volné poznámky:
+Jsou přístupy přiměřené:
+Co se uklidí:
+
+Stav pravidla:
+Ponechat beze změny / opravit trasu / opravit text / vrátit do udržovací změny / zastavit kvůli riziku
+
+Rozhodovací věta:
+Další krok:
+Vlastník:
+Termín:
+Changelog:
+```
+
+### Mini workshop na 20 minut
+
+1. Dvě minuty: přečíst stabilizační větu a kanonické pravidlo.
+2. Tři minuty: vybrat první normální cyklus a konkrétní výstupy.
+3. Čtyři minuty: projít nalezení, použití a výsledek.
+4. Tři minuty: hledat návrat staré cesty.
+5. Tři minuty: zkontrolovat privacy-first stopu skutečných výstupů.
+6. Tři minuty: vybrat stav pravidla.
+7. Dvě minuty: napsat rozhodovací větu a další krok.
+
+Workshop držte u jednoho pravidla. Pokud během něj najdete další problémy, zapište je bokem. Nepřetavujte kontrolu jednoho pravidla v inventuru celé firmy. To je lákavé, ale přesně tak vznikají tříhodinové schůzky, po kterých nikdo neví, co se vlastně změnilo.
+
+### Checklist kapitoly
+
+- Vybrali jste první skutečně normální cyklus, ne demo zavedení?
+- Kontrolovali jste reálné výstupy, ne jen text pravidla?
+- Našli lidé pravidlo bez zvláštního připomínání?
+- Pomohlo pravidlo rozhodnout nebo předat práci dál?
+- Nevznikla skrytá pomocná evidence?
+- Nevrátila se stará cesta přes odkaz, šablonu, onboarding nebo automatizaci?
+- Rozlišili jste problém pravidla od problému umístění?
+- Zkontrolovali jste skutečnou datovou stopu výstupů?
+- Nevznikly nové kopie zákaznických, osobních nebo citlivých údajů?
+- Mají odkazy a přístupy přiměřený rozsah?
+- Vybrali jste jeden stav pravidla?
+- Napsali jste rozhodovací větu?
+- Je další krok malý, vlastněný a zapsaný v changelogu?
+
+Kontrola po prvním normálním cyklu chrání stabilizované pravidlo před dvěma opačnými chybami. První je slepě věřit, že hotový text znamená hotový provoz. Druhá je z každého drobného tření vyrábět novou velkou revizi. Dobrý provoz dělá něco střízlivějšího: podívá se na skutečnou práci, opraví nejbližší tření a nechá funkční pravidlo dál sloužit.
+
 ## Pracovní log
 
+- 2026-05-15: Doplněna Příloha HJ o kontrole běžného pravidla po prvním normálním cyklu: výběr správného cyklu, sledování práce místo poslušnosti, návrat starého chování, skrytá administrativa, privacy-first kontrola skutečných výstupů, rozhodnutí stavu pravidla, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HI o stabilizaci ověřené udržovací změny do běžného pravidla: potvrzení důkazu, přepis kanonického pravidla, uzavření dočasných artefaktů, odstranění starých cest, privacy-first úklid, pracovní předání, lehký kontrolní háček, stabilizační karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HH o ověření udržovací změny po příštím použití: návrat k udržovací větě, výběr prvního normálního použití, sledování průchodu bez zachraňování, čtyři stavy ověření, kontrola staré cesty, privacy-first záznam, rozhodovací věta, šablona, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HG o převodu kontroly běžného pravidla do jedné udržovací změny: výběr nálezu podle opakované ceny, udržovací věta, nejbližší pracovní místo, typy textových/polohových/úklidových/datových změn, privacy-first dopad, uzavření staré cesty, ověření při příštím použití, šablona, mini workshop a checklist.
