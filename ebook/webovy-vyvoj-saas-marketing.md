@@ -65105,8 +65105,315 @@ Výstupem je krátká kontrolní karta a případně jedna změna nejbližšího
 
 Kontrola udržovacího záznamu po prvním použití chrání systém před tichým rozpadem. Ukáže, jestli záznam opravdu pomáhá, nebo jen dobře vypadal při zápisu. Dobrá kontrola je krátká, praktická a blízko práce: najít, rozhodnout, vytvořit správný výstup a nezvětšit datovou stopu.
 
+## Příloha HU: Převod potvrzeného udržovacího záznamu do údržbového rytmu
+
+Když udržovací záznam prošel prvním použitím, ještě není vyhráno. Jedno dobré použití říká, že záznam pomohl v konkrétní situaci. Neříká automaticky, že se z něj má stát další věčný proces, nová tabulka nebo povinný meeting. Úkolem této přílohy je rozhodnout, jestli potvrzený záznam patří do opakovaného údržbového rytmu, a pokud ano, jak ho tam vložit bez bobtnání systému.
+
+Pracovní otázka:
+
+```text
+Má se potvrzený udržovací záznam opakovat jako lehká kontrola, nebo stačí, že jednou opravil nejbližší pracovní místo?
+```
+
+Dobrá odpověď není "raději to budeme hlídat pořád". To je jen administrativní reflex v kabátu odpovědnosti. Dobrá odpověď rozlišuje, jestli se riziko vrací, jak často, kdo ho přirozeně vidí a jak malá kontrola stačí k tomu, aby se systém nerozjel zpátky do starého chování.
+
+Codyho komentář: spousta firem vyrábí procesy ze strachu, ne z potřeby. Jedna chyba se opraví, ale pak po ní zůstane měsíční kontrola navždy. Po třech letech už nikdo neví proč, ale všichni ji poslušně přepisují do dalšího nástroje. To není provozní vyspělost. To je muzeum opatrnosti.
+
+### 1. Začněte výsledkem z první kontroly
+
+Nevymýšlejte rytmus od nuly. Vezměte poslední kontrolní kartu z Přílohy HT a podívejte se na stav:
+
+```text
+Drží / přesunout / zpřesnit / opravit okolí / vrátit do korekce
+```
+
+Do údržbového rytmu patří hlavně stav `drží`, případně `opravit okolí`, pokud byla okolní oprava už dokončená a znovu ověřená. Stav `přesunout` nebo `zpřesnit` nejdřív dokončete jako malou úpravu. Stav `vrátit do korekce` do rytmu nepatří vůbec, protože problém ještě není stabilní.
+
+Příklad:
+
+```text
+Stav po prvním použití:
+Drží.
+
+Důkaz:
+Kontrola formulářů proběhla bez screenshotů zákaznických údajů, výstup obsahoval jen odkaz na primární CRM záznam a anonymizovaný závěr.
+```
+
+To je dobrý kandidát na údržbový rytmus. Ne proto, že je text pěkný, ale protože se v reálné práci ukázalo, že záznam chrání správný výstup.
+
+### 2. Rozhodněte, jestli se riziko opravdu vrací
+
+Opakovaný rytmus má smysl jen tam, kde se riziko vrací. Pokud šlo o jednorázové předání, migraci nebo uzavřenou změnu, stačí dobrý changelog a uklizené pracovní místo. Pokud se stejná situace vrací každý týden, měsíc, sprint, kvartál nebo při každém onboardingu, rytmus dává větší smysl.
+
+Zeptejte se:
+
+- Objeví se stejný typ rozhodnutí znovu?
+- Uvidí ho stejná role, nebo pokaždé někdo jiný?
+- Je chyba drahá, viditelná pro zákazníka nebo riziková pro data?
+- Stačí jedna věta v existujícím úkolu, nebo je potřeba samostatná kontrola?
+- Kdybychom rytmus nezavedli, jak poznáme návrat starého chování?
+
+Slabý důvod pro rytmus:
+
+```text
+Je lepší mít to pro jistotu v měsíční kontrole.
+```
+
+Silnější důvod:
+
+```text
+Stejný výstup vzniká každý měsíc a starý návyk vkládat screenshoty se už jednou vrátil přes šablonu. Lehký měsíční háček v existující kontrole stačí.
+```
+
+Rozdíl je v opakování a ceně chyby. Rytmus má chránit konkrétní riziko, ne uklidňovat svědomí.
+
+### 3. Vyberte nejmenší přirozený rytmus
+
+Údržbový rytmus má být co nejblíž práci, která už existuje. Nepřidávejte nový meeting, pokud stačí jedna věta v opakovaném úkolu. Nepřidávejte novou tabulku, pokud stačí pole v checklistu. Nepřidávejte nové hlášení, pokud stačí změna šablony výstupu.
+
+Možné rytmy:
+
+- při každém použití šablony,
+- při měsíční provozní kontrole,
+- při kvartálním review webu, SaaS nebo marketingu,
+- při onboardingu nové role,
+- při změně nástroje nebo dodavatele,
+- při incidentu nebo návratu z fallbacku,
+- při publikaci nové veřejné verze materiálu.
+
+Příklad dobrého umístění:
+
+```text
+Rytmus:
+Měsíční kontrola formulářů.
+
+Umístění:
+Jedna kontrolní věta v existujícím opakovaném úkolu.
+
+Text:
+Ověř, že výstup používá odkaz na primární CRM záznam a anonymizovaný závěr, ne screenshot zákaznických údajů.
+```
+
+To je dost. Pokud z jedné věty uděláte samostatný proces, pravděpodobně jste si koupili drahou cedulku s nápisem "efektivita".
+
+### 4. Určete vlastníka podle role, ne podle autora
+
+Udržovací záznam často vytvoří člověk, který problém objevil. To ale neznamená, že ho má navždy hlídat. Vlastník rytmu má být role, která se přirozeně dotýká dané práce.
+
+Dobré vlastnictví:
+
+- provoz webu hlídá formuláře, dostupnost a měření,
+- customer success hlídá předávací výstupy a zákaznické follow-upy,
+- produkt hlídá rozhodovací šablony a backlogové změny,
+- marketing hlídá veřejné odkazy, landing page a distribuční poznámky,
+- technický lead hlídá přístupy, logy a provozní standardy.
+
+Slabé vlastnictví:
+
+```text
+Hlídá to ten, kdo to posledně opravoval.
+```
+
+Silnější vlastnictví:
+
+```text
+Hlídá to role odpovědná za měsíční kontrolu formulářů, protože právě tam výstup vzniká.
+```
+
+Jméno člověka se může změnit. Pracovní role a spouštěč musí zůstat srozumitelné i po předání.
+
+### 5. Nastavte signál, který se dá poznat bez špehování
+
+Údržba nemá znamenat sledování lidí. Má sledovat výstup a práci systému. Privacy-first provoz proto používá signály, které nepotřebují osobní dohled, detailní časové stopy ani zbytečné kopie zákaznických dat.
+
+Dobré signály:
+
+- ve výstupu je odkaz na primární záznam, ne kopie dat,
+- checklist má aktuální kanonický odkaz,
+- šablona už neobsahuje staré pole,
+- výstup vznikl bez dočasného exportu,
+- po kontrole existuje krátký anonymizovaný závěr,
+- při onboardingu člověk našel správné místo bez osobní asistence.
+
+Špatné signály:
+
+- kdo přesně co otevřel a kdy,
+- screenshoty průchodu práce,
+- kopie zákaznických dat pro "důkaz",
+- dlouhé osobní poznámky o výkonu konkrétního člověka,
+- plošné sledování aktivity v nástroji bez jasného účelu.
+
+Privacy-first věta pro rytmus:
+
+```text
+Rytmus kontroluje jen výstup: zda obsahuje odkaz na primární záznam a anonymizovaný závěr. Nekopíruje zákaznická data ani nesleduje aktivitu konkrétního člověka.
+```
+
+To je přesnější než "budeme to monitorovat". Monitorovat se dá ledacos. Něco užitečně, něco jen proto, že dashboard má pěkné grafy.
+
+### 6. Zapište rytmus do jednoho pracovního místa
+
+Udržovací rytmus potřebuje jeden zdroj pravdy. Ne tři poznámky, ne zprávu v chatu, ne komentář v dokumentu, který za měsíc nikdo nenajde. Vyberte pracovní místo, kde se další kontrola skutečně spustí.
+
+Možná místa:
+
+- opakovaný úkol,
+- kanonický checklist,
+- šablona výstupu,
+- onboardingová trasa,
+- provozní karta,
+- changelog,
+- rozhodovací index.
+
+Zápis má být krátký:
+
+```text
+Spouštěč:
+Měsíční kontrola kontaktních formulářů.
+
+Role:
+Provoz webu.
+
+Kontrolní věta:
+Ve výstupu použij odkaz na primární CRM záznam a anonymizovaný závěr, ne screenshot zákaznických údajů.
+
+Signál správného výsledku:
+Výstup neobsahuje nové kopie osobních dat.
+
+Další review:
+Po třech měsíčních kontrolách zhodnotit, zda háček stále přináší hodnotu.
+```
+
+Všimněte si posledního řádku. I údržbový rytmus má mít kontrolu životnosti. Jinak se z malé ochrany stane další trvalá vrstva prachu.
+
+### 7. Nastavte stop pravidlo
+
+Každý rytmus potřebuje podmínku, kdy ho zrušit, sloučit nebo zkrátit. Bez stop pravidla se systém plní malými dobrými nápady, které už nikdo neodváží vyhodit.
+
+Stop pravidla mohou znít:
+
+- pokud tři po sobě jdoucí kontroly neodhalí žádné tření, zkrať háček na jednu větu v checklistu,
+- pokud se riziko přesune do automatické validace šablony, zruš ruční kontrolu,
+- pokud se změní nástroj, převeď rytmus do nové provozní karty a starou poznámku archivuj,
+- pokud kontrola začíná vyžadovat nové kopie dat, zastav ji a navrhni privacy-first náhradu,
+- pokud vlastník neumí říct, jaké rozhodnutí kontrola chrání, rytmus smaž nebo vrať k revizi.
+
+Příklad stop pravidla:
+
+```text
+Po třech měsících bez návratu screenshotů zůstane jen věta v šabloně výstupu. Samostatný kontrolní háček v měsíčním úkolu se smaže.
+```
+
+To je zdravé. Systém si ponechá pravidlo tam, kde člověk pracuje, ale odstraní opakovanou kontrolu, která už nepřidává hodnotu.
+
+### Šablona převodu do údržbového rytmu
+
+```text
+Název potvrzeného udržovacího záznamu:
+
+Výsledek první kontroly:
+Drží / opravené okolí a znovu ověřeno / jiný stav
+
+Opakující se riziko:
+
+Kde se riziko vrací:
+
+Nejmenší přirozený rytmus:
+
+Pracovní místo zápisu:
+
+Role vlastníka:
+
+Kontrolní věta:
+
+Signál správného výsledku:
+
+Privacy-first hranice:
+Jaká data nekopírovat:
+Jaký důkaz stačí:
+Kdy mazat dočasné podklady:
+
+Stop pravidlo:
+
+Další review:
+
+Changelog věta:
+```
+
+### Příklad vyplněného převodu
+
+```text
+Název potvrzeného udržovacího záznamu:
+Odkaz na CRM záznam místo screenshotu ve výstupech kontroly formulářů.
+
+Výsledek první kontroly:
+Drží.
+
+Opakující se riziko:
+Při měsíční kontrole se může vrátit starý zvyk vkládat screenshot zákaznických údajů do výstupu.
+
+Kde se riziko vrací:
+Měsíční kontrola kontaktních formulářů.
+
+Nejmenší přirozený rytmus:
+Jedna věta v existujícím opakovaném úkolu.
+
+Pracovní místo zápisu:
+Kanonický úkol "Měsíční kontrola formulářů".
+
+Role vlastníka:
+Provoz webu.
+
+Kontrolní věta:
+Ve výstupu používej odkaz na primární CRM záznam a anonymizovaný závěr, ne screenshot zákaznických údajů.
+
+Signál správného výsledku:
+Výstup neobsahuje nové kopie osobních nebo zákaznických dat.
+
+Privacy-first hranice:
+Jaká data nekopírovat: obsah formulářů, e-maily, telefonní čísla, screenshoty CRM.
+Jaký důkaz stačí: odkaz na primární záznam a anonymizovaný závěr.
+Kdy mazat dočasné podklady: hned po uzavření měsíční kontroly.
+
+Stop pravidlo:
+Po třech měsících bez návratu screenshotů ponechat větu v šabloně výstupu a zrušit samostatný kontrolní háček v opakovaném úkolu.
+
+Další review:
+Po třech měsíčních kontrolách.
+
+Changelog věta:
+Potvrzený udržovací záznam byl převeden do měsíčního údržbového rytmu jako jedna věta v opakovaném úkolu; kontrola sleduje pouze výstup a nevytváří nové kopie zákaznických dat.
+```
+
+### Mini workshop na 20 minut
+
+1. Čtyři minuty: přečíst výsledek první kontroly a rozhodnout, zda je záznam vůbec kandidát na rytmus.
+2. Čtyři minuty: pojmenovat opakující se riziko a místo, kde se vrací.
+3. Čtyři minuty: vybrat nejmenší přirozený rytmus a pracovní místo zápisu.
+4. Čtyři minuty: určit privacy-first signál správného výsledku.
+5. Čtyři minuty: napsat stop pravidlo a changelog větu.
+
+Výstupem není nový procesní manuál. Výstupem je jeden lehký háček v existující práci, jasný vlastník podle role a podmínka, kdy háček zkrátit nebo zrušit.
+
+### Checklist kapitoly
+
+- Vycházíte z reálného výsledku první kontroly?
+- Nepřevádíte do rytmu záznam, který je stále ve stavu korekce?
+- Je jasné, jaké riziko se vrací a jak často?
+- Vybrali jste nejmenší přirozený rytmus místo nového procesu?
+- Je vlastník určený podle role, ne podle autora opravy?
+- Sledujete výstup a systém, ne osobní aktivitu lidí?
+- Nevznikají kvůli kontrole nové kopie zákaznických nebo osobních dat?
+- Je kontrolní věta krátká a umístěná v místě práce?
+- Má rytmus stop pravidlo?
+- Je jasné, kdy proběhne další review životnosti rytmu?
+- Dá se changelog věta pochopit bez znalosti celé historie?
+
+Převod potvrzeného udržovacího záznamu do údržbového rytmu je malý, ale důležitý krok. Chrání užitečné rozhodnutí před zapomenutím, aniž by z něj dělal věčný administrativní pomník. Dobrý rytmus je lehký, blízko práce, měří jen to, co potřebuje, a od začátku ví, kdy má zmizet.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha HU o převodu potvrzeného udržovacího záznamu do údržbového rytmu: vyhodnocení první kontroly, opakující se riziko, nejmenší přirozený rytmus, vlastnictví podle role, privacy-first signály bez špehování, zápis do jednoho pracovního místa, stop pravidlo, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HT o kontrole udržovacího záznamu po prvním použití: výběr normálního průchodu, signály nalezení/rozhodnutí/výstupu, rozlišení chyby záznamu a okolí, zkracování místo bobtnání, privacy-first kontrola datové stopy, rozhodnutí dalšího stavu, šablona, příklad, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HS o převodu kontroly stabilizované malé korekce do udržovacího záznamu: provozní věta stavu, domov záznamu podle místa práce, typy převodu, pracovní minimum důkazů, úprava pracovního místa, kontrolní háček, privacy-first úklid, šablona, příklad, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HR o kontrole stabilizované malé korekce po prvních běžných cyklech: původní slib korekce, výběr běžných průchodů, sledování práce místo poslušnosti, návrat starého chování, třídění nálezů, privacy-first kontrola výstupů, rozhodnutí dalšího stavu, kontrolní karta, mini workshop a checklist.
