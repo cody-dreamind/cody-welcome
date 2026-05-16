@@ -69969,8 +69969,228 @@ Workshop má skončit jedním rozhodnutím, ne debatou o celé historii pravidla
 
 Kontrola běžného rytmu má potvrdit, že stabilizovaný háček nezůstal jen dobrou formulací. Buď se stal přirozenou součástí práce, nebo ukázal, kde pracovní prostředí pořád táhne lidi zpět. Obojí je užitečné. Jen se netvařte, že pravidlo funguje, dokud jste ho neviděli projít normálním pracovním dnem.
 
+## Příloha II: Převod kontroly běžného rytmu do jednoho úklidového rozhodnutí
+
+Kontrola běžného rytmu má smysl jen tehdy, když po ní následuje rozhodnutí. Ne velká provozní reforma, ne nová sada tabulek, ne porada o tom, že "bychom si to měli někdy projít". Jedno rozhodnutí. Co s háčkem uděláme teď, aby práce byla jednodušší, jasnější a méně datově rozežraná.
+
+Tahle příloha navazuje na Přílohu IH. Použijte ji ve chvíli, kdy už máte kontrolní kartu běžného rytmu: víte, jestli člověk háček našel, jestli výstup odpovídal pracovní větě, co zůstalo jako důkaz, kde se vrátila stará cesta a kolik háček stojí pozornosti. Teď z toho udělejte jeden úklidový krok.
+
+Úklidové rozhodnutí není méně důležité než zavedení pravidla. Právě naopak. V provozu se kvalita často ztrácí tím, že dobré věci nikdy nikdo neprořeže. Každý háček, karta, šablona a kontrola zůstane "pro jistotu". Po půl roce má tým krásný les pravidel, ve kterém už nikdo nevidí cestu.
+
+Codyho komentář: provozní disciplína není schopnost přidávat další checklisty. To umí i unavený tým po třetí kávě. Skutečná disciplína je umět říct: tohle funguje, tohle zkraťme, tohle sloučíme a tohle už nemá právo zabírat místo.
+
+### 1. Začněte poslední rozhodovací větou
+
+Nezačínejte dojmem. Vezměte rozhodovací větu z Přílohy IH a přepište ji do pracovního tvaru.
+
+Příklad:
+
+```text
+Háček ponechat se zkrácením: tým ho v měsíční kontrole našel sám, výstup stačil, nevznikly kopie dat, ale formulace se zkrátí na jednu větu přímo u pole pro uzavření.
+```
+
+Pracovní tvar:
+
+```text
+Zkrátíme háček pro měsíční kontrolu formulářů na jednu větu u pole pro uzavření a archivujeme starou kopii šablony.
+```
+
+Rozdíl je důležitý. První věta vysvětluje zjištění. Druhá říká, co se stane. Pokud neumíte napsat druhou větu, kontrola ještě není připravená na změnu. Buď chybí důkaz, nebo se snažíte řešit moc věcí najednou.
+
+### 2. Vyberte jen jeden typ úklidu
+
+Po kontrole často uvidíte víc problémů. Háček je dlouhý, žije na špatném místě, překrývá se s jinou kontrolou, stará šablona pořád obíhá a někde vznikají screenshoty. To neznamená, že máte otevřít pět změn. Vyberte jeden typ úklidu podle největšího praktického tření.
+
+Pět typů úklidového rozhodnutí:
+
+```text
+Zkrátit:
+háček je užitečný, ale jeho formulace nebo důkaz jsou těžší, než musí být.
+
+Přesunout:
+háček je správný, ale leží pozdě nebo mimo místo, kde se rozhodnutí dělá.
+
+Sloučit:
+háček se překrývá s jiným krokem a má být součástí existující kontroly.
+
+Ukončit:
+háček už nechrání reálné riziko nebo stojí víc pozornosti, než přináší hodnoty.
+
+Zavřít starou cestu:
+nový háček funguje, ale staré šablony, odkazy nebo automatizace pořád vracejí tým zpět.
+```
+
+Když je největší problém datová stopa, obvykle začněte zkrácením nebo přesunem důkazu. Když je problém dohledatelnost, začněte přesunem. Když je problém duplicita, začněte sloučením. Když je problém návrat staré cesty, nepište další vysvětlení; zavřete starou cestu.
+
+### 3. Omezte úpravu na nejbližší pracovní místo
+
+Úklid má proběhnout tam, kde se práce opravdu děje. Ne v nadřazené strategii, ne ve vzdáleném dokumentu, který nikdo neotevírá, ne v poznámce z porady. Pokud má člověk háček použít při exportu, úprava patří ke kroku exportu. Pokud ho má použít při měsíční kontrole, patří do šablony měsíční kontroly.
+
+Ptejte se:
+
+```text
+Kde člověk stojí ve chvíli, kdy má háček použít?
+
+Které jedno pole, tlačítko, věta, šablona nebo automatizace mu má pomoct?
+
+Co můžeme upravit tak, aby nemusel hledat vysvětlení jinde?
+
+Která stará cesta se musí odstranit, archivovat nebo přesměrovat?
+```
+
+Příklad:
+
+```text
+Špatně:
+Přidáme vysvětlení do provozní dokumentace.
+
+Lépe:
+Do šablony měsíční kontroly přidáme přímo k poli "Uzavření formulářů" větu: "Stačí ano/ne potvrzení smazání exportů; nepřikládejte screenshoty ani kopie dat."
+```
+
+Dokumentace může být správná, ale sama o sobě často nestačí. Pracovní místo je silnější než vysvětlení vedle. Tým nemá mít povinnost pamatovat si, kde je správné pravidlo. Pravidlo má být v cestě práce.
+
+### 4. Udělejte privacy-first brzdu před aplikací
+
+Každé úklidové rozhodnutí si zaslouží krátkou datovou brzdu. Cílem není vyrobit právní rituál. Cílem je nezhoršit stopu ve chvíli, kdy opravujete provoz.
+
+Před změnou si odpovězte:
+
+```text
+Zvyšuje úprava množství osobních, zákaznických nebo provozních dat?
+
+Vznikne nový export, screenshot, kopie, log nebo sdílený dokument?
+
+Mění se přístup lidí k důkazům nebo výstupům?
+
+Prodlužuje se retence něčeho, co mělo být dočasné?
+
+Nešlo by rozhodnutí podložit agregovaným, anonymizovaným nebo ano/ne důkazem?
+```
+
+Dobré úklidové rozhodnutí obvykle datovou stopu snižuje. Zkrátí důkaz, odstraní screenshot, zruší starou kopii šablony, sjednotí zdroj pravdy nebo přesune větu do místa práce bez nového sběru dat.
+
+Pokud úprava vyžaduje novou stopu, napište proč. Krátce a konkrétně. "Pro jistotu" není důvod. "Kvůli rozhodnutí, zda transakční e-maily po změně stále odcházejí, stačí agregované ano/ne potvrzení z monitoringu bez ukládání obsahu zpráv" už důvod je.
+
+### 5. Napište úklidovou kartu
+
+Úklidová karta má být krátká. Slouží k tomu, aby změna neskončila jako volná poznámka v chatu.
+
+```text
+Název háčku:
+
+Poslední rozhodovací věta:
+
+Typ úklidu:
+
+Jedno pracovní místo:
+
+Konkrétní úprava:
+
+Co se archivuje, maže nebo slučuje:
+
+Privacy-first dopad:
+
+Jak poznáme při příštím použití, že úklid pomohl:
+
+Kdo vlastní další kontrolu podle role:
+
+Changelog věta:
+```
+
+Karta nemá otevírat celý příběh. Pokud se nevejde do jedné obrazovky, pravděpodobně řešíte moc velký balík. Rozdělte ho. Tohle je úklid po kontrole běžného rytmu, ne generální oprava provozu.
+
+### 6. Příklad vyplněné úklidové karty
+
+```text
+Název háčku:
+Měsíční formuláře bez screenshotů zákaznických údajů.
+
+Poslední rozhodovací věta:
+Háček ponechat se zkrácením a zavřít starou kopii šablony.
+
+Typ úklidu:
+Zkrátit + zavřít starou cestu.
+
+Jedno pracovní místo:
+Šablona měsíční kontroly formulářů.
+
+Konkrétní úprava:
+K poli "Uzavření formulářů" přidat větu: "Stačí ano/ne potvrzení smazání exportů; nepřikládejte screenshoty ani kopie dat."
+
+Co se archivuje, maže nebo slučuje:
+Archivuje se stará projektová kopie šablony a v indexu zůstává jen kanonická šablona.
+
+Privacy-first dopad:
+Úprava snižuje riziko ukládání screenshotů a kopií zákaznických údajů. Nevzniká nový export ani nový důkaz.
+
+Jak poznáme při příštím použití, že úklid pomohl:
+V dalším měsíčním cyklu vznikne jen ano/ne potvrzení bez screenshotů a člověk najde správné pole bez přímého odkazu od autora.
+
+Kdo vlastní další kontrolu podle role:
+Role odpovědná za webový provoz a formuláře.
+
+Changelog věta:
+Háček pro měsíční kontrolu formulářů byl zkrácen přímo do pole pro uzavření a stará kopie šablony byla archivována.
+```
+
+Všimněte si, že karta neřeší všechny možné formuláře ve firmě, celý privacy program ani kompletní redesign šablon. Řeší jedno pracovní místo, jeden háček a jeden návrat staré cesty. Právě proto se dá dokončit.
+
+### 7. Proveďte změnu a zavřete stopu
+
+Po napsání karty změnu skutečně proveďte. Upravte šablonu, přesuňte větu, archivujte starý dokument, smažte dočasný export, přesměrujte odkaz, sloučte duplicitní krok. Pak zapište changelog.
+
+Po aplikaci zkontrolujte:
+
+```text
+Je kanonická verze jasná?
+
+Zmizela nebo byla označena stará kopie?
+
+Nevznikl nový mezidokument, který bude za měsíc dalším problémem?
+
+Je privacy-first hranice přímo v místě práce?
+
+Je další kontrola napojená na existující rytmus?
+```
+
+Pokud úklid vyžaduje komunikaci týmu, napište ji jako provozní větu:
+
+```text
+Od další měsíční kontroly formulářů používejte jen kanonickou šablonu; u uzavření stačí ano/ne potvrzení smazání exportů, screenshoty ani kopie zákaznických dat nepřikládejte.
+```
+
+Žádná dlouhá omluva, žádná minipřednáška o procesech. Lidé potřebují vědět, co se mění a kde to najdou.
+
+### Mini workshop na 15 minut
+
+1. Tři minuty: přečíst rozhodovací větu z kontroly běžného rytmu.
+2. Dvě minuty: vybrat typ úklidu.
+3. Tři minuty: určit nejbližší pracovní místo.
+4. Tři minuty: projít privacy-first brzdu.
+5. Dvě minuty: vyplnit úklidovou kartu.
+6. Dvě minuty: napsat changelog a další kontrolní signál.
+
+Workshop musí skončit změnovou větou, ne seznamem úkolů pro neurčité "později". Pokud se rozhodnutí nedá udělat v jedné malé úpravě, vraťte se k výběru typu úklidu. Nejčastější chyba je pokusit se jednou kontrolou opravit celý provoz. To vypadá odpovědně, ale většinou to jen vyrábí další nedokončenou vrstvu.
+
+### Checklist kapitoly
+
+- Máte rozhodovací větu z kontroly běžného rytmu?
+- Přepsali jste ji do pracovního tvaru, který říká, co se stane?
+- Vybrali jste jeden typ úklidu: zkrátit, přesunout, sloučit, ukončit nebo zavřít starou cestu?
+- Úprava se děje v nejbližším pracovním místě, ne v dokumentaci vedle?
+- Zkontrolovali jste, jestli změna nevyrábí nový export, screenshot, kopii dat nebo další retenci?
+- Je privacy-first hranice přímo v místě práce?
+- Archivovali jste nebo označili starou cestu, pokud by mohla tým vracet zpět?
+- Víte, jak při příštím použití poznáte, že úklid pomohl?
+- Má další kontrolu vlastnit role, ne autor původní změny?
+- Zapsali jste changelog větou bez surových zákaznických nebo osobních dat?
+
+Úklidové rozhodnutí je malé, ale důležité zakončení celé smyčky. Háček byl navržen, ověřen, stabilizován, použit v běžném rytmu a teď se podle reality zjednodušuje. Tak má vypadat provozní dospívání: méně slibů, méně dokumentů, méně zbytečných dat a víc práce, která se dá normálně dělat.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha II o převodu kontroly běžného rytmu do jednoho úklidového rozhodnutí: práce s poslední rozhodovací větou, výběr typu úklidu, úprava nejbližšího pracovního místa, privacy-first brzda, úklidová karta, vyplněný příklad, aplikace změny, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IH o kontrole běžného rytmu po stabilizaci revizního háčku: výběr skutečného cyklu, dohledatelnost bez autora, porovnání výstupu s pracovní větou, scorecard ceny použití, kontrola návratu staré cesty, privacy-first kontrola skutečné datové stopy, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IG o stabilizaci ověřeného revizního háčku do běžného rytmu: rozhodnutí z první kontroly, jeden domov háčku, pracovní věta, zavření starých tras, privacy-first retence důkazů, vlastnictví podle role, napojení na existující rytmus, stop pravidlo, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IF o kontrole trvalého revizního háčku po prvním reálném použití: výběr normálního použití, nalezení háčku bez připomínání, porovnání důkazu s původním slibem, cena použití, privacy-first kontrola stopy, čtyři stavy rozhodnutí, nejmenší úprava pracovního místa, changelog, karta kontroly, příklad, mini workshop a checklist.
