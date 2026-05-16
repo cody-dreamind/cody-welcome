@@ -67398,8 +67398,401 @@ Výstupem je jedna hotová provozní úprava. Ne seznam možných zlepšení. Ne
 
 Převod první kontroly standardu do jedné provozní úpravy drží systém v pohybu bez procesního bobtnání. Standard se zlepšuje tam, kde práce opravdu drhla, a zůstává stabilní tam, kde fungoval. To je zdravý provoz: malé zásahy, jasná hranice, krátká zpětná vazba a žádné dobrovolné pěstování dalších administrativních vrstev.
 
+## Příloha IB: Ověření provozní úpravy po prvním normálním použití
+
+Provozní úprava není hotová ve chvíli, kdy ji zapíšete do šablony, indexu nebo standardu. Hotová je až ve chvíli, kdy ji někdo použije při normální práci a systém se chová lépe než předtím. To zní samozřejmě, ale právě tady vzniká spousta falešného klidu: dokumentace je opravená, changelog má větu, tým dostal zprávu, takže se předpokládá, že se práce zlepšila. Jenže předpoklad není ověření.
+
+Pracovní otázka:
+
+```text
+Jak po první běžné práci ověřit, že malá provozní úprava skutečně odstranila tření, nevytvořila nový problém a nezhoršila datovou stopu?
+```
+
+Tahle příloha navazuje na předchozí provozní úpravu. Neřeší velkou revizi standardu. Nehodnotí celý systém. Bere jednu změnu a jeden normální průchod práce. Cílem je zjistit, jestli úprava funguje dost dobře na to, aby zůstala, jestli potřebuje drobnou korekci, nebo jestli se ukázalo, že původní problém byl špatně pojmenovaný.
+
+Codyho komentář: nejhorší typ ověření je "nikdo si nestěžoval". Lidé se často nestěžují, protože našli vlastní obcházku, nemají čas vysvětlovat detail nebo považují drobné tření za normální daň za práci. Ticho v provozu není vždy signál zdraví. Někdy je to jen šum v hezkém kabátě.
+
+### 1. Ověřujte první normální použití, ne ukázkový průchod
+
+První ověření má proběhnout při práci, která by se stala i bez kontroly. Pokud kvůli úpravě vytvoříte umělý test, snadno ověříte jen to, že lidé dokážou projít předem připravenou situaci. To je užitečné u technického testu, ale slabé u provozního návyku.
+
+Vyberte průchod, který splňuje tři podmínky:
+
+```text
+Je skutečný:
+Vznikl z běžné práce, zákaznické situace, interního cyklu nebo pravidelného výstupu.
+
+Je dost čerstvý:
+Lidé si ještě pamatují, kde se zastavili, co hledali a co je mátlo.
+
+Je dost malý:
+Dá se projít bez toho, aby z ověření vznikl nový audit.
+```
+
+Příklad:
+
+```text
+Úprava:
+Do šablony měsíční kontroly formulářů bylo doplněno pole "dočasné exporty smazány: ano/ne".
+
+Dobré ověření:
+Podívat se na první reálnou měsíční kontrolu formulářů po změně.
+
+Slabé ověření:
+Požádat někoho, aby mimo běžný rytmus vyplnil kopii šablony jen kvůli testu.
+```
+
+Normální použití ukáže, jestli změna zapadla do práce. Ukázkový průchod ukáže hlavně to, že lidé umí číst instrukce, když vědí, že jsou pozorovaní. To není totéž.
+
+### 2. Vraťte se k úpravové větě
+
+Před hodnocením si znovu přečtěte úpravovou větu z předchozí přílohy. Ověření nemá hledat všechno, co by šlo zlepšit. Má odpovědět, jestli se splnil původní malý slib.
+
+Použijte jednoduchý rámec:
+
+```text
+Upravili jsme:
+
+Změna měla odstranit:
+
+Hotovo mělo být když:
+
+První normální použití ukázalo:
+```
+
+Příklad:
+
+```text
+Upravili jsme:
+Šablonu měsíčního výstupu kontroly formulářů.
+
+Změna měla odstranit:
+Neviditelný úklid dočasných exportů.
+
+Hotovo mělo být když:
+Výstup obsahuje vyplněné pole a po kontrole nezůstane dočasný export ve sdílené složce.
+
+První normální použití ukázalo:
+Pole bylo vyplněné, ale člověk si nebyl jistý, zda se má smazání potvrdit před nebo po odeslání výsledku.
+```
+
+Tím se ověření drží konkrétního slibu. Když se při čtení objeví jiný problém, zapište ho bokem jako nový nález. Nevmíchejte ho do hodnocení této úpravy, jinak se z první kontroly stane malá verze nekonečné porady.
+
+### 3. Sledujte cestu člověka k úpravě
+
+U malých provozních změn často nerozhoduje text samotný, ale místo, kde se text objeví. Úprava může být správná, ale schovaná. Může být přesná, ale v dokumentu, který se při práci neotevírá. Může být logická pro autora, ale ne pro člověka, který právě řeší zákaznickou situaci.
+
+Při prvním použití proto sledujte cestu:
+
+```text
+Našel člověk úpravu bez připomínky?
+
+Našel ji v okamžiku, kdy ji potřeboval?
+
+Pochopil, co má udělat?
+
+Musel se někoho ptát?
+
+Vytvořil si vlastní obcházku?
+```
+
+Příklad nálezu:
+
+```text
+Člověk pole "dočasné exporty smazány" našel, ale až na konci šablony. Export přitom mazal už před vyplněním závěru, takže se k poli musel vracet.
+```
+
+Možná korekce:
+
+```text
+Přesunout pole do části "Podklady a úklid", která se vyplňuje před závěrem kontroly.
+```
+
+Tohle není nová velká změna. Je to polohová korekce, která posune existující úpravu blíž k práci. A přesně o to jde: ověřit realitu, ne jen existenci textu.
+
+### 4. Porovnejte výstup před a po změně
+
+Provozní úprava má mít viditelný dopad na výstup, rozhodnutí nebo datovou stopu. Pokud po ní výstup vypadá stejně a práce stojí stejně, možná neřešila skutečné tření.
+
+Porovnání nemusí být těžké:
+
+```text
+Před změnou:
+Co chybělo, drhlo nebo zůstávalo neviditelné?
+
+Po změně:
+Co je teď jasnější, kratší, bezpečnější nebo lépe dohledatelné?
+
+Zbytkové tření:
+Co pořád vyžaduje ruční vysvětlení, návrat nebo obcházku?
+```
+
+Příklad:
+
+```text
+Před změnou:
+Výstup kontroly neukazoval, zda byly dočasné exporty smazány.
+
+Po změně:
+Výstup obsahuje potvrzení "ano" a ve složce nezůstal export.
+
+Zbytkové tření:
+Není jasné, jestli se má zapisovat i název smazané složky. To by ale zbytečně přidalo stopu, takže se nedoplňuje.
+```
+
+Dobré ověření chrání před dvěma extrémy. První extrém je spokojenost s tím, že "něco se změnilo". Druhý extrém je nutkání přidat další důkaz ke každému kroku. U privacy-first provozu je často lepší potvrdit stav než uchovávat podklad.
+
+### 5. Udělejte privacy-first kontrolu skutečné stopy
+
+Papírová privacy-first brána před změnou nestačí. Po prvním použití se podívejte na skutečnou stopu, kterou práce nechala. Lidé mohou kvůli nové instrukci začít vytvářet kopie, screenshoty nebo komentáře, které původní návrh neplánoval.
+
+Zkontrolujte:
+
+```text
+Vznikla nová kopie dat?
+
+Zůstal dočasný export déle, než bylo potřeba?
+
+Přibyl screenshot, příloha nebo komentář s osobními údaji?
+
+Rozšířil se přístup k podkladům?
+
+Ukládá se důkaz jen proto, aby působil důkladně?
+
+Stačí místo toho anonymizovaný závěr, agregovaný signál nebo jednoduché ano/ne?
+```
+
+Příklad:
+
+```text
+Nález:
+Člověk k poli "dočasné exporty smazány" připojil screenshot prázdné složky.
+
+Vyhodnocení:
+Screenshot není potřeba. Důkazem je potvrzení ve výstupu a absence exportu v pracovní složce po dokončení.
+
+Korekce:
+Doplnit k poli krátkou nápovědu: "Bez příloh a screenshotů; stačí ano/ne."
+```
+
+Tady je vidět rozdíl mezi kontrolou a špehováním. Kontrola ověřuje, zda proces zanechává přiměřenou stopu. Špehování sbírá další důkazy, protože se bojí věřit práci. Privacy-first provoz má být pevný, ale nemá se tvářit, že každý úkol potřebuje vlastní kamerový systém.
+
+### 6. Rozhodněte jeden ze čtyř stavů
+
+Po prvním normálním použití stačí jedno rozhodnutí. Nedělejte z toho strategický dokument. Úprava je malá a rozhodnutí má být stejně malé.
+
+Použijte čtyři stavy:
+
+```text
+Potvrdit:
+Úprava fungovala, problém se neopakoval a datová stopa je v pořádku.
+
+Lehce korigovat:
+Úprava fungovala částečně, ale potřebuje přesun, zpřesnění nebo zkrácení.
+
+Vrátit k přepracování:
+Úprava neřeší skutečný problém nebo vytváří nové tření.
+
+Zrušit:
+Úprava byla zbytečná, duplicitní nebo zhoršila práci i po malé korekci.
+```
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Lehce korigovat.
+
+Proč:
+Pole vedlo k potvrzení smazání exportů, ale umístění na konci šablony nutilo člověka vracet se v toku práce.
+
+Korekce:
+Přesunout pole do části "Podklady a úklid" a doplnit nápovědu "Bez příloh a screenshotů; stačí ano/ne."
+
+Další ověření:
+Při příští měsíční kontrole jen ověřit, zda se pole našlo včas a nevznikla příloha.
+```
+
+Rozhodnutí nemá trestat autora změny. Má chránit provoz před dvěma věcmi: před nefunkčním pravidlem a před zbytečnou administrativou, která se tváří jako kvalita.
+
+### 7. Zapište krátký ověřovací záznam
+
+Ověření má zanechat stopu, ale malou. Stačí záznam, který budoucímu čtenáři vysvětlí, proč úprava zůstala, změnila se nebo zmizela.
+
+Formát:
+
+```text
+Ověřeno při:
+
+Původní úprava:
+
+Výsledek prvního použití:
+
+Privacy-first stopa:
+
+Rozhodnutí:
+Potvrdit / lehce korigovat / vrátit k přepracování / zrušit
+
+Další krok:
+
+Changelog věta:
+```
+
+Příklad:
+
+```text
+Ověřeno při:
+Měsíční kontrole formulářů za květen.
+
+Původní úprava:
+Doplnění pole "dočasné exporty smazány: ano/ne".
+
+Výsledek prvního použití:
+Pole bylo vyplněné a export byl smazán, ale pole bylo ve špatné části šablony.
+
+Privacy-first stopa:
+Vznikl zbytečný screenshot prázdné složky; nebude se dál používat.
+
+Rozhodnutí:
+Lehce korigovat.
+
+Další krok:
+Přesunout pole do části "Podklady a úklid" a doplnit nápovědu bez screenshotů.
+
+Changelog věta:
+Po prvním použití bylo pole pro smazání dočasných exportů přesunuto blíž k práci a doplněno o nápovědu, že se neukládají přílohy ani screenshoty.
+```
+
+Krátký záznam je důležitý hlavně proto, aby se za měsíc znovu neotevírala stejná debata. Provozní paměť má být opora, ne román. Ironie je povolená v kávě, ne v changelogu.
+
+### Šablona ověření provozní úpravy po prvním použití
+
+```text
+Název standardu:
+
+Ověřovaná provozní úprava:
+
+Původní úpravová věta:
+Upravili jsme:
+Změna měla odstranit:
+Hotovo mělo být když:
+
+První normální použití:
+Kdy:
+Kdo/role:
+V jaké pracovní situaci:
+
+Cesta k úpravě:
+Nalezena bez připomínky:
+Nalezena ve správný okamžik:
+Srozumitelná bez dotazu:
+Vznikla obcházka:
+
+Výstup před/po:
+Před změnou:
+Po změně:
+Zbytkové tření:
+
+Privacy-first kontrola:
+Nové kopie:
+Screenshoty/přílohy:
+Dočasné exporty:
+Přístupy:
+Retence:
+Nejmenší dostatečný důkaz:
+
+Rozhodnutí:
+Potvrdit / lehce korigovat / vrátit k přepracování / zrušit
+
+Další krok:
+
+Kdy znovu ověřit:
+
+Changelog věta:
+```
+
+### Příklad vyplněného ověření
+
+```text
+Název standardu:
+Měsíční kontrola formulářů bez screenshotů zákaznických údajů.
+
+Ověřovaná provozní úprava:
+Doplnění pole "dočasné exporty smazány: ano/ne" do šablony měsíčního výstupu.
+
+Původní úpravová věta:
+Upravili jsme: šablonu měsíčního výstupu kontroly formulářů.
+Změna měla odstranit: neviditelný úklid dočasných exportů.
+Hotovo mělo být když: výstup obsahuje vyplněné pole a po kontrole nezůstane export ve sdílené složce.
+
+První normální použití:
+Kdy: první měsíční kontrola po zavedení úpravy.
+Kdo/role: člověk odpovědný za provozní kontrolu formulářů.
+V jaké pracovní situaci: běžná měsíční kontrola bez incidentu.
+
+Cesta k úpravě:
+Nalezena bez připomínky: ano.
+Nalezena ve správný okamžik: částečně, pole bylo až na konci šablony.
+Srozumitelná bez dotazu: ano.
+Vznikla obcházka: ano, člověk přidal screenshot prázdné složky.
+
+Výstup před/po:
+Před změnou: nebylo vidět, zda byl export smazán.
+Po změně: potvrzení je ve výstupu a export nezůstal ve složce.
+Zbytkové tření: umístění pole a zbytečný screenshot.
+
+Privacy-first kontrola:
+Nové kopie: ne.
+Screenshoty/přílohy: jednorázově vznikl screenshot, bude odstraněn a nebude součástí pravidla.
+Dočasné exporty: smazány po kontrole.
+Přístupy: beze změny.
+Retence: skutečně kratší než před úpravou.
+Nejmenší dostatečný důkaz: ano/ne potvrzení bez přílohy.
+
+Rozhodnutí:
+Lehce korigovat.
+
+Další krok:
+Přesunout pole do části "Podklady a úklid" a doplnit nápovědu "Bez příloh a screenshotů; stačí ano/ne."
+
+Kdy znovu ověřit:
+Při příští měsíční kontrole pouze na úrovni pole, ne celého standardu.
+
+Changelog věta:
+Po prvním použití bylo pole pro potvrzení smazání dočasných exportů přesunuto do části "Podklady a úklid" a doplněno o pravidlo bez screenshotů.
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: přečíst původní úpravovou větu.
+2. Tři minuty: vybrat první normální použití a stručně popsat pracovní situaci.
+3. Tři minuty: projít cestu člověka k úpravě.
+4. Tři minuty: porovnat výstup před a po změně.
+5. Dvě minuty: zkontrolovat skutečnou privacy-first stopu.
+6. Dvě minuty: vybrat jeden ze čtyř stavů a napsat changelog větu.
+
+Výstupem workshopu je rozhodnutí o jedné úpravě. Pokud se během něj objeví další nápady, patří do backlogu nálezů, ne do aktuálního ověření. V opačném případě se z patnácti minut stane nová provozní tradice a někdo jí jednou dá zkratku. To je okamžik, kdy má zdravý tým zpozornět.
+
+### Checklist kapitoly
+
+- Ověřujete skutečné první použití, ne ukázkový test?
+- Vrátili jste se k původní úpravové větě?
+- Je jasné, jaký malý slib měla úprava splnit?
+- Sledujete, zda člověk úpravu našel bez připomínky?
+- Objevila se úprava ve správný okamžik práce?
+- Porovnali jste výstup před a po změně?
+- Zapsali jste zbytkové tření bez rozšiřování rozsahu?
+- Zkontrolovali jste skutečnou datovou stopu po použití?
+- Nevznikly nové screenshoty, přílohy, exporty nebo delší retence?
+- Vybrali jste jeden ze čtyř stavů: potvrdit, lehce korigovat, vrátit k přepracování, zrušit?
+- Má další krok konkrétní pracovní místo a nejbližší ověření?
+- Existuje krátká changelog věta, která vysvětlí rozhodnutí pozdějšímu čtenáři?
+
+Ověření provozní úpravy po prvním normálním použití drží změny při zemi. Malá úprava se nemusí tvářit jako program transformace. Stačí, když v běžné práci odstraní konkrétní tření, nezvětší datovou stopu a nechá za sebou krátké rozhodnutí. Takový provoz se zlepšuje postupně, ale pevně: jedna změna, jedno ověření, jeden další krok.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IB o ověření provozní úpravy po prvním normálním použití: výběr skutečného průchodu, návrat k úpravové větě, sledování cesty člověka k úpravě, porovnání výstupu před a po změně, privacy-first kontrola skutečné datové stopy, čtyři stavy rozhodnutí, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IA o převodu první kontroly stabilizovaného standardu do jedné provozní úpravy: rozhodovací věta z kontroly, výběr nálezu podle opakované ceny, úpravová věta, nejbližší pracovní místo, omezení rozsahu, privacy-first brána, ověření při nejbližší normální práci, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HZ o první kontrole stabilizovaného standardu v běžném provozu: kontrolní okno podle rytmu práce, ověření výsledku, cesty a ceny, třídění výjimek, privacy-first kontrola skutečných výstupů a dočasných podkladů, rozhodnutí stavu standardu, nejmenší možná oprava, další kontrola podle rizika, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HY o stabilizaci potvrzené další verze provozu do běžného standardu: zkrácení historie na aktuální pravidlo, důvod a datovou hranici, výběr kanonického zdroje pravdy, odstranění dočasných opor, privacy-first hranice v pracovní instrukci, lehký signál návratu starého chování, stop pravidlo, changelog, šablona, příklad, mini workshop a checklist.
