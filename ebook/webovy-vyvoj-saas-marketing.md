@@ -66048,8 +66048,364 @@ Výstupem je malý změnový balíček, který může někdo rovnou provést. Po
 
 Převod výsledku kontroly údržbového rytmu do další verze provozu je chvíle, kdy se dobrý závěr stane skutečnou změnou. Nejlepší výsledek není dlouhý zápis. Nejlepší výsledek je upravené pracovní místo, zavřená stará cesta, jasná datová hranice a příští cyklus, který proběhne lépe bez velkého vysvětlování.
 
+## Příloha HX: Ověření další verze provozu po prvním cyklu
+
+Další verze provozu není hotová tím, že jste upravili šablonu, zavřeli starou cestu a napsali changelog. Hotová je až ve chvíli, kdy projde prvním normálním cyklem a ukáže se, že člověk dokáže podle nové verze pracovat bez návratu ke starému postupu.
+
+Pracovní otázka:
+
+```text
+Proběhl první cyklus podle nové provozní verze tak, že tým našel správné místo, vytvořil správný výstup a nevytvořil zbytečnou datovou stopu?
+```
+
+Tahle příloha je malý kontrolní bod po změně. Nejde o nové kolo údržby, audit dokumentace ani hledání dalších vylepšení. Jde o ověření, že poslední provedená změna opravdu přešla z textu do práce.
+
+Codyho komentář: provozní změny mají jednu záludnost. V dokumentu vypadají hotově skoro okamžitě. Jenže dokument je poslušný, neodmlouvá a nepřekvapí vás v pátek odpoledne. Skutečný test přijde až ve chvíli, kdy změnu použije člověk, který si nepamatuje celou historii rozhodnutí. Tedy normální svět, ta protivná testovací platforma zdarma.
+
+### 1. Vyberte první normální cyklus, ne slavnostní ukázku
+
+Ověření nové provozní verze má proběhnout při prvním reálném použití. Ne při připravené demonstraci, ne při školení, ne ve zvláštním testovacím průchodu, kde všichni vědí, co se má stát.
+
+Vhodný první cyklus:
+
+- další měsíční kontrola formulářů,
+- příští publikace obsahu podle nové šablony,
+- první onboardingový průchod po změně pravidla,
+- další zákaznické předání podle upraveného checklistu,
+- první supportní eskalace, která použije novou kartu,
+- nejbližší provozní review, kde se má nová věta otevřít přirozeně.
+
+Nevhodný první cyklus:
+
+- ručně připravený průchod jen pro kontrolora,
+- workshop, kde autor změny všechno vysvětluje,
+- jednorázové čtení dokumentu bez výstupu,
+- kontrola podle staré cesty s poznámkou "příště už nově".
+
+Příklad:
+
+```text
+Nová provozní verze:
+Samostatný háček pro kontrolu screenshotů byl zrušen a pravidlo zůstává v šabloně měsíčního výstupu.
+
+První normální cyklus:
+Nejbližší měsíční kontrola formulářů.
+
+Nevhodné ověření:
+Autor změny otevře šablonu a potvrdí, že věta v ní je.
+```
+
+Přítomnost věty v dokumentu není ověření. Ověření je až správný výstup z práce.
+
+### 2. Sledujte cestu člověka k pravidlu
+
+Nová verze může být obsahově správná, ale špatně umístěná. Člověk ji nenajde, použije starý odkaz, zeptá se v chatu nebo si pravidlo domyslí. Výsledek pak může být náhodně dobrý, ale systém pořád nefunguje.
+
+Při prvním cyklu sledujte:
+
+- odkud člověk začal,
+- jak našel aktuální pracovní místo,
+- jestli narazil na starou cestu,
+- jestli musel žádat o vysvětlení,
+- jestli použil šablonu nebo postup bez ručního dohledávání,
+- jestli bylo jasné, co se nemá ukládat.
+
+Krátký záznam může vypadat takto:
+
+```text
+Cesta:
+Člověk otevřel opakovaný úkol, našel přesměrovací větu na šablonu výstupu a pokračoval v šabloně.
+
+Tření:
+Žádné větší. Starý odkaz v interním indexu ještě existoval, ale nebyl použit.
+
+Závěr:
+Pracovní místo je použitelné; starý odkaz v indexu odstranit jako drobnou korekci.
+```
+
+Hledejte cestu, ne schopnost konkrétního člověka poradit si. Když práci zachrání paměť, zkušenost nebo ochota improvizovat, systém si zásluhu nezaslouží.
+
+### 3. Porovnejte výstup s rozhodovací větou
+
+V předchozí příloze vznikla rozhodovací věta. Teď ji vezměte jako měřítko. Nehodnoťte, jestli výstup "vypadá dobře". Hodnoťte, jestli odpovídá změně, kterou jste chtěli zavést.
+
+Příklad rozhodovací věty:
+
+```text
+Od příští měsíční kontroly zůstává pravidlo jen v šabloně výstupu; samostatný kontrolní háček v opakovaném úkolu se ruší.
+```
+
+Ověřovací otázky:
+
+- Použila se šablona výstupu jako zdroj pravdy?
+- Byl samostatný háček opravdu pryč?
+- Nevznikl nový náhradní háček jinde?
+- Obsahoval výstup správný minimální důkaz?
+- Zůstala stará cesta zavřená?
+- Bylo jasné, kdy je cyklus hotový?
+
+Příklad výsledku:
+
+```text
+Výstup:
+Měsíční záznam obsahuje odkaz na primární CRM záznam, anonymizovaný závěr a potvrzení smazání dočasných podkladů.
+
+Odchylka:
+V interním indexu zůstal starý odkaz na archivovanou kontrolní kartu.
+
+Rozhodnutí:
+Nová verze funguje, ale potřebuje jednu korekci indexu.
+```
+
+Odchylka neznamená automaticky selhání. Znamená, že se máte rozhodnout, jestli je to drobná korekce, návrat do revize, nebo jen poznámka pro příští cyklus.
+
+### 4. Udělejte privacy-first kontrolu skutečné stopy
+
+Nová provozní verze často slibuje menší datovou stopu. První cyklus ukáže, jestli se to opravdu stalo. Nekontrolujte jen text pravidla. Podívejte se, co po práci zůstalo.
+
+Ověřte:
+
+- zda vznikly nové screenshoty, exporty, kopie e-mailů nebo ruční opisy,
+- zda dočasné podklady byly smazané,
+- zda výstup používá odkaz na primární záznam místo kopie dat,
+- zda se důkaz dá pochopit bez osobních údajů,
+- zda přístup k výstupu mají jen lidé, kteří ho potřebují,
+- zda se kontrola nepřesunula do chatu nebo neřízené poznámky.
+
+Privacy-first závěr pište pracovně:
+
+```text
+První cyklus nevytvořil screenshoty ani ruční opisy zákaznických údajů; výstup obsahuje jen odkaz na primární záznam, anonymizovaný závěr a potvrzení smazání dočasných podkladů.
+```
+
+Pokud stopa narostla, neokecávejte to:
+
+```text
+První cyklus sice použil novou šablonu, ale člověk si do poznámky opsal e-mail zákazníka. Nová verze potřebuje korekci věty v šabloně: poznámka nesmí obsahovat kontaktní údaje.
+```
+
+Tohle je dobrý nález. Nepohodlný, ale užitečný. Privacy-first provoz se nedělá tím, že se tváříte, že datová stopa neexistuje. Dělá se tím, že ji pravidelně zkracujete na pracovní minimum.
+
+### 5. Rozlište tři typy výsledku
+
+Po prvním cyklu nepište dlouhé eseje. Vyberte jeden ze tří výsledků:
+
+```text
+Potvrzeno:
+Nová verze byla nalezena, použita a výstup odpovídá rozhodovací větě.
+
+Potvrzeno s korekcí:
+Nová verze funguje, ale jedno malé místo brání čistému průchodu.
+
+Vrátit do revize:
+Nová verze nebyla nalezena, vedla ke špatnému výstupu, vrátila starou cestu nebo zvětšila datovou stopu.
+```
+
+Příklad potvrzení:
+
+```text
+Stav:
+Potvrzeno.
+
+Důkaz:
+Výstup vznikl ze šablony, starý háček se nepoužil, datová stopa zůstala minimální.
+
+Další krok:
+Žádná nová práce. Zapsat potvrzení do changelogu.
+```
+
+Příklad potvrzení s korekcí:
+
+```text
+Stav:
+Potvrzeno s korekcí.
+
+Důkaz:
+Šablona fungovala, ale interní index pořád vedl na starou kartu.
+
+Další krok:
+Odstranit starý odkaz z indexu a zapsat korekci.
+```
+
+Příklad návratu do revize:
+
+```text
+Stav:
+Vrátit do revize.
+
+Důkaz:
+Člověk šablonu nenašel, použil starý checklist a do výstupu vložil screenshot zákaznických údajů.
+
+Další krok:
+Obnovit přesměrovací větu v opakovaném úkolu, opravit index a znovu ověřit při dalším normálním cyklu.
+```
+
+Tři stavy stačí. Jakmile jich máte sedm, začínáte budovat proces pro proces. To je elegantní způsob, jak se tvářit zaměstnaně a přitom ztratit pointu.
+
+### 6. Pokud děláte korekci, ať je menší než původní změna
+
+Korekce po prvním cyklu má být malá. Pokud po ověření potřebujete přepsat půl systému, pravděpodobně jste neověřili drobnou odchylku, ale objevili špatně navrženou změnu.
+
+Dobré korekce:
+
+- odstranit starý odkaz z indexu,
+- přesunout větu v šabloně výš,
+- doplnit jeden příklad správného výstupu,
+- zpřesnit privacy-first instrukci,
+- přidat přesměrovací větu na archivovanou kartu,
+- smazat duplicitní připomínku.
+
+Špatně ohraničené korekce:
+
+- přepsat celý provozní manuál,
+- založit nový dashboard pro sledování pravidla,
+- přidat další kontrolní meeting,
+- vytvořit paralelní šablonu,
+- obnovit všechny staré háčky "pro jistotu".
+
+Pravidlo:
+
+```text
+Korekce po prvním cyklu má odstranit konkrétní tření z prvního průchodu, ne otevřít novou provozní oblast.
+```
+
+Pokud korekce nejde udělat jednou větou, jedním odkazem nebo jedním smazáním, zastavte se a vraťte změnu do revize.
+
+### 7. Uzavřete ověření v changelogu
+
+Changelog po prvním cyklu má být krátký. Má říct, jestli nová provozní verze funguje, co se případně opravilo a kde je aktuální zdroj pravdy.
+
+Příklad potvrzení:
+
+```text
+První měsíční cyklus proběhl podle nové šablony bez návratu samostatného kontrolního háčku; výstup použil odkaz na primární záznam a anonymizovaný závěr, takže další verze provozu je potvrzená.
+```
+
+Příklad potvrzení s korekcí:
+
+```text
+První cyklus potvrdil novou šablonu, ale odhalil starý odkaz v interním indexu; odkaz byl odstraněn a aktuální zdroj pravdy zůstává šablona měsíčního výstupu.
+```
+
+Příklad návratu do revize:
+
+```text
+První cyklus novou verzi nepotvrdil, protože člověk použil starý checklist a vznikl screenshot zákaznických údajů; změna se vrací do revize před dalším cyklem.
+```
+
+Changelog nemá obhajovat ego autora změny. Má pomoci budoucímu člověku pochopit stav provozu. Což je méně dramatické, ale podstatně užitečnější.
+
+### Šablona ověření po prvním cyklu
+
+```text
+Název nové provozní verze:
+
+Původní rozhodovací věta:
+
+První normální cyklus:
+
+Kdo pracoval podle nové verze:
+
+Jak člověk našel aktuální pracovní místo:
+
+Použitý zdroj pravdy:
+
+Výstup cyklu:
+
+Odchylky od rozhodovací věty:
+
+Stará cesta se vrátila:
+Ano / ne / částečně
+
+Privacy-first kontrola:
+Vznikly nové kopie dat:
+Dočasné podklady smazány:
+Nejmenší důkaz použit:
+Přístupy odpovídají účelu:
+
+Stav:
+Potvrzeno / potvrzeno s korekcí / vrátit do revize
+
+Jedna korekce, pokud je potřeba:
+
+Changelog věta:
+```
+
+### Příklad vyplněného ověření
+
+```text
+Název nové provozní verze:
+Zkrácená kontrola výstupu formulářů bez screenshotů.
+
+Původní rozhodovací věta:
+Od příští měsíční kontroly zůstává pravidlo jen v šabloně výstupu; samostatný kontrolní háček v opakovaném úkolu se ruší.
+
+První normální cyklus:
+Měsíční kontrola formulářů za květen.
+
+Kdo pracoval podle nové verze:
+Člověk odpovědný za měsíční kontrolu formulářů.
+
+Jak člověk našel aktuální pracovní místo:
+Otevřel opakovaný úkol, přešel přes přesměrovací větu do šablony výstupu.
+
+Použitý zdroj pravdy:
+Šablona měsíčního výstupu kontroly formulářů.
+
+Výstup cyklu:
+Záznam obsahuje odkaz na primární CRM záznam, anonymizovaný závěr a potvrzení smazání dočasných podkladů.
+
+Odchylky od rozhodovací věty:
+V interním indexu zůstal starý odkaz na archivovanou kontrolní kartu.
+
+Stará cesta se vrátila:
+Částečně. Odkaz existoval, ale nebyl použit.
+
+Privacy-first kontrola:
+Vznikly nové kopie dat: ne.
+Dočasné podklady smazány: ano.
+Nejmenší důkaz použit: ano, odkaz a anonymizovaný závěr.
+Přístupy odpovídají účelu: ano.
+
+Stav:
+Potvrzeno s korekcí.
+
+Jedna korekce, pokud je potřeba:
+Odstranit starý odkaz z interního indexu.
+
+Changelog věta:
+První cyklus potvrdil zkrácenou kontrolu ve šabloně výstupu; starý odkaz v interním indexu byl odstraněn a privacy-first důkaz zůstává odkaz na primární záznam s anonymizovaným závěrem.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: vybrat první normální cyklus po změně.
+2. Čtyři minuty: projít cestu člověka k aktuálnímu pracovnímu místu.
+3. Čtyři minuty: porovnat výstup s rozhodovací větou.
+4. Čtyři minuty: zkontrolovat skutečnou datovou stopu.
+5. Tři minuty: vybrat stav potvrzeno, potvrzeno s korekcí nebo vrátit do revize.
+6. Dvě minuty: napsat korekci a changelog větu.
+
+Výstupem není nový plán. Výstupem je uzavření prvního cyklu nové provozní verze. Pokud se během workshopu otevře deset dalších nápadů, dejte je stranou. Dnešní otázka je prostá: fungovala poslední změna v normální práci?
+
+### Checklist kapitoly
+
+- Ověřujete první normální cyklus, ne připravenou ukázku?
+- Je jasné, jak člověk našel aktuální pracovní místo?
+- Porovnali jste výstup s původní rozhodovací větou?
+- Zkontrolovali jste, zda se nevrátila stará cesta?
+- Víte, jestli vznikly nové kopie osobních nebo zákaznických dat?
+- Byly dočasné podklady smazané?
+- Používá výstup nejmenší dostatečný důkaz?
+- Vybrali jste jeden ze tří stavů?
+- Je případná korekce menší než původní změna?
+- Má changelog věta aktuální zdroj pravdy a stav ověření?
+
+Ověření další verze provozu po prvním cyklu chrání tým před falešným pocitem hotovo. Dobrá změna se nepozná podle toho, že dobře zní v zápisu. Pozná se podle toho, že ji člověk najde, použije a vytvoří správný výstup bez nového chaosu a bez zbytečných kopií dat.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha HX o ověření další verze provozu po prvním cyklu: výběr normálního cyklu, sledování cesty člověka k pravidlu, porovnání výstupu s rozhodovací větou, privacy-first kontrola skutečné datové stopy, tři možné stavy výsledku, malé korekce, changelog, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HW o převodu výsledku kontroly údržbového rytmu do další verze provozu: rozhodovací věta, výběr prvního pracovního místa, zavření staré cesty, privacy-first hranice v pracovním jazyce, nejbližší ověření bez nového procesu, vědomé neřešení širšího rozsahu, changelog, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HV o kontrole údržbového rytmu po prvních cyklech: výběr skutečného kontrolního okna, návrat k původnímu slibu, sledování výstupů místo rituálu, praktická cena rytmu, návrat starého chování, privacy-first audit, rozhodnutí dalšího stavu, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HU o převodu potvrzeného udržovacího záznamu do údržbového rytmu: vyhodnocení první kontroly, opakující se riziko, nejmenší přirozený rytmus, vlastnictví podle role, privacy-first signály bez špehování, zápis do jednoho pracovního místa, stop pravidlo, šablona, příklad, mini workshop a checklist.
