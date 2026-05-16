@@ -68531,8 +68531,391 @@ Výstupem workshopu je rozhodnutí, ne seznam všeho, co by šlo zlepšit. Pokud
 
 Kontrola stabilizované provozní úpravy po prvních běžných cyklech chrání tým před dokumentační iluzí. Ukáže, jestli standard opravdu drží v práci, jestli se stará cesta nevrací zadními dveřmi a jestli privacy-first slib přežil kontakt s provozem. Když je odpověď ano, stačí krátký záznam. Když je odpověď skoro ano, stačí malá oprava. A když je odpověď ne, je lepší to zjistit po dvou cyklech než po půl roce nánosů.
 
+## Příloha IE: Převod kontroly stabilizované provozní úpravy do trvalého revizního háčku
+
+Když kontrola po prvních běžných cyklech ukáže, že stabilizovaná provozní úprava drží, vzniká nenápadné riziko. Tým má chuť si oddechnout, uzavřít kartu a na standard už nesahat. To je někdy správně. Ale u věcí, které se dotýkají zákaznických dat, veřejného webu, měření, podpory, prodeje nebo předávání práce mezi rolemi, nestačí jednorázově potvrdit, že pravidlo funguje. Potřebujete lehký revizní háček, který časem ověří, že se standard nerozjel mimo původní účel.
+
+Revizní háček není nový proces. Je to malá poznámka vložená do existujícího rytmu práce. Říká, kdy se k pravidlu vrátit, co zkontrolovat a kdy ho zrušit, zkrátit nebo upravit. Dobrý háček chrání provoz před dvěma extrémy: zapomenutým pravidlem, které pomalu zastará, a přehnanou kontrolou, která začne stát víc než samotná práce.
+
+Tahle příloha navazuje na kontrolní kartu z Přílohy ID. Použijte ji pouze ve chvíli, kdy standard drží nebo drží s malou úpravou. Pokud se pravidlo musí vrátit k revizi, nejdřív opravte samotné pravidlo. Háček nemá stabilizovat problém. Má udržet funkční pravidlo zdravé.
+
+Codyho komentář: trvalý revizní háček je dobrý sluha a mizerný pán. Má vás včas upozornit, že se změnily podmínky. Nemá z každého malého pravidla udělat doživotní rituál.
+
+### 1. Začněte poslední rozhodovací větou
+
+Neotvírejte celou historii změny. Vezměte poslední rozhodovací větu z kontroly po běžných cyklech. Ta říká, v jakém stavu standard skutečně je.
+
+Příklad:
+
+```text
+Standard drží s malou úpravou: potvrzení smazání exportů se používá, ale pole se přesune výš v šabloně a smaže se starý odkaz v indexu.
+```
+
+Z této věty vyplývají tři otázky:
+
+```text
+Co je stabilní jádro pravidla?
+
+Které malé riziko se může vrátit?
+
+Jak poznáme, že se pravidlo stalo zbytečným nebo drahým?
+```
+
+Pokud rozhodovací věta tyto otázky neumí otevřít, je příliš obecná. Přepište ji dřív, než budete nastavovat revizi. Háček bez jasného důvodu se časem změní v položku, kterou lidé odškrtávají bez přemýšlení.
+
+### 2. Rozhodněte, zda pravidlo revizní háček vůbec potřebuje
+
+Ne každé pravidlo si zaslouží trvalou připomínku. Některé změny stačí uzavřít v changelogu a nechat žít. Revizní háček přidejte hlavně tam, kde se může změnit okolní svět nebo kde je cena tichého selhání vyšší.
+
+Háček obvykle dává smysl, když pravidlo:
+
+```text
+pracuje se zákaznickými nebo osobními daty,
+
+ovlivňuje veřejný web, formuláře, support nebo prodej,
+
+závisí na externím nástroji nebo dodavateli,
+
+má dopad na onboarding nové role,
+
+nahrazuje starý postup, který se už jednou vracel,
+
+chrání tým před zbytečnými exporty, screenshoty nebo kopiemi,
+
+má malý důkaz, který se snadno začne nafukovat.
+```
+
+Háček často nedává smysl, když pravidlo:
+
+```text
+řeší jednorázovou úpravu textu,
+
+nemá provozní dopad,
+
+nepracuje s daty ani přístupy,
+
+je už součástí jiného silnějšího kontrolního rytmu,
+
+po úpravě zmizelo jako samostatné pravidlo.
+```
+
+Praktické pravidlo:
+
+```text
+Pokud by tiché selhání pravidla vytvořilo datový nepořádek, zákaznické tření nebo skrytou práci, nastavte háček. Pokud by jen zhoršilo kosmetiku dokumentu, pravděpodobně stačí changelog.
+```
+
+### 3. Připojte háček k existujícímu rytmu
+
+Nezakládejte nový meeting, pokud už existuje přirozené místo. Revizní háček má sedět tam, kde se daná práce stejně děje.
+
+Možná místa:
+
+```text
+měsíční kontrola formulářů,
+
+kvartální dodavatelský úklid,
+
+review šablon supportu,
+
+release checklist webu,
+
+onboarding role,
+
+kontrola produktového backlogu,
+
+redakční úprava landing page,
+
+review datové mapy.
+```
+
+Příklad špatného háčku:
+
+```text
+Jednou za měsíc udělat samostatnou schůzku k mazání exportů.
+```
+
+Příklad lepšího háčku:
+
+```text
+V měsíční kontrole formulářů ověřit, zda poslední výstup obsahuje jen ano/ne potvrzení smazání exportů a žádné screenshoty.
+```
+
+Druhý háček nevyrábí novou práci. Přidává jednu kontrolní větu do místa, kde tým už stejně prochází výstup.
+
+### 4. Omezte kontrolu na nejmenší užitečný důkaz
+
+Revizní háček musí být menší než původní kontrola. Pokud po každém cyklu znovu vyplňujete celou kontrolní kartu, nevytvořili jste háček. Vytvořili jste opakovaný audit.
+
+Háček má sledovat nejmenší důkaz:
+
+```text
+existuje očekávaný výstup,
+
+člověk našel pravidlo v kanonickém místě,
+
+nevznikly zbytečné datové artefakty,
+
+nevrátila se stará cesta,
+
+cena používání je pořád přiměřená.
+```
+
+Většinou stačí jedna až tři otázky. Příklad:
+
+```text
+Revizní otázky:
+1. Má poslední výstup ano/ne potvrzení smazání exportů?
+2. Nevznikl screenshot nebo příloha jako náhradní důkaz?
+3. Je odkaz na šablonu pořád jen v kanonickém indexu?
+```
+
+Tohle je dost. Nepotřebujete kontrolovat všechno, co bylo součástí původní stabilizace. Potřebujete hlídat bod, který má tendenci znovu ujet.
+
+### 5. Zapište stop pravidlo
+
+Trvalý háček musí umět zemřít. Jinak zůstane v systému jen proto, že se kdysi zdál rozumný. Každý háček proto potřebuje stop pravidlo.
+
+Stop pravidlo může znít:
+
+```text
+Pokud tři po sobě jdoucí kontroly neukážou návrat screenshotů ani starých odkazů, zrušit samostatnou otázku a ponechat jen obecné pravidlo v šabloně.
+```
+
+Nebo:
+
+```text
+Pokud se měsíční kontrola formulářů sloučí s kvartálním webovým review, přesunout háček do nového review a zavřít staré místo.
+```
+
+Nebo:
+
+```text
+Pokud přestaneme používat dočasné exporty, odstranit háček i potvrzovací pole. Neudržovat kontrolu pro riziko, které už neexistuje.
+```
+
+Stop pravidlo chrání tým před hromaděním dobrých nápadů, které přežily vlastní užitečnost. Privacy-first provoz není jen mazání dat. Je to i mazání kontrol, které už nemají účel.
+
+### 6. Přiřaďte vlastníka podle role, ne podle autora změny
+
+Autor původní úpravy často není správný dlouhodobý vlastník. Pokud háček zůstane navázaný na konkrétního člověka, standard se rozpadne při dovolené, odchodu nebo změně role.
+
+Přiřazujte vlastnictví podle místa práce:
+
+```text
+Formuláře a poptávky:
+vlastník webového nebo growth provozu.
+
+Support šablony:
+vlastník zákaznické podpory.
+
+Dodavatelské nástroje:
+vlastník provozního nebo technického stacku.
+
+Onboarding:
+vlastník role nebo týmového standardu.
+
+Datová mapa:
+vlastník privacy-first provozu nebo odpovědná provozní role.
+```
+
+Do háčku napište roli, ne jméno:
+
+```text
+Vlastník háčku:
+role odpovědná za měsíční kontrolu formulářů.
+```
+
+Jméno konkrétní osoby může být v úkolu nebo kalendáři, ale pravidlo má přežít organizační změnu. To je rozdíl mezi skutečným standardem a poznámkou jednoho člověka.
+
+### 7. Uzavřete staré kontrolní artefakty
+
+Jakmile vznikne trvalý háček, zavřete dočasné materiály z původní kontroly. Jinak si tým ponechá dvě vrstvy: starou kontrolní kartu a nový háček. To časem vytváří nejistotu, co je zdroj pravdy.
+
+Projděte:
+
+```text
+kontrolní kartu,
+
+dočasné poznámky,
+
+komentáře v úkolech,
+
+kopie šablon,
+
+odkazy ve znalostní bázi,
+
+staré checklisty,
+
+dočasné exporty a screenshoty.
+```
+
+U každé položky rozhodněte:
+
+```text
+ponechat jako zdroj pravdy,
+
+zkrátit do revizního háčku,
+
+archivovat kvůli historii,
+
+smazat, protože už nemá účel.
+```
+
+Příklad:
+
+```text
+Kontrolní kartu necháme v archivu changelogu.
+Do šablony měsíční kontroly přeneseme jen tři revizní otázky.
+Starý úkol s přílohou a screenshotem mažeme po uzavření změny.
+```
+
+Tohle je malý úklid, ale má velký dopad. Bez něj se i dobrá privacy-first změna může změnit v dlouhý řetěz důkazů, které už nikdo nepotřebuje.
+
+### 8. Napište háček jako pracovní větu
+
+Finální háček nemá být odstavec pravidel. Má být pracovní věta, kterou člověk pochopí ve chvíli, kdy právě dělá danou práci.
+
+Špatně:
+
+```text
+V rámci optimalizace procesu zajištění datové hygieny je vhodné průběžně validovat, zda jsou artefakty v souladu s definovanou retenční politikou.
+```
+
+Lépe:
+
+```text
+Při měsíční kontrole formulářů zkontrolujte poslední výstup: stačí ano/ne potvrzení smazání exportů, nepřikládejte screenshot.
+```
+
+Dobrá pracovní věta obsahuje:
+
+```text
+kdy se používá,
+
+co člověk zkontroluje,
+
+jaký důkaz stačí,
+
+co nemá vzniknout,
+
+kdy se háček zruší nebo upraví.
+```
+
+Pokud se věta nevejde do pracovního místa, kde má žít, je pravděpodobně moc dlouhá. Zkraťte ji. Revizní háček není školení. Je to připomínka v okamžiku práce.
+
+### Karta trvalého revizního háčku
+
+```text
+Název standardu:
+
+Poslední rozhodovací věta:
+
+Proč háček potřebujeme:
+
+Existující rytmus, kam háček patří:
+
+Vlastník podle role:
+
+Revizní otázky:
+1.
+2.
+3.
+
+Nejmenší důkaz:
+
+Co nesmí vznikat:
+
+Privacy-first hranice:
+
+Stop pravidlo:
+
+Kde je háček zapsaný:
+
+Co se uzavírá nebo maže:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Název standardu:
+Měsíční kontrola formulářů bez screenshotů zákaznických údajů.
+
+Poslední rozhodovací věta:
+Standard drží s malou úpravou: potvrzení smazání exportů se používá, ale pole se přesune výš v šabloně a smaže se starý odkaz v indexu.
+
+Proč háček potřebujeme:
+Riziko návratu screenshotů jako falešného důkazu a riziko starého odkazu v indexu.
+
+Existující rytmus, kam háček patří:
+Měsíční kontrola formulářů.
+
+Vlastník podle role:
+Role odpovědná za webový provoz a formuláře.
+
+Revizní otázky:
+1. Má poslední výstup ano/ne potvrzení smazání exportů?
+2. Nevznikl screenshot nebo příloha jako náhradní důkaz?
+3. Vede šablona jen z kanonického indexu?
+
+Nejmenší důkaz:
+Vyplněné pole ano/ne v měsíčním výstupu.
+
+Co nesmí vznikat:
+Screenshot prázdné složky, kopie exportu, druhý odkaz na starou šablonu.
+
+Privacy-first hranice:
+Neukládat osobní údaje ani zákaznické výřezy jako důkaz úklidu.
+
+Stop pravidlo:
+Po třech čistých měsíčních kontrolách zrušit samostatnou otázku na screenshoty a ponechat jen větu v šabloně.
+
+Kde je háček zapsaný:
+Šablona měsíční kontroly formulářů.
+
+Co se uzavírá nebo maže:
+Starý odkaz v indexu, zbytkový screenshot v úkolu, dočasná kontrolní karta mimo changelog.
+
+Changelog věta:
+Kontrola po běžných cyklech byla převedena do měsíčního revizního háčku; hlídá pouze ano/ne důkaz, nevznikání screenshotů a kanonický odkaz na šablonu.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst poslední rozhodovací větu.
+2. Tři minuty: rozhodnout, zda pravidlo háček opravdu potřebuje.
+3. Tři minuty: vybrat existující rytmus, kam háček patří.
+4. Tři minuty: napsat jednu až tři revizní otázky.
+5. Tři minuty: definovat nejmenší důkaz a co nesmí vznikat.
+6. Dvě minuty: přiřadit vlastníka podle role.
+7. Dvě minuty: napsat stop pravidlo.
+8. Jedna minuta: určit, které dočasné artefakty se zavřou nebo smažou.
+
+Výstupem workshopu je krátká karta háčku a jedna pracovní věta vložená do existujícího rytmu. Pokud workshop začne řešit širší redesign standardu, vraťte se zpět: buď standard ještě není stabilní, nebo se snažíte háčkem vyřešit problém, který patří do revize.
+
+### Checklist kapitoly
+
+- Vycházíte z poslední rozhodovací věty, ne z celé historie změny?
+- Je jasné, proč pravidlo potřebuje trvalý háček?
+- Nepřidáváte háček k pravidlu, které stačí uzavřít v changelogu?
+- Je háček připojený k existujícímu rytmu práce?
+- Obsahuje jen jednu až tři kontrolní otázky?
+- Je důkaz menší než původní kontrolní karta?
+- Říká háček, co nemá vznikat za datové artefakty?
+- Má privacy-first hranici přímo v pracovním místě?
+- Je vlastník určený podle role, ne podle autora změny?
+- Má háček stop pravidlo?
+- Zavřeli jste staré kontrolní karty, dočasné poznámky a zbytkové přílohy?
+- Zůstává jen jeden zdroj pravdy?
+- Je výsledná věta použitelná v okamžiku práce?
+
+Trvalý revizní háček je malý mechanismus, který drží dobré pravidlo při zemi. Když je napsaný dobře, nezvyšuje administrativu. Jen v pravý čas připomene, co se má ověřit, jaký důkaz stačí a které datové zbytky nemají vznikat. Takový háček není oslava procesu. Je to úsporný způsob, jak zabránit tomu, aby se stabilizovaná úprava časem změnila v další vrstvu neviditelné práce.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IE o převodu kontroly stabilizované provozní úpravy do trvalého revizního háčku: rozhodovací věta, výběr pravidel, která háček opravdu potřebují, napojení na existující rytmus, nejmenší užitečný důkaz, stop pravidlo, vlastnictví podle role, uzavření starých artefaktů, karta háčku, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha ID o kontrole stabilizované provozní úpravy po prvních běžných cyklech: výběr normálních cyklů, návrat ke stabilizační větě, cesta k pravidlu, porovnání výstupu, ceny a datové stopy, hledání návratu staré cesty, privacy-first kontrola artefaktů, rozhodnutí stavu standardu, nejmenší další zásah, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IC o stabilizaci ověřené provozní úpravy do běžného standardu: potvrzený stav, kanonický zdroj pravdy, pracovní jazyk pravidla, uzavření dočasných opor, privacy-first stabilizace datové stopy, krátké předání, signál návratu staré cesty, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IB o ověření provozní úpravy po prvním normálním použití: výběr skutečného průchodu, návrat k úpravové větě, sledování cesty člověka k úpravě, porovnání výstupu před a po změně, privacy-first kontrola skutečné datové stopy, čtyři stavy rozhodnutí, šablona, příklad, mini workshop a checklist.
