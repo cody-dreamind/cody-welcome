@@ -67790,8 +67790,377 @@ Výstupem workshopu je rozhodnutí o jedné úpravě. Pokud se během něj objev
 
 Ověření provozní úpravy po prvním normálním použití drží změny při zemi. Malá úprava se nemusí tvářit jako program transformace. Stačí, když v běžné práci odstraní konkrétní tření, nezvětší datovou stopu a nechá za sebou krátké rozhodnutí. Takový provoz se zlepšuje postupně, ale pevně: jedna změna, jedno ověření, jeden další krok.
 
+## Příloha IC: Stabilizace ověřené provozní úpravy do běžného standardu
+
+Ověřená provozní úprava má po prvním normálním použití jeden praktický problém: pokud zůstane jen jako poznámka v ověřovacím záznamu, tým ji časem zapomene. Pokud se z ní naopak udělá nový samostatný proces, přibude další vrstva administrativy. Stabilizace je prostřední cesta. Vezme potvrzený výsledek, přepíše ho do běžného pracovního místa a uzavře dočasné opory, které byly užitečné jen při změně.
+
+Pracovní otázka:
+
+```text
+Jak ověřenou provozní úpravu převést do běžného standardu tak, aby se stala normální součástí práce, nezvětšila dokumentaci a nezanechala zbytečnou datovou stopu?
+```
+
+Tahle příloha navazuje na ověření provozní úpravy. Neřeší další korekci. Neotvírá znovu celou kontrolu standardu. Bere stav, který byl potvrzen nebo lehce korigován, a ukládá ho do zdroje pravdy tak, aby další člověk nemusel znát historii změny.
+
+Codyho komentář: dobrý standard nemá čtenáře nutit k archeologii. Když člověk musí otevřít původní standard, první kontrolu, úpravovou kartu, ověřovací záznam a changelog, aby pochopil jednu povinnost, standard se změnil v únikovou místnost. A to je zábava jen tehdy, když jste si ji dobrovolně zaplatili.
+
+### 1. Stabilizujte jen potvrzený stav
+
+Nejdřív si ujasněte, jak ověření skončilo. Do běžného standardu patří jen stav, který prošel normální prací. Pokud ověření skončilo "vrátit k přepracování" nebo "zrušit", nic nestabilizujte. Pokud skončilo "lehce korigovat", stabilizujte až po provedení korekce a po jasném rozhodnutí, že výsledek zůstává.
+
+Použijte jednoduchý filtr:
+
+```text
+Potvrdit:
+Stabilizovat hned.
+
+Lehce korigovat:
+Nejdřív provést korekci, potom stabilizovat pouze výslednou podobu.
+
+Vrátit k přepracování:
+Nestabilizovat. Vrátit do návrhu nebo revize.
+
+Zrušit:
+Odstranit stopu z pracovních míst a ponechat jen krátký záznam v changelogu.
+```
+
+Příklad:
+
+```text
+Ověření:
+Pole "dočasné exporty smazány" fungovalo, ale bylo ve špatné části šablony.
+
+Korekce:
+Pole bylo přesunuto do části "Podklady a úklid" a doplněno o nápovědu bez screenshotů.
+
+Stabilizovaný stav:
+Do běžného standardu patří už jen nová poloha pole a pravidlo "Bez příloh a screenshotů; stačí ano/ne."
+```
+
+Stabilizace nemá do standardu přenášet celý příběh. Přenáší aktuální pravidlo. Historie patří do changelogu, ne do každodenní instrukce.
+
+### 2. Vyberte jeden zdroj pravdy
+
+Ověřená úprava může být během změny zapsaná na více místech: v kartě úpravy, v ověřovacím záznamu, v komentáři u šablony, v interním úkolu a v changelogu. To je dočasně snesitelné. V běžném provozu je to recept na drift.
+
+Rozhodněte, kde bude kanonická podoba pravidla:
+
+```text
+Šablona:
+Když se pravidlo používá při vyplňování výstupu.
+
+Checklist:
+Když se pravidlo používá jako kontrola dokončení práce.
+
+Index standardů:
+Když lidé potřebují najít správný standard podle situace.
+
+Provozní karta:
+Když pravidlo patří k opakovanému rytmu nebo odpovědnosti.
+
+Onboardingový materiál:
+Když se pravidlo primárně učí nový člověk při převzetí role.
+```
+
+Příklad:
+
+```text
+Pravidlo:
+Dočasné exporty se po kontrole smažou a potvrzení se zapisuje bez příloh.
+
+Zdroj pravdy:
+Šablona měsíčního výstupu, protože člověk ji vyplňuje přímo při práci.
+
+Vedlejší místa:
+Index standardů bude obsahovat jen odkaz na šablonu, ne vlastní kopii pravidla.
+```
+
+Jedno pravidlo na dvou místech časem znamená dvě verze pravidla. A pak někdo stráví půl hodiny zjišťováním, která je pravější. To není kvalita, to je dokumentační karaoke.
+
+### 3. Přepište pravidlo do pracovního jazyka
+
+Stabilizovaný standard má mluvit jazykem člověka, který práci právě dělá. Nepotřebuje popisovat, jaké nálezy vedly ke změně. Potřebuje říct, co se udělá, kdy a jaký výstup stačí.
+
+Slabý stabilizační text:
+
+```text
+Na základě první kontroly a následného ověření provozní úpravy bylo rozhodnuto, že je vhodné zachovat pole pro dočasné exporty v upravené podobě.
+```
+
+Silnější pracovní text:
+
+```text
+Po dokončení kontroly smažte dočasné exporty a v části "Podklady a úklid" potvrďte stav polem "dočasné exporty smazány: ano/ne". Nepřikládejte screenshoty ani kopie složek.
+```
+
+První text vysvětluje administrativní rodokmen. Druhý pomáhá práci. Stabilizace má preferovat druhou variantu.
+
+Praktické pravidlo:
+
+```text
+Pokud věta nezačíná tím, co má člověk udělat nebo zkontrolovat, je možná moc historická.
+```
+
+Historii nevyhazujte úplně. Jen ji necpěte do místa, kde člověk potřebuje jednat.
+
+### 4. Uzavřete dočasné opory
+
+Během úpravy vznikají dočasné opory: experimentální úkoly, komentáře, kopie šablon, kontrolní poznámky, staré verze, připomínky v chatu nebo ruční upozornění. Po stabilizaci mají zmizet nebo se změnit na odkaz. Jinak tým začne žít ve dvou režimech: oficiální pravidlo a stíny změny kolem něj.
+
+Zkontrolujte:
+
+```text
+Existuje stará kopie šablony?
+
+Zůstal otevřený úkol, který už jen připomíná hotovou změnu?
+
+Obsahuje interní chat instrukci, která se liší od standardu?
+
+Má někdo uložený lokální postup nebo export?
+
+Vede index na starou verzi?
+
+Je v onboardingovém materiálu stará varianta?
+```
+
+Příklad úklidu:
+
+```text
+Ponechat:
+Kanonickou šablonu měsíčního výstupu a changelog větu.
+
+Zavřít:
+Úkol "ověřit pole exportů", komentář u staré šablony a dočasnou kopii šablony použitou při testu.
+
+Nahradit:
+Odkaz v indexu standardů tak, aby vedl na kanonickou šablonu.
+```
+
+Uzavření dočasných opor je nudná práce. Přesně proto je důležitá. V provozu se máloco rozpadá dramaticky. Častěji jen přibývají malé staré stopy, až se z nich stane interní bludiště.
+
+### 5. Udělejte privacy-first stabilizaci datové stopy
+
+Ověřená úprava často pracuje s důkazy: výstupy, exporty, screenshoty, ověřovací záznamy nebo dočasnými kopiemi. Při stabilizaci rozhodněte, co musí zůstat a co mělo smysl jen během ověření.
+
+Privacy-first stabilizace se ptá:
+
+```text
+Jaký nejmenší důkaz stačí pro běžný provoz?
+
+Které dočasné podklady se smažou?
+
+Které záznamy se anonymizují nebo zkrátí?
+
+Kdo má mít přístup ke kanonickému pravidlu?
+
+Kdo má mít přístup k ověřovacím podkladům?
+
+Kdy se ověřovací podklady odstraní nebo archivují?
+```
+
+Příklad:
+
+```text
+Běžný důkaz:
+Ano/ne potvrzení ve výstupu.
+
+Dočasné podklady:
+Screenshot prázdné složky se smaže.
+
+Ověřovací záznam:
+Zůstane bez osobních údajů a bez příloh.
+
+Retence:
+Dočasné exporty se mažou po dokončení kontroly, ověřovací poznámka se drží jen jako changelog bez zákaznických dat.
+```
+
+Privacy-first stabilizace není jen mazání. Je to rozhodnutí, jak má vypadat normální důkaz kvality bez zbytečného sběru dat. Dobrý provoz umí být dohledatelný, aniž by si pro jistotu schovával všechno.
+
+### 6. Předání udělejte krátké a pracovní
+
+Po stabilizaci informujte jen lidi, kteří pravidlo používají, vlastní nebo kontrolují. Není potřeba velké oznámení pro celý tým, pokud změna zasahuje jednu šablonu. Zpráva má říct, kde je aktuální pravidlo a co už neplatí.
+
+Šablona předání:
+
+```text
+Co je stabilizováno:
+
+Kde je aktuální pravidlo:
+
+Co se změnilo v běžné práci:
+
+Co už nepoužívat:
+
+Privacy-first poznámka:
+
+Kdy se znovu zkontroluje:
+```
+
+Příklad:
+
+```text
+Co je stabilizováno:
+Potvrzení smazání dočasných exportů při měsíční kontrole formulářů.
+
+Kde je aktuální pravidlo:
+Šablona měsíčního výstupu, část "Podklady a úklid".
+
+Co se změnilo v běžné práci:
+Po smazání exportů vyplnit ano/ne pole.
+
+Co už nepoužívat:
+Nepřikládat screenshoty prázdných složek a nepoužívat starou kopii šablony.
+
+Privacy-first poznámka:
+Stačí stavové potvrzení bez ukládání dalších podkladů.
+
+Kdy se znovu zkontroluje:
+Při nejbližší běžné kontrole standardu.
+```
+
+Krátké předání chrání tým před domněnkami. Lidé nemusí vědět všechno, co se stalo. Potřebují vědět, co dělat zítra ráno.
+
+### 7. Nastavte lehký signál návratu staré cesty
+
+Stabilizace není konec pozornosti. Staré chování se rádo vrací, hlavně když bylo pohodlné. Proto nastavte malý signál, který ukáže, že se tým vrací ke staré cestě.
+
+Signál má být přirozený:
+
+```text
+Ve výstupu se znovu objeví screenshot.
+
+Dočasný export zůstane po kontrole ve složce.
+
+Člověk se ptá na věc, kterou má řešit šablona.
+
+Někdo použije starou kopii postupu.
+
+Index vede na archivní verzi.
+```
+
+Příklad:
+
+```text
+Lehký signál:
+Při další běžné kontrole standardu se podívat jen na to, zda poslední dva výstupy obsahují ano/ne potvrzení bez příloh.
+```
+
+To není nový audit. Je to kontrolní háček. Když je vše v pořádku, nic se neděje. Když se stará cesta vrací, máte signál dřív, než z jedné obcházky vznikne nepsané pravidlo.
+
+### Stabilizační karta ověřené provozní úpravy
+
+```text
+Název standardu:
+
+Ověřená provozní úprava:
+
+Výsledek ověření:
+Potvrdit / lehce korigovat a potvrdit
+
+Stabilizovaný stav:
+
+Kanonický zdroj pravdy:
+
+Pracovní text pravidla:
+
+Dočasné opory k uzavření:
+
+Vedlejší místa k aktualizaci:
+
+Privacy-first stabilizace:
+Nejmenší dostatečný důkaz:
+Mazání dočasných podkladů:
+Přístupy:
+Retence:
+
+Krátké předání komu:
+
+Signál návratu staré cesty:
+
+Další kontrola:
+
+Changelog věta:
+```
+
+### Příklad vyplněné stabilizační karty
+
+```text
+Název standardu:
+Měsíční kontrola formulářů bez screenshotů zákaznických údajů.
+
+Ověřená provozní úprava:
+Pole "dočasné exporty smazány: ano/ne" v části "Podklady a úklid".
+
+Výsledek ověření:
+Lehce korigovat a potvrdit.
+
+Stabilizovaný stav:
+Po kontrole se dočasné exporty smažou a stav se potvrdí ano/ne polem bez příloh.
+
+Kanonický zdroj pravdy:
+Šablona měsíčního výstupu kontroly formulářů.
+
+Pracovní text pravidla:
+Po dokončení kontroly smažte dočasné exporty a v části "Podklady a úklid" potvrďte stav polem "dočasné exporty smazány: ano/ne". Nepřikládejte screenshoty ani kopie složek.
+
+Dočasné opory k uzavření:
+Ověřovací úkol, stará kopie šablony, screenshot z prvního použití.
+
+Vedlejší místa k aktualizaci:
+Index standardů odkazuje na aktuální šablonu, onboardingová poznámka odkazuje na stejný zdroj.
+
+Privacy-first stabilizace:
+Nejmenší dostatečný důkaz: ano/ne potvrzení.
+Mazání dočasných podkladů: exporty se mažou po dokončení kontroly.
+Přístupy: beze změny.
+Retence: žádné screenshoty ani kopie složek.
+
+Krátké předání komu:
+Role odpovědná za měsíční kontrolu formulářů a člověk, který udržuje index standardů.
+
+Signál návratu staré cesty:
+V posledních dvou výstupech se nesmí objevit screenshot ani chybějící potvrzení.
+
+Další kontrola:
+Při nejbližší běžné kontrole standardu.
+
+Changelog věta:
+Ověřená úprava mazání dočasných exportů byla stabilizována do šablony měsíčního výstupu; běžným důkazem je ano/ne potvrzení bez screenshotů.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst výsledek ověření a vybrat jen potvrzený stav.
+2. Tři minuty: určit jeden kanonický zdroj pravdy.
+3. Čtyři minuty: přepsat pravidlo do pracovního jazyka.
+4. Tři minuty: sepsat dočasné opory k uzavření.
+5. Tři minuty: projít privacy-first stabilizaci datové stopy.
+6. Dvě minuty: napsat krátké předání.
+7. Dvě minuty: nastavit signál návratu staré cesty a changelog větu.
+
+Výstupem workshopu je stabilizovaná úprava, ne nová revize standardu. Pokud se během workshopu objeví další zlepšení, patří do backlogu nálezů. Stabilizace má ukládat, ne rozšiřovat.
+
+### Checklist kapitoly
+
+- Stabilizujete jen potvrzený nebo po korekci potvrzený stav?
+- Nepřenášíte do běžného standardu celý příběh změny?
+- Má pravidlo jeden kanonický zdroj pravdy?
+- Jsou vedlejší místa jen odkazy nebo stručné orientace, ne duplicitní pravidla?
+- Je pracovní text srozumitelný člověku v okamžiku práce?
+- Uzavřeli jste dočasné úkoly, kopie, komentáře a staré odkazy?
+- Udělali jste privacy-first stabilizaci skutečné datové stopy?
+- Stačí běžnému provozu nejmenší dostatečný důkaz?
+- Jsou dočasné exporty, screenshoty nebo přílohy smazané nebo výslovně zakázané?
+- Dostali informaci jen lidé, kteří pravidlo používají, vlastní nebo kontrolují?
+- Je jasné, co už se nepoužívá?
+- Existuje lehký signál návratu staré cesty?
+- Má changelog jednu větu, která vysvětlí aktuální stav bez zbytečné historie?
+
+Stabilizace ověřené provozní úpravy je drobná, ale důležitá koncovka změny. Bez ní se zlepšení rozpadne mezi poznámky, kopie a vzpomínky. S ní se úprava stane normální součástí práce: jeden zdroj pravdy, krátké pravidlo, uklizené podklady, přiměřený důkaz a jasný signál, že se stará cesta nevrací.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IC o stabilizaci ověřené provozní úpravy do běžného standardu: potvrzený stav, kanonický zdroj pravdy, pracovní jazyk pravidla, uzavření dočasných opor, privacy-first stabilizace datové stopy, krátké předání, signál návratu staré cesty, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IB o ověření provozní úpravy po prvním normálním použití: výběr skutečného průchodu, návrat k úpravové větě, sledování cesty člověka k úpravě, porovnání výstupu před a po změně, privacy-first kontrola skutečné datové stopy, čtyři stavy rozhodnutí, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IA o převodu první kontroly stabilizovaného standardu do jedné provozní úpravy: rozhodovací věta z kontroly, výběr nálezu podle opakované ceny, úpravová věta, nejbližší pracovní místo, omezení rozsahu, privacy-first brána, ověření při nejbližší normální práci, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HZ o první kontrole stabilizovaného standardu v běžném provozu: kontrolní okno podle rytmu práce, ověření výsledku, cesty a ceny, třídění výjimek, privacy-first kontrola skutečných výstupů a dočasných podkladů, rozhodnutí stavu standardu, nejmenší možná oprava, další kontrola podle rizika, šablona, příklad, mini workshop a checklist.
