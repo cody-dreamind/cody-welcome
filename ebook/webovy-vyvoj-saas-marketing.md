@@ -66714,8 +66714,349 @@ Výstupem je stabilní standard, ne další balík úkolů. Pokud workshop začn
 
 Stabilizace potvrzené další verze provozu do běžného standardu je poslední krok mezi "změna fungovala" a "takhle teď normálně pracujeme". Čím kratší, jasnější a blíž skutečné práci standard je, tím menší šance, že se z něj stane další dokument, který všichni respektují hlavně tím, že ho neotevírají.
 
+## Příloha HZ: První kontrola stabilizovaného standardu v běžném provozu
+
+Stabilizovaný standard ještě není důkaz dlouhodobé užitečnosti. Je to dobrý začátek: pravidlo je zkrácené, má jedno kanonické místo, privacy-first hranice je součástí práce a dočasné opory jsou uklizené. Teprve první běžné období ale ukáže, jestli standard opravdu pomáhá lidem pracovat, nebo jestli jen vypadá hezky v dokumentaci.
+
+Pracovní otázka:
+
+```text
+Jak po prvním běžném období ověřit, že stabilizovaný standard drží výsledek, nezvyšuje zbytečně režii a nevytváří novou datovou stopu?
+```
+
+Tahle příloha je kontrola bez slavnostního auditu. Nejde o to dokázat, že autor standardu měl pravdu. Jde o to zjistit, jestli standard přežil kontakt s normální prací: spěchem, neúplnými vstupy, novým člověkem, drobnou výjimkou a únavou z dalších pravidel.
+
+Codyho komentář: standard, který funguje jen při ukázkovém průchodu, není standard. Je to demo s lepším oblečením. Skutečný standard poznáte až ve chvíli, kdy ho někdo použije mezi dvěma jinými úkoly a výsledek je pořád dobrý.
+
+### 1. Vyberte kontrolní okno podle rytmu práce
+
+Kontrola má přijít dost brzy na to, aby zachytila tření, ale dost pozdě na to, aby už existovalo několik normálních použití. Nevybírejte datum podle kalendářní elegance. Vyberte ho podle práce.
+
+Praktické pravidlo:
+
+```text
+Jednorázová nebo řídká práce:
+Kontrolujte po prvním skutečném použití.
+
+Měsíční práce:
+Kontrolujte po jednom až dvou měsíčních cyklech.
+
+Týdenní práce:
+Kontrolujte po třech až čtyřech týdnech.
+
+Denní práce:
+Kontrolujte po pěti až deseti normálních průchodech.
+```
+
+Příklad:
+
+```text
+Standard:
+Měsíční kontrola formulářů bez screenshotů zákaznických údajů.
+
+Kontrolní okno:
+Po dvou měsíčních kontrolách, protože jeden cyklus může být náhoda a tři cykly už by zbytečně prodlužovaly případné tření.
+```
+
+Kontrolní okno má být malé. Pokud kvůli němu vznikne rozsáhlý audit, standard začíná živit sám sebe. To je oblíbený sport procesů, ale horší sport pro produktivitu.
+
+### 2. Ověřte tři věci: výsledek, cestu a cenu
+
+První kontrola stabilizovaného standardu má sledovat tři jednoduché otázky:
+
+```text
+Výsledek:
+Vzniká výstup, kvůli kterému standard existuje?
+
+Cesta:
+Najde člověk správné pravidlo v okamžiku práce?
+
+Cena:
+Nepřidává standard víc režie, než kolik odstraňuje rizika nebo zmatku?
+```
+
+Příklad hodnocení:
+
+```text
+Výsledek:
+Obě měsíční kontroly obsahují odkaz na primární CRM záznam, anonymizovaný závěr a potvrzení smazání dočasných podkladů.
+
+Cesta:
+Člověk začínal v opakovaném úkolu a odtud šel do kanonické šablony. Nemusel hledat starý dokument.
+
+Cena:
+Vyplnění trvalo přibližně stejně dlouho jako dřív, ale bez kopírování screenshotů a bez dodatečného čištění osobních údajů.
+```
+
+Když výsledek sedí, cesta je jasná a cena je rozumná, standard je zdravý. Když sedí jen výsledek, ale cesta je nepříjemná, lidé ho budou časem obcházet. Když je cesta jasná, ale výsledek slabý, standard je čitelný, jen ne užitečný. A když je cena vysoká, i dobrý standard začne v týmu tiše ztrácet podporu.
+
+### 3. Sledujte výjimky bez trestání lidí
+
+Výjimka není automaticky selhání. Někdy ukáže, že standard potřebuje doplnit hranici. Někdy ukáže, že okolní systém posílá člověka špatnou cestou. A někdy ukáže jen to, že jeden vstup byl neobvyklý.
+
+U každé výjimky napište jednu z těchto značek:
+
+```text
+Chyba standardu:
+Pravidlo neříká, co dělat v běžné situaci.
+
+Chyba cesty:
+Pravidlo existuje, ale člověk ho v okamžiku práce nenašel.
+
+Chyba okolí:
+Navazující nástroj, úkol nebo šablona vede proti standardu.
+
+Skutečná výjimka:
+Situace je vzácná a nemá smysl kvůli ní měnit hlavní pravidlo.
+```
+
+Příklad:
+
+```text
+Nález:
+V jednom výstupu se objevil screenshot CRM.
+
+Značka:
+Chyba okolí.
+
+Důvod:
+Starý návod u supportního checklistu pořád doporučuje přiložit screenshot jako důkaz kontroly.
+
+Akce:
+Odstranit větu ze supportního checklistu a nahradit ji odkazem na kanonickou šablonu.
+```
+
+Tím chráníte standard před zbytečným bobtnáním. Není potřeba přidat další odstavec do hlavního pravidla, pokud problém sedí ve starém podpůrném materiálu.
+
+### 4. Udělejte privacy-first kontrolu skutečných výstupů
+
+Stabilizovaný standard má chránit datovou stopu v normální práci. Proto nestačí přečíst pravidlo. Je potřeba podívat se na skutečné výstupy, které podle něj vznikly.
+
+Kontrolujte:
+
+- jestli výstupy neobsahují osobní údaje, které tam být nemusí,
+- jestli se nepoužívají screenshoty místo odkazů na primární záznam,
+- jestli nevznikly dočasné kopie dat v chatu, dokumentech nebo přílohách,
+- jestli je jasné, kdo má k výstupu přístup,
+- jestli se dočasné podklady opravdu mažou,
+- jestli retenční pravidlo odpovídá účelu výstupu.
+
+Příklad privacy-first závěru:
+
+```text
+Skutečné výstupy:
+Dva měsíční záznamy kontroly formulářů.
+
+Nález:
+Bez screenshotů a bez ručních opisů e-mailu nebo telefonu. Jeden dočasný export zůstal ve sdílené složce o tři dny déle, než bylo potřeba.
+
+Akce:
+Do šablony doplnit povinné pole "dočasné exporty smazány: ano/ne" a při příštím měsíčním review ověřit jen tento bod.
+```
+
+Privacy-first kontrola má být konkrétní. Věta "data jsou v pořádku" je hezká, ale nic neříká. Lepší je napsat, které výstupy se kontrolovaly, jaká data se v nich objevila a co se uklidilo.
+
+### 5. Rozhodněte stav standardu jednou větou
+
+Po kontrole potřebujete rozhodnutí. Ne pět pocitů, ne hromadu poznámek, ne další velký projekt. Jednu větu, která řekne, co se se standardem děje dál.
+
+Použijte jeden ze čtyř stavů:
+
+```text
+Ponechat:
+Standard funguje, cena je přiměřená a nejsou potřeba změny.
+
+Ponechat s drobnou opravou:
+Standard funguje, ale jedno pracovní místo nebo pole potřebuje zpřesnit.
+
+Zkrátit:
+Standard funguje, ale obsahuje zbytečnou režii nebo duplicitní kroky.
+
+Vrátit do revize:
+Standard nedrží výsledek, cesta je nejasná nebo vytváří nepřijatelnou datovou stopu.
+```
+
+Příklad:
+
+```text
+Rozhodnutí:
+Ponechat s drobnou opravou: standard kontroly formulářů funguje bez screenshotů, ale šablona musí výslovně vyžadovat potvrzení smazání dočasných exportů.
+```
+
+Tato věta je důležitější než dlouhý zápis. Dlouhý zápis může zůstat jako podklad. Rozhodovací věta řídí další práci.
+
+### 6. Upravte nejmenší možné místo
+
+Pokud kontrola najde problém, nezačínejte přepisovat celý standard. Nejprve najděte nejmenší místo, které problém způsobuje nebo umožňuje.
+
+Pořadí zásahu:
+
+1. opravit starý odkaz nebo duplicitní instrukci,
+2. doplnit jedno pole do šablony,
+3. zkrátit pracovní instrukci,
+4. upravit opakovaný úkol nebo onboardingovou trasu,
+5. až potom měnit samotné kanonické pravidlo.
+
+Příklad:
+
+```text
+Problém:
+Dočasný export nebyl smazán hned po kontrole.
+
+Nejmenší oprava:
+Doplnit do šablony pole "dočasné exporty smazány: ano/ne".
+
+Co se nemění:
+Hlavní pravidlo bez screenshotů, kanonický zdroj pravdy ani měsíční rytmus.
+```
+
+Menší oprava je snáz ověřitelná. Když po každém nálezu otevřete celý standard, tým se naučí, že každá kontrola znamená další vlnu změn. Pak lidé raději nálezy nehlásí. Skvělý způsob, jak mít krásně klidné reporty a ošklivou realitu.
+
+### 7. Nastavte další kontrolu podle rizika
+
+Po první kontrole není nutné držet stejnou intenzitu navždy. Pokud standard funguje, kontrolu zlehčete. Pokud proběhla drobná oprava, ověřte jen opravené místo. Pokud se standard vrací do revize, stanovte nové ověření jako u změny, ne jako běžnou údržbu.
+
+Praktické nastavení:
+
+```text
+Ponechat:
+Další kontrola v běžném měsíčním nebo kvartálním review.
+
+Ponechat s drobnou opravou:
+Ověřit jen opravený bod při nejbližším normálním použití.
+
+Zkrátit:
+Ověřit, že zkrácení nesnížilo kvalitu výstupu.
+
+Vrátit do revize:
+Znovu formulovat problém a rozhodnout, zda standard opravit, sloučit nebo zrušit.
+```
+
+Příklad:
+
+```text
+Další kontrola:
+Při příští měsíční kontrole ověřit pouze pole "dočasné exporty smazány: ano/ne". Pokud je vyplněné a exporty nezůstávají ve sdílené složce, přesunout standard do kvartální kontroly šablon.
+```
+
+Tím standard nezmizí z radaru, ale ani si nezačne nárokovat víc pozornosti, než si zaslouží.
+
+### Šablona první kontroly stabilizovaného standardu
+
+```text
+Název standardu:
+
+Kanonický zdroj pravdy:
+
+Kontrolní okno:
+
+Kontrolované výstupy nebo průchody:
+
+Výsledek:
+Vzniká očekávaný výstup? Ano/ne/částečně.
+
+Cesta:
+Našel člověk pravidlo v okamžiku práce? Ano/ne/částečně.
+
+Cena:
+Je režie přiměřená hodnotě standardu? Ano/ne/částečně.
+
+Výjimky:
+Chyba standardu / chyba cesty / chyba okolí / skutečná výjimka
+
+Privacy-first kontrola:
+Jaká data se objevila ve výstupech:
+Jaké dočasné podklady vznikly:
+Co bylo smazáno nebo zkráceno:
+
+Rozhodnutí:
+Ponechat / ponechat s drobnou opravou / zkrátit / vrátit do revize
+
+Nejmenší oprava:
+
+Co se vědomě nemění:
+
+Další kontrola:
+
+Changelog věta:
+```
+
+### Příklad vyplněné kontroly
+
+```text
+Název standardu:
+Měsíční kontrola formulářů bez screenshotů zákaznických údajů.
+
+Kanonický zdroj pravdy:
+Šablona měsíčního výstupu kontroly formulářů.
+
+Kontrolní okno:
+Dva měsíční cykly po stabilizaci.
+
+Kontrolované výstupy nebo průchody:
+Dva vyplněné měsíční výstupy a opakovaný úkol, kterým práce začíná.
+
+Výsledek:
+Ano. Oba výstupy obsahují odkaz na primární CRM záznam a anonymizovaný závěr.
+
+Cesta:
+Ano. Opakovaný úkol vede do kanonické šablony, bez duplicitního pravidla.
+
+Cena:
+Ano. Práce netrvala déle než před změnou a odpadlo dodatečné čištění screenshotů.
+
+Výjimky:
+Chyba okolí: ve starém supportním checklistu zůstala věta o přiložení screenshotu.
+
+Privacy-first kontrola:
+Ve výstupech nejsou e-maily, telefony ani obsah formulářů. Jeden dočasný export zůstal ve sdílené složce déle, než bylo potřeba. Export byl smazán.
+
+Rozhodnutí:
+Ponechat s drobnou opravou.
+
+Nejmenší oprava:
+Odstranit větu o screenshotu ze supportního checklistu a do šablony doplnit pole "dočasné exporty smazány: ano/ne".
+
+Co se vědomě nemění:
+Hlavní pravidlo, kanonické místo ani měsíční rytmus.
+
+Další kontrola:
+Při příštím měsíčním použití ověřit jen nové pole a absenci staré screenshotové instrukce.
+
+Changelog věta:
+Po dvou běžných cyklech standard kontroly formulářů drží výstup bez screenshotů a ručních opisů; zůstává v platnosti s drobnou opravou šablony a odstraněním staré instrukce ze supportního checklistu.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: vybrat kontrolní okno a skutečné výstupy.
+2. Čtyři minuty: projít výsledek, cestu a cenu standardu.
+3. Čtyři minuty: označit výjimky jako chybu standardu, cesty, okolí nebo skutečnou výjimku.
+4. Čtyři minuty: udělat privacy-first kontrolu výstupů a dočasných podkladů.
+5. Tři minuty: napsat rozhodnutí a nejmenší opravu.
+6. Dvě minuty: nastavit další kontrolu a changelog větu.
+
+Výstupem má být jedna rozhodovací věta a případně jedna malá oprava. Pokud workshop končí třemi novými standardy, někdo se nechal unést. Stává se. Dejte mu kávu a vraťte se k nejmenšímu místu zásahu.
+
+### Checklist kapitoly
+
+- Vybrali jste kontrolní okno podle rytmu práce, ne podle pocitu?
+- Kontrolujete skutečné výstupy, ne jen existenci dokumentu?
+- Ověřili jste výsledek, cestu a cenu standardu?
+- Rozlišili jste chybu standardu, chybu cesty, chybu okolí a skutečnou výjimku?
+- Prošli jste privacy-first stopu ve skutečných výstupech?
+- Zkontrolovali jste dočasné exporty, screenshoty, přílohy a sdílené složky?
+- Rozhodli jste stav standardu jednou větou?
+- Vybrali jste nejmenší možnou opravu?
+- Je jasné, co se vědomě nemění?
+- Nastavili jste další kontrolu podle rizika?
+- Zapsali jste changelog tak, aby budoucí člověk pochopil aktuální stav?
+
+První kontrola stabilizovaného standardu je pojistka proti dvěma extrémům: slepé víře, že dokument znamená změnu, a procesní panice, která po každém nálezu přestaví půl systému. Dobrý standard se kontroluje prakticky, krátce a blízko práce. Když drží výsledek, cestu, cenu i datovou stopu, může konečně přejít z režimu "nová změna" do režimu "normální způsob práce".
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha HZ o první kontrole stabilizovaného standardu v běžném provozu: kontrolní okno podle rytmu práce, ověření výsledku, cesty a ceny, třídění výjimek, privacy-first kontrola skutečných výstupů a dočasných podkladů, rozhodnutí stavu standardu, nejmenší možná oprava, další kontrola podle rizika, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HY o stabilizaci potvrzené další verze provozu do běžného standardu: zkrácení historie na aktuální pravidlo, důvod a datovou hranici, výběr kanonického zdroje pravdy, odstranění dočasných opor, privacy-first hranice v pracovní instrukci, lehký signál návratu starého chování, stop pravidlo, changelog, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HX o ověření další verze provozu po prvním cyklu: výběr normálního cyklu, sledování cesty člověka k pravidlu, porovnání výstupu s rozhodovací větou, privacy-first kontrola skutečné datové stopy, tři možné stavy výsledku, malé korekce, changelog, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HW o převodu výsledku kontroly údržbového rytmu do další verze provozu: rozhodovací věta, výběr prvního pracovního místa, zavření staré cesty, privacy-first hranice v pracovním jazyce, nejbližší ověření bez nového procesu, vědomé neřešení širšího rozsahu, changelog, šablona, příklad, mini workshop a checklist.
