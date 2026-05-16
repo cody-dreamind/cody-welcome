@@ -68158,8 +68158,382 @@ Výstupem workshopu je stabilizovaná úprava, ne nová revize standardu. Pokud 
 
 Stabilizace ověřené provozní úpravy je drobná, ale důležitá koncovka změny. Bez ní se zlepšení rozpadne mezi poznámky, kopie a vzpomínky. S ní se úprava stane normální součástí práce: jeden zdroj pravdy, krátké pravidlo, uklizené podklady, přiměřený důkaz a jasný signál, že se stará cesta nevrací.
 
+## Příloha ID: Kontrola stabilizované provozní úpravy po prvních běžných cyklech
+
+Stabilizovaná provozní úprava vypadá po uložení do standardu hotově. Pravidlo je v kanonickém místě, staré kopie jsou zavřené, tým dostal krátké předání a privacy-first stopa je uklizená. Jenže skutečná zkouška nepřijde v okamžiku zápisu. Přijde až po několika běžných cyklech, kdy už nikdo nemá změnu čerstvě v hlavě a práce se vrátí do normálního tempa.
+
+Tahle kontrola odpovídá na jednoduchou otázku:
+
+```text
+Drží stabilizovaná úprava v běžné práci, nebo se tým vrací ke staré cestě, skryté pomoci a zbytečným datovým podkladům?
+```
+
+Nejde o audit pro audit. Jde o krátkou provozní kontrolu, která má potvrdit, že se úprava stala normální součástí práce. Pokud ne, neznamená to automaticky selhání člověka. Často to znamená, že pravidlo je na špatném místě, používá nejasný jazyk, stojí víc pozornosti než problém, který řeší, nebo vyžaduje důkaz, který v reálné práci nikdo nechce vytvářet.
+
+Codyho komentář: nejzrádnější změna je ta, která vypadá hotově v dokumentu a neexistuje v práci. Papír snese pravidlo. Provoz snese jen pravidlo, které najde správný člověk ve správnou chvíli a nemusí kvůli němu hrát malou detektivku.
+
+### 1. Vyberte dva až tři běžné cykly
+
+Kontrolujte normální použití, ne ukázkový průchod. Potřebujete vidět, co se stalo ve chvíli, kdy tým pracoval bez zvláštní pozornosti. Ideální vzorek jsou dva až tři poslední cykly, ve kterých mělo stabilizované pravidlo přirozeně proběhnout.
+
+Příklady cyklů:
+
+```text
+Měsíční kontrola formulářů:
+Poslední dvě měsíční kontroly.
+
+Týdenní review support šablon:
+Poslední tři týdenní review.
+
+Kvartální úklid dodavatelů:
+Poslední jeden kvartál a první přípravný záznam dalšího kvartálu.
+```
+
+Nevybírejte jen nejlepší průchod. Pokud jeden cyklus proběhl v chaosu, právě ten je užitečný. Standard má fungovat i ve dnech, kdy tým nemá ideální podmínky. Ne dokonale, ale dost dobře na to, aby člověk nemusel znovu vymýšlet postup.
+
+### 2. Vraťte se ke stabilizační větě
+
+Před kontrolou si přečtěte stabilizační nebo changelog větu. Ne celou historii změny. Jednu větu, která říká, co mělo být stabilizováno.
+
+Příklad:
+
+```text
+Ověřená úprava mazání dočasných exportů byla stabilizována do šablony měsíčního výstupu; běžným důkazem je ano/ne potvrzení bez screenshotů.
+```
+
+Z této věty odvoďte tři kontrolní otázky:
+
+```text
+Je pravidlo ve správném pracovním místě?
+
+Vznikl očekávaný výstup?
+
+Zůstala datová stopa stejně malá, jak bylo slíbeno?
+```
+
+Pokud stabilizační věta neumí tyto otázky vytvořit, je sama příliš mlhavá. V tom případě nejdřív zpřesněte větu, ne kontrolu. Kontrola bez jasného slibu se rychle změní v obecné "podíváme se, jak to funguje", což je oblíbený začátek dlouhého meetingu a krátkého výsledku.
+
+### 3. Sledujte cestu k pravidlu
+
+Nejdůležitější signál není jen to, zda výstup existuje. Důležité je, jak se k němu člověk dostal. Stabilizované pravidlo má být nalezitelné v okamžiku práce. Pokud ho člověk použil jen proto, že mu ho někdo připomněl, standard ještě nežije samostatně.
+
+Sledujte:
+
+```text
+Našel člověk pravidlo v kanonickém místě?
+
+Použil správnou šablonu nebo pracovní kartu?
+
+Nemusel hledat staré vlákno, komentář nebo kopii?
+
+Nepotřeboval ruční připomenutí od autora změny?
+
+Nebylo pravidlo obejito osobním návykem?
+```
+
+Příklad:
+
+```text
+Stav:
+V obou kontrolách bylo pole ano/ne vyplněné.
+
+Skrytý problém:
+Člověk ho vyplnil až po připomenutí v chatu, protože ve výstupní šabloně bylo pole dole pod archivní poznámkou.
+
+Nález:
+Pravidlo existuje, ale není ve správném okamžiku práce dost viditelné.
+```
+
+Takový nález neznamená přepsat celý standard. Znamená posunout pravidlo blíž k místu, kde člověk rozhoduje.
+
+### 4. Porovnejte výstup, cenu a datovou stopu
+
+Kontrola má sledovat tři věci najednou. Výstup říká, jestli pravidlo dodalo slib. Cena říká, jestli jeho používání nevytvořilo nové tření. Datová stopa říká, jestli zůstala privacy-first hodnota skutečně v provozu, ne jen v textu.
+
+Použijte krátkou scorecard:
+
+```text
+Výstup:
+Vznikl očekávaný důkaz nebo pracovní výsledek?
+
+Cesta:
+Našel člověk pravidlo bez záchrany?
+
+Cena:
+Přibyla ruční práce, čekání nebo vysvětlování?
+
+Datová stopa:
+Nepřibyly screenshoty, exporty, přílohy, kopie nebo delší retence?
+
+Staré chování:
+Neobjevila se původní cesta v jiné podobě?
+```
+
+Příklad:
+
+```text
+Výstup: ano, obě kontroly mají potvrzení smazání exportů.
+Cesta: částečně, jeden průchod potřeboval připomenutí.
+Cena: nízká, potvrzení zabralo pár sekund.
+Datová stopa: dobrá, žádné nové screenshoty ani kopie.
+Staré chování: jednou se objevil odkaz na starou kopii šablony.
+```
+
+To je dobrý výsledek s jednou malou úpravou. Není potřeba zakládat novou pracovní skupinu. Stačí odstranit starý odkaz a posunout pole ve šabloně.
+
+### 5. Hledejte návrat staré cesty
+
+Staré chování se často nevrátí celé. Vrátí se jako pohodlná zkratka:
+
+```text
+Screenshot se už nejmenuje důkaz, ale "rychlá kontrola".
+
+Stará šablona se používá "jen pro jistotu".
+
+Dočasný export zůstává "než se to ověří".
+
+Changelog věta se kopíruje do dalších míst, až vznikne druhý zdroj pravdy.
+
+Ruční připomenutí v chatu se tváří jako běžná součást procesu.
+```
+
+Kontrola má tyto zkratky pojmenovat bez dramatu. Staré chování není morální selhání. Je to signál, že původní cesta měla nějakou výhodu: byla rychlejší, známější, viditelnější nebo dávala člověku falešný pocit bezpečí.
+
+Otázka není:
+
+```text
+Kdo to zase obešel?
+```
+
+Lepší otázka:
+
+```text
+Co stará cesta pořád řeší lépe než nový standard?
+```
+
+Když odpověď zní "je viditelnější", upravte umístění. Když zní "dává silnější důkaz", zpřesněte nejmenší dostatečný důkaz. Když zní "je rychlejší", zkraťte pravidlo. Když zní "nikdo neví, kde je nová šablona", opravte index a onboarding.
+
+### 6. Udělejte privacy-first kontrolu skutečných artefaktů
+
+Privacy-first kontrola se nedělá podle toho, co standard tvrdí. Dělá se podle toho, co po práci skutečně zůstalo.
+
+Zkontrolujte:
+
+```text
+Zůstaly po cyklech dočasné exporty?
+
+Vznikly nové screenshoty, které standard nechtěl?
+
+Obsahuje ověřovací záznam osobní nebo zákaznické údaje navíc?
+
+Nekopíruje se stejný důkaz do více nástrojů?
+
+Má ke kanonickému pravidlu přístup jen potřebná role?
+
+Je retence důkazů pořád přiměřená účelu?
+```
+
+Příklad:
+
+```text
+Nález:
+Dočasné exporty byly smazané, ale v jednom cyklu zůstal screenshot složky v interním úkolu.
+
+Rozhodnutí:
+Screenshot smazat, v šabloně doplnit větu "nepřikládat screenshot prázdné složky" přímo k poli ano/ne.
+```
+
+To je typická malá oprava. Privacy-first provoz nestojí na velkých prohlášeních. Stojí na tom, že se podobné zbytky rychle najdou a nevytvoří nový normál.
+
+### 7. Rozhodněte stav standardu
+
+Po kontrole vyberte jeden stav. Ne "budeme sledovat". To je často jen slušnější název pro nerozhodnutí.
+
+Použijte čtyři stavy:
+
+```text
+Drží:
+Standard funguje v běžné práci, cena je přijatelná a datová stopa odpovídá slibu.
+
+Drží s malou úpravou:
+Výsledek je dobrý, ale je potřeba opravit umístění, text, starý odkaz nebo drobný privacy-first zbytek.
+
+Vrátit k revizi:
+Pravidlo se opakovaně hledá těžko, vytváří skrytou práci nebo neřeší původní tření.
+
+Ukončit:
+Úprava už nedává smysl, problém zmizel, nebo cena pravidla převyšuje přínos.
+```
+
+Příklad rozhodovací věty:
+
+```text
+Standard drží s malou úpravou: potvrzení smazání exportů se používá, ale pole se přesune výš v šabloně a smaže se starý odkaz v indexu.
+```
+
+Dobrá rozhodovací věta obsahuje výsledek a nejbližší zásah. Nemusí popsat celý průběh. Zbytek patří do kontrolní karty.
+
+### 8. Upravte jen nejmenší místo
+
+Pokud kontrola ukáže malý problém, udělejte malou opravu. Stabilizovaný standard po prvních cyklech nepotřebuje novou architekturu, pokud stačí přesunout větu, smazat starý odkaz nebo přejmenovat pole.
+
+Typické malé zásahy:
+
+```text
+Přesunout pravidlo blíž k okamžiku práce.
+
+Zkrátit větu na jasný příkaz.
+
+Smazat starou šablonu nebo archivní odkaz.
+
+Doplnit příklad nejmenšího dostatečného důkazu.
+
+Odstranit povinnost, která vytváří zbytečný artefakt.
+
+Zpřesnit retenční větu.
+```
+
+Příklad:
+
+```text
+Původní text:
+Po dokončení kontroly nezapomeňte provést úklid podkladů.
+
+Upravený text:
+Po dokončení kontroly smažte dočasné exporty. Do pole "exporty smazány" napište ano/ne. Nepřikládejte screenshot.
+```
+
+Tahle úprava je malá, ale prakticky silnější. Říká, co udělat, jaký důkaz stačí a co nevytvářet.
+
+### Kontrolní karta po prvních běžných cyklech
+
+```text
+Název standardu:
+
+Stabilizovaná úprava:
+
+Kontrolované cykly:
+
+Stabilizační věta:
+
+Výstup:
+Co mělo vzniknout:
+Co skutečně vzniklo:
+
+Cesta k pravidlu:
+Kde člověk pravidlo našel:
+Kde hledal mimo kanonické místo:
+Byla potřeba ruční pomoc:
+
+Cena používání:
+Nová práce navíc:
+Skryté připomínání:
+Čekání nebo opakované vysvětlování:
+
+Privacy-first kontrola:
+Dočasné exporty:
+Screenshoty nebo přílohy:
+Kopie v jiných nástrojích:
+Retence:
+Přístupy:
+
+Návrat staré cesty:
+
+Rozhodnutí:
+Drží / drží s malou úpravou / vrátit k revizi / ukončit
+
+Nejmenší další zásah:
+
+Další kontrola:
+
+Changelog věta:
+```
+
+### Příklad vyplněné kontrolní karty
+
+```text
+Název standardu:
+Měsíční kontrola formulářů bez screenshotů zákaznických údajů.
+
+Stabilizovaná úprava:
+Potvrzení smazání dočasných exportů polem ano/ne.
+
+Kontrolované cykly:
+Dvě poslední měsíční kontroly.
+
+Stabilizační věta:
+Ověřená úprava mazání dočasných exportů byla stabilizována do šablony měsíčního výstupu; běžným důkazem je ano/ne potvrzení bez screenshotů.
+
+Výstup:
+Co mělo vzniknout: ano/ne potvrzení bez příloh.
+Co skutečně vzniklo: potvrzení vzniklo v obou cyklech.
+
+Cesta k pravidlu:
+Kde člověk pravidlo našel: v šabloně výstupu.
+Kde hledal mimo kanonické místo: jednou starý odkaz v indexu.
+Byla potřeba ruční pomoc: v prvním cyklu ano, ve druhém ne.
+
+Cena používání:
+Nová práce navíc: minimální.
+Skryté připomínání: jednou.
+Čekání nebo opakované vysvětlování: ne.
+
+Privacy-first kontrola:
+Dočasné exporty: smazané.
+Screenshoty nebo přílohy: jeden screenshot z prvního cyklu zůstal v úkolu.
+Kopie v jiných nástrojích: starý odkaz v indexu.
+Retence: upravit, screenshot smazat.
+Přístupy: beze změny.
+
+Návrat staré cesty:
+Částečný návrat přes screenshot a starý odkaz.
+
+Rozhodnutí:
+Drží s malou úpravou.
+
+Nejmenší další zásah:
+Smazat screenshot, odstranit starý odkaz v indexu a přesunout pole výš v šabloně.
+
+Další kontrola:
+Při příští měsíční kontrole ověřit jen poslední výstup.
+
+Changelog věta:
+Kontrola po dvou cyklech potvrdila stabilizovanou úpravu; doplněn úklid starého odkazu a odstraněn zbytkový screenshot.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: vybrat dva až tři běžné cykly.
+2. Dvě minuty: přečíst stabilizační větu a odvodit kontrolní otázky.
+3. Čtyři minuty: projít cestu k pravidlu a výstupy.
+4. Čtyři minuty: udělat privacy-first kontrolu skutečných artefaktů.
+5. Tři minuty: pojmenovat návrat staré cesty nebo skrytou pomoc.
+6. Dvě minuty: vybrat stav standardu.
+7. Dvě minuty: napsat nejmenší další zásah a changelog větu.
+
+Výstupem workshopu je rozhodnutí, ne seznam všeho, co by šlo zlepšit. Pokud kontrola odkryje větší problém, vraťte standard k revizi. Pokud ukáže jen drobné tření, opravte nejbližší pracovní místo a nepřidávejte nový proces.
+
+### Checklist kapitoly
+
+- Kontrolujete normální cykly, ne ukázkový průchod?
+- Máte stabilizační větu, která říká, co mělo držet?
+- Ověřili jste, zda člověk našel pravidlo v kanonickém místě?
+- Nevznikla skrytá ruční pomoc od autora změny?
+- Porovnali jste výstup, cestu, cenu a datovou stopu?
+- Hledali jste návrat staré cesty v menších zkratkách?
+- Zkontrolovali jste skutečné artefakty, ne jen text standardu?
+- Nezůstaly dočasné exporty, screenshoty, přílohy nebo kopie?
+- Je retence důkazů pořád přiměřená účelu?
+- Vybrali jste jeden stav: drží, drží s malou úpravou, vrátit k revizi, ukončit?
+- Má malý nález malou opravu v nejbližším pracovním místě?
+- Nevznikl nový proces jen kvůli jedné drobné kontrole?
+- Existuje changelog věta, která vysvětlí stav pozdějšímu čtenáři?
+
+Kontrola stabilizované provozní úpravy po prvních běžných cyklech chrání tým před dokumentační iluzí. Ukáže, jestli standard opravdu drží v práci, jestli se stará cesta nevrací zadními dveřmi a jestli privacy-first slib přežil kontakt s provozem. Když je odpověď ano, stačí krátký záznam. Když je odpověď skoro ano, stačí malá oprava. A když je odpověď ne, je lepší to zjistit po dvou cyklech než po půl roce nánosů.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha ID o kontrole stabilizované provozní úpravy po prvních běžných cyklech: výběr normálních cyklů, návrat ke stabilizační větě, cesta k pravidlu, porovnání výstupu, ceny a datové stopy, hledání návratu staré cesty, privacy-first kontrola artefaktů, rozhodnutí stavu standardu, nejmenší další zásah, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IC o stabilizaci ověřené provozní úpravy do běžného standardu: potvrzený stav, kanonický zdroj pravdy, pracovní jazyk pravidla, uzavření dočasných opor, privacy-first stabilizace datové stopy, krátké předání, signál návratu staré cesty, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IB o ověření provozní úpravy po prvním normálním použití: výběr skutečného průchodu, návrat k úpravové větě, sledování cesty člověka k úpravě, porovnání výstupu před a po změně, privacy-first kontrola skutečné datové stopy, čtyři stavy rozhodnutí, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IA o převodu první kontroly stabilizovaného standardu do jedné provozní úpravy: rozhodovací věta z kontroly, výběr nálezu podle opakované ceny, úpravová věta, nejbližší pracovní místo, omezení rozsahu, privacy-first brána, ověření při nejbližší normální práci, šablona, příklad, mini workshop a checklist.
