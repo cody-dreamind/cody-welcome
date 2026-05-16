@@ -65733,8 +65733,324 @@ Výstupem je rozhodnutí o životnosti rytmu. Pokud workshop skončí větou "mu
 
 Kontrola údržbového rytmu po prvních cyklech je zdravá brzda. Pomáhá ponechat to, co chrání práci, zkrátit to, co už splnilo účel, a odstranit to, co jen zabírá místo. Dobrá údržba není nekonečné hlídání. Je to schopnost pravidelně rozhodnout, co si zaslouží zůstat.
 
+## Příloha HW: Převod výsledku kontroly údržbového rytmu do další verze provozu
+
+Kontrola údržbového rytmu má hodnotu až ve chvíli, kdy se její závěr promění v upravenou práci. Nestačí napsat, že rytmus ponecháváme, zkracujeme, přesouváme nebo rušíme. Někdo musí změnit konkrétní pracovní místo, zavřít starou cestu, upravit datovou hranici a zapsat, co se od příštího cyklu očekává.
+
+Pracovní otázka:
+
+```text
+Jak převést rozhodnutí po kontrole rytmu do jedné další provozní verze tak, aby tým při příštím cyklu nemusel znát celou historii?
+```
+
+Tahle příloha je o malém provedení. Ne o dalším review, ne o širší reorganizaci, ne o filozofii procesů. Máte rozhodnutí z kontroly a teď ho potřebujete dostat do místa, kde lidé opravdu pracují.
+
+Codyho komentář: nejhorší provozní rozhodnutí nejsou ta, která jsou špatně napsaná. Nejhorší jsou ta, která zůstanou napsaná jen v zápisu z meetingu. Proces pak vypadá, že se zlepšil, ale v reálné práci běží stará verze. Papír spokojený, tým zmatený. Skvělá kombinace, pokud sbíráte chaos jako hobby.
+
+### 1. Začněte jednou rozhodovací větou
+
+Z kontroly údržbového rytmu vezměte jen finální stav a přepište ho do jedné pracovní věty. Ta má říkat, co se mění od příštího cyklu.
+
+Slabý zápis:
+
+```text
+Rytmus funguje dobře, ale asi by se dal zjednodušit.
+```
+
+Silnější zápis:
+
+```text
+Od příští měsíční kontroly formulářů zůstává jen jedna věta v šabloně výstupu; samostatný kontrolní háček v opakovaném úkolu se ruší.
+```
+
+Rozdíl je praktický. První věta popisuje dojem. Druhá věta mění provoz.
+
+Dobrá rozhodovací věta obsahuje:
+
+- pracovní místo, kde se změna projeví,
+- stav rytmu po kontrole,
+- jednu konkrétní úpravu,
+- okamžik, od kdy platí,
+- privacy-first hranici, pokud se dotýká dat.
+
+Příklad s privacy-first hranicí:
+
+```text
+Od další kontroly formulářů se výstup zapisuje pouze jako odkaz na primární CRM záznam a anonymizovaný závěr; ruční opis e-mailu ani screenshot se nepoužívá.
+```
+
+Tohle už může někdo udělat. Není potřeba interpretovat náladu autora zápisu.
+
+### 2. Vyberte jedno místo, které se upraví jako první
+
+Po kontrole rytmu často najdete několik míst, která by šla upravit. Opakovaný úkol, šablona, checklist, onboardingová trasa, provozní karta, interní index. Pokud je změníte všechna najednou, z malé provozní úpravy se stane mini projekt.
+
+Začněte místem, které člověk otevře při příštím normálním cyklu.
+
+Možná rozhodnutí:
+
+```text
+Pokud se rytmus zkracuje:
+Uprav šablonu výstupu jako první a až potom smaž samostatný háček.
+
+Pokud se rytmus přesouvá:
+Uprav nové pracovní místo jako první a staré místo označ krátkou přesměrovací větou.
+
+Pokud se rytmus ruší:
+Smaž spouštěč tam, kde by vyvolal další práci, a ponech jen changelog záznam.
+
+Pokud se rytmus opravuje:
+Uprav větu přímo v místě práce, ne v retrospektivním dokumentu.
+```
+
+Příklad:
+
+```text
+Rozhodnutí po kontrole:
+Rytmus zkrátit.
+
+První místo změny:
+Šablona výstupu měsíční kontroly formulářů.
+
+Úprava:
+Přidat větu "Nepřikládej screenshot zákaznických údajů; použij odkaz na primární CRM záznam a anonymizovaný závěr."
+```
+
+Teprve potom smažte starý háček v opakovaném úkolu. Jinak můžete odstranit připomínku dřív, než nová práce dostane oporu.
+
+### 3. Zavřete starou cestu
+
+Každá provozní úprava má starou cestu, která může zůstat ležet v systému. Starý checklist, stará šablona, starý odkaz v indexu, starý postup ve wiki, starý příklad v onboardingovém materiálu. Když ho necháte žít, tým si vybere podle náhody.
+
+Zavření staré cesty neznamená dramatický úklid. Stačí jedna z těchto akcí:
+
+- smazat starý řádek,
+- nahradit ho novou větou,
+- přidat přesměrování na kanonické místo,
+- označit starou šablonu jako archivovanou,
+- odstranit odkaz z indexu,
+- doplnit krátký changelog.
+
+Příklad přesměrování:
+
+```text
+Tento kontrolní háček byl po třech cyklech zrušen. Aktuální pravidlo je v šabloně výstupu měsíční kontroly formulářů.
+```
+
+Příklad archivace:
+
+```text
+Archivováno 2026-05-16:
+Samostatná kontrola screenshotů byla zrušena. Pravidlo zůstává jako jedna věta v šabloně výstupu.
+```
+
+Starou cestu nenechávejte beze slov. Ticho v dokumentaci je jen elegantní forma pasti.
+
+### 4. Přepište privacy-first hranici do pracovního jazyka
+
+Pokud se rytmus týká dat, musí se privacy-first závěr dostat z kontroly do každodenní práce. Ne jako právní odstavec, ale jako jasná pracovní instrukce.
+
+Slabá věta:
+
+```text
+Dodržovat zásady ochrany osobních údajů.
+```
+
+Silnější věta:
+
+```text
+Do výstupu nekopíruj obsah formuláře, e-mail ani telefon; použij odkaz na primární záznam a anonymizovaný závěr.
+```
+
+Ještě silnější věta pro šablonu:
+
+```text
+Důkaz kontroly:
+Odkaz na primární záznam:
+Anonymizovaný závěr:
+Dočasné podklady smazány: ano/ne
+```
+
+Taková instrukce je praktická. Nevyžaduje, aby člověk při každé kontrole znovu přemýšlel, co přesně znamená "minimalizace dat".
+
+Privacy-first překlad si udělejte přes tři otázky:
+
+1. Jaká data už kvůli rytmu nemají vznikat?
+2. Jaký nejmenší důkaz stačí?
+3. Kde se má důkaz uložit, aby nevznikla další kopie?
+
+Příklad:
+
+```text
+Už nevzniká:
+Screenshot CRM ani ruční opis kontaktních údajů.
+
+Stačí:
+Odkaz na primární CRM záznam a anonymizovaný závěr.
+
+Ukládá se:
+Pouze v měsíčním výstupu kontroly, ne v chatu ani v další tabulce.
+```
+
+Tohle je přesně ten druh nudné věty, která šetří budoucí incidenty. Nudné věci mají v provozu často nejlepší návratnost. Bohužel se hůř prodávají na plakátu.
+
+### 5. Nastavte nejbližší ověření bez nového procesu
+
+Každá další provozní verze potřebuje ověření. Ale ověření nemusí znamenat nový meeting, nový report ani další dashboard. Stačí se podívat při nejbližším normálním použití.
+
+Ověření napište jako háček:
+
+```text
+Při příští měsíční kontrole ověřit, že člověk našel pravidlo v šabloně výstupu bez samostatného kontrolního háčku.
+```
+
+Nebo:
+
+```text
+Při příštím onboardingovém průchodu ověřit, že nová role použila kanonickou šablonu a ne starý archivovaný dokument.
+```
+
+Ověření má sledovat:
+
+- jestli člověk našel nové místo,
+- jestli výstup odpovídá rozhodnutí,
+- jestli se stará cesta nevrátila,
+- jestli nevznikla větší datová stopa,
+- jestli změna nepotřebuje drobnou korekci.
+
+Nepřidávejte obecné "budeme sledovat". Napište, kde přesně se podíváte a co bude stačit jako důkaz.
+
+### 6. Rozhodněte, co se neudělá
+
+Po kontrole rytmu často vznikne chuť opravit okolní systém. To může být správné, ale není to cílem této iterace. Tady převádíte jeden závěr do jedné další verze provozu.
+
+Zapište vědomé neřešení:
+
+```text
+Teď neupravujeme celý provozní manuál. Měníme jen šablonu výstupu a rušíme samostatný háček v opakovaném úkolu.
+```
+
+Nebo:
+
+```text
+Teď nepřidáváme nový dashboard. Ověření proběhne při příštím normálním použití šablony.
+```
+
+Vědomé neřešení chrání malou úpravu před bobtnáním. Není to lenost. Je to provozní disciplína. A ano, zní to méně epicky než "komplexní transformace", ale má větší šanci, že se to opravdu stane.
+
+### 7. Zapište změnu do changelogu
+
+Changelog nemá být kronika všeho, co se komu honilo hlavou. Má vysvětlit, co se změnilo a kde je aktuální pravda.
+
+Dobrá changelog věta:
+
+```text
+Po kontrole prvních tří cyklů byl samostatný údržbový háček zrušen a pravidlo bylo ponecháno jako jedna věta v šabloně výstupu; aktuální zdroj pravdy je šablona měsíční kontroly formulářů.
+```
+
+Ještě lepší, pokud je potřeba privacy-first dopad:
+
+```text
+Změna zároveň potvrzuje, že výstup nemá obsahovat screenshoty ani ruční opis zákaznických údajů; stačí odkaz na primární záznam a anonymizovaný závěr.
+```
+
+Changelog pište tak, aby člověk za tři měsíce pochopil, proč starý háček zmizel. Bez toho se bude ptát, jestli ho někdo nesmazal omylem. A pak ho možná z dobré vůle vrátí. Což je přesně ten typ dobra, který páchá malé provozní škody.
+
+### Šablona převodu do další provozní verze
+
+```text
+Název rytmu:
+
+Rozhodnutí po kontrole:
+Ponechat / zkrátit / přesunout / sloučit / opravit / zrušit
+
+Jedna rozhodovací věta:
+
+První pracovní místo změny:
+
+Konkrétní úprava:
+
+Stará cesta, kterou zavíráme:
+
+Privacy-first hranice:
+Co už nekopírovat:
+Jaký důkaz stačí:
+Kde bude uložen:
+Kdy mazat dočasné podklady:
+
+Nejbližší ověření:
+
+Co teď vědomě neřešíme:
+
+Changelog věta:
+```
+
+### Příklad vyplněného převodu
+
+```text
+Název rytmu:
+Kontrola výstupu formulářů bez screenshotů zákaznických údajů.
+
+Rozhodnutí po kontrole:
+Zkrátit.
+
+Jedna rozhodovací věta:
+Od příští měsíční kontroly zůstává pravidlo jen v šabloně výstupu; samostatný kontrolní háček v opakovaném úkolu se ruší.
+
+První pracovní místo změny:
+Šablona výstupu měsíční kontroly formulářů.
+
+Konkrétní úprava:
+Přidat větu: "Do výstupu nevkládej screenshot ani kontaktní údaje; použij odkaz na primární CRM záznam a anonymizovaný závěr."
+
+Stará cesta, kterou zavíráme:
+Samostatný kontrolní háček v opakovaném úkolu "Měsíční kontrola formulářů".
+
+Privacy-first hranice:
+Co už nekopírovat: obsah formuláře, e-mail, telefon, screenshot CRM.
+Jaký důkaz stačí: odkaz na primární CRM záznam a anonymizovaný závěr.
+Kde bude uložen: pouze ve výstupu měsíční kontroly.
+Kdy mazat dočasné podklady: hned po uzavření kontroly.
+
+Nejbližší ověření:
+Při příští měsíční kontrole ověřit, že člověk našel pravidlo v šabloně a výstup neobsahuje nové kopie zákaznických dat.
+
+Co teď vědomě neřešíme:
+Nepřepisujeme celý provozní manuál a nepřidáváme nový dashboard.
+
+Changelog věta:
+Po kontrole prvních tří cyklů byl samostatný údržbový háček zrušen a pravidlo bylo ponecháno v šabloně výstupu; privacy-first hranice zůstává odkaz na primární záznam a anonymizovaný závěr bez screenshotů.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst rozhodnutí z kontroly rytmu a napsat jednu rozhodovací větu.
+2. Čtyři minuty: vybrat první pracovní místo změny.
+3. Čtyři minuty: zavřít starou cestu nebo napsat přesměrovací větu.
+4. Čtyři minuty: přepsat privacy-first hranici do pracovního jazyka.
+5. Tři minuty: určit nejbližší ověření bez nového procesu.
+6. Dvě minuty: napsat changelog větu.
+
+Výstupem je malý změnový balíček, který může někdo rovnou provést. Pokud po dvaceti minutách řešíte redesign celé dokumentace, vraťte se k rozhodovací větě. Dnešní úkol je převod jednoho závěru, ne festival ambicí.
+
+### Checklist kapitoly
+
+- Máte jednu rozhodovací větu, která říká, co platí od příštího cyklu?
+- Vybrali jste první pracovní místo, které se skutečně otevře při normální práci?
+- Je konkrétní úprava menší než nový proces?
+- Zavřeli jste starou cestu, aby se nevrátila omylem?
+- Je privacy-first hranice napsaná jako pracovní instrukce, ne jako obecné přání?
+- Je jasné, jaký nejmenší důkaz stačí?
+- Nevzniká kvůli ověření nový report, tabulka nebo dashboard?
+- Zapsali jste, co teď vědomě neřešíte?
+- Má changelog věta aktuální zdroj pravdy?
+- Pochopí změnu člověk, který nebyl u kontroly rytmu?
+
+Převod výsledku kontroly údržbového rytmu do další verze provozu je chvíle, kdy se dobrý závěr stane skutečnou změnou. Nejlepší výsledek není dlouhý zápis. Nejlepší výsledek je upravené pracovní místo, zavřená stará cesta, jasná datová hranice a příští cyklus, který proběhne lépe bez velkého vysvětlování.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha HW o převodu výsledku kontroly údržbového rytmu do další verze provozu: rozhodovací věta, výběr prvního pracovního místa, zavření staré cesty, privacy-first hranice v pracovním jazyce, nejbližší ověření bez nového procesu, vědomé neřešení širšího rozsahu, changelog, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HV o kontrole údržbového rytmu po prvních cyklech: výběr skutečného kontrolního okna, návrat k původnímu slibu, sledování výstupů místo rituálu, praktická cena rytmu, návrat starého chování, privacy-first audit, rozhodnutí dalšího stavu, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HU o převodu potvrzeného udržovacího záznamu do údržbového rytmu: vyhodnocení první kontroly, opakující se riziko, nejmenší přirozený rytmus, vlastnictví podle role, privacy-first signály bez špehování, zápis do jednoho pracovního místa, stop pravidlo, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HT o kontrole udržovacího záznamu po prvním použití: výběr normálního průchodu, signály nalezení/rozhodnutí/výstupu, rozlišení chyby záznamu a okolí, zkracování místo bobtnání, privacy-first kontrola datové stopy, rozhodnutí dalšího stavu, šablona, příklad, mini workshop a checklist.
