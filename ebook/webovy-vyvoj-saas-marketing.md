@@ -65411,8 +65411,331 @@ Výstupem není nový procesní manuál. Výstupem je jeden lehký háček v exi
 
 Převod potvrzeného udržovacího záznamu do údržbového rytmu je malý, ale důležitý krok. Chrání užitečné rozhodnutí před zapomenutím, aniž by z něj dělal věčný administrativní pomník. Dobrý rytmus je lehký, blízko práce, měří jen to, co potřebuje, a od začátku ví, kdy má zmizet.
 
+## Příloha HV: Kontrola údržbového rytmu po prvních cyklech
+
+Údržbový rytmus je užitečný jen tehdy, když po několika skutečných průchodech pořád chrání práci a nepřidává víc tření než hodnoty. První nastavení může vypadat rozumně, ale teprve běžné používání ukáže, jestli je rytmus na správném místě, jestli ho lidé najdou bez vysvětlování a jestli kontroluje výstup místo toho, aby sbíral zbytečná data.
+
+Pracovní otázka:
+
+```text
+Pomohl údržbový rytmus po prvních cyklech udržet správné chování, nebo se z něj stala další vrstva práce bez jasného rozhodnutí?
+```
+
+Tahle kontrola nemá hledat dokonalost. Má rozhodnout, co se má s rytmem stát dál: ponechat, zkrátit, přesunout, sloučit, opravit nebo zrušit. Pokud rytmus neumí projít takovou kontrolou, není stabilní součást provozu. Je to jen připomínka, která zatím měla dobré úmysly.
+
+Codyho komentář: dobrý provoz se nepozná podle počtu pravidel. Pozná se podle toho, kolik pravidel opravdu pomáhá lidem udělat správnou práci bez divadla okolo. Jakmile údržbový rytmus potřebuje vlastní údržbový rytmus, je čas sundat nohu z administrativního plynu.
+
+### 1. Vyberte malé, ale skutečné kontrolní okno
+
+Nekontrolujte rytmus hned po prvním průchodu. Na to sloužila předchozí příloha. Tady potřebujete několik běžných cyklů, aby bylo vidět opakování, cena a případný návrat starého chování.
+
+Rozumné kontrolní okno:
+
+- tři měsíční kontroly,
+- dva až tři sprinty,
+- několik použití stejné šablony,
+- jeden onboardingový cyklus,
+- první kvartální review po zavedení rytmu,
+- tři veřejné publikační nebo distribuční průchody.
+
+Příklad:
+
+```text
+Rytmus:
+Při měsíční kontrole formulářů ověřit, že výstup používá odkaz na primární CRM záznam a anonymizovaný závěr.
+
+Kontrolní okno:
+První tři měsíční kontroly po zavedení rytmu.
+```
+
+Neberte ideální průchod, který si někdo speciálně připravil. Vezměte normální provoz. Když rytmus funguje jen tehdy, když o něm všichni ví týden dopředu, není to rytmus. Je to školní inspekce.
+
+### 2. Vraťte se k původnímu slibu rytmu
+
+Každý údržbový rytmus měl mít důvod. Než začnete hodnotit, najděte původní větu:
+
+```text
+Tento rytmus chrání před tím, aby se do výstupů kontroly formulářů znovu vkládaly screenshoty zákaznických údajů.
+```
+
+Bez původního slibu se kontrola rychle změní v obecné dojmy. Jeden člověk řekne, že rytmus je užitečný, protože "drží kvalitu". Druhý řekne, že je zbytečný, protože "nikdo si nestěžuje". Obojí může být pravda i mlha. Potřebujete konkrétní závazek.
+
+Zapište:
+
+- jaké riziko měl rytmus držet,
+- kde se riziko mělo objevovat,
+- jaký signál měl ukázat správný výsledek,
+- jaké privacy-first hranice neměl rytmus překročit,
+- jaké stop pravidlo bylo nastavené.
+
+Příklad:
+
+```text
+Původní slib:
+Zabránit návratu screenshotů zákaznických údajů do měsíčních výstupů kontroly formulářů.
+
+Signál:
+Výstup obsahuje jen odkaz na primární záznam a anonymizovaný závěr.
+
+Stop pravidlo:
+Po třech měsících bez návratu screenshotů zrušit samostatný kontrolní háček a ponechat větu v šabloně výstupu.
+```
+
+Tento návrat k původnímu slibu je malý, ale zásadní. Chrání vás před tím, aby se kontrola hodnotila podle nálady, ne podle účelu.
+
+### 3. Sledujte výstupy, ne rituál
+
+Údržbový rytmus není úspěšný proto, že ho někdo odklikl. Je úspěšný tehdy, když pomohl vytvořit správný výstup s menší chybovostí, menším třením nebo menší datovou stopou.
+
+U každého cyklu se podívejte na tři věci:
+
+```text
+Byl rytmus nalezen v přirozeném místě práce?
+Pomohl udělat správné rozhodnutí nebo výstup?
+Nevyrobil kvůli kontrole zbytečnou administrativu nebo data?
+```
+
+Příklad záznamu po třech cyklech:
+
+```text
+Cyklus 1:
+Rytmus nalezen v opakovaném úkolu. Výstup bez screenshotu. Dočasný export nevznikl.
+
+Cyklus 2:
+Rytmus nalezen až po připomenutí v chatu. Výstup správný. Tření: kontrolní věta je nízko v popisu úkolu.
+
+Cyklus 3:
+Rytmus nalezen bez připomenutí po přesunu věty nahoru. Výstup správný. Nová kopie dat nevznikla.
+```
+
+To je užitečnější než "kontrola proběhla". Proběhnout může i věc, která nikomu nepomohla.
+
+### 4. Změřte cenu rytmu prakticky
+
+Cena rytmu není jen čas v minutách. Je to i pozornost, přepínání kontextu, opakované vysvětlování, nové artefakty, riziko zbytečných kopií dat a počet míst, která musí zůstat synchronizovaná.
+
+Zeptejte se:
+
+- Musí člověk kvůli rytmu otevírat další nástroj?
+- Přibyl nový dokument, tabulka nebo report?
+- Je kontrolní věta pořád blízko práci, nebo se přesunula do vedlejší evidence?
+- Vyžaduje rytmus ruční opisování údajů?
+- Musí se kvůli kontrole ukládat citlivější důkaz než dřív?
+- Pomáhá rytmus rozhodnout, nebo jen potvrzuje, že někdo něco udělal?
+
+Jednoduché hodnocení:
+
+```text
+Hodnota:
+Vysoká / střední / nízká
+
+Cena:
+Nízká / střední / vysoká
+
+Datová stopa:
+Menší / stejná / větší
+
+Závěr:
+Ponechat / zkrátit / přesunout / sloučit / opravit / zrušit
+```
+
+Rytmus s nízkou hodnotou a vysokou cenou nespravujte kosmetikou. Zrušte ho nebo vraťte do revize. Rytmus s vysokou hodnotou a nízkou cenou si zaslouží stabilizaci. Rytmus se stejnou hodnotou, ale rostoucí datovou stopou potřebuje privacy-first opravu hned, ne až při dalším kvartálu.
+
+### 5. Zkontrolujte návrat starého chování
+
+Údržbový rytmus vznikl proto, že se něco mohlo vrátit. Proto při kontrole hledejte hlavně starou cestu:
+
+- Objevily se znovu screenshoty, kopie, exporty nebo ruční poznámky?
+- Použil někdo starou šablonu?
+- Vedl odkaz v checklistu na zastaralé místo?
+- Přesunula se chyba do jiného kroku práce?
+- Začal tým obcházet rytmus, protože byl moc těžký?
+- Zůstala kontrola správně umístěná po změně nástroje nebo role?
+
+Příklad:
+
+```text
+Nález:
+Screenshoty se nevrátily, ale ve druhém cyklu vznikl ruční opis e-mailu zákazníka do kontrolní poznámky.
+
+Rozhodnutí:
+Rytmus drží hlavní riziko, ale privacy-first hranice musí být zpřesněná: poznámka nesmí obsahovat kontaktní údaje, jen interní ID nebo odkaz na primární záznam.
+```
+
+Tady není potřeba zahodit celý rytmus. Je potřeba opravit hranici. Dobrá kontrola umí rozlišit mezi selháním rytmu a malou chybou v jeho provedení.
+
+### 6. Udělejte privacy-first audit rytmu
+
+Privacy-first kontrola má být konkrétní. Nestačí říct, že "data jsou v pořádku". Podívejte se, co rytmus opravdu vyrobil.
+
+Ověřte:
+
+- zda vznikly nové kopie osobních nebo zákaznických dat,
+- zda dočasné podklady po kontrole zmizely,
+- zda výstup používá odkazy na primární záznamy místo opisů,
+- zda kontrola nesleduje aktivitu konkrétních lidí bez pracovního důvodu,
+- zda se důkazy nedají zkrátit nebo anonymizovat,
+- zda má vlastník jasno, co smí a nesmí ukládat.
+
+Privacy-first závěr pište jednou větou:
+
+```text
+Rytmus po třech cyklech nevytvořil nové kopie zákaznických dat; jediný ruční opis z druhého cyklu byl odstraněn a kontrolní věta byla zpřesněna na odkaz na primární záznam.
+```
+
+Tahle věta je lepší než dlouhý auditní dokument, pokud skutečně vede k rozhodnutí. U malých rytmů má být kontrola lehká, ale ne slepá.
+
+### 7. Rozhodněte další stav rytmu
+
+Po kontrole vyberte jeden stav. Ne tři možné scénáře, ne otevřenou diskuzi bez konce. Jeden stav a jedna navazující úprava.
+
+Možné stavy:
+
+```text
+Ponechat:
+Rytmus má jasnou hodnotu, nízkou cenu a drží privacy-first hranice.
+
+Zkrátit:
+Riziko se nevrací, ale jedna věta v šabloně pořád dává smysl.
+
+Přesunout:
+Rytmus pomáhá, ale je na špatném pracovním místě.
+
+Sloučit:
+Rytmus se překrývá s jinou kontrolou a má být součástí širšího review.
+
+Opravit:
+Rytmus má hodnotu, ale potřebuje malou změnu textu, vlastnictví nebo datové hranice.
+
+Zrušit:
+Rytmus už nechrání žádné reálné rozhodnutí, nebo jeho cena převyšuje hodnotu.
+```
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Zkrátit.
+
+Důvod:
+Po třech cyklech se screenshoty nevrátily a kontrolní věta je už součástí šablony výstupu.
+
+Úprava:
+Smazat samostatný háček v měsíčním úkolu, ponechat jednu větu v šabloně výstupu a další review neplánovat.
+```
+
+To je dobrý výsledek. Cílem údržby není udržet údržbu navždy. Cílem je udržet správnou práci.
+
+### Šablona kontroly údržbového rytmu
+
+```text
+Název rytmu:
+
+Původní slib rytmu:
+
+Kontrolní okno:
+
+Prošlé cykly:
+1.
+2.
+3.
+
+Byl rytmus nalezen v přirozeném místě práce?
+
+Pomohl správnému výstupu nebo rozhodnutí?
+
+Vrátilo se staré chování?
+
+Cena rytmu:
+Nízká / střední / vysoká
+
+Datová stopa:
+Menší / stejná / větší
+
+Privacy-first závěr:
+
+Stav rytmu:
+Ponechat / zkrátit / přesunout / sloučit / opravit / zrušit
+
+Jedna navazující úprava:
+
+Changelog věta:
+```
+
+### Příklad vyplněné kontroly
+
+```text
+Název rytmu:
+Kontrola výstupu formulářů bez screenshotů zákaznických údajů.
+
+Původní slib rytmu:
+Zabránit návratu screenshotů zákaznických údajů do měsíčních výstupů kontroly formulářů.
+
+Kontrolní okno:
+První tři měsíční kontroly.
+
+Prošlé cykly:
+1. Výstup správně použil odkaz na primární CRM záznam a anonymizovaný závěr.
+2. Výstup byl správný, ale kontrolní věta byla nalezena až po připomenutí.
+3. Po přesunu kontrolní věty nahoru byl výstup správný bez připomenutí.
+
+Byl rytmus nalezen v přirozeném místě práce?
+Ano, po malé úpravě umístění.
+
+Pomohl správnému výstupu nebo rozhodnutí?
+Ano, udržel výstup bez screenshotů.
+
+Vrátilo se staré chování?
+Ne.
+
+Cena rytmu:
+Nízká.
+
+Datová stopa:
+Stejná až menší, protože nevznikly screenshoty ani dočasné exporty.
+
+Privacy-first závěr:
+Rytmus nevytvořil nové kopie zákaznických dat a používá pouze odkaz na primární záznam s anonymizovaným závěrem.
+
+Stav rytmu:
+Zkrátit.
+
+Jedna navazující úprava:
+Smazat samostatný háček z měsíčního úkolu a ponechat větu v šabloně výstupu.
+
+Changelog věta:
+Po třech měsíčních cyklech byl údržbový rytmus zkrácen na jednu větu v šabloně výstupu; samostatná kontrola se ruší, protože riziko se nevrátilo a privacy-first hranice drží.
+```
+
+### Mini workshop na 20 minut
+
+1. Čtyři minuty: přečíst původní slib rytmu a stop pravidlo.
+2. Čtyři minuty: projít první skutečné cykly a zapsat, jestli rytmus pomohl výstupu.
+3. Čtyři minuty: najít návrat starého chování, skrytou práci nebo rostoucí datovou stopu.
+4. Čtyři minuty: vybrat jeden stav rytmu.
+5. Čtyři minuty: napsat jednu navazující úpravu a changelog větu.
+
+Výstupem je rozhodnutí o životnosti rytmu. Pokud workshop skončí větou "musíme to ještě víc sledovat", vraťte se k původní otázce: co přesně se má rozhodnout a jaký nejmenší důkaz k tomu stačí?
+
+### Checklist kapitoly
+
+- Vybrali jste několik skutečných cyklů místo ideální ukázky?
+- Našli jste původní slib rytmu a stop pravidlo?
+- Hodnotíte výstup a rozhodnutí, ne jen odkliknutí kontroly?
+- Je jasné, jestli rytmus lidé najdou v přirozeném místě práce?
+- Změřili jste cenu rytmu prakticky, včetně pozornosti a artefaktů?
+- Hledali jste návrat starého chování?
+- Ověřili jste, zda nevznikly nové kopie osobních nebo zákaznických dat?
+- Má privacy-first závěr jednu konkrétní větu?
+- Vybrali jste jeden stav rytmu?
+- Udělali jste jen jednu navazující úpravu?
+- Je changelog věta pochopitelná i pro člověka, který nebyl u zavedení rytmu?
+
+Kontrola údržbového rytmu po prvních cyklech je zdravá brzda. Pomáhá ponechat to, co chrání práci, zkrátit to, co už splnilo účel, a odstranit to, co jen zabírá místo. Dobrá údržba není nekonečné hlídání. Je to schopnost pravidelně rozhodnout, co si zaslouží zůstat.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha HV o kontrole údržbového rytmu po prvních cyklech: výběr skutečného kontrolního okna, návrat k původnímu slibu, sledování výstupů místo rituálu, praktická cena rytmu, návrat starého chování, privacy-first audit, rozhodnutí dalšího stavu, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HU o převodu potvrzeného udržovacího záznamu do údržbového rytmu: vyhodnocení první kontroly, opakující se riziko, nejmenší přirozený rytmus, vlastnictví podle role, privacy-first signály bez špehování, zápis do jednoho pracovního místa, stop pravidlo, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HT o kontrole udržovacího záznamu po prvním použití: výběr normálního průchodu, signály nalezení/rozhodnutí/výstupu, rozlišení chyby záznamu a okolí, zkracování místo bobtnání, privacy-first kontrola datové stopy, rozhodnutí dalšího stavu, šablona, příklad, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HS o převodu kontroly stabilizované malé korekce do udržovacího záznamu: provozní věta stavu, domov záznamu podle místa práce, typy převodu, pracovní minimum důkazů, úprava pracovního místa, kontrolní háček, privacy-first úklid, šablona, příklad, mini workshop a checklist.
