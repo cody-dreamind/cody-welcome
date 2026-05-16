@@ -69668,8 +69668,310 @@ Výstupem workshopu je stabilizovaný háček, který se dá použít v příšt
 
 Stabilizace revizního háčku je dobrá chvíle pro disciplínu. Neoslavujte, že jste přidali další kontrolu. Oslavujte jen to, že jste snížili riziko s menší stopou, menším třením a jasnější odpovědností. To je v provozu mnohem cennější než další perfektně pojmenovaný checklist, který nikdo nechce otevřít.
 
+## Příloha IH: Kontrola běžného rytmu po stabilizaci revizního háčku
+
+Stabilizovaný revizní háček ještě není hotová věc. Je to dohoda, že se určitá kontrola stala součástí běžného rytmu. Teprve první normální cykly ukážou, jestli dohoda opravdu drží: lidé háček najdou bez připomínání, použijí ho v práci, nevyrábějí kvůli němu zbytečná data a výstup pomáhá rozhodnutí místo toho, aby jen plnil další políčko.
+
+Tahle příloha navazuje na Přílohu IG. Použijte ji po prvních běžných použitích stabilizovaného háčku. Ne při slavnostním zavedení, ne při ručním doprovodu autora, ne při speciálním auditu. Vyberte normální cyklus, kde se práce děje tak jako obvykle. Cílem není dokázat, že stabilizace byla chytrá. Cílem je zjistit, jestli se z ní stal použitelný pracovní návyk.
+
+Codyho komentář: nejzrádnější provozní pravidla jsou ta, která vypadají rozumně v dokumentu a nikdo je reálně nepoužije. Dokument se usmívá, proces mlčí a problém se vrátí jinými dveřmi. Ano, administrativní poezie. Nádhera, ale radši ne.
+
+### 1. Vyberte skutečný běžný cyklus
+
+Kontrolu nedělejte na ukázkovém příkladu. Vyberte první nebo druhý normální cyklus, ve kterém měl háček pomoct. Pokud jde o měsíční kontrolu formulářů, vezměte skutečnou měsíční kontrolu. Pokud jde o release checklist, vezměte skutečné vydání. Pokud jde o dodavatelský úklid, vezměte skutečný kvartální průchod.
+
+Do kontroly si zapište:
+
+```text
+jaký rytmus proběhl,
+
+kdy proběhl,
+
+kdo ho vlastnil podle role,
+
+kde měl být háček použit,
+
+jaký výstup měl vzniknout.
+```
+
+Nevybírejte cyklus, kde autor háčku seděl vedle týmu a všechno vysvětloval. To není běžný provoz. To je řízená ukázka. Užitečná pro zavedení, špatná pro ověření samostatnosti.
+
+### 2. Sledujte, jestli háček našel člověk, ne autor
+
+První signál zralosti je dohledatelnost. Člověk, který práci dělá, by měl vědět, kde háček žije, aniž by se ptal autora původní změny.
+
+Ptejte se:
+
+```text
+Našel člověk správnou šablonu nebo kontrolní kartu?
+
+Byla pracovní věta přímo v místě práce?
+
+Nemusel hledat starý chat, starý úkol nebo starý dokument?
+
+Nebyla vedle platné verze stará kopie?
+
+Bylo jasné, co je povinné a co je jen příklad?
+```
+
+Pokud člověk háček našel jen proto, že mu někdo poslal přímý odkaz, stabilizace ještě není stabilní. Problém nemusí být v háčku samotném. Může být v indexu, šabloně, názvu dokumentu nebo automatizaci, která zakládá nový cyklus ze staré kopie.
+
+### 3. Porovnejte výstup s běžnou pracovní větou
+
+Vraťte se k pracovní větě z Přílohy IG. Ta měla říkat spouštěč, akci, hranici a důkaz. Nyní ověřte, jestli podle ní vznikl výstup.
+
+Příklad pracovní věty:
+
+```text
+Uzavření formulářů: stačí ano/ne potvrzení smazání exportů; nepřikládejte screenshoty ani kopie dat.
+```
+
+Kontrola výstupu:
+
+```text
+Je v měsíčním výstupu ano/ne potvrzení?
+
+Nevznikl screenshot zákaznických údajů?
+
+Nezůstala dočasná tabulka jen kvůli důkazu?
+
+Je jasné, kdo kontrolu uzavřel?
+
+Stačí výstup k provoznímu rozhodnutí?
+```
+
+Neřešte estetiku dokumentu, pokud nebrání použití. Řešte, zda výstup splnil účel s nejmenší rozumnou stopou.
+
+### 4. Změřte cenu použití bez složité metriky
+
+Háček může být správný a zároveň moc drahý. Pokud kvůli jedné malé kontrole vznikne dvacet minut vysvětlování, dvě nové tabulky a interní debata o slovíčku, pravidlo nebude dlouhodobě držet.
+
+Stačí jednoduchá scorecard:
+
+```text
+Nalezení:
+0 = nenašel, 1 = našel s pomocí, 2 = našel sám
+
+Pochopení:
+0 = nepochopil, 1 = potřeboval výklad, 2 = pochopil z pracovní věty
+
+Dokončení:
+0 = nevznikl použitelný výstup, 1 = vznikl s opravou, 2 = vznikl rovnou
+
+Datová stopa:
+0 = vznikla zbytečná citlivá stopa, 1 = vzniklo něco navíc, 2 = minimum drží
+
+Cena:
+0 = výrazně brzdí práci, 1 = trochu překáží, 2 = přirozená součást rytmu
+```
+
+Nejde o vědecké měření. Jde o jazyk pro rozhodnutí. Pokud má háček nízké skóre v nalezení a pochopení, opravte pracovní místo. Pokud má nízké skóre v datové stopě, opravte hranici důkazů. Pokud má nízké skóre v ceně, zkraťte háček nebo ho sloučte s jiným krokem.
+
+### 5. Zkontrolujte návrat staré cesty
+
+Stará cesta se často vrací tiše. Někdo použije starou šablonu, zkopíruje minulý výstup, nechá si export "pro jistotu" nebo přiloží screenshot, protože to tak dělal před stabilizací.
+
+Hledejte hlavně:
+
+```text
+staré kopie šablon,
+
+uložené exporty v pracovních složkách,
+
+screenshoty v chatu,
+
+duplicitní otázky v jiné kontrolní kartě,
+
+automatizaci, která zakládá starou verzi,
+
+návod v onboardingu, který neodpovídá nové pracovní větě.
+```
+
+Návrat staré cesty neberte jako selhání člověka. Většinou je to selhání prostředí. Pokud starý odkaz pořád vede k práci, někdo ho jednou použije. Provoz nemá stát na paměti, ale na správně upraveném pracovním místě.
+
+### 6. Udělejte privacy-first kontrolu skutečné stopy
+
+Privacy-first kontrola po stabilizaci má být konkrétní. Nestačí říct, že pravidlo "myslí na data". Podívejte se, co opravdu vzniklo.
+
+Zapište:
+
+```text
+jaký důkaz zůstal,
+
+kde je uložený,
+
+kdo k němu má přístup,
+
+jak dlouho má zůstat,
+
+co se smazalo po uzavření cyklu,
+
+co vzniklo navíc proti původní hranici.
+```
+
+Dobré znamení:
+
+```text
+Zůstal jen kontrolní výstup s ano/ne potvrzením a krátkou rozhodovací větou. Dočasné exporty byly smazány. Nevznikly screenshoty ani kopie zákaznických údajů.
+```
+
+Špatné znamení:
+
+```text
+Pro jistotu vznikla tabulka se surovými daty, screenshot byl vložený do chatu a nikdo neví, kdy se to smaže.
+```
+
+Pokud vznikla zbytečná stopa, nejdřív ji ukliďte. Až potom upravujte text háčku. Bez úklidu by kontrola jen zdokumentovala problém a nechala ho ležet.
+
+### 7. Rozhodněte další stav háčku
+
+Po kontrole nepište dlouhé shrnutí. Napište jednu rozhodovací větu a vyberte stav.
+
+Možné stavy:
+
+```text
+Ponechat:
+háček funguje v běžném rytmu a stačí další standardní kontrola.
+
+Zkrátit:
+háček funguje, ale pracovní věta nebo důkaz jsou zbytečně těžké.
+
+Přesunout:
+háček je užitečný, ale žije na špatném místě.
+
+Sloučit:
+háček se překrývá s jinou kontrolou a má se stát její součástí.
+
+Ukončit:
+háček už neřeší reálné riziko nebo stojí víc, než chrání.
+```
+
+Příklad rozhodovací věty:
+
+```text
+Háček ponechat se zkrácením: tým ho v měsíční kontrole našel sám, výstup stačil, nevznikly kopie dat, ale formulace se zkrátí na jednu větu přímo u pole pro uzavření.
+```
+
+Nebo:
+
+```text
+Háček přesunout: kontrola se používá až při měsíčním review, ale rozhodnutí vzniká už při exportu, proto se pracovní věta přesune do kroku exportu a v review zůstane jen potvrzení.
+```
+
+### Kontrolní karta běžného rytmu
+
+```text
+Název háčku:
+
+Rytmus, ve kterém byl použit:
+
+Datum běžného cyklu:
+
+Vlastník podle role:
+
+Kde měl háček žít:
+
+Našel ho člověk bez pomoci:
+
+Výstup podle pracovní věty:
+
+Nejmenší důkaz, který zůstal:
+
+Co vzniklo navíc:
+
+Co bylo smazáno:
+
+Scorecard nalezení / pochopení / dokončení / datová stopa / cena:
+
+Návrat staré cesty:
+
+Rozhodnutí dalšího stavu:
+
+Jedna úprava pracovního místa:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Název háčku:
+Měsíční formuláře bez screenshotů zákaznických údajů.
+
+Rytmus, ve kterém byl použit:
+Měsíční kontrola webového provozu.
+
+Datum běžného cyklu:
+2026-05-16.
+
+Vlastník podle role:
+Role odpovědná za webový provoz a formuláře.
+
+Kde měl háček žít:
+Šablona měsíční kontroly formulářů.
+
+Našel ho člověk bez pomoci:
+Ano, přes kanonickou šablonu.
+
+Výstup podle pracovní věty:
+Ano/ne potvrzení smazání exportů.
+
+Nejmenší důkaz, který zůstal:
+Jedno pole v měsíčním výstupu.
+
+Co vzniklo navíc:
+Nic.
+
+Co bylo smazáno:
+Dočasný export po uzavření kontroly.
+
+Scorecard nalezení / pochopení / dokončení / datová stopa / cena:
+2 / 2 / 2 / 2 / 1.
+
+Návrat staré cesty:
+V jedné projektové složce zůstala stará kopie šablony.
+
+Rozhodnutí dalšího stavu:
+Ponechat se zkrácením a zavřít starou kopii.
+
+Jedna úprava pracovního místa:
+Přidat pracovní větu přímo k poli pro uzavření a archivovat starou šablonu.
+
+Changelog věta:
+První běžný cyklus potvrdil háček pro formuláře; zkracuje se formulace u pole pro uzavření a archivuje se stará kopie šablony.
+```
+
+### Mini workshop na 18 minut
+
+1. Tři minuty: vybrat skutečný běžný cyklus a výstup.
+2. Tři minuty: ověřit, jestli člověk našel háček bez autora.
+3. Tři minuty: porovnat výstup s pracovní větou.
+4. Tři minuty: projít skutečnou datovou stopu a úklid.
+5. Dvě minuty: ohodnotit scorecard.
+6. Dvě minuty: najít návrat staré cesty.
+7. Dvě minuty: napsat rozhodovací větu, jednu úpravu a changelog.
+
+Workshop má skončit jedním rozhodnutím, ne debatou o celé historii pravidla. Pokud se otevře širší problém, založte ho jako samostatný nález a vraťte se k háčku. Jinak se z kontroly běžného rytmu stane obecná porada o provozu. Ty bývají dlouhé, ambiciózní a podezřele málo užitečné.
+
+### Checklist kapitoly
+
+- Vybrali jste skutečný běžný cyklus, ne ukázkový příklad?
+- Našel člověk háček bez autora původní změny?
+- Byla pracovní věta v místě, kde se práce opravdu dělá?
+- Odpovídá výstup spouštěči, akci, hranici a důkazu?
+- Nevznikl kvůli háčku export, screenshot, kopie dat nebo dočasná tabulka navíc?
+- Je jasné, co zůstalo jako důkaz, kde to leží a kdy se to smaže?
+- Zkontrolovali jste staré šablony, odkazy, úkoly a automatizace?
+- Máte scorecard nalezení, pochopení, dokončení, datové stopy a ceny?
+- Rozhodli jste stav: ponechat, zkrátit, přesunout, sloučit nebo ukončit?
+- Vybrali jste jednu nejbližší úpravu pracovního místa?
+- Zapsali jste changelog bez surových zákaznických nebo osobních dat?
+
+Kontrola běžného rytmu má potvrdit, že stabilizovaný háček nezůstal jen dobrou formulací. Buď se stal přirozenou součástí práce, nebo ukázal, kde pracovní prostředí pořád táhne lidi zpět. Obojí je užitečné. Jen se netvařte, že pravidlo funguje, dokud jste ho neviděli projít normálním pracovním dnem.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IH o kontrole běžného rytmu po stabilizaci revizního háčku: výběr skutečného cyklu, dohledatelnost bez autora, porovnání výstupu s pracovní větou, scorecard ceny použití, kontrola návratu staré cesty, privacy-first kontrola skutečné datové stopy, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IG o stabilizaci ověřeného revizního háčku do běžného rytmu: rozhodnutí z první kontroly, jeden domov háčku, pracovní věta, zavření starých tras, privacy-first retence důkazů, vlastnictví podle role, napojení na existující rytmus, stop pravidlo, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IF o kontrole trvalého revizního háčku po prvním reálném použití: výběr normálního použití, nalezení háčku bez připomínání, porovnání důkazu s původním slibem, cena použití, privacy-first kontrola stopy, čtyři stavy rozhodnutí, nejmenší úprava pracovního místa, changelog, karta kontroly, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IE o převodu kontroly stabilizované provozní úpravy do trvalého revizního háčku: rozhodovací věta, výběr pravidel, která háček opravdu potřebují, napojení na existující rytmus, nejmenší užitečný důkaz, stop pravidlo, vlastnictví podle role, uzavření starých artefaktů, karta háčku, příklad, mini workshop a checklist.
