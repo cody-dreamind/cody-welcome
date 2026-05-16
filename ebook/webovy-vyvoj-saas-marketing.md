@@ -72181,8 +72181,375 @@ Workshop má skončit aplikovanou změnou v pracovním místě. Pokud skončí s
 
 Převod kontroly do jedné další úpravy je místo, kde se pozná, jestli tým opravdu zlepšuje systém, nebo jen vyrábí dokumentaci o zlepšování systému. Dobrá úprava je malá, viditelná v práci a po ověření buď zůstane, nebo se opraví. Žádné drama, žádné procesní konfety. Jen další kousek provozu, který je čistší, srozumitelnější a méně hladový po datech.
 
+## Příloha IP: Ověření další úpravy po prvním normálním použití
+
+Další úprava provozu je hotová až tehdy, když přežije první normální použití. Ne první prezentaci týmu, ne kontrolu autora, ne ideální demo na čistých datech. Normální použití znamená, že člověk dělá běžnou práci, má normální časový tlak, používá skutečné pracovní místo a úprava buď pomůže, nebo začne překážet.
+
+Tahle příloha navazuje na Přílohu IO. Použijte ji po první úpravě, která vznikla z kontroly trvalého úklidového rytmu: přesunutí pravidla, zkrácení výstupu, zavření staré cesty, sloučení kontroly, změna frekvence nebo doplnění privacy-first hranice. Cílem není znovu auditovat celý systém. Cílem je zjistit, jestli malá úprava opravdu změnila práci.
+
+Ověření má odpovědět na pět otázek:
+
+```text
+Našel člověk úpravu ve chvíli práce?
+
+Použil ji bez vysvětlování autora?
+
+Vznikl správný minimální výstup?
+
+Nevrátila se stará nebo náhradní datová stopa?
+
+Je další stav jasný jednou větou?
+```
+
+Codyho komentář: první normální použití je nemilosrdné, a proto užitečné. Dokumentace může vypadat dokonale, dokud ji nepotká pondělní realita, rozbitý formulář, spěchající obchodník nebo starý odkaz v šabloně. To není selhání. To je přesně okamžik, kdy se z dobrého záměru stává použitelný provoz.
+
+### 1. Vyberte skutečné použití úpravy
+
+Neověřujte úpravu abstraktně. Najděte první okamžik, kdy se měla skutečně použít.
+
+Vhodné situace:
+
+```text
+první kvartální review po přesunu měsíční kontroly,
+
+první změna formuláře po doplnění spouštěče,
+
+první support handoff po úpravě šablony,
+
+první release checklist po sloučení kontrol,
+
+první zákaznický výstup po zkrácení důkazní stopy,
+
+první vendor review po zavření staré exportní cesty.
+```
+
+Ke zvolenému použití si napište jen minimum:
+
+```text
+co se mělo stát,
+
+kde měla úprava žít,
+
+jaký výstup měl vzniknout,
+
+jaká stopa neměla vzniknout,
+
+kdy a kým podle role se práce skutečně dělala.
+```
+
+Jméno konkrétního člověka zapisujte jen tehdy, když je nutné pro odpovědnost nebo předání. Pro ověření systému většinou stačí role. Privacy-first provoz nezačíná u cookie lišty, ale u zvyku neukládat víc lidí a detailů, než práce potřebuje.
+
+### 2. Porovnejte slib úpravy s realitou
+
+Vezměte úpravovou kartu z Přílohy IO a položte ji vedle skutečného průchodu. Nehledejte, jestli byl proces "splněn". Hledejte, jestli slib úpravy nastal v práci.
+
+Porovnejte:
+
+```text
+Slib:
+co měla úprava zlepšit.
+
+Pracovní místo:
+kde měla být vidět.
+
+Výstup:
+co mělo vzniknout místo starého balastu.
+
+Zavřená cesta:
+co už nemělo být pohodlně dostupné.
+
+Privacy-first hranice:
+jaká data neměla vzniknout nebo zůstat.
+```
+
+Příklad:
+
+```text
+Slib úpravy:
+měsíční kontrola formulářových exportů se přesune do kvartálního review a měsíční úkol ponechá jen spouštěč návratu při změně formuláře.
+
+Realita prvního použití:
+kvartální review obsahovalo stavovou větu, ale měsíční úkol pořád odkazoval na starý checklist.
+```
+
+To není tragédie. Je to konkrétní nález. Úprava nebyla úplně zavřená, protože stará cesta zůstala v pracovním prostoru. Další krok je malý: odstranit starý odkaz z měsíčního úkolu nebo ho přesměrovat na kvartální review.
+
+### 3. Sledujte nalezení bez autora
+
+Dobrá úprava funguje i bez člověka, který ji napsal. Pokud ji tým použije jen proto, že autor sedí vedle a připomíná ji, úprava ještě nežije v systému.
+
+Ptejte se:
+
+```text
+Byla úprava vidět v přirozeném pracovním místě?
+
+Vedl odkaz na správné kanonické místo?
+
+Byl text dost krátký, aby ho člověk použil při práci?
+
+Nemusel nikdo hledat historii rozhodnutí?
+
+Nevznikla otázka, která ukazuje, že pravidlo je napsané pro autora, ne pro uživatele?
+```
+
+Signály dobrého nalezení:
+
+```text
+člověk použil novou větu bez připomenutí,
+
+starý odkaz ho nedostal jinam,
+
+úprava byla přímo v checklistu, šabloně nebo opakovaném úkolu,
+
+nebylo nutné otevírat dlouhou dokumentaci,
+
+výsledek vznikl při normální práci, ne až při dodatečné kontrole.
+```
+
+Signály slabého nalezení:
+
+```text
+autor musel poslat odkaz do chatu,
+
+tým našel starou verzi dřív než novou,
+
+nové pravidlo je v obecné dokumentaci, ale práce se děje jinde,
+
+úprava vyžaduje číst historický kontext,
+
+lidé vytvořili vlastní zkratku, protože oficiální cesta je daleko.
+```
+
+Pokud úprava nejde najít bez autora, nepište delší vysvětlení. Přesuňte ji blíž práci, zkraťte ji nebo zavřete starou cestu důsledněji.
+
+### 4. Zkontrolujte skutečný výstup a datovou stopu
+
+U úklidových změn nestačí, že úprava byla použita. Musí po ní zůstat správná stopa. Často se stane, že tým nové pravidlo formálně dodrží, ale vytvoří náhradní důkaz vedle.
+
+Hledejte:
+
+```text
+vznikl jen plánovaný minimální výstup,
+
+nevznikly screenshoty pro jistotu,
+
+nevznikly exporty bez retenčního důvodu,
+
+nevznikla kopie zákaznického obsahu v komentáři,
+
+nevznikla nová tabulka mimo kanonické místo,
+
+automatizace neuložila víc dat než před úpravou,
+
+staré přílohy nezůstaly v aktivním pracovním prostoru.
+```
+
+Příklad dobrého výstupu:
+
+```text
+Kvartální kontrola formulářové datové stopy hotová. Exporty nevznikly, screenshoty nevznikly, při další změně formuláře se na dva cykly obnoví měsíční kontrola.
+```
+
+Příklad výstupu, který potřebuje opravu:
+
+```text
+Kontrola hotová. Pro jistotu uložen CSV export do složky review-2026-Q2.
+```
+
+Druhá varianta možná vznikla z dobré vůle. Ale pokud úprava měla snížit datovou stopu, export "pro jistotu" je návrat problému jinými dveřmi. Oprava není moralizování. Oprava je změnit minimální důkaz tak, aby lidé měli dost jistoty bez surových dat.
+
+### 5. Rozlišujte chybu úpravy, chybu umístění a chybu očekávání
+
+Když první použití nevyjde, neházejte všechno do jednoho pytle. Potřebujete vědět, co přesně selhalo.
+
+```text
+Chyba úpravy:
+text nebo pravidlo je nejasné, moc dlouhé, moc přísné nebo neřeší skutečnou situaci.
+
+Chyba umístění:
+úprava je napsaná dobře, ale žije mimo pracovní okamžik.
+
+Chyba zavření staré cesty:
+nová cesta existuje, ale stará je pořád dostupnější.
+
+Chyba minimálního důkazu:
+tým vytváří balast, protože krátký výstup nedává dost jistoty.
+
+Chyba očekávání:
+původní rozhodnutí předpokládalo práci, která se ve skutečnosti děje jinak.
+```
+
+Podle typu chyby vyberte jeden další krok:
+
+```text
+Chyba úpravy:
+přepsat jednu větu nebo zúžit pravidlo.
+
+Chyba umístění:
+přesunout pravidlo do šablony, checklistu, úkolu nebo automatizace.
+
+Chyba zavření staré cesty:
+smazat, archivovat, přesměrovat nebo označit starý materiál jako historický.
+
+Chyba minimálního důkazu:
+nahradit surový důkaz agregací, stavem, počtem, odkazem na kanonické místo nebo krátkou anonymizovanou poznámkou.
+
+Chyba očekávání:
+vrátit se k rozhodovací větě a změnit stav úpravy.
+```
+
+Jedno první selhání neznamená, že úprava je špatná. Znamená, že máte konkrétní informaci z provozu. To je lepší než elegantní pravidlo, které nikdo nikdy nepoužije.
+
+### 6. Napište ověřovací větu
+
+Ověření má skončit jednou větou. Ne zápisem porady, ne tabulkou s deseti poznámkami, ne novým auditem. Jedna věta má říct stav a nejbližší akci.
+
+Možné stavy:
+
+```text
+Potvrzeno:
+úprava se našla, použila a nevytvořila novou datovou stopu.
+
+Potvrzeno s drobnou korekcí:
+úprava funguje, ale potřebuje malý textový, odkazový nebo frekvenční zásah.
+
+Přesunout:
+úprava dává smysl, ale musí být blíž práci.
+
+Zpřísnit dočasně:
+první použití ukázalo nové riziko nebo nový datový tok.
+
+Zjednodušit:
+úprava chrání víc, než riziko potřebuje, a zvyšuje tření.
+
+Vrátit k rozhodnutí:
+původní předpoklad neodpovídá realitě.
+```
+
+Příklady ověřovacích vět:
+
+```text
+Potvrzeno: při prvním kvartálním review byla použita nová stavová věta, starý měsíční checklist už nebyl dostupný a nevznikly exporty ani screenshoty.
+```
+
+```text
+Potvrzeno s korekcí: úprava snížila výstup na stavovou větu, ale starý odkaz zůstal v měsíčním úkolu; další krok je přesměrovat ho na kvartální review.
+```
+
+```text
+Vrátit k rozhodnutí: úprava předpokládala, že exporty vznikají při kvartálním review, ale ve skutečnosti vznikají při support handoffu; další krok je přesunout kontrolu do handoff šablony.
+```
+
+### Ověřovací karta první normální práce
+
+```text
+Název úpravy:
+
+První normální použití:
+
+Původní slib úpravy:
+
+Kde měla úprava žít:
+
+Kde ji člověk skutečně našel:
+
+Plánovaný minimální výstup:
+
+Skutečný výstup:
+
+Zakázaná nebo nežádoucí datová stopa:
+
+Skutečná datová stopa:
+
+Stará nebo náhradní cesta:
+
+Typ nálezu:
+
+Rozhodnutí dalšího stavu:
+
+Jedna nejbližší korekce:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Název úpravy:
+Přesun měsíční kontroly formulářové datové stopy do kvartálního review.
+
+První normální použití:
+První kvartální provozní review po změně rytmu.
+
+Původní slib úpravy:
+Snížit frekvenci kontroly a držet čistou datovou stopu bez exportů a screenshotů.
+
+Kde měla úprava žít:
+Kvartální review a měsíční úkol pouze jako spouštěč návratu při změně formuláře.
+
+Kde ji člověk skutečně našel:
+V kvartálním review ano, v měsíčním úkolu ale zůstal starý odkaz.
+
+Plánovaný minimální výstup:
+Jedna stavová věta.
+
+Skutečný výstup:
+Jedna stavová věta v review, bez příloh.
+
+Zakázaná nebo nežádoucí datová stopa:
+CSV exporty, screenshoty formulářů, kopie obsahu odeslaných poptávek.
+
+Skutečná datová stopa:
+Bez exportů a screenshotů.
+
+Stará nebo náhradní cesta:
+Starý checklist zůstal odkazovaný z měsíčního úkolu.
+
+Typ nálezu:
+Chyba zavření staré cesty.
+
+Rozhodnutí dalšího stavu:
+Potvrzeno s drobnou korekcí.
+
+Jedna nejbližší korekce:
+Přesměrovat starý měsíční odkaz na kvartální review a ponechat jen spouštěcí větu pro změnu formuláře.
+
+Changelog věta:
+První kvartální použití potvrdilo zkrácenou stavovou větu bez nové datové stopy; starý měsíční odkaz byl přesměrován na kvartální review.
+```
+
+### Mini workshop na 15 minut
+
+1. Tři minuty: vybrat první normální použití úpravy.
+2. Dvě minuty: přečíst původní slib úpravy z úpravové karty.
+3. Dvě minuty: ověřit nalezení úpravy bez autora.
+4. Tři minuty: porovnat plánovaný a skutečný výstup včetně datové stopy.
+5. Dvě minuty: určit typ nálezu.
+6. Dvě minuty: napsat ověřovací větu a jednu nejbližší korekci.
+7. Jedna minuta: zapsat changelog bez citlivých detailů.
+
+Workshop je krátký schválně. Pokud z něj začíná být hodinová debata, pravděpodobně neověřujete jednu úpravu, ale otevíráte další provozní téma. To může být legitimní, jen to nepleťte dohromady. Jedna úprava, jedno ověření, jeden další krok.
+
+### Checklist kapitoly
+
+- Ověřujete první normální použití, ne ideální test autora?
+- Je jasné, jaký byl původní slib úpravy?
+- Našel člověk úpravu v pracovním místě bez připomínání?
+- Nepřivedly staré odkazy tým zpět ke starému postupu?
+- Vznikl jen plánovaný minimální výstup?
+- Nevznikly exporty, screenshoty, kopie, vedlejší tabulky ani dlouhé komentáře bez účelu?
+- Zkontrolovali jste skutečnou datovou stopu, ne jen text pravidla?
+- Rozlišili jste chybu úpravy, umístění, zavření staré cesty, minimálního důkazu a očekávání?
+- Máte jednu ověřovací větu se stavem dalšího kroku?
+- Je nejbližší korekce malá a umístěná tam, kde práce opravdu vzniká?
+- Changelog neobsahuje osobní údaje, zákaznické detaily ani surové příklady?
+- Pokud úprava funguje, nepřidáváte další kontrolu jen pro pocit jistoty?
+
+Ověření první normální práce drží provoz při zemi. Ukáže, jestli úprava opravdu snížila tření a datovou stopu, nebo jen přidala další pravidlo do dokumentace. Nejlepší výsledek je nudný: člověk úpravu našel, použil, vznikla krátká stavová věta a nic zbytečného se neuložilo. Nudné provozní výsledky jsou často přesně ty, které šetří nejvíc peněz, času i nervů.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IP o ověření další úpravy po prvním normálním použití: výběr skutečného použití, porovnání slibu s realitou, nalezení bez autora, kontrola výstupu a datové stopy, typy nálezů, ověřovací věta, karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IO o převodu kontroly trvalého úklidového rytmu do jedné další úpravy: rozhodovací věta, typ úpravy, nejbližší pracovní místo, privacy-first hranice, zavření staré cesty, úpravová karta, příklad, ověření při normálním použití, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IN o kontrole trvalého úklidového rytmu po prvních použitích: skutečná použití, spouštěč rytmu, minimální výstup, návrat staré nebo náhradní cesty, práce se stop pravidlem, scorecard ceny, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IM o převodu stabilizovaného úklidu do trvalého úklidového rytmu: provozní stav, přirozený rytmus, minimální výstup, stop pravidlo, vlastnictví podle role, uzavření přechodových artefaktů, trvalá karta rytmu, příklad, mini workshop a checklist.
