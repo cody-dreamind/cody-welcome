@@ -71456,8 +71456,382 @@ Workshop má skončit vložením rytmu do skutečného pracovního místa. Pokud
 
 Trvalý úklidový rytmus je nejlepší, když je skoro nudný. V běžné práci tiše připomene hranici, nechá vzniknout nejmenší užitečný výstup a včas řekne, kdy už není potřeba. To je přesně ten typ provozní disciplíny, který chrání soukromí i čas týmu bez velkého divadla.
 
+## Příloha IN: Kontrola trvalého úklidového rytmu po prvních použitích
+
+Trvalý úklidový rytmus nesmí zůstat jen hezkou kartou v kanonickém místě. Po několika použitích musí projít kontrolou, jestli opravdu drží uklizený stav s minimální pozorností. Nejde o další audit celého provozu. Jde o krátké ověření, že rytmus plní přesně to, kvůli čemu vznikl: brání návratu nepořádku, nevyrábí novou administrativu a nechává za sebou co nejmenší datovou stopu.
+
+Tahle příloha navazuje na Přílohu IM. Použijte ji po prvních dvou až třech použitích trvalého úklidového rytmu, případně po prvním kvartálním průchodu, pokud je rytmus méně častý. Cílem není rytmus obhájit za každou cenu. Cílem je rozhodnout, jestli ho ponechat, zjednodušit, přesunout, zpřísnit, sloučit nebo ukončit.
+
+Kontrola má odpovědět na šest otázek:
+
+```text
+Spustil se rytmus ve správném pracovním okamžiku?
+
+Vznikl jen minimální výstup?
+
+Nevrátila se zakázaná datová stopa?
+
+Pomohlo stop pravidlo přemýšlet o životnosti rytmu?
+
+Neobchází tým rytmus vedlejší cestou?
+
+Je další stav jasný jednou větou?
+```
+
+Codyho komentář: trvalé rytmy mají zvláštní talent tvářit se nevinně. "Je to jen minutka měsíčně," řekne jeden. Pak jich máte třicet, všude checkboxy, nikdo neví proč, a soukromí se chrání screenshotem screenshotu. První kontrola rytmu je dobrá brzda proti tomu, aby se z úklidu stal nový prach.
+
+### 1. Vyberte skutečná použití, ne záznam o existenci rytmu
+
+Začněte tím, že najdete reálné průchody rytmem. Nestačí, že karta existuje, opakovaný úkol je založený nebo checklist obsahuje řádek. Potřebujete vidět, co se stalo při normální práci.
+
+Vhodný vzorek:
+
+```text
+dvě až tři měsíční kontroly,
+
+jeden až dva release checklisty,
+
+první kvartální review,
+
+několik zákaznických handoffů,
+
+první použití po změně formuláře, nástroje nebo dodavatele.
+```
+
+Ke každému použití si napište:
+
+```text
+kdy se rytmus měl spustit,
+
+kde byl umístěný,
+
+jaký minimální výstup měl vzniknout,
+
+jaká datová stopa neměla vzniknout,
+
+kdo rytmus vlastnil podle role,
+
+jaký byl skutečný výsledek.
+```
+
+Jména lidí zapisujte jen tehdy, když jsou nutná pro odpovědnost nebo předání. Pro kontrolu rytmu obvykle stačí role. Cílem není sledovat jednotlivce, ale zlepšit pracovní systém.
+
+### 2. Ověřte spouštěč rytmu
+
+Trvalý rytmus funguje jen tehdy, když se spustí v přirozeném okamžiku. Pokud ho lidé musí hledat, připomínat si ho nebo dohánět zpětně, rytmus není připojený k práci dost dobře.
+
+Ptejte se:
+
+```text
+Byl rytmus vidět ve chvíli, kdy se práce opravdu dělala?
+
+Byl odkaz na kanonické místo přímo v úkolu, checklistu nebo šabloně?
+
+Spustil se rytmus bez autora původního úklidu?
+
+Nevznikla situace, kdy se kontrola dělala až dodatečně?
+
+Nepřekáží rytmus v místě, kde riziko reálně nevzniká?
+```
+
+Příklad:
+
+```text
+Rytmus pro úklid exportů formulářů je napsaný v kvartálním privacy review, ale exporty vznikají při měsíční kontrole doručování. Tým si na něj vzpomene až zpětně. Správná oprava není další připomínka, ale přesun rytmu do měsíčního úkolu, kde exporty opravdu vznikají.
+```
+
+Dobré znamení je, když rytmus působí jako normální část práce. Špatné znamení je, když ho někdo musí slavnostně vytáhnout z dokumentace pokaždé, když se má použít.
+
+### 3. Porovnejte minimální výstup se skutečností
+
+Příloha IM nastavila minimální výstup. Teď ověřte, jestli se ho tým drží. U úklidových rytmů je nejčastější selhání nenápadné: lidé splní kontrolu, ale přidají důkaz navíc "pro jistotu". Tím se uklizený stav začne znovu zaplňovat.
+
+Porovnejte plán a realitu:
+
+```text
+Plánovaný výstup:
+jedna věta, ano/ne potvrzení, odkaz na kanonické místo, stav beze změny.
+
+Skutečný výstup:
+co opravdu vzniklo v úkolu, šabloně, archivu, komentáři nebo automatizaci.
+```
+
+Sledujte hlavně:
+
+```text
+nepřibyly screenshoty,
+
+nevznikly nové exporty,
+
+neukládají se příklady s osobními nebo zákaznickými údaji,
+
+nevznikla vedlejší tabulka,
+
+nevzniká dlouhá diskuse místo krátkého rozhodnutí,
+
+nepřidala automatizace logy bez retenčního účelu.
+```
+
+Příklad dobrého výstupu:
+
+```text
+2026-05: Kontrola formulářů hotová. Exporty smazány, screenshoty nevznikly, šablona beze změny.
+```
+
+Příklad rizikového výstupu:
+
+```text
+Kontrola hotová, přiložen screenshot jednoho formuláře a CSV export pro budoucí porovnání.
+```
+
+Druhá varianta možná působí pečlivěji. Privacy-first pohledem je ale horší, pokud k ní není jasný účel, přístup a retence. Pečlivost bez hranic často jen ukládá problém pro později.
+
+### 4. Zkontrolujte, jestli se nevrací stará nebo náhradní cesta
+
+Trvalý rytmus může formálně běžet a přesto prohrávat. Stará cesta se vrací přes odkazy, kopie, ruční poznámky nebo automatizace. Náhradní cesta vzniká tehdy, když lidé sice dodrží zákaz jedné datové stopy, ale vytvoří jinou.
+
+Hledejte:
+
+```text
+staré odkazy v opakovaných úkolech,
+
+kopie šablon v projektových složkách,
+
+ruční exporty uložené mimo kanonické místo,
+
+screenshoty poslané v chatu,
+
+komentáře s reálnými zákaznickými údaji,
+
+automatizace, které ukládají víc než rytmus dovoluje,
+
+nový checklist, který obchází původní úklid.
+```
+
+Rozlišujte dvě situace:
+
+```text
+Rytmus je špatně umístěný:
+lidé starou cestu používají, protože je blíž práci.
+
+Minimální výstup nestačí:
+lidé tvoří náhradní důkaz, protože krátká věta nedává dost jistoty pro rozhodnutí.
+```
+
+V prvním případě přesuňte rytmus blíž práci. Ve druhém nejdřív definujte nejmenší lepší důkaz. Může to být agregovaný počet, hash kontrola, stavový štítek nebo anonymizované shrnutí. Nemusí to být surový export.
+
+### 5. Použijte stop pravidlo, ne jen pocit
+
+Stop pravidlo nebylo dekorace. Při první kontrole ho skutečně použijte. Pomůže vám odlišit, jestli rytmus má pokračovat, zjednodušit se, zpřísnit nebo skončit.
+
+Vezměte stop pravidlo z karty rytmu a položte vedle něj realitu:
+
+```text
+Nastala podmínka pro ukončení?
+
+Nastala podmínka pro sloučení s jiným rytmem?
+
+Nastala podmínka pro snížení frekvence?
+
+Nastala podmínka pro dočasné zpřísnění?
+
+Nastala podmínka pro znovurozhodnutí?
+```
+
+Příklad:
+
+```text
+Stop pravidlo říká: po třech měsících beze změn přesunout měsíční kontrolu do kvartálního review. Realita: tři měsíce beze změn, žádné exporty, žádné screenshoty, žádný nový formulář. Rozhodnutí: snížit frekvenci a ponechat spouštěč pro návrat měsíční kontroly při změně formuláře.
+```
+
+Nedělejte z rytmu talisman. Pokud riziko ustoupilo, rytmus může být menší. Pokud se riziko zvýšilo, rytmus může být přísnější. Pokud se práce přesunula jinam, rytmus se má přesunout také.
+
+### 6. Změřte cenu rytmu
+
+Trvalý rytmus má chránit stav s nízkou cenou. Pokud každé použití vyžaduje vysvětlování, dohledávání, ruční opravy nebo dodatečné čištění dat, rytmus ještě není zdravý.
+
+Použijte krátkou scorecard:
+
+```text
+Spouštěč:
+0 = rytmus se nespustil nebo až zpětně, 1 = spustil se s připomenutím, 2 = spustil se přirozeně
+
+Výstup:
+0 = vznikl balast nebo chyběl výstup, 1 = drobná odchylka, 2 = minimální výstup stačil
+
+Datová stopa:
+0 = vznikla zakázaná nebo citlivá stopa, 1 = vznikla zbytečná drobnost, 2 = stopa zůstala čistá
+
+Cesta:
+0 = stará nebo náhradní cesta vyhrála, 1 = objevila se lokální odchylka, 2 = kanonická cesta drží
+
+Cena:
+0 = rytmus brzdí práci, 1 = občasné tření, 2 = přirozená součást práce
+```
+
+Jedna nula znamená zásah. Ne nutně velký, ale konkrétní. Samé dvojky znamenají, že rytmus pravděpodobně nepotřebuje další péči. U samých dvojek je největší riziko, že začnete vymýšlet vylepšení jen proto, že je kontrola hotová moc rychle. Odolejte. Ticho v provozu je někdy nejlepší výsledek.
+
+### 7. Rozhodněte další stav rytmu
+
+Na konci vyberte jeden stav a napište jednu větu. Žádné mlhavé "budeme sledovat". Sleduje se už jen to, co má spouštěč, vlastníka a další rozhodovací okamžik.
+
+Možné stavy:
+
+```text
+Ponechat:
+rytmus se spouští správně, výstup je minimální a datová stopa čistá.
+
+Zjednodušit:
+rytmus funguje, ale frekvence nebo výstup je větší než riziko.
+
+Přesunout:
+rytmus je užitečný, ale žije mimo skutečné místo práce.
+
+Zpřísnit dočasně:
+objevilo se nové riziko, nový nástroj, formulář, export nebo dodavatel.
+
+Sloučit:
+stejnou kontrolu už dělá jiný rytmus a dvojí práce nepřidává hodnotu.
+
+Ukončit:
+riziko zmizelo, datový tok skončil nebo rytmus stojí víc pozornosti než chrání.
+
+Znovu rozhodnout:
+lidé rytmus obcházejí, protože minimální výstup nebo pravidlo neodpovídá skutečné potřebě.
+```
+
+Příklad rozhodovací věty:
+
+```text
+Zjednodušit: po třech měsíčních použitích se rytmus spustil přirozeně, nevznikly exporty ani screenshoty a minimální výstup stačil, proto se kontrola přesouvá do kvartálního review s návratem měsíční frekvence při změně formuláře.
+```
+
+Nebo:
+
+```text
+Přesunout a znovu rozhodnout výstup: rytmus byl zapsaný v privacy review, ale exporty vznikají při support handoffu; další krok je vložit kontrolu do handoff šablony a nahradit screenshot anonymizovaným počtem uzavřených exportů.
+```
+
+### Kontrolní karta trvalého úklidového rytmu
+
+```text
+Název rytmu:
+
+Kontrolované použití nebo období:
+
+Kde měl rytmus žít:
+
+Kde se skutečně spustil:
+
+Vlastník podle role:
+
+Plánovaný minimální výstup:
+
+Skutečný výstup:
+
+Zakázaná nebo nežádoucí datová stopa:
+
+Skutečná datová stopa:
+
+Návrat staré cesty nebo náhradní nepořádek:
+
+Stop pravidlo a jeho vyhodnocení:
+
+Scorecard spouštěč / výstup / datová stopa / cesta / cena:
+
+Rozhodnutí dalšího stavu:
+
+Jedna nejbližší úprava:
+
+Kdy se rytmus znovu kontroluje:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Název rytmu:
+Měsíční úklid datové stopy webových formulářů.
+
+Kontrolované použití nebo období:
+Tři měsíční kontroly po zavedení trvalého rytmu.
+
+Kde měl rytmus žít:
+Opakovaný úkol měsíční kontroly formulářů a kanonická šablona.
+
+Kde se skutečně spustil:
+Ve všech třech případech v opakovaném úkolu.
+
+Vlastník podle role:
+Role odpovědná za webový provoz a formuláře.
+
+Plánovaný minimální výstup:
+Jedna věta o dokončení kontroly, smazání exportů a nevzniku screenshotů.
+
+Skutečný výstup:
+Tři krátké věty v měsíčních kartách, bez příloh.
+
+Zakázaná nebo nežádoucí datová stopa:
+Screenshoty zákaznických údajů, kopie obsahu formulářů, exporty bez retenčního důvodu.
+
+Skutečná datová stopa:
+Jen měsíční stavové věty. Exporty byly po kontrole smazány.
+
+Návrat staré cesty nebo náhradní nepořádek:
+Žádný návrat staré šablony. V jednom měsíci vznikl návrh přidat počet testovacích odeslání, ale bez ukládání obsahu.
+
+Stop pravidlo a jeho vyhodnocení:
+Po třech měsících beze změn přesunout do kvartálního review. Podmínka nastala.
+
+Scorecard spouštěč / výstup / datová stopa / cesta / cena:
+2 / 2 / 2 / 2 / 2.
+
+Rozhodnutí dalšího stavu:
+Zjednodušit frekvenci.
+
+Jedna nejbližší úprava:
+Přesunout kontrolu do kvartálního provozního review a ponechat spouštěč pro návrat měsíční kontroly při změně formuláře nebo nástroje.
+
+Kdy se rytmus znovu kontroluje:
+Po prvním kvartálním review nebo při přidání nového formuláře.
+
+Changelog věta:
+Měsíční úklid formulářové datové stopy byl po třech čistých cyklech přesunut do kvartálního review s návratem měsíční kontroly při změně formuláře nebo nástroje.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: vybrat dvě až tři skutečná použití trvalého rytmu.
+2. Tři minuty: ověřit, jestli se rytmus spustil v přirozeném pracovním okamžiku.
+3. Tři minuty: porovnat plánovaný minimální výstup se skutečným výstupem.
+4. Tři minuty: projít zakázanou a skutečnou datovou stopu.
+5. Tři minuty: hledat starou cestu nebo náhradní nepořádek.
+6. Tři minuty: použít stop pravidlo a scorecard.
+7. Dvě minuty: napsat rozhodovací větu, jednu úpravu a changelog.
+
+Workshop má skončit změnou pracovního místa, pokud je potřeba. Ne jen poznámkou, že "rytmus je třeba sledovat". Pokud má rytmus pokračovat beze změny, zapište to taky. Ponechat věc beze změny je platné rozhodnutí, když k němu máte důvod.
+
+### Checklist kapitoly
+
+- Kontrolujete skutečná použití rytmu, ne jen existenci karty?
+- Je jasné, kdy a kde se měl rytmus spustit?
+- Spustil se rytmus bez dodatečného nahánění?
+- Vznikl jen plánovaný minimální výstup?
+- Nevznikly screenshoty, exporty, kopie, vedlejší tabulky ani dlouhé komentáře bez účelu?
+- Prošli jste skutečnou datovou stopu, ne jen text pravidla?
+- Zkontrolovali jste návrat staré cesty i vznik náhradního nepořádku?
+- Použili jste stop pravidlo z karty rytmu?
+- Máte scorecard spouštěče, výstupu, datové stopy, cesty a ceny?
+- Vybrali jste jeden další stav: ponechat, zjednodušit, přesunout, zpřísnit, sloučit, ukončit nebo znovu rozhodnout?
+- Má nejbližší úprava konkrétní pracovní místo?
+- Changelog věta neukládá citlivé detaily ani zbytečné příklady?
+
+První kontrola trvalého úklidového rytmu chrání tým před dvěma extrémy. První extrém je zapomenout na úklid a nechat starý nepořádek vrátit. Druhý extrém je držet rytmus navždy, i když už chrání jen vlastní existenci. Zdravý provoz umí obojí: udržet hranici, když má smysl, a pustit ji, když už jen zabírá místo.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IN o kontrole trvalého úklidového rytmu po prvních použitích: skutečná použití, spouštěč rytmu, minimální výstup, návrat staré nebo náhradní cesty, práce se stop pravidlem, scorecard ceny, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IM o převodu stabilizovaného úklidu do trvalého úklidového rytmu: provozní stav, přirozený rytmus, minimální výstup, stop pravidlo, vlastnictví podle role, uzavření přechodových artefaktů, trvalá karta rytmu, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IL o kontrole stabilizovaného úklidu po prvních běžných cyklech: výběr kontrolního okna, ověření kanonického místa, porovnání výstupů, hledání návratu staré cesty a náhradního nepořádku, měření provozní ceny, privacy-first kontrola artefaktů, rozhodnutí stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IK o stabilizaci potvrzeného úklidu do běžného provozu: převod ověřeného výsledku do pracovní věty, výběr kanonického domova, zkrácení pravidla bez historického balastu, zavření starých cest, privacy-first uzavření artefaktů, lehký signál návratu nepořádku, stabilizační karta, příklad, mini workshop a checklist.
