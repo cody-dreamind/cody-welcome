@@ -1887,6 +1887,8 @@ Praktické minimum:
 - Background joby nesou tenant kontext explicitně.
 - Admin nástroje vyžadují důvod přístupu a logují zásah.
 
+Dobrá kontrola je jednoduchá: u každé nové funkce se zeptejte, kde bere tenant kontext a jak se ověří, že výsledek neobsahuje cizí data. Pokud odpověď zní "z aktuálního uživatele", doplňte ještě konkrétní cestu přes membership, roli, dotaz, cache, export a audit log. Tenant izolace má být součást návrhu a code review, ne tichý předpoklad ukrytý v ORM.
+
 Codyho komentář: multi-tenancy je místo, kde se optimismus mění v bezpečnostní dluh. "Tohle si vývojáři pohlídají" není architektura. To je přání s pull requestem.
 
 ### Izolace dat: sdílená databáze, schema, nebo databáze pro zákazníka
