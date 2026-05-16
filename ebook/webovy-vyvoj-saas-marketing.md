@@ -70504,8 +70504,303 @@ Workshop nesmí skončit větou "budeme sledovat". Sledujte jen tehdy, když ví
 
 Ověření úklidového rozhodnutí uzavírá smyčku zdravě: změna se neoslavuje jen proto, že byla aplikovaná, ale potvrzuje se podle práce. Když úklid pomohl, nechte ho dýchat. Když nepomohl, opravte nejmenší místo. A když ukáže, že pravidlo už nepotřebujete, ukončete ho. I smazané pravidlo může být dobrý výsledek.
 
+## Příloha IK: Stabilizace potvrzeného úklidu do běžného provozu
+
+Potvrzený úklid je dobrá zpráva, ale ještě není provozní standard. Dokud zůstává jen v ověřovací kartě, existuje jako vzpomínka na jednu povedenou změnu. Stabilizace znamená převést potvrzený úklid do běžného místa práce tak, aby tým nemusel vědět, jaká smyčka mu předcházela. Má prostě najít aktuální pravidlo, použít ho a nevracet se ke starému nepořádku.
+
+Tahle příloha navazuje na Přílohu IJ. Použijte ji ve chvíli, kdy první normální použití ukázalo, že úklid pomohl: člověk našel správné místo, výstup stačil, stará cesta se nevrátila a datová stopa se nezhoršila. Teď je potřeba z úklidu udělat stabilní provozní stav.
+
+Stabilizace není další velký projekt. Je to krátké provozní dotažení: zkrátit historii, aktualizovat kanonické místo, zavřít zbytky staré cesty, nastavit lehký signál návratu nepořádku a zapsat změnu tak, aby ji pochopil i člověk, který u původní kontroly nebyl.
+
+Codyho komentář: dobrý úklid poznáte podle toho, že o něm za měsíc nemusíte vyprávět. Když má tým používat pravidlo až po vysvětlení celé ságy "nejdřív jsme měli háček, pak kontrolu háčku, pak úklid háčku", neprovedli jste stabilizaci. Jen jste založili seriál.
+
+### 1. Vezměte jen potvrzený výsledek
+
+Neberte do stabilizace celý příběh. Vezměte poslední rozhodnutí z Přílohy IJ a přepište ho do aktuálního provozního stavu.
+
+Příklad rozhodnutí:
+
+```text
+Úklid potvrzen: kanonická šablona stačila, nevznikly screenshoty ani kopie a další kontrola zůstává v měsíčním rytmu.
+```
+
+Provozní stav:
+
+```text
+Měsíční kontrola formulářů používá kanonickou šablonu s ano/ne potvrzením smazání exportů. Screenshoty ani kopie zákaznických údajů se nepřikládají.
+```
+
+První věta patří do ověřovací historie. Druhá patří do místa, kde se bude pracovat dál. Stabilní pravidlo nemá začínat slovy "po ověření jsme zjistili". Má říct, co platí teď.
+
+### 2. Vyberte jeden kanonický domov
+
+Potvrzený úklid musí mít jedno místo, kde žije. Pokud po stabilizaci existuje pravidlo v šabloně, poznámce z workshopu, starém checklistu a připnuté zprávě v chatu, úklid jste nedotáhli. Jen jste snížili nepořádek na jednom místě a nechali ho růst jinde.
+
+Vyberte domov podle okamžiku použití:
+
+```text
+Při měsíční kontrole:
+kanonická kontrolní šablona.
+
+Při uzavírání incidentu:
+incidentní runbook nebo formulář uzavření.
+
+Při přípravě newsletteru:
+publikační checklist.
+
+Při exportu dat:
+pracovní postup exportu a mazání.
+
+Při předání klientovi:
+předávací karta nebo handover checklist.
+```
+
+Kanonický domov má být nejbližší práci, ne nejprestižnější dokument. Pokud pravidlo uložíte do obecné strategie, ale člověk při práci otevírá šablonu, pravidlo je prakticky schované.
+
+### 3. Přepište pravidlo bez historického balastu
+
+Stabilizované pravidlo má být krátké. Historie patří do changelogu, ne do každodenní instrukce.
+
+Špatně:
+
+```text
+Na základě kontroly úklidového rozhodnutí po prvním normálním použití jsme ověřili, že screenshoty nejsou potřeba, proto se doporučuje používat pouze ano/ne potvrzení, pokud nenastane výjimka.
+```
+
+Lépe:
+
+```text
+U smazání exportů stačí ano/ne potvrzení. Screenshoty ani kopie zákaznických údajů nepřikládejte.
+```
+
+Dobré stabilní pravidlo má tři části:
+
+```text
+Kdy platí:
+u které práce nebo kroku se používá.
+
+Co má člověk udělat:
+jedna konkrétní akce nebo hranice.
+
+Co nemá vzniknout:
+zvlášť pokud chrání soukromí, retenci nebo duplicitu.
+```
+
+Nesnažte se do pravidla vložit všechny výjimky. Pokud výjimky opravdu existují, dejte vedle krátkou eskalační větu:
+
+```text
+Pokud právní nebo bezpečnostní důvod vyžaduje detailnější důkaz, založte samostatnou kontrolní kartu s retencí a vlastníkem.
+```
+
+To je lepší než přidat pět odstavců pro hypotetické situace, které pak nikdo nečte.
+
+### 4. Zavřete zbytky staré cesty
+
+Stabilizace selže nejčastěji tím, že stará cesta zůstane pohodlnější než nová. Lidé nepoužijí starý postup proto, že milují chaos. Použijí ho, protože ho mají v záložce, v kopii, v šabloně projektu nebo v paměti.
+
+Po přepsání kanonického místa projděte zbytky:
+
+```text
+Staré šablony:
+archivovat, označit jako nahrazené nebo smazat podle pravidel retence.
+
+Staré odkazy:
+přesměrovat na kanonické místo nebo odstranit z indexu.
+
+Staré automatizace:
+vypnout krok, který vytvářel zbytečný důkaz nebo kopii.
+
+Staré instrukce:
+zkrátit na odkaz na nový zdroj pravdy.
+
+Staré příklady:
+anonymizovat, zkrátit nebo nahradit příkladem bez zákaznických dat.
+```
+
+U každého zbytku rozhodněte jeden stav:
+
+```text
+Ponechat jako kanonické:
+jen pokud je to nový zdroj pravdy.
+
+Archivovat:
+pokud má historickou hodnotu, ale nemá se používat.
+
+Smazat:
+pokud nemá provozní ani právní důvod dál existovat.
+
+Přesměrovat:
+pokud na něj lidé stále přicházejí z běžné práce.
+```
+
+Privacy-first zásada je jednoduchá: když starý artefakt obsahuje zákaznická, osobní nebo provozně citlivá data a nemá jasný účel, nemá se stát památníkem. Má se uklidit.
+
+### 5. Nastavte lehký signál návratu nepořádku
+
+Stabilní pravidlo nepotřebuje těžký dohled. Potřebuje jen malý signál, který ukáže, že se starý problém vrací.
+
+Příklady lehkých signálů:
+
+```text
+V měsíční kontrole se objevil screenshot místo ano/ne potvrzení.
+
+Někdo použil archivovanou šablonu.
+
+Vznikl nový export bez retence.
+
+Člověk se ptal v chatu na pravidlo, které mělo být přímo v šabloně.
+
+Do checklistu přibylo nové pole "pro jistotu".
+```
+
+Signál nemá sledovat lidi. Má sledovat tření v systému. Pokud se objeví, ptejte se nejdřív na pracovní místo: bylo pravidlo dost blízko práci? Byla věta čitelná? Nechyběl legitimní kontext? Nebyla stará cesta pořád po ruce?
+
+Zapište signál jednou větou:
+
+```text
+Pokud se v další měsíční kontrole objeví screenshot nebo použití staré šablony, pravidlo se vrací k lehké úpravě.
+```
+
+To stačí. Nepotřebujete dashboard návratu screenshotů. Opravdu ne. I když by měl pěkný graf, svět už pár grafů viděl.
+
+### 6. Uzavřete ověřovací artefakty
+
+Po stabilizaci už ověřovací karta nemá být aktivní pracovní pomůcka. Je to důkaz změny, ne každodenní instrukce.
+
+Uzavření artefaktů:
+
+```text
+Ověřovací kartu označte jako uzavřenou.
+
+Do changelogu zapište, co je aktuální pravidlo.
+
+Do kanonického místa přeneste jen krátkou pracovní větu.
+
+Dočasné exporty, screenshoty a pracovní kopie smažte nebo archivujte podle retence.
+
+Pokud karta obsahuje citlivé příklady, zkraťte je na typ situace a rozhodnutí.
+```
+
+Příklad dobrého uzavření:
+
+```text
+Ověření úklidu měsíční kontroly formulářů uzavřeno. Aktuální pravidlo je v kanonické šabloně: u smazání exportů stačí ano/ne potvrzení, screenshoty ani kopie zákaznických údajů se nepřikládají. Ověřovací karta ponechána bez příloh, stará projektová kopie archivována.
+```
+
+Záměrně v tom není seznam konkrétních zákazníků, zpráv ani formulářových obsahů. Stabilizace má snížit informační zátěž, ne ji zabalit do hezčího odstavce.
+
+### 7. Předání napište pro roli, ne pro pamětníky
+
+Pokud pravidlo bude používat víc lidí, napište krátké předání. Ne jako oznámení o interním procesu, ale jako instrukci pro roli.
+
+Dobré předání:
+
+```text
+Od další měsíční kontroly formulářů používejte jen kanonickou šablonu. U smazání exportů stačí ano/ne potvrzení; screenshoty ani kopie zákaznických údajů nepřikládejte. Stará projektová kopie je archivovaná.
+```
+
+Špatné předání:
+
+```text
+Dokončili jsme úklidový proces po ověření kontrolního háčku a stabilizovali jsme ho podle poslední karty.
+```
+
+První věta říká, co má člověk dělat. Druhá dokazuje, že někdo četl vlastní metodiku. To je hezké, ale práci to moc neposune.
+
+### Stabilizační karta potvrzeného úklidu
+
+```text
+Název úklidu:
+
+Potvrzené rozhodnutí z ověření:
+
+Aktuální pracovní pravidlo:
+
+Kanonický domov pravidla:
+
+Co bylo archivováno, smazáno nebo přesměrováno:
+
+Privacy-first stav po stabilizaci:
+
+Lehký signál návratu nepořádku:
+
+Kdo pravidlo vlastní podle role:
+
+Changelog věta:
+
+Krátké předání týmu, pokud je potřeba:
+```
+
+Karta je poslední pracovní zastávka, ne nový dlouhodobý dokument. Po stabilizaci má být nejdůležitější kanonické místo, ne karta samotná.
+
+### Příklad vyplněné stabilizační karty
+
+```text
+Název úklidu:
+Měsíční formuláře bez screenshotů zákaznických údajů.
+
+Potvrzené rozhodnutí z ověření:
+Úklid potvrzen po prvním normálním použití: kanonická šablona stačila, nevznikly screenshoty ani kopie a stará projektová šablona nebyla použita.
+
+Aktuální pracovní pravidlo:
+U smazání exportů stačí ano/ne potvrzení. Screenshoty ani kopie zákaznických údajů nepřikládejte.
+
+Kanonický domov pravidla:
+Šablona měsíční kontroly formulářů, pole "Uzavření exportů".
+
+Co bylo archivováno, smazáno nebo přesměrováno:
+Stará projektová kopie šablony archivována, odkaz v indexu přesměrován na kanonickou šablonu, dočasné exporty smazány podle retence.
+
+Privacy-first stav po stabilizaci:
+Zůstává jen ano/ne potvrzení v měsíční kartě. Nevzniká screenshot, export ani kopie obsahu formulářů.
+
+Lehký signál návratu nepořádku:
+Pokud se v další kontrole objeví screenshot, použití staré šablony nebo nové pole pro detailní důkaz, pravidlo se vrací k lehké úpravě.
+
+Kdo pravidlo vlastní podle role:
+Role odpovědná za webový provoz a formuláře.
+
+Changelog věta:
+Potvrzený úklid měsíční kontroly formulářů byl stabilizován do kanonické šablony a stará projektová cesta byla uzavřena.
+
+Krátké předání týmu, pokud je potřeba:
+Od další měsíční kontroly používejte jen kanonickou šablonu; u exportů stačí ano/ne potvrzení bez screenshotů a kopií zákaznických údajů.
+```
+
+Všimněte si, že stabilizace neprodlužuje proces. Naopak. Odebírá historickou oporu, starou kopii a zbytečný důkaz. Tým má méně míst, méně textu a jasnější hranici.
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst potvrzené rozhodnutí z Přílohy IJ.
+2. Tři minuty: přepsat ho do aktuální pracovní věty.
+3. Tři minuty: vybrat jeden kanonický domov pravidla.
+4. Čtyři minuty: projít staré šablony, odkazy, kopie a dočasné důkazy.
+5. Tři minuty: napsat privacy-first stav po stabilizaci.
+6. Dvě minuty: nastavit lehký signál návratu nepořádku.
+7. Dvě minuty: zapsat changelog a případné krátké předání týmu.
+
+Workshop končí až ve chvíli, kdy je jasné, kde pravidlo žije a která stará cesta už nemá být používána. Bez toho nejde o stabilizaci, ale jen o další poznámku na hromádce.
+
+### Checklist kapitoly
+
+- Máte potvrzené rozhodnutí z prvního normálního použití úklidu?
+- Přepsali jste ho do aktuální pracovní věty bez historického balastu?
+- Vybrali jste jeden kanonický domov pravidla podle místa práce?
+- Je pravidlo dost krátké na to, aby šlo použít při práci?
+- Říká pravidlo, co udělat a co nemá vzniknout?
+- Zavřeli jste staré šablony, odkazy, kopie nebo automatizace, které by vracely původní nepořádek?
+- Snížila nebo alespoň nezhoršila se datová stopa po stabilizaci?
+- Uzavřeli jste ověřovací artefakty a odstranili dočasné důkazy podle retence?
+- Máte lehký signál, podle kterého poznáte návrat nepořádku?
+- Je vlastník pravidla role, ne pamětník původní změny?
+- Changelog věta neobsahuje osobní, zákaznická ani zbytečně detailní provozní data?
+- Pokud bylo potřeba předání týmu, říká konkrétně, co se od příštího použití mění?
+
+Stabilizace potvrzeného úklidu je tichá práce, ale drží systém zdravý. Dobrý provoz nevzniká tím, že se každá změna navždy vysvětluje. Vzniká tím, že potvrzené věci zkrátíte do pravidla, zavřete staré cesty a necháte tým dělat práci bez zbytečné historie v batohu.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IK o stabilizaci potvrzeného úklidu do běžného provozu: převod ověřeného výsledku do pracovní věty, výběr kanonického domova, zkrácení pravidla bez historického balastu, zavření starých cest, privacy-first uzavření artefaktů, lehký signál návratu nepořádku, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IJ o ověření úklidového rozhodnutí po příštím normálním použití: výběr skutečného průchodu, porovnání slibu s realitou, hledání náhradního nepořádku, privacy-first kontrola skutečné datové stopy, čtyři stavy rozhodnutí, ověřovací karta, příklad, lehká úprava, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha II o převodu kontroly běžného rytmu do jednoho úklidového rozhodnutí: práce s poslední rozhodovací větou, výběr typu úklidu, úprava nejbližšího pracovního místa, privacy-first brzda, úklidová karta, vyplněný příklad, aplikace změny, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IH o kontrole běžného rytmu po stabilizaci revizního háčku: výběr skutečného cyklu, dohledatelnost bez autora, porovnání výstupu s pracovní větou, scorecard ceny použití, kontrola návratu staré cesty, privacy-first kontrola skutečné datové stopy, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
