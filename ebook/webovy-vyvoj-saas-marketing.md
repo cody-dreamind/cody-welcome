@@ -70798,8 +70798,346 @@ Workshop končí až ve chvíli, kdy je jasné, kde pravidlo žije a která star
 
 Stabilizace potvrzeného úklidu je tichá práce, ale drží systém zdravý. Dobrý provoz nevzniká tím, že se každá změna navždy vysvětluje. Vzniká tím, že potvrzené věci zkrátíte do pravidla, zavřete staré cesty a necháte tým dělat práci bez zbytečné historie v batohu.
 
+## Příloha IL: Kontrola stabilizovaného úklidu po prvních běžných cyklech
+
+Stabilizovaný úklid má po prvním potvrzení ještě jednu zkoušku: několik normálních cyklů. Jedno použití ukáže, že pravidlo může fungovat. První běžné cykly ukážou, jestli funguje bez autora změny, bez slavnostní pozornosti a bez toho, aby si tým potichu vyráběl náhradní nepořádek.
+
+Tahle příloha navazuje na Přílohu IK. Použijte ji po dvou až třech normálních použitích stabilizovaného úklidu: po dvou měsíčních kontrolách, po několika releasech, po prvních předáních zákazníkovi nebo po prvních opakovaných použitích nové šablony. Cílem není znovu dokazovat, že původní úklid byl dobrý nápad. Cílem je zjistit, jestli se z něj stal přirozený provozní stav.
+
+Kontrola po prvních cyklech má být krátká a věcná. Nemá přidat další vrstvu řízení. Má odpovědět na čtyři otázky: používá se kanonické místo, drží se krátké pravidlo, nevrací se stará cesta a nevzniká nová datová stopa.
+
+Codyho komentář: některé procesy vypadají po úklidu jako uklizený stůl v pátek odpoledne. V pondělí ráno je na něm zase stará složka, tři kopie a poznámka "radši ponechat". První cykly nejsou formalita. Jsou realita, která na proces nemá sentiment.
+
+### 1. Vyberte malé okno skutečné práce
+
+Nečekejte půl roku. Kontrolujte ve chvíli, kdy už se pravidlo použilo víc než jednou, ale ještě se nestihlo tiše rozpadnout.
+
+Dobré kontrolní okno:
+
+```text
+dvě až tři měsíční kontroly,
+
+dva až tři releasy,
+
+tři až pět použití stejné předávací šablony,
+
+první sada opakovaných zákaznických handoffů,
+
+první kvartální průchod po stabilizaci.
+```
+
+Okno má být dost malé na rychlé vyhodnocení a dost skutečné na to, aby ukázalo návyk. Pokud kontrolujete jen jednu událost, jste zpět v ověření z Přílohy IJ. Pokud kontrolujete příliš dlouhé období, budete třídit historii místo rozhodnutí.
+
+Zapište si:
+
+```text
+které cykly kontrolujete,
+
+kdy proběhly,
+
+kdo je vlastnil podle role,
+
+kde měl stabilizovaný úklid žít,
+
+jaký výstup měl vznikat.
+```
+
+Nepotřebujete osobní jména, pokud nejsou nutná pro provozní odpovědnost. Role obvykle stačí a je to čistší.
+
+### 2. Ověřte, že kanonické místo opravdu vyhrálo
+
+Stabilizace slíbila jeden domov pravidla. Teď ověřte, jestli ho lidé používají.
+
+Ptejte se:
+
+```text
+Otevírali lidé kanonickou šablonu nebo postup?
+
+Zmizely staré odkazy z indexu, úkolů a automatizací?
+
+Nevznikla nová lokální kopie "jen pro tento projekt"?
+
+Nemusel někdo pravidlo znovu vysvětlovat v chatu?
+
+Je aktuální pravidlo přímo v místě práce?
+```
+
+Kanonické místo nemusí být dokonalé. Musí být vítězem běžné cesty. Pokud lidé opakovaně sahají jinam, nesvalujte to nejdřív na disciplínu týmu. Podívejte se, jestli stará cesta není rychlejší, viditelnější nebo lépe pojmenovaná.
+
+Příklad:
+
+```text
+Kanonická šablona je v indexu "Provoz webu", ale tým při měsíční kontrole otevírá starý úkol v projektové nástěnce. Problém není v tom, že tým neumí číst index. Problém je v tom, že pracovní rytmus začíná v nástěnce, ne v indexu.
+```
+
+Řešení může být jednoduché: přidat odkaz na kanonickou šablonu přímo do opakovaného úkolu a starou přílohu odstranit.
+
+### 3. Porovnejte výstupy mezi cykly
+
+Stabilizovaný úklid má zjednodušit výstup. Po prvních cyklech porovnejte, jestli výstupy vypadají konzistentně a jestli stačí k rozhodnutí.
+
+Sledujte:
+
+```text
+Vzniká stejný typ výstupu?
+
+Stačí výstup k rozhodnutí nebo uzavření práce?
+
+Nepřibývají pole, přílohy nebo vysvětlení "pro jistotu"?
+
+Není pravidlo vykládáno pokaždé jinak?
+
+Neztratil se ochranný účel původního úklidu?
+```
+
+Příklad dobrého stavu:
+
+```text
+Ve všech třech měsíčních kontrolách zůstalo jen ano/ne potvrzení smazání exportů. Nejsou přiložené screenshoty, dočasné exporty byly po kontrole smazány a výstup stačil k uzavření.
+```
+
+Příklad varování:
+
+```text
+První měsíc vzniklo ano/ne potvrzení, druhý měsíc screenshot "pro jistotu" a třetí měsíc sdílená tabulka s ukázkami formulářů. Pravidlo se sice neztratilo, ale tým si vyrobil náhradní důkaz.
+```
+
+Konzistence neznamená uniformitu kvůli uniformitě. Znamená, že lidé rozumí hranici a nepotřebují ji pokaždé znovu vynalézat.
+
+### 4. Hledejte návrat nepořádku v nové podobě
+
+Starý nepořádek se málokdy vrátí se stejným názvem. Když zavřete screenshoty, objeví se exporty. Když archivujete starou šablonu, vznikne projektová kopie. Když zkrátíte formulář, někdo si vede vedlejší tabulku.
+
+Hledejte hlavně:
+
+```text
+nové kopie kanonické šablony,
+
+dočasné exporty bez retence,
+
+screenshoty místo stručného potvrzení,
+
+duplicitní checklist v projektu,
+
+ruční poznámky v chatu, které nahrazují pravidlo,
+
+automatizaci, která přidává starý krok zpět,
+
+nové pole, které sbírá víc detailů než původní pravidlo.
+```
+
+Náhradní nepořádek je signál, že stabilizované pravidlo buď není dost blízko práci, nebo lidem chybí legitimní důkaz pro rozhodnutí. V prvním případě přesuňte pravidlo blíž. V druhém zvažte, jestli nejmenší důkaz nebyl zkrácen příliš agresivně.
+
+Privacy-first hranice ale zůstává: pokud potřebujete silnější důkaz, nejdřív hledejte agregaci, anonymizaci nebo krátké ano/ne potvrzení. Nesbírejte surová data jen proto, že se lépe ukazují v kontrole.
+
+### 5. Změřte provozní cenu
+
+Stabilizovaný úklid má práci zjednodušit. Pokud po něm lidé pořád ztrácejí čas hledáním, vysvětlováním nebo opravováním výstupů, úklid ještě není stabilní.
+
+Použijte lehkou scorecard za celé kontrolní okno:
+
+```text
+Dohledatelnost:
+0 = lidé pravidlo opakovaně hledali, 1 = našli s pomocí, 2 = našli sami
+
+Srozumitelnost:
+0 = výklad se lišil, 1 = občas bylo potřeba dovysvětlení, 2 = pravidlo stačilo
+
+Konzistence výstupu:
+0 = výstupy se rozpadly, 1 = drobné odchylky, 2 = výstupy drží tvar
+
+Datová stopa:
+0 = vznikla citlivá stopa navíc, 1 = vznikly zbytečné drobnosti, 2 = stopa zůstala minimální
+
+Cena:
+0 = pravidlo brzdí práci, 1 = občasné tření, 2 = přirozená součást rytmu
+```
+
+Skóre není soutěž. Je to zkratka pro rozhodnutí. Pokud má oblast 0, udělejte zásah. Pokud má oblast 1, vyberte jednu malou úpravu nebo ji vědomě nechte do dalšího okna. Pokud má všechno 2, nechte pravidlo být. To je také práce, i když u toho nevznikne nový dokument. Hrdinství bez dokumentu, hrozné pomyšlení.
+
+### 6. Udělejte privacy-first kontrolu artefaktů
+
+Po více cyklech už vidíte, co v systému zůstává. Neřešte jen šablonu. Projděte skutečné artefakty.
+
+Zkontrolujte:
+
+```text
+aktuální kanonickou šablonu nebo postup,
+
+výstupy z kontrolovaných cyklů,
+
+dočasné exporty a pracovní soubory,
+
+komentáře a přílohy v úkolech,
+
+automatizace, které zakládají další cyklus,
+
+archiv starých verzí,
+
+přístupy k místům, kde důkazy leží.
+```
+
+U každého artefaktu si odpovězte:
+
+```text
+Má pořád účel?
+
+Obsahuje osobní, zákaznická nebo provozně citlivá data?
+
+Je jasné, kdo k němu má přístup?
+
+Je jasné, kdy se smaže nebo archivuje?
+
+Stačil by kratší, agregovaný nebo anonymizovaný záznam?
+```
+
+Pokud najdete artefakt bez účelu, ukliďte ho podle retence. Pokud najdete citlivější stopu, než pravidlo dovoluje, opravte pracovní místo, které ji vyrobilo. Samotné smazání nestačí, pokud cesta k opakování zůstává otevřená.
+
+### 7. Rozhodněte stav po prvních cyklech
+
+Na konci kontroly vyberte jeden stav. Nepište dlouhý esej, pokud stačí věta.
+
+Možné stavy:
+
+```text
+Stabilní:
+pravidlo drží, kanonické místo se používá, výstupy stačí a datová stopa je minimální.
+
+Lehce upravit:
+pravidlo funguje, ale jedno pracovní místo, název nebo věta potřebuje zkrátit nebo přesunout.
+
+Zavřít návrat staré cesty:
+pravidlo funguje, ale starý odkaz, kopie nebo automatizace pořád vytváří riziko.
+
+Znovu rozhodnout:
+úklid neřeší skutečnou potřebu nebo lidem chybí legitimní důkaz.
+
+Ukončit:
+pravidlo už nechrání reálné riziko, stojí víc pozornosti než hodnoty nebo se stalo součástí jiného standardu.
+```
+
+Příklad rozhodovací věty:
+
+```text
+Stabilní s lehkou úpravou názvu: po třech měsíčních kontrolách tým používal kanonickou šablonu, výstup zůstal jen ano/ne potvrzení bez screenshotů, ale opakovaný úkol v nástěnce se přejmenuje tak, aby vedl přímo na aktuální šablonu.
+```
+
+Nebo:
+
+```text
+Znovu rozhodnout: tým pravidlo našel, ale u dvou cyklů vznikl nový export, protože ano/ne potvrzení nestačilo pro technické ověření doručení. Další krok je definovat agregovaný důkaz bez obsahu zpráv.
+```
+
+### Kontrolní karta po prvních cyklech
+
+```text
+Název stabilizovaného úklidu:
+
+Kontrolované cykly:
+
+Kanonický domov pravidla:
+
+Vlastník podle role:
+
+Použité pracovní místo:
+
+Výstupy v jednotlivých cyklech:
+
+Návrat staré cesty nebo náhradní nepořádek:
+
+Skutečná datová stopa:
+
+Artefakty bez dalšího účelu:
+
+Scorecard dohledatelnost / srozumitelnost / konzistence / datová stopa / cena:
+
+Rozhodnutí stavu:
+
+Jedna nejbližší úprava:
+
+Co se smaže, archivuje nebo přesměruje:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Název stabilizovaného úklidu:
+Měsíční formuláře bez screenshotů zákaznických údajů.
+
+Kontrolované cykly:
+Tři měsíční kontroly webových formulářů.
+
+Kanonický domov pravidla:
+Šablona měsíční kontroly formulářů, pole "Uzavření exportů".
+
+Vlastník podle role:
+Role odpovědná za webový provoz a formuláře.
+
+Použité pracovní místo:
+Opakovaný úkol měsíční kontroly s odkazem na kanonickou šablonu.
+
+Výstupy v jednotlivých cyklech:
+Ve všech třech cyklech vzniklo jen ano/ne potvrzení smazání exportů.
+
+Návrat staré cesty nebo náhradní nepořádek:
+V jednom starším úkolu zůstal odkaz na archivovanou šablonu, ale nebyl použit.
+
+Skutečná datová stopa:
+Zůstaly jen měsíční karty s potvrzením. Nevznikly screenshoty ani kopie obsahu formulářů.
+
+Artefakty bez dalšího účelu:
+Starý odkaz v jednom opakovaném úkolu.
+
+Scorecard dohledatelnost / srozumitelnost / konzistence / datová stopa / cena:
+2 / 2 / 2 / 2 / 1.
+
+Rozhodnutí stavu:
+Stabilní se zavřením návratu staré cesty.
+
+Jedna nejbližší úprava:
+Přesměrovat starý odkaz v opakovaném úkolu na kanonickou šablonu.
+
+Co se smaže, archivuje nebo přesměruje:
+Starý odkaz se nahradí, archivovaná šablona zůstává jen v archivu bez pracovního odkazu.
+
+Changelog věta:
+Stabilizovaný úklid měsíční kontroly formulářů drží po třech cyklech; starý odkaz v opakovaném úkolu byl přesměrován na kanonickou šablonu.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: vybrat dvě až tři skutečná použití stabilizovaného úklidu.
+2. Tři minuty: ověřit, jestli kanonické místo vyhrálo běžnou cestu.
+3. Tři minuty: porovnat výstupy mezi cykly.
+4. Tři minuty: hledat starou cestu nebo náhradní nepořádek.
+5. Tři minuty: projít skutečné artefakty a datovou stopu.
+6. Tři minuty: vyplnit scorecard.
+7. Dvě minuty: napsat rozhodovací větu, jednu úpravu a changelog.
+
+Workshop má skončit stavem, ne seznamem volných pozorování. Pokud najdete větší téma, založte ho samostatně a tady dokončete kontrolu stabilizovaného úklidu. Jinak se z malé provozní kontroly stane nekonečný výlet po všech nedokonalostech týmu. To se tváří poctivě, ale většinou jen oddaluje jednu malou opravu.
+
+### Checklist kapitoly
+
+- Kontrolujete několik skutečných cyklů, ne demo ani jeden izolovaný průchod?
+- Je jasné, kde stabilizovaný úklid kanonicky žije?
+- Použili lidé kanonické místo bez autora původní změny?
+- Jsou výstupy mezi cykly dost konzistentní pro rozhodnutí?
+- Nevrátila se stará cesta přes kopii, odkaz, automatizaci nebo starý úkol?
+- Nevznikl náhradní nepořádek v podobě exportu, screenshotu, vedlejší tabulky nebo chatu?
+- Prošli jste skutečné artefakty, ne jen text pravidla?
+- Má každý zbylý důkaz účel, vlastníka přístupu a retenci?
+- Použili jste scorecard dohledatelnosti, srozumitelnosti, konzistence, datové stopy a ceny?
+- Vybrali jste jeden stav: stabilní, lehce upravit, zavřít starou cestu, znovu rozhodnout nebo ukončit?
+- Máte jednu nejbližší úpravu místo nového balíku práce?
+- Changelog věta neobsahuje surová osobní, zákaznická ani zbytečně detailní provozní data?
+
+Kontrola po prvních cyklech je dobrý filtr proti procesnímu optimismu. Ukáže, jestli úklid opravdu přežil kontakt s běžnou prací. Když ano, nechte ho být a jen zavřete drobné návraty starých cest. Když ne, opravte nejmenší místo nebo pravidlo ukončete. Provoz se nezlepšuje tím, že všechno držíte navždy. Zlepšuje se tím, že dobré věci necháte pracovat a zbytečné věci pošlete ze stolu pryč.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IL o kontrole stabilizovaného úklidu po prvních běžných cyklech: výběr kontrolního okna, ověření kanonického místa, porovnání výstupů, hledání návratu staré cesty a náhradního nepořádku, měření provozní ceny, privacy-first kontrola artefaktů, rozhodnutí stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IK o stabilizaci potvrzeného úklidu do běžného provozu: převod ověřeného výsledku do pracovní věty, výběr kanonického domova, zkrácení pravidla bez historického balastu, zavření starých cest, privacy-first uzavření artefaktů, lehký signál návratu nepořádku, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IJ o ověření úklidového rozhodnutí po příštím normálním použití: výběr skutečného průchodu, porovnání slibu s realitou, hledání náhradního nepořádku, privacy-first kontrola skutečné datové stopy, čtyři stavy rozhodnutí, ověřovací karta, příklad, lehká úprava, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha II o převodu kontroly běžného rytmu do jednoho úklidového rozhodnutí: práce s poslední rozhodovací větou, výběr typu úklidu, úprava nejbližšího pracovního místa, privacy-first brzda, úklidová karta, vyplněný příklad, aplikace změny, mini workshop a checklist.
