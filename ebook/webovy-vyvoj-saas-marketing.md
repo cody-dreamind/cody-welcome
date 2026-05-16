@@ -64822,8 +64822,292 @@ Výstupem workshopu je jeden udržovací záznam a případně jedna hotová úp
 
 Převod kontroly do udržovacího záznamu je malý krok, ale drží celý systém pohromadě. Bez něj se kontroly mění v dojmy a korekce v historky. S ním má tým krátkou paměť tam, kde ji potřebuje: u konkrétní práce, konkrétního rozhodnutí a konkrétní datové stopy.
 
+## Příloha HT: Kontrola udržovacího záznamu po prvním použití
+
+Udržovací záznam z Přílohy HS má smysl až ve chvíli, kdy pomůže při skutečné práci. Dokud jen leží v changelogu, checklistu nebo opakovaném úkolu, je to slib. První použití ukáže, jestli je záznam dost krátký, dost blízko místu práce a dost konkrétní na to, aby člověka provedl dalším rozhodnutím bez nové administrativy.
+
+Tato příloha neřeší další velkou revizi pravidla. Řeší jednoduchou provozní kontrolu:
+
+```text
+Pomohl udržovací záznam při příštím běžném použití, nebo jen přidal další větu, kterou lidé obcházejí?
+```
+
+Kontrola má být lehká. Neotevírá celou historii korekce, nevrací se ke všem důkazům a nevyžaduje nový workshop, pokud k tomu není důvod. Sleduje jeden normální průchod práce a odpoví, zda záznam splnil svůj účel.
+
+Codyho komentář: udržovací záznam je jako cedule u správných dveří. Když ji dáte na nástěnku o tři chodby vedle, můžete mít skvělý text a stejně nikomu nepomůže. První použití je test, jestli cedule stojí tam, kde člověk skutečně rozhoduje.
+
+### 1. Vyberte první normální použití
+
+Nekontrolujte záznam na umělé situaci. Vyberte první běžný průchod, kde měl záznam pomoci: měsíční kontrolu formulářů, přípravu výstupu, aktualizaci checklistu, onboarding nového člověka, review datové mapy nebo opakovaný provozní úkol.
+
+Dobré první použití splňuje tři podmínky:
+
+- práce by proběhla i bez kontroly,
+- člověk u ní narazí na místo, kde je záznam uložený,
+- výsledek se dá porovnat s původním slibem záznamu.
+
+Slabé první použití:
+
+```text
+Autor záznamu si ho sám přečetl a řekl, že dává smysl.
+```
+
+Silnější první použití:
+
+```text
+Člověk, který běžně připravuje měsíční kontrolu formulářů, použil opakovaný úkol s novým odkazem a dokončil výstup bez screenshotů zákaznických údajů.
+```
+
+Rozdíl je v realitě. Kontrolujete práci, ne text.
+
+### 2. Sledujte tři signály
+
+Při prvním použití sledujte jen tři věci. Víc signálů obvykle znamená, že z lehké kontroly děláte audit.
+
+```text
+1. Nalezení:
+Našel člověk záznam v okamžiku, kdy ho potřeboval?
+
+2. Rozhodnutí:
+Pomohl záznam vybrat správný další krok?
+
+3. Výstup:
+Vznikl výstup bez návratu starého tření nebo zbytečné datové stopy?
+```
+
+Příklad:
+
+- Nalezení: opakovaný úkol vedl na nový checklist.
+- Rozhodnutí: člověk pochopil, že má použít odkaz na primární záznam, ne screenshot.
+- Výstup: kontrolní poznámka obsahovala anonymizovaný závěr a odkaz, ne kopii zákaznických údajů.
+
+Pokud selže nalezení, problém často není v pravidle, ale v umístění. Pokud selže rozhodnutí, text je moc obecný. Pokud selže výstup, záznam možná nepokrývá skutečné tření nebo okolní systém stále tlačí člověka do staré cesty.
+
+### 3. Oddělte chybu záznamu od chyby okolí
+
+Ne každé selhání znamená, že udržovací záznam je špatný. Někdy je správný, ale okolí ho přebije.
+
+Typické situace:
+
+- Záznam je správný, ale starý odkaz zůstal v šabloně.
+- Checklist je správný, ale opakovaný úkol vede na archivní verzi.
+- Changelog je jasný, ale člověk pracuje z osobní kopie dokumentu.
+- Pravidlo říká "neukládat screenshoty", ale nástroj stále nabízí screenshot jako nejrychlejší cestu.
+- Privacy-first závěr je správný, ale formulář nebo export pořád sbírá víc dat, než je potřeba.
+
+Praktická otázka:
+
+```text
+Kdyby člověk záznam našel a dodržel, vznikl by správný výstup?
+```
+
+Pokud ano, opravte okolní cestu: starý odkaz, šablonu, úkol, zkratku, onboardingovou poznámku nebo oprávnění. Pokud ne, opravte samotný záznam: je moc dlouhý, neříká další krok, neumí rozlišit stav nebo nepatří na správné místo.
+
+### 4. Zkraťte místo rozšiřování
+
+První reakce na selhání bývá přidat další vysvětlení. To je lákavé a často špatně. Udržovací záznam má pomáhat v práci, kde člověk nemá čas číst historii. Když nefunguje, nejdřív hledejte zkrácení, přesun nebo přepsání do jasnější akce.
+
+Slabá oprava:
+
+```text
+Doplnit do záznamu detailní popis, proč jsme screenshoty přestali používat, včetně historie rozhodnutí a příkladů.
+```
+
+Silnější oprava:
+
+```text
+V opakovaném úkolu přepsat větu na: "Do výstupu vlož odkaz na CRM záznam, ne screenshot zákaznických údajů."
+```
+
+Když je problém v nalezení, přesouvejte. Když je problém v pochopení, zkracujte. Když je problém ve výstupu, upravujte pracovní místo. Další dokument zakládejte až ve chvíli, kdy jeden krátký zásah nestačí.
+
+### 5. Privacy-first kontrola prvního použití
+
+Udržovací záznam často vznikl kvůli datové stopě: méně screenshotů, méně exportů, méně osobních poznámek, jasnější retence, lepší odkaz na primární zdroj. První použití proto musí zkontrolovat, zda se datová stopa skutečně zmenšila.
+
+Zeptejte se:
+
+- Vznikly při prvním použití nové kopie osobních nebo zákaznických dat?
+- Přenesl se důkaz do výstupu jako odkaz nebo anonymizované shrnutí?
+- Nezůstaly dočasné poznámky v osobním prostoru?
+- Je jasné, co se maže, co zůstává a proč?
+- Nepřibyl kvůli kontrole nový nástroj, který sbírá další data?
+
+Dobrá privacy-first věta po prvním použití:
+
+```text
+První použití proběhlo bez screenshotů a bez nového exportu. Ve výstupu zůstal jen odkaz na primární CRM záznam a anonymizovaný závěr kontroly.
+```
+
+Slabá věta:
+
+```text
+Data vypadají v pořádku.
+```
+
+"V pořádku" není provozní stav. Je to pocit. A pocity jsou fajn na kávu, horší na retenci dat.
+
+### 6. Rozhodněte jeden další stav
+
+Po prvním použití vyberte jeden stav. Ne tři možnosti, ne "uvidíme", ne neurčité "ještě sledovat".
+
+```text
+1. Záznam drží:
+Pomohl při práci, výstup je správný, další zvláštní kontrola není potřeba.
+
+2. Přesunout:
+Obsah je správný, ale je na špatném místě.
+
+3. Zpřesnit:
+Místo je správné, ale text nevede k rozhodnutí.
+
+4. Opravit okolí:
+Záznam je správný, ale starý úkol, šablona nebo odkaz ho obchází.
+
+5. Vrátit do korekce:
+První použití ukázalo, že původní problém stále trvá.
+```
+
+Příklad rozhodnutí:
+
+```text
+Stav: opravit okolí.
+Důvod: udržovací záznam je jasný, ale stará šablona výstupu stále obsahuje pole pro vložení screenshotu.
+Další krok: odebrat pole ze šablony a ověřit příští měsíční kontrolu.
+```
+
+Toto rozhodnutí je malé, ale má výhodu: dá se udělat. Nevyžaduje rozpad celého procesu na prvočinitele.
+
+### 7. Aktualizujte jen nejbližší pracovní místo
+
+Po prvním použití neupravujte všechno najednou. Pokud záznam potřebuje změnu, změňte nejbližší místo, které ovlivní příští práci.
+
+Možná místa:
+
+- text opakovaného úkolu,
+- jedna věta v checklistu,
+- odkaz na kanonickou šablonu,
+- pole ve výstupní šabloně,
+- krátká onboardingová poznámka,
+- changelog věta,
+- stav kontrolního háčku.
+
+Příklad malé opravy:
+
+```text
+Původní text v úkolu:
+Připrav měsíční kontrolu formulářů podle checklistu.
+
+Nový text:
+Připrav měsíční kontrolu formulářů podle kanonického checklistu. Do výstupu vkládej odkaz na CRM záznam, ne screenshot zákaznických údajů.
+```
+
+To stačí. Není potřeba vytvořit "Metodiku práce s měsíční kontrolou formulářů verze 3.1 final opravdu final". Lidská civilizace má už teď dost souborů s názvem final.
+
+### Šablona kontroly prvního použití
+
+```text
+Název udržovacího záznamu:
+
+První normální použití:
+
+Kdo nebo jaká role záznam použila:
+
+Signál nalezení:
+Našel / nenašel / našel pozdě
+
+Signál rozhodnutí:
+Pomohl / nepomohl / pomohl částečně
+
+Signál výstupu:
+Výstup správný / výstup s třením / návrat staré cesty
+
+Privacy-first kontrola:
+Nové kopie dat:
+Dočasné podklady:
+Co zůstává:
+Co se maže:
+
+Rozlišení problému:
+Záznam / umístění / okolí / širší problém
+
+Další stav:
+Drží / přesunout / zpřesnit / opravit okolí / vrátit do korekce
+
+Jedna hotová úprava:
+
+Changelog věta:
+```
+
+### Příklad vyplněné kontroly
+
+```text
+Název udržovacího záznamu:
+Odkaz na CRM záznam místo screenshotu ve výstupech kontroly formulářů
+
+První normální použití:
+Měsíční kontrola kontaktních formulářů za květen.
+
+Kdo nebo jaká role záznam použila:
+Člověk odpovědný za provozní kontrolu webu.
+
+Signál nalezení:
+Našel pozdě. Opakovaný úkol vedl na nový checklist, ale stará šablona výstupu byla pořád v oblíbených odkazech.
+
+Signál rozhodnutí:
+Pomohl. Po nalezení checklistu bylo jasné, že se má použít odkaz na CRM záznam.
+
+Signál výstupu:
+Výstup správný po opravě trasy. Screenshot nevznikl.
+
+Privacy-first kontrola:
+Nové kopie dat: žádné.
+Dočasné podklady: jedna pracovní poznámka bez osobních údajů.
+Co zůstává: anonymizovaný závěr v changelogu.
+Co se maže: starý odkaz ze sdílených oblíbených položek.
+
+Rozlišení problému:
+Okolí.
+
+Další stav:
+Opravit okolí.
+
+Jedna hotová úprava:
+Starý odkaz na šablonu odstraněn ze sdílených oblíbených položek.
+
+Changelog věta:
+První použití udržovacího záznamu potvrdilo správný výstup; opraveno bylo okolí, protože stará šablona zůstala v oblíbených odkazech.
+```
+
+### Mini workshop na 15 minut
+
+1. Tři minuty: vybrat první normální použití.
+2. Tři minuty: projít signály nalezení, rozhodnutí a výstupu.
+3. Tři minuty: oddělit problém záznamu od problému okolí.
+4. Tři minuty: udělat privacy-first kontrolu datové stopy.
+5. Tři minuty: vybrat jeden další stav a jednu hotovou úpravu.
+
+Výstupem je krátká kontrolní karta a případně jedna změna nejbližšího pracovního místa. Pokud workshop vytvoří velký seznam, pravděpodobně jste objevili širší provozní problém. Zapište ho do backlogu, ale tuto kontrolu uzavřete jedním rozhodnutím.
+
+### Checklist kapitoly
+
+- Vybrali jste první normální použití, ne umělý test?
+- Kontrolovali jste práci člověka, který záznam běžně potřebuje?
+- Sledujete jen nalezení, rozhodnutí a výstup?
+- Je jasné, zda problém vznikl v záznamu, umístění, okolí nebo širším systému?
+- Zkusili jste zkrátit nebo přesunout dřív, než přidáte další vysvětlení?
+- Ověřili jste, že nevznikly nové kopie osobních nebo zákaznických dat?
+- Zůstává v záznamu rozhodnutí, ne citlivé důkazy?
+- Vybrali jste jeden další stav?
+- Udělali jste jednu nejbližší pracovní úpravu, pokud byla potřeba?
+- Je changelog věta pochopitelná bez znalosti celé historie?
+- Neotevřeli jste kvůli malé kontrole novou velkou revizi?
+
+Kontrola udržovacího záznamu po prvním použití chrání systém před tichým rozpadem. Ukáže, jestli záznam opravdu pomáhá, nebo jen dobře vypadal při zápisu. Dobrá kontrola je krátká, praktická a blízko práce: najít, rozhodnout, vytvořit správný výstup a nezvětšit datovou stopu.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha HT o kontrole udržovacího záznamu po prvním použití: výběr normálního průchodu, signály nalezení/rozhodnutí/výstupu, rozlišení chyby záznamu a okolí, zkracování místo bobtnání, privacy-first kontrola datové stopy, rozhodnutí dalšího stavu, šablona, příklad, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HS o převodu kontroly stabilizované malé korekce do udržovacího záznamu: provozní věta stavu, domov záznamu podle místa práce, typy převodu, pracovní minimum důkazů, úprava pracovního místa, kontrolní háček, privacy-first úklid, šablona, příklad, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HR o kontrole stabilizované malé korekce po prvních běžných cyklech: původní slib korekce, výběr běžných průchodů, sledování práce místo poslušnosti, návrat starého chování, třídění nálezů, privacy-first kontrola výstupů, rozhodnutí dalšího stavu, kontrolní karta, mini workshop a checklist.
 - 2026-05-15: Doplněna Příloha HQ o stabilizaci ověřené malé korekce do běžného pravidla: výsledek ověření, typ stabilizace, nejbližší pracovní místo, zkrácení příběhu na pravidlo, úklid starých variant a datové stopy, kontrolní háček, changelog, šablona, mini workshop a checklist.
