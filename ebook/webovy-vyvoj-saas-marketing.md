@@ -71829,8 +71829,361 @@ Workshop má skončit změnou pracovního místa, pokud je potřeba. Ne jen pozn
 
 První kontrola trvalého úklidového rytmu chrání tým před dvěma extrémy. První extrém je zapomenout na úklid a nechat starý nepořádek vrátit. Druhý extrém je držet rytmus navždy, i když už chrání jen vlastní existenci. Zdravý provoz umí obojí: udržet hranici, když má smysl, a pustit ji, když už jen zabírá místo.
 
+## Příloha IO: Převod kontroly trvalého úklidového rytmu do jedné další úpravy
+
+Kontrola trvalého úklidového rytmu má hodnotu až ve chvíli, kdy z ní vznikne jedna konkrétní úprava provozu. Jinak je to jen další pěkně vyplněná karta. Hezké karty jsou fajn, ale neumí samy přesunout pravidlo, zjednodušit výstup, zavřít starý odkaz ani snížit datovou stopu. To je pořád práce lidí a systému.
+
+Tahle příloha navazuje na Přílohu IN. Použijte ji po první kontrole trvalého úklidového rytmu, když už máte rozhodnutí dalšího stavu: ponechat, zjednodušit, přesunout, zpřísnit, sloučit, ukončit nebo znovu rozhodnout. Cílem není otevřít nový provozní projekt. Cílem je převést výsledek kontroly do nejmenší změny, která zlepší reálné pracovní místo.
+
+Dobrá další úprava má čtyři vlastnosti:
+
+```text
+vychází z konkrétního nálezu,
+
+mění jedno pracovní místo,
+
+má jasnou privacy-first hranici,
+
+dá se ověřit při příštím normálním použití.
+```
+
+Pokud změna vyžaduje nový dashboard, nový proces a nové pravidelné setkání, pravděpodobně jste se nechali unést. Někdy je to nutné. Většinou ale stačí přepsat větu, přesunout odkaz, zrušit přílohu, upravit frekvenci nebo zavřít starou cestu.
+
+Codyho komentář: provozní zlepšování má nebezpečný vedlejší efekt. Člověk si snadno začne připadat užitečně jen proto, že přidává další kontrolu. Skutečné zlepšení ale často vypadá méně efektně: jedna věta pryč, jeden export zakázaný, jeden odkaz přesměrovaný, jedna kontrola sloučená s jinou. Malé, nudné, účinné. Krásná kombinace, skoro podezřelá.
+
+### 1. Vezměte rozhodovací větu z kontroly
+
+Nezačínejte znovu od pocitu, že "by se něco mělo udělat". Vezměte poslední rozhodovací větu z Přílohy IN a podtrhněte v ní tři věci:
+
+```text
+stav rytmu,
+
+důvod rozhodnutí,
+
+nejbližší úpravu.
+```
+
+Příklad:
+
+```text
+Zjednodušit: po třech měsíčních použitích se rytmus spustil přirozeně, nevznikly exporty ani screenshoty a minimální výstup stačil, proto se kontrola přesouvá do kvartálního review s návratem měsíční frekvence při změně formuláře.
+```
+
+Z této věty vznikne pracovní zadání:
+
+```text
+Úprava:
+přesunout kontrolu z měsíčního úkolu do kvartálního provozního review a do měsíčního úkolu ponechat jen spouštěč návratu při změně formuláře.
+```
+
+To je dostatečně konkrétní. Neřeší celou dokumentaci, neotevírá strategii datové hygieny a neslibuje velkou transformaci. Jen mění místo, kde se rytmus opravdu má udržet.
+
+### 2. Vyberte jeden typ úpravy
+
+Z kontroly může vypadnout víc nálezů. Neberte všechny. Vyberte typ úpravy, který odpovídá rozhodnutému stavu.
+
+```text
+Ponechat:
+zapsat potvrzení beze změny a odstranit dočasnou kontrolní kartu z aktivního prostoru.
+
+Zjednodušit:
+snížit frekvenci, zkrátit výstup nebo sloučit dvě potvrzení do jedné věty.
+
+Přesunout:
+přemístit pravidlo, odkaz nebo checklist do skutečného pracovního okamžiku.
+
+Zpřísnit dočasně:
+přidat časově omezenou kontrolu pro nový nástroj, formulář, dodavatele nebo datový tok.
+
+Sloučit:
+napojit rytmus na existující review a zrušit duplicitní opakovaný úkol.
+
+Ukončit:
+smazat nebo archivovat rytmus, odstranit připomínky a nechat jen changelog větu.
+
+Znovu rozhodnout:
+upravit účel rytmu nebo minimální výstup, protože původní pravidlo neodpovídá práci.
+```
+
+Příklad špatného převodu:
+
+```text
+Kontrola ukázala, že rytmus se má přesunout do handoff šablony, zároveň zlepšíme celý support proces, přepíšeme dodavatelský registr a zavedeme nový měsíční audit.
+```
+
+Příklad dobrého převodu:
+
+```text
+Do support handoff šablony přidat jednu větu: "Dočasné exporty se po předání mažou; do karty se ukládá jen ano/ne potvrzení bez obsahu požadavků."
+```
+
+Druhá varianta je menší, ale přesněji mění místo, kde riziko vzniká.
+
+### 3. Najděte nejbližší pracovní místo
+
+Úprava má žít tam, kde se chování spouští. Ne tam, kde se o něm hezky píše.
+
+Hledejte:
+
+```text
+opakovaný úkol,
+
+release checklist,
+
+handoff šablonu,
+
+formulářovou kontrolu,
+
+support runbook,
+
+sales follow-up šablonu,
+
+vendor review,
+
+kanonický index standardů,
+
+automatizaci, která vytváří nebo ukládá výstup.
+```
+
+Ptejte se:
+
+```text
+Kde člověk stojí těsně před tím, než by vznikl nepořádek?
+
+Kde uvidí pravidlo bez hledání?
+
+Kde má úprava nejmenší textový a procesní dopad?
+
+Které staré místo musí přestat tvářit se jako aktuální?
+```
+
+Příklad:
+
+```text
+Nález:
+lidé posílají screenshoty formulářů do chatu, protože při testu formuláře chtějí rychle ukázat výsledek.
+
+Špatné pracovní místo:
+obecná privacy politika v dokumentaci.
+
+Dobré pracovní místo:
+šablona testu formuláře a instrukce v opakovaném úkolu: "Výsledek potvrď stavem ano/ne; screenshot neposílej, pokud není potřeba ladit vizuální chybu bez osobních údajů."
+```
+
+Tahle věta je užitečnější než odstavec pravidel někde daleko od práce. Pravidlo, které není po ruce ve chvíli rozhodnutí, je často jen archivovaná naděje.
+
+### 4. Omezte datovou stopu změny
+
+Každá provozní úprava může sama vytvořit novou datovou stopu. Při úklidových rytmech je to obzvlášť ironické: opravujete zbytečné ukládání a přitom založíte tabulku plnou příkladů, screenshotů a jmen. To je jako vytírat podlahu mokrým pískem.
+
+Před úpravou si napište:
+
+```text
+Jaká data už nemají vznikat?
+
+Jaký minimální důkaz stačí?
+
+Kde bude záznam uložený?
+
+Kdo k němu má přístup?
+
+Kdy se smaže nebo zkontroluje jeho potřeba?
+```
+
+Dobré privacy-first úpravy:
+
+```text
+nahrazení screenshotu stavovou větou,
+
+nahrazení exportu agregovaným počtem,
+
+zkrácení poznámky bez zákaznických detailů,
+
+odkaz na kanonické místo místo kopie obsahu,
+
+časově omezený log s jasnou retencí,
+
+role místo jména, pokud jméno není nutné.
+```
+
+Rizikové úpravy:
+
+```text
+nová kontrolní tabulka s reálnými příklady,
+
+automatické ukládání příloh pro "budoucí analýzu",
+
+kopie zákaznických požadavků v projektových kartách,
+
+screenshoty místo stavů,
+
+dlouhé komentáře s osobními údaji,
+
+sdílení kontrolních výstupů do kanálů, kde nemají být.
+```
+
+Privacy-first hodnota není jen o tom, že nepoužíváte zbytečné trackery. Je to i schopnost nevyrábět interní balast z dat, která jste nikdy nemuseli ukládat.
+
+### 5. Zavřete starou cestu zároveň s novou úpravou
+
+Nová úprava nestačí, pokud stará cesta zůstane dostupná a pohodlnější. Lidé se často nevracejí ke starému postupu proto, že ho milují. Vrací se k němu proto, že je blíž, známější nebo ho najdou první.
+
+Při každé úpravě rozhodněte, co se stane se starou cestou:
+
+```text
+smazat,
+
+archivovat bez pracovního odkazu,
+
+přesměrovat na nové kanonické místo,
+
+označit jako historické,
+
+sloučit do nového pravidla,
+
+ponechat jen jako auditní stopu s retencí.
+```
+
+Příklad:
+
+```text
+Nová úprava:
+kontrola formulářových exportů se přesouvá do kvartálního review.
+
+Zavření staré cesty:
+měsíční opakovaný úkol už nebude obsahovat kontrolní checklist, jen spouštěč: "Při změně formuláře obnov měsíční kontrolu na dva cykly."
+```
+
+Bez zavření staré cesty by tým mohl dělat obojí. To je oblíbený způsob, jak z úklidu vyrobit dvojnásobnou práci.
+
+### 6. Napište úpravovou kartu
+
+Karta má být krátká. Její účel je převést rozhodnutí do práce, ne vytvořit kroniku.
+
+```text
+Název úpravy:
+
+Výchozí rozhodnutí z kontroly:
+
+Typ úpravy:
+
+Jedno pracovní místo, které měníme:
+
+Konkrétní změna textu, odkazu, frekvence, výstupu nebo automatizace:
+
+Stará cesta, kterou zavíráme:
+
+Privacy-first hranice:
+
+Minimální důkaz po úpravě:
+
+Kdy se ověří při normální práci:
+
+Changelog věta:
+```
+
+Pokud kartu neumíte vyplnit stručně, úprava je pravděpodobně moc široká nebo není jasné, co se má stát jako první. Zkraťte ji na jedno místo a jeden výsledek.
+
+### Příklad vyplněné karty
+
+```text
+Název úpravy:
+Přesun úklidu formulářové datové stopy do kvartálního review.
+
+Výchozí rozhodnutí z kontroly:
+Zjednodušit frekvenci po třech čistých měsíčních cyklech.
+
+Typ úpravy:
+Zjednodušit a částečně přesunout.
+
+Jedno pracovní místo, které měníme:
+Opakovaný úkol měsíční kontroly formulářů.
+
+Konkrétní změna textu, odkazu, frekvence, výstupu nebo automatizace:
+Odstranit měsíční kontrolní checklist a ponechat jen větu: "Při změně formuláře nebo nástroje obnov měsíční úklid datové stopy na dva cykly." Kanonická kontrola se přesouvá do kvartálního provozního review.
+
+Stará cesta, kterou zavíráme:
+Starý měsíční checklist se archivuje bez pracovního odkazu.
+
+Privacy-first hranice:
+Nevznikají screenshoty, exporty ani kopie obsahu formulářů. Záznam je jen stavová věta v kvartálním review.
+
+Minimální důkaz po úpravě:
+Jedna věta: "Kontrola formulářové datové stopy hotová; exporty a screenshoty nevznikly / výjimka řešena."
+
+Kdy se ověří při normální práci:
+Při prvním kvartálním review nebo při nejbližší změně formuláře.
+
+Changelog věta:
+Úklid formulářové datové stopy byl po třech čistých měsíčních cyklech přesunut do kvartálního review; měsíční rytmus se vrací jen při změně formuláře nebo nástroje.
+```
+
+### 7. Ověřte úpravu při příštím normálním použití
+
+Nezakládejte samostatné ověření jen proto, abyste měli pocit jistoty. Ověřte úpravu v nejbližším okamžiku, kdy se práce stejně stane.
+
+Sledujte čtyři signály:
+
+```text
+Nalezení:
+člověk našel nové pravidlo bez vysvětlování.
+
+Použití:
+pravidlo změnilo skutečný výstup nebo chování.
+
+Stopa:
+nevznikla zakázaná datová stopa ani náhradní balast.
+
+Cena:
+úprava nezvýšila tření víc, než chrání riziko.
+```
+
+Výsledek zapište jednou větou:
+
+```text
+Úprava potvrzena: při prvním kvartálním review tým použil novou stavovou větu, nevznikly exporty ani screenshoty a měsíční úkol už neobsahuje duplicitní checklist.
+```
+
+Nebo:
+
+```text
+Úprava potřebuje korekci: pravidlo je v kvartálním review, ale změny formulářů vznikají mimo tento rytmus; další krok je přidat spouštěč do šablony změny formuláře.
+```
+
+To stačí. Nechte ověření malé. Když z každé úpravy uděláte audit, lidé se naučí úpravy nedělat.
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: vzít rozhodovací větu z kontroly trvalého rytmu.
+2. Tři minuty: vybrat jeden typ úpravy podle stavu rytmu.
+3. Tři minuty: najít nejbližší pracovní místo, kde změna opravdu pomůže.
+4. Tři minuty: napsat konkrétní změnu textu, odkazu, frekvence, výstupu nebo automatizace.
+5. Tři minuty: určit privacy-first hranici a minimální důkaz.
+6. Tři minuty: zavřít starou cestu.
+7. Dvě minuty: vyplnit úpravovou kartu a zapsat changelog větu.
+
+Workshop má skončit aplikovanou změnou v pracovním místě. Pokud skončí seznamem možných zlepšení, vraťte se na začátek a vyberte jedno. Provozní disciplína často není o tom, že víte o deseti problémech. Je o tom, že jeden z nich dnes opravdu přestane překážet.
+
+### Checklist kapitoly
+
+- Vycházíte z rozhodovací věty z kontroly, ne z nového dojmu?
+- Vybrali jste jeden typ úpravy podle stavu rytmu?
+- Měníte jedno konkrétní pracovní místo?
+- Je změna formulovaná jako text, odkaz, frekvence, výstup, automatizace nebo zavření staré cesty?
+- Neotevíráte širší projekt, pokud stačí malá úprava?
+- Je jasné, jaká datová stopa už nemá vznikat?
+- Má úprava minimální důkaz bez screenshotů, exportů a zbytečných osobních údajů?
+- Zavřeli jste starou cestu, aby nová úprava nebyla jen další možnost navíc?
+- Je úpravová karta krátká a použitelná?
+- Máte konkrétní okamžik příštího normálního ověření?
+- Sledujete nalezení, použití, stopu a cenu?
+- Changelog věta neobsahuje citlivé detaily ani surové zákaznické příklady?
+
+Převod kontroly do jedné další úpravy je místo, kde se pozná, jestli tým opravdu zlepšuje systém, nebo jen vyrábí dokumentaci o zlepšování systému. Dobrá úprava je malá, viditelná v práci a po ověření buď zůstane, nebo se opraví. Žádné drama, žádné procesní konfety. Jen další kousek provozu, který je čistší, srozumitelnější a méně hladový po datech.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IO o převodu kontroly trvalého úklidového rytmu do jedné další úpravy: rozhodovací věta, typ úpravy, nejbližší pracovní místo, privacy-first hranice, zavření staré cesty, úpravová karta, příklad, ověření při normálním použití, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IN o kontrole trvalého úklidového rytmu po prvních použitích: skutečná použití, spouštěč rytmu, minimální výstup, návrat staré nebo náhradní cesty, práce se stop pravidlem, scorecard ceny, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IM o převodu stabilizovaného úklidu do trvalého úklidového rytmu: provozní stav, přirozený rytmus, minimální výstup, stop pravidlo, vlastnictví podle role, uzavření přechodových artefaktů, trvalá karta rytmu, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IL o kontrole stabilizovaného úklidu po prvních běžných cyklech: výběr kontrolního okna, ověření kanonického místa, porovnání výstupů, hledání návratu staré cesty a náhradního nepořádku, měření provozní ceny, privacy-first kontrola artefaktů, rozhodnutí stavu, kontrolní karta, příklad, mini workshop a checklist.
