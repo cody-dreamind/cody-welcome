@@ -72547,8 +72547,347 @@ Workshop je krátký schválně. Pokud z něj začíná být hodinová debata, p
 
 Ověření první normální práce drží provoz při zemi. Ukáže, jestli úprava opravdu snížila tření a datovou stopu, nebo jen přidala další pravidlo do dokumentace. Nejlepší výsledek je nudný: člověk úpravu našel, použil, vznikla krátká stavová věta a nic zbytečného se neuložilo. Nudné provozní výsledky jsou často přesně ty, které šetří nejvíc peněz, času i nervů.
 
+## Příloha IQ: Stabilizace ověřené další úpravy do běžného úklidového pravidla
+
+Ověřená úprava je pořád jen úprava. Pomohla v jednom normálním použití, možná opravila starý odkaz, zkrátila výstup, přesunula pravidlo blíž práci nebo zavřela vedlejší datovou stopu. Aby se z ní nestala další historická poznámka, musí se převést do běžného pravidla. Ne slavnostně. Prakticky: tak, aby další člověk nemusel vědět, jaká série kontrol, úklidů a korekcí tomu předcházela.
+
+Tahle příloha navazuje na Přílohu IP. Použijte ji ve chvíli, kdy první normální použití ukázalo jeden z těchto stavů:
+
+```text
+Potvrzeno:
+úprava fungovala bez další pomoci.
+
+Potvrzeno s drobnou korekcí:
+úprava fungovala, ale bylo potřeba opravit odkaz, formulaci, umístění nebo minimální výstup.
+
+Přesunout:
+úprava dává smysl, jen musela být přemístěna do skutečného pracovního místa.
+```
+
+Pokud ověření skončilo stavem `Vrátit k rozhodnutí`, nestabilizujte. Nejdřív změňte rozhodovací větu. Stabilizovat špatný předpoklad znamená jen elegantně zabetonovat nepořádek. A ne, beton v dokumentaci není o nic hezčí než beton v CRM.
+
+Výsledek této přílohy má být běžné pravidlo, které říká:
+
+```text
+kdy se použije,
+
+kde žije,
+
+co má vzniknout,
+
+co už nevzniká,
+
+kdo ho podle role udržuje,
+
+kdy se znovu otevře.
+```
+
+### 1. Oddělte aktuální pravidlo od historie opravy
+
+Při stabilizaci je největší pokušení nechat v pravidle celou historii: proč změna vznikla, kdo ji navrhl, jaké byly tři předchozí varianty, jaký problém vyřešila a co se našlo při ověření. Pro autora je to uklidňující. Pro další použití je to šum.
+
+Do běžného pravidla patří aktuální pracovní tvar:
+
+```text
+Při kvartálním review formulářů zapište jednu stavovou větu o datové stopě. Nevytvářejte exporty ani screenshoty. Měsíční kontrolu obnovte jen na dva cykly po změně formuláře.
+```
+
+Do changelogu nebo archivu patří historie:
+
+```text
+Původně byla kontrola měsíční, po třech čistých cyklech přesunuta do kvartálního review, po prvním použití přesměrován starý odkaz z měsíčního úkolu.
+```
+
+Obě věty jsou užitečné, ale nemají bydlet na stejném místě. Pravidlo má pomáhat člověku při práci. Historie má pomoct při revizi, když se někdo ptá, proč pravidlo existuje.
+
+Praktický postup:
+
+1. Vezměte ověřovací větu z Přílohy IP.
+2. Vyškrtněte jména, datumy, staré varianty a detaily průběhu.
+3. Nechte jen spouštěč, akci, výstup a datovou hranici.
+4. Historii přesuňte do changelogu nebo rozhodovacího logu.
+5. Zkontrolujte, jestli pravidlo přečte člověk za méně než půl minuty.
+
+Pokud pravidlo nejde zkrátit bez ztráty smyslu, možná ještě není pravidlem. Možná je to pořád rozhodnutí, které potřebuje lepší formulaci.
+
+### 2. Vyberte jeden domov pravidla
+
+Běžné pravidlo musí mít jeden domov. Ne hlavní dokument, kopii v úkolu, starší verzi v šabloně a ještě připnutou zprávu v chatu. Takový systém se tváří bezpečně, ale ve skutečnosti vytváří závod verzí.
+
+Domov vybírejte podle místa, kde práce opravdu vzniká:
+
+```text
+Formulářové kontroly:
+review checklist nebo provozní karta formulářů.
+
+Support handoff:
+handoff šablona, ne obecná knowledge base.
+
+Release kontrola:
+release checklist, ne retrospektivní poznámka.
+
+Vendor review:
+registr dodavatelů nebo opakovaný review úkol.
+
+Obsahová údržba:
+redakční checklist u publikace nebo měsíční obsahové review.
+
+Datová retence:
+datová mapa, retenční tabulka nebo provozní karta konkrétního toku.
+```
+
+Když pravidlo potřebuje být vidět na více místech, nekopírujte celý text. Na sekundární místa dejte krátký odkaz nebo jednu spouštěcí větu:
+
+```text
+Datovou stopu formulářů kontrolujte podle kanonické karty `Formuláře / kvartální review`.
+```
+
+Privacy-first hodnota je tady jednoduchá: čím méně kopií pravidel a příkladů, tím méně míst, kde mohou zestárnout odkazy, osobní údaje, zákaznické detaily nebo staré exporty.
+
+### 3. Přepište pravidlo do jazyka role
+
+Pravidlo nemá znít jako interní auditní zápis. Má znít jako instrukce pro člověka, který ho má použít v konkrétní roli.
+
+Slabý tvar:
+
+```text
+Na základě ověření provozní úpravy IP-2026-05-16 bude zachován redukovaný výstup kontroly a původní měsíční artefakt bude považován za historický.
+```
+
+Použitelný tvar:
+
+```text
+Při kvartálním review formulářů zapište jednu stavovou větu: jestli vznikly exporty, screenshoty nebo kopie poptávek. Pokud nevznikly, neukládejte žádný další důkaz.
+```
+
+Rozdíl je v adresátovi. První text mluví k budoucímu archiváři. Druhý mluví k člověku, který právě dělá review.
+
+Při přepisu si položte otázky:
+
+```text
+Která role pravidlo používá?
+
+V jakém okamžiku ho vidí?
+
+Jaké rozhodnutí má udělat?
+
+Jaký výstup má po práci zůstat?
+
+Co výslovně nemá vytvářet?
+
+Kdy má eskalovat nebo obnovit přísnější režim?
+```
+
+Codyho komentář: nejlepší provozní pravidla často vypadají až podezřele obyčejně. Žádný velký manifest. Jen věta, která člověku ve správnou chvíli ušetří deset minut a zabrání vytvoření zbytečného exportu. To je přesně ten druh nudy, který mám rád. Efektivní nuda. Prémiová edice.
+
+### 4. Zavřete přechodové opory
+
+Po ověření často zůstanou kolem pravidla podpůrné věci: dočasné checklisty, komentáře, testovací tabulky, staré odkazy, poznámky z workshopu, screenshoty nebo pracovní kopie. Dokud existují v aktivním prostoru, lidé se k nim mohou vracet.
+
+Projít je potřeba hlavně:
+
+```text
+staré checklisty,
+
+opakované úkoly,
+
+připnuté zprávy,
+
+pracovní tabulky,
+
+exporty a screenshoty,
+
+dočasné dokumenty z ověření,
+
+komentáře s konkrétními zákaznickými příklady,
+
+automatizace, které zapisují starý výstup.
+```
+
+U každé opory zvolte jeden stav:
+
+```text
+Smazat:
+nemá právní, provozní ani historickou hodnotu.
+
+Archivovat:
+má hodnotu pro budoucí audit nebo revizi, ale nepatří do aktivní práce.
+
+Přesměrovat:
+existuje staré vstupní místo, které lidé používají, takže má vést na nové pravidlo.
+
+Zkrátit:
+obsahuje užitečný signál, ale příliš mnoho detailů.
+
+Převést:
+má se stát součástí kanonického pravidla, ne vedlejším materiálem.
+```
+
+Privacy-first kontrola při zavírání opor:
+
+```text
+Nezůstaly v aktivním prostoru osobní údaje bez účelu?
+
+Nezůstaly exporty, které už nahradila stavová věta?
+
+Nezůstaly screenshoty se zákaznickým obsahem?
+
+Neobsahují komentáře konkrétní příklady, které stačí zobecnit?
+
+Je archiv oddělený od běžné práce a má jasnou retenci?
+```
+
+Tady se úklid často opravdu zhmotní. Ne v tom, že napíšete nové pravidlo, ale v tom, že odstraníte starou pohodlnou cestu.
+
+### 5. Nastavte lehký revizní háček
+
+Běžné pravidlo nepotřebuje další velký proces. Potřebuje malý háček, který řekne, kdy se má znovu otevřít.
+
+Dobré revizní háčky jsou konkrétní:
+
+```text
+po změně formuláře,
+
+po přidání nového marketingového zdroje,
+
+po změně support handoffu,
+
+po zavedení nového dodavatele,
+
+po incidentu nebo zákaznické stížnosti,
+
+po dvou cyklech, ve kterých se pravidlo obchází,
+
+po změně datového toku nebo retenční potřeby.
+```
+
+Slabé háčky jsou mlhavé:
+
+```text
+čas od času zkontrolovat,
+
+podle potřeby,
+
+když bude kapacita,
+
+až to bude dávat smysl.
+```
+
+Revizní háček zapište přímo k pravidlu:
+
+```text
+Revizní háček:
+Otevřít pravidlo znovu při změně formuláře, novém zdroji leadů nebo pokud v jednom kvartálu vznikne export či screenshot mimo incidentní důvod.
+```
+
+Háček není pozvánka k věčné debatě. Je to pojistka proti tomu, aby pravidlo potichu zestárlo.
+
+### 6. Napište stabilizační kartu
+
+Stabilizační karta má být krátká. Je to přechod mezi ověřením a běžným provozem.
+
+```text
+Název pravidla:
+
+Stav z ověření:
+
+Kanonický domov:
+
+Role, která pravidlo používá:
+
+Pracovní spouštěč:
+
+Běžné pravidlo:
+
+Minimální výstup:
+
+Co už nevzniká:
+
+Zavřené nebo přesměrované staré cesty:
+
+Privacy-first hranice:
+
+Revizní háček:
+
+Changelog věta:
+```
+
+Karta nemá nahrazovat samotné pravidlo. Pomáhá jen uzavřít přechod. Po stabilizaci má být v aktivní práci vidět hlavně běžné pravidlo, ne celá karta.
+
+### Příklad vyplněné stabilizační karty
+
+```text
+Název pravidla:
+Kvartální kontrola formulářové datové stopy.
+
+Stav z ověření:
+Potvrzeno s drobnou korekcí. První kvartální review proběhlo bez exportů a screenshotů, starý měsíční odkaz byl přesměrován.
+
+Kanonický domov:
+Provozní karta formulářů / kvartální review.
+
+Role, která pravidlo používá:
+Provozní vlastník webu.
+
+Pracovní spouštěč:
+Kvartální review formulářů nebo změna formuláře.
+
+Běžné pravidlo:
+Při kvartálním review formulářů zapište jednu stavovou větu o tom, zda vznikly exporty, screenshoty nebo kopie poptávek. Pokud nevznikly, neukládejte žádný další důkaz. Po změně formuláře obnovte měsíční kontrolu jen na dva cykly.
+
+Minimální výstup:
+Jedna stavová věta v kvartálním review.
+
+Co už nevzniká:
+CSV exporty pro jistotu, screenshoty odeslaných formulářů, kopie poptávek v komentářích.
+
+Zavřené nebo přesměrované staré cesty:
+Starý měsíční checklist přesměrován na kvartální review; připnutá poznámka z ověření archivována.
+
+Privacy-first hranice:
+Žádné surové obsahy poptávek mimo systém, žádné nové exporty bez incidentního nebo právního důvodu, archiv ověřovacích poznámek bez osobních údajů.
+
+Revizní háček:
+Otevřít po změně formuláře, novém zdroji leadů nebo při vzniku jakéhokoli exportu mimo incidentní důvod.
+
+Changelog věta:
+Ověřená úprava formulářové datové stopy byla stabilizována do kvartálního pravidla se stavovou větou, přesměrovaným měsíčním odkazem a revizním háčkem po změně formuláře.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst ověřovací větu z Přílohy IP.
+2. Tři minuty: oddělit aktuální pravidlo od historie opravy.
+3. Tři minuty: vybrat jeden kanonický domov podle skutečného pracovního místa.
+4. Tři minuty: přepsat pravidlo do jazyka role.
+5. Tři minuty: projít staré opory a rozhodnout smazat, archivovat, přesměrovat, zkrátit nebo převést.
+6. Tři minuty: doplnit privacy-first hranici a revizní háček.
+7. Dvě minuty: napsat changelog větu.
+
+Pokud se workshop zasekne na sporu, kde má pravidlo bydlet, rozhodněte podle prvního použití: kde člověk pravidlo skutečně hledal nebo měl hledat při práci. Ne podle organizačního ideálu. Organizační ideál je pěkná věc, ale běžná práce má hlasovací právo nohama.
+
+### Checklist kapitoly
+
+- Stabilizujete jen úpravu, která byla ověřena v normálním použití?
+- Nezůstala v běžném pravidle zbytečná historie opravy?
+- Má pravidlo jeden kanonický domov?
+- Sekundární místa odkazují na pravidlo místo kopírování celého textu?
+- Je pravidlo napsané jazykem role, která ho použije?
+- Je jasný pracovní spouštěč?
+- Je jasný minimální výstup?
+- Je výslovně řečeno, co už nemá vznikat?
+- Zavřeli jste staré odkazy, checklisty, úkoly a připnuté poznámky?
+- Smazali nebo archivovali jste dočasné exporty, screenshoty a pracovní kopie?
+- Má pravidlo privacy-first hranici bez zbytečných osobních nebo zákaznických detailů?
+- Má pravidlo konkrétní revizní háček?
+- Changelog říká, co se změnilo, ale neobsahuje citlivé detaily?
+- Další člověk dokáže pravidlo použít bez znalosti celé historie?
+
+Stabilizace je dobrá ve chvíli, kdy se z opravy stane obyčejná práce. Nevyžaduje autora, workshop ani paměť týmu. Člověk přijde k review, přečte krátké pravidlo, zapíše minimální výstup a nevytvoří zbytečnou datovou stopu. To je malý provozní zázrak: méně věcí, méně vysvětlování, méně rizika.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IQ o stabilizaci ověřené další úpravy do běžného úklidového pravidla: oddělení aktuálního pravidla od historie, výběr kanonického domova, přepis do jazyka role, zavření přechodových opor, revizní háček, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IP o ověření další úpravy po prvním normálním použití: výběr skutečného použití, porovnání slibu s realitou, nalezení bez autora, kontrola výstupu a datové stopy, typy nálezů, ověřovací věta, karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IO o převodu kontroly trvalého úklidového rytmu do jedné další úpravy: rozhodovací věta, typ úpravy, nejbližší pracovní místo, privacy-first hranice, zavření staré cesty, úpravová karta, příklad, ověření při normálním použití, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IN o kontrole trvalého úklidového rytmu po prvních použitích: skutečná použití, spouštěč rytmu, minimální výstup, návrat staré nebo náhradní cesty, práce se stop pravidlem, scorecard ceny, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
