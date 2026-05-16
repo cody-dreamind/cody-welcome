@@ -67054,8 +67054,353 @@ Výstupem má být jedna rozhodovací věta a případně jedna malá oprava. Po
 
 První kontrola stabilizovaného standardu je pojistka proti dvěma extrémům: slepé víře, že dokument znamená změnu, a procesní panice, která po každém nálezu přestaví půl systému. Dobrý standard se kontroluje prakticky, krátce a blízko práce. Když drží výsledek, cestu, cenu i datovou stopu, může konečně přejít z režimu "nová změna" do režimu "normální způsob práce".
 
+## Příloha IA: Převod první kontroly standardu do jedné provozní úpravy
+
+První kontrola stabilizovaného standardu obvykle neskončí dramatem. Častější výsledek je mnohem nudnější a užitečnější: standard funguje, ale někde zůstala stará věta, chybí jedno pole v šabloně, odkaz vede přes zbytečnou okliku nebo privacy-first kontrola našla drobnou datovou stopu, kterou jde uklidit bez přestavby celého procesu.
+
+Pracovní otázka:
+
+```text
+Jak z první kontroly stabilizovaného standardu vybrat jednu provozní úpravu, která odstraní skutečné tření a nerozjede další velkou revizi?
+```
+
+Tahle příloha je o disciplíně po kontrole. Kontrola má dodat rozhodnutí, ne výmluvu pro otevření všeho. Pokud standard po prvním běžném období drží výsledek a jen jeden detail drhne, nejlepší další krok je malý, přesný a ověřitelný zásah.
+
+Codyho komentář: nejnebezpečnější věta po kontrole je "když už jsme u toho". Za ní se často schová půldenní úklid, tři nové šablony a pocit, že jsme byli produktivní. Ve skutečnosti jsme jen vyměnili jeden konkrétní nález za mlhu. Mlha je hezká na horách, v provozu méně.
+
+### 1. Začněte rozhodovací větou z kontroly
+
+Než začnete vymýšlet úpravu, vraťte se k rozhodnutí z první kontroly. Z něj musí být jasné, zda standard zůstává, zkracuje se, nebo se vrací do revize.
+
+Pro tuto přílohu je ideální stav:
+
+```text
+Ponechat s drobnou opravou:
+Standard funguje, ale jedno pracovní místo nebo pole potřebuje zpřesnit.
+
+Zkrátit:
+Standard funguje, ale obsahuje zbytečnou režii nebo duplicitní krok.
+```
+
+Pokud kontrola skončila stavem "vrátit do revize", nepředstírejte malou úpravu. To už je jiný typ práce. Nejprve znovu pojmenujte problém standardu a rozhodněte, jestli ho opravit, sloučit, nebo zrušit.
+
+Příklad vhodného vstupu:
+
+```text
+Rozhodnutí z kontroly:
+Ponechat s drobnou opravou: standard kontroly formulářů funguje bez screenshotů, ale šablona musí výslovně vyžadovat potvrzení smazání dočasných exportů.
+```
+
+Z takové věty se dá udělat malý zásah. Je v ní jasný standard, přínos, problém i místo opravy. Žádná detektivka, žádné "nějak zlepšit práci s daty".
+
+### 2. Vyberte jeden nález podle opakované ceny
+
+Kontrola může najít víc drobností. Vy ale vybíráte jednu. Ne tu nejviditelnější, ne tu nejhlasitější, ne tu, která se nejlépe hodí do interní prezentace. Vyberte nález, který má největší opakovanou cenu.
+
+Pomůže krátké skóre:
+
+```text
+Opakuje se:
+Ano / ne / nevíme
+
+Brzdí výsledek:
+Ano / ne / částečně
+
+Zvyšuje datovou stopu:
+Ano / ne / částečně
+
+Stačí malý zásah:
+Ano / ne / nevíme
+```
+
+Příklad:
+
+```text
+Nález A:
+Starý odkaz v interním indexu. Opakuje se jen při hledání přes index, výsledek zatím nepoškodil.
+
+Nález B:
+V šabloně chybí pole "dočasné exporty smazány". Opakuje se při každém měsíčním výstupu a přímo souvisí s datovou stopou.
+
+Vybraný nález:
+Nález B, protože má opakovanou privacy-first cenu a stačí doplnit jedno pole.
+```
+
+Tím zabráníte tomu, aby se úprava řídila dojmem. Dojem je užitečný signál, ale mizerný projektový manažer.
+
+### 3. Napište úpravovou větu
+
+Úpravová věta je malý kontrakt. Říká, co přesně se mění, kde, proč a jak poznáte, že je hotovo.
+
+Použijte tvar:
+
+```text
+Upravíme:
+Jedno konkrétní pracovní místo.
+
+Změna:
+Jedna konkrétní úprava.
+
+Důvod:
+Jaké tření nebo riziko tím zmizí.
+
+Hotovo je když:
+Jaký výstup nebo signál potvrdí dokončení.
+```
+
+Příklad:
+
+```text
+Upravíme:
+Šablonu měsíčního výstupu kontroly formulářů.
+
+Změna:
+Doplníme povinné pole "dočasné exporty smazány: ano/ne".
+
+Důvod:
+První kontrola ukázala, že jeden export zůstal ve sdílené složce déle, než bylo potřeba.
+
+Hotovo je když:
+Příští měsíční výstup obsahuje vyplněné pole a ve sdílené složce nezůstane dočasný export po dokončení kontroly.
+```
+
+Úpravová věta musí být menší než původní standard. Pokud je stejně velká, nejspíš jste z drobné opravy udělali novou kapitolu provozu. To zní důležitě, ale často je to jen dražší cesta k témuž.
+
+### 4. Upravte nejbližší pracovní místo, ne dokumentaci kolem něj
+
+Když nález vznikl při práci v šabloně, opravte šablonu. Když vznikl při hledání v indexu, opravte index. Když vznikl v opakovaném úkolu, opravte opakovaný úkol. Dokumentace kolem je až druhá vlna, pokud je vůbec potřeba.
+
+Praktické pravidlo:
+
+```text
+Kde člověk udělal chybu nebo musel přemýšlet navíc, tam má úprava začít.
+```
+
+Příklad:
+
+```text
+Špatně:
+Dopsat do provozního standardu odstavec o mazání exportů.
+
+Lépe:
+Doplnit do šablony výstupu pole "dočasné exporty smazány: ano/ne".
+
+Proč:
+Člověk vyplňuje šablonu v okamžiku práce. Standard čte jen občas.
+```
+
+Nejbližší pracovní místo je místo, kde má systém pomáhat bez připomínání. Když musíte lidem zvlášť oznamovat, že mají číst novou poznámku v dokumentaci, úprava pravděpodobně není dost blízko práci.
+
+### 5. Omezte rozsah na jeden typ zásahu
+
+Jedna provozní úprava má mít jeden typ zásahu. Nemá zároveň měnit šablonu, index, onboarding, měření i odpovědnosti. Pokud potřebujete víc typů zásahu, nejdřív ověřte, zda nejde o návrat do revize.
+
+Typy malých zásahů:
+
+```text
+Textový zásah:
+Zpřesnit jednu větu, popisek pole nebo instrukci.
+
+Polohový zásah:
+Přesunout pravidlo blíž k místu práce.
+
+Úklidový zásah:
+Odstranit starý odkaz, duplicitní návod nebo dočasnou oporu.
+
+Datový zásah:
+Zmenšit sbíraný důkaz, doplnit mazání podkladů nebo omezit přístup.
+
+Rytmický zásah:
+Změnit frekvenci lehké kontroly, protože původní rytmus je moc těžký nebo slabý.
+```
+
+Příklad výběru:
+
+```text
+Typ zásahu:
+Datový zásah.
+
+Proč:
+Standard funguje, ale dočasný export zůstává déle, než odpovídá účelu.
+
+Co se nedělá:
+Nemění se měsíční rytmus, kanonická šablona jako zdroj pravdy ani hlavní pravidlo bez screenshotů.
+```
+
+Rozsah se nejlépe drží větou "co se nedělá". Bez ní si úprava ráda přibere sourozence. Sourozenci jsou fajn u rodiny, horší u rozsahu.
+
+### 6. Udělejte privacy-first bránu před změnou
+
+I malá úprava může zhoršit soukromí. Typicky tím, že přidá nové povinné pole, nový důkaz, novou kopii nebo nové sledování.
+
+Před změnou odpovězte:
+
+```text
+Sbírá úprava nové osobní nebo zákaznické údaje?
+
+Vytváří nový export, screenshot, přílohu nebo kopii?
+
+Rozšiřuje přístup k podkladům?
+
+Prodlužuje retenci?
+
+Lze stejný důkaz získat odkazem, anonymizovaným závěrem nebo agregovaným signálem?
+```
+
+Příklad:
+
+```text
+Návrh:
+Doplnit pole "dočasné exporty smazány: ano/ne".
+
+Privacy-first brána:
+Úprava nesbírá nové osobní údaje, nevytváří nový export a neprodlužuje retenci. Pouze nutí potvrdit odstranění dočasného podkladu.
+
+Výsledek:
+Schválit jako malý datový zásah.
+```
+
+Privacy-first brána není brzda pro brzdu. Je to ochrana před tím, aby se dobrý standard postupně změnil v malý sběrač důkazů. Takové věci rostou nenápadně a pak se tváří, že tam byly odjakživa.
+
+### 7. Nastavte ověření při nejbližší normální práci
+
+Malá úprava nepotřebuje velké vyhodnocení. Potřebuje ověření tam, kde se má projevit.
+
+Stačí:
+
+```text
+Při příštím normálním použití ověřit:
+- člověk úpravu našel bez vysvětlování,
+- výstup odpovídá úpravové větě,
+- nevznikla nová zbytečná datová stopa,
+- starý problém se neopakoval.
+```
+
+Příklad:
+
+```text
+Ověření:
+Při příští měsíční kontrole formulářů zkontrolovat, zda je pole "dočasné exporty smazány" vyplněné a zda ve sdílené složce nezůstal export po dokončení práce.
+```
+
+Nevytvářejte pro ověření nový dashboard, pokud stačí jeden pohled do výstupu. Dashboard je nástroj, ne odznak dospělosti.
+
+### Šablona provozní úpravy po první kontrole standardu
+
+```text
+Název standardu:
+
+Rozhodnutí z první kontroly:
+Ponechat s drobnou opravou / zkrátit
+
+Vybraný nález:
+
+Proč právě tento nález:
+Opakovaná cena:
+Dopad na výsledek:
+Dopad na datovou stopu:
+
+Úpravová věta:
+Upravíme:
+Změna:
+Důvod:
+Hotovo je když:
+
+Typ zásahu:
+Textový / polohový / úklidový / datový / rytmický
+
+Nejbližší pracovní místo:
+
+Co se vědomě nemění:
+
+Privacy-first brána:
+Nová data:
+Nové kopie:
+Přístupy:
+Retence:
+Nejmenší dostatečný důkaz:
+
+Ověření při nejbližší normální práci:
+
+Changelog věta:
+```
+
+### Příklad vyplněné úpravy
+
+```text
+Název standardu:
+Měsíční kontrola formulářů bez screenshotů zákaznických údajů.
+
+Rozhodnutí z první kontroly:
+Ponechat s drobnou opravou.
+
+Vybraný nález:
+Jeden dočasný export zůstal ve sdílené složce déle, než bylo potřeba.
+
+Proč právě tento nález:
+Opakovaná cena: může se opakovat při každé měsíční kontrole.
+Dopad na výsledek: výsledek kontroly je správný, ale úklid podkladu není viditelný.
+Dopad na datovou stopu: zbytečně prodlužuje životnost dočasné kopie zákaznických dat.
+
+Úpravová věta:
+Upravíme: šablonu měsíčního výstupu kontroly formulářů.
+Změna: doplníme pole "dočasné exporty smazány: ano/ne".
+Důvod: aby byl úklid dočasných podkladů součástí dokončení práce.
+Hotovo je když: příští výstup obsahuje vyplněné pole a po kontrole nezůstane export ve sdílené složce.
+
+Typ zásahu:
+Datový zásah.
+
+Nejbližší pracovní místo:
+Šablona měsíčního výstupu.
+
+Co se vědomě nemění:
+Hlavní pravidlo bez screenshotů, kanonický zdroj pravdy, měsíční rytmus ani odkazování na primární CRM záznam.
+
+Privacy-first brána:
+Nová data: ne.
+Nové kopie: ne.
+Přístupy: beze změny.
+Retence: zkrácení skutečné retence dočasných exportů.
+Nejmenší dostatečný důkaz: ano/ne potvrzení bez ukládání exportu.
+
+Ověření při nejbližší normální práci:
+Při další měsíční kontrole ověřit vyplněné pole a prázdnou složku dočasných exportů po dokončení práce.
+
+Changelog věta:
+Po první kontrole standardu bylo do šablony měsíčního výstupu doplněno pole pro potvrzení smazání dočasných exportů; hlavní pravidlo bez screenshotů zůstává beze změny a ověření proběhne při příští měsíční kontrole.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst rozhodnutí z první kontroly standardu.
+2. Čtyři minuty: vybrat jeden nález podle opakované ceny.
+3. Čtyři minuty: napsat úpravovou větu a typ zásahu.
+4. Tři minuty: určit nejbližší pracovní místo a co se vědomě nemění.
+5. Tři minuty: projít privacy-first bránu.
+6. Tři minuty: nastavit ověření při nejbližší normální práci a changelog větu.
+
+Výstupem je jedna hotová provozní úprava. Ne seznam možných zlepšení. Ne úvod do budoucí reorganizace. Jedna věc, která odstraní konkrétní opakované tření.
+
+### Checklist kapitoly
+
+- Vycházíte z rozhodovací věty první kontroly?
+- Je stav vhodný pro malou úpravu, ne pro úplnou revizi?
+- Vybrali jste jeden nález podle opakované ceny?
+- Je úpravová věta konkrétní a menší než původní standard?
+- Upravujete nejbližší pracovní místo?
+- Zvolili jste jeden typ zásahu?
+- Je napsané, co se vědomě nemění?
+- Prošla úprava privacy-first bránou?
+- Nevznikají nová osobní data, kopie, přístupy nebo delší retence?
+- Stačí pro ověření příští normální použití?
+- Má changelog jasný stav, rozsah a ověření?
+
+Převod první kontroly standardu do jedné provozní úpravy drží systém v pohybu bez procesního bobtnání. Standard se zlepšuje tam, kde práce opravdu drhla, a zůstává stabilní tam, kde fungoval. To je zdravý provoz: malé zásahy, jasná hranice, krátká zpětná vazba a žádné dobrovolné pěstování dalších administrativních vrstev.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IA o převodu první kontroly stabilizovaného standardu do jedné provozní úpravy: rozhodovací věta z kontroly, výběr nálezu podle opakované ceny, úpravová věta, nejbližší pracovní místo, omezení rozsahu, privacy-first brána, ověření při nejbližší normální práci, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HZ o první kontrole stabilizovaného standardu v běžném provozu: kontrolní okno podle rytmu práce, ověření výsledku, cesty a ceny, třídění výjimek, privacy-first kontrola skutečných výstupů a dočasných podkladů, rozhodnutí stavu standardu, nejmenší možná oprava, další kontrola podle rizika, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HY o stabilizaci potvrzené další verze provozu do běžného standardu: zkrácení historie na aktuální pravidlo, důvod a datovou hranici, výběr kanonického zdroje pravdy, odstranění dočasných opor, privacy-first hranice v pracovní instrukci, lehký signál návratu starého chování, stop pravidlo, changelog, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HX o ověření další verze provozu po prvním cyklu: výběr normálního cyklu, sledování cesty člověka k pravidlu, porovnání výstupu s rozhodovací větou, privacy-first kontrola skutečné datové stopy, tři možné stavy výsledku, malé korekce, changelog, šablona, příklad, mini workshop a checklist.
