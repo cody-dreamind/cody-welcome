@@ -68913,8 +68913,381 @@ Výstupem workshopu je krátká karta háčku a jedna pracovní věta vložená 
 
 Trvalý revizní háček je malý mechanismus, který drží dobré pravidlo při zemi. Když je napsaný dobře, nezvyšuje administrativu. Jen v pravý čas připomene, co se má ověřit, jaký důkaz stačí a které datové zbytky nemají vznikat. Takový háček není oslava procesu. Je to úsporný způsob, jak zabránit tomu, aby se stabilizovaná úprava časem změnila v další vrstvu neviditelné práce.
 
+## Příloha IF: Kontrola trvalého revizního háčku po prvním reálném použití
+
+Trvalý revizní háček vypadá na papíře nevinně. Jedna věta, pár otázek, stop pravidlo, hotovo. První reálné použití ale ukáže, jestli háček opravdu pomáhá práci, nebo se jen přilepil k existujícímu rytmu jako další drobná povinnost. Proto je dobré po prvním použití udělat krátkou kontrolu: ne kvůli slavnostnímu hodnocení, ale kvůli tomu, aby se háček hned na začátku zkrátil, posunul nebo odstranil.
+
+Tahle příloha navazuje na Přílohu IE. Použijte ji ve chvíli, kdy revizní háček prošel prvním normálním cyklem: měsíční kontrolou formulářů, review šablon, dodavatelským úklidem, onboardingem role nebo jiným rytmem, do kterého byl vložený. Neověřujte ho na ukázkovém průchodu. Háček musí obstát v obyčejné práci, kdy lidé řeší zákazníky, termíny, rozbitý kontext a trochu moc otevřených záložek.
+
+Codyho komentář: největší nebezpečí revizních háčků není to, že by neexistovaly. Největší nebezpečí je, že existují všude, nikdo už neví proč a všichni se tváří, že to je profesionalita. Profesionální je i včasné smazání zbytečné kontroly.
+
+### 1. Vezměte první normální použití, ne testovací scénu
+
+Kontrolujte háček tam, kde se opravdu použil. Pokud jste ho vložili do měsíční kontroly formulářů, vezměte první měsíční kontrolu po zavedení. Pokud do onboardingového balíčku, vezměte první onboarding, kde se podle něj někdo orientoval. Pokud do dodavatelského úklidu, vezměte první reálný úklid s opravdovými nástroji a přístupy.
+
+Neberte:
+
+```text
+demo pro tým,
+
+kontrolu vyplněnou autorem háčku,
+
+ideální scénář bez časového tlaku,
+
+speciální audit vytvořený jen kvůli ověření,
+
+retrospektivu, kde lidé háček hodnotí z paměti.
+```
+
+Berete:
+
+```text
+skutečný výstup z existujícího rytmu,
+
+člověka nebo roli, která háček měla použít,
+
+pracovní místo, kde háček opravdu žije,
+
+nejmenší důkaz, který háček požadoval,
+
+datovou stopu, která při použití vznikla nebo nevznikla.
+```
+
+První normální použití nemusí být dokonalé. Právě proto je užitečné. Ukáže, jestli je háček viditelný, pochopitelný a přiměřený ve chvíli, kdy práce běží sama.
+
+### 2. Ověřte, jestli háček člověk našel bez připomínání
+
+První signál kvality není vyplněná kolonka. První signál je, zda se člověk k háčku vůbec dostal přirozenou cestou. Pokud musel někdo posílat zvláštní zprávu typu "nezapomeň na ten nový revizní bod", háček možná není špatně napsaný, ale je špatně umístěný.
+
+Ptejte se:
+
+```text
+Byl háček ve stejném místě, kde člověk dělal práci?
+
+Byl viditelný dřív, než vznikl výstup?
+
+Bylo z formulace jasné, co zkontrolovat?
+
+Nemusel člověk hledat starou kartu, úkol nebo komentář?
+
+Nepotřeboval vysvětlení od autora změny?
+```
+
+Příklad:
+
+```text
+Háček byl zapsaný v šabloně měsíční kontroly, ale člověk začal ze staré kopie šablony uložené v záložkách. Problém není v otázce háčku. Problém je ve staré trase k práci.
+```
+
+Správná oprava není přidat další připomínku. Správná oprava je zavřít starou trasu: aktualizovat odkaz v indexu, odstranit kopii, přesměrovat pracovní místo a zapsat krátkou changelog větu.
+
+### 3. Porovnejte důkaz s původním slibem háčku
+
+Háček má obvykle hlídat jeden malý důkaz. Kontrola po prvním použití musí říct, jestli ten důkaz stačil.
+
+Příklad původního slibu:
+
+```text
+Při měsíční kontrole formulářů stačí ano/ne potvrzení smazání exportů. Nevytvářet screenshoty ani přílohy jako důkaz.
+```
+
+Po prvním použití se podívejte:
+
+```text
+Vzniklo ano/ne potvrzení?
+
+Stačilo pro rozhodnutí?
+
+Nevznikl screenshot, export nebo kopie navíc?
+
+Nebyl důkaz tak stručný, že později nepůjde pochopit stav?
+
+Nezačal někdo doplňovat zbytečné vysvětlování jen pro jistotu?
+```
+
+Dobrý výsledek:
+
+```text
+Ano/ne potvrzení stačilo, žádné přílohy nevznikly, člověk věděl, kdy je hotovo.
+```
+
+Varovný výsledek:
+
+```text
+Ano/ne potvrzení vzniklo, ale člověk přidal screenshot prázdné složky, protože nevěděl, zda samotné "ano" bude později obhajitelné.
+```
+
+V druhém případě neobviňujte člověka z nedodržení pravidla. Háček pravděpodobně nevysvětlil, proč je malé potvrzení lepší než vizuální důkaz. Přepište ho do pracovnější věty.
+
+### 4. Změřte cenu použití v minutách a tření
+
+Revizní háček má být levný. Pokud první použití přidalo deset minut hledání, vysvětlování nebo vyplňování, je příliš těžký, špatně umístěný nebo hlídá víc věcí najednou.
+
+Nemusíte měřit stopkami. Stačí praktické rozlišení:
+
+```text
+do jedné minuty:
+háček je lehký a pravděpodobně sedí v práci,
+
+jedna až pět minut:
+háček je přijatelný, pokud chrání citlivé riziko,
+
+víc než pět minut:
+háček potřebuje zkrátit, přesunout nebo sloučit s jinou kontrolou,
+
+nejasná cena:
+háček nevytváří přímou práci, ale lidé kvůli němu začali diskutovat mimo výstup.
+```
+
+Sledujte i tiché tření:
+
+```text
+člověk se ptal, co přesně vyplnit,
+
+výstup má nové pole, které nikdo nečte,
+
+kontrola se zdvojuje s jiným checklistem,
+
+kvůli háčku vzniká nová příloha,
+
+háček přerušuje tok práce v nevhodný okamžik.
+```
+
+Pokud háček chrání osobní nebo zákaznická data, může stát trochu víc než kosmetická kontrola. Ale i privacy-first pravidlo musí být úsporné. Ochrana dat není omluva pro nekonečnou evidenci.
+
+### 5. Udělejte privacy-first kontrolu skutečné stopy
+
+U revizního háčku je privacy-first kontrola jednoduchá: porovnejte, co mělo vzniknout, s tím, co opravdu vzniklo.
+
+Zkontrolujte:
+
+```text
+zda nevznikly screenshoty s osobními údaji,
+
+zda se neuložil export jen kvůli důkazu,
+
+zda někdo neposlal citlivý výřez do chatu,
+
+zda se nezkopírovala data do dočasné tabulky,
+
+zda důkaz žije ve správném systému,
+
+zda má důkaz přiměřenou retenci,
+
+zda staré podklady nezůstaly v úkolu po uzavření kontroly.
+```
+
+Praktická věta do kontroly:
+
+```text
+Háček splnil privacy-first účel, pokud pro rozhodnutí stačil menší důkaz než dřív a nevznikla nová kopie dat.
+```
+
+Pokud háček sice formálně proběhl, ale vytvořil nový export, screenshot nebo kopii, není hotovo. Privacy-first hodnota se neměří tím, že pravidlo existuje. Měří se tím, že v provozu skutečně vzniká méně zbytečných dat.
+
+### 6. Rozhodněte jeden ze čtyř stavů
+
+Po prvním použití nepište dlouhé hodnocení. Stačí jeden stav a malý další krok.
+
+Použijte čtyři stavy:
+
+```text
+Ponechat:
+háček byl nalezený, pochopený, levný a vytvořil správný důkaz.
+
+Zjednodušit:
+háček pomohl, ale je moc dlouhý, má moc otázek nebo vytváří zbytečné tření.
+
+Přesunout:
+háček je užitečný, ale žije na špatném místě nebo přichází pozdě.
+
+Ukončit:
+háček nepřinesl užitečný signál, zdvojuje jinou kontrolu nebo chrání riziko, které už neexistuje.
+```
+
+Příklad rozhodovací věty:
+
+```text
+Háček ponechat s drobným zjednodušením: člověk ho našel v měsíční šabloně a nevznikly screenshoty, ale tři otázky sloučíme do jedné pracovní věty.
+```
+
+Jiný příklad:
+
+```text
+Háček přesunout: otázka je užitečná, ale v měsíční kontrole přichází pozdě; patří přímo do šablony výstupu, kde člověk rozhoduje o důkazu.
+```
+
+Důležité: stav musí vést k jedné úpravě. Ne k novému projektu, ne k obecné debatě o procesní kultuře, ne k rozšíření háčku na dalších sedm oblastí.
+
+### 7. Upravte nejmenší pracovní místo
+
+Když výsledek není čisté "ponechat", začněte nejbližším pracovním místem. Ne dokumentací kolem něj.
+
+Možné malé úpravy:
+
+```text
+zkrátit tři otázky na jednu,
+
+přesunout větu výš v šabloně,
+
+přidat příklad správného důkazu,
+
+smazat duplicitní pole,
+
+odstranit starý odkaz,
+
+vložit stop pravidlo přímo k otázce,
+
+upravit název tak, aby odpovídal pracovní situaci.
+```
+
+Příklad před úpravou:
+
+```text
+Revizní otázky:
+1. Má poslední výstup ano/ne potvrzení?
+2. Nevznikl screenshot?
+3. Je odkaz kanonický?
+```
+
+Příklad po úpravě:
+
+```text
+Při uzavření měsíční kontroly stačí ano/ne potvrzení smazání exportů; nepřikládejte screenshoty a používejte jen šablonu z kanonického indexu.
+```
+
+Tohle je lepší, pokud lidé nepotřebují tři samostatné otázky. Jedna věta sedí přímo v práci a snižuje riziko, že se z háčku stane další formulář.
+
+### 8. Uzavřete kontrolu krátkým changelogem
+
+Kontrola prvního použití musí být dohledatelná, ale nemá vytvářet další vrstvu dokumentace. Stačí krátký changelog v místě, kde žije háček nebo standard.
+
+Dobrá changelog věta:
+
+```text
+První použití revizního háčku proběhlo v měsíční kontrole formulářů; háček se zkracuje ze tří otázek na jednu pracovní větu, protože důkaz stačí a nevznikly screenshoty.
+```
+
+Nebo:
+
+```text
+První použití ukázalo, že háček je duplicitní s kvartálním dodavatelským úklidem; samostatná otázka se ruší a odkaz se přesouvá do dodavatelské kontroly.
+```
+
+Do changelogu nedávejte osobní údaje, zákaznické výřezy ani kopie důkazů. Zapište rozhodnutí, ne surový materiál. Pokud surový materiál nemá samostatný právní nebo provozní důvod zůstat, smažte ho podle domluvené retence.
+
+### Karta kontroly prvního použití háčku
+
+```text
+Název háčku:
+
+Kde háček žije:
+
+První normální použití:
+
+Kdo ho použil podle role:
+
+Původní slib háčku:
+
+Byl nalezen bez připomínání:
+
+Stačil nejmenší důkaz:
+
+Co vzniklo za datovou stopu:
+
+Cena použití:
+
+Co se zdvojilo nebo zadrhlo:
+
+Rozhodnutí:
+ponechat / zjednodušit / přesunout / ukončit
+
+Jedna úprava:
+
+Co se maže nebo zavírá:
+
+Changelog věta:
+```
+
+### Příklad vyplněné kontroly
+
+```text
+Název háčku:
+Měsíční kontrola formulářů bez screenshotů zákaznických údajů.
+
+Kde háček žije:
+Šablona měsíční kontroly formulářů.
+
+První normální použití:
+Květnová kontrola formuláře "Domluvit konzultaci".
+
+Kdo ho použil podle role:
+Role odpovědná za webový provoz a formuláře.
+
+Původní slib háčku:
+Stačí ano/ne potvrzení smazání exportů; nevytvářet screenshoty ani přílohy.
+
+Byl nalezen bez připomínání:
+Ano, ale přes starý odkaz v záložkách se otevřela starší kopie šablony.
+
+Stačil nejmenší důkaz:
+Ano. Pole ano/ne stačilo pro uzavření kontroly.
+
+Co vzniklo za datovou stopu:
+Pouze vyplněná kontrolní věta v měsíčním výstupu. Nevznikl screenshot ani export.
+
+Cena použití:
+Asi dvě minuty navíc kvůli ověření správné verze šablony.
+
+Co se zdvojilo nebo zadrhlo:
+Starý odkaz v záložkách a duplicitní otázka v kontrolní kartě.
+
+Rozhodnutí:
+Zjednodušit.
+
+Jedna úprava:
+Sloučit tři revizní otázky do jedné pracovní věty a odstranit duplicitní pole.
+
+Co se maže nebo zavírá:
+Starý odkaz v indexu, starší kopie šablony a dočasná kontrolní karta mimo changelog.
+
+Changelog věta:
+První použití háčku potvrdilo, že stačí ano/ne důkaz bez screenshotů; háček se zkracuje na jednu větu a staré odkazy na šablonu se zavírají.
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: vybrat první normální použití háčku.
+2. Dvě minuty: ověřit, zda člověk háček našel bez připomínání.
+3. Dvě minuty: porovnat skutečný důkaz s původním slibem.
+4. Dvě minuty: projít privacy-first stopu a smazat zbytečné podklady.
+5. Dvě minuty: určit cenu použití a hlavní tření.
+6. Dvě minuty: vybrat stav ponechat, zjednodušit, přesunout nebo ukončit.
+7. Dvě minuty: provést jednu nejmenší úpravu pracovního místa.
+8. Jedna minuta: zapsat changelog větu.
+
+Výstupem workshopu není další plán revizí. Výstupem je buď potvrzený háček, nebo jedna malá úprava, která ho udělá lehčím. Pokud workshop objeví větší problém standardu, oddělte ho do nové revize. Háček nemá nést celou váhu špatně navrženého procesu.
+
+### Checklist kapitoly
+
+- Kontrolujete první normální použití, ne demo?
+- Byl háček v pracovním místě, kde ho člověk skutečně potřeboval?
+- Našel ho člověk bez připomínání od autora změny?
+- Stačil nejmenší důkaz definovaný v háčku?
+- Nevznikl screenshot, export, kopie nebo citlivý výřez jen kvůli kontrole?
+- Je cena použití přiměřená riziku, které háček chrání?
+- Nezdvojuje háček jiný checklist nebo kontrolní rytmus?
+- Je jasné, zda háček ponechat, zjednodušit, přesunout nebo ukončit?
+- Vybrali jste jednu nejmenší úpravu pracovního místa?
+- Zavřeli jste staré odkazy, kopie šablon a dočasné kontrolní artefakty?
+- Zapsali jste krátkou changelog větu bez surových osobních nebo zákaznických dat?
+- Nezůstala z kontroly nová administrativa, která nemá vlastní účel?
+
+Kontrola prvního použití revizního háčku je malá pojistka proti dobrým úmyslům, které pomalu bobtnají. Když háček funguje, potvrďte ho a nechte žít. Když je moc těžký, zkraťte ho. Když je na špatném místě, přesuňte ho. A když už nemá důvod existovat, smažte ho bez sentimentu. Privacy-first provoz potřebuje paměť, ale nepotřebuje suvenýry z každé kontroly.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IF o kontrole trvalého revizního háčku po prvním reálném použití: výběr normálního použití, nalezení háčku bez připomínání, porovnání důkazu s původním slibem, cena použití, privacy-first kontrola stopy, čtyři stavy rozhodnutí, nejmenší úprava pracovního místa, changelog, karta kontroly, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IE o převodu kontroly stabilizované provozní úpravy do trvalého revizního háčku: rozhodovací věta, výběr pravidel, která háček opravdu potřebují, napojení na existující rytmus, nejmenší užitečný důkaz, stop pravidlo, vlastnictví podle role, uzavření starých artefaktů, karta háčku, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha ID o kontrole stabilizované provozní úpravy po prvních běžných cyklech: výběr normálních cyklů, návrat ke stabilizační větě, cesta k pravidlu, porovnání výstupu, ceny a datové stopy, hledání návratu staré cesty, privacy-first kontrola artefaktů, rozhodnutí stavu standardu, nejmenší další zásah, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IC o stabilizaci ověřené provozní úpravy do běžného standardu: potvrzený stav, kanonický zdroj pravdy, pracovní jazyk pravidla, uzavření dočasných opor, privacy-first stabilizace datové stopy, krátké předání, signál návratu staré cesty, stabilizační karta, příklad, mini workshop a checklist.
