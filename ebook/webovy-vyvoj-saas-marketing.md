@@ -66405,8 +66405,318 @@ Výstupem není nový plán. Výstupem je uzavření prvního cyklu nové provoz
 
 Ověření další verze provozu po prvním cyklu chrání tým před falešným pocitem hotovo. Dobrá změna se nepozná podle toho, že dobře zní v zápisu. Pozná se podle toho, že ji člověk najde, použije a vytvoří správný výstup bez nového chaosu a bez zbytečných kopií dat.
 
+## Příloha HY: Stabilizace potvrzené další verze provozu do běžného standardu
+
+Když nová provozní verze projde prvním normálním cyklem, máte důležitý důkaz. Ale pořád to ještě není automaticky běžný standard. Je to potvrzená změna po prvním použití. Aby se z ní stal standard, musí se zkrátit historie, upevnit zdroj pravdy, odstranit dočasné opory a nastavit lehký signál, který ukáže, jestli se starý postup nevrací.
+
+Pracovní otázka:
+
+```text
+Jak převést potvrzenou další verzi provozu do běžného standardu tak, aby byla srozumitelná bez znalosti celé opravy, kontroly a ověřovací historie?
+```
+
+Tahle příloha je o stabilizaci. Ne o dalším vylepšování, ne o přidání nové vrstvy kontroly, ne o vytváření procesního pomníku. Cíl je prostý: člověk má při další práci najít jedno aktuální místo, pochopit pravidlo a vytvořit správný výstup bez toho, aby četl archeologii minulých rozhodnutí.
+
+Codyho komentář: provozní historie je užitečná pro audit, ale mizerná jako návod k práci. Když musí nový člověk přečíst pět changelogů, tři kontroly a jednu opravu, aby pochopil jednoduché pravidlo, standard ještě není standard. Je to detektivka. A detektivky patří na večer, ne do měsíční kontroly formulářů.
+
+### 1. Vezměte jen potvrzený stav, ne celý příběh
+
+Po ověření první cyklus typicky obsahuje hodně kontextu: proč změna vznikla, co bylo staré chování, kde zůstal starý odkaz, jaká korekce proběhla a jaký byl privacy-first závěr. Pro stabilní standard z toho ale nepotřebujete všechno.
+
+Vyberte tři věty:
+
+```text
+Aktuální pravidlo:
+Co má člověk udělat při běžné práci.
+
+Důvod pravidla:
+Jaké riziko nebo tření pravidlo drží.
+
+Datová hranice:
+Co se nesmí kopírovat, ukládat nebo sledovat.
+```
+
+Příklad:
+
+```text
+Aktuální pravidlo:
+Při měsíční kontrole formulářů používej šablonu výstupu a zapisuj jen odkaz na primární CRM záznam, anonymizovaný závěr a potvrzení smazání dočasných podkladů.
+
+Důvod pravidla:
+Pravidlo brání návratu screenshotů a ručních opisů zákaznických údajů do kontrolních výstupů.
+
+Datová hranice:
+Do výstupu nepatří obsah formuláře, e-mail, telefon ani screenshot CRM.
+```
+
+To je standardní tvar. Stručný, použitelný, bez nutnosti znát předchozí provozní drama. Kdo potřebuje historii, najde ji v changelogu. Kdo potřebuje pracovat, najde pravidlo.
+
+### 2. Určete jeden kanonický zdroj pravdy
+
+Standard nemůže mít pět domovů. Může mít odkazy z více míst, ale aktuální znění musí žít jen na jednom místě. Jinak se za pár týdnů objeví dvě podobné věty, jedna stará šablona a někdo začne hádat, která verze je správná.
+
+Kanonické místo vybírejte podle okamžiku použití:
+
+- šablona výstupu, pokud se pravidlo používá při psaní výstupu,
+- opakovaný úkol, pokud se pravidlo používá při spuštění práce,
+- provozní karta, pokud pravidlo nastavuje odpovědnost a hranice,
+- onboardingová trasa, pokud se podle pravidla učí nová role,
+- interní index, pokud jde jen o rozcestník na správný materiál.
+
+Příklad rozhodnutí:
+
+```text
+Kanonický zdroj pravdy:
+Šablona měsíčního výstupu kontroly formulářů.
+
+Odkazy:
+Opakovaný úkol a interní index pouze odkazují na šablonu. Neobsahují vlastní kopii pravidla.
+```
+
+Tohle je malý detail, který šetří hodně budoucího zmatku. Odkazy jsou v pořádku. Kopie pravidla jsou dluh.
+
+### 3. Zkraťte pracovní instrukci na použitelný formát
+
+Stabilní standard má být kratší než ověřovací záznam. Pokud je stejně dlouhý, pravděpodobně jste do něj přenesli příliš mnoho historie.
+
+Dobrá pracovní instrukce má obvykle tento tvar:
+
+```text
+Kdy:
+Při jaké práci se pravidlo používá.
+
+Co udělat:
+Jedna až tři konkrétní akce.
+
+Co nedělat:
+Jedna jasná hranice.
+
+Hotovo je když:
+Minimální výstup nebo důkaz.
+```
+
+Příklad:
+
+```text
+Kdy:
+Při měsíční kontrole formulářů.
+
+Co udělat:
+Vyplň šablonu výstupu, přidej odkaz na primární CRM záznam a napiš anonymizovaný závěr.
+
+Co nedělat:
+Nevkládej screenshot, e-mail, telefon ani obsah formuláře.
+
+Hotovo je když:
+Výstup obsahuje odkaz, anonymizovaný závěr a potvrzení smazání dočasných podkladů.
+```
+
+Tento formát funguje lépe než odstavec plný podmínek. Člověk ho rychle přečte v okamžiku práce. A když ho rychle přečte, je větší šance, že ho opravdu použije. Převratný objev: pravidla, která lidé dokážou přečíst, mají vyšší šanci nebýt dekorace.
+
+### 4. Odstraňte dočasné opory po ověření
+
+Během změny často vzniknou dočasné opory: přesměrovací věta, kontrolní háček, poznámka v opakovaném úkolu, karta korekce, varování u staré šablony. Po stabilizaci se rozhodněte, co zůstává a co zmizí.
+
+Dočasná opora má zůstat jen tehdy, když ještě chrání reálné riziko.
+
+Příklady:
+
+```text
+Ponechat:
+Krátký odkaz z opakovaného úkolu na kanonickou šablonu, protože člověk tím úkolem práci začíná.
+
+Odstranit:
+Poznámku "nové pravidlo ověřit v příštím cyklu", protože ověření už proběhlo.
+
+Archivovat:
+Kartu původní korekce, protože může být užitečná pro historii, ale nemá řídit běžnou práci.
+
+Smazat:
+Duplicitní text pravidla v interním indexu, protože vytváří druhý zdroj pravdy.
+```
+
+Úklid dočasných opor není kosmetika. Je to prevence návratu do přechodového režimu. Pokud v systému necháte všechny opory, tým nikdy nepozná, že změna už je stabilní.
+
+### 5. Přepište privacy-first hranici do standardu, ne do poznámky
+
+Privacy-first hranice nesmí zůstat jen v ověřovacím zápisu. Musí být součástí běžné pracovní instrukce. Jinak se při dalším použití snadno ztratí a člověk bude řešit jen výstup, ne datovou stopu.
+
+Špatně:
+
+```text
+Poznámka z ověření: příště dávat pozor na osobní údaje.
+```
+
+Dobře:
+
+```text
+Do výstupu nekopíruj obsah formuláře, e-mail, telefon ani screenshot CRM. Použij odkaz na primární záznam a anonymizovaný závěr.
+```
+
+Ještě praktičtější:
+
+```text
+Důkaz kontroly:
+- Odkaz na primární záznam:
+- Anonymizovaný závěr:
+- Dočasné podklady smazány: ano/ne
+```
+
+Privacy-first provoz se neopírá o to, že si lidé vzpomenou na zásadu. Opírá se o to, že správná práce je v šabloně jednodušší než špatná práce. Pokud je jednodušší vložit screenshot než vyplnit odkaz a anonymizovaný závěr, systém tlačí proti vlastní hodnotě.
+
+### 6. Nastavte lehký signál návratu starého chování
+
+Stabilizace neznamená, že už nikdy nic nekontrolujete. Znamená, že kontrola nemá být samostatný těžký proces. Stačí lehký signál v přirozeném rytmu.
+
+Lehký signál může být:
+
+- při měsíčním review rychle ověřit jeden výstup,
+- při onboardingu nové role zkontrolovat první použití šablony,
+- při kvartálním úklidu šablon najít duplicity pravidla,
+- při incidentním nebo supportním review ověřit, zda nevznikly nové kopie dat,
+- při úpravě CRM nebo formulářů zkontrolovat, jestli odkaz na primární záznam pořád dává smysl.
+
+Příklad:
+
+```text
+Lehký signál:
+Při měsíčním review formulářů zkontrolovat jeden výstup: neobsahuje screenshot ani ruční opis zákaznických údajů.
+
+Stop pravidlo:
+Pokud tři po sobě jdoucí review nenajdou návrat starého chování, signál přesunout jen do kvartální kontroly šablon.
+```
+
+Lehký signál má chránit standard před návratem staré práce. Nemá dokazovat, že lidé pravidlo poslušně odklikli. To je rozdíl mezi provozní péčí a mikromanagementem v hezkém kabátě.
+
+### 7. Uzavřete stabilizaci jednou větou
+
+Na konci stabilizace napište jednu větu do changelogu. Má říct, že změna přešla z ověřování do běžného standardu, kde je aktuální zdroj pravdy a jaká privacy-first hranice platí.
+
+Příklad:
+
+```text
+Po potvrzení prvního normálního cyklu byla zkrácená kontrola formulářů stabilizována jako běžné pravidlo v šabloně měsíčního výstupu; výstup používá jen odkaz na primární záznam, anonymizovaný závěr a potvrzení smazání dočasných podkladů.
+```
+
+Pokud proběhla malá korekce:
+
+```text
+Stabilizace zahrnula odstranění starého odkazu z interního indexu; kanonický zdroj pravdy je šablona měsíčního výstupu a ostatní místa na ni pouze odkazují.
+```
+
+Tato věta pomáhá budoucímu člověku pochopit stav bez toho, aby rozbaloval celou minulost. Changelog není skládka poznámek. Je to mapa aktuální reality.
+
+### Šablona stabilizace potvrzené verze
+
+```text
+Název změny:
+
+Potvrzený stav po prvním cyklu:
+Potvrzeno / potvrzeno s korekcí
+
+Aktuální pravidlo:
+
+Důvod pravidla:
+
+Datová hranice:
+
+Kanonický zdroj pravdy:
+
+Místa, která pouze odkazují:
+
+Dočasné opory k odstranění:
+
+Dočasné opory k archivaci:
+
+Pracovní instrukce:
+Kdy:
+Co udělat:
+Co nedělat:
+Hotovo je když:
+
+Lehký signál návratu starého chování:
+
+Stop pravidlo signálu:
+
+Changelog věta:
+```
+
+### Příklad vyplněné stabilizace
+
+```text
+Název změny:
+Zkrácená kontrola výstupu formulářů bez screenshotů.
+
+Potvrzený stav po prvním cyklu:
+Potvrzeno s korekcí.
+
+Aktuální pravidlo:
+Při měsíční kontrole formulářů používat šablonu výstupu a zapisovat jen odkaz na primární CRM záznam, anonymizovaný závěr a potvrzení smazání dočasných podkladů.
+
+Důvod pravidla:
+Brání návratu screenshotů a ručních opisů zákaznických údajů do kontrolních výstupů.
+
+Datová hranice:
+Do výstupu nepatří obsah formuláře, e-mail, telefon ani screenshot CRM.
+
+Kanonický zdroj pravdy:
+Šablona měsíčního výstupu kontroly formulářů.
+
+Místa, která pouze odkazují:
+Opakovaný úkol měsíční kontroly a interní index provozních šablon.
+
+Dočasné opory k odstranění:
+Poznámka "ověřit při příštím cyklu" v opakovaném úkolu.
+
+Dočasné opory k archivaci:
+Karta původní korekce a záznam prvního ověření.
+
+Pracovní instrukce:
+Kdy: při měsíční kontrole formulářů.
+Co udělat: vyplnit šablonu výstupu, přidat odkaz na primární CRM záznam a napsat anonymizovaný závěr.
+Co nedělat: nevkládat screenshot, e-mail, telefon ani obsah formuláře.
+Hotovo je když: výstup obsahuje odkaz, anonymizovaný závěr a potvrzení smazání dočasných podkladů.
+
+Lehký signál návratu starého chování:
+Při měsíčním review formulářů zkontrolovat jeden výstup, zda neobsahuje screenshot ani ruční opis zákaznických údajů.
+
+Stop pravidlo signálu:
+Po třech čistých review přesunout signál do kvartální kontroly šablon.
+
+Changelog věta:
+Po potvrzení prvního normálního cyklu byla zkrácená kontrola formulářů stabilizována jako běžné pravidlo v šabloně měsíčního výstupu; ostatní místa pouze odkazují a privacy-first hranice zůstává bez screenshotů a ručních opisů zákaznických údajů.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst potvrzený stav po prvním cyklu a případnou korekci.
+2. Čtyři minuty: přepsat historii do tří vět: aktuální pravidlo, důvod, datová hranice.
+3. Čtyři minuty: vybrat jeden kanonický zdroj pravdy a označit ostatní místa jen jako odkazy.
+4. Tři minuty: odstranit nebo archivovat dočasné opory.
+5. Tři minuty: nastavit lehký signál návratu starého chování a stop pravidlo.
+6. Tři minuty: napsat changelog větu.
+
+Výstupem je stabilní standard, ne další balík úkolů. Pokud workshop začne otevírat širší redesign provozu, vraťte se k otázce: co musí člověk vědět při příštím normálním použití?
+
+### Checklist kapitoly
+
+- Vycházíte z potvrzeného prvního cyklu, ne jen z přání autora změny?
+- Přepsali jste historii do aktuálního pravidla, důvodu a datové hranice?
+- Má standard jeden kanonický zdroj pravdy?
+- Ostatní místa pouze odkazují, místo aby kopírovala pravidlo?
+- Je pracovní instrukce kratší než ověřovací záznam?
+- Jsou dočasné opory odstraněné nebo archivované?
+- Je privacy-first hranice součástí šablony nebo pravidla, ne jen poznámkou v changelogu?
+- Je jasné, co se nesmí kopírovat nebo ukládat?
+- Nastavili jste lehký signál návratu starého chování?
+- Má lehký signál stop pravidlo?
+- Vysvětluje changelog, kde je aktuální zdroj pravdy?
+
+Stabilizace potvrzené další verze provozu do běžného standardu je poslední krok mezi "změna fungovala" a "takhle teď normálně pracujeme". Čím kratší, jasnější a blíž skutečné práci standard je, tím menší šance, že se z něj stane další dokument, který všichni respektují hlavně tím, že ho neotevírají.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha HY o stabilizaci potvrzené další verze provozu do běžného standardu: zkrácení historie na aktuální pravidlo, důvod a datovou hranici, výběr kanonického zdroje pravdy, odstranění dočasných opor, privacy-first hranice v pracovní instrukci, lehký signál návratu starého chování, stop pravidlo, changelog, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HX o ověření další verze provozu po prvním cyklu: výběr normálního cyklu, sledování cesty člověka k pravidlu, porovnání výstupu s rozhodovací větou, privacy-first kontrola skutečné datové stopy, tři možné stavy výsledku, malé korekce, changelog, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HW o převodu výsledku kontroly údržbového rytmu do další verze provozu: rozhodovací věta, výběr prvního pracovního místa, zavření staré cesty, privacy-first hranice v pracovním jazyce, nejbližší ověření bez nového procesu, vědomé neřešení širšího rozsahu, changelog, šablona, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha HV o kontrole údržbového rytmu po prvních cyklech: výběr skutečného kontrolního okna, návrat k původnímu slibu, sledování výstupů místo rituálu, praktická cena rytmu, návrat starého chování, privacy-first audit, rozhodnutí dalšího stavu, šablona, příklad, mini workshop a checklist.
