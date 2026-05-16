@@ -70188,8 +70188,325 @@ Workshop musí skončit změnovou větou, ne seznamem úkolů pro neurčité "po
 
 Úklidové rozhodnutí je malé, ale důležité zakončení celé smyčky. Háček byl navržen, ověřen, stabilizován, použit v běžném rytmu a teď se podle reality zjednodušuje. Tak má vypadat provozní dospívání: méně slibů, méně dokumentů, méně zbytečných dat a víc práce, která se dá normálně dělat.
 
+## Příloha IJ: Ověření úklidového rozhodnutí po příštím normálním použití
+
+Úklidové rozhodnutí není hotové ve chvíli, kdy upravíte šablonu, archivujete starý dokument nebo zkrátíte kontrolní větu. Hotové je až ve chvíli, kdy se podle nové verze opravdu pracovalo a ukázalo se, že úklid pomohl. Jinak jste možná jen přesunuli nepořádek na hezčí místo.
+
+Tahle příloha navazuje na Přílohu II. Použijte ji po prvním normálním použití upraveného háčku, šablony nebo pracovního místa. Ne po testu autora změny. Ne po demo průchodu na poradě. Po skutečné práci, kde člověk potřeboval udělat běžný úkol a úklidové rozhodnutí mu mělo pomoct.
+
+Smysl ověření je jednoduchý: zjistit, jestli úklid snížil tření, zachoval ochranný účel a nevytvořil novou datovou stopu. Když se to potvrdí, úklid můžete nechat být. Když ne, udělejte jednu malou korekci nebo se vraťte k rozhodnutí z Přílohy II.
+
+Codyho komentář: úklid bez ověření je provozní kosmetika. Vypadá to lépe, ale nevíte, jestli se tím někomu pracuje lépe. A pokud po úklidu vznikl nový "dočasný" soubor, který nikdo nechce smazat, gratuluju, pořídili jste si menší nepořádek s lepším názvem.
+
+### 1. Vyberte první skutečné použití
+
+Neověřujte úklid na ideálním scénáři. Vyberte první normální práci, kde se upravené místo použilo bez speciální přípravy.
+
+Dobré použití vypadá takto:
+
+```text
+Někdo mimo autora změny otevřel kanonickou šablonu.
+
+Narazil na upravenou větu, pole, krok nebo odkaz.
+
+Dokončil běžný úkol.
+
+Vznikl výstup, který by vznikl i bez auditu.
+
+Nebylo potřeba ruční zachraňování autorem změny.
+```
+
+Špatné použití:
+
+```text
+Autor změny ukáže týmu, jak by se to mělo používat.
+
+Tým si změnu projde bez reálného úkolu.
+
+Někdo vyplní šablonu jen proto, aby bylo co zapsat do kontroly.
+
+Průchod proběhne s komentářem "tady normálně klikneš sem".
+```
+
+Ověření má měřit použitelnost v provozu, ne schopnost týmu následovat instruktáž. Pokud se změna použije jen tehdy, když u ní stojí její autor, není stabilní.
+
+### 2. Porovnejte slib úklidu s realitou
+
+Vraťte se k úklidové kartě z Přílohy II. Hlavní otázka zní: co měl úklid zlepšit?
+
+Typické sliby úklidu:
+
+```text
+Zkrátit formulaci, aby se dala použít přímo při práci.
+
+Přesunout pravidlo do místa, kde se rozhodnutí dělá.
+
+Sloučit duplicitní krok s existující kontrolou.
+
+Ukončit háček, který už nechrání reálné riziko.
+
+Zavřít starou cestu, která vracela tým k horšímu postupu.
+```
+
+U prvního použití se neptejte obecně, jestli "to bylo lepší". To je moc měkké. Ptejte se konkrétně:
+
+```text
+Našel člověk správné místo bez nápovědy?
+
+Stačila nová formulace k rozhodnutí?
+
+Vznikl správný výstup?
+
+Zmizel krok, který měl zmizet?
+
+Nevrátila se stará cesta přes kopii, starý odkaz nebo osobní připomínku?
+
+Zůstala privacy-first hranice čitelná přímo při práci?
+```
+
+Příklad:
+
+```text
+Slib úklidu:
+U měsíční kontroly formulářů bude stačit ano/ne potvrzení smazání exportů bez screenshotů.
+
+Realita:
+Člověk našel pole v kanonické šabloně, vyplnil ano/ne potvrzení, nepřidal screenshot a nepoužil starou projektovou kopii.
+```
+
+To je potvrzený úklid. Ne proto, že text vypadá dobře, ale protože změnil chování v normálním průchodu.
+
+### 3. Hledejte skrytou náhradu starého nepořádku
+
+Největší riziko po úklidu je, že tým odstraněnou věc potichu nahradí jinou. Smazali jste screenshoty, ale lidé začali kopírovat texty e-mailů do poznámky. Zkrátili jste šablonu, ale někdo si vytvořil vlastní "rozšířenou" verzi. Zavřeli jste starý odkaz, ale lidé si posílají starý dokument v chatu.
+
+Při ověření si proto všímejte náhrad:
+
+```text
+Vznikl nový dočasný dokument?
+
+Použil někdo osobní kopii šablony?
+
+Objevilo se nové pole "pro jistotu"?
+
+Ukládá se důkaz na jiném místě než předtím?
+
+Přesunula se stará datová stopa do chatu, e-mailu nebo screenshotu?
+
+Vysvětluje někdo změnu ručně pokaždé znovu?
+```
+
+Pokud se objeví náhrada, neberte ji automaticky jako neposlušnost. Často ukazuje, že úklid odstranil věc, která plnila nějakou potřebu. Možná byl důkaz moc krátký. Možná kanonické místo není po ruce. Možná se tým bojí, že bez detailu nepůjde obhájit rozhodnutí.
+
+Rozdíl je v reakci. Nepřidávejte zpátky celý starý nepořádek. Zjistěte, jakou potřebu náhrada řeší, a upravte nejmenší pracovní místo.
+
+### 4. Udělejte privacy-first kontrolu skutečné stopy
+
+Úklidové rozhodnutí mělo pravděpodobně zmenšit datovou stopu. Teď ověřte, jestli se to stalo i v realitě.
+
+Kontrolní otázky:
+
+```text
+Jaký důkaz po prvním použití skutečně zůstal?
+
+Obsahuje osobní, zákaznická nebo provozně citlivá data?
+
+Je důkaz kratší než před úklidem?
+
+Je uložený v kanonickém místě, nebo vznikla kopie?
+
+Má jasnou retenci nebo přirozené smazání?
+
+Je přístup omezený na roli, která ho opravdu potřebuje?
+```
+
+Dobré ověření může skončit velmi krátkým zápisem:
+
+```text
+Po prvním použití zůstalo jen ano/ne potvrzení v měsíční kontrolní kartě. Nevznikl screenshot, export ani kopie zákaznických údajů. Stará projektová šablona nebyla použita.
+```
+
+To je dost. Ověření privacy-first provozu nemá vyrábět víc dat, než kolik jich kontroluje. Když kvůli kontrole datové minimalizace vytvoříte tři nové reporty, pointa trochu odešla na kafe.
+
+### 5. Rozhodněte jeden ze čtyř stavů
+
+Po prvním použití zařaďte úklid do jednoho stavu. Neotevírejte nekonečnou debatu.
+
+```text
+Potvrdit:
+Úklid pomohl, účel zůstal zachovaný a datová stopa se nezhoršila.
+
+Lehce upravit:
+Úklid je správným směrem, ale jedno pracovní místo potřebuje malou korekci.
+
+Vrátit k rozhodnutí:
+Ukázalo se, že původní úklid řešil špatný problém nebo odstranil potřebnou oporu.
+
+Ukončit:
+Háček, kontrola nebo šablona po úklidu už nemá reálný účel a může zmizet úplně.
+```
+
+Příklady rozhodovacích vět:
+
+```text
+Potvrdit:
+Úklid potvrzen: kanonická šablona stačila, nevznikly screenshoty ani kopie a další kontrola zůstává v měsíčním rytmu.
+
+Lehce upravit:
+Úklid ponechat, ale větu přesunout o jedno pole výš, protože člověk ji našel až po vyplnění důkazu.
+
+Vrátit k rozhodnutí:
+Úklid vrátit k rozhodnutí; zrušené pole neslo důležitý kontext pro podporu a tým ho začal nahrazovat poznámkou v chatu.
+
+Ukončit:
+Háček ukončit; po přesunu procesu do automatizovaného mazání už ruční potvrzení nepřináší hodnotu.
+```
+
+Stav má být praktický, ne diplomatický. Pokud změna nefunguje, napište to. Provoz se nezlepší tím, že špatné rozhodnutí nazvete "částečně stabilizovanou příležitostí". To je jen mlha v pracovní obuvi.
+
+### 6. Šablona ověřovací karty
+
+```text
+Název úklidového rozhodnutí:
+
+Datum prvního normálního použití:
+
+Kdo použil podle role:
+
+Jaký úkol se dělal:
+
+Původní slib úklidu:
+
+Našel člověk správné místo bez nápovědy:
+
+Stačila nová formulace nebo struktura:
+
+Jaký výstup vznikl:
+
+Objevila se stará cesta nebo náhradní nepořádek:
+
+Skutečná datová stopa:
+
+Privacy-first závěr:
+
+Rozhodnutí stavu:
+
+Jedna další úprava, pokud je potřeba:
+
+Changelog věta:
+```
+
+Vyplňujte stručně. Role stačí, jméno většinou nepotřebujete. Pokud řešíte citlivý proces, neukládejte surové příklady zákaznických dat. Popište typ výstupu a rozhodnutí.
+
+### 7. Vyplněný příklad
+
+```text
+Název úklidového rozhodnutí:
+Měsíční formuláře bez screenshotů zákaznických údajů.
+
+Datum prvního normálního použití:
+2026-05-16.
+
+Kdo použil podle role:
+Role odpovědná za webový provoz a formuláře.
+
+Jaký úkol se dělal:
+Měsíční kontrola poptávkových formulářů a smazání dočasných exportů.
+
+Původní slib úklidu:
+Stačí ano/ne potvrzení smazání exportů přímo v kanonické šabloně; nepřikládat screenshoty ani kopie dat.
+
+Našel člověk správné místo bez nápovědy:
+Ano, použil kanonickou šablonu z indexu.
+
+Stačila nová formulace nebo struktura:
+Ano, věta u pole stačila k rozhodnutí.
+
+Jaký výstup vznikl:
+Jedno ano/ne potvrzení bez příloh.
+
+Objevila se stará cesta nebo náhradní nepořádek:
+Ne, stará projektová kopie nebyla použita.
+
+Skutečná datová stopa:
+Zůstalo jen potvrzení v měsíční kartě. Nevznikl export, screenshot ani kopie zákaznických údajů.
+
+Privacy-first závěr:
+Úklid snížil datovou stopu a zachoval kontrolní účel.
+
+Rozhodnutí stavu:
+Potvrdit.
+
+Jedna další úprava, pokud je potřeba:
+Žádná.
+
+Changelog věta:
+Úklid měsíční kontroly formulářů byl po prvním normálním použití potvrzen bez nové datové stopy.
+```
+
+Příklad je záměrně obyčejný. Ověření provozu nemá být literární výkon. Má dát týmu jistotu, že úklid funguje a není potřeba ho dál rozebírat.
+
+### 8. Co dělat při lehké úpravě
+
+Pokud stav vyjde jako "lehce upravit", držte změnu malou. První ověření není pozvánka k nové velké smyčce.
+
+Dobré lehké úpravy:
+
+```text
+Přesunout větu blíž k poli, kde se rozhoduje.
+
+Zkrátit text na jednu jasnější formulaci.
+
+Přejmenovat odkaz na kanonickou šablonu.
+
+Odstranit zbytečné pole, které svádělo k detailnímu důkazu.
+
+Doplnit stop pravidlo pro screenshoty nebo exporty.
+```
+
+Špatné reakce:
+
+```text
+Vytvořit novou kontrolní tabulku pro všechny případy.
+
+Přidat povinné schvalování každého použití.
+
+Obnovit celou starou šablonu, protože jednou chyběl kontext.
+
+Začít sbírat detailní logy, aby se příště lépe vědělo.
+```
+
+Lehká úprava má být ověřitelná při dalším normálním použití. Pokud ji neumíte vysvětlit jednou větou, je moc velká.
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: vybrat první normální použití po úklidu.
+2. Tři minuty: porovnat realitu s původním slibem úklidu.
+3. Tři minuty: hledat starou cestu nebo náhradní nepořádek.
+4. Tři minuty: zapsat skutečnou datovou stopu.
+5. Dvě minuty: vybrat stav: potvrdit, lehce upravit, vrátit k rozhodnutí, ukončit.
+6. Dvě minuty: napsat changelog větu a případnou jednu další úpravu.
+
+Workshop nesmí skončit větou "budeme sledovat". Sledujte jen tehdy, když víte co, proč a jak dlouho. Jinak je to jen elegantnější odklad rozhodnutí.
+
+### Checklist kapitoly
+
+- Ověřujete úklid na prvním normálním použití, ne na ukázce autora?
+- Máte po ruce původní úklidovou kartu a slib změny?
+- Víte, jestli člověk našel správné místo bez nápovědy?
+- Porovnali jste skutečný výstup s tím, co měl úklid zajistit?
+- Zkontrolovali jste, jestli nevznikla stará cesta v nové podobě?
+- Popsali jste skutečnou datovou stopu bez ukládání zbytečných detailů?
+- Vybrali jste jeden ze čtyř stavů: potvrdit, lehce upravit, vrátit k rozhodnutí, ukončit?
+- Pokud je potřeba úprava, je malá a leží v nejbližším pracovním místě?
+- Changelog věta neobsahuje surová zákaznická ani osobní data?
+- Je další kontrola napojená na běžný rytmus, nebo změnu můžete nechat být?
+
+Ověření úklidového rozhodnutí uzavírá smyčku zdravě: změna se neoslavuje jen proto, že byla aplikovaná, ale potvrzuje se podle práce. Když úklid pomohl, nechte ho dýchat. Když nepomohl, opravte nejmenší místo. A když ukáže, že pravidlo už nepotřebujete, ukončete ho. I smazané pravidlo může být dobrý výsledek.
+
 ## Pracovní log
 
+- 2026-05-16: Doplněna Příloha IJ o ověření úklidového rozhodnutí po příštím normálním použití: výběr skutečného průchodu, porovnání slibu s realitou, hledání náhradního nepořádku, privacy-first kontrola skutečné datové stopy, čtyři stavy rozhodnutí, ověřovací karta, příklad, lehká úprava, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha II o převodu kontroly běžného rytmu do jednoho úklidového rozhodnutí: práce s poslední rozhodovací větou, výběr typu úklidu, úprava nejbližšího pracovního místa, privacy-first brzda, úklidová karta, vyplněný příklad, aplikace změny, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IH o kontrole běžného rytmu po stabilizaci revizního háčku: výběr skutečného cyklu, dohledatelnost bez autora, porovnání výstupu s pracovní větou, scorecard ceny použití, kontrola návratu staré cesty, privacy-first kontrola skutečné datové stopy, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IG o stabilizaci ověřeného revizního háčku do běžného rytmu: rozhodnutí z první kontroly, jeden domov háčku, pracovní věta, zavření starých tras, privacy-first retence důkazů, vlastnictví podle role, napojení na existující rytmus, stop pravidlo, stabilizační karta, příklad, mini workshop a checklist.
