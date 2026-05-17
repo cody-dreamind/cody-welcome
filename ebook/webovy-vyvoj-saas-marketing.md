@@ -79518,8 +79518,407 @@ Když workshop začne řešit celý systém dokumentace, vraťte ho zpět k prvn
 
 Provozní standard po stabilizaci drží tehdy, když se podle něj dá pracovat bez autora, bez obcházek a bez bobtnání důkazů. Pokud kontrola ukáže malé tření, opravte nejbližší pracovní místo. Pokud ukáže návrat starého systému, ukliďte starou trasu. A pokud ukáže, že standard stojí jen na dobrém úmyslu, vraťte ho k přepracování. Lepší malá oprava teď než velká dokumentační archeologie za půl roku.
 
+## Příloha JK: Převod kontroly stabilizovaného standardu do jedné další akce
+
+Kontrola provozního standardu po stabilizaci má smysl jen tehdy, když z ní vznikne jasný další krok. Ne velký seznam dobrých nápadů. Ne nový program údržby. Jedna akce, která odpovídá jednomu zjištění: upravit cestu, zpřesnit pravidlo, uklidit starou trasu, nebo nechat standard být.
+
+Otázka této přílohy zní:
+
+```text
+Jak z kontroly stabilizovaného standardu vybrat jednu další akci, která odstraní skutečné tření a nezmění lehkou kontrolu v nový proces?
+```
+
+Tahle příloha navazuje na Přílohu JJ. Tam vznikla kontrolní karta, scorecard a stav standardu. Tady z toho uděláme práci. Nejde o to být produktivní za každou cenu. Někdy je nejlepší další akce žádná změna. Pokud standard drží, datová stopa neroste a lidé ho najdou bez pomoci, nezasahujte jen proto, aby bylo co zapsat do changelogu.
+
+Codyho komentář: provozní disciplína není schopnost pořád něco měnit. Často je to schopnost nechat funkční věc na pokoji. Nejlevnější oprava je ta, kterou nemusíte dělat, protože jste si včas všimli, že problém je jen dojem, ne opakované tření.
+
+### 1. Začněte stavem z kontroly
+
+Než vyberete akci, vraťte se ke stavu z kontrolní karty. Stav určuje typ práce. Když ho přeskočíte, začnete řešit nápady místo nálezu.
+
+Použijte jednoduché mapování:
+
+```text
+Ponechat:
+Další akce je jen zapsat potvrzení a nedělat změnu.
+
+Upravit cestu:
+Další akce mění odkaz, vstupní místo, pořadí nebo pracovní trasu.
+
+Zpřesnit pravidlo:
+Další akce mění jednu větu, popisek pole nebo hranici výjimky.
+
+Uklidit starou trasu:
+Další akce maže, archivuje nebo přesměrovává starý materiál.
+
+Vrátit k přepracování:
+Další akce není malá oprava. Je to návrat k problému, rozsahu a novému návrhu standardu.
+```
+
+Příklad:
+
+```text
+Stav z kontroly:
+Uklidit starou trasu.
+
+Důvod:
+Pravidlo funguje a výstup je minimální, ale stará tabulka pořád vypadá jako živý pracovní prostor.
+
+Povolený typ akce:
+Archivace staré tabulky a přesměrování odkazu.
+
+Zakázané pokušení:
+Přepisovat hlavní pravidlo, když pravidlo problém nezpůsobilo.
+```
+
+Tím se akce drží v úzkém pruhu. Pokud kontrola řekla "upravit cestu", neopravujte jazyk pravidla jen proto, že vás napadla hezčí formulace. Hezčí text není automaticky lepší provoz.
+
+### 2. Oddělte nález od komentáře
+
+Kontrolní karta často obsahuje fakta i dojmy. Pro další akci potřebujete nález, který se dá ověřit. Komentář může pomoci, ale nesmí řídit změnu sám.
+
+Rozdíl:
+
+```text
+Komentář:
+Lidem se to asi hledá špatně.
+
+Nález:
+První člověk začal v měsíčním úkolu a první odkaz vedl do staré tabulky.
+```
+
+```text
+Komentář:
+Pravidlo je moc dlouhé.
+
+Nález:
+Člověk při použití přeskočil část "výjimky" a přidal screenshot běžného stavu, i když pravidlo říká opak.
+```
+
+Příklad převodu:
+
+```text
+Komentář z kontroly:
+Starý systém se pořád plete.
+
+Pracovní nález:
+V měsíčním úkolu jsou dva odkazy: první vede na starou tabulku, druhý na provozní kartu. Člověk použil první odkaz.
+
+Jedna akce:
+V měsíčním úkolu ponechat jen odkaz na provozní kartu a starou tabulku označit jako archiv.
+```
+
+Dobrá další akce musí mít oporu ve skutečném průchodu. Pokud oporu nemá, zapište ji jako hypotézu a počkejte na další použití. Provoz nepotřebuje opravy z mlhy.
+
+### 3. Vyberte nejbližší pracovní místo
+
+Další akce má začít tam, kde vzniklo tření. Když člověk použil špatný odkaz v měsíčním úkolu, opravte měsíční úkol. Když přidal screenshot kvůli nejasné hranici, opravte větu u pole. Když si vytvořil osobní kopii, zeptejte se, proč kanonické místo nešlo použít v práci.
+
+Pravidlo nejbližšího místa:
+
+```text
+Opravte místo, které člověk skutečně použil nebo minul.
+```
+
+Příklad:
+
+```text
+Nález:
+Člověk našel pravidlo, ale až po otevření staré tabulky.
+
+Špatná akce:
+Přidat do standardu novou sekci "kde najít pravidlo".
+
+Lepší akce:
+Odstranit starý odkaz z měsíčního úkolu a ponechat jen provozní kartu.
+```
+
+Další příklad:
+
+```text
+Nález:
+Člověk přidal screenshot běžného stavu, protože nevěděl, kdy je screenshot povolený.
+
+Špatná akce:
+Vytvořit nový privacy-first checklist pro všechny kontroly.
+
+Lepší akce:
+Doplnit k poli krátkou hranici: "Screenshot jen při incidentu nebo eskalaci."
+```
+
+Nejbližší pracovní místo má ještě jednu výhodu: dá se rychle ověřit. Když opravíte konkrétní odkaz, příští průchod ukáže, jestli člověk šel správnou cestou. Když přepíšete širší dokumentaci, budete těžko vědět, co přesně pomohlo.
+
+### 4. Napište akční větu
+
+Akční věta drží rozsah. Je krátká, konkrétní a musí obsahovat místo, zásah, důvod a ověření.
+
+Šablona:
+
+```text
+V místě:
+
+Uděláme:
+
+Protože:
+
+Hotovo poznáme podle:
+```
+
+Příklad:
+
+```text
+V místě:
+Měsíční úkol kontroly formulářů.
+
+Uděláme:
+Odstraníme odkaz na starou tabulku a ponecháme jen odkaz na provozní kartu.
+
+Protože:
+První člověk začal starou trasou, i když nový standard byl v pořádku.
+
+Hotovo poznáme podle:
+Příští měsíční kontrola začne v provozní kartě bez dotazu a bez staré tabulky.
+```
+
+Další příklad:
+
+```text
+V místě:
+Pole pro běžný stav v provozní kartě.
+
+Uděláme:
+Doplníme nápovědu "Screenshot jen při incidentu nebo eskalaci".
+
+Protože:
+Při prvním použití vznikl zbytečný screenshot běžného stavu.
+
+Hotovo poznáme podle:
+Příští běžná kontrola obsahuje jednu stavovou větu bez screenshotu.
+```
+
+Akční věta není zápis porady. Je to pracovní instrukce pro jednu malou změnu. Pokud se do ní nevejde všechno, pravděpodobně řešíte víc než jednu akci.
+
+### 5. Projděte privacy-first brzdu
+
+I další akce po kontrole může zhoršit datovou stopu. Nejčastější chyba je přidat nový důkaz, aby bylo "lépe vidět", že se standard dodržuje. Jenže lepší viditelnost často znamená víc uložených podkladů, víc screenshotů, víc přístupů a víc budoucího úklidu.
+
+Před provedením akce odpovězte:
+
+```text
+Přidává akce nový důkaz běžného stavu?
+
+Vzniká nový export, screenshot, kopie nebo tabulka?
+
+Prodlužuje se retence něčeho, co dřív mizelo?
+
+Rozšiřuje se přístup k pracovním podkladům?
+
+Lze stejný účel splnit menším signálem?
+
+Je stará datová stopa smazaná, archivovaná nebo jasně označená?
+```
+
+Příklad:
+
+```text
+Návrh:
+Po každé měsíční kontrole ukládat screenshot provozní karty jako důkaz.
+
+Privacy-first brzda:
+Zamítnout. Standard má snižovat důkazy běžného stavu, ne vytvářet obrazový archiv.
+
+Menší alternativa:
+Ponechat jednu stavovou větu a screenshot povolit jen při incidentu nebo eskalaci.
+```
+
+Privacy-first brzda má chránit tým před falešnou důkladností. V evropském, kontrolovaném provozu není cílem schovávat všechno. Cílem je mít dostatečný důkaz pro rozhodnutí a co nejmenší zbytečnou stopu.
+
+### 6. Proveďte akci v jedné dávce
+
+Malá akce má být hotová najednou. Ne roztahaná přes pět míst a tři připomínky. Pokud oprava vyžaduje víc kroků, pořád je můžete udělat v jedné dávce, ale držte jeden účel.
+
+Příklad jedné dávky:
+
+```text
+Účel:
+Uklidit starou trasu.
+
+Kroky:
+1. V měsíčním úkolu odstranit odkaz na starou tabulku.
+2. Starou tabulku označit jako archiv.
+3. Z archivní tabulky doplnit odkaz na provozní kartu.
+4. Do changelogu napsat jednu větu.
+```
+
+Co už do dávky nepatří:
+
+```text
+- přepsat celé pravidlo,
+- změnit formát provozní karty,
+- zavést měsíční report používání standardu,
+- školit celý tým znovu od začátku.
+```
+
+Jedna dávka může mít víc technických kroků, ale jen jeden provozní záměr. To je důležitý rozdíl. Pokud záměrů přibývá, rozdělte je do backlogu nálezů a dokončete jen první.
+
+### 7. Nastavte nejbližší ověření a stop pravidlo
+
+Každá další akce po kontrole má mít nejbližší ověření. Ne proto, že nevěříte lidem, ale protože chcete vědět, zda jste opravili správné místo.
+
+Ověření má být malé:
+
+```text
+Kdy:
+Při příštím normálním použití standardu.
+
+Co ověřit:
+Pouze věc, kterou akce měnila.
+
+Co neověřovat:
+Celý standard znovu, pokud k tomu není důvod.
+```
+
+Příklad:
+
+```text
+Akce:
+Odstranit starý odkaz z měsíčního úkolu.
+
+Ověření:
+Při příští měsíční kontrole zjistit, zda člověk začal v provozní kartě.
+
+Stop pravidlo:
+Pokud dvě po sobě jdoucí kontroly začnou správně, přestat tento bod sledovat samostatně.
+```
+
+Stop pravidlo je stejně důležité jako ověření. Bez něj se z každé malé opravy stane další trvalý kontrolní bod. A tak vzniká procesní prach: každý bod byl kdysi rozumný, ale dohromady zatemní práci.
+
+### Karta další akce po kontrole standardu
+
+```text
+Kontrolovaný standard:
+
+Stav z kontroly:
+Ponechat / Upravit cestu / Zpřesnit pravidlo / Uklidit starou trasu / Vrátit k přepracování
+
+Ověřený nález:
+
+Komentáře mimo rozsah:
+
+Nejbližší pracovní místo:
+
+Akční věta:
+V místě:
+Uděláme:
+Protože:
+Hotovo poznáme podle:
+
+Privacy-first brzda:
+Nový důkaz běžného stavu:
+Nové kopie nebo exporty:
+Přístup:
+Retence:
+Menší signál:
+Stará datová stopa:
+
+Jedna dávka kroků:
+
+Co se nedělá:
+
+Nejbližší ověření:
+
+Stop pravidlo:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Kontrolovaný standard:
+Běžná kontrola formulářů se zapisuje jednou stavovou větou do provozní karty. Screenshot jen při incidentu nebo eskalaci.
+
+Stav z kontroly:
+Uklidit starou trasu.
+
+Ověřený nález:
+V měsíčním úkolu byl první odkaz stále na starou tabulku. Člověk se k provozní kartě dostal až druhým odkazem.
+
+Komentáře mimo rozsah:
+Nápad zkrátit provozní kartu. Není součástí této akce, protože výstup byl minimální a pravidlo bylo srozumitelné.
+
+Nejbližší pracovní místo:
+Měsíční úkol kontroly formulářů.
+
+Akční věta:
+V místě: měsíční úkol kontroly formulářů.
+Uděláme: odstraníme starý odkaz a ponecháme jen odkaz na provozní kartu.
+Protože: stará trasa naváděla člověka mimo stabilizovaný standard.
+Hotovo poznáme podle: příští kontrola začne v provozní kartě bez staré tabulky.
+
+Privacy-first brzda:
+Nový důkaz běžného stavu: ne.
+Nové kopie nebo exporty: ne.
+Přístup: beze změny.
+Retence: stará tabulka označená jako archiv a bez nových zápisů.
+Menší signál: při příštím použití stačí ověřit začátek v provozní kartě.
+Stará datová stopa: stará tabulka nebude mazána, pokud má historickou hodnotu, ale bude jasně označena jako archiv.
+
+Jedna dávka kroků:
+Odstranit odkaz ze měsíčního úkolu, označit starou tabulku jako archiv, přidat v ní odkaz na provozní kartu a zapsat changelog větu.
+
+Co se nedělá:
+Nepřepisuje se pravidlo, nezavádí se nový report a neškolí se celý tým.
+
+Nejbližší ověření:
+Při další měsíční kontrole zjistit, zda člověk začal v provozní kartě.
+
+Stop pravidlo:
+Po dvou správných začátcích už tento bod nesledovat samostatně.
+
+Changelog věta:
+Po kontrole stabilizovaného standardu byla odstraněna stará vstupní trasa z měsíčního úkolu; aktuální pracovní místo je provozní karta a samostatné ověření skončí po dvou správných použitích.
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: přečíst stav z kontroly a povolený typ práce.
+2. Dvě minuty: oddělit ověřený nález od komentářů mimo rozsah.
+3. Tři minuty: určit nejbližší pracovní místo.
+4. Tři minuty: napsat akční větu.
+5. Dvě minuty: projít privacy-first brzdu.
+6. Dvě minuty: sepsat jednu dávku kroků a co se nedělá.
+7. Jedna minuta: nastavit nejbližší ověření, stop pravidlo a changelog větu.
+
+Výstup workshopu:
+
+```text
+Jedna další akce, jedno ověření a jasná hranice, kde práce končí.
+```
+
+Když se během workshopu objeví další dobré nápady, neházejte je do aktuální akce. Zapište je jako komentáře mimo rozsah nebo do backlogu nálezů. Dobrý nápad, který rozbije rozsah, je pořád rozbitý rozsah.
+
+### Checklist kapitoly
+
+- Vychází další akce ze stavu kontrolní karty?
+- Nepřepisujete pravidlo, když nález říká jen "upravit cestu"?
+- Oddělili jste ověřený nález od dojmů a komentářů?
+- Má akce nejbližší pracovní místo?
+- Je akční věta konkrétní a ověřitelná?
+- Obsahuje akce jasné "co se nedělá"?
+- Prošla akce privacy-first brzdou?
+- Nevzniká nový důkaz běžného stavu jen pro pocit jistoty?
+- Uklízíte nebo označujete starou datovou stopu?
+- Dá se akce provést v jedné dávce?
+- Ověřujete při příštím normálním použití jen změněné místo?
+- Má ověření stop pravidlo?
+- Je changelog krátký a srozumitelný bez čtení celé historie?
+
+Převod kontroly stabilizovaného standardu do jedné další akce chrání tým před dvěma špatnými směry: ignorovat nález, nebo kvůli němu otevřít celý systém. Zralý provoz dělá něco nudnějšího a účinnějšího. Vezme jeden ověřený nález, opraví nejbližší pracovní místo, pohlídá datovou stopu a hned ví, kdy s kontrolou přestat.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JK o převod kontroly stabilizovaného standardu do jedné další akce: mapování stavu na typ práce, oddělení nálezu od komentáře, nejbližší pracovní místo, akční věta, privacy-first brzda, provedení v jedné dávce, nejbližší ověření, stop pravidlo, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JJ o kontrolu provozního standardu po stabilizaci systémového zlepšení: výběr běžného kontrolního okna, cesta k pravidlu, porovnání minimálního a skutečného výstupu, hledání starých tras, scorecard ceny použití, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JI o stabilizaci potvrzeného systémového zlepšení do provozního standardu: vstupní brána pouze pro stav Potvrdit, kanonický domov, stabilní pravidlo, odstranění starých tras, lehký kontrolní signál, krátké předání, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JH o ověření systémového zlepšení po prvním použití: výběr normálního použití, návrat ke zlepšovací větě, cesta k pravidlu, porovnání výstupů, kontrola náhradního nepořádku, privacy-first dopad, rozhodnutí stavu, úklid ověřovací stopy, karta, příklad, mini workshop a checklist.
