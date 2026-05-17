@@ -74309,8 +74309,293 @@ Když se workshop začne rozšiřovat do debaty o všech podobných pravidlech, 
 
 Stabilizace ověřené korekce je dobrý test provozní dospělosti. Méně zralý tým si nechá všechny vrstvy, protože se bojí něco ztratit. Zralejší tým si nechá jen aktuální pravidlo, krátký důvod změny a jasný revizní háček. Ne proto, že by historie nebyla důležitá. Ale protože člověk při práci potřebuje pravidlo, ne archeologii.
 
+## Příloha IV: Kontrola pravidla po stabilizaci korekce
+
+Stabilizovaná korekce z Přílohy IU už není zvláštní oprava. Je součást běžného pravidla. To ale ještě neznamená, že je hotovo navždy. Znamená to jen, že další kontrola má sledovat normální provoz, ne úspěch samotné korekce.
+
+Tahle fáze je nenápadná. Pravidlo už nepůsobí nové, tým ho možná bere jako samozřejmost a v pracovních artefaktech je méně viditelných stop po původním problému. Právě proto má smysl udělat krátkou kontrolu po několika běžných použitích. Ne kvůli auditu poslušnosti. Kvůli ověření, že pravidlo drží bez autora, bez skrytých obchůzek a bez návratu zbytečné datové stopy.
+
+Kontrolní otázka zní:
+
+```text
+Funguje stabilizované pravidlo i tehdy, když ho použije běžný člověk v běžném rytmu bez připomínání původní korekce?
+```
+
+Pokud odpověď zní ano, pravidlo může zůstat v údržbovém rytmu. Pokud ne, nevracejte se automaticky k celé historii opravy. Najděte nejmenší místo, kde se běžná práce znovu láme.
+
+### 1. Vyberte tři normální použití
+
+Kontrola po stabilizaci nemá sledovat první slavnostní použití. To už proběhlo při ověření. Teď chcete vidět opakování.
+
+Vhodný vzorek:
+
+```text
+poslední tři běžné kontroly formuláře,
+
+poslední dva release úklidy a jeden menší hotfix,
+
+tři supportní situace, kde se použil stejný výstup,
+
+tři onboardingové průchody stejné pracovní role,
+
+tři měsíční provozní úkoly se stejným pravidlem.
+```
+
+Nevybírejte jen příklady, které dopadly hezky. Vzorek má ukázat normální provoz, ne prezentaci pro interní demo. Pokud máte jen jedno použití, kontrolu odložte a nepište závěr z jednoho šťastného průchodu.
+
+Do kontroly si zapište:
+
+```text
+Pravidlo:
+
+Kanonický domov:
+
+Kontrolované období:
+
+Použití 1:
+
+Použití 2:
+
+Použití 3:
+
+Kdo pravidlo použil:
+```
+
+U lidí stačí role. Nepotřebujete vytvářet osobní scoreboard. Cílem je kvalita systému, ne hodnocení člověka.
+
+### 2. Ověřte cestu k pravidlu
+
+První otázka není, jestli člověk pravidlo dodržel. První otázka je, jestli ho vůbec našel tam, kde ho měl najít.
+
+Sledujte:
+
+```text
+šel člověk do kanonického domova pravidla,
+
+použil starou směrovku nebo starý odkaz,
+
+ptal se autora původní korekce,
+
+vytáhl osobní poznámku,
+
+našel pravidlo až přes vyhledávání,
+
+narazil na dvě místa, která působila stejně důležitě.
+```
+
+Dobré pravidlo se dá najít v okamžiku práce. Ne až po pátrání v historii změn. Pokud lidé pravidlo používají správně jen proto, že si pamatují poslední workshop, stabilizace je slabá.
+
+Příklad nálezu:
+
+```text
+Role našla pravidlo v provozní kartě formulářů, ale šla tam přes starou tabulku označenou jako nahrazená.
+```
+
+To není chyba člověka. To je signál, že stará cesta je pořád příliš viditelná. Nejmenší oprava může být odstranit starý odkaz, zkrátit archivní poznámku nebo přidat jasnější směrovku v místě, kde práce začíná.
+
+### 3. Porovnejte minimální výstup se skutečností
+
+Stabilizované pravidlo má říkat, jaký minimální výstup stačí. Kontrola má zjistit, jestli tento výstup opravdu vzniká a jestli tým nepřidává pojistky.
+
+Ptejte se:
+
+```text
+Vznikl přesně minimální výstup?
+
+Vzniklo něco navíc?
+
+Pomohlo to navíc rozhodnutí, nebo jen uklidnilo nejistotu?
+
+Je výstup srozumitelný pro další roli?
+
+Dokáže další člověk pokračovat bez kontextu původní korekce?
+```
+
+Příklad:
+
+```text
+Pravidlo:
+Při běžné kontrole formuláře zapiš jednu stavovou větu do provozní karty. Přílohy nepřidávej, pokud nevznikl incident.
+
+Skutečnost:
+Ve dvou kontrolách vznikla jedna stavová věta. Ve třetí kontrole vznikla stavová věta a screenshot pro jistotu.
+```
+
+Třetí průchod je důležitější než první dva. Ukazuje, že slovo "pro jistotu" se vrací. Nejspíš pravidlo stále nevysvětluje hranici incidentu nebo tým nemá jistotu, kdy už příloha dává smysl.
+
+### 4. Hledejte staré i náhradní cesty
+
+Po stabilizaci bývají dvě rizika. Buď se vrátí stará cesta, nebo vznikne nová cesta se stejným problémem v jiném kabátu.
+
+Stará cesta vypadá třeba takhle:
+
+```text
+někdo znovu použil nahrazenou tabulku,
+
+někdo odkázal na starý checklist,
+
+někdo vložil starou formulaci do nového úkolu,
+
+někdo poslal přílohu podle minulého zvyku.
+```
+
+Náhradní cesta vypadá nenápadněji:
+
+```text
+místo staré tabulky vznikl komentářový thread,
+
+místo screenshotu vznikl export,
+
+místo osobního checklistu vznikla soukromá poznámka,
+
+místo kopie poptávky vznikl přepis do jiné šablony.
+```
+
+Codyho komentář: náhradní cesta je nebezpečnější než stará cesta, protože se tváří jako zlepšení. Ve skutečnosti často jen přesune nepořádek tam, kde ho kontrola nehledá.
+
+Privacy-first kontrola musí být konkrétní:
+
+```text
+Vznikla nová kopie osobních údajů?
+
+Vznikl nový export?
+
+Vznikla nová příloha?
+
+Vznikl nový interní komentář s citací zákaznického obsahu?
+
+Zůstává něco déle, než potřebuje pracovní rozhodnutí?
+```
+
+Pokud ano, nepřidávejte hned další zákaz. Nejdřív zjistěte, jakou nejistotu si tím tým řešil.
+
+### 5. Rozhodněte stav pravidla
+
+Po kontrole nepište dlouhé shrnutí bez rozhodnutí. Vyberte jeden stav.
+
+```text
+Ponechat:
+pravidlo se našlo, použilo, vytvořilo minimální výstup a nepřidalo datovou stopu.
+
+Zjednodušit:
+pravidlo funguje, ale lidé ho čtou pomalu, část textu je historická nebo zbytečně opatrná.
+
+Přesunout:
+pravidlo je správné, ale není v místě, kde práce přirozeně začíná.
+
+Otevřít korekci:
+pravidlo vede k chybě, staré cestě, náhradní datové stopě nebo nejasnému výstupu.
+
+Sloučit:
+pravidlo je duplicitní s jiným stabilním pravidlem a obě se dají převést do jednoho kanonického místa.
+```
+
+Stav `Ponechat` je legitimní výsledek. Není potřeba vymýšlet změnu jen proto, že jste udělali kontrolu. Údržba není hra na neustálé přepisování.
+
+### 6. Zapište jednu provozní větu
+
+Kontrola po stabilizaci má skončit krátkým zápisem, který pomůže příštímu cyklu. Nepište zprávu na stránku a půl, pokud se nic dramatického nestalo.
+
+Šablona:
+
+```text
+Kontrolované pravidlo:
+Období:
+Vzorek použití:
+Nález:
+Rozhodnutí:
+Další akce:
+Privacy-first dopad:
+```
+
+Příklad:
+
+```text
+Kontrolované pravidlo:
+Běžná kontrola formulářové datové stopy.
+
+Období:
+Tři měsíční kontroly po stabilizaci korekce.
+
+Vzorek použití:
+Dvě kontroly kontaktního formuláře a jedna kontrola poptávkového formuláře.
+
+Nález:
+Pravidlo se našlo v provozní kartě. Ve dvou případech vznikla jen stavová věta. V jednom případě vznikl screenshot pro jistotu.
+
+Rozhodnutí:
+Zjednodušit.
+
+Další akce:
+Doplnit do pracovní věty hranici incidentu: příloha vzniká jen při incidentu nebo eskalaci, ne při běžné kontrole.
+
+Privacy-first dopad:
+Smazat screenshot z běžné kontroly, pokud nemá incidentní důvod.
+```
+
+To je dost. Když se z každé kontroly stane dokument, tým se brzy naučí kontroly obcházet.
+
+### Kontrolní karta
+
+```text
+Název pravidla:
+
+Kanonický domov:
+
+Kontrolované období:
+
+Použití ve vzorku:
+
+Našli lidé pravidlo bez autora:
+
+Vznikl minimální výstup:
+
+Vzniklo něco navíc:
+
+Objevila se stará cesta:
+
+Objevila se náhradní cesta:
+
+Privacy-first nález:
+
+Rozhodnutí:
+
+Jedna další akce:
+
+Kde se akce zapíše:
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: připomenout aktuální pracovní větu pravidla.
+2. Tři minuty: projít tři běžná použití.
+3. Tři minuty: ověřit cestu k pravidlu a minimální výstup.
+4. Tři minuty: najít staré nebo náhradní cesty.
+5. Dvě minuty: vybrat stav pravidla.
+6. Dvě minuty: zapsat jednu další akci a privacy-first dopad.
+
+Pokud workshop začne řešit celý systém úklidu, zastavte ho. Tahle kontrola má odpovědět na stav jednoho stabilizovaného pravidla. Portfolio úklidových pravidel patří do samostatné revize.
+
+### Checklist kapitoly
+
+- Kontrolujete pravidlo až po několika normálních použitích?
+- Vzorek ukazuje běžnou práci, ne jen nejlepší příklad?
+- Sledujete cestu k pravidlu, ne poslušnost jednotlivce?
+- Je jasné, zda lidé našli kanonický domov bez autora původní korekce?
+- Porovnali jste minimální výstup se skutečnými výstupy?
+- Všimli jste si výstupů navíc, které vznikly "pro jistotu"?
+- Hledali jste starou cestu i náhradní cestu?
+- Zkontrolovali jste nové kopie, exporty, přílohy a interní citace?
+- Rozhodli jste stav pravidla jedním slovem: ponechat, zjednodušit, přesunout, otevřít korekci, nebo sloučit?
+- Nepíšete dlouhou zprávu tam, kde stačí jedna provozní věta?
+- Má další akce konkrétní pracovní místo?
+- Je privacy-first dopad uzavřený, včetně smazání zbytečných podkladů?
+
+Kontrola po stabilizaci korekce má být krátká a nepřekvapivá. Jejím cílem není dokázat, že minulé rozhodnutí bylo chytré. Cílem je zjistit, jestli pravidlo obstojí v obyčejné práci. Pokud ano, nechte ho žít. Pokud ne, opravte nejbližší místo zlomu a znovu sledujte skutečné použití.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha IV o kontrolu pravidla po stabilizaci korekce: výběr normálních použití, ověření cesty k pravidlu, porovnání minimálního výstupu se skutečností, hledání starých a náhradních cest, stav pravidla, provozní věta, kontrolní karta, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IU o stabilizaci ověřené korekce úklidového pravidla do běžného pravidla: práce jen se stavem Stabilizovat, oddělení aktuálního pravidla od historie, kanonický domov, přepis do jazyka role, zavření přechodových artefaktů, privacy-first uzávěrka, revizní háček, předání týmu, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IT o ověření korekce úklidového pravidla po příštím normálním použití: výběr skutečného pracovního průchodu, cesta ke korekci, porovnání výstupu s korekční větou, náhradní nepořádek, rozhodnutí dalšího stavu, privacy-first uzavření datové stopy, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IS o převodu kontroly běžného úklidového pravidla do jedné korekce: práce s rozhodnutím z kontroly, výběr nejbližšího pracovního místa, textová/polohová/úklidová/datová korekce, korekční věta, privacy-first dopad, ověření při příštím normálním použití, karta, příklad, mini workshop a checklist.
