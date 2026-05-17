@@ -73171,8 +73171,387 @@ Když workshop potřebuje víc času, zastavte se a zeptejte se, jestli nekontro
 
 Dobře usazené úklidové pravidlo je skoro neviditelné. Člověk ho najde ve správný okamžik, udělá krátký výstup a jde dál. Nevzniká kolem něj rituál, report ani nová složka "pro jistotu". Pokud kontrola ukáže právě tohle, nechte pravidlo pracovat. Největší disciplína někdy není něco dalšího zlepšit, ale nepokazit jednoduchou věc tím, že ji začnete nadšeně přeměřovat.
 
+## Příloha IS: Převod kontroly běžného úklidového pravidla do jedné korekce
+
+Kontrola z Přílohy IR může skončit stavem `Ponechat`. V takovém případě není co opravovat. Mnohem častější je ale drobný nález: pravidlo je správné, jen je schované o krok vedle; minimální výstup je jasný, ale lidé k němu přidávají malou přílohu; stará cesta je zavřená, ale v jednom místě zůstal odkaz; datová stopa se zmenšila, jen se část nejistoty přesunula do komentářů.
+
+Tahle příloha slouží přesně pro takovou situaci. Neřeší velkou reformu pravidel. Převádí jeden konkrétní nález z kontroly do jedné korekce, která se dá udělat v nejbližším pracovním místě a ověřit při příštím normálním použití.
+
+Dobrá korekce odpoví na jednu větu:
+
+```text
+Při příštím použití pravidla bude pro člověka jednodušší udělat správný minimální výstup než obejít pravidlo bokem.
+```
+
+Pokud korekce potřebuje nové školení, nový dokument, novou tabulku a nový schvalovací krok, pravděpodobně neopravujete pravidlo. Budujete kolem něj opěrnou konstrukci. Ta může být někdy nutná, ale neměla by vzniknout jako reflex po jednom drobném nálezu.
+
+### 1. Vraťte se k rozhodnutí z kontroly
+
+Začněte posledním rozhodnutím z Přílohy IR. Nezačínejte dojmem, že "by se to mohlo ještě vylepšit". V provozních pravidlech je taková věta podezřele často začátek nového nepořádku v čisté košili.
+
+Použijte jen jeden ze stavů:
+
+```text
+Zjednodušit:
+pravidlo dává smysl, ale výstup, jazyk nebo postup je těžší, než musí být.
+
+Přesunout:
+pravidlo je správné, ale není v místě skutečné práce.
+
+Zavřít starou cestu:
+nové pravidlo funguje, ale vedle něj zůstala stará šablona, odkaz, export nebo zvyk.
+
+Vrátit k rozhodnutí:
+pravidlo řeší špatný problém nebo vyrábí víc práce, než šetří.
+```
+
+Pro jednu korekci vyberte jen jeden stav. Když máte dva stejně silné nálezy, vyberte ten, který při opakování vytváří větší provozní nebo privacy-first cenu. Druhý zapište jako podnět, ale nedělejte z něj součást téhle korekce.
+
+Příklad:
+
+```text
+Nález:
+Pravidlo pro kvartální kontrolu formulářové datové stopy fungovalo, ale člověk ho našel až přes obecný index standardů.
+
+Stav:
+Přesunout.
+
+Korekční směr:
+Přidat krátkou spouštěcí větu přímo do kvartální review karty formulářů.
+```
+
+To je dost. Není potřeba přepsat celý index standardů, natočit vysvětlení ani svolat schůzku o dokumentační kultuře. Ano, i takové schůzky existují. Ne, většinou nepáchají dobro.
+
+### 2. Vyberte nejbližší pracovní místo
+
+Korekce má žít tam, kde vzniklo tření. Pokud se pravidlo nenašlo v release checklistu, opravte release checklist. Pokud lidé přidávají screenshot k jedné stavové větě, opravte formulaci výstupu v místě, kde tu větu píšou. Pokud se vrací starý export, zavřete nebo označte starou exportní trasu.
+
+Nejbližší pracovní místo může být:
+
+```text
+konkrétní checklist,
+
+šablona předávky,
+
+review karta,
+
+formulářová provozní karta,
+
+release poznámka,
+
+onboardingový krok,
+
+kanonický index,
+
+archivní odkaz,
+
+automatizovaný úkol,
+
+krátká nápověda v pracovním nástroji.
+```
+
+Vyhněte se abstraktním místům jako "dokumentace", "proces" nebo "týmová paměť". To nejsou pracovní místa. To jsou kategorie, do kterých se dobře uklízí na papíře a špatně v reálném provozu.
+
+Praktický test:
+
+```text
+Kdyby člověk zítra dělal stejnou práci znovu, narazí na korekci dřív, než udělá chybu?
+```
+
+Pokud ne, místo je špatně. Korekce, která čeká až po chybě, je spíš poznámka pro retrospektivu než pomoc v toku práce.
+
+### 3. Zvolte typ korekce
+
+Většina dobrých korekcí spadá do jedné ze čtyř skupin.
+
+#### Textová korekce
+
+Použijte ji, když pravidlo existuje na správném místě, ale jazyk vede k většímu výstupu, než chcete.
+
+Slabá formulace:
+
+```text
+Zkontrolujte, zda při práci s formuláři nevznikly zbytečné kopie dat.
+```
+
+Lepší formulace:
+
+```text
+Zapište jednu stavovou větu. Pokud nevznikly exporty, screenshoty ani kopie poptávek, nepřidávejte žádný další důkaz.
+```
+
+Rozdíl je zásadní. První věta zve k obecné kontrole. Druhá říká, jaký výstup stačí a co se nemá dělat.
+
+#### Polohová korekce
+
+Použijte ji, když je pravidlo správné, ale člověk ho najde pozdě.
+
+Příklad:
+
+```text
+Přesunout krátkou verzi pravidla z obecného indexu do kvartální review karty.
+
+V indexu nechat jen odkaz na kanonický domov.
+```
+
+Polohová korekce často stačí. Pravidlo nemusí být delší. Musí být blíž k rozhodnutí.
+
+#### Úklidová korekce
+
+Použijte ji, když se stará cesta vrátila bokem.
+
+Příklad:
+
+```text
+Archivovat starou tabulku "kontrola formulářů".
+
+Do jejího prvního řádku přidat větu:
+"Nahrazeno kvartální stavovou větou v provozní kartě formulářů."
+
+Odstranit odkaz ze starého měsíčního úkolu.
+```
+
+Úklidová korekce není mazání historie kvůli estetice. Je to odstranění falešných vstupů, které svádějí tým zpět ke staré práci.
+
+#### Datová korekce
+
+Použijte ji, když pravidlo sice běží, ale zanechává zbytečnou datovou stopu.
+
+Příklad:
+
+```text
+Nahradit příklad s reálnou poptávkou syntetickým příkladem.
+
+Zkrátit stavovou větu tak, aby neobsahovala jméno zákazníka.
+
+Nastavit automatické smazání dočasného exportu po uzavření incidentního důvodu.
+```
+
+Privacy-first korekce má být konkrétní. Nestačí napsat "pozor na osobní údaje". Lepší je odstranit místo, kde osobní údaje vůbec nemají vznikat.
+
+### 4. Napište korekční větu
+
+Korekční věta drží rozsah. Bez ní se z jedné drobné opravy snadno stane revize půlky provozu.
+
+Formát:
+
+```text
+Protože [konkrétní nález], upravíme [jedno pracovní místo] tak, aby [příští použití pravidla mělo jednodušší správný výstup].
+```
+
+Příklady:
+
+```text
+Protože pravidlo bylo nalezeno až přes obecný index, doplníme do kvartální review karty formulářů jednu spouštěcí větu a v indexu necháme jen odkaz.
+
+Protože lidé ke stavové větě přidávají screenshot pro jistotu, zpřesníme formulaci minimálního výstupu: pokud nevznikl incident, screenshot se nepřikládá.
+
+Protože stará tabulka kontroly formulářů zůstala odkazovaná z měsíčního úkolu, odstraníme odkaz a tabulku označíme jako nahrazenou provozní kartou.
+
+Protože příklad pravidla obsahuje reálný obsah poptávky, nahradíme ho syntetickým příkladem se stejnou rozhodovací situací.
+```
+
+Korekční věta nesmí obsahovat pět sloves. Pokud obsahuje "doplníme, přepíšeme, proškolíme, zautomatizujeme a sjednotíme", vraťte se o krok zpět. To už není jedna korekce.
+
+### 5. Proveďte korekci bez nového rituálu
+
+Samotná změna má být malá a viditelná.
+
+Dobré zásahy:
+
+```text
+přidat jednu spouštěcí větu,
+
+zkrátit odstavec pravidla,
+
+přesunout pravidlo do existující karty,
+
+označit starou šablonu jako nahrazenou,
+
+odstranit odkaz na starý export,
+
+nahradit reálný příklad syntetickým,
+
+doplnit stop pravidlo pro přílohy,
+
+zjednodušit výstup z reportu na jednu větu.
+```
+
+Podezřelé zásahy:
+
+```text
+zavést novou pravidelnou schůzku,
+
+vytvořit nový dashboard pro hlídání pravidla,
+
+přidat povinné schválení,
+
+duplikovat pravidlo do pěti dokumentů,
+
+vytvořit novou tabulku stavu,
+
+vyžadovat screenshot jako důkaz, že nevznikají screenshoty.
+```
+
+Codyho komentář: poslední bod zní jako vtip, dokud ho nepotkáte v provozu. Organizace umí být kreativní v dokazování, že něco nedělají. Výsledek bývá, že přesně tím začnou vyrábět stopu, které se chtěly zbavit.
+
+### 6. Uzavřete privacy-first dopad
+
+Každá korekce úklidového pravidla má říct, co se stane s datovou stopou. Ne proto, aby vznikl právnický odstavec, ale aby se starý problém nepřestěhoval.
+
+Stačí vyplnit tři řádky:
+
+```text
+Co se po korekci už nemá ukládat:
+
+Kde zůstává kanonický minimální výstup:
+
+Kdy se korekce znovu otevře:
+```
+
+Příklad:
+
+```text
+Co se po korekci už nemá ukládat:
+Screenshoty formulářových poptávek při běžném kvartálním review.
+
+Kde zůstává kanonický minimální výstup:
+Jedna stavová věta v provozní kartě formulářů.
+
+Kdy se korekce znovu otevře:
+Při změně formuláře, novém zdroji leadů, incidentu nebo vzniku exportu mimo incidentní důvod.
+```
+
+Tím se korekce uzavře prakticky. Neříká jen, co se přepsalo. Říká, jaké chování má přestat a kdy má smysl se k němu vrátit.
+
+### 7. Ověřte korekci při příštím normálním použití
+
+Korekce není hotová tím, že byla zapsaná. Hotová je až ve chvíli, kdy ji někdo použije v běžné práci a nevznikne kolem toho nové tření.
+
+Ověření neplánujte jako samostatný audit. Připojte ho k příštímu normálnímu použití pravidla.
+
+Kontrolní otázky:
+
+```text
+Našel člověk korekci bez autora?
+
+Objevila se před rozhodnutím?
+
+Vznikl minimální výstup?
+
+Nevznikla nová příloha, export, screenshot nebo komentář pro jistotu?
+
+Zůstala stará cesta zavřená?
+```
+
+Pokud ano, korekce se může stabilizovat. Pokud ne, neopakujte stejnou opravu hlasitěji. Hledejte, jestli byl špatně typ korekce, pracovní místo nebo původní rozhodnutí.
+
+### Karta jedné korekce
+
+```text
+Název pravidla:
+
+Nález z kontroly:
+
+Vybraný stav:
+
+Typ korekce:
+
+Korekční věta:
+
+Pracovní místo zásahu:
+
+Co se změní:
+
+Co se výslovně nepřidává:
+
+Co se po korekci už nemá ukládat:
+
+Kanonický minimální výstup:
+
+Kdy se korekce znovu otevře:
+
+Příští normální použití pro ověření:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Název pravidla:
+Kvartální kontrola formulářové datové stopy.
+
+Nález z kontroly:
+Pravidlo funguje, ale měsíční úkol po změně formuláře stále odkazuje na starou tabulku kontroly.
+
+Vybraný stav:
+Zavřít starou cestu.
+
+Typ korekce:
+Úklidová korekce.
+
+Korekční věta:
+Protože měsíční úkol stále vede na starou tabulku, odstraníme odkaz a tabulku označíme jako nahrazenou provozní kartou formulářů.
+
+Pracovní místo zásahu:
+Měsíční úkol po změně formuláře a stará tabulka kontroly.
+
+Co se změní:
+V úkolu zůstane odkaz jen na provozní kartu formulářů. Stará tabulka dostane první řádek "Nahrazeno kvartální stavovou větou v provozní kartě formulářů".
+
+Co se výslovně nepřidává:
+Nová kontrolní tabulka, schvalovací krok ani screenshoty.
+
+Co se po korekci už nemá ukládat:
+Duplicitní stavové poznámky a kopie poptávek ve staré tabulce.
+
+Kanonický minimální výstup:
+Jedna stavová věta v provozní kartě formulářů.
+
+Kdy se korekce znovu otevře:
+Pokud se při dalším měsíčním úkolu objeví odkaz na starou tabulku nebo jiná náhradní evidence.
+
+Příští normální použití pro ověření:
+První měsíční úkol po nejbližší změně formuláře.
+
+Changelog věta:
+Po kontrole běžného úklidového pravidla byl zavřen starý odkaz na formulářovou kontrolní tabulku a kanonický výstup zůstal v provozní kartě.
+```
+
+### Mini workshop na 16 minut
+
+1. Dvě minuty: přečíst rozhodnutí z poslední kontroly.
+2. Tři minuty: vybrat jeden nález podle opakované ceny.
+3. Dvě minuty: určit nejbližší pracovní místo.
+4. Dvě minuty: zvolit typ korekce.
+5. Tři minuty: napsat korekční větu a vyplnit, co se nepřidává.
+6. Dvě minuty: uzavřít privacy-first dopad.
+7. Dvě minuty: určit příští normální použití pro ověření.
+
+Pokud se tým zasekne u výběru nálezu, použijte jednoduché pravidlo: přednost má nález, který při opakování vytváří zbytečná data nebo vrací starou práci. Estetické zlepšení formulace může počkat. Zbytečný export ne.
+
+### Checklist kapitoly
+
+- Navazuje korekce na konkrétní rozhodnutí z kontroly?
+- Vybrali jste jeden stav, ne směs několika stavů?
+- Je pracovní místo opravdu nejbližší skutečné práci?
+- Bude korekce vidět před rozhodnutím?
+- Zvolili jste jasný typ korekce: textovou, polohovou, úklidovou nebo datovou?
+- Dá se korekční věta přečíst jako jedna malá změna?
+- Je jasné, co se výslovně nepřidává?
+- Nezakládáte novou schůzku, dashboard nebo tabulku jen kvůli drobnému nálezu?
+- Zavřeli jste starou cestu místo jejího tichého ponechání?
+- Říká privacy-first dopad, co se po korekci už nemá ukládat?
+- Zůstává minimální výstup na jednom kanonickém místě?
+- Je určeno příští normální použití pro ověření?
+- Má changelog větu bez osobních údajů, zákaznických detailů a interních citací?
+
+Jedna dobrá korekce má být skoro nudná. Vezme nález, opraví nejbližší pracovní místo a nastaví ověření v normálním toku. Nezvyšuje dramatičnost provozu. Nezvětšuje dokumentaci jen proto, že se objevila chyba. A hlavně nepřidává novou datovou stopu kvůli tomu, aby dokázala, že stará datová stopa zmizela.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha IS o převodu kontroly běžného úklidového pravidla do jedné korekce: práce s rozhodnutím z kontroly, výběr nejbližšího pracovního místa, textová/polohová/úklidová/datová korekce, korekční věta, privacy-first dopad, ověření při příštím normálním použití, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IR o kontrole běžného úklidového pravidla po stabilizaci: výběr kontrolního okna, ověření cesty k pravidlu, porovnání minimálního výstupu se skutečností, hledání staré nebo náhradní cesty, scorecard ceny, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IQ o stabilizaci ověřené další úpravy do běžného úklidového pravidla: oddělení aktuálního pravidla od historie, výběr kanonického domova, přepis do jazyka role, zavření přechodových opor, revizní háček, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IP o ověření další úpravy po prvním normálním použití: výběr skutečného použití, porovnání slibu s realitou, nalezení bez autora, kontrola výstupu a datové stopy, typy nálezů, ověřovací věta, karta, příklad, mini workshop a checklist.
