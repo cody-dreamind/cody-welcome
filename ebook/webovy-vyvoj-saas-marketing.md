@@ -78127,8 +78127,312 @@ To je dostatečný výstup. Nevzniká nová iniciativa jen proto, že máte pře
 
 Lehký portfoliový přehled je užitečný jen tehdy, když snižuje opakování stejných problémů. Pokud začne přidávat práci, kterou nikdo nepoužívá k rozhodnutí, ztratil smysl. Držte ho krátký, čitelný a zaměřený na zmenšení systému. Hotová práce má zůstat hotová.
 
+## Příloha JG: Převod portfoliového vzoru do jednoho systémového zlepšení
+
+Příloha JF ukázala, jak převádět uzavřené smyčky do lehkého portfoliového přehledu. Ten přehled ale není vitrína hotové práce. Má pomáhat najít opakovaný vzor a vybrat jeden další krok, který zmenší systém jako celek. Tahle příloha řeší okamžik, kdy portfolio začne ukazovat, že se stejný typ problému vrací v různých podobách.
+
+Otázka této přílohy zní:
+
+```text
+Jak z opakovaného vzoru v portfoliu udělat jedno systémové zlepšení, aniž by tým znovu otevřel všechny uzavřené smyčky?
+```
+
+Rozdíl je důležitý. Uzavřená smyčka zůstává uzavřená. Nevracíme se k ní proto, abychom ji pitvali. Používáme ji jako signál, že se v systému možná opakuje stejná příčina: špatné pracovní místo, nejasná šablona, zbytečný důkaz, přebujelý formulář, duplicitní pravidlo nebo datová stopa, která vzniká jen ze zvyku.
+
+Codyho komentář: portfolio nemá být muzeum starých oprav. Má být mapa míst, kde se systém pořád zakopává o vlastní kabely. A nejlepší reakce není vyrobit velkou reorganizaci s logem a kickoffem. Nejlepší reakce je jeden menší zásah, po kterém se stejný typ zakopnutí stane méně pravděpodobný.
+
+### 1. Vyberte jen jeden opakovaný vzor
+
+Měsíční review portfolia může ukázat víc věcí najednou. Tři smyčky řešily formuláře, dvě supportní odpovědi, jedna staré URL, další šablonu předání. Pokud se tým pokusí řešit všechno, obvykle nevylepší nic. Začněte jedním vzorem, který má jasnou stopu přes více uzavřených smyček.
+
+Dobrá formulace vzoru:
+
+```text
+V posledních 90 dnech se ve čtyřech uzavřených smyčkách opakovalo zbytečné dokazování běžného stavu pomocí screenshotů.
+```
+
+Slabá formulace:
+
+```text
+Máme problém s dokumentací a lidi si dělají věci po svém.
+```
+
+První věta ukazuje konkrétní opakování. Druhá věta je mlha, ve které se dá schovat libovolná reorganizace. Vzor musí být dost přesný, aby z něj šlo odvodit malý zásah.
+
+Praktická hranice:
+
+```text
+Vzor bereme vážně, pokud se objevil alespoň ve dvou uzavřených smyčkách nebo v jedné smyčce s vysokou provozní cenou.
+```
+
+Vysoká provozní cena neznamená dramatický incident. Může to být i tiché opakování: každý týden někdo ručně přepisuje stav do tabulky, ukládá screenshot nebo hledá správný odkaz ve starém chatu. To je přesně ten typ práce, který nevypadá nebezpečně, dokud ho nevynásobíte časem a počtem lidí.
+
+### 2. Oddělte vzor od jednotlivých příběhů
+
+Portfolio slouží k tomu, abyste viděli vzor přes více smyček. Ne k tomu, abyste znovu řešili každou smyčku. U každého vzoru si napište krátké shrnutí bez jmen, bez viníků a bez zbytečných detailů.
+
+Šablona:
+
+```text
+Vzor:
+
+Kde se objevil:
+
+Společná příčina:
+
+Co se v systému má stát méně často:
+
+Co nesmíme znovu otevřít:
+```
+
+Příklad:
+
+```text
+Vzor:
+Zbytečné screenshoty běžného stavu.
+
+Kde se objevil:
+Formulářová kontrola, supportní předání, review kampaně.
+
+Společná příčina:
+Není jasně napsané, kdy stačí krátká provozní věta a kdy je potřeba důkaz.
+
+Co se v systému má stát méně často:
+Ukládání screenshotů, které nevedou k rozhodnutí.
+
+Co nesmíme znovu otevřít:
+Už uzavřené formulářové, supportní a kampanové smyčky.
+```
+
+Poslední řádek je překvapivě užitečný. Chrání hotovou práci. Když se někdo začne vracet ke starým detailům, můžete ho vrátit k otázce systémového zlepšení: jak změnit pravidlo pro příště?
+
+### 3. Najděte nejbližší pracovní místo, kde vzor vzniká
+
+Systémové zlepšení nemusí být velké. Často stačí upravit místo, kde člověk poprvé udělá špatný krok. Nehledejte nejvyšší úroveň dokumentace. Hledejte nejbližší pracovní místo.
+
+Typická pracovní místa:
+
+- šablona kontroly,
+- checklist před publikací,
+- supportní makro,
+- provozní karta,
+- onboardingový rozcestník,
+- formulář pro zadání práce,
+- changelog,
+- kanonický index standardů.
+
+Příklad rozhodnutí:
+
+```text
+Vzor nevzniká při měsíčním review. Vzniká ve chvíli, kdy člověk vyplňuje kontrolní kartu a neví, jestli má přiložit screenshot. Zlepšíme tedy kontrolní kartu, ne měsíční review.
+```
+
+Tohle je rozdíl mezi opravou systému a výrobou další vrstvy řízení. Když problém vzniká v konkrétní šabloně, změňte šablonu. Když vzniká v nejasném předání, změňte předávací větu. Když vzniká v datové stopě, změňte pravidlo pro důkaz a retenci.
+
+### 4. Přepište vzor do jedné zlepšovací věty
+
+Než sáhnete do dokumentu, napište jednu větu, která říká, co se má po změně stát jinak. Věta musí být praktická, ne strategická.
+
+Šablona:
+
+```text
+Po zlepšení bude [role] při [situace] dělat [menší a jasnější krok] místo [opakovaný nepořádek].
+```
+
+Příklady:
+
+```text
+Po zlepšení bude člověk při běžné kontrole formuláře zapisovat krátkou provozní větu místo ukládání screenshotu bez rozhodovací hodnoty.
+```
+
+```text
+Po zlepšení bude support při předání opakovaného dotazu používat jednu kanonickou odpověď místo hledání poslední verze ve starém chatu.
+```
+
+```text
+Po zlepšení bude marketing při review kampaně ukládat jen závěr a rozhodnutí místo exportu celé pracovní tabulky.
+```
+
+Pokud věta nejde napsat jednoduše, vzor je buď příliš široký, nebo zlepšení nemá jasné pracovní místo. V takovém případě se vraťte o krok zpět a zúžte ho.
+
+### 5. Vyberte nejmenší systémový zásah
+
+Systémové zlepšení není automaticky automatizace, nový nástroj nebo velká změna procesu. Nejmenší dobrý zásah je ten, který sníží pravděpodobnost opakování vzoru v běžné práci.
+
+Možné zásahy:
+
+```text
+Textový zásah:
+jedna věta v šabloně nebo checklistu.
+
+Polohový zásah:
+přesun pravidla blíž k místu, kde se používá.
+
+Datový zásah:
+zkrácení důkazu, retence nebo rozsahu ukládaných údajů.
+
+Rozhodovací zásah:
+jasné pravidlo, kdy stačí provozní věta a kdy je potřeba důkaz.
+
+Předávací zásah:
+jedna kanonická odpověď nebo karta pro další roli.
+
+Automatizační zásah:
+až tehdy, když je pravidlo stabilní a ruční krok se opakuje beze změny.
+```
+
+Příklad nejmenšího zásahu:
+
+```text
+Do kontrolní karty přidat pravidlo:
+
+Screenshot ukládejte jen tehdy, když vede k rozhodnutí, reklamaci, incidentu nebo budoucímu porovnání. Běžný stav zapisujte jednou provozní větou.
+```
+
+Tohle je malé, ale systémové. Neřeší jeden starý screenshot. Mění příští rozhodnutí v místě, kde screenshot vznikal.
+
+### 6. Udělejte privacy-first kontrolu před zavedením
+
+Každé systémové zlepšení může nechtěně vytvořit novou datovou stopu. I když cílíte na zjednodušení, zeptejte se před zavedením:
+
+- Nevzniká nový seznam lidí, chyb, odpovědností nebo zákaznických případů?
+- Nezavádíme nový důkaz běžného stavu, který nikdo nepoužije k rozhodnutí?
+- Neodnášíme data do dalšího nástroje jen proto, že se s ním pohodlně reportuje?
+- Neprodlužujeme retenci věcí, které měly být dočasné?
+- Je možné problém vyřešit kratší větou, menším příkladem nebo čistším pravidlem?
+
+Privacy-first zlepšení má snižovat datovou stopu stejně jako provozní tření. Pokud navržený zásah přidává nový sběr dat, musí mít jasný účel, vlastníka, retenci a rozhodnutí, které bez něj nejde udělat.
+
+Krátká kontrolní věta:
+
+```text
+Zlepšení nevytváří nový důkaz běžného stavu; jen přesouvá rozhodnutí o důkazu do kontrolní karty a omezuje ukládání screenshotů bez účelu.
+```
+
+Taková věta je lepší než obecné "je to GDPR friendly". To je kouřová clona v obleku. Napište, co se konkrétně s daty změní.
+
+### 7. Ověřte zlepšení na příštím normálním použití
+
+Po zavedení systémového zlepšení není potřeba velká kontrola. Stačí první normální použití v místě, kde vzor vznikal.
+
+Ověřovací otázky:
+
+```text
+Našel člověk nové pravidlo bez vysvětlování?
+
+Udělal menší krok, který zlepšení slibovalo?
+
+Nevznikla náhradní stopa jinde?
+
+Je výsledek dohledatelný bez autora změny?
+
+Zůstala uzavřená stará smyčka uzavřená?
+```
+
+Příklad ověřovací věty:
+
+```text
+Při první běžné kontrole formuláře člověk použil novou větu v kontrolní kartě, zapsal stav bez screenshotu a nevytvořil náhradní důkaz v chatu. Zlepšení zůstává v provozu.
+```
+
+Pokud ověření selže, neopravujte hned portfolio. Opravte pracovní místo. Portfolio jen drží vzor a rozhodnutí. Skutečné zlepšení žije tam, kde lidé pracují.
+
+### Karta systémového zlepšení z portfolia
+
+```text
+Název zlepšení:
+
+Portfoliový vzor:
+
+Kde se vzor objevil:
+
+Společná příčina:
+
+Nejbližší pracovní místo:
+
+Zlepšovací věta:
+
+Typ zásahu:
+Text / poloha / data / rozhodnutí / předání / automatizace
+
+Privacy-first dopad:
+
+Co nesmíme znovu otevřít:
+
+Ověření při příštím normálním použití:
+
+Stav:
+Navrženo / zavedeno / ověřeno / upravit / zastavit
+```
+
+### Příklad vyplněné karty
+
+```text
+Název zlepšení:
+Pravidlo pro screenshoty běžného stavu.
+
+Portfoliový vzor:
+Zbytečné dokazování běžného stavu screenshoty.
+
+Kde se vzor objevil:
+Formulářová kontrola, supportní předání, review kampaně.
+
+Společná příčina:
+Šablony neříkaly, kdy stačí provozní věta a kdy je potřeba důkaz.
+
+Nejbližší pracovní místo:
+Kontrolní karta formuláře a obecná karta provozní kontroly.
+
+Zlepšovací věta:
+Po zlepšení bude člověk při běžné kontrole zapisovat krátkou provozní větu místo ukládání screenshotu bez rozhodovací hodnoty.
+
+Typ zásahu:
+Text + rozhodnutí.
+
+Privacy-first dopad:
+Méně dat a kratší životnost dočasných důkazů.
+
+Co nesmíme znovu otevřít:
+Už uzavřené smyčky formuláře, supportu a kampaně.
+
+Ověření při příštím normálním použití:
+Zkontrolovat, zda člověk našel pravidlo v kartě a nevytvořil náhradní důkaz v chatu.
+
+Stav:
+Zavedeno.
+```
+
+### Mini workshop na 15 minut
+
+1. Tři minuty: z portfolia vybrat jeden opakovaný vzor.
+2. Dvě minuty: opsat jen smyčky, kde se vzor objevil, bez otevírání detailů.
+3. Dvě minuty: určit společnou příčinu a nejbližší pracovní místo.
+4. Dvě minuty: napsat jednu zlepšovací větu.
+5. Dvě minuty: vybrat nejmenší typ zásahu.
+6. Dvě minuty: projít privacy-first kontrolu.
+7. Dvě minuty: domluvit první normální použití, na kterém se zlepšení ověří.
+
+Výstup workshopu nemá být sada úkolů. Má to být jedna karta systémového zlepšení a jeden konkrétní zásah v pracovním místě.
+
+### Checklist kapitoly
+
+- Vybrali jste jen jeden opakovaný portfoliový vzor?
+- Je vzor formulovaný konkrétně, ne jako obecná nespokojenost?
+- Neotevíráte znovu uzavřené smyčky?
+- Zapsali jste, co se nesmí znovu otevřít?
+- Našli jste nejbližší pracovní místo, kde vzor vzniká?
+- Máte jednu praktickou zlepšovací větu?
+- Zvolili jste nejmenší zásah místo velké reorganizace?
+- Snižuje zásah práci, data, výjimky nebo otázky?
+- Prošli jste privacy-first kontrolu nové datové stopy?
+- Ověříte změnu při příštím normálním použití?
+- Zůstává portfolio přehledem vzorů, ne novým backlogem?
+
+Portfoliový vzor má hodnotu jen tehdy, když se promění v menší tření v běžné práci. Ne v novou schůzku, ne v další dashboard, ne v lov na staré chyby. Jeden vzor, jedno pracovní místo, jedna zlepšovací věta, jedno ověření. To stačí.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JG o převodu portfoliového vzoru do jednoho systémového zlepšení: výběr jednoho vzoru, oddělení od starých příběhů, nalezení pracovního místa, zlepšovací věta, nejmenší zásah, privacy-first kontrola, ověření při normálním použití, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JF o převodu uzavřené smyčky do lehkého portfoliového přehledu: vstup jen pro uzavřené smyčky, minimální metadata, portfoliové otázky, třídění podle zmenšení, privacy-first dopad, měsíční hledání vzorů, retenční rytmus, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JE o uzavření smyčky malé opravy po kontrole pravidla: práce jen se stavem Ponechat, oddělení živého pravidla od historie změny, zrušení dočasných opor, provozní věta, lehký signál do běžného rytmu, úklid backlogu a komunikace, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JD o kontrole běžného pravidla po stabilizaci malé opravy: malé kontrolní okno, dohledatelnost pravidla, porovnání minimálního výstupu se skutečností, návrat staré cesty, privacy-first datová stopa, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
