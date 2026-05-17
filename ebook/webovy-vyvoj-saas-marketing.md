@@ -79916,8 +79916,437 @@ Když se během workshopu objeví další dobré nápady, neházejte je do aktu�
 
 Převod kontroly stabilizovaného standardu do jedné další akce chrání tým před dvěma špatnými směry: ignorovat nález, nebo kvůli němu otevřít celý systém. Zralý provoz dělá něco nudnějšího a účinnějšího. Vezme jeden ověřený nález, opraví nejbližší pracovní místo, pohlídá datovou stopu a hned ví, kdy s kontrolou přestat.
 
+## Příloha JL: Ověření další akce po prvním normálním použití
+
+Jedna další akce po kontrole standardu není hotová ve chvíli, kdy ji někdo zapíše do changelogu. Hotová je až ve chvíli, kdy projde prvním normálním použitím. Normální použití znamená, že člověk řeší skutečnou práci, ne ukázkový průchod pro autora pravidla. Právě tam se ukáže, jestli akce opravila správné místo, nebo jen přidala další slušně vypadající vrstvu.
+
+Otázka této přílohy zní:
+
+```text
+Jak ověřit jednu další akci po prvním normálním použití tak, aby tým poznal, jestli akce pomohla, nezvětšila datovou stopu a může být uzavřena?
+```
+
+Tahle příloha navazuje na Přílohu JK. Tam vznikla akční věta, jedna dávka kroků, nejbližší ověření a stop pravidlo. Tady se k tomu vracíme po prvním reálném použití. Cíl není znovu auditovat celý standard. Cíl je ověřit změněné místo, rozhodnout další stav a uklidit přechodovou stopu.
+
+Codyho komentář: nejčastější provozní chyba po malé opravě je předčasná spokojenost. "Upravili jsme odkaz, takže hotovo." Ne tak rychle. Odkaz je hotový až ve chvíli, kdy člověk díky němu opravdu začne správně. Jinak jsme jen přesunuli problém z tabulky do pocitu.
+
+### 1. Vyberte první normální použití
+
+Ověření má proběhnout při nejbližší situaci, ve které by se opravené místo přirozeně použilo. Ne dřív, ne v demo režimu a ne ve zvláštní poradě svolané jen kvůli ověření. Pokud akce upravila měsíční úkol, ověřujte při další měsíční kontrole. Pokud změnila nápovědu u pole, ověřujte při dalším vyplnění této karty. Pokud archivovala starou trasu, ověřujte při dalším průchodu, kde by se stará trasa mohla objevit.
+
+Špatné ověření:
+
+```text
+Autor změny otevře dokument, projde novou trasu a potvrdí, že všechno vypadá dobře.
+```
+
+Lepší ověření:
+
+```text
+Člověk, který řeší běžnou práci, použije standard bez zvláštního vedení. Sledujeme jen to, zda změněné místo fungovalo.
+```
+
+První normální použití si zapište předem:
+
+```text
+Akce:
+Odstranit starý odkaz z měsíčního úkolu.
+
+První normální použití:
+Další měsíční kontrola formulářů.
+
+Kdo použije:
+Role nebo člověk, který kontrolu běžně dělá.
+
+Co ověřit:
+Zda začne v provozní kartě a nepoužije starou tabulku.
+```
+
+Pokud první normální použití nejde určit, akce byla pravděpodobně příliš abstraktní. Dobrá akce má pracovní okamžik. Když ho nemá, bude se těžko poznávat, jestli pomohla.
+
+### 2. Vraťte se k původní akční větě
+
+Před ověřením si znovu přečtěte akční větu z Přílohy JK. Ne proto, abyste si připomněli historii, ale aby se ověření nerozlezlo do širší kontroly.
+
+Použijte čtyři části:
+
+```text
+V místě:
+
+Uděláme:
+
+Protože:
+
+Hotovo poznáme podle:
+```
+
+Ověření se má držet hlavně poslední části: "Hotovo poznáme podle." Pokud jste tam napsali, že příští kontrola začne v provozní kartě, ověřujte začátek v provozní kartě. Neřešte v té chvíli nový design karty, jiné názvy sloupců ani širší revizi procesu.
+
+Příklad:
+
+```text
+Hotovo poznáme podle:
+Příští měsíční kontrola začne v provozní kartě bez dotazu a bez staré tabulky.
+
+Ověřovací otázka:
+Začal člověk v provozní kartě bez dotazu a bez staré tabulky?
+```
+
+Tím chráníte rozsah. Každá malá akce má právo na malé ověření. Pokud ji budete pokaždé spojovat s velkou revizí, tým se začne malých oprav bát, protože z nich pokaždé vyroste schůzka.
+
+### 3. Sledujte práci, ne vysvětlení
+
+Při ověřování se dívejte na to, co člověk skutečně udělal. Vysvětlení je užitečné až potom. Lidé často racionálně popíšou cestu, kterou by chtěli použít, ale ruce v provozu udělají něco jiného. Práce ukazuje návyk, ne prezentaci.
+
+Sledujte tři signály:
+
+```text
+Nalezení:
+Našel člověk správné místo bez dotazu?
+
+Dokončení:
+Dokončil minimální výstup podle pravidla?
+
+Stopa:
+Vznikly nové kopie, screenshoty, exporty, komentáře nebo paralelní zápisy?
+```
+
+Příklad pozorování:
+
+```text
+Nalezení:
+Člověk otevřel měsíční úkol a klikl rovnou na provozní kartu.
+
+Dokončení:
+Zapsal jednu stavovou větu.
+
+Stopa:
+Nevznikl screenshot ani zápis do staré tabulky.
+```
+
+To je silný signál, že akce pomohla. Nemusí k tomu být deset odstavců. Stačí důkaz z práce.
+
+Jiný příklad:
+
+```text
+Nalezení:
+Člověk otevřel měsíční úkol, ale začal vyhledávat starou tabulku podle názvu.
+
+Dokončení:
+Nakonec zapsal stav do provozní karty.
+
+Stopa:
+Do osobních poznámek si uložil odkaz na starou tabulku "pro jistotu".
+```
+
+Tady akce nestačí. Možná jste odstranili odkaz, ale stará trasa pořád žije v názvu, zvyku nebo osobních pomůckách.
+
+### 4. Rozlište výsledek akce od okolního problému
+
+Ne každé tření po ověření znamená, že akce byla špatná. Někdy se ukáže okolní problém: člověk neměl přístup, úkol přišel pozdě, chyběl kontext, nebo se změnil proces mimo standard. Ověření má rozlišit, zda selhalo změněné místo, nebo něco kolem něj.
+
+Použijte jednoduché třídění:
+
+```text
+Akce pomohla:
+Změněné místo fungovalo a výstup byl minimální.
+
+Akce je slabá:
+Změněné místo se použilo, ale pořád vytváří stejné tření.
+
+Akce minula problém:
+Tření vzniklo jinde než na opraveném místě.
+
+Okolní blokace:
+Práce neproběhla kvůli přístupu, termínu, chybě systému nebo změně procesu.
+
+Nové riziko:
+Akce sice pomohla, ale vytvořila novou datovou stopu, nový přístup nebo novou závislost.
+```
+
+Příklad:
+
+```text
+Situace:
+Člověk nezačal v provozní kartě, protože neměl přístup.
+
+Vyhodnocení:
+Okolní blokace. Odkaz mohl být správný, ale přístupová práva bránila použití.
+
+Další krok:
+Neopravovat znovu text pravidla. Nejprve opravit přístup pro roli, která standard používá.
+```
+
+Jiný příklad:
+
+```text
+Situace:
+Člověk začal ve správné kartě, ale přidal screenshot běžného stavu, protože chtěl "mít důkaz".
+
+Vyhodnocení:
+Nové riziko nebo nedořešená hranice důkazu.
+
+Další krok:
+Vrátit se k hranici, kdy je screenshot povolený, a ověřit datovou stopu.
+```
+
+Třídění brání tomu, aby tým opravoval nesprávnou věc. Když je problém přístup, nepřepisujte text. Když je problém starý návyk, nestačí přístup. Když je problém datová stopa, nepřidávejte další evidenci.
+
+### 5. Projděte privacy-first kontrolu skutečné stopy
+
+Privacy-first kontrola po ověření se neptá jen na záměr. Ptá se, co skutečně vzniklo. Malá akce mohla mít dobrý návrh, ale při použití mohla vyrobit nové podklady.
+
+Zkontrolujte:
+
+```text
+Vznikl nový screenshot?
+
+Vznikla osobní kopie, export nebo lokální poznámka s daty?
+
+Zapsal někdo běžný stav na dvě místa?
+
+Rozšířil se přístup k původním nebo novým podkladům?
+
+Zůstala stará trasa aktivní a matoucí?
+
+Je potřeba něco smazat, archivovat nebo označit?
+
+Stačí pro další rozhodnutí menší signál?
+```
+
+Příklad dobrého výsledku:
+
+```text
+Datová stopa:
+Jedna stavová věta v provozní kartě, žádný screenshot, stará tabulka bez nových zápisů.
+
+Rozhodnutí:
+Stopa je stejná nebo menší. Akci lze potvrdit.
+```
+
+Příklad špatného výsledku:
+
+```text
+Datová stopa:
+Stavová věta v provozní kartě, screenshot v chatu a osobní kopie odkazu na starou tabulku.
+
+Rozhodnutí:
+Akce sice zlepšila cestu, ale vytvořila náhradní stopu. Neuzavírat bez úklidu.
+```
+
+Privacy-first provoz v Evropě stojí na schopnosti říct: víme, kde data jsou, proč tam jsou a kdy zmizí. I malá provozní oprava musí toto pravidlo respektovat. Jinak se z malých dobrých úmyslů stane velký nepořádek v datech.
+
+### 6. Vyberte jeden stav po ověření
+
+Po prvním normálním použití vyberte jeden stav. Ne tři možnosti, ne "ještě uvidíme", ne dlouhou poznámku bez rozhodnutí.
+
+Použijte pět stavů:
+
+```text
+Potvrdit:
+Akce pomohla, výstup je minimální, stopa se nezvětšila.
+
+Drobně doladit:
+Akce pomohla, ale jedno malé místo ještě vytváří tření.
+
+Uklidit stopu:
+Akce pomohla, ale vznikly nové nebo staré artefakty, které je potřeba smazat, archivovat nebo označit.
+
+Vrátit k jiné akci:
+Akce minula problém nebo opravila špatné místo.
+
+Pozastavit:
+Normální použití neproběhlo nebo bylo ovlivněné okolní blokací, takže nejde férově vyhodnotit.
+```
+
+Příklad:
+
+```text
+Stav:
+Potvrdit.
+
+Důkaz:
+Kontrola začala v provozní kartě, vznikla jedna stavová věta a stará tabulka nebyla použita.
+
+Další krok:
+Ukončit samostatné sledování po druhém správném použití podle stop pravidla.
+```
+
+Další příklad:
+
+```text
+Stav:
+Uklidit stopu.
+
+Důkaz:
+Nová trasa fungovala, ale člověk si pro jistotu vytvořil osobní kopii starého odkazu.
+
+Další krok:
+Vysvětlit kanonické místo, odstranit osobní kopii a starou tabulku viditelně označit jako archiv.
+```
+
+Stav musí vést k práci nebo k uzavření. Pokud stav nic nemění, není to stav. Je to poznámka.
+
+### 7. Uzavřete nebo nastavte druhé ověření
+
+Příloha JK nastavila stop pravidlo. Teď rozhodněte, jestli se podle něj pokračuje. Pokud první použití dopadlo dobře a stop pravidlo říká dvě správná použití, nastavte ještě jedno lehké ověření. Pokud pravidlo říká jedno použití a výsledek je čistý, uzavřete samostatné sledování. Pokud se objevilo tření, nastavte ověření jen pro změněné místo, ne pro celý standard.
+
+Dobré uzavření:
+
+```text
+Akce potvrzena po prvním normálním použití.
+Samostatné sledování končí, protože stop pravidlo bylo splněno.
+Changelog doplněn jednou větou.
+Přechodové poznámky smazány.
+```
+
+Dobré druhé ověření:
+
+```text
+Akce pomohla, ale stop pravidlo vyžaduje dvě správná použití.
+Při příští měsíční kontrole ověřit pouze začátek v provozní kartě.
+Nesbírat screenshot ani nový report.
+```
+
+Špatné pokračování:
+
+```text
+Pro jistotu budeme další tři měsíce sbírat screenshoty každé kontroly.
+```
+
+To není ověření. To je nový proces bez jasného důvodu. Pokud potřebujete další důkaz, použijte nejmenší signál, který stačí k rozhodnutí.
+
+### Karta ověření další akce
+
+```text
+Ověřovaná akce:
+
+Původní akční věta:
+V místě:
+Uděláme:
+Protože:
+Hotovo poznáme podle:
+
+První normální použití:
+
+Kdo použil:
+
+Signál nalezení:
+
+Signál dokončení:
+
+Skutečná datová stopa:
+
+Okolní blokace:
+
+Rozlišení výsledku:
+Akce pomohla / Akce je slabá / Akce minula problém / Okolní blokace / Nové riziko
+
+Stav po ověření:
+Potvrdit / Drobně doladit / Uklidit stopu / Vrátit k jiné akci / Pozastavit
+
+Jedna rozhodovací věta:
+
+Co se uklízí:
+
+Co se nedělá:
+
+Další ověření nebo uzavření:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Ověřovaná akce:
+Odstranění starého odkazu z měsíčního úkolu kontroly formulářů.
+
+Původní akční věta:
+V místě: měsíční úkol kontroly formulářů.
+Uděláme: odstraníme starý odkaz a ponecháme jen odkaz na provozní kartu.
+Protože: stará trasa naváděla člověka mimo stabilizovaný standard.
+Hotovo poznáme podle: příští kontrola začne v provozní kartě bez staré tabulky.
+
+První normální použití:
+Měsíční kontrola formulářů za další měsíc.
+
+Kdo použil:
+Člověk odpovědný za běžnou kontrolu formulářů.
+
+Signál nalezení:
+Začal v měsíčním úkolu a klikl rovnou na provozní kartu.
+
+Signál dokončení:
+Zapsal jednu stavovou větu a nevyžádal si doplňující instrukce.
+
+Skutečná datová stopa:
+Jedna stavová věta v provozní kartě. Žádný screenshot, žádný export, žádný nový zápis do staré tabulky.
+
+Okolní blokace:
+Žádná.
+
+Rozlišení výsledku:
+Akce pomohla.
+
+Stav po ověření:
+Potvrdit.
+
+Jedna rozhodovací věta:
+Odstranění staré vstupní trasy fungovalo; další kontrola začala v kanonické provozní kartě a datová stopa zůstala minimální.
+
+Co se uklízí:
+Dočasná poznámka k ověření po tomto použití.
+
+Co se nedělá:
+Nepřidává se screenshotový důkaz, nepřepisuje se pravidlo a nezavádí se nový report.
+
+Další ověření nebo uzavření:
+Podle původního stop pravidla ještě jednou ověřit začátek v provozní kartě při příští měsíční kontrole; pokud bude znovu čistý, samostatné sledování skončí.
+
+Changelog věta:
+První normální použití po odstranění starého odkazu potvrdilo správnou trasu do provozní karty bez nové datové stopy; po druhém čistém použití se samostatné sledování uzavře.
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: připomenout původní akční větu a kritérium hotovo poznáme podle.
+2. Tři minuty: projít první normální použití podle signálů nalezení, dokončení a stopy.
+3. Dvě minuty: oddělit výsledek akce od okolních blokací.
+4. Tři minuty: projít privacy-first kontrolu skutečně vzniklé stopy.
+5. Dvě minuty: vybrat jeden stav po ověření.
+6. Dvě minuty: rozhodnout uzavření, druhé ověření nebo jednu malou reakci.
+7. Jedna minuta: zapsat changelog větu a uklidit přechodové poznámky.
+
+Výstup workshopu:
+
+```text
+Jedna rozhodovací věta, jeden stav a jasné rozhodnutí, zda se ověřování uzavírá, pokračuje podle stop pravidla, nebo se vrací k jiné akci.
+```
+
+Workshop nesmí skončit seznamem "ještě by se mohlo". Pokud se objeví další nápady, patří mimo rozsah. Tato kontrola má odpovědět na jednu otázku: fungovala poslední akce v normální práci?
+
+### Checklist kapitoly
+
+- Ověřovali jste při prvním normálním použití, ne v demo průchodu?
+- Vrátili jste se k původní akční větě a kritériu hotovo poznáme podle?
+- Sledujete práci, ne jen vysvětlení člověka po použití?
+- Máte signál nalezení, dokončení a skutečné datové stopy?
+- Rozlišili jste problém akce od okolní blokace?
+- Zkontrolovali jste nové kopie, screenshoty, exporty a paralelní zápisy?
+- Vybrali jste jeden stav po ověření?
+- Je stav opřený o pozorování, ne o dojem?
+- Pokud akce pomohla, víte, kdy samostatné sledování skončí?
+- Pokud akce nepomohla, vracíte se k nejbližšímu pracovnímu místu?
+- Uklidili jste přechodové poznámky, které už nejsou potřeba?
+- Nepřidali jste nový trvalý kontrolní bod bez stop pravidla?
+- Je changelog věta krátká a použitelná i bez čtení celé historie?
+
+Ověření další akce po prvním normálním použití drží provoz při zemi. Neoslavuje změnu za to, že byla provedena. Ptá se, jestli pomohla skutečné práci, jestli nezvětšila datovou stopu a jestli tým ví, kdy přestat kontrolovat. To je malá disciplína s velkým dopadem: z oprav se nestává byrokracie a ze standardů se nestává muzeum starých dobrých úmyslů.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JL o ověření další akce po prvním normálním použití: výběr reálného použití, návrat k akční větě, signály nalezení/dokončení/stopy, rozlišení výsledku akce od okolního problému, privacy-first kontrola skutečné stopy, rozhodovací stavy, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JK o převod kontroly stabilizovaného standardu do jedné další akce: mapování stavu na typ práce, oddělení nálezu od komentáře, nejbližší pracovní místo, akční věta, privacy-first brzda, provedení v jedné dávce, nejbližší ověření, stop pravidlo, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JJ o kontrolu provozního standardu po stabilizaci systémového zlepšení: výběr běžného kontrolního okna, cesta k pravidlu, porovnání minimálního a skutečného výstupu, hledání starých tras, scorecard ceny použití, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JI o stabilizaci potvrzeného systémového zlepšení do provozního standardu: vstupní brána pouze pro stav Potvrdit, kanonický domov, stabilní pravidlo, odstranění starých tras, lehký kontrolní signál, krátké předání, karta, příklad, mini workshop a checklist.
