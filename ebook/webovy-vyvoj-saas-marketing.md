@@ -72885,8 +72885,295 @@ Pokud se workshop zasekne na sporu, kde má pravidlo bydlet, rozhodněte podle p
 
 Stabilizace je dobrá ve chvíli, kdy se z opravy stane obyčejná práce. Nevyžaduje autora, workshop ani paměť týmu. Člověk přijde k review, přečte krátké pravidlo, zapíše minimální výstup a nevytvoří zbytečnou datovou stopu. To je malý provozní zázrak: méně věcí, méně vysvětlování, méně rizika.
 
+## Příloha IR: Kontrola běžného úklidového pravidla po stabilizaci
+
+Stabilizované pravidlo je dobrý konec jedné změny, ale není to důkaz, že se pravidlo usadilo v běžné práci. Po stabilizaci přichází chvíle, kdy je potřeba zkontrolovat něco obyčejnějšího: jestli pravidlo lidé najdou, použijí a nezaplatí za něj novým nepořádkem.
+
+Tahle příloha navazuje na Přílohu IQ. Použijte ji po několika běžných cyklech, typicky po jednom kvartálním review, dvou až třech měsíčních opakováních nebo po prvních několika skutečných použitích pravidla v týmu. Cíl není auditovat poslušnost. Cíl je zjistit, jestli pravidlo pomáhá práci a drží datovou stopu menší než před změnou.
+
+Dobrá kontrola odpoví na čtyři otázky:
+
+```text
+Našlo se pravidlo ve správný okamžik?
+
+Vznikl jen minimální výstup?
+
+Nevrátila se stará cesta bokem?
+
+Je pravidlo pořád levnější než nepořádek, který mělo odstranit?
+```
+
+Pokud odpověď zní ano, pravidlo se může stát běžnou součástí provozu. Pokud ne, neopravujte celý systém. Vyberte jedno místo, kde pravidlo selhalo, a udělejte nejmenší další zásah.
+
+### 1. Vyberte krátké kontrolní okno
+
+Kontrola stabilizovaného pravidla musí pracovat se skutečnou prací, ne s dobrým úmyslem v dokumentaci. Vyberte krátké okno, ve kterém pravidlo mělo reálně proběhnout.
+
+Příklady vhodného okna:
+
+```text
+první kvartální review formulářů po stabilizaci,
+
+poslední dvě předávky supportu,
+
+první release po úpravě release checklistu,
+
+tři poslední publikace článků,
+
+první vendor review po změně datové karty,
+
+první onboarding nové role po úklidu šablon.
+```
+
+Nevybírejte okno podle toho, kde se pravidlo dá nejlépe obhájit. Vyberte okno, kde mohlo selhat. Tam je hodnota kontroly.
+
+Do kontroly si vezměte jen to, co opravdu potřebujete:
+
+```text
+kanonické pravidlo,
+
+minimální výstup,
+
+revizní háček,
+
+případné staré vstupní místo,
+
+skutečný výsledek práce.
+```
+
+Nepotřebujete kompletní historii úprav. Pokud se bez ní kontrola nedá udělat, pravidlo je pořád příliš závislé na paměti autora.
+
+### 2. Ověřte cestu k pravidlu
+
+První praktická otázka zní: dostalo se pravidlo k člověku ve chvíli, kdy ho potřeboval?
+
+Nestačí, že pravidlo existuje. Nestačí, že je "někde v dokumentaci". Provozní pravidlo má být vidět v pracovním toku. Pokud člověk dělá kvartální review formulářů, pravidlo má být v review kartě nebo na ni má vést krátká spouštěcí věta. Pokud dělá release, pravidlo má být v release checklistu. Pokud předává support případ, má být v handoff šabloně.
+
+Zkontrolujte tři signály:
+
+```text
+Místo:
+bylo pravidlo na trase skutečné práce?
+
+Jazyk:
+rozuměla mu role bez vysvětlení autora?
+
+Okamžik:
+objevilo se před rozhodnutím, ne až po něm?
+```
+
+Typické selhání je pravidlo, které je správné, ale pozdě. Člověk ho najde až ve chvíli, kdy už vytvořil export, screenshot nebo dlouhý komentář. To není lidská chyba. To je chyba umístění.
+
+### 3. Porovnejte minimální výstup se skutečností
+
+Stabilizované úklidové pravidlo má chránit jednoduchost. Proto se kontroluje hlavně to, jestli vznikl jen dohodnutý minimální výstup.
+
+Příklad pravidla:
+
+```text
+Při kvartálním review formulářů zapište jednu stavovou větu o tom, zda vznikly exporty, screenshoty nebo kopie poptávek. Pokud nevznikly, neukládejte žádný další důkaz.
+```
+
+Dobré výsledky:
+
+```text
+V tomto kvartálu nevznikly exporty, screenshoty ani kopie poptávek mimo systém.
+
+Po změně formuláře byla na dva cykly obnovena měsíční kontrola; oba cykly proběhly bez vedlejších exportů.
+```
+
+Varovné výsledky:
+
+```text
+stavová věta plus přiložený CSV export pro jistotu,
+
+screenshot "aby bylo vidět, že je vše čisté",
+
+kopie poptávky v komentáři,
+
+nová tabulka pro sledování toho, že se tabulky nemají tvořit,
+
+dlouhý report místo jedné pracovní věty.
+```
+
+Tady buďte přísní. Pokud pravidlo říká jednu větu a vznikne pět příloh, pravidlo se v praxi neujalo. Možná je příliš nejasné. Možná tým nevěří, že méně důkazů stačí. Možná v okolním procesu chybí důvěra. Každý z těchto důvodů je jiný problém, ale všechny se projeví stejně: úklidové pravidlo začne vyrábět nový nepořádek.
+
+### 4. Hledejte starou cestu pod novým názvem
+
+Staré cesty se málokdy vrátí s cedulí "jsem starý problém". Častěji se vrátí jako opatrnost, pomocná poznámka nebo dočasné řešení.
+
+Ptejte se:
+
+```text
+Nevznikla nová kopie pravidla v jiném dokumentu?
+
+Nevrátil se starý checklist pod názvem "rychlá kontrola"?
+
+Neukládají se exporty do jiné složky?
+
+Nesbírá se víc dat, protože se někdo bojí ztráty přehledu?
+
+Nevznikl nový komentářový zvyk, který nahrazuje smazané screenshoty?
+```
+
+Privacy-first kontrola je tady praktická, ne ideologická. Pokud pravidlo odstranilo jeden export, ale tým si začal kopírovat obsah poptávek do komentářů, soukromí se nezlepšilo. Jen se riziko přestěhovalo na méně viditelné místo. Takové stěhování rizika je provozně horší než otevřený problém, protože se tváří jako vyřešený.
+
+### 5. Změřte cenu pravidla
+
+Úklidové pravidlo má šetřit práci. Nemusí být zadarmo, ale jeho cena má být menší než cena nepořádku, který řeší.
+
+Stačí jednoduchá scorecard:
+
+```text
+Nalezení pravidla:
+0 = bez hledání, 1 = krátké dohledání, 2 = musel pomoct autor.
+
+Použití pravidla:
+0 = přirozená součást práce, 1 = drobné tření, 2 = samostatný rituál navíc.
+
+Výstup:
+0 = minimální výstup, 1 = jeden drobný doplněk, 2 = nový report nebo sada příloh.
+
+Datová stopa:
+0 = žádná nová zbytečná stopa, 1 = krátká poznámka navíc, 2 = exporty, screenshoty nebo kopie obsahu.
+```
+
+Výsledek 0 až 2 je zdravý. Výsledek 3 až 5 znamená, že pravidlo funguje, ale potřebuje zjednodušit nebo přesunout. Výsledek 6 a víc znamená, že pravidlo pravděpodobně řeší starý nepořádek tak, že vytvořilo nový. To není tragédie. To je dobrý nález, pokud ho neobalíte do tří dalších kontrol.
+
+### 6. Rozhodněte jeden další stav
+
+Na konci kontroly vyberte jeden stav:
+
+```text
+Ponechat:
+pravidlo je dohledatelné, používané a levné.
+
+Zjednodušit:
+pravidlo dává smysl, ale výstup nebo jazyk je těžší, než musí být.
+
+Přesunout:
+pravidlo je správné, ale nežije ve skutečném pracovním místě.
+
+Zavřít starou cestu:
+pravidlo funguje, ale paralelně zůstal starý checklist, odkaz, export nebo šablona.
+
+Vrátit k rozhodnutí:
+pravidlo řeší špatný problém nebo vytváří víc práce, než šetří.
+```
+
+Nepřidávejte víc stavů jen proto, že realita je košatá. Košatá realita je přesně důvod, proč má rozhodnutí zůstat jednoduché.
+
+### Kontrolní karta běžného úklidového pravidla
+
+```text
+Název pravidla:
+
+Kontrolované okno:
+
+Kanonický domov:
+
+Role, která pravidlo použila:
+
+Mělo se pravidlo objevit kde:
+
+Kde se pravidlo skutečně našlo:
+
+Minimální výstup podle pravidla:
+
+Skutečný výstup:
+
+Vznikla zbytečná datová stopa:
+
+Vrátila se stará nebo náhradní cesta:
+
+Scorecard ceny:
+
+Rozhodnutí dalšího stavu:
+
+Jedna nejbližší úprava:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Název pravidla:
+Kvartální kontrola formulářové datové stopy.
+
+Kontrolované okno:
+První kvartální review po stabilizaci pravidla.
+
+Kanonický domov:
+Provozní karta formulářů / kvartální review.
+
+Role, která pravidlo použila:
+Provozní vlastník webu.
+
+Mělo se pravidlo objevit kde:
+V kvartální review kartě a jako krátká spouštěcí věta v měsíčním úkolu po změně formuláře.
+
+Kde se pravidlo skutečně našlo:
+V kvartální review kartě ano. Měsíční úkol obsahoval jen spouštěcí větu, bez kopie pravidla.
+
+Minimální výstup podle pravidla:
+Jedna stavová věta.
+
+Skutečný výstup:
+Jedna stavová věta bez příloh.
+
+Vznikla zbytečná datová stopa:
+Ne.
+
+Vrátila se stará nebo náhradní cesta:
+Ne.
+
+Scorecard ceny:
+Nalezení 0, použití 0, výstup 0, datová stopa 0.
+
+Rozhodnutí dalšího stavu:
+Ponechat.
+
+Jedna nejbližší úprava:
+Žádná aktivní úprava. Pravidlo znovu otevřít jen při změně formuláře, novém zdroji leadů nebo vzniku exportu mimo incidentní důvod.
+
+Changelog věta:
+První kontrola běžného úklidového pravidla potvrdila kvartální stavovou větu bez návratu exportů, screenshotů a kopií poptávek.
+```
+
+### Mini workshop na 18 minut
+
+1. Tři minuty: vybrat krátké kontrolní okno skutečné práce.
+2. Tři minuty: projít cestu k pravidlu a ověřit, kde se skutečně našlo.
+3. Tři minuty: porovnat minimální a skutečný výstup.
+4. Tři minuty: hledat starou nebo náhradní cestu.
+5. Tři minuty: vyplnit scorecard ceny.
+6. Dvě minuty: rozhodnout jeden další stav.
+7. Jedna minuta: napsat changelog větu bez citlivých detailů.
+
+Když workshop potřebuje víc času, zastavte se a zeptejte se, jestli nekontrolujete příliš široký kus provozu. Jedno pravidlo, jedno okno, jeden výsledek. Širší audit má svoje místo, ale ne v téhle kontrole.
+
+### Checklist kapitoly
+
+- Kontrolujete skutečné použití pravidla, ne jen jeho existenci?
+- Je kontrolní okno krátké a konkrétní?
+- Našel člověk pravidlo v pracovním toku bez autora?
+- Objevilo se pravidlo před rozhodnutím, ne až po něm?
+- Vznikl jen minimální výstup?
+- Nevznikly exporty, screenshoty, kopie obsahu ani pomocné tabulky pro jistotu?
+- Nevrátila se stará cesta pod novým názvem?
+- Nepřestěhovalo se privacy riziko do komentářů, poznámek nebo vedlejších složek?
+- Změřili jste cenu pravidla jednoduchou scorecard?
+- Rozhodli jste jeden další stav místo seznamu přání?
+- Je nejbližší úprava opravdu jedna?
+- Changelog popisuje změnu bez osobních údajů a zákaznických detailů?
+- Pokud je stav `Ponechat`, nepřidáváte zbytečný nový dohled?
+
+Dobře usazené úklidové pravidlo je skoro neviditelné. Člověk ho najde ve správný okamžik, udělá krátký výstup a jde dál. Nevzniká kolem něj rituál, report ani nová složka "pro jistotu". Pokud kontrola ukáže právě tohle, nechte pravidlo pracovat. Největší disciplína někdy není něco dalšího zlepšit, ale nepokazit jednoduchou věc tím, že ji začnete nadšeně přeměřovat.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha IR o kontrole běžného úklidového pravidla po stabilizaci: výběr kontrolního okna, ověření cesty k pravidlu, porovnání minimálního výstupu se skutečností, hledání staré nebo náhradní cesty, scorecard ceny, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IQ o stabilizaci ověřené další úpravy do běžného úklidového pravidla: oddělení aktuálního pravidla od historie, výběr kanonického domova, přepis do jazyka role, zavření přechodových opor, revizní háček, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IP o ověření další úpravy po prvním normálním použití: výběr skutečného použití, porovnání slibu s realitou, nalezení bez autora, kontrola výstupu a datové stopy, typy nálezů, ověřovací věta, karta, příklad, mini workshop a checklist.
 - 2026-05-16: Doplněna Příloha IO o převodu kontroly trvalého úklidového rytmu do jedné další úpravy: rozhodovací věta, typ úpravy, nejbližší pracovní místo, privacy-first hranice, zavření staré cesty, úpravová karta, příklad, ověření při normálním použití, mini workshop a checklist.
