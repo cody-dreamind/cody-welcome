@@ -78430,8 +78430,369 @@ Výstup workshopu nemá být sada úkolů. Má to být jedna karta systémového
 
 Portfoliový vzor má hodnotu jen tehdy, když se promění v menší tření v běžné práci. Ne v novou schůzku, ne v další dashboard, ne v lov na staré chyby. Jeden vzor, jedno pracovní místo, jedna zlepšovací věta, jedno ověření. To stačí.
 
+## Příloha JH: Ověření systémového zlepšení po prvním použití
+
+Příloha JG popsala, jak z portfoliového vzoru vybrat jedno systémové zlepšení. Tato příloha řeší další krok: první normální použití po zavedení změny. Právě tam se ukáže, jestli zlepšení opravdu zmenšilo práci, nebo jen přidalo další pravidlo do sbírky pravidel, které vypadají rozumně hlavně v dokumentu.
+
+Otázka této přílohy zní:
+
+```text
+Jak ověřit první použití systémového zlepšení tak, aby tým potvrdil reálný dopad, nevyrobil nový audit a neznovu otevřel uzavřené smyčky?
+```
+
+Ověření systémového zlepšení nemá být velká revize. Má to být krátká kontrola skutečné práce. Člověk použil nové pravidlo, šablonu, kartu nebo rozhodovací větu v běžné situaci. Teď potřebujeme zjistit tři věci: našel změnu bez autora, udělal menší krok a nevytvořil náhradní nepořádek jinde.
+
+Codyho komentář: systémové zlepšení není hotové ve chvíli, kdy ho někdo přidá do dokumentace. Hotové je až ve chvíli, kdy ho použije člověk, který nemusel slyšet patnáctiminutový výklad autora. Pokud změna funguje jen s živým průvodcem, není to pravidlo. Je to komentovaná prohlídka.
+
+### 1. Vyberte první normální použití, ne ukázkovou scénu
+
+Ověření musí proběhnout na situaci, která by nastala tak jako tak. Ne na demo průchodu, ne na workshopu a ne na ideálním testu připraveném autorem změny. Hledejte první běžný okamžik, kde nové zlepšení mělo snížit tření.
+
+Vhodné ověřovací situace:
+
+- pravidelná kontrola formuláře,
+- běžné supportní předání,
+- revize kampaně,
+- aktualizace provozní karty,
+- vyplnění checklistu před publikací,
+- měsíční kontrola obsahu,
+- předání malé změny mezi rolemi.
+
+Nevhodné situace:
+
+- autor změny všem vysvětluje, co mají dělat,
+- tým si změnu zkouší nanečisto bez skutečného výstupu,
+- ověření se dělá na staré uzavřené smyčce,
+- kontroluje se jen existence textu v dokumentaci,
+- vzniká zvláštní meeting jen proto, aby se změna tvářila důležitě.
+
+Praktická věta:
+
+```text
+Ověřujeme nejbližší skutečné použití kontrolní karty formuláře, ne speciální test pravidla pro screenshoty.
+```
+
+Tím chráníte měřítko. Systémové zlepšení má pomoct v práci, ne v prezentaci změny.
+
+### 2. Vraťte se ke zlepšovací větě
+
+Před ověřením si znovu přečtěte zlepšovací větu z karty JG. Bez ní se kontrola snadno rozplizne do obecného dojmu.
+
+Šablona zlepšovací věty:
+
+```text
+Po zlepšení bude [role] při [situace] dělat [menší a jasnější krok] místo [opakovaný nepořádek].
+```
+
+Ověření se má ptát jen na tuto větu. Ne na celý systém, ne na všechny staré problémy, ne na náladu týmu.
+
+Příklad:
+
+```text
+Po zlepšení bude člověk při běžné kontrole formuláře zapisovat krátkou provozní větu místo ukládání screenshotu bez rozhodovací hodnoty.
+```
+
+Ověřovací otázky z této věty:
+
+- Našel člověk pravidlo v kontrolní kartě?
+- Zapsal krátkou provozní větu?
+- Neukládal screenshot bez rozhodovací hodnoty?
+- Nevznikl náhradní důkaz v chatu, e-mailu nebo tabulce?
+
+To je celé. Pokud vás napadne dalších dvanáct otázek, zapište je bokem, ale nepouštějte je do ověření. První kontrola má potvrdit slib změny, ne odemknout nový sklep s inventurou.
+
+### 3. Sledujte cestu k pravidlu
+
+U systémového zlepšení nestačí, že člověk nakonec udělal správnou věc. Důležité je, jak se k ní dostal. Pokud se musel zeptat autora, hledat v pěti dokumentech nebo kopírovat starý příklad z chatu, změna není dost blízko pracovnímu místu.
+
+Sledujte tři signály:
+
+```text
+Cesta:
+Kde člověk pravidlo našel?
+
+Tření:
+Kolik dodatečného vysvětlení potřeboval?
+
+Samostatnost:
+Dokázal použít pravidlo bez autora změny?
+```
+
+Příklad dobrého výsledku:
+
+```text
+Člověk otevřel kontrolní kartu, našel pravidlo u části "Důkaz stavu", zapsal provozní větu a nepotřeboval další vysvětlení.
+```
+
+Příklad slabého výsledku:
+
+```text
+Člověk věděl, že se něco měnilo, ale pravidlo nenašel. Autor mu poslal odkaz do chatu a vysvětlil, kdy screenshot neukládat.
+```
+
+Druhý výsledek není katastrofa. Je to dobrý nález. Znamená, že pravidlo možná funguje, ale jeho umístění nebo formulace ještě ne.
+
+### 4. Porovnejte výstup před a po změně
+
+Ověření má ukázat, jestli se práce opravdu zmenšila. Proto porovnejte minimální výstup před změnou a po změně. Nemusíte měřit všechno. Stačí jednoduché porovnání rozsahu, kroků a datové stopy.
+
+Šablona porovnání:
+
+```text
+Před změnou:
+
+Po změně:
+
+Co se zmenšilo:
+
+Co zůstalo stejné:
+
+Co se nečekaně přesunulo jinam:
+```
+
+Příklad:
+
+```text
+Před změnou:
+Kontrolující ukládal screenshot formuláře a posílal ho do chatu jako důkaz běžného stavu.
+
+Po změně:
+Do kontrolní karty zapsal větu: "Formulář odpovídá, testovací poptávka dorazila, bez změny."
+
+Co se zmenšilo:
+Nevznikl screenshot, chatový důkaz ani extra soubor.
+
+Co zůstalo stejné:
+Kontrola doručení poptávky.
+
+Co se nečekaně přesunulo jinam:
+Nic.
+```
+
+To je dostatečné ověření. Nepotřebujete dashboard na úsporu screenshotů. Pokud se práce zmenšila a výsledek zůstal použitelný, změna splnila první slib.
+
+### 5. Hledejte náhradní nepořádek
+
+Systém se někdy brání změně tím, že nepořádek přesune jinam. Zakážete screenshoty bez účelu, ale lidé začnou ukládat exporty. Zkrátíte formulář, ale obchod si chybějící údaje začne sbírat neformálně v chatu. Zavedete kanonickou odpověď, ale support si vedle ní vytvoří vlastní kopii.
+
+Při prvním použití proto hledejte náhradní stopu:
+
+- Vznikl nový soubor, screenshot, export nebo tabulka?
+- Přesunula se kontrola do chatu nebo e-mailu?
+- Začal někdo uchovávat osobní údaje mimo kanonické místo?
+- Přibyla ruční poznámka, kterou bude nutné později uklízet?
+- Vznikla paralelní verze pravidla?
+
+Krátký příklad:
+
+```text
+Screenshot se už neukládá, ale člověk poslal fotku stavu do chatu. Zlepšení tedy zatím jen změnilo formát důkazu. Potřebujeme doplnit větu: běžný stav se neposílá do chatu, zapisuje se jen do kontrolní karty.
+```
+
+Tohle je přesně ten typ nálezu, kvůli kterému první ověření dává smysl. Nejde o selhání člověka. Jde o signál, že pravidlo ještě neuzavřelo starou cestu.
+
+### 6. Udělejte privacy-first kontrolu skutečné stopy
+
+Před zavedením změny jste odhadli privacy-first dopad. Po prvním použití ověřte realitu. Ne obecně. Konkrétně se podívejte, co vzniklo.
+
+Kontrolní otázky:
+
+- Vznikla menší datová stopa než před změnou?
+- Neuložily se osobní údaje nebo zákaznický kontext do nového místa?
+- Je výstup dohledatelný bez ukládání zbytečných důkazů?
+- Má případný dočasný podklad jasnou retenci?
+- Zůstává kanonické místo jedno?
+
+Příklad privacy-first ověřovací věty:
+
+```text
+První použití snížilo datovou stopu: nevznikl screenshot ani chatová příloha, stav je zapsaný jen v kontrolní kartě a neobsahuje osobní údaje testovací poptávky.
+```
+
+Slabá věta:
+
+```text
+Privacy je v pohodě.
+```
+
+To není ověření. To je pokrčení ramen v tričku s nápisem compliance. Pište konkrétně, co vzniklo, co nevzniklo a kde je výsledek uložený.
+
+### 7. Rozhodněte jeden stav
+
+Po prvním použití vyberte jeden ze čtyř stavů. Nepište dlouhý komentář, pokud stačí jasné rozhodnutí.
+
+```text
+Potvrdit:
+Zlepšení fungovalo, práce se zmenšila a nevznikla náhradní stopa.
+
+Upravit:
+Směr je správný, ale pravidlo je špatně umístěné, nejasné nebo propouští náhradní nepořádek.
+
+Vrátit:
+Zlepšení zhoršilo práci nebo rozbilo důležitý výstup.
+
+Pozorovat:
+Použití bylo příliš výjimečné nebo neúplné; další kontrola proběhne při nejbližším normálním použití.
+```
+
+Stav `Pozorovat` používejte střídmě. Je užitečný, když první situace nebyla reprezentativní. Je nebezpečný, když se z něj stane čekárna pro rozhodnutí, kterému se nikomu nechce.
+
+Příklad rozhodnutí:
+
+```text
+Stav: Upravit.
+
+Důvod:
+Člověk použil provozní větu, ale pravidlo našel až přes odkaz v chatu. Přesunout větu přímo k poli "Důkaz stavu" v kontrolní kartě.
+```
+
+To je dobré rozhodnutí. Krátké, konkrétní a míří na pracovní místo.
+
+### 8. Uzavřete ověřovací stopu
+
+Ověření samo nesmí zůstat jako nový nepořádek. Po rozhodnutí ukliďte dočasné poznámky a nechte jen minimum, které bude užitečné při další revizi.
+
+Minimum k ponechání:
+
+```text
+Datum prvního použití:
+
+Použitá situace:
+
+Stav:
+
+Jedna ověřovací věta:
+
+Případná malá úprava:
+
+Privacy-first dopad:
+```
+
+Co obvykle mazat nebo nepřikládat:
+
+- screenshoty běžného stavu,
+- celé chatové vlákno,
+- osobní údaje z testovacího nebo zákaznického případu,
+- pracovní poznámky autora,
+- duplicitní kopie pravidla,
+- exporty, které už neslouží rozhodnutí.
+
+Pokud stav vyšel `Potvrdit`, ověřovací stopa má být krátká. Pokud vyšel `Upravit`, ponechte jen tolik kontextu, aby bylo jasné, co se mění. Pokud vyšel `Vrátit`, zapište důvod a obnovte poslední funkční pravidlo. Žádné archeologické naleziště z jednoho ověření.
+
+### Karta ověření systémového zlepšení
+
+```text
+Název zlepšení:
+
+Zlepšovací věta:
+
+První normální použití:
+
+Kdo použil pravidlo:
+Role, ne jméno, pokud jméno není nutné.
+
+Cesta k pravidlu:
+
+Výstup před změnou:
+
+Výstup po změně:
+
+Co se zmenšilo:
+
+Náhradní nepořádek:
+Ano / ne / nejisté
+
+Privacy-first dopad:
+
+Stav:
+Potvrdit / upravit / vrátit / pozorovat
+
+Jedna ověřovací věta:
+
+Další krok:
+Žádný / malá úprava pracovního místa / návrat pravidla / další normální použití
+```
+
+### Příklad vyplněné karty
+
+```text
+Název zlepšení:
+Pravidlo pro screenshoty běžného stavu.
+
+Zlepšovací věta:
+Po zlepšení bude člověk při běžné kontrole zapisovat krátkou provozní větu místo ukládání screenshotu bez rozhodovací hodnoty.
+
+První normální použití:
+Páteční kontrola kontaktního formuláře.
+
+Kdo použil pravidlo:
+Role provozní kontroly.
+
+Cesta k pravidlu:
+Kontrolní karta, část "Důkaz stavu".
+
+Výstup před změnou:
+Screenshot formuláře a zpráva v chatu.
+
+Výstup po změně:
+Věta v kontrolní kartě: "Formulář odpovídá, testovací poptávka dorazila, bez změny."
+
+Co se zmenšilo:
+Žádný screenshot, žádná chatová příloha, jeden kanonický zápis.
+
+Náhradní nepořádek:
+Ne.
+
+Privacy-first dopad:
+Nevznikl obrazový důkaz běžného stavu ani další kopie testovacího kontextu.
+
+Stav:
+Potvrdit.
+
+Jedna ověřovací věta:
+Pravidlo bylo nalezeno v kartě, použito bez vysvětlování a snížilo datovou stopu běžné kontroly.
+
+Další krok:
+Žádný. Zlepšení zůstává v provozu.
+```
+
+### Mini workshop na 12 minut
+
+1. Dvě minuty: přečíst původní zlepšovací větu.
+2. Dvě minuty: popsat první normální použití.
+3. Dvě minuty: zapsat cestu k pravidlu a míru vysvětlování.
+4. Dvě minuty: porovnat výstup před a po změně.
+5. Jedna minuta: hledat náhradní nepořádek.
+6. Jedna minuta: zapsat privacy-first dopad.
+7. Dvě minuty: vybrat stav a jednu ověřovací větu.
+
+Výstup workshopu:
+
+```text
+Jedna karta ověření, jeden stav a nejvýše jeden další krok.
+```
+
+Pokud z workshopu vylezou tři úkoly, zastavte se. Buď jste ověřovali moc širokou změnu, nebo jste do ověření pustili staré problémy, které měly zůstat zavřené.
+
+### Checklist kapitoly
+
+- Ověřujete první normální použití, ne demo scénář?
+- Vrátili jste se k jedné zlepšovací větě?
+- Sledujete cestu k pravidlu, ne jen konečný výsledek?
+- Porovnali jste výstup před a po změně?
+- Je jasné, co se zmenšilo: kroky, důkazy, data, otázky nebo ruční vysvětlování?
+- Zkontrolovali jste, zda nevznikl náhradní nepořádek?
+- Popsali jste privacy-first dopad podle skutečné stopy, ne podle přání?
+- Vybrali jste jeden stav: potvrdit, upravit, vrátit nebo pozorovat?
+- Pokud je potřeba úprava, míří na nejbližší pracovní místo?
+- Uzavřeli jste dočasné poznámky a neponechali zbytečné důkazy?
+- Neotevřeli jste znovu staré uzavřené smyčky?
+
+První použití systémového zlepšení je malý, ale poctivý test. Když změna funguje bez autora, zmenší práci a nepřidá datovou stopu, může zůstat v provozu. Když ne, opravte nejbližší pracovní místo. Žádné velké drama, žádný nový proces s fanfárami. Jen ověřit, rozhodnout a uklidit po sobě.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JH o ověření systémového zlepšení po prvním použití: výběr normálního použití, návrat ke zlepšovací větě, cesta k pravidlu, porovnání výstupů, kontrola náhradního nepořádku, privacy-first dopad, rozhodnutí stavu, úklid ověřovací stopy, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JG o převodu portfoliového vzoru do jednoho systémového zlepšení: výběr jednoho vzoru, oddělení od starých příběhů, nalezení pracovního místa, zlepšovací věta, nejmenší zásah, privacy-first kontrola, ověření při normálním použití, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JF o převodu uzavřené smyčky do lehkého portfoliového přehledu: vstup jen pro uzavřené smyčky, minimální metadata, portfoliové otázky, třídění podle zmenšení, privacy-first dopad, měsíční hledání vzorů, retenční rytmus, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JE o uzavření smyčky malé opravy po kontrole pravidla: práce jen se stavem Ponechat, oddělení živého pravidla od historie změny, zrušení dočasných opor, provozní věta, lehký signál do běžného rytmu, úklid backlogu a komunikace, karta, příklad, mini workshop a checklist.
