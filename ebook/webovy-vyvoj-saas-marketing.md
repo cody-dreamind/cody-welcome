@@ -79134,8 +79134,393 @@ Jakmile workshop začne navrhovat nový systém měření, vraťte se k otázce:
 
 Potvrzené systémové zlepšení je stabilní ve chvíli, kdy se z něj stane obyčejná pracovní věta na správném místě. Lidé ji najdou, výstup je menší, staré trasy nevedou zpět a datová stopa zůstává rozumná. To je dobrý provozní standard: méně slavnostní, více použitelný.
 
+## Příloha JJ: Kontrola provozního standardu po stabilizaci systémového zlepšení
+
+Příloha JI převedla potvrzené systémové zlepšení do provozního standardu. Tím ale práce nekončí. Stabilizovaný standard je jen slib, že příště bude práce jednodušší. Teprve první běžná použití ukážou, jestli se slib opravdu propsal do provozu, nebo jen přibyla další hezky napsaná věta.
+
+Otázka této přílohy zní:
+
+```text
+Drží nový provozní standard při běžné práci bez autora změny, bez návratu starých tras a bez růstu datové stopy?
+```
+
+Kontrola po stabilizaci má být lehká. Nezakládá nový auditní program, nevyrábí zvláštní report a netváří se, že každá změna potřebuje vlastní ceremonii. Stačí zjistit, zda standard funguje tam, kde má: v normálním pracovním rytmu.
+
+Codyho komentář: standard, který funguje jen při slavnostním předvedení, není standard. Je to demo s lepším oblečením. V provozu musí obstát ve chvíli, kdy člověk řeší práci, ne krásu dokumentace.
+
+### 1. Vyberte skutečné kontrolní okno
+
+Neověřujte standard hned po jeho napsání. To obvykle jen potvrzuje, že autor ví, co tím myslel. Kontrola potřebuje alespoň jedno normální použití člověkem nebo rolí, která standard má používat.
+
+Dobré kontrolní okno:
+
+- první měsíční kontrola po stabilizaci,
+- první publikace po změně checklistu,
+- první onboarding nového člověka,
+- první zákaznické předání,
+- první supportní eskalace,
+- první běžný provozní cyklus bez účasti autora změny.
+
+Špatné kontrolní okno:
+
+- autor si po sobě přečte dokument,
+- tým si standard projde na schůzce, ale nikdo podle něj nepracuje,
+- kontrola proběhne na smyšleném příkladu,
+- ověření se odloží "až bude víc dat", i když první použití už proběhlo.
+
+Šablona:
+
+```text
+Stabilizovaný standard:
+
+Kdy byl stabilizován:
+
+První běžné použití:
+
+Kdo ho použil:
+
+Byl u toho autor změny?
+Ano / Ne
+
+Je kontrolní okno dostatečně normální?
+Ano / Ne
+
+Proč:
+```
+
+Pokud odpověď na otázku "byl u toho autor" zní ano, kontrolu berte opatrně. Autor často nechtěně vyplní mezery, které by měly být vyplněné standardem. Stačí drobná věta v chatu a standard najednou působí srozumitelněji, než ve skutečnosti je.
+
+### 2. Zkontrolujte cestu k pravidlu
+
+První otázka není, jestli pravidlo samo o sobě zní dobře. První otázka je, jestli ho člověk našel ve správné chvíli. Standard může být napsaný přesně, ale pokud leží mimo pracovní trasu, bude se používat jen při vzpomínce.
+
+Zeptejte se:
+
+```text
+Kde člověk práci začal?
+Našel standard přirozeně?
+Musel se ptát?
+Použil starý odkaz?
+Vytvořil osobní kopii?
+Přeskočil standard a dohledal ho až zpětně?
+```
+
+Příklad:
+
+```text
+Standard:
+Běžná kontrola formulářů se zapisuje jednou větou do provozní karty.
+
+První použití:
+Člověk otevřel měsíční úkol, ale odkaz stále vedl do staré tabulky. Provozní kartu našel až přes vyhledávání.
+
+Závěr:
+Pravidlo může být správné, ale cesta k němu není stabilní. Oprava patří do měsíčního úkolu, ne do textu pravidla.
+```
+
+Tady je důležité nesvádět problém automaticky na člověka. Když někdo použije starou trasu, často to znamená, že stará trasa ještě žije. Systém ho k ní navedl. A systém se dá opravit jednodušeji než lidská paměť.
+
+### 3. Porovnejte minimální výstup se skutečností
+
+Každý dobrý standard říká, jaký výstup stačí. Kontrola má zjistit, zda se tento minimální výstup opravdu drží. Pokud standard říká "jedna stavová věta" a v praxi vzniknou tři screenshoty, export a komentář v chatu, standard ještě nevyhrál.
+
+Porovnávací karta:
+
+```text
+Minimální výstup podle standardu:
+
+Skutečný výstup:
+
+Co vzniklo navíc:
+
+Proč to vzniklo:
+nejistota / starý zvyk / chybějící důkaz / zákaznický požadavek / incident / nejasné pravidlo / jiné
+
+Bylo navíc užitečné?
+Ano / Ne
+
+Má se výjimka propsat do standardu?
+Ano / Ne
+```
+
+Příklad:
+
+```text
+Minimální výstup podle standardu:
+Jedna stavová věta v provozní kartě.
+
+Skutečný výstup:
+Jedna stavová věta a screenshot potvrzující úspěšné odeslání formuláře.
+
+Co vzniklo navíc:
+Screenshot běžného stavu.
+
+Proč:
+Starý zvyk a obava, že bez obrázku nebude kontrola dost průkazná.
+
+Bylo navíc užitečné?
+Ne.
+
+Má se výjimka propsat do standardu?
+Ne. Stačí připomenout hranici: screenshot jen při chybě, incidentu nebo eskalaci.
+```
+
+Kontrola není hon na chyby. Je to hledání tření. Když lidé vyrábějí víc důkazů, než je potřeba, často chrání sami sebe před nejasným očekáváním. Standard má očekávání zmenšit, ne jen přidat další formulaci.
+
+### 4. Hledejte návrat starých tras
+
+Stará trasa se často vrátí tiše. Někdo použije starou záložku, někdo najde starý dokument přes vyhledávání, někdo zkopíruje starou tabulku, protože "tam to bylo přehlednější". Pokud se to stane jednou, je to signál. Pokud se to stane dvakrát, standard má díru.
+
+Kontrola starých tras:
+
+- Existuje starý dokument, který pořád vypadá jako aktuální?
+- Vedou interní odkazy na původní místo?
+- Zůstala v chatu připnutá stará instrukce?
+- Má někdo osobní kopii checklistu?
+- Objevily se nové výstupy ve starém formátu?
+- Musel někdo ručně vysvětlovat, že se používá nový standard?
+
+Rozhodnutí:
+
+```text
+Smazat:
+starý materiál nemá auditní ani pracovní hodnotu.
+
+Přesměrovat:
+staré místo má návštěvnost nebo odkazy a musí vést na nový domov.
+
+Označit archiv:
+materiál má historickou hodnotu, ale nesmí vypadat jako živý návod.
+
+Sloučit:
+staré místo obsahuje část, která v novém standardu opravdu chybí.
+```
+
+Privacy-first kontrola je tady velmi konkrétní: stará trasa často znamená stará data. Pokud starý screenshot, export nebo tabulka už neslouží žádnému rozhodnutí, pryč s tím. Ne proto, že mazání je dramatické, ale protože nepotřebná data jsou provozní závazek.
+
+### 5. Změřte cenu standardu jednou krátkou scorecardou
+
+Standard má práci zmenšit nebo zpřesnit. Pokud ji prodražil, je potřeba to vidět brzy. Nepotřebujete přesné časové studie. Stačí krátká scorecard po prvním nebo druhém použití.
+
+Scorecard:
+
+```text
+Nalezení pravidla:
+0 = bez hledání
+1 = drobné hledání
+2 = dotaz nebo ruční navigace
+
+Dokončení práce:
+0 = plynule
+1 = drobná nejistota
+2 = zaseknutí nebo návrat ke starému postupu
+
+Velikost výstupu:
+0 = minimální výstup
+1 = drobnost navíc
+2 = výrazné bobtnání
+
+Datová stopa:
+0 = podle standardu
+1 = malé dočasné navýšení
+2 = nové zbytečné artefakty
+
+Závislost na autorovi:
+0 = žádná
+1 = drobný dotaz
+2 = autor musel práci vést
+```
+
+Vyhodnocení:
+
+```text
+0 až 2 body:
+Standard drží.
+
+3 až 5 bodů:
+Standard drží s třením, stačí malá úprava nejbližšího pracovního místa.
+
+6 a více bodů:
+Standard není stabilní. Vraťte se k cestě, pravidlu nebo starým trasám.
+```
+
+Scorecard není KPI. Je to rychlý způsob, jak přestat diskutovat dojmy a podívat se na cenu použití. Když skóre roste, standard nejspíš není tak obyčejný, jak měl být.
+
+### 6. Rozhodněte jedním stavem
+
+Po kontrole vyberte jeden stav. Neotevírejte pět souběžných zlepšení. Standard po stabilizaci potřebuje malé přesné zásahy, jinak se z kontroly stane další nekonečná smyčka.
+
+Stavy:
+
+```text
+Ponechat:
+standard funguje, není potřeba zásah.
+
+Upravit cestu:
+pravidlo je správné, ale lidé ho nenajdou ve správném místě.
+
+Zpřesnit pravidlo:
+lidé ho najdou, ale text neříká dost jasně, co dělat nebo nedělat.
+
+Uklidit starou trasu:
+standard funguje, ale staré odkazy, kopie nebo artefakty táhnou práci zpět.
+
+Vrátit k přepracování:
+standard nefunguje ani po malé opravě cesty, pravidla nebo starých tras.
+```
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Upravit cestu.
+
+Proč:
+Pravidlo je srozumitelné a výstup byl minimální, ale první člověk se k němu dostal přes starou tabulku.
+
+Jedna další akce:
+Nahradit odkaz v měsíčním úkolu a označit starou tabulku jako archiv.
+
+Co se nedělá:
+Nepřepisuje se celé pravidlo a nezakládá se nový report dodržování standardu.
+```
+
+Dobré rozhodnutí obsahuje i to, co se nedělá. Bez této hranice tým snadno začne opravovat všechno, co uvidí. A pak se z kontroly standardu stane úklid sklepa, ve kterém se po třech hodinách najde vánoční krabice, ale původní problém pořád stojí u dveří.
+
+### Kontrolní karta provozního standardu
+
+```text
+Standard:
+
+Kanonický domov:
+
+Kontrolní okno:
+
+Použil standard někdo bez autora změny?
+Ano / Ne
+
+Cesta k pravidlu:
+
+Minimální výstup podle standardu:
+
+Skutečný výstup:
+
+Co vzniklo navíc:
+
+Staré trasy nalezené při kontrole:
+
+Privacy-first dopad:
+
+Scorecard:
+Nalezení pravidla:
+Dokončení práce:
+Velikost výstupu:
+Datová stopa:
+Závislost na autorovi:
+Celkem:
+
+Stav:
+Ponechat / Upravit cestu / Zpřesnit pravidlo / Uklidit starou trasu / Vrátit k přepracování
+
+Jedna další akce:
+
+Co se nedělá:
+
+Kdy se znovu podíváme:
+```
+
+### Příklad vyplněné karty
+
+```text
+Standard:
+Běžná kontrola formulářů se zapisuje jednou stavovou větou do provozní karty. Screenshot jen při incidentu nebo eskalaci.
+
+Kanonický domov:
+Měsíční úkol kontroly webových formulářů.
+
+Kontrolní okno:
+První měsíční kontrola po stabilizaci.
+
+Použil standard někdo bez autora změny?
+Ano.
+
+Cesta k pravidlu:
+Člověk začal v měsíčním úkolu, ale první odkaz vedl do staré tabulky. Provozní kartu našel přes druhý odkaz.
+
+Minimální výstup podle standardu:
+Jedna stavová věta.
+
+Skutečný výstup:
+Jedna stavová věta a žádný screenshot.
+
+Co vzniklo navíc:
+Nic.
+
+Staré trasy nalezené při kontrole:
+Stará tabulka má stále aktivní odkaz v měsíčním úkolu.
+
+Privacy-first dopad:
+Nová datová stopa nevznikla, ale stará tabulka zůstává dostupná jako živě vypadající místo.
+
+Scorecard:
+Nalezení pravidla: 1
+Dokončení práce: 0
+Velikost výstupu: 0
+Datová stopa: 0
+Závislost na autorovi: 0
+Celkem: 1
+
+Stav:
+Uklidit starou trasu.
+
+Jedna další akce:
+Označit starou tabulku jako archiv a v měsíčním úkolu ponechat jen odkaz na provozní kartu.
+
+Co se nedělá:
+Nemění se text pravidla a nezavádí se další kontrola.
+
+Kdy se znovu podíváme:
+Při další měsíční kontrole jen ověřit, zda už nikdo nepoužil starou tabulku.
+```
+
+### Mini workshop na 10 minut
+
+1. Jedna minuta: vybrat první normální použití standardu.
+2. Dvě minuty: projít cestu k pravidlu a najít případné staré trasy.
+3. Dvě minuty: porovnat minimální výstup se skutečným výstupem.
+4. Dvě minuty: vyplnit scorecard ceny použití.
+5. Jedna minuta: pojmenovat privacy-first dopad.
+6. Dvě minuty: vybrat jeden stav a jednu další akci.
+
+Výstup workshopu:
+
+```text
+Jedna kontrolní karta, jeden stav a jedna další akce bez nové administrativy.
+```
+
+Když workshop začne řešit celý systém dokumentace, vraťte ho zpět k prvnímu použití. Kontrola standardu není portfoliová revize. Je to krátký test, zda jedna pracovní věta na správném místě opravdu ušetřila práci.
+
+### Checklist kapitoly
+
+- Vybrali jste skutečné běžné použití, ne autorskou kontrolu po napsání?
+- Použil standard někdo bez ručního vedení autora změny?
+- Ověřili jste, kde člověk práci začal?
+- Našel standard přirozeně v kanonickém domově?
+- Nevedly odkazy, záložky nebo vyhledávání zpět do staré trasy?
+- Porovnali jste minimální výstup se skutečným výstupem?
+- Vznikly screenshoty, exporty, kopie nebo komentáře navíc?
+- Umíte říct, proč vznikly a jestli měly hodnotu?
+- Uklidili jste staré artefakty, které už neslouží rozhodnutí?
+- Vyplnili jste krátkou scorecard ceny použití?
+- Vybrali jste jeden stav a jednu další akci?
+- Je jasné, co se kvůli kontrole nedělá?
+- Zůstala datová stopa stejná nebo menší?
+
+Provozní standard po stabilizaci drží tehdy, když se podle něj dá pracovat bez autora, bez obcházek a bez bobtnání důkazů. Pokud kontrola ukáže malé tření, opravte nejbližší pracovní místo. Pokud ukáže návrat starého systému, ukliďte starou trasu. A pokud ukáže, že standard stojí jen na dobrém úmyslu, vraťte ho k přepracování. Lepší malá oprava teď než velká dokumentační archeologie za půl roku.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JJ o kontrolu provozního standardu po stabilizaci systémového zlepšení: výběr běžného kontrolního okna, cesta k pravidlu, porovnání minimálního a skutečného výstupu, hledání starých tras, scorecard ceny použití, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JI o stabilizaci potvrzeného systémového zlepšení do provozního standardu: vstupní brána pouze pro stav Potvrdit, kanonický domov, stabilní pravidlo, odstranění starých tras, lehký kontrolní signál, krátké předání, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JH o ověření systémového zlepšení po prvním použití: výběr normálního použití, návrat ke zlepšovací větě, cesta k pravidlu, porovnání výstupů, kontrola náhradního nepořádku, privacy-first dopad, rozhodnutí stavu, úklid ověřovací stopy, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JG o převodu portfoliového vzoru do jednoho systémového zlepšení: výběr jednoho vzoru, oddělení od starých příběhů, nalezení pracovního místa, zlepšovací věta, nejmenší zásah, privacy-first kontrola, ověření při normálním použití, karta, příklad, mini workshop a checklist.
