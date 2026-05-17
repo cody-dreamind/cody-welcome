@@ -76131,8 +76131,332 @@ Pokud workshop potřebuje víc než patnáct minut, pravděpodobně neřešíte 
 
 Kontrola běžného rytmu je úspěšná, když po ní systém není větší než před ní. Buď pravidlo necháte být, uklidíte nejbližší starou stopu, zpřesníte jednu větu, nebo vrátíte problém do malé úpravy. Nic víc. Dlouhodobá spolehlivost často nestojí na velkých reformách, ale na tom, že se malé opravy po čase zkontrolují a zůstanou malé.
 
+## Příloha JA: Převod kontroly běžného rytmu do jedné malé opravy
+
+Příloha IZ končí rozhodnutím po kontrole běžného rytmu: ponechat, uklidit okolí, zpřesnit pravidlo, nebo vrátit do úpravy. Tahle příloha řeší nejběžnější pokračování: kontrola našla drobné tření, ale ne důvod předělávat celý systém.
+
+Otázka zní:
+
+```text
+Jak z nálezu po kontrole běžného rytmu udělat jednu malou opravu, která pomůže příštímu použití a nerozšíří administrativu?
+```
+
+Malá oprava není nová metodika. Je to přesný zásah do nejbližšího pracovního místa: přepsat nejasnou větu, odstranit starý odkaz, přesunout pravidlo blíž k úkolu, zkrátit výstup, doplnit stop pravidlo, nebo uklidit zbytečný artefakt. Když je oprava větší než problém, systém se tváří zodpovědně, ale ve skutečnosti jen pěstuje další vrstvu práce.
+
+### 1. Vezměte poslední rozhodovací větu
+
+Nezačínejte znovu debatou, co všechno by se dalo zlepšit. Začněte poslední rozhodovací větou z kontroly běžného rytmu.
+
+```text
+Rozhodnutí z kontroly:
+
+Nález:
+
+Proč vadí:
+
+Co má být jiné při příštím použití:
+```
+
+Příklad:
+
+```text
+Rozhodnutí z kontroly:
+Uklidit okolí.
+
+Nález:
+Šablona měsíčního úkolu pořád obsahuje starý odkaz na tabulku.
+
+Proč vadí:
+Vytváří paralelní cestu a láká k návratu ke starému záznamu.
+
+Co má být jiné při příštím použití:
+Člověk začne v provozní kartě formulářů a zapíše jen stavovou větu.
+```
+
+Pokud neumíte jednou větou říct, co má být jiné při příštím použití, ještě nemáte opravu. Máte pocit. Pocit si můžete nechat na kávu, oprava potřebuje pracovní tvar.
+
+### 2. Vyberte nejbližší pracovní místo
+
+Malá oprava má jít tam, kde člověk skutečně pracuje. Ne do odděleného dokumentu, který si někdo možná přečte, až se planety srovnají a kalendář se slituje.
+
+Možná pracovní místa:
+
+- šablona opakovaného úkolu,
+- provozní karta,
+- checklist před vydáním,
+- onboardingový krok,
+- supportní makro,
+- formulářová poznámka,
+- interní rozcestník,
+- changelog pravidla,
+- kanonická stránka playbooku.
+
+Rozlišujte tři typy opravy:
+
+```text
+Textová:
+zpřesnit nebo zkrátit formulaci.
+
+Polohová:
+přesunout pravidlo blíž k místu práce.
+
+Úklidová:
+odstranit starý odkaz, duplicitní šablonu, screenshot nebo export.
+```
+
+Příklad:
+
+```text
+Nález:
+Starý odkaz zůstal v měsíčním úkolu.
+
+Typ opravy:
+Úklidová.
+
+Pracovní místo:
+Šablona měsíčního úkolu.
+
+Nejmenší zásah:
+Smazat starý odkaz a místo něj ponechat odkaz na provozní kartu formulářů.
+```
+
+Tím se oprava dostane do cesty příštímu použití. Není potřeba posílat velké oznámení, vytvářet nový workshop ani dokazovat týmu, že odkaz už opravdu nemá existovat. Smažte ho tam, kde škodí.
+
+### 3. Napište opravnou větu
+
+Opravná věta chrání rozsah. Má říct, co přesně se mění a co se nemění.
+
+Šablona:
+
+```text
+Upravíme [pracovní místo] tak, aby [příští použití dopadlo jinak].
+Neměníme [část pravidla/procesu], protože [důvod].
+```
+
+Příklady:
+
+```text
+Upravíme šablonu měsíčního úkolu tak, aby vedla jen do provozní karty formulářů.
+Neměníme samotné pravidlo kontroly, protože poslední průchody potvrdily, že minimální stavová věta stačí.
+```
+
+```text
+Upravíme formulaci pravidla tak, aby screenshot vznikal jen při incidentu, eskalaci nebo právním důvodu.
+Neměníme měsíční rytmus kontroly, protože problém byl v nejasné větě, ne v termínu.
+```
+
+```text
+Přesuneme odkaz na privacy-first kontrolu z konce playbooku do úvodního checklistu.
+Neměníme obsah kontroly, protože lidé ji chápou, jen ji objevují příliš pozdě.
+```
+
+Dobrá opravná věta je nudná. To je kompliment. Nudná věta se dá provést, ověřit a zapsat do logu. Velká inspirativní věta se často jen dobře cítí v dokumentu.
+
+### 4. Držte privacy-first hranici opravy
+
+I malá oprava může zhoršit datovou stopu. Typická past: tým chce dokázat, že oprava funguje, a začne sbírat další screenshoty, exporty nebo osobní poznámky.
+
+Před úpravou si řekněte:
+
+```text
+Potřebujeme pro opravu nová osobní nebo zákaznická data?
+
+Vznikne kopie existujících dat?
+
+Stačí anonymizovaný příklad nebo obecná stavová věta?
+
+Je potřeba ponechat důkaz po opravě, nebo stačí changelog?
+
+Kde se smaže stará stopa?
+```
+
+Příklad privacy-first opravy:
+
+```text
+Místo screenshotu staré tabulky se do changelogu zapíše:
+"Ze šablony měsíčního úkolu odstraněn starý odkaz na tabulku; kanonická cesta vede do provozní karty formulářů."
+```
+
+To stačí. Nepotřebujete archivovat důkaz, že starý odkaz opravdu existoval, pokud nejde o incident, spor nebo právní důvod. Většina provozních oprav nepotřebuje památník. Potřebuje být hotová.
+
+### 5. Proveďte opravu v jedné dávce
+
+Malá oprava má mít jasný začátek a konec. Pokud se začne větvit, zastavte ji a vraťte se k rozhodovací větě.
+
+Jedna dávka může obsahovat:
+
+1. změnu pracovního místa,
+2. odstranění jedné staré stopy,
+3. krátkou changelog větu,
+4. nastavení ověření při příštím normálním použití.
+
+Neměla by obsahovat:
+
+- nový reporting,
+- nové role,
+- plošné přejmenování,
+- revizi celé metodiky,
+- sběr dalších dat jen pro pocit jistoty.
+
+Příklad provedení:
+
+```text
+Změna:
+V šabloně měsíčního úkolu smazán starý odkaz na tabulku a ponechán odkaz na provozní kartu.
+
+Úklid:
+Starý odkaz odstraněn z aktivní šablony. Historická tabulka zůstává archivovaná mimo běžnou trasu.
+
+Changelog:
+Měsíční kontrola formulářů nově vede jen do provozní karty; starý odkaz z aktivní šablony byl odstraněn.
+
+Ověření:
+Při příští měsíční kontrole se zkontroluje, jestli člověk použil provozní kartu bez návratu ke staré tabulce.
+```
+
+To je hotová iterace. Ne fascinující. Jen užitečná. V provozu je to často lepší žánr.
+
+### 6. Ověření nastavte na příští normální použití
+
+Opravu neověřujte umělou poradou hned po změně. Pokud nejde o rizikovou věc, počkejte na příští přirozené použití. Tam se ukáže, jestli oprava opravdu pomohla.
+
+Ověřovací otázky:
+
+```text
+Našel člověk správné pracovní místo bez doplňujícího vysvětlování?
+
+Použil nový nebo upravený text?
+
+Nevrátil se ke staré cestě?
+
+Vznikl minimální výstup?
+
+Nevznikla nová zbytečná datová stopa?
+
+Je potřeba další oprava, nebo oprava stačí?
+```
+
+Možné stavy po ověření:
+
+```text
+Stačí:
+oprava funguje, další práce není potřeba.
+
+Ještě zpřesnit:
+oprava pomohla, ale jedna věta nebo odkaz pořád drhne.
+
+Vrátit do kontroly:
+oprava neřeší příčinu, problém je širší než původní nález.
+```
+
+Nejlepší výsledek je `Stačí`. Znamená to, že jste nevyrobili další systém řízení systému. Administrativa zůstala malá, což je přesně pointa.
+
+### Karta malé opravy
+
+```text
+Rozhodnutí z kontroly:
+
+Nález:
+
+Co má být jiné při příštím použití:
+
+Typ opravy:
+Textová / Polohová / Úklidová
+
+Pracovní místo:
+
+Opravná věta:
+
+Co se nemění:
+
+Privacy-first hranice:
+
+Provedená změna:
+
+Odstraněná stará stopa:
+
+Changelog věta:
+
+Ověření při příštím použití:
+
+Stav po ověření:
+Stačí / Ještě zpřesnit / Vrátit do kontroly
+```
+
+### Příklad vyplněné karty
+
+```text
+Rozhodnutí z kontroly:
+Uklidit okolí.
+
+Nález:
+Šablona měsíčního úkolu obsahuje starý odkaz na tabulku.
+
+Co má být jiné při příštím použití:
+Kontrola začne v provozní kartě formulářů a skončí jednou stavovou větou.
+
+Typ opravy:
+Úklidová.
+
+Pracovní místo:
+Šablona měsíčního úkolu.
+
+Opravná věta:
+Upravíme šablonu měsíčního úkolu tak, aby vedla jen do provozní karty formulářů.
+Neměníme pravidlo kontroly, protože minimální stavová věta v posledních průchodech stačila.
+
+Co se nemění:
+Měsíční rytmus, vlastník kontroly, provozní karta.
+
+Privacy-first hranice:
+Nevzniká screenshot ani export staré tabulky; změna se doloží jen changelog větou.
+
+Provedená změna:
+Starý odkaz smazán, ponechán odkaz na provozní kartu.
+
+Odstraněná stará stopa:
+Starý odkaz v aktivní šabloně.
+
+Changelog věta:
+Měsíční kontrola formulářů nově vede jen do provozní karty; starý odkaz z aktivní šablony byl odstraněn.
+
+Ověření při příštím použití:
+Při další měsíční kontrole se ověří, že nevznikla kopie staré tabulky ani screenshot běžného stavu.
+
+Stav po ověření:
+Čeká na příští použití.
+```
+
+### Mini workshop na 10 minut
+
+1. Dvě minuty: přečíst rozhodovací větu z kontroly.
+2. Jedna minuta: říct, co má být jiné při příštím použití.
+3. Jedna minuta: vybrat typ opravy.
+4. Dvě minuty: najít nejbližší pracovní místo.
+5. Dvě minuty: napsat opravnou větu a privacy-first hranici.
+6. Jedna minuta: určit changelog větu.
+7. Jedna minuta: domluvit ověření při příštím normálním použití.
+
+Když workshop přesáhne deset minut, pravděpodobně do něj leze širší problém. Zapište ho zvlášť a malou opravu nechte malou.
+
+### Checklist kapitoly
+
+- Vychází oprava z poslední rozhodovací věty, ne z nové obecné debaty?
+- Je jasné, co má být jiné při příštím použití?
+- Vybrali jste jedno nejbližší pracovní místo?
+- Víte, jestli jde o textovou, polohovou nebo úklidovou opravu?
+- Má oprava jednu větu, která říká i to, co se nemění?
+- Nevzniká kvůli opravě nový screenshot, export, kopie tabulky nebo osobní evidence?
+- Odstraňuje oprava starou stopu z aktivní pracovní trasy?
+- Je changelog krátký a bez zákaznických nebo osobních detailů?
+- Je ověření napojené na příští normální použití?
+- Má oprava jasný konec?
+
+Malá oprava je dobrá tehdy, když příští člověk udělá správnou věc s menším přemýšlením než předtím. Ne proto, že četl dlouhou vysvětlivku. Protože pracovní cesta ho vede rozumněji, sbírá méně dat a nechává méně starých lákadel po okolí.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JA o převodu kontroly běžného rytmu do jedné malé opravy: rozhodovací věta, výběr pracovního místa, textová/polohová/úklidová oprava, opravná věta, privacy-first hranice, provedení v jedné dávce, ověření při příštím použití, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IZ o kontrole běžného rytmu po stabilizaci udržovací úpravy: výběr normálních průchodů, ověření cesty k pravidlu, porovnání minimálního výstupu se skutečností, hledání návratu staré cesty, praktický scorecard ceny, privacy-first kontrola artefaktů, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IY o stabilizaci potvrzené udržovací úpravy do běžného rytmu: práce jen se stavem Potvrdit, oddělení aktuálního pravidla od ověřovací historie, napojení na existující rytmus, jazyk role, uzavření ověřovacích artefaktů, signál návratu staré cesty, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IX o ověření udržovací úpravy po prvním normálním použití: výběr skutečného použití, cesta k pravidlu, porovnání s udržovací větou, hledání náhradní stopy, rozhodnutí stavu, ověřovací věta, úklid po ověření, karta, příklad, mini workshop a checklist.
