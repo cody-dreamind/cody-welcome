@@ -77453,8 +77453,346 @@ Workshop držte u konkrétní práce. Jakmile debata uteče k tomu, že by se "c
 
 Dobré stabilizované pravidlo po kontrole nepotřebuje pozornost. Zůstane v místě práce, lidé ho najdou, výstup je menší a datová stopa čistší. Pokud se to povedlo, nechte pravidlo žít. Pokud ne, opravte nejbližší místo tření. V obou případech je cílem stejná věc: méně rituálů, víc hotové práce.
 
+## Příloha JE: Uzavření smyčky malé opravy po kontrole pravidla
+
+Příloha JD končí kontrolou běžného pravidla po stabilizaci malé opravy. Pokud kontrola dopadla dobře, další logický krok není další kontrola. Je to uzavření smyčky. Tedy jasné rozhodnutí, že oprava se stala běžnou součástí práce, dočasné podpěry zmizely a tým už nemusí věnovat pozornost samotné změně.
+
+Otázka této přílohy zní:
+
+```text
+Jak uzavřít smyčku malé opravy tak, aby zůstalo platné pravidlo, čistá datová stopa a žádný nový provozní dluh?
+```
+
+Uzavření smyčky je důležitější, než vypadá. Týmy často umí změnu navrhnout, ověřit i zapsat. Méně často umí říct: hotovo, dál už to neřešíme. Bez téhle věty zůstane každá oprava trochu otevřená. Někde visí starý úkol, někdo čeká na další review, někde je dočasná poznámka "ověřit později" a po pár měsících nikdo neví, jestli je to historie, povinnost nebo zapomenutý poplach.
+
+Codyho komentář: spousta firem nemá problém s nedostatkem procesů. Má problém s nedostatkem konců. Každá dobrá změna potřebuje nejen start, ale i čisté zavření dveří. Jinak se z provozu stane chodba plná pootevřených skříní a každý kolem nich chodí s pocitem, že by je měl jednou uklidit. Romantické to není. Únavné ano.
+
+### 1. Vraťte se k poslednímu rozhodnutí z kontroly
+
+Neuzavírejte smyčku podle dojmu, že "už je to asi v pohodě". Vezměte poslední kontrolní kartu z JD a přečtěte její rozhodnutí.
+
+Možné stavy:
+
+```text
+Ponechat:
+pravidlo funguje, výstup je minimální, stará cesta se nevrátila a datová stopa je čistá.
+
+Upravit pracovní místo:
+pravidlo je správné, ale okolí ještě vede špatně.
+
+Zpřesnit pravidlo:
+pravidlo se našlo, ale lidé pořád váhají, co přesně dělat nebo nedělat.
+
+Vrátit do opravy:
+problém je širší a malá oprava nestačila.
+```
+
+Smyčku uzavírejte jen u stavu `Ponechat`. U ostatních stavů smyčku nezavírejte, jen převeďte jeden další krok zpět do odpovídající části: úprava pracovního místa patří do malé opravy, zpřesnění pravidla do stabilizace a širší problém zpět do kontroly nebo backlogu.
+
+Krátký zápis:
+
+```text
+Poslední rozhodnutí:
+
+Důkaz z reálného použití:
+
+Je možné smyčku uzavřít?
+Ano / Ne
+
+Pokud ne, kam se práce vrací:
+```
+
+Příklad:
+
+```text
+Poslední rozhodnutí:
+Ponechat.
+
+Důkaz z reálného použití:
+Člověk našel provozní kartu z měsíčního úkolu, zapsal jednu stavovou větu a nevznikl screenshot běžného stavu.
+
+Je možné smyčku uzavřít?
+Ano.
+
+Pokud ne, kam se práce vrací:
+Nevrací se.
+```
+
+Tohle vypadá skoro směšně krátce. Dobře. Uzavírací záznam nemá vyprávět celý román opravy. Má potvrdit, že existuje důkaz a že už není potřeba další zvláštní pozornost.
+
+### 2. Oddělte živé pravidlo od historie změny
+
+Po uzavření smyčky musí být jasné, co člověk potřebuje pro práci dnes a co je jen historický kontext. Tyhle dvě věci nemají žít ve stejné větě.
+
+Živé pravidlo odpovídá na otázku:
+
+```text
+Co mám udělat při příštím použití?
+```
+
+Historie změny odpovídá na otázku:
+
+```text
+Proč jsme to kdysi upravili?
+```
+
+Příklad špatného živého pravidla:
+
+```text
+Po malé opravě z května, kdy se odstranil starý odkaz na tabulku a ověřilo se první použití, kontrolujte formuláře v provozní kartě.
+```
+
+Příklad lepšího živého pravidla:
+
+```text
+Kontrolu formulářů zapisujte do provozní karty; běžný stav stačí jednou větou.
+```
+
+Historie může zůstat v changelogu:
+
+```text
+2026-05-17: Uzavřena malá oprava formulářové kontroly; stará tabulka už není součástí běžné pracovní trasy.
+```
+
+Tím se pravidlo odlehčí. Člověk v provozu nepotřebuje znát každou zatáčku, kterou změna prošla. Potřebuje vědět, co platí teď.
+
+### 3. Zrušte dočasné opory
+
+Každá oprava si během života vytváří dočasné opory: poznámky, ověřovací úkoly, připomínky, pomocné odkazy, screenshoty, komentáře v chatu, přechodové checklisty. Při uzavření smyčky projděte, co z nich zůstalo.
+
+Tři kategorie stačí:
+
+```text
+Zůstává:
+jen to, co člověk potřebuje pro běžnou práci.
+
+Archivuje se:
+krátký changelog, rozhodovací věta nebo auditní záznam se skutečným účelem.
+
+Maže se:
+dočasné důkazy, kopie, screenshoty, osobní poznámky a pomocné odkazy bez další hodnoty.
+```
+
+Příklad:
+
+```text
+Zůstává:
+Aktuální věta v měsíčním úkolu a odkaz na provozní kartu.
+
+Archivuje se:
+Jedna changelog věta o odstranění staré tabulky z běžné trasy.
+
+Maže se:
+Dočasný ověřovací úkol, screenshot běžného stavu a osobní kopie checklistu.
+```
+
+Privacy-first hodnota je tady praktická: co nemusí existovat, nemažte "někdy". Smažte to při uzavření smyčky. Zbytečná data nestárnou do krásy. Jen čekají, až je někdo omylem použije, přepošle nebo bude muset vysvětlovat, proč je vůbec drží.
+
+### 4. Přepište závěr do provozní věty
+
+Uzavřená smyčka má mít jednu provozní větu. Ne shrnutí na půl stránky. Jednu větu, která se dá vložit do pracovního logu, předat týmu a najít při další revizi.
+
+Šablona:
+
+```text
+Smyčka [čeho] je uzavřená: [živé pravidlo] platí v [kanonický domov], [dočasné opory] jsou odstraněné a další zvláštní kontrola není potřeba.
+```
+
+Příklady:
+
+```text
+Smyčka malé opravy formulářové kontroly je uzavřená: běžný stav se zapisuje jednou větou v provozní kartě, stará tabulka i ověřovací screenshoty jsou mimo pracovní trasu a další zvláštní kontrola není potřeba.
+```
+
+```text
+Smyčka zpřesnění supportního makra je uzavřená: makro nově odkazuje jen na kanonický návod, staré interní poznámky jsou archivované a běžné použití se dál kontroluje jen v pravidelném support review.
+```
+
+```text
+Smyčka úklidu onboardingového checklistu je uzavřená: nová role začíná v aktuálním rozcestníku, dočasná předávací poznámka je smazaná a další ověření se neplánuje.
+```
+
+Dobrá provozní věta obsahuje tři věci: co platí, co zmizelo a proč se nevyrábí další práce. Právě poslední část bývá nejdůležitější. Bez ní někdo za týden přidá "ještě preventivní kontrolu" a malá oprava znovu začne růst.
+
+### 5. Přeneste jen jeden signál do běžného rytmu
+
+Uzavření smyčky neznamená, že si už nikdy ničeho nevšimnete. Znamená, že téma nepotřebuje zvláštní péči. Pokud existuje už běžný rytmus review, přeneste do něj jen jeden lehký signál.
+
+Příklady signálů:
+
+- objevil se znovu starý odkaz,
+- vznikla osobní kopie checklistu,
+- běžný stav se začal dokládat screenshoty,
+- lidé se ptají, která verze pravidla platí,
+- výstup je znovu větší než domluvené minimum.
+
+Zápis do běžného rytmu:
+
+```text
+Při měsíční kontrole formulářů si všimněte jen toho, zda běžný stav zůstává jednou větou v provozní kartě.
+```
+
+To je dost. Nepotřebujete novou metriku, nový report ani novou tabulku "udržitelnosti opravy". Pokud se signál objeví, řešte ho jako běžný nález. Pokud se neobjeví, nechte věc být.
+
+### 6. Zavřete backlog a komunikaci
+
+Poslední praktický krok je úklid okolo práce. V backlogu, úkolech a komunikaci nesmí zůstat nejasné položky typu "ještě sledovat", "ověřit potom" nebo "možná upravit". Buď mají konkrétní další krok, nebo se zavřou.
+
+Projděte:
+
+- původní úkol malé opravy,
+- ověřovací úkol,
+- komentáře s otevřenými otázkami,
+- odkazy v rozcestníku,
+- changelog,
+- případné interní předání.
+
+U každého rozhodněte:
+
+```text
+Zavřít:
+práce je hotová a žádný další krok není potřeba.
+
+Převést:
+vznikl nový nález, který má vlastní kartu a nesouvisí s uzavřením této smyčky.
+
+Smazat:
+dočasný artefakt nemá účel ani retenci.
+```
+
+Příklad:
+
+```text
+Původní úkol:
+Zavřít.
+
+Ověřovací úkol:
+Zavřít s odkazem na provozní větu.
+
+Komentář "možná později přidat report":
+Nepřevádět, protože neexistuje rozhodovací otázka.
+
+Dočasný screenshot:
+Smazat.
+
+Changelog:
+Ponechat jednu uzavírací větu.
+```
+
+Tohle je malý provozní úklid, ale chrání tým před mentálním dluhem. Otevřený úkol bez dalšího kroku je jako šum v hlavě systému. Jednotlivě nevadí. Ve stovkách už ano.
+
+### Uzavírací karta malé opravy
+
+```text
+Uzavíraná smyčka:
+
+Poslední rozhodnutí z kontroly:
+Ponechat / Upravit pracovní místo / Zpřesnit pravidlo / Vrátit do opravy
+
+Důkaz z reálného použití:
+
+Je možné smyčku uzavřít?
+Ano / Ne
+
+Živé pravidlo:
+
+Kanonický domov:
+
+Co zůstává:
+
+Co se archivuje:
+
+Co se maže:
+
+Privacy-first úklid:
+
+Lehký signál do běžného rytmu:
+
+Uzavírací provozní věta:
+
+Backlog a komunikace:
+
+Co se dál nedělá:
+```
+
+### Příklad vyplněné karty
+
+```text
+Uzavíraná smyčka:
+Malá oprava měsíční kontroly formulářů.
+
+Poslední rozhodnutí z kontroly:
+Ponechat.
+
+Důkaz z reálného použití:
+Při první měsíční kontrole po stabilizaci člověk začal v provozní kartě, zapsal jednu stavovou větu a nevytvořil screenshot běžného stavu.
+
+Je možné smyčku uzavřít?
+Ano.
+
+Živé pravidlo:
+Kontrolu formulářů zapisujte do provozní karty; běžný stav stačí jednou větou.
+
+Kanonický domov:
+Opakovaný měsíční úkol kontroly formulářů.
+
+Co zůstává:
+Odkaz na provozní kartu a živá věta v měsíčním úkolu.
+
+Co se archivuje:
+Jedna changelog věta o odstranění staré tabulky z běžné pracovní trasy.
+
+Co se maže:
+Dočasný ověřovací úkol a screenshot běžného stavu.
+
+Privacy-first úklid:
+Nezůstává žádná kopie testovací poptávky ani osobní poznámka s e-mailovou adresou.
+
+Lehký signál do běžného rytmu:
+Při běžném měsíčním review si všimnout jen toho, zda se kontrola nevrací mimo provozní kartu.
+
+Uzavírací provozní věta:
+Smyčka malé opravy formulářové kontroly je uzavřená: běžný stav se zapisuje jednou větou v provozní kartě, stará tabulka i ověřovací screenshoty jsou mimo pracovní trasu a další zvláštní kontrola není potřeba.
+
+Backlog a komunikace:
+Původní i ověřovací úkol zavřené, bez nové backlogové položky.
+
+Co se dál nedělá:
+Nevzniká nový report, nová tabulka ani samostatná kontrola této opravy.
+```
+
+### Mini workshop na 10 minut
+
+1. Jedna minuta: přečíst poslední rozhodnutí z kontroly JD.
+2. Jedna minuta: potvrdit, zda je stav `Ponechat`.
+3. Dvě minuty: oddělit živé pravidlo od historie změny.
+4. Dvě minuty: vybrat, co zůstává, archivuje se a maže.
+5. Jedna minuta: doplnit privacy-first úklid.
+6. Jedna minuta: napsat lehký signál do běžného rytmu.
+7. Jedna minuta: zapsat uzavírací provozní větu.
+8. Jedna minuta: zavřít backlogové a komunikační zbytky.
+
+Pokud se v workshopu objeví nový problém, neřešte ho tady. Zapište ho jako samostatný nález s vlastním důvodem. Uzavření smyčky není tajná zadní vrátka pro další práci. Je to přesně opačný pohyb: vrátit pozornost tam, kde je teď užitečnější.
+
+### Checklist kapitoly
+
+- Vychází uzavření z posledního rozhodnutí z kontroly, ne z pocitu?
+- Uzavíráte jen stav `Ponechat`?
+- Je živé pravidlo oddělené od historie změny?
+- Ví člověk při příštím použití, co přesně platí?
+- Zmizely dočasné ověřovací úkoly, screenshoty, osobní poznámky a staré odkazy?
+- Zůstává jen archivní stopa se skutečným účelem?
+- Je privacy-first úklid hotový, ne jen naplánovaný?
+- Přenesli jste do běžného rytmu maximálně jeden lehký signál?
+- Zavřeli jste původní úkoly a nejasné komentáře?
+- Nevznikl nový report, tabulka nebo samostatná kontrola jen kvůli uzavření?
+- Má smyčka jednu uzavírací provozní větu?
+
+Uzavřená smyčka malé opravy je dobrá tehdy, když po ní zůstane méně věcí než před ní: méně odkazů, méně důkazů, méně otázek, méně otevřených úkolů. Zůstane jen platné pravidlo na správném místě a krátká historie, ke které se dá vrátit, pokud bude potřeba. To je nenápadná, ale velmi praktická forma produktivity.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JE o uzavření smyčky malé opravy po kontrole pravidla: práce jen se stavem Ponechat, oddělení živého pravidla od historie změny, zrušení dočasných opor, provozní věta, lehký signál do běžného rytmu, úklid backlogu a komunikace, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JD o kontrole běžného pravidla po stabilizaci malé opravy: malé kontrolní okno, dohledatelnost pravidla, porovnání minimálního výstupu se skutečností, návrat staré cesty, privacy-first datová stopa, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JC o stabilizaci potvrzené malé opravy do běžného pravidla: práce jen se stavem Potvrdit, kanonický domov, přepis opravy do pracovní věty, zavření přechodových opor, privacy-first úklid, signál návratu staré cesty, krátké předání, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JB o ověření malé opravy po prvním normálním použití: reálné použití místo demo průchodu, tři signály nalezení/dokončení/stopy, rozlišení chyby opravy a okolního systému, ověřovací věta, jedna reakce, privacy-first úklid ověřovací stopy, karta, příklad, mini workshop a checklist.
