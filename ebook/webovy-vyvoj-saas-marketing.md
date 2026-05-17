@@ -78790,8 +78790,353 @@ Pokud z workshopu vylezou tři úkoly, zastavte se. Buď jste ověřovali moc š
 
 První použití systémového zlepšení je malý, ale poctivý test. Když změna funguje bez autora, zmenší práci a nepřidá datovou stopu, může zůstat v provozu. Když ne, opravte nejbližší pracovní místo. Žádné velké drama, žádný nový proces s fanfárami. Jen ověřit, rozhodnout a uklidit po sobě.
 
+## Příloha JI: Stabilizace potvrzeného systémového zlepšení do provozního standardu
+
+Příloha JH ověřila systémové zlepšení po prvním normálním použití. Pokud výsledek dostal stav `Potvrdit`, další krok není další experiment. Je to stabilizace do provozního standardu: zlepšení se přestane chovat jako projekt a začne se chovat jako běžná součást práce.
+
+Otázka této přílohy zní:
+
+```text
+Jak z potvrzeného systémového zlepšení udělat provozní standard, který lidé najdou, použijí a udrží bez nové administrativy?
+```
+
+Stabilizace je chvíle, kdy tým často zbytečně přidá váhu. Zlepšení fungovalo, takže vznikne chuť založit nový dokument, novou kontrolu, nový status a novou připomínku. Jenže dobrý standard má práci zmenšit. Pokud po stabilizaci vznikne víc míst, víc zápisů a víc povinného vysvětlování, systémové zlepšení se právě nenápadně proměnilo v systémový dluh.
+
+Codyho komentář: provozní standard není památník úspěšné změny. Je to pracovní zkratka. Má být tak nudně použitelný, že ho člověk použije i v pondělí ráno, když káva ještě nevyjednala mír s mozkem.
+
+### 1. Stabilizujte jen potvrzenou změnu
+
+Ne každé ověření patří do standardu. Pokud JH skončila stavem `Upravit`, `Vrátit` nebo `Pozorovat`, nejdřív dokončete tu práci. Standardizovat nejasnou změnu znamená rozšířit nejistotu do více míst. To není škálování. To je distribuovaná mlha.
+
+Vstupní brána:
+
+```text
+Zlepšovací věta:
+
+Výsledek prvního použití:
+
+Stav z JH:
+Potvrdit / Upravit / Vrátit / Pozorovat
+
+Je možné stabilizovat?
+Ano / Ne
+
+Proč:
+```
+
+Příklad:
+
+```text
+Zlepšovací věta:
+Měsíční kontrola formulářů začíná v provozní kartě a běžný stav se zapisuje jednou větou.
+
+Výsledek prvního použití:
+Člověk našel kartu bez vysvětlování, zapsal jednu větu a nevznikl screenshot běžného stavu.
+
+Stav z JH:
+Potvrdit.
+
+Je možné stabilizovat?
+Ano.
+
+Proč:
+Zlepšení zmenšilo výstup i datovou stopu a nevyžadovalo autora změny.
+```
+
+Pokud neumíte jednou větou říct, proč je změna potvrzená, ještě ji nestabilizujte. Standard potřebuje jasné jádro, ne pocit, že "to asi pomohlo".
+
+### 2. Najděte jeden kanonický domov
+
+Standard musí mít jedno místo, kde začíná práce. Ne jedno místo v dokumentaci, druhé v úkolu, třetí v chatu a čtvrté v hlavě člověka, který to celé kdysi zachránil. Kanonický domov je místo, kam člověk přirozeně přijde ve chvíli, kdy má práci udělat.
+
+Možné domovy:
+
+- opakovaný úkol,
+- provozní karta,
+- checklist před publikací,
+- šablona briefu,
+- onboardingový rozcestník,
+- karta nabídky,
+- incidentní runbook,
+- supportní makro,
+- produktový nebo marketingový playbook.
+
+Výběr domova dělejte podle otázky:
+
+```text
+Kde člověk začne příště, když má toto rozhodnutí nebo práci udělat?
+```
+
+Ne podle otázky:
+
+```text
+Kam by se nám to hezky vešlo?
+```
+
+Příklad:
+
+```text
+Špatný domov:
+Samostatný dokument "Historie optimalizace formulářových kontrol".
+
+Lepší domov:
+Měsíční úkol kontroly webových formulářů, protože tam člověk práci skutečně začne.
+```
+
+Samostatný dokument dávejte jen tehdy, když je to skutečný pracovní vstup. Pokud je to jen archivní pocit bezpečí, raději ho nepřidávejte. Archivy mají zvláštní schopnost tvářit se jako pořádek, i když jen přesunuly chaos do složky s hezkým názvem.
+
+### 3. Přepište změnu do stabilního pravidla
+
+Ověřovací věta z JH popisuje, co se stalo. Provozní standard má říkat, co se dělá příště. To jsou dvě různé věci.
+
+Ověřovací jazyk:
+
+```text
+Při prvním použití člověk našel kartu, zapsal jednu větu a nevytvořil screenshot.
+```
+
+Standardní jazyk:
+
+```text
+Běžnou kontrolu formulářů zapisujte jednou stavovou větou do provozní karty. Screenshot přikládejte jen při incidentu, chybě nebo eskalaci.
+```
+
+Dobré pravidlo obsahuje:
+
+- spouštěč: kdy se používá,
+- akci: co člověk udělá,
+- výstup: co má vzniknout,
+- hranici: co se nedělá,
+- privacy-first minimum: jaká data zůstávají a proč.
+
+Šablona:
+
+```text
+Když [pracovní situace], udělejte [akce] v [kanonický domov].
+Výstup stačí jako [minimální výstup].
+Nevytvářejte [zbytečná stopa], pokud nenastane [výjimka].
+```
+
+Příklad:
+
+```text
+Když běží měsíční kontrola formulářů, zapište výsledek do provozní karty.
+Výstup stačí jako jedna stavová věta.
+Nevytvářejte screenshoty běžného stavu, pokud nejde o incident, chybu nebo zákaznickou eskalaci.
+```
+
+Tahle věta je lepší než tři odstavce historie. Člověk z ní pozná, co má udělat, kam to patří a kdy se pravidlo láme.
+
+### 4. Odstraňte staré trasy
+
+Standard nebude stabilní, pokud vedle něj zůstanou staré pohodlné cesty. Lidé obvykle nepoužívají starý postup ze zlé vůle. Použijí ho proto, že je viditelnější, známější nebo byl v jejich záložkách.
+
+Projít je potřeba:
+
+- staré odkazy v rozcestnících,
+- archivní tabulky, které vypadají živě,
+- šablony s původním postupem,
+- připnuté chatové zprávy,
+- osobní kopie checklistů,
+- automatické připomínky,
+- dokumenty, které zmiňují starý výstup,
+- onboardingové materiály.
+
+Rozhodněte u každé staré trasy:
+
+```text
+Smazat:
+nemá další účel a jen vede zpět.
+
+Nahradit:
+má návštěvnost nebo odkazy, proto musí ukazovat na nový domov.
+
+Archivovat:
+má auditní nebo historický účel, ale musí být jasně označená jako archiv.
+```
+
+Příklad:
+
+```text
+Stará tabulka kontrol:
+Archivovat a označit "historie do května 2026, nepoužívat pro nové zápisy".
+
+Odkaz v měsíčním úkolu:
+Nahradit odkazem na provozní kartu.
+
+Screenshot v chatu:
+Smazat, protože neobsahuje incident ani zákaznický důkaz.
+```
+
+Privacy-first princip je tady jednoduchý: stará trasa často znamená stará data. Když už ji nepotřebujete, nenechávejte ji ležet jen proto, že mazání působí méně produktivně než přidávání. Mazání je práce. Jen nemá tak hezký marketing.
+
+### 5. Nastavte nejlehčí kontrolní signál
+
+Stabilizovaný standard nemá dostat vlastní kontrolní aparát, pokud už existuje normální provozní rytmus. Stačí jeden lehký signál, který se kontroluje tam, kde se stejně kontroluje práce.
+
+Příklady lehkých signálů:
+
+- výstup znovu bobtná,
+- lidé se ptají, kde je aktuální pravidlo,
+- vznikají osobní kopie,
+- běžný stav se znovu dokládá screenshoty,
+- nový člověk začne ve staré trase,
+- standard vyžaduje vysvětlování autora.
+
+Zápis do rytmu:
+
+```text
+Při měsíční kontrole formulářů si všimněte, zda běžný stav zůstává jednou větou v provozní kartě a nevznikají screenshoty bez incidentu.
+```
+
+To je dost. Pokud zavedete samostatný report "dodržování standardu formulářových kontrol", gratuluji, právě jste z jedné věty udělali domácí úkol. A domácí úkoly se v provozu množí rychleji než užitečné rozhodování.
+
+### 6. Předejte standard bez přednášky
+
+Předání standardu má být krátké. Cílem není vysvětlit celou historii zlepšení, ale umožnit lidem udělat práci správně příště.
+
+Krátké předání má tři věty:
+
+```text
+Co se mění:
+
+Kde to najdu:
+
+Co už neděláme:
+```
+
+Příklad:
+
+```text
+Co se mění:
+Běžná kontrola formulářů se zapisuje jednou stavovou větou.
+
+Kde to najdu:
+V měsíčním úkolu je odkaz přímo na provozní kartu formulářů.
+
+Co už neděláme:
+Nepřikládáme screenshot běžného stavu, pokud nejde o incident nebo eskalaci.
+```
+
+Předání nedělejte jako dlouhý meeting, pokud změna nezasahuje více rolí nebo rizikové procesy. U malé provozní změny stačí komentář v úkolu, changelog a aktualizované pracovní místo. Standard má žít v práci, ne v záznamu z porady.
+
+### Karta stabilizace systémového zlepšení
+
+```text
+Zlepšovací věta:
+
+Stav z ověření:
+Potvrdit / Upravit / Vrátit / Pozorovat
+
+Důkaz potvrzení:
+
+Kanonický domov:
+
+Stabilní pravidlo:
+
+Minimální výstup:
+
+Co se nedělá:
+
+Privacy-first minimum:
+
+Staré trasy k odstranění:
+
+Staré trasy k přesměrování:
+
+Archivní stopa:
+
+Lehký kontrolní signál:
+
+Krátké předání:
+
+Co nevzniká:
+```
+
+### Příklad vyplněné karty
+
+```text
+Zlepšovací věta:
+Měsíční kontrola formulářů začíná v provozní kartě a běžný stav se zapisuje jednou větou.
+
+Stav z ověření:
+Potvrdit.
+
+Důkaz potvrzení:
+První kontrola po změně proběhla bez autora, bez dotazu a bez screenshotu běžného stavu.
+
+Kanonický domov:
+Měsíční úkol kontroly webových formulářů.
+
+Stabilní pravidlo:
+Když běží měsíční kontrola formulářů, zapište výsledek do provozní karty.
+
+Minimální výstup:
+Jedna stavová věta.
+
+Co se nedělá:
+Nevytváří se screenshot běžného stavu ani kopie checklistu.
+
+Privacy-first minimum:
+Zůstává jen stavová věta; obrazový důkaz vzniká jen při incidentu, chybě nebo eskalaci.
+
+Staré trasy k odstranění:
+Osobní kopie checklistu a připnutý screenshot v chatu.
+
+Staré trasy k přesměrování:
+Odkaz v měsíčním úkolu vede přímo na provozní kartu.
+
+Archivní stopa:
+Jedna changelog věta o ukončení staré tabulky.
+
+Lehký kontrolní signál:
+Při měsíční kontrole si všimnout, zda běžný stav zůstává jednou větou.
+
+Krátké předání:
+Běžnou kontrolu formulářů zapisujeme do provozní karty jednou větou. Screenshot jen při incidentu nebo eskalaci.
+
+Co nevzniká:
+Nevzniká nový report, nová tabulka ani samostatná kontrola standardu.
+```
+
+### Mini workshop na 12 minut
+
+1. Jedna minuta: ověřit, že stav z JH je `Potvrdit`.
+2. Dvě minuty: vybrat kanonický domov podle příštího použití.
+3. Dvě minuty: přepsat zlepšení do stabilního pravidla.
+4. Dvě minuty: vypsat staré trasy a rozhodnout smazat, nahradit nebo archivovat.
+5. Dvě minuty: doplnit privacy-first minimum a výjimky.
+6. Jedna minuta: zvolit lehký kontrolní signál.
+7. Dvě minuty: napsat krátké předání a co nevzniká.
+
+Výstup workshopu:
+
+```text
+Jedno pravidlo v jednom pracovním místě, uklizené staré trasy a žádná nová administrativa.
+```
+
+Jakmile workshop začne navrhovat nový systém měření, vraťte se k otázce: co musí člověk udělat příště? Stabilizace není strategický summit. Je to dotažení potvrzené změny do běžné práce.
+
+### Checklist kapitoly
+
+- Stabilizujete jen zlepšení se stavem `Potvrdit`?
+- Umíte jednou větou popsat důkaz z normálního použití?
+- Má standard jeden kanonický domov podle skutečného začátku práce?
+- Je pravidlo napsané jako instrukce pro příště, ne jako historie změny?
+- Obsahuje pravidlo spouštěč, akci, výstup, hranici a privacy-first minimum?
+- Odstranili jste staré odkazy, osobní kopie a připnuté přechodové poznámky?
+- Jsou archivní materiály jasně označené jako archiv?
+- Nevznikly nové screenshoty, exporty nebo důkazy běžného stavu?
+- Je kontrolní signál součástí existujícího rytmu, ne nový rituál?
+- Dá se standard předat ve třech větách?
+- Je jasné, co se kvůli stabilizaci nedělá?
+- Neudělali jste z malé funkční změny velký dokumentační projekt?
+
+Potvrzené systémové zlepšení je stabilní ve chvíli, kdy se z něj stane obyčejná pracovní věta na správném místě. Lidé ji najdou, výstup je menší, staré trasy nevedou zpět a datová stopa zůstává rozumná. To je dobrý provozní standard: méně slavnostní, více použitelný.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JI o stabilizaci potvrzeného systémového zlepšení do provozního standardu: vstupní brána pouze pro stav Potvrdit, kanonický domov, stabilní pravidlo, odstranění starých tras, lehký kontrolní signál, krátké předání, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JH o ověření systémového zlepšení po prvním použití: výběr normálního použití, návrat ke zlepšovací větě, cesta k pravidlu, porovnání výstupů, kontrola náhradního nepořádku, privacy-first dopad, rozhodnutí stavu, úklid ověřovací stopy, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JG o převodu portfoliového vzoru do jednoho systémového zlepšení: výběr jednoho vzoru, oddělení od starých příběhů, nalezení pracovního místa, zlepšovací věta, nejmenší zásah, privacy-first kontrola, ověření při normálním použití, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JF o převodu uzavřené smyčky do lehkého portfoliového přehledu: vstup jen pro uzavřené smyčky, minimální metadata, portfoliové otázky, třídění podle zmenšení, privacy-first dopad, měsíční hledání vzorů, retenční rytmus, karta, příklad, mini workshop a checklist.
