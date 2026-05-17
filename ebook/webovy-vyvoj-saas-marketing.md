@@ -81041,8 +81041,382 @@ Workshop nesmí skončit novým seznamem přání. Pokud pravidlo drží, zavře
 
 Kontrola běžného pravidla po stabilizaci další akce brání tomu, aby se z potvrzené opravy stal další skrytý proces. Dává pravidlu krátkou zkušební dráhu v normální práci, ověří dohledatelnost, výstup, staré cesty a datovou stopu. Když pravidlo drží, kontrolu zavře. Když nedrží, vrátí se k nejbližší opravě. Žádná sláva, žádná ceremonie, jen provozní hygiena, která šetří čas i data.
 
+## Příloha JO: Převod kontroly běžného pravidla do jedné další úpravy
+
+Kontrola běžného pravidla má hodnotu až ve chvíli, kdy skončí konkrétní změnou nebo vědomým uzavřením. Pokud po kontrole zůstane jen pocit, že "něco by se mělo zlepšit", systém se nezlepšil. Jen jste přidali další vrstvu pozornosti. Tato příloha navazuje na Přílohu JN a pomáhá převést výsledek kontroly do jedné malé úpravy, která má jasný účel, hranici a ověření.
+
+Vstupem je stav pravidla:
+
+```text
+Ponechat / Zpřesnit / Uklidit stopu / Zavřít obchvat / Vrátit do opravy
+```
+
+Výstupem není seznam úkolů. Výstupem je jedna vybraná úprava nebo vědomé uzavření bez úpravy. To je důležité hlavně u dlouhodobých webů, SaaS produktů a marketingových systémů, kde každá drobná procesní poznámka může časem nabobtnat do dalšího standardu, další tabulky a dalšího místa, které nikdo nechce udržovat.
+
+Codyho komentář: nejnebezpečnější věta po kontrole je "ještě bychom mohli". Většinou je pravdivá. A právě proto je nebezpečná. Mohli bychom skoro vždycky. Praktická otázka zní: která jedna úprava skutečně sníží opakované tření, riziko nebo datovou stopu?
+
+### 1. Přeložte stav na typ práce
+
+Každý stav z kontroly má vést k jinému typu reakce. Pokud všechny stavy končí stejným typem úkolu, kontrola byla jen rituál.
+
+Použijte jednoduchý překlad:
+
+```text
+Ponechat:
+Nic nového nevytvářet. Uzavřít samostatné sledování a ponechat pravidlo v běžném rytmu.
+
+Zpřesnit:
+Upravit jednu větu, název, odkaz, popisek nebo pořadí kroků.
+
+Uklidit stopu:
+Smazat, archivovat nebo sloučit jednu zbytečnou kopii dat, screenshotů, exportů nebo poznámek.
+
+Zavřít obchvat:
+Odstranit nebo zneviditelnit jednu starou cestu, která vede mimo kanonické pravidlo.
+
+Vrátit do opravy:
+Nepřidávat další záplatu. Vrátit se k nejbližšímu pracovnímu místu, kde pravidlo selhalo.
+```
+
+Příklad:
+
+```text
+Stav z kontroly:
+Zpřesnit.
+
+Nález:
+Lidé pravidlo najdou, ale název v měsíčním úkolu používá starý termín.
+
+Typ práce:
+Přejmenovat odkaz v měsíčním úkolu a sladit ho s kanonickou kartou.
+```
+
+Jiný příklad:
+
+```text
+Stav z kontroly:
+Uklidit stopu.
+
+Nález:
+Po každé kontrole vzniká screenshot v chatu, i když rozhodnutí je už zapsané v provozní kartě.
+
+Typ práce:
+Zrušit screenshot jako běžný důkaz a ponechat jen stavovou větu v kanonické kartě.
+```
+
+Tento překlad drží reakci při zemi. Neměníte celý proces, když stačí opravit název. Nevymýšlíte nový standard, když stačí odstranit starý odkaz.
+
+### 2. Vyberte nejbližší pracovní místo
+
+Úprava má patřit tam, kde člověk skutečně pracuje. Ne tam, kde se hezky dokumentuje. Pokud se problém objevuje při měsíční kontrole formulářů, opravte měsíční kontrolní kartu nebo úkol. Pokud se objevuje při onboardingu, opravte onboardingový krok. Pokud se objevuje při kontrole analytiky, opravte provozní list nebo dashboardovou poznámku.
+
+Ptejte se:
+
+- Kde člověk poprvé narazil na tření?
+- Kde vznikla zbytečná datová stopa?
+- Kde se otevřela stará nebo náhradní cesta?
+- Kde lze udělat nejmenší změnu s největším dopadem?
+- Které místo je kanonické, ne jen pohodlné?
+
+Příklad slabé reakce:
+
+```text
+Nález:
+Lidé se pletou mezi starým a novým názvem pravidla.
+
+Slabá reakce:
+Poslat zprávu do chatu, ať si dávají pozor.
+```
+
+Silnější reakce:
+
+```text
+Nález:
+Lidé se pletou mezi starým a novým názvem pravidla.
+
+Úprava:
+Přejmenovat odkaz v měsíčním úkolu, archivní dokument označit jako nepoužívaný a v kanonické kartě držet stejný název.
+```
+
+Chat může změnu oznámit, ale nemá ji nést. Pokud pravidlo závisí na tom, že si někdo pamatuje zprávu z chatu, pravidlo není stabilní. Je to jen nápověda hozená do proudu.
+
+### 3. Napište úpravu jako jednu pracovní větu
+
+Než cokoli upravíte, napište jednu větu. Pokud ji neumíte napsat, úprava je nejspíš moc velká, nejasná nebo není skutečně navázaná na kontrolu.
+
+Šablona:
+
+```text
+Protože [konkrétní nález], upravíme [jedno pracovní místo] tak, aby [očekávaný efekt] a ověříme to při [nejbližší normální použití].
+```
+
+Příklad:
+
+```text
+Protože měsíční úkol pořád používá starý název tabulky, přepíšeme odkaz a popisek v měsíčním úkolu tak, aby vedl jen na provozní kartu, a ověříme to při příští měsíční kontrole.
+```
+
+Jiný příklad:
+
+```text
+Protože po kontrole vznikají duplicitní screenshoty v chatu, doplníme do provozní karty větu "běžný stav se nedokládá screenshotem" a při příštím průchodu ověříme, že zůstala jen stavová věta.
+```
+
+Dobrá pracovní věta obsahuje čtyři věci:
+
+- konkrétní nález,
+- jedno místo zásahu,
+- očekávaný efekt,
+- nejbližší ověření.
+
+Když věta obsahuje pět míst zásahu, tři efekty a neurčité "časem ověříme", rozdělte ji. Ne proto, že by tým nezvládl víc práce. Protože jedna malá hotová úprava má větší hodnotu než větší balík, který zůstane rozehraný.
+
+### 4. Omezte rozsah podle stavu
+
+Každý stav má vlastní hranici. Hranice chrání tým před tím, aby se drobné zjištění proměnilo v další projekt.
+
+Praktické hranice:
+
+```text
+Zpřesnit:
+Měňte text, název, odkaz nebo pořadí. Neměňte celý proces.
+
+Uklidit stopu:
+Mažte nebo slučujte artefakty. Nevytvářejte nový report o úklidu.
+
+Zavřít obchvat:
+Zavřete konkrétní starou cestu. Nepřepisujte všechny související dokumenty.
+
+Vrátit do opravy:
+Vraťte se ke kroku, kde selhal předpoklad. Nelepte selhání další poznámkou.
+
+Ponechat:
+Nedělejte úpravu jen proto, že kontrola proběhla.
+```
+
+Příklad pro `Zavřít obchvat`:
+
+```text
+Nález:
+Stará tabulka je pořád ve výsledcích interního indexu.
+
+Hranice úpravy:
+Odstranit starou tabulku z indexu a dát do ní archivní hlavičku.
+
+Co nedělat:
+Nepřepisovat celý index, neměnit retenční pravidla a nevytvářet novou mapu dokumentů.
+```
+
+Rozsah je potřeba hlídat zvlášť u privacy-first témat. Jakmile se objeví datová stopa, tým má tendenci "pro jistotu" přidat evidenci o evidenci. To je přesně opačný směr. Privacy-first úprava má stopu zmenšit, ne ji převyprávět v další vrstvě.
+
+### 5. Proveďte úpravu v jedné dávce
+
+Jedna dávka znamená: změnit kanonické místo, zavřít přímý obchvat, doplnit minimální changelog a skončit. Neznamená to oběhnout celý systém a hledat další potenciální zlepšení.
+
+Malá dávka může vypadat takto:
+
+```text
+1. Přepsat název odkazu v měsíčním úkolu.
+2. Přidat archivní hlavičku do staré tabulky.
+3. Zapsat jednu changelog větu.
+4. Nastavit ověření při příští měsíční kontrole.
+```
+
+To je dost. Pokud během práce narazíte na další problém, zapište ho jako nový podnět, ale nepřibalujte ho automaticky. Každý přibalený problém zvyšuje šanci, že úprava nebude hotová, nebude ověřitelná a nakonec zůstane v mlze.
+
+Changelog věta má být krátká:
+
+```text
+Po kontrole běžného pravidla byl měsíční úkol přesměrován ze staré tabulky na provozní kartu; ověření proběhne při příští měsíční kontrole.
+```
+
+Není potřeba psát román o historii problému. Historie je užitečná jen tehdy, když pomáhá pochopit rozhodnutí. Jinak je to jen sediment.
+
+### 6. Udělejte privacy-first brzdu před dokončením
+
+Než úpravu uzavřete, položte si krátkou brzdu:
+
+```text
+Zmenšuje tato úprava datovou stopu, nebo ji jen přesouvá?
+
+Vzniká nový dokument, screenshot, export, tabulka nebo chatový důkaz?
+
+Je nový artefakt opravdu nutný pro další rozhodnutí?
+
+Má každý ponechaný artefakt účel a retenční konec?
+
+Může místo surových dat zůstat jen rozhodovací věta?
+```
+
+Příklad:
+
+```text
+Špatně:
+Vytvoříme novou tabulku screenshotů, aby bylo vidět, že už screenshoty nechceme.
+
+Dobře:
+Do provozní karty doplníme větu, že běžný stav se nedokládá screenshotem, a smažeme dosavadní pomocné screenshoty bez další hodnoty.
+```
+
+Privacy-first provoz se pozná v malých rozhodnutích. Ne podle toho, že tým jednou vybral evropský hosting, ale podle toho, že každý další proces zbytečně nerozmnožuje data.
+
+### 7. Nastavte nejbližší ověření a stop pravidlo
+
+Každá úprava má mít ověření, ale ověření má být úzké. Nevracejte se ke kompletní kontrole, pokud jste opravili jen název odkazu.
+
+Šablona:
+
+```text
+Ověřit při:
+
+Ověřit pouze:
+
+Úspěch znamená:
+
+Stop pravidlo:
+```
+
+Příklad:
+
+```text
+Ověřit při:
+Příští měsíční kontrole formulářů.
+
+Ověřit pouze:
+Zda člověk začal v provozní kartě a neotevřel starou tabulku.
+
+Úspěch znamená:
+Kontrola začala v provozní kartě a vznikla jen jedna stavová věta.
+
+Stop pravidlo:
+Pokud se to povede jednou při normálním průchodu, samostatné ověření končí.
+```
+
+Stop pravidlo je malé, ale důležité. Bez něj se ověření stane novým dlouhodobým rituálem. Rituály bez rozhodnutí jsou drahé. Občas vypadají profesionálně, což je na nich nejzrádnější.
+
+### Karta jedné další úpravy
+
+```text
+Stav z kontroly:
+Ponechat / Zpřesnit / Uklidit stopu / Zavřít obchvat / Vrátit do opravy
+
+Konkrétní nález:
+
+Typ práce:
+
+Nejbližší pracovní místo:
+
+Jedna pracovní věta:
+Protože ..., upravíme ..., aby ..., a ověříme ...
+
+Hranice rozsahu:
+
+Co se výslovně nedělá:
+
+Privacy-first brzda:
+- Co se maže nebo slučuje:
+- Co zůstává:
+- Co nevzniká:
+- Retenční konec:
+
+Changelog věta:
+
+Ověřit při:
+
+Ověřit pouze:
+
+Úspěch znamená:
+
+Stop pravidlo:
+```
+
+### Příklad vyplněné karty
+
+```text
+Stav z kontroly:
+Zavřít obchvat.
+
+Konkrétní nález:
+Stará tabulka je pořád dohledatelná přes interní index a jeden člověk ji otevřel omylem.
+
+Typ práce:
+Zavřít starou cestu.
+
+Nejbližší pracovní místo:
+Interní index a hlavička staré tabulky.
+
+Jedna pracovní věta:
+Protože stará tabulka zůstává dohledatelná přes interní index, odstraníme ji z indexu a přidáme archivní hlavičku tak, aby běžná kontrola vedla jen do provozní karty, a ověříme to při příští měsíční kontrole.
+
+Hranice rozsahu:
+Jen index a archivní hlavička staré tabulky.
+
+Co se výslovně nedělá:
+Nepřepisuje se celý provozní list, nevytváří se nový report a nesbírají se screenshoty.
+
+Privacy-first brzda:
+- Co se maže nebo slučuje: žádné nové podklady; stará tabulka zůstává jen jako archiv.
+- Co zůstává: provozní karta a archivní hlavička.
+- Co nevzniká: screenshot důkazu, export staré tabulky ani nový kontrolní seznam.
+- Retenční konec: archivní tabulka podle běžného retenčního rytmu.
+
+Changelog věta:
+Po kontrole běžného pravidla byl starý odkaz odstraněn z indexu a stará tabulka označena jako archiv.
+
+Ověřit při:
+Příští měsíční kontrole.
+
+Ověřit pouze:
+Zda kontrola začne v provozní kartě a stará tabulka nezíská nový zápis.
+
+Úspěch znamená:
+Průchod proběhne bez staré tabulky a bez nové datové stopy.
+
+Stop pravidlo:
+Po jednom úspěšném normálním průchodu samostatné ověření končí.
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: přečíst stav z kontroly a konkrétní nález.
+2. Dvě minuty: přeložit stav na typ práce.
+3. Tři minuty: vybrat nejbližší pracovní místo.
+4. Tři minuty: napsat jednu pracovní větu a hranici rozsahu.
+5. Dvě minuty: udělat privacy-first brzdu.
+6. Dvě minuty: nastavit ověření a stop pravidlo.
+7. Jedna minuta: zapsat changelog větu.
+
+Výstup workshopu:
+
+```text
+Jedna malá úprava navázaná na kontrolu, jasné místo zásahu, omezený rozsah, privacy-first brzda, nejbližší ověření a stop pravidlo.
+```
+
+Workshop nesmí skončit větou "ještě se na to podíváme". Buď vyberte jednu úpravu, nebo vědomě uzavřete bez úpravy. Obě možnosti jsou lepší než otevřený pocit, že někde v systému číhá další povinnost.
+
+### Checklist kapitoly
+
+- Máte jasný stav z kontroly běžného pravidla?
+- Přeložili jste stav na odpovídající typ práce?
+- Nevybíráte úpravu jen proto, že kontrola něco našla?
+- Je vybrané nejbližší pracovní místo, kde se tření opravdu objevilo?
+- Umíte úpravu napsat jednou pracovní větou?
+- Obsahuje věta nález, místo zásahu, očekávaný efekt a ověření?
+- Má úprava výslovnou hranici rozsahu?
+- Je jasné, co se tentokrát nedělá?
+- Proběhla privacy-first brzda před dokončením?
+- Maže nebo slučuje úprava zbytečnou stopu, pokud vznikla?
+- Nevzniká nový report, screenshot nebo tabulka jen kvůli důkazu?
+- Má ponechaný artefakt účel a retenční konec?
+- Je ověření úzké a navázané na nejbližší normální použití?
+- Má ověření stop pravidlo?
+- Je zapsaná krátká changelog věta?
+
+Převod kontroly běžného pravidla do jedné další úpravy je ochrana proti dvěma extrémům. První extrém je ignorovat nález, protože je malý. Druhý extrém je proměnit malý nález v nový projekt. Dobrá reakce je mezi tím: jedna přesná úprava, v místě skutečné práce, s minimální datovou stopou a jasným koncem ověření.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JO o převod kontroly běžného pravidla do jedné další úpravy: překlad stavů na typ práce, výběr nejbližšího pracovního místa, pracovní věta, hranice rozsahu, jednorázové provedení, privacy-first brzda, úzké ověření, stop pravidlo, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JN o kontrolu běžného pravidla po stabilizaci další akce: krátké kontrolní okno, samostatná dohledatelnost pravidla, porovnání minimálního výstupu s realitou, hledání obchvatů, privacy-first kontrola skutečné stopy, rozhodnutí stavu pravidla, uzavření nebo zúžení sledování, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JM o stabilizaci potvrzené další akce do běžného pravidla: vstup přes ověřený stav, výběr kanonického domova pravidla, přepis akce bez historického balastu, zavření staré cesty, privacy-first úklid datové stopy, předávací věta, lehký signál návratu staré cesty, stop pravidlo, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JL o ověření další akce po prvním normálním použití: výběr reálného použití, návrat k akční větě, signály nalezení/dokončení/stopy, rozlišení výsledku akce od okolního problému, privacy-first kontrola skutečné stopy, rozhodovací stavy, karta, příklad, mini workshop a checklist.
