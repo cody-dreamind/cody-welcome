@@ -75339,8 +75339,379 @@ Pokud workshop začne řešit širší proces, zastavte ho. Širší nález mů�
 
 Ověřená udržovací úprava nemá být slavnostní projekt. Má jen potvrdit, že malé zlepšení obstálo v normální práci. Když obstálo, nechte ho být. Když ne, opravte nejbližší zlom. Dlouhodobě zdravý systém nevzniká tím, že se každá drobnost nafoukne do procesu. Vzniká tím, že malé věci dostanou jasný domov, ověří se v realitě a po ověření po sobě uklidí.
 
+## Příloha IY: Stabilizace potvrzené udržovací úpravy do běžného rytmu
+
+Ověření z Přílohy IX může dopadnout dobře: úprava pomohla, původní tření zmizelo a nevznikla nová datová stopa. To je příjemný okamžik, ale ještě není důvod přidávat další kontrolní vrstvu. Potvrzená udržovací úprava má projít opačným pohybem: z ověřovacího režimu se má stát nenápadná součást běžného rytmu.
+
+Tahle příloha řeší otázku:
+
+```text
+Jak potvrzenou udržovací úpravu uložit do běžného rytmu tak, aby lidem pomáhala, ale sama se nestala novým procesním nákladem?
+```
+
+Stabilizace není oslava hotové práce. Je to úklid po dobrém výsledku. Z ověřovací karty vezmete jen aktuální pravidlo, pracovní místo, minimální výstup, datovou hranici a nejbližší rytmus, ve kterém se má pravidlo přirozeně používat. Všechno ostatní je historie. Historie může být dohledatelná, ale nemá stát mezi člověkem a rozhodnutím.
+
+### 1. Pracujte jen s potvrzenou úpravou
+
+Do stabilizace patří jen úprava se stavem `Potvrdit`. Pokud poslední ověření skončilo stavem `Doladit`, nejdřív udělejte jedno doladění a ověřte ho. Pokud skončilo stavem `Vrátit do korekce`, nejste ve stabilizaci, ale zpět u problému. Pokud šlo o incidentní nebo provozní režim, patří výsledek do samostatného provozního procesu.
+
+Krátký vstup:
+
+```text
+Udržovací úprava:
+
+Ověřovací věta:
+
+Stav:
+Potvrdit
+
+Co se při ověření osvědčilo:
+
+Co nesmí vznikat znovu:
+
+Kde práce normálně začíná:
+```
+
+Příklad:
+
+```text
+Udržovací úprava:
+Upřesnění běžné kontroly formulářové datové stopy.
+
+Ověřovací věta:
+Při první měsíční kontrole formulářů vznikla jedna stavová věta bez screenshotu a bez návratu ke staré tabulce.
+
+Stav:
+Potvrdit
+
+Co se při ověření osvědčilo:
+Pracovní věta "Přílohu přidej jen při incidentu nebo eskalaci".
+
+Co nesmí vznikat znovu:
+Screenshot běžné kontroly, export formulářových záznamů nebo stará kontrolní tabulka.
+
+Kde práce normálně začíná:
+Měsíční úkol pro kontrolu formulářů.
+```
+
+Tohle je dostatečný základ. Nepřepisujte do stabilizace celý průběh ověření. Člověk, který pravidlo použije za měsíc, nepotřebuje znát drama jeho vzniku. Potřebuje vědět, co má udělat teď.
+
+### 2. Oddělte aktuální pravidlo od ověřovací historie
+
+Ověřovací karta je pracovní důkaz. Běžné pravidlo je pracovní návod. Když je smícháte, vznikne dokument, který je sice poctivý, ale nepoužitelný. Lidé pak čtou historii místo instrukce a často si z ní vytáhnou špatný detail.
+
+Rozdělte obsah na tři části:
+
+```text
+Aktuální pravidlo:
+co má člověk udělat při běžné práci.
+
+Důvod pravidla:
+proč pravidlo existuje, ideálně jednou větou.
+
+Historie ověření:
+kam se dá sáhnout, pokud někdo potřebuje dohledat rozhodnutí.
+```
+
+Příklad stabilizovaného pravidla:
+
+```text
+Běžná kontrola formulářů:
+Zapiš jednu stavovou větu. Přílohu, screenshot nebo export přidej jen při incidentu, eskalaci nebo právním důvodu.
+
+Důvod:
+Běžná kontrola má potvrdit stav, ne vytvářet nové kopie osobních dat.
+
+Historie:
+Ověřeno při měsíční kontrole 2026-05; původní screenshoty běžných kontrol byly odstraněny.
+```
+
+Historie je krátká a neobsahuje zákaznické detaily. Pokud potřebujete delší záznam kvůli internímu auditu, držte ho mimo pracovní návod a nastavte mu retenci.
+
+Codyho komentář: stabilizované pravidlo má být trochu nudné. Když se čte jako detektivka, někdo ho dřív nebo později přestane číst celé. A potom se znovu objeví screenshot "pro jistotu". Výborně, máme napínavý sequel, který nikdo nechtěl.
+
+### 3. Vyberte běžný rytmus, ne novou připomínku
+
+Potvrzenou úpravu nepřidávejte do dalšího samostatného kalendáře. Připojte ji k rytmu, který už existuje:
+
+```text
+měsíční kontrola formulářů,
+
+release checklist,
+
+supportní týdenní review,
+
+obsahová revize,
+
+onboarding role,
+
+kvartální dodavatelská kontrola,
+
+pravidelný audit datové stopy.
+```
+
+Dobrá stabilizace odpoví na otázky:
+
+```text
+Kdy se pravidlo přirozeně použije?
+
+Kde člověk začne práci?
+
+Jaké jedno místo má pravidlo nést?
+
+Jaký minimální výstup zůstává?
+
+Jak poznáme, že se vrací stará cesta?
+```
+
+Příklad:
+
+```text
+Rytmus:
+Měsíční kontrola formulářů.
+
+Start práce:
+Měsíční úkol v projektovém boardu.
+
+Domov pravidla:
+Provozní karta formulářů.
+
+Minimální výstup:
+Jedna stavová věta.
+
+Signál návratu staré cesty:
+Vznikne screenshot, export, kopie tabulky nebo komentář "pro jistotu".
+```
+
+Pokud musíte kvůli malé udržovací úpravě zakládat nový pravidelný meeting, něco je špatně. Buď je problém větší než údržba, nebo stabilizujete špatné místo.
+
+### 4. Přepište pravidlo do jazyka role
+
+Stabilizované pravidlo nesmí znít jako zápis z interní revize. Má mluvit jazykem člověka, který ho použije ve své roli.
+
+Přepis:
+
+```text
+Revizní jazyk:
+Při běžné kontrole se nesmí vytvářet nadbytečná obrazová dokumentace, pokud není incidentní nebo eskalační důvod.
+
+Jazyk role:
+Zapiš stav jednou větou. Screenshot přidej jen tehdy, když řešíš incident nebo eskalaci.
+```
+
+Další příklady:
+
+```text
+Revizní jazyk:
+Starý artefakt nesmí zůstat v aktivní pracovní trase.
+
+Jazyk role:
+Používej odkaz v měsíčním úkolu. Starou tabulku neotvírej pro běžnou kontrolu.
+```
+
+```text
+Revizní jazyk:
+Minimální výstup má zabránit vzniku duplicitního záznamu.
+
+Jazyk role:
+Nevytvářej novou tabulku. Výsledek dopiš do existující stavové věty.
+```
+
+Jazyk role má být krátký, konkrétní a bez právnického divadla. Právní přesnost patří do policy a smluv. Pracovní pravidlo má člověku pomoct udělat správnou věc ve správné minutě.
+
+### 5. Zavřete ověřovací artefakty
+
+Po stabilizaci projděte artefakty, které vznikly během úpravy a ověření. Každý musí dostat stav.
+
+```text
+Ověřovací karta:
+zkrátit na rozhodnutí nebo přesunout do archivu rozhodnutí.
+
+Dočasné poznámky:
+smazat, pokud nepřidávají další rozhodnutí.
+
+Screenshoty a exporty:
+ponechat jen při incidentním, právním nebo provozním důvodu.
+
+Staré odkazy:
+odstranit z aktivních úkolů nebo přesměrovat na kanonické místo.
+
+Osobní checklisty:
+sloučit do pravidla, označit jako nahrazené nebo smazat.
+
+Changelog:
+doplnit jednu větu bez citlivých detailů.
+```
+
+Privacy-first kontrola po stabilizaci:
+
+```text
+Zůstává někde kopie osobních dat jen proto, že sloužila k ověření?
+
+Obsahuje pracovní pravidlo zákaznický detail, který nepotřebuje?
+
+Má ponechaný ověřovací záznam jasný účel a retenci?
+
+Je stará cesta méně pohodlná než nová?
+
+Dá se pravidlo použít bez interního chatu a bez autora úpravy?
+```
+
+Nejčastější chyba je ponechat všechny ověřovací podklady "kdyby něco". Tím se malé zlepšení promění v nový sklad citlivých nebo zastaralých detailů. Pokud podklad nepotřebujete pro incident, právní důvod, audit nebo jasné provozní rozhodnutí, zkraťte ho nebo smažte.
+
+### 6. Nastavte lehký signál návratu staré cesty
+
+Běžný rytmus nepotřebuje těžký monitoring. Potřebuje jen signál, že se stará cesta vrací. Signál má být viditelný při práci, ne v dalším dashboardu, který nikdo neotevře.
+
+Příklady signálů:
+
+```text
+Ve stavové větě se objeví odkaz na starou tabulku.
+
+V úkolu přibude screenshot běžné kontroly.
+
+Někdo založí osobní checklist pro rozhodnutí, které má být v playbooku.
+
+Při support review se řeší otázka, která má být vyřešená pravidlem.
+
+V releasu vznikne export "jen pro jistotu".
+```
+
+Signál neznamená automaticky selhání. Znamená: podívejte se na nejbližší pracovní místo. Možná se změnil proces. Možná je pravidlo špatně umístěné. Možná je to jen jednorázová výjimka. Rozhodnutí udělejte podle reálné práce, ne podle pocitu, že pravidlo bylo kdysi potvrzené, takže musí být navždy správné.
+
+### 7. Zapište stabilizační větu
+
+Stabilizační věta uzavírá přechod z ověření do běžného rytmu. Má říct, co je aktuální pravidlo, kde žije, v jakém rytmu se používá a jaká stopa už nemá vznikat.
+
+Šablona:
+
+```text
+Potvrzená úprava [název] je od teď součástí [běžný rytmus] v [pracovní místo]. Minimální výstup je [výstup]. Stará cesta [artefakt] je [stav]. Při běžném použití nevzniká [nežádoucí stopa].
+```
+
+Příklad:
+
+```text
+Potvrzená úprava běžné kontroly formulářové datové stopy je od teď součástí měsíční kontroly formulářů v provozní kartě formulářů. Minimální výstup je jedna stavová věta. Stará tabulka je označená jako nahrazená a odstraněná z měsíčního úkolu. Při běžném použití nevzniká screenshot, export ani kopie formulářových záznamů.
+```
+
+Tohle stačí. Nepřidávejte druhou větu o tom, jak bude tým pravidlo pravidelně milovat a ctít. Tým má práci. Pravidlo má práci usnadnit.
+
+### Karta stabilizace udržovací úpravy
+
+```text
+Potvrzená udržovací úprava:
+
+Ověřovací věta:
+
+Aktuální pravidlo:
+
+Důvod pravidla:
+
+Běžný rytmus:
+
+Kde práce začíná:
+
+Kanonický domov pravidla:
+
+Jazyk role:
+
+Minimální výstup:
+
+Co už nemá vznikat:
+
+Stav staré cesty:
+
+Stav ověřovacích artefaktů:
+
+Lehký signál návratu staré cesty:
+
+Stabilizační věta:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Potvrzená udržovací úprava:
+Upřesnění běžné kontroly formulářové datové stopy.
+
+Ověřovací věta:
+Při první měsíční kontrole formulářů úprava potvrdila původní slib: vznikla jedna stavová věta bez screenshotu a bez návratu ke staré tabulce.
+
+Aktuální pravidlo:
+Při běžné kontrole formulářů zapiš jednu stavovou větu. Přílohu přidej jen při incidentu, eskalaci nebo právním důvodu.
+
+Důvod pravidla:
+Běžná kontrola má potvrdit stav, ne vytvářet nové kopie osobních dat.
+
+Běžný rytmus:
+Měsíční kontrola formulářů.
+
+Kde práce začíná:
+Měsíční úkol v projektovém boardu.
+
+Kanonický domov pravidla:
+Provozní karta formulářů.
+
+Jazyk role:
+Zapiš stav jednou větou. Screenshot přidej jen při incidentu nebo eskalaci.
+
+Minimální výstup:
+Jedna stavová věta.
+
+Co už nemá vznikat:
+Screenshot běžné kontroly, export formulářových záznamů, nová kontrolní tabulka.
+
+Stav staré cesty:
+Stará tabulka je označená jako nahrazená a odstraněná z měsíčního úkolu.
+
+Stav ověřovacích artefaktů:
+Ověřovací karta zkrácená na rozhodnutí. Dočasné poznámky smazané. Screenshot bez incidentního důvodu smazaný.
+
+Lehký signál návratu staré cesty:
+Ve stavové větě nebo úkolu se objeví screenshot, export nebo odkaz na starou tabulku.
+
+Stabilizační věta:
+Potvrzená úprava běžné kontroly formulářové datové stopy je od teď součástí měsíční kontroly formulářů v provozní kartě formulářů. Minimální výstup je jedna stavová věta. Stará tabulka je označená jako nahrazená a odstraněná z měsíčního úkolu. Při běžném použití nevzniká screenshot, export ani kopie formulářových záznamů.
+
+Changelog věta:
+Potvrzená udržovací úprava kontroly formulářů byla stabilizována do měsíčního rytmu s jednou stavovou větou jako běžným výstupem.
+```
+
+### Mini workshop na 14 minut
+
+1. Dvě minuty: ověřit, že poslední stav úpravy je `Potvrdit`.
+2. Dvě minuty: oddělit aktuální pravidlo od ověřovací historie.
+3. Dvě minuty: vybrat běžný rytmus a kanonický domov.
+4. Dvě minuty: přepsat pravidlo do jazyka role.
+5. Dvě minuty: rozhodnout stav staré cesty a ověřovacích artefaktů.
+6. Dvě minuty: určit lehký signál návratu staré cesty.
+7. Dvě minuty: zapsat stabilizační a changelog větu.
+
+Pokud během workshopu vznikne potřeba nového pravidelného reportu, zastavte se. Stabilizace má zmenšit pracovní stopu potvrzené úpravy, ne vyrobit další povinnost. Nový report může být správný jen tehdy, když řeší opakované riziko s jasným vlastníkem a rozhodnutím. Jinak je to jen administrativní konfeta.
+
+### Checklist kapitoly
+
+- Stabilizujete jen úpravu se stavem `Potvrdit`?
+- Nepřenášíte do běžného pravidla celou ověřovací historii?
+- Má pravidlo jednu aktuální pracovní instrukci a jednu krátkou větu důvodu?
+- Je pravidlo napojené na existující běžný rytmus?
+- Je jasné, kde práce začíná a kde pravidlo kanonicky žije?
+- Je formulace napsaná jazykem role, která pravidlo skutečně použije?
+- Zůstává minimální výstup malý a konkrétní?
+- Rozhodli jste stav staré tabulky, odkazu, screenshotu, exportu nebo osobního checklistu?
+- Smazali nebo zkrátili jste ověřovací podklady, které už nemají účel?
+- Nezůstává v pracovním pravidle zákaznický detail nebo osobní údaj bez důvodu?
+- Máte lehký signál návratu staré cesty bez nového dashboardu?
+- Je changelog věta krátká, neosobní a použitelná při další revizi?
+
+Stabilizace potvrzené udržovací úpravy je dobrá tehdy, když po ní není moc vidět. Pravidlo je blíž práci, stará cesta je méně lákavá, výstup je menší a datová stopa čistší. To není dramatický závěr. To je přesně pointa. Zdravý provoz se pozná i podle toho, že drobné opravy přestanou být tématem a začnou být normální součástí práce.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha IY o stabilizaci potvrzené udržovací úpravy do běžného rytmu: práce jen se stavem Potvrdit, oddělení aktuálního pravidla od ověřovací historie, napojení na existující rytmus, jazyk role, uzavření ověřovacích artefaktů, signál návratu staré cesty, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IX o ověření udržovací úpravy po prvním normálním použití: výběr skutečného použití, cesta k pravidlu, porovnání s udržovací větou, hledání náhradní stopy, rozhodnutí stavu, ověřovací věta, úklid po ověření, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IW o převodu kontroly stabilizovaného pravidla do jedné udržovací úpravy: výběr nálezu podle ceny opakování, udržovací věta, typ úpravy, uzavření staré stopy, ověření při příštím použití, karta, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IV o kontrolu pravidla po stabilizaci korekce: výběr normálních použití, ověření cesty k pravidlu, porovnání minimálního výstupu se skutečností, hledání starých a náhradních cest, stav pravidla, provozní věta, kontrolní karta, mini workshop a checklist.
