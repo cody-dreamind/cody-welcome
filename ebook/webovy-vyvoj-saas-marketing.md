@@ -73903,8 +73903,415 @@ Workshop musí skončit rozhodnutím, ne pocitem. Jestli nemáte dost informací
 
 Ověření korekce má být krátké, ale ne povrchní. Dobrý výsledek není "přepsali jsme pravidlo". Dobrý výsledek je "při normální práci vznikl správný minimální výstup a nevznikla nová zbytečná stopa". To je mnohem méně efektní věta. Takže má slušnou šanci být pravdivá.
 
+## Příloha IU: Stabilizace ověřené korekce úklidového pravidla do běžného pravidla
+
+Ověřená korekce z Přílohy IT je poslední přechodový stav. Už víte, že při normálním použití pomohla. Člověk našel opravené místo, vznikl správný minimální výstup, stará cesta se nevrátila a nevznikla náhradní datová stopa. Teď je potřeba udělat méně viditelnou, ale důležitou věc: přestat s korekcí zacházet jako s korekcí.
+
+Pokud ji necháte jako zvláštní poznámku, zůstane vedle běžného pravidla další vrstva. A každá další vrstva je budoucí úklid. Stabilizace znamená, že se ověřená korekce rozpustí do pravidla, do pracovního místa a do údržbového rytmu. Historie zůstane jen tam, kde pomáhá rozhodnout. Ne tam, kde mate člověka při práci.
+
+Dobrá stabilizace odpoví na jednu otázku:
+
+```text
+Co má člověk při příštím normálním použití vidět jako obyčejné pravidlo, ne jako opravu po problému?
+```
+
+Jakmile na tu otázku odpovíte, většina stabilizace je obyčejné zkracování. Ne přidávání vysvětlení. Ne zakládání nové sekce "po poslední korekci". Ne další tabulka stavu. Jen čistý pracovní tvar.
+
+### 1. Začněte jen stavem `Stabilizovat`
+
+Tahle příloha se používá pouze tehdy, když ověření skončilo stavem `Stabilizovat`. Pokud stav z Přílohy IT byl `Doladit`, `Vrátit k pracovnímu místu` nebo `Zrušit nebo přepsat`, nejdřív dokončete další malý krok. Stabilizovat napůl ověřenou korekci je rychlá cesta k pravidlu, kterému tým začne obcházet rohy.
+
+Před stabilizací si z ověřovací karty vezměte jen pět řádků:
+
+```text
+Korekční věta:
+
+První normální použití:
+
+Jaký minimální výstup vznikl:
+
+Vznikla náhradní datová stopa:
+
+Rozhodnutí:
+```
+
+Pokud poslední řádek není `Stabilizovat`, zastavte se. Pokud u náhradní datové stopy není jasné `Ne`, stabilizujte až po dořešení. Úklidové pravidlo, které stabilizuje zbytečnou stopu, si právě zapisuje další práci do budoucnosti.
+
+Příklad dobrého vstupu:
+
+```text
+Korekční věta:
+Odstranit odkaz na starou formulářovou tabulku a nechat kanonický výstup v provozní kartě formulářů.
+
+První normální použití:
+Měsíční úkol po úpravě kontaktního formuláře.
+
+Jaký minimální výstup vznikl:
+Jedna stavová věta v provozní kartě.
+
+Vznikla náhradní datová stopa:
+Ne.
+
+Rozhodnutí:
+Stabilizovat.
+```
+
+To je dost materiálu. Nepotřebujete přenášet celý příběh, proč stará tabulka kdysi vznikla, kdo ji používal a jaké byly všechny mezikroky. Stabilizace má chránit budoucí práci, ne konzervovat minulou nejistotu.
+
+### 2. Oddělte aktuální pravidlo od historie
+
+Nejčastější chyba stabilizace je přepsat pravidlo tak, že v něm zůstane stopa celé opravy.
+
+Slabý tvar:
+
+```text
+Po poslední korekci už nepoužívejte starou tabulku a místo toho zapisujte stav do provozní karty formulářů.
+```
+
+Lepší tvar:
+
+```text
+Výstupem měsíční kontroly formuláře je jedna stavová věta v provozní kartě formulářů.
+```
+
+První věta mluví k lidem, kteří zažili starý stav. Druhá věta funguje i pro člověka, který přijde za půl roku. To je rozdíl mezi pamětí týmu a pracovním pravidlem.
+
+Historii nevyhazujte slepě. Jen ji přesuňte do správného místa. Praktické rozdělení:
+
+```text
+Pracovní pravidlo:
+aktuální instrukce pro příští použití.
+
+Changelog:
+jedna věta, proč se pravidlo změnilo.
+
+Archiv:
+starý artefakt označený jako nahrazený, pokud ho ještě potřebujete kvůli dohledatelnosti.
+
+Ověřovací poznámka:
+uzavřená nebo zkrácená po stabilizaci.
+```
+
+Do pracovního pravidla patří jen první bod. Zbytek má pomáhat údržbě, ne člověku v toku práce.
+
+### 3. Vyberte kanonický domov stabilizovaného pravidla
+
+Ověřená korekce mohla proběhnout na více místech: v úkolu, tabulce, checklistu, provozní kartě, poznámce u šablony. Stabilizace musí rozhodnout, kde je jediný domov pravidla.
+
+Kanonický domov vybírejte podle okamžiku použití:
+
+```text
+Kde člověk rozhoduje, co má být výstup?
+
+Kde by pravidlo hledala role, která u toho nebyla?
+
+Kde lze pravidlo udržovat bez kopírování do dalších míst?
+
+Kde je nejmenší riziko zbytečné datové stopy?
+```
+
+Příklady:
+
+```text
+Formulářová datová stopa:
+provozní karta formulářů, ne obecný privacy index.
+
+Release úklid starých exportů:
+release checklist, ne interní poznámka vývojáře.
+
+Supportní přílohy:
+support playbook, ne osobní checklist support ownera.
+
+Onboardingový příklad:
+onboardingová karta role, ne archiv původního workshopu.
+```
+
+Kanonický domov neznamená, že nikde jinde nesmí být odkaz. Znamená to, že jen jedno místo obsahuje pravidlo. Ostatní místa mohou obsahovat krátkou směrovku.
+
+Dobrá směrovka:
+
+```text
+Pro minimální výstup kontroly formuláře použij provozní kartu formulářů.
+```
+
+Špatná směrovka:
+
+```text
+Výstupem je jedna stavová věta v provozní kartě formulářů; screenshoty se nepřikládají; stará tabulka se nepoužívá; při incidentu postupujte jinak.
+```
+
+To už není směrovka. To je duplikované pravidlo. A duplikované pravidlo začne stárnout jinou rychlostí než originál.
+
+### 4. Přepište korekci do obyčejného jazyka role
+
+Stabilizované pravidlo má být čitelné pro roli, která ho použije, ne pro autora korekce. Pište proto jazykem práce, ne jazykem změnového řízení.
+
+Převod může vypadat takhle:
+
+```text
+Korekční jazyk:
+Odstranili jsme odkaz na starou tabulku a zrušili zvyk přikládat screenshoty.
+
+Pracovní jazyk:
+Při běžné kontrole formuláře zapiš jen jednu stavovou větu do provozní karty. Přílohy nepřidávej, pokud nevznikl incident.
+```
+
+Nebo:
+
+```text
+Korekční jazyk:
+Přesunuli jsme pravidlo z obecného indexu do release checklistu.
+
+Pracovní jazyk:
+Před vydáním ověř, že dočasné exporty z testu jsou smazané nebo mají zapsaný incidentní důvod.
+```
+
+Dobré pravidlo má tři vlastnosti:
+
+```text
+říká, kdy se použije,
+
+říká, jaký minimální výstup stačí,
+
+říká, co se nepřidává.
+```
+
+Poslední bod je u úklidových pravidel zásadní. Pokud pravidlo neříká, co se nepřidává, tým si často vytvoří pojistku. Pojistka se tváří jako opatrnost, ale v privacy-first provozu se velmi rychle mění v novou datovou stopu.
+
+### 5. Zavřete přechodové artefakty
+
+Po stabilizaci nesmí zůstat vedle pravidla hromádka přechodových poznámek. Každá taková poznámka vytváří otázku: platí ještě, nebo už ne?
+
+Projít stačí krátký seznam:
+
+```text
+ověřovací karta,
+
+korekční karta,
+
+dočasný úkol,
+
+starý odkaz,
+
+nahrazená tabulka,
+
+komentáře u pracovního místa,
+
+osobní checklist autora,
+
+testovací nebo příkladová data.
+```
+
+Pro každý artefakt vyberte jeden stav:
+
+```text
+Sloučit do pravidla:
+pokud obsahuje aktuální pracovní instrukci.
+
+Zkrátit do changelogu:
+pokud obsahuje jen důvod změny.
+
+Označit jako nahrazené:
+pokud ho ještě potřebujete kvůli dohledatelnosti.
+
+Smazat:
+pokud už nemá provozní ani právní důvod.
+```
+
+Nevymýšlejte pátý stav "nechat zatím". To je jen odložené rozhodnutí. Pokud opravdu nevíte, napište konkrétní datum nebo spouštěč, kdy se artefakt znovu otevře. Bez toho je to budoucí šum.
+
+### 6. Udělejte privacy-first uzávěrku
+
+Stabilizace je dobrý okamžik pro poslední datovou kontrolu. Ne proto, že by každá drobná korekce potřebovala velký audit. Protože právě při stabilizaci se často přenáší do pravidla staré důkazy, příklady a interní citace, které už nemají důvod existovat.
+
+Vyplňte čtyři řádky:
+
+```text
+Co zůstává jako pracovní pravidlo:
+
+Co zůstává jen v changelogu:
+
+Co se archivuje nebo maže:
+
+Co se už při běžném použití nesmí vytvářet:
+```
+
+Příklad:
+
+```text
+Co zůstává jako pracovní pravidlo:
+Jedna instrukce v provozní kartě formulářů: při běžné kontrole zapiš stavovou větu bez příloh.
+
+Co zůstává jen v changelogu:
+Stará tabulka byla nahrazena provozní kartou po ověření v měsíčním úkolu.
+
+Co se archivuje nebo maže:
+Dočasná ověřovací poznámka se zkracuje na rozhodnutí. Osobní poznámky z pozorování se mažou.
+
+Co se už při běžném použití nesmí vytvářet:
+Screenshoty poptávek, kopie obsahu formulářů a komentáře dokazující, že příloha nevznikla.
+```
+
+Codyho komentář: nejlepší privacy-first uzávěrka je často obyčejná věta "tohle už nevyrábíme". Méně hrdinské než nový nástroj. Výrazně levnější na údržbu.
+
+### 7. Nastavte lehký revizní háček
+
+Stabilizované pravidlo nemá zmizet z pozornosti navždy. Má dostat lehký háček, který se ozve při smysluplné změně. Ne pravidelnou schůzku bez důvodu, ale spouštěč.
+
+Vhodné háčky:
+
+```text
+změna formuláře nebo zdroje leadů,
+
+nový supportní kanál,
+
+nový export nebo integrace,
+
+změna role, která pravidlo používá,
+
+incident nebo opakovaná výjimka,
+
+kvartální úklid provozních artefaktů,
+
+nový onboardingový průchod.
+```
+
+Nevhodné háčky:
+
+```text
+kontrolovat každý týden pro jistotu,
+
+sbírat screenshoty jako důkaz dodržování,
+
+vyžadovat potvrzení od každého použití,
+
+zakládat dashboard pro pravidlo, které má jeden výstup.
+```
+
+Lehký háček napište přímo do kanonického domova pravidla:
+
+```text
+Otevři pravidlo znovu při změně formuláře, novém zdroji leadů, incidentu nebo vzniku exportu mimo incidentní důvod.
+```
+
+To stačí. Když pravidlo potřebuje víc hlídání, možná už nejde o úklidové pravidlo, ale o rizikovější provozní oblast. Pak má smysl vrátit se k rizikovému registru, ne tvářit se, že všechno vyřeší další odstavec.
+
+### 8. Předejte změnu bez ceremonie
+
+Stabilizace obvykle nepotřebuje velké oznámení. Potřebuje, aby lidé, kterých se pravidlo týká, věděli, kde je aktuální tvar a co se po nich nechce.
+
+Krátká interní zpráva může znít:
+
+```text
+Stabilizovali jsme pravidlo pro běžnou kontrolu formulářů. Kanonický výstup je jedna stavová věta v provozní kartě formulářů. Přílohy, screenshoty ani kopie poptávek se při běžné kontrole nepřidávají. Starou tabulku už nepoužívejte.
+```
+
+Všimněte si, že zpráva nepopisuje celý příběh. Říká aktuální pracovní stav. To je přesně to, co tým potřebuje.
+
+Pokud změna dopadá na nového člověka, přidejte ji do onboardingové trasy role. Ne jako "historii korekce", ale jako aktuální pracovní pravidlo.
+
+### Stabilizační karta
+
+```text
+Název pravidla:
+
+Ověřená korekční věta:
+
+Stav z ověření:
+
+Kanonický domov pravidla:
+
+Aktuální pracovní věta:
+
+Minimální výstup:
+
+Co se výslovně nepřidává:
+
+Co se sloučilo do pravidla:
+
+Co zůstává v changelogu:
+
+Co se archivuje nebo maže:
+
+Revizní háček:
+
+Krátké předání týmu:
+```
+
+### Příklad vyplněné karty
+
+```text
+Název pravidla:
+Kvartální kontrola formulářové datové stopy.
+
+Ověřená korekční věta:
+Protože měsíční úkol stále vedl na starou tabulku, odstranili jsme odkaz a tabulku označili jako nahrazenou provozní kartou formulářů.
+
+Stav z ověření:
+Stabilizovat.
+
+Kanonický domov pravidla:
+Provozní karta formulářů.
+
+Aktuální pracovní věta:
+Při běžné kontrole formuláře zapiš jednu stavovou větu do provozní karty formulářů. Přílohy nepřidávej, pokud nevznikl incident.
+
+Minimální výstup:
+Jedna stavová věta.
+
+Co se výslovně nepřidává:
+Screenshoty poptávek, kopie obsahu formulářů, duplicitní tabulka ani komentář pro jistotu.
+
+Co se sloučilo do pravidla:
+Instrukce, že kanonický výstup je v provozní kartě formulářů.
+
+Co zůstává v changelogu:
+Stará tabulka byla nahrazena provozní kartou po ověření při měsíčním úkolu.
+
+Co se archivuje nebo maže:
+Ověřovací poznámka se zkracuje na rozhodnutí. Osobní poznámky z pozorování se mažou. Stará tabulka zůstává označená jako nahrazená jen po dobu, kdy ji tým potřebuje pro dohledatelnost.
+
+Revizní háček:
+Otevřít při změně formuláře, novém zdroji leadů, incidentu nebo vzniku exportu mimo incidentní důvod.
+
+Krátké předání týmu:
+Od teď je výstup běžné kontroly formuláře jen stavová věta v provozní kartě. Starou tabulku a přílohy nepoužívejte.
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: potvrdit, že ověření skončilo stavem `Stabilizovat`.
+2. Dvě minuty: oddělit aktuální pravidlo od historie korekce.
+3. Dvě minuty: vybrat kanonický domov pravidla.
+4. Tři minuty: přepsat korekci do obyčejného jazyka role.
+5. Dvě minuty: rozhodnout stav přechodových artefaktů.
+6. Dvě minuty: vyplnit privacy-first uzávěrku.
+7. Dvě minuty: napsat revizní háček a krátké předání týmu.
+
+Když se workshop začne rozšiřovat do debaty o všech podobných pravidlech, vraťte ho k jedné otázce: co má člověk vidět při příštím použití tohoto konkrétního pravidla? Portfolio podobných pravidel můžete řešit později. Stabilizace jedné korekce není konsolidační projekt.
+
+### Checklist kapitoly
+
+- Stabilizujete jen korekci, která byla ověřena stavem `Stabilizovat`?
+- Je jasné, jaký minimální výstup při ověření skutečně vznikl?
+- Nevznikla při ověření náhradní datová stopa?
+- Oddělili jste aktuální pravidlo od historie korekce?
+- Má pravidlo jeden kanonický domov?
+- Jsou ostatní místa jen směrovky, ne duplikáty pravidla?
+- Je pracovní věta napsaná jazykem role, která ji použije?
+- Říká pravidlo, kdy se použije, jaký výstup stačí a co se nepřidává?
+- Zavřeli jste nebo zkrátili korekční a ověřovací poznámky?
+- Má každý přechodový artefakt stav: sloučit, zkrátit, označit jako nahrazené, nebo smazat?
+- Je v privacy-first uzávěrce jasné, co se už nesmí vytvářet?
+- Má pravidlo lehký revizní háček místo nového rituálu?
+- Dostane tým krátké předání aktuálního stavu bez zbytečné historie?
+- Je changelog věta bez osobních údajů, zákaznických detailů a interních citací?
+
+Stabilizace ověřené korekce je dobrý test provozní dospělosti. Méně zralý tým si nechá všechny vrstvy, protože se bojí něco ztratit. Zralejší tým si nechá jen aktuální pravidlo, krátký důvod změny a jasný revizní háček. Ne proto, že by historie nebyla důležitá. Ale protože člověk při práci potřebuje pravidlo, ne archeologii.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha IU o stabilizaci ověřené korekce úklidového pravidla do běžného pravidla: práce jen se stavem Stabilizovat, oddělení aktuálního pravidla od historie, kanonický domov, přepis do jazyka role, zavření přechodových artefaktů, privacy-first uzávěrka, revizní háček, předání týmu, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IT o ověření korekce úklidového pravidla po příštím normálním použití: výběr skutečného pracovního průchodu, cesta ke korekci, porovnání výstupu s korekční větou, náhradní nepořádek, rozhodnutí dalšího stavu, privacy-first uzavření datové stopy, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IS o převodu kontroly běžného úklidového pravidla do jedné korekce: práce s rozhodnutím z kontroly, výběr nejbližšího pracovního místa, textová/polohová/úklidová/datová korekce, korekční věta, privacy-first dopad, ověření při příštím normálním použití, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IR o kontrole běžného úklidového pravidla po stabilizaci: výběr kontrolního okna, ověření cesty k pravidlu, porovnání minimálního výstupu se skutečností, hledání staré nebo náhradní cesty, scorecard ceny, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
