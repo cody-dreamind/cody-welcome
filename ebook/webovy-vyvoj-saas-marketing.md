@@ -75709,8 +75709,431 @@ Pokud během workshopu vznikne potřeba nového pravidelného reportu, zastavte 
 
 Stabilizace potvrzené udržovací úpravy je dobrá tehdy, když po ní není moc vidět. Pravidlo je blíž práci, stará cesta je méně lákavá, výstup je menší a datová stopa čistší. To není dramatický závěr. To je přesně pointa. Zdravý provoz se pozná i podle toho, že drobné opravy přestanou být tématem a začnou být normální součástí práce.
 
+## Příloha IZ: Kontrola běžného rytmu po stabilizaci udržovací úpravy
+
+Stabilizovaná udržovací úprava z Přílohy IY už nežije v ověřovacím režimu. Je součástí běžného rytmu: měsíční kontroly, release checklistu, supportního review, obsahové revize nebo jiného pracovního místa. To je správně. Jenže stabilizace ještě neznamená, že pravidlo bude fungovat i po několika běžných průchodech, kdy už u toho nestojí autor změny.
+
+Tahle příloha řeší otázku:
+
+```text
+Jak po několika normálních použitích zkontrolovat, že stabilizovaná udržovací úprava pořád pomáhá, nezvětšila administrativu a nevrací starou datovou stopu?
+```
+
+Kontrola běžného rytmu není audit s velkým razítkem. Je to krátké ověření, jestli se pravidlo skutečně zabydlelo v práci. Zajímá vás cesta člověka k pravidlu, minimální výstup, návrat staré cesty, cena použití a privacy-first stopa. Pokud kontrola najde problém, neotevíráte celý systém. Vyberete jeden nejbližší zásah.
+
+### 1. Vyberte několik normálních průchodů
+
+Nekontrolujte ideální ukázku. Vyberte dva až tři běžné průchody, které proběhly po stabilizaci. Měly by být dost obyčejné na to, aby ukázaly realitu, a dost čerstvé na to, aby si tým ještě pamatoval tření.
+
+Krátký vstup:
+
+```text
+Stabilizovaná úprava:
+
+Běžný rytmus:
+
+Kanonický domov pravidla:
+
+Kontrolované průchody:
+- průchod 1:
+- průchod 2:
+- průchod 3:
+
+Co mělo vzniknout jako minimální výstup:
+
+Co už nemělo vznikat:
+```
+
+Příklad:
+
+```text
+Stabilizovaná úprava:
+Běžná kontrola formulářové datové stopy bez screenshotů.
+
+Běžný rytmus:
+Měsíční kontrola formulářů.
+
+Kanonický domov pravidla:
+Provozní karta formulářů.
+
+Kontrolované průchody:
+- dubnová kontrola kontaktního formuláře,
+- dubnová kontrola demo formuláře,
+- květnová kontrola kontaktního formuláře.
+
+Co mělo vzniknout jako minimální výstup:
+Jedna stavová věta v provozní kartě.
+
+Co už nemělo vznikat:
+Screenshot běžné kontroly, export formulářových záznamů, kopie staré tabulky.
+```
+
+Pokud žádný normální průchod neexistuje, nekontrolujte pravidlo naslepo. Zapište stav `Čeká na použití` a nastavte nejbližší přirozený okamžik, kdy se pravidlo ověří. Kontrola bez reálné práce je jen debatní kroužek v obleku.
+
+### 2. Ověřte cestu k pravidlu
+
+Pravidlo může být obsahově správné a přesto nepoužitelné, pokud ho člověk nenajde v okamžiku práce. Proto se neptejte jen "je pravidlo napsané dobře". Sledujte trasu:
+
+```text
+Kde práce začala?
+
+Byl odkaz na pravidlo přímo v úkolu, checklistu nebo kartě?
+
+Musel člověk hledat v chatu, staré dokumentaci nebo osobních poznámkách?
+
+Použil kanonické místo, nebo náhradní cestu?
+
+Co by nový člověk bez historie pravděpodobně udělal?
+```
+
+Dobrá trasa:
+
+```text
+Měsíční úkol odkazuje na provozní kartu formulářů.
+V kartě je pravidlo ve stejné sekci jako běžná kontrola.
+Člověk zapíše stavovou větu bez hledání v historii.
+```
+
+Slabá trasa:
+
+```text
+Měsíční úkol říká jen "zkontrolovat formuláře".
+Pravidlo je v poznámce z minulého review.
+Člověk se v chatu ptá, jestli má dělat screenshot.
+```
+
+Slabá trasa neznamená, že lidé pravidlo ignorují. Často znamená, že systém spoléhá na paměť. Paměť je skvělá na humor na poradě, horší jako provozní infrastruktura.
+
+### 3. Porovnejte minimální výstup se skutečností
+
+Stabilizovaná udržovací úprava měla zmenšit práci. Kontrola má ověřit, jestli se to opravdu stalo.
+
+Porovnejte:
+
+```text
+Plánovaný minimální výstup:
+
+Skutečný výstup:
+
+Co přibylo navíc:
+
+Co chybělo:
+
+Byl výstup použitelný pro další rozhodnutí?
+```
+
+Příklad:
+
+```text
+Plánovaný minimální výstup:
+Jedna stavová věta.
+
+Skutečný výstup:
+Jedna stavová věta a jeden odkaz na starou tabulku.
+
+Co přibylo navíc:
+Odkaz na starou tabulku jako "pojistka".
+
+Co chybělo:
+Nic.
+
+Byl výstup použitelný:
+Ano, ale odkaz na starou tabulku vrací starou cestu do aktivní práce.
+```
+
+Tady není potřeba trestat člověka za opatrnost. Odkaz "pro jistotu" je signál, že pravidlo možná není dost viditelné, stará cesta je pořád pohodlná, nebo tým nevěří minimálnímu výstupu. Opravte příčinu, ne člověka.
+
+### 4. Hledejte návrat staré cesty
+
+Největší riziko stabilizované úpravy je tichý návrat starého chování. Ne v podobě vzpoury. Spíš jako malý doplněk:
+
+```text
+Screenshot jen tentokrát.
+
+Export pro kontrolu.
+
+Osobní checklist vedle kanonického pravidla.
+
+Starý odkaz ponechaný v úkolu.
+
+Kopie tabulky pro tým.
+
+Komentář v chatu místo zápisu do pracovního místa.
+```
+
+Rozlišujte čtyři stavy:
+
+```text
+Bez návratu:
+stará cesta se nepoužila a není v aktivní trase.
+
+Stopa v okolí:
+stará cesta existuje, ale nikdo ji nepoužil.
+
+Náhradní použití:
+někdo použil starou nebo paralelní cestu pro běžnou práci.
+
+Nové riziko:
+vznikla jiná datová stopa, která je horší než původní problém.
+```
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Stopa v okolí.
+
+Nález:
+Starý odkaz zůstal v šabloně měsíčního úkolu, ale v posledních dvou kontrolách ho nikdo nepoužil.
+
+Akce:
+Odstranit starý odkaz ze šablony úkolu. Pravidlo se nemění.
+```
+
+To je správně malý zásah. Když najdete jen starý odkaz, nepotřebujete novou metodiku. Potřebujete smazat starý odkaz. Ano, i takhle neheroicky se někdy zachraňuje provoz.
+
+### 5. Změřte cenu pravidla prakticky
+
+Udržovací úprava nesmí být levná jen na papíře. Zeptejte se, kolik stála v běžné práci:
+
+```text
+Kolik minut zabralo najít pravidlo?
+
+Kolik minut zabralo vytvořit výstup?
+
+Vznikla otázka, kterou pravidlo mělo odstranit?
+
+Musel někdo čekat na autora úpravy?
+
+Přibylo ruční kopírování, dvojí evidence nebo schvalování?
+```
+
+Jednoduchý scorecard:
+
+```text
+Použití:
+0 = pravidlo se nepoužilo
+1 = použilo se s pomocí
+2 = použilo se samostatně
+
+Výstup:
+0 = nevznikl nebo je nepoužitelný
+1 = vznikl, ale s přebytečnou stopou
+2 = vznikl minimální použitelný výstup
+
+Cena:
+0 = pravidlo práci zkomplikovalo
+1 = pravidlo pomohlo, ale pořád drhne
+2 = pravidlo zmenšilo práci
+
+Datová stopa:
+0 = vznikla zbytečná nebo riziková kopie
+1 = vznikla drobná stopa k úklidu
+2 = stopa odpovídá privacy-first minimu
+```
+
+Nejde o exaktní metrologii. Jde o společný jazyk. Když dva průchody mají u datové stopy skóre 1, víte, kde začít. Když použití dostane 0, pravidlo je možná dobře napsané, ale špatně umístěné.
+
+### 6. Udělejte privacy-first kontrolu skutečných artefaktů
+
+Privacy-first kontrola se nedělá nad záměrem, ale nad tím, co opravdu vzniklo. Otevřete pracovní místo, úkoly, přílohy a záznamy z kontrolovaných průchodů.
+
+Zkontrolujte:
+
+```text
+Vznikly nové kopie osobních nebo zákaznických dat?
+
+Zůstaly někde screenshoty, exporty nebo přeposlané výřezy bez jasného důvodu?
+
+Obsahuje stavová věta víc detailů, než je potřeba pro rozhodnutí?
+
+Mají ponechané artefakty účel, vlastníka a retenci?
+
+Je stará cesta odstraněná z aktivní práce, nebo jen "už se nepoužívá" podle paměti?
+```
+
+Příklad dobré stavové věty:
+
+```text
+Kontaktní formulář má po kontrole beze změny minimální datovou stopu; přílohy se nepřidávají, běžný záznam zůstává v provozní kartě.
+```
+
+Slabá stavová věta:
+
+```text
+Formulář je v pořádku, viz screenshoty a export odpovědí v příloze.
+```
+
+První věta pomáhá rozhodnutí a drží minimum. Druhá vytváří další data, která se budou jednou uklízet, přesouvat, vysvětlovat a možná litovat. Zbytečná data jsou jako účtenky v kapse: nenápadné, dokud jich není plná pračka.
+
+### 7. Rozhodněte jeden další stav
+
+Po kontrole nepište dlouhé shrnutí bez rozhodnutí. Vyberte jeden stav:
+
+```text
+Ponechat:
+pravidlo funguje, není potřeba další zásah.
+
+Uklidit okolí:
+pravidlo funguje, ale v aktivní trase zůstaly staré odkazy nebo zbytečné artefakty.
+
+Zpřesnit pravidlo:
+pravidlo se používá, ale jedna formulace nebo umístění vytváří tření.
+
+Vrátit do úpravy:
+pravidlo se nepoužívá, zvyšuje práci nebo vrací starou datovou stopu.
+```
+
+Každý stav musí mít jednu pracovní větu.
+
+Příklady:
+
+```text
+Ponechat:
+Pravidlo běžné kontroly formulářů funguje ve měsíčním rytmu samostatně; ponechává se beze změny.
+```
+
+```text
+Uklidit okolí:
+Pravidlo funguje, ale šablona měsíčního úkolu pořád obsahuje starý odkaz; odstraní se odkaz, pravidlo se nemění.
+```
+
+```text
+Zpřesnit pravidlo:
+Pravidlo se používá, ale formulace "příloha jen při důvodu" je nejasná; přepíše se na "screenshot jen při incidentu, eskalaci nebo právním důvodu".
+```
+
+```text
+Vrátit do úpravy:
+Pravidlo se v posledních dvou průchodech obešlo přes osobní checklist; vrací se do jedné udržovací úpravy zaměřené na pracovní trasu.
+```
+
+Rozhodnutí má být malé. Kontrola běžného rytmu není pozvánka k přestavbě celého systému. Pokud objeví větší problém, založte pro něj samostatné rozhodnutí a současnou kontrolu uzavřete.
+
+### Kontrolní karta běžného rytmu po udržovací úpravě
+
+```text
+Stabilizovaná úprava:
+
+Běžný rytmus:
+
+Kanonický domov pravidla:
+
+Kontrolované průchody:
+
+Plánovaný minimální výstup:
+
+Skutečný výstup:
+
+Cesta k pravidlu:
+
+Návrat staré cesty:
+Bez návratu / Stopa v okolí / Náhradní použití / Nové riziko
+
+Scorecard:
+Použití:
+Výstup:
+Cena:
+Datová stopa:
+
+Privacy-first nález:
+
+Rozhodnutí:
+Ponechat / Uklidit okolí / Zpřesnit pravidlo / Vrátit do úpravy
+
+Jedna další akce:
+
+Kdo ji provede:
+
+Do kdy:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Stabilizovaná úprava:
+Běžná kontrola formulářové datové stopy bez screenshotů.
+
+Běžný rytmus:
+Měsíční kontrola formulářů.
+
+Kanonický domov pravidla:
+Provozní karta formulářů.
+
+Kontrolované průchody:
+Dubnová kontrola kontaktního formuláře, dubnová kontrola demo formuláře, květnová kontrola kontaktního formuláře.
+
+Plánovaný minimální výstup:
+Jedna stavová věta.
+
+Skutečný výstup:
+Ve všech průchodech vznikla stavová věta. V jednom úkolu zůstal starý odkaz na tabulku.
+
+Cesta k pravidlu:
+Pravidlo bylo dostupné z provozní karty. Starý odkaz v šabloně úkolu vytvářel paralelní cestu.
+
+Návrat staré cesty:
+Stopa v okolí.
+
+Scorecard:
+Použití: 2
+Výstup: 2
+Cena: 2
+Datová stopa: 1
+
+Privacy-first nález:
+Nevznikl nový screenshot ani export. Starý odkaz na tabulku zůstává v aktivní šabloně a má být odstraněn.
+
+Rozhodnutí:
+Uklidit okolí.
+
+Jedna další akce:
+Odstranit starý odkaz ze šablony měsíčního úkolu.
+
+Kdo ji provede:
+Vlastník provozní karty formulářů.
+
+Do kdy:
+Před příští měsíční kontrolou.
+
+Changelog věta:
+Kontrola běžného rytmu potvrdila pravidlo formulářové kontroly; odstraní se starý odkaz ze šablony úkolu, pravidlo zůstává beze změny.
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: vybrat dva až tři normální průchody.
+2. Dvě minuty: ověřit cestu k pravidlu.
+3. Dvě minuty: porovnat minimální výstup se skutečností.
+4. Dvě minuty: najít návrat staré nebo náhradní cesty.
+5. Dvě minuty: vyplnit scorecard použití, výstupu, ceny a datové stopy.
+6. Dvě minuty: udělat privacy-first kontrolu skutečných artefaktů.
+7. Tři minuty: rozhodnout stav, jednu další akci a changelog větu.
+
+Pokud workshop potřebuje víc než patnáct minut, pravděpodobně neřešíte kontrolu jedné stabilizované úpravy. Buď je problém širší, nebo se tým snaží přes malou kontrolu vyřešit starý dluh. Starý dluh si zaslouží vlastní místo. Tohle je jen kontrola, jestli malé pravidlo pořád drží.
+
+### Checklist kapitoly
+
+- Vybrali jste skutečné normální průchody po stabilizaci?
+- Je jasné, kde práce začala a jak člověk našel pravidlo?
+- Použil se kanonický domov pravidla, nebo náhradní cesta?
+- Odpovídá skutečný výstup plánovanému minimu?
+- Nevznikl screenshot, export, osobní checklist, kopie tabulky nebo jiná zbytečná stopa?
+- Rozlišili jste stav návratu staré cesty: bez návratu, stopa v okolí, náhradní použití nebo nové riziko?
+- Změřili jste cenu pravidla prakticky, ne pocitově?
+- Zkontrolovali jste reálné artefakty, ne jen úmysl týmu?
+- Má ponechaná datová stopa účel, vlastníka a retenci?
+- Vybrali jste jeden stav: ponechat, uklidit okolí, zpřesnit pravidlo nebo vrátit do úpravy?
+- Má další akce jednoho vlastníka a jasný termín?
+- Je changelog věta krátká, bez zákaznických detailů a použitelná při další revizi?
+
+Kontrola běžného rytmu je úspěšná, když po ní systém není větší než před ní. Buď pravidlo necháte být, uklidíte nejbližší starou stopu, zpřesníte jednu větu, nebo vrátíte problém do malé úpravy. Nic víc. Dlouhodobá spolehlivost často nestojí na velkých reformách, ale na tom, že se malé opravy po čase zkontrolují a zůstanou malé.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha IZ o kontrole běžného rytmu po stabilizaci udržovací úpravy: výběr normálních průchodů, ověření cesty k pravidlu, porovnání minimálního výstupu se skutečností, hledání návratu staré cesty, praktický scorecard ceny, privacy-first kontrola artefaktů, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IY o stabilizaci potvrzené udržovací úpravy do běžného rytmu: práce jen se stavem Potvrdit, oddělení aktuálního pravidla od ověřovací historie, napojení na existující rytmus, jazyk role, uzavření ověřovacích artefaktů, signál návratu staré cesty, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IX o ověření udržovací úpravy po prvním normálním použití: výběr skutečného použití, cesta k pravidlu, porovnání s udržovací větou, hledání náhradní stopy, rozhodnutí stavu, ověřovací věta, úklid po ověření, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IW o převodu kontroly stabilizovaného pravidla do jedné udržovací úpravy: výběr nálezu podle ceny opakování, udržovací věta, typ úpravy, uzavření staré stopy, ověření při příštím použití, karta, mini workshop a checklist.
