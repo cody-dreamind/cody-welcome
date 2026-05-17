@@ -80344,8 +80344,308 @@ Workshop nesmí skončit seznamem "ještě by se mohlo". Pokud se objeví dalš�
 
 Ověření další akce po prvním normálním použití drží provoz při zemi. Neoslavuje změnu za to, že byla provedena. Ptá se, jestli pomohla skutečné práci, jestli nezvětšila datovou stopu a jestli tým ví, kdy přestat kontrolovat. To je malá disciplína s velkým dopadem: z oprav se nestává byrokracie a ze standardů se nestává muzeum starých dobrých úmyslů.
 
+## Příloha JM: Stabilizace potvrzené další akce do běžného pravidla
+
+Když další akce po kontrole standardu prošla prvním normálním použitím, vzniká známé pokušení: nechat ji jako poznámku v changelogu, připomenutí v chatu nebo osobní návyk autora. To je pohodlné, ale křehké. Akce fungovala jednou. Teď je potřeba rozhodnout, jestli se má stát běžným pravidlem, kde bude bydlet a co se po stabilizaci uklidí.
+
+Stabilizace není rozšíření práce. Je to převod potvrzeného výsledku do nejmenšího stabilního tvaru. Pokud se při ověření ukázalo, že změna pomohla, nemá zůstat jako historická stopa. Má se proměnit v běžný pracovní pokyn, šablonu, kontrolní bod nebo odstranění staré cesty.
+
+Tato příloha navazuje na stav `Potvrdit` nebo `Ponechat s krátkou kontrolou` z předchozího ověření. Pokud výsledek nebyl ověřený v normální práci, nestabilizujte. Nejdřív ověřte. Stabilizovat neověřenou změnu je jen rychlejší cesta k trvalému nepořádku.
+
+### 1. Začněte ověřeným stavem, ne chutí uklízet
+
+Vstup do stabilizace musí být krátký a tvrdý:
+
+- Jaká další akce byla provedena.
+- Kde byla ověřena v normální práci.
+- Jaký byl výsledek.
+- Jaká datová stopa vznikla.
+- Jaký stav byl po ověření vybrán.
+
+Nestačí věta "vypadá to dobře". Potřebujete konkrétní rozhodovací větu z ověření.
+
+Příklad vstupu:
+
+```text
+Akce:
+Odstranit starý odkaz na provozní poznámku a vést tým do kanonické provozní karty.
+
+Ověření:
+První měsíční kontrola začala v provozní kartě bez připomínání autora změny.
+
+Výsledek:
+Tým našel správné místo a zapsal jednu stavovou větu.
+
+Datová stopa:
+Jeden zápis v provozní kartě, žádný screenshot ani paralelní report.
+
+Stav:
+Potvrdit.
+```
+
+Pokud takový vstup nemáte, vraťte se o krok zpět. Stabilizace bez vstupu se rychle změní v přepisování dokumentace podle paměti. A paměť je výborná věc na historky, horší na provoz.
+
+### 2. Vyberte jeden domov pravidla
+
+Potvrzená akce potřebuje jeden domov. Ne tři. Ne "pro jistotu i v onboardingu, i v checklistu, i v šabloně, i v poznámce k procesu". Jeden kanonický domov a případně odkazy z ostatních míst.
+
+Domov vybírejte podle toho, kde člověk práci skutečně dělá:
+
+- Pokud akce mění kontrolu, patří do kontrolní karty.
+- Pokud akce mění výstup, patří do šablony výstupu.
+- Pokud akce mění rozhodnutí, patří do rozhodovacího checklistu.
+- Pokud akce ruší starou trasu, patří do místa, kde se stará trasa dřív nabízela.
+- Pokud akce mění vlastnictví, patří do provozního listu nebo role karty.
+
+Slabá stabilizace:
+
+```text
+Přidáme poznámku do dokumentace, že se má používat provozní karta.
+```
+
+Silnější stabilizace:
+
+```text
+V měsíční kontrolní kartě bude první pole "Otevři kanonickou provozní kartu". Starý odkaz na poznámku se odstraní.
+```
+
+Rozdíl je v místě dopadu. První varianta informuje. Druhá mění pracovní cestu.
+
+### 3. Přepište akci do pravidla, ne do příběhu
+
+Akce má historii. Pravidlo ji nepotřebuje. Lidé, kteří budou pravidlo používat za měsíc, nepotřebují číst, proč vzniklo, kdo ho ověřoval a kolik diskusí tomu předcházelo. Potřebují vědět, co mají udělat.
+
+Příliš historický zápis:
+
+```text
+Po kontrole 17. 5. jsme zjistili, že stará provozní poznámka pletla měsíční review, takže jsme ji odstranili a ověřili, že tým zvládne začít v provozní kartě. Proto by se odteď měla používat provozní karta.
+```
+
+Pracovní pravidlo:
+
+```text
+Měsíční kontrolu začněte v kanonické provozní kartě. Dočasné poznámky používejte jen během ověření a po potvrzení je smažte nebo archivujte.
+```
+
+Historie může zůstat v changelogu. Pravidlo má být krátké, dohledatelné a použitelné bez autora změny.
+
+Codyho komentář: dokumentace často bobtná proto, že lidé neumí oddělit pravidlo od archeologie. Archeologie je zajímavá. Jen by neměla sedět uprostřed formuláře, který někdo používá v pondělí ráno.
+
+### 4. Zavřete starou cestu, jinak pravidlo nevyhraje
+
+Nové pravidlo nestačí přidat. Starou cestu musíte zavřít nebo alespoň zřetelně zneplatnit. Jinak budou existovat dvě pravdy a tým si bude vybírat podle zvyku, rychlosti nebo poslední zprávy v chatu.
+
+Zavření staré cesty může znamenat:
+
+- Smazat starý odkaz.
+- Přesměrovat starou stránku na kanonické místo.
+- Označit starou šablonu jako archivovanou.
+- Odstranit duplicitní pole z formuláře.
+- Sloučit dvě kontrolní karty.
+- V changelogu uvést, co už se nepoužívá.
+
+Pozor na měkké formulace:
+
+```text
+Preferovaně používejte novou kartu.
+```
+
+To není pravidlo. To je pozvánka k chaosu v hezčím svetru. Lepší je:
+
+```text
+Nová karta je jediný zdroj pro měsíční kontrolu. Starý dokument je archivovaný a neslouží k zápisu nových kontrol.
+```
+
+Pokud starou cestu nemůžete zavřít hned, napište přechodové pravidlo s datem nebo jasným stop pravidlem. Bez toho vznikne věčný kompromis.
+
+### 5. Udělejte privacy-first stabilizaci stopy
+
+Stabilizace má uklidit i datovou stopu, která vznikla při ověření. Dočasné poznámky, exporty, kopie, screenshoty, testovací tabulky a pomocné komentáře nemají automaticky přežít jen proto, že pomohly při kontrole.
+
+Privacy-first stabilizace se ptá:
+
+- Jaká data vznikla jen kvůli ověření?
+- Je pořád potřeba je držet?
+- Obsahují osobní, zákaznická nebo interně citlivá data?
+- Dá se zachovat jen rozhodovací věta místo surových podkladů?
+- Kde bude kanonický zápis po stabilizaci?
+- Kdy se smažou nebo archivují pomocné artefakty?
+
+Praktické pravidlo:
+
+```text
+Po stabilizaci ponechte jen pravidlo, rozhodovací větu a minimální changelog. Pomocné důkazy držte jen tehdy, když mají jasný účel, vlastníka a retenční konec.
+```
+
+Příklad:
+
+- Ponechat: "Měsíční kontrola od 2026-05-17 začíná v provozní kartě."
+- Smazat: screenshot staré navigace, který sloužil jen k jednorázovému porovnání.
+- Archivovat na 30 dní: anonymizovaný výstup z ověření, pokud ještě čeká druhá kontrola.
+- Nepřenášet: obsah konkrétních zákaznických poznámek do obecné šablony.
+
+Tím se stabilizace nestane dalším místem, kde se hromadí data. Pravidlo má zjednodušovat práci i stopu.
+
+### 6. Předejte změnu jako pracovní větu
+
+Předání nemá být dlouhé. Lidé nepotřebují slyšet celý příběh, pokud se jich týká jen nový způsob práce. Stačí vědět, co se mění, kde to najdou a co se už nepoužívá.
+
+Dobrá předávací věta:
+
+```text
+Měsíční kontrolu odteď začínáme v kanonické provozní kartě; stará provozní poznámka je archivovaná a nové kontroly se do ní nezapisují.
+```
+
+Ještě lepší, pokud doplníte dopad:
+
+```text
+Měsíční kontrolu odteď začínáme v kanonické provozní kartě; stará provozní poznámka je archivovaná, takže další kontrola má jeden zdroj pravdy a nevzniká duplicitní zápis.
+```
+
+Předání nesmí vytvářet nový trvalý kanál. Pokud změnu oznámíte v chatu, odkažte na kanonické místo a nepoužívejte chat jako zdroj pravdy. Chat je dobrý na upozornění. Špatný na paměť systému.
+
+### 7. Nastavte lehký signál návratu staré cesty
+
+Stabilizované pravidlo nepotřebuje velký nový audit. Potřebuje jen malý signál, který ukáže, jestli se stará cesta nevrací.
+
+Lehký signál může být:
+
+- Při příštím měsíčním review zkontrolovat, jestli zápis vznikl v kanonické kartě.
+- Při prvním použití novým člověkem ověřit, zda pravidlo našel bez vysvětlování.
+- Po dvou cyklech zkontrolovat, zda starý dokument nemá nový zápis.
+- Při kvartálním úklidu ověřit, že odkazy vedou jen na kanonické místo.
+
+Signál musí mít stop pravidlo:
+
+```text
+Pokud dvě po sobě jdoucí kontroly začnou v kanonické kartě a starý dokument nemá nové zápisy, samostatné sledování končí.
+```
+
+Bez stop pravidla se z lehkého signálu stane další trvalý rituál. A trvalé rituály mají nepříjemný zvyk tvářit se jako řízení kvality, i když už jen spotřebovávají pozornost.
+
+### Stabilizační karta potvrzené další akce
+
+```text
+Původní akce:
+
+Ověřený stav:
+Potvrdit / Ponechat s krátkou kontrolou
+
+Rozhodovací věta z ověření:
+
+Kanonický domov pravidla:
+
+Nové pracovní pravidlo:
+
+Co se zavírá nebo archivuje:
+
+Co zůstává jako minimální changelog:
+
+Privacy-first úklid:
+- Co se maže:
+- Co se archivuje:
+- Co zůstává:
+- Do kdy:
+
+Předávací věta:
+
+Lehký signál návratu staré cesty:
+
+Stop pravidlo:
+
+Vlastník:
+
+Datum stabilizace:
+```
+
+Karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně do ní přetéká historie. Historii dejte do changelogu, ne do pravidla.
+
+### Příklad vyplněné stabilizační karty
+
+```text
+Původní akce:
+Odstranit starý odkaz na provozní poznámku a vést měsíční kontrolu do kanonické provozní karty.
+
+Ověřený stav:
+Potvrdit.
+
+Rozhodovací věta z ověření:
+První měsíční kontrola začala v kanonické provozní kartě bez připomínání autora změny a nevznikl paralelní zápis.
+
+Kanonický domov pravidla:
+Měsíční kontrolní karta v provozním listu.
+
+Nové pracovní pravidlo:
+Měsíční kontrolu začněte v kanonické provozní kartě. Dočasné poznámky používejte jen během ověření a po potvrzení je smažte nebo archivujte.
+
+Co se zavírá nebo archivuje:
+Stará provozní poznámka se archivuje a označí jako nepoužívaná pro nové kontroly.
+
+Co zůstává jako minimální changelog:
+Od 2026-05-17 je kanonickým místem měsíční kontroly provozní karta; stará poznámka je archiv.
+
+Privacy-first úklid:
+- Co se maže: screenshot staré navigace z ověření.
+- Co se archivuje: anonymizovaná poznámka o prvním použití po dobu jednoho dalšího cyklu.
+- Co zůstává: pravidlo a changelog věta.
+- Do kdy: pomocná poznámka se smaže po druhém čistém použití.
+
+Předávací věta:
+Měsíční kontrolu odteď začínáme v kanonické provozní kartě; stará provozní poznámka je archivovaná, takže další kontrola má jeden zdroj pravdy.
+
+Lehký signál návratu staré cesty:
+Při příští měsíční kontrole ověřit, že nevznikl nový zápis ve staré poznámce.
+
+Stop pravidlo:
+Po druhém čistém použití bez nového zápisu ve staré poznámce samostatné sledování končí.
+
+Vlastník:
+Role odpovědná za měsíční provozní kontrolu.
+
+Datum stabilizace:
+2026-05-17.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: přečíst rozhodovací větu z ověření a vybrat stav.
+2. Tři minuty: najít kanonický domov pravidla podle místa skutečné práce.
+3. Čtyři minuty: přepsat akci do krátkého pracovního pravidla.
+4. Tři minuty: rozhodnout, kterou starou cestu zavřít nebo archivovat.
+5. Tři minuty: projít privacy-first úklid dočasných stop.
+6. Dvě minuty: napsat jednu předávací větu.
+7. Dvě minuty: nastavit lehký signál návratu staré cesty a stop pravidlo.
+
+Výstup workshopu:
+
+```text
+Jedno pracovní pravidlo v kanonickém místě, zavřená stará cesta, minimální changelog, uklizená datová stopa a jedno stop pravidlo pro poslední ověření.
+```
+
+Workshop není prostor pro novou optimalizaci procesu. Pokud během stabilizace objevíte větší problém, zapište ho jako samostatný podnět. Tady stabilizujete potvrzenou akci, ne otevíráte další renovaci.
+
+### Checklist kapitoly
+
+- Vstupujete do stabilizace jen se stavem `Potvrdit` nebo jasně omezeným stavem `Ponechat s krátkou kontrolou`?
+- Máte rozhodovací větu z normálního použití?
+- Vybrali jste jeden kanonický domov pravidla?
+- Přepsali jste akci do krátkého pracovního pravidla bez historického balastu?
+- Zavřeli jste nebo archivovali starou cestu?
+- Je jasné, co se už nepoužívá?
+- Uklidili jste dočasné poznámky, screenshoty, exporty a duplicitní zápisy?
+- Zůstává jen minimální changelog a pravidlo?
+- Obsahuje stabilizace privacy-first rozhodnutí o retenci pomocných důkazů?
+- Předali jste změnu jednou pracovní větou?
+- Nevznikl nový trvalý kanál jen kvůli oznámení změny?
+- Nastavili jste lehký signál návratu staré cesty?
+- Má signál stop pravidlo?
+- Je vlastník pravidla role, ne jen autor poslední změny?
+
+Stabilizace potvrzené další akce je poslední krok, který zabrání tomu, aby dobrá oprava zůstala jen osobním zvykem. Vezme ověřený výsledek, uloží ho do místa skutečné práce, zavře starou cestu a uklidí dočasnou datovou stopu. Díky tomu se systém zlepšuje bez toho, aby se každý malý posun změnil v další vrstvu dokumentačního bahna.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JM o stabilizaci potvrzené další akce do běžného pravidla: vstup přes ověřený stav, výběr kanonického domova pravidla, přepis akce bez historického balastu, zavření staré cesty, privacy-first úklid datové stopy, předávací věta, lehký signál návratu staré cesty, stop pravidlo, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JL o ověření další akce po prvním normálním použití: výběr reálného použití, návrat k akční větě, signály nalezení/dokončení/stopy, rozlišení výsledku akce od okolního problému, privacy-first kontrola skutečné stopy, rozhodovací stavy, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JK o převod kontroly stabilizovaného standardu do jedné další akce: mapování stavu na typ práce, oddělení nálezu od komentáře, nejbližší pracovní místo, akční věta, privacy-first brzda, provedení v jedné dávce, nejbližší ověření, stop pravidlo, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JJ o kontrolu provozního standardu po stabilizaci systémového zlepšení: výběr běžného kontrolního okna, cesta k pravidlu, porovnání minimálního a skutečného výstupu, hledání starých tras, scorecard ceny použití, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
