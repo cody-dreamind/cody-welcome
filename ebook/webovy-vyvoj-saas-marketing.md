@@ -74595,8 +74595,388 @@ Pokud workshop začne řešit celý systém úklidu, zastavte ho. Tahle kontrola
 
 Kontrola po stabilizaci korekce má být krátká a nepřekvapivá. Jejím cílem není dokázat, že minulé rozhodnutí bylo chytré. Cílem je zjistit, jestli pravidlo obstojí v obyčejné práci. Pokud ano, nechte ho žít. Pokud ne, opravte nejbližší místo zlomu a znovu sledujte skutečné použití.
 
+## Příloha IW: Převod kontroly stabilizovaného pravidla do jedné udržovací úpravy
+
+Kontrola z Přílohy IV může skončit klidně: pravidlo se našlo, použilo a nevytvořilo novou zbytečnou stopu. Pak stačí výsledek zapsat a vrátit pravidlo do běžného rytmu. Častěji ale kontrola ukáže malé tření. Ne tak velké, aby bylo potřeba otevírat celý systém. Dost velké na to, aby se po pár měsících změnilo v další výjimku, osobní poznámku nebo starý odkaz, který nikdo nechce smazat.
+
+Tahle příloha řeší přesně ten okamžik. Neptá se, jak pravidlo znovu navrhnout. Ptá se:
+
+```text
+Jakou jednu udržovací úpravu uděláme, aby pravidlo při dalším běžném použití fungovalo lépe a nevyrábělo novou datovou stopu?
+```
+
+Slovo `jednu` je důležité. Po kontrole pravidla se snadno otevře pět malých problémů najednou: text je dlouhý, starý odkaz je moc vidět, příklad je zastaralý, výstup se dá vykládat dvěma způsoby a někdo si vede vlastní poznámku. Všechno může být pravda. Ale dobrá údržba začíná jedním zásahem, který má největší vliv na příští normální použití.
+
+### 1. Vezměte rozhodnutí z kontroly, ne celý příběh
+
+Z Přílohy IV si nepřenášejte všechny poznámky. Přeneste jen to, co je potřeba pro udržovací úpravu:
+
+```text
+Kontrolované pravidlo:
+
+Rozhodnutí:
+
+Nález:
+
+Jedna další akce:
+
+Privacy-first dopad:
+```
+
+Pokud rozhodnutí bylo `Ponechat`, udržovací úprava nevzniká. Maximálně doplňte datum kontroly do provozního rytmu. Údržba nemá trestat pravidla za to, že fungují.
+
+Pokud rozhodnutí bylo `Zjednodušit`, `Přesunout`, `Otevřít korekci` nebo `Sloučit`, pokračujte. Ale i tehdy držte rozsah. Cílem není opravit celou rodinu pravidel. Cílem je odstranit nejbližší zlom, který se ukázal při běžné práci.
+
+Příklad vstupu:
+
+```text
+Kontrolované pravidlo:
+Běžná kontrola formulářové datové stopy.
+
+Rozhodnutí:
+Zjednodušit.
+
+Nález:
+Ve třetím použití vznikl screenshot pro jistotu, protože hranice incidentu není v pracovní větě jasná.
+
+Jedna další akce:
+Doplnit hranici incidentu do pracovní věty.
+
+Privacy-first dopad:
+Smazat screenshot z běžné kontroly, pokud nemá incidentní důvod.
+```
+
+Tohle je dost. Nepotřebujete znovu otevírat, proč pravidlo kdysi vzniklo. Pracujete s nálezem z reálného použití.
+
+### 2. Vyberte nález podle ceny opakování
+
+Nejdůležitější nález není vždy ten nejviditelnější. Vyberte ten, který bude nejdražší, pokud se zopakuje desetkrát.
+
+Praktické řazení:
+
+```text
+Nejdřív:
+nález, který vytváří osobní data, exporty, screenshoty, kopie nebo duplicitní úložiště.
+
+Potom:
+nález, který vede člověka na staré nebo špatné místo.
+
+Potom:
+nález, který zpomaluje rozhodnutí nebo nutí ptát se autora.
+
+Potom:
+nález, který jen zhoršuje čitelnost, ale nemění výstup.
+```
+
+Příklad:
+
+```text
+Nález A:
+Pravidlo má dlouhý úvod.
+
+Nález B:
+Starý odkaz stále vede na nahrazenou tabulku s kopiemi poptávek.
+```
+
+Začněte nálezem B. Dlouhý úvod je otravný. Starý odkaz vyrábí riziko a šum. Údržba má chránit práci i data, ne jen estetiku dokumentu.
+
+Codyho komentář: když si nejste jistí, vyberte problém, který byste nechtěli vysvětlovat zákazníkovi. To bývá lepší kompas než interní debata o tom, jestli je text dost elegantní.
+
+### 3. Napište udržovací větu
+
+Udržovací věta je malá smlouva se sebou samými. Říká, co změníte, proč a podle čeho poznáte, že to stačilo.
+
+Šablona:
+
+```text
+Protože [nález z běžného použití], upravíme [jedno pracovní místo] tak, aby při příštím použití [očekávaný výsledek] a nevzniklo [nežádoucí stopa].
+```
+
+Příklady:
+
+```text
+Protože lidé chodí na starou formulářovou tabulku přes měsíční úkol, upravíme odkaz v měsíčním úkolu tak, aby při příští kontrole vedl přímo na provozní kartu a nevznikla kopie poptávky.
+```
+
+```text
+Protože hranice incidentu není jasná a vznikl screenshot pro jistotu, upravíme pracovní větu v provozní kartě tak, aby při běžné kontrole vznikla jen stavová věta a příloha vznikla jen při incidentu nebo eskalaci.
+```
+
+```text
+Protože support owner používá osobní checklist místo kanonického playbooku, přesuneme jednu rozhodovací větu do support playbooku tak, aby další člověk našel pravidlo bez osobní poznámky.
+```
+
+Dobrá udržovací věta má tři brzdy:
+
+```text
+jedno pracovní místo,
+
+jedno příští použití,
+
+jedna nežádoucí stopa, kterou nechceme vyrábět.
+```
+
+Když věta nejde napsat takhle úzce, pravděpodobně neřešíte udržovací úpravu, ale širší provozní změnu.
+
+### 4. Zvolte typ úpravy
+
+Většina udržovacích úprav spadá do jedné ze čtyř kategorií.
+
+Textová úprava:
+
+```text
+zkrátit pracovní větu,
+
+doplnit hranici výjimky,
+
+odstranit historické vysvětlování,
+
+přepsat pravidlo jazykem role.
+```
+
+Polohová úprava:
+
+```text
+přesunout pravidlo do místa rozhodnutí,
+
+změnit starý odkaz na kanonický domov,
+
+odstranit duplikovanou směrovku,
+
+přidat krátkou směrovku tam, kde práce začíná.
+```
+
+Výstupová úprava:
+
+```text
+upřesnit, jaký minimální výstup stačí,
+
+zrušit povinnou přílohu,
+
+sloučit dva zápisy do jedné stavové věty,
+
+oddělit běžný výstup od incidentního výstupu.
+```
+
+Datová úprava:
+
+```text
+smazat zbytečný export,
+
+zkrátit příklad,
+
+odstranit screenshot,
+
+uzavřít dočasnou tabulku,
+
+označit starý artefakt jako nahrazený a nastavit jeho další kontrolu.
+```
+
+Vyberte jeden typ. Pokud potřebujete dva, začněte tím, který zabraňuje zbytečné datové stopě. Text může počkat. Kopie osobních údajů obvykle ne.
+
+### 5. Změňte nejbližší pracovní místo
+
+Udržovací úprava má být blízko místu, kde vznikl problém. Ne v abstraktním indexu. Ne v dlouhé metodice. Ne v dokumentu, který se čte jen při onboardingu.
+
+Příklady blízkého místa:
+
+```text
+Problém vznikl při měsíční kontrole formuláře:
+upravte měsíční úkol nebo provozní kartu formulářů.
+
+Problém vznikl při supportním rozhodnutí:
+upravte konkrétní support playbook nebo šablonu odpovědi.
+
+Problém vznikl při releasu:
+upravte release checklist.
+
+Problém vznikl při onboardingovém průchodu:
+upravte onboardingovou kartu role.
+```
+
+Když úpravu dáte moc vysoko, lidé ji budou znát teoreticky a míjet prakticky. Dobré pravidlo se objeví před rozhodnutím. Špatné pravidlo se najde až při zpětném vysvětlování, proč rozhodnutí dopadlo divně.
+
+### 6. Uzavřete starou stopu
+
+Každá udržovací úprava musí odpovědět na otázku, co se stane se starou stopou. Jinak se nový stav jen přidá vedle starého.
+
+Krátká tabulka stavů:
+
+```text
+Smazat:
+artefakt nemá provozní ani právní důvod.
+
+Zkrátit:
+artefakt obsahuje užitečný důvod změny, ale zbytečně moc detailů.
+
+Označit jako nahrazené:
+artefakt ještě potřebujete kvůli dohledatelnosti, ale nesmí být pracovní cestou.
+
+Přesměrovat:
+artefakt je vstupní bod, který má vést na kanonické místo.
+
+Sloučit:
+artefakt obsahuje aktuální pravidlo a patří do kanonického domova.
+```
+
+Příklad:
+
+```text
+Stará tabulka formulářů:
+označit jako nahrazenou, odstranit ji z měsíčního úkolu a po další kontrole rozhodnout, zda ji smazat nebo archivovat ve zkrácené podobě.
+```
+
+Nepište jen "nepoužívat". To je slabé. Pokud stará cesta zůstane stejně pohodlná jako nová, někdo ji použije ve spěchu. Ne ze zlého úmyslu. Z únavy.
+
+### 7. Nastavte ověření při příštím normálním použití
+
+Udržovací úprava není hotová okamžikem přepsání textu. Je hotová až tehdy, když při dalším běžném použití zmizí zlom, kvůli kterému vznikla.
+
+Ověření držte malé:
+
+```text
+Kdy nastane příští normální použití:
+
+Co má člověk najít:
+
+Jaký minimální výstup má vzniknout:
+
+Jaká stará nebo náhradní stopa nemá vzniknout:
+
+Kdo ověří roli, ne osobu:
+```
+
+Příklad:
+
+```text
+Kdy nastane příští normální použití:
+Další měsíční kontrola formulářů.
+
+Co má člověk najít:
+Měsíční úkol vede přímo na provozní kartu formulářů.
+
+Jaký minimální výstup má vzniknout:
+Jedna stavová věta.
+
+Jaká stará nebo náhradní stopa nemá vzniknout:
+Stará tabulka, screenshot ani komentář pro jistotu.
+
+Kdo ověří roli, ne osobu:
+Marketing owner.
+```
+
+Ověření neznamená schůzku navíc. Často stačí při příštím cyklu na pět minut zkontrolovat výsledek a zapsat stav.
+
+### Karta udržovací úpravy
+
+```text
+Pravidlo:
+
+Rozhodnutí z kontroly:
+
+Vybraný nález:
+
+Cena opakování:
+
+Udržovací věta:
+
+Typ úpravy:
+
+Pracovní místo:
+
+Co se mění:
+
+Co se nemaže, ale zkracuje nebo označuje jako nahrazené:
+
+Co se maže:
+
+Co nesmí vzniknout znovu:
+
+Příští normální použití:
+
+Ověřovací signál:
+
+Changelog věta:
+```
+
+### Příklad vyplněné karty
+
+```text
+Pravidlo:
+Běžná kontrola formulářové datové stopy.
+
+Rozhodnutí z kontroly:
+Zjednodušit.
+
+Vybraný nález:
+Ve třetím použití vznikl screenshot pro jistotu, protože hranice incidentu nebyla v pracovní větě jasná.
+
+Cena opakování:
+Při opakování vznikají zbytečné přílohy s potenciálně citlivým obsahem a tým si zvyká dokazovat běžnou kontrolu screenshotem.
+
+Udržovací věta:
+Protože hranice incidentu není jasná a vznikl screenshot pro jistotu, upravíme pracovní větu v provozní kartě tak, aby při běžné kontrole vznikla jen stavová věta a příloha vznikla jen při incidentu nebo eskalaci.
+
+Typ úpravy:
+Textová a výstupová; primární je výstupová hranice.
+
+Pracovní místo:
+Provozní karta formulářů.
+
+Co se mění:
+Pracovní věta doplňuje: "Přílohu přidej jen při incidentu nebo eskalaci."
+
+Co se nemaže, ale zkracuje nebo označuje jako nahrazené:
+Kontrolní poznámka zůstává jen jako rozhodnutí bez screenshotu.
+
+Co se maže:
+Screenshot z běžné kontroly, pokud nemá incidentní důvod.
+
+Co nesmí vzniknout znovu:
+Screenshot, export nebo komentář dokazující, že běžná kontrola proběhla.
+
+Příští normální použití:
+Další měsíční kontrola formulářů.
+
+Ověřovací signál:
+Vznikne jedna stavová věta bez přílohy a bez návratu ke staré tabulce.
+
+Changelog věta:
+Pravidlo pro běžnou kontrolu formulářů bylo zjednodušeno tak, aby přílohy vznikaly jen při incidentu nebo eskalaci.
+```
+
+### Mini workshop na 13 minut
+
+1. Dvě minuty: přečíst rozhodnutí z kontroly pravidla.
+2. Dvě minuty: vybrat jeden nález podle ceny opakování.
+3. Dvě minuty: napsat udržovací větu.
+4. Dvě minuty: určit typ úpravy a pracovní místo.
+5. Dvě minuty: rozhodnout, co se stane se starou stopou.
+6. Dvě minuty: nastavit ověření při příštím normálním použití.
+7. Jedna minuta: zapsat changelog větu.
+
+Když workshop vyrobí tři úpravy, vyberte jednu. Zbytek dejte do poznámky jen tehdy, pokud má vlastní pracovní důvod. Backlog plný drobných "někdy by se mělo" položek je jen elegantnější forma nepořádku.
+
+### Checklist kapitoly
+
+- Vychází úprava z kontroly stabilizovaného pravidla, ne z dojmu?
+- Nepřevádíte stav `Ponechat` do zbytečné práce?
+- Vybrali jste jeden nález podle ceny opakování?
+- Má udržovací věta jedno pracovní místo, jedno příští použití a jednu nežádoucí stopu?
+- Je jasné, zda jde o textovou, polohovou, výstupovou nebo datovou úpravu?
+- Je úprava v místě, kde práce skutečně vzniká?
+- Uzavřeli jste starý odkaz, tabulku, export, screenshot nebo osobní poznámku?
+- Rozhodli jste, co se smaže, zkrátí, označí jako nahrazené, přesměruje nebo sloučí?
+- Nevzniká nová kontrolní tabulka jen kvůli této malé úpravě?
+- Je ověření navázané na příští normální použití?
+- Sledujete roli a výstup, ne výkon konkrétního člověka?
+- Má changelog větu bez osobních údajů, zákaznických detailů a interních citací?
+
+Dobrá udržovací úprava je nudná záměrně. Zkrátí větu, přesune odkaz, zavře starou stopu, smaže zbytečný důkaz nebo upřesní výstup. Právě tím drží systém zdravý. Velké provozní problémy často nezačínají velkým selháním. Začínají malou výjimkou, kterou nikdo nepřevedl do nejbližšího pracovního místa.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha IW o převodu kontroly stabilizovaného pravidla do jedné udržovací úpravy: výběr nálezu podle ceny opakování, udržovací věta, typ úpravy, uzavření staré stopy, ověření při příštím použití, karta, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IV o kontrolu pravidla po stabilizaci korekce: výběr normálních použití, ověření cesty k pravidlu, porovnání minimálního výstupu se skutečností, hledání starých a náhradních cest, stav pravidla, provozní věta, kontrolní karta, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IU o stabilizaci ověřené korekce úklidového pravidla do běžného pravidla: práce jen se stavem Stabilizovat, oddělení aktuálního pravidla od historie, kanonický domov, přepis do jazyka role, zavření přechodových artefaktů, privacy-first uzávěrka, revizní háček, předání týmu, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IT o ověření korekce úklidového pravidla po příštím normálním použití: výběr skutečného pracovního průchodu, cesta ke korekci, porovnání výstupu s korekční větou, náhradní nepořádek, rozhodnutí dalšího stavu, privacy-first uzavření datové stopy, karta, příklad, mini workshop a checklist.
