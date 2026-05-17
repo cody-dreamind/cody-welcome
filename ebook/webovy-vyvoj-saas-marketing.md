@@ -76788,8 +76788,290 @@ Pokud se workshop protáhne, zastavte debatu otázkou: "Co přesně má být jin
 
 Ověřená malá oprava má zmizet do provozu. Nemá si stavět pomník. Když příští použití proběhne snáz, s menší datovou stopou a bez návratu ke staré cestě, práce je hotová. Zapište větu, ukliďte dočasné důkazy a nechte systém dýchat.
 
+## Příloha JC: Stabilizace potvrzené malé opravy do běžného pravidla
+
+Příloha JB končí stavem ověřené malé opravy. Pokud ověření dopadlo jako `Potvrdit`, práce ještě nemusí znamenat další vývoj. Znamená hlavně uklidit opravu tak, aby se nestala věčnou poznámkou na okraji procesu.
+
+Otázka této přílohy zní:
+
+```text
+Jak z potvrzené malé opravy udělat běžné pravidlo, aniž vznikne nový rituál, nová dokumentace a nová datová stopa?
+```
+
+Stabilizace je úmyslně menší než oprava. Nehledá další vylepšení. Jen převádí potvrzenou změnu do místa, kde lidé opravdu pracují. Pokud se při stabilizaci otevře pět nových nápadů, nejsou to součásti této iterace. Jsou to položky do backlogu. Ano, backlog je někdy jen elegantnější šuplík, ale pořád lepší než narvat všechno do jedné věty a tvářit se, že to někdo použije.
+
+### 1. Stabilizujte jen stav `Potvrdit`
+
+Ne každá ověřená oprava patří do stabilizace. Pokud výsledek z JB skončil jako `Zpřesnit`, `Uklidit okolí` nebo `Vrátit do kontroly`, nejdřív dokončete tu jednu reakci. Stabilizovat nehotovou věc znamená zabetonovat nejistotu.
+
+Vstup do této přílohy má vypadat takto:
+
+```text
+Oprava:
+
+Ověřovací věta:
+
+Stav:
+Potvrdit
+
+Důkaz:
+Co se při prvním normálním použití zlepšilo.
+```
+
+Příklad:
+
+```text
+Oprava:
+Šablona měsíčního úkolu vede jen do provozní karty formulářů.
+
+Ověřovací věta:
+Při prvním normálním použití oprava pomohla, protože člověk začal v provozní kartě a zapsal jen jednu stavovou větu.
+Další krok je žádný.
+
+Stav:
+Potvrdit
+
+Důkaz:
+Kontrola proběhla bez staré tabulky, bez screenshotu a bez nové osobní evidence.
+```
+
+Pokud tento vstup nemáte, nestabilizujte. Vraťte se k ověření. Stabilizace bez důkazu je jen produkční verze dojmu.
+
+### 2. Vyberte jeden kanonický domov
+
+Malá oprava má mít jeden domov. Ne tři kopie. Ne poznámku v changelogu, šabloně, interním rozcestníku a ještě v osobním checklistu člověka, který to zrovna zachraňoval.
+
+Typické domovy:
+
+- opakovaný úkol,
+- provozní karta,
+- šablona výstupu,
+- krátký interní standard,
+- checklist před publikací,
+- karta formuláře,
+- onboardingová instrukce role.
+
+Vyberte místo podle otázky:
+
+```text
+Kde člověk stojí těsně před tím, než má pravidlo použít?
+```
+
+Příklad:
+
+```text
+Špatný domov:
+Samostatná stránka "Poučení z oprav formulářů".
+
+Lepší domov:
+Měsíční úkol kontroly formulářů, protože tam člověk práci skutečně začíná.
+```
+
+Kanonický domov je místo, které má nejmenší vzdálenost od práce. Čím dál je pravidlo od okamžiku použití, tím větší je šance, že se z něj stane dekorace pro audit.
+
+### 3. Přepište opravu jako běžné pravidlo
+
+Oprava má často jazyk historie: "po minulém ověření jsme zjistili..." Běžné pravidlo má mít jazyk práce: "při kontrole udělejte..."
+
+Přepisujte takto:
+
+```text
+Historie opravy:
+Po ověření malé opravy jsme zjistili, že screenshoty běžného stavu nejsou potřeba.
+
+Běžné pravidlo:
+Screenshot ukládejte jen při incidentu, eskalaci nebo právním důvodu.
+```
+
+Dobré pravidlo je krátké, použitelné a obsahuje hranici. Neříká jen, co dělat. Říká i, kdy to nedělat.
+
+Další příklady:
+
+```text
+Historie opravy:
+Lidé se vraceli ke staré tabulce, protože byla pořád v rozcestníku.
+
+Běžné pravidlo:
+Kontrolu formulářů zapisujte jen do provozní karty; staré tabulky nejsou pracovní zdroj.
+```
+
+```text
+Historie opravy:
+Při publikaci vznikaly osobní kopie checklistu.
+
+Běžné pravidlo:
+Předpublikační checklist vyplňujte v kanonické šabloně; osobní kopie zakládejte jen pro dočasný draft a po publikaci je smažte.
+```
+
+Tím se oprava přestane tvářit jako výjimka. Stane se normální součástí toku.
+
+### 4. Zavřete přechodové opory
+
+Po ověřování často zůstanou opory: dočasný komentář, odkaz na starý dokument, poznámka "nově používat", screenshot správného stavu, duplicitní checklist nebo osobní připomínka. Při stabilizaci je potřeba rozhodnout, co zůstává a co mizí.
+
+Praktické třídění:
+
+```text
+Zůstává:
+aktuální pravidlo v kanonickém domově.
+
+Mizí:
+dočasné poznámky, staré odkazy, screenshoty běžného stavu, osobní kopie, ověřovací podklady bez dalšího účelu.
+
+Archivuje se:
+jen changelog věta nebo auditní záznam, pokud má jasný provozní nebo právní důvod.
+```
+
+Příklad:
+
+```text
+Zůstává:
+V měsíčním úkolu věta: "Kontrolu formulářů zapisujte jen do provozní karty."
+
+Mizí:
+Starý odkaz na tabulku z interního rozcestníku.
+Osobní screenshot z ověření.
+Komentář "ověřit příště".
+
+Archivuje se:
+Jedna věta v pracovním logu.
+```
+
+Privacy-first stabilizace je často obyčejné mazání. Ne dramatické, ne slavnostní. Prostě méně kopií, méně osobních poznámek, méně dat bez účelu.
+
+### 5. Nastavte lehký signál návratu
+
+Stabilizované pravidlo nepotřebuje nový monitoring. Potřebuje jen lehký signál, podle kterého poznáte, že se stará cesta vrací.
+
+Signál má být viditelný v existující práci:
+
+- při další kontrole někdo založí osobní screenshot běžného stavu,
+- v rozcestníku se znovu objeví odkaz na starou tabulku,
+- výstup vznikne mimo kanonickou šablonu,
+- člověk se ptá autora opravy, kde začít,
+- při review se objeví dvě verze stejného pravidla.
+
+Zapište signál jednou větou:
+
+```text
+Návrat staré cesty poznáme podle toho, že se kontrola formulářů objeví mimo provozní kartu.
+```
+
+Nedělejte z toho další tabulku. Signál má pomoci při běžném review, ne vytvořit mikroproces s vlastním životem.
+
+### 6. Předejte změnu bez ceremonie
+
+Malá oprava nepotřebuje velké oznámení. Potřebuje, aby člověk v příští práci narazil na aktuální pravidlo a nemusel luštit historii.
+
+Stačí krátké předání:
+
+```text
+Měsíční kontrola formulářů je zjednodušená: začíná v provozní kartě a běžný stav se zapisuje jednou větou. Screenshot ukládejte jen při incidentu, eskalaci nebo právním důvodu.
+```
+
+Předání má říct:
+
+- co se mění v práci,
+- kde je aktuální místo,
+- co se už nepoužívá,
+- jaká je privacy-first hranice.
+
+Nemusí vysvětlovat celý příběh. Kdo potřebuje historii, najde ji v pracovním logu. Kdo má pracovat, potřebuje aktuální pravidlo.
+
+### Stabilizační karta malé opravy
+
+```text
+Potvrzená oprava:
+
+Ověřovací věta:
+
+Kanonický domov:
+
+Běžné pravidlo:
+
+Co zůstává:
+
+Co mizí:
+
+Co se archivuje:
+
+Privacy-first hranice:
+
+Signál návratu staré cesty:
+
+Krátké předání:
+
+Co se nedělá:
+```
+
+### Příklad vyplněné karty
+
+```text
+Potvrzená oprava:
+Šablona měsíčního úkolu vede jen do provozní karty formulářů.
+
+Ověřovací věta:
+Při prvním normálním použití oprava pomohla, protože člověk začal v provozní kartě a zapsal jen jednu stavovou větu.
+Další krok je žádný.
+
+Kanonický domov:
+Opakovaný měsíční úkol kontroly formulářů.
+
+Běžné pravidlo:
+Kontrolu formulářů zapisujte jen do provozní karty; běžný stav stačí jednou větou.
+
+Co zůstává:
+Aktuální odkaz na provozní kartu v měsíčním úkolu.
+
+Co mizí:
+Starý odkaz na tabulku v rozcestníku a osobní screenshot z ověření.
+
+Co se archivuje:
+Jedna changelog věta v pracovním logu.
+
+Privacy-first hranice:
+Screenshot ukládat jen při incidentu, eskalaci nebo právním důvodu.
+
+Signál návratu staré cesty:
+Kontrola formulářů se objeví mimo provozní kartu.
+
+Krátké předání:
+Měsíční kontrola formulářů začíná v provozní kartě. Běžný stav zapisujte jednou větou, screenshot jen při incidentu.
+
+Co se nedělá:
+Nevzniká nová tabulka kontrol ani samostatný proces ověřování.
+```
+
+### Mini workshop na 10 minut
+
+1. Jedna minuta: přečíst ověřovací větu se stavem `Potvrdit`.
+2. Dvě minuty: vybrat kanonický domov podle místa skutečné práce.
+3. Dvě minuty: přepsat opravu do jedné běžné pracovní věty.
+4. Dvě minuty: vybrat, co zůstává, mizí a archivuje se.
+5. Jedna minuta: doplnit privacy-first hranici.
+6. Jedna minuta: napsat signál návratu staré cesty.
+7. Jedna minuta: připravit krátké předání.
+
+Když se workshop zasekne na tom, kam pravidlo patří, vyberte místo, kde člověk práci začne příště. Ne místo, kde by se dokumentace krásně vyjímala. Dokumentace má sloužit práci, ne lovit obdiv na poličce.
+
+### Checklist kapitoly
+
+- Stabilizujete jen opravu se stavem `Potvrdit`?
+- Má oprava jeden kanonický domov?
+- Je pravidlo napsané jazykem běžné práce, ne jazykem historie opravy?
+- Říká pravidlo také, kdy se věc nedělá?
+- Odstranili jste staré odkazy, osobní kopie a dočasné ověřovací podklady?
+- Zůstává jen changelog nebo auditní záznam s jasným účelem?
+- Je privacy-first hranice součástí pracovní instrukce?
+- Máte jednoduchý signál návratu staré cesty?
+- Je předání krátké a použitelné bez čtení celého příběhu?
+- Nevznikl kvůli stabilizaci nový rituál, nová tabulka nebo nový status?
+
+Stabilizovaná malá oprava je dobrá tehdy, když si jí příští člověk skoro nevšimne. Prostě začne na správném místě, udělá menší výstup, nevytvoří zbytečnou datovou stopu a nemusí se ptát, která verze pravidla platí. Tohle je nenápadný druh kvality. Není hlučný, ale drží provoz pohromadě.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JC o stabilizaci potvrzené malé opravy do běžného pravidla: práce jen se stavem Potvrdit, kanonický domov, přepis opravy do pracovní věty, zavření přechodových opor, privacy-first úklid, signál návratu staré cesty, krátké předání, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JB o ověření malé opravy po prvním normálním použití: reálné použití místo demo průchodu, tři signály nalezení/dokončení/stopy, rozlišení chyby opravy a okolního systému, ověřovací věta, jedna reakce, privacy-first úklid ověřovací stopy, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JA o převodu kontroly běžného rytmu do jedné malé opravy: rozhodovací věta, výběr pracovního místa, textová/polohová/úklidová oprava, opravná věta, privacy-first hranice, provedení v jedné dávce, ověření při příštím použití, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha IZ o kontrole běžného rytmu po stabilizaci udržovací úpravy: výběr normálních průchodů, ověření cesty k pravidlu, porovnání minimálního výstupu se skutečností, hledání návratu staré cesty, praktický scorecard ceny, privacy-first kontrola artefaktů, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
