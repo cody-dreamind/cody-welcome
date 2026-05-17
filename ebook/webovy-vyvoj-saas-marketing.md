@@ -77790,8 +77790,346 @@ Pokud se v workshopu objeví nový problém, neřešte ho tady. Zapište ho jako
 
 Uzavřená smyčka malé opravy je dobrá tehdy, když po ní zůstane méně věcí než před ní: méně odkazů, méně důkazů, méně otázek, méně otevřených úkolů. Zůstane jen platné pravidlo na správném místě a krátká historie, ke které se dá vrátit, pokud bude potřeba. To je nenápadná, ale velmi praktická forma produktivity.
 
+## Příloha JF: Převod uzavřené smyčky do lehkého portfoliového přehledu
+
+Příloha JE uzavřela jednu konkrétní smyčku malé opravy. Pravidlo platí, dočasné opory zmizely, backlog je zavřený a další zvláštní kontrola není potřeba. To je dobrý konec. Jenže u týmů, které opravují web, SaaS produkt, marketing a provoz průběžně, vzniká ještě jedna otázka: jak si zachovat přehled o uzavřených smyčkách, aniž by z toho vznikla nová dokumentační zeď?
+
+Otázka této přílohy zní:
+
+```text
+Jak převést uzavřené smyčky do lehkého portfoliového přehledu, který pomáhá řídit další práci, ale neotevírá hotové opravy znovu?
+```
+
+Portfoliový přehled není archiv každého detailu. Je to mapa hotových změn, ze které má být vidět, kde se provoz skutečně zlepšil, kde se opakují podobné potíže a které typy změn se vyplácí dělat malým krokem. Pokud přehled začne sbírat vše, stane se druhým backlogem. Pokud nesbírá nic, tým ztrácí paměť a za tři měsíce řeší stejný problém jen pod jiným názvem.
+
+Codyho komentář: dobrý portfoliový přehled je jako čistý štítek na krabici. Neobsahuje celý obsah krabice, jen říká, co v ní je a proč ji má smysl někdy otevřít. Špatný přehled je krabice v krabici, k ní další tabulka a nakonec schůzka o tom, proč už nikdo neví, kde je ta původní krabice. Ano, i tohle umí firmy vyrábět s vážnou tváří.
+
+### 1. Převádějte jen uzavřené smyčky
+
+Do portfoliového přehledu nepatří rozpracované opravy, nápady ani otevřené nálezy. Ty mají vlastní místo v backlogu, rozhodovacím logu nebo provozním rytmu. Portfolio uzavřených smyček má zachycovat jen práci, která prošla celou cestou:
+
+```text
+Nález -> malá oprava -> ověření -> stabilizace -> kontrola -> uzavření.
+```
+
+Vstupní pravidlo:
+
+```text
+Do portfolia patří jen smyčka, která má uzavírací provozní větu z JE.
+```
+
+Pokud uzavírací věta neexistuje, smyčka není připravená pro portfolio. Není potřeba ji tam cpát preventivně. Buď se ještě vrátí do práce, nebo se uzavře později.
+
+Krátký příklad:
+
+```text
+Nepatří do portfolia:
+Asi jsme opravili formulářovou kontrolu, ale ještě to někdo ověří.
+
+Patří do portfolia:
+Smyčka malé opravy formulářové kontroly je uzavřená: běžný stav se zapisuje jednou větou v provozní kartě, stará tabulka i ověřovací screenshoty jsou mimo pracovní trasu a další zvláštní kontrola není potřeba.
+```
+
+Tím chráníte přehled před tím, aby se z něj stal druhý seznam úkolů. Portfolio má ukazovat hotovou práci a vzory, ne nervózní mezistavy.
+
+### 2. Zapište minimum, které pomůže později rozhodnout
+
+Lehký portfoliový záznam má být kratší než původní karta opravy. Nepotřebuje celý příběh. Potřebuje jen metadata, podle kterých za měsíc nebo kvartál poznáte, co se v provozu měnilo.
+
+Minimum:
+
+```text
+Název smyčky:
+
+Oblast:
+Web / SaaS / Marketing / Support / Provoz / Data / Tým
+
+Typ změny:
+Text / pracovní místo / datová stopa / pravidlo / automatizace / předání
+
+Uzavírací věta:
+
+Co se zmenšilo:
+počet kroků / počet míst / počet dat / počet výjimek / počet otázek
+
+Lehký signál do běžného rytmu:
+
+Datum uzavření:
+```
+
+Příklad:
+
+```text
+Název smyčky:
+Formulářová kontrola bez screenshotů.
+
+Oblast:
+Web / Provoz / Data.
+
+Typ změny:
+Pracovní místo a datová stopa.
+
+Uzavírací věta:
+Smyčka malé opravy formulářové kontroly je uzavřená: běžný stav se zapisuje jednou větou v provozní kartě, stará tabulka i ověřovací screenshoty jsou mimo pracovní trasu a další zvláštní kontrola není potřeba.
+
+Co se zmenšilo:
+Počet míst pro zápis kontroly a počet zbytečných důkazů běžného stavu.
+
+Lehký signál do běžného rytmu:
+Při měsíční kontrole si všimnout jen toho, zda se kontrola nevrací mimo provozní kartu.
+
+Datum uzavření:
+2026-05-17.
+```
+
+Tenhle záznam stačí. Když někdo potřebuje detail, najde ho přes uzavírací větu a changelog. Portfolio samo nemá nahrazovat historii.
+
+### 3. Nechte portfolio odpovídat na portfoliové otázky
+
+Smyslem přehledu není kontrolovat každou opravu. Smyslem je vidět vzory přes více uzavřených smyček. Dobré otázky jsou například:
+
+- Kde se opravy opakují nejčastěji?
+- Zmenšujeme skutečně počet pracovních míst, nebo jen přepisujeme pravidla?
+- Nevyrábíme pořád nové důkazy běžného stavu?
+- Které typy změn nejčastěji končí stabilně?
+- Kde se vrací staré cesty i po uzavření?
+- Jsou privacy-first úklidy skutečně dokončené, nebo jen zapsané jako záměr?
+
+Naopak špatné portfoliové otázky:
+
+- Proč přesně tehdy člověk klikl na starý odkaz?
+- Kdo zapomněl smazat konkrétní screenshot?
+- Neměli bychom znovu ověřit všechny uzavřené smyčky?
+- Co kdybychom přidali týdenní report ke každé opravě?
+
+První sada otázek pomáhá řídit systém. Druhá sada znovu otevírá hotovou práci a tahá tým do mikromanagementu. Pokud máte chuť rozebírat každý detail, vraťte se k původní kartě jen u smyčky, která ukazuje opakovaný vzor. Ne u všech.
+
+### 4. Třiďte podle zmenšení, ne podle aktivity
+
+V produktivitě se snadno odměňuje aktivita: kolik úkolů se zavřelo, kolik změn se udělalo, kolik dokumentů vzniklo. U provozních smyček je lepší sledovat zmenšení. Tedy co už nemusí existovat, co už se nemusí vysvětlovat a co už nemusí někdo kontrolovat zvlášť.
+
+Praktické kategorie zmenšení:
+
+```text
+Méně kroků:
+člověk dokončí práci kratší cestou.
+
+Méně míst:
+informace je v jednom kanonickém domově místo ve více kopiích.
+
+Méně dat:
+nevznikají screenshoty, exporty, osobní kopie nebo zbytečné identifikátory.
+
+Méně výjimek:
+běžná práce nepotřebuje zvláštní domluvu.
+
+Méně otázek:
+role ví, co udělat bez dotazování autora pravidla.
+```
+
+Příklad portfoliového štítku:
+
+```text
+Zmenšení:
+Méně míst + méně dat.
+```
+
+To je užitečnější než štítek:
+
+```text
+Aktivita:
+Dokumentace aktualizována.
+```
+
+Aktualizovaná dokumentace může být dobrá, ale sama o sobě neříká, jestli systém zjednodušila. Zmenšení nutí tým dívat se na výsledek, ne na pohyb rukou nad klávesnicí.
+
+### 5. Držte privacy-first stopu jako samostatný sloupec
+
+Privacy-first přínos se často ztratí, pokud je schovaný jen v textu. U portfolia uzavřených smyček má smysl mít jednoduchý sloupec:
+
+```text
+Privacy-first dopad:
+Žádný / méně dat / kratší retence / méně přístupů / méně externích služeb / čistší komunikace
+```
+
+Příklady:
+
+```text
+Méně dat:
+zrušily se screenshoty běžného stavu obsahující osobní údaje z testovacích poptávek.
+```
+
+```text
+Kratší retence:
+dočasné exporty po kontrole se mažou při uzavření smyčky.
+```
+
+```text
+Méně přístupů:
+kontrola už nevyžaduje sdílenou tabulku mimo hlavní pracovní systém.
+```
+
+```text
+Čistší komunikace:
+supportní makro už neposílá zákazníkovi odkaz na starou verzi formuláře.
+```
+
+Tenhle sloupec není právní audit. Je to pracovní připomínka, že malé opravy mají snižovat datový nepořádek stejně přirozeně, jako snižují procesní tření.
+
+### 6. Jednou za měsíc hledejte vzor, ne jednotlivé chyby
+
+Portfolio uzavřených smyček nepotřebuje denní pozornost. Stačí krátký měsíční průchod, ideálně jako součást existujícího review webu, produktu nebo provozu.
+
+Měsíční otázky:
+
+```text
+Která oblast měla nejvíc uzavřených smyček?
+
+Jaký typ zmenšení se opakoval nejčastěji?
+
+Kde se nejčastěji řešila datová stopa?
+
+Objevil se signál návratu staré cesty?
+
+Vzniká z uzavřených smyček jedno větší téma pro další měsíc?
+
+Co naopak přestáváme sledovat, protože to zůstává stabilní?
+```
+
+Příklad závěru:
+
+```text
+Za měsíc se uzavřelo pět malých smyček. Tři se týkaly formulářů a dvě supportních odpovědí. Nejčastější zmenšení bylo méně dat: zrušily se screenshoty, osobní kopie a dočasné exporty. Další měsíc nebudeme otevírat jednotlivé smyčky, ale zkontrolujeme, jestli všechny nové formulářové změny automaticky začínají datovou mapou.
+```
+
+Dobrý měsíční závěr neříká "zkontrolujme všechno znovu". Říká "vidíme vzor, udělejme jeden další systémový krok".
+
+### 7. Archivujte portfolio podle rytmu, ne podle strachu
+
+I portfoliový přehled může začít bobtnat. Pokud v něm držíte každý uzavřený záznam navždy ve stejné aktivní tabulce, po čase se ztratí přehled. Nastavte jednoduchou retenci.
+
+Praktický rytmus:
+
+```text
+Aktivní přehled:
+posledních 90 dní uzavřených smyček.
+
+Kvartální souhrn:
+hlavní vzory, zmenšení a privacy-first dopady.
+
+Archiv:
+starší záznamy jen v souhrnu, detail zůstává v changelogu nebo rozhodovacím logu, pokud má účel.
+```
+
+Co nemačkat do archivu:
+
+- dočasné screenshoty,
+- osobní poznámky,
+- kopie zákaznických dat,
+- exporty běžného stavu,
+- chatové diskuse bez trvalého rozhodnutí.
+
+Archiv není skládka pro věci, které se bojíte smazat. Archiv má držet jen stopu, která má budoucí hodnotu: rozhodnutí, datum, oblast, typ zmenšení a případně odkaz na kanonický changelog.
+
+### Portfoliová karta uzavřené smyčky
+
+```text
+Název smyčky:
+
+Oblast:
+Web / SaaS / Marketing / Support / Provoz / Data / Tým
+
+Typ změny:
+Text / pracovní místo / datová stopa / pravidlo / automatizace / předání
+
+Uzavírací provozní věta:
+
+Co se zmenšilo:
+Méně kroků / méně míst / méně dat / méně výjimek / méně otázek
+
+Privacy-first dopad:
+Žádný / méně dat / kratší retence / méně přístupů / méně externích služeb / čistší komunikace
+
+Lehký signál do běžného rytmu:
+
+Datum uzavření:
+
+Kanonický odkaz:
+
+Stav v portfoliu:
+Aktivní 90 dní / zahrnuto v kvartálním souhrnu / archivováno
+```
+
+### Příklad vyplněné karty
+
+```text
+Název smyčky:
+Formulářová kontrola bez screenshotů.
+
+Oblast:
+Web / Provoz / Data.
+
+Typ změny:
+Pracovní místo a datová stopa.
+
+Uzavírací provozní věta:
+Smyčka malé opravy formulářové kontroly je uzavřená: běžný stav se zapisuje jednou větou v provozní kartě, stará tabulka i ověřovací screenshoty jsou mimo pracovní trasu a další zvláštní kontrola není potřeba.
+
+Co se zmenšilo:
+Méně míst a méně dat.
+
+Privacy-first dopad:
+Méně dat; běžný stav už se nedokládá screenshoty s testovacími poptávkami.
+
+Lehký signál do běžného rytmu:
+Při měsíční kontrole si všimnout jen toho, zda se kontrola nevrací mimo provozní kartu.
+
+Datum uzavření:
+2026-05-17.
+
+Kanonický odkaz:
+Changelog formulářového provozu.
+
+Stav v portfoliu:
+Aktivní 90 dní.
+```
+
+### Mini workshop na 12 minut
+
+1. Dvě minuty: vybrat jen smyčky s uzavírací větou z JE.
+2. Dvě minuty: u každé určit oblast a typ změny.
+3. Dvě minuty: zapsat, co se skutečně zmenšilo.
+4. Dvě minuty: doplnit privacy-first dopad.
+5. Jedna minuta: zkontrolovat, že záznam neotevírá nový úkol.
+6. Jedna minuta: nastavit stav v portfoliu.
+7. Dvě minuty: napsat jednu měsíční pozorovací větu, pokud se opakuje vzor.
+
+Příklad měsíční pozorovací věty:
+
+```text
+Uzavřené smyčky z posledních 90 dní ukazují, že nejvíc zbytečných dat vznikalo při dokazování běžného stavu; další provozní zlepšení proto začne úpravou pravidel pro screenshoty a exporty.
+```
+
+To je dostatečný výstup. Nevzniká nová iniciativa jen proto, že máte přehled. Vzniká jen tehdy, když přehled ukáže opakovaný vzor a existuje jeden rozumný další krok.
+
+### Checklist kapitoly
+
+- Přidáváte do portfolia jen smyčky s uzavírací provozní větou?
+- Nepletete do portfolia otevřené nálezy, nápady nebo rozpracované úkoly?
+- Je záznam kratší než původní karta opravy?
+- Obsahuje oblast, typ změny, zmenšení, privacy-first dopad a datum?
+- Je jasné, co se zmenšilo: kroky, místa, data, výjimky nebo otázky?
+- Neotevírá portfoliový záznam novou kontrolu hotové práce?
+- Měsíční review hledá vzory, ne viníky?
+- Má portfolio aktivní okno, kvartální souhrn a archivní pravidlo?
+- Nemažete rozhodnutí, ale mažte dočasné důkazy bez účelu?
+- Pomáhá přehled vybrat jeden další systémový krok místo deseti malých poplachů?
+
+Lehký portfoliový přehled je užitečný jen tehdy, když snižuje opakování stejných problémů. Pokud začne přidávat práci, kterou nikdo nepoužívá k rozhodnutí, ztratil smysl. Držte ho krátký, čitelný a zaměřený na zmenšení systému. Hotová práce má zůstat hotová.
+
 ## Pracovní log
 
+- 2026-05-17: Doplněna Příloha JF o převodu uzavřené smyčky do lehkého portfoliového přehledu: vstup jen pro uzavřené smyčky, minimální metadata, portfoliové otázky, třídění podle zmenšení, privacy-first dopad, měsíční hledání vzorů, retenční rytmus, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JE o uzavření smyčky malé opravy po kontrole pravidla: práce jen se stavem Ponechat, oddělení živého pravidla od historie změny, zrušení dočasných opor, provozní věta, lehký signál do běžného rytmu, úklid backlogu a komunikace, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JD o kontrole běžného pravidla po stabilizaci malé opravy: malé kontrolní okno, dohledatelnost pravidla, porovnání minimálního výstupu se skutečností, návrat staré cesty, privacy-first datová stopa, rozhodnutí dalšího stavu, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JC o stabilizaci potvrzené malé opravy do běžného pravidla: práce jen se stavem Potvrdit, kanonický domov, přepis opravy do pracovní věty, zavření přechodových opor, privacy-first úklid, signál návratu staré cesty, krátké předání, stabilizační karta, příklad, mini workshop a checklist.
