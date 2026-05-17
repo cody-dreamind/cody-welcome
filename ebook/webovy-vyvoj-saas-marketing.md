@@ -13,6 +13,8 @@ Po každém čtení si proto napište jednu pracovní větu: co se mění, kdo t
 
 Když se k rukopisu vracíte opakovaně, porovnejte novou pracovní větu s posledním rozhodnutím. Pokud se navzájem tlučou, nejdřív uzavřete starší závěr nebo ho vědomě nahraďte; jinak z e-booku rychle vznikne sbírka dobrých rad, které táhnou každá jinam.
 
+Každý průchod rukopisem berte jako malou pracovní smyčku: vybrat problém, najít relevantní část, udělat jedno rozhodnutí, zapsat ověření a vrátit se až podle výsledku. Tím text zůstane praktický i ve chvíli, kdy ho používá víc lidí v různých rolích.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -74892,3 +74894,4 @@ Kontrola po stabilizaci korekce má být krátká a nepřekvapivá. Jejím cíle
 - 2026-05-12: Doplněna Příloha EM o převodu ověřené opravy standardu do běžného provozního rytmu: provozní háčky, vlastnictví role, ochranné signály, privacy-first důkazy a checklist.
 - 2026-05-12: Doplněna Příloha EN o kvartální kontrole provozního rytmu standardu: původní slib, reálné průchody, scorecard, zkracování pravidel, privacy-first úklid důkazů a rozhodnutí o dalším zásahu.
 - 2026-05-12: Doplněna Příloha EO o převodu kvartální kontroly standardu do dalšího provozního cyklu: rozhodovací věta, karta cyklu, vlastnictví, komunikace změny, první ověření a uzavření smyčky.
+- 2026-05-17: Zpřesněn úvodní čtenářský kompas o práci s jednou ověřitelnou smyčkou při každém průchodu rukopisem.
