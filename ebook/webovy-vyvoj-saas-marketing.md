@@ -84452,8 +84452,211 @@ Můj pohled: dobrá portfoliová oprava je skoro neviditelná. Lidé prostě př
 
 Portfoliová oprava je úspěšná tehdy, když další použití pravidla vyžaduje méně vysvětlování. Ne když dokumentace vypadá bohatší. Bohatší dokumentace může být někdy jen dražší nepořádek s lepším titulkem.
 
+## Příloha KB: Ověření portfoliové opravy po prvním použití
+
+Příloha KA převedla kvartální závěr do jedné hotové portfoliové opravy. Tahle příloha řeší okamžik, kdy oprava poprvé narazí na běžnou práci. Ne na workshopu, ne při autorské kontrole, ne v ideálním scénáři s člověkem, který změnu vymyslel. V normálním použití, kde má tým něco udělat a dokumentace mu má pomoct bez velkého vysvětlování.
+
+Ověřovací otázka je jednoduchá:
+
+```text
+Pomohla portfoliová oprava při prvním skutečném použití najít správné pravidlo, udělat rozhodnutí a nezvětšit datovou stopu?
+```
+
+Pokud odpověď neznáte, nezačínejte další opravu. Nejdřív zjistěte, co se stalo s tou minulou. Jinak se portfolio pravidel začne chovat jako backlog kosmetických zásahů: pořád něco ladíte, ale nikdo neví, jestli to v práci opravdu pomohlo.
+
+### Vyberte první normální použití
+
+Ověření má smysl až ve chvíli, kdy se oprava potká s reálnou situací. Nehledejte dokonalý test. Hledejte první normální okamžik, kdy by opravená cesta měla být použita.
+
+Příklady:
+
+- Upravený publikační checklist se použije při nové landing page.
+- Přejmenovaná karta pravidla se hledá při přípravě formuláře.
+- Archivovaná šablona už se nemá objevit v nové nabídce.
+- Zkrácené pravidlo má pomoct novému člověku dokončit první kontrolu.
+- Sloučená duplicita má vést tým na jeden zdroj pravdy.
+
+Nevybírejte situaci, kterou dopředu řídí autor opravy. Autor změny ví, kudy jít, i kdyby cesta byla špatně značená. Lepší test je člověk, který má běžný úkol a jen tolik kontextu, kolik by měl mít i za měsíc.
+
+### Sledujte cestu, ne člověka
+
+Smysl ověření není hodnotit, jestli byl konkrétní člověk pečlivý. Smysl je zjistit, jestli pracovní cesta vede tam, kam má. Proto se ptejte na trasu:
+
+- Kde práce začala?
+- Jak člověk našel pravidlo nebo šablonu?
+- Kde vzniklo první tření?
+- Bylo jasné, která verze je kanonická?
+- Vedla stará cesta někam dál, nebo byla opravdu zavřená?
+- Stačil výstup pravidla k rozhodnutí?
+
+Slabý závěr:
+
+```text
+Nový kolega zase použil starý checklist.
+```
+
+Silnější závěr:
+
+```text
+Stará šablona se pořád nabízela v onboardingové složce, takže oprava landing page checklistu neuzavřela všechny aktivní vstupy.
+```
+
+Druhý závěr říká, co opravit. První jen hledá viníka. A viník je v dokumentačních systémech podezřele často jen člověk, který jako první narazil na špatně zametenou cestu.
+
+### Zkontrolujte tři signály
+
+První použití ověřujte přes tři praktické signály. Nemusíte měřit všechno. Potřebujete vědět, jestli oprava splnila svůj slib.
+
+| Signál | Otázka | Dobré znamení | Varování |
+| --- | --- | --- | --- |
+| Nalezení | Našel člověk správné místo bez autora opravy? | Začal v běžném pracovním vstupu a došel na kanonické pravidlo. | Musel se doptat, hledal podle starého názvu nebo našel duplicitní kopii. |
+| Rozhodnutí | Pomohlo pravidlo udělat konkrétní krok? | Výstup byl jasný: ponechat, upravit, archivovat, publikovat nebo zastavit. | Pravidlo bylo přečteno, ale výsledek se musel vysvětlovat bokem. |
+| Stopová čistota | Nevznikla zbytečná data, sledování nebo nové podklady? | Použily se pracovní věty a minimum artefaktů. | Zůstaly screenshoty, osobní poznámky, exporty chatu nebo nové sledování lidí. |
+
+Když selže jeden signál, neznamená to automaticky, že oprava byla špatně. Může být špatný odkaz, název, stará šablona nebo okolní proces. Cílem je najít nejmenší reakci, ne dokazovat, že minulá práce byla dokonalá. Dokonalost je pěkná ambice, ale jako provozní metoda má dost drahé vedlejší účinky.
+
+### Rozlište výsledek opravy od okolního tření
+
+Po prvním použití se často objeví víc problémů najednou. Některé patří k ověřované opravě, jiné jen využily příležitost vyskočit na stůl.
+
+Rozdělení:
+
+- Problém opravy: cesta měla vést na kanonické pravidlo, ale nevede.
+- Problém staré trasy: stará šablona, odkaz nebo název zůstaly aktivní.
+- Problém pravidla: pravidlo se našlo, ale nejde podle něj rozhodnout.
+- Problém okolního procesu: práce začíná jinde, než oprava předpokládala.
+- Nový námět: užitečný nápad, který ale nepatří do ověření této opravy.
+
+Příklad:
+
+```text
+Ověřovaná oprava: Šablony landing page mají vést na kanonickou kartu veřejných formulářů.
+Pozorování: Nová landing page správně použila kartu, ale obchod chce zároveň doplnit nové otázky do kvalifikačního formuláře.
+Rozhodnutí: Oprava se potvrzuje. Nové otázky patří do samostatného backlogového podnětu, ne do ověření portfoliové opravy.
+```
+
+Tahle disciplína chrání rozsah. Když do ověření jedné opravy přibalíte každý nový nápad, nikdy nic neuzavřete. Jen budete mít bohatší zápis, což je hezké hlavně pro lidi, kteří rádi scrollují.
+
+### Privacy-first kontrola skutečné stopy
+
+Portfoliová oprava má snižovat tření, ne vyrábět nový dohled. Při prvním použití proto zkontrolujte, jaká data po ověření zůstala.
+
+Držte se minima:
+
+- Zapište pracovní situaci, ne jména lidí.
+- Nepřipojujte screenshoty, pokud nejsou nezbytné pro opravu trasy.
+- Pokud screenshot potřebujete, odstraňte osobní údaje a po uzavření ho smažte.
+- Neuchovávejte citace z interních chatů jako důkaz poslušnosti nebo nepozornosti.
+- Neměřte čtení dokumentace po jednotlivcích.
+- Do trvalého záznamu nepište nic, co nepotřebuje další člověk k rozhodnutí.
+
+Dobrý trvalý záznam může být jen:
+
+```text
+První použití potvrdilo opravu napojení landing page šablony. Tým došel ke kanonické kartě formuláře bez doplňujícího vysvětlení. Stará šablona se ještě objevila v onboardingové složce, proto se zavírá jako jedna malá následná oprava.
+```
+
+To stačí. Nepotřebujete z toho dělat kroniku. Kroniky jsou krásné, ale provozní dokumentace má obvykle radši kratší věty a méně stop.
+
+### Rozhodněte stav opravy
+
+Po prvním použití přiřaďte portfoliové opravě jeden stav:
+
+| Stav | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Potvrdit | Oprava pomohla a nevzniklo významné tření. | Uzavřít ověření a nechat další kontrolu běžnému rytmu. |
+| Drobně dočistit | Oprava funguje, ale zůstala jedna stará cesta nebo slabý odkaz. | Udělat jednu malou následnou opravu. |
+| Zúžit | Oprava řeší moc širokou oblast a část lidí neví, kdy ji použít. | Zpřesnit pracovní situaci, název nebo vstupní pravidlo. |
+| Vrátit do revize | Oprava nepomohla rozhodování nebo otevřela nové tření. | Vrátit se k opravné větě z Přílohy KA a přepsat rozsah. |
+| Odložit | Nebylo skutečné použití, jen hypotetický test. | Nehodnotit účinnost, čekat na reálnou situaci. |
+
+Stav "drobně dočistit" používejte opatrně. Má znamenat jednu malou akci, ne druhé kolo přestavby. Pokud drobné dočištění potřebuje víc než jeden zásah, pravděpodobně nejde o dočištění, ale o novou portfoliovou opravu.
+
+### Karta ověření portfoliové opravy
+
+```text
+Ověřovaná oprava:
+Původní opravná věta:
+První skutečné použití:
+Kdo ověřoval trasu bez autora opravy:
+
+Signál nalezení:
+Signál rozhodnutí:
+Signál stopové čistoty:
+
+Co fungovalo:
+Kde vzniklo tření:
+Je tření v opravě, staré trase, pravidle, okolním procesu, nebo jde o nový námět:
+
+Privacy-first kontrola:
+Dočasné podklady k odstranění:
+Stav opravy:
+Jedna následná akce, pokud je potřeba:
+Jednovětý závěr:
+```
+
+Příklad:
+
+```text
+Ověřovaná oprava: Napojení landing page šablony na kartu veřejných formulářů
+Původní opravná věta: Protože šablony vracely starý postup, napojíme landing page checklist na kanonickou kartu veřejného formuláře.
+První skutečné použití: Příprava landing page pro audit webu
+Kdo ověřoval trasu bez autora opravy: Editor obsahu
+
+Signál nalezení: Checklist vedl na správnou kartu bez doptávání.
+Signál rozhodnutí: Telefon zůstal nepovinný a formulář sbírá jen údaje pro první odpověď.
+Signál stopové čistoty: Bez nového měření lidí, bez osobních screenshotů.
+
+Co fungovalo: Nová šablona vedla na kanonické pravidlo.
+Kde vzniklo tření: Stará šablona byla ještě v onboardingové složce.
+Je tření v opravě, staré trase, pravidle, okolním procesu, nebo jde o nový námět: Stará trasa.
+
+Privacy-first kontrola: Trvalý záznam popisuje jen pracovní situaci.
+Dočasné podklady k odstranění: Screenshot staré onboardingové složky po odstranění odkazu.
+Stav opravy: Drobně dočistit.
+Jedna následná akce, pokud je potřeba: Archivovat starou onboardingovou šablonu s poznámkou "nahrazeno".
+Jednovětý závěr: Oprava landing page šablony funguje, ale vyžaduje zavřít jednu zapomenutou starou cestu v onboardingu.
+```
+
+### Mini workshop na 12 minut
+
+1. Dvě minuty: pojmenujte ověřovanou opravu a původní opravnou větu.
+2. Dvě minuty: popište první skutečné použití.
+3. Tři minuty: projděte signál nalezení, rozhodnutí a stopové čistoty.
+4. Dvě minuty: určete, kde vzniklo tření.
+5. Dvě minuty: přiřaďte stav opravy.
+6. Jednu minutu: napište jednovětý závěr a smažte zbytečné podklady.
+
+Výstup:
+
+```text
+Jedna ověřovací karta, jeden stav opravy a nejvýše jedna následná akce.
+```
+
+### Codyho komentář
+
+Můj pohled: první použití je nejlepší detektor přehnaně sebevědomých oprav. V hlavě autora je cesta vždycky jasná. V provozu se ukáže, jestli ji najde i někdo, kdo řeší práci, ne dokumentační architekturu. A přesně proto má být ověření krátké, věcné a trochu nepříjemně praktické. Když oprava funguje, potvrďte ji. Když ne, opravte nejbližší cestu. Nedělejte z toho soudní proces s přílohami.
+
+### Checklist kapitoly
+
+- Ověřovali jste první skutečné použití, ne hypotetický test?
+- Neřídil ověření autor opravy?
+- Sledovali jste cestu k pravidlu, ne výkon člověka?
+- Zkontrolovali jste signál nalezení, rozhodnutí a stopové čistoty?
+- Rozlišili jste problém opravy od staré trasy, pravidla, okolního procesu a nového námětu?
+- Nepřibalili jste do ověření další nesouvisející nápady?
+- Zapsali jste pracovní situaci bez jmen a osobních údajů?
+- Smazali jste nebo označili dočasné podklady k odstranění?
+- Přiřadili jste opravě jeden stav?
+- Pokud je potřeba následná akce, je opravdu jen jedna?
+- Umíte závěr říct jednou pracovní větou?
+- Zůstává další kontrola napojená na běžný měsíční nebo kvartální rytmus?
+
+Ověření portfoliové opravy má být krátká brzda před další prací. Ne proto, aby tým zpomalila, ale aby neopakoval stejný typ úprav naslepo. Jedna dobrá oprava, která se ověří v provozu, má větší hodnotu než pět elegantních změn, které nikdo nepotká při skutečné práci.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KB o ověření portfoliové opravy po prvním skutečném použití: výběr normální situace, sledování pracovní cesty místo člověka, tři signály nalezení/rozhodnutí/stopové čistoty, rozlišení tření, privacy-first kontrola skutečné stopy, stavy opravy, ověřovací karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KA o převod kvartální konsolidace do jedné portfoliové opravy: převod stavů na typ práce, opravná věta, jedno pracovní místo, jednorázové provedení, viditelné zavření staré cesty, privacy-first kontrola podkladů, karta opravy, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JZ o kvartální konsolidaci portfolia pravidel po měsíčním rytmu: práce se třemi měsíčními větami, hledání opakovaného vzoru, stav portfolia, jedna vybraná oprava, privacy-first omezení podkladů, kvartální karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JY o kontrolu měsíčního rytmu po uzavření redukce: kontrola podle reálného použití, rozlišení problému pravidla a okolních šablon, jednovětý výstup, privacy-first omezení stop, kontrolní karta, mini workshop a checklist.
