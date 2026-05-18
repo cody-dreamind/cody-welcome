@@ -81799,8 +81799,340 @@ Pokud workshop skončí třemi novými úkoly, vraťte se o krok zpět. Buď ov�
 
 Ověření další úpravy po prvním normálním použití drží provoz střízlivý. Pomáhá poznat, jestli malá změna opravdu snížila tření, ale nenechá z ní vyrůst nový kontrolní systém. To je přesně ten druh nenápadné disciplíny, který dlouhodobě rozhoduje o tom, jestli web, SaaS a marketingový provoz zůstane použitelný, nebo se utopí ve vlastních poznámkách.
 
+## Příloha JQ: Stabilizace potvrzené další úpravy do běžného pravidla
+
+Potvrzená úprava má zvláštní nebezpečí: tým má pocit, že je vyhráno, ale změna pořád žije jako malá historka v changelogu, poznámce nebo hlavě člověka, který ji udělal. Pokud se z ní nestane běžné pravidlo v místě, kde lidé opravdu pracují, časem se vrátí stará cesta. Ne dramaticky. Jen tiše. A tichý návrat staré práce je přesně ten typ provozního dluhu, který se špatně hledá.
+
+Tato příloha navazuje na Přílohu JP. Použijte ji jen ve chvíli, kdy první normální použití skončilo stavem `Potvrdit`, případně `Drobně opravit` a drobná oprava už byla ověřená. Cílem není přidat další dokument. Cílem je převést potvrzenou úpravu do běžného pravidla, zavřít dočasnou ověřovací stopu a zajistit, že příště člověk nepůjde přes historii změny, ale rovnou přes aktuální pracovní cestu.
+
+Vstupem je potvrzená ověřovací karta:
+
+```text
+Ověřovaná úprava:
+
+Rozhodnutí:
+Potvrdit
+
+Co se prokázalo:
+
+Co zůstává jako běžná práce:
+
+Co už se nemá sledovat samostatně:
+```
+
+Výstupem je stabilizační věta:
+
+```text
+Odteď platí [běžné pravidlo] v [kanonické místo], protože [stručný důvod], a stará ověřovací stopa se uzavírá podle [retenční nebo úklidové pravidlo].
+```
+
+Codyho komentář: potvrzená změna není suvenýr. Nemá zůstat vystavená v každém úkolu, každé kartě a každém interním shrnutí. Jakmile splnila účel, patří z ní zachovat pravidlo a zbytek uklidit. Jinak si tým z provozu vyrobí muzeum vlastních oprav, kam se chodí ztrácet odpoledne.
+
+### 1. Stabilizujte jen potvrzenou věc
+
+Nejdřív zkontrolujte, že opravdu stabilizujete výsledek, ne přání. Do běžného pravidla patří jen to, co prošlo normálním použitím a má jasný efekt. Pokud je závěr `Vrátit do opravy`, stabilizace je předčasná. Pokud je závěr `Drobně opravit`, stabilizujte až po ověření té drobnosti.
+
+Ptejte se:
+
+- Byla úprava použita v běžné práci?
+- Zmizelo původní tření nebo se snížilo na přijatelnou úroveň?
+- Nepotřeboval člověk speciální instrukci mimo pracovní místo?
+- Nevznikla kvůli změně nová zbytečná datová stopa?
+- Je jasné, co přesně se má stát běžným pravidlem?
+
+Příklad:
+
+```text
+Nestabilizovat:
+Odkaz byl přepsán, ale při prvním použití ho člověk nenašel.
+
+Stabilizovat:
+Odkaz vedl do správné provozní karty, stará tabulka nebyla použita a výstup vznikl jednou větou.
+```
+
+Stabilizace není odměna za snahu. Je to provozní krok po ověřeném výsledku. Tím chráníte tým před pravidly, která vznikla z dobrého úmyslu, ale nikdy nebyla potvrzená v realitě.
+
+### 2. Najděte kanonické pracovní místo
+
+Potvrzená úprava musí skončit tam, kde ji člověk potřebuje při práci. Ne tam, kde se dobře dokumentuje. Kanonické místo je první přirozené místo, kam člověk sáhne, když danou situaci řeší.
+
+Typická kanonická místa:
+
+- provozní karta konkrétního procesu,
+- checklist před vydáním,
+- měsíční úkol nebo opakovaný rytmus,
+- šablona poptávky, auditu, support odpovědi nebo sales handoffu,
+- interní index standardů,
+- README nebo runbook u technické části,
+- administrace nástroje, pokud pravidlo souvisí přímo s konfigurací.
+
+Špatné kanonické místo je často "někam do changelogu". Changelog má říct, co se změnilo. Nemá být hlavní cesta k pravidlu.
+
+Příklad:
+
+```text
+Potvrzená úprava:
+Měsíční kontrola formulářů už vede přes provozní kartu a ne přes starou tabulku.
+
+Kanonické místo:
+Měsíční úkol kontroly formulářů + provozní karta formulářů.
+
+Ne kanonické místo:
+Komentář v úkolu, kde se úprava původně řešila.
+```
+
+Pokud existují dvě stejně pravděpodobná místa, vyberte jedno jako zdroj pravdy a druhé jen odkažte. Dvě plné kopie pravidla jsou budoucí rozchod. Dnes vypadají stejně, za měsíc už jedna bude lhát.
+
+### 3. Přepište historii na aktuální pravidlo
+
+Běžné pravidlo nemá znít jako archeologická zpráva. Člověk, který ho čte za měsíc, nepotřebuje znát celou cestu od nálezu přes opravu až po ověření. Potřebuje vědět, co má udělat teď a proč to tak zhruba je.
+
+Přepisujte takto:
+
+```text
+Historická formulace:
+Po poslední kontrole jsme zjistili, že stará tabulka se pořád používá, proto jsme přidali nový odkaz a ověřili, že při první kontrole už funguje.
+
+Běžné pravidlo:
+Měsíční kontrola formulářů začíná v provozní kartě formulářů. Stará tabulka je pouze archiv a nesmí do ní vznikat nové zápisy.
+```
+
+Dobré pravidlo má tři části:
+
+1. Kdy se použije.
+2. Co má člověk udělat.
+3. Co už se nepoužívá nebo nepřidává.
+
+Příklad pro SaaS:
+
+```text
+Při kontrole aktivačních eventů používejte jen agregovaný měsíční přehled. Neexportujte seznam jednotlivých uživatelů, pokud není otevřený konkrétní support nebo billing případ.
+```
+
+Příklad pro marketing:
+
+```text
+Při vyhodnocení nové landing page zapisujeme kvalitu poptávek ručním štítkem v CRM. Do formuláře nepřidáváme další povinná pole jen kvůli pohodlnějšímu reportu.
+```
+
+Tím se potvrzená úprava mění z příběhu na pracovní instrukci. To je malý rozdíl v textu, ale velký rozdíl v tom, jak se pravidlo používá.
+
+### 4. Zavřete starou cestu
+
+Stabilizace není hotová, dokud stará cesta zůstává pohodlně otevřená. Nemusíte všechno mazat. Někdy je potřeba archiv, auditní stopa nebo historický kontext. Ale stará cesta nesmí vypadat jako běžná možnost.
+
+Možnosti uzavření:
+
+- odstranit starý odkaz z interního indexu,
+- přidat archivní hlavičku na starý dokument,
+- nastavit dokument jen pro čtení,
+- přesměrovat opakovaný úkol na nové místo,
+- sloučit duplicitní šablony,
+- označit starý postup jako nahrazený,
+- odstranit zbytečný export nebo pomocnou tabulku,
+- zkrátit starý komentář na odkaz do aktuálního pravidla.
+
+Příklad archivní hlavičky:
+
+```text
+Archiv: tato tabulka se nepoužívá pro nové kontroly formulářů.
+Aktuální pravidlo a nové zápisy jsou v provozní kartě formulářů.
+Nové řádky sem nepřidávat.
+```
+
+U technických artefaktů použijte stejný princip. Stará env proměnná, starý webhook, starý tracking event nebo starý runbook nesmí zůstat v systému jako lákavá zkratka. Když nejde smazat hned, označte ho stavem, vlastníkem a termínem dalšího úklidu.
+
+### 5. Udělejte privacy-first uzávěrku
+
+Při ověřování často vznikne drobná stopa: stavová věta, screenshot, dočasný export, komentář v úkolu, pracovní kopie šablony nebo poznámka z mini workshopu. Stabilizace je chvíle, kdy rozhodnete, co z toho zůstává.
+
+Privacy-first uzávěrka:
+
+```text
+Ponechat:
+Aktuální pravidlo v kanonickém místě.
+
+Zkrátit:
+Ověřovací poznámku na jednu stavovou větu.
+
+Smazat:
+Dočasné screenshoty, exporty, pomocné kopie a chatové přílohy bez dalšího účelu.
+
+Archivovat:
+Pouze věci, které mají právní, auditní nebo provozní důvod.
+
+Retence:
+Zapsat, kdy se archiv znovu zkontroluje nebo smaže.
+```
+
+Příklad:
+
+```text
+Po stabilizaci zůstává provozní karta a jedna věta v changelogu. Dočasný screenshot staré tabulky se maže, protože už neslouží žádnému rozhodnutí.
+```
+
+U zákaznických a týmových dat buďte přísnější. Pokud ověřovací podklad obsahuje osobní údaje, interní komunikaci nebo citlivý obchodní kontext, nenechávejte ho v dokumentaci jen proto, že "by se mohl hodit". To je věta, kterou se datový nepořádek živí.
+
+### 6. Dejte pravidlu lehký signál návratu staré cesty
+
+Běžné pravidlo nepotřebuje velký kontrolní proces. Potřebuje jednoduchý signál, který ukáže, že se stará cesta vrací.
+
+Příklady signálů:
+
+- v archivu vznikl nový zápis,
+- v supportu se znovu objevil odkaz na starou šablonu,
+- měsíční úkol obsahuje komentář "nevím, kde je aktuální karta",
+- někdo vytvořil nový export místo použití agregovaného přehledu,
+- do formuláře přibylo pole bez zapsaného účelu,
+- v interním indexu se znovu objeví duplicitní dokument.
+
+Signál zapište přímo do pravidla:
+
+```text
+Signál návratu staré cesty:
+Pokud ve staré tabulce vznikne nový řádek, nejde o chybu člověka. Je to signál, že pracovní cesta nebo odkaz pořád není dost jasný.
+```
+
+Tahle věta je důležitá. Brání tomu, aby tým řešil návrat staré cesty jako osobní selhání. Většinou je to selhání systému: špatný odkaz, nejasný název, duplicitní místo, starý návyk bez uzavření.
+
+### 7. Uzavřete stabilizaci jednou větou
+
+Na konci napište jednu stabilizační větu. Má být dost krátká, aby se dala vložit do changelogu, úkolu nebo provozní karty.
+
+Šablona:
+
+```text
+Potvrzená úprava je stabilizovaná: [běžné pravidlo] je v [kanonické místo], [stará cesta] je [uzavřená/archivní/jen pro čtení] a samostatné ověřování končí.
+```
+
+Příklad:
+
+```text
+Potvrzená úprava je stabilizovaná: měsíční kontrola formulářů začíná v provozní kartě, stará tabulka je označená jako archiv jen pro čtení a samostatné ověřování končí.
+```
+
+Pokud stabilizace odhalí další problém, nezvětšujte větu. Zapište nový samostatný nález:
+
+```text
+Samostatný nález:
+U jednoho formuláře chybí vlastník. Neřeší se v této stabilizaci; pokud se objeví při další kontrole, dostane vlastní pracovní větu.
+```
+
+Stabilizační věta má zavírat smyčku, ne otevírat další tři dveře.
+
+### Karta stabilizace potvrzené úpravy
+
+```text
+Potvrzená úprava:
+
+Zdroj ověření:
+
+Co se prokázalo:
+
+Kanonické pracovní místo:
+
+Běžné pravidlo:
+
+Stará cesta:
+Smazat / Archivovat / Jen pro čtení / Přesměrovat / Sloučit
+
+Co zůstává v changelogu:
+
+Privacy-first uzávěrka:
+- Ponechat:
+- Zkrátit:
+- Smazat:
+- Archivovat:
+- Retenční konec:
+
+Signál návratu staré cesty:
+
+Stabilizační věta:
+
+Stop pravidlo:
+```
+
+### Příklad vyplněné karty
+
+```text
+Potvrzená úprava:
+Měsíční úkol byl přesměrován ze staré tabulky na provozní kartu formulářů.
+
+Zdroj ověření:
+První normální měsíční kontrola po změně.
+
+Co se prokázalo:
+Kontrola začala v provozní kartě, stará tabulka nebyla použita a výstup vznikl jednou stavovou větou.
+
+Kanonické pracovní místo:
+Měsíční úkol kontroly formulářů a provozní karta formulářů.
+
+Běžné pravidlo:
+Měsíční kontrola formulářů začíná v provozní kartě. Stará tabulka je pouze archiv a nesmí do ní vznikat nové zápisy.
+
+Stará cesta:
+Archivovat + nastavit jen pro čtení.
+
+Co zůstává v changelogu:
+Jedna věta o stabilizaci a odkaz na aktuální provozní kartu.
+
+Privacy-first uzávěrka:
+- Ponechat: provozní kartu a archivní hlavičku staré tabulky.
+- Zkrátit: původní ověřovací poznámku na jednu stavovou větu.
+- Smazat: dočasný screenshot staré tabulky.
+- Archivovat: starou tabulku bez nových zápisů.
+- Retenční konec: zkontrolovat při kvartálním úklidu provozních artefaktů.
+
+Signál návratu staré cesty:
+Pokud ve staré tabulce vznikne nový řádek, zkontrolovat odkaz v měsíčním úkolu a název provozní karty.
+
+Stabilizační věta:
+Potvrzená úprava je stabilizovaná: měsíční kontrola formulářů začíná v provozní kartě, stará tabulka je archiv jen pro čtení a samostatné ověřování končí.
+
+Stop pravidlo:
+Bez nového zápisu ve staré tabulce se pravidlo kontroluje jen v běžném kvartálním úklidu.
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: potvrdit, že vstupní ověření má stav `Potvrdit`.
+2. Tři minuty: vybrat kanonické pracovní místo.
+3. Tři minuty: přepsat historii na běžné pravidlo.
+4. Dvě minuty: rozhodnout, co se stane se starou cestou.
+5. Dvě minuty: udělat privacy-first uzávěrku ověřovacích artefaktů.
+6. Dvě minuty: zapsat signál návratu staré cesty.
+7. Jedna minuta: napsat stabilizační větu.
+
+Výstup workshopu:
+
+```text
+Jedno běžné pravidlo v kanonickém místě, uzavřená stará cesta a uklizená ověřovací stopa.
+```
+
+Pokud workshop začne řešit širší redesign procesu, vraťte se k ověřené úpravě. Stabilizace má uzavřít jednu smyčku. Nový proces může být další práce, ale nemá se schovávat do stabilizace potvrzené drobnosti.
+
+### Checklist kapitoly
+
+- Stabilizujete jen úpravu se stavem `Potvrdit`?
+- Je jasné, co se prokázalo při normálním použití?
+- Má pravidlo jedno kanonické pracovní místo?
+- Je historie přepsaná na aktuální pracovní instrukci?
+- Ví člověk, kdy pravidlo použít a co přesně udělat?
+- Je stará cesta smazaná, archivovaná, přesměrovaná nebo označená jen pro čtení?
+- Nevznikají dvě plné kopie stejného pravidla?
+- Zůstává v changelogu jen nezbytný kontext?
+- Jsou dočasné screenshoty, exporty a pomocné kopie smazané nebo zkrácené?
+- Má ponechaný archiv jasný účel a retenční konec?
+- Je zapsaný lehký signál návratu staré cesty?
+- Neřešíte návrat staré cesty jako osobní chybu, ale jako signál systému?
+- Existuje jedna stabilizační věta?
+- Končí samostatné ověřování, jakmile je pravidlo stabilizované?
+
+Stabilizace potvrzené úpravy je úklid po dobré práci. Díky ní se tým neopírá o paměť autora změny, ale o jasné pravidlo v místě práce. A protože se zároveň zavře stará cesta a uklidí ověřovací stopa, systém se nezvětší víc, než je nutné. To je v privacy-first provozu tichá, ale velmi praktická výhra.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha JQ o stabilizaci potvrzené další úpravy do běžného pravidla: vstup jen pro potvrzený výsledek, výběr kanonického pracovního místa, přepis historie na aktuální pravidlo, uzavření staré cesty, privacy-first uzávěrka ověřovacích artefaktů, signál návratu staré cesty, stabilizační věta, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JP o ověření další úpravy po prvním normálním použití: výběr skutečného použití, návrat k pracovní větě, čtyři signály nalezení/dokončení/efekt/stopa, oddělení okolních problémů, privacy-first kontrola skutečné stopy, rozhodovací stavy, uzavření ověřovací stopy, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JO o převod kontroly běžného pravidla do jedné další úpravy: překlad stavů na typ práce, výběr nejbližšího pracovního místa, pracovní věta, hranice rozsahu, jednorázové provedení, privacy-first brzda, úzké ověření, stop pravidlo, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JN o kontrolu běžného pravidla po stabilizaci další akce: krátké kontrolní okno, samostatná dohledatelnost pravidla, porovnání minimálního výstupu s realitou, hledání obchvatů, privacy-first kontrola skutečné stopy, rozhodnutí stavu pravidla, uzavření nebo zúžení sledování, kontrolní karta, příklad, mini workshop a checklist.
