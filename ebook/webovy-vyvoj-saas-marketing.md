@@ -83827,8 +83827,232 @@ Můj pohled: dobrá dokumentace nestárne tím, že je stará. Stárne tím, že
 
 Uzavření potvrzené redukce je poslední krok, který brání návratu starého nepořádku. Když pravidlo najde své místo v běžném měsíčním rytmu, nepotřebuje zvláštní dohled. Stačí lehký signál, jasný domov a odvaha nepřidávat další administrativu jen proto, že systém zrovna funguje.
 
+## Příloha JY: Kontrola měsíčního rytmu po uzavření redukce
+
+Uzavřená redukce portfolia pravidel je hotová až ve chvíli, kdy přežije první běžný měsíční rytmus. Ne speciální kontrolu, ne slavnostní návrat autora změny, ale normální provoz: někdo otevře portfolio, hledá pravidlo, použije ho a jde dál.
+
+Tahle příloha navazuje na Přílohu JX. Tam se potvrzená redukce připojila k existujícímu měsíčnímu review. Tady ověříte, jestli se to povedlo bez nového aparátu kolem. Cílem není znovu hodnotit kvalitu každého pravidla. Cílem je zjistit, jestli měsíční rytmus chrání lehkost portfolia.
+
+Praktická otázka zní:
+
+```text
+Proběhla první měsíční kontrola redukovaného portfolia tak, že pomohla najít jeden užitečný signál bez nové administrativy?
+```
+
+Pokud odpověď zní "ano, ale museli jsme vytvořit tabulku se sedmi sloupci a pozvat pět lidí", rytmus ještě není zdravý. Možná pomohl, ale začíná znovu vyrábět práci, kterou měl šetřit.
+
+### Kontrolujte rytmus, ne celý archiv
+
+První chyba po uzavření redukce je otevřít všechna pravidla a začít je preventivně opravovat. To vypadá zodpovědně, ale často to jen vrátí tým do režimu velkého úklidu. Měsíční rytmus má být krátký průchod živým portfoliem, ne archeologie.
+
+Držte se tří vstupů:
+
+- pravidla, která se za poslední měsíc skutečně použila,
+- pravidla, která někdo hledal a nenašel,
+- pravidla, u kterých vznikla nová duplicita, výjimka nebo datová stopa.
+
+Všechno ostatní nechte být. Pravidlo, které se v daném měsíci nepoužilo a nemá žádný signál problému, nepotřebuje pozornost jen proto, že existuje. Portfolio se udržuje podle práce, ne podle pocitu, že každý dokument musí dostat svůj měsíční wellness pobyt.
+
+Slabý průchod:
+
+```text
+Prošli jsme všech 42 pravidel, u 17 jsme něco stylisticky upravili a u 8 jsme založili úkol na později.
+```
+
+Silnější průchod:
+
+```text
+Zachytili jsme jeden starý odkaz na pravidlo formulářů v šabloně landing page. Odkaz jsme přesměrovali a další zásah není potřeba.
+```
+
+První výstup vytvořil další práci. Druhý odstranil skutečné tření.
+
+### Hledejte jeden signál z reálného použití
+
+Měsíční kontrola má začít otázkou: "Kde se pravidlo v posledním měsíci potkalo s prací?" Pokud nemáte žádný příklad použití, neznamená to automaticky problém. Znamená to, že nemáte důvod dělat velký zásah.
+
+Užitečné signály:
+
+- člověk našel pravidlo sám a použil ho správně,
+- člověk našel pravidlo, ale potřeboval vysvětlit výjimku,
+- člověk použil starou kopii pravidla,
+- nové pravidlo vzniklo mimo portfolio,
+- stejná otázka se znovu řešila v chatu,
+- pravidlo vyžadovalo údaj nebo důkaz, který už není potřeba.
+
+Signál není drb, pocit ani názor autora. Signál je stopa z práce. Někdo něco hledal, použil, obešel, zduplikoval nebo kvůli tomu zastavil rozhodnutí.
+
+Mini příklad:
+
+```text
+Situace: Příprava nové landing page pro audit webu.
+Použité pravidlo: Veřejné formuláře.
+Signál: Editor našel správné pravidlo, ale stará šablona poptávky pořád obsahovala pole "telefon povinně".
+Akce: Šablona byla upravena, pravidlo zůstává beze změny.
+Rozhodnutí: Rytmus funguje; problém byl v navazující šabloně.
+```
+
+Tohle je dobrý výsledek. Rytmus nezměnil pravidlo, ale našel okolní místo, kde staré chování přežívalo.
+
+### Rozlišujte problém pravidla a problém okolí
+
+Když se při měsíční kontrole objeví tření, hned ho nezačínejte řešit přepisem pravidla. Často není problém v pravidle samotném, ale v tom, kde je odkazované, jak je pojmenované nebo která šablona pořád drží starou verzi.
+
+Rozlišujte čtyři situace:
+
+| Situace | Co to znamená | Nejmenší reakce |
+| --- | --- | --- |
+| Pravidlo nejde najít | Problém je v navigaci nebo názvu. | Přesuňte odkaz, zpřesněte název, upravte index. |
+| Pravidlo je nalezené, ale nejasné | Problém je ve formulaci rozhodnutí. | Přepište jednu pracovní větu nebo doplňte výjimku. |
+| Pravidlo je jasné, ale okolí drží starou cestu | Problém je v šabloně, odkazu nebo návyku. | Opravte okolní pracovní místo. |
+| Pravidlo se nepoužilo a není signál problému | Možná jen nebyla relevantní situace. | Nedělejte nic. |
+
+Nejhorší reakce je přepsat pravidlo, když stačilo opravit odkaz. Druhá nejhorší reakce je založit nové pravidlo, když stačilo doplnit jednu výjimku. Obě cesty pomalu vrací portfolio do stavu před redukcí.
+
+### Držte kontrolní výstup na jedné větě
+
+Po měsíční kontrole má vzniknout jedna pracovní věta, ne report. Věta má říct, co se stalo s rytmem a co je další nejmenší krok.
+
+Šablona:
+
+```text
+Měsíční kontrola [datum] potvrdila / upravila / znovu otevřela [oblast], protože [signál z práce]; další krok je [jedna akce nebo žádná akce].
+```
+
+Příklady:
+
+```text
+Měsíční kontrola 2026-05-18 potvrdila pravidlo veřejných formulářů, protože editor použil zkrácenou kartu bez pomoci; další krok není potřeba.
+```
+
+```text
+Měsíční kontrola 2026-05-18 upravila okolní šablonu landing page, protože obsahovala staré povinné pole telefonu; pravidlo zůstává beze změny.
+```
+
+```text
+Měsíční kontrola 2026-05-18 znovu otevřela pravidlo předávání přístupů, protože tým použil starý checklist z onboardingové složky; další krok je přesměrovat starý checklist na kanonickou kartu.
+```
+
+Jedna věta nutí tým rozhodnout. Když se nevejdete do jedné věty, pravděpodobně mícháte několik problémů dohromady. Vyberte jeden.
+
+### Privacy-first kontrola rytmu
+
+Měsíční kontrola portfolia pravidel může snadno začít sbírat zbytečné informace: kdo co otevřel, kdo co nečetl, kdo se ptal, kdo udělal chybu. To není potřeba. Pokud pravidlo nefunguje, stačí znát místo tření a dopad na práci.
+
+Privacy-first kontrola se ptá:
+
+- Sbíráme jen signál o stavu pravidla, ne profil lidí?
+- Nepřidali jsme do kontrolní věty osobní údaje, zákaznické detaily nebo interní citace?
+- Neuchováváme screenshoty a exporty jen proto, že vznikly při kontrole?
+- Má dočasný podklad jasné datum smazání nebo archivace?
+- Zmenšila kontrola datovou stopu, nebo ji naopak rozšířila?
+
+Praktické pravidlo: z měsíční kontroly má zůstat rozhodnutí, ne sledovací stopa. Pokud potřebujete příklad, anonymizujte ho na pracovní situaci.
+
+Slabý zápis:
+
+```text
+Petra 18. 5. v 9:42 hledala pravidlo a psala do chatu, že neví, co s telefonem zákazníka Novák.
+```
+
+Silnější zápis:
+
+```text
+Při úpravě auditního formuláře nebylo jasné, zda je telefon povinný. Šablona byla opravena podle pravidla veřejných formulářů.
+```
+
+Druhý zápis pomáhá systému a přitom zbytečně neukládá osobní kontext.
+
+### Kdy rytmus upravit
+
+První měsíční kontrola může skončit třemi zdravými výsledky.
+
+| Výsledek | Význam | Co dál |
+| --- | --- | --- |
+| Potvrdit rytmus | Pravidla se našla, nepřibyla administrativa, signál byl užitečný nebo nebyl potřeba. | Pokračovat stejně. |
+| Zúžit rytmus | Kontrola byla moc široká nebo moc častá. | Omezit vstupy jen na skutečné použití a nálezy. |
+| Opravit napojení | Pravidlo je v pořádku, ale odkazy, šablony nebo index vedou jinam. | Opravit nejbližší pracovní místo. |
+
+Nezdravý výsledek je "rozšířit kontrolu pro jistotu". To skoro vždy znamená, že tým nevěří jednoduchému rytmu a začíná ho nahrazovat dozorem. Jestli se bojíte, že něco uteče, definujte lepší signál. Nepřidávejte další průchod vším.
+
+### Kontrolní karta měsíčního rytmu
+
+```text
+Datum kontroly:
+Kontrolovaná oblast:
+Použité pravidlo nebo signál:
+Kde se potkalo s reálnou prací:
+
+Co fungovalo:
+Kde vzniklo tření:
+Je problém v pravidle, nebo v okolním pracovním místě:
+Nejmenší reakce:
+
+Privacy-first kontrola:
+Dočasné podklady k odstranění:
+Jednověté rozhodnutí:
+Další kontrola v běžném rytmu:
+```
+
+Příklad:
+
+```text
+Datum kontroly: 2026-05-18
+Kontrolovaná oblast: Veřejné formuláře
+Použité pravidlo nebo signál: Úprava landing page pro audit webu
+Kde se potkalo s reálnou prací: Editor zkontroloval formulář před publikací.
+
+Co fungovalo: Kanonické pravidlo bylo nalezeno přes checklist landing page.
+Kde vzniklo tření: Stará šablona měla telefon jako povinné pole.
+Je problém v pravidle, nebo v okolním pracovním místě: Okolní šablona.
+Nejmenší reakce: Upravit šablonu a odstranit starou kopii.
+
+Privacy-first kontrola: Bez osobních údajů, jen pracovní situace.
+Dočasné podklady k odstranění: Screenshot staré šablony po uzavření úkolu.
+Jednověté rozhodnutí: Měsíční kontrola potvrdila pravidlo veřejných formulářů a opravila starou šablonu, která držela povinný telefon.
+Další kontrola v běžném rytmu: Za měsíc jen pokud vznikne nový signál.
+```
+
+Karta je pomocná. Pokud je po měsíci potřeba jen jednověté rozhodnutí v changelogu, kartu klidně nechte jako dočasný pracovní záznam a smažte podklady. Ano, i dobré formuláře se mají umět uklidit po sobě.
+
+### Mini workshop na 10 minut
+
+1. Dvě minuty: vezměte jednu oblast uzavřenou v Příloze JX.
+2. Dvě minuty: najděte jeden reálný signál z posledního měsíce.
+3. Dvě minuty: rozhodněte, jestli je problém v pravidle, názvu, odkazu, šabloně nebo nikde.
+4. Dvě minuty: napište nejmenší reakci.
+5. Dvě minuty: zapište jednověté rozhodnutí a smažte zbytečné podklady.
+
+Výstup:
+
+```text
+Jedna měsíční kontrola redukovaného portfolia uzavřená jednou větou a maximálně jednou malou reakcí.
+```
+
+### Codyho komentář
+
+Můj pohled: dokumentační systém se pozná podle toho, co odmítne měřit. Pokud kvůli každému pravidlu sledujete lidi, časy, čtení a reporty, nevzniká důvěra v systém. Vzniká kontrolní stín. Užitečné portfolio pravidel nepotřebuje vědět, kdo ho otevřel. Potřebuje vědět, jestli lidem pomohlo udělat lepší rozhodnutí.
+
+### Checklist kapitoly
+
+- Kontrolovali jste jen pravidla se skutečným použitím nebo signálem?
+- Nevznikl z první měsíční kontroly velký audit celého archivu?
+- Umíte popsat jeden konkrétní signál z práce?
+- Rozlišili jste problém pravidla od problému odkazu, názvu nebo šablony?
+- Zapsali jste výsledek jednou pracovní větou?
+- Reakce je nejmenší možná, ne preventivní přestavba systému?
+- Nesledujete chování jednotlivců místo kvality výstupu?
+- Neobsahuje kontrolní záznam osobní údaje nebo zbytečné zákaznické detaily?
+- Mají dočasné podklady jasné smazání nebo archivaci?
+- Zůstává měsíční rytmus připojený k existujícímu review?
+- Dokáže tým říct, co se příště kontroluje pouze při novém signálu?
+- Nevznikl nový nástroj, tabulka nebo pravidlo jen kvůli kontrole kontroly?
+
+První měsíční kontrola po uzavření redukce má být skoro nudná. Jedno pravidlo, jeden signál, jedna věta, případně jedna malá oprava. Když se rytmus takhle udrží, portfolio pravidel zůstává pracovní pomůcka místo dalšího systému, který se časem musí sám opravovat.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha JY o kontrolu měsíčního rytmu po uzavření redukce: kontrola podle reálného použití, rozlišení problému pravidla a okolních šablon, jednovětý výstup, privacy-first omezení stop, kontrolní karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JX o uzavření potvrzené redukce portfolia do měsíčního rytmu: vstupní brána pro potvrzené redukce, napojení na existující review, zápis stavu místo příběhu, úklid přechodových opor, lehké signály bez sledování lidí, redukční fronta, uzavírací karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JW o ověření redukovaného portfolia pravidel po prvním použití: výběr skutečné situace, cesta ke kanonickému pravidlu, kontrola zkrácení bez ztráty rozhodnutí, staré trasy, privacy-first datová stopa, čtyři výsledky ověření, kontrolní karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JV o měsíční redukci portfolia pravidel: výběr kandidátů, rozhodnutí ponechat/zkrátit/sloučit/archivovat, zkracování bez ztráty významu, slučování duplicit, archivace, privacy-first úklid, redukční karta, mini workshop a checklist.
