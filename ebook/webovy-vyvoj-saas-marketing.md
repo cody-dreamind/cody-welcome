@@ -84239,8 +84239,222 @@ Můj pohled: kvartální konsolidace je užitečná jen tehdy, když umí říct
 
 Kvartální konsolidace má portfolio pravidel držet zdravé, ne slavnostně přestavět. Když z posledních měsíců vyjde jeden vzor, opravte jedno místo. Když nevyjde žádný vzor, pokračujte. Stabilita je taky výsledek práce, i když se špatně prodává jako dramatická změna.
 
+## Příloha KA: Převod kvartální konsolidace do jedné portfoliové opravy
+
+Kvartální konsolidace z Přílohy JZ končí jedním stavem portfolia a maximálně jednou opravou. Tato příloha řeší další krok: jak z kvartálního závěru udělat konkrétní změnu, která se opravdu projeví v práci týmu, ale nerozjede další nekonečný audit.
+
+Smysl není "udělat pořádek ve všem". Smysl je vzít jeden potvrzený vzor a převést ho do jedné hotové portfoliové opravy:
+
+```text
+Kvartální vzor -> jedna opravná věta -> jedno pracovní místo -> jedna změna -> první ověření v dalším měsíčním rytmu.
+```
+
+Pokud po kvartální konsolidaci neumíte napsat opravnou větu, neimplementujte nic. Nejasná oprava v portfoliu pravidel obvykle nevytvoří jasnější systém. Jen přidá další vrstvu, kterou bude za měsíc někdo konsolidovat. A ano, takhle vzniká dokumentační perpetuum mobile, bohužel bez elektřiny zdarma.
+
+### Začněte kvartálním stavem, ne náladou
+
+Nejdřív se vraťte ke stavu z kvartální karty. Oprava se musí odvíjet od něj, ne od toho, co je zrovna nejvíc vidět nebo koho poslední problém nejvíc rozčiluje.
+
+Převod stavů do práce:
+
+| Stav z konsolidace | Typ opravy | Co se nemá dělat |
+| --- | --- | --- |
+| Pokračovat | Žádná změna, jen záznam rozhodnutí. | Nevymýšlet preventivní úpravu. |
+| Opravit napojení | Upravit odkaz, index, šablonu nebo rozcestník. | Nepřepisovat samotné pravidlo, pokud je srozumitelné. |
+| Zkrátit pravidlo | Udělat rozhodovací kartu nebo zkrátit úvod. | Nepřepsat celý standard do nové metodiky. |
+| Sloučit duplicity | Vybrat kanonickou verzi a ostatní zavřít. | Nenechat více "dočasně platných" verzí. |
+| Znovu otevřít oblast | Založit cílenou revizi jedné oblasti. | Neotevřít celé portfolio pravidel. |
+
+Příklad:
+
+```text
+Stav: Opravit napojení.
+Špatná reakce: Uděláme nový audit všech formulářových pravidel.
+Lepší reakce: Opravíme tři šablony landing page tak, aby vedly na kanonickou kartu veřejných formulářů.
+```
+
+Rozdíl je v kontrole rozsahu. První reakce otevírá systém. Druhá opravuje místo, kde systém selhal.
+
+### Napište opravnou větu
+
+Opravná věta je malý kontrakt. Říká, co přesně se změní, kde se to změní a proč. Bez ní se portfoliová oprava snadno rozleze do komentářů, přejmenování, úklidu složek a drobných "když už jsme u toho" zásahů.
+
+Formát:
+
+```text
+Protože [opakovaný vzor], upravíme [jedno pracovní místo] tak, aby [konkrétní očekávané použití].
+```
+
+Příklady:
+
+```text
+Protože tým opakovaně hledal pravidlo podle názvu úkolu, přejmenujeme kartu "Formuláře" na "Publikace veřejného formuláře" a upravíme odkaz v publikačním checklistu.
+```
+
+```text
+Protože dvě šablony drží starý postup sběru telefonních čísel, archivujeme starou obchodní šablonu a novou napojíme na kanonickou kartu poptávkového formuláře.
+```
+
+```text
+Protože pravidlo pro zákaznické screenshoty lidé najdou, ale nepoužijí bez vysvětlení, přidáme na začátek rozhodovací kartu se třemi otázkami a detail necháme pod ní.
+```
+
+Dobrá opravná věta obsahuje sloveso. "Zlepšit portfolio formulářů" není oprava. "Archivovat starou šablonu a odkázat checklist na kanonickou kartu" oprava je.
+
+### Vyberte jedno pracovní místo
+
+Portfoliová oprava má mít jedno hlavní místo zásahu. Ne nutně jeden soubor, ale jedno pracovní místo: index, šablona, karta pravidla, rozcestník, checklist, onboardingový balíček nebo formulářový brief.
+
+Vyberte místo podle toho, kde vzniká tření:
+
+- Lidé pravidlo nenajdou: opravte index, název nebo rozcestník.
+- Lidé použijí starý postup: opravte šablonu, která starý postup reprodukuje.
+- Lidé pravidlo najdou, ale nedokončí práci: zkraťte začátek pravidla.
+- Lidé používají dvě verze: sloučte nebo zavřete duplicitu.
+- Lidé řeší novou rozhodovací situaci: znovu otevřete jen danou oblast.
+
+Nejbližší pracovní místo má přednost před "čistým" dokumentačním místem. Pokud tým začíná práci v šabloně nabídky, oprava ukrytá hluboko v centrálním pravidle mu nepomůže. Kanonické pravidlo je důležité, ale pracovní vstup je místo, kde se chování opravdu mění.
+
+### Proveďte změnu v jedné dávce
+
+Jedna portfoliová oprava má být dokončitelná v jedné pracovní dávce. Pokud vyžaduje víc dnů, několik schůzek a pět závislostí, pravděpodobně jste z jedné opravy udělali projekt.
+
+Pracovní postup:
+
+1. Otevřete jen artefakty nutné pro opravnou větu.
+2. Udělejte změnu v kanonickém místě nebo v pracovním vstupu.
+3. Zavřete starou cestu: archivujte, přesměrujte, přejmenujte nebo odstraňte duplicitní odkaz.
+4. Doplňte krátkou změnovou poznámku.
+5. Připravte první ověření v dalším měsíčním rytmu.
+
+Příklad změnové poznámky:
+
+```text
+Změna 2026-05-18: Šablony landing page nově vedou na kanonickou kartu veřejných formulářů. Stará kopie checklistu byla archivována, protože opakovaně vracela povinný telefon do poptávkového formuláře.
+```
+
+Poznámka nemusí být dlouhá. Musí ale vysvětlit, proč oprava existuje. Bez důvodu se z ní za půl roku stane další záhada v dokumentaci.
+
+### Zavřete starou cestu viditelně
+
+U portfolia pravidel nestačí vytvořit správnou novou cestu. Musíte také ošetřit starou cestu, která vedla k chybě. Jinak budou oba postupy existovat vedle sebe a tým si vybere ten, který zrovna najde jako první.
+
+Možnosti uzavření:
+
+- Přesměrovat starý odkaz na kanonické pravidlo.
+- Archivovat starou šablonu s jasnou poznámkou "nahrazeno".
+- Smazat duplicitní kopii, pokud nemá samostatnou hodnotu.
+- Přejmenovat pracovní kartu podle aktuální situace.
+- Přidat do starého místa krátký odkaz na nový zdroj pravdy.
+
+Špatné uzavření:
+
+```text
+Starou šablonu necháme, kdyby ji někdo potřeboval.
+```
+
+Lepší uzavření:
+
+```text
+Stará šablona je archivovaná jen pro historii. Pro nové landing page platí šablona napojená na kartu veřejných formulářů.
+```
+
+Historie může zůstat, ale nesmí se tvářit jako aktivní volba.
+
+### Privacy-first kontrola portfoliové opravy
+
+Portfoliová oprava často vzniká z reálných chyb, dotazů nebo příkladů. To svádí nechat v dokumentaci konkrétní jména, screenshoty, citace ze zákaznické komunikace nebo interní poznámky. Pro opravu pravidla to obvykle není potřeba.
+
+Před uzavřením si projděte:
+
+- Je v opravné větě pracovní situace, ne jméno člověka?
+- Nezůstaly v příkladu osobní údaje zákazníka?
+- Nepřenášíme do šablony citaci z interního chatu?
+- Má dočasný podklad jasné smazání nebo archivaci?
+- Nezavádíme nové sledování jednotlivců jen kvůli ověření opravy?
+- Je v kanonickém pravidle jen datové minimum potřebné pro rozhodnutí?
+
+Privacy-first oprava neznamená, že se ztratí kontext. Znamená, že kontext popisuje práci, ne lidi. "Stará obchodní šablona vracela povinný telefon" je užitečné. "Petr to třikrát zapomněl" je pro pravidlo většinou zbytečné a pro kulturu dost drahé.
+
+### Karta portfoliové opravy
+
+```text
+Navazuje na kvartál:
+Stav z konsolidace:
+
+Opakovaný vzor:
+Opravná věta:
+Hlavní pracovní místo:
+
+Provedená změna:
+Zavřená stará cesta:
+Co záměrně neměníme:
+
+Privacy-first kontrola:
+Dočasné podklady:
+První ověření v dalším měsíčním rytmu:
+Jednovětý závěr:
+```
+
+Příklad:
+
+```text
+Navazuje na kvartál: Q2 2026
+Stav z konsolidace: Opravit napojení
+
+Opakovaný vzor: Landing page šablony opakovaně vedly na starou kopii formulářového checklistu.
+Opravná věta: Protože šablony vracely starý postup, napojíme všechny landing page šablony na kanonickou kartu veřejného formuláře.
+Hlavní pracovní místo: Šablona landing page před publikací.
+
+Provedená změna: Checklist v šabloně odkazuje na kanonickou kartu a nepřebírá vlastní kopii pravidel.
+Zavřená stará cesta: Stará kopie checklistu archivována s poznámkou "nahrazeno".
+Co záměrně neměníme: Nepřepisujeme pravidlo formulářů a nezavádíme nový audit.
+
+Privacy-first kontrola: Bez jmen a zákaznických screenshotů, jen popis pracovní situace.
+Dočasné podklady: Smazat screenshot staré šablony po měsíční kontrole.
+První ověření v dalším měsíčním rytmu: U nové landing page zkontrolovat, zda formulář nepřidal zbytečný telefon.
+Jednovětý závěr: Oprava nemění pravidlo formulářů, ale pracovní vstup, který k němu tým používá.
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: přečtěte kvartální stav a opakovaný vzor.
+2. Tři minuty: napište opravnou větu.
+3. Tři minuty: vyberte jedno hlavní pracovní místo.
+4. Tři minuty: rozhodněte, jak se zavře stará cesta.
+5. Dvě minuty: udělejte privacy-first kontrolu podkladů.
+6. Dvě minuty: napište první ověření pro další měsíční rytmus.
+
+Výstup:
+
+```text
+Jedna karta portfoliové opravy, jeden zásah a jasný signál pro příští měsíční kontrolu.
+```
+
+### Codyho komentář
+
+Můj pohled: dobrá portfoliová oprava je skoro neviditelná. Lidé prostě příště přijdou správnou cestou, použijí aktuální pravidlo a nemusí vědět, že za tím byla kvartální konsolidace. To je v pořádku. Interní systémy nemají sbírat potlesk. Mají snižovat počet drobných selhání, která se tváří jako lidská chyba, ale ve skutečnosti jsou špatně navržená cesta.
+
+### Checklist kapitoly
+
+- Vycházíte ze stavu kvartální konsolidace, ne z aktuální nálady?
+- Umíte opravu popsat jednou opravnou větou?
+- Má věta jasné sloveso, pracovní místo a očekávané použití?
+- Vybrali jste jedno hlavní místo zásahu?
+- Opravujete místo, kde vznikalo tření, ne jen místo, které se dobře edituje?
+- Provedli jste změnu v jedné dávce?
+- Zavřeli jste starou cestu viditelně?
+- Nezůstaly dvě aktivní verze stejného pravidla?
+- Zapsali jste krátkou změnovou poznámku s důvodem?
+- Nepřidali jste nový audit, nástroj nebo sledování lidí?
+- Prošla oprava privacy-first kontrolou?
+- Má další měsíční rytmus jasný signál, podle kterého pozná, že oprava pomohla?
+
+Portfoliová oprava je úspěšná tehdy, když další použití pravidla vyžaduje méně vysvětlování. Ne když dokumentace vypadá bohatší. Bohatší dokumentace může být někdy jen dražší nepořádek s lepším titulkem.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KA o převod kvartální konsolidace do jedné portfoliové opravy: převod stavů na typ práce, opravná věta, jedno pracovní místo, jednorázové provedení, viditelné zavření staré cesty, privacy-first kontrola podkladů, karta opravy, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JZ o kvartální konsolidaci portfolia pravidel po měsíčním rytmu: práce se třemi měsíčními větami, hledání opakovaného vzoru, stav portfolia, jedna vybraná oprava, privacy-first omezení podkladů, kvartální karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JY o kontrolu měsíčního rytmu po uzavření redukce: kontrola podle reálného použití, rozlišení problému pravidla a okolních šablon, jednovětý výstup, privacy-first omezení stop, kontrolní karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JX o uzavření potvrzené redukce portfolia do měsíčního rytmu: vstupní brána pro potvrzené redukce, napojení na existující review, zápis stavu místo příběhu, úklid přechodových opor, lehké signály bez sledování lidí, redukční fronta, uzavírací karta, mini workshop a checklist.
