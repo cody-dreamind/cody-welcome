@@ -86704,8 +86704,227 @@ Můj pohled: portfolio poučení má sloužit jako kompas, ne jako kronika všec
 
 Měsíční kontrola uzavřených poučení je užitečná jen tehdy, když zmenšuje budoucí tření. Pokud z ní vzniká další vrstva řízení, minula pointu. Poučení má postupně mizet do lepších šablon, pravidel a rytmů. Ne bobtnat do vitríny, na kterou se chodíme dívat, když máme špatné svědomí z opakovaných chyb.
 
+## Příloha KL: Provedení systémové úpravy z měsíční kontroly poučení
+
+Příloha KK skončila jednou systémovou úpravou. Tahle příloha řeší chvíli, kdy je potřeba tu úpravu opravdu provést. Ne jako velký projekt, ne jako nový standardizační sprint, ale jako malý zásah do místa, kde příští podobná práce začne.
+
+Nejčastější chyba po měsíční kontrole je, že tým správně pojmenuje vzor a pak ho nechá viset jako položku v backlogu. Vypadá to rozumně: "upravíme šablonu", "sjednotíme index", "doplníme privacy otázku". Jenže pokud změna nemá vlastníka, konkrétní pracovní místo a první ověření, zůstane z ní jen hezká věta. A hezké věty mají v provozu jednu nevýhodu: neumí samy otevřít pull request, přepsat šablonu ani zabránit kopírování starých pravidel.
+
+Pracovní otázka:
+
+```text
+Jak provedeme jednu vybranou systémovou úpravu tak, aby příští podobná práce byla jednodušší a nevznikla nová zbytečná evidence?
+```
+
+Výstupem není dokument o tom, že se má něco zlepšit. Výstupem je upravené pracovní místo a krátká kontrola, že změna jde použít.
+
+### Začněte měsíční větou
+
+Neotevírejte znovu celý měsíční review. Vezměte jen závěrečnou větu z KK:
+
+```text
+Kvůli opakovanému [typ tření] upravíme [jedno pracovní místo] tak, aby příští podobná práce [lepší výsledek].
+```
+
+Tahle věta je brána do práce. Pokud ji neumíte najít, neprovádějte úpravu. Nejdřív se vraťte do měsíční kontroly a dopište rozhodnutí. Bez ní budete jen intuitivně přepisovat dokumentaci podle posledního dojmu.
+
+Příklad:
+
+```text
+Kvůli opakovanému kopírování privacy pravidel upravíme šablonu checklistu tak, aby nová práce vždy odkazovala na kanonickou kartu a nevytvářela vlastní kopii pravidel.
+```
+
+Z téhle věty je vidět typ tření, místo zásahu i očekávaný výsledek. To stačí. Nepotřebujete projektový plán na tři stránky. Potřebujete otevřít správnou šablonu a změnit ji tak, aby nové chování bylo přirozenější než staré.
+
+### Najděte nejbližší pracovní místo
+
+Systémová úprava má patřit tam, kde člověk dělá rozhodnutí, ne tam, kde se dobře archivuje. Pokud problém vznikal při zakládání checklistu, opravte šablonu checklistu. Pokud při onboardingu, opravte onboardingovou trasu. Pokud při review, opravte review kartu. Pokud při formuláři, opravte formulářovou datovou mapu nebo brief.
+
+Dobré pracovní místo splňuje tři podmínky:
+
+- člověk ho otevře před rozhodnutím nebo během něj,
+- změna v něm ovlivní další podobnou práci,
+- je to kanonický zdroj, ne vedlejší poznámka.
+
+Slabé místo je naopak takové, které se čte až po práci: retrospektiva, archiv starých poučení, obecná wiki stránka nebo poznámka z porady. Ty mohou být užitečné pro kontext, ale málokdy změní chování v pravý moment.
+
+Příklad převodu:
+
+| Vzor z KK | Špatné místo úpravy | Lepší místo úpravy |
+| --- | --- | --- |
+| Kopírování privacy pravidel | Měsíční zápis z review | Šablona checklistu |
+| Nejasné vlastnictví | Poznámka v retrospektivě | Karta odpovědnosti role |
+| Těžká uzávěrka poučení | Nový proces kontroly | Zkrácená uzavírací karta |
+| Pravidlo mimo práci | Obecná znalostní báze | Konkrétní pracovní brief |
+
+Když váháte mezi dvěma místy, vyberte to, které člověk otevře dřív. Pravidlo, které přijde pozdě, bývá jen komentář k chybě.
+
+### Změňte jednu věc, ne celý systém
+
+Portfoliové poučení svádí k velkým opravám. Když už jste našli opakovaný vzor, najednou je lákavé přepsat všechny šablony, sjednotit terminologii, vyčistit index a udělat školení. Zní to odpovědně. Často je to ale jen elegantnější forma odkladu.
+
+Pro první provedení zvolte nejmenší změnu, která může zabránit opakování tření:
+
+- jedna věta v šabloně,
+- jeden povinný odkaz na zdroj pravdy,
+- jedno pole v kartě,
+- jedno stop pravidlo,
+- jedno odstranění duplicitní sekce,
+- jedno přejmenování stavu, který mate tým.
+
+Příklad úpravy šablony checklistu:
+
+```text
+Privacy a formuláře: nepište pravidla znovu. Odkazujte na kanonickou kartu formulářů a doplňte jen rozdíl pro tento konkrétní případ.
+```
+
+To je malá změna, ale mění rozhodnutí v okamžiku práce. Člověk už nemusí hádat, jestli má pravidlo kopírovat. Šablona ho vede k odkazu na zdroj pravdy.
+
+### Upravte okolní text, aby změna nebyla cizí těleso
+
+Jedna nová věta může působit jako nálepka, pokud nesedí do okolního textu. Před uložením změny proto zkontrolujte tři věci:
+
+1. Používá stejný jazyk jako zbytek šablony?
+2. Je ve správném pořadí vůči práci, kterou člověk dělá?
+3. Nevytváří rozpor s jinou částí dokumentu?
+
+Slabá úprava:
+
+```text
+Dodržujte privacy-first principy dle interních standardů.
+```
+
+Silnější úprava:
+
+```text
+Pokud checklist obsahuje formulář, odkažte na kanonickou kartu formulářů a zapisujte jen odchylku pro tento konkrétní projekt.
+```
+
+První věta zní důležitě, ale neříká, co udělat. Druhá věta vede ruku. To je u provozních šablon cennější než slavnostní obecnost.
+
+### Zavřete starou cestu
+
+Když přidáte nové pravidlo, zkontrolujte, jestli ve stejném systému nezůstává stará cesta, která lidi stáhne zpátky. Typicky jde o starý příklad, duplicitní sekci, archivní šablonu, zastaralý odkaz nebo interní návod, který říká totéž jinak.
+
+Nemusíte uklidit celý vesmír. Stačí zavřít nejbližší kolizi:
+
+- nahradit starý příklad novým,
+- odstranit duplicitní odstavec,
+- přidat poznámku `nahrazeno kanonickou kartou`,
+- přesměrovat interní odkaz,
+- upravit název šablony, aby bylo jasné, která je aktuální.
+
+Pokud starou cestu nejde hned smazat, označte ji velmi prakticky:
+
+```text
+Stav: nahrazeno. Pro nové checklisty používejte šablonu X. Tato verze zůstává jen kvůli starším projektům do dalšího úklidu.
+```
+
+Nejhorší varianta je mlčet. Dvě podobné cesty bez vysvětlení jsou pozvánka k tomu, aby si každý vybral tu, kterou zná z minula.
+
+### Privacy-first provedení změny
+
+Systémová úprava má zmenšit datovou stopu, ne vytvořit další dohled. Proto při provedení změny zkontrolujte:
+
+- zda nová šablona nevyžaduje osobní údaje navíc,
+- zda se kvůli ověření nebude sledovat konkrétní člověk,
+- zda příklady nejdou anonymizovat nebo zobecnit,
+- zda staré screenshoty, chatové citace a exporty po úpravě ještě mají účel,
+- zda nové pravidlo vede k odkazu na zdroj pravdy místo kopírování citlivých instrukcí.
+
+Silná privacy-first úprava často vypadá nenápadně:
+
+```text
+Do checklistu zapisujte jen rozhodnutí a odkaz na kanonickou kartu. Neukládejte screenshot formuláře ani celé odpovědi uživatelů, pokud nejsou nutné pro řešení incidentu.
+```
+
+Tohle není právnický ornament. Je to provozní brzda proti sběru dat ze zvyku. A sběr dat ze zvyku je přesně ten druh drahé lenosti, který se tváří jako pečlivost.
+
+### Karta provedení systémové úpravy
+
+```text
+Původní měsíční věta:
+Typ tření:
+Vybrané pracovní místo:
+
+Provedená změna:
+Co se změnilo v textu, šabloně nebo pravidle:
+Co bylo odstraněno, sloučeno nebo označeno jako nahrazené:
+
+Proč je změna nejmenší dostatečná:
+Jak člověka navede v okamžiku práce:
+Jak ověříme při prvním použití:
+
+Privacy-first kontrola:
+Co se nově nesbírá:
+Co se maže nebo zkracuje:
+Kde je zdroj pravdy:
+
+Jednovětý závěr:
+```
+
+Příklad:
+
+```text
+Původní měsíční věta: Kvůli opakovanému kopírování privacy pravidel upravíme šablonu checklistu tak, aby nová práce vždy odkazovala na kanonickou kartu a nevytvářela vlastní kopii pravidel.
+Typ tření: kopírování pravidel
+Vybrané pracovní místo: šablona nového checklistu
+
+Provedená změna: Do části formuláře a tracking přidána věta o odkazu na kanonickou kartu.
+Co se změnilo v textu, šabloně nebo pravidle: Nový checklist má povinný odkaz na zdroj pravdy a zapisuje jen projektovou odchylku.
+Co bylo odstraněno, sloučeno nebo označeno jako nahrazené: Starý příklad s opsanými privacy pravidly byl nahrazen odkazovým příkladem.
+
+Proč je změna nejmenší dostatečná: Problém vznikal při zakládání checklistu, ne při měsíčním review.
+Jak člověka navede v okamžiku práce: Šablona říká, že pravidla se nekopírují a kde je najít.
+Jak ověříme při prvním použití: První nový checklist zkontrolujeme jen podle toho, zda odkazuje na kanonickou kartu a neobsahuje vlastní kopii pravidel.
+
+Privacy-first kontrola: Bez sledování autora checklistu, bez screenshotů formuláře.
+Co se nově nesbírá: Kopie obecných privacy instrukcí v projektových checklistech.
+Co se maže nebo zkracuje: Starý opsaný příklad.
+Kde je zdroj pravdy: Kanonická karta formulářů.
+
+Jednovětý závěr: Šablona checklistu teď vede novou práci k odkazu na zdroj pravdy místo kopírování pravidel.
+```
+
+### Mini workshop na 12 minut
+
+1. Dvě minuty: přečtěte původní měsíční větu.
+2. Dvě minuty: určete nejbližší pracovní místo.
+3. Tři minuty: napište nejmenší dostatečnou změnu.
+4. Dvě minuty: najděte a zavřete nejbližší starou cestu.
+5. Dvě minuty: proveďte privacy-first kontrolu.
+6. Jednu minutu: zapište ověření při prvním použití.
+
+Výstup:
+
+```text
+Jedno upravené pracovní místo, jedna zavřená kolize a jasné ověření při prvním použití.
+```
+
+### Codyho komentář
+
+Můj pohled: systémová úprava je dobrá jen tehdy, když budoucí práce proběhne lépe i bez toho, aby si někdo pamatoval historii poučení. Jestli změna vyžaduje, aby tým znal celý příběh, ještě není v systému. Je pořád v hlavách. A hlavy jsou skvělá věc, dokud někdo není na dovolené, nemocný, zahlcený nebo prostě pondělí.
+
+### Checklist kapitoly
+
+- Máte původní měsíční větu z KK?
+- Je jasný jeden typ tření, který úprava řeší?
+- Vybrali jste pracovní místo, které člověk otevře před rozhodnutím nebo během něj?
+- Neprovádíte širší refaktor jen proto, že jste našli opakovaný vzor?
+- Je změna nejmenší dostatečná?
+- Vede nová věta ke konkrétní akci, ne jen k obecnému principu?
+- Sedí změna do okolního textu a nevytváří rozpor?
+- Zavřeli jste nejbližší starou cestu, duplicitu nebo zastaralý příklad?
+- Je jasné, jak se změna ověří při prvním běžném použití?
+- Nevzniklo nové sledování lidí, čtení dokumentace nebo práce v šabloně?
+- Zmenšili jste datovou stopu tam, kde to šlo?
+- Má změna jednovětý závěr a kanonické místo?
+
+Provedení systémové úpravy má být krátké, konkrétní a trochu nudné. To je kompliment. Pokud se z něj stane velká iniciativa, pravděpodobně se práce přesunula od odstranění tření k budování dalšího aparátu. Dobrá úprava zmizí do šablony tak nenápadně, že příští člověk udělá správnou věc a ani netuší, kolik starého zmatku mu právě nepadlo na stůl.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KL o provedení systémové úpravy z měsíční kontroly poučení: práce s měsíční větou, výběr nejbližšího pracovního místa, nejmenší dostatečná změna, úprava okolního textu, zavření staré cesty, privacy-first provedení, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KK o měsíční kontrolu uzavřených poučení: výběr uzavřených poučení, hledání opakovaného typu tření, stav portfolia, převod jednoho vzoru do systémové úpravy, privacy-first kontrola portfolia, karta měsíční kontroly, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KJ o uzavření potvrzeného poučení po běžném cyklu: vstupní brána, přesun hodnoty do zdroje pravdy, uzavírací věta, zavření dočasných opor, lehký revizní háček, privacy-first uzávěrka, uzavírací karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KI o kontrolu stabilizovaného poučení po prvním běžném cyklu: výběr skutečného cyklu, kontrola stop v artefaktu, rozlišení selhání poučení od selhání trasy, měření ceny stabilizace, privacy-first kontrola po cyklu, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
