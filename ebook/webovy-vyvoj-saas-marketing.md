@@ -85064,8 +85064,232 @@ Můj pohled: první běžný cyklus je test, jestli dokumentace umí žít bez s
 
 Kontrola po běžném cyklu má tým chránit před dvěma extrémy: před slepou vírou, že stabilizace všechno vyřešila, a před nutkáním kontrolovat stabilizovanou opravu donekonečna. Dobrý výsledek je nudný: pravidlo se našlo, práce se uzavřela, stopa zůstala malá a další cyklus může běžet normálně.
 
+## Příloha KE: Uzavření potvrzené portfoliové opravy po běžném cyklu
+
+Příloha KD ověřila, jestli stabilizovaná portfoliová oprava přežila první běžný cyklus. Tahle příloha řeší okamžik, který týmy často podceňují: kdy přestat opravu sledovat jako zvláštní případ a nechat ji žít jako normální pravidlo. Pokud se to neudělá, portfolio pravidel se začne plnit položkami ve stavu "ještě pro jistotu hlídat". To zní zodpovědně, ale po pár měsících z toho vznikne druhý backlog, jen s lepším slovníkem.
+
+Uzavírací otázka:
+
+```text
+Co musí být zapsané, odstraněné nebo předané, aby potvrzená oprava dál fungovala bez speciální kontroly?
+```
+
+Uzavření není oslava změny. Je to provozní úklid. Oprava splnila účel, běžný cyklus ji prověřil a teď má zůstat jen to, co bude užitečné při další práci: aktuální pravidlo, krátký changelog, napojení na běžný rytmus a jasné rozhodnutí, že starý režim je pryč.
+
+### Uzavírejte jen opravy se správným stavem
+
+Do uzavření patří jen výsledek z Přílohy KD se stavem:
+
+- `Ponechat v rytmu`: oprava funguje, cyklus neukázal významné tření.
+- `Drobně uklidit`: oprava funguje a jedna malá následná akce už byla provedena.
+- `Zpřesnit pravidlo`: pravidlo bylo upravené a krátce ověřené v místě, kde původně drhlo.
+
+Pokud je stav `Vrátit do portfoliové opravy`, nic neuzavírejte. Oprava znovu vstupuje do pracovní smyčky. Pokud je stav `Sloučit s širším vzorem`, také neuzavírejte jen lokální změnu; nejdřív ji převeďte do kvartální konsolidace. Uzavřít problém, který se právě ukázal jako širší, je elegantní způsob, jak si naplánovat budoucí překvapení.
+
+Krátká brána před uzavřením:
+
+```text
+Máme jeden stav po běžném cyklu?
+Je případná následná akce hotová?
+Vede běžný vstup na aktuální pravidlo?
+Je stará cesta zavřená, archivovaná nebo jasně označená jako nahrazená?
+Zůstává další kontrola v existujícím rytmu?
+```
+
+Když odpověď na jednu otázku chybí, uzavření odložte. Ne jako trest. Jen proto, že otevřený konec má být viditelný, dokud je opravdu otevřený.
+
+### Přepište sledování na běžný provoz
+
+Během opravy může být užitečné mít dočasný štítek, kontrolní úkol nebo připomínku. Po ověření v běžném cyklu už ale speciální sledování ztrácí smysl. Nechte jen kontrolu, která by existovala i bez této konkrétní opravy.
+
+Převod:
+
+| Před uzavřením | Po uzavření |
+| --- | --- |
+| Úkol "ověřit opravu po cyklu" | Uzavřený záznam v changelogu |
+| Dočasný štítek `sledovat` | Běžný stav pravidla |
+| Připnutý odkaz v chatu | Kanonický odkaz v indexu nebo šabloně |
+| Ověřovací screenshoty | Smazané nebo archivované podle retence |
+| Speciální kontrolní poznámka | Součást měsíčního nebo kvartálního rytmu |
+
+Příklad:
+
+```text
+Před uzavřením: Formulářová karta má štítek "po měsíci ověřit" a připnutou poznámku v publikačním chatu.
+Po uzavření: Štítek je odstraněný, poznámka v chatu smazaná, kanonický odkaz zůstává v publikačním checklistu a změna je uvedená jednou větou v changelogu.
+```
+
+Tím se sníží počet míst, kde tým hledá pravdu. A to je u portfolia pravidel skoro vždycky výhra.
+
+### Napište uzavírací větu
+
+Uzavírací věta má říct, co bylo potvrzené a jak se s tím dál pracuje. Nemá popisovat celý vývoj opravy. Historie může zůstat dohledatelná, ale aktivní pravidlo nepotřebuje román.
+
+Dobrá uzavírací věta má tři části:
+
+1. Co je teď aktuální pravidlo nebo cesta.
+2. Jak bylo ověřené, že funguje v běžném cyklu.
+3. Kde se bude dál přirozeně kontrolovat.
+
+Příklad:
+
+```text
+Publikační checklist nových landing pages vede na kanonickou formulářovou kartu; první měsíční review potvrdilo použití bez staré kopie a další kontrola zůstává v běžném měsíčním review portfolia pravidel.
+```
+
+Slabší varianta:
+
+```text
+Oprava formulářů je hotová.
+```
+
+Druhá věta je krátká, ale nepřenáší rozhodnutí. Neříká, kde je aktuální cesta, jak byla ověřená ani co se bude dít dál. Krátkost bez informace není stručnost. Je to jen malý mlžný obláček.
+
+### Zavřete staré odkazy viditelně
+
+Uzavření neznamená, že všechno staré prostě smažete. Někdy je lepší starou cestu krátce označit jako nahrazenou, aby člověk, který ji najde z historického odkazu, pochopil stav.
+
+Použijte jeden ze tří režimů:
+
+| Režim | Kdy ho použít | Jak vypadá |
+| --- | --- | --- |
+| Smazat | Stará věc nemá hodnotu a nikdo na ni nemá legitimně chodit. | Odstranit kopii, zrušit odkaz, zavřít úkol. |
+| Archivovat jako nahrazené | Stará věc může být dohledaná z historie. | Přidat krátkou poznámku "Nahrazeno: odkaz na aktuální pravidlo". |
+| Přesměrovat pozornost | Starý vstup je pořád používaný, ale má vést jinam. | Nechat vstup, změnit cíl na kanonické místo. |
+
+Příklad:
+
+```text
+Stará kopie checklistu formuláře není smazaná bez vysvětlení. Je přesunutá do archivu s poznámkou: "Nahrazeno formulářovou kartou v portfoliu pravidel. Aktivní odkaz je v publikačním checklistu."
+```
+
+Tohle je užitečné hlavně u týmů, kde se materiály používají ve více rolích. Člověk nemusí hádat, jestli našel starý poklad, nebo starý nepořádek.
+
+### Předání bez schůzky navíc
+
+Uzavřená oprava se má dát předat bez zvláštní schůzky. Pokud je potřeba dlouze vysvětlovat, co se změnilo, pravděpodobně ještě není dobře zapojená do pracovních míst.
+
+Minimální předání:
+
+- Jedna věta v changelogu pravidla nebo indexu.
+- Aktualizovaný kanonický odkaz v místě, kde práce začíná.
+- Odstraněný nebo archivovaný dočasný štítek.
+- Žádný nový kontrolní rituál.
+- Jasné místo, kde se změna objeví při příštím běžném review.
+
+Krátká zpráva týmu může znít:
+
+```text
+Formulářová karta je po prvním běžném review uzavřená jako součást publikačního checklistu. Starý checklist je archivovaný jako nahrazený a další kontrola proběhne už jen v měsíčním review portfolia.
+```
+
+To stačí. Není potřeba vysílat dokumentační fanfáru pokaždé, když se uklidí jeden starý odkaz. Tým má vědět, co se změnilo, ne prožívat celou genezi změny.
+
+### Privacy-first uzavření
+
+Uzavírání je poslední dobrý okamžik na odstranění zbytečné stopy po opravě. Pokud ji necháte být, často zůstane v systému déle než samotný problém.
+
+Privacy-first kontrola:
+
+- Zůstává v aktivním pravidle jen pracovní situace bez osobních údajů?
+- Jsou screenshoty, exporty, chatové citace a testovací soubory smazané nebo mají retenci?
+- Nezůstaly v příkladech jména lidí, zákazníků nebo interní detaily, které nejsou nutné pro rozhodnutí?
+- Nezavedlo uzavření nový seznam lidí, kteří pravidlo použili?
+- Je changelog dost konkrétní pro práci, ale ne zbytečně detailní pro dohled nad lidmi?
+- Víme, kdo smí archivovaný materiál vidět?
+
+Slabý archivní zápis:
+
+```text
+Nechali jsme ve složce všechny screenshoty z ověření, kdyby se někdy hodily.
+```
+
+Silnější zápis:
+
+```text
+Ověřovací screenshoty byly po uzavření smazané. V changelogu zůstala jen pracovní věta o napojení checklistu na kanonickou formulářovou kartu.
+```
+
+Kontrola nad daty se často nepozná podle velkých zásad, ale podle těchto malých úklidů. Právě tam se rozhoduje, jestli privacy-first provoz žije v praxi, nebo jen pěkně zní v patičce webu.
+
+### Uzavírací karta
+
+```text
+Uzavíraná portfoliová oprava:
+Stav po běžném cyklu:
+Případná následná akce:
+
+Aktuální pravidlo nebo pracovní cesta:
+Kanonické místo:
+Stará cesta a její nový stav:
+
+Co bylo odstraněno ze speciálního sledování:
+Kde je krátký changelog:
+V jakém běžném rytmu se věc dál potká:
+
+Privacy-first uzavření:
+Dočasné podklady smazané nebo archivované:
+Uzavírací věta:
+```
+
+Příklad:
+
+```text
+Uzavíraná portfoliová oprava: Napojení landing page šablony na kartu veřejných formulářů
+Stav po běžném cyklu: Drobně uklidit, následná akce hotová
+Případná následná akce: Archivovaný starý odkaz v onboardingové kartě
+
+Aktuální pravidlo nebo pracovní cesta: Publikační checklist vede na kanonickou formulářovou kartu.
+Kanonické místo: Portfolio pravidel, karta veřejného formuláře.
+Stará cesta a její nový stav: Kopie checklistu v onboardingu je archivovaná jako nahrazená.
+
+Co bylo odstraněno ze speciálního sledování: Štítek "ověřit po měsíci" a připnutá chatová poznámka.
+Kde je krátký changelog: Changelog publikačního checklistu.
+V jakém běžném rytmu se věc dál potká: Měsíční review portfolia pravidel.
+
+Privacy-first uzavření: Bez jmen, bez screenshotů, bez sledování čtení pravidla po lidech.
+Dočasné podklady smazané nebo archivované: Ověřovací screenshot smazán, stará kopie archivovaná bez osobních dat.
+Uzavírací věta: Publikační checklist vede na kanonickou formulářovou kartu, první měsíční review potvrdilo cestu bez staré kopie a další kontrola zůstává v běžném portfoliovém rytmu.
+```
+
+### Mini workshop na 10 minut
+
+1. Dvě minuty: ověřte stav po běžném cyklu a případnou hotovou následnou akci.
+2. Dvě minuty: pojmenujte aktuální pravidlo, kanonické místo a stav staré cesty.
+3. Dvě minuty: odstraňte speciální sledování, štítek nebo připnutou poznámku.
+4. Dvě minuty: proveďte privacy-first uzavření dočasných podkladů.
+5. Dvě minuty: napište uzavírací větu a uložte ji do changelogu.
+
+Výstup:
+
+```text
+Jedna uzavírací karta, odstraněné dočasné sledování a aktuální pravidlo napojené už jen na běžný rytmus.
+```
+
+### Codyho komentář
+
+Můj pohled: dobrá dokumentace pozná, kdy má přestat mluvit o vlastní opravě. Během změny je historie užitečná. Po potvrzení má zůstat hlavně cesta k práci. Když se každá oprava dál tváří jako výjimečná, tým časem přestane rozlišovat, co je důležité a co je jen dozvuk starého problému. Uzavření je proto malý, ale dost podstatný akt disciplíny.
+
+### Checklist kapitoly
+
+- Má oprava po běžném cyklu stav vhodný k uzavření?
+- Je případná následná akce opravdu hotová?
+- Vede běžný pracovní vstup na aktuální pravidlo nebo šablonu?
+- Je stará cesta smazaná, archivovaná jako nahrazená nebo přesměrovaná?
+- Odstranili jste dočasné štítky, připnuté poznámky a speciální sledovací úkoly?
+- Zůstala kontrola jen v existujícím měsíčním, kvartálním nebo pracovním rytmu?
+- Napsali jste uzavírací větu se stavem, ověřením a dalším rytmem?
+- Je changelog krátký a použitelný pro další práci?
+- Smazali jste nebo archivovali dočasné podklady podle retence?
+- Nezůstaly v aktivním pravidle osobní údaje, zákaznické detaily nebo chatové citace?
+- Nezavedli jste nové sledování používání pravidla po jednotlivcích?
+- Dá se změna pochopit bez zvláštní schůzky?
+
+Uzavřená portfoliová oprava už nemá poutat pozornost. Má potichu zlepšovat běžnou práci. To je v dokumentaci často nejlepší možný výsledek: méně výjimek, méně speciálních kontrol a jedna správná cesta, která se dá najít, použít a zase opustit.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KE o uzavření potvrzené portfoliové opravy po běžném cyklu: vstupní stavy vhodné k uzavření, převod speciálního sledování do běžného provozu, uzavírací věta, viditelné zavření starých odkazů, předání bez schůzky navíc, privacy-first úklid dočasných podkladů, uzavírací karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KD o kontrolu stabilizované portfoliové opravy po prvním běžném cyklu: výběr přirozeného cyklu, kontrola návratu staré cesty, cena použití pravidla, rozlišení selhání stabilizace od běžného šumu, privacy-first kontrola po cyklu, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KC o stabilizaci potvrzené portfoliové opravy do běžného rytmu: vstupní brána pro potvrzené a dočištěné opravy, přepis ověřovací historie do aktuálního pravidla, napojení na existující měsíční nebo kvartální rytmus, uzavření přechodových opor, privacy-first uzávěrka, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KB o ověření portfoliové opravy po prvním skutečném použití: výběr normální situace, sledování pracovní cesty místo člověka, tři signály nalezení/rozhodnutí/stopové čistoty, rozlišení tření, privacy-first kontrola skutečné stopy, stavy opravy, ověřovací karta, příklad, mini workshop a checklist.
