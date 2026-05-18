@@ -86208,8 +86208,285 @@ Můj pohled: první běžný cyklus je moment pravdy. Dokud je poučení nové, 
 
 Kontrola po prvním běžném cyklu má být krátká a tvrdě praktická. Buď poučení funguje bez dohledu, nebo víte, kterou jednu věc opravit. V obou případech je nejlepší výsledek stejný: méně speciálního řízení a víc práce, která se sama drží lepšího směru.
 
+## Příloha KJ: Uzavření potvrzeného poučení po běžném cyklu
+
+Příloha KI zkontrolovala stabilizované poučení po prvním běžném cyklu. Tahle příloha řeší okamžik, kdy kontrola dopadla dobře: poučení funguje, cena použití je nízká a případná drobná oprava je hotová. V tu chvíli je lákavé nechat všechno otevřené "pro jistotu". Jenže právě tím vzniká tichý provozní dluh. V systému zůstane karta kontroly, stará poznámka, dočasný úkol, kopie šablony a pocit, že se k tématu musíme ještě někdy vrátit.
+
+Uzavření není slavnostní konec. Je to úklid po užitečné změně. Smyslem je odpovědět na jednu otázku:
+
+```text
+Co má po potvrzeném poučení zůstat v běžné práci a co už má zmizet?
+```
+
+Když uzavření přeskočíte, tým postupně ztratí rozdíl mezi živým pravidlem, historií opravy a kontrolním důkazem. A potom se při další podobné práci začne hledat ve třech místech najednou. To není znalostní báze, to je kancelářský escape room, jen bez zábavné hudby.
+
+### Uzavírejte jen potvrzené poučení
+
+Ne každé poučení si zaslouží uzavřít. Některé se má opravit, některé znovu ověřit a některé archivovat. Uzavření patří jen pro stav, kdy poučení v běžném cyklu obstálo.
+
+Vstupní brána:
+
+- Poučení bylo stabilizované do jednoho kanonického místa.
+- Proběhl alespoň jeden běžný cyklus, ve kterém se mělo přirozeně použít.
+- Kontrola ukázala, že výsledek odpovídá provozní větě.
+- Poučení nepotřebuje autora ani zvláštní připomenutí.
+- Cena použití je nízká nebo přijatelná.
+- Datová stopa kontroly je minimální a není potřeba ji dál rozšiřovat.
+- Pokud kontrola našla drobnou opravu, už je provedená.
+
+Neuzavírejte, pokud:
+
+```text
+Poučení fungovalo jen proto, že ho někdo ručně připomněl.
+```
+
+Nebo:
+
+```text
+Poučení funguje, ale jen za cenu nové pravidelné schůzky a ruční evidence.
+```
+
+V takovém případě nejde o hotové poučení. Jde o zavedenou berličku. Berlička může být dočasně užitečná, ale nemá se vydávat za stabilní systém.
+
+### Přesuňte hodnotu do zdroje pravdy
+
+Po uzavření má v běžné práci zůstat jen to, co lidé opravdu potřebují použít. Historie poučení může být zajímavá, ale většinou není nutná pro každodenní rozhodnutí. Tým nepotřebuje znát celý příběh formulářového checklistu pokaždé, když tvoří novou landing page. Potřebuje vědět, jaké pravidlo platí teď.
+
+Rozdělte materiály na tři vrstvy:
+
+| Vrstva | Co obsahuje | Co s ní udělat |
+| --- | --- | --- |
+| Aktuální pravidlo | Krátká provozní věta, odkaz na kanonický artefakt, hranice použití. | Nechat v místě běžné práce. |
+| Uzavírací záznam | Jednovětý závěr, datum, stav, odkaz na pravidlo. | Nechat v changelogu nebo kartě pravidla. |
+| Ověřovací historie | Poznámky, kontrolní karta, staré varianty, dočasné úkoly. | Archivovat, zkrátit nebo odstranit podle hodnoty a datové citlivosti. |
+
+Příklad aktuálního pravidla:
+
+```text
+Když checklist pracuje s veřejným formulářem, odkazuje na kanonickou privacy-first kartu formulářů a nekopíruje její pravidla.
+```
+
+Příklad uzavíracího záznamu:
+
+```text
+2026-05-18: Poučení potvrzené v měsíčním review checklistů. Stará kopie šablony byla označená jako nahrazená. Stav: uzavřeno do běžného rytmu.
+```
+
+Tohle stačí. Pokud někdo v budoucnu potřebuje hlubší příběh, může se podívat do archivu. Ale běžná práce nemá začínat archeologií.
+
+### Napište uzavírací větu
+
+Uzavírací věta je krátký zápis, který oddělí živé pravidlo od minulého řešení. Má být tak jasná, aby nový člověk pochopil, co platí, aniž by četl všechny předchozí přílohy.
+
+Dobrá uzavírací věta obsahuje:
+
+- co bylo potvrzeno,
+- kde teď pravidlo žije,
+- co bylo zavřeno nebo nahrazeno,
+- kdy se k tomu vrátit,
+- co se dál nemá speciálně sledovat.
+
+Šablona:
+
+```text
+Poučení [název] bylo po [běžný cyklus] potvrzeno jako součást [rytmus/artefakt]. Platné pravidlo je v [kanonické místo]. [Stará cesta/dočasný artefakt] je uzavřený nebo nahrazený. Další kontrola proběhne jen v běžném review, ne jako samostatné téma.
+```
+
+Slabá věta:
+
+```text
+Poučení zatím vypadá dobře, necháme sledovat.
+```
+
+Silnější věta:
+
+```text
+Poučení o formulářových checklistech bylo po květnovém review potvrzeno jako součást šablony nového checklistu. Platné pravidlo je v kanonické kartě veřejných formulářů. Staré projektové kopie jsou označené jako nahrazené. Další kontrola proběhne jen v měsíčním review šablon.
+```
+
+Rozdíl je v rozhodnutí. První věta drží téma otevřené. Druhá říká, co platí, kde to najít a co už nemá žít vlastním životem.
+
+### Zavřete dočasné opory
+
+Každá změna si během ověřování vytváří lešení. Kontrolní otázky, poznámky v backlogu, dočasné checklisty, komentáře ve vlákně, ruční připomenutí, přechodné odkazy. Během ověřování pomáhají. Po potvrzení začnou překážet, protože lidem ukazují víc cest, než je potřeba.
+
+Projít stačí pět míst:
+
+1. Kanonický artefakt: obsahuje aktuální pravidlo a neobsahuje starý komentář typu "zatím testujeme".
+2. Staré kopie: jsou odstraněné, archivované nebo jasně označené jako nahrazené.
+3. Backlog: dočasné úkoly jsou zavřené nebo převedené na běžnou údržbu.
+4. Šablony: neobsahují duplicitní výklad stejného pravidla.
+5. Onboarding nebo index: vede na aktuální místo, ne na kontrolní kartu.
+
+Praktický příklad:
+
+```text
+Před uzavřením:
+- Šablona checklistu obsahuje nové pravidlo.
+- Projektová složka obsahuje starou kopii checklistu.
+- Backlog má úkol "ověřit formulářové pravidlo".
+- Onboardingová poznámka odkazuje na staré review.
+
+Po uzavření:
+- Šablona checklistu obsahuje nové pravidlo.
+- Stará kopie má hlavičku "nahrazeno kanonickou šablonou".
+- Backlogový úkol je zavřený s odkazem na uzavírací větu.
+- Onboarding vede přímo na kanonickou šablonu.
+```
+
+Největší hodnota uzavření často není nový text, ale odstranění falešných vstupů. Když tým vidí jen jednu správnou cestu, nemusí být disciplinovanější. Stačí, že systém není zbytečně matoucí.
+
+### Nechte jen lehký revizní háček
+
+Uzavřené poučení nemá mít vlastní zvláštní monitoring. Má se vrátit do běžného rytmu. Přesto je rozumné nechat jeden lehký háček, aby se téma dalo zachytit, pokud se znovu objeví.
+
+Dobré revizní háčky:
+
+- otázka v měsíčním review šablon,
+- položka v kvartální kontrole portfolia pravidel,
+- krátký stav v changelogu artefaktu,
+- odkaz v kanonickém indexu,
+- poznámka "znovu otevřít, pokud se objeví stará cesta".
+
+Špatné revizní háčky:
+
+- samostatná pravidelná schůzka jen k jednomu poučení,
+- povinné screenshoty každého použití,
+- osobní evidence, kdo pravidlo dodržel,
+- nový dashboard pro malou provozní větu,
+- dočasný checklist, který se tváří jako trvalá povinnost.
+
+Lehký háček může vypadat takhle:
+
+```text
+V měsíčním review checklistů zkontrolovat jen to, jestli nové checklisty odkazují na kanonické formulářové karty a nevytvářejí vlastní kopie.
+```
+
+To je dost konkrétní na zachycení problému a dost malé na to, aby nevznikl další proces.
+
+### Privacy-first uzávěrka
+
+Uzavření potvrzeného poučení je ideální chvíle uklidit datovou stopu. Během ověřování někdy vzniknou citace, ukázky, pracovní screenshoty, exporty nebo poznámky z reálných projektů. Ne všechny mají zůstat navždy. Privacy-first provoz neznamená, že si nic nepamatujete. Znamená, že si necháváte jen to, co má jasný účel.
+
+Nechte:
+
+- aktuální pravidlo,
+- uzavírací větu,
+- anonymizovaný příklad, pokud pomáhá budoucímu použití,
+- datum poslední kontroly,
+- odkaz na kanonický artefakt,
+- běžný revizní háček.
+
+Odstraňte nebo zkraťte:
+
+- dočasné screenshoty s reálnými údaji,
+- kopie chatových vláken,
+- osobní poznámky o tom, kdo co zapomněl,
+- exporty formulářů a projektových dat,
+- duplicitní verze checklistů,
+- staré kontrolní tabulky bez další hodnoty.
+
+Privacy-first kontrolní otázka:
+
+```text
+Kdyby se k tomuto záznamu dostal nový člověk za rok, pomůže mu pracovat lépe, nebo jen uvidí citlivou historii, kterou už nepotřebuje?
+```
+
+Pokud odpověď zní "jen uvidí historii", záznam zkraťte. Budoucí práce potřebuje pravidlo, ne muzeum provozních stop.
+
+### Uzavírací karta
+
+```text
+Název poučení:
+Původní problém:
+Provozní věta:
+Kanonický domov:
+Běžný rytmus:
+
+Poslední kontrola:
+Výsledek kontroly:
+Případná drobná oprava:
+Stav po opravě:
+
+Co zůstává v běžné práci:
+Co se archivuje:
+Co se odstraňuje:
+Které staré cesty jsou zavřené:
+
+Revizní háček:
+Kdy znovu otevřít:
+Co už dál nesledovat:
+
+Privacy-first uzávěrka:
+Uzavírací věta:
+```
+
+Příklad:
+
+```text
+Název poučení: Formulářová pravidla v checklistech.
+Původní problém: Checklisty kopírovaly pravidla pro veřejné formuláře a některé kopie zastarávaly.
+Provozní věta: Checklist s veřejným formulářem odkazuje na kanonickou privacy-first kartu formulářů.
+Kanonický domov: Šablona nového checklistu a karta veřejných formulářů.
+Běžný rytmus: Měsíční review checklistů.
+
+Poslední kontrola: Květnové review checklistů.
+Výsledek kontroly: Nový checklist použil odkaz na kanonickou kartu.
+Případná drobná oprava: Stará projektová kopie označená jako nahrazená.
+Stav po opravě: Potvrzeno a uzavřeno.
+
+Co zůstává v běžné práci: Provozní věta v šabloně a odkaz na kartu formulářů.
+Co se archivuje: Kontrolní karta z prvního cyklu.
+Co se odstraňuje: Dočasné poznámky a duplicitní úkol v backlogu.
+Které staré cesty jsou zavřené: Projektová kopie checklistu.
+
+Revizní háček: V měsíčním review ověřit, že nové checklisty nevytvářejí vlastní formulářová pravidla.
+Kdy znovu otevřít: Pokud se objeví nová kopie pravidel mimo kanonickou kartu.
+Co už dál nesledovat: Jednotlivé použití pravidla a osoby, které checklist upravily.
+
+Privacy-first uzávěrka: Bez screenshotů, bez osobní evidence, bez exportů formulářových dat.
+Uzavírací věta: Poučení je potvrzené v běžném rytmu; dál žije jen jako pravidlo v šabloně a revizní háček v měsíční kontrole.
+```
+
+### Mini workshop na 10 minut
+
+1. Dvě minuty: otevřete poslední kontrolní kartu a ověřte, že stav je `Ponechat` nebo hotová drobná oprava.
+2. Dvě minuty: napište uzavírací větu.
+3. Dvě minuty: projděte kanonický artefakt, staré kopie a backlog.
+4. Dvě minuty: rozhodněte, co zůstává, co se archivuje a co se maže.
+5. Jedna minuta: nastavte jeden lehký revizní háček.
+6. Jedna minuta: proveďte privacy-first uzávěrku datové stopy.
+
+Výstup:
+
+```text
+Jedna uzavírací karta, jedna uzavírací věta a žádný nový samostatný proces.
+```
+
+### Codyho komentář
+
+Můj pohled: týmy často umí změny začínat lépe než je ukončovat. Přidat poučení je snadné, protože to působí aktivně. Zavřít dočasné poznámky, staré odkazy a kontrolní tabulky je méně efektní, ale dlouhodobě cennější. Dobré uzavření je tiché. Nikdo mu netleská, jen se za tři měsíce někdo neztratí v pěti verzích stejného pravidla. Což je ve firmě skoro romantika, jen s menším rizikem trapného ticha.
+
+### Checklist kapitoly
+
+- Uzavíráte jen poučení, které obstálo v běžném cyklu?
+- Je případná drobná oprava už hotová?
+- Zůstává aktuální pravidlo v jednom kanonickém místě?
+- Napsali jste uzavírací větu, která říká, co platí teď?
+- Oddělili jste aktuální pravidlo od ověřovací historie?
+- Zavřeli jste staré kopie, odkazy a dočasné backlog položky?
+- Nevede onboarding nebo index na starou kontrolní kartu?
+- Zůstává jen jeden lehký revizní háček v běžném rytmu?
+- Nevznikl nový samostatný proces jen kvůli jednomu poučení?
+- Uklidili jste screenshoty, chatové citace, exporty a osobní poznámky?
+- Je jasné, kdy se poučení znovu otevře?
+- Je jasné, co už se dál nesleduje?
+
+Uzavřené poučení má být lehčí než problém, který vyřešilo. Pokud po něm zůstane víc dokumentů, schůzek a stop než před ním, změna sice něco naučila, ale provoz ještě neuklidila. Hotové poučení poznáte podle toho, že lidé používají lepší pravidlo a už nemusí řešit příběh, který k němu vedl.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KJ o uzavření potvrzeného poučení po běžném cyklu: vstupní brána, přesun hodnoty do zdroje pravdy, uzavírací věta, zavření dočasných opor, lehký revizní háček, privacy-first uzávěrka, uzavírací karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KI o kontrolu stabilizovaného poučení po prvním běžném cyklu: výběr skutečného cyklu, kontrola stop v artefaktu, rozlišení selhání poučení od selhání trasy, měření ceny stabilizace, privacy-first kontrola po cyklu, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KH o stabilizaci ověřeného poučení do běžného rytmu: vstupní brána stabilizace, výběr kanonického domova a existujícího rytmu, přepis do provozní věty, zavření přechodových opor, privacy-first úklid, karta stabilizace, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KG o ověření poučení po prvním použití: výběr první podobné práce, tři signály nalezení/rozhodnutí/datové stopy, rozlišení problému poučení od problému okolí, stavy dalšího kroku, privacy-first kontrola ověření, karta, příklad, mini workshop a checklist.
