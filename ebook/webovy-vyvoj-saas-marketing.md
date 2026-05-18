@@ -83237,8 +83237,195 @@ Jedna karta pravidla v portfoliu, jeden jasný stav a žádná nová speciální
 
 Portfolio pravidel má být nenápadná mapa provozu. Když funguje, tým nemusí znovu objevovat stejná rozhodnutí, ale zároveň nežije pod lavinou dokumentace. Dobré portfolio se pozná podle toho, že při práci zkracuje cestu k rozhodnutí. Špatné podle toho, že samo potřebuje vlastní manuál, schůzku a tajného vykladače. To poslední prosím ne. Stačí už, že existují daňové portály.
 
+## Příloha JV: Měsíční redukce portfolia pravidel
+
+Portfolio pravidel začne být užitečné ve chvíli, kdy pomáhá najít správné pravidlo rychleji, než by člověk začal improvizovat. Začne být škodlivé ve chvíli, kdy je v něm tolik položek, že tým raději píše nové pravidlo, protože hledání starého je pomalejší než další dokument. To je tichý začátek dokumentační inflace.
+
+Tahle příloha navazuje na Přílohu JU. Neřeší, jak pravidlo do portfolia dostat. Řeší, jak jednou měsíčně zabránit tomu, aby portfolio nabobtnalo, zestárlo a začalo vytvářet přesně ten chaos, který mělo snižovat.
+
+Praktická otázka zní:
+
+```text
+Která pravidla v portfoliu tento měsíc zkrátíme, sloučíme, archivujeme nebo ponecháme beze změny, aby portfolio dál pomáhalo práci místo rozšiřování administrativy?
+```
+
+Redukce portfolia není úklid pro úklid. Cílem není mít co nejméně pravidel. Cílem je mít tak málo pravidel, kolik stačí k lepším rozhodnutím, a tak konkrétní pravidla, aby se dala použít bez výkladu autora.
+
+### Kdy redukci dělat
+
+Redukci dělejte v běžném měsíčním review. Nezakládejte kvůli ní novou ceremonii. Pokud už tým má měsíční kontrolu webu, produktu, marketingu, supportu nebo provozu, přidejte do ní deset až patnáct minut pro portfolio pravidel.
+
+Dobré spouštěče:
+
+- v portfoliu přibylo více pravidel za poslední měsíc,
+- tým při práci nenašel existující pravidlo a vytvořil podobné znovu,
+- dvě oblasti používají jiná pravidla pro stejnou situaci,
+- pravidlo odkazuje na starý nástroj, roli, formulář nebo proces,
+- pravidlo vyžaduje víc evidence než rozhodnutí, které chrání,
+- v kartě pravidla zůstaly staré příklady, exporty nebo citlivé detaily.
+
+Nedělejte redukci jako velkou jednorázovou akci jednou za rok. Roční úklid dokumentace vypadá hrdinsky, ale často jen odhalí, že se jedenáct měsíců nikdo nedíval. Měsíční redukce má být nudná, krátká a opakovatelná.
+
+### Čtyři rozhodnutí nad každým kandidátem
+
+Nevybírejte pravidla k úklidu podle toho, které se komu nelíbí. Vezměte kandidáta a rozhodněte jedním ze čtyř stavů.
+
+| Stav | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Ponechat | Pravidlo je dohledatelné, aktuální a používané. | Neměnit text, jen potvrdit poslední revizi. |
+| Zkrátit | Pravidlo funguje, ale nese historický balast. | Nechat jen aktuální rozhodnutí, minimální výstup a spouštěč. |
+| Sloučit | Dvě nebo více pravidel řeší stejnou situaci. | Vybrat jeden kanonický domov a odstranit duplicity. |
+| Archivovat | Pravidlo už nemá opakované použití nebo chrání zaniklý problém. | Zavřít odkazy, zapsat důvod a odstranit ho z aktivní trasy. |
+
+Stav `Ponechat` je legitimní výsledek. Když pravidlo funguje a nezabírá pozornost, nechte ho být. Někdy je největší údržbová disciplína nevylepšovat věc, která právě tiše funguje.
+
+### Zkrácení pravidla bez ztráty významu
+
+Zkrácení neznamená ořezat text tak, že z něj zmizí důvod. Dobré zkrácení odstraní historii, ale ponechá pracovní rozhodnutí.
+
+Před zkrácením:
+
+```text
+Po kampani na audit webu jsme zjistili, že lidé vyplňují dlouhý formulář s telefonem, rozpočtem a interním popisem projektu. Proto jsme se shodli, že pro budoucí poptávky budeme chtít méně polí, protože dlouhý formulář zvyšuje tření a zároveň zbytečně ukládá osobní údaje. Marketing má hlídat, že se formulář nezvětší.
+```
+
+Po zkrácení:
+
+```text
+Formulář auditu sbírá jen údaje nutné pro první odpověď: jméno, pracovní e-mail, URL a krátký popis problému. Nové pole se přidává jen tehdy, když bez něj nejde připravit první reakci.
+```
+
+Druhá verze je kratší, ale silnější. Umí vést rozhodnutí i bez znalosti původní kampaně. Historii můžete nechat v changelogu, pokud má cenu. Nemusí být v živém pravidle.
+
+### Sloučení duplicit
+
+Duplicitní pravidla jsou nebezpečnější než dlouhá pravidla. Dlouhé pravidlo je otravné. Dvě podobná pravidla vytvářejí konflikt. Tým pak začne rozhodovat podle toho, které našel dřív, kdo ho napsal nebo v jakém nástroji zrovna pracuje.
+
+Při sloučení postupujte jednoduše:
+
+1. Napište jednu společnou pracovní situaci.
+2. Vyberte kanonický domov podle toho, kde člověk pravidlo hledá při práci.
+3. Přeneste jen aktuální rozhodnutí, ne celé příběhy původních pravidel.
+4. Staré karty označte jako nahrazené a odkažte na novou.
+5. Po jednom běžném použití ověřte, že lidé nenacházejí starou verzi.
+
+Příklad:
+
+```text
+Duplicitní pravidla:
+- "Formuláře bez zbytečných polí" v marketingovém checklistu.
+- "Minimalizace vstupních dat" v privacy checklistu.
+
+Sloučené pravidlo:
+Všechny veřejné formuláře sbírají jen údaje potřebné pro první odpověď nebo dokončení konkrétní akce. Marketing vlastní text a tok formuláře, privacy vlastník potvrzuje nová pole při měsíční kontrole.
+```
+
+Sloučení není vítězství jedné oblasti nad druhou. Je to dohoda, kde pravidlo žije a kdo hlídá kterou část reality.
+
+### Archivace bez ztráty poučení
+
+Archivace pravidla není selhání. Je to známka, že portfolio nezamrzlo. Některá pravidla chrání přechodné období, starý nástroj, dočasnou kampaň nebo problém, který už produkt vyřešil jinak.
+
+Archivujte pravidlo, když:
+
+- jeho spouštěč už v běžné práci neexistuje,
+- pravidlo odkazuje na zrušený nástroj nebo proces,
+- drží tým u staré výjimky,
+- nikdo ho nepoužil v posledních relevantních cyklech,
+- stejný problém už pokrývá jiné, obecnější pravidlo.
+
+Archivní záznam má být krátký:
+
+```text
+Archivováno:
+Důvod:
+Nahrazeno čím:
+Co bylo uklizeno:
+Kdy znovu otevřít:
+```
+
+Neukládejte do archivu všechno. Pokud pravidlo nemá budoucí poučení, stačí changelog. Archiv má pomáhat pochopit důležité rozhodnutí, ne uchovávat každou provozní fosilii.
+
+### Privacy-first redukce
+
+Měsíční redukce je dobrá příležitost zmenšit datovou stopu portfolia. Pravidla často postupně nasají příklady, odkazy, screenshoty, citace zákazníků, staré exporty nebo testovací záznamy. Na začátku to pomáhá vysvětlit kontext. Po měsíci už to často jen leží.
+
+U každého kandidáta zkontrolujte:
+
+- Dá se konkrétní zákazník nahradit typem situace?
+- Potřebujeme screenshot, nebo stačí popis rozhodnutí?
+- Nevede karta pravidla na starý export osobních údajů?
+- Má podpůrný důkaz retenční konec?
+- Jsou příklady použitelné pro onboarding bez další anonymizace?
+- Neměříme dodržování pravidla přes sledování lidí, když stačí kontrola výstupu?
+
+Privacy-first redukce má jednoduché pravidlo: živé pravidlo má obsahovat rozhodnutí, ne důkazní spis. Důkazy patří do omezeného pracovního místa a mají konec životnosti.
+
+### Redukční karta
+
+```text
+Měsíc:
+Portfolio:
+Vybrané pravidlo:
+Proč je kandidát na redukci:
+
+Aktuální stav:
+Rozhodnutí: Ponechat / Zkrátit / Sloučit / Archivovat
+
+Nové znění nebo kanonický odkaz:
+Co se ruší, slučuje nebo archivuje:
+Privacy-first úklid:
+Kdo ověří první běžné použití:
+Kdy se zkontroluje dopad:
+```
+
+Kartu vyplňujte jen pro pravidla, se kterými něco děláte. Pro pravidla ve stavu `Ponechat` stačí měsíční poznámka:
+
+```text
+Ponecháno beze změny, použito v běžném review, bez nové datové stopy.
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: vyberte nejvýše tři kandidáty z portfolia.
+2. Tři minuty: u každého určete stav `Ponechat`, `Zkrátit`, `Sloučit` nebo `Archivovat`.
+3. Čtyři minuty: proveďte jednu nejmenší úpravu u nejdůležitějšího kandidáta.
+4. Dvě minuty: zkontrolujte datovou stopu pravidla.
+5. Dvě minuty: zavřete starý odkaz, duplicitní kartu nebo nepotřebný důkaz.
+6. Dvě minuty: napište, kdy se ověří první běžné použití po redukci.
+
+Výstup:
+
+```text
+Jedno pravidlo zkrácené, sloučené nebo archivované a žádný nový úklidový projekt.
+```
+
+Pokud workshop začne řešit celou dokumentaci firmy, zastavte ho. Tohle není generální úklid. Je to měsíční redukce jednoho místa, kde se nejvíc hromadí tření.
+
+### Codyho komentář
+
+Můj pohled: zdravé portfolio pravidel poznáte podle toho, že občas něco smaže. Týmy mají tendenci přidávat pravidla jako pojistky proti budoucí bolesti. Jenže každá pojistka má provozní cenu. Když cenu nikdo neplatí vědomě, zaplatí ji později někdo, kdo jen chtěl najít jednoduchou odpověď a místo toho otevřel dokumentační adventní kalendář.
+
+### Checklist kapitoly
+
+- Probíhá redukce v existujícím měsíčním rytmu?
+- Vybrali jste nejvýše několik kandidátů, ne celé portfolio?
+- Má každý kandidát jasný důvod kontroly?
+- Rozhodli jste stav `Ponechat`, `Zkrátit`, `Sloučit` nebo `Archivovat`?
+- Nezkrátili jste pravidlo tak moc, že ztratilo pracovní význam?
+- Má sloučené pravidlo jeden kanonický domov?
+- Jsou staré karty označené jako nahrazené nebo odstraněné z aktivní trasy?
+- Má archivované pravidlo krátký důvod a případný spouštěč znovuotevření?
+- Zmizely z pravidla zbytečné osobní údaje, screenshoty nebo exporty?
+- Je jasné, kdo ověří první běžné použití po změně?
+- Nevznikla kvůli redukci nová dlouhá evidence?
+- Zůstalo portfolio po zásahu snazší k použití než před ním?
+
+Měsíční redukce portfolia pravidel je malá disciplína s velkým efektem. Chrání tým před tím, aby si z dobrých rozhodnutí postupně postavil dokumentační labyrint. Dobré portfolio pravidel není nejúplnější. Je tak akorát: člověk v něm najde rozhodnutí, použije ho a může jít pracovat dál.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha JV o měsíční redukci portfolia pravidel: výběr kandidátů, rozhodnutí ponechat/zkrátit/sloučit/archivovat, zkracování bez ztráty významu, slučování duplicit, archivace, privacy-first úklid, redukční karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JU o převod kontroly uzavřeného pravidla do portfolia pravidel: stavy po kontrole, minimální karta pravidla, hranice portfolia, privacy-first datová poznámka, měsíční review, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JT o kontrolu uzavřeného pravidla po prvním běžném revizním cyklu: výběr skutečného cyklu, čtyři signály zdravého uzavření, rozhodovací matice, privacy-first kontrola datové stopy, kontrolní karta, příklad formuláře, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JS o uzavření funkčního pravidla do běžného revizního rytmu: rozhodnutí zralosti, zkrácení důkazů, napojení na existující revize, spouštěče znovuotevření, úklid backlogu a štítků, privacy-first uzavření přístupů a datové stopy, karta, příklad, mini workshop a checklist.
