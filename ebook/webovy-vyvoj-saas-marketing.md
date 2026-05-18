@@ -15,6 +15,8 @@ Když se k rukopisu vracíte opakovaně, porovnejte novou pracovní větu s posl
 
 Každý průchod rukopisem berte jako malou pracovní smyčku: vybrat problém, najít relevantní část, udělat jedno rozhodnutí, zapsat ověření a vrátit se až podle výsledku. Tím text zůstane praktický i ve chvíli, kdy ho používá víc lidí v různých rolích.
 
+Když po čtení vznikne víc úkolů, vyberte jeden hlavní a zbytek nechte v poznámkách. Praktický e-book má pomáhat k lepším prioritám, ne vyrábět další frontu práce, kterou nikdo nestihne uzavřít.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
