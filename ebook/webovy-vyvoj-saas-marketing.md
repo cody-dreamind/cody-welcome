@@ -85512,8 +85512,224 @@ Můj pohled: dobré poučení je krátké, trochu nepříjemně konkrétní a po
 
 Poučení z uzavřené opravy má být malé, ale trvalé zlepšení způsobu práce. Nejlepší výsledek není delší archiv, ale příští šablona, která už starou chybu neumožní tak snadno zopakovat.
 
+## Příloha KG: Ověření poučení po prvním použití
+
+Příloha KF převedla uzavřenou portfoliovou opravu do jednoho poučení. Tahle příloha řeší další krok: jak poznat, že poučení opravdu změnilo budoucí práci, a není to jen hezká věta uložená na správně pojmenovaném místě.
+
+Poučení se neověřuje tím, že s ním tým souhlasí. Souhlas je levný. Ověření přijde až ve chvíli, kdy někdo později řeší podobnou situaci a poučení mu pomůže udělat lepší rozhodnutí bez dalšího vysvětlování, pingání autora nebo návratu ke starému postupu.
+
+Pracovní otázka:
+
+```text
+Pomohlo poučení při prvním skutečném použití změnit práci správným směrem?
+```
+
+Slovo `skutečném` je důležité. Neověřujte poučení na vymyšleném příkladu, interní prezentaci nebo schůzce, kde všichni vědí, co se má potvrdit. Vyberte první normální situaci, ve které by poučení mělo samo pomoci.
+
+### Vyberte první podobnou práci
+
+Poučení má smysl ověřovat jen v práci, která je opravdu podobná původnímu vzoru. Nemusí jít o stejný checklist, stejný formulář nebo stejný tým. Musí ale jít o stejný typ rozhodnutí.
+
+Dobrá ověřovací situace:
+
+- Někdo tvoří nový checklist, šablonu, pravidlo nebo onboardingový materiál.
+- Hrozí stejné riziko jako minule: kopírování pravidla, špatný domov, nejasná věta, zbytečná datová stopa nebo nový kontrolní rituál.
+- Člověk řeší práci běžným způsobem, ne v testovacím režimu.
+- Poučení je dostupné v místě, kde má být použito.
+- Výsledek jde posoudit podle hotového artefaktu, ne podle pocitu.
+
+Špatná ověřovací situace:
+
+```text
+Na poradě jsme si přečetli poučení a všichni souhlasili, že dává smysl.
+```
+
+Lepší ověřovací situace:
+
+```text
+Editor vytvořil nový checklist pro kampaňovou landing page a měl rozhodnout, zda do něj zkopírovat formulářová pravidla, nebo odkázat na kanonickou privacy-first kartu.
+```
+
+V prvním případě se ověřuje nálada. Ve druhém práce.
+
+### Sledujte tři jednoduché signály
+
+Při prvním použití nesledujte člověka jako pod mikroskopem. Sledujte, jestli poučení udělalo svoji práci. Stačí tři signály.
+
+| Signál | Dobrá známka | Varování |
+| --- | --- | --- |
+| Nalezení | Člověk poučení potkal v přirozeném pracovním místě. | Musel se ptát autora, hledat v chatu nebo procházet starou opravu. |
+| Rozhodnutí | Poučení změnilo konkrétní volbu v šabloně, pravidle nebo odkazu. | Poučení bylo přečtené, ale artefakt dopadl stejně jako stará chyba. |
+| Stopa | Výsledek nevytvořil zbytečná data, kopie ani nové trvalé důkazy. | Kvůli ověření vznikly screenshoty, duplicitní dokumenty nebo osobní poznámky navíc. |
+
+Příklad:
+
+```text
+Poučení: Checklisty pro formuláře odkazují na kanonickou privacy-first kartu a nekopírují její text.
+
+Nalezení: Editor našel větu přímo v šabloně checklistu.
+Rozhodnutí: Do nového checklistu vložil odkaz na kartu, ne kopii pravidla.
+Stopa: Nevznikl screenshot původní chyby ani nová evidence lidí, kteří checklist použili.
+```
+
+To je potvrzené použití. Nemusí být slavnostní. Stačí, že práce prošla jinak a levněji.
+
+### Rozlište problém poučení od problému okolí
+
+Když první použití nevyjde, neskákejte hned k závěru, že poučení je špatné. Někdy selže okolní systém.
+
+Rozlišujte:
+
+| Co selhalo | Jak to poznáte | Co opravovat |
+| --- | --- | --- |
+| Poučení | Je neurčité, nevede ke konkrétnímu rozhodnutí nebo se dá vyložit dvěma způsoby. | Text poučení. |
+| Umístění | Poučení je dobré, ale člověk ho v práci nepotkal. | Kanonický domov, odkaz, šablonu nebo navigaci. |
+| Artefakt | Poučení je dostupné, ale šablona pořád nutí ke starému chování. | Samotnou šablonu nebo checklist. |
+| Rozsah | Poučení se používá na situaci, pro kterou nebylo určeno. | Hranici použití a příklad. |
+| Návyky | Tým dál kopíruje starý postup, protože je rychlejší nebo známější. | Předání, zkrácení trasy a odstranění starých opor. |
+
+Příklad:
+
+```text
+Nález: Editor zkopíroval formulářová pravidla do checklistu, i když poučení existuje.
+
+Špatný závěr: Poučení nefunguje, přidáme školení.
+Lepší rozlišení: Poučení bylo jen v měsíčním review, ale ne v šabloně nového checklistu. Problém je umístění.
+Oprava: Vložit jednu větu přímo do šablony checklistu a z review na ni jen odkazovat.
+```
+
+Školení je často nejdražší náplast na špatně umístěné pravidlo. Někdy je potřeba, ale nezačínejte jím.
+
+### Proveďte malou opravu, ne novou metodiku
+
+Ověření poučení má vést k jednomu z pěti stavů:
+
+| Stav | Co znamená | Další krok |
+| --- | --- | --- |
+| Potvrzené | Poučení se našlo, změnilo rozhodnutí a nezvětšilo datovou stopu. | Nechte ho v kanonickém domově a vraťte kontrolu do běžného rytmu. |
+| Potvrzené s drobnou úpravou | Fungovalo, ale věta nebo odkaz potřebuje zpřesnit. | Upravte jedno místo a zapište krátkou poznámku. |
+| Problém umístění | Poučení je dobré, ale nebylo v cestě práce. | Přesuňte ho blíž k rozhodnutí. |
+| Problém obsahu | Poučení nevede ke konkrétní volbě. | Přepište ho na pracovní větu s příkladem. |
+| Nepoužitelné | Poučení řeší příliš úzký nebo špatně pochopený vzor. | Archivujte ho a nechte původní opravu uzavřenou. |
+
+Důležité pravidlo: z prvního ověření nedělejte novou kapitolu provozu. Jedna drobná úprava stačí. Pokud se ukáže širší problém, dejte ho do backlogu jako samostatnou položku. Poučení nemá být zadní dveře pro další velký audit.
+
+### Privacy-first kontrola ověření
+
+Ověření poučení může snadno vytvořit víc dat než samotné poučení. To je špatná výměna. Nechcete trvale ukládat screenshoty, kdo co přečetl, kolikrát klikl na odkaz nebo ve kterém chatu se ptal. Chcete vědět, jestli poučení pomohlo práci.
+
+Minimum privacy-first záznamu:
+
+```text
+Poučení bylo / nebylo nalezeno v pracovním místě.
+Výsledek použil / nepoužil doporučenou volbu.
+Vznikla / nevznikla zbytečná datová stopa.
+Další stav: potvrzené / drobná úprava / přesun / přepis / archiv.
+```
+
+Co neukládat:
+
+- jména lidí, pokud nejsou nutná pro vlastnictví dalšího kroku,
+- screenshoty obrazovek s reálnými zákaznickými daty,
+- kopie chatových vláken,
+- detailní časové stopy čtení dokumentace,
+- původní problém jako trvalou interní historku.
+
+Silnější zápis:
+
+```text
+Při tvorbě nového kampaňového checklistu bylo poučení nalezené v šabloně a vedlo k odkazu na kanonickou formulářovou kartu místo kopie pravidla. Bez trvalých screenshotů a bez sledování autora checklistu. Stav: potvrzené.
+```
+
+To stačí. Práce je ověřená, soukromí zůstalo v klidu a nikdo nezaložil tabulku, která bude za dva měsíce smutně stárnout v rohu disku.
+
+### Karta ověření poučení
+
+```text
+Poučení:
+Kanonický domov:
+
+První podobná práce:
+Kdo nebo jaká role ji řešila:
+Kde mělo být poučení potkáno:
+
+Signál nalezení:
+Signál rozhodnutí:
+Signál datové stopy:
+
+Co fungovalo:
+Co nefungovalo:
+Typ problému: žádný / text / umístění / artefakt / rozsah / návyk
+
+Další stav:
+Jedna drobná úprava:
+Privacy-first záznam:
+Jednovětý závěr:
+```
+
+Příklad:
+
+```text
+Poučení: Checklisty, které pracují se sběrem osobních údajů, odkazují na kanonickou privacy-first kartu a nekopírují její pravidla.
+Kanonický domov: Šablona nového checklistu
+
+První podobná práce: Nový checklist pro kampaňovou landing page
+Kdo nebo jaká role ji řešila: Editor obsahu
+Kde mělo být poučení potkáno: V úvodní části šablony checklistu
+
+Signál nalezení: Poučení bylo použité přímo ze šablony.
+Signál rozhodnutí: Checklist obsahuje odkaz na kanonickou kartu, ne kopii formulářových pravidel.
+Signál datové stopy: Nevznikly screenshoty, osobní poznámky ani nová evidence čtení.
+
+Co fungovalo: Věta byla dost blízko pracovnímu rozhodnutí.
+Co nefungovalo: Odkaz na kartu byl pojmenovaný příliš obecně.
+Typ problému: drobné umístění a text odkazu
+
+Další stav: potvrzené s drobnou úpravou
+Jedna drobná úprava: Přejmenovat odkaz na "Kanonická privacy-first karta formulářů".
+Privacy-first záznam: Bez osobních údajů, bez zákaznických detailů, bez trvalých screenshotů.
+Jednovětý závěr: Poučení fungovalo při prvním použití; stačí zpřesnit název odkazu v šabloně.
+```
+
+### Mini workshop na 10 minut
+
+1. Dvě minuty: vyberte první skutečnou práci, kde se poučení mělo projevit.
+2. Dvě minuty: zkontrolujte, jestli poučení bylo nalezené v přirozeném místě.
+3. Dvě minuty: porovnejte výsledek s očekávaným rozhodnutím.
+4. Dvě minuty: udělejte privacy-first kontrolu ověřovací stopy.
+5. Jednu minutu: vyberte stav poučení.
+6. Jednu minutu: zapište jednu drobnou úpravu nebo potvrzení bez změny.
+
+Výstup:
+
+```text
+Jedna karta ověření poučení a nejvýše jedna drobná úprava.
+```
+
+### Codyho komentář
+
+Můj pohled: poučení se pozná podle toho, že se v příští práci tiše projeví. Ne podle toho, že má lepší formulaci než původní chyba. Pokud musí někdo poučení pořád vysvětlovat, není to ještě pracovní poučení. Je to poznámka s ambicemi. Dejte ji blíž k rozhodnutí, zkraťte ji nebo ji bez nostalgie archivujte.
+
+### Checklist kapitoly
+
+- Vybrali jste první skutečnou podobnou práci, ne umělý test?
+- Ověřujete stejný typ rozhodnutí jako v původním poučení?
+- Bylo poučení dostupné v místě, kde se práce opravdu dělala?
+- Pomohlo poučení změnit konkrétní volbu v šabloně, pravidle nebo odkazu?
+- Nevznikla kvůli ověření nová zbytečná datová stopa?
+- Rozlišili jste problém textu, umístění, artefaktu, rozsahu a návyku?
+- Pokud poučení nefungovalo, navrhli jste jen jednu nejmenší opravu?
+- Pokud vzniká širší práce, je oddělená v backlogu?
+- Neukládáte screenshoty, chatové citace ani osobní detaily jako trvalý důkaz?
+- Má ověření jednovětý závěr?
+- Je další stav jasný: potvrdit, drobně upravit, přesunout, přepsat nebo archivovat?
+- Vrací se potvrzené poučení do běžného rytmu bez speciálního dohledu?
+
+Ověřené poučení má uzavřít smyčku mezi opravou a budoucí prací. Když se použije jednou správně, není potřeba kolem něj stavět slavobránu. Stačí ho nechat tam, kde pomáhá, a zbytek provozu nezatěžovat další pamětí navíc.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KG o ověření poučení po prvním použití: výběr první podobné práce, tři signály nalezení/rozhodnutí/datové stopy, rozlišení problému poučení od problému okolí, stavy dalšího kroku, privacy-first kontrola ověření, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KF o převod uzavřené portfoliové opravy do jednoho poučení: vstupní brána pro uzavřené opravy, hledání opakovatelného vzoru, přepis příběhu na pracovní poučení, výběr kanonického domova, rozlišení poučení/pravidla/backlogu, privacy-first filtr, karta poučení, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KE o uzavření potvrzené portfoliové opravy po běžném cyklu: vstupní stavy vhodné k uzavření, převod speciálního sledování do běžného provozu, uzavírací věta, viditelné zavření starých odkazů, předání bez schůzky navíc, privacy-first úklid dočasných podkladů, uzavírací karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KD o kontrolu stabilizované portfoliové opravy po prvním běžném cyklu: výběr přirozeného cyklu, kontrola návratu staré cesty, cena použití pravidla, rozlišení selhání stabilizace od běžného šumu, privacy-first kontrola po cyklu, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
