@@ -83598,8 +83598,238 @@ Můj pohled: redukce dokumentace se má testovat stejně prakticky jako formulá
 
 Ověření redukovaného portfolia je malý test reality. Ukáže, jestli měsíční úklid opravdu zkrátil cestu k rozhodnutí, nebo jen přeuspořádal text. Když po něm člověk najde správné pravidlo rychleji, použije ho bez výkladu a nevznikne nová datová stopa, redukce splnila svůj účel.
 
+## Příloha JX: Uzavření potvrzené redukce portfolia do měsíčního rytmu
+
+Ověřená redukce portfolia pravidel by neměla zůstat jako jednorázový úspěch v pracovním logu. Pokud první použití potvrdilo, že se pravidlo hledá snáz, zní jasněji a nevznikla nová datová stopa, je čas uzavřít redukci do běžného měsíčního rytmu.
+
+Cíl není vytvořit další proces nad procesem. Cíl je udělat z redukce normální hygienu portfolia: jednou za měsíc se podívat, jestli pravidla pořád pomáhají práci, jestli se nevrátily duplicity a jestli se z užitečného systému nestává knihovna historických kompromisů.
+
+Praktická otázka zní:
+
+```text
+Jak potvrzenou redukci uzavřeme tak, aby portfolio zůstalo lehké i za měsíc, bez další kontroly navíc?
+```
+
+Pokud na tu otázku odpovíte novou schůzkou, novým dokumentem a novým dlouhým reportem, pravděpodobně jdete proti smyslu redukce. Měsíční rytmus má chránit lehkost, ne ji obřadně pohřbít pod administrativou.
+
+### Uzavírejte jen potvrzené redukce
+
+Do měsíčního rytmu patří jen redukce, které prošly prvním skutečným použitím. Pokud člověk pravidlo nenašel, pochopil ho špatně nebo potřeboval autora jako živý návod, redukce ještě není připravená k uzavření.
+
+Vstupní brána je jednoduchá:
+
+- pravidlo má jeden kanonický domov,
+- stará cesta objevená při použití je uzavřená nebo přesměrovaná,
+- minimální výstup je po zkrácení pořád jasný,
+- nevznikla nová citlivá datová stopa,
+- existuje jeden zapsaný stav z ověření: potvrzeno nebo drobně upraveno a znovu ověřeno.
+
+Neuzavírejte redukci proto, že už vás nebaví se k ní vracet. To je pochopitelný lidský pocit, ale špatné provozní kritérium. Uzavření znamená, že se systém obejde bez zvláštní péče.
+
+Mini příklad:
+
+```text
+Redukce: Sloučená pravidla pro veřejné formuláře.
+Ověření: Marketing našel novou kartu přes checklist landing page a použil ji při úpravě auditního formuláře.
+Nález: Starý odkaz v privacy checklistu byl nahrazen.
+Stav: Potvrzeno.
+Uzavření: Přidat kartu do měsíčního review portfolia, odstranit štítek "sledovat po redukci".
+```
+
+Tady už není potřeba další zvláštní kontrola. Stačí, aby pravidlo žilo v běžném rytmu spolu s ostatními.
+
+### Připojte výsledek k existujícímu review
+
+Nejlepší měsíční rytmus je ten, který už existuje. Pokud tým jednou měsíčně kontroluje produktový backlog, marketingový plán, provozní dokumentaci nebo bezpečnostní poznámky, připojte portfolio pravidel tam, kde se pravidla skutečně používají.
+
+Nevymýšlejte nový kalendář jen proto, že redukce zní důležitě. Zeptejte se:
+
+- Kde tým už řeší kvalitu práce?
+- Kde se přirozeně potkávají lidé, kteří pravidla používají?
+- Kde se rozhoduje, co zůstane, co se změní a co se vyhodí?
+- Který existující rytmus unese pět minut navíc bez toho, aby se rozpadl?
+
+Měsíční kontrola portfolia pravidel může být velmi krátká:
+
+```text
+1. Které pravidlo se za poslední měsíc použilo nejčastěji?
+2. Které pravidlo někdo hledal a nenašel?
+3. Které pravidlo se obešlo přes starou cestu?
+4. Které pravidlo už jen zabírá místo?
+5. Kde vznikla zbytečná datová stopa?
+```
+
+To je dost. Pokud z pěti otázek nevznikne žádný nález, portfolio nepotřebuje velký zásah. Pokud vznikne jeden nález, udělejte jednu malou úpravu. Neotevírejte všechno najednou.
+
+### Zapište redukci jako stav, ne jako příběh
+
+Po uzavření redukce nepotřebujete v aktivním portfoliu dlouhý příběh, jak se k ní tým dostal. Historie může být užitečná pro poučení, ale nemá překážet člověku, který přišel udělat práci.
+
+Aktivní karta pravidla má po uzavření obsahovat hlavně:
+
+- název pravidla,
+- kdy se používá,
+- co je minimální výstup,
+- co se nesmí přidávat ze zvyku,
+- kdo rozhoduje výjimku,
+- datum posledního ověření,
+- odkaz na archiv změny, pokud je opravdu potřeba.
+
+Slabý zápis:
+
+```text
+Toto pravidlo vzniklo sloučením tří starších pravidel, protože se během Q2 ukázalo, že tým opakovaně...
+```
+
+Silnější zápis:
+
+```text
+Veřejný formulář smí vyžadovat jen údaje potřebné pro první odpověď. Výjimku schvaluje vlastník služby. Poslední ověření: 2026-05-18.
+```
+
+První zápis vysvětluje historii. Druhý pomáhá rozhodnout. Historii nevyhazujte, pokud má hodnotu, ale dejte ji do archivu nebo changelogu. Aktivní pravidlo má být pracovní nástroj.
+
+### Odstraňte přechodové opory
+
+Po potvrzené redukci často zůstanou dočasné opory: štítky, úkoly, poznámky "ověřit později", duplicitní odkazy, komentáře v backlogu nebo krátkodobé checklisty. Pokud je neuklidíte, portfolio začne vypadat jako hotové, ale kolem něj zůstane provozní prach.
+
+Po uzavření projděte jen nejbližší okolí redukce:
+
+- dočasný štítek `po redukci`,
+- úkol na ověření prvního použití,
+- komentář s odkazem na starou kartu,
+- šablonu, která pořád kopíruje staré znění,
+- archivní poznámku obsahující citlivá data,
+- osobní poznámku autora, která se stala neoficiálním zdrojem pravdy.
+
+Nejde o velký úklid celé firmy. Jde o zavření věcí, které vznikly kvůli této konkrétní redukci. Když dočasné opory necháte aktivní, lidé je začnou používat jako paralelní systém.
+
+### Nastavte měsíční signál, ne měsíční audit
+
+Měsíční rytmus nemá dokazovat, že portfolio existuje. Má zachytit signál, že se zhoršuje použitelnost.
+
+Dobré signály jsou lehké:
+
+- někdo pravidlo hledal déle než pár minut,
+- někdo použil starý odkaz,
+- někdo se ptal na výjimku, která už je v pravidle,
+- stejné rozhodnutí se řešilo znovu v chatu,
+- vznikla kopie pravidla v jiné šabloně,
+- pravidlo se nepoužilo ani jednou, i když mělo být relevantní.
+
+Špatné signály jsou těžké:
+
+- měřit počet otevření každé karty podle lidí,
+- sledovat, kdo pravidlo četl a kdy,
+- vyžadovat měsíční report od každého týmu,
+- hodnotit poslušnost místo kvality výstupu,
+- zavádět nový nástroj jen pro evidenci kontroly.
+
+Privacy-first pohled je tady praktický: sledujte stav systému a kvalitu výstupu, ne chování jednotlivců. Pokud pravidlo nefunguje, nepotřebujete vědět, kdo ho kolikrát otevřel. Potřebujete vědět, kde se práce zasekla.
+
+### Udělejte jednu měsíční redukční frontu
+
+Portfolio pravidel může generovat hodně drobných nápadů. Některé jsou užitečné, některé jen lákají k úklidu pro úklid. Proto držte jednu malou frontu kandidátů.
+
+Každý kandidát má mít pouze:
+
+```text
+Pravidlo:
+Nález:
+Cena opakování:
+Navržený zásah: ponechat / zkrátit / sloučit / archivovat / přesměrovat
+Další nejmenší krok:
+```
+
+Do měsíční práce vyberte maximálně jednu až tři položky. Když jich vyberete deset, nevznikne lepší portfolio. Vznikne další backlog. A backlog pravidel je přesně ten typ nenápadné administrativy, kterou měla redukce omezit.
+
+Priorita patří kandidátům, které opakovaně zdržují práci nebo zvyšují riziko:
+
+1. duplicitní pravidla s rozdílným rozhodnutím,
+2. staré odkazy vedoucí na neplatnou verzi,
+3. pravidla, která sbírají víc dat, než je potřeba,
+4. pravidla bez jasné výjimky,
+5. dlouhé karty, které lidé obcházejí dotazem v chatu.
+
+Estetické úpravy nechte na konec. Hezké portfolio je příjemné. Použitelné portfolio je důležitější.
+
+### Uzavírací karta redukce
+
+```text
+Datum uzavření:
+Redukované pravidlo:
+Typ redukce: zkrácení / sloučení / archivace / přesměrování
+Výsledek prvního použití:
+Kanonický domov:
+Uzavřená stará cesta:
+Odstraněné přechodové opory:
+
+Měsíční rytmus, kam pravidlo patří:
+Signál pro znovuotevření:
+Privacy-first kontrola:
+
+Uzavírací věta:
+```
+
+Příklad:
+
+```text
+Datum uzavření: 2026-05-18
+Redukované pravidlo: Veřejné formuláře
+Typ redukce: sloučení
+Výsledek prvního použití: Marketing použil pravidlo bez pomoci při úpravě auditního formuláře.
+Kanonický domov: Checklist veřejných formulářů
+Uzavřená stará cesta: Privacy checklist přesměrován na novou kartu.
+Odstraněné přechodové opory: Štítek "ověřit po redukci", úkol v backlogu, stará kopie v šabloně landing page.
+
+Měsíční rytmus, kam pravidlo patří: Review produktového a marketingového portfolia.
+Signál pro znovuotevření: Nový formulář požaduje údaj bez jasného účelu.
+Privacy-first kontrola: Aktivní pravidlo neobsahuje osobní data ani staré zákaznické příklady.
+
+Uzavírací věta: Pravidlo pro veřejné formuláře je po sloučení potvrzené a dál se kontroluje jen v běžném měsíčním review.
+```
+
+Uzavírací karta není další dokument k věčnému udržování. Je to poslední stopa jednorázové redukce. Po jejím vyplnění má tým vědět, kde pravidlo žije a kdy má smysl se k němu vrátit.
+
+### Mini workshop na 12 minut
+
+1. Dvě minuty: vezměte jednu redukci potvrzenou v Příloze JW.
+2. Dvě minuty: ověřte, že má kanonický domov a uzavřenou starou cestu.
+3. Dvě minuty: odstraňte jednu přechodovou oporu.
+4. Dvě minuty: vyberte existující měsíční rytmus, kam pravidlo patří.
+5. Dvě minuty: napište signál pro znovuotevření.
+6. Dvě minuty: doplňte uzavírací větu.
+
+Výstup:
+
+```text
+Jedna potvrzená redukce portfolia uzavřená do běžného měsíčního rytmu bez nového procesu navíc.
+```
+
+### Codyho komentář
+
+Můj pohled: dobrá dokumentace nestárne tím, že je stará. Stárne tím, že se kolem ní hromadí výjimky, kopie a vzpomínky na to, jak to kdysi bylo. Měsíční rytmus nemá být slavnostní audit. Má být krátké připomenutí, že pravidla existují proto, aby lidé nemuseli znovu vynalézat stejné rozhodnutí.
+
+### Checklist kapitoly
+
+- Uzavíráte jen redukci ověřenou při skutečném použití?
+- Má pravidlo jeden kanonický domov?
+- Je stará cesta zavřená, přesměrovaná nebo jasně archivovaná?
+- Zůstalo aktivní pravidlo krátké a rozhodovací?
+- Je historie změny mimo hlavní pracovní text?
+- Odstranili jste dočasné štítky, úkoly a kopie vzniklé kvůli redukci?
+- Připojili jste pravidlo k existujícímu měsíčnímu rytmu?
+- Sledujete signály systému, ne chování jednotlivců?
+- Má pravidlo jasný spouštěč znovuotevření?
+- Nevznikl kvůli kontrole nový nástroj, report nebo backlog?
+- Je privacy-first kontrola omezená na nutnou datovou stopu?
+- Dokáže tým jednou větou říct, proč je redukce uzavřená?
+
+Uzavření potvrzené redukce je poslední krok, který brání návratu starého nepořádku. Když pravidlo najde své místo v běžném měsíčním rytmu, nepotřebuje zvláštní dohled. Stačí lehký signál, jasný domov a odvaha nepřidávat další administrativu jen proto, že systém zrovna funguje.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha JX o uzavření potvrzené redukce portfolia do měsíčního rytmu: vstupní brána pro potvrzené redukce, napojení na existující review, zápis stavu místo příběhu, úklid přechodových opor, lehké signály bez sledování lidí, redukční fronta, uzavírací karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JW o ověření redukovaného portfolia pravidel po prvním použití: výběr skutečné situace, cesta ke kanonickému pravidlu, kontrola zkrácení bez ztráty rozhodnutí, staré trasy, privacy-first datová stopa, čtyři výsledky ověření, kontrolní karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JV o měsíční redukci portfolia pravidel: výběr kandidátů, rozhodnutí ponechat/zkrátit/sloučit/archivovat, zkracování bez ztráty významu, slučování duplicit, archivace, privacy-first úklid, redukční karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JU o převod kontroly uzavřeného pravidla do portfolia pravidel: stavy po kontrole, minimální karta pravidla, hranice portfolia, privacy-first datová poznámka, měsíční review, mini workshop a checklist.
