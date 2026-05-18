@@ -83089,8 +83089,157 @@ Pokud workshop vyrobí pět nových úkolů, vraťte se k rozhodovací otázce. 
 
 Kontrola po prvním běžném cyklu chrání tým před falešným pocitem hotové práce. Dobré pravidlo po ní zůstane nudné, dohledatelné a užitečné. A to je přesně správně: provozní pravidla nemají zářit. Mají tiše snižovat tření, riziko a zbytečnou práci.
 
+## Příloha JU: Převod kontroly uzavřeného pravidla do portfolia pravidel
+
+Když pravidlo přežije první běžný revizní cyklus, láká to udělat dvě protichůdné chyby. Buď se na něj úplně zapomene, protože "už je hotové", nebo kolem něj vznikne další speciální kontrola, protože tým chce mít jistotu. První možnost nechává pravidla stárnout potichu. Druhá vyrábí provozní administrativu, která postupně sežere víc času než problém, kvůli kterému pravidlo vzniklo.
+
+Lepší cesta je převést výsledek kontroly do portfolia pravidel. Ne jako velký governance projekt. Stačí jednoduchý přehled, který říká:
+
+```text
+Která pravidla máme, proč existují, kdy se přirozeně kontrolují a co se s nimi stalo po posledním použití?
+```
+
+Portfolio pravidel není knihovna pro právní pocit bezpečí. Je to pracovní mapa. Pomáhá vidět, jestli tým pravidla používá, jestli se nedublují, jestli některá nestárnou a jestli kvůli každé malé změně nevzniká nový ostrůvek dokumentace.
+
+### Kdy převod udělat
+
+Převod do portfolia dělejte jen po jasném rozhodnutí z Přílohy JT. Pokud kontrola skončila stavem `Ponechat`, pravidlo stačí zapsat do běžného přehledu a nechat ho žít v existujícím rytmu. Pokud skončila stavem `Zpřesnit`, zapište jednu opravu a po jejím dokončení aktualizujte stav. Pokud skončila stavem `Znovu otevřít`, pravidlo nemá být v portfoliu jako stabilní; patří zpět do práce. Pokud skončila stavem `Zrušit`, portfolio má obsahovat hlavně důvod odstranění a úklid odkazů.
+
+Prakticky:
+
+- `Ponechat`: přidat nebo aktualizovat řádek v portfoliu pravidel.
+- `Zpřesnit`: zapsat jednu malou opravu a její nejbližší ověření.
+- `Znovu otevřít`: přesunout pravidlo do stavu aktivní stabilizace.
+- `Zrušit`: odstranit pravidlo z kanonické trasy a ponechat krátký záznam o důvodu.
+
+Tím se z kontroly nestane samostatný proces. Je to jen vstup do mapy, kterou tým už používá při revizích webu, SaaS provozu, marketingu, podpory nebo interních standardů.
+
+### Minimální karta pravidla v portfoliu
+
+Každé pravidlo by mělo mít jen tolik údajů, aby ho někdo dokázal najít, použít a rozumně zrevidovat.
+
+```text
+Název pravidla:
+Oblast:
+Kanonický domov:
+Proč existuje:
+Minimální výstup:
+Vlastník oblasti:
+Běžný revizní rytmus:
+Poslední stav:
+Poslední rozhodnutí:
+Spouštěč znovuotevření:
+Datová stopa a retenční poznámka:
+```
+
+Tohle není formulář pro sběr detailů. Je to brzda proti chaosu. Pokud pravidlo nejde popsat krátce, pravděpodobně je buď moc široké, nebo se v něm míchá pravidlo, proces, šablona a historická poznámka.
+
+Silný zápis:
+
+```text
+Název pravidla: Minimální údaje ve formuláři auditu
+Oblast: Web / lead generation
+Kanonický domov: Checklist webových formulářů
+Proč existuje: Nesbírat údaje, které nejsou potřeba pro první odpověď.
+Minimální výstup: Formulář chce jen jméno, pracovní e-mail, URL a krátký popis problému.
+Vlastník oblasti: Marketing + delivery lead
+Běžný revizní rytmus: Měsíční kontrola webu
+Poslední stav: Ponechat
+Poslední rozhodnutí: Starý formulář z kampaně byl odstraněn, aktuální tok funguje.
+Spouštěč znovuotevření: Nová kampaň, nový typ auditu nebo požadavek na další pole.
+Datová stopa a retenční poznámka: Bez exportů mimo CRM; staré testovací záznamy smazat po kontrole.
+```
+
+Slabý zápis:
+
+```text
+Formuláře jsou vyřešené.
+```
+
+Druhá věta je pohodlná, ale neříká nic o rozsahu, vlastníkovi, kontrole ani datové stopě. Až se za dva měsíce objeví nový formulář s pěti povinnými poli, nikdo nebude vědět, jestli porušuje pravidlo, nebo jestli pravidlo vlastně nikdy neexistovalo.
+
+### Nedělejte z portfolia muzeum
+
+Portfolio pravidel má pomáhat při práci, ne archivovat každou dobrou myšlenku. Když se do něj dostane všechno, tým ho přestane používat. Pravidlo patří do portfolia jen tehdy, když splňuje tři podmínky:
+
+1. Má opakované použití.
+2. Snižuje riziko, tření nebo ruční rozhodování.
+3. Dá se zkontrolovat v běžném rytmu bez zvláštního rituálu.
+
+Jednorázová oprava textu na webu není pravidlo. Poznámka z retrospektivy není pravidlo. Přání, aby se něco příště dělalo lépe, taky není pravidlo. Pravidlo začíná až ve chvíli, kdy umí říct, co se má v podobné situaci stát znovu.
+
+Codyho komentář: týmy někdy pletou portfolio pravidel s místem, kam se ukládá kolektivní vina. "Tohle jsme jednou pokazili, tak k tomu napíšeme standard." Chápu reflex, ale není moc užitečný. Dobrý standard není pomník chyby. Je to zkratka k lepšímu rozhodnutí příště.
+
+### Privacy-first pohled na portfolio
+
+Portfolio pravidel často vypadá nevinně, ale může obsahovat citlivé stopy: jména zákazníků, screenshoty, interní chyby, odkazy na exporty, incidentní detaily nebo osobní údaje v příkladech. Proto má mít každé pravidlo krátkou datovou poznámku.
+
+Ptejte se:
+
+- Potřebujeme v portfoliu konkrétní jméno zákazníka, nebo stačí typ situace?
+- Je příklad anonymizovaný tak, aby šel použít při onboardingu bez dalšího čištění?
+- Nevede karta pravidla na starý export, screenshot nebo dočasný dokument?
+- Víme, kdy se podpůrné důkazy smažou nebo zkrátí?
+- Je portfolio uložené tam, kde má přístup jen relevantní tým?
+- Nevzniká kvůli sledování pravidel nový monitoring lidí místo kontroly procesu?
+
+Privacy-first portfolio má raději méně konkrétních historických detailů a víc jasných rozhodovacích pravidel. Když někdo potřebuje pochopit princip, nepotřebuje kompletní interní detektivku. Potřebuje vědět, co má udělat příště.
+
+### Krátké portfolio review jednou měsíčně
+
+Jednou za měsíc projděte portfolio pravidel v lehkém režimu. Nečtěte všechno od začátku. Hledejte jen čtyři signály:
+
+- Nová duplicita: dvě pravidla řeší stejnou situaci jinými slovy.
+- Stárnutí: pravidlo odkazuje na starý nástroj, starou roli nebo zaniklý proces.
+- Nadbytečnost: pravidlo už nemá účel, protože problém zmizel.
+- Datový přebytek: pravidlo nebo jeho příklady drží víc informací, než potřebuje.
+
+Výstup měsíčního review má být malý:
+
+```text
+Jedno pravidlo ponechat beze změny.
+Jedno pravidlo zpřesnit, sloučit nebo zrušit.
+Jednu datovou stopu zkrátit, anonymizovat nebo smazat.
+```
+
+Pokud měsíční review otevře deset témat, není to review portfolia. Je to signál, že portfolio už je moc velké, nejasné nebo používá příliš ambiciózní šablonu. Zkraťte ho.
+
+### Mini workshop na 15 minut
+
+1. Tři minuty: vyberte jedno pravidlo po kontrole z Přílohy JT.
+2. Tři minuty: rozhodněte, jestli patří do portfolia jako stabilní pravidlo, aktivní stabilizace, nebo záznam o zrušení.
+3. Čtyři minuty: vyplňte minimální kartu pravidla.
+4. Dvě minuty: zkontrolujte datovou stopu a retenční poznámku.
+5. Dvě minuty: napojte pravidlo na existující revizní rytmus.
+6. Jedna minuta: smažte nebo označte starou cestu, aby portfolio neukazovalo dvě pravdy.
+
+Výstup:
+
+```text
+Jedna karta pravidla v portfoliu, jeden jasný stav a žádná nová speciální schůzka.
+```
+
+### Checklist kapitoly
+
+- Má pravidlo jasné rozhodnutí z první kontroly po běžném cyklu?
+- Je v portfoliu jen tehdy, pokud má opakované použití?
+- Má jeden kanonický domov?
+- Je jasné, proč pravidlo existuje?
+- Je popsaný minimální výstup, ne celá historie vzniku?
+- Má pravidlo vlastníka oblasti, ne náhodného autora dokumentu?
+- Je napojené na existující revizní rytmus?
+- Existuje spouštěč znovuotevření?
+- Je datová stopa popsaná krátce a prakticky?
+- Neobsahuje karta zbytečné osobní údaje, zákaznické detaily nebo staré exporty?
+- Nejsou v portfoliu dvě pravidla pro stejnou situaci?
+- Má zrušené pravidlo uklizené odkazy a krátký důvod odstranění?
+- Nevznikla kvůli portfoliu další pravidelná administrativa?
+
+Portfolio pravidel má být nenápadná mapa provozu. Když funguje, tým nemusí znovu objevovat stejná rozhodnutí, ale zároveň nežije pod lavinou dokumentace. Dobré portfolio se pozná podle toho, že při práci zkracuje cestu k rozhodnutí. Špatné podle toho, že samo potřebuje vlastní manuál, schůzku a tajného vykladače. To poslední prosím ne. Stačí už, že existují daňové portály.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha JU o převod kontroly uzavřeného pravidla do portfolia pravidel: stavy po kontrole, minimální karta pravidla, hranice portfolia, privacy-first datová poznámka, měsíční review, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JT o kontrolu uzavřeného pravidla po prvním běžném revizním cyklu: výběr skutečného cyklu, čtyři signály zdravého uzavření, rozhodovací matice, privacy-first kontrola datové stopy, kontrolní karta, příklad formuláře, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JS o uzavření funkčního pravidla do běžného revizního rytmu: rozhodnutí zralosti, zkrácení důkazů, napojení na existující revize, spouštěče znovuotevření, úklid backlogu a štítků, privacy-first uzavření přístupů a datové stopy, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JR o kontrolu běžného pravidla po stabilizaci další úpravy: výběr skutečného použití, ověření cesty bez autora změny, porovnání minimálního a skutečného výstupu, hledání staré cesty i nových obchvatů, privacy-first kontrola skutečné stopy, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
