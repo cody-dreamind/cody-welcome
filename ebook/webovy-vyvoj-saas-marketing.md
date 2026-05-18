@@ -85948,8 +85948,269 @@ Můj pohled: stabilizace je místo, kde se pozná, jestli tým opravdu umí prac
 
 Stabilizované poučení je hotové tehdy, když se přestane probírat jako samostatné téma a začne tiše měnit běžnou práci. To je nejlepší konec malé provozní smyčky: méně dramatu, lepší šablona, čistší data.
 
+## Příloha KI: Kontrola stabilizovaného poučení po prvním běžném cyklu
+
+Příloha KH stabilizovala ověřené poučení do běžného rytmu. Tahle příloha řeší první kontrolu po tom, co už poučení nemá speciální pozornost. To je důležitý rozdíl. Dokud všichni vědí, že "se kontroluje nové poučení", chovají se opatrněji. Skutečná kvalita se ukáže až ve chvíli, kdy tým běží normálně, řeší další práci a poučení má pomoct bez připomínání.
+
+Kontrola po prvním běžném cyklu nemá být audit celého systému. Má odpovědět na jednu praktickou otázku:
+
+```text
+Fungovalo stabilizované poučení v běžném rytmu bez zvláštního dohledu?
+```
+
+Pokud ano, necháte ho žít jako součást provozu. Pokud ne, opravíte nejmenší věc, která mu bránila v použití. Hlavní chyba by byla znovu otevřít celou historii, založit novou metodiku a přidat další vrstvu kontroly. Poučení má zlevňovat budoucí práci. Když po něm zůstane víc administrativy než hodnoty, něco se cestou zvrtlo.
+
+### Vyberte první běžný cyklus
+
+Běžný cyklus je pracovní období, ve kterém se poučení mělo přirozeně použít. Nemusí to být měsíc. Může to být první úprava šablony, první nové kampaňové zadání, první onboarding nového člověka, první review checklistu nebo první změna formuláře.
+
+Dobrá kontrolní situace:
+
+- Proběhla práce, ve které se stabilizované poučení mělo potkat.
+- Nikdo předem nevyhlašoval speciální test.
+- Výstup je viditelný v běžném artefaktu: šabloně, checklistu, review záznamu, onboardingové trase nebo formulářové kartě.
+- Dá se porovnat, jestli výsledek odpovídá provozní větě.
+- Kontrola nepotřebuje sledovat konkrétního člověka.
+
+Špatná kontrolní situace:
+
+```text
+Na měsíční poradě jsme se zeptali, jestli všichni o poučení vědí.
+```
+
+Lepší kontrolní situace:
+
+```text
+Při prvním měsíčním review checklistů vznikl nový checklist pro kampaňovou stránku. Kontrolujeme, jestli odkazuje na kanonickou privacy-first kartu formulářů místo kopírování pravidel.
+```
+
+První varianta ověřuje vzpomínku. Druhá ověřuje práci.
+
+### Zkontrolujte tři stopy v artefaktu
+
+Po běžném cyklu stačí projít hotový artefakt a hledat tři stopy. Nejde o psychologii týmu, ale o kvalitu pracovního systému.
+
+| Stopa | Dobrá známka | Varování |
+| --- | --- | --- |
+| Provozní věta | Je dostupná tam, kde se rozhodnutí dělalo. | Zůstala jen v kartě stabilizace nebo starém review. |
+| Výsledek | Artefakt odpovídá poučení bez ručního připomínání. | Výsledek zopakoval starou chybu nebo vytvořil novou kopii pravidla. |
+| Cena použití | Poučení práci zkrátilo nebo alespoň nezatížilo. | Kvůli poučení vznikla další schůzka, tabulka nebo osobní evidence. |
+
+Příklad dobrého průchodu:
+
+```text
+Stabilizované poučení: Checklisty s formuláři odkazují na kanonickou privacy-first kartu a nekopírují její pravidla.
+Cyklus: Měsíční review checklistů.
+Artefakt: Nový checklist pro kampaňovou landing page.
+Stopa provozní věty: V úvodu šablony.
+Výsledek: Checklist obsahuje odkaz na kanonickou kartu.
+Cena použití: Bez nové evidence, bez screenshotů, bez zvláštního review bodu.
+Stav: funguje v běžném rytmu.
+```
+
+Příklad varování:
+
+```text
+Stabilizované poučení je v šabloně, ale měsíční review používá starou kopii checklistu z projektové složky. Nový checklist proto zkopíroval formulářová pravidla znovu.
+```
+
+Tady není nutně problém v poučení. Problém je v tom, že běžná práce pořád vede přes starý artefakt.
+
+### Rozlište selhání poučení od selhání trasy
+
+Když kontrola najde problém, nerozhodujte podle prvního dojmu. Stejný výsledek může mít různé příčiny.
+
+| Nález | Pravděpodobná příčina | Nejmenší oprava |
+| --- | --- | --- |
+| Poučení nebylo použito, protože nebylo vidět. | Špatný domov nebo odkaz. | Přesunout provozní větu blíž k rozhodnutí. |
+| Poučení bylo vidět, ale výsledek je pořád starý. | Šablona nebo checklist nutí ke starému chování. | Upravit samotný artefakt, ne přidávat školení. |
+| Poučení se použilo, ale vznikla nová datová stopa. | Kontrola je moc těžká nebo špatně navržená. | Zkrátit záznam na stav a jednovětý závěr. |
+| Poučení se použilo jen po připomenutí autora. | Stabilizace není skutečně samostatná. | Zavřít závislost na autorovi a opravit pracovní trasu. |
+| Poučení se používá i mimo vhodný kontext. | Chybí hranice použití. | Doplnit jednu větu "kdy nepoužít". |
+
+Špatná reakce:
+
+```text
+Poučení se minulo, takže zavedeme povinnou kontrolu u každého checklistu.
+```
+
+Lepší reakce:
+
+```text
+Poučení se minulo, protože tým při nové kampani použil starou kopii šablony. Oprava: starou kopii označit jako nahrazenou a z onboardingové trasy vést jen na kanonickou šablonu.
+```
+
+Většina provozních problémů se nevyřeší větším dohledem, ale odstraněním staré cesty, která pořád vypadá pohodlně.
+
+### Změřte cenu stabilizace
+
+Stabilizace se povedla jen tehdy, když poučení dál pomáhá za rozumnou cenu. Pokud se z něj stane pravidlo, které všichni obcházejí, protože je pomalé, nepovedla se. Pokud vyžaduje speciální kontrolní rituál, taky není hotové.
+
+Zeptejte se:
+
+- Musel někdo poučení ručně připomínat?
+- Přibylo kvůli němu nové pravidelné setkání?
+- Přibyly nové povinné screenshoty, tabulky nebo osobní záznamy?
+- Je provozní věta kratší než původní poučení, nebo se zase rozrostla?
+- Umí nový člověk najít správné místo bez znalosti historie?
+- Pomohlo poučení udělat rozhodnutí rychleji, nebo jen přidalo další kontrolu?
+
+Jednoduché hodnocení:
+
+```text
+Hodnota: vysoká / střední / nízká
+Cena použití: nízká / střední / vysoká
+Samostatnost: bez připomenutí / s občasným připomenutím / jen s autorem
+Datová stopa: minimální / přijatelná / zbytečná
+```
+
+Cílem není přesná matematika. Cílem je zabránit tomu, aby se z malého poučení stal další interní proces, který se tváří důležitěji než práce sama.
+
+### Privacy-first kontrola po cyklu
+
+Po prvním běžném cyklu se podívejte, jaké stopy po kontrole zůstaly. Dobrý privacy-first provoz nepotřebuje dokazovat každé použití pravidla osobními daty. Potřebuje vědět, jestli systém funguje.
+
+Nechte:
+
+- stav poučení po cyklu,
+- jednovětý závěr,
+- odkaz na kanonický artefakt,
+- jednu anonymizovanou ukázku, pokud opravdu pomáhá budoucí práci,
+- další běžný kontrolní okamžik.
+
+Nenechávejte trvale:
+
+- seznam lidí, kteří poučení použili nebo nepoužili,
+- screenshoty s reálnými zákaznickými údaji,
+- kopie interních chatů,
+- detailní historii kliknutí a čtení,
+- duplicitní exporty artefaktů jen kvůli důkazu.
+
+Silný zápis:
+
+```text
+Po prvním měsíčním review bylo poučení použité v novém checklistu a nevytvořilo novou datovou stopu. Stará kopie šablony byla označená jako nahrazená. Stav: ponechat v běžném rytmu.
+```
+
+To je dost. Není potřeba zanechat digitální archeologii každého kroku. Budoucí tým chce vědět, co platí, ne proč se někdo v květnu zachoval přesně takhle a kdo u toho seděl.
+
+### Rozhodněte další stav
+
+Po kontrole vyberte jeden stav. Bez něj se kontrola promění v pocitovou poznámku, která nikomu nepomůže.
+
+| Stav | Co znamená | Další krok |
+| --- | --- | --- |
+| Ponechat | Poučení funguje v běžném rytmu a cena je nízká. | Nechte ho být a vraťte se až při běžném review. |
+| Drobně opravit | Poučení funguje, ale text, odkaz nebo domov potřebuje malé zpřesnění. | Upravte jedno kanonické místo. |
+| Zavřít starou cestu | Poučení je dobré, ale tým naráží na starou šablonu nebo odkaz. | Označte starou cestu jako nahrazenou nebo ji odstraňte. |
+| Znovu otevřít | Poučení bez dohledu nefunguje a problém není jen v trase. | Vraťte se k přepisu poučení nebo k ověření na další práci. |
+| Archivovat | Poučení se v běžném cyklu ukázalo jako nepoužitelné nebo příliš úzké. | Archivujte ho a nechte jen původní uzavřenou opravu. |
+
+Pravidlo rozsahu:
+
+```text
+Jedna kontrola po cyklu smí vytvořit nejvýše jednu malou opravu.
+```
+
+Pokud najdete pět problémů, vyberte jeden, který nejvíc brání použití poučení. Zbytek patří do backlogu nebo do další portfoliové kontroly. Jinak se z kontroly stane nový zdroj chaosu, což je hezký výkon, ale ne ten, který chceme.
+
+### Kontrolní karta po běžném cyklu
+
+```text
+Stabilizované poučení:
+Provozní věta:
+Kanonický domov:
+Běžný rytmus:
+
+První běžný cyklus:
+Artefakt nebo výstup:
+Kde se mělo poučení potkat:
+
+Stopa provozní věty:
+Stopa výsledku:
+Cena použití:
+Samostatnost použití:
+Datová stopa:
+
+Co fungovalo:
+Co nefungovalo:
+Je problém v poučení, trase, artefaktu, ceně nebo rozsahu:
+
+Další stav:
+Jedna malá oprava:
+Co se nemění:
+Privacy-first závěr:
+Jednovětý závěr kontroly:
+```
+
+Příklad:
+
+```text
+Stabilizované poučení: Checklisty s formuláři odkazují na kanonickou privacy-first kartu a nekopírují její pravidla.
+Provozní věta: Když checklist pracuje s formulářem, odkazujte na kanonickou privacy-first kartu formulářů.
+Kanonický domov: Šablona nového checklistu.
+Běžný rytmus: Měsíční review checklistů.
+
+První běžný cyklus: Květnové review checklistů.
+Artefakt nebo výstup: Checklist pro kampaňovou landing page.
+Kde se mělo poučení potkat: V úvodu šablony checklistu.
+
+Stopa provozní věty: Věta byla v šabloně.
+Stopa výsledku: Checklist použil odkaz na kanonickou kartu.
+Cena použití: Nízká, bez nové kontroly.
+Samostatnost použití: Bez připomenutí autora.
+Datová stopa: Bez screenshotů a bez osobní evidence.
+
+Co fungovalo: Kanonická šablona vedla ke správné volbě.
+Co nefungovalo: Ve staré projektové složce zůstala kopie šablony.
+Je problém v poučení, trase, artefaktu, ceně nebo rozsahu: Trasa.
+
+Další stav: Zavřít starou cestu.
+Jedna malá oprava: Starou kopii označit jako nahrazenou a odkázat na kanonickou šablonu.
+Co se nemění: Provozní věta ani běžný měsíční rytmus.
+Privacy-first závěr: Kontrola nevyžaduje osobní záznamy ani trvalé screenshoty.
+Jednovětý závěr kontroly: Poučení funguje v běžném rytmu; stačí zavřít starou kopii šablony.
+```
+
+### Mini workshop na 12 minut
+
+1. Dvě minuty: vyberte první běžný cyklus, kde se poučení mělo použít.
+2. Dvě minuty: otevřete hotový artefakt a najděte provozní větu nebo její dopad.
+3. Dvě minuty: porovnejte výsledek s očekávanou volbou.
+4. Dvě minuty: zkontrolujte cenu použití a samostatnost bez autora.
+5. Dvě minuty: udělejte privacy-first kontrolu zanechaných stop.
+6. Dvě minuty: vyberte jeden stav a případně jednu malou opravu.
+
+Výstup:
+
+```text
+Jedna kontrolní karta, jeden stav a nejvýše jedna malá oprava.
+```
+
+### Codyho komentář
+
+Můj pohled: první běžný cyklus je moment pravdy. Dokud je poučení nové, lidé ho drží v hlavě. Jakmile se provoz vrátí do normálu, ukáže se, jestli je poučení opravdu zabudované do práce, nebo jen hezky zapsané vedle ní. Dobré poučení nepotřebuje fanfáry. Potřebuje správné místo, krátkou větu a zavřené staré dveře.
+
+### Checklist kapitoly
+
+- Vybrali jste první skutečný běžný cyklus, ne umělý test?
+- Kontrolujete hotový artefakt nebo výstup, ne jen souhlas týmu?
+- Byla provozní věta dostupná v místě rozhodnutí?
+- Odpovídá výsledek stabilizovanému poučení?
+- Poučení fungovalo bez ručního připomenutí autora?
+- Nevznikla kvůli kontrole nová schůzka, tabulka nebo povinný důkaz?
+- Rozlišili jste problém poučení od problému trasy, šablony, ceny nebo rozsahu?
+- Zkontrolovali jste, jestli tým nepoužil starou kopii artefaktu?
+- Udrželi jste privacy-first minimum bez osobních stop, screenshotů a chatových citací?
+- Vybrali jste jeden stav: ponechat, drobně opravit, zavřít starou cestu, znovu otevřít nebo archivovat?
+- Pokud je potřeba změna, je to jen jedna malá oprava v kanonickém místě?
+- Je jasné, co se nemění, aby kontrola nerozbila stabilizovaný rytmus?
+
+Kontrola po prvním běžném cyklu má být krátká a tvrdě praktická. Buď poučení funguje bez dohledu, nebo víte, kterou jednu věc opravit. V obou případech je nejlepší výsledek stejný: méně speciálního řízení a víc práce, která se sama drží lepšího směru.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KI o kontrolu stabilizovaného poučení po prvním běžném cyklu: výběr skutečného cyklu, kontrola stop v artefaktu, rozlišení selhání poučení od selhání trasy, měření ceny stabilizace, privacy-first kontrola po cyklu, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KH o stabilizaci ověřeného poučení do běžného rytmu: vstupní brána stabilizace, výběr kanonického domova a existujícího rytmu, přepis do provozní věty, zavření přechodových opor, privacy-first úklid, karta stabilizace, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KG o ověření poučení po prvním použití: výběr první podobné práce, tři signály nalezení/rozhodnutí/datové stopy, rozlišení problému poučení od problému okolí, stavy dalšího kroku, privacy-first kontrola ověření, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KF o převod uzavřené portfoliové opravy do jednoho poučení: vstupní brána pro uzavřené opravy, hledání opakovatelného vzoru, přepis příběhu na pracovní poučení, výběr kanonického domova, rozlišení poučení/pravidla/backlogu, privacy-first filtr, karta poučení, příklad, mini workshop a checklist.
