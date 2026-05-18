@@ -84050,8 +84050,198 @@ Můj pohled: dokumentační systém se pozná podle toho, co odmítne měřit. P
 
 První měsíční kontrola po uzavření redukce má být skoro nudná. Jedno pravidlo, jeden signál, jedna věta, případně jedna malá oprava. Když se rytmus takhle udrží, portfolio pravidel zůstává pracovní pomůcka místo dalšího systému, který se časem musí sám opravovat.
 
+## Příloha JZ: Kvartální konsolidace portfolia pravidel po měsíčním rytmu
+
+Měsíční rytmus drží portfolio pravidel při životě. Kvartální konsolidace má jiný účel: podívat se, jestli se z jednotlivých měsíčních signálů nezačíná skládat větší vzor. Nejde o velký audit, přejmenování všeho ani dokumentační olympiádu. Jde o krátké zastavení nad tím, zda pravidla pořád chrání práci, nebo se z nich opět stává šuplík dobrých úmyslů.
+
+Tahle příloha navazuje na Přílohu JY. Tam jste ověřili, že první měsíční kontrola po redukci umí fungovat lehce. Tady vezmete tři měsíční rozhodovací věty a položíte nad nimi jednu otázku:
+
+```text
+Ukazují poslední tři měsíční kontroly opakovaný vzor, který má změnit portfolio pravidel, nebo stačí pokračovat beze změny?
+```
+
+Pokud odpověď zní "nevíme, protože jsme si kromě tabulek nenechali žádné rozhodovací věty", nevracejte se k rekonstrukci historie. Začněte od dalšího kvartálu. Portfolio pravidel má zlepšovat budoucí práci, ne trestat tým za starší nepořádek.
+
+### Vezměte jen tři měsíční věty
+
+Kvartální konsolidace nezačíná otevřením všech pravidel. Začíná třemi posledními měsíčními větami z Přílohy JY. Pokud je nemáte, vezměte maximálně tři nejbližší záznamy z changelogu, které popisují reálné použití pravidel.
+
+U každé věty si označte:
+
+- jaké pravidlo nebo oblast se řešila,
+- zda problém byl v pravidle, názvu, odkazu, šabloně, nebo nikde,
+- jaká byla nejmenší reakce,
+- jestli se podobný signál opakuje.
+
+Příklad tří vět:
+
+```text
+Leden: Kontrola potvrdila pravidlo veřejných formulářů, ale opravila starou šablonu s povinným telefonem.
+Únor: Kontrola znovu otevřela pravidlo poptávkových formulářů, protože obchod používal starou kopii checklistu.
+Březen: Kontrola potvrdila pravidlo veřejných formulářů, ale doplnila odkaz do landing page šablony.
+```
+
+Tady už je vidět vzor. Nejde o to, že pravidlo je špatné. Problém je v okolních šablonách a odkazech. Kvartální reakce tedy nemá být přepsat pravidlo. Má opravit místa, odkud lidé k pravidlu přicházejí.
+
+### Hledejte typ vzoru, ne viníka
+
+Kvartální konsolidace má chránit systém, ne hodnotit lidi. Pokud se pravidlo obchází, první otázka není "kdo to zase nečetl". První otázka je "proč bylo jednodušší obejít pravidlo než ho použít".
+
+Nejčastější vzory:
+
+| Vzor | Jak se projevuje | Co obvykle pomůže |
+| --- | --- | --- |
+| Opakovaně stará šablona | Lidé pravidlo znají, ale pracovní dokument drží starý postup. | Opravit nebo zrušit šablonu. |
+| Slabý název pravidla | Pravidlo existuje, ale lidé ho nenajdou podle své situace. | Přejmenovat podle pracovního úkolu. |
+| Přerostlé pravidlo | Pravidlo je správné, ale moc dlouhé pro běžné použití. | Zkrátit na rozhodovací kartu a detail přesunout níž. |
+| Chybějící výjimka | Tým se ptá na stejnou okrajovou situaci. | Doplnit jednu výjimku nebo rozhodovací otázku. |
+| Nová duplicita | Vedle kanonického pravidla vzniká druhý návod. | Sloučit, přesměrovat a zavřít starou cestu. |
+| Žádný signál | Pravidlo se nepoužilo a nikdo ho nehledal. | Nedělat nic, případně sledovat při další relevantní práci. |
+
+Důležité je nepřehnat reakci. Jeden opakovaný signál může znamenat malý fix. Tři různé signály v různých oblastech nemusí znamenat systémovou krizi. Kvartál je lupa, ne kladivo.
+
+### Rozhodněte stav portfolia
+
+Po přečtení tří měsíčních vět přiřaďte portfoliu jeden stav. Stav má říct, jak se bude s pravidly pracovat další kvartál.
+
+| Stav | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Pokračovat | Měsíční rytmus je lehký a signály jsou jednorázové. | Neměnit portfolio, jen pokračovat v rytmu. |
+| Opravit napojení | Pravidla jsou dobrá, ale odkazy, index nebo šablony vedou jinam. | Udělat jednu malou opravu vstupní cesty. |
+| Zkrátit pravidlo | Lidé pravidlo najdou, ale nepoužijí ho bez vysvětlení. | Převést úvod na rozhodovací kartu. |
+| Sloučit duplicity | Dvě nebo více pravidel řeší stejnou situaci. | Vybrat kanonickou verzi a ostatní zavřít. |
+| Znovu otevřít oblast | Opakuje se zásadní problém v rozhodování, ne jen v dokumentaci. | Naplánovat jednu cílenou revizi oblasti. |
+
+Nepřidávejte stav "pro jistotu zkontrolovat všechno". To je jen převlečený návrat k velkému auditu. Pokud cítíte nejistotu, zúžte ji na konkrétní otázku: "Která jedna oblast za poslední kvartál opakovaně brzdila práci?"
+
+### Kvartální oprava má být jedna
+
+Největší riziko kvartální konsolidace je, že z ní vznikne seznam patnácti drobných zlepšení. Každé zní rozumně. Dohromady ale vrátí portfolio do režimu neustálého šlechtění.
+
+Vyberte jednu opravu podle tohoto pořadí:
+
+1. Opravte místo, které brání lidem najít kanonické pravidlo.
+2. Opravte šablonu, která reprodukuje staré chování.
+3. Zkraťte pravidlo, které se používá často, ale s třením.
+4. Sloučte duplicitu, která rozděluje tým.
+5. Až potom přepisujte samotné pravidlo.
+
+Příklad:
+
+```text
+Vzor: Ve třech měsících se vracely staré formulářové šablony.
+Stav: Opravit napojení.
+Jedna oprava: Všechny landing page šablony dostanou odkaz na kanonickou kartu veřejných formulářů a stará kopie checklistu se archivuje.
+Co se nedělá: Nepřepisuje se pravidlo, nezakládá se nový formulářový audit a nesleduje se, kdo šablonu použil.
+```
+
+Tahle oprava je malá, ale systémová. Změní místo, kde vznikalo tření, a přitom nevyrábí další kontrolní vrstvu.
+
+### Privacy-first konsolidace
+
+Kvartální pohled svádí ke sběru širších dat: kdo pravidla používá, kdo je obchází, kdo se ptá, které týmy mají nejvíc chyb. To je lákavé, protože z toho jde udělat graf. Jenže graf ještě není lepší systém.
+
+Privacy-first konsolidace drží minimum:
+
+- Pracujte s rozhodovacími větami, ne s osobní historií.
+- Neuchovávejte chatové citace, screenshoty a jména jen kvůli ilustraci.
+- Pokud potřebujete příklad, popište pracovní situaci anonymně.
+- Po uzavření konsolidace smažte dočasné podklady, které nejsou zdrojem pravdy.
+- Sledujte kvalitu pravidla a pracovního místa, ne výkon jednotlivce.
+
+Slabý kvartální závěr:
+
+```text
+Tři lidé z obchodu opakovaně ignorovali pravidlo formulářů.
+```
+
+Silnější závěr:
+
+```text
+Obchodní šablony pořád vedly na starou verzi poptávkového formuláře. Kanonická karta byla v pořádku, ale nebyla napojená na běžné pracovní místo.
+```
+
+Druhý závěr vede k opravě systému. První jen vyrábí napětí a obvykle neřekne, co přesně změnit.
+
+### Kvartální karta konsolidace
+
+```text
+Kvartál:
+Kontrolované měsíční věty:
+
+Opakovaný vzor:
+Je problém v pravidlech, nebo v okolních pracovních místech:
+Stav portfolia:
+
+Jedna vybraná oprava:
+Co záměrně neděláme:
+Kde se oprava projeví:
+Jak poznáme v dalším měsíčním rytmu, že pomohla:
+
+Privacy-first kontrola:
+Dočasné podklady ke smazání:
+Jednovětý kvartální závěr:
+```
+
+Příklad:
+
+```text
+Kvartál: Q2 2026
+Kontrolované měsíční věty: duben, květen, červen
+
+Opakovaný vzor: Staré šablony formulářů vedou mimo kanonické pravidlo.
+Je problém v pravidlech, nebo v okolních pracovních místech: V okolních šablonách.
+Stav portfolia: Opravit napojení.
+
+Jedna vybraná oprava: Upravit landing page a auditní šablony tak, aby odkazovaly na kartu veřejných formulářů.
+Co záměrně neděláme: Nepřepisujeme pravidlo a nezavádíme nový formulářový audit.
+Kde se oprava projeví: V šablonách používaných před publikací nové stránky.
+Jak poznáme v dalším měsíčním rytmu, že pomohla: Při nové landing page nebude potřeba ručně opravovat povinný telefon.
+
+Privacy-first kontrola: Bez osobních údajů, jen pracovní situace a stav šablon.
+Dočasné podklady ke smazání: Screenshot staré šablony po úpravě.
+Jednovětý kvartální závěr: Q2 konsolidace neopravuje pravidlo formulářů, ale napojení šablon, protože tření vznikalo mimo kanonickou kartu.
+```
+
+### Mini workshop na 20 minut
+
+1. Tři minuty: najděte tři poslední měsíční rozhodovací věty.
+2. Čtyři minuty: označte u každé problém pravidla, odkazu, názvu, šablony nebo žádný problém.
+3. Čtyři minuty: najděte opakovaný vzor, pokud existuje.
+4. Tři minuty: vyberte stav portfolia.
+5. Tři minuty: napište jednu opravu a jednu věc, kterou záměrně neděláte.
+6. Tři minuty: proveďte privacy-first kontrolu podkladů a zapište jednovětý závěr.
+
+Výstup:
+
+```text
+Jedna kvartální karta, jeden stav portfolia a maximálně jedna oprava pro další měsíční rytmus.
+```
+
+### Codyho komentář
+
+Můj pohled: kvartální konsolidace je užitečná jen tehdy, když umí říct "nic neměnit". Tým, který při každém review něco přepíše, se možná tváří pečlivě, ale uživatelům dokumentace bere stabilitu. Někdy je nejlepší údržba pravidel ta, která jen potvrdí, že systém pořád slouží a není potřeba na něj sahat. Krásně nudné. Skoro podezřele dospělé.
+
+### Checklist kapitoly
+
+- Vzali jste jen poslední tři měsíční rozhodovací věty?
+- Hledali jste opakovaný vzor, ne viníka?
+- Rozlišili jste problém pravidla od problému šablony, odkazu, názvu nebo indexu?
+- Přiřadili jste portfoliu jeden stav pro další kvartál?
+- Vybrali jste maximálně jednu opravu?
+- Zapsali jste i to, co záměrně neděláte?
+- Neotevřeli jste celý archiv jen kvůli pocitu jistoty?
+- Nepřidali jste nový nástroj, tabulku nebo povinný report?
+- Nezůstaly v podkladech osobní údaje, citace z chatu nebo zbytečné screenshoty?
+- Má oprava jasné místo, kde se projeví v běžné práci?
+- Ví další měsíční rytmus, jak pozná, že oprava pomohla?
+- Umíte kvartální závěr říct jednou pracovní větou?
+
+Kvartální konsolidace má portfolio pravidel držet zdravé, ne slavnostně přestavět. Když z posledních měsíců vyjde jeden vzor, opravte jedno místo. Když nevyjde žádný vzor, pokračujte. Stabilita je taky výsledek práce, i když se špatně prodává jako dramatická změna.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha JZ o kvartální konsolidaci portfolia pravidel po měsíčním rytmu: práce se třemi měsíčními větami, hledání opakovaného vzoru, stav portfolia, jedna vybraná oprava, privacy-first omezení podkladů, kvartální karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JY o kontrolu měsíčního rytmu po uzavření redukce: kontrola podle reálného použití, rozlišení problému pravidla a okolních šablon, jednovětý výstup, privacy-first omezení stop, kontrolní karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JX o uzavření potvrzené redukce portfolia do měsíčního rytmu: vstupní brána pro potvrzené redukce, napojení na existující review, zápis stavu místo příběhu, úklid přechodových opor, lehké signály bez sledování lidí, redukční fronta, uzavírací karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JW o ověření redukovaného portfolia pravidel po prvním použití: výběr skutečné situace, cesta ke kanonickému pravidlu, kontrola zkrácení bez ztráty rozhodnutí, staré trasy, privacy-first datová stopa, čtyři výsledky ověření, kontrolní karta, mini workshop a checklist.
