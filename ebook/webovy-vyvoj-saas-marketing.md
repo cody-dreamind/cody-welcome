@@ -82130,8 +82130,390 @@ Pokud workshop začne řešit širší redesign procesu, vraťte se k ověřené
 
 Stabilizace potvrzené úpravy je úklid po dobré práci. Díky ní se tým neopírá o paměť autora změny, ale o jasné pravidlo v místě práce. A protože se zároveň zavře stará cesta a uklidí ověřovací stopa, systém se nezvětší víc, než je nutné. To je v privacy-first provozu tichá, ale velmi praktická výhra.
 
+## Příloha JR: Kontrola běžného pravidla po stabilizaci další úpravy
+
+Stabilizované pravidlo vypadá hotově, ale první dny po stabilizaci jsou zrádné. V dokumentu už je nové znění, stará cesta je označená nebo zavřená, changelog má uklizenou větu. Jenže provoz se neřídí tím, že něco hezky vypadá v textu. Provoz se řídí tím, jestli člověk ve správné chvíli najde správné místo a udělá správnou minimální akci bez autora změny za zády.
+
+Tato příloha navazuje na Přílohu JQ. Použijte ji po prvních běžných použitích stabilizovaného pravidla. Cílem není znovu otevřít celou úpravu. Cílem je ověřit, že pravidlo opravdu přežilo přechod z "právě jsme to opravili" do "takhle se u nás normálně pracuje".
+
+Vstupem je stabilizační věta:
+
+```text
+Potvrzená úprava je stabilizovaná: [běžné pravidlo] je v [kanonické místo], [stará cesta] je [uzavřená/archivní/jen pro čtení] a samostatné ověřování končí.
+```
+
+Výstupem je kontrolní rozhodnutí:
+
+```text
+Po prvních použitích má pravidlo stav [ponechat / drobně upravit / vrátit do opravy / sloučit / ukončit], protože [stručný důkaz z běžné práce].
+```
+
+Codyho komentář: stabilizace je jako uklizený pracovní stůl po dlouhém dni. Kontrola je ráno potom. Jestli člověk do deseti minut zase hledá propisku v šuplíku s kabely, nebyl to systém. Byla to jen večerní estetika.
+
+### 1. Vyberte skutečné použití po stabilizaci
+
+Kontrolujte až chvíli, kdy pravidlo někdo použil v běžné práci. Ne při čtení změny, ne při prezentaci, ne při "pojďme si ukázat, co je nové". Skutečné použití má tlak kontextu: člověk řeší poptávku, audit, support, měsíční review, release, sales follow-up nebo provozní úklid a pravidlo je jen prostředek k dokončení práce.
+
+Dobré kontrolní okno:
+
+- první měsíční kontrola po stabilizaci,
+- první nová poptávka přes upravený formulářový proces,
+- první support případ, který má použít novou šablonu,
+- první interní review, které má začít v novém kanonickém místě,
+- první release, kde se pravidlo potká s realitou,
+- první onboardingový průchod člověka, který u změny nebyl.
+
+Špatné kontrolní okno:
+
+- autor změny si pravidlo sám projde,
+- tým si změnu ukáže na schůzce bez skutečného výstupu,
+- kontrolujete jen to, že dokument existuje,
+- sbíráte dojmy dřív, než pravidlo někdo potřeboval použít.
+
+Příklad:
+
+```text
+Nekontrolovat:
+Po stabilizaci jsme otevřeli provozní kartu a všichni potvrdili, že text dává smysl.
+
+Kontrolovat:
+Při další měsíční kontrole formulářů člověk otevřel provozní kartu, nepoužil starou tabulku a zapsal výstup jednou stavovou větou.
+```
+
+Pokud zatím žádné skutečné použití nenastalo, nevyplňujte kontrolní kartu jen proto, aby byl proces "hotový". Zapište čekací stav a konkrétní spouštěč:
+
+```text
+Kontrola čeká na první měsíční kontrolu formulářů po stabilizaci. Bez tohoto průchodu se stav pravidla nemění.
+```
+
+### 2. Ověřte cestu k pravidlu bez autora změny
+
+První otázka není, jestli je pravidlo správně formulované. První otázka je, jestli ho člověk najde, když ho potřebuje. Pokud musí vědět, kdo úpravu dělal, ve kterém úkolu se řešila nebo jak se dřív jmenovala stará tabulka, pravidlo není stabilizované dost dobře.
+
+Sledujte:
+
+- kde člověk začal hledat,
+- jestli se dostal do kanonického místa bez vysvětlování,
+- jestli název místa odpovídá pracovní situaci,
+- jestli interní odkaz vede přímo na aktuální pravidlo,
+- jestli stará cesta pořád nepůsobí jako lákavější vstup,
+- jestli pravidlo není schované v historickém komentáři.
+
+Krátký test:
+
+```text
+Řekněte člověku jen pracovní situaci:
+"Potřebuješ udělat měsíční kontrolu formulářů."
+
+Neříkejte:
+"Jdi do té nové provozní karty, co jsme přepsali po poslední kontrole."
+```
+
+Rozdíl je zásadní. První formulace testuje systém. Druhá testuje paměť a ochotu poslouchat autora změny.
+
+Pokud člověk pravidlo nenajde, nejde hned o selhání textu. Může jít o špatný název, chybějící odkaz, starý bookmark, duplicitní index nebo úkol, který pořád vede jinam. Opravujte nejbližší pracovní cestu, ne osobu.
+
+### 3. Porovnejte minimální výstup s realitou
+
+Stabilizované pravidlo má vést k minimálnímu výstupu. Ne k bohatšímu dokumentu, ne k delší kontrole, ne k novému reportu. Při kontrole se ptejte, jestli výstup odpovídá slibu pravidla.
+
+Příklad minimálního výstupu:
+
+```text
+Pravidlo:
+Měsíční kontrola formulářů začíná v provozní kartě. Výstupem je jedna stavová věta a případně jeden konkrétní nález do backlogu.
+
+Skutečnost:
+Vznikla stavová věta, jeden nález a žádný nový export.
+```
+
+To je dobrý signál. Pravidlo funguje a nezvětšuje systém.
+
+Horší signál:
+
+```text
+Skutečnost:
+Vznikla stavová věta, nový spreadsheet pro porovnání, screenshoty všech formulářů a návrh na další pravidelný meeting.
+```
+
+Tady pravidlo možná sice člověk našel, ale neudrželo rozsah. Kontrola má zastavit právě tento typ provozního bobtnání.
+
+Ptejte se:
+
+- Byl výstup kratší, stejný, nebo delší než slib?
+- Vznikl jen jeden rozhodnutelný nález?
+- Nepřibylo nové povinné pole, export, screenshot nebo opis dat?
+- Nezačal někdo vytvářet "pomocný" přehled vedle zdroje pravdy?
+- Stačil výstup k rozhodnutí, nebo jen uklidňoval pocit kontroly?
+
+U SaaS a marketingu je tahle otázka obzvlášť důležitá. Týmy často přidávají měření, aby se cítily jistěji. Jenže více stop nemusí znamenat lepší rozhodnutí. Někdy to znamená jen více míst, kde mohou zestárnout špatná data.
+
+### 4. Hledejte návrat staré cesty a nové obchvaty
+
+Stará cesta se málokdy vrátí s cedulí "jsem provozní dluh". Vrací se jako pohodlný odkaz v chatu, uložený bookmark, kopie tabulky, screenshot ve složce, stará šablona v CRM nebo věta "já to radši udělám jako minule".
+
+Kontrolujte dva typy návratu:
+
+```text
+Stará cesta:
+Člověk použil původní tabulku, starý dokument, starý export nebo starý postup.
+
+Nový obchvat:
+Člověk nepoužil starou cestu, ale vytvořil nový pomocný artefakt mimo pravidlo.
+```
+
+Příklad:
+
+```text
+Stará cesta:
+Do archivní tabulky přibyl nový řádek.
+
+Nový obchvat:
+Nevznikl nový řádek ve staré tabulce, ale člověk si z provozní karty udělal vlastní kopii, protože se bál rozbít originál.
+```
+
+Obě situace říkají něco jiného. Stará cesta často znamená špatné uzavření nebo špatný odkaz. Nový obchvat často znamená nedůvěru v pravidlo, nejasnou odpovědnost nebo strach z práce ve zdroji pravdy.
+
+Reakce má být malá:
+
+- opravit odkaz,
+- přejmenovat kanonické místo,
+- odstranit starý vstup z indexu,
+- přidat archivní hlavičku,
+- doplnit jednu větu o tom, kdo smí upravovat zdroj pravdy,
+- zrušit pomocnou kopii,
+- zkrátit pravidlo, pokud je příliš opatrné nebo dlouhé.
+
+Neotevírejte hned velkou revizi. Jedno použití je signál, ne rozsudek. Rozsudek z něj uděláte až ve chvíli, kdy se vzor opakuje.
+
+### 5. Udělejte privacy-first kontrolu skutečné stopy
+
+Stabilizace v Příloze JQ měla uklidit ověřovací artefakty. Tato kontrola se dívá na to, co vzniklo při běžném použití po stabilizaci. To je důležitý rozdíl. Běžná práce někdy vytvoří novou datovou stopu, kterou původní stabilizace neodhalila.
+
+Zkontrolujte:
+
+- jaká data se při použití pravidla otevřela,
+- jestli někdo neexportoval osobní nebo zákaznická data jen kvůli pohodlí,
+- jestli výstup neobsahuje víc detailů, než potřebuje rozhodnutí,
+- jestli se pomocné poznámky nedostaly do sdíleného prostoru bez účelu,
+- jestli nová stopa má vlastníka a retenční konec,
+- jestli agregovaný nebo anonymizovaný signál stačí místo detailního seznamu.
+
+Praktická privacy-first otázka:
+
+```text
+Kdybychom tento kontrolní výstup za měsíc našli bez kontextu, bylo by jasné, proč existuje, kdo ho používá a kdy se smaže nebo zkrátí?
+```
+
+Pokud odpověď zní ne, výstup je moc těžký. Zkraťte ho.
+
+Příklad:
+
+```text
+Původní výstup:
+Export všech odeslaných formulářů za měsíc se jménem, e-mailem, zprávou a zdrojem návštěvy.
+
+Lepší výstup:
+Stavová věta: "3 relevantní poptávky, 1 spam, žádný technický problém." Konkrétní osobní údaje zůstávají jen v systému, kde mají provozní účel.
+```
+
+Privacy-first provoz není o tom, že tým nesmí nic vědět. Je o tom, že tým ví přesně tolik, kolik potřebuje k dalšímu rozhodnutí, a nenechává za sebou datové drobky jen proto, že úložiště je levné.
+
+### 6. Rozhodněte stav pravidla jednou větou
+
+Po kontrole nepřidávejte dlouhý komentář. Vyberte jeden stav a napište důkaz z běžné práce.
+
+Stavy:
+
+```text
+Ponechat:
+Pravidlo bylo nalezeno, použito a výstup odpovídal slibu.
+
+Drobně upravit:
+Pravidlo fungovalo, ale jedna věc bránila samostatnému použití nebo zbytečně zvětšila stopu.
+
+Vrátit do opravy:
+Pravidlo nebylo nalezeno, stará cesta zůstala hlavní, nebo výstup neodpovídal účelu.
+
+Sloučit:
+Kontrola ukázala, že pravidlo duplikuje jiné pravidlo a samostatná existence zvyšuje tření.
+
+Ukončit:
+Pravidlo už nemá pracovní situaci, ve které by dávalo smysl.
+```
+
+Příklady rozhodnutí:
+
+```text
+Ponechat:
+Po první měsíční kontrole bylo pravidlo nalezeno v provozní kartě, stará tabulka nebyla použita a výstup zůstal jednou stavovou větou.
+
+Drobně upravit:
+Pravidlo bylo použito, ale název odkazu v měsíčním úkolu pořád svádí ke staré tabulce; upravit text odkazu a znovu ověřit při příštím cyklu.
+
+Vrátit do opravy:
+Člověk začal ve staré tabulce a novou provozní kartu našel až po dotazu; problém není stabilizovaný.
+```
+
+Jedna věta stačí, pokud obsahuje stav, důkaz a další krok. Když potřebujete odstavec vysvětlování, pravděpodobně rozhodnutí ještě není jasné.
+
+### 7. Uzavřete kontrolu nebo nastavte nejmenší další krok
+
+Kontrola má po sobě zanechat buď klid, nebo jednu další malou práci. Nic mezi tím.
+
+Pokud stav je `Ponechat`:
+
+```text
+Samostatná kontrola končí. Pravidlo se dál hlídá jen v běžném revizním rytmu.
+```
+
+Pokud stav je `Drobně upravit`:
+
+```text
+Další krok:
+Upravit název odkazu v měsíčním úkolu.
+
+Ověření:
+Při příští měsíční kontrole sledovat jen to, jestli člověk začne v provozní kartě.
+```
+
+Pokud stav je `Vrátit do opravy`, vraťte se na nejbližší předchozí typ práce. Někdy stačí Příloha JO pro jednu další úpravu. Někdy je potřeba vrátit se až k otázce, jestli pravidlo patří do daného místa.
+
+Pokud stav je `Sloučit` nebo `Ukončit`, hlídejte hlavně staré odkazy a datovou stopu. Sloučení i ukončení umí vytvořit víc nepořádku než ponechání špatného pravidla, pokud se udělá bez mapy dopadu.
+
+### Kontrolní karta pravidla po stabilizaci úpravy
+
+```text
+Stabilizované pravidlo:
+
+Kanonické pracovní místo:
+
+Kontrolované použití:
+
+Kdo použil pravidlo:
+Autor změny / Jiný člověk / Nová role / Tým
+
+Cesta k pravidlu:
+Nalezeno samostatně / Nalezeno s pomocí / Nenalezeno
+
+Minimální výstup podle pravidla:
+
+Skutečný výstup:
+
+Stará cesta:
+Nevrátila se / Vrátila se / Není jasné
+
+Nový obchvat:
+Nevznikl / Vznikl / Není jasné
+
+Privacy-first kontrola:
+- Nová datová stopa:
+- Je nutná pro rozhodnutí:
+- Co zkrátit nebo smazat:
+- Retenční konec:
+
+Rozhodnutí:
+Ponechat / Drobně upravit / Vrátit do opravy / Sloučit / Ukončit
+
+Důkaz:
+
+Další krok:
+
+Stop pravidlo:
+```
+
+### Příklad vyplněné karty
+
+```text
+Stabilizované pravidlo:
+Měsíční kontrola formulářů začíná v provozní kartě. Stará tabulka je pouze archiv a nesmí do ní vznikat nové zápisy.
+
+Kanonické pracovní místo:
+Měsíční úkol kontroly formulářů a provozní karta formulářů.
+
+Kontrolované použití:
+První měsíční kontrola po stabilizaci pravidla.
+
+Kdo použil pravidlo:
+Jiný člověk než autor změny.
+
+Cesta k pravidlu:
+Nalezeno samostatně.
+
+Minimální výstup podle pravidla:
+Jedna stavová věta a případně jeden nález do backlogu.
+
+Skutečný výstup:
+Jedna stavová věta: "Formuláře fungují, jedna spamová poptávka označená v CRM, bez technického nálezu."
+
+Stará cesta:
+Nevrátila se. Do archivní tabulky nepřibyl nový řádek.
+
+Nový obchvat:
+Nevznikl.
+
+Privacy-first kontrola:
+- Nová datová stopa: stavová věta v měsíčním úkolu.
+- Je nutná pro rozhodnutí: ano, stačí pro měsíční review.
+- Co zkrátit nebo smazat: nic; nevznikl export ani screenshot.
+- Retenční konec: podle běžné retence měsíčních úkolů.
+
+Rozhodnutí:
+Ponechat.
+
+Důkaz:
+Pravidlo bylo nalezeno bez pomoci, stará tabulka nebyla použita a výstup zůstal v domluveném minimu.
+
+Další krok:
+Žádný samostatný krok. Pravidlo přechází do běžného kvartálního úklidu provozních artefaktů.
+
+Stop pravidlo:
+Bez nového zápisu ve staré tabulce nebo bez pomocného exportu se samostatná kontrola neopakuje.
+```
+
+### Mini workshop na 12 minut
+
+1. Dvě minuty: vybrat první skutečné použití po stabilizaci.
+2. Dvě minuty: projít cestu k pravidlu bez autora změny.
+3. Dvě minuty: porovnat minimální a skutečný výstup.
+4. Dvě minuty: zkontrolovat návrat staré cesty nebo nový obchvat.
+5. Dvě minuty: udělat privacy-first kontrolu skutečné stopy.
+6. Jedna minuta: vybrat stav pravidla.
+7. Jedna minuta: napsat další krok nebo stop pravidlo.
+
+Výstup workshopu:
+
+```text
+Jedno kontrolní rozhodnutí po prvním běžném použití stabilizovaného pravidla.
+```
+
+Pokud workshop začne řešit kvalitu celého procesu, zastavte ho. Tato kontrola má odpovědět na úzkou otázku: funguje stabilizované pravidlo při běžné práci bez autora změny? Všechno ostatní může být samostatný nález.
+
+### Checklist kapitoly
+
+- Kontrolujete skutečné použití po stabilizaci, ne demo?
+- Použil pravidlo někdo jiný než autor změny, pokud je to možné?
+- Našel člověk kanonické místo bez vysvětlování?
+- Odpovídá název místa pracovní situaci?
+- Vedou odkazy přímo na aktuální pravidlo?
+- Nepůsobí stará cesta jako pohodlnější vstup?
+- Odpovídá skutečný výstup minimálnímu slibu pravidla?
+- Nevznikl nový spreadsheet, export, screenshot nebo kopie bez jasného účelu?
+- Zkontrolovali jste starou cestu i nový obchvat?
+- Řešíte návrat staré cesty jako signál systému, ne jako osobní chybu?
+- Udělali jste privacy-first kontrolu skutečné datové stopy po použití?
+- Stačí agregovaný nebo zkrácený výstup místo detailního seznamu?
+- Má ponechaná stopa vlastníka a retenční konec?
+- Vybrali jste jeden stav pravidla?
+- Má rozhodnutí důkaz z běžné práce?
+- Končí samostatná kontrola, pokud pravidlo funguje?
+- Pokud je potřeba další krok, je opravdu nejmenší možný?
+
+Kontrola běžného pravidla po stabilizaci další úpravy je malý provozní reality check. Neoslavuje text v dokumentu. Ověřuje, že text pomohl člověku udělat práci s menším třením, menší datovou stopou a bez návratu staré cesty. Právě tím se z drobné úpravy stává skutečný provozní standard.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha JR o kontrolu běžného pravidla po stabilizaci další úpravy: výběr skutečného použití, ověření cesty bez autora změny, porovnání minimálního a skutečného výstupu, hledání staré cesty i nových obchvatů, privacy-first kontrola skutečné stopy, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JQ o stabilizaci potvrzené další úpravy do běžného pravidla: vstup jen pro potvrzený výsledek, výběr kanonického pracovního místa, přepis historie na aktuální pravidlo, uzavření staré cesty, privacy-first uzávěrka ověřovacích artefaktů, signál návratu staré cesty, stabilizační věta, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JP o ověření další úpravy po prvním normálním použití: výběr skutečného použití, návrat k pracovní větě, čtyři signály nalezení/dokončení/efekt/stopa, oddělení okolních problémů, privacy-first kontrola skutečné stopy, rozhodovací stavy, uzavření ověřovací stopy, karta, příklad, mini workshop a checklist.
 - 2026-05-17: Doplněna Příloha JO o převod kontroly běžného pravidla do jedné další úpravy: překlad stavů na typ práce, výběr nejbližšího pracovního místa, pracovní věta, hranice rozsahu, jednorázové provedení, privacy-first brzda, úzké ověření, stop pravidlo, karta, příklad, mini workshop a checklist.
