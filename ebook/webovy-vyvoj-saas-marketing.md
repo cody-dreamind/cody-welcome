@@ -83423,8 +83423,184 @@ Můj pohled: zdravé portfolio pravidel poznáte podle toho, že občas něco sm
 
 Měsíční redukce portfolia pravidel je malá disciplína s velkým efektem. Chrání tým před tím, aby si z dobrých rozhodnutí postupně postavil dokumentační labyrint. Dobré portfolio pravidel není nejúplnější. Je tak akorát: člověk v něm najde rozhodnutí, použije ho a může jít pracovat dál.
 
+## Příloha JW: Ověření redukovaného portfolia pravidel po prvním použití
+
+Redukce portfolia pravidel je hotová až ve chvíli, kdy se podle upraveného portfolia dá znovu pracovat. Nestačí zkrátit kartu, sloučit duplicitu nebo archivovat staré pravidlo. Potřebujete ověřit, že člověk v běžné situaci najde správnou verzi, pochopí rozhodnutí a nemusí se vracet ke staré cestě.
+
+Tahle příloha navazuje na Přílohu JV. Tam tým vybral pravidlo k redukci a provedl malý zásah. Tady ověří, jestli zásah opravdu snížil tření. Ne na schůzce nad abstraktním pocitem, ale při prvním normálním použití.
+
+Praktická otázka zní:
+
+```text
+Pomohla redukce portfolia najít a použít správné pravidlo rychleji, bez ztráty významu a bez nové datové stopy?
+```
+
+Pokud na tuhle otázku neumíte odpovědět, redukce ještě není uzavřená. Možná jste jen přepsali text. To je někdy příjemné, ale samo o sobě to není provozní zlepšení.
+
+### Vyberte první skutečné použití
+
+Ověření nedělejte na umělé ukázce. Vyberte první situaci, kdy by tým pravidlo stejně potřeboval. Může to být nová landing page, změna formuláře, úprava onboardingového checklistu, výběr dodavatele, příprava kampaně nebo měsíční review.
+
+Dobré ověřovací použití splňuje tři podmínky:
+
+1. Člověk pravidlo potřebuje kvůli reálnému rozhodnutí.
+2. Nemá po ruce autora poslední úpravy jako živý návod.
+3. Výsledek práce se dá zkontrolovat podle minimálního výstupu.
+
+Špatné ověření vypadá tak, že autor redukce otevře kartu, přečte ji nahlas a prohlásí, že dává smysl. Možná dává. Jenže cílem portfolia není přesvědčit autora, že napsal dobrý text. Cílem je pomoct někomu jinému udělat správný krok bez dodatečného vysvětlování.
+
+### Sledujte cestu k pravidlu
+
+První věc není obsah pravidla, ale cesta k němu. Pokud člověk neví, kde pravidlo hledat, je jedno, jak elegantně je zkrácené.
+
+Při ověření sledujte:
+
+- odkud člověk začal hledat,
+- jaký název nebo kategorii čekal,
+- jestli našel kanonický domov,
+- jestli narazil na starou nebo duplicitní kartu,
+- jestli potřeboval chat, historii, autora nebo náhodný odkaz,
+- jestli název pravidla odpovídá pracovní situaci.
+
+Výsledek má být jednoduchý: člověk našel správné pravidlo v místě, kde ho přirozeně hledal. Pokud ho našel jen díky tomu, že mu někdo poslal přímý odkaz, portfolio ještě není zdravé.
+
+Mini příklad:
+
+```text
+Situace: Marketing připravuje nový formulář pro audit webu.
+Očekávaná cesta: Checklist veřejných formulářů.
+Skutečná cesta: Člověk hledal v privacy checklistu, našel staré pravidlo a až potom novou sloučenou kartu.
+Nález: Starý odkaz v privacy checklistu zůstal aktivní.
+Další krok: Nahradit starý odkaz kanonickou kartou a přidat krátký alias "minimalizace vstupních dat".
+```
+
+Tohle je malý nález s velkým dopadem. Neznamená, že redukce selhala. Znamená, že ještě nebyla dotažená do pracovních tras.
+
+### Ověřte, že zkrácení neztratilo rozhodnutí
+
+Zkrácené pravidlo má být kratší, ale ne tupější. Při prvním použití zkontrolujte, jestli člověk po přečtení ví:
+
+- co má udělat,
+- kdy pravidlo použít,
+- kdy pravidlo neplatí,
+- kdo rozhoduje výjimku,
+- jaký minimální výstup má vzniknout,
+- co se nesmí přidat jen ze zvyku.
+
+Typické selhání zkrácení je, že zmizí důvod. Pravidlo pak zní úsporně, ale lidé ho začnou obcházet, protože nechápou, co chrání. Druhé selhání je opačné: zůstane dlouhý příběh a zmizí konkrétní rozhodnutí. Ani jedno nepomáhá.
+
+Použitelný test:
+
+```text
+Po přečtení pravidla umí člověk jednou větou říct:
+"V této situaci udělám X, neudělám Y a případnou výjimku řeší Z."
+```
+
+Pokud věta nevznikne, pravidlo potřebuje ještě jednu úpravu. Ne další odstavce, ale jasnější pracovní jádro.
+
+### Zkontrolujte staré cesty
+
+Po sloučení nebo archivaci pravidla bývá největší riziko ve starých trasách. Lidé nechodí do portfolia ideální cestou. Chodí přes záložky, staré odkazy, onboardingové materiály, šablony, checklisty, komentáře v úkolech a vlastní paměť.
+
+Po prvním použití projděte:
+
+- interní odkazy v relevantních šablonách,
+- onboardingové materiály,
+- checklisty, které pravidlo zmiňují,
+- uložené odkazy v projektových kartách,
+- staré názvy v indexu,
+- dokumenty, které obsahují kopii pravidla místo odkazu.
+
+Nesnažte se najít všechno v celé firmě. Stačí uzavřít cestu, která se při prvním použití reálně objevila. Portfolio se udržuje po živých stopách, ne archeologickým výzkumem všech možných dokumentů.
+
+### Privacy-first kontrola po redukci
+
+Redukce portfolia má zmenšit i datovou stopu. Po prvním použití ověřte, že se nestalo nic z toho:
+
+- starý export zůstal připojený ke kartě jen jako "důkaz",
+- anonymizovaný příklad se při úpravě znovu změnil na konkrétního zákazníka,
+- nová karta odkazuje na nástroj s širším přístupem než původní místo,
+- archiv obsahuje data, která už nemají účel,
+- ověřování použití začalo sledovat lidi místo kontroly výstupu,
+- do pravidla přibyla citlivá historie, která není nutná pro rozhodnutí.
+
+Privacy-first ověření má být krátké. Stačí otázka: "Držíme po redukci méně citlivých stop než před ní, nebo jsme jen přesunuli nepořádek jinam?" Pokud odpověď zní "přesunuli", redukce není hotová.
+
+### Čtyři výsledky ověření
+
+Po prvním použití rozhodněte jeden stav:
+
+| Stav | Co znamená | Další krok |
+| --- | --- | --- |
+| Potvrzeno | Pravidlo bylo nalezeno a použito bez nové pomoci. | Uzavřít redukci a zapsat datum ověření. |
+| Drobně upravit | Pravidlo funguje, ale chybí alias, odkaz nebo věta. | Udělat jednu malou opravu a ověřit při dalším použití. |
+| Vrátit do úpravy | Člověk nenašel pravidlo nebo pochopil jiné rozhodnutí. | Otevřít redukční kartu a opravit kanonický domov nebo znění. |
+| Zastavit změnu | Redukce odstranila důležité rozhodnutí nebo zvýšila riziko. | Vrátit poslední funkční stav a znovu rozhodnout rozsah. |
+
+Stav `Zastavit změnu` není ostuda. Horší je ponechat elegantně zkrácené pravidlo, které vede lidi ke špatnému rozhodnutí. Portfolio má sloužit práci, ne literárnímu minimalismu.
+
+### Kontrolní karta prvního použití
+
+```text
+Datum:
+Redukované pravidlo:
+Typ redukce: zkrácení / sloučení / archivace / ponechání s úklidem
+První skutečné použití:
+Kdo pravidlo použil:
+
+Našel člověk správný kanonický domov: ano / ne
+Narazil na starou cestu: ano / ne
+Pochopil minimální výstup: ano / ne
+Vzniklo správné rozhodnutí: ano / ne
+Vznikla nová zbytečná datová stopa: ano / ne
+
+Nález:
+Rozhodnutí: potvrzeno / drobně upravit / vrátit do úpravy / zastavit změnu
+Další krok:
+Datum další kontroly:
+```
+
+Kartu držte krátkou. Pokud se z kontroly prvního použití stane dlouhé hodnocení dokumentace, systém se začne bránit sám sobě. Cílem je zjistit, jestli redukce pomohla, ne vytvořit nový kontrolní aparát.
+
+### Mini workshop na 15 minut
+
+1. Tři minuty: vezměte jedno pravidlo redukované v Příloze JV.
+2. Tři minuty: popište první skutečnou situaci, kde bylo použité.
+3. Tři minuty: porovnejte očekávanou a skutečnou cestu k pravidlu.
+4. Dvě minuty: ověřte, jestli člověk pochopil minimální výstup.
+5. Dvě minuty: zkontrolujte staré odkazy a datovou stopu.
+6. Dvě minuty: rozhodněte stav a napište jeden další krok.
+
+Výstup:
+
+```text
+Jedna potvrzená nebo opravená redukce portfolia a jasná informace, jestli pravidlo opravdu pomohlo při práci.
+```
+
+### Codyho komentář
+
+Můj pohled: redukce dokumentace se má testovat stejně prakticky jako formulář nebo onboarding. Když lidé po zkrácení pravidla pracují rychleji a méně se ptají, výborně. Když se ptají víc, něco se ztratilo. Není potřeba filozofovat o ideální délce textu. Stačí sledovat, jestli pravidlo unese reálnou práci.
+
+### Checklist kapitoly
+
+- Ověřili jste redukci na prvním skutečném použití?
+- Nepotřeboval člověk autora změny jako živý návod?
+- Vedla cesta k jednomu kanonickému domovu?
+- Nezůstala aktivní stará nebo duplicitní karta?
+- Je zkrácené pravidlo pořád dost konkrétní pro rozhodnutí?
+- Umí člověk jednou větou říct, co má udělat a co ne?
+- Vznikl správný minimální výstup?
+- Uzavřeli jste starý odkaz, šablonu nebo kopii pravidla, která se objevila při použití?
+- Zmenšila se datová stopa, nebo alespoň nevznikla nová?
+- Nerozšířilo ověřování sledování lidí místo kontroly výstupu?
+- Rozhodli jste stav potvrzeno, drobně upravit, vrátit do úpravy nebo zastavit změnu?
+- Má případná oprava jeden konkrétní další krok?
+
+Ověření redukovaného portfolia je malý test reality. Ukáže, jestli měsíční úklid opravdu zkrátil cestu k rozhodnutí, nebo jen přeuspořádal text. Když po něm člověk najde správné pravidlo rychleji, použije ho bez výkladu a nevznikne nová datová stopa, redukce splnila svůj účel.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha JW o ověření redukovaného portfolia pravidel po prvním použití: výběr skutečné situace, cesta ke kanonickému pravidlu, kontrola zkrácení bez ztráty rozhodnutí, staré trasy, privacy-first datová stopa, čtyři výsledky ověření, kontrolní karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JV o měsíční redukci portfolia pravidel: výběr kandidátů, rozhodnutí ponechat/zkrátit/sloučit/archivovat, zkracování bez ztráty významu, slučování duplicit, archivace, privacy-first úklid, redukční karta, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JU o převod kontroly uzavřeného pravidla do portfolia pravidel: stavy po kontrole, minimální karta pravidla, hranice portfolia, privacy-first datová poznámka, měsíční review, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JT o kontrolu uzavřeného pravidla po prvním běžném revizním cyklu: výběr skutečného cyklu, čtyři signály zdravého uzavření, rozhodovací matice, privacy-first kontrola datové stopy, kontrolní karta, příklad formuláře, mini workshop a checklist.
