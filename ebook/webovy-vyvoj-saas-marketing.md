@@ -85727,8 +85727,230 @@ Můj pohled: poučení se pozná podle toho, že se v příští práci tiše pr
 
 Ověřené poučení má uzavřít smyčku mezi opravou a budoucí prací. Když se použije jednou správně, není potřeba kolem něj stavět slavobránu. Stačí ho nechat tam, kde pomáhá, a zbytek provozu nezatěžovat další pamětí navíc.
 
+## Příloha KH: Stabilizace ověřeného poučení do běžného rytmu
+
+Příloha KG ověřila, že poučení pomohlo při prvním skutečném použití. Tahle příloha řeší další nebezpečný moment: co udělat potom. Právě po úspěšném ověření týmy často začnou přidávat nové kontrolní rituály, nové evidence a nové připomínky, protože "to očividně funguje". Výsledek je paradoxní: dobré poučení, které mělo práci zjednodušit, vytvoří další vrstvu provozu.
+
+Stabilizace znamená něco jiného. Ověřené poučení se má stát normální součástí pracovního rytmu, šablony nebo pravidla. Nemá zůstat jako speciální projekt, který někdo ručně hlídá. Pokud po každém ověřeném poučení vznikne nová tabulka, nový status meeting a nová povinnost dokazovat použití, tým se brzy naučí poučení raději nezapisovat. A to by byla škoda. Poučení má zlepšovat práci, ne trestat tým za to, že se něco naučil.
+
+Pracovní otázka:
+
+```text
+Kam ověřené poučení patří, aby dál pomáhalo bez zvláštního dohledu?
+```
+
+### Vstupní brána stabilizace
+
+Ne každé poučení je připravené na stabilizaci. Stabilizujte až ve chvíli, kdy máte tři věci:
+
+- Poučení bylo použité v první skutečné podobné práci.
+- Výsledek dopadl lépe než starý postup nebo alespoň nezopakoval původní chybu.
+- Ověření nevytvořilo zbytečnou datovou stopu, kterou by bylo potřeba dál spravovat.
+
+Pokud jedna z těchto věcí chybí, nejste ve stabilizaci. Jste pořád v opravě, přesunu nebo přepisu poučení. To není selhání. Je lepší přiznat, že poučení ještě nemá hotový tvar, než ho předčasně rozlít do šablon, checklistů a onboardingu.
+
+Příklad:
+
+```text
+Poučení: Checklisty pro formuláře odkazují na kanonickou privacy-first kartu a nekopírují její pravidla.
+Ověření: Při tvorbě nového checklistu editor použil odkaz místo kopie.
+Datová stopa: Bez screenshotů, bez evidence čtení, bez osobních detailů.
+Stav: připraveno ke stabilizaci.
+```
+
+Proti tomu:
+
+```text
+Poučení existuje, ale editor ho našel až po dotazu v chatu.
+Stav: nestabilizovat. Nejdřív opravit umístění.
+```
+
+Stabilizace nesmí maskovat problém dostupnosti. Pokud se poučení musí hledat přes autora, není stabilní. Je jen zapamatované někým, kdo měl zrovna čas odpovědět.
+
+### Vyberte jeden běžný rytmus
+
+Ověřené poučení patří do už existujícího rytmu. Nezakládejte nový, dokud neumíte jasně říct, proč nestačí stávající. Většinou stačí jedno z těchto míst:
+
+| Typ poučení | Přirozený domov | Běžný rytmus |
+| --- | --- | --- |
+| Pravidlo pro šablonu | Šablona nebo její úvodní poznámka | Kontrola při úpravě šablony |
+| Pravidlo pro review | Agenda review nebo scorecard | Měsíční nebo kvartální review |
+| Pravidlo pro onboarding | Lesson pack nebo role checklist | Onboarding a první samostatný cyklus |
+| Privacy-first brzda | Datová mapa, formulářová karta nebo dodavatelská brána | Kontrola při změně datového toku |
+| Rozhodovací věta | Kanonický index pravidel | Běžná práce s indexem |
+
+Nejčastější chyba je uložit poučení na dvě až tři místa "pro jistotu". To skoro vždy vytvoří budoucí rozpor. Jedno místo se upraví, druhé ne. Jeden checklist začne používat novou formulaci, druhý nechá starou. Po půl roce už nikdo neví, co platí.
+
+Silnější postup:
+
+```text
+Kanonický domov: Šablona nového checklistu.
+Odkazují na něj: onboarding editorů, publikační review.
+Nekopírují ho: kampaňové checklisty, poznámky z review, staré incidentní zápisy.
+```
+
+Jedno pravidlo, více odkazů. To je nudné, ale zdravé. Nudné věci v provozu vyhrávají častěji, než by si marketing přál.
+
+### Přepište poučení do provozní věty
+
+Poučení z ověření často obsahuje historii: co se stalo, kdo co našel, jaká byla stará cesta a proč vznikla oprava. Stabilizované pravidlo má být kratší. Člověk, který ho použije za měsíc, nepotřebuje celý příběh. Potřebuje vědět, co má udělat teď.
+
+Přepis:
+
+```text
+Historická věta:
+Po opravě kampaňového checklistu jsme zjistili, že kopírování formulářových pravidel vede ke staré datové stopě, a při prvním použití nový odkaz fungoval.
+
+Provozní věta:
+Checklisty, které sbírají osobní údaje, odkazují na kanonickou privacy-first kartu formulářů a nekopírují její pravidla.
+```
+
+Historie může zůstat v pracovním logu nebo kartě ověření. Do běžné šablony patří provozní věta. Krátká, rozhodovací a bez interní kroniky.
+
+Dobrá provozní věta má tři vlastnosti:
+
+- Říká, kdy se použije.
+- Říká, jakou volbu má člověk udělat.
+- Říká, čemu se má vyhnout.
+
+Slabá věta:
+
+```text
+Myslete na konzistenci formulářových pravidel.
+```
+
+Silnější věta:
+
+```text
+Když checklist pracuje s formulářem, odkazujte na kanonickou formulářovou kartu; pravidla nekopírujte do checklistu.
+```
+
+První věta je přání. Druhá věta je pracovní brzda.
+
+### Zavřete přechodové opory
+
+Během ověřování často vzniknou dočasné pomůcky: poznámka v backlogu, kontrolní komentář, zvýrazněný řádek v review, připomínka v chatu nebo krátký dočasný checklist. Po stabilizaci je potřeba je zavřít. Jinak budou žít dál a vytvářet dojem, že poučení je pořád zvláštní případ.
+
+Zkontrolujte:
+
+- Je dočasná backlog položka uzavřená nebo převedená na samostatnou práci?
+- Je stará kopie pravidla odstraněná nebo označená jako nahrazená?
+- Vede onboarding na kanonické místo, ne na starý ověřovací zápis?
+- Nezůstala v review agenda speciální otázka, která už patří do běžného rytmu?
+- Nejsou v dokumentech odkazy na chat, screenshot nebo starý incident jako běžný zdroj pravdy?
+
+Příklad uzavření:
+
+```text
+Dočasná poznámka v měsíčním review: odstraněna.
+Kanonická věta: vložena do šablony checklistu.
+Onboarding editorů: odkazuje na šablonu, ne na ověřovací kartu.
+Stará kopie pravidel: nahrazena odkazem.
+```
+
+Tím se poučení přestane tvářit jako projekt. Stane se součástí cesty.
+
+### Privacy-first stabilizace
+
+Stabilizace je dobrý okamžik pro úklid datové stopy. Pokud jste ověřovali poučení z reálné práce, možná existují podklady, které byly užitečné během ověření, ale nemají žít trvale.
+
+Nechte:
+
+- provozní větu,
+- kanonický domov,
+- jednovětý závěr ověření,
+- případnou anonymizovanou ukázku bez zákaznických detailů,
+- odkaz na běžný revizní rytmus.
+
+Odstraňte nebo archivujte podle retenčních pravidel:
+
+- screenshoty s reálnými daty,
+- kopie chatových vláken,
+- osobní poznámky o tom, kdo co přehlédl,
+- duplicitní checklisty vytvořené pro ověření,
+- dočasné tabulky použití.
+
+Privacy-first hodnota se neukazuje jen v cookie liště. Ukazuje se i v tom, že tým neukládá interní pracovní stopy déle, než potřebuje. Méně dat znamená méně vysvětlování, méně rizika a méně budoucího úklidu. Krásná věta, skoro až podezřele praktická.
+
+### Karta stabilizace poučení
+
+```text
+Ověřené poučení:
+Jednovětý závěr ověření:
+
+Provozní věta:
+Kanonický domov:
+Běžný rytmus:
+Místa, která jen odkazují:
+
+Přechodové opory k zavření:
+Stará pravidla nebo kopie k odstranění:
+Privacy-first úklid:
+
+První běžná kontrola:
+Co by znamenalo znovuotevření:
+Jednovětý závěr stabilizace:
+```
+
+Příklad:
+
+```text
+Ověřené poučení: Checklisty, které pracují se sběrem osobních údajů, odkazují na kanonickou privacy-first kartu a nekopírují její pravidla.
+Jednovětý závěr ověření: Poučení fungovalo při prvním checklistu pro kampaňovou landing page; stačilo zpřesnit název odkazu.
+
+Provozní věta: Když checklist pracuje s formulářem, odkazujte na kanonickou privacy-first kartu formulářů a pravidla nekopírujte.
+Kanonický domov: Šablona nového checklistu.
+Běžný rytmus: Měsíční review checklistů a kontrola při úpravě šablony.
+Místa, která jen odkazují: Onboarding editorů, publikační checklist, kampaňové review.
+
+Přechodové opory k zavření: Dočasná položka v review agendě.
+Stará pravidla nebo kopie k odstranění: Kopie formulářových pravidel ve staré kampaňové šabloně.
+Privacy-first úklid: Bez screenshotů a bez evidence, kdo poučení četl.
+
+První běžná kontrola: Příští měsíční review checklistů.
+Co by znamenalo znovuotevření: Nový checklist zkopíruje formulářová pravidla místo odkazu.
+Jednovětý závěr stabilizace: Poučení je stabilizované v šabloně checklistu a dál se kontroluje jen běžným měsíčním rytmem.
+```
+
+### Mini workshop na 12 minut
+
+1. Dvě minuty: přečtěte jednovětý závěr ověření.
+2. Dvě minuty: přepište poučení do provozní věty.
+3. Dvě minuty: vyberte jeden kanonický domov a jeden běžný rytmus.
+4. Dvě minuty: najděte přechodové opory, které se mají zavřít.
+5. Dvě minuty: proveďte privacy-first úklid ověřovacích podkladů.
+6. Dvě minuty: zapište, co by znamenalo znovuotevření.
+
+Výstup:
+
+```text
+Jedna provozní věta, jeden domov, jeden běžný rytmus a zavřené přechodové opory.
+```
+
+### Codyho komentář
+
+Můj pohled: stabilizace je místo, kde se pozná, jestli tým opravdu umí pracovat s poučením. Skoro každý zvládne po chybě napsat chytrou větu. Méně týmů ji umí dostat do správné šablony, odstranit staré kopie a pak už kolem ní netančit. Dobré pravidlo nemá být slavné. Má být po ruce přesně ve chvíli, kdy ho někdo potřebuje.
+
+### Checklist kapitoly
+
+- Je poučení ověřené v první skutečné podobné práci?
+- Vedlo ověření ke konkrétně lepšímu rozhodnutí nebo zabránilo staré chybě?
+- Přepsali jste ověřovací historii do krátké provozní věty?
+- Říká provozní věta, kdy se použije, co udělat a čemu se vyhnout?
+- Vybrali jste jeden kanonický domov?
+- Napojili jste poučení na existující běžný rytmus?
+- Ostatní místa na pravidlo jen odkazují místo kopírování?
+- Zavřeli jste dočasné poznámky, backlog položky a speciální kontrolní otázky?
+- Odstranili jste staré kopie nebo je jasně označili jako nahrazené?
+- Uklidili jste ověřovací podklady podle privacy-first minima?
+- Nezůstaly trvale screenshoty, chatové citace ani osobní detaily?
+- Je jasné, co by v budoucnu znamenalo znovuotevření poučení?
+
+Stabilizované poučení je hotové tehdy, když se přestane probírat jako samostatné téma a začne tiše měnit běžnou práci. To je nejlepší konec malé provozní smyčky: méně dramatu, lepší šablona, čistší data.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KH o stabilizaci ověřeného poučení do běžného rytmu: vstupní brána stabilizace, výběr kanonického domova a existujícího rytmu, přepis do provozní věty, zavření přechodových opor, privacy-first úklid, karta stabilizace, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KG o ověření poučení po prvním použití: výběr první podobné práce, tři signály nalezení/rozhodnutí/datové stopy, rozlišení problému poučení od problému okolí, stavy dalšího kroku, privacy-first kontrola ověření, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KF o převod uzavřené portfoliové opravy do jednoho poučení: vstupní brána pro uzavřené opravy, hledání opakovatelného vzoru, přepis příběhu na pracovní poučení, výběr kanonického domova, rozlišení poučení/pravidla/backlogu, privacy-first filtr, karta poučení, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KE o uzavření potvrzené portfoliové opravy po běžném cyklu: vstupní stavy vhodné k uzavření, převod speciálního sledování do běžného provozu, uzavírací věta, viditelné zavření starých odkazů, předání bez schůzky navíc, privacy-first úklid dočasných podkladů, uzavírací karta, příklad, mini workshop a checklist.
