@@ -82898,8 +82898,200 @@ Pokud workshop vyrobí nový pravidelný meeting, novou tabulku nebo nový dlouh
 
 Uzavření funkčního pravidla do běžného revizního rytmu je drobný, ale důležitý akt disciplíny. Díky němu se ověřená změna nestane dalším procesem, další datovou stopou ani dalším otevřeným úkolem. Zůstane jen pravidlo, které pomáhá práci, a jasné spouštěče pro chvíli, kdy se má znovu otevřít.
 
+## Příloha JT: Kontrola uzavřeného pravidla po prvním běžném revizním cyklu
+
+Uzavřené pravidlo není hotové tím, že ho zapíšeme do správného dokumentu a smažeme přechodové poznámky. Hotové začne být až ve chvíli, kdy přežije první normální revizní cyklus bez toho, aby kolem sebe znovu vyrobilo zvláštní proces, novou tabulku, další schůzku nebo nejasnou datovou stopu.
+
+Tahle příloha řeší malou, ale důležitou kontrolu po uzavření pravidla z Přílohy JS. Nejde o nový audit. Jde o rychlé ověření, že se pravidlo skutečně stalo běžnou součástí práce a že jeho uzavření nebylo jen administrativní gesto.
+
+Praktická otázka zní:
+
+```text
+Fungovalo pravidlo v prvním běžném revizním cyklu bez zvláštní péče, bez návratu starých opor a bez zbytečné datové stopy?
+```
+
+Pokud odpověď není jasná, pravidlo možná není špatné. Možná jen nebylo uzavřené dost čistě. A to je lepší zjistit v první kontrole než o tři měsíce později, kdy už se kolem něj usadí zvyky, výjimky a tiché obchvaty.
+
+### Kdy tuto kontrolu použít
+
+Použijte ji jen pro pravidla, která už mají uzavřenou smyčku:
+
+- pravidlo bylo ověřené v běžném použití,
+- stará cesta nebo přechodová opora byla zavřená,
+- pravidlo má jeden kanonický domov,
+- existuje krátká uzavírací věta,
+- pravidlo je napojené na existující revizní rytmus,
+- dočasné důkazy, exporty a poznámky byly zkrácené, smazané nebo archivované.
+
+Nepoužívejte ji pro pravidla, která jsou pořád ve fázi pilotu, korekce nebo stabilizace. Tam by kontrola jen předstírala pořádek. Nejdřív dokončete předchozí smyčku, potom teprve ověřujte uzavření.
+
+### Vyberte jeden skutečný revizní cyklus
+
+Kontrola má stát na normální práci. Ne na demo průchodu, ne na schůzce svolané jen kvůli pravidlu, ne na pocitu autora změny.
+
+Vyberte nejbližší běžný cyklus, kde se pravidlo mělo přirozeně objevit:
+
+- týdenní review backlogu,
+- měsíční kontrola webu nebo marketingu,
+- kvartální revize dodavatelů,
+- pravidelný audit přístupů,
+- provozní kontrola incidentního playbooku,
+- redakční kontrola veřejného obsahu,
+- review zákaznického handoffu.
+
+Dobrá kontrolní věta:
+
+```text
+Pravidlo bylo použité při měsíční revizi formulářů 2026-05-18 bez zvláštního připomenutí a bez návratu starého exportu.
+```
+
+Slabá kontrolní věta:
+
+```text
+Vypadá to v pořádku, až bude čas, někdo se na to podívá.
+```
+
+První věta ukazuje cyklus, datum, způsob použití a jeden konkrétní signál. Druhá věta jen odkládá odpovědnost do mlhy. Mlha je poetická, ale provozně dost k ničemu.
+
+### Čtyři signály zdravého uzavření
+
+Po prvním běžném cyklu hledejte čtyři signály.
+
+1. Pravidlo bylo dohledatelné.
+
+Člověk nemusel hledat ve starých komentářích, chatu, dočasné tabulce nebo hlavě autora. Našel aktuální pravidlo tam, kde ho při práci přirozeně čekal.
+
+2. Pravidlo šlo použít bez vysvětlování.
+
+Nemuselo být dokonalé. Stačí, že člověk pochopil, co má udělat, jaký výstup má vzniknout a kdy pravidlo nepoužít. Pokud se musel ptát na základní význam, pravidlo ještě není uzavřené.
+
+3. Stará cesta se nevrátila.
+
+Tým nepoužil starý dokument, starý export, starý formulář, starý checklist nebo ruční obchvat jen proto, že byl pohodlnější. Pokud se stará cesta vrací, nehádejte se s lidmi. Zjistěte, co na nové cestě pořád drhne.
+
+4. Datová stopa zůstala přiměřená.
+
+Kontrola nevytvořila nové kopie osobních údajů, screenshoty, exporty nebo záznamy, které nikdo nepotřebuje. Privacy-first uzavření znamená, že pravidlo pomáhá provozu bez toho, aby po každém použití nechávalo další hromádku dat.
+
+### Rozhodovací matice
+
+Po kontrole zapište jeden stav:
+
+| Stav | Co znamená | Co udělat |
+| --- | --- | --- |
+| Ponechat | Pravidlo fungovalo v běžném cyklu bez zvláštní péče. | Nechat ho v běžném revizním rytmu a nezakládat další úkol. |
+| Zpřesnit | Pravidlo šlo použít, ale jeden detail způsobil tření. | Opravit nejbližší pracovní místo jednou malou změnou. |
+| Znovu otevřít | Pravidlo nešlo použít bez autora, staré cesty nebo ručního obchvatu. | Vrátit ho do stabilizace a popsat konkrétní příčinu. |
+| Zrušit | Ukázalo se, že pravidlo už nemá účel nebo řeší zaniklý problém. | Odstranit ho ze zdroje pravdy, zapsat důvod a uklidit odkazy. |
+
+Nejnebezpečnější stav je nepojmenovaný kompromis: pravidlo trochu nefunguje, ale nikdo ho nechce otevřít, protože už bylo přece uzavřené. Tak vznikají provozní vrstvy, které nikdo nečte a všichni obcházejí.
+
+### Privacy-first kontrola po cyklu
+
+U každého uzavřeného pravidla se po prvním cyklu ptejte:
+
+- Vznikl během kontroly nový export dat?
+- Byl export nutný, nebo šlo použít agregovaný signál?
+- Obsahují důkazy osobní údaje, zákaznické detaily nebo interní citlivé informace?
+- Má každý uložený důkaz jasný účel a retenční konec?
+- Nezůstala stará sdílení, přístupy nebo kopie po předchozí verzi pravidla?
+- Nepřibyl nástroj jen proto, aby sledoval dodržování pravidla?
+
+Privacy-first provoz není o tom, že nikdy nic neměříte. Je o tom, že měříte jen to, co pomáhá rozhodnutí, a po rozhodnutí nenecháváte data ležet jako suvenýr.
+
+### Kontrolní karta
+
+```text
+Pravidlo:
+Kanonický domov:
+Uzavírací věta z Přílohy JS:
+
+První běžný revizní cyklus:
+Datum kontroly:
+Kdo pravidlo použil:
+
+Dohledatelnost:
+Použitelnost bez autora:
+Návrat staré cesty:
+Skutečná datová stopa:
+
+Rozhodnutí:
+Jedna další změna, pokud je potřeba:
+Co se maže nebo archivuje:
+Další běžný rytmus:
+```
+
+Kartu nevyplňujte jako rituál. Pokud je rozhodnutí `Ponechat`, má být krátká. Tři konkrétní věty často stačí. Delší zápis je užitečný jen tehdy, když pravidlo znovu otevíráte nebo rušíte.
+
+### Příklad: formulář pro poptávku auditu
+
+Firma měla na webu poptávkový formulář pro audit. Po několika úpravách vzniklo pravidlo:
+
+```text
+Formulář sbírá jen jméno, pracovní e-mail, URL webu a krátký popis problému. Další informace se řeší až po první odpovědi, aby se na webu nesbíraly zbytečné osobní údaje.
+```
+
+Pravidlo bylo uzavřené do měsíční kontroly webu. Při prvním cyklu tým zjistil:
+
+- pravidlo bylo v kanonickém checklistu pro web,
+- marketing ho našel bez dotazu na autora,
+- formulář odpovídal pravidlu,
+- obchod ale bokem používal starý odkaz na delší formulář z předchozí kampaně,
+- starý formulář pořád ukládal telefonní číslo a rozpočet.
+
+Rozhodnutí:
+
+```text
+Stav: Zpřesnit.
+Jedna změna: Odstranit starý formulář z kampaně a přesměrovat odkaz na aktuální stránku auditu.
+Privacy-first úklid: Smazat nepoužívaný export starých poptávek po ověření, že není potřeba pro otevřené obchodní případy.
+```
+
+Tohle není selhání pravidla. Je to přesně důvod, proč první kontrola existuje. Neřeší abstraktní kvalitu dokumentace. Odhalí starou cestu, která by jinak tiše žila dál.
+
+### Codyho komentář
+
+Můj pohled: nejvíc pravidel neumírá proto, že byla špatně napsaná. Umírá proto, že po uzavření nikdo nezkontroluje jejich první střet s běžnou prací. Dokument vypadá čistě, ale v provozu se jede podle starého odkazu, staré šablony nebo starého zvyku. A pak se všichni tváří překvapeně, jako by se staré zvyky neuměly vracet. Umí. Mají v tom docela dobrou praxi.
+
+### Mini workshop na 10 minut
+
+1. Jedna minuta: přečíst uzavírací větu z Přílohy JS.
+2. Dvě minuty: pojmenovat první skutečný revizní cyklus.
+3. Dvě minuty: projít čtyři signály zdravého uzavření.
+4. Dvě minuty: rozhodnout stav `Ponechat`, `Zpřesnit`, `Znovu otevřít` nebo `Zrušit`.
+5. Jedna minuta: zapsat jednu další změnu, pokud je potřeba.
+6. Jedna minuta: uklidit dočasné důkazy, exporty nebo staré odkazy.
+7. Jedna minuta: potvrdit další běžný rytmus bez nového procesu.
+
+Výstup workshopu:
+
+```text
+Jedno rozhodnutí o stavu pravidla po prvním běžném cyklu a případně jedna malá oprava nejbližšího pracovního místa.
+```
+
+Pokud workshop vyrobí pět nových úkolů, vraťte se k rozhodovací otázce. Cílem není otevřít další projekt. Cílem je potvrdit, že uzavřené pravidlo opravdu funguje, nebo vybrat jednu nejmenší opravu.
+
+### Checklist kapitoly
+
+- Vybrali jste skutečný běžný revizní cyklus?
+- Bylo pravidlo dohledatelné v kanonickém pracovním místě?
+- Šlo použít bez autora změny?
+- Byl jasný minimální výstup pravidla?
+- Nevrátila se stará cesta, stará šablona nebo starý export?
+- Nevznikl nový obchvat mimo pravidlo?
+- Zůstala datová stopa přiměřená účelu?
+- Jsou dočasné důkazy zkrácené, smazané nebo archivované s retenčním koncem?
+- Má rozhodnutí jeden z jasných stavů: ponechat, zpřesnit, znovu otevřít nebo zrušit?
+- Pokud je potřeba změna, je to jedna malá úprava nejbližšího pracovního místa?
+- Nevzniká nový pravidelný proces jen kvůli kontrole pravidla?
+- Je další kontrola napojená na běžný rytmus?
+- Je starý odkaz, starý dokument nebo staré sdílení opravdu uklizené?
+
+Kontrola po prvním běžném cyklu chrání tým před falešným pocitem hotové práce. Dobré pravidlo po ní zůstane nudné, dohledatelné a užitečné. A to je přesně správně: provozní pravidla nemají zářit. Mají tiše snižovat tření, riziko a zbytečnou práci.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha JT o kontrolu uzavřeného pravidla po prvním běžném revizním cyklu: výběr skutečného cyklu, čtyři signály zdravého uzavření, rozhodovací matice, privacy-first kontrola datové stopy, kontrolní karta, příklad formuláře, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JS o uzavření funkčního pravidla do běžného revizního rytmu: rozhodnutí zralosti, zkrácení důkazů, napojení na existující revize, spouštěče znovuotevření, úklid backlogu a štítků, privacy-first uzavření přístupů a datové stopy, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JR o kontrolu běžného pravidla po stabilizaci další úpravy: výběr skutečného použití, ověření cesty bez autora změny, porovnání minimálního a skutečného výstupu, hledání staré cesty i nových obchvatů, privacy-first kontrola skutečné stopy, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JQ o stabilizaci potvrzené další úpravy do běžného pravidla: vstup jen pro potvrzený výsledek, výběr kanonického pracovního místa, přepis historie na aktuální pravidlo, uzavření staré cesty, privacy-first uzávěrka ověřovacích artefaktů, signál návratu staré cesty, stabilizační věta, karta, příklad, mini workshop a checklist.
