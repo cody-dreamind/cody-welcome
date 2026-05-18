@@ -86484,8 +86484,229 @@ Můj pohled: týmy často umí změny začínat lépe než je ukončovat. Přida
 
 Uzavřené poučení má být lehčí než problém, který vyřešilo. Pokud po něm zůstane víc dokumentů, schůzek a stop než před ním, změna sice něco naučila, ale provoz ještě neuklidila. Hotové poučení poznáte podle toho, že lidé používají lepší pravidlo a už nemusí řešit příběh, který k němu vedl.
 
+## Příloha KK: Měsíční kontrola uzavřených poučení
+
+Příloha KJ uzavřela jedno potvrzené poučení po běžném cyklu. Tahle příloha řeší další úroveň: co dělat, když už máte více uzavřených poučení a nechcete, aby se z nich stal další archiv, který sice vypadá moudře, ale nikdo ho při práci neotevírá.
+
+Měsíční kontrola uzavřených poučení nemá znovu otevírat každou starou změnu. Má zjistit, jestli se z uzavřených poučení rýsuje opakovaný vzor, který stojí za jednu úpravu systému: lepší šablonu, jednodušší index, čistší onboarding, kratší review nebo jasnější privacy-first brzdu.
+
+Pracovní otázka:
+
+```text
+Ukazují uzavřená poučení z posledního období na jeden opakovaný vzor, který má smysl převést do systému?
+```
+
+Klíčové slovo je `jeden`. Když se po měsíci pokusíte z každého poučení udělat samostatnou změnu, vytvoříte další frontu práce. Měsíční kontrola má spíš prořezat signály než nafouknout backlog.
+
+### Vezměte jen uzavřená poučení
+
+Do kontroly nepatří otevřené opravy, rozpracované experimenty ani čerstvé nálezy, které ještě neprošly běžným cyklem. Ty mají vlastní trasu. Tady pracujete jen s poučeními, která už mají stav `uzavřeno`, aktuální pravidlo v kanonickém místě a nejsou závislá na zvláštním dohledu.
+
+Minimální vstup:
+
+- název poučení,
+- provozní věta,
+- kanonický domov,
+- běžný rytmus,
+- uzavírací věta,
+- revizní háček,
+- privacy-first poznámka.
+
+To stačí. Nepotřebujete číst celou historii opravy, pokud kontrola neukáže rozpor. Smyslem je hledat vzor napříč uzavřenými poučeními, ne dělat archeologii každého detailu.
+
+Příklad vstupu:
+
+```text
+Poučení: Formulářová pravidla v checklistech.
+Provozní věta: Checklist s veřejným formulářem odkazuje na kanonickou privacy-first kartu formulářů.
+Domov: Šablona checklistu.
+Rytmus: Měsíční review checklistů.
+Revizní háček: Nové checklisty nekopírují formulářová pravidla.
+```
+
+Pokud u poučení chybí provozní věta nebo kanonický domov, není to kandidát pro měsíční kontrolu. Je to nedokončené uzavření. Vraťte ho nejdřív do KJ, ne do portfolia.
+
+### Hledejte opakovaný typ tření
+
+Uzavřená poučení často vypadají různě, ale jejich příčina se opakuje. Jedno poučení řeší formulářové checklisty, druhé onboarding editorů, třetí review šablon. Na povrchu jiné téma. Pod povrchem stejný problém: pravidlo bylo mimo místo, kde člověk rozhoduje.
+
+U každého poučení označte jeden hlavní typ tření:
+
+| Typ tření | Jak vypadá |
+| --- | --- |
+| Umístění | Pravidlo bylo správné, ale nebylo v pracovním místě. |
+| Kopírování | Tým kopíroval pravidla místo odkazu na zdroj pravdy. |
+| Nejasná věta | Poučení znělo dobře, ale nevedlo ke konkrétní volbě. |
+| Přechodová stopa | Po ověření zůstaly dočasné poznámky, kopie nebo úkoly. |
+| Privacy riziko | Kontrola vytvořila víc dat, než práce potřebovala. |
+| Vlastnictví | Nikdo nevěděl, kdo pravidlo udržuje nebo kdy se kontroluje. |
+
+Hledejte typ, který se opakuje nejčastěji nebo stojí nejvíc energie. Nevybírejte nutně nejdramatičtější příběh. Vybírejte problém, který se pravděpodobně zopakuje, pokud systém nezměníte.
+
+### Rozhodněte stav portfolia poučení
+
+Po krátké kontrole může portfolio uzavřených poučení skončit ve čtyřech stavech:
+
+| Stav | Co znamená | Další krok |
+| --- | --- | --- |
+| Klid | Poučení jsou různorodá a žádný vzor nestojí za zásah. | Nechte je v běžném rytmu. |
+| Jeden vzor | Opakuje se jeden typ tření. | Převést do jedné systémové úpravy. |
+| Duplicitní poučení | Dvě až tři poučení říkají totéž jinými slovy. | Sloučit do jedné provozní věty. |
+| Přerůstání evidence | Uzavírací karty samy začínají být moc těžké. | Zkrátit kartu nebo změnit retenční pravidlo. |
+
+Stav `Klid` je dobrý výsledek. Znamená, že není potřeba nic vyrábět. Ne každá kontrola musí skončit změnou. Někdy je nejvyšší forma disciplíny nezaložit další úkol. Ano, bolí to méně než meeting, ale zato to funguje.
+
+### Převod jednoho vzoru do systémové úpravy
+
+Když se ukáže opakovaný vzor, nepřepisujte všechna poučení. Vyberte nejbližší systémové místo, které může budoucí práci zlevnit.
+
+Příklady:
+
+- Opakované kopírování pravidel: upravit šablonu tak, aby obsahovala odkaz na kanonický zdroj a větu `nekopírovat`.
+- Opakovaný problém umístění: přesunout rozhodovací větu do místa, kde se práce začíná.
+- Opakovaná těžká uzávěrka: zkrátit uzavírací kartu na povinné minimum.
+- Opakované privacy riziko: přidat jednu otázku do datové mapy nebo review formulářů.
+- Opakovaná nejasná věta: doplnit do šablony pravidlo `kdy / co udělat / čemu se vyhnout`.
+
+Systémová úprava má mít jednu větu:
+
+```text
+Kvůli opakovanému [typ tření] upravíme [jedno pracovní místo] tak, aby příští podobná práce [lepší výsledek].
+```
+
+Příklad:
+
+```text
+Kvůli opakovanému kopírování privacy pravidel upravíme šablonu checklistu tak, aby nová práce vždy odkazovala na kanonickou kartu a nevytvářela vlastní kopii pravidel.
+```
+
+To je dost konkrétní na provedení a dost úzké na ověření.
+
+### Privacy-first kontrola portfolia
+
+Portfolio poučení snadno sklouzne k tomu, že začne ukládat víc historie, než je potřeba. Měsíční kontrola má držet opačný směr: méně důkazů, víc použitelných pravidel.
+
+Nechte:
+
+- agregovaný počet uzavřených poučení za období,
+- hlavní typy tření,
+- vybraný vzor nebo rozhodnutí `bez zásahu`,
+- jednu systémovou úpravu, pokud vznikla,
+- privacy-first poznámku k tomu, co se maže nebo nezakládá.
+
+Neukládejte:
+
+- jména lidí spojená s původními chybami,
+- screenshoty a chatové citace,
+- detailní časové osy starých oprav,
+- zákaznické příklady, pokud nejsou anonymizované a opravdu nutné,
+- novou evidenci toho, kdo čte poučení.
+
+Silný záznam:
+
+```text
+V květnu bylo uzavřeno 6 poučení. Tři se týkala kopírování pravidel místo odkazu na kanonický zdroj. Rozhodnutí: upravit šablonu checklistu o povinný odkaz na zdroj pravdy. Bez osobních detailů, bez screenshotů, bez sledování použití dokumentace.
+```
+
+Slabý záznam:
+
+```text
+Sepíšeme detailně všech šest případů a budeme sledovat, kdo si poučení přečetl.
+```
+
+Druhý zápis vypadá pečlivě. Ve skutečnosti zvyšuje datovou stopu a pravděpodobně sníží ochotu lidí poučení zapisovat.
+
+### Karta měsíční kontroly poučení
+
+```text
+Období:
+Počet uzavřených poučení:
+
+Poučení zahrnutá do kontroly:
+Vyloučená poučení a proč:
+
+Opakované typy tření:
+Nejvýraznější vzor:
+Stav portfolia: klid / jeden vzor / duplicita / přerůstání evidence
+
+Rozhodnutí:
+Jedna systémová úprava:
+Kanonické místo úpravy:
+Jak ověříme při příštím běžném použití:
+
+Co zůstává:
+Co se slučuje:
+Co se maže nebo zkracuje:
+Privacy-first poznámka:
+
+Jednovětý závěr:
+```
+
+Příklad:
+
+```text
+Období: květen 2026
+Počet uzavřených poučení: 6
+
+Poučení zahrnutá do kontroly: formulářové checklisty, onboarding editorů, review šablon, uzávěrka starých kopií, datová stopa ověření, revizní háčky.
+Vyloučená poučení a proč: žádná.
+
+Opakované typy tření: kopírování pravidel, umístění pravidla, přechodová stopa.
+Nejvýraznější vzor: kopírování pravidel místo odkazu na zdroj pravdy.
+Stav portfolia: jeden vzor
+
+Rozhodnutí: Převést vzor do jedné úpravy šablony checklistu.
+Jedna systémová úprava: Do šablony checklistu přidat krátkou větu, že pravidla pro formuláře, privacy a tracking se odkazují z kanonických karet a nekopírují.
+Kanonické místo úpravy: Šablona nového checklistu.
+Jak ověříme při příštím běžném použití: První nový checklist zkontrolovat jen podle toho, zda odkazuje na kanonickou kartu.
+
+Co zůstává: Jednověté uzávěrky poučení.
+Co se slučuje: Dvě podobné poznámky o kopírování pravidel do jedné provozní věty.
+Co se maže nebo zkracuje: Staré kontrolní poznámky bez další hodnoty.
+Privacy-first poznámka: Bez osobních údajů, bez screenshotů, bez evidence čtení dokumentace.
+
+Jednovětý závěr: Uzavřená poučení ukazují jeden vzor; upravíme šablonu checklistu, aby budoucí práce odkazovala na zdroj pravdy místo kopírování pravidel.
+```
+
+### Mini workshop na 15 minut
+
+1. Tři minuty: vyberte jen uzavřená poučení z posledního období.
+2. Tři minuty: každému přiřaďte jeden typ tření.
+3. Tři minuty: rozhodněte stav portfolia.
+4. Tři minuty: pokud existuje vzor, napište jednu systémovou úpravu.
+5. Dvě minuty: proveďte privacy-first úklid portfolia.
+6. Jednu minutu: zapište jednovětý závěr.
+
+Výstup:
+
+```text
+Jedna měsíční karta, nejvýše jedna systémová úprava a žádný nový samostatný proces.
+```
+
+### Codyho komentář
+
+Můj pohled: portfolio poučení má sloužit jako kompas, ne jako kronika všech menších zakopnutí. Pokud se při měsíční kontrole učíte hlavně to, že máte moc dokumentů o učení, zpráva je jasná: zkraťte stopu. Nejlepší systémové poučení často není nová příloha. Je to jedna věta ve správné šabloně.
+
+### Checklist kapitoly
+
+- Kontrolujete jen poučení se stavem `uzavřeno`?
+- Má každé zahrnuté poučení provozní větu a kanonický domov?
+- Nečtete znovu celou historii, pokud není potřeba řešit rozpor?
+- Označili jste u každého poučení jeden hlavní typ tření?
+- Hledáte jeden opakovaný vzor, ne deset nových úkolů?
+- Připustili jste stav `Klid`, pokud žádný vzor nestojí za zásah?
+- Pokud vzniká úprava, má jednu pracovní větu a jedno kanonické místo?
+- Neslučujete poučení tak, že se ztratí důležité hranice použití?
+- Zkracujete nebo mažete staré kontrolní stopy bez další hodnoty?
+- Neukládáte osobní detaily, screenshoty ani chatové citace?
+- Nevzniklo nové sledování lidí nebo čtení dokumentace?
+- Má měsíční kontrola jednovětý závěr a nejvýše jednu další akci?
+
+Měsíční kontrola uzavřených poučení je užitečná jen tehdy, když zmenšuje budoucí tření. Pokud z ní vzniká další vrstva řízení, minula pointu. Poučení má postupně mizet do lepších šablon, pravidel a rytmů. Ne bobtnat do vitríny, na kterou se chodíme dívat, když máme špatné svědomí z opakovaných chyb.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KK o měsíční kontrolu uzavřených poučení: výběr uzavřených poučení, hledání opakovaného typu tření, stav portfolia, převod jednoho vzoru do systémové úpravy, privacy-first kontrola portfolia, karta měsíční kontroly, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KJ o uzavření potvrzeného poučení po běžném cyklu: vstupní brána, přesun hodnoty do zdroje pravdy, uzavírací věta, zavření dočasných opor, lehký revizní háček, privacy-first uzávěrka, uzavírací karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KI o kontrolu stabilizovaného poučení po prvním běžném cyklu: výběr skutečného cyklu, kontrola stop v artefaktu, rozlišení selhání poučení od selhání trasy, měření ceny stabilizace, privacy-first kontrola po cyklu, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KH o stabilizaci ověřeného poučení do běžného rytmu: vstupní brána stabilizace, výběr kanonického domova a existujícího rytmu, přepis do provozní věty, zavření přechodových opor, privacy-first úklid, karta stabilizace, příklad, mini workshop a checklist.
