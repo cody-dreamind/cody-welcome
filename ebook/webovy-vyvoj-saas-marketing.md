@@ -84857,8 +84857,216 @@ Můj pohled: stabilizace je chvíle, kdy má dokumentace zhubnout. Během změny
 
 Stabilizovaná portfoliová oprava je hotová tehdy, když ji další člověk potká jako normální součást práce, ne jako památku na minulý problém. Dobré pravidlo nemusí vyprávět celý příběh své opravy. Má vést správným směrem a nechat historii tam, kde patří: krátce, dohledatelně a mimo hlavní cestu.
 
+## Příloha KD: Kontrola stabilizované portfoliové opravy po prvním běžném cyklu
+
+Příloha KC dostala potvrzenou portfoliovou opravu zpět do běžného rytmu. Tahle příloha řeší první kontrolu po tom, co už oprava nežije jako čerstvá změna, ale jako normální součást portfolia pravidel. To je důležitý okamžik. Při stabilizaci může všechno vypadat uklizeně, protože tým má změnu ještě v hlavě. Po jednom běžném cyklu se ukáže, jestli oprava opravdu drží i bez speciální pozornosti.
+
+Kontrolní otázka:
+
+```text
+Funguje stabilizovaná portfoliová oprava v běžném rytmu bez návratu staré cesty, bez ručního vysvětlování a bez nové zbytečné datové stopy?
+```
+
+Tahle kontrola nemá znovu otevírat celou historii opravy. Má jen ověřit, že stabilizace nebyla hezká tečka na papíře, ale skutečné zapojení do provozu. Pokud se při kontrole objeví další náměty, patří do backlogu nebo měsíční redukce portfolia. Ne do nekonečného dodatku k jedné opravě.
+
+### Vyberte jeden běžný cyklus
+
+Kontrola má proběhnout po prvním přirozeném cyklu, ve kterém se oprava mohla projevit. Ne po týdnu jen proto, že někdo rád kontroluje tabulky. Rytmus vyberte podle typu opravy.
+
+Příklady:
+
+- U publikační šablony kontrolujte první běžnou publikaci po stabilizaci.
+- U indexu pravidel kontrolujte první měsíční procházení portfolia.
+- U archivace duplicity kontrolujte nejbližší situaci, kdy by se stará duplicita dřív použila.
+- U onboardingového pravidla kontrolujte první nástup nebo první refresh materiálů.
+- U privacy-first datové stopy kontrolujte nejbližší úklid artefaktů nebo přístupů.
+
+Nevybírejte cyklus, který byl vytvořený jen kvůli kontrole. Když založíte speciální revizi pro každou stabilizovanou opravu, rychle budete mít dokonale evidovaný systém, který nikdo nechce používat. A to je dokumentační ekvivalent luxusní skříně plné kabelů bez štítků.
+
+### Zkontrolujte návrat staré cesty
+
+Největší riziko po stabilizaci není, že pravidlo úplně zmizí. Častější je návrat staré cesty: starý odkaz v šabloně, kopie v onboardingové složce, interní poznámka, která někoho pošle zpět, nebo zvyk člověka, který má starý postup uložený v hlavě.
+
+Ptejte se:
+
+- Kde práce v cyklu začala?
+- Vedl první vstup na aktuální pravidlo?
+- Objevila se někde stará kopie, starý název nebo starý odkaz?
+- Musel někdo vysvětlovat, že stará cesta už neplatí?
+- Vznikl nový obchvat, protože aktuální pravidlo nebylo po ruce?
+
+Slabý závěr:
+
+```text
+Tým občas ještě používá staré odkazy.
+```
+
+Silnější závěr:
+
+```text
+Měsíční review šlo přes aktuální index, ale onboardingová karta pořád obsahuje starý odkaz na archivovanou formulářovou šablonu.
+```
+
+Druhý závěr je opravitelný. První je jen povzdech ve slušném oblečení.
+
+### Ověřte cenu použití pravidla
+
+Stabilizovaná oprava má zjednodušit práci. Proto nestačí, že aktuální pravidlo existuje. Musí být použitelné bez zbytečné režie.
+
+Projděte tři otázky:
+
+| Oblast | Kontrolní otázka | Dobré znamení | Varování |
+| --- | --- | --- | --- |
+| Dohledatelnost | Našel tým pravidlo z běžného vstupu? | První cesta vedla na kanonické místo. | Pravidlo se hledalo přes chat, autora změny nebo starý název. |
+| Rozhodnutí | Pomohlo pravidlo uzavřít práci? | Vzniklo jedno jasné rozhodnutí nebo hotový výstup. | Pravidlo se přečetlo, ale výsledek se dopisoval bokem. |
+| Režie | Kolik podpůrných kroků bylo potřeba? | Bez speciální schůzky, bez nové tabulky, bez ručního hlídání. | Kontrola vyžadovala nový rituál nebo opakované vysvětlování. |
+
+Pokud pravidlo funguje jen díky autorovi opravy, není stabilizované. Je hlídané. To není totéž. Hlídané pravidlo může být dočasně v pořádku u rizikové změny, ale v portfoliu pravidel nemá zůstat jako běžný stav.
+
+### Rozlište selhání stabilizace od běžného šumu
+
+Po prvním cyklu se může ukázat několik typů problémů. Ne všechny znamenají, že stabilizace selhala.
+
+Rozlišení:
+
+- Selhání stabilizace: běžný vstup nevede na aktuální pravidlo.
+- Návrat staré cesty: stará kopie nebo starý odkaz zůstaly aktivní.
+- Slabé pravidlo: pravidlo se našlo, ale nepomohlo rozhodnout.
+- Okolní šum: práce začala mimo portfolio z důvodu, který nesouvisí s opravou.
+- Nový podnět: tým objevil další zlepšení, ale původní oprava funguje.
+
+Příklad:
+
+```text
+Stabilizovaná oprava: Sloučení dvou formulářových checklistů do jedné karty.
+Pozorování po cyklu: Publikační checklist vede na správnou kartu. Obchod ale navrhuje novou otázku do kvalifikace poptávky.
+Rozhodnutí: Stabilizace funguje. Nová otázka je produktový nebo sales podnět, ne chyba portfoliové opravy.
+```
+
+Tohle rozlišení chrání tým před rozléváním práce. Když každý nový nápad přilepíte k poslední změně, z jedné opravy se stane věčný magnet na všechno, co zrovna někdo potkal.
+
+### Privacy-first kontrola po cyklu
+
+Po běžném cyklu zkontrolujte, jestli stabilizace nezavedla nový dohled nebo zbytečnou evidenci. Dokumentační pravidla mají pomáhat lidem pracovat, ne vyrábět tichý monitoring jejich chování.
+
+Kontrola:
+
+- Nezapisujete, kdo přesně pravidlo otevřel a kolikrát?
+- Nepoužíváte screenshoty chatů nebo osobních poznámek jako trvalý důkaz?
+- Nezůstaly v příkladech zákaznické údaje, interní citace nebo jména lidí?
+- Nezavedla kontrola nový tracker, export nebo analytiku bez jasného účelu?
+- Má trvalý záznam jen to, co další člověk potřebuje k rozhodnutí?
+- Jsou dočasné podklady smazané nebo mají jasnou retenci?
+
+Dobrý záznam po cyklu:
+
+```text
+První měsíční review po stabilizaci potvrdilo, že formulářová karta je dohledatelná z publikačního checklistu. Stará onboardingová kopie byla nalezena a archivována jako nahrazená. Bez nového sledování lidí a bez ukládání osobních screenshotů.
+```
+
+To je dost. Není potřeba vytvářet galerii důkazů, že někdo klikl správně. Jednak je to divné, jednak to obvykle nepomáhá produktu.
+
+### Rozhodněte další stav
+
+Po kontrole přiřaďte stabilizované opravě jeden stav:
+
+| Stav | Kdy ho použít | Co udělat |
+| --- | --- | --- |
+| Ponechat v rytmu | Oprava funguje a cyklus neukázal významné tření. | Nechat ji v běžném měsíčním nebo kvartálním rytmu. |
+| Drobně uklidit | Funguje, ale zůstala jedna stará stopa nebo přechodový odkaz. | Udělat jednu úklidovou akci a zapsat ji do changelogu. |
+| Zpřesnit pravidlo | Pravidlo se našlo, ale nepomohlo dost jasně rozhodnout. | Upravit formulaci nebo vstupní situaci pravidla. |
+| Vrátit do portfoliové opravy | Běžný vstup nevede na správné místo nebo se stará cesta vrací systémově. | Otevřít novou opravu podle Přílohy KA. |
+| Sloučit s širším vzorem | Problém se opakuje u více pravidel, ne jen u této opravy. | Přenést ho do kvartální konsolidace portfolia. |
+
+Stav `Drobně uklidit` držte malý. Jedna stará kopie, jeden odkaz, jedna poznámka. Pokud potřebujete uklidit pět míst, už nejde o drobný úklid, ale o další portfoliovou opravu. Slova jsou zdarma, ale rozsah práce už ne.
+
+### Kontrolní karta po běžném cyklu
+
+```text
+Stabilizovaná oprava:
+Běžný cyklus, ve kterém se kontrolovala:
+Původní stabilizační závěr:
+
+Kde práce začala:
+Vedl běžný vstup na aktuální pravidlo:
+Objevila se stará cesta, starý název nebo kopie:
+Bylo potřeba ruční vysvětlení:
+
+Dohledatelnost:
+Rozhodnutí:
+Režie použití:
+
+Je problém ve stabilizaci, staré cestě, pravidle, okolním šumu, nebo jde o nový podnět:
+Privacy-first kontrola po cyklu:
+Dočasné podklady k odstranění:
+Další stav:
+Jedna následná akce:
+Jednovětý závěr:
+```
+
+Příklad:
+
+```text
+Stabilizovaná oprava: Napojení landing page šablony na kartu veřejných formulářů
+Běžný cyklus, ve kterém se kontrolovala: Měsíční review portfolia pravidel
+Původní stabilizační závěr: Oprava je součástí běžného publikačního checklistu a dál se hlídá jen jako signál návratu staré cesty.
+
+Kde práce začala: Publikační checklist nové landing page
+Vedl běžný vstup na aktuální pravidlo: Ano
+Objevila se stará cesta, starý název nebo kopie: Ano, starý odkaz v onboardingové kartě
+Bylo potřeba ruční vysvětlení: Ne
+
+Dohledatelnost: Aktuální karta byla nalezena bez autora opravy.
+Rozhodnutí: Formulář zůstal krátký a nepřidal povinný telefon.
+Režie použití: Bez nové schůzky a bez nové tabulky.
+
+Je problém ve stabilizaci, staré cestě, pravidle, okolním šumu, nebo jde o nový podnět: Stará cesta.
+Privacy-first kontrola po cyklu: Bez osobních screenshotů, trvalý záznam popisuje jen pracovní situaci.
+Dočasné podklady k odstranění: Poznámka s odkazem na starou onboardingovou kartu po archivaci.
+Další stav: Drobně uklidit.
+Jedna následná akce: Archivovat starý odkaz v onboardingové kartě jako nahrazený.
+Jednovětý závěr: Stabilizace funguje, ale onboarding ještě obsahuje jednu starou stopu k úklidu.
+```
+
+### Mini workshop na 12 minut
+
+1. Dvě minuty: pojmenujte stabilizovanou opravu a běžný cyklus.
+2. Dvě minuty: sledujte, odkud práce začala a kam vedl první vstup.
+3. Tři minuty: ověřte dohledatelnost, rozhodnutí a režii použití.
+4. Dvě minuty: rozlište typ problému nebo potvrďte, že žádný není.
+5. Dvě minuty: proveďte privacy-first kontrolu po cyklu.
+6. Jednu minutu: přiřaďte stav a napište jednovětý závěr.
+
+Výstup:
+
+```text
+Jedna kontrolní karta, jeden stav a nejvýše jedna následná akce.
+```
+
+### Codyho komentář
+
+Můj pohled: první běžný cyklus je test, jestli dokumentace umí žít bez slavnostního doprovodu. Při stabilizaci se dá hodně věcí uhladit ručně. V běžném cyklu už se ukáže, jestli cesta opravdu vede. Když ano, nechte ji být. Když ne, opravte nejbližší překážku. Hlavně z toho nedělejte další permanentní kontrolní patro, protože patro navíc je často jen elegantní způsob, jak schovat schody, po kterých nikdo nechce chodit.
+
+### Checklist kapitoly
+
+- Kontrolovali jste první přirozený běžný cyklus, ne umělý test?
+- Ověřili jste, odkud práce začala a kam vedl první vstup?
+- Hledali jste návrat staré cesty, starého názvu nebo staré kopie?
+- Zjistili jste, jestli bylo potřeba ruční vysvětlování?
+- Zkontrolovali jste dohledatelnost, rozhodnutí a režii použití?
+- Rozlišili jste selhání stabilizace od staré cesty, slabého pravidla, okolního šumu a nového podnětu?
+- Nepřilepili jste k opravě další nesouvisející nápady?
+- Nezavedli jste nové sledování lidí nebo čtení dokumentace po jednotlivcích?
+- Odstranili jste z trvalého záznamu osobní údaje, interní citace a zbytečné screenshoty?
+- Přiřadili jste jeden další stav?
+- Pokud je potřeba následná akce, je opravdu jen jedna?
+- Umíte výsledek kontroly říct jednou pracovní větou?
+
+Kontrola po běžném cyklu má tým chránit před dvěma extrémy: před slepou vírou, že stabilizace všechno vyřešila, a před nutkáním kontrolovat stabilizovanou opravu donekonečna. Dobrý výsledek je nudný: pravidlo se našlo, práce se uzavřela, stopa zůstala malá a další cyklus může běžet normálně.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KD o kontrolu stabilizované portfoliové opravy po prvním běžném cyklu: výběr přirozeného cyklu, kontrola návratu staré cesty, cena použití pravidla, rozlišení selhání stabilizace od běžného šumu, privacy-first kontrola po cyklu, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KC o stabilizaci potvrzené portfoliové opravy do běžného rytmu: vstupní brána pro potvrzené a dočištěné opravy, přepis ověřovací historie do aktuálního pravidla, napojení na existující měsíční nebo kvartální rytmus, uzavření přechodových opor, privacy-first uzávěrka, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KB o ověření portfoliové opravy po prvním skutečném použití: výběr normální situace, sledování pracovní cesty místo člověka, tři signály nalezení/rozhodnutí/stopové čistoty, rozlišení tření, privacy-first kontrola skutečné stopy, stavy opravy, ověřovací karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KA o převod kvartální konsolidace do jedné portfoliové opravy: převod stavů na typ práce, opravná věta, jedno pracovní místo, jednorázové provedení, viditelné zavření staré cesty, privacy-first kontrola podkladů, karta opravy, mini workshop a checklist.
