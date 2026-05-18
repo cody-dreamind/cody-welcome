@@ -85287,8 +85287,234 @@ Můj pohled: dobrá dokumentace pozná, kdy má přestat mluvit o vlastní oprav
 
 Uzavřená portfoliová oprava už nemá poutat pozornost. Má potichu zlepšovat běžnou práci. To je v dokumentaci často nejlepší možný výsledek: méně výjimek, méně speciálních kontrol a jedna správná cesta, která se dá najít, použít a zase opustit.
 
+## Příloha KF: Převod uzavřené portfoliové opravy do jednoho poučení
+
+Příloha KE uzavřela potvrzenou portfoliovou opravu zpět do běžného rytmu. Tahle příloha řeší poslední užitečný krok: jak z uzavřené opravy získat jedno poučení, které pomůže příště, ale nerozbobtná portfolio pravidel o další vysvětlovací vrstvu.
+
+Uzavřená oprava často obsahuje cenný vzor. Ne proto, že by bylo potřeba z každé malé změny dělat případovou studii. Spíš proto, že se v ní ukáže něco opakovatelného: špatné místo pro pravidlo, příliš dlouhá šablona, nejasný název, starý odkaz, chybějící privacy-first brzda nebo signál, že tým potřebuje jednodušší rozhodovací větu. Když se poučení nezachytí vůbec, stejná chyba se vrátí jinde. Když se zachytí moc podrobně, vznikne dokumentační památník. Obě varianty jsou drahé, jen každá jinak.
+
+Pracovní otázka:
+
+```text
+Jaké jedno poučení z uzavřené portfoliové opravy má změnit budoucí tvorbu nebo údržbu pravidel?
+```
+
+Slovo `jedno` je důležité. Ne tři závěry, ne seznam doporučení, ne nová metodika. Jedno použitelné poučení, které se dá vložit na místo, kde příště vzniká podobná práce.
+
+### Vybírejte jen uzavřenou opravu
+
+Do poučení převádějte jen opravu, která má uzavírací větu a jasný stav staré cesty. Pokud je oprava pořád ve speciálním sledování, nejdřív ji uzavřete. Nedokončené opravy produkují nedokončená poučení a ta mají nepříjemný zvyk tvářit se jako moudrost.
+
+Vstupní brána:
+
+```text
+Má oprava uzavírací větu?
+Je aktuální pravidlo nebo pracovní cesta jasná?
+Je stará cesta smazaná, archivovaná jako nahrazená nebo přesměrovaná?
+Zůstává další kontrola jen v běžném rytmu?
+Je ověřovací stopa uklizená podle privacy-first pravidel?
+```
+
+Když odpověď na některou otázku chybí, nevytvářejte poučení. Vraťte se k uzavření. Poučení nemá suplovat chybějící provozní práci.
+
+### Najděte opakovatelný vzor
+
+Ne každá oprava zaslouží poučení. Někdy šlo jen o jednorázový překlep, špatně vložený odkaz nebo zapomenutý archivní štítek. To se opraví a jde se dál. Poučení má smysl ve chvíli, kdy chyba ukazuje na vzor, který se může opakovat.
+
+Hledejte hlavně tyto typy vzorů:
+
+| Vzor | Jak se projevuje | Poučení může změnit |
+| --- | --- | --- |
+| Špatný domov pravidla | Lidé hledali pravidlo přes chat, autora nebo starý název. | Kam ukládat podobná pravidla příště. |
+| Kopírovaná šablona | Staré kopie přežily v onboardingu, checklistu nebo sales materiálu. | Kdy používat odkaz místo kopie. |
+| Nejasná rozhodovací věta | Pravidlo se našlo, ale nepomohlo uzavřít práci. | Jak psát budoucí pravidla kratší a konkrétnější. |
+| Skrytá datová stopa | Ověření nechalo screenshoty, citace nebo osobní údaje. | Jak omezit důkazy a retenci už při návrhu změny. |
+| Přehnaný kontrolní rituál | Malá oprava dostala vlastní schůzku nebo tabulku. | Kdy napojit změnu na existující rytmus. |
+
+Příklad:
+
+```text
+Oprava: Landing page checklist měl starou kopii formulářových pravidel.
+Vzor: Kopírované checklisty stárnou rychleji než kanonická karta.
+Poučení: U pravidel, která se týkají dat z formulářů, vkládat do šablon odkaz na kanonickou kartu místo kopírování celého textu.
+```
+
+To je použitelné. Neříká "buďme pečlivější". Říká, co se má příště udělat jinak.
+
+### Přepište příběh na pracovní poučení
+
+Poučení nemá vyprávět celou opravu. Má pomoct příštímu člověku při podobném rozhodnutí. Proto z něj odstraňte drama, historii i interní detaily.
+
+Postup přepisu:
+
+1. Pojmenujte pracovní situaci.
+2. Napište, co se v ní opakovalo nebo hrozilo.
+3. Přidejte pravidlo pro příště.
+4. Uveďte, kde se má poučení objevit.
+5. Odstraňte osobní údaje, zákaznické kontexty a chatové citace.
+
+Slabé poučení:
+
+```text
+Minule jsme zapomněli aktualizovat onboarding, takže příště musíme všechno víc hlídat.
+```
+
+Silnější poučení:
+
+```text
+Když se mění kanonické formulářové pravidlo, aktualizuje se jen zdroj pravdy a vstupní šablony na něj odkazují. Kopie pravidla v onboardingu se nezakládají.
+```
+
+Rozdíl je v použitelnosti. První věta vytváří pocit viny a neurčitý dohled. Druhá věta mění budoucí konstrukci pravidel.
+
+### Dejte poučení nejblíž budoucí práci
+
+Poučení má žít tam, kde ho člověk potká ve chvíli, kdy ho potřebuje. Ne v samostatném archivu "moudra z oprav", kam se chodí jen při auditu nebo když někdo hledá výmluvu pro novou tabulku.
+
+Vyberte jeden domov:
+
+- Do šablony pravidla, pokud poučení mění způsob psaní pravidel.
+- Do publikačního checklistu, pokud se týká webu, landing pages nebo obsahu.
+- Do onboardingové trasy, pokud se týká prvního použití materiálů novým člověkem.
+- Do privacy-first brány, pokud se týká datové stopy, screenshotů, retence nebo přístupů.
+- Do měsíčního review portfolia, pokud se týká redukce, slučování nebo archivace pravidel.
+
+Nepřidávejte poučení na všechna místa najednou. Pokud ho potřebuje víc míst, vložte ho do jednoho kanonického domova a ostatní místa na něj odkažte. Kopírované poučení stárne úplně stejně jako kopírované pravidlo. Jen se tváří vznešeněji.
+
+Příklad umístění:
+
+```text
+Domov poučení: Šablona nového checklistu.
+Vložená věta: Pokud checklist používá pravidlo pro sběr osobních údajů, odkazuje na kanonickou privacy-first kartu a nekopíruje její text.
+Odkaz z onboardingu: "Při tvorbě nového checklistu použij šablonu checklistu; pravidla pro formuláře nekopíruj."
+```
+
+Tím se poučení dostane do práce bez dalšího samostatného procesu.
+
+### Rozlište poučení, pravidlo a backlog
+
+Po uzavřené opravě se často objeví tři různé věci. Když je smícháte, vznikne chaos.
+
+| Typ | Co to je | Kam patří |
+| --- | --- | --- |
+| Poučení | Opakovatelný závěr pro budoucí podobnou práci. | Do nejbližší šablony, brány nebo review rytmu. |
+| Pravidlo | Aktivní instrukce pro konkrétní pracovní situaci. | Do portfolia pravidel nebo kanonického zdroje pravdy. |
+| Backlog položka | Konkrétní další změna, která ještě není hotová. | Do backlogu s vlastní prioritou a ověřením. |
+
+Příklad rozlišení:
+
+```text
+Poučení: Formulářová pravidla nekopírovat do checklistů, jen odkazovat na kanonickou kartu.
+Pravidlo: Publikační checklist landing page vede na kartu veřejného formuláře.
+Backlog: Zkontrolovat starší šablony kampaní, jestli nekopírují formulářová pravidla.
+```
+
+Poučení není backlog. Pokud z něj vznikne další práce, dejte ji do backlogu jako samostatnou položku. Jinak se poučení změní na skrytý úkol bez vlastní priority, a to je přesně ten typ práce, který pak nenápadně bobtná.
+
+### Privacy-first filtr poučení
+
+Poučení z oprav často vzniká z reálných situací. O to víc musí projít privacy-first filtrem. Cílem je zachovat vzor, ne osoby, zákazníky ani interní historku.
+
+Před uložením zkontrolujte:
+
+- Popisuje poučení pracovní situaci bez jmen?
+- Neobsahuje zákaznický kontext, který není nutný pro budoucí rozhodnutí?
+- Neodkazuje na chatové vlákno jako trvalý důkaz?
+- Nevyžaduje nové sledování lidí, čtení dokumentace nebo klikání?
+- Nezvyšuje retenci podkladů jen proto, že "by se mohly hodit"?
+- Dá se poučení použít i bez přístupu k původní opravě?
+
+Slabý zápis:
+
+```text
+Po problému u konkrétní poptávky necháváme v interní složce screenshoty, aby bylo vidět, proč jsme změnili formulářová pravidla.
+```
+
+Silnější zápis:
+
+```text
+Poučení z formulářové opravy je uložené jako pravidlo pro tvorbu checklistů: formulářová pravidla se nekopírují, ale odkazují na kanonickou privacy-first kartu. Ověřovací screenshoty nejsou trvalý podklad.
+```
+
+Druhá věta chrání soukromí a přitom zachovává podstatu. To je dobrý obchod: méně dat, víc použitelného pravidla.
+
+### Karta poučení
+
+```text
+Uzavřená oprava:
+Uzavírací věta:
+
+Opakovatelný vzor:
+Jedno poučení pro příště:
+Typ poučení: šablona / domov pravidla / rozhodovací věta / privacy-first brzda / revizní rytmus
+
+Kanonický domov poučení:
+Místa, která na něj pouze odkazují:
+Co záměrně nepřenášíme:
+
+Vzniká z toho samostatná backlog položka:
+Privacy-first filtr:
+Jednovětý závěr:
+```
+
+Příklad:
+
+```text
+Uzavřená oprava: Napojení landing page šablony na kartu veřejných formulářů
+Uzavírací věta: Publikační checklist vede na kanonickou formulářovou kartu, první měsíční review potvrdilo cestu bez staré kopie a další kontrola zůstává v běžném portfoliovém rytmu.
+
+Opakovatelný vzor: Kopírovaná pravidla pro formuláře stárnou a vracejí starou datovou stopu.
+Jedno poučení pro příště: Checklisty, které pracují se sběrem osobních údajů, odkazují na kanonickou privacy-first kartu a nekopírují její pravidla.
+Typ poučení: privacy-first brzda a šablona
+
+Kanonický domov poučení: Šablona nového checklistu
+Místa, která na něj pouze odkazují: Onboarding editorů, publikační checklist
+Co záměrně nepřenášíme: Historii chyby, screenshoty, jména lidí a detail původní poptávky
+
+Vzniká z toho samostatná backlog položka: Ano, zkontrolovat starší kampaňové checklisty při příštím měsíčním review.
+Privacy-first filtr: Bez osobních údajů, bez trvalých screenshotů, bez sledování lidí.
+Jednovětý závěr: Poučení z opravy se ukládá do šablony checklistu jako pravidlo nekopírovat formulářová pravidla mimo kanonickou privacy-first kartu.
+```
+
+### Mini workshop na 12 minut
+
+1. Dvě minuty: přečtěte uzavírací větu opravy.
+2. Dvě minuty: rozhodněte, jestli oprava obsahuje opakovatelný vzor, nebo šlo jen o jednorázový úklid.
+3. Tři minuty: přepište vzor do jedné pracovní věty pro příště.
+4. Dvě minuty: vyberte jeden kanonický domov poučení.
+5. Dvě minuty: proveďte privacy-first filtr.
+6. Jednu minutu: rozhodněte, jestli vzniká samostatná backlog položka.
+
+Výstup:
+
+```text
+Jedna karta poučení, jeden kanonický domov a případně jedna oddělená backlog položka.
+```
+
+### Codyho komentář
+
+Můj pohled: dobré poučení je krátké, trochu nepříjemně konkrétní a použitelné bez poradního výboru. Když po opravě vznikne odstavec o tom, jak bychom měli "zlepšit komunikaci a více dbát na konzistenci", je to sice společensky přijatelné, ale pracovně skoro prázdné. Lepší je věta, která příště změní šablonu, odkaz, formulaci nebo datovou brzdu. Dokumentace nepotřebuje víc moudrosti. Potřebuje lepší místa, kde se správná věc stane skoro automaticky.
+
+### Checklist kapitoly
+
+- Převádíte do poučení jen opravu, která je opravdu uzavřená?
+- Má oprava uzavírací větu a jasný stav staré cesty?
+- Našli jste opakovatelný vzor, ne jen jednorázový překlep?
+- Přepsali jste příběh opravy do jedné pracovní věty pro příště?
+- Je poučení konkrétní dost na to, aby změnilo budoucí šablonu, pravidlo nebo rytmus?
+- Vybrali jste jeden kanonický domov poučení?
+- Ostatní místa na poučení jen odkazují místo kopírování?
+- Rozlišili jste poučení, aktivní pravidlo a backlog položku?
+- Nezůstaly v poučení osobní údaje, zákaznické detaily nebo chatové citace?
+- Nezavedli jste nové sledování lidí nebo používání dokumentace?
+- Pokud vznikla další práce, má vlastní backlog položku a ověření?
+- Dá se poučení použít bez čtení původní opravy?
+
+Poučení z uzavřené opravy má být malé, ale trvalé zlepšení způsobu práce. Nejlepší výsledek není delší archiv, ale příští šablona, která už starou chybu neumožní tak snadno zopakovat.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KF o převod uzavřené portfoliové opravy do jednoho poučení: vstupní brána pro uzavřené opravy, hledání opakovatelného vzoru, přepis příběhu na pracovní poučení, výběr kanonického domova, rozlišení poučení/pravidla/backlogu, privacy-first filtr, karta poučení, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KE o uzavření potvrzené portfoliové opravy po běžném cyklu: vstupní stavy vhodné k uzavření, převod speciálního sledování do běžného provozu, uzavírací věta, viditelné zavření starých odkazů, předání bez schůzky navíc, privacy-first úklid dočasných podkladů, uzavírací karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KD o kontrolu stabilizované portfoliové opravy po prvním běžném cyklu: výběr přirozeného cyklu, kontrola návratu staré cesty, cena použití pravidla, rozlišení selhání stabilizace od běžného šumu, privacy-first kontrola po cyklu, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KC o stabilizaci potvrzené portfoliové opravy do běžného rytmu: vstupní brána pro potvrzené a dočištěné opravy, přepis ověřovací historie do aktuálního pravidla, napojení na existující měsíční nebo kvartální rytmus, uzavření přechodových opor, privacy-first uzávěrka, stabilizační karta, příklad, mini workshop a checklist.
