@@ -84654,8 +84654,212 @@ Můj pohled: první použití je nejlepší detektor přehnaně sebevědomých o
 
 Ověření portfoliové opravy má být krátká brzda před další prací. Ne proto, aby tým zpomalila, ale aby neopakoval stejný typ úprav naslepo. Jedna dobrá oprava, která se ověří v provozu, má větší hodnotu než pět elegantních změn, které nikdo nepotká při skutečné práci.
 
+## Příloha KC: Stabilizace potvrzené portfoliové opravy do běžného rytmu
+
+Příloha KB ověřila, jestli portfoliová oprava pomohla při prvním skutečném použití. Tahle příloha řeší další krok: co udělat, když oprava obstála, případně když potřebovala jen jednu malou následnou akci. Cílem není vyrábět další dokumentační vrstvu. Cílem je dostat potvrzenou opravu zpět do běžného rytmu portfolia pravidel, aby se z ní nestala věčná položka ve stavu "ještě sledujeme".
+
+Stabilizační otázka:
+
+```text
+Co musí zůstat v běžném portfoliu pravidel, aby potvrzená oprava fungovala i bez autora změny a bez speciální pozornosti?
+```
+
+Pokud odpověď zní "musíme to měsíc hlídat ručně", oprava ještě není stabilizovaná. Možná funguje, ale opírá se o člověka, který ví, kudy vést ostatní. Běžný rytmus má být opakovatelný i ve chvíli, kdy autor opravy řeší něco úplně jiného, ideálně něco příjemnějšího než staré šablony.
+
+### Stabilizujte jen potvrzenou nebo dočištěnou opravu
+
+Do stabilizace pouštějte jen opravy se stavem:
+
+- `Potvrdit`: první použití ukázalo, že oprava pomohla a nevzniklo významné tření.
+- `Drobně dočistit`: oprava fungovala, následná malá akce byla provedena a stará cesta je zavřená.
+
+Ostatní stavy sem nepatří. `Zúžit` znamená, že rozsah opravy ještě není jasný. `Vrátit do revize` znamená, že oprava nesplnila slib. `Odložit` znamená, že nemáte reálné použití. Stabilizovat neověřenou změnu je jako dávat razítko na prázdný papír. Vypadá úředně, ale nic neřeší.
+
+Krátká vstupní brána:
+
+```text
+Má oprava ověřené první použití?
+Je stará cesta zavřená nebo viditelně označená jako nahrazená?
+Existuje jedna věta, co se změnilo a proč?
+Víme, kde se změna projeví v dalším běžném rytmu?
+```
+
+Když jedna odpověď chybí, vraťte se o krok zpět. Stabilizace není odkladiště nedořešených oprav.
+
+### Přepište opravu z historie do pravidla
+
+Ověřovací karta popisuje příběh: co se opravovalo, kde se testovalo a co se stalo při prvním použití. Běžné portfolio pravidel ale nemá být sbírka příběhů. Potřebuje aktuální stav.
+
+Převod do běžného pravidla proto vypadá takto:
+
+| V ověřovací kartě | V běžném portfoliu |
+| --- | --- |
+| Původní problém a stará cesta | Krátká změnová poznámka nebo archivní záznam |
+| Screenshoty a pomocné podklady | Smazat nebo přesunout mimo aktivní pravidlo |
+| Detail první kontroly | Jedna věta v changelogu |
+| Opravená pracovní cesta | Aktuální pravidlo, šablona nebo index |
+| Stav opravy | Běžný revizní rytmus |
+
+Příklad přepisu:
+
+```text
+Historie: Landing page šablona dřív vedla na starou kopii formulářového checklistu. Po opravě a prvním použití editor došel na kanonickou kartu bez doptávání.
+Aktuální pravidlo: Při publikaci nové landing page použijte checklist napojený na kartu veřejného formuláře. Formulář sbírá jen údaje potřebné pro první odpověď.
+Changelog: 2026-05-18: Šablona landing page byla napojena na kanonickou kartu veřejného formuláře; stará kopie checklistu je archivovaná.
+```
+
+V aktivním pravidle zůstává to, co člověk potřebuje příště. V historii zůstává jen důvod změny. Všechno ostatní je podpůrná stopa, která má po stabilizaci odejít.
+
+### Napojte změnu na existující rytmus
+
+Potvrzená oprava nesmí dostat vlastní nový kontrolní rituál, pokud to není opravdu nutné. Většinou stačí připojit ji k rytmu, který už existuje: měsíční redukce portfolia, kvartální konsolidace, publikační checklist, onboardingový refresh nebo technický audit.
+
+Vyberte nejbližší rytmus podle toho, kde oprava žije:
+
+- Oprava názvu nebo indexu patří do měsíční kontroly dohledatelnosti pravidel.
+- Oprava šablony patří do prvního běžného použití šablony a potom do měsíčního rytmu.
+- Oprava duplicit patří do redukce portfolia.
+- Oprava rozhodovací karty patří do kontroly použitelnosti pravidla.
+- Oprava privacy-first datové stopy patří do pravidelného úklidu artefaktů a přístupů.
+
+Zápis má být krátký:
+
+```text
+Stabilizovaná oprava se dál kontroluje v měsíčním rytmu portfolia pravidel. Signál: při nové landing page už tým nepoužije starou kopii formulářového checklistu.
+```
+
+To stačí. Nepotřebujete nový dashboard, novou schůzku ani tabulku s patnácti sloupci. Pokud se kvůli každé opravě zakládá nový rytmus, portfolio pravidel se postupně promění v orchestr bez dirigenta a s příliš mnoha triangly.
+
+### Uzavřete přechodové opory
+
+Během opravy často vzniknou opory, které pomohly přechod zvládnout: dočasná poznámka, připnutý odkaz, komentář ve vlákně, screenshot staré cesty, checklist "po opravě ještě zkontrolovat". Tyto věci jsou užitečné při změně, ale škodí, když zůstanou jako polostálá navigace.
+
+Po stabilizaci projděte:
+
+- dočasné komentáře v dokumentaci,
+- připnuté zprávy a odkazy v chatu,
+- kopie checklistů s poznámkou "zatím",
+- screenshoty starého stavu,
+- přechodové úkoly v backlogu,
+- neaktuální odkazy v onboardingových materiálech.
+
+Každé položce dejte jeden stav:
+
+| Stav | Co znamená |
+| --- | --- |
+| Smazat | Pomohla při ověření, ale pro další práci nemá hodnotu. |
+| Archivovat | Má historickou hodnotu, ale nesmí být aktivní pracovní vstup. |
+| Přepsat | Obsahuje užitečnou větu, která patří do aktuálního pravidla. |
+| Ponechat | Je to skutečný zdroj pravdy nebo aktivní vstup do práce. |
+
+Nejčastější chyba je ponechat všechno "pro jistotu". Jenže jistota v dokumentaci nevzniká množstvím stop. Vzniká tím, že další člověk najde jednu správnou cestu.
+
+### Privacy-first uzávěrka
+
+Stabilizace je vhodný okamžik pro datový úklid. Opravy pravidel často pracují s příklady z reálné práce, a právě tam se snadno nechají osobní údaje, zákaznické kontexty nebo interní citace.
+
+Uzávěrka:
+
+- Do aktivního pravidla patří pracovní situace, ne jméno člověka.
+- Do changelogu patří důvod změny, ne detailní rekonstrukce chyby.
+- Screenshoty mažte, pokud nejsou nutné jako dlouhodobý důkaz.
+- Pokud archivujete podklad, odstraňte osobní údaje a omezte přístup.
+- Nezavádějte nové sledování používání pravidla po jednotlivcích.
+- Retenci ověřovacích podkladů stanovte hned, ne "až se k tomu někdo vrátí".
+
+Slabý stabilizační zápis:
+
+```text
+Po chybě v obchodním týmu jsme nechali v dokumentaci screenshot staré šablony a vlákno s vysvětlením.
+```
+
+Silnější zápis:
+
+```text
+Stará obchodní šablona byla archivovaná jako nahrazená. Aktivní šablona vede na kanonické pravidlo a ověřovací screenshot byl po kontrole smazán.
+```
+
+Druhý zápis chrání práci i lidi. A jako bonus se dá přečíst bez detektivního výcviku.
+
+### Stabilizační karta
+
+```text
+Stabilizovaná oprava:
+Stav po ověření:
+Původní opravná věta:
+
+Aktuální pravidlo nebo pracovní vstup po stabilizaci:
+Kam se přesunula historie změny:
+Jaká stará cesta je zavřená:
+
+Běžný rytmus, který změnu dál hlídá:
+Signál, že se stará cesta nevrací:
+Co záměrně nesledujeme:
+
+Privacy-first uzávěrka:
+Dočasné podklady smazané nebo archivované:
+Jednovětý stabilizační závěr:
+```
+
+Příklad:
+
+```text
+Stabilizovaná oprava: Napojení landing page šablony na kartu veřejných formulářů
+Stav po ověření: Potvrdit
+Původní opravná věta: Protože šablony vracely starý postup, napojíme landing page checklist na kanonickou kartu veřejného formuláře.
+
+Aktuální pravidlo nebo pracovní vstup po stabilizaci: Publikační checklist landing page vede na kartu veřejného formuláře a nepřebírá vlastní kopii pravidel.
+Kam se přesunula historie změny: Jedna věta v changelogu šablony.
+Jaká stará cesta je zavřená: Stará kopie formulářového checklistu je archivovaná jako nahrazená.
+
+Běžný rytmus, který změnu dál hlídá: Měsíční kontrola portfolia pravidel.
+Signál, že se stará cesta nevrací: Nová landing page nepoužije starou kopii checklistu.
+Co záměrně nesledujeme: Kdo pravidlo četl a kolikrát otevřel dokument.
+
+Privacy-first uzávěrka: Bez jmen, bez zákaznických screenshotů, bez nového měření lidí.
+Dočasné podklady smazané nebo archivované: Screenshot staré šablony smazán po potvrzení.
+Jednovětý stabilizační závěr: Oprava je součástí běžného publikačního checklistu a dál se hlídá jen jako signál návratu staré cesty.
+```
+
+### Mini workshop na 15 minut
+
+1. Dvě minuty: potvrďte, že oprava má stav `Potvrdit` nebo dočištěné `Drobně dočistit`.
+2. Tři minuty: přepište ověřovací příběh na aktuální pravidlo nebo pracovní vstup.
+3. Tři minuty: určete existující rytmus, který změnu dál pohlídá.
+4. Tři minuty: projděte přechodové opory a dejte jim stav smazat, archivovat, přepsat nebo ponechat.
+5. Dvě minuty: proveďte privacy-first uzávěrku.
+6. Dvě minuty: napište jednovětý stabilizační závěr.
+
+Výstup:
+
+```text
+Jedna stabilizační karta, aktuální pravidlo bez historického balastu a napojení na existující rytmus.
+```
+
+### Codyho komentář
+
+Můj pohled: stabilizace je chvíle, kdy má dokumentace zhubnout. Během změny je v pořádku mít poznámky, screenshoty a opatrné připomínky. Po ověření už ale mají zůstat jen věci, které pomůžou dalšímu člověku udělat práci. Zbytek je provozní šum. A šum má tu nehezkou vlastnost, že se tváří jako pečlivost, dokud v něm někdo neztratí správné pravidlo.
+
+### Checklist kapitoly
+
+- Stabilizujete jen opravu se stavem `Potvrdit` nebo dočištěné `Drobně dočistit`?
+- Má oprava ověřené první skutečné použití?
+- Je stará cesta zavřená, archivovaná nebo jasně označená jako nahrazená?
+- Přepsali jste příběh opravy do aktuálního pravidla nebo pracovního vstupu?
+- Zůstala historie změny jen v krátkém changelogu?
+- Napojili jste změnu na existující měsíční, kvartální nebo pracovní rytmus?
+- Nevytvořili jste nový kontrolní rituál bez jasného důvodu?
+- Prošli jste přechodové opory a rozhodli, co smazat, archivovat, přepsat nebo ponechat?
+- Odstranili jste zbytečné screenshoty, chatové citace a osobní údaje?
+- Nesledujete používání pravidla po jednotlivcích?
+- Má rytmus jeden jednoduchý signál návratu staré cesty?
+- Umíte stabilizační závěr říct jednou pracovní větou?
+
+Stabilizovaná portfoliová oprava je hotová tehdy, když ji další člověk potká jako normální součást práce, ne jako památku na minulý problém. Dobré pravidlo nemusí vyprávět celý příběh své opravy. Má vést správným směrem a nechat historii tam, kde patří: krátce, dohledatelně a mimo hlavní cestu.
+
 ## Pracovní log
 
+- 2026-05-18: Doplněna Příloha KC o stabilizaci potvrzené portfoliové opravy do běžného rytmu: vstupní brána pro potvrzené a dočištěné opravy, přepis ověřovací historie do aktuálního pravidla, napojení na existující měsíční nebo kvartální rytmus, uzavření přechodových opor, privacy-first uzávěrka, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KB o ověření portfoliové opravy po prvním skutečném použití: výběr normální situace, sledování pracovní cesty místo člověka, tři signály nalezení/rozhodnutí/stopové čistoty, rozlišení tření, privacy-first kontrola skutečné stopy, stavy opravy, ověřovací karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KA o převod kvartální konsolidace do jedné portfoliové opravy: převod stavů na typ práce, opravná věta, jedno pracovní místo, jednorázové provedení, viditelné zavření staré cesty, privacy-first kontrola podkladů, karta opravy, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha JZ o kvartální konsolidaci portfolia pravidel po měsíčním rytmu: práce se třemi měsíčními větami, hledání opakovaného vzoru, stav portfolia, jedna vybraná oprava, privacy-first omezení podkladů, kvartální karta, mini workshop a checklist.
