@@ -88300,8 +88300,197 @@ Můj pohled: dočasné soubory se nechovají dočasně, pokud jim tým nedá kon
 
 Měsíční kontrola dočasných podkladů je malý návyk s velkým dopadem. Neřeší jen pořádek ve složkách. Učí tým poznat, kdy privacy problém není v jednom screenshotu, ale v procesu, který screenshoty pořád vyrábí.
 
+## Příloha KT: Ověření systémové opravy po měsíční kontrole dočasných podkladů
+
+Měsíční kontrola má skončit jednou systémovou opravou: upraveným checklistem, bezpečnějším formulářem, lepší stavovou větou, agregovaným reportem, omezeným exportním oprávněním nebo jasnějším úklidovým spouštěčem. Tím ale práce nekončí. Oprava, která se neověří při prvním normálním použití, je jen hezká věta v zápisu.
+
+Ověření nemá být další audit. Má odpovědět na jednoduchou otázku: vzniká po opravě méně zbytečných dočasných podkladů, nebo si tým jen našel jinou cestu, jak je vyrábět?
+
+Pracovní otázka:
+
+```text
+Pomohla systémová oprava při první normální situaci zmenšit datovou stopu, zrychlit zápis a zachovat dost důkazů pro práci?
+```
+
+Výchozí pravidlo:
+
+```text
+Každá systémová oprava z měsíční kontroly dočasných podkladů se ověřuje při prvním normálním použití. Sleduje se výsledek práce, počet nových stop, kvalita záznamu a návrat starého návyku.
+```
+
+### Vyberte první normální situaci
+
+Neověřujte opravu na umělém demo průchodu, pokud to není nutné. Vyberte první běžnou situaci, pro kterou byla oprava udělaná:
+
+- test formuláře po deployi,
+- měsíční marketingové review,
+- vyřešený support ticket,
+- uzavřený incident,
+- předání opravy zákazníkovi,
+- kontrola poptávek,
+- kontrola provozního dashboardu.
+
+Smyslem je vidět, co udělá tým pod normálním tlakem. Pokud se oprava používá jen tehdy, když se na ni všichni dívají, není stabilní. Stabilní oprava musí fungovat i ve chvíli, kdy člověk řeší práci, ne metodiku.
+
+Příklad:
+
+```text
+Oprava: doplnit testovací checklist formulářů o tři stavové věty, aby nevznikaly screenshoty potvrzovacích hlášek.
+První normální situace: běžný smoke test formuláře po drobné úpravě textu na landing page.
+```
+
+### Sledujte čtyři signály
+
+Ověření držte na čtyřech praktických signálech. Nehodnoťte pocit, ale stopu po práci.
+
+1. Výsledek: podařilo se práci dokončit bez zmatku?
+2. Záznam: vznikla použitelná stavová věta místo přílohy?
+3. Datová stopa: nevznikl zbytečný screenshot, export nebo kopie?
+4. Návrat staré cesty: neposlal někdo podklad bokem do chatu, e-mailu nebo osobní složky?
+
+Silný výsledek:
+
+```text
+Formulář po deployi ověřen. Testovací poptávka dorazila do sdílené schránky, CRM záznam vznikl bez telefonního čísla a potvrzovací e-mail odešel do jedné minuty. Screenshot nevznikl, protože checklist obsahoval dostatečnou stavovou větu.
+```
+
+Slabý výsledek:
+
+```text
+Formulář ok, screenshot v chatu.
+```
+
+Druhý záznam je rychlý, ale vrací tým do starého návyku. Chybí jasný výsledek, místo důkazu je příloha a dočasná stopa se přesunula mimo kanonické místo.
+
+### Rozlište selhání opravy od selhání okolí
+
+Když oprava nepomůže, nemusí být špatná sama o sobě. Často selže okolní proces:
+
+- checklist je dobrý, ale lidé nevědí, kde ho najít,
+- stavová věta existuje, ale issue šablona ji nenabízí,
+- export už není potřeba, ale staré oprávnění zůstalo,
+- dashboard má agregované číslo, ale review agenda pořád žádá tabulku,
+- retenční pravidlo je jasné, ale zavírací workflow nemá krok pro úklid.
+
+Proto se neptejte jen "fungovala oprava?". Ptejte se:
+
+```text
+Co přesně člověku bránilo použít novou cestu při normální práci?
+```
+
+Praktické rozlišení:
+
+- Problém opravy: věta je nejasná, chybí důležitý stav, pravidlo je moc dlouhé.
+- Problém umístění: oprava je jinde než práce, lidé ji musí hledat.
+- Problém oprávnění: stará exportní cesta je pořád jednodušší než nová agregovaná cesta.
+- Problém návyku: tým ví, co má dělat, ale vrací se k obrázkům "pro jistotu".
+- Problém výjimky: situace opravdu vyžadovala důkaz a screenshot byl oprávněný.
+
+Tahle diagnostika brání dvěma extrémům. První extrém je zahodit dobrou opravu po prvním tření. Druhý extrém je donekonečna vysvětlovat, že pravidlo je správné, zatímco ho nikdo nepoužívá. Oba extrémy jsou drahé. Jeden zahazuje práci, druhý vyrábí rituál.
+
+### Opravte nejbližší pracovní místo
+
+Pokud ověření ukáže problém, neotvírejte velkou metodiku. Opravte nejbližší místo, kde práce probíhá.
+
+Příklady:
+
+- Lidé pořád posílají screenshot do chatu: doplňte do šablony issue pole "stavová věta" a do chatu připněte pravidlo, že dočasné podklady patří do issue jen při výjimce.
+- Export poptávek se vrací: přidejte do měsíčního review agregované počty a odeberte ruční export z agendy.
+- Stavová věta je moc obecná: doplňte tři konkrétní varianty pro úspěch, chybu validace a výpadek integrace.
+- Úklid po incidentu se zapomíná: přidejte do uzavírací karty řádek "podklady smazány / anonymizovány / archivovány s důvodem".
+- Lidé nevědí, kdo rozhoduje: přidejte vlastníka k pravidlu, ne novou schůzku.
+
+Dobrý zásah je malý, ale blízko práci. Když problém vzniká v issue šabloně, neopravujte wiki na třech stránkách. Když problém vzniká v review agendě, nezačínejte školením o celé datové hygieně. Opravte místo, kde se člověk rozhoduje.
+
+### Privacy-first kontrola ověření
+
+Ověření samo nesmí vytvořit větší stopu než původní problém. Neukládejte před a po screenshoty jen proto, abyste dokázali, že screenshoty už nepotřebujete. Ano, zní to absurdně. Přesně proto se to v týmech děje.
+
+Privacy-first ověření má držet minimum:
+
+- stavová věta místo obrázku,
+- agregované číslo místo seznamu osob,
+- odkaz na kanonický záznam místo kopie,
+- krátký závěr místo nové tabulky,
+- jasné rozhodnutí, co se děje dál.
+
+Bezpečný ověřovací záznam:
+
+```text
+Ověření opravy: při prvním smoke testu formuláře nevznikl screenshot ani export. Checklist stačil pro zápis výsledku, ale chyběla věta pro výpadek CRM. Doplněna jedna varianta stavové věty. Další kontrola při příštím deployi formuláře.
+```
+
+Tento záznam říká dost. Neobsahuje zákaznická data, neukládá nové podklady a vede k jedné malé úpravě.
+
+### Ověřovací karta
+
+Použijte krátkou kartu:
+
+```text
+Oprava z měsíční kontroly:
+První normální použití:
+Výsledek práce:
+Vznikl screenshot, export nebo kopie? ano / ne / oprávněná výjimka
+Kde zůstala stopa:
+Návrat staré cesty:
+Problém opravy nebo okolí:
+Jedna další úprava:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Oprava z měsíční kontroly: doplněné stavové věty do checklistu formulářů.
+První normální použití: smoke test kontaktního formuláře po změně textu CTA.
+Výsledek práce: test dokončen, poptávka dorazila do sdílené schránky a CRM záznam vznikl bez zbytečných polí.
+Vznikl screenshot, export nebo kopie? ne.
+Kde zůstala stopa: issue k deployi, jedna stavová věta.
+Návrat staré cesty: žádný screenshot v chatu ani v issue.
+Problém opravy nebo okolí: chybí varianta věty pro výpadek CRM.
+Jedna další úprava: doplnit variantu "napojení nedostupné, incident otevřen".
+Další kontrola: příští deploy formuláře.
+```
+
+### Mini workshop na 10 minut
+
+Po prvním použití systémové opravy udělejte krátký průchod:
+
+1. Najděte původní měsíční větu a opravu, kterou slibovala.
+2. Vyberte první skutečné použití opravy.
+3. Zapište, jestli vznikl screenshot, export, kopie nebo jen stavová věta.
+4. Rozlište problém opravy od problému umístění, oprávnění nebo návyku.
+5. Proveďte jednu nejbližší úpravu pracovního místa.
+6. Uzavřete ověření jednou větou.
+
+Výstup:
+
+```text
+Oprava funguje / potřebuje jednu úpravu / nefunguje, protože [konkrétní důvod]. Další krok je [jedna změna v jednom pracovním místě].
+```
+
+### Codyho komentář
+
+Můj pohled: nejhorší výsledek měsíční kontroly není to, že najdete nepořádek. Nejhorší je, že vyrobíte novou pěknou opravu, nikdo ji nepoužije a tým si odškrtne, že "privacy řešíme". Privacy-first provoz se pozná až v normálním průchodu práce. Ne ve chvíli, kdy všichni souhlasí s pravidlem, ale ve chvíli, kdy někdo spěchá a stejně nevytvoří zbytečný export.
+
+### Checklist kapitoly
+
+- Má systémová oprava z měsíční kontroly vybrané první normální použití?
+- Sledujete výsledek práce, záznam, datovou stopu a návrat staré cesty?
+- Nevzniká při ověření nová zbytečná evidence?
+- Umíte rozlišit problém opravy od problému okolního procesu?
+- Opravujete nejbližší pracovní místo, kde tření vzniklo?
+- Nevysvětlujete pravidlo místo toho, abyste ho zjednodušili?
+- Nezůstaly staré exportní nebo screenshotové cesty pohodlnější než nová cesta?
+- Má ověřovací záznam jednu další úpravu nebo jasné uzavření?
+- Jsou v ověřovacím záznamu jen nezbytná data?
+- Je další kontrola navázaná na přirozenou práci, ne na novou schůzku?
+
+Ověření systémové opravy má být krátké a tvrdě praktické. Buď oprava zmenšila datovou stopu při normální práci, nebo ještě není hotová. V obou případech je výsledek užitečný: tým ví, co funguje, co se vrací starou cestou a kde udělat nejmenší další zásah.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KT o ověření systémové opravy po měsíční kontrole dočasných podkladů: první normální použití, čtyři signály ověření, rozlišení problému opravy a okolí, nejbližší pracovní místo, privacy-first ověřovací záznam, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KS o měsíční kontrole dočasných podkladů: mapa míst, tři stavy kontroly, sledování důvodu vzniku, měsíční karta, prevence nového katalogu stop, převod opakovaného důvodu do systémové opravy, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KR o úklidu screenshotů a exportů po vyřešení výjimky: úklidové spouštěče, stavy podkladů, náhrada rozhodovací větou, kontrola kopií, retenční karta, privacy-first kontrola, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KQ se stop pravidlem pro screenshoty a dočasné exporty: výchozí pravidlo, stavová věta místo přílohy, oprávněné výjimky, datové minimum, retenční karta, příklad, Codyho komentář a checklist.
