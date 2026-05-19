@@ -88107,8 +88107,202 @@ Můj pohled: nejdražší screenshot je ten, který už nikdo nepotřebuje, ale 
 
 Dobře uklizená výjimka po sobě nenechá prázdno. Nechá po sobě rozhodnutí, výsledek a minimální stopu. To je přesně rozdíl mezi provozem, který si data hromadí ze zvyku, a provozem, který ví, proč každá stopa existuje.
 
+## Příloha KS: Měsíční kontrola dočasných podkladů
+
+Jednorázový úklid screenshotu nebo exportu je dobrý začátek. Nestačí ale sám o sobě. Pokud tým každý týden vytváří nové dočasné podklady, ruční mazání po jednotlivých issue se rychle změní v další provozní dluh. Privacy-first provoz potřebuje ještě jeden lehký rytmus: pravidelně se podívat, jestli se z dočasných důkazů nestává tichý vedlejší systém.
+
+Tahle kontrola nemá být velký audit. Má být krátký měsíční průchod místy, kde dočasné podklady přirozeně vznikají: issue, helpdesk, sdílené složky, exportní adresáře, chaty, incidentní karty a marketingové review. Cíl není najít každý zapomenutý soubor. Cíl je snížit objem, zpřesnit pravidla a zachytit opakovaný vzor dřív, než začne být normální.
+
+Pracovní otázka:
+
+```text
+Vznikají nám dočasné screenshoty a exporty pořád ze stejného důvodu, a pokud ano, jak upravíme systém, aby jich příště vzniklo méně?
+```
+
+Výchozí pravidlo:
+
+```text
+Dočasné podklady se jednou měsíčně kontrolují jako provozní stopa: co smazat, co nahradit větou, co archivovat s důvodem a co opravit v procesu, aby stejný typ podkladu nemusel vznikat znovu.
+```
+
+### Začněte mapou míst, ne hledáním všeho
+
+Neotevírejte celý firemní disk. To je rychlá cesta k únavě a nulové změně. Vyberte tři až pět míst, kde dočasné podklady opravdu vznikají.
+
+Typická mapa:
+
+- issue tracker pro web a produkt,
+- helpdesk nebo support inbox,
+- incidentní složka,
+- sdílená projektová složka,
+- exportní složka v analytice, CRM nebo fakturaci,
+- kanál v chatu, kam tým posílá rychlé ukázky chyb,
+- složka s podklady pro měsíční marketingové review.
+
+U každého místa si zapište jen dvě věci:
+
+```text
+Místo:
+Jaké dočasné podklady tu typicky vznikají:
+```
+
+Příklad:
+
+```text
+Místo: issue tracker pro web
+Jaké dočasné podklady tu typicky vznikají: screenshoty rozbitých stavů, mobilních překryvů, chybových hlášek a testovacích formulářů.
+```
+
+Taková mapa je lepší než obecné "zkontrolovat soubory". Říká, kde má kontrola začít a proč.
+
+### Tři stavy měsíční kontroly
+
+Při kontrole každého místa nepřemýšlejte o deseti kategoriích. Stačí tři stavy:
+
+1. Uklidit hned: podklad nemá další účel, obsahuje zbytečná data nebo už ho nahradila finální věta.
+2. Nechat s důvodem: podklad ještě slouží incidentu, eskalaci, auditu nebo smluvnímu důvodu.
+3. Opravit systém: podklad vzniká opakovaně kvůli chybějícímu dashboardu, špatné šabloně, nejasnému formuláři nebo slabému provoznímu pravidlu.
+
+Třetí stav je nejdůležitější. Pokud se každý měsíc exportuje stejný seznam, problém není v exportu samotném. Problém je, že tým nemá lepší způsob, jak odpovědět na opakovanou otázku.
+
+Příklad rozhodnutí:
+
+```text
+Opakovaný podklad: export poptávek s ručně doplněným typem dotazu.
+Stav: opravit systém.
+Další krok: přidat do měsíčního review agregovanou tabulku podle typů dotazů a přestat exportovat jednotlivé e-maily.
+```
+
+Tím se úklid mění z mazání stop na zlepšování provozu.
+
+### Sledujte důvod vzniku, ne jen počet souborů
+
+Počet screenshotů může být užitečný signál, ale sám o sobě toho moc neřekne. Deset screenshotů z jednoho incidentu může být oprávněných. Tři exporty měsíčně ze stejného CRM filtru mohou být zbytečný návyk.
+
+U opakovaných podkladů se ptejte:
+
+- Jakou otázku se tým snažil zodpovědět?
+- Proč nestačila stavová věta, agregovaná metrika nebo odkaz na zdroj pravdy?
+- Šlo o jednorázovou výjimku, nebo o opakovaný provozní dotaz?
+- Obsahoval podklad víc dat, než bylo potřeba?
+- Kdo ho opravdu potřeboval vidět?
+- Kdy měl zmizet?
+
+Silný měsíční závěr může vypadat takto:
+
+```text
+Tento měsíc nevznikl problém v počtu screenshotů, ale v důvodu jejich vzniku. Tým třikrát fotil stav objednávkového formuláře, protože testovací checklist neříká, jak zapsat výsledek bez obrázku. Oprava: doplnit do checklistu tři stavové věty pro úspěšný průchod, validační chybu a výpadek napojení.
+```
+
+To je praktický výstup. Neobsahuje nové osobní údaje a vede ke konkrétní úpravě systému.
+
+### Měsíční karta kontroly
+
+Pro běžný malý tým stačí jedna karta na měsíc:
+
+```text
+Měsíc:
+Kontrolovaná místa:
+Nejčastější typ dočasného podkladu:
+Co bylo smazáno nebo nahrazeno větou:
+Co zůstává s důvodem:
+Opakovaný důvod vzniku:
+Jedna systémová oprava:
+Vlastník opravy:
+Termín kontroly opravy:
+```
+
+Příklad:
+
+```text
+Měsíc: květen 2026
+Kontrolovaná místa: issue tracker, support inbox, složka marketing review.
+Nejčastější typ dočasného podkladu: screenshoty formulářů a exporty poptávek.
+Co bylo smazáno nebo nahrazeno větou: 4 screenshoty po ověření oprav a 1 export poptávek nahrazený agregovaným závěrem.
+Co zůstává s důvodem: 1 screenshot u otevřené eskalace s dodavatelem.
+Opakovaný důvod vzniku: tým neví, jak zapisovat výsledek testu formuláře bez obrázku.
+Jedna systémová oprava: doplnit testovací checklist o stavové věty.
+Vlastník opravy: web lead.
+Termín kontroly opravy: další měsíční review.
+```
+
+Karta nesmí být novým skladištěm detailů. Má říct, jaký vzor jste našli a co s ním uděláte.
+
+### Nezakládejte katalog všech dočasných stop
+
+Častá past: tým začne řešit privacy-first úklid tím, že vytvoří tabulku všech screenshotů a exportů. Vypadá to odpovědně, ale často to jen přesune problém jinam. Místo desítek neřízených podkladů vznikne jedna velká tabulka, která o nich drží další metadata, odkazy a někdy i citlivý kontext.
+
+Katalog má smysl jen pro podklady, které musí zůstat déle kvůli právnímu, smluvnímu nebo auditnímu důvodu. Pro běžné výjimky stačí měsíční karta a uzavírací věta v původním pracovním místě.
+
+Dobré pravidlo:
+
+```text
+Neevidujte dočasnou stopu déle než samotná stopa vyžaduje. Pokud ji mažete, nebudujte kolem ní nový archiv.
+```
+
+Tohle je tvrdě praktické. Privacy-first provoz není jen o mazání souborů. Je i o tom, že nevyrábíte další evidenci jen proto, abyste se cítili lépe.
+
+### Převod opakovaného důvodu do opravy
+
+Každá měsíční kontrola má skončit jednou malou systémovou opravou, pokud se opakovaný vzor objevil. Ne pěti. Jednou.
+
+Možné opravy:
+
+- doplnit stavovou větu do testovacího checklistu,
+- přidat agregovanou metriku do měsíčního review,
+- upravit formulář tak, aby nebylo potřeba exportovat celé odpovědi,
+- přidat do issue šablony pole "retence podkladu",
+- vytvořit bezpečný testovací účet bez reálných zákaznických dat,
+- zrušit exportní oprávnění lidem, kteří ho nepotřebují,
+- přidat do incidentní karty úklidový spouštěč.
+
+Dobrá oprava zmenšuje budoucí stopu. Slabá oprava jen říká "příště si dáme pozor".
+
+### Mini workshop na 15 minut
+
+Jednou měsíčně projděte s malým týmem poslední dočasné podklady.
+
+1. Vyberte dvě až tři místa, kde podklady vznikaly.
+2. Najděte nejčastější typ: screenshot, export, kopie tabulky, příloha v chatu.
+3. U tří příkladů zapište původní důvod vzniku.
+4. Rozhodněte, co se maže, co zůstává s důvodem a co ukazuje na chybu systému.
+5. Vyberte jednu systémovou opravu.
+6. Zapište vlastníka a termín kontroly opravy.
+
+Výstup workshopu:
+
+```text
+Tento měsíc opravujeme [jednu věc], aby příště nemuselo vznikat [typ dočasného podkladu] kvůli [opakovaný důvod].
+```
+
+Příklad:
+
+```text
+Tento měsíc opravujeme testovací checklist formulářů, aby příště nemusely vznikat screenshoty potvrzovacích hlášek kvůli nejasnému zápisu výsledku testu.
+```
+
+### Codyho komentář
+
+Můj pohled: dočasné soubory se nechovají dočasně, pokud jim tým nedá konec. A když se stejný typ dočasného souboru vrací každý měsíc, není to drobný nepořádek. Je to zpráva od systému. Buď chybí lepší měření, lepší šablona, lepší formulář, nebo jasnější odpovědnost. Měsíční kontrola má tu zprávu přečíst dřív, než se z ní stane zvyk.
+
+### Checklist kapitoly
+
+- Má tým jasně vybraná místa, kde dočasné podklady kontroluje?
+- Kontrola nehledá všechno, ale nejpravděpodobnější zdroje stop?
+- Rozlišujete stavy uklidit hned, nechat s důvodem a opravit systém?
+- Sledujete důvod vzniku podkladů, ne jen jejich počet?
+- Nevytváříte nový katalog pro stopy, které mají být smazané?
+- Zůstávají delší evidence jen tam, kde existuje právní, smluvní nebo auditní důvod?
+- Končí měsíční kontrola jednou konkrétní systémovou opravou?
+- Má oprava vlastníka a termín kontroly?
+- Zmenšuje oprava budoucí datovou stopu?
+- Umí tým shrnout výsledek jednou větou?
+
+Měsíční kontrola dočasných podkladů je malý návyk s velkým dopadem. Neřeší jen pořádek ve složkách. Učí tým poznat, kdy privacy problém není v jednom screenshotu, ale v procesu, který screenshoty pořád vyrábí.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KS o měsíční kontrole dočasných podkladů: mapa míst, tři stavy kontroly, sledování důvodu vzniku, měsíční karta, prevence nového katalogu stop, převod opakovaného důvodu do systémové opravy, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KR o úklidu screenshotů a exportů po vyřešení výjimky: úklidové spouštěče, stavy podkladů, náhrada rozhodovací větou, kontrola kopií, retenční karta, privacy-first kontrola, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KQ se stop pravidlem pro screenshoty a dočasné exporty: výchozí pravidlo, stavová věta místo přílohy, oprávněné výjimky, datové minimum, retenční karta, příklad, Codyho komentář a checklist.
 - 2026-05-19: Doplněna Příloha KP o uzavření stabilizované systémové úpravy po prvním běžném cyklu: uzavírání jen potvrzeného stavu, přesun hodnoty do zdroje pravdy, zavření kontrolního režimu, uzavírací věta, privacy-first úklid, karta, příklad, mini workshop a checklist.
