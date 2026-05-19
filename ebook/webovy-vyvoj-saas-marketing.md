@@ -87952,8 +87952,164 @@ Můj pohled: screenshot je často lenost v převleku za důkaz. Někdy je přesn
 
 Dobré stop pravidlo neříká "nikdy". Říká: nejdřív zmenšit stopu, potom teprve ukládat důkaz. Pokud stačí věta, napište větu. Pokud je potřeba screenshot, udělejte z něj krátkodobý, oříznutý a dohledatelný podklad. Privacy-first provoz není o tom, že tým nic nesmí. Je o tom, že každá stopa má důvod a konec.
 
+## Příloha KR: Úklid screenshotů a exportů po vyřešení výjimky
+
+Stop pravidlo pro screenshoty a exporty je užitečné jen tehdy, když má druhou polovinu: úklid po vyřešení. Jinak se z výjimky stane nová běžná praxe. Tým sice umí říct, proč podklad vznikl, ale už neví, proč pořád leží v issue, sdílené složce, chatu nebo osobním počítači.
+
+Úklid neznamená smazat všechno bez rozmyslu. Znamená rozhodnout, co ještě slouží původnímu účelu, co má zůstat jen jako krátká stopa v changelogu a co už je čisté riziko bez hodnoty.
+
+Pracovní otázka:
+
+```text
+Je tento screenshot nebo export po vyřešení problému ještě nutný jako důkaz, nebo stačí ponechat rozhodovací větu a odkaz na finální změnu?
+```
+
+Výchozí pravidlo:
+
+```text
+Každý screenshot a dočasný export má po vyřešení výjimky projít úklidem: smazat, anonymizovat, přesunout do řízeného archivu, nebo nahradit krátkou provozní větou.
+```
+
+### Úklid spouštějte událostí, ne dobrou pamětí
+
+Nečekejte, že si někdo za tři týdny vzpomene na jeden obrázek v komentáři. Úklid připojte k události, která už v práci existuje:
+
+- uzavření incidentu,
+- zavření issue,
+- schválení opravy,
+- předání výstupu zákazníkovi,
+- měsíční review provozních artefaktů,
+- ukončení eskalace s dodavatelem.
+
+Do karty výjimky proto patří spouštěč úklidu hned při vzniku podkladu. Ne jako poznámka "pak uklidit", ale jako konkrétní věta:
+
+```text
+Úklidový spouštěč: po ověření opravy v produkci smazat screenshot z issue a ponechat jen větu v changelogu.
+```
+
+Tahle věta šetří dvě věci najednou: data a budoucí přemýšlení. Člověk při uzavírání nemusí znovu vymýšlet pravidlo, jen ho provede.
+
+### Rozhodněte stav podkladu
+
+Po vyřešení výjimky má každý podklad jeden ze čtyř stavů:
+
+1. Smazat: podklad splnil účel a není potřeba ho dál držet.
+2. Anonymizovat: hodnota zůstává, ale osobní, zákaznické nebo interní detaily nejsou potřeba.
+3. Přesunout do řízeného archivu: existuje právní, smluvní nebo auditní důvod držet důkaz déle.
+4. Nahradit větou: podklad samotný zmizí, ale v historii zůstane stručný stav, rozhodnutí a odkaz na finální změnu.
+
+Prakticky nejčastější má být první a čtvrtý stav. Pokud většina screenshotů končí v archivu, pravidlo je podezřelé. Buď tým zbytečně vyrábí důkazy, nebo nemá jasné hranice, co opravdu musí archivovat.
+
+### Nechte v historii jen pracovní hodnotu
+
+Po vyřešení problému často není potřeba držet původní obrázek. Stačí záznam, který říká, co se stalo a jak to dopadlo.
+
+Slabý uzávěr:
+
+```text
+Opraveno, screenshot v příloze.
+```
+
+Silnější uzávěr:
+
+```text
+Mobilní potvrzení formuláře už nepřekrývá tlačítko. Ověřeno na produkci 2026-05-19, původní screenshot s testovacím e-mailem smazán z issue, v changelogu zůstává jen tato věta.
+```
+
+Druhá verze je použitelnější i bez obrázku. Zachovává důkaz práce, ale neuchovává víc dat, než je potřeba.
+
+### Hledejte kopie mimo kanonické místo
+
+Screenshot málokdy žije jen jednou. Někdo ho vloží do issue, někdo pošle do chatu, někdo si ho nechá v Downloads, někdo ho přidá do prezentace. Při úklidu proto nekontrolujte jen kanonické místo, ale i pravděpodobné vedlejší cesty.
+
+Krátký průchod:
+
+- Je podklad v issue, ticketu nebo incidentní kartě?
+- Neodešel do chatu jako rychlá ukázka?
+- Není v osobní složce, exportní složce nebo příloze e-mailu?
+- Nevznikla z něj kopie v prezentaci, reportu nebo interním dokumentu?
+- Nepoužil ho někdo jako příklad v onboardingovém materiálu?
+
+Smyslem není dělat detektivku u každého drobného podkladu. Smyslem je u citlivějších výjimek nepředstírat, že smazání jednoho souboru vyřešilo všechny kopie.
+
+### Retenční karta po úklidu
+
+Pro běžné podklady stačí krátká uzavírací karta:
+
+```text
+Podklad: screenshot / export
+Původní důvod:
+Výsledek: problém vyřešen / eskalace uzavřena / důkaz předán / oprava ověřena
+Stav podkladu: smazán / anonymizován / archivován / nahrazen větou
+Kde zůstává stopa:
+Kopie mimo kanonické místo zkontrolované:
+Datum úklidu:
+Vlastník úklidu:
+```
+
+Příklad:
+
+```text
+Podklad: export poptávek za duben
+Původní důvod: kontrola, proč se zvedl počet nerelevantních poptávek.
+Výsledek: doplněn kvalifikační text na stránku služby a zkrácen formulář.
+Stav podkladu: smazán, protože stačí agregovaný závěr.
+Kde zůstává stopa: měsíční marketingové review, věta o 18 relevantních a 5 nerelevantních poptávkách.
+Kopie mimo kanonické místo zkontrolované: sdílená složka projektu a issue.
+Datum úklidu: 2026-05-19
+Vlastník úklidu: marketing lead.
+```
+
+### Privacy-first kontrola po úklidu
+
+Úklid má ověřit hlavně tři věci:
+
+- Účel: zůstává jen informace, kterou tým opravdu potřebuje.
+- Přístup: delší stopu vidí jen role, které ji potřebují.
+- Retence: podklad má konec, ne neurčité "pro jistotu".
+
+U citlivých dat přidejte ještě jednu otázku:
+
+```text
+Kdyby se tento podklad omylem dostal mimo tým, obsahuje něco, co jsme mohli po vyřešení bezpečně odstranit?
+```
+
+Pokud odpověď zní ano, podklad je po vyřešení příliš těžký. Ořízněte ho, anonymizujte, nebo ho nahraďte stavovou větou.
+
+### Mini workshop na 10 minut
+
+Vezměte poslední vyřešený incident, bug nebo marketingovou kontrolu, kde vznikl screenshot nebo export.
+
+1. Najděte původní důvod vzniku podkladu.
+2. Zapište, jestli je problém už vyřešený.
+3. Rozhodněte stav: smazat, anonymizovat, archivovat, nebo nahradit větou.
+4. Zkontrolujte jedno kanonické místo a jednu pravděpodobnou vedlejší kopii.
+5. Napište uzavírací větu do issue, changelogu nebo review.
+
+Výstup má být jedna zavřená stopa, ne nová tabulka všech stop. Když workshop končí větším katalogem souborů, tým pravděpodobně řeší pozdě něco, co mělo být omezené už při vzniku.
+
+### Codyho komentář
+
+Můj pohled: nejdražší screenshot je ten, který už nikdo nepotřebuje, ale pořád existuje. Ne proto, že zabírá místo na disku. Protože vytváří tichou povinnost: někdo ho má chránit, vysvětlit, najít, smazat nebo obhájit. To je dost práce na věc, která měla být "jen rychlý obrázek".
+
+### Checklist kapitoly
+
+- Má každý screenshot nebo export úklidový spouštěč?
+- Proběhl úklid po uzavření incidentu, issue, eskalace nebo review?
+- Je jasné, jestli se podklad maže, anonymizuje, archivuje, nebo nahrazuje větou?
+- Zůstává v historii pracovní hodnota bez zbytečných osobních a zákaznických dat?
+- Jsou zkontrolované nejpravděpodobnější vedlejší kopie?
+- Má archivovaný podklad konkrétní právní, smluvní nebo auditní důvod?
+- Vidí delší stopu jen lidé, kteří ji opravdu potřebují?
+- Nezůstávají exporty jako náhrada za agregovanou metriku?
+- Umí tým uzavřít běžnou výjimku jednou větou a bez nové byrokracie?
+- Snižuje úklid budoucí riziko, nebo jen přesouvá soubory jinam?
+
+Dobře uklizená výjimka po sobě nenechá prázdno. Nechá po sobě rozhodnutí, výsledek a minimální stopu. To je přesně rozdíl mezi provozem, který si data hromadí ze zvyku, a provozem, který ví, proč každá stopa existuje.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KR o úklidu screenshotů a exportů po vyřešení výjimky: úklidové spouštěče, stavy podkladů, náhrada rozhodovací větou, kontrola kopií, retenční karta, privacy-first kontrola, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KQ se stop pravidlem pro screenshoty a dočasné exporty: výchozí pravidlo, stavová věta místo přílohy, oprávněné výjimky, datové minimum, retenční karta, příklad, Codyho komentář a checklist.
 - 2026-05-19: Doplněna Příloha KP o uzavření stabilizované systémové úpravy po prvním běžném cyklu: uzavírání jen potvrzeného stavu, přesun hodnoty do zdroje pravdy, zavření kontrolního režimu, uzavírací věta, privacy-first úklid, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KO o kontrole stabilizované systémové úpravy po prvním běžném cyklu: výběr normálního cyklu, sledování nalezení/použití/dokončení, návrat staré cesty, rozlišení pravidla, domova a okolního procesu, privacy-first kontrola, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
