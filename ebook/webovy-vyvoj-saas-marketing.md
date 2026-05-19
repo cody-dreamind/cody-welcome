@@ -90303,8 +90303,229 @@ Můj pohled: dobrý provoz se nepozná podle toho, kolik má kontrol. Pozná se 
 
 Uzavření kontroly je malý provozní úklid s velkým dopadem. Tým má po něm vědět, co platí, kde to najde a kdy se k tomu vrátí. Všechno ostatní má zmizet, nebo aspoň přestat předstírat, že je součástí běžného provozu.
 
+## Příloha LD: Měsíční čtení revizních záznamů bez nové byrokracie
+
+Když se jednotlivé kontroly uzavírají do běžných revizních záznamů, vzniká další otázka: kdo se na ty záznamy dívá jako na celek? Ne proto, aby tým založil nový kontrolní výbor. Spíš proto, aby včas poznal, že se opakuje stejný typ tření, stejné datové riziko nebo stejný návrat staré cesty.
+
+Měsíční čtení revizních záznamů má být krátké. Jeho smyslem není auditovat každé pravidlo znovu. Smyslem je najít jeden vzor, který stojí za malou systémovou opravu, nebo potvrdit, že záznamy zatím neukazují nic společného.
+
+Pracovní otázka:
+
+```text
+Co nám poslední revizní záznamy říkají o systému práce, a jakou jednu malou úpravu z toho uděláme, pokud se opakuje stejný typ tření?
+```
+
+Výchozí pravidlo:
+
+```text
+Jednou měsíčně čtěte jen uzavřené revizní záznamy z běžných rytmů. Neotevírejte všechny staré kontroly. Hledejte opakovaný vzor, vyberte nejmenší užitečnou úpravu a smažte nebo zkraťte vše, co vzniklo jen kvůli tomuto čtení.
+```
+
+### Nezačínejte inventurou všeho
+
+Nejčastější chyba je začít seznamem všech pravidel, checklistů a historických změn. To z měsíčního čtení udělá projekt. Praktický vstup má být menší:
+
+- revizní záznamy uzavřené za poslední měsíc;
+- záznamy z pravidel, která měla stav `Doladit místo`, `Doladit pravidlo` nebo podobné lehké varování;
+- záznamy, kde se objevil návrat staré cesty;
+- záznamy, kde vznikla dočasná datová stopa, export nebo screenshot;
+- záznamy, které mají stejného vlastníka nebo stejné pracovní místo.
+
+Pokud je záznamů moc, nečtěte všechny. Vezměte posledních deset nebo vyberte jednu oblast, například předávání zákaznických výstupů, release checklisty nebo supportní triage. Lepší je malé čtení, které skončí rozhodnutím, než velká inventura, která skončí únavou a dalším odkladem.
+
+Mini pravidlo rozsahu:
+
+```text
+Měsíční čtení se vejde do 30 minut a končí jednou větou. Pokud se nevejde, rozsah byl moc široký.
+```
+
+### Čtěte záznamy podle vzorů, ne podle pořadí
+
+Revizní záznamy nejsou deník. Nečtěte je jako příběh od pondělí do pátku. Čtěte je podle toho, jaké tření ukazují.
+
+U každého záznamu si poznamenejte jen jednu značku:
+
+| Značka | Co znamená | Typická další otázka |
+| --- | --- | --- |
+| `Místo` | Pravidlo existuje, ale lidé ho nenašli včas. | Je odkaz v okamžiku rozhodnutí? |
+| `Znění` | Pravidlo se našlo, ale nebylo pochopené. | Je věta kratší a konkrétnější? |
+| `Rytmus` | Kontrola proběhla mimo přirozený tok práce. | Dá se připojit k existujícímu review? |
+| `Data` | Vznikla zbytečná kopie, export nebo osobní údaj. | Dá se rozhodnout bez této stopy? |
+| `Návrat` | Tým použil starou šablonu, odkaz nebo postup. | Kde stará cesta pořád vypadá platně? |
+| `Cena` | Pravidlo funguje, ale stojí moc času. | Co je minimální výstup pro další krok? |
+
+Nepotřebujete přesnou statistiku. Potřebujete vidět, jestli se stejná značka objevuje víckrát. Když se třikrát objeví `Místo`, problém možná není v lidech ani v pravidlech, ale v navigaci pracovních artefaktů. Když se opakuje `Data`, problém není jeden konkrétní export, ale slabá privacy-first brzda v okamžiku rozhodnutí.
+
+### Vyberte jeden měsíční nález
+
+Po čtení se může objevit víc zajímavých věcí. To je normální a trochu zrádné. Pokud z měsíčního čtení vznikne pět úkolů, tým si nejspíš přidal novou frontu práce. Vyberte jeden nález podle opakované ceny.
+
+Pomáhá jednoduché řazení:
+
+1. Nález, který zbytečně vytváří nebo drží osobní data.
+2. Nález, který opakovaně vrací starou cestu.
+3. Nález, který blokuje dokončení práce.
+4. Nález, který pravidelně stojí tým čas.
+5. Nález, který jen esteticky vadí, ale práci moc nemění.
+
+Měsíční nález napište jednou větou:
+
+```text
+V posledních revizních záznamech se opakuje [typ tření] v [pracovní místo], kvůli čemuž vzniká [cena nebo riziko].
+```
+
+Příklad:
+
+```text
+V posledních revizních záznamech se opakuje značka Data u předávacích podkladů, kvůli čemuž týmy vytvářejí screenshoty stavů místo krátké rozhodovací věty.
+```
+
+To je dobrý nález. Je konkrétní, ukazuje místo a naznačuje opravu. Slabý nález by zněl:
+
+```text
+Musíme lépe hlídat práci s daty.
+```
+
+To je sice pravda skoro vždycky, ale nedá se podle toho nic rozumně změnit. Je to věta, která se tváří zodpovědně a přitom po sobě nechává mlhu. Mlha je pro hory fajn, pro provoz méně.
+
+### Přepište nález do malé systémové úpravy
+
+Měsíční čtení má skončit jednou hotovou úpravou nebo rozhodnutím nic neměnit. Úprava má být co nejblíž místu, kde chyba vzniká.
+
+Dobré typy úprav:
+
+- přidat jeden odkaz do checklistu;
+- nahradit export krátkou rozhodovací větou;
+- přepsat nejasný odstavec na tři kroky;
+- přesunout pravidlo do místa, kde se práce opravdu dělá;
+- odstranit starou šablonu nebo starý odkaz;
+- doplnit jedno stop pravidlo pro dočasné podklady;
+- změnit výchozí příklad z reálných dat na syntetická data.
+
+Špatné typy úprav:
+
+- založit nový měsíční meeting bez jasného výstupu;
+- vytvořit druhý checklist vedle původního;
+- přidat obecné upozornění "dávejte pozor";
+- vyžadovat další screenshot jako důkaz, že screenshoty nevznikají;
+- udělat velkou reorganizaci dokumentace kvůli jednomu nálezu.
+
+Tvar úpravy:
+
+```text
+Tento měsíc měníme [jedno pracovní místo] tak, aby příště [žádoucí chování] bez [zbytečná cena nebo datová stopa].
+```
+
+Příklad:
+
+```text
+Tento měsíc měníme předávací checklist tak, aby příště stačila rozhodovací věta o stavu poptávek bez screenshotu zákaznického detailu.
+```
+
+### Privacy-first čtení záznamů
+
+I samotné měsíční čtení může vytvořit zbytečnou stopu. Typicky když si někdo exportuje všechny revizní záznamy do tabulky, kopíruje příklady z reálných zákaznických situací nebo si ukládá screenshoty "na porovnání". Pokud cílem bylo snížit provozní stopu, je dost trapné ji při kontrole zase zvětšit. Ano, provozní ironie má smysl pro humor, ale účty za ni platí tým.
+
+Privacy-first pravidla měsíčního čtení:
+
+- pracujte s odkazy na záznamy, ne s kopiemi celého obsahu;
+- nepřenášejte osobní údaje do souhrnné tabulky;
+- používejte značky a agregované vzory místo citací konkrétních zákazníků;
+- pokud potřebujete příklad, anonymizujte ho hned při zápisu;
+- dočasný pracovní přehled smažte po vytvoření měsíční věty;
+- pokud vznikne výjimka, dejte jí vlastníka a datum konce;
+- výstup měsíčního čtení ukládejte do stejného místa jako běžné revizní záznamy.
+
+Bezpečný souhrn:
+
+```text
+Za měsíc se třikrát opakovalo tření Data u předávacích podkladů. Konkrétní zákaznické údaje nebyly kopírované; pracovní přehled obsahoval jen značku, pracovní místo a rozhodnutí.
+```
+
+Rizikový souhrn:
+
+```text
+Pro jistotu jsme si vyexportovali všechny záznamy a příklady ponechali v tabulce pro pozdější analýzu.
+```
+
+Pokud pozdější analýza nemá jasnou otázku, není to analýza. Je to sklad.
+
+### Měsíční karta čtení
+
+Použijte krátkou kartu, která nenahrazuje revizní záznamy. Jen shrnuje, co z nich tento měsíc plyne.
+
+```text
+Měsíc:
+Čtený rozsah:
+Počet záznamů:
+Nejčastější značka:
+Jeden měsíční nález:
+Vybraná úprava:
+Kanonické pracovní místo:
+Privacy-first kontrola:
+Co záměrně neřešíme:
+Vlastník:
+Ověření při nejbližším použití:
+```
+
+Vyplněný příklad:
+
+```text
+Měsíc: květen 2026
+Čtený rozsah: revizní záznamy předávacích podkladů.
+Počet záznamů: 7
+Nejčastější značka: Data.
+Jeden měsíční nález: U předávacích podkladů se opakuje nahrazování rozhodovací věty screenshotem stavu.
+Vybraná úprava: Do předávacího checklistu přidat pole "stav poptávek jednou větou" a stop pravidlo pro screenshot zákaznického detailu.
+Kanonické pracovní místo: zákaznický předávací checklist.
+Privacy-first kontrola: Souhrn obsahuje jen značky a pracovní místa, bez zákaznických údajů.
+Co záměrně neřešíme: Celou strukturu předávací dokumentace.
+Vlastník: vlastník předávacího checklistu.
+Ověření při nejbližším použití: příští zákaznické předání.
+```
+
+### Mini workshop na 15 minut
+
+Vezměte poslední uzavřené revizní záznamy z jedné oblasti.
+
+1. Omezte rozsah na maximálně deset záznamů.
+2. Ke každému napište jednu značku: `Místo`, `Znění`, `Rytmus`, `Data`, `Návrat` nebo `Cena`.
+3. Najděte jednu opakovanou značku.
+4. Napište měsíční nález jednou větou.
+5. Vyberte nejbližší pracovní místo, kde se dá udělat malá úprava.
+6. Projděte privacy-first pravidla: žádné kopie osobních dat, žádné nové exporty, žádné screenshoty pro pohodlí.
+7. Zapište vlastníka a první situaci, kde se úprava ověří.
+
+Výstup:
+
+```text
+Z měsíčního čtení revizních záznamů vznikla jedna malá úprava v konkrétním pracovním místě, bez nové evidenční vrstvy a bez kopírování citlivých dat.
+```
+
+### Codyho komentář
+
+Můj pohled: měsíční čtení záznamů má být jako rychlé podívání do zpětného zrcátka, ne jako rozebrání celého auta na parkovišti. Když se tým každý měsíc naučí jednu věc z reálných kontrol a nezaloží kvůli tomu další proces, systém zraje. Když z každého čtení vznikne prezentace, tabulka a nový rituál, systém se možná tváří dospěle, ale ve skutečnosti jen draze vzpomíná na vlastní práci.
+
+### Checklist kapitoly
+
+- Omezili jste měsíční čtení na konkrétní oblast nebo poslední uzavřené záznamy?
+- Vešlo se čtení do krátkého pracovního okna?
+- Četli jste záznamy podle vzorů, ne jako historický deník?
+- Má každý čtený záznam nanejvýš jednu pracovní značku?
+- Vybrali jste jeden měsíční nález podle opakované ceny?
+- Je nález formulovaný jako konkrétní tření v konkrétním pracovním místě?
+- Vznikla nejmenší užitečná úprava, ne nová metodika?
+- Je úprava co nejblíž místu, kde problém vzniká?
+- Je jasné, co tento měsíc záměrně neřešíte?
+- Nevznikl nový export, screenshot nebo souhrn s osobními údaji?
+- Obsahuje měsíční karta jen agregované značky, pracovní místa a rozhodnutí?
+- Má úprava vlastníka a první normální situaci pro ověření?
+
+Měsíční čtení revizních záznamů je užitečné jen tehdy, když zmenšuje budoucí práci. Pokud samo vytváří víc evidence, než kolik pomáhá odstranit, je čas ho zkrátit, zúžit nebo na chvíli vypnout.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha LD o měsíční čtení revizních záznamů bez nové byrokracie: omezení rozsahu, čtení podle vzorů, výběr jednoho měsíčního nálezu, převod do malé systémové úpravy, privacy-first práce bez kopírování dat, měsíční karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LC o uzavření kontroly stabilizované úpravy do běžného revizního záznamu: oddělení výsledku od kontrolních materiálů, revizní věta, zavření přechodových opor, napojení na existující rytmus, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LB o kontrole stabilizované úpravy pravidla po prvním běžném cyklu: výběr skutečného cyklu, sledování nalezení/použití/dokončení, návrat staré cesty, rozhodovací stavy, privacy-first kontrola, kontrolní karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LA o stabilizaci potvrzené úpravy pravidla do běžného provozu: vstupní brána pro stav Potvrdit, přepis ověřovací historie do aktuálního pravidla, konečný domov pravidla, zavření přechodových opor, privacy-first úklid, stabilizační karta, mini workshop a checklist.
