@@ -87351,8 +87351,279 @@ Můj pohled: stabilizace je okamžik, kdy se pozná rozdíl mezi zlepšováním 
 
 Stabilizovaná systémová úprava má změnit běžnou práci, ne jen dokumentovat dobrou snahu. Když má správný domov, zavřené staré cesty a lehký revizní signál, přestane být projektem. Stane se normálním způsobem práce. A přesně tam má skončit.
 
+## Příloha KO: Kontrola stabilizované systémové úpravy po prvním běžném cyklu
+
+Příloha KN stabilizovala potvrzenou systémovou úpravu do běžného provozu. Tím ale práce nekončí úplně. Stabilizace říká: pravidlo má správný domov, staré cesty jsou zavřené a tým ví, kdy se k němu vrátit. První běžný cyklus potom ukáže, jestli se změna opravdu stala součástí práce, nebo jestli jen hezky sedí ve zdroji pravdy.
+
+První běžný cyklus není další pilot. Je to normální situace, ve které by pravidlo mělo pomoct bez zvláštní pozornosti. Právě proto je cenný. Když pravidlo funguje jen ve chvíli, kdy ho někdo připomíná, není stabilizované. Je hlídané.
+
+Pracovní otázka:
+
+```text
+Použila se stabilizovaná systémová úprava v běžném cyklu přirozeně, srozumitelně a bez nové zbytečné datové nebo organizační stopy?
+```
+
+Výstupem má být jedna kontrolní věta a rozhodnutí, zda pravidlo zůstává beze změny, potřebuje drobnou provozní korekci, má špatný domov, nebo se má znovu otevřít jako systémový problém.
+
+### Vyberte první normální cyklus
+
+Kontrola nemá probíhat v uměle připravené situaci. Vyberte první reálný cyklus, ve kterém se pravidlo mělo přirozeně použít. Může to být první nový formulář, první onboarding nové role, první měsíční review šablon, první zákaznický audit nebo první úprava marketingového workflow.
+
+Dobré kritérium:
+
+```text
+Kdybychom pravidlo nehlídali, právě tady by se mělo samo potkat s prací.
+```
+
+Nevybírejte situaci jen proto, že dopadla dobře. Kontrola má ukázat realitu, ne vyrobit uklidňující zápis. Pokud se v prvním cyklu pravidlo vůbec nepotkalo s prací, zapište to také. Možná byl cyklus špatně vybraný. Možná je revizní signál příliš vzdálený. Možná pravidlo řeší situaci, která není tak častá, jak jste si mysleli.
+
+Kontrolní karta začíná jednoduše:
+
+```text
+Stabilizované pravidlo:
+Kde má domov:
+První běžný cyklus:
+Kdo s pravidlem pracoval:
+Jaký výstup měl vzniknout:
+```
+
+Jméno člověka pište jen tehdy, pokud je pro kontrolu opravdu potřeba. Ve většině případů stačí role. Smyslem není hodnotit jednotlivce, ale ověřit systém.
+
+### Sledujte tři body průchodu
+
+U stabilizovaného pravidla stačí sledovat tři praktické body: nalezení, použití a dokončení. Pokud některý z nich drhne, pravidlo ještě není tak běžné, jak vypadá.
+
+Nalezení:
+
+```text
+Našel člověk pravidlo ve správném pracovním místě bez vysvětlování?
+```
+
+Použití:
+
+```text
+Bylo z pravidla jasné, jaké rozhodnutí nebo krok má udělat?
+```
+
+Dokončení:
+
+```text
+Vznikl výstup, který odpovídá stabilizační větě?
+```
+
+Příklad pro formulářovou šablonu:
+
+```text
+Nalezení: delivery lead našel privacy pravidlo přímo v šabloně formuláře.
+Použití: místo kopírování obecných pravidel přidal jen projektovou odchylku.
+Dokončení: nový checklist odkazuje na kanonickou privacy kartu a neobsahuje duplicitní právní text.
+```
+
+To je zdravý průchod. Není potřeba sbírat víc. Pokud systém funguje, kontrola má být krátká.
+
+### Hledejte návrat staré cesty
+
+Největší riziko po stabilizaci není to, že pravidlo nikdo nezná. Největší riziko je tichý návrat staré cesty. Tým použije nový zdroj pravdy, ale vedle toho si nechá starý checklist, starý příklad, starou poznámku nebo starý odkaz "pro jistotu". Výsledek je dvojí systém.
+
+Při kontrole se ptejte:
+
+- Neobjevila se stará šablona v nové práci?
+- Nekopíroval někdo historický příklad místo aktuálního pravidla?
+- Neodkazuje aktivní dokument na archivovaný postup?
+- Nevznikla nová lokální kopie pravidla?
+- Neřeší lidé stejnou otázku znovu ve schůzce, i když má být rozhodnutá?
+
+Návrat staré cesty nemusí znamenat chybu člověka. Často znamená, že stará cesta nebyla zavřená dost viditelně, nebo že nový domov pravidla není v přirozené pracovní trase.
+
+Provozní korekce může být velmi malá:
+
+```text
+Starý odkaz v onboardingové kartě stále vedl na archivovaný checklist. Oprava: odkaz přesměrován na aktuální zdroj pravdy a archiv označen jako nepoužívat pro nové projekty.
+```
+
+Tohle je dobrá oprava. Neotevírá celý systém, jen odstraňuje zbytečný návrat.
+
+### Rozlište pravidlo, domov a okolní proces
+
+Když stabilizovaná úprava nefunguje hladce, neházejte všechno do jednoho pytle. Problém může být ve třech různých místech.
+
+Pravidlo je nejasné:
+
+```text
+Člověk ho našel, ale nevěděl, co přesně má udělat.
+```
+
+Domov je špatný:
+
+```text
+Pravidlo dává smysl, ale není v místě, kde člověk pracuje.
+```
+
+Okolní proces překáží:
+
+```text
+Pravidlo je jasné a dobře umístěné, ale navazující šablona, oprávnění nebo nástroj nutí tým pracovat postaru.
+```
+
+Každý typ potřebuje jiný zásah. Nejasné pravidlo zkraťte nebo doplňte příkladem. Špatný domov přesuňte. Překážející okolní proces řešte jako samostatnou systémovou úpravu, pokud se opakuje nebo stojí tým čas.
+
+Pozor na oblíbený omyl: přidat vysvětlující odstavec ke špatně umístěnému pravidlu. To většinou nepomůže. Pravidlo, které nikdo nenajde, nepotřebuje lepší literaturu. Potřebuje lepší adresu.
+
+### Privacy-first kontrola po běžném cyklu
+
+První běžný cyklus často ukáže, jestli stabilizace opravdu zmenšila datovou stopu. V ověřovací fázi bývá tým opatrný, ale při běžné práci se rychle vrací návyky: kopírování zákaznických ukázek, ukládání screenshotů, posílání exportů do chatu, duplikace checklistů a sběr údajů "pro jistotu".
+
+Zkontrolujte:
+
+- zda nový běžný výstup neobsahuje reálná osobní nebo zákaznická data, kde stačí anonymní příklad,
+- zda nevznikla lokální kopie privacy pravidla s vlastním životem,
+- zda kontrola pravidla nevytvořila novou tabulku sledování lidí,
+- zda archivované podklady nezůstaly v aktivní navigaci,
+- zda se důkaz o použití dá zapsat jako krátký stav místo ukládání celého výstupu,
+- zda pravidlo stále podporuje datovou minimalizaci, ne jen administrativní pocit bezpečí.
+
+Silný zápis po kontrole:
+
+```text
+Pravidlo bylo použito v běžném cyklu. Výstup odkazuje na kanonickou kartu, neobsahuje duplicitní osobní data a kontrolní záznam ukládá jen stav, roli a odkaz na aktuální šablonu.
+```
+
+Slabý zápis:
+
+```text
+Pro jistotu jsme uložili celý formulář, screenshot nastavení, komentáře týmu a kopii privacy textu do kontrolní složky.
+```
+
+První verze drží užitečnou stopu. Druhá vyrábí archiv citlivých podkladů, který bude za tři měsíce zajímat přesně nikoho, dokud nezačne překážet.
+
+### Rozhodněte stav po kontrole
+
+Po prvním běžném cyklu vyberte jeden stav. Ne pište dlouhou esej. Jedno rozhodnutí stačí, pokud je konkrétní.
+
+```text
+Stav 1: Funguje beze změny
+Pravidlo bylo nalezeno, použito a dokončeno bez zbytečné pomoci. Staré cesty se nevrátily. Privacy-first stopa je čistá.
+```
+
+```text
+Stav 2: Drobná provozní korekce
+Pravidlo funguje, ale jeden odkaz, příklad, popisek nebo umístění potřebuje malou opravu.
+```
+
+```text
+Stav 3: Špatný domov
+Pravidlo dává smysl, ale lidé na něj v běžné práci nenarážejí. Je potřeba ho přesunout nebo lépe napojit.
+```
+
+```text
+Stav 4: Znovu otevřít systémový problém
+Pravidlo neřeší původní tření, nebo okolní proces vytváří nové opakované tření. Je potřeba vrátit se k systémové otázce.
+```
+
+U stavu 1 nechte pravidlo být. Úspěšné pravidlo nepotřebuje odměnu v podobě dalších dokumentů. U stavu 2 opravte konkrétní drobnost a zapište ji do changelogu. U stavu 3 přesuňte pravidlo a ověřte další běžný cyklus. U stavu 4 vytvořte novou systémovou větu a vraťte se k postupu pro systémovou úpravu.
+
+### Kontrolní karta po prvním běžném cyklu
+
+```text
+Stabilizované pravidlo:
+Stabilizační věta:
+Konečný domov pravidla:
+Vlastník:
+
+První běžný cyklus:
+Role, která pravidlo použila:
+Očekávaný výstup:
+Skutečný výstup:
+
+Nalezení:
+Použití:
+Dokončení:
+
+Návrat staré cesty:
+Co se objevilo:
+Co bylo zavřeno:
+
+Privacy-first kontrola:
+Co zůstává:
+Co se maže, zkracuje nebo anonymizuje:
+Nevznikla nová zbytečná evidence?
+
+Stav po kontrole:
+Jedna oprava nebo další krok:
+Kontrolní věta:
+```
+
+Příklad:
+
+```text
+Stabilizované pravidlo: u formulářů odkazovat na kanonickou privacy kartu.
+Stabilizační věta: pravidlo je v projektové šabloně, staré kopie jsou zavřené a další kontrola proběhne při měsíčním review nebo opakovaném dotazu.
+Konečný domov pravidla: projektová šablona pro formuláře.
+Vlastník: delivery lead.
+
+První běžný cyklus: příprava formuláře pro audit webu.
+Role, která pravidlo použila: delivery lead.
+Očekávaný výstup: formulářový checklist s odkazem na kanonickou kartu a jednou projektovou odchylkou.
+Skutečný výstup: checklist vznikl ve správné šabloně a nekopíruje obecná privacy pravidla.
+
+Nalezení: pravidlo bylo nalezeno v šabloně bez dotazu.
+Použití: odchylka byla zapsaná do správné části.
+Dokončení: výstup odpovídá stabilizační větě.
+
+Návrat staré cesty: starý odkaz v onboardingové kartě stále vedl na archiv.
+Co se objevilo: jeden neaktuální odkaz.
+Co bylo zavřeno: odkaz přesměrován na projektovou šablonu, archiv označen jako nepoužívat.
+
+Privacy-first kontrola: kontrolní záznam ukládá jen stav, roli a odkaz na šablonu.
+Co zůstává: aktuální pravidlo a anonymní příklad.
+Co se maže, zkracuje nebo anonymizuje: pracovní screenshot formuláře z přípravy.
+Nevznikla nová zbytečná evidence? Ne.
+
+Stav po kontrole: drobná provozní korekce dokončena.
+Jedna oprava nebo další krok: zkontrolovat při příštím měsíčním review, zda se starý odkaz neobjevuje i jinde.
+Kontrolní věta: Pravidlo prošlo prvním běžným cyklem, starý odkaz byl zavřen a není potřeba otevírat novou systémovou úpravu.
+```
+
+### Mini workshop na 10 minut
+
+1. Dvě minuty: vyberte první běžný cyklus a očekávaný výstup.
+2. Dvě minuty: projděte nalezení, použití a dokončení pravidla.
+3. Dvě minuty: hledejte návrat staré cesty.
+4. Dvě minuty: udělejte privacy-first kontrolu skutečné stopy.
+5. Dvě minuty: vyberte stav a napište kontrolní větu.
+
+Výstup:
+
+```text
+Jedna kontrolní karta, jeden stav po cyklu a nanejvýš jedna malá oprava.
+```
+
+### Codyho komentář
+
+Můj pohled: první běžný cyklus je nejlepší detektor dokumentačního divadla. Ve workshopu vypadá skoro každé pravidlo chytře. V normální práci se ukáže, jestli opravdu pomáhá, nebo jen čeká, až ho někdo slavnostně připomene. Dobré pravidlo není to, které má nejdelší vysvětlení. Dobré pravidlo je to, které se objeví ve správný okamžik a nezpůsobí další práci jen tím, že existuje.
+
+### Checklist kapitoly
+
+- Vybrali jste první skutečný běžný cyklus, ne umělý test?
+- Je jasné, jaký výstup měl podle pravidla vzniknout?
+- Našel člověk pravidlo bez ručního navádění?
+- Bylo pravidlo srozumitelné při použití?
+- Vznikl výstup odpovídající stabilizační větě?
+- Nevrátila se stará šablona, starý odkaz nebo starý příklad?
+- Pokud se stará cesta vrátila, zavřeli jste ji konkrétně?
+- Rozlišili jste problém pravidla, domova a okolního procesu?
+- Nevznikla kvůli kontrole nová zbytečná evidence?
+- Zůstává datová stopa menší nebo stejně malá jako po stabilizaci?
+- Mažete, zkracujete nebo anonymizujete dočasné podklady?
+- Vybrali jste jeden stav po kontrole?
+- Je další krok malý, konkrétní a ve správném místě?
+- Má kontrola jednu větu, kterou tým pochopí bez historie změny?
+
+Kontrola po prvním běžném cyklu má potvrdit, že stabilizace přežila kontakt s realitou. Pokud ano, nechte pravidlo pracovat. Pokud ne, opravte nejbližší konkrétní překážku. Cílem není mít dokonale popsaný systém. Cílem je, aby další práce dopadla lépe s menší námahou a menší datovou stopou.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KO o kontrole stabilizované systémové úpravy po prvním běžném cyklu: výběr normálního cyklu, sledování nalezení/použití/dokončení, návrat staré cesty, rozlišení pravidla, domova a okolního procesu, privacy-first kontrola, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KN o stabilizaci potvrzené systémové úpravy do běžného provozu: vstupní brána, konečný domov pravidla, zavření starých cest, přepis do provozního jazyka, vlastník a revizní signál, privacy-first úklid, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KM o ověření systémové úpravy po prvním použití: výběr prvního normálního použití, sledování práce místo člověka, porovnání s původní systémovou větou, čtyři stavy po ověření, privacy-first kontrola, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KL o provedení systémové úpravy z měsíční kontroly poučení: práce s měsíční větou, výběr nejbližšího pracovního místa, nejmenší dostatečná změna, úprava okolního textu, zavření staré cesty, privacy-first provedení, karta, příklad, mini workshop a checklist.
