@@ -90971,8 +90971,205 @@ Můj pohled: stabilizace je místo, kde se pozná rozdíl mezi zlepšováním a 
 
 Potvrzená úprava je hotová teprve tehdy, když se přestane tvářit jako úprava. Stane se prostě normálním pravidlem práce: stručným, nalezitelným, užitečným a uklizeným.
 
+## Příloha LG: Kontrola stabilizovaného měsíčního pravidla po dalším čtení
+
+Stabilizované pravidlo může vypadat hotově, ale skutečný test přijde až při dalším běžném čtení revizních záznamů. Pokud se pravidlo znovu otevře jako zvláštní téma, lidé ho obcházejí nebo kolem něj vznikají pomocné poznámky, stabilizace nebyla úplná. Nejde o tragédii. Je to jen signál, že pravidlo ještě nemá správné místo, správné znění nebo správnou hranici dat.
+
+Tato kontrola má být krátká. Nemá znovu vyšetřovat celý příběh měsíční úpravy. Má ověřit, jestli se z potvrzené změny stala normální součást práce: někdo ji našel, použil, nemusel kvůli ní žádat autora o vysvětlení a nevznikla nová datová stopa jen proto, aby se pravidlo "pro jistotu" dokazovalo.
+
+Pracovní otázka:
+
+```text
+Chová se stabilizovaná měsíční úprava při dalším měsíčním čtení jako běžné pravidlo, nebo pořád vytváří zvláštní péči?
+```
+
+Výchozí pravidlo:
+
+```text
+Při dalším měsíčním čtení ověřte jen jednu stabilizovanou úpravu. Sledujte, zda byla nalezená, použitá a uzavřená bez staré měsíční historie. Pokud ne, opravte místo nebo znění; nezakládejte nový kontrolní proces.
+```
+
+### Vezměte jednu stabilizovanou úpravu
+
+Kontrola se snadno rozroste, když do ní přinesete všechno, co se za měsíc změnilo. To je přesně ten okamžik, kdy dobrá údržba začne připomínat malý auditní festival. Pro tuto kontrolu vyberte jednu stabilizovanou měsíční úpravu, ideálně tu, která:
+
+- se používá v častém pracovním toku;
+- chrání před zbytečným kopírováním dat;
+- má jasného vlastníka pracovního místa;
+- byla stabilizovaná dost nedávno, aby šel dohledat první běžný cyklus;
+- má riziko návratu starého chování.
+
+Neberte nejdramatičtější téma. Berte téma, na kterém poznáte, jestli systém umí malé zlepšení vstřebat bez další byrokracie.
+
+Krátký výběrový zápis:
+
+```text
+Kontrolujeme stabilizované pravidlo z předávacího checklistu: stav poptávek jednou větou místo screenshotu zákaznického detailu.
+```
+
+### Sledujte tři běžné signály
+
+Po stabilizaci už nepotřebujete velké ověřování. Stačí tři otázky:
+
+1. Bylo pravidlo nalezené v místě práce?
+2. Bylo použité bez vysvětlování měsíční historie?
+3. Byl výstup dokončený bez nové pomocné stopy?
+
+Příklad dobrého průchodu:
+
+```text
+Při předání portálu vlastník otevřel kanonický checklist, doplnil stav poptávek jednou větou a nepřiložil screenshot ani export. Nebyla potřeba další domluva.
+```
+
+Příklad varovného průchodu:
+
+```text
+Checklist obsahuje pravidlo, ale člověk si v chatu vyžádal původní měsíční poznámku a přiložil screenshot "pro kontext".
+```
+
+To neznamená, že člověk selhal. Znamená to, že pravidlo buď není dost srozumitelné, není dost vidět, nebo nevysvětluje hranici výjimky.
+
+### Rozlište místo, znění a hranici
+
+Když se stabilizované pravidlo nepoužilo hladce, neopravujte všechno najednou. Tři nejčastější příčiny jsou různé a každá potřebuje jiný zásah.
+
+Problém místa:
+
+```text
+Pravidlo je správné, ale člověk ho nehledal v daném dokumentu.
+```
+
+Oprava: přesuňte pravidlo do pracovního místa, kde se rozhodnutí skutečně dělá, nebo tam přidejte krátký odkaz na kanonické místo.
+
+Problém znění:
+
+```text
+Pravidlo je na správném místě, ale člověk nepoznal, co má konkrétně udělat.
+```
+
+Oprava: přepište pravidlo do akční věty. Pryč s mlhavým "zvážit vhodný stav". Lepší je "uveďte stav poptávek jednou větou".
+
+Problém hranice:
+
+```text
+Pravidlo říká, co dělat, ale neříká, kdy se nesmí použít screenshot, export nebo detail zákazníka.
+```
+
+Oprava: doplňte jasné stop pravidlo a výjimku do data. Bez hranice si tým často pomůže starým způsobem, protože starý způsob bývá rychlý.
+
+### Nevracejte starou historii do pravidla
+
+Při kontrole může vzniknout pokušení přidat do pravidla víc kontextu: proč vzniklo, kdo ho navrhl, co se stalo při ověření a jaké byly alternativy. V pracovním pravidle to obvykle škodí. Pravidlo má pomoci v okamžiku rozhodnutí, ne učit historii procesu.
+
+Zachovejte jen:
+
+- aktuální akci;
+- důvod v jedné větě;
+- hranici, co se nedělá;
+- vlastníka;
+- běžný revizní háček.
+
+Historii nechte v revizním záznamu, pokud má ještě rozhodovací hodnotu. Pokud ne, smažte ji nebo archivujte podle retenčního pravidla. Stabilizované pravidlo nemá být malý román. Má být pracovní nůž, ne pamětní deska.
+
+### Privacy-first kontrola druhého měsíce
+
+Druhé měsíční čtení je dobrý moment zjistit, jestli se kvůli pravidlu nevrátil starý datový zlozvyk jinými dveřmi. Někdy se screenshot zakáže v checklistu, ale objeví se v chatu. Export zmizí z přílohy, ale někdo ho uloží do sdílené složky "dočasně". Dočasně je v digitálním provozu zvláštní slovo: často znamená "dokud si toho někdo všimne".
+
+Projít:
+
+- nevznikly nové screenshoty zákaznických detailů;
+- nevznikl pomocný export kvůli kontrole pravidla;
+- lidé nepřesunuli citlivý kontext do chatu nebo poznámek;
+- výjimky mají vlastníka, důvod a datum konce;
+- příklady v pravidle používají anonymizované nebo syntetické údaje;
+- zůstává jasné, že minimum dat je součást kvality práce, ne právní dekorace.
+
+Krátký zápis:
+
+```text
+Druhé měsíční čtení neukázalo návrat screenshotů ani pomocných exportů. Pravidlo stačí ponechat beze změny.
+```
+
+Varovný zápis:
+
+```text
+Pravidlo se použilo, ale kvůli jistotě vznikla kopie exportu v pracovní složce. Opravujeme hranici pravidla a mažeme export po předání stavové věty.
+```
+
+### Kontrolní karta po druhém čtení
+
+Použijte krátkou kartu. Pokud ji nedokážete vyplnit za pět minut, kontrolujete příliš široký problém.
+
+```text
+Stabilizované pravidlo:
+Kanonické pracovní místo:
+Kontrolovaný běžný průchod:
+Nalezeno bez vysvětlování: ano/ne
+Použito v práci: ano/ne
+Vznikla pomocná stopa: ano/ne
+Privacy-first nález:
+Stav po kontrole: ponechat / opravit místo / opravit znění / zpřesnit hranici / zrušit
+Jedna dokončená úprava:
+Další běžný revizní háček:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizované pravidlo: stav poptávek jednou větou bez screenshotu detailu.
+Kanonické pracovní místo: zákaznický předávací checklist.
+Kontrolovaný běžný průchod: měsíční předání portálu klientovi.
+Nalezeno bez vysvětlování: ano.
+Použito v práci: ano.
+Vznikla pomocná stopa: ne.
+Privacy-first nález: žádný screenshot, žádný export, žádná kopie v chatu.
+Stav po kontrole: ponechat.
+Jedna dokončená úprava: žádná, pravidlo zůstává beze změny.
+Další běžný revizní háček: další měsíční čtení jen při novém nálezu.
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu stabilizovanou měsíční úpravu a jeden skutečný průchod od posledního čtení.
+
+1. Otevřete kanonické pracovní místo pravidla.
+2. Najděte jeden běžný průchod, kde se pravidlo mělo použít.
+3. Zapište, jestli bylo nalezené bez vysvětlování.
+4. Zapište, jestli člověk dokončil výstup bez staré měsíční historie.
+5. Projděte, jestli nevznikl screenshot, export, kopie v chatu nebo pomocná tabulka.
+6. Rozhodněte stav: ponechat, opravit místo, opravit znění, zpřesnit hranici nebo zrušit.
+7. Pokud je potřeba změna, udělejte jednu nejmenší úpravu a vraťte se do běžného rytmu.
+
+Výstup:
+
+```text
+Stabilizované pravidlo po dalším měsíčním čtení buď zůstává beze změny, nebo má jednu konkrétní opravu bez nové kontrolní vrstvy.
+```
+
+### Codyho komentář
+
+Můj pohled: dobré pravidlo po stabilizaci trochu znudí. Lidé ho najdou, použijí a jdou dál. To je výhra. Pokud pravidlo pořád vyžaduje vysvětlování, hlídání a malé obřady kolem sebe, ještě není pravidlem. Je to procesní suvenýr. A ty se množí rychleji než rozumné pracovní návyky, když jim člověk nechá vlastní složku.
+
+### Checklist kapitoly
+
+- Vybrali jste jen jednu stabilizovanou měsíční úpravu?
+- Kontrolujete skutečný běžný průchod, ne vzpomínku na workshop?
+- Bylo pravidlo nalezené v místě práce?
+- Bylo použité bez vysvětlování původní měsíční historie?
+- Vznikl výstup, kvůli kterému pravidlo existuje?
+- Nevznikla pomocná stopa v chatu, exportu, screenshotu nebo dočasné tabulce?
+- Rozlišili jste problém místa, znění a hranice?
+- Nepřidáváte do pravidla starou historii jen proto, že ji máte po ruce?
+- Zůstává v pravidle jen akce, důvod, hranice, vlastník a revizní háček?
+- Má každá výjimka vlastníka, důvod a datum konce?
+- Pokud je potřeba oprava, je to jedna dokončená úprava?
+- Vrací se kontrola zpět do běžného měsíčního čtení místo nového procesu?
+
+Kontrola po dalším čtení má chránit stabilizované pravidlo před dvěma extrémy: zapomenutím a přerůstáním. Buď se pravidlo ztratí, nebo kolem sebe nabalí další vysvětlování. Správný stav je prostší: pravidlo pomáhá v práci, nezvyšuje datovou stopu a nepotřebuje zvláštní péči.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha LG o kontrole stabilizovaného měsíčního pravidla po dalším čtení: výběr jedné úpravy, tři signály běžného použití, rozlišení problému místa, znění a hranice, ochrana před návratem staré historie, privacy-first kontrola druhého měsíce, kontrolní karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LF o stabilizaci potvrzené měsíční úpravy do běžného pravidla: vstupní podmínky, přepis historie na aktuální pravidlo, uložení do místa rozhodnutí, uzavření měsíční stopy, privacy-first brána, stabilizační karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LE o ověření měsíční úpravy po prvním normálním použití: návrat k původnímu nálezu, výběr skutečného průchodu, signály nalezení/použití/výsledku/datové stopy, rozlišení zkreslení, rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LD o měsíční čtení revizních záznamů bez nové byrokracie: omezení rozsahu, čtení podle vzorů, výběr jednoho měsíčního nálezu, převod do malé systémové úpravy, privacy-first práce bez kopírování dat, měsíční karta, mini workshop a checklist.
