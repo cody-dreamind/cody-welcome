@@ -90078,8 +90078,234 @@ Můj pohled: první běžný cyklus je pravdivější než nejlepší workshop. 
 
 Dobrá kontrola po stabilizaci je krátká a trochu nudná. Pravidlo se našlo, práce proběhla, stará cesta se nevrátila, datová stopa se nezvětšila a systém nemusí zakládat další kontrolní kolečko. Přesně tak má vypadat provoz, který se zlepšuje bez toho, aby si pokaždé stavěl vlastní lešení.
 
+## Příloha LC: Uzavření kontroly stabilizované úpravy do běžného revizního záznamu
+
+Po první kontrole stabilizované úpravy přichází nenápadný, ale důležitý krok: uzavřít kontrolu tak, aby nezůstala viset jako další speciální režim. V předchozí příloze jsme ověřili, jestli pravidlo prošlo prvním běžným cyklem. Teď je potřeba výsledek převést do normální evidence, uklidit kontrolní podklady a rozhodnout, kde se pravidlo příště zkontroluje.
+
+Bez tohoto uzavření se z každé dobré opravy může stát malý provozní stín. Pravidlo už funguje, ale někdo si nechá extra tabulku. Kontrola už proběhla, ale stará karta zůstane v oběhu. Privacy-first úklid je hotový, ale screenshot "pro jistotu" pořád leží v chatu. Systém se tváří stabilně, jen má za sebou ocásek dočasných věcí.
+
+Pracovní otázka:
+
+```text
+Jak uzavřeme kontrolu stabilizované úpravy tak, aby zůstalo jedno platné pravidlo, jeden běžný revizní záznam a žádná zbytečná datová stopa?
+```
+
+Výchozí pravidlo:
+
+```text
+Po potvrzeném běžném cyklu nepřidávejte novou kontrolní vrstvu. Přepište výsledek do běžného revizního záznamu, smažte dočasné podklady a nechte pravidlo žít v rytmu, který už tým používá.
+```
+
+### Rozlište výsledek kontroly od materiálů kontroly
+
+Nejprve oddělte, co má zůstat, od toho, co vzniklo jen kvůli ověření.
+
+Zůstat má:
+
+- stav pravidla po kontrole;
+- jedna věta, proč je stav zvolený;
+- odkaz na kanonické pracovní místo;
+- nejbližší běžný revizní rytmus;
+- případná jedna oprava místa nebo znění;
+- informace, že privacy-first stopa byla uklizená.
+
+Zmizet nebo se zkrátit má:
+
+- pracovní poznámky z ověřování;
+- screenshoty, exporty a dočasné přílohy;
+- duplicitní checklisty mimo kanonické místo;
+- staré odkazy na přechodové instrukce;
+- soukromé komentáře v chatech, které nahrazují pravidlo;
+- osobní údaje v příkladech, které už nejsou potřeba pro rozhodnutí.
+
+Praktický test:
+
+```text
+Kdyby se k pravidlu za měsíc vrátil někdo nový, potřebuje vidět celý průběh kontroly, nebo mu stačí stav, důvod a další rytmus?
+```
+
+Ve většině případů stačí stav, důvod a další rytmus. Historie je užitečná jen tehdy, když chrání před opakováním chyby. Pokud jen dokazuje, že někdo práci udělal, patří pryč nebo do velmi krátkého logu.
+
+### Přepište kontrolu do jedné revizní věty
+
+Revizní věta má být krátká a provozní. Není to report pro vedení ani dramatický příběh o zlepšování procesu. Je to malý zápis, který řekne, co se stalo a co platí dál.
+
+Tvar věty:
+
+```text
+Po [běžný cyklus] má pravidlo [stav], protože [konkrétní důvod]; další kontrola proběhne v [běžný rytmus] a dočasné podklady byly [uklizené / nejsou potřeba / mají výjimku do data].
+```
+
+Příklad:
+
+```text
+Po prvním zákaznickém předání má pravidlo Ponechat, protože souhrn poptávek stačil bez exportu detailu; další kontrola proběhne v měsíčním review předávacích podkladů a dočasné podklady nebyly potřeba.
+```
+
+Když je potřeba drobná oprava:
+
+```text
+Po prvním release cyklu má pravidlo Doladit místo, protože tým našel instrukci až přes starý odkaz; odkaz v release checklistu se opraví do pátku a ověření proběhne při příštím release.
+```
+
+Všimněte si, že věta nepíše, kdo udělal chybu. Popisuje pracovní tok. To je důležité. Cílem není evidovat výkon lidí, ale udržet systém, který lidem pomáhá rozhodovat bez zbytečné improvizace.
+
+### Zavřete přechodové opory
+
+Přechodové opory jsou věci, které byly užitečné při změně, ale škodí po stabilizaci. Často vypadají nevinně:
+
+- dočasná tabulka s kontrolními průchody;
+- komentář v dokumentu "zatím používejte novou verzi";
+- připnutá zpráva v chatu;
+- starý checklist s poznámkou "neaktuální";
+- kopie nové šablony v osobní složce;
+- ruční připomínka v kalendáři autora změny.
+
+Po uzavření kontroly udělejte tři kroky:
+
+1. Pokud opora obsahuje rozhodnutí, přepište ho do kanonického pravidla nebo revizního záznamu.
+2. Pokud opora obsahuje osobní data, exporty nebo screenshoty, smažte je podle retenčního pravidla.
+3. Pokud opora jen připomíná, že změna proběhla, nahraďte ji odkazem na běžné pracovní místo nebo ji odstraňte.
+
+Krátký příklad:
+
+```text
+Dočasná tabulka ověření obsahovala tři řádky: stav cyklu, poznámku k odkazu a informaci o datové stopě. Stav se přepsal do měsíčního revizního logu, odkaz se opravil v checklistu a tabulka se smazala.
+```
+
+Tohle není byrokratická čistota pro radost. Je to prevence situace, kdy tým za půl roku neví, jestli platí pravidlo, kontrolní tabulka, starý komentář nebo osobní vzpomínka člověka, který zrovna není online.
+
+### Napojte pravidlo na existující rytmus
+
+Po kontrole se neptejte "jaký nový rytmus založíme". Ptejte se:
+
+```text
+Kde už tým přirozeně kontroluje podobnou práci?
+```
+
+Možné rytmy:
+
+- měsíční review předávacích podkladů;
+- kvartální kontrola dodavatelů;
+- release retrospektiva;
+- supportní triage;
+- onboardingové review;
+- úklid dočasných exportů;
+- kontrola kanonického indexu standardů.
+
+Nový rytmus založte jen tehdy, když neexistuje žádné přirozené místo a riziko je dost velké. I pak ho formulujte úzce. "Každý měsíc projít všechna pravidla" je recept na únavu. "Při měsíčním review ověřit, jestli předávací checklist nevyrábí nové exporty" je použitelný háček.
+
+Rozhodovací mini tabulka:
+
+```text
+Pravidlo se týká předání -> připojit k review předávacích podkladů
+Pravidlo se týká release -> připojit k release retrospektivě
+Pravidlo se týká supportu -> připojit k supportní triage
+Pravidlo se týká datové stopy -> připojit k retenčnímu nebo privacy-first úklidu
+Pravidlo se týká onboardingového chování -> připojit k onboardingovému review
+```
+
+### Privacy-first uzavření
+
+Uzavření kontroly je poslední šance zastavit nenápadné hromadění důkazních dat. U privacy-first provozu nestačí říct, že pravidlo už data nesbírá. Je potřeba ověřit, že data nevznikla okolo kontroly samotné.
+
+Před uzavřením projděte:
+
+- jestli kontrolní záznam neobsahuje jména zákazníků, e-maily nebo konkrétní poptávky;
+- jestli dočasné exporty mají datum smazání nebo už byly smazané;
+- jestli screenshoty z chatu nebyly použité místo aktualizace kanonického pravidla;
+- jestli příklady v dokumentaci používají anonymizovaná nebo syntetická data;
+- jestli oprávnění k dočasné složce nezůstala širší než oprávnění ke kanonickému místu;
+- jestli výjimka, pokud existuje, má vlastníka a konec platnosti.
+
+Bezpečný závěrečný zápis:
+
+```text
+Kontrola uzavřena bez dočasných exportů. Revizní záznam obsahuje jen stav pravidla, důvod a další rytmus. Příklady jsou anonymizované a starý odkaz byl odstraněn.
+```
+
+Rizikový zápis:
+
+```text
+Kontrola uzavřena, podklady ponechány pro případnou budoucí analýzu.
+```
+
+"Pro případnou budoucí analýzu" je často jen elegantní název pro neochotu uklidit. Pokud nevíte, jaké konkrétní rozhodnutí podklad podpoří, nemá v běžném provozu zůstávat.
+
+### Uzavírací karta
+
+Použijte jednu krátkou kartu. Jejím cílem je zavřít smyčku, ne otevřít další projekt.
+
+```text
+Stabilizovaná úprava:
+Výsledek prvního běžného cyklu:
+Revizní věta:
+Kanonické pracovní místo:
+Běžný rytmus další kontroly:
+Přechodové opory k uzavření:
+Privacy-first úklid:
+Jedna drobná oprava, pokud existuje:
+Vlastník:
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizovaná úprava: zákaznické předání používá agregovaný souhrn místo exportu poptávek.
+Výsledek prvního běžného cyklu: Ponechat.
+Revizní věta: Po prvním předání má pravidlo Ponechat, protože souhrn stačil pro další práci bez exportu detailu; další kontrola proběhne v měsíčním review předávacích podkladů.
+Kanonické pracovní místo: zákaznický předávací checklist.
+Běžný rytmus další kontroly: měsíční review předávacích podkladů.
+Přechodové opory k uzavření: dočasná ověřovací tabulka a připnutá zpráva v chatu.
+Privacy-first úklid: tabulka smazána, zpráva nahrazena odkazem na checklist, žádný export nevznikl.
+Jedna drobná oprava, pokud existuje: žádná.
+Vlastník: vlastník předávacího checklistu.
+Datum uzavření: 2026-05-19.
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu kontrolu stabilizované úpravy, která už má výsledek po prvním běžném cyklu.
+
+1. Napište jednu revizní větu.
+2. Určete kanonické pracovní místo.
+3. Najděte přirozený běžný rytmus další kontroly.
+4. Sepište přechodové opory, které mají zmizet.
+5. Projděte privacy-first úklid dočasných podkladů.
+6. Zapište vlastníka a datum uzavření.
+7. Odstraňte nebo zkraťte vše, co už nemá konkrétní rozhodovací účel.
+
+Výstup:
+
+```text
+Kontrola stabilizované úpravy je uzavřená v běžném revizním záznamu, kanonické pravidlo je jediné platné místo a dočasné podklady byly uklizené nebo mají jasnou výjimku do data.
+```
+
+### Codyho komentář
+
+Můj pohled: dobrý provoz se nepozná podle toho, kolik má kontrol. Pozná se podle toho, kolik speciálních kontrol dokáže po ověření zrušit. Když každé zlepšení nechá za sebou novou tabulku, nový rituál a novou složku, systém se sice učí, ale zároveň tloustne. A tlustý provoz se časem tváří jako governance, i když je to jen neuklizená minulost v lepším saku.
+
+### Checklist kapitoly
+
+- Má kontrola po prvním běžném cyklu jasný stav?
+- Je výsledek přepsaný do jedné revizní věty?
+- Vede revizní věta na kanonické pracovní místo?
+- Je další kontrola napojená na existující rytmus?
+- Nevznikl nový speciální meeting, tabulka nebo proces bez silného důvodu?
+- Jsou přechodové opory uzavřené, zkrácené nebo odstraněné?
+- Zůstaly jen informace, které pomohou příštímu rozhodnutí?
+- Byly odstraněné staré odkazy, staré šablony a připnuté přechodové zprávy?
+- Neobsahuje revizní záznam zbytečná osobní data?
+- Jsou dočasné exporty, screenshoty a pracovní poznámky smazané nebo mají výjimku do data?
+- Mají anonymizované příklady přednost před reálnými daty?
+- Je vlastník pravidla jasný i bez autora původní změny?
+
+Uzavření kontroly je malý provozní úklid s velkým dopadem. Tým má po něm vědět, co platí, kde to najde a kdy se k tomu vrátí. Všechno ostatní má zmizet, nebo aspoň přestat předstírat, že je součástí běžného provozu.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha LC o uzavření kontroly stabilizované úpravy do běžného revizního záznamu: oddělení výsledku od kontrolních materiálů, revizní věta, zavření přechodových opor, napojení na existující rytmus, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LB o kontrole stabilizované úpravy pravidla po prvním běžném cyklu: výběr skutečného cyklu, sledování nalezení/použití/dokončení, návrat staré cesty, rozhodovací stavy, privacy-first kontrola, kontrolní karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LA o stabilizaci potvrzené úpravy pravidla do běžného provozu: vstupní brána pro stav Potvrdit, přepis ověřovací historie do aktuálního pravidla, konečný domov pravidla, zavření přechodových opor, privacy-first úklid, stabilizační karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KZ o ověření úpravy pravidla po příštím normálním použití: návrat k původnímu nálezu, výběr reálné situace, signály nalezení/použití/výsledku/datové stopy, rozhodovací stavy, privacy-first kontrola, ověřovací karta, mini workshop a checklist.
