@@ -86922,8 +86922,218 @@ Můj pohled: systémová úprava je dobrá jen tehdy, když budoucí práce prob
 
 Provedení systémové úpravy má být krátké, konkrétní a trochu nudné. To je kompliment. Pokud se z něj stane velká iniciativa, pravděpodobně se práce přesunula od odstranění tření k budování dalšího aparátu. Dobrá úprava zmizí do šablony tak nenápadně, že příští člověk udělá správnou věc a ani netuší, kolik starého zmatku mu právě nepadlo na stůl.
 
+## Příloha KM: Ověření systémové úpravy po prvním použití
+
+Příloha KL skončila provedenou systémovou úpravou. Tahle příloha řeší chvíli, kdy se úprava poprvé potká s normální prací. Ne s ukázkovým scénářem, ne s autorem změny, ne s ideálním checklistem připraveným pro revizi. S běžnou situací, ve které má člověk něco dodat a nechce přemýšlet o historii portfoliových poučení.
+
+Ověření je důležité právě proto, že systémové úpravy často vypadají dobře při psaní. Věta v šabloně je jasná, odkaz na zdroj pravdy sedí, stará cesta je označená jako nahrazená. Jenže skutečný test přijde až ve chvíli, kdy někdo podle nového místa pracuje pod běžným tlakem. Pokud změnu najde, pochopí a použije bez extra vysvětlování, systém se zlepšil. Pokud ji mine, obejde nebo kvůli ní začne sbírat víc dat než dřív, úprava ještě není hotová.
+
+Pracovní otázka:
+
+```text
+Pomohla provedená systémová úprava při prvním běžném použití, nebo jen přidala další pravidlo do systému?
+```
+
+Výstupem není dlouhá retrospektiva. Výstupem je rozhodnutí, jestli změnu ponechat, drobně opravit, vrátit k přepracování, nebo zavřít jako slepou cestu.
+
+### Vyberte první normální použití
+
+Nečekejte na perfektní příležitost. První normální použití je nejbližší situace, ve které by upravené pracovní místo mělo přirozeně pomoci. Pokud jste změnili šablonu checklistu, je to první nový checklist. Pokud jste upravili onboardingovou kartu, je to první onboarding dané role. Pokud jste přidali odkaz na kanonickou privacy kartu, je to první práce s formulářem, trackingem nebo datovým tokem, kde by se ten odkaz měl použít.
+
+Dobré první použití splňuje tři podmínky:
+
+- práce by vznikla i bez ověřování,
+- člověk používá běžnou trasu, ne speciální testovací scénář,
+- výsledek jde posoudit podle hotového artefaktu nebo rozhodnutí.
+
+Špatné první použití je ukázka pro tým, kontrola autorem úpravy nebo ručně vedený průchod, ve kterém někdo člověku dopředu říká, co má najít. To může být užitečné pro školení, ale ne pro ověření systému. Systém má fungovat i tehdy, když u něj nestojí člověk, který ho právě opravil.
+
+Příklad:
+
+```text
+První normální použití: nový projektový checklist pro kontaktní formulář.
+Upravené místo: šablona checklistu, část privacy a formuláře.
+Očekávaný výsledek: checklist odkazuje na kanonickou kartu formulářů a zapisuje jen projektovou odchylku.
+```
+
+Tohle je dost konkrétní. Neměříte celou kvalitu projektu. Měříte, jestli úprava změnila přesně to chování, kvůli kterému vznikla.
+
+### Sledujte práci, ne člověka
+
+Ověření systémové úpravy nemá být dohled nad výkonem jednotlivce. Sledujte trasu práce: co člověk otevřel, co našel, jaké rozhodnutí zapsal a jaký artefakt vznikl. Neřešte, jestli byl dost pečlivý podle vaší představy. Řešte, jestli systém vedl k lepšímu výsledku bez neúměrné námahy.
+
+Prakticky stačí odpovědět na čtyři otázky:
+
+1. Našel člověk upravené pracovní místo v okamžiku, kdy ho potřeboval?
+2. Pochopil novou instrukci bez dalšího vysvětlování?
+3. Vznikl požadovaný výsledek v hotovém artefaktu?
+4. Nevznikla nová ruční práce, evidence nebo datová stopa?
+
+Pokud odpověď na první otázku zní ne, problém je v trase. Změna může být napsaná dobře, ale je na špatném místě. Pokud selže druhá otázka, problém je v jazyce. Pokud selže třetí, problém je v napojení na výsledek. Pokud selže čtvrtá, změna možná opravila jedno tření a vytvořila jiné.
+
+Příklad špatného ověřování:
+
+```text
+Autor checklistu si nevšiml nové privacy věty, musíme mu to připomenout.
+```
+
+Silnější zápis:
+
+```text
+Nová privacy věta je až za obecnou sekcí poznámek, kterou lidé při zakládání checklistu přeskakují. Přesunout ji přímo k poli pro formulář.
+```
+
+První zápis ukazuje prstem na člověka. Druhý opravuje systém.
+
+### Porovnejte výsledek s původní větou
+
+Vraťte se k měsíční nebo změnové větě z KL. Ta drží rozsah pohromadě:
+
+```text
+Kvůli opakovanému [typ tření] upravíme [jedno pracovní místo] tak, aby příští podobná práce [lepší výsledek].
+```
+
+Ověření má odpovědět, jestli se lepší výsledek opravdu objevil. Nepřidávejte nové cíle jen proto, že jste při kontrole viděli další nedokonalosti. První použití často odkryje spoustu věcí: staré názvy, dlouhý text, nejasné vlastnictví, chybějící příklad. Zapište je bokem, ale rozhodnutí dělejte podle původního slibu.
+
+Příklad porovnání:
+
+```text
+Původní slib: checklist bude odkazovat na kanonickou kartu a nebude kopírovat privacy pravidla.
+Výsledek prvního použití: checklist obsahuje odkaz na kartu, ale autor ještě opsal dvě obecná pravidla do poznámek.
+Stav: částečně potvrzeno, potřebuje drobnou korekci šablony.
+```
+
+Tohle je přesnější než obecné "funguje/nefunguje". Změna pomohla, ale nezavřela starý návyk úplně. Další krok nemá být nové školení. Nejdřív upravte šablonu tak, aby pole pro poznámky nevybízelo k opisování obecných pravidel.
+
+### Rozlište čtyři stavy po prvním použití
+
+Po ověření nepoužívejte mlhavé závěry typu "ještě sledovat". To je oblíbená věta pro práci, kterou nikdo nechce rozhodnout. Lepší je vybrat jeden ze čtyř stavů.
+
+| Stav | Co znamená | Další krok |
+| --- | --- | --- |
+| Potvrzeno | Úprava byla nalezena, pochopena a vedla k očekávanému výsledku. | Ponechat a uzavřít ověření. |
+| Drobná korekce | Úprava pomohla, ale jazyk, pořadí nebo příklad ještě vytváří tření. | Opravit stejné pracovní místo. |
+| Špatné místo | Instrukce je rozumná, ale člověk ji v práci nepotká včas. | Přesunout do bližšího pracovního místa. |
+| Nepotvrzeno | Úprava neřeší původní tření nebo vytváří větší cenu než problém. | Vrátit k přepracování nebo zrušit. |
+
+Stav vybírejte podle důkazů z práce, ne podle pocitu autora změny. Autor má přirozeně tendenci vidět záměr. Uživatel systému vidí trasu, text a výsledek. V provozu rozhoduje to druhé.
+
+### Privacy-first kontrola prvního použití
+
+První použití je dobrý moment pro kontrolu, jestli úprava opravdu zmenšila datovou stopu. Nejde jen o to, zda text říká "privacy-first". Jde o to, co se při práci skutečně uložilo.
+
+Zkontrolujte:
+
+- zda nový artefakt neobsahuje kopie obecných pravidel místo odkazu na zdroj pravdy,
+- zda se kvůli ověření neukládaly screenshoty, celé konverzace nebo osobní údaje bez jasného důvodu,
+- zda příklady v šabloně nejsou převzaté z reálných zákaznických dat, kde by stačil anonymní vzor,
+- zda se nezavedlo ruční sledování konkrétních lidí místo kontroly hotového výstupu,
+- zda staré dočasné podklady po ověření ještě mají účel.
+
+Silný zápis privacy-first ověření:
+
+```text
+Ověření proběhlo z hotového checklistu. Nekontrolovali jsme historii editací ani autora. Checklist obsahuje odkaz na kanonickou kartu a jen jednu projektovou odchylku. Starý opsaný příklad byl odstraněn.
+```
+
+Slabý zápis:
+
+```text
+Zkontrolovali jsme, kdo checklist vyplnil a jak postupoval.
+```
+
+Ten druhý zápis možná něco zjistí, ale snadno sklouzne k dohledu nad člověkem. Privacy-first provoz má měřit systém tak, aby lidem nemusel dýchat na záda.
+
+### Karta ověření systémové úpravy
+
+```text
+Původní systémová věta:
+Provedená úprava:
+První normální použití:
+
+Našel člověk upravené místo včas:
+Pochopil instrukci bez vysvětlování:
+Vznikl očekávaný výsledek:
+Vznikla nová ruční práce nebo evidence:
+
+Stav po ověření:
+Co potvrzujeme:
+Co je potřeba opravit:
+Kde se oprava provede:
+
+Privacy-first kontrola:
+Jaké podklady byly použity:
+Co se nesbíralo:
+Co se maže nebo zkracuje:
+
+Jednovětý závěr:
+```
+
+Příklad:
+
+```text
+Původní systémová věta: Kvůli opakovanému kopírování privacy pravidel upravíme šablonu checklistu tak, aby nová práce vždy odkazovala na kanonickou kartu a nevytvářela vlastní kopii pravidel.
+Provedená úprava: Do části formuláře a tracking přidána instrukce s odkazem na kanonickou kartu.
+První normální použití: checklist pro nový kontaktní formulář.
+
+Našel člověk upravené místo včas: ano.
+Pochopil instrukci bez vysvětlování: částečně.
+Vznikl očekávaný výsledek: odkaz ano, ale dvě obecná pravidla byla opsaná do poznámek.
+Vznikla nová ruční práce nebo evidence: ne.
+
+Stav po ověření: drobná korekce.
+Co potvrzujeme: odkaz na kanonickou kartu pomohl.
+Co je potřeba opravit: poznámkové pole svádí k opisování obecných pravidel.
+Kde se oprava provede: ve stejné šabloně, hned pod poznámkovým polem.
+
+Privacy-first kontrola: ověřeno z hotového checklistu, bez sledování autora.
+Jaké podklady byly použity: jen finální checklist a kanonická karta.
+Co se nesbíralo: historie editací, screenshoty formuláře, osobní údaje z testovacích odpovědí.
+Co se maže nebo zkracuje: opsaná obecná pravidla v checklistu.
+
+Jednovětý závěr: Systémová úprava je užitečná, ale šablona potřebuje drobnou korekci, aby nevybízela k opisování pravidel do poznámek.
+```
+
+### Mini workshop na 10 minut
+
+1. Dvě minuty: pojmenujte první normální použití.
+2. Dvě minuty: porovnejte hotový výstup s původní systémovou větou.
+3. Dvě minuty: odpovězte na čtyři otázky nalezení, pochopení, výsledku a ceny.
+4. Dvě minuty: vyberte jeden ze čtyř stavů.
+5. Jednu minutu: proveďte privacy-first kontrolu podkladů.
+6. Jednu minutu: napište jednovětý závěr a další krok.
+
+Výstup:
+
+```text
+Jedno rozhodnutí o stavu systémové úpravy a případně jedna malá korekce ve stejném pracovním místě.
+```
+
+### Codyho komentář
+
+Můj pohled: první použití je nejférovější recenze systému. Neptá se, co jste chtěli říct. Ptá se, co šlo udělat bez vysvětlování. To je občas nepříjemné, protože hezká věta v dokumentaci se najednou ukáže jako cedule na konci slepé chodby. Ale právě proto je tenhle test cenný. Ušetří týmu měsíce tichého obcházení pravidla, které všichni formálně schválili a nikdo reálně nepoužívá.
+
+### Checklist kapitoly
+
+- Vybrali jste první normální použití, ne demonstrační scénář?
+- Kontrolujete hotový výstup a trasu práce, ne výkon jednotlivce?
+- Vrátili jste se k původní systémové větě z KL?
+- Nepřidáváte do ověření nové cíle mimo původní slib?
+- Je jasné, zda člověk upravené místo našel včas?
+- Je instrukce pochopitelná bez dalšího vysvětlování?
+- Vznikl očekávaný výsledek v hotovém artefaktu?
+- Nevznikla nová ruční evidence, meeting nebo kontrolní aparát?
+- Vybrali jste jeden stav: potvrzeno, drobná korekce, špatné místo nebo nepotvrzeno?
+- Je případná oprava malá a ve správném pracovním místě?
+- Ověřili jste privacy-first dopad podle skutečně uložených podkladů?
+- Mažete nebo zkracujete dočasné důkazy, které už nemají účel?
+- Má ověření jednovětý závěr a jasný další krok?
+
+Ověření systémové úpravy má být krátké, ale nemá být symbolické. Když ho přeskočíte, riskujete, že budete dál vyrábět pravidla, která se tváří jako systémová zlepšení a v praxi jen rozšiřují dokumentační šum. Když ho uděláte poctivě, často stačí jedna malá korekce a změna se opravdu usadí v práci.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KM o ověření systémové úpravy po prvním použití: výběr prvního normálního použití, sledování práce místo člověka, porovnání s původní systémovou větou, čtyři stavy po ověření, privacy-first kontrola, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KL o provedení systémové úpravy z měsíční kontroly poučení: práce s měsíční větou, výběr nejbližšího pracovního místa, nejmenší dostatečná změna, úprava okolního textu, zavření staré cesty, privacy-first provedení, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KK o měsíční kontrolu uzavřených poučení: výběr uzavřených poučení, hledání opakovaného typu tření, stav portfolia, převod jednoho vzoru do systémové úpravy, privacy-first kontrola portfolia, karta měsíční kontroly, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KJ o uzavření potvrzeného poučení po běžném cyklu: vstupní brána, přesun hodnoty do zdroje pravdy, uzavírací věta, zavření dočasných opor, lehký revizní háček, privacy-first uzávěrka, uzavírací karta, příklad, mini workshop a checklist.
