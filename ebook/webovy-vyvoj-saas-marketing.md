@@ -89248,8 +89248,229 @@ Když workshop začne řešit celé portfolio pravidel, zastavte ho. Tohle není
 
 První běžná revize má pravidlo vrátit do normálu, ne ho znovu vystavit pod reflektor. Když pravidlo funguje, nechte ho pracovat. Když nefunguje rytmus, přesuňte ho. Když se změnila realita, znovuotevřete konkrétní tření a opravte nejbližší pracovní místo.
 
+## Příloha KY: Převod nálezu z první běžné revize do jedné úpravy pravidla
+
+První běžná revize může skončit čistě: pravidlo funguje, stopa je krátká a tým ho nechá dál běžet. Často ale ukáže jeden konkrétní nález. Pravidlo je správné, ale leží o krok vedle. Minimální výstup stačí pro běžný případ, ale chybí věta pro výjimku. Stará cesta je zavřená ve šabloně, ale pořád žije v připnutém chatu. Nebo se změnil pracovní tok a pravidlo začalo chránit včerejší problém.
+
+Tahle příloha řeší okamžik po revizi. Cíl není otevřít nový projekt. Cíl je vzít jeden nález a převést ho do jedné dokončené úpravy pravidla, která se dá ověřit při příštím použití.
+
+Pracovní otázka:
+
+```text
+Jaká nejmenší úprava pravidla, jeho umístění nebo staré cesty odstraní nález z první běžné revize?
+```
+
+Výchozí pravidlo:
+
+```text
+Jeden revizní nález znamená jednu úpravu v jednom pracovním místě. Pokud nález potřebuje víc práce, rozdělte ho a začněte místem, kde vzniká zbytečná datová stopa nebo největší tření.
+```
+
+### Začněte revizní větou
+
+Nález z revize musí jít říct jednou pracovní větou. Pokud to nejde, pravděpodobně ještě nemáte nález, ale hromadu dojmů.
+
+Dobré revizní věty:
+
+- Pravidlo pro stavovou větu je správné, ale chybí v předávacím checklistu, kde export vzniká nejdřív.
+- Screenshoty se nevrátily v issue, ale lidé je pořád posílají do chatu při výpadku CRM.
+- Minimální výstup stačí pro běžný test formuláře, ale nestačí pro výpadek automatické odpovědi.
+- Dočasné exporty mají retenční pravidlo, ale uzavírací karta neobsahuje krok smazání.
+- Nový člověk pravidlo najde až přes autora změny, protože kanonický index používá jiný název situace.
+
+Slabé revizní věty:
+
+- Musíme to celé líp popsat.
+- Lidi to pořád nechápou.
+- Dokumentace je neaktuální.
+- Privacy je potřeba víc hlídat.
+- Asi potřebujeme školení.
+
+Slabé věty mohou být pravdivé, ale nejsou akční. Neříkají, kde se práce láme. Dobrá revizní věta obsahuje tři věci: co se stalo, kde se to stalo a proč je to problém pro práci nebo datovou stopu.
+
+Šablona:
+
+```text
+Při [pracovní situace] vznikl nález [konkrétní tření nebo stopa], protože [nejbližší příčina v pravidle, umístění nebo staré cestě].
+```
+
+Příklad:
+
+```text
+Při zákaznickém předání vznikl export seznamu poptávek, protože pravidlo pro agregovaný souhrn žije až v měsíčním review a předávací checklist pořád žádá přílohu.
+```
+
+Tohle je úpravitelný nález. Neříká "tým nedodržuje pravidla". Říká, že pravidlo je pozdě a stará šablona je pořád silnější.
+
+### Vyberte typ úpravy
+
+Po revizní větě nerozšiřujte dokumentaci automaticky. Nejdřív vyberte typ úpravy. Většina nálezů po první běžné revizi patří do jedné z pěti skupin.
+
+1. `Přesunout`: pravidlo je správné, ale je na špatném místě.
+2. `Zpřesnit`: pravidlo je na správném místě, ale chybí jeden stav, příklad nebo výjimka.
+3. `Zkrátit`: pravidlo je moc dlouhé a lidé kvůli tomu sahají po staré cestě.
+4. `Zavřít starou cestu`: nové pravidlo existuje, ale starý odkaz, pole nebo chatová zkratka zůstaly pohodlnější.
+5. `Změnit rytmus`: kontrola přichází moc brzy, moc pozdě nebo v místě, kde už nejde zabránit zbytečné stopě.
+
+Příklady:
+
+- `Přesunout`: pravidlo z měsíčního review doplnit do zákaznického předávacího checklistu.
+- `Zpřesnit`: přidat stavovou větu pro výpadek automatické odpovědi.
+- `Zkrátit`: nahradit dlouhou pasáž v issue šabloně třemi volbami a jedním příkladem.
+- `Zavřít starou cestu`: odstranit pole "příloha exportu" ze staré šablony.
+- `Změnit rytmus`: kontrolovat dočasné podklady při uzavření incidentu, ne až na konci měsíce.
+
+Jedna úprava může mít vedlejší malé kroky, ale musí mít jeden hlavní typ. Když se snažíte zároveň přesunout, přepsat, proškolit, změnit nástroj a zavést nový reporting, už neřešíte revizní nález. Rozjíždíte projekt. Někdy je to potřeba, ale neříkejte tomu drobná úprava pravidla.
+
+### Opravte místo rozhodnutí
+
+Nejlepší úprava se děje tam, kde se člověk rozhoduje. Ne tam, kde se o rozhodnutí zpětně píše.
+
+Příklady míst rozhodnutí:
+
+- pole v issue šabloně,
+- řádek v release checklistu,
+- krok v zákaznickém předávacím checklistu,
+- otázka v incidentní uzavírací kartě,
+- název položky v kanonickém indexu,
+- výchozí pohled v dashboardu,
+- oprávnění ke starému exportu,
+- připnutý postup v pracovním chatu.
+
+Když export vzniká při předání, neopravujte primárně měsíční reporting. Když screenshot vzniká při debugování formuláře, neopravujte jen obecnou privacy stránku v interní wiki. Když nový člověk nenajde pravidlo, neopravujte jen autora, který mu ho vysvětlil. Opravte trasu k pravidlu.
+
+Krátký test:
+
+```text
+Uvidí člověk úpravu dřív, než udělá starý krok?
+```
+
+Pokud ne, úprava je pozdě. Může být pěkná, ale nechrání práci.
+
+### Držte rozsah na jedné dokončené změně
+
+Po revizi bývá lákavé otevřít celý backlog. Najednou vidíte, že podobný problém je ve formulářích, sales šablonách, onboardingu i supportu. To může být pravda. Ale běžný provoz se zlepšuje tím, že dokončuje malé smyčky, ne tím, že z každého nálezu udělá mapu impéria.
+
+Jedna dokončená úprava má mít:
+
+- jeden zdrojový nález,
+- jeden typ úpravy,
+- jedno pracovní místo,
+- jednu změnu textu, pole, odkazu, oprávnění nebo rytmu,
+- jeden ověřovací okamžik,
+- jednu větu v logu.
+
+Pokud najdete další podobná místa, zapište je jako kandidáty, ale nemíchejte je do stejné úpravy. Tým má po běžné revizi potřebovat méně soustředění, ne víc.
+
+Praktické stop pravidlo:
+
+```text
+Když úprava nejde dokončit bez nové schůzky, nového nástroje nebo nového vlastníka, rozdělte ji. Teď dokončete nejbližší pracovní místo.
+```
+
+### Privacy-first kontrola úpravy
+
+Úprava po revizi je malé místo s velkým privacy dopadem. Právě tady se často rozhoduje, jestli tým začne data držet lehce, nebo jestli si k pravidlu vytvoří novou vrstvu důkazů.
+
+Před provedením úpravy se ptejte:
+
+- Snižuje úprava potřebu screenshotů, exportů, kopií nebo ručních seznamů?
+- Nepřidává úprava nové osobní údaje do šablony jen proto, aby se lépe kontrolovala?
+- Nahrazuje přílohu stavovou větou, agregací nebo odkazem na kanonický záznam?
+- Má případná výjimka retenční datum nebo jasný důvod archivace?
+- Zavírá úprava starou cestu, kde data zůstávala bez vlastníka?
+- Je záznam o úpravě dostatečný bez kopírování zákaznických dat?
+
+Bezpečná úprava:
+
+```text
+Do předávacího checklistu se doplní řádek: "Souhrn poptávek předán agregovaně, bez exportu osobních údajů; detail zůstává v CRM." Staré pole pro přílohu exportu se odstraní.
+```
+
+Riziková úprava:
+
+```text
+Ke každému předání přikládat export poptávek, aby bylo vidět, že se nic neztratilo.
+```
+
+Druhá úprava možná uklidní pocit kontroly, ale zhoršuje datovou stopu. Privacy-first provoz nesmí vyměnit menší nejistotu za větší kopírování dat.
+
+### Karta úpravy po první revizi
+
+Použijte krátkou kartu. Má pomoct dokončit změnu, ne založit další evidenční systém.
+
+```text
+Revizní nález:
+Typ úpravy: Přesunout / Zpřesnit / Zkrátit / Zavřít starou cestu / Změnit rytmus
+Pracovní místo:
+Konkrétní změna:
+Co se nemění:
+Privacy-first dopad:
+Ověření při příštím použití:
+Vlastník:
+Log věta:
+```
+
+Vyplněný příklad:
+
+```text
+Revizní nález: při zákaznickém předání vznikl export seznamu poptávek, protože pravidlo pro agregovaný souhrn žije až v měsíčním review.
+Typ úpravy: Přesunout + zavřít starou cestu.
+Pracovní místo: zákaznický předávací checklist.
+Konkrétní změna: doplnit řádek "poptávky předáváme agregovaně, detail zůstává v CRM" a odstranit pole "příloha exportu".
+Co se nemění: měsíční review dál kontroluje jen souhrnný signál.
+Privacy-first dopad: méně exportů osobních údajů mimo CRM, žádná nová evidence.
+Ověření při příštím použití: další zákaznické předání zkontroluje, zda vznikl agregovaný souhrn bez přílohy.
+Vlastník: člověk odpovědný za předávací checklist.
+Log věta: po první běžné revizi bylo pravidlo přesunuto do předávacího checklistu a staré pole pro export bylo odstraněno.
+```
+
+Všimněte si řádku `Co se nemění`. Je důležitý. Chrání úpravu před nafouknutím. Když jasně řeknete, co teď neřešíte, snížíte riziko, že se malá změna rozteče do pěti směrů.
+
+### Mini workshop na 12 minut
+
+Vezměte jeden nález z první běžné revize.
+
+1. Přepište ho do jedné revizní věty.
+2. Vyberte hlavní typ úpravy.
+3. Najděte pracovní místo, kde se člověk rozhoduje.
+4. Proveďte nejmenší změnu textu, pole, odkazu, oprávnění nebo rytmu.
+5. Napište, co se teď nemění.
+6. Zkontrolujte privacy-first dopad.
+7. Určete první normální použití, na kterém úpravu ověříte.
+
+Výstup:
+
+```text
+Z nálezu [věta] vznikla úprava [konkrétní změna] v místě [pracovní místo]. Ověří se při [příští normální použití].
+```
+
+Když po dvanácti minutách nemáte pracovní místo a konkrétní změnu, nález je buď moc široký, nebo špatně pojmenovaný. Vraťte se k revizní větě.
+
+### Codyho komentář
+
+Můj pohled: zralost týmu se nepozná podle toho, kolik nálezů najde. Pozná se podle toho, kolik nálezů umí převést do malých dokončených změn. Revize bez dokončené úpravy je jen lepší forma stěžování. Úprava bez privacy-first kontroly je zase rychlá cesta k tomu, že si proces začne vyrábět vlastní data navíc. Dobrý provoz má v tomhle směru klidnou disciplínu: jeden nález, jedno místo, jedna změna, jedno ověření.
+
+### Checklist kapitoly
+
+- Má nález z první běžné revize jednu pracovní větu?
+- Obsahuje věta pracovní situaci, konkrétní tření a nejbližší příčinu?
+- Vybrali jste hlavní typ úpravy?
+- Opravujete místo rozhodnutí, ne jen místo zpětného zápisu?
+- Uvidí člověk úpravu dřív, než udělá starý krok?
+- Je rozsah omezený na jedno pracovní místo?
+- Je jasně řečeno, co se teď nemění?
+- Snižuje úprava screenshoty, exporty, kopie nebo ruční seznamy?
+- Nezavádíte novou evidenci jen kvůli kontrole pravidla?
+- Má úprava první normální použití, na kterém se ověří?
+- Má úprava vlastníka a krátkou log větu?
+- Zůstala případná další podobná místa mimo tuto změnu jako samostatní kandidáti?
+
+Převod revizního nálezu do úpravy je malá smyčka, ale drží celý systém při zemi. Pravidlo se učí z reality, aniž by z každého zjištění vznikl nový proces. To je přesně místo, kde privacy-first provoz přestává být heslo a začíná být obyčejná pracovní hygiena.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KY o převodu nálezu z první běžné revize do jedné úpravy pravidla: revizní věta, typy úprav, oprava místa rozhodnutí, omezení rozsahu, privacy-first kontrola, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KX o první revizi pravidla v běžném rytmu: rozlišení revize od nového projektu, kontrola rytmu, stavy Pokračovat/Přesunout/Znovuotevřít, privacy-first revizní stopa, karta, příklady, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KW o uzavření stabilizovaného pravidla do běžného revizního rytmu: vstupní stav Ponechat, výběr nejmenšího existujícího rytmu, uzavírací věta, zrušení přechodových opor, privacy-first úklid, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněny rychlé pracovní trasy do úvodu e-booku: web, aplikace/SaaS, marketing a prodej, privacy-first provoz a třicetiminutový pracovní režim s konkrétními výstupy.
