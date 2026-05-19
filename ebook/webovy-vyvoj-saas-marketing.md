@@ -91354,8 +91354,226 @@ Můj pohled: systém, který neumí snížit intenzitu kontroly, nikdy opravdu n
 
 Přesun do kvartálního přehledu je malá, ale důležitá forma důvěry v provoz. Pravidlo zůstává dohledatelné, má hranice a spouštěč návratu, ale přestává zabírat měsíční pozornost. Tak má vypadat zralá údržba: méně rituálu, více skutečné práce.
 
+## Příloha LI: První kvartální přehled pravidel po přesunu z měsíční péče
+
+Pravidlo přesunuté do kvartálního přehledu není zapomenuté pravidlo. Jen už nemá stát v měsíční frontě jako čerstvá oprava, která potřebuje opatrné hlídání. První kvartální přehled má ověřit, že přesun opravdu snížil provozní zátěž, aniž by se tým vrátil ke starým zkratkám, pomocným exportům nebo nejasným rozhodnutím.
+
+Smysl první kvartální kontroly není znovu otevřít celý příběh pravidla. Smysl je položit jednoduchou otázku: pravidlo zůstalo v práci použitelné, dohledatelné a lehké? Pokud ano, může zůstat v kvartálním režimu. Pokud ne, vraťte ho do měsíční péče nebo opravte jedno konkrétní místo, které v běžné práci selhalo.
+
+Pracovní otázka:
+
+```text
+Zůstalo pravidlo po přesunu do kvartálního přehledu použitelné v normální práci bez návratu staré cesty a bez nové pomocné datové stopy?
+```
+
+Výchozí pravidlo:
+
+```text
+Při prvním kvartálním přehledu kontrolujte jen skutečné použití, návrat starého chování, dohledatelnost pravidla, cenu údržby a privacy-first stopu. Nevracejte se k celé měsíční historii, pokud nenastal spouštěč návratu.
+```
+
+### Začněte kvartální otázkou, ne archivem
+
+Největší riziko první kvartální kontroly je příliš široký start. Tým otevře staré měsíční zápisy, kontrolní karty, screenshoty, chaty a začne si připomínat, proč pravidlo vzniklo. Po půl hodině všichni vědí víc o historii, ale pořád není jasné, jestli pravidlo fungovalo v posledním kvartálu.
+
+Začněte proto krátkou kvartální otázkou:
+
+```text
+Kde se pravidlo v posledním kvartálu reálně použilo a co z toho poznáme?
+```
+
+K odpovědi stačí malý vzorek:
+
+- jeden běžný průchod práce, kde pravidlo mělo pomoct;
+- jeden výstup, který podle pravidla vznikl;
+- jeden dotaz nebo výjimka, pokud se objevila;
+- kontrola, zda nenastal spouštěč návratu do měsíční péče;
+- kontrola, zda kvůli pravidlu nevznikla nová evidence navíc.
+
+Pokud žádný reálný průchod nenajdete, není to automaticky chyba pravidla. Možná situace prostě nenastala. V takovém případě pravidlo nehodnoťte jako úspěšné ani neúspěšné. Zapište stav "bez použití" a nastavte další kontrolu podle toho, zda se pracovní situace ještě opakuje.
+
+### Sledujte pět signálů
+
+První kvartální přehled by měl být krátký, ale ne povrchní. Držte se pěti signálů, které ukazují, jestli pravidlo opravdu přežilo přesun do lehčího režimu.
+
+1. Nalezení: člověk ví, kde pravidlo hledat, bez ptaní v chatu.
+2. Použití: pravidlo vede k dokončenému pracovnímu kroku, ne jen k diskusi.
+3. Výsledek: výstup má pořád rozhodovací hodnotu pro další roli nebo zákazníka.
+4. Cena: pravidlo nepřidalo novou pravidelnou administrativu.
+5. Datová stopa: pravidlo nevyrábí nové kopie osobních, zákaznických nebo citlivých údajů.
+
+Krátký příklad:
+
+```text
+Pravidlo "stav poptávky jednou větou bez screenshotu detailu" se použilo u dvou předání. Delivery lead ho našel v předávacím checklistu, výstup stačil supportu k dalšímu kroku a nevznikly nové screenshoty. Stav: ponechat kvartálně.
+```
+
+Slabý závěr:
+
+```text
+Pravidlo asi funguje, nikdo si nestěžoval.
+```
+
+Silnější závěr:
+
+```text
+Pravidlo ponecháváme v kvartálním přehledu, protože v posledním kvartálu proběhla dvě předání bez návratu screenshotů, výstup byl použitelný pro support a nevznikla nová pomocná evidence.
+```
+
+### Rozlišujte čtyři výsledky kontroly
+
+Po prvním kvartálním přehledu neexistuje jen "dobré" a "špatné". Potřebujete čtyři praktické stavy, aby z kontroly nevznikla mlhavá poznámka.
+
+```text
+Ponechat kvartálně:
+Pravidlo fungovalo, nevznikla nová zátěž a nenastal spouštěč návratu.
+
+Opravit v místě:
+Pravidlo je užitečné, ale selhalo jedno konkrétní místo: název, umístění, hranice výjimky nebo příklad.
+
+Vrátit měsíčně:
+Nastal spouštěč návratu, stará cesta se objevila znovu nebo pravidlo potřebuje několik bližších ověření.
+
+Zrušit nebo sloučit:
+Pracovní situace už neexistuje, pravidlo je kryté jiným pravidlem nebo udržuje zbytečný artefakt.
+```
+
+Důležité je neplést stav "bez použití" se stavem "ponechat". Pokud se pravidlo v kvartálu nepoužilo, zapište to zvlášť:
+
+```text
+Bez použití v kvartálu. Situace se podle sales a delivery nevyskytla. Pravidlo necháváme v kvartálním přehledu ještě jeden cyklus, potom ověříme, zda má pořád existovat.
+```
+
+Tím zabráníte tomu, aby se pravidla hromadila jen proto, že nikomu nepřekážejí. Nepoužívaný standard je pořád standard. Zabírá pozornost, vytváří pocit závazku a časem mate nové lidi.
+
+### Opravujte jen nejbližší místo selhání
+
+Když kvartální kontrola ukáže problém, nesnažte se přepsat celý systém. Vraťte se k nejbližšímu místu selhání. Nejčastější opravy jsou malé:
+
+- pravidlo je v přehledu, ale chybí odkaz z pracovního checklistu;
+- název pravidla používá interní zkratku, které nová role nerozumí;
+- příklad je moc starý a neodpovídá aktuálnímu toku;
+- výjimka nemá jasného vlastníka;
+- retenční poznámka říká, co nemažete, ale neříká, kdy to smažete;
+- spouštěč návratu je příliš obecný.
+
+Oprava má mít jednu větu:
+
+```text
+Opravujeme odkaz na pravidlo přímo v předávacím checklistu, protože při kvartální kontrole se ukázalo, že lidé pravidlo hledají v přehledu, ale nepoužijí ho v okamžiku práce.
+```
+
+Ne:
+
+```text
+Předěláme systém pravidel a sjednotíme dokumentaci.
+```
+
+To může být pravda, ale není to kvartální oprava. To je projekt. A projekty se nemají maskovat jako drobná údržba, protože pak se nafouknou potichu a nikdo neví, proč páteční kontrola najednou sežrala půl týmu.
+
+### Privacy-first kontrola kvartálního přehledu
+
+Kvartální režim svádí k tomu, že se důkazy drží déle "pro jistotu". Jenže právě delší rytmus vyžaduje lepší disciplínu. Pokud už pravidlo nepotřebuje měsíční důkazy, nemá smysl schovávat staré pracovní kopie, reálné exporty nebo screenshoty s osobními údaji.
+
+Při první kvartální kontrole projděte:
+
+- zda kvartální přehled obsahuje jen aktuální pravidla a krátké důvody;
+- zda v příkladech nejsou reální zákazníci, osobní údaje nebo interní citlivé detaily;
+- zda staré měsíční důkazy mají účel, vlastníka a retenční konec;
+- zda se při kontrole nevytvořil nový export jen kvůli pohodlí;
+- zda lze výsledek doložit agregovaně nebo anonymizovaně;
+- zda má tým jasné pravidlo, co po kontrole smazat;
+- zda přístup ke kvartálnímu přehledu odpovídá citlivosti pravidel.
+
+Krátký privacy-first zápis:
+
+```text
+Kvartální kontrola použila jen anonymizovaný výstup a datum předání. Staré měsíční screenshoty byly smazány už při přesunu, nový export nevznikl.
+```
+
+Pokud kontrola bez reálných dat nejde udělat, zapište proč. Někdy je legitimní pracovat s konkrétním záznamem, ale musí být jasný účel, omezený přístup a konec životnosti. "Hodí se to do budoucna" není účel. To je šuplík s lepším sebevědomím.
+
+### Karta první kvartální kontroly
+
+Použijte jednu kartu pro jedno pravidlo. Neslučujte pět pravidel do jedné poznámky, pokud každé může skončit v jiném stavu.
+
+```text
+Pravidlo:
+Kvartální přehled:
+Kanonické pracovní místo:
+Reálné použití v kvartálu:
+Nalezení pravidla:
+Výsledek práce:
+Návrat staré cesty:
+Nová pomocná datová stopa:
+Cena údržby:
+Privacy-first kontrola:
+Stav: ponechat kvartálně / opravit v místě / vrátit měsíčně / zrušit nebo sloučit / bez použití
+Jedna úprava, pokud je potřeba:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo: stav poptávky jednou větou bez screenshotu detailu.
+Kvartální přehled: pravidla pro předání zákaznických portálů.
+Kanonické pracovní místo: zákaznický předávací checklist.
+Reálné použití v kvartálu: dvě předání portálu.
+Nalezení pravidla: delivery lead použil checklist bez dotazu v chatu.
+Výsledek práce: support měl dost kontextu pro převzetí.
+Návrat staré cesty: ne.
+Nová pomocná datová stopa: ne.
+Cena údržby: bez nové pravidelné práce.
+Privacy-first kontrola: použity jen anonymizované příklady, žádné screenshoty.
+Stav: ponechat kvartálně.
+Jedna úprava, pokud je potřeba: žádná.
+Další kontrola: další kvartální přehled.
+```
+
+### Mini workshop na 12 minut
+
+Vyberte jedno pravidlo, které bylo poprvé v kvartálním přehledu.
+
+1. Najděte poslední reálné použití pravidla.
+2. Ověřte, jestli člověk pravidlo našel v pracovním místě.
+3. Zkontrolujte, zda výstup pomohl další roli nebo zákazníkovi.
+4. Hledejte návrat staré cesty, kvůli které pravidlo vzniklo.
+5. Zkontrolujte, zda nevznikl nový export, screenshot, kopie nebo tabulka.
+6. Rozhodněte jeden ze stavů: ponechat, opravit, vrátit měsíčně, zrušit/sloučit nebo bez použití.
+7. Pokud je potřeba oprava, formulujte ji jednou větou.
+8. Smažte nebo označte kontrolní podklady podle retenčního pravidla.
+
+Výstup:
+
+```text
+Jedno pravidlo má po první kvartální kontrole jasný stav, případně jednu konkrétní opravu, a kontrola nezanechala zbytečnou datovou stopu.
+```
+
+### Codyho komentář
+
+Můj pohled: první kvartální kontrola je zkouška dospělosti systému. Ne proto, že by byla slavnostní, ale protože ukáže, jestli tým umí věřit dobrému pravidlu bez toho, aby kolem něj stavěl nový dozor. Když kontrola skončí větou "ponechat, funguje, žádná nová data", je to malá výhra. Není dramatická. Jen šetří čas, nervy a pár zbytečných screenshotů. Což je v provozu někdy skoro poezie, jen s lepší retencí.
+
+### Checklist kapitoly
+
+- Začali jste reálným použitím pravidla, ne starou historií?
+- Ověřili jste, že nenastal spouštěč návratu do měsíční péče?
+- Ví člověk v práci, kde pravidlo najít?
+- Vedlo pravidlo k dokončenému výstupu?
+- Pomohl výstup další roli, zákazníkovi nebo rozhodnutí?
+- Nevrátila se stará cesta, kvůli které pravidlo vzniklo?
+- Nevznikla nová pomocná datová stopa?
+- Umíte rozlišit stav ponechat, opravit, vrátit, zrušit/sloučit a bez použití?
+- Pokud je potřeba oprava, je omezená na jedno nejbližší místo selhání?
+- Neotevřeli jste z kvartální kontroly nový nepojmenovaný projekt?
+- Zůstaly v podkladech jen údaje, které mají jasný účel a retenci?
+- Je další kontrola napojená na běžný kvartální rytmus?
+
+První kvartální přehled má potvrdit, že lehčí režim opravdu funguje. Dobré pravidlo po něm zůstane kratší, jasnější a méně hladové po datech. Špatně umístěné pravidlo dostane jednu opravu. A pravidlo bez života se nepřetvařuje, že je standard jen proto, že se zatím nikomu nechtělo ho zrušit.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha LI o první kvartální kontrole pravidel po přesunu z měsíční péče: kvartální otázka, pět signálů, stavy kontroly, nejmenší oprava místa selhání, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LH o převodu opakovaně potvrzeného měsíčního pravidla do kvartálního přehledu: dvě potvrzení, oddělení pravidla od historie, spouštěč návratu do měsíční péče, zkrácení měsíčního čtení, privacy-first úklid, karta přesunu, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LG o kontrole stabilizovaného měsíčního pravidla po dalším čtení: výběr jedné úpravy, tři signály běžného použití, rozlišení problému místa, znění a hranice, ochrana před návratem staré historie, privacy-first kontrola druhého měsíce, kontrolní karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LF o stabilizaci potvrzené měsíční úpravy do běžného pravidla: vstupní podmínky, přepis historie na aktuální pravidlo, uložení do místa rozhodnutí, uzavření měsíční stopy, privacy-first brána, stabilizační karta, mini workshop a checklist.
