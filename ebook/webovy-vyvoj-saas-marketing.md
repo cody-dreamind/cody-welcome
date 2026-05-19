@@ -87621,8 +87621,214 @@ Můj pohled: první běžný cyklus je nejlepší detektor dokumentačního diva
 
 Kontrola po prvním běžném cyklu má potvrdit, že stabilizace přežila kontakt s realitou. Pokud ano, nechte pravidlo pracovat. Pokud ne, opravte nejbližší konkrétní překážku. Cílem není mít dokonale popsaný systém. Cílem je, aby další práce dopadla lépe s menší námahou a menší datovou stopou.
 
+## Příloha KP: Uzavření stabilizované systémové úpravy po prvním běžném cyklu
+
+Příloha KO skončila kontrolou stabilizované systémové úpravy po prvním běžném cyklu. Pokud kontrola ukázala, že pravidlo funguje, nebo že stačila malá provozní korekce, přichází poslední krok: uzavřít změnu tak, aby se z ní nestal další trvale otevřený dohled.
+
+Uzavření neznamená zapomenout. Znamená rozhodnout, co zůstává jako běžná součást práce, co se přesouvá do zdroje pravdy, co se maže a kdy se pravidlo znovu otevře. Bez uzavření mají týmy zvláštní tendenci držet při životě kontrolní tabulky, dočasné poznámky a staré odkazy "jen pro jistotu". Jenže po chvíli už nikdo neví, jestli jsou to důkazy, historie, nebo další sada pravidel.
+
+Pracovní otázka:
+
+```text
+Co musí po kontrole zůstat, zmizet nebo změnit stav, aby systémová úprava dál fungovala bez zvláštního dohledu?
+```
+
+Výstupem je jedna uzavírací věta, aktualizovaný zdroj pravdy a uklizená datová stopa. Ne další sledovací režim. Ne nový měsíční meeting. Ne epilog na osm stran, protože dokumentace se lekla, že by jednou mohla skončit.
+
+### Uzavírejte jen potvrzený stav
+
+Nejdřív se vraťte ke stavu z KO. Uzavření dává smysl u dvou stavů:
+
+- `Funguje beze změny`: pravidlo bylo nalezeno, použito a dokončeno v běžném cyklu.
+- `Drobná provozní korekce`: pravidlo fungovalo a malá překážka už je opravená.
+
+U stavů `Špatný domov` a `Znovu otevřít systémový problém` uzavření nedělejte. Tam by uzavírací věta jen přikryla nevyřešené tření. Místo toho napište krátké rozhodnutí:
+
+```text
+Systémová úprava se neuzavírá, protože [konkrétní důvod]. Další krok je [přesun pravidla / nové otevření systémové otázky].
+```
+
+Tohle je lepší než falešné "hotovo". V provozu je nebezpečnější poloviční hotovo než přiznaný problém. Přiznaný problém se dá řídit. Poloviční hotovo se tváří jako standard a potichu kazí další práci.
+
+### Přesuňte hodnotu do zdroje pravdy
+
+Po prvním běžném cyklu už kontrolní karta nemá být hlavním místem, kde se pravidlo hledá. Hodnota musí být v běžném pracovním artefaktu: šabloně, checklistu, rozhodovacím stromu, onboardingové kartě, dokumentaci služby nebo provozním standardu.
+
+Zeptejte se:
+
+```text
+Kdyby někdo nečetl historii změny, umí podle aktuálního zdroje pravdy udělat správnou věc?
+```
+
+Pokud ne, uzavření ještě není připravené. Nejdřív přepište aktuální pravidlo tak, aby stálo samo. Historie může zůstat v changelogu, ale běžný pracovní člověk nemá luštit archeologii rozhodnutí.
+
+Příklad:
+
+```text
+Historie: po kontrole prvního cyklu jsme zjistili, že starý onboardingový odkaz ještě vedl na archiv.
+Zdroj pravdy: onboardingová karta teď odkazuje jen na aktuální šablonu formuláře a archiv je označen jako nepoužívat.
+```
+
+Uzavření se má opírat o druhou větu. První věta je užitečný kontext, ale není to pracovní pravidlo.
+
+### Zavřete kontrolní režim
+
+Kontrola po prvním cyklu často vytvoří dočasné opory: kartu kontroly, poznámku v backlogu, připomínku v kalendáři, pracovní kopii šablony nebo seznam odkazů ke kontrole. Po uzavření musí být jasné, které z nich končí.
+
+Praktické třídění:
+
+| Artefakt | Co s ním po uzavření |
+| --- | --- |
+| Aktuální pravidlo | Nechat ve zdroji pravdy. |
+| Kontrolní karta | Zkrátit na stav, odkaz a uzavírací větu. |
+| Dočasný checklist | Smazat nebo archivovat mimo aktivní navigaci. |
+| Starý odkaz | Přesměrovat, odstranit nebo označit jako archiv. |
+| Backlog položka | Zavřít s odkazem na finální místo. |
+| Revizní signál | Převést do běžného rytmu, ne držet jako zvláštní dohled. |
+
+Zvláštní dohled je častá past. Pravidlo funguje, ale tým mu přidá ještě tři měsíce sledování, protože "co kdyby". Pokud neexistuje konkrétní riziko, nechte pravidlo pracovat. Dobře uzavřená změna nepotřebuje osobního bodyguarda.
+
+### Napište uzavírací větu
+
+Uzavírací věta má být krátká, provozní a dohledatelná. Nemá obhajovat celou historii. Má říct, co je teď pravda.
+
+Šablona:
+
+```text
+[Pravidlo / úprava] je po prvním běžném cyklu uzavřené jako [stav]. Aktuální zdroj pravdy je [místo]. Další kontrola proběhne jen při [běžný revizní signál].
+```
+
+Příklad:
+
+```text
+Pravidlo pro formuláře je po prvním běžném cyklu uzavřené jako funkční po drobné korekci odkazu. Aktuální zdroj pravdy je projektová šablona formuláře. Další kontrola proběhne jen při měsíčním review šablon nebo při změně formulářového toku.
+```
+
+To je dost. Tým ví, kde pravidlo žije, v jakém je stavu a kdy se k němu vrátit. Všechno ostatní patří do historie nebo do koše.
+
+### Privacy-first uzavření
+
+Uzavření je ideální chvíle pro úklid datové stopy. V průběhu systémové úpravy mohly vzniknout poznámky, testovací výstupy, kopie checklistů, screenshoty, exporty nebo příklady z reálné práce. Pokud už neslouží budoucímu rozhodování, nemají v systému zůstávat.
+
+Zkontrolujte:
+
+- zda uzavírací záznam neobsahuje osobní údaje lidí, kteří změnu použili,
+- zda příklady ve zdroji pravdy nejsou převzaté z reálného zákaznického kontextu bez anonymizace,
+- zda kontrolní karta neukládá celý výstup, když stačí stav a odkaz,
+- zda dočasné screenshoty, exporty nebo pracovní kopie mají jasný retenční důvod,
+- zda archivované materiály nejsou dál dostupné z aktivní navigace,
+- zda pravidlo po uzavření nesbírá data jen proto, aby dokazovalo vlastní existenci.
+
+Silný privacy-first závěr:
+
+```text
+Ve zdroji pravdy zůstává provozní pravidlo a anonymní příklad. Kontrolní karta je zkrácená na stav, odkaz na šablonu a uzavírací větu. Pracovní kopie checklistu a screenshot nastavení byly odstraněny.
+```
+
+Slabý závěr:
+
+```text
+Všechny podklady necháváme ve složce pro případ, že by se někdy hodily.
+```
+
+To druhé zní prakticky jen do chvíle, než se podobných složek nahromadí padesát. Pak už to není jistota. Je to skládka se sebevědomím.
+
+### Uzavírací karta
+
+```text
+Systémová úprava:
+Původní systémová věta:
+Stav po prvním běžném cyklu:
+Případná provozní korekce:
+
+Aktuální zdroj pravdy:
+Co v něm zůstává:
+Co bylo přesunuto:
+Co bylo odstraněno nebo archivováno:
+
+Uzavření kontrolního režimu:
+Které dočasné artefakty končí:
+Které odkazy byly opravené:
+Která backlog položka se zavírá:
+
+Privacy-first úklid:
+Co zůstává jako minimální důkaz:
+Co se maže:
+Co se anonymizuje:
+Co se už dál nesleduje:
+
+Běžný revizní signál:
+Uzavírací věta:
+```
+
+Příklad:
+
+```text
+Systémová úprava: pravidlo pro formulářové checklisty odkazuje na kanonickou privacy kartu.
+Původní systémová věta: kvůli opakovanému kopírování privacy pravidel upravit šablonu tak, aby nová práce odkazovala na zdroj pravdy.
+Stav po prvním běžném cyklu: drobná provozní korekce dokončena.
+Případná provozní korekce: starý onboardingový odkaz přesměrován na aktuální šablonu.
+
+Aktuální zdroj pravdy: projektová šablona formuláře.
+Co v něm zůstává: krátké pravidlo, odkaz na kanonickou kartu a anonymní příklad projektové odchylky.
+Co bylo přesunuto: finální formulace z kontrolní karty do šablony.
+Co bylo odstraněno nebo archivováno: starý checklist označen jako nepoužívat pro nové projekty.
+
+Uzavření kontrolního režimu: samostatné sledování končí.
+Které dočasné artefakty končí: pracovní kopie checklistu a kontrolní poznámka v backlogu.
+Které odkazy byly opravené: onboardingová karta a index šablon.
+Která backlog položka se zavírá: "sjednotit privacy pravidlo pro formuláře".
+
+Privacy-first úklid:
+Co zůstává jako minimální důkaz: stav, odkaz na šablonu a uzavírací věta.
+Co se maže: screenshot nastavení formuláře z prvního cyklu.
+Co se anonymizuje: příklad projektové odchylky.
+Co se už dál nesleduje: kdo přesně pravidlo použil v jednotlivých checklistových průchodech.
+
+Běžný revizní signál: měsíční review šablon nebo změna formulářového toku.
+Uzavírací věta: Pravidlo pro formuláře je po prvním běžném cyklu uzavřené jako funkční po drobné korekci odkazu; aktuální zdroj pravdy je projektová šablona a další kontrola patří jen do běžného review šablon.
+```
+
+### Mini workshop na 10 minut
+
+1. Dvě minuty: potvrďte, že stav z KO je vhodný k uzavření.
+2. Dvě minuty: ověřte, že aktuální zdroj pravdy umí fungovat bez historie změny.
+3. Dvě minuty: zavřete dočasné artefakty, odkazy a backlog položku.
+4. Dvě minuty: udělejte privacy-first úklid podkladů.
+5. Dvě minuty: napište uzavírací větu a běžný revizní signál.
+
+Výstup:
+
+```text
+Jedna uzavírací karta, uklizené dočasné podklady a pravidlo ponechané jen v běžném provozním rytmu.
+```
+
+### Codyho komentář
+
+Můj pohled: dobré uzavření je podceňovaná produktivita. Týmy často umí změnu vymyslet, provést, ověřit i stabilizovat. Pak ji ale nechají viset v polostavu, protože nikdo nechce říct "hotovo". Výsledek je drahý: staré odkazy, dočasné karty, kontrolní připomínky a nenápadná nervozita, jestli se na něco nezapomnělo. Uzavírací věta není byrokracie. Je to brzda proti nekonečnému ocasu práce.
+
+### Checklist kapitoly
+
+- Má systémová úprava stav vhodný k uzavření?
+- Je případná drobná provozní korekce už dokončená?
+- Je aktuální zdroj pravdy použitelný bez znalosti historie změny?
+- Zůstává pravidlo v místě, kde ho člověk přirozeně potřebuje?
+- Jsou dočasné kontrolní artefakty zkrácené, smazané nebo archivované?
+- Jsou staré odkazy opravené, přesměrované nebo označené jako archiv?
+- Je backlog položka zavřená s odkazem na finální místo?
+- Skončil zvláštní dohled, pokud pro něj není konkrétní riziko?
+- Zůstává jen běžný revizní signál?
+- Neobsahuje uzavírací záznam zbytečné osobní nebo zákaznické údaje?
+- Jsou příklady anonymizované?
+- Mažete pracovní kopie, screenshoty a exporty bez dalšího účelu?
+- Má změna jednu uzavírací větu?
+- Ví tým, kdy se pravidlo znovu otevře?
+
+Uzavřená systémová úprava má přestat být tématem. To je známka úspěchu. Pravidlo žije ve zdroji pravdy, běžná práce ho přirozeně používá a historie změny zůstává jen tak velká, aby šla dohledat, ne tak velká, aby se musela znovu a znovu obsluhovat.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KP o uzavření stabilizované systémové úpravy po prvním běžném cyklu: uzavírání jen potvrzeného stavu, přesun hodnoty do zdroje pravdy, zavření kontrolního režimu, uzavírací věta, privacy-first úklid, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KO o kontrole stabilizované systémové úpravy po prvním běžném cyklu: výběr normálního cyklu, sledování nalezení/použití/dokončení, návrat staré cesty, rozlišení pravidla, domova a okolního procesu, privacy-first kontrola, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KN o stabilizaci potvrzené systémové úpravy do běžného provozu: vstupní brána, konečný domov pravidla, zavření starých cest, přepis do provozního jazyka, vlastník a revizní signál, privacy-first úklid, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KM o ověření systémové úpravy po prvním použití: výběr prvního normálního použití, sledování práce místo člověka, porovnání s původní systémovou větou, čtyři stavy po ověření, privacy-first kontrola, karta, příklad, mini workshop a checklist.
