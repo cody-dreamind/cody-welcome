@@ -90523,8 +90523,249 @@ Můj pohled: měsíční čtení záznamů má být jako rychlé podívání do 
 
 Měsíční čtení revizních záznamů je užitečné jen tehdy, když zmenšuje budoucí práci. Pokud samo vytváří víc evidence, než kolik pomáhá odstranit, je čas ho zkrátit, zúžit nebo na chvíli vypnout.
 
+## Příloha LE: Ověření měsíční úpravy po prvním normálním použití
+
+Měsíční čtení revizních záznamů má skončit malou systémovou úpravou. Tím ale práce nekončí. Úprava může vypadat elegantně v zápisu a stejně nepomoct v reálném toku. Proto ji ověřujte při prvním normálním použití, ne na další poradě o tom, jak by asi mohla fungovat.
+
+Ověření nemá dokazovat, že tým udělal správné rozhodnutí. Má zjistit, jestli úprava opravdu zmenšila opakované tření, kvůli kterému vznikla. Pokud ne, je levnější to zjistit hned po prvním průchodu než po třech měsících, kdy už si všichni zvykli obcházet nové pravidlo stejně kreativně jako to staré.
+
+Pracovní otázka:
+
+```text
+Při prvním normálním použití měsíční úpravy se stalo to, kvůli čemu jsme ji zavedli, jednodušší, jasnější nebo méně datově rizikové?
+```
+
+Výchozí pravidlo:
+
+```text
+Ověřujte měsíční úpravu v první skutečné pracovní situaci, kde měla pomoct. Nesbírejte nové důkazy pro jistotu. Porovnejte původní nález, očekávané chování, skutečný průchod a datovou stopu.
+```
+
+### Vraťte se k původnímu měsíčnímu nálezu
+
+Nezačínejte tím, jestli se nová věta v checklistu líbí. Začněte původním nálezem. Ten říká, proč úprava vznikla.
+
+Příklad původního nálezu:
+
+```text
+U předávacích podkladů se opakuje značka Data, protože tým nahrazuje rozhodovací větu screenshotem zákaznického detailu.
+```
+
+Úprava:
+
+```text
+Do předávacího checklistu přidat pole "stav poptávek jednou větou" a stop pravidlo pro screenshot zákaznického detailu.
+```
+
+Ověřovací otázka potom není:
+
+```text
+Vyplnili lidé nové pole?
+```
+
+Lepší otázka:
+
+```text
+Pomohlo nové pole předat stav poptávek bez screenshotu zákaznického detailu?
+```
+
+Rozdíl je zásadní. První otázka měří poslušnost formuláře. Druhá měří, jestli se snížila práce a datové riziko. Formuláře jsou fajn, ale když začnou vyhrávat nad účelem, máme z procesu papírového šéfa. Digitálního, samozřejmě, aby to bylo moderní.
+
+### Vyberte první skutečný průchod
+
+Ověření má proběhnout v situaci, kde by se staré tření normálně objevilo. Ne v umělém testu, kde všichni vědí, co se má stát, a chovají se jako na školení.
+
+Dobrý první průchod:
+
+- další zákaznické předání;
+- další release checklist;
+- další supportní triage;
+- další příprava case study;
+- další měsíční report;
+- další onboardingový krok;
+- další revize dodavatelského přístupu.
+
+Slabý první průchod:
+
+- interní ukázka bez reálného výstupu;
+- kontrola prázdné šablony;
+- diskuze nad tím, jak by se postup použil;
+- vyplnění příkladu jen pro potřeby ověření;
+- opakované vysvětlování lidem, kteří normálně danou práci nedělají.
+
+Mini pravidlo:
+
+```text
+Pokud by situace bez úpravy nevytvořila stejné tření, není to dobrý ověřovací průchod.
+```
+
+### Sledujte čtyři signály
+
+Ověření držte malé. U prvního normálního použití stačí čtyři signály:
+
+| Signál | Co sledujete | Dobrá známka |
+| --- | --- | --- |
+| Nalezení | Našel člověk úpravu ve chvíli rozhodnutí? | Úprava je v pracovním místě, ne v zapomenutém dokumentu. |
+| Použití | Pochopil člověk, co má udělat? | Není potřeba další vysvětlování mimo běžný kontext. |
+| Výsledek | Zmenšilo se původní tření? | Práce se dokončila s menší nejistotou, menší ruční domluvou nebo menším obcházením. |
+| Data | Zmenšila se nebo nezvětšila datová stopa? | Nevznikl nový export, screenshot ani kopie osobních údajů. |
+
+Nepřidávejte pátý, šestý a sedmý signál jen proto, že tabulka vypadá důležitěji, když je delší. Čtyři signály stačí k rozhodnutí, jestli úpravu ponechat, doladit nebo zahodit.
+
+Praktické hodnocení:
+
+```text
+Nalezení: ano/ne
+Použití: ano/ne
+Výsledek: lepší/stejné/horší
+Data: menší/stejná/větší stopa
+```
+
+### Rozlište výsledek úpravy od náhody
+
+Jedno použití není vědecká studie. To nevadí. Cílem není statistická jistota, ale praktický signál. Přesto si dejte pozor, abyste úpravě nepřipsali něco, co způsobilo okolí.
+
+Příklady falešně dobrého výsledku:
+
+- zákaznické předání bylo mimořádně jednoduché, takže by screenshot nevznikl ani bez úpravy;
+- práci dělal člověk, který původní problém nikdy neměl;
+- úprava se nepoužila, ale někdo ručně hlídal výsledek bokem;
+- zákaznická data nebyla k dispozici, takže nevznikl export jen náhodou.
+
+Příklady falešně špatného výsledku:
+
+- šlo o výjimečný případ mimo běžný tok;
+- úprava nebyla nasazená v kanonickém místě;
+- lidé používali starou verzi šablony;
+- někdo nevěděl, že stará cesta už je zavřená.
+
+Do ověřovací karty proto přidejte jednu větu:
+
+```text
+Co mohlo výsledek zkreslit:
+```
+
+Někdy tím zachráníte dobrou úpravu před předčasným zahozením. Jindy tím odhalíte, že úprava funguje jen tehdy, když kolem ní stojí člověk s ručním dohledem. To není stabilní pravidlo. To je proces na kšandách.
+
+### Rozhodněte jeden ze čtyř stavů
+
+Po prvním normálním použití nepřidávejte neurčitý stav "budeme sledovat". To je často jen hezky zabalené odložení. Vyberte jeden ze čtyř stavů.
+
+| Stav | Kdy ho použít | Další krok |
+| --- | --- | --- |
+| `Ponechat` | Úprava byla nalezená, použitá a zmenšila původní tření bez nové datové stopy. | Nechte ji běžet do dalšího měsíčního čtení. |
+| `Doladit místo` | Úprava dává smysl, ale nebyla v okamžiku rozhodnutí po ruce. | Přesuňte ji do pracovního místa nebo opravte odkaz. |
+| `Doladit znění` | Úprava byla nalezená, ale lidé ji pochopili různě. | Zkraťte text, přidejte příklad nebo změňte název pole. |
+| `Zrušit` | Úprava nepomohla, vytvořila novou práci nebo zhoršila datovou stopu. | Vraťte se k původnímu nálezu a vyberte menší zásah. |
+
+Stav `Ponechat` neznamená, že pravidlo je navždy hotové. Znamená jen, že první reálný průchod neukázal důvod zasahovat. To je dost. Provoz nepotřebuje slavnostní certifikát ke každému políčku v checklistu.
+
+### Privacy-first ověření
+
+Ověření měsíční úpravy nesmí vytvořit větší stopu než problém, který řeší. Zvlášť u úprav, které vznikly kvůli exportům, screenshotům nebo zákaznickým detailům.
+
+Držte tato pravidla:
+
+- ověřujte výstup v kanonickém systému, nevytvářejte kopii pro kontrolu;
+- do ověřovací karty nepište osobní údaje zákazníků;
+- místo screenshotu použijte stavovou větu;
+- pokud potřebujete příklad, anonymizujte ho hned při zápisu;
+- dočasné poznámky smažte po uzavření ověřovací karty;
+- pokud úprava vyžaduje nový datový tok, vraťte ji do stavu `Doladit` nebo `Zrušit`;
+- pokud se při ověření objeví staré exporty, přidejte úklid jako součást uzavření.
+
+Bezpečná ověřovací věta:
+
+```text
+Při prvním zákaznickém předání stačila stavová věta v checklistu. Screenshot zákaznického detailu nevznikl.
+```
+
+Riziková ověřovací věta:
+
+```text
+Pro kontrolu jsme si uložili screenshot před a po, aby bylo jasné, že nový postup funguje.
+```
+
+Jestli důkaz, že nesbíráte zbytečná data, vyžaduje sběr dalších dat, je čas zastavit se. Privacy-first provoz není kvíz, kde správná odpověď je "ještě jeden export".
+
+### Ověřovací karta
+
+Použijte krátký zápis. Má potvrdit výsledek, ne založit další vrstvu dokumentace.
+
+```text
+Měsíční nález:
+Vybraná úprava:
+První normální použití:
+Kdo práci dělal:
+Nalezení:
+Použití:
+Výsledek:
+Data:
+Co mohlo výsledek zkreslit:
+Rozhodnutí: Ponechat / Doladit místo / Doladit znění / Zrušit
+Další malý krok:
+Co mažeme nebo zavíráme:
+```
+
+Vyplněný příklad:
+
+```text
+Měsíční nález: U předávacích podkladů vznikaly screenshoty zákaznických detailů místo stavové věty.
+Vybraná úprava: Pole "stav poptávek jednou větou" v předávacím checklistu a stop pravidlo pro screenshot.
+První normální použití: předání zákaznického portálu po ukončení sprintu.
+Kdo práci dělal: vlastník předání.
+Nalezení: ano, pole bylo přímo v checklistu.
+Použití: ano, věta stačila bez další domluvy.
+Výsledek: lepší, předání bylo jasné bez screenshotu.
+Data: menší stopa, nevznikl nový export ani screenshot.
+Co mohlo výsledek zkreslit: šlo o jednodušší předání než obvykle.
+Rozhodnutí: Ponechat.
+Další malý krok: zkontrolovat při příštím měsíčním čtení, jestli se značka Data u předání neopakuje.
+Co mažeme nebo zavíráme: dočasnou poznámku z ověření.
+```
+
+### Mini workshop na 10 minut
+
+Vezměte poslední měsíční úpravu, která už prošla prvním normálním použitím.
+
+1. Přečtěte původní měsíční nález.
+2. Pojmenujte první skutečnou situaci, kde se úprava použila.
+3. Ohodnoťte signály `Nalezení`, `Použití`, `Výsledek` a `Data`.
+4. Napište jednu větu, co mohlo výsledek zkreslit.
+5. Vyberte stav `Ponechat`, `Doladit místo`, `Doladit znění` nebo `Zrušit`.
+6. Zapište jeden další malý krok.
+7. Smažte dočasné poznámky nebo kopie, které vznikly jen kvůli ověření.
+
+Výstup:
+
+```text
+Měsíční úprava byla ověřená v prvním normálním použití a má jasný stav bez nové byrokratické vrstvy.
+```
+
+### Codyho komentář
+
+Můj pohled: první normální použití je nejpoctivější recenze procesu. Lidé v něm nemají čas hrát divadlo pro metodiku. Buď jim úprava pomůže, nebo ji obejdou, přehlédnou, přepíšou po svém či zachrání ruční domluvou. To není selhání lidí. To je zpětná vazba od reality, která nemá ráda dlouhé dokumenty a neumí ocenit krásně zarovnanou tabulku.
+
+### Checklist kapitoly
+
+- Vrátili jste se k původnímu měsíčnímu nálezu?
+- Ověřujete úpravu v první skutečné pracovní situaci, ne v umělém testu?
+- Je jasné, jaké původní tření měla úprava zmenšit?
+- Sledujete jen signály `Nalezení`, `Použití`, `Výsledek` a `Data`?
+- Nehodnotíte jen to, zda lidé vyplnili nové pole?
+- Zapsali jste, co mohlo výsledek zkreslit?
+- Rozlišili jste stav `Ponechat`, `Doladit místo`, `Doladit znění` nebo `Zrušit`?
+- Nevznikl kvůli ověření nový export, screenshot nebo kopie osobních údajů?
+- Použili jste stavové věty a agregované poznámky místo zákaznických detailů?
+- Má ověřovací karta jeden další malý krok?
+- Zavřeli jste nebo smazali dočasné podklady po ověření?
+- Vrací se výsledek do běžného měsíčního čtení, místo aby zakládal nový proces?
+
+Ověření měsíční úpravy má být krátké, věcné a trochu nemilosrdné. Pokud úprava pomohla, ponechte ji. Pokud nepomohla, zmenšete ji, přesuňte nebo zrušte. Nejhorší stav není chyba. Nejhorší stav je mlhavé "ještě to budeme sledovat", které jen tiše drží při životě další kus provozního šumu.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha LE o ověření měsíční úpravy po prvním normálním použití: návrat k původnímu nálezu, výběr skutečného průchodu, signály nalezení/použití/výsledku/datové stopy, rozlišení zkreslení, rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LD o měsíční čtení revizních záznamů bez nové byrokracie: omezení rozsahu, čtení podle vzorů, výběr jednoho měsíčního nálezu, převod do malé systémové úpravy, privacy-first práce bez kopírování dat, měsíční karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LC o uzavření kontroly stabilizované úpravy do běžného revizního záznamu: oddělení výsledku od kontrolních materiálů, revizní věta, zavření přechodových opor, napojení na existující rytmus, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LB o kontrole stabilizované úpravy pravidla po prvním běžném cyklu: výběr skutečného cyklu, sledování nalezení/použití/dokončení, návrat staré cesty, rozhodovací stavy, privacy-first kontrola, kontrolní karta, mini workshop a checklist.
