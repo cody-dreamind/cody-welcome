@@ -89077,8 +89077,180 @@ Můj pohled: dobré pravidlo se má umět ztratit v dobrém smyslu. Ne zmizet. S
 
 Uzavřené pravidlo není mrtvé pravidlo. Je to pravidlo, které už nepotřebuje reflektor. Žije v běžném rytmu, chrání správnou věc a vrátí se do pozornosti až ve chvíli, kdy se změní práce nebo se začne vracet staré tření.
 
+## Příloha KX: První revize pravidla v běžném rytmu
+
+Jakmile pravidlo opustí zvláštní kontrolní režim, přijde první skutečná zkouška dospělosti: běžná revize. Ne revize svolaná kvůli pravidlu. Normální rytmus, ve kterém se stejně kontroluje release, dodavatelé, obsah, formuláře, přístupy, šablony nebo dočasné podklady.
+
+Tahle příloha navazuje na uzavření stabilizovaného pravidla. Cíl není znovu dokazovat, že pravidlo bylo dobré. Cíl je zjistit, jestli se v běžném rytmu neztratilo, nezačalo bobtnat a nevytváří novou datovou stopu jen proto, že ho někdo chtěl pečlivě zkontrolovat.
+
+Pracovní otázka:
+
+```text
+Dokáže pravidlo projít první běžnou revizí bez návratu do zvláštního režimu, bez nové administrativy a bez zbytečných datových stop?
+```
+
+Výchozí pravidlo:
+
+```text
+První běžná revize má potvrdit rytmus, ne znovu otevřít celé rozhodnutí. Otevírejte jen konkrétní tření, změnu práce nebo návrat staré cesty.
+```
+
+### Nepleťte si revizi s novým projektem
+
+První revize po uzavření svádí k tomu, že tým znovu projde celou historii. Proč pravidlo vzniklo, kdo ho navrhl, jaké byly varianty, co se řešilo při stabilizaci. To může být užitečné při incidentu, ale pro běžnou revizi je to většinou moc.
+
+Revize má odpovědět na čtyři malé otázky:
+
+1. Leží pravidlo pořád v kanonickém domově?
+2. Použilo se v běžné práci bez zvláštního připomínání?
+3. Stačil minimální výstup k rozhodnutí?
+4. Nevznikly zbytečné kopie, screenshoty, exporty nebo chatové návody?
+
+Když jsou odpovědi ano, pravidlo pokračuje v rytmu. Nedělejte z toho oslavu ani velký zápis. Stačí krátká věta v místě, kde revize už probíhá.
+
+Příklad:
+
+```text
+Revize pravidla pro stavovou větu po smoke testu formuláře: pravidlo zůstává v release checklistu, při dvou vydáních vznikla jen stavová věta, screenshoty se nevrátily, další změna není potřeba.
+```
+
+Tohle je dostatečný výstup. Pokud se vám zdá moc krátký, je to dobré znamení. Běžný provoz má být stručný.
+
+### Sledujte rytmus, ne jen pravidlo
+
+Uzavřené pravidlo může být správné, ale špatně napojené na rytmus. První revize proto nekontroluje jen text pravidla. Kontroluje i to, jestli vybraný rytmus opravdu funguje.
+
+Ptejte se:
+
+- přišla revize včas, nebo se pravidlo připomnělo až náhodou;
+- věděl vlastník, že pravidlo do rytmu patří;
+- bylo pravidlo viditelné v checklistu, šabloně nebo agendě;
+- nezabralo nepřiměřeně moc času vůči hodnotě, kterou chrání;
+- vedla revize k rozhodnutí, nebo jen k pocitu, že se něco zkontrolovalo.
+
+Když rytmus nefunguje, neznamená to hned, že pravidlo je špatné. Možná je špatně zvolené místo kontroly. Pravidlo pro dočasné exporty nemusí patřit do obecného měsíčního provozního review, pokud exporty vznikají hlavně při zákaznickém předání. V takovém případě ho přesuňte blíž k předávacímu checklistu.
+
+Dobrá otázka zní:
+
+```text
+Kde by člověk narazil na toto pravidlo právě ve chvíli, kdy může ještě zabránit zbytečné datové stopě?
+```
+
+Pokud odpověď není současný rytmus, pravidlo nepotřebuje velkou revizi. Potřebuje lepší umístění.
+
+### Rozlišujte tři výsledky první revize
+
+Po první běžné revizi většinou stačí tři výsledky:
+
+1. `Pokračovat`: pravidlo funguje, rytmus stačí, výstup je lehký.
+2. `Přesunout`: pravidlo je správné, ale revizní rytmus není nejbližší pracovní místo.
+3. `Znovuotevřít`: změnila se práce, vrátila se stará cesta nebo pravidlo vytváří nové riziko.
+
+Stav `Pokračovat` znamená, že příští kontrola má proběhnout až v běžném rytmu. Nepřidávejte nový reminder "pro jistotu". Pokud pravidlo potřebuje mimořádné připomínky, ještě není opravdu uzavřené.
+
+Stav `Přesunout` je častý a není ostuda. V praxi se ukáže, že pravidlo má žít v jiné šabloně, v jiné části checklistu nebo u jiné role. Přesun má být malý: změnit odkaz, doplnit řádek do správného pracovního místa, odstranit starou zmínku.
+
+Stav `Znovuotevřít` používejte konkrétně. Ne "pravidlo nefunguje", ale třeba:
+
+- do issue se znovu začaly vkládat screenshoty s osobními údaji;
+- CRM změnilo tok a stavová věta už nepotvrzuje správnou věc;
+- zákaznické předání začalo vytvářet export mimo kanonický systém;
+- nová role pravidlo nenajde bez pomoci;
+- minimální výstup nestačí pro auditní nebo provozní rozhodnutí.
+
+Znovuotevření není návrat na začátek. Je to malá oprava konkrétního tření.
+
+### Privacy-first revizní stopa
+
+Paradox první revize: tým chce zkontrolovat, že pravidlo nevyrábí zbytečná data, a při kontrole si snadno vyrobí nová. Screenshoty jako důkaz, exporty pro přehled, kopie do prezentace, seznam lidí, kdo pravidlo použil. Tohle je přesně ten typ provozní nadprodukce, kterému se privacy-first přístup snaží vyhnout.
+
+Pro první revizi stačí minimální revizní stopa:
+
+- odkaz na kanonické pravidlo;
+- krátký stav `Pokračovat`, `Přesunout` nebo `Znovuotevřít`;
+- jedna věta důvodu;
+- jedna nejbližší akce jen tehdy, když je potřeba;
+- datum příští běžné kontroly, pokud už existuje v rytmu.
+
+Nepotřebujete seznam všech lidí, kteří pravidlo použili. Nepotřebujete kopie jejich výstupů. Nepotřebujete ukládat testovací data. Pokud musíte doložit konkrétní chybu, anonymizujte ji a rovnou napište, kdy se dočasný důkaz smaže.
+
+Codyho komentář: největší riziko pravidel je, že se začnou dokazovat sama sobě. Vznikne pravidlo, pak kontrola pravidla, potom tabulka kontrol pravidel a nakonec schůzka nad tabulkou. Technicky vzato je to proces. Prakticky vzato je to kancelářský kompost. Držte stopu krátkou.
+
+### Karta první běžné revize
+
+Použijte krátkou kartu přímo v existujícím revizním místě:
+
+```text
+Pravidlo:
+Běžný revizní rytmus:
+Kanonický domov:
+Revizní otázka:
+Skutečné použití od uzavření:
+Minimální výstup stačil:
+Vznikla zbytečná datová stopa:
+Stav: Pokračovat / Přesunout / Znovuotevřít
+Důvod jednou větou:
+Nejbližší akce:
+Co se smaže, anonymizuje nebo přesune:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo: po smoke testu formuláře zapisovat stavovou větu místo screenshotu.
+Běžný revizní rytmus: měsíční review release podkladů.
+Kanonický domov: release checklist pro formulářové změny.
+Revizní otázka: stačí stavová věta bez screenshotu a nevznikají kopie mimo issue?
+Skutečné použití od uzavření: dvě formulářové změny.
+Minimální výstup stačil: ano, u obou změn šlo ověřit doručení, CRM záznam i automatickou odpověď.
+Vznikla zbytečná datová stopa: ne.
+Stav: Pokračovat.
+Důvod jednou větou: pravidlo se použilo bez připomínání a stará screenshotová cesta se nevrátila.
+Nejbližší akce: žádná, zůstává v měsíčním rytmu.
+Co se smaže, anonymizuje nebo přesune: nic nového nevzniklo.
+```
+
+Příklad přesunu:
+
+```text
+Stav: Přesunout.
+Důvod jednou větou: pravidlo je správné, ale měsíční review přichází pozdě; export vzniká už při zákaznickém předání.
+Nejbližší akce: doplnit řádek do předávacího checklistu a z měsíčního review ponechat jen souhrnný signál.
+Co se smaže, anonymizuje nebo přesune: stará poznámka v měsíční agendě se nahradí odkazem na předávací checklist.
+```
+
+### Mini workshop na 10 minut
+
+První revizi uzavřeného pravidla udělejte rychle:
+
+1. Otevřete místo běžné revize.
+2. Najděte pravidlo a jeho kanonický domov.
+3. Ověřte jedno nebo dvě skutečná použití od uzavření.
+4. Zkontrolujte minimální výstup a datovou stopu.
+5. Rozhodněte `Pokračovat`, `Přesunout` nebo `Znovuotevřít`.
+6. Zapište jednu větu důvodu.
+7. Udělejte nejbližší akci jen tehdy, když je opravdu potřeba.
+
+Když workshop začne řešit celé portfolio pravidel, zastavte ho. Tohle není portfoliová revize. Je to první kontrola jednoho pravidla v normálním rytmu.
+
+### Checklist kapitoly
+
+- Probíhá revize v existujícím rytmu, ne ve zvláštním režimu?
+- Kontrolujete čtyři malé otázky místo celé historie pravidla?
+- Je jasné, jestli funguje pravidlo, rytmus, nebo oboje?
+- Umíte rozhodnout mezi stavy `Pokračovat`, `Přesunout` a `Znovuotevřít`?
+- Nepřidáváte nový reminder, pokud stav vyšel `Pokračovat`?
+- Je případný přesun pravidla malý a blíž skutečné práci?
+- Je znovuotevření popsáno konkrétním třením, ne obecným dojmem?
+- Zůstává revizní stopa krátká a bez osobních údajů navíc?
+- Nevznikly při revizi screenshoty, exporty nebo kopie jen jako důkaz kontroly?
+- Má případná dočasná evidence jasné smazání, anonymizaci nebo přesun?
+
+První běžná revize má pravidlo vrátit do normálu, ne ho znovu vystavit pod reflektor. Když pravidlo funguje, nechte ho pracovat. Když nefunguje rytmus, přesuňte ho. Když se změnila realita, znovuotevřete konkrétní tření a opravte nejbližší pracovní místo.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KX o první revizi pravidla v běžném rytmu: rozlišení revize od nového projektu, kontrola rytmu, stavy Pokračovat/Přesunout/Znovuotevřít, privacy-first revizní stopa, karta, příklady, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KW o uzavření stabilizovaného pravidla do běžného revizního rytmu: vstupní stav Ponechat, výběr nejmenšího existujícího rytmu, uzavírací věta, zrušení přechodových opor, privacy-first úklid, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněny rychlé pracovní trasy do úvodu e-booku: web, aplikace/SaaS, marketing a prodej, privacy-first provoz a třicetiminutový pracovní režim s konkrétními výstupy.
 - 2026-05-19: Doplněna Příloha KV o kontrole stabilizovaného pravidla po prvním běžném cyklu: výběr skutečného cyklu, sledování pracovní cesty místo výkonu člověka, porovnání minimálního a skutečného výstupu, návrat staré cesty, privacy-first kontrola datové stopy, kontrolní karta, příklad, mini workshop a checklist.
