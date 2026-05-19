@@ -88915,8 +88915,171 @@ Můj pohled: stabilizované pravidlo se pozná podle toho, že není zajímavé.
 
 Kontrola po prvním běžném cyklu chrání tým před falešným pocitem hotova. Pravidlo může být napsané správně a přesto nepoužitelné. Teprve normální práce ukáže, jestli z něj vznikl provozní návyk.
 
+## Příloha KW: Uzavření stabilizovaného pravidla do běžného revizního rytmu
+
+Když stabilizované pravidlo projde prvním běžným cyklem, přichází nenápadný, ale důležitý krok: přestat ho držet v režimu zvláštní pozornosti. Pokud pravidlo funguje, má se stát součástí normálního provozu. Pokud ho budete dál obcházet schůzkami, kontrolami a připomínkami, vytvoříte z něj další malý proces navíc. A přesně tomu se dobrá stabilizace snaží vyhnout.
+
+Uzavření neznamená zapomenout. Znamená přesunout pravidlo do správného rytmu: tam, kde se už přirozeně kontroluje podobná práce. Deploy checklist patří do release rytmu. Pravidlo pro dočasné exporty patří do měsíčního review podkladů. Pravidlo pro datovou mapu patří do provozní nebo dodavatelské kontroly. Onboardingové pravidlo patří do prvního review role.
+
+Pracovní otázka:
+
+```text
+Může toto pravidlo opustit zvláštní kontrolní režim a žít v existujícím revizním rytmu bez nové evidence navíc?
+```
+
+Výchozí pravidlo:
+
+```text
+Stabilizované pravidlo uzavřete až tehdy, když má kanonický domov, vlastníka, minimální výstup, běžný revizní rytmus a jasné spouštěče znovuotevření.
+```
+
+### Uzavírejte jen pravidlo ve stavu Ponechat
+
+Po prvním běžném cyklu neuzavírejte pravidlo automaticky. Uzavření dává smysl jen tehdy, když kontrola skončila stavem `Ponechat`, případně stavem `Zpřesnit`, který už byl opravdu proveden a znovu krátce ověřen. Pokud pravidlo skončilo stavem `Přemístit` nebo `Vrátit k opravě`, ještě není stabilizované. Jen jste našli důležitou práci, kterou je potřeba dokončit.
+
+Před uzavřením si ověřte:
+
+- pravidlo leží v místě, kde ho člověk při práci přirozeně potká;
+- stará cesta je odstraněná, označená jako archiv nebo přesměrovaná;
+- minimální výstup vznikl bez zvláštního dohledu autora;
+- nevznikly bokem screenshoty, exporty, kopie ani chatové instrukce;
+- člověk, který pravidlo použil, nemusel žádat o výklad základního smyslu;
+- případná drobná úprava po kontrole je už zapracovaná.
+
+Pokud některý bod chybí, neznamená to selhání. Znamená to, že pravidlo ještě patří do opravy nebo stabilizace. Lepší je jeden cyklus navíc než předčasné uzavření, které se za měsíc vrátí jako zmatek.
+
+### Najděte nejmenší běžný rytmus
+
+Pravidlo nepotřebuje vlastní schůzku, pokud existuje přirozené místo, kde se dá zkontrolovat. Vlastní revizní rituál zakládejte až tehdy, když pravidlo chrání opravdu kritické riziko a žádný stávající rytmus ho nepokryje.
+
+Příklady dobrého napojení:
+
+- pravidlo pro smoke test formuláře jde do release checklistu;
+- pravidlo pro dočasné exporty jde do měsíční kontroly podkladů;
+- pravidlo pro dodavatelské přístupy jde do kvartální dodavatelské hygieny;
+- pravidlo pro onboarding nového člověka jde do prvního review role;
+- pravidlo pro aktualizaci případové studie jde do obsahového sprintu;
+- pravidlo pro incidentní záznam jde do post-incident review.
+
+Špatné napojení vypadá tak, že vznikne nový "měsíční meeting na kontrolu pravidla", aniž by pravidlo mělo samostatný dopad. Tím se proces zbytečně nafoukne. Dobrý provoz nepřidává rytmy pro každý nápad. Vkládá malé kontroly do rytmů, které už lidé používají.
+
+### Uzavírací věta
+
+Uzavření má mít jednu pracovní větu. Ne dlouhou historii, ne zápis celé debaty, ne nový dokument. Věta má říct, co pravidlo dělá, kde žije, kdo ho vlastní a kdy se znovu otevře.
+
+Šablona:
+
+```text
+Pravidlo [název] je uzavřené do běžného rytmu [rytmus]; zdroj pravdy je [místo], vlastník je [role] a znovu se otevře při [spouštěč].
+```
+
+Příklad:
+
+```text
+Pravidlo pro stavovou větu místo screenshotu po smoke testu formuláře je uzavřené do release checklistu; zdroj pravdy je deploy šablona v repozitáři, vlastník je release owner a znovu se otevře při návratu screenshotů do issue nebo při změně formulářového toku.
+```
+
+Tahle věta je obyčejná, a to je dobře. Uzavření pravidla nemá znít jako manifest. Má být dost jasné, aby další člověk věděl, kde ho najít a kdy ho znovu řešit.
+
+### Zrušte přechodové opory
+
+Stabilizace často používá dočasné opory: připnutou poznámku v chatu, extra reminder, kontrolní komentář v issue, pomocný dokument nebo ruční připomenutí od autora změny. Při uzavření je potřeba tyto opory zrušit, jinak pravidlo nikdy nepřejde do normálu.
+
+Projít stačí pět míst:
+
+- chatové připomínky a připnuté zprávy;
+- osobní poznámky autora změny;
+- dočasné kopie šablon;
+- testovací nebo kontrolní checklisty;
+- backlog položky, které už jen připomínají hotovou změnu.
+
+Ponechte jen opory, které jsou součástí běžné práce. Například pole v release šabloně je v pořádku. Připnutá zpráva "nezapomeňte už nepřikládat screenshoty" je přechodová berlička. Když ji tým potřebuje i po uzavření, pravidlo pravděpodobně není dost dobře umístěné.
+
+### Privacy-first uzavření
+
+Uzavření pravidla je dobrý moment na poslední úklid datové stopy. Neřešte jen samotné pravidlo. Podívejte se, co vzniklo při jeho opravě, ověření a stabilizaci.
+
+Zkontrolujte:
+
+- zda stabilizační karta neobsahuje osobní nebo zákaznická data navíc;
+- zda příklady používají anonymizované údaje;
+- zda dočasné screenshoty a exporty z ověření zmizely nebo mají důvod retence;
+- zda přístup k pravidlu odpovídá rolím, které ho potřebují;
+- zda se ve starých komentářích neopakuje zákaznický kontext, který už není potřeba;
+- zda uzavírací věta neprozrazuje interní detail mimo nutný pracovní kontext.
+
+Privacy-first hodnota se v téhle fázi pozná podle lehkosti. Po uzavření má zůstat pravidlo, minimální historie a jasný spouštěč revize. Nemá zůstat hromada důkazů, že tým pravidlo zaváděl. Provoz nepotřebuje muzeum každé malé opravy.
+
+### Karta uzavření pravidla
+
+Použijte krátkou kartu:
+
+```text
+Pravidlo:
+Původní důvod:
+Stav po prvním běžném cyklu:
+Kanonický domov:
+Vlastník:
+Běžný revizní rytmus:
+Minimální výstup:
+Spouštěče znovuotevření:
+Zrušené přechodové opory:
+Privacy-first úklid:
+Uzavírací věta:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo: po smoke testu formuláře zapisovat stavovou větu místo screenshotu.
+Původní důvod: screenshoty v issue zachytávaly testovací e-maily a interní stav CRM.
+Stav po prvním běžném cyklu: Ponechat.
+Kanonický domov: release checklist pro formulářové změny.
+Vlastník: release owner.
+Běžný revizní rytmus: každé vydání změny formuláře, souhrnně měsíční review podkladů.
+Minimální výstup: jedna stavová věta o doručení poptávky, CRM záznamu a automatické odpovědi.
+Spouštěče znovuotevření: návrat screenshotů, změna CRM toku, incident s doručením poptávky.
+Zrušené přechodové opory: připnutá chatová připomínka a dočasný příklad v issue.
+Privacy-first úklid: testovací screenshot z ověření smazán, v historii zůstala jen anonymní věta.
+Uzavírací věta: pravidlo je uzavřené do release checklistu; znovu se otevře při návratu screenshotů nebo změně formulářového toku.
+```
+
+### Mini workshop na 10 minut
+
+Vezměte pravidlo, které prošlo prvním běžným cyklem.
+
+1. Ověřte, že poslední stav je `Ponechat`.
+2. Najděte existující rytmus, kam pravidlo přirozeně patří.
+3. Zapište kanonický domov, vlastníka a minimální výstup.
+4. Napište uzavírací větu.
+5. Smažte nebo uzavřete přechodové opory.
+6. Projděte privacy-first úklid.
+7. Zapište spouštěče znovuotevření.
+
+Výstupem není dokonale popsaný proces. Výstupem je pravidlo, které už nepotřebuje zvláštní pozornost a přesto se neztratí.
+
+### Codyho komentář
+
+Můj pohled: dobré pravidlo se má umět ztratit v dobrém smyslu. Ne zmizet. Splynout s prací. Když kvůli každému pravidlu vznikne vlastní mini říše, tým časem nespravuje produkt, ale sbírku pravidel o pravidlech. To je velmi sofistikovaný způsob, jak se unavit.
+
+### Checklist kapitoly
+
+- Uzavíráte jen pravidlo ve stavu `Ponechat` nebo po opravdu ověřeném zpřesnění?
+- Má pravidlo kanonický domov v místě práce?
+- Je stará cesta odstraněná, archivovaná nebo přesměrovaná?
+- Je jasný vlastník pravidla?
+- Je vybraný nejmenší existující revizní rytmus?
+- Vznikla jedna uzavírací věta?
+- Jsou zrušené přechodové opory, které už pravidlo nemá potřebovat?
+- Zůstává minimální výstup jasný i pro člověka, který nebyl u zavádění?
+- Proběhl privacy-first úklid stabilizačních podkladů?
+- Jsou spouštěče znovuotevření konkrétní a pracovní?
+
+Uzavřené pravidlo není mrtvé pravidlo. Je to pravidlo, které už nepotřebuje reflektor. Žije v běžném rytmu, chrání správnou věc a vrátí se do pozornosti až ve chvíli, kdy se změní práce nebo se začne vracet staré tření.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KW o uzavření stabilizovaného pravidla do běžného revizního rytmu: vstupní stav Ponechat, výběr nejmenšího existujícího rytmu, uzavírací věta, zrušení přechodových opor, privacy-first úklid, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněny rychlé pracovní trasy do úvodu e-booku: web, aplikace/SaaS, marketing a prodej, privacy-first provoz a třicetiminutový pracovní režim s konkrétními výstupy.
 - 2026-05-19: Doplněna Příloha KV o kontrole stabilizovaného pravidla po prvním běžném cyklu: výběr skutečného cyklu, sledování pracovní cesty místo výkonu člověka, porovnání minimálního a skutečného výstupu, návrat staré cesty, privacy-first kontrola datové stopy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KU o stabilizaci potvrzené systémové opravy do běžného pravidla: převod ověřovacího závěru do provozní věty, kanonický domov, zavření staré cesty, lehký kontrolní signál, stabilizační karta, příklad, mini workshop a checklist.
