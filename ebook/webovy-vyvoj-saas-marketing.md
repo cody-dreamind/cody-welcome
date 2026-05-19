@@ -89468,8 +89468,212 @@ Můj pohled: zralost týmu se nepozná podle toho, kolik nálezů najde. Pozná 
 
 Převod revizního nálezu do úpravy je malá smyčka, ale drží celý systém při zemi. Pravidlo se učí z reality, aniž by z každého zjištění vznikl nový proces. To je přesně místo, kde privacy-first provoz přestává být heslo a začíná být obyčejná pracovní hygiena.
 
+## Příloha KZ: Ověření úpravy pravidla po příštím normálním použití
+
+Úprava pravidla po první běžné revizi vypadá hotově ve chvíli, kdy je zapsaná, přesunutá nebo stará cesta odstraněná. Ve skutečnosti je hotová až po příštím normálním použití. Teprve tam se ukáže, jestli člověk pravidlo našel včas, pochopil ho bez vysvětlování, udělal menší datovou stopu a nezaložil si bokem novou zkratku.
+
+Tahle příloha řeší ověření malé úpravy pravidla. Nejde o audit týmu ani o nový reporting. Jde o krátký průchod jednou reálnou situací, ve které se ukáže, jestli úprava odstranila původní nález.
+
+Pracovní otázka:
+
+```text
+Odstranila úprava pravidla původní nález při příštím normálním použití bez nové zbytečné práce a bez nové datové stopy?
+```
+
+Výchozí pravidlo:
+
+```text
+Ověřujte upravené pravidlo na první běžné situaci, kde by se původní nález mohl znovu objevit. Sledujte práci a stopu, ne výkon konkrétního člověka.
+```
+
+### Vraťte se k původnímu nálezu
+
+Ověření nezačínejte otázkou, jestli se úprava někomu líbí. Začněte původním nálezem. Jinak se snadno stane, že tým začne hodnotit obecnou kvalitu dokumentace, náladu po změně nebo nové nápady, které s nálezem nesouvisejí.
+
+Použijte tři věty:
+
+```text
+Původní nález:
+Provedená úprava:
+Ověřovací situace:
+```
+
+Příklad:
+
+```text
+Původní nález: při zákaznickém předání vznikl export seznamu poptávek, protože pravidlo pro agregovaný souhrn žilo až v měsíčním review.
+Provedená úprava: pravidlo se přesunulo do předávacího checklistu a staré pole pro přílohu exportu bylo odstraněno.
+Ověřovací situace: další zákaznické předání, kde se poptávky předávají do provozního souhrnu.
+```
+
+Tohle drží ověření úzké. Neřešíte celý předávací proces, CRM ani marketingovou kvalitu poptávek. Řešíte, jestli konkrétní úprava zabránila konkrétnímu starému chování.
+
+### Vyberte první normální použití
+
+První ověření nemá být laboratorní test. Má to být normální práce, při které by pravidlo stejně mělo být použité. Pokud čekáte na ideální scénář, ověření se odloží. Pokud vytvoříte speciální scénář, zjistíte hlavně to, že lidé umí projít speciálním scénářem.
+
+Dobrý ověřovací okamžik:
+
+- přichází přirozeně v běžném provozu;
+- obsahuje stejnou rozhodovací situaci jako původní nález;
+- má jasný začátek a konec;
+- nevyžaduje novou schůzku jen kvůli pozorování;
+- umožní zjistit, jestli vznikla nebo nevznikla zbytečná datová stopa.
+
+Slabý ověřovací okamžik:
+
+- "až bude čas to probrat";
+- "až někdo narazí na problém";
+- "při příštím kvartálním auditu";
+- "po kompletním přepracování checklistu";
+- "až si všichni zvyknou".
+
+Když pravidlo chrání před zbytečným exportem při předání, ověřte ho při příštím předání. Když chrání před screenshoty při incidentu, ověřte ho při příští menší výjimce nebo drill scénáři, který už v provozu existuje. Když pomáhá novému člověku najít správný postup, ověřte ho při dalším samostatném průchodu, ne při vysvětlovací schůzce s autorem pravidla.
+
+### Sledujte čtyři signály
+
+Ověření malé úpravy nepotřebuje dashboard. Stačí čtyři signály.
+
+1. `Nalezení`: člověk našel upravené pravidlo v místě, kde se rozhodoval.
+2. `Použití`: pravidlo vedlo k očekávanému kroku bez dodatečného vysvětlování.
+3. `Výsledek`: původní nález se nevrátil, nebo se vrátil slabší a přesněji pojmenovatelný.
+4. `Stopa`: nevznikly nové kopie, exporty, screenshoty, ruční seznamy nebo osobní údaje navíc.
+
+Příklad pozorování:
+
+```text
+Nalezení: předávací checklist obsahoval řádek o agregovaném souhrnu a člověk ho použil bez dotazu.
+Použití: souhrn poptávek byl předán jako počet a stav, detail zůstal v CRM.
+Výsledek: příloha exportu nevznikla.
+Stopa: v předávacím vlákně zůstala jen věta s odkazem na kanonický záznam, bez osobních údajů.
+```
+
+To je dost. Nepotřebujete z toho udělat metriku, tabulku ani nový kontrolní rituál. Potřebujete vědět, jestli malá úprava splnila svůj slib.
+
+### Rozlište výsledek úpravy od okolního problému
+
+Při prvním použití se často objeví další tření. To neznamená, že úprava selhala. Znamená to, že reálná práce je reálná práce, gratuluji, nejsme v ukázkovém demu.
+
+Rozlišujte čtyři situace:
+
+- `Potvrdit`: úprava odstranila původní nález a nezpůsobila novou stopu.
+- `Doladit`: úprava funguje, ale chybí drobná věta, název nebo odkaz.
+- `Oddělit`: původní nález je vyřešený, ale objevilo se jiné tření mimo rozsah.
+- `Vrátit`: úprava neodstranila nález nebo vytvořila horší obchvat.
+
+Příklady:
+
+- `Potvrdit`: export nevznikl, předání proběhlo agregovaně, detail zůstal v CRM.
+- `Doladit`: export nevznikl, ale řádek v checklistu má matoucí název a nový člověk ho našel až napodruhé.
+- `Oddělit`: export nevznikl, ale tým zjistil, že zákaznický souhrn nemá jednotný formát. To je další kandidát, ne selhání privacy pravidla.
+- `Vrátit`: lidé odstraněné pole nahradili přílohou v chatu, protože souhrn nedává obchodníkovi dost informací.
+
+Nejnebezpečnější je stav `Oddělit`. Tým má tendenci z něj udělat důkaz, že změna nebyla dost velká. Často je to ale naopak důkaz, že malá změna fungovala a konečně odhalila další samostatný problém.
+
+### Privacy-first kontrola skutečné stopy
+
+Po ověření se nedívejte jen na to, jestli se práce dokončila. Podívejte se, co po ní zůstalo.
+
+Kontrolní otázky:
+
+- Vznikl export, screenshot nebo kopie tam, kde dřív vznikaly?
+- Pokud vznikla výjimka, má jasný účel, vlastníka a datum úklidu?
+- Zůstala osobní data v kanonickém systému místo v přílohách a chatech?
+- Nevznikl nový kontrolní seznam lidí, kteří pravidlo použili?
+- Nevznikla dokumentace s reálnými zákaznickými údaji jako příkladem?
+- Stačí ověřovací záznam bez citlivých detailů?
+
+Bezpečný ověřovací záznam:
+
+```text
+Při předání 2026-05-19 byl použit agregovaný souhrn bez exportu osobních údajů. Detail zůstal v CRM. Původní nález se nevrátil.
+```
+
+Rizikový ověřovací záznam:
+
+```text
+Do poznámky přiložen export poptávek, aby bylo vidět, že nový postup fungoval.
+```
+
+Ověření nesmí znovu vytvořit přesně tu stopu, kterou měla úprava odstranit. To je provozní klasika: uklidit podlahu tím, že špínu přeneseme do vedlejší místnosti a nazveme ji evidencí.
+
+### Ověřovací karta
+
+Použijte krátkou kartu a po rozhodnutí ji uzavřete. Pokud z ní uděláte trvalý formulář, malá úprava začne vyrábět vlastní provoz.
+
+```text
+Původní nález:
+Provedená úprava:
+První normální použití:
+Nalezení:
+Použití:
+Výsledek:
+Datová stopa:
+Stav: Potvrdit / Doladit / Oddělit / Vrátit
+Další krok:
+Log věta:
+```
+
+Vyplněný příklad:
+
+```text
+Původní nález: při zákaznickém předání vznikal export poptávek mimo CRM.
+Provedená úprava: předávací checklist nově žádá agregovaný souhrn a staré pole pro export bylo odstraněno.
+První normální použití: předání onboardingového balíčku zákazníkovi.
+Nalezení: pravidlo bylo v checklistu u kroku předání dat.
+Použití: člověk předal souhrn bez přílohy a odkázal na CRM jako zdroj detailu.
+Výsledek: export nevznikl.
+Datová stopa: jen agregovaná věta v předávací poznámce, bez osobních údajů.
+Stav: Potvrdit.
+Další krok: uzavřít úpravu a ponechat kontrolu v běžném měsíčním rytmu.
+Log věta: úprava předávacího checklistu byla potvrzena při prvním normálním použití bez exportu osobních údajů.
+```
+
+Když stav vyjde `Doladit`, udělejte drobnou opravu hned, pokud je opravdu drobná. Například přejmenovat řádek, doplnit jeden příklad nebo opravit odkaz. Pokud vyjde `Oddělit`, založte samostatný kandidát a tuto úpravu uzavřete. Pokud vyjde `Vrátit`, nezkoušejte jen přidat další vysvětlení. Vraťte se k místu rozhodnutí a zjistěte, proč stará cesta zůstala silnější.
+
+### Mini workshop na 10 minut
+
+Vezměte jednu úpravu pravidla z poslední revize.
+
+1. Napište původní nález a provedenou úpravu.
+2. Určete první normální použití, kde se úprava ověří.
+3. Projděte čtyři signály: nalezení, použití, výsledek, stopa.
+4. Rozhodněte stav `Potvrdit`, `Doladit`, `Oddělit` nebo `Vrátit`.
+5. Napište jednu log větu bez osobních údajů.
+6. Uzavřete ověřovací kartu nebo z ní vytvořte jeden samostatný kandidát.
+
+Výstup:
+
+```text
+Úprava [konkrétní změna] byla při [normální použití] ve stavu [stav], protože [nejkratší důvod]. Další krok je [jeden krok].
+```
+
+Pokud po deseti minutách řešíte tři další problémy, zastavte se. Ověřujete jednu úpravu. Další problémy si zaslouží vlastní smyčku, ne přilepení na tuhle kartu.
+
+### Codyho komentář
+
+Můj pohled: dobré pravidlo se pozná podle toho, že po ověření může zmizet z pozornosti. Když každá úprava potřebuje další tabulku, další schůzku a další připomínku, provoz se sice tváří zodpovědně, ale ve skutečnosti bobtná. Privacy-first disciplína je v tomhle krásně praktická: méně kopií, méně výjimek, méně dokazování. Pravidlo má chránit práci, ne si říkat o vlastní fan klub.
+
+### Checklist kapitoly
+
+- Vracíte se při ověření k původnímu nálezu?
+- Je jasně popsána provedená úprava?
+- Vybrali jste první normální použití, ne laboratorní scénář?
+- Sledujete nalezení, použití, výsledek a datovou stopu?
+- Hodnotíte práci a systém, ne výkon konkrétního člověka?
+- Umíte rozlišit stavy `Potvrdit`, `Doladit`, `Oddělit` a `Vrátit`?
+- Nelepíte nový problém na úpravu, která původní nález vyřešila?
+- Nevznikl při ověření export, screenshot nebo kopie jen jako důkaz?
+- Zůstala osobní data v kanonickém systému?
+- Je ověřovací karta krátká a uzavíratelná?
+- Má výsledek jednu log větu bez citlivých detailů?
+- Je další krok opravdu jeden krok?
+
+Ověření úpravy pravidla je poslední brzda před tím, než změnu pustíte do normálu. Když funguje, nechte ji běžet. Když potřebuje drobné doladění, dolaďte ji blízko místa rozhodnutí. Když odhalí jiný problém, oddělte ho. A když se stará cesta vrátí silnější než pravidlo, berte to jako informaci o systému, ne jako důvod přidat další odstavec plný vykřičníků.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KZ o ověření úpravy pravidla po příštím normálním použití: návrat k původnímu nálezu, výběr reálné situace, signály nalezení/použití/výsledku/datové stopy, rozhodovací stavy, privacy-first kontrola, ověřovací karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KY o převodu nálezu z první běžné revize do jedné úpravy pravidla: revizní věta, typy úprav, oprava místa rozhodnutí, omezení rozsahu, privacy-first kontrola, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KX o první revizi pravidla v běžném rytmu: rozlišení revize od nového projektu, kontrola rytmu, stavy Pokračovat/Přesunout/Znovuotevřít, privacy-first revizní stopa, karta, příklady, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KW o uzavření stabilizovaného pravidla do běžného revizního rytmu: vstupní stav Ponechat, výběr nejmenšího existujícího rytmu, uzavírací věta, zrušení přechodových opor, privacy-first úklid, karta, příklad, mini workshop a checklist.
