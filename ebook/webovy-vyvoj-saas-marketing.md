@@ -19,6 +19,68 @@ Když po čtení vznikne víc úkolů, vyberte jeden hlavní a zbytek nechte v p
 
 Pokud rukopis používá tým, určete u vybraného kroku jednoho vlastníka a nejbližší termín kontroly. Bez toho se dobré rozhodnutí snadno rozpustí mezi lidmi: všichni souhlasí, nikdo ho nevezme do ruky a další schůzka začne od stejné otázky.
 
+## Rychlé pracovní trasy
+
+Rukopis je dlouhý záměrně, ale první krok má být krátký. Pokud nevíte, kde začít, vyberte trasu podle aktuální situace a po přečtení zapište jednu pracovní větu.
+
+### Potřebuji zlepšit firemní web
+
+Začněte kapitolami 1 až 7 a potom použijte kapitolu 30. Hledejte hlavně odpověď na otázku: co návštěvník potřebuje pochopit, čemu má uvěřit a jaký další krok má udělat bez zbytečného tření.
+
+Praktický výstup:
+
+- jedna upravená věta hlavního slibu;
+- jeden odstraněný nebo zkrácený formulářový požadavek;
+- jeden důkaz důvěry posunutý výš;
+- seznam externích skriptů s rozhodnutím ponechat, nahradit nebo vypnout.
+
+### Přemýšlím, jestli stavět aplikaci nebo SaaS
+
+Začněte kapitolami 8 až 14 a potom použijte kapitoly 31, 35 a případně přílohu A. Hledejte hlavně odpověď na otázku: jaký opakovaný workflow má produkt zlepšit a jaká data kvůli tomu opravdu potřebuje.
+
+Praktický výstup:
+
+- jedna věta problému a primárního uživatele;
+- popsaný hlavní objekt, vlastník a základní stavy;
+- rozhodnutí, co v MVP zůstane ruční;
+- privacy-first poznámka k datům, exportu a retenci.
+
+### Potřebuji zlepšit marketing a prodej
+
+Začněte kapitolami 22 až 29 a potom použijte kapitolu 36. Hledejte hlavně odpověď na otázku: komu pomáháme udělat lepší rozhodnutí a jaký důkaz mu chybí.
+
+Praktický výstup:
+
+- jeden cílový segment místo obecného publika;
+- čtyři rozhodovací otázky zákazníka;
+- jeden obsahový pilíř s interními odkazy;
+- jeden férový další krok bez automatického přihlášení do marketingu.
+
+### Řeším privacy-first provoz
+
+Začněte kapitolami 3, 7, 14 a 32. Potom sáhněte po přílohách podle toho, jestli řešíte provozní list, dodavatele, retenci, incident nebo úklid dočasných podkladů. Hledejte hlavně odpověď na otázku: kde data vznikají, kam tečou, kdo k nim má přístup a kdy zmizí.
+
+Praktický výstup:
+
+- mapa datových toků v jedné tabulce;
+- seznam dodavatelů a jejich účelů;
+- retenční pravidlo pro logy, poptávky a exporty;
+- jedna věta pro návštěvníka, která lidsky vysvětluje, co se měří a proč.
+
+### Mám jen třicet minut
+
+Nečtěte všechno. Vyberte jednu stránku, jeden produktový tok nebo jeden marketingový materiál a použijte nejbližší checklist. Na konci napište:
+
+```text
+Měníme:
+Vlastník:
+Ověříme podle:
+Termín kontroly:
+Co kvůli soukromí nesbíráme:
+```
+
+Pokud po třiceti minutách nevznikne takový zápis, zúžili jste problém málo. Vraťte se o krok zpět a vyberte menší pracovní jednotku.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -88855,6 +88917,7 @@ Kontrola po prvním běžném cyklu chrání tým před falešným pocitem hotov
 
 ## Pracovní log
 
+- 2026-05-19: Doplněny rychlé pracovní trasy do úvodu e-booku: web, aplikace/SaaS, marketing a prodej, privacy-first provoz a třicetiminutový pracovní režim s konkrétními výstupy.
 - 2026-05-19: Doplněna Příloha KV o kontrole stabilizovaného pravidla po prvním běžném cyklu: výběr skutečného cyklu, sledování pracovní cesty místo výkonu člověka, porovnání minimálního a skutečného výstupu, návrat staré cesty, privacy-first kontrola datové stopy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KU o stabilizaci potvrzené systémové opravy do běžného pravidla: převod ověřovacího závěru do provozní věty, kanonický domov, zavření staré cesty, lehký kontrolní signál, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KT o ověření systémové opravy po měsíční kontrole dočasných podkladů: první normální použití, čtyři signály ověření, rozlišení problému opravy a okolí, nejbližší pracovní místo, privacy-first ověřovací záznam, karta, příklad, mini workshop a checklist.
