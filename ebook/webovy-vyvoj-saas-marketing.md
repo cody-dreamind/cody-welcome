@@ -91167,8 +91167,196 @@ Můj pohled: dobré pravidlo po stabilizaci trochu znudí. Lidé ho najdou, pou�
 
 Kontrola po dalším čtení má chránit stabilizované pravidlo před dvěma extrémy: zapomenutím a přerůstáním. Buď se pravidlo ztratí, nebo kolem sebe nabalí další vysvětlování. Správný stav je prostší: pravidlo pomáhá v práci, nezvyšuje datovou stopu a nepotřebuje zvláštní péči.
 
+## Příloha LH: Převod opakovaně potvrzeného měsíčního pravidla do kvartálního přehledu
+
+Když pravidlo projde druhým měsíčním čtením bez nové opravy, není dobré ho donekonečna držet ve stejné měsíční pozornosti. Údržba má chránit práci, ne vyrábět stálý pocit, že všechno musí být každý měsíc znovu obhajováno. Opakovaně potvrzené pravidlo proto potřebuje jiný režim: z aktivní měsíční kontroly se má přesunout do lehkého kvartálního přehledu.
+
+Smysl není pravidlo opustit. Smysl je přiznat, že už funguje jako běžná součást systému. Měsíční čtení má sloužit novým nálezům, křehkým úpravám a místům, kde se vrací staré chování. Pravidlo, které lidé našli, použili a uzavřeli bez pomocné datové stopy, má dostat méně prostoru. Jinak tým platí za stabilitu časem, který by měl věnovat další skutečné práci.
+
+Pracovní otázka:
+
+```text
+Je stabilizované měsíční pravidlo dost potvrzené na to, aby z měsíční kontroly přešlo do kvartálního portfoliového přehledu?
+```
+
+Výchozí pravidlo:
+
+```text
+Po dvou běžných měsíčních čteních bez nové opravy přesuňte pravidlo z aktivní měsíční kontroly do kvartálního přehledu. Zachovejte kanonické pracovní místo, vlastníka, hranici dat a jeden spouštěč návratu do měsíční péče.
+```
+
+### Převádějte jen pravidlo se dvěma potvrzeními
+
+Kvartální přehled není odkladiště pro věci, které nikoho nebaví kontrolovat. Je to režim pro pravidla, která se opakovaně osvědčila v normální práci. Před přesunem proto musí být jasné, že pravidlo má alespoň dvě potvrzení:
+
+- první potvrzení při běžném použití po stabilizaci;
+- druhé potvrzení při dalším měsíčním čtení;
+- žádný návrat staré cesty;
+- žádná nová pomocná tabulka, export, screenshot nebo chatová kopie;
+- žádná potřeba vysvětlovat původní historii změny;
+- jasného vlastníka pracovního místa.
+
+Pokud některý bod chybí, pravidlo nepřesouvejte. Nechte ho ještě jeden měsíční cyklus v aktivní pozornosti nebo udělejte jednu konkrétní opravu místa, znění či hranice.
+
+Krátký příklad:
+
+```text
+Pravidlo "stav poptávek jednou větou bez screenshotu detailu" prošlo dvěma měsíčními čteními bez návratu screenshotů. Přesouváme ho do kvartálního přehledu pravidel pro předání zákaznických portálů.
+```
+
+### Oddělte pravidlo od jeho měsíční historie
+
+Při přesunu do kvartálního přehledu se často objeví chuť uložit všechno: měsíční nález, ověřovací kartu, stabilizační poznámku, kontrolu druhého měsíce a ještě pár komentářů z chatu. To je pochopitelné. A přesně tím vzniká dokument, který nikdo nebude používat.
+
+Do kvartálního přehledu patří jen aktuální provozní tvar:
+
+```text
+Pravidlo:
+Kde se používá:
+Proč existuje:
+Co se nedělá:
+Vlastník:
+Spouštěč návratu do měsíční péče:
+Poslední potvrzení:
+```
+
+Historii držte jen tam, kde má hodnotu pro budoucí rozhodování. Pokud už jen dokazuje, že práce proběhla, archivujte ji podle retenčního pravidla nebo smažte. Stabilní pravidlo nemá být kufr plný účtenek.
+
+### Nastavte spouštěč návratu
+
+Přesun do kvartálního režimu musí obsahovat podmínku, kdy se pravidlo vrací do měsíční péče. Bez toho se z kvartálního přehledu stane černá díra: pravidlo tam leží, dokud se nerozbije dost nahlas.
+
+Dobrý spouštěč je konkrétní a pozorovatelný:
+
+- objeví se screenshot nebo export tam, kde pravidlo říká stavovou větu;
+- člověk pravidlo nenajde v pracovním místě a ptá se v chatu;
+- výjimka nemá vlastníka, důvod nebo datum konce;
+- pravidlo se kvůli nové službě, integraci nebo roli přestane vztahovat na reálný tok;
+- zákaznický nebo interní výstup ztratí rozhodovací hodnotu.
+
+Slabý spouštěč:
+
+```text
+Vrátit k revizi, pokud bude potřeba.
+```
+
+Silnější spouštěč:
+
+```text
+Vrátit do měsíční péče, pokud se při předání portálu znovu objeví screenshot zákaznického detailu nebo pokud vlastník nedokáže výstup dokončit ze stavové věty.
+```
+
+### Zkraťte měsíční čtení
+
+Přesun do kvartálního přehledu má uvolnit měsíční čtení. Udělejte proto malou úpravu měsíčního postupu: pravidlo už se nemá každý měsíc ručně kontrolovat, pokud nenastal spouštěč návratu.
+
+Měsíční postup může obsahovat jedinou větu:
+
+```text
+Opakovaně potvrzená pravidla v kvartálním přehledu kontrolujeme jen při spouštěči návratu; jinak se k nim vracíme v kvartální konsolidaci.
+```
+
+Tato věta je důležitá. Bez ní lidé často pokračují ve staré kontrole ze zvyku. A ze zvyku vzniká nenápadná byrokracie, která nemá dramatický název, jen každý měsíc ukousne dvacet minut.
+
+### Privacy-first brána přesunu
+
+Přesun do kvartálního režimu je vhodný okamžik pro úklid zbytkové datové stopy. Pravidlo už nepotřebuje měsíční důkazy, pracovní kopie ani dočasné příklady s reálnými údaji. Pokud zůstávají, jejich účel musí být znovu obhájen.
+
+Projít:
+
+- existují staré ověřovací exporty nebo screenshoty;
+- jsou v měsíčních poznámkách reálné zákaznické údaje, které už nejsou potřeba;
+- dají se příklady nahradit anonymizovanou nebo syntetickou verzí;
+- má kvartální přehled jen data potřebná k rozhodování;
+- je jasné, kdo může přehled číst a upravovat;
+- má pravidlo retenční poznámku pro staré kontrolní artefakty;
+- neukládá se nová evidence jen proto, že se pravidlo přesunulo.
+
+Krátký zápis:
+
+```text
+Při přesunu do kvartálního přehledu mažu staré ověřovací screenshoty, ponechávám jen anonymizovaný příklad stavové věty a datum posledního potvrzení.
+```
+
+### Karta kvartálního přesunu
+
+Použijte kartu, která se dá vyplnit v jednom průchodu. Pokud potřebujete dlouhý dokument, pravděpodobně se snažíte zachránit historii místo nastavit provoz.
+
+```text
+Pravidlo:
+Kanonické pracovní místo:
+První potvrzení:
+Druhé potvrzení:
+Stav staré cesty:
+Pomocná datová stopa:
+Rozhodnutí: ponechat měsíčně / přesunout kvartálně / opravit před přesunem / zrušit
+Kvartální přehled:
+Vlastník:
+Spouštěč návratu do měsíční péče:
+Privacy-first úklid:
+Další kvartální kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo: stav poptávek jednou větou bez screenshotu detailu.
+Kanonické pracovní místo: zákaznický předávací checklist.
+První potvrzení: dubnové předání portálu bez screenshotu.
+Druhé potvrzení: květnové měsíční čtení bez pomocného exportu.
+Stav staré cesty: screenshoty se nevrátily.
+Pomocná datová stopa: žádná.
+Rozhodnutí: přesunout kvartálně.
+Kvartální přehled: pravidla pro předání zákaznických portálů.
+Vlastník: delivery lead.
+Spouštěč návratu do měsíční péče: nový screenshot detailu, export nebo nejasná výjimka.
+Privacy-first úklid: smazány staré ověřovací podklady, ponechán anonymizovaný příklad.
+Další kvartální kontrola: konec příštího kvartálu.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jedno pravidlo, které prošlo druhým měsíčním čtením bez opravy.
+
+1. Ověřte dvě potvrzení v normální práci.
+2. Zapište, zda se vrátila stará cesta.
+3. Zapište, zda vznikla nová pomocná datová stopa.
+4. Vyberte kvartální přehled, kam pravidlo patří.
+5. Přepište pravidlo do krátké karty bez měsíční historie.
+6. Nastavte spouštěč návratu do měsíční péče.
+7. Smažte nebo archivujte staré kontrolní artefakty podle retenčního pravidla.
+8. Zkraťte měsíční postup o pravidlo, které už nemá být ručně kontrolované.
+
+Výstup:
+
+```text
+Jedno opakovaně potvrzené pravidlo je přesunuté do kvartálního přehledu, má spouštěč návratu a nezanechává zbytečnou datovou stopu.
+```
+
+### Codyho komentář
+
+Můj pohled: systém, který neumí snížit intenzitu kontroly, nikdy opravdu nedospěje. Pořád se tváří odpovědně, ale ve skutečnosti říká týmu: ničemu nevěříme, všechno budeme hlídat pořád. Dobrá údržba umí pravidlo nejdřív podržet, potom pustit do běžného provozu a nakonec ho jen občas zkontrolovat. Ano, i procesy potřebují naučit chodit bez držení za ruku. Bez dramat, bez fanfár, ideálně bez nové tabulky.
+
+### Checklist kapitoly
+
+- Má pravidlo dvě potvrzení z normální práce?
+- Nevrátila se stará cesta, kvůli které pravidlo vzniklo?
+- Nevznikl nový screenshot, export, chatová kopie nebo pomocná tabulka?
+- Je pravidlo srozumitelné bez měsíční historie?
+- Má jasné kanonické pracovní místo?
+- Má vlastníka, který odpovídá za jeho běžné používání?
+- Vybrali jste konkrétní kvartální přehled, ne obecný archiv?
+- Nastavili jste spouštěč návratu do měsíční péče?
+- Zkrátili jste měsíční čtení o pravidlo, které už nepotřebuje aktivní kontrolu?
+- Smazali nebo archivovali jste staré kontrolní artefakty podle retence?
+- Zůstaly v příkladech jen anonymizované nebo syntetické údaje?
+- Je další kontrola napojená na běžný kvartální rytmus?
+
+Přesun do kvartálního přehledu je malá, ale důležitá forma důvěry v provoz. Pravidlo zůstává dohledatelné, má hranice a spouštěč návratu, ale přestává zabírat měsíční pozornost. Tak má vypadat zralá údržba: méně rituálu, více skutečné práce.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha LH o převodu opakovaně potvrzeného měsíčního pravidla do kvartálního přehledu: dvě potvrzení, oddělení pravidla od historie, spouštěč návratu do měsíční péče, zkrácení měsíčního čtení, privacy-first úklid, karta přesunu, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LG o kontrole stabilizovaného měsíčního pravidla po dalším čtení: výběr jedné úpravy, tři signály běžného použití, rozlišení problému místa, znění a hranice, ochrana před návratem staré historie, privacy-first kontrola druhého měsíce, kontrolní karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LF o stabilizaci potvrzené měsíční úpravy do běžného pravidla: vstupní podmínky, přepis historie na aktuální pravidlo, uložení do místa rozhodnutí, uzavření měsíční stopy, privacy-first brána, stabilizační karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LE o ověření měsíční úpravy po prvním normálním použití: návrat k původnímu nálezu, výběr skutečného průchodu, signály nalezení/použití/výsledku/datové stopy, rozlišení zkreslení, rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
