@@ -88662,8 +88662,200 @@ Můj pohled: týmy často podceňují posledních pět procent změny. Oprava je
 
 Stabilizace potvrzené opravy má jeden praktický cíl: nová cesta musí být jednodušší než stará. Když se to povede, tým nemusí privacy-first pravidlo pořád připomínat. Prostě se podle něj pracuje.
 
+## Příloha KV: Kontrola stabilizovaného pravidla po prvním běžném cyklu
+
+Stabilizované pravidlo není hotové tím, že je hezky zapsané v kanonickém domově. Hotové začne být až ve chvíli, kdy projde prvním normálním cyklem práce bez speciálního dohledu autora změny. Tým ho najde, použije, dokončí podle něj práci a nevytvoří si bokem starou nebo náhradní cestu.
+
+Tahle kontrola navazuje na stabilizaci potvrzené systémové opravy. Nehledá nové velké téma. Hledá odpověď na úzkou otázku: stalo se z opravy běžné pravidlo, nebo jen další text, který se tváří jako proces?
+
+Prakticky se kontrola hodí po prvním reálném použití pravidla v běžném rytmu: první deploy, první měsíční review, první onboarding, první audit podkladů, první předání zákazníkovi nebo první úklid dočasných exportů. Není potřeba čekat kvartál. Když se pravidlo rozbije hned v prvním cyklu, čím dřív to zjistíte, tím levnější je oprava.
+
+### Vyberte skutečný běžný cyklus
+
+Kontrolujte jen situaci, která by nastala i bez testu. Demo průchod, workshopová simulace nebo "zkusíme si to nanečisto" může ověřit srozumitelnost textu, ale ne běžný provoz. V běžném provozu jsou lidé unavení, mají jiné priority, spěchají, přeskakují mezi nástroji a často dělají rozhodnutí podle nejbližší dostupné cesty. Právě tam se ukáže, jestli je pravidlo použitelné.
+
+Dobré kontrolní situace:
+
+- nový deploy, kde se má použít upravený checklist;
+- pravidelné měsíční review, kde má vzniknout stavová věta místo exportu;
+- první zákaznické předání, kde se má použít zkrácená datová mapa;
+- onboarding nového člověka, který má najít pravidlo bez vysvětlování autora;
+- úklid starého podkladu po uzavření výjimky;
+- incidentní follow-up, který má zapsat poučení bez zbytečných screenshotů.
+
+Špatné kontrolní situace:
+
+- autor pravidla sedí vedle týmu a radí každý krok;
+- kontrola probíhá na ideálním příkladu bez okrajových případů;
+- používá se kopie pravidla mimo kanonické místo;
+- tým dopředu ví, že se hodnotí konkrétní člověk, a začne hrát divadlo;
+- výsledek se posuzuje podle dojmu, ne podle pracovního artefaktu.
+
+Kontrolní otázka zní: kdyby se nikdo speciálně nesnažil, došlo by k použití pravidla přirozeně? Pokud ne, pravidlo ještě není stabilizované. Je možná správné, ale neleží v pracovním toku.
+
+### Sledujte cestu, ne výkon člověka
+
+Kontrola pravidla nemá být tajný test zaměstnance. To je rychlá cesta k tomu, aby lidé začali schovávat chyby a vyrábět hezčí záznamy, ne lepší systém. Sledujte pracovní cestu:
+
+1. Jak člověk zjistil, že pravidlo existuje?
+2. Kde ho našel?
+3. Co podle něj udělal?
+4. Jaký artefakt po práci vznikl?
+5. Vznikla někde bokem kopie, screenshot, export, chatová instrukce nebo ruční obchvat?
+
+Když člověk pravidlo nenajde, není první závěr "nečetl dokumentaci". První závěr je: cesta k pravidlu je možná špatně umístěná, špatně pojmenovaná nebo není napojená na moment práce. Dokumentace, kterou člověk musí najít silou vůle, je slabší než pravidlo zabudované do checklistu, šablony nebo formuláře.
+
+Příklad: tým stabilizoval pravidlo, že po smoke testu kontaktního formuláře se zapisuje stavová věta místo screenshotu. Při prvním deployi člověk stejně vloží screenshot do chatu. Není nutně problém v člověku. Možná starý deploy checklist pořád říká "přiložit důkaz", chat má připnutý starý příklad, nebo formulář pro release nemá pole pro stavovou větu. Kontrola má najít nejbližší místo, kde stará cesta vyhrála.
+
+### Porovnejte minimální výstup se skutečným výstupem
+
+Každé stabilizované pravidlo by mělo mít minimální výstup. Ne ideální výstup pro perfektní den, ale nejmenší podobu, která stačí k rozhodnutí, provozu nebo důvěře.
+
+Příklady minimálních výstupů:
+
+- jedna stavová věta v deploy issue;
+- aktualizovaná řádka v datové mapě;
+- odkaz na kanonický podklad místo exportu do chatu;
+- krátká uzavírací poznámka v changelogu;
+- vyplněná karta výjimky s retenčním datem;
+- rozhodnutí ponechat, opravit, sloučit nebo archivovat.
+
+Při kontrole porovnejte tři věci:
+
+1. Co pravidlo slibovalo jako minimální výstup.
+2. Co skutečně vzniklo.
+3. Co vzniklo navíc a proč.
+
+Navíc nemusí být vždy špatně. Někdy vznikne doplňující poznámka, která pomůže dalšímu člověku. Problém je, když "navíc" znamená nový datový stín: screenshoty, exporty, kopie tabulek, osobní poznámky s citlivými údaji nebo paralelní seznamy, které nikdo nebude uklízet.
+
+Privacy-first pravidlo je úspěšné až tehdy, když po něm zůstane méně zbytečných stop než po staré cestě. Pokud je výstup věcně správný, ale kolem něj vznikly tři nové kopie, změna splnila text, ale minula hodnotu.
+
+### Najděte návrat staré cesty
+
+Stará cesta se málokdy vrací s nápisem "jsem stará cesta". Vrací se jako pohodlí. Někdo použije starou šablonu, protože ji má v historii. Někdo pošle screenshot, protože je to rychlejší než formulovat stavovou větu. Někdo exportuje tabulku, protože adresát nechce otevřít kanonický nástroj. Někdo založí nový dokument, protože neví, kam zapsat výsledek.
+
+Typické signály návratu staré cesty:
+
+- lidé si pravidlo vysvětlují ústně místo odkazu na zdroj pravdy;
+- v chatu se objevuje kopie toho, co má být jen v kanonickém systému;
+- stará šablona se použije "jen tentokrát";
+- nová karta existuje, ale práce se dokončí mimo ni;
+- někdo doplní screenshot jako pojistku, i když pravidlo říká, že stačí stav;
+- v review se ptáte na stejné informace, které měly být v minimálním výstupu.
+
+Když stará cesta vyhraje, neřešte to přednáškou. Najděte tření. Možná je nové pravidlo moc dlouhé. Možná je umístěné o dvě kliknutí dál. Možná neobsahuje příklad okrajového případu. Možná stará šablona nebyla odstraněná. Možná chybí pole v nástroji. Systémová oprava má začít v nejbližším pracovním místě, ne v morálním apelu.
+
+### Rozlište čtyři stavy pravidla
+
+Po prvním běžném cyklu obvykle stačí čtyři rozhodovací stavy:
+
+1. Ponechat: pravidlo se našlo, použilo, výstup stačil a nevznikla zbytečná stopa.
+2. Zpřesnit: pravidlo fungovalo, ale chyběl příklad, pole, název nebo malá instrukce.
+3. Přemístit: pravidlo je správné, ale neleží v místě práce.
+4. Vrátit k opravě: pravidlo neřeší skutečnou situaci nebo vytváří nové riziko.
+
+Stav `Ponechat` neznamená "už nikdy nekontrolovat". Znamená, že pravidlo může přejít do běžného revizního rytmu. Stav `Zpřesnit` má být malý textový nebo šablonový zásah. Stav `Přemístit` je často nejdůležitější, protože dobré pravidlo na špatném místě se chová jako neexistující pravidlo. Stav `Vrátit k opravě` použijte bez dramatu, když se ukáže, že stabilizace byla předčasná.
+
+Příklad rozhodnutí:
+
+```text
+Kontrola: první deploy po stabilizaci pravidla pro smoke test formuláře.
+Stav: Zpřesnit.
+Důvod: stavová věta vznikla v issue, screenshot nevznikl, ale člověk se ptal v chatu, zda má uvést i CRM záznam.
+Úprava: do checklistu doplnit příklad stavové věty s potvrzením doručení do sdílené schránky a CRM.
+Další kontrola: při příštím deployi formuláře.
+```
+
+To je dost. Není potřeba zakládat nový projekt. Jedna malá úprava, jasné místo, další normální ověření.
+
+### Privacy-first kontrola skutečné stopy
+
+Po prvním cyklu se podívejte na skutečnou datovou stopu. Ne na to, co mělo vzniknout, ale na to, co opravdu zůstalo v nástrojích.
+
+Zkontrolujte:
+
+- zda nevznikly nové screenshoty s osobními údaji;
+- zda se data neposlala do chatu nebo e-mailu jen kvůli pohodlí;
+- zda odkaz vede na kanonický zdroj, ne na kopii;
+- zda má dočasná výjimka retenční datum;
+- zda příklad neobsahuje reálná zákaznická data, která se měla anonymizovat;
+- zda přístup k výsledku mají jen lidé, kteří ho pro práci potřebují;
+- zda výstup stačí k rozhodnutí bez nadbytečných detailů.
+
+Privacy-first kontrola není hon na chyby. Je to hygienická brzda. Většina datového nepořádku nevzniká zlým úmyslem. Vzniká tím, že někdo chtěl být užitečný, rychlý nebo "radši přidal víc kontextu". Dobré pravidlo má lidem pomoct být užiteční bez toho, aby rozlévali data po pracovních kanálech.
+
+### Kontrolní karta po prvním běžném cyklu
+
+Použijte krátkou kartu:
+
+```text
+Stabilizované pravidlo:
+První běžný cyklus:
+Kdo pravidlo použil nebo měl použít:
+Kde pravidlo hledal:
+Vznikl minimální výstup:
+Co vzniklo navíc:
+Vrátila se stará cesta:
+Skutečná datová stopa:
+Rozhodnutí: Ponechat / Zpřesnit / Přemístit / Vrátit k opravě
+Jedna nejbližší úprava:
+Další kontrola:
+Co se smaže, anonymizuje nebo přesune:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizované pravidlo: po smoke testu formuláře zapisovat stavovou větu místo screenshotu.
+První běžný cyklus: deploy nové kontaktní stránky 2026-05-19.
+Kdo pravidlo použil nebo měl použít: člověk odpovědný za release kontrolu.
+Kde pravidlo hledal: deploy checklist v repozitáři.
+Vznikl minimální výstup: ano, v issue je stavová věta.
+Co vzniklo navíc: jeden dotaz v chatu, bez osobních dat.
+Vrátila se stará cesta: ne, screenshot nevznikl.
+Skutečná datová stopa: issue obsahuje stav formuláře, sdílenou schránku a CRM bez detailů poptávky.
+Rozhodnutí: Zpřesnit.
+Jedna nejbližší úprava: doplnit do checklistu příklad věty s CRM potvrzením.
+Další kontrola: příští deploy formuláře.
+Co se smaže, anonymizuje nebo přesune: chatový dotaz není potřeba archivovat, žádný export nevznikl.
+```
+
+### Mini workshop na 10 minut
+
+Kontrola stabilizovaného pravidla má být krátká:
+
+1. Otevřete stabilizační kartu pravidla.
+2. Najděte první skutečný běžný cyklus.
+3. Podívejte se na vzniklý pracovní artefakt.
+4. Porovnejte minimální výstup se skutečným výstupem.
+5. Zapište, jestli se vrátila stará cesta nebo vznikla náhradní stopa.
+6. Rozhodněte stav pravidla.
+7. Udělejte jednu nejbližší úpravu nebo pravidlo přesuňte do běžného rytmu.
+
+Když workshop trvá déle, pravděpodobně řešíte moc široké pravidlo. Zúžte ho na jeden pracovní moment. "Jak tým pracuje s důkazy" je velké téma. "Jak po deployi formuláře zapisujeme výsledek smoke testu" je kontrolovatelná jednotka.
+
+### Codyho komentář
+
+Můj pohled: stabilizované pravidlo se pozná podle toho, že není zajímavé. Nikdo o něm nevede filozofickou debatu, nikdo se nechlubí, že ho použil, a nikdo kvůli němu nezakládá schůzku. Prostě leží na správném místě, vede k dostatečnému výstupu a nevyrábí datový nepořádek. Trochu nudné, hodně užitečné. Což je u provozu skoro kompliment.
+
+### Checklist kapitoly
+
+- Kontrolujete skutečný běžný cyklus, ne simulaci?
+- Sledujete pracovní cestu a artefakt, ne výkon jednotlivce?
+- Je jasné, kde měl člověk pravidlo najít?
+- Vznikl minimální výstup, který pravidlo slibovalo?
+- Nevznikly bokem screenshoty, exporty, kopie nebo chatové instrukce?
+- Je případný návrat staré cesty popsaný jako tření v systému?
+- Umíte rozhodnout mezi stavy Ponechat, Zpřesnit, Přemístit a Vrátit k opravě?
+- Je jedna nejbližší úprava opravdu malá a umístěná v místě práce?
+- Prošli jste skutečnou privacy-first datovou stopu po cyklu?
+- Má pravidlo další kontrolu jen tehdy, když je k ní konkrétní důvod?
+
+Kontrola po prvním běžném cyklu chrání tým před falešným pocitem hotova. Pravidlo může být napsané správně a přesto nepoužitelné. Teprve normální práce ukáže, jestli z něj vznikl provozní návyk.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KV o kontrole stabilizovaného pravidla po prvním běžném cyklu: výběr skutečného cyklu, sledování pracovní cesty místo výkonu člověka, porovnání minimálního a skutečného výstupu, návrat staré cesty, privacy-first kontrola datové stopy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KU o stabilizaci potvrzené systémové opravy do běžného pravidla: převod ověřovacího závěru do provozní věty, kanonický domov, zavření staré cesty, lehký kontrolní signál, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KT o ověření systémové opravy po měsíční kontrole dočasných podkladů: první normální použití, čtyři signály ověření, rozlišení problému opravy a okolí, nejbližší pracovní místo, privacy-first ověřovací záznam, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KS o měsíční kontrole dočasných podkladů: mapa míst, tři stavy kontroly, sledování důvodu vzniku, měsíční karta, prevence nového katalogu stop, převod opakovaného důvodu do systémové opravy, mini workshop a checklist.
