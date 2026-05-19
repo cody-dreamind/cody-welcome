@@ -87826,8 +87826,133 @@ Můj pohled: dobré uzavření je podceňovaná produktivita. Týmy často umí 
 
 Uzavřená systémová úprava má přestat být tématem. To je známka úspěchu. Pravidlo žije ve zdroji pravdy, běžná práce ho přirozeně používá a historie změny zůstává jen tak velká, aby šla dohledat, ne tak velká, aby se musela znovu a znovu obsluhovat.
 
+## Příloha KQ: Stop pravidlo pro screenshoty a dočasné exporty
+
+Screenshot je pohodlný důkaz. A právě proto je zrádný. Vypadá nevinně, rychle se pořídí, snadno se vloží do úkolu a nikdo u toho nemá pocit, že právě vznikl další datový artefakt. Jenže screenshot často zachytí víc, než bylo potřeba: jména zákazníků, e-maily, interní poznámky, URL s tokenem, název projektu, cenu, chybu v produkci nebo kus konverzace.
+
+Dočasný export je stejný problém v tabulkové podobě. Vznikne "jen na kontrolu", pošle se do osobní složky, někdo ho přejmenuje na `final-final`, a za půl roku nikdo neví, proč existuje. Privacy-first provoz se neláme na velkých prohlášeních. Láme se právě tady: v drobných podkladech, které nikdo nechtěl spravovat.
+
+Pracovní otázka:
+
+```text
+Je screenshot nebo export nutný k rozhodnutí, incidentu, eskalaci nebo právnímu důvodu, nebo jen nahrazuje krátkou stavovou větu?
+```
+
+Výchozí pravidlo:
+
+```text
+Screenshoty a dočasné exporty nevznikají při běžné kontrole. Povolené jsou jen při incidentu, eskalaci, právním důvodu nebo technickém důkazu, který nejde rozumně popsat stavovou větou.
+```
+
+### Nejdřív napište stavovou větu
+
+Ve většině běžných kontrol není potřeba obrazovka ani export. Stačí krátká věta, která říká stav, dopad a další krok.
+
+Slabý záznam:
+
+```text
+Viz screenshot.
+```
+
+Silnější záznam:
+
+```text
+Formulář po deployi funguje: testovací poptávka dorazila do sdílené schránky, CRM záznam vznikl bez telefonního čísla a automatická odpověď odešla do jedné minuty. Další kontrola patří do měsíčního review formulářů.
+```
+
+Druhá verze je delší, ale bezpečnější a užitečnější. Člověk nemusí otevírat obrázek, luštit kontext ani zjišťovat, jestli screenshot neobsahuje osobní údaje. Navíc se z takové věty dá lépe poznat, co bylo opravdu ověřeno.
+
+### Kdy je screenshot oprávněný
+
+Screenshot má smysl, když pomáhá vyřešit konkrétní problém a nejde ho nahradit bezpečnějším záznamem.
+
+Typické oprávněné situace:
+
+- Incident: chybová obrazovka, rozbitý formulář, špatná veřejná stránka nebo bezpečnostní varování.
+- Eskalace: dodavatel nebo tým potřebuje přesně vidět stav, který se nedá jednoduše reprodukovat.
+- Právní nebo účetní důvod: podklad musí zůstat jako důkaz podle interního nebo smluvního pravidla.
+- UX chyba: vizuální problém je samotným předmětem opravy, například překryté tlačítko nebo nečitelný text.
+- Technická diagnostika: stav v administraci nejde spolehlivě popsat bez obrázku.
+
+I v těchto případech platí datové minimum:
+
+- Ořízněte obraz jen na relevantní část.
+- Skryjte osobní údaje, zákaznické názvy, tokeny a interní poznámky.
+- Nepřikládejte celý dashboard, když stačí jeden chybový stav.
+- Uložte screenshot do kanonického místa, ne do osobní složky.
+- Přidejte retenční důvod: kdy se má podklad smazat nebo přehodnotit.
+
+### Kdy export nevytvářet
+
+Export je lákavý hlavně tehdy, když tým nechce rozhodnout, jaká data opravdu potřebuje. Místo tří polí si stáhne celou tabulku. Místo jednoho agregovaného čísla uloží seznam uživatelů. Místo stavu "hotovo / nehotovo" vznikne nový soubor s daty, která už někde existují.
+
+Export nevytvářejte, pokud:
+
+- stačí agregovaná metrika,
+- stačí počet, stav nebo trend,
+- data už existují v systému a není potřeba je kopírovat,
+- export obsahuje osobní nebo zákaznická data jen kvůli pohodlí,
+- nikdo neumí říct, kdy se export smaže,
+- export má sloužit jako náhrada za chybějící dashboard nebo provozní kartu.
+
+Lepší alternativa:
+
+```text
+Místo exportu všech poptávek za měsíc zapište: 18 relevantních poptávek, 5 mimo fit, 2 bez odpovědi do 24 hodin, nejčastější otázka: provoz dat v EU. Další krok: doplnit odpověď na stránku služby.
+```
+
+Takový záznam chrání data a zároveň lépe vede k rozhodnutí.
+
+### Minimální karta výjimky
+
+Když screenshot nebo export opravdu musí vzniknout, použijte krátkou kartu. Smyslem není přidat byrokracii. Smyslem je donutit podklad mít účel, vlastníka a konec.
+
+```text
+Typ podkladu: screenshot / export
+Důvod: incident / eskalace / právní důvod / technický důkaz / UX chyba
+Rozhodnutí, které má podklad podpořit:
+Datové minimum: co bylo oříznuto, skryto nebo anonymizováno
+Kanonické místo uložení:
+Kdo má přístup:
+Retence: smazat / anonymizovat / ponechat do [datum nebo spouštěč]
+Stav po vyřešení:
+```
+
+Příklad:
+
+```text
+Typ podkladu: screenshot
+Důvod: UX chyba
+Rozhodnutí, které má podklad podpořit: opravit mobilní formulář, protože potvrzovací hláška překrývá tlačítko.
+Datové minimum: screenshot oříznutý na formulář, e-mail v poli anonymizovaný.
+Kanonické místo uložení: issue k opravě formuláře.
+Kdo má přístup: projektový tým.
+Retence: smazat po uzavření issue a ověření opravy.
+Stav po vyřešení: odstraněno, v changelogu zůstává jen věta o opravě.
+```
+
+### Codyho komentář
+
+Můj pohled: screenshot je často lenost v převleku za důkaz. Někdy je přesně to, co potřebujete. Častěji je to ale způsob, jak nepsat krátkou jasnou větu. A když se takových obrázků nasbírá dost, máte najednou vedlejší archiv interních a zákaznických dat, který nikdo neplánoval. Gratuluju, vyrobili jste si malý compliance horor v PNG.
+
+### Checklist kapitoly
+
+- Existuje rozhodnutí, incident, eskalace nebo právní důvod pro screenshot či export?
+- Nešlo by stejný účel splnit krátkou stavovou větou?
+- Je podklad oříznutý jen na relevantní část?
+- Jsou osobní údaje, zákaznické názvy, tokeny a interní poznámky odstraněné nebo anonymizované?
+- Je podklad uložený v kanonickém místě, ne v osobní složce?
+- Je jasné, kdo k němu má přístup?
+- Má podklad retenční pravidlo nebo datum smazání?
+- Zůstane po vyřešení jen minimální důkaz: stav, odkaz a rozhodovací věta?
+- Nepoužívá tým export jako náhradu za chybějící dashboard?
+- Neučí tato výjimka lidi, že běžná kontrola má vždy produkovat přílohu?
+
+Dobré stop pravidlo neříká "nikdy". Říká: nejdřív zmenšit stopu, potom teprve ukládat důkaz. Pokud stačí věta, napište větu. Pokud je potřeba screenshot, udělejte z něj krátkodobý, oříznutý a dohledatelný podklad. Privacy-first provoz není o tom, že tým nic nesmí. Je o tom, že každá stopa má důvod a konec.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KQ se stop pravidlem pro screenshoty a dočasné exporty: výchozí pravidlo, stavová věta místo přílohy, oprávněné výjimky, datové minimum, retenční karta, příklad, Codyho komentář a checklist.
 - 2026-05-19: Doplněna Příloha KP o uzavření stabilizované systémové úpravy po prvním běžném cyklu: uzavírání jen potvrzeného stavu, přesun hodnoty do zdroje pravdy, zavření kontrolního režimu, uzavírací věta, privacy-first úklid, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KO o kontrole stabilizované systémové úpravy po prvním běžném cyklu: výběr normálního cyklu, sledování nalezení/použití/dokončení, návrat staré cesty, rozlišení pravidla, domova a okolního procesu, privacy-first kontrola, rozhodovací stavy, kontrolní karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KN o stabilizaci potvrzené systémové úpravy do běžného provozu: vstupní brána, konečný domov pravidla, zavření starých cest, přepis do provozního jazyka, vlastník a revizní signál, privacy-first úklid, stabilizační karta, příklad, mini workshop a checklist.
