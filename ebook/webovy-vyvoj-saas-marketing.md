@@ -87131,8 +87131,229 @@ Můj pohled: první použití je nejférovější recenze systému. Neptá se, c
 
 Ověření systémové úpravy má být krátké, ale nemá být symbolické. Když ho přeskočíte, riskujete, že budete dál vyrábět pravidla, která se tváří jako systémová zlepšení a v praxi jen rozšiřují dokumentační šum. Když ho uděláte poctivě, často stačí jedna malá korekce a změna se opravdu usadí v práci.
 
+## Příloha KN: Stabilizace potvrzené systémové úpravy do běžného provozu
+
+Příloha KM končí rozhodnutím po prvním normálním použití systémové úpravy. Pokud stav vyšel jako `Potvrzeno`, nebo jako `Drobná korekce` po rychlé opravě, přichází méně nápadná, ale důležitá práce: stabilizovat změnu tak, aby se z ní nestal další dočasný experiment v rohu dokumentace.
+
+Stabilizace neznamená vyrobit větší proces. Znamená odstranit lešení. Změna má být v místě, kde ji člověk přirozeně použije, má mít vlastníka, má být dohledatelná bez znalosti historie a nemá po sobě nechávat staré varianty, které budou tým lákat zpět.
+
+Pracovní otázka:
+
+```text
+Co musí zmizet, změnit místo nebo dostat vlastníka, aby potvrzená systémová úprava fungovala jako normální součást práce?
+```
+
+Výstupem je jedna stabilizační věta, upravený zdroj pravdy a lehký revizní signál. Ne nová metodika, ne další meeting, ne slavnostní uvedení pravidla do síně slávy. Dokumentace není muzeum. Tedy měla by nebýt. Některé firemní wiki mají jiný názor.
+
+### Stabilizujte jen potvrzenou změnu
+
+Ne každá ověřená úprava si zaslouží stabilizaci. Pokud první použití ukázalo stav `Špatné místo` nebo `Nepotvrzeno`, stabilizace by jen zakonzervovala problém. Nejdřív změnu opravte, přesuňte nebo zrušte. Stabilizujte až ve chvíli, kdy existuje důkaz, že pomohla v reálné práci.
+
+Vstupní brána:
+
+- úprava byla použita v normální práci,
+- člověk ji našel bez ručního navádění,
+- výsledek odpovídá původní systémové větě,
+- nevznikla nová zbytečná evidence,
+- privacy-first kontrola nenašla horší datovou stopu,
+- případná drobná korekce už je hotová.
+
+Pokud jedna z těchto podmínek chybí, napište místo stabilizační věty krátký závěr:
+
+```text
+Změna se zatím nestabilizuje, protože [konkrétní důvod]. Další krok: [jedna oprava nebo zrušení].
+```
+
+To je lepší než tiché ponechání napůl potvrzené věci v provozu. Napůl potvrzené pravidlo má zvláštní schopnost tvářit se důležitě a zároveň nepomáhat.
+
+### Najděte konečný domov pravidla
+
+Potvrzená systémová úprava musí mít jeden konečný domov. Může to být šablona, provozní checklist, onboardingový materiál, kanonická karta, rozhodovací strom nebo část zdrojové dokumentace. Důležité je, aby člověk nemusel vědět, kde změna vznikla. Má ji najít tam, kde pracuje.
+
+Dobrá kontrolní otázka:
+
+```text
+Kdyby zítra přišel nový člověk a řešil stejnou práci, narazí na pravidlo přirozeně?
+```
+
+Pokud ne, pravidlo je pořád v historii, ne v provozu. Typický problém je, že závěr z ověření zůstane jen v changelogu nebo v retrospektivním zápisu. To je užitečné pro audit, ale špatné pro každodenní práci. Changelog říká, co se změnilo. Zdroj pravdy říká, jak se má pracovat teď.
+
+Příklad:
+
+```text
+Špatný domov: zápis z ověření šablony formuláře.
+Dobrý domov: aktuální šablona formuláře, přímo u části "Jaká data sbíráme a proč".
+```
+
+Stabilizace často není o přidání textu. Často je o přesunu jedné věty na správné místo.
+
+### Zavřete staré cesty
+
+Když nová úprava funguje, staré cesty musí přestat vypadat jako rovnocenná volba. Jinak tým nebude používat nový standard, ale náhodnou směs starého a nového. To je nejhorší varianta: systém vypadá modernizovaně, ale rozhodnutí se pořád dělají podle paměti.
+
+Zavření staré cesty může znamenat:
+
+- odstranit starou šablonu,
+- označit starý dokument jako nahrazený,
+- přesměrovat odkaz na nový zdroj pravdy,
+- zkrátit historický zápis na odkaz na aktuální pravidlo,
+- vyčistit duplicitní příklad,
+- odebrat dočasný checklist z aktivní navigace,
+- zavřít backlog položku, která už nemá samostatný účel.
+
+Nejhorší je nechat starou cestu "pro jistotu". Jistota je v tomhle kontextu často jen jiný název pro budoucí zmatek. Pokud starý materiál opravdu musíte nechat kvůli historii, označte ho jasně:
+
+```text
+Archivováno. Aktuální pravidlo je v [odkaz na zdroj pravdy]. Tento dokument nepoužívat pro nové projekty.
+```
+
+### Přepište změnu do obyčejného jazyka
+
+Text stabilizovaného pravidla nemá nést celou historii problému. Člověk v běžné práci nepotřebuje vědět, že pravidlo vzniklo po měsíční kontrole portfolia poučení, ověření systémové úpravy a drobné korekci poznámkového pole. Potřebuje vědět, co má udělat.
+
+Historický zápis:
+
+```text
+Po opakovaném zjištění kopírování privacy pravidel do checklistů a následném ověření úpravy po prvním použití doplňujeme doporučení používat kanonickou kartu.
+```
+
+Provozní pravidlo:
+
+```text
+U formulářů odkazujte na kanonickou privacy kartu. Do projektového checklistu pište jen konkrétní odchylku pro daný projekt.
+```
+
+Druhá verze je lepší, protože se dá použít. Stabilizace je překlad z příběhu změny do jazyka práce.
+
+### Dejte pravidlu vlastníka a lehký signál
+
+Každé stabilizované pravidlo potřebuje vlastníka, ale ne každé pravidlo potřebuje samostatný proces. Vlastník neznamená člověka, který musí všechno kontrolovat. Znamená člověka nebo roli, která ví, kdy se pravidlo má upravit, zrušit nebo sloučit s jiným.
+
+Lehký revizní signál stačí:
+
+- první použití po stabilizaci,
+- měsíční review šablon,
+- kvartální kontrola standardů,
+- incident nebo opakovaný dotaz,
+- změna nástroje, dodavatele nebo datového toku,
+- nový typ projektu, který pravidlo nepokrývá.
+
+Do stabilizační věty proto patří nejen co se změnilo, ale i kdy se k tomu vrátit:
+
+```text
+Pravidlo pro formuláře je stabilizované v projektové šabloně. Vlastníkem je role delivery lead. Kontrola proběhne při nejbližším měsíčním review šablon nebo dřív, pokud se objeví druhý dotaz na stejnou část.
+```
+
+To je dostatečné. Nepotřebujete kvůli jedné větě stavět nový kontrolní systém.
+
+### Privacy-first stabilizace
+
+Stabilizace je dobrý moment odstranit dočasné důkazy. Při ověřování jste možná používali výstupy, příklady, poznámky nebo krátkodobé kontrolní záznamy. Jakmile je změna potvrzená, ponechte jen to, co má dlouhodobý účel.
+
+Zkontrolujte:
+
+- zda zdroj pravdy neobsahuje reálná zákaznická data, kde stačí anonymní příklad,
+- zda ověřovací poznámky neukládají jména lidí bez důvodu,
+- zda staré screenshoty, exporty nebo pracovní kopie ještě mají účel,
+- zda nový standard nesbírá víc dat jen proto, aby se lépe kontroloval,
+- zda je jasné, kde končí aktuální pravidlo a kde začíná archiv historie.
+
+Silný privacy-first závěr:
+
+```text
+V aktuální šabloně zůstává jen provozní pravidlo a anonymní příklad. Ověřovací karta je zkrácena na jednovětý závěr a odkaz na commit. Pracovní kopie s reálným checklistem byla smazána po potvrzení změny.
+```
+
+Tohle drží hodnotu poučení, ale nenechává za sebou zbytečnou datovou stopu.
+
+### Stabilizační karta
+
+```text
+Potvrzená úprava:
+Původní systémová věta:
+Stav po ověření:
+
+Konečný domov pravidla:
+Co se přepisuje do provozního jazyka:
+Co se odstraňuje nebo archivuje:
+Které staré cesty se zavírají:
+
+Vlastník:
+Lehký revizní signál:
+Kdy se pravidlo znovu otevře:
+
+Privacy-first úklid:
+Co zůstává:
+Co se maže nebo zkracuje:
+Co se anonymizuje:
+
+Stabilizační věta:
+```
+
+Příklad:
+
+```text
+Potvrzená úprava: šablona formulářového checklistu odkazuje na kanonickou privacy kartu.
+Původní systémová věta: kvůli kopírování privacy pravidel upravit šablonu tak, aby nová práce odkazovala na zdroj pravdy.
+Stav po ověření: potvrzeno po drobné korekci poznámkového pole.
+
+Konečný domov pravidla: projektová šablona pro formuláře.
+Co se přepisuje do provozního jazyka: krátké pravidlo u části "Data a souhlas".
+Co se odstraňuje nebo archivuje: starý příklad s opsanými obecnými pravidly.
+Které staré cesty se zavírají: odkaz na původní dočasný checklist.
+
+Vlastník: delivery lead.
+Lehký revizní signál: nejbližší měsíční review šablon nebo druhý dotaz na stejné pravidlo.
+Kdy se pravidlo znovu otevře: při změně formulářového toku, analytics nastavení nebo právního textu.
+
+Privacy-first úklid: v šabloně zůstává anonymní příklad, ověřovací karta je zkrácená.
+Co zůstává: provozní pravidlo a odkaz na kanonickou kartu.
+Co se maže nebo zkracuje: pracovní kopie checklistu z ověření.
+Co se anonymizuje: příklad projektové odchylky.
+
+Stabilizační věta: Pravidlo pro formuláře je stabilizované v projektové šabloně, staré kopie jsou zavřené a další kontrola proběhne jen při běžném měsíčním review nebo při opakovaném dotazu.
+```
+
+### Mini workshop na 12 minut
+
+1. Dvě minuty: ověřte, že změna má stav vhodný ke stabilizaci.
+2. Dvě minuty: vyberte konečný domov pravidla.
+3. Dvě minuty: přepište změnu do obyčejného provozního jazyka.
+4. Dvě minuty: najděte staré cesty, které musí zmizet nebo být označené jako archiv.
+5. Dvě minuty: určete vlastníka a lehký revizní signál.
+6. Dvě minuty: proveďte privacy-first úklid a napište stabilizační větu.
+
+Výstup:
+
+```text
+Jedno stabilizované pravidlo ve zdroji pravdy, zavřené staré cesty a krátká věta, kdy se k pravidlu vrátit.
+```
+
+### Codyho komentář
+
+Můj pohled: stabilizace je okamžik, kdy se pozná rozdíl mezi zlepšováním systému a výrobou dalších dokumentů. Pokud po změně zůstane víc míst, víc vysvětlování a víc dočasných podkladů, tým možná pracoval hodně, ale systém není lehčí. Dobrá stabilizace je skoro neviditelná. Příští práce prostě dopadne lépe a nikdo u toho nemusí číst archeologii rozhodnutí.
+
+### Checklist kapitoly
+
+- Má úprava potvrzený stav vhodný ke stabilizaci?
+- Je případná drobná korekce už provedená?
+- Má pravidlo jeden konečný domov ve zdroji pravdy?
+- Narazí na pravidlo nový člověk přirozeně při práci?
+- Je text přepsaný do provozního jazyka bez dlouhé historie?
+- Jsou staré šablony, odkazy nebo příklady odstraněné, přesměrované nebo označené jako archiv?
+- Je jasné, kdo pravidlo vlastní?
+- Má pravidlo lehký revizní signál místo nového kontrolního aparátu?
+- Víte, kdy se pravidlo znovu otevře?
+- Zůstává ve zdroji pravdy jen to, co pomáhá budoucí práci?
+- Jsou dočasné ověřovací podklady smazané, zkrácené nebo anonymizované?
+- Nevzniká kvůli stabilizaci nová zbytečná datová stopa?
+- Má stabilizace jednu větu, kterou tým pochopí bez kontextu?
+
+Stabilizovaná systémová úprava má změnit běžnou práci, ne jen dokumentovat dobrou snahu. Když má správný domov, zavřené staré cesty a lehký revizní signál, přestane být projektem. Stane se normálním způsobem práce. A přesně tam má skončit.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KN o stabilizaci potvrzené systémové úpravy do běžného provozu: vstupní brána, konečný domov pravidla, zavření starých cest, přepis do provozního jazyka, vlastník a revizní signál, privacy-first úklid, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KM o ověření systémové úpravy po prvním použití: výběr prvního normálního použití, sledování práce místo člověka, porovnání s původní systémovou větou, čtyři stavy po ověření, privacy-first kontrola, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KL o provedení systémové úpravy z měsíční kontroly poučení: práce s měsíční větou, výběr nejbližšího pracovního místa, nejmenší dostatečná změna, úprava okolního textu, zavření staré cesty, privacy-first provedení, karta, příklad, mini workshop a checklist.
 - 2026-05-18: Doplněna Příloha KK o měsíční kontrolu uzavřených poučení: výběr uzavřených poučení, hledání opakovaného typu tření, stav portfolia, převod jednoho vzoru do systémové úpravy, privacy-first kontrola portfolia, karta měsíční kontroly, příklad, mini workshop a checklist.
