@@ -88488,8 +88488,183 @@ Můj pohled: nejhorší výsledek měsíční kontroly není to, že najdete nep
 
 Ověření systémové opravy má být krátké a tvrdě praktické. Buď oprava zmenšila datovou stopu při normální práci, nebo ještě není hotová. V obou případech je výsledek užitečný: tým ví, co funguje, co se vrací starou cestou a kde udělat nejmenší další zásah.
 
+## Příloha KU: Stabilizace potvrzené systémové opravy do běžného pravidla
+
+Ověřená oprava ještě není hotový standard. Je to jen dobrý kandidát. Tým jednou prokázal, že nová cesta funguje při normální práci: nevznikl zbytečný screenshot, export ani kopie, stavová věta stačila a stará obchůzka se nevrátila. To je důležité, ale pořád to neznamená, že se stejný návyk udrží za měsíc, při jiném člověku nebo pod tlakem zákaznického termínu.
+
+Stabilizace je krátký převod z "fungovalo to v ověření" do "takhle odteď pracujeme". Nejde o novou metodiku. Jde o to, aby potvrzená oprava měla jasný domov, stručné pravidlo, vlastníka, přirozený kontrolní okamžik a uklizenou minulou stopu. Bez toho se z dobré opravy stane další příloha ke kultuře příloh. Ano, ironie si sedla na židli a udělala si kafe.
+
+Stabilizujte jen opravy, které splňují tři podmínky:
+
+- prošly prvním normálním použitím,
+- zmenšily nebo nezvětšily datovou stopu,
+- mají jasné místo, kde se budou používat opakovaně.
+
+Pokud některá podmínka chybí, vraťte se o krok zpět. Nestabilizujte hypotézu. Stabilizujte ověřený pracovní pohyb.
+
+### Přepište ověřovací závěr do provozního pravidla
+
+Ověřovací zápis bývá historický: co se stalo, kde to zadrhlo a co se upravilo. Pro běžné použití je ale potřeba pravidlo v přítomném čase. Člověk, který ho použije za tři týdny, nepotřebuje znát celý příběh. Potřebuje vědět, co má udělat teď.
+
+Historický zápis:
+
+```text
+Při smoke testu formuláře nevznikl screenshot. Checklist stačil pro zápis výsledku, ale doplnili jsme variantu pro výpadek CRM.
+```
+
+Provozní pravidlo:
+
+```text
+Při testu formuláře zapisujeme výsledek jednou stavovou větou do issue. Screenshot vzniká jen při vizuální chybě nebo při požadavku na důkaz pro incident. Výpadek CRM zapisujeme větou "napojení nedostupné, incident otevřen".
+```
+
+Rozdíl je praktický. První věta je důkaz minulosti. Druhá věta vede budoucí práci. Stabilizace má převést důkaz na instrukci, ale nezatížit ji příběhem vzniku.
+
+Dobré provozní pravidlo má být:
+
+- krátké,
+- konkrétní,
+- umístěné v pracovním místě,
+- použitelné bez autora opravy,
+- doplněné příkladem dobrého zápisu,
+- jasné v tom, kdy je výjimka oprávněná.
+
+Slabé pravidlo poznáte podle toho, že se opírá o paměť týmu. "Jak jsme řešili minule" není standard. Je to kouřový signál nad bažinou procesů. Codyho profesionální doporučení: méně bažiny, víc jedné věty v šabloně.
+
+### Vyberte jeden kanonický domov
+
+Potvrzená oprava musí mít jeden domov. Ne tři kopie, ne poznámku v chatu, ne dokument "zatím tady", ne screenshot pravidla vložený do prezentace. Jeden domov znamená, že tým ví, kam sáhnout, když práci dělá.
+
+Typické domovy:
+
+- issue šablona pro test formuláře,
+- deploy checklist,
+- incidentní uzavírací karta,
+- měsíční review agenda,
+- support playbook,
+- karta automatizace,
+- kanonický index pravidel,
+- README u provozního nástroje.
+
+Výběr domova dělejte podle místa práce, ne podle místa dokumentace. Pokud se pravidlo používá při deployi, patří do deploy checklistu. Pokud se používá při měsíčním review, patří do review agendy. Pokud ho schováte do obecné wiki, bude pravdivé a opuštěné. To je horší než nepravdivé? Ne nutně. Ale pro provoz přibližně stejně neužitečné.
+
+Praktická otázka:
+
+```text
+Kde bude člověk stát ve chvíli, kdy se musí rozhodnout, jestli vytvořit screenshot, export nebo jen stavovou větu?
+```
+
+Tam pravidlo patří.
+
+### Zavřete starou cestu
+
+Stabilizace není hotová, dokud stará cesta zůstává pohodlnější než nová. Pokud lidé dřív posílali screenshot do chatu, ručně exportovali tabulku nebo ukládali dočasné podklady do osobní složky, nová věta v checklistu sama o sobě nestačí. Stará cesta musí být viditelně znepohodlněná, označená nebo odstraněná.
+
+Příklady zavření staré cesty:
+
+- v chatu připnout krátké pravidlo, že screenshot patří do issue jen při oprávněné výjimce,
+- z review agendy odstranit řádek "přiložit export",
+- odebrat starý odkaz na sdílenou složku s dočasnými podklady,
+- v issue šabloně nahradit pole "příloha" polem "stavová věta",
+- v checklistu doplnit větu "pokud vznikl screenshot, uveď důvod a termín smazání",
+- u starého dokumentu přidat nahoře odkaz na nové kanonické pravidlo.
+
+Nejde o trestání starého návyku. Jde o odstranění tření. Lidé se často nevrací ke staré cestě proto, že by milovali nepořádek. Vrací se, protože stará cesta je o dva kliky blíž. Provozní standard musí být blíž než zlozvyk.
+
+### Přidejte lehký kontrolní signál
+
+Nové pravidlo nepotřebuje samostatnou schůzku. Potřebuje lehký signál v existujícím rytmu. Cílem není sledovat lidi, ale poznat, jestli se vrací zbytečná datová stopa.
+
+Dobré signály:
+
+- při příštím deploy review se podívat, zda formulářové testy obsahují stavovou větu,
+- v měsíčním review zkontrolovat počet oprávněných výjimek se screenshotem,
+- při incident review ověřit, zda byly dočasné podklady smazány nebo anonymizovány,
+- při support retro najít, jestli někdo exportoval osobní data mimo kanonický systém,
+- při kontrole šablon ověřit, zda staré pole pro přílohy nezůstalo v kopii dokumentu.
+
+Špatný signál:
+
+```text
+Sledujeme, kdo pravidlo porušil.
+```
+
+Lepší signál:
+
+```text
+Sledujeme, jestli pracovní místo pořád svádí k vytváření zbytečných podkladů.
+```
+
+Privacy-first provoz nemá být dohled nad jednotlivcem. Má být lepší návrh práce. Pokud tým potřebuje mikroskop na lidi, pravidlo je nejspíš moc vzdálené od práce nebo příliš složité.
+
+### Stabilizační karta
+
+Použijte krátkou kartu. Pokud ji nejde vyplnit za pár minut, oprava ještě není zralá nebo je moc široká.
+
+```text
+Ověřená oprava:
+Provozní pravidlo:
+Kanonický domov:
+Staré cesty k zavření:
+Oprávněné výjimky:
+Příklad správného zápisu:
+Vlastník pravidla:
+Kontrolní signál:
+První běžná kontrola:
+Co se smaže, archivuje nebo anonymizuje:
+```
+
+Vyplněný příklad:
+
+```text
+Ověřená oprava: stavové věty pro smoke test kontaktního formuláře.
+Provozní pravidlo: výsledek testu se zapisuje jednou stavovou větou do deploy issue; screenshot jen při vizuální chybě nebo incidentním důkazu.
+Kanonický domov: deploy checklist pro webové formuláře.
+Staré cesty k zavření: řádek "přiložit screenshot" ve staré šabloně, zvyk posílat potvrzovací obrazovku do chatu.
+Oprávněné výjimky: vizuální rozpad formuláře, nesoulad textu potvrzení, incidentní důkaz pro debugging.
+Příklad správného zápisu: "Formulář ověřen, poptávka dorazila do sdílené schránky, CRM záznam vznikl bez telefonu, potvrzení odešlo do jedné minuty."
+Vlastník pravidla: člověk odpovědný za webový deploy checklist.
+Kontrolní signál: při příštím deploy review se kontroluje, zda vznikla stavová věta a nevznikl zbytečný screenshot.
+První běžná kontrola: první deploy formuláře v dalším sprintu.
+Co se smaže, archivuje nebo anonymizuje: staré screenshoty potvrzovacích obrazovek v uzavřených issue smazat, pokud nejsou součástí incidentu.
+```
+
+### Mini workshop na 15 minut
+
+Stabilizaci potvrzené opravy jde udělat rychle:
+
+1. Otevřete ověřovací kartu poslední opravy.
+2. Přepište ověřovací závěr do jedné provozní věty.
+3. Vyberte jedno pracovní místo, kde pravidlo opravdu žije.
+4. Najděte starou cestu, která by mohla lidi stáhnout zpět.
+5. Doplňte jeden příklad správného zápisu.
+6. Určete první běžnou kontrolu v existujícím rytmu.
+7. Ukliďte dočasné důkazy, které už nejsou potřeba.
+
+Výstup workshopu nemá být prezentace. Má být změněná šablona, checklist nebo karta. Jestli po workshopu vznikne jen poznámka "měli bychom pravidlo zapracovat", workshop se přestrojil za odklad.
+
+### Codyho komentář
+
+Můj pohled: týmy často podceňují posledních pět procent změny. Oprava je vymyšlená, ověřená, všichni souhlasí a pak zůstane viset v poznámkách. To je nejdražší místo, kde změnu zahodit. Stabilizace není sexy, protože nevypadá jako nový nápad. Ale právě tady se rozhoduje, jestli privacy-first provoz bude návyk, nebo jen hezká věta v interním dokumentu.
+
+### Checklist kapitoly
+
+- Stabilizujete jen opravu, která prošla prvním normálním použitím?
+- Je ověřovací závěr přepsaný do provozního pravidla v přítomném čase?
+- Má pravidlo jeden kanonický domov v místě skutečné práce?
+- Je stará cesta viditelně zavřená, odstraněná nebo znepohodlněná?
+- Obsahuje pravidlo příklad správného zápisu?
+- Jsou oprávněné výjimky pojmenované konkrétně?
+- Má pravidlo vlastníka, který se stará o jeho domov?
+- Je kontrolní signál součástí existujícího rytmu?
+- Nevzniká při stabilizaci nová zbytečná evidence nebo osobní sledování?
+- Jsou dočasné screenshoty, exporty a kopie smazané, anonymizované nebo zdůvodněně archivované?
+
+Stabilizace potvrzené opravy má jeden praktický cíl: nová cesta musí být jednodušší než stará. Když se to povede, tým nemusí privacy-first pravidlo pořád připomínat. Prostě se podle něj pracuje.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha KU o stabilizaci potvrzené systémové opravy do běžného pravidla: převod ověřovacího závěru do provozní věty, kanonický domov, zavření staré cesty, lehký kontrolní signál, stabilizační karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KT o ověření systémové opravy po měsíční kontrole dočasných podkladů: první normální použití, čtyři signály ověření, rozlišení problému opravy a okolí, nejbližší pracovní místo, privacy-first ověřovací záznam, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KS o měsíční kontrole dočasných podkladů: mapa míst, tři stavy kontroly, sledování důvodu vzniku, měsíční karta, prevence nového katalogu stop, převod opakovaného důvodu do systémové opravy, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KR o úklidu screenshotů a exportů po vyřešení výjimky: úklidové spouštěče, stavy podkladů, náhrada rozhodovací větou, kontrola kopií, retenční karta, privacy-first kontrola, mini workshop a checklist.
