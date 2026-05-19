@@ -17,6 +17,8 @@ Každý průchod rukopisem berte jako malou pracovní smyčku: vybrat problém, 
 
 Když po čtení vznikne víc úkolů, vyberte jeden hlavní a zbytek nechte v poznámkách. Praktický e-book má pomáhat k lepším prioritám, ne vyrábět další frontu práce, kterou nikdo nestihne uzavřít.
 
+Pokud rukopis používá tým, určete u vybraného kroku jednoho vlastníka a nejbližší termín kontroly. Bez toho se dobré rozhodnutí snadno rozpustí mezi lidmi: všichni souhlasí, nikdo ho nevezme do ruky a další schůzka začne od stejné otázky.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -88297,3 +88299,4 @@ Dobré stop pravidlo neříká "nikdy". Říká: nejdřív zmenšit stopu, potom
 - 2026-05-12: Doplněna Příloha EN o kvartální kontrole provozního rytmu standardu: původní slib, reálné průchody, scorecard, zkracování pravidel, privacy-first úklid důkazů a rozhodnutí o dalším zásahu.
 - 2026-05-12: Doplněna Příloha EO o převodu kvartální kontroly standardu do dalšího provozního cyklu: rozhodovací věta, karta cyklu, vlastnictví, komunikace změny, první ověření a uzavření smyčky.
 - 2026-05-17: Zpřesněn úvodní čtenářský kompas o práci s jednou ověřitelnou smyčkou při každém průchodu rukopisem.
+- 2026-05-19: Doplněna poznámka k týmovému používání rukopisu: vlastník kroku, termín kontroly a prevence rozpuštěné odpovědnosti.
