@@ -89671,8 +89671,213 @@ Můj pohled: dobré pravidlo se pozná podle toho, že po ověření může zmiz
 
 Ověření úpravy pravidla je poslední brzda před tím, než změnu pustíte do normálu. Když funguje, nechte ji běžet. Když potřebuje drobné doladění, dolaďte ji blízko místa rozhodnutí. Když odhalí jiný problém, oddělte ho. A když se stará cesta vrátí silnější než pravidlo, berte to jako informaci o systému, ne jako důvod přidat další odstavec plný vykřičníků.
 
+## Příloha LA: Stabilizace potvrzené úpravy pravidla do běžného provozu
+
+Potvrzená úprava pravidla má zvláštní riziko: působí hotově. První normální použití proběhlo, původní nález se nevrátil a datová stopa zůstala kratší. Jenže pokud úprava zůstane jako poznámka v ověřovací kartě, žije pořád v přechodném režimu. Lidé si ji budou pamatovat chvíli, potom přijde další práce, nový člověk nebo starý odkaz a systém se pomalu vrátí k původnímu chování.
+
+Tahle příloha řeší poslední krok po potvrzené úpravě. Cíl není přidat další kontrolu. Cíl je převést ověřenou změnu do běžného pracovního místa, odstranit přechodové pomůcky a nechat pravidlo fungovat bez autora změny.
+
+Pracovní otázka:
+
+```text
+Jak dostaneme potvrzenou úpravu pravidla do běžného provozu tak, aby ji člověk našel ve správný okamžik bez ověřovací historie, bez nové administrativy a bez zbytečné datové stopy?
+```
+
+Výchozí pravidlo:
+
+```text
+Stabilizujte jen úpravu ve stavu Potvrdit nebo po opravdu drobném Doladit. Do běžného provozu patří aktuální pravidlo, ne příběh celé opravy.
+```
+
+### Stabilizujte jen potvrzený stav
+
+Ne každé ověření má skončit stabilizací. Pokud stav vyšel `Oddělit`, původní úpravu můžete uzavřít, ale nové tření patří do samostatné smyčky. Pokud stav vyšel `Vrátit`, stabilizace by jen zakonzervovala nefunkční řešení. A pokud stav vyšel `Doladit`, nejdřív udělejte drobnou opravu a ověřte, že se nezměnil význam pravidla.
+
+Stabilizační brána je jednoduchá:
+
+- původní nález se při normálním použití nevrátil;
+- člověk našel pravidlo bez autora změny;
+- minimální výstup stačil k dokončení práce;
+- stará cesta nebyla pohodlnější než nová;
+- nevznikl export, screenshot, kopie nebo seznam navíc;
+- další krok není nový projekt, ale přepis do běžného místa.
+
+Když některý bod chybí, ještě nestabilizujte. Buď dolaďte pracovní místo, nebo se vraťte k příčině, proč stará cesta zůstala silnější.
+
+### Přepište ověřovací závěr do aktuálního pravidla
+
+Ověřovací karta obsahuje historii. Běžné pravidlo má obsahovat jen současné rozhodnutí. To je velký rozdíl.
+
+Historický zápis:
+
+```text
+Po první běžné revizi jsme zjistili, že při zákaznickém předání vznikal export poptávek, protože pravidlo bylo až v měsíčním review. Přesunuli jsme ho do předávacího checklistu, odstranili pole pro export a při dalším předání se potvrdilo, že agregovaný souhrn stačí.
+```
+
+Běžné pravidlo:
+
+```text
+Při zákaznickém předání se poptávky předávají agregovaným souhrnem. Detail zůstává v CRM. Export osobních údajů mimo CRM se nevytváří, pokud neexistuje schválená výjimka s datem úklidu.
+```
+
+Druhý text je kratší a použitelnější. Nový člověk nepotřebuje znát celou cestu. Potřebuje vědět, co má udělat teď, kde data zůstávají a kdy je výjimka opravdu výjimkou.
+
+Při přepisu si hlídejte tři věci:
+
+- pravidlo musí říkat akci, ne historii;
+- musí být vidět datová hranice;
+- výjimka musí být užší než běžný postup.
+
+Pokud pravidlo potřebuje pět odstavců vysvětlení, pravděpodobně ještě není dost blízko práci. Přesuňte rozhodnutí do checklistu, pole, šablony nebo krátké karty.
+
+### Najděte konečný domov pravidla
+
+Stabilizace není hotová, dokud pravidlo neleží tam, kde se podle něj opravdu pracuje. Ověřovací karta, projektové issue ani chat nejsou konečný domov. Jsou to místa vzniku změny.
+
+Konečný domov může být:
+
+- řádek v předávacím checklistu;
+- otázka v release checklistu;
+- pole v supportní šabloně;
+- pravidlo v kanonickém indexu standardů;
+- krok v incidentní uzavírací kartě;
+- krátká poznámka u exportního oprávnění;
+- odkaz v onboardingové trase role.
+
+Dobrá stabilizační otázka:
+
+```text
+Kde člověk udělá rozhodnutí dřív, než vznikne stará datová stopa?
+```
+
+Pokud odpověď zní "v dokumentaci, až si ji někdo přečte", buďte opatrní. Dokumentace je užitečná, ale často přichází pozdě. Privacy-first pravidlo má být v místě, kde zabrání zbytečnému kopírování dat, ne v místě, kde se později vysvětlí, proč to kopírování nebylo ideální.
+
+### Zavřete přechodové opory
+
+Každá úprava během ověřování vytváří dočasné opory: komentář v issue, kontrolní kartu, připnutou zprávu, poznámku v backlogu, dočasný odkaz, starou šablonu se značkou "nepoužívat". Když je necháte žít vedle nového pravidla, systém bude mít dvě pravdy. A dvě pravdy v provozu znamenají náhodu.
+
+Po stabilizaci projděte:
+
+- ověřovací kartu;
+- revizní nález;
+- dočasné odkazy;
+- starou šablonu nebo pole;
+- připnuté zprávy;
+- backlogové položky;
+- poznámky v pracovních dokumentech.
+
+U každé položky rozhodněte:
+
+- `Smazat`: nemá samostatnou hodnotu a jen drží historii;
+- `Zkrátit`: zůstane pouze jedna log věta bez citlivých údajů;
+- `Přesměrovat`: staré místo ukazuje na nový kanonický domov;
+- `Archivovat`: má auditní nebo provozní hodnotu, ale už není pracovní instrukcí.
+
+Nejčastější chyba je ponechat starou cestu "pro jistotu". Jistota to není. Je to pozvánka k návratu starého chování.
+
+### Privacy-first stabilizace
+
+Stabilizace je ideální okamžik pro úklid datové stopy. Při ověřování mohly vzniknout pracovní poznámky, anonymizované příklady nebo dočasné důkazy. Jakmile je pravidlo potvrzené, zeptejte se, co z toho ještě musí existovat.
+
+Privacy-first stabilizace znamená:
+
+- v kanonickém pravidle nejsou reálné osobní údaje jako příklad;
+- dočasné důkazy mají stav smazáno, anonymizováno nebo archivováno s důvodem;
+- staré exportní pole, odkaz nebo oprávnění je opravdu odstraněné;
+- log věta popisuje změnu bez zákaznických detailů;
+- nový provozní signál měří stav procesu, ne chování konkrétních lidí;
+- běžný rytmus kontroly už existuje a nepřidává se jen kvůli této úpravě.
+
+Bezpečná stabilizační věta:
+
+```text
+Pravidlo pro zákaznické předání bylo přesunuto do předávacího checklistu: poptávky se předávají agregovaně, detail zůstává v CRM a export mimo CRM je jen schválená výjimka s datem úklidu.
+```
+
+Riziková stabilizační věta:
+
+```text
+U každého předání budeme ukládat kontrolní export, aby bylo vidět, že agregovaný souhrn odpovídá detailu.
+```
+
+Druhá věta možná vypadá pečlivě, ale znovu vyrábí kopii dat. To není stabilizace privacy-first pravidla. To je jeho obejití v saku a s razítkem.
+
+### Stabilizační karta
+
+Použijte krátkou kartu a po dokončení ji uzavřete.
+
+```text
+Potvrzená úprava:
+Stav ověření:
+Konečný domov pravidla:
+Aktuální znění pravidla:
+Co bylo odstraněno nebo přesměrováno:
+Co zůstává jen jako log věta:
+Privacy-first úklid:
+Běžný revizní rytmus:
+Vlastník:
+Uzavírací věta:
+```
+
+Vyplněný příklad:
+
+```text
+Potvrzená úprava: předávací checklist žádá agregovaný souhrn poptávek místo exportu.
+Stav ověření: Potvrdit, první normální předání proběhlo bez exportu osobních údajů.
+Konečný domov pravidla: zákaznický předávací checklist.
+Aktuální znění pravidla: poptávky se předávají agregovaným souhrnem, detail zůstává v CRM, export mimo CRM vyžaduje schválenou výjimku s datem úklidu.
+Co bylo odstraněno nebo přesměrováno: staré pole "příloha exportu" bylo odstraněno, měsíční review odkazuje jen na souhrnný signál.
+Co zůstává jen jako log věta: úprava byla potvrzena při prvním normálním použití.
+Privacy-first úklid: žádné nové exporty nevznikly, ověřovací poznámka neobsahuje osobní údaje.
+Běžný revizní rytmus: měsíční kontrola předávacích podkladů.
+Vlastník: vlastník předávacího checklistu.
+Uzavírací věta: potvrzená úprava je stabilizovaná v předávacím checklistu a přechodové opory byly odstraněny.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu úpravu ve stavu `Potvrdit`.
+
+1. Přečtěte ověřovací kartu a napište jednou větou, co se potvrdilo.
+2. Přepište historii do aktuálního pravidla.
+3. Vyberte konečný domov pravidla.
+4. Odstraňte nebo přesměrujte starou cestu.
+5. Uzavřete přechodové opory.
+6. Zkontrolujte, že nevzniká nová datová stopa.
+7. Zapište běžný revizní rytmus a vlastníka.
+
+Výstup:
+
+```text
+Potvrzená úprava [konkrétní změna] je stabilizovaná v [konečný domov]. Staré místo [co] bylo [smazáno/přesměrováno/archivováno] a pravidlo se dál kontroluje v [existující rytmus].
+```
+
+Když workshop začne řešit, jestli by podobné pravidlo nemělo vzniknout i pro další týmy, zastavte to. To je samostatný kandidát. Tady stabilizujete jednu potvrzenou úpravu.
+
+### Codyho komentář
+
+Můj pohled: stabilizace je méně sexy než vymýšlení nových pravidel, a právě proto je důležitější. Nové pravidlo dává pocit pohybu. Stabilizace dává systému paměť. Bez ní se tým pořád učí totéž, jen s novým názvem souboru a lehce jinou tabulkou. Privacy-first provoz stojí na tom, že dobré rozhodnutí skončí v pracovním místě, ne v hromadě důkazů, že někdy existovalo.
+
+### Checklist kapitoly
+
+- Stabilizujete jen úpravu ve stavu `Potvrdit` nebo po drobném `Doladit`?
+- Nezakonzervujete stav `Oddělit` nebo `Vrátit` jako běžné pravidlo?
+- Přepsali jste ověřovací historii do aktuálního provozního znění?
+- Říká pravidlo akci, datovou hranici a podmínku výjimky?
+- Leží pravidlo v místě, kde se člověk rozhoduje?
+- Byla stará cesta odstraněna, přesměrována nebo jasně archivována?
+- Nezůstaly vedle sebe dvě pracovní pravdy?
+- Je ověřovací karta uzavřená a zkrácená na log větu?
+- Proběhl úklid dočasných důkazů, odkazů, příloh a poznámek?
+- Neobsahuje kanonické pravidlo reálné osobní údaje jako příklad?
+- Je běžný revizní rytmus existující, ne nově založený jen pro tuto úpravu?
+- Má pravidlo vlastníka a jednu uzavírací větu?
+
+Stabilizovaná úprava má být obyčejná. Člověk ji najde ve správný okamžik, udělá menší a čistší krok, stará cesta ho netáhne zpátky a po práci nezůstane zbytečná kopie dat. To je dobrý konec malé smyčky: žádná fanfára, jen lepší provoz.
+
 ## Pracovní log
 
+- 2026-05-19: Doplněna Příloha LA o stabilizaci potvrzené úpravy pravidla do běžného provozu: vstupní brána pro stav Potvrdit, přepis ověřovací historie do aktuálního pravidla, konečný domov pravidla, zavření přechodových opor, privacy-first úklid, stabilizační karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KZ o ověření úpravy pravidla po příštím normálním použití: návrat k původnímu nálezu, výběr reálné situace, signály nalezení/použití/výsledku/datové stopy, rozhodovací stavy, privacy-first kontrola, ověřovací karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KY o převodu nálezu z první běžné revize do jedné úpravy pravidla: revizní věta, typy úprav, oprava místa rozhodnutí, omezení rozsahu, privacy-first kontrola, karta, příklad, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha KX o první revizi pravidla v běžném rytmu: rozlišení revize od nového projektu, kontrola rytmu, stavy Pokračovat/Přesunout/Znovuotevřít, privacy-first revizní stopa, karta, příklady, mini workshop a checklist.
