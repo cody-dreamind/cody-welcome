@@ -93823,8 +93823,264 @@ Potvrzená oprava onboardingového pravidla je převedená do běžného provozu
 
 Stabilizace potvrzené opravy je méně vzrušující než vymýšlení nového pravidla, ale pro provoz je důležitější. Právě tady se pozná, jestli tým opravdu zlepšil systém, nebo jen vyrobil další poznámku do dokumentace. Dobrá stabilizace nechá po sobě méně textu, méně kopií, méně datové stopy a jasnější práci.
 
+## Příloha LT: Kontrola stabilizované opravy onboardingového pravidla po prvním běžném cyklu
+
+Stabilizované onboardingové pravidlo potřebuje ještě jednu klidnou kontrolu v běžném cyklu. Ne proto, aby se tým znovu utopil v revizích, ale aby ověřil, že oprava přežila normální práci: nový člověk ji našel, použil, výstup byl dost dobrý a nevznikla stará datová stopa v novém kabátu.
+
+Tato příloha navazuje na Přílohu LS. Vstupem je stabilizační karta s aktuálním zněním pravidla, kanonickým domovem, místem rozhodnutí, návratovým signálem a datem lehké kontroly. Cíl není hodnotit člověka, který onboardingem prošel. Cíl je hodnotit systém, který ho měl dovést k bezpečnému a použitelnému rozhodnutí.
+
+Kontrola po prvním běžném cyklu odpovídá na čtyři otázky:
+
+```text
+Našel člověk pravidlo tam, kde ho potřeboval?
+Použil ho bez dodatečného vysvětlování?
+Vznikl výstup, který odpovídá minimálnímu správnému výsledku?
+Neobjevila se zpět stará datová nebo procesní stopa?
+```
+
+Pokud tyto otázky přeskočíte, může pravidlo vypadat stabilně jen proto, že ho všichni viděli při poslední opravě. To není běžný provoz. To je čerstvá paměť týmu. Skutečný test začíná ve chvíli, kdy už nikdo neřeší historii změny a pravidlo má fungovat samo.
+
+### Vyberte jeden normální cyklus
+
+Kontrola má proběhnout na normálním použití, ne na umělé zkoušce. Vyberte jeden běžný cyklus, ve kterém mělo pravidlo přirozeně pomoct: první samostatné předání, první supportní odpověď, první příprava reportu, první práce s šablonou nebo první dokončení úkolu bez autora pravidla za zády.
+
+Dobré zadání kontroly:
+
+```text
+Cyklus: první samostatné předání zákaznického portálu novým delivery člověkem.
+Pravidlo: při běžném předání nepoužívat screenshot zákaznického detailu, ale stavovou větu a odkaz na portál.
+Kontrolní místo: předávací e-mailová šablona a delivery checklist.
+```
+
+Slabé zadání:
+
+```text
+Cyklus: obecně onboarding.
+Pravidlo: privacy.
+Kontrolní místo: všechno projít.
+```
+
+Druhá verze nemá hranici. Bude svádět k tomu, aby se kontrolovalo všechno od školení po kulturu firmy. První verze je malá, ale užitečná: jedna situace, jedno pravidlo, jedno místo rozhodnutí.
+
+### Sledujte cestu k rozhodnutí
+
+Nejdřív zjistěte, kudy se člověk k pravidlu dostal. Neptáte se kvůli výslechu. Ptáte se proto, že stabilizované pravidlo má být v pracovní cestě, ne v paměti starších kolegů.
+
+Zapište:
+
+- kde člověk začal;
+- jestli šel přes kanonický domov, místo rozhodnutí nebo školící odkaz;
+- zda narazil na starou kopii;
+- jestli musel hledat v chatu, starém úkolu nebo cizím příkladu;
+- zda pravidlo pochopil bez doplňujícího výkladu;
+- kde přesně vzniklo rozhodnutí.
+
+Příklad dobrého zjištění:
+
+```text
+Člověk začal v delivery checklistu, z něj přešel do předávací šablony a použil stavovou větu. Nepotřeboval dohledat starý komentář ani se ptát v chatu.
+```
+
+Příklad varovného zjištění:
+
+```text
+Člověk pravidlo nenašel v checklistu, ale vzpomněl si na něj z onboardingového hovoru. V šabloně zůstala stará ukázka se screenshotem.
+```
+
+Druhé zjištění neznamená, že člověk selhal. Znamená, že stabilizace není úplná. Pravidlo žije v paměti a vedle něj pořád existuje konkurenční stopa.
+
+### Porovnejte výstup s minimem
+
+Kontrola nemá hledat dokonalost. Má ověřit minimální správný výstup. U onboardingových pravidel je to důležité, protože nový člověk může udělat práci jiným stylem než autor pravidla. To je v pořádku, pokud zůstane zachovaný účel, kvalita a ochrana dat.
+
+Definujte minimum ještě před hodnocením:
+
+```text
+Minimální správný výstup:
+Předávací e-mail obsahuje stavovou větu, odkaz na portál a další krok. Neobsahuje screenshot zákaznického detailu, export dat ani přeposlanou interní poznámku.
+```
+
+Pak porovnejte skutečný výstup:
+
+```text
+Skutečný výstup:
+E-mail použil stavovou větu a odkaz na portál. Přidal zbytečný interní komentář o tom, proč screenshot neposíláme, ale bez zákaznických dat.
+```
+
+Závěr může být:
+
+```text
+Výstup splnil datové minimum a hlavní pracovní účel. Příště zkrátit interní vysvětlení, aby se pravidlo nepřenášelo do komunikace se zákazníkem.
+```
+
+Tady se nevyplatí dramatizovat. Když výstup chrání data a splní účel, nejbližší oprava může být malá textová úprava šablony. Když se ale objeví screenshot nebo export, nejde o stylistiku. Je to návrat původního rizika.
+
+### Hledejte návrat staré stopy
+
+Stabilizační karta z Přílohy LS měla obsahovat návratový signál. Teď ho použijte. Nehledejte nové teoretické problémy, dokud nevíte, jestli se vrátil ten původní.
+
+Typické návraty staré stopy:
+
+- člověk znovu použije screenshot, protože je rychlejší;
+- v šabloně zůstala stará varianta s citlivějším příkladem;
+- někdo si uloží vlastní lokální kopii "pro jistotu";
+- zákaznický detail se objeví v interním úkolu místo odkazu na systém;
+- onboarding vysvětluje pravidlo dobře, ale pracovní místo ho neobsahuje;
+- kolega poradí starý postup, protože novou verzi neviděl.
+
+Zapište návrat bez obviňování:
+
+```text
+Návrat staré stopy: v interním úkolu se objevila lokální kopie detailu, protože odkaz na portál nebyl v šabloně dost viditelný.
+```
+
+To je užitečný záznam. Neříká "někdo to pokazil". Říká, kde systém stále vyrábí staré chování.
+
+### Rozhodněte stav po cyklu
+
+Po kontrole vyberte jeden stav. Bez stavu zůstane kontrola jen poznámkou, která se bude znovu číst při další údržbě.
+
+Použijte čtyři stavy:
+
+```text
+Ponechat:
+Pravidlo fungovalo v běžném cyklu, výstup splnil minimum a stará stopa se nevrátila.
+
+Drobně doladit:
+Pravidlo fungovalo, ale jedna formulace, odkaz nebo šablona vytváří malé tření.
+
+Vrátit ke stabilizaci:
+Pravidlo je správné, ale kanonický domov, místo rozhodnutí nebo staré kopie nejsou uklizené.
+
+Znovuotevřít pravidlo:
+Běžný cyklus ukázal, že pravidlo samo nestačí nebo chrání špatnou hranici.
+```
+
+Příklady rozhodnutí:
+
+```text
+Stav: Ponechat.
+Důvod: člověk použil stavovou větu v šabloně, výstup neobsahoval screenshot ani export a nebyl potřeba chatový dotaz.
+```
+
+```text
+Stav: Vrátit ke stabilizaci.
+Důvod: pravidlo je srozumitelné, ale stará kopie šablony s ukázkovým screenshotem zůstala v onboardingové složce a byla použita jako příklad.
+```
+
+```text
+Stav: Znovuotevřít pravidlo.
+Důvod: zákaznický portál zatím neumožňuje bezpečný odkaz pro externího příjemce, takže pravidlo tlačí člověka k ručnímu obcházení.
+```
+
+Poslední stav je důležitý. Někdy nejde o dokumentaci, ale o produktový nebo provozní dluh. Když systém nenabízí bezpečný způsob práce, pravidlo bude znít hezky a lidé ho budou obcházet. Dokumentace pak jen maluje zábradlí na podlahu.
+
+### Privacy-first kontrola bez nové evidence
+
+Kontrola stabilizovaného pravidla nesmí vytvořit větší datovou stopu než problém, který řeší. Nepotřebujete nahrávat obrazovku, kopírovat zákaznický e-mail ani dělat archiv všech mezikroků. Většinou stačí krátký záznam o cestě, výstupu, stavu a případné opravě.
+
+Držte minimum:
+
+- neukládejte reálné screenshoty, pokud nejsou nezbytné pro incident;
+- místo citace zákaznického obsahu popište typ situace;
+- ukládejte závěr, ne celý pracovní materiál;
+- pokud vznikne dočasný podklad, dejte mu datum smazání;
+- nepoužívejte kontrolu jako sledování výkonu konkrétního člověka;
+- při sdílení výsledku pište o pravidle a pracovní cestě, ne o osobních chybách.
+
+Dobrá privacy-first kontrolní věta:
+
+```text
+Kontrola proběhla na jednom běžném předání. Záznam obsahuje jen agregovaný popis cesty a závěr, bez zákaznického obsahu, screenshotu nebo exportu.
+```
+
+Codyho komentář: když kontrola pravidla potřebuje tři exporty, dvě nahrávky a kopii e-mailu, pravděpodobně jste právě vytvořili nový problém. Gratuluji, byrokracie si nasadila falešný knír a říká si kvalita.
+
+### Kontrolní karta po prvním cyklu
+
+Použijte jednoduchou kartu:
+
+```text
+Stabilizované onboardingové pravidlo:
+Kanonický domov:
+Místo rozhodnutí:
+Běžný cyklus:
+Kde člověk pravidlo našel:
+Kde vzniklo rozhodnutí:
+Minimální správný výstup:
+Skutečný výstup:
+Návrat staré stopy: ano / ne
+Popis tření:
+Stav: Ponechat / Drobně doladit / Vrátit ke stabilizaci / Znovuotevřít pravidlo
+Nejbližší krok:
+Privacy-first závěr:
+Vlastník:
+Datum kontroly:
+Datum dalšího rytmu:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizované onboardingové pravidlo: nepoužívat screenshot zákaznického detailu při běžném předání.
+Kanonický domov: delivery checklist.
+Místo rozhodnutí: předávací e-mailová šablona.
+Běžný cyklus: první samostatné předání zákaznického portálu.
+Kde člověk pravidlo našel: v předávací šabloně.
+Kde vzniklo rozhodnutí: při přípravě e-mailu zákazníkovi.
+Minimální správný výstup: stavová věta, odkaz na portál, další krok, bez screenshotu a exportu.
+Skutečný výstup: splněno, jen lehce delší interní vysvětlení v textu.
+Návrat staré stopy: ne.
+Popis tření: šablona by mohla mít kratší zákaznickou formulaci.
+Stav: Drobně doladit.
+Nejbližší krok: zkrátit zákaznickou větu v šabloně bez změny pravidla.
+Privacy-first závěr: bez kopie zákaznických dat, kontrolní záznam je agregovaný.
+Vlastník: delivery lead.
+Datum kontroly: 2026-05-20.
+Datum dalšího rytmu: 2026-06-20.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu stabilizovanou opravu onboardingového pravidla po prvním běžném cyklu.
+
+1. Otevřete stabilizační kartu z Přílohy LS.
+2. Vyberte jeden normální cyklus, kde se pravidlo mělo použít.
+3. Zapište cestu k pravidlu a místo rozhodnutí.
+4. Porovnejte skutečný výstup s minimálním správným výsledkem.
+5. Ověřte návratový signál.
+6. Popište tření bez hodnocení člověka.
+7. Vyberte stav po cyklu.
+8. Zapište nejbližší krok a privacy-first závěr.
+
+Výstup:
+
+```text
+Stabilizovaná oprava onboardingového pravidla je ověřená v prvním běžném cyklu a má jasný stav: ponechat, drobně doladit, vrátit ke stabilizaci nebo znovuotevřít.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete jeden konkrétní běžný cyklus?
+- Navazujete na stabilizační kartu z Přílohy LS?
+- Sledujete pracovní cestu, ne výkon člověka?
+- Zapsali jste, kde člověk pravidlo našel?
+- Zapsali jste, kde vzniklo rozhodnutí?
+- Definovali jste minimální správný výstup před hodnocením?
+- Porovnali jste skutečný výstup s minimem?
+- Ověřili jste návratový signál?
+- Oddělili jste starou stopu od nového tření?
+- Vybrali jste jeden ze čtyř stavů?
+- Má nejbližší krok vlastníka?
+- Nevznikl kvůli kontrole screenshot, export nebo kopie zákaznického obsahu?
+- Je kontrolní záznam agregovaný a použitelný pro další rytmus?
+- Je jasné, jestli pravidlo pokračuje, dolaďuje se, vrací ke stabilizaci nebo se znovu otevírá?
+
+Kontrola po prvním běžném cyklu je poslední sanity check před tím, než pravidlo přestane být "opravené pravidlo" a začne být prostě normální způsob práce. Když projde, není potřeba mu stavět pomník. Stačí ho nechat v rytmu, ve kterém tým už pracuje, a dávat pozor, aby se kvůli kontrole nevrátilo přesně to hromadění dat a kopií, které mělo pravidlo odstranit.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LT o kontrole stabilizované opravy onboardingového pravidla po prvním běžném cyklu: výběr normálního cyklu, cesta k rozhodnutí, porovnání minimálního a skutečného výstupu, návrat staré stopy, rozhodovací stavy, privacy-first kontrola, kontrolní karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LS o stabilizaci potvrzené opravy onboardingového pravidla: vstup přes ověřený stav, přepis historie na aktuální pravidlo, kanonický domov, zavření dočasných opor, návratový signál, privacy-first úklid, stabilizační karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LR o ověření opraveného onboardingového pravidla po dalším použití: návrat k opravné větě, výběr normálního použití, porovnání proti první kontrole, třídění původního/nového/okolního tření, stavy opravy, privacy-first ověřovací karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LQ o opravě onboardingového pravidla po první kontrole: opravná věta, typy textová/polohová/rolová/datová oprava, kanonické místo, omezení rozsahu, privacy-first úklid, ověření při dalším použití, opravná karta, mini workshop a checklist.
