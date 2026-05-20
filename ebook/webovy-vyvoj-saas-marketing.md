@@ -92297,8 +92297,255 @@ Potvrzená kvartální úprava je převedená do aktuálního pravidla, má jedn
 
 Stabilizace je tichá práce. Neprodává se dobře v prezentaci a málokdy z ní vznikne velké "aha". Ale bez ní se ověřené úpravy pomalu mění v hromadu historických poznámek. Dobré pravidlo má žít v místě práce, mít krátkou aktuální větu, uklizenou stopu a lehký návrat v rytmu, který už tým používá.
 
+## Příloha LM: Kontrola dlouhodobého pravidla po dalším kvartálním přehledu
+
+Dlouhodobé pravidlo, které vzniklo ze stabilizované kvartální úpravy, se nemá kontrolovat pořád. Kdyby se po každém použití znovu otevíralo, nikdy by se nestalo běžnou součástí práce. Zároveň ale nemá zmizet do šuplíku jen proto, že jednou prošlo stabilizací.
+
+Další kvartální přehled je správný okamžik pro lehkou kontrolu. Nejde o audit celého procesu. Jde o ověření jedné věci: jestli pravidlo pořád drží hodnotu, kvůli které vzniklo, a jestli se nevrátila stará drahá nebo datově riziková cesta.
+
+Smyslem této přílohy je navázat na Přílohu LL. Pokud stabilizační karta obsahovala návratovou otázku, použijte ji jako hlavní osu kontroly. Pokud návratová otázka chybí, nezačínejte velkou inventurou. Vraťte se k původní opravné větě a z ní odvoďte jednu úzkou kontrolní otázku.
+
+### Začněte návratovou otázkou
+
+Dobrá kontrola nezačíná větou "pojďme se podívat na pravidlo". To je příliš široké. Začíná otázkou, která byla zapsaná při stabilizaci.
+
+Příklad:
+
+```text
+Návratová otázka: nevrátily se při předání portálu screenshoty zákaznického detailu?
+```
+
+Taková otázka je použitelná, protože ukazuje konkrétní riziko. Tým ví, co hledat, kde hledat a kdy může kontrolu ukončit.
+
+Slabá otázka:
+
+```text
+Funguje delivery checklist dobře?
+```
+
+To může být důležité, ale není to kontrola stabilizované úpravy. Je to začátek širší revize. Pokud ji otevřete pokaždé, když kontrolujete jedno pravidlo, kvartální přehled se nafoukne a lidé se mu začnou vyhýbat s elegancí zkušených kalendářových diplomatů.
+
+Praktický postup:
+
+1. Najděte stabilizační kartu nebo revizní větu.
+2. Přečtěte návratovou otázku.
+3. Ověřte, že otázka pořád odpovídá aktuálnímu procesu.
+4. Pokud proces změnil tvar, otázku zúžte na stejný původní smysl.
+5. Neotvírejte další témata, dokud není tato otázka uzavřená.
+
+### Vezměte malý vzorek skutečné práce
+
+Kontrola dlouhodobého pravidla nepotřebuje velké množství dat. Potřebuje pár skutečných průchodů, na kterých poznáte, jestli pravidlo žije v provozu, nebo jen v dokumentu.
+
+Použitelný vzorek:
+
+- poslední dva až tři relevantní výstupy;
+- jedno nedávné předání zákazníkovi;
+- jeden support případ, kde pravidlo mělo pomoct;
+- jedna nová interní šablona, která na pravidlo odkazuje;
+- jeden onboardingový průchod nové role.
+
+Nejde o statistiku. Jde o pracovní signál. Pokud pravidlo ani ve třech posledních relevantních situacích nikdo nepoužil nebo nenašel, nepotřebujete dashboard. Potřebujete opravit místo práce.
+
+Příklad kontroly:
+
+```text
+Vzorek: poslední tři předávací checklisty.
+Signál: ve všech vznikla stavová věta, ve dvou byl použit syntetický příklad, žádný screenshot zákaznického detailu.
+Závěr: pravidlo drží.
+```
+
+Jiný výsledek:
+
+```text
+Vzorek: poslední tři předávací checklisty.
+Signál: jeden checklist obsahoval odkaz na starou šablonu se screenshotem.
+Závěr: pravidlo samotné je dobré, ale stará šablona zůstala ve vyhledávání.
+```
+
+To není důvod přepsat pravidlo. Je to důvod zavřít starou cestu.
+
+### Sledujte čtyři signály
+
+Při kontrole dlouhodobého pravidla sledujte čtyři jednoduché signály. Dohromady ukazují, jestli pravidlo funguje jako běžná součást systému.
+
+```text
+Nalezení: lidé najdou pravidlo tam, kde pracují.
+Použití: pravidlo se promítne do skutečného výstupu.
+Výsledek: původní problém se nevrací.
+Stopa: pravidlo nevyrábí zbytečná data, kopie ani výjimky.
+```
+
+Nalezení je často nejpodceňovanější. Pravidlo může být perfektně napsané, ale pokud ho člověk najde až v revizním zápisu z minulého kvartálu, v praxi neexistuje. Použití ověřuje, že pravidlo není jen přečtené, ale ovlivnilo práci. Výsledek hlídá původní hodnotu. Stopa chrání privacy-first princip: oprava nemá vracet data, kterých jste se chtěli zbavit.
+
+Krátká kontrolní tabulka:
+
+```text
+Pravidlo:
+Návratová otázka:
+Vzorek:
+Nalezení: drží / tření / selhává
+Použití: drží / tření / selhává
+Výsledek: drží / tření / selhává
+Stopa: drží / tření / selhává
+Nejbližší nález:
+```
+
+Hodnota tabulky není v administrativě. Hodnota je v tom, že tým nerozmazává jeden problém do deseti pocitů.
+
+### Rozlište stav pravidla
+
+Po kontrole dejte pravidlu jeden ze čtyř stavů.
+
+```text
+Ponechat: pravidlo je nalezitelné, používané a původní problém se nevrací.
+Dočistit trasu: pravidlo je dobré, ale zůstala stará kopie, špatný odkaz nebo nejasné místo.
+Upravit znění: pravidlo se používá, ale lidé ho vykládají různě nebo v něm chybí hranice.
+Znovuotevřít: původní problém se vrací nebo se proces změnil natolik, že pravidlo už nechrání správnou věc.
+```
+
+Stav `Ponechat` je nejlepší výsledek. Znamená, že nemusíte nic dělat kromě krátkého záznamu. To je v provozu podceňované: ne každá kontrola musí vyrobit úkol. Někdy je kvalitní výsledek právě to, že systém drží a tým ho může nechat pracovat.
+
+Stav `Dočistit trasu` znamená, že nezasahujete do pravidla, ale do okolí. Typicky smažete starou šablonu, opravíte odkaz, přesunete připomínku nebo upravíte onboardingovou trasu.
+
+Stav `Upravit znění` používejte opatrně. Pokud lidé pravidlo nenašli, není problém ve znění. Pokud ho našli, použili a přesto vznikl jiný výklad, znění je pravděpodobný kandidát.
+
+Stav `Znovuotevřít` není selhání. Je to signál, že se změnil kontext. Například zákaznické předání má nový formát, produkt začal generovat jiné výstupy nebo právní a bezpečnostní požadavky vyžadují jinou stopu. V takovém případě pravidlo nelepte záplatou. Vraťte ho do další malé úpravy.
+
+### Opravujte nejbližší místo selhání
+
+Největší riziko kvartální kontroly je chuť opravovat všechno kolem. Jakmile vidíte jeden starý odkaz, objeví se pokušení přepsat celý checklist, onboarding, sales kartu i interní wiki. Někdy je to potřeba. V této kontrole ale nejdřív opravte nejbližší místo selhání.
+
+Příklady:
+
+- Starý odkaz vede na nahrazenou šablonu: opravte odkaz a označte starou šablonu jako nahrazenou.
+- Lidé hledají pravidlo v sales kartě: přidejte do sales karty krátkou připomínku s odkazem na kanonické místo.
+- Pravidlo se vykládá dvěma způsoby: doplňte jeden příklad nebo jednu hranici.
+- Vzniká nový export "pro kontrolu": nahraďte ho stavovou větou nebo agregovaným signálem.
+- Výjimka se stala běžnou cestou: znovuotevřete pravidlo a rozhodněte, jestli je výjimka nový standard.
+
+Opravná věta má být krátká:
+
+```text
+Opravíme jen starý odkaz v onboardingové trase, aby vedl na aktuální delivery checklist.
+```
+
+Nebo:
+
+```text
+Doplníme do pravidla jednu hranici: screenshot je povolený jen u technického incidentu bez osobních údajů a s retenčním datem.
+```
+
+Jakmile opravná věta obsahuje tři různé slovesné akce, rozdělte ji. V opačném případě jste z kontroly pravidla udělali malý projekt, který bude čekat na čas, který se záhadně nikdy nedostaví.
+
+### Privacy-first kontrola dlouhodobého pravidla
+
+Dlouhodobé pravidlo může časem nenápadně sklouznout zpět ke sběru dat. Ne proto, že by tým chtěl být nešetrný, ale protože staré pohodlí je vytrvalé. Screenshot je rychlý. Export je pocitově jistý. Kopie do tabulky vypadá jako pořádek. A pak máte tři místa, kde leží data, která už neměla vznikat.
+
+Při kvartální kontrole se zeptejte:
+
+- Nevznikly nové screenshoty, exporty nebo kopie kvůli pravidlu?
+- Nepoužívá tým zákaznická data tam, kde stačí syntetický příklad?
+- Není výjimka z pravidla častější než samotné pravidlo?
+- Mají dočasné podklady retenční datum?
+- Nezůstaly staré materiály dostupné přes vyhledávání nebo sdílený odkaz?
+- Nevznikl nový externí nástroj jen proto, aby se pravidlo pohodlněji kontrolovalo?
+- Neobsahuje revizní záznam víc citlivých detailů než samotná práce?
+
+Privacy-first závěr by měl být jednovětý:
+
+```text
+Kontrola nenašla návrat screenshotů; starý odkaz na šablonu se screenshotem byl odstraněn.
+```
+
+Nebo:
+
+```text
+Pravidlo drží, ale ve dvou případech vznikl zbytečný export; export nahrazujeme stavovou větou a nastavujeme mazání starých souborů.
+```
+
+Codyho komentář: dlouhodobá pravidla se nekazí dramaticky. Kazí se potichu, přes malé výjimky, staré odkazy a větu "tohle si radši uložíme". To je přesně chvíle, kdy má privacy-first přístup hodnotu. Nečeká na průšvih, ale uklízí dřív, než se z výjimky stane firemní folklor.
+
+### Kontrolní karta po kvartálu
+
+Použijte kartu, která drží kontrolu v malém rozsahu.
+
+```text
+Dlouhodobé pravidlo:
+Kanonické místo:
+Původní opravná věta:
+Návratová otázka:
+Kontrolovaný vzorek:
+Nalezení:
+Použití:
+Výsledek:
+Datová stopa:
+Stav pravidla: Ponechat / Dočistit trasu / Upravit znění / Znovuotevřít
+Nejbližší oprava:
+Privacy-first závěr:
+Vlastník:
+Datum kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Dlouhodobé pravidlo: předání portálu bez screenshotu zákaznického detailu.
+Kanonické místo: delivery checklist.
+Původní opravná věta: předání má vysvětlit stav bez exportu zákaznického detailu.
+Návratová otázka: nevrátily se screenshoty při předání?
+Kontrolovaný vzorek: poslední tři předávací checklisty.
+Nalezení: drží, checklist používají všichni tři autoři.
+Použití: drží, ve všech výstupech je stavová věta.
+Výsledek: drží, screenshot zákaznického detailu nevznikl.
+Datová stopa: tření, stará šablona se screenshotem byla pořád dostupná přes odkaz v onboardingu.
+Stav pravidla: Dočistit trasu.
+Nejbližší oprava: odstranit starý odkaz z onboardingové trasy.
+Privacy-first závěr: žádné nové zákaznické screenshoty, stará šablona bude označena jako nahrazená.
+Vlastník: delivery lead.
+Datum kontroly: 2026-05-20.
+```
+
+Karta má pomoci rozhodnout, ne dokazovat aktivitu. Pokud je stav `Ponechat`, záznam může být velmi krátký. Pokud je stav jiný, karta má obsahovat jednu nejbližší opravu, ne seznam přání.
+
+### Mini workshop na 10 minut
+
+Vezměte jedno dlouhodobé pravidlo, které mělo návrat při kvartálním přehledu.
+
+1. Přečtěte návratovou otázku.
+2. Vyberte dva až tři skutečné výstupy nebo průchody.
+3. Zkontrolujte signály nalezení, použití, výsledku a datové stopy.
+4. Dejte pravidlu jeden ze čtyř stavů.
+5. Pokud stav není `Ponechat`, napište jednu nejbližší opravu.
+6. Zapište privacy-first závěr jednou větou.
+7. Uložte kontrolní kartu nebo krátký revizní záznam.
+
+Výstup:
+
+```text
+Dlouhodobé pravidlo má po kvartální kontrole jasný stav, jeden případný další krok a ověřenou datovou stopu bez nové byrokracie.
+```
+
+### Checklist kapitoly
+
+- Začali jste návratovou otázkou ze stabilizační karty?
+- Pokud otázka chyběla, odvodili jste ji z původní opravné věty?
+- Zůstala kontrola úzká a neotevřela celý proces?
+- Použili jste malý vzorek skutečné práce?
+- Sledujete nalezení, použití, výsledek a datovou stopu?
+- Rozlišili jste problém pravidla od problému staré trasy nebo odkazu?
+- Dali jste pravidlu stav `Ponechat`, `Dočistit trasu`, `Upravit znění` nebo `Znovuotevřít`?
+- Je navazující oprava jen jedna a nejbližší?
+- Nevznikl kvůli kontrole nový export, screenshot nebo kopie citlivých dat?
+- Zkontrolovali jste, jestli se výjimka nestala běžnou cestou?
+- Má revizní záznam jen tolik detailů, kolik je potřeba pro rozhodnutí?
+- Ví vlastník, co přesně se má stát po kontrole?
+
+Kontrola dlouhodobého pravidla po kvartálu je malá pojistka proti návratu staré práce. Má potvrdit, že pravidlo pořád pomáhá, nebo ukázat nejbližší místo, kde se systém odchyluje. Když se drží návratové otázky, skutečného vzorku a minimální datové stopy, zůstává užitečná. Jakmile začne suplovat celkový audit, ztrácí ostrost a vyrábí práci místo rozhodnutí.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LM o kontrole dlouhodobého pravidla po dalším kvartálním přehledu: návratová otázka, malý vzorek skutečné práce, signály nalezení/použití/výsledku/datové stopy, stavy pravidla, nejbližší oprava, privacy-first kontrola, kontrolní karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LL o stabilizaci potvrzené kvartální úpravy do dlouhodobého pravidla: vstupní brána pro stav Potvrdit, přepis změnové historie na aktuální instrukci, kanonické místo práce, zavření přechodových poznámek, návratová otázka pro další kvartál, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LK o ověření kvartální úpravy po prvním normálním použití: návrat k opravné větě, výběr skutečného průchodu, čtyři signály, rozlišení typu problému, rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LJ o převodu nálezu z kvartálního přehledu do jedné úpravy pravidla: výběr podle opakované ceny, opravná věta, oprava místa rozhodnutí, zavření staré cesty, omezení rozsahu, privacy-first kontrola, karta, mini workshop a checklist.
