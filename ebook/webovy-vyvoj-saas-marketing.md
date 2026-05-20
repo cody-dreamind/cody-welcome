@@ -95161,8 +95161,249 @@ Jedna úprava onboardingové trasy je ověřená po normálním použití a má 
 
 Ověření úpravy onboardingové trasy drží tým při zemi. Neptá se, jestli dokumentace vypadá lépe. Ptá se, jestli člověk v reálné práci našel správnou oporu, udělal správné rozhodnutí a nezanechal za sebou zbytečná data. To je malý, ale poctivý test kvality systému.
 
+## Příloha LY: Stabilizace potvrzené úpravy onboardingové trasy
+
+Ověřená úprava onboardingové trasy ještě není stabilní jen proto, že jednou fungovala. Stabilní je až ve chvíli, kdy zmizí dočasné poznámky, staré odkazy a speciální dohled kolem změny. Jinak tým sice vyřeší jeden nález, ale nechá po sobě další vrstvu dokumentace, kterou bude muset někdo později rozplétat. Radost, práce navíc, lehký pach budoucí porady.
+
+Tato příloha navazuje na Přílohu LX. Vstupem je úprava ve stavu `Potvrdit`, případně velmi malý stav `Doladit`, který už neotevírá smysl trasy. Cílem je převést ověřenou změnu z režimu "kontrolujeme úpravu" do režimu "takto se onboarding normálně dělá".
+
+Stabilizace má tři výsledky:
+
+```text
+Kanonická trasa obsahuje aktuální pravidlo.
+Staré nebo dočasné opory už nevedou člověka jinam.
+Záznam o změně je krátký, bez zbytečných osobních a zákaznických dat.
+```
+
+Bez tohoto kroku vzniká tichý dluh. Nový člověk narazí na dvě verze šablony, lead si pamatuje, která je správná, autor změny ví, co se stalo, ale systém to neumí říct sám.
+
+### Stabilizujte jen potvrzenou změnu
+
+Ne každé ověření smí skončit stabilizací. Pokud se při ověření ukázalo selhání nalezení, pochopení nebo výstupu, stabilizace by jen zabetonovala problém. Nejdřív opravte nejbližší místo selhání a vraťte se k ověření.
+
+Do stabilizace patří změna, která splňuje minimum:
+
+- člověk našel upravené místo bez speciální navigace;
+- použil pravidlo, šablonu nebo příklad v normální práci;
+- vznikl správný výstup bez ruční záchrany;
+- nevznikla nová zbytečná datová stopa;
+- rozhodnutí po ověření je zapsané jako `Potvrdit`;
+- případné drobné tření má vlastní další krok mimo stabilizovanou změnu.
+
+Hraniční příklad:
+
+```text
+Úprava předávací šablony fungovala, ale pořád není jasné, kdy dát technický kontakt do kopie.
+```
+
+To neznamená, že se šablona nesmí stabilizovat. Znamená to, že stabilizujete část "neposílat screenshot, použít bezpečnou stavovou větu" a otázku technického kontaktu dáte jako samostatný nález. Jinak se malá dobrá změna utopí v čekání na dokonalost.
+
+### Přepište změnu na současný stav
+
+Po ověření odstraňte jazyk, který popisuje opravu jako dočasnou výjimku. Onboardingová trasa nemá novému člověku vyprávět celou historii toho, proč se něco měnilo. Má ho dovést ke správnému rozhodnutí.
+
+Slabý zápis:
+
+```text
+Po posledním ověření jsme zjistili, že screenshoty nejsou vhodné, takže zatím používejte tuto novou formulaci, dokud se to nedořeší.
+```
+
+Stabilní zápis:
+
+```text
+Při předání zákaznického portálu neposílejte screenshot. Pošlete odkaz, stav a další krok. Stav popište syntetickou větou bez zákaznických údajů.
+```
+
+Rozdíl je praktický. První text udržuje pozornost na změnové historii. Druhý text říká, jak se má pracovat teď.
+
+Při přepisu zkontrolujte:
+
+- je pravidlo napsané jako aktuální instrukce;
+- není v něm slovo "zatím", pokud opravdu nejde o dočasný režim;
+- příklad je syntetický nebo bezpečně anonymizovaný;
+- výstup je popsaný tak, aby šel zkontrolovat;
+- text neobsahuje jména lidí z ověření ani reálná zákaznická data;
+- stará opravná věta zůstává jen v pracovním logu, ne v místě práce.
+
+### Uložte pravidlo tam, kde začíná práce
+
+Stabilizované pravidlo musí být v místě, kam člověk jde při reálném úkolu. Ne v archivu rozhodnutí, ne v komentáři u starého ticketu, ne v osobní poznámce autora změny.
+
+Typická místa:
+
+```text
+Onboardingový checklist:
+Pravidlo patří k úkolu, který nový člověk otevírá jako první.
+
+Šablona:
+Pravidlo patří přímo do části, kterou člověk vyplňuje nebo kopíruje.
+
+Role playbook:
+Pravidlo patří k rozhodovací situaci konkrétní role.
+
+Issue nebo ticket template:
+Pravidlo patří do zadání, pokud chyba vznikala už při předání práce.
+
+Interní wiki:
+Pravidlo patří do wiki jen tehdy, pokud je wiki skutečný pracovní start, ne hřbitov hezkých odstavců.
+```
+
+Příklad:
+
+```text
+Špatně: pravidlo o bezpečné stavové větě je jen v poznámce z retrospektivy.
+Lépe: pravidlo je přímo v předávací šabloně a onboardingový checklist odkazuje na tuto šablonu.
+```
+
+Když pravidlo uložíte do místa práce, snižujete potřebu školení. Člověk ho nepotká jako další dokument, ale jako součást toku, ve kterém se právě rozhoduje.
+
+### Zavřete staré cesty
+
+Největší riziko stabilizace není špatný nový text. Největší riziko je stará cesta, která pořád vypadá dost důvěryhodně. Lidé pak nedělají chybu proto, že by ignorovali pravidla. Jen našli jinou verzi světa.
+
+Zavřete hlavně:
+
+- staré kopie šablon v osobních nebo týmových složkách;
+- odkazy v onboardingovém checklistu, které míří na starou wiki stránku;
+- ukázkové e-maily se screenshoty nebo reálnými daty;
+- komentáře v ticketech, které doporučují původní postup;
+- dočasné poznámky z ověření, které už nemají provozní hodnotu;
+- duplicitní příklady v materiálech pro různé role.
+
+Zavření neznamená všechno mazat bez stopy. U aktivních materiálů často stačí jasná náhrada:
+
+```text
+Tato šablona je nahrazená předávací šablonou verze 2026-05. Nepoužívat pro nová předání.
+```
+
+U dočasných podkladů z ověření je naopak lepší mazat nebo zkracovat. Pokud už závěr existuje v kartě stabilizace, kopie screenshotů, e-mailů a osobních poznámek nepotřebují nový domov.
+
+### Nastavte lehký návratový signál
+
+Stabilizace nemá vytvořit další kontrolní rituál. Stačí jeden návratový signál, který ukáže, jestli se staré tření vrací.
+
+Dobré návratové signály:
+
+- nový člověk znovu hledá starou šablonu;
+- lead musí opakovaně opravovat stejný typ výstupu;
+- v předávacích e-mailech se znovu objevují screenshoty;
+- zákazník dostává nejasný další krok;
+- tým si není jistý, kde je kanonická verze šablony;
+- kvůli kontrole se začínají ukládat nové kopie dat.
+
+Návratový signál zapište jako jednoduchou větu:
+
+```text
+Pokud se ve dvou po sobě jdoucích předáních objeví screenshot místo stavové věty, vracíme šablonu do kontroly trasy.
+```
+
+To stačí. Není potřeba měřit každé předání, bodovat každého nového člověka ani zakládat tabulku s detaily. Privacy-first provoz má hlídat kvalitu systému, ne vyrábět dohled nad lidmi.
+
+### Privacy-first stabilizace
+
+Stabilizace je dobrý okamžik na úklid dat. Během opravy a ověření často vzniknou pracovní poznámky, dočasné příklady, odkazy na ticket, kopie šablon nebo interní komentáře. Část z nich byla užitečná při rozhodování, ale po stabilizaci už jen zvyšuje datovou stopu a riziko zmatku.
+
+Privacy-first stabilizace se ptá:
+
+```text
+Co musí zůstat, aby tým příště pracoval správně?
+Co může zmizet, protože rozhodnutí už je přepsané do kanonické trasy?
+Co je citlivé, osobní nebo zákaznické a nemá provozní důvod dál existovat?
+```
+
+Praktický úklid:
+
+- ponechte kanonickou šablonu, checklist nebo playbook;
+- ponechte krátký stabilizační záznam bez osobních detailů;
+- smažte dočasné screenshoty a exporty;
+- zkraťte poznámky z ověření na stav a rozhodnutí;
+- nahraďte reálné příklady syntetickými;
+- zrušte odkazy na staré kopie;
+- u interního logu ponechte jen informaci, co se změnilo a proč.
+
+Codyho komentář: stabilizovaná znalost má být nudná. Člověk otevře správné místo, udělá správný krok a nemá pocit, že právě prošel muzeem minulých chyb. Když dokumentace potřebuje detektivní schopnosti, není to onboarding, ale úniková hra s horším občerstvením.
+
+### Stabilizační karta trasy
+
+Použijte jednu kartu. Slouží k uzavření změny, ne k dalšímu sběru důkazů.
+
+```text
+Stabilizovaná úprava:
+Původní nález:
+Ověřeno při:
+Rozhodnutí z ověření:
+Kanonické místo:
+Co se změnilo v trase:
+Co se změnilo v šabloně nebo příkladu:
+Staré cesty k zavření:
+Dočasné podklady k mazání nebo zkrácení:
+Privacy-first výsledek:
+Návratový signál:
+Kdo vlastní kanonickou trasu:
+Datum stabilizace:
+Kdy se k tomu vrátíme:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizovaná úprava: bezpečná stavová věta v předávací šabloně.
+Původní nález: nový člověk používal screenshot jako důkaz stavu portálu.
+Ověřeno při: prvním běžném předání zákaznického portálu.
+Rozhodnutí z ověření: potvrdit.
+Kanonické místo: předávací šablona odkazovaná z onboardingového checklistu delivery role.
+Co se změnilo v trase: onboardingový úkol vede přímo na aktuální šablonu.
+Co se změnilo v šabloně nebo příkladu: screenshot nahrazen syntetickou stavovou větou a dalším krokem.
+Staré cesty k zavření: stará wiki ukázka a osobní kopie šablony.
+Dočasné podklady k mazání nebo zkrácení: poznámka z ověření zkrácená na stav bez kopie e-mailu.
+Privacy-first výsledek: předání funguje bez screenshotu, exportu a kopie zákaznických dat.
+Návratový signál: dva opakované výskyty screenshotu vrací šablonu do kontroly.
+Kdo vlastní kanonickou trasu: delivery lead.
+Datum stabilizace: po ověřeném předání.
+Kdy se k tomu vrátíme: při další běžné kontrole onboardingového rytmu.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu potvrzenou úpravu onboardingové trasy a stabilizujte ji do běžného systému.
+
+1. Ověřte, že rozhodnutí z Přílohy LX je `Potvrdit`.
+2. Přepište změnu jako aktuální pravidlo, ne jako historii opravy.
+3. Uložte pravidlo do místa, kde začíná reálný úkol.
+4. Najděte staré kopie, odkazy a příklady, které mohou vést jinam.
+5. Rozhodněte, co se maže, zkracuje nebo označuje jako nahrazené.
+6. Zapište jeden návratový signál.
+7. Vyplňte stabilizační kartu.
+8. Uzavřete dočasné podklady bez ukládání citlivých detailů.
+
+Výstup:
+
+```text
+Jedna ověřená úprava onboardingové trasy je přepsaná do kanonického místa, staré cesty jsou zavřené a dočasná datová stopa je uklizená.
+```
+
+### Checklist kapitoly
+
+- Stabilizujete jen úpravu, která byla skutečně ověřená?
+- Je rozhodnutí z ověření jasně zapsané?
+- Přepsali jste změnu jako aktuální pravidlo, ne jako dočasnou poznámku?
+- Je pravidlo v místě, kde člověk začíná práci?
+- Odkazuje onboardingový checklist na kanonickou verzi?
+- Zavřeli jste staré kopie, odkazy nebo příklady?
+- Nezůstaly v materiálech reálné zákaznické údaje jako ukázka?
+- Zkrátili jste dočasné poznámky z ověření na stav a rozhodnutí?
+- Smazali jste screenshoty, exporty nebo kopie e-mailů bez provozního důvodu?
+- Má pravidlo vlastníka?
+- Má stabilizace jeden návratový signál?
+- Nezakládáte kvůli stabilizaci novou kontrolní tabulku nad lidmi?
+- Je jasné, kdy se pravidlo vrátí do běžného onboardingového rytmu?
+- Pokud zůstalo drobné tření, má samostatný nález mimo tuto stabilizaci?
+
+Stabilizace potvrzené úpravy je tiché dokončení práce. Neprodlužuje opravu, ale uklízí ji do systému. Díky tomu se další člověk nemusí učit historii rozhodnutí; potká rovnou lepší trasu, bezpečnější příklad a méně datového nepořádku.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LY o stabilizaci potvrzené úpravy onboardingové trasy: vstup přes ověřený stav, přepis změny na aktuální pravidlo, uložení do místa práce, zavření starých cest, návratový signál, privacy-first úklid, stabilizační karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LX o ověření úpravy onboardingové trasy po dalším normálním použití: výběr reálného průchodu, návrat ke změnové větě, sledování startu/nalezení/rozhodnutí/výstupu, rozlišení selhání nalezení/pochopení/výstupu, privacy-first kontrola skutečné stopy, rozhodovací stavy, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LW o převodu nálezu z běžného onboardingového rytmu do jedné úpravy trasy: výběr jednoho nálezu, změnová věta, nejbližší místo rozhodnutí, typy textová/polohová/rolová/šablonová/datová úprava, privacy-first dopad, ověření při dalším normálním použití, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LV o kontrole běžného onboardingového rytmu po prvních nástupech: malé kontrolní okno, sledování rytmu místo výkonu člověka, signály nalezení/použití/výsledku/datové stopy, tření trasy/pochopení/provozu, stavy rytmu, privacy-first kontrola, karta, mini workshop a checklist.
