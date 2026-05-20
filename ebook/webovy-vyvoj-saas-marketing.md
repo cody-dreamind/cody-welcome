@@ -93100,8 +93100,246 @@ Onboardingové pravidlo má ověřené první použití, jasný stav a případn
 
 Kontrola onboardingového pravidla po prvním použití je malá, ale zdravá protiváha k dokumentačnímu optimismu. Nevěří jen tomu, že jsme pravidlo napsali. Ověří, že ho nový člověk našel, použil a nevytvořil při tom nový nepořádek. Což je v praxi mnohem zajímavější než další krásný dokument, který nikdo v rozhodující chvíli neotevře.
 
+## Příloha LQ: Oprava onboardingového pravidla po první kontrole
+
+První kontrola onboardingového pravidla většinou neskončí dramatem. Častěji ukáže malou věc: pravidlo leží o jedno kliknutí vedle, používá interní zkratku, chybí mu hranice výjimky nebo nový člověk neví, kdo má schválit nestandardní situaci. To je dobrá zpráva. Malá chyba v pravidle je přesně ten typ problému, který se dá opravit dřív, než se z něj stane zvyk.
+
+Tato příloha navazuje na Přílohu LP. Řeší stav `Zpřesnit`, `Přesunout` nebo lehké `Znovuotevřít`, kdy první reálné použití ukázalo jednu konkrétní slabinu. Cíl není přepsat celý onboarding. Cíl je převést nález z kontroly do jedné hotové opravy v místě práce.
+
+Dobrá oprava má tři vlastnosti:
+
+```text
+Řeší konkrétní tření z prvního použití.
+Mění nejbližší pracovní místo, ne celý systém.
+Jde ověřit při dalším normálním použití.
+```
+
+Pokud oprava nesplňuje všechny tři podmínky, je pravděpodobně moc široká. A široká oprava po prvním použití bývá jen nervozita v pracovním kabátě.
+
+### Přepište stav kontroly na opravnou větu
+
+Začněte posledním stavem z kontrolní karty. Neotevírejte všechny poznámky, dojmy a vedlejší nápady. Vezměte jen to, co bránilo správnému použití pravidla.
+
+Šablona opravné věty:
+
+```text
+Protože při prvním použití [co se stalo], upravíme [nejbližší místo] tak, aby příště [očekávané chování].
+```
+
+Příklady:
+
+```text
+Protože nový člověk našel pravidlo až v onboardingovém dokumentu, vložíme krátkou poznámku do šablony předávacího e-mailu tak, aby příště rozhodoval přímo při psaní zprávy.
+
+Protože nebylo jasné, kdo schvaluje incidentní výjimku, doplníme do pravidla větu "Výjimku schvaluje incident owner" tak, aby příště nevznikl screenshot jen kvůli nejistotě.
+
+Protože příklad stavové věty byl moc obecný, přidáme jeden syntetický příklad pro zákaznické předání tak, aby člověk nemusel vymýšlet bezpečnou formulaci od nuly.
+```
+
+Opravná věta má být nudně konkrétní. Pokud zní jako strategie, není to oprava onboardingového pravidla. Je to nové téma do backlogu.
+
+### Vyberte správný typ opravy
+
+Po první kontrole typicky existují čtyři typy oprav.
+
+```text
+Textová oprava:
+Znění pravidla je dobré, ale potřebuje jasnější slovo, hranici nebo příklad.
+
+Polohová oprava:
+Pravidlo je správné, ale neleží v místě, kde člověk dělá rozhodnutí.
+
+Rolová oprava:
+Pravidlo používá správný člověk, ale chybí informace pro kontrolora, schvalovatele nebo sousední roli.
+
+Datová oprava:
+Pravidlo se učí nebo kontroluje způsobem, který vytváří zbytečnou datovou stopu.
+```
+
+Ke každému typu patří jiný zásah. Textová oprava přidá větu nebo příklad. Polohová oprava přesune pravidlo do šablony, checklistu nebo formuláře. Rolová oprava doplní odpovědnost nebo eskalační hranici. Datová oprava odstraní screenshot, export, kopii v chatu nebo reálný zákaznický detail ze školícího materiálu.
+
+Příklad třídění:
+
+```text
+Nález: nový člověk pravidlo pochopil, ale poslal dotaz na schválení do obecného kanálu.
+Typ opravy: rolová.
+Oprava: doplnit do pravidla "Schvaluje delivery lead; incidentní výjimku schvaluje incident owner."
+```
+
+Když nález patří do více typů, vyberte ten, který nejvíc bránil správnému rozhodnutí. Jedna oprava má mít jedno těžiště. V opačném případě se z ní stane malý refaktor všeho, což je krásný způsob, jak nedokončit nic.
+
+### Opravte kanonické místo, kopie jen ukliďte
+
+Onboardingové pravidlo má mít jeden zdroj pravdy. Při opravě proto neupravujte pět kopií paralelně jako by to byla soutěž v synchronizaci. Nejdřív najděte kanonické místo a změňte ho tam.
+
+Praktický postup:
+
+1. Určete, kde pravidlo opravdu žije.
+2. Upravte jen kanonické znění nebo pracovní šablonu.
+3. Pokud existují kopie, nahraďte je odkazem nebo je odstraňte.
+4. Do kontrolní karty napište, které místo je po opravě platné.
+5. Staré poznámky označte jako nahrazené nebo je smažte podle retenčního smyslu.
+
+Příklad:
+
+```text
+Kanonické místo: šablona předávacího e-mailu.
+Oprava: doplněna věta o incidentní výjimce.
+Uklizené kopie: stará poznámka v onboardingovém dokumentu nahrazena odkazem na šablonu.
+Platí od: dalšího zákaznického předání.
+```
+
+Tím se zabrání tomu, aby nový člověk příště našel starší verzi pravidla a udělal správnou věc podle už neplatného textu. Interní dokumentace je dobrý sluha, ale když se rozmnoží bez dozoru, začne hrát vlastní kapelu.
+
+### Udržte opravu malou
+
+Po první kontrole bývá lákavé opravit všechno, co onboarding dlouho trápí. Chybí lepší rozcestník, šablony nejsou sjednocené, lesson pack je moc dlouhý, role mají staré názvy a někdo v roce minulém založil dokument "nový onboarding final final". Ano, bolí to. Ne, tato oprava nemá řešit všechno.
+
+Malá oprava po první kontrole má jasné stop pravidlo:
+
+```text
+Opravujeme jen to, co by při příštím stejném použití znovu vedlo ke stejnému tření.
+```
+
+Co do opravy patří:
+
+- jedna doplněná věta;
+- jeden přesun pravidla do pracovního místa;
+- jeden syntetický příklad;
+- jedno jméno role nebo schvalovací hranice;
+- jeden smazaný nebo nahrazený dočasný podklad;
+- jeden odkaz na kanonické místo.
+
+Co do ní nepatří:
+
+- celkový redesign onboardingu;
+- sjednocení všech šablon;
+- školení všech rolí najednou;
+- nový nástroj na znalostní bázi;
+- sběr dalších metrik bez jasného rozhodnutí;
+- export reálných příkladů "abychom měli materiál".
+
+Codyho komentář: první kontrola pravidla je jako ochutnání omáčky. Když chybí sůl, nepřestavujete kuchyň. Přidáte sůl, zamícháte a ochutnáte znovu. Produktivita, ale bez gastronomického dramatu.
+
+### Privacy-first oprava
+
+Onboardingové materiály mají sklon uchovávat věci déle, než je rozumné. Proto má každá oprava projít krátkou privacy-first bránou.
+
+Otázky:
+
+- Odstraňuje oprava zbytečnou kopii dat, nebo ji naopak vytváří?
+- Stačí syntetický příklad místo reálného zákaznického detailu?
+- Pokud vznikl dočasný podklad, má účel, vlastníka a retenční datum?
+- Není opravené pravidlo sdílené do širší skupiny, než která ho potřebuje?
+- Zůstává auditní nebo kontrolní záznam bez osobních údajů, pokud nejsou nutné?
+- Je jasné, kdy se starý školící materiál smaže nebo archivuje?
+
+Privacy-first oprava může být úplně malá:
+
+```text
+Místo screenshotu reálného portálu používáme syntetickou ukázku stavové věty. Starý screenshot z onboardingové poznámky byl smazán. Kontrolní karta zůstává bez jména zákazníka.
+```
+
+Tohle není právnické puntičkářství. Je to provozní hygiena. Čím víc se tým učí na reálných datech, tím víc dat začne žít mimo systém, kde mají být.
+
+### Ověření při dalším normálním použití
+
+Oprava není hotová zápisem do dokumentu. Hotová je až po dalším normálním použití, kde se ukáže, že původní tření zmizelo nebo se aspoň zmenšilo.
+
+Do opravné karty proto zapište:
+
+```text
+Ověříme při:
+Signál zlepšení:
+Signál selhání:
+Kdo ověří:
+Co uděláme, pokud oprava nepomůže:
+```
+
+Vyplněný příklad:
+
+```text
+Ověříme při: dalším zákaznickém předání novým customer success člověkem.
+Signál zlepšení: pravidlo najde přímo v e-mailové šabloně a použije stavovou větu bez dotazu na chat.
+Signál selhání: znovu hledá pravidlo v onboardingovém dokumentu nebo vytvoří screenshot kvůli nejistotě.
+Kdo ověří: delivery lead.
+Co uděláme, pokud oprava nepomůže: přesuneme příklad přímo do předvyplněné části šablony.
+```
+
+Ověření nemá čekat na měsíční retro, pokud se pravidlo použije dřív. Kontrolujte v okamžiku práce. Tehdy je tření vidět nejlépe a lidé si ještě pamatují, co se opravdu stalo.
+
+### Opravná karta
+
+Použijte krátkou kartu, aby oprava nezmizela mezi poznámkami z kontroly.
+
+```text
+Původní pravidlo:
+Stav po první kontrole: Zpřesnit / Přesunout / Znovuotevřít
+Opravná věta:
+Typ opravy: Textová / Polohová / Rolová / Datová
+Kanonické místo:
+Konkrétní změna:
+Uklizené kopie nebo podklady:
+Privacy-first závěr:
+Ověření při dalším použití:
+Vlastník:
+Datum opravy:
+```
+
+Příklad:
+
+```text
+Původní pravidlo: při předání portálu nepoužívat screenshot zákaznického detailu mimo incidentní režim.
+Stav po první kontrole: Přesunout.
+Opravná věta: protože pravidlo člověk našel až v onboardingu, vložíme krátkou poznámku do šablony předávacího e-mailu.
+Typ opravy: Polohová.
+Kanonické místo: šablona předávacího e-mailu.
+Konkrétní změna: přidána věta "Popiš stav textem; screenshot zákaznického detailu patří jen do schváleného incidentního režimu."
+Uklizené kopie nebo podklady: onboardingový dokument odkazuje na šablonu, starý screenshot odstraněn.
+Privacy-first závěr: nevznikl nový export ani kopie zákaznických dat.
+Ověření při dalším použití: další předání pilotního zákazníka.
+Vlastník: delivery lead.
+Datum opravy: 2026-05-20.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu kontrolní kartu ze stavu `Zpřesnit`, `Přesunout` nebo lehké `Znovuotevřít`.
+
+1. Přepište nález na jednu opravnou větu.
+2. Určete typ opravy: textová, polohová, rolová nebo datová.
+3. Najděte kanonické místo pravidla.
+4. Udělejte nejmenší změnu, která odstraní původní tření.
+5. Ukliďte kopie, staré odkazy nebo dočasné podklady.
+6. Projděte privacy-first bránu.
+7. Zapište, při jakém dalším použití se oprava ověří.
+
+Výstup:
+
+```text
+Onboardingové pravidlo má jednu hotovou opravu v místě práce, uklizenou datovou stopu a jasné ověření při dalším normálním použití.
+```
+
+### Checklist kapitoly
+
+- Vychází oprava z konkrétního nálezu první kontroly?
+- Přepsali jste stav kontroly na jednu opravnou větu?
+- Vybrali jste typ opravy: textovou, polohovou, rolovou nebo datovou?
+- Opravujete nejbližší místo tření, ne celý onboarding?
+- Změnili jste kanonické místo pravidla?
+- Uklidili jste staré kopie, odkazy nebo dočasné poznámky?
+- Nepřidali jste druhý zdroj pravdy?
+- Je oprava dost malá na dokončení v jednom pracovním kroku?
+- Nevyrobila oprava nový screenshot, export nebo kopii zákaznických dat?
+- Použili jste syntetický příklad tam, kde reálná data nejsou nutná?
+- Má oprava vlastníka a ověření při dalším normálním použití?
+- Je jasné, co se stane, pokud oprava nepomůže?
+
+Oprava onboardingového pravidla po první kontrole je místo, kde se dokumentace mění v učení systému. Nejde o perfektní text. Jde o to, aby další člověk našel pravidlo blíž své práci, pochopil ho rychleji a nevytvořil kvůli němu zbytečnou datovou stopu. Malá hotová oprava tady poráží velkou ambici skoro pokaždé.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LQ o opravě onboardingového pravidla po první kontrole: opravná věta, typy textová/polohová/rolová/datová oprava, kanonické místo, omezení rozsahu, privacy-first úklid, ověření při dalším použití, opravná karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LP o kontrole onboardingového pravidla po prvním použití: výběr reálného průchodu, cesta k rozhodnutí, minimální správný výstup, stavy Ponechat/Zpřesnit/Přesunout/Znovuotevřít, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LO o převodu uzavřeného pravidla do onboardingu a školení: rozhodnutí místo historie, výběr rolí, místo prvního použití, cvičný průchod, privacy-first školící materiály, aktualizační háček, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LN o uzavření dlouhodobého pravidla po potvrzeném kvartálním přehledu: vstupní brána, provozní věta, výběr běžného/lehkého/návratového rytmu, zavření přechodových opor, privacy-first úklid, uzavírací karta, mini workshop a checklist.
