@@ -92543,8 +92543,185 @@ Dlouhodobé pravidlo má po kvartální kontrole jasný stav, jeden případný 
 
 Kontrola dlouhodobého pravidla po kvartálu je malá pojistka proti návratu staré práce. Má potvrdit, že pravidlo pořád pomáhá, nebo ukázat nejbližší místo, kde se systém odchyluje. Když se drží návratové otázky, skutečného vzorku a minimální datové stopy, zůstává užitečná. Jakmile začne suplovat celkový audit, ztrácí ostrost a vyrábí práci místo rozhodnutí.
 
+## Příloha LN: Uzavření dlouhodobého pravidla po potvrzeném kvartálním přehledu
+
+Když dlouhodobé pravidlo projde dalším kvartálním přehledem bez návratu původního problému, je lákavé nechat ho v kontrolním režimu navždy. Působí to bezpečně: ještě jednou se podíváme, ještě jednou si uděláme jistotu, ještě jednou vyplníme kartu. Jenže provozní jistota se nedělá tím, že všechno pořád kontrolujeme. Dělá se tím, že dobrá pravidla žijí tam, kde se pracuje, a kontrolní režim se umí včas zavřít.
+
+Tato příloha navazuje na Přílohu LM. Řeší situaci, kdy kvartální kontrola ukáže stav `Ponechat` nebo jen drobné dočištění trasy, které bylo hotové. Cílem je rozhodnout, zda pravidlo zůstane jako běžný standard bez zvláštní pozornosti, nebo zda potřebuje ještě jeden návratový háček.
+
+Uzavření neznamená zapomenout. Znamená přestat se tvářit, že každé dobré pravidlo je pořád otevřený projekt.
+
+### Vstupní brána pro uzavření
+
+Pravidlo uzavírejte jen tehdy, když splní čtyři podmínky:
+
+```text
+Původní problém se v kontrolovaném vzorku nevrátil.
+Pravidlo je nalezitelné v běžném místě práce.
+Použití pravidla nevyrábí zbytečnou datovou stopu.
+Nevznikla nová výjimka, která by měnila smysl pravidla.
+```
+
+Pokud jedna z podmínek chybí, pravidlo ještě neuzavírejte. Neznamená to automaticky velkou opravu. Často stačí dočistit odkaz, doplnit příklad nebo zavřít starou šablonu. Uzavření ale má být odměna za stabilitu, ne způsob, jak si odškrtnout nepohodlný problém.
+
+Příklad dobrého vstupu:
+
+```text
+Pravidlo: předání portálu bez screenshotu zákaznického detailu.
+Kvartální kontrola: poslední tři předání bez screenshotu, ve všech použita stavová věta.
+Datová stopa: nevznikl export ani kopie zákaznických dat.
+Závěr: připraveno k uzavření do běžného standardu.
+```
+
+Příklad slabého vstupu:
+
+```text
+Pravidlo: nepoužívat screenshoty v předání.
+Kvartální kontrola: screenshot se neobjevil, ale tým našel pravidlo jen přes starý Slack thread.
+Závěr: neuzavírat; nejdřív přesunout pravidlo do delivery checklistu.
+```
+
+Rozdíl je jednoduchý. V prvním případě pravidlo funguje v systému. Ve druhém fungovalo hlavně díky tomu, že si někdo pamatoval historii. Paměť člověka není kanonické místo, i když se tváří velmi sebevědomě.
+
+### Přepište kontrolní výsledek na provozní větu
+
+Uzavírací záznam nemá opakovat celou historii pravidla. Má převést poslední kontrolu do jedné provozní věty, kterou lze najít a použít.
+
+Dobrá provozní věta:
+
+```text
+Při předání portálu popisujeme zákaznický stav textovou stavovou větou; screenshot zákaznického detailu nevzniká mimo schválený incidentní režim.
+```
+
+Slabá věta:
+
+```text
+Na základě kontrol z května ponecháváme pravidlo beze změny.
+```
+
+Slabá věta je pravdivá, ale nepomůže člověku v práci. Popisuje rozhodnutí, ne chování. Provozní věta má říct, co se dělá příště.
+
+Postup:
+
+1. Vezměte původní opravnou větu.
+2. Odstraňte z ní dočasná slova jako "ověříme", "pilotně", "zatím" nebo "po další kontrole".
+3. Doplňte hranici výjimky, pokud je důležitá.
+4. Uložte větu do místa, kde člověk rozhoduje nebo vytváří výstup.
+5. Do revizního záznamu dejte jen krátkou poznámku, že pravidlo bylo uzavřeno.
+
+Tím se z kontrolní historie stane standard. Ne další román v poznámkách, kterému rozumí jen člověk, který ho napsal.
+
+### Zvolte další rytmus: běžný, lehký nebo návratový
+
+Po potvrzeném kvartálním přehledu má pravidlo dostat jeden ze tří rytmů.
+
+```text
+Běžný rytmus: pravidlo zůstává jen v kanonickém pracovním místě a nevyžaduje samostatnou kontrolu.
+Lehký rytmus: pravidlo se zkontroluje v rámci existujícího kvartálního přehledu jednou větou.
+Návratový rytmus: pravidlo se otevře jen při konkrétním spouštěči.
+```
+
+Běžný rytmus použijte, když je pravidlo jednoduché, nízkorizikové a dobře vložené do pracovního toku. Například věta v checklistu, kterou tým běžně používá.
+
+Lehký rytmus použijte, když je pravidlo důležité, ale stabilní. V kvartálním přehledu stačí otázka: "Nevrátil se původní problém?" Odpověď může být jednou větou, žádná extra tabulka.
+
+Návratový rytmus použijte, když se pravidlo týká citlivých dat, právního rizika, incidentů nebo předání zákazníkovi. Neznamená to pravidelně vyplňovat další formulář. Znamená to mít jasný spouštěč:
+
+```text
+Pravidlo znovu otevřeme, pokud se objeví nový typ exportu, nový předávací formát nebo incidentní výjimka.
+```
+
+Codyho komentář: nejlepší kontrolní rytmus je ten, který tým opravdu zvládne dělat i v horším týdnu. Pokud rytmus funguje jen ve chvíli, kdy mají všichni čas, klid a dokonale uklizený backlog, je to spíš literární útvar než provozní systém.
+
+### Zavřete přechodové opory
+
+Každé pravidlo, které prošlo několika ověřeními, za sebou nechává pomocné stopy: pracovní poznámky, dočasné checklisty, staré odkazy, screenshoty z testu, kopie v interním dokumentu nebo připomínku v úkolovníku. Při uzavření je potřeba tyto opory uklidit.
+
+Neuklízejte proto, že máte rádi pořádek. Uklízejte proto, že staré opory často vrací staré chování. Člověk najde starou šablonu, použije starý postup a za měsíc tým řeší stejný problém znovu, tentokrát s bonusem v podobě zmatku, která verze vlastně platí.
+
+Praktický úklid:
+
+- označte staré dokumenty jako nahrazené nebo je archivujte;
+- opravte odkazy v onboardingu, delivery checklistu a sales kartách;
+- smažte dočasné exporty, pokud už nemají účel;
+- zkraťte revizní poznámky na závěr a odkaz na kanonické místo;
+- zrušte připomínky, které měly smysl jen během ověřování;
+- ponechte jen minimální záznam o tom, proč pravidlo vzniklo.
+
+Privacy-first úklid má přednost před sentimentem. Pokud dočasný podklad obsahuje zákaznická data, interní detaily nebo osobní údaje, nesmí zůstat jen proto, že "se to možná někdy bude hodit". To je věta, která umí napáchat překvapivě hodně práce.
+
+### Uzavírací karta
+
+Použijte krátkou kartu. Její smysl je zavřít smyčku a zabránit tomu, aby pravidlo zůstalo viset v polootevřeném stavu.
+
+```text
+Dlouhodobé pravidlo:
+Kanonické pracovní místo:
+Poslední kvartální závěr:
+Provozní věta:
+Zvolený rytmus: Běžný / Lehký / Návratový
+Návratový spouštěč, pokud existuje:
+Uzavřené přechodové opory:
+Privacy-first úklid:
+Vlastník:
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Dlouhodobé pravidlo: předání portálu bez screenshotu zákaznického detailu.
+Kanonické pracovní místo: delivery checklist.
+Poslední kvartální závěr: pravidlo drží, screenshoty se nevrátily, starý odkaz byl odstraněn.
+Provozní věta: při předání popisujeme stav textovou větou; screenshot zákaznického detailu nevzniká mimo incidentní režim.
+Zvolený rytmus: Návratový.
+Návratový spouštěč: nový předávací formát, nový export nebo incidentní výjimka.
+Uzavřené přechodové opory: starý onboardingový odkaz a dočasná kontrolní poznámka.
+Privacy-first úklid: žádné nové screenshoty, stará ukázka se zákaznickými daty odstraněna.
+Vlastník: delivery lead.
+Datum uzavření: 2026-05-20.
+```
+
+Karta nemusí být dlouhá. Dlouhá karta často znamená, že uzavíráte víc témat najednou. V takovém případě se vraťte k jednomu pravidlu a jednomu rytmu.
+
+### Mini workshop na 12 minut
+
+Vezměte jedno pravidlo, které po kvartální kontrole dostalo stav `Ponechat`.
+
+1. Ověřte vstupní bránu pro uzavření.
+2. Přepište poslední kontrolní výsledek na jednu provozní větu.
+3. Vyberte rytmus: běžný, lehký nebo návratový.
+4. Pokud volíte návratový rytmus, napište konkrétní spouštěč.
+5. Najděte a zavřete přechodové opory.
+6. Udělejte privacy-first úklid dočasných podkladů.
+7. Zapište uzavírací kartu.
+
+Výstup:
+
+```text
+Pravidlo je uzavřené jako běžná součást práce, má jasné kanonické místo, přiměřený rytmus návratu a nezanechává zbytečnou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Splnilo pravidlo vstupní bránu pro uzavření?
+- Nevrátil se původní problém v posledním kontrolovaném vzorku?
+- Je pravidlo nalezitelné v běžném místě práce?
+- Přepsali jste kontrolní závěr na provozní větu?
+- Neobsahuje provozní věta dočasná slova z ověřovací fáze?
+- Vybrali jste běžný, lehký nebo návratový rytmus?
+- Má návratový rytmus konkrétní spouštěč?
+- Zavřeli jste staré odkazy, šablony a dočasné připomínky?
+- Nevzniká kvůli uzavření nový dokument, který bude potřeba zbytečně udržovat?
+- Smazali nebo archivovali jste dočasné podklady podle retenčního smyslu?
+- Nezůstaly v ukázkách zákaznické nebo osobní údaje bez účelu?
+- Ví vlastník, kde pravidlo žije a kdy se má znovu otevřít?
+
+Uzavření dlouhodobého pravidla je malý, ale důležitý konec smyčky. Bez něj se dobrá zlepšení mění v nekonečné kontroly. S ním se pravidlo přesune tam, kam patří: do běžné práce, s jasným rytmem návratu a bez zbytečných dat okolo.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LN o uzavření dlouhodobého pravidla po potvrzeném kvartálním přehledu: vstupní brána, provozní věta, výběr běžného/lehkého/návratového rytmu, zavření přechodových opor, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LM o kontrole dlouhodobého pravidla po dalším kvartálním přehledu: návratová otázka, malý vzorek skutečné práce, signály nalezení/použití/výsledku/datové stopy, stavy pravidla, nejbližší oprava, privacy-first kontrola, kontrolní karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LL o stabilizaci potvrzené kvartální úpravy do dlouhodobého pravidla: vstupní brána pro stav Potvrdit, přepis změnové historie na aktuální instrukci, kanonické místo práce, zavření přechodových poznámek, návratová otázka pro další kvartál, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LK o ověření kvartální úpravy po prvním normálním použití: návrat k opravné větě, výběr skutečného průchodu, čtyři signály, rozlišení typu problému, rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
