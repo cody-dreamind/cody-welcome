@@ -96104,8 +96104,256 @@ Trvalý onboardingový standard po dalších nástupech buď zůstává beze zm�
 
 Kontrola po dalších nástupech je ochrana proti tichému návratu starých zvyků. Když standard funguje, nechte ho pracovat. Když drhne, opravte nejbližší tření. A když začne sbírat data navíc, zastavte to hned, dokud je z toho malá úprava, ne další provozní dluh.
 
+## Příloha MC: Převod nálezu z trvalého onboardingového standardu do jedné malé opravy
+
+Kontrola trvalého onboardingového standardu má smysl jen tehdy, když po ní tým umí udělat rozhodnutí. Ne každý nález se má proměnit v nový projekt, workshop nebo přepsání celé dokumentace. Většina dobrých oprav je menší: jeden odkaz, jedno pole v šabloně, jedna věta u minimálního výstupu, jedno zavřené staré místo. Právě tím se standard drží živý bez toho, aby kolem něj rostla nová vrstva řízení.
+
+Tato příloha navazuje na Přílohu MB. Vstupem je kontrolní karta po dalších nástupech, kde standard dostal stav `Zpřesnit`, `Zjednodušit` nebo výjimečně `Znovuotevřít`. Cílem není vyřešit všechno, co kontrola našla. Cílem je převést jeden ověřený nález do jedné malé opravy, která se dá použít a zkontrolovat při nejbližším normálním nástupu nebo předání role.
+
+Dobrá oprava odpoví na tři otázky:
+
+```text
+Které jedno místo bránilo správnému použití standardu?
+Jaká nejmenší změna odstraní tření bez nové byrokracie?
+Jak ověříme při příštím normálním použití, že se datová stopa nezvětšila?
+```
+
+Pokud na tyto otázky neumíte odpovědět, oprava je zatím příliš široká. Vraťte se ke kontrolní kartě a vyberte menší místo.
+
+### Neopravujte celý standard najednou
+
+Po kontrole se často objeví víc signálů. Jeden člověk hledal šablonu, druhý přidal screenshot, třetí se zeptal na roli vlastníka a v kanonickém dokumentu je starý odkaz. To neznamená, že je potřeba přepsat celý onboardingový standard. Znamená to, že máte frontu nálezů.
+
+Vyberte jednu opravu podle praktického dopadu:
+
+- brání minimálnímu správnému výstupu;
+- opakovala se ve více použitích;
+- vytváří zbytečnou datovou stopu;
+- vrací lidi ke staré cestě;
+- je levná opravit a snadná ověřit;
+- leží v místě, kde člověk skutečně pracuje.
+
+Slabé rozhodnutí:
+
+```text
+Přepracujeme onboardingový standard, protože se ukázalo několik drobných nejasností.
+```
+
+Silnější rozhodnutí:
+
+```text
+V předávací šabloně přejmenujeme pole "příloha" na "zákaznický odkaz", protože pole navádělo nového člověka k přidání screenshotu.
+```
+
+Druhá věta je menší, ale použitelnější. Tým ví, co změnit, proč to mění a jak pozná, že oprava pomohla.
+
+### Napište opravnou větu
+
+Opravná věta drží změnu při zemi. Má být tak konkrétní, aby šla předat člověku, který nebyl u kontroly.
+
+Formát:
+
+```text
+Opravujeme:
+Protože při kontrole:
+Změníme:
+Ověříme při:
+Privacy-first podmínka:
+```
+
+Vyplněný příklad:
+
+```text
+Opravujeme: pole v předávací šabloně pro první zákaznický portál.
+Protože při kontrole: jeden nový člověk přidal screenshot do interního chatu.
+Změníme: pole "příloha" na "zákaznický odkaz" a doplníme poznámku "screenshot nepřikládat".
+Ověříme při: dalším normálním předání zákaznického portálu.
+Privacy-first podmínka: nevznikne screenshot, export ani kopie zákaznických dat mimo běžný systém.
+```
+
+Opravná věta nemá obsahovat jména lidí, kopie zákaznických výstupů ani dlouhé vysvětlování historie. Stačí důvod a další krok.
+
+### Vyberte typ malé opravy
+
+Malá oprava může mít několik podob. Správný typ vyberte podle prvního místa tření, ne podle toho, co se nejlépe píše do dokumentace.
+
+```text
+Textová oprava:
+Pravidlo je na správném místě, ale věta je nejasná.
+
+Polohová oprava:
+Pravidlo je dobré, ale člověk ho potká moc pozdě nebo vůbec.
+
+Šablonová oprava:
+Pracovní artefakt navádí ke špatnému výstupu.
+
+Odkazová oprava:
+Checklist, wiki nebo issue míří na starou verzi.
+
+Rolová oprava:
+Není jasné, kdo má krok udělat nebo ověřit.
+
+Datová oprava:
+Standard vede ke screenshotu, exportu, kopii nebo evidenci navíc.
+```
+
+Příklady:
+
+```text
+Textová: přidat k minimálnímu výstupu "bez screenshotu".
+Polohová: přesunout pravidlo z wiki do šablony, kterou člověk vyplňuje.
+Šablonová: odstranit pole "příloha" z předávacího e-mailu.
+Odkazová: změnit onboardingový checklist, aby vedl na kanonickou šablonu.
+Rolová: doplnit, že vlastníka dalšího kroku nastavuje delivery lead.
+Datová: nahradit reálný zákaznický příklad syntetickým.
+```
+
+Když jedna oprava spadá do tří typů najednou, pravděpodobně je moc velká. Rozdělte ji a začněte místem, které nejvíc zvyšuje riziko špatného výstupu nebo zbytečného sběru dat.
+
+### Opravujte v místě práce
+
+Oprava má žít tam, kde člověk dělá rozhodnutí. Pokud nový člověk vyplňuje šablonu, opravte šablonu. Pokud začíná v checklistu, opravte checklist. Pokud chyba vzniká v zadání úkolu, opravte issue template nebo předávací text.
+
+Nepomůže, když správná věta přibude do vzdálené wiki stránky, kterou nikdo v daném toku neotevírá. To je dokumentační komfort pro autora, ne pracovní pomoc pro uživatele standardu.
+
+Krátké pravidlo:
+
+```text
+Oprava patří do prvního místa, kde by člověk mohl udělat špatné rozhodnutí.
+```
+
+Příklad:
+
+```text
+Nález: nový člověk poslal screenshot, protože šablona měla pole "příloha".
+Špatná oprava: přidat do interní wiki odstavec o tom, že screenshoty nepoužíváme.
+Lepší oprava: přejmenovat pole v šabloně a doplnit syntetický příklad správné stavové věty.
+```
+
+Codyho komentář: dokumentace, kterou musí člověk aktivně hledat, prohraje s políčkem ve formuláři. Políčko je v tu chvíli silnější produktový text než celá filozofie týmu. Trochu smutné, ale prakticky užitečné.
+
+### Přivažte opravu k nejbližšímu normálnímu použití
+
+Malá oprava nemá čekat na další velké review. Jakmile je změna hotová, určete nejbližší normální situaci, kde se použije. Ověření má být krátké a pracovní.
+
+Dobré ověření:
+
+- proběhne při dalším běžném nástupu nebo předání role;
+- porovná výstup s minimem;
+- zkontroluje, jestli se nevrátila stará cesta;
+- ověří, že nevznikla nová datová stopa;
+- skončí rozhodnutím `Potvrdit`, `Doladit`, `Přesunout` nebo `Znovuotevřít`.
+
+Ověřovací věta:
+
+```text
+Při příštím předání portálu zkontrolujeme jen to, jestli člověk použil zákaznický odkaz místo screenshotu a jestli šablonu našel z onboardingového checklistu.
+```
+
+To stačí. Nepotřebujete z toho dělat audit. Malá oprava má malé ověření.
+
+### Privacy-first úklid při opravě
+
+Oprava po kontrole je dobrý okamžik na datový úklid. Když už otevíráte šablonu, checklist nebo příklad, zkontrolujte i to, jestli v něm nezůstaly staré kopie reality.
+
+Při opravě smažte nebo nahraďte:
+
+- screenshoty použité jako učící příklad;
+- reálná jména zákazníků tam, kde stačí syntetický scénář;
+- osobní poznámky z kontroly;
+- exporty uložené jen kvůli vysvětlování chyby;
+- staré šablony, které dál navádí k horší praxi;
+- pomocné tabulky bez jasného účelu a retence;
+- odkazy do chatů místo kanonického dokumentu.
+
+Privacy-first uzavření opravy:
+
+```text
+Oprava je uložená v kanonické šabloně, stará kopie je označená jako nahrazená, screenshot z kontroly byl smazán a příklad je syntetický.
+```
+
+Taková věta chrání tým před dvěma věcmi najednou: před návratem staré cesty a před tichým hromaděním podkladů, které už nikdo nepotřebuje.
+
+### Karta malé opravy standardu
+
+Použijte jednu kartu. Má být kratší než původní kontrola.
+
+```text
+Nález z kontroly:
+Typ opravy:
+První místo tření:
+Opravná věta:
+Kanonické místo změny:
+Co přesně se mění:
+Co se nemění:
+Staré místo k zavření:
+Privacy-first úklid:
+Ověření při nejbližším použití:
+Rozhodovací signál:
+Vlastník:
+Termín:
+```
+
+Vyplněný příklad:
+
+```text
+Nález z kontroly: nový člověk přidal screenshot do interního chatu.
+Typ opravy: šablonová a datová.
+První místo tření: pole "příloha" v předávací šabloně.
+Opravná věta: pole přejmenujeme na "zákaznický odkaz", aby předání vedlo k odkazu a stavové větě bez screenshotu.
+Kanonické místo změny: předávací šablona odkazovaná z onboardingového checklistu.
+Co přesně se mění: název pole, krátká poznámka a syntetický příklad.
+Co se nemění: celý onboardingový standard a role vlastníka.
+Staré místo k zavření: stará šablona s polem "příloha".
+Privacy-first úklid: screenshot z kontroly smazat, příklad nahradit syntetickým.
+Ověření při nejbližším použití: další běžné předání portálu.
+Rozhodovací signál: výstup obsahuje zákaznický odkaz a nevznikne screenshot.
+Vlastník: delivery lead.
+Termín: před dalším předáním portálu.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jeden nález z kontroly trvalého onboardingového standardu a převeďte ho do malé opravy.
+
+1. Otevřete kontrolní kartu z Přílohy MB.
+2. Vyberte jeden nález podle dopadu na výstup nebo datovou stopu.
+3. Napište opravnou větu.
+4. Určete typ opravy: textová, polohová, šablonová, odkazová, rolová nebo datová.
+5. Najděte první místo práce, kde se má změna stát.
+6. Zapište, co se výslovně nemění.
+7. Udělejte privacy-first úklid starých příkladů, screenshotů, exportů a kopií.
+8. Přivažte ověření k nejbližšímu normálnímu použití.
+
+Výstup:
+
+```text
+Jeden nález z kontroly standardu je převedený do malé opravy s vlastníkem, kanonickým místem, privacy-first úklidem a nejbližším ověřením.
+```
+
+### Checklist kapitoly
+
+- Vybrali jste jeden nález, ne celý seznam?
+- Je jasné, proč má právě tento nález prioritu?
+- Má oprava jednu větu, kterou pochopí i člověk mimo kontrolu?
+- Určili jste první místo tření?
+- Zvolili jste typ opravy podle reality, ne podle oblíbeného dokumentu?
+- Opravujete v místě práce?
+- Je jasné, co se mění a co se nemění?
+- Zavřeli jste starou šablonu, odkaz nebo příklad, který by vedl jinam?
+- Nepřidali jste novou kontrolní tabulku jen kvůli malé opravě?
+- Odstranili jste screenshoty, exporty nebo reálné zákaznické příklady bez provozního důvodu?
+- Je příklad po opravě syntetický nebo bezpečně anonymizovaný?
+- Má oprava vlastníka?
+- Je ověření navázané na nejbližší normální použití?
+- Máte rozhodovací signál pro potvrzení nebo další doladění?
+- Zůstává standard po opravě jednodušší než před kontrolou?
+
+Převod nálezu do malé opravy je místo, kde se kontrola mění v užitečnou práci. Když tým opraví nejbližší tření, zavře starou cestu a uklidí datovou stopu, standard se zlepšuje bez procesního nadýmání. A to je přesně ten druh provozní hygieny, který není nápadný, ale dlouhodobě šetří lidi i data.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha MC o převodu nálezu z trvalého onboardingového standardu do jedné malé opravy: výběr jednoho nálezu, opravná věta, typy oprav, oprava v místě práce, ověření při dalším použití, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MB o kontrole trvalého onboardingového standardu po dalších nástupech: reálné použití, porovnání s minimálním výstupem, první místo tření, rozhodovací stavy, privacy-first kontrola datové stopy, kontrolní karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MA o uzavření potvrzené onboardingové trasy do trvalého standardu: jeden zdroj pravdy, okamžik použití, běžná údržba, zavření kontrolního režimu, privacy-first uzavření, karta standardu, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LZ o kontrole stabilizované onboardingové trasy po prvním běžném cyklu: výběr normálního cyklu, sledování trasy místo člověka, porovnání výstupu s minimem, návrat staré cesty, rozhodovací stavy, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
