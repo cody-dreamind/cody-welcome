@@ -92721,8 +92721,185 @@ Pravidlo je uzavřené jako běžná součást práce, má jasné kanonické mí
 
 Uzavření dlouhodobého pravidla je malý, ale důležitý konec smyčky. Bez něj se dobrá zlepšení mění v nekonečné kontroly. S ním se pravidlo přesune tam, kam patří: do běžné práce, s jasným rytmem návratu a bez zbytečných dat okolo.
 
+## Příloha LO: Převod uzavřeného pravidla do onboardingu a školení
+
+Uzavřené dlouhodobé pravidlo má ještě jeden praktický test: dokáže podle něj pracovat člověk, který nebyl u jeho vzniku? Pokud pravidlo chápe jen původní tým, není to ještě týmový standard. Je to dobrá vzpomínka s odkazem.
+
+Tato příloha navazuje na Přílohu LN. Řeší okamžik, kdy je pravidlo stabilní, má provozní větu, kanonické místo a přiměřený rytmus návratu. Teď je potřeba rozhodnout, zda a jak se má propsat do onboardingu, školení, interního lesson packu nebo role-specific checklistu.
+
+Cíl není vyrábět další kurz. Cíl je, aby nový člověk udělal správné rozhodnutí ve správném místě práce, aniž by musel znát celou historii pravidla.
+
+### Neučte historii, učte rozhodnutí
+
+Nejčastější chyba při převodu pravidla do školení je snaha vysvětlit celý příběh: co se stalo, kdo co řešil, proč vznikla oprava, jak se ověřovala a ve kterém kvartálu prošla kontrolou. To může být užitečné pro vlastníka procesu, ale pro běžného uživatele pravidla je to většinou moc.
+
+Onboarding potřebuje tři věci:
+
+```text
+Kdy se rozhodnutí používá.
+Jak vypadá správné chování.
+Kde je hranice nebo výjimka.
+```
+
+Příklad provozní věty:
+
+```text
+Při předání portálu popisujeme zákaznický stav textovou stavovou větou; screenshot zákaznického detailu nevzniká mimo schválený incidentní režim.
+```
+
+Onboardingová verze:
+
+```text
+Když připravuješ předání portálu, nepřidávej screenshot zákaznického detailu. Použij stavovou větu: co je hotové, co čeká na zákazníka a kde najde další krok. Screenshot patří jen do incidentního režimu, pokud neobsahuje osobní údaje a má retenční datum.
+```
+
+Rozdíl je v použití. Provozní věta je standard. Onboardingová verze je instrukce v konkrétní situaci.
+
+### Vyberte jen role, které pravidlo opravdu potřebují
+
+Ne každé pravidlo patří do školení pro celý tým. Pokud každé stabilizované pravidlo přidáte všem, onboarding se nafoukne a nový člověk se naučí hlavně to, že interní dokumentace je nekonečná krajina. Hezké na výlet, horší na práci.
+
+U každého pravidla určete cílové role:
+
+- kdo pravidlo používá přímo;
+- kdo kontroluje výstup;
+- kdo schvaluje výjimku;
+- kdo potřebuje jen vědět, že pravidlo existuje;
+- kdo pravidlo nepotřebuje vůbec.
+
+Příklad:
+
+```text
+Pravidlo: předání portálu bez screenshotu zákaznického detailu.
+Používá přímo: delivery specialista, customer success.
+Kontroluje výstup: delivery lead.
+Schvaluje výjimku: incident owner.
+Jen informativně: sales, pokud slibuje podobu předání.
+Nepotřebuje: obecný marketingový onboarding.
+```
+
+Tím se z pravidla nestane plošná přednáška. Stane se malý kus pracovního návyku tam, kde má dopad.
+
+### Vložte pravidlo do místa prvního použití
+
+Školení je dobré, ale lidé zapomínají. Pracovní místo připomíná. Proto nestačí dát pravidlo do onboardingového dokumentu. Musí být vidět tam, kde člověk poprvé dělá příslušný krok.
+
+Vhodná místa:
+
+- checklist pro předání;
+- šablona zákaznického e-mailu;
+- formulář pro vytvoření nové nabídky;
+- interní karta služby;
+- support makro;
+- review checklist;
+- role-specific onboarding trasa;
+- krátký lesson pack pro konkrétní typ práce.
+
+Praktická otázka:
+
+```text
+Kde člověk stojí ve chvíli, kdy by mohl pravidlo porušit?
+```
+
+Tam má pravidlo žít. Ne o tři kliky dál, ne v revizním zápisu, ne v dokumentu "různé poznámky". Pokud pravidlo chrání data zákazníka při předání, patří do předávací šablony. Pokud chrání formulář před sběrem zbytečných údajů, patří do formulářového checklistu.
+
+### Udělejte z pravidla jeden cvičný průchod
+
+Dobré školení neříká jen "nedělej X". Ukáže malou situaci a nechá člověka rozhodnout. Stačí krátký cvičný průchod, který ověří porozumění.
+
+Šablona:
+
+```text
+Situace:
+Co bys udělal:
+Správné rozhodnutí:
+Proč:
+Privacy-first poznámka:
+Kde je kanonické pravidlo:
+```
+
+Vyplněný příklad:
+
+```text
+Situace: zákazník chce před schůzkou vidět, které položky v portálu čekají na jeho kontrolu.
+Co bys udělal: neposílám screenshot detailu zákaznických dat; napíšu stavovou větu a odkážu na bezpečné místo v portálu.
+Správné rozhodnutí: stavová věta v předávacím e-mailu, žádný export ani screenshot.
+Proč: předání má vysvětlit další krok bez kopírování zákaznických dat mimo systém.
+Privacy-first poznámka: nevzniká nový soubor s osobními nebo zákaznickými údaji.
+Kde je kanonické pravidlo: delivery checklist.
+```
+
+Jeden takový průchod má větší hodnotu než dlouhé vysvětlení. Nový člověk si vyzkouší rozhodnutí v kontextu, ve kterém ho později opravdu použije.
+
+### Oddělte pravidlo od interních historek
+
+Interní historky bývají užitečné, ale v onboardingu rychle stárnou. Navíc mohou obsahovat zákaznické detaily, incidentní kontext nebo osobní údaje, které do školení nepatří. Pokud potřebujete ukázku, použijte syntetický příklad.
+
+Privacy-first pravidla pro školení:
+
+- nepoužívejte reálné zákaznické screenshoty, pokud nejsou nezbytné;
+- neukládejte incidentní detaily do školících materiálů;
+- anonymizace není výmluva pro zbytečné kopírování dat;
+- syntetický příklad je výchozí volba;
+- pokud musí vzniknout dočasný podklad, má účel, vlastníka a retenční datum;
+- onboardingový materiál nemá mít širší přístup než samotné pravidlo vyžaduje.
+
+Codyho komentář: školení je zvláštně oblíbené místo pro stará data. Někdo kdysi udělal screenshot "jen jako ukázku" a o rok později z něj máme archeologický exponát s osobními údaji. Radši nudný syntetický příklad než napínavý compliance thriller.
+
+### Aktualizační háček
+
+Jakmile pravidlo vložíte do onboardingu, vzniká nová povinnost: když se pravidlo změní, musí se změnit i onboarding. Ne hned všude v dokonalé koordinaci, ale aspoň na kanonických místech, která nový člověk opravdu použije.
+
+Do uzavírací karty pravidla doplňte:
+
+```text
+Onboardingová místa:
+Role, kterých se týká:
+Cvičný průchod:
+Vlastník aktualizace:
+Kdy se aktualizuje: při změně pravidla / při kvartální revizi role / při změně šablony
+```
+
+Pokud neumíte určit vlastníka aktualizace, pravidlo zatím do školení nevkládejte plošně. Dejte ho jen do pracovního checklistu a vraťte se k širšímu onboardingu, až bude jasné vlastnictví.
+
+### Mini workshop na 15 minut
+
+Vezměte jedno uzavřené dlouhodobé pravidlo a převeďte ho do onboardingového tvaru.
+
+1. Napište rozhodnutí, které má nový člověk udělat.
+2. Vyberte role, které pravidlo opravdu potřebují.
+3. Najděte místo prvního použití.
+4. Přepište provozní větu do krátké instrukce v situaci.
+5. Přidejte jeden syntetický cvičný průchod.
+6. Zkontrolujte, že nevznikl screenshot, export ani kopie reálných zákaznických dat.
+7. Zapište vlastníka aktualizace a kanonické onboardingové místo.
+
+Výstup:
+
+```text
+Uzavřené pravidlo je převedené do konkrétní onboardingové situace, má cílové role, cvičný průchod a privacy-first školící materiál bez zbytečných dat.
+```
+
+### Checklist kapitoly
+
+- Učíte rozhodnutí, ne celou historii pravidla?
+- Je jasné, kdy se pravidlo používá?
+- Je popsáno správné chování i hranice výjimky?
+- Vybrali jste jen role, které pravidlo opravdu potřebují?
+- Je pravidlo vložené do místa prvního použití?
+- Existuje krátká onboardingová instrukce v řeči dané role?
+- Má pravidlo jeden syntetický cvičný průchod?
+- Nepoužíváte reálné screenshoty, exporty ani incidentní detaily bez nutnosti?
+- Má případný dočasný podklad účel, vlastníka a retenční datum?
+- Je jasné, kde je kanonické pravidlo?
+- Má onboardingová verze vlastníka aktualizace?
+- Ví tým, co se má změnit v onboardingu, když se změní pravidlo?
+
+Převod uzavřeného pravidla do onboardingu je poslední metr stabilizace. Pravidlo už není jen správně napsané a zkontrolované. Je naučitelné. Nový člověk ho dokáže použít v konkrétní situaci, bez znalosti celé historie a bez zbytečného kopírování dat.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LO o převodu uzavřeného pravidla do onboardingu a školení: rozhodnutí místo historie, výběr rolí, místo prvního použití, cvičný průchod, privacy-first školící materiály, aktualizační háček, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LN o uzavření dlouhodobého pravidla po potvrzeném kvartálním přehledu: vstupní brána, provozní věta, výběr běžného/lehkého/návratového rytmu, zavření přechodových opor, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LM o kontrole dlouhodobého pravidla po dalším kvartálním přehledu: návratová otázka, malý vzorek skutečné práce, signály nalezení/použití/výsledku/datové stopy, stavy pravidla, nejbližší oprava, privacy-first kontrola, kontrolní karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LL o stabilizaci potvrzené kvartální úpravy do dlouhodobého pravidla: vstupní brána pro stav Potvrdit, přepis změnové historie na aktuální instrukci, kanonické místo práce, zavření přechodových poznámek, návratová otázka pro další kvartál, privacy-first stabilizace, karta, mini workshop a checklist.
