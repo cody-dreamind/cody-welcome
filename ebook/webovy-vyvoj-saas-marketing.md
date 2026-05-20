@@ -95647,8 +95647,232 @@ Jedna stabilizovaná onboardingová trasa má po prvním běžném cyklu jasný 
 
 Kontrola po prvním běžném cyklu chrání stabilizaci před iluzí hotové práce. Když systém obstojí v obyčejném použití, nechte ho dýchat v běžném rytmu. Když neobstojí, opravte nejbližší místo selhání a neproměňte jednu praktickou trasu v další interní seriál.
 
+## Příloha MA: Uzavření potvrzené onboardingové trasy do trvalého standardu
+
+Když onboardingová trasa projde prvním běžným cyklem, přichází nenápadný, ale důležitý krok: uzavřít ji jako trvalý standard. Ne jako "tu novou věc, co se zrovna povedla", ne jako výjimku pro jednoho člověka, ne jako poznámku v logu. Standard znamená, že tým ví, kde trasa žije, kdy se používá, kdo ji vlastní a kdy se smí znovu otevřít.
+
+Tato příloha navazuje na Přílohu LZ. Vstupem je onboardingová trasa ve stavu `Ponechat`, případně `Zpřesnit`, pokud šlo jen o drobnou opravu bez změny smyslu. Cílem je převést potvrzenou trasu z režimu kontroly do běžného onboardingového standardu, který se používá při dalších nástupech bez zvláštního dohledu.
+
+Trvalý standard má tři vlastnosti:
+
+```text
+Má jeden zdroj pravdy.
+Má jasný okamžik použití.
+Má lehký rytmus údržby bez sledování lidí.
+```
+
+Bez těchto tří věcí se z potvrzené trasy snadno stane další dobrá iniciativa, která funguje jen tak dlouho, dokud si ji pamatuje původní autor.
+
+### Uzavírejte výsledek, ne historii
+
+Do trvalého standardu nepatří celý příběh opravy. Nový člověk nepotřebuje vědět, kolikrát se měnila šablona, kdo našel starý odkaz a jak dlouho se debatovalo o screenshotu. Potřebuje bezpečně dokončit práci.
+
+Slabý standard:
+
+```text
+Po několika kontrolách jsme upravili onboardingovou trasu tak, aby se nepoužívaly screenshoty. Dříve se posílaly, ale teď je lepší používat stavovou větu.
+```
+
+Pracovní standard:
+
+```text
+Při prvním předání zákaznického portálu použij stavovou větu, zákaznický odkaz, další krok a vlastníka. Screenshoty ani exporty do předání nepatří.
+```
+
+První verze vysvětluje minulost. Druhá vede práci. Historii nevyhazujte úplně, ale nechte ji v pracovním logu nebo v krátké rozhodovací kartě. V místě práce má být současné pravidlo.
+
+### Vyberte jeden zdroj pravdy
+
+Trvalý onboardingový standard nesmí být rozprostřený po wiki, šabloně, checklistu, chatu a starém ticketu. Může na více míst odkazovat, ale pravdu má říkat jedno místo.
+
+Vyberte zdroj podle toho, kde člověk přirozeně začíná:
+
+```text
+Onboardingový checklist:
+Dobré místo pro pořadí kroků a kontrolu dokončení.
+
+Role playbook:
+Dobré místo pro rozhodovací situace konkrétní role.
+
+Šablona výstupu:
+Dobré místo pro pravidlo, které se používá přímo při psaní nebo předání.
+
+Issue template:
+Dobré místo, když kvalita onboardingu závisí na zadání práce.
+```
+
+Jedno pravidlo může být zmíněné na více místech, ale jen jedno z nich má být kanonické. Ostatní mají odkazovat, ne opisovat. Kopie standardu jsou pohodlné při psaní a drahé při údržbě.
+
+Praktické pravidlo:
+
+```text
+Když by změna jedné věty vyžadovala úpravu na třech místech, nemáte standard. Máte tři kandidáty na rozpor.
+```
+
+### Pojmenujte okamžik použití
+
+Standard má být připojený k okamžiku práce, ne k abstraktní kategorii. "Předávání zákaznických portálů" je lepší než "komunikace se zákazníkem". "První samostatný ticket nové role" je lepší než "technický onboarding".
+
+Pojmenování okamžiku použití pomáhá třem věcem:
+
+- nový člověk ví, kdy má standard otevřít;
+- lead ví, kdy má čekat minimální správný výstup;
+- tým pozná, kdy standard zastaral nebo se překrývá s jiným pravidlem.
+
+Příklad:
+
+```text
+Okamžik použití:
+První samostatné předání zákaznického portálu po založení účtu.
+
+Minimální správný výstup:
+Stavová věta, zákaznický odkaz, další krok, vlastník.
+
+Bezpečnostní hranice:
+Bez screenshotu, bez exportu, bez reálných zákaznických dat v učícím příkladu.
+```
+
+Takhle napsaný standard není obecná moudrost. Je to malý provozní kontrakt.
+
+### Nastavte běžnou údržbu
+
+Trvalý standard neznamená věčný standard. Znamená jen, že se nemá otevírat při každé drobnosti. Potřebuje lehký rytmus údržby, který zachytí návrat staré cesty, zastaralý odkaz nebo zbytečné datové riziko.
+
+Stačí jednoduchý režim:
+
+```text
+Po dalších dvou běžných nástupech:
+Krátce ověřit, jestli člověk našel kanonickou trasu a výstup splnil minimum.
+
+Při změně nástroje, šablony nebo role:
+Zkontrolovat, jestli standard pořád vede do správného místa.
+
+Při návratu staré cesty:
+Otevřít nejbližší místo selhání, ne celý onboarding.
+```
+
+Nevytvářejte měsíční rituál, pokud standard používáte dvakrát do roka. Údržba má sledovat reálné použití. Tam, kde není použití, není co kontrolovat. Tam, kde je použití časté, stačí malý vzorek a jasná otázka.
+
+### Zavřete kontrolní režim
+
+Po uzavření do standardu smažte nebo zkraťte vše, co sloužilo jen k zavedení změny:
+
+- dočasné kontrolní poznámky;
+- osobní připomínky autora opravy;
+- pracovní exporty a screenshoty;
+- duplicitní kopie šablon;
+- staré checklisty označené jen názvem data;
+- komentáře v chatu, které nahrazovaly kanonické pravidlo;
+- seznamy "ještě hlídat", které už nemají vlastníka.
+
+Zavření kontrolního režimu je důležité i lidsky. Pokud tým po každém zlepšení nechá běžet speciální dohled, lidé si zvyknou, že standardy nejsou opora, ale další test. Onboarding má člověku pomoct rychleji vlastnit práci, ne mu připomínat, že někdo pořád stojí za ramenem.
+
+Codyho komentář: dobrý standard po zavedení ztichne. Když pořád vyžaduje porady, vysvětlování a osobní hlídání, není stabilní. Je to jen proces s marketingovým názvem.
+
+### Privacy-first uzavření standardu
+
+Onboardingové standardy snadno hromadí data, protože obsahují příklady, přístupy, zákaznické situace a interní rozhodnutí. Při uzavření zkontrolujte, že standard učí práci bez zbytečného kopírování reality.
+
+Privacy-first standard:
+
+- používá syntetické nebo bezpečně anonymizované příklady;
+- neposílá člověka do osobních složek a starých chatů;
+- nevyžaduje screenshot jako důkaz běžného kroku;
+- nepoužívá reálná zákaznická data jako tréninkový materiál;
+- má jasné místo pro předání přístupů;
+- říká, co se po dokončení maže nebo vůbec nevytváří;
+- popisuje chyby jako stav systému, ne jako selhání konkrétní osoby.
+
+Jednoduchá uzavírací věta:
+
+```text
+Standard je uzavřený bez reálných zákaznických příkladů, bez dočasných exportů a bez nové evidence nad novými lidmi.
+```
+
+Tohle je malá věta, ale drží hodnotu celé firmy. Standard, který učí správný výstup a zároveň minimalizuje data, se dá používat déle a s menším rizikem.
+
+### Karta trvalého onboardingového standardu
+
+Použijte jednu kartu. Má být krátká a praktická.
+
+```text
+Název standardu:
+Okamžik použití:
+Role, pro kterou platí:
+Kanonické místo:
+Minimální správný výstup:
+Bezpečnostní hranice:
+Odkazy, které na standard vedou:
+Místa, která byla nahrazena:
+Vlastník standardu:
+Rytmus údržby:
+Návratový signál:
+Privacy-first uzavření:
+Datum uzavření:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Název standardu: první předání zákaznického portálu bez screenshotu.
+Okamžik použití: první samostatné předání portálu po založení účtu.
+Role, pro kterou platí: delivery specialista.
+Kanonické místo: onboardingový checklist delivery role, bod "První předání portálu".
+Minimální správný výstup: stavová věta, zákaznický odkaz, další krok, vlastník.
+Bezpečnostní hranice: bez screenshotu, bez exportu, bez reálných zákaznických dat v příkladu.
+Odkazy, které na standard vedou: role playbook a předávací šablona.
+Místa, která byla nahrazena: stará wiki ukázka a osobní kopie šablony.
+Vlastník standardu: delivery lead.
+Rytmus údržby: po dalších dvou běžných nástupech nebo při změně šablony.
+Návratový signál: opakovaný screenshot v předání vrací nejbližší místo trasy do kontroly.
+Privacy-first uzavření: ponechán jen syntetický příklad a krátký záznam rozhodnutí.
+Datum uzavření: po potvrzeném běžném cyklu.
+Další kontrola: při dalším běžném onboardingovém review.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu onboardingovou trasu ve stavu `Ponechat` a uzavřete ji do trvalého standardu.
+
+1. Přečtěte rozhodnutí z kontroly po prvním běžném cyklu.
+2. Přepište výsledek jako současné pravidlo, ne jako historii.
+3. Vyberte jeden zdroj pravdy.
+4. Pojmenujte konkrétní okamžik použití.
+5. Zapište minimální správný výstup a bezpečnostní hranici.
+6. Zavřete nebo označte nahrazené kopie a staré odkazy.
+7. Nastavte lehký rytmus údržby podle reálného použití.
+8. Vyplňte kartu trvalého standardu a ukliďte dočasnou datovou stopu.
+
+Výstup:
+
+```text
+Jedna potvrzená onboardingová trasa je uzavřená jako trvalý standard s jedním zdrojem pravdy, jasným okamžikem použití a privacy-first údržbou.
+```
+
+### Checklist kapitoly
+
+- Uzavíráte trasu, která prošla běžným cyklem?
+- Je výsledek napsaný jako současné pravidlo, ne jako historie změny?
+- Má standard jeden zdroj pravdy?
+- Ostatní místa odkazují místo opisování?
+- Je jasný okamžik použití?
+- Je popsaný minimální správný výstup?
+- Je zapsaná bezpečnostní hranice pro data, příklady a přístupy?
+- Zavřeli jste staré kopie, odkazy a šablony?
+- Zkrátili jste dočasné poznámky z kontrolního režimu?
+- Neponechali jste screenshoty, exporty nebo reálné zákaznické příklady bez důvodu?
+- Má standard vlastníka?
+- Má údržba rytmus podle reálného použití, ne podle kalendářové úzkosti?
+- Je návratový signál konkrétní?
+- Nezavedli jste novou evidenci nad lidmi?
+- Ví další nový člověk, kde standard najde?
+
+Uzavření potvrzené onboardingové trasy je malý akt dospělosti systému. Tým přestane držet změnu v hlavě, přestane kolem ní chodit po špičkách a nechá ji sloužit v běžném provozu. Standard má být opora, ne památník procesu.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha MA o uzavření potvrzené onboardingové trasy do trvalého standardu: jeden zdroj pravdy, okamžik použití, běžná údržba, zavření kontrolního režimu, privacy-first uzavření, karta standardu, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LZ o kontrole stabilizované onboardingové trasy po prvním běžném cyklu: výběr normálního cyklu, sledování trasy místo člověka, porovnání výstupu s minimem, návrat staré cesty, rozhodovací stavy, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LY o stabilizaci potvrzené úpravy onboardingové trasy: vstup přes ověřený stav, přepis změny na aktuální pravidlo, uložení do místa práce, zavření starých cest, návratový signál, privacy-first úklid, stabilizační karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LX o ověření úpravy onboardingové trasy po dalším normálním použití: výběr reálného průchodu, návrat ke změnové větě, sledování startu/nalezení/rozhodnutí/výstupu, rozlišení selhání nalezení/pochopení/výstupu, privacy-first kontrola skutečné stopy, rozhodovací stavy, karta, mini workshop a checklist.
