@@ -94346,8 +94346,264 @@ Opravené onboardingové pravidlo už není speciální projekt. Je součástí 
 
 Uzavření stabilizované opravy je malý, ale důležitý úklidový pohyb. Tým tím říká: oprava pomohla, systém se naučil novou věc a speciální režim končí. V dobrém provozu se totiž každá úspěšná oprava nemá stát další vrstvou procesu. Má zmizet do normální práce a nechat po sobě jen lepší cestu.
 
+## Příloha LV: Kontrola běžného onboardingového rytmu po prvních nástupech
+
+Když se opravené onboardingové pravidlo přesune do běžného rytmu, práce nekončí. Jen se změní typ pozornosti. Už nekontrolujeme jednu opravu po jednom použití. Kontrolujeme, jestli nový normální rytmus opravdu pomáhá lidem začít pracovat samostatně, drží správné rozhodnutí v místě práce a nevyrábí vedlejší administrativu.
+
+Tato příloha navazuje na Přílohu LU. Vstupem je pravidlo, které má kanonický domov, místo prvního použití v onboardingu, vlastníka rytmu a uklizenou datovou stopu. Teď je potřeba podívat se na první malé období běžného používání: typicky několik nástupů do role, několik onboardingových průchodů nebo první měsíc, kdy pravidlo už není speciálně hlídané.
+
+Cíl kontroly není dokazovat, že onboarding je dokonalý. Cíl je zjistit, jestli rytmus drží bez toho, aby se kolem něj musel stavět další dohled.
+
+Dobrá kontrola odpoví na čtyři otázky:
+
+```text
+Našel nový člověk pravidlo ve správném okamžiku?
+Použil ho bez zvláštní pomoci autora pravidla?
+Vznikl správný pracovní výstup?
+Zůstala datová stopa přiměřená účelu?
+```
+
+Pokud odpověď zní ano, rytmus se může dál uklidnit. Pokud ne, nehledáme viníka. Hledáme nejbližší místo, kde se onboarding rozpojil od práce.
+
+### Vyberte malé kontrolní okno
+
+Kontrola běžného rytmu nemá být celoroční audit. Po prvním přesunu do normálu stačí krátké okno, ve kterém se pravidlo reálně několikrát potkalo s prací. Může to být první měsíc, první tři onboardingové průchody nebo první dva lidé, kteří prošli stejnou rolovou trasou.
+
+Vhodné okno:
+
+- zahrnuje skutečné použití pravidla, ne jen čtení dokumentu;
+- je dost krátké, aby si tým pamatoval tření;
+- není tak krátké, že hodnotí jednu náhodnou výjimku;
+- pracuje se závěry, ne s osobním sledováním nových lidí;
+- má jasného vlastníka, který kontrolu uzavře.
+
+Příklad:
+
+```text
+Kontrolní okno: první tři předání zákaznického portálu po přesunu pravidla do běžného onboardingového rytmu.
+Role: delivery specialista a customer success.
+Kontroluje: delivery lead.
+Otázka: vede onboarding k předání bez screenshotu zákaznického detailu a bez dodatečného vysvětlování?
+```
+
+Takové okno je dost konkrétní. Neptá se, jestli je onboarding obecně dobrý. Ptá se, jestli jeden rytmus splnil jeden slib.
+
+### Sledujte rytmus, ne výkon člověka
+
+Onboardingová kontrola se snadno zvrhne v hodnocení nového člověka. To je špatný směr. Člověk může udělat chybu, ale systém má vysvětlit, proč správné rozhodnutí nebylo dost dostupné, jasné nebo praktické.
+
+Při kontrole proto používejte jazyk systému:
+
+```text
+Pravidlo nebylo v místě rozhodnutí.
+Příklad byl moc obecný.
+Výjimka nebyla přiřazená k roli.
+Šablona obsahovala starou variantu.
+Kontrolní otázka vznikla až po odeslání výstupu.
+```
+
+Méně užitečný jazyk:
+
+```text
+Nový člověk si to nepohlídal.
+Měl si přečíst dokumentaci.
+Musíme být důslednější.
+Příště to někdo zkontroluje ručně.
+```
+
+První sada vede k opravě systému. Druhá sada vede k dohledu. A dohled je drahá náhrada za špatně umístěné pravidlo.
+
+Codyho komentář: věta "měl si přečíst dokumentaci" je někdy pravdivá, ale málokdy užitečná. Pokud člověk v kritickém okamžiku stojí ve špatné šabloně, dokumentace v jiném koutě firmy mu morálně fandí, ale prakticky nepomáhá.
+
+### Zkontrolujte čtyři signály rytmu
+
+Pro první kontrolu běžného onboardingového rytmu stačí čtyři signály.
+
+```text
+Nalezení:
+Člověk pravidlo našel v okamžiku, kdy ho potřeboval.
+
+Použití:
+Pravidlo převedl do konkrétního výstupu bez zvláštní podpory.
+
+Výsledek:
+Výstup splnil minimální správný standard.
+
+Stopa:
+Kvůli učení, kontrole nebo výjimce nevznikla zbytečná kopie dat.
+```
+
+Vyplněný příklad:
+
+```text
+Nalezení: pravidlo bylo přímo v předávací šabloně.
+Použití: nový člověk použil stavovou větu bez dotazu na autora pravidla.
+Výsledek: zákazník dostal odkaz na portál a jasný další krok, bez screenshotu.
+Stopa: nevznikl export; review zapsané jen jako agregovaný závěr.
+```
+
+Pokud jeden signál chybí, držte opravu u něj. Když chybí nalezení, nepřepisujte celé školení. Když chybí výsledek, neřešte hned nový nástroj. Když selže stopa, nezačínejte debatou o tónu textu. Úzká oprava bývá rychlejší a férovější.
+
+### Rozlišujte tři typy tření
+
+Ne každé tření znamená, že pravidlo je špatně. Při kontrole si proto u každého nálezu napište typ.
+
+```text
+Tření trasy:
+Pravidlo existuje, ale člověk ho nepotká v pracovním toku.
+
+Tření pochopení:
+Pravidlo je na správném místě, ale jazyk, příklad nebo hranice nejsou dost jasné.
+
+Tření provozu:
+Pravidlo je jasné, ale okolní proces, role nebo šablona mu odporuje.
+```
+
+Příklady:
+
+```text
+Tření trasy: onboarding říká "použij delivery checklist", ale šablona e-mailu je uložená zvlášť a bez odkazu.
+Tření pochopení: člověk ví, že nemá poslat screenshot, ale neví, jak napsat stavovou větu.
+Tření provozu: sales slíbil zákazníkovi export jako součást předání, i když onboarding pracuje s bezpečným odkazem do portálu.
+```
+
+Každý typ má jinou opravu. Trasa potřebuje přesun nebo odkaz. Pochopení potřebuje příklad nebo přesnější větu. Provoz potřebuje sladit sousední proces, jinak bude onboarding pořád učit něco, co realita obchází.
+
+### Stav rytmu po kontrole
+
+Na konci kontroly neurčujte deset úkolů. Určete stav rytmu.
+
+```text
+Pokračovat:
+Rytmus funguje bez speciální podpory, výstupy splňují minimum a datová stopa je čistá.
+
+Doladit:
+Rytmus funguje, ale jeden signál potřebuje malou úpravu v místě práce.
+
+Vrátit do krátké péče:
+Pravidlo se opakovaně nepoužívá správně nebo vyžaduje pomoc, kterou běžný rytmus nemá nést.
+
+Znovuotevřít onboardingovou trasu:
+Problém není v jednom pravidle, ale v pořadí, obsahu nebo vlastnictví celé rolové trasy.
+```
+
+Příklady rozhodnutí:
+
+```text
+Pokračovat: první tři předání proběhla bez screenshotu, bez exportu a bez dodatečné podpory.
+Doladit: pravidlo funguje, ale šablona potřebuje kratší syntetický příklad stavové věty.
+Vrátit do krátké péče: dva ze tří průchodů skončily dotazem na autora pravidla, protože výjimka není jasná.
+Znovuotevřít onboardingovou trasu: nový člověk neví, která šablona je aktuální, protože role má tři paralelní vstupy do stejné práce.
+```
+
+Stav `Doladit` má skončit jednou malou změnou. Stav `Vrátit do krátké péče` má mít omezené okno, třeba další dva průchody. Stav `Znovuotevřít onboardingovou trasu` už je větší téma, ale pořád by mělo začít konkrétní otázkou: kde se trasa rozpadá?
+
+### Privacy-first kontrola rytmu
+
+Běžný onboarding často vytváří méně viditelnou datovou stopu než samotný produkt. Ukázky, kontrolní poznámky, nahrávky průchodů, screenshoty, staré exporty, kopie e-mailů a chatové vysvětlování mohou zůstat ležet dlouho po tom, co splnily účel.
+
+Při kontrole rytmu proto projděte:
+
+- zda onboarding používá syntetické příklady místo reálných zákaznických dat;
+- zda se review zapisuje jako závěr, ne jako kopie celého výstupu;
+- zda se otázky z prvních průchodů nepřepisují do trvalých dokumentů se jmény zákazníků;
+- zda staré šablony neobsahují zastaralé screenshoty nebo exporty;
+- zda má případný dočasný podklad vlastníka a datum smazání;
+- zda kontrola rytmu nemění onboarding v osobní sledování nováčků;
+- zda se výjimky řeší v kanonickém režimu, ne v ad hoc chatu.
+
+Dobrá privacy-first věta po kontrole:
+
+```text
+Kontrola rytmu pracovala jen s agregovaným závěrem. V onboardingové trase zůstávají syntetické příklady a dočasné podklady z prvních průchodů byly smazané nebo zkrácené podle účelu.
+```
+
+Tohle není právnická ozdoba. Je to provozní hygiena. Když se tým naučí kontrolovat onboarding bez kopírování reálných dat, sníží riziko a zároveň si udrží lepší pořádek v materiálech.
+
+### Karta kontroly rytmu
+
+Použijte jednu krátkou kartu:
+
+```text
+Onboardingové pravidlo:
+Role:
+Běžný rytmus:
+Kontrolní okno:
+Počet skutečných průchodů:
+Signál nalezení:
+Signál použití:
+Signál výsledku:
+Signál datové stopy:
+Typ hlavního tření: trasa / pochopení / provoz / žádné
+Stav rytmu: Pokračovat / Doladit / Vrátit do krátké péče / Znovuotevřít onboardingovou trasu
+Jedna další akce:
+Co se maže nebo zkracuje:
+Vlastník:
+Datum další kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Onboardingové pravidlo: při běžném předání neposílat screenshot zákaznického detailu.
+Role: delivery specialista.
+Běžný rytmus: měsíční kontrola předávacích šablon.
+Kontrolní okno: první tři předání po uzavření opravy.
+Počet skutečných průchodů: 3.
+Signál nalezení: pravidlo bylo v šabloně předávacího e-mailu.
+Signál použití: všichni použili stavovou větu bez podpory autora pravidla.
+Signál výsledku: výstupy splnily minimum, zákazník dostal další krok.
+Signál datové stopy: nevznikl screenshot ani export.
+Typ hlavního tření: pochopení.
+Stav rytmu: Doladit.
+Jedna další akce: zkrátit syntetický příklad stavové věty na dvě varianty.
+Co se maže nebo zkracuje: poznámky z prvních průchodů zkrátit na agregovaný závěr.
+Vlastník: delivery lead.
+Datum další kontroly: při příští měsíční kontrole šablon.
+```
+
+### Mini workshop na 15 minut
+
+Vezměte jedno onboardingové pravidlo, které už přešlo do běžného rytmu, a zkontrolujte jeho první používání.
+
+1. Vyberte malé kontrolní okno: první měsíc, první tři průchody nebo první dva nástupy.
+2. Napište původní slib rytmu jednou větou.
+3. U každého průchodu zkontrolujte nalezení, použití, výsledek a datovou stopu.
+4. Určete hlavní typ tření: trasa, pochopení nebo provoz.
+5. Rozhodněte stav rytmu.
+6. Vyberte maximálně jednu další akci.
+7. Zkraťte nebo smažte dočasné podklady z kontroly.
+8. Zapište datum další běžné kontroly.
+
+Výstup:
+
+```text
+Běžný onboardingový rytmus má ověřené první používání, jeden jasný stav a případně jednu malou akci bez nové vrstvy dohledu.
+```
+
+### Checklist kapitoly
+
+- Vybrali jste malé kontrolní okno místo velkého auditu?
+- Kontrolujete skutečné průchody, ne jen existenci dokumentu?
+- Sledujete rytmus a systém, ne osobní výkon nového člověka?
+- Je jasný signál nalezení pravidla?
+- Je jasný signál použití bez zvláštní podpory?
+- Je výstup porovnaný s minimálním správným výsledkem?
+- Zkontrolovali jste datovou stopu u učení, kontroly i výjimek?
+- Rozlišili jste tření trasy, pochopení a provozu?
+- Určili jste stav `Pokračovat`, `Doladit`, `Vrátit do krátké péče` nebo `Znovuotevřít onboardingovou trasu`?
+- Vybrali jste maximálně jednu další akci?
+- Má případná krátká péče jasné omezení?
+- Nezavedli jste pravidelný dohled nad lidmi místo opravy systému?
+- Zůstávají v onboardingu syntetické příklady místo reálných zákaznických dat?
+- Zkrátili nebo smazali jste dočasné poznámky z prvních průchodů?
+- Má rytmus vlastníka a datum další běžné kontroly?
+
+Kontrola běžného onboardingového rytmu je test dospělosti pravidla. Pokud funguje, pravidlo už nepotřebuje reflektor. Stačí mu dobré místo, lehký rytmus a občasný návrat k tomu, jestli novým lidem opravdu pomáhá dělat správné rozhodnutí bez zbytečné datové stopy.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LV o kontrole běžného onboardingového rytmu po prvních nástupech: malé kontrolní okno, sledování rytmu místo výkonu člověka, signály nalezení/použití/výsledku/datové stopy, tření trasy/pochopení/provozu, stavy rytmu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LU o uzavření stabilizované opravy onboardingového pravidla do běžného rytmu: vstupní stavy, přesun do existujícího onboardingového rytmu, mapa onboardingu, zavření speciální evidence, návratový signál bez dohledu nad lidmi, privacy-first uzavření, uzavírací karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LT o kontrole stabilizované opravy onboardingového pravidla po prvním běžném cyklu: výběr normálního cyklu, cesta k rozhodnutí, porovnání minimálního a skutečného výstupu, návrat staré stopy, rozhodovací stavy, privacy-first kontrola, kontrolní karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LS o stabilizaci potvrzené opravy onboardingového pravidla: vstup přes ověřený stav, přepis historie na aktuální pravidlo, kanonický domov, zavření dočasných opor, návratový signál, privacy-first úklid, stabilizační karta, mini workshop a checklist.
