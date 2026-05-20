@@ -96859,8 +96859,224 @@ Potvrzená malá oprava je přepsaná do aktuálního pravidla, uložená v mís
 
 Stabilizace malé opravy je tichý konec jedné smyčky. Oprava už není projekt, incident ani téma porady. Je z ní aktuální pravidlo v místě práce, stará cesta je zavřená a dočasná data nezůstávají ležet po okolí. Přesně tak má vypadat zdravý provozní standard: méně vysvětlování, méně kopií, méně návratů ke starému zvyku.
 
+## Příloha MF: Kontrola stabilizované malé opravy onboardingového standardu po dalších použitích
+
+Stabilizovaná oprava ještě není automaticky zdravá součást standardu. Je jen uložená v místě práce, staré varianty jsou zavřené a tým má rozumný návratový signál. Skutečná otázka přijde až po dalších běžných použitích: funguje oprava i ve chvíli, kdy u toho není autor změny, nikdo ji nepřipomíná a nový člověk řeší normální práci, ne testovací scénář?
+
+Tato příloha navazuje na Přílohu ME. Vstupem je malá oprava, která byla stabilizovaná do onboardingového standardu. Cílem není hledat další velké zlepšení. Cílem je ověřit, jestli se oprava stala obyčejnou součástí provozu, nebo jestli pořád žije jen díky pozornosti několika lidí.
+
+Kontrola má odpovědět na pět otázek:
+
+```text
+Našel nový člověk opravené pravidlo bez zvláštní navigace?
+Použil ho ve správném pracovním okamžiku?
+Vznikl minimální správný výstup?
+Nevrátila se stará varianta, kterou měla oprava odstranit?
+Nevznikla nová datová stopa jen kvůli kontrole?
+```
+
+Pokud na ně neumíte odpovědět z běžných artefaktů, není to důvod zavádět další dohled. Je to signál, že standard možná neumí nechat po sobě dostatečně čitelný výsledek.
+
+### Vyberte dvě až tři běžná použití
+
+Nekontrolujte všechno. Vyberte malé okno, ve kterém se oprava měla přirozeně projevit. U onboardingového standardu to mohou být dva další nástupy, dvě předání role nebo tři první samostatné cykly v nové roli.
+
+Vhodný výběr:
+
+- běžný nástup bez speciální přípravy;
+- předání, které vedl jiný člověk než autor opravy;
+- práce, kde nový člověk použil aktuální šablonu nebo checklist;
+- situace, kde bylo možné vrátit se ke staré variantě;
+- výstup, který už vzniká v běžném systému.
+
+Nevhodný výběr:
+
+- ukázkový průchod na poradě;
+- práce, u které autor opravy seděl vedle člověka a navigoval ho;
+- jednorázový výjimečný případ;
+- kontrola podle exportu, který by jinak nevznikl;
+- měření každého kroku člověka jen proto, že chcete mít "jistotu".
+
+Praktický zápis:
+
+```text
+Kontrolované použití 1:
+Kontrolované použití 2:
+Kontrolované použití 3:
+Proč jsou běžná:
+Kde je vidět výsledek:
+```
+
+Kontrolní okno držte malé. Když po dvou až třech normálních použitích nevidíte žádný signál, že oprava funguje, problém obvykle není ve velikosti vzorku. Problém je v tom, že pravidlo není dost blízko práci, výstup není jasný, nebo stará cesta zůstala pohodlnější.
+
+### Sledujte cestu k opravenému místu
+
+Stabilizovaná oprava má být nalezitelná bez ústního vysvětlování. Proto nekontrolujte jen finální výstup. Podívejte se, kudy se člověk k opravenému pravidlu dostal.
+
+Sledujte čtyři body:
+
+```text
+Spouštěč: co člověka přivedlo k práci?
+Vstup: kde potkal aktuální standard?
+Rozhodnutí: co mu pravidlo pomohlo rozhodnout?
+Výstup: co po práci zůstalo?
+```
+
+Příklad:
+
+```text
+Spouštěč: nový člen týmu dokončuje první předání zákaznického portálu.
+Vstup: onboardingové issue odkazuje na aktuální předávací šablonu.
+Rozhodnutí: místo screenshotu vložil zákaznický odkaz, stavovou větu a další krok.
+Výstup: předávací komentář je dohledatelný v portálu, v chatu nevznikla kopie zákaznických dat.
+```
+
+Pokud člověk pravidlo použil správně až po připomenutí, není to selhání člověka. Je to nález o trase. Standard má být navržený tak, aby dobré rozhodnutí bylo nejbližší rozumnou cestou.
+
+### Rozlišujte tři výsledky kontroly
+
+Po kontrole nepoužívejte vágní závěr "funguje/nefunguje". Ten je příliš hrubý. Vyberte jeden ze tří stavů:
+
+```text
+Drží: oprava se používá v běžném provozu, stará varianta se nevrací a datová stopa je čistší nebo stejná.
+Drží s třením: výsledek je správný, ale cesta je moc křehká, dlouhá nebo závislá na paměti lidí.
+Nedrží: stará varianta se vrací, nový člověk pravidlo nenajde, nebo oprava vytváří nové riziko.
+```
+
+Stav `Drží` znamená, že oprava může zůstat v běžném rytmu standardu. Není potřeba další projekt ani speciální dohled.
+
+Stav `Drží s třením` znamená, že neopravujete celé pravidlo. Najděte nejmenší místo tření: odkaz, název šablony, pořadí kroku, příklad výstupu nebo chybějící větu v onboardingovém issue.
+
+Stav `Nedrží` znamená, že stabilizace byla předčasná nebo stará cesta nebyla opravdu zavřená. Vraťte se k malé opravě, ne k velké reorganizaci standardu.
+
+Rozhodovací věta:
+
+```text
+Po dalších běžných použitích má oprava stav [Drží / Drží s třením / Nedrží], protože [konkrétní důkaz z práce]. Další krok je [ponechat / odstranit jedno tření / znovuotevřít malou opravu].
+```
+
+### Hledejte návrat staré varianty
+
+Stará varianta se málokdy vrátí jako nápis "jsem stará varianta". Vrací se jako pohodlí. Člověk otevře starý odkaz, použije starý příklad, zkopíruje starou zprávu, pošle screenshot, protože je rychlejší než najít správný systém, nebo doplní pole, které už nemá být povinné.
+
+Kontrolujte konkrétně:
+
+- použil někdo starou šablonu;
+- objevil se starý příklad v nové práci;
+- vznikla ruční kopie dat mimo systém;
+- musel někdo vysvětlovat pravidlo v chatu;
+- odkaz v onboardingovém issue vedl na archiv;
+- nový člověk přeskočil aktuální standard, protože byl hůř pojmenovaný;
+- support, delivery nebo sales si vytvořili vlastní zkratku.
+
+Příklad nálezu:
+
+```text
+Nález: nový člověk použil aktuální šablonu, ale kolega mu v chatu poslal starý screenshot jako příklad.
+Typ problému: starý příklad zůstal v neformálním kanálu.
+Nejmenší oprava: nahradit screenshot syntetickým příkladem v šabloně a smazat starý obrázek z připnuté zprávy.
+```
+
+Codyho komentář: staré varianty jsou houževnaté hlavně proto, že jsou pohodlné. Nevyhrajete nad nimi tím, že budete lidem říkat "používejte prosím aktuální postup". Vyhrajete tím, že aktuální postup bude blíž, kratší a méně riskantní.
+
+### Privacy-first kontrola bez dohledu navíc
+
+Kontrola stabilizované opravy nesmí zhoršit soukromí jen proto, že tým chce důkaz. Nepřidávejte sledování lidí, nové exporty ani kopie zákaznických dat. Využijte to, co už vzniká jako běžný výstup práce.
+
+Stačí:
+
+- zkontrolovat hotový komentář, issue, checklist nebo předávací záznam;
+- ověřit, že nevznikl screenshot nebo export mimo systém;
+- podívat se, jestli odkaz vede do správného prostředí s odpovídajícími právy;
+- zapsat jen stav, důvod a další krok;
+- použít syntetický příklad, pokud potřebujete ukázat správný tvar výstupu.
+
+Nestačí:
+
+- ukládat kopie zákaznických obrazovek pro "důkaz";
+- přeposílat osobní údaje do kontrolního dokumentu;
+- zavádět měření aktivity člověka;
+- nechávat dočasné poznámky bez termínu smazání;
+- míchat onboardingové poznámky s produkčními zákaznickými daty.
+
+Krátká kontrolní věta:
+
+```text
+Kontrola použila jen běžné pracovní výstupy, nevytvořila nový export ani screenshot a po uzavření zůstává pouze stav opravy, důvod rozhodnutí a případná malá akce.
+```
+
+### Kontrolní karta po dalších použitích
+
+Karta má zachytit rozhodnutí, ne přepisovat historii.
+
+```text
+Oprava:
+Kontrolované použití:
+Kde člověk našel pravidlo:
+Jaký vznikl výstup:
+Vrací se stará varianta:
+Datová stopa po kontrole:
+Stav opravy:
+Nejmenší další krok:
+Vlastník:
+Termín běžného návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Oprava: předávací komentář používá zákaznický odkaz místo screenshotu.
+Kontrolované použití: dva další nástupy delivery role.
+Kde člověk našel pravidlo: onboardingové issue a předávací šablona.
+Jaký vznikl výstup: oba komentáře obsahují odkaz, stav a další krok.
+Vrací se stará varianta: jednou se objevil starý screenshot v připnuté chatové zprávě.
+Datová stopa po kontrole: nevznikl nový export, starý screenshot byl smazán.
+Stav opravy: Drží s třením.
+Nejmenší další krok: nahradit připnutou zprávu odkazem na aktuální šablonu.
+Vlastník: delivery lead.
+Termín běžného návratu: při příští měsíční kontrole onboardingových šablon.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu stabilizovanou malou opravu a ověřte ji na dvou až třech běžných použitích.
+
+1. Otevřete stabilizační kartu z Přílohy ME.
+2. Vyberte dvě až tři normální situace, kde se oprava měla projevit.
+3. Zapište spouštěč, vstup, rozhodnutí a výstup.
+4. Ověřte, jestli se nevrátila stará varianta.
+5. Zkontrolujte, že kontrola nevytvořila nový export, screenshot ani sledování člověka.
+6. Vyberte stav `Drží`, `Drží s třením` nebo `Nedrží`.
+7. Pokud je potřeba akce, zapište jen nejmenší další krok.
+8. Uzavřete kontrolní poznámku a smažte dočasné podklady bez dalšího účelu.
+
+Výstup:
+
+```text
+Stabilizovaná oprava má po dalších běžných použitích jasný stav, jeden případný další krok a žádnou novou zbytečnou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Vybrali jste dvě až tři běžná použití místo ukázkového testu?
+- Je u každého použití jasné, proč je normální?
+- Sledujete cestu k pravidlu, ne výkon člověka?
+- Víte, kde člověk pravidlo našel?
+- Víte, jaké rozhodnutí mu pravidlo pomohlo udělat?
+- Porovnali jste skutečný výstup s minimem správného výsledku?
+- Zkontrolovali jste návrat staré šablony, odkazu, screenshotu nebo příkladu?
+- Vybrali jste stav `Drží`, `Drží s třením` nebo `Nedrží`?
+- Pokud oprava drží s třením, je další krok opravdu nejmenší místo tření?
+- Pokud oprava nedrží, vracíte se k malé opravě místo velkého přepisu?
+- Nevznikl kvůli kontrole nový export, screenshot ani sledování lidí?
+- Zůstává po kontrole jen stav, důvod a případný další krok?
+- Má další krok vlastníka a termín běžného návratu?
+
+Kontrola po dalších použitích chrání tým před falešným pocitem hotova. Malá oprava může vypadat stabilně v dokumentaci a přitom se v provozu pořád obcházet. Když ji ověříte na běžné práci, bez dohledu navíc a bez nových kopií dat, zjistíte podstatné: jestli standard opravdu pomáhá lidem rozhodovat samostatně.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha MF o kontrole stabilizované malé opravy onboardingového standardu po dalších použitích: výběr běžných použití, sledování cesty k opravenému místu, stavy Drží/Drží s třením/Nedrží, návrat staré varianty, privacy-first kontrola bez dohledu navíc, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha ME o stabilizaci potvrzené malé opravy onboardingového standardu: přepis opravy na aktuální pravidlo, uložení do místa práce, zavření starých variant, návratový signál, uzavření dočasného režimu, privacy-first úklid, stabilizační karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MD o ověření malé opravy onboardingového standardu po dalším běžném nástupu: výběr skutečného použití, návrat k opravné větě, sledování cesty k opravenému místu, porovnání výstupu s minimem, rozhodovací stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MC o převodu nálezu z trvalého onboardingového standardu do jedné malé opravy: výběr jednoho nálezu, opravná věta, typy oprav, oprava v místě práce, ověření při dalším použití, privacy-first úklid, karta, mini workshop a checklist.
