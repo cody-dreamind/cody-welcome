@@ -96351,8 +96351,265 @@ Jeden nález z kontroly standardu je převedený do malé opravy s vlastníkem, 
 
 Převod nálezu do malé opravy je místo, kde se kontrola mění v užitečnou práci. Když tým opraví nejbližší tření, zavře starou cestu a uklidí datovou stopu, standard se zlepšuje bez procesního nadýmání. A to je přesně ten druh provozní hygieny, který není nápadný, ale dlouhodobě šetří lidi i data.
 
+## Příloha MD: Ověření malé opravy onboardingového standardu po dalším běžném nástupu
+
+Malá oprava onboardingového standardu není hotová tím, že se přepíše šablona, odkaz nebo jedna věta v checklistu. Hotová je až ve chvíli, kdy projde dalším normálním použitím a ukáže se, že opravdu odstranila tření, kvůli kterému vznikla. Jinak má tým jen hezčí dokument a staré chování může dál běžet bokem.
+
+Tato příloha navazuje na Přílohu MC. Vstupem je karta malé opravy standardu: víte, co se změnilo, kde je kanonické místo, jaký starý artefakt měl zmizet a při jakém použití se má oprava ověřit. Cílem není otevřít další audit. Cílem je vzít jeden běžný nástup nebo předání role a zkontrolovat, jestli oprava pomohla v reálné práci.
+
+Dobré ověření odpoví na pět otázek:
+
+```text
+Našel člověk opravené místo bez ruční navigace?
+Pochopil správné rozhodnutí?
+Vznikl minimální správný výstup?
+Nevrátila se stará šablona, starý odkaz nebo starý zvyk?
+Nevznikla nová zbytečná datová stopa?
+```
+
+Pokud je odpověď na všech pět otázek jasná, opravu můžete potvrdit. Pokud ne, neopravujte hned celý standard znovu. Nejdřív pojmenujte, kde přesně ověření selhalo.
+
+### Vyberte skutečný nástup, ne ukázkový průchod
+
+Oprava se má ověřovat v normálním provozu. Ne při schůzce, kde všichni vědí, že se testuje dokumentace. Ne na uměle připraveném příkladu, kde je všechno uklizené a nikdo nespěchá. Vyberte první reálnou situaci, ve které by se standard použil i bez testu.
+
+Vhodná situace:
+
+- nový člověk přebírá první zákaznický portál;
+- kolega mění roli a poprvé používá předávací checklist;
+- delivery lead zakládá onboardingovou kartu pro další projekt;
+- support přebírá nový typ dotazu podle stejného standardu;
+- tým používá opravenou šablonu v běžném termínu, ne v mimořádném cvičení.
+
+Nevhodná situace:
+
+```text
+Projdi si opravenou šablonu a řekni, jestli dává smysl.
+```
+
+Lepší situace:
+
+```text
+Použij opravenou šablonu při dalším předání portálu a na konci zkontrolujeme jen výstup, cestu a datovou stopu.
+```
+
+Rozdíl je zásadní. V prvním případě testujete názor na dokument. Ve druhém testujete, jestli dokument pomáhá práci.
+
+### Vraťte se k původní opravné větě
+
+Před ověřením otevřete opravnou větu z Přílohy MC. Ne proto, abyste ji obhajovali, ale aby se ověření nerozuteklo do obecných dojmů.
+
+Krátká příprava:
+
+```text
+Opravovali jsme:
+Původní tření bylo:
+Změnili jsme:
+Očekávaný lepší výstup:
+Privacy-first podmínka:
+```
+
+Příklad:
+
+```text
+Opravovali jsme: pole v předávací šabloně.
+Původní tření bylo: pole "příloha" vedlo ke screenshotu v interním chatu.
+Změnili jsme: pole na "zákaznický odkaz" a doplnili syntetický příklad.
+Očekávaný lepší výstup: předání obsahuje odkaz a stavovou větu bez screenshotu.
+Privacy-first podmínka: nevznikne export ani kopie zákaznických dat mimo běžný systém.
+```
+
+Tím držíte kontrolu u jedné změny. Pokud si během ověření všimnete dalších problémů, zapište je bokem. Nepleťte je do rozhodnutí o této opravě, pokud přímo nebrání ověřovanému výstupu.
+
+### Sledujte cestu k opravenému místu
+
+U malé opravy často selže ne obsah, ale cesta. Věta je správná, ale člověk ji nepotká. Odkaz vede na správný dokument, ale začíná se jinde. Šablona je opravená, ale stará kopie zůstala v oblíbených položkách.
+
+Při ověření sledujte čtyři momenty:
+
+```text
+Start: odkud člověk reálně začal?
+Nalezení: jak se dostal k opravenému místu?
+Rozhodnutí: co podle opravy udělal jinak?
+Výstup: co po použití standardu skutečně vzniklo?
+```
+
+Nepište dlouhý záznam z každého kliknutí. Stačí zachytit první odbočku, pokud nastala.
+
+Příklad:
+
+```text
+Start: onboardingový checklist v issue.
+Nalezení: checklist vedl na novou předávací šablonu.
+Rozhodnutí: člověk vyplnil zákaznický odkaz místo přílohy.
+Výstup: předávací komentář obsahuje odkaz, stav a další krok.
+Odbočka: žádná stará šablona nebyla použita.
+```
+
+Pokud start proběhl mimo kanonickou cestu, nehodnoťte člověka. Hodnoťte systém. Standard, který musí někdo najít podle paměti zkušeného kolegy, není ještě stabilní standard.
+
+### Porovnejte výstup s minimálním správným výsledkem
+
+Oprava se nemá hodnotit podle pocitu, že "to bylo lepší". Porovnejte výstup s minimem, které mělo po opravě vzniknout.
+
+Minimální výsledek napište jednou větou:
+
+```text
+Po použití opravené šablony vznikne předávací komentář se zákaznickým odkazem, stavem a dalším krokem, bez screenshotu a bez exportu dat.
+```
+
+Pak výstup rozdělte na tři části:
+
+```text
+Splněno:
+Chybí:
+Vzniklo navíc:
+```
+
+Vyplněný příklad:
+
+```text
+Splněno: komentář obsahuje zákaznický odkaz a další krok.
+Chybí: stavová věta je moc obecná.
+Vzniklo navíc: žádný screenshot, žádný export, žádná kopie v chatu.
+```
+
+Takové ověření je použitelné. Neříká jen "dobré" nebo "špatné". Říká, jestli oprava splnila svůj účel a co případně potřebuje doladit.
+
+### Rozlišujte čtyři výsledky ověření
+
+Po ověření vyberte jeden stav. Stav má určit další krok, ne vyvolat debatu o celé historii standardu.
+
+```text
+Potvrdit:
+Oprava odstranila původní tření, výstup je správný a datová stopa se nezvětšila.
+
+Doladit:
+Oprava pomohla, ale jedna věta, popisek nebo příklad ještě vede k drobnému nejasnému kroku.
+
+Přesunout:
+Oprava je věcně správná, ale leží moc daleko od místa práce.
+
+Znovuotevřít:
+Oprava neřeší původní problém, vrací staré chování nebo vytváří novou datovou stopu.
+```
+
+Příklady rozhodnutí:
+
+```text
+Potvrdit: nový člověk použil odkaz, nevznikl screenshot a výstup odpovídá minimu.
+Doladit: odkaz byl použit správně, ale příklad stavové věty je moc abstraktní.
+Přesunout: správná instrukce je v šabloně, ale člověk začal v issue, kde na ni není odkaz.
+Znovuotevřít: šablona dál navádí k exportu, jen jiným polem.
+```
+
+Stav `Doladit` neznamená novou velkou opravu. Znamená jednu malou úpravu na stejném místě. Stav `Znovuotevřít` používejte střídmě, ale poctivě: když se původní problém nevyřešil, je lepší to říct hned než stabilizovat špatnou změnu.
+
+### Privacy-first kontrola po použití
+
+Ověření malé opravy je ideální moment zkontrolovat, jestli oprava opravdu snížila datovou stopu. Nejen teoreticky, ale v konkrétním průchodu.
+
+Zkontrolujte:
+
+- nevznikl screenshot zákaznických dat;
+- nevznikl export kvůli vysvětlení postupu;
+- interní komentář neobsahuje osobní údaje, které tam nepatří;
+- stará šablona není dál dostupná jako pohodlná kopie;
+- syntetický příklad nebyl nahrazen reálným příkladem;
+- dočasné poznámky z ověření mají jasný účel a termín smazání;
+- odkaz vede do systému, kde mají přístup jen správné role.
+
+Privacy-first závěr může být krátký:
+
+```text
+Ověření proběhlo na běžném předání. Nevznikl screenshot ani export, stará šablona nebyla použita a dočasná poznámka z kontroly bude smazána po uzavření rozhodnutí.
+```
+
+Codyho komentář: dobrý onboarding není ten, který novému člověku dá všechno. Dobrý onboarding mu dá přesně tolik kontextu, aby udělal správný krok bez zbytečné kopie reality. Realita má zůstat v provozním systému, ne v prezentaci, chatu a třech "jen pro jistotu" souborech.
+
+### Karta ověření malé opravy
+
+Použijte jednu kartu. Pokud je delší než samotná oprava, pravděpodobně z ní děláte audit v převleku.
+
+```text
+Ověřovaná oprava:
+Původní tření:
+Normální použití:
+Start práce:
+Cesta k opravenému místu:
+Minimální správný výstup:
+Skutečný výstup:
+Staré chování se vrátilo?:
+Nová datová stopa?:
+Stav ověření:
+Jedna další akce:
+Vlastník:
+Termín:
+Co smažeme nebo zavřeme:
+```
+
+Vyplněný příklad:
+
+```text
+Ověřovaná oprava: pole "příloha" nahrazené polem "zákaznický odkaz".
+Původní tření: screenshot zákaznického portálu v interním chatu.
+Normální použití: další předání zákaznického portálu novému člověku.
+Start práce: issue s onboardingovým checklistem.
+Cesta k opravenému místu: checklist vedl na aktuální šablonu.
+Minimální správný výstup: odkaz, stavová věta, další krok, bez screenshotu.
+Skutečný výstup: odkaz a další krok splněny, stavová věta příliš obecná.
+Staré chování se vrátilo?: ne.
+Nová datová stopa?: ne.
+Stav ověření: Doladit.
+Jedna další akce: doplnit konkrétnější syntetický příklad stavové věty.
+Vlastník: delivery lead.
+Termín: před dalším předáním.
+Co smažeme nebo zavřeme: dočasnou poznámku z ověření po úpravě příkladu.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu malou opravu z Přílohy MC a ověřte ji po dalším běžném použití.
+
+1. Otevřete kartu malé opravy.
+2. Vyberte skutečný nástup nebo předání, kde se oprava použila.
+3. Přepište původní opravnou větu do jedné ověřovací otázky.
+4. Zapište start práce, cestu k opravenému místu a skutečný výstup.
+5. Porovnejte výstup s minimálním správným výsledkem.
+6. Zkontrolujte návrat staré šablony, odkazu nebo zvyku.
+7. Udělejte privacy-first kontrolu skutečné datové stopy.
+8. Vyberte stav `Potvrdit`, `Doladit`, `Přesunout` nebo `Znovuotevřít`.
+9. Zapište jednu další akci a jeden úklidový krok.
+
+Výstup:
+
+```text
+Malá oprava onboardingového standardu je ověřená na běžném použití a má jasný stav, další akci a privacy-first úklid.
+```
+
+### Checklist kapitoly
+
+- Ověřovali jste skutečný nástup nebo předání, ne ukázku?
+- Vrátili jste se k původní opravné větě?
+- Je jasné, jaký minimální výstup měla oprava vytvořit?
+- Zapsali jste start práce a cestu k opravenému místu?
+- Zjistili jste, jestli člověk opravené místo našel bez ruční navigace?
+- Porovnali jste skutečný výstup s minimem?
+- Oddělili jste chybějící část od věcí, které vznikly navíc?
+- Zkontrolovali jste návrat staré šablony, odkazu nebo zvyku?
+- Vybrali jste jeden ze čtyř stavů ověření?
+- Pokud je stav `Doladit`, drží se další akce stejného malého místa?
+- Pokud je stav `Přesunout`, víte, kam oprava patří blíž k práci?
+- Pokud je stav `Znovuotevřít`, je jasné, proč původní problém trvá?
+- Nevznikl screenshot, export nebo kopie zákaznických dat navíc?
+- Má dočasná poznámka z ověření jasný účel a termín smazání?
+- Je další akce menší než původní oprava?
+
+Ověření malé opravy chrání standard před dvěma extrémy: před nekonečným přepisováním i před předčasným uspokojením. Když tým ověří jednu změnu v reálném nástupu, zavře starou cestu a uklidí datovou stopu, onboarding se zlepšuje prakticky. Bez fanfár, bez tabulkového divadla, ale s výsledkem, který nový člověk opravdu použije.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha MD o ověření malé opravy onboardingového standardu po dalším běžném nástupu: výběr skutečného použití, návrat k opravné větě, sledování cesty k opravenému místu, porovnání výstupu s minimem, rozhodovací stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MC o převodu nálezu z trvalého onboardingového standardu do jedné malé opravy: výběr jednoho nálezu, opravná věta, typy oprav, oprava v místě práce, ověření při dalším použití, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MB o kontrole trvalého onboardingového standardu po dalších nástupech: reálné použití, porovnání s minimálním výstupem, první místo tření, rozhodovací stavy, privacy-first kontrola datové stopy, kontrolní karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MA o uzavření potvrzené onboardingové trasy do trvalého standardu: jeden zdroj pravdy, okamžik použití, běžná údržba, zavření kontrolního režimu, privacy-first uzavření, karta standardu, mini workshop a checklist.
