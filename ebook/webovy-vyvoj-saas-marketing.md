@@ -19,6 +19,8 @@ Když po čtení vznikne víc úkolů, vyberte jeden hlavní a zbytek nechte v p
 
 Pokud rukopis používá tým, určete u vybraného kroku jednoho vlastníka a nejbližší termín kontroly. Bez toho se dobré rozhodnutí snadno rozpustí mezi lidmi: všichni souhlasí, nikdo ho nevezme do ruky a další schůzka začne od stejné otázky.
 
+Před otevřením další kapitoly si napište jednu otázku, kvůli které text čtete právě teď. Otázka typu "jak zlepšit web" je ještě moc široká; otázka "proč nám z homepage chodí málo kvalitních poptávek" už vede k rozhodnutí, které se dá ověřit.
+
 ## Rychlé pracovní trasy
 
 Rukopis je dlouhý záměrně, ale první krok má být krátký. Pokud nevíte, kde začít, vyberte trasu podle aktuální situace a po přečtení zapište jednu pracovní větu.
@@ -93091,3 +93093,4 @@ Uzavření dlouhodobého pravidla je malý, ale důležitý konec smyčky. Bez n
 - 2026-05-12: Doplněna Příloha EO o převodu kvartální kontroly standardu do dalšího provozního cyklu: rozhodovací věta, karta cyklu, vlastnictví, komunikace změny, první ověření a uzavření smyčky.
 - 2026-05-17: Zpřesněn úvodní čtenářský kompas o práci s jednou ověřitelnou smyčkou při každém průchodu rukopisem.
 - 2026-05-19: Doplněna poznámka k týmovému používání rukopisu: vlastník kroku, termín kontroly a prevence rozpuštěné odpovědnosti.
+- 2026-05-20: Doplněna úvodní poznámka, aby čtenář před další kapitolou formuloval jednu konkrétní pracovní otázku.
