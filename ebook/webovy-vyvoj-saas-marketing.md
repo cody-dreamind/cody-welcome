@@ -91795,8 +91795,264 @@ Jeden nález z kvartálního přehledu je převedený do jedné hotové úpravy 
 
 Kvartální přehled nemá být jen kontrolní rituál. Má občas vyrobit malou přesnou změnu, která zlepší práci a zároveň nezvýší provozní dluh. Jeden nález, jedna opravná věta, jedno pracovní místo, jedna uzavřená stará cesta. To je dost. A často právě proto to opravdu proběhne.
 
+## Příloha LK: Ověření kvartální úpravy po prvním normálním použití
+
+Kvartální úprava pravidla není hotová jen tím, že se změní text checklistu, odkaz, příklad nebo hranice výjimky. Hotová je až ve chvíli, kdy ji někdo použije v normální práci a systém ukáže, jestli změna opravdu pomohla. Jinak zůstáváme u hezkého pocitu, že jsme něco opravili. Ten pocit je příjemný, ale do provozního standardu bych ho raději nepouštěl bez dozoru.
+
+První normální použití je lepší test než extra audit. Audit často proběhne v ideálních podmínkách: lidé vědí, co se změnilo, mají čas, chtějí uspět a všichni se dívají na stejný dokument. Normální použití je praktičtější. Někdo řeší reálnou práci, má vedlejší tlak, hledá pravidlo ve skutečném místě a nechce si vyrábět další ceremonii.
+
+Smyslem této přílohy je zavřít smyčku po Příloze LJ. Vzali jste nález z kvartálního přehledu, převedli ho do jedné úpravy pravidla a zavřeli starou cestu. Teď ověřte, jestli se změna chová dobře v prvním běžném průchodu.
+
+### Vraťte se k původní opravné větě
+
+Nezačínejte otázkou, jestli je nový text hezčí. Začněte opravnou větou z kvartální úpravy. Ta říká, co mělo být opraveno, kde, pro koho a s jakým praktickým výsledkem.
+
+Dobrá opravná věta:
+
+```text
+V předávacím checklistu má vzniknout stavová věta bez screenshotu, aby delivery lead nemusel při každém předání exportovat detail zákaznických dat.
+```
+
+Slabá opravná věta:
+
+```text
+Zlepšit checklist pro předání.
+```
+
+Při ověření potřebujete první typ. Pokud máte jen druhý, doplňte ho zpětně do pracovního tvaru. Ne proto, abyste přepisovali historii, ale proto, abyste věděli, co vlastně testujete.
+
+Ověřovací otázka zní:
+
+```text
+Splnila úprava přesně tu opravu, kvůli které vznikla?
+```
+
+Ne:
+
+```text
+Je celý proces předání konečně perfektní?
+```
+
+To druhé je past. Kvartální úprava měla být malá. Ověření má být stejně malé.
+
+### Vyberte první skutečný průchod
+
+Ověřujte na první situaci, která by podle nového pravidla stejně proběhla. Nevytvářejte testovací schůzku, nový formulář ani zvláštní tabulku jen kvůli kontrole.
+
+Vhodné průchody:
+
+- první předání zákaznického portálu po úpravě checklistu;
+- první review kampaně po změně pravidla pro screenshoty;
+- první příprava nabídky po doplnění retenční věty;
+- první měsíční kontrola, která má použít nově upravený odkaz;
+- první interní handoff, kde má člověk najít nový příklad bez pomoci autora.
+
+Nevhodné průchody:
+
+- umělý test v prázdném projektu;
+- kontrola člověkem, který úpravu právě napsal;
+- schůzka svolaná jen proto, aby se prokázalo, že změna funguje;
+- screenshotová dokumentace nového pravidla, když cílem bylo screenshoty omezit;
+- velký audit všech podobných pravidel.
+
+Pokud první skutečný průchod zatím nenastal, nechte u úpravy jasný čekající stav:
+
+```text
+Čeká na ověření při prvním předání zákaznického portálu po 2026-05-20.
+```
+
+To je lepší než předstírat dokončení. Nedokončené ověření není selhání. Selhání je tvářit se, že ověření proběhlo, protože se změna dobře četla při kontrole dokumentu.
+
+### Sledujte čtyři praktické signály
+
+Při prvním použití nesledujte všechno. Stačí čtyři signály.
+
+1. Nalezení: našel člověk nové pravidlo tam, kde práci skutečně dělal?
+2. Použití: použil ho bez dodatečného vysvětlování autora úpravy?
+3. Výsledek: vznikl požadovaný pracovní výstup v dostatečné kvalitě?
+4. Stopa: nevznikla nová zbytečná datová kopie, export nebo ruční evidence?
+
+Příklad:
+
+```text
+Nalezení: delivery lead našel řádek v předávacím checklistu.
+Použití: nepotřeboval se ptát autora změny, co má napsat.
+Výsledek: vznikla stavová věta použitelná pro zákaznické předání.
+Stopa: nevznikl screenshot detailu, jen syntetický příklad zůstal v šabloně.
+```
+
+Když jeden signál selže, neznamená to automaticky, že je úprava špatná. Znamená to, že musíte rozlišit typ problému.
+
+Nalezení selhalo: pravidlo je možná v nesprávném místě nebo nemá dostatečně jasný odkaz.
+
+Použití selhalo: text je možná příliš abstraktní, chybí příklad nebo hranice výjimky.
+
+Výsledek selhal: pravidlo možná opravuje špatnou část procesu, případně je výstup definovaný moc volně.
+
+Stopa selhala: pravidlo sice pomohlo pracovnímu toku, ale vrátilo starý privacy problém jinou cestou.
+
+### Rozlište opravu pravidla od okolního problému
+
+První použití často odhalí okolní tření. Třeba že checklist je správně upravený, ale lidé ho nevidí, protože v projektu používají starou kopii. Nebo že nové pravidlo funguje, ale navazující šablona nabídky pořád vyžaduje přílohu, kterou jste chtěli odstranit.
+
+Neslučujte všechno do jednoho závěru. Použijte jednoduché rozlišení:
+
+- Problém pravidla: text, příklad, hranice nebo umístění úpravy nefunguje.
+- Problém trasy: pravidlo funguje, ale lidé k němu nepřijdou ve správný moment.
+- Problém okolního artefaktu: pravidlo je v pořádku, ale stará šablona, odkaz nebo checklist ho obchází.
+- Problém očekávání: úprava byla správná, ale slibovala víc, než malá kvartální změna mohla dodat.
+
+Každý typ má jinou reakci.
+
+```text
+Pravidlo: upravit jednu větu nebo příklad.
+Trasa: přesunout odkaz do místa práce.
+Okolní artefakt: zavřít starou šablonu nebo doplnit kompatibilní řádek.
+Očekávání: zúžit popis přínosu a případný větší problém dát do backlogu.
+```
+
+Codyho komentář: tady se láme disciplína. Jakmile se při ověření objeví tři další problémy, tým má chuť otevřít velkou přestavbu. Někdy je to potřeba. Ale většinou stačí pojmenovat, který problém patří k ověřované úpravě a který jen křičí z vedlejší místnosti. Křik si zapište. Dveře zatím nevysazujte.
+
+### Rozhodněte jeden ze čtyř stavů
+
+Po prvním použití dejte úpravě jeden stav. Ne dlouhou debatu, ne pocitovou známku, ne dvoustránkový zápis.
+
+Stavy:
+
+- Potvrdit: úprava splnila opravnou větu a nevytvořila novou zbytečnou stopu.
+- Doladit: jádro funguje, ale je potřeba drobná úprava znění, příkladu nebo odkazu.
+- Přesunout: pravidlo je věcně správné, ale je na špatném pracovním místě.
+- Znovuotevřít: úprava neřeší původní problém nebo vrací staré riziko jinou cestou.
+
+Příklady závěrů:
+
+```text
+Potvrdit: stavová věta vznikla bez screenshotu a checklist byl použit bez pomoci autora.
+```
+
+```text
+Doladit: pravidlo bylo nalezeno, ale příklad je moc obecný; doplnit jeden syntetický příklad pro support předání.
+```
+
+```text
+Přesunout: pravidlo je správné, ale lidé předání začínají v sales kartě, ne v delivery checklistu.
+```
+
+```text
+Znovuotevřít: tým kvůli ověření vytvořil nový export dat, takže úprava nesplnila privacy-first účel.
+```
+
+Stav má být přísný, ale malý. Pokud dáte `Doladit`, napište konkrétní doladění. Pokud dáte `Znovuotevřít`, napište, co přesně se vrací do problému. Bez toho se stav stane jen náladou v převleku za řízení kvality.
+
+### Privacy-first ověření bez nové evidence
+
+Ověření privacy-first úpravy se nesmí změnit v další sběr dat. Nepotřebujete nahrávku obrazovky, screenshot před a po, kopii zákaznického detailu ani export komunikace. Potřebujete krátký důkaz, že práce proběhla správně a že datová stopa zůstala menší nebo stejná.
+
+Stačí jedna věta:
+
+```text
+Při prvním předání vznikla stavová věta bez screenshotu zákaznického detailu; stará příloha nebyla použita.
+```
+
+Nebo:
+
+```text
+Nový odkaz tým nenašel včas, takže pravidlo se přesouvá do sales karty; žádný nový export kvůli kontrole nevznikl.
+```
+
+Dobré privacy-first ověření:
+
+- používá minimální důkaz;
+- neukládá osobní údaje, pokud nejsou nutné;
+- preferuje syntetický nebo anonymizovaný příklad;
+- nesbírá výkon jednotlivců;
+- rozlišuje pracovní problém od kontroly člověka;
+- uklízí dočasné poznámky po uzavření stavu;
+- neprodlužuje retenci jen proto, že "by se to někdy mohlo hodit".
+
+Praktická hranice: pokud byste se styděli stejný ověřovací záznam ukázat zákazníkovi jako příklad dobré datové hygieny, je moc těžký nebo moc konkrétní.
+
+### Ověřovací karta
+
+Použijte krátkou kartu. Má zachytit výsledek prvního použití, ne vytvořit další miniprojekt.
+
+```text
+Kvartální úprava:
+Původní opravná věta:
+První normální použití:
+Kdo pravidlo použil:
+Nalezení:
+Použití:
+Výsledek:
+Datová stopa:
+Typ problému, pokud nastal:
+Rozhodnutí stavu:
+Jedna navazující akce:
+Co se záměrně neotevírá:
+Privacy-first poznámka:
+Vlastník:
+Datum kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Kvartální úprava: stavová věta místo screenshotu v předávacím checklistu.
+Původní opravná věta: při předání portálu má vzniknout srozumitelný stav bez exportu zákaznického detailu.
+První normální použití: předání portálu zákazníkovi po pilotní fázi.
+Kdo pravidlo použil: delivery lead.
+Nalezení: našel řádek v checklistu bez pomoci.
+Použití: použil syntetický příklad a doplnil stavovou větu.
+Výsledek: zákazník dostal srozumitelný stav bez přílohy.
+Datová stopa: screenshot nevznikl, poznámka neobsahuje osobní údaje.
+Typ problému, pokud nastal: žádný.
+Rozhodnutí stavu: Potvrdit.
+Jedna navazující akce: při příštím měsíčním čtení už kontrolovat jen návrat screenshotů.
+Co se záměrně neotevírá: nepřepisujeme celý předávací proces.
+Privacy-first poznámka: ověření uložené jako jedna anonymní věta.
+Vlastník: delivery lead.
+Datum kontroly: 2026-05-20.
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu kvartální úpravu, která už prošla prvním skutečným použitím.
+
+1. Najděte původní opravnou větu.
+2. Vyberte první normální průchod, ne umělý test.
+3. Zapište signály nalezení, použití, výsledku a datové stopy.
+4. Rozlište, zda případný problém patří k pravidlu, trase, okolnímu artefaktu nebo očekávání.
+5. Dejte úpravě stav Potvrdit, Doladit, Přesunout nebo Znovuotevřít.
+6. Napište jednu navazující akci.
+7. Zapište, co se záměrně neotevírá.
+8. Uložte jen minimální privacy-first důkaz.
+
+Výstup:
+
+```text
+Kvartální úprava má po prvním normálním použití jasný stav, jednu navazující akci a ověřovací záznam bez zbytečné datové stopy.
+```
+
+### Checklist kapitoly
+
+- Vrátili jste se k původní opravné větě?
+- Ověřujete přesně tu malou úpravu, která vznikla z kvartálního nálezu?
+- Vybrali jste první normální použití místo umělého testu?
+- Nesleduje ověření výkon člověka místo funkčnosti pravidla?
+- Máte zapsané signály nalezení, použití, výsledku a datové stopy?
+- Rozlišili jste problém pravidla, trasy, okolního artefaktu a očekávání?
+- Dali jste úpravě jeden ze čtyř stavů?
+- Je navazující akce opravdu jedna a dokončitelná?
+- Zůstalo jasné, co se záměrně neotevírá?
+- Nevznikl kvůli ověření nový screenshot, export nebo kopie citlivých dat?
+- Je ověřovací důkaz minimální, anonymizovaný nebo syntetický?
+- Ví vlastník, kdy se stav považuje za uzavřený?
+
+Ověření po prvním použití chrání kvartální úpravy před dvěma extrémy. První je slepá víra, že změna dokumentu změnila realitu. Druhý je nekonečné ladění, které z malé opravy udělá nový projekt. Dobrý prostředek je jednoduchý: jedna opravná věta, první normální použití, čtyři signály, jeden stav a minimální datová stopa.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LK o ověření kvartální úpravy po prvním normálním použití: návrat k opravné větě, výběr skutečného průchodu, čtyři signály, rozlišení typu problému, rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LJ o převodu nálezu z kvartálního přehledu do jedné úpravy pravidla: výběr podle opakované ceny, opravná věta, oprava místa rozhodnutí, zavření staré cesty, omezení rozsahu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LI o první kvartální kontrole pravidel po přesunu z měsíční péče: kvartální otázka, pět signálů, stavy kontroly, nejmenší oprava místa selhání, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LH o převodu opakovaně potvrzeného měsíčního pravidla do kvartálního přehledu: dvě potvrzení, oddělení pravidla od historie, spouštěč návratu do měsíční péče, zkrácení měsíčního čtení, privacy-first úklid, karta přesunu, mini workshop a checklist.
