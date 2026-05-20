@@ -91571,8 +91571,233 @@ Můj pohled: první kvartální kontrola je zkouška dospělosti systému. Ne pr
 
 První kvartální přehled má potvrdit, že lehčí režim opravdu funguje. Dobré pravidlo po něm zůstane kratší, jasnější a méně hladové po datech. Špatně umístěné pravidlo dostane jednu opravu. A pravidlo bez života se nepřetvařuje, že je standard jen proto, že se zatím nikomu nechtělo ho zrušit.
 
+## Příloha LJ: Převod nálezu z kvartálního přehledu do jedné úpravy pravidla
+
+Kvartální přehled má smysl jen tehdy, když z něj občas vznikne konkrétní změna. Ne velká reorganizace pravidel, ne nový proces, ne další složka s poznámkami. Jedna úprava pravidla, která odstraní nejbližší zjištěné tření a vrátí práci zpět do běžného rytmu.
+
+Typický nález z kvartálního přehledu zní nenápadně: pravidlo se hledá na špatném místě, příklad už nesedí na aktuální službu, výjimka je příliš široká, vlastník se změnil nebo se kvůli kontrole začaly znovu tvořit pomocné screenshoty. Pokud takový nález necháte jen v zápisu, příští kvartál ho najdete znovu. Pokud z něj uděláte projekt, možná ho nedokončíte vůbec. Proto je cílem této přílohy převést jeden kvartální nález do jedné malé hotové úpravy.
+
+Pracovní otázka:
+
+```text
+Jakou jednu nejmenší úpravu pravidla uděláme, aby se konkrétní nález z kvartálního přehledu neopakoval v dalším běžném cyklu?
+```
+
+Výchozí pravidlo:
+
+```text
+Z kvartálního přehledu převádějte do práce jen jeden vybraný nález. Opravte nejbližší místo rozhodnutí, zavřete starou cestu a nastavte ověření v příštím normálním použití. Pokud oprava potřebuje víc než jednu pracovní změnu, patří do backlogu, ne do rychlé kvartální úpravy.
+```
+
+### Vyberte jeden nález podle opakované ceny
+
+Po kvartální kontrole může být lákavé sepsat všechny nedokonalosti a začít je rovnou opravovat. To vypadá odpovědně, ale často tím vznikne další údržbová fronta. Lepší je vybrat jeden nález podle ceny, kterou bude mít, pokud se zopakuje.
+
+Ptejte se:
+
+- Způsobuje nález opakované hledání pravidla?
+- Vede k návratu staré cesty, například screenshotu, exportu nebo ručnímu přepisování?
+- Zvyšuje riziko práce s osobními nebo zákaznickými daty?
+- Blokuje další roli v dokončení práce?
+- Mate nové lidi, protože pravidlo neříká, co přesně udělat?
+- Vytváří výjimky bez vlastníka a konce?
+
+Silný kandidát není nutně nejhlasitější problém. Je to problém, který se při dalším cyklu pravděpodobně vrátí a znovu vyrobí časovou, datovou nebo rozhodovací cenu.
+
+Krátký výběr:
+
+```text
+Vybraný nález: pravidlo "stav poptávky jednou větou" je v kvartálním přehledu, ale chybí odkaz z předávacího checklistu. Lidé ho najdou až při kontrole, ne v okamžiku práce.
+```
+
+Slabý výběr:
+
+```text
+Zlepšíme dokumentaci pravidel.
+```
+
+To není nález. To je mlha s ambicí. Nález musí ukazovat místo, kde práce skutečně drhne.
+
+### Přepište nález do opravné věty
+
+Opravná věta drží rozsah. Má říct, co měníte, kde to měníte, proč a jak poznáte, že je hotovo.
+
+Šablona:
+
+```text
+Upravujeme [pracovní místo] tak, aby [role] v situaci [situace] udělala [konkrétní akce] bez [staré cesty nebo zbytečné datové stopy].
+```
+
+Příklad:
+
+```text
+Upravujeme předávací checklist tak, aby delivery lead při předání portálu zapsal stav poptávek jednou větou bez hledání pravidla v kvartálním přehledu a bez screenshotu zákaznického detailu.
+```
+
+Dobrá opravná věta má jednu důležitou vlastnost: dá se podle ní poznat, kdy skončit. Jakmile je odkaz v checklistu, věta v jazyce práce a stará cesta zavřená, úprava je hotová. Není potřeba přepisovat celou knihovnu pravidel, měnit všechny šablony nebo svolávat revizi systému.
+
+### Opravte místo rozhodnutí
+
+Pravidlo má být tam, kde člověk dělá rozhodnutí. Kvartální přehled je dobrý pro kontrolu portfolia, ale často není dobrý jako pracovní místo. Pokud se pravidlo používá při předání, patří do předávacího checklistu. Pokud při supportu, patří do supportního postupu. Pokud při publikaci, patří do publikační brány.
+
+Nejčastější úpravy místa:
+
+- přidat krátký odkaz z pracovního checklistu na kanonické pravidlo;
+- přesunout jednu akční větu z přehledu přímo do místa práce;
+- přejmenovat pravidlo podle situace, ne podle interní historie;
+- doplnit příklad do šablony, kterou lidé skutečně vyplňují;
+- zrušit starý odkaz, který vede na předchozí verzi pravidla;
+- přidat stop větu k poli, kde lidé dřív přikládali screenshot nebo export.
+
+Praktický příklad:
+
+```text
+Do předávacího checklistu přidáváme řádek: "Stav poptávek popište jednou větou. Nepřikládejte screenshot detailu ani export; výjimku zapisuje vlastník předání s datem smazání."
+```
+
+To je malá změna, ale míří přesně do místa rozhodnutí. Člověk ji uvidí ve chvíli, kdy má něco udělat. Nemusí si vzpomenout, že někde existuje kvartální přehled. To je rozdíl mezi dokumentací a pracovním nástrojem.
+
+### Zavřete starou cestu viditelně
+
+Úprava pravidla není hotová, dokud stará cesta zůstává pohodlnější než nová. Pokud lidé dál vidí pole "přiložit screenshot", starou šablonu, archivní odkaz nebo příklad s exportem, vrátí se k němu při prvním tlaku. Ne proto, že by ignorovali pravidlo. Protože systém jim pořád nabízí starší, rychlejší cestu.
+
+Zavření staré cesty může být jednoduché:
+
+- odstranit pole pro přílohu, pokud už nemá účel;
+- změnit popisek pole na stavovou větu;
+- nahradit starý příklad anonymizovanou verzí;
+- přesměrovat starý odkaz na aktuální pracovní místo;
+- označit starou šablonu jako archivovanou a odstranit ji z běžné navigace;
+- smazat dočasný export po přenesení rozhodovací hodnoty.
+
+Krátký zápis:
+
+```text
+Starý řádek "přiložte screenshot stavu" byl nahrazen stavovou větou. Archivní šablona je označená jako neplatná a není v běžném rozcestníku.
+```
+
+Bez tohoto kroku vznikne zvláštní dvojkolejnost. Na papíře máte nové pravidlo, v práci starý zvyk a v kvartálním přehledu poznámku, že se to má zlepšit. To je krásná malá byrokratická botanika: roste sama, nikdo ji nesázel a zabírá místo.
+
+### Omezte úpravu na jeden dokončený výsledek
+
+Kvartální nález často odhalí širší téma. Třeba že předávací checklisty nejsou sjednocené, názvy pravidel jsou nejednotné a staré šablony žijí ve třech složkách. To může být pravda. Ale rychlá úprava po kvartálním přehledu má dokončit jednu věc.
+
+Dobré rozsahy:
+
+- jeden odkaz doplněný do jednoho checklistu;
+- jeden příklad nahrazený anonymizovanou verzí;
+- jedna výjimka doplněná o vlastníka a datum konce;
+- jedna stará šablona odstraněná z běžné trasy;
+- jedna věta pravidla přepsaná do akčního jazyka;
+- jeden retenční řádek doplněný k typu podkladu.
+
+Špatné rozsahy:
+
+- sjednotit všechny checklisty;
+- zrevidovat celý provozní systém;
+- přepsat pravidla pro všechny role;
+- vytvořit nový dashboard údržby;
+- zavést nový měsíční audit bez jasného důvodu.
+
+Pokud nález ukazuje na větší systémový problém, zapište ho do backlogu jako samostatnou položku. Rychlou kvartální úpravu ale dokončete v malém rozsahu. Hotová malá oprava má větší hodnotu než velký záměr, který bude příští kvartál pořád ve stejné větě.
+
+### Privacy-first kontrola úpravy
+
+Každá úprava pravidla má zkontrolovat datovou stopu. Ne až při právním auditu. Hned při změně. Pokud pravidlo vzniklo proto, aby se omezily screenshoty, exporty, kopie v chatu nebo zbytečné přílohy, úprava nesmí stejný problém vrátit jinou formou.
+
+Projít:
+
+- nevznikl při úpravě nový export jen kvůli kontrole;
+- starý screenshot nebo příklad byl smazán nebo anonymizován;
+- výjimka má důvod, vlastníka a datum konce;
+- nový text nevyžaduje víc osobních údajů než předchozí postup;
+- přístup k pravidlu odpovídá citlivosti informací;
+- v backlogu nezůstaly přiložené reálné zákaznické podklady bez účelu;
+- ověření úpravy půjde udělat na minimálním nebo anonymizovaném důkazu.
+
+Krátký privacy-first zápis:
+
+```text
+Úprava doplnila stavovou větu do checklistu. Starý screenshotový příklad byl odstraněn, nový příklad je syntetický. Ověření proběhne při příštím předání bez exportu dat.
+```
+
+Codyho komentář: privacy-first tady není brzda práce. Je to ochrana před tím, aby každá malá oprava po sobě nechala další stopu. Když systém prokazuje, že méně dat stačí, nemá si kvůli vlastnímu prokazování vyrábět nová data. Ano, je to trochu meta. Ale užitečně meta, ne konferenčně meta.
+
+### Karta kvartální úpravy
+
+Použijte krátkou kartu. Její účel není dokumentovat celý příběh, ale udržet úpravu malou a ověřitelnou.
+
+```text
+Kvartální přehled:
+Vybraný nález:
+Opakovaná cena nálezu:
+Opravná věta:
+Pracovní místo úpravy:
+Co se mění:
+Jak se zavírá stará cesta:
+Privacy-first kontrola:
+Co se neřeší:
+Ověření při příštím použití:
+Vlastník:
+Datum dokončení:
+```
+
+Vyplněný příklad:
+
+```text
+Kvartální přehled: pravidla pro předání zákaznických portálů.
+Vybraný nález: pravidlo o stavové větě je jen v přehledu, ne v předávacím checklistu.
+Opakovaná cena nálezu: lidé pravidlo hledají pozdě a vrací se ke screenshotu detailu.
+Opravná věta: upravit checklist tak, aby stav poptávek vznikl jednou větou bez screenshotu.
+Pracovní místo úpravy: zákaznický předávací checklist.
+Co se mění: přidán řádek se stavovou větou a stop pravidlem pro screenshoty.
+Jak se zavírá stará cesta: starý screenshotový příklad odstraněn z běžné šablony.
+Privacy-first kontrola: nový příklad je syntetický, žádný export nevznikl.
+Co se neřeší: nesjednocujeme ostatní checklisty.
+Ověření při příštím použití: první předání portálu po změně.
+Vlastník: delivery lead.
+Datum dokončení: 2026-05-20.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jeden kvartální nález a držte se malého rozsahu.
+
+1. Vyberte nález podle opakované ceny.
+2. Přepište ho do jedné opravné věty.
+3. Najděte pracovní místo, kde se rozhodnutí skutečně dělá.
+4. Udělejte jednu konkrétní úpravu pravidla, odkazu, příkladu nebo hranice.
+5. Viditelně zavřete starou cestu.
+6. Zkontrolujte, že úprava nevytvořila novou datovou stopu.
+7. Zapište, co se záměrně neřeší.
+8. Nastavte ověření při příštím normálním použití.
+
+Výstup:
+
+```text
+Jeden nález z kvartálního přehledu je převedený do jedné hotové úpravy pravidla, stará cesta je zavřená a příští použití má jasné ověření.
+```
+
+### Checklist kapitoly
+
+- Vybrali jste jeden nález, ne celý seznam z kvartální kontroly?
+- Je výběr postavený na opakované ceně pro práci, data nebo rozhodnutí?
+- Má nález opravnou větu s místem, rolí, situací a cílem?
+- Opravujete pracovní místo, kde se rozhodnutí skutečně dělá?
+- Je změna omezená na jeden dokončený výsledek?
+- Zavřeli jste starou cestu, aby nebyla pohodlnější než nové pravidlo?
+- Zůstalo jasné, co se touto úpravou záměrně neřeší?
+- Nevznikl nový screenshot, export, chatová kopie nebo pomocná tabulka?
+- Jsou příklady anonymizované nebo syntetické, pokud nesou citlivý kontext?
+- Má každá výjimka vlastníka, důvod a datum konce?
+- Je ověření napojené na příští normální použití, ne na nový audit?
+- Ví vlastník, kdy je úprava hotová?
+
+Kvartální přehled nemá být jen kontrolní rituál. Má občas vyrobit malou přesnou změnu, která zlepší práci a zároveň nezvýší provozní dluh. Jeden nález, jedna opravná věta, jedno pracovní místo, jedna uzavřená stará cesta. To je dost. A často právě proto to opravdu proběhne.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LJ o převodu nálezu z kvartálního přehledu do jedné úpravy pravidla: výběr podle opakované ceny, opravná věta, oprava místa rozhodnutí, zavření staré cesty, omezení rozsahu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LI o první kvartální kontrole pravidel po přesunu z měsíční péče: kvartální otázka, pět signálů, stavy kontroly, nejmenší oprava místa selhání, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LH o převodu opakovaně potvrzeného měsíčního pravidla do kvartálního přehledu: dvě potvrzení, oddělení pravidla od historie, spouštěč návratu do měsíční péče, zkrácení měsíčního čtení, privacy-first úklid, karta přesunu, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LG o kontrole stabilizovaného měsíčního pravidla po dalším čtení: výběr jedné úpravy, tři signály běžného použití, rozlišení problému místa, znění a hranice, ochrana před návratem staré historie, privacy-first kontrola druhého měsíce, kontrolní karta, mini workshop a checklist.
