@@ -92897,8 +92897,212 @@ Uzavřené pravidlo je převedené do konkrétní onboardingové situace, má c�
 
 Převod uzavřeného pravidla do onboardingu je poslední metr stabilizace. Pravidlo už není jen správně napsané a zkontrolované. Je naučitelné. Nový člověk ho dokáže použít v konkrétní situaci, bez znalosti celé historie a bez zbytečného kopírování dat.
 
+## Příloha LP: Kontrola onboardingového pravidla po prvním použití
+
+Onboardingové pravidlo není hotové ve chvíli, kdy se objeví ve školícím dokumentu. Hotové je až tehdy, když ho nový člověk použije v normální práci a výsledek odpovídá tomu, co pravidlo slibovalo. Jinak máme jen pěkně uloženou instrukci. To je lepší než chaos, ale horší než fungující návyk.
+
+Tato příloha navazuje na Přílohu LO. Řeší první skutečné použití pravidla, které bylo převedeno do onboardingu, role-specific checklistu nebo cvičného průchodu. Cíl není hodnotit nového člověka jako ve škole. Cíl je zjistit, jestli pravidlo stojí na správném místě, mluví jazykem role a chrání data bez zbytečné byrokracie.
+
+První použití berte jako test systému:
+
+```text
+Našel člověk pravidlo v místě práce?
+Pochopil rozhodnutí bez znalosti historie?
+Vznikl správný výstup?
+Nevznikla zbytečná datová stopa?
+```
+
+Pokud odpověď na některou otázku zní ne, nemusí být problém v člověku. Často je problém v tom, že pravidlo bylo vložené do špatného místa, používá interní jazyk nebo předpokládá znalost, kterou onboarding ještě nepředal.
+
+### Vyberte první normální použití, ne demo scénu
+
+Kontrola má smysl jen tehdy, když se pravidlo použije v reálném pracovním toku. Demo průchod je užitečný při školení, ale neukáže běžné tření: časový tlak, rozdělané podklady, neúplné zadání, zákaznickou výjimku nebo starý zvyk z předchozí práce.
+
+Vhodné první použití:
+
+- nový člověk připravuje první skutečné předání zákazníkovi;
+- zákaznický success řeší první podobný support případ;
+- delivery specialista vyplňuje první checklist u reálného projektu;
+- marketingový člověk připravuje první case study podle nové šablony;
+- produktový člověk popisuje první změnu ve workflow, kde pravidlo chrání data.
+
+Nevhodné první použití:
+
+- interní zkouška bez reálného výstupu;
+- kontrola po několika týdnech, kdy už nikdo neví, co se stalo;
+- review jen podle dojmu manažera;
+- test, kde autor pravidla sedí vedle člověka a všechno mu průběžně vysvětluje.
+
+Praktická věta:
+
+```text
+Pravidlo zkontrolujeme při prvním běžném výstupu, kde by jeho porušení mělo reálný dopad na zákazníka, tým nebo data.
+```
+
+### Sledujte cestu k rozhodnutí
+
+Při kontrole se neptejte jen na výsledek. Sledujte, jak se k němu člověk dostal. Dobré pravidlo má být dohledatelné a použitelné bez archeologického výzkumu v interní dokumentaci. Když člověk pravidlo použije správně jen proto, že mu ho někdo připomněl na chatu, systém ještě nefunguje.
+
+Zapište čtyři body:
+
+```text
+Kde člověk začal:
+Kde pravidlo našel:
+Co mu pomohlo rozhodnout:
+Co chybělo nebo zdrželo:
+```
+
+Příklad:
+
+```text
+Kde člověk začal: šablona předávacího e-mailu.
+Kde pravidlo našel: krátká poznámka u sekce "Stav zákaznických dat".
+Co mu pomohlo rozhodnout: příklad stavové věty bez screenshotu.
+Co chybělo nebo zdrželo: nebylo jasné, kdo schvaluje výjimku při incidentu.
+```
+
+Z toho nevzniká rozsáhlý report. Vzniká jedna malá oprava: doplnit do šablony větu "Výjimku schvaluje incident owner". Přesně tak má kontrola onboardingového pravidla fungovat. Najít nejbližší místo tření a opravit ho tam, kde vzniklo.
+
+### Porovnejte výstup s minimálním správným výsledkem
+
+Před kontrolou si ujasněte, jak vypadá nejmenší správný výstup. Bez toho se review snadno promění v debatní klub o stylu. Jeden člověk by chtěl delší text, druhý kratší formulář, třetí jiný název políčka. To může být užitečné později, ale první kontrola má odpovědět na jednodušší otázku: splnil výstup účel pravidla?
+
+Šablona minimálního výsledku:
+
+```text
+Pravidlo:
+Minimální správný výstup:
+Nepřijatelné porušení:
+Volitelný prostor pro styl:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo: při předání portálu nepoužívat screenshot zákaznického detailu mimo incidentní režim.
+Minimální správný výstup: předávací e-mail obsahuje stavovou větu, odkaz na portál a jasný další krok.
+Nepřijatelné porušení: přiložený screenshot nebo export zákaznických dat bez schválené výjimky.
+Volitelný prostor pro styl: délka vysvětlení, pořadí vět, konkrétní formulace úvodu.
+```
+
+Tím chráníte dvě věci najednou: kvalitu pravidla i autonomii člověka. Pravidlo nemá dělat z lidí přepisovací stroje. Má jasně držet hranici, která je důležitá pro zákazníka, provoz nebo soukromí.
+
+### Rozlišujte čtyři výsledky kontroly
+
+Po prvním použití neskákejte rovnou k přepisování celého onboardingu. Stačí určit stav:
+
+```text
+Ponechat:
+Pravidlo bylo nalezeno, pochopeno a použito bez zbytečné datové stopy.
+
+Zpřesnit:
+Výstup byl v zásadě správný, ale pravidlo potřebuje lepší formulaci, příklad nebo hranici výjimky.
+
+Přesunout:
+Pravidlo je dobré, ale leží mimo skutečné místo práce.
+
+Znovuotevřít:
+Pravidlo selhalo v podstatné části nebo vede k horšímu rozhodnutí, než které mělo nahradit.
+```
+
+Příklady rozhodnutí:
+
+```text
+Ponechat: nový člověk použil stavovou větu a nevytvořil žádný export.
+Zpřesnit: člověk nepoužil screenshot, ale nebylo jasné, jak popsat čekající zákaznický krok.
+Přesunout: pravidlo bylo v onboardingovém dokumentu, ale člověk pracoval ze šablony e-mailu.
+Znovuotevřít: pravidlo zakazuje screenshoty tak plošně, že tým neumí bezpečně řešit schválený incidentní režim.
+```
+
+Jen stav `Znovuotevřít` patří do širší revize. Stavy `Zpřesnit` a `Přesunout` často vyřeší jedna věta nebo přesunutí poznámky do šablony. To je přesně ten typ malé opravy, kterou má systém zvládnout bez velké porady.
+
+### Privacy-first kontrola prvního použití
+
+Onboarding je citlivý tím, že často pracuje s ukázkami. Při první kontrole proto hlídejte nejen výsledek, ale i stopu, která vznikla okolo učení. Dobře použitá privacy-first instrukce může být zkažená tím, že během kontroly někdo vytvoří zbytečný screenshot, kopii e-mailu nebo export "pro jistotu".
+
+Kontrolní otázky:
+
+- Vznikl při prvním použití nový soubor s osobními nebo zákaznickými daty?
+- Byl tento soubor nutný pro práci, nebo jen pro kontrolu?
+- Má případný dočasný podklad účel, vlastníka a retenční datum?
+- Použil se syntetický příklad tam, kde reálná data nebyla nutná?
+- Nešíří se výsledek review do širšího kanálu, než je potřeba?
+- Zůstává kanonické pravidlo v jednom místě, nebo vznikly kopie v chatech a poznámkách?
+
+Codyho komentář: první použití pravidla je moment, kdy se dá krásně poznat, jestli privacy-first bereme vážně. Když kvůli kontrole zákazu screenshotů uděláme tři screenshoty do chatu, pravidlo sice žije, ale trochu ironicky kulhá.
+
+### Kontrolní karta prvního použití
+
+Použijte krátký záznam. Má zachytit rozhodnutí, ne vyrobit další vrstvu dokumentace.
+
+```text
+Pravidlo:
+Role:
+První skutečné použití:
+Kde člověk pravidlo našel:
+Minimální správný výstup:
+Skutečný výstup:
+Stav: Ponechat / Zpřesnit / Přesunout / Znovuotevřít
+Jedna oprava:
+Privacy-first stopa:
+Vlastník opravy:
+Termín kontroly opravy:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo: předání portálu bez screenshotu zákaznického detailu.
+Role: customer success.
+První skutečné použití: předávací e-mail pro pilotního zákazníka.
+Kde člověk pravidlo našel: delivery checklist, ne v onboardingové trase.
+Minimální správný výstup: stavová věta, odkaz na portál, další krok.
+Skutečný výstup: splněno, bez screenshotu.
+Stav: Přesunout.
+Jedna oprava: vložit stejnou krátkou poznámku i do šablony předávacího e-mailu.
+Privacy-first stopa: nevznikl export ani screenshot; review zapsané agregovaně bez zákaznických detailů.
+Vlastník opravy: delivery lead.
+Termín kontroly opravy: při dalším předání.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jedno pravidlo, které už prošlo onboardingem, a zkontrolujte jeho první reálné použití.
+
+1. Vyberte skutečný výstup, ne demo.
+2. Zapište minimální správný výsledek.
+3. Zjistěte, odkud člověk pravidlo opravdu použil.
+4. Porovnejte výsledek s pravidlem a oddělte kvalitu rozhodnutí od osobního stylu.
+5. Určete stav `Ponechat`, `Zpřesnit`, `Přesunout` nebo `Znovuotevřít`.
+6. Vyberte jednu nejbližší opravu, pokud je potřeba.
+7. Zkontrolujte, že kontrola sama nevytvořila zbytečnou datovou stopu.
+
+Výstup:
+
+```text
+Onboardingové pravidlo má ověřené první použití, jasný stav a případně jednu malou opravu v místě práce.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete první normální použití, ne demo scénu?
+- Je jasné, jaký reálný dopad mělo pravidlo chránit?
+- Víme, kde člověk pravidlo hledal a našel?
+- Porovnali jste výstup s minimálním správným výsledkem?
+- Oddělili jste porušení pravidla od volitelného stylu práce?
+- Rozhodli jste stav `Ponechat`, `Zpřesnit`, `Přesunout` nebo `Znovuotevřít`?
+- Vybrali jste maximálně jednu nejbližší opravu?
+- Je oprava zapsaná v místě práce, ne jen v poznámce z review?
+- Nevznikl při kontrole zbytečný screenshot, export nebo kopie zákaznických dat?
+- Má případný dočasný podklad účel, vlastníka a retenční datum?
+- Zůstává kanonické pravidlo v jednom zdroji pravdy?
+- Je jasné, kdy se oprava ověří znovu?
+
+Kontrola onboardingového pravidla po prvním použití je malá, ale zdravá protiváha k dokumentačnímu optimismu. Nevěří jen tomu, že jsme pravidlo napsali. Ověří, že ho nový člověk našel, použil a nevytvořil při tom nový nepořádek. Což je v praxi mnohem zajímavější než další krásný dokument, který nikdo v rozhodující chvíli neotevře.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LP o kontrole onboardingového pravidla po prvním použití: výběr reálného průchodu, cesta k rozhodnutí, minimální správný výstup, stavy Ponechat/Zpřesnit/Přesunout/Znovuotevřít, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LO o převodu uzavřeného pravidla do onboardingu a školení: rozhodnutí místo historie, výběr rolí, místo prvního použití, cvičný průchod, privacy-first školící materiály, aktualizační háček, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LN o uzavření dlouhodobého pravidla po potvrzeném kvartálním přehledu: vstupní brána, provozní věta, výběr běžného/lehkého/návratového rytmu, zavření přechodových opor, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LM o kontrole dlouhodobého pravidla po dalším kvartálním přehledu: návratová otázka, malý vzorek skutečné práce, signály nalezení/použití/výsledku/datové stopy, stavy pravidla, nejbližší oprava, privacy-first kontrola, kontrolní karta, mini workshop a checklist.
