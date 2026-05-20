@@ -94078,8 +94078,277 @@ Stabilizovaná oprava onboardingového pravidla je ověřená v prvním běžné
 
 Kontrola po prvním běžném cyklu je poslední sanity check před tím, než pravidlo přestane být "opravené pravidlo" a začne být prostě normální způsob práce. Když projde, není potřeba mu stavět pomník. Stačí ho nechat v rytmu, ve kterém tým už pracuje, a dávat pozor, aby se kvůli kontrole nevrátilo přesně to hromadění dat a kopií, které mělo pravidlo odstranit.
 
+## Příloha LU: Uzavření stabilizované opravy onboardingového pravidla do běžného rytmu
+
+Stabilizovaná oprava onboardingového pravidla po prvním běžném cyklu má ještě jeden poslední krok: uzavřít speciální režim. Dokud pravidlo nese nálepku "oprava", tým má tendenci ho sledovat zvlášť, vysvětlovat zvlášť a držet kolem něj zbytečné poznámky. To dává smysl při ověření. Nedává to smysl navždy.
+
+Tato příloha navazuje na Přílohu LT. Vstupem je kontrolní karta se stavem `Ponechat` nebo `Drobně doladit`, případně krátká úprava po drobném doladění. Cíl je převést pravidlo do normálního onboardingového rytmu: tam, kde se učí noví lidé, kde se aktualizují role, kde se kontrolují šablony a kde už tým stejně pracuje.
+
+Uzavření odpovídá na čtyři otázky:
+
+```text
+Který speciální kontrolní režim končí?
+Kde bude pravidlo dál žít v normálním onboardingu?
+Jak se bude kontrolovat bez nové evidence?
+Co se smaže, aby po opravě nezůstala zbytečná datová stopa?
+```
+
+Bez uzavření se z dobře opraveného pravidla stane malý provozní přívěsek. Není velký, ale pořád někde visí: samostatný úkol, poznámka v revizním dokumentu, stará karta v backlogu, přechodový komentář v šabloně. Jedna taková věc nevadí. Deset takových věcí už tvoří systém, který nikdo nechtěl.
+
+### Uzavírejte jen potvrzený stav
+
+Do běžného rytmu neposílejte pravidlo, které má otevřený stav `Vrátit ke stabilizaci` nebo `Znovuotevřít pravidlo`. V takové chvíli by uzavření jen zametlo problém pod procesní koberec. Nejdřív opravte kanonický domov, místo rozhodnutí nebo samotné pravidlo.
+
+Vhodný vstup:
+
+```text
+Stav po prvním běžném cyklu: Ponechat.
+Důvod: člověk našel pravidlo v předávací šabloně, výstup splnil minimum a nevznikl screenshot ani export.
+Nejbližší krok: žádný speciální; pravidlo přechází do měsíční kontroly onboardingových šablon.
+```
+
+Vhodný vstup po malém doladění:
+
+```text
+Stav po prvním běžném cyklu: Drobně doladit.
+Doladění: zkrácena zákaznická stavová věta v šabloně.
+Ověření: text je v kanonické šabloně a stará varianta byla odstraněná.
+```
+
+Nevhodný vstup:
+
+```text
+Stav: asi dobré.
+Poznámka: uvidíme při dalším zákazníkovi.
+Speciální úkol: zatím ponechat všechny staré příklady.
+```
+
+Třetí záznam není uzavření. Je to odložené rozhodnutí v kabátu zápisu. Hezky sedí, ale pořád nic neřeší.
+
+### Přesuňte pravidlo do existujícího rytmu
+
+Uzavřené onboardingové pravidlo nemá dostat nový rituál, pokud už existuje přirozené místo. Hledejte nejmenší rytmus, ve kterém se pravidlo může udržovat bez další administrativy.
+
+Typická místa:
+
+- měsíční kontrola onboardingových šablon;
+- kvartální revize rolových standardů;
+- kontrola před nástupem nového člověka do role;
+- aktualizace delivery checklistu po změně služby;
+- review školících příkladů po změně produktu;
+- úklid dočasných podkladů po uzavřené výjimce.
+
+Praktické pravidlo:
+
+```text
+Pokud pravidlo pomáhá při prvním použití role, patří do onboardingového balíčku role.
+Pokud pravidlo chrání opakovaný výstup, patří do pracovního checklistu nebo šablony.
+Pokud pravidlo jen vysvětluje důvod, patří do revizního záznamu, ne do cesty nového člověka.
+```
+
+Příklad:
+
+```text
+Pravidlo: při běžném předání neposílat screenshot zákaznického detailu.
+Běžný rytmus: měsíční kontrola předávacích šablon a onboardingový refresh delivery role.
+Co už nepotřebujeme: samostatný úkol "hlídat screenshoty po opravě".
+```
+
+Tím pravidlo nezmizí. Jen přestane vyžadovat zvláštní pozornost. To je zdravý konec většiny oprav: ne dramatické finále, ale klidný návrat do práce.
+
+### Upravte mapu onboardingu
+
+Onboarding často selhává ne proto, že pravidlo chybí, ale proto, že člověk neví, v jakém pořadí ho potká. Po uzavření opravy proto aktualizujte mapu onboardingu: kudy nový člověk projde od prvního vysvětlení k prvnímu samostatnému použití.
+
+Minimální mapa může vypadat takto:
+
+```text
+Role:
+První situace, kde pravidlo potřebuje:
+Kde se s pravidlem seznámí:
+Kde ho použije:
+Jaký výstup má vzniknout:
+Kde je kanonická šablona:
+Kdo kontroluje první použití:
+Kdy pravidlo přechází do běžného rytmu:
+```
+
+Vyplněný příklad:
+
+```text
+Role: delivery specialista.
+První situace, kde pravidlo potřebuje: předání zákaznického portálu.
+Kde se s pravidlem seznámí: onboardingový průchod "bezpečné předání".
+Kde ho použije: předávací e-mailová šablona.
+Jaký výstup má vzniknout: stavová věta, odkaz na portál a další krok bez screenshotu.
+Kde je kanonická šablona: delivery checklist.
+Kdo kontroluje první použití: delivery lead.
+Kdy pravidlo přechází do běžného rytmu: po prvním samostatném předání bez návratu staré stopy.
+```
+
+Mapa nemusí být dlouhá. Má zabránit tomu, aby se pravidlo vysvětlovalo na jednom místě, používalo na druhém a kontrolovalo na třetím bez vazby mezi nimi.
+
+### Zavřete speciální evidenci
+
+Po uzavření pravidla projděte všechno, co vzniklo kvůli opravě. Ne kvůli běžnému onboardingu, ale kvůli tomu, že pravidlo bylo v přechodovém režimu.
+
+Zavřít nebo uklidit:
+
+- ověřovací úkoly;
+- kontrolní karty, které už splnily účel;
+- přechodové komentáře v dokumentech;
+- staré šablony uložené "pro jistotu";
+- dočasné screenshoty, exporty a kopie příkladů;
+- chatové zprávy připnuté jako náhradní návod;
+- duplicitní poznámky ve školících materiálech;
+- backlog položky, které už nemají další akci.
+
+U každé položky stačí jeden ze čtyř stavů:
+
+```text
+Smazat:
+Nemá auditní ani pracovní hodnotu.
+
+Zkrátit:
+Má hodnotu jen jako závěr, ne jako plný podklad.
+
+Přesunout:
+Patří do kanonického místa nebo revizního logu.
+
+Ponechat:
+Je součástí běžného rytmu, ne přechodové opravy.
+```
+
+Codyho komentář: "necháme to pro jistotu" je věta, ze které se rodí většina dokumentačního prachu. Jistota je fajn. Jen by neměla vypadat jako pět starých kopií s různou pravdou.
+
+### Nastavte návrat bez hlídání lidí
+
+Uzavření do běžného rytmu neznamená, že už se pravidlo nikdy nekontroluje. Znamená to, že kontrola je součástí práce, ne samostatná mikroskopická disciplína. Návratový signál proto formulujte jako stav systému, ne jako dohled nad člověkem.
+
+Dobré návratové signály:
+
+- v běžném výstupu se znovu objeví citlivější příloha;
+- nový člověk neví, kterou šablonu použít;
+- při první samostatné práci vznikne dotaz, který má řešit pravidlo;
+- v onboardingovém balíčku se objeví dvě odlišné formulace;
+- zákazník dostane interní vysvětlení místo čistého dalšího kroku;
+- kvůli kontrole pravidla vzniknou nové kopie dat.
+
+Špatné návratové signály:
+
+- "sledovat, jestli lidé pravidlo dodržují";
+- "každý týden kontrolovat všechny výstupy";
+- "ukládat příklady pro jistotu";
+- "nechat autora pravidla schvalovat každý případ".
+
+První sada chrání systém. Druhá sada vyrábí dohled, frontu práce a často i novou datovou stopu. To je velmi drahý způsob, jak si říct, že nevěříme vlastnímu onboardingu.
+
+### Privacy-first uzavření
+
+Uzavření je poslední dobrá příležitost odstranit podklady, které měly krátkodobý účel. U onboardingových pravidel to platí dvojnásob: příklady, screenshoty a pracovní výstupy se snadno mění v učební materiály, i když obsahují víc reálných dat, než je potřeba.
+
+Privacy-first uzavření znamená:
+
+- ponechat v onboardingu syntetické příklady místo reálných zákaznických detailů;
+- v revizním logu držet závěr, ne plný obsah výstupu;
+- smazat dočasné screenshoty a exporty po splnění účelu;
+- omezit přístup k archivní kartě jen na role, které ji potřebují;
+- nepoužívat kontrolu pravidla jako osobní hodnocení konkrétního člověka;
+- zapsat retenční rozhodnutí přímo do uzavírací karty;
+- zkontrolovat, že staré odkazy nevedou na odstraněné nebo citlivé podklady.
+
+Dobrá uzavírací privacy věta:
+
+```text
+Speciální ověřovací podklady byly odstraněné. V onboardingovém balíčku zůstává syntetický příklad a v revizním logu jen agregovaný závěr bez zákaznického obsahu.
+```
+
+To je přesně ten typ nudné věty, která později šetří nervy. Privacy-first provoz je často schopnost napsat méně, uložit méně a pořád vědět dost.
+
+### Uzavírací karta
+
+Použijte jednu kartu pro jedno pravidlo:
+
+```text
+Onboardingové pravidlo:
+Stav po prvním běžném cyklu:
+Případné doladění:
+Běžný rytmus:
+Kanonický domov:
+Místo prvního použití v onboardingu:
+Co končí jako speciální režim:
+Co se maže:
+Co se zkracuje:
+Co se přesouvá:
+Návratový signál:
+Privacy-first závěr:
+Vlastník rytmu:
+Datum uzavření:
+Datum nejbližší běžné kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Onboardingové pravidlo: při běžném předání neposílat screenshot zákaznického detailu.
+Stav po prvním běžném cyklu: Ponechat.
+Případné doladění: žádné.
+Běžný rytmus: měsíční kontrola předávacích šablon.
+Kanonický domov: delivery checklist.
+Místo prvního použití v onboardingu: průchod "bezpečné předání zákazníkovi".
+Co končí jako speciální režim: samostatný úkol hlídání screenshotů po opravě.
+Co se maže: dočasný ověřovací checklist a stará ukázka se screenshotem.
+Co se zkracuje: revizní karta na jednovětý závěr.
+Co se přesouvá: návratový signál do měsíční kontroly šablon.
+Návratový signál: znovu se objeví screenshot, export nebo dotaz na povolení přílohy.
+Privacy-first závěr: onboarding používá syntetický příklad, bez zákaznického obsahu.
+Vlastník rytmu: delivery lead.
+Datum uzavření: 2026-05-20.
+Datum nejbližší běžné kontroly: 2026-06-20.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu kontrolní kartu z Přílohy LT se stavem `Ponechat` nebo dokončeným `Drobně doladit`.
+
+1. Ověřte, že pravidlo nemá otevřený stav `Vrátit ke stabilizaci` nebo `Znovuotevřít pravidlo`.
+2. Vyberte existující onboardingový nebo šablonový rytmus.
+3. Aktualizujte mapu onboardingu pro danou roli.
+4. Zapište, který speciální režim končí.
+5. Projděte dočasné opory a rozhodněte smazat, zkrátit, přesunout nebo ponechat.
+6. Přesuňte návratový signál do běžného rytmu.
+7. Udělejte privacy-first úklid podkladů.
+8. Vyplňte uzavírací kartu.
+
+Výstup:
+
+```text
+Opravené onboardingové pravidlo už není speciální projekt. Je součástí běžného onboardingového rytmu, má vlastníka, návratový signál a uklizenou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Uzavíráte jen pravidlo se stavem `Ponechat` nebo dokončeným `Drobně doladit`?
+- Neskryli jste otevřený problém pod uzavření?
+- Vybrali jste existující rytmus místo nového rituálu?
+- Je jasné, kde pravidlo žije jako zdroj pravdy?
+- Je jasné, kde ho nový člověk poprvé použije?
+- Aktualizovali jste mapu onboardingu pro danou roli?
+- Ukončili jste speciální kontrolní režim?
+- Prošli jste dočasné úkoly, komentáře, karty a staré šablony?
+- Smazali jste podklady bez další hodnoty?
+- Zkrátili jste revizní stopu na závěr místo plného obsahu?
+- Přesunuli jste návratový signál do běžného rytmu?
+- Nezavedli jste dohled nad člověkem místo kontroly systému?
+- Zůstaly v onboardingu syntetické příklady místo reálných zákaznických dat?
+- Má běžný rytmus vlastníka a nejbližší kontrolní datum?
+- Je jasné, co se stane, pokud se stará stopa vrátí?
+
+Uzavření stabilizované opravy je malý, ale důležitý úklidový pohyb. Tým tím říká: oprava pomohla, systém se naučil novou věc a speciální režim končí. V dobrém provozu se totiž každá úspěšná oprava nemá stát další vrstvou procesu. Má zmizet do normální práce a nechat po sobě jen lepší cestu.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LU o uzavření stabilizované opravy onboardingového pravidla do běžného rytmu: vstupní stavy, přesun do existujícího onboardingového rytmu, mapa onboardingu, zavření speciální evidence, návratový signál bez dohledu nad lidmi, privacy-first uzavření, uzavírací karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LT o kontrole stabilizované opravy onboardingového pravidla po prvním běžném cyklu: výběr normálního cyklu, cesta k rozhodnutí, porovnání minimálního a skutečného výstupu, návrat staré stopy, rozhodovací stavy, privacy-first kontrola, kontrolní karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LS o stabilizaci potvrzené opravy onboardingového pravidla: vstup přes ověřený stav, přepis historie na aktuální pravidlo, kanonický domov, zavření dočasných opor, návratový signál, privacy-first úklid, stabilizační karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LR o ověření opraveného onboardingového pravidla po dalším použití: návrat k opravné větě, výběr normálního použití, porovnání proti první kontrole, třídění původního/nového/okolního tření, stavy opravy, privacy-first ověřovací karta, mini workshop a checklist.
