@@ -96607,8 +96607,261 @@ Malá oprava onboardingového standardu je ověřená na běžném použití a m
 
 Ověření malé opravy chrání standard před dvěma extrémy: před nekonečným přepisováním i před předčasným uspokojením. Když tým ověří jednu změnu v reálném nástupu, zavře starou cestu a uklidí datovou stopu, onboarding se zlepšuje prakticky. Bez fanfár, bez tabulkového divadla, ale s výsledkem, který nový člověk opravdu použije.
 
+## Příloha ME: Stabilizace potvrzené malé opravy onboardingového standardu
+
+Potvrzená malá oprava se snadno ztratí, pokud po ověření zůstane jen jako poznámka v kontrolní kartě. Člověk, který opravu navrhl, si ji pamatuje. Člověk, který byl u ověření, ví, proč vznikla. Další nový člověk ale potká jen aktuální standard, odkazy, šablony a pracovní rytmus. Pokud se oprava nepřepíše do těchto míst, provoz se vrátí ke staré trase nebo začne žít ve dvou variantách najednou.
+
+Tato příloha navazuje na Přílohu MD. Vstupem je ověřená malá oprava se stavem `Potvrdit` nebo `Doladit`. Cílem není rozšiřovat standard. Cílem je vzít jednu potvrzenou změnu, odstranit její dočasnost, uložit ji do místa práce a zavřít vše, co by tým vracelo zpět.
+
+Stabilizace má odpovědět na šest otázek:
+
+```text
+Co je odteď aktuální pravidlo?
+Kde ho člověk potká při běžné práci?
+Které staré místo musí zmizet, přesměrovat nebo dostat jasný stav?
+Kdo pozná, že se oprava začala používat bez ručního připomínání?
+Jaké dočasné podklady po ověření smažeme?
+Kdy se k této změně vrátíme jen jako k běžné součásti standardu?
+```
+
+Bez těchto odpovědí je oprava jen lokální úspěch. Se stabilizací se z ní stane obyčejná součást onboardingového standardu. A obyčejnost je v provozu dobrá zpráva.
+
+### Přepište opravu na aktuální pravidlo
+
+Po ověření nemažte kontext hned, ale oddělte historii od současného pravidla. Standard nemá novému člověku vyprávět celý příběh, proč se něco měnilo. Má mu říct, co má udělat teď.
+
+Špatně:
+
+```text
+Dříve jsme sem dávali přílohu, ale po kontrole se ukázalo, že to vede ke screenshotům v chatu, takže nově je lepší přidat zákaznický odkaz.
+```
+
+Lépe:
+
+```text
+Do předávacího komentáře vlož zákaznický odkaz, stavovou větu a další krok. Screenshot ani export nepřidávej.
+```
+
+Historie změny patří do changelogu nebo rozhodovací karty. Pracovní pravidlo má být krátké, přítomné a použitelné v okamžiku práce.
+
+Praktický přepis:
+
+```text
+Původní oprava:
+Ověřený výsledek:
+Aktuální pravidlo:
+Příklad správného výstupu:
+Co už se nepoužívá:
+```
+
+Vyplněný příklad:
+
+```text
+Původní oprava: pole "příloha" bylo nahrazeno polem "zákaznický odkaz".
+Ověřený výsledek: nový člověk použil odkaz a nevznikl screenshot.
+Aktuální pravidlo: předávací komentář obsahuje zákaznický odkaz, stav a další krok.
+Příklad správného výstupu: "Portál je připravený ke kontrole. Odkaz: [interní odkaz]. Další krok: ověřit role uživatelů."
+Co už se nepoužívá: screenshot portálu v interním chatu.
+```
+
+### Uložte pravidlo do nejbližšího pracovního místa
+
+Stabilní pravidlo musí ležet tam, kde práce začíná. Pokud ho uložíte do obecné dokumentace, kterou lidé otevírají jen při revizi, oprava bude formálně existovat a prakticky mizet.
+
+Vyberte jedno primární místo:
+
+- onboardingový checklist v issue;
+- předávací šablona;
+- karta role;
+- zákaznický portál nebo interní provozní systém;
+- krátký runbook pro první samostatný cyklus;
+- kanonický index standardů.
+
+Pak zkontrolujte, jestli k pravidlu vedou všechny běžné vstupy. Ne všechny dokumenty musí obsahovat celé pravidlo. Často stačí jasný odkaz a krátká pracovní věta.
+
+Příklad:
+
+```text
+Primární místo: předávací šablona.
+Vstup z onboardingového checklistu: "Vyplň předávací komentář podle aktuální šablony."
+Vstup z karty role: odkaz na stejnou šablonu.
+Vstup ze starého dokumentu: archivní poznámka a odkaz na aktuální šablonu.
+```
+
+Tím se oprava stane součástí trasy. Člověk ji nemusí znát z porady ani z paměti kolegy.
+
+### Zavřete starou variantu
+
+Největší riziko malé opravy není odpor týmu. Často je to pohodlná stará kopie. Starý odkaz v issue. Duplikovaná šablona v oblíbených položkách. Příklad v dokumentaci, který pořád ukazuje původní chování. Jeden screenshot ve starém vlákně, podle kterého se další člověk orientuje, protože je zrovna po ruce.
+
+Projděte jen místa, která mohou reálně vrátit staré chování:
+
+```text
+Staré šablony:
+Staré odkazy:
+Staré příklady:
+Staré automatické texty:
+Staré onboardingové úkoly:
+Staré dočasné poznámky:
+```
+
+U každého místa vyberte jeden stav:
+
+```text
+Smazat:
+Přesměrovat:
+Archivovat s jasným datem:
+Ponechat jako historický důkaz bez pracovního použití:
+```
+
+Nepoužívejte archiv jako odpadkový koš pro nerozhodnost. Pokud stará varianta nemá právní, provozní nebo historický důvod, smažte ji. Pokud důvod má, označte ji tak, aby ji nikdo nepoužil jako aktuální návod.
+
+### Nastavte nenápadný návratový signál
+
+Stabilizace nepotřebuje nový kontrolní dashboard. Potřebuje jeden lehký signál, který ukáže, jestli se staré chování nevrací.
+
+Vhodné signály:
+
+- při dalším předání nevznikl screenshot místo odkazu;
+- nový člověk našel šablonu bez ruční navigace;
+- support nepoužil starý text odpovědi;
+- v onboardingovém issue se objevil odkaz na aktuální šablonu;
+- v interním komentáři není export dat, který oprava odstranila.
+
+Nevhodné signály:
+
+- sledování každého kliknutí nového člověka;
+- povinný denní report používání šablony;
+- další tabulka jen pro kontrolu jedné věty;
+- měření výkonu člověka místo kvality standardu.
+
+Privacy-first stabilizace znamená, že měříte návrat starého procesu, ne lidi. Pokud stačí zkontrolovat jeden výstup po dalším běžném použití, není důvod zavádět trvalé sledování.
+
+### Uzavřete dočasný režim
+
+Malá oprava často během ověření vytvoří pomocné materiály: poznámku z kontroly, dočasný příklad, interní komentář, screenshot cesty, export šablony, seznam nálezů. Po stabilizaci musí být jasné, co z toho zůstává a proč.
+
+Použijte krátké rozhodnutí:
+
+```text
+Zůstává v kanonickém standardu:
+Zůstává v changelogu:
+Maže se po stabilizaci:
+Maže se po další kontrole:
+Nepřenáší se nikam:
+```
+
+Příklad:
+
+```text
+Zůstává v kanonickém standardu: nové pravidlo a syntetický příklad komentáře.
+Zůstává v changelogu: datum změny a důvod "snížení kopírování zákaznických dat".
+Maže se po stabilizaci: dočasná poznámka z ověření a pracovní export šablony.
+Maže se po další kontrole: krátký kontrolní komentář v issue.
+Nepřenáší se nikam: detailní poznámky z průchodu nového člověka.
+```
+
+Tím se standard nezanáší kontrolní historií a zároveň nezmizí důležité rozhodnutí.
+
+### Privacy-first stabilizace
+
+Stabilizace je dobrý okamžik pro úklid dat, protože tým přesně ví, které podklady vznikly jen kvůli opravě. Privacy-first přístup tady není právní vsuvka. Je to provozní disciplína: co už nemá účel, nemá zůstávat jen proto, že disk je levný a vyhledávání to možná jednou najde.
+
+Zkontrolujte:
+
+- jestli nový standard nevyžaduje více osobních nebo zákaznických dat než starý;
+- jestli příklad používá syntetická nebo bezpečně anonymizovaná data;
+- jestli se staré screenshoty, exporty a kopie opravdu smažou;
+- jestli odkazy vedou do systému s odpovídajícími právy;
+- jestli changelog neprozrazuje interní nebo zákaznické detaily;
+- jestli dočasné poznámky mají termín smazání;
+- jestli se kvůli stabilizaci nezavedlo nové sledování lidí.
+
+Krátká privacy-first věta pro changelog:
+
+```text
+Oprava stabilizuje předávání přes zákaznický odkaz místo screenshotů a snižuje počet kopií zákaznických dat mimo běžný provozní systém.
+```
+
+Codyho komentář: stabilizace je místo, kde se ukáže, jestli tým opravdu věří minimalizaci dat. Je snadné říct "nesbíráme zbytečnosti" na homepage. Těžší je smazat pracovní screenshot, který už splnil účel, a nechat po sobě jen pravidlo, odkaz a jasný důvod.
+
+### Stabilizační karta malé opravy
+
+Karta má být krátká. Pokud z ní roste nový projekt, pravděpodobně stabilizujete víc než jednu opravu.
+
+```text
+Oprava:
+Stav po ověření:
+Aktuální pravidlo:
+Primární pracovní místo:
+Běžné vstupy, které na něj vedou:
+Staré varianty k zavření:
+Co smažeme:
+Co zůstává v changelogu:
+Návratový signál:
+Další běžná kontrola:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Oprava: pole "příloha" nahrazené polem "zákaznický odkaz".
+Stav po ověření: Potvrdit.
+Aktuální pravidlo: předávací komentář obsahuje zákaznický odkaz, stavovou větu a další krok, bez screenshotu.
+Primární pracovní místo: předávací šablona.
+Běžné vstupy, které na něj vedou: onboardingové issue, karta role, kanonický index standardů.
+Staré varianty k zavření: stará šablona v archivu a příklad se screenshotem v dokumentaci.
+Co smažeme: dočasnou poznámku z ověření a export šablony.
+Co zůstává v changelogu: datum, důvod změny a odkaz na aktuální šablonu.
+Návratový signál: při dalším předání nevznikne screenshot ani kopie dat v chatu.
+Další běžná kontrola: po dvou dalších nástupech.
+Vlastník: delivery lead.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu ověřenou malou opravu a stabilizujte ji do standardu.
+
+1. Otevřete kartu ověření z Přílohy MD.
+2. Přepište opravu do jedné aktuální pracovní věty.
+3. Vyberte primární místo, kde má pravidlo žít.
+4. Zkontrolujte běžné vstupy, které na toto místo vedou.
+5. Najděte staré šablony, odkazy, příklady nebo poznámky, které vrací staré chování.
+6. U každé staré varianty rozhodněte `Smazat`, `Přesměrovat`, `Archivovat` nebo `Ponechat jako historický důkaz`.
+7. Zapište jeden lehký návratový signál.
+8. Udělejte privacy-first úklid dočasných podkladů.
+9. Zapište krátký changelog a vlastníka.
+
+Výstup:
+
+```text
+Potvrzená malá oprava je přepsaná do aktuálního pravidla, uložená v místě práce, staré varianty jsou zavřené a dočasná datová stopa má jasný úklid.
+```
+
+### Checklist kapitoly
+
+- Přepsali jste historii opravy na aktuální pracovní pravidlo?
+- Je pravidlo krátké, přítomné a použitelné při práci?
+- Má pravidlo jeden syntetický nebo bezpečně anonymizovaný příklad?
+- Vybrali jste primární pracovní místo?
+- Vedou na něj běžné vstupy z onboardingu, role nebo indexu?
+- Zavřeli jste staré šablony, odkazy a příklady?
+- Je u archivovaných věcí jasné, že nejsou aktuálním návodem?
+- Nezůstala stará pohodlná kopie v místě, kde ji nový člověk snadno použije?
+- Máte jeden lehký návratový signál?
+- Neměříte výkon člověka místo návratu starého procesu?
+- Uzavřeli jste dočasný režim ověření?
+- Víte, co zůstává v changelogu a co se maže?
+- Smazali jste screenshoty, exporty a pracovní kopie bez dalšího účelu?
+- Neobsahuje changelog zákaznické nebo interní detaily, které tam nepatří?
+- Má stabilizace vlastníka a nejbližší běžnou kontrolu?
+
+Stabilizace malé opravy je tichý konec jedné smyčky. Oprava už není projekt, incident ani téma porady. Je z ní aktuální pravidlo v místě práce, stará cesta je zavřená a dočasná data nezůstávají ležet po okolí. Přesně tak má vypadat zdravý provozní standard: méně vysvětlování, méně kopií, méně návratů ke starému zvyku.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha ME o stabilizaci potvrzené malé opravy onboardingového standardu: přepis opravy na aktuální pravidlo, uložení do místa práce, zavření starých variant, návratový signál, uzavření dočasného režimu, privacy-first úklid, stabilizační karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MD o ověření malé opravy onboardingového standardu po dalším běžném nástupu: výběr skutečného použití, návrat k opravné větě, sledování cesty k opravenému místu, porovnání výstupu s minimem, rozhodovací stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MC o převodu nálezu z trvalého onboardingového standardu do jedné malé opravy: výběr jednoho nálezu, opravná věta, typy oprav, oprava v místě práce, ověření při dalším použití, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MB o kontrole trvalého onboardingového standardu po dalších nástupech: reálné použití, porovnání s minimálním výstupem, první místo tření, rozhodovací stavy, privacy-first kontrola datové stopy, kontrolní karta, mini workshop a checklist.
