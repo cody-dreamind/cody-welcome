@@ -93577,8 +93577,255 @@ Oprava onboardingového pravidla je ověřená v dalším normálním použití,
 
 Ověření opraveného onboardingového pravidla uzavírá malou učící smyčku. Pravidlo bylo převedené do onboardingu, poprvé použité, opravené a znovu ověřené v práci. To je přesně ten bod, kdy se dá přestat diskutovat o dokumentaci a začít věřit provozu: ne slepě, ale na základě dalšího normálního použití.
 
+## Příloha LS: Stabilizace potvrzené opravy onboardingového pravidla
+
+Potvrzená oprava onboardingového pravidla ještě není stabilní jen proto, že jednou prošla ověřením. Stabilní je až ve chvíli, kdy se z ní stane běžná součást práce: člověk ji najde v místě rozhodnutí, nemusí znát historii opravy, nevznikají vedlejší kopie a tým ví, kdy se k pravidlu vrátit.
+
+Tato příloha navazuje na Přílohu LR. Vstupem je ověřovací karta se stavem `Potvrdit` nebo `Drobně doladit`. Cíl není znovu otevírat onboarding. Cíl je převést potvrzenou opravu do klidného provozního tvaru: jedno aktuální pravidlo, jeden kanonický domov, uklizené přechodové poznámky a lehký signál, který zachytí návrat starého tření.
+
+Stabilizace odpovídá na čtyři otázky:
+
+```text
+Kde má opravené pravidlo trvale bydlet?
+Jak má znít bez historie opravy?
+Které dočasné opory se mají odstranit?
+Jak poznáme, že se staré tření vrací?
+```
+
+Pokud na tyto otázky neodpovíte, oprava zůstane v polovičním stavu. Všichni tuší, že se něco změnilo, ale nový člověk pořád naráží na staré kopie, komentáře, výjimky nebo vysvětlování v chatu. To není stabilizace. To je dokumentační ozvěna.
+
+### Stabilizujte jen potvrzenou opravu
+
+Do stabilizace neposílejte opravu, která ještě nemá jasný stav. Pokud ověření skončilo `Vrátit k opravě` nebo `Znovuotevřít pravidlo`, nejdřív udělejte další konkrétní změnu. Stabilizovat neověřenou opravu znamená zafixovat nejistotu.
+
+Vhodný vstup:
+
+```text
+Stav opravy: Potvrdit.
+Rozdíl proti první kontrole: člověk našel pravidlo přímo v předávací šabloně a nepoužil screenshot.
+Privacy-first závěr: nevznikla kopie zákaznického e-mailu ani export.
+```
+
+Nevhodný vstup:
+
+```text
+Stav opravy: asi lepší.
+Poznámka: ještě se uvidí, jestli to lidé najdou.
+Další krok: možná přepsat celý onboarding.
+```
+
+První záznam říká, co se změnilo a proč to může přejít do běžného režimu. Druhý záznam je pocit. Pocity jsou užitečné na začátku rozhovoru, ale špatné jako zdroj pravdy pro onboarding.
+
+### Přepište opravu na aktuální pravidlo
+
+Stabilizované pravidlo nemá vyprávět historii problému. Nový člověk nepotřebuje vědět, že kdysi byla poznámka jen v onboardingovém dokumentu, potom v šabloně, potom se řešil screenshot a potom vznikla syntetická varianta. Potřebuje vědět, co má udělat teď.
+
+Přepište proto:
+
+```text
+Historie:
+Minule se lidé ptali, jestli mohou přiložit screenshot zákaznického detailu. Oprava přesunula pravidlo do předávací šablony a ověření ukázalo, že to funguje.
+
+Aktuální pravidlo:
+Při běžném předání neposílejte screenshot zákaznického detailu. Použijte stavovou větu ze šablony a odkaz na portál. Screenshot je povolený jen v incidentním režimu podle incidentního playbooku.
+```
+
+Druhá verze je kratší, akčnější a lépe chrání data. Historie může zůstat v revizním logu, pokud má hodnotu pro audit nebo učení. Nemá ale překážet člověku, který právě dělá práci.
+
+Dobré stabilizované pravidlo:
+
+- říká, kdy se použije;
+- popisuje minimální správný výstup;
+- ukazuje výjimku nebo odkaz na výjimkový režim;
+- nepřenáší staré diskuse do pracovního místa;
+- nevyžaduje další schůzku k pochopení.
+
+### Vyberte kanonický domov
+
+Opravené onboardingové pravidlo může mít víc míst, kde se o něm mluví: onboardingový dokument, šablona e-mailu, support makro, delivery checklist, interní wiki, školící materiál nebo komentář v úkolu. Stabilizace má určit, kde je zdroj pravdy a která místa jsou jen pracovní odkazy.
+
+Rozlišujte:
+
+```text
+Kanonický domov:
+Místo, kde pravidlo žije jako zdroj pravdy.
+
+Místo rozhodnutí:
+Místo, kde člověk pravidlo potřebuje použít.
+
+Školící odkaz:
+Místo, které pravidlo vysvětluje, ale nemá vlastní variantu pravdy.
+
+Archivní stopa:
+Záznam, proč se pravidlo změnilo, ne instrukce pro běžnou práci.
+```
+
+Příklad:
+
+```text
+Kanonický domov: delivery checklist pro předání.
+Místo rozhodnutí: předávací e-mailová šablona.
+Školící odkaz: onboarding pro delivery roli.
+Archivní stopa: ověřovací karta z Přílohy LR.
+```
+
+To je zdravé rozdělení. Pravidlo má jeden zdroj pravdy, ale je vidět tam, kde se rozhoduje. Školení neobsahuje vlastní odlišnou formulaci, jen odkazuje na stejný princip a ukazuje cvičný průchod.
+
+### Zavřete dočasné opory
+
+Každá oprava obvykle vytvoří dočasné opory: komentář v dokumentu, poznámku v chatu, připnutý úkol, starou variantu šablony, ukázkový screenshot, export nebo seznam "pozor, zatím používat novou verzi". Pokud je necháte žít, budou časem působit jako alternativní pravidla.
+
+Po stabilizaci projděte:
+
+- staré kopie šablon;
+- komentáře, které popisují přechodový stav;
+- dočasné úkoly k ověření;
+- školící materiály se starou formulací;
+- screenshoty a exporty použité při opravě;
+- odkazy v onboardingu, které vedou na neaktuální místo;
+- chatové zprávy nebo poznámky, které lidé stále používají jako návod.
+
+U každé položky rozhodněte:
+
+```text
+Smazat:
+Položka už nemá účel a obsahuje přechodovou nebo datově citlivou stopu.
+
+Nahradit odkazem:
+Položka pomáhá orientaci, ale nemá obsahovat vlastní kopii pravidla.
+
+Archivovat:
+Položka má auditní hodnotu, ale nesmí být v běžné pracovní cestě.
+
+Ponechat:
+Položka je kanonický domov nebo místo rozhodnutí.
+```
+
+Codyho komentář: největší nepřítel stabilního pravidla není neznalost. Je to stará kopie, která vypadá dost důvěryhodně na to, aby ji někdo použil. Dokumentace umí lhát velmi slušným tónem.
+
+### Nastavte lehký návratový signál
+
+Stabilizace nemá vytvořit další trvalou kontrolní mašinu. Stačí jeden lehký signál, který ukáže, že se staré tření vrací. Signál musí být navázaný na práci, ne na sledování lidí.
+
+Příklady signálů:
+
+- někdo znovu pošle screenshot místo stavové věty;
+- nový člověk se ptá v chatu na věc, kterou má řešit šablona;
+- zákazník dostane výstup s citlivější přílohou, než je potřeba;
+- při předání vzniká ruční kopie dat, i když pravidlo nabízí bezpečnější cestu;
+- lidé obcházejí šablonu, protože pravidlo je moc dlouhé nebo schované.
+
+Zapište návratovou otázku:
+
+```text
+Při dalším měsíčním review ověříme, jestli se v běžných předáních znovu objevily screenshoty zákaznických detailů nebo dotazy na jejich použití.
+```
+
+To stačí. Nezavádějte nový dashboard, pokud problém není opakovaný a drahý. Dobré pravidlo má být lehké na používání i na kontrolu.
+
+### Privacy-first stabilizace
+
+Stabilizace je ideální chvíle na úklid datové stopy. Ověření často dočasně potřebuje poznámky, příklady nebo pracovní karty. Po potvrzení opravy ale většina těchto podkladů nemá zůstat v běžné cestě.
+
+Privacy-first stabilizace znamená:
+
+- ponechat v pravidle jen obecný popis situace;
+- odstranit reálné zákaznické screenshoty, exporty a přeposlané e-maily, pokud nejsou nutné;
+- nahradit příklady syntetickými daty;
+- zkrátit revizní záznam na závěr, ne na plný obsah výstupu;
+- omezit přístup k archivní stopě jen na role, které ji opravdu potřebují;
+- nastavit datum smazání pro dočasné podklady;
+- nezakládat novou evidenci jen proto, že stabilizace proběhla.
+
+Dobrá stabilizační privacy věta:
+
+```text
+Stabilizované pravidlo používá syntetický příklad a stavovou větu. Dočasný ověřovací podklad byl odstraněn, revizní záznam obsahuje jen obecný popis bez identifikace zákazníka.
+```
+
+Tato věta je krátká, ale drží hodnotu: tým se učí, aniž by kvůli učení hromadil zákaznická data. Překvapivě civilizované. Skoro jako by šlo dělat provoz bez digitálního syslení.
+
+### Stabilizační karta
+
+Použijte jednoduchou kartu pro jednu potvrzenou opravu:
+
+```text
+Opravené onboardingové pravidlo:
+Stav z ověření: Potvrdit / Drobně doladit
+Aktuální znění pravidla:
+Kanonický domov:
+Místo rozhodnutí:
+Školící odkaz:
+Co se maže:
+Co se nahrazuje odkazem:
+Co se archivuje:
+Návratový signál:
+Privacy-first závěr:
+Vlastník:
+Datum stabilizace:
+Datum lehké kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Opravené onboardingové pravidlo: nepoužívat screenshot zákaznického detailu při běžném předání.
+Stav z ověření: Potvrdit.
+Aktuální znění pravidla: při běžném předání použijte stavovou větu a odkaz na portál; screenshot jen v incidentním režimu.
+Kanonický domov: delivery checklist.
+Místo rozhodnutí: předávací e-mailová šablona.
+Školící odkaz: onboarding delivery role.
+Co se maže: stará ukázka se screenshotem, přechodový komentář ve šabloně.
+Co se nahrazuje odkazem: onboardingová kapitola s historickým vysvětlením.
+Co se archivuje: ověřovací karta bez zákaznických detailů.
+Návratový signál: při měsíčním review se hledá návrat screenshotů nebo dotazů na jejich použití.
+Privacy-first závěr: pravidlo obsahuje syntetický příklad, dočasný podklad byl smazán.
+Vlastník: delivery lead.
+Datum stabilizace: 2026-05-20.
+Datum lehké kontroly: 2026-06-20.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu ověřenou opravu se stavem `Potvrdit` nebo `Drobně doladit`.
+
+1. Přečtěte ověřovací závěr z Přílohy LR.
+2. Přepište opravu na aktuální pravidlo bez historie.
+3. Určete kanonický domov a místo rozhodnutí.
+4. Najděte staré kopie, komentáře a dočasné opory.
+5. Rozhodněte, co smazat, nahradit odkazem, archivovat nebo ponechat.
+6. Zapište jeden návratový signál.
+7. Udělejte privacy-first úklid podkladů.
+8. Vyplňte stabilizační kartu.
+
+Výstup:
+
+```text
+Potvrzená oprava onboardingového pravidla je převedená do běžného provozu, staré opory jsou uklizené a existuje lehký signál pro návrat původního tření.
+```
+
+### Checklist kapitoly
+
+- Stabilizujete jen opravu, která má jasný stav z ověření?
+- Přepsali jste historii opravy na aktuální pravidlo?
+- Je pravidlo srozumitelné bez znalosti předchozí chyby?
+- Má pravidlo jeden kanonický domov?
+- Je pravidlo vidět v místě, kde člověk skutečně rozhoduje?
+- Neobsahují školící materiály vlastní konkurenční variantu pravidla?
+- Prošli jste staré kopie, komentáře, úkoly a dočasné opory?
+- Smazali jste podklady, které už nemají účel?
+- Nahradili jste kopie odkazem tam, kde má zůstat jen orientace?
+- Archivovali jste jen to, co má skutečnou hodnotu?
+- Nastavili jste jeden lehký návratový signál?
+- Nezavedli jste kvůli stabilizaci nové zbytečné měření lidí?
+- Používají příklady syntetická nebo anonymizovaná data?
+- Má stabilizace vlastníka a datum lehké kontroly?
+
+Stabilizace potvrzené opravy je méně vzrušující než vymýšlení nového pravidla, ale pro provoz je důležitější. Právě tady se pozná, jestli tým opravdu zlepšil systém, nebo jen vyrobil další poznámku do dokumentace. Dobrá stabilizace nechá po sobě méně textu, méně kopií, méně datové stopy a jasnější práci.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LS o stabilizaci potvrzené opravy onboardingového pravidla: vstup přes ověřený stav, přepis historie na aktuální pravidlo, kanonický domov, zavření dočasných opor, návratový signál, privacy-first úklid, stabilizační karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LR o ověření opraveného onboardingového pravidla po dalším použití: návrat k opravné větě, výběr normálního použití, porovnání proti první kontrole, třídění původního/nového/okolního tření, stavy opravy, privacy-first ověřovací karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LQ o opravě onboardingového pravidla po první kontrole: opravná věta, typy textová/polohová/rolová/datová oprava, kanonické místo, omezení rozsahu, privacy-first úklid, ověření při dalším použití, opravná karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LP o kontrole onboardingového pravidla po prvním použití: výběr reálného průchodu, cesta k rozhodnutí, minimální správný výstup, stavy Ponechat/Zpřesnit/Přesunout/Znovuotevřít, privacy-first kontrola, karta, mini workshop a checklist.
