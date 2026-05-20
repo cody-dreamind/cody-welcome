@@ -94883,8 +94883,287 @@ Jeden nález z běžného onboardingového rytmu je převedený do jedné konkr�
 
 Převod nálezu do úpravy trasy je malá disciplína s velkým dopadem. Učí tým reagovat na onboardingové tření přesně: ne přidáním dalšího dokumentu, ale opravou místa, kde se práce opravdu děje. A když se při tom uklidí stará datová stopa, onboarding je nejen použitelnější, ale i důvěryhodnější.
 
+## Příloha LX: Ověření úpravy onboardingové trasy po dalším normálním použití
+
+Úprava onboardingové trasy není hotová v okamžiku, kdy je přepsaná šablona, přesunutý odkaz nebo doplněný příklad. Hotová je až tehdy, když ji nový člověk použije v běžné práci a vznikne lepší výstup bez skrytého zachraňování.
+
+Tato příloha navazuje na Přílohu LW. Vstupem je jedna konkrétní úprava trasy a domluvené ověření při dalším normálním použití. Cílem není kontrolovat výkon nového člověka. Cílem je zjistit, jestli upravená trasa opravdu pomáhá najít správné rozhodnutí ve správný okamžik.
+
+Dobré ověření se ptá na tři věci:
+
+```text
+Našel člověk upravené místo bez speciální navigace?
+Vznikl správný pracovní výstup bez dodatečné záchrany?
+Nevznikla kvůli učení, kontrole nebo opravě nová zbytečná datová stopa?
+```
+
+Pokud jsou odpovědi kladné, úprava může zůstat v běžné trase. Pokud ne, není potřeba hned otevírat celý onboarding. Nejdřív pojmenujte, který signál selhal.
+
+### Vyberte normální použití, ne ideální test
+
+Ověření má proběhnout ve skutečném pracovním cyklu. Ideální test, kde autor změny sedí vedle nového člověka a průběžně vysvětluje, často potvrdí jen to, že autor umí vysvětlovat. To není totéž jako použitelná trasa.
+
+Vhodné ověření:
+
+- probíhá při běžném úkolu, který by se dělal i bez kontroly;
+- používá stejnou šablonu, checklist nebo pracovní místo jako reálný proces;
+- nespoléhá na to, že autor změny bude nablízku;
+- sleduje výstup a trasu, ne osobní tempo člověka;
+- zapisuje jen nutné závěry, ne detailní pozorování chování;
+- má předem dané rozhodnutí, co se stane po ověření.
+
+Nevhodné ověření:
+
+```text
+Uděláme speciální schůzku, kde novému člověku vše ukážeme, a pak se zeptáme, jestli je to jasné.
+```
+
+Lepší ověření:
+
+```text
+Při dalším běžném předání zákaznického portálu nový delivery specialista použije aktualizovanou předávací šablonu bez asistence autora změny. Po odeslání zkontrolujeme, jestli e-mail obsahoval bezpečnou stavovou větu, odkaz a další krok bez screenshotu.
+```
+
+Rozdíl je důležitý. První varianta měří spokojenost se školením. Druhá varianta měří, jestli pracovní trasa nese správné rozhodnutí.
+
+### Vraťte se ke změnové větě
+
+Před ověřením znovu otevřete změnovou větu z Přílohy LW. Pokud ji nikdo nedokáže najít nebo přečíst za minutu, už samotné ověření ukazuje problém: změna nemá dostatečně jasnou stopu.
+
+Minimum pro ověření:
+
+```text
+Upravovali jsme:
+Protože:
+Správný výstup měl být:
+Ověřujeme při:
+Privacy-first podmínka:
+```
+
+Příklad:
+
+```text
+Upravovali jsme: předávací šablonu pro první zákaznický portál.
+Protože: nový člověk neuměl nahradit screenshot bezpečnou stavovou větou.
+Správný výstup měl být: e-mail s odkazem, stavem a dalším krokem bez kopie zákaznických dat.
+Ověřujeme při: dalším běžném předání portálu.
+Privacy-first podmínka: nevznikne screenshot, export ani osobní poznámka s reálnými údaji.
+```
+
+Bez tohoto návratu se ověření snadno rozpadne na obecné dojmy: "asi lepší", "pořád trochu nejasné", "ještě bychom to měli doladit". Dojmy mohou být užitečné, ale rozhodnutí potřebuje konkrétnější jazyk.
+
+### Sledujte cestu k rozhodnutí
+
+Při ověření není potřeba zaznamenávat každý krok. Stačí zjistit, jestli člověk potkal správnou oporu ve správném místě.
+
+Sledujte čtyři momenty:
+
+```text
+Start:
+Kde člověk úkol začal?
+
+Nalezení:
+Našel upravené místo bez externí nápovědy?
+
+Rozhodnutí:
+Použil upravené pravidlo, příklad nebo šablonu?
+
+Výstup:
+Vznikl pracovní výsledek, který odpovídá původnímu záměru?
+```
+
+Příklad zdravého průchodu:
+
+```text
+Start: úkol "Připravit předávací e-mail".
+Nalezení: člověk otevřel šablonu z onboardingového checklistu.
+Rozhodnutí: použil syntetickou stavovou větu místo screenshotu.
+Výstup: zákazník dostal odkaz, stav a další krok bez kopie dat.
+```
+
+Příklad varovného průchodu:
+
+```text
+Start: úkol "Připravit předávací e-mail".
+Nalezení: člověk otevřel starou kopii šablony z osobní složky.
+Rozhodnutí: pravidlo v nové šabloně vůbec nepotkal.
+Výstup: e-mail prošel až po ruční opravě leadem.
+```
+
+V druhém případě není hlavní problém ve znění pravidla. Problém je v tom, že stará cesta pořád žije.
+
+### Rozlišujte tři typy selhání
+
+Když ověření nevyjde, nepište automaticky "onboarding selhal". To je moc velká věta. Většinou selhala jedna část trasy.
+
+```text
+Selhání nalezení:
+Člověk se k upravenému místu nedostal.
+
+Selhání pochopení:
+Člověk upravené místo našel, ale nepochopil rozhodnutí.
+
+Selhání výstupu:
+Člověk rozhodnutí pochopil, ale šablona nebo proces stále vedly ke špatnému výsledku.
+```
+
+Příklady:
+
+```text
+Nalezení: odkaz na novou šablonu je v checklistu, ale onboardingový úkol stále míří na starou wiki stránku.
+Pochopení: šablona obsahuje bezpečnou větu, ale není jasné, kdy použít variantu pro interní a kdy pro zákaznický portál.
+Výstup: člověk použil správnou větu, ale formulář pořád vyžaduje přiložení ukázky obrazovky.
+```
+
+Každý typ selhání vede k jiné další úpravě. U nalezení opravte trasu. U pochopení opravte příklad nebo rozhodovací otázku. U výstupu opravte pracovní artefakt, který nutí člověka obejít pravidlo.
+
+### Privacy-first kontrola skutečné stopy
+
+Ověření úpravy nesmí vytvořit větší datovou stopu než původní problém. To je častá past. Tým chce zlepšit onboarding, a tak začne sbírat screenshoty, nahrávky obrazovky, kopie e-mailů a osobní poznámky z průchodu. Výsledkem je možná lepší dokumentace, ale horší datová hygiena.
+
+Při ověření stačí zapsat stav, ne celý důkazní materiál.
+
+Dobře:
+
+```text
+Předávací e-mail byl odeslán bez screenshotu. Šablona byla nalezena z onboardingového checklistu. Není potřeba ukládat kopii zákaznického e-mailu.
+```
+
+Rizikově:
+
+```text
+Uložíme screenshot celé přípravy, kopii odeslaného e-mailu a poznámky k tomu, kde se nový člověk zasekl.
+```
+
+Privacy-first ověření kontroluje:
+
+- nevznikl screenshot se zákaznickými údaji;
+- nevznikl export jen kvůli kontrole;
+- kopie e-mailu nebo ticketu není uložená mimo běžný systém;
+- poznámka z ověření nehodnotí člověka, ale trasu;
+- příklad v dokumentaci je syntetický nebo bezpečně anonymizovaný;
+- po ověření se mažou dočasné podklady;
+- závěr je agregovaný a použitelný i bez citlivých detailů.
+
+Codyho komentář: dobrý onboarding nepotřebuje složku "důkazy, že se někdo učil". Potřebuje trasu, která vede k dobrému výstupu, a krátký záznam, co se má příště stát. Čím méně šuplíků s dočasnými podklady, tím méně budoucích překvapení.
+
+### Rozhodnutí po ověření
+
+Po ověření zvolte jeden ze čtyř stavů. Stav musí být dost konkrétní, aby podle něj šlo udělat další krok.
+
+```text
+Potvrdit:
+Úprava byla nalezena, použita a vedla ke správnému výstupu bez nové zbytečné datové stopy.
+
+Doladit:
+Úprava pomohla, ale jeden detail ještě brání plynulému použití.
+
+Přesunout:
+Znění je v pořádku, ale pravidlo je na špatném místě.
+
+Znovuotevřít trasu:
+Ověření ukázalo, že problém není drobná úprava, ale širší rozpad pracovního toku.
+```
+
+Příklady rozhodnutí:
+
+```text
+Potvrdit: nová šablona byla použita bez asistence a výstup splnil privacy-first podmínku.
+
+Doladit: šablona pomohla, ale chybí rozlišení mezi interním a zákaznickým portálem.
+
+Přesunout: text pravidla je dobrý, ale nový člověk otevřel nejdřív issue template, ne wiki stránku.
+
+Znovuotevřít trasu: existují tři paralelní předávací šablony a tým neví, která je kanonická.
+```
+
+Stav `Znovuotevřít trasu` používejte opatrně. Je důležitý, ale drahý. Ne každý nepohodlný detail je důvod k novému projektu.
+
+### Karta ověření úpravy
+
+Použijte jednu kartu. Má zachytit rozhodnutí, ne vytvářet auditní román.
+
+```text
+Ověřovaná úprava:
+Původní nález:
+Normální použití:
+Kdo trasu použil: role, ne osobní hodnocení
+Start pracovního toku:
+Nalezení upraveného místa: ano / částečně / ne
+Použití pravidla nebo šablony: ano / částečně / ne
+Výstup odpovídal záměru: ano / částečně / ne
+Privacy-first stopa: čistá / drobný úklid / problém
+Co jsme nemuseli zachraňovat:
+Co zůstalo jako tření:
+Rozhodnutí: potvrdit / doladit / přesunout / znovuotevřít trasu
+Další krok:
+Co mažeme nebo zkracujeme:
+Vlastník:
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Ověřovaná úprava: syntetické stavové věty v předávací šabloně.
+Původní nález: nový člověk neuměl nahradit screenshot bezpečnou větou.
+Normální použití: první předání zákaznického portálu.
+Kdo trasu použil: nový delivery specialista.
+Start pracovního toku: onboardingový úkol "Připravit předávací e-mail".
+Nalezení upraveného místa: ano.
+Použití pravidla nebo šablony: ano.
+Výstup odpovídal záměru: ano.
+Privacy-first stopa: čistá.
+Co jsme nemuseli zachraňovat: lead nemusel přepisovat e-mail ani mazat screenshot.
+Co zůstalo jako tření: není jasné, kdy přidat technický kontakt do kopie.
+Rozhodnutí: potvrdit.
+Další krok: ponechat šablonu v běžné trase, technický kontakt řešit samostatně mimo tuto úpravu.
+Co mažeme nebo zkracujeme: dočasnou poznámku z ověření zkrátit na tento stav.
+Vlastník: delivery lead.
+Datum uzavření: po prvním předání.
+```
+
+### Mini workshop na 15 minut
+
+Vezměte jednu úpravu trasy a ověřte ji podle reálného použití.
+
+1. Najděte původní změnovou větu.
+2. Vyberte normální pracovní průchod, který už proběhl nebo probíhá.
+3. Zapište start, nalezení, rozhodnutí a výstup.
+4. Určete, jestli selhalo nalezení, pochopení nebo výstup.
+5. Zkontrolujte skutečnou datovou stopu ověření.
+6. Zvolte stav `Potvrdit`, `Doladit`, `Přesunout` nebo `Znovuotevřít trasu`.
+7. Zapište jeden další krok.
+8. Smažte nebo zkraťte dočasné podklady z ověření.
+
+Výstup:
+
+```text
+Jedna úprava onboardingové trasy je ověřená po normálním použití a má jasné rozhodnutí, další krok a privacy-first uzavření podkladů.
+```
+
+### Checklist kapitoly
+
+- Ověřovali jste úpravu při normálním použití, ne při umělém testu?
+- Vrátili jste se k původní změnové větě?
+- Je jasné, jaký správný výstup měl vzniknout?
+- Sledujete trasu a výstup, ne osobní výkon nového člověka?
+- Zapsali jste start, nalezení, rozhodnutí a výstup?
+- Rozlišili jste selhání nalezení, pochopení a výstupu?
+- Nepřidali jste kvůli ověření screenshoty, exporty nebo kopie e-mailů?
+- Je poznámka z ověření agregovaná a bez zbytečných osobních detailů?
+- Zvolili jste jeden ze stavů `Potvrdit`, `Doladit`, `Přesunout`, `Znovuotevřít trasu`?
+- Má rozhodnutí jeden další krok, ne seznam přání?
+- Jsou dočasné podklady smazané, zkrácené nebo přesunuté do kanonického záznamu?
+- Je jasné, kdo uzavírá ověření a kdy?
+- Pokud úprava fungovala, nepřidáváte další kontrolní vrstvu jen ze zvyku?
+- Pokud nefungovala, víte, které nejbližší místo trasy opravit?
+
+Ověření úpravy onboardingové trasy drží tým při zemi. Neptá se, jestli dokumentace vypadá lépe. Ptá se, jestli člověk v reálné práci našel správnou oporu, udělal správné rozhodnutí a nezanechal za sebou zbytečná data. To je malý, ale poctivý test kvality systému.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LX o ověření úpravy onboardingové trasy po dalším normálním použití: výběr reálného průchodu, návrat ke změnové větě, sledování startu/nalezení/rozhodnutí/výstupu, rozlišení selhání nalezení/pochopení/výstupu, privacy-first kontrola skutečné stopy, rozhodovací stavy, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LW o převodu nálezu z běžného onboardingového rytmu do jedné úpravy trasy: výběr jednoho nálezu, změnová věta, nejbližší místo rozhodnutí, typy textová/polohová/rolová/šablonová/datová úprava, privacy-first dopad, ověření při dalším normálním použití, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LV o kontrole běžného onboardingového rytmu po prvních nástupech: malé kontrolní okno, sledování rytmu místo výkonu člověka, signály nalezení/použití/výsledku/datové stopy, tření trasy/pochopení/provozu, stavy rytmu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LU o uzavření stabilizované opravy onboardingového pravidla do běžného rytmu: vstupní stavy, přesun do existujícího onboardingového rytmu, mapa onboardingu, zavření speciální evidence, návratový signál bez dohledu nad lidmi, privacy-first uzavření, uzavírací karta, mini workshop a checklist.
