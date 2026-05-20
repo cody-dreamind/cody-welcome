@@ -93337,8 +93337,249 @@ Onboardingové pravidlo má jednu hotovou opravu v místě práce, uklizenou dat
 
 Oprava onboardingového pravidla po první kontrole je místo, kde se dokumentace mění v učení systému. Nejde o perfektní text. Jde o to, aby další člověk našel pravidlo blíž své práci, pochopil ho rychleji a nevytvořil kvůli němu zbytečnou datovou stopu. Malá hotová oprava tady poráží velkou ambici skoro pokaždé.
 
+## Příloha LR: Ověření opraveného onboardingového pravidla po dalším použití
+
+Opravené onboardingové pravidlo je dobrý mezikrok, ale ještě není důkazem. Důkaz vzniká až při dalším normálním použití: člověk jde stejnou nebo podobnou pracovní cestou, narazí na opravené místo a původní tření se buď zmenší, nebo se znovu ukáže. Teprve potom víte, jestli oprava pomohla práci, nebo jen uklidnila dokumentaci.
+
+Tato příloha navazuje na Přílohu LQ. Řeší okamžik, kdy už existuje opravná věta, upravené kanonické místo, uklizené kopie a naplánované ověření. Cíl je jednoduchý: ověřit jednu opravu v reálném použití a rozhodnout, jestli ji ponechat, ještě jednou doladit, nebo pravidlo vrátit do širší revize.
+
+Ověření má odpovědět na čtyři otázky:
+
+```text
+Našel člověk opravené pravidlo bez objížďky?
+Pochopil rozhodnutí rychleji než minule?
+Vznikl správný výstup bez zbytečné pomoci?
+Nevznikla nová datová stopa kvůli učení nebo kontrole?
+```
+
+Pokud ano, oprava splnila účel. Pokud ne, neznamená to automaticky selhání člověka ani pravidla. Znamená to, že systém ještě nepostavil dostatečně krátkou cestu od situace k rozhodnutí.
+
+### Vraťte se k opravné větě
+
+Nezačínejte ověření obecnou otázkou, jestli se onboarding zlepšil. To je moc široké. Vraťte se k opravné větě z minulé přílohy a ověřujte přesně to, co měla změnit.
+
+Příklad opravné věty:
+
+```text
+Protože nový člověk našel pravidlo až v onboardingovém dokumentu, vložíme krátkou poznámku do šablony předávacího e-mailu tak, aby příště rozhodoval přímo při psaní zprávy.
+```
+
+Z toho plyne ověřovací otázka:
+
+```text
+Našel člověk při dalším předání pravidlo v e-mailové šabloně a použil ho bez hledání v onboardingovém dokumentu?
+```
+
+To je měřitelné bez velké metriky. Stačí sledovat pracovní cestu, výstup a případnou datovou stopu. Když člověk stále otevře onboardingový dokument, oprava možná leží moc nízko v šabloně. Když se zeptá v chatu, chybí příklad nebo hranice výjimky. Když vytvoří screenshot, pravidlo buď nebylo vidět, nebo neumělo nabídnout bezpečnou alternativu.
+
+Dobré ověření je úzké. Neřeší celý onboarding, jen jednu slíbenou změnu.
+
+### Vyberte další normální použití
+
+Ověření má proběhnout při dalším běžném použití pravidla, ne v umělé scéně vytvořené pro review. Pokud pravidlo chrání předávací e-mail, čekejte na další předání. Pokud chrání support makro, ověřujte při dalším podobném support případu. Pokud chrání formulář před sběrem zbytečných údajů, ověřujte při další reálné úpravě formuláře.
+
+Vhodné ověřovací použití:
+
+- stejná role dělá další podobný výstup;
+- nová role používá opravené pravidlo poprvé;
+- pracovní situace má podobné riziko jako minule;
+- výstup má reálný dopad na zákazníka, tým nebo data;
+- člověk může postupovat normálně, bez autora pravidla za zády.
+
+Nevhodné ověřovací použití:
+
+- kontrolor člověka navede krok za krokem;
+- výstup je jen interní cvičení bez skutečného rozhodnutí;
+- situace je tak odlišná, že neověřuje původní opravu;
+- review proběhne pozdě a opírá se jen o vzpomínky;
+- kvůli ověření vzniknou nové kopie zákaznických dat.
+
+Praktická věta:
+
+```text
+Opravu ověřujeme v nejbližší normální situaci, kde by původní tření znovu bolelo, kdyby oprava nefungovala.
+```
+
+### Sledujte rozdíl proti první kontrole
+
+Největší hodnota ověření je v porovnání. Neptáte se jen, jestli výstup dopadl dobře. Ptáte se, jestli se zlepšilo právě to, kvůli čemu oprava vznikla.
+
+Použijte krátké srovnání:
+
+```text
+Minule:
+Oprava:
+Tentokrát:
+Rozdíl:
+```
+
+Vyplněný příklad:
+
+```text
+Minule: člověk našel pravidlo až v onboardingovém dokumentu a ptal se v chatu, jestli může použít screenshot.
+Oprava: poznámka a syntetická stavová věta byly vložené přímo do e-mailové šablony.
+Tentokrát: člověk použil stavovou větu ze šablony, neotevřel onboardingový dokument a neposlal dotaz do chatu.
+Rozdíl: původní polohové tření zmizelo; pravidlo je v místě rozhodnutí.
+```
+
+Tím se z kontroly nestane subjektivní dojem. Vidíte, jestli oprava změnila pracovní chování. Pokud ano, můžete ji stabilizovat. Pokud ne, víte, kde pokračovat.
+
+### Hledejte nové tření, ale neopravujte ho hned všechno
+
+Další použití může ukázat nové tření. To je normální. Po přesunu pravidla do šablony se třeba ukáže, že příklad je moc dlouhý. Po doplnění schvalovatele se ukáže, že lidé nevědí, kdy jde o incidentní výjimku. Po odstranění screenshotu ze školení se ukáže, že syntetický příklad chybí u druhé role.
+
+Nesnažte se z toho udělat okamžitý balík dalších oprav. Nejdřív rozlišujte:
+
+```text
+Původní tření:
+To, kvůli čemu oprava vznikla.
+
+Nové tření:
+Vedlejší slabina, která se ukázala až po opravě.
+
+Okolní problém:
+Něco, co s pravidlem souvisí jen volně: špatná struktura znalostní báze, staré role, nejasný proces předání.
+```
+
+Příklad:
+
+```text
+Původní tření: pravidlo nebylo v e-mailové šabloně.
+Nové tření: stavová věta v šabloně je moc obecná pro technické předání.
+Okolní problém: celý delivery checklist má staré názvy rolí.
+```
+
+Původní tření rozhoduje o stavu opravy. Nové tření může založit další malou úpravu. Okolní problém patří do backlogu nebo širší revize, ne do ověření jedné opravy.
+
+Codyho komentář: ověření opravy je výborný magnet na další "když už jsme u toho" nápady. Některé jsou dobré. Jen nesmí ukrást závěr. Nejdřív uzavřít jednu smyčku, potom si hrát na zahradníka v celém procesu.
+
+### Rozhodněte stav opravy
+
+Po dalším použití stačí čtyři stavy:
+
+```text
+Potvrdit:
+Původní tření zmizelo nebo se zmenšilo natolik, že pravidlo funguje v běžné práci.
+
+Drobně doladit:
+Oprava pomohla, ale chybí jedna malá věta, příklad nebo hranice.
+
+Vrátit k opravě:
+Původní tření zůstalo, ale příčina je stále úzká a dá se řešit další konkrétní změnou.
+
+Znovuotevřít pravidlo:
+Oprava ukázala, že problém není jen v onboardingu, ale v samotném pravidle, procesu nebo odpovědnostech.
+```
+
+Příklady:
+
+```text
+Potvrdit: člověk pravidlo našel v šabloně a správně použil stavovou větu.
+Drobně doladit: pravidlo našel, ale syntetický příklad potřebuje jednu variantu pro technické předání.
+Vrátit k opravě: poznámka je v šabloně, ale člověk ji při psaní běžně nevidí.
+Znovuotevřít pravidlo: lidé neumí rozlišit běžné předání od incidentu, takže pravidlo potřebuje jasnější rozhodovací strom.
+```
+
+Stav `Potvrdit` neznamená, že onboarding je dokonalý. Znamená, že konkrétní oprava splnila konkrétní slib. To je dost. Systémy se zlepšují právě takhle: malými uzavřenými smyčkami, ne nekonečným přepisem všeho.
+
+### Privacy-first ověření opravy
+
+Ověření nesmí zhoršit datovou stopu. U onboardingových pravidel je to obzvlášť důležité, protože lidé mají tendenci dokazovat, že něco funguje, pomocí screenshotů, přeposlaných e-mailů nebo kopií reálných výstupů. Většinou stačí agregovaný záznam.
+
+Kontrolní otázky:
+
+- Stačí pro ověření popis pracovní cesty místo kopie výstupu?
+- Neobsahuje ověřovací karta jméno zákazníka, pokud není nutné?
+- Nevznikl nový screenshot jen proto, aby někdo ukázal, že screenshot nevznikl?
+- Pokud vznikl dočasný podklad, má účel, vlastníka a datum smazání?
+- Byly staré kopie pravidla po opravě skutečně odstraněné nebo nahrazené odkazem?
+- Nešíří se ověřovací závěr do kanálu, kde ho nepotřebují lidé mimo danou roli?
+
+Dobře zapsaný privacy-first závěr může vypadat takto:
+
+```text
+Ověření proběhlo podle pracovní cesty a výsledné stavové věty. Nebyl uložen screenshot, export ani kopie zákaznického e-mailu. Karta používá obecný popis situace bez identifikace zákazníka.
+```
+
+To je dost informací pro systémové učení a minimum informací pro budoucí úniky. Hezký kompromis, který vlastně není kompromis, protože práce i soukromí vyhrávají zároveň.
+
+### Ověřovací karta
+
+Použijte krátkou kartu. Má uzavřít jednu opravu a zachytit, co se má stát dál.
+
+```text
+Opravené pravidlo:
+Původní tření:
+Opravná věta:
+Další normální použití:
+Kde člověk pravidlo našel:
+Skutečný výstup:
+Rozdíl proti první kontrole:
+Nové tření:
+Stav opravy: Potvrdit / Drobně doladit / Vrátit k opravě / Znovuotevřít pravidlo
+Privacy-first závěr:
+Další krok:
+Vlastník:
+Datum ověření:
+```
+
+Vyplněný příklad:
+
+```text
+Opravené pravidlo: při předání portálu nepoužívat screenshot zákaznického detailu mimo incidentní režim.
+Původní tření: pravidlo bylo jen v onboardingovém dokumentu, ne v e-mailové šabloně.
+Opravná věta: vložit krátkou poznámku do šablony předávacího e-mailu.
+Další normální použití: další předání pilotního zákazníka.
+Kde člověk pravidlo našel: přímo v předávací šabloně.
+Skutečný výstup: stavová věta, odkaz na portál, žádná příloha.
+Rozdíl proti první kontrole: člověk nehledal v onboardingovém dokumentu a neptal se v chatu.
+Nové tření: technická varianta stavové věty by pomohla u složitějších předání.
+Stav opravy: Drobně doladit.
+Privacy-first závěr: nevznikl screenshot ani export; karta neobsahuje zákaznický detail.
+Další krok: přidat jednu syntetickou technickou variantu stavové věty.
+Vlastník: delivery lead.
+Datum ověření: 2026-05-20.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu opravnou kartu z Přílohy LQ a ověřte ji na dalším normálním použití.
+
+1. Přečtěte původní opravnou větu.
+2. Vyberte reálné použití, které ověřuje stejnou pracovní situaci.
+3. Zapište, kde člověk pravidlo skutečně našel.
+4. Porovnejte výstup s minimálním správným výsledkem.
+5. Popište rozdíl proti první kontrole.
+6. Oddělte původní tření, nové tření a okolní problém.
+7. Rozhodněte stav opravy.
+8. Zapište privacy-first závěr bez zbytečných kopií dat.
+
+Výstup:
+
+```text
+Oprava onboardingového pravidla je ověřená v dalším normálním použití, má jasný stav a jeden konkrétní další krok.
+```
+
+### Checklist kapitoly
+
+- Vrátili jste se k původní opravné větě?
+- Ověřujete konkrétní slib opravy, ne celý onboarding?
+- Proběhlo ověření při dalším normálním použití?
+- Nevedl člověka autor pravidla krok za krokem?
+- Zapsali jste, kde člověk opravené pravidlo skutečně našel?
+- Porovnali jste rozdíl proti první kontrole?
+- Oddělili jste původní tření od nového tření a okolního problému?
+- Rozhodli jste stav `Potvrdit`, `Drobně doladit`, `Vrátit k opravě` nebo `Znovuotevřít pravidlo`?
+- Nepřidali jste při ověření novou kopii zákaznických nebo osobních dat?
+- Stačil agregovaný záznam místo screenshotu, exportu nebo přeposlaného e-mailu?
+- Má případný další krok jednoho vlastníka?
+- Je jasné, kdy se oprava stabilizuje nebo znovu otevře?
+
+Ověření opraveného onboardingového pravidla uzavírá malou učící smyčku. Pravidlo bylo převedené do onboardingu, poprvé použité, opravené a znovu ověřené v práci. To je přesně ten bod, kdy se dá přestat diskutovat o dokumentaci a začít věřit provozu: ne slepě, ale na základě dalšího normálního použití.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LR o ověření opraveného onboardingového pravidla po dalším použití: návrat k opravné větě, výběr normálního použití, porovnání proti první kontrole, třídění původního/nového/okolního tření, stavy opravy, privacy-first ověřovací karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LQ o opravě onboardingového pravidla po první kontrole: opravná věta, typy textová/polohová/rolová/datová oprava, kanonické místo, omezení rozsahu, privacy-first úklid, ověření při dalším použití, opravná karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LP o kontrole onboardingového pravidla po prvním použití: výběr reálného průchodu, cesta k rozhodnutí, minimální správný výstup, stavy Ponechat/Zpřesnit/Přesunout/Znovuotevřít, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LO o převodu uzavřeného pravidla do onboardingu a školení: rozhodnutí místo historie, výběr rolí, místo prvního použití, cvičný průchod, privacy-first školící materiály, aktualizační háček, mini workshop a checklist.
