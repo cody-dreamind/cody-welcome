@@ -92050,8 +92050,256 @@ Kvartální úprava má po prvním normálním použití jasný stav, jednu nava
 
 Ověření po prvním použití chrání kvartální úpravy před dvěma extrémy. První je slepá víra, že změna dokumentu změnila realitu. Druhý je nekonečné ladění, které z malé opravy udělá nový projekt. Dobrý prostředek je jednoduchý: jedna opravná věta, první normální použití, čtyři signály, jeden stav a minimální datová stopa.
 
+## Příloha LL: Stabilizace potvrzené kvartální úpravy do dlouhodobého pravidla
+
+Potvrzená kvartální úprava má za sebou první normální použití. To je dobrý signál, ale ještě to není totéž jako dlouhodobě použitelné pravidlo. Mezi "fungovalo to jednou" a "takhle teď pracujeme" je malý, ale důležitý krok: stabilizace.
+
+Stabilizace neznamená přidat další dokument, ceremonii nebo schvalovací kolečko. Znamená vzít ověřenou změnu, odstranit její přechodovou historii, uložit ji do místa, kde se opravdu používá, a nastavit lehký návrat při další kvartální kontrole. Jinak bude tým za tři měsíce znovu přemýšlet, proč se pravidlo změnilo, která verze platí a jestli stará cesta náhodou nebyla pohodlnější.
+
+Smyslem této přílohy je navázat na Přílohu LK. Pokud ověření skončilo stavem `Potvrdit`, převeďte úpravu do stabilního pravidla. Pokud skončilo stavem `Doladit`, `Přesunout` nebo `Znovuotevřít`, nejdřív dokončete danou akci. Stabilizovat nevyjasněnou změnu je jen rychlejší způsob, jak si zabetonovat nepořádek.
+
+### Stabilizujte jen potvrzenou úpravu
+
+Vstupní brána je jednoduchá. Úprava smí do dlouhodobého pravidla pouze tehdy, když splňuje tři podmínky:
+
+- má původní opravnou větu;
+- prošla prvním normálním použitím;
+- po ověření dostala stav `Potvrdit`.
+
+Nestačí, že se líbila na workshopu. Nestačí, že ji autor považuje za rozumnou. Nestačí ani to, že nikdo neprotestoval. Potřebujete malý důkaz z reálné práce.
+
+Příklad vstupu:
+
+```text
+Opravná věta: v předávacím checklistu má vzniknout stavová věta bez screenshotu zákaznického detailu.
+První použití: předání portálu po pilotní fázi.
+Výsledek: checklist byl nalezen, stavová věta vznikla, screenshot nevznikl.
+Stav: Potvrdit.
+```
+
+To je dostatečné. Stabilizace může začít.
+
+Slabý vstup:
+
+```text
+Úprava: asi už nepotřebujeme screenshoty.
+Ověření: nikdo nic neříkal.
+Stav: vypadá to dobře.
+```
+
+Tady stabilizaci nedělejte. Nejprve doplňte opravnou větu a najděte první skutečné použití. Jinak nevíte, co vlastně stabilizujete.
+
+### Přepište změnovou historii na aktuální pravidlo
+
+Ověřovací karta je užitečná při kontrole, ale nemá zůstat hlavním pracovním textem. Lidé v provozu nepotřebují číst celý příběh změny pokaždé, když mají pravidlo použít. Potřebují jasnou aktuální instrukci.
+
+Změnová historie:
+
+```text
+Po kvartálním přehledu jsme zjistili, že tým při předání často přikládal screenshot zákaznického detailu. Úprava byla ověřena při prvním předání po pilotu a screenshot nevznikl.
+```
+
+Aktuální pravidlo:
+
+```text
+Při předání portálu napište jednu stavovou větu. Nepřikládejte screenshot zákaznického detailu; pokud je potřeba příklad, použijte syntetický vzor ze šablony.
+```
+
+Rozdíl je v pracovním použití. Historie vysvětluje, proč se pravidlo změnilo. Pravidlo říká, co má člověk udělat teď.
+
+Dobrá stabilizace ponechá odkaz na historii jen tam, kde pomáhá vlastníkovi při revizi. Běžného uživatele pravidla tím nezatěžuje.
+
+Praktický postup:
+
+1. Najděte větu, kterou člověk potřebuje v okamžiku práce.
+2. Odstraňte vysvětlování, které patří jen do changelogu.
+3. Přidejte jeden příklad, pokud bez něj vzniká nejistota.
+4. Zapište výjimku jen tehdy, když se skutečně opakuje.
+5. Starou ověřovací kartu přesuňte do revizní historie nebo ji zkraťte na jednu větu.
+
+### Uložte pravidlo do místa práce
+
+Pravidlo je stabilní až tehdy, když je tam, kde se podle něj rozhoduje. Pokud potvrzenou úpravu necháte jen v zápisu z kvartální kontroly, tým ji bude muset pokaždé znovu najít. To není standard. To je archiv s dobrým úmyslem.
+
+Místo práce může být:
+
+- předávací checklist;
+- sales karta;
+- support šablona;
+- runbook;
+- produktový brief;
+- datová mapa;
+- redakční checklist;
+- onboardingový balíček pro roli.
+
+Vyberte jedno kanonické místo. Pokud pravidlo potřebuje být vidět na více místech, neduplikujte celé znění. Použijte krátký odkaz nebo připomínku.
+
+Příklad:
+
+```text
+Kanonické místo: delivery checklist.
+Připomínka v sales kartě: při slibu výstupu nepředpokládat screenshoty, viz delivery checklist.
+```
+
+Tím se snižuje riziko, že za pár měsíců budou existovat dvě podobné, ale ne stejné verze. Dvě skoro stejné verze jsou horší než jedna nedokonalá. Jedna se dá opravit. Dvě se začnou hádat v hlavách lidí.
+
+### Zavřete přechodové poznámky
+
+Každá úprava při ověřování vytváří dočasné stopy: poznámky, komentáře, pracovní kopie, připomínky ve vlákně, staré odkazy, návrhy znění. Po stabilizaci mají zmizet nebo dostat jasný stav. Jinak budou později vypadat jako stále platná práce.
+
+Zavřete hlavně:
+
+- návrhové komentáře u původního pravidla;
+- staré kopie checklistů;
+- dočasné tabulky s ověřením;
+- chatové připomínky obsahující konkrétní zákaznický kontext;
+- screenshoty nebo exporty, pokud při ověření přece jen vznikly;
+- odkazy na starý postup;
+- úkoly bez vlastníka, které už stabilizace nahrazuje.
+
+Stačí jednoduché pravidlo:
+
+```text
+Po stabilizaci zůstává jedna aktuální verze pravidla a jedna krátká revizní věta. Všechno ostatní se smaže, archivuje nebo označí jako nahrazené.
+```
+
+Tady se vyplatí být tvrdý. Ne proto, že pořádek v dokumentech je estetický sport, ale protože staré poznámky umí vyhrát nad novým pravidlem čistě tím, že se objeví ve vyhledávání.
+
+### Nastavte návrat při příštím kvartálním přehledu
+
+Stabilizovaná úprava nemá být kontrolovaná každý týden. To by z kvartální změny udělalo položku, která neustále bere pozornost místo toho, aby tiše pomáhala v provozu. Zároveň nesmí zmizet bez dalšího pohledu.
+
+Nastavte jeden lehký návrat:
+
+```text
+Při příštím kvartálním přehledu zkontrolovat, zda se nevrátila stará cesta se screenshoty.
+```
+
+Nebo:
+
+```text
+Při další kvartální kontrole ověřit, jestli pravidlo lidé hledají v delivery checklistu, ne ve staré sales kartě.
+```
+
+Návrat má být konkrétní, ale úzký. Nekontrolujte znovu celý proces. Sledujte jen to riziko, kvůli kterému stabilizovaná úprava vznikla.
+
+Dobré návratové otázky:
+
+- Vrátila se stará datová stopa?
+- Hledají lidé pravidlo na správném místě?
+- Nevznikla paralelní kopie?
+- Je výjimka stále výjimkou, nebo už se z ní stal nový standard?
+- Nepřestalo pravidlo dávat smysl kvůli změně procesu?
+
+Špatné návratové otázky:
+
+- Funguje celý delivery proces ideálně?
+- Máme přepsat všechny šablony?
+- Měli bychom udělat nový audit dokumentace?
+- Co všechno by šlo ještě zlepšit?
+
+To poslední je samozřejmě lákavé. Také je to nenápadná díra do kalendáře.
+
+### Privacy-first stabilizace
+
+Privacy-first stabilizace má dvě části. První je obsah pravidla: nesmí vracet zbytečný sběr, kopírování nebo sdílení dat. Druhá je úklid po samotné změně: ověřovací materiály nesmí zůstat ležet jen proto, že vznikly při dobré práci.
+
+Praktická kontrola:
+
+- Aktuální pravidlo používá minimální data pro rozhodnutí.
+- Příklad je syntetický nebo anonymizovaný.
+- Ověřovací záznam neobsahuje osobní údaje, pokud nejsou nezbytné.
+- Dočasné podklady mají jasný stav `smazat`, `archivovat` nebo `nahrazeno`.
+- Přístup k revizní historii mají jen lidé, kteří ji opravdu potřebují.
+- Retence ověřovacích poznámek není delší než jejich účel.
+- Staré exporty a screenshoty nejsou uchované "pro jistotu".
+- Dodavatel ani externí nástroj nedostal nová data jen kvůli stabilizaci.
+
+Příklad stabilizační poznámky:
+
+```text
+Pravidlo stabilizováno v delivery checklistu. Ověřovací karta zkrácena na anonymní revizní větu. Pracovní poznámky ze zákaznického předání smazány po uzavření kontroly.
+```
+
+Codyho komentář: privacy-first provoz často nevyhrává velkými prohlášeními, ale těmito malými úklidy. Nikdo netleská, když smažete dočasnou tabulku. Což je škoda, ale také známka dobře udělané práce. Nejlepší datová stopa je často ta, která po splnění účelu slušně odejde.
+
+### Stabilizační karta
+
+Použijte krátkou kartu. Má potvrdit, že úprava přešla z režimu ověření do režimu běžného pravidla.
+
+```text
+Stabilizovaná úprava:
+Původní opravná věta:
+Stav po ověření:
+Aktuální znění pravidla:
+Kanonické místo:
+Místa s krátkou připomínkou:
+Co bylo nahrazeno:
+Co bylo smazáno nebo archivováno:
+Privacy-first poznámka:
+Návrat při příštím kvartálním přehledu:
+Vlastník:
+Datum stabilizace:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizovaná úprava: stavová věta místo screenshotu při předání portálu.
+Původní opravná věta: předání má vysvětlit stav bez exportu zákaznického detailu.
+Stav po ověření: Potvrdit.
+Aktuální znění pravidla: při předání napište jednu stavovou větu; screenshot zákaznického detailu nepřikládejte.
+Kanonické místo: delivery checklist.
+Místa s krátkou připomínkou: sales karta obsahuje odkaz na delivery checklist.
+Co bylo nahrazeno: starý řádek "přiložit screenshot stavu".
+Co bylo smazáno nebo archivováno: pracovní poznámky k ověření smazány, revizní věta ponechána v changelogu.
+Privacy-first poznámka: šablona používá syntetický příklad, žádná zákaznická data.
+Návrat při příštím kvartálním přehledu: zkontrolovat návrat screenshotů v předáních.
+Vlastník: delivery lead.
+Datum stabilizace: 2026-05-20.
+```
+
+Karta nemusí být uložená jako samostatný dokument. Často stačí vložit ji do revizního záznamu k pravidlu. Důležité je, aby po ní šlo za tři měsíce pochopit, co platí a proč.
+
+### Mini workshop na 12 minut
+
+Vezměte jednu kvartální úpravu se stavem `Potvrdit`.
+
+1. Přečtěte původní opravnou větu.
+2. Zkontrolujte, že první normální použití opravdu proběhlo.
+3. Přepište ověřovací historii do aktuálního znění pravidla.
+4. Určete jedno kanonické místo práce.
+5. Označte staré kopie, odkazy a poznámky jako nahrazené, smazané nebo archivované.
+6. Zapište jednu privacy-first poznámku k datové stopě.
+7. Nastavte úzkou návratovou otázku pro příští kvartální přehled.
+8. Uložte stabilizační kartu nebo její zkrácenou verzi.
+
+Výstup:
+
+```text
+Potvrzená kvartální úprava je převedená do aktuálního pravidla, má jedno kanonické místo, uklizenou přechodovou stopu a jednu návratovou otázku pro další kvartál.
+```
+
+### Checklist kapitoly
+
+- Má úprava stav `Potvrdit` po prvním normálním použití?
+- Víte, jaká byla původní opravná věta?
+- Přepsali jste změnovou historii do aktuální pracovní instrukce?
+- Zůstala historie jen tam, kde pomáhá revizi?
+- Má pravidlo jedno kanonické místo?
+- Jsou případné připomínky na jiných místech jen krátké odkazy, ne duplicitní verze?
+- Zavřeli jste staré kopie, komentáře a odkazy?
+- Smazali nebo archivovali jste dočasné ověřovací podklady?
+- Nevznikla při stabilizaci nová zbytečná datová stopa?
+- Používá pravidlo syntetické nebo anonymizované příklady, pokud jde o citlivý kontext?
+- Má stabilizovaná úprava jednu návratovou otázku pro příští kvartální přehled?
+- Ví vlastník, kde pravidlo žije a kdy se k němu tým vrátí?
+
+Stabilizace je tichá práce. Neprodává se dobře v prezentaci a málokdy z ní vznikne velké "aha". Ale bez ní se ověřené úpravy pomalu mění v hromadu historických poznámek. Dobré pravidlo má žít v místě práce, mít krátkou aktuální větu, uklizenou stopu a lehký návrat v rytmu, který už tým používá.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LL o stabilizaci potvrzené kvartální úpravy do dlouhodobého pravidla: vstupní brána pro stav Potvrdit, přepis změnové historie na aktuální instrukci, kanonické místo práce, zavření přechodových poznámek, návratová otázka pro další kvartál, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LK o ověření kvartální úpravy po prvním normálním použití: návrat k opravné větě, výběr skutečného průchodu, čtyři signály, rozlišení typu problému, rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LJ o převodu nálezu z kvartálního přehledu do jedné úpravy pravidla: výběr podle opakované ceny, opravná věta, oprava místa rozhodnutí, zavření staré cesty, omezení rozsahu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-19: Doplněna Příloha LI o první kvartální kontrole pravidel po přesunu z měsíční péče: kvartální otázka, pět signálů, stavy kontroly, nejmenší oprava místa selhání, privacy-first kontrola, karta, mini workshop a checklist.
