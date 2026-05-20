@@ -95401,8 +95401,255 @@ Jedna ověřená úprava onboardingové trasy je přepsaná do kanonického mís
 
 Stabilizace potvrzené úpravy je tiché dokončení práce. Neprodlužuje opravu, ale uklízí ji do systému. Díky tomu se další člověk nemusí učit historii rozhodnutí; potká rovnou lepší trasu, bezpečnější příklad a méně datového nepořádku.
 
+## Příloha LZ: Kontrola stabilizované onboardingové trasy po prvním běžném cyklu
+
+Stabilizovaná onboardingová trasa se má ověřit v běžném provozu, ne na slavnostně připraveném průchodu. Teprve první normální cyklus ukáže, jestli změna opravdu žije v systému: nový člověk ji najde, použije, odevzdá správný výstup a nevznikne kolem toho nová sada dočasných poznámek. Pokud kontrolu přeskočíte, může stabilizace vypadat hotově jen proto, že si ji pamatuje autor změny.
+
+Tato příloha navazuje na Přílohu LY. Vstupem je stabilizovaná úprava onboardingové trasy, která už má kanonické místo, zavřené staré cesty a jeden návratový signál. Cílem není znovu řešit celou úpravu. Cílem je zjistit, jestli běžný onboardingový cyklus prošel bez ruční záchrany a bez nového datového nepořádku.
+
+Kontrola má odpovědět na tři otázky:
+
+```text
+Našel člověk správnou trasu bez osobního navádění?
+Vznikl minimální správný výstup bez návratu ke staré cestě?
+Zůstala datová stopa stejně malá nebo menší než před stabilizací?
+```
+
+Když jsou odpovědi jasné, trasa může zůstat v běžném rytmu. Když nejsou, neotevírejte celé téma znovu. Najděte nejbližší místo selhání a opravte jen to.
+
+### Vyberte jeden normální cyklus
+
+Kontrola po stabilizaci nemá být plošné hodnocení všech nástupů. Vyberte jeden skutečný onboardingový cyklus, ve kterém se stabilizovaná trasa použila přirozeně. Ideálně jde o situaci, kde nový člověk řešil reálný úkol, ne cvičení pro kontrolora.
+
+Dobré kontrolní okno:
+
+- první předání, ve kterém měl člověk použít aktualizovanou šablonu;
+- první samostatné založení zákaznického prostoru podle nové trasy;
+- první předání přístupu, kde se mělo použít nové privacy-first pravidlo;
+- první běžný úkol v roli, pro kterou byla trasa upravená;
+- první situace, kdy lead nebyl u každého kroku osobně.
+
+Špatné kontrolní okno:
+
+```text
+Vybrali jsme demo průchod, všichni věděli, co testujeme, a autor změny seděl vedle člověka.
+```
+
+Takový test může být užitečný při ověřování opravy, ale po stabilizaci už potřebujete obyčejný provoz. Jinak měříte schopnost týmu předvést správné chování, ne schopnost systému vést práci.
+
+### Sledujte cestu, ne člověka
+
+Kontrola onboardingové trasy nesmí sklouznout k mikromanagementu nového člověka. Sledujete systém: jestli dokumentace, šablony, odkazy a příklady vedou ke správnému rozhodnutí. Člověk je zdroj signálu, ne objekt dozoru.
+
+Sledujte praktické body:
+
+- kde člověk začal;
+- jestli se dostal na kanonickou šablonu nebo playbook;
+- kde se zastavil;
+- jakou otázku musel položit;
+- jestli výstup odpovídal minimálnímu správnému výsledku;
+- jestli se objevila stará cesta, stará kopie nebo starý příklad;
+- jestli bylo potřeba uložit screenshot, export nebo reálná zákaznická data.
+
+Zápis držte krátký:
+
+```text
+Člověk našel checklist, ale odkaz v bodě 3 vedl na starou ukázku. Výstup byl správný až po ručním upozornění. Datová stopa zůstala čistá.
+```
+
+To je použitelný signál. Nepotřebujete přepisovat celý průchod minutu po minutě, hodnotit tempo práce ani sbírat osobní poznámky.
+
+### Porovnejte výstup s minimem
+
+Před kontrolou si připomeňte, jak vypadá minimální správný výstup. Bez toho se kontrola snadno změní v pocitovou debatu: někdo chtěl víc detailů, někdo méně, někdo by to napsal jinak. Onboardingová trasa ale nemá vyrábět identické lidi. Má pomoci bezpečně dokončit práci.
+
+Minimum popište věcně:
+
+```text
+Výstup obsahuje stav, další krok, vlastníka a bezpečný odkaz.
+Výstup neobsahuje screenshot, export ani reálná zákaznická data mimo nutný systém.
+Zákazník ví, co se stane dál.
+Interní tým ví, kde pokračovat.
+```
+
+Potom porovnejte skutečný výstup:
+
+- co je splněné;
+- co chybí;
+- co je navíc a vytváří riziko;
+- co vzniklo jen díky ruční pomoci;
+- co by zákazník nebo interní tým nepochopil;
+- co by bylo drahé opakovat při dalším nástupu.
+
+Příklad:
+
+```text
+Minimum: bezpečná stavová věta, odkaz na portál, další krok, vlastník.
+Skutečnost: věta a vlastník jsou správně, ale odkaz vedl na interní preview místo zákaznického portálu. Screenshot nevznikl. Problém je v příkladu odkazu ve šabloně, ne v celé trase.
+```
+
+Tím se kontrola zúží na opravitelné místo. Žádné velké divadlo, jen správně položený prst na mapě.
+
+### Hledejte návrat staré cesty
+
+Po stabilizaci je nejdůležitější otázka, jestli se do provozu nevrací stará cesta. Stará šablona, starý odkaz nebo starý zvyk často přežije déle než samotné rozhodnutí. Ne proto, že by tým sabotoval změnu. Prostě proto, že stará věc byla dostupnější.
+
+Signály návratu:
+
+- někdo zkopíroval starou šablonu z osobní složky;
+- onboardingový checklist vede na správné místo, ale interní wiki pořád nabízí starý příklad;
+- lead poslal člověku starý postup v chatu;
+- zákaznický výstup znovu obsahuje screenshot;
+- nový člověk neví, která verze dokumentu je kanonická;
+- kvůli nejistotě vzniká nová kontrolní tabulka;
+- stará cesta je rychlejší než nová, takže se tiše vrací.
+
+Návrat staré cesty řešte jako problém dostupnosti a jasnosti, ne jako problém disciplíny.
+
+Praktická oprava:
+
+```text
+Stará wiki stránka dostane nahoře jednoznačnou poznámku "Nahrazeno šablonou X" a všechny onboardingové odkazy se převedou na kanonickou šablonu.
+```
+
+To je lepší než připomínka lidem, aby "používali správnou verzi". Systém má správnou verzi nabídnout v okamžiku práce.
+
+### Rozhodněte stav trasy po cyklu
+
+Po kontrole vyberte jeden ze čtyř stavů. Nepište dlouhou esej, pokud stačí pracovní rozhodnutí.
+
+```text
+Ponechat:
+Trasa fungovala v běžném cyklu, výstup byl správný a datová stopa zůstala čistá.
+
+Zpřesnit:
+Trasa fungovala, ale jedno místo vytvářelo zbytečnou otázku nebo malou odchylku.
+
+Přesunout:
+Pravidlo je správné, ale je uložené na špatném místě nebo příliš pozdě v toku.
+
+Znovuotevřít:
+Stabilizace neunesla běžný cyklus. Výstup je špatný, stará cesta se vrátila nebo vzniká nové privacy-first riziko.
+```
+
+Stav `Zpřesnit` je nejběžnější a nemá být drama. Znamená jen, že systém potřebuje malou opravu. Stav `Znovuotevřít` používejte tehdy, když se ukáže, že původní změna neřešila správný problém nebo že vedla k horšímu provoznímu chování.
+
+Rozhodovací věta:
+
+```text
+Po prvním běžném cyklu trasu ponecháváme, ale zpřesníme příklad odkazu v předávací šabloně, protože nový člověk sáhl po interním preview.
+```
+
+Tahle věta má víc hodnoty než dlouhá retrospektiva bez dalšího kroku.
+
+### Privacy-first kontrola po cyklu
+
+Onboarding často pracuje s přístupy, zákaznickými názvy, interními odkazy, screenshoty, ukázkami a poznámkami. Proto musí kontrola po cyklu ověřit nejen kvalitu výstupu, ale i datovou stopu.
+
+Zkontrolujte:
+
+- nevznikly nové screenshoty bez provozního důvodu;
+- reálná zákaznická data nejsou použitá jako výukový příklad;
+- dočasné exporty byly smazané nebo zkrácené;
+- přístupy byly předané jen přes schválený kanál;
+- osobní poznámky neobsahují citlivé detaily;
+- kontrolní zápis popisuje stav systému, ne výkon člověka;
+- případné chyby jsou anonymizované nebo synteticky přepsané;
+- kanonická trasa pořád vede k datovému minimu.
+
+Privacy-first výsledek může znít jednoduše:
+
+```text
+Onboarding proběhl bez screenshotu, bez exportu zákaznických dat a bez nové osobní evidence. Zůstává jen krátký kontrolní záznam a oprava odkazu v šabloně.
+```
+
+To je přesně ten typ nudné věty, který má provoz rád. A když provoz miluje nudu, bezpečnostní incidenty mají horší společenský život.
+
+### Kontrolní karta po prvním cyklu
+
+Použijte jednu kartu. Nemá sledovat člověka, ale stav trasy.
+
+```text
+Stabilizovaná trasa:
+Kanonické místo:
+Kontrolovaný cyklus:
+Kdo trasu použil:
+Jak začal:
+Našel správné místo bez navedení:
+Minimální správný výstup:
+Skutečný výstup:
+Kde vzniklo tření:
+Vrátila se stará cesta:
+Datová stopa po cyklu:
+Rozhodnutí: Ponechat / Zpřesnit / Přesunout / Znovuotevřít
+Nejmenší další krok:
+Kdo ho vlastní:
+Datum kontroly:
+Kdy se vrátíme:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizovaná trasa: předání zákaznického portálu bez screenshotu.
+Kanonické místo: onboardingový checklist delivery role, bod "První předání portálu".
+Kontrolovaný cyklus: první běžné předání po nástupu nového delivery specialisty.
+Kdo trasu použil: nový delivery specialista.
+Jak začal: otevřel onboardingový checklist.
+Našel správné místo bez navedení: ano.
+Minimální správný výstup: stavová věta, zákaznický odkaz, další krok, vlastník.
+Skutečný výstup: stavová věta správně, vlastník správně, odkaz vedl na interní preview.
+Kde vzniklo tření: příklad ve šabloně neodlišuje interní preview a zákaznický portál.
+Vrátila se stará cesta: ne, screenshot se neobjevil.
+Datová stopa po cyklu: bez screenshotu a bez exportu; zůstává jen krátká poznámka ke kontrole.
+Rozhodnutí: zpřesnit.
+Nejmenší další krok: upravit příklad odkazu ve šabloně.
+Kdo ho vlastní: delivery lead.
+Datum kontroly: po prvním běžném předání.
+Kdy se vrátíme: při dalším normálním předání.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu stabilizovanou onboardingovou trasu a zkontrolujte ji po prvním běžném cyklu.
+
+1. Vyberte jeden normální cyklus, kde se trasa použila.
+2. Připomeňte minimální správný výstup.
+3. Projděte cestu od prvního odkazu po skutečný výstup.
+4. Zapište, kde člověk trasu našel a kde se zastavil.
+5. Ověřte, jestli se nevrátila stará šablona, odkaz nebo ukázka.
+6. Zkontrolujte datovou stopu: screenshoty, exporty, reálné příklady, osobní poznámky.
+7. Vyberte stav `Ponechat`, `Zpřesnit`, `Přesunout` nebo `Znovuotevřít`.
+8. Určete nejmenší další krok a vlastníka.
+
+Výstup:
+
+```text
+Jedna stabilizovaná onboardingová trasa má po prvním běžném cyklu jasný stav, případně jednu malou opravu bez nové kontrolní byrokracie.
+```
+
+### Checklist kapitoly
+
+- Vybrali jste skutečný běžný cyklus, ne demo průchod?
+- Kontrolujete trasu a systém, ne výkon člověka?
+- Je jasné, jak měl vypadat minimální správný výstup?
+- Porovnali jste skutečný výstup s tímto minimem?
+- Zjistili jste, jestli člověk našel kanonické místo bez navedení?
+- Prověřili jste, jestli se nevrátila stará šablona, starý odkaz nebo starý příklad?
+- Neřešíte celý onboarding, když selhalo jedno malé místo?
+- Vybrali jste jeden ze stavů `Ponechat`, `Zpřesnit`, `Přesunout` nebo `Znovuotevřít`?
+- Má případná oprava vlastníka a nejbližší pracovní místo?
+- Nevznikla nová evidence nad lidmi?
+- Nevznikly zbytečné screenshoty, exporty nebo kopie zákaznických dat?
+- Jsou chyby zapsané bez osobních detailů?
+- Zůstává kanonická trasa jednodušší než stará cesta?
+- Je jasné, kdy se k trase vrátíte příště?
+
+Kontrola po prvním běžném cyklu chrání stabilizaci před iluzí hotové práce. Když systém obstojí v obyčejném použití, nechte ho dýchat v běžném rytmu. Když neobstojí, opravte nejbližší místo selhání a neproměňte jednu praktickou trasu v další interní seriál.
+
 ## Pracovní log
 
+- 2026-05-20: Doplněna Příloha LZ o kontrole stabilizované onboardingové trasy po prvním běžném cyklu: výběr normálního cyklu, sledování trasy místo člověka, porovnání výstupu s minimem, návrat staré cesty, rozhodovací stavy, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LY o stabilizaci potvrzené úpravy onboardingové trasy: vstup přes ověřený stav, přepis změny na aktuální pravidlo, uložení do místa práce, zavření starých cest, návratový signál, privacy-first úklid, stabilizační karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LX o ověření úpravy onboardingové trasy po dalším normálním použití: výběr reálného průchodu, návrat ke změnové větě, sledování startu/nalezení/rozhodnutí/výstupu, rozlišení selhání nalezení/pochopení/výstupu, privacy-first kontrola skutečné stopy, rozhodovací stavy, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha LW o převodu nálezu z běžného onboardingového rytmu do jedné úpravy trasy: výběr jednoho nálezu, změnová věta, nejbližší místo rozhodnutí, typy textová/polohová/rolová/šablonová/datová úprava, privacy-first dopad, ověření při dalším normálním použití, karta, mini workshop a checklist.
