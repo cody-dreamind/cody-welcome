@@ -97821,8 +97821,239 @@ Jeden nález ze stavu Doladit je převedený do malé úpravy údržbového rytm
 
 Úprava rytmu je dobrá tehdy, když ji po měsíci skoro nikdo nekomentuje, protože prostě funguje. Vlastník najde správné místo, rozhodne stav pravidla, stará historie zůstane zavřená a datová stopa se nezvětší. To je provozní elegance: méně dramatu, víc použitelnosti.
 
+## Příloha MJ: Ověření úpravy údržbového rytmu po dalším běžném cyklu
+
+Úprava rytmu z Přílohy MI je hotová až ve chvíli, kdy projde dalším normálním cyklem. Ne když ji někdo pěkně zapíše do šablony. Ne když s ní všichni na schůzce souhlasí. A už vůbec ne když se kolem ní vytvoří nová tabulka, která dokazuje, že tabulky pořád umíme vyrábět.
+
+Ověření má být malé, protože samotná úprava byla malá. Cílem není znovu otevřít onboardingový standard, ale zjistit, jestli údržbový rytmus po drobném doladění funguje samostatněji než předtím.
+
+Tato příloha navazuje na Přílohu MI. Vstupem je karta úpravy údržbového rytmu a nejbližší běžný cyklus, ve kterém se změna přirozeně použila. Výstupem je rozhodnutí, zda úprava drží, potřebuje ještě jedno zpřesnění, nebo se má vrátit do malé opravy standardu.
+
+Ověření odpovídá na šest otázek:
+
+```text
+Proběhl skutečný běžný cyklus, nebo jen řízený test?
+Našel vlastník upravené místo bez staré historie?
+Dokázal podle úpravy rozhodnout stav pravidla?
+Zmizelo původní tření, kvůli kterému úprava vznikla?
+Nevrátila se speciální evidence nebo stará varianta?
+Zůstala datová stopa stejná nebo menší?
+```
+
+Pokud na některou otázku neumíte odpovědět bez dohledávání v chatu, úprava možná není dost blízko práci. To není katastrofa. Je to přesně důvod, proč se ověřuje dalším běžným cyklem a ne dojmem z porady.
+
+### Vyberte další běžný cyklus
+
+Ověřujte při cyklu, který by proběhl tak jako tak. U onboardingového standardu to může být další měsíční kontrola šablon, další nástup člověka do role, další review předávacích materiálů nebo další údržba syntetických příkladů.
+
+Nevybírejte ideální ukázku. Ideální ukázka často potvrdí hlavně to, že lidé umí předvést práci, když vědí, že jsou sledovaní. Běžný cyklus ukáže, jestli rytmus funguje bez speciální pozornosti.
+
+Minimální vstupy:
+
+```text
+Karta úpravy rytmu:
+Úpravová věta:
+Místo práce:
+Původní nález:
+Nejbližší běžný cyklus:
+Vlastník cyklu:
+```
+
+Pokud běžný cyklus ještě nenastal, nevyhodnocujte předčasně. Můžete zkontrolovat, že je úprava na správném místě, ale rozhodnutí o stavu počká. Předčasné "funguje to" je jen optimismus v pracovním tričku.
+
+### Vraťte se k úpravové větě
+
+Začněte větou z Přílohy MI, ne vzpomínkou na debatu. Úpravová věta drží rozsah.
+
+Příklad:
+
+```text
+V měsíční kontrole onboardingových šablon měníme odkaz u údržbové věty tak, aby delivery lead kontroloval aktuální syntetický příklad bez otevírání staré karty opravy.
+```
+
+Při ověření se ptejte:
+
+- Stalo se přesně to, co věta slibovala?
+- Musel vlastník otevřít starou kartu opravy?
+- Vedl odkaz na aktuální příklad?
+- Šlo rozhodnutí zapsat bez doplňujícího vysvětlování?
+- Zůstalo pravidlo stejné, nebo se nenápadně změnil i jeho obsah?
+
+Dobré ověření nehodnotí, jestli je standard obecně dokonalý. Hodnotí, jestli konkrétní úprava odstranila konkrétní tření. Když do toho začnete přidávat další přání, ztratíte měřítko.
+
+### Sledujte cestu vlastníka
+
+Nejlepší signál je krátká cesta vlastníka v normální práci. Nemusíte ho sledovat jako bezpečnostní kameru. Stačí zkontrolovat pracovní stopu, která při cyklu stejně vzniká.
+
+Sledujte čtyři body:
+
+```text
+Start: našel vlastník správné místo údržby?
+Použití: pochopil upravenou větu, odkaz nebo příklad?
+Rozhodnutí: zapsal stav pravidla bez staré historie?
+Výsledek: nevznikla nová dočasná opora?
+```
+
+Příklad dobrého signálu:
+
+```text
+Delivery lead otevřel měsíční checklist, klikl na aktuální syntetický příklad, potvrdil stav pravidla jako Udržet a nepoužil starou kartu opravy.
+```
+
+Příklad slabého signálu:
+
+```text
+Na schůzce jsme si řekli, že by to mělo být lepší.
+```
+
+První signál říká něco o práci. Druhý signál říká něco o náladě. Nálada je fajn, ale šablonu podle ní neopravujte.
+
+### Porovnejte původní tření s novým stavem
+
+Vraťte se k vybranému nálezu ze stavu `Doladit`. Ten byl důvodem úpravy. Ověření má ukázat, jestli se snížila cena tření.
+
+Použijte jednoduchou tabulku:
+
+```text
+Původní nález:
+Jak se projevoval před úpravou:
+Co se změnilo v místě práce:
+Co se stalo v dalším cyklu:
+Stav tření: zmizelo / zmenšilo se / přesunulo se / zůstalo
+```
+
+Rozlišujte čtyři výsledky:
+
+```text
+Zmizelo: vlastník pracoval bez původního tření.
+Zmenšilo se: úprava pomohla, ale zůstává jedna drobná nejasnost.
+Přesunulo se: původní problém zmizel, ale objevil se v jiném místě rytmu.
+Zůstalo: úprava se minula s příčinou.
+```
+
+Pokud se tření přesunulo, neberte to automaticky jako neúspěch. Někdy úprava konečně odkryla další skutečné místo problému. Důležité je nerozšířit kontrolu na všechno. Zapište nové místo a rozhodněte, jestli patří do další malé úpravy, nebo už do znovuotevření opravy standardu.
+
+### Rozhodněte stav úpravy
+
+Po ověření použijte jeden ze tří stavů.
+
+```text
+Potvrdit: úprava odstranila tření, rytmus funguje bez speciální evidence a datová stopa se nezvětšila.
+Ještě zpřesnit: úprava pomohla, ale jedno malé místo pořád brání hladkému použití.
+Vrátit do opravy: úprava se minula s příčinou, vrací se stará varianta nebo rytmus potřebuje zásah do samotného standardu.
+```
+
+Stav `Potvrdit` znamená, že úprava se může uzavřít do běžného rytmu. Není potřeba další zvláštní kontrola.
+
+Stav `Ještě zpřesnit` je povolený jen jednou. Pokud po druhém malém doladění pořád řešíte stejné tření, problém pravděpodobně není v rytmu, ale ve standardu, vlastnictví nebo pracovní trase.
+
+Stav `Vrátit do opravy` neznamená, že předchozí práce byla zbytečná. Znamená, že drobná úprava nestačí. Vraťte se k procesu malé opravy a pojmenujte příčinu přesněji.
+
+Rozhodovací věta:
+
+```text
+Po dalším běžném cyklu má úprava rytmu stav [Potvrdit / Ještě zpřesnit / Vrátit do opravy], protože [konkrétní signál z práce]; další krok je [uzavřít / jednou zpřesnit / znovu otevřít opravu] bez nové speciální evidence.
+```
+
+### Privacy-first ověření po cyklu
+
+Ověření úpravy rytmu nesmí samo vytvořit větší datový problém než původní tření. Tady se často láme disciplína: tým chce mít jistotu, a tak začne sbírat víc důkazů, než potřebuje.
+
+Stačí zkontrolovat:
+
+- použili jste běžný pracovní výstup místo nového exportu;
+- nehodnotíte výkon konkrétního člověka;
+- stará karta opravy zůstala zavřená nebo archivovaná;
+- dočasné screenshoty a kopie nevznikly znovu;
+- syntetický příklad pořád nahrazuje zákaznická data tam, kde to jde;
+- rozhodnutí je zapsané jednou, ne ve třech paralelních místech.
+
+Krátká privacy-first věta:
+
+```text
+Ověření proběhlo v běžném cyklu, bez nového sběru dat o lidech a bez návratu starých screenshotů, exportů nebo paralelní evidence.
+```
+
+Pokud věta není pravdivá, opravte nejdřív ověřovací postup. Není dobré potvrdit úpravu rytmu za cenu toho, že si vyrobíte nový sledovací zvyk.
+
+### Karta ověření úpravy rytmu
+
+Karta má být krátká. Její úkol je uzavřít rozhodnutí, ne uchovat celou historii.
+
+```text
+Původní úprava rytmu:
+Úpravová věta:
+Ověřený běžný cyklus:
+Původní nález:
+Co se stalo v cyklu:
+Stav tření: zmizelo / zmenšilo se / přesunulo se / zůstalo
+Rozhodnutí: Potvrdit / Ještě zpřesnit / Vrátit do opravy
+Další krok:
+Co se odstraní nebo zavře:
+Privacy-first věta:
+Vlastník:
+Datum dalšího běžného návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Původní úprava rytmu: odkaz u údržbové věty vede na aktuální syntetický příklad místo staré karty opravy.
+Úpravová věta: V měsíční kontrole onboardingových šablon měníme odkaz u údržbové věty tak, aby delivery lead kontroloval aktuální syntetický příklad bez otevírání staré karty opravy.
+Ověřený běžný cyklus: měsíční kontrola onboardingových šablon za červen.
+Původní nález: vlastník při první běžné údržbě otevíral starou kartu opravy.
+Co se stalo v cyklu: delivery lead použil aktuální checklist, otevřel syntetický příklad a zapsal stav Udržet.
+Stav tření: zmizelo.
+Rozhodnutí: Potvrdit.
+Další krok: uzavřít úpravu do běžného rytmu bez další speciální kontroly.
+Co se odstraní nebo zavře: dočasná poznámka k ověření úpravy.
+Privacy-first věta: ověření proběhlo bez nového sběru dat a bez práce se starými screenshoty.
+Vlastník: delivery lead.
+Datum dalšího běžného návratu: další měsíční kontrola šablon.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu úpravu rytmu z Přílohy MI a ověřte ji po dalším běžném cyklu.
+
+1. Otevřete kartu úpravy rytmu a úpravovou větu.
+2. Vyberte běžný cyklus, kde se změna opravdu použila.
+3. Zkontrolujte cestu vlastníka: start, použití, rozhodnutí, výsledek.
+4. Porovnejte původní tření s novým stavem.
+5. Určete, zda tření zmizelo, zmenšilo se, přesunulo se nebo zůstalo.
+6. Vyberte stav `Potvrdit`, `Ještě zpřesnit` nebo `Vrátit do opravy`.
+7. Zapište privacy-first větu.
+8. Zavřete dočasné podklady, které už nemají účel.
+9. Nezakládejte nový kontrolní režim.
+
+Výstup:
+
+```text
+Úprava údržbového rytmu je po dalším běžném cyklu potvrzená, jednou zpřesněná, nebo vrácená do malé opravy; rozhodnutí stojí na pracovním signálu a nevytvořilo novou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Ověřujete další běžný cyklus, ne řízenou ukázku?
+- Máte před sebou původní úpravovou větu?
+- Kontrolujete konkrétní tření, kvůli kterému úprava vznikla?
+- Našel vlastník upravené místo bez staré historie?
+- Dokázal podle úpravy rozhodnout stav pravidla?
+- Rozlišili jste, zda tření zmizelo, zmenšilo se, přesunulo se nebo zůstalo?
+- Použili jste jeden ze stavů `Potvrdit`, `Ještě zpřesnit` nebo `Vrátit do opravy`?
+- Neudělali jste ze stavu `Ještě zpřesnit` nekonečný režim?
+- Pokud se problém vrací, pojmenovali jste, proč drobná úprava nestačí?
+- Nezavedli jste nový sběr dat kvůli ověření?
+- Nehodnotíte výkon člověka místo stavu rytmu?
+- Zavřeli jste dočasné poznámky, screenshoty nebo paralelní evidenci?
+- Je rozhodnutí zapsané na jednom místě?
+- Je jasné, kdy se k tématu vrátíte už jen v běžném rytmu?
+
+Dobře ověřená úprava rytmu je nudná v tom nejlepším smyslu. Vlastník našel správné místo, udělal rozhodnutí, stará historie zůstala zavřená a nikdo kvůli tomu nezakládal další proces. Přesně tak má vypadat provoz, který si váží času i dat.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MJ o ověření úpravy údržbového rytmu po dalším běžném cyklu: výběr normálního cyklu, návrat k úpravové větě, cesta vlastníka, porovnání původního tření s novým stavem, rozhodovací stavy Potvrdit/Ještě zpřesnit/Vrátit do opravy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MI o převodu nálezu ze stavu Doladit po první běžné údržbě do jedné malé úpravy údržbového rytmu: výběr jednoho nálezu, typy úprav, úpravová věta, změna v místě práce, úklid stopy, privacy-first dopad, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MH o kontrole běžné údržby onboardingového standardu po prvním cyklu: ověření údržbového rytmu, rozhodovací stavy Udržet/Doladit/Znovu otevřít opravu, návrat speciální evidence, kontrola údržbové věty v reálném použití, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MG o převodu potvrzené malé opravy onboardingového standardu do běžné údržby: uzavření speciálního kontrolního režimu, výběr existujícího údržbového rytmu, údržbová věta, zachování jen užitečného důkazu, privacy-first převod, karta, mini workshop a checklist.
