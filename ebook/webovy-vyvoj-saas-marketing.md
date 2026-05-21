@@ -98296,8 +98296,234 @@ Potvrzená úprava údržbového rytmu je součástí aktuálního pravidla, př
 
 Dobrá stabilizace není slavnostní. Je to úklid po dobře provedené změně. Pravidlo je kratší, běžná cesta čistší, staré podklady zavřené a tým se může vrátit k práci bez toho, aby s sebou tahal batoh přechodových poznámek.
 
+## Příloha ML: Kontrola stabilizované úpravy údržbového rytmu po prvním běžném cyklu
+
+Stabilizovaná úprava z Přílohy MK prošla přepisem do běžného pravidla. Teď přichází nudnější, ale důležitý test: první normální cyklus bez zvláštního zacházení. Právě tam se ukáže, jestli úprava opravdu zapadla do práce, nebo jen hezky vypadala v den stabilizace.
+
+Smysl této přílohy je zkontrolovat, zda stabilizovaná úprava funguje bez přechodové berličky. Vlastník nemá otevírat starou kartu opravy, hledat vysvětlení v changelogu ani se ptát, "jak jsme to vlastně mysleli". Má projít běžný údržbový rytmus a nový stav použít jako samozřejmou součást práce.
+
+Vstupem je stabilizační karta úpravy rytmu a jeden dokončený běžný cyklus. Výstupem je krátké rozhodnutí, jestli úprava zůstává v běžné údržbě, potřebuje malé zpřesnění, nebo se má vrátit do opravy.
+
+Kontrola odpovídá na pět otázek:
+
+```text
+Použil vlastník nové pravidlo bez otevírání přechodové historie?
+Vzniklo méně tření než před úpravou?
+Zůstala běžná trasa kratší, čistší nebo jasnější?
+Nevznikl kvůli kontrole nový dohled, report nebo sběr dat?
+Je možné přechodovou stopu definitivně ponechat jen v archivu?
+```
+
+Pokud na první otázku odpověď zní ne, stabilizace ještě není hotová. Neznamená to katastrofu. Znamená to, že běžná práce pořád potřebuje něco, co jste chtěli uzavřít. A to je přesně důvod, proč se první běžný cyklus kontroluje.
+
+### Kontrolujte normální použití, ne ideální scénář
+
+Kontrola má proběhnout na obyčejném cyklu. Nevybírejte ukázkový případ, kdy má vlastník dost času, všechno si pamatuje a nikdo ho neruší. Vezměte první normální použití, protože stabilní pravidlo musí fungovat ve skutečné práci, ne jen v demo režimu.
+
+Normální cyklus má tyto znaky:
+
+- proběhl v obvyklém termínu;
+- pracoval s běžnými vstupy;
+- vlastník použil standardní checklist nebo pracovní místo;
+- nikdo mu předem nevysvětloval historii úpravy;
+- výstup je použitelný pro další práci.
+
+Příklad:
+
+```text
+Stabilizovaná úprava: měsíční kontrola onboardingových šablon odkazuje na aktuální syntetický příklad.
+Normální cyklus: delivery lead prošel měsíční kontrolu po nástupu nového člověka a použil checklist bez otevírání staré karty opravy.
+```
+
+Slabý test by vypadal takto:
+
+```text
+Na schůzce jsme si úpravu připomněli, společně otevřeli původní kartu a potvrdili, že nový odkaz dává smysl.
+```
+
+To není kontrola stabilizované úpravy. To je další asistovaný průchod. Občas je užitečný, ale neříká, jestli pravidlo funguje samo.
+
+Codyho komentář: standard, který funguje jen když u něj stojí člověk a vysvětluje historii, ještě není standard. Je to komentovaná prohlídka procesu. Hezké, ale drahé.
+
+### Sledujte tření, ne jen splnění
+
+Nejčastější chyba kontroly je spokojit se s větou "ano, proběhlo". To je málo. Úprava mohla formálně proběhnout, ale zároveň mohla přidat nový zmatek, prodloužit práci nebo potichu vrátit starý postup.
+
+Ptejte se na tření:
+
+```text
+Kde se vlastník zastavil?
+Musel dohledávat historii úpravy?
+Byl nový odkaz, název nebo krok jednoznačný?
+Vznikla nová otázka, která se opakovaně vrátí?
+Bylo jednodušší udělat práci než před úpravou?
+```
+
+Signály dobré stabilizace:
+
+- vlastník prošel cyklus bez staré karty;
+- výstup má stejnou nebo lepší kvalitu;
+- pravidlo je kratší nebo jasnější než před úpravou;
+- nikdo nevytvořil paralelní poznámku "pro jistotu";
+- návratový signál šel ověřit z běžného výstupu.
+
+Varovné signály:
+
+- vlastník si otevřel starou kartu opravy, aby pochopil současný krok;
+- někdo do checklistu dopsal vysvětlující poznámku mimo zdroj pravdy;
+- nový krok se dá vyložit dvěma způsoby;
+- kontrola vyžadovala screenshoty nebo ruční důkazy navíc;
+- stará varianta zůstala v komunikaci jako "alternativa".
+
+Když se objeví varovný signál, nepanikařte a nerozjíždějte velkou revizi. Většinou stačí jedna malá oprava: přejmenovat odkaz, zkrátit větu, přesunout příklad blíž k pracovnímu kroku nebo odstranit starý odkaz, který pořád svádí ke špatné cestě.
+
+### Tři možná rozhodnutí
+
+Po kontrole nepište dlouhou retrospektivu. Stačí jedno ze tří rozhodnutí:
+
+```text
+Uzavřít: úprava funguje v běžném cyklu a zůstává v údržbovém rytmu.
+Zpřesnit: úprava funguje, ale potřebuje jednu malou opravu textu, odkazu nebo umístění.
+Vrátit do opravy: úprava nefunguje bez přechodové historie nebo zvyšuje tření.
+```
+
+Použijte rozhodnutí `Uzavřít`, když:
+
+- vlastník použil nové pravidlo bez pomoci;
+- návratový signál neodhalil návrat staré varianty;
+- nevznikl nový report ani sběr dat;
+- přechodové karty už nejsou součástí běžné trasy;
+- privacy-first úklid je dokončený.
+
+Použijte rozhodnutí `Zpřesnit`, když:
+
+- směr úpravy je správný, ale jeden detail mate;
+- chybí jasný název, odkaz nebo příklad;
+- stará stopa je archivovaná, ale ještě někde zůstává viditelná z běžné trasy;
+- vlastník práci dokončil, ale musel si domyslet význam kroku.
+
+Použijte rozhodnutí `Vrátit do opravy`, když:
+
+- nový krok nejde použít bez znalosti historie;
+- stará varianta se vrátila do práce;
+- úprava vytvořila víc tření než původní stav;
+- tým kvůli ní začal sbírat nové důkazy bez jasného účelu;
+- pravidlo přestalo odpovídat realitě role.
+
+Nejhorší rozhodnutí je žádné rozhodnutí. Když kontrolu jen odložíte, úprava zůstane ve šedé zóně. Formálně stabilizovaná, prakticky pořád nejistá. Šedé zóny jsou levné jen na papíře; v provozu žerou pozornost každý měsíc.
+
+### Privacy-first kontrola po cyklu
+
+Po prvním běžném cyklu zkontrolujte, zda se kvůli ověření nevrátila zbytečná datová stopa. To se stává nenápadně. Někdo chce "jen pro jistotu" screenshot, export nebo kopii výstupu. Jenže pokud běžný pracovní výstup stačí k rozhodnutí, další důkaz je často jen nová hromádka rizika.
+
+Privacy-first otázky:
+
+```text
+Stačil k ověření běžný pracovní výstup?
+Vznikly kvůli kontrole nové screenshoty, exporty nebo kopie?
+Obsahují dočasné podklady osobní, zákaznická nebo provozně citlivá data?
+Který důkaz má zůstat jako rozhodovací záznam?
+Co lze smazat hned po uzavření kontroly?
+Je retenční rozhodnutí zapsané v jedné větě?
+```
+
+Praktické pravidlo:
+
+```text
+Nedokazujte stabilitu tím, že vytvoříte novou nestabilní datovou stopu.
+```
+
+Příklad dobrého zápisu:
+
+```text
+Běžný výstup měsíční kontroly potvrzuje použití aktuálního odkazu. Nevznikly nové screenshoty. Přechodové karty zůstávají archivované, do běžné trasy nevedou.
+```
+
+Příklad špatného zápisu:
+
+```text
+Pro jistotu jsme uložili screenshot každého kroku a export celé kontroly do sdílené složky.
+```
+
+Druhá varianta možná působí pečlivě. Ve skutečnosti jen přesouvá nejistotu do úložiště. Pokud výstup nepotřebujete pro rozhodnutí, audit nebo další práci, nemá mít dlouhý život.
+
+### Kontrolní karta po prvním běžném cyklu
+
+Karta má být krátká. Jejím účelem není psát kroniku úpravy, ale zavřít otázku, zda stabilizace obstála v normálním provozu.
+
+```text
+Stabilizovaná úprava:
+Běžný cyklus:
+Vlastník:
+Použito bez staré karty: ano/ne
+Nalezené tření:
+Návrat staré varianty: ano/ne
+Nová datová stopa: žádná / minimální / zbytečná
+Privacy-first rozhodnutí:
+Rozhodnutí: Uzavřít / Zpřesnit / Vrátit do opravy
+Další krok:
+Datum kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizovaná úprava: měsíční kontrola onboardingových šablon používá aktuální syntetický příklad v checklistu.
+Běžný cyklus: květnová kontrola po nástupu nového člověka.
+Vlastník: delivery lead.
+Použito bez staré karty: ano.
+Nalezené tření: žádné významné; vlastník navrhl zkrátit název odkazu.
+Návrat staré varianty: ne.
+Nová datová stopa: žádná.
+Privacy-first rozhodnutí: ponechat jen tento kontrolní záznam, bez screenshotů.
+Rozhodnutí: Zpřesnit.
+Další krok: zkrátit název odkazu v checklistu do příští měsíční kontroly.
+Datum kontroly: 2026-05-21.
+```
+
+Všimněte si, že rozhodnutí `Zpřesnit` není selhání. Je to normální údržba. Selhání by bylo přidat další vysvětlivku, nechat starý odkaz v trase a tvářit se, že je hotovo.
+
+### Mini workshop na 15 minut
+
+Vezměte jednu stabilizovanou úpravu údržbového rytmu po prvním běžném cyklu.
+
+1. Otevřete stabilizační kartu z Přílohy MK.
+2. Najděte první skutečný běžný cyklus, kde se úprava použila.
+3. Ověřte, zda vlastník nepotřeboval starou kartu opravy.
+4. Zapište jedno konkrétní místo tření, pokud existuje.
+5. Zkontrolujte, jestli se nevrátila stará varianta.
+6. Ověřte, že nevznikl nový report, screenshot nebo export bez účelu.
+7. Vyberte rozhodnutí `Uzavřít`, `Zpřesnit` nebo `Vrátit do opravy`.
+8. Pokud je potřeba zpřesnění, napište jeden malý další krok.
+9. Pokud je úprava uzavřená, odstraňte návratový signál z mimořádné pozornosti.
+
+Výstup:
+
+```text
+Stabilizovaná úprava obstála nebo neobstála v prvním běžném cyklu a má jasné další zacházení bez nové byrokracie.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete skutečný běžný cyklus, ne asistovaný test?
+- Použil vlastník nové pravidlo bez staré karty opravy?
+- Je z běžného výstupu vidět, že úprava fungovala?
+- Zapsali jste konkrétní tření místo obecného dojmu?
+- Nevrátila se stará varianta jako alternativa?
+- Nevznikl nový report, screenshot nebo export jen pro pocit jistoty?
+- Stačí rozhodovací záznam bez surových podkladů?
+- Vybrali jste jedno ze tří rozhodnutí?
+- Je případné zpřesnění opravdu malé?
+- Při rozhodnutí `Uzavřít` mizí mimořádná pozornost z běžné práce?
+- Při rozhodnutí `Vrátit do opravy` je jasné, co přesně nefungovalo?
+- Je privacy-first rozhodnutí zapsané jednou větou?
+- Zůstává údržbový rytmus kratší a použitelnější než před úpravou?
+
+Dobrá kontrola po prvním běžném cyklu je krátká a věcná. Neoslavuje změnu, nehledá viníka a nevyrábí nový dohled. Jen ověří, jestli stabilizace přežila kontakt s normální prací. Když ano, pustí ji dál. Když ne, vrátí ji do opravy dřív, než se z malé nejasnosti stane další provozní tradice.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha ML o kontrole stabilizované úpravy údržbového rytmu po prvním běžném cyklu: ověření bez starých karet, sledování tření, rozhodnutí Uzavřít/Zpřesnit/Vrátit do opravy, privacy-first kontrola datové stopy, kontrolní karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MK o stabilizaci potvrzené úpravy údržbového rytmu: přepis do současného pravidla, zavření přechodových karet, návratový signál, privacy-first úklid datové stopy, stabilizační karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MJ o ověření úpravy údržbového rytmu po dalším běžném cyklu: výběr normálního cyklu, návrat k úpravové větě, cesta vlastníka, porovnání původního tření s novým stavem, rozhodovací stavy Potvrdit/Ještě zpřesnit/Vrátit do opravy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MI o převodu nálezu ze stavu Doladit po první běžné údržbě do jedné malé úpravy údržbového rytmu: výběr jednoho nálezu, typy úprav, úpravová věta, změna v místě práce, úklid stopy, privacy-first dopad, karta, mini workshop a checklist.
