@@ -100271,8 +100271,291 @@ Potvrzený standard je uložený v dlouhodobé mapě, má jasný zdroj pravdy, r
 
 Dlouhodobá mapa je dobrá jen tehdy, když lidem zkracuje cestu k platnému rozhodnutí. Jakmile začne vyprávět celou historii každé opravy, mění se z mapy na bažinu. A bažina je hezké slovo, ale špatný informační systém.
 
+## Příloha MU: První přehled dlouhodobé mapy standardů
+
+Příloha MT ukládá potvrzený standard do dlouhodobé mapy. Příloha MU řeší první přehled této mapy po několika nových záznamech: jak zjistit, jestli mapa opravdu zkracuje práci, nebo se začíná měnit v další vrstvu správy.
+
+Používá se ve chvíli, kdy mapa obsahuje aspoň pět až deset dlouhodobých standardů, nebo po prvním měsíci až kvartálu od chvíle, kdy jste ji začali používat. Dřív by přehled byl jen kontrola jednoho záznamu. Později už můžete přijít ve chvíli, kdy mapa narostla do tvaru, který nikdo nechce číst.
+
+Výstupem této přílohy je jedno rozhodnutí:
+
+```text
+Mapa zůstává beze změny.
+Mapa potřebuje jednu úpravu navigace.
+Mapa potřebuje redukci nebo sloučení záznamů.
+Mapa se nepoužívá a potřebuje návrat k pracovní situaci.
+```
+
+Smysl není hodnotit, jestli jsou všechny standardy dokonalé. Smysl je ověřit, jestli dlouhodobá mapa pomáhá lidem najít platné rozhodnutí ve chvíli, kdy ho potřebují.
+
+### Začněte skutečnou pracovní otázkou
+
+První přehled mapy nezačínejte seznamem všech položek. Začněte otázkou, kvůli které by člověk mapu otevřel.
+
+Příklady dobrých pracovních otázek:
+
+- Kde najdu platné pravidlo pro mazání dočasných exportů po auditu?
+- Jaký standard platí pro onboarding nové role do delivery procesu?
+- Kdy se má revidovat privacy-first nastavení analytiky?
+- Kdo vlastní měsíční údržbu šablon a kde je zdroj pravdy?
+- Co platí po poslední změně sales materiálů?
+
+Slabé otázky:
+
+- Máme všechno zapsané?
+- Je mapa aktuální?
+- Nechybí nám nějaký standard?
+
+Tyto otázky nejsou špatné, ale jsou moc administrativní. Dlouhodobá mapa má sloužit práci. Proto testujte nejdřív situace, ve kterých se člověk musí rozhodnout, ne pocit, že archiv vypadá uklizeně.
+
+Praktický postup:
+
+1. Vyberte tři až pět reálných situací z posledního období.
+2. U každé napište otázku, kterou měl člověk při práci.
+3. Ověřte, jestli podle mapy našel platný zdroj pravdy.
+4. Zapište první místo, kde ztratil čas.
+5. Neopravujte všechno. Vyberte jednu opakující se překážku.
+
+Codyho komentář: nejhorší přehled dokumentace je ten, kde tým hodinu přejmenovává nadpisy, ale nikdo nezkusí najít odpověď na skutečnou otázku. To je kancelářský fitness. Člověk se unaví, ale systém moc nezesílí.
+
+### Ověřte trasu od situace ke zdroji pravdy
+
+U každé pracovní otázky sledujte cestu:
+
+```text
+Situace -> mapový záznam -> zdroj pravdy -> rozhodnutí -> výstup práce
+```
+
+Mapa funguje, když člověk dokáže projít tuto trasu bez znalosti historie a bez dotazu na autora standardu. Není nutné, aby vše našel na první klik. Je nutné, aby cesta byla pochopitelná, stabilní a bez starých odboček.
+
+Dobrá trasa:
+
+```text
+Situace: potřebuji uzavřít pracovní exporty po měsíční kontrole.
+Mapový záznam: Retence pracovních podkladů při údržbě šablon.
+Zdroj pravdy: delivery playbook, část Údržba šablon.
+Rozhodnutí: ponechat souhrn, smazat pracovní screenshoty.
+Výstup: changelog a krátký souhrn bez zákaznických údajů.
+```
+
+Slabá trasa:
+
+```text
+Situace: potřebuji uzavřít pracovní exporty.
+Mapový záznam: několik podobných položek o retenci.
+Zdroj pravdy: jeden odkaz vede do starého dokumentu, druhý do changelogu.
+Rozhodnutí: tým se ptá v chatu.
+Výstup: exporty zůstaly ve složce pro jistotu.
+```
+
+Když trasa selže, nerozšiřujte mapu dalším vysvětlením automaticky. Nejprve zjistěte typ selhání:
+
+- člověk nepoznal správný záznam;
+- záznam nevedl na zdroj pravdy;
+- zdroj pravdy byl moc dlouhý nebo neaktuální;
+- existovaly dvě podobné položky;
+- výstup práce nebyl jasně popsaný;
+- privacy-first pravidlo bylo schované až v historii.
+
+Teprve podle typu selhání vyberte jednu úpravu.
+
+### Hledejte duplicity podle práce, ne podle slov
+
+Duplicita není jen stejný nadpis. Duplicita vzniká, když dva záznamy odpovídají na stejnou pracovní otázku a člověk neví, který platí.
+
+Typické duplicity:
+
+- jeden standard pro úklid exportů a druhý pro retenci pracovních podkladů, ale oba se používají při stejné měsíční kontrole;
+- zvláštní pravidlo pro onboarding role a samostatná trasa v playbooku, které říkají podobnou věc jinými slovy;
+- starý standard uložený jako "archivní", ale pořád viditelný ve stejné navigaci;
+- mapový záznam a changelog, které oba vypadají jako aktuální instrukce;
+- privacy-first poznámka uvedená jednou v dodavatelském pravidle a podruhé v analytickém checklistu bez jasné hranice.
+
+Praktický test:
+
+```text
+Kdyby nový člověk hledal odpověď na tuto situaci, dostal by jednu platnou cestu, nebo dvě podobné možnosti?
+```
+
+Pokud dostane dvě podobné možnosti, rozhodněte:
+
+```text
+Sloučit.
+Přejmenovat.
+Přesunout do archivu.
+Nechat odděleně a jasně popsat hranici.
+```
+
+Příklad hranice:
+
+```text
+Standard A řeší retenci pracovních podkladů po interní údržbě.
+Standard B řeší retenci podkladů po zákaznickém auditu.
+Hranice: jakmile podklady obsahují zákaznická data, používá se Standard B.
+```
+
+Bez hranice budou lidé používat to, co najdou první. To není systém. To je loterie s lepším fontem.
+
+### Zkontrolujte stárnutí záznamů
+
+Dlouhodobý záznam může stárnout i bez toho, aby byl formálně špatně. Změní se nástroj, role, rytmus, typ dat, dodavatel, ceník, právní kontext nebo jen běžný způsob práce. Přehled mapy má zachytit hlavně tiché stárnutí.
+
+U každého vybraného záznamu se ptejte:
+
+- Platí pracovní situace pořád stejně?
+- Existuje uvedený zdroj pravdy?
+- Vlastník nebo role pořád existuje?
+- Revizní rytmus dává smysl podle aktuální frekvence práce?
+- Nevede záznam na archiv, dočasný export nebo starou složku?
+- Nezměnila se citlivost dat, se kterými standard pracuje?
+- Je v záznamu jasné, co se už nemá znovu otevírat?
+
+Není potřeba procházet celou mapu do detailu. U prvního přehledu stačí vzorek:
+
+```text
+2 nejpoužívanější standardy
+2 standardy s privacy-first dopadem
+1 standard, který se dlouho nepoužil
+1 nový standard uložený v posledním období
+```
+
+Tento vzorek ukáže víc než mechanické přečtení všech nadpisů. Mechanické čtení často jen potvrzuje, že text existuje. Vzorek podle práce ukazuje, jestli text pořád slouží.
+
+### Privacy-first přehled mapy
+
+Dlouhodobá mapa se může stát centrálním místem, které nechtěně prozrazuje víc, než má. Ne proto, že by někdo chtěl sbírat data navíc. Spíš proto, že lidé při vysvětlování rádi přidávají příklady, odkazy a kontext.
+
+Při prvním přehledu zkontrolujte:
+
+- mapa neobsahuje zákaznická jména, osobní údaje nebo interní incidentní detaily bez jasného účelu;
+- odkazy nevedou na pracovní exporty, screenshoty nebo staré dočasné složky;
+- příklady jsou syntetické nebo bezpečně zkrácené;
+- záznamy nerozšiřují přístup k datům jen proto, že jsou v centrální mapě;
+- u citlivých standardů je jasné, kdo smí otevřít zdroj pravdy;
+- staré důkazy byly nahrazeny souhrnem, pokud už nejsou potřeba.
+
+Silný stav:
+
+```text
+Mapa obsahuje pracovní situaci, zdroj pravdy a vlastníka. Citlivý příklad je přepsaný synteticky. Ověřovací export byl smazán po vytvoření souhrnu.
+```
+
+Slabý stav:
+
+```text
+Mapa odkazuje na původní složku s podklady, protože tam je vidět celý kontext.
+```
+
+Celý kontext je většinou luxus. Pro dlouhodobou mapu je důležitější správné rozhodnutí s minimem dat.
+
+### Vyberte jednu úpravu mapy
+
+Po přehledu neotevírejte deset oprav. Vyberte jednu úpravu, která nejvíc zkrátí cestu k platnému rozhodnutí.
+
+Typy úprav:
+
+```text
+Navigační úprava: přejmenovat záznam podle pracovní situace.
+Sloučení: spojit dvě položky, které odpovídají na stejnou otázku.
+Archivace: odstranit starý záznam z běžné trasy.
+Zdroj pravdy: opravit odkaz na aktuální dokument.
+Hranice: doplnit jednu větu, kdy použít který standard.
+Privacy-first úklid: nahradit citlivý odkaz bezpečným souhrnem.
+```
+
+Dobrá úprava:
+
+```text
+Přejmenovat "Retence po kontrole" na "Mazání pracovních exportů po měsíční údržbě šablon" a starý odkaz přesunout do changelogu.
+```
+
+Slabá úprava:
+
+```text
+Celkově sjednotit dokumentaci standardů.
+```
+
+"Celkově sjednotit" je často jen hezčí název pro neurčitou práci. První přehled má skončit malou hotovou změnou, ne novým programem interní reformy.
+
+### Karta prvního přehledu mapy
+
+Použijte ji po prvním období, kdy mapa obsahuje víc dlouhodobých standardů.
+
+```text
+Datum přehledu:
+Počet záznamů v mapě:
+Kontrolované pracovní otázky:
+Kontrolovaný vzorek standardů:
+Nejčastější tření:
+Nalezené duplicity:
+Stárnoucí záznamy:
+Privacy-first nález:
+Rozhodnutí: beze změny / jedna úprava navigace / redukce nebo sloučení / návrat k pracovní situaci
+Jedna vybraná úprava:
+Vlastník úpravy:
+Termín kontroly:
+Co teď vědomě neřešíme:
+```
+
+Vyplněný příklad:
+
+```text
+Datum přehledu: 2026-05-21
+Počet záznamů v mapě: 8
+Kontrolované pracovní otázky: kde najít pravidlo pro mazání exportů, jak onboardovat novou delivery roli, kdy revidovat analytiku
+Kontrolovaný vzorek standardů: retence podkladů, onboarding role, privacy-first analytika, starší sales karta, nový standard pro údržbu šablon
+Nejčastější tření: názvy dvou záznamů neříkají pracovní situaci
+Nalezené duplicity: retence pracovních podkladů a úklid exportů se překrývají při měsíční údržbě
+Stárnoucí záznamy: sales karta odkazuje na starý changelog
+Privacy-first nález: jeden odkaz vede na složku s pracovními exporty
+Rozhodnutí: jedna úprava navigace
+Jedna vybraná úprava: přejmenovat retenční záznam podle situace a nahradit odkaz na exporty bezpečným souhrnem
+Vlastník úpravy: delivery lead
+Termín kontroly: příští měsíční údržba
+Co teď vědomě neřešíme: neslučujeme celou mapu ani neměníme revizní rytmy
+```
+
+Karta má chránit proti dvěma extrémům: proti ignorování mapy a proti velké dokumentační rekonstrukci. Obojí je lákavé. Ani jedno většinou nepomůže prvnímu praktickému přehledu.
+
+### Mini workshop na 15 minut
+
+Vezměte dlouhodobou mapu a tři nedávné pracovní situace.
+
+1. Přepište každou situaci na jednu otázku.
+2. Zkuste podle mapy najít platný zdroj pravdy.
+3. Zapište první místo tření.
+4. Najděte jednu duplicitu nebo potvrďte, že nevznikla.
+5. Zkontrolujte jeden privacy-first záznam.
+6. Vyberte jednu úpravu mapy.
+7. Zapište, co teď vědomě neřešíte.
+
+Výstup:
+
+```text
+Dlouhodobá mapa byla ověřena na skutečných otázkách, má jednu vybranou úpravu a nepřidává zbytečnou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Má mapa dost záznamů na první přehled?
+- Testovali jste skutečné pracovní otázky, ne jen seznam nadpisů?
+- Ověřili jste trasu od situace ke zdroji pravdy?
+- Našel člověk platné rozhodnutí bez znalosti historie?
+- Zapsali jste první místo, kde vzniklo tření?
+- Hledali jste duplicity podle práce, ne jen podle podobných slov?
+- Je u podobných standardů jasná hranice použití?
+- Zkontrolovali jste vzorek nejpoužívanějších, citlivých, starých i nových záznamů?
+- Nevedou odkazy na dočasné exporty, screenshoty nebo staré složky?
+- Neobsahuje mapa zbytečné osobní, zákaznické nebo interně citlivé údaje?
+- Vybrali jste jednu konkrétní úpravu mapy?
+- Má úprava vlastníka a termín kontroly?
+- Zapsali jste, co teď vědomě neřešíte?
+
+První přehled dlouhodobé mapy má být malý test užitečnosti. Když mapa pomáhá najít rozhodnutí, nechte ji dýchat. Když překáží, opravte nejbližší tření. A když se nepoužívá, nepište delší úvod. Vraťte ji k pracovním situacím, kvůli kterým má existovat.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MU o prvním přehledu dlouhodobé mapy standardů: pracovní otázky, trasa ke zdroji pravdy, duplicity, stárnutí záznamů, privacy-first kontrola mapy, jedna vybraná úprava, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MT o uložení potvrzeného návratu standardu do dlouhodobé mapy: rozhodnutí, kdy standard patří do mapy, jednovětý zápis, oddělení mapy od historie, revizní spouštěče, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MS o kontrole návratu trvalého standardu do běžného rytmu: výběr cyklu, sledování práce bez zvláštního dohledu, rozlišení tření a selhání, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MR o uzavření ověřené akce po kontrole trvalého standardu: uzavírací věta, postupy pro Drží/Zpřesnit/Vrátit do opravy, úklid starých stop, karta, mini workshop a checklist.
