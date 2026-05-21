@@ -98766,8 +98766,247 @@ Ověřená úprava údržbového rytmu je uzavřená do trvalého standardu, má
 
 Dobré uzavření je nenápadné. Aktuální pravidlo je na správném místě, stará historie nepřekáží, datová stopa se zmenšila a tým se k tématu vrátí až v běžném rytmu. Přesně tak se z malé opravy nestane nový provozní dluh.
 
+## Příloha MO: První kontrola trvalého údržbového standardu po několika cyklech
+
+Uzavření do trvalého standardu v Příloze MN neznamená, že se pravidlo už nikdy nemá zpochybnit. Znamená jen, že už nepotřebuje zvláštní dohled. Po několika běžných cyklech je ale užitečné udělat krátkou kontrolu, jestli standard opravdu slouží práci, nebo se z něj pomalu stává zvyk, který lidé dodržují hlavně proto, že je napsaný.
+
+Tato příloha pomáhá zkontrolovat trvalý údržbový standard bez toho, aby se z kontroly stal nový projekt. Používá se typicky po třech až šesti běžných cyklech, podle rytmu práce. U měsíční údržby to může být po čtvrt roce, u týdenního pravidla dřív, u ročního pravidla po prvním dalším skutečném použití.
+
+Vstupem je uzavírací karta z Přílohy MN, aktuální zdroj pravdy a několik běžných výstupů. Výstupem je jednoduché rozhodnutí: standard ponechat, zjednodušit, sloučit s jiným pravidlem, nebo otevřít novou malou opravu.
+
+Kontrola odpovídá na pět otázek:
+
+```text
+Používá se standard v normální práci bez připomínání?
+Pomáhá pořád stejnému rozhodnutí, kvůli kterému vznikl?
+Nevzniklo kolem něj nové tření, duplicitní evidence nebo obcházení?
+Je datová stopa pořád minimální a oprávněná?
+Stačí drobná údržba, nebo je potřeba nová oprava?
+```
+
+Když na některou otázku neumíte odpovědět, nesnažte se hned sbírat víc dat. Nejdřív se podívejte, jestli odpověď neleží v běžných výstupech. Trvalý standard má být kontrolovatelný z práce, kterou stejně děláte. Pokud kvůli němu vzniká speciální evidence, už to je nález.
+
+### Vyberte skutečné cykly, ne nejlepší ukázky
+
+Kontrola má stát na několika normálních průchodech. Ne na tom nejhezčím, kdy měl tým čas, vzpomněl si na všechny detaily a výstup vypadá jako do školení. Vezměte poslední dostupné cykly a krátce si poznamenejte, co se opravdu stalo.
+
+Pro každý cyklus stačí čtyři řádky:
+
+```text
+Cyklus:
+Kdo standard použil:
+Jaký výstup vznikl:
+Kde se objevilo tření nebo obcházení:
+```
+
+Příklad:
+
+```text
+Cyklus: měsíční kontrola onboardingových šablon za červen.
+Kdo standard použil: delivery lead.
+Jaký výstup vznikl: upravená šablona pro první projektový týden a potvrzený syntetický příklad.
+Kde se objevilo tření nebo obcházení: žádné, ale vlastník přeskočil nepoužívanou část checklistu.
+```
+
+Po třech cyklech už často uvidíte vzor. Buď standard pomáhá stejně, jako pomáhal při uzavření, nebo se ukáže, že jedna část jen přežila z opatrnosti. To druhé není ostuda. Je to normální život pravidel. Co se neprořezává, to bobtná. A bobtnající standard je v týmu oblíbený asi jako formulář, který se ptá na fax.
+
+Codyho komentář: dobrý standard není posvátný dokument. Je to pracovní nástroj. Když se realita posune, standard má pokorně uhnout, zkrátit se nebo přiznat, že jeho část už nikomu nepomáhá.
+
+### Hledejte cenu dodržování
+
+U trvalého standardu nestačí otázka "dodržujeme ho?". Důležitější je otázka "kolik nás stojí ho dodržovat?". Pravidlo může být formálně správné a zároveň příliš drahé na pozornost, koordinaci nebo datovou stopu.
+
+Sledujte hlavně tyto signály:
+
+- lidé vyplňují položku, ale nikdo podle ní nerozhoduje;
+- standard vyžaduje ruční přepis informace, která už existuje jinde;
+- vlastník pravidla musí po každém cyklu vysvětlovat stejný krok;
+- vznikají paralelní poznámky mimo zdroj pravdy;
+- část checklistu se pravidelně přeskakuje;
+- kontrola se začíná ptát na výkon člověka místo stavu systému;
+- kvůli pravidlu se ukládají podklady, které nemají další účel.
+
+Praktický test:
+
+```text
+Kdybychom tuto položku standardu zrušili, jaké rozhodnutí by se zhoršilo?
+```
+
+Pokud odpověď není jasná, položka je kandidát na zkrácení, sloučení nebo archivaci. Neznamená to, že ji máte hned mazat. Znamená to, že musí znovu obhájit svoji práci.
+
+Silná položka:
+
+```text
+Před publikací šablony ověř, že ukázková data jsou syntetická a neobsahují zákaznické údaje.
+```
+
+Slabá položka:
+
+```text
+Zkontroluj, že je všechno v pořádku a odpovídá minulému standardu.
+```
+
+První věta vede ke konkrétnímu rozhodnutí a chrání privacy-first hodnotu. Druhá jen vytváří pocit kontroly. Pocit kontroly je fajn, ale nedá se podle něj provozovat web, SaaS ani tým.
+
+### Čtyři rozhodnutí po kontrole
+
+Po kontrole vyberte jedno ze čtyř rozhodnutí:
+
+```text
+Ponechat: standard funguje, cena dodržování je přiměřená a není potřeba zásah.
+Zjednodušit: standard funguje, ale obsahuje zbytečnou položku, vysvětlivku nebo důkaz.
+Sloučit: standard se překrývá s jiným pravidlem a má být součástí jednoho zdroje pravdy.
+Otevřít opravu: standard už nevede práci spolehlivě a potřebuje malou změnovou smyčku.
+```
+
+Použijte `Ponechat`, když:
+
+- standard se používá bez zvláštního připomínání;
+- výstupy jsou použitelné pro další práci;
+- nevzniká paralelní evidence;
+- datová stopa odpovídá účelu;
+- vlastník pravidla nehlásí opakované tření.
+
+Použijte `Zjednodušit`, když:
+
+- jedna položka se opakovaně přeskakuje;
+- text pravidla je delší než práce, kterou vede;
+- historická vysvětlivka už nepomáhá;
+- kontrolní otázka se dá nahradit konkrétnějším rozhodnutím;
+- stejný důkaz se ukládá dvakrát.
+
+Použijte `Sloučit`, když:
+
+- dvě pravidla řeší stejný okamžik práce;
+- tým neví, který dokument je zdroj pravdy;
+- údržba stejného pravidla běží ve dvou rytmech;
+- privacy-first kontrola se opakuje ve více šablonách bez rozdílu;
+- existují dva checklisty, které vedou ke stejnému výstupu.
+
+Použijte `Otevřít opravu`, když:
+
+- pravidlo už neodpovídá současné práci;
+- lidé ho obcházejí, protože je nepraktické;
+- kvůli němu vzniká zbytečný sběr dat;
+- rozhodnutí po cyklu není jasnější než před cyklem;
+- změna je větší než prosté zkrácení nebo sloučení.
+
+Rozhodnutí `Otevřít opravu` nemá být drama. Je to jen návrat do malé smyčky: pojmenovat nález, vybrat jedno místo zásahu, ověřit ho v příštím normálním použití a znovu uklidit stopu.
+
+### Privacy-first kontrola trvalého standardu
+
+Trvalé standardy mají jednu záludnost: protože jsou "trvalé", snadno se v nich schová trvalý sběr dat. Položka, která při zavedení dávala smysl, může po několika cyklech zůstat jen jako setrvačnost.
+
+Při kontrole se ptejte:
+
+```text
+Jaká data standard pravidelně vytváří nebo uchovává?
+Která z nich jsou nutná pro rozhodnutí?
+Která vznikají jen proto, že je jednoduché je uložit?
+Obsahují výstupy zákaznická, osobní nebo provozně citlivá data?
+Existuje syntetická nebo agregovaná varianta, která stačí?
+Kdo má k výstupům přístup?
+Kdy se výstupy mažou, zkracují nebo archivují?
+```
+
+Praktická privacy-first věta:
+
+```text
+Standard ponechává jen aktuální checklist a krátký rozhodovací záznam; pracovní příklady zůstávají syntetické a staré výstupy se po dalším cyklu nahrazují shrnutím.
+```
+
+Slabá privacy-first věta:
+
+```text
+Všechno necháme uložené, kdybychom se k tomu někdy potřebovali vrátit.
+```
+
+"Kdyby někdy" není retenční pravidlo. Je to krabice na budoucí problém. Pokud nevíte, proč něco držíte, pravděpodobně to držíte moc dlouho.
+
+### Kontrolní karta po několika cyklech
+
+Karta má být krátká a opakovatelná. Nejde o audit celého systému, ale o kontrolu jednoho trvalého standardu.
+
+```text
+Kontrolovaný standard:
+Zdroj pravdy:
+Kontrolované cykly:
+Původní účel standardu:
+Co pořád funguje:
+Kde vzniká tření:
+Duplicitní nebo obcházené části:
+Datová stopa:
+Privacy-first rozhodnutí:
+Rozhodnutí: Ponechat / Zjednodušit / Sloučit / Otevřít opravu
+Další krok:
+Vlastník:
+Datum kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Kontrolovaný standard: měsíční kontrola onboardingových šablon.
+Zdroj pravdy: delivery playbook, část měsíční kontrola šablon.
+Kontrolované cykly: červen, červenec, srpen.
+Původní účel standardu: udržet onboardingovou šablonu použitelnou bez návratu ke starým opravám.
+Co pořád funguje: aktuální syntetický příklad vede k rychlému porovnání šablony.
+Kde vzniká tření: jedna historická položka se tři cykly přeskočila.
+Duplicitní nebo obcházené části: poznámka k původní opravě je duplicitní s changelogem.
+Datová stopa: zůstává checklist a krátký měsíční záznam, bez screenshotů.
+Privacy-first rozhodnutí: historickou poznámku odstranit, staré měsíční záznamy po kvartálu zkrátit na souhrn.
+Rozhodnutí: Zjednodušit.
+Další krok: odstranit historickou položku a zapsat změnu do changelogu.
+Vlastník: delivery lead.
+Datum kontroly: 2026-05-21.
+```
+
+Když karta končí rozhodnutím `Ponechat`, další krok může být jen "vrátit do běžného rytmu". To je platný výstup. Ne každá kontrola musí porodit úkol. Někdy je nejlepší práce potvrdit, že nic dalšího nevyrábíme.
+
+### Mini workshop na 15 minut
+
+Vezměte jeden trvalý údržbový standard po několika běžných cyklech.
+
+1. Otevřete uzavírací kartu z Přílohy MN.
+2. Najděte aktuální zdroj pravdy.
+3. Vyberte tři poslední normální cykly nebo nejbližší dostupný vzorek.
+4. Zapište pro každý cyklus výstup a případné tření.
+5. Najděte položky, které se přeskakují, duplikují nebo obcházejí.
+6. Ověřte, zda standard pořád slouží původnímu rozhodnutí.
+7. Projděte datovou stopu a retenční pravidlo.
+8. Vyberte rozhodnutí `Ponechat`, `Zjednodušit`, `Sloučit` nebo `Otevřít opravu`.
+9. Zapište jeden další krok nebo návrat do běžného rytmu.
+
+Výstup:
+
+```text
+Trvalý údržbový standard je po několika cyklech potvrzený, zkrácený, sloučený nebo vrácený do malé opravy bez nové zbytečné evidence.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete několik normálních cyklů, ne ukázkový průchod?
+- Je jasné, jaký byl původní účel standardu?
+- Vidíte, zda standard pořád pomáhá stejnému rozhodnutí?
+- Hledali jste cenu dodržování, nejen formální splnění?
+- Zapsali jste konkrétní tření nebo obcházení?
+- Našli jste položky, které se opakovaně přeskakují?
+- Ověřili jste, že existuje jeden zdroj pravdy?
+- Nevzniká duplicitní evidence ve více dokumentech?
+- Je datová stopa přiměřená účelu standardu?
+- Lze některé důkazy nahradit syntetickým příkladem nebo souhrnem?
+- Má každý uchovávaný výstup jasnou retenci?
+- Vybrali jste jedno ze čtyř rozhodnutí?
+- Je případné zjednodušení menší než nová oprava?
+- Při sloučení víte, který zdroj pravdy zůstane?
+- Při otevření opravy je jasné jedno místo zásahu?
+- Je privacy-first rozhodnutí zapsané jednou větou?
+
+První kontrola trvalého standardu má být skromná. Nehledá velkou transformaci, jen ověřuje, že se z dobrého pravidla nestala zvyklost bez užitku. Když standard pořád pomáhá, nechte ho být. Když bobtná, zkraťte ho. Když se duplikuje, slučte ho. Když přestal vést práci, otevřete malou opravu a nenechte z nejistoty vyrůst nový provozní dluh.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MO o první kontrole trvalého údržbového standardu po několika cyklech: výběr běžných cyklů, cena dodržování, rozhodnutí Ponechat/Zjednodušit/Sloučit/Otevřít opravu, privacy-first kontrola trvalé datové stopy, kontrolní karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MN o uzavření ověřené úpravy údržbového rytmu do trvalého standardu: zdroj pravdy, odpojení přechodové historie, trvalý jazyk pravidla, běžný návrat bez zvláštního dohledu, privacy-first úklid, karta uzavření, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha ML o kontrole stabilizované úpravy údržbového rytmu po prvním běžném cyklu: ověření bez starých karet, sledování tření, rozhodnutí Uzavřít/Zpřesnit/Vrátit do opravy, privacy-first kontrola datové stopy, kontrolní karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MK o stabilizaci potvrzené úpravy údržbového rytmu: přepis do současného pravidla, zavření přechodových karet, návratový signál, privacy-first úklid datové stopy, stabilizační karta, mini workshop a checklist.
