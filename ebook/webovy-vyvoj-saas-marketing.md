@@ -101100,8 +101100,222 @@ Výstup:
 
 První skutečné použití je nejlepší test dokumentace. Ne proto, že odhalí každou chybu, ale protože ukáže, jestli se z interní mapy stalo něco víc než hezký seznam. Dobrá mapa zkracuje cestu k rozhodnutí. Výborná mapa to dělá bez toho, aby cestou rozhazovala staré odkazy, citlivá data a drobné nejistoty, které pak musí někdo uklízet.
 
+## Příloha MX: Uzavření ověřené úpravy dlouhodobé mapy do stabilního záznamu
+
+Příloha MW ověřila úpravu dlouhodobé mapy při prvním skutečném použití. Příloha MX řeší další krok: co udělat, aby ověřená úprava nezůstala viset jako dočasná poznámka, ale stala se stabilní součástí mapy.
+
+Tohle je malý, ale důležitý rozdíl. Ověření říká, jestli úprava pomohla. Uzavření říká, jak se s tímto výsledkem bude dál pracovat. Bez uzavření vzniká dokumentační polostín: někde existuje karta ověření, někde stará verze mapy, někdo si pamatuje doplňující větu a další člověk za měsíc neví, čemu má věřit.
+
+Výstupem této přílohy je stabilizační zápis:
+
+```text
+Uzavíraná úprava:
+Výsledek ověření:
+Finální mapový záznam:
+Co se přepisuje:
+Co se archivuje:
+Privacy-first úklid:
+Vlastník další kontroly:
+Datum další revize:
+```
+
+Smyslem není vyrobit nový proces. Smyslem je zavřít smyčku tak, aby běžný uživatel mapy viděl jen aktuální cestu, ne historii všech pokusů, které k ní vedly.
+
+### Začněte výsledkem ověření
+
+Nejdřív se vraťte k rozhodovací větě z Přílohy MW. Podle ní určete, jaký typ uzavření dává smysl.
+
+```text
+Drží: převést úpravu do stabilního záznamu a uzavřít ověřovací kartu.
+Drží s třením: doplnit jednu malou korekci, ověřit ji rychlým průchodem a teprve potom uzavřít.
+Nedrží: neuzavírat jako stabilní pravidlo; vrátit úpravu do opravy nebo změnit typ zásahu.
+```
+
+Slabé uzavření:
+
+```text
+Úprava asi funguje, necháme ji tam.
+```
+
+Silnější uzavření:
+
+```text
+Úprava drží: mapový záznam pro mazání zákaznických exportů zůstává jako aktuální zdroj pravdy, ověřovací karta se uzavírá a stará retenční poznámka se přesouvá do archivu mimo běžnou trasu.
+```
+
+Rozdíl je v tom, že druhá věta říká, co platí, co končí a co už nemá být na očích. Dlouhodobá mapa potřebuje právě takovou jasnost.
+
+### Přepište záznam do současného pravidla
+
+Ověřovací poznámky často mluví jazykem změny: "doplnit", "opravit", "ověřit", "po prvním použití zkontrolovat". Stabilní mapa má mluvit jazykem práce: "když řešíte tuto situaci, použijte tento zdroj pravdy a udělejte tento další krok".
+
+Příklad přechodového zápisu:
+
+```text
+Doplnili jsme hranici mezi zákaznickými exporty a supportními exporty, protože při ověření nebyla jasná.
+```
+
+Stabilní zápis:
+
+```text
+Zákaznické exporty po auditu se mažou podle zákaznického exportního playbooku. Supportní exporty, které vznikly při řešení ticketu, se kontrolují podle supportního retenčního pravidla. Do auditního souhrnu patří jen potvrzení akce, ne kopie exportu.
+```
+
+Stabilní zápis nemusí vysvětlovat celou historii. Má odpovědět člověku, který přijde později a potřebuje rozhodnutí teď. Historie může zůstat v changelogu nebo archivu, ale nemá se tvářit jako běžná instrukce.
+
+Codyho komentář: interní dokumentace často stárne proto, že v ní zůstávají vrstvy geologie. Nahoře nový odstavec, pod ním starý odstavec, vedle poznámka "platí od Q2" a někde v komentáři věta, kterou zná jen autor. To není znalostní báze. To je archeologie s přístupovými právy.
+
+### Zavřete starou cestu viditelně, ale úsporně
+
+Když se úprava stane stabilní, stará cesta musí přestat vypadat jako alternativa. Nestačí říct týmu, že "už se používá nová verze". Mapa musí sama ukázat, co je aktuální.
+
+Podle situace vyberte jeden zásah:
+
+- Starý záznam smažte, pokud nemá žádnou historickou hodnotu.
+- Starý záznam archivujte, pokud je potřeba kvůli auditu nebo zpětnému dohledání.
+- Starý záznam přesměrujte, pokud na něj lidé pořád chodí z odkazů.
+- Starý záznam slučte, pokud obsahuje jednu užitečnou část a zbytek mate.
+- Starý záznam označte jako nahrazený jen tehdy, když ho opravdu musíte nechat viditelný.
+
+Dobré pravidlo:
+
+```text
+Běžná pracovní trasa má ukazovat jednu aktuální cestu. Historie má být dohledatelná, ale nemá soutěžit o pozornost.
+```
+
+U privacy-first provozu je to ještě důležitější. Staré záznamy často obsahují odkazy na exporty, screenshoty, incidentní poznámky, zákaznické ukázky nebo dočasné složky. Pokud už nejsou potřeba pro běžné rozhodnutí, nemají zůstávat v mapě jen proto, že "se to může hodit".
+
+### Vyčistěte ověřovací stopu
+
+Po uzavření úpravy projděte, co vzniklo během ověřování. Cílem není smazat důkaz, že se práce udělala. Cílem je ponechat nejmenší stopu, která stačí pro budoucí pochopení rozhodnutí.
+
+Zkontrolujte:
+
+1. Ověřovací karta obsahuje jen pracovní situaci a výsledek, ne citlivé podklady.
+2. Dočasné poznámky, screenshoty a exporty mají jasné rozhodnutí: smazat, zkrátit, anonymizovat nebo archivovat.
+3. Changelog popisuje změnu bez osobních nebo zákaznických detailů.
+4. Odkazy v mapě vedou na stabilní zdroj pravdy, ne na pracovní složku ověření.
+5. Přístup k archivu má jen role, která ho skutečně potřebuje.
+
+Příklad dobré uzavírací stopy:
+
+```text
+2026-05-21: Zpřesněna hranice mezi zákaznickými exporty a supportními exporty. Ověřeno prvním použitím při uzavření auditu; finální pravidlo je v retenční mapě.
+```
+
+Příklad slabé stopy:
+
+```text
+Viz screenshoty a exporty ve složce /audit/test/old-final-final.
+```
+
+Ano, `old-final-final` je možná upřímné pojmenování. To z něj ale nedělá provozní standard.
+
+### Nastavte návrat do běžné revize
+
+Stabilní záznam nepotřebuje speciální dohled navždy. Potřebuje se vrátit do běžného rytmu mapy: měsíční, kvartální nebo spouštěčové kontroly podle rizika.
+
+U uzavírané úpravy určete:
+
+- kdo je vlastník záznamu;
+- kdy se má záznam příště zkontrolovat;
+- jaký spouštěč vyvolá mimořádnou revizi;
+- jak se pozná, že záznam znovu vytváří tření;
+- kde se bude evidovat příští změna.
+
+Spouštěče revize mohou být:
+
+- změna dodavatele nebo nástroje;
+- změna datové kategorie;
+- nový typ zákaznického workflow;
+- incident nebo skoro-incident;
+- opakovaný dotaz týmu na stejnou hranici;
+- změna role vlastníka.
+
+Tím se uzavření nestane zamčením. Stabilní neznamená mrtvé. Znamená jen, že pravidlo je dost jasné pro běžné použití a další změny mají normální cestu.
+
+### Karta uzavření úpravy dlouhodobé mapy
+
+Použijte ji ve chvíli, kdy ověřená úprava přechází do stabilní mapy.
+
+```text
+Datum uzavření:
+Uzavíraná úprava:
+Původní pracovní otázka:
+Výsledek prvního ověření: drží / drží s třením / nedrží
+Provedená korekce před uzavřením:
+Finální mapový záznam:
+Nahrazené nebo archivované záznamy:
+Přesměrování starých odkazů:
+Changelog věta:
+Privacy-first úklid:
+Dočasné podklady smazané nebo archivované:
+Vlastník záznamu:
+Další běžná revize:
+Spouštěče mimořádné revize:
+Co zůstává mimo rozsah:
+```
+
+Vyplněný příklad:
+
+```text
+Datum uzavření: 2026-05-21
+Uzavíraná úprava: hranice mezi zákaznickými exporty a supportními exporty
+Původní pracovní otázka: které pravidlo použít při mazání zákaznických exportů po auditu?
+Výsledek prvního ověření: drží s třením
+Provedená korekce před uzavřením: doplněna jedna věta o supportních exportech
+Finální mapový záznam: zákaznické exporty po auditu řeší zákaznický exportní playbook; supportní exporty řeší supportní retenční pravidlo
+Nahrazené nebo archivované záznamy: stará interní retenční poznámka přesunuta do archivu
+Přesměrování starých odkazů: starý odkaz vede na nový mapový záznam
+Changelog věta: zpřesněna hranice mezi zákaznickými a supportními exporty
+Privacy-first úklid: v mapě zůstal jen souhrn, exporty se neukládají jako důkaz
+Dočasné podklady smazané nebo archivované: ověřovací poznámka bez osobních dat ponechána v changelogu
+Vlastník záznamu: delivery lead
+Další běžná revize: další kvartální kontrola mapy
+Spouštěče mimořádné revize: nový supportní exportní tok nebo opakovaný dotaz týmu
+Co zůstává mimo rozsah: neslučujeme retenční playbooky
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu úpravu dlouhodobé mapy, která už prošla prvním použitím.
+
+1. Přečtěte rozhodovací větu z ověření.
+2. Vyberte stav: uzavřít, nejdřív drobně korigovat, nebo vrátit do opravy.
+3. Přepište finální záznam do jazyka současného pravidla.
+4. Určete, co se stane se starou cestou.
+5. Zkontrolujte odkazy, archivy a dočasné podklady.
+6. Napište changelog větu bez citlivých detailů.
+7. Určete vlastníka, běžnou revizi a spouštěče mimořádné revize.
+
+Výstup:
+
+```text
+Ověřená úprava dlouhodobé mapy je uzavřená do stabilního záznamu, stará cesta nepůsobí jako alternativa a ověřovací stopa je privacy-first uklizená.
+```
+
+### Checklist kapitoly
+
+- Vycházíte z rozhodovací věty po prvním ověření?
+- Neuzavíráte jako stabilní pravidlo úpravu, která nedrží?
+- Pokud úprava držela s třením, udělali jste jen nejmenší nutnou korekci?
+- Je finální záznam napsaný jako současné pravidlo, ne jako historie změny?
+- Vidí běžný uživatel mapy jednu aktuální cestu?
+- Je starý záznam smazaný, archivovaný, přesměrovaný nebo jasně nahrazený?
+- Nezůstaly v mapě odkazy na pracovní složky ověření?
+- Obsahuje changelog větu bez osobních a zákaznických detailů?
+- Prošli jste dočasné screenshoty, exporty a poznámky?
+- Zůstala jen nejmenší datová stopa potřebná pro budoucí pochopení rozhodnutí?
+- Má stabilní záznam vlastníka?
+- Má záznam další běžnou revizi?
+- Jsou jasné spouštěče mimořádné revize?
+- Je zapsané, co zůstává mimo rozsah?
+
+Dobře uzavřená úprava nevypadá dramaticky. Prostě přestane být vidět jako zvláštní projekt a začne fungovat jako normální součást mapy. Lidé najdou platné pravidlo, staré odkazy je nesvedou vedle a tým nemusí nosit kontext v hlavě. To je přesně ten druh klidu, který se v provozu počítá.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MX o uzavření ověřené úpravy dlouhodobé mapy do stabilního záznamu: práce s výsledkem ověření, přepis do současného pravidla, zavření starých cest, privacy-first úklid ověřovací stopy, návrat do běžné revize, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MW o ověření úpravy dlouhodobé mapy po prvním skutečném použití: návrat k pracovní otázce, sledování trasy, stavy ověření, privacy-first kontrola, rozhodovací karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MV o převodu nálezu z přehledu dlouhodobé mapy do jedné hotové úpravy: výběr nálezu podle ceny práce, pracovní věta, typ zásahu, oprava v místě práce, oddělení historie, privacy-first úklid, ověření jedním průchodem, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MU o prvním přehledu dlouhodobé mapy standardů: pracovní otázky, trasa ke zdroji pravdy, duplicity, stárnutí záznamů, privacy-first kontrola mapy, jedna vybraná úprava, karta, mini workshop a checklist.
