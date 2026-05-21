@@ -100838,8 +100838,271 @@ Jeden nález z přehledu mapy byl převeden do hotové úpravy, která zkracuje 
 
 Dobrá úprava dlouhodobé mapy je skoro nenápadná. Člověk prostě rychleji najde správné pravidlo, stará cesta ho nesvede stranou a citlivá data neleží v navigaci jen proto, že se kdysi hodila jako důkaz. To je přesně ten druh interní kvality, která nevypadá dramaticky, ale šetří práci každý týden.
 
+## Příloha MW: Ověření úpravy dlouhodobé mapy po prvním skutečném použití
+
+Příloha MV končí hotovou úpravou dlouhodobé mapy. Příloha MW řeší okamžik, kdy se ukáže, jestli úprava opravdu pomohla: první skutečné použití v běžné práci.
+
+Nepočítá se kontrola, při které autor úpravy klikne na odkaz a řekne "funguje". To je technická kontrola. Tady jde o pracovní ověření: člověk má konkrétní otázku, potřebuje najít platné pravidlo a mapa ho má dovést k rozhodnutí bez vysvětlování bokem.
+
+Výstupem této přílohy je krátká ověřovací karta:
+
+```text
+Ověřovaná úprava:
+První skutečná situace:
+Kdo mapu použil:
+Našel správnou cestu bez nápovědy:
+Kde vzniklo tření:
+Privacy-first kontrola:
+Rozhodnutí po ověření:
+Další malý krok:
+```
+
+Smysl není měřit výkon člověka. Smysl je zjistit, jestli mapová úprava drží v provozu. Pokud člověk zabloudí, není to ostuda uživatele. Je to užitečný signál, že mapa pořád mluví víc jazykem autora než jazykem práce.
+
+### Vraťte se k původní pracovní otázce
+
+První ověření začíná původním důvodem úpravy. Neotvírejte mapu obecně. Vezměte větu, kvůli které se úprava dělala.
+
+Příklady:
+
+```text
+Které pravidlo použít při mazání zákaznických exportů po auditu?
+Kde najít aktuální onboardingový standard pro delivery roli?
+Jaký zdroj pravdy platí pro měsíční kontrolu privacy-first analytiky?
+Kam zapsat poučení z uzavřeného incidentního drillu?
+```
+
+Dobré ověření se ptá:
+
+1. Najde člověk správný záznam podle této otázky?
+2. Pozná, že našel aktuální zdroj pravdy?
+3. Ví, co má udělat dál?
+4. Neotevře starou nebo citlivou cestu jako běžnou možnost?
+5. Vznikne z použití mapy hotové rozhodnutí, nebo další dotaz?
+
+Slabé ověření:
+
+```text
+Podívali jsme se na mapu a vypadá přehledně.
+```
+
+Silnější ověření:
+
+```text
+Delivery lead podle mapy našel retenční playbook pro zákaznické exporty, nepoužil starý interní úklidový standard a zapsal rozhodnutí o smazání do auditního souhrnu.
+```
+
+Rozdíl je v důkazu. Přehlednost je dojem. Dokončené rozhodnutí je provozní signál.
+
+### Sledujte trasu, ne poslušnost
+
+Při prvním použití nesledujte, jestli člověk postupuje "správně" podle vaší představy. Sledujte, kudy reálně jde. Kliknutí, hledání, zastavení, návraty, dotazy a obcházení jsou užitečnější než formální souhlas.
+
+Zapište hlavně:
+
+- první výraz, podle kterého člověk hledal;
+- záznam, který otevřel jako první;
+- místo, kde zaváhal;
+- starou cestu, která ho lákala;
+- otázku, kterou musel položit;
+- rozhodnutí, které nakonec udělal;
+- data nebo odkazy, na které při tom narazil.
+
+Krátký záznam trasy:
+
+```text
+Otázka: kde najít pravidlo pro mazání zákaznických exportů po auditu?
+První hledaný výraz: exporty
+První otevřený záznam: Mazání zákaznických exportů po auditu
+Zaváhání: nejasné, jestli se pravidlo týká i exportů ze supportu
+Stará cesta: interní retenční poznámka se neobjevila v běžné mapě
+Rozhodnutí: použít zákaznický exportní playbook a zapsat souhrn do auditu
+Datová stopa: bez otevření původní exportní složky
+```
+
+Takový záznam stačí. Nepotřebujete hodinový záznam obrazovky ani kopii citlivých dat. Mapa má být ověřená, ne sledovaná jako podezřelý proces. Ano, interní dokumentace bez špionážního dramatu. Šílený nápad, vím.
+
+### Rozlište tři výsledky ověření
+
+Po prvním použití vyberte jeden ze tří stavů.
+
+```text
+Drží: člověk našel platné rozhodnutí bez nápovědy a bez nebezpečné datové stopy.
+Drží s třením: rozhodnutí našel, ale musel hádat, ptát se nebo obcházet nejasnost.
+Nedrží: skončil ve stejné nejistotě, otevřel špatnou cestu nebo úprava nevedla k rozhodnutí.
+```
+
+Stav "drží" neznamená, že mapa je navždy hotová. Znamená jen, že konkrétní úprava splnila svůj nejbližší slib.
+
+Stav "drží s třením" je nejčastější. Nepanikařte. Nezakládejte nový projekt. Zapište jedno tření a rozhodněte, jestli si zaslouží drobnou korekci.
+
+Stav "nedrží" je také užitečný, pokud se nezamete pod koberec. Ukazuje, že původní zásah mířil vedle: možná se přejmenoval záznam, ale problém byl ve zdroji pravdy; možná se doplnila hranice, ale stará cesta pořád vypadá platně; možná se opravila navigace, ale chybí vlastník rozhodnutí.
+
+### Kdy dělat korekci a kdy počkat
+
+Ne každé tření se má opravit hned. Některé tření je cena novosti: člověk vidí upravenou mapu poprvé a chvíli se orientuje. Jiné tření je strukturální: mapa pořád schovává rozhodnutí, míchá staré a nové cesty nebo nutí lidi ptát se autora.
+
+Korekci udělejte hned, pokud:
+
+- člověk otevřel starý zdroj jako běžnou cestu;
+- není jasné, který standard je platný;
+- mapa vede na citlivý nebo zbytečně široce přístupný odkaz;
+- chybí hranice použití mezi dvěma podobnými pravidly;
+- bez nápovědy nevznikne rozhodnutí.
+
+Počkejte do dalšího cyklu, pokud:
+
+- člověk správnou cestu našel, jen název není elegantní;
+- tření vzniklo tím, že o úpravě ještě nevěděl;
+- problém se týká jiné části mapy než ověřované úpravy;
+- oprava by vyžadovala sloučení více standardů;
+- nemáte druhý signál, že se tření opakuje.
+
+Praktické pravidlo:
+
+```text
+Opravujte to, co brání rozhodnutí nebo zvyšuje datové riziko. Zbytek dejte do dalšího přehledu.
+```
+
+Tím se mapa zlepšuje bez toho, aby se z každého použití stal dokumentační sprint.
+
+### Privacy-first kontrola po použití
+
+První skutečné použití mapy je dobrá chvíle zkontrolovat, jestli úprava omylem nevytvořila novou datovou stopu.
+
+Zeptejte se:
+
+1. Musel člověk otevřít osobní, zákaznická nebo citlivá data, aby pochopil pravidlo?
+2. Vedl mapový odkaz na pracovní export, screenshot nebo starý incidentní podklad?
+3. Vznikla při ověření nová kopie dat jen proto, aby se dokázalo, že úprava funguje?
+4. Je v mapě jen souhrn rozhodnutí, nebo celý původní materiál?
+5. Má k novému zdroji přístup jen role, která ho opravdu potřebuje?
+6. Je jasné, kdy se dočasné podklady po ověření smažou?
+
+Dobré ověření:
+
+```text
+Člověk našel rozhodnutí přes souhrn a playbook. Původní export ani screenshot se neotevíraly. Do ověřovací karty se zapsala jen pracovní situace a výsledek.
+```
+
+Slabé ověření:
+
+```text
+Pro jistotu jsme přiložili screenshot složky s exporty a kopii starého chatu.
+```
+
+"Pro jistotu" je častý důvod, proč interní systémy nenápadně tloustnou o data, která už nikdo nepotřebuje. Privacy-first provoz neznamená, že se nesmí nic ověřit. Znamená, že ověření má používat nejmenší důkaz, který stačí pro rozhodnutí.
+
+### Uzavřete ověření jednou větou
+
+Po prvním použití napište jednu rozhodovací větu. Bez ní ověření zůstane jen dojmem.
+
+Šablony:
+
+```text
+Úprava drží, protože člověk našel platný zdroj pravdy bez nápovědy a bez otevření staré datové cesty.
+```
+
+```text
+Úprava drží s třením: rozhodnutí vzniklo, ale hranice mezi zákaznickými exporty a supportními exporty musí být doplněna jednou větou.
+```
+
+```text
+Úprava nedrží: člověk otevřel starý retenční záznam jako platný, takže starou cestu musíme přesunout mimo běžnou mapu.
+```
+
+Jedna věta pomáhá dalšímu kroku. Když je výsledek "drží", uzavřete úpravu v changelogu. Když "drží s třením", udělejte malou korekci. Když "nedrží", vraťte se k mapové úpravě a opravte typ zásahu.
+
+### Karta prvního ověření úpravy mapy
+
+Použijte ji po prvním normálním použití upraveného záznamu.
+
+```text
+Datum ověření:
+Ověřovaná úprava:
+Původní pracovní otázka:
+První skutečná situace:
+Role člověka, který mapu použil:
+První hledaný výraz nebo vstup:
+První otevřený záznam:
+Našel platný zdroj pravdy bez nápovědy: ano / částečně / ne
+Vzniklé rozhodnutí:
+Kde vzniklo tření:
+Stará cesta, která se objevila:
+Privacy-first kontrola:
+Dočasné podklady k úklidu:
+Výsledek ověření: drží / drží s třením / nedrží
+Rozhodovací věta:
+Další malý krok:
+Co zůstává mimo rozsah:
+```
+
+Vyplněný příklad:
+
+```text
+Datum ověření: 2026-05-21
+Ověřovaná úprava: hranice mezi zákaznickými exporty a interními pracovními podklady
+Původní pracovní otázka: které pravidlo použít při mazání zákaznických exportů po auditu?
+První skutečná situace: uzavření auditu po předání výstupů zákazníkovi
+Role člověka, který mapu použil: delivery lead
+První hledaný výraz nebo vstup: exporty po auditu
+První otevřený záznam: Mazání zákaznických exportů po auditu
+Našel platný zdroj pravdy bez nápovědy: částečně
+Vzniklé rozhodnutí: použít zákaznický exportní playbook a zapsat pouze souhrn smazání
+Kde vzniklo tření: nebylo jasné, jestli supportní export patří do stejné kategorie
+Stará cesta, která se objevila: žádná stará retenční poznámka v běžné mapě
+Privacy-first kontrola: původní exporty se neotevíraly, mapa vede na souhrn
+Dočasné podklady k úklidu: krátká ověřovací poznámka bez osobních dat zůstává v changelogu
+Výsledek ověření: drží s třením
+Rozhodovací věta: úprava drží, ale hranice pro supportní exporty potřebuje jednu doplňující větu
+Další malý krok: doplnit hranici u stejného záznamu
+Co zůstává mimo rozsah: neslučujeme retenční playbooky ani neměníme auditní proces
+```
+
+Karta je záměrně krátká. Není to nový report. Je to potvrzení, že mapa buď pomohla, nebo přesně ukázala, kde ještě brzdí.
+
+### Mini workshop na 10 minut
+
+Vezměte jednu úpravu dlouhodobé mapy, která už byla poprvé použita.
+
+1. Přečtěte původní pracovní otázku.
+2. Popište první skutečnou situaci.
+3. Zapište první hledaný výraz a první otevřený záznam.
+4. Ověřte, jestli vzniklo rozhodnutí bez nápovědy.
+5. Najděte jedno místo tření.
+6. Zkontrolujte, jestli nevznikla nová datová stopa.
+7. Vyberte stav: drží, drží s třením nebo nedrží.
+8. Napište jednu rozhodovací větu.
+9. Určete nejmenší další krok.
+
+Výstup:
+
+```text
+Úprava dlouhodobé mapy byla ověřena prvním skutečným použitím a má jasný stav, privacy-first kontrolu a jeden další krok.
+```
+
+### Checklist kapitoly
+
+- Ověřovali jste skutečné použití, ne jen technické kliknutí?
+- Vrátili jste se k původní pracovní otázce?
+- Sledovali jste reálnou trasu člověka mapou?
+- Zapsali jste první hledaný výraz a první otevřený záznam?
+- Poznali jste, jestli člověk našel platný zdroj pravdy bez nápovědy?
+- Vzniklo z použití mapy konkrétní rozhodnutí?
+- Rozlišili jste stav drží, drží s třením nebo nedrží?
+- Nezaměnili jste problém mapy za chybu člověka?
+- Zkontrolovali jste staré cesty, které se znovu objevily?
+- Ověřili jste, že mapa nevede na citlivé exporty, screenshoty nebo staré pracovní složky?
+- Nevytvořili jste kvůli ověření zbytečné nové kopie dat?
+- Zapsali jste rozhodovací větu?
+- Má další krok realistický rozsah?
+- Je jasné, co teď vědomě neřešíte?
+
+První skutečné použití je nejlepší test dokumentace. Ne proto, že odhalí každou chybu, ale protože ukáže, jestli se z interní mapy stalo něco víc než hezký seznam. Dobrá mapa zkracuje cestu k rozhodnutí. Výborná mapa to dělá bez toho, aby cestou rozhazovala staré odkazy, citlivá data a drobné nejistoty, které pak musí někdo uklízet.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MW o ověření úpravy dlouhodobé mapy po prvním skutečném použití: návrat k pracovní otázce, sledování trasy, stavy ověření, privacy-first kontrola, rozhodovací karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MV o převodu nálezu z přehledu dlouhodobé mapy do jedné hotové úpravy: výběr nálezu podle ceny práce, pracovní věta, typ zásahu, oprava v místě práce, oddělení historie, privacy-first úklid, ověření jedním průchodem, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MU o prvním přehledu dlouhodobé mapy standardů: pracovní otázky, trasa ke zdroji pravdy, duplicity, stárnutí záznamů, privacy-first kontrola mapy, jedna vybraná úprava, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MT o uložení potvrzeného návratu standardu do dlouhodobé mapy: rozhodnutí, kdy standard patří do mapy, jednovětý zápis, oddělení mapy od historie, revizní spouštěče, privacy-first stabilizace, karta, mini workshop a checklist.
