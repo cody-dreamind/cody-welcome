@@ -102805,8 +102805,292 @@ Uzavřená oprava má první běžnou kontrolu v normálním údržbovém rytmu 
 
 První běžná kontrola je malá pojistka proti tomu, aby se dobře uzavřená oprava potichu rozpadla. Když drží, nechte ji žít v normálním rytmu. Když drhne, opravte přesně místo tření. Když se vrátila stará cesta nebo vzniklo datové riziko, nesnažte se to přelepit dalším vysvětlením. Vraťte problém do systému tam, kam patří.
 
+## Příloha NE: Převod nálezu z první běžné kontroly do jedné údržbové úpravy
+
+Příloha ND ukázala, jestli oprava po zařazení do běžné údržby opravdu drží. Pokud stav vyšel jako `drží`, není potřeba dělat další projekt. Nechte opravu v běžném rytmu a vraťte se k ní až v další plánované kontrole. Příloha NE je pro situace, kdy kontrola našla konkrétní tření, částečný návrat staré cesty nebo drobné datové riziko, které se dá převést do jedné údržbové úpravy.
+
+Otázka této přílohy je jednoduchá:
+
+```text
+Jak z nálezu z první běžné kontroly uděláme jednu malou úpravu, která opravdu zlepší práci?
+```
+
+Výstupem není nový audit ani dlouhý seznam. Výstupem je úpravová karta:
+
+```text
+Nález z kontroly:
+Typ nálezu: tření / návrat staré cesty / paralelní evidence / datová stopa / vlastnictví
+Jedna úprava:
+Místo zásahu:
+Hotovo znamená:
+Ověření:
+Privacy-first poznámka:
+Vlastník:
+Termín:
+Co zůstává mimo rozsah:
+```
+
+Smysl je zabránit tomu, aby se první běžná kontrola proměnila v další údržbovou frontu. Fronta má smysl, když se problém nedá opravit hned nebo má větší dopad. Pokud ale kontrola ukázala jednu jasnou překážku, opravte ji jako malou údržbovou úpravu a zavřete smyčku.
+
+### Vyberte jen jeden nález
+
+První běžná kontrola může najít několik drobností. Starý odkaz v chatu, nepřesnou větu v šabloně, osobní checklist, chybějící vlastnictví, příliš těžký důkaz nebo vedlejší dokument, který lidi pořád mate. Všechno může být pravda. To ale neznamená, že všechno patří do jedné úpravy.
+
+Vyberte nález podle tří kritérií:
+
+1. nejvíc brání běžnému použití opravy;
+2. dá se opravit v jednom konkrétním místě;
+3. nevyžaduje nové sbírání důkazů ani širokou změnu procesu.
+
+Příklad dobrého výběru:
+
+```text
+Nález: jeden tým dál používá osobní checklist se starým screenshotovým krokem.
+Proč vybrat: vrací starou cestu a má jasné místo zásahu.
+Úprava: nahradit osobní checklist odkazem na kanonickou šablonu a odstranit starý krok.
+```
+
+Příklad příliš širokého výběru:
+
+```text
+Nález: lidé někdy nechápou auditní proces.
+Úprava: předělat celý auditní proces.
+```
+
+Druhá varianta může být jednou správná, ale nepatří do malé údržbové úpravy po první kontrole. Je to kandidát na samostatný audit nebo větší provozní změnu.
+
+### Přepište nález do úpravové věty
+
+Nález z kontroly často popisuje problém. Úpravová věta má popsat zásah. Rozdíl je důležitý, protože problém sám o sobě ještě neříká, co se změní.
+
+Použijte tvar:
+
+```text
+Upravíme [konkrétní místo] tak, aby [konkrétní práce] šla udělat bez [konkrétní tření nebo riziko].
+```
+
+Příklady:
+
+```text
+Upravíme osobní onboardingový checklist tak, aby vedl jen na kanonickou kartu exportů a nevracel screenshotový krok.
+```
+
+```text
+Upravíme šablonu auditního ticketu tak, aby stav "Export ověřen" byl vidět při uzavření bez kopírování detailu exportu do komentáře.
+```
+
+```text
+Upravíme dlouhodobou mapu standardů tak, aby u záznamu byl vidět vlastník bez otevírání archivní změnové karty.
+```
+
+Slabá úpravová věta:
+
+```text
+Zlepšíme používání opraveného pravidla.
+```
+
+To není věta pro práci. To je přání. Přání patří do poznámek, úprava do systému.
+
+### Vyberte místo zásahu co nejblíž práci
+
+Malá údržbová úprava má být v místě, kde člověk skutečně rozhoduje nebo něco dělá. Pokud je tření v šabloně ticketu, neupravujte jen obecnou dokumentaci. Pokud je problém v odkazu z onboardingu, neupravujte jen mapu standardů. Pokud se stará cesta vrací přes osobní checklist, nestačí poslat zprávu do chatu.
+
+Možná místa zásahu:
+
+- šablona ticketu;
+- checklist v onboardingu;
+- kanonická karta standardu;
+- dlouhodobá mapa standardů;
+- připnutý odkaz v pracovním kanálu;
+- formulář nebo povinné pole;
+- krátký příklad v dokumentaci;
+- archivní poznámka, která se pořád objevuje ve výsledcích hledání.
+
+Pravidlo:
+
+```text
+Opravte místo, kde chyba vzniká, ne místo, kde se o chybě mluví.
+```
+
+Příklad:
+
+```text
+Problém: lidé kopírují detail exportu do komentáře ticketu.
+Slabý zásah: připomenout týmu, že to nemá dělat.
+Silný zásah: upravit šablonu ticketu tak, aby stav ověření byl jasný a komentář nebyl potřeba.
+```
+
+Codyho komentář: zpráva do chatu je často nejlevnější úprava na pět minut a nejdražší úprava na další tři měsíce. Rychle zmizí, nikdo neví, jestli platí, a při dalším onboardingu ji stejně někdo nenajde. Pokud něco má zůstat, dejte to do pracovního místa, ne do proudu zpráv.
+
+### Definujte hotovo bez pocitu vítězství
+
+U malé údržbové úpravy nestačí napsat "upraveno". Hotovo musí popsat, jak poznáte, že se původní nález už v běžné trase nevrací.
+
+Použijte tvar:
+
+```text
+Hotovo znamená, že při dalším běžném použití [kdo] udělá [co] bez [staré cesty / paralelní evidence / zbytečné datové stopy].
+```
+
+Příklady:
+
+```text
+Hotovo znamená, že při dalším auditním ticketu vlastník uzavře export stavem "Export ověřen" bez screenshotu a bez kopírování detailu exportu do komentáře.
+```
+
+```text
+Hotovo znamená, že nový člověk při onboardingovém průchodu najde kartu exportů přes checklist a nepoužije starý osobní návod.
+```
+
+```text
+Hotovo znamená, že při nejbližší revizi mapy standardů je vlastník záznamu vidět přímo v mapě a archivní karta se neotevírá kvůli běžné práci.
+```
+
+Slabé definice hotovo:
+
+- text byl upraven;
+- tým byl informován;
+- pravidlo je jasnější;
+- dokumentace je aktuální.
+
+Tyto věty mohou být součást práce, ale nejsou důkazem, že se zlepšila běžná trasa.
+
+### Ověřte úpravu jedním normálním průchodem
+
+Po malé údržbové úpravě nepotřebujete další velkou kontrolu. Potřebujete jeden normální průchod, který ukáže, jestli se nález neopakuje.
+
+Ověření má mít tři části:
+
+```text
+Kdy ověříme:
+Co sledujeme:
+Jak rozhodneme:
+```
+
+Příklad:
+
+```text
+Kdy ověříme: při dalším auditním ticketu s exportem.
+Co sledujeme: jestli se použije stav bez screenshotu a bez detailu v komentáři.
+Jak rozhodneme: pokud ano, úpravu zavřeme; pokud ne, vrací se do údržbové fronty jako problém šablony.
+```
+
+Neověřujte úpravu tím, že se zeptáte týmu, jestli jí rozumí. Lidé často rozumí věci ve chvíli, kdy ji čtou, a stejně ji později obejdou, protože pracovní místo je nepohodlné. Ověřujte použití, ne souhlas.
+
+### Privacy-first brzda malé úpravy
+
+Malé úpravy umí nenápadně zvětšit datovou stopu. Tým chce rychle ověřit, že oprava funguje, a najednou začne ukládat příklady, kopie ticketů, screenshoty, exporty nebo jména lidí, kteří postup použili špatně. To je přesně opačný směr, než má privacy-first provoz držet.
+
+Před uzavřením úpravové karty si odpovězte:
+
+1. Přidává úprava nové pole, nový export, nový screenshot nebo nový log?
+2. Pokud ano, je to opravdu nutné pro běžnou práci, ne jen pro kontrolu?
+3. Dá se ověření popsat stavem, počtem nebo krátkou anonymizovanou větou?
+4. Nevzniká seznam lidí, kteří "udělali chybu", místo záznamu o kvalitě procesu?
+5. Pokud se pracuje s příkladem, je modelový nebo anonymizovaný?
+6. Má dočasný podklad termín smazání?
+7. Je případný nový datový tok zapsaný v datové mapě?
+
+Silná privacy-first poznámka:
+
+```text
+Ověření ukládá jen stav průchodu a větu výsledku. Nekopírujeme obsah ticketu, screenshot exportu ani jméno člověka, který použil starý checklist.
+```
+
+Slabá poznámka:
+
+```text
+Pro jistotu si necháme ukázky všech chybných ticketů.
+```
+
+Jistota je dobrá věc, ale nesmí se stát výmluvou pro sběr dat, který později nikdo neuklidí.
+
+### Karta malé údržbové úpravy
+
+Použijte ji ve chvíli, kdy první běžná kontrola podle Přílohy ND najde konkrétní tření, které nepotřebuje nový projekt.
+
+```text
+Datum:
+Nález z kontroly:
+Typ nálezu: tření / návrat staré cesty / paralelní evidence / datová stopa / vlastnictví
+Proč tento nález řešíme teď:
+Jedna úpravová věta:
+Místo zásahu:
+Co přesně se změní:
+Co se nemaže, ale archivuje:
+Hotovo znamená:
+Ověření:
+Datová stopa ověření:
+Privacy-first poznámka:
+Vlastník:
+Termín:
+Co zůstává mimo rozsah:
+Stav po ověření: zavřít / drobně doladit / vrátit do fronty / otevřít riziko
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-21
+Nález z kontroly: jeden auditní ticket měl starý screenshot podle osobního checklistu
+Typ nálezu: návrat staré cesty
+Proč tento nález řešíme teď: starý checklist vrací datově těžší důkaz do běžné práce
+Jedna úpravová věta: upravíme osobní checklist tak, aby vedl jen na kanonickou šablonu auditního ticketu a neobsahoval screenshotový krok
+Místo zásahu: osobní checklist a připnutý odkaz v auditním kanálu
+Co přesně se změní: odstraní se starý krok, vloží se odkaz na kanonickou šablonu, připnutá zpráva povede na zdroj pravdy
+Co se nemaže, ale archivuje: původní checklist jako historický podklad mimo běžnou trasu
+Hotovo znamená: při dalším auditním ticketu se použije stav "Export ověřen" bez screenshotu
+Ověření: další běžný auditní ticket s exportem
+Datová stopa ověření: uloží se jen stav průchodu a krátká věta výsledku
+Privacy-first poznámka: nekopírujeme chybný ticket ani screenshot do kontrolní karty
+Vlastník: provozní lead
+Termín: před dalším auditním review
+Co zůstává mimo rozsah: celková změna auditního procesu
+Stav po ověření: čeká na ověření
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu kartu první běžné kontroly podle Přílohy ND, která nevyšla čistě jako `drží`.
+
+1. Vyberte jeden nález, který nejvíc vrací tření nebo starou cestu.
+2. Pojmenujte typ nálezu.
+3. Přepište ho do jedné úpravové věty.
+4. Najděte místo zásahu co nejblíž běžné práci.
+5. Popište, co přesně se změní.
+6. Definujte `Hotovo znamená`.
+7. Určete jeden normální průchod pro ověření.
+8. Projděte privacy-first brzdu.
+9. Zapište vlastníka, termín a věc mimo rozsah.
+
+Výstup:
+
+```text
+Nález z první běžné kontroly je převedený do jedné malé údržbové úpravy s místem zásahu, definicí hotovo, ověřením a privacy-first hranicí.
+```
+
+### Checklist kapitoly
+
+- Vybrali jste jen jeden nález?
+- Je jasné, proč se řeší teď?
+- Přepsali jste problém do úpravové věty?
+- Má úprava konkrétní místo zásahu?
+- Je místo zásahu blízko reálné práci, ne jen v obecné dokumentaci?
+- Neřešíte jednou malou úpravou celý proces?
+- Má `Hotovo znamená` popis běžného použití?
+- Je ověření navázané na normální průchod?
+- Nesledujete člověka místo kvality trasy?
+- Nevzniká nový screenshot, export nebo kopie ticketu jen kvůli kontrole?
+- Je případná dočasná evidence omezená účelem a termínem smazání?
+- Je jasné, co se archivuje a co se maže?
+- Má úprava vlastníka a termín?
+- Je výslovně napsané, co zůstává mimo rozsah?
+
+Malá údržbová úprava je dobrý nástroj jen tehdy, když zůstane malá. Ne proto, že bychom se báli větší práce, ale proto, že běžný provoz potřebuje uzavírat smyčky. Když první kontrola najde přesné tření, největší služba týmu je opravit přesné místo, ověřit jeden průchod a nepřidat k tomu nový batoh evidence.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha NE o převodu nálezu z první běžné kontroly do jedné malé údržbové úpravy: výběr jednoho nálezu, úpravová věta, místo zásahu blízko práci, definice hotovo, ověření jedním normálním průchodem, privacy-first brzda, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha ND o první běžné kontrole opravy po zařazení do údržby: výběr přirozeného kontrolního okna, kontrola zkrácení práce, rozlišení tření od návratu starého problému, hledání paralelní evidence, privacy-first kontrola běžné údržby, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha NC o uzavření potvrzené opravy do běžné údržby: přepis do zdroje pravdy, zavření přechodové evidence, napojení na běžný rytmus, privacy-first úklid dočasných podkladů, karta uzavření, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha NB o ověření hotové opravy po prvním běžném použití: normální použití místo slavnostní kontroly, návrat k větě Hotovo znamená, sledování pracovní trasy, stavy Potvrdit/Doladit/Vrátit do fronty/Otevřít riziko, privacy-first kontrola ověřovací stopy, karta ověření, mini workshop a checklist.
