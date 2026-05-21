@@ -97320,8 +97320,230 @@ Potvrzená malá oprava už nemá speciální kontrolní režim; žije v aktuál
 
 Převod do běžné údržby je nenápadná, ale důležitá část práce. Díky ní se z jedné opravy nestane věčná výjimka. Standard zůstane aktuální, tým nebude hlídat zbytečné artefakty a privacy-first úklid se nestane odkládaným dobrým úmyslem. Hotová oprava má být vidět v lepší práci, ne v tom, kolik složek po sobě nechala.
 
+## Příloha MH: Kontrola běžné údržby onboardingového standardu po prvním cyklu
+
+Jakmile potvrzená malá oprava přejde do běžné údržby, přichází nenápadný test: nezmizela v provozním rytmu tak dobře, že ji už nikdo neumí najít? Převod z Přílohy MG byl správný jen tehdy, když oprava dál chrání standard, ale nevyrábí vlastní administrativní život.
+
+Tato příloha navazuje na Přílohu MG. Vstupem je oprava, která už nemá speciální kontrolní režim a je uložená v existujícím údržbovém rytmu. Cílem není znovu auditovat celý onboarding. Cílem je po prvním běžném cyklu ověřit, že údržbová věta byla použitelná, vlastník věděl co kontrolovat a datová stopa zůstala čistá.
+
+První kontrola běžné údržby má odpovědět na šest otázek:
+
+```text
+Proběhl údržbový rytmus opravdu v normálním provozu?
+Našel vlastník údržbovou větu bez hledání v historii opravy?
+Bylo jasné, jaký signál návratu staré varianty sledovat?
+Vznikl po kontrole konkrétní stav, ne jen pocit?
+Nevrátila se speciální evidence zadními dveřmi?
+Zůstala po kontrole jen minimální a užitečná datová stopa?
+```
+
+Když na tyto otázky odpovíte krátce, oprava je zdravě začleněná. Když kvůli nim musíte otevřít tři staré dokumenty, dvě chatová vlákna a export z nástroje, převod do údržby byl spíš přesun nepořádku na nové místo. Papírově uklizeno, prakticky koberec s hrbem.
+
+### Kontrolujte rytmus, ne celou historii
+
+První běžný cyklus má ověřit údržbový rytmus, ne znovu prožít celou opravu. Nevracejte se k tomu, kdo problém našel, kolik verzí opravy existovalo nebo proč se kdysi používala stará varianta. To je historie. Běžná údržba potřebuje pracovat s aktuálním pravidlem.
+
+Otevřete jen tři věci:
+
+- aktuální onboardingový standard;
+- údržbovou větu z Přílohy MG;
+- běžný výstup posledního cyklu, kde se pravidlo mělo projevit.
+
+Neotevírejte automaticky:
+
+- původní kontrolní kartu malé opravy;
+- staré screenshoty nebo exporty;
+- chatová vlákna z prvního ověřování;
+- vedlejší seznam nápadů, které se tehdy neřešily;
+- osobní poznámky autora opravy.
+
+Praktický zápis:
+
+```text
+Kontrolovaný rytmus:
+Aktuální údržbová věta:
+Kde je věta uložená:
+Který běžný výstup se kontroluje:
+Co se neotevírá z historie:
+```
+
+Pokud běžná kontrola bez historie nejde udělat, údržbová věta není dost samostatná. Opravte ji, ne celý standard.
+
+### Ověřte, že vlastník ví, co má rozhodnout
+
+Údržba není jen připomínka v kalendáři. Musí vést k rozhodnutí. Vlastník má po cyklu umět říct, jestli pravidlo drží, potřebuje drobnou úpravu, nebo se stará varianta vrací.
+
+Použijte tři stavy:
+
+```text
+Udržet: pravidlo je nalezitelné, výstup odpovídá minimu a stará varianta se nevrací.
+Doladit: pravidlo funguje, ale údržbová věta, odkaz, příklad nebo umístění má malé tření.
+Znovu otevřít opravu: stará varianta se vrací, výstup neodpovídá minimu nebo údržba neumí problém zachytit.
+```
+
+Stav `Udržet` neznamená "už nikdy nekontrolovat". Znamená, že oprava zůstává v běžném rytmu bez nové akce.
+
+Stav `Doladit` znamená jeden malý zásah. Třeba přejmenovat odkaz, zkrátit údržbovou větu, vyměnit syntetický příklad nebo přesunout kontrolu do bližšího pracovního místa.
+
+Stav `Znovu otevřít opravu` používejte střídmě, ale nebojte se ho. Je lepší přiznat, že převod do údržby byl předčasný, než držet pravidlo v režimu "nějak to hlídáme", který ve skutečnosti nehlídá nic.
+
+Rozhodovací věta:
+
+```text
+Po prvním běžném údržbovém cyklu má oprava stav [Udržet / Doladit / Znovu otevřít opravu], protože [konkrétní signál z práce]. Další krok je [žádná akce / jedna drobná úprava / návrat k malé opravě].
+```
+
+### Hledejte návrat speciální evidence
+
+Nejčastější selhání po převodu do údržby není návrat staré varianty. Je to návrat speciální evidence. Tým si řekne, že už žádný zvláštní režim nepotřebuje, ale pak "pro jistotu" vytvoří další list, ruční kontrolní sloupec nebo složku se screenshoty.
+
+Tohle je potřeba zachytit hned v prvním cyklu.
+
+Varovné signály:
+
+- někdo založil novou tabulku jen pro sledování jedné opravy;
+- kontrola vyžaduje ruční report od každého nového člověka;
+- ve standardu zůstala stará kontrolní karta jako neoficiální návod;
+- tým ukládá screenshoty jako důkaz, že pravidlo funguje;
+- údržbová věta odkazuje na historii místo na aktuální pravidlo;
+- vlastník potřebuje autora opravy, aby vysvětlil, co se má kontrolovat.
+
+Správná reakce není rozšířit evidenci. Správná reakce je zkrátit a zpřesnit údržbu.
+
+Příklad:
+
+```text
+Nález: vlastník při měsíční kontrole otevřel starou kartu opravy, protože údržbová věta neříkala, kde je aktuální syntetický příklad.
+Typ problému: údržbová věta není samostatná.
+Nejmenší úprava: doplnit odkaz na aktuální příklad v onboardingové šabloně a archivovat starou kartu jako historickou.
+```
+
+Codyho komentář: "pro jistotu" je v provozu drahá fráze. Někdy zachrání incident, jasně. Ale často jen převlékne nejistotu za proces. Když nevíte, co přesně má kontrola rozhodnout, další tabulka vám nepomůže. Jen bude vypadat pracovněji.
+
+### Porovnejte údržbovou větu s reálným použitím
+
+Údržbová věta napsaná u stolu může znít dobře a přitom selhat v provozu. První cyklus má ukázat, jestli používá jazyk, který vlastník při práci opravdu pozná.
+
+Zkontrolujte:
+
+- jestli věta začíná správným pracovním okamžikem;
+- jestli ukazuje na konkrétní místo, ne na obecný "standard";
+- jestli popisuje viditelný signál, ne vnitřní pocit;
+- jestli říká, co se stane při nálezu;
+- jestli nevyžaduje data, která se běžně nevytváří;
+- jestli ji pochopí i člověk, který nebyl u původní opravy.
+
+Slabá údržbová věta:
+
+```text
+Kontrolovat, že se lidé drží nové verze předávání.
+```
+
+Silnější údržbová věta:
+
+```text
+Při měsíční kontrole předávací šablony ověř, že syntetický příklad používá zákaznický odkaz, stavovou větu a další krok; screenshot ani export nesmí být doporučená cesta.
+```
+
+Rozdíl je praktický. Druhá věta ukazuje rytmus, místo, signál i hranici datové stopy. První věta jen doufá, že si všichni pamatují kontext.
+
+### Privacy-first kontrola po prvním cyklu
+
+První běžný cyklus je dobrý okamžik ověřit, že privacy-first úklid z Přílohy MG nebyl jen hezká věta v dokumentu. Údržba má fungovat bez nových kopií zákaznických dat, bez sledování lidí a bez ukládání dočasných důkazů, které už nemají účel.
+
+Zeptejte se:
+
+- Použila kontrola jen běžné pracovní výstupy?
+- Nevznikl nový export, screenshot nebo kopie zákaznických dat?
+- Nezapisuje se aktivita konkrétních lidí místo stavu pravidla?
+- Je syntetický příklad pořád dostatečný?
+- Nezůstala dočasná poznámka bez termínu smazání?
+- Ví vlastník, co po kontrole zůstává a co mizí?
+
+Krátká privacy-first věta po cyklu:
+
+```text
+První běžná údržba potvrdila stav pravidla bez nových kopií zákaznických dat; zůstává pouze stav, důvod rozhodnutí a případná malá úprava standardu.
+```
+
+Pokud tato věta není pravdivá, nepište ji silou. Zapište nález a upravte rytmus tak, aby příště nepotřeboval víc dat, než skutečně pomáhá rozhodnutí.
+
+### Karta první běžné údržby
+
+Karta má být krátká. Jejím úkolem je potvrdit, že převod do běžného rytmu funguje.
+
+```text
+Oprava převedená do údržby:
+Běžný údržbový rytmus:
+Vlastník:
+Aktuální údržbová věta:
+Kontrolovaný běžný výstup:
+Signál návratu staré varianty:
+Vznikla speciální evidence:
+Datová stopa po kontrole:
+Stav po cyklu:
+Nejmenší další krok:
+Nejbližší další kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Oprava převedená do údržby: předávací komentář používá zákaznický odkaz místo screenshotu.
+Běžný údržbový rytmus: měsíční kontrola onboardingových šablon.
+Vlastník: delivery lead.
+Aktuální údržbová věta: při kontrole ověřit, že příklady nevrací screenshoty ani exporty jako běžnou cestu.
+Kontrolovaný běžný výstup: aktuální předávací šablona a poslední syntetický příklad.
+Signál návratu staré varianty: ve vzoru se neobjevil screenshot, ale stará karta opravy byla pořád odkazovaná z poznámek.
+Vznikla speciální evidence: ne.
+Datová stopa po kontrole: žádný nový export, stará karta označená jako archiv.
+Stav po cyklu: Doladit.
+Nejmenší další krok: přesunout odkaz ze staré karty na aktuální syntetický příklad.
+Nejbližší další kontrola: další měsíční review šablon.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu opravu, která byla převedená do běžné údržby, a ověřte její první normální cyklus.
+
+1. Otevřete kartu převodu z Přílohy MG.
+2. Najděte aktuální údržbovou větu v běžném pracovním místě.
+3. Vyberte jeden běžný výstup posledního cyklu.
+4. Ověřte, jestli vlastník poznal sledovaný signál bez původní historie.
+5. Zapište stav `Udržet`, `Doladit` nebo `Znovu otevřít opravu`.
+6. Zkontrolujte, jestli nevznikla speciální evidence navíc.
+7. Projděte privacy-first otázky a smažte dočasné podklady bez účelu.
+8. Pokud je potřeba úprava, zapište jen jeden nejmenší další krok.
+9. Uložte kartu první běžné údržby k běžnému rytmu, ne ke staré opravě.
+
+Výstup:
+
+```text
+Oprava po prvním běžném údržbovém cyklu buď drží bez další akce, má jednu drobnou úpravu údržby, nebo se vrací do malé opravy; speciální evidence se neobnovila a datová stopa zůstala minimální.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete první běžný údržbový cyklus, ne celou historii opravy?
+- Otevřeli jste aktuální standard, údržbovou větu a běžný výstup?
+- Nevracíte se ke starým screenshotům, exportům a chatům bez jasného důvodu?
+- Najde vlastník údržbovou větu v místě práce?
+- Je z věty jasné, co má vlastník rozhodnout?
+- Použili jste stav `Udržet`, `Doladit` nebo `Znovu otevřít opravu`?
+- Pokud je stav `Doladit`, je další krok opravdu malý?
+- Pokud se oprava znovu otevírá, je jasné, jaký signál selhal?
+- Nevznikla nová tabulka, report nebo ruční evidence jen pro tuto opravu?
+- Nevyžaduje kontrola sledování konkrétních lidí?
+- Použili jste běžné pracovní výstupy místo nového exportu?
+- Nezůstala stará karta opravy jako druhý zdroj pravdy?
+- Je privacy-first věta po cyklu pravdivá?
+- Má další kontrola přirozený termín v běžném rytmu?
+
+První běžná údržba je malá zkouška dospělosti opravy. Pokud obstojí, oprava už nepotřebuje zvláštní pozornost. Pokud drhne, opravte nejbližší místo v rytmu. A pokud se stará varianta vrací, neberte to jako selhání týmu. Je to užitečný signál, že standard ještě není tak blízko práci, jak měl být.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MH o kontrole běžné údržby onboardingového standardu po prvním cyklu: ověření údržbového rytmu, rozhodovací stavy Udržet/Doladit/Znovu otevřít opravu, návrat speciální evidence, kontrola údržbové věty v reálném použití, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MG o převodu potvrzené malé opravy onboardingového standardu do běžné údržby: uzavření speciálního kontrolního režimu, výběr existujícího údržbového rytmu, údržbová věta, zachování jen užitečného důkazu, privacy-first převod, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MF o kontrole stabilizované malé opravy onboardingového standardu po dalších použitích: výběr běžných použití, sledování cesty k opravenému místu, stavy Drží/Drží s třením/Nedrží, návrat staré varianty, privacy-first kontrola bez dohledu navíc, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha ME o stabilizaci potvrzené malé opravy onboardingového standardu: přepis opravy na aktuální pravidlo, uložení do místa práce, zavření starých variant, návratový signál, uzavření dočasného režimu, privacy-first úklid, stabilizační karta, mini workshop a checklist.
