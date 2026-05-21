@@ -102317,8 +102317,215 @@ Hotová oprava má první běžné ověření a jasný stav. Buď je potvrzená,
 
 První ověření má jednoduchý účel: zjistit, jestli oprava přežila kontakt s běžnou prací. Když ano, uzavřete ji a nechte ji žít v normálním rytmu. Když ne, vraťte do systému přesně ten kousek, který nefungoval. Bez dramatu, bez sběru zbytečných dat a bez výroby dalšího paralelního pravidla.
 
+## Příloha NC: Uzavření potvrzené opravy do běžné údržby
+
+Příloha NB končí jasným stavem po prvním běžném použití. Když stav zní `potvrdit`, práce ještě nekončí tím, že si tým pogratuluje a karta zůstane ležet v rohu. Potvrzená oprava má být vrácená do běžného provozu: do zdroje pravdy, do údržbového rytmu a do minimální historie, která pomůže příště, ale nebude překážet při práci.
+
+Smysl této přílohy je jednoduchý: uzavřít potvrzenou opravu tak, aby z ní nevznikla další paralelní evidence. Oprava má zmizet jako speciální případ a zůstat jen tam, kde ji člověk potřebuje při běžném rozhodování.
+
+Výstupem je krátká uzavírací karta:
+
+```text
+Oprava:
+Stav po ověření: potvrzeno
+Kanonické místo:
+Co se změnilo v běžné práci:
+Co bylo archivováno nebo smazáno:
+Další běžná kontrola:
+Privacy-first poznámka:
+```
+
+### Začněte tím, co má zůstat
+
+Po potvrzení opravy nejdřív rozhodněte, co má zůstat v každodenní trase. Ne co všechno se stalo, kdo se k čemu vyjádřil nebo kolik mezikroků předcházelo výsledku. Běžný uživatel systému potřebuje aktuální pravidlo, ne archeologii.
+
+Položte si tři otázky:
+
+1. Kde člověk potká tuto práci příště?
+2. Jaká jedna věta mu má pomoct udělat správný krok?
+3. Který starý odkaz, text, šablona nebo návyk má přestat být viditelný?
+
+Příklad:
+
+```text
+Potvrzená oprava: onboardingový checklist vede na aktuální záznam o exportech.
+Co má zůstat: v checklistu je pouze aktuální odkaz a věta "Exporty ověřuj podle kanonické karty exportů".
+Co nemá zůstat: stará archivní poznámka v připnuté zprávě kanálu.
+```
+
+Pokud se tým snaží zachovat všechno, oprava se rozředí. Nový člověk pak vidí aktuální pravidlo, starý komentář, archivní odkaz, poznámku z ověření a ještě vysvětlení, proč se to měnilo. To není transparentnost. To je mlha s dobrými úmysly.
+
+### Přepište opravu do zdroje pravdy
+
+Potvrzená oprava patří do místa, kde práce opravdu začíná. Ne jen do logu změn. Pokud se změnil onboardingový krok, patří do onboardingového checklistu. Pokud se změnila šablona ticketu, patří do šablony v nástroji. Pokud se změnilo pravidlo pro práci s daty, patří do datové mapy nebo provozní karty.
+
+Praktický postup:
+
+1. Najděte kanonické místo.
+2. Přepište potvrzenou opravu jako současné pravidlo.
+3. Odstraňte formulace typu "nově", "dočasně", "po opravě" tam, kde už nejde o přechodový stav.
+4. Nechte krátkou stopu v changelogu, ne v hlavní pracovní trase.
+5. Ověřte, že stará cesta už není viditelnější než nová.
+
+Silný zápis:
+
+```text
+Při uzavření auditního projektu zapiš stav exportu do pole "Export ověřen". Screenshot exportu neukládej, pokud k tomu není konkrétní incidentní důvod.
+```
+
+Slabý zápis:
+
+```text
+Po poslední opravě už asi nemusíme dávat screenshoty exportů, ale kdyby si někdo nebyl jistý, tak viz starší karta NB-14 a původní komentář v ticketu.
+```
+
+Druhá varianta sice vysvětluje historii, ale v běžné práci nechává nejistotu. Člověk má pořád pocit, že existuje skryté pravidlo někde vedle.
+
+### Zavřete přechodovou evidenci
+
+Karty z Příloh NA a NB byly užitečné při opravě a ověření. Po potvrzení ale nemají být dalším místem, kam tým chodí pro aktuální pravidlo. Jejich role se mění: z pracovního nástroje na stručnou historii změny.
+
+Uzavření přechodové evidence znamená:
+
+- karta opravy má stav `uzavřeno`;
+- karta ověření odkazuje na kanonické místo;
+- dočasné poznámky, screenshoty, exporty nebo testovací podklady jsou smazané, pokud už nemají účel;
+- staré odkazy vedou na aktuální místo nebo jsou označené jako archiv;
+- běžný pracovní postup nevyžaduje otevření staré ověřovací karty.
+
+Příklad uzavírací věty:
+
+```text
+Oprava potvrzena při prvním běžném použití. Aktuální pravidlo je v onboardingovém checklistu. Ověřovací karta zůstává pouze jako changelog, ne jako pracovní návod.
+```
+
+To je dost. Není potřeba přidávat další kontrolní dokument, aby kontroloval, že kontrola kontroly byla zkontrolovaná. Ano, věta je schválně protivná. Přesně tak protivná bývá i přebytečná dokumentace.
+
+### Napojte opravu na běžný rytmus
+
+Potvrzená oprava nemá dostat vlastní věčný meeting. Má se připojit k rytmu, který už existuje. Jinak si tým vytvoří malý provozní dluh: každá oprava přidá jednu připomínku, jednu tabulku a jeden pocit, že "bychom se na to měli někdy podívat".
+
+Vyberte nejbližší běžný rytmus:
+
+- měsíční review standardů;
+- kvartální kontrola datové mapy;
+- onboardingové retro po několika nástupech;
+- revize šablon a playbooků;
+- technický nebo provozní audit;
+- obsahová údržba webu nebo znalostní báze.
+
+Zápis do rytmu má být krátký:
+
+```text
+Při měsíční revizi onboardingových standardů zkontrolovat, zda checklist stále vede na kanonickou kartu exportů.
+```
+
+Nepřidávejte samostatnou připomínku jen proto, že oprava byla důležitá. Důležitost se má projevit tím, že je pravidlo ve správném místě a rytmu, ne tím, že visí na dalším seznamu.
+
+### Privacy-first uzavření
+
+Opravy často vznikají kolem důkazů: někdo něco vyfotil, exportoval, opsal nebo přiložil, aby bylo jasné, kde problém je. Během opravy to může být rozumné, pokud je účel jasný a rozsah minimální. Po potvrzení už ale dočasné důkazy často ztrácejí smysl.
+
+Privacy-first uzavření znamená:
+
+1. Ponechat jen výsledek, který je potřeba pro budoucí práci.
+2. Smazat dočasné screenshoty, exporty a kopie reálných zákaznických příkladů.
+3. Pokud musí zůstat příklad, anonymizovat ho a odstranit identifikátory.
+4. Ověřit, že kanonické pravidlo nesbírá víc dat než před opravou.
+5. Zapsat retenční poznámku tam, kde vznikl nový typ provozního záznamu.
+
+Silný zápis:
+
+```text
+Do changelogu ukládáme jen stav opravy a odkaz na aktuální pravidlo. Dočasný export použitý při ověření byl smazán po potvrzení výsledku.
+```
+
+Slabý zápis:
+
+```text
+Pro jistotu necháváme všechny podklady v příloze, kdyby se k tomu někdy někdo vracel.
+```
+
+`Kdyby někdy` není retenční pravidlo. Je to šuplík s časovanou náloží. Codyho komentář: nejlevnější bezpečnostní opatření je nemít zbytečnou kopii. Je to méně sexy než nový dashboard, ale funguje podezřele dobře.
+
+### Karta uzavření potvrzené opravy
+
+Použijte ji ve chvíli, kdy stav z Přílohy NB zní `potvrdit`.
+
+```text
+Datum:
+Oprava:
+Původní položka z fronty:
+Stav po prvním ověření: potvrdit
+Kanonické místo:
+Současné pravidlo nebo pracovní věta:
+Stará cesta uzavřena:
+Přechodová evidence uzavřena:
+Dočasné podklady smazány nebo archivovány:
+Privacy-first poznámka:
+Napojení na běžný rytmus:
+Další běžná kontrola:
+Vlastník:
+Co zůstává mimo rozsah:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-21
+Oprava: odstranění povinných screenshotů exportu z auditního ticketu
+Původní položka z fronty: šablona ticketu vedla ke zbytečnému ukládání obrazovek
+Stav po prvním ověření: potvrdit
+Kanonické místo: šablona auditního ticketu a datová mapa exportů
+Současné pravidlo nebo pracovní věta: stav exportu se zapisuje do pole "Export ověřen"; screenshot se ukládá jen při konkrétním incidentu
+Stará cesta uzavřena: původní pole "přilož screenshot" odstraněno
+Přechodová evidence uzavřena: karta opravy označena jako changelog
+Dočasné podklady smazány nebo archivovány: testovací screenshot smazán po ověření
+Privacy-first poznámka: běžný audit už neukládá obrazovky s potenciálně citlivými údaji
+Napojení na běžný rytmus: kvartální kontrola datové mapy
+Další běžná kontrola: ověřit po dalším kvartálním review
+Vlastník: provozní lead
+Co zůstává mimo rozsah: redesign celé auditní šablony
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu opravu se stavem `potvrdit` a zavřete ji do běžné údržby.
+
+1. Najděte kanonické místo, kde práce začíná.
+2. Přepište opravu do současného pravidla.
+3. Zkontrolujte, že stará cesta není viditelnější.
+4. Uzavřete karty opravy a ověření jako historii, ne jako pracovní návod.
+5. Smažte nebo anonymizujte dočasné podklady.
+6. Připojte pravidlo k existujícímu reviznímu rytmu.
+7. Zapište jednu větu, co zůstává mimo rozsah.
+
+Výstup:
+
+```text
+Potvrzená oprava je součástí běžné práce, stará cesta je zavřená a dočasná datová stopa uklizená.
+```
+
+### Checklist kapitoly
+
+- Má potvrzená oprava jasné kanonické místo?
+- Je současné pravidlo zapsané tam, kde člověk opravdu začíná práci?
+- Zmizely přechodové formulace z hlavní pracovní trasy?
+- Je stará cesta uzavřená, označená jako archiv nebo přesměrovaná?
+- Nezůstala karta opravy jako paralelní pracovní návod?
+- Je changelog stručný a neplete se do běžného použití?
+- Byly smazané nebo anonymizované dočasné screenshoty, exporty a citlivé příklady?
+- Nevzniká po opravě větší datová stopa než před ní?
+- Je oprava napojená na existující revizní rytmus?
+- Má další běžná kontrola vlastníka?
+- Je jasné, co zůstává mimo rozsah?
+- Dá se po uzavření pracovat bez znalosti celé historie opravy?
+
+Dobře uzavřená oprava je skoro neviditelná. Člověk prostě jde správnou cestou, nepotřebuje znát předchozí tření a systém po něm nechce zbytečné důkazy. Historie zůstává dohledatelná, ale každodenní práce je kratší, čistší a s menší datovou stopou.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha NC o uzavření potvrzené opravy do běžné údržby: přepis do zdroje pravdy, zavření přechodové evidence, napojení na běžný rytmus, privacy-first úklid dočasných podkladů, karta uzavření, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha NB o ověření hotové opravy po prvním běžném použití: normální použití místo slavnostní kontroly, návrat k větě Hotovo znamená, sledování pracovní trasy, stavy Potvrdit/Doladit/Vrátit do fronty/Otevřít riziko, privacy-first kontrola ověřovací stopy, karta ověření, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha NA o zpracování první položky z údržbové fronty do hotové opravy: výběr jedné položky, skutečné místo zásahu, definice hotovo, nejmenší funkční oprava, uzavření staré cesty, krátké ověření, privacy-first kontrola, karta opravy, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MZ o převodu běžné revize stabilního záznamu do údržbové fronty: typ akce, úroveň dopadu, správná fronta, ochrana rozsahu, privacy-first kontrola před zařazením, údržbová karta, mini workshop a checklist.
