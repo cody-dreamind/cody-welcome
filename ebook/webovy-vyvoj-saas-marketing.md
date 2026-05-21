@@ -99243,8 +99243,256 @@ Kontrola trvalého standardu je převedená do jedné hotové akce a zdroj pravd
 
 Převod kontroly do akce je malý most mezi přemýšlením a provozem. Bez něj tým sice ví, co by se mělo stát, ale nic se nezmění. S ním se kontrola uzavře, standard zůstane živý a privacy-first provoz se nepropadne do nekonečného ukládání věcí "pro jistotu".
 
+## Příloha MQ: Ověření jedné akce po kontrole trvalého standardu
+
+Příloha MP převede kontrolu trvalého standardu do jedné hotové akce. Tím ale práce ještě nekončí úplně. Akce může být rozumná na papíře a pořád se ukázat jako slabá v běžném cyklu. Proto je užitečné ji po dalším normálním použití krátce ověřit.
+
+Tato příloha pomáhá zjistit, jestli akce po kontrole opravdu zlepšila práci, zmenšila tření nebo udržela standard bez zbytečné datové stopy. Není to nový audit. Je to krátký návrat k jedné změně, která už byla provedena.
+
+Používá se po nejbližším běžném použití standardu. U měsíční údržby tedy po dalším měsíci, u týdenního pravidla po dalším týdnu, u méně častého standardu po první skutečné situaci, kde se měl použít. Důležité je slovo skutečné. Ověření nemá stát na ukázce připravené tak, aby změna hezky vyšla.
+
+Vstupem je uzavírací záznam z Přílohy MP a výstup z dalšího běžného použití. Výstupem této přílohy je jedno ze tří rozhodnutí:
+
+```text
+Akce drží: standard se vrací do běžného rytmu.
+Akce pomohla, ale potřebuje drobné zpřesnění.
+Akce nepomohla: vraťte se k malé opravě nebo sloučení.
+```
+
+Ověření odpovídá na pět otázek:
+
+```text
+Proběhlo další použití bez zvláštního vedení?
+Našel vlastník aktuální zdroj pravdy?
+Vyřešila akce původní nález?
+Nevzniklo nové tření nebo obcházení?
+Zůstala datová stopa stejná nebo menší?
+```
+
+Pokud se akce v dalším cyklu vůbec nepoužila, nehodnoťte ji jako úspěch ani selhání. Zapište stav `Neověřeno` a určete nejbližší skutečnou situaci, kde se ověření stane. Prázdný cyklus není důkaz. Je to jen ticho.
+
+### Vraťte se k původní akci
+
+Začněte uzavíracím záznamem z Přílohy MP. Nezačínejte pocitem, že "to asi funguje", ani novým seznamem nápadů. Ověření má kontrolovat konkrétní akci, ne otevřít debatu o celém standardu.
+
+Zapište si:
+
+```text
+Původní rozhodnutí z kontroly:
+Provedená akce:
+Původní nález:
+Hotovo mělo být, když:
+Co se tehdy vědomě neřešilo:
+```
+
+Příklad:
+
+```text
+Původní rozhodnutí z kontroly: Zjednodušit.
+Provedená akce: odstranit historickou položku z měsíčního checklistu.
+Původní nález: položka se tři cykly přeskakovala a byla duplicitní s changelogem.
+Hotovo mělo být, když: checklist obsahuje jen současné pravidlo a stará poznámka je pryč.
+Co se tehdy vědomě neřešilo: neměníme celý údržbový rytmus.
+```
+
+Tento návrat chrání ověření před rozpliznutím. Když si původní akci nepřipomenete, snadno začnete hodnotit všechno, co je kolem. To je sice lidské, ale provozně drahé.
+
+### Vyberte jeden běžný průchod
+
+Ověření má stát na běžném průchodu práce. Stačí jeden, pokud je opravdu reprezentativní. Pokud je průchod výjimečný, počkejte na další. Výjimečný chaos ani výjimečně klidný den nejsou dobrý základ pro závěr o trvalém standardu.
+
+Pro průchod zapište jen minimum:
+
+```text
+Datum nebo cyklus:
+Kdo standard použil:
+Jaký výstup vznikl:
+Kde se projevila původní akce:
+Co šlo hladce:
+Co drhlo:
+```
+
+Vyplněný příklad:
+
+```text
+Datum nebo cyklus: další měsíční kontrola onboardingových šablon.
+Kdo standard použil: delivery lead.
+Jaký výstup vznikl: aktualizovaná šablona a krátký záznam kontroly.
+Kde se projevila původní akce: historická položka už v checklistu nebyla.
+Co šlo hladce: vlastník našel aktuální pravidlo bez hledání staré karty.
+Co drhlo: retenční věta byla pořád příliš obecná.
+```
+
+Pokud musíte kvůli ověření pořádat zvláštní schůzku, vyžadovat extra report nebo ručně sledovat člověka krok za krokem, pravděpodobně kontrolujete moc těžkopádně. Trvalý standard má být ověřitelný z práce, která tak jako tak vzniká.
+
+### Porovnejte výsledek s původním nálezem
+
+Nejčastější chyba je hodnotit změnu podle obecného dojmu. "Je to lepší" nestačí. Lepší v čem? Pro koho? Podle čeho?
+
+Porovnejte průchod s původním nálezem:
+
+```text
+Původní nález:
+Co se mělo změnit:
+Co se v dalším průchodu opravdu stalo:
+Je původní nález pryč, menší, stejný nebo horší?
+```
+
+Příklad:
+
+```text
+Původní nález: checklist obsahoval historickou položku, kterou lidé přeskakovali.
+Co se mělo změnit: aktuální kontrola má být kratší a bez duplicitní historie.
+Co se v dalším průchodu opravdu stalo: vlastník prošel checklist bez přeskakování historické položky.
+Je původní nález pryč, menší, stejný nebo horší? Pryč.
+```
+
+Když je původní nález pryč, nehledejte okamžitě další problém jen proto, že se při průchodu něco objevilo. Nový nález zapište bokem, ale rozhodnutí o akci dělejte podle slibu, který měla splnit. Jinak každé ověření začne vyrábět další práci a standard se nikdy nevrátí do klidu.
+
+Codyho komentář: provozní disciplína někdy znamená nelovit nový problém, i když ho vidíte. Zapište ho, ale nenechte ho ukrást uzavření původní akce. Jinak budete mít dokonalý seznam zlepšení a žádné hotové zlepšení.
+
+### Zkontrolujte vedlejší škody
+
+Akce může vyřešit původní nález a zároveň vytvořit nové tření. Proto krátce ověřte, zda zjednodušení, sloučení nebo oprava neodstranily něco, co lidé potřebovali.
+
+Sledujte tyto signály:
+
+- člověk našel zdroj pravdy pomaleji než před změnou;
+- po sloučení zůstaly dva odkazy, které tvrdí něco jiného;
+- po zjednodušení zmizel důležitý privacy-first krok;
+- po potvrzení standardu se začala tvořit neoficiální poznámka bokem;
+- po otevření opravy se rozsah rozrostl za původní jedno místo zásahu;
+- výstup je kratší, ale méně použitelný pro další rozhodnutí.
+
+Vedlejší škody rozdělte na tři typy:
+
+```text
+Bez dopadu: poznámka pro pozdější údržbu.
+Drobné tření: zpřesnit jednou větou nebo odkazem.
+Blokující problém: akci vrátit do opravy nebo sloučení.
+```
+
+Příklad drobného tření:
+
+```text
+Po zjednodušení checklistu je jasnější hlavní tok, ale vlastník si není jistý retenčním termínem. Stačí zpřesnit jednu větu: pracovní podklady se po dalším cyklu nahrazují krátkým souhrnem.
+```
+
+Příklad blokujícího problému:
+
+```text
+Po sloučení standardu zůstal starý dokument ve vyhledávání jako první výsledek a obsahuje jinou retenční větu. Akce není uzavřená; je potřeba opravit zdroj pravdy a staré místo zřetelně uzavřít.
+```
+
+### Privacy-first ověření po akci
+
+Každá akce po kontrole trvalého standardu má projít krátkou datovou kontrolou. Ne proto, že by z každého checklistu měl být právní seminář. Protože malé provozní změny velmi často nechávají za sebou staré kopie, dočasné exporty a "pro jistotu" uložené podklady.
+
+Zeptejte se:
+
+```text
+Vznikla kvůli akci nová evidence?
+Zůstaly staré podklady po změně přístupné v běžné trase?
+Je aktuální zdroj pravdy bez zákaznických nebo osobních dat, pokud nejsou nutná?
+Byly dočasné materiály smazány, zkráceny nebo archivovány podle retence?
+Stačí pro další kontrolu agregovaný nebo syntetický příklad?
+```
+
+Dobrá ověřovací věta:
+
+```text
+Po dalším cyklu zůstává jen aktuální checklist, krátký záznam kontroly a syntetický příklad; stará karta je mimo běžnou trasu a neobsahuje zákaznická data.
+```
+
+Slabá věta:
+
+```text
+Nechali jsme všechno uložené, kdyby se někdo ptal.
+```
+
+To není ověření. To je odklad úklidu. Privacy-first provoz nestojí na tom, že se nikdy nic neuloží. Stojí na tom, že každá uložená věc ví, proč existuje, kdo ji smí číst a kdy skončí.
+
+### Karta ověření jedné akce
+
+Karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně hodnotíte víc než jednu akci.
+
+```text
+Ověřovaná akce:
+Původní nález:
+Další běžný průchod:
+Výstup průchodu:
+Stav původního nálezu: Pryč / Menší / Stejný / Horší / Neověřeno
+Nové tření:
+Privacy-first stav:
+Rozhodnutí: Drží / Zpřesnit / Vrátit do opravy
+Další krok:
+Co teď vědomě neřešíme:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Ověřovaná akce: odstranění historické položky z měsíčního checklistu.
+Původní nález: položka byla duplicitní s changelogem a tři cykly se přeskakovala.
+Další běžný průchod: květnová kontrola onboardingových šablon.
+Výstup průchodu: aktualizovaná šablona a krátký záznam kontroly.
+Stav původního nálezu: Pryč.
+Nové tření: retenční věta je stále příliš obecná.
+Privacy-first stav: bez nové evidence, staré podklady mimo běžnou trasu.
+Rozhodnutí: Zpřesnit.
+Další krok: přepsat retenční větu na konkrétní pravidlo pro nahrazení pracovních podkladů souhrnem.
+Co teď vědomě neřešíme: neměníme celý měsíční rytmus.
+Vlastník: delivery lead.
+Datum: 2026-05-21.
+```
+
+Rozhodnutí `Drží` je plnohodnotný konec. Rozhodnutí `Zpřesnit` má vést k jedné větě, odkazu nebo drobné úpravě. Rozhodnutí `Vrátit do opravy` používejte až tehdy, když původní akce nevyřešila nález nebo vytvořila blokující problém.
+
+### Mini workshop na 12 minut
+
+Vezměte jednu akci uzavřenou podle Přílohy MP.
+
+1. Otevřete uzavírací záznam akce.
+2. Připomeňte původní nález a kritérium hotovo.
+3. Vyberte další běžný průchod standardu.
+4. Zapište výstup průchodu a místo, kde se akce projevila.
+5. Porovnejte výsledek s původním nálezem.
+6. Najděte případné nové tření nebo vedlejší škody.
+7. Projděte privacy-first datovou stopu po akci.
+8. Vyberte rozhodnutí `Drží`, `Zpřesnit` nebo `Vrátit do opravy`.
+9. Zapište další krok nebo návrat do běžného rytmu.
+
+Výstup:
+
+```text
+Jedna akce po kontrole trvalého standardu je ověřená v běžné práci a má jasný další stav bez nové zbytečné evidence.
+```
+
+### Checklist kapitoly
+
+- Ověřujete jednu konkrétní akci z Přílohy MP?
+- Máte původní nález a kritérium hotovo?
+- Proběhlo ověření v běžném průchodu, ne v ukázkovém testu?
+- Je jasné, kde se akce v práci projevila?
+- Porovnali jste výsledek s původním nálezem?
+- Rozlišili jste stav `Pryč`, `Menší`, `Stejný`, `Horší` nebo `Neověřeno`?
+- Neotevíráte nové problémy jako součást stejného rozhodnutí?
+- Zapsali jste nové tření jen v rozsahu, který opravdu souvisí s akcí?
+- Ověřili jste, že zdroj pravdy je po akci dohledatelný?
+- Nevznikla neoficiální poznámka nebo paralelní evidence?
+- Zkontrolovali jste dočasné podklady, kopie a staré odkazy?
+- Je privacy-first stav vyjádřený jednou konkrétní větou?
+- Vybrali jste rozhodnutí `Drží`, `Zpřesnit` nebo `Vrátit do opravy`?
+- U rozhodnutí `Zpřesnit` je další krok opravdu malý?
+- U rozhodnutí `Drží` se standard vrací do běžného rytmu bez nového dohledu?
+
+Ověření po akci má být poslední krátká kontrola, ne začátek dalšího kola nekonečné údržby. Když akce drží, nechte standard pracovat. Když potřebuje zpřesnit, zpřesněte jednu větu. Když selhala, vraťte ji do malé opravy. Hlavní výhra je jasný stav, čistý zdroj pravdy a datová stopa, která se po změně nezvětšila.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MQ o ověření jedné akce po kontrole trvalého standardu: návrat k původní akci, běžný průchod, porovnání s nálezem, vedlejší škody, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MP o převodu kontroly trvalého standardu do jedné další akce: rozhodovací věta, postupy pro Ponechat/Zjednodušit/Sloučit/Otevřít opravu, úklid datové stopy, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MO o první kontrole trvalého údržbového standardu po několika cyklech: výběr běžných cyklů, cena dodržování, rozhodnutí Ponechat/Zjednodušit/Sloučit/Otevřít opravu, privacy-first kontrola trvalé datové stopy, kontrolní karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MN o uzavření ověřené úpravy údržbového rytmu do trvalého standardu: zdroj pravdy, odpojení přechodové historie, trvalý jazyk pravidla, běžný návrat bez zvláštního dohledu, privacy-first úklid, karta uzavření, mini workshop a checklist.
