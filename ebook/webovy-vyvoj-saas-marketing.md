@@ -98051,8 +98051,252 @@ Výstup:
 
 Dobře ověřená úprava rytmu je nudná v tom nejlepším smyslu. Vlastník našel správné místo, udělal rozhodnutí, stará historie zůstala zavřená a nikdo kvůli tomu nezakládal další proces. Přesně tak má vypadat provoz, který si váží času i dat.
 
+## Příloha MK: Stabilizace potvrzené úpravy údržbového rytmu
+
+Potvrzená úprava z Přílohy MJ ještě není totéž co stabilní provoz. Znamená jen, že v jednom dalším běžném cyklu fungovala. Stabilizace je krok, který z potvrzené úpravy udělá normální součást údržby, odstraní přechodové poznámky a zabrání tomu, aby se kolem malé změny navždy táhla malá historie.
+
+Smysl této přílohy je jednoduchý: když úprava drží, přestaňte ji chovat jako výjimku. Přepište ji do současného pravidla, zavřete starou stopu a nechte ji žít v běžném rytmu. Tým nemá při každé kontrole znovu číst, jak se k úpravě došlo. Má vidět aktuální způsob práce.
+
+Vstupem je karta ověření úpravy rytmu se stavem `Potvrdit`. Výstupem je stabilizované místo v údržbovém rytmu, jedna krátká stabilizační karta a zavřená přechodová evidence.
+
+Stabilizace odpovídá na pět otázek:
+
+```text
+Kde má být potvrzená úprava vidět při další běžné práci?
+Co se má přepsat do aktuálního pravidla?
+Která dočasná poznámka nebo karta se zavře?
+Jak poznáme, že se stará varianta nevrací?
+Jakou datovou stopu můžeme po stabilizaci smazat nebo zkrátit?
+```
+
+Pokud stabilizaci přeskočíte, úprava často zůstane ve zvláštním režimu. Lidé pak otevírají původní kartu, kartu ověření, měsíční checklist a ještě poznámku z porady. Všichni jsou snaživí, jen práce začne připomínat archeologii.
+
+### Stabilizujte jen potvrzenou úpravu
+
+Stabilizujte pouze úpravu, která prošla stavem `Potvrdit`. Stav `Ještě zpřesnit` potřebuje nejdřív jedno malé doladění. Stav `Vrátit do opravy` patří zpět do opravy standardu, ne do stabilizace.
+
+Minimální vstupy:
+
+```text
+Karta ověření úpravy rytmu:
+Rozhodnutí: Potvrdit
+Úpravová věta:
+Běžný cyklus, kde se úprava ověřila:
+Místo práce:
+Co se má zavřít:
+Privacy-first věta:
+```
+
+První pravidlo stabilizace: nevylepšujte úpravu při stabilizaci. Pokud vás napadne další dobrý nápad, zapište ho do backlogu. Stabilizace má uzavřít ověřenou změnu, ne otevřít další návrh.
+
+Příklad správného rozsahu:
+
+```text
+Potvrzená úprava: v měsíční kontrole onboardingových šablon vede odkaz u údržbové věty na aktuální syntetický příklad.
+Stabilizace: přepsat měsíční checklist tak, aby obsahoval jen aktuální odkaz a už nepoznámkoval původní kartu opravy.
+```
+
+Příklad špatného rozsahu:
+
+```text
+Když už upravujeme měsíční checklist, předěláme rovnou celou strukturu onboardingu, přidáme nový scorecard a změníme role.
+```
+
+To druhé může být někdy dobrý projekt. Není to ale stabilizace potvrzené malé úpravy.
+
+### Přepište úpravu do současného pravidla
+
+Potvrzenou úpravu nepřidávejte jako další odstavec typu "od minulého měsíce platí také". Takové věty stárnou špatně. Za tři měsíce nikdo neví, jestli jsou pořád důležité, nebo jen přežily z minulého cyklu.
+
+Místo toho přepište aktuální pravidlo tak, aby nový stav vypadal samozřejmě.
+
+Před stabilizací:
+
+```text
+Při měsíční kontrole otevři kartu opravy a zkontroluj syntetický příklad. Poznámka: po poslední úpravě používej nový odkaz v kartě ověření.
+```
+
+Po stabilizaci:
+
+```text
+Při měsíční kontrole otevři aktuální syntetický příklad v checklistu a podle něj potvrď stav pravidla.
+```
+
+Rozdíl je důležitý. První verze nutí člověka znát historii. Druhá verze mu dává současný pracovní krok. Stabilní standard má být čitelný pro člověka, který u původní opravy vůbec nebyl.
+
+Při přepisu si pohlídejte:
+
+- pravidlo popisuje současnou práci, ne cestu k ní;
+- odkaz vede na živý pracovní artefakt, ne na přechodovou kartu;
+- stará varianta není ponechaná jako alternativní cesta;
+- slovník odpovídá běžné roli vlastníka;
+- text je kratší nebo stejně dlouhý než před stabilizací.
+
+Codyho komentář: když stabilizace prodlouží pravidlo o půl stránky, nejspíš stabilizujete strach, ne práci. Malá ověřená úprava má standard zjednodušit, ne mu nalepit pamětní desku.
+
+### Zavřete přechodové karty
+
+Karty z předchozích příloh měly účel: pojmenovat nález, udělat úpravu, ověřit ji a rozhodnout. Jakmile je úprava potvrzená a přepsaná do současného pravidla, přechodové karty už nemají být běžným vstupem do práce.
+
+Neznamená to nutně všechno smazat. Znamená to zavřít pracovní cestu.
+
+Použijte tři stavy:
+
+```text
+Zachovat jako auditní stopu: krátký rozhodovací záznam bez detailních podkladů.
+Archivovat: karta zůstává dohledatelná, ale není odkazovaná z běžného checklistu.
+Smazat nebo zkrátit: dočasné poznámky, kopie, screenshoty, exporty a pracovní duplicity bez dalšího účelu.
+```
+
+Praktický postup:
+
+1. V aktuálním checklistu nechte jen nový pracovní krok.
+2. Z karty ověření ponechte jednu větu rozhodnutí.
+3. Starou kartu opravy odpojte z běžné trasy.
+4. Do changelogu zapište stabilizaci jednou větou.
+5. Dočasné podklady smažte nebo zkraťte podle retenčního pravidla.
+
+Příklad zápisu do changelogu:
+
+```text
+2026-05-21: Stabilizován odkaz na aktuální syntetický příklad v měsíční kontrole onboardingových šablon; stará karta opravy už není součástí běžné trasy.
+```
+
+Changelog stačí. Není potřeba, aby budoucí člověk četl celé drama malé úpravy. Pokud potřebuje historii, dohledá ji v archivu. Pokud chce jen udělat práci, má mít před sebou aktuální krok.
+
+### Nastavte návratový signál
+
+Stabilizace neznamená, že téma už nikdy neuvidíte. Znamená, že se k němu vrátíte běžným rytmem, ne zvláštním dohledem.
+
+Návratový signál má být lehký a navázaný na existující kontrolu. Například:
+
+```text
+Při další měsíční kontrole šablon zkontrolovat, zda vlastník použil aktuální syntetický příklad bez otevírání staré karty.
+```
+
+Signál není nový proces. Je to jedna otázka v existujícím rytmu. Pokud kvůli němu vznikne samostatná tabulka, kalendářová schůzka a nový formulář, stabilizace se vám převlékla za mikromanagement.
+
+Dobré návratové signály:
+
+- kontrolují chování pravidla, ne výkon člověka;
+- dají se ověřit z běžného pracovního výstupu;
+- mají jasný konec nebo přechod do standardní údržby;
+- nevyžadují nový sběr osobních dat;
+- nevrací do hry starou přechodovou kartu.
+
+Slabé návratové signály:
+
+- "budeme to víc sledovat";
+- "každý měsíc si řekneme, jestli je to lepší";
+- "založíme extra report pro jistotu";
+- "vlastník bude posílat screenshoty použití".
+
+Návratový signál má dát klid, ne vyrábět další provozní šum.
+
+### Privacy-first stabilizace
+
+Stabilizace je dobrý okamžik na úklid datové stopy. Během opravy a ověření často vzniknou dočasné poznámky, kopie příkladů, screenshoty, exporty nebo duplicitní odkazy. Část z nich byla užitečná při rozhodování. Po stabilizaci už často jen zvyšuje riziko a nepořádek.
+
+Privacy-first kontrola:
+
+```text
+Jaké dočasné podklady vznikly kvůli úpravě?
+Obsahují osobní, zákaznická nebo provozně citlivá data?
+Které podklady musí zůstat kvůli auditní stopě?
+Které stačí shrnout jednou větou?
+Které lze smazat hned?
+Kde je zapsané retenční rozhodnutí?
+```
+
+Preferujte tento princip:
+
+```text
+Ponechat rozhodnutí, odstranit surový materiál.
+```
+
+Příklad:
+
+```text
+Místo tří screenshotů ze starého onboardingového checklistu ponecháme jednu větu: "Původní cesta vedla přes starou kartu opravy a při měsíční kontrole zdržovala vlastníka." Screenshoty smažeme, protože už nejsou potřeba pro běžnou práci ani audit.
+```
+
+Tohle je privacy-first provoz v praxi. Nejde jen o cookies a analytiku. Jde o každodenní disciplínu: když data přestanou sloužit rozhodnutí, nemají se válet po nástrojích jako suvenýr z minulé porady.
+
+### Stabilizační karta úpravy rytmu
+
+Stabilizační karta je krátký zápis, který uzavírá přechodový režim.
+
+```text
+Potvrzená úprava:
+Kde je nově součástí běžného pravidla:
+Co bylo přepsáno:
+Co bylo zavřeno nebo archivováno:
+Co bylo smazáno nebo zkráceno:
+Návratový signál:
+Další běžný rytmus:
+Privacy-first rozhodnutí:
+Vlastník:
+Datum stabilizace:
+```
+
+Vyplněný příklad:
+
+```text
+Potvrzená úprava: odkaz u měsíční údržbové věty vede na aktuální syntetický příklad místo staré karty opravy.
+Kde je nově součástí běžného pravidla: měsíční checklist onboardingových šablon.
+Co bylo přepsáno: pracovní krok "zkontroluj aktuální syntetický příklad v checklistu".
+Co bylo zavřeno nebo archivováno: karta ověření úpravy rytmu, stará karta malé opravy.
+Co bylo smazáno nebo zkráceno: dočasná poznámka z ověření a kopie starého odkazu.
+Návratový signál: při další měsíční kontrole ověřit, že vlastník neotevírá starou kartu.
+Další běžný rytmus: standardní měsíční kontrola šablon.
+Privacy-first rozhodnutí: ponechána jedna věta rozhodnutí, odstraněny dočasné kopie bez dalšího účelu.
+Vlastník: delivery lead.
+Datum stabilizace: 2026-05-21.
+```
+
+Karta nemá být připojená jako další povinný krok do každého cyklu. Slouží k uzavření změny. Po stabilizaci je hlavním pracovním místem aktuální pravidlo.
+
+### Mini workshop na 12 minut
+
+Vezměte jednu úpravu rytmu se stavem `Potvrdit` a stabilizujte ji.
+
+1. Otevřete kartu ověření úpravy rytmu.
+2. Zkontrolujte, že rozhodnutí je opravdu `Potvrdit`.
+3. Najděte pracovní místo, kde má být nový stav vidět.
+4. Přepište pravidlo do současného tvaru bez historické poznámky.
+5. Odpojte starou kartu opravy z běžné trasy.
+6. Rozhodněte, co zachovat, archivovat, zkrátit nebo smazat.
+7. Nastavte jeden návratový signál v existujícím rytmu.
+8. Zapište stabilizační kartu.
+9. Ověřte, že budoucí člověk může pravidlo použít bez znalosti celé historie.
+
+Výstup:
+
+```text
+Potvrzená úprava údržbového rytmu je součástí aktuálního pravidla, přechodová evidence je zavřená a další návrat proběhne jen v běžném rytmu.
+```
+
+### Checklist kapitoly
+
+- Stabilizujete jen úpravu se stavem `Potvrdit`?
+- Nepřidáváte při stabilizaci nový nápad mimo rozsah?
+- Je nový stav přepsaný do aktuálního pravidla?
+- Odstranili jste historické poznámky z běžné pracovní cesty?
+- Vede odkaz na živý pracovní artefakt?
+- Je stará karta opravy odpojená z běžné trasy?
+- Zůstává auditní stopa jen v nezbytném rozsahu?
+- Smazali nebo zkrátili jste dočasné podklady bez dalšího účelu?
+- Nastavili jste návratový signál v existujícím rytmu?
+- Nezavedli jste nový report, schůzku nebo sledování lidí?
+- Umí budoucí vlastník použít pravidlo bez znalosti historie?
+- Je privacy-first rozhodnutí zapsané jednou větou?
+- Je jasné, kde stabilizovaná úprava žije dál?
+
+Dobrá stabilizace není slavnostní. Je to úklid po dobře provedené změně. Pravidlo je kratší, běžná cesta čistší, staré podklady zavřené a tým se může vrátit k práci bez toho, aby s sebou tahal batoh přechodových poznámek.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MK o stabilizaci potvrzené úpravy údržbového rytmu: přepis do současného pravidla, zavření přechodových karet, návratový signál, privacy-first úklid datové stopy, stabilizační karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MJ o ověření úpravy údržbového rytmu po dalším běžném cyklu: výběr normálního cyklu, návrat k úpravové větě, cesta vlastníka, porovnání původního tření s novým stavem, rozhodovací stavy Potvrdit/Ještě zpřesnit/Vrátit do opravy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MI o převodu nálezu ze stavu Doladit po první běžné údržbě do jedné malé úpravy údržbového rytmu: výběr jednoho nálezu, typy úprav, úpravová věta, změna v místě práce, úklid stopy, privacy-first dopad, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MH o kontrole běžné údržby onboardingového standardu po prvním cyklu: ověření údržbového rytmu, rozhodovací stavy Udržet/Doladit/Znovu otevřít opravu, návrat speciální evidence, kontrola údržbové věty v reálném použití, privacy-first kontrola, karta, mini workshop a checklist.
