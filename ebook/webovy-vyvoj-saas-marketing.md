@@ -97074,8 +97074,255 @@ Stabilizovaná oprava má po dalších běžných použitích jasný stav, jeden
 
 Kontrola po dalších použitích chrání tým před falešným pocitem hotova. Malá oprava může vypadat stabilně v dokumentaci a přitom se v provozu pořád obcházet. Když ji ověříte na běžné práci, bez dohledu navíc a bez nových kopií dat, zjistíte podstatné: jestli standard opravdu pomáhá lidem rozhodovat samostatně.
 
+## Příloha MG: Převod potvrzené malé opravy onboardingového standardu do běžné údržby
+
+Když malá oprava po dalších použitích drží, je lákavé ji oslavit dalším pravidlem, novou tabulkou nebo speciální kontrolou. To je ale přesně chvíle, kdy se z dobré provozní disciplíny může stát dokumentační plevel. Potvrzená oprava nepotřebuje věčný pomníček. Potřebuje zapadnout do běžné údržby standardu tak, aby nezmizela, ale zároveň kolem sebe netahala další administrativu.
+
+Tato příloha navazuje na Přílohu MF. Vstupem je stabilizovaná malá oprava se stavem `Drží` nebo `Drží s třením`, u které je jasné, co se osvědčilo a co případně ještě lehce drhne. Cílem není znovu otevírat onboardingový standard. Cílem je rozhodnout, jak bude oprava odteď hlídaná v normálním provozním rytmu.
+
+Převod do běžné údržby má odpovědět na šest otázek:
+
+```text
+Co se stalo trvalou součástí standardu?
+Která speciální kontrola tím končí?
+Do jakého existujícího rytmu oprava patří?
+Jaký lehký signál stačí sledovat dál?
+Kdo při běžné údržbě pozná, že se oprava rozpadá?
+Jaké dočasné podklady po kontrole smažeme nebo zkrátíme?
+```
+
+Pokud na tyto otázky odpovíte jednou kartou a jedním zápisem v changelogu, je to zdravé. Pokud kvůli jedné malé opravě vznikne nový proces, nový dashboard a nová měsíční schůzka, oprava možná vyřešila jeden problém a vyrobila druhý. Gratuluji, systém našel způsob, jak si říct o svačinu.
+
+### Uzavřete speciální kontrolní režim
+
+Speciální kontrola má smysl jen do chvíle, než je jasné, jestli oprava drží. Po potvrzení už nemá běžet paralelně vedle normální údržby. Jinak tým začne udržovat dvě vrstvy: samotný standard a ještě historii jedné opravy. To je drahé a po pár měsících skoro nečitelné.
+
+Udělejte krátké uzavření:
+
+```text
+Speciální kontrola:
+Výsledek:
+Co se převádí do standardu:
+Co se převádí do běžné údržby:
+Co se zavírá:
+Datum uzavření:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Speciální kontrola: ověření, že předávací komentář používá zákaznický odkaz místo screenshotu.
+Výsledek: oprava drží s drobným třením ve staré připnuté zprávě.
+Co se převádí do standardu: pravidlo v předávací šabloně a syntetický příklad komentáře.
+Co se převádí do běžné údržby: při měsíční kontrole šablon ověřit, že příklady nevrací screenshoty.
+Co se zavírá: samostatná kontrolní karta opravy.
+Datum uzavření: 2026-05-21.
+Vlastník: delivery lead.
+```
+
+Uzavření nemusí být dlouhé. Musí ale jasně říct, že dočasný režim skončil. Bez toho se z dočasných poznámek stane druhý zdroj pravdy.
+
+### Vyberte existující údržbový rytmus
+
+Potvrzenou opravu nepřidávejte do samostatného kalendáře, pokud už existuje přirozenější rytmus. Onboardingový standard se obvykle udržuje při měsíční kontrole šablon, po několika nástupech, při změně role, po změně produktu nebo při revizi zákaznického procesu. Oprava má patřit tam, kde by se podobný problém objevil znovu.
+
+Vhodné rytmy:
+
+- měsíční kontrola onboardingových šablon;
+- kontrola po prvních třech nástupech v nové roli;
+- kvartální revize rolových standardů;
+- revize po změně produktu, pricingu nebo delivery procesu;
+- kontrola datové stopy po změně formulářů, portálu nebo předávacích materiálů.
+
+Nevhodné rytmy:
+
+- nová pravidelná schůzka jen kvůli jedné opravě;
+- trvalý dohled nad každým použitím šablony;
+- povinný report člověka po každém předání;
+- tabulka, kterou nikdo nepoužije při skutečné práci;
+- kontrola bez jasného rozhodnutí, co se podle ní změní.
+
+Praktický filtr:
+
+```text
+Kde by se stejný problém přirozeně našel znovu?
+Kdo už má odpovědnost za toto místo?
+Jak často se místo opravdu mění?
+Jaký nejmenší signál stačí?
+Co se stane, když signál ukáže návrat starého chování?
+```
+
+Pokud neexistuje žádný rytmus, nevytvářejte ho automaticky. Nejdřív se zeptejte, jestli standard vůbec potřebuje běžnou údržbu. Někdy stačí jasný vlastník a návrat při nejbližší změně.
+
+### Přepište opravu do údržbového pravidla
+
+Údržbové pravidlo není kopie celé opravy. Má říct, co se při běžné kontrole hlídá. Historie patří do changelogu, pracovní pravidlo do standardu a údržbová věta do provozního rytmu.
+
+Špatně:
+
+```text
+Kontrolujeme opravu z května, kdy jsme zjistili, že se používaly screenshoty, takže se má kontrolovat celá předávací šablona a všechny chaty.
+```
+
+Lépe:
+
+```text
+Při měsíční kontrole předávací šablony ověř, že příklady používají zákaznický odkaz, stavovou větu a další krok; screenshoty a exporty nesmí být doporučená cesta.
+```
+
+Dobrá údržbová věta má čtyři části:
+
+```text
+Kdy: při jakém rytmu se kontroluje.
+Kde: které pracovní místo se otevírá.
+Co: jaký konkrétní signál se hledá.
+Co potom: jaká malá akce následuje při nálezu.
+```
+
+Příklad:
+
+```text
+Kdy: při měsíční kontrole onboardingových šablon.
+Kde: předávací šablona a její syntetický příklad.
+Co: jestli se nevrací screenshot, export nebo starý komentář bez odkazu.
+Co potom: opravit příklad v šabloně a zavřít starý odkaz, neotevírat celý standard.
+```
+
+Tím se oprava stane součástí běžné péče. Ne samostatným památníkem v dokumentaci.
+
+### Zachovejte jen užitečný důkaz
+
+Po kontrole často zůstane mnoho podkladů: karty ověření, poznámky, screenshoty, komentáře, exporty, seznamy nálezů, interní vlákna. Při převodu do údržby vyberte minimum, které má dlouhodobý účel.
+
+Typicky stačí:
+
+- aktuální pravidlo ve standardu;
+- syntetický nebo bezpečně anonymizovaný příklad;
+- krátký changelog s datem a důvodem;
+- údržbová věta v existujícím rytmu;
+- vlastník standardu;
+- případný odkaz na rozhodovací kartu bez citlivých detailů.
+
+Co obvykle nemá zůstat:
+
+- screenshoty zákaznických obrazovek;
+- exporty z provozních systémů;
+- detailní poznámky o práci konkrétního člověka;
+- dočasné kopie šablon;
+- chatová vlákna použitá jako návod;
+- seznam všech nápadů, které se při kontrole objevily bokem.
+
+Krátké rozhodnutí:
+
+```text
+Zůstává:
+Zkracuje se:
+Maže se:
+Archivuje se s důvodem:
+Nepřenáší se do údržby:
+```
+
+Codyho komentář: nejčistší dokumentace často není ta, která všechno ví. Je to ta, která ví, co už vědět nepotřebuje. Disk levný je, pozornost ne.
+
+### Privacy-first převod do údržby
+
+Převod do běžné údržby je výborné místo pro finální úklid datové stopy. Oprava už je potvrzená, takže dočasné důkazy splnily účel. Pokud zůstanou dál, často už nepomáhají práci. Jen zvyšují riziko, že někde leží zákaznická data, interní poznámky nebo osobní údaje bez jasného důvodu.
+
+Zkontrolujte:
+
+- že údržbové pravidlo nevyžaduje trvalé sledování lidí;
+- že běžná kontrola používá existující pracovní výstupy;
+- že příklady ve standardu jsou syntetické nebo bezpečně anonymizované;
+- že staré screenshoty a exporty mají stav `Smazat` nebo jasný archivní důvod;
+- že se zákaznická data nekopírují do kontrolních tabulek;
+- že vlastník ví, kde se dočasné podklady mažou;
+- že changelog popisuje rozhodnutí, ne citlivé detaily.
+
+Privacy-first údržbová věta:
+
+```text
+Údržba kontroluje pouze tvar běžného výstupu a návrat staré cesty; nevytváří nové kopie zákaznických dat ani nesleduje aktivitu konkrétních lidí.
+```
+
+Tato věta je praktická pojistka. Když někdo později navrhne "pro jistotu" nový export nebo monitoring, máte se k čemu vrátit.
+
+### Karta převodu do běžné údržby
+
+Karta má být kratší než původní kontrola. Pokud je delší, pravděpodobně jste nezavřeli speciální režim.
+
+```text
+Oprava:
+Stav po dalších použitích:
+Aktuální pravidlo ve standardu:
+Existující údržbový rytmus:
+Údržbová věta:
+Lehký signál návratu staré varianty:
+Co zůstává jako důkaz:
+Co se maže:
+Co se nepřenáší dál:
+Vlastník:
+Nejbližší běžná kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Oprava: předávací komentář používá zákaznický odkaz místo screenshotu.
+Stav po dalších použitích: Drží s třením.
+Aktuální pravidlo ve standardu: komentář obsahuje odkaz, stav a další krok, bez screenshotu.
+Existující údržbový rytmus: měsíční kontrola onboardingových šablon.
+Údržbová věta: při kontrole ověřit, že příklady a odkazy nevrací screenshoty ani exporty jako běžnou cestu.
+Lehký signál návratu staré varianty: v novém předání se objeví screenshot v chatu místo odkazu.
+Co zůstává jako důkaz: changelog a syntetický příklad správného komentáře.
+Co se maže: pracovní export šablony a dočasná kontrolní poznámka.
+Co se nepřenáší dál: detailní poznámky o prvních průchodech nových lidí.
+Vlastník: delivery lead.
+Nejbližší běžná kontrola: příští měsíční review šablon.
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu stabilizovanou opravu, která po dalších použitích drží, a převeďte ji do běžné údržby.
+
+1. Otevřete kontrolní kartu z Přílohy MF.
+2. Zapište, který speciální kontrolní režim tím končí.
+3. Vyberte existující údržbový rytmus.
+4. Přepište opravu do jedné údržbové věty.
+5. Určete lehký signál návratu staré varianty.
+6. Rozhodněte, co zůstává jako důkaz a co se smaže.
+7. Zapište privacy-first větu pro údržbu.
+8. Přiřaďte vlastníka a nejbližší běžnou kontrolu.
+9. Zavřete dočasnou kontrolní kartu.
+
+Výstup:
+
+```text
+Potvrzená malá oprava už nemá speciální kontrolní režim; žije v aktuálním standardu, má jednu údržbovou větu, vlastníka a uklizenou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Je jasné, která speciální kontrola tímto končí?
+- Převádíte jen potvrzený stav, ne otevřenou hypotézu?
+- Vybrali jste existující údržbový rytmus místo nové schůzky?
+- Má rytmus přirozeného vlastníka?
+- Je údržbová věta krátká a použitelná při běžné kontrole?
+- Říká věta kdy, kde, co a co potom?
+- Sledujete návrat staré varianty, ne výkon lidí?
+- Stačí vám běžné pracovní výstupy místo nového exportu?
+- Zůstává ve standardu aktuální pravidlo a bezpečný příklad?
+- Je changelog krátký a bez citlivých detailů?
+- Smazali jste screenshoty, exporty a dočasné poznámky bez dalšího účelu?
+- Nezůstala stará kontrolní karta jako druhý zdroj pravdy?
+- Má běžná údržba vlastníka a nejbližší termín?
+- Je jasné, co se stane, pokud se stará varianta vrátí?
+
+Převod do běžné údržby je nenápadná, ale důležitá část práce. Díky ní se z jedné opravy nestane věčná výjimka. Standard zůstane aktuální, tým nebude hlídat zbytečné artefakty a privacy-first úklid se nestane odkládaným dobrým úmyslem. Hotová oprava má být vidět v lepší práci, ne v tom, kolik složek po sobě nechala.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MG o převodu potvrzené malé opravy onboardingového standardu do běžné údržby: uzavření speciálního kontrolního režimu, výběr existujícího údržbového rytmu, údržbová věta, zachování jen užitečného důkazu, privacy-first převod, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MF o kontrole stabilizované malé opravy onboardingového standardu po dalších použitích: výběr běžných použití, sledování cesty k opravenému místu, stavy Drží/Drží s třením/Nedrží, návrat staré varianty, privacy-first kontrola bez dohledu navíc, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha ME o stabilizaci potvrzené malé opravy onboardingového standardu: přepis opravy na aktuální pravidlo, uložení do místa práce, zavření starých variant, návratový signál, uzavření dočasného režimu, privacy-first úklid, stabilizační karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MD o ověření malé opravy onboardingového standardu po dalším běžném nástupu: výběr skutečného použití, návrat k opravné větě, sledování cesty k opravenému místu, porovnání výstupu s minimem, rozhodovací stavy, privacy-first kontrola, karta, mini workshop a checklist.
