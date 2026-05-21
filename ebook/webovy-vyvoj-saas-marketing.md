@@ -102078,8 +102078,248 @@ Jedna položka z údržbové fronty je dokončená jako hotová oprava, má uzav
 
 Dobrá údržba je nudná v tom nejlepším smyslu. Jedna položka se vezme, opraví, stará cesta se zavře a v provozu se ověří, že lidé už nezakopávají o stejné místo. Když to tým dělá pravidelně, dlouhodobá mapa nestárne skokově. Stárne pomalu, viditelně a opravitelně.
 
+## Příloha NB: Ověření hotové opravy po prvním běžném použití
+
+Příloha NA končí hotovou opravou, která má uzavřenou starou cestu a nastavené nejbližší přirozené ověření. Příloha NB řeší právě toto ověření: jak poznat, že oprava opravdu funguje v běžné práci, ne jen v okamžiku, kdy ji někdo pečlivě zapsal do karty.
+
+Hotová oprava ještě není totéž co potvrzená oprava. Hotová znamená, že zásah byl provedený. Potvrzená znamená, že první normální použití nevrátilo tým do starého tření, nevytvořilo novou zkratku a nezanechalo zbytečnou datovou stopu. Rozdíl je malý na papíře a velký v provozu.
+
+Výstupem této přílohy je karta prvního ověření:
+
+```text
+Oprava:
+První běžné použití:
+Očekávané chování:
+Skutečné chování:
+Stav: potvrdit / doladit / vrátit do fronty / otevřít riziko
+Privacy-first poznámka:
+Další krok:
+```
+
+Tato karta nemá z opravy dělat další projekt. Má jen uzavřít smyčku: změnili jsme jedno místo, někdo ho použil a víme, jestli oprava drží.
+
+### Vyberte normální použití, ne slavnostní kontrolu
+
+První ověření má proběhnout v nejbližším normálním okamžiku, kdy by se oprava přirozeně projevila. Pokud jste opravili onboardingový odkaz, ověřujte při dalším onboardingu nebo testovacím průchodu onboardingovou trasou. Pokud jste upravili šablonu ticketu, ověřujte při dalším ticketu daného typu. Pokud jste změnili způsob důkazu dokončení, ověřujte při dalším dokončení stejné práce.
+
+Nevytvářejte speciální schůzku jen proto, aby se oprava mohla tvářit důležitě. Speciální kontrola často vede k umělému chování: lidé jsou opatrnější, ptají se víc než obvykle a oprava projde hlavně proto, že všichni vědí, že se právě testuje.
+
+Praktické pravidlo:
+
+```text
+Ověřujte tam, kde by se problém objevil i bez kontroly.
+```
+
+Příklady:
+
+```text
+Oprava: starý odkaz v onboardingovém checklistu nahrazen aktuálním záznamem.
+První běžné použití: další člověk prochází checklist při nástupu do delivery role.
+```
+
+```text
+Oprava: šablona ticketu už nevyžaduje screenshot exportu, ale stav "export ověřen".
+První běžné použití: další uzavřený auditní projekt s exportem.
+```
+
+```text
+Oprava: vlastník standardu zapsaný do kanonické karty.
+První běžné použití: další dotaz nebo změna k danému standardu.
+```
+
+### Vraťte se k větě `Hotovo znamená`
+
+Při ověření nezačínejte novou debatou. Vraťte se k větě z karty hotové opravy:
+
+```text
+Hotovo znamená:
+```
+
+Tato věta je měřítko. Pokud při ověření začnete měnit kritéria, smyčka se rozjede do stran. Někdo bude chtít přidat další úpravu, někdo připomene starší problém, někdo otevře strategickou otázku. To všechno může být legitimní, ale není to ověření této opravy.
+
+Postup:
+
+1. Přečtěte původní větu `Hotovo znamená`.
+2. Popište první běžné použití jednou větou.
+3. Porovnejte očekávané chování se skutečným.
+4. Rozhodněte stav opravy.
+5. Zapište jen další nezbytný krok.
+
+Příklad:
+
+```text
+Hotovo znamená: checklist vede na aktuální záznam, archivní odkaz není v běžné trase a další nástup ověří nalezení bez dotazu.
+Skutečné chování: nový člověk našel aktuální záznam přes checklist, ale v interním chatu se ještě objevil starý archivní odkaz od kolegy.
+Stav: doladit.
+Další krok: odstranit starý odkaz z připnuté zprávy v onboardingovém kanálu.
+```
+
+To není selhání celé opravy. Je to užitečný nález: pracovní trasa byla opravená, ale stará stopa přežila v okolním místě.
+
+### Sledujte chování, ne člověka
+
+Ověření opravy nemá hodnotit výkon konkrétního člověka. Má hodnotit, jestli pracovní systém vede správným směrem. Když nový člověk nenajde záznam, otázka nezní "proč sis toho nevšiml". Otázka zní "kde trasa přestala pomáhat".
+
+Sledujte hlavně:
+
+- jestli člověk začal ve správném místě;
+- jestli název nebo odkaz dával smysl;
+- jestli stará cesta nebyla pořád viditelnější než nová;
+- jestli oprava nevyžadovala dodatečné vysvětlení;
+- jestli výsledek vznikl bez nových screenshotů, exportů nebo citlivých příkladů;
+- jestli se někdo nevrátil ke starému postupu ze zvyku.
+
+Codyho komentář: když oprava funguje jen ve chvíli, kdy vedle ní stojí člověk a vysvětluje ji, není to oprava. Je to komentovaný průchod labyrintem. Labyrinty jsou fajn v mýtech, v provozní dokumentaci už méně.
+
+### Rozhodněte jedním ze čtyř stavů
+
+Po prvním běžném použití dejte opravě jeden stav. Bez stavu se z ověření stane volný zápis a za měsíc nikdo neví, jestli je smyčka uzavřená.
+
+Použijte čtyři praktické stavy:
+
+```text
+Potvrdit:
+Oprava funguje, stará cesta se nevrátila a nevznikla zbytečná datová stopa.
+
+Doladit:
+Jádro opravy funguje, ale jedna drobná okolní stopa brání čistému použití.
+
+Vrátit do fronty:
+Oprava neodstranila původní tření nebo vytvořila nové běžné tření.
+
+Otevřít riziko:
+Ověření ukázalo dopad na data, přístupy, retenci, bezpečnost nebo zákaznickou důvěru.
+```
+
+Příklady:
+
+```text
+Potvrdit: onboardingový checklist vede správně a nový člověk nepotřeboval dotaz.
+```
+
+```text
+Doladit: checklist je správně, ale starý odkaz zůstal v připnuté zprávě.
+```
+
+```text
+Vrátit do fronty: lidé pořád používají starou šablonu, protože nová není v nástroji výchozí.
+```
+
+```text
+Otevřít riziko: oprava odstranila screenshoty, ale nový postup ukládá detailní export do komentáře ticketu.
+```
+
+Stav `Otevřít riziko` nepoužívejte dramaticky. Používejte ho přesně. Jakmile se ukáže, že oprava změnila datovou stopu nebo přístupová práva, přestává to být jen dokumentační údržba.
+
+### Privacy-first kontrola prvního použití
+
+První ověření často svádí k důkazům: screenshot, nahrávka, kopie ticketu, export, detailní přepis chatu. Většinou to není potřeba. Pro potvrzení provozní opravy stačí krátký stav a věta výsledku.
+
+Kontrolní otázky:
+
+1. Potřebujeme uchovat konkrétní obsah prvního použití, nebo stačí výsledek?
+2. Nevznikl screenshot nebo export jen proto, aby se oprava lépe dokazovala?
+3. Pokud někdo použil reálný zákaznický příklad, je v zápisu anonymizovaný?
+4. Neodhalilo ověření nový tok dat, který nebyl v původní opravě?
+5. Pokud vznikl dočasný podklad, má termín smazání?
+6. Dá se další kontrola udělat v běžném rytmu bez zvláštního sledování lidí?
+
+Silný privacy-first zápis:
+
+```text
+Ověření proběhlo při dalším běžném onboardingu. Ukládáme jen stav "záznam nalezen bez dotazu", ne screenshot obrazovky ani osobní poznámky nového člověka.
+```
+
+Slabý zápis:
+
+```text
+Přikládáme screenshot celého checklistu, přepis chatu a export ticketu pro jistotu.
+```
+
+"Pro jistotu" je často nejdražší věta v práci s daty. Jistotu má dávat dobře navržený proces, ne hromada kopií.
+
+### Karta prvního ověření
+
+Použijte ji po prvním běžném použití hotové opravy.
+
+```text
+Datum:
+Oprava:
+Původní položka z fronty:
+Původní věta Hotovo znamená:
+První běžné použití:
+Očekávané chování:
+Skutečné chování:
+Stará cesta se vrátila: ano / ne / částečně
+Nové tření:
+Datová stopa ověření:
+Privacy-first poznámka:
+Stav: potvrdit / doladit / vrátit do fronty / otevřít riziko
+Další krok:
+Vlastník dalšího kroku:
+Termín kontroly:
+Co zůstává mimo rozsah:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-21
+Oprava: aktualizovaný onboardingový odkaz na záznam o exportech
+Původní položka z fronty: starý onboardingový odkaz na archivní poznámku
+Původní věta Hotovo znamená: checklist vede na aktuální záznam, archivní odkaz není v běžné trase a další nástup ověří nalezení bez dotazu
+První běžné použití: testovací průchod onboardingem delivery role
+Očekávané chování: člověk najde aktuální záznam přes checklist
+Skutečné chování: záznam nalezen, ale starý odkaz zůstal v připnuté zprávě kanálu
+Stará cesta se vrátila: částečně
+Nové tření: připnutá zpráva má vyšší viditelnost než checklist
+Datová stopa ověření: jen stav a krátká věta výsledku
+Privacy-first poznámka: bez screenshotů a bez zákaznických dat
+Stav: doladit
+Další krok: nahradit odkaz v připnuté zprávě
+Vlastník dalšího kroku: delivery lead
+Termín kontroly: při příštím onboardingovém průchodu
+Co zůstává mimo rozsah: retenční pravidlo exportů a struktura rozcestníku
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu hotovou opravu z Přílohy NA a ověřte ji po prvním běžném použití.
+
+1. Najděte původní větu `Hotovo znamená`.
+2. Popište první běžné použití.
+3. Porovnejte očekávané a skutečné chování.
+4. Zkontrolujte, jestli se nevrátila stará cesta.
+5. Zkontrolujte, jestli ověření nevytvořilo zbytečnou datovou stopu.
+6. Dejte opravě stav: potvrdit, doladit, vrátit do fronty nebo otevřít riziko.
+7. Zapište jeden další krok nebo smyčku uzavřete.
+
+Výstup:
+
+```text
+Hotová oprava má první běžné ověření a jasný stav. Buď je potvrzená, nebo má přesně jeden další krok.
+```
+
+### Checklist kapitoly
+
+- Ověřili jste opravu při normálním použití, ne při umělé kontrole?
+- Vrátili jste se k původní větě `Hotovo znamená`?
+- Popsali jste očekávané a skutečné chování jednou větou?
+- Sledujete pracovní trasu místo výkonu konkrétního člověka?
+- Zjistili jste, jestli se stará cesta vrátila?
+- Rozlišili jste drobné doladění od návratu do fronty?
+- Otevřeli jste riziko, pokud se ukázal dopad na data, přístupy, retenci nebo důvěru?
+- Stačí pro ověření krátký stav místo screenshotu, exportu nebo přepisu chatu?
+- Má dočasný podklad termín smazání?
+- Je další krok jen jeden?
+- Je jasné, co zůstává mimo rozsah?
+- Pokud oprava drží, uzavřeli jste smyčku bez další byrokracie?
+
+První ověření má jednoduchý účel: zjistit, jestli oprava přežila kontakt s běžnou prací. Když ano, uzavřete ji a nechte ji žít v normálním rytmu. Když ne, vraťte do systému přesně ten kousek, který nefungoval. Bez dramatu, bez sběru zbytečných dat a bez výroby dalšího paralelního pravidla.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha NB o ověření hotové opravy po prvním běžném použití: normální použití místo slavnostní kontroly, návrat k větě Hotovo znamená, sledování pracovní trasy, stavy Potvrdit/Doladit/Vrátit do fronty/Otevřít riziko, privacy-first kontrola ověřovací stopy, karta ověření, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha NA o zpracování první položky z údržbové fronty do hotové opravy: výběr jedné položky, skutečné místo zásahu, definice hotovo, nejmenší funkční oprava, uzavření staré cesty, krátké ověření, privacy-first kontrola, karta opravy, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MZ o převodu běžné revize stabilního záznamu do údržbové fronty: typ akce, úroveň dopadu, správná fronta, ochrana rozsahu, privacy-first kontrola před zařazením, údržbová karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MY o první běžné revizi stabilního záznamu dlouhodobé mapy: výběr normálního revizního okna, kontrola trasy k záznamu, oddělení problémů nalezení/pochopení/provedení/důvěry/datové stopy, privacy-first kontrola běžného použití, rozhodovací stavy, karta, mini workshop a checklist.
