@@ -102523,8 +102523,291 @@ Potvrzená oprava je součástí běžné práce, stará cesta je zavřená a do
 
 Dobře uzavřená oprava je skoro neviditelná. Člověk prostě jde správnou cestou, nepotřebuje znát předchozí tření a systém po něm nechce zbytečné důkazy. Historie zůstává dohledatelná, ale každodenní práce je kratší, čistší a s menší datovou stopou.
 
+## Příloha ND: První běžná kontrola opravy po zařazení do údržby
+
+Příloha NC uzavřela potvrzenou opravu do běžné údržby. Tím se oprava přestala tvářit jako speciální projekt a stala se součástí normální práce. Příloha ND řeší první kontrolu po tomto zařazení: jak poznat, že oprava v běžném rytmu opravdu drží, nezmizela mezi ostatními pravidly a nezačala vyrábět novou skrytou práci.
+
+Tahle kontrola nemá znovu otevírat celou historii opravy. Má odpovědět na jednu praktičtější otázku:
+
+```text
+Používá se opravené pravidlo v běžné údržbě tak, jak jsme zamýšleli?
+```
+
+Výstupem je krátká karta běžné kontroly:
+
+```text
+Oprava:
+Běžný údržbový rytmus:
+Kontrolované použití:
+Co mělo zůstat:
+Co se stalo v praxi:
+Stav: drží / drží s třením / vrátit do údržbové fronty / otevřít riziko
+Privacy-first poznámka:
+Další krok:
+```
+
+Smysl této karty je chránit běžnou údržbu před dvěma extrémy. První extrém je slepá důvěra: "jednou jsme to opravili, hotovo navždy". Druhý extrém je trvalé hlídání každé drobnosti. Dobrá kontrola stojí mezi nimi: krátce ověří skutečné použití, rozhodne stav a nechá systém dál pracovat.
+
+### Vyberte první přirozené kontrolní okno
+
+Kontrola po zařazení do údržby má proběhnout v prvním normálním rytmu, do kterého byla oprava vložená. Pokud šlo o onboardingový checklist, kontrolujte při nejbližším onboardingovém review. Pokud šlo o šablonu ticketu, kontrolujte při běžné revizi šablon nebo při nejbližší uzavřené práci daného typu. Pokud šlo o datovou mapu, kontrolujte při standardním privacy-first nebo provozním review.
+
+Nepřidávejte nový rituál jen kvůli tomu, že oprava je čerstvá. Pokud každá oprava dostane vlastní kontrolu, tým brzy nebude provozovat systém, ale kalendář kontrol. A kalendář kontrol je zvláštní druh produktivity: člověk je pořád zaneprázdněný a zároveň se nic moc nezjednodušuje.
+
+Praktické pravidlo:
+
+```text
+Kontrolujte opravu tam, kde jste slíbili, že bude žít.
+```
+
+Příklady:
+
+```text
+Oprava: screenshot exportu už není běžný důkaz dokončení.
+Běžný rytmus: kvartální kontrola datové mapy a šablon auditních ticketů.
+Kontrolní okno: první kvartální kontrola po uzavření opravy.
+```
+
+```text
+Oprava: onboardingový checklist vede na kanonickou kartu exportů.
+Běžný rytmus: měsíční review onboardingových standardů.
+Kontrolní okno: první měsíční review po jednom dalším onboardingu.
+```
+
+```text
+Oprava: vlastník standardu je uveden v dlouhodobé mapě.
+Běžný rytmus: měsíční průchod mapou standardů.
+Kontrolní okno: první dotaz nebo změna, kde se vlastník použil.
+```
+
+Pokud oprava nemá žádné přirozené kontrolní okno, nebyla v Příloze NC dost dobře zařazená. Neznamená to tragédii. Znamená to jen, že nejdřív musíte najít rytmus, do kterého patří, místo abyste kolem ní stavěli další speciální režim.
+
+### Sledujte, jestli oprava zkracuje práci
+
+První kontrola po zařazení do údržby nemá dokazovat, že dokumentace je hezká. Má ukázat, jestli oprava zkrátila nebo zpřesnila reálnou práci.
+
+Ptejte se:
+
+- našel člověk správné místo bez dalšího vysvětlování?
+- pomohla současná pracovní věta udělat rozhodnutí?
+- stará cesta zůstala zavřená?
+- oprava nepřidala nový mezikrok, který tým obchází?
+- nevznikl nový "jen pro jistotu" důkaz, screenshot, export nebo poznámka?
+- je jasné, kdo pravidlo vlastní, když se objeví otázka?
+
+Silný signál:
+
+```text
+Při běžné revizi šablon se nové pravidlo použilo bez dotazu. Ticket obsahoval stav "Export ověřen", ne screenshot. Staré pole se nevrátilo.
+```
+
+Slabý signál:
+
+```text
+Pravidlo v dokumentaci je správně, ale lidé si pořád posílají starý postup v chatu.
+```
+
+Druhý signál není jen komunikační problém. Ukazuje, že zdroj pravdy není v místě, kde práce skutečně začíná, nebo že stará cesta je pořád pohodlnější než nová. To je přesně důvod, proč se první běžná kontrola dělá.
+
+### Rozlišujte tření od návratu starého problému
+
+Ne každé tření znamená, že oprava selhala. Někdy lidé jen potřebují jeden cyklus, aby si zvykli na kratší trasu. Jindy se ale starý problém vrátil pod jiným názvem.
+
+Použijte jednoduché rozlišení:
+
+```text
+Drží:
+Oprava je v běžné trase, stará cesta se nevrací a údržba nepotřebuje zvláštní dohled.
+
+Drží s třením:
+Jádro opravy funguje, ale jedno okolní místo komplikuje použití.
+
+Vrátit do údržbové fronty:
+Oprava v běžném rytmu nefunguje, stará cesta se vrátila nebo lidé používají obcházení.
+
+Otevřít riziko:
+Kontrola ukázala dopad na data, přístupy, retenci, bezpečnost nebo důvěru zákazníka.
+```
+
+Příklad `drží s třením`:
+
+```text
+Šablona ticketu je správně, ale starší interní návod pořád ukazuje screenshotový postup.
+Další krok: odstranit starý příklad z návodu.
+```
+
+Příklad `vrátit do údržbové fronty`:
+
+```text
+Lidé dál přikládají screenshoty, protože nový stav "Export ověřen" není povinné pole a při uzavření ticketu nejde vidět.
+Další krok: vrátit do fronty jako úpravu šablony v nástroji, ne jako další textové vysvětlení.
+```
+
+Příklad `otevřít riziko`:
+
+```text
+Screenshoty zmizely, ale tým začal kopírovat detail exportu do komentáře ticketu.
+Další krok: otevřít datové riziko a upravit způsob důkazu dokončení.
+```
+
+Codyho komentář: obcházení pravidla je zpětná vazba, ne morální selhání. Když lidé opakovaně obcházejí proces, proces jim pravděpodobně stojí v cestě. Samozřejmě někdy je to jen zvyk, ale zvyk se léčí lepším pracovním místem líp než dalším odstavcem pravidel.
+
+### Zkontrolujte, jestli nevznikla paralelní evidence
+
+Jedno z nejčastějších rizik po uzavření opravy je paralelní evidence. Tým má kanonické místo, ale vedle něj si nechá starou tabulku, připnutou zprávu, archivní kartu, komentář v ticketu nebo soukromý checklist. Všechno "jen pro jistotu". Výsledkem je, že už nikdo neví, která pravda je platná.
+
+Při první běžné kontrole hledejte hlavně:
+
+- staré odkazy v připnutých zprávách;
+- kopie šablony v osobních poznámkách;
+- komentáře typu "aktuálně platí spíš toto";
+- duplicitní kartu v jiné mapě;
+- archivní příklad, který se tváří jako doporučený postup;
+- staré důkazy nebo exporty používané jako vzor.
+
+Pokud paralelní evidence existuje, neřešte ji morálně. Rozhodněte její stav:
+
+```text
+Smazat:
+Nemá samostatný účel a mate práci.
+
+Archivovat:
+Má historickou hodnotu, ale nesmí být v běžné trase.
+
+Přesměrovat:
+Lidé ji pořád nacházejí, takže má vést na kanonické místo.
+
+Sloučit:
+Obsahuje užitečnou větu, která patří do zdroje pravdy.
+```
+
+Silná kontrolní věta:
+
+```text
+Stará připnutá zpráva byla odstraněna, protože vedla na archivní postup. Kanonický odkaz zůstává jen v onboardingovém checklistu.
+```
+
+Slabá kontrolní věta:
+
+```text
+Starou zprávu necháme, protože ji možná někdo někdy bude hledat.
+```
+
+Možná někdo někdy bude hledat skoro cokoliv. To ještě neznamená, že to má zůstat v pracovní trase.
+
+### Privacy-first kontrola běžné údržby
+
+Po zařazení opravy do běžné údržby se privacy-first otázka mění. Už nejde jen o to, jestli se uklidily dočasné podklady z opravy. Jde o to, jestli běžný rytmus nezačal sbírat víc dat jen proto, aby mohl opravu pohodlně kontrolovat.
+
+Kontrolní otázky:
+
+1. Stačí pro běžnou kontrolu stav a krátká věta výsledku?
+2. Nevzniká nový zvyk ukládat screenshot, export nebo přepis chatu jako důkaz dodržení?
+3. Neobsahuje údržbová karta zákaznická jména, osobní údaje nebo citlivé detaily bez jasného účelu?
+4. Pokud se objevil nový datový tok, je zapsaný v datové mapě?
+5. Má případná dočasná evidence vlastníka a termín smazání?
+6. Dá se kontrola provést agregovaně nebo anonymizovaně?
+7. Nevyžaduje rytmus sledování konkrétních lidí tam, kde stačí sledovat výstup práce?
+
+Silný privacy-first zápis:
+
+```text
+V běžné kontrole ukládáme jen stav "bez screenshotu" a počet uzavřených ticketů daného typu. Neuchováváme kopie ticketů ani obsah exportů.
+```
+
+Slabý zápis:
+
+```text
+Pro kontrolu budeme každý měsíc ukládat ukázkové tickety s přílohami.
+```
+
+Ukázkový ticket je někdy užitečný při školení, ale jako trvalý důkaz údržby je často zbytečně těžký. Pokud příklad opravdu potřebujete, vytvořte anonymizovaný modelový příklad bez zákaznických dat.
+
+### Karta první běžné kontroly
+
+Použijte ji při prvním normálním údržbovém rytmu po uzavření potvrzené opravy.
+
+```text
+Datum:
+Oprava:
+Kanonické místo:
+Běžný údržbový rytmus:
+Kontrolované použití:
+Co mělo zůstat:
+Co se stalo v praxi:
+Stará cesta se vrátila: ano / ne / částečně
+Paralelní evidence nalezena: ano / ne
+Datová stopa kontroly:
+Privacy-first poznámka:
+Stav: drží / drží s třením / vrátit do údržbové fronty / otevřít riziko
+Další krok:
+Vlastník:
+Termín další běžné kontroly:
+Co zůstává mimo rozsah:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-21
+Oprava: odstranění povinných screenshotů exportu z auditního ticketu
+Kanonické místo: šablona auditního ticketu a datová mapa exportů
+Běžný údržbový rytmus: kvartální kontrola šablon a datové mapy
+Kontrolované použití: tři běžně uzavřené auditní tickety po změně
+Co mělo zůstat: stav "Export ověřen" bez screenshotu jako běžný důkaz
+Co se stalo v praxi: dva tickety správně, jeden obsahoval starý screenshot podle osobního checklistu
+Stará cesta se vrátila: částečně
+Paralelní evidence nalezena: ano, osobní checklist s původním krokem
+Datová stopa kontroly: ukládáme jen počet a stav, ne kopie ticketů
+Privacy-first poznámka: screenshot z chybného použití nebyl kopírován do kontroly
+Stav: drží s třením
+Další krok: nahradit osobní checklist odkazem na kanonickou šablonu
+Vlastník: provozní lead
+Termín další běžné kontroly: příští kvartální review
+Co zůstává mimo rozsah: celkový redesign auditního procesu
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu opravu uzavřenou podle Přílohy NC a projděte první běžnou kontrolu.
+
+1. Najděte rytmus, do kterého byla oprava zařazená.
+2. Vyberte první normální použití nebo kontrolní okno.
+3. Popište, co mělo v běžné práci zůstat.
+4. Porovnejte to se skutečným použitím.
+5. Zkontrolujte návrat staré cesty.
+6. Najděte případnou paralelní evidenci.
+7. Projděte privacy-first kontrolu datové stopy.
+8. Dejte stav: drží, drží s třením, vrátit do fronty nebo otevřít riziko.
+9. Zapište jeden další krok nebo smyčku ponechte v běžném rytmu.
+
+Výstup:
+
+```text
+Uzavřená oprava má první běžnou kontrolu v normálním údržbovém rytmu a jasné rozhodnutí, jestli dál drží, potřebuje drobné doladění, vrací se do fronty nebo otevírá riziko.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete opravu v rytmu, kam byla zařazená?
+- Nevytváříte kvůli ní nový trvalý meeting nebo zvláštní tabulku?
+- Vybrali jste normální použití místo umělého testu?
+- Sledujete zkrácení práce, ne jen správnost dokumentace?
+- Je stará cesta opravdu zavřená?
+- Neobjevila se paralelní evidence v chatu, osobních poznámkách, staré šabloně nebo archivu?
+- Rozlišili jste drobné tření od návratu původního problému?
+- Má stav kontroly jednu ze čtyř hodnot: drží, drží s třením, vrátit do fronty, otevřít riziko?
+- Nevznikl nový sběr dat jen kvůli kontrole?
+- Stačí pro důkaz stav a krátká věta výsledku?
+- Jsou případné příklady anonymizované nebo modelové?
+- Má další krok vlastníka a termín?
+- Je jasné, co zůstává mimo rozsah?
+
+První běžná kontrola je malá pojistka proti tomu, aby se dobře uzavřená oprava potichu rozpadla. Když drží, nechte ji žít v normálním rytmu. Když drhne, opravte přesně místo tření. Když se vrátila stará cesta nebo vzniklo datové riziko, nesnažte se to přelepit dalším vysvětlením. Vraťte problém do systému tam, kam patří.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha ND o první běžné kontrole opravy po zařazení do údržby: výběr přirozeného kontrolního okna, kontrola zkrácení práce, rozlišení tření od návratu starého problému, hledání paralelní evidence, privacy-first kontrola běžné údržby, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha NC o uzavření potvrzené opravy do běžné údržby: přepis do zdroje pravdy, zavření přechodové evidence, napojení na běžný rytmus, privacy-first úklid dočasných podkladů, karta uzavření, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha NB o ověření hotové opravy po prvním běžném použití: normální použití místo slavnostní kontroly, návrat k větě Hotovo znamená, sledování pracovní trasy, stavy Potvrdit/Doladit/Vrátit do fronty/Otevřít riziko, privacy-first kontrola ověřovací stopy, karta ověření, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha NA o zpracování první položky z údržbové fronty do hotové opravy: výběr jedné položky, skutečné místo zásahu, definice hotovo, nejmenší funkční oprava, uzavření staré cesty, krátké ověření, privacy-first kontrola, karta opravy, mini workshop a checklist.
