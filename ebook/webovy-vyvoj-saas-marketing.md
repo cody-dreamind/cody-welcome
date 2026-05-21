@@ -100030,8 +100030,250 @@ Víme, zda se trvalý standard po uzavřené akci vrátil do běžného rytmu be
 
 Kontrola návratu chrání tým před tím, aby z každé opravy vznikl nový režim. Trvalý standard má po uzavření znovu pracovat tiše: v běžném rytmu, v jednom zdroji pravdy a s daty, která mají jasný účel i konec.
 
+## Příloha MT: Uložení potvrzeného návratu standardu do dlouhodobé mapy
+
+Příloha MS ověřuje, že se trvalý standard po uzavřené akci vrátil do běžného rytmu. Příloha MT řeší poslední krok: jak tento potvrzený návrat uložit do dlouhodobé mapy standardů tak, aby tým věděl, co platí, kdy se k tomu vrátit a co už se nemá znovu otevírat.
+
+Používá se jen tehdy, když výsledek z Přílohy MS zní:
+
+```text
+Návrat drží.
+Návrat drží s drobným třením.
+```
+
+Pokud návrat nedrží, neukládejte standard do dlouhodobé mapy jako hotový. Nejdřív opravte konkrétní selhání: starý odkaz, nejasný zdroj pravdy, paralelní evidenci nebo zbytečnou datovou stopu. Dlouhodobá mapa není sklad přání, ale index věcí, které už opravdu žijí v provozu.
+
+Výstupem této přílohy je jeden krátký záznam:
+
+```text
+Standard je dlouhodobě platný.
+Patří do tohoto běžného rytmu.
+Další revize proběhne jen při spouštěči nebo plánovaném přehledu.
+```
+
+Smysl není vytvořit další dokument. Smysl je zavřít aktivní kontrolu a nechat standard dál existovat jako klidnou součást systému.
+
+### Rozhodněte, jestli standard patří do dlouhodobé mapy
+
+Ne každý standard si zaslouží místo v dlouhodobé mapě. Pokud se týká jednorázové kampaně, dočasného zákaznického projektu nebo krátkého interního experimentu, stačí ho uzavřít v changelogu a nepřenášet do trvalého indexu.
+
+Do dlouhodobé mapy patří standard, který splňuje aspoň tři podmínky:
+
+- opakuje se v běžné práci;
+- má jasného vlastníka nebo roli;
+- chrání kvalitu, rychlost, důvěru, příjem nebo datovou stopu;
+- má jeden zdroj pravdy;
+- nový člověk podle něj dokáže udělat správné rozhodnutí;
+- jeho zrušení by vrátilo tým ke starému tření.
+
+Praktický test:
+
+```text
+Kdyby tento standard zmizel z mapy, kdo by si toho všiml a proč?
+```
+
+Dobrá odpověď:
+
+```text
+Delivery lead by při měsíční údržbě nevěděl, kdy pracovní podklady nahradit souhrnem, a tým by znovu držel screenshoty déle, než potřebuje.
+```
+
+Slabá odpověď:
+
+```text
+Je dobré to někde mít, kdyby se to hodilo.
+```
+
+"Kdyby se to hodilo" je skoro vždycky slabý důvod pro trvalý záznam. Dlouhodobá mapa má snižovat mentální zátěž, ne dokazovat, že tým umí archivovat všechno, co se kdy stalo.
+
+### Zapište standard jednou větou
+
+Dlouhodobý záznam musí být kratší než původní oprava. Pokud je záznam stejně dlouhý jako celá historie změny, mapa se změní v kroniku. Kroniky jsou hezké, ale v provozu lidé hledají odpověď, ne literární oblouk.
+
+Použijte větu:
+
+```text
+Při [pracovní situace] používáme [zdroj pravdy], aby [výsledek], bez [nežádoucí práce nebo datové stopy].
+```
+
+Příklad:
+
+```text
+Při měsíční údržbě onboardingových šablon používáme delivery playbook, aby vlastník nahradil pracovní podklady krátkým souhrnem, bez ponechávání screenshotů a exportů ve sdílené složce.
+```
+
+Tato věta říká čtyři věci najednou: kdy standard použít, kde ho najít, jaký má výsledek a čemu má zabránit. To je pro dlouhodobou mapu víc než detailní popis cesty, kterou standard vznikl.
+
+Codyho komentář: dobrý provozní standard poznáte podle toho, že se dá shrnout bez detektivní nástěnky. Když k pochopení potřebujete pět šipek, tři historické poznámky a člověka, který u toho kdysi byl, ještě to není standard. Je to archeologie.
+
+### Oddělte mapu od historie
+
+Dlouhodobá mapa má ukazovat aktuální stav. Historie změn má vysvětlovat, proč se stav změnil. Když tyto dvě věci smícháte, nový člověk neví, co má použít, a zkušený člověk ztrácí čas čtením starých rozhodnutí.
+
+Rozdělte záznamy takto:
+
+```text
+Dlouhodobá mapa: název standardu, pracovní situace, zdroj pravdy, vlastník, rytmus, příští revize.
+Changelog: co se změnilo, proč, kdy, kdo rozhodl.
+Archiv: staré podklady jen pokud mají jasný účel a retenční pravidlo.
+```
+
+Příklad mapového záznamu:
+
+```text
+Název: Retence pracovních podkladů při údržbě onboardingových šablon
+Situace: měsíční kontrola delivery playbooku
+Zdroj pravdy: delivery playbook, část Údržba šablon
+Vlastník: delivery lead
+Rytmus: měsíčně
+Příští revize: kvartální přehled standardů nebo změna retenčního pravidla
+Stav: dlouhodobě platný
+```
+
+Příklad changelogu:
+
+```text
+2026-05-21: Po kontrole návratu potvrzeno, že retenční věta funguje v měsíčním rytmu. Do dlouhodobé mapy uložen aktuální zdroj pravdy a příští revize.
+```
+
+Do mapy nedávejte celé odůvodnění, screenshoty ani diskusi. Pokud je někdo potřebuje pro audit nebo poučení, patří mimo běžnou trasu a jen s jasnou retencí.
+
+### Nastavte revizní spouštěče
+
+Trvalý standard nemá být bezčasý. Má jen opustit aktivní opravu. Dlouhodobá mapa proto potřebuje spouštěče, které říkají, kdy se k němu znovu vrátit.
+
+Použijte tři typy spouštěčů:
+
+- plánovaný rytmus: měsíční, kvartální nebo roční přehled;
+- změna okolí: nový nástroj, nový typ zákaznických dat, nová role, změna procesu;
+- varovný signál: návrat staré varianty, paralelní evidence, ruční vysvětlování, delší retence podkladů.
+
+Příklad:
+
+```text
+Plánovaný rytmus: kvartální přehled standardů.
+Změna okolí: nový onboardingový nástroj nebo změna úložiště pracovních podkladů.
+Varovný signál: tým znovu ukládá screenshoty po měsíční kontrole.
+```
+
+Spouštěče držte krátké. Pokud jich napíšete deset, nikdo je nebude používat. Většinou stačí jeden plánovaný rytmus, jedna změna okolí a jeden varovný signál.
+
+### Privacy-first stabilizace mapy
+
+Dlouhodobá mapa bývá nenápadné místo, kde se mohou hromadit citlivé detaily. Tým do ní přidá odkazy na pracovní exporty, příklady se zákaznickými údaji, staré screenshoty nebo poznámky z incidentů, protože "to pomůže pochopit kontext".
+
+Privacy-first pravidlo:
+
+```text
+Mapa má obsahovat rozhodnutí a odkazy na zdroje pravdy, ne pracovní důkazy s osobními nebo zákaznickými daty.
+```
+
+Zkontrolujte:
+
+- neobsahuje mapový záznam osobní údaje, zákaznické názvy nebo citlivé interní detaily bez důvodu;
+- odkazy vedou na aktuální zdroj pravdy, ne na dočasné exporty;
+- staré podklady mají jasný stav: zkráceno, archivováno, smazáno;
+- příklady jsou syntetické nebo dostatečně anonymizované;
+- u každého dlouhodobého záznamu je jasné, proč existuje.
+
+Silný zápis:
+
+```text
+Mapa odkazuje jen na delivery playbook a changelog. Pracovní screenshoty byly po uzavření souhrnu smazány. Příklad v mapě je syntetický.
+```
+
+Slabý zápis:
+
+```text
+Mapa obsahuje odkaz na složku s původními podklady, kdyby někdo potřeboval detail.
+```
+
+Pokud detail není potřeba pro budoucí rozhodnutí, nemá být v mapě. Pokud potřeba je, zkraťte ho na souhrn bez zbytečných dat.
+
+### Karta dlouhodobého záznamu
+
+Použijte ji při ukládání potvrzeného návratu do mapy. Má být malá, protože standard už prošel opravou, ověřením i návratem.
+
+```text
+Název standardu:
+Pracovní situace:
+Jednovětý standard:
+Zdroj pravdy:
+Vlastník nebo role:
+Běžný rytmus:
+Stav po Příloze MS: Návrat drží / Návrat drží s drobným třením
+Drobný nález do údržby, pokud existuje:
+Plánovaný revizní rytmus:
+Revizní spouštěč mimo plán:
+Privacy-first stav mapy:
+Co bylo po uložení zkráceno nebo smazáno:
+Co teď vědomě neřešíme:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Název standardu: Retence pracovních podkladů při údržbě onboardingových šablon
+Pracovní situace: měsíční kontrola delivery playbooku
+Jednovětý standard: Při měsíční údržbě onboardingových šablon používáme delivery playbook, aby vlastník nahradil pracovní podklady krátkým souhrnem, bez ponechávání screenshotů a exportů ve sdílené složce.
+Zdroj pravdy: delivery playbook, část Údržba šablon
+Vlastník nebo role: delivery lead
+Běžný rytmus: měsíčně
+Stav po Příloze MS: Návrat drží s drobným třením
+Drobný nález do údržby, pokud existuje: přejmenovat odkaz v indexu při nejbližší údržbě
+Plánovaný revizní rytmus: kvartální přehled standardů
+Revizní spouštěč mimo plán: změna úložiště pracovních podkladů nebo návrat screenshotů do běžné trasy
+Privacy-first stav mapy: mapa odkazuje jen na zdroj pravdy a changelog, příklad je syntetický
+Co bylo po uložení zkráceno nebo smazáno: ověřovací karta zkrácena na changelog, pracovní exporty smazány
+Co teď vědomě neřešíme: neměníme měsíční rytmus ani strukturu delivery playbooku
+Datum: 2026-05-21
+```
+
+Když karta vyvolá další tři úkoly, zkontrolujte, jestli opravdu ukládáte potvrzený standard, nebo se nenápadně vracíte do opravy. Dlouhodobé uložení má aktivní práci ukončit.
+
+### Mini workshop na 12 minut
+
+Vezměte jeden standard se stavem `Návrat drží` nebo `Návrat drží s drobným třením`.
+
+1. Ověřte, že patří do dlouhodobé mapy.
+2. Napište jednovětý standard.
+3. Určete aktuální zdroj pravdy.
+4. Oddělte mapový záznam od changelogu a historie.
+5. Nastavte jeden plánovaný revizní rytmus.
+6. Přidejte jeden varovný spouštěč mimo plán.
+7. Zkontrolujte, že mapa neobsahuje zbytečná data.
+8. Zapište, co teď vědomě neřešíte.
+
+Výstup:
+
+```text
+Potvrzený standard je uložený v dlouhodobé mapě, má jasný zdroj pravdy, revizní spouštěče a nevytváří novou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Výsledek z Přílohy MS je `Návrat drží` nebo `Návrat drží s drobným třením`?
+- Nezkoušíte uložit standard, jehož návrat nedrží?
+- Patří standard opravdu do dlouhodobé mapy?
+- Dá se standard shrnout jednou pracovní větou?
+- Je jasná pracovní situace, ve které se používá?
+- Vede záznam na jeden aktuální zdroj pravdy?
+- Je oddělená mapa, changelog a případný archiv?
+- Má standard vlastníka nebo roli?
+- Je nastaven jeden plánovaný revizní rytmus?
+- Existuje jeden jasný varovný spouštěč mimo plán?
+- Neobsahuje mapa screenshoty, exporty ani citlivé pracovní důkazy?
+- Jsou příklady syntetické nebo dostatečně anonymizované?
+- Byly dočasné podklady zkráceny, archivovány nebo smazány podle účelu?
+- Je drobné tření zapsané do běžné údržby, ne do nového zvláštního režimu?
+- Je zapsané, co teď vědomě neřešíte?
+
+Dlouhodobá mapa je dobrá jen tehdy, když lidem zkracuje cestu k platnému rozhodnutí. Jakmile začne vyprávět celou historii každé opravy, mění se z mapy na bažinu. A bažina je hezké slovo, ale špatný informační systém.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MT o uložení potvrzeného návratu standardu do dlouhodobé mapy: rozhodnutí, kdy standard patří do mapy, jednovětý zápis, oddělení mapy od historie, revizní spouštěče, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MS o kontrole návratu trvalého standardu do běžného rytmu: výběr cyklu, sledování práce bez zvláštního dohledu, rozlišení tření a selhání, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MR o uzavření ověřené akce po kontrole trvalého standardu: uzavírací věta, postupy pro Drží/Zpřesnit/Vrátit do opravy, úklid starých stop, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MQ o ověření jedné akce po kontrole trvalého standardu: návrat k původní akci, běžný průchod, porovnání s nálezem, vedlejší škody, privacy-first ověření, karta, mini workshop a checklist.
