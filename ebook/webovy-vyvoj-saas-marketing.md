@@ -99004,8 +99004,248 @@ Trvalý údržbový standard je po několika cyklech potvrzený, zkrácený, slo
 
 První kontrola trvalého standardu má být skromná. Nehledá velkou transformaci, jen ověřuje, že se z dobrého pravidla nestala zvyklost bez užitku. Když standard pořád pomáhá, nechte ho být. Když bobtná, zkraťte ho. Když se duplikuje, slučte ho. Když přestal vést práci, otevřete malou opravu a nenechte z nejistoty vyrůst nový provozní dluh.
 
+## Příloha MP: Převod kontroly trvalého standardu do jedné další akce
+
+Příloha MO končí rozhodnutím. To je důležité, ale samo o sobě to nestačí. Rozhodnutí `Ponechat`, `Zjednodušit`, `Sloučit` nebo `Otevřít opravu` se musí převést do jedné další akce, jinak se z kontroly stane jen další slušně vyplněná karta. Hezká, rozumná, skoro dojemná. A pořád bez dopadu.
+
+Tato příloha pomáhá udělat malý, dokončený krok po kontrole trvalého standardu. Používá se ve chvíli, kdy už víte, co kontrola ukázala, ale nechcete kolem toho stavět nový projekt, schůzku nebo nekonečný backlog.
+
+Vstupem je kontrolní karta z Přílohy MO. Výstupem je jedna z těchto akcí:
+
+```text
+Vrátit standard do běžného rytmu.
+Zkrátit standard v jednom konkrétním místě.
+Sloučit dvě pravidla do jednoho zdroje pravdy.
+Otevřít jednu malou opravu s jasným ověřením.
+```
+
+Klíčové pravidlo: jedna kontrola má vyrobit jednu dokončenou akci. Pokud kontrola odhalila deset problémů, vyberte první, který nejvíc zlepšuje použití standardu nebo snižuje datovou stopu. Zbytek patří do poznámky, ne do paralelního sprintu.
+
+### Začněte rozhodovací větou
+
+Než sáhnete do dokumentu, šablony nebo procesu, napište jednu rozhodovací větu. Má spojit nález, akci a důvod.
+
+Šablona:
+
+```text
+Po kontrole standardu děláme tuto akci:
+Protože:
+Hotovo bude, když:
+Co teď vědomě neřešíme:
+```
+
+Příklad pro `Ponechat`:
+
+```text
+Po kontrole standardu děláme tuto akci: vracíme měsíční kontrolu šablon do běžného rytmu bez změny.
+Protože: tři poslední cykly proběhly bez tření a výstupy pořád pomáhají stejnému rozhodnutí.
+Hotovo bude, když: v changelogu zůstane krátká poznámka o potvrzení standardu.
+Co teď vědomě neřešíme: nepřidáváme další měření používání šablon.
+```
+
+Příklad pro `Zjednodušit`:
+
+```text
+Po kontrole standardu děláme tuto akci: odstraníme historickou položku o původní opravě.
+Protože: tři cykly se přeskakuje a rozhodnutí je už uložené v changelogu.
+Hotovo bude, když: aktuální checklist obsahuje jen současné pravidlo a stará poznámka je pryč.
+Co teď vědomě neřešíme: neměníme celý údržbový rytmus.
+```
+
+Rozhodovací věta chrání rozsah. Bez ní tým snadno začne "rovnou trochu uklízet" a za hodinu řeší nové názvy složek, historické odkazy, proces schvalování a barvu štítku v tabulce. Ano, barva štítku je lákavá. Ne, většinou to není důvod, proč standard nefunguje.
+
+### Když je rozhodnutí Ponechat
+
+`Ponechat` není pasivita. Je to aktivní rozhodnutí nevyrábět další práci. I tak ho ale krátce uzavřete, aby se za měsíc neotevřela stejná otázka znovu.
+
+Stačí udělat tři věci:
+
+1. Zapsat potvrzení do changelogu nebo provozního záznamu.
+2. Nechat standard ve stejném zdroji pravdy.
+3. Nastavit další běžnou kontrolu podle existujícího rytmu.
+
+Krátký zápis:
+
+```text
+2026-05-21: Trvalý standard potvrzen po třech běžných cyklech. Beze změny. Datová stopa zůstává: aktuální checklist a krátký měsíční záznam bez pracovních screenshotů.
+```
+
+Nepřidávejte kvůli potvrzení nový dashboard, novou metodu skórování ani extra schvalování. Když standard funguje, nejlepší akce je často vrátit ho do práce a odejít od něj. To není lenost. To je provozní hygiena.
+
+### Když je rozhodnutí Zjednodušit
+
+Zjednodušení má být chirurgické. Ne přepis celé kapitoly, ne redesign procesu, ne velké "když už jsme tady". Vyberte jedno místo, které kontrola jasně označila jako zbytečné, duplicitní nebo drahé na pozornost.
+
+Typické malé zásahy:
+
+- odstranit historickou vysvětlivku;
+- zkrátit kontrolní otázku;
+- smazat položku, která se opakovaně přeskakuje;
+- nahradit dlouhý důkaz krátkým souhrnem;
+- přesunout detail z hlavní trasy do archivu;
+- přepsat obecnou větu na konkrétní rozhodnutí.
+
+Příklad před:
+
+```text
+Zkontroluj původní opravu, současné pravidlo, všechny poznámky z pilotu a ujisti se, že výsledek odpovídá domluvenému způsobu používání.
+```
+
+Příklad po:
+
+```text
+Ověř, že aktuální šablona pořád vede k rozhodnutí: ponechat, upravit nebo archivovat.
+```
+
+Po zjednodušení si položte jednu kontrolní otázku:
+
+```text
+Ztratili jsme odstraněním této části nějaké rozhodnutí, důkaz nebo privacy-first ochranu?
+```
+
+Pokud ne, zjednodušení je hotové. Nechte ho projít nejbližším běžným použitím a nesbírejte kvůli němu další zvláštní evidenci.
+
+### Když je rozhodnutí Sloučit
+
+Sloučení je rizikovější než zjednodušení, protože se dotýká zdroje pravdy. Proto nejdřív určete, který dokument, šablona nebo pravidlo přežije jako kanonická verze.
+
+Sloučení má čtyři kroky:
+
+1. Vybrat zdroj pravdy.
+2. Přenést jen aktuální pravidlo, ne celou historii.
+3. Ve zrušeném místě nechat krátký odkaz nebo poznámku.
+4. Zapsat, co se stalo s datovou stopou.
+
+Příklad:
+
+```text
+Zdroj pravdy: delivery playbook, část Údržba onboardingových šablon.
+Sloučené pravidlo: starý checklist z měsíční kontroly šablon.
+Co přenášíme: jednu aktuální kontrolní otázku a retenční větu.
+Co nepřenášíme: pilotní poznámky, staré screenshoty, duplicitní vysvětlení.
+Stopa po sloučení: starý dokument obsahuje jen odkaz na nový zdroj pravdy a datum uzavření.
+```
+
+Privacy-first sloučení je hlavně úklid. Historie nemá cestovat do nového zdroje jen proto, že existuje. Přenášejte pravidla, která jsou potřeba pro práci. Staré důkazy zkraťte na shrnutí, anonymizujte, nebo smažte podle retence.
+
+Slabé sloučení:
+
+```text
+Zkopírovali jsme všechno do jednoho dokumentu, aby bylo vše pohromadě.
+```
+
+Silnější sloučení:
+
+```text
+Do kanonického playbooku jsme přenesli jen současné pravidlo a retenční větu. Staré pracovní poznámky zůstaly uzavřené podle retenčního plánu.
+```
+
+"Všechno pohromadě" zní pohodlně, ale často znamená "všechno navždy". To je přesně ten typ pohodlí, který privacy-first provoz nemá rád.
+
+### Když je rozhodnutí Otevřít opravu
+
+Otevření opravy neznamená, že se standard rozpadl. Znamená to, že běžná kontrola našla něco, co nejde vyřešit prostým zkrácením nebo sloučením. I tady ale držte malý rozsah.
+
+Opravná karta:
+
+```text
+Nález:
+Jedno místo zásahu:
+Navržená změna:
+Kde se změna provede:
+Příští normální použití:
+Jak poznáme, že oprava pomohla:
+Privacy-first dopad:
+Co teď neměníme:
+```
+
+Vyplněný příklad:
+
+```text
+Nález: Vlastník při měsíční kontrole neví, kdy má starý příklad smazat a kdy ho zkrátit.
+Jedno místo zásahu: retenční věta v údržbovém pravidle.
+Navržená změna: přidat pravidlo "pracovní příklady po jednom dalším cyklu nahraď syntetickým souhrnem".
+Kde se změna provede: delivery playbook, část Údržba onboardingových šablon.
+Příští normální použití: další měsíční kontrola.
+Jak poznáme, že oprava pomohla: vlastník uzavře kontrolu bez ponechání starých pracovních podkladů.
+Privacy-first dopad: menší retence dočasných příkladů.
+Co teď neměníme: neměníme celý onboardingový standard.
+```
+
+Oprava má mít ověření v normální práci. Ne v umělé ukázce, ne v samostatném testovacím rituálu. Pokud oprava potřebuje vlastní provozní aparát, pravděpodobně není malá.
+
+### Zavřete stopu po akci
+
+Po každé akci udělejte krátké uzavření. Ne kvůli byrokracii, ale aby bylo jasné, kde je aktuální pravda a co se stalo se starými podklady.
+
+Uzavírací záznam:
+
+```text
+Akce:
+Změněné místo:
+Zdroj pravdy po změně:
+Co bylo odstraněno nebo archivováno:
+Datová stopa po změně:
+Další ověření:
+Vlastník:
+Datum:
+```
+
+Příklad:
+
+```text
+Akce: Zjednodušit.
+Změněné místo: checklist měsíční kontroly onboardingových šablon.
+Zdroj pravdy po změně: delivery playbook.
+Co bylo odstraněno nebo archivováno: historická poznámka k původní opravě, duplicitní s changelogem.
+Datová stopa po změně: aktuální checklist a krátký záznam kontroly, bez starých pracovních screenshotů.
+Další ověření: při příští měsíční kontrole jen sledovat, zda vlastník najde správné pravidlo.
+Vlastník: delivery lead.
+Datum: 2026-05-21.
+```
+
+Tento záznam má být krátký. Pokud je delší než samotná změna, zase se vám do procesu vkradla papírová mlha. Papírová mlha je zvláštní tím, že vypadá jako pořádek, ale člověk přes ni nic nevidí.
+
+### Mini workshop na 12 minut
+
+Vezměte jednu kontrolní kartu z Přílohy MO.
+
+1. Přečtěte rozhodnutí z kontroly.
+2. Napište jednu rozhodovací větu.
+3. Vyberte přesně jednu další akci.
+4. Určete jedno místo zásahu nebo potvrzení.
+5. Zapište, co teď vědomě neměníte.
+6. Proveďte změnu ve zdroji pravdy nebo zapište potvrzení.
+7. Ukliďte starou stopu podle retence.
+8. Zapište krátké uzavření.
+
+Výstup:
+
+```text
+Kontrola trvalého standardu je převedená do jedné hotové akce a zdroj pravdy je po změně jasný.
+```
+
+### Checklist kapitoly
+
+- Máte kontrolní kartu z Přílohy MO?
+- Vybrali jste jen jednu další akci?
+- Napsali jste rozhodovací větu?
+- Je jasné, co teď vědomě neřešíte?
+- U rozhodnutí `Ponechat` jste nepřidali zbytečný dohled?
+- U rozhodnutí `Zjednodušit` je zásah opravdu menší než nová oprava?
+- U rozhodnutí `Sloučit` víte, který zdroj pravdy zůstává?
+- U rozhodnutí `Otevřít opravu` je jasné jedno místo zásahu?
+- Proběhne ověření v normální práci, ne ve zvláštním testovacím režimu?
+- Uklidili jste staré podklady podle retenčního pravidla?
+- Zůstává datová stopa menší nebo stejně velká než před akcí?
+- Je aktuální zdroj pravdy dohledatelný pro člověka, který u kontroly nebyl?
+- Zapsali jste krátké uzavření?
+
+Převod kontroly do akce je malý most mezi přemýšlením a provozem. Bez něj tým sice ví, co by se mělo stát, ale nic se nezmění. S ním se kontrola uzavře, standard zůstane živý a privacy-first provoz se nepropadne do nekonečného ukládání věcí "pro jistotu".
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MP o převodu kontroly trvalého standardu do jedné další akce: rozhodovací věta, postupy pro Ponechat/Zjednodušit/Sloučit/Otevřít opravu, úklid datové stopy, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MO o první kontrole trvalého údržbového standardu po několika cyklech: výběr běžných cyklů, cena dodržování, rozhodnutí Ponechat/Zjednodušit/Sloučit/Otevřít opravu, privacy-first kontrola trvalé datové stopy, kontrolní karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MN o uzavření ověřené úpravy údržbového rytmu do trvalého standardu: zdroj pravdy, odpojení přechodové historie, trvalý jazyk pravidla, běžný návrat bez zvláštního dohledu, privacy-first úklid, karta uzavření, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha ML o kontrole stabilizované úpravy údržbového rytmu po prvním běžném cyklu: ověření bez starých karet, sledování tření, rozhodnutí Uzavřít/Zpřesnit/Vrátit do opravy, privacy-first kontrola datové stopy, kontrolní karta, mini workshop a checklist.
