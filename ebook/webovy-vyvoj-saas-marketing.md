@@ -101313,8 +101313,253 @@ Ověřená úprava dlouhodobé mapy je uzavřená do stabilního záznamu, star�
 
 Dobře uzavřená úprava nevypadá dramaticky. Prostě přestane být vidět jako zvláštní projekt a začne fungovat jako normální součást mapy. Lidé najdou platné pravidlo, staré odkazy je nesvedou vedle a tým nemusí nosit kontext v hlavě. To je přesně ten druh klidu, který se v provozu počítá.
 
+## Příloha MY: První běžná revize stabilního záznamu dlouhodobé mapy
+
+Příloha MX uzavřela ověřenou úpravu do stabilního záznamu. Příloha MY řeší první normální revizi po tomto uzavření. Nejde už o ověřování změny. Jde o kontrolu, jestli se záznam chová jako běžná součást dlouhodobé mapy: lidé ho najdou, pochopí, použijí a nezakládají kolem něj novou vrstvu vysvětlivek.
+
+Tohle je praktický test dospělosti pravidla. Během pilotu bývá tým pozorný, protože ví, že se něco měnilo. Po uzavření pozornost klesne a záznam musí obstát bez doprovodného komentáře autora. Pokud obstojí až v běžné revizi, je skutečně součástí systému, ne jen čerstvě uhlazenou poznámkou.
+
+Výstupem této přílohy je revizní karta:
+
+```text
+Revidovaný záznam:
+Revizní okno:
+Skutečná použití:
+Signál nalezení:
+Signál pochopení:
+Signál dokončení:
+Datová stopa:
+Rozhodnutí: ponechat / zkrátit / přesměrovat / otevřít opravu
+Jedna další akce:
+```
+
+Smyslem není hledat chybu za každou cenu. Smyslem je zjistit, jestli stabilní záznam pořád pomáhá práci a jestli při tom nevyrábí zbytečná data, poznámky, screenshoty nebo paralelní výklady.
+
+### Vyberte normální revizní okno
+
+První revize má proběhnout v běžném rytmu, který byl nastaven při uzavření. Pokud jste v Příloze MX zapsali kvartální kontrolu, nepřepisujte ji na speciální týdenní dohled jen proto, že chcete mít jistotu. Speciální dohled zkresluje výsledek: lidé se chovají pečlivěji, protože vědí, že je pravidlo pod lupou.
+
+Vyberte malé okno, ve kterém záznam mohl být skutečně použit:
+
+- jeden až tři běžné pracovní průchody;
+- jeden nový člověk, který záznam použil bez výkladu autora;
+- jeden případ, kdy záznam řešil hranici mezi dvěma podobnými situacemi;
+- jeden případ, kdy na záznam vedl starší odkaz nebo rozcestník.
+
+Slabé revizní okno:
+
+```text
+Podíváme se, jestli dokument pořád vypadá dobře.
+```
+
+Silnější revizní okno:
+
+```text
+Zkontrolujeme poslední dvě použití retenční mapy při uzavírání zákaznických exportů a jeden průchod nového člověka přes rozcestník.
+```
+
+Druhá varianta pracuje s reálnou situací. První jen hladí dokument po hlavě, což je sice milé, ale provozu to moc nepomůže.
+
+### Sledujte trasu k záznamu
+
+Dlouhodobá mapa selhává často dřív, než člověk začne číst samotné pravidlo. Problém není v textu, ale v cestě k němu: záznam je schovaný pod starým názvem, odkaz vede na archiv, rozcestník nabízí dvě podobné možnosti nebo interní vyhledávání najde starší poznámku výš než aktuální zdroj pravdy.
+
+Při revizi si proto napište trasu:
+
+```text
+Start:
+Hledaná pracovní otázka:
+Použitý rozcestník nebo vyhledávání:
+Nalezený záznam:
+Místo prvního zaváhání:
+Staré odkazy nebo paralelní výsledky:
+```
+
+Příklad:
+
+```text
+Start: uzavírání auditního projektu
+Hledaná pracovní otázka: kdy smazat zákaznické exporty?
+Použitý rozcestník: Delivery / Retence / Exporty
+Nalezený záznam: Zákaznické exporty po auditu
+Místo prvního zaváhání: vyhledávání nabízí i starý supportní exportní postup
+Staré odkazy nebo paralelní výsledky: jeden odkaz z onboardingové checklist položky
+```
+
+Tady text pravidla možná funguje, ale cesta k němu potřebuje uklidit. To je jiný typ opravy než přepis obsahu.
+
+### Oddělte problém mapy od problému práce
+
+Ne každý zádrhel znamená, že je špatně záznam v mapě. Někdy člověk nemá potřebné oprávnění, chybí mu kontext zákazky, nástroj je pomalý nebo proces vedle mapy není jasný. Revize má odlišit, co patří do mapy a co má vlastníka jinde.
+
+Použijte jednoduché třídění:
+
+```text
+Problém nalezení: člověk neví, kde záznam hledat.
+Problém pochopení: člověk záznam najde, ale nerozumí hranici nebo dalšímu kroku.
+Problém provedení: člověk pravidlo chápe, ale okolní systém mu neumožní práci dokončit.
+Problém důvěry: člověk si není jistý, jestli je záznam opravdu aktuální.
+Problém datové stopy: pravidlo vede k ukládání zbytečných podkladů nebo citlivých detailů.
+```
+
+Každý typ má jinou malou opravu:
+
+- nalezení řešte názvem, rozcestníkem, přesměrováním nebo interním odkazem;
+- pochopení řešte jednou konkrétní větou nebo příkladem hranice;
+- provedení předejte vlastníkovi nástroje nebo procesu;
+- důvěru řešte datem revize, vlastníkem a zrušením starých variant;
+- datovou stopu řešte zkrácením důkazu, smazáním dočasných exportů nebo změnou šablony.
+
+Codyho komentář: když se každý problém vyřeší přidáním odstavce, dokumentace začne připomínat skříň, kam se ukládá všechno, co se nikomu nechce roztřídit. Chvíli to vypadá produktivně. Pak už jen hledáte, kam se schovala ta jedna věta, kterou všichni potřebují.
+
+### Zkontrolujte privacy-first stopu po běžném použití
+
+Stabilní záznam může vypadat privacy-first na papíře, ale běžná práce ho umí potichu obejít. Lidé si udělají screenshot "jen pro jistotu", stáhnou export do lokální složky, vloží zákaznický detail do komentáře nebo nechají v kontrolní kartě víc údajů, než je potřeba.
+
+Při první běžné revizi se neptejte jen, jestli se pravidlo použilo. Ptejte se, co po použití zůstalo.
+
+Kontrolní otázky:
+
+1. Vznikl během použití screenshot, export, kopie databázového výpisu nebo ruční poznámka?
+2. Je jasné, proč tento podklad vznikl?
+3. Je podklad pořád potřeba?
+4. Pokud ano, má omezený přístup a retenční pravidlo?
+5. Pokud ne, byl smazán nebo zkrácen na neosobní souhrn?
+6. Nevznikla nová šablona, která sbírá víc údajů než původní pravidlo?
+7. Stačí pro budoucí pochopení rozhodnutí krátký changelog místo plných podkladů?
+
+Příklad dobrého výsledku:
+
+```text
+Po dvou použitích zůstaly jen dvě changelog věty bez zákaznických detailů. Dočasné exporty byly smazané při uzavření ticketu a kontrolní karta obsahuje pouze stav, datum a vlastníka.
+```
+
+Příklad varovného výsledku:
+
+```text
+Pravidlo funguje, ale tým si začal ukládat screenshoty exportů do sdílené složky, protože si není jistý, jak prokázat dokončení.
+```
+
+V druhém případě není primární oprava textu pravidla. Primární oprava je důkaz dokončení: místo screenshotu stačí auditní záznam, stav v ticketu nebo krátké potvrzení bez kopie dat.
+
+### Rozhodněte jednou větou
+
+Na konci první běžné revize zapište rozhodnutí. Nepište dlouhé shrnutí všeho, co jste viděli. Napište stav záznamu a jednu další akci.
+
+Možné stavy:
+
+```text
+Ponechat: záznam je najitelný, srozumitelný a nevyrábí zbytečnou stopu.
+Zkrátit: záznam funguje, ale obsahuje starou vysvětlovací vrstvu nebo příliš mnoho historie.
+Přesměrovat: problém je hlavně v cestě, starých odkazech nebo rozcestníku.
+Otevřít opravu: záznam vede k chybnému rozhodnutí, opakovanému tření nebo zbytečnému sběru dat.
+```
+
+Příklady rozhodovacích vět:
+
+```text
+Ponechat: záznam o zákaznických exportech byl ve dvou běžných průchodech nalezen a použit bez doplňujících poznámek; další kontrola zůstává kvartální.
+```
+
+```text
+Přesměrovat: pravidlo je srozumitelné, ale starý onboardingový odkaz vede na archiv; opravíme jeden odkaz a nebudeme měnit text záznamu.
+```
+
+```text
+Otevřít opravu: pravidlo sice vede k dokončení práce, ale tým kvůli důkazu ukládá screenshoty exportů; další akce je nahradit screenshot krátkým stavem v ticketu.
+```
+
+Jedna věta nutí tým vybrat podstatu. Pokud se rozhodnutí nevejde do jedné věty, pravděpodobně se snažíte řešit víc věcí najednou.
+
+### Revizní karta stabilního záznamu
+
+Použijte ji při první běžné revizi po uzavření úpravy do dlouhodobé mapy.
+
+```text
+Datum revize:
+Revidovaný záznam:
+Původní slib záznamu:
+Revizní okno:
+Skutečná použití:
+Kdo záznam použil:
+Jak se k němu dostal:
+Místo prvního zaváhání:
+Staré odkazy nebo paralelní záznamy:
+Signál nalezení:
+Signál pochopení:
+Signál dokončení:
+Datová stopa po použití:
+Privacy-first nález:
+Rozhodnutí: ponechat / zkrátit / přesměrovat / otevřít opravu
+Jedna další akce:
+Vlastník akce:
+Termín ověření:
+Co zůstává mimo rozsah:
+```
+
+Vyplněný příklad:
+
+```text
+Datum revize: 2026-05-21
+Revidovaný záznam: Zákaznické exporty po auditu
+Původní slib záznamu: jasně odlišit zákaznické a supportní exporty
+Revizní okno: dvě běžná uzavření auditních projektů
+Skutečná použití: audit A, audit B
+Kdo záznam použil: delivery lead a nový projektový koordinátor
+Jak se k němu dostal: rozcestník Delivery / Retence / Exporty
+Místo prvního zaváhání: starý onboardingový odkaz vede na archivní poznámku
+Staré odkazy nebo paralelní záznamy: jeden onboardingový odkaz
+Signál nalezení: oba lidé našli aktuální záznam do dvou minut
+Signál pochopení: supportní exporty oddělili bez dotazu
+Signál dokončení: ticket obsahuje stav mazání a datum
+Datová stopa po použití: bez screenshotů, bez exportů v příloze
+Privacy-first nález: žádný nový sběr dat
+Rozhodnutí: přesměrovat
+Jedna další akce: opravit starý onboardingový odkaz na aktuální záznam
+Vlastník akce: delivery lead
+Termín ověření: při další onboardingové kontrole
+Co zůstává mimo rozsah: neměníme retenční pravidlo pro supportní exporty
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jeden stabilní záznam, který se po uzavření úpravy vrátil do běžné mapy.
+
+1. Vyberte jedno až tři skutečná použití od posledního uzavření.
+2. Zapište cestu, kterou lidé k záznamu přišli.
+3. Označte první místo zaváhání.
+4. Rozlište problém nalezení, pochopení, provedení, důvěry nebo datové stopy.
+5. Zkontrolujte, co po použití zůstalo za podklady.
+6. Napište rozhodnutí ve stavu ponechat, zkrátit, přesměrovat nebo otevřít opravu.
+7. Vyberte jednu další akci a zbytek nechte mimo rozsah.
+
+Výstup:
+
+```text
+Stabilní záznam prošel první běžnou revizí, má jasný stav a další práce je omezená na jednu akci.
+```
+
+### Checklist kapitoly
+
+- Revidujete záznam v běžném rytmu, ne ve speciálním pilotním dohledu?
+- Vybrali jste skutečná použití místo dojmu z dokumentu?
+- Zapsali jste trasu od pracovní otázky k záznamu?
+- Víte, jestli problém vznikl při nalezení, pochopení, provedení, důvěře nebo datové stopě?
+- Neřešíte problém okolního procesu přepisem mapy?
+- Zkontrolovali jste staré odkazy, rozcestníky a paralelní záznamy?
+- Prošli jste podklady, které po použití zůstaly?
+- Nevznikají screenshoty nebo exporty jen jako náhradní důkaz dokončení?
+- Stačí pro budoucí pochopení krátký changelog místo plných podkladů?
+- Má rozhodnutí jeden ze stavů ponechat, zkrátit, přesměrovat nebo otevřít opravu?
+- Vybrali jste přesně jednu další akci?
+- Má akce vlastníka a termín ověření?
+- Je zapsané, co zůstává mimo rozsah?
+
+První běžná revize má být nenápadná. Když dopadne dobře, záznam prostě zůstane žít v mapě a tým o něm nemusí vést dlouhou debatu. Když najde tření, nemá z něj vyrůst nový projekt. Stačí jedna přesná oprava: cesta, věta, důkaz dokončení nebo úklid datové stopy.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MY o první běžné revizi stabilního záznamu dlouhodobé mapy: výběr normálního revizního okna, kontrola trasy k záznamu, oddělení problémů nalezení/pochopení/provedení/důvěry/datové stopy, privacy-first kontrola běžného použití, rozhodovací stavy, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MX o uzavření ověřené úpravy dlouhodobé mapy do stabilního záznamu: práce s výsledkem ověření, přepis do současného pravidla, zavření starých cest, privacy-first úklid ověřovací stopy, návrat do běžné revize, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MW o ověření úpravy dlouhodobé mapy po prvním skutečném použití: návrat k pracovní otázce, sledování trasy, stavy ověření, privacy-first kontrola, rozhodovací karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MV o převodu nálezu z přehledu dlouhodobé mapy do jedné hotové úpravy: výběr nálezu podle ceny práce, pracovní věta, typ zásahu, oprava v místě práce, oddělení historie, privacy-first úklid, ověření jedním průchodem, karta, mini workshop a checklist.
