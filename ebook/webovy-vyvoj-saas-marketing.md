@@ -17,6 +17,8 @@ Každý průchod rukopisem berte jako malou pracovní smyčku: vybrat problém, 
 
 Když po čtení vznikne víc úkolů, vyberte jeden hlavní a zbytek nechte v poznámkách. Praktický e-book má pomáhat k lepším prioritám, ne vyrábět další frontu práce, kterou nikdo nestihne uzavřít.
 
+Vedle vybraného úkolu si proto zapište i jednu věc, kterou teď vědomě neměníte. Takový zápis chrání rozsah práce: tým ví, že téma nezmizelo, ale zároveň se z jedné kapitoly nestane neřízený backlog.
+
 Pokud rukopis používá tým, určete u vybraného kroku jednoho vlastníka a nejbližší termín kontroly. Bez toho se dobré rozhodnutí snadno rozpustí mezi lidmi: všichni souhlasí, nikdo ho nevezme do ruky a další schůzka začne od stejné otázky.
 
 Před otevřením další kapitoly si napište jednu otázku, kvůli které text čtete právě teď. Otázka typu "jak zlepšit web" je ještě moc široká; otázka "proč nám z homepage chodí málo kvalitních poptávek" už vede k rozhodnutí, které se dá ověřit.
@@ -98691,3 +98693,4 @@ Dobrá stabilizace není slavnostní. Je to úklid po dobře provedené změně.
 - 2026-05-19: Doplněna poznámka k týmovému používání rukopisu: vlastník kroku, termín kontroly a prevence rozpuštěné odpovědnosti.
 - 2026-05-20: Doplněna úvodní poznámka, aby čtenář před další kapitolou formuloval jednu konkrétní pracovní otázku.
 - 2026-05-20: Doplněn úvodní filtr pro výběr jedné kapitoly podle dopadu na zákazníka, ověřitelnosti, rozhodnutí a privacy-first datové stopy.
+- 2026-05-21: Doplněna krátká úvodní poznámka o vědomém omezení rozsahu: k hlavnímu úkolu si čtenář zapíše i jednu věc, kterou teď nemění.
