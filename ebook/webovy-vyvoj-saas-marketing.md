@@ -101557,8 +101557,255 @@ Stabilní záznam prošel první běžnou revizí, má jasný stav a další pr�
 
 První běžná revize má být nenápadná. Když dopadne dobře, záznam prostě zůstane žít v mapě a tým o něm nemusí vést dlouhou debatu. Když najde tření, nemá z něj vyrůst nový projekt. Stačí jedna přesná oprava: cesta, věta, důkaz dokončení nebo úklid datové stopy.
 
+## Příloha MZ: Převod běžné revize stabilního záznamu do údržbové fronty
+
+Příloha MY končí jednou další akcí po běžné revizi stabilního záznamu. Příloha MZ řeší, kam tato akce patří, aby nezmizela v poznámkách a zároveň z ní nevznikl větší projekt, než si nález zaslouží. Dlouhodobá mapa má zůstat použitelná právě tím, že se drobné opravy dostanou do správné údržbové fronty a projdou normálním rytmem.
+
+Ne každá akce po revizi má stejnou váhu. Oprava starého odkazu není totéž jako změna retenčního pravidla. Zkrácení příkladu není totéž jako úprava přístupů v nástroji. Když se všechny nálezy hodí do jedné hromady, tým buď zbytečně eskaluje malé věci, nebo naopak podcení změny, které mají dopad na data, důvěru nebo provoz.
+
+Výstupem této přílohy je údržbová karta:
+
+```text
+Nález z revize:
+Typ akce: navigace / text / proces / nástroj / data / vlastnictví
+Úroveň dopadu: drobná / běžná / riziková
+Údržbová fronta:
+Vlastník:
+Nejbližší rytmus:
+Ověření:
+Co se teď nemění:
+```
+
+Smyslem není vytvořit další administrativu. Smyslem je převést revizní poznatek do místa, kde ho někdo skutečně dokončí.
+
+### Začněte typem akce
+
+Nejdřív pojmenujte, jaký typ práce revize našla. Jedna věta z Přílohy MY často zní jednoduše, ale může ukrývat rozdílné druhy zásahu.
+
+Použijte šest praktických typů:
+
+```text
+Navigace: odkaz, rozcestník, název, vyhledatelnost.
+Text: jedna věta, příklad, hranice rozhodnutí, odstranění starého vysvětlení.
+Proces: pracovní krok mimo dokumentaci, handoff, kontrola dokončení.
+Nástroj: oprávnění, stav v systému, formulář, automatizace, šablona.
+Data: retence, export, screenshot, citlivý detail, auditní stopa.
+Vlastnictví: není jasné, kdo záznam udržuje nebo kdo rozhoduje o změně.
+```
+
+Příklad:
+
+```text
+Nález: starý onboardingový odkaz vede na archivní poznámku.
+Typ akce: navigace.
+```
+
+Jiný příklad:
+
+```text
+Nález: tým kvůli důkazu dokončení ukládá screenshoty exportů.
+Typ akce: data + proces.
+```
+
+Druhý nález je rizikovější. Nejde jen o přepsání dokumentu. Je potřeba změnit způsob důkazu dokončení tak, aby lidé nemuseli vyrábět kopie dat.
+
+### Určete úroveň dopadu
+
+Úroveň dopadu říká, jak rychle a s jakou kontrolou má akce projít. Stačí jednoduché třídění.
+
+```text
+Drobná akce:
+Opravuje cestu, překlep, starý odkaz, duplicitní název nebo zbytečnou větu. Nemění pravidlo, odpovědnost ani práci s daty.
+
+Běžná akce:
+Zpřesňuje pravidlo, příklad, hranici rozhodnutí nebo předání mezi rolemi. Může ovlivnit běžný pracovní postup, ale nemění citlivá data ani oprávnění.
+
+Riziková akce:
+Dotýká se datové stopy, retence, přístupů, zákaznických podkladů, automatizace, externího nástroje nebo odpovědnosti za rozhodnutí.
+```
+
+Příklady rozhodnutí:
+
+```text
+Drobná: přesměrovat jeden starý odkaz v onboardingovém checklistu.
+Běžná: doplnit hranici mezi supportním a zákaznickým exportem.
+Riziková: nahradit screenshoty exportů stavem v ticketu a smazat staré kopie.
+```
+
+Codyho komentář: dobrá údržba není heroický zásah. Je to schopnost poznat, kdy stačí opravit kliku a kdy se dveře otevírají do místnosti plné dat, odpovědností a budoucích problémů. Ano, ta druhá varianta si zaslouží víc pozornosti než "jen to někde přepiš".
+
+### Vyberte správnou frontu
+
+Údržbová fronta není vždy jeden backlog. Malý tým může mít jednu sdílenou tabulku, větší tým může mít oddělené fronty pro dokumentaci, produkt, provoz a bezpečnost. Důležité je, aby nález skončil tam, kde má vlastníka a přirozený rytmus.
+
+Praktické mapování:
+
+```text
+Navigace -> dokumentační údržba nebo vlastník mapy.
+Text -> dokumentační údržba nebo autor daného standardu.
+Proces -> provozní review dané role nebo delivery rytmus.
+Nástroj -> produktový/provozní backlog podle vlastníka systému.
+Data -> privacy-first review, bezpečnostní nebo provozní fronta.
+Vlastnictví -> týmové rozhodnutí o odpovědnosti, ne anonymní backlog.
+```
+
+Slabé zařazení:
+
+```text
+Přidat do backlogu: opravit exporty.
+```
+
+Silnější zařazení:
+
+```text
+Privacy-first provozní fronta: nahradit screenshot exportu stavem v ticketu; vlastník delivery lead; ověřit při dalším uzavření auditního projektu.
+```
+
+Druhá varianta říká, co se má změnit, kdo to drží a kdy se pozná, že je hotovo.
+
+### Nepřevádějte revizi na sběr dalších důkazů
+
+Častá chyba po revizi je reflex "ještě si nasbíráme víc příkladů". Někdy je to správně, ale často tím tým jen odkládá malou zjevnou opravu. Pokud nález ukazuje starý odkaz, nepotřebujete tři další workshopy. Opravte odkaz a ověřte při dalším použití.
+
+Další důkazy sbírejte jen tehdy, když:
+
+- není jasné, jestli problém vzniká opakovaně;
+- akce může změnit pravidlo pro více rolí;
+- zásah se dotýká citlivých dat, přístupů nebo retence;
+- existují dvě rozumné interpretace a každá vede k jiné práci;
+- oprava může rozbít stávající pracovní trasu.
+
+Ve všech ostatních případech stačí malá akce a krátké ověření.
+
+### Udržte rozsah jednou větou
+
+Každá položka ve frontě musí mít větu, která chrání rozsah. Bez ní se z drobné údržby snadno stane přepis celé kapitoly, výměna nástroje nebo debata o strategii.
+
+Formát:
+
+```text
+Měníme:
+Neměníme:
+Ověříme podle:
+```
+
+Příklady:
+
+```text
+Měníme: starý onboardingový odkaz na aktuální záznam o exportech.
+Neměníme: text retenčního pravidla ani strukturu rozcestníku.
+Ověříme podle: nový člověk při příštím onboardingu najde aktuální záznam bez dotazu.
+```
+
+```text
+Měníme: důkaz dokončení exportu ze screenshotu na stav v ticketu.
+Neměníme: samotnou retenční lhůtu ani odpovědnost delivery lead role.
+Ověříme podle: další uzavřený auditní projekt nemá screenshot exportu v příloze.
+```
+
+Tato věta je malá brzda proti přerůstání práce. Tým ví, co se řeší, a stejně důležité je, co se teď neřeší.
+
+### Privacy-first kontrola před zařazením
+
+Před zařazením položky do fronty se zeptejte, jestli údržba sama nevytvoří novou datovou stopu. I oprava dokumentace může nechtěně vést k ukládání citlivých příkladů, screenshotů nebo plných zákaznických detailů do pracovních podkladů.
+
+Kontrolní otázky:
+
+1. Potřebujeme pro opravu reálná zákaznická data, nebo stačí anonymizovaný příklad?
+2. Pokud potřebujeme reálný případ, kde bude uložen a kdy zmizí?
+3. Má vlastník položky přístup jen k datům, která opravdu potřebuje?
+4. Nevznikne v backlogu citlivý detail jen proto, že se někomu lépe popisuje problém?
+5. Dá se výsledek ověřit stavem, datem nebo chováním místo kopií podkladů?
+6. Má položka jasný konec, po kterém se dočasné podklady smažou?
+
+Příklad privacy-first zápisu:
+
+```text
+Do položky nevkládáme screenshot exportu ani jméno zákazníka. Stačí anonymizovaný popis: "auditní projekt s exportem dat". Ověření proběhne kontrolou stavu ticketu po dalším uzavření projektu.
+```
+
+### Údržbová karta
+
+Použijte ji pro každou akci, která vznikne z běžné revize stabilního záznamu.
+
+```text
+Datum:
+Zdrojová revize:
+Revidovaný záznam:
+Nález z revize:
+Typ akce: navigace / text / proces / nástroj / data / vlastnictví
+Úroveň dopadu: drobná / běžná / riziková
+Údržbová fronta:
+Vlastník:
+Nejbližší rytmus:
+Měníme:
+Neměníme:
+Ověříme podle:
+Privacy-first poznámka:
+Dočasné podklady:
+Termín úklidu podkladů:
+Stav: zařazeno / hotovo / čeká na ověření / vráceno
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-21
+Zdrojová revize: první běžná revize záznamu o zákaznických exportech
+Revidovaný záznam: Zákaznické exporty po auditu
+Nález z revize: starý onboardingový odkaz vede na archivní poznámku
+Typ akce: navigace
+Úroveň dopadu: drobná
+Údržbová fronta: dokumentační údržba
+Vlastník: delivery lead
+Nejbližší rytmus: další onboardingová kontrola
+Měníme: jeden starý odkaz v onboardingovém checklistu
+Neměníme: retenční pravidlo ani text záznamu
+Ověříme podle: nový člověk najde aktuální záznam přes checklist
+Privacy-first poznámka: bez zákaznických dat, stačí kontrola odkazu
+Dočasné podklady: žádné
+Termín úklidu podkladů: není potřeba
+Stav: zařazeno
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu akci z Přílohy MY a převeďte ji do údržbové fronty.
+
+1. Pojmenujte typ akce.
+2. Určete úroveň dopadu.
+3. Vyberte frontu, která má vlastníka a rytmus.
+4. Napište věty `Měníme`, `Neměníme` a `Ověříme podle`.
+5. Projděte privacy-first kontrolu před zařazením.
+6. Zapište dočasné podklady a termín jejich úklidu.
+7. Nastavte stav položky a nejbližší ověření.
+
+Výstup:
+
+```text
+Nález z běžné revize je zařazený ve správné údržbové frontě, má vlastníka, omezený rozsah a jasné ověření.
+```
+
+### Checklist kapitoly
+
+- Převedli jste nález z revize do konkrétního typu akce?
+- Rozlišili jste drobnou, běžnou a rizikovou úroveň dopadu?
+- Neskončila riziková datová akce v obyčejné dokumentační frontě?
+- Má položka vlastníka, ne jen anonymní backlog?
+- Je jasné, v jakém rytmu se položka udělá nebo ověří?
+- Zapsali jste, co se mění a co se teď nemění?
+- Nežádáte další důkazy tam, kde stačí malá zjevná oprava?
+- Pokud důkazy potřebujete, mají omezený rozsah a retenční pravidlo?
+- Dá se výsledek ověřit bez screenshotů, exportů a citlivých příkladů?
+- Má položka privacy-first poznámku?
+- Má dočasný podklad termín úklidu?
+- Je definované, kdy se položka považuje za hotovou?
+
+Údržbová fronta má být most mezi revizí a hotovou prací. Když je most krátký a jasný, tým neopakuje stejnou debatu při každé kontrole. Když je mlhavý, mapa začne znovu stárnout: ne proto, že by chyběly poznámky, ale protože poznámky nedoputovaly do práce.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MZ o převodu běžné revize stabilního záznamu do údržbové fronty: typ akce, úroveň dopadu, správná fronta, ochrana rozsahu, privacy-first kontrola před zařazením, údržbová karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MY o první běžné revizi stabilního záznamu dlouhodobé mapy: výběr normálního revizního okna, kontrola trasy k záznamu, oddělení problémů nalezení/pochopení/provedení/důvěry/datové stopy, privacy-first kontrola běžného použití, rozhodovací stavy, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MX o uzavření ověřené úpravy dlouhodobé mapy do stabilního záznamu: práce s výsledkem ověření, přepis do současného pravidla, zavření starých cest, privacy-first úklid ověřovací stopy, návrat do běžné revize, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MW o ověření úpravy dlouhodobé mapy po prvním skutečném použití: návrat k pracovní otázce, sledování trasy, stavy ověření, privacy-first kontrola, rozhodovací karta, mini workshop a checklist.
