@@ -99490,8 +99490,287 @@ Jedna akce po kontrole trvalého standardu je ověřená v běžné práci a má
 
 Ověření po akci má být poslední krátká kontrola, ne začátek dalšího kola nekonečné údržby. Když akce drží, nechte standard pracovat. Když potřebuje zpřesnit, zpřesněte jednu větu. Když selhala, vraťte ji do malé opravy. Hlavní výhra je jasný stav, čistý zdroj pravdy a datová stopa, která se po změně nezvětšila.
 
+## Příloha MR: Uzavření ověřené akce po kontrole trvalého standardu
+
+Příloha MQ ověřuje, jestli jedna akce po kontrole trvalého standardu opravdu funguje v běžné práci. Příloha MR dělá poslední krok: uzavírá ověření tak, aby po něm nezůstala rozpracovaná poznámka, nejasný zdroj pravdy ani další malý proces, který se tváří jako zlepšení a ve skutečnosti jen přidává údržbu.
+
+Používá se ve chvíli, kdy už máte kartu ověření z Přílohy MQ a jedno z rozhodnutí:
+
+```text
+Drží.
+Zpřesnit.
+Vrátit do opravy.
+```
+
+Výstupem této přílohy není další analýza. Výstupem je uzavřený stav:
+
+```text
+Standard se vrací do běžného rytmu.
+Standard dostal jedno drobné zpřesnění a má nejbližší běžné ověření.
+Akce se vrací do malé opravy s jasným důvodem.
+```
+
+Klíčové pravidlo: po ověření nesmí zůstat čtvrtý stav typu "někdy se k tomu vrátíme". Buď akce drží, potřebuje malé zpřesnění, nebo se vrací do opravy. Všechno ostatní je jen měkký způsob, jak neuzavřít rozhodnutí.
+
+### Začněte uzavírací větou
+
+Než upravíte dokument nebo zapíšete changelog, napište jednu větu, která spojuje ověřený výsledek s dalším stavem standardu.
+
+Šablona:
+
+```text
+Po ověření akce rozhodujeme:
+Protože:
+Další stav standardu:
+Co teď vědomě neřešíme:
+```
+
+Příklad pro `Drží`:
+
+```text
+Po ověření akce rozhodujeme: odstranění historické položky drží.
+Protože: vlastník při dalším běžném cyklu našel aktuální pravidlo bez přeskakování a původní nález je pryč.
+Další stav standardu: vrací se do měsíční údržby bez zvláštního dohledu.
+Co teď vědomě neřešíme: nezavádíme nové měření používání checklistu.
+```
+
+Příklad pro `Zpřesnit`:
+
+```text
+Po ověření akce rozhodujeme: změna pomohla, ale retenční věta potřebuje jedno zpřesnění.
+Protože: původní duplicita zmizela, ale vlastník si pořád není jistý, kdy pracovní podklady nahradit souhrnem.
+Další stav standardu: upravit jednu větu a ověřit při příštím běžném cyklu.
+Co teď vědomě neřešíme: neměníme celý retenční plán.
+```
+
+Příklad pro `Vrátit do opravy`:
+
+```text
+Po ověření akce rozhodujeme: sloučení nebylo uzavřené a vrací se do opravy.
+Protože: starý dokument zůstal ve vyhledávání jako první výsledek a obsahuje odlišnou retenční větu.
+Další stav standardu: opravit zdroj pravdy a zřetelně uzavřít staré místo.
+Co teď vědomě neřešíme: nepřepisujeme celý onboardingový playbook.
+```
+
+Uzavírací věta je malá brzda proti provoznímu šumu. Když ji neumíte napsat jednoduše, pravděpodobně se pořád snažíte uzavřít víc věcí najednou.
+
+### Když rozhodnutí zní Drží
+
+`Drží` znamená, že akce splnila původní slib a nevytvořila nové zásadní tření. V takovém případě standard neodměňujte dalším dohledem. Vraťte ho do běžného rytmu a ukliďte stopy po ověřování.
+
+Stačí udělat čtyři věci:
+
+1. Zapsat krátké potvrzení do changelogu nebo provozního záznamu.
+2. Nechat aktuální pravidlo ve zdroji pravdy.
+3. Uzavřít ověřovací kartu.
+4. Smazat nebo zkrátit dočasné podklady podle retenčního pravidla.
+
+Krátký zápis:
+
+```text
+2026-05-21: Akce po kontrole trvalého standardu ověřena v běžném cyklu. Původní nález je pryč, standard se vrací do měsíční údržby. Dočasné poznámky nahrazeny krátkým souhrnem.
+```
+
+Nepřidávejte novou kolonku "stav po ověření", pokud ji nikdo nebude používat pro rozhodnutí. Nepřidávejte další kontrolní schůzku jen proto, že ověření dopadlo dobře. Dobrý výsledek má proces zkrátit, ne rozšířit.
+
+Codyho komentář: udržet fungující věc v klidu je podceňovaná manažerská dovednost. Spousta týmů umí opravovat problémy, ale neumí přestat, když je oprava hotová. Pak se i dobrý standard utopí v péči, kterou nepotřebuje.
+
+### Když rozhodnutí zní Zpřesnit
+
+`Zpřesnit` je malá změna, ne nová oprava v přestrojení. Má být tak úzká, aby ji šlo provést v jednom místě a ověřit při příštím normálním použití.
+
+Dobré zpřesnění:
+
+- přepíše jednu nejasnou větu;
+- doplní jeden odkaz na zdroj pravdy;
+- přesune jednu položku na správné místo v checklistu;
+- přidá jedno stop pravidlo;
+- zkrátí příklad, který mate čtenáře;
+- vyjasní, kdy se maže nebo nahrazuje dočasný podklad.
+
+Slabé zpřesnění:
+
+- otevře celou strukturu dokumentu;
+- přidá novou povinnou kartu;
+- rozšíří měření bez jasného rozhodnutí;
+- nechá vedle sebe starou i novou formulaci;
+- řeší tři nálezy najednou;
+- odkládá privacy-first úklid "až bude čas".
+
+Mini karta zpřesnění:
+
+```text
+Co zpřesňujeme:
+Přesné místo:
+Nové znění nebo změna:
+Proč stačí tato malá úprava:
+Ověření při příštím běžném použití:
+Privacy-first dopad:
+Co teď neměníme:
+```
+
+Vyplněný příklad:
+
+```text
+Co zpřesňujeme: retenční větu u měsíční kontroly onboardingových šablon.
+Přesné místo: delivery playbook, část Údržba šablon.
+Nové znění nebo změna: pracovní podklady po jednom dalším cyklu nahraď syntetickým souhrnem a smaž kopie se zákaznickými údaji.
+Proč stačí tato malá úprava: původní nález zmizel, nejasný zůstal jen retenční okamžik.
+Ověření při příštím běžném použití: vlastník uzavře kontrolu bez ponechání pracovních screenshotů.
+Privacy-first dopad: kratší retence dočasných materiálů.
+Co teď neměníme: neměníme periodicitu údržby ani celý onboardingový standard.
+```
+
+Po zpřesnění nechte akci znovu projít běžnou prací. Nezakládejte speciální ověřovací režim, pokud změna opravdu zůstala malá. U drobné věty stačí příští normální použití a krátký záznam.
+
+### Když rozhodnutí zní Vrátit do opravy
+
+`Vrátit do opravy` používejte tehdy, když ověřená akce nesplnila původní slib nebo vytvořila blokující problém. Neznamená to ostudu. Znamená to, že tým našel hranici předchozího zásahu dřív, než se z ní stal trvalý zmatek.
+
+Návrat do opravy musí být konkrétní:
+
+```text
+Co nefungovalo:
+Jaký dopad to mělo na práci:
+Jaký dopad to mělo na datovou stopu:
+Které jedno místo se opraví:
+Co se nesmí znovu otevřít:
+Kdy proběhne další běžné ověření:
+```
+
+Příklad:
+
+```text
+Co nefungovalo: starý dokument po sloučení pořád vyhrává ve vyhledávání.
+Jaký dopad to mělo na práci: vlastník použil starou retenční větu.
+Jaký dopad to mělo na datovou stopu: dočasné podklady zůstaly dostupné déle, než měl nový standard povolit.
+Které jedno místo se opraví: starý dokument dostane uzavírací poznámku a odkaz na kanonický zdroj.
+Co se nesmí znovu otevřít: nepřepisujeme obsah kanonického playbooku, protože jeho pravidlo je správné.
+Kdy proběhne další běžné ověření: při příští měsíční kontrole.
+```
+
+Důležité je nevracet do opravy celý standard, pokud selhalo jen místo po akci. Rozlišujte:
+
+```text
+Selhala akce: opravte akci.
+Selhal zdroj pravdy: opravte umístění a odkazy.
+Selhal celý standard: teprve potom otevřete širší revizi.
+```
+
+Širší revize má být poslední možnost. Většina selhání po jedné akci je menší: nejasný odkaz, zbylá stará kopie, nedořešená retenční věta nebo příliš měkké uzavření.
+
+### Uzavřete staré stopy
+
+Po rozhodnutí `Drží`, `Zpřesnit` i `Vrátit do opravy` zkontrolujte, co po ověřování zůstalo. Trvalý standard nemá kolem sebe držet každou pomocnou kartu, komentář a pracovní výstřižek.
+
+Rozdělte materiály na čtyři skupiny:
+
+```text
+Ponechat jako zdroj pravdy.
+Zkrátit na souhrn.
+Archivovat mimo běžnou trasu.
+Smazat podle retence.
+```
+
+Příklad úklidu:
+
+```text
+Ponechat jako zdroj pravdy: aktuální odstavec v delivery playbooku.
+Zkrátit na souhrn: karta ověření akce, jedna věta v changelogu.
+Archivovat mimo běžnou trasu: uzavírací záznam původní kontroly bez zákaznických dat.
+Smazat podle retence: pracovní screenshoty a exporty použité při ověření.
+```
+
+Privacy-first uzavření není jen "něco jsme smazali". Dobré uzavření říká, proč zůstává právě to, co zůstává:
+
+```text
+Po uzavření zůstává jen aktuální pravidlo, changelog a syntetický souhrn ověření. Dočasné pracovní podklady se zákaznickými údaji byly odstraněny podle retenčního pravidla.
+```
+
+Slabé uzavření:
+
+```text
+Všechno máme pro jistotu uložené ve složce archiv.
+```
+
+Archiv bez účelu je jen pomalejší forma nepořádku. A někdy také dražší forma rizika.
+
+### Karta uzavření ověřené akce
+
+Použijte ji jen jednou, na konci ověření. Nemá nahrazovat původní kontrolní kartu ani běžný changelog.
+
+```text
+Ověřená akce:
+Rozhodnutí z Přílohy MQ: Drží / Zpřesnit / Vrátit do opravy
+Uzavírací věta:
+Aktuální zdroj pravdy:
+Provedená změna nebo návrat:
+Další běžné ověření:
+Co bylo zkráceno, archivováno nebo smazáno:
+Privacy-first stav po uzavření:
+Co teď vědomě neřešíme:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Ověřená akce: odstranění historické položky z měsíčního checklistu.
+Rozhodnutí z Přílohy MQ: Zpřesnit.
+Uzavírací věta: původní duplicita je pryč, ale retenční věta potřebuje konkrétní okamžik úklidu.
+Aktuální zdroj pravdy: delivery playbook, část Údržba šablon.
+Provedená změna nebo návrat: retenční věta doplněna o nahrazení pracovních podkladů syntetickým souhrnem po dalším cyklu.
+Další běžné ověření: příští měsíční kontrola.
+Co bylo zkráceno, archivováno nebo smazáno: ověřovací poznámky zkráceny do changelogu, pracovní screenshoty smazány.
+Privacy-first stav po uzavření: zůstává aktuální pravidlo a souhrn bez zákaznických dat.
+Co teď vědomě neřešíme: neměníme měsíční rytmus.
+Vlastník: delivery lead.
+Datum: 2026-05-21.
+```
+
+Karta má být poslední zápis k jedné ověřené akci. Pokud po ní vznikne další karta hned vedle, pravděpodobně jste neuzavřeli, ale jen přesunuli nejasnost do nového formuláře.
+
+### Mini workshop na 10 minut
+
+Vezměte jednu kartu ověření z Přílohy MQ.
+
+1. Přečtěte rozhodnutí `Drží`, `Zpřesnit` nebo `Vrátit do opravy`.
+2. Napište uzavírací větu.
+3. Určete aktuální zdroj pravdy.
+4. Proveďte jednu změnu, návrat nebo potvrzení.
+5. Zapište, co teď vědomě neřešíte.
+6. Rozdělte staré podklady na ponechat, zkrátit, archivovat nebo smazat.
+7. Zapište privacy-first stav po uzavření.
+8. Uzavřete kartu a vraťte standard do příslušného rytmu.
+
+Výstup:
+
+```text
+Ověřená akce po kontrole trvalého standardu má uzavřený stav, jasný zdroj pravdy a uklizenou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Máte kartu ověření z Přílohy MQ?
+- Vybrali jste jen jeden stav: `Drží`, `Zpřesnit` nebo `Vrátit do opravy`?
+- Napsali jste uzavírací větu?
+- Je jasný aktuální zdroj pravdy?
+- U stavu `Drží` jste nepřidali nový dohled?
+- U stavu `Zpřesnit` je změna opravdu jedna věta, odkaz, stop pravidlo nebo malé umístění?
+- U stavu `Vrátit do opravy` opravujete konkrétní selhání, ne celý standard bez důvodu?
+- Zapsali jste, co teď vědomě neřešíte?
+- Rozdělili jste staré podklady na ponechat, zkrátit, archivovat nebo smazat?
+- Zůstává po uzavření méně nebo stejně dat než před ověřováním?
+- Je privacy-first stav napsaný konkrétně, ne obecnou frází?
+- Ví další vlastník, kdy standard znovu použije nebo ověří?
+- Je ověřená akce skutečně uzavřená, ne jen přesunutá do další poznámky?
+
+Uzavření ověřené akce je malý konec, který chrání celý systém. Bez něj se i dobré opravy mění v nános polovičních poznámek. S ním má standard aktuální pravdu, tým ví, co platí, a data po cestě nezůstávají ležet déle, než musí.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MR o uzavření ověřené akce po kontrole trvalého standardu: uzavírací věta, postupy pro Drží/Zpřesnit/Vrátit do opravy, úklid starých stop, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MQ o ověření jedné akce po kontrole trvalého standardu: návrat k původní akci, běžný průchod, porovnání s nálezem, vedlejší škody, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MP o převodu kontroly trvalého standardu do jedné další akce: rozhodovací věta, postupy pro Ponechat/Zjednodušit/Sloučit/Otevřít opravu, úklid datové stopy, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MO o první kontrole trvalého údržbového standardu po několika cyklech: výběr běžných cyklů, cena dodržování, rozhodnutí Ponechat/Zjednodušit/Sloučit/Otevřít opravu, privacy-first kontrola trvalé datové stopy, kontrolní karta, mini workshop a checklist.
