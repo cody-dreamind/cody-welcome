@@ -99768,8 +99768,271 @@ Ověřená akce po kontrole trvalého standardu má uzavřený stav, jasný zdro
 
 Uzavření ověřené akce je malý konec, který chrání celý systém. Bez něj se i dobré opravy mění v nános polovičních poznámek. S ním má standard aktuální pravdu, tým ví, co platí, a data po cestě nezůstávají ležet déle, než musí.
 
+## Příloha MS: Kontrola návratu trvalého standardu do běžného rytmu
+
+Příloha MR uzavírá ověřenou akci po kontrole trvalého standardu. Příloha MS přidává krátkou kontrolu návratu: ověřuje, že standard po uzavření opravdu znovu žije v běžném rytmu a že kolem něj nevznikl nový nenápadný proces.
+
+Používá se po jednom až dvou normálních cyklech od uzavření akce. Ne dřív. Pokud kontrolujete hned druhý den, často jen sledujete dozvuk opravy, ne skutečný návrat do provozu.
+
+Výstupem této přílohy je jednoduché rozhodnutí:
+
+```text
+Návrat drží.
+Návrat drží s drobným třením.
+Návrat nedrží.
+```
+
+Smysl kontroly není znovu hodnotit celý standard. Smysl je zjistit, jestli tým po uzavření používá aktuální zdroj pravdy bez zvláštní péče, bez paralelních poznámek a bez zbytečně dlouhé datové stopy.
+
+### Vyberte jeden běžný rytmus
+
+Nejprve určete, v jakém rytmu se měl standard po uzavření znovu objevit. Může to být týdenní provozní kontrola, měsíční údržba šablon, kvartální revize dodavatelů, onboarding nové role nebo pravidelné vyhodnocení marketingového materiálu.
+
+Zapište jen jeden rytmus:
+
+```text
+Kontrolovaný standard:
+Uzavřená akce z Přílohy MR:
+Běžný rytmus, do kterého se měl standard vrátit:
+První normální cyklus po uzavření:
+Vlastník cyklu:
+```
+
+Příklad:
+
+```text
+Kontrolovaný standard: měsíční údržba onboardingových šablon.
+Uzavřená akce z Přílohy MR: zpřesnění retenční věty u pracovních podkladů.
+Běžný rytmus, do kterého se měl standard vrátit: měsíční kontrola delivery playbooku.
+První normální cyklus po uzavření: kontrola za květen.
+Vlastník cyklu: delivery lead.
+```
+
+Nekontrolujte současně tři standardy jen proto, že jsou v jedné složce. Kontrola návratu má být malá. Když je moc široká, začne se chovat jako audit a tým se přestane dívat na skutečné používání.
+
+### Sledujte práci bez zvláštního dohledu
+
+Hlavní otázka zní: použil vlastník standard normálně, nebo potřeboval připomenutí, náhradní instrukci či ruční vedení?
+
+Hledejte čtyři signály:
+
+```text
+Vlastník našel aktuální zdroj pravdy.
+Použil platné pravidlo bez staré varianty.
+Výstup cyklu odpovídá minimálnímu správnému výsledku.
+Po cyklu nevznikla nová pomocná evidence.
+```
+
+Dobré znamení:
+
+```text
+Vlastník otevřel delivery playbook, použil aktuální retenční větu, nahradil pracovní podklady souhrnem a uzavřel cyklus v běžném changelogu.
+```
+
+Varovné znamení:
+
+```text
+Vlastník se ptal v chatu, která verze pravidla platí, a někdo mu poslal starý screenshot s doplněným komentářem.
+```
+
+Ještě horší znamení:
+
+```text
+Tým po uzavření akce založil novou tabulku "dočasné sledování návratu standardu" a nikdo neví, kdy ji smaže.
+```
+
+Codyho komentář: když standard po návratu potřebuje osobního průvodce, není to trvalý standard. Je to dokument s fan klubem. Fan klub může být milý, ale provozní systém na něm stavět nechcete.
+
+### Rozlišujte tření od selhání
+
+Návrat do běžného rytmu nemusí být dokonale hladký. Jedno malé tření neznamená, že standard selhal. Důležité je poznat rozdíl mezi drobnou nepohodlností a návratem starého chaosu.
+
+Drobná tření:
+
+- vlastník musel jednou kliknout přes starý odkaz, ale aktuální zdroj pravdy našel;
+- changelog má správný výsledek, jen mu chybí jasnější formulace;
+- retenční úklid proběhl, ale souhrn by mohl být kratší;
+- jeden příklad v dokumentu je pořád moc dlouhý, ale nevede k chybě;
+- nový člověk se zeptal na kontext, ne na platnost pravidla.
+
+Selhání návratu:
+
+- tým použil starou variantu pravidla;
+- výstup cyklu se opírá o dočasnou kartu místo zdroje pravdy;
+- pracovní podklady s citlivými údaji zůstaly uložené "pro jistotu";
+- vlastník neví, kdy standard použít;
+- po uzavření vznikl nový kontrolní proces bez konce;
+- standard se v běžném rytmu vůbec neobjevil.
+
+Praktické pravidlo:
+
+```text
+Tření zhoršuje pohodlí práce.
+Selhání mění rozhodnutí, zdroj pravdy nebo datovou stopu.
+```
+
+Pokud jde jen o pohodlí, zapište drobný nález a nechte standard běžet. Pokud se mění rozhodnutí, zdroj pravdy nebo data, návrat nedrží a potřebuje malou opravu.
+
+### Privacy-first kontrola návratu
+
+Po uzavření akce je největší riziko nenápadné: tým si nechá pomocné materiály, protože "kdyby něco". Právě tady se z provozní opatrnosti může stát zbytečná retence.
+
+Zkontrolujte tři věci:
+
+```text
+Zůstaly jen materiály s jasným účelem?
+Neobsahuje běžná trasa staré kopie, screenshoty, exporty nebo pracovní poznámky?
+Je jasné, kdy se mažou podklady vzniklé při dalším cyklu?
+```
+
+Vyplněný příklad:
+
+```text
+Zůstaly jen materiály s jasným účelem: aktuální pravidlo, changelog a syntetický souhrn.
+Staré kopie v běžné trase: žádné.
+Podklady z dalšího cyklu: pracovní screenshoty smazány po uzavření souhrnu.
+```
+
+Slabý stav:
+
+```text
+Máme všechno uložené ve sdílené složce, kdyby se někdo chtěl vrátit k detailům.
+```
+
+Silnější stav:
+
+```text
+Detailní pracovní podklady nebyly potřeba pro další rozhodnutí, proto zůstává jen souhrn bez osobních a zákaznických údajů.
+```
+
+Privacy-first návrat znamená, že běžný rytmus nepotřebuje staré důkazy jako berličku. Pokud je potřebuje, buď není pravidlo dost jasné, nebo tým pořád nevěří uzavřenému rozhodnutí.
+
+### Rozhodnutí po kontrole návratu
+
+Na konci vyberte jeden ze tří stavů.
+
+```text
+Návrat drží.
+```
+
+Použijte, když standard prošel běžným cyklem, vlastník našel zdroj pravdy, výstup odpovídá minimu a datová stopa se nezvětšila.
+
+Zápis:
+
+```text
+Návrat drží: standard se po uzavřené akci vrátil do měsíčního rytmu. Vlastník použil aktuální pravidlo bez staré varianty a po cyklu zůstal jen changelog a souhrn.
+```
+
+```text
+Návrat drží s drobným třením.
+```
+
+Použijte, když standard funguje, ale jedna malá věc zhoršuje použití. Neopravujte ji hned, pokud neblokuje práci ani privacy-first pravidlo. Zapište ji do nejbližší běžné údržby.
+
+Zápis:
+
+```text
+Návrat drží s drobným třením: aktuální pravidlo bylo použito správně, ale odkaz v indexu má nejasný název. Zapsáno do nejbližší údržby indexu, bez nového kontrolního režimu.
+```
+
+```text
+Návrat nedrží.
+```
+
+Použijte, když se tým vrátil ke starému pravidlu, standard se v rytmu neobjevil, vznikla paralelní evidence nebo zůstala zbytečná datová stopa.
+
+Zápis:
+
+```text
+Návrat nedrží: vlastník použil starý dokument z vyhledávání a pracovní podklady zůstaly ve sdílené složce. Otevírá se jedna malá oprava odkazu a uzavírací poznámky, ne revize celého standardu.
+```
+
+Stav `Návrat nedrží` neznamená automaticky velký projekt. Většinou stačí opravit nejbližší místo, kde se člověk dostal na starou cestu.
+
+### Karta kontroly návratu
+
+Použijte ji jednou po prvním normálním cyklu nebo po dvou cyklech, pokud se standard používá často a první cyklus byl atypický.
+
+```text
+Kontrolovaný standard:
+Uzavřená akce:
+Běžný rytmus:
+Kontrolovaný cyklus:
+Kdo standard použil:
+Našel aktuální zdroj pravdy: ano / ne
+Použil starou variantu: ano / ne
+Výstup odpovídá minimu: ano / ne
+Vznikla nová pomocná evidence: ano / ne
+Privacy-first stav po cyklu:
+Rozhodnutí: Návrat drží / Návrat drží s drobným třením / Návrat nedrží
+Jedna další akce, pokud je potřeba:
+Co teď vědomě neřešíme:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kontrolovaný standard: měsíční údržba onboardingových šablon.
+Uzavřená akce: zpřesnění retenční věty.
+Běžný rytmus: měsíční kontrola delivery playbooku.
+Kontrolovaný cyklus: květnová kontrola.
+Kdo standard použil: delivery lead.
+Našel aktuální zdroj pravdy: ano.
+Použil starou variantu: ne.
+Výstup odpovídá minimu: ano.
+Vznikla nová pomocná evidence: ne.
+Privacy-first stav po cyklu: zůstává changelog a souhrn bez zákaznických údajů, pracovní screenshoty byly smazány.
+Rozhodnutí: Návrat drží s drobným třením.
+Jedna další akce, pokud je potřeba: při nejbližší údržbě přejmenovat odkaz v indexu.
+Co teď vědomě neřešíme: neměníme měsíční rytmus ani strukturu playbooku.
+Vlastník: delivery lead.
+Datum: 2026-05-21.
+```
+
+Karta má být krátká. Pokud její vyplnění trvá déle než samotná běžná kontrola standardu, vytvořili jste si nový problém.
+
+### Mini workshop na 12 minut
+
+Vezměte jeden standard, který se po uzavřené akci vrátil do provozu.
+
+1. Určete jeden běžný cyklus po uzavření.
+2. Najděte, kde vlastník začal práci.
+3. Ověřte, zda použil aktuální zdroj pravdy.
+4. Porovnejte výstup s minimem.
+5. Zapište, jestli vznikla nová pomocná evidence.
+6. Zkontrolujte podklady, kopie a retenční úklid.
+7. Vyberte stav návratu.
+8. Pokud je potřeba akce, zapište jen jednu.
+
+Výstup:
+
+```text
+Víme, zda se trvalý standard po uzavřené akci vrátil do běžného rytmu bez nového dohledu a bez větší datové stopy.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete jeden standard, ne celý systém?
+- Proběhl aspoň jeden normální cyklus po uzavření akce?
+- Je jasné, do jakého rytmu se měl standard vrátit?
+- Našel vlastník aktuální zdroj pravdy bez ruční navigace?
+- Nepoužila se stará varianta pravidla?
+- Odpovídá výstup cyklu minimálnímu správnému výsledku?
+- Nevznikla nová pomocná evidence bez konce?
+- Rozlišili jste drobné tření od selhání návratu?
+- Zkontrolovali jste staré kopie, screenshoty, exporty a pracovní poznámky?
+- Zůstává po cyklu jen datová stopa s jasným účelem?
+- Je rozhodnutí napsané jako `Návrat drží`, `Návrat drží s drobným třením` nebo `Návrat nedrží`?
+- Pokud je potřeba další akce, je opravdu jedna?
+- Zapsali jste, co teď vědomě neřešíte?
+
+Kontrola návratu chrání tým před tím, aby z každé opravy vznikl nový režim. Trvalý standard má po uzavření znovu pracovat tiše: v běžném rytmu, v jednom zdroji pravdy a s daty, která mají jasný účel i konec.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MS o kontrole návratu trvalého standardu do běžného rytmu: výběr cyklu, sledování práce bez zvláštního dohledu, rozlišení tření a selhání, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MR o uzavření ověřené akce po kontrole trvalého standardu: uzavírací věta, postupy pro Drží/Zpřesnit/Vrátit do opravy, úklid starých stop, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MQ o ověření jedné akce po kontrole trvalého standardu: návrat k původní akci, běžný průchod, porovnání s nálezem, vedlejší škody, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MP o převodu kontroly trvalého standardu do jedné další akce: rozhodovací věta, postupy pro Ponechat/Zjednodušit/Sloučit/Otevřít opravu, úklid datové stopy, mini workshop a checklist.
