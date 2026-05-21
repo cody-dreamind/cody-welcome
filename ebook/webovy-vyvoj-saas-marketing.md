@@ -100553,8 +100553,294 @@ Dlouhodobá mapa byla ověřena na skutečných otázkách, má jednu vybranou �
 
 První přehled dlouhodobé mapy má být malý test užitečnosti. Když mapa pomáhá najít rozhodnutí, nechte ji dýchat. Když překáží, opravte nejbližší tření. A když se nepoužívá, nepište delší úvod. Vraťte ji k pracovním situacím, kvůli kterým má existovat.
 
+## Příloha MV: Převod nálezu z přehledu dlouhodobé mapy do jedné úpravy
+
+Příloha MU končí jednou vybranou úpravou mapy. Příloha MV řeší další krok: jak z nálezu udělat hotovou změnu, která zkrátí cestu k rozhodnutí, ale nerozjede velkou dokumentační přestavbu.
+
+Používá se ve chvíli, kdy první přehled dlouhodobé mapy ukázal konkrétní tření. Někdo nenašel správný standard, narazil na dvě podobné položky, otevřel starý zdroj pravdy, zahlédl citlivý pracovní odkaz nebo musel požádat autora pravidla o vysvětlení. To je dost signálů na malou úpravu. Není to automaticky důvod přepsat celý systém.
+
+Výstupem této přílohy je jedna hotová úprava mapy:
+
+```text
+Upravený záznam:
+Typ úpravy:
+Původní tření:
+Nová pracovní trasa:
+Ověření při příštím použití:
+Co zůstává mimo rozsah:
+```
+
+Smysl je jednoduchý: dlouhodobá mapa se má zlepšovat podle skutečné práce. Ne podle toho, co by teoreticky mohlo být hezčí.
+
+### Vyberte nález, který nejvíc zkracuje práci
+
+Po přehledu mapy budete mít pravděpodobně víc drobných nálezů. Jeden název je nepřesný, jeden odkaz vede na starší dokument, dvě položky jsou podobné, u jednoho privacy-first pravidla chybí hranice použití a jedna role už se jmenuje jinak. To všechno může být pravda. Přesto vyberte jen jeden nález.
+
+Řaďte nálezy podle ceny pro běžnou práci:
+
+1. Brání člověku najít platné rozhodnutí?
+2. Zvyšuje riziko práce se špatnou nebo starou verzí pravidla?
+3. Vede k uchování nebo sdílení dat navíc?
+4. Vytváří dotazy na autora standardu místo samostatné práce?
+5. Opakuje se ve více pracovních situacích?
+
+Silný kandidát:
+
+```text
+Lidé při měsíční údržbě šablon otevírají dva podobné retenční standardy a nevědí, který platí pro zákaznické exporty.
+```
+
+Slabší kandidát:
+
+```text
+Název jednoho záznamu by mohl být stylisticky hezčí.
+```
+
+Stylistická čistota není špatná. Jen obvykle není první priorita, pokud mapa současně posílá lidi k nejasnému retenčnímu pravidlu. Dokumentace má nejdřív chránit rozhodnutí, teprve potom estetiku.
+
+Codyho komentář: pokud se při úpravě interní mapy přistihnete, že ladíte tón nadpisu déle než trasu ke zdroji pravdy, dejte si pauzu. Tým nepotřebuje literární cenu za navigaci. Potřebuje trefit správné pravidlo v úterý odpoledne, ideálně bez detektivky.
+
+### Pojmenujte úpravu jako pracovní změnu
+
+Úprava mapy má mít konkrétní pracovní větu. Ne "vylepšit navigaci", ale co se změní a proč.
+
+Dobré pracovní věty:
+
+```text
+Přejmenujeme retenční záznam podle situace "mazání zákaznických exportů po auditu", aby se nepletl s interní údržbou šablon.
+```
+
+```text
+Starý onboardingový standard přesuneme mimo běžnou mapu a necháme v ní jen aktuální zdroj pravdy, aby nový člověk neviděl dvě platné cesty.
+```
+
+```text
+U privacy-first analytiky nahradíme odkaz na pracovní export krátkým souhrnem bez osobních údajů.
+```
+
+Slabé pracovní věty:
+
+```text
+Uklidit mapu.
+Zlepšit názvosloví.
+Zkontrolovat privacy.
+```
+
+Tyto věty neříkají, kdy je hotovo. A když není jasné, kdy je hotovo, práce se nafoukne. Malá úprava mapy má být uzavřená během jednoho krátkého pracovního bloku.
+
+### Vyberte správný typ zásahu
+
+Ne každý nález potřebuje stejnou opravu. Když člověk nenašel záznam, pomůže název nebo umístění. Když otevřel starý dokument, pomůže zdroj pravdy. Když se bojí smazat export, pomůže hranice odpovědnosti. Když mapa obsahuje citlivé odkazy, pomůže datový úklid.
+
+Typy zásahů:
+
+```text
+Název: záznam se přejmenuje podle pracovní situace.
+Umístění: záznam se přesune k části mapy, kde ho člověk hledá.
+Sloučení: dvě položky se spojí a stará cesta se uzavře.
+Hranice: doplní se jedna věta, kdy použít který standard.
+Zdroj pravdy: opraví se odkaz na aktuální dokument nebo playbook.
+Archivace: starý záznam zmizí z běžné trasy a zůstane jen jako historie.
+Privacy-first úklid: citlivý odkaz se nahradí bezpečným souhrnem.
+```
+
+Příklad rozhodnutí:
+
+```text
+Nález: dva retenční záznamy vypadají platně pro stejný úkol.
+Typ zásahu: hranice + zdroj pravdy.
+Úprava: v mapě zůstane jeden záznam pro zákaznické exporty, druhý se přejmenuje na interní pracovní podklady. U obou bude jedna věta hranice a odkaz na aktuální playbook.
+```
+
+Pozor na kombinace. Pokud jedna úprava začne obsahovat přejmenování, přesuny, sloučení, nový index, školení týmu a změnu retenční politiky, už to není jedna úprava mapy. Rozdělte ji. V této příloze se dokončuje nejmenší zásah, který odstraní původní tření.
+
+### Opravujte v místě, kde práce začíná
+
+Mapa se nepoužívá v abstraktním prostoru. Člověk do ní přichází z nějaké situace: onboarding, měsíční kontrola, audit, incident, publikace, úklid dat, změna nabídky. Úpravu proto dělejte co nejblíž místu, kde práce skutečně začíná.
+
+Slabý postup:
+
+```text
+Do dlouhého úvodu mapy doplníme vysvětlení, jak rozlišovat retenční standardy.
+```
+
+Silnější postup:
+
+```text
+Přímo u dvou retenčních záznamů doplníme hranici: interní pracovní podklady vs. zákaznické exporty. Starý odkaz na exportní složku nahradíme souhrnem.
+```
+
+Úvodní vysvětlení čte málokdo ve chvíli, kdy potřebuje jednat. Hranice u konkrétního záznamu pomáhá právě tam, kde rozhodnutí vzniká.
+
+Praktické pravidlo:
+
+```text
+Když člověk udělá chybu v kroku 3, neopravujte jen obecný návod v kroku 0.
+```
+
+To platí i pro privacy-first úpravy. Pokud problém vznikl tím, že mapový záznam vede na pracovní složku s exporty, nestačí do obecné části napsat "nesdílejte citlivá data". Opravte samotný odkaz, vytvořte bezpečný souhrn a starou stopu zavřete podle retenčního pravidla.
+
+### Zachovejte historii, ale necpěte ji do běžné cesty
+
+Dlouhodobá mapa má ukazovat platnou cestu. Historie je užitečná pro audit, učení a vysvětlení změn, ale nemá stát vedle aktuální instrukce tak, že vypadá stejně důležitě.
+
+Po úpravě si u každé staré části rozhodněte:
+
+```text
+Zůstává v changelogu.
+Přesouvá se do archivu.
+Nahrazuje se souhrnem.
+Maže se po skončení retenční lhůty.
+Zůstává pouze v omezeném přístupu kvůli auditu.
+```
+
+Dobrá mapa po úpravě:
+
+```text
+Aktuální záznam vede na zdroj pravdy. U záznamu je krátká poznámka "nahrazuje starý retenční postup z dubna 2026". Detail starého postupu je v changelogu mimo běžnou trasu.
+```
+
+Slabá mapa po úpravě:
+
+```text
+Aktuální i starý postup jsou vedle sebe, oba mají podobné názvy a tým má "vědět", který je správný.
+```
+
+"Tým má vědět" je často jen maskovaný dluh v dokumentaci. Pokud musí vědět historii, aby našel aktuální pravidlo, mapa neplní svou práci.
+
+### Privacy-first úprava bez sběru nových důkazů
+
+Při opravě mapy je lákavé udělat si "pro jistotu" další screenshoty, exporty, kopie chatu nebo příklady z reálných zákaznických situací. Někdy to pomůže pochopit problém. Často to ale jen zvětší datovou stopu kvůli malé dokumentační úpravě.
+
+Privacy-first postup:
+
+- Pracujte s nálezem z přehledu, neotevírejte novou sbírku důkazů bez důvodu.
+- Pokud potřebujete příklad, přepište ho synteticky nebo ho zkraťte na pracovní situaci.
+- Citlivý odkaz nahraďte souhrnem, ne dalším odkazem do jiné složky.
+- Po úpravě smažte dočasné poznámky, které obsahují osobní nebo zákaznické údaje.
+- Ujistěte se, že centrální mapa nerozšiřuje přístup k citlivým zdrojům.
+- Do changelogu zapisujte rozhodnutí, ne celý původní obsah.
+
+Příklad bezpečného zápisu:
+
+```text
+Privacy-first změna: odkaz na pracovní export zákaznických dat byl nahrazen souhrnem retenčního rozhodnutí. Původní export zůstává mimo mapu a bude odstraněn podle retenčního pravidla.
+```
+
+Slabý zápis:
+
+```text
+Pro kontext přidán odkaz na složku s původními exporty.
+```
+
+Kontext je užitečný, ale nemá automaticky vyhrávat nad minimalizací dat. Dlouhodobá mapa má lidem říct, co mají rozhodnout. Nemá být skladištěm všech podkladů, které kdy k rozhodnutí vedly.
+
+### Ověřte úpravu jedním průchodem
+
+Po úpravě nečekejte měsíc, jestli si někdo všimne. Ověřte ji na jednom realistickém průchodu.
+
+Stačí krátký test:
+
+1. Vezměte původní pracovní otázku z přehledu.
+2. Dejte ji člověku, který úpravu nedělal, nebo si ji projděte jako nový uživatel.
+3. Sledujte, jestli najde správný záznam.
+4. Ověřte, že se dostane na aktuální zdroj pravdy.
+5. Zkontrolujte, že stará nebo citlivá cesta už nepůsobí jako běžná možnost.
+6. Zapište výsledek jednou větou.
+
+Možné výsledky:
+
+```text
+Úprava drží: člověk našel platné rozhodnutí bez dotazu.
+Úprava drží s třením: rozhodnutí našel, ale název nebo hranice ještě brzdí.
+Úprava nedrží: člověk skončil ve stejné nejistotě jako předtím.
+```
+
+Pokud úprava drží, uzavřete ji v changelogu. Pokud drží s třením, udělejte jednu drobnou korekci. Pokud nedrží, vraťte se k typu zásahu; pravděpodobně jste opravili text, ale problém byl ve zdroji pravdy, hranici nebo staré cestě.
+
+### Karta úpravy dlouhodobé mapy
+
+Použijte ji pro jednu hotovou úpravu po přehledu mapy.
+
+```text
+Datum úpravy:
+Původní pracovní otázka:
+Nález z přehledu:
+Vybraný typ zásahu: název / umístění / sloučení / hranice / zdroj pravdy / archivace / privacy-first úklid
+Původní tření:
+Konkrétní úprava:
+Upravený záznam:
+Staré cesty uzavřené:
+Privacy-first dopad:
+Nová pracovní trasa:
+Ověření jedním průchodem:
+Výsledek ověření: drží / drží s třením / nedrží
+Co zůstává mimo rozsah:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Datum úpravy: 2026-05-21
+Původní pracovní otázka: které pravidlo použít při mazání zákaznických exportů po auditu?
+Nález z přehledu: dva retenční záznamy vypadaly jako platné pro stejný úkol
+Vybraný typ zásahu: hranice + zdroj pravdy + privacy-first úklid
+Původní tření: člověk otevřel interní údržbový standard a nebylo jasné, jestli platí i pro zákaznická data
+Konkrétní úprava: záznamy přejmenovány podle pracovní situace, doplněna hranice a starý exportní odkaz nahrazen souhrnem
+Upravený záznam: Mazání zákaznických exportů po auditu
+Staré cesty uzavřené: archivní retenční poznámka přesunuta mimo běžnou mapu
+Privacy-first dopad: mapa už nevede na složku s pracovními exporty
+Nová pracovní trasa: audit -> mapový záznam zákaznických exportů -> retenční playbook -> souhrn rozhodnutí
+Ověření jedním průchodem: delivery lead našel platný zdroj pravdy bez dotazu
+Výsledek ověření: drží
+Co zůstává mimo rozsah: neslučujeme všechny retenční standardy
+Další kontrola: příští kvartální přehled mapy
+```
+
+Karta má být krátká. Jakmile začíná připomínat samostatný projektový dokument, pravděpodobně řešíte víc než jednu úpravu.
+
+### Mini workshop na 12 minut
+
+Vezměte jeden nález z posledního přehledu dlouhodobé mapy.
+
+1. Přepište nález na pracovní otázku.
+2. Seřaďte ho podle ceny pro běžnou práci.
+3. Vyberte jeden typ zásahu.
+4. Napište konkrétní pracovní větu úpravy.
+5. Opravte nejbližší místo, kde práce začíná.
+6. Uzavřete nebo oddělte starou cestu.
+7. Zkontrolujte privacy-first dopad.
+8. Ověřte úpravu jedním průchodem.
+9. Zapište, co zůstává mimo rozsah.
+
+Výstup:
+
+```text
+Jeden nález z přehledu mapy byl převeden do hotové úpravy, která zkracuje cestu k platnému rozhodnutí a nepřidává zbytečnou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Vybrali jste jeden nález, ne celý seznam přání?
+- Řadili jste nálezy podle ceny pro běžnou práci?
+- Má úprava pracovní větu, podle které jde poznat hotovo?
+- Vybrali jste správný typ zásahu?
+- Opravili jste místo, kde člověk skutečně začíná práci?
+- Nezůstala stará cesta vedle aktuální jako zdánlivě platná alternativa?
+- Je historie uložená mimo běžnou pracovní trasu?
+- Nenabrali jste kvůli malé úpravě nové citlivé důkazy?
+- Nahradili jste citlivé odkazy bezpečným souhrnem, pokud to dávalo smysl?
+- Zkontrolovali jste, že mapa nerozšiřuje přístup k datům?
+- Ověřili jste úpravu jedním realistickým průchodem?
+- Zapsali jste výsledek jako drží, drží s třením nebo nedrží?
+- Je jasné, co zůstává mimo rozsah?
+
+Dobrá úprava dlouhodobé mapy je skoro nenápadná. Člověk prostě rychleji najde správné pravidlo, stará cesta ho nesvede stranou a citlivá data neleží v navigaci jen proto, že se kdysi hodila jako důkaz. To je přesně ten druh interní kvality, která nevypadá dramaticky, ale šetří práci každý týden.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MV o převodu nálezu z přehledu dlouhodobé mapy do jedné hotové úpravy: výběr nálezu podle ceny práce, pracovní věta, typ zásahu, oprava v místě práce, oddělení historie, privacy-first úklid, ověření jedním průchodem, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MU o prvním přehledu dlouhodobé mapy standardů: pracovní otázky, trasa ke zdroji pravdy, duplicity, stárnutí záznamů, privacy-first kontrola mapy, jedna vybraná úprava, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MT o uložení potvrzeného návratu standardu do dlouhodobé mapy: rozhodnutí, kdy standard patří do mapy, jednovětý zápis, oddělení mapy od historie, revizní spouštěče, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MS o kontrole návratu trvalého standardu do běžného rytmu: výběr cyklu, sledování práce bez zvláštního dohledu, rozlišení tření a selhání, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
