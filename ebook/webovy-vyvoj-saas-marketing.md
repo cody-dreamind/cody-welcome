@@ -98521,8 +98521,254 @@ Stabilizovaná úprava obstála nebo neobstála v prvním běžném cyklu a má 
 
 Dobrá kontrola po prvním běžném cyklu je krátká a věcná. Neoslavuje změnu, nehledá viníka a nevyrábí nový dohled. Jen ověří, jestli stabilizace přežila kontakt s normální prací. Když ano, pustí ji dál. Když ne, vrátí ji do opravy dřív, než se z malé nejasnosti stane další provozní tradice.
 
+## Příloha MN: Uzavření ověřené úpravy údržbového rytmu do trvalého standardu
+
+Když stabilizovaná úprava obstála v prvním běžném cyklu, přichází poslední krok celé malé smyčky: uzavřít ji jako normální součást trvalého standardu. Ne jako "novinku z poslední kontroly", ne jako věc, kterou si musí někdo pamatovat, ale jako běžné pravidlo, které další člověk použije bez znalosti celé historie.
+
+Tato příloha navazuje na Přílohu ML a používá se jen tehdy, když kontrola skončila rozhodnutím `Uzavřít`. Smyslem není znovu hodnotit úpravu. Smyslem je uklidit provozní stopu, potvrdit zdroj pravdy, zapsat retenční rozhodnutí a vrátit téma do standardního rytmu údržby.
+
+Vstupem je kontrolní karta po prvním běžném cyklu. Výstupem je trvalý údržbový standard bez přechodových poznámek, bez zvláštního dohledu a bez zbytečných podkladů z ověřování.
+
+Uzavření odpovídá na šest otázek:
+
+```text
+Je rozhodnutí opravdu Uzavřít?
+Kde přesně žije aktuální pravidlo?
+Co už nesmí být součástí běžné pracovní trasy?
+Jaká minimální historie má zůstat pro audit a učení?
+Které dočasné podklady se mažou nebo zkracují?
+Kdy se k pravidlu vrátíme už jen v běžné údržbě?
+```
+
+Pokud na první otázku odpověď zní ne, tuto přílohu nepoužívejte. Stav `Zpřesnit` patří zpět do jedné malé opravy. Stav `Vrátit do opravy` patří do hlubšího pracovního zásahu. Uzavření není zametání nejistoty pod koberec. Je to konec ověřené změny.
+
+### Potvrďte zdroj pravdy
+
+Trvalý standard potřebuje jedno místo, které platí. Ne tři dokumenty, dvě karty a jednu zprávu v chatu, kde je "nejaktuálnější vysvětlení". První krok uzavření je tedy obyčejný, ale zásadní: pojmenujte zdroj pravdy.
+
+Zdroj pravdy může být:
+
+- aktuální checklist pro měsíční údržbu;
+- kanonická karta onboardingového standardu;
+- interní playbook pro konkrétní roli;
+- provozní list standardu;
+- dokumentace v repozitáři nebo znalostní bázi.
+
+Dobrá věta vypadá takto:
+
+```text
+Zdroj pravdy pro měsíční kontrolu onboardingových šablon je kanonický checklist v delivery playbooku; staré karty oprav nejsou součástí běžné trasy.
+```
+
+Slabá věta vypadá takto:
+
+```text
+Aktuální pravidlo je v checklistu, ale pro kontext se dívejte i do staré karty a poznámek z ověření.
+```
+
+Druhá věta možná působí pečlivě. Ve skutečnosti říká, že standard ještě není uzavřený. Když člověk potřebuje starou historii k běžnému použití, nemá před sebou trvalý standard, ale pracovní archeologii.
+
+### Odpojte přechodovou historii z běžné trasy
+
+Přechodová historie může zůstat v archivu, ale nesmí vodit běžnou práci. To je rozdíl, na kterém hodně záleží.
+
+Odpojení znamená:
+
+- z checklistu vedou odkazy jen na aktuální pracovní artefakty;
+- stará karta opravy není uvedená jako doporučený kontext;
+- kontrolní karta po prvním cyklu je uzavřená, ne aktivní;
+- changelog obsahuje jen krátký záznam o uzavření;
+- lidé nemají při dalším cyklu otevírat ověřovací podklady.
+
+Praktický postup:
+
+1. Otevřete aktuální pracovní místo.
+2. Najděte všechny odkazy na přechodové karty.
+3. Nechte jen odkaz, který je nutný pro audit nebo archiv.
+4. Z běžné trasy odstraňte vysvětlivky typu "po poslední úpravě".
+5. Do changelogu napište jednu uzavírací větu.
+
+Příklad uzavírací věty:
+
+```text
+2026-05-21: Úprava údržbového rytmu byla po běžném cyklu uzavřena do trvalého standardu; běžná trasa používá jen aktuální checklist a syntetický příklad.
+```
+
+Věta stačí. Budoucí vlastník nepotřebuje číst celou historii malé změny, aby udělal měsíční kontrolu. Pokud ji potřebuje kvůli auditu nebo učení, najde ji v archivu mimo hlavní pracovní tok.
+
+Codyho komentář: procesy často netrpí nedostatkem dokumentace. Trpí tím, že se stará dokumentace tváří jako aktuální rada. To je horší než ticho, protože člověk poslušně udělá špatnou věc podle historicky správného odkazu. Paráda, jen trochu drahá.
+
+### Přepište pravidlo do trvalého jazyka
+
+Trvalý standard nemá znít jako poznámka po incidentu. Má znít jako normální pracovní pravidlo.
+
+Dočasný jazyk:
+
+```text
+Po poslední úpravě používej nový syntetický příklad a nevracej se ke staré kartě opravy.
+```
+
+Trvalý jazyk:
+
+```text
+Při měsíční kontrole porovnej onboardingovou šablonu s aktuálním syntetickým příkladem v checklistu.
+```
+
+Rozdíl je v tom, že trvalý jazyk popisuje práci, ne původ změny. Slova jako "po poslední úpravě", "nově", "prozatím", "zatím raději" nebo "dokud se neukáže" patří do přechodového režimu. V trvalém standardu rychle stárnou a svádějí k otázce, jestli ještě platí.
+
+Kontrolní otázky:
+
+```text
+Rozumí pravidlu člověk, který nebyl u původní opravy?
+Popisuje věta současnou práci, ne historii rozhodnutí?
+Je z pravidla jasné, kdy se používá?
+Je jasné, jaký výstup má vzniknout?
+Zmizela slova, která naznačují dočasnost?
+```
+
+Pokud věta po přepisu zní suše, je to v pořádku. Trvalý standard nemá bavit. Má spolehlivě vést práci. Humor si nechte do komentářů, ne do kritického provozního kroku.
+
+### Nastavte běžný návrat bez zvláštního dohledu
+
+Po uzavření už téma nemá zvláštní režim. Vrací se jen v rytmu, který už existuje. U onboardingového standardu to může být měsíční kontrola šablon, kvartální review standardů nebo kontrola po dalším reálném nástupu.
+
+Dobrý návrat:
+
+```text
+Pravidlo se vrací v běžné měsíční kontrole onboardingových šablon jako jedna položka checklistu.
+```
+
+Špatný návrat:
+
+```text
+Po uzavření budeme další tři měsíce sledovat použití pravidla v samostatné tabulce a sbírat důkazy od vlastníka.
+```
+
+To druhé není trvalý standard. To je prodloužená zkušební doba s lepším názvem.
+
+Běžný návrat má splňovat tři podmínky:
+
+- používá existující rytmus;
+- kontroluje stav pravidla, ne výkon člověka;
+- vystačí si s pracovním výstupem, který by vznikl tak jako tak.
+
+Pokud pořád cítíte potřebu zvláštního dohledu, vraťte se k rozhodnutí z Přílohy ML. Možná mělo být `Zpřesnit`, ne `Uzavřít`.
+
+### Privacy-first uzavření
+
+Uzavření do trvalého standardu je ideální chvíle na poslední úklid dat. V předchozích krocích mohly vzniknout pracovní poznámky, kopie checklistů, screenshoty, exporty nebo ukázky. Některé byly užitečné při rozhodování. Po uzavření už často nemají účel.
+
+Privacy-first uzavření se řídí jednoduchou větou:
+
+```text
+Trvalý standard potřebuje aktuální pravidlo a minimální rozhodovací stopu, ne sklad surových podkladů.
+```
+
+Projít je potřeba:
+
+- dočasné kopie pracovních dokumentů;
+- screenshoty a exporty z ověřování;
+- poznámky z kontrolních schůzek;
+- staré varianty checklistů;
+- odkazy v chatu, které lidé pořád používají;
+- příklady obsahující zákaznická nebo osobní data.
+
+Rozhodněte pro každý typ podkladu:
+
+```text
+Ponechat: krátký záznam nutný pro audit nebo učení.
+Archivovat: historická karta mimo běžnou pracovní trasu.
+Zkrátit: shrnutí místo surového materiálu.
+Smazat: dočasná kopie bez dalšího účelu.
+```
+
+Příklad privacy-first zápisu:
+
+```text
+Po uzavření zůstává aktuální checklist, jedna věta v changelogu a archivovaná karta rozhodnutí. Dočasné screenshoty a kopie starého odkazu byly smazány, protože už nejsou potřeba pro práci ani audit.
+```
+
+Tohle je nudná věta, a právě proto je dobrá. Privacy-first provoz se často nepozná podle velkých manifestů, ale podle toho, že se po malé změně neukládá zbytečný materiál "kdyby něco".
+
+### Karta uzavření do trvalého standardu
+
+Karta má sloužit jako poslední pracovní tečka za změnou. Nemá otevřít další režim.
+
+```text
+Uzavíraná úprava:
+Rozhodnutí z kontroly: Uzavřít
+Zdroj pravdy:
+Aktuální trvalé pravidlo:
+Co bylo odpojeno z běžné trasy:
+Co zůstává v archivu:
+Co bylo smazáno nebo zkráceno:
+Běžný návratový rytmus:
+Privacy-first rozhodnutí:
+Vlastník standardu:
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Uzavíraná úprava: měsíční kontrola onboardingových šablon používá aktuální syntetický příklad v checklistu.
+Rozhodnutí z kontroly: Uzavřít.
+Zdroj pravdy: delivery playbook, část měsíční kontrola onboardingových šablon.
+Aktuální trvalé pravidlo: při měsíční kontrole porovnej šablonu s aktuálním syntetickým příkladem v checklistu.
+Co bylo odpojeno z běžné trasy: stará karta opravy a kontrolní karta prvního cyklu.
+Co zůstává v archivu: jedna karta rozhodnutí s důvodem změny.
+Co bylo smazáno nebo zkráceno: dočasná poznámka z ověření a kopie starého odkazu.
+Běžný návratový rytmus: standardní měsíční kontrola šablon.
+Privacy-first rozhodnutí: ponechána jen rozhodovací stopa, bez screenshotů a zákaznických dat.
+Vlastník standardu: delivery lead.
+Datum uzavření: 2026-05-21.
+```
+
+Po vyplnění karty už nevytvářejte další "kontrolu uzavření uzavření". Ano, dá se to vymyslet. Ne, není to dobrý nápad. Trvalý standard má dál žít v běžném rytmu.
+
+### Mini workshop na 12 minut
+
+Vezměte jednu stabilizovanou úpravu se stavem `Uzavřít` z Přílohy ML.
+
+1. Potvrďte, že rozhodnutí po prvním běžném cyklu je opravdu `Uzavřít`.
+2. Pojmenujte jeden zdroj pravdy pro aktuální pravidlo.
+3. Přepište pravidlo do trvalého jazyka bez historických poznámek.
+4. Odpojte přechodové karty z běžné pracovní trasy.
+5. Rozhodněte, co zůstává v archivu a co se maže nebo zkracuje.
+6. Zapište jednu větu do changelogu.
+7. Určete běžný návratový rytmus.
+8. Vyplňte kartu uzavření.
+9. Ověřte, že další člověk může pravidlo použít bez znalosti historie.
+
+Výstup:
+
+```text
+Ověřená úprava údržbového rytmu je uzavřená do trvalého standardu, má jeden zdroj pravdy, čistou pracovní trasu a minimální datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Uzavíráte jen úpravu se stavem `Uzavřít`?
+- Má aktuální pravidlo jeden jasný zdroj pravdy?
+- Je přechodová historie odpojená z běžné pracovní trasy?
+- Nevede checklist na starou kartu opravy jako běžný kontext?
+- Je pravidlo přepsané do trvalého jazyka?
+- Zmizela slova, která naznačují dočasnost nebo poslední změnu?
+- Ví nový vlastník, kdy a jak pravidlo použít?
+- Je návrat do tématu součástí existujícího rytmu?
+- Nevznikl nový dohled, report nebo tabulka po uzavření?
+- Zůstala jen minimální rozhodovací stopa?
+- Smazali nebo zkrátili jste dočasné podklady bez účelu?
+- Jsou zákaznická a osobní data mimo archiv, pokud nejsou nutná?
+- Je privacy-first rozhodnutí zapsané jednou větou?
+- Je changelog krátký a srozumitelný?
+- Může další běžný cyklus proběhnout bez znalosti celé historie změny?
+
+Dobré uzavření je nenápadné. Aktuální pravidlo je na správném místě, stará historie nepřekáží, datová stopa se zmenšila a tým se k tématu vrátí až v běžném rytmu. Přesně tak se z malé opravy nestane nový provozní dluh.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MN o uzavření ověřené úpravy údržbového rytmu do trvalého standardu: zdroj pravdy, odpojení přechodové historie, trvalý jazyk pravidla, běžný návrat bez zvláštního dohledu, privacy-first úklid, karta uzavření, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha ML o kontrole stabilizované úpravy údržbového rytmu po prvním běžném cyklu: ověření bez starých karet, sledování tření, rozhodnutí Uzavřít/Zpřesnit/Vrátit do opravy, privacy-first kontrola datové stopy, kontrolní karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MK o stabilizaci potvrzené úpravy údržbového rytmu: přepis do současného pravidla, zavření přechodových karet, návratový signál, privacy-first úklid datové stopy, stabilizační karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MJ o ověření úpravy údržbového rytmu po dalším běžném cyklu: výběr normálního cyklu, návrat k úpravové větě, cesta vlastníka, porovnání původního tření s novým stavem, rozhodovací stavy Potvrdit/Ještě zpřesnit/Vrátit do opravy, privacy-first kontrola, karta, mini workshop a checklist.
