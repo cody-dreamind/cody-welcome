@@ -101803,8 +101803,284 @@ Nález z běžné revize je zařazený ve správné údržbové frontě, má vla
 
 Údržbová fronta má být most mezi revizí a hotovou prací. Když je most krátký a jasný, tým neopakuje stejnou debatu při každé kontrole. Když je mlhavý, mapa začne znovu stárnout: ne proto, že by chyběly poznámky, ale protože poznámky nedoputovaly do práce.
 
+## Příloha NA: Zpracování první položky z údržbové fronty do hotové opravy
+
+Příloha MZ dostala nález z běžné revize do správné údržbové fronty. Příloha NA řeší další krok: jak jednu položku opravdu dokončit, aniž se z ní stane nový projekt, nekonečná diskuse nebo tajná vedlejší práce, kterou někdo "někdy dodělá".
+
+Údržbová fronta má hodnotu jen tehdy, když se z ní položky vracejí do provozu jako hotové opravy. Ne jako poznámky. Ne jako sliby. Ne jako komentář v dokumentu, který čeká na lepší časy. Hotová oprava znamená, že se změnil konkrétní pracovní bod, někdo ho použil nebo má jasně dané ověření, a stará stopa už netahá tým zpátky.
+
+Výstupem této přílohy je karta hotové opravy:
+
+```text
+Položka z fronty:
+Typ opravy:
+Místo zásahu:
+Hotovo znamená:
+Ověření:
+Privacy-first poznámka:
+Co bylo uzavřeno:
+Co zůstává mimo rozsah:
+```
+
+Tahle karta nemá dokazovat, že tým pracoval. Má chránit dokončení. Když někdo za měsíc narazí na stejnou věc, musí rychle poznat, jestli byla vyřešená, kde se změna projevila a proč se neřešily sousední problémy.
+
+### Vyberte jednu položku, ne celý seznam
+
+Nejhorší způsob práce s údržbovou frontou je otevřít ji celou a začít přeskakovat mezi deseti položkami. Mozek má rád pocit užitečnosti, takže začne opravovat drobnosti, komentovat rizikové věci, přejmenovávat nadpisy a plánovat větší úklid. Výsledek vypadá aktivně, ale žádná položka není uzavřená.
+
+Pro jednu iteraci vyberte přesně jednu položku podle tří filtrů:
+
+1. Má jasného vlastníka.
+2. Má nejmenší smysluplný zásah.
+3. Dá se ověřit bez sběru nových citlivých dat.
+
+Pokud položka tyto tři podmínky nesplňuje, nejdřív ji nezpracovávejte. Zpřesněte ji ve frontě nebo ji vraťte k rozhodnutí. Údržba není odkladiště mlhy, i když by se tam mlze asi líbilo.
+
+Příklad dobré položky pro zpracování:
+
+```text
+Měníme: starý onboardingový odkaz na aktuální záznam o zákaznických exportech.
+Neměníme: retenční pravidlo ani strukturu rozcestníku.
+Ověříme podle: nový člověk při příštím onboardingu najde aktuální záznam bez dotazu.
+```
+
+Příklad položky, která ještě není připravená:
+
+```text
+Měníme: zpřehlednit exporty.
+Neměníme: zatím nevíme.
+Ověříme podle: bude to lepší.
+```
+
+Druhá položka není práce, ale přání. Než se dostane do opravy, musí získat hranice.
+
+### Najděte skutečné místo zásahu
+
+Každá oprava má místo, kde se práce skutečně mění. Někdy je to dokumentace, jindy formulář, šablona, automatizace, nastavení oprávnění, název v navigaci nebo konkrétní krok v procesu. Pokud opravíte jen souhrnný dokument, ale lidé dál začínají práci ve staré šabloně, oprava se v provozu neprojeví.
+
+Položte si otázku:
+
+```text
+Kde člověk poprvé udělá špatný krok?
+```
+
+Tam má být zásah.
+
+Příklady:
+
+```text
+Problém: nový člověk kliká na archivní poznámku.
+Místo zásahu: onboardingový checklist, ne hlavní mapa.
+```
+
+```text
+Problém: lidé ukládají screenshot exportu jako důkaz dokončení.
+Místo zásahu: šablona ticketu a definice hotovo, ne jen privacy dokument.
+```
+
+```text
+Problém: vlastník standardu není jasný.
+Místo zásahu: karta standardu a týmový index vlastníků, ne komentář v revizi.
+```
+
+Správné místo zásahu je obvykle blíž práci, než by si dokumentační pořádek přál. Když oprava žije jen v mapě, ale pracovní tok začíná jinde, mapa se tváří chytře a provoz si dál dělá svoje.
+
+### Definujte hotovo před změnou
+
+Před samotnou úpravou napište jednu větu, co znamená hotovo. Ne obecně, ale provozně.
+
+Slabé:
+
+```text
+Hotovo znamená, že je odkaz opravený.
+```
+
+Silnější:
+
+```text
+Hotovo znamená, že onboardingový checklist vede na aktuální záznam, starý archivní odkaz není v běžné trase a další nástup ověří nalezení bez dotazu.
+```
+
+Slabé:
+
+```text
+Hotovo znamená, že neukládáme screenshoty.
+```
+
+Silnější:
+
+```text
+Hotovo znamená, že šablona ticketu používá stav "export ověřen", ne přílohu se screenshotem, a první uzavřený auditní projekt po změně nemá v ticketu kopii exportu.
+```
+
+Dobrá definice hotovo má čtyři části:
+
+- co se změní;
+- kde se to změní;
+- co starého se uzavře;
+- jak se pozná první funkční použití.
+
+Tahle věta chrání tým před opravami napůl. Když chybí "co starého se uzavře", stará cesta zůstane vedle nové. Když chybí ověření, oprava se považuje za hotovou jen proto, že někdo upravil text.
+
+### Udělejte nejmenší skutečnou opravu
+
+Nejmenší skutečná oprava není nejmenší možná změna v souboru. Je to nejmenší změna, která odstraní konkrétní tření v provozu.
+
+Někdy stačí:
+
+- opravit jeden odkaz;
+- přejmenovat položku v rozcestníku;
+- zkrátit matoucí odstavec;
+- doplnit vlastníka do karty standardu;
+- přesunout jednu větu do šablony, kde ji lidé potřebují;
+- odstranit starý příklad, který vede ke špatnému chování.
+
+Někdy ale malá textová oprava nestačí. Pokud lidé ukládají screenshoty, protože šablona ticketu nemá jiný způsob důkazu, text "neukládejte screenshoty" problém nevyřeší. Skutečná oprava je změnit šablonu tak, aby nabízela správný stav, pole nebo kontrolní otázku.
+
+Codyho komentář: když tým řeší stejnou drobnost potřetí, většinou to není drobnost. Je to malý otvor v pracovním systému, kterým každý týden protéká čas. Ano, pořád vypadá nenápadně. To je přesně jeho trik.
+
+### Uzavřete starou cestu
+
+Hotová oprava musí uklidit nebo viditelně uzavřít starou cestu. Jinak vzniknou dvě pravdy: nová, která je správně, a stará, kterou si lidé pamatují, mají v záložkách nebo najdou přes starý odkaz.
+
+Podle typu opravy použijte jednu z možností:
+
+```text
+Odkaz: přesměrovat, odstranit nebo označit jako archiv.
+Text: nahradit starou větu, ne přidat další vysvětlení pod ni.
+Proces: zrušit starý krok v checklistu.
+Šablona: odstranit staré pole, které svádí ke špatné práci.
+Vlastnictví: vymazat "někdo z týmu" a zapsat konkrétní roli.
+Data: smazat dočasné podklady nebo nastavit termín jejich úklidu.
+```
+
+Příklad:
+
+```text
+Stará cesta: archivní poznámka o exportech zůstala v onboardingovém checklistu.
+Uzavření: odkaz nahrazen aktuálním záznamem; archivní poznámka má nahoře větu "Nepoužívat pro nové onboardingy" a odkaz na aktuální místo.
+```
+
+U rizikových datových položek buďte přísnější. Nestačí napsat, že se staré screenshoty už nemají používat. Musí být jasné, kde jsou, kdo rozhodne o jejich smazání a kdy se úklid ověří.
+
+### Nastavte krátké ověření
+
+Ověření hotové opravy nemá být nový audit. Má být nejbližší přirozený okamžik, kdy by se oprava měla projevit.
+
+Příklady:
+
+```text
+Odkaz v onboardingu -> ověřit při dalším nástupu nebo testovacím průchodu onboardingem.
+Šablona ticketu -> ověřit při dalším uzavřeném ticketu daného typu.
+Vlastník standardu -> ověřit při další otázce nebo změně k danému standardu.
+Retenční poznámka -> ověřit při nejbližším úklidovém rytmu.
+```
+
+Ověření zapište tak, aby šlo udělat bez zbytečných podkladů:
+
+```text
+Ověříme podle: nový člověk najde aktuální záznam přes checklist bez dotazu v onboardingovém kanálu.
+```
+
+Není potřeba nahrávat obrazovku, sbírat osobní poznámky ani ukládat screenshoty. Stačí stav, datum a krátká věta výsledku.
+
+### Privacy-first kontrola hotové opravy
+
+Před uzavřením položky projděte datovou stopu, kterou oprava vytvořila. Údržba často pracuje s "malými" příklady, ale právě malé příklady se rády rozlezou do komentářů, ticketů, screenshotů a exportů.
+
+Kontrolní otázky:
+
+1. Nevložili jsme do karty opravy jméno zákazníka, osobní údaj nebo citlivý detail, který nebyl nutný?
+2. Nevznikl screenshot, export nebo kopie dat jen kvůli důkazu opravy?
+3. Pokud vznikl dočasný podklad, má vlastníka a termín smazání?
+4. Je nové pravidlo formulované tak, aby příště nevyžadovalo ukládání zbytečných dat?
+5. Má ověření podobu stavu nebo výsledku, ne kopie obsahu?
+6. Je jasné, kdo smí vidět podklady k rizikové položce?
+
+Privacy-first oprava není pomalejší oprava. Je to oprava, která nezanechá za sebou nový nepořádek. Jinak by tým vyřešil odkaz a vyrobil datovou stopu, kterou bude za měsíc uklízet jiná příloha. To je sice způsob, jak napsat hodně e-booku, ale ne způsob, jak dobře provozovat firmu.
+
+### Karta hotové opravy
+
+Použijte ji po dokončení jedné položky z údržbové fronty.
+
+```text
+Datum:
+Položka z fronty:
+Typ opravy: navigace / text / proces / nástroj / data / vlastnictví
+Úroveň dopadu: drobná / běžná / riziková
+Místo zásahu:
+Hotovo znamená:
+Provedená změna:
+Uzavřená stará cesta:
+Ověření:
+Vlastník ověření:
+Privacy-first poznámka:
+Dočasné podklady:
+Termín úklidu podkladů:
+Co zůstává mimo rozsah:
+Stav: hotovo / čeká na ověření / vráceno
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-21
+Položka z fronty: starý onboardingový odkaz na exporty
+Typ opravy: navigace
+Úroveň dopadu: drobná
+Místo zásahu: onboardingový checklist pro delivery roli
+Hotovo znamená: checklist vede na aktuální záznam, archivní odkaz není v běžné trase a další nástup ověří nalezení bez dotazu
+Provedená změna: starý odkaz nahrazen aktuálním záznamem
+Uzavřená stará cesta: archivní poznámka označena jako nepoužívat pro nové onboardingy
+Ověření: příští onboardingový průchod
+Vlastník ověření: delivery lead
+Privacy-first poznámka: bez zákaznických dat, ověřuje se jen nalezení záznamu
+Dočasné podklady: žádné
+Termín úklidu podkladů: není potřeba
+Co zůstává mimo rozsah: retenční pravidlo a struktura rozcestníku
+Stav: čeká na ověření
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu položku z údržbové fronty a dokončete ji do hotové opravy.
+
+1. Vyberte jednu připravenou položku.
+2. Najděte skutečné místo zásahu.
+3. Napište větu `Hotovo znamená`.
+4. Proveďte nejmenší skutečnou opravu.
+5. Uzavřete starou cestu.
+6. Nastavte nejbližší přirozené ověření.
+7. Projděte privacy-first kontrolu hotové opravy.
+8. Zapište, co zůstává mimo rozsah.
+
+Výstup:
+
+```text
+Jedna položka z údržbové fronty je dokončená jako hotová oprava, má uzavřenou starou cestu a čeká už jen na přirozené ověření v provozu.
+```
+
+### Checklist kapitoly
+
+- Vybrali jste jednu položku místo práce nad celou frontou?
+- Má položka vlastníka, místo zásahu a ověřitelný výsledek?
+- Víte, kde člověk poprvé udělá špatný krok?
+- Opravili jste pracovní místo, ne jen souhrnný dokument?
+- Napsali jste definici `Hotovo znamená` před samotnou změnou?
+- Je oprava nejmenší, ale skutečně odstraňuje tření?
+- Uzavřeli jste starý odkaz, text, krok, šablonu nebo datovou stopu?
+- Nevznikly dvě paralelní pravdy?
+- Je ověření napojené na nejbližší přirozený pracovní okamžik?
+- Dá se ověřit bez screenshotů, exportů a nových citlivých podkladů?
+- Má dočasný podklad vlastníka a termín úklidu?
+- Je zapsané, co zůstává mimo rozsah?
+- Má položka stav hotovo, čeká na ověření nebo vráceno?
+
+Dobrá údržba je nudná v tom nejlepším smyslu. Jedna položka se vezme, opraví, stará cesta se zavře a v provozu se ověří, že lidé už nezakopávají o stejné místo. Když to tým dělá pravidelně, dlouhodobá mapa nestárne skokově. Stárne pomalu, viditelně a opravitelně.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha NA o zpracování první položky z údržbové fronty do hotové opravy: výběr jedné položky, skutečné místo zásahu, definice hotovo, nejmenší funkční oprava, uzavření staré cesty, krátké ověření, privacy-first kontrola, karta opravy, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MZ o převodu běžné revize stabilního záznamu do údržbové fronty: typ akce, úroveň dopadu, správná fronta, ochrana rozsahu, privacy-first kontrola před zařazením, údržbová karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MY o první běžné revizi stabilního záznamu dlouhodobé mapy: výběr normálního revizního okna, kontrola trasy k záznamu, oddělení problémů nalezení/pochopení/provedení/důvěry/datové stopy, privacy-first kontrola běžného použití, rozhodovací stavy, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MX o uzavření ověřené úpravy dlouhodobé mapy do stabilního záznamu: práce s výsledkem ověření, přepis do současného pravidla, zavření starých cest, privacy-first úklid ověřovací stopy, návrat do běžné revize, karta, mini workshop a checklist.
