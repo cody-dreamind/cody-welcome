@@ -97541,8 +97541,289 @@ Oprava po prvním běžném údržbovém cyklu buď drží bez další akce, má
 
 První běžná údržba je malá zkouška dospělosti opravy. Pokud obstojí, oprava už nepotřebuje zvláštní pozornost. Pokud drhne, opravte nejbližší místo v rytmu. A pokud se stará varianta vrací, neberte to jako selhání týmu. Je to užitečný signál, že standard ještě není tak blízko práci, jak měl být.
 
+## Příloha MI: Převod nálezu z první běžné údržby do jedné úpravy rytmu
+
+Když první běžná údržba z Přílohy MH skončí stavem `Doladit`, je lákavé otevřít celou debatu znovu. Co kdybychom přepsali onboardingový standard? Co kdybychom přidali další kontrolní krok? Co kdybychom udělali nový workshop? Někdy to bude potřeba, ale většinou ne hned.
+
+Stav `Doladit` říká něco přesnějšího: základní oprava drží, jen její běžná údržba má malé tření. To je dobrá zpráva. Neřešíte rozbitý standard. Řešíte místo, kde se má standard potkat s normální prací trochu čistěji.
+
+Tato příloha navazuje na Přílohu MH. Vstupem je karta první běžné údržby, která má stav `Doladit`. Cílem je převést nález do jedné malé úpravy údržbového rytmu, kterou lze provést bez speciální evidence, bez nového projektu a bez sběru dalších dat o lidech.
+
+Dobrá úprava rytmu má odpovědět na pět otázek:
+
+```text
+Které jedno tření brání hladké údržbě?
+Kde přesně vzniká: v umístění, textu, odkazu, příkladu, vlastnictví nebo datové stopě?
+Jaká nejmenší změna ho odstraní?
+Kdy se změna poprvé přirozeně ověří?
+Co po úpravě zmizí, aby nevznikla další vrstva procesu?
+```
+
+Pokud odpověď začíná slovy "uděláme nový systém", pravděpodobně jste přeskočili několik menších možností. Nový systém je jako větší skříň na nepořádek. Někdy praktická věc. Často jen dražší způsob, jak nevyhodit staré krabice.
+
+### Vyberte jeden nález ze stavu Doladit
+
+Karta první běžné údržby může obsahovat víc drobných pozorování. Vlastník nenašel odkaz na první pokus. Údržbová věta byla trochu moc obecná. Starý dokument byl pořád vidět ve výsledcích hledání. Syntetický příklad byl zastaralý. V poznámkách zůstala dočasná karta.
+
+Neopravujte všechno najednou. Vyberte jeden nález podle ceny tření.
+
+Použijte tento filtr:
+
+- Brání nález vlastníkovi rozhodnout stav pravidla?
+- Nutí tým otevírat starou historii?
+- Vytváří nový ruční krok?
+- Zvyšuje datovou stopu bez jasné hodnoty?
+- Může se při dalším cyklu znovu projevit?
+
+Přednost má nález, který nejvíc brání samostatnosti běžné údržby. Estetická drobnost počká. Nejasný odkaz na aktuální příklad nečeká, protože kvůli němu lidé sahají do historie.
+
+Praktický zápis:
+
+```text
+Vybraný nález:
+Proč právě tento:
+Které nálezy teď vědomě neřešíme:
+Co by se stalo, kdybychom ho nechali do dalšího cyklu:
+```
+
+Tím si chráníte rozsah. `Doladit` není pozvánka na redesign procesu. Je to pozvánka na přesnou opravu nejbližšího tření.
+
+### Pojmenujte typ úpravy rytmu
+
+Nález se řeší lépe, když víte, jakého typu je. U běžné údržby onboardingového standardu se nejčastěji objevuje šest typů drobných úprav.
+
+```text
+Umístění: pravidlo existuje, ale není v místě práce.
+Text: věta je dlouhá, obecná nebo neříká, co rozhodnout.
+Odkaz: odkaz vede na starou kartu, archiv nebo příliš obecnou stránku.
+Příklad: syntetický příklad neukazuje aktuální správnou cestu.
+Vlastnictví: není jasné, kdo v běžném rytmu stav potvrzuje.
+Datová stopa: kontrola pořád vytváří nebo drží podklady, které už nemají účel.
+```
+
+Každý typ má jinou nejmenší opravu.
+
+Příklady:
+
+- U `Umístění` nepřepisujte standard. Přesuňte nebo připněte údržbovou větu tam, kde vlastník opravdu začíná kontrolu.
+- U `Text` nezakládejte školení. Přepište větu tak, aby obsahovala pracovní okamžik, signál a rozhodnutí.
+- U `Odkaz` nechte historii v archivu a nastavte jeden aktuální odkaz.
+- U `Příklad` nevytahujte zákaznická data. Vyměňte nebo upravte syntetický příklad.
+- U `Vlastnictví` nepřidávejte komisi. Dopište jednu roli, která stav po cyklu zapíše.
+- U `Datová stopa` nelegalizujte nepořádek. Smažte dočasný artefakt nebo přidejte retenční větu.
+
+Codyho komentář: když neumíte určit typ úpravy, často ještě nemáte nález, ale pocit. Pocit je užitečný začátek, ale špatný pracovní příkaz. Přepište ho na větu "co komu kde překáží" a teprve potom upravujte.
+
+### Napište úpravovou větu
+
+Úpravová věta je krátký pracovní příkaz. Má říct, co se mění v rytmu, ne opakovat celou historii opravy.
+
+Šablona:
+
+```text
+V [místo běžné údržby] měníme [konkrétní prvek], aby [vlastník] při [pracovní okamžik] poznal [sledovaný signál] bez [zbytečná historie nebo datová stopa].
+```
+
+Slabá věta:
+
+```text
+Zlepšíme údržbu onboardingového pravidla.
+```
+
+Silnější věta:
+
+```text
+V měsíční kontrole onboardingových šablon měníme odkaz u údržbové věty tak, aby delivery lead při kontrole syntetického příkladu poznal návrat screenshotové cesty bez otevírání staré karty opravy.
+```
+
+Silnější věta má několik výhod. Ukazuje místo, prvek, vlastníka, okamžik, signál i hranici. Dá se udělat. Dá se ověřit. A hlavně se nedá snadno nafouknout do projektu s pěti podúkoly, protože sama drží úzký rozsah.
+
+### Proveďte úpravu v místě práce
+
+Drobná úprava rytmu má žít tam, kde se rytmus používá. Pokud se změna zapíše jen do retrospektivní poznámky, při dalším cyklu ji nikdo nenajde. To je klasický dokumentační trik: informace existuje, ale v praxi neexistuje.
+
+Upravujte přímo:
+
+- měsíční kontrolní šablonu;
+- onboardingovou mapu;
+- kanonický standard;
+- syntetický příklad;
+- odkaz v pracovním checklistu;
+- retenční poznámku u dočasných podkladů.
+
+Neukládejte úpravu primárně do:
+
+- chatu;
+- osobních poznámek;
+- staré karty opravy;
+- komentáře v úkolu, který se zavře;
+- samostatného "dočasného" dokumentu bez vlastníka.
+
+Praktická minikarta úpravy:
+
+```text
+Úpravová věta:
+Typ úpravy:
+Místo práce, kde se změna provedla:
+Co bylo odstraněno nebo archivováno:
+Kdo potvrdil aktuální stav:
+Kdy se změna poprvé ověří:
+```
+
+Když úprava nejde provést v místě práce, pravděpodobně nemáte jasno, kde běžná údržba skutečně začíná. To je nález sám o sobě. Nezakrývejte ho novou poznámkou bokem.
+
+### Zachovejte jen jednu stopu rozhodnutí
+
+Po malé úpravě rytmu by měla zůstat jedna stopa rozhodnutí: co se změnilo, proč a kdy se to ověří. Nemá zůstat hromada důkazů, starých variant a "pro jistotu" kopií.
+
+Stačí:
+
+```text
+Stav z první běžné údržby: Doladit.
+Vybraný nález:
+Provedená úprava:
+Důvod:
+První ověření:
+Co bylo odstraněno:
+```
+
+Nestačí ale jen přidat tento zápis. Součástí úpravy je úklid.
+
+Zkontrolujte:
+
+- jestli stará karta opravy není pořád doporučený vstup;
+- jestli odkazy nevedou na archiv jako na aktuální zdroj;
+- jestli dočasné screenshoty a exporty mají stav smazáno nebo archivováno podle účelu;
+- jestli nový zápis neobsahuje osobní hodnocení konkrétního člověka;
+- jestli se kvůli úpravě nezaložila nová trvalá evidence.
+
+Privacy-first provoz se pozná i podle toho, že po opravě umí mazat. Ne proto, že něco schovává. Protože ví, co už nepotřebuje.
+
+### Nastavte první ověření bez nového režimu
+
+Malá úprava rytmu nepotřebuje vlastní kontrolní ceremonii. Ověřte ji při nejbližším normálním cyklu, kde se stejně měla použít.
+
+Ověření má být jednoduché:
+
+```text
+Při příští běžné údržbě ověříme, zda vlastník najde upravenou větu nebo odkaz bez staré historie a zda podle ní dokáže rozhodnout stav pravidla.
+```
+
+Nepřidávejte:
+
+- extra schůzku jen kvůli jedné drobnosti;
+- ruční report od všech účastníků onboardingu;
+- nový export dat;
+- měření aktivity lidí;
+- dlouhý formulář spokojenosti.
+
+Přidejte jen nejmenší signál:
+
+- vlastník našel správné místo;
+- rozhodnutí bylo zapsané bez pomoci autora opravy;
+- stará varianta se nevrátila;
+- nevznikla nová speciální evidence;
+- datová stopa zůstala stejná nebo menší.
+
+Pokud se úprava při dalším cyklu nepotvrdí, vraťte se k nálezu. Nepřidávejte další kontrolu automaticky. Možná jste vybrali špatný typ úpravy. Možná je problém větší a stav už není `Doladit`, ale `Znovu otevřít opravu`.
+
+### Privacy-first dopad úpravy rytmu
+
+Každá úprava údržbového rytmu má mít malý privacy-first účet. Ne právnický román. Jen kontrolu, zda se kvůli pohodlí nepřidala zbytečná data.
+
+Otázky:
+
+- Přidali jsme nový sběr dat, nebo jen zpřesnili práci s existujícím výstupem?
+- Zůstává kontrola zaměřená na stav pravidla, ne na výkon člověka?
+- Odstranili jsme staré kopie, exporty nebo screenshoty bez účelu?
+- Je syntetický příklad pořád preferovaná cesta?
+- Ví vlastník, co se po ověření smaže nebo zavře?
+- Nevznikl nový dodavatel, nástroj ani externí úložiště?
+
+Krátká privacy-first věta:
+
+```text
+Úprava rytmu nezavádí nový sběr dat; pouze zpřesňuje místo, text nebo odkaz běžné údržby a odstraňuje staré podklady bez účelu.
+```
+
+Pokud věta není pravdivá, upravte změnu. Malé tření v údržbě není dobrý důvod k tomu, aby se zavedlo větší sledování lidí nebo další kopie zákaznických dat.
+
+### Karta úpravy údržbového rytmu
+
+Použijte kartu jen tehdy, když stav z Přílohy MH byl `Doladit`. Pro stav `Udržet` není potřeba. Pro stav `Znovu otevřít opravu` je potřeba vrátit se k procesu malé opravy, ne jen ladit rytmus.
+
+```text
+Původní oprava:
+Stav po první běžné údržbě: Doladit
+Vybraný nález:
+Typ úpravy rytmu:
+Úpravová věta:
+Místo práce, kde se změna provede:
+Co se nemění:
+Co se odstraní nebo archivuje:
+Privacy-first dopad:
+První ověření:
+Vlastník ověření:
+```
+
+Vyplněný příklad:
+
+```text
+Původní oprava: předávací komentář používá zákaznický odkaz místo screenshotu.
+Stav po první běžné údržbě: Doladit
+Vybraný nález: údržbová věta odkazovala na starou kartu opravy, ne na aktuální syntetický příklad.
+Typ úpravy rytmu: Odkaz
+Úpravová věta: V měsíční kontrole onboardingových šablon měníme odkaz u údržbové věty tak, aby delivery lead kontroloval aktuální syntetický příklad bez otevírání staré karty opravy.
+Místo práce, kde se změna provede: checklist měsíční kontroly onboardingových šablon.
+Co se nemění: samotné pravidlo o nepoužívání screenshotů jako běžné cesty.
+Co se odstraní nebo archivuje: stará karta opravy zůstane jen v archivu a není odkazovaná z běžného checklistu.
+Privacy-first dopad: žádný nový sběr dat, menší riziko práce se starými screenshoty.
+První ověření: další měsíční kontrola šablon.
+Vlastník ověření: delivery lead.
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu kartu z Přílohy MH se stavem `Doladit` a převeďte ji do jedné úpravy rytmu.
+
+1. Přečtěte jen kartu první běžné údržby, ne celou historii opravy.
+2. Vyberte jeden nález podle ceny tření.
+3. Určete typ úpravy: umístění, text, odkaz, příklad, vlastnictví nebo datová stopa.
+4. Napište úpravovou větu.
+5. Proveďte změnu v místě práce.
+6. Odstraňte nebo archivujte starou stopu, která by mátla další cyklus.
+7. Zapište privacy-first dopad.
+8. Nastavte první ověření v nejbližším běžném rytmu.
+9. Nezakládejte nový kontrolní režim.
+
+Výstup:
+
+```text
+Jeden nález ze stavu Doladit je převedený do malé úpravy údržbového rytmu, změna je v místě práce, stará stopa je uklizená a ověření proběhne při nejbližším normálním cyklu.
+```
+
+### Checklist kapitoly
+
+- Navazujete na stav `Doladit`, ne na `Udržet` nebo `Znovu otevřít opravu`?
+- Vybrali jste jeden nález místo celé sady drobností?
+- Je jasné, proč má tento nález největší cenu tření?
+- Určili jste typ úpravy rytmu?
+- Napsali jste úpravovou větu s místem, prvkem, vlastníkem, signálem a hranicí?
+- Provádíte změnu v místě práce?
+- Nevzniká nový dokument bokem jako hlavní zdroj pravdy?
+- Je jasné, co se nemění?
+- Odstranili jste nebo archivovali starou matoucí stopu?
+- Nezavádíte nový sběr dat?
+- Kontrola pořád sleduje stav pravidla, ne výkon člověka?
+- Je první ověření navázané na nejbližší běžný cyklus?
+- Nepřidali jste extra schůzku, export nebo ruční report bez nutnosti?
+- Ví vlastník, podle čeho pozná, že úprava pomohla?
+
+Úprava rytmu je dobrá tehdy, když ji po měsíci skoro nikdo nekomentuje, protože prostě funguje. Vlastník najde správné místo, rozhodne stav pravidla, stará historie zůstane zavřená a datová stopa se nezvětší. To je provozní elegance: méně dramatu, víc použitelnosti.
+
 ## Pracovní log
 
+- 2026-05-21: Doplněna Příloha MI o převodu nálezu ze stavu Doladit po první běžné údržbě do jedné malé úpravy údržbového rytmu: výběr jednoho nálezu, typy úprav, úpravová věta, změna v místě práce, úklid stopy, privacy-first dopad, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MH o kontrole běžné údržby onboardingového standardu po prvním cyklu: ověření údržbového rytmu, rozhodovací stavy Udržet/Doladit/Znovu otevřít opravu, návrat speciální evidence, kontrola údržbové věty v reálném použití, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha MG o převodu potvrzené malé opravy onboardingového standardu do běžné údržby: uzavření speciálního kontrolního režimu, výběr existujícího údržbového rytmu, údržbová věta, zachování jen užitečného důkazu, privacy-first převod, karta, mini workshop a checklist.
 - 2026-05-20: Doplněna Příloha MF o kontrole stabilizované malé opravy onboardingového standardu po dalších použitích: výběr běžných použití, sledování cesty k opravenému místu, stavy Drží/Drží s třením/Nedrží, návrat staré varianty, privacy-first kontrola bez dohledu navíc, karta, mini workshop a checklist.
