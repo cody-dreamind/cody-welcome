@@ -35,6 +35,77 @@ Praktický filtr na výběr jedné kapitoly:
 
 Pokud odpověď na první otázku zní "bude to vypadat lépe", ještě to nemusí být špatně. Jen ji přepište konkrétněji: komu to pomůže, jaké rozhodnutí mu to usnadní a jakou nejistotu to odstraní. Design, text, analytika i automatizace mají v tomto rukopisu stejnou povinnost: sloužit práci, ne jen vyrábět pocit pohybu.
 
+## Jak uzavřít jednu čtecí iteraci
+
+Rukopis má smysl jen tehdy, když po čtení vznikne lepší rozhodnutí v praxi. Proto každou čtecí iteraci uzavřete malým pracovním protokolem. Nemá dokazovat, že jste četli pozorně. Má ochránit tým před tím, aby se dobrá myšlenka ztratila mezi poznámkami, úkoly a další poradou.
+
+Jedna iterace má mít čtyři části:
+
+1. Rozhodnutí: co přesně měníme nebo potvrzujeme.
+2. Důvod: jakou nejistotu tím snižujeme.
+3. Ověření: podle čeho poznáme, že změna pomohla.
+4. Hranice: co teď vědomě neměníme a jaká data kvůli tomu nesbíráme.
+
+Příklad po čtení kapitoly o prodejním webu:
+
+```text
+Rozhodnutí:
+Na homepage přesuneme důkaz důvěry nad první formulář.
+
+Důvod:
+Návštěvník dnes vidí formulář dřív než konkrétní důvod, proč nám věřit.
+
+Ověření:
+Za 14 dní porovnáme kvalitu příchozích poptávek a projdeme pět posledních rozhovorů.
+
+Hranice:
+Neměníme celý redesign, nepřidáváme heatmapu a nesbíráme nové osobní údaje.
+```
+
+Tento zápis je záměrně malý. Když se nevejde do několika vět, iterace je pravděpodobně moc široká. Zužte ji na jednu stránku, jeden tok, jeden formulář, jeden segment nebo jeden provozní problém.
+
+### Rozhodnutí musí změnit chování
+
+Slabý výstup po čtení zní: "Zlepšíme web." To není rozhodnutí, ale přání. Silnější výstup říká, co se stane jinak:
+
+- přepíšeme hlavní slib pro segment malých B2B týmů;
+- odstraníme telefon z prvního kontaktního formuláře;
+- přesuneme privacy-first vysvětlení z patičky do části o důvěře;
+- zavedeme měsíční kontrolu externích skriptů;
+- sloučíme dvě duplicitní stránky služby do jedné rozhodovací stránky.
+
+Dobré rozhodnutí má vlastníka. Pokud je vlastníkem "tým", vlastníkem není nikdo. Stačí role nebo jméno člověka, který má právo změnu dotáhnout a říct, kdy je hotovo.
+
+### Ověření má být menší než změna
+
+Ověření nemusí být velký analytický projekt. U malého webu často stačí kvalitativní signál: pět reálných poptávek, tři zákaznické hovory, ruční průchod formulářem, kontrola logů nebo porovnání konkrétní stránky před a po změně.
+
+Privacy-first pravidlo: kvůli ověření nepřidávejte sledování, které je větší než samotný problém. Pokud chcete vědět, jestli je formulář srozumitelnější, často nepotřebujete další tracker. Potřebujete projít poslední odpovědi, zeptat se zákazníka nebo zkontrolovat, kolik lidí musí tým ručně doptávat.
+
+### Kdy iteraci zavřít
+
+Iterace je zavřená ve chvíli, kdy existuje jeden z těchto stavů:
+
+- Potvrdit: změna pomohla a může zůstat.
+- Doladit: směr je správný, ale jedna malá část drhne.
+- Vrátit: změna nepomohla nebo vytvořila větší problém.
+- Odložit: téma je platné, ale není teď nejdůležitější.
+
+Nejhorší stav je "rozpracováno" bez dalšího termínu. To je jen elegantnější název pro ztracenou práci. Pokud něco nemá vlastníka, ověření a datum návratu, raději to vědomě odložte.
+
+### Checklist uzavření čtecí iterace
+
+- Je vybraná jen jedna kapitola, trasa nebo příloha?
+- Vzniklo jedno konkrétní rozhodnutí, ne obecné přání?
+- Má rozhodnutí vlastníka a nejbližší termín kontroly?
+- Je jasné, podle čeho se pozná přínos?
+- Je zapsané, co teď zůstává mimo rozsah?
+- Nepřidává ověření zbytečné trackery, formuláře ani osobní data?
+- Je výstup uložený tam, kde ho tým při práci skutečně najde?
+- Ví tým, kdy iteraci potvrdit, doladit, vrátit nebo odložit?
+
+Když takový zápis vznikne, rukopis splnil účel. Ne proto, že přidal další teorii, ale proto, že zkrátil cestu od čtení k rozhodnutí. Přesně tam má praktický e-book vydělávat svou existenci.
+
 ## Rychlé pracovní trasy
 
 Rukopis je dlouhý záměrně, ale první krok má být krátký. Pokud nevíte, kde začít, vyberte trasu podle aktuální situace a po přečtení zapište jednu pracovní větu.
@@ -103560,6 +103631,7 @@ Uzavření malé údržbové úpravy je drobná, ale důležitá disciplína. Be
 
 ## Pracovní log
 
+- 2026-05-22: Doplněna úvodní sekce Jak uzavřít jednu čtecí iteraci: pracovní protokol rozhodnutí, důvod, ověření a hranice rozsahu, příklad zápisu po čtení, privacy-first ověřování bez nových trackerů, stavy Potvrdit/Doladit/Vrátit/Odložit a checklist uzavření.
 - 2026-05-22: Doplněna Příloha NG o uzavření potvrzené malé údržbové úpravy do běžné údržby: uzavírací věta, přepis do zdroje pravdy, zavření přechodové evidence, napojení na přirozenou kontrolu, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NF o ověření malé údržbové úpravy po dalším běžném průchodu: návrat k větě Hotovo znamená, sledování běžné práce bez slavnostního testu, rozhodovací stavy Potvrdit/Doladit/Vrátit do fronty/Otevřít riziko, rozlišení trasy od poslušnosti týmu, privacy-first ověřovací záznam, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha NE o převodu nálezu z první běžné kontroly do jedné malé údržbové úpravy: výběr jednoho nálezu, úpravová věta, místo zásahu blízko práci, definice hotovo, ověření jedním normálním průchodem, privacy-first brzda, karta, mini workshop a checklist.
