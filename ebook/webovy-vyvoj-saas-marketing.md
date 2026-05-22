@@ -105406,8 +105406,250 @@ Drobné doladění je ověřené na dalším běžném průchodu a tým ví, jes
 
 Ověření drobného doladění má být tiché. Když funguje, skoro zmizí: práce plyne přes správné místo, stará stopa neklame a nikdo kvůli tomu nemusí zakládat novou evidenci. To je v provozu docela elegantní výsledek. Ne okázalý, ale užitečný. Což je u údržby podezřele často ta nejlepší možná varianta.
 
+## Příloha NO: Uzavření potvrzeného drobného doladění do běžné údržby
+
+Příloha NN končí ve chvíli, kdy je drobné doladění ověřené na dalším běžném průchodu. Pokud stav zní `Potvrdit`, práce ještě nekončí slavnostním "hotovo". Končí až tehdy, když se výsledek propíše do místa, kde se bude používat i za měsíc, za kvartál nebo při předání novému člověku.
+
+Tato příloha řeší poslední krok malé údržbové smyčky: jak potvrzené drobné doladění zavřít tak, aby z něj nevznikla další vrstva poznámek, výjimek a připomínek. Cíl je jednoduchý: správná pracovní cesta má zůstat, přechodová stopa má zmizet a běžná údržba má vědět, kdy se k tématu vrátit.
+
+Otázka této přílohy:
+
+```text
+Jak potvrzené drobné doladění uzavřeme do běžné údržby tak, aby zůstalo v kanonickém pracovním místě, nezaložilo novou evidenci a neudržovalo starou stopu při životě?
+```
+
+Výstupem je uzavírací karta potvrzeného doladění:
+
+```text
+Potvrzené doladění:
+Kanonické místo:
+Co se přepisuje:
+Co se zavírá:
+Co se maže nebo anonymizuje:
+Běžná kontrola:
+Vlastník:
+Datum dalšího návratu:
+```
+
+Karta je krátká záměrně. Drobné doladění, které po potvrzení potřebuje vlastní proces, pravděpodobně ještě není dobře uzavřené. Údržba má zmenšovat počet míst, kde tým musí myslet, ne přidávat další zastávky na mapě.
+
+### Začněte potvrzenou větou
+
+Nejdřív vezměte ověřovací kartu z Přílohy NN a vytáhněte z ní jen potvrzený výsledek. Nevracejte se ke všem poznámkám, které kolem doladění vznikly. Potřebujete jednu pracovní větu:
+
+```text
+Potvrzené doladění:
+Archivní exportní checklist už nepůsobí jako aktuální postup; běžné vyhledání vede k aktuální auditní šabloně.
+```
+
+Tato věta má odpovědět na tři otázky:
+
+- jaké tření zmizelo;
+- kde je teď správná pracovní cesta;
+- proč už není potřeba samostatná ověřovací stopa.
+
+Slabé uzavření:
+
+```text
+Doladění asi funguje, necháme poznámky pro jistotu bokem.
+```
+
+"Pro jistotu bokem" je oblíbený výrobce budoucího nepořádku. Pokud je doladění potvrzené, musí se přesunout do zdroje pravdy nebo zaniknout jako přechodová poznámka. Mezi tím je jen šedá zóna, kde se staré problémy učí nový make-up.
+
+### Přepište jen kanonické místo
+
+Potvrzené doladění se má propsat do jednoho kanonického místa. To může být aktuální checklist, provozní karta, rozcestník, šablona, index standardů, stránka dokumentace nebo úkolový template. Nemá to být nový dokument s názvem "Poznámky k doladění po ověření".
+
+Vyberte místo podle otázky: kde člověk bude přirozeně hledat pravidlo při příští práci?
+
+Příklady:
+
+- upravený název archivu patří do samotného archivního dokumentu a do indexu, ne do zvláštního zápisu ze schůzky;
+- změněný odkaz na aktuální šablonu patří do rozcestníku, který tým používá při práci;
+- doplněné varování "nepoužívat pro nové exporty" patří do starého materiálu, který se ještě může objevit ve vyhledávání;
+- rozhodnutí, že dočasná poznámka už není potřeba, patří do údržbového záznamu jako jedna věta, ne jako nový follow-up.
+
+Dobré pravidlo:
+
+```text
+Pokud by nový člověk bez kontextu našel jen kanonické místo, dokázal by udělat správný další krok?
+```
+
+Pokud odpověď zní ne, nepřidávejte další vysvětlující dokument. Opravte kanonické místo. Pracovní systém, který funguje jen s komentářem autora, není systém. Je to ústní tradice v Markdownu.
+
+### Zavřete přechodové stopy
+
+Každé doladění po sobě nechává malé stopy: poznámku v údržbě, dočasný komentář, testovací odkaz, připomínku v chatu, duplicitní checklist nebo screenshot z ověření. Po potvrzení rozhodněte, co s nimi.
+
+Rozlišujte čtyři akce:
+
+- `Ponechat v kanonickém místě`: výsledek, který má řídit další práci.
+- `Archivovat`: historický záznam, který má hodnotu pro audit rozhodnutí.
+- `Smazat`: dočasný podklad bez dalšího účelu.
+- `Anonymizovat`: záznam je užitečný, ale nepotřebuje osobní nebo zákaznická data.
+
+Příklad uzavření:
+
+```text
+Ponechat:
+Aktuální auditní šablona a archivní checklist s jasným označením.
+
+Archivovat:
+Jedna věta v měsíční údržbě, že doladění bylo potvrzeno.
+
+Smazat:
+Dočasná poznámka s průchodem vyhledávání.
+
+Anonymizovat:
+Není potřeba; ověření neobsahovalo osobní údaje.
+```
+
+Slabé uzavření:
+
+```text
+Necháme všechno, kdyby se to hodilo.
+```
+
+Tohle zní opatrně, ale často je to jen skladování nejistoty. Když necháte staré podklady naživu bez účelu, příští kontrola nebude řešit práci. Bude řešit archeologii.
+
+### Napojte výsledek na běžný rytmus
+
+Potvrzené drobné doladění se nemá kontrolovat speciálním rituálem. Má spadnout do běžného rytmu, který už existuje: měsíční údržba šablon, kvartální kontrola datové mapy, review rozcestníků, audit archivů nebo onboardingový refresh.
+
+Zapište jen nejbližší přirozený návrat:
+
+```text
+Běžná kontrola:
+Při další kvartální kontrole šablon ověřit, že archivní exportní checklist zůstává označený jako archiv a aktuální šablona je stále hlavní pracovní cesta.
+```
+
+Nevytvářejte nový recurring úkol jen proto, že jeden archivní dokument kdysi matl. Nový rytmus má smysl až ve chvíli, kdy se podobné tření opakuje napříč více místy. Jedno potvrzené drobné doladění patří do existující údržby.
+
+Vhodné návraty:
+
+- při další běžné kontrole šablon;
+- při kvartální revizi indexu;
+- při nejbližším předání role;
+- při plánované aktualizaci dokumentace;
+- při dalším incidentním nebo provozním drillu, pokud se téma týká provozu.
+
+Nevhodné návraty:
+
+- samostatná schůzka jen kvůli potvrzenému odkazu;
+- nová tabulka všech drobných doladění;
+- osobní připomínky autorovi opravy;
+- sledování, kdo přesně starý materiál otevřel;
+- další ověřovací cyklus bez konkrétního nového tření.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření není jen otázka právních textů. Je to provozní disciplína: když už data nepotřebujete, nenechávejte je ležet jen proto, že mazání je méně viditelné než přidávání.
+
+Před zavřením potvrzeného doladění projděte krátkou kontrolu:
+
+1. Zůstává v kanonickém místě jen to, co pomáhá další práci?
+2. Neobsahuje ověřovací záznam jména lidí, pokud stačí role nebo anonymní průchod?
+3. Nezůstaly screenshoty, exporty nebo testovací kopie bez účelu?
+4. Je jasné, které staré odkazy jsou archivní a které pracovní?
+5. Nevede archivní materiál omylem k aktuální práci?
+6. Je dočasná poznámka smazaná nebo má jasný důvod zůstat?
+7. Má další kontrola existující rytmus místo nové evidence?
+
+Silný zápis:
+
+```text
+Do kanonického indexu zůstává jen aktuální šablona a jasně označený archiv. Dočasné ověřovací poznámky byly smazány. Údržbový záznam obsahuje jednu anonymizovanou větu bez zákaznických dat.
+```
+
+Slabý zápis:
+
+```text
+Všechny podklady z ověření necháváme v interní složce, protože se někdy mohou hodit.
+```
+
+Codyho komentář: "někdy se může hodit" je věta, která v provozu nafukuje úložiště, mentální zátěž i datové riziko. Když nevíte, k čemu podklad bude, nejspíš nemá být trvale uložený. Ano, je to méně dramatické než nový dashboard. Překvapivě často je to užitečnější.
+
+### Uzavírací karta potvrzeného doladění
+
+Použijte ji jen pro doladění, které má po Příloze NN stav `Potvrdit`.
+
+```text
+Datum:
+Potvrzené doladění:
+Původní tření:
+Kanonické místo:
+Co se přepisuje:
+Co zůstává jako archiv:
+Co se maže:
+Co se anonymizuje:
+Datová stopa po uzavření:
+Běžná kontrola:
+Vlastník:
+Datum dalšího návratu:
+Stav: Uzavřeno do běžné údržby
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Potvrzené doladění: archivní exportní checklist už nepůsobí jako aktuální postup
+Původní tření: archiv se ve vyhledávání zobrazoval před aktuální auditní šablonou
+Kanonické místo: aktuální auditní šablona a index exportních postupů
+Co se přepisuje: index vede primárně na aktuální auditní šablonu; archiv má první řádek "Archiv - nepoužívat pro nové exporty"
+Co zůstává jako archiv: starý checklist jen kvůli historii rozhodnutí
+Co se maže: dočasná poznámka z ověřovacího průchodu
+Co se anonymizuje: nic, ověření neobsahovalo osobní údaje
+Datová stopa po uzavření: jedna anonymizovaná věta v měsíční údržbě
+Běžná kontrola: další kvartální kontrola šablon
+Vlastník: provozní lead
+Datum dalšího návratu: při kvartální kontrole
+Stav: Uzavřeno do běžné údržby
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jedno drobné doladění, které bylo v Příloze NN potvrzené.
+
+1. Přečtěte potvrzenou větu.
+2. Určete jediné kanonické místo, kde má výsledek zůstat.
+3. Zapište, co přesně se v tomto místě přepisuje.
+4. Rozhodněte, které přechodové stopy se mažou, archivují nebo anonymizují.
+5. Zkontrolujte, že starý materiál nevede k aktuální práci omylem.
+6. Napojte téma na existující běžnou kontrolu.
+7. Určete vlastníka údržby.
+8. Smažte nebo zavřete dočasné poznámky.
+9. Zapište jednu anonymizovanou větu do údržbového záznamu.
+10. Označte stav `Uzavřeno do běžné údržby`.
+
+Výstup:
+
+```text
+Potvrzené drobné doladění je propsané do kanonického místa, přechodové stopy jsou zavřené a další návrat proběhne v existujícím údržbovém rytmu.
+```
+
+### Checklist kapitoly
+
+- Vycházíte jen z doladění se stavem `Potvrdit`?
+- Máte jednu potvrzenou větu, ne seznam dojmů?
+- Je určené jediné kanonické pracovní místo?
+- Dokázal by nový člověk najít správnou cestu bez kontextu autora?
+- Přepsali jste výsledek tam, kde se bude používat?
+- Zavřeli jste dočasné poznámky, komentáře a testovací odkazy?
+- Rozlišili jste ponechat, archivovat, smazat a anonymizovat?
+- Nezůstává stará stopa dostupná jako zdánlivě aktuální postup?
+- Nevzniká nová evidence jen kvůli potvrzenému doladění?
+- Je datová stopa po uzavření minimální a účelná?
+- Neobsahuje ověřovací záznam zbytečná osobní nebo zákaznická data?
+- Je další kontrola napojená na existující rytmus?
+- Má běžná údržba vlastníka?
+- Je stav uzavřený jasně a bez otevřeného "ještě se k tomu někdy vrátíme"?
+
+Dobře uzavřené drobné doladění není vidět jako nový proces. Je vidět jako menší tření při příští práci. Správný odkaz je nahoře, archiv se netváří jako současnost, dočasné poznámky nezůstávají v koutě a tým nemusí přemýšlet, kde je pravda. Malá věc, jasně zavřená. Přesně takové věci dlouhodobě drží provoz v rozumném stavu.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NO o uzavření potvrzeného drobného doladění do běžné údržby: potvrzená věta, přepis kanonického místa, zavření přechodových stop, napojení na existující údržbový rytmus, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NN o ověření drobného doladění po dalším běžném průchodu: návrat k původnímu tření, výběr normálního průchodu, sledování pracovní cesty místo poslušnosti, rozhodnutí Potvrdit/Ještě jednou drobně doladit/Vrátit do údržbové fronty, privacy-first ověření bez nové stopy, ověřovací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NM o drobném doladění po první běžné kontrole uzavřené korekce: vstup jen pro stav Drobně doladit, oprava nejbližšího pracovního místa, rozhodnutí Přepsat/Označit/Odstranit, ověření dalším normálním průchodem, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NL o první běžné kontrole po uzavření následné korekce: kontrola v existujícím rytmu, jeden normální průchod, hledání návratu staré stopy, rozhodnutí Drží/Drobně doladit/Vrátit do údržbové fronty, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
