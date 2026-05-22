@@ -103336,8 +103336,231 @@ Malá údržbová úprava má po prvním běžném průchodu jasný výsledek, d
 
 Ověření malé údržbové úpravy má jeden hlavní smysl: nedovolit, aby se malý nález ztratil v provozu nebo nafoukl v další projekt. Jeden běžný průchod, jedno rozhodnutí, jedna privacy-first poznámka. Když to stačí, zavřete smyčku. Když to nestačí, vraťte problém do správné fronty a nezakrývejte ho dalším připomenutím.
 
+## Příloha NG: Uzavření potvrzené malé údržbové úpravy do běžné údržby
+
+Příloha NF ověřila, jestli malá údržbová úprava po dalším běžném průchodu opravdu pomohla. Tato příloha řeší situaci, kdy výsledek zní `potvrdit` nebo po drobném doladění už není potřeba držet úpravu v opravárenském režimu. Cílem je zavřít smyčku tak, aby se užitečná změna stala součástí běžné údržby, ale nevznikl kolem ní další trvalý proces.
+
+Otázka této přílohy:
+
+```text
+Jak potvrzenou malou údržbovou úpravu uložíme do běžné údržby tak, aby zůstala použitelná a nezvětšovala datovou stopu?
+```
+
+Výstupem je krátký uzavírací záznam:
+
+```text
+Potvrzená úprava:
+Co zůstává v běžné trase:
+Kde je zdroj pravdy:
+Co se archivuje:
+Co se maže:
+Další přirozená kontrola:
+Privacy-first poznámka:
+Vlastník běžné údržby:
+Datum uzavření:
+```
+
+Uzavření není slavnostní dokument. Je to praktická pojistka, že se po ověření neztratí výsledek, nezůstane viset přechodová karta a tým nebude dál používat starou cestu jen proto, že někde přežila v odkazu, chatu nebo osobní poznámce.
+
+### Začněte potvrzeným výsledkem
+
+Nejdřív se vraťte k výsledku z Přílohy NF. Pokud byl stav `potvrdit`, můžete úpravu převést do běžné údržby přímo. Pokud byl stav `doladit`, udělejte nejdřív drobné doladění a ověřte ho stejně lehce jako původní úpravu. Teprve potom uzavírejte.
+
+Dobrá uzavírací věta má tvar:
+
+```text
+Potvrzujeme, že [úprava] při běžném průchodu odstranila [původní tření] bez [zbytečné datové stopy nebo nové okliky].
+```
+
+Příklad:
+
+```text
+Potvrzujeme, že odkaz z osobního checklistu na kanonickou šablonu auditního ticketu při běžném průchodu odstranil screenshotový krok bez kopírování detailu exportu do komentáře.
+```
+
+Slabé uzavření:
+
+```text
+Úprava vypadá hotově.
+```
+
+To je pocit, ne rozhodnutí. U malé údržby stačí jedna věta, ale musí říct, co se opravdu zlepšilo a proč se smyčka zavírá.
+
+### Přepište výsledek do zdroje pravdy
+
+Potvrzená úprava nemá zůstat jen v ověřovací kartě. Ta je pracovní stopa. Běžný člověk má najít aktuální pravidlo tam, kde práci skutečně dělá: v šabloně, checklistu, mapě standardů, runbooku, onboardingové trase nebo provozní kartě.
+
+Při přepisu se držte tří pravidel:
+
+1. Do běžné trasy dejte jen současné pravidlo.
+2. Historii nechte mimo hlavní pracovní tok.
+3. Neopisujte celý důvod změny tam, kde člověk potřebuje jen udělat práci.
+
+Příklad přepisu:
+
+```text
+Stará pracovní věta: při ověření exportu vlož screenshot do komentáře.
+Nová pracovní věta: při ověření exportu nastav stav "Export ověřen"; obsah exportu ani screenshot do ticketu nekopíruj.
+```
+
+Karta ověření může zůstat v archivu jako stopa rozhodnutí, ale běžná šablona má obsahovat jen nový postup. Když do šablony nalepíte celý příběh, proč úprava vznikla, lidé budou číst historii místo práce.
+
+Codyho komentář: dokumentace často tloustne proto, že se do ní ukládá každá oprava jako další vrstva vysvětlení. Lepší je pravidlo přepsat čistě a historii uklidit vedle. Jinak z pracovního checklistu vznikne archeologická expedice s checkboxy.
+
+### Zavřete přechodovou evidenci
+
+Po ověření často zůstávají pomocné artefakty: úpravová karta, ověřovací záznam, poznámka v chatu, dočasný odkaz, screenshot pro kontrolu, osobní checklist nebo položka v údržbové frontě. Pokud je necháte žít, začnou konkurovat novému zdroji pravdy.
+
+Projděte krátký úklid:
+
+- položku v údržbové frontě označte jako uzavřenou;
+- do ověřovací karty dopište datum uzavření;
+- starý checklist přesuňte mimo běžnou trasu nebo ho nahraďte odkazem na zdroj pravdy;
+- připnuté zprávy a interní odkazy nasměrujte na aktuální místo;
+- dočasné podklady smažte, pokud už neslouží rozhodnutí;
+- archivní stopu ponechte jen tam, kde má jasný účel.
+
+Praktická věta:
+
+```text
+Běžná práce vede jen přes kanonickou šablonu; úpravová a ověřovací karta jsou uzavřené v archivu rozhodnutí, dočasný screenshot byl smazán.
+```
+
+Nejhorší stav je napůl uzavřená změna. Všichni vědí, že něco bylo opraveno, ale staré odkazy pořád existují, ověřovací karta je otevřená a údržbová fronta ukazuje nejasný stav. To je přesně prostředí, ve kterém se po měsíci nikdo neodváží rozhodnout, co vlastně platí.
+
+### Napojte úpravu na přirozenou kontrolu
+
+Potvrzená malá úprava obvykle nepotřebuje nový meeting. Potřebuje se objevit v už existujícím rytmu: při měsíční údržbě šablon, kvartálním review standardů, kontrole onboardingových tras nebo při běžném provozním review.
+
+Zapište jen:
+
+```text
+Další kontrola:
+Co při ní sledujeme:
+Kdy úpravu znovu otevřeme:
+```
+
+Příklad:
+
+```text
+Další kontrola: nejbližší měsíční review auditních šablon.
+Co sledujeme: jestli se screenshotový krok nevrátil v osobních checklistech nebo starých odkazech.
+Kdy znovu otevřeme: pokud se objeví kopírování obsahu exportu do ticketu nebo paralelní evidence mimo šablonu.
+```
+
+Tím se úprava vrátí do normálního provozu. Není potřeba držet speciální připomínku jen proto, že změna kdysi vznikla jako oprava. Oprava, která funguje, má přestat být zvláštní.
+
+### Privacy-first uzavření datové stopy
+
+Malé údržbové úpravy často vznikají okolo šablon, ticketů, supportních záznamů, auditních poznámek nebo provozních důkazů. Uzavření je dobrá chvíle rozhodnout, co musí zůstat a co má zmizet.
+
+Před uzavřením odpovězte:
+
+1. Jaký záznam je potřeba pro budoucí pochopení rozhodnutí?
+2. Stačí anonymizovaná věta místo konkrétního ticketu?
+3. Je nutné ponechat screenshot, export nebo kopii zprávy?
+4. Má dočasný podklad jasné datum smazání?
+5. Nevznikl vedlejší seznam lidí, kteří postup použili špatně?
+6. Je případný nový datový tok zapsaný v datové mapě?
+7. Ví vlastník, kde je zdroj pravdy a kde archiv?
+
+Silné uzavření:
+
+```text
+V archivu zůstává jen anonymizovaná věta důvodu změny a datum potvrzení. Dočasný screenshot a kopie ticketu se mažou, protože rozhodnutí už nevyžadují.
+```
+
+Slabé uzavření:
+
+```text
+Pro jistotu necháme všechny podklady v interní složce.
+```
+
+`Pro jistotu` je často začátek budoucího nepořádku. Privacy-first provoz neznamená, že si nikdy nesmíte nechat důkaz. Znamená to, že každý důkaz má účel, vlastníka a konec života.
+
+### Karta uzavření malé údržbové úpravy
+
+Použijte ji ve chvíli, kdy stav z Přílohy NF zní `potvrdit`, případně když je drobné doladění už ověřené.
+
+```text
+Datum:
+Potvrzená úprava:
+Původní nález:
+Výsledek ověření:
+Uzavírací věta:
+Zdroj pravdy po uzavření:
+Co se změnilo v běžné trase:
+Co se archivuje:
+Co se maže:
+Co se odpojuje ze staré trasy:
+Další přirozená kontrola:
+Kdy znovu otevřít:
+Privacy-first poznámka:
+Vlastník běžné údržby:
+Co zůstává mimo rozsah:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Potvrzená úprava: osobní checklist vede jen na kanonickou šablonu auditního ticketu
+Původní nález: starý checklist vracel screenshotový krok
+Výsledek ověření: potvrdit
+Uzavírací věta: při běžném auditním ticketu se použil stav "Export ověřen" bez screenshotu a bez kopírování detailu exportu
+Zdroj pravdy po uzavření: kanonická šablona auditního ticketu
+Co se změnilo v běžné trase: připnutý odkaz i checklist vedou na šablonu, starý krok není v aktivní trase
+Co se archivuje: úpravová karta a anonymizovaná ověřovací věta
+Co se maže: dočasný screenshot použitý při kontrole
+Co se odpojuje ze staré trasy: osobní checklist s původním screenshotovým krokem
+Další přirozená kontrola: měsíční review auditních šablon
+Kdy znovu otevřít: pokud se znovu objeví screenshotový důkaz nebo kopírování obsahu exportu
+Privacy-first poznámka: archiv neobsahuje ticket, screenshot ani jméno člověka, jen anonymizovaný výsledek
+Vlastník běžné údržby: provozní lead
+Co zůstává mimo rozsah: celková změna auditního procesu
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu ověřovací kartu z Přílohy NF se stavem `potvrdit`.
+
+1. Napište jednu uzavírací větu.
+2. Určete zdroj pravdy po uzavření.
+3. Přepište nové pravidlo do běžné pracovní trasy.
+4. Označte úpravovou a ověřovací kartu jako uzavřenou.
+5. Najděte staré odkazy, připnuté zprávy nebo osobní checklisty.
+6. Rozhodněte, co se archivuje a co se maže.
+7. Přidejte úpravu do nejbližší přirozené kontroly.
+8. Zapište, kdy se má znovu otevřít.
+9. Potvrďte vlastníka běžné údržby.
+
+Výstup:
+
+```text
+Potvrzená malá údržbová úprava je zavřená, uložená ve zdroji pravdy, odpojená od starých tras a napojená na běžnou kontrolu bez nové zbytečné evidence.
+```
+
+### Checklist kapitoly
+
+- Máte výsledek ověření `potvrdit` nebo ověřené drobné doladění?
+- Napsali jste jednu uzavírací větu?
+- Je nové pravidlo ve zdroji pravdy, ne jen v ověřovací kartě?
+- Je běžná pracovní trasa čistá od historie opravy?
+- Jsou staré odkazy, checklisty nebo připnuté zprávy odpojené?
+- Je údržbová položka označená jako uzavřená?
+- Rozhodli jste, co se archivuje a co se maže?
+- Nezůstaly dočasné screenshoty, exporty nebo kopie ticketů bez účelu?
+- Stačí anonymizovaná věta místo konkrétního příkladu?
+- Je úprava napojená na existující kontrolní rytmus?
+- Je jasné, kdy se má znovu otevřít?
+- Má běžná údržba vlastníka?
+- Je zapsané, co zůstává mimo rozsah?
+
+Uzavření malé údržbové úpravy je drobná, ale důležitá disciplína. Bez něj se z dobrých oprav stávají vrstvy polovičních pravidel. S ním má tým jednu platnou trasu, lehkou stopu rozhodnutí a méně důvodů schovávat staré návody v osobních poznámkách.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NG o uzavření potvrzené malé údržbové úpravy do běžné údržby: uzavírací věta, přepis do zdroje pravdy, zavření přechodové evidence, napojení na přirozenou kontrolu, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NF o ověření malé údržbové úpravy po dalším běžném průchodu: návrat k větě Hotovo znamená, sledování běžné práce bez slavnostního testu, rozhodovací stavy Potvrdit/Doladit/Vrátit do fronty/Otevřít riziko, rozlišení trasy od poslušnosti týmu, privacy-first ověřovací záznam, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha NE o převodu nálezu z první běžné kontroly do jedné malé údržbové úpravy: výběr jednoho nálezu, úpravová věta, místo zásahu blízko práci, definice hotovo, ověření jedním normálním průchodem, privacy-first brzda, karta, mini workshop a checklist.
 - 2026-05-21: Doplněna Příloha ND o první běžné kontrole opravy po zařazení do údržby: výběr přirozeného kontrolního okna, kontrola zkrácení práce, rozlišení tření od návratu starého problému, hledání paralelní evidence, privacy-first kontrola běžné údržby, karta, mini workshop a checklist.
