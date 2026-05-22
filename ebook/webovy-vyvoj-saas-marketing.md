@@ -106140,8 +106140,258 @@ Jedno drobné tření je převedené do lokální opravy s hranicí rozsahu, ov�
 
 Drobné tření po běžné kontrole je normální. Nemá se ignorovat, ale nemá se ani nafukovat. Když ho opravíte lokálně, s jasnou hranicí a bez nové datové stopy, údržba zůstane užitečná: pomáhá práci, ale nekrmí sama sebe.
 
+## Příloha NR: Ověření lokální opravy po dalším běžném použití
+
+Příloha NQ převádí jedno drobné tření do jedné lokální opravy. Tím ale smyčka ještě nekončí. Lokální oprava může vypadat správně v okamžiku, kdy ji zapíšete, ale teprve další běžné použití ukáže, jestli opravdu odstranila tření a nevytvořila nový malý zmatek vedle.
+
+Tato příloha řeší ověření lokální opravy bez zvláštního testovacího rituálu. Cílem není znovu auditovat celý standard, celý index ani celý proces. Cílem je vrátit se k opravné kartě, projít normální pracovní situaci a rozhodnout, jestli se lokální oprava uzavírá, ještě jednou drobně opraví, nebo se poctivě vrátí do údržbové fronty jako širší problém.
+
+Otázka této přílohy:
+
+```text
+Zmizelo pojmenované drobné tření při dalším běžném použití, aniž by vznikla nová datová stopa, nový vedlejší problém nebo potřeba vysvětlovat postup bokem?
+```
+
+Výstupem je krátká ověřovací karta:
+
+```text
+Lokální oprava:
+Běžné použití:
+Co mělo zmizet:
+Co se stalo v praxi:
+Vedlejší tření:
+Datová stopa:
+Rozhodnutí:
+Další krok:
+Vlastník:
+Termín:
+```
+
+Ověření má být lehčí než oprava. Pokud kvůli ověření lokální změny vznikne schůzka, tabulka, screenshotová galerie a nové pravidlo, tým pravděpodobně ztratil měřítko. Lokální oprava se má potvrdit v reálné práci, ne v divadelní kontrole, kde všichni předem vědí, co mají najít.
+
+Codyho komentář: u drobných oprav je největší riziko přehnaná svědomitost. Člověk chce být pečlivý, tak si založí kontrolní tabulku. Pak další. Pak jednu "jen dočasnou". A najednou má firma víc evidence o přejmenovaném archivním dokumentu než o zákazníkovi, kterému měla ta dokumentace pomoct. To je sice krásně pořádkumilovné, ale trochu mimo planetu.
+
+### Vraťte se k původní opravné větě
+
+Ověření nezačínejte otázkou "co všechno bychom ještě mohli zlepšit". Začněte původní větou z Přílohy NQ:
+
+```text
+Při [běžná situace] člověk narazí na [konkrétní tření], takže [pracovní dopad].
+```
+
+Tato věta chrání rozsah. Připomíná, že ověřujete jedno konkrétní tření, ne celkovou kvalitu dokumentace, onboardingu, indexu nebo procesu.
+
+Příklad:
+
+```text
+Při vyhledání exportního postupu člověk vidí archivní checklist se starým titulkem, takže může na chvíli pochybovat, jestli je archiv opravdu neaktuální.
+```
+
+Ověřovací otázka zní:
+
+```text
+Vidí člověk při běžném vyhledání exportního postupu ještě archivní checklist jako možnou aktuální cestu?
+```
+
+Nezní:
+
+```text
+Máme dobře pojmenované všechny exportní dokumenty?
+```
+
+Druhá otázka může být legitimní, ale patří do údržbové fronty nebo revize informační architektury. Ne do ověření jedné lokální opravy.
+
+### Vyberte skutečné běžné použití
+
+Ověření má proběhnout při situaci, která by nastala i bez této přílohy. Typicky:
+
+- další kvartální kontrola šablon;
+- další onboarding nového člověka;
+- další interní audit webu;
+- další příprava sales materiálu;
+- další supportní průchod podle checklistu;
+- další úklid exportů a dočasných podkladů;
+- další aktualizace kanonického indexu.
+
+Nevhodné ověření:
+
+```text
+Svoláme speciální kontrolu jen k tomu, abychom se podívali, jestli se dokument přejmenoval správně.
+```
+
+Vhodné ověření:
+
+```text
+Při příští kvartální kontrole šablon použijeme běžné vyhledávání a ověříme, že archivní dokument už nepůsobí jako aktuální postup.
+```
+
+Rozdíl je důležitý. Speciální kontrola často měří to, jestli lidé vědí, že probíhá kontrola. Běžné použití měří, jestli systém pomáhá, když se nikdo extra nesoustředí.
+
+### Sledujte práci, ne poslušnost
+
+Při ověření se neptejte hlavně na to, jestli člověk "dodržel nový postup". Ptejte se, jestli mu pracovní cesta dává smysl bez dodatečného vysvětlování.
+
+Dobré pozorovací otázky:
+
+1. Našel člověk správné místo běžnou cestou?
+2. Zastavil se na stejném tření jako minule?
+3. Musel někdo vysvětlit, že stará stopa je archiv?
+4. Vznikla pochybnost, který dokument nebo krok je aktuální?
+5. Vznikl nový malý problém hned vedle opravy?
+6. Stačil k ověření běžný pracovní záznam?
+
+Slabé otázky:
+
+```text
+Přečetl si člověk změnovou poznámku?
+Potvrdil, že změna dává smysl?
+Věděl, že jsme to opravovali?
+```
+
+To měří pozornost vůči změně, ne kvalitu změny. U dobré lokální opravy člověk často ani nemusí vědět, že proběhla. Prostě ho přestane brzdit jedna zbytečnost.
+
+### Rozhodnutí po ověření
+
+Po běžném použití vyberte jeden ze tří stavů.
+
+```text
+Uzavřít:
+Pojmenované tření zmizelo, hlavní cesta drží a nevzniklo nové vedlejší tření.
+```
+
+Tento stav znamená, že oprava se může zapsat do běžné údržby a karta se zavře. Nepřidávejte další práci jen proto, že máte otevřený dokument.
+
+```text
+Ještě jednou lokálně opravit:
+Tření se zmenšilo, ale jedno bezprostředně sousední místo pořád mate.
+```
+
+Tento stav použijte jen tehdy, když je další zásah opravdu blízko původnímu místu. Například archivní dokument už má správný titulek, ale v prvním řádku má stále starý odkaz. To je pořád lokální oprava.
+
+```text
+Vrátit do údržbové fronty:
+Ověření ukázalo, že problém je širší než původní drobné tření.
+```
+
+Tento stav je poctivý výsledek, ne selhání. Lokální oprava splnila diagnostickou roli: ukázala, že zmatek není v jednom titulku, ale třeba ve více verzích šablon, v duplicitním indexu nebo v nejasném vlastnictví zdroje pravdy.
+
+Pravidlo:
+
+```text
+Po druhé lokální opravě už třetí lokální opravu nepřidávejte automaticky. Nejdřív ověřte, jestli téma nepatří zpět do údržbové fronty.
+```
+
+Třetí "malá" oprava za sebou často znamená, že tým lokálně obchází systémový problém.
+
+### Privacy-first ověření bez zbytečných důkazů
+
+Ověření lokální opravy svádí k ukládání důkazů. U webu, SaaS provozu, marketingu i interní dokumentace ale důkaz často obsahuje víc citlivých informací než samotná změna potřebuje.
+
+Stačí obvykle tento zápis:
+
+```text
+Při běžné kvartální kontrole byl exportní postup nalezen přes aktuální šablonu. Archivní checklist se už nezobrazil jako aktivní cesta. Bez screenshotů a bez seznamu uživatelů.
+```
+
+Nevytvářejte:
+
+- screenshoty interního vyhledávání, pokud stačí textový zápis;
+- seznam lidí, kteří postup použili;
+- export výsledků hledání;
+- kopii zákaznického nebo supportního kontextu;
+- novou tabulku jen kvůli jedné opravě;
+- trvalý monitoring drobného tření.
+
+Pokud se bez screenshotu opravdu neobejdete, ořízněte citlivé části, uložte ho jen dočasně, zapište účel a termín smazání. U většiny lokálních oprav je ale lepší screenshot vůbec nevyrábět.
+
+Privacy-first otázka:
+
+```text
+Dokázali bychom ověření pochopit i za měsíc z jedné věty bez osobních údajů, interních URL a obrazových důkazů?
+```
+
+Pokud ano, napište jednu větu a jděte dál. Bravo, údržba přežila kontakt s realitou.
+
+### Ověřovací karta
+
+```text
+Datum:
+Navazuje na lokální opravu:
+Původní tření:
+Běžné použití:
+Co mělo zmizet:
+Co se stalo v praxi:
+Vedlejší tření:
+Datová stopa ověření:
+Dočasné podklady:
+Rozhodnutí: Uzavřít / Ještě jednou lokálně opravit / Vrátit do údržbové fronty
+Další krok:
+Co se nemění:
+Vlastník:
+Termín:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Navazuje na lokální opravu: přejmenování archivního exportního checklistu
+Původní tření: archivní checklist ve vyhledávání vypadal jako aktuální postup
+Běžné použití: kvartální kontrola šablon
+Co mělo zmizet: pochybnost, jestli je archiv aktivní cesta
+Co se stalo v praxi: aktuální auditní šablona byla nalezena běžným vyhledáváním a archivní dokument byl jasně označený
+Vedlejší tření: žádné
+Datová stopa ověření: jedna věta v údržbovém changelogu
+Dočasné podklady: žádné
+Rozhodnutí: Uzavřít
+Další krok: zařadit opravu do běžné údržby bez další speciální kontroly
+Co se nemění: neměníme index, ostatní archivní dokumenty ani vyhledávací pravidla
+Vlastník: provozní lead
+Termín: hotovo při kvartální kontrole
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu lokální opravu z Přílohy NQ, která čeká na ověření.
+
+1. Přečtěte původní opravnou větu.
+2. Vyberte nejbližší běžné použití, které by nastalo i bez kontroly.
+3. Zapište, co přesně mělo zmizet.
+4. Projděte běžnou cestu bez vysvětlování bokem.
+5. Sledujte, jestli člověk narazí na stejné tření.
+6. Zapište případné vedlejší tření.
+7. Zkontrolujte, že kvůli ověření nevznikají nové osobní údaje ani screenshoty.
+8. Vyberte rozhodnutí: Uzavřít, Ještě jednou lokálně opravit, nebo Vrátit do údržbové fronty.
+9. Zapište další krok, vlastníka a termín.
+10. Zavřete kartu, pokud není potřeba další akce.
+
+Výstup:
+
+```text
+Lokální oprava je ověřená při běžném použití a tým ví, jestli ji uzavírá, jednou blízce doladí, nebo vrací jako širší nález do údržbové fronty.
+```
+
+### Checklist kapitoly
+
+- Navazujete na konkrétní kartu z Přílohy NQ?
+- Vrátili jste se k původní opravné větě?
+- Ověřujete jen jedno pojmenované tření?
+- Probíhá ověření při skutečném běžném použití?
+- Neměříte poslušnost týmu místo kvality pracovní cesty?
+- Je jasné, co mělo po opravě zmizet?
+- Zkontrolovali jste, jestli nevzniklo vedlejší tření?
+- Rozlišujete stav Uzavřít, Ještě jednou lokálně opravit a Vrátit do údržbové fronty?
+- Nelepíte třetí lokální opravu na problém, který už je širší?
+- Nevznikl screenshot, export, seznam lidí ani nová tabulka bez jasného účelu?
+- Stačí ověřovací stopa pochopitelná jednou větou?
+- Je zapsané, co se nemění?
+- Má další krok vlastníka a termín?
+
+Ověření lokální opravy má uzavřít smyčku, ne otevřít další chodbu práce. Když tření zmizelo, zavřete kartu. Když trochu drhne sousední místo, opravte ho jednou a blízko. Když se ukáže širší problém, vraťte ho do fronty a přestaňte mu říkat drobnost.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NR o ověření lokální opravy po dalším běžném použití: návrat k opravné větě, výběr skutečného běžného použití, sledování pracovní cesty místo poslušnosti, rozhodnutí Uzavřít/Ještě jednou lokálně opravit/Vrátit do údržbové fronty, privacy-first ověření bez zbytečných důkazů, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NQ o převodu drobného tření po běžné kontrole do jedné lokální opravy: vstupní brána pro stav Drží s drobným třením, opravná věta, nejbližší místo zásahu, zákaz rozšíření, ověření dalším běžným použitím, privacy-first kontrola, opravná karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NP o první běžné kontrole po uzavření drobného doladění: přirozený návrat v existujícím rytmu, kontrola správné cesty, staré stopy a datové stopy, rozhodnutí Drží/Drží s drobným třením/Nedrží, kontrolní karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NO o uzavření potvrzeného drobného doladění do běžné údržby: potvrzená věta, přepis kanonického místa, zavření přechodových stop, napojení na existující údržbový rytmus, privacy-first úklid, uzavírací karta, mini workshop a checklist.
