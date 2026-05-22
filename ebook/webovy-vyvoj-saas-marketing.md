@@ -107279,8 +107279,283 @@ Nález z běžné kontroly je převedený do údržbové fronty jako samostatná
 
 Převod nálezu do údržbové fronty je malý, ale důležitý akt dospělosti systému. Tým uzná, že něco stojí za pozornost, ale zároveň odmítne paniku, přeskakování priorit a sběr důkazů pro pocit bezpečí. Dobrý nález není ten, který vyhraje hlasitostí. Dobrý nález je ten, který jde férově porovnat, rozhodnout a dokončit.
 
+## Příloha NV: Triage údržbové fronty po novém nálezu
+
+Příloha NU převedla nález z běžné kontroly do údržbové fronty. To je dobrý krok, ale ještě to není rozhodnutí o práci. Fronta není seznam věcí, které se mají automaticky udělat v pořadí příchodu. Je to místo, kde se nálezy porovnávají podle dopadu, datové stopy, opakování a ceny opravy.
+
+Tato příloha řeší první triage po zařazení nového nálezu. Cílem je rozhodnout, jestli se nález opraví hned, naplánuje, sloučí s jiným tématem, odloží s datem návratu, zahodí, nebo eskaluje jako riziko.
+
+Otázka této přílohy:
+
+```text
+Jak po zařazení nového nálezu projít údržbovou frontu tak, aby tým vybral další krok podle dopadu a kapacity, ne podle čerstvosti, hlasitosti nebo pocitu viny?
+```
+
+Výstupem je triage karta:
+
+```text
+Nový nález:
+Porovnané položky:
+Rozhodnutí:
+Důvod:
+Nejmenší další krok:
+Co se teď neotevírá:
+Privacy-first kontrola:
+Vlastník:
+Termín nebo datum návratu:
+```
+
+Codyho komentář: fronta bez triage je jen elegantně pojmenovaná hromada. Zvenku působí organizovaně, ale uvnitř se stejně všechno pere o pozornost. Triage není administrativa navíc. Je to brzda proti tomu, aby tým každý týden řešil poslední věc, která někoho napadla.
+
+### Začněte porovnáním, ne obhajobou nového nálezu
+
+Nový nález má přirozenou výhodu. Je čerstvý, všichni si ho pamatují a často k němu existuje konkrétní příběh. To ale neznamená, že má předběhnout starší položky.
+
+Při triage si vedle sebe položte:
+
+- nový nález z Přílohy NU;
+- tři až pět nejbližších položek ve frontě;
+- jednu položku s vyšším datovým nebo provozním rizikem;
+- jednu položku, která se dlouho odkládá;
+- dostupnou kapacitu pro údržbu.
+
+Nepotřebujete velkou tabulku. Stačí krátké porovnání:
+
+```text
+Co se stane, když tuto položku neuděláme další měsíc?
+Co se stane, když ji uděláme teď a odsuneme jinou položku?
+Kde vzniká větší riziko pro zákazníka, tým nebo data?
+```
+
+Dobrá triage neříká jen "tohle je důležité". Říká také "tohle je důležitější než něco jiného právě teď".
+
+### Použijte šest rozhodovacích stavů
+
+Každý nález po triage skončí v jednom z těchto stavů.
+
+```text
+Opravit teď:
+Malý zásah, jasné místo opravy, vysoký dopad nebo datové riziko.
+```
+
+Příklad:
+
+```text
+Starý formulář stále sbírá nepoužívané telefonní číslo. Oprava je smazání pole a aktualizace navazující šablony.
+```
+
+```text
+Naplánovat:
+Nález je důležitý, ale potřebuje slot, vlastníka nebo návaznost na jinou práci.
+```
+
+Příklad:
+
+```text
+Index šablon potřebuje sjednotit pole "Platí od" u více dokumentů. Zařadit do měsíční údržby indexu.
+```
+
+```text
+Sloučit:
+Nález má stejný kořen jako jiná položka a samostatné řešení by vytvořilo duplicitu.
+```
+
+Příklad:
+
+```text
+Chybějící datum platnosti u exportní šablony sloučit s existující položkou o metadatech v celém indexu.
+```
+
+```text
+Odložit s datem návratu:
+Nález je reálný, ale dopad je nízký nebo chybí důkaz opakování.
+```
+
+Příklad:
+
+```text
+Jeden člověk hledal správný dokument o minutu déle, ale rozhodl se správně a nevznikla chyba. Vrátit se při další kvartální kontrole.
+```
+
+```text
+Zahodit:
+Nález nevede k pracovnímu rozhodnutí, je duplicitní bez nové informace, nebo šlo o běžný provozní šum.
+```
+
+Příklad:
+
+```text
+Poznámka "možná by šlo index přepsat hezčeji" bez dopadu na konkrétní práci.
+```
+
+```text
+Eskalovat jako riziko:
+Nález může vést k právnímu, bezpečnostnímu, reputačnímu nebo datovému problému a běžná údržbová fronta je na něj pomalá.
+```
+
+Příklad:
+
+```text
+Interní šablona omylem vede lidi ke kopírování zákaznických dat do nástroje, který pro tento účel není schválený.
+```
+
+Nejhorší stav je "nechat ve frontě". To není rozhodnutí. Pokud položka zůstává ve frontě, musí mít stav, důvod a datum návratu.
+
+### Chraňte kapacitu údržby
+
+Údržba má často menší kapacitu, než si tým přeje. Proto každé rozhodnutí potřebuje cenu.
+
+Použijte jednoduché velikosti:
+
+```text
+S:
+Do 30 minut, jedno místo, malé ověření.
+
+M:
+Do půl dne, více míst, jeden vlastník, jasná kontrola.
+
+L:
+Více dní nebo více lidí, potřebuje samostatný plán.
+```
+
+Pravidlo:
+
+```text
+Pokud má položka velikost L, nepatří do běžné triage jako "uděláme to". Patří do rozhodnutí, jestli z ní udělat samostatný projekt, rozdělit ji, nebo odložit.
+```
+
+Příklad:
+
+```text
+Nález:
+V indexu chybí datum platnosti u aktivních šablon.
+
+Špatné rozhodnutí:
+Předělat celý index a archiv.
+
+Lepší rozhodnutí:
+Velikost S: doplnit pole "Platí od" u tří nejpoužívanějších aktivních šablon a ověřit, jestli to stačí.
+```
+
+Kapacita se chrání i větou:
+
+```text
+Co kvůli této položce dnes odsuneme?
+```
+
+Pokud odpověď není jasná, triage ještě neskončila.
+
+### Privacy-first kontrola při triage
+
+Privacy-first hodnota se v triage projevuje dvěma způsoby. Za prvé, datové riziko může změnit prioritu. Za druhé, samotná triage nesmí vyrábět zbytečnou evidenci.
+
+Před rozhodnutím projděte:
+
+- obsahuje položka osobní nebo zákaznická data;
+- vznikly kvůli ní screenshoty, exporty nebo nahrávky;
+- je jasný účel a retenční datum každého podkladu;
+- nejde problém vyřešit odstraněním dat místo dalším měřením;
+- nepřidává navržené řešení nový tracker, formulářové pole nebo ruční kopírování dat;
+- má případné riziko vlastníka rychleji než běžná údržba.
+
+Silné privacy-first rozhodnutí:
+
+```text
+Opravit teď, protože pole sbírá údaj bez jasného účelu. Oprava je odstranění pole, ne nové měření formuláře.
+```
+
+Slabé rozhodnutí:
+
+```text
+Necháme měsíc běžet analytiku, abychom viděli, kolik lidí pole vyplní.
+```
+
+Když je problém v nadbytečném sběru dat, často nepotřebujete další data. Potřebujete sběr zmenšit.
+
+### Triage karta
+
+```text
+Datum:
+Nový nález:
+Zdroj nálezu:
+Porovnané položky:
+Dopad na zákazníka:
+Dopad na tým:
+Datové nebo bezpečnostní riziko:
+Velikost zásahu: S / M / L
+Rozhodnutí: Opravit teď / Naplánovat / Sloučit / Odložit s datem návratu / Zahodit / Eskalovat jako riziko
+Důvod rozhodnutí:
+Nejmenší další krok:
+Co se teď neotevírá:
+Co se kvůli tomu odsouvá:
+Privacy-first kontrola:
+Vlastník:
+Termín nebo datum návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Nový nález: u aktivních šablon není vidět datum platnosti
+Zdroj nálezu: první běžná kontrola po uzavření lokální opravy archivního checklistu
+Porovnané položky: chybějící datum platnosti, starý formulář se zbytečným polem, sjednocení názvů archivů
+Dopad na zákazníka: nepřímý, přes rychlost a jistotu týmu
+Dopad na tým: střední, brzdí nové lidi při kontrole šablon
+Datové nebo bezpečnostní riziko: nízké
+Velikost zásahu: S
+Rozhodnutí: Naplánovat
+Důvod rozhodnutí: užitečné, ale méně urgentní než odstranění zbytečného pole ve formuláři
+Nejmenší další krok: při měsíční údržbě indexu doplnit "Platí od" ke třem aktivním šablonám
+Co se teď neotevírá: nepředěláváme archiv, názvosloví ani onboarding
+Co se kvůli tomu odsouvá: nic, jde do už plánované měsíční údržby
+Privacy-first kontrola: bez screenshotů, bez nových eventů, jen krátká poznámka ve frontě
+Vlastník: provozní lead
+Termín nebo datum návratu: další měsíční údržba indexu
+```
+
+### Mini workshop na 15 minut
+
+Vezměte jeden nový nález z údržbové fronty.
+
+1. Položte vedle něj několik starších položek.
+2. Určete dopad na zákazníka, tým a data.
+3. Odhadněte velikost zásahu S, M nebo L.
+4. Vyberte jeden ze šesti rozhodovacích stavů.
+5. Napište důvod rozhodnutí jednou větou.
+6. Určete nejmenší další krok.
+7. Doplňte, co se teď neotevírá.
+8. Zapište, co se kvůli tomu odsouvá, pokud něco.
+9. Proveďte privacy-first kontrolu podkladů a navrženého řešení.
+10. Přiřaďte vlastníka a termín nebo datum návratu.
+
+Výstup:
+
+```text
+Nový nález má po triage jasný stav, důvod, další krok a hranici rozsahu. Fronta se nezvětšila o neurčitý pocit, ale o rozhodnutelnou práci.
+```
+
+### Checklist kapitoly
+
+- Porovnali jste nový nález se staršími položkami ve frontě?
+- Nerozhodujete podle čerstvosti nebo hlasitosti?
+- Má položka jeden ze šesti stavů?
+- Je jasné, proč nevyhrála jiná položka?
+- Má zásah odhad velikosti S, M nebo L?
+- Není velká položka schovaná za malou větou?
+- Je napsaný nejmenší další krok?
+- Je jasné, co se teď neotevírá?
+- Je zapsané, co se kvůli práci odsouvá?
+- Proběhla privacy-first kontrola podkladů?
+- Nevznikají kvůli triage nové screenshoty, exporty nebo trackery bez účelu?
+- Má položka vlastníka a termín nebo datum návratu?
+- Nezůstala ve frontě položka ve stavu "někdy"?
+
+Triage údržbové fronty je místo, kde se dobrý provoz pozná podle zdrženlivosti. Ne všechno se opraví hned. Ne všechno zůstane. Ne všechno se stane projektem. Tým vezme nález vážně právě tím, že ho porovná, omezí, rozhodne a pošle správným směrem.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NV o triage údržbové fronty po novém nálezu: porovnání s existujícími položkami, šest rozhodovacích stavů, ochrana kapacity, privacy-first kontrola, triage karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NU o převodu nálezu z první běžné kontroly po lokální opravě do údržbové fronty: rozlišení návratu původního problému, dočištění, nového samostatného nálezu a provozního šumu, pracovní věta nálezu, posouzení dopadu, nejmenší další rozhodnutí, hranice rozsahu, privacy-first zařazení, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NT o první běžné kontrole po uzavření lokální opravy: návrat do normálního rytmu, kontrola kanonického místa, zbytky přechodové stopy, rozlišení návratu tření od provozního šumu, privacy-first úklid dočasných důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NS o uzavření ověřené lokální opravy do běžné údržby: potvrzený výsledek jednou větou, přepis kanonického místa, zavření přechodových stop, privacy-first úklid dočasných důkazů, napojení na běžnou kontrolu, uzavírací karta, mini workshop a checklist.
