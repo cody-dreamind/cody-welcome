@@ -108100,8 +108100,316 @@ Dokončená údržbová akce je ověřená v prvním běžném použití, má ro
 
 První ověření má chránit dvě věci najednou: užitek akce a lehkost provozu. Když změna pomohla, zavřete ji a pokračujte. Když nepomohla, vraťte ji do fronty bez dramatu. Když odhalila riziko, eskalujte. A když jen vyrobila další nápady, poděkujte jim za návštěvu, zapište je bokem a nenechte je bydlet v původní kartě zadarmo.
 
+## Příloha NY: Uzavření potvrzené proveditelné akce do běžné údržby
+
+Příloha NX skončila ověřením první běžné situace po dokončené akci. Pokud ověření dopadlo stavem `Potvrdit`, práce ještě není úplně zavřená. Potvrzení říká, že změna pomohla. Uzavření říká, že už se nemá dál nosit jako mimořádná akce, dočasná karta nebo mentální poznámka vlastníka.
+
+Tato příloha řeší poslední krok malé údržbové smyčky: převést potvrzenou akci zpět do normálního provozu. Neznamená to vyrábět další dokument. Znamená to uklidit stopy, aktualizovat kanonické místo, rozhodnout o vedlejších nálezech a nastavit nejlehčí možný návrat při příští běžné kontrole.
+
+Otázka této přílohy:
+
+```text
+Jak uzavřít potvrzenou údržbovou akci tak, aby zůstala v běžné práci, nezůstaly po ní dočasné podklady a další kontrola proběhla bez nového provozního balastu?
+```
+
+Výstupem je uzavírací karta:
+
+```text
+Potvrzená akce:
+Ověření:
+Kanonické místo aktualizováno:
+Dočasné stopy uzavřeny:
+Vedlejší nálezy:
+Běžná kontrola:
+Privacy-first úklid:
+Stav:
+```
+
+Codyho komentář: potvrzená změna, která se neuzavře, je taková malá nevyřízená cedulka. Nikomu už aktivně nepomáhá, ale občas se objeví v poznámkách, někdo ji znovu otevře, někdo se bojí smazat starý podklad a po čase tým neví, jestli je to hotová věc, experiment nebo úkol na jindy. Uzavření má cedulku sundat z tabulky. Bez ceremonie, stačí rozhodnutí.
+
+### Začněte potvrzeným výsledkem
+
+Neuzavírejte podle pocitu, že "už se to asi udělalo". Uzavírejte podle potvrzeného výsledku z Přílohy NX.
+
+Příklad:
+
+```text
+Potvrzený výsledek:
+Pole "Platí od" pomohlo při měsíční údržbě vybrat aktuální šablonu bez otevření changelogu. Nevznikly nové screenshoty ani exporty.
+```
+
+Z této věty musí být vidět tři věci:
+
+1. co bylo změněno;
+2. jak to pomohlo v běžné práci;
+3. že ověření nezvětšilo zbytečně datovou stopu.
+
+Pokud některá část chybí, ještě neuzavírejte. Vraťte se k ověřovací kartě a doplňte chybějící rozhodnutí. Uzavření nemá nahrazovat ověření. Má ho uklidit do normálního provozu.
+
+Slabý uzavírací vstup:
+
+```text
+Akce hotová, vypadá dobře.
+```
+
+Silný uzavírací vstup:
+
+```text
+Akce potvrzená při prvním běžném použití: aktuální šablonu šlo vybrat z indexu bez changelogu, stará triage poznámka byla uzavřena a nevznikly nové kopie dat.
+```
+
+První věta je nálada. Druhá věta je provozní stav.
+
+### Přepište jen kanonické místo
+
+Potvrzená akce má skončit tam, kde lidé skutečně pracují. Ne v historii úkolu, ne v komentáři pod kartou, ne v dočasné tabulce z ověření.
+
+Kanonické místo může být:
+
+- index šablon;
+- aktuální formulář;
+- provozní checklist;
+- karta služby;
+- interní playbook;
+- dokumentace API;
+- definice role;
+- retenční tabulka;
+- stránka s prodejní nabídkou.
+
+Pravidlo:
+
+```text
+Po uzavření musí další člověk najít správný stav bez čtení akční a ověřovací historie.
+```
+
+Příklad:
+
+```text
+Kanonické místo:
+Index šablon.
+
+Změna po uzavření:
+U tří aktivních šablon zůstává pole "Platí od" jako běžná součást indexu. Poznámka "doplněno po triage" se nemaže, pokud je potřeba pro změnový log, ale nevyžaduje další čtení při běžném výběru šablony.
+```
+
+Pozor na přepisování historie do všeho okolo. Po malé akci často vzniká pokušení upravit i související návody, onboarding a reporty. Udělejte jen to, co je nutné, aby nový stav byl nalezitelný v běžné práci. Zbytek patří do samostatné fronty, ne do uzavření.
+
+### Zavřete dočasné stopy
+
+Každá malá údržbová smyčka po sobě může zanechat stopy:
+
+- triage poznámku;
+- akční kartu;
+- ověřovací kartu;
+- dočasný výpis;
+- screenshot;
+- export;
+- kopii zákaznického příkladu;
+- komentář v chatu;
+- starou položku ve frontě.
+
+Uzavření musí říct, co s nimi bude.
+
+Jednoduché třídění:
+
+```text
+Smazat:
+Dočasné podklady, které splnily účel a nejsou potřeba pro audit, právní důvod ani provozní poučení.
+
+Archivovat zkráceně:
+Krátký záznam rozhodnutí, pokud se k němu tým má někdy vrátit.
+
+Převést:
+Vedlejší nález, který má vlastní hodnotu a patří do údržbové fronty.
+
+Ponechat v kanonickém místě:
+Jen stabilní pravidlo, pole, text nebo kontrola, kterou lidé potřebují při práci.
+```
+
+Příklad uzavření stop:
+
+```text
+Smazat:
+Dočasný výpis tří šablon použitý při ověření.
+
+Archivovat zkráceně:
+Jedna věta v changelogu indexu: "Doplněno pole Platí od u aktivních šablon po údržbové kontrole."
+
+Převést:
+Nález podobných názvů archivovaných šablon jako samostatná položka do údržbové fronty.
+
+Ponechat:
+Pole "Platí od" v indexu.
+```
+
+Čím menší akce, tím kratší historie má po ní zůstat. Malá oprava nemá vyrábět složku důkazů. Pokud ji vyrábí, už neopravujete proces. Budujete muzeum procesu.
+
+### Rozhodněte o vedlejších nálezech
+
+Příloha NX oddělila výsledek původní akce od vedlejších nálezů. Teď je potřeba zabránit dvěma opačným chybám:
+
+- vedlejší nález se nenápadně přilepí k uzavření a rozšíří práci;
+- vedlejší nález se ztratí, i když má skutečný dopad.
+
+Použijte malou bránu:
+
+```text
+Souvisí vedlejší nález s původní akcí natolik, že bez něj nový stav nefunguje?
+```
+
+Pokud ano, původní akce možná neměla být potvrzená. Vraťte se k rozhodnutí `Doladit lokálně` nebo `Vrátit do fronty`.
+
+Pokud ne, založte vedlejší nález samostatně:
+
+```text
+Vedlejší nález:
+Dvě archivované šablony mají podobný název jako aktivní verze.
+
+Rozhodnutí:
+Nezakládá blokaci potvrzené akce. Zapsat do údržbové fronty s otázkou, jestli podobné názvy reálně matou při dalším použití archivu.
+```
+
+Nález nemusí automaticky znamenat práci. Může znamenat jen položku ke sledování, odložení nebo zahození při triage. Důležité je, aby nezůstal schovaný v uzavřené kartě, kde ho nikdo nenajde, ale zároveň aby nepřerostl původní akci v další projekt.
+
+### Napojte změnu na běžnou kontrolu
+
+Uzavřená akce nemá mít vlastní doživotní kontrolní rituál. Má se vrátit do existujícího rytmu.
+
+Příklady napojení:
+
+```text
+Formulář:
+Zkontrolovat při běžném měsíčním průchodu poptávkových formulářů.
+```
+
+```text
+Index šablon:
+Zkontrolovat při další plánované údržbě indexu, bez samostatné schůzky.
+```
+
+```text
+Prodejní stránka:
+Zkontrolovat při nejbližším review nabídky nebo po pěti relevantních poptávkách.
+```
+
+```text
+Retenční pravidlo:
+Zkontrolovat při pravidelném úklidu dočasných podkladů.
+```
+
+Dobrá běžná kontrola má být lehká:
+
+```text
+Při další měsíční údržbě indexu ověřit, že pole "Platí od" zůstává vyplněné u aktivních šablon a že kvůli němu nevznikla paralelní evidence.
+```
+
+Špatná kontrola:
+
+```text
+Každý týden samostatně reportovat stav pole "Platí od" všem lidem v týmu.
+```
+
+To není údržba. To je trest za to, že jste kdysi opravili jednu věc.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má dvě části: zmenšit stopu po opravě a ověřit, že stabilní stav nepřidává zbytečný sběr.
+
+Otázky:
+
+1. Zůstaly po akci dočasné exporty, screenshoty, kopie nebo pracovní výpisy?
+2. Mají všechny ponechané podklady účel a vlastníka?
+3. Je jasné, kdy se dočasné podklady smažou?
+4. Nepřibyl nový formulářový údaj, event, log nebo dodavatel jen kvůli ověření?
+5. Pokud se něco archivuje, je to zkrácené na rozhodnutí, ne na plnou kopii dat?
+6. Umí další člověk použít nový stav bez přístupu k citlivým podkladům z ověření?
+
+Příklad:
+
+```text
+Privacy-first úklid:
+Dočasný výpis šablon se smaže dnes. V changelogu zůstane jen jednověté rozhodnutí bez obsahu šablon. Ověření nevytvořilo screenshoty, exporty ani nové analytické eventy. Nový stav nevyžaduje nový dodavatelský nástroj.
+```
+
+Pokud se při uzavření ukáže, že kvůli malé akci vznikl trvalý nový sběr dat, zastavte se. Buď je sběr skutečně nutný a patří do datové mapy, nebo se má odstranit ještě před uzavřením.
+
+### Uzavírací karta
+
+```text
+Datum:
+Potvrzená akce:
+Ověření:
+Kanonické místo:
+Co bylo přepsáno:
+Dočasné stopy:
+Vedlejší nálezy:
+Běžná kontrola:
+Privacy-first úklid:
+Co se teď neotevírá:
+Vlastník:
+Stav: uzavřeno / uzavřeno s vedlejším nálezem ve frontě / vrátit k doladění
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Potvrzená akce: doplnění pole "Platí od" ke třem aktivním šablonám v indexu
+Ověření: při měsíční údržbě šlo vybrat aktuální šablonu bez otevření changelogu
+Kanonické místo: index šablon
+Co bylo přepsáno: pole "Platí od" zůstává jako běžná součást aktivních položek
+Dočasné stopy: triage poznámka uzavřena, ověřovací výpis smazán, v changelogu ponechána jedna věta
+Vedlejší nálezy: podobné názvy archivovaných šablon zapsány samostatně do údržbové fronty
+Běžná kontrola: zkontrolovat při další měsíční údržbě indexu bez samostatné schůzky
+Privacy-first úklid: bez screenshotů, bez exportů, bez nového eventu, bez nového dodavatele
+Co se teď neotevírá: onboarding, archiv všech šablon, dokumentační metodika ani měření používání šablon
+Vlastník: provozní lead
+Stav: uzavřeno s vedlejším nálezem ve frontě
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu potvrzenou akci z Přílohy NX.
+
+1. Přečtěte potvrzený výsledek jednou větou.
+2. Najděte kanonické místo, kde má nový stav žít.
+3. Zkontrolujte, že další člověk nemusí číst historii akce.
+4. Seřaďte dočasné stopy na smazat, archivovat zkráceně, převést nebo ponechat.
+5. Oddělte vedlejší nálezy od původní akce.
+6. U každého vedlejšího nálezu rozhodněte, jestli blokuje uzavření, nebo jde samostatně do fronty.
+7. Napojte nový stav na existující běžnou kontrolu.
+8. Proveďte privacy-first úklid podkladů.
+9. Napište, co se teď neotevírá.
+10. Uzavřete kartu jedním ze tří stavů.
+
+Výstup:
+
+```text
+Potvrzená údržbová akce je převedená do kanonického místa, dočasné stopy jsou uzavřené, vedlejší nálezy jsou oddělené a další kontrola proběhne v běžném rytmu.
+```
+
+### Checklist kapitoly
+
+- Vychází uzavření z potvrzeného výsledku, ne jen z odškrtnutého úkolu?
+- Je jasné, jak změna pomohla v běžné práci?
+- Je aktualizované kanonické místo, kde lidé skutečně pracují?
+- Najde další člověk nový stav bez čtení akční historie?
+- Jsou dočasné podklady roztříděné na smazat, archivovat, převést nebo ponechat?
+- Zůstává v changelogu jen tolik historie, kolik má provozní hodnotu?
+- Jsou vedlejší nálezy oddělené od původní akce?
+- Neblokuje vedlejší nález uzavření, pokud nebrání fungování potvrzené změny?
+- Je nový stav napojený na existující běžnou kontrolu?
+- Nevzniká kvůli malé akci nový doživotní rituál?
+- Jsou smazané nebo označené ke smazání dočasné exporty, screenshoty a výpisy?
+- Nepřidala akce nový trvalý sběr dat, event, formulářové pole nebo dodavatele bez jasného důvodu?
+- Je napsané, co se teď neotevírá?
+- Má karta finální stav: uzavřeno, uzavřeno s vedlejším nálezem ve frontě, nebo vrátit k doladění?
+
+Uzavření potvrzené akce má být tiché. Když funguje, nikdo ho příští týden nemusí obdivovat. Nový stav prostě leží na správném místě, staré podklady nezabírají prostor, vedlejší nálezy neblokují hotovou práci a běžná údržba může pokračovat bez toho, aby si na každou malou opravu zakládala vlastní malou byrokracii.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NY o uzavření potvrzené proveditelné akce do běžné údržby: potvrzený výsledek, přepis kanonického místa, zavření dočasných stop, práce s vedlejšími nálezy, napojení na běžnou kontrolu, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NX o ověření proveditelné údržbové akce po prvním běžném použití: návrat k definici hotovo, výběr normálního použití, tři signály nalezení/rozhodnutí/stopy, oddělení vedlejších nálezů, rozhodovací stavy, privacy-first ověřovací stopa, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NW o převodu triage rozhodnutí do jedné proveditelné údržbové akce: pracovní sloveso, jedna akční věta, definice hotovo, místo zásahu, ověření v běžném použití, privacy-first kontrola, akční karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NV o triage údržbové fronty po novém nálezu: porovnání s existujícími položkami, šest rozhodovacích stavů, ochrana kapacity, privacy-first kontrola, triage karta, mini workshop a checklist.
