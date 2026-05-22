@@ -108819,8 +108819,269 @@ Výstup:
 
 Kontrola rytmu má být krátká a trochu nekompromisní. Neptá se, jestli tým pracoval poctivě. Ptá se, jestli poctivá práce zanechala systém jednodušší. Pokud ne, další iterace nemá přidat víc disciplíny. Má ubrat tření, duplicity a zbytečnou datovou stopu. Tedy přesně ty věci, kvůli kterým údržba vůbec existuje.
 
+## Příloha OA: Převod kontroly rytmu do jedné systémové úpravy
+
+Příloha NZ končí výběrem jedné další změny rytmu. To je dobrý začátek, ale ještě to není hotová práce. Po kontrole se často objeví lákavý seznam oprav: sloučit dvě evidence, zkrátit checklist, doplnit pole do šablony, smazat staré exporty, upravit vlastnictví, přepsat pravidlo pro nové položky. Všechno může být rozumné. Problém je, že rozumný seznam se velmi rychle změní v další projekt.
+
+Tato příloha řeší převod kontroly rytmu do jedné malé systémové úpravy. Nejde o další audit. Jde o přesný zásah do místa, kde opakované tření vzniká. Výsledkem má být změna, která se projeví při běžné práci, ne jen v dokumentu o tom, že by se něco mělo změnit.
+
+Otázka této přílohy:
+
+```text
+Jak po kontrole údržbového rytmu udělat jednu systémovou úpravu tak, aby snížila opakované tření, nezvětšila datovou stopu a šla ověřit při nejbližším normálním použití?
+```
+
+Výstupem je karta systémové úpravy:
+
+```text
+Nález z kontroly rytmu:
+Opakované tření:
+Místo vzniku:
+Jedna úprava:
+Co se nemění:
+Privacy-first hranice:
+Ověření:
+Vlastník:
+Termín:
+```
+
+Codyho komentář: po dobré kontrole má člověk chuť spravit celý systém. To je přesně chvíle, kdy je potřeba brzdit. Systém se často nezlepší velkým plánem, ale jedním přesným zásahem do vstupního místa. Třeba do šablony, formuláře, indexu, briefu nebo pravidla, podle kterého vznikají nové položky.
+
+### Začněte místem vzniku, ne místem bolesti
+
+Bolest se často ukáže jinde než příčina. Lidé se pletou při výběru šablony, ale problém vzniká při zakládání nové šablony. Sales neumí použít nový výřez z e-booku, ale problém vzniká v distribučním balíčku. Formulář sbírá moc dat, ale problém vzniká v šabloně pro nové landing pages.
+
+Proto nejdřív napište dvě věty:
+
+```text
+Kde se problém projevil:
+
+Kde problém pravděpodobně vzniká:
+```
+
+Příklad:
+
+```text
+Kde se problém projevil:
+Při měsíční kontrole indexu chybělo u dvou nových šablon pole "Platí od".
+
+Kde problém pravděpodobně vzniká:
+Nové šablony se zakládají kopírováním starých položek, které pole nemají povinné.
+```
+
+Tohle rozlišení šetří práci. Kdybyste opravili jen dvě konkrétní šablony, problém se vrátí u další nové položky. Když upravíte výchozí kartu nové šablony, opravujete místo vzniku.
+
+### Napište jednu systémovou větu
+
+Systémová úprava musí být konkrétní. Nestačí "zlepšit údržbu indexu" nebo "sjednotit šablony". Taková věta zní rozumně, ale nedá se dokončit.
+
+Použijte tvar:
+
+```text
+Když vzniká [pracovní situace], musí [kanonické místo] obsahovat [konkrétní prvek], aby [pracovní rozhodnutí] šlo udělat bez [zbytečné práce nebo datové stopy].
+```
+
+Příklad:
+
+```text
+Když vzniká nová interní šablona, musí výchozí karta obsahovat pole "Platí od", vlastník a další kontrola, aby šlo při měsíční údržbě vybrat aktuální verzi bez čtení changelogu.
+```
+
+V jedné větě je spouštěč, místo zásahu, změna i důvod. To je dobrý filtr. Pokud věta nejde napsat, pravděpodobně máte ještě moc široký problém nebo moc nejasné rozhodnutí.
+
+### Omezte rozsah nahlas
+
+Každá systémová úprava má přirozené sousedy. Když měníte výchozí kartu šablony, můžete chtít přepsat celý index. Když upravujete formulář, můžete chtít přepsat landing page. Když čistíte datovou stopu, můžete chtít auditovat všechny nástroje. Někdy to bude potřeba. V této iteraci ale ne.
+
+Do karty napište:
+
+```text
+Co se mění:
+
+Co se nemění:
+
+Co jde do samostatné fronty:
+```
+
+Příklad:
+
+```text
+Co se mění:
+Výchozí karta pro novou interní šablonu.
+
+Co se nemění:
+Archiv starých šablon, onboardingový materiál a celý index.
+
+Co jde do samostatné fronty:
+Sjednocení názvů archivovaných šablon, pokud se problém zopakuje při dalším použití archivu.
+```
+
+Tento zápis není opatrnictví. Je to ochrana před roztečením práce. Malá systémová úprava má být hotová, ověřitelná a vratná. Když se do ní přilepí všechno související, přestane být malá.
+
+### Upravte kanonické místo
+
+Systémová úprava musí skončit v místě, kudy práce opravdu prochází. Typická kanonická místa:
+
+- výchozí šablona pro nový obsah, projekt nebo záznam;
+- formulář používaný pro vstup poptávky;
+- checklist před publikací;
+- definice hotovo pro konkrétní typ práce;
+- index šablon nebo playbooků;
+- datová mapa nebo event slovník;
+- sales karta;
+- support makro;
+- provozní runbook.
+
+Pravidlo:
+
+```text
+Když se podobná práce stane příště, nový stav se použije přirozeně.
+```
+
+Pokud musí vlastník změnu lidem připomínat v chatu, není ještě v systému. Pokud ji lidé najdou při běžném založení položky, je na správném místě.
+
+Příklad dobrého zásahu:
+
+```text
+Výchozí karta nové šablony obsahuje povinné řádky:
+- Platí od:
+- Vlastník:
+- Další kontrola:
+```
+
+Příklad slabého zásahu:
+
+```text
+Do poznámek z kontroly rytmu napsat, že se má u nových šablon pamatovat na datum platnosti.
+```
+
+Poznámka může být užitečná jako stopa rozhodnutí. Nemá ale nahradit změnu pracovního místa.
+
+### Privacy-first hranice systémové úpravy
+
+Systémová úprava má snižovat tření, ne rozšiřovat dohled. U každé změny napište, co kvůli ní nezačnete sbírat.
+
+Příklady:
+
+```text
+Nepřidáváme měření otevření šablon.
+```
+
+```text
+Neukládáme osobní jména autorů do reportingu; vlastník je role v kanonické kartě.
+```
+
+```text
+Nevytváříme screenshoty před a po. Stačí jednovětý záznam v pracovním logu.
+```
+
+```text
+Nezavádíme nový nástroj, pokud stačí upravit existující šablonu.
+```
+
+Privacy-first hranice má být konkrétní. Věta "budeme opatrní s daty" je moc měkká. Lepší je napsat, který tracker, export, screenshot, osobní údaj nebo paralelní evidenci nepřidáte.
+
+### Ověřte změnu v nejbližším normálním použití
+
+Ověření nemá být další workshop. Má proběhnout při práci, která by se stejně stala.
+
+Příklad:
+
+```text
+Ověření:
+Při založení další nové šablony zkontrolovat, že výchozí karta obsahuje pole "Platí od", vlastník a další kontrola bez ručního připomínání.
+```
+
+Ověření má odpovědět na tři otázky:
+
+1. Použil člověk nové kanonické místo přirozeně?
+2. Snížila úprava původní tření?
+3. Nevznikla kvůli ověření nová zbytečná datová stopa?
+
+Pokud ano, změna může jít do běžné údržby. Pokud ne, vraťte se k místu vzniku. Neznamená to automaticky větší projekt. Často stačí druhý přesnější zásah.
+
+### Karta systémové úpravy
+
+```text
+Datum:
+Nález z kontroly rytmu:
+Opakované tření:
+Kde se problém projevil:
+Kde problém vzniká:
+Jedna systémová věta:
+Kanonické místo:
+Co se mění:
+Co se nemění:
+Co jde do samostatné fronty:
+Privacy-first hranice:
+Ověření při normálním použití:
+Vlastník:
+Termín:
+Stav: připraveno / provedeno / ověřit / vrátit k upřesnění
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Nález z kontroly rytmu: nové šablony někdy nevznikají s poli potřebnými pro běžnou údržbu
+Opakované tření: při měsíční kontrole se musí dohledávat platnost a vlastník nové šablony
+Kde se problém projevil: v indexu šablon
+Kde problém vzniká: ve výchozí kartě nové šablony
+Jedna systémová věta: když vzniká nová interní šablona, musí výchozí karta obsahovat pole "Platí od", vlastník a další kontrola, aby šla při měsíční údržbě ověřit bez čtení historie
+Kanonické místo: výchozí karta nové šablony
+Co se mění: tři povinné řádky v kartě
+Co se nemění: archiv starých šablon, celý index, onboarding a měření používání
+Co jde do samostatné fronty: podobné názvy archivovaných šablon
+Privacy-first hranice: bez měření otevření šablon, bez sledování autorů, bez screenshotů a bez nového nástroje
+Ověření při normálním použití: při příštím založení šablony zkontrolovat, že pole vznikla automaticky a stačila pro měsíční údržbu
+Vlastník: provozní lead
+Termín: do dalšího založení nové šablony
+Stav: připraveno
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu kartu rytmu z Přílohy NZ.
+
+1. Vyberte jedno opakující se tření.
+2. Oddělte místo projevu od místa vzniku.
+3. Napište jednu systémovou větu.
+4. Určete kanonické místo, kudy práce příště projde.
+5. Napište, co se mění a co se výslovně nemění.
+6. Vedlejší témata dejte do samostatné fronty nebo je vědomě zahoďte.
+7. Napište privacy-first hranici jednou konkrétní větou.
+8. Určete ověření při nejbližším normálním použití.
+9. Přidělte vlastníka a termín.
+10. Po provedení nechte změnu ověřit v běžném rytmu, ne na zvláštní schůzce.
+
+Výstup:
+
+```text
+Jedno opakované tření z kontroly rytmu je převedené do malé systémové úpravy na kanonickém místě, s jasnou hranicí rozsahu, privacy-first omezením a ověřením při běžném použití.
+```
+
+### Checklist kapitoly
+
+- Vybrali jste jen jedno opakující se tření?
+- Rozlišili jste místo projevu a místo vzniku?
+- Je systémová úprava napsaná jednou konkrétní větou?
+- Má věta spouštěč, místo zásahu, změnu a důvod?
+- Je určeno kanonické místo, kudy práce příště přirozeně projde?
+- Je jasně napsané, co se v této iteraci nemění?
+- Jsou vedlejší témata oddělená od hlavní úpravy?
+- Neřešíte celý systém tam, kde stačí upravit vstupní kartu, šablonu nebo checklist?
+- Je privacy-first hranice konkrétní?
+- Nepřidává úprava nový tracker, export, screenshot, osobní pole nebo dodavatele bez jasného účelu?
+- Je ověření navázané na nejbližší normální použití?
+- Má úprava vlastníka, termín a stav?
+- Půjde po ověření uzavřít bez další vrstvy evidence?
+
+Jedna systémová úprava má být malá, ale nesmí být kosmetická. Míří do místa, kde se práce opakuje. Když se povede, příští člověk nemusí být disciplinovanější, informovanější ani opatrnější. Prostě dostane lepší výchozí stav. To je nejpraktičtější forma provozní kvality.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha OA o převodu kontroly údržbového rytmu do jedné systémové úpravy: místo vzniku tření, systémová věta, hranice rozsahu, kanonické místo, privacy-first omezení, ověření při běžném použití, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NZ o kontrole údržbového rytmu po několika uzavřených akcích: malé kontrolní okno, kanonická místa, opakující se tření, privacy-first datová stopa, rušení a slučování nadbytečných vrstev, jedna další změna rytmu, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NY o uzavření potvrzené proveditelné akce do běžné údržby: potvrzený výsledek, přepis kanonického místa, zavření dočasných stop, práce s vedlejšími nálezy, napojení na běžnou kontrolu, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NX o ověření proveditelné údržbové akce po prvním běžném použití: návrat k definici hotovo, výběr normálního použití, tři signály nalezení/rozhodnutí/stopy, oddělení vedlejších nálezů, rozhodovací stavy, privacy-first ověřovací stopa, karta, mini workshop a checklist.
