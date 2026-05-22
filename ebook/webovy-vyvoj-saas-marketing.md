@@ -106957,8 +106957,331 @@ Uzavřená lokální oprava byla zkontrolovaná v normálním rytmu, přechodov�
 
 První běžná kontrola po uzavření lokální opravy je malý test provozní dospělosti. Když oprava drží, neoslavujte ji další evidencí. Když po ní zůstaly drobné stopy, ukliďte je. Když se ukáže širší problém, pojmenujte ho poctivě. A když se nestalo nic zvláštního, berte to jako výborný výsledek: systém se zlepšil a přestal vyžadovat pozornost.
 
+## Příloha NU: Převod nálezu z první běžné kontroly do údržbové fronty
+
+Příloha NT ukázala, že první běžná kontrola po uzavření lokální opravy může skončit různě. Někdy oprava drží a není co řešit. Někdy stačí smazat zbylou přechodovou stopu. A někdy kontrola odhalí, že původní problém se vrací, nebo že se vedle něj objevil nový samostatný nález. Právě pro tu třetí situaci slouží tato příloha.
+
+Cílem není znovu otevřít starou opravu jen proto, že kolem ní vzniklo napětí. Cílem je převést nález do běžné údržbové fronty tak, aby soutěžil s ostatní prací podle dopadu, ne podle toho, že je zrovna čerstvě v hlavě.
+
+Otázka této přílohy:
+
+```text
+Jak převést nález z první běžné kontroly po uzavřené lokální opravě do údržbové fronty tak, aby měl jasný rozsah, dopad, privacy-first hranici a neotevíral starou smyčku zbytečně znovu?
+```
+
+Výstupem je karta údržbového nálezu:
+
+```text
+Nález:
+Vzešel z kontroly:
+Vztah ke staré opravě:
+Typ nálezu:
+Dopad na práci:
+Dopad na zákazníka nebo tým:
+Datová stopa:
+Nejmenší další rozhodnutí:
+Co se teď neotevírá:
+Priorita:
+Vlastník fronty:
+Datum návratu:
+```
+
+Codyho komentář: údržbová fronta není skládka výčitek. Když do ní dáte všechno, co někoho napadlo při kontrole, brzy z ní vznikne seznam neurčitých pocitů. Dobrý nález má pracovní situaci, dopad a nejbližší rozhodnutí. Bez toho je to jen poznámka s batohem.
+
+### Nejprve určete vztah ke staré opravě
+
+Nález z Přílohy NT může mít čtyři různé vztahy k uzavřené lokální opravě.
+
+```text
+Návrat původního problému:
+Staré tření se znovu objevilo ve stejné pracovní situaci.
+```
+
+Příklad:
+
+```text
+Archivní exportní checklist se po uzavření znovu zobrazuje jako aktivní postup.
+```
+
+```text
+Nedokončené dočištění:
+Oprava drží, ale zůstala přechodová stopa bez účelu.
+```
+
+Příklad:
+
+```text
+Aktuální postup je správně v indexu, ale starý úkol "sledovat export" zůstal otevřený.
+```
+
+```text
+Nový samostatný nález:
+Oprava drží, ale kontrola odhalila jiné tření mimo původní rozsah.
+```
+
+Příklad:
+
+```text
+Archiv je správně označený, ale v celém indexu šablon chybí jednotné datum platnosti.
+```
+
+```text
+Provozní šum:
+Někdo se chvíli orientoval, ale systém fungoval a není potřeba zásah.
+```
+
+Příklad:
+
+```text
+Nový člověk hledal správnou sekci déle, ale podle indexu se rozhodl správně a nepoužil starý dokument.
+```
+
+Do údržbové fronty patří první a třetí stav. Druhý stav často stačí dočistit hned, pokud je jasné, co smazat nebo přepsat. Čtvrtý stav se nezapisuje jako úkol. Zapište ho maximálně do krátké poznámky, pokud pomáhá kalibrovat další kontroly.
+
+### Přepište nález do pracovní věty
+
+Nález nesmí znít jako komentář z porady. Musí popsat konkrétní pracovní situaci.
+
+Slabý zápis:
+
+```text
+Index šablon je pořád trochu matoucí.
+```
+
+Silnější zápis:
+
+```text
+Při kvartální kontrole šablon není u tří aktivních dokumentů vidět datum platnosti, takže nový člověk nepozná, která verze je aktuální bez čtení changelogu.
+```
+
+Dobrá pracovní věta má čtyři části:
+
+1. Kdy se problém objeví.
+2. Koho brzdí.
+3. Jaké rozhodnutí ztěžuje.
+4. Jaká stopa nebo důkaz to ukázaly.
+
+Šablona:
+
+```text
+Když [role/situace] potřebuje [pracovní rozhodnutí], brzdí ji [konkrétní tření], protože [viditelná příčina]. Ukázalo se to při [kontrola/použití].
+```
+
+Vyplněný příklad:
+
+```text
+Když nový provozní člověk při kvartální kontrole hledá aktuální šablonu exportu, brzdí ho chybějící datum platnosti u aktivních dokumentů, protože musí otevřít changelog. Ukázalo se to při první běžné kontrole po uzavření lokální opravy archivního checklistu.
+```
+
+Takový zápis už umí vstoupit do fronty. Není to celé řešení, ale je jasné, co se má rozhodnout.
+
+### Oddělte dopad od čerstvosti
+
+Nález z poslední kontroly působí důležitě hlavně proto, že je nový. To je normální, ale špatný základ pro prioritizaci. Před zařazením do fronty mu dejte stejný metr jako ostatním položkám.
+
+Použijte jednoduché skóre 0 až 2:
+
+```text
+Dopad na zákazníka:
+0 žádný přímý dopad
+1 nepřímý dopad přes tým nebo kvalitu výstupu
+2 zákazník může dostat horší, pomalejší nebo nejistější výstup
+
+Dopad na tým:
+0 jen kosmetická nejasnost
+1 zpomaluje opakovanou práci
+2 vede k chybám, duplicitám nebo ručnímu obcházení systému
+
+Frekvence:
+0 jednorázová situace
+1 občasná situace v běžném rytmu
+2 opakuje se v kritickém nebo častém workflow
+
+Datové riziko:
+0 nepřidává ani nedrží citlivá data
+1 drží dočasnou stopu bez jasného data
+2 může vést ke zbytečnému sběru, exportu nebo sdílení osobních či zákaznických dat
+```
+
+Součet není matematická pravda. Je to brzda proti tomu, aby nejhlasitější nebo nejnovější nález automaticky předběhl důležitější práci.
+
+Praktické pravidlo:
+
+```text
+Pokud má nález nízký dopad a nízké datové riziko, dejte mu datum návratu místo okamžité opravy.
+Pokud má vysoké datové riziko, řešte nejdřív omezení stopy, i kdyby produktový dopad nebyl dramatický.
+```
+
+Privacy-first provoz občas znamená opravit "nudnou" retenční nebo přístupovou věc dřív než viditelnější UX detail. Nudné věci mají často tu výhodu, že později nevybuchují v kalendáři.
+
+### Zapište nejmenší další rozhodnutí
+
+Údržbová fronta nemá obsahovat celé řešení. Má obsahovat další rozhodnutí, které umožní práci posunout.
+
+Příliš velký další krok:
+
+```text
+Předělat celý index šablon.
+```
+
+Menší další rozhodnutí:
+
+```text
+Rozhodnout, zda datum platnosti patří do názvu dokumentu, metadat indexu nebo úvodního řádku šablony.
+```
+
+Ještě lepší:
+
+```text
+Na třech aktivních šablonách ověřit, jestli stačí doplnit pole "Platí od" do indexu.
+```
+
+Tím nevzniká velký projekt. Vzniká malý test, který ukáže, jestli nález opravdu potřebuje úpravu standardu, nebo jen lokální doplnění.
+
+### Určete, co se teď neotevírá
+
+Každý nález má tendenci tahat za okolní témata. Pokud chybí datum platnosti, někdo navrhne přejmenovat šablony. Pak sloučit archiv. Pak přepsat onboarding. Pak sjednotit celý znalostní systém. A najednou drobný nález přinesl batoh práce na kvartál.
+
+Proto karta musí obsahovat větu:
+
+```text
+Co se teď neotevírá:
+```
+
+Příklady:
+
+```text
+Neotevíráme celou strukturu indexu, pouze viditelnost platnosti u aktivních šablon.
+```
+
+```text
+Neřešíme archivní dokumenty, pokud nejsou ve standardní pracovní cestě.
+```
+
+```text
+Neměníme onboardingovou trasu, dokud se neukáže, že problém brzdí nové lidi i po úpravě indexu.
+```
+
+Tato věta není alibismus. Je to ochrana fronty. Údržba má zlepšovat systém po dávkách, které tým umí dokončit.
+
+### Privacy-first zařazení do fronty
+
+Při převodu nálezu do fronty zkontrolujte, jestli kvůli němu nevzniká zbytečná datová stopa.
+
+Nepřidávejte automaticky:
+
+- screenshoty celé obrazovky s osobními údaji;
+- exporty komentářů z interních nástrojů;
+- seznam lidí, kteří udělali chybu;
+- záznamy obrazovky z běžné práce;
+- kopie zákaznických dokumentů;
+- nové analytické eventy jen kvůli jedné nejasnosti.
+
+Stačí často kratší důkaz:
+
+```text
+Důkaz:
+Při kontrole 2026-05-22 nebylo u tří aktivních šablon v indexu vidět datum platnosti. Konkrétní názvy dokumentů jsou v interní údržbové kartě, bez kopírování obsahu dokumentů.
+```
+
+Pokud musíte uchovat citlivější podklad, napište:
+
+```text
+Účel:
+Kdo má přístup:
+Datum smazání:
+Kde je záznam:
+```
+
+Bez těchto čtyř polí podklad do fronty nepatří.
+
+### Karta údržbového nálezu
+
+```text
+Datum:
+Nález:
+Vzešel z kontroly:
+Vztah ke staré opravě: návrat původního problému / nový samostatný nález
+Pracovní situace:
+Koho brzdí:
+Jaké rozhodnutí ztěžuje:
+Viditelná příčina:
+Důkaz bez zbytečných dat:
+Dopad na zákazníka: 0 / 1 / 2
+Dopad na tým: 0 / 1 / 2
+Frekvence: 0 / 1 / 2
+Datové riziko: 0 / 1 / 2
+Nejmenší další rozhodnutí:
+Co se teď neotevírá:
+Priorita ve frontě:
+Vlastník fronty:
+Datum návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Nález: u aktivních šablon není vidět datum platnosti
+Vzešel z kontroly: první běžná kontrola po uzavření lokální opravy archivního exportního checklistu
+Vztah ke staré opravě: nový samostatný nález
+Pracovní situace: kvartální kontrola šablon
+Koho brzdí: nový provozní člověk
+Jaké rozhodnutí ztěžuje: poznat, která šablona je aktuální bez čtení changelogu
+Viditelná příčina: index ukazuje názvy dokumentů, ale ne pole "Platí od"
+Důkaz bez zbytečných dat: poznámka z kontroly bez screenshotů a bez kopírování obsahu dokumentů
+Dopad na zákazníka: 1
+Dopad na tým: 1
+Frekvence: 1
+Datové riziko: 0
+Nejmenší další rozhodnutí: ověřit na třech aktivních šablonách, zda stačí přidat pole "Platí od" do indexu
+Co se teď neotevírá: neměníme archiv, onboarding ani názvosloví všech dokumentů
+Priorita ve frontě: nízká až střední, vrátit se při nejbližší údržbě indexu
+Vlastník fronty: provozní lead
+Datum návratu: příští měsíční údržba indexu
+```
+
+### Mini workshop na 15 minut
+
+Vezměte jeden nález z Přílohy NT, který nebyl jen dočištěním přechodové stopy.
+
+1. Pojmenujte vztah ke staré opravě.
+2. Rozhodněte, jestli jde o návrat původního problému, nebo nový samostatný nález.
+3. Přepište nález do pracovní věty.
+4. Určete, koho brzdí a jaké rozhodnutí ztěžuje.
+5. Zapište důkaz bez zbytečných dat.
+6. Odhadněte dopad na zákazníka, tým, frekvenci a datové riziko.
+7. Napište nejmenší další rozhodnutí.
+8. Doplňte větu, co se teď neotevírá.
+9. Zařaďte nález do fronty podle dopadu, ne podle čerstvosti.
+10. Určete vlastníka fronty a datum návratu.
+
+Výstup:
+
+```text
+Nález z běžné kontroly je převedený do údržbové fronty jako samostatná pracovní položka s jasným dopadem, hranicí rozsahu a privacy-first stopou.
+```
+
+### Checklist kapitoly
+
+- Je jasné, z jaké běžné kontroly nález vznikl?
+- Rozlišili jste návrat původního problému, nedokončené dočištění, nový samostatný nález a provozní šum?
+- Nepíšete do fronty něco, co stačí rovnou smazat nebo dočistit?
+- Je nález přepsaný do konkrétní pracovní věty?
+- Je jasné, koho brzdí a jaké rozhodnutí ztěžuje?
+- Má nález stručný důkaz bez zbytečných osobních nebo zákaznických dat?
+- Je dopad posouzený podle zákazníka, týmu, frekvence a datového rizika?
+- Nepředbíhá nález ostatní práci jen proto, že je čerstvý?
+- Je napsané nejmenší další rozhodnutí?
+- Je zapsané, co se teď neotevírá?
+- Má položka vlastníka fronty a datum návratu?
+- Nevznikly kvůli zařazení do fronty screenshoty, exporty nebo nové trackery bez účelu?
+
+Převod nálezu do údržbové fronty je malý, ale důležitý akt dospělosti systému. Tým uzná, že něco stojí za pozornost, ale zároveň odmítne paniku, přeskakování priorit a sběr důkazů pro pocit bezpečí. Dobrý nález není ten, který vyhraje hlasitostí. Dobrý nález je ten, který jde férově porovnat, rozhodnout a dokončit.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NU o převodu nálezu z první běžné kontroly po lokální opravě do údržbové fronty: rozlišení návratu původního problému, dočištění, nového samostatného nálezu a provozního šumu, pracovní věta nálezu, posouzení dopadu, nejmenší další rozhodnutí, hranice rozsahu, privacy-first zařazení, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NT o první běžné kontrole po uzavření lokální opravy: návrat do normálního rytmu, kontrola kanonického místa, zbytky přechodové stopy, rozlišení návratu tření od provozního šumu, privacy-first úklid dočasných důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NS o uzavření ověřené lokální opravy do běžné údržby: potvrzený výsledek jednou větou, přepis kanonického místa, zavření přechodových stop, privacy-first úklid dočasných důkazů, napojení na běžnou kontrolu, uzavírací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NR o ověření lokální opravy po dalším běžném použití: návrat k opravné větě, výběr skutečného běžného použití, sledování pracovní cesty místo poslušnosti, rozhodnutí Uzavřít/Ještě jednou lokálně opravit/Vrátit do údržbové fronty, privacy-first ověření bez zbytečných důkazů, karta, mini workshop a checklist.
