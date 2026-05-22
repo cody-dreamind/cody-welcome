@@ -106646,8 +106646,320 @@ Ověřená lokální oprava je propsaná do zdroje pravdy, přechodové stopy js
 
 Uzavření ověřené lokální opravy je dobrý okamžik pro disciplínu. Nepřidávat další vrstvu, když stačí jedna věta. Nechat současný stav na správném místě. Smazat dočasné stopy. Vrátit pozornost do běžné práce. Tak vypadá údržba, která pomáhá systému dýchat místo toho, aby mu lepila další štítky na čelo.
 
+## Příloha NT: První běžná kontrola po uzavření lokální opravy
+
+Příloha NS zavřela ověřenou lokální opravu a vrátila ji do běžné údržby. To je správný konec speciální pozornosti, ale ještě ne důkaz, že se systém opravdu uklidnil. První běžná kontrola po uzavření ukáže, jestli oprava zapadla do normální práce, nebo jestli kolem ní zůstala skrytá výjimka, dočasná poznámka, ruční připomínka nebo nový drobný zmatek.
+
+Tato příloha neotevírá opravu znovu. Je to kontrola návratu do normálu. Tým se nedívá na to, jestli byla karta NS pěkně vyplněná, ale jestli člověk při běžné kontrole najde aktuální stav na kanonickém místě bez čtení starých opravných stop.
+
+Otázka této přílohy:
+
+```text
+Drží uzavřená lokální oprava při první běžné kontrole jako součást normální údržby, bez zvláštního vysvětlování, nové evidence a návratu přechodových stop?
+```
+
+Výstupem je krátká kontrolní karta:
+
+```text
+Uzavřená lokální oprava:
+Běžná kontrola:
+Kanonické místo:
+Co mělo držet:
+Co se stalo v praxi:
+Zbylé přechodové stopy:
+Nové tření:
+Datová stopa kontroly:
+Rozhodnutí:
+Další krok:
+Vlastník:
+Termín:
+```
+
+První běžná kontrola má být skoro nudná. Pokud všechno funguje, výsledek je krátký zápis a konec. Nehledejte další práci jen proto, že jste si na téma vzpomněli. Dobrá údržba pozná rozdíl mezi signálem a chutí ještě něco vylepšit.
+
+Codyho komentář: největší kompliment pro lokální opravu je, když si jí při další kontrole skoro nikdo nevšimne. Prostě se jde správnou cestou, starý zmatek nepřekáží a nikdo nemusí říkat "jo, tohle jsme minule opravovali". To je méně dramatické než velké odhalení na poradě, ale provoz má drama dávkovat opatrně. Ideálně pipetou.
+
+### Vraťte se k běžnému rytmu, ne k opravné kartě
+
+Začněte kontrolou, která by proběhla i bez lokální opravy:
+
+- kvartální kontrola šablon;
+- měsíční review nabídky;
+- běžný onboarding nové role;
+- revize datové mapy;
+- kontrola interního indexu;
+- údržba sales materiálů;
+- pravidelný úklid dočasných podkladů.
+
+Nevhodný vstup:
+
+```text
+Otevřeme kartu lokální opravy a projdeme, jestli je všechno podle ní.
+```
+
+Vhodný vstup:
+
+```text
+Při běžné kvartální kontrole šablon použijeme normální postup a všimneme si, jestli uzavřená oprava drží bez zvláštního režimu.
+```
+
+Rozdíl je jemný, ale prakticky důležitý. Když začnete opravnou kartou, lidé se přizpůsobí tomu, co vědí, že se kontroluje. Když začnete běžnou prací, vidíte systém tak, jak ho potká člověk, který nemá v hlavě historii posledních tří příloh.
+
+### Zkontrolujte kanonické místo
+
+Uzavřená lokální oprava měla v Příloze NS skončit v jednom kanonickém místě. První běžná kontrola ověřuje, jestli to opravdu stačí.
+
+Ptejte se:
+
+1. Je aktuální stav vidět na správném místě?
+2. Je stará stopa označená jako archiv, smazaná nebo odsunutá mimo pracovní cestu?
+3. Potřebuje člověk číst opravnou nebo ověřovací kartu?
+4. Je changelog jen podpůrná stopa, ne nový návod?
+5. Neexistují dvě místa, která tvrdí něco podobného trochu jinak?
+
+Příklad:
+
+```text
+Kanonické místo:
+Index šablon.
+
+Co mělo držet:
+Aktuální exportní postup je jediná pracovní cesta a archivní checklist je jasně označený jako archiv.
+
+Kontrola:
+Při kvartální kontrole šablon člověk otevřel index, našel aktuální auditní šablonu a nemusel číst opravnou kartu ani ověřovací poznámku.
+```
+
+To je dobrý stav. Oprava se rozpustila do zdroje pravdy. Přesně tam měla skončit.
+
+Varovný stav:
+
+```text
+Aktuální postup je v indexu, ale člověk musí otevřít changelog, aby pochopil, proč se archivní checklist nemá používat.
+```
+
+Tady uzavření ještě nedrží. Ne proto, že by oprava selhala úplně, ale protože zdroj pravdy stále spoléhá na přechodovou stopu.
+
+### Hledejte zbytky přechodové stopy
+
+Zbytky přechodové stopy jsou malé věci, které naznačují, že oprava sice byla uzavřená, ale systém ji pořád nese jako zvláštní případ.
+
+Typické zbytky:
+
+- otevřený úkol "ještě sledovat";
+- komentář u šablony, který odkazuje na starou opravu;
+- dočasný screenshot bez retenčního data;
+- ruční připomínka v kalendáři;
+- duplicitní poznámka v indexu;
+- starý odkaz v onboardingové trase;
+- interní zpráva připnutá déle, než bylo potřeba;
+- zvláštní kontrolní řádek pro jednu drobnou opravu.
+
+U každého zbytku vyberte stav:
+
+```text
+Smazat:
+Stopa už nemá pracovní účel.
+
+Přepsat do kanonického místa:
+Stopa obsahuje užitečnou větu, ale žije mimo zdroj pravdy.
+
+Nechat do termínu:
+Stopa má jasný účel a datum smazání.
+
+Vrátit do fronty:
+Stopa ukazuje širší problém, který nepatří do uzavřené lokální opravy.
+```
+
+Nejčastější chyba je stav "nechat pro jistotu". Ten zní opatrně, ale v praxi znamená, že se výjimka dál připomíná každému, kdo kolem ní projde. Pokud stopa nemá účel, vlastníka a termín, smažte ji nebo ji přepište na správné místo.
+
+### Rozlišujte návrat tření od běžného provozního šumu
+
+Při první běžné kontrole se může objevit něco drobného. Ne každá drobnost znamená, že se lokální oprava vrátila.
+
+Návrat původního tření:
+
+```text
+Archivní checklist se znovu zobrazuje jako aktivní exportní postup.
+```
+
+Vedlejší tření:
+
+```text
+Archiv je jasně označený, ale v indexu chybí krátké datum, od kdy platí nová šablona.
+```
+
+Běžný provozní šum:
+
+```text
+Nový člověk se chvíli orientoval v celé sadě šablon, ale správnou exportní cestu našel bez záměny s archivem.
+```
+
+První stav znamená, že uzavřená oprava nedrží a téma se má vrátit do údržbové fronty nebo do jedné jasné korekce podle rozsahu. Druhý stav může být drobné tření, ale nemusí patřit do stejné smyčky. Třetí stav je normální učení systému. Neopravujte systém pokaždé, když někdo chvíli přemýšlí.
+
+Praktická otázka:
+
+```text
+Brzdí pozorované tření stejnou pracovní situaci, kvůli které lokální oprava vznikla?
+```
+
+Pokud ne, nezavírejte ho do staré karty. Buď ho nechte být, nebo ho zapište jako nový nález do běžné údržbové fronty.
+
+### Privacy-first kontrola po návratu do normálu
+
+První běžná kontrola po uzavření opravy má potvrdit i datovou hygienu. Nejde jen o to, jestli text nebo odkaz sedí. Jde o to, jestli po drobné opravě nezůstaly důkazy, které už nikdo nepotřebuje.
+
+Projděte:
+
+- dočasné screenshoty;
+- exporty výsledků hledání;
+- pracovní kopie dokumentů;
+- seznamy lidí, kteří změnu ověřovali;
+- interní URL v poznámkách;
+- zákaznické příklady použité jen pro ověření;
+- staré komentáře s osobními údaji;
+- připnuté zprávy nebo úkoly bez účelu.
+
+Silný zápis:
+
+```text
+Při první běžné kontrole nebyly nalezeny žádné dočasné podklady k lokální opravě. Changelog obsahuje jen jednu větu o výsledku a běžný uživatel pracuje z indexu šablon.
+```
+
+Slabý zápis:
+
+```text
+Screenshoty zatím necháme, kdyby se to někdy hodilo.
+```
+
+"Někdy" není retenční plán. Je to skříň bez dveří. Pokud podklad opravdu musí zůstat, napište účel a datum:
+
+```text
+Screenshot výsledku vyhledávání ponechán do 2026-06-30 kvůli kontrole interního vyhledávacího indexu, potom smazat.
+```
+
+U většiny lokálních oprav ale žádný screenshot nemá přežít první běžnou kontrolu.
+
+### Rozhodnutí po první běžné kontrole
+
+Po kontrole vyberte jeden stav.
+
+```text
+Drží v běžné údržbě:
+Oprava je součástí kanonického místa, přechodové stopy jsou zavřené a nevzniklo nové tření.
+```
+
+Tento stav téma uzavírá. Další kontrola proběhne už jen v normálním rytmu daného místa.
+
+```text
+Dočistit přechodovou stopu:
+Samotná oprava drží, ale zůstala dočasná poznámka, screenshot, odkaz nebo úkol bez účelu.
+```
+
+Tady neotvírejte opravu znovu. Dočistěte stopu a zapište krátký výsledek.
+
+```text
+Vrátit do údržbové fronty:
+Původní tření se vrátilo nebo kontrola ukázala širší problém.
+```
+
+Tento stav znamená, že lokální řešení nebylo dostatečné. Nepřidávejte další drobnou náplast automaticky. Pojmenujte problém a nechte ho soutěžit s ostatními nálezy podle dopadu.
+
+```text
+Zapsat nový samostatný nález:
+Oprava drží, ale objevilo se jiné téma mimo původní rozsah.
+```
+
+To je časté a zdravé. Systém se zlepšuje po jednotlivých rozhodnutích, ne tím, že každá kontrola spolyká celý okolní svět.
+
+### Kontrolní karta
+
+```text
+Datum:
+Navazuje na uzavření:
+Uzavřená lokální oprava:
+Běžná kontrola:
+Kanonické místo:
+Co mělo držet:
+Co se stalo v praxi:
+Potřeboval člověk přechodovou kartu:
+Zbylé přechodové stopy:
+Privacy-first úklid:
+Nové nebo vedlejší tření:
+Rozhodnutí: Drží v běžné údržbě / Dočistit přechodovou stopu / Vrátit do údržbové fronty / Zapsat nový samostatný nález
+Další krok:
+Co se nemění:
+Vlastník:
+Termín:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Navazuje na uzavření: přejmenování archivního exportního checklistu
+Uzavřená lokální oprava: archivní checklist už nemá působit jako aktuální exportní postup
+Běžná kontrola: kvartální kontrola šablon
+Kanonické místo: index šablon
+Co mělo držet: aktuální auditní šablona je jediná pracovní cesta a archiv je jasně označený
+Co se stalo v praxi: člověk našel aktuální šablonu přes index a archivní dokument neotevřel jako možnou pracovní cestu
+Potřeboval člověk přechodovou kartu: ne
+Zbylé přechodové stopy: stará připnutá poznámka v úkolu
+Privacy-first úklid: připnutá poznámka smazána, žádné screenshoty nezůstávají
+Nové nebo vedlejší tření: žádné
+Rozhodnutí: Dočistit přechodovou stopu
+Další krok: odstranit připnutou poznámku a nechat téma dál jen v běžné kvartální kontrole
+Co se nemění: neměníme index, archivní strukturu ani vyhledávací pravidla
+Vlastník: provozní lead
+Termín: hotovo při kontrole
+```
+
+Všimněte si, že rozhodnutí není dramatické. Oprava drží, jen se dočistila stopa. Přesně tak má první běžná kontrola vypadat: krátce najít zbytek přechodového režimu, uklidit ho a nevyrobit novou kapitolu práce.
+
+### Mini workshop na 12 minut
+
+Vezměte jednu lokální opravu uzavřenou podle Přílohy NS.
+
+1. Najděte nejbližší běžnou kontrolu, do které oprava patří.
+2. Projděte kontrolu normální cestou, ne podle opravné karty.
+3. Ověřte kanonické místo.
+4. Zapište, jestli člověk potřeboval číst přechodové podklady.
+5. Najděte zbytky přechodové stopy.
+6. Rozhodněte, co se smaže, přepíše nebo ponechá do konkrétního termínu.
+7. Rozlište návrat původního tření, vedlejší tření a běžný provozní šum.
+8. Proveďte privacy-first úklid dočasných důkazů.
+9. Vyberte jeden stav po kontrole.
+10. Zapište, co se nemění.
+11. Přiřaďte vlastníka a termín jen pro skutečný další krok.
+12. Zavřete téma zpět do běžného rytmu.
+
+Výstup:
+
+```text
+Uzavřená lokální oprava byla zkontrolovaná v normálním rytmu, přechodové stopy jsou pryč nebo mají termín a další práce nevzniká mimo běžnou údržbu.
+```
+
+### Checklist kapitoly
+
+- Probíhá kontrola v běžném rytmu, ne jako speciální návrat k opravné kartě?
+- Je jasné, na kterou uzavřenou lokální opravu navazujete?
+- Ověřili jste kanonické místo?
+- Najde člověk aktuální stav bez čtení přechodových karet?
+- Nezůstal otevřený úkol, připnutá zpráva nebo ruční připomínka bez účelu?
+- Jsou dočasné screenshoty, exporty a pracovní kopie smazané nebo mají retenční datum?
+- Rozlišili jste návrat původního tření od vedlejšího tření a běžného šumu?
+- Nevzniká další lokální oprava jen ze zvyku?
+- Je případný nový nález zapsaný samostatně, mimo starou kartu?
+- Je rozhodnutí po kontrole jednoznačné?
+- Je zapsané, co se nemění?
+- Má další krok vlastníka a termín?
+- Vrací se téma po kontrole zpět do normální údržby?
+
+První běžná kontrola po uzavření lokální opravy je malý test provozní dospělosti. Když oprava drží, neoslavujte ji další evidencí. Když po ní zůstaly drobné stopy, ukliďte je. Když se ukáže širší problém, pojmenujte ho poctivě. A když se nestalo nic zvláštního, berte to jako výborný výsledek: systém se zlepšil a přestal vyžadovat pozornost.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NT o první běžné kontrole po uzavření lokální opravy: návrat do normálního rytmu, kontrola kanonického místa, zbytky přechodové stopy, rozlišení návratu tření od provozního šumu, privacy-first úklid dočasných důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NS o uzavření ověřené lokální opravy do běžné údržby: potvrzený výsledek jednou větou, přepis kanonického místa, zavření přechodových stop, privacy-first úklid dočasných důkazů, napojení na běžnou kontrolu, uzavírací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NR o ověření lokální opravy po dalším běžném použití: návrat k opravné větě, výběr skutečného běžného použití, sledování pracovní cesty místo poslušnosti, rozhodnutí Uzavřít/Ještě jednou lokálně opravit/Vrátit do údržbové fronty, privacy-first ověření bez zbytečných důkazů, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NQ o převodu drobného tření po běžné kontrole do jedné lokální opravy: vstupní brána pro stav Drží s drobným třením, opravná věta, nejbližší místo zásahu, zákaz rozšíření, ověření dalším běžným použitím, privacy-first kontrola, opravná karta, mini workshop a checklist.
