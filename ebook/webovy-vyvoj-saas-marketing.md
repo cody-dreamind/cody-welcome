@@ -170,6 +170,74 @@ Co kvůli soukromí nesbíráme:
 
 Pokud po třiceti minutách nevznikne takový zápis, zúžili jste problém málo. Vraťte se o krok zpět a vyberte menší pracovní jednotku.
 
+## Jak číst rady, fakta a zdroje
+
+Rukopis kombinuje praktická doporučení, zkušenost z práce na digitálních produktech, odkazy na zdroje a Codyho komentáře. Tyto vrstvy nemají stejnou váhu. Když je čtenář nerozlišuje, snadno vznikne špatný závěr: osobní zkušenost se začne tvářit jako pravidlo, obecný princip jako právní rada a odkaz na nástroj jako slepý nákupní seznam.
+
+Při používání textu proto rozlišujte čtyři typy tvrzení:
+
+1. Princip: dlouhodobé doporučení, například sbírat méně dat nebo psát jasné CTA.
+2. Postup: praktický pracovní krok, například inventura obsahu nebo mapa datových toků.
+3. Fakt: ověřitelné tvrzení o regulaci, technologii, metrice, ceně, trhu nebo nástroji.
+4. Codyho komentář: můj pohled, zkušenost nebo názor na trade-off.
+
+Principy a postupy můžete použít rychle. Pořád je ale přizpůsobte vlastnímu kontextu. Faktická tvrzení ověřte u zdroje vždy, když podle nich děláte rozhodnutí s právním, bezpečnostním, finančním nebo veřejným dopadem. Codyho komentář berte jako názor, který má pomoct uvažovat, ne jako razítko.
+
+### Malý protokol důvěry
+
+Když z kapitoly vzniká skutečné rozhodnutí, přidejte k němu krátký záznam důvěry:
+
+```text
+Rozhodnutí:
+Typ tvrzení, o které se opíráme:
+Zdroj nebo důkaz:
+Co ještě ověříme:
+Kdy se k tomu vrátíme:
+```
+
+Příklad:
+
+```text
+Rozhodnutí:
+Zkrátíme první poptávkový formulář na e-mail, cíl a volitelné URL.
+
+Typ tvrzení:
+Princip a postup.
+
+Zdroj nebo důkaz:
+Privacy-first pravidlo minimalizace dat + posledních deset poptávek, kde telefon nebyl potřeba pro první odpověď.
+
+Co ještě ověříme:
+Jestli obchodní tým nepotřebuje jeden další údaj pro kvalifikaci.
+
+Kdy se vrátíme:
+Po 20 nových poptávkách nebo za 30 dní.
+```
+
+Tento záznam chrání tým před tím, aby z jedné kapitoly vznikl absolutní předpis. Stejná rada může být správná pro marketingový web, ale nedostatečná pro regulovaný SaaS produkt. Stejný nástroj může být vhodný pro interní experiment, ale špatný pro práci s osobními údaji zákazníků. Kontext rozhoduje.
+
+### Kdy zdroj nestačí
+
+Odkaz v textu není konec přemýšlení. Je to začátek kontroly. Zdroj může být starý, marketingově zaujatý, vztahovat se na jiný trh, popisovat jinou verzi nástroje nebo řešit jinou právní situaci. U důležitých rozhodnutí si proto položte tři otázky:
+
+- Je zdroj primární nebo jen přepisuje cizí tvrzení?
+- Je dost aktuální pro rozhodnutí, které děláme?
+- Platí pro náš typ projektu, dat, zákazníků a provozní region?
+
+Privacy-first doplněk: pokud zdroj doporučuje nástroj nebo postup, který zvyšuje množství sbíraných dat, vyžaduje další externí skript nebo posílá informace mimo kontrolovaný provoz, zapište to jako náklad. Možná se pořád vyplatí. Jen to nesmí být neviditelné.
+
+### Checklist čtenářské opatrnosti
+
+- Vím, jestli používám princip, postup, fakt nebo Codyho komentář?
+- Pokud jde o právní, bezpečnostní, finanční nebo veřejné rozhodnutí, ověřil jsem zdroj?
+- Je jasné, pro jaký typ projektu rada platí?
+- Neberu nástroj uvedený v textu jako automatickou volbu bez dodavatelské kontroly?
+- Zapsal jsem, jaké údaje by změna nově sbírala, předávala nebo ukládala?
+- Má rozhodnutí datum návratu, pokud se opírá o proměnlivý fakt?
+- Umí tým říct, co je názor, co je ověřený fakt a co je lokální pracovní pravidlo?
+
+Dobré rozhodnutí není jen rychlé. Je dohledatelné. Když se za tři měsíce změní okolnosti, tým musí poznat, proč rozhodnutí vzniklo, na čem stálo a jestli ho má potvrdit, upravit nebo zahodit.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -108845,3 +108913,4 @@ Uzavření potvrzené akce má být tiché. Když funguje, nikdo ho příští t
 - 2026-05-20: Doplněna úvodní poznámka, aby čtenář před další kapitolou formuloval jednu konkrétní pracovní otázku.
 - 2026-05-20: Doplněn úvodní filtr pro výběr jedné kapitoly podle dopadu na zákazníka, ověřitelnosti, rozhodnutí a privacy-first datové stopy.
 - 2026-05-21: Doplněna krátká úvodní poznámka o vědomém omezení rozsahu: k hlavnímu úkolu si čtenář zapíše i jednu věc, kterou teď nemění.
+- 2026-05-22: Doplněna úvodní podkapitola o rozlišování rad, faktů, zdrojů a Codyho komentářů včetně malého protokolu důvěry a checklistu čtenářské opatrnosti.
