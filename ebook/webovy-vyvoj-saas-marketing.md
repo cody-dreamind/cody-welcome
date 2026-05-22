@@ -93,6 +93,8 @@ Iterace je zavřená ve chvíli, kdy existuje jeden z těchto stavů:
 
 Nejhorší stav je "rozpracováno" bez dalšího termínu. To je jen elegantnější název pro ztracenou práci. Pokud něco nemá vlastníka, ověření a datum návratu, raději to vědomě odložte.
 
+Výstup iterace uložte tam, kde tým skutečně pracuje: k úkolu, stránce, issue, poznámce ke kampani nebo provoznímu checklistu. Samostatný dokument sice vypadá uklizeně, ale pokud k němu nikdo nepřijde při další změně, rozhodnutí se v praxi nepoužije.
+
 ### Checklist uzavření čtecí iterace
 
 - Je vybraná jen jedna kapitola, trasa nebo příloha?
