@@ -107553,8 +107553,275 @@ Nový nález má po triage jasný stav, důvod, další krok a hranici rozsahu. 
 
 Triage údržbové fronty je místo, kde se dobrý provoz pozná podle zdrženlivosti. Ne všechno se opraví hned. Ne všechno zůstane. Ne všechno se stane projektem. Tým vezme nález vážně právě tím, že ho porovná, omezí, rozhodne a pošle správným směrem.
 
+## Příloha NW: Převod triage rozhodnutí do jedné proveditelné akce
+
+Příloha NV skončila rozhodnutím. To je důležité, ale pořád to není hotová práce. Mezi větou "naplánovat" a skutečnou opravou často vzniká největší ztráta: rozhodnutí se přepíše do neurčitého úkolu, úkol nabobtná, začne sbírat související nápady a po měsíci už nikdo neví, co přesně se mělo stát.
+
+Tato příloha řeší další krok: převést výsledek triage do jedné proveditelné údržbové akce. Ne do projektu, ne do strategie, ne do seznamu přání. Do akce, kterou lze přiřadit, dokončit, ověřit a zavřít.
+
+Otázka této přílohy:
+
+```text
+Jak z triage rozhodnutí vytvořit jeden konkrétní údržbový úkol s jasným výsledkem, hranicí rozsahu, privacy-first kontrolou a ověřením v běžné práci?
+```
+
+Výstupem je akční karta:
+
+```text
+Vychází z triage:
+Rozhodnutí triage:
+Jedna akce:
+Hotovo znamená:
+Místo zásahu:
+Ověření:
+Co se teď neotevírá:
+Privacy-first kontrola:
+Vlastník:
+Termín:
+```
+
+Codyho komentář: dobrá triage bez dobré akce je jako pečlivě vytříděný stůl, na kterém zůstane jedna hromádka "někdy". Vypadá to uklizeně, ale práce pořád nemá ruce. Akční karta má být ta ruka: jedna konkrétní věc, ne rozvětvený seznam vedlejších úkolů, který se tváří nenápadně a pak sežere půl sprintu.
+
+### Přepište stav na pracovní sloveso
+
+Triage používá stavy: opravit teď, naplánovat, sloučit, odložit, zahodit nebo eskalovat. Akční karta z nich musí udělat pracovní sloveso.
+
+Příklady převodu:
+
+```text
+Opravit teď -> Odstranit z formuláře pole "telefon" a upravit potvrzovací text.
+```
+
+```text
+Naplánovat -> Přidat pole "Platí od" ke třem nejpoužívanějším aktivním šablonám v indexu.
+```
+
+```text
+Sloučit -> Připojit nález k existující položce "sjednocení metadat indexu" a zrušit samostatnou kartu.
+```
+
+```text
+Odložit s datem návratu -> Nechat položku ve frontě se stavem "čeká na opakování" a vrátit se při další kvartální kontrole.
+```
+
+```text
+Zahodit -> Uzavřít poznámku jako provozní šum bez další akce.
+```
+
+```text
+Eskalovat jako riziko -> Předat bezpečnostnímu nebo právnímu vlastníkovi s omezením datové stopy do 24 hodin.
+```
+
+Sloveso je důležité. "Index šablon" není akce. "Zlepšit index" je moc široké. "Doplnit pole Platí od ke třem aktivním šablonám" už je práce, kterou lze udělat a zkontrolovat.
+
+### Držte jednu akci, jeden výsledek
+
+Údržbová akce se má vejít do jedné věty:
+
+```text
+Uděláme [konkrétní zásah] v [konkrétním místě], aby [pracovní rozhodnutí] šlo udělat bez [konkrétního tření].
+```
+
+Vyplněný příklad:
+
+```text
+Přidáme pole "Platí od" ke třem aktivním šablonám v indexu, aby nový provozní člověk poznal aktuální verzi bez otevírání changelogu.
+```
+
+Věta záměrně neříká:
+
+- přepíšeme celý index;
+- sjednotíme všechny archivy;
+- vytvoříme novou dokumentační metodiku;
+- upravíme onboarding;
+- změříme, jak lidé používají všechny šablony.
+
+To všechno může být někdy užitečné. Teď to ale není tato akce. Pokud se jedna věta rozpadá na pět sloves, vraťte ji do triage nebo ji rozdělte.
+
+### Definujte hotovo dřív než začnete
+
+Slovo "hotovo" nesmí znamenat "někdo se tomu věnoval". Musí znamenat pozorovatelný stav.
+
+Slabá definice:
+
+```text
+Index je upravený.
+```
+
+Silnější definice:
+
+```text
+Hotovo znamená, že tři nejpoužívanější aktivní šablony v indexu mají vyplněné pole "Platí od", starší poznámka o chybějící platnosti je uzavřená a při ruční kontrole lze aktuální šablonu vybrat bez čtení changelogu.
+```
+
+Dobrá definice hotovo obsahuje:
+
+1. konkrétní změněné místo;
+2. viditelný výsledek;
+3. uzavření staré stopy;
+4. krátké ověření;
+5. privacy-first kontrolu.
+
+Pokud úkol nemá definici hotovo, bude se zavírat podle nálady. To je levné při zápisu a drahé při předávání.
+
+### Vyberte místo zásahu nejblíž práci
+
+Údržbová akce má opravit místo, kde člověk skutečně pracuje. Ne místo, kde se o problému nejlépe mluví.
+
+Příklad:
+
+```text
+Problém:
+Nový člověk nepozná aktuální šablonu při kontrole indexu.
+
+Špatné místo zásahu:
+Nový odstavec v interním dokumentu "Jak chápat šablony".
+
+Lepší místo zásahu:
+Pole "Platí od" přímo v indexu u aktivních šablon.
+```
+
+Obecné pravidlo:
+
+```text
+Pokud musí člověk kvůli opravě číst další vysvětlení mimo pracovní tok, opravili jste možná dokumentaci, ale ne tření.
+```
+
+Někdy je správná akce textová. Někdy strukturální. Někdy stačí smazat starou cestu. Někdy je největší oprava v tom, že nic nepřidáte a odstraníte duplicitu.
+
+### Ověření má být normální použití
+
+Po malé údržbové akci není potřeba slavnostní audit. Stačí ověřit, že akce pomohla v běžném průchodu.
+
+Možné ověření:
+
+- jeden nový člověk najde správnou šablonu podle indexu;
+- provozní lead projde kontrolu bez otevření staré karty;
+- formulář po odstranění pole pořád doručí poptávku;
+- export po přejmenování archivu vede jen na aktuální postup;
+- zákaznický tok nevyžaduje nový tracker ani nové pole.
+
+Ověření napište předem:
+
+```text
+Ověření:
+Při nejbližší měsíční údržbě indexu projde vlastník tři upravené šablony a ověří, že aktuální verze jde poznat bez changelogu.
+```
+
+Nečekejte na dokonalá data. U malých údržbových akcí je často důležitější rychle zjistit, jestli změna odstranila tření, než stavět kolem ní měřicí aparát.
+
+### Privacy-first kontrola akce
+
+Při převodu triage do akce se ptejte na dvě věci:
+
+```text
+Zmenšuje akce datovou stopu, nebo ji zvětšuje?
+Potřebujeme k ověření nové osobní, zákaznické nebo behaviorální údaje?
+```
+
+Silná privacy-first akce:
+
+```text
+Odstranit z formuláře nepoužívané telefonní číslo a upravit navazující šablonu odpovědi.
+```
+
+Slabá akce:
+
+```text
+Přidat analytický event na telefonní pole, abychom měsíc sledovali, jestli ho lidé vyplňují.
+```
+
+Když je problém ve zbytečném sběru, ověření nemá být další sběr. Ověření má být odstranění a kontrola, že provoz pořád funguje.
+
+U každé akce doplňte krátkou kontrolu:
+
+```text
+Privacy-first kontrola:
+Nevznikají nové screenshoty, exporty ani eventy. Starý podklad z triage se smaže po ověření akce. Změna nepřidává nové osobní údaje ani nového dodavatele.
+```
+
+Pokud akce vyžaduje dočasný podklad, musí mít účel, přístup a datum smazání. Bez toho podklad nevzniká.
+
+### Akční karta
+
+```text
+Datum:
+Vychází z triage:
+Rozhodnutí triage:
+Jedna akce:
+Pracovní věta:
+Hotovo znamená:
+Místo zásahu:
+Staré stopy k uzavření:
+Ověření:
+Co se teď neotevírá:
+Privacy-first kontrola:
+Vlastník:
+Termín:
+Stav po dokončení: čeká na ověření / ověřeno / vrátit do fronty
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Vychází z triage: u aktivních šablon není vidět datum platnosti
+Rozhodnutí triage: Naplánovat
+Jedna akce: doplnit pole "Platí od" ke třem nejpoužívanějším aktivním šablonám v indexu
+Pracovní věta: Přidáme pole "Platí od" ke třem aktivním šablonám v indexu, aby nový provozní člověk poznal aktuální verzi bez otevírání changelogu.
+Hotovo znamená: tři šablony mají pole vyplněné, stará poznámka z triage je uzavřená a při ruční kontrole jde aktuální verzi vybrat z indexu
+Místo zásahu: kanonický index šablon
+Staré stopy k uzavření: samostatná poznámka "chybí platnost u aktivních šablon"
+Ověření: projít tři upravené položky při nejbližší měsíční údržbě indexu
+Co se teď neotevírá: archiv, názvosloví všech dokumentů, onboardingová trasa ani nová analytika používání šablon
+Privacy-first kontrola: bez screenshotů, bez exportu obsahu šablon, stará poznámka se smaže po ověření
+Vlastník: provozní lead
+Termín: další měsíční údržba indexu
+Stav po dokončení: čeká na ověření
+```
+
+### Mini workshop na 15 minut
+
+Vezměte jednu položku po triage z Přílohy NV.
+
+1. Přepište rozhodovací stav na pracovní sloveso.
+2. Napište jednu akční větu.
+3. Zkraťte ji, pokud obsahuje víc než jeden zásah.
+4. Určete konkrétní místo zásahu.
+5. Doplňte definici hotovo.
+6. Najděte staré stopy, které se mají zavřít.
+7. Navrhněte ověření v běžném použití.
+8. Napište, co se teď neotevírá.
+9. Proveďte privacy-first kontrolu podkladů a ověření.
+10. Přiřaďte vlastníka a termín.
+
+Výstup:
+
+```text
+Triage rozhodnutí je převedené do jedné proveditelné akce, která má místo zásahu, definici hotovo, ověření, vlastníka a jasnou hranici rozsahu.
+```
+
+### Checklist kapitoly
+
+- Vychází akce z konkrétního triage rozhodnutí?
+- Je stav převedený na pracovní sloveso?
+- Obsahuje akce jen jeden hlavní zásah?
+- Je jasné, kde přesně se zásah provede?
+- Je definice hotovo pozorovatelná?
+- Uzavírá akce staré přechodové stopy nebo poznámky?
+- Je ověření součástí běžného použití, ne nový zvláštní audit?
+- Je napsané, co se teď neotevírá?
+- Nezvětšuje akce zbytečně datovou stopu?
+- Nevznikají kvůli ověření nové screenshoty, exporty, trackery nebo formulářová pole bez účelu?
+- Má případný dočasný podklad účel, přístup a datum smazání?
+- Má akce vlastníka a termín?
+- Je jasné, co se stane po dokončení: čeká na ověření, ověřeno, nebo vrátit do fronty?
+
+Převod triage do akce je krátký most mezi rozhodnutím a skutečnou změnou. Když je most moc široký, lidé na něm začnou stavět další nápady. Když je moc mlhavý, nikdo neví, kam vede. Dobrá akční karta říká: tady zasáhneme, takhle poznáme hotovo, tohle teď necháme být a kvůli ověření nebudeme sbírat víc dat, než je potřeba.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NW o převodu triage rozhodnutí do jedné proveditelné údržbové akce: pracovní sloveso, jedna akční věta, definice hotovo, místo zásahu, ověření v běžném použití, privacy-first kontrola, akční karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NV o triage údržbové fronty po novém nálezu: porovnání s existujícími položkami, šest rozhodovacích stavů, ochrana kapacity, privacy-first kontrola, triage karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NU o převodu nálezu z první běžné kontroly po lokální opravě do údržbové fronty: rozlišení návratu původního problému, dočištění, nového samostatného nálezu a provozního šumu, pracovní věta nálezu, posouzení dopadu, nejmenší další rozhodnutí, hranice rozsahu, privacy-first zařazení, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NT o první běžné kontrole po uzavření lokální opravy: návrat do normálního rytmu, kontrola kanonického místa, zbytky přechodové stopy, rozlišení návratu tření od provozního šumu, privacy-first úklid dočasných důkazů, kontrolní karta, mini workshop a checklist.
