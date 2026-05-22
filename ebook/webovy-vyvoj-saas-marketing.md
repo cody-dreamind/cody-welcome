@@ -105152,8 +105152,263 @@ Drobné tření z první běžné kontroly je doladěné jedním zásahem v mís
 
 Drobné doladění je dobrý sluha a mizerný pán. Když je malé, pomáhá systému zůstat čistý. Když se z něj stane zástěrka pro další projekt, začne žrát přesně tu pozornost, kterou mělo šetřit. Držte ho proto blízko práce, blízko důkazu a daleko od nové byrokracie.
 
+## Příloha NN: Ověření drobného doladění po dalším běžném průchodu
+
+Příloha NM popsala drobné doladění po první běžné kontrole uzavřené korekce. Tato příloha řeší návrat k doladění ve chvíli, kdy proběhne další normální pracovní průchod. Nejde o nový audit. Jde o krátkou odpověď na otázku, jestli jeden malý zásah opravdu odstranil tření, kvůli kterému vznikl.
+
+Ověření drobného doladění má být ještě menší než samotné doladění. Pokud jste změnili název archivního checklistu, nepotřebujete měsíční výzkum. Potřebujete vidět, jestli běžné vyhledání a běžná pracovní cesta už vedou k aktuálnímu zdroji pravdy bez záměny.
+
+Otázka této přílohy:
+
+```text
+Odstranilo drobné doladění konkrétní tření v dalším běžném průchodu, aniž by přidalo novou evidenci, nové sledování nebo další paralelní pravidlo?
+```
+
+Výstupem je ověřovací karta drobného doladění:
+
+```text
+Doladěné místo:
+Původní tření:
+Další běžný průchod:
+Co se mělo stát jinak:
+Co se skutečně stalo:
+Rozhodnutí:
+Datová stopa:
+Další krok:
+Vlastník:
+```
+
+Tahle karta má být krátká schválně. Drobné doladění, které potřebuje složitý protokol, možná nebylo drobné. To není tragédie. Jen je lepší to přiznat dřív, než se kolem jednoho přejmenovaného odkazu postaví malá administrativní vesnice.
+
+### Vraťte se k původnímu tření
+
+Začněte kartou z Přílohy NM a vytáhněte jen tři věci:
+
+- jaké konkrétní tření se mělo odstranit;
+- kde byl proveden jeden zásah;
+- při jakém běžném průchodu se mělo ověřit, že zásah pomohl.
+
+Nepřidávejte nové cíle. Pokud jste původně řešili, že archivní checklist mate vyhledávání, ověřujte vyhledávání a následnou pracovní cestu. Nezačínejte přitom hodnotit celou auditní šablonu, onboarding, strukturu složek a náladu týmu v pondělí ráno. Některé věci jsou sice zajímavé, ale to ještě neznamená, že patří do této smyčky.
+
+Silný návrat:
+
+```text
+Původní tření:
+Archivní checklist se ve vyhledávání zobrazoval před aktuální auditní šablonou.
+
+Doladění:
+Archivní checklist byl přejmenován a v prvním řádku odkazuje na aktuální šablonu.
+
+Ověření:
+Při dalším běžném exportním průchodu ověřit, jestli práce začne v aktuální šabloně.
+```
+
+Slabý návrat:
+
+```text
+Podíváme se, jestli je dokumentace celkově lepší.
+```
+
+"Celkově lepší" je pocit, ne ověřovací otázka. Pocit se hodí do komentáře. Rozhodnutí potřebuje pracovní situaci.
+
+### Vyberte první normální průchod po doladění
+
+Ověření má nastat při prvním normálním průchodu, který přirozeně použije doladěné místo. Ne při simulaci, kterou připravíte jen proto, aby karta mohla být dnes uzavřená.
+
+Vhodné průchody:
+
+- další měsíční export dat;
+- první nový onboardingový průchod, který používá upravený rozcestník;
+- nejbližší běžná kontrola support šablony;
+- další aktualizace prodejního materiálu, kde se používá přejmenovaný zdroj;
+- první provozní údržba, při které se hledá upravený checklist.
+
+Nevhodné průchody:
+
+- umělé klikání autorem doladění;
+- dotaz v chatu bez reálné práce;
+- hromadný audit všech podobných dokumentů;
+- speciální schůzka jen kvůli jednomu odkazu;
+- sledování konkrétních lidí, jestli změnu použili správně.
+
+Když běžný průchod ještě nenastal, nezavírejte ověření napůl. Zapište stav `Čeká na průchod` a nastavte návrat. Čekání je v pořádku. Horší je vyrobit falešný důkaz jen proto, že tabulka nemá ráda prázdná políčka.
+
+### Sledujte pracovní cestu, ne poslušnost
+
+Při ověření se neptejte hlavně na to, kdo si všiml změny. Ptejte se, jestli pracovní cesta vedla správně. Drobné doladění má měnit systém, ne testovat paměť lidí.
+
+Sledujte:
+
+- jestli člověk našel správný zdroj pravdy bez dalšího vysvětlování;
+- jestli upravený název, odkaz nebo označení odstranil původní záměnu;
+- jestli stará stopa přestala vypadat jako aktuální cesta;
+- jestli kvůli doladění nevznikla nová otázka nebo obcházení;
+- jestli výsledek stačí ověřit jednou anonymizovanou větou.
+
+Příklad dobrého ověření:
+
+```text
+Při dalším exportním průchodu práce začala vyhledáním "export zákaznických dat". První použitý výsledek byla aktuální auditní šablona. Archivní checklist byl viditelně označený jako archiv a nebyl použit jako pracovní postup.
+```
+
+Příklad slabého ověření:
+
+```text
+Provozní lead napsal, že si myslí, že už je to jasnější.
+```
+
+Názor vlastníka může být užitečný doplněk, ale nemá nahradit průchod prací. Pokud systém funguje jen v hlavě člověka, který ho opravil, ještě nefunguje jako systém.
+
+### Rozhodněte jedním ze tří stavů
+
+Po ověření vyberte jeden ze tří stavů.
+
+`Potvrdit`
+
+Původní tření zmizelo, správná cesta drží a nevznikla nová datová ani procesní stopa. Výsledek zapište do běžné údržby a nechte téma spadnout zpět do normálního rytmu.
+
+`Ještě jednou drobně doladit`
+
+Původní tření se zmenšilo, ale zůstalo jedno nové lokální tření, které má jasné místo zásahu. Tento stav použijte jen tehdy, když další zásah umíte popsat jednou větou.
+
+`Vrátit do údržbové fronty`
+
+Původní tření nezmizelo, stará cesta se vrátila jako hlavní, nebo se ukázalo, že problém není lokální. V takovém případě nepřidávejte druhou a třetí záplatu bokem. Vraťte téma do fronty jako větší údržbový nález.
+
+Rozhodovací příklady:
+
+```text
+Potvrdit:
+Vyhledání vede k aktuální šabloně, archiv je jasně označený a nebyl použit.
+```
+
+```text
+Ještě jednou drobně doladit:
+Aktuální šablona je první výsledek, ale archivní checklist má v titulku stále starý název exportu. Přepsat titulek archivu.
+```
+
+```text
+Vrátit do údržbové fronty:
+Lidé dál začínají ze starého checklistu, protože na něj odkazuje onboarding i automatická připomínka. Problém má víc míst zásahu.
+```
+
+Codyho komentář: dvě drobná doladění za sebou jsou ještě údržba. Třetí už je obvykle signál, že tým lakuje větší problém na barvu "jen drobnost". Barva nedrží. Provoz si toho všimne dřív než roadmapa.
+
+### Privacy-first ověření bez nové stopy
+
+Ověření drobného doladění má být datově lehké. Cílem je potvrdit pracovní cestu, ne založit nový dohledový mechanismus.
+
+Před uzavřením odpovězte:
+
+1. Stačí jedna anonymizovaná věta o průchodu?
+2. Nevznikl screenshot se zákaznickými daty?
+3. Nezapisujeme jméno člověka, když stačí popsat trasu práce?
+4. Nevytváříme novou tabulku jen kvůli ověření jednoho doladění?
+5. Nezůstává stará stopa dostupná jako aktuální varianta?
+6. Má případný dočasný podklad jasný termín smazání?
+7. Je výsledek uložený do existující údržby, ne do dalšího dokumentu bokem?
+
+Silný privacy-first zápis:
+
+```text
+Ověření je zapsané jednou anonymizovanou větou v měsíční údržbě. Nevznikl screenshot, export ani seznam lidí. Dočasné poznámky nebyly potřeba.
+```
+
+Slabý zápis:
+
+```text
+Pro jistotu ukládáme screenshot každého vyhledání a jména lidí, kteří otevřeli archiv.
+```
+
+To druhé je nepoměr. Kvůli jednomu matoucímu titulku nevyrábějte režim, který sbírá víc dat než původní problém. Privacy-first provoz má být střízlivý i při kontrole vlastních oprav.
+
+### Ověřovací karta drobného doladění
+
+Použijte ji při dalším běžném průchodu po doladění.
+
+```text
+Datum:
+Doladěné místo:
+Původní tření:
+Provedené doladění:
+Další běžný průchod:
+Co se mělo stát jinak:
+Co se skutečně stalo:
+Stará stopa:
+Nové tření:
+Datová stopa ověření:
+Dočasné podklady:
+Rozhodnutí: Potvrdit / Ještě jednou drobně doladit / Vrátit do údržbové fronty
+Další krok:
+Vlastník:
+Termín:
+Kdy znovu kontrolovat:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Doladěné místo: název a první řádek archivního exportního checklistu
+Původní tření: archivní checklist se zobrazoval ve vyhledávání před aktuální auditní šablonou
+Provedené doladění: archiv přejmenován na "Archiv - nepoužívat pro aktuální exporty" a doplněn odkaz na aktuální šablonu
+Další běžný průchod: měsíční kontrola exportu zákaznických dat
+Co se mělo stát jinak: práce měla začít v aktuální auditní šabloně
+Co se skutečně stalo: vyhledání nabídlo aktuální šablonu jako první pracovní výsledek; archiv byl viditelně označený
+Stará stopa: zůstala dostupná jen jako archiv
+Nové tření: žádné
+Datová stopa ověření: jedna anonymizovaná věta v měsíční údržbě
+Dočasné podklady: žádné
+Rozhodnutí: Potvrdit
+Další krok: nechat v běžném údržbovém rytmu
+Vlastník: provozní lead
+Termín: uzavřeno
+Kdy znovu kontrolovat: při další běžné kvartální kontrole šablon
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jedno drobné doladění z Přílohy NM, u kterého už proběhl další běžný průchod.
+
+1. Přečtěte původní tření jednou větou.
+2. Připomeňte si jedno doladěné místo.
+3. Určete skutečný běžný průchod, který ověření spustil.
+4. Popište, co se mělo stát jinak.
+5. Zapište, co se skutečně stalo.
+6. Zkontrolujte návrat staré stopy.
+7. Pojmenujte nové tření, pokud vzniklo.
+8. Udělejte privacy-first kontrolu ověřovací stopy.
+9. Vyberte stav Potvrdit, Ještě jednou drobně doladit nebo Vrátit do údržbové fronty.
+10. Uložte výsledek do existující údržby.
+
+Výstup:
+
+```text
+Drobné doladění je ověřené na dalším běžném průchodu a tým ví, jestli se má potvrdit, jednou lokálně doladit, nebo vrátit do údržbové fronty.
+```
+
+### Checklist kapitoly
+
+- Vycházíte z konkrétní karty drobného doladění?
+- Vrátili jste se k původnímu tření, ne k novému širšímu tématu?
+- Ověřujete první normální průchod, ne umělou simulaci?
+- Je jasné, co se mělo po doladění stát jinak?
+- Popsali jste skutečnou pracovní cestu?
+- Hledali jste návrat staré stopy?
+- Rozlišujete problém systému od toho, kdo si čeho všiml?
+- Umíte rozhodnout stavem Potvrdit, Ještě jednou drobně doladit nebo Vrátit do údržbové fronty?
+- Nepoužíváte stav Ještě jednou drobně doladit pro vícemístný zásah?
+- Nevznikla nová tabulka, porada ani kontrolní rituál?
+- Nevznikl screenshot, export nebo seznam lidí bez jasného účelu?
+- Je výsledek uložený do existující údržby?
+- Má další krok vlastníka a termín?
+- Je jasné, kdy se téma vrátí do normálního rytmu?
+
+Ověření drobného doladění má být tiché. Když funguje, skoro zmizí: práce plyne přes správné místo, stará stopa neklame a nikdo kvůli tomu nemusí zakládat novou evidenci. To je v provozu docela elegantní výsledek. Ne okázalý, ale užitečný. Což je u údržby podezřele často ta nejlepší možná varianta.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NN o ověření drobného doladění po dalším běžném průchodu: návrat k původnímu tření, výběr normálního průchodu, sledování pracovní cesty místo poslušnosti, rozhodnutí Potvrdit/Ještě jednou drobně doladit/Vrátit do údržbové fronty, privacy-first ověření bez nové stopy, ověřovací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NM o drobném doladění po první běžné kontrole uzavřené korekce: vstup jen pro stav Drobně doladit, oprava nejbližšího pracovního místa, rozhodnutí Přepsat/Označit/Odstranit, ověření dalším normálním průchodem, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NL o první běžné kontrole po uzavření následné korekce: kontrola v existujícím rytmu, jeden normální průchod, hledání návratu staré stopy, rozhodnutí Drží/Drobně doladit/Vrátit do údržbové fronty, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NK o uzavření potvrzené následné údržbové korekce do běžné údržby: potvrzený výsledek, přepis kanonického místa, zavření přechodových stop, napojení na běžnou kontrolu, privacy-first úklid datové stopy, uzavírací karta, mini workshop a checklist.
