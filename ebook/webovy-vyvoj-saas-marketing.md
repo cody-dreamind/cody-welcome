@@ -108475,8 +108475,353 @@ Potvrzená údržbová akce je převedená do kanonického místa, dočasné sto
 
 Uzavření potvrzené akce má být tiché. Když funguje, nikdo ho příští týden nemusí obdivovat. Nový stav prostě leží na správném místě, staré podklady nezabírají prostor, vedlejší nálezy neblokují hotovou práci a běžná údržba může pokračovat bez toho, aby si na každou malou opravu zakládala vlastní malou byrokracii.
 
+## Příloha NZ: Kontrola údržbového rytmu po několika uzavřených akcích
+
+Příloha NY uzavřela jednu potvrzenou akci zpět do běžné údržby. Po jedné akci je jednoduché mít pocit, že systém funguje. Skutečný test přichází až ve chvíli, kdy se podobných malých akcí uzavře víc. Tehdy se ukáže, jestli údržbový rytmus opravdu zůstává lehký, nebo jestli se z každé drobné opravy stává vlastní evidence, vlastní rituál a vlastní malý dluh.
+
+Tato příloha řeší kontrolu po několika uzavřených akcích. Cílem není auditovat každou kartu znovu. Cílem je zjistit, jestli běžná údržba pořád pomáhá lidem pracovat, jestli se kanonická místa drží jako zdroj pravdy a jestli privacy-first úklid nezůstal jen hezkou větou v závěru karty.
+
+Otázka této přílohy:
+
+```text
+Jak po několika uzavřených údržbových akcích ověřit, že rytmus zůstává lehký, dohledatelný a privacy-first, aniž z kontroly vznikne další provozní vrstva?
+```
+
+Výstupem je karta rytmu:
+
+```text
+Kontrolované období:
+Uzavřené akce:
+Kanonická místa:
+Opakující se tření:
+Datová stopa:
+Co zrušit nebo sloučit:
+Co ponechat:
+Jedna další změna:
+Vlastník:
+Další kontrola:
+```
+
+Codyho komentář: údržba má jednu zrádnou vlastnost. Když je dobrá, není moc vidět. Když je špatná, tváří se jako zodpovědnost. Najednou máte pět tabulek, tři statusy, dvě kontrolní schůzky a pořád stejný problém v provozu. Kontrola rytmu má odlišit poctivou péči od papírového fitness náramku pro proces.
+
+### Vyberte malé kontrolní okno
+
+Nekontrolujte celou historii. Vyberte krátké období nebo malý počet uzavřených akcí.
+
+Dobré okno:
+
+```text
+Poslední měsíc údržby indexu šablon.
+```
+
+Nebo:
+
+```text
+Posledních pět uzavřených údržbových akcí napříč webem, formuláři a interními šablonami.
+```
+
+Slabé okno:
+
+```text
+Všechno, co jsme kdy opravili.
+```
+
+To není kontrola rytmu. To je pozvánka do bažiny starých rozhodnutí. Malé okno má jednu výhodu: nutí tým hodnotit reálné chování systému, ne nostalgii nad tím, jak náročné bylo něco kdysi zavést.
+
+Ke každé akci v okně stačí vypsat:
+
+```text
+Akce:
+Kanonické místo:
+Další běžná kontrola:
+Dočasné stopy:
+Vedlejší nález:
+Stav dnes:
+```
+
+Pokud už tento krátký seznam nejde sestavit bez dlouhého pátrání, máte první nález: uzavření možná nevytváří dost jasnou stopu rozhodnutí.
+
+### Sledujte kanonická místa, ne množství karet
+
+Kontrola rytmu nemá odměňovat počet vyplněných karet. Má ověřit, že lidé najdou správný stav tam, kde pracují.
+
+Pro každou uzavřenou akci se zeptejte:
+
+1. Je nový stav opravdu v kanonickém místě?
+2. Musí člověk číst starou akční nebo ověřovací kartu, aby pochopil aktuální stav?
+3. Nevznikla paralelní tabulka, poznámka nebo kopie, která se začala používat místo zdroje pravdy?
+4. Je jasné, kdo kanonické místo udržuje?
+5. Je změna viditelná při běžném použití, ne jen při kontrole?
+
+Příklad:
+
+```text
+Akce:
+Doplnění pole "Platí od" u aktivních šablon.
+
+Kanonické místo:
+Index šablon.
+
+Kontrola:
+Pole je vyplněné u aktivních šablon, ale jedna nová šablona vznikla bez něj. Problém není v původní akci, ale v šabloně pro zakládání nových položek.
+```
+
+Toto je užitečný nález, protože ukazuje na rytmus. Jedna oprava funguje, ale běžný způsob zakládání nové položky ji nepřevzal. Řešením není znovu oslavit původní akci. Řešením je upravit místo, kudy do systému vstupují nové položky.
+
+### Hledejte opakující se tření
+
+Po několika uzavřených akcích se často objeví vzor. Jednotlivé opravy vypadají různě, ale tření má stejný kořen.
+
+Příklady opakujícího se tření:
+
+- lidé nevědí, které místo je zdroj pravdy;
+- nové položky nevznikají podle aktuální šablony;
+- vedlejší nálezy se zapisují, ale už se nevracejí do triage;
+- dočasné podklady se mažou ručně a nepravidelně;
+- každá oprava vytváří vlastní slovník místo společného jazyka;
+- kontrolní karty jsou delší než problém, který měly řešit.
+
+Zapište vzor jednou větou:
+
+```text
+Opakující se tření:
+Uzavřené akce se dostanou do kanonického místa, ale šablona pro nové položky se neaktualizuje, takže se stejná chyba vrací u nových záznamů.
+```
+
+Silný vzor vede k malé systémové změně. Slabý vzor je jen seznam stížností.
+
+Špatně:
+
+```text
+Lidé občas nedodržují proces.
+```
+
+Lépe:
+
+```text
+Proces spoléhá na paměť vlastníka při zakládání nové položky, protože povinná pole nejsou součástí výchozí šablony.
+```
+
+První věta hledá viníka. Druhá věta ukazuje místo opravy.
+
+### Zkontrolujte datovou stopu po uzavřeních
+
+Privacy-first kontrola rytmu se neptá jen na to, jestli při jednotlivé akci nevznikl zbytečný export. Ptá se, jestli se z údržby jako celku nestal nový sběrný mechanismus.
+
+Projděte v kontrolovaném okně:
+
+```text
+Dočasné výpisy:
+Jsou smazané nebo mají datum smazání?
+
+Screenshoty a exporty:
+Existují jen tam, kde mají jasný účel?
+
+Kopie zákaznických nebo interních příkladů:
+Jsou anonymizované, zkrácené nebo odstraněné?
+
+Vedlejší evidence:
+Nevznikla tabulka, která duplikuje kanonické místo?
+
+Přístupy:
+Nemá k podkladům přístup víc lidí, než je potřeba?
+```
+
+Dobrá kontrola může skončit velmi krátce:
+
+```text
+Datová stopa:
+U pěti uzavřených akcí zůstaly jen jednověté changelog záznamy a dvě položky ve frontě. Dočasné výpisy byly smazané. Nevznikly screenshoty, exporty ani nový nástroj.
+```
+
+Varovný stav:
+
+```text
+Datová stopa:
+Ke třem malým akcím existuje pět screenshotů, dva exporty indexu a jedna soukromá tabulka vlastníka. Účel po uzavření není jasný.
+```
+
+V takovém případě není další krok "lépe dokumentovat". První krok je mazat, slučovat a vracet aktuální stav do kanonických míst. Dokumentace, která vysvětluje zbytečnou dokumentaci, je procesní komedie bez dobrého konce.
+
+### Rozhodněte, co zrušit nebo sloučit
+
+Po několika akcích se nebojte zrušit části rytmu, které už nepomáhají.
+
+Kandidáti na zrušení:
+
+- samostatná kontrola pro opravu, která už je součástí běžného review;
+- dočasná tabulka, jejíž obsah je v kanonickém místě;
+- duplicitní checklist, který jen opakuje obecnou definici hotovo;
+- status, podle kterého se nerozhoduje;
+- archiv podkladů, které už nemají účel ani právní nebo provozní důvod.
+
+Kandidáti na sloučení:
+
+- dvě podobné údržbové fronty;
+- více checklistů pro stejný typ formulářové změny;
+- oddělené changelogy, které čtou stejní lidé ve stejném rytmu;
+- opakované privacy-first otázky, které lze přesunout do jedné vstupní brány.
+
+Příklad:
+
+```text
+Zrušit:
+Samostatnou kontrolu pole "Platí od", protože je už součástí měsíční kontroly indexu.
+
+Sloučit:
+Vedlejší nálezy k názvům šablon a archivovaným verzím do jedné položky "srozumitelnost názvů v archivu".
+
+Ponechat:
+Jednovětý changelog v indexu a kontrolu povinných polí při zakládání nové šablony.
+```
+
+Zrušení je práce. Ne jen absence práce. Někdo musí odstranit odkazy, zavřít staré karty a říct týmu, kde je nový zdroj pravdy. Jinak stará věc nezmizí, jen se přesune do mentálního šuplíku "možná ještě platí".
+
+### Vyberte jednu další změnu rytmu
+
+Kontrola rytmu nemá končit seznamem deseti doporučení. Vyberte jednu změnu, která nejvíc sníží opakované tření.
+
+Dobrá změna rytmu:
+
+```text
+Při založení nové šablony bude výchozí karta obsahovat pole "Platí od", vlastníka a datum další kontroly.
+```
+
+Špatná změna rytmu:
+
+```text
+Všichni si budou dávat větší pozor.
+```
+
+Pozor je dobrý sluha a mizerný systém. Pokud něco potřebuje opakovaně pozor, dejte to do místa, kde práce vzniká.
+
+Jedna změna rytmu má mít:
+
+```text
+Spouštěč:
+Kdy se použije.
+
+Místo:
+Kde se projeví.
+
+Vlastníka:
+Kdo ji udržuje.
+
+Ověření:
+Jak poznáme při příští běžné kontrole, že pomohla.
+
+Privacy-first hranici:
+Jaká data kvůli ní nesbíráme.
+```
+
+Příklad:
+
+```text
+Spouštěč:
+Založení nové interní šablony.
+
+Místo:
+Výchozí karta šablony.
+
+Vlastník:
+Provozní lead.
+
+Ověření:
+Při další měsíční kontrole mají nové aktivní šablony vyplněné pole "Platí od" bez dodatečného dohledávání.
+
+Privacy-first hranice:
+Nepřidáváme měření otevření šablon ani osobní sledování autorů. Kontroluje se jen stav aktivních položek.
+```
+
+### Karta rytmu
+
+```text
+Datum:
+Kontrolované období:
+Uzavřené akce:
+Kanonická místa:
+Co funguje:
+Opakující se tření:
+Datová stopa:
+Co zrušit:
+Co sloučit:
+Co ponechat:
+Jedna další změna rytmu:
+Spouštěč:
+Místo zásahu:
+Vlastník:
+Ověření:
+Privacy-first hranice:
+Další kontrola:
+Stav: ponechat rytmus / zjednodušit rytmus / opravit vstupní místo / eskalovat
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Kontrolované období: posledních pět uzavřených údržbových akcí v indexu šablon
+Uzavřené akce: pole "Platí od", uzavření starých triage poznámek, přesun vedlejších nálezů do fronty, zkrácení changelogu, smazání dočasných výpisů
+Kanonická místa: index šablon, údržbová fronta, changelog indexu
+Co funguje: aktivní šablony mají aktuální stav v indexu a lidé nemusí číst ověřovací historii
+Opakující se tření: nové šablony nevznikají z výchozí karty s povinnými poli
+Datová stopa: zůstaly jen jednověté changelog záznamy; dva staré exporty se mažou dnes
+Co zrušit: samostatnou kontrolu pole "Platí od"
+Co sloučit: podobné vedlejší nálezy k názvům archivovaných šablon
+Co ponechat: měsíční kontrolu indexu a údržbovou frontu
+Jedna další změna rytmu: doplnit výchozí kartu nové šablony o povinná pole "Platí od", vlastník a další kontrola
+Spouštěč: založení nové interní šablony
+Místo zásahu: výchozí karta šablony
+Vlastník: provozní lead
+Ověření: při další měsíční kontrole nemá žádná nová aktivní šablona chybějící pole
+Privacy-first hranice: bez měření otevření šablon, bez sledování jednotlivých autorů, bez nového nástroje
+Další kontrola: při běžné měsíční kontrole indexu
+Stav: opravit vstupní místo
+```
+
+### Mini workshop na 15 minut
+
+Vezměte poslední tři až pět uzavřených údržbových akcí.
+
+1. Vypište ke každé akci kanonické místo a dnešní stav.
+2. Zkontrolujte, jestli člověk najde aktuální stav bez čtení historie.
+3. Označte opakující se tření jednou větou.
+4. Projděte dočasné výpisy, screenshoty, exporty a vedlejší evidence.
+5. Rozhodněte, co smazat, sloučit, ponechat nebo převést do fronty.
+6. Najděte místo, kde opakované tření do systému vstupuje.
+7. Vyberte jednu změnu rytmu, která opraví vstupní místo.
+8. Napište privacy-first hranici: co kvůli kontrole nezačnete měřit.
+9. Napojte další ověření na existující běžnou kontrolu.
+10. Zavřete kartu jedním stavem.
+
+Výstup:
+
+```text
+Údržbový rytmus po několika uzavřených akcích je zkontrolovaný, zbytečné vrstvy jsou zrušené nebo sloučené a jedna další změna míří do místa, kde opakované tření vzniká.
+```
+
+### Checklist kapitoly
+
+- Je kontrolní okno malé a konkrétní?
+- Jsou vybrané skutečně uzavřené akce, ne celý historický archiv?
+- Je u každé akce jasné kanonické místo?
+- Najde další člověk aktuální stav bez čtení starých karet?
+- Nevznikla paralelní evidence vedle zdroje pravdy?
+- Je zapsané opakující se tření jednou pracovní větou?
+- Ukazuje věta na místo opravy, ne na obecnou vinu lidí?
+- Jsou dočasné výpisy, screenshoty a exporty smazané nebo mají jasný účel a datum smazání?
+- Nevznikl z údržby nový sběrný mechanismus?
+- Je rozhodnuté, co se zruší, sloučí, ponechá nebo převede do fronty?
+- Je vybraná jen jedna další změna rytmu?
+- Má změna spouštěč, místo zásahu, vlastníka a ověření?
+- Je privacy-first hranice napsaná konkrétně?
+- Je další kontrola napojená na existující rytmus, ne na novou schůzku?
+
+Kontrola rytmu má být krátká a trochu nekompromisní. Neptá se, jestli tým pracoval poctivě. Ptá se, jestli poctivá práce zanechala systém jednodušší. Pokud ne, další iterace nemá přidat víc disciplíny. Má ubrat tření, duplicity a zbytečnou datovou stopu. Tedy přesně ty věci, kvůli kterým údržba vůbec existuje.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NZ o kontrole údržbového rytmu po několika uzavřených akcích: malé kontrolní okno, kanonická místa, opakující se tření, privacy-first datová stopa, rušení a slučování nadbytečných vrstev, jedna další změna rytmu, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NY o uzavření potvrzené proveditelné akce do běžné údržby: potvrzený výsledek, přepis kanonického místa, zavření dočasných stop, práce s vedlejšími nálezy, napojení na běžnou kontrolu, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NX o ověření proveditelné údržbové akce po prvním běžném použití: návrat k definici hotovo, výběr normálního použití, tři signály nalezení/rozhodnutí/stopy, oddělení vedlejších nálezů, rozhodovací stavy, privacy-first ověřovací stopa, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NW o převodu triage rozhodnutí do jedné proveditelné údržbové akce: pracovní sloveso, jedna akční věta, definice hotovo, místo zásahu, ověření v běžném použití, privacy-first kontrola, akční karta, mini workshop a checklist.
