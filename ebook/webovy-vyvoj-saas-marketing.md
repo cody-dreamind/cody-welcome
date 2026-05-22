@@ -107819,8 +107819,290 @@ Triage rozhodnutí je převedené do jedné proveditelné akce, která má míst
 
 Převod triage do akce je krátký most mezi rozhodnutím a skutečnou změnou. Když je most moc široký, lidé na něm začnou stavět další nápady. Když je moc mlhavý, nikdo neví, kam vede. Dobrá akční karta říká: tady zasáhneme, takhle poznáme hotovo, tohle teď necháme být a kvůli ověření nebudeme sbírat víc dat, než je potřeba.
 
+## Příloha NX: Ověření proveditelné akce po prvním běžném použití
+
+Příloha NW převedla triage rozhodnutí do jedné proveditelné akce. Další riziko je nenápadné: akce se udělá, karta se odškrtne a tým si začne myslet, že tím je problém vyřešený. Jenže údržbová akce není hotová ve chvíli, kdy někdo změnil text, pole, šablonu nebo index. Hotová je až ve chvíli, kdy v běžné práci odstraní tření, kvůli kterému vznikla.
+
+Tato příloha řeší první ověření po dokončení akce. Ne jako audit, ne jako obhajobu práce, ne jako důkazní spis pro budoucí poradu. Jako krátký návrat k otázce: pomohlo to v reálném použití?
+
+Otázka této přílohy:
+
+```text
+Jak ověřit jednu dokončenou údržbovou akci při prvním běžném použití, rozhodnout o jejím dalším stavu a nezvětšit kvůli tomu datovou stopu?
+```
+
+Výstupem je ověřovací karta:
+
+```text
+Původní akce:
+Hotovo mělo znamenat:
+První běžné použití:
+Co se zlepšilo:
+Co pořád drhne:
+Vedlejší dopad:
+Privacy-first stopa:
+Rozhodnutí:
+Další krok:
+```
+
+Codyho komentář: odškrtnutý úkol je příjemný dopamin, ale mizerný důkaz. Údržba se má měřit tím, jestli další člověk projde práci s menším třením, ne tím, jestli karta vypadá hezky zeleně. Zelená karta sama o sobě zákazníkovi, provozu ani soukromí nepomůže. Je to jen semafor, který si tým namaloval na vlastní zeď.
+
+### Vraťte se k definici hotovo
+
+Nezačínejte otázkou, jestli se akce líbí. Začněte tím, co bylo předem napsané jako `Hotovo znamená`.
+
+Příklad z akční karty:
+
+```text
+Hotovo znamená:
+Tři šablony mají pole "Platí od", stará poznámka z triage je uzavřená a při ruční kontrole jde aktuální verzi vybrat z indexu bez čtení changelogu.
+```
+
+První ověření pak nesmí sklouznout k debatě:
+
+- jestli by šlo upravit všech deset šablon;
+- jestli by měl být celý index v jiné aplikaci;
+- jestli by se k tomu hodil nový dashboard;
+- jestli by se neměl změnit onboarding;
+- jestli by nebylo fajn měřit každé otevření šablony.
+
+To mohou být samostatné nálezy. Teď ověřujete jednu konkrétní větu. Pokud se tým nedokáže vrátit k původní definici hotovo, akce byla napsaná moc mlhavě nebo se během práce nepozorovaně rozšířila.
+
+### Vyberte první normální použití
+
+Ověření má proběhnout při situaci, která by nastala i bez kontroly. Nevyvolávejte zvláštní test jen proto, aby měla karta rychle stav.
+
+Dobrá ověřovací situace:
+
+```text
+Při nejbližší měsíční údržbě indexu vlastník skutečně vybírá aktuální šablonu pro další použití.
+```
+
+Slabá ověřovací situace:
+
+```text
+Vlastník si otevře index mimo práci a zkusí, jestli pole vidí.
+```
+
+Rozdíl je v tření. Mimo práci často vidíte jen to, že změna existuje. V reálné práci poznáte, jestli pomáhá rozhodnutí, kvůli kterému vznikla.
+
+Normální použití může být malé:
+
+- jeden průchod formulářem po odstranění pole;
+- jedna kontrola indexu při pravidelné údržbě;
+- jedno použití šablony novým člověkem;
+- jedno předání výstupu zákazníkovi;
+- jeden návrat k provoznímu standardu během skutečné situace.
+
+Nepotřebujete velký vzorek, pokud akce sama byla malá. Potřebujete reálný kontext.
+
+### Sledujte tři signály
+
+Při prvním běžném použití stačí sledovat tři věci:
+
+```text
+Nalezení:
+Našel člověk opravené místo bez dalšího vysvětlování?
+
+Rozhodnutí:
+Pomohla změna udělat původní pracovní rozhodnutí rychleji nebo jistěji?
+
+Stopa:
+Nevznikla kvůli ověření nová zbytečná data, kopie, screenshoty nebo paralelní evidence?
+```
+
+Příklad:
+
+```text
+Nalezení:
+Provozní lead našel pole "Platí od" přímo v indexu.
+
+Rozhodnutí:
+Aktuální šablonu vybral bez otevření changelogu.
+
+Stopa:
+Nevznikl screenshot indexu ani export šablon. Do karty se zapsal jen výsledek ověření.
+```
+
+Pokud nalezení funguje, ale rozhodnutí ne, opravili jste možná viditelnost, ne pracovní problém. Pokud rozhodnutí funguje, ale vzniklo kvůli němu nové kopírování dat, zlepšení má privacy-first dluh. Pokud stopa bobtná rychleji než užitek, údržba se sama mění v další systém k údržbě. Gratuluji, našli jste perpetuum mobile na schůzky.
+
+### Rozlišujte výsledek od vedlejšího nálezu
+
+Při ověření často vyplave něco dalšího. To je normální. Důležité je nespojit všechno do jedné nekonečné opravy.
+
+Použijte jednoduché třídění:
+
+```text
+Původní akce drží:
+Akce splnila definici hotovo a může pokračovat k uzavření.
+
+Původní akce potřebuje malé doladění:
+Směr je správný, ale jedna drobná část brání pohodlnému použití.
+
+Původní akce nedrží:
+Změna neodstranila tření nebo vytvořila větší problém.
+
+Vedlejší nález:
+Objevilo se nové téma, které nepatří do této akce a má jít do údržbové fronty.
+```
+
+Příklad:
+
+```text
+Výsledek:
+Pole "Platí od" pomohlo vybrat aktuální šablonu bez changelogu.
+
+Vedlejší nález:
+Dvě archivované šablony mají podobný název jako aktivní šablona.
+
+Rozhodnutí:
+Původní akce drží. Vedlejší nález jde do fronty jako samostatná položka, neblokuje uzavření akce.
+```
+
+Toto oddělení chrání tempo. Když každá ověřená akce automaticky otevře další opravy, tým se naučí ověřování odkládat. Ne proto, že by byl líný, ale protože ověření začne znamenat nové bahno. A bahno se v kalendáři tváří jako "krátká návazná schůzka".
+
+### Rozhodnutí po prvním ověření
+
+Po prvním běžném použití zvolte jeden stav:
+
+```text
+Potvrdit:
+Akce splnila definici hotovo, nevznikl významný vedlejší problém a datová stopa zůstala přiměřená.
+
+Doladit lokálně:
+Akce pomohla, ale jedna malá část brání hladkému použití. Doladění má zůstat u stejného místa zásahu.
+
+Vrátit do fronty:
+Akce nevyřešila původní tření, problém je širší nebo změna otevřela nové závislosti.
+
+Eskalovat:
+Ověření ukázalo bezpečnostní, právní, zákaznické nebo provozní riziko, které nemá řešit běžná údržba.
+```
+
+Silné rozhodnutí je krátké:
+
+```text
+Rozhodnutí:
+Potvrdit. Akce odstranila nutnost otevírat changelog při výběru aktuální šablony. Vedlejší nález s podobnými názvy jde samostatně do fronty.
+```
+
+Slabé rozhodnutí:
+
+```text
+Rozhodnutí:
+Ještě to necháme otevřené a uvidíme.
+```
+
+"Uvidíme" je někdy poctivá nejistota. Častěji je to ale neochota říct, co se stalo. Pokud opravdu potřebujete další průchod, napište proč, kdy a co přesně má potvrdit.
+
+### Privacy-first ověřovací stopa
+
+Ověření má mít menší datovou stopu než samotná akce. U malých údržbových změn většinou stačí zapsat výsledek slovně.
+
+Dobrá stopa:
+
+```text
+Ověřeno při měsíční údržbě indexu. Aktuální šablona šla vybrat bez changelogu. Bez screenshotů a exportů. Dočasná poznámka z triage smazána.
+```
+
+Přehnaná stopa:
+
+```text
+Uložili jsme screenshot před a po, export indexu, záznam obrazovky a nový event pro měření otevření šablon.
+```
+
+Privacy-first otázky:
+
+1. Stačí k ověření slovní záznam?
+2. Pokud vznikl podklad, kdo k němu má přístup?
+3. Má podklad datum smazání?
+4. Nevznikla kopie zákaznických, osobních nebo interně citlivých dat?
+5. Nezavedli jsme kvůli malé akci nový trvalý tracker, formulář nebo reporting?
+6. Smazali jsme staré triage poznámky, které už nemají účel?
+
+Pokud odpověď na první otázku zní ano, žádný další podklad nevyrábějte. Údržba má zmenšovat tření i datovou stopu. Když kvůli každé malé opravě vznikne malý archiv důkazů, za pár měsíců máte velký archiv výmluv.
+
+### Ověřovací karta
+
+```text
+Datum:
+Původní akce:
+Hotovo mělo znamenat:
+První běžné použití:
+Nalezení:
+Rozhodnutí:
+Stopa:
+Co se zlepšilo:
+Co pořád drhne:
+Vedlejší nález:
+Privacy-first stopa:
+Rozhodnutí: potvrdit / doladit lokálně / vrátit do fronty / eskalovat
+Další krok:
+Vlastník:
+Termín uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Původní akce: doplnit pole "Platí od" ke třem nejpoužívanějším aktivním šablonám v indexu
+Hotovo mělo znamenat: aktuální šablonu lze vybrat z indexu bez čtení changelogu
+První běžné použití: měsíční údržba indexu
+Nalezení: provozní lead našel pole přímo u tří aktivních šablon
+Rozhodnutí: aktuální šablonu vybral bez otevření changelogu
+Stopa: zapsán jen slovní výsledek, bez screenshotů a exportů
+Co se zlepšilo: výběr aktuální verze je rychlejší a méně závisí na paměti vlastníka
+Co pořád drhne: dvě archivované šablony mají podobný název jako aktivní verze
+Vedlejší nález: sjednocení názvů archivovaných šablon, samostatně do údržbové fronty
+Privacy-first stopa: stará triage poznámka se smaže po uzavření; nevznikají nové osobní ani zákaznické údaje
+Rozhodnutí: potvrdit
+Další krok: uzavřít akci a vedlejší nález zapsat jako samostatnou položku
+Vlastník: provozní lead
+Termín uzavření: dnes
+```
+
+### Mini workshop na 15 minut
+
+Vezměte jednu dokončenou akci z Přílohy NW.
+
+1. Najděte její původní definici hotovo.
+2. Vyberte první normální použití, ne umělý test.
+3. Zapište signály nalezení, rozhodnutí a stopy.
+4. Oddělte výsledek původní akce od vedlejších nálezů.
+5. Zvolte stav: potvrdit, doladit lokálně, vrátit do fronty nebo eskalovat.
+6. Napište další krok jednou větou.
+7. Zkontrolujte, zda nevznikly zbytečné screenshoty, exporty, eventy nebo paralelní evidence.
+8. Smažte nebo označte k odstranění dočasné podklady, které už splnily účel.
+9. Pokud vznikl vedlejší nález, založte ho jako samostatnou položku bez blokování původní akce.
+10. Uzavřete kartu nebo určete přesný termín dalšího ověření.
+
+Výstup:
+
+```text
+Dokončená údržbová akce je ověřená v prvním běžném použití, má rozhodnutí o dalším stavu a nezanechává za sebou zbytečnou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Vrací se ověření k původní definici hotovo?
+- Proběhlo ověření při normálním použití, ne v umělém testu?
+- Je zapsané, jestli člověk opravené místo našel bez dalšího vysvětlování?
+- Je zapsané, jestli změna pomohla původnímu pracovnímu rozhodnutí?
+- Je oddělený výsledek původní akce od vedlejších nálezů?
+- Má akce jeden jasný stav: potvrdit, doladit lokálně, vrátit do fronty nebo eskalovat?
+- Je další krok napsaný jednou větou?
+- Nevznikly kvůli ověření nové zbytečné screenshoty, exporty, eventy ani formulářová pole?
+- Mají případné dočasné podklady účel, přístup a datum smazání?
+- Jsou staré triage poznámky uzavřené nebo připravené ke smazání?
+- Je vedlejší nález založený samostatně, pokud nemá blokovat původní akci?
+- Ví vlastník, kdy kartu zavřít nebo kdy se k ní přesně vrátit?
+
+První ověření má chránit dvě věci najednou: užitek akce a lehkost provozu. Když změna pomohla, zavřete ji a pokračujte. Když nepomohla, vraťte ji do fronty bez dramatu. Když odhalila riziko, eskalujte. A když jen vyrobila další nápady, poděkujte jim za návštěvu, zapište je bokem a nenechte je bydlet v původní kartě zadarmo.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NX o ověření proveditelné údržbové akce po prvním běžném použití: návrat k definici hotovo, výběr normálního použití, tři signály nalezení/rozhodnutí/stopy, oddělení vedlejších nálezů, rozhodovací stavy, privacy-first ověřovací stopa, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NW o převodu triage rozhodnutí do jedné proveditelné údržbové akce: pracovní sloveso, jedna akční věta, definice hotovo, místo zásahu, ověření v běžném použití, privacy-first kontrola, akční karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NV o triage údržbové fronty po novém nálezu: porovnání s existujícími položkami, šest rozhodovacích stavů, ochrana kapacity, privacy-first kontrola, triage karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NU o převodu nálezu z první běžné kontroly po lokální opravě do údržbové fronty: rozlišení návratu původního problému, dočištění, nového samostatného nálezu a provozního šumu, pracovní věta nálezu, posouzení dopadu, nejmenší další rozhodnutí, hranice rozsahu, privacy-first zařazení, karta, mini workshop a checklist.
