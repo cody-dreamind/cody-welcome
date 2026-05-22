@@ -104134,8 +104134,240 @@ Jeden drobný nález z první běžné kontroly je převedený do následné kor
 
 Následná korekce je dobrá ve chvíli, kdy po ní systém působí obyčejněji. Člověk najde správné místo rychleji, stará cesta je méně viditelná a nikdo kvůli tomu nemusí vyplňovat novou evidenci. To je přesně ten typ malého zlepšení, které se na poradě nevyjímá dramaticky, ale v provozu šetří čas každý týden.
 
+## Příloha NJ: Ověření následné údržbové korekce po dalším běžném průchodu
+
+Příloha NI převedla drobný nález z první běžné kontroly do jedné následné korekce. Tato příloha zavírá další krok: ověřuje, jestli korekce opravdu odstranila tření v běžné práci, nebo jen hezky vypadala v okamžiku provedení.
+
+Ověření má být malé, protože i korekce byla malá. Nejde o audit celého procesu, nový průzkum ani kontrolu výkonu lidí. Jde o jeden další normální průchod situací, ve které se původní nález objevil.
+
+Otázka této přílohy:
+
+```text
+Odstranila následná korekce konkrétní nález, aniž přidala novou práci, novou evidenci nebo novou datovou stopu?
+```
+
+Výstupem je krátká ověřovací karta:
+
+```text
+Korekční věta:
+Běžný průchod:
+Původní nález:
+Výsledek ověření:
+Nové tření:
+Datová stopa:
+Rozhodnutí:
+Další krok:
+Vlastník:
+```
+
+Dobré ověření je trochu neatraktivní. Vezmete normální práci, podíváte se, jestli prošla opraveným místem, a zapíšete rozhodnutí. Když k tomu potřebujete další poradu, tabulku, hlasování a speciální kontrolní den, ověření se nejspíš utrhlo ze řetězu.
+
+### Začněte korekční větou
+
+Neověřujte pocit, že "už je to lepší". Vraťte se ke korekční větě z Přílohy NI. Ta drží rozsah a připomíná, co přesně mělo být opraveno.
+
+Příklad:
+
+```text
+Opravíme připnutou zprávu v kanálu podpory, aby běžná kontrola exportu vedla přes kanonickou auditní šablonu bez návratu ke screenshotovému checklistu.
+```
+
+Z této věty vyplývají tři kontrolní otázky:
+
+1. Vedla běžná kontrola exportu přes připnutou zprávu?
+2. Otevřela se kanonická auditní šablona?
+3. Nevrátil se screenshotový checklist?
+
+To stačí. Nepřidávejte dalších deset otázek jen proto, že by "mohly být užitečné". Ověření má chránit malou korekci před bobtnáním.
+
+### Vyberte první normální průchod
+
+Správný průchod není ten, který si tým připraví, aby korekce dopadla dobře. Správný průchod je první běžná situace, ve které by se původní tření mohlo znovu projevit.
+
+Vhodné průchody:
+
+- další pravidelná kontrola exportu;
+- další použití interní šablony odpovědi;
+- další onboardingový úkol, který vede přes opravený rozcestník;
+- další ticket, kde se používá přejmenované pole;
+- další provozní kontrola, která dřív začínala starým odkazem.
+
+Nevhodné průchody:
+
+- ukázka pro tým po změně;
+- ruční test autora korekce bez reálného kontextu;
+- zpětné procházení starých případů;
+- hromadná kontrola všech souvisejících dokumentů;
+- schůzka, kde se o korekci jen mluví.
+
+Pokud normální průchod nenastane do rozumného termínu, nevyhlašujte korekci za ověřenou. Zapište stav `Čeká na použití` a dejte mu datum návratu. Některé věci prostě potřebují reálný okamžik, ne slavnostní simulaci.
+
+### Sledujte trasu, ne člověka
+
+Ověření následné korekce nemá odpovídat na otázku, kdo si pamatoval novou instrukci. Má odpovědět, jestli pracovní trasa vede správným směrem i bez hrdinského úsilí.
+
+Sledujte hlavně:
+
+- kde člověk začal;
+- jestli narazil na opravené místo;
+- jestli z něj vedla správná další akce;
+- jestli stará cesta byla méně dostupná než nová;
+- jestli výsledek vznikl bez doptávání;
+- jestli se kvůli ověření nevytvořila nová kopie dat.
+
+Příklad dobrého zápisu:
+
+```text
+Při další kontrole exportu šel tým z připnuté zprávy do kanonické auditní šablony. Starý screenshotový checklist se nepoužil a nevznikla žádná nová evidence použití.
+```
+
+Slabý zápis:
+
+```text
+Podpora si tentokrát vzpomněla, že má použít novou šablonu.
+```
+
+Druhý zápis přesouvá odpovědnost na paměť člověka. To je přesně to, čemu měla korekce zabránit. Pokud systém funguje jen díky tomu, že si někdo vzpomene, oprava ještě není hotová.
+
+### Rozhodněte jedním ze čtyř stavů
+
+Po ověření vyberte jeden stav. Stav musí vést k dalšímu kroku, ne k neurčité debatě.
+
+`Uzavřít`
+
+Korekce odstranila původní nález, práce prošla správnou trasou a nevznikla nová datová ani evidenční stopa. Zapište výsledek do zdroje pravdy nebo k původní kartě a korekci zavřete.
+
+`Ještě drobně zpřesnit`
+
+Původní nález je skoro pryč, ale zůstalo jedno malé tření: věta je trochu nejasná, odkaz je správný, ale špatně popsaný, nebo stará cesta přežila na jednom viditelném místě. Zpřesnění musí být stejně malé jako korekce.
+
+`Vrátit do údržbové fronty`
+
+Ověření ukázalo, že problém je širší než jeden nález. Třeba existuje víc starých cest, nejasný vlastník, dvě paralelní šablony nebo chybějící zdroj pravdy. V takovém případě z malé korekce nedělejte sérii záplat. Vraťte téma do údržbové fronty jako samostatnou položku.
+
+`Otevřít riziko`
+
+Korekce odkryla bezpečnostní, právní, privacy nebo provozní riziko. Například se ukázalo, že starý export obsahuje osobní data, že dočasné screenshoty leží ve sdílené složce, nebo že lidé používají neautorizovaný nástroj. Tady už nejde o textovou úpravu. Nejprve řešte riziko.
+
+Codyho komentář: stav `Ještě drobně zpřesnit` je užitečný jen tehdy, když je opravdu drobný. Jakmile ho použijete potřetí za sebou, není to zpřesňování. Je to jen elegantní způsob, jak nepřiznat, že problém patří do větší fronty.
+
+### Privacy-first kontrola po ověření
+
+Malé ověření nesmí vyrobit větší datovou stopu než původní problém. U korekcí se často objeví pokušení "pro jistotu" ukládat důkazy, kdo co použil, kdy klikl a jak postupoval. To je většinou zbytečné a někdy i škodlivé.
+
+Před uzavřením odpovězte:
+
+1. Vznikl kvůli ověření nový screenshot, export nebo záznam obrazovky?
+2. Obsahuje ověřovací poznámka osobní údaje zákazníka nebo zaměstnance?
+3. Stačí anonymizovaná věta místo konkrétního příkladu?
+4. Byla odstraněna stará cesta, nebo zůstala dostupná jako skrytá kopie?
+5. Má případný dočasný podklad jasné smazání?
+6. Nepřidalo ověření sledování konkrétních lidí?
+7. Je výsledek uložený u původní korekční karty, ne v nové paralelní evidenci?
+
+Silný zápis:
+
+```text
+Ověření proběhlo při běžné kontrole exportu. Výsledek je zapsaný jednou anonymizovanou větou u korekční karty; žádný screenshot ani nová evidence použití nevznikly.
+```
+
+Slabý zápis:
+
+```text
+Pro ověření jsme uložili screenshot obrazovky každého člena podpory a tabulku, kdo použil nový odkaz.
+```
+
+To druhé už není ověření trasy. To je dohled nad lidmi maskovaný jako procesní jistota.
+
+### Ověřovací karta
+
+Použijte ji hned po prvním normálním průchodu.
+
+```text
+Datum:
+Korekční věta:
+Původní nález:
+Běžný průchod:
+Kde práce začala:
+Opravené místo:
+Správná další akce:
+Stará cesta se objevila kde:
+Nové tření:
+Datová stopa před ověřením:
+Datová stopa po ověření:
+Dočasné podklady ke smazání:
+Rozhodnutí:
+Další krok:
+Vlastník:
+Termín:
+Kdy téma vrátit do údržbové fronty:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Korekční věta: opravíme připnutou zprávu, aby kontrola exportu vedla přes kanonickou auditní šablonu bez návratu ke screenshotovému checklistu
+Původní nález: připnutá zpráva v kanálu podpory vedla na starý screenshotový checklist
+Běžný průchod: další pravidelná kontrola exportu
+Kde práce začala: kanál podpory
+Opravené místo: připnutá zpráva
+Správná další akce: otevření kanonické auditní šablony
+Stará cesta se objevila kde: nikde v běžném průchodu
+Nové tření: žádné
+Datová stopa před ověřením: starý checklist byl archivovaný bez zákaznických příkladů
+Datová stopa po ověření: zůstává jen anonymizovaná věta u korekční karty
+Dočasné podklady ke smazání: žádné
+Rozhodnutí: Uzavřít
+Další krok: ponechat opravenou připnutou zprávu jako běžný vstup
+Vlastník: provozní lead
+Termín: hotovo při ověření
+Kdy téma vrátit do údržbové fronty: pokud se starý checklist objeví v jiné kanonické trase
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu následnou korekci z Přílohy NI.
+
+1. Opište korekční větu.
+2. Vyberte první normální průchod, kde se korekce opravdu použila.
+3. Popište, kde práce začala.
+4. Zapište, jestli prošla přes opravené místo.
+5. Zkontrolujte, jestli správná další akce byla jasná.
+6. Najděte případný návrat staré cesty.
+7. Pojmenujte nové tření, pokud vzniklo.
+8. Zkontrolujte screenshoty, exporty, kopie a osobní údaje.
+9. Vyberte stav Uzavřít, Ještě drobně zpřesnit, Vrátit do údržbové fronty nebo Otevřít riziko.
+10. Zapište jeden další krok.
+
+Výstup:
+
+```text
+Následná korekce je ověřená na jednom běžném průchodu a uzavřená rozhodnutím, které nepřidává novou evidenci ani sledování lidí.
+```
+
+### Checklist kapitoly
+
+- Ověřujete konkrétní korekční větu, ne obecný pocit zlepšení?
+- Vybrali jste první normální průchod, ne ukázkový test?
+- Sledujete pracovní trasu, ne paměť nebo poslušnost člověka?
+- Je jasné, kde práce začala?
+- Prošla práce přes opravené místo?
+- Vedlo opravené místo ke správné další akci?
+- Byla stará cesta méně dostupná nebo úplně zavřená?
+- Nevzniklo nové tření nalezení, pochopení nebo provedení?
+- Umíte rozhodnout jedním ze čtyř stavů?
+- Nepoužíváte `Ještě drobně zpřesnit` jako zástěrku pro větší problém?
+- Nevznikl kvůli ověření nový screenshot, export nebo osobní záznam?
+- Stačí anonymizovaná věta místo konkrétních příkladů?
+- Je výsledek uložený u původní korekce?
+- Má další krok vlastníka, i když je další krok jen uzavření?
+
+Ověřená korekce má zmizet z pozornosti. Ne proto, že by byla bezvýznamná, ale protože se stala součástí normální práce. Správná cesta je viditelnější, stará cesta méně lákavá a tým nepotřebuje další tabulku, aby si dokázal, že proces existuje.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NJ o ověření následné údržbové korekce po dalším běžném průchodu: návrat ke korekční větě, výběr normálního průchodu, sledování pracovní trasy místo lidí, rozhodovací stavy, privacy-first kontrola ověřovací stopy, ověřovací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NI o převodu nálezu z první běžné kontroly do následné údržbové korekce: výběr nálezu se stavem Drobně opravit, korekční věta, jedno místo zásahu, hranice rozsahu, privacy-first kontrola, ověření dalším běžným průchodem, korekční karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NH o první běžné kontrole malé údržbové úpravy po uzavření: výběr normálního použití, návrat k uzavírací větě, hledání starých cest, třídění tření, kontrola datové stopy, rozhodovací stavy, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna úvodní sekce Jak uzavřít jednu čtecí iteraci: pracovní protokol rozhodnutí, důvod, ověření a hranice rozsahu, příklad zápisu po čtení, privacy-first ověřování bez nových trackerů, stavy Potvrdit/Doladit/Vrátit/Odložit a checklist uzavření.
