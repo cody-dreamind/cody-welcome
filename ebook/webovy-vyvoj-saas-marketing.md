@@ -103629,8 +103629,258 @@ Potvrzená malá údržbová úprava je zavřená, uložená ve zdroji pravdy, o
 
 Uzavření malé údržbové úpravy je drobná, ale důležitá disciplína. Bez něj se z dobrých oprav stávají vrstvy polovičních pravidel. S ním má tým jednu platnou trasu, lehkou stopu rozhodnutí a méně důvodů schovávat staré návody v osobních poznámkách.
 
+## Příloha NH: První běžná kontrola malé údržbové úpravy po uzavření
+
+Příloha NG zavřela potvrzenou malou údržbovou úpravu do běžné údržby. Tato příloha řeší další okamžik: úprava už není v testovacím režimu, ale ještě je čerstvá. První běžná kontrola má ověřit, jestli se nové pravidlo opravdu drží v normální práci, jestli nevytvořilo novou okliku a jestli po uzavření nezůstaly staré stopy, které tým tahají zpět.
+
+Otázka této přílohy:
+
+```text
+Drží potvrzená malá údržbová úprava i po uzavření, bez zvláštního dohledu, paralelní evidence a nové datové stopy?
+```
+
+Výstupem je krátká kontrolní karta:
+
+```text
+Kontrolovaná úprava:
+Běžné použití:
+Co mělo zůstat jednodušší:
+Co se v práci skutečně stalo:
+Návrat staré cesty:
+Nové tření:
+Datová stopa:
+Rozhodnutí:
+Další krok:
+Vlastník:
+Datum kontroly:
+```
+
+Tato kontrola nemá dokazovat, že předchozí práce byla správná. Má chránit tým před tichým návratem starého postupu. Malá oprava může být při ověření perfektní a přesto se za dva týdny rozpadnout, protože někde zůstal starý odkaz, nový krok je moc schovaný nebo lidé dál používají osobní kopii checklistu.
+
+### Vyberte první normální použití
+
+Nekontrolujte úpravu ve slavnostním režimu. Nevyhlašujte speciální audit, neposílejte lidem připomínku a nevytvářejte další tabulku jen kvůli ověření. Vyberte první přirozené použití, ve kterém by se nová běžná trasa měla objevit sama.
+
+Dobré kontrolní okno:
+
+- nejbližší pravidelná údržba šablon;
+- běžný auditní ticket;
+- normální předání výstupu zákazníkovi;
+- pravidelná kontrola onboardingové trasy;
+- standardní provozní review, kde se daný artefakt stejně otevírá.
+
+Slabé kontrolní okno:
+
+```text
+Všichni si teď připomenou novou úpravu a ukážou, že ji umí použít.
+```
+
+To ověřuje poslušnost v kontrolovaný den, ne kvalitu systému. První běžná kontrola má ukázat, jestli trasa funguje i bez toho, aby ji někdo držel za ruku.
+
+### Vraťte se k uzavírací větě
+
+Před kontrolou si přečtěte uzavírací větu z Přílohy NG. Je to kotva, podle které poznáte, jestli se úprava opravdu stala součástí běžné práce.
+
+Příklad:
+
+```text
+Potvrzujeme, že odkaz z osobního checklistu na kanonickou šablonu auditního ticketu při běžném průchodu odstranil screenshotový krok bez kopírování detailu exportu do komentáře.
+```
+
+Z takové věty vzniknou tři kontrolní otázky:
+
+1. Vedla práce opravdu přes kanonickou šablonu?
+2. Nevrátil se screenshotový krok?
+3. Nevzniklo kopírování detailu exportu jinam?
+
+Když uzavírací věta nejde převést na tři jednoduché otázky, byla nejspíš napsaná moc obecně. V takovém případě ji nejdřív zpřesněte. Kontrola bez jasné kotvy se rychle promění v pocitovou debatu, jestli je "to už lepší".
+
+### Sledujte návrat staré cesty
+
+U čerstvě uzavřených úprav je největší riziko návrat staré cesty. Ne proto, že by lidé chtěli sabotovat proces. Často jen používají odkaz, záložku, kopii, starý návyk nebo zprávu, která přežila úklid.
+
+Hledejte hlavně:
+
+- staré odkazy v připnutých zprávách;
+- osobní kopie checklistů;
+- duplicitní šablony v jiné složce;
+- instrukce v onboardingových materiálech, které nebyly aktualizované;
+- exporty, screenshoty nebo komentáře, které měly po uzavření zmizet;
+- starý název kroku v ticketu, který mate při hledání;
+- nové vysvětlování v chatu, protože aktuální zdroj pravdy nestačí.
+
+Praktická věta do karty:
+
+```text
+Stará cesta se nevrátila v hlavní šabloně, ale zůstala v připnuté zprávě v kanálu podpory.
+```
+
+To je užitečnější než "lidé to pořád dělají špatně". Popisuje místo zásahu. A místo zásahu je to, co se dá opravit bez moralizování.
+
+### Rozlišujte tři typy tření
+
+Když úprava po uzavření drhne, netlačte hned na další velkou změnu. Nejdřív pojmenujte typ tření:
+
+1. Tření nalezení: člověk neví, kde je nový zdroj pravdy.
+2. Tření pochopení: člověk zdroj najde, ale neví, co má udělat.
+3. Tření provedení: člověk ví, co má udělat, ale práce je pořád zbytečně těžká.
+
+Příklad třídění:
+
+```text
+Tření nalezení: starý odkaz v připnuté zprávě vede mimo kanonickou šablonu.
+Tření pochopení: nová věta "neukládej důkaz" není jasná, protože tým neví, co se má zapsat místo screenshotu.
+Tření provedení: stav "Export ověřen" existuje, ale v ticketu je schovaný pod rozbalovací volbou.
+```
+
+Každý typ tření chce jiný zásah. U nalezení často stačí opravit odkaz. U pochopení stačí přepsat jednu větu. U provedení může být potřeba změnit formulář, šablonu nebo pořadí polí.
+
+Codyho komentář: když se všechno označí jako "lidé nedodržují proces", tým si koleduje o školení, které nikomu nepomůže. Většinou není problém v charakteru lidí, ale v tom, že stará cesta je pořád pohodlnější než nová. Proces, který prohraje s připnutou zprávou z loňska, nemá vyčítat lidem lenost. Má uklidit připnutou zprávu.
+
+### Zkontrolujte datovou stopu po uzavření
+
+Uzavřená úprava měla snížit nebo aspoň nezvětšit datovou stopu. První běžná kontrola ověřuje, jestli se to v praxi opravdu stalo.
+
+Odpovězte:
+
+1. Zmizely dočasné screenshoty, exporty nebo kopie ticketů?
+2. Nevznikla nová evidence "pro jistotu"?
+3. Stačí anonymizovaná rozhodovací věta místo konkrétního příkladu?
+4. Nezačal někdo ukládat důkaz do chatu, protože šablona neříká, co má udělat?
+5. Je archivní stopa pořád úměrná důvodu změny?
+6. Má případný zbylý podklad jasnou retenci a vlastníka?
+
+Silný výsledek:
+
+```text
+Běžná práce používá stav "Export ověřen"; screenshoty se neukládají, v archivu zůstává jen anonymizovaná věta důvodu změny.
+```
+
+Slabý výsledek:
+
+```text
+Screenshoty už nedáváme do ticketu, ale pro jistotu je posíláme do chatu.
+```
+
+To není privacy-first zlepšení. To je přesun nepořádku z jednoho místa na druhé, jen s lepším pocitem a horším dohledáním.
+
+### Rozhodněte jedním ze čtyř stavů
+
+Na konci kontroly vyberte jeden stav:
+
+- Drží: úprava funguje v běžné práci a není potřeba další zásah.
+- Drobně opravit: úprava je správná, ale jedno místo ji zbytečně komplikuje.
+- Vrátit do údržbové fronty: problém je větší než jedna drobná oprava a potřebuje samostatnou položku.
+- Otevřít riziko: úprava vytvořila provozní, právní, bezpečnostní nebo privacy-first problém.
+
+Příklady rozhodnutí:
+
+```text
+Drží: běžný auditní ticket použil kanonickou šablonu, screenshot se nevrátil a datová stopa zůstala minimální.
+```
+
+```text
+Drobně opravit: nová trasa funguje, ale připnutá zpráva v kanálu podpory stále vede na starý checklist.
+```
+
+```text
+Vrátit do údržbové fronty: tým používá tři různé šablony, takže nejde opravit jen jeden odkaz.
+```
+
+```text
+Otevřít riziko: dočasné exporty se přesunuly do osobních složek bez retence a vlastníka.
+```
+
+Rozhodnutí má být stručné. Pokud potřebuje půl stránky vysvětlení, pravděpodobně v sobě míchá víc nálezů. Vyberte jeden hlavní a zbytek nechte jako kontext.
+
+### Karta první běžné kontroly
+
+Použijte ji při prvním přirozeném použití úpravy po jejím uzavření.
+
+```text
+Datum:
+Kontrolovaná úprava:
+Uzavírací věta:
+Běžné použití:
+Kdo byl vlastníkem běžné údržby:
+Co mělo zůstat jednodušší:
+Co se v práci skutečně stalo:
+Návrat staré cesty:
+Typ tření:
+Nové tření:
+Datová stopa po uzavření:
+Co se nemusí sledovat:
+Rozhodnutí:
+Další krok:
+Kdy znovu otevřít:
+Vlastník dalšího kroku:
+Co zůstává mimo rozsah:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Kontrolovaná úprava: auditní ticket používá stav "Export ověřen" místo screenshotu
+Uzavírací věta: potvrzená úprava odstranila screenshotový krok bez kopírování detailu exportu do komentáře
+Běžné použití: pravidelná kontrola exportu v auditním ticketu
+Kdo byl vlastníkem běžné údržby: provozní lead
+Co mělo zůstat jednodušší: ověření exportu bez ukládání obsahu exportu
+Co se v práci skutečně stalo: ticket použil správný stav, ale starý odkaz přežil v připnuté zprávě
+Návrat staré cesty: částečný, jen přes připnutou zprávu
+Typ tření: nalezení
+Nové tření: žádné
+Datová stopa po uzavření: screenshot se neuložil, archiv obsahuje jen anonymizovanou větu
+Co se nemusí sledovat: kdo starou zprávu otevřel
+Rozhodnutí: drobně opravit
+Další krok: nahradit připnutou zprávu odkazem na kanonickou šablonu
+Kdy znovu otevřít: pokud se screenshotový krok objeví v dalším auditním ticketu
+Vlastník dalšího kroku: provozní lead
+Co zůstává mimo rozsah: redesign celé auditní šablony
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu úpravu uzavřenou podle Přílohy NG.
+
+1. Najděte první normální použití po uzavření.
+2. Přečtěte uzavírací větu.
+3. Přepište ji na tři kontrolní otázky.
+4. Projděte, jestli práce vedla přes zdroj pravdy.
+5. Najděte případný návrat staré cesty.
+6. Pojmenujte tření nalezení, pochopení nebo provedení.
+7. Zkontrolujte screenshoty, exporty, kopie a chatové důkazy.
+8. Vyberte stav Drží, Drobně opravit, Vrátit do údržbové fronty nebo Otevřít riziko.
+9. Zapište jeden další krok a vlastníka.
+
+Výstup:
+
+```text
+První běžná kontrola potvrdila, jestli malá údržbová úprava po uzavření drží v normální práci, a případný nález převedla do jednoho dalšího kroku bez nového sledování lidí.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete první normální použití, ne speciální test?
+- Máte po ruce uzavírací větu z Přílohy NG?
+- Umíte ji převést na jednoduché kontrolní otázky?
+- Vedla práce přes aktuální zdroj pravdy?
+- Nevrátil se starý odkaz, checklist, šablona nebo připnutá zpráva?
+- Pojmenovali jste typ tření: nalezení, pochopení nebo provedení?
+- Hledáte místo zásahu, ne viníka?
+- Nevznikla nová paralelní evidence?
+- Nezůstaly dočasné screenshoty, exporty nebo kopie bez účelu?
+- Stačí anonymizovaná věta místo konkrétního příkladu?
+- Je rozhodnutí zapsané jedním ze čtyř stavů?
+- Má další krok vlastníka?
+- Je jasné, kdy se má úprava znovu otevřít?
+- Je zapsané, co zůstává mimo rozsah?
+
+První běžná kontrola je malá pojistka proti návratu starého nepořádku. Když dopadne dobře, úprava může dál žít v běžném rytmu. Když najde tření, nemá z toho vzniknout nový velký projekt. Má vzniknout jedna přesná oprava místa, kde se nová cesta ještě neumí prosadit sama.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NH o první běžné kontrole malé údržbové úpravy po uzavření: výběr normálního použití, návrat k uzavírací větě, hledání starých cest, třídění tření, kontrola datové stopy, rozhodovací stavy, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna úvodní sekce Jak uzavřít jednu čtecí iteraci: pracovní protokol rozhodnutí, důvod, ověření a hranice rozsahu, příklad zápisu po čtení, privacy-first ověřování bez nových trackerů, stavy Potvrdit/Doladit/Vrátit/Odložit a checklist uzavření.
 - 2026-05-22: Doplněna Příloha NG o uzavření potvrzené malé údržbové úpravy do běžné údržby: uzavírací věta, přepis do zdroje pravdy, zavření přechodové evidence, napojení na přirozenou kontrolu, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NF o ověření malé údržbové úpravy po dalším běžném průchodu: návrat k větě Hotovo znamená, sledování běžné práce bez slavnostního testu, rozhodovací stavy Potvrdit/Doladit/Vrátit do fronty/Otevřít riziko, rozlišení trasy od poslušnosti týmu, privacy-first ověřovací záznam, karta, mini workshop a checklist.
