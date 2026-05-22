@@ -105647,8 +105647,236 @@ Potvrzené drobné doladění je propsané do kanonického místa, přechodové 
 
 Dobře uzavřené drobné doladění není vidět jako nový proces. Je vidět jako menší tření při příští práci. Správný odkaz je nahoře, archiv se netváří jako současnost, dočasné poznámky nezůstávají v koutě a tým nemusí přemýšlet, kde je pravda. Malá věc, jasně zavřená. Přesně takové věci dlouhodobě drží provoz v rozumném stavu.
 
+## Příloha NP: První běžná kontrola po uzavření drobného doladění
+
+Příloha NO zavřela potvrzené drobné doladění do běžné údržby. Tím se téma nemá držet při životě jako samostatný projekt, ale úplně zmizet z mimořádného režimu. Přesto má smysl udělat při nejbližším přirozeném návratu krátkou kontrolu: ne proto, abychom znovu dokazovali hotovou práci, ale abychom ověřili, že uzavření neponechalo starou stopu jako skrytou alternativu.
+
+Otázka této přílohy:
+
+```text
+Drží uzavřené drobné doladění v běžné údržbě bez nové evidence, bez návratu staré cesty a bez zbytečné datové stopy?
+```
+
+Výstupem je krátká kontrolní karta:
+
+```text
+Uzavřené doladění:
+Běžný návrat:
+Správná cesta:
+Stará stopa:
+Nové tření:
+Datová stopa:
+Rozhodnutí:
+Další krok:
+```
+
+Tahle kontrola má být menší než uzavření. Pokud se z ní stane samostatný audit, systém si z jedné drobnosti vyrobil novou práci. Cílem je přesný pohled na normální použití: člověk otevře běžný úkol, najde správné místo, starý materiál ho nesvede a nevznikne nová evidence jen kvůli ověření.
+
+Codyho komentář: údržba je zdravá ve chvíli, kdy se dobré opravy přestanou připomínat. Když se každé drobné doladění musí měsíce hlídat jako porcelán na okraji stolu, nebylo dobře začleněné. Nebo máte moc stolů. To už je jiná kapitola.
+
+### Kontrolujte jen při přirozeném návratu
+
+První běžná kontrola po uzavření nemá mít vlastní speciální schůzku. Vezměte nejbližší existující rytmus, který by se k tématu stejně vrátil:
+
+- měsíční kontrolu šablon;
+- kvartální revizi indexu;
+- běžný export nebo import dat;
+- onboarding nového člověka;
+- údržbu prodejních materiálů;
+- kontrolu archivních odkazů;
+- pravidelný provozní review.
+
+Nevhodný návrat:
+
+```text
+Zakládáme nový recurring úkol jen pro kontrolu jednoho přejmenovaného archivu.
+```
+
+Vhodný návrat:
+
+```text
+Při příští kvartální kontrole šablon ověříme, že archivní checklist zůstává označený jako archiv a aktuální auditní šablona je první pracovní cesta.
+```
+
+Rozdíl je praktický. V prvním případě drobná oprava dál spotřebovává pozornost. Ve druhém se zkontroluje tam, kde už pozornost stejně je.
+
+### Vraťte se ke třem věcem
+
+Při kontrole stačí tři pohledy:
+
+```text
+Správná cesta:
+Najde člověk aktuální zdroj pravdy bez vysvětlování bokem?
+
+Stará stopa:
+Nemůže starý materiál působit jako aktuální postup?
+
+Datová stopa:
+Nevznikly kvůli uzavření nové kopie, screenshoty, tabulky nebo osobní záznamy?
+```
+
+Příklad:
+
+```text
+Uzavřené doladění:
+Archivní exportní checklist byl označen jako archiv a index vede na aktuální auditní šablonu.
+
+Správná cesta:
+Při kvartální kontrole šablon vede index na aktuální auditní šablonu.
+
+Stará stopa:
+Archivní checklist je dohledatelný jen jako archiv a první řádek jasně říká, že se nepoužívá pro nové exporty.
+
+Datová stopa:
+Nevznikly nové screenshoty ani seznam lidí; kontrola je zapsaná jednou anonymizovanou větou.
+```
+
+Tři pohledy stačí. Nehodnoťte znovu celý proces exportu, kvalitu všech šablon ani obecnou úroveň dokumentace. Pokud během kontroly objevíte další problém, zapište ho jako samostatný nález do údržbové fronty. Nestrkejte ho do této smyčky jen proto, že ležel vedle.
+
+### Rozlišujte návrat problému a běžné tření
+
+Ne každé tření znamená, že uzavřené doladění selhalo. Někdy je problém v jiné části systému. Někdy se objeví nové lokální tření. A někdy se skutečně vrátila stará cesta.
+
+Použijte tři značky:
+
+```text
+Drží:
+Správná cesta funguje a stará stopa neklame.
+
+Drží s drobným třením:
+Hlavní cesta funguje, ale jedno blízké místo potřebuje malé zpřesnění.
+
+Nedrží:
+Stará cesta se vrátila jako pracovní varianta nebo správná cesta nejde najít bez znalosti historie.
+```
+
+Příklad `Drží`:
+
+```text
+Index vede na aktuální šablonu, archiv je jasně označený a nebyl použit jako pracovní postup.
+```
+
+Příklad `Drží s drobným třením`:
+
+```text
+Index vede správně, ale archivní dokument má v interním vyhledávání stále starý titulek. Stačí upravit titulek archivu.
+```
+
+Příklad `Nedrží`:
+
+```text
+Tým znovu začal ze starého checklistu, protože na něj vede onboardingový materiál i automatická připomínka.
+```
+
+Stav `Nedrží` neřešte dalším drobným doladěním bokem. Vraťte téma do údržbové fronty jako nový nález. Když má problém víc cest zpět, jedna přelepka ho nezastaví.
+
+### Privacy-first kontrola běžného návratu
+
+Při první běžné kontrole po uzavření je lákavé "pro jistotu" uložit důkaz. Jenže u drobných údržbových smyček bývá nejlepší důkaz krátký, anonymní a napojený na existující záznam.
+
+Kontrolní otázky:
+
+1. Stačí jedna věta o běžném průchodu?
+2. Nevznikl screenshot s osobními nebo zákaznickými daty?
+3. Nepíšeme jména lidí, když stačí role nebo popis cesty?
+4. Nezakládáme novou tabulku jen pro jedno uzavřené doladění?
+5. Nezůstala stará stopa dostupná bez archivního označení?
+6. Je případný nový nález zapsaný bez citlivých detailů?
+7. Je výsledek uložený v existující údržbě?
+
+Silný zápis:
+
+```text
+Při kvartální kontrole šablon index vedl na aktuální auditní šablonu a archivní checklist zůstal označený jako archiv. Nevznikl screenshot, export ani seznam lidí.
+```
+
+Slabý zápis:
+
+```text
+Uložíme screenshot vyhledávání a jména lidí, kteří otevřeli archiv, abychom měli jistotu.
+```
+
+Privacy-first provoz nemá být slepý. Má být přiměřený. U malého doladění často stačí zkontrolovat cestu a nezvětšovat datovou stopu jen proto, že kontrola vypadá seriózněji s přílohou.
+
+### Kontrolní karta po uzavření doladění
+
+```text
+Datum:
+Uzavřené doladění:
+Běžný návrat:
+Kanonické místo:
+Správná cesta:
+Stará stopa:
+Nové tření:
+Datová stopa kontroly:
+Dočasné podklady:
+Rozhodnutí: Drží / Drží s drobným třením / Nedrží
+Další krok:
+Co zůstává mimo rozsah:
+Vlastník:
+Termín:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Uzavřené doladění: archivní exportní checklist už nepůsobí jako aktuální postup
+Běžný návrat: kvartální kontrola šablon
+Kanonické místo: index exportních postupů a aktuální auditní šablona
+Správná cesta: index vede na aktuální auditní šablonu
+Stará stopa: archivní checklist je označený jako archiv a první řádek odkazuje na aktuální postup
+Nové tření: žádné
+Datová stopa kontroly: jedna anonymizovaná věta v kvartální údržbě
+Dočasné podklady: žádné
+Rozhodnutí: Drží
+Další krok: ponechat v běžné kvartální kontrole šablon
+Co zůstává mimo rozsah: nekontrolujeme celý exportní proces ani další archivní dokumenty
+Vlastník: provozní lead
+Termín: uzavřeno
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jedno doladění uzavřené podle Přílohy NO.
+
+1. Najděte nejbližší běžný návrat, který už existuje.
+2. Přečtěte uzavírací větu z předchozí karty.
+3. Ověřte, že kanonické místo vede ke správné práci.
+4. Zkontrolujte, jestli stará stopa nepůsobí jako aktuální cesta.
+5. Pojmenujte nové tření, pokud se objevilo.
+6. Udělejte privacy-first kontrolu bez screenshotů a nové evidence.
+7. Rozhodněte `Drží`, `Drží s drobným třením` nebo `Nedrží`.
+8. Pokud drží, vraťte téma do běžného rytmu.
+9. Pokud drží s třením, zapište jeden malý nález.
+10. Pokud nedrží, vraťte téma do údržbové fronty.
+
+Výstup:
+
+```text
+Uzavřené drobné doladění bylo zkontrolované při běžném návratu a tým ví, jestli zůstává v údržbě, potřebuje jednu lokální opravu, nebo se vrací do fronty.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete při přirozeném návratu, ne ve speciálním rituálu?
+- Vycházíte z uzavírací karty Přílohy NO?
+- Je jasné kanonické místo, které má vést další práci?
+- Ověřili jste správnou cestu bez vysvětlování bokem?
+- Zkontrolovali jste, že stará stopa nepůsobí jako aktuální postup?
+- Rozlišili jste běžné tření od návratu starého problému?
+- Používáte stavy Drží, Drží s drobným třením nebo Nedrží?
+- Nevyrábíte další doladění, pokud se problém vrátil přes více míst?
+- Nevznikl screenshot, export, tabulka ani seznam lidí bez jasného účelu?
+- Je výsledek zapsaný do existující údržby?
+- Je jasné, co zůstává mimo rozsah?
+- Má další krok vlastníka a termín?
+
+První běžná kontrola po uzavření drobného doladění má potvrdit jednoduchou věc: oprava se opravdu stala součástí normální práce. Když drží, nechte ji být. Když trochu drhne, opravte nejbližší místo. Když nedrží, přiznejte větší nález a vraťte ho do fronty. Údržba má být klidná, ale ne slepá.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NP o první běžné kontrole po uzavření drobného doladění: přirozený návrat v existujícím rytmu, kontrola správné cesty, staré stopy a datové stopy, rozhodnutí Drží/Drží s drobným třením/Nedrží, kontrolní karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NO o uzavření potvrzeného drobného doladění do běžné údržby: potvrzená věta, přepis kanonického místa, zavření přechodových stop, napojení na existující údržbový rytmus, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NN o ověření drobného doladění po dalším běžném průchodu: návrat k původnímu tření, výběr normálního průchodu, sledování pracovní cesty místo poslušnosti, rozhodnutí Potvrdit/Ještě jednou drobně doladit/Vrátit do údržbové fronty, privacy-first ověření bez nové stopy, ověřovací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NM o drobném doladění po první běžné kontrole uzavřené korekce: vstup jen pro stav Drobně doladit, oprava nejbližšího pracovního místa, rozhodnutí Přepsat/Označit/Odstranit, ověření dalším normálním průchodem, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
