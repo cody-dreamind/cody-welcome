@@ -104626,8 +104626,267 @@ Potvrzená následná korekce je uzavřená do běžné údržby: existuje jedno
 
 Dobře uzavřená korekce není vidět jako korekce. Je vidět jen jako normální, čistá pracovní cesta. To je ideální konec malých údržbových změn: žádné fanfáry, žádný nový systém, jen méně tření a méně stop, které budou za měsíc předstírat, že jsou pořád aktuální.
 
+## Příloha NL: První běžná kontrola po uzavření následné korekce
+
+Příloha NK uzavřela potvrzenou následnou korekci do běžné údržby. Tato příloha řeší první návrat k takto uzavřené práci. Ne proto, aby se korekce znovu otevřela jen z nervozity, ale aby tým ověřil, že se opravdu stala součástí normálního rytmu.
+
+První běžná kontrola má být nenápadná. Nemá vyvolat speciální audit, novou poradu ani pocit, že každá malá oprava potřebuje vlastní správní radu. Má jen zkontrolovat, jestli uzavřená korekce drží v reálné práci bez přechodových karet, připomínek a osobního dohledu.
+
+Otázka této přílohy:
+
+```text
+Drží uzavřená následná korekce v běžné údržbě tak, že práce používá správnou cestu, stará stopa se nevrací a nevzniká nová evidence navíc?
+```
+
+Výstupem je krátká karta první běžné kontroly:
+
+```text
+Uzavřená korekce:
+Běžný kontrolní rytmus:
+Kontrolovaný průchod:
+Správná cesta:
+Návrat staré stopy:
+Nové tření:
+Datová stopa:
+Rozhodnutí:
+Další krok:
+Vlastník:
+```
+
+Kontrola po uzavření je dobrý test dospělosti provozu. Pokud korekce funguje jen tehdy, když ji autor osobně připomíná, není uzavřená. Pokud funguje proto, že správná cesta je nejbližší pracovní cesta, systém se zlepšil.
+
+### Kontrolujte v existujícím rytmu
+
+Nezakládejte nový kontrolní proces jen proto, že jedna korekce byla uzavřená. Vraťte se k uzavírací kartě z Přílohy NK a najděte běžnou kontrolu, která měla výsledek nést.
+
+Vhodné rytmy:
+
+- měsíční kontrola provozních šablon;
+- kvartální kontrola interní wiki;
+- běžné onboardingové review;
+- pravidelná kontrola support šablon;
+- provozní audit služby;
+- údržba rozcestníků, formulářů nebo checklistů.
+
+Nevhodné rytmy:
+
+- nový týdenní meeting jen pro jednu korekci;
+- osobní připomínka autorovi opravy;
+- kontrolní tabulka, kam lidé hlásí, že se chovali správně;
+- zpětné pročítání všech chatů od uzavření korekce;
+- sledování konkrétních lidí, jestli klikli na správný odkaz.
+
+Příklad dobrého zadání:
+
+```text
+V měsíční kontrole provozních šablon podpory ověřit jeden běžný exportní průchod a zjistit, jestli stále začíná z aktuální připnuté zprávy.
+```
+
+To je dost. Cílem není dokázat, že tým poslušně dodržuje pravidlo. Cílem je zjistit, jestli běžná pracovní trasa pořád vede správně.
+
+### Vyberte jeden normální průchod
+
+První kontrola po uzavření má pracovat s jedním normálním průchodem. Ne s nejlepším příkladem, ne s nejhorším incidentem a ne s historickým vzorkem dvaceti případů. Jeden běžný průchod ukáže, jestli se uzavřená korekce vejde do práce bez další režie.
+
+V praxi stačí zapsat:
+
+```text
+Kontrolovaný průchod:
+Další běžná kontrola exportu zákaznických dat v rámci měsíční údržby podpory.
+
+Co má být vidět:
+Práce začíná v připnuté zprávě, pokračuje do kanonické auditní šablony a nepoužívá starý screenshotový checklist.
+```
+
+Pokud první průchod dopadne dobře, neznamená to, že je celý systém navždy bezchybný. Znamená to, že uzavření korekce obstálo v prvním normálním použití. To je přesně velikost důkazu, kterou tady potřebujete.
+
+Pokud průchod nenastal, nastavte návrat:
+
+```text
+Stav:
+Čeká na normální průchod.
+
+Návrat:
+Zkontrolovat při příští měsíční údržbě, nejpozději do 30 dní.
+```
+
+Nevyrábějte umělý test jen proto, aby karta rychle vypadala hotově. U provozních pravidel je reálné použití cennější než svižná simulace.
+
+### Hledejte návrat staré stopy
+
+Nejdůležitější otázka první běžné kontroly zní: vrátila se stará cesta? Staré stopy se často nevrací dramaticky. Neobjeví se jako velký incident, ale jako nenápadný odkaz v chatu, starý název v šabloně nebo věta v onboardingovém dokumentu.
+
+Kontrolujte hlavně:
+
+- jestli někdo začal práci ze starého odkazu;
+- jestli nový zdroj pravdy odkazuje zpět na archiv;
+- jestli starý checklist zůstal ve výsledcích hledání;
+- jestli automatizace nebo připomínka míří na starou cestu;
+- jestli lidé používají starý název, protože nový není srozumitelný;
+- jestli uzavírací karta nevznikla jako další paralelní zdroj pravdy.
+
+Návrat staré stopy neznamená automaticky selhání lidí. Často znamená, že uzavření nebylo dost důkladné. Třeba byla stará kopie zavřená v jedné složce, ale zůstala v oblíbených odkazech, ve vyhledávání nebo v onboardingovém materiálu.
+
+Silný zápis:
+
+```text
+Při běžné kontrole exportu práce začala v připnuté zprávě a vedla do auditní šablony. Starý screenshotový checklist se neobjevil v průchodu ani ve vyhledání podle názvu exportu.
+```
+
+Slabý zápis:
+
+```text
+Nikdo si nestěžoval, takže to asi drží.
+```
+
+Absence stížnosti není totéž jako fungující pracovní cesta. Lidé si často nestěžují na tření, které už považují za normální. Systém pak dál ztrácí čas potichu a bez tiketu, což je ten nejméně fotogenický druh problému.
+
+### Rozlišujte tři výsledky kontroly
+
+Po prvním běžném průchodu rozhodněte jeden ze tří stavů. Nepřidávejte mezistavy pro každý odstín nejistoty; zbytečně byste vyrobili další údržbu.
+
+`Drží`
+
+Správná cesta byla použita, stará stopa se nevrátila, nové tření nevzniklo a kontrola nepřidala novou evidenci. Výsledek zapište do běžné údržby a téma nechte v normálním rytmu.
+
+`Drobně doladit`
+
+Správná cesta se použila, ale objevilo se malé tření: nejasný název, špatně popsaný odkaz, jedna přeživší zmínka nebo drobná kolize v hledání. Doladění musí být jedním zásahem v nejbližším pracovním místě.
+
+`Vrátit do údržbové fronty`
+
+Stará stopa se vrátila nebo se ukázalo, že problém je širší než jedna uzavřená korekce. V takovém případě nepřidávejte další záplatu bokem. Vraťte téma do údržbové fronty jako položku s jasným nálezem.
+
+Příklad rozhodnutí:
+
+```text
+Rozhodnutí:
+Drobně doladit.
+
+Důvod:
+Práce vedla správně do auditní šablony, ale vyhledání podle starého názvu stále nabízí archivní checklist.
+
+Další krok:
+Přepsat název archivního checklistu na "Archiv - nepoužívat pro aktuální exporty" a doplnit odkaz na zdroj pravdy.
+```
+
+Codyho komentář: `Drobně doladit` má být opravdu drobné. Pokud musíte upravit pět míst, tři šablony a dvě automatizace, už neladíte. Jen se snažíte nacpat větší údržbový problém do malého slova, aby vypadal levněji.
+
+### Privacy-first kontrola po návratu do běžné údržby
+
+První běžná kontrola po uzavření svádí k tomu, že si tým začne "pro jistotu" uchovávat důkazy. Screenshoty, seznamy lidí, exporty, záznamy kliknutí, kopie chatu. Většinou to není jistota, ale datová zátěž.
+
+Před uzavřením kontroly odpovězte:
+
+1. Stačí anonymizovaná věta o průchodu místo screenshotu?
+2. Nevznikl seznam lidí, kteří pravidlo použili nebo nepoužili?
+3. Neobsahuje kontrolní karta zákaznická data, která nejsou pro rozhodnutí nutná?
+4. Nezůstala stará stopa dostupná kvůli tomu, že se ji někdo bál smazat?
+5. Je případný archiv jasně označený jako neaktuální?
+6. Je výsledek uložený v běžné údržbě, ne v nové paralelní evidenci?
+7. Má kontrolní záznam retenční logiku, nebo může po další kontrole zmizet?
+
+Silný privacy-first zápis:
+
+```text
+Kontrola je zapsaná jednou anonymizovanou větou v měsíční údržbě šablon. Nevznikl screenshot, seznam uživatelů ani kopie zákaznických dat. Archivní checklist je označený jako neaktuální a odkazuje na zdroj pravdy.
+```
+
+Slabý zápis:
+
+```text
+Pro kontrolu jsme si uložili obrazovky všech kroků a seznam lidí, kteří použili správný postup.
+```
+
+To druhé není údržba. To je dohled. Privacy-first provoz má dokazovat, že systém funguje, ne že lidé byli sledováni při každém kroku.
+
+### Karta první běžné kontroly
+
+Použijte ji v prvním existujícím kontrolním rytmu po uzavření korekce.
+
+```text
+Datum:
+Uzavřená korekce:
+Zdroj pravdy po uzavření:
+Běžný kontrolní rytmus:
+Kontrolovaný průchod:
+Kde práce začala:
+Správná cesta:
+Stará stopa se vrátila kde:
+Nové tření:
+Datová stopa kontroly:
+Dočasné podklady:
+Rozhodnutí: Drží / Drobně doladit / Vrátit do údržbové fronty
+Další krok:
+Vlastník:
+Termín:
+Kdy znovu kontrolovat:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Uzavřená korekce: připnutá zpráva podpory vede kontrolu exportu přes kanonickou auditní šablonu
+Zdroj pravdy po uzavření: připnutá zpráva v kanálu podpory
+Běžný kontrolní rytmus: měsíční kontrola provozních šablon
+Kontrolovaný průchod: další běžná kontrola exportu
+Kde práce začala: připnutá zpráva podpory
+Správná cesta: auditní šablona otevřená z aktuálního odkazu
+Stará stopa se vrátila kde: archivní checklist se objevil ve výsledku hledání podle starého názvu
+Nové tření: riziko záměny při vyhledávání
+Datová stopa kontroly: anonymizovaná věta v měsíční údržbě
+Dočasné podklady: žádné
+Rozhodnutí: Drobně doladit
+Další krok: přejmenovat archivní checklist a doplnit odkaz na zdroj pravdy
+Vlastník: provozní lead
+Termín: do další měsíční kontroly
+Kdy znovu kontrolovat: při příštím běžném exportním průchodu
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu korekci uzavřenou podle Přílohy NK.
+
+1. Najděte běžný kontrolní rytmus, který měl výsledek nést.
+2. Vyberte jeden normální průchod.
+3. Zapište, kde práce začala.
+4. Ověřte, jestli vedla přes správný zdroj pravdy.
+5. Vyhledejte návrat staré stopy.
+6. Pojmenujte nové tření, pokud se objevilo.
+7. Zkontrolujte, jestli nevznikl screenshot, export nebo seznam lidí.
+8. Vyberte stav Drží, Drobně doladit nebo Vrátit do údržbové fronty.
+9. Zapište jeden další krok.
+10. Uložte výsledek do běžné údržby.
+
+Výstup:
+
+```text
+Uzavřená následná korekce prošla první běžnou kontrolou: tým ví, jestli drží, potřebuje drobné doladění, nebo se má vrátit do údržbové fronty.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete korekci v existujícím rytmu?
+- Vybrali jste jeden normální průchod, ne speciální audit?
+- Je jasné, kde práce začala?
+- Vedla práce přes správný zdroj pravdy?
+- Hledali jste návrat staré stopy i mimo hlavní dokument?
+- Nevydáváte absenci stížnosti za důkaz funkčnosti?
+- Umíte rozhodnout stavem Drží, Drobně doladit nebo Vrátit do údržbové fronty?
+- Je případné doladění opravdu jedním malým zásahem?
+- Nezakládáte novou evidenci kvůli jedné uzavřené korekci?
+- Nevznikl screenshot, export nebo seznam lidí bez jasného účelu?
+- Je archivní stopa označená jako neaktuální?
+- Je výsledek uložený do běžné údržby?
+- Má další krok vlastníka a termín?
+- Je jasné, kdy se téma znovu kontroluje?
+
+První běžná kontrola po uzavření korekce má být klidná. Když vše drží, nechte korekci zmizet do normální práce. Když se objeví drobné tření, opravte nejbližší místo. Když se vrací stará cesta, vraťte téma do fronty. Nejhorší možnost je přidat další dohled a tvářit se, že tím vznikla kvalita. Nevznikla. Jen jste dali chaosu vlastní formulář.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NL o první běžné kontrole po uzavření následné korekce: kontrola v existujícím rytmu, jeden normální průchod, hledání návratu staré stopy, rozhodnutí Drží/Drobně doladit/Vrátit do údržbové fronty, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NK o uzavření potvrzené následné údržbové korekce do běžné údržby: potvrzený výsledek, přepis kanonického místa, zavření přechodových stop, napojení na běžnou kontrolu, privacy-first úklid datové stopy, uzavírací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NJ o ověření následné údržbové korekce po dalším běžném průchodu: návrat ke korekční větě, výběr normálního průchodu, sledování pracovní trasy místo lidí, rozhodovací stavy, privacy-first kontrola ověřovací stopy, ověřovací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NI o převodu nálezu z první běžné kontroly do následné údržbové korekce: výběr nálezu se stavem Drobně opravit, korekční věta, jedno místo zásahu, hranice rozsahu, privacy-first kontrola, ověření dalším běžným průchodem, korekční karta, mini workshop a checklist.
