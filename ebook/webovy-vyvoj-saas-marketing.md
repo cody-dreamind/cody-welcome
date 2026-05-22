@@ -104884,8 +104884,277 @@ Uzavřená následná korekce prošla první běžnou kontrolou: tým ví, jestl
 
 První běžná kontrola po uzavření korekce má být klidná. Když vše drží, nechte korekci zmizet do normální práce. Když se objeví drobné tření, opravte nejbližší místo. Když se vrací stará cesta, vraťte téma do fronty. Nejhorší možnost je přidat další dohled a tvářit se, že tím vznikla kvalita. Nevznikla. Jen jste dali chaosu vlastní formulář.
 
+## Příloha NM: Drobné doladění po první běžné kontrole uzavřené korekce
+
+Příloha NL popsala první běžnou kontrolu po uzavření následné korekce. Tato příloha navazuje na stav `Drobně doladit`. Je pro situaci, kdy se ukázalo malé tření, ale základní pracovní cesta drží: lidé našli správný zdroj pravdy, nepoužili starý postup jako hlavní cestu a není potřeba vracet téma do celé údržbové fronty.
+
+Drobné doladění má být opravdu drobné. Neznamená "otevřeme znovu všechno, když už jsme u toho". Znamená jeden přesný zásah v nejbližším místě, které při běžné práci vytvořilo tření. Typicky název, odkaz, úvodní věta, popisek archivní kopie, pořadí kroků nebo chybějící upozornění u starého materiálu.
+
+Otázka této přílohy:
+
+```text
+Jak po první běžné kontrole odstranit jedno malé tření tak, aby se korekce nemusela znovu řídit jako projekt a zároveň nevznikla další paralelní stopa?
+```
+
+Výstupem je karta drobného doladění:
+
+```text
+Původní uzavřená korekce:
+Nález z první běžné kontroly:
+Proč stačí drobné doladění:
+Jedno místo zásahu:
+Přesná změna:
+Co zůstává mimo rozsah:
+Ověření při dalším běžném průchodu:
+Datová stopa:
+Vlastník:
+Termín:
+```
+
+Dobré doladění je malé nejen rozsahem, ale i psychologicky. Nemá týmu vracet pocit, že se starý problém znovu otevřel. Má jen odstranit šroubek, o který se práce poprvé po uzavření zachytila. Ano, šroubek je technický termín. Velmi vědecký. Skoro.
+
+### Vstupní brána: jen stav Drobně doladit
+
+Do této přílohy patří jen nálezy, které splňují tři podmínky:
+
+- správná cesta se v prvním běžném průchodu použila;
+- tření je lokální a má jedno přirozené místo opravy;
+- oprava nevyžaduje nové role, nová data ani nový kontrolní proces.
+
+Příklady vhodných nálezů:
+
+- archivní checklist se zobrazuje ve vyhledávání před aktuální šablonou;
+- nový odkaz má správný cíl, ale popisek je nejasný;
+- lidé používají starý název, protože nový název není v titulku;
+- připnutá zpráva vede správně, ale chybí věta, že starý postup je archivní;
+- v onboardingové trase zůstal odkaz na starou sekci, která už jen přesměrovává.
+
+Příklady nálezů, které do drobného doladění nepatří:
+
+- správná cesta se vůbec nepoužila;
+- starý postup se vrátil jako hlavní pracovní cesta;
+- oprava vyžaduje změnu ve více týmech, šablonách nebo automatizacích;
+- není jasné, kde vzniklo tření;
+- kvůli ověření by bylo potřeba sledovat konkrétní lidi nebo sbírat nová osobní data.
+
+Takové nálezy vraťte do údržbové fronty. Není to prohra. Je to poctivé pojmenování velikosti problému. Malé slovo nesmí maskovat velký zásah, protože pak si tým začne zvykat, že "drobnost" znamená půl dne práce a tři navazující opravy.
+
+### Opravte nejbližší pracovní místo
+
+Drobné doladění má být co nejblíž místu, kde člověk reálně pracuje. Nechte stranou dokumenty, které jsou sice hezké, ale nikdo je při práci neotevírá. Pokud tření vzniklo ve vyhledávání, upravte název nebo archivní štítek. Pokud vzniklo v připnuté zprávě, upravte připnutou zprávu. Pokud vzniklo v šabloně, upravte šablonu.
+
+Slabé doladění:
+
+```text
+Vytvoříme poznámku, že archivní checklist se nemá používat.
+```
+
+Silné doladění:
+
+```text
+Archivní checklist přejmenujeme na "Archiv - nepoužívat pro aktuální exporty" a do prvního řádku doplníme odkaz na aktuální auditní šablonu.
+```
+
+Rozdíl je jednoduchý. Slabé doladění přidává další místo, které musí někdo znát. Silné doladění opravuje místo, kde chyba vzniká. Privacy-first provoz má stejnou logiku: méně stop, méně kopií, méně vysvětlování bokem.
+
+### Jedna změna, jedna věta
+
+Každé drobné doladění popište jednou větou. Pokud věta potřebuje několik odboček, rozsah je pravděpodobně větší než drobný.
+
+Šablona:
+
+```text
+Doladíme [jedno místo] tak, aby [běžná práce] vedla k [aktuální zdroj pravdy] bez [konkrétní tření].
+```
+
+Příklad:
+
+```text
+Doladíme název archivního checklistu tak, aby vyhledávání podle exportu vedlo k aktuální auditní šabloně bez záměny se starým postupem.
+```
+
+K této větě rovnou přidejte hranici:
+
+```text
+Neměníme auditní proces, nepřepisujeme celou šablonu a nezakládáme novou kontrolní tabulku.
+```
+
+Hranice je důležitější, než vypadá. Drobné doladění svádí k tomu, že se člověk "jen na chvíli" podívá i vedle. Za půl hodiny už přepisuje tři dokumenty, protože našel další nepořádek. Ten nepořádek může být skutečný, ale patří do samostatné fronty. Ne do této karty.
+
+### Rozhodněte mezi přepsat, označit, odstranit
+
+Drobné doladění má obvykle jeden ze tří tvarů.
+
+`Přepsat`
+
+Použijte, když je správné místo aktuální, ale formulace vytváří tření. Přepište titulek, popisek, první větu nebo název kroku.
+
+Příklad:
+
+```text
+Původně: Kontrola exportu
+Nově: Kontrola exportu přes aktuální auditní šablonu
+```
+
+`Označit`
+
+Použijte, když stará stopa musí zůstat kvůli historii, ale nesmí vypadat jako aktuální cesta. Označení musí být vidět dřív, než člověk starý postup použije.
+
+Příklad:
+
+```text
+Archiv - nepoužívat pro aktuální exporty. Aktuální postup je v auditní šabloně: [odkaz].
+```
+
+`Odstranit`
+
+Použijte, když stará stopa nemá žádný pracovní ani auditní důvod. Smazání je často nejlepší UX. Jenže je méně dramatické než nová šablona, takže na něj týmy podezřele často zapomínají.
+
+Příklad:
+
+```text
+Starý komentář s odkazem na screenshotový checklist odstraněn; úkol teď odkazuje jen na zdroj pravdy.
+```
+
+Nekombinujte všechny tři tvary automaticky. Pokud stačí odstranit starý odkaz, nepřidávejte k tomu novou poznámku. Pokud stačí označit archiv, nepřepisujte aktuální proces. Cílem není udělat nejvíc práce, ale nejmenší zásah, který odstraní tření.
+
+### Ověření při dalším normálním průchodu
+
+Drobné doladění nepotřebuje zvláštní testovací ceremonii. Potřebuje jeden další normální průchod, při kterém se ukáže, jestli tření zmizelo. Ověření má být napojené na stejný rytmus jako první běžná kontrola.
+
+Silné ověření:
+
+```text
+Při příští měsíční kontrole exportu ověříme, jestli vyhledání podle názvu exportu nabízí aktuální auditní šablonu dřív než archivní checklist.
+```
+
+Slabé ověření:
+
+```text
+Zeptáme se týmu, jestli je to už lepší.
+```
+
+Dotaz může být užitečný, ale sám o sobě nestačí. Lidé často odpoví podle dojmu nebo podle toho, co si pamatují z poslední debaty. Běžný průchod ukáže skutečnou pracovní cestu.
+
+Stavy po ověření:
+
+- `Potvrdit`: tření zmizelo a správná cesta drží.
+- `Ještě jednou doladit`: zůstalo jedno nové lokální tření.
+- `Vrátit do fronty`: ukázalo se, že problém je širší než drobné doladění.
+
+Stav `Ještě jednou doladit` používejte opatrně. Dvě drobná doladění za sebou jsou ještě normální. Tři už často znamenají, že nejde o drobnost, ale o špatně navrženou pracovní cestu.
+
+### Privacy-first kontrola doladění
+
+Drobné doladění má zmenšit datovou stopu, ne ji rozšířit. Před uzavřením se zeptejte:
+
+1. Nezaložili jsme novou evidenci jen kvůli malé opravě?
+2. Nevznikl screenshot, který obsahuje zákaznická nebo osobní data?
+3. Nezapisujeme, kdo udělal chybu, když stačí popsat tření v systému?
+4. Nezůstala archivní stopa dostupná jako aktuální varianta?
+5. Má případný archiv jasné označení a retenční smysl?
+6. Nepřidali jsme novou notifikaci, která bude lidi rušit déle než samotný problém?
+7. Je výsledek uložený v existujícím zdroji pravdy?
+
+Silný zápis:
+
+```text
+Doladění změnilo název archivního checklistu a doplnilo odkaz na aktuální šablonu. Nevznikla nová evidence, screenshot ani seznam lidí. Ověření proběhne při dalším běžném exportním průchodu.
+```
+
+Slabý zápis:
+
+```text
+Pro jistotu budeme měsíc ukládat screenshoty vyhledávání a zapisovat, kdo otevřel starý checklist.
+```
+
+To druhé je přesně ten typ "jistoty", který vypadá odpovědně, dokud někdo nespočítá náklady na data, pozornost a důvěru. Kontrola systému ano. Dohled nad lidmi kvůli špatnému odkazu ne.
+
+### Karta drobného doladění
+
+Použijte ji jen pro nález se stavem `Drobně doladit` z první běžné kontroly.
+
+```text
+Datum:
+Původní uzavřená korekce:
+Nález z první běžné kontroly:
+Proč nejde o návrat do fronty:
+Jedno místo zásahu:
+Typ zásahu: Přepsat / Označit / Odstranit
+Původní stav:
+Nový stav:
+Co zůstává mimo rozsah:
+Ověření při dalším běžném průchodu:
+Datová stopa doladění:
+Dočasné podklady:
+Rozhodnutí po ověření: Potvrdit / Ještě jednou doladit / Vrátit do fronty
+Vlastník:
+Termín:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Původní uzavřená korekce: připnutá zpráva podpory vede kontrolu exportu přes kanonickou auditní šablonu
+Nález z první běžné kontroly: archivní checklist se objevil ve vyhledávání podle starého názvu
+Proč nejde o návrat do fronty: běžný průchod začal správně a aktuální šablona se použila; tření je jen v názvu archivní stopy
+Jedno místo zásahu: název a první řádek archivního checklistu
+Typ zásahu: Označit
+Původní stav: Kontrola exportu - checklist
+Nový stav: Archiv - nepoužívat pro aktuální exporty; aktuální postup je v auditní šabloně
+Co zůstává mimo rozsah: nepřepisujeme auditní šablonu, neměníme proces exportu, nezakládáme novou evidenci
+Ověření při dalším běžném průchodu: při příští měsíční kontrole ověřit výsledek vyhledání podle názvu exportu
+Datová stopa doladění: jedna anonymizovaná věta v údržbovém logu
+Dočasné podklady: žádné
+Rozhodnutí po ověření: čeká na další běžný průchod
+Vlastník: provozní lead
+Termín: do příští měsíční kontroly
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jeden nález se stavem `Drobně doladit`.
+
+1. Ověřte, že správná cesta v prvním běžném průchodu držela.
+2. Pojmenujte jedno konkrétní tření.
+3. Vyberte nejbližší pracovní místo zásahu.
+4. Rozhodněte Přepsat, Označit nebo Odstranit.
+5. Napište jednu větu doladění.
+6. Napište jednu větu mimo rozsah.
+7. Proveďte změnu bez zakládání nové evidence.
+8. Zapište datovou stopu co nejkratší větou.
+9. Napojte ověření na další normální průchod.
+10. Určete vlastníka a termín.
+
+Výstup:
+
+```text
+Drobné tření z první běžné kontroly je doladěné jedním zásahem v místě práce a čeká na ověření při dalším normálním průchodu.
+```
+
+### Checklist kapitoly
+
+- Vstupujete sem jen se stavem `Drobně doladit`?
+- Správná cesta při první běžné kontrole opravdu držela?
+- Je tření lokální a opravitelné jedním zásahem?
+- Vybrali jste nejbližší pracovní místo, ne nový dokument bokem?
+- Umíte změnu popsat jednou větou?
+- Zapsali jste, co zůstává mimo rozsah?
+- Rozhodli jste mezi Přepsat, Označit a Odstranit?
+- Neopravujete preventivně další místa jen proto, že jste je našli?
+- Je ověření napojené na další běžný průchod?
+- Nevznikla nová tabulka, porada ani speciální kontrola?
+- Nevznikl screenshot, export nebo seznam lidí bez jasného účelu?
+- Je archivní stopa buď odstraněná, nebo jasně označená jako neaktuální?
+- Má doladění vlastníka a termín?
+- Je jasné, kdy se téma vrátí do fronty, pokud doladění nebude stačit?
+
+Drobné doladění je dobrý sluha a mizerný pán. Když je malé, pomáhá systému zůstat čistý. Když se z něj stane zástěrka pro další projekt, začne žrát přesně tu pozornost, kterou mělo šetřit. Držte ho proto blízko práce, blízko důkazu a daleko od nové byrokracie.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NM o drobném doladění po první běžné kontrole uzavřené korekce: vstup jen pro stav Drobně doladit, oprava nejbližšího pracovního místa, rozhodnutí Přepsat/Označit/Odstranit, ověření dalším normálním průchodem, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NL o první běžné kontrole po uzavření následné korekce: kontrola v existujícím rytmu, jeden normální průchod, hledání návratu staré stopy, rozhodnutí Drží/Drobně doladit/Vrátit do údržbové fronty, privacy-first kontrola bez nové evidence, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NK o uzavření potvrzené následné údržbové korekce do běžné údržby: potvrzený výsledek, přepis kanonického místa, zavření přechodových stop, napojení na běžnou kontrolu, privacy-first úklid datové stopy, uzavírací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NJ o ověření následné údržbové korekce po dalším běžném průchodu: návrat ke korekční větě, výběr normálního průchodu, sledování pracovní trasy místo lidí, rozhodovací stavy, privacy-first kontrola ověřovací stopy, ověřovací karta, mini workshop a checklist.
