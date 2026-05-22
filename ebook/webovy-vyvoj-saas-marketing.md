@@ -104365,8 +104365,270 @@ Následná korekce je ověřená na jednom běžném průchodu a uzavřená rozh
 
 Ověřená korekce má zmizet z pozornosti. Ne proto, že by byla bezvýznamná, ale protože se stala součástí normální práce. Správná cesta je viditelnější, stará cesta méně lákavá a tým nepotřebuje další tabulku, aby si dokázal, že proces existuje.
 
+## Příloha NK: Uzavření potvrzené následné údržbové korekce do běžné údržby
+
+Příloha NJ ověřila následnou údržbovou korekci na dalším běžném průchodu. Pokud ověření dopadlo stavem `Uzavřít`, zbývá poslední kus práce: nenechat korekci jako samostatný příběh, ale vrátit ji do běžné údržby.
+
+To zní banálně, jenže právě tady se často rodí procesní nepořádek. Korekce je hotová, všichni mají pocit vyřešení, ale v systému zůstanou tři drobné stopy: stará poznámka, dočasný odkaz a komentář v chatu. Za měsíc se někdo chytí špatné stopy a problém se nenápadně vrátí. Elegantně, potichu a s výrazem "já myslel, že tohle je aktuální".
+
+Otázka této přílohy:
+
+```text
+Jak potvrzenou následnou korekci uzavřít tak, aby zůstala jen jedna správná pracovní cesta, jeden zdroj pravdy a žádná zbytečná datová stopa?
+```
+
+Výstupem je krátká uzavírací karta:
+
+```text
+Korekce:
+Potvrzený výsledek:
+Zdroj pravdy:
+Co se přepisuje:
+Co se zavírá:
+Co se maže:
+Běžná kontrola:
+Vlastník:
+Datum uzavření:
+```
+
+Uzavření není další vylepšení. Je to úklid po potvrzené práci. Když při uzavírání otevřete nové téma, novou šablonu nebo nový dashboard, pravděpodobně jste přeskočili z údržby do produktového backlogu.
+
+### Začněte potvrzeným výsledkem
+
+Neuzavírejte korekci podle toho, že "někdo říkal, že už je to v pořádku". Vraťte se k ověřovací kartě z Přílohy NJ a najděte konkrétní potvrzený výsledek.
+
+Silná uzavírací věta:
+
+```text
+Následná korekce připnuté zprávy je potvrzená: při další běžné kontrole exportu tým použil kanonickou auditní šablonu a starý screenshotový checklist se neobjevil.
+```
+
+Slabá uzavírací věta:
+
+```text
+Exporty už jsou snad v pohodě.
+```
+
+První věta říká, co se stalo, kde se to ověřilo a jaká stará cesta se nevrátila. Druhá věta je nálada. Nálada nepatří do zdroje pravdy, maximálně do kafe, kde taky občas přeceňujeme její spolehlivost.
+
+Před uzavřením si odpovězte:
+
+1. Jaká korekce byla ověřena?
+2. Na jakém běžném průchodu se potvrdila?
+3. Jaký původní nález tím zmizel?
+4. Jaké nové tření nevzniklo?
+5. Jaká datová stopa se nezvětšila?
+
+Pokud neumíte odpovědět jednou nebo dvěma větami, korekce ještě není připravená k uzavření. Vraťte se k ověření, ne k dalšímu psaní pravidel.
+
+### Přepište jen kanonické místo
+
+Potvrzená korekce má skončit v místě, kde ji lidé při práci opravdu potkají. Ne v historické poznámce, ne v komentáři u dávno zavřeného úkolu, ne v prezentaci z workshopu. Kanonické místo je ten artefakt, podle kterého se běžná práce příště udělá.
+
+Typická kanonická místa:
+
+- připnutá provozní zpráva;
+- aktuální checklist;
+- šablona odpovědi;
+- rozcestník v interní wiki;
+- definice hotovo u pracovního toku;
+- onboardingový balíček pro roli;
+- provozní karta služby nebo nabídky.
+
+Uzavření má být co nejmenší. Nepřepisujte celý dokument, pokud stačí změnit jednu větu, jeden odkaz nebo jeden název pole. Cílem není vytvořit pocit čerstvosti. Cílem je, aby příští člověk nemusel vědět, že nějaká korekce existovala.
+
+Příklad:
+
+```text
+Kanonické místo:
+Připnutá zpráva v kanálu podpory.
+
+Změna:
+Ponechat odkaz na auditní šablonu, odstranit zmínku o screenshotovém checklistu a přidat větu "Pro kontrolu exportu používejte pouze tuto šablonu."
+```
+
+To je dost. Nepotřebujete novou stránku "Historie kontroly exportů po korekci připnuté zprávy". Pokud takovou stránku založíte, za dva měsíce ji bude někdo považovat za další zdroj pravdy. A pak si můžete otevřít přílohu o úklidu duplicit, protože jste si ji právě vyrobili.
+
+### Zavřete přechodové stopy
+
+Korekce často zanechá malé přechodové stopy. Samy o sobě nevypadají nebezpečně, ale dohromady vytvářejí druhou realitu.
+
+Zkontrolujte hlavně:
+
+- dočasné odkazy v chatu;
+- staré komentáře u úkolu;
+- duplicitní kopie checklistu;
+- pracovní screenshoty;
+- lokální poznámky autora korekce;
+- staré exporty použité při ověření;
+- dokumenty označené jako "dočasné", které nikdo nemaže;
+- odkazy v onboardingových materiálech;
+- automatizace nebo připomínky, které stále míří na starou cestu.
+
+U každé stopy rozhodněte jedním ze tří stavů:
+
+`Smazat`
+
+Stopa nemá dlouhodobou hodnotu a jen by mátla. Typicky screenshot, dočasný export, pracovní kopie nebo poznámka s osobními údaji.
+
+`Archivovat bez aktivní trasy`
+
+Stopa má auditní nebo rozhodovací hodnotu, ale nesmí být běžnou cestou práce. Archivujte ji s datem, důvodem a jasným označením, že není aktuální.
+
+`Přepsat na odkaz do zdroje pravdy`
+
+Stopu lidé pravděpodobně znovu najdou, takže ji nenechávejte slepou. Přepište ji na krátké upozornění a odkaz na aktuální místo.
+
+Příklad:
+
+```text
+Starý komentář u úkolu:
+Nahrazen větou "Aktuální kontrola exportu je v připnuté zprávě podpory" a odkazem na kanonickou šablonu.
+
+Dočasný screenshot:
+Smazán po potvrzení, že neobsahoval žádnou jedinečnou auditní informaci.
+
+Karta korekce:
+Ponechána v archivu údržby se stavem Uzavřeno a datem.
+```
+
+### Napojte výsledek na běžnou kontrolu
+
+Uzavřená korekce nemá potřebovat vlastní hlídání. Má se kontrolovat v běžném rytmu, který už existuje: měsíční údržba šablon, kvartální kontrola rozcestníků, onboardingové review, provozní audit nebo jiná normální smyčka.
+
+Dobré napojení:
+
+```text
+Při měsíční kontrole provozních šablon ověřit, že připnutá zpráva podpory stále vede na kanonickou auditní šablonu.
+```
+
+Špatné napojení:
+
+```text
+Každý pátek samostatně kontrolovat, jestli někdo nepoužívá starý screenshotový checklist.
+```
+
+Druhé pravidlo vyrábí novou práci a přesouvá systémovou odpovědnost do dohledu nad lidmi. Pokud musíte každý týden hlídat, jestli se stará cesta nevrací, stará cesta pravděpodobně není opravdu zavřená.
+
+Napište kontrolu jako jednu nenápadnou položku v existujícím rytmu:
+
+```text
+Kontrolní háček:
+V měsíční kontrole podpory projít jeden běžný exportní průchod a ověřit, že začíná z aktuální připnuté zprávy.
+```
+
+Když kontrolní háček vyžaduje novou tabulku, nové metriky a novou schůzku, zmenšete ho. Běžná údržba má být nudná. To je kompliment.
+
+### Privacy-first uzavření korekce
+
+Privacy-first hodnota se při uzavírání pozná podle toho, co po práci nezůstane. Potvrzená korekce nemá za sebou táhnout dočasné exporty, screenshoty, jména lidí, kopie zákaznických dat ani záznamy chování konkrétních členů týmu.
+
+Před uzavřením projděte krátkou datovou otázku:
+
+1. Jaké podklady vznikly jen kvůli korekci nebo ověření?
+2. Které z nich obsahují osobní, zákaznická nebo provozně citlivá data?
+3. Které lze smazat hned?
+4. Které musí zůstat kvůli auditní stopě?
+5. Lze auditní stopu anonymizovat nebo zkrátit?
+6. Je jasné, kde je jediný aktuální zdroj pravdy?
+7. Nevzniklo nové sledování lidí kvůli kontrole dodržování?
+
+Silný privacy-first zápis:
+
+```text
+Dočasný export a screenshot z ověření byly smazány. V archivu údržby zůstává jen anonymizovaná uzavírací karta bez zákaznických údajů. Běžná kontrola používá existující měsíční review šablon, nepřidává nové sledování lidí.
+```
+
+Slabý zápis:
+
+```text
+Pro jistotu necháme všechny ověřovací screenshoty ve sdílené složce a časem se k nim vrátíme.
+```
+
+"Časem se k tomu vrátíme" je často jen luxusní název pro datový nepořádek. Pokud podklad nemá účel, vlastníka a retenční logiku, nemá v systému zůstávat.
+
+### Uzavírací karta potvrzené korekce
+
+Použijte ji ve chvíli, kdy má ověření z Přílohy NJ stav `Uzavřít`.
+
+```text
+Datum:
+Korekce:
+Potvrzený výsledek z ověření:
+Kanonické místo:
+Přepsaná věta, odkaz nebo pravidlo:
+Zavřená stará cesta:
+Smazané dočasné podklady:
+Archivované podklady:
+Datová stopa po uzavření:
+Běžná kontrola, která výsledek ponese:
+Kdy téma znovu otevřít:
+Vlastník zdroje pravdy:
+Vlastník běžné kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-22
+Korekce: připnutá zpráva podpory měla vést kontrolu exportu přes kanonickou auditní šablonu
+Potvrzený výsledek z ověření: při další běžné kontrole exportu tým použil auditní šablonu a starý screenshotový checklist se neobjevil
+Kanonické místo: připnutá zpráva v kanálu podpory
+Přepsaná věta, odkaz nebo pravidlo: ponechán jediný odkaz na auditní šablonu a doplněna věta "Pro kontrolu exportu používejte pouze tuto šablonu."
+Zavřená stará cesta: odkaz na screenshotový checklist odstraněn z komentáře u úkolu
+Smazané dočasné podklady: ověřovací screenshot bez auditní hodnoty
+Archivované podklady: karta korekce se stavem Uzavřeno
+Datová stopa po uzavření: anonymizovaná uzavírací karta bez zákaznických dat
+Běžná kontrola, která výsledek ponese: měsíční kontrola provozních šablon podpory
+Kdy téma znovu otevřít: pokud se starý checklist objeví v běžném exportním průchodu
+Vlastník zdroje pravdy: provozní lead
+Vlastník běžné kontroly: podpora
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu korekci, která má po ověření stav `Uzavřít`.
+
+1. Opište potvrzený výsledek z ověřovací karty.
+2. Vyberte jedno kanonické místo, kde má výsledek zůstat.
+3. Přepište jen větu, odkaz nebo pravidlo, které příště povede práci.
+4. Najděte staré cesty, které by mohly lidi stáhnout zpět.
+5. U každé staré stopy rozhodněte Smazat, Archivovat nebo Přepsat.
+6. Zapište, jaká dočasná data po korekci zmizí.
+7. Napojte výsledek na existující běžnou kontrolu.
+8. Určete vlastníka zdroje pravdy.
+9. Určete, kdy se téma znovu otevře.
+10. Zapište uzavírací kartu.
+
+Výstup:
+
+```text
+Potvrzená následná korekce je uzavřená do běžné údržby: existuje jedno aktuální pracovní místo, staré stopy jsou zavřené a ověřovací data nezůstávají v systému bez účelu.
+```
+
+### Checklist kapitoly
+
+- Vycházíte z ověřené korekce se stavem `Uzavřít`?
+- Máte jednu konkrétní uzavírací větu?
+- Je jasné, jaký původní nález korekce odstranila?
+- Vybrali jste jedno kanonické místo, ne nový paralelní dokument?
+- Přepisujete jen to, co příště povede běžnou práci?
+- Zavřeli jste staré odkazy, komentáře, kopie a dočasné poznámky?
+- Rozlišili jste, co smazat, archivovat a přepsat?
+- Nezůstává stará cesta dostupná jako "pro jistotu" varianta?
+- Je výsledek napojený na existující běžnou kontrolu?
+- Nevznikla nová samostatná kontrolní schůzka jen kvůli této korekci?
+- Smazali jste dočasné screenshoty, exporty nebo pracovní kopie bez účelu?
+- Neobsahuje uzavírací karta osobní nebo zákaznická data, která tam být nemusí?
+- Nepřidali jste sledování konkrétních lidí?
+- Má zdroj pravdy vlastníka?
+- Je jasné, kdy téma znovu otevřít?
+
+Dobře uzavřená korekce není vidět jako korekce. Je vidět jen jako normální, čistá pracovní cesta. To je ideální konec malých údržbových změn: žádné fanfáry, žádný nový systém, jen méně tření a méně stop, které budou za měsíc předstírat, že jsou pořád aktuální.
+
 ## Pracovní log
 
+- 2026-05-22: Doplněna Příloha NK o uzavření potvrzené následné údržbové korekce do běžné údržby: potvrzený výsledek, přepis kanonického místa, zavření přechodových stop, napojení na běžnou kontrolu, privacy-first úklid datové stopy, uzavírací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NJ o ověření následné údržbové korekce po dalším běžném průchodu: návrat ke korekční větě, výběr normálního průchodu, sledování pracovní trasy místo lidí, rozhodovací stavy, privacy-first kontrola ověřovací stopy, ověřovací karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NI o převodu nálezu z první běžné kontroly do následné údržbové korekce: výběr nálezu se stavem Drobně opravit, korekční věta, jedno místo zásahu, hranice rozsahu, privacy-first kontrola, ověření dalším běžným průchodem, korekční karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NH o první běžné kontrole malé údržbové úpravy po uzavření: výběr normálního použití, návrat k uzavírací větě, hledání starých cest, třídění tření, kontrola datové stopy, rozhodovací stavy, karta, mini workshop a checklist.
