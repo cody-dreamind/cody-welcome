@@ -109892,8 +109892,309 @@ Uzavřená systémová úprava má po prvním dlouhodobém návratu jasný stav,
 
 První dlouhodobá kontrola má být krátká, ale poctivá. Pokud změna drží, potvrďte ji a nechte ji žít v běžném rytmu. Pokud drhne, opravte nejbližší místo. Pokud nedrží, vraťte se k příčině, ne k pocitu viny. A pokud odhalí nový problém, založte ho zvlášť. Tak se systém zlepšuje bez toho, aby každá dobrá oprava dostala vlastní nekonečný seriál.
 
+## Příloha OE: Převod nálezu z dlouhodobé kontroly do dalšího cyklu
+
+Příloha OD končí stavem první dlouhodobé kontroly. Někdy je výsledek čistý: úprava drží a není potřeba nic dalšího. Často ale kontrola ukáže malé tření, návrat starého problému nebo nový samostatný nález. Tato příloha pomáhá převést takový výsledek do dalšího cyklu bez toho, aby se z jedné kontroly stal neurčitý projekt.
+
+Cíl není okamžitě všechno opravit. Cíl je rozhodnout, jaký typ práce vznikl. Malé doladění se chová jinak než selhaná systémová úprava. Nový nález se chová jinak než návrat původního tření. Pokud tyto věci smícháte, tým buď přestřelí rozsah, nebo naopak opraví jen kosmetiku a skutečná příčina zůstane ležet pod kobercem.
+
+Otázka této přílohy:
+
+```text
+Co přesně jsme při dlouhodobé kontrole našli a jaký nejmenší další cyklus z toho má vzniknout?
+```
+
+Výstupem je převodová karta:
+
+```text
+Kontrolovaný stav:
+Typ nálezu:
+Pracovní věta:
+Nejmenší další cyklus:
+Kanonické místo zásahu:
+Co se neotevírá:
+Datová stopa:
+Vlastník:
+Termín návratu:
+```
+
+Codyho komentář: dlouhodobá kontrola svádí k tomu říct "ještě to celé projdeme". To je hezká věta, která nenápadně zakládá další bažinu. Lepší je nudnější věta: "našli jsme jeden typ problému, patří do jednoho konkrétního cyklu a všechno ostatní zůstává mimo rozsah". Nudné věty často šetří nejlepší peníze.
+
+### Nejdřív pojmenujte typ nálezu
+
+Začněte stavem z Přílohy OD a převeďte ho na typ práce. Nepřeskakujte rovnou k řešení. Stejný povrchový symptom může znamenat různé věci.
+
+Použijte jednoduchou matici:
+
+```text
+Stav z kontroly: Drží
+Typ práce: žádná změna
+Další cyklus: běžná údržba
+
+Stav z kontroly: Drží s malým třením
+Typ práce: lokální doladění
+Další cyklus: jedna malá oprava nejbližšího místa
+
+Stav z kontroly: Nedrží
+Typ práce: návrat k příčině
+Další cyklus: diagnostika původního slibu a nová systémová úprava jen pokud je nutná
+
+Stav z kontroly: Otevřít nový nález
+Typ práce: samostatná položka
+Další cyklus: triage údržbové fronty nebo nový rozhodovací cyklus
+```
+
+Příklad:
+
+```text
+Stav z kontroly:
+Drží s malým třením.
+
+Nález:
+Index standardů má správná data, ale sloupec "kontrola" není jasný, jestli znamená poslední nebo další kontrolu.
+
+Typ práce:
+Lokální doladění.
+
+Další cyklus:
+Přepsat popisek jednoho sloupce a ověřit ho při příštím měsíčním review.
+```
+
+Tato klasifikace má praktický důvod. U lokálního doladění nepotřebujete strategickou debatu. U stavu "Nedrží" naopak nestačí přepsat popisek, pokud se lidé vracejí k paralelní evidenci, protože kanonické místo neodpovídá jejich reálné práci.
+
+### Přepište nález do pracovní věty
+
+Nález z kontroly bývá popsaný jako pozorování. Pro další cyklus ho přepište do věty, která říká, co se má změnit a kde.
+
+Slabý zápis:
+
+```text
+Index je trochu matoucí.
+```
+
+Lepší zápis:
+
+```text
+V indexu standardů přepíšeme popisek sloupce "kontrola" na "Další kontrola (YYYY-MM-DD)", aby bylo jasné, podle čeho se plánuje měsíční review.
+```
+
+Pracovní věta má obsahovat čtyři části:
+
+1. místo zásahu;
+2. konkrétní změnu;
+3. důvod pro práci;
+4. způsob ověření nebo návratu.
+
+Šablona:
+
+```text
+V [kanonické místo] změníme [konkrétní věc], aby [pracovní důvod]. Ověříme při [běžný průchod].
+```
+
+Příklad pro stav "Nedrží":
+
+```text
+V provozním standardu pro nové šablony znovu projdeme krok založení, protože lidé obcházejí kanonickou kartu a zakládají vlastní kopie. Ověříme, jestli karta odpovídá reálnému začátku práce, ne jen ideálnímu postupu.
+```
+
+U stavu "Nedrží" záměrně nepište rovnou "opravíme kartu". Nejdřív potřebujete zjistit, proč ji lidé obcházejí. Možná je moc dlouhá, možná chybí vstupní kritérium, možná se používá ve špatný moment. Bez diagnostiky by další oprava jen přidala další vrstvu.
+
+### Vyberte nejmenší další cyklus
+
+Další cyklus má odpovídat typu nálezu. Nepoužívejte jeden univerzální postup pro všechno.
+
+Pro "Drží":
+
+```text
+Další cyklus:
+Žádný. Zůstává běžný rytmus kontroly.
+```
+
+Pro "Drží s malým třením":
+
+```text
+Další cyklus:
+Jedna lokální oprava nejbližšího místa a ověření při dalším běžném použití.
+```
+
+Pro "Nedrží":
+
+```text
+Další cyklus:
+Krátká diagnostika návratu původního tření: kde se práce odchýlila, proč kanonické místo nepomohlo a zda je potřeba nová systémová úprava.
+```
+
+Pro "Otevřít nový nález":
+
+```text
+Další cyklus:
+Samostatná položka ve frontě. Nelepí se na původní změnu, pokud ji přímo nerozbíjí.
+```
+
+Praktické pravidlo: čím blíž je nález původnímu tření, tím víc se vracejte k příčině. Čím víc je nález vedlejší, tím víc ho oddělte. Tým tím chrání uzavřenou změnu před nekonečným nabalováním nových témat.
+
+### Určete kanonické místo zásahu
+
+Každý další cyklus musí mít jedno hlavní místo zásahu. Pokud ho neumíte pojmenovat, nález ještě není připravený k práci. V takové chvíli nezačínejte editovat pět dokumentů. Nejdřív zúžte problém.
+
+Kanonické místo může být:
+
+- jedna šablona;
+- jeden index;
+- jeden provozní standard;
+- jedna sales karta;
+- jedna část onboardingové trasy;
+- jedna stránka webu;
+- jeden dodavatelský registr;
+- jedna rozhodovací karta.
+
+Příklad zúžení:
+
+```text
+Široké:
+Musíme zlepšit práci se standardy.
+
+Užší:
+V indexu standardů není jasné, podle kterého data se řadí další kontrola.
+
+Kanonické místo zásahu:
+Sloupec s datem kontroly v indexu standardů.
+```
+
+U stavu "Nedrží" může být kanonické místo zásahu nejdřív diagnostická karta, ne finální dokument. To je v pořádku. Diagnostika má ale také vlastní hranici: jeden původní slib, jeden pracovní průchod, jeden závěr.
+
+### Zapište, co se neotevírá
+
+Po dlouhodobé kontrole bývá tým citlivý na všechno, co kolem tématu vypadá nedokonale. Právě proto je potřeba zapsat hranici rozsahu.
+
+Příklady hranic:
+
+```text
+Neotevíráme celý index standardů, jen popisek jednoho sloupce.
+```
+
+```text
+Neřešíme všechny onboardingové materiály, jen krok, kde nový člověk zakládá první šablonu.
+```
+
+```text
+Neslučujeme všechny dodavatelské evidence, jen ověřujeme, proč se po systémové úpravě vrátila paralelní tabulka.
+```
+
+```text
+Nový nález o sales kartě zakládáme zvlášť. Původní úpravu support šablon nepřepisujeme.
+```
+
+Hranice rozsahu není brzda zlepšování. Je to ochrana proti tomu, aby každé review otevřelo staré debaty v novém kabátě. Když se později ukáže, že širší zásah je opravdu nutný, dostane vlastní rozhodovací kartu.
+
+### Privacy-first převod nálezu
+
+Při převodu nálezu do dalšího cyklu stačí uchovat minimum důkazů. Kontrolní poznámka nemá být složka screenshotů, exportů a osobních hodnocení lidí.
+
+Dobrá datová stopa:
+
+```text
+Souhrn:
+Při měsíční kontrole vznikly dvě nové šablony. Obě měly vlastníka a platnost, ale v indexu nebylo jasné, zda sloupec "kontrola" znamená poslední nebo další kontrolu.
+
+Uložený důkaz:
+Souhrnný zápis v převodové kartě.
+
+Neukládáme:
+Screenshoty, jména lidí, pracovní chat ani kopie zákaznických dat.
+```
+
+Pokud je potřeba citovat konkrétní příklad, zkraťte ho na pracovní tvar:
+
+```text
+Anonymizovaný příklad:
+Nová support šablona měla vyplněnou platnost, ale review tým nevěděl, zda má řadit podle data vytvoření nebo další kontroly.
+```
+
+Privacy-first otázky:
+
+- Stačí nám souhrnný důkaz místo osobní evidence?
+- Potřebujeme uchovat konkrétní příklad, nebo jen typ tření?
+- Je nález o systému, nebo nechtěně hodnotí výkon člověka?
+- Jak dlouho má převodová karta zůstat aktivní?
+- Kde se karta po uzavření sloučí, archivuje nebo smaže?
+
+### Převodová karta
+
+```text
+Datum:
+Původní uzavřená úprava:
+Kontrolovaný stav:
+Typ nálezu:
+Pracovní věta:
+Nejmenší další cyklus:
+Kanonické místo zásahu:
+Ověření:
+Co se neotevírá:
+Datová stopa:
+Vlastník:
+Termín návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-23
+Původní uzavřená úprava: výchozí karta nové interní šablony obsahuje pole "Platí od", vlastník a další kontrola
+Kontrolovaný stav: Drží s malým třením
+Typ nálezu: lokální doladění
+Pracovní věta: V indexu standardů přepíšeme popisek sloupce "kontrola" na "Další kontrola (YYYY-MM-DD)", aby bylo jasné, podle čeho se plánuje měsíční review.
+Nejmenší další cyklus: jedna lokální oprava a ověření při příští měsíční kontrole šablon
+Kanonické místo zásahu: popisek sloupce v indexu standardů
+Ověření: další měsíční kontrola najde a seřadí nové šablony bez doptávání
+Co se neotevírá: struktura celé šablony, celé řazení indexu, onboarding standardů
+Datová stopa: souhrnný zápis bez screenshotů a bez osobních údajů
+Vlastník: provozní lead
+Termín návratu: příští měsíční kontrola šablon
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jeden výsledek z Přílohy OD, který není čisté "Drží".
+
+1. Přečtěte stav dlouhodobé kontroly.
+2. Rozhodněte, jestli jde o malé tření, návrat původního problému nebo nový samostatný nález.
+3. Přepište nález do jedné pracovní věty.
+4. Vyberte nejmenší další cyklus podle typu nálezu.
+5. Pojmenujte jedno kanonické místo zásahu.
+6. Zapište, co se teď neotevírá.
+7. Určete, jak se výsledek ověří při běžném použití.
+8. Zkraťte důkaz na souhrnnou větu bez osobních údajů.
+9. Přidělte vlastníka a termín návratu.
+10. Vedlejší témata založte zvlášť nebo je výslovně odložte.
+
+Výstup:
+
+```text
+Nález z dlouhodobé kontroly je převedený do jednoho dalšího cyklu, má jasné místo zásahu, hranici rozsahu, minimální datovou stopu a termín návratu.
+```
+
+### Checklist kapitoly
+
+- Je jasné, jaký stav vznikl v dlouhodobé kontrole?
+- Rozlišili jste malé tření, návrat původního problému a nový samostatný nález?
+- Přepsali jste pozorování do pracovní věty?
+- Obsahuje pracovní věta místo, změnu, důvod a ověření?
+- Vybrali jste nejmenší další cyklus odpovídající typu nálezu?
+- Má další cyklus jedno kanonické místo zásahu?
+- Pokud změna nedrží, vracíte se k příčině místo kosmetické opravy?
+- Pokud jde o nový nález, nelepíte ho na původní uzavřenou změnu?
+- Je zapsané, co se teď neotevírá?
+- Stačí k převodu souhrnný důkaz?
+- Nevznikají screenshoty, exporty nebo osobní evidence jen kvůli kontrole?
+- Má další krok vlastníka a termín návratu?
+- Je jasné, kde se převodová karta po uzavření sloučí nebo archivuje?
+
+Převod nálezu je malá disciplína, ale chrání celý provozní systém. Bez ní se dlouhodobá kontrola mění v pocitovou debatu: něco jsme našli, něco bychom měli zlepšit, někdy se k tomu vrátíme. S ní vznikne jeden další cyklus, který má tvar, hranici a konec. Přesně tak se udržuje živý systém bez toho, aby se každá kontrola tvářila jako nový začátek.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OE o převodu nálezu z dlouhodobé kontroly do dalšího cyklu: rozlišení malého tření, návratu původního problému a nového nálezu, pracovní věta, nejmenší další cyklus, kanonické místo zásahu, hranice rozsahu, privacy-first převodová stopa, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OD o první dlouhodobé kontrole po uzavření systémové úpravy: návrat v běžném rytmu, kontrola původního slibu změny, používání kanonického místa, čtyři stavy kontroly, privacy-first minimální důkaz, kontrolní karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OC o uzavření potvrzené systémové úpravy do dlouhodobého rytmu: potvrzená věta, přepis kanonického místa, zavření dočasných stop, privacy-first úklid důkazů, návrat do běžného review, práce s vedlejšími nálezy, uzavírací karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OB o ověření systémové úpravy po prvním normálním použití: výběr reálného použití, návrat k původnímu tření, sledování pracovní cesty místo výkonu člověka, rozhodovací stavy, privacy-first minimální důkaz, ověřovací karta, mini workshop a checklist.
