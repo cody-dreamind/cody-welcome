@@ -111843,8 +111843,327 @@ Potvrzená údržbová úprava je převedená do jednoho kanonického pracovníh
 
 Uzavření potvrzené údržbové úpravy je malý, ale důležitý okamžik. Právě tady se rozhoduje, jestli provozní paměť zůstane lehká, nebo se začne vrstvit do interního archeologického naleziště. Dobrá stabilizace nechá pravidlo v místě práce, zavře lešení a smaže důkazy, které už nikomu neslouží.
 
+## Příloha OL: První kontrola provozního pravidla po stabilizaci
+
+Příloha OK převádí potvrzenou údržbovou úpravu do běžného provozního pravidla. Tím se práce uklidí, ale ještě není jisté, že nové pravidlo přežilo první normální použití bez původní karty, screenshotu nebo vysvětlení v chatu. První kontrola po stabilizaci má ověřit právě tohle: zda pravidlo funguje samo, v místě práce a bez další obsluhy.
+
+Tato kontrola nemá hledat dokonalost. Má zjistit, jestli se stabilizace opravdu stala součástí provozu, nebo jestli se tým při prvním běžném použití znovu opřel o dočasné lešení. Pokud ano, není to ostuda. Je to signál, že pravidlo ještě není dost dobře usazené.
+
+Otázka této přílohy:
+
+```text
+Použil člověk stabilizované pravidlo z kanonického místa bez návratu do staré údržbové karty a bez nové zbytečné evidence?
+```
+
+Výstupem je kontrolní zápis:
+
+```text
+Kontrolované pravidlo:
+První běžné použití:
+Kanonické místo:
+Co člověk našel:
+Co musel hledat jinde:
+Návrat do staré stopy:
+Datová stopa kontroly:
+Rozhodnutí:
+Další krok:
+Vlastník:
+```
+
+Codyho komentář: stabilizace se pozná podle nudy. Člověk otevře správné místo, najde pravidlo, udělá práci a nikdo u toho nemusí vytahovat historickou kartu jako rodinné album dokumentačních traumat. Když je potřeba vyprávět celý příběh opravy, pravidlo ještě nepracuje samo.
+
+### Kontrolujte při prvním skutečném použití
+
+Neplánujte samostatný test jen proto, že pravidlo existuje. První kontrola má přijít ve chvíli, kdy by člověk danou práci dělal tak jako tak: při měsíčním review, předání výstupu, onboardingu role, revizi kampaně, kontrole standardu nebo aktualizaci indexu.
+
+Špatný kontrolní okamžik:
+
+```text
+Sejdeme se zvlášť a projdeme, jestli nové pravidlo dává smysl.
+```
+
+Lepší kontrolní okamžik:
+
+```text
+Při nejbližším měsíčním review sledujeme, jestli provozní lead najde datum další kontroly přímo v indexu standardů.
+```
+
+Rozdíl je důležitý. Samostatný test často ověří jen to, že lidé vědí, co se nedávno změnilo. Běžné použití ověří, jestli změna zapadla do práce. Provoz nepotřebuje pravidla, která fungují jen ve chvíli, kdy na ně všichni právě myslí.
+
+Před kontrolou si zapište jednu větu:
+
+```text
+První běžné použití nastane, až:
+```
+
+Příklady:
+
+```text
+První běžné použití nastane, až se bude uzavírat další údržbová karta.
+První běžné použití nastane, až nový člověk použije onboardingový balíček bez doprovodu autora.
+První běžné použití nastane, až provozní lead udělá další měsíční kontrolu indexu.
+```
+
+Pokud neumíte takový okamžik pojmenovat, pravidlo možná není provozní. Možná je to jen poznámka, kterou někdo přidal, protože vypadala rozumně. Pravidlo má mít situaci použití.
+
+### Vraťte se ke stabilizačnímu zápisu
+
+Kontrola nezačíná dojmem, ale stabilizačním zápisem z Přílohy OK. Ten říká, co se mělo přepsat, kde to mělo žít, co se mělo zavřít a kdy se pravidlo znovu lehce ověří.
+
+Před prvním použitím si přečtěte hlavně čtyři položky:
+
+- kanonické místo;
+- pracovní tvar pravidla;
+- co bylo zavřeno;
+- další lehká kontrola.
+
+Krátký příklad:
+
+```text
+Kanonické místo:
+Index provozních standardů.
+
+Pracovní tvar pravidla:
+Každý aktivní standard má pole "Další kontrola"; změna data má v changelogu jednu větu s důvodem.
+
+Co bylo zavřeno:
+Údržbová karta OI-022 a ověřovací poznámka OJ-022.
+
+Další lehká kontrola:
+Při dalším měsíčním review zkontrolovat, že aktivní standardy mají vyplněné pole "Další kontrola".
+```
+
+Bez návratu ke stabilizačnímu zápisu hrozí, že budete kontrolovat něco jiného než původní rozhodnutí. Tým začne řešit, jestli je celý index hezký, jestli by nešel přepsat, jestli by se neměl udělat nový dashboard. To může být později legitimní práce, ale ne v první kontrole stabilizovaného pravidla.
+
+První kontrola má úzký rozsah:
+
+```text
+Funguje konkrétní pravidlo v konkrétním místě při konkrétní práci?
+```
+
+Všechno ostatní je vedlejší nález.
+
+### Sledujte cestu k pravidlu
+
+Nejdůležitější není, jestli člověk pravidlo nakonec našel. Důležité je, kudy k němu šel. Pokud otevřel kanonické místo a použil pravidlo, stabilizace pravděpodobně funguje. Pokud otevřel starou kartu, zeptal se autora nebo hledal v chatu, pravidlo sice existuje, ale ještě není přirozenou cestou práce.
+
+Sledujte tři otázky:
+
+1. Otevřel člověk správné kanonické místo jako první?
+2. Pochopil pravidlo bez čtení starého příběhu opravy?
+3. Dokázal podle pravidla udělat rozhodnutí nebo akci?
+
+Příklad dobrého průchodu:
+
+```text
+Provozní lead otevřel index standardů, našel pole "Další kontrola", doplnil datum k novému standardu a do changelogu přidal jednu větu důvodu. Starou údržbovou kartu neotevřel.
+```
+
+Příklad varovného průchodu:
+
+```text
+Provozní lead otevřel index, ale nebylo jasné, kdy se pole vyplňuje. Potom dohledal uzavřenou údržbovou kartu OI-022 a z ní odvodil, že datum patří ke každému aktivnímu standardu.
+```
+
+Druhý průchod neznamená, že pravidlo je špatně. Znamená, že pracovní tvar pravidla je možná moc krátký, schovaný nebo nevhodně pojmenovaný. Oprava má mířit do kanonického místa, ne do obnovení staré karty.
+
+### Rozlišujte čtyři stavy kontroly
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů. Nepište dlouhé hodnocení, dokud není jasné rozhodnutí.
+
+```text
+Drží:
+Pravidlo bylo použito z kanonického místa bez návratu do staré stopy.
+
+Drží s drobným třením:
+Pravidlo pomohlo, ale jedna formulace, pole nebo odkaz zdržel práci.
+
+Nedrží:
+Člověk se musel vrátit do staré karty, chatu, screenshotu nebo k autorovi změny.
+
+Otevřel se jiný nález:
+Pravidlo drží, ale při práci se ukázal samostatný problém mimo původní stabilizaci.
+```
+
+Příklady rozhodnutí:
+
+```text
+Stav: Drží.
+Další krok: ponechat pravidlo v běžném rytmu, bez nové úpravy.
+```
+
+```text
+Stav: Drží s drobným třením.
+Další krok: doplnit k poli "Další kontrola" krátkou nápovědu "vyplň u každého aktivního standardu".
+```
+
+```text
+Stav: Nedrží.
+Další krok: vrátit pravidlo do údržbové fronty jako samostatnou opravu kanonického místa.
+```
+
+```text
+Stav: Otevřel se jiný nález.
+Další krok: původní pravidlo potvrdit, nový nález zapsat odděleně a neřešit ho v této kontrole.
+```
+
+Stav `Drží s drobným třením` používejte opatrně. Je určený pro opravdu malou úpravu stejného místa: nápověda, název pole, pořadí řádku, odkaz na správnou šablonu. Pokud se má měnit workflow, vlastnictví, datová mapa nebo celý index, už to není drobné tření. Je to další cyklus.
+
+### Hlídejte návrat do staré stopy
+
+Stabilizované pravidlo se často tváří hotově, dokud někdo nepotřebuje detail. Pak se ukáže, že tým pořád používá staré artefakty jako skrytou dokumentaci. První kontrola má tento návrat pojmenovat bez dramatu.
+
+Starou stopou může být:
+
+- uzavřená údržbová karta;
+- screenshot před úpravou;
+- export z ověřování;
+- chatové vlákno s vysvětlením;
+- osobní poznámka autora;
+- duplikovaná šablona;
+- archivní stránka, která už nemá být pracovní.
+
+Zapište konkrétně:
+
+```text
+Návrat do staré stopy:
+Ano, provozní lead otevřel uzavřenou kartu OI-022 kvůli nejasnému rozsahu pole "Další kontrola".
+```
+
+nebo:
+
+```text
+Návrat do staré stopy:
+Ne, práce proběhla jen v indexu standardů a changelogu.
+```
+
+Pokud se návrat stal, nepřenášejte starou stopu zpět do provozu. Opravte důvod návratu v kanonickém místě. Staré artefakty jsou dobré pro historii, ne jako navigace.
+
+### Privacy-first kontrola bez sledování lidí
+
+První kontrola po stabilizaci nepotřebuje sledovat člověka jako objekt výkonu. Kontroluje se kvalita provozního pravidla, ne poslušnost jednotlivce. Zápis má proto popisovat pracovní cestu a stav artefaktů, ne hodnotit osobu.
+
+Lepší zápis:
+
+```text
+Při měsíčním review nebylo z indexu jasné, že pole "Další kontrola" patří ke každému aktivnímu standardu.
+```
+
+Horší zápis:
+
+```text
+Petr si nevšiml nového pravidla a musel se doptat.
+```
+
+Privacy-first minimum pro kontrolu:
+
+- stačí anonymizovaný popis pracovního průchodu;
+- neukládejte obrazovkové záznamy, pokud nejsou nezbytné;
+- screenshot použijte jen dočasně a smažte ho po opravě;
+- nepište do kontrolní karty osobní hodnocení člověka;
+- neprodlužujte retenci uzavřených karet jen kvůli pocitu jistoty;
+- nový problém zapisujte odděleně a bez detailů, které neslouží rozhodnutí.
+
+Datová stopa kontroly má být menší než užitek pravidla. Pokud kvůli jednomu poli v indexu vznikne nový monitoring práce lidí, oprava se vydala špatným směrem. To není provozní kvalita, to je jen dražší nejistota.
+
+### Kontrolní zápis provozního pravidla
+
+```text
+Datum:
+Kontrolované pravidlo:
+Stabilizační zápis:
+První běžné použití:
+Kanonické místo:
+Co člověk našel:
+Co musel hledat jinde:
+Návrat do staré stopy:
+Stav:
+Drobná úprava nebo nový nález:
+Datová stopa kontroly:
+Další krok:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-06-17
+Kontrolované pravidlo: každý aktivní standard má pole "Další kontrola" a změna data má jednu větu důvodu v changelogu
+Stabilizační zápis: OK-022
+První běžné použití: měsíční review provozních standardů
+Kanonické místo: index provozních standardů
+Co člověk našel: pole "Další kontrola" u aktivních standardů a changelog u poslední změny
+Co musel hledat jinde: nic
+Návrat do staré stopy: ne
+Stav: Drží
+Drobná úprava nebo nový nález: žádný
+Datová stopa kontroly: anonymizovaný souhrn bez screenshotu a bez osobního hodnocení
+Další krok: ponechat pravidlo v běžném měsíčním review
+Vlastník: provozní lead
+```
+
+Příklad s drobným třením:
+
+```text
+Datum: 2026-06-17
+Kontrolované pravidlo: každý aktivní standard má pole "Další kontrola" a změna data má jednu větu důvodu v changelogu
+Stabilizační zápis: OK-022
+První běžné použití: měsíční review provozních standardů
+Kanonické místo: index provozních standardů
+Co člověk našel: pole "Další kontrola"
+Co musel hledat jinde: uzavřenou kartu OI-022 kvůli otázce, jestli pole patří i ke standardům ve stavu pilot
+Návrat do staré stopy: ano
+Stav: Drží s drobným třením
+Drobná úprava nebo nový nález: doplnit k poli nápovědu "vyplň u aktivních standardů; pilotní standardy mají datum pilotního review"
+Datová stopa kontroly: ponechat jen tento anonymizovaný zápis, starou kartu znovu neotevírat jako pracovní zdroj
+Další krok: upravit nápovědu v indexu a ověřit při dalším review
+Vlastník: provozní lead
+```
+
+Kontrolní zápis má chránit úzkost z nejasnosti. Když je jasné, co drží a co ne, tým nemusí preventivně otevírat celý systém. Stačí rozhodnout o nejmenší další akci.
+
+### Mini workshop na 12 minut
+
+Vezměte jedno provozní pravidlo stabilizované podle Přílohy OK a počkejte na jeho první skutečné použití.
+
+1. Přečtěte stabilizační zápis.
+2. Pojmenujte první běžné použití jednou větou.
+3. Sledujte, zda člověk začal v kanonickém místě.
+4. Zapište, co našel bez pomoci.
+5. Zapište, jestli se vrátil do staré karty, chatu, screenshotu nebo k autorovi změny.
+6. Vyberte stav: drží, drží s drobným třením, nedrží, nebo otevřel se jiný nález.
+7. Pokud je potřeba úprava, omezte ji na nejbližší pracovní místo.
+8. Zapište datovou stopu kontroly a smažte dočasné důkazy, které už nejsou potřeba.
+
+Výstup:
+
+```text
+Stabilizované pravidlo má po prvním běžném použití jasný stav a případná další práce je omezená na jedno místo.
+```
+
+### Checklist kapitoly
+
+- Proběhla kontrola při skutečném použití, ne při umělém testu?
+- Je jasné, který stabilizační zápis se kontroluje?
+- Vrátila se kontrola ke kanonickému místu a pracovnímu tvaru pravidla?
+- Sleduje zápis cestu k pravidlu, ne výkon člověka?
+- Začal člověk v kanonickém místě?
+- Pochopil pravidlo bez staré údržbové karty?
+- Dokázal podle pravidla udělat akci nebo rozhodnutí?
+- Je výsledek zařazen do jednoho ze čtyř stavů?
+- Pokud pravidlo drží s drobným třením, je úprava opravdu malá a ve stejném místě?
+- Pokud pravidlo nedrží, vrací se do údržbové fronty místo obnovování staré stopy?
+- Jsou vedlejší nálezy oddělené od kontroly původního pravidla?
+- Nepřibyl nový tracker, záznam obrazovky ani osobní hodnocení člověka?
+- Stačí anonymizovaný pracovní souhrn?
+- Jsou dočasné důkazy smazané, anonymizované nebo jasně archivované?
+- Ví vlastník, jestli pravidlo zůstává v běžném rytmu, potřebuje drobné doladění, nebo se vrací do fronty?
+
+První kontrola provozního pravidla je malý test samostatnosti. Nezkoumá, jestli tým umí mluvit o údržbě. Zkoumá, jestli údržba zmizela do práce tak dobře, že ji člověk při příštím použití nemusí znovu objevovat. To je tichý, ale velmi praktický typ kvality.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OL o první kontrole provozního pravidla po stabilizaci: ověření při skutečném použití, návrat ke stabilizačnímu zápisu, cesta k pravidlu, čtyři stavy kontroly, hlídání návratu do staré stopy, privacy-first minimum evidence, kontrolní zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna úvodní sekce První úkol z karty změny: převod čtenářské karty do jednoho zadatelného úkolu, šablona, příklad pro checklist a konzultaci, ochrana rozsahu, privacy-first brána, Codyho komentář a checklist.
 - 2026-05-23: Doplněna Příloha OK o uzavření potvrzené údržbové úpravy do provozního pravidla: potvrzené rozhodnutí, kanonické místo, pracovní tvar pravidla, zavření údržbové karty, privacy-first úklid dočasných důkazů, další lehká kontrola, stabilizační zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OJ o ověření údržbové úpravy po dalším běžném použití: návrat k původnímu tření, ověření v normální pracovní trase, tři rozhodovací stavy, sledování návratu do staré stopy, privacy-first minimum evidence, ověřovací zápis, mini workshop a checklist.
