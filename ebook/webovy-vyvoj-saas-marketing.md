@@ -111244,8 +111244,264 @@ Z prvního tření provozní paměti vznikla jedna malá údržbová úprava s j
 
 Převod kontroly do údržbové úpravy je dobrý tehdy, když zmenší budoucí hledání. Ne když přidá další vrstvu evidence. Pokud člověk při dalším použití najde platnou odpověď bez návratu do historie, úprava splnila účel. Zavřete ji a nechte provozní paměť dělat to, kvůli čemu existuje: šetřit pozornost.
 
+## Příloha OJ: Ověření údržbové úpravy po dalším běžném použití
+
+Příloha OI končí údržbovou kartou a slibem, že se úprava ověří jedním dalším normálním použitím. Tady je důležité neuklouznout. Ověření nemá být malý audit převlečený za pečlivost, ani nový rituál, který se bude opakovat navždy. Má odpovědět na jednoduchou otázku: odstranila údržbová úprava konkrétní tření, kvůli kterému vznikla?
+
+Tato příloha řeší první návrat k úpravě. Neřeší celou kvalitu provozní paměti, nehodnotí práci člověka a neotevírá všechny sousední dokumenty. Sleduje jednu pracovní trasu, jedno místo zásahu a jeden původní problém.
+
+Otázka této přílohy:
+
+```text
+Našel člověk při dalším běžném použití platnou odpověď rychleji a bez návratu do stopy, kterou měla údržbová úprava odstranit?
+```
+
+Výstupem je krátký ověřovací zápis:
+
+```text
+Původní tření:
+Údržbová úprava:
+Další běžné použití:
+Co člověk udělal:
+Co už nemusel dělat:
+Co pořád drhlo:
+Datová stopa:
+Rozhodnutí:
+```
+
+Codyho komentář: dobré ověření je nudné. Člověk šel do správného místa, našel odpověď a nezaložil nový dokument s názvem "poznámky k dohledání". Pokud ověření vypadá jako detektivka, úprava nejspíš nevyřešila provozní problém, jen mu dala hezčí popisek.
+
+### Vraťte se k původnímu tření
+
+Než začnete ověřovat, přečtěte si původní údržbovou větu. Nehledejte, jestli by šlo vylepšit víc věcí. Hledejte, jestli zmizelo konkrétní tření.
+
+Příklad:
+
+```text
+Původní tření:
+Datum další kontroly bylo schované v poznámce a člověk musel otevřít uzavírací kartu.
+
+Údržbová věta:
+Aby provozní lead při měsíčním review nemusel otevírat uzavírací kartu, přesuneme datum do pole "Další kontrola" a do changelogu indexu doplníme jednu větu s důvodem změny.
+```
+
+Ověřovací otázka potom není:
+
+```text
+Je index standardů už perfektní?
+```
+
+Ověřovací otázka je:
+
+```text
+Našel provozní lead datum další kontroly a důvod změny bez otevření uzavírací karty?
+```
+
+Takový návrat k původní větě chrání rozsah. Údržbová úprava má právo být malá. Nemusí opravit celý systém, aby byla užitečná.
+
+### Sledujte další normální použití
+
+Ověření má proběhnout v okamžiku, kdy by se pracovní trasa použila tak jako tak:
+
+- další měsíční review;
+- onboarding nového člověka;
+- kontrola kampaně;
+- příprava zákaznického předání;
+- provozní rozhodnutí podle kanonického indexu;
+- úklid dočasných karet po uzavřeném cyklu.
+
+Nevytvářejte umělý test jen proto, že chcete úpravu rychle odškrtnout. Umělý test často prochází líp než realita, protože člověk ví, co má hledat. Normální použití je přísnější a férovější: pracovník má svou práci, omezenou pozornost a žádnou chuť luštit interní muzeum.
+
+Krátký zápis stačí:
+
+```text
+Další běžné použití:
+Měsíční review indexu standardů 2026-06.
+
+Co člověk udělal:
+Otevřel index, našel pole "Další kontrola", přečetl changelog a pokračoval do review.
+
+Co už nemusel dělat:
+Neotevřel uzavírací kartu OG-014 ani starý screenshot z kontroly.
+```
+
+Pokud další běžné použití dlouho nepřichází, nezakládejte nový proces jen kvůli čekání. Zapište "čeká na přirozené použití" a vraťte se při nejbližší vhodné příležitosti. Údržba má držet krok s prací, ne si vynucovat vlastní kalendář.
+
+### Rozlišujte tři výsledky
+
+Po ověření vyberte jeden ze tří stavů:
+
+```text
+Potvrdit:
+Původní tření zmizelo. Úprava může zůstat a karta se zavře.
+
+Jednou doladit:
+Směr pomohl, ale jedna drobná věc pořád zdržuje. Povolená je jen jedna malá úprava stejného místa.
+
+Vrátit do fronty:
+Původní problém je širší nebo se přesunul jinam. Původní karta se neprodlužuje; vzniká samostatná položka.
+```
+
+Příklad potvrzení:
+
+```text
+Rozhodnutí:
+Potvrdit. Provozní lead našel datum i důvod změny v indexu a changelogu. Neotevřel uzavírací kartu. Údržbovou kartu zavřít.
+```
+
+Příklad jednoho doladění:
+
+```text
+Rozhodnutí:
+Jednou doladit. Pole "Další kontrola" pomohlo, ale changelog používá starý název standardu. Přejmenovat jednu větu v changelogu a znovu ověřit při dalším review.
+```
+
+Příklad vrácení do fronty:
+
+```text
+Rozhodnutí:
+Vrátit do údržbové fronty. Člověk sice našel datum, ale neuměl určit, který standard je pro danou roli platný. To je širší problém indexu rolí, ne pokračování této karty.
+```
+
+Největší riziko je čtvrtý stav, který v seznamu záměrně není: "necháme otevřené". Otevřená údržbová karta bez dalšího konkrétního použití je jen malá díra v pozornosti. Buď potvrdit, jednou doladit, nebo převést do samostatné fronty.
+
+### Měřte návrat do staré stopy
+
+U provozní paměti je užitečný jednoduchý signál: musel se člověk vrátit do dočasné nebo historické stopy?
+
+Starou stopou může být:
+
+- uzavírací karta;
+- chat;
+- screenshot;
+- export;
+- starý checklist;
+- archivní stránka;
+- osobní poznámky člověka, který změnu původně dělal.
+
+Pokud se člověk do staré stopy nevrátil, je to silný signál, že údržbová úprava pomohla. Pokud se vrátil, zapište proč:
+
+```text
+Návrat do staré stopy:
+Ano, člověk otevřel uzavírací kartu, protože changelog neobsahoval důvod změny dost konkrétně.
+
+Dopad:
+Povolit jedno doladění changelogu. Nepřepisovat celou kartu.
+```
+
+Pozor na falešně dobrý výsledek. Když se člověk nevrátil do staré stopy jen proto, že se zeptal kolegy, problém nezmizel. Jen se přesunul z dokumentace do rušení lidí.
+
+Praktický doplňkový signál:
+
+```text
+Ptal se člověk někoho dalšího na věc, kterou měla úprava vysvětlit?
+```
+
+Když ano, zapište to jako tření. Ne jako selhání člověka. Provozní paměť existuje právě proto, aby běžná rozhodnutí nemusela stát na tom, kdo je zrovna online.
+
+### Privacy-first ověření bez nové evidence
+
+Ověření údržbové úpravy má často svádět k nahrávání obrazovky, ukládání screenshotů nebo sbírání detailních poznámek z práce člověka. Většinou to není potřeba. Stačí krátký souhrn cesty.
+
+Privacy-first zápis:
+
+```text
+Člověk našel platné datum v indexu a důvod změny v changelogu. Neotevřel uzavírací kartu ani screenshot. Stav: potvrdit.
+```
+
+Zbytečně těžký zápis:
+
+```text
+Uložíme screenshoty všech kroků, čas otevření dokumentů, jméno člověka a přesné citace z interního chatu.
+```
+
+Sbírejte jen to, co je potřeba k rozhodnutí o úpravě. Pokud stačí anonymizovaná věta, nepřidávejte citace. Pokud stačí stav "neotevřel starou kartu", neměřte čas na sekundy. Pokud se při ověření objeví citlivý příklad, oddělte ho od aktivní provozní paměti nebo ho přepište do zobecněné podoby.
+
+Privacy-first kontrolní otázky:
+
+- Stačí pro rozhodnutí souhrnná věta místo screenshotu?
+- Potřebujeme uvádět jméno člověka, nebo stačí role?
+- Nezapisujeme interní detail zákazníka jen proto, že byl v příkladu po ruce?
+- Mažeme po ověření dočasný důkaz, který už neslouží práci?
+- Nevznikla z ověření nová trvalá evidence používání dokumentace?
+
+### Ověřovací zápis
+
+```text
+Datum:
+Původní tření:
+Údržbová úprava:
+Další běžné použití:
+Role:
+Co člověk udělal:
+Co už nemusel dělat:
+Návrat do staré stopy:
+Dotaz na jiného člověka:
+Co pořád drhlo:
+Datová stopa:
+Rozhodnutí:
+Další krok:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-06-03
+Původní tření: datum další kontroly bylo schované v poznámce a důvod změny jen v uzavírací kartě
+Údržbová úprava: samostatné pole "Další kontrola" v indexu a jedna věta s důvodem v changelogu
+Další běžné použití: měsíční review indexu standardů
+Role: provozní lead
+Co člověk udělal: otevřel index, našel pole "Další kontrola", přečetl changelog a pokračoval v review
+Co už nemusel dělat: neotevřel uzavírací kartu, starý screenshot ani chat
+Návrat do staré stopy: ne
+Dotaz na jiného člověka: ne
+Co pořád drhlo: nic zásadního
+Datová stopa: ponechat jen tento anonymizovaný souhrn, dočasný screenshot z původní kontroly smazán
+Rozhodnutí: potvrdit
+Další krok: zavřít údržbovou kartu a ponechat změnu v běžném měsíčním rytmu
+Vlastník: provozní lead
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu údržbovou kartu z Přílohy OI, která už prošla dalším běžným použitím.
+
+1. Přečtěte původní tření a údržbovou větu.
+2. Popište další normální použití jednou větou.
+3. Zapište, co člověk udělal místo starého obcházení.
+4. Označte, jestli se vrátil do staré stopy.
+5. Zapište, jestli se musel ptát jiného člověka.
+6. Vyberte stav: potvrdit, jednou doladit, nebo vrátit do fronty.
+7. Rozhodněte, jaký dočasný důkaz lze smazat, anonymizovat nebo nechat jen jako interní historii.
+8. Zavřete kartu nebo vytvořte samostatnou položku. Neponechávejte ji neurčitě otevřenou.
+
+Výstup:
+
+```text
+Údržbová úprava je ověřená jedním normálním použitím a má jasné rozhodnutí bez nové zbytečné evidence.
+```
+
+### Checklist kapitoly
+
+- Vrací se ověření k původnímu tření, ne k obecnému pocitu z dokumentace?
+- Proběhlo ověření v normálním pracovním použití?
+- Je zapsané, co člověk udělal a co už nemusel dělat?
+- Sleduje zápis návrat do staré karty, chatu, screenshotu, exportu nebo archivní stránky?
+- Je jasné, jestli člověk potřeboval pomoc někoho dalšího?
+- Je vybraný jen jeden ze tří stavů: potvrdit, jednou doladit, nebo vrátit do fronty?
+- Pokud se dolazuje, jde opravdu jen o jednu malou úpravu stejného místa?
+- Pokud je problém širší, vzniká samostatná položka místo prodlužování původní karty?
+- Stačí pro ověření anonymizovaný souhrn místo screenshotu nebo detailní citace?
+- Maže se nebo uzavírá dočasný důkaz, který už není potřeba?
+- Nevzniká nový trvalý reporting používání dokumentace?
+- Je údržbová karta po rozhodnutí zavřená nebo jasně převedená dál?
+
+Ověření údržbové úpravy má chránit dvě věci najednou: užitečnost provozní paměti a pozornost týmu. Když člověk při dalším normálním použití najde odpověď bez návratu do staré stopy, není potřeba slavit procesem. Stačí úpravu potvrdit, uklidit důkazy a jít dál.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OJ o ověření údržbové úpravy po dalším běžném použití: návrat k původnímu tření, ověření v normální pracovní trase, tři rozhodovací stavy, sledování návratu do staré stopy, privacy-first minimum evidence, ověřovací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OI o převodu první kontroly provozní paměti do jedné údržbové úpravy: vstup ze skutečného tření, typy zásahů, údržbová věta, místo práce, hranice rozsahu, privacy-first úklid důkazů, ověření dalším použitím, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OH o první kontrole provozní paměti po uzavření cyklu: výběr prvního běžného použití, sledování cesty k odpovědi, čtyři stavy paměti, nejmenší oprava pracovního místa, privacy-first kontrola důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OG o uzavření ověřeného dalšího cyklu do provozní paměti: rozhodnutí po ověření, přepis jednoho kanonického místa, zavření dočasných karet, práce s vedlejšími nálezy, privacy-first úklid důkazů, uzavírací karta, mini workshop a checklist.
