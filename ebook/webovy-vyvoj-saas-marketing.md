@@ -413,6 +413,132 @@ Codyho komentář: nejzdravější úkoly často vypadají nenápadně. Méně p
 
 Hotový první úkol je most mezi čtením a provozem. Když vznikne, kapitola přestane být inspirace a začne být malá změna systému. Přesně tam se pozná, jestli e-book pomáhá práci, nebo jen hezky zabírá místo v záložkách.
 
+## Ověření prvního úkolu bez velkého projektu
+
+První úkol má hodnotu až ve chvíli, kdy se po něm tým vrátí k výsledku. Bez ověření se z dobré změny stane další položka ve stylu "něco jsme upravili". To sice zní produktivně, ale za měsíc už nikdo neví, jestli změna pomohla, překážela, nebo jen tiše prošuměla kolem zákazníků.
+
+Ověření nemusí být statistická operace. U malých webů, raných SaaS produktů a marketingových experimentů často stačí krátká pracovní kontrola: projít několik reálných poptávek, podívat se na poslední support dotazy, porovnat kvalitu rozhovorů, ručně projít cestu uživatele nebo se vrátit k jednomu konkrétnímu rozhodnutí. Důležité je, aby ověření odpovídalo velikosti změny.
+
+Pokud jste změnili jeden odstavec u formuláře, nebudujte kvůli tomu nový dashboard. Pokud jste odstranili jedno pole, nemusíte sledovat každý pohyb myši. Pokud jste zkrátili onboardingový e-mail, nejdřív se podívejte, jestli lidé lépe dokončí další krok a jestli se opakuje méně nejasných dotazů. Praktický provoz se nezlepšuje tím, že se všechno začne měřit. Zlepšuje se tím, že správné otázky dostanou dost dobré odpovědi.
+
+### Ověřovací otázka
+
+Každé ověření začněte jednou větou:
+
+```text
+Chceme zjistit, jestli [změna] pomohla [komu] udělat [konkrétní krok] s menším třením, větší důvěrou nebo menším datovým nákladem.
+```
+
+Příklady:
+
+- Chceme zjistit, jestli kratší kontaktní formulář pomohl relevantním zájemcům poslat poptávku bez zbytečného váhání.
+- Chceme zjistit, jestli přesunutý důkaz důvěry pomohl návštěvníkům lépe pochopit, proč nám mají věřit.
+- Chceme zjistit, jestli veřejný checklist bez e-mailové brány přinesl kvalitnější konzultace místo větší hromady studených kontaktů.
+- Chceme zjistit, jestli vypnutí nepoužívaného skriptu zjednodušilo datovou stopu bez ztráty důležitého rozhodovacího signálu.
+
+Slabá ověřovací otázka zní "jestli to funguje". Silnější otázka říká, komu změna pomáhá, jaký krok sleduje a jaký druh tření se měl zmenšit. Tím chrání tým před tím, aby si po dvou týdnech vybral metriku podle toho, která zrovna vypadá hezky.
+
+### Vyberte nejmenší důkaz
+
+Nejmenší důkaz je signál, který stačí pro další rozhodnutí. Nemusí být dokonalý. Musí být použitelný.
+
+Pro obsahovou změnu může stačit:
+
+- pět posledních poptávek a jejich kvalita;
+- tři zákaznické rozhovory s poznámkou, co bylo srozumitelné;
+- ruční kontrola, jestli lidé dál kladou stejnou otázku;
+- porovnání dvou verzí textu s obchodním týmem;
+- záznam, jestli support po změně dostává méně doplňujících dotazů.
+
+Pro produktovou změnu může stačit:
+
+- dokončení jednoho hlavního workflow u několika reálných uživatelů;
+- počet ručních zásahů, které musel tým udělat po změně;
+- seznam chyb nebo zmatků, které se opakovaly víc než jednou;
+- kontrola, jestli změna nezhoršila onboarding, support nebo fakturaci;
+- krátké rozhodnutí vlastníka: potvrdit, doladit, vrátit, nebo odložit.
+
+Pro privacy-first změnu může být nejlepším důkazem to, že se nic obchodně důležitého neztratilo, ale datová stopa se zmenšila. To je legitimní výsledek. Méně dat, méně dodavatelů a méně skriptů může být produktové zlepšení, i když se nevejde do klasického růstového grafu.
+
+### Ověřovací zápis
+
+Po kontrole zapište výsledek v krátkém tvaru:
+
+```text
+Původní rozhodnutí:
+Ověřovací otázka:
+Co jsme viděli:
+Co z toho plyne:
+Rozhodnutí:
+Co uklízíme:
+Kdy se vrátíme:
+```
+
+Příklad:
+
+```text
+Původní rozhodnutí:
+Zkrátit první kontaktní formulář na e-mail, kontext a volitelné URL.
+
+Ověřovací otázka:
+Pomohlo zkrácení relevantním zájemcům poslat poptávku bez zbytečného tření?
+
+Co jsme viděli:
+Za dva týdny přišlo méně neúplných zpráv. Obchodní tým se dvakrát doptával na telefon, ale až po první odpovědi. Kvalita poptávek se nezhoršila.
+
+Co z toho plyne:
+Telefon není nutný pro první kontakt. Dává smysl ptát se na něj až v navazující domluvě.
+
+Rozhodnutí:
+Změnu potvrzujeme a ponecháváme formulář kratší.
+
+Co uklízíme:
+Odstraňujeme telefon i ze starší šablony landing page, aby nevznikly dvě pravidla.
+
+Kdy se vrátíme:
+Při příští měsíční kontrole formulářů.
+```
+
+Tento zápis je důležitější než dlouhé shrnutí. Za půl roku má tým rychle poznat, proč změna zůstala, jaký důkaz tehdy stačil a kde se má pravidlo propisovat dál. Když takový zápis chybí, stejná debata se vrátí v jiném převleku. A převleky patří na maškarní, ne do provozní paměti.
+
+### Kdy změnu potvrdit, doladit, vrátit nebo odložit
+
+Při ověření nepoužívejte jen dva stavy "úspěch" a "neúspěch". Digitální produkty jsou praktičtější než školní testy. Většina změn skončí v jednom ze čtyř stavů:
+
+- Potvrdit: změna pomohla dost na to, aby zůstala a propsala se do šablon, checklistů nebo standardů.
+- Doladit: směr je správný, ale jedna část vytváří nové tření.
+- Vrátit: změna nepomohla, zhoršila práci nebo vytvořila větší datový či provozní náklad.
+- Odložit: signál je slabý, změna není teď prioritní nebo chybí dost provozních důkazů.
+
+Nejhorší varianta je nechat změnu žít bez stavu. Tým pak neví, jestli ji má opakovat, opravovat nebo ignorovat. Každé ověření proto končí rozhodnutím, i kdyby rozhodnutí znělo "zatím odkládáme a nebudeme z toho dělat pravidlo".
+
+### Privacy-first kontrola ověření
+
+Před ověřením si položte otázku: sbíráme kvůli kontrole víc dat, než je potřeba k rozhodnutí? Pokud ano, zmenšete ověření. Často stačí agregovaný počet, ruční poznámka, anonymizovaný příklad nebo krátká týmová kontrola místo osobního sledování.
+
+Privacy-first ověření má tři dobré návyky:
+
+1. Používá existující provozní signály, pokud stačí.
+2. Nezavádí nový externí skript jen kvůli jedné nejistotě.
+3. Po rozhodnutí uklidí dočasné exporty, poznámky a pracovní kopie.
+
+Codyho komentář: ověření má být jako dobrý šroubovák. Vezmete ho, použijete na konkrétní věc a uklidíte. Když kvůli každému šroubku stavíte dílnu s kamerovým systémem, problém už není šroubek.
+
+### Checklist ověření prvního úkolu
+
+- Má ověření jednu jasnou otázku?
+- Odpovídá velikost ověření velikosti změny?
+- Používá tým nejmenší důkaz, který stačí pro další rozhodnutí?
+- Je jasné, komu měla změna pomoct a jaký krok měla zlepšit?
+- Není metrika vybraná až zpětně podle toho, co vypadá dobře?
+- Končí kontrola stavem potvrdit, doladit, vrátit nebo odložit?
+- Je zapsané, co se po ověření uklízí nebo propisuje do standardu?
+- Nepřidalo ověření zbytečný tracker, export, oprávnění ani delší retenci?
+- Ví vlastník, kdy se k tématu vrátí, pokud výsledek není definitivní?
+- Je zápis uložený tam, kde tým najde původní kartu změny i první úkol?
+
+Když ověření proběhne takhle jednoduše, první úkol nezmizí v provozu. Buď se promění v potvrzené pravidlo, drobné doladění, vědomý návrat zpět, nebo odloženou věc bez chaosu. To je přesně rytmus, ve kterém má e-book pomáhat: menší rozhodnutí, kratší smyčky, méně zbytečných dat a víc práce, která opravdu mění produkt.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -114515,3 +114641,4 @@ Uzavření potvrzené údržbové položky vrací práci do normálu. To je poin
 - 2026-05-20: Doplněn úvodní filtr pro výběr jedné kapitoly podle dopadu na zákazníka, ověřitelnosti, rozhodnutí a privacy-first datové stopy.
 - 2026-05-21: Doplněna krátká úvodní poznámka o vědomém omezení rozsahu: k hlavnímu úkolu si čtenář zapíše i jednu věc, kterou teď nemění.
 - 2026-05-22: Doplněna úvodní podkapitola o rozlišování rad, faktů, zdrojů a Codyho komentářů včetně malého protokolu důvěry a checklistu čtenářské opatrnosti.
+- 2026-05-23: Doplněna úvodní podkapitola o ověření prvního úkolu bez velkého projektu: ověřovací otázka, nejmenší důkaz, zápis výsledku, rozhodovací stavy a privacy-first kontrola.
