@@ -109403,8 +109403,244 @@ Systémová úprava má po prvním normálním použití jasný stav, minimáln�
 
 Ověření systémové úpravy má chránit dvě věci najednou: kvalitu práce a klid systému. Když změna drží, zavřete ji. Když drhne, opravte nejbližší konkrétní místo. Když otevře nové téma, nenechte ho přirůst k původní kartě. Dobrý provoz není nekonečná kontrola. Je to schopnost udělat malý zásah, ověřit ho a zase se vrátit k normální práci.
 
+## Příloha OC: Uzavření potvrzené systémové úpravy do dlouhodobého rytmu
+
+Příloha OB končí ověřením systémové úpravy po prvním normálním použití. Pokud výsledek zní "Potvrdit", práce ještě není úplně hotová. Potvrzená úprava se musí uklidit do dlouhodobého rytmu tak, aby nezůstala viset jako speciální případ, který si někdo musí pamatovat bokem.
+
+Tato příloha řeší poslední krok: jak potvrzenou systémovou úpravu převést z dočasné změnové karty do běžného provozu, zavřít přechodové poznámky, aktualizovat kanonické místo a určit, kdy se k ní tým znovu vrátí. Nejde o další kontrolu navíc. Jde o to, aby se dobrá změna stala normální součástí práce.
+
+Otázka této přílohy:
+
+```text
+Jak potvrzenou systémovou úpravu uzavřít tak, aby se používala bez zvláštního dohledu, nezůstaly po ní dočasné stopy a měla jasné místo v dlouhodobém review?
+```
+
+Výstupem je uzavírací karta:
+
+```text
+Systémová úprava:
+Potvrzený výsledek:
+Kanonické místo:
+Co se přepisuje:
+Co se zavírá:
+Co se maže:
+Kdy se vrátí v běžném rytmu:
+Vlastník:
+```
+
+Codyho komentář: největší riziko potvrzené změny je, že ji tým bude dál opečovávat jako čerstvou novinku. To je provozní verze toho, když někdo nechá na stole prázdnou krabici, protože "se ještě bude hodit". Možná bude. Ale mezitím překáží.
+
+### Začněte potvrzenou větou
+
+Než začnete cokoli přepisovat, napište jednu větu, která říká, co se potvrdilo. Musí být konkrétní a navázaná na původní tření.
+
+Slabý zápis:
+
+```text
+Nová šablona funguje lépe.
+```
+
+Silnější zápis:
+
+```text
+Výchozí karta nové šablony snížila dohledávání platnosti a vlastníka při měsíční kontrole.
+```
+
+Dobrá potvrzená věta obsahuje tři věci:
+
+- jaká úprava se potvrzuje;
+- jaké původní tření snížila;
+- v jakém běžném použití se to ukázalo.
+
+Příklad:
+
+```text
+Potvrzený výsledek:
+Po prvním založení nové support šablony obsahovala karta vlastníka, datum platnosti a další kontrolu bez ručního dohledávání v historii změn.
+```
+
+Tato věta není marketing výsledku. Je to provozní důkaz, který stačí k tomu, aby se změna zavřela a tým ji přestal řešit jako experiment.
+
+### Přepište jen kanonické místo
+
+Po potvrzení upravte místo, ze kterého budou lidé změnu dál používat. Neopisujte stejné pravidlo do pěti dokumentů. Čím víc míst změníte, tím víc míst bude za měsíc zastaralých.
+
+Kanonické místo může být:
+
+- výchozí šablona;
+- index standardů;
+- checklist před publikací;
+- provozní karta služby;
+- sales karta nabídky;
+- onboardingový materiál pro roli;
+- runbook nebo údržbový rytmus.
+
+Pravidlo:
+
+```text
+Kdo bude práci dělat příště, musí najít správné chování tam, kde práci přirozeně začíná.
+```
+
+Příklad:
+
+```text
+Špatně:
+Změnu popíšeme v retrospektivě, v údržbové kartě, v onboardingu a ještě v komentáři u šablony.
+
+Lépe:
+Upravíme výchozí kartu nové šablony a v údržbové kartě necháme jen odkaz na kanonické místo.
+```
+
+Pokud máte pocit, že pravidlo musí být na více místech, nejdřív se zeptejte, jestli tým nemá příliš roztříštěný zdroj pravdy. Někdy je problém v dokumentaci, ne v samotné změně.
+
+### Zavřete dočasnou změnovou stopu
+
+Každá systémová úprava po sobě během práce nechá dočasné stopy: poznámky z kontroly, akční kartu, ověřovací kartu, komentáře, screenshoty, pracovní tabulku nebo připomínku v backlogu. Po potvrzení mají zůstat jen ty stopy, které mají dlouhodobý účel.
+
+Rozdělte je na tři skupiny:
+
+```text
+Zachovat:
+Kanonické pravidlo, finální karta rozhodnutí, odkaz v changelogu.
+
+Zavřít:
+Úkoly, dočasné checklisty, připomínky k ověření, otevřené komentáře.
+
+Smazat nebo anonymizovat:
+Dočasné poznámky, screenshoty, exporty, osobní příklady, které už nejsou potřeba.
+```
+
+Privacy-first důvod je jednoduchý: dočasné důkazy mají často větší datovou stopu než finální standard. Pokud jste během ověřování použili screenshot, export nebo konkrétní zákaznický příklad, po potvrzení rozhodněte, jestli ho opravdu potřebujete dál držet. Často stačí anonymizovaný provozní zápis.
+
+Příklad úklidu:
+
+```text
+Zachovat:
+Aktualizovaná výchozí karta šablony a jednovětý záznam v changelogu.
+
+Zavřít:
+Úkol "ověřit novou kartu při prvním použití".
+
+Smazat:
+Pracovní poznámka se screenshotem staré šablony, protože už nemá provozní účel.
+```
+
+### Napojte změnu na běžný rytmus
+
+Potvrzená systémová úprava nemá dostat vlastní nekonečný monitoring. Má se vrátit do běžného rytmu, který už existuje: měsíční kontrola standardů, kvartální review provozu, předpublikační checklist, onboardingové review nebo údržba nabídky.
+
+Zapište jen nejbližší přirozený návrat:
+
+```text
+Kdy se k tomu vrátíme:
+Při příští měsíční kontrole šablon.
+
+Co tam ověříme:
+Jestli nové šablony dál vznikají s vlastníkem, platností a dalším datem kontroly.
+```
+
+Nevytvářejte zvláštní meeting kvůli jedné potvrzené úpravě, pokud nejde o kritickou změnu. Pokud každá malá oprava dostane vlastní review, tým brzy kontroluje víc než pracuje. To je elegantní cesta k vyčerpání s dobrým zápisem v kalendáři.
+
+### Rozhodněte o vedlejších nálezech
+
+Při ověřování se často objeví vedlejší nález. Příloha OB říká, že ho nemáte lepit k původní úpravě. Při uzavření udělejte poslední třídění:
+
+```text
+Založit:
+Nález má jasný dopad, vlastní místo vzniku a stojí za samostatnou údržbovou položku.
+
+Odložit:
+Nález je platný, ale není teď důležitější než běžná práce.
+
+Zahodit:
+Nález je jen provozní šum, jednorázová nejasnost nebo osobní preference.
+```
+
+Příklad:
+
+```text
+Vedlejší nález:
+Některé starší šablony nemají jednotný název vlastníka.
+
+Rozhodnutí:
+Odložit do příští měsíční kontroly šablon, nezahrnovat do uzavření nové výchozí karty.
+```
+
+Tím chráníte potvrzenou změnu před nekonečným rozšiřováním. Jedna úprava se má zavřít jako jedna úprava.
+
+### Uzavírací karta systémové úpravy
+
+```text
+Datum:
+Systémová úprava:
+Původní tření:
+Potvrzený výsledek:
+Kanonické místo:
+Co se přepsalo:
+Co se zavřelo:
+Co se smazalo nebo anonymizovalo:
+Vedlejší nálezy:
+Rozhodnutí o vedlejších nálezech:
+Návrat v běžném rytmu:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-23
+Systémová úprava: výchozí karta nové interní šablony obsahuje pole "Platí od", vlastník a další kontrola
+Původní tření: při měsíční kontrole se musela dohledávat platnost a vlastník nové šablony
+Potvrzený výsledek: nová support šablona vznikla s vlastníkem, platností a dalším datem kontroly bez čtení historie změn
+Kanonické místo: výchozí karta nové šablony
+Co se přepsalo: popisek pole na "Další kontrola (YYYY-MM-DD)"
+Co se zavřelo: úkol k prvnímu ověření a dočasná poznámka z kontroly rytmu
+Co se smazalo nebo anonymizovalo: pracovní screenshot staré karty
+Vedlejší nálezy: starší šablony mají nejednotný zápis vlastníka
+Rozhodnutí o vedlejších nálezech: odložit do příští měsíční kontroly šablon
+Návrat v běžném rytmu: příští měsíční kontrola šablon
+Vlastník: provozní lead
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu systémovou úpravu se stavem "Potvrdit" z Přílohy OB.
+
+1. Napište jednu potvrzenou větu.
+2. Určete kanonické místo, kde má změna dlouhodobě žít.
+3. Přepište jen toto místo nebo připravte přesnou instrukci k přepisu.
+4. Rozdělte dočasné stopy na Zachovat, Zavřít, Smazat nebo anonymizovat.
+5. Zkontrolujte, jestli po ověření nezůstávají zbytečné osobní údaje, screenshoty nebo exporty.
+6. Vyberte běžný rytmus, ve kterém se změna příště přirozeně zkontroluje.
+7. Rozhodněte, co se stane s vedlejšími nálezy.
+8. Zapište uzavírací kartu.
+
+Výstup:
+
+```text
+Potvrzená systémová úprava je zapsaná v kanonickém místě, dočasné stopy jsou zavřené nebo uklizené, vedlejší nálezy jsou oddělené a změna se vrací do běžného rytmu bez zvláštního dohledu.
+```
+
+### Checklist kapitoly
+
+- Máte jednu konkrétní potvrzenou větu?
+- Navazuje potvrzení na původní tření, ne jen na obecný pocit zlepšení?
+- Je jasné kanonické místo, kde má změna dlouhodobě žít?
+- Nepřepisujete stejné pravidlo do zbytečně mnoha dokumentů?
+- Jsou dočasné úkoly, poznámky a připomínky zavřené?
+- Je rozhodnuté, co se smaže nebo anonymizuje?
+- Nezůstaly po ověření screenshoty, exporty nebo osobní příklady bez účelu?
+- Je změna napojená na existující běžný rytmus?
+- Nevznikl kvůli jedné potvrzené úpravě nový nekonečný monitoring?
+- Jsou vedlejší nálezy založené, odložené nebo zahozené odděleně od původní změny?
+- Má uzavření vlastníka?
+- Ví tým, kde změnu najde při příštím normálním použití?
+
+Uzavření potvrzené systémové úpravy je malý, ale důležitý hygienický krok. Bez něj se dobré změny hromadí jako dočasné výjimky a tým postupně ztrácí přehled, co je experiment, co je standard a co už může zmizet. Cílem není víc dokumentace. Cílem je, aby se ověřená změna stala normální prací a aby po ní nezůstala zbytečná datová ani mentální stopa.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OC o uzavření potvrzené systémové úpravy do dlouhodobého rytmu: potvrzená věta, přepis kanonického místa, zavření dočasných stop, privacy-first úklid důkazů, návrat do běžného review, práce s vedlejšími nálezy, uzavírací karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OB o ověření systémové úpravy po prvním normálním použití: výběr reálného použití, návrat k původnímu tření, sledování pracovní cesty místo výkonu člověka, rozhodovací stavy, privacy-first minimální důkaz, ověřovací karta, mini workshop a checklist.
 - 2026-05-23: Doplněna úvodní sekce Karta jedné změny po čtení: šablona převodu kapitoly do jedné ověřitelné změny, příklad pro lead generation, privacy-first datová stopa, hranice rozsahu a checklist.
 - 2026-05-22: Doplněna Příloha OA o převodu kontroly údržbového rytmu do jedné systémové úpravy: místo vzniku tření, systémová věta, hranice rozsahu, kanonické místo, privacy-first omezení, ověření při běžném použití, karta, mini workshop a checklist.
