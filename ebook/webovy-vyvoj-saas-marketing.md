@@ -114180,8 +114180,253 @@ Potvrzená údržbová položka je zavřená, její výsledek je v kanonickém m
 
 Uzavření potvrzené údržbové položky vrací práci do normálu. To je pointa celé smyčky. Nález se objevil, oprava pomohla a tým z ní nevyrábí nový miniproces. Dobrý provoz není ten, který si pamatuje každou opravu navždy. Dobrý provoz umí nechat opravenou věc zmizet do lepšího pracovního místa.
 
+## Příloha OU: První kontrola běžného rytmu po uzavřené údržbové položce
+
+Příloha OT uzavřela potvrzenou údržbovou položku a vrátila její výsledek do běžného rytmu. Tato příloha řeší první kontrolu po návratu do normálu: jak poznat, že uzavření opravdu drží, aniž by tým kvůli tomu zakládal další speciální review.
+
+Kontrola po uzavření nemá dokazovat, že autor opravy pracoval dobře. Má ověřit, že běžný provoz už nepotřebuje starou kartu, dočasné poznámky ani ruční připomínání. Pokud se práce vrací do starých stop, položka sice mohla být formálně uzavřená, ale systém ji ještě nestrávil.
+
+Pracovní otázka zní:
+
+```text
+Při prvním běžném použití po uzavření: našel tým aktuální pravidlo a dokončil práci bez návratu ke staré údržbové položce?
+```
+
+Výstupem je krátká kontrolní karta:
+
+```text
+Kontrolovaná položka:
+Běžný rytmus:
+První použití po uzavření:
+Aktuální pracovní místo:
+Bylo nalezeno bez staré karty:
+Co se vrátilo ze staré stopy:
+Výsledek kontroly:
+Další krok:
+Datová stopa:
+Vlastník:
+```
+
+Codyho komentář: jestli po uzavření potřebujete schůzku, tabulku a tři připomínky, aby uzavřená věc zůstala uzavřená, tak jste neuzavřeli provoz. Jen jste mu dali hezčí status. To je velmi firemní kouzlo, ale pořád kouzlo.
+
+### Kontrolujte jen při skutečném použití
+
+První kontrola má proběhnout v okamžiku, kdy se dané pravidlo, checklist, šablona nebo pracovní místo opravdu použije. Ne den po uzavření jen proto, že je to v kalendáři.
+
+Dobré kontrolní okamžiky:
+
+- další měsíční review standardů;
+- první předání výstupu zákazníkovi po změně šablony;
+- další onboardingový průchod, kde se pravidlo hledá;
+- první příprava kampaně s aktualizovanou sales kartou;
+- nejbližší údržbová kontrola, která by dané místo otevřela i bez této přílohy.
+
+Špatné kontrolní okamžiky:
+
+- umělý test autora opravy;
+- kontrola jen podle toho, že karta má stav `Uzavřeno`;
+- schůzka svolaná pouze kvůli potvrzení, že už nic neřešíme;
+- ruční dotaz "pamatujete si, že jsme to zavřeli?".
+
+Smysl první kontroly je zjistit, jestli se oprava stala součástí přirozené práce. Pokud ji musíte vyvolat bokem, pravděpodobně ještě není přirozená.
+
+### Sledujte cestu k aktuálnímu místu
+
+Nejdůležitější signál není, že aktuální pravidlo existuje. Důležité je, jestli ho člověk při práci najde.
+
+Sledujte tři otázky:
+
+1. Kde člověk začal hledat?
+2. Našel aktuální místo bez otevření staré karty?
+3. Dokázal podle něj dokončit práci bez dalšího vysvětlování?
+
+Příklad dobrého výsledku:
+
+```text
+Při měsíčním review tým otevřel kanonický checklist z indexu standardů, použil aktuální verzi a nepotřeboval starou údržbovou kartu.
+```
+
+Příklad slabého výsledku:
+
+```text
+Checklist je aktualizovaný, ale tým si v chatu vyžádal odkaz na starou kartu, protože nevěděl, která verze platí.
+```
+
+Slabý výsledek neznamená automaticky velký problém. Znamená, že uzavření ještě nevytvořilo dost jasnou cestu k aktuálnímu místu. Oprava může být malá: lepší název v indexu, odstranění starého odkazu, doplnění jedné věty v changelogu nebo přesun pravidla blíž k pracovnímu toku.
+
+### Hledejte návrat staré stopy
+
+Staré stopy se po uzavření vracejí nenápadně. Ne jako dramatický incident, ale jako pohodlná zkratka: někdo pošle starý odkaz, otevře archivní screenshot, zkopíruje starou šablonu nebo se v chatu zeptá autora, "jak jsme to vlastně mysleli".
+
+Typické návraty:
+
+- stará karta se otevře jako hlavní zdroj pravdy;
+- archivní screenshot se použije jako aktuální návod;
+- dočasná poznámka zůstane v indexu;
+- původní úkol se znovu otevře kvůli novému nálezu;
+- tým drží v hlavě pravidlo, které není v kanonickém místě;
+- vedlejší nález se přilepí k uzavřené položce.
+
+Návrat staré stopy řešte podle velikosti:
+
+- Pokud jen chybí odkaz, opravte odkaz.
+- Pokud je nejasný název, přejmenujte pracovní místo.
+- Pokud existují dvě platné verze, vyberte jednu a druhou označte jako historickou.
+- Pokud tým pořád potřebuje starou kartu, vraťte položku do údržby s přesným důvodem.
+
+Neotevírejte kvůli malé stopě celou minulou debatu. Kontrolujete návrat do provozu, ne pořádáte archeologický festival dokumentace. Ten sice zní kulturně, ale zákazník za něj obvykle neplatí.
+
+### Rozlišujte čtyři výsledky kontroly
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů.
+
+`Drží` znamená, že aktuální pracovní místo stačilo, stará stopa se neotevřela a práce proběhla normálně.
+
+```text
+Výsledek: Drží.
+Další krok: žádný speciální. Další kontrola jen v běžném rytmu.
+```
+
+`Drží s drobnou stopou` znamená, že práce proběhla, ale objevila se malá nejasnost, kterou lze opravit přímo v pracovním místě.
+
+```text
+Výsledek: Drží s drobnou stopou.
+Další krok: odstranit starý odkaz z indexu a doplnit jednu větu do changelogu.
+```
+
+`Vrátit do údržby` znamená, že tým bez staré karty nedokázal rozhodnout, co platí, nebo se ukázalo, že kanonické místo není dostatečné.
+
+```text
+Výsledek: Vrátit do údržby.
+Další krok: založit malou údržbovou položku s důvodem "aktuální pravidlo nejde najít bez staré karty".
+```
+
+`Nový nález` znamená, že původní uzavření drží, ale při použití se objevil jiný problém.
+
+```text
+Výsledek: Nový nález.
+Další krok: zapsat samostatný nález do údržbové fronty, nepřipojovat ho k uzavřené položce.
+```
+
+Nejčastější chyba je smíchat poslední dva stavy. Když se objeví nový problém, neznamená to, že stará položka selhala. A když stará položka skutečně selhala, nepomůže ji schovat pod nový nález. Pojmenujte stav přesně, jinak se údržba začne tvářit jako mlha s checklistem.
+
+### Privacy-first kontrola zbytkových stop
+
+První kontrola po uzavření je dobrý okamžik ověřit, že po staré údržbě nezůstaly zbytečné osobní nebo provozní detaily.
+
+Položte si tyto otázky:
+
+- Zůstávají někde screenshoty, exporty nebo přepisy, které už nic nerozhodují?
+- Neobsahuje archivní karta jména lidí, komentáře nebo zákaznické údaje, které nejsou nutné?
+- Je jasně označeno, které podklady jsou historické?
+- Nezůstala dočasná tabulka mimo běžný zdroj pravdy?
+- Nevyžaduje kontrola nové sledování lidí, kliků nebo individuálního výkonu?
+
+Privacy-first kontrola nemá být výmluva pro mazání odpovědnosti. Má odstranit důkazy, které už nemají účel. Pro budoucí rozhodnutí často stačí aktuální pravidlo, datum změny, krátký výsledek a odkaz na uzavřenou kartu bez nadbytečných detailů.
+
+Dobrá zbytková stopa:
+
+```text
+Aktuální checklist, changelogová věta a uzavřená karta bez screenshotů.
+```
+
+Příliš těžká zbytková stopa:
+
+```text
+Checklist, stará karta, dva screenshoty, export komentářů, dočasná tabulka a chatový přepis.
+```
+
+Pokud něco zůstává "pro jistotu", napište účel. Když účel neumíte napsat, je to kandidát na smazání nebo archivaci s omezeným dosahem.
+
+### Kontrolní zápis
+
+```text
+Datum:
+Kontrolovaná uzavřená položka:
+Běžný rytmus:
+První použití po uzavření:
+Kdo pravidlo použil:
+Aktuální pracovní místo:
+Cesta k aktuálnímu místu:
+Otevřela se stará karta nebo stopa:
+Co bylo potřeba ručně vysvětlit:
+Výsledek kontroly:
+Další krok:
+Co se neotevírá:
+Datová stopa po kontrole:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-09-25
+Kontrolovaná uzavřená položka: odstranění starého řádku z měsíčního checklistu
+Běžný rytmus: měsíční review provozních standardů
+První použití po uzavření: zářijové review checklistu
+Kdo pravidlo použil: provozní lead
+Aktuální pracovní místo: měsíční checklist v indexu standardů
+Cesta k aktuálnímu místu: otevřeno z kanonického indexu, bez staré karty
+Otevřela se stará karta nebo stopa: ne
+Co bylo potřeba ručně vysvětlit: nic
+Výsledek kontroly: Drží
+Další krok: žádný speciální, další kontrola jen v běžném měsíčním rytmu
+Co se neotevírá: historie původní stabilizační karty
+Datová stopa po kontrole: jedna věta v changelogu review
+Vlastník: provozní lead
+```
+
+Příklad s drobnou stopou:
+
+```text
+Výsledek kontroly: Drží s drobnou stopou
+Otevřela se stará karta nebo stopa: ano, v indexu zůstal starý odkaz
+Další krok: odstranit starý odkaz z indexu a doplnit datum změny k aktuálnímu checklistu
+Co se neotevírá: nepřepisujeme celý checklist a nezakládáme nové review
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu uzavřenou údržbovou položku, která se od té doby poprvé objevila v běžném rytmu.
+
+1. Napište, v jakém skutečném použití se položka potkala s provozem.
+2. Ověřte, odkud člověk otevřel aktuální pracovní místo.
+3. Zapište, jestli se otevřela stará karta, screenshot, chat nebo dočasná poznámka.
+4. Rozhodněte stav: `Drží`, `Drží s drobnou stopou`, `Vrátit do údržby`, nebo `Nový nález`.
+5. Pokud je potřeba oprava, zapište jen nejmenší zásah v místě práce.
+6. Pokud vznikl nový nález, oddělte ho do samostatné fronty.
+7. Smažte nebo archivujte zbytkové podklady, které už nemají účel.
+8. Potvrďte, že další kontrola zůstává v běžném rytmu.
+
+Výstup:
+
+```text
+Uzavřená údržbová položka byla poprvé zkontrolovaná v běžném rytmu. Je jasné, zda drží, potřebuje drobný úklid, vrací se do údržby, nebo jen odhalila samostatný nový nález.
+```
+
+### Checklist kapitoly
+
+- Proběhla kontrola při skutečném použití, ne v umělém testu?
+- Je jasné, jaký běžný rytmus položku znovu otevřel?
+- Našel člověk aktuální pracovní místo bez staré karty?
+- Bylo možné dokončit práci bez ručního vysvětlování?
+- Je zapsané, zda se otevřel starý odkaz, screenshot, chat nebo dočasná poznámka?
+- Nezaměňuje se nový nález za selhání staré položky?
+- Je vybraný jeden ze čtyř stavů kontroly?
+- Pokud stav drží, nevzniká žádná speciální další kontrola?
+- Pokud zůstala drobná stopa, je oprava malá a v místě práce?
+- Pokud se položka vrací do údržby, je důvod konkrétní?
+- Jsou nové nálezy oddělené mimo uzavřenou položku?
+- Neobsahuje kontrolní zápis zbytečné osobní údaje?
+- Byly odstraněné nebo archivované dočasné podklady bez dalšího účelu?
+- Zůstává aktuální pravidlo dohledatelné v kanonickém místě?
+- Ví vlastník, kdy se věc znovu řeší jen v běžném rytmu?
+
+První kontrola běžného rytmu po uzavřené údržbové položce má jednu skromnou ambici: potvrdit, že opravená věc už nepotřebuje zvláštní pozornost. Když drží, nechte ji být. Když drhne, opravte nejbližší pracovní místo. Když otevře nový problém, dejte mu vlastní kartu. Provoz se tím učí jednu důležitou dovednost: nepřenášet starou práci dál jen proto, že se kdysi hodila jako opora.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OU o první kontrolu běžného rytmu po uzavřené údržbové položce: kontrola při skutečném použití, cesta k aktuálnímu místu, návrat staré stopy, čtyři výsledky kontroly, privacy-first úklid zbytkových podkladů, kontrolní zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OT o uzavření potvrzené údržbové položky do běžného rytmu: potvrzený výsledek, kanonické místo, zavření údržbové karty, návrat do běžného rytmu, úklid starých stop, privacy-first uzavření, uzavírací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OS o ověření údržbové položky po dalším běžném použití: návrat k původnímu nálezu, kontrola normálního průchodu, čtyři výsledky ověření, privacy-first ověřovací stopa, ověřovací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OR o převodu nálezu z první kontroly běžného rytmu do jedné údržbové položky: výběr jednoho nálezu, oddělení od staré stabilizace, popis pracovní ceny bez osobních stop, nejmenší oprava v místě práce, privacy-first brzda, ověření při dalším běžném použití, karta, mini workshop a checklist.
