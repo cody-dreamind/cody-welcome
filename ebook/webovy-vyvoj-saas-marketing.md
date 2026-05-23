@@ -113769,8 +113769,294 @@ Výstup:
 
 Ověření údržbové položky uzavírá malou smyčku. Nález se objevil v běžném rytmu, byl převedený do malé opravy a teď se ukázalo, jestli oprava opravdu zkrátila práci. Když ano, nechte ji splynout s provozem. Když ne, vraťte ji do údržby přesně v rozsahu problému. V obou případech je cílem méně tření a méně stop, ne další vrstva procesní výzdoby.
 
+## Příloha OT: Uzavření potvrzené údržbové položky do běžného rytmu
+
+Příloha OS ověřila, jestli malá údržbová položka po dalším běžném použití opravdu pomohla. Tato příloha řeší poslední krok: jak potvrzenou položku zavřít tak, aby se nestala dalším trvalým štítkem, kontrolou nebo samostatnou vrstvou dokumentace.
+
+Uzavření není slavnostní archiv. Je to praktické uklizení. Cílem je, aby po opravě zůstalo jen aktuální pracovní místo, krátká stopa v changelogu a jasný běžný rytmus, ve kterém se věc přirozeně zkontroluje, pokud to bude potřeba.
+
+Pracovní otázka zní:
+
+```text
+Co musí po potvrzené údržbové položce zůstat v běžném provozu a co má zmizet, aby tým nepřenášel starou opravu dál?
+```
+
+Výstupem je uzavírací zápis:
+
+```text
+Položka:
+Potvrzený výsledek:
+Kanonické místo:
+Co zůstává:
+Co se zavírá:
+Co se maže nebo archivuje:
+Běžný rytmus kontroly:
+Datová stopa:
+Vlastník:
+```
+
+Codyho komentář: drobná údržba je jako dobrý servis kliky u dveří. Po opravě nemá na dveřích viset cedule "tady byla servisována klika". Dveře se mají normálně otevírat. Jo, technicky to není vznešené. Ale přesně tím provoz vyhrává.
+
+### Začněte potvrzeným výsledkem
+
+Neuzavírejte položku jen proto, že už nikoho nebaví. Uzavírejte ji proto, že má potvrzený výsledek z Přílohy OS.
+
+Potvrzený výsledek má být krátký:
+
+```text
+Při dalším měsíčním review se checklist použil bez návratu ke staré stabilizační kartě.
+```
+
+Nebo:
+
+```text
+Nový název pole pomohl najít správné místo v indexu bez dalšího vysvětlování.
+```
+
+Slabý výsledek:
+
+```text
+Vypadá to hotově.
+```
+
+Slabá formulace je problém, protože neříká, co se v práci změnilo. Uzavření potom stojí na pocitu, ne na pozorovaném průchodu.
+
+Před uzavřením proto zkontrolujte tři věci:
+
+- je zapsané běžné použití, ve kterém se položka ověřila;
+- je jasné, jaké tření zmizelo;
+- nevznikl nový nález, který by se tajně přilepil k původní položce.
+
+Pokud některá odpověď chybí, neuzavírejte. Doplňte ověřovací zápis nebo vraťte položku do údržby s konkrétním důvodem.
+
+### Přepište jen kanonické místo práce
+
+Potvrzená údržba má skončit v místě, které tým opravdu používá. Ne v samostatné kartě, ne v dlouhém zápisu z review, ne v chatu.
+
+Kanonické místo může být:
+
+- provozní checklist;
+- index standardů;
+- šablona předání;
+- stránka v interní znalostní bázi;
+- formulář, který se používá při reálné práci;
+- karta nabídky, pokud šlo o sales nebo delivery pravidlo.
+
+Pravidlo je jednoduché: pokud člověk při běžné práci toto místo neotevře, není to kanonické místo. Je to skladiště.
+
+Příklad:
+
+```text
+Původní položka:
+Odstranit starý řádek z měsíčního checklistu.
+
+Kanonické místo:
+Měsíční checklist provozních standardů.
+
+Zásah:
+Checklist zůstává bez starého řádku. Do changelogu přibývá jedna věta o odstranění.
+```
+
+Nezakládejte novou stránku "Uzavřené údržbové položky", pokud ji tým nepoužívá k rozhodování. Většinou stačí aktualizované pracovní místo a krátký changelog.
+
+### Zavřete údržbovou kartu
+
+Údržbová karta splnila účel ve chvíli, kdy pomohla převést nález do opravy, ověřit ji a uložit výsledek do běžné práce. Potom má být zavřená.
+
+Zavření znamená:
+
+- karta má stav `Uzavřeno` nebo ekvivalent;
+- obsahuje jednovětý výsledek;
+- odkazuje na aktuální kanonické místo;
+- neobsahuje neuzavřený seznam dalších nápadů;
+- dočasné podklady jsou smazané nebo jasně archivované.
+
+Krátký uzavírací text:
+
+```text
+Uzavřeno: položka potvrzena při dalším měsíčním review. Aktuální pravidlo je v měsíčním checklistu. Starý řádek ani stabilizační karta se při běžném použití neotevírají.
+```
+
+Pokud karta obsahuje další nápady, rozdělte je:
+
+```text
+Zůstává v této kartě:
+Nic, původní položka je uzavřená.
+
+Nový samostatný nález:
+Index nerozlišuje pilotní a ukončené standardy.
+```
+
+Tím chráníte původní údržbu před bobtnáním. Malá položka nemá být odkladiště pro všechno, co si tým všiml cestou.
+
+### Vraťte věc do běžného rytmu
+
+Po uzavření nemá vzniknout speciální kontrola "jestli uzavřená údržbová položka pořád drží". Pokud je potřeba kontrola, má patřit do existujícího rytmu.
+
+Příklady běžného rytmu:
+
+- další měsíční review provozních standardů;
+- kvartální kontrola dodavatelů;
+- příští onboarding nového člověka;
+- další předání zákaznického výstupu;
+- běžná kontrola sales materiálů před kampaní;
+- roční inventura datové stopy.
+
+Dobrá věta:
+
+```text
+Další kontrola proběhne jen v rámci běžného měsíčního review checklistu.
+```
+
+Špatná věta:
+
+```text
+Založíme samostatnou opakovanou kontrolu této opravy.
+```
+
+Samostatná kontrola je někdy správná u bezpečnostního incidentu, právní povinnosti nebo kritického provozního rizika. U běžné údržbové položky je to většinou dražší než samotný problém.
+
+### Ukliďte staré stopy
+
+Potvrzená údržba často po sobě nechá víc stop než je potřeba: dočasné poznámky, screenshoty, odkazy na staré karty, duplicitní návrhy textu nebo komentáře v chatu. Pokud je necháte žít, za měsíc budou vypadat jako alternativní pravda.
+
+Úklidová otázka:
+
+```text
+Které stopy by mohly budoucímu člověku naznačit, že stará verze pořád platí?
+```
+
+Hledejte hlavně:
+
+- staré odkazy v indexu;
+- neaktuální řádky v checklistech;
+- duplicitní šablony;
+- komentáře označené jako "dočasně";
+- screenshoty starého stavu;
+- rozpracované návrhy v dokumentech;
+- úkoly bez stavu po ověření.
+
+Nemusíte mazat historii, která má auditní nebo rozhodovací hodnotu. Ale musí být jasné, že je historická. Prakticky to znamená archivní stav, datum a odkaz na aktuální pracovní místo.
+
+Příklad:
+
+```text
+Archiv:
+Původní stabilizační karta ponechána jen jako historický doklad rozhodnutí. V horní části je odkaz na aktuální měsíční checklist.
+
+Smazáno:
+Dočasný screenshot starého checklistu a pracovní návrh přejmenování pole.
+```
+
+### Privacy-first uzavření
+
+Uzavření je dobrý okamžik snížit datovou stopu. Ověření už proběhlo, rozhodnutí padlo a většina dočasných důkazů ztratila účel.
+
+Privacy-first kontrola:
+
+- Zůstává jen zápis, který bude potřeba pro budoucí rozhodnutí?
+- Neobsahuje uzavírací karta jména lidí, pokud nejsou nutná?
+- Jsou smazané screenshoty, exporty nebo přepisy, které jen dokazovaly průchod?
+- Nezůstala dočasná tabulka s poznámkami mimo kanonické místo?
+- Je u archivovaných podkladů jasné, proč zůstávají a kdy se k nim vrátit?
+
+U interních standardů bývá nejčastější chyba skromně nenápadná: tým si nechá všechny pomocné důkazy "pro jistotu". Jenže "pro jistotu" není účel. Pokud něco nechrání bezpečnost, právní dohledatelnost, kontinuitu práce nebo budoucí rozhodnutí, zvažte smazání.
+
+Dobrá datová stopa po uzavření:
+
+```text
+Aktuální checklist, jedna věta v changelogu, zavřená karta s odkazem na checklist.
+```
+
+Příliš těžká stopa:
+
+```text
+Checklist, zavřená karta, screenshoty, chat, poznámky z review, kopie staré šablony a samostatná tabulka ověření.
+```
+
+### Uzavírací zápis
+
+```text
+Datum:
+Položka:
+Potvrzený výsledek:
+Kanonické místo:
+Co zůstává v provozu:
+Co se zavírá:
+Co se maže:
+Co se archivuje:
+Běžný rytmus kontroly:
+Nové nálezy oddělené mimo položku:
+Datová stopa po uzavření:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-09-11
+Položka: odstranit starý řádek "ověřit novou nápovědu" z měsíčního checklistu
+Potvrzený výsledek: při dalším měsíčním review se checklist použil bez návratu ke staré stabilizační kartě
+Kanonické místo: měsíční checklist provozních standardů
+Co zůstává v provozu: aktuální checklist bez starého řádku
+Co se zavírá: údržbová karta položky
+Co se maže: dočasný screenshot starého checklistu
+Co se archivuje: původní stabilizační karta jako historický doklad, s odkazem na aktuální checklist
+Běžný rytmus kontroly: pouze běžné měsíční review standardů
+Nové nálezy oddělené mimo položku: žádné
+Datová stopa po uzavření: checklist, jedna věta v changelogu, zavřená karta
+Vlastník: provozní lead
+```
+
+Příklad s odděleným novým nálezem:
+
+```text
+Nové nálezy oddělené mimo položku:
+Index nerozlišuje pilotní a ukončené standardy. Zapsáno jako nová údržbová položka, bez prodlužování původní karty.
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu údržbovou položku se stavem `Potvrdit` z Přílohy OS.
+
+1. Opište potvrzený výsledek jednou větou.
+2. Určete kanonické místo, kde má oprava zůstat.
+3. Zapište, co zůstává v provozu.
+4. Zavřete údržbovou kartu nebo úkol.
+5. Smažte dočasné důkazy, které už nic nerozhodují.
+6. Archivujte jen podklady s jasným účelem.
+7. Připojte položku k existujícímu běžnému rytmu, pokud nějaká kontrola dává smysl.
+8. Oddělte nové nálezy do samostatné fronty.
+
+Výstup:
+
+```text
+Potvrzená údržbová položka je zavřená, její výsledek je v kanonickém místě a po ověření nezůstala zbytečná datová ani procesní stopa.
+```
+
+### Checklist kapitoly
+
+- Existuje potvrzený výsledek z běžného použití?
+- Je výsledek formulovaný jako změna práce, ne jako pocit?
+- Je jasné kanonické místo, kde oprava zůstává?
+- Nevznikla nová stránka nebo tabulka jen kvůli uzavření?
+- Je údržbová karta zavřená a odkazuje na aktuální pracovní místo?
+- Nezůstaly v kartě další nápady bez oddělení?
+- Je případná další kontrola součástí běžného rytmu?
+- Nevznikla samostatná kontrola kvůli malé opravě?
+- Jsou odstraněné staré odkazy, duplicitní šablony a dočasné návrhy?
+- Jsou archivované jen podklady, které mají jasný účel?
+- Neobsahuje uzavírací zápis zbytečná osobní data?
+- Byly smazané screenshoty, exporty nebo přepisy bez další hodnoty?
+- Je jasné, co zůstává v provozu a co už je historie?
+- Má uzavření vlastníka?
+- Dokáže nový člověk najít aktuální pravidlo bez čtení celé historie?
+
+Uzavření potvrzené údržbové položky vrací práci do normálu. To je pointa celé smyčky. Nález se objevil, oprava pomohla a tým z ní nevyrábí nový miniproces. Dobrý provoz není ten, který si pamatuje každou opravu navždy. Dobrý provoz umí nechat opravenou věc zmizet do lepšího pracovního místa.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OT o uzavření potvrzené údržbové položky do běžného rytmu: potvrzený výsledek, kanonické místo, zavření údržbové karty, návrat do běžného rytmu, úklid starých stop, privacy-first uzavření, uzavírací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OS o ověření údržbové položky po dalším běžném použití: návrat k původnímu nálezu, kontrola normálního průchodu, čtyři výsledky ověření, privacy-first ověřovací stopa, ověřovací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OR o převodu nálezu z první kontroly běžného rytmu do jedné údržbové položky: výběr jednoho nálezu, oddělení od staré stabilizace, popis pracovní ceny bez osobních stop, nejmenší oprava v místě práce, privacy-first brzda, ověření při dalším běžném použití, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OQ o první kontrolu běžného rytmu po uzavřené stabilizaci: návrat do normálního použití, kontrola zbytkových stop, čtyři stavy rytmu, privacy-first úklid dočasné evidence, rytmická karta, mini workshop a checklist.
