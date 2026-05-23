@@ -112481,8 +112481,294 @@ Drobné tření má jednu stabilizační úpravu ve stejném kanonickém místě
 
 Drobné tření si zaslouží drobnou odpověď. Když pravidlo drží, není potřeba ho znovu stavět. Stačí odstranit místo, kde člověk zakopl, a nechat pravidlo dál pracovat v běžném rytmu.
 
+## Příloha ON: Ověření stabilizační úpravy po prvním běžném použití
+
+Příloha OM končí tím, že drobné tření dostalo malou stabilizační úpravu. Teď přichází chvíle, kdy se ukáže, jestli úprava opravdu pomohla, nebo jen vypadala rozumně v okamžiku psaní. Ověření nemá být slavnostní audit. Má to být normální návrat k práci, ve které se původní tření objevilo.
+
+Stabilizační úprava se ověřuje na stejné otázce, kvůli které vznikla:
+
+```text
+Zmizelo původní drobné tření při dalším běžném použití pravidla?
+```
+
+Výstupem je krátký ověřovací zápis:
+
+```text
+Kontrolované pravidlo:
+Stabilizační věta:
+Původní drobné tření:
+Běžné použití:
+Co se stalo:
+Výsledek:
+Co se uzavírá:
+Co se vrací do fronty:
+Datová stopa:
+Vlastník:
+Další návrat:
+```
+
+Codyho komentář: pokud jste kvůli jedné nápovědě svolali review meeting, založili tabulku signálů a přidali tři štítky, gratuluju, právě jste z opravy špendlíku vyrobili provozní nábytek. Ověření stabilizace má být skoro nudné. Člověk použije pravidlo, nezasekne se, zapíše se jedna věta a jede se dál.
+
+### Vraťte se k původnímu tření
+
+Neověřujte celou kvalitu pravidla znovu. To už proběhlo v předchozích krocích. Tady se vracíte jen k tomu, co stabilizační úprava slíbila odstranit.
+
+Slabé ověření:
+
+```text
+Pravidlo se zdá být lepší.
+```
+
+Silnější ověření:
+
+```text
+Při dalším měsíčním review provozní lead vyplnil pole "Další kontrola" u aktivního i pilotního standardu bez návratu do staré karty.
+```
+
+Rozdíl je v ostrosti. První věta popisuje dojem. Druhá věta popisuje konkrétní pracovní situaci, původní tření a výsledek. U stabilizačních úprav potřebujete právě tu druhou.
+
+Před ověřením si opište tři věci ze stabilizační karty:
+
+- původní drobné tření;
+- stabilizační větu;
+- běžné použití, při kterém se měla úprava ověřit.
+
+Teprve potom sledujte další použití pravidla. Bez návratu k původní kartě hrozí, že tým začne hodnotit všechno, co ho zrovna napadne. To je sice občas užitečné, ale není to ověření stabilizace.
+
+### Vyberte první normální použití
+
+Nečekejte na ideální případ. Stabilizační úprava má fungovat v provozu, ne v laboratorním cvičení. První normální použití je takové, kde člověk pravidlo skutečně potřebuje pro práci: měsíční review, onboarding, údržbová kontrola, aktualizace indexu, předání výstupu nebo jiné běžné rozhodnutí.
+
+Nevhodné použití:
+
+```text
+Autor úpravy ukáže týmu, jak nové pole myslel, a všichni potvrdí, že dává smysl.
+```
+
+Vhodné použití:
+
+```text
+Člověk, který úpravu nepsal, použije pravidlo při běžném review a dokončí práci bez stejného zaseknutí.
+```
+
+Pokud první použití vede autor změny, výsledek berte opatrně. Autor zná záměr, pamatuje si debatu a snadno obejde nejasnost, kterou by někdo jiný potkal. Není nutné dělat velký test s novým člověkem. Stačí nepředstírat, že autorovo hladké použití dokazuje samostatnost pravidla.
+
+Praktická otázka:
+
+```text
+Použil pravidlo někdo v běžné práci tak, že nemusel znát historii stabilizační úpravy?
+```
+
+Pokud odpověď zní ne, ověření ještě neuzavírejte. Zapište, že úprava čeká na první vhodné použití. To je lepší než falešné potvrzení.
+
+### Sledujte jen tři signály
+
+U drobné stabilizace stačí tři signály:
+
+1. Nalezení: člověk našel správné místo bez návratu do staré stopy.
+2. Pochopení: člověk pochopil upravenou formulaci, pole nebo odkaz bez dalšího vysvětlování.
+3. Dokončení: člověk dokončil původní pracovní krok bez stejného tření.
+
+Příklad:
+
+```text
+Nalezení:
+Index standardů byl otevřen z běžného měsíčního checklistu.
+
+Pochopení:
+Nápověda u pole "Další kontrola" jasně rozlišila aktivní a pilotní standard.
+
+Dokončení:
+Datum kontroly bylo vyplněno u obou typů standardu bez návratu do staré karty.
+```
+
+Není potřeba měřit náladu týmu, počet kliknutí, čas na sekundu ani spokojenost s celým systémem. Pokud se původní drobné tření týkalo jedné nápovědy, ověřujte jednu nápovědu. Pokud se týkalo pořadí dvou sekcí, ověřujte pořadí dvou sekcí. Rozšířené měření by tady spíš vyrobilo šum.
+
+Když se během použití objeví nové tření, oddělte ho:
+
+```text
+Původní tření zmizelo. Nový nález: v indexu chybí filtr pro archivované standardy. Zařadit do údržbové fronty, ne do této stabilizace.
+```
+
+Tím chráníte stabilizační úpravu před nekonečným natahováním. Jedna úprava má odpovědět na jednu otázku.
+
+### Vyberte výsledek bez mlžení
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+```text
+Potvrdit:
+Původní tření zmizelo a pravidlo se vrací do běžného rytmu.
+
+Ještě jednou stabilizovat:
+Původní tření se zmenšilo, ale stejná drobná nejasnost pořád zdržuje práci.
+
+Vrátit do fronty:
+Ukázalo se, že problém je větší než drobná stabilizační úprava.
+
+Čeká na ověření:
+Pravidlo zatím nebylo použité v dostatečně normální situaci.
+```
+
+Stav `Potvrdit` uzavírá stabilizační kartu. Nezakládejte další kontrolní režim jen proto, že by bylo hezké mít víc jistoty. Pokud pravidlo fungovalo v reálném použití a původní tření zmizelo, vraťte ho do běžného rytmu.
+
+Stav `Ještě jednou stabilizovat` použijte jen pro stejnou drobnou nejasnost. Příklad:
+
+```text
+Nápověda už rozlišuje aktivní a pilotní standard, ale slovo "pilotní review" není v týmu používané. Stačí přejmenovat ho na "kontrola pilotu".
+```
+
+Stav `Vrátit do fronty` použijte, když se ukáže, že drobné tření bylo jen příznak většího problému:
+
+```text
+Lidé nerozumí poli "Další kontrola", protože stavový model standardů není jasný. Nejde o nápovědu, ale o samostatnou údržbovou práci.
+```
+
+Stav `Čeká na ověření` je poctivý mezistav, ale nesmí se stát odkladištěm. Přidejte konkrétní návrat: další měsíční review, další onboarding, další předání nebo konkrétní provozní událost.
+
+### Uzavřete nebo vraťte jen jedno místo
+
+Když se stabilizační úprava potvrdí, zavřete stabilizační kartu a ponechte jen současný stav pravidla. Historii nechte krátkou:
+
+```text
+2026-06-24: Nápověda u pole "Další kontrola" ověřena při měsíčním review; původní nejasnost mezi aktivním a pilotním standardem zmizela.
+```
+
+Nepřepisujte celý příběh do dalšího dokumentu. Nepřidávejte samostatnou stránku "jak jsme stabilizovali pole". Hodnota je v upraveném pravidle, ne v muzeu jeho vývoje.
+
+Když se práce vrací do fronty, zapište ji jako nový nález, ne jako pokračování stabilizační karty:
+
+```text
+Nález:
+Stavový model standardů není srozumitelný při měsíčním review.
+
+Důvod:
+Druhá drobná úprava nápovědy by jen maskovala širší nejasnost.
+
+Nejbližší rozhodnutí:
+Zvolit, zda model zjednodušit, přejmenovat stavy nebo přesunout vysvětlení do indexu.
+```
+
+Tím se zachová čistá hranice: stabilizační úprava byla vyzkoušená, její výsledek je známý a větší práce má vlastní kartu.
+
+### Privacy-first ověření bez nové evidence
+
+Ověření stabilizační úpravy obvykle nepotřebuje nové osobní údaje ani další analytiku. Stačí pracovní výsledek a krátká poznámka. Pokud někdo při použití narazí na problém, popište situaci, ne člověka.
+
+Lepší zápis:
+
+```text
+Při měsíčním review se člověk vrátil ke staré kartě, protože upravená nápověda pořád nepokrývá pilotní standardy.
+```
+
+Horší zápis:
+
+```text
+Jana to zase nepochopila a museli jsme jí poslat screenshot.
+```
+
+Privacy-first pravidla pro ověřovací zápis:
+
+- ukládejte výsledek práce, ne hodnocení člověka;
+- nepřidávejte sledování jen kvůli jedné drobné úpravě;
+- pokud použijete screenshot, ořízněte ho na relevantní část a smažte ho po uzavření;
+- do nové karty nekopírujte celé chatové vlákno;
+- uveďte jen data, která jsou nutná pro návrat k rozhodnutí;
+- vedlejší nálezy zapisujte odděleně a bez osobních detailů.
+
+Codyho komentář: interní provozní paměť se často zaplevelí ne tím, že by týmy sbíraly velká tajemství, ale tím, že si nechávají tisíc malých stop "pro jistotu". Každá sama o sobě nic moc. Dohromady vznikne archiv cizích zaváhání. To není znalostní báze, to je špatně uklizený sklep.
+
+### Ověřovací zápis
+
+```text
+Datum:
+Kontrolované pravidlo:
+Stabilizační věta:
+Původní drobné tření:
+Běžné použití:
+Kdo pravidlo použil: role, ne jméno, pokud jméno není nutné
+Signál nalezení:
+Signál pochopení:
+Signál dokončení:
+Výsledek: Potvrdit / Ještě jednou stabilizovat / Vrátit do fronty / Čeká na ověření
+Co se uzavírá:
+Co se vrací do fronty:
+Datová stopa:
+Další návrat:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-07-03
+Kontrolované pravidlo: každý aktivní standard má pole "Další kontrola" a změna data má jednu větu důvodu v changelogu
+Stabilizační věta: V indexu standardů upravíme nápovědu u pole "Další kontrola" tak, aby rozlišila aktivní a pilotní standardy; neměníme stavový model standardů.
+Původní drobné tření: nebylo jasné, zda pilotní standardy mají stejné pole nebo samostatné datum pilotního review
+Běžné použití: měsíční review provozních standardů
+Kdo pravidlo použil: provozní lead
+Signál nalezení: index byl otevřen z běžného review checklistu
+Signál pochopení: aktivní i pilotní standard byly vyplněné bez dotazu na autora úpravy
+Signál dokončení: datum kontroly a důvod změny byly zapsané v changelogu
+Výsledek: Potvrdit
+Co se uzavírá: stabilizační karta k nápovědě pole "Další kontrola"
+Co se vrací do fronty: nic
+Datová stopa: krátký zápis bez screenshotu a bez jmen
+Další návrat: běžné měsíční review
+Vlastník: provozní lead
+```
+
+Příklad neúspěšného ověření:
+
+```text
+Výsledek: Vrátit do fronty
+Co se uzavírá: stabilizační pokus s nápovědou pole
+Co se vrací do fronty: zjednodušení stavového modelu standardů, protože lidé nerozlišují aktivní, pilotní a archivovaný standard
+Datová stopa: anonymizovaný popis situace, screenshot smazán po přepsání nejasnosti do nálezu
+```
+
+Všimněte si, že i neúspěšné ověření je užitečné. Neříká "oprava selhala, ach běda". Říká: malá úprava nestačí, problém má větší tvar a zaslouží si vlastní místo ve frontě. To je dobrý výsledek, protože přestáváte lepit náplast na špatné místo.
+
+### Mini workshop na 10 minut
+
+Vezměte jednu stabilizační kartu z Přílohy OM.
+
+1. Opište původní drobné tření a stabilizační větu.
+2. Najděte první běžné použití, kde se úprava skutečně potkala s prací.
+3. Zapište signál nalezení, pochopení a dokončení.
+4. Vyberte výsledek: potvrdit, ještě jednou stabilizovat, vrátit do fronty nebo čeká na ověření.
+5. Pokud potvrzujete, zavřete stabilizační kartu a ponechte krátký záznam v kanonickém místě.
+6. Pokud vracíte do fronty, napište nový nález bez osobních detailů.
+7. Smažte nebo zkraťte dočasné důkazy, které už nejsou potřeba.
+
+Výstup:
+
+```text
+Stabilizační úprava má jasný výsledek po prvním běžném použití a nezanechala zbytečnou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Vrátili jste se k původnímu drobnému tření, ne k celému pravidlu?
+- Je ověření postavené na běžném použití, ne na ukázce autora změny?
+- Je jasné, kdo pravidlo použil z hlediska role, bez zbytečných osobních detailů?
+- Sledujete jen nalezení, pochopení a dokončení?
+- Nehodnotíte člověka místo kvality pravidla?
+- Je nové tření oddělené od původní stabilizační úpravy?
+- Vybrali jste jeden ze stavů `Potvrdit`, `Ještě jednou stabilizovat`, `Vrátit do fronty` nebo `Čeká na ověření`?
+- Nepoužíváte `Čeká na ověření` bez konkrétního dalšího návratu?
+- Pokud je výsledek potvrzený, zavřeli jste stabilizační kartu?
+- Pokud problém pokračuje, vrátili jste ho do fronty jako samostatný nález?
+- Zůstává v kanonickém místě jen současný užitečný stav, ne celý příběh úpravy?
+- Nevznikl nový tracker, screenshotový archiv ani přepis chatu?
+- Jsou dočasné důkazy smazané, zkrácené nebo nahrazené rozhodovací větou?
+- Je jasné, kdy se pravidlo vrací do běžného rytmu?
+
+Ověření stabilizační úpravy je malý konec malé práce. Když dopadne dobře, nic velkého se nestane: pravidlo prostě funguje o kousek lépe a tým ho nemusí řešit. A přesně to je pointa. Nejlepší provozní úpravy nejsou ty, o kterých se dlouho mluví. Jsou to ty, které přestanou překážet.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha ON o ověření stabilizační úpravy po prvním běžném použití: návrat k původnímu tření, výběr normálního použití, signály nalezení/pochopení/dokončení, rozhodovací stavy, uzavření nebo návrat do fronty, privacy-first ověřovací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OM o převodu drobného tření po kontrole provozního pravidla do jedné stabilizační úpravy: vstupní brána, stabilizační věta, úprava stejného kanonického místa, hranice rozsahu, ověření dalším běžným použitím, privacy-first evidence, stabilizační karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OL o první kontrole provozního pravidla po stabilizaci: ověření při skutečném použití, návrat ke stabilizačnímu zápisu, cesta k pravidlu, čtyři stavy kontroly, hlídání návratu do staré stopy, privacy-first minimum evidence, kontrolní zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna úvodní sekce První úkol z karty změny: převod čtenářské karty do jednoho zadatelného úkolu, šablona, příklad pro checklist a konzultaci, ochrana rozsahu, privacy-first brána, Codyho komentář a checklist.
