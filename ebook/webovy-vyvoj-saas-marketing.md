@@ -238,6 +238,78 @@ Privacy-first doplněk: pokud zdroj doporučuje nástroj nebo postup, který zvy
 
 Dobré rozhodnutí není jen rychlé. Je dohledatelné. Když se za tři měsíce změní okolnosti, tým musí poznat, proč rozhodnutí vzniklo, na čem stálo a jestli ho má potvrdit, upravit nebo zahodit.
 
+## Karta jedné změny po čtení
+
+Kapitola by neměla skončit jen poznámkou "tohle bychom měli někdy řešit". Taková věta je mentální lepík na lednici: chvíli vypadá užitečně, potom splývá s pozadím. Pokud má čtení rukopisu vést k práci, převeďte ho do jedné malé karty změny.
+
+Karta má být krátká a použitelná v běžném nástroji týmu: issue, úkolu, provozním listu, rozhodovacím logu nebo poznámce ke kampani. Nemá opisovat kapitolu. Má zachytit nejmenší změnu, kterou umíte ověřit.
+
+Šablona:
+
+```text
+Kapitola nebo část:
+Pracovní otázka:
+Rozhodnutí:
+Nejmenší změna:
+Vlastník:
+Ověření:
+Termín návratu:
+Co teď neměníme:
+Datová stopa:
+```
+
+Příklad po čtení kapitoly o lead generation:
+
+```text
+Kapitola nebo část:
+Lead generation: kvalita před objemem
+
+Pracovní otázka:
+Proč máme hodně kontaktů, ale málo dobrých obchodních rozhovorů?
+
+Rozhodnutí:
+Oddělíme veřejný checklist od obchodního kontaktu.
+
+Nejmenší změna:
+Checklist necháme dostupný bez e-mailu a vedle něj přidáme dobrovolný formulář na 30min konzultaci.
+
+Vlastník:
+Marketing owner
+
+Ověření:
+Za 30 dní porovnáme počet kvalitních konzultací a důvody, proč lidé formulář vyplnili.
+
+Termín návratu:
+2026-06-23
+
+Co teď neměníme:
+Nespouštíme nový newsletter ani reklamní remarketing.
+
+Datová stopa:
+Do analytiky půjde jen stažení checklistu, klik na konzultaci a odeslání formuláře bez obsahu zprávy.
+```
+
+Karta má jednu důležitou vlastnost: nutí tým napsat i hranici. Bez hranice se každé dobré doporučení nafoukne. Zkrácení formuláře se změní v redesign webu, úprava analytiky v nový datový sklad a článek o RSS v půldenní debatu o celé mediální strategii. To může být někdy užitečné, ale ne jako výchozí reakce na jednu kapitolu.
+
+Privacy-first část karty není formalita. Před každou změnou si napište, jestli kvůli ní vzniká nový údaj, nový event, nový dodavatel, nový export, delší retence nebo nová oprávnění. Pokud ano, změna není nutně špatně. Jen už není čistě obsahová, marketingová nebo produktová. Má datový dopad a musí být vidět.
+
+Codyho komentář: nejlepší karta změny je skoro nudná. Jedna otázka, jedna změna, jeden vlastník, jedno ověření. Když karta vypadá jako malá strategie pro půl firmy, pravděpodobně jste z kapitoly udělali projekt. A projekt, jak víme, je místo, kam malé dobré nápady někdy chodí trochu dramaticky dospět.
+
+### Checklist karty změny
+
+- Navazuje karta na jednu konkrétní kapitolu nebo část?
+- Odpovídá na jednu pracovní otázku?
+- Popisuje rozhodnutí, ne jen dojem z textu?
+- Je změna dost malá, aby šla ověřit během jednoho až čtyř týdnů?
+- Má vlastníka, který může změnu opravdu dotáhnout?
+- Je jasné, podle čeho se pozná přínos?
+- Je zapsané, co teď zůstává mimo rozsah?
+- Je datová stopa popsaná lidsky a bez zbytečného sledování?
+- Ví tým, kam kartu uložit, aby se k ní při práci vrátil?
+- Má karta datum návratu, kdy se rozhodne potvrdit, doladit, vrátit nebo odložit?
+
+Pokud se karta nevejde na jednu obrazovku, zkraťte změnu, ne písmo. Smyslem rukopisu není vyrábět další administrativu. Smyslem je dostat dobrý princip do jedné konkrétní změny, kterou tým zvládne použít.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -109081,6 +109153,7 @@ Jedna systémová úprava má být malá, ale nesmí být kosmetická. Míří d
 
 ## Pracovní log
 
+- 2026-05-23: Doplněna úvodní sekce Karta jedné změny po čtení: šablona převodu kapitoly do jedné ověřitelné změny, příklad pro lead generation, privacy-first datová stopa, hranice rozsahu a checklist.
 - 2026-05-22: Doplněna Příloha OA o převodu kontroly údržbového rytmu do jedné systémové úpravy: místo vzniku tření, systémová věta, hranice rozsahu, kanonické místo, privacy-first omezení, ověření při běžném použití, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NZ o kontrole údržbového rytmu po několika uzavřených akcích: malé kontrolní okno, kanonická místa, opakující se tření, privacy-first datová stopa, rušení a slučování nadbytečných vrstev, jedna další změna rytmu, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NY o uzavření potvrzené proveditelné akce do běžné údržby: potvrzený výsledek, přepis kanonického místa, zavření dočasných stop, práce s vedlejšími nálezy, napojení na běžnou kontrolu, privacy-first úklid, uzavírací karta, mini workshop a checklist.
