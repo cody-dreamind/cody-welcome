@@ -113540,8 +113540,238 @@ Jeden nález z běžného rytmu je převedený do malé údržbové položky, kt
 
 Převod nálezu do údržbové položky je drobná, ale důležitá disciplína. Chrání tým před dvěma extrémy: ignorovat tření, protože "už jsme to přece uzavřeli", nebo kvůli jedné poznámce znovu otevřít celý příběh. Dobrý provoz umí obojí najednou: držet hotová rozhodnutí zavřená a přitom nechat malé nálezy projít do klidné, ověřitelné údržby.
 
+## Příloha OS: Ověření údržbové položky po dalším běžném použití
+
+Příloha OR převádí jeden nález z běžného rytmu do malé údržbové položky. Tato příloha řeší další krok: jak poznat, že oprava opravdu pomohla, aniž by se z drobné údržby stal nový kontrolní projekt.
+
+Ověření má proběhnout ve stejném typu situace, ve které nález vznikl. Pokud problém vznikl při měsíčním review, ověřujte při dalším měsíčním review. Pokud se objevil při onboardingu, ověřujte při dalším skutečném onboardingu. Ne v umělé ukázce pro autora opravy, ne v chatu a ne v tabulce, kterou tým otevře jen proto, že existuje.
+
+Pracovní otázka zní:
+
+```text
+Použila se opravená údržbová položka při dalším běžném průchodu bez návratu ke staré historii a bez nového tření?
+```
+
+Výstupem je krátký ověřovací zápis:
+
+```text
+Položka:
+Původní nález:
+Běžné použití:
+Co se změnilo:
+Co se stalo při použití:
+Stav ověření:
+Datová stopa:
+Další krok:
+Vlastník:
+```
+
+Codyho komentář: drobná údržba má po ověření zmizet z pódia. Když se malá oprava musí pořád obhajovat, vysvětlovat a hlídat, nebyla ještě přepsaná do práce. Jen dostala slavnostnější visačku.
+
+### Vraťte se k původnímu nálezu
+
+Ověření nezačínejte otázkou, jestli oprava vypadá lépe. Začněte původním nálezem. Ten říká, jaké tření měla oprava odstranit.
+
+Špatný začátek:
+
+```text
+Líbí se nám nová verze checklistu?
+```
+
+Lepší začátek:
+
+```text
+Vedl checklist při dalším měsíčním review pořád zpět k uzavřené stabilizační kartě?
+```
+
+Rozdíl je praktický. První otázka sbírá dojmy. Druhá ověřuje pracovní chování systému. Udržovací oprava není designová soutěž o nejlepší formulaci. Je to zásah, který má zkrátit cestu, odstranit starou stopu nebo zpřesnit rozhodnutí.
+
+Před kontrolou si proto z karty údržbové položky opište tři věci:
+
+- původní nález;
+- nejmenší opravu;
+- ověřovací větu.
+
+Příklad:
+
+```text
+Původní nález: měsíční checklist obsahoval starý řádek "ověřit novou nápovědu".
+Nejmenší oprava: řádek odstranit a ponechat jen běžnou kontrolu data další revize.
+Ověření: při příštím měsíčním review se checklist použije bez návratu do uzavřené karty.
+```
+
+Pokud tyto tři věty nejsou jasné, neověřujte. Nejdřív kartu doplňte. Jinak budete hodnotit mlhavý pocit, ne hotovou práci.
+
+### Sledujte normální průchod, ne poslušnost týmu
+
+Při ověření nesledujte, jestli si lidé pamatují, co bylo opraveno. Sledujte, jestli systém vede k práci bez připomínání.
+
+Vhodný signál:
+
+```text
+Provozní lead otevřel měsíční checklist, prošel standardy a k poli "Další kontrola" se dostal bez otevření staré karty.
+```
+
+Nevhodný signál:
+
+```text
+Autor opravy týmu připomněl, že starý řádek je pryč, a všichni potvrdili, že tomu rozumí.
+```
+
+U drobných oprav stačí pozorovat tři věci:
+
+- našlo se správné místo práce;
+- nebyla potřeba stará historie;
+- nevzniklo nové tření větší než původní problém.
+
+Nezapisujte výkon konkrétních lidí. Zapisujte cestu práce. Pokud někdo sáhl po starém odkazu, neznamená to automaticky osobní chybu. Může to znamenat, že starý odkaz pořád někde zůstal, nový název není jasný nebo kanonické místo není dost viditelné.
+
+### Rozlišujte čtyři výsledky
+
+Po dalším běžném použití vyberte jeden stav:
+
+```text
+Potvrdit:
+Oprava odstranila původní tření a nevytvořila nové.
+
+Drobně dočistit:
+Oprava funguje, ale zůstala jedna malá stopa, například starý odkaz, nejasná formulace nebo nadbytečný řádek.
+
+Vrátit do údržby:
+Původní tření se vrátilo nebo oprava nezasáhla správné místo.
+
+Otevřít samostatný nález:
+Původní oprava drží, ale běžné použití ukázalo jiný problém mimo její rozsah.
+```
+
+Každý stav má jiný další krok.
+
+U stavu `Potvrdit` zavřete údržbovou položku a ponechte jen aktuální pravidlo nebo checklist. Nepřidávejte další zvláštní kontrolu.
+
+U stavu `Drobně dočistit` opravte jednu zbytkovou stopu a nastavte poslední lehké ověření při dalším běžném použití. Pokud dočištění potřebuje víc než jednu větu, už to není dočištění.
+
+U stavu `Vrátit do údržby` neprodlužujte ověřovací zápis do nekonečna. Vraťte položku do údržbové fronty s konkrétním důvodem: špatné místo zásahu, nejasná formulace, nedořešený odkaz nebo chybějící vlastník.
+
+U stavu `Otevřít samostatný nález` zavřete původní položku, pokud drží, a nový problém zapište odděleně. Jedna malá oprava nemá nést všechno, co se při další práci našlo.
+
+### Privacy-first ověřovací stopa
+
+Ověření malé údržby má být datově skromné. Nepotřebujete nahrávku obrazovky, screenshot každého kroku, přepis chatu ani seznam lidí, kteří pravidlo použili. Většinou stačí jedna věta o pracovním průchodu.
+
+Dobrá stopa:
+
+```text
+Při dalším měsíčním review byl checklist použitý bez starého odkazu. Uzavřená stabilizační karta se neotevřela. Položka potvrzena a zavřena.
+```
+
+Špatná stopa:
+
+```text
+Uložíme screenshoty z review, přepis diskuze a seznam účastníků, abychom mohli později dokazovat, kdo si čeho všiml.
+```
+
+Privacy-first otázky:
+
+- Stačí jedna anonymní věta o průchodu?
+- Neobsahuje zápis jména lidí, která nejsou pro rozhodnutí nutná?
+- Nevznikla nová dočasná evidence jen kvůli ověření drobné opravy?
+- Byly odstraněny staré odkazy, screenshoty nebo poznámky, které už nic nerozhodují?
+- Zůstává po potvrzení jen aktuální pracovní místo a krátký changelog?
+
+U interních provozních pravidel platí stejné pravidlo jako u zákaznických dat: sbírejte jen to, co má jasný účel. Pokud zápis nepomáhá budoucímu rozhodnutí, je to jen stopa navíc.
+
+### Ověřovací zápis
+
+```text
+Datum:
+Položka:
+Původní nález:
+Nejmenší oprava:
+Běžné použití:
+Co se stalo při použití:
+Bylo potřeba otevřít starou historii:
+Vzniklo nové tření:
+Stav ověření: Potvrdit / Drobně dočistit / Vrátit do údržby / Otevřít samostatný nález
+Datová stopa:
+Další krok:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-09-04
+Položka: odstranit starý řádek "ověřit novou nápovědu" z měsíčního checklistu
+Původní nález: checklist vedl při běžném review zpět k uzavřené stabilizační kartě
+Nejmenší oprava: odstranit starý řádek a ponechat běžnou kontrolu pole "Další kontrola"
+Běžné použití: další měsíční review provozních standardů
+Co se stalo při použití: checklist byl použitý z aktuálního místa a pravidlo se ověřilo v indexu
+Bylo potřeba otevřít starou historii: ne
+Vzniklo nové tření: ne
+Stav ověření: Potvrdit
+Datová stopa: jedna anonymní věta v changelogu checklistu
+Další krok: zavřít údržbovou položku, žádná zvláštní kontrola navíc
+Vlastník: provozní lead
+```
+
+Příklad s dočištěním:
+
+```text
+Stav ověření: Drobně dočistit
+Vzniklo nové tření: v indexu je pořád starý interní název pole, který mate nové lidi
+Další krok: přejmenovat pole v indexu; ověřit při dalším běžném review
+```
+
+Příklad samostatného nálezu:
+
+```text
+Stav ověření: Otevřít samostatný nález
+Původní oprava: drží
+Nový nález: filtr archivovaných standardů nerozlišuje pilotní a ukončené standardy
+Další krok: zapsat nový nález do údržbové fronty mimo původní položku
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu údržbovou položku vytvořenou podle Přílohy OR a počkejte na další běžné použití stejného pravidla nebo artefaktu.
+
+1. Opište původní nález, nejmenší opravu a ověřovací větu.
+2. Vyberte první skutečný průchod, ve kterém se oprava přirozeně použila.
+3. Zapište, jestli člověk našel správné místo práce.
+4. Zapište, jestli bylo potřeba otevřít starou kartu, chat, screenshot nebo vedlejší dokument.
+5. Zapište, jestli vzniklo nové tření.
+6. Vyberte stav ověření.
+7. U potvrzené opravy zavřete položku a smažte dočasné stopy.
+8. U dočištění nebo návratu založte jen nejmenší další krok.
+
+Výstup:
+
+```text
+Údržbová položka je potvrzená, dočištěná, vrácená do údržby nebo oddělená od nového nálezu podle toho, co se stalo při skutečném běžném použití.
+```
+
+### Checklist kapitoly
+
+- Vychází ověření z původního nálezu, ne z dojmu, že oprava vypadá lépe?
+- Proběhlo při dalším skutečném použití pravidla nebo artefaktu?
+- Nebyl použitý umělý test jen pro autora opravy?
+- Je zapsané, zda člověk našel správné pracovní místo?
+- Je jasné, zda se otevřela stará karta, chat, screenshot nebo vedlejší dokument?
+- Nevzniklo nové tření větší než původní problém?
+- Je vybraný jeden ze čtyř stavů ověření?
+- Pokud je oprava potvrzená, nevzniká další zvláštní kontrola?
+- Pokud je potřeba dočištění, je opravdu malé a v místě práce?
+- Pokud se položka vrací do údržby, je zapsaný konkrétní důvod?
+- Pokud vznikl nový nález, je oddělený od původní položky?
+- Neobsahuje zápis zbytečná osobní data, screenshoty nebo přepisy chatu?
+- Zůstane po potvrzení jen aktuální pravidlo a krátký changelog?
+- Má další krok vlastníka a nejbližší přirozený termín návratu?
+
+Ověření údržbové položky uzavírá malou smyčku. Nález se objevil v běžném rytmu, byl převedený do malé opravy a teď se ukázalo, jestli oprava opravdu zkrátila práci. Když ano, nechte ji splynout s provozem. Když ne, vraťte ji do údržby přesně v rozsahu problému. V obou případech je cílem méně tření a méně stop, ne další vrstva procesní výzdoby.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OS o ověření údržbové položky po dalším běžném použití: návrat k původnímu nálezu, kontrola normálního průchodu, čtyři výsledky ověření, privacy-first ověřovací stopa, ověřovací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OR o převodu nálezu z první kontroly běžného rytmu do jedné údržbové položky: výběr jednoho nálezu, oddělení od staré stabilizace, popis pracovní ceny bez osobních stop, nejmenší oprava v místě práce, privacy-first brzda, ověření při dalším běžném použití, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OQ o první kontrolu běžného rytmu po uzavřené stabilizaci: návrat do normálního použití, kontrola zbytkových stop, čtyři stavy rytmu, privacy-first úklid dočasné evidence, rytmická karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OP o uzavření potvrzené stabilizační úpravy do běžného rytmu: potvrzený výsledek, přepis kanonického místa, zavření stabilizační karty, návrat do existujícího review rytmu, oddělení vedlejších nálezů, privacy-first úklid dočasných důkazů, uzavírací zápis, mini workshop a checklist.
