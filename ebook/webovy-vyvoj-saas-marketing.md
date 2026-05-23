@@ -113249,8 +113249,300 @@ Uzavřená stabilizace buď opravdu splynula s běžným rytmem, nebo má jasně
 
 První kontrola běžného rytmu je malý test toho, jestli se údržba opravdu zmenšila. Dobře uzavřená stabilizace nemá tým pronásledovat jako další položka v systému. Má zmizet do správného místa, uvolnit pozornost a nechat práci pokračovat.
 
+## Příloha OR: Převod nálezu z první kontroly běžného rytmu do jedné údržbové položky
+
+Příloha OQ ukazuje, co se stane při prvním návratu pravidla do běžného rytmu. Někdy rytmus drží a není potřeba nic dělat. Někdy ale kontrola ukáže drobné tření: starý odkaz v checklistu, nejasné pole v indexu, zbytečnou poznámku v šabloně, chybějící větu v changelogu nebo nový nález, který nepatří do uzavřené stabilizace.
+
+Tato příloha řeší právě ten okamžik. Cílem není znovu otevřít starou kartu. Cílem je vzít jeden skutečný nález z běžného rytmu a převést ho do malé údržbové položky, která má vlastní rozsah, vlastníka a jasné ověření.
+
+Pracovní otázka zní:
+
+```text
+Jaký jeden nález z běžného rytmu stojí za údržbovou položku a jak ho zapíšeme bez obnovování staré historie?
+```
+
+Výstupem je krátká karta údržbové položky:
+
+```text
+Nález:
+Zdroj nálezu:
+Pravidlo nebo artefakt:
+Proč to vadí při práci:
+Nejmenší oprava:
+Co se neotevírá:
+Datová stopa:
+Ověření:
+Vlastník:
+Termín návratu:
+```
+
+Codyho komentář: běžný rytmus je dobrý detektor drobného tření, ale špatný důvod pro velký návrat do minulosti. Když se při kontrole objeví nejasnost, nevolejte hned archeology provozních rozhodnutí. Vezměte jeden nález, opravte ho tam, kde překáží, a staré vykopávky nechte spát.
+
+### Vyberte jen jeden nález
+
+První kontrola běžného rytmu může odhalit víc věcí najednou. To je normální. Pravidlo se vrátí do práce a najednou je vidět, že kolem něj existují staré odkazy, nejasné formulace nebo chybějící vlastnictví. Přesto pro jednu údržbovou položku vyberte jen jeden nález.
+
+Dobrý kandidát splňuje tři podmínky:
+
+- objevil se při skutečném použití pravidla;
+- způsobil konkrétní tření, zdržení nebo návrat k historii;
+- dá se opravit v jednom pracovním místě bez změny celého systému.
+
+Příklad vhodného nálezu:
+
+```text
+Při měsíčním review lidé našli pravidlo v indexu, ale v checklistu zůstal starý řádek "ověřit novou nápovědu", který je poslal zpět do uzavřené stabilizační karty.
+```
+
+Příklad příliš širokého nálezu:
+
+```text
+Měli bychom předělat celý index standardů, protože při review vzniklo víc drobných dotazů.
+```
+
+Široký nález nejdřív zmenšete:
+
+```text
+Odstranit starý řádek z měsíčního checklistu a nahradit ho běžnou kontrolou pole "Další kontrola".
+```
+
+Jedna údržbová položka má být tak malá, aby ji šlo dokončit bez strategické porady. Pokud potřebuje nový workshop, nejde o drobnou údržbu, ale o nový cyklus změny.
+
+### Oddělte nový nález od staré stabilizace
+
+Nejčastější chyba je vzít nový nález a přilepit ho k uzavřené stabilizační kartě. Vypadá to úsporně, protože "souvisí to". Ve skutečnosti tím znovu otevíráte historii, která už měla skončit.
+
+Do nové údržbové položky proto napište dvě věty:
+
+```text
+Souvisí s:
+Čeho se nedotýká:
+```
+
+Příklad:
+
+```text
+Souvisí s: polem "Další kontrola" v indexu standardů.
+Čeho se nedotýká: potvrzené nápovědy rozlišující aktivní a pilotní standardy.
+```
+
+Tím chráníte hotovou práci. Nová položka smí upravit checklist, odkaz, drobnou formulaci nebo umístění pravidla. Nesmí potichu zpochybnit výsledek, který už byl ověřený, pokud k tomu nemá nový důkaz.
+
+Když nový nález opravdu zpochybňuje původní stabilizaci, pojmenujte to přímo:
+
+```text
+Nález ruší předpoklad původní stabilizace.
+```
+
+V takovém případě nejde o běžnou údržbovou položku. Vraťte se k předchozímu rozhodovacímu cyklu a otevřete samostatnou revizi pravidla. Nevyřizujte zásadní změnu jako drobný úklid, protože tím jen odložíte problém na později.
+
+### Popište pracovní cenu, ne osobní chybu
+
+Údržbová položka má popisovat tření v systému. Nemá hodnotit člověka, který se o pravidlo zarazil. V praxi to mění tón i užitečnost zápisu.
+
+Slabý zápis:
+
+```text
+Petr zase otevřel starou kartu, protože si nepamatoval, že je uzavřená.
+```
+
+Silnější zápis:
+
+```text
+Měsíční checklist stále obsahuje odkaz na uzavřenou kartu, takže při běžném review vede člověka mimo kanonické místo.
+```
+
+Druhá věta říká, co opravit. První věta jen ukládá osobní stopu a vytváří špatnou atmosféru. Privacy-first provoz se netýká jen zákaznických dat. Týká se i interní hygieny: zapisujte pracovní problém, ne zbytečnou osobní nálepku.
+
+Pracovní cenu popište jednou konkrétní větou:
+
+```text
+Proč to vadí:
+Při běžném review vzniká zbytečný návrat do staré karty a pravidlo má dva zdroje vysvětlení.
+```
+
+To stačí. Není nutné měřit minuty, pořizovat screenshot ani sbírat další důkazy, pokud nález vznikl přímo při běžném použití.
+
+### Najděte nejmenší opravu v místě práce
+
+Nejlepší údržbová oprava se děje tam, kde vzniká tření. Pokud je problém v checklistu, opravte checklist. Pokud je problém v indexu, opravte index. Pokud je problém v názvu položky, přejmenujte položku. Nezakládejte vedlejší vysvětlení, které bude tým muset hledat.
+
+Příklady nejmenší opravy:
+
+- odstranit starý odkaz na uzavřenou kartu;
+- přepsat jednu nápovědu z historického jazyka do současného pravidla;
+- přesunout pravidlo z poznámky do správného pole šablony;
+- sloučit dvě duplicitní formulace do jedné;
+- přidat datum další běžné kontroly tam, kde už tým pracuje;
+- zkrátit changelog na rozhodnutí místo dlouhé debaty.
+
+Příklad dobré položky:
+
+```text
+Nejmenší oprava:
+V měsíčním checklistu odstranit řádek "ověřit novou nápovědu" a ponechat jen běžnou otázku "má aktivní standard datum další kontroly?".
+```
+
+Příklad přerostlé položky:
+
+```text
+Nejmenší oprava:
+Předělat měsíční review standardů, index, onboarding a changelog.
+```
+
+Pokud nejmenší oprava obsahuje čtyři artefakty, není nejmenší. Rozdělte ji. První položka má odstranit tření, které se právě projevilo. Další systémové zlepšení může přijít později, až bude existovat opakovaný důkaz.
+
+### Privacy-first brzda údržbové položky
+
+Údržbová položka má snižovat datovou stopu, ne ji rozšiřovat. U nálezu z běžného rytmu proto zkontrolujte, jestli kvůli opravě nevzniká nový zbytečný záznam.
+
+Před založením položky si položte otázky:
+
+- Stačí popsat pracovní problém bez jmen lidí?
+- Potřebujeme screenshot, nebo stačí citace názvu pole a místo opravy?
+- Neukládáme starou kartu znovu jen proto, že se nám nechce smazat odkaz?
+- Nevytváříme nový stav, štítek nebo tabulku kvůli jedné drobné opravě?
+- Zůstane po dokončení jen aktuální pravidlo a krátký changelog?
+
+Dobrá datová stopa:
+
+```text
+Zůstane jedna údržbová položka bez osobních jmen a po dokončení jedna věta v changelogu checklistu. Starý odkaz na stabilizační kartu bude odstraněn.
+```
+
+Špatná datová stopa:
+
+```text
+Přidáme screenshot z review, přepis chatu, samostatný seznam lidí, kteří se ptali, a novou tabulku pro sledování podobných případů.
+```
+
+Pokud je problém malý, důkaz má být malý taky. Jinak provozní hygiena sama vyrábí šum, který bude někdo za měsíc uklízet. Gratuluji, vytvořili jste práci, aby bylo co řídit. To je přesně ten druh produktivity, který se tváří jako dospělý proces a přitom jen přendává papíry.
+
+### Ověření po dalším běžném použití
+
+Každá údržbová položka potřebuje ověření, ale ověření má být přirozené. Neplánujte speciální test, pokud stačí počkat na další běžné použití stejného pravidla.
+
+Dobrá ověřovací věta:
+
+```text
+Ověření:
+Při příštím měsíčním review se pravidlo použije bez návratu do uzavřené stabilizační karty.
+```
+
+Slabá ověřovací věta:
+
+```text
+Ověření:
+Tým potvrdí v chatu, že oprava vypadá dobře.
+```
+
+Chatové potvrzení může pomoct u textu, ale neověří pracovní tok. Pokud se nález objevil v rytmu, ověřujte ho zase v rytmu.
+
+Ověření má sledovat tři věci:
+
+- našel člověk správné kanonické místo;
+- nevrátil se ke staré historii;
+- nevzniklo nové tření větší než původní problém.
+
+Stačí krátký zápis:
+
+```text
+Při dalším review byl checklist použitý bez starého odkazu. Pravidlo se otevřelo v indexu, stabilizační karta zůstala zavřená. Položku uzavíráme.
+```
+
+Tím je hotovo. Nevyrábějte k drobné opravě dlouhodobý dashboard. Malá údržba má být malá i po ověření.
+
+### Karta údržbové položky
+
+```text
+Datum:
+Nález:
+Zdroj nálezu:
+Pravidlo nebo artefakt:
+Souvisí s:
+Čeho se nedotýká:
+Proč to vadí při práci:
+Nejmenší oprava:
+Co se neotevírá:
+Datová stopa:
+Ověření:
+Vlastník:
+Termín návratu:
+Stav:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-08-07
+Nález: měsíční checklist pořád obsahuje řádek "ověřit novou nápovědu"
+Zdroj nálezu: první běžné review po uzavření stabilizace pole "Další kontrola"
+Pravidlo nebo artefakt: měsíční checklist provozních standardů
+Souvisí s: polem "Další kontrola" v indexu standardů
+Čeho se nedotýká: potvrzené nápovědy rozlišující aktivní a pilotní standardy
+Proč to vadí při práci: checklist vede člověka zpět k uzavřené kartě místo k platnému pravidlu
+Nejmenší oprava: odstranit řádek a ponechat jen běžnou kontrolu, zda aktivní standard má datum další kontroly
+Co se neotevírá: stabilizační karta, původní diskuse, celý redesign indexu
+Datová stopa: jedna údržbová položka bez osobních jmen; po dokončení krátký changelog checklistu
+Ověření: při příštím měsíčním review se checklist použije bez návratu do uzavřené karty
+Vlastník: provozní lead
+Termín návratu: příští měsíční review
+Stav: připraveno k drobné opravě
+```
+
+Příklad nového samostatného nálezu:
+
+```text
+Nález: filtr "Archiv" je nejasný pro pilotní standardy
+Souvisí s: hledáním standardů při review
+Čeho se nedotýká: uzavřené stabilizace pole "Další kontrola"
+Nejmenší oprava: přejmenovat filtr nebo doplnit jednu nápovědu u filtru
+Co se neotevírá: pravidlo pro datum další kontroly
+```
+
+Tento zápis zabrání tomu, aby se jeden vedlejší nález nalepil na starou opravu a začal ji tahat zpět do aktivní práce.
+
+### Mini workshop na 10 minut
+
+Vezměte jeden výsledek z Přílohy OQ, který není čisté `Rytmus drží`.
+
+1. Vyberte jeden konkrétní nález z běžného použití.
+2. Napište, kde se nález objevil a jaké pravidlo nebo artefakt ovlivňuje.
+3. Oddělte, s čím nález souvisí a čeho se nedotýká.
+4. Popište pracovní cenu bez jmen lidí.
+5. Navrhněte nejmenší opravu v místě práce.
+6. Zapište, co se kvůli položce nesmí znovu otevřít.
+7. Určete privacy-first datovou stopu.
+8. Nastavte ověření při dalším běžném použití.
+
+Výstup:
+
+```text
+Jeden nález z běžného rytmu je převedený do malé údržbové položky, která má jasný rozsah, neotevírá starou stabilizaci a dá se ověřit při dalším běžném průchodu.
+```
+
+### Checklist kapitoly
+
+- Vychází položka ze skutečného běžného použití, ne z dojmu autora?
+- Je vybraný jen jeden nález?
+- Je jasné, v jakém pravidle, checklistu, indexu nebo šabloně nález vznikl?
+- Popisuje zápis pracovní tření místo osobní chyby?
+- Je oddělené, s čím nález souvisí a čeho se nedotýká?
+- Neotevírá položka znovu uzavřenou stabilizační kartu?
+- Je nejmenší oprava opravdu v místě práce?
+- Neobsahuje položka skrytý redesign celého systému?
+- Je zapsané, co se kvůli opravě neotevírá?
+- Nevznikají zbytečné screenshoty, přepisy chatu nebo osobní záznamy?
+- Po dokončení zůstane jen aktuální pravidlo a krátký changelog?
+- Ověří se oprava při dalším běžném použití?
+- Má položka vlastníka a termín návratu?
+- Je jasné, kdy položku uzavřít, vrátit nebo rozdělit?
+
+Převod nálezu do údržbové položky je drobná, ale důležitá disciplína. Chrání tým před dvěma extrémy: ignorovat tření, protože "už jsme to přece uzavřeli", nebo kvůli jedné poznámce znovu otevřít celý příběh. Dobrý provoz umí obojí najednou: držet hotová rozhodnutí zavřená a přitom nechat malé nálezy projít do klidné, ověřitelné údržby.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OR o převodu nálezu z první kontroly běžného rytmu do jedné údržbové položky: výběr jednoho nálezu, oddělení od staré stabilizace, popis pracovní ceny bez osobních stop, nejmenší oprava v místě práce, privacy-first brzda, ověření při dalším běžném použití, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OQ o první kontrolu běžného rytmu po uzavřené stabilizaci: návrat do normálního použití, kontrola zbytkových stop, čtyři stavy rytmu, privacy-first úklid dočasné evidence, rytmická karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OP o uzavření potvrzené stabilizační úpravy do běžného rytmu: potvrzený výsledek, přepis kanonického místa, zavření stabilizační karty, návrat do existujícího review rytmu, oddělení vedlejších nálezů, privacy-first úklid dočasných důkazů, uzavírací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha ON o ověření stabilizační úpravy po prvním běžném použití: návrat k původnímu tření, výběr normálního použití, signály nalezení/pochopení/dokončení, rozhodovací stavy, uzavření nebo návrat do fronty, privacy-first ověřovací zápis, mini workshop a checklist.
