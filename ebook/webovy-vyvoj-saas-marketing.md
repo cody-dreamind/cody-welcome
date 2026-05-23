@@ -108,6 +108,8 @@ Výstup iterace uložte tam, kde tým skutečně pracuje: k úkolu, stránce, is
 
 Když takový zápis vznikne, rukopis splnil účel. Ne proto, že přidal další teorii, ale proto, že zkrátil cestu od čtení k rozhodnutí. Přesně tam má praktický e-book vydělávat svou existenci.
 
+Pokud iterace vznikla v chatu, přepište její výsledek ještě do místa, kde se změna opravdu udělá. Chat je dobrý na rychlé přemýšlení, ale špatný jako jediný zdroj pravdy: za týden v něm tým těžko pozná, která varianta platí, kdo ji drží a podle čeho se ověří.
+
 ## Rychlé pracovní trasy
 
 Rukopis je dlouhý záměrně, ale první krok má být krátký. Pokud nevíte, kde začít, vyberte trasu podle aktuální situace a po přečtení zapište jednu pracovní větu.
