@@ -112161,8 +112161,329 @@ Stabilizované pravidlo má po prvním běžném použití jasný stav a přípa
 
 První kontrola provozního pravidla je malý test samostatnosti. Nezkoumá, jestli tým umí mluvit o údržbě. Zkoumá, jestli údržba zmizela do práce tak dobře, že ji člověk při příštím použití nemusí znovu objevovat. To je tichý, ale velmi praktický typ kvality.
 
+## Příloha OM: Převod drobného tření po kontrole provozního pravidla do jedné stabilizační úpravy
+
+Příloha OL končí jedním ze čtyř stavů. Nejzrádnější z nich je `Drží s drobným třením`. Zní nevinně, ale právě tady týmy často udělají z malé opravy nový proces, další šablonu nebo velkou diskuzi o celém systému. Tato příloha drží rozsah při zemi: pokud pravidlo v zásadě funguje, opravte jen místo, kde při prvním použití zadrhlo.
+
+Stabilizační úprava není nový cyklus. Je to malý zásah do stejného kanonického místa, který má pravidlu pomoct pracovat samostatně. Typicky jde o název pole, krátkou nápovědu, pořadí řádků, chybějící odkaz, příliš obecnou větu nebo nejasnou hranici, kdy se pravidlo použije.
+
+Otázka této přílohy:
+
+```text
+Jakou nejmenší úpravou ve stejném kanonickém místě odstraníme drobné tření, aniž bychom znovu otevřeli celé pravidlo?
+```
+
+Výstupem je stabilizační karta:
+
+```text
+Kontrolované pravidlo:
+Stav z první kontroly:
+Drobné tření:
+Kanonické místo:
+Nejmenší úprava:
+Co se nemění:
+Jak se ověří:
+Datová stopa:
+Vlastník:
+Termín návratu:
+```
+
+Codyho komentář: drobné tření je jako šroubek, který ještě nedosedl. Vezměte šroubovák, ne bagr. Pokud kvůli jedné nejasné nápovědě zakládáte pracovní skupinu, pravidlo možná není problém. Problém je vaše láska k provoznímu divadlu.
+
+### Vstupní brána: opravdu jen drobné tření
+
+Než začnete upravovat, ověřte, že stav z Přílohy OL skutečně patří do kategorie `Drží s drobným třením`. Stabilizační úprava je vhodná jen tehdy, když platí tři věci:
+
+1. Pravidlo bylo nalezené v kanonickém místě nebo velmi blízko něj.
+2. Člověk podle něj dokázal udělat práci, jen se krátce zasekl.
+3. Úprava se dá udělat ve stejném místě bez změny workflow, rolí nebo datového toku.
+
+Příklad vhodného vstupu:
+
+```text
+Při měsíční kontrole standardů člověk našel pole "Další kontrola", ale nebylo jasné, zda se vyplňuje i u standardů ve stavu pilot.
+```
+
+Tady stačí doplnit krátkou nápovědu k poli nebo zpřesnit stavovou tabulku.
+
+Příklad nevhodného vstupu:
+
+```text
+Při měsíční kontrole standardů nikdo nevěděl, kdo má index otevřít, kde index leží a které standardy jsou aktivní.
+```
+
+To už není drobné tření. To je návrat do údržbové fronty nebo nový cyklus kolem vlastnictví a zdroje pravdy.
+
+Praktická brána:
+
+```text
+Je úprava hotová jednou větou, jedním polem, jedním odkazem nebo jedním přesunem v kanonickém místě?
+```
+
+Pokud odpověď zní ne, nepoužívejte tuto přílohu. Vraťte nález do fronty a pojmenujte ho jako samostatnou práci. Malý postup nesmí sloužit jako maska pro velký zásah.
+
+### Přepište tření do stabilizační věty
+
+Drobné tření se často zapíše jako pocit:
+
+```text
+Bylo to trochu nejasné.
+```
+
+To nestačí. Stabilizační věta musí říct, co přesně se má změnit a kde:
+
+```text
+V indexu standardů doplnit k poli "Další kontrola" nápovědu, že aktivní standardy mají běžné datum kontroly a pilotní standardy datum pilotního review.
+```
+
+Dobrá stabilizační věta má čtyři části:
+
+- místo: kde se úprava udělá;
+- objekt: čeho se týká;
+- změnu: co přesně přibude, zmizí nebo se přejmenuje;
+- hranici: co se tím neotevírá.
+
+Šablona:
+
+```text
+V [kanonické místo] upravíme [objekt] tak, aby [konkrétní nejasnost zmizela]; neměníme [hranice rozsahu].
+```
+
+Příklady:
+
+```text
+V indexu standardů upravíme nápovědu u pole "Další kontrola" tak, aby bylo jasné použití pro aktivní a pilotní standardy; neměníme stavový model standardů.
+```
+
+```text
+V onboardingovém balíčku přesuneme odkaz na rozhodovací mapu nad checklist prvního týdne; neměníme obsah mapy ani kroky onboardingu.
+```
+
+```text
+V šabloně provozního review přejmenujeme sekci "Poznámky" na "Vedlejší nálezy mimo dnešní rozhodnutí"; neměníme rytmus review.
+```
+
+Stabilizační věta má být tak konkrétní, aby ji šlo předat jako malý úkol bez další debaty. Pokud ji musíte vysvětlovat pěti odstavci, je příliš široká nebo špatně pochopená.
+
+### Upravte stejné kanonické místo
+
+Stabilizační úprava má zlepšit cestu, kterou člověk už při kontrole použil. Proto se nesnažte problém obejít novou dokumentací jinde. Pokud tření vzniklo v indexu, opravte index. Pokud vzniklo v šabloně, opravte šablonu. Pokud vzniklo u názvu pole, opravte název nebo nápovědu u pole.
+
+Špatná reakce:
+
+```text
+K nejasnému poli v indexu přidáme vysvětlující stránku do wiki.
+```
+
+Lepší reakce:
+
+```text
+K nejasnému poli v indexu přidáme krátkou nápovědu přímo do indexu.
+```
+
+Samostatná vysvětlující stránka může být užitečná u složitého standardu. U drobného tření ale často jen vytváří druhé místo, které bude potřeba udržovat. To je provozní dluh převlečený za dokumentaci.
+
+Malé stabilizační zásahy obvykle patří do jedné z pěti kategorií:
+
+- zpřesnit formulaci;
+- přejmenovat pole nebo sekci;
+- přesunout informaci blíž k místu rozhodnutí;
+- doplnit jeden interní odkaz;
+- odstranit starou formulaci, která konkuruje novému pravidlu.
+
+Pokud zásah potřebuje migraci dat, změnu oprávnění, nový meeting, nové měření nebo úpravu více artefaktů, už nejde o stabilizační úpravu. Nevadí. Jen tomu dejte správný název a necpěte to do malého rámce.
+
+### Hranice rozsahu napište před úpravou
+
+U drobného tření je největší riziko nenápadné rozšiřování. Jeden člověk navrhne přejmenování pole, druhý doplnění stavů, třetí nový dashboard a za dvacet minut tým řeší celý provozní model. Někdy je to potřeba, ale ne v této iteraci.
+
+Před úpravou napište větu:
+
+```text
+Touto úpravou neměníme:
+```
+
+Příklady:
+
+```text
+Touto úpravou neměníme vlastnictví standardů, stavový model ani měsíční rytmus kontroly.
+```
+
+```text
+Touto úpravou neměníme onboardingové kroky, odpovědnosti mentora ani místo, kde se ukládají rozhodnutí.
+```
+
+```text
+Touto úpravou neměníme retenční pravidla, oprávnění ani způsob archivace starých karet.
+```
+
+Hranice není byrokracie. Je to pojistka, že stabilizace zůstane stabilizací. Když se během práce objeví větší téma, zapište ho jako vedlejší nález a vraťte se k původní malé úpravě.
+
+Krátký postup:
+
+1. Pojmenujte drobné tření.
+2. Napište stabilizační větu.
+3. Napište, co se nemění.
+4. Udělejte úpravu ve stejném kanonickém místě.
+5. Ověřte ji při nejbližším běžném použití.
+
+Tento postup je záměrně obyčejný. Právě obyčejnost chrání provoz před tím, aby každá drobná nejasnost dostala vlastní metodiku.
+
+### Ověření: další běžné použití, ne nové kolečko debat
+
+Stabilizační úprava se ověřuje jednoduše: při dalším běžném použití stejného pravidla sledujte, zda zmizelo původní tření. Nepřidávejte samostatný test, pokud není nutný. Neptejte se týmu abstraktně, jestli se mu úprava líbí. Sledujte práci.
+
+Ověřovací otázka:
+
+```text
+Použil člověk pravidlo bez stejného zaseknutí, kvůli kterému vznikla stabilizační úprava?
+```
+
+Příklad:
+
+```text
+Původní tření:
+Nebyl jasný rozdíl mezi aktivním a pilotním standardem u pole "Další kontrola".
+
+Úprava:
+Doplněna nápověda k poli.
+
+Ověření:
+Při dalším měsíčním review provozní lead vyplnil aktivní i pilotní standard bez návratu do staré karty.
+```
+
+Po ověření vyberte jeden ze tří stavů:
+
+```text
+Uzavřít:
+Tření zmizelo a pravidlo zůstává v běžném rytmu.
+
+Ještě jednou stabilizovat:
+Tření se zmenšilo, ale stejná drobná nejasnost pořád zdržuje práci.
+
+Vrátit do fronty:
+Ukázalo se, že problém je větší než drobná stabilizace.
+```
+
+Stav `Ještě jednou stabilizovat` použijte nejvýš jednou. Pokud stejná věc potřebuje třetí malou opravu, už nejspíš nejde o drobnost. Vraťte ji do údržbové fronty a pojmenujte skutečný problém.
+
+### Privacy-first stabilizace
+
+Drobné tření nepotřebuje velkou evidenci. Stabilizační karta má obsahovat jen tolik informací, aby bylo jasné, co se upravilo a proč. Nepotřebuje jména lidí, dlouhé přepisy chatů, screenshoty celé obrazovky ani záznamy chování.
+
+Privacy-first pravidla pro stabilizační úpravu:
+
+- popisujte pracovní situaci, ne výkon konkrétní osoby;
+- neukládejte screenshot, pokud stačí opsat nejasnou formulaci;
+- pokud screenshot použijete, ořízněte ho na relevantní místo a po ověření ho smažte;
+- neopisujte starou kartu do nové dokumentace;
+- neprodlužujte retenci dočasných důkazů jen proto, že se něco "možná bude hodit";
+- vedlejší nálezy zapisujte bez osobních detailů a mimo stabilizační kartu.
+
+Lepší zápis:
+
+```text
+Při měsíčním review nebylo z nápovědy jasné, zda pilotní standardy používají stejné pole "Další kontrola".
+```
+
+Horší zápis:
+
+```text
+Petr zase nevěděl, co má vyplnit, a poslal screenshot do chatu.
+```
+
+Kontrolujeme kvalitu pravidla. Nezakládáme složku důkazů o tom, kdo kdy zaváhal. Privacy-first provoz se pozná i podle toho, že neukládá zbytečné interní mikrostopy jen kvůli pohodlí budoucí debaty.
+
+### Stabilizační karta
+
+```text
+Datum:
+Kontrolované pravidlo:
+Stav z první kontroly:
+Drobné tření:
+Kanonické místo:
+Stabilizační věta:
+Nejmenší úprava:
+Co se nemění:
+Ověření:
+Datová stopa:
+Vedlejší nálezy:
+Vlastník:
+Termín návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-06-24
+Kontrolované pravidlo: každý aktivní standard má pole "Další kontrola" a změna data má jednu větu důvodu v changelogu
+Stav z první kontroly: Drží s drobným třením
+Drobné tření: nebylo jasné, zda pilotní standardy mají stejné pole nebo samostatné datum pilotního review
+Kanonické místo: index provozních standardů
+Stabilizační věta: V indexu standardů upravíme nápovědu u pole "Další kontrola" tak, aby rozlišila aktivní a pilotní standardy; neměníme stavový model standardů.
+Nejmenší úprava: doplnit nápovědu "aktivní standard: datum běžné kontroly; pilotní standard: datum pilotního review"
+Co se nemění: vlastnictví standardů, měsíční rytmus, stavový model, archivace starých karet
+Ověření: při dalším měsíčním review zkontrolovat, zda se pole vyplní bez návratu do staré karty
+Datová stopa: anonymizovaná karta bez screenshotu
+Vedlejší nálezy: žádné
+Vlastník: provozní lead
+Termín návratu: další měsíční review
+```
+
+Příklad, kdy se má práce vrátit do fronty:
+
+```text
+Drobné tření:
+Člověk nenašel, které standardy jsou aktivní.
+
+Rozhodnutí:
+Nejde o stabilizační úpravu pole "Další kontrola". Vrací se do údržbové fronty jako samostatný nález: "Index standardů neukazuje spolehlivě aktuální stav standardu."
+```
+
+Tento druh poctivého zastavení je důležitý. Malý rámec není klec. Je to filtr. Když přes něj problém neprojde, problém se nezahazuje; jen se přesune do správného typu práce.
+
+### Mini workshop na 12 minut
+
+Vezměte jeden výsledek `Drží s drobným třením` z Přílohy OL.
+
+1. Přečtěte kontrolní zápis a pojmenujte přesné tření.
+2. Ověřte, že jde o drobnou úpravu stejného kanonického místa.
+3. Napište stabilizační větu.
+4. Napište, co se touto úpravou nemění.
+5. Vyberte nejmenší zásah: formulace, název, pořadí, odkaz nebo odstranění staré věty.
+6. Určete, při jakém dalším běžném použití se úprava ověří.
+7. Zapište datovou stopu a smažte dočasné důkazy, které nejsou potřeba.
+8. Vedlejší nálezy odložte do fronty, ne do této karty.
+
+Výstup:
+
+```text
+Drobné tření má jednu stabilizační úpravu ve stejném kanonickém místě a jasné ověření při dalším běžném použití.
+```
+
+### Checklist kapitoly
+
+- Vychází úprava ze stavu `Drží s drobným třením`?
+- Je jasné, jaké konkrétní tření se odstraňuje?
+- Ověřili jste, že nejde o návrat většího problému?
+- Dá se úprava udělat ve stejném kanonickém místě?
+- Je stabilizační věta konkrétní a předatelná jako malý úkol?
+- Je napsané, co se touto úpravou nemění?
+- Nezakládá se nová stránka, šablona nebo proces, když stačí upravit existující místo?
+- Je vybraný nejmenší zásah: formulace, název, pořadí, odkaz nebo odstranění staré věty?
+- Je ověření navázané na další běžné použití?
+- Má ověření tři možné výsledky: uzavřít, ještě jednou stabilizovat, vrátit do fronty?
+- Nepoužívá se `Ještě jednou stabilizovat` donekonečna?
+- Popisuje karta pracovní situaci, ne výkon konkrétní osoby?
+- Nevznikají zbytečné screenshoty, přepisy chatu ani osobní mikrostopy?
+- Jsou vedlejší nálezy oddělené od stabilizační úpravy?
+- Ví vlastník, kdy se k úpravě vrátit?
+
+Drobné tření si zaslouží drobnou odpověď. Když pravidlo drží, není potřeba ho znovu stavět. Stačí odstranit místo, kde člověk zakopl, a nechat pravidlo dál pracovat v běžném rytmu.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OM o převodu drobného tření po kontrole provozního pravidla do jedné stabilizační úpravy: vstupní brána, stabilizační věta, úprava stejného kanonického místa, hranice rozsahu, ověření dalším běžným použitím, privacy-first evidence, stabilizační karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OL o první kontrole provozního pravidla po stabilizaci: ověření při skutečném použití, návrat ke stabilizačnímu zápisu, cesta k pravidlu, čtyři stavy kontroly, hlídání návratu do staré stopy, privacy-first minimum evidence, kontrolní zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna úvodní sekce První úkol z karty změny: převod čtenářské karty do jednoho zadatelného úkolu, šablona, příklad pro checklist a konzultaci, ochrana rozsahu, privacy-first brána, Codyho komentář a checklist.
 - 2026-05-23: Doplněna Příloha OK o uzavření potvrzené údržbové úpravy do provozního pravidla: potvrzené rozhodnutí, kanonické místo, pracovní tvar pravidla, zavření údržbové karty, privacy-first úklid dočasných důkazů, další lehká kontrola, stabilizační zápis, mini workshop a checklist.
