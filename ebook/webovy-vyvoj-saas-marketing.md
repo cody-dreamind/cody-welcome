@@ -109638,8 +109638,263 @@ Potvrzená systémová úprava je zapsaná v kanonickém místě, dočasné stop
 
 Uzavření potvrzené systémové úpravy je malý, ale důležitý hygienický krok. Bez něj se dobré změny hromadí jako dočasné výjimky a tým postupně ztrácí přehled, co je experiment, co je standard a co už může zmizet. Cílem není víc dokumentace. Cílem je, aby se ověřená změna stala normální prací a aby po ní nezůstala zbytečná datová ani mentální stopa.
 
+## Příloha OD: První dlouhodobá kontrola po uzavření systémové úpravy
+
+Příloha OC vrací potvrzenou systémovou úpravu do dlouhodobého rytmu. Tím práce nekončí navždy. Končí jen zvláštní dohled. První dlouhodobá kontrola má po čase ověřit, jestli se úprava opravdu stala normální součástí práce, nebo jestli se jen hezky zavřela v dokumentaci a v provozu mezitím ztratila.
+
+Tato příloha řeší první návrat k uzavřené systémové úpravě v běžném review: měsíční kontrole šablon, kvartální revizi standardů, provozním review nabídky, auditním rytmu webu nebo onboardingu role. Nejde o znovuotevření celé změny. Jde o krátkou kontrolu, zda kanonické místo dál vede k práci, kterou mělo zlepšit.
+
+Otázka této přílohy:
+
+```text
+Drží uzavřená systémová úprava i po návratu do běžného rytmu, nebo se kolem ní znovu objevuje tření, paralelní evidence či zbytečná datová stopa?
+```
+
+Výstupem je kontrolní karta:
+
+```text
+Uzavřená systémová úprava:
+Běžný rytmus kontroly:
+Kanonické místo:
+Co mělo držet:
+Co se stalo v běžném použití:
+Stav:
+Další krok:
+Datová stopa:
+Vlastník:
+Termín:
+```
+
+Codyho komentář: první dlouhodobá kontrola je test, jestli změna přežila pondělí. V den zavření vypadá každá úprava rozumně. Pravda se ukáže až ve chvíli, kdy ji používá někdo, kdo už nemá v hlavě historii celé debaty a prostě potřebuje udělat práci.
+
+### Kontrolujte jen v přirozeném rytmu
+
+Nezakládejte extra review jen proto, že existuje uzavřená systémová úprava. Pokud byla správně uzavřená, má být navázaná na existující rytmus. První dlouhodobá kontrola se má stát tam, kde byste stejně kontrolovali danou oblast.
+
+Příklady přirozeného rytmu:
+
+- měsíční kontrola šablon a playbooků;
+- kvartální review webu, nabídky nebo provozních standardů;
+- první onboarding nové role po úpravě materiálů;
+- běžná předpublikační kontrola obsahu;
+- revize dodavatelského registru;
+- servisní kontrola produktizované služby.
+
+Špatný signál:
+
+```text
+Kvůli uzavřené úpravě zakládáme novou pravidelnou schůzku.
+```
+
+Lepší signál:
+
+```text
+Při příští měsíční kontrole šablon ověříme, jestli nové šablony vznikají s vlastníkem, platností a dalším datem kontroly.
+```
+
+Samostatná kontrola dává smysl jen u kritických změn, kde selhání přímo ohrožuje bezpečnost, právní povinnost, dostupnost služby nebo důvěru zákazníka. U běžné provozní hygieny by extra dohled rychle vytvořil víc práce než samotná úprava ušetřila.
+
+### Vraťte se k původnímu slibu změny
+
+Při dlouhodobé kontrole nezačínejte otázkou, jestli se vám nová podoba líbí. Vraťte se k uzavírací kartě z Přílohy OC a najděte původní slib změny.
+
+Zajímají vás hlavně tři věty:
+
+```text
+Původní tření:
+Potvrzený výsledek:
+Návrat v běžném rytmu:
+```
+
+Příklad:
+
+```text
+Původní tření:
+Při měsíční kontrole se musela dohledávat platnost a vlastník nové šablony.
+
+Potvrzený výsledek:
+Nová support šablona vznikla s vlastníkem, platností a dalším datem kontroly bez čtení historie změn.
+
+Návrat v běžném rytmu:
+Příští měsíční kontrola šablon.
+```
+
+Kontrola potom zní jednoduše:
+
+```text
+Když dnes vznikla nebo se kontrolovala šablona, našel člověk vlastnictví, platnost a další kontrolu v kanonickém místě bez obcházení?
+```
+
+Tato otázka chrání review před sklouznutím do obecné debaty o dokumentaci. Obecná debata může být užitečná, ale není to první dlouhodobá kontrola jedné uzavřené úpravy.
+
+### Sledujte používání kanonického místa
+
+Uzavřená systémová úprava drží jen tehdy, když lidé dál používají kanonické místo. Pokud se po čase vrátí komentáře bokem, dočasné tabulky, staré šablony nebo ruční vysvětlování, změna sice možná existuje v dokumentaci, ale ne v práci.
+
+Sledujte čtyři signály:
+
+1. Nalezení: člověk našel správné místo bez osobní nápovědy.
+2. Rozhodnutí: místo mu řeklo, co má udělat dál.
+3. Stopu: nevznikla paralelní evidence nebo nový ruční mezikrok.
+4. Výsledek: původní tření se nevrátilo.
+
+Příklad dobrého výsledku:
+
+```text
+Nová šablona byla založena z aktuální výchozí karty. Vlastník, platnost a další kontrola jsou vyplněné. Nikdo nemusel dohledávat historii ani psát bokem poznámku.
+```
+
+Příklad slabého výsledku:
+
+```text
+Nová šablona má správná pole, ale tým pořád vede bokem tabulku "kdo za co ručí", protože v indexu standardů není jasné, kde vlastníka hledat.
+```
+
+Slabý výsledek nemusí znamenat, že původní úprava byla špatná. Může znamenat, že drží jen na jednom místě, ale nenavazuje na okolní pracovní trasu. To je důležitý rozdíl: neopravujte hned celou oblast, nejdřív pojmenujte přesné místo návratu tření.
+
+### Rozlišujte čtyři stavy kontroly
+
+Po první dlouhodobé kontrole rozhodněte jedním ze čtyř stavů. Nechte ho jednoduchý, aby z kontroly nevznikl nový projekt bez hranic.
+
+```text
+Drží:
+Úprava se používá v běžném rytmu a původní tření se nevrátilo.
+
+Drží s malým třením:
+Jádro úpravy funguje, ale jedno okolní místo mate nebo zdržuje.
+
+Nedrží:
+Lidé změnu obcházejí, původní tření se vrátilo nebo kanonické místo nevede k práci.
+
+Otevřít nový nález:
+Původní úprava drží, ale review odhalilo samostatný problém jinde.
+```
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Drží s malým třením.
+
+Důvod:
+Nové šablony mají vlastníka i platnost, ale v indexu standardů není jasné, podle jakého data se řadí další kontrola.
+
+Další krok:
+Upravit popisek sloupce v indexu standardů. Neotevírat celou strukturu indexu.
+```
+
+Nejdůležitější je oddělit stav "Nedrží" od stavu "Otevřít nový nález". Pokud původní úprava funguje a objevili jste jiné téma, nelepte ho na ni. Jinak dobrá změna nikdy neskončí, jen bude přitahovat další práci jako magnet na úkoly.
+
+### Privacy-first kontrola dlouhodobé stopy
+
+Dlouhodobá kontrola má ověřit práci, ne zavést nový dohled nad lidmi. Nepřidávejte kvůli ní tracking, screenshotování, exporty ani osobní evidence, pokud to není opravdu nutné.
+
+Stačí minimální provozní důkaz:
+
+```text
+Kontrolovaný průchod:
+měsíční kontrola šablon 2026-05-23
+
+Zjištění:
+dvě nové šablony mají vlastníka, platnost a další kontrolu v kanonické kartě
+
+Datová stopa:
+bez screenshotů, bez exportu, bez osobních poznámek; zůstává jen tento souhrnný zápis
+```
+
+Pokud potřebujete příklad, anonymizujte ho hned při zápisu. Není nutné uchovávat jména lidí, zákaznické údaje, celé konverzace nebo interní screenshoty jen proto, abyste dokázali, že šablona měla správné pole. Provozní rozhodnutí většinou unese souhrnnou větu.
+
+Privacy-first otázky:
+
+- Stačí nám agregovaný nebo souhrnný zápis?
+- Musíme uchovávat screenshot, nebo stačí odkaz na kanonické místo?
+- Obsahuje důkaz osobní údaje, zákaznický obsah nebo interní citlivý kontext?
+- Kdy se kontrolní poznámka smaže, sloučí nebo archivuje?
+- Nevytváříme novou evidenci jen proto, že se bojíme zavřít starou změnu?
+
+### Kontrolní karta
+
+```text
+Datum:
+Uzavřená systémová úprava:
+Běžný rytmus kontroly:
+Kanonické místo:
+Původní tření:
+Co mělo držet:
+Kontrolovaný běžný průchod:
+Co se stalo:
+Stav:
+Důvod stavu:
+Další krok:
+Co se neotevírá:
+Datová stopa:
+Vlastník:
+Termín:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-23
+Uzavřená systémová úprava: výchozí karta nové interní šablony obsahuje pole "Platí od", vlastník a další kontrola
+Běžný rytmus kontroly: měsíční kontrola šablon
+Kanonické místo: výchozí karta nové šablony
+Původní tření: při kontrole se musela dohledávat platnost a vlastník nové šablony
+Co mělo držet: nová šablona má vlastníka, platnost a další kontrolu bez ručního dohledávání
+Kontrolovaný běžný průchod: založení nové support šablony a měsíční kontrola indexu
+Co se stalo: karta byla vyplněná správně, ale index neukazuje jasně, podle kterého data se plánuje další kontrola
+Stav: Drží s malým třením
+Důvod stavu: původní tření se nevrátilo, ale okolní index zpomaluje plánování další kontroly
+Další krok: přepsat popisek sloupce v indexu na "Další kontrola (YYYY-MM-DD)"
+Co se neotevírá: neměníme strukturu celé šablony ani celý index standardů
+Datová stopa: souhrnný zápis bez screenshotů a bez osobních údajů
+Vlastník: provozní lead
+Termín: před příští měsíční kontrolou
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu systémovou úpravu uzavřenou podle Přílohy OC.
+
+1. Najděte nejbližší běžný rytmus, kde se k ní tým přirozeně vrátil.
+2. Otevřete původní uzavírací kartu a přečtěte původní tření.
+3. Zkontrolujte kanonické místo, ne dočasnou kartu změny.
+4. Vyberte jeden běžný průchod, kde se úprava měla projevit.
+5. Zapište, jestli člověk našel správné místo bez nápovědy.
+6. Zapište, jestli místo vedlo ke správnému rozhodnutí.
+7. Zkontrolujte, jestli nevznikla paralelní evidence nebo ruční obcházení.
+8. Rozhodněte stav Drží, Drží s malým třením, Nedrží nebo Otevřít nový nález.
+9. Pokud je potřeba další krok, zmenšete ho na jedno místo zásahu.
+10. Zapište datovou stopu a smažte nebo neukládejte zbytečné důkazy.
+
+Výstup:
+
+```text
+Uzavřená systémová úprava má po prvním dlouhodobém návratu jasný stav, minimální důkaz, oddělené vedlejší nálezy a případný další krok omezený na jedno konkrétní místo.
+```
+
+### Checklist kapitoly
+
+- Proběhla kontrola v přirozeném rytmu, ne jako nový zvláštní dohled?
+- Vrátili jste se k původnímu tření a potvrzenému výsledku?
+- Kontrolovali jste kanonické místo, kde má změna dlouhodobě žít?
+- Vybrali jste jeden skutečný běžný průchod?
+- Našel člověk správné místo bez osobní nápovědy?
+- Vedlo místo ke správnému rozhodnutí nebo kroku?
+- Nevrátila se paralelní evidence, ruční dohledávání nebo stará šablona?
+- Rozhodli jste jedním ze stavů Drží, Drží s malým třením, Nedrží nebo Otevřít nový nález?
+- Je případný další krok omezený na jedno místo zásahu?
+- Jsou vedlejší nálezy oddělené od původní úpravy?
+- Nevznikl kvůli kontrole nový tracker, screenshotová evidence nebo osobní dohled?
+- Stačí k rozhodnutí souhrnný zápis?
+- Je jasné, co se neotevírá?
+- Má další krok vlastníka a termín, pokud je potřeba?
+
+První dlouhodobá kontrola má být krátká, ale poctivá. Pokud změna drží, potvrďte ji a nechte ji žít v běžném rytmu. Pokud drhne, opravte nejbližší místo. Pokud nedrží, vraťte se k příčině, ne k pocitu viny. A pokud odhalí nový problém, založte ho zvlášť. Tak se systém zlepšuje bez toho, aby každá dobrá oprava dostala vlastní nekonečný seriál.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OD o první dlouhodobé kontrole po uzavření systémové úpravy: návrat v běžném rytmu, kontrola původního slibu změny, používání kanonického místa, čtyři stavy kontroly, privacy-first minimální důkaz, kontrolní karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OC o uzavření potvrzené systémové úpravy do dlouhodobého rytmu: potvrzená věta, přepis kanonického místa, zavření dočasných stop, privacy-first úklid důkazů, návrat do běžného review, práce s vedlejšími nálezy, uzavírací karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OB o ověření systémové úpravy po prvním normálním použití: výběr reálného použití, návrat k původnímu tření, sledování pracovní cesty místo výkonu člověka, rozhodovací stavy, privacy-first minimální důkaz, ověřovací karta, mini workshop a checklist.
 - 2026-05-23: Doplněna úvodní sekce Karta jedné změny po čtení: šablona převodu kapitoly do jedné ověřitelné změny, příklad pro lead generation, privacy-first datová stopa, hranice rozsahu a checklist.
