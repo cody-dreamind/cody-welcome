@@ -110457,8 +110457,258 @@ Další cyklus po převedeném nálezu má ověřený výsledek, jasné rozhodnu
 
 Ověření dalšího cyklu je malý závěrečný účet. Neptá se, jestli je systém najednou dokonalý. Ptá se, jestli konkrétní práce splnila konkrétní slib. Když ano, zavřete ji. Když ne, založte další práci přesněji. A když se objeví vedlejší téma, nenechte ho přilepit na starou kartu jen proto, že zrovna leží otevřená. Provozní systém má mít paměť, ne lepící plochu na všechno, co kolem proletí.
 
+## Příloha OG: Uzavření ověřeného dalšího cyklu do provozní paměti
+
+Příloha OF ověřuje, jestli další cyklus po převedeném nálezu splnil svůj konkrétní slib. Tato příloha řeší poslední krok: jak ověřený výsledek dostat zpět do provozní paměti tak, aby po něm nezůstala hromada dočasných karet, paralelních poznámek a nejasných závěrů.
+
+Bez uzavření se i dobré ověření začne časem rozpadat. Tým ví, že se něco potvrdilo, ale neví, kde je nový zdroj pravdy. Někdo používá starou kartu, někdo novou poznámku, někdo si pamatuje rozhodnutí z review a další člověk se za měsíc zeptá znovu. To není selhání lidí. To je chybějící zavírací krok.
+
+Otázka této přílohy:
+
+```text
+Které jedno kanonické místo se má po ověřeném cyklu změnit, a které dočasné stopy se mají zavřít nebo smazat?
+```
+
+Výstupem je uzavírací zápis:
+
+```text
+Ověřený cyklus:
+Rozhodnutí po ověření:
+Kanonické místo:
+Co se přepisuje:
+Co se zavírá:
+Co se maže nebo archivuje:
+Co se neotevírá:
+Datová stopa po uzavření:
+Vlastník:
+Příští běžná kontrola:
+```
+
+Codyho komentář: provozní paměť nemá být muzeum všech rozhodovacích mezikroků. Má být místo, kde člověk rychle pozná, co platí teď. Historie je užitečná, ale jen pokud nepřekáží práci. Jinak z ní není paměť, ale půda plná krabic bez popisků.
+
+### Začněte rozhodnutím po ověření
+
+Než začnete něco přepisovat, pojmenujte stav z Přílohy OF. Uzavírat se dá jen práce, která má rozhodnutí. Pokud ověřovací karta končí větou "asi dobré", nejdřív ji přepište.
+
+Použijte jeden ze čtyř stavů:
+
+```text
+Potvrzeno:
+Cyklus splnil slib a má se propsat do kanonického místa.
+
+Doladit:
+Cyklus pomohl, ale zůstává jedna malá úprava ve stejném místě.
+
+Nová práce:
+Ověření otevřelo samostatný nález, který má vlastní kartu a hranici.
+
+Zavřít bez změny:
+Nález se nepotvrdil nebo nemá dostatečný dopad.
+```
+
+Příklad:
+
+```text
+Rozhodnutí po ověření:
+Potvrzeno. Přepsaný popisek "Další kontrola (YYYY-MM-DD)" pomohl při měsíčním review a má zůstat v kanonickém indexu standardů.
+```
+
+Tato věta je důležitá. Chrání tým před tím, aby při uzavírání začal znovu diskutovat o celém tématu. Uzavírací krok není nová strategie. Je to přenos potvrzeného výsledku do běžné práce.
+
+### Přepište jen jedno kanonické místo
+
+Po ověření vyberte jedno místo, kde má platit nový stav. Může to být index, šablona, runbook, checklist, stránka dokumentace, sales karta, onboardingová trasa nebo provozní list. Důležité je, aby tým věděl, že právě tam má příště hledat pravdu.
+
+Slabý závěr:
+
+```text
+Aktualizovali jsme kartu a dali informaci do chatu.
+```
+
+Silnější závěr:
+
+```text
+Kanonické místo je index standardů. Přepsali jsme název sloupce a starou převodovou kartu zavřeli.
+```
+
+Pokud musíte upravit více míst, zapište proč:
+
+```text
+Kanonické místo:
+Index standardů.
+
+Odvozené místo:
+Onboardingová trasa pro provozního leada, protože na index přímo odkazuje.
+```
+
+Bez tohoto rozlišení se z jedné uzavírky stane tichý refaktor dokumentace. A tichý refaktor dokumentace je skoro vždycky větší, než se tváří.
+
+### Zavřete dočasné karty
+
+Každá ověřovací smyčka po sobě nechává pracovní stopy: převodovou kartu, ověřovací kartu, poznámku z review, odkaz na dočasný příklad, možná úkol v backlogu. Po uzavření musí být jasné, které z nich zůstávají jako historie a které už nemají pracovní roli.
+
+Praktické pravidlo:
+
+- Kanonické místo říká, co platí.
+- Uzavírací karta říká, proč se to změnilo.
+- Dočasné karty se zavírají.
+- Vedlejší nálezy se buď převádějí na samostatné karty, nebo se zahazují.
+- Chat, screenshoty a pracovní exporty se neuchovávají bez jasného důvodu.
+
+Příklad uzavření:
+
+```text
+Zavíráme:
+Převodovou kartu OE-014 a ověřovací kartu OF-014.
+
+Ponecháváme:
+Jednu uzavírací větu v changelogu indexu.
+
+Mažeme:
+Dočasný screenshot z review, protože rozhodnutí je zapsané souhrnně.
+```
+
+Takový úklid není puntičkářství. Je to způsob, jak zabránit tomu, aby budoucí člověk našel tři verze stejné pravdy a musel hádat, která z nich je živá.
+
+### Vedlejší nález nesmí cestovat zadarmo
+
+Při ověřování často vznikne vedlejší nález. Třeba zjistíte, že popisek sloupce už funguje, ale lidé se pořád nedostanou k indexu z onboardingové trasy. To je platný nález, ale není to důvod držet starou kartu otevřenou.
+
+Použijte jednoduché pravidlo:
+
+```text
+Pokud vedlejší nález mění jiné kanonické místo, dostane vlastní kartu.
+Pokud patří do stejného místa a jde o drobnost, může být posledním doladěním.
+Pokud nemá dopad, zapíše se jako odložený nebo se zahodí.
+```
+
+Příklad:
+
+```text
+Vedlejší nález:
+Onboardingová trasa neodkazuje na index standardů.
+
+Rozhodnutí:
+Nová práce. Necháváme uzavřený původní cyklus k popisku sloupce a zakládáme samostatnou kartu pro vstupní bod v onboardingu.
+```
+
+Tohle drží systém čistý. Jeden cyklus řešil jeden slib. Nový problém dostane vlastní hranici, vlastní ověření a vlastní závěr.
+
+### Privacy-first úklid důkazů
+
+Uzavření je dobrý okamžik uklidit důkazy. Ověření často používá pracovní příklady, poznámky a někdy i data z reálných průchodů. Pokud už rozhodnutí existuje, nepotřebujete držet všechno.
+
+Zeptejte se:
+
+- Jaký nejmenší záznam stačí, aby šlo rozhodnutí pochopit?
+- Obsahuje dočasný důkaz osobní údaje, zákaznický kontext nebo interní hodnocení lidí?
+- Je potřeba příklad anonymizovat?
+- Má důkaz retenční důvod, nebo jen zůstal po cestě?
+- Kdo má mít přístup k uzavírací kartě?
+
+Dobrá datová stopa po uzavření:
+
+```text
+Uchováno:
+Souhrnná věta v changelogu a uzavírací karta bez osobních údajů.
+
+Neuchováno:
+Screenshot review, kopie pracovního chatu a jména účastníků ověření.
+```
+
+Privacy-first provoz není jen o zákaznických datech. Týká se i interní práce. Není potřeba vyrábět detailní archiv toho, kdo se kde doptal, pokud stačí věta, že nové kanonické místo obstálo v běžném použití.
+
+### Uzavírací karta
+
+```text
+Datum:
+Ověřený cyklus:
+Rozhodnutí po ověření:
+Kanonické místo:
+Co se přepisuje:
+Co se zavírá:
+Co se maže nebo archivuje:
+Co se neotevírá:
+Vedlejší nálezy:
+Datová stopa po uzavření:
+Vlastník:
+Příští běžná kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-23
+Ověřený cyklus: OF-014, ověření popisku "Další kontrola (YYYY-MM-DD)"
+Rozhodnutí po ověření: potvrzeno
+Kanonické místo: index týmových standardů
+Co se přepisuje: název sloupce "kontrola" na "Další kontrola (YYYY-MM-DD)"
+Co se zavírá: převodová karta OE-014 a ověřovací karta OF-014
+Co se maže nebo archivuje: maže se dočasný screenshot review; uzavírací věta zůstává v changelogu indexu
+Co se neotevírá: celková struktura indexu a další sloupce
+Vedlejší nálezy: žádné
+Datová stopa po uzavření: souhrnný zápis bez jmen, screenshotů a pracovního chatu
+Vlastník: provozní lead
+Příští běžná kontrola: další měsíční review indexu
+```
+
+Příklad s vedlejším nálezem:
+
+```text
+Datum: 2026-05-23
+Ověřený cyklus: OF-018, diagnostika návratu paralelní tabulky šablon
+Rozhodnutí po ověření: nová práce
+Kanonické místo: kanonický index zůstává beze změny
+Co se přepisuje: nic v původní kartě
+Co se zavírá: diagnostický cyklus k návratu paralelní tabulky
+Co se maže nebo archivuje: archivuje se anonymizovaný souhrn průchodu; pracovní poznámky se mažou
+Co se neotevírá: struktura všech šablon a jejich obsah
+Vedlejší nálezy: založit samostatnou kartu pro odkaz na index v onboardingovém briefu
+Datová stopa po uzavření: jedna anonymizovaná věta bez osobních hodnocení
+Vlastník: provozní lead
+Příští běžná kontrola: po prvním použití upraveného onboardingového briefu
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu ověřovací kartu z Přílohy OF, která má jasné rozhodnutí.
+
+1. Přečtěte rozhodnutí po ověření.
+2. Určete jedno kanonické místo, kde má platit nový stav.
+3. Napište, co přesně se přepisuje.
+4. Zapište, které převodové a ověřovací karty se zavírají.
+5. Rozhodněte, které dočasné důkazy se mažou nebo anonymizují.
+6. Oddělte vedlejší nálezy od původního cyklu.
+7. Zapište, co se teď výslovně neotevírá.
+8. Přidejte jednu uzavírací větu do changelogu nebo provozní paměti.
+9. Určete další běžnou kontrolu jen tehdy, když je užitečná.
+10. Zavřete úkol.
+
+Výstup:
+
+```text
+Ověřený další cyklus je propsaný do jednoho kanonického místa, dočasné stopy jsou zavřené, zbytečné důkazy uklizené a případné vedlejší nálezy mají vlastní hranici.
+```
+
+### Checklist kapitoly
+
+- Má ověřený cyklus jasné rozhodnutí: potvrzeno, doladit, nová práce nebo zavřít bez změny?
+- Je vybrané jedno kanonické místo, kde má platit nový stav?
+- Je přesně zapsané, co se přepisuje?
+- Jsou dočasné převodové a ověřovací karty zavřené?
+- Je jasné, co zůstává jako historie a co už nemá pracovní roli?
+- Jsou vedlejší nálezy převedené na vlastní karty, odložené nebo zahozené?
+- Je zapsané, co se teď vědomě neotevírá?
+- Stačí uchovat souhrnný důkaz místo screenshotů, chatů a exportů?
+- Byly odstraněné nebo anonymizované dočasné podklady s osobními nebo interně citlivými údaji?
+- Ví tým, kde příště hledat platnou verzi rozhodnutí?
+- Má další kontrola termín jen tehdy, když skutečně pomáhá provozu?
+
+Uzavření ověřeného cyklu je malý akt disciplíny. Nejde o další dokument pro radost z dokumentů. Jde o to, aby potvrzená práce přestala být rozpracovaná, vedlejší nálezy nepřisedly na starou kartu a tým měl jedno místo, kde platí aktuální pravda. Provozní paměť má práci zrychlovat. Pokud ji musíte luštit, už začala pracovat proti vám.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OG o uzavření ověřeného dalšího cyklu do provozní paměti: rozhodnutí po ověření, přepis jednoho kanonického místa, zavření dočasných karet, práce s vedlejšími nálezy, privacy-first úklid důkazů, uzavírací karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OF o ověření dalšího cyklu po převedeném nálezu: návrat k původnímu slibu, ověření v normálním použití, rozlišení lokálního doladění, diagnostiky a nového nálezu, hledání návratu staré ruční práce, privacy-first ověřovací stopa, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OE o převodu nálezu z dlouhodobé kontroly do dalšího cyklu: rozlišení malého tření, návratu původního problému a nového nálezu, pracovní věta, nejmenší další cyklus, kanonické místo zásahu, hranice rozsahu, privacy-first převodová stopa, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OD o první dlouhodobé kontrole po uzavření systémové úpravy: návrat v běžném rytmu, kontrola původního slibu změny, používání kanonického místa, čtyři stavy kontroly, privacy-first minimální důkaz, kontrolní karta, mini workshop a checklist.
