@@ -110194,8 +110194,272 @@ Nález z dlouhodobé kontroly je převedený do jednoho dalšího cyklu, má jas
 
 Převod nálezu je malá disciplína, ale chrání celý provozní systém. Bez ní se dlouhodobá kontrola mění v pocitovou debatu: něco jsme našli, něco bychom měli zlepšit, někdy se k tomu vrátíme. S ní vznikne jeden další cyklus, který má tvar, hranici a konec. Přesně tak se udržuje živý systém bez toho, aby se každá kontrola tvářila jako nový začátek.
 
+## Příloha OF: Ověření dalšího cyklu po převedeném nálezu
+
+Příloha OE převádí nález z dlouhodobé kontroly do dalšího cyklu. Tato příloha řeší okamžik, kdy už další cyklus proběhl: lokální doladění se použilo, diagnostika se udělala, nová položka prošla triage nebo se potvrdilo, že není potřeba další práce. Bez ověření by převodová karta zůstala jen hezký zápis. A hezký zápis bez návratu je provozní dekorace, ne systém.
+
+Cíl ověření není hledat dokonalost. Cíl je zjistit, jestli další cyklus splnil svůj malý slib a co se s ním má stát dál. Pokud šlo o lokální doladění, ověřujete, zda odstranilo tření. Pokud šlo o návrat k příčině, ověřujete, zda tým našel skutečný důvod selhání. Pokud šlo o nový nález, ověřujete, zda se správně oddělil od původní změny.
+
+Otázka této přílohy:
+
+```text
+Splnil další cyklus svůj konkrétní slib, nebo má vzniknout nová práce s novou hranicí?
+```
+
+Výstupem je ověřovací karta:
+
+```text
+Původní nález:
+Typ dalšího cyklu:
+Slib cyklu:
+Skutečné použití nebo kontrola:
+Výsledek:
+Rozhodnutí:
+Co se uzavírá:
+Co případně vzniká nově:
+Datová stopa:
+Vlastník:
+Termín dalšího návratu:
+```
+
+Codyho komentář: největší riziko po dalším cyklu je falešné vítězství. Tým něco upraví, na chvíli se uleví a karta se zavře, protože všichni chtějí mít hotovo. Jenže hotovo neznamená "něco jsme změnili". Hotovo znamená "změna obstála v normálním použití a víme, co dál".
+
+### Vraťte se k původnímu slibu cyklu
+
+Nezačínejte novým dojmem. Otevřete převodovou kartu z Přílohy OE a přečtěte pracovní větu i nejmenší další cyklus. Ověření má měřit slib, který cyklus skutečně měl, ne všechno, co by se kolem tématu dalo zlepšit.
+
+Příklad:
+
+```text
+Původní nález:
+V indexu standardů nebylo jasné, zda sloupec "kontrola" znamená poslední nebo další kontrolu.
+
+Slib cyklu:
+Přepsat popisek na "Další kontrola (YYYY-MM-DD)" a ověřit, že při měsíčním review tým řadí položky bez doptávání.
+```
+
+Správné ověření se potom neptá:
+
+```text
+Je index standardů už ideální?
+```
+
+Ptá se:
+
+```text
+Pomohl nový popisek při měsíčním review najít další kontroly bez doptávání?
+```
+
+Tohle zúžení je praktické. Pokud při ověření najdete další problém, můžete ho zapsat. Ale nesmí se tvářit jako selhání původního cyklu, pokud původní slib splněný byl.
+
+### Vyberte normální použití, ne slavnostní test
+
+Ověření má proběhnout v situaci, ve které má změna opravdu žít. U popisku sloupce je to běžné měsíční review. U onboardingové trasy je to další nástup nebo simulovaný průchod člověka, který trasu běžně použije. U diagnostiky návratu problému je to rozhovor nad jedním skutečným pracovním průchodem.
+
+Nevhodné ověření:
+
+```text
+Autor změny otevře dokument a potvrdí, že mu dává smysl.
+```
+
+Lepší ověření:
+
+```text
+Člověk, který nebyl u úpravy, použije dokument při běžném review a zapíše, kde se musel doptat.
+```
+
+Nemusíte sbírat velká data. U mnoha provozních standardů stačí jeden až tři normální průchody. Důležité je, aby šlo o skutečnou práci, ne o prohlídku dokumentu v režimu "řekněte mi, že to vypadá dobře".
+
+### Rozlišujte výsledek podle typu cyklu
+
+Každý typ dalšího cyklu má jiné rozhodnutí. Nepoužívejte jednu univerzální známku "OK / není OK".
+
+Pro lokální doladění:
+
+```text
+Potvrdit:
+Tření zmizelo při běžném použití.
+
+Ještě drobně doladit:
+Směr pomohl, ale zůstává jedno malé tření ve stejném místě.
+
+Vrátit do údržbové fronty:
+Problém je větší než lokální popisek, krok nebo odkaz.
+```
+
+Pro diagnostiku návratu původního problému:
+
+```text
+Příčina nalezena:
+Je jasné, proč původní úprava nedržela, a vzniká jedna nová systémová úprava.
+
+Příčina nenalezena:
+Chybí důkaz, proto se cyklus uzavírá jako nedostatečně prokázaný a nevrství se další řešení.
+
+Původní problém se nepotvrdil:
+Šlo o provozní šum nebo vedlejší situaci, ne o návrat starého tření.
+```
+
+Pro nový samostatný nález:
+
+```text
+Zařadit:
+Nález má jasný dopad, vlastní místo a patří do fronty.
+
+Sloučit:
+Nález je stejný jako existující položka a nepřidává novou práci.
+
+Odložit:
+Nález je platný, ale teď nemá dostatečný dopad.
+
+Zahodit:
+Nález se při kontrole nepotvrdil.
+```
+
+Toto rozlišení brání dvěma chybám. První chyba je zavřít problém jen proto, že někdo něco změnil. Druhá chyba je držet kartu otevřenou, i když už dávno splnila svůj malý účel.
+
+### Hledejte návrat staré práce
+
+Ověření dalšího cyklu má jednu zvláštní povinnost: hledat, jestli se nevrátila stará ruční práce. Když se systém zlepší jen na papíře, lidé často začnou potichu obcházet dokument, držet si vlastní poznámky nebo se ptát jednoho zkušeného člověka místo toho, aby použili zdroj pravdy.
+
+Praktické signály návratu staré práce:
+
+- lidé pořád hledají stejnou informaci v chatu;
+- vznikla soukromá kopie šablony;
+- review se opírá o paměť člověka, ne o kanonické místo;
+- nová změna vyžaduje vysvětlování mimo dokument;
+- starý odkaz nebo stará tabulka se používá dál;
+- ověření je možné jen díky tomu, že autor změny sedí vedle týmu.
+
+Když takový signál najdete, nepište hned "tým to nepoužívá". Přepište ho na systémovou otázku:
+
+```text
+Co v kanonickém místě neodpovídá okamžiku, kdy lidé práci opravdu dělají?
+```
+
+Často zjistíte, že problém není v disciplíně lidí, ale v tom, že dokument začíná o dva kroky později, používá jiný jazyk než běžná práce nebo schovává nejdůležitější rozhodnutí moc hluboko.
+
+### Privacy-first ověřovací stopa
+
+Ověření dalšího cyklu má být lehké. Nepotřebuje nové sledování lidí, nahrávání obrazovek ani ukládání pracovních chatů. Stačí krátký záznam o tom, co bylo ověřeno, v jakém běžném průchodu a jaké rozhodnutí z toho vzniklo.
+
+Dobrá ověřovací stopa:
+
+```text
+Ověření:
+Při měsíčním review byly tři šablony seřazeny podle nového sloupce "Další kontrola (YYYY-MM-DD)" bez doptávání.
+
+Rozhodnutí:
+Lokální doladění potvrzeno a uzavřeno.
+
+Uložený důkaz:
+Souhrnná věta v ověřovací kartě.
+
+Neukládáme:
+Screenshoty review, jména účastníků, chatovou komunikaci ani kopie šablon.
+```
+
+Pokud ověření vyžaduje příklad, anonymizujte ho a zkraťte:
+
+```text
+Anonymizovaný příklad:
+Jedna šablona měla další kontrolu za 14 dní a díky novému popisku byla správně zařazena do nejbližšího review.
+```
+
+Privacy-first pravidlo: čím menší změna, tím menší důkaz. Pokud kvůli popisku sloupce vznikne složka exportů a záznamů, oprava možná pomohla dokumentu, ale uškodila provozní hygieně. Gratuluju, vyměnili jsme jednu drobnost za novou ledničku plnou magnetků.
+
+### Ověřovací karta
+
+```text
+Datum:
+Původní nález:
+Typ dalšího cyklu:
+Slib cyklu:
+Skutečné použití nebo kontrola:
+Výsledek:
+Rozhodnutí:
+Co se uzavírá:
+Co případně vzniká nově:
+Datová stopa:
+Vlastník:
+Termín dalšího návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-23
+Původní nález: sloupec "kontrola" v indexu standardů nebyl jednoznačný
+Typ dalšího cyklu: lokální doladění
+Slib cyklu: přepsat popisek na "Další kontrola (YYYY-MM-DD)" a ověřit použití při měsíčním review
+Skutečné použití nebo kontrola: měsíční review tří nových nebo upravených šablon
+Výsledek: tým seřadil položky podle další kontroly bez doptávání
+Rozhodnutí: potvrdit a uzavřít lokální doladění
+Co se uzavírá: převodová karta k popisku sloupce
+Co případně vzniká nově: nic
+Datová stopa: souhrnný zápis bez screenshotů, jmen a pracovního chatu
+Vlastník: provozní lead
+Termín dalšího návratu: běžná příští měsíční kontrola indexu
+```
+
+Příklad pro diagnostiku:
+
+```text
+Datum: 2026-05-23
+Původní nález: po systémové úpravě se znovu objevila paralelní tabulka šablon
+Typ dalšího cyklu: diagnostika návratu původního problému
+Slib cyklu: zjistit, proč lidé obcházejí kanonický index
+Skutečné použití nebo kontrola: jeden běžný průchod založení nové šablony
+Výsledek: index je správný pro review, ale není dostupný v okamžiku založení šablony
+Rozhodnutí: založit jednu novou systémovou úpravu vstupního bodu
+Co se uzavírá: diagnostický cyklus
+Co případně vzniká nově: úprava odkazu na index v šablonovém briefu
+Datová stopa: anonymizovaný souhrn průchodu bez osobních hodnocení
+Vlastník: provozní lead
+Termín dalšího návratu: po prvním založení šablony přes upravený vstupní bod
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu převodovou kartu z Přílohy OE, kde už další cyklus proběhl.
+
+1. Přečtěte původní nález, typ cyklu a slib cyklu.
+2. Vyberte jedno normální použití nebo kontrolu, kde se měl slib projevit.
+3. Zapište, jestli se ověřoval původní slib, ne širší dojem.
+4. Rozhodněte výsledek podle typu cyklu: lokální doladění, diagnostika nebo nový nález.
+5. Zkontrolujte, jestli se nevrátila stará ruční práce.
+6. Pokud vzniká nová práce, pojmenujte ji jako nový cyklus s vlastní hranicí.
+7. Pokud je slib splněný, uzavřete převodovou kartu.
+8. Zkraťte důkaz na souhrnný zápis.
+9. Smažte nebo neukládejte zbytečné podklady.
+10. Zapište termín dalšího návratu jen tehdy, když je opravdu potřeba.
+
+Výstup:
+
+```text
+Další cyklus po převedeném nálezu má ověřený výsledek, jasné rozhodnutí, minimální datovou stopu a buď uzavřenou kartu, nebo nově založenou práci s vlastní hranicí.
+```
+
+### Checklist kapitoly
+
+- Vrátili jste se k původní pracovní větě a slibu cyklu?
+- Ověřovali jste normální použití, ne jen prohlídku dokumentu autorem změny?
+- Je jasné, jestli šlo o lokální doladění, diagnostiku nebo nový nález?
+- Má výsledek odpovídající rozhodnutí, ne jen obecné "OK"?
+- Nehodnotíte širší téma, které původní cyklus nesliboval vyřešit?
+- Zkontrolovali jste návrat staré ruční práce, paralelních tabulek a soukromých kopií?
+- Pokud vznikla nová práce, má vlastní kartu a hranici rozsahu?
+- Pokud je slib splněný, je převodová karta uzavřená?
+- Stačí k ověření souhrnný zápis?
+- Nevznikly screenshoty, exporty, osobní hodnocení nebo záznamy chatu bez jasného důvodu?
+- Je zapsané, co se uzavírá a co případně vzniká nově?
+- Má další návrat termín jen tehdy, když je užitečný?
+
+Ověření dalšího cyklu je malý závěrečný účet. Neptá se, jestli je systém najednou dokonalý. Ptá se, jestli konkrétní práce splnila konkrétní slib. Když ano, zavřete ji. Když ne, založte další práci přesněji. A když se objeví vedlejší téma, nenechte ho přilepit na starou kartu jen proto, že zrovna leží otevřená. Provozní systém má mít paměť, ne lepící plochu na všechno, co kolem proletí.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OF o ověření dalšího cyklu po převedeném nálezu: návrat k původnímu slibu, ověření v normálním použití, rozlišení lokálního doladění, diagnostiky a nového nálezu, hledání návratu staré ruční práce, privacy-first ověřovací stopa, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OE o převodu nálezu z dlouhodobé kontroly do dalšího cyklu: rozlišení malého tření, návratu původního problému a nového nálezu, pracovní věta, nejmenší další cyklus, kanonické místo zásahu, hranice rozsahu, privacy-first převodová stopa, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OD o první dlouhodobé kontrole po uzavření systémové úpravy: návrat v běžném rytmu, kontrola původního slibu změny, používání kanonického místa, čtyři stavy kontroly, privacy-first minimální důkaz, kontrolní karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OC o uzavření potvrzené systémové úpravy do dlouhodobého rytmu: potvrzená věta, přepis kanonického místa, zavření dočasných stop, privacy-first úklid důkazů, návrat do běžného review, práce s vedlejšími nálezy, uzavírací karta, mini workshop a checklist.
