@@ -113027,8 +113027,231 @@ Potvrzená stabilizační úprava je součástí běžného pravidla, dočasná 
 
 Uzavření potvrzené stabilizační úpravy je hlavně úklid. Ne ten nudný administrativní, který se dělá proto, aby bylo zaškrtnuto. Ten užitečný: platné pravidlo je na správném místě, staré stopy nepřekážejí, vedlejší nálezy neutíkají zadarmo a tým nemusí vědět, jaká malá oprava tomu předcházela. Prostě použije pravidlo a jde dál.
 
+## Příloha OQ: První kontrola běžného rytmu po uzavřené stabilizaci
+
+Příloha OP zavřela potvrzenou stabilizační úpravu a vrátila pravidlo do běžného rytmu. Tím se ale ještě neví, jestli se běžný rytmus opravdu chová jako běžný rytmus. První kontrola po uzavření má ověřit, že se tým k pravidlu vrací přirozeně, bez speciální připomínky, bez staré stabilizační karty a bez nového miniprocesu kolem jedné malé úpravy.
+
+Kontrolní otázka zní:
+
+```text
+Použilo se pravidlo v běžném rytmu tak, že uzavřená stabilizace už nebyla samostatným tématem?
+```
+
+Výstupem je krátká rytmická karta:
+
+```text
+Pravidlo:
+Uzavřená stabilizace:
+Běžný rytmus:
+První návrat:
+Kde se pravidlo našlo:
+Co se použilo bez historie:
+Co se znovu otevřelo:
+Stav rytmu:
+Datová stopa:
+Další krok:
+Vlastník:
+```
+
+Codyho komentář: nejlepší potvrzení stabilizace je situace, kdy si na ni nikdo nevzpomene, protože pravidlo prostě funguje. Pokud se při každém použití pořád říká "to je ta věc, co jsme minule stabilizovali", změna ještě není úplně součást práce. Je pořád malý exponát s popiskem.
+
+### Nehledejte dokonalost, hledejte normální použití
+
+První kontrola běžného rytmu nemá znovu auditovat celé pravidlo. Má zjistit, jestli se pravidlo použilo v přirozeném okamžiku, ve kterém by se použilo i bez nedávné opravy.
+
+Příklady běžného návratu:
+
+- měsíční review standardů;
+- další onboarding nového člověka;
+- kvartální kontrola dodavatelů;
+- uzavření další údržbové karty;
+- pravidelná revize marketingového checklistu;
+- běžná kontrola privacy-first datové mapy.
+
+Nevhodný návrat:
+
+```text
+Autor stabilizace připomene týmu, ať si nové pravidlo zkusí.
+```
+
+Vhodný návrat:
+
+```text
+Při dalším měsíčním review provozní lead otevře index standardů a použije upravenou nápovědu bez návratu ke stabilizační kartě.
+```
+
+Rozdíl je v samostatnosti. Speciální připomínka ověří hlavně paměť týmu. Běžné použití ověří, jestli pravidlo žije tam, kde má.
+
+### Sledujte, jestli se uzavření nevrátilo jako úkol
+
+Po uzavření drobné stabilizace často zůstane v systému drobný nepořádek: karta je sice zavřená, ale někdo ji pořád používá jako vysvětlení; v checklistu je nový řádek "zkontrolovat stabilizaci"; v chatu je připnutý screenshot; v úkolovníku svítí kontrolní položka, která už nemá co rozhodnout.
+
+Při první kontrole si napište:
+
+```text
+Co se při běžném použití otevřelo?
+```
+
+Dobrá odpověď:
+
+```text
+Otevřen byl jen index standardů a běžný changelog.
+```
+
+Varovná odpověď:
+
+```text
+Otevřen byl index standardů, uzavřená stabilizační karta a chat s původním vysvětlením.
+```
+
+Varovná odpověď neznamená katastrofu. Znamená, že kanonické místo nejspíš pořád neobsahuje dost jasnou současnou verzi pravidla, nebo že staré stopy nebyly po uzavření dost uklizené.
+
+### Rozlišujte čtyři stavy rytmu
+
+Po prvním návratu do běžného rytmu vyberte jeden stav:
+
+```text
+Rytmus drží:
+Pravidlo se použilo z kanonického místa a uzavřená stabilizace se znovu neotevřela.
+
+Rytmus drží s drobnou stopou:
+Pravidlo fungovalo, ale někde zůstala malá stará opora, například odkaz, poznámka nebo připnutý screenshot.
+
+Rytmus se vrací k historii:
+Tým musel otevřít stabilizační kartu, starý chat nebo původní důkaz, aby pravidlo použil.
+
+Rytmus otevřel nový nález:
+Pravidlo drží, ale běžné použití ukázalo samostatný problém mimo uzavřenou stabilizaci.
+```
+
+Každý stav má jinou odpověď.
+
+U stavu `Rytmus drží` nic nepřidávejte. Jen ponechte pravidlo v běžné kontrole.
+
+U stavu `Rytmus drží s drobnou stopou` smažte nebo přepište zbytkovou oporu. Typicky jde o odstranění starého odkazu, zrušení připnuté poznámky nebo zkrácení changelogu.
+
+U stavu `Rytmus se vrací k historii` neobnovujte starou kartu jako pracovní dokument. Najděte, co v kanonickém místě chybí, a vraťte problém do údržbové fronty jako samostatnou opravu.
+
+U stavu `Rytmus otevřel nový nález` potvrďte původní pravidlo a nový nález zapište zvlášť. Jedna uzavřená stabilizace nemá automaticky nést všechno, co se při další práci objeví.
+
+### Privacy-first kontrola zbytkových stop
+
+Tato kontrola je hlavně úklidová. Nevyžaduje nový tracker, nahrávání obrazovky ani detailní sledování lidí. Stačí krátce popsat, jakou pracovní cestu tým použil a jestli se znovu otevřely staré důkazy.
+
+Privacy-first otázky:
+
+- Zůstaly po uzavřené stabilizaci screenshoty, chatové výřezy nebo exporty, které už nic nerozhodují?
+- Neobsahuje changelog osobní poznámky místo pracovního rozhodnutí?
+- Nepřibyla samostatná kontrolní položka, která jen prodlužuje život dočasné opravy?
+- Je platné pravidlo dohledatelné bez historie lidí a debat?
+- Dá se zbytková stopa smazat, zkrátit nebo přesunout do anonymizovaného changelogu?
+
+Lepší zápis:
+
+```text
+Při měsíčním review bylo pravidlo použité z indexu. Stará stabilizační karta se neotevřela. Připnutý screenshot v chatu byl smazán, protože už není zdrojem rozhodnutí.
+```
+
+Horší zápis:
+
+```text
+Tým si pro jistotu nechává všechny screenshoty, kdyby někdo později nevěděl, proč se nápověda změnila.
+```
+
+"Pro jistotu" je užitečné jen tehdy, když víte, jaké rozhodnutí tím chráníte. Pokud žádné takové rozhodnutí neexistuje, jde jen o retenci bez účelu.
+
+### Rytmická karta
+
+```text
+Datum:
+Pravidlo:
+Uzavřená stabilizace:
+Běžný rytmus:
+První návrat:
+Kanonické místo:
+Co se použilo bez historie:
+Co se znovu otevřelo:
+Stav rytmu: Rytmus drží / Rytmus drží s drobnou stopou / Rytmus se vrací k historii / Rytmus otevřel nový nález
+Zbytkové stopy:
+Datová stopa:
+Další krok:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-07-31
+Pravidlo: každý aktivní standard má pole "Další kontrola" a změna data má jednu větu důvodu v changelogu
+Uzavřená stabilizace: nápověda u pole rozlišuje aktivní a pilotní standardy
+Běžný rytmus: měsíční review provozních standardů
+První návrat: první měsíční review po uzavření stabilizační karty
+Kanonické místo: index provozních standardů
+Co se použilo bez historie: upravená nápověda u pole a běžný changelog
+Co se znovu otevřelo: nic
+Stav rytmu: Rytmus drží
+Zbytkové stopy: žádné aktivní; starý screenshot smazán už při uzavření
+Datová stopa: jedna anonymizovaná věta v běžném review zápisu
+Další krok: ponechat v měsíčním review bez samostatné kontroly
+Vlastník: provozní lead
+```
+
+Příklad s drobnou stopou:
+
+```text
+Stav rytmu: Rytmus drží s drobnou stopou
+Zbytkové stopy: v checklistu zůstal řádek "ověřit novou nápovědu"
+Další krok: odstranit řádek z checklistu, protože nápověda už je součást běžného pravidla
+```
+
+Příklad návratu k historii:
+
+```text
+Stav rytmu: Rytmus se vrací k historii
+Co se znovu otevřelo: uzavřená stabilizační karta kvůli otázce, zda pilotní standardy patří do stejného review
+Další krok: vrátit do údržbové fronty jako opravu kanonického místa; starou kartu nepoužívat jako živý návod
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu stabilizační úpravu uzavřenou podle Přílohy OP a počkejte na první běžné použití pravidla.
+
+1. Pojmenujte běžný rytmus, do kterého se pravidlo vrátilo.
+2. Zapište první skutečný návrat k pravidlu.
+3. Ověřte, že člověk našel kanonické místo.
+4. Zapište, jestli se otevřela stará karta, chat, screenshot nebo zvláštní kontrolní úkol.
+5. Vyberte stav rytmu.
+6. U drobné stopy ji smažte nebo zkraťte.
+7. U návratu k historii vraťte problém do údržbové fronty.
+8. U nového nálezu založte oddělenou položku.
+
+Výstup:
+
+```text
+Uzavřená stabilizace buď opravdu splynula s běžným rytmem, nebo má jasně pojmenovaný zbytek práce bez obnovování staré dočasné evidence.
+```
+
+### Checklist kapitoly
+
+- Proběhla kontrola při prvním skutečném návratu do běžného rytmu?
+- Nepoužil se umělý test jen proto, že je stabilizace čerstvá?
+- Našel člověk platné pravidlo v kanonickém místě?
+- Použilo se pravidlo bez otevření stabilizační karty?
+- Nezůstal v checklistu, chatu nebo úkolovníku zbytečný zbytkový odkaz?
+- Je výsledek zařazen do jednoho ze čtyř stavů rytmu?
+- Pokud rytmus drží, nevzniká další samostatná kontrola?
+- Pokud drží s drobnou stopou, je stopa odstraněná v místě práce?
+- Pokud se tým vrací k historii, vznikl samostatný nález místo oživování staré karty?
+- Jsou nové nálezy oddělené od uzavřené stabilizace?
+- Nevznikly nové osobní záznamy, screenshoty nebo sledování lidí?
+- Zůstala jen minimální datová stopa, která vysvětluje aktuální rozhodnutí?
+- Ví vlastník, kdy se pravidlo znovu uvidí v běžném rytmu?
+
+První kontrola běžného rytmu je malý test toho, jestli se údržba opravdu zmenšila. Dobře uzavřená stabilizace nemá tým pronásledovat jako další položka v systému. Má zmizet do správného místa, uvolnit pozornost a nechat práci pokračovat.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OQ o první kontrolu běžného rytmu po uzavřené stabilizaci: návrat do normálního použití, kontrola zbytkových stop, čtyři stavy rytmu, privacy-first úklid dočasné evidence, rytmická karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OP o uzavření potvrzené stabilizační úpravy do běžného rytmu: potvrzený výsledek, přepis kanonického místa, zavření stabilizační karty, návrat do existujícího review rytmu, oddělení vedlejších nálezů, privacy-first úklid dočasných důkazů, uzavírací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha ON o ověření stabilizační úpravy po prvním běžném použití: návrat k původnímu tření, výběr normálního použití, signály nalezení/pochopení/dokončení, rozhodovací stavy, uzavření nebo návrat do fronty, privacy-first ověřovací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OM o převodu drobného tření po kontrole provozního pravidla do jedné stabilizační úpravy: vstupní brána, stabilizační věta, úprava stejného kanonického místa, hranice rozsahu, ověření dalším běžným použitím, privacy-first evidence, stabilizační karta, mini workshop a checklist.
