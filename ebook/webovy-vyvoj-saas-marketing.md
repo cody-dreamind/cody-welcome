@@ -111499,8 +111499,252 @@ Výstup:
 
 Ověření údržbové úpravy má chránit dvě věci najednou: užitečnost provozní paměti a pozornost týmu. Když člověk při dalším normálním použití najde odpověď bez návratu do staré stopy, není potřeba slavit procesem. Stačí úpravu potvrdit, uklidit důkazy a jít dál.
 
+## Příloha OK: Uzavření potvrzené údržbové úpravy do provozního pravidla
+
+Příloha OJ končí rozhodnutím, že údržbová úprava pomohla. To ještě neznamená, že je práce hotová. Potvrzená úprava se musí uložit do místa, kde ji člověk najde při další normální práci, a zároveň se musí zavřít dočasná stopa, která vznikla jen kvůli ověření.
+
+Tato příloha řeší poslední krok malé údržbové smyčky: jak z potvrzené úpravy udělat běžné provozní pravidlo bez toho, aby vznikla další vrstva dokumentace. Cíl není vytvořit slavnostní standard. Cíl je, aby příště nikdo nemusel vědět, že nějaká údržbová karta existovala.
+
+Otázka této přílohy:
+
+```text
+Kde má potvrzená úprava žít, aby ji člověk použil automaticky při další práci, a co můžeme po ověření zavřít nebo smazat?
+```
+
+Výstupem je stabilizační zápis:
+
+```text
+Potvrzená úprava:
+Kanonické místo:
+Co se přepisuje:
+Co se zavírá:
+Co se maže nebo anonymizuje:
+Kdy se pravidlo znovu zkontroluje:
+Vlastník:
+```
+
+Codyho komentář: když potvrzená údržbová úprava dál žije jako karta, je to jako nechat na stole lešení po opravě police. Technicky to pořád něco drží, ale všichni kolem toho musí chodit opatrně. Dobré provozní pravidlo má být police, ne lešení.
+
+### Začněte potvrzeným rozhodnutím
+
+Než cokoliv přepíšete, vraťte se k rozhodnutí z ověřovacího zápisu. Stabilizovat se má jen úprava, která má stav `potvrdit`. Pokud byl stav `jednou doladit`, nejdřív dokončete doladění a ověřte ho dalším běžným použitím. Pokud byl stav `vrátit do fronty`, tato příloha se nepoužívá.
+
+Krátký filtr:
+
+```text
+Stav z Přílohy OJ:
+Potvrdit.
+
+Důvod:
+Člověk našel datum další kontroly v indexu, pochopil důvod změny z changelogu a neotevřel starou uzavírací kartu.
+
+Co se stabilizuje:
+Pole "Další kontrola" v indexu a jedna věta v changelogu jako běžný tvar zápisu.
+```
+
+Pokud neumíte jednou větou říct, co se stabilizuje, úprava ještě není připravená na provozní pravidlo. Možná byla užitečná, ale její jádro není dost jasné. V takovém případě ji nepřepisujte do standardu. Zkraťte ji na jednu větu nebo ji vraťte do údržbové fronty.
+
+Stabilizace nemá zachraňovat nejasnou práci. Má jen odstranit poslední dočasné podpěry kolem něčeho, co už v běžném použití fungovalo.
+
+### Vyberte jedno kanonické místo
+
+Potvrzená úprava má mít jeden domov. Ne tři odkazy, dvě kopie a poznámku v chatu. Kanonické místo je to, kam člověk přirozeně přijde v okamžiku práce.
+
+Příklady kanonických míst:
+
+- index provozních standardů;
+- šablona předávací karty;
+- checklist měsíční kontroly;
+- changelog konkrétního playbooku;
+- onboardingový balíček role;
+- formulář zadání kampaně;
+- rozhodovací log produktu.
+
+Špatné kanonické místo je takové, které člověk otevře jen při auditu. Pokud se úprava týká měsíčního review, patří do měsíčního review, ne do archivní lekce o tom, proč review kdysi drhlo. Historie může zůstat dohledatelná, ale nemá být pracovní cestou.
+
+Praktický test:
+
+```text
+Kdyby nový člověk dělal tuto práci poprvé, otevřel by toto místo bez nápovědy?
+```
+
+Pokud odpověď zní ne, kanonické místo je špatně. Přesuňte pravidlo blíž k okamžiku rozhodnutí.
+
+### Přepište jen pracovní tvar pravidla
+
+Do kanonického místa nepatří celý příběh údržby. Nepřepisujte tam původní tření, průběh ověření, vedlejší poznámky ani vysvětlení, kdo měl pravdu. Pracovní místo má obsahovat jen to, co člověk potřebuje k další akci.
+
+Příklad přepisu:
+
+```text
+Původní údržbová karta:
+Při měsíčním review provozní lead neviděl datum další kontroly a musel otevřít uzavírací kartu OG-014. Přidali jsme pole "Další kontrola" a větu do changelogu. Ověřeno při review 2026-06, bez návratu do staré stopy.
+
+Pracovní tvar v indexu:
+Každý aktivní standard má pole "Další kontrola". Pokud se datum mění kvůli údržbové úpravě, changelog obsahuje jednu větu s důvodem změny.
+```
+
+Druhý text je kratší a lepší. Ne proto, že by skrýval historii, ale protože při práci odpovídá na správnou otázku: co mám udělat teď?
+
+Stabilizační pravidlo:
+
+```text
+Do pracovního místa patří pravidlo pro příští použití, ne kronika poslední opravy.
+```
+
+Historie změny může zůstat v changelogu jednou větou. Detailní karta už nemá být aktivní vstup do práce.
+
+### Zavřete údržbovou kartu
+
+Po přepisu do kanonického místa zavřete původní údržbovou kartu. Zavření neznamená smazat všechno. Znamená jasně říct, že karta už není pracovním zdrojem pravdy.
+
+Závěrečný zápis může být krátký:
+
+```text
+Stav:
+Uzavřeno.
+
+Kanonické místo:
+Index provozních standardů, pole "Další kontrola" a changelog.
+
+Co bylo převzato:
+Pravidlo, že každý aktivní standard má datum další kontroly a změna data má jednu větu důvodu.
+
+Co už nepoužívat:
+Tuto údržbovou kartu jako návod pro měsíční review.
+```
+
+Pokud karta zůstane otevřená, tým má najednou dvě pravdy: kanonické místo a starou kartu. A protože stará karta bývá delší, někdo jí začne přikládat větší váhu. Délka ale není autorita. Autorita je místo, kde se práce skutečně dělá.
+
+### Ukliďte dočasné důkazy
+
+Údržbové smyčky často vytvářejí drobné stopy: screenshot, výřez chatu, export, poznámku z ověření, dočasnou tabulku nebo kopii staré šablony. Po stabilizaci rozhodněte, co s nimi.
+
+Použijte čtyři stavy:
+
+```text
+Smazat:
+Důkaz už neslouží práci ani auditu.
+
+Anonymizovat:
+Příklad je užitečný, ale obsahuje člověka, zákazníka nebo citlivý detail.
+
+Archivovat:
+Je potřeba kvůli dohledatelnosti rozhodnutí, ale nemá být v pracovní trase.
+
+Převést:
+Malá část důkazu se stane zobecněným příkladem v kanonickém místě.
+```
+
+Příklad:
+
+```text
+Screenshot starého indexu:
+Smazat po stabilizaci, už není potřeba.
+
+Ověřovací věta:
+Archivovat v uzavřené kartě bez jména člověka.
+
+Konkrétní zákaznický název v poznámce:
+Anonymizovat na "zákaznický projekt".
+```
+
+Privacy-first princip je jednoduchý: dočasný důkaz nemá přežít jen proto, že nikdo nechce uklízet. Každý starý screenshot a export je malý budoucí problém. Možná nikdy nevybuchne, ale určitě bude překážet při hledání toho, co platí.
+
+### Nastavte další lehkou kontrolu
+
+Stabilizovaná úprava nepotřebuje vlastní nový rituál. Má se kontrolovat v nejbližším existujícím rytmu, který už tým používá.
+
+Příklady:
+
+- při měsíčním review indexu;
+- při dalším onboardingu role;
+- při kvartální kontrole playbooků;
+- při dalším předání zákaznického výstupu;
+- při revizi kampaně po uzavřeném cyklu.
+
+Zápis může být velmi krátký:
+
+```text
+Další kontrola:
+Bez samostatného meetingu. Ověřit při nejbližším měsíčním review, jestli všechny aktivní standardy mají pole "Další kontrola" vyplněné a changelog obsahuje důvod poslední změny.
+```
+
+Kontrola se nesmí tvářit jako nový projekt. Je to jen lehký háček v existující práci. Pokud kvůli malé údržbové úpravě vznikne nový pravidelný meeting, něco se utrhlo ze řetězu. Malá úprava má snižovat provozní tření, ne vyrábět trvalou obsluhu sama pro sebe.
+
+### Stabilizační zápis
+
+```text
+Datum:
+Potvrzená úprava:
+Původní tření:
+Kanonické místo:
+Pracovní tvar pravidla:
+Co se přepsalo:
+Co se zavřelo:
+Dočasné důkazy:
+Datová stopa po úklidu:
+Další lehká kontrola:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-06-03
+Potvrzená úprava: pole "Další kontrola" v indexu standardů a jedna věta důvodu v changelogu
+Původní tření: provozní lead musel při měsíčním review otevírat starou uzavírací kartu, aby našel datum další kontroly
+Kanonické místo: index provozních standardů
+Pracovní tvar pravidla: každý aktivní standard má pole "Další kontrola"; změna data má v changelogu jednu větu s důvodem
+Co se přepsalo: šablona řádku v indexu a krátké pravidlo pro changelog
+Co se zavřelo: údržbová karta OI-022, ověřovací poznámka OJ-022
+Dočasné důkazy: screenshot starého indexu smazán, ověřovací věta ponechána anonymizovaně v uzavřené kartě
+Datová stopa po úklidu: žádný nový tracker, žádné jméno člověka, žádný zákaznický detail
+Další lehká kontrola: při dalším měsíčním review zkontrolovat, že aktivní standardy mají vyplněné pole
+Vlastník: provozní lead
+```
+
+Tento zápis není další dokument k obdivování. Je to potvrzení, že dočasná změna přešla do běžné práce a že zůstala jen stopa, která má jasný účel.
+
+### Mini workshop na 12 minut
+
+Vezměte jednu údržbovou úpravu, která byla v Příloze OJ potvrzená.
+
+1. Přečtěte potvrzené rozhodnutí.
+2. Jednou větou pojmenujte, co se má stabilizovat.
+3. Vyberte jedno kanonické místo, kde se práce přirozeně děje.
+4. Přepište úpravu do pracovního tvaru pravidla.
+5. Rozhodněte, co bude jen jednovětý changelog a co se do pracovního místa nedostane.
+6. Zavřete původní údržbovou kartu.
+7. Projděte dočasné důkazy a označte je jako smazat, anonymizovat, archivovat nebo převést.
+8. Zapište další lehkou kontrolu do existujícího rytmu.
+
+Výstup:
+
+```text
+Potvrzená údržbová úprava je převedená do jednoho kanonického pracovního místa, původní karta je zavřená a dočasné důkazy mají jasný stav.
+```
+
+### Checklist kapitoly
+
+- Má úprava z Přílohy OJ stav `potvrdit`?
+- Je jednou větou jasné, co se stabilizuje?
+- Má potvrzená úprava jedno kanonické místo?
+- Je kanonické místo tam, kde člověk skutečně pracuje?
+- Přepisuje se do pracovního místa jen pravidlo pro příští použití?
+- Neputuje do standardu celý příběh původního tření?
+- Je původní údržbová karta zavřená jako pracovní zdroj pravdy?
+- Je jasné, co se smazalo, anonymizovalo, archivovalo nebo převedlo?
+- Nezůstávají aktivní screenshoty, exporty nebo chatové výřezy bez účelu?
+- Je další kontrola napojená na existující rytmus místo nového meetingu?
+- Je datová stopa po stabilizaci menší nebo stejná než před úpravou?
+- Ví vlastník, kde pravidlo žije a kdy se k němu vrátit?
+
+Uzavření potvrzené údržbové úpravy je malý, ale důležitý okamžik. Právě tady se rozhoduje, jestli provozní paměť zůstane lehká, nebo se začne vrstvit do interního archeologického naleziště. Dobrá stabilizace nechá pravidlo v místě práce, zavře lešení a smaže důkazy, které už nikomu neslouží.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OK o uzavření potvrzené údržbové úpravy do provozního pravidla: potvrzené rozhodnutí, kanonické místo, pracovní tvar pravidla, zavření údržbové karty, privacy-first úklid dočasných důkazů, další lehká kontrola, stabilizační zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OJ o ověření údržbové úpravy po dalším běžném použití: návrat k původnímu tření, ověření v normální pracovní trase, tři rozhodovací stavy, sledování návratu do staré stopy, privacy-first minimum evidence, ověřovací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OI o převodu první kontroly provozní paměti do jedné údržbové úpravy: vstup ze skutečného tření, typy zásahů, údržbová věta, místo práce, hranice rozsahu, privacy-first úklid důkazů, ověření dalším použitím, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OH o první kontrole provozní paměti po uzavření cyklu: výběr prvního běžného použití, sledování cesty k odpovědi, čtyři stavy paměti, nejmenší oprava pracovního místa, privacy-first kontrola důkazů, kontrolní karta, mini workshop a checklist.
