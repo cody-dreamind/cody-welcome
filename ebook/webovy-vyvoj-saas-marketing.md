@@ -112766,8 +112766,270 @@ Stabilizační úprava má jasný výsledek po prvním běžném použití a nez
 
 Ověření stabilizační úpravy je malý konec malé práce. Když dopadne dobře, nic velkého se nestane: pravidlo prostě funguje o kousek lépe a tým ho nemusí řešit. A přesně to je pointa. Nejlepší provozní úpravy nejsou ty, o kterých se dlouho mluví. Jsou to ty, které přestanou překážet.
 
+## Příloha OP: Uzavření potvrzené stabilizační úpravy do běžného rytmu
+
+Příloha ON končí potvrzením, že drobná stabilizační úprava opravdu pomohla při prvním běžném použití. Tím ale práce ještě není úplně hotová. Potvrzená úprava se musí vrátit do normálního provozu tak, aby po ní nezůstal samostatný mini proces, extra karta a další kontrolní kolečko, které už nikdo nepotřebuje.
+
+Uzavírací otázka zní:
+
+```text
+Kde má potvrzená stabilizační úprava žít odteď, aby ji tým používal bez návratu k celé historii opravy?
+```
+
+Výstupem není další dlouhý dokument. Výstupem je krátký uzavírací zápis a upravené kanonické místo:
+
+```text
+Pravidlo:
+Potvrzená stabilizační úprava:
+Kanonické místo:
+Co se přepisuje:
+Co se zavírá:
+Co se vrací do běžného rytmu:
+Dočasné důkazy:
+Další kontrola:
+Vlastník:
+```
+
+Codyho komentář: stabilizace je hotová ve chvíli, kdy ji přestanete oslavovat. Pokud po potvrzení založíte "monitoring stabilizační úpravy", vyrobili jste si malý provozní suvenýr. Hezké na poličce, k ničemu v práci.
+
+### Začněte potvrzeným výsledkem
+
+Neuzavírejte stabilizační úpravu podle dojmu, že "už je to asi lepší". Uzavírá se jen tehdy, když existuje potvrzený výsledek z Přílohy ON:
+
+```text
+Výsledek: Potvrdit
+Původní drobné tření zmizelo při běžném použití pravidla.
+```
+
+Tuto větu použijte jako vstupní bránu. Pokud výsledek zněl `Ještě jednou stabilizovat`, `Vrátit do fronty` nebo `Čeká na ověření`, nepatříte do této přílohy. Nejdřív dokončete předchozí krok.
+
+Praktický příklad:
+
+```text
+Potvrzený výsledek:
+Nápověda u pole "Další kontrola" pomohla rozlišit aktivní a pilotní standard při měsíčním review. Provozní lead vyplnil obě položky bez návratu do staré karty.
+```
+
+Taková věta stačí. Není potřeba přepisovat celou stabilizační kartu ani znovu vysvětlovat, proč úprava vznikla. Historie byla užitečná při rozhodování. Po potvrzení má zůstat hlavně současné pravidlo.
+
+### Upravte stejné kanonické místo
+
+Potvrzená stabilizační úprava má skončit tam, kde tým pravidlo opravdu používá. Ne v poznámce vedle. Ne v chatu. Ne v samostatné kartě, na kterou si někdo možná vzpomene. Pokud se úprava týká nápovědy v indexu standardů, přepište nápovědu v indexu. Pokud se týká checklistu, přepište checklist. Pokud se týká šablony, přepište šablonu.
+
+Dobré uzavření:
+
+```text
+V indexu standardů zůstává u pole "Další kontrola" jedna upravená nápověda:
+"Aktivní standard má datum další běžné kontroly. Pilotní standard má datum pilotního review."
+```
+
+Slabé uzavření:
+
+```text
+Stabilizační karta obsahuje vysvětlení, jak pole chápat.
+```
+
+Slabá varianta nechává užitečné pravidlo mimo pracovní trasu. Člověk pak musí vědět, že nějaká karta existuje. To je přesně typ závislosti na paměti, který provozní standardy nemají vytvářet.
+
+Při přepisu kanonického místa dodržte tři pravidla:
+
+- ponechte jen současný užitečný tvar pravidla;
+- nelepte k němu celý příběh opravy;
+- smažte nebo nahraďte staré formulace, které by mohly vést ke dvojímu výkladu.
+
+Pokud se bojíte smazat starou formulaci, zeptejte se prakticky: pomůže někomu při práci, nebo jen uklidňuje autora změny? Pokud je správně druhá možnost, patří pryč.
+
+### Zavřete stabilizační kartu
+
+Stabilizační karta byla dočasný pracovní nástroj. Pomohla udržet rozsah, ověření a rozhodnutí. Po potvrzení už nemá zůstat jako paralelní zdroj pravdy.
+
+Zavření může být velmi krátké:
+
+```text
+Stav: Uzavřeno
+Výsledek: Potvrzeno při měsíčním review 2026-07-03.
+Kanonické místo: index standardů, pole "Další kontrola".
+Dočasné důkazy: screenshot smazán, zůstal krátký anonymizovaný zápis.
+Další návrat: běžné měsíční review standardů.
+```
+
+Kartu potom přesuňte do archivu, zavřete issue nebo ji nahraďte jednou větou v changelogu kanonického místa. Co přesně zvolíte, záleží na pracovním systému týmu. Důležité je, aby karta po uzavření nepůsobila jako další aktivní úkol.
+
+Signály špatného zavření:
+
+- karta zůstala v aktivní frontě "pro jistotu";
+- kanonické místo nebylo upravené;
+- v systému existují dvě verze pravidla;
+- další kontrola se plánuje jen proto, že karta pořád svítí;
+- dočasné screenshoty a chatové výřezy zůstaly uložené bez důvodu.
+
+Pokud některý signál platí, uzavření ještě nedoběhlo. Nejde o administrativu. Jde o to, aby tým příště nepoužil starou verzi pravidla.
+
+### Vraťte pravidlo do běžného rytmu
+
+Potvrzená stabilizační úprava se nemá hlídat samostatně. Má se kontrolovat v rytmu, ve kterém se kontroluje celé pravidlo: měsíční review, onboardingový průchod, kvartální audit, běžná údržba šablon nebo jiný už existující okamžik.
+
+Správná věta:
+
+```text
+Další návrat: běžné měsíční review provozních standardů.
+```
+
+Příliš těžká věta:
+
+```text
+Další návrat: samostatná kontrola této nápovědy za 14 dní.
+```
+
+Samostatná kontrola dává smysl jen tehdy, když riziko změny přesahuje běžnou drobnou stabilizaci. U jedné nápovědy, pole nebo odkazu je většinou přehnaná. Stabilizace má provoz zklidnit, ne vyrobit nový kalendář.
+
+Když se bojíte, že změna zase začne drhnout, vložte lehký ochranný signál do existujícího rytmu:
+
+```text
+Při měsíčním review si všimnout, zda se lidé vracejí ke staré kartě kvůli poli "Další kontrola".
+```
+
+To je dostačující. Nevyžaduje nový tracker, novou tabulku ani zvláštní report. Jen připomíná, čeho si v běžném rytmu všímat.
+
+### Vedlejší nálezy nechte mimo uzavření
+
+Během ověření se často objeví něco dalšího. Třeba se ukáže, že nápověda funguje, ale index standardů má špatně pojmenovaný filtr. Nebo že nový člověk najde pravidlo správně, ale neví, kde je navazující checklist. Tyto nálezy jsou užitečné, ale nepatří do uzavření potvrzené stabilizační úpravy.
+
+Zapište je odděleně:
+
+```text
+Vedlejší nález:
+Filtr "Archiv" v indexu standardů není srozumitelný pro pilotní položky.
+
+Rozhodnutí:
+Zařadit do údržbové fronty jako samostatný nález. Neotevírat v této stabilizační kartě.
+```
+
+Tím chráníte uzavření před rozpínáním. Jedna potvrzená úprava se zavře. Nové tření dostane vlastní místo. Tým pak ví, co je hotové a co teprve čeká.
+
+Codyho komentář: každá úspěšná oprava je magnet na další "když už jsme tady". To je nejrychlejší cesta, jak z desetiminutové stabilizace udělat malý rekonstrukční projekt. Když už jste tady, hlavně odejděte včas.
+
+### Privacy-first úklid po potvrzení
+
+Po potvrzení stabilizační úpravy zkontrolujte, jaká dočasná stopa vznikla. U drobných provozních změn se často nasbírá víc podkladů, než je po uzavření potřeba: screenshoty, kopie chatu, poznámky z průchodu, exporty z nástroje, osobní komentáře nebo pracovní záznamy s konkrétními jmény.
+
+Privacy-first pravidlo je jednoduché:
+
+```text
+Po potvrzení ponechte nejmenší stopu, která vysvětluje současné rozhodnutí.
+```
+
+Obvykle stačí:
+
+- upravené kanonické místo;
+- jedna věta v changelogu;
+- zavřená karta se stavem, výsledkem a odkazem na kanonické místo;
+- anonymizovaný popis ověření, pokud je potřeba pro budoucí návrat.
+
+Naopak smažte nebo zkraťte:
+
+- screenshoty, které už nic nerozhodují;
+- celé chatové diskuse;
+- osobní hodnocení lidí;
+- duplicitní kopie pravidla;
+- pracovní exporty použité jen pro ověření;
+- dočasné tabulky vytvořené kvůli jedné drobné úpravě.
+
+Příklad dobrého závěru:
+
+```text
+Datová stopa:
+Zůstává upravená nápověda v indexu standardů a jedna anonymizovaná věta v changelogu. Screenshot z ověření smazán po uzavření.
+```
+
+Tím se zachová dohledatelnost bez zbytečného provozního archivu. Privacy-first provoz není jen o externích trackerech. Je i o tom, že interní systém neuchovává víc stop, než potřebuje.
+
+### Uzavírací zápis
+
+```text
+Datum:
+Pravidlo:
+Potvrzená stabilizační úprava:
+Potvrzený výsledek:
+Kanonické místo:
+Co se přepisuje:
+Co se zavírá:
+Vedlejší nálezy:
+Co se vrací do běžného rytmu:
+Dočasné důkazy:
+Další kontrola:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-07-03
+Pravidlo: každý aktivní standard má pole "Další kontrola" a změna data má jednu větu důvodu v changelogu
+Potvrzená stabilizační úprava: nápověda u pole "Další kontrola" rozlišuje aktivní a pilotní standardy
+Potvrzený výsledek: při měsíčním review bylo pole vyplněné u aktivního i pilotního standardu bez návratu do staré karty
+Kanonické místo: index provozních standardů
+Co se přepisuje: nápověda u pole "Další kontrola" zůstává v upraveném tvaru
+Co se zavírá: stabilizační karta k nejasnosti mezi aktivním a pilotním standardem
+Vedlejší nálezy: žádné
+Co se vrací do běžného rytmu: kontrola pole při měsíčním review standardů
+Dočasné důkazy: screenshot smazán, zůstává anonymizovaná věta v changelogu
+Další kontrola: běžné měsíční review
+Vlastník: provozní lead
+```
+
+Příklad s vedlejším nálezem:
+
+```text
+Vedlejší nálezy:
+Filtr archivovaných standardů není jasný při hledání pilotních položek.
+
+Rozhodnutí:
+Zapsáno jako samostatný nález do údržbové fronty. Stabilizační karta k poli "Další kontrola" se tím znovu neotevírá.
+```
+
+Uzavírací zápis má být tak krátký, aby ho někdo dokázal přečíst za minutu a pochopit, kde je platné pravidlo. Pokud se z něj stává kronika, vraťte se k otázce: co bude tým potřebovat při dalším použití?
+
+### Mini workshop na 10 minut
+
+Vezměte jednu stabilizační úpravu, která má po Příloze ON výsledek `Potvrdit`.
+
+1. Opište potvrzený výsledek jednou větou.
+2. Najděte kanonické místo, kde má upravené pravidlo žít.
+3. Přepište jen současný užitečný tvar pravidla.
+4. Zavřete stabilizační kartu nebo issue.
+5. Vedlejší nálezy zapište odděleně, pokud existují.
+6. Určete návrat v běžném rytmu, ne samostatný kontrolní režim.
+7. Smažte nebo zkraťte dočasné důkazy.
+
+Výstup:
+
+```text
+Potvrzená stabilizační úprava je součástí běžného pravidla, dočasná karta je zavřená a nezůstala po ní zbytečná datová stopa.
+```
+
+### Checklist kapitoly
+
+- Má stabilizační úprava potvrzený výsledek z běžného použití?
+- Neuzavíráte změnu jen podle dojmu autora?
+- Je upravené kanonické místo, kde tým pravidlo opravdu používá?
+- Zmizely staré nebo duplicitní formulace pravidla?
+- Zůstává v kanonickém místě současný užitečný tvar, ne celý příběh opravy?
+- Je stabilizační karta zavřená, archivovaná nebo nahrazená krátkým changelogem?
+- Nepůsobí zavřená karta jako další aktivní úkol?
+- Vrací se pravidlo do existujícího provozního rytmu?
+- Nevznikla samostatná kontrola jen kvůli jedné drobné úpravě?
+- Jsou vedlejší nálezy oddělené od uzavření potvrzené stabilizace?
+- Je jasné, kdo vlastní kanonické místo a další běžnou kontrolu?
+- Byly odstraněné screenshoty, chatové výřezy, exporty a osobní poznámky, které už nejsou potřeba?
+- Zůstala jen minimální stopa nutná pro dohledatelnost rozhodnutí?
+- Dokáže nový člověk najít platné pravidlo bez znalosti stabilizační historie?
+
+Uzavření potvrzené stabilizační úpravy je hlavně úklid. Ne ten nudný administrativní, který se dělá proto, aby bylo zaškrtnuto. Ten užitečný: platné pravidlo je na správném místě, staré stopy nepřekážejí, vedlejší nálezy neutíkají zadarmo a tým nemusí vědět, jaká malá oprava tomu předcházela. Prostě použije pravidlo a jde dál.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OP o uzavření potvrzené stabilizační úpravy do běžného rytmu: potvrzený výsledek, přepis kanonického místa, zavření stabilizační karty, návrat do existujícího review rytmu, oddělení vedlejších nálezů, privacy-first úklid dočasných důkazů, uzavírací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha ON o ověření stabilizační úpravy po prvním běžném použití: návrat k původnímu tření, výběr normálního použití, signály nalezení/pochopení/dokončení, rozhodovací stavy, uzavření nebo návrat do fronty, privacy-first ověřovací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OM o převodu drobného tření po kontrole provozního pravidla do jedné stabilizační úpravy: vstupní brána, stabilizační věta, úprava stejného kanonického místa, hranice rozsahu, ověření dalším běžným použitím, privacy-first evidence, stabilizační karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OL o první kontrole provozního pravidla po stabilizaci: ověření při skutečném použití, návrat ke stabilizačnímu zápisu, cesta k pravidlu, čtyři stavy kontroly, hlídání návratu do staré stopy, privacy-first minimum evidence, kontrolní zápis, mini workshop a checklist.
