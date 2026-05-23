@@ -114424,8 +114424,270 @@ Uzavřená údržbová položka byla poprvé zkontrolovaná v běžném rytmu. J
 
 První kontrola běžného rytmu po uzavřené údržbové položce má jednu skromnou ambici: potvrdit, že opravená věc už nepotřebuje zvláštní pozornost. Když drží, nechte ji být. Když drhne, opravte nejbližší pracovní místo. Když otevře nový problém, dejte mu vlastní kartu. Provoz se tím učí jednu důležitou dovednost: nepřenášet starou práci dál jen proto, že se kdysi hodila jako opora.
 
+## Příloha OV: Převod drobné stopy po kontrole běžného rytmu do jedné dočišťovací úpravy
+
+Příloha OU rozlišila čtyři výsledky první kontroly po uzavřené údržbové položce. Tato příloha řeší stav `Drží s drobnou stopou`: práce proběhla normálně, aktuální pravidlo stačilo, ale někde zůstal starý odkaz, nejasný název, archivní poznámka nebo drobný zbytek, který může při příštím průchodu znovu tahat tým do minulosti.
+
+Dočišťovací úprava není nová údržbová položka. Je to malý zásah, který má odstranit poslední tření v cestě k aktuálnímu pracovnímu místu. Pokud z něj uděláte plnohodnotný projekt, provoz se naučí špatnou věc: že i po uzavření se každá drobnost vrací jako další kolečko práce.
+
+Pracovní otázka zní:
+
+```text
+Jakou jednu malou stopu odstraníme, aby další běžné použití už nepotřebovalo starou kartu, starý odkaz ani ruční vysvětlení?
+```
+
+Výstupem je dočišťovací karta:
+
+```text
+Drobna stopa:
+Kde se objevila:
+Aktualni pracovni misto:
+Nejmensi docistovaci uprava:
+Co se neotevira:
+Overeni pri pristim pouziti:
+Datova stopa:
+Vlastnik:
+```
+
+Codyho komentář: drobná stopa je jako cedulka na dveřích, které už nevedou do správné místnosti. Není potřeba přestavět budovu. Stačí cedulku sundat dřív, než podle ní někdo znovu vyrazí.
+
+### Vstupní brána: opravdu jen drobná stopa
+
+Než začnete upravovat, ověřte, že nejde o návrat celé údržbové položky. Stav `Drží s drobnou stopou` platí jen tehdy, když byly současně splněné tři podmínky:
+
+1. Práce šla dokončit podle aktuálního místa.
+2. Stará karta nebo stopa nebyla nutná pro rozhodnutí.
+3. Oprava se vejde do jednoho nejbližšího pracovního místa.
+
+Příklady drobné stopy:
+
+- v indexu zůstal starý odkaz na uzavřenou kartu;
+- aktuální checklist má nejasný název;
+- changelog neříká, od kdy platí nová verze;
+- archivní screenshot není označený jako historický;
+- dočasná poznámka je pořád vidět vedle aktuálního pravidla;
+- v šabloně zůstala jedna věta odkazující na starý postup.
+
+Příklady, které už drobnou stopou nejsou:
+
+- tým bez staré karty neví, co má udělat;
+- existují dvě současně používané verze pravidla;
+- aktuální pracovní místo chybí nebo je prázdné;
+- nová kontrola otevřela jiný provozní problém;
+- oprava vyžaduje změnu rolí, procesu nebo datové mapy.
+
+Když narazíte na druhý typ situace, nepoužívejte tuto přílohu. Vraťte věc do údržby nebo založte samostatný nový nález. Dočištění má být krátké právě proto, že hlavní rozhodnutí už drží.
+
+### Pojmenujte stopu podle místa, ne podle člověka
+
+Dočišťovací úprava má popisovat pracovní místo, kde vzniklo tření. Ne člověka, který na něj narazil.
+
+Slabý zápis:
+
+```text
+Petr zase otevřel starou kartu.
+```
+
+Lepší zápis:
+
+```text
+V indexu standardů zůstal starý odkaz nad aktuálním checklistem.
+```
+
+První věta vyrábí osobní příběh a snadno spustí debatu o pozornosti, disciplíně nebo školení. Druhá věta ukazuje na systémové tření: pracovní trasa nabízí starý odkaz dřív než aktuální místo. To se dá opravit rychle a bez divadla.
+
+U každé drobné stopy napište:
+
+- kde přesně se objevila;
+- jak ovlivnila cestu k aktuálnímu místu;
+- proč nebyla nutná pro dokončení práce;
+- jaký nejmenší zásah ji odstraní.
+
+Tento zápis drží úpravu malou. Pokud neumíte stopu pojmenovat jednou větou, pravděpodobně ještě nevíte, co vlastně čistíte.
+
+### Vyberte jeden typ dočištění
+
+Drobné stopy mívají několik podob. Vyberte jednu, podle které určíte zásah.
+
+`Odkazové dočištění` řeší staré nebo matoucí odkazy.
+
+```text
+Odstranit starý odkaz z indexu a ponechat jen aktuální checklist.
+```
+
+`Názvové dočištění` řeší situaci, kdy správné místo existuje, ale nejde ho snadno poznat.
+
+```text
+Přejmenovat "Review checklist v2" na "Měsíční review provozních standardů".
+```
+
+`Changelogové dočištění` doplní minimální informaci o platnosti změny.
+
+```text
+Doplnit jednu větu: "Od 2026-09-25 se používá jen tento checklist; stará karta je historická."
+```
+
+`Archivní dočištění` označí nebo skryje starý podklad tak, aby nepůsobil jako aktuální návod.
+
+```text
+Označit screenshot jako historický a přesunout ho mimo pracovní část.
+```
+
+`Textové dočištění` odstraní jednu větu, která odkazuje na starý postup.
+
+```text
+V šabloně smazat větu "detaily najdete ve stabilizační kartě" a nahradit ji odkazem na aktuální pravidlo.
+```
+
+Nekombinujte typy jen proto, že jste si při kontrole všimli více věcí. Pokud spolu přímo nesouvisejí, zapište jen hlavní stopu a zbytek nechte jako samostatné nálezy. Dočištění má chránit návrat do běžného rytmu, ne otevřít generální úklid dokumentace.
+
+### Omezte zásah na nejbližší pracovní místo
+
+Dočišťovací úprava má proběhnout tam, kde se stopa objevila. Když starý odkaz zůstal v indexu, opravte index. Když chybí věta v changelogu, opravte changelog. Když se plete název checklistu, přejmenujte checklist.
+
+Neotevírejte kvůli drobné stopě:
+
+- celou architekturu znalostní báze;
+- nový naming systém;
+- revizi všech starých karet;
+- školení týmu;
+- redesign pracovního procesu;
+- další analytiku použití dokumentů.
+
+Hranice rozsahu napište před úpravou:
+
+```text
+Opravujeme jen odkaz v indexu standardů.
+Neotevíráme obsah checklistu, staré údržbové karty ani celou strukturu standardů.
+```
+
+Tato věta není byrokracie. Je to pojistka proti tomu, aby se z malé užitečné opravy stala další fronta práce. Provoz nepotřebuje dokonalé muzeum rozhodnutí. Potřebuje aktuální místo, které člověk najde ve chvíli, kdy má něco udělat.
+
+### Ověřte dalším běžným použitím
+
+Dočištění se neověřuje samostatnou schůzkou. Stačí počkat na další normální použití stejného pracovního místa a zkontrolovat jednu věc: zmizela stopa, kvůli které úprava vznikla?
+
+Ověřovací věta může být krátká:
+
+```text
+Při dalším měsíčním review byl otevřen aktuální checklist z indexu; starý odkaz se už neobjevil.
+```
+
+Pokud dočištění funguje, žádná další akce nevzniká. Pokud stopa zůstává, rozhodněte, jestli:
+
+- šlo jen o špatně provedené dočištění a stačí ho opravit;
+- původní stav nebyl drobná stopa, ale návrat do údržby;
+- vznikl nový nález, který má jít do samostatné fronty.
+
+Nepřidávejte kvůli ověření sledování kliků na dokumenty nebo individuální kontrolu lidí. U tak malé změny obvykle stačí pozorování běžného průchodu, krátká poznámka vlastníka nebo záznam v changelogu.
+
+### Privacy-first dočištění
+
+Drobné dočištění je dobrá příležitost odstranit zbytečné zbytky dat. Zároveň ale nesmí smazat jedinou stopu, která vysvětluje platné rozhodnutí.
+
+Praktické pravidlo:
+
+- aktuální pravidlo nechte dostupné;
+- důvod změny zkraťte na jednu větu;
+- staré podklady označte jako historické nebo je smažte, pokud už nemají účel;
+- osobní komentáře, screenshoty a exporty držte jen tehdy, když mají jasnou retenční potřebu;
+- neukládejte nový důkaz jen proto, že jste dočištění provedli.
+
+Příklad dobrého privacy-first výsledku:
+
+```text
+Index obsahuje jen aktuální checklist. Changelog má jednu větu o změně. Stará karta zůstává uzavřená bez screenshotů a bez osobních komentářů.
+```
+
+Příklad špatného výsledku:
+
+```text
+Ke starému odkazu přibyla nová tabulka s historií použití, seznamem lidí, kteří narazili na problém, a exportem chatu.
+```
+
+Dočištění má datovou stopu zmenšit nebo zpřesnit. Když po něm vznikne víc evidence než před ním, něco se utrhlo ze řetězu.
+
+### Dočišťovací zápis
+
+```text
+Datum:
+Drobna stopa:
+Kde se objevila:
+Proc hlavni rozhodnuti porad drzi:
+Typ docisteni:
+Nejmensi uprava:
+Co se neotevira:
+Overeni pri pristim beznem pouziti:
+Datova stopa po uprave:
+Vlastnik:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-09-28
+Drobna stopa: v indexu standardů zůstal odkaz na starou údržbovou kartu
+Kde se objevila: při měsíčním review provozních standardů
+Proc hlavni rozhodnuti porad drzi: tým dokončil review podle aktuálního checklistu
+Typ docisteni: odkazové dočištění
+Nejmensi uprava: odstranit starý odkaz z indexu a ponechat jen aktuální checklist
+Co se neotevira: nepřepisujeme checklist, nevracíme údržbovou kartu do práce
+Overeni pri pristim beznem pouziti: při dalším měsíčním review se ověří, že index vede rovnou na aktuální checklist
+Datova stopa po uprave: jedna věta v changelogu indexu, bez nových screenshotů
+Vlastnik: provozní lead
+```
+
+Příklad textového dočištění:
+
+```text
+Drobna stopa: šablona pořád říká "podívejte se do stabilizační karty"
+Typ docisteni: textové dočištění
+Nejmensi uprava: nahradit větu odkazem na aktuální pravidlo
+Co se neotevira: neřešíme strukturu celé šablony
+Overeni: při dalším použití šablony člověk otevře aktuální pravidlo bez dotazu v chatu
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu kontrolu se stavem `Drží s drobnou stopou`.
+
+1. Napište jednu větu, proč hlavní rozhodnutí pořád drží.
+2. Pojmenujte drobnou stopu podle pracovního místa, kde vznikla.
+3. Vyberte typ dočištění: odkazové, názvové, changelogové, archivní nebo textové.
+4. Napište nejmenší zásah v jednom místě.
+5. Napište, co se kvůli tomu neotevírá.
+6. Proveďte úpravu v kanonickém pracovním místě.
+7. Zmenšete nebo zpřesněte datovou stopu po staré údržbě.
+8. Určete další běžné použití, při kterém se ověří, že stopa zmizela.
+
+Výstup:
+
+```text
+Drobna stopa po kontrole běžného rytmu byla převedená do jedné malé dočišťovací úpravy. Hlavní rozhodnutí zůstává uzavřené, stará údržbová položka se znovu neotevírá a další ověření proběhne v normálním rytmu.
+```
+
+### Checklist kapitoly
+
+- Je jasné, že hlavní rozhodnutí pořád drží?
+- Jde opravdu o drobnou stopu, ne o návrat celé údržbové položky?
+- Je stopa popsaná podle pracovního místa, ne podle člověka?
+- Je vybraný jeden typ dočištění?
+- Proběhne úprava v nejbližším kanonickém místě?
+- Je napsané, co se kvůli tomu neotevírá?
+- Nevzniká z dočištění nová velká revize dokumentace?
+- Je ověření navázané na další běžné použití?
+- Nepřidává ověření nové sledování lidí nebo kliků?
+- Zmenšuje nebo zpřesňuje úprava zbytkovou datovou stopu?
+- Jsou staré screenshoty, exporty nebo osobní komentáře odstraněné, zkrácené nebo jasně označené?
+- Zůstává aktuální pravidlo dohledatelné bez staré karty?
+- Je vlastník úpravy jasný?
+- Je jasné, kdy by se věc místo dočištění vrátila do údržby?
+
+Drobné dočištění je dobré právě tehdy, když po něm není moc co vyprávět. Starý odkaz zmizel, název je jasnější, changelog říká minimum potřebného a tým při dalším použití nezakopne o minulost. To je nenápadná práce, ale v provozu má vysokou hodnotu: snižuje tření bez toho, aby vyráběla další vrstvu řízení.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OV o převod drobné stopy po kontrole běžného rytmu do jedné dočišťovací úpravy: vstupní brána pro stav Drží s drobnou stopou, pojmenování podle pracovního místa, typy dočištění, omezení zásahu na nejbližší kanonické místo, ověření dalším běžným použitím, privacy-first úklid datové stopy, zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OU o první kontrolu běžného rytmu po uzavřené údržbové položce: kontrola při skutečném použití, cesta k aktuálnímu místu, návrat staré stopy, čtyři výsledky kontroly, privacy-first úklid zbytkových podkladů, kontrolní zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OT o uzavření potvrzené údržbové položky do běžného rytmu: potvrzený výsledek, kanonické místo, zavření údržbové karty, návrat do běžného rytmu, úklid starých stop, privacy-first uzavření, uzavírací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OS o ověření údržbové položky po dalším běžném použití: návrat k původnímu nálezu, kontrola normálního průchodu, čtyři výsledky ověření, privacy-first ověřovací stopa, ověřovací zápis, mini workshop a checklist.
