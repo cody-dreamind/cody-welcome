@@ -110938,8 +110938,315 @@ Víme, jestli uzavřený cyklus funguje jako použitelná provozní paměť, a m
 
 První kontrola provozní paměti nemá dokazovat, že tým dokumentuje dost. Má ukázat, jestli se potvrzená práce dá použít v normálním dni. Pokud ano, nechte ji být. Pokud ne, opravte nejbližší místo, které člověka zdrželo. Provozní paměť je dobrá tehdy, když je méně vidět než práce, kterou umožňuje.
 
+## Příloha OI: Převod první kontroly provozní paměti do jedné údržbové úpravy
+
+Příloha OH končí kontrolním stavem provozní paměti. Někdy je výsledek příjemně nudný: zápis drží, člověk našel odpověď a nic dalšího není potřeba. Často ale kontrola ukáže malé tření. Sloupec se jmenuje moc obecně, aktivní checklist odkazuje do staré karty, důvod změny je schovaný v poznámce nebo kanonické místo sice existuje, ale člověk se k němu nedostane z běžné pracovní trasy.
+
+Tato příloha řeší právě ten okamžik. Nejde o novou velkou revizi dokumentace. Jde o převod jednoho zjištění z první kontroly do jedné malé údržbové úpravy, která sníží opakované hledání, neotevře starou historii a nezvětší datovou stopu.
+
+Otázka této přílohy:
+
+```text
+Jaký nejmenší zásah do provozní paměti odstraní konkrétní tření z první kontroly, aniž bychom znovu otevřeli celý uzavřený cyklus?
+```
+
+Výstupem je údržbová karta:
+
+```text
+Vstup z kontroly:
+Stav provozní paměti:
+Konkrétní tření:
+Údržbová věta:
+Místo zásahu:
+Co upravíme:
+Co výslovně neotevíráme:
+Datová stopa:
+Ověření:
+Vlastník:
+```
+
+Codyho komentář: nejnebezpečnější věta po kontrole zní "když už jsme u toho". V tu chvíli se z jedné opravy názvu sloupce stává reforma celé znalostní báze, tři schůzky a nový dokument s názvem "návrh procesu". Ano, přesně takhle vzniká interní archeologie.
+
+### Vstup berte jen ze skutečného tření
+
+Do údržbové úpravy nepřevádějte všechno, co někoho napadne při čtení kontrolní karty. Vstupem má být jen konkrétní tření z reálného použití:
+
+- člověk začal ve špatném místě, protože běžná trasa neodkazuje na kanonický zdroj;
+- našel správný záznam, ale nerozuměl dalšímu kroku;
+- musel otevřít zavřenou kartu, protože kanonické místo neobsahuje důvod rozhodnutí;
+- použil starý checklist, protože aktivní materiál neukazuje, která verze platí;
+- kvůli dohledání odpovědi vznikla nová kopie nebo screenshot, který zbytečně zvětšuje datovou stopu.
+
+Slabý vstup:
+
+```text
+Dokumentace by mohla být přehlednější.
+```
+
+Použitelný vstup:
+
+```text
+Při měsíčním review člověk nenašel datum další kontroly v indexu, protože je schované v poli "Poznámka" a aktivní checklist ho vede do staré uzavírací karty.
+```
+
+Rozdíl je v tom, že druhý vstup ukazuje místo, okamžik i opakovatelnou cenu. Díky tomu jde udělat malý zásah bez dohadování, jestli se má přepsat celá struktura.
+
+### Vyberte typ údržbové úpravy
+
+Většina nálezů z první kontroly provozní paměti spadá do jedné z pěti úprav:
+
+```text
+Přejmenovat:
+Název sloupce, sekce, karty nebo odkazu neříká, k čemu slouží.
+
+Doplnit:
+Chybí jedna věta, stav, datum, vlastník nebo odkaz na zdroj pravdy.
+
+Přesunout:
+Správná informace existuje, ale není v místě, kde ji člověk při práci hledá.
+
+Odpojit:
+Aktivní materiál pořád vede do zavřené karty, chatu, screenshotu nebo starého exportu.
+
+Označit:
+Stará stránka nebo karta musí být jasně označená jako archiv, aby nepůsobila jako platná verze.
+```
+
+Příklad třídění:
+
+```text
+Konkrétní tření:
+Datum další kontroly je v poznámce a člověk ho při review přehlédl.
+
+Typ úpravy:
+Přesunout a lehce přejmenovat.
+
+Úprava:
+V indexu standardů vytvořit samostatné pole "Další kontrola" a z poznámky odstranit datum.
+```
+
+Pokud nález vyžaduje víc než jeden typ úpravy, vyberte ten, který odstraní hlavní návrat do staré stopy. Ostatní zapište do "co neotevíráme" nebo do samostatné fronty. Jedna údržbová úprava má mít jeden hlavní účinek.
+
+### Napište údržbovou větu
+
+Údržbová věta převádí nález do práce. Má být konkrétní, malá a ověřitelná:
+
+```text
+Aby [role / situace] nemusela [konkrétní obcházení], upravíme [jedno místo] tak, že [malá změna].
+```
+
+Příklady:
+
+```text
+Aby provozní lead při měsíčním review nemusel otevírat zavřenou kartu OG-014, doplníme do changelogu indexu jednu větu s důvodem poslední změny.
+```
+
+```text
+Aby nový člověk při onboardingovém průchodu nebral archivní checklist jako platný, přidáme na starou stránku stav "Archiv" a odkaz na aktuální onboardingovou trasu.
+```
+
+```text
+Aby se při kontrole kampaně nevytvářely nové screenshoty jen kvůli důkazu, nahradíme odkaz na export jednou anonymizovanou souhrnnou větou v kontrolní kartě.
+```
+
+Špatná údržbová věta:
+
+```text
+Zlepšíme navigaci a sjednotíme dokumentaci.
+```
+
+To je znovu přání, ne práce. Kdyby taková věta prošla do úkolu, nikdo nebude vědět, kde skončit. A když nevíte, kde skončit, údržba se tváří jako strategie. To je drahý kostým.
+
+### Zasahujte v místě práce
+
+Nejlepší údržbová úprava není vždy v dokumentu, kde vznikl původní cyklus. Je v místě, kde člověk při normální práci hledal odpověď.
+
+Možná místa zásahu:
+
+- kanonický index;
+- aktivní checklist;
+- onboardingová trasa;
+- changelog;
+- šablona review;
+- provozní karta;
+- interní rozcestník;
+- archivní stránka, která se pořád plete pod ruce.
+
+Příklad:
+
+```text
+Nález:
+Člověk našel správné rozhodnutí až v uzavírací kartě.
+
+Špatné místo zásahu:
+Přepsat uzavírací kartu detailněji.
+
+Lepší místo zásahu:
+Doplnit do aktivního indexu jednu větu "Platné rozhodnutí" a odkaz na aktuální pole.
+```
+
+Uzavírací karta může zůstat jako historie. Aktivní práce ale potřebuje současný signál. Pokud opravíte jen historický dokument, tým se bude do historie vracet dál. To je přesný opak provozní paměti.
+
+### Omezte rozsah nahlas
+
+Každá údržbová karta má mít sekci "Co výslovně neotevíráme". Není to formalita. Je to brzda proti tomu, aby malá oprava začala polykat sousední témata.
+
+Příklad:
+
+```text
+Co výslovně neotevíráme:
+Neměníme strukturu všech standardů, nepřepisujeme onboardingovou trasu, nepřidáváme nové měření používání dokumentace a neotevíráme starší ověřovací karty.
+```
+
+Dobrá hranice se pozná podle toho, že někomu trochu uleví. Znamená to, že tým ví, které lákavé odbočky teď nemusí řešit. Údržba má snižovat provozní tření, ne vytvářet katalog všech nedokonalostí.
+
+Pokud se při práci objeví další důležitý nález, zapište ho samostatně:
+
+```text
+Vedlejší nález:
+Onboardingová trasa odkazuje na starý název indexu.
+
+Stav:
+Samostatná položka do údržbové fronty, ne součást této úpravy.
+```
+
+Tím chráníte jak původní úpravu, tak budoucí nález. Když se všechno slepí do jedné karty, nic nejde pořádně ověřit.
+
+### Privacy-first kontrola údržbové úpravy
+
+Údržba provozní paměti často svádí k tomu, že se do dokumentace přidá víc důkazů, aby "bylo jasno". U privacy-first provozu má platit opačný instinkt: přidejte jen tolik kontextu, kolik stačí k rozhodnutí.
+
+Před úpravou zkontrolujte:
+
+- Nepřidáváme do aktivního místa jména lidí, zákazníků nebo detailní interní situace?
+- Nenahrazujeme jednu starou dočasnou stopu dvěma novými?
+- Nestačí anonymizovaná souhrnná věta místo screenshotu, exportu nebo citace z chatu?
+- Nezůstává archivní karta přístupná širšímu publiku, než potřebuje?
+- Má úprava jasné pravidlo, které dočasné důkazy se mažou nebo nechávají jen jako interní historie?
+
+Privacy-first údržbová věta:
+
+```text
+Do aktivního indexu doplníme anonymizovaný důvod změny. Odkaz na screenshot z kontroly odstraníme, protože pro další práci stačí souhrnná věta.
+```
+
+Slabá varianta:
+
+```text
+Do indexu přidáme celý screenshot z review, aby bylo jasné, co se stalo.
+```
+
+Transparentnost neznamená skladovat všechno. Znamená to, že člověk rozumí platnému rozhodnutí a umí ho použít. Zbytek je často jen budoucí úklid převlečený za pečlivost.
+
+### Ověřte úpravu jedním dalším použitím
+
+Po provedení údržbové úpravy nepotřebujete velký audit. Stačí nejbližší normální použití stejné pracovní trasy.
+
+Ověřovací otázka:
+
+```text
+Našel člověk při dalším běžném použití platnou odpověď bez návratu do stopy, která byla předmětem opravy?
+```
+
+Tři možné výsledky:
+
+```text
+Potvrdit:
+Úprava odstranila konkrétní tření. Kartu zavřít a ponechat jen stručný záznam.
+
+Ještě jednou drobně doladit:
+Hlavní směr pomohl, ale popisek, odkaz nebo pořadí informací pořád zdržuje. Povolit jen jednu další malou úpravu.
+
+Vrátit do údržbové fronty:
+Ukázalo se, že problém není lokální. Zapsat samostatnou položku a neprodlužovat původní kartu.
+```
+
+Příklad ověření:
+
+```text
+Ověření:
+Při dalším měsíčním review našel provozní lead datum v poli "Další kontrola" a důvod změny v changelogu indexu. Neotevřel uzavírací kartu. Stav: potvrdit.
+```
+
+Když ověření dopadne dobře, nezakládejte další kontrolu jen ze zvyku. Stačí uzavřít kartu a nechat úpravu žít v normálním rytmu. Proces, který si pořád říká o pozornost, ještě není uklizený.
+
+### Údržbová karta
+
+```text
+Datum:
+Vstup z kontroly:
+Stav provozní paměti:
+Konkrétní tření:
+Typ úpravy:
+Údržbová věta:
+Místo zásahu:
+Co upravíme:
+Co výslovně neotevíráme:
+Vedlejší nálezy:
+Datová stopa:
+Ověření:
+Vlastník:
+Stav po ověření:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-23
+Vstup z kontroly: první běžné použití uzavřeného cyklu OG-014
+Stav provozní paměti: drží s drobným třením
+Konkrétní tření: datum další kontroly je schované v poznámce a důvod změny je jen v uzavírací kartě
+Typ úpravy: přesunout a doplnit
+Údržbová věta: Aby provozní lead při měsíčním review nemusel otevírat uzavírací kartu, přesuneme datum do pole "Další kontrola" a do changelogu indexu doplníme jednu větu s důvodem změny.
+Místo zásahu: index týmových standardů a jeho changelog
+Co upravíme: jedno pole v indexu, jedna věta v changelogu, odstranění odkazu na uzavírací kartu z aktivního checklistu
+Co výslovně neotevíráme: strukturu všech standardů, onboardingovou trasu, historické karty a měření používání dokumentace
+Vedlejší nálezy: starší onboardingová stránka pořád používá starý název indexu, zapsat jako samostatnou údržbovou položku
+Datová stopa: ponechat jen anonymizovanou souhrnnou větu, screenshot z kontroly smazat
+Ověření: při dalším měsíčním review zkontrolovat, jestli člověk otevře jen index a changelog
+Vlastník: provozní lead
+Stav po ověření: doplní se po dalším použití
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu kontrolní kartu z Přílohy OH se stavem "Drží s drobným třením", "Vrací dočasné stopy" nebo "Nedrží".
+
+1. Pojmenujte konkrétní tření jednou větou.
+2. Vyberte typ úpravy: přejmenovat, doplnit, přesunout, odpojit nebo označit.
+3. Najděte nejbližší místo práce, kde má úprava proběhnout.
+4. Napište údržbovou větu ve formátu "Aby... upravíme...".
+5. Zapište, co se výslovně neotevírá.
+6. Rozhodněte, jakou dočasnou nebo citlivou stopu lze odstranit, anonymizovat nebo nechat jen jako interní historii.
+7. Určete jedno další běžné použití, na kterém se úprava ověří.
+8. Zapište vlastníka a stav po ověření.
+
+Výstup:
+
+```text
+Z prvního tření provozní paměti vznikla jedna malá údržbová úprava s jasným místem zásahu, hranicí rozsahu a privacy-first úklidem důkazů.
+```
+
+### Checklist kapitoly
+
+- Vychází úprava z reálného použití, ne z obecného pocitu?
+- Je konkrétní tření popsané jednou větou?
+- Je vybraný jeden hlavní typ úpravy?
+- Směřuje zásah do místa, kde člověk skutečně pracoval?
+- Má úprava jasnou větu "Aby... upravíme..."?
+- Je zapsané, co se výslovně neotevírá?
+- Nelepí se vedlejší nálezy k původní kartě?
+- Odstraňuje úprava návrat do zavřené karty, chatu, screenshotu nebo exportu?
+- Stačí pro další práci anonymizovaný souhrn místo citlivého důkazu?
+- Je ověření navázané na jedno další běžné použití?
+- Je jasné, kdy kartu potvrdit, jednou drobně doladit nebo vrátit do údržbové fronty?
+- Nevzniká kvůli malé opravě nový trvalý reporting, který nikdo nepotřebuje?
+
+Převod kontroly do údržbové úpravy je dobrý tehdy, když zmenší budoucí hledání. Ne když přidá další vrstvu evidence. Pokud člověk při dalším použití najde platnou odpověď bez návratu do historie, úprava splnila účel. Zavřete ji a nechte provozní paměť dělat to, kvůli čemu existuje: šetřit pozornost.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OI o převodu první kontroly provozní paměti do jedné údržbové úpravy: vstup ze skutečného tření, typy zásahů, údržbová věta, místo práce, hranice rozsahu, privacy-first úklid důkazů, ověření dalším použitím, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OH o první kontrole provozní paměti po uzavření cyklu: výběr prvního běžného použití, sledování cesty k odpovědi, čtyři stavy paměti, nejmenší oprava pracovního místa, privacy-first kontrola důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OG o uzavření ověřeného dalšího cyklu do provozní paměti: rozhodnutí po ověření, přepis jednoho kanonického místa, zavření dočasných karet, práce s vedlejšími nálezy, privacy-first úklid důkazů, uzavírací karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OF o ověření dalšího cyklu po převedeném nálezu: návrat k původnímu slibu, ověření v normálním použití, rozlišení lokálního doladění, diagnostiky a nového nálezu, hledání návratu staré ruční práce, privacy-first ověřovací stopa, karta, mini workshop a checklist.
