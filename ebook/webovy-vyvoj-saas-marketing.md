@@ -312,6 +312,107 @@ Codyho komentář: nejlepší karta změny je skoro nudná. Jedna otázka, jedna
 
 Pokud se karta nevejde na jednu obrazovku, zkraťte změnu, ne písmo. Smyslem rukopisu není vyrábět další administrativu. Smyslem je dostat dobrý princip do jedné konkrétní změny, kterou tým zvládne použít.
 
+## První úkol z karty změny
+
+Karta změny je dobrý mezikrok, ale sama ještě nic nezmění. Aby rukopis nezůstal jen u přemýšlení, převeďte kartu do prvního úkolu během stejné pracovní chvíle. Ne až "někdy na plánování". Ne až po dalším čtení. Hned po uzavření karty vznikne jeden úkol, který má výsledek, vlastníka, hranici a termín ověření.
+
+První úkol nemá obsáhnout celou změnu. Má otevřít nejmenší dveře, za kterými se ukáže, jestli změna dává smysl. Pokud karta říká "zlepšíme kvalitu leadů", první úkol není "předělat lead generation". První úkol může být "přepsat text u formuláře tak, aby jasně říkal, pro koho konzultace je a pro koho není". To je zásah, který se dá udělat, zkontrolovat a vrátit.
+
+Převod karty do úkolu má pět kroků:
+
+1. Vyberte jedno místo zásahu: stránku, formulář, šablonu, automatizaci, onboardingový krok nebo obchodní materiál.
+2. Napište sloveso: přepsat, odstranit, přesunout, zkrátit, doplnit, ověřit, vypnout nebo sloučit.
+3. Popište hotovo jednou větou.
+4. Zapište, co se úkolem nesmí rozšířit.
+5. Přidejte ověření, které používá existující práci a nepřidává zbytečné sledování.
+
+Šablona prvního úkolu:
+
+```text
+Karta změny:
+První úkol:
+Místo zásahu:
+Hotovo znamená:
+Vlastník:
+Termín:
+Ověření:
+Mimo rozsah:
+Datová stopa:
+```
+
+Příklad:
+
+```text
+Karta změny:
+Oddělit veřejný checklist od obchodního kontaktu.
+
+První úkol:
+Přepsat blok pod stažením checklistu na dobrovolnou pozvánku ke konzultaci.
+
+Místo zásahu:
+Landing page checklistu.
+
+Hotovo znamená:
+Text jasně říká, komu konzultace pomůže, co se stane po odeslání a že stažení checklistu není podmíněné kontaktem.
+
+Vlastník:
+Marketing owner.
+
+Termín:
+Do pátku.
+
+Ověření:
+Při příštím týdenním review projdeme nové poptávky z této stránky a ručně označíme, jestli odpovídají cílovému segmentu.
+
+Mimo rozsah:
+Neměníme celý formulář, CRM workflow ani newsletter.
+
+Datová stopa:
+Nepřidáváme nový tracker. Sledujeme jen existující odeslání formuláře a ruční kvalitu navazujícího rozhovoru.
+```
+
+První úkol má být dost konkrétní, aby ho šlo zadat bez další porady. Pokud se u zadání objeví věta "nejdřív musíme domyslet strategii", úkol je moc široký. Vraťte se k místu zásahu a vyberte menší část: jeden odstavec místo celé stránky, jedno pole místo celého formuláře, jednu automatizaci místo celého procesu.
+
+### Úkol nesmí schovat rozhodnutí
+
+Častá chyba je převést rozhodnutí do obecné aktivity. "Zlepšit copy", "podívat se na analytiku", "zkontrolovat privacy" nebo "udělat návrh" zní pracovně, ale často jen odkládá skutečné rozhodnutí. Úkol má říct, jaká změna se stane ve světě:
+
+- odstranit telefon z prvního formuláře;
+- přesunout cenu nebo cenové rozpětí nad FAQ;
+- přidat ke case study konkrétní rozhodovací kontext zákazníka;
+- vypnout nepoužívaný skript na landing page;
+- zkrátit onboardingový e-mail na jeden další krok;
+- sloučit dvě duplicitní interní šablony do jedné kanonické.
+
+Když úkol popisuje jen analýzu, přidejte k němu výstup: rozhodovací větu, seznam položek k vypnutí, návrh textu, porovnání dvou variant nebo doporučení "ponechat, upravit, odstranit". Analýza bez výstupu je často jen elegantní způsob, jak vyrábět další mlhu. A mlha je fajn na horách, ne v backlogu.
+
+### Privacy-first brána před zadáním
+
+Před vytvořením úkolu se zastavte u datové stopy. Položte tři otázky:
+
+- Musíme kvůli úkolu sbírat nový údaj?
+- Předáváme něco novému dodavateli, nástroji nebo člověku?
+- Prodloužíme retenci, vytvoříme export nebo přidáme oprávnění?
+
+Pokud je odpověď ano, úkol potřebuje datovou poznámku. Ne právnický román, jen jasné vysvětlení: jaký údaj vzniká, proč je nutný, kde žije, kdo k němu má přístup a kdy zmizí. Pokud odpověď neumíte napsat jednoduše, změna pravděpodobně ještě není připravená.
+
+Codyho komentář: nejzdravější úkoly často vypadají nenápadně. Méně polí, méně skriptů, kratší text, jasnější slib, lepší místo pro důkaz. Velké výsledky se v digitálním provozu často neskládají z velkých gest, ale z malých změn, které přestanou překážet zákazníkovi i týmu.
+
+### Checklist prvního úkolu
+
+- Vznikl úkol ve stejné pracovní chvíli jako karta změny?
+- Má úkol jedno konkrétní místo zásahu?
+- Začíná jasným slovesem?
+- Je definice hotovo ověřitelná bez další interpretace?
+- Je zapsané, co se úkolem nesmí rozšířit?
+- Má úkol vlastníka a termín?
+- Používá ověření existující pracovní signály místo nového sledování?
+- Je datová stopa stejná nebo menší než před změnou?
+- Pokud vzniká nový údaj nebo přístup, je popsán účel, místo, vlastník a retence?
+- Dá se úkol zadat člověku bez další strategické porady?
+
+Hotový první úkol je most mezi čtením a provozem. Když vznikne, kapitola přestane být inspirace a začne být malá změna systému. Přesně tam se pozná, jestli e-book pomáhá práci, nebo jen hezky zabírá místo v záložkách.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -111744,6 +111845,7 @@ Uzavření potvrzené údržbové úpravy je malý, ale důležitý okamžik. Pr
 
 ## Pracovní log
 
+- 2026-05-23: Doplněna úvodní sekce První úkol z karty změny: převod čtenářské karty do jednoho zadatelného úkolu, šablona, příklad pro checklist a konzultaci, ochrana rozsahu, privacy-first brána, Codyho komentář a checklist.
 - 2026-05-23: Doplněna Příloha OK o uzavření potvrzené údržbové úpravy do provozního pravidla: potvrzené rozhodnutí, kanonické místo, pracovní tvar pravidla, zavření údržbové karty, privacy-first úklid dočasných důkazů, další lehká kontrola, stabilizační zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OJ o ověření údržbové úpravy po dalším běžném použití: návrat k původnímu tření, ověření v normální pracovní trase, tři rozhodovací stavy, sledování návratu do staré stopy, privacy-first minimum evidence, ověřovací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OI o převodu první kontroly provozní paměti do jedné údržbové úpravy: vstup ze skutečného tření, typy zásahů, údržbová věta, místo práce, hranice rozsahu, privacy-first úklid důkazů, ověření dalším použitím, karta, mini workshop a checklist.
