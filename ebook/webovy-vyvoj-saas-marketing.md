@@ -110706,8 +110706,241 @@ Ověřený další cyklus je propsaný do jednoho kanonického místa, dočasné
 
 Uzavření ověřeného cyklu je malý akt disciplíny. Nejde o další dokument pro radost z dokumentů. Jde o to, aby potvrzená práce přestala být rozpracovaná, vedlejší nálezy nepřisedly na starou kartu a tým měl jedno místo, kde platí aktuální pravda. Provozní paměť má práci zrychlovat. Pokud ji musíte luštit, už začala pracovat proti vám.
 
+## Příloha OH: První kontrola provozní paměti po uzavření cyklu
+
+Příloha OG řeší, jak uzavřený cyklus zapsat do provozní paměti. Tato příloha řeší další malý, ale důležitý krok: ověřit, jestli se ten zápis po prvním normálním použití opravdu chová jako paměť, ne jako další archivní vrstva.
+
+Provozní paměť je užitečná jen tehdy, když člověku zkrátí cestu k rozhodnutí. Pokud musí hledat ve třech kartách, ptát se v chatu a porovnávat starý screenshot s novým indexem, uzavření sice proběhlo formálně, ale prakticky selhalo. Kontrola po uzavření proto nesleduje, jestli tým "dodržel proces". Sleduje, jestli platná informace přežila první běžné použití.
+
+Otázka této přílohy:
+
+```text
+Najde člověk při první běžné práci platné rozhodnutí rychle, ve správném místě a bez návratu k dočasným stopám?
+```
+
+Výstupem je kontrolní zápis:
+
+```text
+Uzavřený cyklus:
+Kanonické místo:
+První běžné použití:
+Co člověk hledal:
+Kde to našel:
+Co musel obejít:
+Stav provozní paměti:
+Nejmenší oprava:
+Datová stopa kontroly:
+Vlastník:
+Další návrat:
+```
+
+Codyho komentář: uzavření práce je jako uklizený pracovní stůl. Vypadá dobře v pátek odpoledne. Pravda se ukáže až v pondělí ráno, když někdo potřebuje něco rychle najít a nemá náladu obdivovat váš systém štítků.
+
+### Kontrolujte první normální hledání
+
+Neplánujte slavnostní audit. Vezměte první situaci, kdy někdo skutečně potřebuje použít informaci z uzavřeného cyklu: připravuje review, upravuje šablonu, předává práci novému člověku, odpovídá na otázku zákazníka nebo kontroluje provozní checklist.
+
+Dobrá kontrolní situace:
+
+```text
+Při měsíčním review potřeboval provozní lead zjistit, kdy se má znovu kontrolovat index standardů.
+```
+
+Slabá kontrolní situace:
+
+```text
+Otevřeli jsme dokument a podívali se, jestli tam zápis je.
+```
+
+Rozdíl je podstatný. Existence zápisu ještě neznamená použitelnost. Provozní paměť musí fungovat ve chvíli, kdy má člověk vlastní úkol, časový tlak a omezenou pozornost. Pokud obstojí jen při klidném čtení dokumentace, je to spíš knihovna než pracovní nástroj.
+
+### Sledujte cestu k odpovědi
+
+Při kontrole se neptejte jen "našel to?". Zapište krátkou trasu:
+
+```text
+Hledal:
+Platné pravidlo pro další kontrolu indexu.
+
+Nejdřív otevřel:
+Kanonický index standardů.
+
+Potom musel:
+Kliknout do staré ověřovací karty, protože název sloupce nebyl jasný.
+
+Výsledek:
+Informaci našel, ale pořád se opřel o dočasnou kartu.
+```
+
+Tohle je cennější než obecná poznámka "trochu to drhlo". Ukazuje, kde provozní paměť selhala: ne v samotném rozhodnutí, ale v popisku nebo odkazu, který člověka poslal zpět do přechodové stopy.
+
+Sledujte hlavně čtyři signály:
+
+- člověk začne ve správném kanonickém místě;
+- rozumí názvu, stavu a dalšímu kroku bez vysvětlování;
+- nepotřebuje otevřít zavřené karty, chat ani screenshoty;
+- umí podle zápisu udělat další pracovní rozhodnutí.
+
+Pokud jeden signál chybí, neznamená to, že celý systém je špatně. Znamená to, že má nejspíš stačit malá oprava nejbližšího pracovního místa.
+
+### Rozlišujte čtyři stavy paměti
+
+Po prvním použití zařaďte výsledek do jednoho ze čtyř stavů:
+
+```text
+Drží:
+Platné rozhodnutí je nalezené ve správném místě a stačí pro práci.
+
+Drží s drobným třením:
+Rozhodnutí je správně, ale popisek, odkaz nebo pořadí informací zdržuje.
+
+Vrací dočasné stopy:
+Člověk se musí opřít o zavřenou kartu, chat, screenshot nebo starou poznámku.
+
+Nedrží:
+Kanonické místo nevede k použitelnému rozhodnutí nebo ukazuje jinou pravdu než uzavírací karta.
+```
+
+Příklad:
+
+```text
+Stav provozní paměti:
+Drží s drobným třením. Platné rozhodnutí je v indexu, ale sloupec "Poznámka" skrývá datum další kontroly. Stačí přejmenovat sloupec nebo datum přesunout do samostatného pole.
+```
+
+Jiný příklad:
+
+```text
+Stav provozní paměti:
+Vrací dočasné stopy. Člověk otevřel zavřenou ověřovací kartu, protože index neobsahuje důvod změny ani odkaz na changelog.
+```
+
+Stav pojmenujte tvrdě, ale bez obviňování. Kontrolujete systém, ne paměť člověka. Když někdo hledá ve staré kartě, většinou to není lenost. Je to signál, že kanonické místo nedává dost jistoty.
+
+### Opravujte nejbližší pracovní místo
+
+Kontrola provozní paměti snadno svádí k velké reorganizaci dokumentace. Nedělejte ji automaticky. První oprava má být co nejmenší a co nejblíž místu, kde člověk pracoval.
+
+Typické malé opravy:
+
+- přejmenovat nejasný sloupec;
+- doplnit jednu větu aktuálního rozhodnutí;
+- přidat odkaz z onboardingové trasy na kanonické místo;
+- odstranit odkaz na zavřenou kartu z aktivního checklistu;
+- přesunout datum další kontroly z poznámky do samostatného pole;
+- označit starou stránku jako archiv a přidat odkaz na nový zdroj pravdy.
+
+Opravná věta:
+
+```text
+Aby se člověk při měsíčním review nemusel vracet do zavřené ověřovací karty, přesuneme důvod změny do jedné věty v changelogu indexu a z aktivního checklistu odstraníme starý odkaz.
+```
+
+Tato věta má dvě dobré vlastnosti: říká, komu změna pomůže, a zároveň omezuje rozsah. Neotevírá celý index, všechny šablony ani nový review proces. Jen odstraní konkrétní návrat do dočasné stopy.
+
+### Privacy-first kontrola provozní paměti
+
+Provozní paměť často obsahuje souhrny rozhodnutí, odkazy na příklady a někdy i důkazy z reálné práce. Po prvním použití zkontrolujte, jestli se kvůli dohledatelnosti nezačínají znovu hromadit citlivé podklady.
+
+Položte si otázky:
+
+- Stačí pro pochopení rozhodnutí souhrnná věta bez jmen a detailů?
+- Nevrací aktivní checklist lidi do chatu, screenshotu nebo exportu s osobními údaji?
+- Není stará ověřovací karta pořád veřejněji přístupná, než je potřeba?
+- Má kanonické místo jen takové příklady, které mohou zůstat dlouhodobě?
+- Je jasné, kdy se dočasné důkazy mažou, archivují nebo anonymizují?
+
+Dobrá privacy-first oprava:
+
+```text
+Z aktivního checklistu odstraňujeme odkaz na screenshot review. Do changelogu doplňujeme anonymizovanou větu: "Datum další kontroly je samostatné pole, protože při měsíčním review se ztrácelo v poznámce."
+```
+
+Špatná oprava:
+
+```text
+Ke každému rozhodnutí přidáme kompletní záznam z chatu, aby bylo jasné, jak jsme k němu došli.
+```
+
+Historie má vysvětlit rozhodnutí, ne uchovávat celou cestu včetně citlivého balastu. Pokud se bez detailu obejdete, nechte ho zmizet. Digitální hygiena je nudná jen do chvíle, než někdo musí uklízet tři roky staré exporty.
+
+### Kontrolní karta provozní paměti
+
+```text
+Datum:
+Uzavřený cyklus:
+Kanonické místo:
+První běžné použití:
+Co člověk hledal:
+Kde začal:
+Kde našel platnou odpověď:
+Co musel obejít:
+Stav provozní paměti:
+Nejmenší oprava:
+Co se neotevírá:
+Datová stopa kontroly:
+Vlastník:
+Další návrat:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-23
+Uzavřený cyklus: OG-014, uzavření změny pole další kontroly v indexu standardů
+Kanonické místo: index týmových standardů
+První běžné použití: příprava měsíčního review
+Co člověk hledal: datum další kontroly a důvod poslední změny
+Kde začal: index standardů
+Kde našel platnou odpověď: datum našel v indexu, důvod až v uzavírací kartě
+Co musel obejít: otevřel zavřenou kartu OG-014
+Stav provozní paměti: drží s drobným třením
+Nejmenší oprava: přidat jednu anonymizovanou větu do changelogu indexu a z aktivního checklistu odstranit odkaz na zavřenou kartu
+Co se neotevírá: struktura všech standardů, onboardingová trasa a starší ověřovací karty
+Datová stopa kontroly: pouze souhrnný zápis bez jmen a screenshotů
+Vlastník: provozní lead
+Další návrat: při příštím měsíčním review, jen pokud se tření zopakuje
+```
+
+### Mini workshop na 10 minut
+
+Vyberte jeden cyklus uzavřený podle Přílohy OG a najděte první běžné použití jeho výsledku.
+
+1. Pojmenujte, co člověk v provozní paměti hledal.
+2. Zapište, kde začal hledat.
+3. Zapište, kde našel platnou odpověď.
+4. Označte každou dočasnou stopu, kterou musel otevřít.
+5. Vyberte stav: drží, drží s drobným třením, vrací dočasné stopy, nebo nedrží.
+6. Napište nejmenší opravu nejbližšího pracovního místa.
+7. Zapište, co se teď výslovně neotevírá.
+8. Odstraňte nebo anonymizujte zbytečné důkazy.
+9. Určete další návrat jen tehdy, když je potřeba ověřit konkrétní tření.
+
+Výstup:
+
+```text
+Víme, jestli uzavřený cyklus funguje jako použitelná provozní paměť, a máme jednu malou opravu, pokud člověka pořád vrací do dočasných stop.
+```
+
+### Checklist kapitoly
+
+- Bylo vybrané první skutečné použití uzavřeného cyklu?
+- Je jasné, co člověk hledal?
+- Začal ve správném kanonickém místě?
+- Našel platnou odpověď bez vysvětlování od člověka?
+- Nemusel otevírat zavřené karty, chaty, screenshoty nebo exporty?
+- Je stav provozní paměti pojmenovaný jednou ze čtyř možností?
+- Je případná oprava malá a blízko pracovnímu místu?
+- Je zapsané, co se teď vědomě neotevírá?
+- Byly odstraněné aktivní odkazy na dočasné nebo citlivé důkazy?
+- Stačí uchovaný záznam bez osobních údajů a interních detailů?
+- Má další návrat smysl, nebo by jen vyráběl další údržbu?
+
+První kontrola provozní paměti nemá dokazovat, že tým dokumentuje dost. Má ukázat, jestli se potvrzená práce dá použít v normálním dni. Pokud ano, nechte ji být. Pokud ne, opravte nejbližší místo, které člověka zdrželo. Provozní paměť je dobrá tehdy, když je méně vidět než práce, kterou umožňuje.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OH o první kontrole provozní paměti po uzavření cyklu: výběr prvního běžného použití, sledování cesty k odpovědi, čtyři stavy paměti, nejmenší oprava pracovního místa, privacy-first kontrola důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OG o uzavření ověřeného dalšího cyklu do provozní paměti: rozhodnutí po ověření, přepis jednoho kanonického místa, zavření dočasných karet, práce s vedlejšími nálezy, privacy-first úklid důkazů, uzavírací karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OF o ověření dalšího cyklu po převedeném nálezu: návrat k původnímu slibu, ověření v normálním použití, rozlišení lokálního doladění, diagnostiky a nového nálezu, hledání návratu staré ruční práce, privacy-first ověřovací stopa, karta, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OE o převodu nálezu z dlouhodobé kontroly do dalšího cyklu: rozlišení malého tření, návratu původního problému a nového nálezu, pracovní věta, nejmenší další cyklus, kanonické místo zásahu, hranice rozsahu, privacy-first převodová stopa, karta, mini workshop a checklist.
