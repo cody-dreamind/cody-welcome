@@ -109151,8 +109151,261 @@ Jedno opakované tření z kontroly rytmu je převedené do malé systémové ú
 
 Jedna systémová úprava má být malá, ale nesmí být kosmetická. Míří do místa, kde se práce opakuje. Když se povede, příští člověk nemusí být disciplinovanější, informovanější ani opatrnější. Prostě dostane lepší výchozí stav. To je nejpraktičtější forma provozní kvality.
 
+## Příloha OB: Ověření systémové úpravy po prvním normálním použití
+
+Příloha OA končí provedenou systémovou úpravou a plánem ověření. To je pořád jen polovina práce. Dokud změna neprojde prvním normálním použitím, nevíte, jestli skutečně zlepšila systém, nebo jen vypadá dobře v kartě.
+
+Tato příloha řeší první ověření systémové úpravy v běžném provozu. Nejde o slavnostní audit, schůzku ani velké měření. Jde o krátké pozorování toho, jestli upravené kanonické místo pomohlo člověku udělat práci s menším třením, bez připomínání a bez nové zbytečné datové stopy.
+
+Otázka této přílohy:
+
+```text
+Jak po první běžné práci se systémovou úpravou poznat, jestli změna drží, potřebuje drobné doladění, nebo se má vrátit k přepracování?
+```
+
+Výstupem je ověřovací karta:
+
+```text
+Systémová úprava:
+První normální použití:
+Původní tření:
+Co se zlepšilo:
+Co pořád drhne:
+Datová stopa:
+Rozhodnutí:
+Další krok:
+Vlastník:
+Termín:
+```
+
+Codyho komentář: dobrá systémová úprava se pozná nudně. Nikdo o ní moc nemluví, protože práce prostě projde čistěji. Pokud změnu musíte vysvětlovat ve třech zprávách a hlídat bokem v tabulce, ještě není systémová. Je to poznámka s ambicemi.
+
+### Vyberte první skutečné použití
+
+Ověření má proběhnout při práci, která by se stala i bez testu. Nepřipravujte speciální scénář, nedělejte demo pro kontrolu a nesnažte se změně pomoct. Tím byste testovali schopnost týmu chovat se ideálně, ne kvalitu systému.
+
+Vhodné ověřovací situace:
+
+- někdo založí novou šablonu z upravené výchozí karty;
+- obchodník použije aktualizovanou sales kartu při dalším hovoru;
+- editor projde nový publikační checklist před dalším článkem;
+- support použije upravené makro u dalšího relevantního tiketu;
+- provozní vlastník udělá běžnou měsíční kontrolu podle nového pravidla;
+- nový formulář projde první reálnou poptávkou.
+
+Nevhodné ověření:
+
+```text
+Vlastník změny ukáže týmu, jak by se to mělo používat, a všichni potvrdí, že tomu rozumí.
+```
+
+To může být užitečné pro předání. Není to ale důkaz, že systém funguje. Důkaz vzniká až ve chvíli, kdy člověk narazí na pracovní situaci a upravené místo ho samo vede správným směrem.
+
+### Vraťte se k původnímu tření
+
+Před kontrolou si přečtěte původní kartu z Přílohy OA. Hledejte hlavně tyto položky:
+
+```text
+Opakované tření:
+Kde se problém projevil:
+Kde problém vzniká:
+Jedna systémová věta:
+Privacy-first hranice:
+Ověření při normálním použití:
+```
+
+Bez návratu k původnímu tření se kontrola snadno rozbije na obecné hodnocení. Někdo řekne, že by chtěl lepší text. Někdo navrhne další pole. Někdo otevře starší problém. To všechno může být legitimní, ale teď ověřujete jednu konkrétní úpravu.
+
+Pracovní otázka zní:
+
+```text
+Snížila tato konkrétní úprava konkrétní tření, kvůli kterému vznikla?
+```
+
+Příklad:
+
+```text
+Původní tření:
+Při měsíční kontrole se musela dohledávat platnost a vlastník nové šablony.
+
+Ověření:
+U další nově založené šablony byla pole "Platí od", vlastník a další kontrola vyplněná ve výchozí kartě, takže měsíční kontrola nemusela číst historii změn.
+```
+
+Pokud se zlepšilo něco jiného, napište to jako vedlejší nález. Nepředstírejte, že tím byla původní úprava ověřena.
+
+### Sledujte cestu, ne výkon člověka
+
+Ověření systémové úpravy není hodnocení konkrétního člověka. Nezjišťujete, jestli byl někdo dost pečlivý. Zjišťujete, jestli systém dává pečlivosti dostatečnou oporu.
+
+Sledujte čtyři body:
+
+1. Nalezení: našel člověk správné kanonické místo bez ruční nápovědy?
+2. Použití: navedlo ho místo ke správnému kroku?
+3. Výsledek: vznikl výstup, který snižuje původní tření?
+4. Stopu: nevznikla kvůli kontrole nová zbytečná evidence?
+
+Příklad pozorování:
+
+```text
+Nalezení:
+Editor použil nový publikační checklist z běžného indexu.
+
+Použití:
+U článku doplnil kanonickou URL a privacy-first poznámku bez doptávání.
+
+Výsledek:
+Před publikací nebylo potřeba ručně dohledávat, jestli stránka má správné SEO minimum.
+
+Stopa:
+Nevznikl screenshot ani zvláštní kontrolní formulář; stačil záznam v pracovním logu.
+```
+
+Tady je důležité neplést si přirozené tření s chybou systému. První použití může být pomalejší, protože je změna nová. Problém je až ve chvíli, kdy člověk neví, kde začít, co vyplnit, čemu věřit nebo kam výsledek uložit.
+
+### Rozhodněte jedním ze čtyř stavů
+
+Po prvním normálním použití nepište dlouhé shrnutí. Rozhodněte stav:
+
+```text
+Potvrdit:
+Úprava snížila původní tření a nevytvořila novou zbytečnou datovou stopu.
+
+Drobně doladit:
+Směr je správný, ale jedno místo potřebuje zpřesnit, přejmenovat nebo přesunout.
+
+Vrátit k přepracování:
+Úprava neřeší místo vzniku, lidé ji obchází nebo vytváří nové významné tření.
+
+Otevřít nový nález:
+Původní úprava drží, ale objevilo se jiné samostatné téma.
+```
+
+Příklad rozhodnutí:
+
+```text
+Rozhodnutí: Drobně doladit.
+Důvod: pole "Další kontrola" je ve výchozí kartě, ale lidé ho vyplňují různými formáty.
+Další krok: změnit popisek na "Další kontrola (YYYY-MM-DD)" a ověřit při dalším založení šablony.
+```
+
+Když je stav "Otevřít nový nález", nebalte ho do původní úpravy. Založte novou položku do údržbové fronty nebo ji vědomě odložte. Jinak se potvrzená změna nikdy nezavře, protože se k ní bude přilepovat další provozní realita. A ta umí být v provozu až podezřele kreativní.
+
+### Privacy-first kontrola po ověření
+
+První ověření často láká k tomu, aby tým přidal víc důkazů. Screenshot před a po. Tabulku použití. Jména lidí, kteří změnu použili. Záznam obrazovky. Měření kliků. To může vypadat jako disciplína, ale často je to jen nová datová stopa maskovaná jako kvalita.
+
+Stačí odpovědět:
+
+```text
+Jaký minimální důkaz potřebujeme, abychom mohli rozhodnout stav?
+```
+
+Ve většině případů stačí:
+
+- jednovětý popis prvního použití;
+- odkaz na upravené kanonické místo;
+- rozhodnutí stavu;
+- další krok, pokud je potřeba;
+- datum návratu.
+
+Konkrétní privacy-first pravidla:
+
+- Nesbírejte jména lidí, pokud stačí role.
+- Nedělejte screenshoty, pokud stačí textový popis.
+- Nezavádějte tracker používání šablon kvůli jedné kontrole.
+- Neexportujte data z nástroje, pokud rozhodnutí jde udělat v místě práce.
+- Po potvrzení smažte dočasné poznámky, které už nemají provozní účel.
+
+Příklad:
+
+```text
+Privacy-first výsledek:
+Ověření je zapsané jednou větou v kartě změny. Bez screenshotů, bez měření kliků, bez jmen konkrétních lidí a bez nové tabulky.
+```
+
+### Ověřovací karta systémové úpravy
+
+```text
+Datum:
+Systémová úprava:
+Kanonické místo:
+První normální použití:
+Role, která změnu použila:
+Původní tření:
+Co se zlepšilo:
+Co pořád drhne:
+Vznikl vedlejší nález:
+Datová stopa ověření:
+Rozhodnutí: potvrdit / drobně doladit / vrátit k přepracování / otevřít nový nález
+Další krok:
+Vlastník:
+Termín:
+Co se maže nebo zavírá:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-05-23
+Systémová úprava: výchozí karta nové interní šablony obsahuje pole "Platí od", vlastník a další kontrola
+Kanonické místo: výchozí karta nové šablony
+První normální použití: založení šablony pro nový support výřez
+Role, která změnu použila: support lead
+Původní tření: při měsíční kontrole se musela dohledávat platnost a vlastník nové šablony
+Co se zlepšilo: nová šablona vznikla s datem platnosti i vlastníkem bez čtení historie
+Co pořád drhne: pole "Další kontrola" nemá jednotný formát data
+Vznikl vedlejší nález: ne
+Datová stopa ověření: jednovětý záznam v kartě změny, bez screenshotů a bez nové evidence
+Rozhodnutí: drobně doladit
+Další krok: přepsat popisek na "Další kontrola (YYYY-MM-DD)"
+Vlastník: provozní lead
+Termín: před dalším založením šablony
+Co se maže nebo zavírá: dočasná poznámka z kontroly rytmu po přepsání popisku
+```
+
+### Mini workshop na 12 minut
+
+Vezměte jednu provedenou systémovou úpravu z Přílohy OA.
+
+1. Najděte první normální použití po změně.
+2. Přečtěte původní tření a systémovou větu.
+3. Zapište, jestli člověk našel správné kanonické místo bez nápovědy.
+4. Zapište, jestli místo navedlo ke správnému kroku.
+5. Porovnejte výsledek s původním třením.
+6. Oddělte vedlejší nálezy od ověření původní úpravy.
+7. Zkontrolujte, jestli ověření nevytvořilo zbytečnou datovou stopu.
+8. Rozhodněte jeden ze čtyř stavů.
+9. Pokud je potřeba další krok, zmenšete ho na jednu úpravu.
+10. Zavřete nebo smažte dočasné poznámky, které už nemají účel.
+
+Výstup:
+
+```text
+Systémová úprava má po prvním normálním použití jasný stav, minimální důkaz, privacy-first uzavření a nejbližší další krok pouze tehdy, když je opravdu potřeba.
+```
+
+### Checklist kapitoly
+
+- Ověřovali jste první skutečné použití, ne připravené demo?
+- Vrátili jste se k původnímu tření z karty systémové úpravy?
+- Hodnotili jste pracovní cestu, ne výkon člověka?
+- Je jasné, jestli člověk našel správné kanonické místo bez nápovědy?
+- Snížila změna původní tření?
+- Nevzniklo nové významné tření na jiném místě?
+- Jsou vedlejší nálezy oddělené od původní úpravy?
+- Rozhodli jste jedním ze stavů Potvrdit, Drobně doladit, Vrátit k přepracování nebo Otevřít nový nález?
+- Stačí k rozhodnutí minimální důkaz?
+- Nevznikly screenshoty, exporty, tracking nebo osobní evidence bez jasného účelu?
+- Je zapsané, co se po ověření maže nebo zavírá?
+- Má případný další krok vlastníka a termín?
+- Může se potvrzená úprava vrátit do běžného rytmu bez zvláštního dohledu?
+
+Ověření systémové úpravy má chránit dvě věci najednou: kvalitu práce a klid systému. Když změna drží, zavřete ji. Když drhne, opravte nejbližší konkrétní místo. Když otevře nové téma, nenechte ho přirůst k původní kartě. Dobrý provoz není nekonečná kontrola. Je to schopnost udělat malý zásah, ověřit ho a zase se vrátit k normální práci.
+
 ## Pracovní log
 
+- 2026-05-23: Doplněna Příloha OB o ověření systémové úpravy po prvním normálním použití: výběr reálného použití, návrat k původnímu tření, sledování pracovní cesty místo výkonu člověka, rozhodovací stavy, privacy-first minimální důkaz, ověřovací karta, mini workshop a checklist.
 - 2026-05-23: Doplněna úvodní sekce Karta jedné změny po čtení: šablona převodu kapitoly do jedné ověřitelné změny, příklad pro lead generation, privacy-first datová stopa, hranice rozsahu a checklist.
 - 2026-05-22: Doplněna Příloha OA o převodu kontroly údržbového rytmu do jedné systémové úpravy: místo vzniku tření, systémová věta, hranice rozsahu, kanonické místo, privacy-first omezení, ověření při běžném použití, karta, mini workshop a checklist.
 - 2026-05-22: Doplněna Příloha NZ o kontrole údržbového rytmu po několika uzavřených akcích: malé kontrolní okno, kanonická místa, opakující se tření, privacy-first datová stopa, rušení a slučování nadbytečných vrstev, jedna další změna rytmu, karta, mini workshop a checklist.
