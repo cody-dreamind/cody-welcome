@@ -116554,8 +116554,245 @@ Poslední lokální korekce je uzavřená, finální pravidlo je v kanonickém m
 
 Uzavření poslední lokální korekce je tichý konec práce. Po dobrém uzavření se tým nevrací k metodice, ale k normálnímu provozu. Aktuální pravidlo je tam, kde ho člověk potřebuje, historie nepřekáží a dočasné důkazy nezůstávají viset v systému jen proto, že je nikdo nechtěl uklidit.
 
+## Příloha PC: První kontrola stabilního provozního stavu v běžném rytmu
+
+Příloha PB uzavřela poslední lokální korekci a vrátila pravidlo do normálního provozu. Tato příloha řeší první chvíli, kdy se ke stabilnímu stavu vracíte už ne jako k opravě, ale jako k běžné součásti práce.
+
+Kontrolní otázka zní:
+
+```text
+Drží stabilní provozní stav při běžném použití bez návratu staré práce a bez nové zbytečné evidence?
+```
+
+Výstupem není nový projekt. Výstupem je jedna provozní věta:
+
+```text
+Stabilní stav drží / drží s drobným driftem / potřebuje údržbovou položku / má se ukončit, protože [důvod].
+```
+
+Codyho komentář: stabilní stav není muzeum. Nemá se oprašovat proto, že existuje. Má se občas vzít do ruky při normální práci a ověřit, jestli pořád pomáhá. Pokud se kontrola změní v obřad, provoz se nenápadně učí sloužit dokumentům místo zákazníkům.
+
+### Kontrolujte jen v existujícím rytmu
+
+První kontrola stabilního stavu patří do rytmu, který už tým používá: měsíční review, kvartální údržba, onboardingový průchod, kontrola nabídky, provozní retrospektiva nebo revize šablon. Pokud kvůli stabilnímu stavu zakládáte samostatnou schůzku, pravděpodobně znovu otevíráte něco, co už mělo být zavřené.
+
+Dobrá formulace:
+
+```text
+Stav zkontrolujeme při nejbližším měsíčním review provozních standardů.
+```
+
+Slabá formulace:
+
+```text
+Za dva týdny uděláme speciální kontrolu, jestli korekce opravdu drží.
+```
+
+Speciální kontrola může dávat smysl jen tehdy, když stabilní stav chrání vysoké riziko: bezpečnostní proces, zákaznickou komunikaci po incidentu, billing, přístupy nebo právně citlivou datovou operaci. U běžných pracovních pravidel je lepší nechat kontrolu tam, kde práce přirozeně vzniká.
+
+### Vraťte se ke stabilní větě
+
+Začněte poslední uzavírací větou z Přílohy PB. Nečtěte celou historii korekcí, pokud k tomu není jasný důvod. Stabilní stav má být srozumitelný z aktuálního pravidla.
+
+Krátký návrat:
+
+```text
+Stabilni veta:
+Mesicni review zacina v aktualnim checklistu v kanonickem indexu. Stare karty nejsou pracovni vstup.
+
+Kde lezi:
+Index provoznich standardu.
+
+Kdy se kontroluje:
+Prvni bezne mesicni review po uzavreni korekce.
+```
+
+Pokud bez staré historie nerozumíte, co má pravidlo znamenat, není to problém paměti týmu. Je to signál, že kanonické místo není dost pracovní. V takovém případě neopravujte historii; opravte aktuální formulaci.
+
+### Sledujte čtyři malé signály
+
+Při první běžné kontrole nepotřebujete velkou metriku. Sledujte jen to, jestli stabilní stav skutečně pomáhá práci:
+
+- `Nalezení`: člověk ví, kde pravidlo hledat.
+- `Pochopení`: pravidlo jde použít bez vysvětlování celé historie.
+- `Dokončení`: práce projde bez návratu ke staré kartě, šabloně nebo debatě.
+- `Cena`: pravidlo nepřidává víc administrativy, než kolik tření odstraňuje.
+
+Příklad z měsíčního review:
+
+```text
+Nalezeni:
+Review zacalo v kanonickem indexu.
+
+Pochopeni:
+Novy clovek pouzil aktualni checklist bez dotazu na starou kartu.
+
+Dokonceni:
+Review se uzavrelo v beznem case.
+
+Cena:
+Nevznikl zadny novy zapis mimo standardni poznamku z review.
+```
+
+Signály nemají hodnotit člověka. Hodnotí pracovní trasu. Pokud někdo pravidlo nenašel, otázka nezní "proč si to nepamatoval", ale "proč pracovní místo nevede ke správnému pravidlu samo".
+
+### Rozlišujte čtyři výsledky
+
+Po kontrole vyberte jeden stav:
+
+- `Drží`: pravidlo funguje, další kontrola zůstává v běžném rytmu.
+- `Drží s drobným driftem`: pravidlo funguje, ale jedna formulace nebo odkaz lehce ujíždí.
+- `Údržbová položka`: problém už má pracovní cenu a potřebuje malou opravu.
+- `Ukončit nebo sloučit`: pravidlo už nemá samostatný účel nebo se překrývá s jiným místem.
+
+Příklad:
+
+```text
+Vysledek:
+Drží s drobným driftem.
+
+Duvod:
+Checklist je správný, ale onboardingová poznámka pořád používá starý název sekce.
+
+Rozhodnuti:
+Založit jednu údržbovou položku pro přejmenování odkazu v onboardingové poznámce. Neměnit celý checklist.
+```
+
+Stav `Drží s drobným driftem` nesmí být výmluva pro nekonečné ladění. Buď je drift tak malý, že ho opravíte při nejbližší běžné údržbě, nebo má cenu práce a patří do samostatné údržbové položky.
+
+### Neotvírejte starou historii bez důvodu
+
+Stabilní stav občas vyvolá chuť vrátit se k tomu, proč vznikl. To je užitečné jen tehdy, když aktuální pravidlo selhává nebo se změnil kontext práce. Jinak stará historie jen přitahuje staré debaty.
+
+Dobré důvody otevřít historii:
+
+- pravidlo už neodpovídá skutečnému workflow;
+- vznikl nový typ zákaznické nebo provozní situace;
+- staré rozhodnutí mělo časově omezený předpoklad;
+- pravidlo koliduje s jiným kanonickým místem;
+- kontrola ukázala opakovaný návrat staré trasy.
+
+Špatné důvody:
+
+- někdo chce "pro jistotu" znovu projít celý vývoj pravidla;
+- tým má pocit, že starší rozhodnutí musí být víc zdokumentované;
+- existuje archivní karta, takže by byla škoda ji nepoužít;
+- kontrola nemá jasnou otázku a hledá si téma.
+
+Praktické pravidlo: pokud neumíte jednou větou říct, jaké rozhodnutí má stará historie změnit, nechte ji zavřenou.
+
+### Privacy-first kontrola stabilního stavu
+
+Stabilní stav má mít menší datovou stopu než fáze ověřování. První běžná kontrola proto nesmí obnovit dočasné exporty, screenshoty, seznamy lidí ani detailní pozorování průchodů, které už byly uklizené.
+
+Zkontrolujte:
+
+- zda kanonické pravidlo neobsahuje osobní údaje, které patřily jen do pilotu;
+- zda se při běžné kontrole nevytváří nový seznam konkrétních lidí a jejich chyb;
+- zda staré screenshoty nebo exporty nezůstaly jako pohodlný "důkaz";
+- zda poznámka z review popisuje stav systému, ne chování jednotlivce;
+- zda další kontrola nevyžaduje nový tracker nebo formulář.
+
+Příklad privacy-first zápisu:
+
+```text
+Datova stopa:
+Pouze agregovaná poznámka z měsíčního review. Bez jmen, screenshotů, exportů a samostatného sledování použití.
+```
+
+Pokud kontrola potřebuje víc dat než samotné pravidlo, zastavte se. Buď je pravidlo důležitější, než jste si mysleli, nebo kontrolujete příliš těžkým nástrojem.
+
+### Kontrolní zápis
+
+```text
+Datum:
+Stabilni stav:
+Kanonicke misto:
+Bezny rytmus:
+Kontrolovana situace:
+Nalezeni:
+Pochopeni:
+Dokonceni:
+Cena:
+Vysledek:
+Dalsi krok:
+Datova stopa:
+Vlastnik:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2027-01-12
+Stabilni stav: měsíční review začíná v aktuálním checklistu, staré karty nejsou pracovní vstup
+Kanonicke misto: index provozních standardů
+Bezny rytmus: měsíční review
+Kontrolovana situace: lednové review provozních standardů
+Nalezeni: tým šel přímo do kanonického indexu
+Pochopeni: nový člověk použil checklist bez vysvětlení historie
+Dokonceni: review skončilo běžnou poznámkou a bez návratu ke starým kartám
+Cena: žádná nová evidence mimo standardní zápis
+Vysledek: Drží
+Dalsi krok: další kontrola jen v běžném měsíčním rytmu
+Datova stopa: agregovaná poznámka, bez jmen a exportů
+Vlastnik: provozní lead
+```
+
+Příklad, kdy kontrola vede k údržbě:
+
+```text
+Vysledek:
+Údržbová položka.
+
+Duvod:
+Aktuální checklist drží, ale starý odkaz zůstává v onboardingové šabloně a nový člověk ho použil jako vstup.
+
+Dalsi krok:
+Opravit jen onboardingovou šablonu. Neotevírat stabilní checklist.
+```
+
+Tím chráníte rozsah. Jeden zbytkový odkaz není důvod znovu rozebrat celý provozní standard.
+
+### Mini workshop na 10 minut
+
+Vezměte jeden stabilní provozní stav, který už prošel uzavřením poslední korekce.
+
+1. Najděte jeho kanonické místo.
+2. Přečtěte stabilní větu bez otevírání historie.
+3. Vyberte první běžnou situaci, kde se pravidlo použilo.
+4. Zapište signály `Nalezení`, `Pochopení`, `Dokončení` a `Cena`.
+5. Vyberte jeden ze stavů `Drží`, `Drží s drobným driftem`, `Údržbová položka` nebo `Ukončit nebo sloučit`.
+6. Pokud vzniká další krok, omezte ho na nejbližší pracovní místo.
+7. Zkontrolujte, že po kontrole nevznikla nová osobní nebo sledovací stopa.
+
+Výstup:
+
+```text
+Stabilní provozní stav byl zkontrolován v běžném rytmu a zůstává v provozu / má jednu omezenou údržbovou položku / bude sloučen nebo ukončen.
+```
+
+### Checklist kapitoly
+
+- Probíhá kontrola v existujícím pracovním rytmu?
+- Nevznikla samostatná schůzka jen kvůli uzavřené korekci?
+- Začínáte stabilní větou, ne celou historií?
+- Je kanonické místo srozumitelné bez archeologie starých rozhodnutí?
+- Sledujete nalezení, pochopení, dokončení a cenu?
+- Popisujete trasu práce, ne výkon konkrétního člověka?
+- Vybrali jste jeden jasný výsledek kontroly?
+- Nepoužíváte `Drží s drobným driftem` jako nekonečný mezistav?
+- Pokud vznikl problém, převádíte ho do jedné údržbové položky?
+- Neotevíráte starou historii bez rozhodnutí, které má změnit?
+- Zůstává další kontrola v běžném rytmu?
+- Nevznikly nové exporty, screenshoty, seznamy lidí ani trackery?
+- Je datová stopa menší než ve fázi ověřování?
+- Umí vlastník říct jednou větou, co se po kontrole děje dál?
+
+První kontrola stabilního provozního stavu má být nenápadná. Když vše drží, skoro nic se nestane: zapíše se krátký stav a práce pokračuje. To je dobrý výsledek. Stabilní systém se pozná podle toho, že nepotřebuje drama, aby dokázal, že funguje.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PC o první kontrolu stabilního provozního stavu v běžném rytmu: návrat ke stabilní větě, kontrola v existujícím rytmu, signály nalezení/pochopení/dokončení/ceny, čtyři výsledky kontroly, omezení návratu ke staré historii, privacy-first datová stopa, kontrolní zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PB o uzavření poslední lokální korekce do stabilního provozního stavu: práce se stavem z ověření, přepis aktuálního pravidla do kanonického místa, uzavření dočasných artefaktů, návrat další kontroly do běžného rytmu, privacy-first úklid datové stopy, uzavírací zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PA o ověření poslední lokální korekce po běžném průchodu: návrat ke korekční kartě, ověření při prvním normálním použití, signály nalezení/pochopení/dokončení, čtyři výsledky, práce se zbytkovou stopou, privacy-first minimum evidence, ověřovací zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha OZ o převodu drobné stopy po první kontrole do poslední lokální korekce: vstupní brána pro stav Drží s drobnou stopou, pracovní riziko, oprava nejbližšího kanonického místa, zavření staré smyčky, privacy-first brzda korekce, ověření dalším běžným průchodem, korekční karta, mini workshop a checklist.
