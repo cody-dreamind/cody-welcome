@@ -119864,8 +119864,257 @@ Potvrzená drobná úprava je přepsaná do kanonického pracovního místa, př
 
 Uzavření potvrzené drobné úpravy má být nenápadné. Přesně v tom je jeho hodnota. Malá změna se propíše do místa práce, zbytky po ověření zmizí a tým se vrátí k normálnímu rytmu. Když takhle zavíráte malé smyčky, systém se postupně zlepšuje, ale nepřibírá byrokratické kilogramy. A to je fitness plán, který má šanci přežít déle než leden.
 
+## Příloha PO: První běžná kontrola po uzavřené drobné úpravě
+
+Po uzavření drobné úpravy přichází poslední nenápadný test: co se stane při prvním normálním použití, kdy už nikdo neřeší kartu úpravy, potvrzovací větu ani dočasný komentář. Právě tady se pozná, jestli se malá změna opravdu stala součástí provozu, nebo jestli jen prošla hezkým uzavřením na papíře.
+
+Tahle příloha navazuje na uzavírací kartu drobné úpravy. Nevrací se k celé historii. Nehledá nové nápady. Jen ověřuje, jestli člověk při běžné práci najde aktuální pravidlo, použije ho bez zbytečného doptávání a nevytvoří kolem toho další datovou nebo procesní stopu.
+
+Dobrá první kontrola po uzavření má čtyři znaky:
+
+1. proběhne při skutečné práci;
+2. dívá se na kanonické místo, ne na staré debaty;
+3. rozhodne jasný stav;
+4. pokud něco opravuje, opravuje jen nejbližší pracovní překážku.
+
+Když tyto čtyři věci drží, kontrola nezvětšuje systém. Jen potvrzuje, že malá změna přežila návrat do normálního rytmu. A to je přesně ten druh vítězství, který nemá vlastní ohňostroj, ale šetří nervy každý další týden.
+
+### Kontrolujte až při normálním použití
+
+První kontrolu nespouštějte hned po uzavření jen proto, že chcete mít smyčku rychle hotovou. Počkejte na nejbližší skutečnou situaci, ve které se pravidlo přirozeně použije: další landing page, další formulář, další onboardingový průchod, další supportní odpověď, další revize nabídky nebo další úprava šablony.
+
+Dobré kontrolní okno:
+
+```text
+Uzavřená drobná úprava:
+Sekce checklistu se nově jmenuje "První poptávkový formulář".
+
+První normální použití:
+Tým připravuje další landing page pro konzultační nabídku.
+
+Co kontrolujeme:
+Autor najde sekci bez dotazu, použije e-mail, cíl a volitelné URL a nepřidá telefon jako povinné pole.
+```
+
+Slabé kontrolní okno:
+
+```text
+Na schůzce si řekneme, jestli všichni ví, že jsme sekci přejmenovali.
+```
+
+Schůzka může pomoct s komunikací, ale neověří provoz. Člověk může na schůzce kývat a při práci za týden stejně otevřít starou šablonu. Kontrola má sledovat pracovní trasu, ne deklarovanou znalost.
+
+Pokud se normální použití dlouho neobjeví, napište hranici:
+
+```text
+Pokud do 30 dnů nenastane běžné použití, necháme úpravu v běžném review bez samostatného sledování.
+```
+
+Ne každá drobná úprava si zaslouží vlastní čekající úkol. Někdy je nejlepší kontrola prostě to, že se věc znovu objeví v přirozeném rytmu. Pokud se neobjeví, možná nebyla dost důležitá na další provozní vrstvu.
+
+### Vraťte se jen k aktuálnímu pravidlu
+
+Při kontrole neotevírejte původní kartu, ověřovací kartu, uzavírací kartu, komentáře v chatu a staré screenshoty jako archeologickou výpravu. Stačí aktuální pravidlo v kanonickém místě a krátká uzavírací věta, pokud je potřeba připomenout rozsah.
+
+Praktická otázka:
+
+```text
+Co má člověk udělat teď, bez znalosti staré historie?
+```
+
+Pokud na tuhle otázku kanonické místo odpovídá jasně, uzavření pravděpodobně funguje. Pokud člověk musí číst historii, aby pochopil současný stav, uzavření je příliš těžké. V pracovním místě zůstala minulost, která měla být v changelogu.
+
+Příklad dobrého aktuálního pravidla:
+
+```text
+První poptávkový formulář sbírá e-mail, cíl poptávky a volitelné URL. Telefon řešte až v navazující komunikaci, pokud je pro další krok opravdu potřeba.
+```
+
+Příklad pravidla, které pořád táhne historii:
+
+```text
+Po úpravě z května už telefon většinou nedáváme do prvního formuláře, protože se ukázalo, že to někdy zvyšuje tření, ale pokud si autor není jistý, může se podívat do původního komentáře.
+```
+
+Druhá věta je horší ne proto, že by byla nepravdivá. Je horší, protože nutí člověka vracet se do staré smyčky. Po uzavření má být stará smyčka zavřená. Překvapivé, já vím.
+
+### Sledujte čtyři provozní signály
+
+Kontrola nepotřebuje dashboard. Stačí čtyři krátké signály:
+
+- Nalezení: člověk našel aktuální místo bez staré zkratky.
+- Pochopení: pravidlo použil bez dodatečného výkladu.
+- Výsledek: vznikl správný pracovní výstup.
+- Stopová hygiena: nevznikla nová tabulka, export, screenshot ani osobní evidence.
+
+Vyplněný příklad:
+
+```text
+Nalezení:
+Autor otevřel aktuální checklist z projektové šablony.
+
+Pochopení:
+Sekci "První poptávkový formulář" použil bez dotazu.
+
+Výsledek:
+Formulář obsahuje e-mail, cíl a volitelné URL. Telefon se nevrátil.
+
+Stopová hygiena:
+Bez nového exportu a bez ukládání příkladů poptávek. Kontrola zapsaná jen jako krátký provozní závěr.
+```
+
+Tyto signály jsou záměrně malé. Netestují spokojenost celého týmu ani kvalitu všech formulářů. Testují jen to, jestli uzavřená drobná úprava funguje v prvním normálním použití.
+
+### Rozlišujte čtyři výsledky kontroly
+
+Po kontrole vyberte jeden stav:
+
+- `Drží`: pravidlo bylo nalezeno, pochopeno a použito bez nové stopy.
+- `Drží s drobnou stopou`: výsledek je správný, ale zůstala malá stará stopa nebo nejasnost.
+- `Vrací se stará cesta`: člověk použil starou šablonu, starý odkaz, starý komentář nebo zvyk.
+- `Otevírá nový nález`: úprava drží, ale objevila samostatný větší problém.
+
+Stav `Drží` je pozvánka k tomu nedělat nic navíc. Zapište krátký závěr a nechte pravidlo běžnému rytmu. To je často nejtěžší část, protože tým má pocit, že když něco funguje, měl by k tomu přidat ještě jednu kontrolu. Neměl. Fungující věc nepotřebuje pamětní desku.
+
+Stav `Drží s drobnou stopou` řešte jedním dočištěním: smažte starý komentář, opravte odkaz, přejmenujte archivní šablonu nebo zkraťte větu. Nesmí z toho vzniknout nová kapitola procesu.
+
+Stav `Vrací se stará cesta` znamená, že uzavření nebylo propsané do pracovního okolí. Tady hledejte konkrétní místo návratu: záložka, interní odkaz, kopie šablony, onboardingový materiál, automatizace, formulářové pole nebo oblíbený dokument v projektu.
+
+Stav `Otevírá nový nález` oddělte. Například kontrola ukáže, že problém není v jedné sekci formuláře, ale v tom, že tým nemá jasný zdroj pravdy pro všechny poptávkové formuláře. To už není drobná úprava. To je samostatná práce s vlastním rozsahem.
+
+### Privacy-first kontrola po návratu do rytmu
+
+Po uzavření drobné úpravy má být datová stopa menší, ne větší. První běžná kontrola proto musí zkontrolovat i to, jestli kontrola sama nepřidala novou evidenci. Nejčastější chyba je jednoduchá: tým sice odstraní z formuláře jedno zbytečné pole, ale pro ověření si založí tabulku s příklady, jmény, screenshoty a komentáři.
+
+Privacy-first otázky:
+
+- Stačil nám výsledný pracovní výstup místo osobních údajů?
+- Nepoužili jsme screenshot se zákaznickými nebo interními detaily?
+- Nevznikla nová kontrolní tabulka bez data smazání?
+- Nezůstala stará šablona dostupná jako výchozí volba?
+- Neprodloužili jsme životnost dočasného exportu jen kvůli kontrole?
+- Je výsledek zapsaný agregovaně nebo pracovně, ne jako sledování jednotlivců?
+
+Dobrá věta:
+
+```text
+Privacy-first výsledek:
+Kontrola proběhla na hotové landing page. Bez kopírování poptávek, bez evidence autora a bez nového měření. Starý odkaz na archivní šablonu byl odstraněn.
+```
+
+Slabá věta:
+
+```text
+Pro jistotu ukládáme všechny příklady formulářů a kdo je vytvořil, abychom později viděli, jestli se pravidlo dodržuje.
+```
+
+Ta druhá věta už není kontrola drobné úpravy. Je to sledovací režim v převleku za pečlivost. Privacy-first provoz neznamená rezignovat na kvalitu. Znamená ověřovat kvalitu s co nejmenší potřebnou stopou.
+
+### Kontrolní karta po uzavřené drobné úpravě
+
+Karta má být krátká. Pokud z ní vznikne dlouhý zápis, pravděpodobně už řešíte nový nález.
+
+```text
+Uzavřená drobná úprava:
+První běžné použití:
+Kanonické místo:
+Nalezení:
+Pochopení:
+Výsledek:
+Stopová hygiena:
+Stav:
+Nejmenší další krok:
+Co neotevíráme:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Uzavřená drobná úprava:
+Sekce checklistu landing page se jmenuje "První poptávkový formulář" a pravidlo nevyžaduje telefon v prvním kroku.
+
+První běžné použití:
+Landing page pro konzultační nabídku.
+
+Kanonické místo:
+Checklist landing page v projektové šabloně.
+
+Nalezení:
+Autor našel sekci bez dotazu.
+
+Pochopení:
+Pravidlo použil bez dodatečného vysvětlení.
+
+Výsledek:
+Formulář sbírá e-mail, cíl a volitelné URL.
+
+Stopová hygiena:
+Bez nového exportu a bez osobní evidence. Smazán starý odkaz na archivní variantu checklistu.
+
+Stav:
+Drží.
+
+Nejmenší další krok:
+Žádný samostatný krok. Kontrola zůstává v běžném review landing pages.
+
+Co neotevíráme:
+Neměníme CRM kvalifikaci, obchodní follow-up ani všechny historické landing pages.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-24.
+```
+
+### Codyho komentář
+
+Můj pohled: první kontrola po uzavřené drobné úpravě je zkouška dospělosti provozu. Nedospělý provoz slaví každé pravidlo novou kontrolou. Dospělý provoz nechá pravidlo normálně pracovat a jen se podívá, jestli po něm nezůstaly staré stopy.
+
+Nejlepší výsledek je skoro nudný: člověk najde správné místo, použije správné pravidlo, vznikne správný výstup a nikde nepřibude tabulka s osobními údaji. Ano, je to méně dramatické než velký transformační workshop. Ale také to má podstatně menší šanci se po dvou týdnech rozpadnout.
+
+### Mini workshop na 10 minut
+
+Vyberte jednu drobnou úpravu, která už byla potvrzená a uzavřená.
+
+1. Najděte první skutečné použití po uzavření.
+2. Ověřte, jestli člověk sáhl na aktuální kanonické místo.
+3. Zapište, jestli pravidlo pochopil bez dalšího výkladu.
+4. Porovnejte výsledek s aktuálním pravidlem.
+5. Zkontrolujte, jestli nevznikla nová datová nebo kontrolní stopa.
+6. Vyberte stav: `Drží`, `Drží s drobnou stopou`, `Vrací se stará cesta`, nebo `Otevírá nový nález`.
+7. Pokud je potřeba další krok, napište jen jeden a držte ho u nejbližšího pracovního místa.
+8. Pokud stav drží, vraťte téma do běžného rytmu bez samostatného sledování.
+
+Výstup:
+
+```text
+Uzavřená drobná úprava byla ověřena při prvním běžném použití a má jasný stav bez nové procesní nebo datové vrstvy.
+```
+
+### Checklist kapitoly
+
+- Proběhla kontrola při skutečné práci?
+- Je jasné, která uzavřená drobná úprava se ověřuje?
+- Vrátili jste se k aktuálnímu pravidlu místo celé historie?
+- Našel člověk kanonické místo bez staré zkratky?
+- Pochopil pravidlo bez dodatečného výkladu?
+- Odpovídá výsledek aktuálnímu pravidlu?
+- Nevznikl nový export, screenshot, tabulka nebo evidence lidí?
+- Je stará šablona, odkaz nebo komentář opravdu uklizený?
+- Vybrali jste jeden ze čtyř stavů kontroly?
+- Pokud se vrací stará cesta, víte, odkud se vrací?
+- Pokud vznikl nový nález, je oddělený od drobné úpravy?
+- Nezaložili jste nový meeting, dashboard ani checklist jen kvůli této kontrole?
+- Vrací se téma po kontrole do existujícího rytmu?
+
+První běžná kontrola po uzavřené drobné úpravě má potvrdit, že malá změna nezůstala v kartě, ale opravdu přešla do práce. Když drží, největší služba týmu je nepřidávat další vrstvu. Jen zapsat stav, uklidit stopu a nechat pravidlo dělat svou nudnou, užitečnou práci.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PO o první běžné kontrole po uzavřené drobné úpravě: normální použití, návrat k aktuálnímu pravidlu, provozní signály, čtyři výsledky kontroly, privacy-first stopová hygiena, kontrolní karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PN o uzavření potvrzené drobné úpravy do běžného rytmu: potvrzovací věta, přepis pravidla do kanonického místa, uzavření přechodových artefaktů, napojení na existující review, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PM o ověření drobné úpravy po dalším běžném použití: návrat ke kartě úpravy, výběr normálního použití, signály nalezení/pochopení/výsledku/ceny, čtyři rozhodovací stavy, poslední lokální doladění, privacy-first ověření, ověřovací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PL o převodu drobného tření po první běžné kontrole do jedné úpravy: pracovní popis tření, nejbližší kanonické místo, typy malých úprav, vědomé omezení rozsahu, privacy-first brzda, karta úpravy, mini workshop a checklist.
