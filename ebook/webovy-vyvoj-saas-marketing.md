@@ -118193,8 +118193,232 @@ Drobná stopa z první běžné kontroly je převedená do jedné lokální kore
 
 Lokální korekce je dobrá právě tím, že není velkolepá. Vezme jednu drobnou stopu, odstraní ji z nejbližšího místa a nechá stabilní provoz běžet dál. Když se takové malé věci řeší disciplinovaně, systém nemusí každých pár týdnů padat zpátky do velkých úklidových akcí.
 
+## Příloha PI: Ověření lokální korekce po dalším běžném průchodu
+
+Lokální korekce má smysl jen tehdy, když se po ní tým vrátí k normální práci a ověří, že drobná stopa opravdu zmizela. Nejde o slavnostní audit. Jde o krátkou kontrolu při nejbližším běžném použití stejného kanonického místa: někdo vytvoří novou stránku, použije šablonu, projde checklist, založí další úkol nebo předá materiál kolegovi.
+
+Bez ověření se z lokální korekce stane další malá změna, která možná pomohla a možná jen posunula nejasnost o kousek vedle. To je přesně typ práce, který vypadá bezpečně, ale časem znovu nafoukne údržbu. Jedna drobná stopa se opraví, druhá vznikne, třetí se zapomene a po měsíci tým neví, jestli stabilní provoz pořád drží.
+
+Ověření lokální korekce proto odpovídá na jednu otázku:
+
+```text
+Pomohla korekce dalšímu běžnému průchodu bez toho, aby otevřela novou smyčku, nové sledování nebo nové pravidlo?
+```
+
+Pokud odpověď zní ano, korekce se zavře a provoz dál běží v původním rytmu. Pokud odpověď zní ne, tým nerozšiřuje korekci automaticky. Nejdřív pojmenuje, jestli problém leží v samotné korekci, v kanonickém místě, nebo v tom, že původně "drobná stopa" ve skutečnosti nebyla drobná.
+
+### Vraťte se ke korekční kartě
+
+Kontrolu začněte u karty lokální korekce, ne u celé historie předchozí smyčky. To je důležité. Karta říká, jaká drobná stopa se měla odstranit, kde přesně se zasáhlo, co zůstalo mimo rozsah a při jakém běžném průchodu se korekce ověří.
+
+Před kontrolou si přečtěte jen tyto části:
+
+- jaká stopa se opravovala;
+- jaké pracovní riziko vytvářela;
+- kde byla provedena nejmenší korekce;
+- co se záměrně neotevíralo;
+- jaký běžný průchod měl ověření spustit;
+- jaká datová hranice měla zůstat zachovaná.
+
+Tím se kontrola udrží malá. Pokud začnete znovu číst původní poznámku, staré exporty, předchozí údržbovou položku a všechny navazující komentáře, snadno z lokálního ověření uděláte nový audit. To není potřeba. Ověřujete jednu korekci, ne celý systém.
+
+Příklad:
+
+```text
+Korekce:
+V checklistu nové landing page byla stará věta "ověřit telefonní pole", i když první formulář už telefon nesbírá.
+
+Místo zásahu:
+Checklist nové landing page.
+
+Ověření:
+Další autor použije checklist při přípravě nové stránky a nebude se ptát, jestli má telefon vrátit.
+```
+
+Kontrola se tedy neptá na celý kontaktní proces. Ptá se, jestli konkrétní stará věta už nepřekáží dalšímu použití checklistu.
+
+### Ověřujte při normální práci
+
+Nejlepší ověření je běžný průchod, který by se stal i bez kontroly. Pokud kvůli drobné korekci vytvoříte umělý workshop, nový report nebo speciální dotazník, pravděpodobně je ověření větší než změna. To je špatný obchod.
+
+Běžný průchod může být:
+
+- nová landing page vytvořená podle šablony;
+- další aktualizace sales karty;
+- použití checklistu při publikaci článku;
+- předání interní šablony novému člověku;
+- měsíční kontrola formulářů;
+- běžná údržba automatizace nebo dokumentace.
+
+Při průchodu sledujte práci, ne člověka. Nehodnotíte, jestli někdo "správně dodržel proces". Hodnotíte, jestli mu systém dal dost jasnou cestu. Pokud člověk korekci mine, položte si nejdřív otázku, jestli byla ve správném místě, správným jazykem a ve správném okamžiku práce.
+
+Codyho komentář: když se po malé opravě musí lidem vysvětlovat, že je opravdu malá a kde ji mají hledat, oprava možná nebyla tak dobře umístěná, jak jsme si v poznámkách namlouvali. Dokumentace má být pomocník, ne honba za pokladem.
+
+### Sledujte čtyři malé signály
+
+Lokální korekce nepotřebuje velkou metriku. Stačí čtyři pracovní signály:
+
+1. Nalezení: našel člověk aktuální kanonické místo bez lovení starých variant?
+2. Pochopení: pochopil opravenou část bez dalšího výkladu?
+3. Dokončení: dokončil běžný úkol bez návratu k původní stopě?
+4. Cena: nezpomalila korekce práci víc, než odstraněná stopa pomáhala?
+
+Tyto signály zapisujte krátce. Například:
+
+```text
+Nalezení:
+Autor použil aktuální checklist z kanonického odkazu.
+
+Pochopení:
+Telefonní pole vůbec neřešil, protože stará věta už v checklistu není.
+
+Dokončení:
+Nová landing page vznikla se správným kratším formulářem.
+
+Cena:
+Bez dodatečného vysvětlování. Žádný nový úkol mimo běžnou kontrolu.
+```
+
+Pokud signály dopadnou dobře, není potřeba sbírat další důkazy. U drobné korekce je cílem přestat řešit drobnou stopu, ne vytvořit další záznamový aparát.
+
+### Rozlišujte čtyři výsledky
+
+Po běžném průchodu rozhodněte jedním ze čtyř stavů:
+
+- Zavřít: korekce pomohla, stopa zmizela a není potřeba další samostatná kontrola.
+- Drobně doladit: korekce je správná, ale jedno slovo, odkaz nebo umístění ještě mate.
+- Vrátit do údržby: stopa se ukázala jako větší problém než lokální korekce.
+- Oddělit nový nález: původní stopa je vyřešená, ale při průchodu se objevil jiný problém.
+
+Stav `Zavřít` je ideální. Znamená, že práce se vrací do běžného rytmu. Stav `Drobně doladit` používejte opatrně: smí znamenat opravdu malou úpravu stejného místa, ne další kolo vymýšlení pravidla. Stav `Vrátit do údržby` je poctivé přiznání, že původní odhad byl moc optimistický. Stav `Oddělit nový nález` chrání původní korekci před tím, aby na sebe nabalila cizí problém.
+
+Příklad rozhodnutí:
+
+```text
+Výsledek:
+Zavřít.
+
+Proč:
+Další autor našel aktuální checklist, nevrátil staré telefonní pole a dokončil stránku bez dotazu na výjimku.
+
+Co dál:
+Korekci nezvedáme do samostatné údržbové položky. Příští kontrola proběhne už jen v běžném měsíčním rytmu formulářů.
+```
+
+### Privacy-first ověření bez nové vrstvy
+
+U lokální korekce je privacy-first pravidlo jednoduché: nevytvářejte kvůli ověření novou datovou vrstvu. Pokud šlo o dokumentační stopu, stačí poznámka o průchodu. Pokud šlo o šablonu formuláře, stačí zkontrolovat nově vytvořenou stránku a případně agregovaný výsledek. Pokud šlo o dočasný export, ověření má potvrdit hlavně to, že export nezůstal ležet bokem.
+
+Před zápisem se zeptejte:
+
+- Stačí anonymizovaný nebo agregovaný závěr?
+- Nevznikl screenshot, export nebo kopie jen kvůli kontrole?
+- Nezapisujeme jméno člověka tam, kde stačí role nebo průchod?
+- Neprodloužili jsme retenci původních podkladů jen proto, že "by se mohly hodit"?
+- Je jasné, že další kontrola už patří do běžného rytmu?
+
+Dobrá privacy-first kontrola může vypadat takto:
+
+```text
+Datová stopa:
+Bez nového exportu. Zůstává jen anonymizovaná poznámka, že další stránka vznikla podle aktuálního checklistu a staré telefonní pole se nevrátilo.
+```
+
+Špatná kontrola by vytvořila tabulku průchodů, screenshoty formuláře, kopii poptávek a seznam lidí, kteří se na stránce podíleli. To je moc materiálu pro drobnou korekci. Větší evidence by měla vzniknout jen tehdy, když kontrola ukáže větší provozní nebo právní riziko. A i tehdy jako samostatný nález, ne jako přílepek k lokální korekci.
+
+### Ověřovací karta lokální korekce
+
+Pro zápis použijte krátkou kartu:
+
+```text
+Korekce:
+Běžný průchod:
+Co jsme sledovali:
+Co se stalo:
+Výsledek:
+Co zavíráme:
+Co případně oddělujeme:
+Datová stopa:
+Další návrat:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Korekce:
+Odstranit starou větu o telefonním poli z checklistu nové landing page.
+
+Běžný průchod:
+Příprava nové landing page pro konzultační nabídku.
+
+Co jsme sledovali:
+Jestli autor použije aktuální checklist a nevytvoří povinné telefonní pole.
+
+Co se stalo:
+Autor našel správný checklist, použil kratší formulář a neptal se na telefon.
+
+Výsledek:
+Zavřít.
+
+Co zavíráme:
+Lokální korekci v checklistu. Není potřeba další samostatná kontrola.
+
+Co případně oddělujeme:
+Nic. Nový nález nevznikl.
+
+Datová stopa:
+Bez nového sledování a bez exportu. Zůstává jen tento agregovaný zápis.
+
+Další návrat:
+Běžná měsíční kontrola formulářů.
+
+Vlastník:
+Marketing owner.
+```
+
+Karta je záměrně krátká. Pokud se začne prodlužovat, je to signál, že kontrola narazila na větší téma. To větší téma si zaslouží vlastní nález, vlastní hranici a vlastní rozhodnutí. Lokální korekce má zůstat lokální.
+
+### Mini workshop na 10 minut
+
+Vyberte jednu lokální korekci, která už prošla dalším běžným použitím.
+
+1. Otevřete korekční kartu.
+2. Pojmenujte běžný průchod, při kterém se korekce ověřila.
+3. Zapište čtyři signály: nalezení, pochopení, dokončení a cenu.
+4. Rozhodněte stav: Zavřít, Drobně doladit, Vrátit do údržby nebo Oddělit nový nález.
+5. Pokud je potřeba doladění, napište jednu malou úpravu stejného místa.
+6. Pokud vznikl větší problém, oddělte ho od korekce jako nový nález.
+7. Ujistěte se, že nevznikl nový export, tracker ani osobní evidence.
+8. Zavřete kartu a vraťte další kontrolu do běžného rytmu.
+
+Výstup:
+
+```text
+Lokální korekce má ověřený stav po dalším běžném průchodu a buď je zavřená, drobně doladěná, vrácená do údržby, nebo oddělená od nového nálezu.
+```
+
+### Checklist kapitoly
+
+- Ověřujete konkrétní lokální korekci, ne celou historii předchozí smyčky?
+- Proběhla kontrola při normální práci, která by nastala i bez auditu?
+- Je jasné, jaká stopa se měla odstranit?
+- Sledujete práci a umístění korekce, ne poslušnost člověka?
+- Máte zapsané signály nalezení, pochopení, dokončení a ceny?
+- Končí kontrola jedním ze čtyř stavů?
+- Stav `Drobně doladit` znamená jen malou úpravu stejného místa?
+- Pokud se ukázal větší problém, vznikl samostatný nález?
+- Původní korekce se nerozšířila do nového pravidla bez důvodu?
+- Nevznikl nový tracker, export, screenshotová složka ani osobní evidence?
+- Jsou dočasné podklady po zápisu smazané nebo anonymizované?
+- Je další návrat navázaný na běžný rytmus, pokud korekce drží?
+- Ví vlastník, co přesně je zavřené a co případně pokračuje odděleně?
+
+Ověření lokální korekce je malá brzda proti tomu, aby se údržba tvářila jako hotová jen proto, že někdo změnil jednu větu. Když korekce obstojí v dalším běžném průchodu, má být zavřená bez fanfár. Když neobstojí, má se problém pojmenovat přesně a bez nabalování. Tak se stabilní provoz udržuje čistý: malými kontrolami, krátkými záznamy a minimem dat, která nemají další účel.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PI o ověření lokální korekce po dalším běžném průchodu: návrat ke korekční kartě, kontrola v normální práci, signály nalezení/pochopení/dokončení/ceny, čtyři výsledky, privacy-first ověření bez nové vrstvy, ověřovací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PH o převodu drobné stopy po první běžné kontrole do jedné lokální korekce: vstupní brána, popis pracovního rizika, oprava nejbližšího místa, ochrana uzavřené smyčky, lehké ověření, privacy-first evidence, karta korekce, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PG o první běžné kontrole po uzavření udržovací poznámky: kontrola při skutečném použití, návrat ke kanonickému místu, čtyři výsledky kontroly, privacy-first minimalizace důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PF o uzavření vyhodnocené udržovací poznámky do stabilního provozu: stav z vyhodnocení, oprava kanonického místa, krátké zavření poznámky, rozhodnutí o další kontrole, privacy-first úklid pomocných stop, oddělení nových nálezů, uzavírací karta, mini workshop a checklist.
