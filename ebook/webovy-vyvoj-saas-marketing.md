@@ -118793,8 +118793,235 @@ Ověřená lokální korekce je přepsaná do kanonického pracovního místa, p
 
 Uzavření ověřené lokální korekce má být nenápadné. Ne proto, že by nebylo důležité, ale protože jeho výsledkem je méně věcí k pamatování. Když se aktuální pravidlo dostane na správné místo, staré stopy zmizí a další kontrola se vrátí do běžného rytmu, systém se o kousek uklidní. To je přesně ten typ práce, který nebývá vidět na první pohled, ale po pár měsících rozhoduje, jestli tým žije v použitelném provozu, nebo v archeologii vlastních poznámek.
 
+## Příloha PK: První běžná kontrola po uzavřené lokální korekci
+
+Po uzavření lokální korekce přichází nenápadná zkouška: co se stane při prvním normálním použití, kdy už nikdo nemá korekční kartu otevřenou vedle práce. Právě tady se pozná, jestli se změna opravdu dostala do systému, nebo jestli jen prošla malým rituálem uzavření.
+
+Tahle kontrola nemá znovu dokazovat celou historii. Nemá otevírat staré debaty, proč korekce vznikla, kdo ji navrhl a jestli šlo problém vyřešit elegantněji. Má odpovědět na mnohem praktičtější otázku: dokáže člověk při běžné práci najít aktuální pravidlo, použít ho a dojít ke správnému výsledku bez starých pomocných stop?
+
+První běžná kontrola je užitečná hlavně proto, že odděluje dokumentační úspěch od provozního úspěchu. V dokumentaci může být všechno krásně zavřené. V provozu ale pořád může žít starý odkaz, oblíbená kopie šablony, zvyk v hlavě jednoho člověka nebo dočasný export, který měl zmizet "hned po kontrole". Ano, hned po kontrole je velmi pružný časový údaj. Umí se natáhnout až do dalšího kvartálu.
+
+### Kontrolujte při skutečné práci
+
+Kontrolu spusťte až ve chvíli, kdy dané pravidlo někdo přirozeně potřebuje. Neplánujte samostatný meeting jen kvůli tomu, aby se ověřilo, že korekce je zavřená. Pokud se pravidlo týká landing page, sledujte přípravu další landing page. Pokud se týká supportní odpovědi, sledujte první relevantní ticket. Pokud se týká SaaS administrace, sledujte první běžný průchod daným stavem.
+
+Dobré kontrolní okno vypadá takto:
+
+```text
+Situace:
+Tým připravuje novou landing page pro službu.
+
+Kontrolovaná korekce:
+První formulář už nesmí vyžadovat telefon.
+
+Kde má pravidlo bydlet:
+Checklist landing page, sekce První formulář.
+
+Co sledujeme:
+Autor najde checklist, použije aktuální pravidlo a nevytvoří novou kontrolní tabulku s osobními údaji.
+```
+
+Slabé kontrolní okno vypadá takto:
+
+```text
+Uděláme schůzku a projdeme si, jestli všichni vědí, že telefon už do prvního formuláře nepatří.
+```
+
+Schůzka může pomoct se sdílením kontextu, ale neověří práci. Člověk na schůzce může souhlasit a za týden stejně sáhnout po staré šabloně. Kontrola má proběhnout tam, kde vzniká výsledek.
+
+### Vraťte se ke kanonickému místu
+
+Začněte otázkou: kam člověk při práci sáhl jako první? Pokud zamířil do správného kanonického místa, systém drží. Pokud hledal v chatu, starém issue, kopii dokumentu nebo v hlavě kolegy, uzavření ještě není skutečně propsané do pracovního toku.
+
+Nesledujte to jako osobní chybu. Většinou nejde o nepozornost. Jde o signál, že aktuální místo není dost viditelné, dostupné nebo důvěryhodné. Lidé používají staré cesty ne proto, že milují chaos, ale protože ty staré cesty v minulosti fungovaly. Systém musí nabídnout lepší cestu, ne jen morální ponaučení.
+
+Praktické rozlišení:
+
+- Správné místo nalezeno hned: korekce je dobře uzavřená.
+- Správné místo nalezeno po hledání: zlepšete navigaci, odkaz nebo název.
+- Použita stará kopie: stará stopa nebyla uklizená.
+- Dotaz na kolegu místo práce se zdrojem pravdy: pravidlo není dost samostatné.
+- Vznikla nová pomocná evidence: kontrola si vytvořila vlastní problém.
+
+Pokud se objeví stará kopie, neopravujte všechno kolem. Nejdřív zjistěte, proč ji člověk použil. Byla rychlejší? Byla v šabloně projektu? Byla v záložkách? Vedl na ni interní odkaz? Tahle odpověď určí nejmenší opravu.
+
+### Sledujte čtyři malé signály
+
+První běžná kontrola nepotřebuje složitou metriku. Stačí čtyři signály:
+
+1. Nalezení: člověk našel aktuální pravidlo v místě, kde má být.
+2. Pochopení: pravidlo nepotřebovalo dodatečný výklad.
+3. Výsledek: práce skončila správným výstupem.
+4. Datová stopa: nevzniklo víc osobních údajů, exportů ani ruční evidence.
+
+Příklad u formuláře:
+
+```text
+Nalezení:
+Autor otevřel checklist landing page z aktuální šablony projektu.
+
+Pochopení:
+Bez dotazu použil pole e-mail, cíl a volitelné URL.
+
+Výsledek:
+První formulář neobsahuje telefon a CTA odpovídá slibu stránky.
+
+Datová stopa:
+Nevznikla nová tabulka s kopiemi poptávek. Kontrola je zapsaná jen agregovaně.
+```
+
+Tahle čtveřice stačí, protože testuje skutečný provozní stav. Když všechny čtyři signály drží, nepotřebujete další vrstvu dokazování. Když jeden signál padá, víte, kde zasáhnout.
+
+### Rozlišujte čtyři výsledky kontroly
+
+Po prvním běžném použití vyberte jeden stav:
+
+- Drží: pravidlo bylo nalezeno, pochopeno a použito bez nové datové stopy.
+- Drží s drobným třením: výsledek je správný, ale cesta k pravidlu nebo text pravidla potřebuje malé zpřesnění.
+- Vrací se stará stopa: člověk použil starou šablonu, odkaz, poznámku nebo zvyk.
+- Otevírá větší problém: korekce funguje lokálně, ale ukázala systémovou slabinu.
+
+Stav `Drží` neznamená, že musíte vyrábět další úkol. Naopak. Zapište krátký výsledek a nechte téma běžnému rytmu. Stabilní práce někdy znamená odolat nutkání přidat ještě jeden "pro jistotu" kontrolní bod.
+
+Stav `Drží s drobným třením` řešte lokálně. Například přejmenujte odkaz, přesuňte pravidlo o pár řádků výš nebo zkraťte větu. Pokud kvůli drobnému tření otevíráte nový proces, pravděpodobně jste právě z malé opravy vyrobili trvalou administrativu. To je dražší než samotný problém.
+
+Stav `Vrací se stará stopa` berte vážně. Nejde jen o dokumentační nepořádek. Stará stopa může znamenat staré osobní údaje, staré formuláře, staré sliby zákazníkům nebo stará oprávnění. Tady je oprava často malá, ale musí být konkrétní: smazat kopii, opravit odkaz, označit starou šablonu jako archiv nebo přesměrovat tým na aktuální zdroj pravdy.
+
+Stav `Otevírá větší problém` necpěte do stejné kontroly. Uzavřená lokální korekce může zůstat uzavřená a vedle ní může vzniknout nový nález. To není rozpor. Je to disciplína rozsahu.
+
+### Privacy-first kontrola po uzavření
+
+Privacy-first kontrola se ptá, jestli se po uzavření opravdu zmenšila provozní a datová stopa. Nejde jen o to, že nový formulář sbírá méně údajů. Jde i o to, jestli kolem ověření nevznikly nové soubory, screenshoty, exporty, kopie ticketů nebo seznamy lidí.
+
+Položte si tyto otázky:
+
+- Potřebovali jsme pro kontrolu osobní údaje, nebo stačil výstup bez identifikace lidí?
+- Nevznikla nová kontrolní tabulka, která bude žít déle než samotná otázka?
+- Nezůstala stará šablona dostupná jako výchozí volba?
+- Neobsahuje zápis z kontroly zákaznické detaily, které nejsou nutné?
+- Je jasné, kdy se smažou dočasné podklady použité při kontrole?
+- Zůstává další review v agregovaném nebo pracovním tvaru, ne v podobě sledování jednotlivců?
+
+Dobrá věta do zápisu:
+
+```text
+Kontrola proběhla na výstupu nové landing page. Nebyly kopírovány poptávky ani osobní údaje. Dočasný komentář k formuláři byl po úpravě checklistu smazán.
+```
+
+Slabá věta:
+
+```text
+Pro jistotu jsme si uložili příklady všech formulářů a poptávek do sdílené tabulky.
+```
+
+Ta druhá věta možná působí pečlivě, ale často jen převádí malou kontrolu do větší datové stopy. Privacy-first provoz není proti kontrole. Je proti tomu, aby se kontrola stala výmluvou pro další sběr.
+
+### Kontrolní karta
+
+Zápis držte krátký:
+
+```text
+Uzavřená korekce:
+První běžné použití:
+Kanonické místo:
+Nalezení:
+Pochopení:
+Výsledek:
+Datová stopa:
+Stav kontroly:
+Nejmenší další krok:
+Co neotevíráme:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Uzavřená korekce:
+Telefon není povinné pole v prvním poptávkovém formuláři.
+
+První běžné použití:
+Nová landing page pro audit webu.
+
+Kanonické místo:
+Checklist landing page, sekce První formulář.
+
+Nalezení:
+Autor otevřel aktuální checklist z projektové šablony.
+
+Pochopení:
+Pravidlo použil bez dotazu.
+
+Výsledek:
+Formulář obsahuje e-mail, cíl a volitelné URL.
+
+Datová stopa:
+Bez nových osobních údajů. Kontrola zapsaná agregovaně.
+
+Stav kontroly:
+Drží.
+
+Nejmenší další krok:
+Žádný samostatný úkol. Téma zůstává v měsíčním review formulářů.
+
+Co neotevíráme:
+Neměníme CRM kvalifikaci ani obchodní follow-up.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-24.
+```
+
+Karta má potvrdit stav, ne vytvořit další administrativní závazek. Pokud je výsledek `Drží`, karta může zůstat jako stručný záznam v logu. Pokud je výsledek jiný, napište jen nejmenší další krok a dejte mu vlastní hranici.
+
+### Codyho komentář
+
+Můj pohled: spousta týmů umí změny zavádět, ale neumí je nechat normálně žít. Jakmile se něco opraví, vznikne kolem toho sváteční aura: speciální kontrola, speciální zápis, speciální schůzka, speciální pocit, že tentokrát už to opravdu uhlídáme. Jenže dobrý provoz není sbírka speciálních situací. Je to nudně použitelný systém.
+
+První běžná kontrola má být skoro neviditelná. Člověk dělá normální práci, sáhne na správné místo, použije aktuální pravidlo a nevytvoří zbytečná data. Když to projde, není potřeba bouchat šampaňské. Stačí nezapomenout smazat dočasné poznámky. Ano, vím, méně slavnostní. Ale dlouhodobě mnohem zdravější.
+
+### Mini workshop na 10 minut
+
+Vyberte jednu nedávno uzavřenou lokální korekci a první skutečné použití po ní.
+
+1. Pojmenujte pracovní situaci, kde se pravidlo použilo.
+2. Ověřte, kam člověk sáhl jako první.
+3. Zapište, jestli pravidlo pochopil bez dodatečného vysvětlení.
+4. Porovnejte výsledek s aktuálním pravidlem.
+5. Zkontrolujte, jestli nevznikla nová osobní nebo pomocná datová stopa.
+6. Vyberte stav: `Drží`, `Drží s drobným třením`, `Vrací se stará stopa`, nebo `Otevírá větší problém`.
+7. Pokud je potřeba další krok, napište jen jeden.
+8. Pokud téma drží, vraťte ho do běžného rytmu bez nové vrstvy kontroly.
+
+Výstup:
+
+```text
+Uzavřená lokální korekce byla ověřena při prvním běžném použití a má jasný stav: drží, potřebuje malou úpravu, vrací starou stopu, nebo otevírá samostatný nález.
+```
+
+### Checklist kapitoly
+
+- Proběhla kontrola při skutečné práci, ne jen na schůzce?
+- Je jasné, jaké pravidlo se mělo použít?
+- Sáhl člověk na kanonické pracovní místo jako první?
+- Pokud ne, víte proč použil jinou cestu?
+- Bylo pravidlo pochopené bez dodatečného výkladu?
+- Odpovídá výstup aktuálnímu pravidlu?
+- Nevznikla nová kontrolní tabulka, export nebo kopie osobních údajů?
+- Byly staré šablony, odkazy nebo poznámky opravdu uklizené?
+- Je výsledek kontroly zařazený do jednoho ze čtyř stavů?
+- Pokud vznikl další krok, je malý a konkrétní?
+- Pokud se objevil větší problém, je oddělený jako nový nález?
+- Vrací se téma po kontrole do běžného rytmu místo nové administrativní vrstvy?
+
+První běžná kontrola po uzavřené lokální korekci má jeden tichý cíl: potvrdit, že systém si pamatuje aktuální pravidlo za lidi. Když člověk nemusí znát starou historii, ptát se kolegy ani zakládat novou evidenci, korekce se opravdu proměnila v provoz. A přesně tam má skončit většina dobrých malých změn: ne jako další památník v dokumentaci, ale jako jednodušší práce.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PK o první běžné kontrole po uzavřené lokální korekci: kontrola při skutečné práci, návrat ke kanonickému místu, signály nalezení/pochopení/výsledku/datové stopy, čtyři výsledky kontroly, privacy-first minimalizace důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PJ o uzavření ověřené lokální korekce do běžného rytmu: kanonické pracovní místo, přepis pravidla bez historie, privacy-first úklid přechodových stop, uzavírací karta, oddělení nových nálezů, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PI o ověření lokální korekce po dalším běžném průchodu: návrat ke korekční kartě, kontrola v normální práci, signály nalezení/pochopení/dokončení/ceny, čtyři výsledky, privacy-first ověření bez nové vrstvy, ověřovací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PH o převodu drobné stopy po první běžné kontrole do jedné lokální korekce: vstupní brána, popis pracovního rizika, oprava nejbližšího místa, ochrana uzavřené smyčky, lehké ověření, privacy-first evidence, karta korekce, mini workshop a checklist.
