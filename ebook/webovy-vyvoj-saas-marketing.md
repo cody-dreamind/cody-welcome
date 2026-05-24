@@ -1252,6 +1252,183 @@ Tahle karta dává týmu jeden další krok a zároveň chrání rozsah. Měsí�
 
 Měsíční návrat drží rukopis při zemi. Bez něj mohou jednotlivé kapitoly vést k dobrým, ale osamělým změnám. S ním se z nich stává pracovní systém: rozhodnutí vznikají, ověřují se, uklízejí, občas se ruší a neztrácejí přitom respekt k datům ani k času týmu.
 
+## Kvartální prořezání rozhodovací paměti
+
+Měsíční návrat drží rozhodnutí v použitelném stavu. Jednou za kvartál ale potřebujete udělat ještě jiný typ práce: neřešit jednotlivé iterace, ale zmenšit celý systém. Čím déle tým používá rozhodovací záznamy, pracovní pravidla, výjimky, šablony a checklisty, tím větší je riziko, že se z dobré paměti stane tichá administrativa.
+
+Kvartální prořezání nemá hledat víc přesnosti. Má hledat méně věcí, které tým musí držet v hlavě. Jeho cílem je odstranit rozhodnutí, která už nemají provozní hodnotu, sloučit duplicitní pravidla, zavřít staré výjimky a ponechat jen takovou paměť, která pomáhá dalšímu rozhodnutí.
+
+Začněte otázkou:
+
+```text
+Která rozhodnutí bychom dnes novému člověku opravdu předali jako živá pravidla a která už jsou jen historie?
+```
+
+Pokud je odpověď nejasná, máte pravděpodobně příliš mnoho míst pravdy. To je běžné. Týmy se nesypou kvůli tomu, že by měly málo dokumentů. Častěji se sypou kvůli tomu, že mají příliš mnoho podobně vypadajících dokumentů, z nichž každý tvrdí trochu jinou věc.
+
+### Co vzít do kvartálního prořezání
+
+Neberte celý archiv. Vezměte jen živou vrstvu:
+
+- rozhodovací záznamy označené jako platné nebo čekající na návrat;
+- pravidla, která se propsala do šablon, checklistů, formulářů nebo sales materiálů;
+- výjimky, které ještě nemají rozhodnutí `zavřít`, `prodloužit` nebo `přepsat`;
+- kanonická místa, kde se pravidla čtou při práci;
+- seznam měření, exportů a přístupů, které vznikly kvůli ověřování rozhodnutí.
+
+Archivní poznámky nechte stranou. Pokud se musí kvůli každému prořezání otevřít kompletní historie, systém je příliš těžký. Živá paměť má být malá, dohledatelná a napojená na skutečné pracovní místo.
+
+### Čtyři koše pro starší rozhodnutí
+
+Každé starší rozhodnutí zařaďte do jednoho ze čtyř košů:
+
+- Ponechat: pořád pomáhá a je zapsané na správném místě.
+- Sloučit: dubluje jiné pravidlo nebo se dá převést do kratší šablony.
+- Archivovat: bylo správné pro tehdejší situaci, ale už není aktivní.
+- Zrušit: dnes mate, škodí nebo odporuje aktuálnímu směru.
+
+Rozdíl mezi archivovat a zrušit je důležitý. Archivované rozhodnutí je historický důkaz: vysvětluje, proč se něco udělalo. Zrušené rozhodnutí už nemá vést práci. Pokud ho necháte viset bez jasného stavu, někdo ho později najde, vezme vážně a začne z něj odvozovat nové úkoly. Tak vzniká procesní zombie. A zombie procesy nežerou mozky, ale kalendáře.
+
+Příklad:
+
+```text
+Rozhodnutí:
+Dočasně měřit kliknutí na všechny varianty CTA v pilotní landing page.
+
+Koš:
+Archivovat.
+
+Důvod:
+Pomohlo při pilotu, ale po výběru finální varianty už nemá být aktivní.
+
+Akce:
+Vypnout event, ponechat agregovaný závěr v rozhodovacím záznamu a smazat pracovní export.
+```
+
+Jiný příklad:
+
+```text
+Rozhodnutí:
+Každý lead magnet má mít samostatný měřicí dashboard.
+
+Koš:
+Zrušit.
+
+Důvod:
+Pravidlo vytváří víc údržby než hodnoty a vede k měření bez rozhodovací otázky.
+
+Akce:
+Nahradit pravidlem: měříme jen tehdy, když existuje konkrétní rozhodnutí a datum návratu.
+```
+
+### Slučujte do pracovního místa, ne do dalšího dokumentu
+
+Když najdete dvě podobná pravidla, nepřidávejte třetí dokument, který je vysvětluje. Najděte místo, kde se pravidlo používá, a upravte právě to. U formuláře je to zadání formuláře. U case study je to šablona. U analytiky je to měřicí plán. U nabídky je to sales karta nebo delivery checklist.
+
+Špatný výsledek kvartálního prořezání:
+
+```text
+Vznikl nový dokument „Shrnutí všech pravidel pro obsah“.
+```
+
+Lepší výsledek:
+
+```text
+Šablona případové studie má jednu platnou strukturu, krátkou výjimku pro logo reference a odkaz na poslední rozhodovací záznam.
+```
+
+Čím blíž je pravidlo místu použití, tím menší je šance, že ho tým obejde. Centrální dokument může pomáhat jako index, ale nemá nahrazovat pracovní šablony.
+
+### Privacy-first prořezání paměti
+
+Kvartální prořezání je dobrá chvíle na hlubší úklid datové stopy. Nejde jen o mazání exportů. Jde o otázku, jestli si tým neuchovává víc kontextu, než potřebuje pro další práci.
+
+Zkontrolujte hlavně:
+
+- rozhodovací záznamy s konkrétními osobními údaji, které už stačí nahradit agregovaným závěrem;
+- screenshoty, nahrávky, tabulky a pracovní kopie použité jen pro dávné ověření;
+- výjimky, které kvůli sobě drží speciální přístupy nebo exporty;
+- staré analytické eventy bez aktuální rozhodovací otázky;
+- dodavatelské přístupy, které přežily původní iteraci.
+
+Privacy-first pravidlo je jednoduché: pokud už detail nepomáhá rozhodnout, nemá zůstávat jen proto, že ho umíme levně uložit. Levné úložiště není argument pro drahou odpovědnost.
+
+Codyho komentář: nejhezčí dokumentační systém není ten, který pamatuje všechno. Je to ten, který umí zapomenout přesně ve chvíli, kdy už detail nepomáhá. Digitální minimalismus, jen bez vonné svíčky a s lepším audit trail.
+
+### Kvartální karta prořezání
+
+Na konci vytvořte jednu kartu. Nemá popisovat každé rozhodnutí. Má říct, co se zmenšilo a co zůstává živé.
+
+```text
+Období:
+Počet zkontrolovaných živých rozhodnutí:
+Ponecháno:
+Sloučeno:
+Archivováno:
+Zrušeno:
+Nejdůležitější změna v pracovním místě:
+Privacy-first úklid:
+Otevřené výjimky po prořezání:
+Co dál vědomě neprořezáváme:
+Vlastník:
+Termín dalšího návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Období:
+Q2 2026.
+
+Počet zkontrolovaných živých rozhodnutí:
+18.
+
+Ponecháno:
+9.
+
+Sloučeno:
+4 rozhodnutí o case studies do jedné šablony.
+
+Archivováno:
+3 pilotní měřicí rozhodnutí.
+
+Zrušeno:
+2 pravidla pro dashboardy bez aktivní rozhodovací otázky.
+
+Nejdůležitější změna v pracovním místě:
+Marketingová šablona má nově jednu sekci „důkaz pro rozhodnutí zákazníka“ místo tří podobných pravidel.
+
+Privacy-first úklid:
+Smazané dva pracovní exporty, vypnuté tři staré eventy, odebraný jeden externí přístup.
+
+Otevřené výjimky po prořezání:
+Jedna enterprise výjimka pro telefon v kvalifikačním formuláři, návrat za 30 dní.
+
+Co dál vědomě neprořezáváme:
+Neměníme hlavní strukturu webu ani pricingové rozhodnutí.
+
+Vlastník:
+Operations owner.
+
+Termín dalšího návratu:
+První týden dalšího kvartálu.
+```
+
+### Checklist kvartálního prořezání
+
+- Pracovali jste jen se živou vrstvou, ne s celým archivem?
+- Má každé starší rozhodnutí stav ponechat, sloučit, archivovat nebo zrušit?
+- Zmizely duplicity přímo v pracovních šablonách, ne jen v novém shrnujícím dokumentu?
+- Je jasné, která rozhodnutí už nemají vést práci?
+- Zůstaly archivní záznamy dostatečné pro pochopení historie, ale bez zbytečných detailů?
+- Jsou vypnutá měření, exporty a přístupy, které už nepodporují rozhodnutí?
+- Má každá zbývající výjimka vlastníka a datum návratu?
+- Vznikla jedna karta prořezání místo dlouhého zápisu?
+- Ví nový člověk, kde najde aktuální pravidlo bez čtení celé historie?
+- Je po prořezání systém menší než před ním?
+
+Kvartální prořezání je ochrana proti tomu, aby se z praktického e-booku a rozhodovacích smyček stal interní právní řád malého království. Dobrá paměť má pomáhat rychleji jednat. Pokud tým po každém kvartálu drží méně aktivních pravidel, ale lepší pracovní jistotu, prořezání splnilo účel.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -119021,6 +119198,7 @@ První běžná kontrola po uzavřené lokální korekci má jeden tichý cíl: 
 
 ## Pracovní log
 
+- 2026-05-24: Doplněna úvodní podkapitola o kvartálním prořezání rozhodovací paměti: živá vrstva rozhodnutí, čtyři koše, slučování do pracovních míst, privacy-first úklid a karta prořezání.
 - 2026-05-24: Doplněna Příloha PK o první běžné kontrole po uzavřené lokální korekci: kontrola při skutečné práci, návrat ke kanonickému místu, signály nalezení/pochopení/výsledku/datové stopy, čtyři výsledky kontroly, privacy-first minimalizace důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PJ o uzavření ověřené lokální korekce do běžného rytmu: kanonické pracovní místo, přepis pravidla bez historie, privacy-first úklid přechodových stop, uzavírací karta, oddělení nových nálezů, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PI o ověření lokální korekce po dalším běžném průchodu: návrat ke korekční kartě, kontrola v normální práci, signály nalezení/pochopení/dokončení/ceny, čtyři výsledky, privacy-first ověření bez nové vrstvy, ověřovací karta, mini workshop a checklist.
