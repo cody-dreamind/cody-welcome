@@ -114947,8 +114947,239 @@ Dočišťovací úprava je potvrzená, jednou drobně dočištěná, vrácená d
 
 Ověření dočišťovací úpravy je konec velmi malé smyčky. Drobná stopa se našla, uklidila a při dalším použití buď zmizela, nebo ukázala, že problém byl větší. V obou případech je výhra jasnost: tým ví, jestli může věc pustit z ruky, nebo ji vrátit do údržby bez mlhavého "ještě to sledujme".
 
+## Příloha OX: Uzavření potvrzené dočišťovací úpravy do běžného rytmu
+
+Příloha OW ověřila, že drobná stopa po dočišťovací úpravě zmizela, nebo ukázala, že se věc musí vrátit do údržby. Tato příloha řeší jen první případ: co udělat, když je dočištění potvrzené a tým ho má pustit z ruky.
+
+Uzavření dočištění má být skoro neviditelné. Není to nový standard, nová kapitola interní dokumentace ani další kontrolní rituál. Je to krátké potvrzení, že pracovní místo je aktuální, stará stopa už nevede lidi stranou a běžný rytmus může pokračovat bez speciálního štítku.
+
+Pracovní otázka zní:
+
+```text
+Co přesně ponecháme v kanonickém místě a co po potvrzeném dočištění smažeme, zkrátíme nebo přestaneme sledovat?
+```
+
+Výstupem je uzavírací zápis:
+
+```text
+Potvrzene docisteni:
+Kanonicke misto po uzavreni:
+Co zustava:
+Co mizí:
+Kde je kratky changelog:
+Dalsi bezny rytmus:
+Datova stopa po uzavreni:
+Vlastnik:
+```
+
+Codyho komentář: dobré dočištění poznáte podle toho, že po něm není potřeba nic vysvětlovat. Pokud musí tým měsíc připomínat, že starý odkaz už neplatí, dočištění se nepřepsalo do místa práce. Jen se přesunulo do hlavy lidí, a to je nejdražší možné úložiště.
+
+### Začněte potvrzeným stavem
+
+Neuzavírejte dočištění podle pocitu, že "už je to asi hotové". Vraťte se k ověřovacímu zápisu z Přílohy OW a ověřte, že stav je skutečně `Potvrdit`.
+
+Minimum pro uzavření:
+
+- původní stopa se při běžném použití neobjevila;
+- člověk našel aktuální pracovní místo bez zvláštní instrukce;
+- nevznikla nová pomocná evidence větší než původní problém;
+- existuje jasná věta, co zůstává kanonické.
+
+Příklad potvrzeného stavu:
+
+```text
+Při měsíčním review index vedl přímo na aktuální checklist. Starý odkaz na údržbovou kartu se neobjevil a nevznikla žádná nová tabulka ani instrukce v chatu.
+```
+
+To stačí. Nehledejte druhé a třetí potvrzení jen proto, že uzavírání působí nebezpečně. U malých provozních stop má příliš dlouhé sledování opačný efekt: z dočasné poznámky se stane další položka, kterou musí někdo udržovat.
+
+### Přepište aktuální stav do kanonického místa
+
+Uzavření patří tam, kde lidé příště opravdu začnou. Pokud byl problém v indexu, uzavření se projeví v indexu. Pokud byl problém v checklistu, projeví se v checklistu. Pokud byl problém v onboardingové trase, projeví se v trase.
+
+Nepište dlouhé vysvětlení historie. Stačí aktuální stav:
+
+```text
+Používejte aktuální měsíční checklist provozních standardů.
+```
+
+Místo:
+
+```text
+Dříve jsme používali údržbovou kartu, potom vznikla stabilizační úprava, pak dočištění odkazu a po ověření se rozhodlo, že...
+```
+
+Historie je užitečná jen tehdy, když chrání budoucí rozhodnutí. V běžném pracovním místě většinou stačí aktuální instrukce a případně jedna krátká položka v changelogu. Čtenář nepřišel studovat archeologii procesu. Přišel udělat práci.
+
+Praktické pravidlo:
+
+```text
+Kanonické místo říká, co platí teď. Changelog říká, proč zmizela stará cesta. Dočasná karta se zavře nebo smaže.
+```
+
+### Zavřete dočasné karty a odkazy
+
+Po potvrzeném dočištění často zůstane víc stop, než je potřeba:
+
+- dočišťovací karta;
+- ověřovací poznámka;
+- starý odkaz v chatu;
+- screenshot před úpravou;
+- export malé tabulky;
+- komentář v úkolu, který ukazuje na neaktuální místo.
+
+Ne všechno musí zůstat. Rozhodněte u každé stopy jeden stav:
+
+```text
+Ponechat:
+Krátká changelogová věta, pokud pomůže pochopit, proč starý odkaz zmizel.
+
+Zkrátit:
+Ověřovací poznámka na jednu větu bez osobních detailů.
+
+Smazat:
+Screenshoty, exporty a pomocné tabulky, které už nejsou potřeba.
+
+Archivovat:
+Jen artefakty, které jsou nutné kvůli auditu, smlouvě nebo internímu pravidlu.
+```
+
+U drobného dočištění je výchozí volba zkracovat a mazat. Archivace má být výjimka, ne reflex. Pokud si nejste jistí, jestli artefakt bude potřeba, položte si otázku: pomůže za tři měsíce rozhodnout něco konkrétního? Pokud ne, pravděpodobně jen zvyšuje šum.
+
+### Vraťte věc do existujícího rytmu
+
+Potvrzené dočištění nepotřebuje vlastní review. Vrací se do rytmu pracovního místa, kterého se týká.
+
+Příklady:
+
+- index standardů se kontroluje při běžném měsíčním review indexu;
+- checklist se kontroluje při příští běžné revizi checklistů;
+- onboardingová trasa se kontroluje při dalším onboardingovém cyklu;
+- sales karta se kontroluje při běžném review nabídky;
+- publikační postup se kontroluje při další redakční iteraci.
+
+Slabé uzavření:
+
+```text
+Dočištění je potvrzené, ale za dva týdny si dáme ještě samostatnou kontrolu, jestli opravdu drží.
+```
+
+Silnější uzavření:
+
+```text
+Dočištění je potvrzené. Další kontrola proběhne jen jako součást běžného měsíčního review indexu.
+```
+
+Tím se uzavírá smyčka i mentálně. Tým ví, že dočištění není další otevřený proud práce. Pokud se stopa někdy vrátí, bude to nový nález v běžném rytmu, ne nekonečné prodlužování staré karty.
+
+### Privacy-first uzavření
+
+Privacy-first hodnota se u drobných provozních věcí často neprojeví velkým právním rozhodnutím, ale obyčejným úklidem. Méně screenshotů, méně exportů, méně osobních komentářů, méně dočasných kopií.
+
+Před uzavřením projděte pět otázek:
+
+- Zůstává někde jméno člověka, které není nutné pro vlastnictví dalšího kroku?
+- Máme screenshot nebo export, který už nepomáhá rozhodnutí?
+- Nezůstala stará karta přístupná jako falešná alternativa?
+- Je changelog dost krátký, aby neobsahoval zbytečné interní detaily?
+- Víme, kde je aktuální pracovní místo, aniž bychom museli otevírat staré podklady?
+
+Dobré privacy-first uzavření:
+
+```text
+V indexu zůstává jen aktuální odkaz. Changelog obsahuje jednu větu. Ověřovací screenshoty nebyly ukládány. Dočišťovací karta je zavřená a bez osobních komentářů.
+```
+
+Špatné uzavření:
+
+```text
+Aktuální odkaz je správně, ale stará karta zůstává v indexu jako "pro jistotu", screenshoty jsou v příloze a v chatu visí instrukce, která obsahuje jména lidí a konkrétní chyby.
+```
+
+Úklid není kosmetika. Je to způsob, jak udržet kontrolu nad daty a nad pozorností týmu.
+
+### Uzavírací zápis
+
+```text
+Datum:
+Potvrzene docisteni:
+Puvodni stopa:
+Kanonicke misto po uzavreni:
+Co zustava:
+Co mizi nebo se zkracuje:
+Changelog:
+Dalsi bezny rytmus:
+Datova stopa po uzavreni:
+Vlastnik:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-10-12
+Potvrzene docisteni: odstranění starého odkazu na údržbovou kartu z indexu standardů
+Puvodni stopa: index vedl přednostně na starou kartu místo aktuálního checklistu
+Kanonicke misto po uzavreni: index provozních standardů
+Co zustava: aktuální měsíční checklist a jedna věta v changelogu
+Co mizi nebo se zkracuje: dočišťovací karta zavřená, ověřovací poznámka zkrácená na jednu větu, bez screenshotů
+Changelog: starý odkaz odstraněn, při měsíčním review použit aktuální checklist
+Dalsi bezny rytmus: běžné měsíční review indexu
+Datova stopa po uzavreni: minimum, bez osobních detailů a dočasných exportů
+Vlastnik: provozní lead
+```
+
+Příklad s archivací:
+
+```text
+Co mizi nebo se zkracuje: dočišťovací karta zavřená, pracovní poznámky smazané
+Co zustava: auditní reference k rozhodnutí, protože pravidlo souvisí se smluvním předáním
+Datova stopa po uzavreni: archivovaná jen krátká reference bez osobních komentářů
+```
+
+Archivace není selhání privacy-first přístupu, pokud má jasný účel, omezený rozsah a vlastníka. Selhání je ukládání všeho "pro jistotu", protože nikdo nechce rozhodnout, co už nemá hodnotu.
+
+### Mini workshop na 10 minut
+
+Vezměte jedno dočištění se stavem `Potvrdit`.
+
+1. Opište jednu větu potvrzeného výsledku.
+2. Určete kanonické pracovní místo, kde má zůstat aktuální stav.
+3. Napište, co přesně v tomto místě platí teď.
+4. Rozdělte zbylé stopy na ponechat, zkrátit, smazat nebo archivovat.
+5. Přidejte nejkratší užitečnou větu do changelogu.
+6. Zavřete nebo smažte dočasnou kartu podle pravidel týmu.
+7. Zapište, do jakého běžného rytmu se věc vrací.
+8. Projděte privacy-first otázky a odstraňte zbytečné osobní nebo dočasné stopy.
+
+Výstup:
+
+```text
+Potvrzené dočištění je uzavřené v kanonickém místě, staré stopy jsou zkrácené nebo odstraněné a další kontrola proběhne jen v běžném rytmu.
+```
+
+### Checklist kapitoly
+
+- Je stav ověření opravdu `Potvrdit`?
+- Je jasné, která původní stopa zmizela?
+- Je aktuální stav přepsaný do kanonického pracovního místa?
+- Nezůstává v pracovním místě zbytečná historie?
+- Je changelog krátký a užitečný?
+- Jsou dočasné karty zavřené, zkrácené nebo smazané?
+- Nezůstává starý odkaz jako falešná alternativa?
+- Je jasné, co zůstává kvůli auditu nebo smluvní povinnosti?
+- Je archivace výjimka s účelem, ne reflex?
+- Vrací se věc do existujícího rytmu místo nové zvláštní kontroly?
+- Nevzniká nová tabulka, štítek nebo ruční připomínka?
+- Je datová stopa po uzavření menší než před dočištěním?
+- Zmizely nepotřebné screenshoty, exporty a osobní komentáře?
+- Ví vlastník, že smyčka je zavřená?
+- Je jasné, že případný budoucí návrat bude nový nález v běžném rytmu?
+
+Uzavření potvrzeného dočištění je malý akt provozní disciplíny. Tým nepřidává další vrstvu řízení, jen nechá aktuální pracovní místo zůstat aktuální. Když se stará stopa smaže, changelog řekne minimum a rytmus pokračuje normálně, systém je o kousek tišší. A tichý systém se používá líp než systém, který pořád vysvětluje vlastní minulost.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha OX o uzavření potvrzené dočišťovací úpravy do běžného rytmu: potvrzený stav, přepis kanonického místa, zavření dočasných karet a odkazů, návrat do existujícího rytmu, privacy-first úklid zbytkových stop, uzavírací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OW o ověření dočišťovací úpravy po dalším běžném použití: návrat k původní drobné stopě, ověření při normálním průchodu, tři malé signály, čtyři výsledky ověření, privacy-first minimalizace zbytkové vrstvy, ověřovací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OV o převod drobné stopy po kontrole běžného rytmu do jedné dočišťovací úpravy: vstupní brána pro stav Drží s drobnou stopou, pojmenování podle pracovního místa, typy dočištění, omezení zásahu na nejbližší kanonické místo, ověření dalším běžným použitím, privacy-first úklid datové stopy, zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OU o první kontrolu běžného rytmu po uzavřené údržbové položce: kontrola při skutečném použití, cesta k aktuálnímu místu, návrat staré stopy, čtyři výsledky kontroly, privacy-first úklid zbytkových podkladů, kontrolní zápis, mini workshop a checklist.
