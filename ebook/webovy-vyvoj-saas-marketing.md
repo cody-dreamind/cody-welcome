@@ -116790,8 +116790,252 @@ Stabilní provozní stav byl zkontrolován v běžném rytmu a zůstává v prov
 
 První kontrola stabilního provozního stavu má být nenápadná. Když vše drží, skoro nic se nestane: zapíše se krátký stav a práce pokračuje. To je dobrý výsledek. Stabilní systém se pozná podle toho, že nepotřebuje drama, aby dokázal, že funguje.
 
+## Příloha PD: Převod drobného driftu stabilního stavu do jedné udržovací poznámky
+
+Příloha PC řešila první kontrolu stabilního provozního stavu v běžném rytmu. Tato příloha navazuje na výsledek `Drží s drobným driftem`: pravidlo pořád funguje, práce se nezasekla, starý problém se nevrátil, ale v jednom místě je vidět malý posun, který by se časem mohl stát třením.
+
+Kontrolní otázka zní:
+
+```text
+Umíme drobný drift zachytit jednou udržovací poznámkou bez nové korekční smyčky, nového procesu a nové datové vrstvy?
+```
+
+Výstupem není údržbový projekt. Výstupem je krátká poznámka u kanonického místa:
+
+```text
+Stabilní stav drží. Při nejbližší běžné údržbě upravit [jedno místo], protože [malý drift].
+```
+
+Codyho komentář: drobný drift je jako šroubek, který se ještě nehýbe, ale už je vidět, že není úplně dotažený. Není kvůli němu potřeba svolat poradu vesmíru. Stačí ho zapsat tam, kde se na něj při další běžné údržbě narazí, a nedělat z něj novou ceremonii.
+
+### Nejdřív ověřte, že jde opravdu o drift
+
+Drift není každý nápad, který se objeví při kontrole. Drift je malá odchylka od stabilního pravidla, která zatím nebrání práci, ale může snižovat srozumitelnost, dohledatelnost nebo čistotu provozu.
+
+Patří sem například:
+
+- starý název sekce v jedné onboardingové poznámce;
+- odkaz na správné místo, ale s neaktuálním popisem;
+- checklist, který funguje, ale jedna věta už neodpovídá běžnému pojmenování v týmu;
+- příklad v šabloně, který je pořád použitelný, ale ukazuje starší variantu pracovního toku;
+- archivní poznámka, která není vstupem do práce, ale mohla by mást nového člověka.
+
+Nepatří sem:
+
+- opakované selhání stejného pravidla;
+- návrat starého pracovního toku;
+- problém s přístupy, bezpečností, billingem nebo zákaznickou komunikací;
+- změna kontextu, kvůli které pravidlo přestává platit;
+- potřeba nového rozhodnutí o rozsahu, vlastnictví nebo datové stopě.
+
+Pokud má nález pracovní cenu už teď, nepřevádějte ho do udržovací poznámky. Založte údržbovou položku. Udržovací poznámka je jen pro věci, které mohou počkat na nejbližší normální údržbu bez dopadu na zákazníka, provoz nebo důvěru.
+
+### Zapište drift u stejného kanonického místa
+
+Drobný drift nesmí skončit v samostatném seznamu "věci k opravení někdy". Takové seznamy mají zvláštní schopnost tvářit se organizovaně, zatímco tiše hnijí v koutě. Poznámka má ležet u místa, kde se pravidlo reálně používá.
+
+Dobré umístění:
+
+- poznámka u kanonického checklistu;
+- komentář v kartě provozního standardu;
+- položka v nejbližší plánované údržbě šablon;
+- krátký zápis v měsíčním review, pokud se z něj běžně berou údržbové vstupy.
+
+Slabé umístění:
+
+- nový dokument s jednou poznámkou;
+- soukromý chat;
+- osobní todo vlastníka bez vazby na standard;
+- dlouhý backlog bez jasného review rytmu;
+- komentář u staré karty, která už nemá být pracovním vstupem.
+
+Praktická věta:
+
+```text
+Udržovací poznámka leží u aktuálního checklistu, protože tam ji vlastník uvidí při nejbližší měsíční údržbě.
+```
+
+Pokud neumíte určit kanonické místo, drift pravděpodobně odhalil větší problém: tým neví, kde se stabilní stav vlastně drží. V takovém případě neřešte formulaci poznámky. Nejdřív najděte zdroj pravdy.
+
+### Pište poznámku jako budoucí malou akci
+
+Udržovací poznámka nemá být analýza. Má říct, co se při nejbližší údržbě udělá, proč a kde končí rozsah.
+
+Šablona:
+
+```text
+Drift:
+Malá akce:
+Místo:
+Proč počká:
+Hranice:
+Datová stopa:
+```
+
+Vyplněný příklad:
+
+```text
+Drift:
+Onboardingová poznámka používá starý název sekce "Měsíční kontrola", i když kanonický index už používá "Měsíční review standardů".
+
+Malá akce:
+Při nejbližší údržbě šablon přepsat jen název v onboardingové poznámce.
+
+Místo:
+Onboardingová šablona pro provozní standardy.
+
+Proč počká:
+Nový člověk i tak došel do správného checklistu a práce se nezdržela.
+
+Hranice:
+Neměnit strukturu checklistu, nepřepisovat celý onboarding.
+
+Datová stopa:
+Bez nových exportů, screenshotů a seznamů lidí; stačí tato agregovaná poznámka.
+```
+
+Všimněte si, že příklad neříká "musíme zlepšit onboarding". To by otevřelo dveře do celé budovy. Říká "přepsat jeden název". Drobné věci mají zůstat drobné i v zápisu.
+
+### Rozhodněte, kdy poznámka sama expiruje
+
+Každá udržovací poznámka má mít konec. Buď se při nejbližší údržbě udělá, nebo se vědomě zahodí, protože už nedává smysl. Bez konce se z poznámek stává sediment: jednotlivě nevadí, dohromady zanesou celý provoz.
+
+Stačí jednoduché pravidlo:
+
+```text
+Poznámka se vyhodnotí při nejbližší běžné údržbě. Pokud se do té doby drift neprojeví znovu a místo se mezitím změnilo, poznámka se zavře bez akce.
+```
+
+To je důležité hlavně u živých webů, SaaS produktů a marketingových materiálů. Šablona se může změnit dřív, než dojde na opravu drobného driftu. V takové chvíli nemá smysl přenášet starou poznámku do nové struktury jen proto, že kdysi vznikla.
+
+### Privacy-first brzda u drobných poznámek
+
+Drobný drift často svádí k nevinnému sběru důkazů: screenshot sem, jméno člověka tam, export staré tabulky pro jistotu. Jenže stabilní stav má být už ve fázi, kdy se dočasné důkazy uklízí, ne znovu vyrábí.
+
+Udržovací poznámka proto nesmí obsahovat:
+
+- jména lidí, pokud nejsou potřeba pro vlastnictví akce;
+- screenshoty interních nástrojů jako výchozí důkaz;
+- obsah zákaznických zpráv;
+- exporty z analytiky nebo CRM;
+- detailní popis chování konkrétního člověka;
+- nové sledování, jestli někdo pravidlo používá správně.
+
+Stačí popsat stav systému:
+
+```text
+Onboardingová poznámka používá starý název sekce.
+```
+
+Není potřeba psát:
+
+```text
+Petr při review klikl na starý odkaz a pak se ptal v chatu.
+```
+
+První věta řeší pracovní stopu. Druhá zbytečně ukládá osobní mini příběh, který pro opravu názvu není potřeba.
+
+### Kdy poznámku povýšit na údržbovou položku
+
+Udržovací poznámka má zůstat malá. Povyšte ji na údržbovou položku, pokud nastane jedna z těchto věcí:
+
+- stejný drift se objeví při dalším běžném použití;
+- kvůli driftu někdo použije staré pracovní místo;
+- poznámka se dotýká více než jednoho kanonického místa;
+- změna vyžaduje rozhodnutí vlastníka, ne jen malou úpravu textu nebo odkazu;
+- drift zvyšuje datovou stopu, například vrací do práce starý export nebo seznam lidí;
+- nejbližší běžná údržba poznámku nevyřešila ani nezahodila.
+
+Příklad povýšení:
+
+```text
+Povýšení:
+Udržovací poznámka nestačí.
+
+Důvod:
+Starý název není jen v onboardingové poznámce, ale také v sales checklistu a provozním indexu.
+
+Další krok:
+Založit jednu údržbovou položku na sjednocení názvu ve třech konkrétních místech. Neměnit obsah pravidla.
+```
+
+Povýšení není selhání. Je to jen poctivé přiznání, že nález už není drobný drift.
+
+### Udržovací zápis
+
+```text
+Datum:
+Stabilní stav:
+Výsledek kontroly:
+Drift:
+Kanonické místo poznámky:
+Malá akce při nejbližší údržbě:
+Proč může počkat:
+Hranice rozsahu:
+Kdy poznámka expiruje:
+Kdy povýšit na údržbovou položku:
+Datová stopa:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2027-02-03
+Stabilní stav: měsíční review začíná v aktuálním checklistu v kanonickém indexu
+Výsledek kontroly: Drží s drobným driftem
+Drift: onboardingová poznámka používá starý název sekce
+Kanonické místo poznámky: aktuální onboardingová šablona
+Malá akce při nejbližší údržbě: přepsat jen název sekce
+Proč může počkat: práce se dokončila bez zdržení a tým použil správný checklist
+Hranice rozsahu: nepřepisovat celý onboarding, neměnit strukturu indexu
+Kdy poznámka expiruje: při nejbližší měsíční údržbě šablon
+Kdy povýšit na údržbovou položku: pokud se starý název objeví ještě v dalším pracovním místě
+Datová stopa: jen agregovaná poznámka bez jmen, screenshotů a exportů
+Vlastník: provozní lead
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jeden stabilní stav, který při kontrole dopadl jako `Drží s drobným driftem`.
+
+1. Jednou větou popište drift.
+2. Ověřte, že práce se kvůli němu nezasekla.
+3. Najděte kanonické místo, kde má poznámka ležet.
+4. Napište malou akci pro nejbližší běžnou údržbu.
+5. Přidejte hranici, co se teď nebude měnit.
+6. Určete, kdy poznámka expiruje.
+7. Zapište, kdy se má povýšit na údržbovou položku.
+8. Zkontrolujte, že poznámka neobsahuje osobní údaje ani nové důkazy navíc.
+
+Výstup:
+
+```text
+Drobný drift je zachycen u kanonického místa jako jedna udržovací poznámka. Neotevírá novou smyčku a vyhodnotí se při nejbližší běžné údržbě.
+```
+
+### Checklist kapitoly
+
+- Jde opravdu o drobný drift, ne o opakované selhání?
+- Práce se kvůli driftu dokončila bez zásadního tření?
+- Nejde o bezpečnostní, billingový, právní nebo zákaznicky citlivý problém?
+- Leží poznámka u stejného kanonického místa, kde se pravidlo používá?
+- Nevznikl nový dokument, seznam nebo backlog jen kvůli jedné drobnosti?
+- Je poznámka napsaná jako budoucí malá akce?
+- Je jasné, proč může počkat na běžnou údržbu?
+- Má poznámka hranici rozsahu?
+- Má poznámka datum nebo událost expirace?
+- Je jasné, kdy se má povýšit na údržbovou položku?
+- Neobsahuje poznámka jména lidí, screenshoty, exporty ani osobní mini příběhy?
+- Popisuje stav systému, ne výkon jednotlivce?
+- Nevrací do provozu dočasné důkazy, které už měly být uklizené?
+- Umí vlastník říct jednou větou, co se stane při nejbližší údržbě?
+
+Dobrá udržovací poznámka je malá, viditelná a konečná. Zachytí posun dřív, než z něj vznikne tření, ale zároveň nedělá z každé drobnosti nový proces. Stabilní provoz potřebuje údržbu, ne sbírku mikropanických lístečků.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PD o převod drobného driftu stabilního provozního stavu do jedné udržovací poznámky: rozlišení skutečného driftu od údržbové položky, zápis u kanonického místa, malá akce pro nejbližší údržbu, expirace poznámky, privacy-first brzda, pravidla povýšení, udržovací zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PC o první kontrolu stabilního provozního stavu v běžném rytmu: návrat ke stabilní větě, kontrola v existujícím rytmu, signály nalezení/pochopení/dokončení/ceny, čtyři výsledky kontroly, omezení návratu ke staré historii, privacy-first datová stopa, kontrolní zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PB o uzavření poslední lokální korekce do stabilního provozního stavu: práce se stavem z ověření, přepis aktuálního pravidla do kanonického místa, uzavření dočasných artefaktů, návrat další kontroly do běžného rytmu, privacy-first úklid datové stopy, uzavírací zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PA o ověření poslední lokální korekce po běžném průchodu: návrat ke korekční kartě, ověření při prvním normálním použití, signály nalezení/pochopení/dokončení, čtyři výsledky, práce se zbytkovou stopou, privacy-first minimum evidence, ověřovací zápis, mini workshop a checklist.
