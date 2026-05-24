@@ -119196,8 +119196,219 @@ Uzavřená lokální korekce byla ověřena při prvním běžném použití a m
 
 První běžná kontrola po uzavřené lokální korekci má jeden tichý cíl: potvrdit, že systém si pamatuje aktuální pravidlo za lidi. Když člověk nemusí znát starou historii, ptát se kolegy ani zakládat novou evidenci, korekce se opravdu proměnila v provoz. A přesně tam má skončit většina dobrých malých změn: ne jako další památník v dokumentaci, ale jako jednodušší práce.
 
+## Příloha PL: Převod drobného tření po první běžné kontrole do jedné úpravy
+
+První běžná kontrola po uzavřené lokální korekci nemusí skončit čistým stavem `Drží`. Často dopadne realističtěji: pravidlo se použilo, výsledek je správný, datová stopa se nezvětšila, ale člověk musel chvíli hledat, název odkazu ho zmátl nebo věta v checklistu potřebovala jedno doplnění. To je stav `Drží s drobným třením`.
+
+Tahle příloha řeší, co s takovým třením udělat. Ne proto, aby z každého zaváhání vznikl nový proces. Naopak: cílem je převést drobné tření do jedné malé úpravy nejbližšího kanonického místa a tím ho ukončit dřív, než se z něj stane další karta, tabulka, meeting a posvátný zvyk kontrolovat všechno ručně.
+
+Drobné tření má tři vlastnosti:
+
+1. správný výsledek nakonec vznikl;
+2. problém je lokální a dá se opravit v jednom pracovním místě;
+3. oprava nezvětší sběr dat, počet povinných kroků ani počet míst, která musí tým udržovat.
+
+Pokud jedna z těchto vlastností chybí, nejde o drobné tření. Jde o návrat staré stopy nebo o větší systémový problém. To si zaslouží samostatný nález, ne kosmetickou úpravu přilepenou k uzavřené korekci.
+
+### Nejdřív pojmenujte tření podle práce
+
+Tření nepopisujte jako pocit. Věta "bylo to trochu nejasné" je pravdivá, ale nepomůže určit opravu. Přepište ji do pracovního tvaru:
+
+- člověk nenašel checklist z projektové šablony;
+- pravidlo bylo správně, ale nadpis sekce neříkal, že jde o první formulář;
+- odkaz ve staré šabloně vedl na archivní verzi;
+- výjimka byla napsaná tak dlouze, že ji člověk přeskočil;
+- kontrolní poznámka zůstala v komentáři a vypadala jako aktuální úkol.
+
+Tvar "kde se práce zasekla" je lepší než "kdo se spletl". Udržuje pozornost na systému. Pokud člověk použil starou cestu, zeptejte se, proč byla po ruce. Možná byla rychlejší, viditelnější nebo měla důvěryhodnější název než aktuální zdroj pravdy. To není morální selhání. To je uživatelský výzkum zdarma, jen s méně hezkým názvem.
+
+Příklad:
+
+```text
+Slabý popis:
+Autor si nebyl jistý, jestli telefon patří do formuláře.
+
+Lepší popis:
+V checklistu je pravidlo správně, ale sekce se jmenuje "Kontaktní pole", takže autor nevěděl, jestli platí i pro první poptávkový formulář na landing page.
+```
+
+Druhý popis už ukazuje opravu: přejmenovat nebo zpřesnit sekci. Není potřeba školení, nová kontrola ani další vrstva dokumentace.
+
+### Vyberte nejbližší kanonické místo
+
+Oprava drobného tření patří tam, kde člověk pracoval nebo měl pracovat. Pokud se tření objevilo v checklistu landing page, opravte checklist. Pokud vzniklo v projektové šabloně, opravte šablonu. Pokud vzniklo v odkazu z onboardingového materiálu, opravte odkaz nebo text kolem něj.
+
+Nejbližší kanonické místo má přednost před centrálním shrnutím. Centrální shrnutí často vypadá elegantně, ale člověk se k němu v reálné práci nemusí dostat. Drobné tření má zmizet z pracovní trasy, ne z interního pocitu, že "už jsme to někde popsali".
+
+Praktické pravidlo:
+
+```text
+Opravujeme místo, které člověk použije při příštím stejném průchodu.
+```
+
+Pokud takové místo neexistuje, to je samo o sobě nález. Neřešte ho tím, že založíte další dokument. Nejdřív určete zdroj pravdy a až potom do něj přepište pravidlo. Bez zdroje pravdy se každá drobná oprava rychle rozdělí do několika kopií. A kopie dokumentace jsou jako účtenky v kapse: chvíli působí užitečně, potom jen překážejí.
+
+### Typy malých úprav
+
+Drobné tření se většinou dá vyřešit jedním z pěti typů úprav:
+
+- Přejmenování: nadpis, odkaz nebo soubor dostane název podle pracovní situace.
+- Přesun: pravidlo se posune blíž k okamžiku, kdy ho člověk potřebuje.
+- Zkrácení: dlouhá historická věta se přepíše na aktuální pracovní pravidlo.
+- Odstranění: starý komentář, archivní odkaz nebo pomocná poznámka zmizí.
+- Jedna výjimka: pravidlo dostane krátkou hranici, kdy neplatí.
+
+Příklad zkrácení:
+
+```text
+Před úpravou:
+Po květnové korekci už v prvním formuláři nepoužíváme telefon, protože se ukázalo, že to zvyšuje tření a sbíráme údaj, který pro první odpověď většinou nepotřebujeme.
+
+Po úpravě:
+První formulář obsahuje e-mail, cíl a volitelné URL. Telefon řešte až v další komunikaci, pokud je pro další krok potřeba.
+```
+
+Zkrácená verze je lepší, protože nevyžaduje znalost minulosti. Když se pravidlo používá při práci, historie je často šum. Historie patří do changelogu nebo rozhodovacího logu, ne do každého checklistového kroku.
+
+### Co neotvírat
+
+Největší riziko drobného tření je přehnaná reakce. Tým uvidí malou nejasnost a začne řešit celý formulářový systém, všechny landing pages, CRM kvalifikaci, obchodní skripty a ideálně ještě brand voice. To může být někdy potřeba, ale není to tahle práce.
+
+U drobného tření vědomě neotvírejte:
+
+- kompletní redesign procesu;
+- nové povinné review před každým použitím;
+- celoplošné školení týmu;
+- novou tabulku výjimek;
+- audit všech historických materiálů;
+- měření jednotlivých lidí;
+- sběr příkladů "pro jistotu".
+
+Místo toho napište hranici:
+
+```text
+Teď opravujeme jen název sekce v checklistu landing page. Neřešíme CRM kvalifikaci, obchodní follow-up ani obecnou strukturu všech formulářů.
+```
+
+Taková věta není alibi pro ignorování větších problémů. Pokud se větší problém opravdu ukáže, založte ho jako samostatný nález. Jen ho nepřilepujte k drobné úpravě, protože tím ztratíte kontrolu nad rozsahem.
+
+### Privacy-first brzda
+
+Drobné tření se má opravovat bez nové datové vrstvy. Pokud pro přejmenování odkazu potřebujete exportovat seznam lidí, ukládat screenshoty všech formulářů nebo sledovat, kdo kdy otevřel checklist, rozsah se utrhl ze řetězu. Tedy obrazně. Řetězy do e-booku o SaaS úplně nechci tahat, ale pointa drží.
+
+Privacy-first otázky před úpravou:
+
+- Dá se problém popsat bez osobních údajů?
+- Stačí jeden pracovní příklad místo sbírání celé série případů?
+- Nevznikne nová kontrolní tabulka s delší životností než samotná oprava?
+- Nezapisujeme jména lidí tam, kde stačí role nebo pracovní situace?
+- Nezůstane po úpravě starý export, screenshot nebo komentář bez účelu?
+- Sníží úprava množství míst, dat nebo oprávnění, která tým udržuje?
+
+Dobrá privacy-first úprava:
+
+```text
+Datová stopa:
+Bez nového exportu. Upravili jsme název sekce v checklistu a smazali starý komentář, který vypadal jako aktuální výjimka.
+```
+
+Slabá úprava:
+
+```text
+Datová stopa:
+Založili jsme tabulku všech případů, kdy si někdo nebyl jistý formulářem.
+```
+
+Ta druhá varianta může být užitečná, pokud řešíte systémový problém napříč formuláři. Pak ale patří do samostatného nálezu s vlastním účelem, retencí a vlastníkem. Pro drobné tření je to moc.
+
+### Karta drobné úpravy
+
+Zápis držte krátký. Karta má být důkaz, že se tření zavřelo, ne nový artefakt k dlouhodobé údržbě.
+
+```text
+Původní kontrola:
+Drobné tření:
+Nejbližší kanonické místo:
+Jedna úprava:
+Co neotevíráme:
+Datová stopa:
+Jak ověříme při dalším běžném použití:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Původní kontrola:
+První běžné použití po uzavření pravidla pro kratší poptávkový formulář.
+
+Drobné tření:
+Autor našel správný checklist, ale sekce "Kontaktní pole" nebyla dost jasně navázaná na první formulář landing page.
+
+Nejbližší kanonické místo:
+Checklist landing page, sekce formuláře.
+
+Jedna úprava:
+Přejmenovat sekci na "První poptávkový formulář" a ponechat pravidlo o e-mailu, cíli a volitelném URL.
+
+Co neotevíráme:
+Neměníme CRM kvalifikaci, sales skripty ani formuláře v administraci produktu.
+
+Datová stopa:
+Bez nových osobních údajů a bez exportu. Mažeme starý komentář k telefonnímu poli.
+
+Jak ověříme při dalším běžném použití:
+Při další landing page jen zkontrolujeme, jestli autor našel sekci bez dotazu a nevytvořil telefonní pole.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-24.
+```
+
+Všimněte si, že ověření je malé a přirozené. Nezakládá se extra audit. Další použití stejně nastane, takže kontrola jede po existující pracovní trase.
+
+### Mini workshop na 10 minut
+
+Vyberte jednu první běžnou kontrolu se stavem `Drží s drobným třením`.
+
+1. Přepište tření do pracovní věty: kde se práce zasekla.
+2. Ověřte, že správný výsledek nakonec vznikl.
+3. Najděte nejbližší kanonické místo.
+4. Vyberte jeden typ úpravy: přejmenování, přesun, zkrácení, odstranění nebo krátká výjimka.
+5. Napište jednu větu, co teď vědomě neotevíráte.
+6. Zkontrolujte, že nevzniká nový export, tracker ani osobní evidence.
+7. Proveďte úpravu přímo v pracovním místě.
+8. Zapište, jak se ověří při dalším běžném použití.
+
+Výstup:
+
+```text
+Drobné tření po první běžné kontrole je převedené do jedné úpravy kanonického místa, bez nového procesu a bez nové datové vrstvy.
+```
+
+### Checklist kapitoly
+
+- Skončila předchozí kontrola stavem `Drží s drobným třením`, ne větším problémem?
+- Je tření popsané podle pracovní situace, ne jako obecný pocit?
+- Vznikl správný výsledek i přes tření?
+- Dá se oprava udělat v jednom nejbližším kanonickém místě?
+- Je vybraný jen jeden typ úpravy?
+- Neotevíráte kvůli drobnosti celý proces, školení nebo audit?
+- Je jasně napsané, co zůstává mimo rozsah?
+- Nepřidává úprava nové osobní údaje, exporty, screenshoty ani sledování lidí?
+- Maže nebo zkracuje úprava starou stopu, místo aby přidala další?
+- Je ověření navázané na další běžné použití?
+- Má úprava vlastníka a datum?
+- Pokud se ukázal systémový problém, je oddělený jako samostatný nález?
+
+Drobné tření je dobrá zpráva, pokud ho tým umí zavřít malou úpravou. Znamená, že systém už většinou funguje a potřebuje jen zmenšit odpor v jednom místě. Když takovou úpravu uděláte přímo v pracovní trase, bez nové evidence a bez sběru dalších dat, provoz se zlepší skoro potichu. A to je přesně ideální výsledek: méně vysvětlování, méně hledání, méně stop, víc hotové práce.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PL o převodu drobného tření po první běžné kontrole do jedné úpravy: pracovní popis tření, nejbližší kanonické místo, typy malých úprav, vědomé omezení rozsahu, privacy-first brzda, karta úpravy, mini workshop a checklist.
 - 2026-05-24: Doplněna úvodní podkapitola o kvartálním prořezání rozhodovací paměti: živá vrstva rozhodnutí, čtyři koše, slučování do pracovních míst, privacy-first úklid a karta prořezání.
 - 2026-05-24: Doplněna Příloha PK o první běžné kontrole po uzavřené lokální korekci: kontrola při skutečné práci, návrat ke kanonickému místu, signály nalezení/pochopení/výsledku/datové stopy, čtyři výsledky kontroly, privacy-first minimalizace důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PJ o uzavření ověřené lokální korekce do běžného rytmu: kanonické pracovní místo, přepis pravidla bez historie, privacy-first úklid přechodových stop, uzavírací karta, oddělení nových nálezů, mini workshop a checklist.
