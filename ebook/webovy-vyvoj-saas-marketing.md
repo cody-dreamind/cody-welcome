@@ -117774,8 +117774,252 @@ Uzavřená udržovací poznámka byla ověřena při běžném použití a má j
 
 První běžná kontrola po uzavření má být lehká. Její hodnota není v tom, že znovu otevře minulost. Její hodnota je v tom, že potvrdí, zda aktuální pracovní místo obstojí samo. Když obstojí, nechte ho žít. Když ne, opravte nejbližší tření a nenechte z drobné údržby vyrůst další vrstvu provozního hluku.
 
+## Příloha PH: Převod drobné stopy po první běžné kontrole do jedné lokální korekce
+
+Příloha PG popsala první běžnou kontrolu po uzavření udržovací poznámky. Jeden z jejích výsledků byl stav `Drží s drobnou stopou`: aktuální kanonické místo funguje, ale v těsné blízkosti zůstal starý výraz, odkaz, příklad, poznámka nebo drobná nápověda. Tato příloha řeší, jak takovou stopu převést do jedné lokální korekce.
+
+Cíl není znovu otevřít starou údržbovou smyčku. Cíl je odstranit nejbližší tření, které brání tomu, aby stabilní provoz zůstal opravdu stabilní.
+
+Pracovní otázka:
+
+```text
+Jakou jednu blízkou věc opravíme, aby člověk mohl použít aktuální stav bez návratu ke staré stopě?
+```
+
+Pokud odpověď vede k více místům, více rolím nebo celé nové revizi procesu, nejde o drobnou stopu. Pak je férovější založit samostatný nález, dát mu vlastní vstupní bránu a nebalit ho do malé korekce jen proto, že se objevil při kontrole.
+
+Codyho komentář: drobná stopa je jako starý štítek na správné krabici. Opravte štítek. Nepřestavujte sklad, nesvolejte strategický workshop a hlavně z toho nedělejte novou posvátnou šablonu se sedmi poli. Provoz vám poděkuje tím, že nebude potichu skřípat.
+
+### Vstupní brána pro lokální korekci
+
+Lokální korekce má smysl jen tehdy, když jsou splněné tři podmínky:
+
+1. Kanonické místo je správné a použitelné.
+2. Drobná stopa je blízko tohoto místa.
+3. Oprava se dá udělat bez změny pravidla, role, toku nebo odpovědnosti.
+
+Typické příklady:
+
+- v příkladu pod šablonou zůstal starý název sekce;
+- interní index ukazuje správně, ale jeden odkaz má starý popisek;
+- checklist je aktuální, ale pomocná poznámka vedle něj používá starý termín;
+- onboardingová karta funguje, ale ukázkový výstup odkazuje na dřívější variantu;
+- sales materiál má nové pravidlo, ale interní komentář pod ním mluví starým jazykem.
+
+Tohle nejsou důvody pro novou kapitolu procesu. Jsou to drobné korekce okolí. Mají se opravit rychle, viditelně a s minimální stopou.
+
+Naopak lokální korekce nestačí, pokud:
+
+- člověk nenašel kanonické místo vůbec;
+- aktuální pravidlo je nejasné i po přečtení;
+- stejná stopa je ve více nezávislých částech systému;
+- oprava mění odpovědnost role nebo schvalovací tok;
+- vzniká otázka právního textu, bezpečnosti, datové retence nebo veřejného slibu;
+- tým potřebuje nové rozhodnutí, ne jen opravit starý popisek.
+
+V takovém případě napište nový nález. Drobná kontrola není místo, kde se potichu rozhoduje o větších změnách.
+
+### Popište stopu podle práce, kterou kazí
+
+Nezačínejte větou "někde je starý text". To je moc volné. Popište, jak stopa překáží konkrétnímu průchodu.
+
+Slabý zápis:
+
+```text
+V šabloně je starý název.
+```
+
+Silnější zápis:
+
+```text
+Při přípravě onboardingového e-mailu nový člověk použil správnou šablonu, ale příklad pod ní pořád říká "auditní karta" místo aktuálního názvu "kontrolní karta". Hrozí, že se starý termín vrátí do zákaznického výstupu.
+```
+
+Takový zápis dává hranici. Neříká "projdeme všechny dokumenty". Říká, které místo se opraví a proč.
+
+Položte si pět otázek:
+
+- Kde přesně stopa leží?
+- Při jaké práci se ukázala?
+- Jaké rozhodnutí nebo akci může zmást?
+- Jaká je nejmenší oprava?
+- Co zůstává mimo rozsah?
+
+Odpovědi by se měly vejít do několika vět. Pokud se nevejdou, problém je širší než lokální korekce.
+
+### Opravte nejbližší pracovní místo
+
+Lokální korekce se má dělat v nejbližším místě, kde stopa vzniká nebo mate člověka. Ne v prezentaci o procesu. Ne v samostatném seznamu "co někdy uklidit". Ne v dlouhém komentáři pod starou poznámkou.
+
+Praktické pořadí:
+
+1. Opravte text, odkaz, příklad nebo štítek přímo v kanonickém okolí.
+2. Zkontrolujte nejbližší vstup do tohoto místa, například index nebo rozcestník.
+3. Zavřete korekci krátkou větou v changelogu nebo rozhodovacím záznamu.
+4. Nechte další kontrolu proběhnout při běžném použití.
+
+Příklad:
+
+```text
+Stopa:
+Starý název zůstal v příkladu pod aktuální checklistovou šablonou.
+
+Nejbližší oprava:
+Přepsat příklad pod šablonou. Neměnit checklist, index ani onboardingovou trasu.
+
+Hranice:
+Neprocházíme celý archiv starých výstupů. Pokud se stejný termín objeví při běžném použití jinde, vznikne nový nález.
+```
+
+Tím se drží rozsah. Oprava je dost velká na odstranění tření, ale dost malá na to, aby nevytvořila novou údržbovou vrstvu.
+
+### Chraňte uzavřenou smyčku
+
+Starou udržovací poznámku neotevírejte jen proto, že se v okolí našla drobná stopa. Původní smyčka už splnila účel: vedla k aktuálnímu stavu a první běžná kontrola ukázala, že stav v zásadě drží.
+
+Do nové lokální korekce proto přepište jen krátký odkaz na původ:
+
+```text
+Vzniklo při první běžné kontrole po uzavření poznámky k onboardingové šabloně.
+```
+
+To stačí. Není potřeba vracet celou historii, screenshoty ani dlouhou diskusi. Kdo bude za měsíc číst korekci, potřebuje vědět, co opravit teď. Nepotřebuje archeologii všech důvodů, proč se starý výraz kdysi dostal do šablony.
+
+Dobrá ochrana uzavřené smyčky znamená:
+
+- původní poznámka zůstává zavřená;
+- nová korekce má vlastní malý výsledek;
+- korekce nemění původní rozhodnutí, pokud k tomu není nový důvod;
+- další ověření je navázané na běžné použití, ne na návrat do staré historie.
+
+Pokud lokální korekce začne vyžadovat vysvětlování staré historie, je to signál, že kanonické místo není dost jasné. V takovém případě neopravujte jen stopu. Zapište nový nález k srozumitelnosti kanonického místa.
+
+### Ověřte korekci dalším běžným průchodem
+
+Po malé korekci není nutný samostatný audit. Stačí další běžné použití stejného místa nebo nejbližší přirozený cyklus. Cílem je ověřit, že stopa zmizela a nevznikla nová pomocná vrstva.
+
+Sledujte tři signály:
+
+1. Člověk použije aktuální místo bez starého termínu, odkazu nebo příkladu.
+2. Nevznikne nová dočasná poznámka vysvětlující opravu.
+3. Výstup práce odpovídá aktuálnímu pravidlu.
+
+Výsledek opět držte jednoduchý:
+
+- Hotovo: stopa zmizela, korekce se nemusí dál sledovat.
+- Doladit: jedna blízká věc ještě mate, ale stále jde o lokální korekci.
+- Nový nález: ukázalo se, že problém je širší.
+- Vrátit: korekce zhoršila srozumitelnost nebo přepsala něco, co mělo zůstat.
+
+U stavu `Hotovo` nepřidávejte další práci. Stabilní systém se pozná i podle toho, že umí skončit.
+
+### Privacy-first korekce bez nové evidence
+
+Drobné stopy často svádějí ke sběru důkazů: screenshot před, screenshot po, výřez z chatu, export všech výskytů starého výrazu. U lokální korekce je to většinou přehnané.
+
+Stačí ponechat:
+
+- co se opravilo;
+- kde se to opravilo;
+- proč to bylo lokální;
+- kdy se ověří nebo že se ověří běžným použitím;
+- jaké pomocné podklady byly smazané nebo nebyly vůbec vytvořené.
+
+Privacy-first pravidla:
+
+- nehledejte všechny staré výskyty v osobních konverzacích, pokud opravujete jeden veřejný nebo týmový artefakt;
+- neukládejte screenshoty zákaznických dat kvůli textové korekci;
+- nepřidávejte monitoring používání šablony kvůli jednomu starému popisku;
+- staré pracovní exporty nemažte bez rozmyslu, pokud mají právní nebo provozní účel, ale nenechávejte je aktivně ležet jen ze zvyku;
+- do záznamu ponechte rozhodnutí, ne surový materiál.
+
+Pokud se korekce dotýká právního textu, souhlasu, datové retence, bezpečnostního upozornění nebo veřejného slibu, nepovažujte ji za běžné přepsání slovíčka. Tam potřebujete odpovědného vlastníka, zdroj pravdy a kontrolu podle rizika.
+
+### Karta lokální korekce
+
+```text
+Datum:
+Navazuje na kontrolu:
+Kanonické místo:
+Drobná stopa:
+Kde se ukázala:
+Pracovní riziko:
+Nejmenší korekce:
+Co zůstává mimo rozsah:
+Ověření při dalším běžném použití:
+Datová stopa:
+Vlastník:
+Stav:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2027-03-25
+Navazuje na kontrolu: první běžná kontrola po uzavření poznámky k onboardingové šabloně
+Kanonické místo: onboardingová šablona pro provozní standardy
+Drobná stopa: starý název "auditní karta" v příkladu pod šablonou
+Kde se ukázala: při přípravě onboardingu nového člověka
+Pracovní riziko: starý termín by se mohl vrátit do zákaznického výstupu
+Nejmenší korekce: přepsat jeden příklad pod šablonou
+Co zůstává mimo rozsah: celý archiv starých onboardingových výstupů
+Ověření při dalším běžném použití: další onboarding nebo měsíční kontrola šablony
+Datová stopa: krátký changelog, bez screenshotů a exportů
+Vlastník: provozní lead
+Stav: otevřeno
+```
+
+Po ověření kartu zkraťte:
+
+```text
+Výsledek:
+Rozhodnutí:
+Zbytková stopa:
+Další krok:
+```
+
+Pokud je výsledek `Hotovo`, další krok může být prostě `žádný`. To je legitimní a často nejlepší odpověď.
+
+### Mini workshop na 10 minut
+
+Vyberte jednu první běžnou kontrolu se stavem `Drží s drobnou stopou`.
+
+1. Otevřete kontrolní kartu, ne starou uzavřenou poznámku.
+2. Pojmenujte jedno konkrétní místo, kde stopa leží.
+3. Napište, jaké pracovní riziko vytváří.
+4. Určete nejmenší korekci v nejbližším pracovním místě.
+5. Zapište, co se teď vědomě neprochází.
+6. Rozhodněte, při jakém běžném použití se korekce ověří.
+7. Ujistěte se, že nevzniká nová datová stopa bez účelu.
+8. Zavřete workshop kartou lokální korekce.
+
+Výstup:
+
+```text
+Drobná stopa z první běžné kontroly je převedená do jedné lokální korekce s jasnou hranicí, vlastníkem a lehkým ověřením.
+```
+
+### Checklist kapitoly
+
+- Vycházíte ze stavu `Drží s drobnou stopou`, ne z neurčitého pocitu nepořádku?
+- Je kanonické místo jinak správné a použitelné?
+- Leží stopa blízko tohoto místa?
+- Dá se opravit bez změny pravidla, role, toku nebo odpovědnosti?
+- Je stopa popsaná podle práce, kterou může zmást?
+- Má korekce jen jedno nejbližší pracovní místo?
+- Je jasně zapsané, co zůstává mimo rozsah?
+- Zůstává původní udržovací poznámka zavřená?
+- Nevrací se do korekce staré screenshoty, exporty ani dlouhé diskuse?
+- Je ověření navázané na další běžné použití?
+- Nepřibyl nový monitoring, tracker ani sběr osobních údajů kvůli drobné opravě?
+- Pokud se ukázal širší problém, vznikl samostatný nový nález?
+- Ví vlastník, kdy korekci označit jako hotovou, doladit, vrátit nebo oddělit?
+
+Lokální korekce je dobrá právě tím, že není velkolepá. Vezme jednu drobnou stopu, odstraní ji z nejbližšího místa a nechá stabilní provoz běžet dál. Když se takové malé věci řeší disciplinovaně, systém nemusí každých pár týdnů padat zpátky do velkých úklidových akcí.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PH o převodu drobné stopy po první běžné kontrole do jedné lokální korekce: vstupní brána, popis pracovního rizika, oprava nejbližšího místa, ochrana uzavřené smyčky, lehké ověření, privacy-first evidence, karta korekce, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PG o první běžné kontrole po uzavření udržovací poznámky: kontrola při skutečném použití, návrat ke kanonickému místu, čtyři výsledky kontroly, privacy-first minimalizace důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PF o uzavření vyhodnocené udržovací poznámky do stabilního provozu: stav z vyhodnocení, oprava kanonického místa, krátké zavření poznámky, rozhodnutí o další kontrole, privacy-first úklid pomocných stop, oddělení nových nálezů, uzavírací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PE o ověření udržovací poznámky při nejbližší běžné údržbě: práce s původní hranicí, čtyři rozhodovací stavy, provedení nejmenší akce, zavření bez akce, povýšení na údržbovou položku, privacy-first kontrola, zápis vyhodnocení, mini workshop a checklist.
