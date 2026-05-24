@@ -1079,6 +1079,179 @@ Marketing owner.
 
 Rozhodovací záznam je malý závěr celé pracovní smyčky. Čtení vedlo ke kartě, karta k prvnímu úkolu, úkol k ověření, ověření k pravidlu, pravidlo k úklidu a další iterace k nové otázce. Záznam zajistí, že tato cesta nezmizí. Ne kvůli byrokracii, ale kvůli tomu, aby příští dobré rozhodnutí nezačínalo zbytečně od nuly.
 
+## Měsíční návrat k rozhodnutím
+
+Jedna dobře uzavřená iterace je užitečná. Více iterací za sebou už ale vytváří nový problém: tým má najednou hromadu malých rozhodnutí, pravidel, výjimek, karet a úkolů. Každé z nich mohlo být ve své chvíli správné, ale dohromady mohou začít táhnout různými směry. Proto se k rozhodnutím jednou za čas vraťte jako k portfoliu, ne jako k náhodné hromádce poznámek.
+
+Měsíční návrat nemá být velká retrospektiva. Má trvat dost krátce na to, aby se opravdu konal, a dost konkrétně na to, aby z něj vzniklo jedno rozhodnutí. Cílem není projít celý rukopis. Cílem je zkontrolovat, jestli poslední čtenářské iterace pořád pomáhají práci, nebo jestli některé z nich zestárly, zůstaly bez vlastníka, vytvořily zbytečnou datovou stopu nebo se navzájem překrývají.
+
+Začněte jednoduchou otázkou:
+
+```text
+Které rozhodnutí z posledních čtyř týdnů nám nejvíc pomohlo, které nejvíc drhne a které už nepotřebujeme držet aktivní?
+```
+
+Tahle otázka je záměrně praktická. Neptá se, co bylo zajímavé. Ptá se, co změnilo práci. Pokud tým neumí odpovědět, je to signál, že rozhodovací záznamy nejsou dost blízko provozu, nebo že iterace končí bez skutečného ověření.
+
+### Co vzít na měsíční návrat
+
+Nepřinášejte všechno. Měsíční návrat má fungovat z malého balíčku:
+
+- posledních pět až deset rozhodovacích záznamů;
+- seznam pravidel, která se v měsíci změnila;
+- otevřené výjimky s termínem návratu;
+- jeden až tři signály z provozu, obchodu, podpory nebo webu;
+- seznam dočasných exportů, pracovních kopií nebo přístupů, které měly po iteraci zmizet.
+
+Pokud balíček nejde sestavit za deset minut, systém je moc rozptýlený. To není důvod pořádat větší meeting. Je to důvod opravit místo pravdy. Rozhodnutí, která nejdou najít, jsou v praxi skoro stejná jako rozhodnutí, která neexistují.
+
+### Tři stavy rozhodnutí
+
+U každého rozhodnutí nepoužívejte dlouhé debaty. Zařaďte ho do jednoho ze tří stavů:
+
+- Drží: rozhodnutí pořád pomáhá a není potřeba ho měnit.
+- Upravit: základ je správný, ale v provozu se ukázalo tření nebo výjimka.
+- Ukončit: rozhodnutí už nemá důvod, bylo nahrazené nebo zbytečně komplikuje práci.
+
+Příklad:
+
+```text
+Rozhodnutí:
+První kontaktní formulář nesbírá telefon.
+
+Stav:
+Drží.
+
+Důkaz:
+Za poslední měsíc obchodní tým nepotřeboval telefon pro první odpověď ani u jedné relevantní poptávky.
+
+Akce:
+Ponechat pravidlo a zkontrolovat, jestli se propsalo do nové landing page šablony.
+```
+
+Jiný příklad:
+
+```text
+Rozhodnutí:
+Každá případová studie začne rozhodovacím kontextem zákazníka.
+
+Stav:
+Upravit.
+
+Důkaz:
+U krátkých referencí pravidlo vede k umělému natahování textu.
+
+Akce:
+Doplnit výjimku: krátké logo reference mají jen jednu větu kontextu a odkaz na plnou case study, pokud existuje.
+```
+
+Stav "ukončit" je stejně hodnotný jako "držet". Znamená, že tým umí pustit věc, která už neslouží. V digitálním provozu je mazání starých pravidel často stejně důležité jako přidávání nových.
+
+### Hledejte kolize
+
+Měsíční návrat má jednu výhodu proti běžné práci: vidí víc rozhodnutí najednou. Díky tomu najde kolize, které v jednotlivých iteracích nebyly vidět.
+
+Typické kolize:
+
+- jedna kapitola doporučila zkrátit formulář, jiná později přidala povinné kvalifikační pole;
+- marketingová šablona chce měřit více eventů, zatímco privacy-first pravidlo říká, že se má měřit jen rozhodovací minimum;
+- sales materiál slibuje rychlý audit, ale provozní checklist vyžaduje vstupy, které zákazník před prvním hovorem nemá;
+- šablona case study chce konkrétní čísla, ale zákaznický souhlas dovoluje jen obecný popis výsledku;
+- nová automatizace zrychluje práci, ale vytvořila export dat, který nemá retenční pravidlo.
+
+Kolize není chyba člověka. Je to normální výsledek postupné práce. Chyba je nechat ji žít potichu. U každé kolize napište jednu větu, co má přednost a proč.
+
+```text
+Kolize:
+Kvalifikační formulář chce povinný telefon, základní pravidlo prvního kontaktu telefon nechce.
+
+Rozhodnutí:
+Výchozí první kontakt zůstává bez telefonu. Telefon je výjimka jen pro enterprise bezpečnostní audit, kde je v textu vysvětlený důvod a termín ověření.
+```
+
+### Privacy-first měsíční úklid
+
+Každý měsíční návrat musí mít krátkou datovou část. Ne proto, aby se z něj stal právní audit, ale protože iterace vytvářejí pracovní stopy: exporty, screenshoty, testovací tabulky, kopie obsahu, dočasné přístupy, analytické eventy a poznámky z rozhovorů.
+
+Ptejte se:
+
+- Zůstala někde data, která měla sloužit jen k ověření?
+- Má někdo přístup, který byl potřeba jen během iterace?
+- Běží event, dashboard nebo export, který už nepodporuje žádné rozhodnutí?
+- Obsahuje rozhodovací záznam zbytečné osobní nebo citlivé detaily?
+- Má každá výjimka vlastníka a datum návratu?
+
+Pokud najdete datový dluh, neodkládejte ho do velkého auditu. Vyberte jednu nejmenší úklidovou akci a uzavřete ji. Například: smazat dočasný export po zapsání agregovaného závěru, vypnout nepoužívaný event, odebrat přístup externímu dodavateli po předání, nebo anonymizovat příklad v interní šabloně.
+
+Codyho komentář: privacy-first provoz není slavnostní zásada na začátku projektu. Je to opakované uklízení malých stop. Trochu méně romantické než strategický manifest, ale výrazně užitečnější ve středu odpoledne, kdy někdo najde starý export v tabulce.
+
+### Výstup měsíčního návratu
+
+Na konci měsíčního návratu nevyrábějte dlouhý zápis. Stačí jedna karta:
+
+```text
+Období:
+Nejužitečnější rozhodnutí:
+Rozhodnutí k úpravě:
+Rozhodnutí k ukončení:
+Kolize k vyřešení:
+Privacy-first úklid:
+Jedna další iterace:
+Co teď neotevíráme:
+Vlastník:
+Termín návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Období:
+Květen 2026.
+
+Nejužitečnější rozhodnutí:
+Zkrácení prvního kontaktního formuláře.
+
+Rozhodnutí k úpravě:
+Šablona případové studie potřebuje kratší variantu pro logo reference.
+
+Rozhodnutí k ukončení:
+Dočasný dashboard pro stažení checklistu už nepodporuje žádné aktivní rozhodnutí.
+
+Kolize k vyřešení:
+Kvalifikační formulář a obecné pravidlo prvního kontaktu mají rozdílný požadavek na telefon.
+
+Privacy-first úklid:
+Smazat export z ověření checklistu a ponechat jen agregovaný závěr.
+
+Jedna další iterace:
+Upravit šablonu case study pro krátkou a plnou variantu.
+
+Co teď neotevíráme:
+Neměníme celý sales proces ani analytickou architekturu.
+
+Vlastník:
+Marketing owner.
+
+Termín návratu:
+Příští měsíční review obsahu.
+```
+
+Tahle karta dává týmu jeden další krok a zároveň chrání rozsah. Měsíční návrat nemá otevřít pět nových iniciativ. Má potvrdit, že systém rozhodnutí zůstává použitelný.
+
+### Checklist měsíčního návratu
+
+- Máte po ruce posledních pět až deset rozhodovacích záznamů?
+- Ví tým, která rozhodnutí drží, která upravit a která ukončit?
+- Našli jste alespoň jednu kolizi nebo potvrdili, že žádná důležitá není?
+- Má každá výjimka vlastníka, důvod a datum návratu?
+- Zmizely dočasné exporty, přístupy a měření, které už splnily účel?
+- Zůstává rozhodovací paměť bez zbytečných osobních údajů?
+- Vznikla jen jedna další iterace, ne nový nekonečný backlog?
+- Je jasné, co teď vědomě neotevíráte?
+- Je výstup uložený u zdroje pravdy, ne jen v chatu nebo poznámce z porady?
+
+Měsíční návrat drží rukopis při zemi. Bez něj mohou jednotlivé kapitoly vést k dobrým, ale osamělým změnám. S ním se z nich stává pracovní systém: rozhodnutí vznikají, ověřují se, uklízejí, občas se ruší a neztrácejí přitom respekt k datům ani k času týmu.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -118897,3 +119070,4 @@ Ověření lokální korekce je malá brzda proti tomu, aby se údržba tvářil
 - 2026-05-24: Doplněna úvodní podkapitola o úklidu po zavedení pracovního pravidla: kontrola šablon, starých stop, dočasných exportů, automatizací, privacy-first datové stopy a rozhodovacího záznamu.
 - 2026-05-24: Doplněna úvodní podkapitola o otevření další iterace: stabilní uzavření předchozí změny, konkrétní pracovní otázka, stop signály, karta další iterace a privacy-first brzda.
 - 2026-05-24: Doplněna úvodní podkapitola o rozhodovacím záznamu po iteraci: co do něj patří, kde má bydlet, jak držet privacy-first týmovou paměť, kdy rozhodnutí znovu otevřít a praktická šablona s checklistem.
+- 2026-05-24: Doplněna úvodní podkapitola o měsíčním návratu k rozhodnutím: kontrola posledních iterací, stavy rozhodnutí, hledání kolizí, privacy-first úklid, karta review a checklist.
