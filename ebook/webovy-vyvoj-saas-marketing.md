@@ -116123,8 +116123,205 @@ Poslední lokální korekce je buď zavřená, čeká na konkrétní běžný pr
 
 Ověření poslední lokální korekce je malý konec dlouhé smyčky. Není slavnostní. Nemá vyrábět další metodiku. Jen potvrdí, že práce jde správným místem, stará stopa už netahá za rukáv a systém se může vrátit k běžnému rytmu.
 
+## Příloha PB: Uzavření poslední lokální korekce do stabilního provozního stavu
+
+Příloha PA ověřila, jestli poslední lokální korekce skutečně funguje při běžném průchodu. Tato příloha řeší poslední administrativní krok: jak korekci zavřít tak, aby po ní nezůstala ani otevřená karta, ani nejasné "ještě se k tomu někdy vrátíme", ani nový mini proces, který bude tým nosit jako přívěsek k původní drobnosti.
+
+Kontrolní otázka zní:
+
+```text
+Je ověřená korekce uzavřená v kanonickém místě a všechny dočasné stopy po ní zmizely z pracovní trasy?
+```
+
+Výstupem je krátká uzavírací věta:
+
+```text
+Korekce je uzavřená, aktuální pravidlo leží v [místo], dočasná karta je archivovaná/smazaná a další kontrola proběhne jen v běžném rytmu.
+```
+
+Codyho komentář: dobrá korekce po sobě nezanechá památník. Jestli kvůli jedné opravené větě vznikne tabulka, měsíční meeting a tři barevné stavy, tak se systém tváří uklizeně jen proto, že nepořádek dostal kancelář.
+
+### Začněte stavem z ověření
+
+Neuzavírejte korekci podle pocitu. Vraťte se k ověřovacímu zápisu z Přílohy PA a vezměte jen položky, které jsou potřeba pro zavření:
+
+```text
+Korekce:
+Bezny pruchod:
+Vysledek:
+Zbytkova stopa:
+Dalsi krok:
+```
+
+K uzavření patří jen stavy `Zavřeno` a `Zavřeno s poznámkou`. Stav `Čeká na průchod` ještě nemá důkaz a stav `Vrátit do údržby` už není poslední lokální korekce, ale nová údržbová položka.
+
+Příklad:
+
+```text
+Korekce:
+Archivní poznámka vysvětluje, že stará karta byla nahrazena měsíčním checklistem.
+
+Bezny pruchod:
+Prosincové review provozních standardů.
+
+Vysledek:
+Zavřeno.
+
+Zbytkova stopa:
+Žádná na pracovní trase.
+
+Dalsi krok:
+Zavřít korekční kartu a ponechat pouze aktuální checklist.
+```
+
+Pokud si při čtení zápisu nejste jistí, co přesně se zavírá, vraťte se o krok zpět. Uzavření má být nudné, jasné a krátké. Ne sloužit jako druhá interpretace celé historie.
+
+### Přepište jen aktuální stav
+
+Kanonické místo práce má obsahovat aktuální pravidlo, ne celý příběh korekce. Pokud korekce změnila checklist, šablonu, index, sales kartu, onboardingovou poznámku nebo provozní list, upravte právě toto místo do finálního tvaru.
+
+Dobré finální pravidlo:
+
+```text
+Při měsíčním review provozních standardů používejte aktuální checklist v kanonickém indexu. Staré karty slouží jen jako archivní historie a nejsou pracovní vstup.
+```
+
+Slabé finální pravidlo:
+
+```text
+Po sérii kontrol, dočištění a korekcí jsme se rozhodli, že prozatím asi budeme používat aktuální checklist, pokud nenastane jiná potřeba.
+```
+
+Finální tvar má být pracovní. Člověk, který neviděl předchozí kapitoly, má poznat, co má udělat. Nemá studovat archeologii rozhodnutí.
+
+### Zavřete dočasné artefakty
+
+Po uzavření poslední korekce projděte všechny dočasné artefakty, které kvůli ní vznikly. Typicky půjde o korekční kartu, ověřovací zápis, poznámku v úkolu, komentář v dokumentu, interní odkaz, dočasný checklist nebo krátký záznam v revizní frontě.
+
+Každému artefaktu dejte jeden ze tří stavů:
+
+- `Přenést`: obsah patří do kanonického místa.
+- `Archivovat`: záznam má hodnotu jako historie, ale neleží na pracovní trase.
+- `Smazat`: záznam už nemá účel a jen drží zbytečnou stopu.
+
+Příklad:
+
+```text
+Korekční karta:
+Archivovat s jednou uzavírací větou.
+
+Ověřovací poznámka:
+Smazat po přenesení výsledku do karty.
+
+Aktuální checklist:
+Přenést finální pravidlo.
+
+Starý interní odkaz:
+Smazat z navigace, ponechat jen v changelogu, pokud má auditní hodnotu.
+```
+
+Privacy-first pravidlo: co nemá další účel, nemá zůstávat jen proto, že "by se mohlo hodit". Dočasné podklady často obsahují víc kontextu, jmen, příkladů a pracovních detailů než finální pravidlo. Právě proto mají po uzavření kratší život.
+
+### Nechte další kontrolu běžnému rytmu
+
+Poslední lokální korekce nepotřebuje vlastní následný audit, pokud ověření dopadlo dobře. Další kontrola má proběhnout jen v rytmu, který už pro dané místo existuje: měsíční review, kvartální údržba, pravidelná kontrola nabídky, onboardingový průchod, revize šablon nebo běžná retrospektiva.
+
+Zapište to explicitně:
+
+```text
+Dalsi kontrola:
+Bez samostatného follow-upu. Stav se ověří při nejbližším měsíčním review checklistu.
+```
+
+Tím tým chráníte před údržbovou inflací. Každá malá korekce by jinak dostala vlastní návrat, vlastní připomínku a vlastní "raději to ještě sledujme". Po pár měsících se provozní systém nezhroutí kvůli velkým rizikům, ale kvůli stovce drobných kontrol, které nikdo neumí zabít.
+
+### Uzavírací zápis
+
+```text
+Datum:
+Korekce:
+Overeny vysledek:
+Kanonicke misto:
+Finalni pravidlo:
+Docasne artefakty:
+Co zustava jako historie:
+Co se maze:
+Dalsi kontrola v beznem rytmu:
+Datova stopa po uzavreni:
+Vlastnik:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-12-09
+Korekce: archivní poznámka k nahrazení staré karty měsíčním checklistem
+Overeny vysledek: prosincové review použilo aktuální checklist bez návratu ke staré kartě
+Kanonicke misto: index provozních standardů
+Finalni pravidlo: měsíční review začíná v aktuálním checklistu, staré karty nejsou pracovní vstup
+Docasne artefakty: korekční karta archivována s uzavírací větou
+Co zustava jako historie: jedna položka v changelogu
+Co se maze: dočasná ověřovací poznámka a starý interní odkaz
+Dalsi kontrola v beznem rytmu: nejbližší měsíční review, bez samostatného follow-upu
+Datova stopa po uzavreni: bez jmen, bez screenshotů, bez exportů průchodu
+Vlastnik: provozní lead
+```
+
+Příklad, kdy se uzavření zastaví:
+
+```text
+Overeny vysledek:
+Zavřeno s poznámkou.
+
+Zbytkova stopa:
+Historický changelog je v pořádku, ale starý odkaz pořád leží v onboardingové šabloně.
+
+Rozhodnuti:
+Neuzavírat jako poslední korekci. Založit samostatnou údržbovou položku pro onboardingovou šablonu.
+```
+
+Tady není selhání v tom, že se věc nezavřela. Selhání by bylo zavřít ji potichu a nechat dalšího člověka narazit na stejnou stopu o měsíc později.
+
+### Mini workshop na 10 minut
+
+Vezměte jednu korekční kartu se stavem `Zavřeno` nebo `Zavřeno s poznámkou`.
+
+1. Přečtěte ověřený výsledek.
+2. Najděte kanonické místo, kde má zůstat finální pravidlo.
+3. Přepište pravidlo do jedné pracovní věty.
+4. Rozdělte dočasné artefakty na `Přenést`, `Archivovat` a `Smazat`.
+5. Zapište, kdy proběhne další kontrola v běžném rytmu.
+6. Zkontrolujte, že po uzavření nezůstávají jména, screenshoty ani zbytečné exporty.
+7. Zavřete korekční kartu jednou uzavírací větou.
+
+Výstup:
+
+```text
+Poslední lokální korekce je uzavřená, finální pravidlo je v kanonickém místě a další kontrola nežije mimo běžný provozní rytmus.
+```
+
+### Checklist kapitoly
+
+- Má korekce ověřený stav `Zavřeno` nebo `Zavřeno s poznámkou`?
+- Neuzavíráte stav `Čeká na průchod` bez reálného ověření?
+- Pokud se stopa vrátila, převádíte ji do samostatné údržbové položky?
+- Je finální pravidlo v kanonickém pracovním místě?
+- Je pravidlo napsané pro dalšího člověka, ne jako historický zápis?
+- Jsou dočasné artefakty rozdělené na `Přenést`, `Archivovat` a `Smazat`?
+- Nezůstává dočasná karta na běžné pracovní trase?
+- Je jasné, co zůstává jako historie a proč?
+- Smazali jste podklady, které už nemají účel?
+- Nevzniká samostatný follow-up jen kvůli uzavřené drobnosti?
+- Je další kontrola napojená na existující rytmus?
+- Zůstává datová stopa po uzavření menší než původní ověřování?
+- Nezůstávají v uzavřených podkladech jména, screenshoty nebo zbytečný detail průchodu?
+- Umí vlastník jednou větou říct, že věc je hotová?
+
+Uzavření poslední lokální korekce je tichý konec práce. Po dobrém uzavření se tým nevrací k metodice, ale k normálnímu provozu. Aktuální pravidlo je tam, kde ho člověk potřebuje, historie nepřekáží a dočasné důkazy nezůstávají viset v systému jen proto, že je nikdo nechtěl uklidit.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PB o uzavření poslední lokální korekce do stabilního provozního stavu: práce se stavem z ověření, přepis aktuálního pravidla do kanonického místa, uzavření dočasných artefaktů, návrat další kontroly do běžného rytmu, privacy-first úklid datové stopy, uzavírací zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PA o ověření poslední lokální korekce po běžném průchodu: návrat ke korekční kartě, ověření při prvním normálním použití, signály nalezení/pochopení/dokončení, čtyři výsledky, práce se zbytkovou stopou, privacy-first minimum evidence, ověřovací zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha OZ o převodu drobné stopy po první kontrole do poslední lokální korekce: vstupní brána pro stav Drží s drobnou stopou, pracovní riziko, oprava nejbližšího kanonického místa, zavření staré smyčky, privacy-first brzda korekce, ověření dalším běžným průchodem, korekční karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha OY o první kontrole běžného rytmu po uzavřeném dočištění: kontrola prvního normálního použití, cesta k aktuálnímu místu, návrat staré stopy, čtyři stavy rytmu, privacy-first úklid zbytkových stop, kontrolní zápis, mini workshop a checklist.
