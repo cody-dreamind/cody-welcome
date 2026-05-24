@@ -903,6 +903,182 @@ Pokud je odpověď nejasná, zmenšete iteraci. Privacy-first provoz není záka
 
 Další iterace má začít jen tehdy, když zlepší rozhodnutí, ne když vyplní volné místo v kalendáři. Rukopis tím zůstává pracovní pomůckou: pomáhá vybrat nejbližší rozumný krok, uzavřít ho a teprve potom otevřít další. Tak se z e-booku nestane nekonečný seznam možností, ale opakovatelný způsob, jak posouvat web, SaaS, marketing i provoz bez zbytečného chaosu.
 
+## Rozhodovací záznam, který přežije další iteraci
+
+Když tým udělá změnu, ověří ji, uklidí po ní a otevře další iteraci, pořád zbývá jedna nenápadná povinnost: nechat po sobě rozhodovací záznam, který půjde použít i bez původních účastníků. Ne dlouhý zápis ze schůzky. Ne složku plnou screenshotů. Krátký, srozumitelný záznam toho, co platí, proč to platí a kdy se to má znovu otevřít.
+
+Bez takového záznamu se dobrá iterace časem změní v ústní tradici. Jeden člověk ví, proč se zkrátil formulář. Druhý tuší, že se něco testovalo. Třetí najde starší šablonu a vrátí telefon jako povinné pole, protože mu to připadá bezpečnější. Za dva měsíce tým znovu řeší stejnou otázku, jen s horší pamětí a větším množstvím materiálu kolem.
+
+Rozhodovací záznam má odpovědět na šest věcí:
+
+1. Jaká otázka se řešila.
+2. Co se rozhodlo.
+3. Jaký důkaz stačil.
+4. Kde je aktuální pravidlo nebo výstup.
+5. Co zůstává mimo rozsah.
+6. Kdy a proč se k rozhodnutí vrátit.
+
+Tohle je malé, ale zásadní. Rozhodovací záznam chrání práci před dvěma extrémy: před zapomenutím a před dogmatem. Bez záznamu se rozhodnutí ztratí. Bez data návratu se z něj může stát pravidlo, které přežije déle než jeho původní důvod.
+
+### Co do záznamu nepatří
+
+Rozhodovací záznam není archiv všeho, co se kolem iterace stalo. Nepatří do něj kompletní diskuse, osobní preference, pracovní exporty, syrové poznámky z rozhovorů, interní chaty ani všechna odmítnutá řešení. Tyto materiály mohou být dočasně užitečné při práci, ale po rozhodnutí většinou zvyšují šum.
+
+Do záznamu patří jen to, co budoucímu týmu pomůže rozhodnutí použít nebo přehodnotit:
+
+- původní pracovní otázka;
+- konečné rozhodnutí;
+- stručný důvod;
+- odkaz na kanonické místo;
+- stav datové stopy;
+- výjimky a datum návratu.
+
+Příklad špatného záznamu:
+
+```text
+Řešili jsme formulář. Byly různé názory. Nakonec jsme ho nějak zjednodušili, asi to funguje. Více v poznámkách z meetingu.
+```
+
+Příklad použitelného záznamu:
+
+```text
+Otázka:
+Potřebujeme telefon už v prvním kontaktním formuláři?
+
+Rozhodnutí:
+Ne. První formulář sbírá e-mail, stručný kontext a volitelné URL.
+
+Důkaz:
+Po 15 poptávkách obchodní tým nepotřeboval telefon pro první odpověď. Kvalita poptávek se nezhoršila.
+
+Kanonické místo:
+Checklist nové landing page a komponenta ContactFormDefault.
+
+Mimo rozsah:
+Neměníme enterprise formulář pro bezpečnostní audity, kde existuje samostatná výjimka.
+
+Datová stopa:
+Telefon už nevzniká v prvním kontaktu. Dočasný export z ověření byl smazaný, zůstává jen tento agregovaný závěr.
+
+Návrat:
+Při měsíční kontrole formulářů nebo po pěti poptávkách, kde bude telefon pro první odpověď skutečně chybět.
+```
+
+Rozdíl není v délce. Rozdíl je v použitelnosti. Druhý záznam dovolí dalšímu člověku založit novou stránku bez toho, aby znovu otevíral celou debatu.
+
+### Jeden záznam, jedno místo pravdy
+
+Rozhodovací záznam musí mít domov. Pokud existuje v chatu, úkolu, dokumentu, poznámkách z porady a ještě ve staré tabulce, tým brzy nebude vědět, která verze platí. Proto vyberte jedno místo pravdy a ostatní místa na něj odkažte nebo je ukliďte.
+
+Dobrá místa pravdy:
+
+- issue nebo úkol, ze kterého se změna skutečně dělala;
+- rozhodovací log produktu nebo webu;
+- komentář u šablony, pokud rozhodnutí platí hlavně pro jednu šablonu;
+- provozní checklist, pokud rozhodnutí řídí opakovanou práci;
+- krátká interní stránka k pravidlu, pokud se rozhodnutí dotýká více týmů.
+
+Špatné místo pravdy je takové, kam se člověk při další podobné práci přirozeně nepodívá. Pokud pravidlo pro kontaktní formuláře schováte do retrospektivy kampaně, další autor landing page ho pravděpodobně nenajde. Pokud rozhodnutí o retenci exportů necháte jen v marketingovém úkolu, produktový člověk ho při dalším auditu mine.
+
+Praktické pravidlo: záznam uložte tam, kde vzniká další rozhodnutí stejného typu. Ne tam, kde se o něm nejvíc mluvilo.
+
+### Privacy-first verze paměti
+
+Dobrá paměť týmu neznamená držet všechno navždy. Privacy-first provoz potřebuje paměť rozhodnutí, ne skladiště osobních údajů. Po iteraci proto oddělte:
+
+- rozhodnutí, které má zůstat;
+- agregovaný nebo anonymizovaný důkaz, který vysvětluje proč;
+- dočasná data, která už splnila účel a mají zmizet.
+
+U formulářů to může znamenat ponechat větu "telefon nebyl potřeba v prvních 15 poptávkách" a smazat pracovní export se jmény, telefony, e-maily a poznámkami. U zákaznických rozhovorů to může znamenat ponechat tři anonymizované vzory nejasností a odstranit syrové poznámky, které už nikdo nepotřebuje. U analytiky to může znamenat ponechat rozhodnutí o vypnutí eventu a odstranit dočasný dashboard.
+
+Codyho komentář: týmová paměť má být jako dobrý index, ne půda po babičce. Když tam najdete všechno, nejspíš tam nenajdete nic včas.
+
+### Kdy záznam znovu otevřít
+
+Rozhodnutí nemá být navždy zavřené jen proto, že jednou dávalo smysl. Záznam proto musí obsahovat spouštěče návratu. Ne obecné "někdy zkontrolovat", ale konkrétní situace, které říkají, že se změnil kontext.
+
+Dobré spouštěče:
+
+- nový segment zákazníků používá stejnou stránku jinak;
+- obchodní tým opakovaně postrádá údaj, který byl odstraněn;
+- změnil se hlavní produktový tok;
+- staré pravidlo začalo vytvářet ruční práci;
+- vznikl nový dodavatel nebo datový tok;
+- blíží se pravidelná měsíční, kvartální nebo roční kontrola.
+
+Spouštěč návratu chrání tým před dvěma chybami. První je neustálé otevírání stejné věci bez důvodu. Druhá je držet staré pravidlo i ve chvíli, kdy se realita změnila. Rozhodnutí má být stabilní, ale ne slepé.
+
+### Mini šablona rozhodovacího záznamu
+
+Pro běžnou iteraci stačí tento tvar:
+
+```text
+Datum:
+Otázka:
+Rozhodnutí:
+Důvod:
+Důkaz:
+Kanonické místo:
+Mimo rozsah:
+Datová stopa:
+Výjimky:
+Návrat:
+Vlastník:
+```
+
+Vyplněný příklad pro obsahovou změnu:
+
+```text
+Datum:
+2026-05-24
+
+Otázka:
+Má být case study hlavně příběh spolupráce, nebo rozhodovací důkaz pro kupujícího?
+
+Rozhodnutí:
+Case study začne rozhodovacím kontextem: kdo řešil jaký problém, proč hledal řešení a podle čeho poznal úspěch.
+
+Důvod:
+Zákazník před kontaktem nehledá literární příběh, ale důkaz, že podobný problém už někdo vyřešil.
+
+Důkaz:
+Ve třech obchodních rozhovorech se opakovaly otázky na konkrétní situaci zákazníka, ne na průběh projektu.
+
+Kanonické místo:
+Šablona případové studie.
+
+Mimo rozsah:
+Nepřepisujeme všechny staré reference. Nejprve upravíme dvě nejnavštěvovanější.
+
+Datová stopa:
+Nepřidáváme nové sledování. Používáme existující obchodní poznámky bez osobních detailů navíc.
+
+Výjimky:
+Krátké logo reference zůstávají bez plné struktury.
+
+Návrat:
+Po dvou nově upravených case studies a pěti relevantních poptávkách.
+
+Vlastník:
+Marketing owner.
+```
+
+### Checklist rozhodovacího záznamu
+
+- Je záznam kratší než podklady, ze kterých vznikl?
+- Umí nový člověk poznat, co má příště udělat?
+- Je jasné, jaký důkaz tehdy stačil?
+- Je uvedené kanonické místo pravidla, šablony nebo výstupu?
+- Je zapsané, co rozhodnutí neřeší?
+- Neobsahuje záznam zbytečné osobní údaje, syrové exporty nebo citlivé poznámky?
+- Jsou dočasná data po zapsání závěru smazaná nebo anonymizovaná?
+- Existuje vlastník, který může rozhodnutí znovu otevřít?
+- Má záznam konkrétní spouštěč návratu?
+- Odkazují starší místa na aktuální záznam, nebo jsou uklizená?
+
+Rozhodovací záznam je malý závěr celé pracovní smyčky. Čtení vedlo ke kartě, karta k prvnímu úkolu, úkol k ověření, ověření k pravidlu, pravidlo k úklidu a další iterace k nové otázce. Záznam zajistí, že tato cesta nezmizí. Ne kvůli byrokracii, ale kvůli tomu, aby příští dobré rozhodnutí nezačínalo zbytečně od nuly.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -118496,3 +118672,4 @@ Lokální korekce je dobrá právě tím, že není velkolepá. Vezme jednu drob
 - 2026-05-23: Doplněna úvodní podkapitola o ověření prvního úkolu bez velkého projektu: ověřovací otázka, nejmenší důkaz, zápis výsledku, rozhodovací stavy a privacy-first kontrola.
 - 2026-05-24: Doplněna úvodní podkapitola o úklidu po zavedení pracovního pravidla: kontrola šablon, starých stop, dočasných exportů, automatizací, privacy-first datové stopy a rozhodovacího záznamu.
 - 2026-05-24: Doplněna úvodní podkapitola o otevření další iterace: stabilní uzavření předchozí změny, konkrétní pracovní otázka, stop signály, karta další iterace a privacy-first brzda.
+- 2026-05-24: Doplněna úvodní podkapitola o rozhodovacím záznamu po iteraci: co do něj patří, kde má bydlet, jak držet privacy-first týmovou paměť, kdy rozhodnutí znovu otevřít a praktická šablona s checklistem.
