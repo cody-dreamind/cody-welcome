@@ -115871,8 +115871,261 @@ Jedna drobná stopa má jednu lokální korekci, jasné ověření a žádný no
 
 Poslední lokální korekce má udělat z dobrého rytmu obyčejný rytmus. Bez nápisu "pozor, tady jsme kdysi opravovali problém". Bez nové vrstvy řízení. Bez sbírání důkazů o tom, že lidé umí kliknout na správný odkaz. Jen čistší pracovní místo, které příště nikoho nezastaví.
 
+## Příloha PA: Ověření poslední lokální korekce po běžném průchodu
+
+Příloha OZ převedla drobnou stopu do poslední lokální korekce. Tato příloha řeší jedinou otázku: jestli korekce opravdu zmizela v běžné práci, nebo jen vznikl další hezky pojmenovaný zápis. Ověření nemá dokazovat, že tým něco udělal. Má ukázat, jestli se člověk při normálním průchodu už nemusí ptát na starý název, starý odkaz, starou kartu nebo zbytečný kontext.
+
+Kontrolní otázka zní:
+
+```text
+Proběhl další běžný průchod bez návratu drobné stopy a bez nové pomocné evidence?
+```
+
+Výstupem je krátký ověřovací zápis:
+
+```text
+Korekce:
+Bezny pruchod:
+Ocekavany stav:
+Skutecny pruchod:
+Vysledek:
+Zbytkova stopa:
+Datova stopa overeni:
+Dalsi krok:
+Vlastnik:
+```
+
+Codyho komentář: poslední korekce je úspěšná tehdy, když se o ní nemusí mluvit. Jestli potřebuje půlhodinové vysvětlení, dva screenshoty a novou stránku "jak chápat opravenou poznámku", tak gratuluju, právě jste z drobné stopy vyrobili kancelářský seriál.
+
+### Vraťte se ke korekční kartě, ne k celé historii
+
+Začněte korekční kartou z Přílohy OZ. Neotvírejte celý původní příběh, pokud to není nutné. Ověření má porovnat slib korekce s běžným použitím, ne znovu soudit všechny předchozí kroky.
+
+Použijte tři věty:
+
+```text
+Co bylo opraveno:
+Jaký průchod to mělo ulehčit:
+Jak poznáme, že se stopa nevrátila:
+```
+
+Příklad:
+
+```text
+Co bylo opraveno:
+Archivní poznámka dostala větu, že stará karta byla nahrazena měsíčním checklistem.
+
+Jaký průchod to mělo ulehčit:
+Měsíční review provozních standardů.
+
+Jak poznáme, že se stopa nevrátila:
+Člověk použije aktuální checklist a archivní poznámka ho nepošle do debaty o staré kartě.
+```
+
+Pokud tyto tři věty nedokážete sestavit, korekce byla pravděpodobně popsána moc vágně. Vraťte se o krok zpět a doplňte korekční kartu. Bez jasného slibu nemá ověření co ověřovat.
+
+### Ověřujte při prvním normálním průchodu
+
+Neplánujte zvláštní audit jen proto, že existuje ověřovací příloha. Počkejte na první normální použití pracovního místa, které korekce upravila: měsíční review, aktualizaci checklistu, předání role, kontrolu nabídky, údržbu webu, revizi šablony nebo jiný přirozený okamžik.
+
+Dobré ověřovací okno:
+
+- další pravidelné review, kde se používá opravený index;
+- první nový úkol, který má projít upravenou šablonou;
+- další předání, kde člověk narazí na archivní poznámku;
+- další kontrola obsahu, kde starý odkaz dřív mátl;
+- běžná aktualizace provozního checklistu.
+
+Špatné ověřovací okno:
+
+- samostatná schůzka jen kvůli potvrzení jedné věty;
+- screenshotová kontrola všech historických variant;
+- dotazník pro tým, jestli si všiml korekce;
+- nový tracker kliknutí na opravený odkaz;
+- audit celé znalostní báze kvůli jedné drobné stopě.
+
+Privacy-first pravidlo je jednoduché: běžný průchod už existuje, tak ho nepřevlékejte za sledování lidí. Ověřte výsledek tam, kde práce přirozeně teče.
+
+### Sledujte tři malé signály
+
+U poslední korekce stačí tři signály:
+
+1. Nalezení: člověk došel na aktuální pracovní místo bez staré odbočky.
+2. Pochopení: opravená věta, odkaz nebo štítek nevyvolaly doplňující vysvětlování.
+3. Dokončení: práce skončila v běžném rytmu, ne novou kartou o staré stopě.
+
+Zápis může být velmi krátký:
+
+```text
+Nalezeni:
+Review začalo v aktuálním indexu a použilo měsíční checklist.
+
+Pochopeni:
+Archivní poznámka byla srozumitelná, nikdo neřešil starý název.
+
+Dokonceni:
+Review skončilo standardním zápisem, bez nového úkolu k původní stopě.
+```
+
+Nepřidávejte čtvrtý signál jen proto, že by šel měřit. V této fázi už nejde o poznání celého systému. Jde o potvrzení, že jedna malá korekce přestala překážet.
+
+### Rozlišujte čtyři výsledky
+
+Po průchodu vyberte jeden stav:
+
+- `Zavřeno`: korekce splnila účel a drobná stopa se nevrátila.
+- `Zavřeno s poznámkou`: korekce funguje, ale zůstává neškodný historický kontext.
+- `Vrátit do údržby`: stopa se vrátila jinou cestou a lokální korekce nestačí.
+- `Čeká na průchod`: ještě nenastal přirozený okamžik ověření.
+
+Stav `Zavřeno`:
+
+```text
+Další měsíční review použilo aktuální checklist bez otázky na starou kartu. Korekce zavřena.
+```
+
+Stav `Zavřeno s poznámkou`:
+
+```text
+Review proběhlo správně. V archivu zůstává historický changelog, ale neleží na pracovní trase a nevyžaduje další zásah.
+```
+
+Stav `Vrátit do údržby`:
+
+```text
+Tým našel starý název v jiné šabloně a použil ji místo aktuálního checklistu. Nejde o lokální stopu; otevřít samostatnou údržbovou položku.
+```
+
+Stav `Čeká na průchod`:
+
+```text
+Korekce je provedena, ale další měsíční review ještě neproběhlo. Vrátit se při nejbližším běžném review.
+```
+
+Důležité: stav `Čeká na průchod` nesmí být skladiště. Musí mít konkrétní pracovní okamžik. Pokud takový okamžik neexistuje, možná korekce neřešila reálné použití.
+
+### Zbytkovou stopu nebalte do nového procesu
+
+Když se objeví zbytková stopa, nejdřív se zeptejte, jestli opravdu leží na pracovní trase. Pokud ne, může zůstat jako historie. Pokud ano a mate práci, už nejde o poslední korekci. Vzniká nová údržbová položka s vlastním rozsahem.
+
+Krátký filtr:
+
+- Vede zbytková stopa člověka na špatné místo?
+- Nutí tým vysvětlovat staré rozhodnutí?
+- Způsobuje duplicitní úkol?
+- Obnovuje starý sběr dat nebo starý formulář?
+- Prodlužuje běžný rytmus o ruční obcházení?
+
+Pokud odpověď zní ano, nepřidávejte další drobnou korekci do stejné karty. Vytvořte samostatnou údržbovou položku a původní korekci uzavřete výsledkem `Vrátit do údržby`.
+
+Pokud odpověď zní ne, nechte historii být. Čistý systém není systém bez minulosti. Je to systém, kde minulost nepřekáží aktuální práci.
+
+### Privacy-first ověření bez stop navíc
+
+Ověření poslední lokální korekce má mít nejmenší možnou stopu. Nepotřebuje jména lidí, záznam obrazovky, export chatu ani detailní průchod každým klikem. Stačí pracovní výsledek.
+
+Použitelný zápis:
+
+```text
+Datova stopa overeni:
+Jedna anonymizovaná věta v korekční kartě. Bez screenshotů, bez jmen, bez nového sledování.
+```
+
+Nepoužitelný zápis:
+
+```text
+Uložíme video průchodu, seznam účastníků review a screenshoty všech mezikroků.
+```
+
+Pokud ověření vyžaduje víc dat než korekce samotná, zastavte se. Buď je riziko větší, než jste si mysleli, nebo ověřujete příliš široce. V obou případech není řešením tajně zvětšit evidenci.
+
+### Ověřovací zápis
+
+```text
+Datum:
+Korekce:
+Bezny pruchod:
+Ocekavany stav:
+Skutecny pruchod:
+Nalezeni:
+Pochopeni:
+Dokonceni:
+Vysledek: Zavreno / Zavreno s poznamkou / Vratit do udrzby / Ceka na pruchod
+Zbytkova stopa:
+Datova stopa overeni:
+Dalsi krok:
+Vlastnik:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-12-02
+Korekce: archivní poznámka vysvětluje nahrazení staré karty měsíčním checklistem
+Bezny pruchod: prosincové review provozních standardů
+Ocekavany stav: review začne v indexu, použije aktuální checklist a stará karta se neotevře
+Skutecny pruchod: review prošlo přes index na aktuální checklist
+Nalezeni: bez staré odbočky
+Pochopeni: archivní poznámka nevyvolala dotaz
+Dokonceni: vznikl jen běžný review zápis
+Vysledek: Zavreno
+Zbytkova stopa: žádná na pracovní trase
+Datova stopa overeni: jedna věta v korekční kartě, bez screenshotů
+Dalsi krok: žádný, věc zůstává v běžném rytmu
+Vlastnik: provozní lead
+```
+
+Příklad se zbytkovou stopou:
+
+```text
+Vysledek: Vratit do udrzby
+Zbytkova stopa: starý název je pořád v onboardingové šabloně a posílá nového člověka mimo aktuální checklist
+Dalsi krok: založit samostatnou údržbovou položku pro onboardingovou šablonu, původní korekci dál nerozšiřovat
+```
+
+Tím se chrání rozsah. Jedna korekce se nezmění v nekonečný úklidový vlak.
+
+### Mini workshop na 10 minut
+
+Vezměte jednu korekční kartu se stavem `Provedena`.
+
+1. Přečtěte původní slib korekce.
+2. Najděte první přirozený pracovní průchod, kde se korekce měla projevit.
+3. Popište očekávaný stav jednou větou.
+4. Zapište skutečný průchod bez hodnocení lidí.
+5. Vyhodnoťte signály nalezení, pochopení a dokončení.
+6. Vyberte jeden ze čtyř výsledků.
+7. Zapište zbytkovou stopu jen tehdy, když leží na pracovní trase.
+8. Omezte ověřovací stopu na minimum.
+
+Výstup:
+
+```text
+Poslední lokální korekce je buď zavřená, čeká na konkrétní běžný průchod, nebo se mění na samostatnou údržbovou položku.
+```
+
+### Checklist kapitoly
+
+- Vracíte se ke korekční kartě, ne k celé historické debatě?
+- Umíte jednou větou říct, co měla korekce ulehčit?
+- Ověřujete při normálním pracovním průchodu?
+- Nevytváříte speciální audit kvůli jedné drobné opravě?
+- Sledujete jen nalezení, pochopení a dokončení?
+- Popisujete průchod bez hodnocení konkrétního člověka?
+- Vybrali jste jeden ze stavů `Zavřeno`, `Zavřeno s poznámkou`, `Vrátit do údržby` nebo `Čeká na průchod`?
+- Má stav `Čeká na průchod` konkrétní pracovní okamžik?
+- Pokud se stopa vrátila jinou cestou, převádíte ji do samostatné údržbové položky?
+- Pokud zbytková stopa neleží na pracovní trase, necháváte ji jako historii?
+- Nevznikly screenshoty, záznamy obrazovky, seznam lidí ani nový tracker?
+- Je datová stopa ověření menší než užitek korekce?
+- Zůstává výsledek uložený u původní korekční karty?
+- Umí tým po ověření říct, že věc je zavřená?
+
+Ověření poslední lokální korekce je malý konec dlouhé smyčky. Není slavnostní. Nemá vyrábět další metodiku. Jen potvrdí, že práce jde správným místem, stará stopa už netahá za rukáv a systém se může vrátit k běžnému rytmu.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PA o ověření poslední lokální korekce po běžném průchodu: návrat ke korekční kartě, ověření při prvním normálním použití, signály nalezení/pochopení/dokončení, čtyři výsledky, práce se zbytkovou stopou, privacy-first minimum evidence, ověřovací zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha OZ o převodu drobné stopy po první kontrole do poslední lokální korekce: vstupní brána pro stav Drží s drobnou stopou, pracovní riziko, oprava nejbližšího kanonického místa, zavření staré smyčky, privacy-first brzda korekce, ověření dalším běžným průchodem, korekční karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha OY o první kontrole běžného rytmu po uzavřeném dočištění: kontrola prvního normálního použití, cesta k aktuálnímu místu, návrat staré stopy, čtyři stavy rytmu, privacy-first úklid zbytkových stop, kontrolní zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna úvodní podkapitola o převodu ověřeného úkolu do pracovního pravidla: správný domov pravidla, pracovní věta, výjimky, omezené propsání do šablon, privacy-first datová hranice a kontrola po prvním dalším použití.
