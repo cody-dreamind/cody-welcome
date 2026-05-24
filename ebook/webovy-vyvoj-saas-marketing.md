@@ -117597,8 +117597,186 @@ Vyhodnocená udržovací poznámka je uzavřená, kanonické místo obsahuje akt
 
 Dobré uzavření udržovací poznámky je skoro neviditelné. Člověk, který přijde později, nenajde příběh všech drobných oprav. Najde aktuální pracovní místo, krátký důvod změny a čistou datovou stopu. Přesně tak má vypadat stabilní provoz: málo dramatu, hodně srozumitelnosti.
 
+## Příloha PG: První běžná kontrola po uzavření udržovací poznámky
+
+Příloha PF uzavřela vyhodnocenou udržovací poznámku do stabilního provozu. Tato příloha řeší krátkou kontrolu při prvním běžném použití po uzavření. Nejde o audit. Jde o ověření, že uzavření opravdu zapadlo do práce a že tým nemusí znát starý příběh, aby postupoval správně.
+
+Po drobné údržbě často vznikne pocit hotova. Poznámka je zavřená, kanonické místo upravené, pomocné stopy uklizené. To je dobrý stav, ale ještě neříká, jestli změna funguje v reálném průchodu. První běžná kontrola má proto odpovědět na jednu jednoduchou otázku:
+
+```text
+Použije člověk aktuální pracovní místo správně bez znalosti uzavřené poznámky?
+```
+
+Pokud ano, změna může zůstat v normálním rytmu. Pokud ne, problém se nemá vracet do staré poznámky. Má vzniknout nová malá korekce nebo nový nález podle toho, co se opravdu ukázalo.
+
+Codyho komentář: zavřená poznámka není svatá relikvie. Když se při prvním použití ukáže, že oprava nestačila, není to selhání. Selhání by bylo tvářit se, že zavřené znamená ověřené. Papír je trpělivý, provoz už míň.
+
+### Kontrolujte při skutečném použití
+
+Kontrolu nespouštějte jako samostatnou schůzku, pokud to není nutné. Vraťte se k pracovnímu místu ve chvíli, kdy ho někdo přirozeně použije: při onboardingu, přípravě nabídky, kontrole webu, údržbě šablony, měsíčním review nebo vyřízení konkrétního zákaznického dotazu.
+
+Dobré kontrolní situace:
+
+- nový člověk otevře aktuální šablonu;
+- tým použije checklist při běžném review;
+- provozní lead najde opravený odkaz bez hledání v historii;
+- zákaznicky viditelný materiál se připraví z kanonického místa;
+- stará pomocná poznámka už není potřeba pro dokončení práce.
+
+Špatná kontrolní situace je taková, kde tým kontroluje hlavně sám sebe místo práce. Pokud lidé vědí, že se ověřuje konkrétní uzavřená poznámka, snadno ji obejdou ručně: někdo si vzpomene, kde byl starý problém, opraví průchod hlavou a kontrola vypadá lépe než realita.
+
+Praktické pravidlo:
+
+```text
+Sledujte cestu člověka k aktuálnímu stavu, ne jeho schopnost vybavit si minulou opravu.
+```
+
+### Vraťte se jen ke kanonickému místu
+
+Při první kontrole neotvírejte staré screenshoty, pracovní exporty ani dlouhé komentáře. Ty už měly být uklizené nebo zkrácené do rozhodovací stopy. Začněte aktuálním kanonickým místem a sledujte, jestli samo stačí.
+
+Zeptejte se:
+
+- Najde člověk správné místo běžnou cestou?
+- Pochopí aktuální stav bez doplňujícího vysvětlení?
+- Dokončí práci bez návratu ke staré poznámce?
+- Nevzniká nová dočasná pomůcka jen proto, že oprava je nejasná?
+- Nevrací se starý název, odkaz, příklad nebo pravidlo z jiné části systému?
+
+Pokud odpověď drhne, zapište konkrétní pracovní tření. Nehodnoťte člověka. Hodnoťte systém: vstup, šablonu, odkaz, text, příklad nebo rozhodovací pravidlo.
+
+Příklad zápisu:
+
+```text
+Kontrolní situace:
+Nový obchodník připravoval předávací e-mail podle aktuální šablony.
+
+Co fungovalo:
+Našel kanonickou šablonu bez pomoci.
+
+Co drhlo:
+V interním indexu je nový název, ale v příkladu pod šablonou zůstal starý výraz.
+
+Rozhodnutí:
+Otevřít jednu lokální korekci příkladu. Nevracet se k původní uzavřené poznámce.
+```
+
+### Rozlišujte čtyři výsledky kontroly
+
+První běžná kontrola má skončit jasným stavem. Bez stavu se z ní stane další neurčitá poznámka v provozu.
+
+Použijte čtyři výsledky:
+
+1. Drží: člověk najde a použije aktuální stav bez tření.
+2. Drží s drobnou stopou: aktuální stav funguje, ale jedno blízké místo ještě nese starý výraz, odkaz nebo příklad.
+3. Nedrží: oprava nestačí, běžný průchod pořád vede ke staré práci nebo k nejasnosti.
+4. Nový nález: kontrola ukázala širší problém, který už nepatří k původní poznámce.
+
+Stav `Drží` znamená konec smyčky. Není potřeba přidávat další kontrolu jen proto, že kontrola dopadla dobře. Stabilní provoz má zůstat lehký.
+
+Stav `Drží s drobnou stopou` obvykle vede k jedné lokální korekci. Musí být opravdu blízká původnímu místu. Pokud najdete pět podobných stop, už to není drobná stopa, ale nový nález nebo údržbová položka.
+
+Stav `Nedrží` znamená, že uzavření bylo předčasné nebo oprava mířila na špatné místo. Neotevírejte starou poznámku jako nekonečný úkol. Zapište novou korekční kartu s jasnou otázkou, co má být po další úpravě jinak.
+
+Stav `Nový nález` chraňte samostatnou vstupní bránou. Kontrola jedné drobné poznámky není volná vstupenka k přestavbě celého procesu.
+
+### Privacy-first kontrola po uzavření
+
+První běžná kontrola po uzavření svádí k ukládání důkazů: screenshotů před a po, exportů z nástroje, výřezů chatu nebo nahrávek průchodu. U většiny drobných udržovacích poznámek je to zbytečně silná stopa.
+
+Stačí krátký zápis:
+
+```text
+Co se kontrolovalo:
+Výsledek:
+Případné tření:
+Rozhodnutí:
+Datová stopa:
+```
+
+Privacy-first pravidla:
+
+- neukládejte osobní výkon člověka, pokud kontrolujete použitelnost šablony;
+- nepořizujte screenshoty interních dat, pokud stačí popsat výsledek větou;
+- nepřidávejte sledování používání jen kvůli jedné drobné poznámce;
+- u zákaznicky viditelných materiálů kontrolujte šablonu, ne konkrétní zákaznické zprávy, pokud to stačí;
+- do rozhodovací stopy ponechte závěr, ne surový provozní materiál.
+
+Pokud kontrola odhalí problém s daty, přístupy, právním textem nebo veřejnou komunikací, zvyšte opatrnost. Tam už drobná poznámka může mít větší dopad. I v takovém případě ale platí: nejdřív napište, jaké rozhodnutí má být udělané, a teprve potom sbírejte jen takové podklady, které jsou pro něj nutné.
+
+### Kontrolní karta
+
+```text
+Datum:
+Uzavřená udržovací poznámka:
+Kanonické místo:
+Běžná kontrolní situace:
+Kdo nebo jaká role místo použila:
+Našel člověk aktuální stav bez staré poznámky:
+Dokončil práci bez doplňující pomoci:
+Výsledek kontroly:
+Drobná stopa nebo nový nález:
+Rozhodnutí:
+Datová stopa ponechaná po kontrole:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2027-03-22
+Uzavřená udržovací poznámka: starý název sekce v onboardingové šabloně
+Kanonické místo: onboardingová šablona pro provozní standardy
+Běžná kontrolní situace: příprava onboardingu nového člověka
+Kdo nebo jaká role místo použila: provozní lead
+Našel člověk aktuální stav bez staré poznámky: ano
+Dokončil práci bez doplňující pomoci: ano
+Výsledek kontroly: drží
+Drobná stopa nebo nový nález: žádný
+Rozhodnutí: bez další kontroly, zůstává v běžném rytmu
+Datová stopa ponechaná po kontrole: jedna věta v changelogu šablony
+Vlastník: provozní lead
+```
+
+### Mini workshop na 10 minut
+
+Vyberte jednu udržovací poznámku, která byla nedávno uzavřená a už má přirozenou příležitost k použití.
+
+1. Otevřete jen kanonické místo, ne starou historii poznámky.
+2. Nechte člověka projít běžnou pracovní situaci.
+3. Sledujte, jestli najde aktuální stav bez doplňujícího vysvětlení.
+4. Zapište jedno tření, pokud vzniklo.
+5. Vyberte stav: drží, drží s drobnou stopou, nedrží, nový nález.
+6. U stavu drží smyčku ukončete bez nové práce.
+7. U ostatních stavů zapište nejmenší další rozhodnutí.
+8. Uklidte pomocné podklady a ponechte jen krátký závěr.
+
+Výstup:
+
+```text
+Uzavřená udržovací poznámka byla ověřena při běžném použití a má jasný stav bez zbytečné nové datové stopy.
+```
+
+### Checklist kapitoly
+
+- Proběhla kontrola při skutečném použití, ne v umělé schůzce bez práce?
+- Začali jste kanonickým místem místo staré historie?
+- Šlo ověřit, zda člověk najde aktuální stav bez znalosti původní poznámky?
+- Sledujete použitelnost systému, ne výkon jednotlivce?
+- Je zapsaný jeden ze čtyř stavů kontroly?
+- U stavu `Drží` nevznikla zbytečná další kontrola?
+- U drobné stopy je jasné, že jde jen o blízkou lokální korekci?
+- U stavu `Nedrží` vznikla nová korekční karta místo nekonečného návratu ke staré poznámce?
+- U nového nálezu je oddělená vstupní brána?
+- Nepřibyly screenshoty, exporty, nahrávky nebo osobní údaje bez nutného účelu?
+- Zůstává po kontrole krátká rozhodovací stopa?
+- Ví vlastník, jestli smyčka končí, nebo co je nejmenší další krok?
+
+První běžná kontrola po uzavření má být lehká. Její hodnota není v tom, že znovu otevře minulost. Její hodnota je v tom, že potvrdí, zda aktuální pracovní místo obstojí samo. Když obstojí, nechte ho žít. Když ne, opravte nejbližší tření a nenechte z drobné údržby vyrůst další vrstvu provozního hluku.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PG o první běžné kontrole po uzavření udržovací poznámky: kontrola při skutečném použití, návrat ke kanonickému místu, čtyři výsledky kontroly, privacy-first minimalizace důkazů, kontrolní karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PF o uzavření vyhodnocené udržovací poznámky do stabilního provozu: stav z vyhodnocení, oprava kanonického místa, krátké zavření poznámky, rozhodnutí o další kontrole, privacy-first úklid pomocných stop, oddělení nových nálezů, uzavírací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PE o ověření udržovací poznámky při nejbližší běžné údržbě: práce s původní hranicí, čtyři rozhodovací stavy, provedení nejmenší akce, zavření bez akce, povýšení na údržbovou položku, privacy-first kontrola, zápis vyhodnocení, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PD o převod drobného driftu stabilního provozního stavu do jedné udržovací poznámky: rozlišení skutečného driftu od údržbové položky, zápis u kanonického místa, malá akce pro nejbližší údržbu, expirace poznámky, privacy-first brzda, pravidla povýšení, udržovací zápis, mini workshop a checklist.
