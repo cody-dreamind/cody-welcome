@@ -119646,8 +119646,227 @@ Drobně upravené pracovní místo je ověřené na běžném použití a má ja
 
 Ověření drobné úpravy má být krátké a trochu obyčejné. To je jeho síla. Jedno normální použití, čtyři signály, jedno rozhodnutí, úklid zbytkové stopy. Když tento rytmus držíte, zlepšování systému nevypadá jako velká reforma. Vypadá jako série malých zavřených smyček, které lidem postupně přestávají překážet.
 
+## Příloha PN: Uzavření potvrzené drobné úpravy do běžného rytmu
+
+Potvrzená drobná úprava je dobrá zpráva, ale ještě není konec práce. Pokud zůstane jen v ověřovací kartě, příští člověk ji nemusí najít. Pokud se naopak oslaví novým procesem, z malé opravy vznikne další provozní vrstva. Správný závěr je obyčejnější: přepsat aktuální pracovní místo, zavřít dočasnou stopu a vrátit kontrolu do běžného rytmu.
+
+Tahle příloha navazuje na stav `Potvrdit` z předchozího ověření. Řeší, jak z drobné úpravy udělat normální součást práce bez toho, aby kolem ní vznikl nový rituál. Cílem není napsat historii opravy. Cílem je, aby příště člověk udělal správnou věc bez čtení starých debat.
+
+Dobré uzavření má tři vlastnosti:
+
+1. aktuální pravidlo je tam, kde se používá;
+2. přechodové poznámky jsou zavřené nebo smazané;
+3. další kontrola se děje v existujícím review, ne v novém paralelním procesu.
+
+Pokud jedna z těchto věcí chybí, úprava sice možná pomohla, ale systém si z ní odnesl zbytečnou stopu. A zbytečná stopa je malý dluh: dnes nevypadá dramaticky, za půl roku někdo čte tři staré komentáře a neví, který z nich platí.
+
+### Začněte potvrzovací větou
+
+Nejdřív napište jednu větu, která jasně říká, co bylo potvrzeno. Nemá obsahovat celý příběh. Má být dost přesná na to, aby šla přenést do changelogu, rozhodovacího záznamu nebo poznámky u pracovního místa.
+
+Šablona:
+
+```text
+Potvrzeno:
+[Drobně upravené místo] po běžném použití drží; [konkrétní výsledek] vznikl bez [původní tření nebo zbytečná datová stopa].
+```
+
+Příklad:
+
+```text
+Potvrzeno:
+Sekce "První poptávkový formulář" v checklistu landing page po běžném použití drží; formulář vznikl bez telefonního pole a bez dalšího doptávání.
+```
+
+Tahle věta je kotva. Chrání tým před tím, aby se uzavření změnilo v obecnou debatu o formulářích, copywritingu, CRM nebo analytice. Všechny tyto věci mohou být důležité, ale tahle smyčka zavírá jen jednu drobnou úpravu.
+
+### Přepište aktuální pravidlo, ne historii
+
+Kanonické pracovní místo má obsahovat současný stav. Ne výklad, proč se měnil název, kdo s tím nesouhlasil a jaké varianty se zvažovaly. Historie patří do rozhodovacího záznamu nebo changelogu. Do checklistu, šablony nebo provozního pravidla patří to, co má člověk udělat příště.
+
+Špatný zápis v pracovním místě:
+
+```text
+Telefon jsme dříve dávali do formuláře, ale po ověření 2026-05-24 a debatě s marketingem jsme sekci přejmenovali na "První poptávkový formulář", protože autor předtím nevěděl, jestli telefon může odstranit.
+```
+
+Lepší zápis:
+
+```text
+První poptávkový formulář sbírá jen e-mail, cíl poptávky a volitelné URL. Telefon patří až do dalšího kroku, pokud je pro kvalifikaci opravdu potřeba.
+```
+
+Druhý zápis se dá použít při práci. První zápis vysvětluje historii, ale zpomaluje rozhodnutí. Pokud je historie důležitá, dejte ji do krátkého odkazu:
+
+```text
+Poznámka: poslední ověření pravidla je v rozhodovacím záznamu formulářů za květen 2026.
+```
+
+I tento odkaz používejte střídmě. Když každá věta odkazuje na staré rozhodnutí, pracovní místo se promění v muzeum procesu. Muzea jsou fajn, ale člověk v nich obvykle nechce rychle publikovat landing page.
+
+### Zavřete přechodové artefakty
+
+Po potvrzení bývá kolem úpravy několik pomocných stop: karta drobné úpravy, ověřovací komentář, dočasný checklist, export, screenshot, poznámka v issue nebo zpráva v chatu. Ne všechny musí zmizet. Všechny ale musí dostat stav.
+
+Použijte čtyři jednoduché akce:
+
+- ponechat jako stručný rozhodovací záznam;
+- přesunout závěr do kanonického místa;
+- archivovat bez provozní platnosti;
+- smazat, pokud šlo jen o dočasný pracovní podklad.
+
+Příklad úklidu:
+
+```text
+Karta drobné úpravy:
+Zavřena se stavem Potvrzeno.
+
+Dočasný komentář u checklistu:
+Smazán, protože pravidlo je přepsané přímo v checklistu.
+
+Screenshot formuláře:
+Smazán, nebyl potřeba pro další rozhodnutí.
+
+Changelog:
+Ponechána jedna věta o změně formulářového pravidla.
+```
+
+Nejhorší varianta je nechat všechno "pro jistotu". Jistota tím obvykle neroste. Roste jen počet míst, kde může příští člověk najít starý polostav a začít ho brát jako aktuální pravidlo.
+
+### Vraťte kontrolu do existujícího rytmu
+
+Potvrzená drobná úprava nepotřebuje vlastní měsíční meeting. Potřebuje být zachycená v rytmu, který už existuje: review landing pages, pravidelná údržba checklistů, kontrola formulářů, obsahový sprint, support review nebo technický audit.
+
+Dobré napojení:
+
+```text
+Další kontrola:
+Bez samostatného follow-upu. Pravidlo se zkontroluje při běžném review dalších landing pages.
+```
+
+Špatné napojení:
+
+```text
+Každé dva týdny budeme samostatně kontrolovat, jestli autoři dodržují nové pojmenování sekce.
+```
+
+Druhá varianta možná vypadá odpovědně, ale většinou je to proces navíc. Pokud se má kontrolovat každá malá úprava samostatně, tým brzy tráví víc času hlídáním pravidel než prací, kterou měla pravidla zjednodušit.
+
+Praktická otázka:
+
+```text
+Kde by se problém přirozeně ukázal, kdyby se úprava za měsíc rozbila?
+```
+
+Odpověď obvykle ukáže správný rytmus. Pokud by se chyba ukázala při revizi nové landing page, patří kontrola tam. Pokud by se ukázala při supportu, patří do support review. Pokud by se neukázala nikde, možná úprava není dost důležitá na zvláštní kontrolu.
+
+### Privacy-first uzavření bez zbytkové evidence
+
+U drobných úprav je lákavé nechat si pracovní důkazy, protože "nic nestojí". Jenže každá uložená osobní nebo provozní stopa má cenu: někdo ji musí spravovat, chránit, vysvětlit a jednou smazat. Po potvrzení proto proveďte malý privacy-first úklid.
+
+Zkontrolujte:
+
+- jestli ověřovací zápis neobsahuje jména lidí bez potřeby;
+- jestli screenshoty neukazují osobní údaje, interní komentáře nebo zákaznický kontext;
+- jestli dočasný export nemá datum smazání;
+- jestli starý event, štítek nebo pole ve formuláři nezůstal zapnutý jen kvůli ověření;
+- jestli přístup externího člověka nebo nástroje neskončil spolu s ověřením;
+- jestli kanonické místo neobsahuje historické detaily, které už nejsou potřeba.
+
+Krátký zápis:
+
+```text
+Privacy-first uzavření:
+Ponechán jen agregovaný závěr v changelogu. Smazán screenshot formuláře a dočasný komentář. Bez nového měření a bez evidence lidí.
+```
+
+Codyho komentář: malé úpravy jsou ideální místo pro disciplínu. Když tým neumí mazat drobné pomocné stopy, nebude umět mazat ani velké. A potom se z "ještě se to může hodit" stane firemní datový šuplík bez dna. Praktické? Ani omylem.
+
+### Uzavírací karta drobné úpravy
+
+Karta má být poslední krátký zápis. Po jejím vyplnění už úprava nemá žít jako samostatné téma. Žije jen v aktuálním pracovním místě a běžném rytmu kontroly.
+
+```text
+Potvrzená úprava:
+Kde je aktuální pravidlo:
+Co bylo přepsáno:
+Co bylo zavřeno nebo smazáno:
+Co zůstává jako stručná historie:
+Další kontrola v běžném rytmu:
+Privacy-first uzavření:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Potvrzená úprava:
+Přejmenování a zpřesnění sekce "První poptávkový formulář".
+
+Kde je aktuální pravidlo:
+Checklist landing page.
+
+Co bylo přepsáno:
+Pravidlo nyní říká, že první formulář sbírá e-mail, cíl poptávky a volitelné URL; telefon až v dalším kroku podle potřeby.
+
+Co bylo zavřeno nebo smazáno:
+Zavřená karta drobné úpravy, smazaný dočasný komentář, smazaný screenshot formuláře.
+
+Co zůstává jako stručná historie:
+Jedna věta v changelogu formulářových pravidel.
+
+Další kontrola v běžném rytmu:
+Při review další landing page.
+
+Privacy-first uzavření:
+Bez nového měření, bez evidence autora, bez uchování screenshotu.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-24.
+```
+
+### Mini workshop na 10 minut
+
+Vyberte jednu drobnou úpravu, která byla v předchozím kroku potvrzená.
+
+1. Přečtěte potvrzovací větu.
+2. Najděte kanonické pracovní místo, kde má pravidlo žít.
+3. Přepište pravidlo do současného pracovního tvaru.
+4. Rozhodněte stav každé přechodové stopy: ponechat, přesunout, archivovat nebo smazat.
+5. Určete existující rytmus, ve kterém se úprava příště přirozeně zkontroluje.
+6. Proveďte privacy-first úklid pomocných důkazů, exportů, screenshotů a osobních zmínek.
+7. Vyplňte uzavírací kartu a zavřete původní ověřovací kartu.
+
+Výstup:
+
+```text
+Potvrzená drobná úprava je přepsaná do kanonického pracovního místa, přechodové stopy jsou zavřené a další kontrola běží v existujícím rytmu.
+```
+
+### Checklist kapitoly
+
+- Máte jasnou potvrzovací větu?
+- Je aktuální pravidlo zapsané tam, kde ho člověk příště použije?
+- Neobsahuje pracovní místo zbytečnou historii změny?
+- Je případná historie ponechaná jen jako krátký rozhodovací záznam nebo changelog?
+- Dostaly všechny přechodové artefakty stav ponechat, přesunout, archivovat nebo smazat?
+- Nezůstal dočasný komentář, export, screenshot nebo starý event bez účelu?
+- Je další kontrola napojená na existující rytmus?
+- Nevznikl nový meeting, dashboard nebo checklist jen kvůli drobné úpravě?
+- Je privacy-first uzavření zapsané krátce a konkrétně?
+- Neuchováváte jména, osobní údaje nebo zákaznický kontext, které už nepomáhají rozhodnout?
+- Je původní ověřovací karta zavřená?
+- Ví příští člověk, co má udělat, aniž by četl celou historii?
+
+Uzavření potvrzené drobné úpravy má být nenápadné. Přesně v tom je jeho hodnota. Malá změna se propíše do místa práce, zbytky po ověření zmizí a tým se vrátí k normálnímu rytmu. Když takhle zavíráte malé smyčky, systém se postupně zlepšuje, ale nepřibírá byrokratické kilogramy. A to je fitness plán, který má šanci přežít déle než leden.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PN o uzavření potvrzené drobné úpravy do běžného rytmu: potvrzovací věta, přepis pravidla do kanonického místa, uzavření přechodových artefaktů, napojení na existující review, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PM o ověření drobné úpravy po dalším běžném použití: návrat ke kartě úpravy, výběr normálního použití, signály nalezení/pochopení/výsledku/ceny, čtyři rozhodovací stavy, poslední lokální doladění, privacy-first ověření, ověřovací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PL o převodu drobného tření po první běžné kontrole do jedné úpravy: pracovní popis tření, nejbližší kanonické místo, typy malých úprav, vědomé omezení rozsahu, privacy-first brzda, karta úpravy, mini workshop a checklist.
 - 2026-05-24: Doplněna úvodní podkapitola o kvartálním prořezání rozhodovací paměti: živá vrstva rozhodnutí, čtyři koše, slučování do pracovních míst, privacy-first úklid a karta prořezání.
