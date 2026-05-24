@@ -115306,8 +115306,283 @@ Potvrzené dočištění je uzavřené v kanonickém místě, staré stopy jsou 
 
 Uzavření potvrzeného dočištění je malý akt provozní disciplíny. Tým nepřidává další vrstvu řízení, jen nechá aktuální pracovní místo zůstat aktuální. Když se stará stopa smaže, changelog řekne minimum a rytmus pokračuje normálně, systém je o kousek tišší. A tichý systém se používá líp než systém, který pořád vysvětluje vlastní minulost.
 
+## Příloha OY: První kontrola běžného rytmu po uzavřeném dočištění
+
+Příloha OX zavřela potvrzené dočištění a vrátila pracovní místo do běžného rytmu. Tím ale ještě není jisté, že se rytmus opravdu chová normálně. První kontrola po uzavřeném dočištění má ověřit, že tým používá aktuální místo bez staré stopy, bez zvláštní připomínky a bez návratu k dočasné kartě.
+
+Kontrolní otázka zní:
+
+```text
+Použil tým aktuální pracovní místo v běžném rytmu tak, že uzavřené dočištění už nebylo samostatné téma?
+```
+
+Výstupem je krátký kontrolní zápis:
+
+```text
+Uzavrene docisteni:
+Bezny rytmus:
+Prvni kontrolovane pouziti:
+Kde zacala prace:
+Kde se objevila stara stopa:
+Stav rytmu:
+Co se otevírá:
+Co se nechává zavřené:
+Datová stopa:
+Další krok:
+Vlastník:
+```
+
+Codyho komentář: dobré dočištění má zmizet z konverzace. Ne proto, že by se na něj zapomnělo nebezpečně, ale proto, že přestalo být problémem. Pokud se při dalším review pořád řeší "ta stará karta, kterou jsme mazali", dočištění se možná zavřelo v dokumentu, ale ne v práci.
+
+### Kontrolujte jen první normální použití
+
+Neplánujte zvláštní audit jen kvůli tomu, že jste něco uklidili. První kontrola má proběhnout v nejbližším přirozeném rytmu: měsíční review, další onboarding, další publikace, další sales revize, další kontrola indexu nebo další provozní průchod.
+
+Správný vstup:
+
+```text
+Při běžném měsíčním review standardů sledujeme, jestli index vede přímo na aktuální checklist.
+```
+
+Přetížený vstup:
+
+```text
+Po uzavřeném dočištění uděláme samostatnou schůzku jen k tomu, jestli se starý odkaz opravdu nevrací.
+```
+
+Samostatná schůzka dává smysl jen tehdy, když dočištění souvisí s vysokým rizikem: právní povinností, zákaznickým závazkem, bezpečnostním dopadem nebo kritickým provozem. U běžné provozní stopy je lepší použít normální rytmus a jen si všimnout, jestli věc drží.
+
+Praktická otázka pro začátek kontroly:
+
+```text
+Kde by se stará stopa objevila, kdyby dočištění nebylo opravdu uzavřené?
+```
+
+Tato otázka chrání kontrolu před rozlitím do celého systému. Nehledáte všechny možné problémy. Hledáte návrat jedné konkrétní stopy.
+
+### Sledujte cestu k aktuálnímu místu
+
+Při kontrole nesledujte, jestli si lidé pamatují historii dočištění. Sledujte, odkud začali a kam je systém dovedl.
+
+Zapište tři věci:
+
+1. Start: odkud člověk běžně začal práci.
+2. Cesta: přes jaký odkaz, checklist, index nebo šablonu pokračoval.
+3. Cíl: jestli skončil v aktuálním kanonickém místě.
+
+Příklad:
+
+```text
+Start:
+Měsíční review začalo v indexu provozních standardů.
+
+Cesta:
+Index obsahoval jen aktuální odkaz na měsíční checklist.
+
+Cíl:
+Checklist byl použitý bez návratu ke staré údržbové kartě.
+```
+
+Pokud člověk musel otevřít starý chat, dohledat starý odkaz nebo se zeptat autora dočištění, rytmus ještě nedrží. To nemusí znamenat velkou chybu. Znamená to, že někde zůstala stopa, která pořád soupeří s aktuálním místem.
+
+Slabý zápis:
+
+```text
+Tým už ví, kam má chodit.
+```
+
+Silnější zápis:
+
+```text
+Tým začal v indexu, použil aktuální checklist a stará karta se v průchodu neobjevila.
+```
+
+Druhý zápis je užitečný, protože popisuje systém, ne víru v paměť lidí.
+
+### Hledejte návrat staré stopy, ne nové nápady
+
+První kontrola po dočištění má úzký rozsah. Jejím úkolem je zjistit, jestli se nevrací stará stopa. Není to příležitost přestavět celý index, přejmenovat všechny stavy ani založit novou iniciativu kolem dokumentace.
+
+Typické návraty staré stopy:
+
+- starý odkaz je pořád v patičce dokumentu;
+- někdo použil starou kartu, protože je výš ve vyhledávání;
+- v chatu zůstal připnutý neaktuální postup;
+- šablona kopíruje starou formulaci;
+- changelog je tak dlouhý, že lidi místo aktuální instrukce čtou historii;
+- dočasný screenshot se stal neoficiálním návodem.
+
+Vedlejší nové nápady zapište odděleně:
+
+```text
+Vedlejší nález:
+Index by se dal v budoucnu lépe filtrovat podle role.
+
+Rozhodnutí:
+Neotevírat v této kontrole. Zapsat jako samostatný podnět do údržbové fronty, pokud má jasný pracovní dopad.
+```
+
+Když kontrola najde deset nápadů a žádný závěr k původní stopě, neproběhla kontrola. Proběhl brainstorming v přestrojení. Brainstorming může být užitečný, ale tady by jen rozmazal malý uzavřený krok.
+
+### Rozlišujte čtyři stavy rytmu
+
+Po prvním normálním použití vyberte jeden stav:
+
+```text
+Drží:
+Aktuální místo bylo použité bez návratu staré stopy.
+
+Drží s drobnou stopou:
+Práce skončila správně, ale zůstala malá matoucí stopa, kterou lze uklidit lokálně.
+
+Nedrží:
+Stará stopa znovu odvedla práci mimo aktuální místo.
+
+Čeká na použití:
+Běžný rytmus ještě nenastal nebo situace nebyla dost normální.
+```
+
+Stav `Drží` znamená, že staré dočištění zůstává zavřené. Nepřidávejte další ověřování jen proto, že by bylo hezké mít víc jistoty.
+
+Stav `Drží s drobnou stopou` použijte jen pro lokální zbytek:
+
+```text
+Aktuální checklist byl použitý, ale v archivní poznámce zůstal starý název. Stačí přepsat jednu větu.
+```
+
+Stav `Nedrží` použijte, když stará stopa znovu změnila pracovní cestu:
+
+```text
+Review začalo v indexu, ale vyhledávání nabídlo starou kartu výš než aktuální checklist a člověk ji použil.
+```
+
+Stav `Čeká na použití` nesmí být pohodlný odklad. Přidejte konkrétní návrat:
+
+```text
+Další návrat:
+První onboarding nového člověka do role, nejpozději další měsíční review.
+```
+
+### Privacy-first kontrola zbytkových stop
+
+První kontrola po uzavřeném dočištění je dobrý okamžik podívat se, jestli po práci nezůstala zbytečná evidence. Nehledejte osobní výkon. Hledejte datové a pozornostní zbytky.
+
+Privacy-first otázky:
+
+- Nevznikl nový seznam lidí, kteří "to použili správně"?
+- Nezůstaly screenshoty jen proto, že bylo snadné je uložit?
+- Neobsahuje kontrolní zápis jména, hodnocení nebo citace, které nejsou nutné?
+- Nevrátil se starý chat jako zdroj pravdy?
+- Je možné rozhodnutí pochopit z kanonického místa a krátkého changelogu?
+- Má případná archivace jasný účel, vlastníka a návrat?
+
+Dobrý zápis:
+
+```text
+Datová stopa:
+Zůstává jen kontrolní věta v měsíčním review. Bez screenshotů, bez jmen a bez kopie chatu.
+```
+
+Horší zápis:
+
+```text
+Uložili jsme screenshot celé obrazovky, přepsali chat a poznamenali, kdo se v odkazu ztratil.
+```
+
+U malé provozní kontroly je anonymizovaná pracovní věta téměř vždy dost. Pokud potřebujete víc, napište proč. Tím se z "pro jistotu" stane vědomé rozhodnutí.
+
+### Kontrolní zápis
+
+```text
+Datum:
+Uzavrene docisteni:
+Bezny rytmus:
+Prvni kontrolovane pouziti:
+Start prace:
+Cesta k aktualnimu mistu:
+Objevila se stara stopa: ano / ne / castečně
+Stav rytmu: Drzi / Drzi s drobnou stopou / Nedrzi / Ceka na pouziti
+Co zustava zavrene:
+Co se otevírá:
+Datova stopa:
+Dalsi krok:
+Vlastnik:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-10-28
+Uzavrene docisteni: starý odkaz na údržbovou kartu odstraněný z indexu standardů
+Bezny rytmus: měsíční review provozních standardů
+Prvni kontrolovane pouziti: listopadové review indexu
+Start prace: index provozních standardů
+Cesta k aktualnimu mistu: index vedl na aktuální měsíční checklist
+Objevila se stara stopa: ne
+Stav rytmu: Drzi
+Co zustava zavrene: dočišťovací karta a starý odkaz
+Co se otevírá: nic
+Datova stopa: jedna kontrolní věta v review zápisu, bez screenshotů a bez jmen
+Dalsi krok: běžné měsíční review
+Vlastnik: provozní lead
+```
+
+Příklad se stavem `Drží s drobnou stopou`:
+
+```text
+Stav rytmu: Drzi s drobnou stopou
+Co zustava zavrene: původní dočištění starého odkazu
+Co se otevírá: lokální přepsání archivní poznámky, kde zůstal starý název checklistu
+Dalsi krok: přepsat jednu větu v archivní poznámce a ověřit při dalším běžném review
+```
+
+Příklad se stavem `Nedrží`:
+
+```text
+Stav rytmu: Nedrzi
+Co se otevírá: návrat staré karty ve vyhledávání, protože archiv nemá jasný štítek
+Dalsi krok: založit samostatnou údržbovou položku pro označení archivovaných karet; původní dočištění neprodlužovat bez hranic
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jedno dočištění uzavřené podle Přílohy OX.
+
+1. Najděte nejbližší běžný rytmus, kde se mělo pracovní místo použít.
+2. Zapište, odkud práce začala.
+3. Sledujte, zda cesta vedla na aktuální kanonické místo.
+4. Označte, jestli se objevila stará stopa.
+5. Vyberte stav `Drží`, `Drží s drobnou stopou`, `Nedrží` nebo `Čeká na použití`.
+6. Vedlejší nápady zapište mimo tuto kontrolu.
+7. Zkraťte kontrolní důkaz na minimum a smažte dočasné podklady, které už nic nerozhodují.
+
+Výstup:
+
+```text
+Běžný rytmus po uzavřeném dočištění má jasný stav a případný další krok neotevírá starou kartu bez hranic.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete první normální použití, ne umělý audit?
+- Je jasné, kde by se původní stará stopa znovu objevila?
+- Sledujete start, cestu a cíl práce?
+- Popisujete systém, ne paměť nebo výkon člověka?
+- Neotevíráte nové nápady jako součást této kontroly?
+- Jsou vedlejší nálezy oddělené od původního dočištění?
+- Vybrali jste jeden ze stavů `Drží`, `Drží s drobnou stopou`, `Nedrží` nebo `Čeká na použití`?
+- Má stav `Čeká na použití` konkrétní další návrat?
+- Pokud rytmus drží, zůstává staré dočištění opravdu zavřené?
+- Pokud rytmus nedrží, vznikla samostatná údržbová položka s jasným rozsahem?
+- Nevznikl nový tracker, screenshotový archiv ani seznam výkonu lidí?
+- Zůstává kontrolní zápis krátký, anonymizovaný a navázaný na pracovní místo?
+- Je další krok součástí běžného rytmu, ne zvláštního miniprocesu?
+
+První kontrola běžného rytmu má dát klidnou odpověď: systém už vede lidi správně, nebo někde zůstala stopa, která má vlastní malou opravu. Obojí je použitelné. Nepoužitelné je jen mlhavé "asi dobré", po kterém staré odkazy dál straší ve vyhledávání a všichni předstírají, že je to vlastně znalostní báze. Není. Je to odložený úklid.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha OY o první kontrole běžného rytmu po uzavřeném dočištění: kontrola prvního normálního použití, cesta k aktuálnímu místu, návrat staré stopy, čtyři stavy rytmu, privacy-first úklid zbytkových stop, kontrolní zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna úvodní podkapitola o převodu ověřeného úkolu do pracovního pravidla: správný domov pravidla, pracovní věta, výjimky, omezené propsání do šablon, privacy-first datová hranice a kontrola po prvním dalším použití.
 - 2026-05-24: Doplněna Příloha OX o uzavření potvrzené dočišťovací úpravy do běžného rytmu: potvrzený stav, přepis kanonického místa, zavření dočasných karet a odkazů, návrat do existujícího rytmu, privacy-first úklid zbytkových stop, uzavírací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OW o ověření dočišťovací úpravy po dalším běžném použití: návrat k původní drobné stopě, ověření při normálním průchodu, tři malé signály, čtyři výsledky ověření, privacy-first minimalizace zbytkové vrstvy, ověřovací zápis, mini workshop a checklist.
