@@ -119406,8 +119406,249 @@ Drobné tření po první běžné kontrole je převedené do jedné úpravy kan
 
 Drobné tření je dobrá zpráva, pokud ho tým umí zavřít malou úpravou. Znamená, že systém už většinou funguje a potřebuje jen zmenšit odpor v jednom místě. Když takovou úpravu uděláte přímo v pracovní trase, bez nové evidence a bez sběru dalších dat, provoz se zlepší skoro potichu. A to je přesně ideální výsledek: méně vysvětlování, méně hledání, méně stop, víc hotové práce.
 
+## Příloha PM: Ověření drobné úpravy po dalším běžném použití
+
+Drobně upravené pravidlo není hotové tím, že někdo přejmenoval sekci, smazal starý komentář nebo posunul větu blíž k pracovnímu kroku. Hotové je až ve chvíli, kdy ho další člověk použije v normálním průchodu a tření se už nevrátí.
+
+Tahle příloha řeší právě ten okamžik. Navazuje na kartu drobné úpravy z předchozí přílohy a pomáhá ověřit, jestli malý zásah skutečně snížil odpor v práci. Cíl není znovu auditovat celý systém. Cíl je zjistit, jestli jedna úprava stačila, jestli potřebuje ještě jedno lokální doladění, nebo jestli se pod ní schovával větší problém.
+
+Ověření má být malé, protože malá byla i úprava. Pokud kvůli přejmenování jedné sekce vznikne hodinový review meeting, tři exporty a nová tabulka připomínek, proces vyhrál nad prací. A proces má v téhle knize právo na život jen tehdy, když něco opravdu zjednodušuje.
+
+### Vraťte se ke kartě drobné úpravy
+
+Nezačínejte z paměti. Vraťte se ke kartě, která popsala původní tření, kanonické místo a jednu úpravu. Bez toho se ověření snadno rozjede do obecné debaty o kvalitě dokumentace, formulářů, onboardingu nebo marketingového provozu.
+
+Stačí znovu přečíst čtyři pole:
+
+```text
+Drobné tření:
+Nejbližší kanonické místo:
+Jedna úprava:
+Jak ověříme při dalším běžném použití:
+```
+
+Pokud karta neexistuje, nedohánějte historii dlouhou rekonstrukcí. Napište jednovětý záznam z toho, co je jisté:
+
+```text
+Ověřujeme, zda úprava názvu sekce v checklistu landing page pomohla autorovi najít pravidlo pro první poptávkový formulář bez dotazu a bez návratu telefonního pole.
+```
+
+Taková věta stačí. Je lepší než pocitové "mrkneme, jestli je to už dobré". Ověření potřebuje pracovní otázku, ne náladu.
+
+### Vyberte první normální použití
+
+Ověřujte při práci, která by se stala i bez kontroly. Další landing page, další úprava formuláře, další onboardingový průchod, další revize sales materiálu. Nevyrábějte umělý test jen proto, abyste měli rychle odpověď.
+
+Normální použití má tři znaky:
+
+1. člověk řeší skutečný pracovní úkol;
+2. použije stejné kanonické místo, které bylo upraveno;
+3. výsledek má pro tým nebo zákazníka reálný význam.
+
+Umělý test může být užitečný, pokud jde o rizikovou změnu. U drobné úpravy ale často zkresluje. Člověk ví, že je sledovaný, hledá pečlivěji než obvykle a tým z toho vyvodí optimistický závěr. V běžném provozu pak staré tření klidně přežije.
+
+Praktická hranice:
+
+```text
+Ověříme při nejbližším skutečném použití. Pokud do 30 dnů nenastane, kartu zavřeme jako nízkou prioritu nebo ji převedeme do běžné údržby.
+```
+
+Bez takové hranice drobná úprava zůstane viset v polostavu. A polostav je provozní mlha: nikdo neví, jestli je věc hotová, jen se tváří, že je někde "v ověření".
+
+### Sledujte čtyři signály
+
+Ověření drobné úpravy nepotřebuje velkou metriku. Stačí čtyři malé signály:
+
+- Nalezení: člověk našel správné místo bez dotazu nebo obcházení.
+- Pochopení: pravidlo použil bez dodatečného vysvětlování.
+- Výsledek: vznikl správný pracovní výstup.
+- Cena: nevznikla nová ruční kontrola, zbytečný krok ani datová stopa.
+
+Příklad:
+
+```text
+Nalezení:
+Autor otevřel checklist landing page a našel sekci "První poptávkový formulář".
+
+Pochopení:
+Formulář postavil s e-mailem, cílem a volitelným URL.
+
+Výsledek:
+Telefonní pole se nevrátilo do první verze stránky.
+
+Cena:
+Nebyl potřeba nový komentář, export ani dotaz na obchodní tým.
+```
+
+Pokud chybí jen jeden signál, neznamená to automaticky selhání. Důležité je, který signál chybí. Když člověk pravidlo našel a použil, ale musel se jednou doptat na výjimku, možná stačí krátké lokální doladění. Když pravidlo nenašel vůbec, problém je v trase nebo umístění. Když vznikl špatný výsledek, nejde o drobné tření, ale o nedostatečné pravidlo.
+
+### Rozlišujte čtyři výsledky ověření
+
+Po jednom normálním použití rozhodněte stav. Nepřidávejte pátý stav "uvidíme". Ten bývá jen převlečené odložení.
+
+Možné výsledky:
+
+- `Potvrdit`: úprava pomohla a může se zavřít.
+- `Ještě jednou lokálně doladit`: úprava pomohla, ale zůstalo malé tření ve stejném místě.
+- `Vrátit do údržbové fronty`: problém není lokální nebo se opakuje napříč více místy.
+- `Zrušit úpravu`: zásah nepomohl nebo zhoršil pracovní výsledek.
+
+Rozhodovací pomůcka:
+
+```text
+Potvrdit:
+Člověk našel místo, pochopil pravidlo, výsledek je správný a datová stopa se nezvětšila.
+
+Ještě jednou lokálně doladit:
+Výsledek je správný, ale jeden detail v témže místě pořád zdržuje.
+
+Vrátit do údržbové fronty:
+Tření se ukázalo i jinde nebo vyžaduje změnu širšího pravidla.
+
+Zrušit úpravu:
+Nový text, název nebo přesun vytvořil větší nejasnost než původní stav.
+```
+
+Tým tím chrání dvě věci najednou: tempo a kvalitu. Neuzavírá něco, co nedrží, ale ani z malé opravy nedělá nekonečnou poradní položku.
+
+### Když úprava potřebuje ještě jedno doladění
+
+Stav `Ještě jednou lokálně doladit` je v pořádku, pokud má jasnou hranici. Druhé doladění musí zůstat ve stejném kanonickém místě a nesmí přidat nový proces.
+
+Dobré druhé doladění:
+
+- zkrátit větu, která je pořád moc historická;
+- přidat jednu hranici výjimky;
+- odstranit starý archivní odkaz;
+- přejmenovat odkaz podle pracovní situace;
+- přesunout pravidlo o pár řádků blíž k místu použití.
+
+Špatné druhé doladění:
+
+- založit nový review rituál;
+- obejít kanonické místo a poslat pravidlo do chatu;
+- vytvořit paralelní checklist;
+- začít měřit jednotlivé lidi;
+- sbírat další příklady bez jasné retence.
+
+Jedna věta pro hranici:
+
+```text
+Děláme poslední lokální doladění stejné sekce; pokud se tření vrátí i potom, nejde o drobnou úpravu a položka se vrací do údržbové fronty.
+```
+
+Tahle věta je malá brzda proti nekonečnému štelování. Dvě lokální opravy obvykle stačí. Když nestačí, problém je větší než název, odkaz nebo jedna věta.
+
+### Privacy-first ověření bez nové vrstvy
+
+Ověření má použít stopu, která už vzniká přirozeně při práci. Například výslednou stránku, upravený checklist, existující issue, poznámku v changelogu nebo krátký komentář vlastníka. Nepřidávejte zvláštní sledování lidí ani novou tabulku "kdo si čeho všiml".
+
+Privacy-first pravidla:
+
+- zapisujte pracovní situaci, ne jméno člověka, pokud jméno není nutné;
+- nepřikládejte screenshoty s osobními údaji;
+- nemažte historii rozhodnutí, ale zkraťte pracovní pravidlo na aktuální stav;
+- dočasné komentáře po ověření zavřete nebo smažte;
+- pokud vznikl export, určete účel, vlastníka a datum smazání;
+- neprodlužujte životnost pomocných stop jen proto, že "by se mohly hodit".
+
+Krátký dobrý zápis:
+
+```text
+Datová stopa:
+Ověřeno na běžné úpravě landing page. Bez nového exportu a bez evidence lidí. Po potvrzení mažu dočasný komentář u původního odkazu.
+```
+
+Codyho komentář: u malých provozních úprav je největší privacy-first výhra často nudná. Méně screenshotů, méně tabulek, méně "pro jistotu" poznámek. Nudné je tady kompliment. Znamená to, že systém funguje bez dalšího šmírovacího přívěsku.
+
+### Ověřovací karta drobné úpravy
+
+Karta má být tak krátká, aby ji šlo vyplnit hned po normálním použití. Pokud z ní vznikne zápis na půl stránky, pravděpodobně řešíte větší problém.
+
+```text
+Původní drobná úprava:
+Běžné použití:
+Nalezení:
+Pochopení:
+Výsledek:
+Cena a datová stopa:
+Rozhodnutí:
+Další krok:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Původní drobná úprava:
+Přejmenování sekce "Kontaktní pole" na "První poptávkový formulář" v checklistu landing page.
+
+Běžné použití:
+Nová landing page pro konzultační nabídku.
+
+Nalezení:
+Autor našel sekci bez dotazu.
+
+Pochopení:
+Použil e-mail, cíl a volitelné URL. Telefon nepřidal.
+
+Výsledek:
+První formulář odpovídá pravidlu a nevyžaduje další osobní údaj.
+
+Cena a datová stopa:
+Bez nového exportu, bez nové evidence lidí. Smazán starý komentář k telefonnímu poli.
+
+Rozhodnutí:
+Potvrdit.
+
+Další krok:
+Zavřít kartu drobné úpravy a ponechat kontrolu běžnému review landing pages.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-24.
+```
+
+### Mini workshop na 10 minut
+
+Vyberte jednu kartu drobné úpravy, u které už proběhlo další normální použití.
+
+1. Přečtěte původní tření, kanonické místo a jednu úpravu.
+2. Popište reálné použití, na kterém ověřujete.
+3. Zapište signály nalezení, pochopení, výsledku a ceny.
+4. Rozhodněte jeden ze čtyř stavů: potvrdit, ještě jednou lokálně doladit, vrátit do údržbové fronty, zrušit úpravu.
+5. Pokud doladíte, napište hranici posledního lokálního zásahu.
+6. Zkontrolujte, že ověření nepřidalo novou osobní evidenci, screenshoty ani exporty.
+7. Zavřete nebo smažte dočasné poznámky, které už nemají účel.
+
+Výstup:
+
+```text
+Drobně upravené pracovní místo je ověřené na běžném použití a má jasné rozhodnutí dalšího stavu.
+```
+
+### Checklist kapitoly
+
+- Vrátili jste se ke kartě drobné úpravy?
+- Ověřujete při skutečném běžném použití, ne v umělém testu?
+- Je jasné, které kanonické místo člověk použil?
+- Sledujete nalezení, pochopení, výsledek a cenu?
+- Rozhodli jste stav `Potvrdit`, `Ještě jednou lokálně doladit`, `Vrátit do údržbové fronty` nebo `Zrušit úpravu`?
+- Pokud dolazujete znovu, zůstává zásah ve stejném místě?
+- Má druhé doladění jasné stop pravidlo?
+- Nevznikla nová tabulka, tracker, export ani evidence lidí?
+- Jsou dočasné komentáře po ověření zavřené nebo smazané?
+- Je výsledek uložený tam, kde se daná práce příště opravdu odehraje?
+- Pokud se ukázal širší problém, je oddělený od drobné úpravy?
+
+Ověření drobné úpravy má být krátké a trochu obyčejné. To je jeho síla. Jedno normální použití, čtyři signály, jedno rozhodnutí, úklid zbytkové stopy. Když tento rytmus držíte, zlepšování systému nevypadá jako velká reforma. Vypadá jako série malých zavřených smyček, které lidem postupně přestávají překážet.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PM o ověření drobné úpravy po dalším běžném použití: návrat ke kartě úpravy, výběr normálního použití, signály nalezení/pochopení/výsledku/ceny, čtyři rozhodovací stavy, poslední lokální doladění, privacy-first ověření, ověřovací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PL o převodu drobného tření po první běžné kontrole do jedné úpravy: pracovní popis tření, nejbližší kanonické místo, typy malých úprav, vědomé omezení rozsahu, privacy-first brzda, karta úpravy, mini workshop a checklist.
 - 2026-05-24: Doplněna úvodní podkapitola o kvartálním prořezání rozhodovací paměti: živá vrstva rozhodnutí, čtyři koše, slučování do pracovních míst, privacy-first úklid a karta prořezání.
 - 2026-05-24: Doplněna Příloha PK o první běžné kontrole po uzavřené lokální korekci: kontrola při skutečné práci, návrat ke kanonickému místu, signály nalezení/pochopení/výsledku/datové stopy, čtyři výsledky kontroly, privacy-first minimalizace důkazů, kontrolní karta, mini workshop a checklist.
