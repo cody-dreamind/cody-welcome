@@ -118589,8 +118589,213 @@ Lokální korekce má ověřený stav po dalším běžném průchodu a buď je 
 
 Ověření lokální korekce je malá brzda proti tomu, aby se údržba tvářila jako hotová jen proto, že někdo změnil jednu větu. Když korekce obstojí v dalším běžném průchodu, má být zavřená bez fanfár. Když neobstojí, má se problém pojmenovat přesně a bez nabalování. Tak se stabilní provoz udržuje čistý: malými kontrolami, krátkými záznamy a minimem dat, která nemají další účel.
 
+## Příloha PJ: Uzavření ověřené lokální korekce do běžného rytmu
+
+Ověřená lokální korekce ještě není totéž co uzavřená práce. Ověření říká, že změna obstála v jednom běžném průchodu. Uzavření říká, kde teď platí aktuální pravidlo, co se může smazat, kdy se k tématu vrátit a co už nemá žít jako samostatná karta.
+
+Tahle příloha řeší přesně ten malý, ale důležitý krok mezi "fungovalo to" a "systém je zase jednodušší". Bez něj se i dobré korekce mění v archiv malých rozhodnutí, která nikdo nechce rušit, protože vypadají důležitě. Jenže každá taková stopa něco stojí: pozornost, hledání, pochybnost a občas i zbytečné osobní údaje.
+
+Uzavření má tři cíle:
+
+1. dostat aktuální pravidlo do kanonického pracovního místa;
+2. zavřít nebo smazat přechodovou stopu po korekci;
+3. vrátit další kontrolu do běžného rytmu místo vytváření nové vrstvy.
+
+Kanonické pracovní místo je místo, kam člověk půjde příště, když bude stejnou věc dělat. U marketingového formuláře to může být checklist landing page. U supportu to může být šablona odpovědi. U SaaS provozu to může být runbook, datová mapa, onboardingový krok nebo produktový stav v administraci. Pokud uzavření skončí jen poznámkou v logu, korekce sice existuje v historii, ale nemusí existovat v práci.
+
+### Kdy korekci uzavírat
+
+Korekci uzavírejte jen tehdy, když předchozí ověření skončilo stavem `Zavřít` nebo jasným ekvivalentem: změna byla nalezená, pochopená, použitá a nevytvořila novou nepřiměřenou datovou stopu.
+
+Neuzavírejte ji, pokud:
+
+- ověření proběhlo jen na umělém testu, ne v normální práci;
+- člověk musel znát kontext staré chyby, aby změnu použil;
+- korekce fungovala, ale odhalila větší problém v procesu;
+- vznikla nová povinná evidence, export nebo ruční kontrola;
+- pravidlo je zapsané jen v korekční kartě a ne v pracovním místě;
+- tým se neshodne, jestli se má změna stát normou.
+
+V takovém případě není ostuda korekci nechat ještě v údržbě. Horší je zavřít ji předčasně a nechat budoucího člověka hádat, která verze platí. Stabilní provoz není závod v rychlém odškrtávání. Je to schopnost zmenšovat množství míst, kde musí tým držet kontext v hlavě.
+
+### Přepište pravidlo, ne příběh
+
+Při uzavření nepřenášejte do kanonického místa celý příběh korekce. Příští člověk většinou nepotřebuje vědět, že starý formulář kdysi sbíral telefon, pak vznikla stopa v checklistu, potom korekce a potom ověření. Potřebuje vědět, co má udělat teď.
+
+Slabý přepis:
+
+```text
+Pozor, po korekci z května už telefon v prvním formuláři raději nepoužíváme, protože dřív způsoboval zbytečné tření a sběr údajů.
+```
+
+Silnější přepis:
+
+```text
+První poptávkový formulář obsahuje jen e-mail, stručný cíl a volitelné URL. Telefon patří až do další komunikace, pokud ho zákazník sám nabídne nebo je pro další krok opravdu potřeba.
+```
+
+Druhá verze je lepší, protože nevyžaduje znalost historie. Říká aktuální pravidlo, jeho hranici a praktickou výjimku. To je tvar, který patří do checklistu, šablony nebo runbooku.
+
+### Uzavírací kroky
+
+Použijte jednoduchý postup:
+
+1. Otevřete ověřovací kartu korekce.
+2. Zkopírujte z ní jen aktuální pravidlo, ne celý průběh.
+3. Najděte jedno kanonické pracovní místo, kde má pravidlo bydlet.
+4. Přepište pravidlo do pracovního jazyka člověka, který ho použije.
+5. Zkontrolujte, jestli staré odkazy, šablony nebo poznámky nevedou na starou variantu.
+6. Zavřete korekční kartu jednou větou.
+7. Smažte nebo anonymizujte dočasné podklady, které už nemají účel.
+8. Další návrat napojte na existující rytmus, například měsíční review formulářů.
+
+Nejčastější chyba je bod 3. Tým najde dvě nebo tři místa a ze slušnosti aktualizuje všechna. Někdy je to správně, ale často tím vzniknou další kopie pravidla. Pokud pravidlo musí být na více místech, určete jedno jako zdroj pravdy a ostatní jako krátké odkazy nebo pracovní zkratky. Kopie pravidla stárne rychleji než samotné pravidlo. To je fyzika dokumentace, bohužel bez možnosti reklamace.
+
+### Privacy-first uzavření
+
+Lokální korekce často vzniká kvůli drobné datové stopě: zbytečnému poli, screenshotu, exportu, pomocné tabulce, staré šabloně nebo poznámce s údaji, které už nejsou potřeba. Uzavření je poslední vhodný okamžik ověřit, že se stopa opravdu zmenšila.
+
+Zeptejte se:
+
+- Zůstává po korekci méně osobních údajů než před ní?
+- Zmizely dočasné exporty, screenshoty a pracovní kopie?
+- Nezůstala stará varianta v onboardingových materiálech?
+- Nevyžaduje nové pravidlo další ruční evidenci lidí nebo zákazníků?
+- Je jasné, kdo má přístup k novému kanonickému místu?
+- Je další kontrola agregovaná, nebo zbytečně sleduje jednotlivce?
+
+Pokud odpověď na první otázku není "ano", korekce možná vyřešila text, ale nevyřešila provozní dopad. Privacy-first uzavření nemá být kosmetika. Má snížit množství dat, míst a oprávnění, která tým nese dál.
+
+Příklad:
+
+```text
+Původní stopa:
+Kopie poptávkového formuláře ve sdílené tabulce kvůli kontrole, jestli telefonní pole mizí.
+
+Uzavření:
+Checklist landing page obsahuje aktuální pravidlo formuláře. Tabulka se smaže. Další kontrola proběhne jen agregovaně v měsíčním review formulářů.
+```
+
+Tady je důležité, že se nezavřela jen věta v checklistu. Zavřela se i pomocná datová stopa, která by jinak mohla žít další měsíce jako "pro jistotu". Pro jistotu je v provozu drahá fráze. Občas je oprávněná, ale často jen maskuje chybějící rozhodnutí.
+
+### Uzavírací karta
+
+Pro zápis stačí krátká karta:
+
+```text
+Korekce:
+Ověřený výsledek:
+Kanonické místo:
+Aktuální pravidlo:
+Co bylo odstraněno nebo archivováno:
+Co zůstává mimo rozsah:
+Další běžný rytmus:
+Datová stopa po uzavření:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Korekce:
+Odstranit starou větu o telefonním poli z checklistu nové landing page.
+
+Ověřený výsledek:
+Při přípravě nové landing page autor použil kratší formulář bez telefonu.
+
+Kanonické místo:
+Checklist landing page, sekce První formulář.
+
+Aktuální pravidlo:
+První poptávkový formulář obsahuje jen e-mail, stručný cíl a volitelné URL. Telefon se řeší až v další komunikaci, pokud je potřeba.
+
+Co bylo odstraněno nebo archivováno:
+Korekční karta zavřená. Dočasná kontrolní poznámka smazaná.
+
+Co zůstává mimo rozsah:
+Neměníme navazující CRM kvalifikaci ani šablony obchodních e-mailů.
+
+Další běžný rytmus:
+Měsíční review formulářů.
+
+Datová stopa po uzavření:
+Bez nových osobních údajů. Zůstává jen agregovaný zápis o změně pravidla.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-24.
+```
+
+Karta nemá být dalším dlouhodobým dokumentem. Po uzavření může zůstat v changelogu nebo rozhodovacím logu jako stručná stopa. Pracovní pravda má být v checklistu. To je rozdíl mezi historií a systémem.
+
+### Kdy vytvořit nový nález
+
+Uzavření někdy ukáže, že korekce sice funguje, ale kolem ní je větší problém. Typicky:
+
+- stejná stará varianta je ve třech dalších šablonách;
+- lidé nevědí, které místo je kanonické;
+- úklid dočasných exportů není nikde standardizovaný;
+- pravidlo závisí na ruční znalosti jednoho člověka;
+- privacy-first dopad se opakuje i u jiných formulářů.
+
+V tu chvíli nezvětšujte uzavření. Zavřete lokální korekci, pokud opravdu drží, a vedle ní založte nový nález. Nový nález má vlastní otázku, vlastní rozsah a vlastní rozhodnutí. Jinak se z malého uzavření stane skrytý redesign procesu.
+
+Praktická věta:
+
+```text
+Lokální korekce formuláře je uzavřená. Samostatný nález: nemáme jednoznačný zdroj pravdy pro formulářová pravidla napříč landing pages.
+```
+
+Tahle věta chrání dvě věci najednou. Nepopírá hotovou práci a zároveň nepředstírá, že větší problém zmizel. To je zdravý provozní kompromis.
+
+### Codyho komentář
+
+Můj pohled: největší riziko malých korekcí není to, že se neudělají. Často se udělají. Riziko je, že po nich zůstane víc stop než před nimi. Karta, poznámka, kopie checklistu, dočasný export, starý odkaz, nový komentář a hrdý pocit, že jsme to "procesně ošetřili". Gratuluju, právě jsme z jedné věty udělali malý informační sklad.
+
+Dobrá korekce má po uzavření zmizet do jednodušší práce. Člověk příště najde aktuální pravidlo tam, kde ho potřebuje, použije ho bez vysvětlování a systém o něm nemusí sbírat víc dat. To je elegantní výsledek. Ne proto, že vypadá hezky v dokumentaci, ale protože méně překáží.
+
+### Mini workshop na 12 minut
+
+Vyberte jednu ověřenou lokální korekci se stavem `Zavřít`.
+
+1. Pojmenujte kanonické pracovní místo.
+2. Přepište aktuální pravidlo jednou nebo dvěma větami.
+3. Najděte staré odkazy, kopie nebo poznámky, které by mohly mást.
+4. Rozhodněte, co se smaže, co se archivuje a co zůstane jako odkaz.
+5. Zapište, co se privacy-first uzavřením zmenšilo.
+6. Určete existující rytmus, který téma příště zachytí.
+7. Zavřete korekční kartu jednou větou.
+8. Pokud se objevil větší problém, založte samostatný nález.
+
+Výstup:
+
+```text
+Ověřená lokální korekce je přepsaná do kanonického pracovního místa, přechodové stopy jsou zavřené a další kontrola běží v existujícím rytmu.
+```
+
+### Checklist kapitoly
+
+- Má korekce ověřený výsledek z běžného průchodu?
+- Je jasné jedno kanonické pracovní místo?
+- Přepisujete aktuální pravidlo, ne příběh korekce?
+- Je pravidlo napsané jazykem člověka, který ho použije?
+- Nezůstala stará varianta v checklistu, šabloně, onboardingu nebo odkazu?
+- Je rozhodnuté, co se smaže, archivuje nebo nechá jako stručný changelog?
+- Zmenšila se datová stopa po korekci?
+- Nevznikla nová povinná evidence jen kvůli pocitu kontroly?
+- Je další návrat navázaný na existující běžný rytmus?
+- Má uzavření vlastníka?
+- Pokud se objevil větší problém, je oddělený jako nový nález?
+- Umí nový člověk použít aktuální pravidlo bez znalosti celé historie?
+
+Uzavření ověřené lokální korekce má být nenápadné. Ne proto, že by nebylo důležité, ale protože jeho výsledkem je méně věcí k pamatování. Když se aktuální pravidlo dostane na správné místo, staré stopy zmizí a další kontrola se vrátí do běžného rytmu, systém se o kousek uklidní. To je přesně ten typ práce, který nebývá vidět na první pohled, ale po pár měsících rozhoduje, jestli tým žije v použitelném provozu, nebo v archeologii vlastních poznámek.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PJ o uzavření ověřené lokální korekce do běžného rytmu: kanonické pracovní místo, přepis pravidla bez historie, privacy-first úklid přechodových stop, uzavírací karta, oddělení nových nálezů, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PI o ověření lokální korekce po dalším běžném průchodu: návrat ke korekční kartě, kontrola v normální práci, signály nalezení/pochopení/dokončení/ceny, čtyři výsledky, privacy-first ověření bez nové vrstvy, ověřovací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PH o převodu drobné stopy po první běžné kontrole do jedné lokální korekce: vstupní brána, popis pracovního rizika, oprava nejbližšího místa, ochrana uzavřené smyčky, lehké ověření, privacy-first evidence, karta korekce, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PG o první běžné kontrole po uzavření udržovací poznámky: kontrola při skutečném použití, návrat ke kanonickému místu, čtyři výsledky kontroly, privacy-first minimalizace důkazů, kontrolní karta, mini workshop a checklist.
