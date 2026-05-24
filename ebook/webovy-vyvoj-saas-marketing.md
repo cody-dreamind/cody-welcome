@@ -539,6 +539,135 @@ Codyho komentář: ověření má být jako dobrý šroubovák. Vezmete ho, pou�
 
 Když ověření proběhne takhle jednoduše, první úkol nezmizí v provozu. Buď se promění v potvrzené pravidlo, drobné doladění, vědomý návrat zpět, nebo odloženou věc bez chaosu. To je přesně rytmus, ve kterém má e-book pomáhat: menší rozhodnutí, kratší smyčky, méně zbytečných dat a víc práce, která opravdu mění produkt.
 
+## Převod ověřeného úkolu do pracovního pravidla
+
+Ověřený úkol je dobrá zpráva, ale ještě není provozní zlepšení. Pokud změna pomohla a tým ji nechá jen v jednom úkolu, začne se časem ztrácet. Někdo použije starou šablonu, někdo okopíruje původní formulář, někdo založí novou landing page podle starší verze a za pár týdnů je stejný problém zpátky. Ne proto, že by lidé nechtěli pracovat dobře. Spíš proto, že jednorázová změna neměla domov.
+
+Pracovní pravidlo je krátký zápis, který říká: když nastane tato situace, děláme to tímto způsobem, protože jsme si ověřili, že to pomáhá. Nemá to být nový proces na tři stránky. Má to být pojistka, že dobrá změna přežije první použití mimo původní kontext.
+
+Převod do pravidla dává smysl jen tehdy, když platí tři věci:
+
+1. Změna se bude opakovat v podobné situaci.
+2. Ověření ukázalo dost jasný přínos nebo snížení rizika.
+3. Existuje místo, kde lidé pravidlo najdou při skutečné práci.
+
+Pokud jde o jednorázovou opravu překlepu, pravidlo nevyrábějte. Pokud jde o způsob, jak psát formuláře, ukládat dočasné exporty, pracovat s lead magnetem nebo kontrolovat externí skripty, pravidlo už smysl má. Rozdíl je v opakovatelnosti.
+
+### Najděte správný domov pravidla
+
+Největší chyba po úspěšném ověření je uložit poučení do poznámky, kterou nikdo neuvidí při další práci. Pravidlo má bydlet co nejblíž místu použití.
+
+Příklady dobrého domova:
+
+- pravidlo pro formuláře patří k šabloně formuláře nebo checklistu nové landing page;
+- pravidlo pro case studies patří k redakční šabloně případové studie;
+- pravidlo pro analytické eventy patří k privacy-first analytickému checklistu;
+- pravidlo pro onboardingový e-mail patří k onboardingové sekvenci, ne jen do retrospektivy;
+- pravidlo pro úklid exportů patří k provoznímu checklistu po kampani nebo auditu.
+
+Když pravidlo uložíte moc vysoko, lidé ho budou obdivovat z dálky a nepoužijí ho. Když ho uložíte moc nízko, zůstane skryté v jednom úkolu. Správné místo je to, kde další člověk přirozeně začne stejný typ práce.
+
+### Pište pravidlo jako pracovní větu
+
+Dobré pravidlo má být tak krátké, aby šlo použít bez výkladu. Nepište historii celé změny. Historie patří do ověřovacího zápisu. Pravidlo má říct, co se má stát příště.
+
+Šablona:
+
+```text
+Když:
+Děláme:
+Protože:
+Kontrola:
+Datová hranice:
+```
+
+Příklad po ověření kratšího kontaktního formuláře:
+
+```text
+Když:
+Vytváříme první kontaktní formulář pro novou službu nebo landing page.
+
+Děláme:
+Ptáme se jen na e-mail, stručný kontext a volitelné URL. Telefon necháváme až do navazující domluvy.
+
+Protože:
+Ověření ukázalo, že telefon není nutný pro první odpověď a kratší formulář snižuje zbytečné tření.
+
+Kontrola:
+Při měsíční kontrole formulářů projdeme, jestli nová stránka pravidlo neobešla.
+
+Datová hranice:
+Nepřidáváme další povinné osobní údaje bez jasného důvodu a termínu ověření.
+```
+
+Takové pravidlo je praktické, protože vede další rozhodnutí. Když někdo za měsíc navrhne povinný telefon, tým nemusí začínat od nuly. Může se zeptat: změnil se důvod, máme nový důkaz, nebo jen vracíme starý zvyk?
+
+### Oddělte pravidlo od výjimky
+
+Každé pravidlo může mít výjimku. Problém nastává, když výjimka není pojmenovaná a potichu zruší celé pravidlo. Pokud někdo potřebuje víc údajů ve formuláři, větší měření nebo delší retenci, nemusí to být špatně. Musí ale říct proč.
+
+Jednoduchá výjimková věta:
+
+```text
+Výjimka:
+V této situaci sbíráme navíc [údaj], protože [důvod]. Výjimku ověříme [kdy] a po ověření ji ponecháme, zúžíme nebo zrušíme.
+```
+
+Příklad:
+
+```text
+Výjimka:
+U enterprise bezpečnostního auditu sbíráme telefon už v prvním formuláři, protože domluva často probíhá přes více lidí a termíny jsou citlivé. Výjimku ověříme po pěti poptávkách a zkontrolujeme, jestli telefon skutečně zrychlil první odpověď.
+```
+
+Tím se pravidlo nestane dogmatem. Zůstane výchozím nastavením, které chrání jednoduchost, ale dovolí rozumnou odchylku. Rozdíl mezi chaosem a flexibilitou je často jen v tom, jestli výjimka má vlastní důvod a datum návratu.
+
+### Propisujte jen nezbytné minimum
+
+Po ověření úspěšného úkolu může tým dostat chuť přepsat všechno. To je nebezpečný moment. Jedno ověření obvykle neznamená, že se má okamžitě změnit celý web, všechny kampaně a všechny staré materiály. Nejprve pravidlo vložte do míst, kde vzniká nová práce. Potom vyberte jen nejrizikovější staré výskyty.
+
+Praktický postup:
+
+1. Uložte pravidlo do kanonického místa.
+2. Aktualizujte šablonu, ze které vznikají nové varianty.
+3. Najděte dva až pět nejdůležitějších starých výskytů.
+4. Opravte jen ty, kde staré chování vytváří skutečné tření, riziko nebo zbytečnou datovou stopu.
+5. Zbytek nechte na běžnou údržbu, pokud není kritický.
+
+Tím se z ověřené změny nestane nekonečný refaktor. Pravidlo začne chránit budoucí práci a staré části se čistí podle dopadu, ne podle perfekcionismu.
+
+Privacy-first doplněk: pokud pravidlo zmenšuje sběr dat, dává smysl projít i starší místa rychleji. Starý formulář, který stále sbírá zbytečné údaje, není jen estetická odchylka. Je to aktivní datový náklad. Naopak starý odstavec, který je jen stylisticky horší, může počkat.
+
+### Kontrola po prvním dalším použití
+
+Pravidlo není hotové v okamžiku, kdy ho zapíšete. Hotové začíná být až po prvním dalším normálním použití někým, kdo nebyl přímo u původní změny. Tam se ukáže, jestli je pravidlo srozumitelné.
+
+Po prvním použití zkontrolujte:
+
+- našel člověk pravidlo bez ptaní;
+- pochopil, kdy platí;
+- použil ho bez zbytečné interpretace;
+- věděl, jak zapsat výjimku;
+- nevznikla nová datová stopa mimo původní hranici;
+- pravidlo nezpomalilo práci víc, než pomohlo.
+
+Pokud člověk pravidlo nenašel, problém není v člověku. Pravidlo je špatně umístěné. Pokud ho našel, ale nepochopil, je moc abstraktní. Pokud ho pochopil, ale obešel, možná neodpovídá realitě práce. První další použití je malý test systému, ne zkouška poslušnosti.
+
+### Checklist převodu do pravidla
+
+- Je změna opakovatelná, nebo šlo jen o jednorázovou opravu?
+- Má ověření jasný stav: potvrdit, doladit, vrátit nebo odložit?
+- Existuje kanonické místo, kde pravidlo lidé najdou při práci?
+- Je pravidlo napsané jako krátká pracovní věta?
+- Obsahuje důvod, aby tým nerozhodoval naslepo?
+- Má pravidlo datovou hranici: co nesbírat, nepředávat nebo neprodlužovat?
+- Je popsané, jak zapsat výjimku a kdy ji ověřit?
+- Aktualizovala se šablona nebo checklist, ze kterého vzniká nová práce?
+- Vybrali jste jen staré výskyty, které mají skutečný dopad?
+- Je naplánovaná kontrola po prvním dalším normálním použití?
+
+Převod ověřeného úkolu do pravidla je malý krok, ale výrazně mění návratnost práce. Jedna úprava přestane být izolovaná epizoda a začne zlepšovat další web, další formulář, další kampaň nebo další produktový tok. Přesně tak má vypadat zdravé zúročení e-booku: ne další vrstva administrativy, ale kratší cesta od ověřené zkušenosti k lepšímu výchozímu nastavení.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -115179,6 +115308,7 @@ Uzavření potvrzeného dočištění je malý akt provozní disciplíny. Tým n
 
 ## Pracovní log
 
+- 2026-05-24: Doplněna úvodní podkapitola o převodu ověřeného úkolu do pracovního pravidla: správný domov pravidla, pracovní věta, výjimky, omezené propsání do šablon, privacy-first datová hranice a kontrola po prvním dalším použití.
 - 2026-05-24: Doplněna Příloha OX o uzavření potvrzené dočišťovací úpravy do běžného rytmu: potvrzený stav, přepis kanonického místa, zavření dočasných karet a odkazů, návrat do existujícího rytmu, privacy-first úklid zbytkových stop, uzavírací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OW o ověření dočišťovací úpravy po dalším běžném použití: návrat k původní drobné stopě, ověření při normálním průchodu, tři malé signály, čtyři výsledky ověření, privacy-first minimalizace zbytkové vrstvy, ověřovací zápis, mini workshop a checklist.
 - 2026-05-23: Doplněna Příloha OV o převod drobné stopy po kontrole běžného rytmu do jedné dočišťovací úpravy: vstupní brána pro stav Drží s drobnou stopou, pojmenování podle pracovního místa, typy dočištění, omezení zásahu na nejbližší kanonické místo, ověření dalším běžným použitím, privacy-first úklid datové stopy, zápis, mini workshop a checklist.
