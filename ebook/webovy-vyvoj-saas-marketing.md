@@ -778,6 +778,131 @@ Dobrá stopa říká:
 
 Úklid je nenápadný, ale právě on rozhoduje, jestli změna zůstane v provozu. Bez úklidu se nové pravidlo začne míchat se starými zbytky a tým bude znovu rozhodovat věci, které už jednou ověřil. S úklidem se z jedné dobré iterace stane lepší výchozí stav pro další práci.
 
+## Kdy otevřít další iteraci
+
+Po úklidu přichází lákavý moment: tým má pocit, že se konečně rozběhl, a chce hned otevřít další tři témata. To je pochopitelné. Je příjemné vidět, že jedna kapitola vedla ke konkrétní změně. Jenže praktický e-book nemá fungovat jako továrna na rozpracovanou práci. Má pomáhat uzavírat smyčky.
+
+Další iteraci proto otevřete až ve chvíli, kdy je předchozí změna ve stabilním stavu. Stabilní neznamená dokonalá. Znamená to, že tým ví, co bylo rozhodnuto, kde je výsledek uložený, co se bude ověřovat později a co teď vědomě zůstává mimo rozsah.
+
+Pokud tohle chybí, další kapitola často nepřinese pokrok. Přinese jen další dobrý nápad, který začne soutěžit s nedokončeným starším nápadem. A když spolu dobré nápady soutěží bez rozhodnutí, vyhrává ten nejhlasitější, ne ten nejužitečnější.
+
+### Tři podmínky pro další krok
+
+Před otevřením další části rukopisu si ověřte tři věci:
+
+1. Existuje uzavřený výstup předchozí iterace.
+2. Je jasné, jestli se změna potvrdila, doladila, vrátila nebo odložila.
+3. Nová otázka má vlastní důvod a není jen únikem od nedokončeného ověření.
+
+Příklad: tým upravil formulář na landing page, protože sbíral příliš mnoho údajů. Po dvou týdnech ví, že nové poptávky pořád obsahují dost kontextu, obchodní tým nemusí ručně doptávat telefon a dočasný export z ověření byl smazaný. To je dobrý okamžik otevřít další otázku: třeba jestli stránka dostatečně vysvětluje důkaz důvěry.
+
+Špatný okamžik by byl po samotném nasazení formuláře. V tu chvíli tým ještě neví, jestli změna pomohla. Kdyby rovnou otevřel kapitolu o SEO, snadno by začal řešit návštěvnost stránky, která zatím nemá potvrzený kontaktní tok.
+
+### Nová otázka musí být konkrétní
+
+Další iterace nemá začínat větou "pojďme zlepšit marketing". To je moc široké. Začněte otázkou, která se dá převést do jedné změny:
+
+- Proč lidé z případové studie nepřecházejí na kontakt?
+- Který údaj v onboardingu opravdu potřebujeme před prvním výsledkem?
+- Jaký důkaz chybí zákazníkovi před tím, než si řekne o demo?
+- Který externí skript má nejmenší přínos a největší datovou stopu?
+- Kde tým při posledních třech zakázkách opakoval stejnou ruční práci?
+
+Dobrá otázka má hranu. Něco do ní patří a něco už ne. Pokud otázka dovolí upravit homepage, pricing, newsletter, CRM i produkt najednou, není to otázka pro jednu iteraci. Je to téma pro rozpad na menší části.
+
+Praktická pomůcka: napište otázku tak, aby se dala ověřit jedním typem důkazu. Pokud potřebujete současně analytiku, rozhovory, technický audit, obchodní pipeline a právní revizi, pravděpodobně jste si vybrali příliš velký kus práce.
+
+### Nepokračujte jen proto, že existuje další kapitola
+
+Rukopis má hodně kapitol a příloh. To neznamená, že každá musí být použita hned. Někdy je nejlepší další iterace žádná iterace. Tým nechá nové pravidlo doběhnout, počká na první reálné použití, nebo se vrátí k zákaznické práci místo další interní optimalizace.
+
+Stop signály:
+
+- předchozí změna ještě nemá ověření;
+- tým neví, kde je kanonický výstup;
+- existují dvě rozporná pravidla pro stejnou situaci;
+- nová otázka nevychází z reálného tření, ale z pocitu, že "by se mělo pokračovat";
+- další iterace by vyžadovala nové sledování lidí bez jasného rozhodovacího přínosu;
+- zákaznická práce čeká, zatímco tým ladí interní šablonu.
+
+Codyho komentář: někdy je nejprofesionálnější další krok nudný. Neotevřít další kapitolu, neudělat nový workshop, nepřidat dashboard. Jen počkat na první normální použití a podívat se, jestli pravidlo obstojí. Produktivita občas vypadá podezřele jako trpělivost. Hrozné, já vím.
+
+### Karta další iterace
+
+Když další iterace dává smysl, založte ji krátkou kartou:
+
+```text
+Předchozí iterace:
+Stav předchozí iterace:
+Nová pracovní otázka:
+Proč teď:
+Nejmenší změna:
+Jaký důkaz stačí:
+Co teď neotevíráme:
+Datová hranice:
+Termín návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Předchozí iterace:
+Zkrácení prvního kontaktního formuláře.
+
+Stav předchozí iterace:
+Potvrzeno po 15 poptávkách. Šablona upravená, starý export smazaný.
+
+Nová pracovní otázka:
+Chybí nad formulářem důkaz důvěry pro technického kupujícího?
+
+Proč teď:
+Ve třech poptávkách se opakovalo stejné doptávání na reference a provozní zkušenost.
+
+Nejmenší změna:
+Přidat nad formulář krátký blok s jedním konkrétním důkazem a odkazem na případovou studii.
+
+Jaký důkaz stačí:
+Pět dalších relevantních poptávek a kontrola, jestli se dotaz na reference opakuje méně často.
+
+Co teď neotevíráme:
+Neměníme celý layout stránky, pricing ani kompletní case studies.
+
+Datová hranice:
+Nepřidáváme nový tracker. Použijeme obsah poptávek a ruční poznámku obchodníka bez osobních detailů navíc.
+
+Termín návratu:
+Za 14 dní nebo po pěti relevantních poptávkách.
+```
+
+Tahle karta je malá, ale drží disciplínu. Navazuje na předchozí práci, vysvětluje důvod dalšího kroku a chrání rozsah. Zároveň nedovolí, aby se každá kapitola změnila ve výmluvu pro nové měření.
+
+### Privacy-first brzda před pokračováním
+
+Každá další iterace by měla projít krátkou privacy-first bránou:
+
+- Potřebujeme pro novou otázku osobní údaje, nebo stačí agregovaný či anonymizovaný signál?
+- Nevznikne nový export, který po ověření zapomeneme uklidit?
+- Nezavádíme externí nástroj jen proto, že je pohodlnější než ruční kontrola malého vzorku?
+- Neprodlužujeme retenci dat kvůli hypotéze, kterou lze ověřit rychleji?
+- Je jasné, kdo data po iteraci smaže, anonymizuje nebo převede do krátkého rozhodovacího záznamu?
+
+Pokud je odpověď nejasná, zmenšete iteraci. Privacy-first provoz není zákaz učení. Je to tlak na lepší otázky. Když umíte ověřit změnu menším množstvím dat, obvykle tím získáte i ostřejší rozhodnutí.
+
+### Checklist otevření další iterace
+
+- Je předchozí iterace opravdu uzavřená nebo vědomě odložená?
+- Má poslední změna rozhodovací záznam, kanonické místo a vlastníka?
+- Nezůstaly po ní dočasné exporty, staré šablony nebo zapomenuté eventy?
+- Vychází nová otázka z reálného tření, důkazu nebo zákaznické nejistoty?
+- Dá se další krok zúžit na jednu změnu?
+- Víme, jaký nejmenší důkaz bude stačit?
+- Je napsané, co teď neotevíráme?
+- Nepřidáváme kvůli ověření zbytečné trackery, formuláře nebo osobní údaje?
+- Má další iterace termín návratu?
+- Umíme vysvětlit, proč je lepší pokračovat teď než počkat na další běžné použití?
+
+Další iterace má začít jen tehdy, když zlepší rozhodnutí, ne když vyplní volné místo v kalendáři. Rukopis tím zůstává pracovní pomůckou: pomáhá vybrat nejbližší rozumný krok, uzavřít ho a teprve potom otevřít další. Tak se z e-booku nestane nekonečný seznam možností, ale opakovatelný způsob, jak posouvat web, SaaS, marketing i provoz bez zbytečného chaosu.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -116901,3 +117026,4 @@ Uzavření poslední lokální korekce je tichý konec práce. Po dobrém uzavř
 - 2026-05-22: Doplněna úvodní podkapitola o rozlišování rad, faktů, zdrojů a Codyho komentářů včetně malého protokolu důvěry a checklistu čtenářské opatrnosti.
 - 2026-05-23: Doplněna úvodní podkapitola o ověření prvního úkolu bez velkého projektu: ověřovací otázka, nejmenší důkaz, zápis výsledku, rozhodovací stavy a privacy-first kontrola.
 - 2026-05-24: Doplněna úvodní podkapitola o úklidu po zavedení pracovního pravidla: kontrola šablon, starých stop, dočasných exportů, automatizací, privacy-first datové stopy a rozhodovacího záznamu.
+- 2026-05-24: Doplněna úvodní podkapitola o otevření další iterace: stabilní uzavření předchozí změny, konkrétní pracovní otázka, stop signály, karta další iterace a privacy-first brzda.
