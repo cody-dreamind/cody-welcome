@@ -668,6 +668,116 @@ Pokud člověk pravidlo nenašel, problém není v člověku. Pravidlo je špatn
 
 Převod ověřeného úkolu do pravidla je malý krok, ale výrazně mění návratnost práce. Jedna úprava přestane být izolovaná epizoda a začne zlepšovat další web, další formulář, další kampaň nebo další produktový tok. Přesně tak má vypadat zdravé zúročení e-booku: ne další vrstva administrativy, ale kratší cesta od ověřené zkušenosti k lepšímu výchozímu nastavení.
 
+## Úklid po zavedení pracovního pravidla
+
+Pravidlo, které se dostane do provozu, po sobě vždy něco zanechá. Staré šablony, duplicitní formuláře, poznámky v úkolech, exporty z ověření, dočasné tabulky, výjimky, odkazy v dokumentaci a občas i zbytky měření, které měly existovat jen po dobu experimentu. Pokud tým pravidlo zavede, ale neuklidí jeho okolí, vznikne zvláštní stav: oficiálně platí nový způsob práce, ale provoz pořád potkává staré stopy.
+
+Úklid není kosmetika. Je to poslední část změny. Chrání tým před tím, aby se za měsíc někdo vrátil ke staré variantě jen proto, že ji našel dřív než novou. Chrání zákazníka před nekonzistentním zážitkem. A v privacy-first provozu chrání firmu před zbytečnými daty, která už nemají účel.
+
+Po zavedení pracovního pravidla proto udělejte krátký úklidový průchod. Nemá to být velký audit. Stačí projít místa, která pravidlo přímo ovlivnilo, a u každého rozhodnout: ponechat, upravit, archivovat, smazat nebo přesunout do nového zdroje pravdy.
+
+### Co po změně zkontrolovat
+
+Začněte u nejbližších artefaktů. To jsou věci, které člověk použije při dalším podobném úkolu:
+
+- šablony stránek, formulářů, e-mailů, briefů nebo nabídek;
+- checklisty a definice hotovo;
+- interní dokumentace, wiki, onboardingové materiály a sales karty;
+- automatizace, které vytvářejí nebo kopírují starý postup;
+- analytické eventy, tagy, exporty a dashboardy;
+- veřejné texty, které slibují něco podle staré verze procesu.
+
+Příklad: tým ověřil, že první kontaktní formulář má sbírat jen e-mail, stručný kontext a volitelné URL. Pravidlo se zapíše do šablony nové landing page. Úklid ale nekončí zápisem pravidla. Je potřeba najít starší šablonu formuláře v CMS, vzorový blok v design systému, sales dokument s větou "vyplňte telefon" a analytický event, který pořád počítá pole telefonu jako povinnou součást funnelu.
+
+Když tyto stopy zůstanou, nové pravidlo začne prohrávat s náhodou. Lidé většinou nepoužijí špatný postup ze vzdoru. Použijí ho proto, že byl po ruce.
+
+### Úklidová karta
+
+Pro menší změnu stačí krátká karta:
+
+```text
+Pravidlo:
+Kanonické místo:
+Co upravujeme hned:
+Co archivujeme nebo mažeme:
+Co necháváme na běžnou údržbu:
+Datová stopa po úklidu:
+Kontrola po příštím použití:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+První kontaktní formulář sbírá jen e-mail, stručný kontext a volitelné URL.
+
+Kanonické místo:
+Checklist nové landing page a komponenta ContactFormDefault.
+
+Co upravujeme hned:
+Šablonu landing page, formulář na hlavní službě a sales kartu pro úvodní konzultaci.
+
+Co archivujeme nebo mažeme:
+Starou kopii formuláře s povinným telefonem a dočasný export z ověření.
+
+Co necháváme na běžnou údržbu:
+Dvě starší kampaně, které už nejsou aktivně distribuované a nemají nové poptávky.
+
+Datová stopa po úklidu:
+Telefon už nevzniká v prvním kontaktu. Dočasné poznámky z ověření smažeme po zapsání anonymizovaného závěru.
+
+Kontrola po příštím použití:
+Při další nové landing page ověříme, jestli autor našel správnou šablonu bez ptaní.
+```
+
+Karta nemá dokazovat, že tým uklidil všechno. Má ukázat, že tým uklidil to, co má dopad. Perfektní úklid všech historických míst může spotřebovat víc energie než samotné pravidlo. Rozumný úklid vybere místa, která se budou znovu používat, veřejně komunikují zákazníkům nebo drží zbytečná data.
+
+### Privacy-first úklid má přednost
+
+Když pravidlo zmenšuje datovou stopu, úklid starých stop má vyšší prioritu než běžná dokumentační estetika. Zastaralá věta v interní poznámce je nepříjemná. Zastaralý formulář, který dál sbírá zbytečný osobní údaj, je reálný problém.
+
+Při privacy-first úklidu se ptejte:
+
+- Zůstává někde starý sběr dat, který nové pravidlo ruší?
+- Existuje dočasný export, screenshot, kopie databáze nebo tabulka z ověření?
+- Má někdo přístup, který byl potřeba jen během změny?
+- Posílá automatizace data do nástroje, který už pro nové pravidlo není nutný?
+- Je v dokumentaci jasné, kdy se staré podklady mažou nebo anonymizují?
+
+Pokud odpověď zní ano, přidejte konkrétní úklidový úkol. Ne "někdy projít data", ale "smazat dočasný export z ověření formuláře po zapsání anonymizovaného závěru". Rozdíl je velký: první věta vytváří dobrou náladu, druhá skutečně zmenšuje riziko.
+
+Codyho komentář: privacy-first provoz se nepozná podle toho, že firma má krásnou větu v patičce. Pozná se podle toho, že po experimentu smaže pracovní nepořádek, vypne nepotřebný event a nenechá starý formulář dál sbírat údaje jen proto, že na něj nikdo zrovna nekouká.
+
+### Nechte stopu pro budoucí tým
+
+Úklid neznamená vymazat historii tak, že za tři měsíce nikdo nepochopí, proč se pravidlo změnilo. Důkaz a dočasná data nejsou totéž. Dočasná data uklidíte. Rozhodovací stopu ponecháte v krátkém anonymizovaném nebo agregovaném tvaru.
+
+Dobrá stopa říká:
+
+- jaké pravidlo vzniklo;
+- proč vzniklo;
+- kde je kanonická verze;
+- co bylo odstraněno nebo archivováno;
+- jaká výjimka existuje;
+- kdy se pravidlo znovu ověří.
+
+Špatná stopa je složka plná exportů, kopií, screenshotů, chatových úryvků a starých návrhů bez jasného závěru. Tým pak sice "má data", ale nemá rozhodnutí. V praxi je to horší než krátký zápis, protože nadbytek materiálu vytváří falešný pocit dohledatelnosti.
+
+### Checklist úklidu po zavedení pravidla
+
+- Je jasné, kde je kanonická verze nového pravidla?
+- Byly upravené šablony, ze kterých vzniká nová práce?
+- Nezůstává někde stará veřejná verze, která mate zákazníka?
+- Jsou staré interní materiály označené jako archivované, sloučené nebo neplatné?
+- Zmizel z provozu sběr dat, který nové pravidlo ruší?
+- Byly smazané nebo anonymizované dočasné exporty a pracovní kopie?
+- Byla zkontrolovaná automatizace, která by mohla obnovit starý postup?
+- Je zapsané, co se záměrně neuklízí hned a proč?
+- Zůstala krátká rozhodovací stopa bez zbytečných osobních údajů?
+- Je naplánovaná kontrola po příštím reálném použití pravidla?
+
+Úklid je nenápadný, ale právě on rozhoduje, jestli změna zůstane v provozu. Bez úklidu se nové pravidlo začne míchat se starými zbytky a tým bude znovu rozhodovat věci, které už jednou ověřil. S úklidem se z jedné dobré iterace stane lepší výchozí stav pro další práci.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -116790,3 +116900,4 @@ Uzavření poslední lokální korekce je tichý konec práce. Po dobrém uzavř
 - 2026-05-21: Doplněna krátká úvodní poznámka o vědomém omezení rozsahu: k hlavnímu úkolu si čtenář zapíše i jednu věc, kterou teď nemění.
 - 2026-05-22: Doplněna úvodní podkapitola o rozlišování rad, faktů, zdrojů a Codyho komentářů včetně malého protokolu důvěry a checklistu čtenářské opatrnosti.
 - 2026-05-23: Doplněna úvodní podkapitola o ověření prvního úkolu bez velkého projektu: ověřovací otázka, nejmenší důkaz, zápis výsledku, rozhodovací stavy a privacy-first kontrola.
+- 2026-05-24: Doplněna úvodní podkapitola o úklidu po zavedení pracovního pravidla: kontrola šablon, starých stop, dočasných exportů, automatizací, privacy-first datové stopy a rozhodovacího záznamu.
