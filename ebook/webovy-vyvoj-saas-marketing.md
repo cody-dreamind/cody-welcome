@@ -117330,8 +117330,276 @@ Udržovací poznámka má rozhodnutý stav, nezůstává viset a buď byla prove
 
 Ověření udržovací poznámky je malé, ale důležité. Učí tým, že i drobné zápisy mají životní cyklus: vzniknou, počkají na správný okamžik a potom se uzavřou. Díky tomu údržba neztrácí lehkost a stabilní provoz se nezanáší věcmi, které měly být jen dočasnou připomínkou.
 
+## Příloha PF: Uzavření vyhodnocené udržovací poznámky do stabilního provozu
+
+Příloha PE řešila okamžik, kdy se udržovací poznámka při nejbližší běžné údržbě konečně vyhodnotí. Tato příloha řeší poslední krok: jak výsledek dostat zpět do stabilního provozu tak, aby po něm nezůstala další malá fronta práce.
+
+Udržovací poznámka není plnohodnotný projekt. Je to krátká připomínka u kanonického místa. Když se vyhodnotí, musí se stát jedna z těchto věcí:
+
+- malá akce je hotová a poznámka zmizí z aktivní práce;
+- poznámka byla zavřena bez akce a zůstane jen stručný důvod;
+- poznámka byla povýšena na údržbovou položku a dál se sleduje už tam;
+- poznámka byla jednou odložena s konkrétním návratem.
+
+Tato příloha se zaměřuje hlavně na první dvě situace. Cíl je prostý: stabilní provoz má po vyhodnocení poznámky zůstat stabilní. Nemá přibýt nový seznam, nový rituál, nové sledování ani další nenápadná vrstva dokumentace.
+
+Codyho komentář: drobná údržba se často tváří nevinně, ale umí se množit rychleji než záložky v prohlížeči před dovolenou. Dobré uzavření znamená, že po malé poznámce zůstane lepší pracovní místo, ne další připomínka připomínky.
+
+### Začněte stavem z vyhodnocení
+
+Neotvírejte původní historii znovu. Vezměte výsledek z Přílohy PE a položte si jen jednu otázku:
+
+```text
+Co musí po této poznámce zůstat v běžném provozu, aby tým dál pracoval správně?
+```
+
+Odpověď by měla být krátká. Například:
+
+- aktuální název v kanonické šabloně;
+- opravený interní odkaz;
+- zavřená poznámka s jednovětým důvodem;
+- nová údržbová položka s definicí hotovo;
+- odložená poznámka s jednou konkrétní událostí návratu.
+
+Pokud odpověď obsahuje tři nové úkoly, nejde o uzavření. Jde o další kolo údržby. To může být v pořádku, ale pojmenujte ho správně a nepřimíchávejte ho do drobné poznámky.
+
+Příklad dobrého uzavření:
+
+```text
+Výsledek vyhodnocení:
+Provést hned.
+
+Co má zůstat:
+Onboardingová šablona používá aktuální název sekce a udržovací poznámka je zavřená.
+```
+
+Příklad příliš širokého uzavření:
+
+```text
+Výsledek vyhodnocení:
+Provést hned.
+
+Co má zůstat:
+Přepsat onboarding, zkontrolovat všechny šablony, udělat nový index a nastavit měření používání.
+```
+
+Druhá varianta možná popisuje skutečnou potřebu, ale není to stabilní uzavření jedné poznámky. Je to nová změna rozsahu.
+
+### Přepište jen kanonické místo
+
+Když byla malá akce provedena, upravte primárně místo, kde má tým pracovat příště. Neopravujte všechno, co se kolem tématu historicky dotklo dokumentace. Stabilní provoz potřebuje jeden aktuální vstup, ne dokonale uklizené muzeum všech starých stop.
+
+Typický postup:
+
+1. Najděte kanonické místo práce.
+2. Proveďte malou opravu přesně tam.
+3. Zkontrolujte, že z běžného vstupu vede člověk na aktuální stav.
+4. Zavřete udržovací poznámku.
+5. Staré pomocné podklady smažte, anonymizujte nebo označte jako archiv podle jejich účelu.
+
+Kanonické místo může být šablona, checklist, index, provozní karta, onboardingová trasa, rozhodovací log nebo konkrétní stránka znalostní báze. Důležité je, aby člověk nemusel vědět, že nějaká poznámka existovala. Má prostě narazit na správný aktuální stav.
+
+Krátká kontrolní věta:
+
+```text
+Kdyby nový člověk použil běžný vstup dnes, dostane se k aktuální verzi bez znalosti staré poznámky?
+```
+
+Pokud ano, uzavření je pravděpodobně dostatečné. Pokud ne, opravte vstupní místo, ne historii.
+
+### Zavřete poznámku viditelně, ale krátce
+
+Udržovací poznámku nemažte beze stopy, pokud podle ní proběhlo rozhodnutí. Zároveň po ní nenechávejte dlouhý komentářový román. Stačí jeden krátký záznam u místa, kde tým eviduje změny nebo údržbu.
+
+Šablona zavření:
+
+```text
+Poznámka:
+Výsledek:
+Co se změnilo:
+Co se neměnilo:
+Privacy-first úklid:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Poznámka:
+Onboardingová šablona používala starý název sekce.
+
+Výsledek:
+Provedeno a zavřeno.
+
+Co se změnilo:
+Název byl přepsán v kanonické onboardingové šabloně.
+
+Co se neměnilo:
+Neměnila se struktura onboardingu ani měsíční review.
+
+Privacy-first úklid:
+Smazána pracovní poznámka a dočasný screenshot starého názvu.
+
+Další kontrola:
+Bez samostatné kontroly; ověří se při nejbližším běžném použití onboardingu.
+```
+
+Takový zápis je užitečný i za měsíc. Ukazuje, že poznámka byla vyřízená, co přesně se stalo a proč se nerozjelo nic většího. To je zdravá provozní paměť.
+
+### Kdy nedělat samostatnou další kontrolu
+
+Ne každá udržovací poznámka potřebuje vlastní follow-up. Pokud byla oprava malá a kanonické místo je jasné, další kontrola má často proběhnout v běžném rytmu. Samostatná kontrola by jen zvedla režii.
+
+Samostatnou kontrolu obvykle nedělejte, když:
+
+- změna je viditelná přímo v používané šabloně;
+- oprava nemění workflow, role ani odpovědnosti;
+- nevznikla nová datová stopa;
+- chyba nebyla zákaznicky viditelná;
+- běžný provoz má přirozený další průchod;
+- případný návrat problému by byl snadno vidět při práci.
+
+Stačí zapsat:
+
+```text
+Další kontrola proběhne pouze v běžném rytmu při nejbližším použití šablony.
+```
+
+Samostatnou kontrolu naopak zvažte, pokud poznámka zasahovala důvěru zákazníka, bezpečnost, právní text, formulář, přístup k datům, interní oprávnění nebo veřejnou navigaci. V takovém případě už nejde jen o kosmetickou údržbu. I malá oprava může mít vyšší dopad.
+
+### Uklidte pomocné stopy
+
+Drobná poznámka často vznikne z malého důkazu: screenshotu, exportu, výřezu chatu, interního odkazu, pracovní tabulky nebo osobní poznámky. Po uzavření se zeptejte, jestli ten důkaz ještě slouží rozhodnutí.
+
+Praktické pravidlo:
+
+```text
+Ponechte závěr, ne surový podklad, pokud surový podklad už nemá aktivní účel.
+```
+
+Příklady:
+
+- screenshot starého názvu smažte, pokud kanonická šablona už obsahuje opravený název;
+- výřez interní konverzace nahraďte jednou anonymní větou o rozhodnutí;
+- dočasnou tabulku odstraňte, pokud se z ní nepřenáší žádná aktivní položka;
+- starý odkaz do pracovního dokumentu zavřete, pokud už vede jen k historickému kontextu;
+- osobní jména nahraďte rolí, pokud nejsou nutná pro odpovědnost.
+
+Privacy-first hodnota tady není abstraktní. Čím méně pomocných stop necháte po drobných rozhodnutích, tím menší je budoucí riziko, že někdo najde starý export, neaktuální instrukci nebo zbytečný osobní detail a začne podle něj jednat.
+
+### Kdy z uzavření vzniká nový nález
+
+Někdy při zavírání poznámky zjistíte něco nového. Třeba že stejná chyba je v dalších třech místech, že starý název používá zákaznická komunikace, nebo že drobná oprava odhalila nejasné vlastnictví šablony.
+
+V takové chvíli neprodlužujte původní poznámku donekonečna. Uzavřete ji podle toho, co jste opravdu udělali, a nový nález zapište zvlášť.
+
+Rozlišujte:
+
+- původní poznámka: malý drift v jednom místě;
+- nový nález: širší problém, který se ukázal při zavírání;
+- navazující rozhodnutí: zda nový nález vůbec stojí za další práci.
+
+Šablona nového nálezu:
+
+```text
+Vzniklo při zavření poznámky:
+Nový nález:
+Proč nejde o původní poznámku:
+Nejmenší další rozhodnutí:
+Datová stopa:
+```
+
+Příklad:
+
+```text
+Vzniklo při zavření poznámky:
+Při opravě názvu v onboardingové šabloně.
+
+Nový nález:
+Stejný starý název je v zákaznickém předávacím e-mailu.
+
+Proč nejde o původní poznámku:
+Původní poznámka se týkala interní onboardingové šablony, zatímco e-mail je zákaznicky viditelný materiál.
+
+Nejmenší další rozhodnutí:
+Ověřit, zda se e-mail stále používá, a pokud ano, otevřít samostatnou údržbovou položku.
+
+Datová stopa:
+Bez ukládání konkrétních zákaznických e-mailů; stačí odkaz na šablonu.
+```
+
+Tím chráníte rozsah. Původní věc se zavře, nový problém dostane vlastní bránu a tým nepředstírá, že všechno patří do jedné malé poznámky.
+
+### Uzavírací karta
+
+```text
+Datum:
+Původní udržovací poznámka:
+Výsledek vyhodnocení:
+Kanonické místo:
+Provedená změna nebo důvod zavření:
+Co zůstává mimo rozsah:
+Pomocné stopy k úklidu:
+Co zůstává jako rozhodovací stopa:
+Další kontrola:
+Nový nález, pokud vznikl:
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2027-03-08
+Původní udržovací poznámka: onboardingová šablona používá starý název sekce
+Výsledek vyhodnocení: provedeno hned
+Kanonické místo: onboardingová šablona pro provozní standardy
+Provedená změna nebo důvod zavření: název přepsán na aktuální tvar
+Co zůstává mimo rozsah: nemění se struktura onboardingu ani měsíční review
+Pomocné stopy k úklidu: smazat screenshot staré verze a pracovní poznámku v dočasném seznamu
+Co zůstává jako rozhodovací stopa: tento krátký záznam v changelogu šablony
+Další kontrola: jen při nejbližším běžném použití onboardingu
+Nový nález, pokud vznikl: žádný
+Vlastník: provozní lead
+```
+
+### Mini workshop na 10 minut
+
+Vezměte jednu udržovací poznámku, která už má výsledek z nejbližší běžné údržby.
+
+1. Přečtěte jen výsledek vyhodnocení, ne celou historii.
+2. Určete kanonické místo, kde má zůstat aktuální stav.
+3. Zapište, co se změnilo nebo proč se poznámka zavřela bez akce.
+4. Rozhodněte, jestli další kontrola patří do běžného rytmu, nebo potřebuje samostatný návrat.
+5. Smažte, anonymizujte nebo archivujte pomocné podklady bez aktivního účelu.
+6. Pokud vznikl nový nález, oddělte ho od původní poznámky.
+7. Zavřete poznámku tak, aby nezůstala v aktivním seznamu.
+
+Výstup:
+
+```text
+Vyhodnocená udržovací poznámka je uzavřená, kanonické místo obsahuje aktuální stav a po poznámce nezůstává zbytečná pracovní ani datová stopa.
+```
+
+### Checklist kapitoly
+
+- Vycházíte ze stavu z vyhodnocení, neotevíráte celou historii?
+- Je jasné, co má po poznámce zůstat v běžném provozu?
+- Je opravené nebo potvrzené kanonické místo práce?
+- Může nový člověk použít běžný vstup bez znalosti staré poznámky?
+- Je poznámka zavřená viditelně, ale krátce?
+- Nezůstala poznámka v aktivním seznamu po dokončení akce?
+- Je zapsané, co se neměnilo a proč?
+- Nepřidali jste samostatnou další kontrolu, pokud stačí běžný rytmus?
+- Uklidili jste screenshoty, exporty, dočasné tabulky a osobní poznámky bez aktivního účelu?
+- Zůstává jen taková rozhodovací stopa, která pomůže budoucí práci?
+- Pokud vznikl nový nález, má vlastní vstupní bránu a nerozšiřuje původní poznámku potichu?
+- Je jasný vlastník uzavření?
+
+Dobré uzavření udržovací poznámky je skoro neviditelné. Člověk, který přijde později, nenajde příběh všech drobných oprav. Najde aktuální pracovní místo, krátký důvod změny a čistou datovou stopu. Přesně tak má vypadat stabilní provoz: málo dramatu, hodně srozumitelnosti.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha PF o uzavření vyhodnocené udržovací poznámky do stabilního provozu: stav z vyhodnocení, oprava kanonického místa, krátké zavření poznámky, rozhodnutí o další kontrole, privacy-first úklid pomocných stop, oddělení nových nálezů, uzavírací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PE o ověření udržovací poznámky při nejbližší běžné údržbě: práce s původní hranicí, čtyři rozhodovací stavy, provedení nejmenší akce, zavření bez akce, povýšení na údržbovou položku, privacy-first kontrola, zápis vyhodnocení, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PD o převod drobného driftu stabilního provozního stavu do jedné udržovací poznámky: rozlišení skutečného driftu od údržbové položky, zápis u kanonického místa, malá akce pro nejbližší údržbu, expirace poznámky, privacy-first brzda, pravidla povýšení, udržovací zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PC o první kontrolu stabilního provozního stavu v běžném rytmu: návrat ke stabilní větě, kontrola v existujícím rytmu, signály nalezení/pochopení/dokončení/ceny, čtyři výsledky kontroly, omezení návratu ke staré historii, privacy-first datová stopa, kontrolní zápis, mini workshop a checklist.
