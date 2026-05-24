@@ -115580,8 +115580,300 @@ Běžný rytmus po uzavřeném dočištění má jasný stav a případný dalš
 
 První kontrola běžného rytmu má dát klidnou odpověď: systém už vede lidi správně, nebo někde zůstala stopa, která má vlastní malou opravu. Obojí je použitelné. Nepoužitelné je jen mlhavé "asi dobré", po kterém staré odkazy dál straší ve vyhledávání a všichni předstírají, že je to vlastně znalostní báze. Není. Je to odložený úklid.
 
+## Příloha OZ: Převod drobné stopy po první kontrole do poslední lokální korekce
+
+Příloha OY ukázala, jestli běžný rytmus po uzavřeném dočištění opravdu drží. Pokud drží čistě, není co přidávat. Pokud nedrží, nejde o poslední korekci, ale o samostatnou údržbovou položku. Tato příloha řeší jen prostřední stav: rytmus v zásadě funguje, práce skončila na správném místě, ale zůstala drobná stopa, která může časem znovu mást.
+
+Kontrolní otázka zní:
+
+```text
+Jakou jednu lokální korekci uděláme, aby správný rytmus zůstal správný i bez vysvětlování?
+```
+
+Výstupem je krátká korekční karta:
+
+```text
+Puvodni kontrola:
+Drobna stopa:
+Pracovni riziko:
+Kanonicke misto:
+Korekce:
+Co zustava zavrene:
+Co se neotevira:
+Overeni:
+Datova stopa:
+Vlastnik:
+```
+
+Codyho komentář: poslední korekce má být nudná. Přepsaná věta, odstraněný starý odkaz, přejmenovaný archivní štítek, zkrácená poznámka. Jakmile z ní začne vznikat nová metodika, není to korekce, ale další projekt s nalepeným knírem.
+
+### Vstupní brána: jen stav `Drží s drobnou stopou`
+
+Do této přílohy vstupujte jen tehdy, když kontrola podle Přílohy OY skončila stavem `Drží s drobnou stopou`.
+
+To znamená:
+
+- tým našel aktuální pracovní místo;
+- práce byla dokončená správně;
+- původní dočištění se znovu neotevřelo;
+- drobná stopa neodvedla práci jinam;
+- oprava se dá udělat v jednom blízkém místě.
+
+Správný vstup:
+
+```text
+Měsíční review použilo aktuální checklist, ale archivní poznámka pořád obsahuje starý název sekce.
+```
+
+Špatný vstup:
+
+```text
+Tým použil starou kartu místo aktuálního checklistu, protože vyhledávání ji nabízí první.
+```
+
+Druhý příklad už není drobná stopa. Je to návrat staré cesty, tedy samostatná údržbová položka. Pokud byste ho označili jako poslední korekci, jen byste zametli větší problém pod krátký odstavec.
+
+### Popište pracovní riziko jednou větou
+
+Drobné stopy svádějí k tomu, že se opravují pocitově. "Je to tam divné" ale nestačí. Nejdřív napište, jak by stopa mohla poškodit práci.
+
+Použitelná věta:
+
+```text
+Starý název v archivní poznámce může při dalším review vyvolat pochybnost, jestli aktuální checklist opravdu nahradil starou kartu.
+```
+
+Slabá věta:
+
+```text
+V archivu je nepořádek.
+```
+
+Pracovní riziko má být malé a konkrétní. Pokud neumíte říct, co by stopa reálně pokazila, možná ji nemusíte opravovat. Ne každý starý záznam je dluh. Někdy je to jen historie, která už neleží na cestě.
+
+Užitečné otázky:
+
+- Může stopa poslat člověka na špatné místo?
+- Může zpochybnit aktuální pravidlo?
+- Může vést k opětovnému sběru zbytečných dat?
+- Může prodloužit běžné review o vysvětlování historie?
+- Může vyvolat duplicitní úkol?
+
+Pokud odpověď na všechny otázky zní ne, zapište rozhodnutí `neopravovat` a nechte věc zavřenou. Údržba není sport. Body za počet drobných zásahů se nepočítají.
+
+### Opravujte nejbližší kanonické místo
+
+Poslední korekce má zasáhnout místo, kde stopa vzniká nebo kde ji člověk potká. Nezakládejte nový vysvětlující dokument, pokud stačí upravit větu v existujícím indexu, checklistu, šabloně nebo archivní poznámce.
+
+Typické lokální korekce:
+
+- odstranit jeden starý odkaz;
+- přepsat starý název na aktuální;
+- doplnit archivní štítek `nahrazeno`;
+- zkrátit changelog, který překrývá aktuální instrukci;
+- přesunout historickou poznámku pod aktuální pracovní větu;
+- smazat dočasný screenshot, který už nerozhoduje;
+- upravit jednu šablonovou větu, která kopíruje starý stav.
+
+Příklad:
+
+```text
+Drobna stopa:
+Archivní poznámka používá starý název "údržbová karta", i když aktuální místo je "měsíční checklist".
+
+Korekce:
+V archivní poznámce přepsat jednu větu: "Tato karta byla nahrazena měsíčním checklistem provozních standardů."
+```
+
+Špatná korekce:
+
+```text
+Založit stránku "Historie přejmenování údržbových karet".
+```
+
+Historie má být dostupná, pokud je potřeba pro audit nebo porozumění rozhodnutí. Nemá ale stát uprostřed běžné pracovní trasy. Člověk, který chce udělat review, nemá luštit archeologickou vrstvu názvů.
+
+### Zavřete starou smyčku nahlas
+
+I malá korekce potřebuje hranici. Napište, co zůstává zavřené a co se neotevírá. Tím zabráníte tomu, aby drobná stopa znovu pozvala celý starý příběh.
+
+Krátký zápis:
+
+```text
+Co zustava zavrene:
+Původní dočišťovací karta, starý odkaz a debata o přejmenování celé sekce.
+
+Co se neotevira:
+Nový audit indexu, redesign navigace ani kontrola všech archivních poznámek.
+```
+
+Tato věta je praktická hlavně pro týmy, které mají tendenci dělat z každé nalezené drobnosti širší iniciativu. Širší iniciativa může být někdy správná, ale musí mít vlastní důvod. Nemá vzniknout potichu z jedné lokální korekce.
+
+Pokud při korekci najdete další podobné stopy, nezvětšujte rozsah automaticky. Zapište je jako samostatný nález a položte otázku:
+
+```text
+Opakuje se stejná stopa tak často, že už nejde o lokální korekci, ale o nový vzor údržby?
+```
+
+Pokud ano, poslední korekci dokončete a nový vzor řešte mimo ni. Pokud ne, nechte ho být.
+
+### Privacy-first brzda korekce
+
+Drobné provozní korekce často vypadají nevinně, ale i ony umí vyrábět zbytečnou stopu. Typicky screenshot před a po, seznam lidí, kteří narazili na problém, kopie chatu nebo dlouhé komentáře v úkolu.
+
+Privacy-first pravidlo:
+
+```text
+Korekce nesmí mít větší datovou stopu než drobná stopa, kterou uklízí.
+```
+
+Prakticky to znamená:
+
+- nepřidávat sledování použití kvůli jedné větě;
+- neukládat screenshoty, pokud stačí textový zápis;
+- nejmenovat člověka, který na stopu narazil, pokud to není nutné;
+- nearchivovat chat jen proto, že obsahuje původní kontext;
+- nesbírat nové signály, když ověření proběhne v dalším běžném rytmu;
+- po korekci smazat pracovní kopie, které už nemají účel.
+
+Dobrý zápis:
+
+```text
+Datova stopa:
+Jedna věta v korekční kartě a changelog v archivní poznámce. Bez screenshotů a bez jmen.
+```
+
+Špatný zápis:
+
+```text
+Uložíme předchozí verzi celé stránky, screenshot vyhledávání a přepis chatu, aby bylo vidět, proč se to řešilo.
+```
+
+U malé korekce má být důkaz úměrný riziku. Když potřebujete velký důkaz, pravděpodobně nejde o malou korekci.
+
+### Ověřte při dalším běžném průchodu
+
+Poslední korekce se neověřuje novou schůzkou. Ověřuje se tím, že další běžný průchod už nepotřebuje vysvětlení.
+
+Ověřovací věta:
+
+```text
+Při dalším měsíčním review člověk začne v indexu, dojde na aktuální checklist a archivní poznámka ho nevrátí ke starému názvu.
+```
+
+Stačí sledovat tři signály:
+
+1. Cesta: člověk se dostal na aktuální místo.
+2. Tření: drobná stopa už nevyvolala otázku ani odbočku.
+3. Stopová kontrola: nevznikl nový dokument, screenshot nebo seznam kvůli ověření.
+
+Pokud korekce projde, nepište další závěrečnou kapitolu do interní paměti. Stačí doplnit stav:
+
+```text
+Overeni:
+Další běžné review proběhlo bez návratu starého názvu. Korekce zavřena.
+```
+
+Pokud korekce neprojde, neprodlužujte ji donekonečna. Přepište stav na samostatný nález:
+
+```text
+Overeni:
+Stará stopa se vrátila jinou cestou. Lokální korekce nestačí; otevřít samostatnou údržbovou položku.
+```
+
+### Korekční karta
+
+```text
+Datum:
+Puvodni kontrola:
+Drobna stopa:
+Pracovni riziko:
+Kanonicke misto:
+Korekce:
+Co zustava zavrene:
+Co se neotevira:
+Overeni pri dalsim beznem pruchodu:
+Datova stopa:
+Stav: Navrzena / Provedena / Overena / Prevedena na udrzbovou polozku
+Vlastnik:
+```
+
+Vyplněný příklad:
+
+```text
+Datum: 2026-11-04
+Puvodni kontrola: první měsíční review po uzavřeném dočištění indexu standardů
+Drobna stopa: archivní poznámka pořád používá starý název "údržbová karta"
+Pracovni riziko: při dalším review může vzniknout pochybnost, jestli checklist opravdu nahradil starou kartu
+Kanonicke misto: archivní poznámka u původní karty
+Korekce: přepsat první větu na "Tato karta byla nahrazena měsíčním checklistem provozních standardů."
+Co zustava zavrene: původní dočišťovací karta a debata o starém odkazu
+Co se neotevira: audit všech archivních poznámek
+Overeni pri dalsim beznem pruchodu: listopadové review použije index a aktuální checklist bez otázky na starý název
+Datova stopa: korekční karta a jedna věta v changelogu, bez screenshotů
+Stav: Provedena
+Vlastnik: provozní lead
+```
+
+Příklad rozhodnutí neopravovat:
+
+```text
+Drobna stopa:
+V historickém changelogu zůstal starý název, ale není odkazovaný z pracovního indexu ani ze šablon.
+
+Pracovni riziko:
+Žádné běžné použití na tento záznam nevede.
+
+Korekce:
+Neopravovat. Historický záznam zůstává jako archivní kontext.
+
+Datova stopa:
+Bez nové evidence.
+```
+
+Neopravovat je platné rozhodnutí. Úklid má snižovat tření, ne dokazovat, že tým vidí každé smítko v archivu.
+
+### Mini workshop na 10 minut
+
+Vezměte jednu kontrolu z Přílohy OY se stavem `Drží s drobnou stopou`.
+
+1. Ověřte, že práce skončila na správném aktuálním místě.
+2. Popište drobnou stopu jednou větou.
+3. Napište pracovní riziko: co by stopa mohla pokazit při dalším běžném použití.
+4. Vyberte nejbližší kanonické místo korekce.
+5. Navrhněte jednu úpravu, která se vejde do jedné věty, odkazu, štítku nebo krátké poznámky.
+6. Zapište, co zůstává zavřené a co se neotevírá.
+7. Omezte datovou stopu korekce.
+8. Určete další běžný průchod, kde se korekce ověří.
+
+Výstup:
+
+```text
+Jedna drobná stopa má jednu lokální korekci, jasné ověření a žádný nový proces.
+```
+
+### Checklist kapitoly
+
+- Vstupujete sem jen se stavem `Drží s drobnou stopou`?
+- Je jasné, že práce už skončila na správném aktuálním místě?
+- Popsali jste pracovní riziko konkrétně, ne jen pocitově?
+- Umíte říct, co by se stalo, kdyby stopa zůstala?
+- Opravujete nejbližší kanonické místo?
+- Nezakládáte nový dokument kvůli jedné větě?
+- Je korekce menší než problém?
+- Zůstává původní dočištění zavřené?
+- Je výslovně napsané, co se neotevírá?
+- Nevzniká screenshotový důkaz, seznam lidí ani nový tracker?
+- Je datová stopa po korekci menší nebo stejná než před ní?
+- Ověření proběhne při dalším běžném průchodu?
+- Pokud korekce neprojde, změní se na samostatnou údržbovou položku místo nekonečného dolaďování?
+- Je možné rozhodnout i `neopravovat`, když stopa nemá pracovní riziko?
+
+Poslední lokální korekce má udělat z dobrého rytmu obyčejný rytmus. Bez nápisu "pozor, tady jsme kdysi opravovali problém". Bez nové vrstvy řízení. Bez sbírání důkazů o tom, že lidé umí kliknout na správný odkaz. Jen čistší pracovní místo, které příště nikoho nezastaví.
+
 ## Pracovní log
 
+- 2026-05-24: Doplněna Příloha OZ o převodu drobné stopy po první kontrole do poslední lokální korekce: vstupní brána pro stav Drží s drobnou stopou, pracovní riziko, oprava nejbližšího kanonického místa, zavření staré smyčky, privacy-first brzda korekce, ověření dalším běžným průchodem, korekční karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha OY o první kontrole běžného rytmu po uzavřeném dočištění: kontrola prvního normálního použití, cesta k aktuálnímu místu, návrat staré stopy, čtyři stavy rytmu, privacy-first úklid zbytkových stop, kontrolní zápis, mini workshop a checklist.
 - 2026-05-24: Doplněna úvodní podkapitola o převodu ověřeného úkolu do pracovního pravidla: správný domov pravidla, pracovní věta, výjimky, omezené propsání do šablon, privacy-first datová hranice a kontrola po prvním dalším použití.
 - 2026-05-24: Doplněna Příloha OX o uzavření potvrzené dočišťovací úpravy do běžného rytmu: potvrzený stav, přepis kanonického místa, zavření dočasných karet a odkazů, návrat do existujícího rytmu, privacy-first úklid zbytkových stop, uzavírací zápis, mini workshop a checklist.
