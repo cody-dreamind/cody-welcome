@@ -122033,8 +122033,236 @@ První běžný návrat potvrdil, že provozní paměť drží aktuální pravid
 
 První běžný návrat je poslední tichá zkouška uzavřené klidové opravy. Když dopadne dobře, není potřeba slavit novým procesem. Stačí nechat systém pracovat: aktuální pravidlo je na svém místě, historie je uklizená a lidé nemusí nést v hlavě, co už za ně má nést provozní paměť.
 
+## Příloha PX: Převod drobného šumu po návratu k provozní paměti do jedné paměťové úpravy
+
+První běžný návrat k provozní paměti někdy nedopadne čistě. Aktuální pravidlo funguje, lidé se dostanou k práci, stará karta se nemusí znovu otevírat, ale v cestě zůstane drobný šum: nejasný název, stará poznámka v závorce, duplicitní odkaz, příliš dlouhá věta nebo malé rozpojení mezi rozcestníkem a šablonou.
+
+Tato situace není důvod k novému projektu. Je to důvod k jedné paměťové úpravě. Smyslem je opravit nejbližší místo, kde se člověk příště rozhoduje, a nechat zbytek systému v klidu.
+
+Dobrá pracovní věta zní:
+
+```text
+Po návratu k provozní paměti opravíme jeden drobný šum v místě práce, aby aktuální pravidlo bylo vidět bez čtení historie.
+```
+
+Věta drží tři hranice: jde o jeden šum, jedno místo práce a aktuální pravidlo. Pokud potřebujete opravit pět dokumentů, přejmenovat celý proces nebo proškolit tým, už nejde o paměťovou úpravu. To je běžná údržba nebo nový nález.
+
+### Nejdřív potvrďte, že paměť pořád drží
+
+Paměťová úprava má smysl jen tehdy, když základní provozní paměť funguje. Pokud člověk nenašel správné místo, použil starý postup nebo se musel vrátit k uzavřené kartě, nejde o drobný šum. Jde o poruchu pracovní cesty a potřebuje samostatné řešení.
+
+Před úpravou si proto napište krátké rozlišení:
+
+```text
+Co drží:
+Aktuální pracovní místo bylo nalezeno a použito.
+
+Co šumí:
+U hlavního odkazu zůstala stará vysvětlující závorka.
+
+Co neotevíráme:
+Původní klidovou opravu, celý publikační playbook ani onboarding.
+```
+
+Tento zápis brání tomu, aby se malá úprava převlékla za rozsáhlou revizi. Jakmile je jasné, že základ drží, můžete být tvrdě praktičtí: opravte jen to, co další použití zbytečně zpomaluje.
+
+### Vyberte nejbližší místo rozhodnutí
+
+Drobné šumy často leží na hraně mezi více artefakty. Odkaz je v rozcestníku, vysvětlení v playbooku, příklad ve staré šabloně a zmínka v changelogu. To svádí k plošnému úklidu. Jenže plošný úklid je drahý a často vyrobí další stopu, kterou bude někdo muset později udržovat.
+
+Vyberte proto místo, kde se člověk příště skutečně rozhodne:
+
+- pokud váhá, kterou šablonu otevřít, opravte rozcestník;
+- pokud šablonu otevře, ale nerozumí prvnímu kroku, opravte šablonu;
+- pokud se plete název stavu, opravte kanonický slovník nebo hlavičku pracovního místa;
+- pokud je historie moc viditelná, přesuňte ji do changelogu nebo ji smažte;
+- pokud šum žije jen v uzavřené kartě, nechte ji být.
+
+Praktické pravidlo:
+
+```text
+Paměťovou úpravu děláme tam, kde člověk příště udělá rozhodnutí, ne tam, kde je nejvíc historického textu.
+```
+
+Když opravíte místo rozhodnutí, často není potřeba měnit nic dalšího. Starší poznámka v archivu může zůstat uzavřená, pokud do práce znovu nevstupuje. Ne každý starý text je dluh. Dluhem se stává až ve chvíli, kdy mate aktuální rozhodnutí.
+
+### Typy jedné paměťové úpravy
+
+Paměťová úprava má být malá, ale ne kosmetická. Musí zlepšit budoucí použití. Nejčastější typy:
+
+- přejmenovat odkaz tak, aby odpovídal aktuálnímu názvu šablony;
+- odstranit starou poznámku, která vysvětluje už zavřenou chybu;
+- zkrátit pravidlo na jednu pracovní větu;
+- přesunout historické vysvětlení z hlavního textu do changelogu;
+- sjednotit jeden stav nebo termín v nejbližším pracovním místě;
+- doplnit jednu výjimku, která se opakovaně objevila při použití;
+- smazat pomocný komentář, který už nepřidává rozhodovací hodnotu.
+
+Špatná paměťová úprava je taková, která začne preventivně "pro jistotu" procházet celý systém. Pokud je šum opravdu drobný, oprava má být vidět v jedné větě nebo jednom odkazu. Pokud to nejde, pojmenujte větší problém a dejte mu vlastní kartu.
+
+Příklad:
+
+```text
+Šum:
+V rozcestníku je odkaz "Nová case study šablona", ale aktuální šablona se jmenuje "Případová studie - pracovní verze".
+
+Úprava:
+Přejmenovat odkaz v rozcestníku na aktuální název šablony.
+
+Co neměníme:
+Obsah šablony, changelog, starou kartu opravy ani onboardingový lesson pack.
+```
+
+Takový zásah je malý, ale hodnotný. Příští člověk už nemusí hádat, jestli jde o dvě různé věci, nebo jen o starý název.
+
+### Historii zkracujte, ne přepisujte
+
+Když drobný šum souvisí se starou historií, cílem není historii vylepšit. Cílem je zabránit tomu, aby se historie tlačila do současné práce. Nejčastější chyba je přidat další vysvětlení: "Toto je aktuální pravidlo, původně bylo jiné, po opravě jsme ho sjednotili..." Výsledek je delší a pořád těžký.
+
+Lepší postup:
+
+1. Nechte v hlavním místě jen aktuální pravidlo.
+2. Pokud je potřeba dohledatelnost, ponechte jednu větu v changelogu.
+3. Pokud dohledatelnost není potřeba, starou poznámku smažte.
+4. Pokud stará historie odhaluje nový vzor, založte nový nález mimo tuto úpravu.
+
+Rozdíl:
+
+```text
+Před úpravou:
+Použij aktuální publikační šablonu (dříve "nová case study šablona", název byl změněn po opravě rozcestníku).
+
+Po úpravě:
+Použij šablonu "Případová studie - pracovní verze".
+
+Changelog:
+2026-05-25: Sjednocen název odkazu na publikační šablonu.
+```
+
+Hlavní text slouží práci. Changelog slouží paměti. Když si tyto role vymění místo, provozní paměť začne lidem překážet, i když je fakticky správná.
+
+### Privacy-first brzda paměťové úpravy
+
+Paměťovou úpravu není potřeba dokazovat novými osobními daty. Nezapisujte, kdo se spletl, kdo se ptal, kdo otevřel starý odkaz ani kdo potřeboval pomoc. Zapisujte jen šum v systému a změnu v pracovním místě.
+
+Stačí tento typ záznamu:
+
+```text
+Systémový šum:
+Název odkazu neodpovídal aktuálnímu názvu šablony.
+
+Úprava:
+Odkaz přejmenován v publikačním rozcestníku.
+
+Datová stopa:
+Bez osobních jmen, bez screenshotů, bez měření otevření dokumentu.
+```
+
+Pokud pro opravu potřebujete screenshot, použijte ho jen jako krátkodobou pracovní pomůcku a po uzavření ho smažte, pokud neexistuje jasný provozní nebo právní důvod ho držet. Drobné úpravy nemají vyrábět archiv důkazů. Mají zmenšovat šum.
+
+Codyho komentář: nejlepší paměťová úprava je trochu nudná. Jeden název sedí, jedna věta je kratší, jeden starý komentář zmizí. Nikdo z toho nebude dělat keynote, což je dobře. Provoz se zlepšuje často právě tím, že příště není o čem mluvit.
+
+### Karta paměťové úpravy
+
+Použijte ji jen tehdy, když úprava potřebuje dohledatelný záznam. U úplně malého zásahu může stačit changelog.
+
+```text
+Návrat, při kterém se šum ukázal:
+Co v provozní paměti drží:
+Drobné tření:
+Nejbližší místo rozhodnutí:
+Jedna úprava:
+Co zůstává zavřené:
+Co nemažeme, protože má jasný účel:
+Co mažeme jako pomocnou stopu:
+Nové nálezy mimo tuto úpravu:
+Datová stopa:
+Ověření při příštím použití:
+Závěr:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Návrat, při kterém se šum ukázal:
+Příprava nové případové studie podle publikačního rozcestníku.
+
+Co v provozní paměti drží:
+Autor našel správný rozcestník a otevřel aktuální šablonu.
+
+Drobné tření:
+Název odkazu v rozcestníku neodpovídal názvu šablony.
+
+Nejbližší místo rozhodnutí:
+Publikační rozcestník.
+
+Jedna úprava:
+Přejmenován odkaz na "Případová studie - pracovní verze".
+
+Co zůstává zavřené:
+Původní klidová oprava i návratová karta.
+
+Co nemažeme, protože má jasný účel:
+Jedna věta v changelogu.
+
+Co mažeme jako pomocnou stopu:
+Dočasná poznámka u odkazu.
+
+Nové nálezy mimo tuto úpravu:
+Žádné.
+
+Datová stopa:
+Bez jmen, bez screenshotů, bez nové analytiky.
+
+Ověření při příštím použití:
+Při další případové studii zkontrolovat, zda název odkazu stačí.
+
+Závěr:
+Paměťová úprava zmenšila šum bez otevření celé historie.
+
+Datum:
+2026-05-25.
+```
+
+### Mini workshop na 7 minut
+
+Vezměte jeden drobný šum z prvního běžného návratu k provozní paměti.
+
+1. Ověřte, že provozní paměť jako celek drží.
+2. Pojmenujte šum jednou pracovní větou.
+3. Vyberte nejbližší místo, kde se člověk příště rozhodne.
+4. Navrhněte jednu úpravu: přejmenovat, zkrátit, přesunout, sjednotit nebo smazat.
+5. Zapište, co zůstává zavřené.
+6. Proveďte úpravu bez nové osobní evidence.
+7. Určete, jestli stačí changelog, nebo krátká karta.
+
+Výstup:
+
+```text
+Drobné tření po návratu k provozní paměti je převedené do jedné malé úpravy v místě příštího rozhodnutí.
+```
+
+### Checklist kapitoly
+
+- Je jasné, že provozní paměť jako celek drží?
+- Jde opravdu o drobný šum, ne o poruchu pracovní cesty?
+- Je vybrané jedno nejbližší místo rozhodnutí?
+- Opravujete místo budoucí práce, ne nejdelší historický text?
+- Má úprava jeden konkrétní typ: přejmenovat, zkrátit, přesunout, sjednotit, doplnit nebo smazat?
+- Zůstává původní klidová oprava zavřená?
+- Neprocházíte preventivně celý systém bez důvodu?
+- Je historie zkrácená nebo přesunutá, ne nafouknutá dalším vysvětlením?
+- Jsou nové nálezy oddělené od této malé úpravy?
+- Nevznikla nová osobní evidence, screenshot nebo tracking používání?
+- Stačí changelog, pokud karta nepřidá rozhodovací hodnotu?
+- Je jasné, podle čeho se úprava ověří při příštím přirozeném použití?
+
+Paměťová úprava je úspěšná, když se příště nic zvláštního nestane. Člověk najde správné místo, pochopí aktuální pravidlo a nemusí se ptát, proč je v textu starý název nebo vysvětlení dávno zavřené opravy. To je přesně ten typ tiché kvality, který drží web, SaaS i marketingové systémy použitelné i po měsících drobných změn.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha PX o převodu drobného šumu po návratu k provozní paměti do jedné paměťové úpravy: potvrzení, že paměť drží, výběr nejbližšího místa rozhodnutí, typy malých úprav, zkracování historie, privacy-first brzda, karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PW o první běžný návrat k provozní paměti po uzavřené klidové opravě: ověření v reálné práci, přednost aktuálního pravidla před historií, čtyři výsledky návratu, neotevírání uzavřené karty bez důvodu, privacy-first návrat bez sledování lidí, návratová karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PV o uzavření potvrzené klidové opravy do provozní paměti: oddělení aktuálního pravidla od historie, přepis nejbližšího pracovního místa, zavření pomocných háčků, opakovatelné poučení, privacy-first úklid stop, uzavírací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PU o ověření klidové opravy při nejbližším přirozeném použití: čekání na běžnou pracovní situaci, kontrola původního šumu, čtyři výsledky ověření, privacy-first evidence bez stop navíc, ověřovací karta, mini workshop a checklist.
