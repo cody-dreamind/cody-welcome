@@ -124834,6 +124834,226 @@ Rutina byla poprvé zkontrolována v běžném provozu a buď zůstává bez zá
 
 První kontrola tiché rutiny má chránit jednoduchost. Když rutina drží, největší služba je nepřidat jí další zavazadla. Když neudrží, vraťte problém do malé rozhodovací smyčky a opravte nejbližší pracovní místo. Tak se z e-booku nestává muzeum procesů, ale nástroj, který pomáhá webu, SaaS i marketingu fungovat s menším šumem a menší datovou stopou.
 
+## Příloha QF: Převod výsledku kontroly tiché rutiny do jedné trvalé drobné úpravy
+
+První kontrola tiché rutiny někdy skončí větou "drží, necháme být". To je ideální stav. Jindy se ale ukáže malé tření: název je pořád trochu nejasný, odkaz vede správně, ale není tam, kde ho člověk hledá, nebo checklist funguje, jen si čtenář musí domýšlet jednu podmínku. Tohle není důvod otevírat velkou revizi. Je to důvod převést výsledek kontroly do jedné trvalé drobné úpravy.
+
+Trvalá drobná úprava má jednoduchý slib:
+
+```text
+Příští člověk narazí na méně tření, aniž by musel znát historii opravy.
+```
+
+Klíčové je slovo "trvalá". Neznamená navždy a beze změny. Znamená, že úprava žije v aktuálním pracovním místě, ne v dočasné poznámce, chatu, komentáři nebo paměti autora. Když se za měsíc vrátíte k šabloně, rozcestníku, runbooku nebo sales kartě, oprava tam má být přítomná jako normální součást práce.
+
+### Vycházejte jen z potvrzeného tření
+
+Než začnete upravovat, vraťte se ke kontrolní kartě z předchozí přílohy. Hledejte pouze tření, které se ukázalo při přirozeném použití. Neřešte všechno, co vás při pohledu na artefakt napadne. To je past: drobná kontrola se během deseti minut promění v redesign interní znalostní báze a všichni se tváří, že to bylo nevyhnutelné. Nebylo. Jen jste otevřeli víc dveří najednou.
+
+Potvrzené tření poznáte podle toho, že má konkrétní pracovní stopu:
+
+- člověk hledal správný odkaz pod jiným názvem;
+- výstup vznikl, ale jedna podmínka musela být vysvětlena bokem;
+- formulace v checklistu vedla ke dvěma různým výkladům;
+- šablona držela, ale nutila k dočasné kopii;
+- rozhodovací záznam byl správný, jen nebylo jasné, zda je pořád aktuální.
+
+Slabé tření zní jinak:
+
+```text
+Možná bychom mohli jednou sjednotit všechny názvy.
+```
+
+To může být pravda, ale pro tuto iteraci je to moc široké. Trvalá drobná úprava má vzniknout z konkrétního použití, ne z obecné touhy po dokonalém systému.
+
+### Vyberte nejmenší místo, které další průchod opravdu potká
+
+Dobrá úprava není ta, která opraví nejvíc textu. Dobrá úprava je ta, kterou další člověk skutečně uvidí ve chvíli rozhodnutí. Proto hledejte nejbližší místo tření:
+
+- název odkazu v rozcestníku;
+- první větu šablony;
+- jedno kritérium v checklistu;
+- stav v rozhodovacím logu;
+- krátkou poznámku u formuláře;
+- interní odkaz mezi dvěma souvisejícími částmi;
+- příklad vyplněné karty.
+
+Pokud musíte upravit pět dokumentů, pravděpodobně už nejde o drobnou úpravu, ale o změnu standardu. To není zakázané. Jen to patří do jiné smyčky: s vlastníkem, dopadem, kontrolou odkazů a jasným rozhodnutím, co se děje se starými verzemi.
+
+Praktická otázka:
+
+```text
+Které jedno místo by snížilo stejné zaváhání při příštím použití?
+```
+
+Když na ni neumíte odpovědět, ještě neupravujte. Nejdřív zkraťte problém.
+
+### Změňte chování, ne jen pocit pořádku
+
+Trvalá drobná úprava má změnit budoucí práci. Nestačí, že dokument vypadá čistěji. Zeptejte se, jaké chování se po úpravě zlepší:
+
+- člověk rychleji najde aktuální šablonu;
+- nepoužije starý export jako jistotu;
+- vyplní jen údaje, které jsou opravdu potřeba;
+- pozná, kdy má použít checklist a kdy eskalovat;
+- nepřidá nový tracker jen kvůli ověření drobné změny;
+- uloží rozhodnutí na kanonické místo místo do osobního souboru.
+
+Příklad slabé úpravy:
+
+```text
+Přejmenovali jsme sekci, aby zněla lépe.
+```
+
+Příklad silné úpravy:
+
+```text
+Přejmenovali jsme odkaz v rozcestníku tak, aby člověk při přípravě případové studie našel šablonu podle hledaného výstupu, ne podle interního názvu týmu.
+```
+
+Rozdíl je v tom, že druhá věta popisuje pracovní situaci. Díky tomu se dá později ověřit, jestli úprava pomohla.
+
+### Drobné úpravy mají mít stop pravidlo
+
+Malé změny jsou nebezpečné tím, že se tváří nevinně. Jedna věta sem, jeden odkaz tam, jedna poznámka do šablony. Po čase máte dokument, který je plný dobrých úmyslů a špatně se čte. Proto i drobná úprava potřebuje stop pravidlo.
+
+Před editací si napište:
+
+```text
+Upravíme jen:
+Neotevíráme:
+Hotovo poznáme podle:
+```
+
+Vyplněný příklad:
+
+```text
+Upravíme jen:
+Název odkazu v marketingovém rozcestníku a první větu briefu.
+
+Neotevíráme:
+Strukturu všech obsahových šablon, onboarding ani měření použití.
+
+Hotovo poznáme podle:
+Další člověk najde brief podle výstupu "případová studie" bez vysvětlování bokem.
+```
+
+Stop pravidlo chrání rozsah i náladu týmu. Bez něj se úprava snadno zvětší tak pomalu, že si toho všimnete až ve chvíli, kdy už nikdo neví, co vlastně mělo být hotovo.
+
+### Privacy-first dopad drobné úpravy
+
+Privacy-first kontrola se u drobné úpravy často neodehrává ve velkých právních větách. Odehrává se v provozních detailech: kde vznikají kopie, kdo má přístup, co zůstává v komentářích a jestli si tým kvůli nejistotě nevyrábí pomocné evidence.
+
+Položte si pět otázek:
+
+- Sníží úprava potřebu dočasných kopií, exportů nebo screenshotů?
+- Je jasné, kde je aktuální zdroj pravdy?
+- Nezůstávají v příkladech osobní údaje, které nejsou nutné?
+- Nepřidáváme kvůli kontrole nové sledování lidí?
+- Umí člověk udělat správný krok bez toho, aby si data přesouval do osobního poznámkovníku?
+
+Dobrý privacy-first výsledek může být úplně obyčejný:
+
+```text
+Do briefu jsme doplnili větu, že příklady zákaznických citací se před sdílením anonymizují a pracovní kopie se po publikaci smaže.
+```
+
+Taková věta není efektní, ale snižuje provozní riziko. U malých týmů často rozhoduje právě tahle drobná hygiena: méně kopírování, méně osobních poznámek, méně nejasných verzí, méně dat uložených jen proto, že někdo nevěděl, kam sáhnout.
+
+### Karta trvalé drobné úpravy
+
+```text
+Původní rutina:
+Výsledek první kontroly:
+Potvrzené tření:
+Jedno pracovní místo k úpravě:
+Stop pravidlo:
+Konkrétní změna:
+Privacy-first dopad:
+Co nemažeme:
+Co mažeme nebo uzavíráme:
+Changelogová věta:
+Další ověření:
+```
+
+Vyplněný příklad:
+
+```text
+Původní rutina:
+Použití aktuálního briefu pro případovou studii z marketingového rozcestníku.
+
+Výsledek první kontroly:
+Drží s drobným třením.
+
+Potvrzené tření:
+Člověk hledal šablonu podle výstupu "případová studie", ale odkaz používal interní název "customer proof brief".
+
+Jedno pracovní místo k úpravě:
+Název odkazu v rozcestníku a první věta briefu.
+
+Stop pravidlo:
+Neměníme strukturu všech briefů ani nezavádíme měření použití šablon.
+
+Konkrétní změna:
+Odkaz se jmenuje "Brief případové studie: důkaz a výsledek" a první věta říká, kdy šablonu použít.
+
+Privacy-first dopad:
+Brief připomíná anonymizaci citací a smazání pracovní kopie po publikaci.
+
+Co nemažeme:
+Changelogovou větu a aktuální brief.
+
+Co mažeme nebo uzavíráme:
+Dočasnou poznámku z kontroly po přepsání závěru do rozcestníku.
+
+Changelogová věta:
+Po první kontrole byl zpřesněn název odkazu na brief případové studie a doplněna krátká privacy-first poznámka k pracovním kopiím.
+
+Další ověření:
+Při dalším přirozeném použití; bez samostatného meetingu.
+```
+
+### Codyho komentář
+
+Drobná úprava je dobrý sluha jen tehdy, když má ostré hrany. Codyho komentář: jakmile u věty "jen to trochu zpřesníme" otevřete pět dalších témat, už neděláte úpravu. Děláte nepojmenovaný projekt v převleku za úklid. To je oblíbený sport týmů, které mají moc dobrých nápadů a málo uzavřených smyček.
+
+Nejlepší drobná úprava je skoro nudná. Někdo příště rychleji najde správný odkaz, vyplní méně zbytečných údajů nebo si nevytvoří kopii s citlivými daty. Žádný ohňostroj, jen méně šumu. Přesně takhle má vypadat provozní kvalita.
+
+### Mini workshop na 8 minut
+
+Vezměte jednu kontrolní kartu tiché rutiny se stavem `Drží s drobným třením`.
+
+1. Napište potvrzené tření jednou větou.
+2. Vyberte jedno pracovní místo, které příští člověk opravdu potká.
+3. Napište stop pravidlo: co upravíte a co neotevřete.
+4. Proveďte nejmenší textovou, odkazovou nebo strukturální změnu.
+5. Zkontrolujte, zda úprava snižuje zbytečné kopie, exporty nebo osobní poznámky.
+6. Přepište výsledek do changelogu.
+7. Smažte nebo uzavřete dočasné poznámky z kontroly.
+8. Určete, jestli stačí čekat na další přirozené použití.
+
+Výstup:
+
+```text
+Jedno potvrzené tření bylo převedeno do aktuálního pracovního místa a dočasná stopa kontroly byla uzavřena.
+```
+
+### Checklist kapitoly
+
+- Vycházíte z potvrzeného tření, ne z obecné chuti uklízet?
+- Vybrali jste jedno pracovní místo, které další člověk skutečně potká?
+- Je úprava dost malá na jednu hotovou iteraci?
+- Máte stop pravidlo, co neotevíráte?
+- Mění úprava budoucí chování, ne jen estetiku dokumentu?
+- Je jasné, kde bude aktuální zdroj pravdy?
+- Snižuje změna potřebu dočasných kopií, exportů nebo osobních poznámek?
+- Nepřidáváte kvůli ověření nový tracker, report nebo meeting?
+- Zapsali jste krátkou changelogovou větu?
+- Uzavřeli jste dočasnou poznámku z kontroly, aby nezůstala jako druhý zdroj pravdy?
+- Je další ověření napojené na přirozené použití, ne na umělý proces?
+
+Trvalá drobná úprava je způsob, jak dát malé zkušenosti skutečný dopad. Není to velká revize ani další vrstva řízení. Je to přesný pohyb na místě, kde práce opravdu drhla. Když ho uděláte dobře, příští průchod bude tišší, rychlejší a s menší datovou stopou. A to je v privacy-first provozu velmi praktická forma pokroku.
+
 ## Pracovní log
 
 - 2026-05-25: Doplněna Příloha QE o první kontrole tiché rutiny po návratu do běžného provozu: přirozený průchod, tiché signály, čtyři výsledky kontroly, omezení nové procesní vrstvy, privacy-first kontrola, kontrolní karta, Codyho komentář, mini workshop a checklist.
@@ -125347,3 +125567,4 @@ První kontrola tiché rutiny má chránit jednoduchost. Když rutina drží, ne
 - 2026-05-25: Doplněna krátká úvodní poznámka o stop podmínce pro čtecí iteraci, aby práce skončila rozhodnutím místo dalším rozšiřováním rozsahu.
 - 2026-05-25: Doplněna úvodní podkapitola o mapě duplicit před zkrácením rukopisu: pracovní situace, kanonické místo, typy opakování, privacy-first kontrola šablon a checklist ediční iterace.
 - 2026-05-25: Doplněna úvodní podkapitola o stabilizaci zkrácené čtenářské trasy po ověření: stavy trasy, kanonické místo, navigační opravy, privacy-first stabilizace, karta a checklist.
+- 2026-05-25: Doplněna Příloha QF o převodu výsledku kontroly tiché rutiny do jedné trvalé drobné úpravy: potvrzené tření, nejbližší pracovní místo, stop pravidlo, privacy-first dopad, karta úpravy, workshop a checklist.
