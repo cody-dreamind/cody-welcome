@@ -123781,8 +123781,230 @@ Aktuální pravidlo je v pracovním místě, historie je jen v nezbytné stopě 
 
 Tichá provozní paměť je úspěšná právě tím, že na sebe nekřičí. Člověk přijde, najde aktuální odpověď a pokračuje. Changelog podrží nezbytnou historii, ale běžná práce ji nemusí nést na zádech. Pro web, SaaS i marketing je to zdravý konec malé iterace: méně šumu, méně stop, stejná nebo lepší použitelnost.
 
+## Příloha QA: První signál, že tichá provozní paměť znovu šumí
+
+Tichá provozní paměť není mramorová deska na radnici. Funguje, dokud lidem při běžné práci pomáhá najít správnou odpověď bez dlouhého pátrání. Po čase se ale i dobré pravidlo může začít třepit: změní se nabídka, přibude nový nástroj, někdo přepíše formulář, vznikne druhá šablona nebo se v chatu začne znovu posílat starý odkaz. První signál šumu ještě neznamená, že je potřeba velký audit. Znamená jen, že stojí za to ověřit, jestli tichá paměť pořád drží.
+
+Smyslem této přílohy je zachytit slabý signál včas a malým způsobem. Neotevírat všechno, nehledat vinu, nesledovat lidi, nepřidávat novou vrstvu evidence. Jen se podívat, jestli aktuální pracovní místo pořád vede člověka k rozhodnutí.
+
+Vstupní věta může znít:
+
+```text
+Při běžné práci se objevil návrat šumu; ověříme jedno pracovní místo a rozhodneme, jestli stačí malá oprava.
+```
+
+Tato věta má tři brzdy. Šum se objevil při práci, ne při umělém hledání chyb. Ověřuje se jedno místo, ne celý systém. A výchozí řešení je malá oprava, ne nová metodika se šesti schůzkami a tabulkou, která se tváří důležitěji než problém.
+
+### Poznejte slabý signál
+
+Slabý signál není katastrofa. Je to okamžik, kdy někdo udělá krok navíc, zaváhá nebo si vytvoří vlastní zkratku, protože oficiální pracovní místo mu nestačilo. Právě tady se dá zasáhnout nejlevněji.
+
+Typické signály:
+
+- v chatu se znovu objeví otázka, která měla být vyřešená šablonou;
+- člověk použije starý odkaz, protože ho našel rychleji než aktuální;
+- v úkolu vznikne poznámka "nevím, která verze platí";
+- někdo obejde rozcestník a pošle vlastní kopii dokumentu;
+- formulář se vyplní jinak, než předpokládá aktuální pravidlo;
+- onboardingový krok vede na správné téma, ale špatné místo;
+- rozhodnutí se opakuje v poradě, přestože už mělo jedno kanonické místo.
+
+Ne každý signál si zaslouží zásah. Jedno přehlédnutí může být prostě přehlédnutí. Zásah dává smysl, když šum ukazuje na systémovou nejasnost: správná odpověď existuje, ale není dost blízko, dost čitelná nebo dost aktuální.
+
+Praktická otázka:
+
+```text
+Musel člověk znát historii, aby našel aktuální odpověď?
+```
+
+Pokud ano, tichá paměť už není dost tichá. Začala vyžadovat kontext, který měl zůstat v changelogu nebo archivu.
+
+### Ověřte jen nejbližší pracovní místo
+
+Pokušení po prvním signálu zní: "Když už jsme na to narazili, projděme všechny podobné věci." To je přesně okamžik, kdy se drobná provozní hygiena mění v projekt. Nejdřív ověřte nejbližší pracovní místo, kde šum vznikl.
+
+Místem může být:
+
+- jedna položka v rozcestníku;
+- jeden odkaz v checklistu;
+- jedna věta u šablony;
+- jeden krok onboardingu;
+- jeden popis formuláře;
+- jedna interní karta služby;
+- jeden úsek měsíčního review.
+
+Ověření má odpovědět na čtyři otázky:
+
+1. Je aktuální odpověď na správném místě?
+2. Je pojmenovaná jazykem člověka, který ji hledá?
+3. Nevede poblíž stará nebo duplicitní cesta?
+4. Nepotřebuje člověk další osobní vysvětlení, aby ji použil?
+
+Pokud odpověď na první tři otázky vyjde dobře a šlo jen o jednorázové přehlédnutí, nezakládejte opravu. Přidejte maximálně krátkou poznámku k běžnému review. Provozní paměť má snášet lidskou nedokonalost. Nemá kvůli každému zakopnutí vyrábět nové pravidlo.
+
+### Rozlišujte čtyři stavy návratu šumu
+
+Po malém ověření vyberte jeden ze čtyř stavů:
+
+- Bez zásahu: pracovní místo je v pořádku a signál byl jednorázový.
+- Drobná oprava: stačí přejmenovat, přesunout, zkrátit nebo odstranit starou stopu.
+- Lokální revize: šum se týká jednoho pracovního místa, ale jednoduchá oprava nestačí.
+- Samostatný problém: signál ukazuje na změnu procesu, nabídky, nástroje nebo odpovědnosti.
+
+Příklad bez zásahu:
+
+```text
+Signál:
+V chatu padla otázka na aktuální šablonu.
+
+Ověření:
+Rozcestník je aktuální, odkaz je správně pojmenovaný a starý odkaz nikde neleží.
+
+Stav:
+Bez zásahu. Stačí připomenout, že rozcestník je zdroj pravdy.
+```
+
+Příklad drobné opravy:
+
+```text
+Signál:
+Autor použil starý odkaz na brief, protože byl v onboardingové poznámce.
+
+Ověření:
+Kanonický rozcestník je správně, onboardingová poznámka je zastaralá.
+
+Stav:
+Drobná oprava. Nahradit odkaz v onboardingové poznámce a zapsat jednu větu do changelogu.
+```
+
+Příklad samostatného problému:
+
+```text
+Signál:
+Tři lidé se ptají, která verze nabídky platí pro nový segment.
+
+Ověření:
+Rozcestník je čitelný, ale samotná nabídka se změnila a ještě nemá rozhodnutí.
+
+Stav:
+Samostatný problém. Neopravovat rozcestník potichu; otevřít rozhodnutí o nabídce.
+```
+
+### Privacy-first kontrola slabého signálu
+
+Slabý signál se dá ověřit bez sledování lidí. Nepotřebujete měřit klikání v interních dokumentech, pořizovat screenshoty obrazovek ani evidovat, kdo přesně zaváhal. Důležité je, jestli pracovní místo vedlo ke správnému rozhodnutí.
+
+Používejte systémový jazyk:
+
+```text
+Nevhodné:
+Petr zase nenašel správný dokument.
+
+Vhodnější:
+Aktuální dokument nebyl v onboardingové poznámce dostupný z místa, kde začíná práce.
+```
+
+Privacy-first minimum:
+
+- zapisujte problém pracovního místa, ne osobní výkon;
+- neukládejte screenshoty, pokud stačí textový popis;
+- neprodlužujte retenci dočasných exportů kvůli malé opravě;
+- nepřidávejte analytiku do interních dokumentů jen kvůli jednomu signálu;
+- mažte pomocné poznámky po uzavření opravy;
+- nové nálezy oddělte bez kopírování osobních detailů.
+
+U zákaznických dat je brzda ještě přísnější. Pokud šum vznikl na základě poptávky, support tiketu nebo reálného zákaznického příkladu, anonymizujte ho hned při zápisu. Často stačí napsat "poptávka na audit webu" místo názvu firmy, kontaktu a celé citace.
+
+### Karta návratu šumu
+
+Použijte ji jen tehdy, když signál ukazuje na možné pracovní tření. Pokud je věc zjevná, opravte ji rovnou a nepište román.
+
+```text
+Signál:
+Kde se objevil:
+Původní tichá paměť / pracovní místo:
+Co mělo být snadné:
+Co se stalo místo toho:
+Ověření nejbližšího místa:
+Stav: Bez zásahu / Drobná oprava / Lokální revize / Samostatný problém
+Nejmenší další krok:
+Co neotevíráme:
+Privacy-first kontrola:
+Datum návratu, pokud je potřeba:
+```
+
+Vyplněný příklad:
+
+```text
+Signál:
+V interním úkolu se objevil starý odkaz na brief případové studie.
+
+Kde se objevil:
+Onboardingová poznámka pro nový marketingový výstup.
+
+Původní tichá paměť / pracovní místo:
+Rozcestník sales a marketingových šablon.
+
+Co mělo být snadné:
+Začít správnou pracovní šablonou bez dotazu v chatu.
+
+Co se stalo místo toho:
+Onboardingová poznámka vedla na starou kopii.
+
+Ověření nejbližšího místa:
+Rozcestník je správně, problém je jen v onboardingové poznámce.
+
+Stav:
+Drobná oprava.
+
+Nejmenší další krok:
+Nahradit odkaz v onboardingové poznámce a smazat starou kopii z aktivního prostoru.
+
+Co neotevíráme:
+Nepřepisujeme celý onboarding a neauditujeme všechny šablony.
+
+Privacy-first kontrola:
+Bez jmen, screenshotů a měření použití; po opravě stačí changelogová věta.
+
+Datum návratu, pokud je potřeba:
+Bez samostatného návratu, ověří se při dalším běžném použití.
+```
+
+### Mini workshop na 7 minut
+
+Vezměte jeden slabý signál z poslední běžné práce.
+
+1. Pojmenujte, kde se signál objevil.
+2. Najděte nejbližší pracovní místo, které mělo člověku pomoct.
+3. Odpovězte na čtyři otázky ověření.
+4. Vyberte jeden ze čtyř stavů.
+5. Zapište nejmenší další krok nebo vědomé bez zásahu.
+6. Smažte osobní a dočasné detaily, které nepotřebujete.
+
+Výstup:
+
+```text
+Víme, jestli tichá provozní paměť pořád drží, nebo potřebuje jednu malou opravu.
+```
+
+### Checklist kapitoly
+
+- Vznikl signál při běžné práci, ne při hledání problémů pro problémy?
+- Ověřujete jen jedno nejbližší pracovní místo?
+- Je jasné, co mělo být pro člověka snadné?
+- Rozlišili jste jednorázové přehlédnutí od systémové nejasnosti?
+- Vybrali jste jeden ze čtyř stavů?
+- Neskáčete z drobného signálu rovnou do auditu všeho?
+- Je další krok nejmenší možný?
+- Oddělujete nově objevený větší problém od malé opravy?
+- Nezapisujete osobní výkon, jména ani zbytečné screenshoty?
+- Zůstane po zásahu provozní paměť tišší, ne hlučnější?
+
+První návrat šumu je dobrá zpráva, pokud ho zachytíte včas. Ukazuje, kde se pracovní realita trochu posunula od dokumentu. Špatná reakce je vyrobit z toho další vrstvu kontroly. Dobrá reakce je ověřit jedno místo, udělat nejmenší opravu nebo vědomě nezasáhnout. Tichá paměť tím zůstává živá, ale nezačne na sebe křičet.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha QA o prvním signálu, že tichá provozní paměť znovu šumí: slabé signály v běžné práci, ověření nejbližšího pracovního místa, čtyři stavy návratu šumu, privacy-first kontrola bez sledování lidí, karta, mini workshop a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o ověření zkrácené čtenářské trasy: scénář jedné reálné pracovní situace, sledování rozhodnutí místo dojmů, typické chyby po zkrácení, privacy-first ověření bez sledování čtenářů, ověřovací karta a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o redukčním rozhodnutí po mapě duplicit: šest stavů duplicitní části, rozhodování podle ceny dalšího čtení, redukční karta, privacy-first kontrola účelu, minima, přístupu a retence, mini workshop a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o převodu duplicit do směrovek: kanonické místo, struktura krátké směrovky, přenos jedinečných detailů, privacy-first kontrola po zkrácení, karta převodu a checklist.
