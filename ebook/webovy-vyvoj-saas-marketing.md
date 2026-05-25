@@ -122463,8 +122463,255 @@ Paměťová úprava je potvrzená, doladěná, vrácená nebo oddělená od nov�
 
 Ověření paměťové úpravy je malé, ale důležité. Zavírá poslední otázku: nebyla drobná oprava jen pocitově čistší, ale opravdu pomohla dalšímu použití? Když ano, nechte ji zmizet do běžné práce. To je pro provoz často nejlepší možný výsledek: žádný nový proces, žádné další sledování, jen méně šumu.
 
+## Příloha PZ: Uzavření potvrzené paměťové úpravy do tiché provozní paměti
+
+Když je paměťová úprava ověřená, přichází nenápadný, ale důležitý krok: přestat ji držet jako samostatnou událost. Pokud zůstane viset jako připomínka, karta, komentář a poznámka v rozcestníku, systém se sice tváří pečlivě, ale ve skutečnosti si nechává na stole další papír. Tichá provozní paměť znamená, že aktuální pravidlo je dostupné tam, kde se pracuje, a historie nepřekáží.
+
+Smyslem této přílohy není archivovat každý detail. Smyslem je převést potvrzenou úpravu do nejbližšího pracovního místa, zavřít dočasnou stopu a nechat tým pokračovat bez další režie. Dobré uzavření má být kratší než samotná oprava.
+
+Uzavírací věta může znít:
+
+```text
+Paměťová úprava je potvrzená; aktuální pravidlo zůstává v pracovním místě a dočasné podklady zavíráme.
+```
+
+Věta je obyčejná, ale drží tři hranice: úprava je potvrzená, pravidlo má jeden domov a pomocné věci nemají dál žít vlastním životem.
+
+### Nechte aktuální pravidlo na nejbližším místě práce
+
+Po ověření nesmí člověk potřebovat znát příběh úpravy, aby dokázal pracovat. Má vidět správný název, správný odkaz, správnou šablonu nebo správné pravidlo. Historie může zůstat v changelogu, ale nemá stát mezi člověkem a rozhodnutím.
+
+Typická místa, kam patří aktuální stav:
+
+- rozcestník šablon;
+- provozní checklist;
+- krátké pravidlo u formuláře;
+- onboardingový krok;
+- interní karta služby;
+- poznámka u měsíčního review;
+- kanonická stránka playbooku.
+
+Typická místa, kde historie po uzavření překáží:
+
+- dlouhý komentář vysvětlující, proč se název změnil;
+- starý odkaz ponechaný "pro jistotu";
+- dočasná karta označená jako skoro hotová;
+- duplicitní pravidlo v druhém dokumentu;
+- screenshot starého stavu v aktivní šabloně;
+- poznámka v chatu, která se tváří jako platné rozhodnutí.
+
+Praktické pravidlo:
+
+```text
+Aktuální pravidlo patří do místa budoucí práce; příběh změny patří jen do changelogu nebo archivu.
+```
+
+Když to nejde udělat, pravděpodobně ještě nemáte jeden zdroj pravdy. Potom není problém v uzavření paměťové úpravy, ale ve struktuře pracovních míst. Neřešte ho potichu v této malé kartě. Otevřete samostatný nález.
+
+### Přepište závěr do jedné pracovní věty
+
+Potvrzená úprava často začínala jako šum: špatný název, starý odkaz, duplicitní poznámka, nejasné pořadí. Po ověření ji přepište do věty, kterou člověk může použít bez kontextu.
+
+Slabý zápis:
+
+```text
+Odkaz jsme upravili podle poslední kontroly, protože předtím mátl při použití šablony.
+```
+
+Silnější zápis:
+
+```text
+Pro případovou studii používejte šablonu "Zákaznický příběh - pracovní verze".
+```
+
+Druhá věta je lepší ne proto, že je hezčí, ale protože nevyžaduje historickou detektivku. Člověk nemusí vědět, jak se šablona jmenovala dřív. Potřebuje vědět, co má použít teď.
+
+Použijte jednoduchý převod:
+
+```text
+Historický zápis:
+Co se změnilo a proč.
+
+Pracovní věta:
+Co má člověk příště udělat.
+
+Changelog:
+Jedna věta, že úprava byla ověřena a uzavřena.
+```
+
+Příklad:
+
+```text
+Historický zápis:
+Přejmenovali jsme odkaz, protože starý název vypadal jako druhá šablona.
+
+Pracovní věta:
+Při přípravě případové studie začněte v šabloně "Zákaznický příběh - pracovní verze".
+
+Changelog:
+Ověřená paměťová úprava odkazu na šablonu byla uzavřena do rozcestníku.
+```
+
+Tím se zachová stopa rozhodnutí, ale nepřenáší se na každého dalšího člověka.
+
+### Zavřete dočasné podklady
+
+Dočasné podklady vznikají snadno: poznámka z kontroly, krátký export, screenshot, komentář u dokumentu, pomocná karta, interní zpráva. Během opravy jsou užitečné. Po potvrzení se z nich stává provozní prach.
+
+Projděte jen věci, které vznikly kvůli této úpravě:
+
+- karta paměťové úpravy;
+- ověřovací zápis;
+- pomocný komentář v dokumentu;
+- screenshot nebo export starého stavu;
+- dočasný odkaz v chatu nebo úkolu;
+- poznámka v review dokumentu.
+
+U každé věci vyberte jeden stav:
+
+- Smazat: už nepřidává rozhodovací hodnotu.
+- Zkrátit: stačí jedna věta v changelogu.
+- Přesunout: patří do archivu, ne do pracovního místa.
+- Ponechat: je součástí aktuálního pravidla.
+
+Nejčastěji stačí první dvě možnosti. Pokud po malé paměťové úpravě zůstane pět artefaktů, úklid selhal. Ne proto, že by tým nebyl poctivý. Spíš proto, že poctivost zaměnil za sběr stop.
+
+Codyho komentář: dobrý provoz se nepozná podle toho, že umí všechno zpětně vysvětlit na deset obrazovek. Pozná se podle toho, že člověk najde aktuální odpověď rychle a historie se dá dohledat jen tehdy, když je opravdu potřeba.
+
+### Oddělte potvrzenou úpravu od nových nálezů
+
+Při ověření se mohl objevit nový nápad: zkrátit úvod šablony, sjednotit názvy dalších odkazů, přepsat část rozcestníku. Pokud původní paměťová úprava funguje, zavřete ji. Nový nález může být platný, ale nesmí držet původní úpravu jako rukojmí.
+
+Rozlišení vypadá takto:
+
+```text
+Původní úprava:
+Přejmenování odkazu na aktuální šablonu.
+
+Výsledek:
+Potvrzeno a uzavřeno.
+
+Nový nález:
+Úvod šablony je delší, než autor potřebuje.
+
+Další stav:
+Samostatná položka do údržbové fronty, ne pokračování této karty.
+```
+
+Pokud nový nález není důležitý, nezakládejte nic. Zapište ho jen tehdy, když má jasný dopad na práci. Jinak jste jen vyměnili starý šum za nový backlog.
+
+### Privacy-first uzavření maže stopu, kterou už nepotřebujete
+
+Paměťová úprava často pracuje s interními příklady, poznámkami, screenshoty nebo stopami použití. Po potvrzení se zeptejte: co z toho musí zůstat, aby tým uměl příště pracovat? Většinou překvapivě málo.
+
+Privacy-first minimum:
+
+- v pracovním místě zůstává aktuální pravidlo;
+- v changelogu zůstává stručná věta;
+- dočasné podklady se mažou nebo zkracují;
+- osobní detaily se nepřenášejí do dlouhodobé paměti;
+- nové měření se nezavádí jen kvůli uzavření.
+
+Nevhodný zápis:
+
+```text
+Při ověření Jana znovu váhala a pak použila nový odkaz.
+```
+
+Vhodnější zápis:
+
+```text
+Při dalším použití byl aktualizovaný odkaz dostačující pro výběr správné šablony.
+```
+
+Rozdíl je důležitý. První věta ukládá osobní stopu, kterou nepotřebujete. Druhá věta ukládá informaci o systému: pracovní místo funguje.
+
+### Uzavírací karta tiché provozní paměti
+
+Použijte ji jen tehdy, když samotný changelog nestačí. U malé úpravy může být výstupem jen jedna changelogová věta a smazání pomocných stop.
+
+```text
+Potvrzená paměťová úprava:
+Aktuální pracovní místo:
+Pracovní věta, která zůstává:
+Co zapisujeme do changelogu:
+Co mažeme:
+Co zkracujeme nebo přesouváme do archivu:
+Nové nálezy mimo rozsah:
+Privacy-first kontrola:
+Stav: Uzavřeno / Uzavřeno s novým nálezem / Vráceno k doladění
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Potvrzená paměťová úprava:
+Přejmenování odkazu na aktuální šablonu případové studie.
+
+Aktuální pracovní místo:
+Rozcestník sales a marketingových šablon.
+
+Pracovní věta, která zůstává:
+Při přípravě případové studie začněte v šabloně "Zákaznický příběh - pracovní verze".
+
+Co zapisujeme do changelogu:
+Odkaz na šablonu případové studie byl ověřen při dalším použití a uzavřen do rozcestníku.
+
+Co mažeme:
+Dočasnou poznámku u původní ověřovací karty.
+
+Co zkracujeme nebo přesouváme do archivu:
+Starý komentář k názvu odkazu zůstane jen v changelogu.
+
+Nové nálezy mimo rozsah:
+Možné zkrácení úvodu šablony; zatím bez samostatné položky.
+
+Privacy-first kontrola:
+Bez jmen, screenshotů, měření kliknutí a další evidence použití.
+
+Stav:
+Uzavřeno.
+
+Datum:
+2026-05-25.
+```
+
+### Mini workshop na 6 minut
+
+Vezměte jednu ověřenou paměťovou úpravu a zavřete ji do pracovního místa.
+
+1. Najděte nejbližší místo, kde člověk příště pracuje.
+2. Přepište výsledek do jedné pracovní věty.
+3. Zapište jednu changelogovou větu.
+4. Smažte, zkraťte nebo archivujte dočasné podklady.
+5. Oddělte nové nálezy mimo rozsah.
+6. Zkontrolujte, že nezůstává zbytečná osobní nebo měřicí stopa.
+
+Výstup:
+
+```text
+Aktuální pravidlo je v pracovním místě, historie je jen v nezbytné stopě a dočasné podklady nepřekážejí další práci.
+```
+
+### Checklist kapitoly
+
+- Je paměťová úprava opravdu potvrzená?
+- Je aktuální pravidlo na nejbližším místě budoucí práce?
+- Umí člověk postupovat bez znalosti historie úpravy?
+- Je pracovní věta kratší než původní vysvětlení?
+- Stačí changelog místo další samostatné karty?
+- Jsou dočasné poznámky, screenshoty, exporty a komentáře smazané, zkrácené nebo archivované?
+- Nezůstává starý odkaz nebo duplicitní pravidlo "pro jistotu"?
+- Jsou nové nálezy oddělené od potvrzené úpravy?
+- Nezapisujete osobní detaily ani měření použití jednotlivých lidí?
+- Je po uzavření systém lehčí než před opravou?
+
+Tichá provozní paměť je úspěšná právě tím, že na sebe nekřičí. Člověk přijde, najde aktuální odpověď a pokračuje. Changelog podrží nezbytnou historii, ale běžná práce ji nemusí nést na zádech. Pro web, SaaS i marketing je to zdravý konec malé iterace: méně šumu, méně stop, stejná nebo lepší použitelnost.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha PZ o uzavření potvrzené paměťové úpravy do tiché provozní paměti: přepis aktuálního pravidla do nejbližšího pracovního místa, pracovní věta, zavření dočasných podkladů, oddělení nových nálezů, privacy-first mazání stop, uzavírací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PY o ověření paměťové úpravy při dalším přirozeném použití: čekání na normální práci, sledování původního šumu, čtyři výsledky ověření, privacy-first evidence bez sledování lidí, ověřovací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PX o převodu drobného šumu po návratu k provozní paměti do jedné paměťové úpravy: potvrzení, že paměť drží, výběr nejbližšího místa rozhodnutí, typy malých úprav, zkracování historie, privacy-first brzda, karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PW o první běžný návrat k provozní paměti po uzavřené klidové opravě: ověření v reálné práci, přednost aktuálního pravidla před historií, čtyři výsledky návratu, neotevírání uzavřené karty bez důvodu, privacy-first návrat bez sledování lidí, návratová karta, mini workshop a checklist.
