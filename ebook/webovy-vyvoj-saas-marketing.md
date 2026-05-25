@@ -2489,6 +2489,198 @@ Při dalším zkrácení navazující přílohy.
 
 Ověření zkrácené trasy je malá pojistka proti tomu, aby se editace tvářila jako pokrok jen proto, že ubrala text. Pracovní e-book má být kratší tam, kde to zrychlí rozhodnutí, a úplný tam, kde chybějící věta způsobí horší práci. Tohle rozlišení se nepozná z počtu znaků. Pozná se z průchodu člověka, který podle textu opravdu něco mění.
 
+## Stabilizace zkrácené trasy po ověření
+
+Ověření zkrácené trasy obvykle najde jednu nebo dvě opravy. Stabilizace je okamžik, kdy z nich uděláte trvalý stav rukopisu: text je zkrácený, směrovky dávají smysl, kanonické místo drží pravidlo a tým ví, kde bude příště měnit zdroj pravdy. Bez stabilizace se rukopis začne po pár iteracích znovu nafukovat. Každý editor totiž přidá malou větu "pro jistotu" a za měsíc vznikne nová vrstva duplicit.
+
+Cílem stabilizace není další velká redakční vlna. Cílem je zavřít jednu zkrácenou trasu tak, aby se podle ní dalo pracovat bez vysvětlování autora. Pokud jste při ověření našli chybějící směrovku, doplňte ji. Pokud chyběl příklad, přesuňte ho do kanonického místa. Pokud se ukázalo, že vedlejší část pořád sbírá zbytečná data, zkraťte šablonu nebo ji nahraďte odkazem na privacy-first pravidlo.
+
+Praktická otázka stabilizace zní:
+
+```text
+Je po ověření jasné, kde text žije, jak se používá a co se už nebude znovu přidávat?
+```
+
+Pokud odpověď zní ne, nevydávejte zkrácení jako hotové. Ne proto, že by muselo být dokonalé. Protože nestabilní zkrácení je jen odložená duplicita.
+
+### Uzavřete jeden stav trasy
+
+Po ověření dejte trase jeden ze čtyř stavů:
+
+1. Stabilní: čtenář našel kanonické místo, udělal správné rozhodnutí a nevznikl nový datový požadavek.
+2. Stabilní s drobnou opravou: stačí jedna směrovka, jedna věta kontextu nebo jeden přesunutý příklad.
+3. Vrátit k redukci: zkrácení odstranilo něco podstatného a oprava by byla větší než samotný zásah.
+4. Odložit: trasa není teď důležitá nebo chybí reálná situace, podle které ji ověřit.
+
+Stav `Stabilní s drobnou opravou` je nejčastější. Nepište kvůli němu novou kapitolu. Udělejte opravu přímo tam, kde čtenář narazil, a do rozhodovacího záznamu napište, proč stačila malá změna.
+
+Příklad:
+
+```text
+Stav:
+Stabilní s drobnou opravou.
+
+Proč:
+Čtenář našel kapitolu o úklidu, ale směrovka neříkala, že retenční pravidlo patří k rozhodnutí.
+
+Oprava:
+Do směrovky přidána věta: "Po zapracování závěru smažte pracovní export a v logu ponechte jen anonymizované rozhodnutí."
+
+Co už nepřidáváme:
+Nevracíme původní dlouhou přílohu o úklidu exportů.
+```
+
+Tento zápis je důležitý hlavně kvůli budoucnosti. Až někdo za tři měsíce uvidí krátkou směrovku, nebude mít pocit, že chybí původní výklad. Uvidí, že zkrácení bylo rozhodnutí, ne nehoda.
+
+### Zamkněte kanonické místo
+
+Kanonické místo nemusí být technicky zamčené. Má být zamčené pracovně: tým ví, že právě tam se mění hlavní pravidlo, příklad, checklist a privacy-first hranice. Vedlejší části mohou mít jen lokální kontext a směrovku.
+
+U každé stabilizované trasy si napište:
+
+```text
+Kanonické místo:
+Co drží:
+Kde jsou směrovky:
+Co se nesmí duplikovat:
+Kdo může pravidlo změnit:
+Kdy se vrátíme:
+```
+
+Příklad:
+
+```text
+Kanonické místo:
+Úklid po zavedení pracovního pravidla.
+
+Co drží:
+Úklidovou kartu, retenční pravidlo, privacy-first kontrolu a checklist.
+
+Kde jsou směrovky:
+V částech o převodu duplicit, ověření zkrácené trasy a rozhodovacím záznamu.
+
+Co se nesmí duplikovat:
+Samostatné retenční tabulky pro dočasné poznámky.
+
+Kdo může pravidlo změnit:
+Editor veřejné verze po měsíčním review rozhodnutí.
+
+Kdy se vrátíme:
+Při další redukci příloh, které pracují s pracovními exporty.
+```
+
+Když kanonické místo nemá takový zápis, bude se pravidlo postupně rozlézat. Jedna část přidá výjimku, druhá upraví formulář, třetí změní retenci. Po čase nikdo neví, co platí.
+
+### Upravte navigaci, ne jen text
+
+Zkrácení často selže v navigaci, ne v obsahu. Pravidlo existuje, ale čtenář ho v dané pracovní situaci nenajde. Stabilizace proto kontroluje i drobné navigační prvky:
+
+- nadpis říká pracovní situaci, ne interní redakční kategorii;
+- směrovka vysvětluje, proč vede právě na kanonické místo;
+- checklist odkazuje na plné pravidlo tam, kde by jinak opakoval celý výklad;
+- příklad zůstává u pravidla, které má čtenář skutečně použít;
+- stará vedlejší část není v obsahu prezentovaná jako rovnocenná kapitola.
+
+Praktická oprava může být malá:
+
+```text
+Původně:
+Viz úklidová část.
+
+Lépe:
+Pro retenční pravidlo a smazání dočasných exportů použijte kapitolu `Úklid po zavedení pracovního pravidla`; tady řešíme jen směrovku z redukované části.
+```
+
+Dobrá směrovka nesmí znít jako výmluva editora. Má čtenáři ušetřit rozhodování, proč má přejít jinam.
+
+### Privacy-first stabilizace
+
+Při stabilizaci se ptejte, jestli zkrácení neskrývá datové pravidlo moc hluboko. Privacy-first hranice nesmí z rukopisu zmizet jen proto, že se opakovala. Pokud vedlejší část pracuje s osobními údaji, exportem, interními poznámkami, support tikety nebo analytikou, musí v ní zůstat aspoň lokální varování a cesta k plnému pravidlu.
+
+Minimální privacy-first směrovka může vypadat takto:
+
+```text
+Než podle této části vytvoříte nový export, formulář nebo měření, ověřte účel, minimum údajů, přístup a retenci v kanonické datové mapě. Pokud odpověď neznáte, změna ještě není připravená.
+```
+
+Tohle není právní dekorace. Je to pracovní brzda. Čtenář nemusí dostat celý výklad GDPR v každé kapitole, ale musí poznat, že nový sběr dat není vedlejší detail.
+
+Po stabilizaci zkontrolujte tři věci:
+
+1. Nezůstala ve vedlejší části šablona, která chce víc údajů než kanonické místo?
+2. Nezmizelo retenční pravidlo z místa, kde člověk reálně pracuje?
+3. Není privacy-first kontrola schovaná jen v obecné kapitole, kam se čtenář v dané trase nedostane?
+
+Pokud aspoň jedna odpověď bolí, udělejte lokální směrovku nebo přesuňte pravidlo blíž k pracovní akci.
+
+### Stabilizační karta
+
+```text
+Zkrácená trasa:
+Ověřená pracovní situace:
+Výsledek ověření:
+Stav trasy:
+Kanonické místo:
+Upravené směrovky:
+Přesunutý příklad nebo pravidlo:
+Privacy-first kontrola:
+Co se už nebude duplikovat:
+Kde je rozhodnutí zapsané:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Zkrácená trasa:
+Redukce přílohy o úklidu po formulářovém experimentu.
+
+Ověřená pracovní situace:
+Editor převádí dlouhou přílohu do směrovky a kontroluje, jestli čtenář najde retenční pravidlo.
+
+Výsledek ověření:
+Čtenář našel kanonickou kapitolu, ale až po doplňující otázce.
+
+Stav trasy:
+Stabilní s drobnou opravou.
+
+Kanonické místo:
+Úklid po zavedení pracovního pravidla.
+
+Upravené směrovky:
+Doplněna věta o smazání pracovního exportu po zapracování anonymizovaného závěru.
+
+Přesunutý příklad nebo pravidlo:
+Krátký příklad s pěti poptávkami přesunut do kanonické kapitoly.
+
+Privacy-first kontrola:
+Vedlejší část už neobsahuje vlastní retenční tabulku; odkazuje na jedno pravidlo.
+
+Co se už nebude duplikovat:
+Samostatné seznamy údajů pro dočasné ověřovací exporty.
+
+Kde je rozhodnutí zapsané:
+V pracovním logu iterace a v rozhodovacím záznamu veřejné edice.
+
+Další kontrola:
+Při příštím zkrácení části, která používá exporty nebo poznámky z rozhovorů.
+```
+
+### Checklist stabilizace zkrácené trasy
+
+- Má trasa po ověření jeden jasný stav?
+- Je drobná oprava opravdu drobná, ne skrytý návrat k dlouhé části?
+- Ví čtenář, kde je kanonické místo a proč?
+- Je zapsané, co kanonické místo drží a co se nesmí duplikovat?
+- Jsou směrovky srozumitelné i bez autora textu?
+- Zůstaly důležité příklady u pravidla, které má čtenář použít?
+- Nezmizelo privacy-first pravidlo z pracovní situace, kde vznikají data?
+- Nevede vedlejší část k druhému formuláři, exportu, trackeru nebo retenčnímu slibu?
+- Je rozhodnutí zapsané v logu nebo rozhodovacím záznamu?
+- Má stabilizovaná trasa další kontrolu jen tehdy, když ji opravdu potřebuje?
+
+Codyho komentář: stabilizace je nudná jen na papíře. V praxi je to rozdíl mezi rukopisem, který se dá udržovat, a rukopisem, který po každé dobré editaci potichu doroste zpátky. Text se nemá bránit změně. Má si pamatovat, proč změna proběhla.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -124096,3 +124288,4 @@ Tichá provozní paměť je úspěšná právě tím, že na sebe nekřičí. Č
 - 2026-05-25: Doplněna úvodní podkapitola o půlročním auditu použitelnosti rukopisu: výběr částí podle reálného použití, stavy pro úpravy, privacy-first kontrola šablon, karta auditu a checklist.
 - 2026-05-25: Doplněna krátká úvodní poznámka o stop podmínce pro čtecí iteraci, aby práce skončila rozhodnutím místo dalším rozšiřováním rozsahu.
 - 2026-05-25: Doplněna úvodní podkapitola o mapě duplicit před zkrácením rukopisu: pracovní situace, kanonické místo, typy opakování, privacy-first kontrola šablon a checklist ediční iterace.
+- 2026-05-25: Doplněna úvodní podkapitola o stabilizaci zkrácené čtenářské trasy po ověření: stavy trasy, kanonické místo, navigační opravy, privacy-first stabilizace, karta a checklist.
