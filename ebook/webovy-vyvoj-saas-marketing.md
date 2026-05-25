@@ -120376,8 +120376,211 @@ Drobná stopa po první kontrole byla odstraněna bez změny pravidla, bez nové
 
 Poslední dočištění má být malé a trochu nudné. To je jeho přednost. Když po něm další člověk najde jen aktuální pravidlo, použije ho a nemusí znát starý příběh, práce je hotová. Ne všechno si zaslouží další smyčku. Některé věci si zaslouží jen dobře zavřít dveře.
 
+## Příloha PQ: Ověření posledního dočištění při dalším běžném použití
+
+Po posledním dočištění by měl tým odolat nutkání svolat slavnostní kontrolu. Pokud šlo opravdu jen o drobnou stopu po uzavřené úpravě, nejlepší ověření přijde při dalším normálním použití. Někdo otevře šablonu, dokumentaci, checklist, formulář nebo provozní pravidlo a buď narazí už jen na aktuální stav, nebo se ukáže, že stará stopa pořád někde táhne práci špatným směrem.
+
+Tahle kontrola je krátká, ale důležitá. Neověřuje celý systém. Ověřuje, jestli poslední dočištění splnilo svůj slib: příští člověk nemusel znát historii, nenašel starou cestu a nemusel se ptát, která varianta platí.
+
+Vstupní věta:
+
+```text
+Ověřujeme, jestli poslední dočištění odstranilo rušivou stopu a běžná práce se vrací k aktuálnímu pravidlu bez další evidence.
+```
+
+Pokud věta nejde napsat takhle úzce, nejspíš už neověřujete dočištění. Ověřujete změnu pravidla, nový proces, obsahový audit nebo širší údržbu. To může být legitimní práce, ale patří do jiné karty. Malé ověření má malý obvod.
+
+### Čekejte na první normální použití
+
+Nejlepší okamžik je první situace, kdy by se dané místo stejně použilo. Neotevírejte práci jen proto, abyste si potvrdili, že jste uklidili. U malých dočištění je umělé testování často dražší než samotná stopa.
+
+Příklady normálního použití:
+
+- obchodník zakládá novou landing page ze šablony;
+- produkťák upravuje onboardingový checklist;
+- autor článku hledá aktuální pravidlo pro CTA;
+- support používá odpovědní šablonu;
+- vývojář kontroluje provozní poznámku před změnou formuláře;
+- marketing owner připravuje další kampaň a sahá do stejné dokumentace.
+
+Při tomto použití sledujte jen tři otázky:
+
+```text
+Našel člověk aktuální místo bez návratu ke staré stopě?
+Pochopil platný stav bez znalosti historie?
+Vznikla kvůli dočištění nová otázka, objížďka nebo datová stopa?
+```
+
+To stačí. Nepřidávejte měření, rozhovory ani tabulku jen proto, že kontrola zní seriózněji, když má vlastní sloupce. Seriózní je hlavně to, že kontrolujete správnou věc ve správném měřítku.
+
+### Rozlišujte čtyři výsledky
+
+Po prvním běžném použití zapište jeden ze čtyř stavů.
+
+`Drží`: aktuální pravidlo bylo nalezené, použité a stará stopa se nevrátila. Téma se vrací do běžného rytmu.
+
+`Drží s drobným jazykovým třením`: pravidlo funguje, ale jedna formulace je pořád neobratná. Opravte ji přímo na místě, pokud nezmění význam. Nevytvářejte novou kartu.
+
+`Stopa se vrátila`: člověk našel starý odkaz, starou šablonu, archivní kopii nebo dočasný export, který měl zmizet. Otevřete další dočištění jen pro toto konkrétní místo.
+
+`Není to jen stopa`: kontrola ukázala, že problém je v pravidle, procesu nebo vlastnictví. Zastavte malé dočištění a převeďte nález do odpovídající údržbové položky.
+
+Příklad zápisu:
+
+```text
+Ověření:
+První použití šablony landing page po dočištění.
+
+Výsledek:
+Drží.
+
+Pozorování:
+Autor našel jen aktuální pravidlo formuláře, starý odkaz na variantu s telefonem se neobjevil.
+
+Další krok:
+Bez samostatné akce, kontrola zůstává v běžném review landing pages.
+```
+
+Slabý zápis:
+
+```text
+Vypadá to v pohodě, ale raději budeme sledovat dál.
+```
+
+To je neurčité a vytváří stínový dohled. Pokud není jasné, co přesně sledujete a proč, nesledujte nic navíc. Vraťte se k normální práci.
+
+### Kontrolujte návrat staré cesty, ne výkon člověka
+
+Ověření dočištění nemá hodnotit, jestli člověk "správně četl". Má zjistit, jestli pracovní prostředí vede ke správné variantě bez vysvětlování. Když někdo sáhne po staré šabloně, není první otázka "proč sis nevšiml aktuálního pravidla". První otázka je "proč byla stará šablona pořád v cestě".
+
+Sledujte proto trasu:
+
+```text
+Kde člověk začal?
+Co otevřel jako první?
+Kde se objevila stará stopa?
+Byla stará stopa v hlavní trase, vyhledávání, archivu, odkazu, šabloně nebo komentáři?
+Co je nejbližší místo opravy?
+```
+
+Tento pohled je praktičtější a férovější. Pokud systém nechává staré cesty v běžném provozu, lidé je budou občas používat. To není morální selhání, to je návrhová vlastnost. Dobré dočištění má staré cesty odstranit z míst, kde se rozhoduje.
+
+### Privacy-first ověření bez nové vrstvy
+
+Ověření posledního dočištění má mít minimální stopu. Často stačí jednovětý závěr v pracovním logu nebo komentář u původní karty. Nepotřebujete ukládat screenshoty, kopie dokumentů, seznam lidí, kteří šablonu otevřeli, ani export z nástroje.
+
+Dobrý privacy-first zápis:
+
+```text
+První běžné použití po dočištění proběhlo bez návratu staré šablony. Dočasný kontrolní podklad nebyl vytvořen.
+```
+
+Pokud musíte ponechat důkaz, držte ho krátce, neosobně a s jasnou životností:
+
+```text
+Důkaz:
+Neosobní poznámka v kartě dočištění.
+
+Retence:
+Zůstává do nejbližšího měsíčního review, potom se sloučí do uzavírací věty nebo smaže.
+```
+
+Privacy-first otázky:
+
+- Vzniká kvůli ověření nový seznam lidí, aktivit nebo zákaznických příkladů?
+- Stačí místo důkazu neosobní závěr?
+- Má případný dočasný podklad vlastníka a datum smazání?
+- Nekopírujeme starou stopu jen proto, abychom dokázali, že existovala?
+- Nevracíme do provozu data, která už byla při dočištění odstraněná?
+
+Ověření nemá znovu vyrábět materiál, který jste právě uklidili. To je drobná absurdita, ale v provozu digitálních produktů překvapivě oblíbená. Nejdřív smažeme export, potom si uděláme screenshot, že jsme export smazali. Papírování v moderním kabátu.
+
+### Karta ověření posledního dočištění
+
+Karta má být ještě kratší než karta dočištění. Slouží jen k uzavření otázky, jestli se stará stopa nevrátila při normální práci.
+
+```text
+Navazuje na dočištění:
+První běžné použití:
+Kdo nebo jaká role místo použila:
+Výsledek:
+Vrátila se stará stopa?
+Vzniklo nové tření?
+Privacy-first stopa:
+Další krok:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Navazuje na dočištění:
+Odstranění starého odkazu na archivní formulář z projektové šablony landing page.
+
+První běžné použití:
+Příprava nové landing page pro konzultační nabídku.
+
+Kdo nebo jaká role místo použila:
+Marketing owner.
+
+Výsledek:
+Drží.
+
+Vrátila se stará stopa?
+Ne. Šablona obsahuje jen aktuální pravidlo pro e-mail, cíl a volitelné URL.
+
+Vzniklo nové tření?
+Ne.
+
+Privacy-first stopa:
+Bez screenshotu a bez exportu. V kartě zůstává jen tento neosobní závěr.
+
+Další krok:
+Bez samostatné akce, téma zůstává v běžném review landing pages.
+
+Datum:
+2026-05-25.
+```
+
+### Mini workshop na 8 minut
+
+Vyberte jedno poslední dočištění, které už čeká na první normální použití.
+
+1. Najděte původní kartu dočištění.
+2. Počkejte na skutečné použití daného místa.
+3. Sledujte, jestli člověk narazí jen na aktuální pravidlo.
+4. Zapište jeden ze stavů: `Drží`, `Drží s drobným jazykovým třením`, `Stopa se vrátila`, `Není to jen stopa`.
+5. Pokud výsledek drží, neotvírejte další práci.
+6. Pokud se stopa vrátila, pojmenujte jedno nejbližší místo zásahu.
+7. Pokud problém není jen stopa, převeďte ho do správné údržbové karty.
+8. Smažte nebo nevytvářejte dočasné důkazy, které nejsou potřeba.
+
+Výstup:
+
+```text
+Poslední dočištění bylo ověřeno při běžném použití a buď se vrátilo do rytmu, nebo se z něj stal jeden jasně pojmenovaný další krok.
+```
+
+### Checklist kapitoly
+
+- Čekali jste na první normální použití místo umělé kontroly?
+- Ověřujete jen dočištění, ne celé pravidlo nebo proces?
+- Je jasné, na jakou kartu dočištění ověření navazuje?
+- Sledujete návrat staré stopy, ne výkon konkrétního člověka?
+- Umíte výsledek zařadit do jednoho ze čtyř stavů?
+- Pokud výsledek drží, nevzniká další samostatná kontrola?
+- Pokud se stopa vrátila, je další zásah omezený na jedno nejbližší místo?
+- Pokud nejde jen o stopu, převedli jste nález do správného typu práce?
+- Nevznikl kvůli ověření nový tracker, export, screenshot nebo seznam aktivit?
+- Stačí neosobní závěr místo detailního důkazu?
+- Má případný dočasný podklad vlastníka a datum smazání?
+- Vrací se téma po ověření do běžného rytmu?
+
+Dobré ověření posledního dočištění je skoro neviditelné. Práce pokračuje, stará stopa se nevrací a nikdo nemusí otevírat detektivní spis, aby pochopil platný stav. Přesně to je cílem: ne další vrstva řízení, ale méně šumu v cestě k rozhodnutí.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha PQ o ověření posledního dočištění při dalším běžném použití: čekání na normální použití, čtyři výsledky ověření, kontrola návratu staré cesty místo výkonu člověka, privacy-first ověřovací stopa, karta ověření, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PP o převodu drobné stopy po první kontrole uzavřené úpravy do posledního dočištění: rozlišení stopy od problému pravidla, nejbližší místo zásahu, krátká pracovní trasa bez historie, privacy-first mazání pomocných stop, karta dočištění, Codyho komentář, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PO o první běžné kontrole po uzavřené drobné úpravě: normální použití, návrat k aktuálnímu pravidlu, provozní signály, čtyři výsledky kontroly, privacy-first stopová hygiena, kontrolní karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PN o uzavření potvrzené drobné úpravy do běžného rytmu: potvrzovací věta, přepis pravidla do kanonického místa, uzavření přechodových artefaktů, napojení na existující review, privacy-first úklid, uzavírací karta, mini workshop a checklist.
