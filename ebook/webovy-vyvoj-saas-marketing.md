@@ -25,6 +25,8 @@ Před otevřením další kapitoly si napište jednu otázku, kvůli které text
 
 Když máte otázek víc, seřaďte je jednoduchým filtrem. Nejdřív vyberte tu, která má přímý dopad na důvěru zákazníka, příjem, provozní riziko nebo množství sbíraných dat. Teprve potom řešte věci, které jsou hlavně kosmetické, interně oblíbené nebo "by se někdy hodily".
 
+Před čtením si zároveň určete stop podmínku: kolik času tomu dáte, jaký výstup má vzniknout a podle čeho poznáte, že už stačí. Bez stop podmínky se praktická iterace snadno tváří jako poctivá práce, ale ve skutečnosti jen odkládá rozhodnutí.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -121719,3 +121721,4 @@ První běžný návrat ke klidu má být krátký a věcný. Buď se ukáže, �
 - 2026-05-24: Doplněna úvodní podkapitola o rozhodovacím záznamu po iteraci: co do něj patří, kde má bydlet, jak držet privacy-first týmovou paměť, kdy rozhodnutí znovu otevřít a praktická šablona s checklistem.
 - 2026-05-24: Doplněna úvodní podkapitola o měsíčním návratu k rozhodnutím: kontrola posledních iterací, stavy rozhodnutí, hledání kolizí, privacy-first úklid, karta review a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o půlročním auditu použitelnosti rukopisu: výběr částí podle reálného použití, stavy pro úpravy, privacy-first kontrola šablon, karta auditu a checklist.
+- 2026-05-25: Doplněna krátká úvodní poznámka o stop podmínce pro čtecí iteraci, aby práce skončila rozhodnutím místo dalším rozšiřováním rozsahu.
