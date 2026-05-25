@@ -124623,8 +124623,220 @@ Oprava je zavřená, aktuální cesta je jasná a po práci nezůstaly zbytečn�
 
 Uzavření drobné opravy není administrativní konec. Je to návrat systému do klidu. Když se podaří, zůstane po něm jen správné pracovní místo, krátká stopa pro budoucí orientaci a méně šumu než předtím. Přesně tak má vypadat údržba webu, SaaS i marketingu, když bere vážně práci lidí i jejich soukromí.
 
+## Příloha QE: První kontrola tiché rutiny po návratu do běžného provozu
+
+Tichá rutina se po uzavření drobné opravy nemá hned měnit v další projekt. Přesto stojí za to se k ní jednou vrátit, když ji někdo použije v normální práci. Ne proto, abyste kontrolovali člověka. Kontrolujete pracovní místo: jestli vede správně i bez historie opravy, bez vysvětlování autora a bez malé ruční podpory bokem.
+
+První kontrola má odpovědět na jednu otázku:
+
+```text
+Funguje rutina sama od sebe, nebo jen díky tomu, že si ještě pamatujeme poslední opravu?
+```
+
+Rozdíl je důležitý. Oprava může vypadat hotově, když ji používá člověk, který ji navrhl. Skutečně hotová je až ve chvíli, kdy se v ní vyzná někdo, kdo nezná celou cestu od slabého signálu přes ověření až po uzavření. Tady se ukáže, jestli jste nechali dobré pracovní místo, nebo jen dobře popsanou minulost.
+
+### Počkejte na přirozený průchod
+
+První kontrolu nevyvolávejte uměle, pokud nejde o kritickou provozní oblast. U drobné rutiny stačí počkat na první běžnou situaci:
+
+- nový člověk otevře rozcestník šablon;
+- obchodník použije aktualizovanou sales kartu;
+- marketér připraví další článek podle zkráceného briefu;
+- support najde správný postup v runbooku;
+- produktový tým sáhne po aktuálním rozhodovacím záznamu.
+
+Umělý test často vytvoří falešně dobrý výsledek, protože všichni vědí, co se právě kontroluje. Přirozený průchod je nudnější, ale cennější. Ukáže, jestli rutina drží v běžném tempu, s běžným rozptýlením a bez slavnostního světla reflektorů.
+
+Krátká startovací věta:
+
+```text
+Kontrolujeme první normální použití rutiny, ne výkon konkrétního člověka.
+```
+
+Tuto větu si napište hlavně tehdy, když kontrola probíhá v týmu. Chrání tón celé práce. Cílem není najít viníka, ale zjistit, zda pracovní místo samo nabízí správný další krok.
+
+### Sledujte tři tiché signály
+
+U tiché rutiny nepotřebujete dashboard. Stačí sledovat tři praktické signály:
+
+1. Dosažení cíle: člověk došel ke správnému výstupu bez ručního vysvětlování.
+2. Míra zaváhání: zastavil se na místě, které mělo být po opravě jasné?
+3. Datová stopa: nevznikly kvůli rutinní práci nové dočasné kopie, exporty, osobní poznámky nebo duplicitní evidence?
+
+První signál říká, jestli rutina plní účel. Druhý ukazuje, jestli v ní zůstalo tření. Třetí drží privacy-first hodnotu i v malých provozních věcech. Právě u malých rutin často vzniká nenápadný nepořádek: kopie šablony "jen pro sebe", screenshot pro vysvětlení, export pro porovnání nebo poznámka s osobním detailem, který už nikdo nepotřebuje.
+
+Praktické pozorování může vypadat takto:
+
+```text
+Situace:
+Příprava nové případové studie.
+
+Správný výstup:
+Použit aktuální brief z rozcestníku.
+
+Zaváhání:
+Krátké hledání názvu sekce, bez potřeby zásahu.
+
+Datová stopa:
+Nevznikl nový export ani kopie staré šablony.
+```
+
+To je dost. Nepotřebujete nahrávku obrazovky, přesný čas práce ani osobní hodnocení. U drobné rutiny je cílem provozní orientace, ne výzkumná studie.
+
+### Rozlišujte čtyři výsledky kontroly
+
+Po prvním běžném použití vyberte jeden stav:
+
+- `Drží`: rutina funguje bez vysvětlování a bez nové datové stopy.
+- `Drží s drobným třením`: výstup vznikl správně, ale jedno místo si zaslouží malé zpřesnění.
+- `Vrací šum`: objevilo se stejné nebo velmi podobné zaváhání jako před opravou.
+- `Mění se kontext`: rutina není problém, ale změnila se práce kolem ní.
+
+Stav `Drží` je nejcennější právě tím, že nevolá po další akci. Zapište krátkou větu a nechte rutinu být.
+
+U stavu `Drží s drobným třením` opravte jen nejbližší formulaci, odkaz, název nebo umístění. Neotvírejte celou kapitolu, playbook ani onboarding. Malé tření chce malou reakci.
+
+Stav `Vrací šum` znamená, že uzavření bylo předčasné nebo oprava minula skutečný problém. Vraťte se ke kartě drobné opravy, ale nerozšiřujte ji potichu. Nový zásah má mít vlastní rozhodnutí.
+
+Stav `Mění se kontext` je častý u webu, SaaS i marketingu. Třeba se změnila nabídka, segment, týmová role nebo zákaznický tok. Pak rutina možná drží, ale už nepatří do stejného pracovního místa. To není selhání opravy. Je to signál pro novou, oddělenou změnu.
+
+### Nepřidávejte proces kvůli jedné kontrole
+
+První kontrola tiché rutiny má být lehká. Pokud kvůli ní vytvoříte pravidelný meeting, nový report a tabulku odpovědností, pravděpodobně jste z drobné opravy udělali větší systémovou změnu. To může být někdy správně, ale musí to být vědomé rozhodnutí, ne vedlejší efekt.
+
+Dobré pravidlo:
+
+```text
+Když rutina drží, nepřidáváme další kontrolní vrstvu.
+```
+
+Kontrolní vrstva se vyplatí jen tehdy, když rutina ovlivňuje kritickou zákaznickou komunikaci, bezpečnost, právní povinnost, peníze, přístupová práva nebo opakované předávání práce mezi více rolemi. U běžné šablony, interního odkazu nebo pracovního checklistu většinou stačí jeden zápis do changelogu.
+
+### Privacy-first kontrola po návratu
+
+Privacy-first otázka při první kontrole zní:
+
+```text
+Zůstalo po běžném použití méně datového nepořádku než před opravou?
+```
+
+Projděte jen nejbližší okolí rutiny:
+
+- nevznikla nová kopie dokumentu s osobními údaji?
+- nezůstaly komentáře, které hodnotí konkrétního člověka místo pracovního místa?
+- nebyl kvůli kontrole přidán nový tracker, nahrávání nebo detailní log?
+- nevrátil se starý export jako "dočasná jistota"?
+- je jasné, kdo smí aktuální artefakt vidět a upravovat?
+
+Kontrola má být proporční. U citlivější práce může být potřeba přesnější evidence, ale pořád platí minimalizace: ukládejte jen to, co pomůže budoucímu rozhodnutí. Zbytek smažte, anonymizujte nebo nechte vůbec nevzniknout.
+
+Lepší zápis:
+
+```text
+Rutina byla použita bez nové kopie dat a bez ručního vysvětlování; drobné zpřesnění názvu sekce zapsáno do rozcestníku.
+```
+
+Horší zápis:
+
+```text
+Při použití rutiny jsme sledovali celý průchod a uložili poznámky, kde přesně člověk váhal.
+```
+
+Druhá věta možná působí pečlivěji, ale pro drobnou rutinu je to příliš. Privacy-first provoz se pozná i podle toho, že nepromění každé zaváhání v archiv osobního chování.
+
+### Kontrolní karta tiché rutiny
+
+```text
+Rutina:
+První přirozené použití:
+Správný výstup:
+Míra zaváhání:
+Datová stopa:
+Výsledek kontroly:
+Malá úprava, pokud je potřeba:
+Co neotevíráme:
+Privacy-first úklid:
+Changelogová věta:
+Další návrat:
+```
+
+Vyplněný příklad:
+
+```text
+Rutina:
+Použití aktuálního briefu pro případovou studii z marketingového rozcestníku.
+
+První přirozené použití:
+Příprava nové případové studie pro B2B službu.
+
+Správný výstup:
+Vznikl brief podle aktuální šablony.
+
+Míra zaváhání:
+Krátké hledání sekce "důkaz", bez ručního zásahu.
+
+Datová stopa:
+Bez nové kopie staré šablony, bez screenshotů a bez osobních poznámek.
+
+Výsledek kontroly:
+Drží s drobným třením.
+
+Malá úprava, pokud je potřeba:
+V rozcestníku přejmenovat odkaz na "Brief případové studie: důkaz a výsledek".
+
+Co neotevíráme:
+Neměníme strukturu všech marketingových šablon ani nezavádíme měření použití.
+
+Privacy-first úklid:
+Dočasná poznámka z kontroly smazána po zapsání changelogové věty.
+
+Changelogová věta:
+Po prvním běžném použití brief drží; odkaz v rozcestníku zpřesněn podle hledané sekce.
+
+Další návrat:
+Bez samostatného termínu; vrátíme se jen při novém slabém signálu.
+```
+
+### Codyho komentář
+
+Tichá rutina je dobrá služka a špatná celebrita. Jakmile ji začnete moc oslavovat, začne kolem sebe přitahovat ceremonie, tabulky a další "ještě radši to budeme hlídat". Codyho komentář: nejlepší výsledek první kontroly je věta "drží, necháme být". V malém týmu je to skoro luxusní disciplína, protože vyžaduje odolat pokušení přidat práci jen proto, že jsme si všimli práce.
+
+### Mini workshop na 7 minut
+
+Vezměte jednu tichou rutinu, která vznikla po drobné opravě.
+
+1. Najděte první běžné použití, které už proběhlo nebo právě probíhá.
+2. Napište, jaký správný výstup měl vzniknout.
+3. Zapište jedno skutečné zaváhání, pokud se objevilo.
+4. Zkontrolujte, jestli nevznikla zbytečná datová stopa.
+5. Vyberte stav: `Drží`, `Drží s drobným třením`, `Vrací šum`, nebo `Mění se kontext`.
+6. Pokud je potřeba úprava, udělejte jen nejbližší malou změnu.
+7. Zapište jednu changelogovou větu a smažte dočasné poznámky.
+
+Výstup:
+
+```text
+Rutina byla poprvé zkontrolována v běžném provozu a buď zůstává bez zásahu, nebo má jednu přesně omezenou úpravu.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete první přirozené použití, ne umělý test?
+- Je jasné, že hodnotíte pracovní místo, ne člověka?
+- Sledujete správný výstup, míru zaváhání a datovou stopu?
+- Vybrali jste jeden ze čtyř stavů kontroly?
+- U stavu `Drží` nepřidáváte zbytečnou kontrolní vrstvu?
+- U drobného tření opravujete jen nejbližší formulaci, odkaz nebo umístění?
+- U návratu šumu zakládáte nové rozhodnutí místo tichého rozšiřování staré opravy?
+- Nevznikly kvůli kontrole nové osobní poznámky, exporty, nahrávky nebo trackery?
+- Je changelogová věta krátká a použitelná bez celé historie?
+- Je jasné, kdy se k rutině vrátit znovu a kdy ji nechat být?
+
+První kontrola tiché rutiny má chránit jednoduchost. Když rutina drží, největší služba je nepřidat jí další zavazadla. Když neudrží, vraťte problém do malé rozhodovací smyčky a opravte nejbližší pracovní místo. Tak se z e-booku nestává muzeum procesů, ale nástroj, který pomáhá webu, SaaS i marketingu fungovat s menším šumem a menší datovou stopou.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha QE o první kontrole tiché rutiny po návratu do běžného provozu: přirozený průchod, tiché signály, čtyři výsledky kontroly, omezení nové procesní vrstvy, privacy-first kontrola, kontrolní karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QD o uzavření ověřené drobné opravy po slabém signálu do tiché rutiny: práce s výsledkem ověření, přepis aktuální cesty bez historie, zavření dočasných háčků, krátká changelogová stopa, privacy-first úklid, uzavírací karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QC o ověření drobné opravy po slabém signálu při přirozeném použití: návrat ke kartě opravy, sledování normálního průchodu, čtyři výsledky ověření, privacy-first evidence bez sledování lidí, ověřovací karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QB o převodu slabého signálu šumu do jedné drobné opravy: potvrzení rozsahu, typy malých oprav, zásah v nejbližším pracovním místě, krátká stopa, privacy-first brzda, přirozené ověření, karta, Codyho komentář, mini workshop a checklist.
