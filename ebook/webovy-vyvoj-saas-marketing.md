@@ -122260,8 +122260,212 @@ Drobné tření po návratu k provozní paměti je převedené do jedné malé �
 
 Paměťová úprava je úspěšná, když se příště nic zvláštního nestane. Člověk najde správné místo, pochopí aktuální pravidlo a nemusí se ptát, proč je v textu starý název nebo vysvětlení dávno zavřené opravy. To je přesně ten typ tiché kvality, který drží web, SaaS i marketingové systémy použitelné i po měsících drobných změn.
 
+## Příloha PY: Ověření paměťové úpravy při dalším přirozeném použití
+
+Paměťová úprava z předchozí přílohy má jednu nevděčnou vlastnost: když funguje, skoro není vidět. Odkaz má správný název, pravidlo je kratší, stará poznámka nepřekáží a člověk pokračuje v práci. Přesně proto se má ověřovat při dalším přirozeném použití, ne samostatným auditem, poradou nebo dotazníkem.
+
+Smyslem ověření není dokázat, že úprava byla geniální. Smyslem je zjistit, jestli drobný šum opravdu zmizel a nevznikl větší problém vedle. Stačí jedna pracovní situace, jeden stručný záznam a jasný závěr.
+
+Dobrá ověřovací věta zní:
+
+```text
+Při dalším běžném použití ověříme, jestli paměťová úprava odstranila původní šum bez otevření nové práce.
+```
+
+Věta drží rozsah. Neříká "zkontrolujeme celou dokumentaci", "změříme používání šablony" ani "uděláme revizi procesu". Kontroluje jednu věc: jestli úprava pomohla v místě, kde měla pomoct.
+
+### Čekejte na normální práci
+
+Paměťovou úpravu neověřujte v umělé situaci. Když člověka posadíte před rozcestník a řeknete mu, že má hledat problém, najde problém. To ale není stejný signál jako běžná práce, kdy potřebuje rychle vybrat šablonu, publikovat text, připravit nabídku nebo projít provozní checklist.
+
+Vhodné ověřovací situace:
+
+- někdo připravuje další případovou studii podle rozcestníku;
+- tým znovu použije stejnou šablonu při měsíčním review;
+- support otevře provozní pravidlo během skutečného dotazu;
+- marketing použije aktualizovaný odkaz při publikaci;
+- nový člověk projde pracovní místo bez znalosti historie.
+
+Nevhodné ověření:
+
+- samostatná schůzka jen kvůli tomu, jestli se lidem líbí nový název;
+- plošná kontrola všech podobných odkazů bez konkrétního signálu;
+- měření otevření dokumentu po jednotlivých lidech;
+- dotazník, který sbírá víc dat než samotná úprava vyžaduje.
+
+Normální práce má jednu výhodu: ukáže, jestli je úprava skutečně součástí systému. Pokud funguje jen ve chvíli, kdy na ni všichni myslí, není to provozní paměť. Je to úkol, který se ještě nevstřebal.
+
+### Sledujte původní šum, ne nové nápady
+
+Při ověření se snadno objeví další věci. Někdo si všimne staršího příkladu, navrhne lepší strukturu, chce přejmenovat sousední dokument nebo rovnou předělat celý rozcestník. Některé návrhy mohou být správné, ale nepatří do ověření paměťové úpravy.
+
+Držte se tří otázek:
+
+1. Našel člověk správné místo bez návratu do historie?
+2. Byl původní šum pryč nebo aspoň menší?
+3. Vznikla kvůli úpravě nová nejasnost?
+
+Pokud odpovědi stačí, ověření je hotové. Nové nápady zapište stranou jen tehdy, když mají konkrétní dopad. Nepřidávejte je automaticky do stejné karty. Malé ověření se jinak promění v magnet na všechen prach v okolí.
+
+Příklad rozlišení:
+
+```text
+Původní šum:
+Název odkazu neodpovídal názvu šablony.
+
+Ověření:
+Autor při další případové studii našel správnou šablonu bez dotazu.
+
+Nový nápad mimo rozsah:
+Zkrátit úvod šablony. Neřešíme v této kartě.
+```
+
+Tento zápis je nudný, a tím pádem dobrý. Nezamlčuje nový podnět, ale nedovolí mu unést ověření.
+
+### Čtyři výsledky ověření
+
+Po přirozeném použití vyberte jeden ze čtyř stavů:
+
+- Potvrdit: původní šum zmizel a úprava může zůstat.
+- Doladit: směr je správný, ale jedna drobnost ještě brzdí práci.
+- Vrátit: úprava vytvořila větší nejasnost než původní šum.
+- Otevřít nový nález: původní šum je vyřešený, ale ukázal se samostatný problém.
+
+Nejčastější past je stav "ještě to sledujeme". U drobné paměťové úpravy bývá zbytečně drahý. Pokud nemáte jasný důvod čekat, raději rozhodněte. Buď úprava stačí, nebo potřebuje jedno doladění, nebo se má vrátit.
+
+Příklad:
+
+```text
+Výsledek:
+Potvrdit.
+
+Důvod:
+Při dalším použití byl vybrán správný odkaz a nebylo potřeba číst starou poznámku.
+
+Co dál:
+Nezakládáme další úkol. Zůstává jen stručný záznam v changelogu.
+```
+
+Když výsledek zní "Otevřít nový nález", nová karta má začít od nuly: vlastní otázka, vlastní rozsah, vlastní privacy-first kontrola. Nepřilepujte ji k paměťové úpravě jen proto, že se objevila ve stejné chvíli.
+
+### Privacy-first ověření bez sledování lidí
+
+Paměťová úprava se ověřuje na systému, ne na člověku. Nezapisujte, kdo přesně váhal, jak dlouho mu trvalo otevřít dokument ani kolikrát klikl. Pokud potřebujete pracovat s příkladem, anonymizujte ho na pracovní situaci.
+
+Stačí tento typ formulace:
+
+```text
+Při další přípravě případové studie byl použit aktualizovaný odkaz bez návratu ke staré kartě.
+```
+
+Není potřeba:
+
+```text
+Jana klikla nejdřív na starý dokument, pak psala Petrovi a po třech minutách otevřela nový odkaz.
+```
+
+Druhá věta možná působí konkrétněji, ale pro tento typ ověření je zbytečně osobní. Cílem je zlepšit pracovní místo. Pokud se opakovaně ukáže, že lidé tápou, popište systémové tření: nejasný název, špatné pořadí, duplicitní odkaz, skryté pravidlo.
+
+Privacy-first pravidlo:
+
+```text
+Ověření drobné úpravy nesmí vytvořit podrobnější stopu o lidech než problém, který řeší.
+```
+
+### Ověřovací karta paměťové úpravy
+
+Použijte ji, když samotný changelog nestačí. U úplně malého zásahu může být karta kratší nebo zůstat jen jako poznámka u původní úpravy.
+
+```text
+Paměťová úprava:
+Původní šum:
+Přirozené použití:
+Co člověk potřeboval udělat:
+Co fungovalo:
+Co ještě šumělo:
+Nové nálezy mimo rozsah:
+Výsledek: Potvrdit / Doladit / Vrátit / Otevřít nový nález
+Datová stopa:
+Co zapisujeme do changelogu:
+Co mažeme nebo necháváme zavřené:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Paměťová úprava:
+Přejmenování odkazu na aktuální šablonu případové studie.
+
+Původní šum:
+Starý název odkazu vypadal jako druhá šablona.
+
+Přirozené použití:
+Příprava další případové studie.
+
+Co člověk potřeboval udělat:
+Najít správnou šablonu a začít psát osnovu.
+
+Co fungovalo:
+Aktualizovaný název stačil k výběru správné šablony.
+
+Co ještě šumělo:
+Nic v místě odkazu.
+
+Nové nálezy mimo rozsah:
+Úvod šablony by mohl být kratší.
+
+Výsledek:
+Potvrdit.
+
+Datová stopa:
+Bez jmen, screenshotů a měření otevření dokumentu.
+
+Co zapisujeme do changelogu:
+Paměťová úprava ověřena při dalším použití.
+
+Co mažeme nebo necháváme zavřené:
+Dočasnou poznámku u původní úpravy smažeme po potvrzení v changelogu; starou kartu neotevíráme.
+
+Datum:
+2026-05-25.
+```
+
+### Mini workshop na 6 minut
+
+Vezměte jednu dokončenou paměťovou úpravu a počkejte na její první běžné použití.
+
+1. Pojmenujte původní šum jednou větou.
+2. Zapište přirozenou situaci, ve které se úprava použila.
+3. Odpovězte na tři otázky: správné místo, původní šum, nová nejasnost.
+4. Vyberte jeden ze čtyř výsledků.
+5. Oddělte nové nápady mimo rozsah.
+6. Zapište changelog nebo krátkou kartu bez osobních detailů.
+
+Výstup:
+
+```text
+Paměťová úprava je potvrzená, doladěná, vrácená nebo oddělená od nového nálezu.
+```
+
+### Checklist kapitoly
+
+- Ověřujete úpravu při normální práci, ne při umělém auditu?
+- Je jasně pojmenovaný původní šum?
+- Sledujete jen to, jestli původní šum zmizel nebo se zmenšil?
+- Nevzniká z ověření plošná revize všech podobných míst?
+- Umíte vybrat jeden ze čtyř výsledků?
+- Jsou nové nápady oddělené od této ověřovací karty?
+- Nezapisujete osobní výkon, jména, klikání ani zbytečné screenshoty?
+- Stačí changelog, pokud karta nepřidá rozhodovací hodnotu?
+- Je jasné, co zůstává zavřené?
+- Je po ověření provozní paměť lehčí, ne složitější?
+
+Ověření paměťové úpravy je malé, ale důležité. Zavírá poslední otázku: nebyla drobná oprava jen pocitově čistší, ale opravdu pomohla dalšímu použití? Když ano, nechte ji zmizet do běžné práce. To je pro provoz často nejlepší možný výsledek: žádný nový proces, žádné další sledování, jen méně šumu.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha PY o ověření paměťové úpravy při dalším přirozeném použití: čekání na normální práci, sledování původního šumu, čtyři výsledky ověření, privacy-first evidence bez sledování lidí, ověřovací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PX o převodu drobného šumu po návratu k provozní paměti do jedné paměťové úpravy: potvrzení, že paměť drží, výběr nejbližšího místa rozhodnutí, typy malých úprav, zkracování historie, privacy-first brzda, karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PW o první běžný návrat k provozní paměti po uzavřené klidové opravě: ověření v reálné práci, přednost aktuálního pravidla před historií, čtyři výsledky návratu, neotevírání uzavřené karty bez důvodu, privacy-first návrat bez sledování lidí, návratová karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PV o uzavření potvrzené klidové opravy do provozní paměti: oddělení aktuálního pravidla od historie, přepis nejbližšího pracovního místa, zavření pomocných háčků, opakovatelné poučení, privacy-first úklid stop, uzavírací karta, mini workshop a checklist.
