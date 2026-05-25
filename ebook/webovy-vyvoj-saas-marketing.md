@@ -2165,6 +2165,151 @@ Při další kontrole veřejné edice.
 
 Codyho komentář: směrovky jsou redakční dopravní značky. Nikdo nechce na každé křižovatce číst učebnici silničního provozu. Chce vědět, kudy jet, kdy dát přednost a kde najde mapu, když se ztratí. U e-booku je to stejné, jen místo blinkru používáme checklist.
 
+## Redukční rozhodnutí po mapě duplicit
+
+Mapa duplicit a směrovky jsou příprava. Další krok je rozhodnout, co se s konkrétní duplicitou opravdu stane. Tady se editor nesmí schovat za obecné "zkrátíme to později". Každé duplicitní místo potřebuje jeden stav: ponechat, zkrátit, sloučit, přesunout, archivovat nebo smazat.
+
+Dobré redukční rozhodnutí neřeší celý rukopis. Řeší jednu pracovní situaci a jeden čtenářský problém. Například: čtenář má po ověření malé změny vědět, kam zapsat rozhodnutí, jak uklidit dočasná data a kdy se k tématu vrátit. Pokud se tato odpověď opakuje ve třech částech, redukční rozhodnutí určí, která část je zdroj pravdy a co se stane s ostatními.
+
+Praktická věta redukce:
+
+```text
+V situaci [konkrétní práce] drží úplné pravidlo [kanonické místo]; část [vedlejší místo] se mění na [stav], protože [důvod].
+```
+
+Příklad:
+
+```text
+V situaci ověření malé marketingové změny drží úplné pravidlo úvodní podkapitola o ověření prvního úkolu; příloha k drobné úpravě se mění na směrovku, protože má jen připomenout normální použití a návrat staré práce.
+```
+
+Tato věta je malá, ale důležitá. Brání tomu, aby se editace změnila v pocitovou debatu o tom, který odstavec je hezčí. Rozhoduje podle práce čtenáře, ne podle autorské náklonnosti k textu.
+
+### Šest stavů duplicitní části
+
+U každé duplicitní části použijte jeden z těchto stavů:
+
+- Ponechat: opakování je záměrné, krátké a pomáhá v daném kontextu.
+- Zkrátit: část má zůstat, ale jen jako připomínka nebo směrovka.
+- Sloučit: dvě části se spojí do jednoho kanonického výkladu.
+- Přesunout: jedinečný příklad, checklist nebo privacy-first hranice patří jinam.
+- Archivovat: část už nepatří do hlavní čtenářské cesty, ale může zůstat jako interní nebo historická stopa.
+- Smazat: část nepřidává rozhodnutí, příklad, hranici ani důkaz.
+
+Stav `Ponechat` nepoužívejte jako pohodlné odložení. Pokud část zůstává, napište proč. Například: "ponechat, protože kapitola o marketingu musí mít vlastní krátkou privacy-first připomínku pro lidi, kteří nepůjdou do analytického checklistu". To je legitimní. "Ponechat, protože se mi to líbí" je autorský plyšák, ne ediční důvod.
+
+### Rozhodujte podle ceny dalšího čtení
+
+Každý duplicitní odstavec má provozní cenu. Čtenář ho musí přeskočit, znovu vyhodnotit nebo se rozhodnout, jestli platí tady i jinde. Editor ho musí udržovat. Tým podle něj může vytvořit druhé pravidlo, druhou šablonu nebo druhý sběr dat.
+
+Při rozhodování se ptejte:
+
+- Zrychlí ponechání této části další práci čtenáře?
+- Ztratí se po zkrácení konkrétní rozhodnutí?
+- Je toto nejlepší místo pro úplnou šablonu?
+- Neudržujeme dvě pravidla jen proto, že vznikla v různých iteracích?
+- Nevytváří duplicita druhý sběr dat, druhý export nebo druhý retenční slib?
+
+Pokud část zvyšuje cenu čtení a nepřidává jasnou hodnotu, zkraťte ji. Pokud přidává jedinečný příklad, přesuňte příklad do kanonického místa a zbytek zkraťte. Pokud pomáhá jen historicky vysvětlit, jak jste se k pravidlu dostali, dejte ji do changelogu nebo pryč z hlavní trasy.
+
+### Redukční karta
+
+Jedno rozhodnutí zapište do karty. Ne kvůli byrokracii, ale kvůli tomu, aby další editor věděl, proč část zmizela nebo se změnila na směrovku.
+
+```text
+Pracovní situace:
+Duplicitní části:
+Kanonické místo:
+Rozhodnutí:
+Důvod:
+Co přesouváme:
+Co zkracujeme nebo mažeme:
+Privacy-first kontrola:
+Co zůstává mimo rozsah:
+Ověření při dalším čtení:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní situace:
+Úklid dočasných podkladů po ověření malé změny.
+
+Duplicitní části:
+Úvodní úklid po zavedení pravidla, příloha k uzavření drobné úpravy a příloha k provozní paměti.
+
+Kanonické místo:
+Úvodní podkapitola "Úklid po zavedení pracovního pravidla".
+
+Rozhodnutí:
+Přílohy zůstanou jen jako směrovky k místu práce a nebudou znovu vysvětlovat celý úklidový postup.
+
+Důvod:
+Čtenář potřebuje v přílohách potvrdit konkrétní krok, ne číst třetí variantu stejného pravidla.
+
+Co přesouváme:
+Jednu větu o mazání dočasných exportů po anonymizovaném závěru.
+
+Co zkracujeme nebo mažeme:
+Opakovaný výklad rozdílu mezi dočasným důkazem a rozhodovací stopou.
+
+Privacy-first kontrola:
+Kanonické místo musí jasně držet účel, minimum, přístup a retenci dočasných podkladů.
+
+Co zůstává mimo rozsah:
+Neřešíme všechny přílohy najednou; v této iteraci upravujeme jen jednu navazující část.
+
+Ověření při dalším čtení:
+Čtenář má z přílohy poznat, co udělat teď, a pro detail má jasnou cestu na kanonické místo.
+```
+
+### Privacy-first redukce
+
+Redukce textu nesmí znamenat redukci odpovědnosti. Když škrtáte opakované části o datech, vždy ověřte, že v kanonickém místě zůstaly čtyři věci:
+
+1. Účel: proč údaj nebo stopa vzniká.
+2. Minimum: co opravdu stačí.
+3. Přístup: kdo s tím pracuje.
+4. Retence: kdy se to smaže, anonymizuje nebo přesune do rozhodovacího záznamu.
+
+Pokud některá z těchto věcí byla jen ve vedlejší části, nepovažujte ji za duplicitní šum. Přesuňte ji do zdroje pravdy. Teprve potom vedlejší část zkraťte.
+
+Příklad krátké privacy-first směrovky po redukci:
+
+```text
+Dočasné podklady k ověření nevytvářejte znovu. Použijte existující rozhodovací záznam a po potvrzení změny smažte pracovní exporty podle úklidového pravidla.
+```
+
+Tato věta je lepší než další půlstránka výkladu, pokud kanonické místo obsahuje kompletní postup. Čtenář dostane akci, ne mlhu. A data nedostanou druhý život jen proto, že se o nich psalo na více místech.
+
+### Mini workshop na 12 minut
+
+1. Vyberte jednu duplicitní pracovní situaci.
+2. Napište redukční větu.
+3. Označte kanonické místo.
+4. Dejte každé vedlejší části jeden ze šesti stavů.
+5. Přeneste maximálně tři jedinečné prvky.
+6. Zkraťte nebo odstraňte jednu vedlejší část.
+7. Ověřte privacy-first čtyřlístek: účel, minimum, přístup, retence.
+8. Zapište redukční kartu a další téma nechte na příště.
+
+Výstup má být jedna hotová ediční změna. Ne seznam třiceti nápadů. Rukopis se zkracuje stejným způsobem, jakým se staví dobrý produkt: malý zásah, jasné rozhodnutí, ověření, úklid.
+
+### Checklist redukčního rozhodnutí
+
+- Vybrali jste jednu pracovní situaci?
+- Má duplicitní téma jasné kanonické místo?
+- Dostala každá vedlejší část stav ponechat, zkrátit, sloučit, přesunout, archivovat nebo smazat?
+- Je u stavu `Ponechat` napsaný konkrétní důvod?
+- Přesunuli jste jedinečné příklady, stop pravidla nebo privacy-first hranice?
+- Zkrátili jste aspoň jedno místo, ne jen vyrobili další mapu?
+- Zůstává čtenáři jasná akce v místě, kde se nachází?
+- Neztratily se účel, minimum, přístup ani retence dat?
+- Je rozhodnutí zapsané v redukční kartě nebo pracovním logu?
+- Ví další editor, kde má příště upravit zdroj pravdy?
+
+Codyho komentář: škrtání není trest za předchozí psaní. Je to servis pro dalšího čtenáře. Text, který se umí zkrátit, stárne líp než text, který si každou historickou větu brání jako rodinné stříbro.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -123267,6 +123412,7 @@ Tichá provozní paměť je úspěšná právě tím, že na sebe nekřičí. Č
 
 ## Pracovní log
 
+- 2026-05-25: Doplněna úvodní podkapitola o redukčním rozhodnutí po mapě duplicit: šest stavů duplicitní části, rozhodování podle ceny dalšího čtení, redukční karta, privacy-first kontrola účelu, minima, přístupu a retence, mini workshop a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o převodu duplicit do směrovek: kanonické místo, struktura krátké směrovky, přenos jedinečných detailů, privacy-first kontrola po zkrácení, karta převodu a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o ročním rozhodnutí o tvaru rukopisu: volba mezi živým e-bookem, veřejnou zkrácenou edicí, playbooky a interní znalostní bází, práce se škrtáním, privacy-first distribuce, roční karta a checklist.
 - 2026-05-25: Doplněna Příloha PZ o uzavření potvrzené paměťové úpravy do tiché provozní paměti: přepis aktuálního pravidla do nejbližšího pracovního místa, pracovní věta, zavření dočasných podkladů, oddělení nových nálezů, privacy-first mazání stop, uzavírací karta, mini workshop a checklist.
