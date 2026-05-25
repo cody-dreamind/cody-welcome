@@ -1979,6 +1979,192 @@ Taková iterace je malá, ale má velký dopad. Čtenář příště nezabloudí
 
 Mapa duplicit je přechod mezi psaním a editací. Psaní přidává možnosti. Editace vybírá cestu. A u pracovního e-booku je výběr cesty často větší služba čtenáři než další chytrá kapitola.
 
+## Převod duplicit do směrovek
+
+Mapa duplicit sama o sobě rukopis nezkrátí. Je to jen rentgen. Hodnota vznikne až ve chvíli, kdy z jedné duplicitní oblasti uděláte konkrétní ediční zásah: vyberete kanonické místo, ponecháte jedinečné části a z ostatních výkladů uděláte krátké směrovky.
+
+Směrovka není odbytý odstavec. Je to vědomé rozhodnutí, že čtenář v daném místě nepotřebuje celý výklad znovu. Potřebuje rychle poznat, že téma existuje, proč je relevantní právě tady a kam jít pro plnou šablonu nebo pravidlo. Dobrá směrovka šetří čas, ale neztrácí kontext.
+
+Praktická otázka zní:
+
+```text
+Co musí čtenář v této části vědět, aby se rozhodl správně, a co může bezpečně najít jinde?
+```
+
+Pokud na ni neumíte odpovědět, ještě nestříhejte. Nejdřív se vraťte k mapě duplicit a pojmenujte pracovní situaci přesněji. Jinak budete zkracovat podle dojmu, ne podle použití.
+
+### Co má zůstat v kanonickém místě
+
+Kanonické místo má nést hlavní váhu. Patří do něj:
+
+- úplné vysvětlení rozhodovací situace;
+- nejpoužitelnější šablona;
+- hlavní checklist;
+- privacy-first hranice: účel dat, minimální rozsah, retence a dodavatelská stopa;
+- jeden dobrý příklad, který ukazuje práci v praxi;
+- odkaz na související části, pokud čtenář řeší širší kontext.
+
+Kanonické místo nemá být nejdelší jen proto, že tam zbylo nejvíc textu. Má být nejbližší okamžiku, kdy čtenář opravdu rozhoduje. Pokud se plné pravidlo o privacy-first analytice nachází v kapitole o marketingové kampani, ale tým ho potřebuje při návrhu měřicího plánu, kanonické místo je měřicí checklist, ne kampaň.
+
+Příklad rozhodnutí:
+
+```text
+Duplicitní téma:
+Ověření malé změny bez nového sledování.
+
+Kanonické místo:
+Úvodní podkapitola "Ověření prvního úkolu bez velkého projektu".
+
+Co zůstává tam:
+Ověřovací otázka, nejmenší důkaz, rozhodovací stavy a privacy-first kontrola.
+
+Co se jinde zkracuje:
+Opakované vysvětlení, proč není potřeba nový dashboard.
+
+Směrovka v navazujících částech:
+Při ověření použijte nejmenší důkaz z existující práce a vraťte se k ověřovací otázce z úvodní smyčky.
+```
+
+Takové rozhodnutí pomáhá i budoucí údržbě. Když se jednou změní pravidlo, kde začíná zbytečné měření, editor ví, které místo upravit jako první.
+
+### Jak napsat dobrou směrovku
+
+Směrovka má tři části:
+
+1. Kontext: proč se téma objevuje právě tady.
+2. Minimum: co má čtenář udělat teď.
+3. Odkaz: kde je plné pravidlo, šablona nebo checklist.
+
+Šablona:
+
+```text
+V této části řešíte [konkrétní situaci].
+Nepřepisujte celé pravidlo znovu; použijte [jedna akce nebo otázka].
+Plnou šablonu drží [kanonické místo].
+```
+
+Příklad:
+
+```text
+V této části řešíte úpravu formuláře po prvním ověření.
+Nepřidávejte nové měření jen kvůli pocitu jistoty; nejdřív použijte existující poptávky, rozhovory nebo support dotazy.
+Plnou šablonu ověření drží úvodní smyčka "Ověření prvního úkolu bez velkého projektu".
+```
+
+Směrovka by měla být krátká. Pokud má tři odstavce, pravděpodobně jste začali znovu psát výklad. V takové chvíli si položte nepříjemnou otázku: je tato část opravdu samostatná, nebo má být jen odkazem na hlavní pravidlo?
+
+### Přeneste jedinečné části, potom škrtejte
+
+Největší riziko zkracování je ztratit dobrý detail. Proto před smazáním duplicitní části projděte, jestli obsahuje něco, co kanonické místo nemá:
+
+- lepší příklad z praxe;
+- ostřejší stop pravidlo;
+- přesnější privacy-first hranici;
+- užitečnější formulaci pro nový tým;
+- varování před častou chybou;
+- kratší checklistový bod.
+
+Pokud ano, neponechávejte kvůli tomu celou duplicitní část. Přeneste jedinečný detail do kanonického místa a teprve potom vedlejší část zkraťte. Tím se rukopis zlepšuje, ne jen hubne.
+
+Praktický postup:
+
+1. Označte jednu duplicitní část jako vedlejší.
+2. Vypište z ní maximálně tři jedinečné prvky.
+3. Rozhodněte, které z nich patří do kanonického místa.
+4. Přesuňte nebo parafrázujte jen ty prvky, které opravdu pomáhají rozhodnutí.
+5. Vedlejší část zkraťte na směrovku.
+6. Zkontrolujte, že čtenář pořád ví, co má udělat.
+
+Cílem není vytvořit dokonalou kompilaci všeho dobrého. Cílem je, aby nejlepší pracovní pravidlo bylo na jednom místě a ostatní části nezvyšovaly údržbový dluh.
+
+### Privacy-first kontrola po zkrácení
+
+Zkracování může omylem poškodit privacy-first ochranu. Když smažete opakovaný odstavec, možná smažete i jedinou větu o retenci, účelu dat nebo vypnutí dočasného exportu. Proto po každém převodu do směrovky zkontrolujte:
+
+- zůstává u kanonického místa jasný účel sbíraných údajů?
+- ví čtenář, jaké minimum dat stačí?
+- nezmizelo retenční pravidlo nebo podmínka smazání pracovních podkladů?
+- neodkazuje směrovka na část, která je interní, neveřejná nebo pro čtenáře nedostupná?
+- nevzniká kvůli zkrácení dojem, že se má sbírat víc dat "pro jistotu"?
+
+Pokud privacy-first hranice byla jen ve vedlejší části, přesuňte ji do kanonického místa. Potom ve směrovce stačí krátká připomínka:
+
+```text
+Datovou stopu nemapujte znovu; použijte kanonickou privacy-first kartu a doplňte jen rozdíl pro tuto situaci.
+```
+
+Tohle je praktické i bezpečné. Čtenář nedostane pět variant stejné datové tabulky, ale zároveň neztratí povinnost přemýšlet o účelu, přístupu a retenci.
+
+### Karta převodu do směrovky
+
+Jednu ediční změnu uzavřete krátkou kartou:
+
+```text
+Pracovní situace:
+Kanonické místo:
+Vedlejší část:
+Co bylo duplicitní:
+Co bylo jedinečné:
+Co se přesunulo do kanonického místa:
+Nová směrovka:
+Privacy-first kontrola:
+Co se nezkracuje:
+Vlastník:
+Termín návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní situace:
+Ověření malé marketingové změny.
+
+Kanonické místo:
+Ověření prvního úkolu bez velkého projektu.
+
+Vedlejší část:
+Jedna z příloh k provoznímu ověření po drobné úpravě.
+
+Co bylo duplicitní:
+Ověřovací otázka, rozhodovací stavy a varování před novým dashboardem.
+
+Co bylo jedinečné:
+Krátké pravidlo, že se má kontrolovat návrat staré práce, ne výkon konkrétního člověka.
+
+Co se přesunulo do kanonického místa:
+Jedna věta o kontrole návratu staré práce.
+
+Nová směrovka:
+Při ověření drobné marketingové změny použijte úvodní ověřovací otázku a sledujte, jestli se nevrací staré ruční obcházení. Detailní šablonu drží úvodní smyčka.
+
+Privacy-first kontrola:
+Zůstává pravidlo nepřidávat nové sledování lidí; důkaz má být agregovaný nebo ruční.
+
+Co se nezkracuje:
+Příklad s formulářem, protože pomáhá prodejnímu webu.
+
+Vlastník:
+Editor rukopisu.
+
+Termín návratu:
+Při další kontrole veřejné edice.
+```
+
+### Checklist převodu duplicit do směrovek
+
+- Vybrali jste jednu pracovní situaci, ne celý rukopis?
+- Má téma jedno jasné kanonické místo?
+- Víte, které vedlejší části budou jen směrovky?
+- Přenesli jste jedinečné příklady, stop pravidla nebo privacy-first hranice?
+- Zkrátili jste opakovaný výklad, ne užitečné rozhodnutí?
+- Je nová směrovka krátká a použitelná v místě čtení?
+- Neodkazuje na nedostupnou, interní nebo zastaralou část?
+- Zůstává jasný účel, minimum a retence dat?
+- Zmenšil se rukopis nebo údržbový dluh aspoň v jednom konkrétním místě?
+- Je v pracovním logu zapsané, co je nově kanonické?
+
+Codyho komentář: směrovky jsou redakční dopravní značky. Nikdo nechce na každé křižovatce číst učebnici silničního provozu. Chce vědět, kudy jet, kdy dát přednost a kde najde mapu, když se ztratí. U e-booku je to stejné, jen místo blinkru používáme checklist.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -123081,6 +123267,7 @@ Tichá provozní paměť je úspěšná právě tím, že na sebe nekřičí. Č
 
 ## Pracovní log
 
+- 2026-05-25: Doplněna úvodní podkapitola o převodu duplicit do směrovek: kanonické místo, struktura krátké směrovky, přenos jedinečných detailů, privacy-first kontrola po zkrácení, karta převodu a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o ročním rozhodnutí o tvaru rukopisu: volba mezi živým e-bookem, veřejnou zkrácenou edicí, playbooky a interní znalostní bází, práce se škrtáním, privacy-first distribuce, roční karta a checklist.
 - 2026-05-25: Doplněna Příloha PZ o uzavření potvrzené paměťové úpravy do tiché provozní paměti: přepis aktuálního pravidla do nejbližšího pracovního místa, pracovní věta, zavření dočasných podkladů, oddělení nových nálezů, privacy-first mazání stop, uzavírací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PY o ověření paměťové úpravy při dalším přirozeném použití: čekání na normální práci, sledování původního šumu, čtyři výsledky ověření, privacy-first evidence bez sledování lidí, ověřovací karta, mini workshop a checklist.
