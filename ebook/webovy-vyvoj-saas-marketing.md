@@ -121809,8 +121809,233 @@ Potvrzená klidová oprava je uzavřená do provozní paměti: současné pravid
 
 Uzavřená klidová oprava má zanechat méně věcí než před začátkem. Jeden přesnější odkaz, kratší pravidlo, čistší changelog, žádné dočasné důkazy. To je malá práce s velkým dopadem: systém si pamatuje správné minimum a lidé se nemusí učit další vrstvu procesu.
 
+## Příloha PW: První běžný návrat k provozní paměti po uzavřené klidové opravě
+
+Uzavřená klidová oprava vypadá hotově, ale skutečný test přijde až ve chvíli, kdy se někdo k danému pracovnímu místu vrátí bez znalosti celé historie. Neřeší už původní kartu, nehledá starou poznámku, nepamatuje si debatní kontext. Prostě potřebuje udělat práci a sáhne do provozní paměti.
+
+Smysl této přílohy je ověřit, že provozní paměť po uzavřené malé opravě slouží jako současné pravidlo, ne jako archiv drobné minulosti. Pokud člověk najde správné místo, pochopí aktuální stav a dokončí práci bez návratu ke starým stopám, oprava se opravdu vstřebala do běžného provozu.
+
+Dobrá návratová věta zní:
+
+```text
+Při prvním běžném návratu ověříme, že provozní paměť vede k aktuálnímu pravidlu bez toho, aby člověk musel číst historii klidové opravy.
+```
+
+Tato věta má být malá. Neříká, že se má znovu kontrolovat celý systém dokumentace. Říká jen, že po uzavření drobné opravy má pracovní paměť zůstat lehká a použitelná.
+
+### Testujte paměť v běžné práci
+
+První návrat neplánujte jako zvláštní audit, pokud k tomu není rizikový důvod. Počkejte na normální situaci, ve které se dané místo opravdu použije: příprava nové případové studie, úprava stránky služby, odpověď na poptávku, kontrola formuláře, předání šablony kolegovi nebo běžná měsíční údržba.
+
+Při návratu sledujte tři praktické věci:
+
+1. Člověk našel současné pracovní místo bez obcházení.
+2. Současné pravidlo mu stačilo k rozhodnutí.
+3. Stará historie opravy nebyla potřeba pro dokončení práce.
+
+Příklad:
+
+```text
+Situace:
+Nový autor připravuje případovou studii a otevírá publikační rozcestník.
+
+Co sledujeme:
+Najde aktuální šablonu podle současného názvu a nemusí hledat starou kartu klidové opravy.
+
+Co nesledujeme:
+Nehodnotíme kvalitu celé případové studie, rychlost autora ani kompletní stav publikačního systému.
+```
+
+Takové ověření je zdravé, protože se drží přirozeného použití. Není to zkouška člověka. Je to zkouška toho, jestli pracovní paměť drží aktuální pravdu.
+
+### Současné pravidlo má být vidět dřív než historie
+
+Provozní paměť po uzavřené opravě často selže tím, že je sice přesná, ale těžká. Hlavní pravidlo obsahuje vysvětlení staré chyby, odkaz na původní kartu, komentář k ověření a poznámku, proč se to kdysi měnilo. Výsledek je formálně dohledatelný, ale prakticky otravný.
+
+Při prvním návratu se proto ptejte:
+
+- Vidí člověk nejdřív aktuální pravidlo?
+- Je historie schovaná v changelogu nebo uzavřeném záznamu?
+- Nevrací text do práce starý název, starý odkaz nebo starý workaround?
+- Není hlavní místo napsané pro revizora místo pro člověka, který má něco udělat?
+
+Krátký rozdíl:
+
+```text
+Dobře:
+Pro případovou studii použij aktuální šablonu v publikačním playbooku.
+
+Těžké:
+Po opravě z 25. 5. už nepoužívej starý název šablony; historicky byl odkaz v rozcestníku špatně, viz uzavřená karta...
+```
+
+Historie může být důležitá, ale nemá stát v cestě práci. Pokud je potřeba kvůli odpovědnosti, dejte ji do changelogu. Pokud je potřeba kvůli učení, napište krátké opakovatelné pravidlo. Pokud je to jen památka na drobný zásah, nechte ji zmizet.
+
+### Rozlišujte čtyři výsledky návratu
+
+Po prvním běžném návratu vyberte jeden ze čtyř stavů:
+
+- Paměť drží: aktuální pravidlo stačilo a stará stopa se nevrátila.
+- Paměť drží s drobným šumem: práce šla dokončit, ale jedno místo ještě mate.
+- Historie překáží: starý kontext je v hlavním pracovním místě a komplikuje použití.
+- Nový problém: návrat ukázal jiné tření, které nepatří k původní klidové opravě.
+
+Stav `Paměť drží` má vést k tichému uzavření. Nepřidávejte další kontrolu jen proto, že věci fungují. Stačí krátký závěr v běžném changelogu nebo vůbec žádná nová stopa, pokud už existuje uzavírací zápis.
+
+Stav `Paměť drží s drobným šumem` dovoluje jednu malou lokální úpravu: přepsat větu, sjednotit název, odstranit duplicitní poznámku, zkrátit odkaz. Pokud by bylo potřeba měnit více míst, už nejde o drobný šum a patří to do normální údržbové fronty.
+
+Stav `Historie překáží` je častější, než se zdá. Tým s dobrým úmyslem nechal v hlavním pravidle příliš mnoho vysvětlení. Řešení není nové školení. Řešení je přepsat pracovní místo tak, aby bylo znovu pro práci.
+
+Stav `Nový problém` oddělte od původní opravy. To, že jste na nové tření narazili při návratu k uzavřené opravě, ještě neznamená, že patří do stejné smyčky. Jinak se staré malé opravy budou donekonečna rozrůstat.
+
+### Neotevírejte uzavřenou kartu kvůli každému návratu
+
+Uzavřená karta má zůstat uzavřená, dokud není skutečný důvod ji znovu otevřít. První běžný návrat nemá být rituál, při kterém se znovu čte celá historie, potvrzuje původní rozhodnutí a dopisuje další vrstva poznámek.
+
+Kartu znovu otevřete jen tehdy, když platí aspoň jedna z těchto vět:
+
+- původní oprava se ukázala jako chybná;
+- aktuální pravidlo vede člověka špatným směrem;
+- stará stopa se vrátila do kanonického pracovního místa;
+- uzavření smazalo informaci, která je pro práci opravdu potřeba;
+- vzniklo riziko pro zákazníka, bezpečnost, data nebo veřejnou komunikaci.
+
+Ve všech ostatních případech pracujte s nejbližším aktuálním místem. Přepište větu, odstraňte starou poznámku, doplňte krátký changelog nebo založte samostatný nový podnět.
+
+Praktické pravidlo:
+
+```text
+Uzavřenou kartu používáme jako důkaz minulého rozhodnutí, ne jako pracovní rozhraní pro běžné použití.
+```
+
+To chrání tým před jedním z nejtišších druhů provozního dluhu: před dokumentací, která je přesná, ale nutí lidi číst minulost pokaždé, když chtějí udělat současnou práci.
+
+### Privacy-first návrat bez sledování lidí
+
+První návrat k provozní paměti se dá ověřit bez toho, aby se z něj stalo sledování jednotlivců. Nepotřebujete nahrávku obrazovky, heatmapu dokumentu, export otevření souboru ani seznam lidí, kteří se spletli. Potřebujete vědět, jestli současné pracovní místo vedlo k dobrému rozhodnutí.
+
+Stačí neosobný záznam:
+
+```text
+Návrat:
+Při běžné přípravě případové studie byl použit aktuální publikační rozcestník.
+
+Výsledek:
+Paměť drží. Aktuální šablona byla nalezena bez návratu ke staré kartě.
+
+Datová stopa:
+Bez jmen, bez screenshotu, bez měření otevření dokumentu.
+```
+
+Pokud návrat ukázal drobný šum, zapisujte šum, ne člověka:
+
+```text
+Drobné tření:
+V hlavním odkazu zůstala stará poznámka v závorce.
+
+Lokální úprava:
+Poznámka odstraněna, changelog ponechán beze změny.
+```
+
+Codyho komentář: když potřebujete pro ověření provozní paměti sledovat konkrétní lidi, pravděpodobně měříte špatnou věc. Dobrá dokumentace se pozná podle toho, že lidem pomáhá, ne podle toho, že umíme přesně pojmenovat, kdo se v ní kdy ztratil.
+
+### Návratová karta provozní paměti
+
+Použijte ji jen tehdy, když nestačí krátký changelog nebo ústní závěr v týmu.
+
+```text
+Uzavřená klidová oprava:
+Kdy nastal první běžný návrat:
+Jaké pracovní místo bylo použité:
+Co mělo být podle paměti jasné:
+Výsledek návratu:
+Případný drobný šum:
+Co bylo upraveno:
+Co zůstává zavřené:
+Nové nálezy mimo původní opravu:
+Datová stopa:
+Závěr:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Uzavřená klidová oprava:
+Sjednocení názvu odkazu na publikační šablonu v rozcestníku.
+
+Kdy nastal první běžný návrat:
+Při přípravě další případové studie.
+
+Jaké pracovní místo bylo použité:
+Publikační rozcestník.
+
+Co mělo být podle paměti jasné:
+Která šablona je aktuální a kde začít.
+
+Výsledek návratu:
+Paměť drží s drobným šumem.
+
+Případný drobný šum:
+U odkazu zůstala zbytečná poznámka o starém názvu.
+
+Co bylo upraveno:
+Poznámka odstraněna z hlavního odkazu.
+
+Co zůstává zavřené:
+Původní karta klidové opravy a ověřovací poznámka.
+
+Nové nálezy mimo původní opravu:
+Žádné.
+
+Datová stopa:
+Bez jmen, bez screenshotů, bez nové evidence používání.
+
+Závěr:
+Provozní paměť je použitelná; hlavní pracovní místo už ukazuje jen aktuální pravidlo.
+
+Datum:
+2026-05-25.
+```
+
+### Mini workshop na 7 minut
+
+Vezměte jednu uzavřenou klidovou opravu, ke které se tým poprvé přirozeně vrátil.
+
+1. Pojmenujte běžnou pracovní situaci, ve které návrat nastal.
+2. Ověřte, že člověk použil aktuální pracovní místo, ne uzavřenou kartu.
+3. Zkontrolujte, jestli současné pravidlo bylo vidět dřív než historie.
+4. Vyberte jeden ze čtyř výsledků návratu.
+5. Pokud zůstal drobný šum, opravte jen nejbližší pracovní místo.
+6. Nové nálezy oddělte od původní klidové opravy.
+7. Zapište neosobný závěr a smažte případné pomocné poznámky bez účelu.
+
+Výstup:
+
+```text
+První běžný návrat potvrdil, že provozní paměť drží aktuální pravidlo bez zbytečné historie, nebo ukázal jednu malou lokální úpravu.
+```
+
+### Checklist kapitoly
+
+- Nastal návrat v běžné práci, ne v umělém auditu?
+- Použil člověk aktuální pracovní místo místo uzavřené karty?
+- Bylo současné pravidlo jasné bez čtení historie opravy?
+- Nevrací hlavní text starý název, starý odkaz nebo starý workaround?
+- Má návrat jeden ze čtyř stavů?
+- Zůstává případná úprava lokální a malá?
+- Neotevíráte uzavřenou kartu bez skutečného důvodu?
+- Jsou nové nálezy oddělené od původní klidové opravy?
+- Stačí changelog nebo krátký neosobný závěr místo nové evidence?
+- Nevznikl screenshot, export, tracking otevření dokumentu ani osobní hodnocení?
+- Může další člověk použít místo bez znalosti celé historie?
+- Je po návratu provozní paměť lehčí, ne těžší?
+
+První běžný návrat je poslední tichá zkouška uzavřené klidové opravy. Když dopadne dobře, není potřeba slavit novým procesem. Stačí nechat systém pracovat: aktuální pravidlo je na svém místě, historie je uklizená a lidé nemusí nést v hlavě, co už za ně má nést provozní paměť.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha PW o první běžný návrat k provozní paměti po uzavřené klidové opravě: ověření v reálné práci, přednost aktuálního pravidla před historií, čtyři výsledky návratu, neotevírání uzavřené karty bez důvodu, privacy-first návrat bez sledování lidí, návratová karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PV o uzavření potvrzené klidové opravy do provozní paměti: oddělení aktuálního pravidla od historie, přepis nejbližšího pracovního místa, zavření pomocných háčků, opakovatelné poučení, privacy-first úklid stop, uzavírací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PU o ověření klidové opravy při nejbližším přirozeném použití: čekání na běžnou pracovní situaci, kontrola původního šumu, čtyři výsledky ověření, privacy-first evidence bez stop navíc, ověřovací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PT o převodu drobné stopy po návratu ke klidu do jedné klidové opravy: rozlišení drobné a nedrobné stopy, oprava nejbližšího pracovního místa, omezení rozsahu, privacy-first brzda, karta opravy, mini workshop a checklist.
