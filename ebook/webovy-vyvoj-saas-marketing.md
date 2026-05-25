@@ -124426,8 +124426,206 @@ Víme, jestli drobná oprava opravdu snížila původní šum, nebo jestli je po
 
 Drobné opravy se nesmí hromadit jako nedokončené dobré úmysly. Každá potřebuje lehké ověření, ale jen tak lehké, aby nezvětšilo systém, který měla ztišit. Přirozené použití je nejlepší test: pokud člověk projde bez starého šumu, oprava drží. Pokud ne, máte aspoň přesnější informaci, co už není drobná oprava.
 
+## Příloha QD: Uzavření ověřené drobné opravy po slabém signálu do tiché rutiny
+
+Ověřená drobná oprava má skončit nenápadně. To je trochu proti lidské povaze: když už jsme něco našli, popsali, opravili a ověřili, láká nás z toho udělat pravidlo, tabulku, proces nebo aspoň malý památníček v dokumentaci. Jenže u slabých signálů je nejlepší výsledek často ten, že se věc vrátí do tiché rutiny a nikdo už o ní nemusí přemýšlet.
+
+Uzavření má odpovědět na jednu praktickou otázku:
+
+```text
+Co musí zůstat na místě, aby oprava držela i bez znalosti celé historie?
+```
+
+Všechno ostatní je kandidát na úklid. Karta opravy, dočasná poznámka, screenshot, starý odkaz, přechodový komentář i vysvětlení, proč k opravě došlo, mohou být užitečné při práci. Po ověření ale snadno začnou překážet. Člověk, který přijde později, nepotřebuje archeologii. Potřebuje správnou aktuální cestu.
+
+### Začněte výsledkem ověření
+
+Neuzavírejte opravu jen proto, že byla provedena. Vraťte se k výsledku z předchozí přílohy a vyberte jen stavy, které opravdu dovolují zavření:
+
+- `Drží`: oprava splnila účel a starý šum se při normálním použití nevrátil.
+- `Drží s drobnou stopou`: hlavní problém zmizel a zbývá poslední malé dočištění, které nemění pravidlo.
+
+U stavů `Nestačí` a `Bez důkazu` opravu nezavírejte. První znamená, že z drobného signálu vzniklo větší rozhodnutí. Druhý znamená, že ještě neproběhlo normální použití. Zavření bez důkazu je jen hezčí název pro zametení nejistoty pod koberec. Koberec pak vypadá čistě, ale proces pod ním pořád trochu křupe.
+
+Krátký zápis před uzavřením:
+
+```text
+Výsledek ověření:
+Drží / Drží s drobnou stopou.
+
+Co se potvrdilo:
+Aktuální pracovní místo vede člověka správně bez původního slabého signálu.
+```
+
+Pokud neumíte druhou větu napsat konkrétně, nejste připraveni zavírat. Nejdřív doplňte, co přesně oprava zlepšila: nalezení správné šablony, pochopení dalšího kroku, odstranění starého odkazu, zkrácení poznámky nebo vyčištění jedné kolize v názvech.
+
+### Přepište aktuální cestu, ne historii
+
+Uzavření má zanechat správnou aktuální cestu v místě, kde člověk opravdu pracuje. Typicky to bude:
+
+- rozcestník šablon;
+- onboardingový krok;
+- interní checklist;
+- poznámka u formuláře;
+- sales karta;
+- provozní runbook;
+- krátký changelog u konkrétního artefaktu.
+
+Nepřepisujte celou historii do hlavního pravidla. Věta "tento odkaz byl změněn kvůli slabému signálu z minulého onboardingu" může být pravdivá, ale pro běžné použití je většinou rušivá. Lepší je jednoduchý aktuální popis:
+
+```text
+Pro novou případovou studii začněte z rozcestníku marketingových šablon.
+```
+
+Pokud je historie důležitá, patří do krátkého changelogu, ne do pracovního kroku. Pracovní krok má vést k akci. Changelog má vysvětlit změnu těm, kdo se později ptají, proč se cesta změnila.
+
+### Zavřete dočasné háčky
+
+Drobné opravy často po sobě nechají malé háčky: poznámku "ověřit příště", odkaz na starou kartu, komentář v dokumentu, připomínku v úkolu nebo kopii staré šablony s názvem "pro jistotu". Po ověření projděte jen nejbližší okolí opravy a rozhodněte, co s nimi.
+
+Pravidlo je jednoduché:
+
+- co vede na aktuální cestu, ponechte;
+- co vysvětluje jen přechodovou práci, zkraťte nebo archivujte;
+- co odkazuje na starou cestu, smažte nebo přesměrujte;
+- co by vyžadovalo další samostatné rozhodnutí, vyjměte do nové karty a nezavírejte potichu.
+
+Nejčastější chyba je ponechat starý odkaz "kdyby se hodil". U interních šablon a procesů je takový odkaz past. Někdo ho za tři měsíce najde, bude vypadat legitimně a původní šum se vrátí v hezčím kabátu.
+
+Praktická uzavírací věta:
+
+```text
+Aktuální cesta je jedna; starý odkaz je odstraněn; karta opravy zůstává jen jako uzavřený changelogový záznam.
+```
+
+### Kdy stačí changelogová stopa
+
+U malé opravy většinou nepotřebujete samostatnou dokumentaci. Stačí jedna věta v changelogu u artefaktu nebo v rozhodovacím logu týmu:
+
+```text
+2026-05-25: Odkaz v onboardingovém kroku vede na rozcestník šablon; stará šablona byla odstraněna z pracovního toku po ověření při dalším zadání.
+```
+
+Takový zápis má tři části: co se změnilo, kde to platí a že ověření proběhlo. Nepotřebuje jména, časové měření, screenshoty ani dlouhé zdůvodnění. Pokud později někdo narazí na podobný problém, changelog mu ukáže, že nejde o náhodu. Ale běžnému člověku nebude stát v cestě.
+
+Samostatný záznam dává smysl jen tehdy, když oprava ovlivní víc míst najednou, mění vlastnictví, ruší používanou šablonu nebo má dopad na zákaznickou komunikaci. Pak už možná nejde o drobnou opravu, ale o malou provozní změnu. Ta si zaslouží vlastní kartu.
+
+### Privacy-first uzavření znamená méně stop
+
+Při uzavření se ptejte hlavně na to, jakou datovou stopu po sobě práce nechává. U drobných oprav je správná odpověď často: méně než předtím.
+
+Zkontrolujte:
+
+- zůstaly někde osobní poznámky z ověření?
+- jsou dočasné screenshoty, exporty nebo nahrávky pořád potřeba?
+- obsahuje uzavírací zápis jména lidí, která nejsou nutná pro vlastnictví?
+- vede starý odkaz na materiál s daty, který už nemá účel?
+- přidala oprava nové sledování, které po ověření nedává smysl?
+
+Privacy-first provoz není jen o tom, kde běží server. Je i o tom, jestli po každé malé změně nenecháváte v systému zbytečné stopy. Interní procesy umí sbírat překvapivě osobní data: kdo zaváhal, kdo použil špatnou šablonu, kdo potřeboval pomoc. Pro uzavření drobné opravy většinou stačí anonymizovaný provozní výsledek.
+
+Lepší zápis:
+
+```text
+Při dalším onboardingu byla použita správná cesta z rozcestníku; starý odkaz odstraněn.
+```
+
+Horší zápis:
+
+```text
+Nový kolega ztratil 12 minut hledáním šablony, po opravě už chybu neudělal.
+```
+
+Druhá věta možná zní konkrétněji, ale zbytečně hodnotí člověka a ukládá detail, který pro další práci není potřeba. Chceme zlepšit pracovní místo, ne budovat malý archiv drobných selhání.
+
+### Uzavírací karta
+
+```text
+Původní slabý signál:
+Drobná oprava:
+Výsledek ověření:
+Aktuální pracovní místo:
+Co zůstává:
+Co se maže nebo archivuje:
+Changelogová věta:
+Co neotevíráme:
+Privacy-first úklid:
+Datum dalšího přirozeného návratu, pokud je potřeba:
+```
+
+Vyplněný příklad:
+
+```text
+Původní slabý signál:
+Nový člověk otevřel starou šablonu případové studie z onboardingové poznámky.
+
+Drobná oprava:
+Odkaz v onboardingovém kroku vede na rozcestník marketingových šablon.
+
+Výsledek ověření:
+Drží s drobnou stopou; rozcestník byl použit správně, starý název zůstal jen v jedné poznámce.
+
+Aktuální pracovní místo:
+Onboardingový krok pro první případovou studii a rozcestník marketingových šablon.
+
+Co zůstává:
+Jeden odkaz na rozcestník a aktuální název šablony.
+
+Co se maže nebo archivuje:
+Starý odkaz v poznámce, pomocná připomínka k ověření a dočasná karta opravy.
+
+Changelogová věta:
+Odkaz v onboardingovém kroku vede na rozcestník šablon; starý název v poznámce byl odstraněn po ověření při dalším zadání.
+
+Co neotevíráme:
+Neměníme strukturu onboardingu, nepřepisujeme všechny marketingové šablony a nezavádíme sledování použití.
+
+Privacy-first úklid:
+Bez osobních poznámek, screenshotů a časového měření; zůstává jen provozní changelogová věta.
+
+Datum dalšího přirozeného návratu, pokud je potřeba:
+Není potřeba samostatná kontrola; místo se znovu ukáže při běžném onboardingu.
+```
+
+### Codyho komentář
+
+Tichá rutina je podceňovaný výstup. V produktové a marketingové práci občas trpíme tím, že každá oprava chce vlastní mikroceremonii, protože jinak nemáme pocit, že se něco stalo. Jenže dobrý systém se nepozná podle počtu záznamů. Pozná se podle toho, že člověk dojde správnou cestou bez malého dramatu v pozadí. Codyho komentář: když se po drobné opravě nikdo nemusí ptát "proč to tak je", vyhráli jste.
+
+### Mini workshop na 6 minut
+
+Vezměte jednu ověřenou drobnou opravu.
+
+1. Přečtěte výsledek ověření a potvrďte, že stav je `Drží` nebo `Drží s drobnou stopou`.
+2. Najděte jedno aktuální pracovní místo, kde má oprava zůstat.
+3. Napište jednu větu aktuální cesty bez historie.
+4. Odstraňte nebo archivujte nejbližší dočasné háčky.
+5. Zapište jednu changelogovou větu.
+6. Smažte osobní a dočasné podklady, které už nemají účel.
+
+Výstup:
+
+```text
+Oprava je zavřená, aktuální cesta je jasná a po práci nezůstaly zbytečné stopy.
+```
+
+### Checklist kapitoly
+
+- Uzavíráte jen opravu se stavem `Drží` nebo `Drží s drobnou stopou`?
+- Umíte jednou větou říct, co se ověřením potvrdilo?
+- Je aktuální cesta zapsaná v místě, kde člověk opravdu pracuje?
+- Neopisujete do hlavního pravidla historii opravy?
+- Odstranili jste staré odkazy, přechodové poznámky a pomocné připomínky?
+- Stačí jedna changelogová věta místo nové dokumentační vrstvy?
+- Nezůstaly po ověření osobní poznámky, screenshoty, exporty nebo zbytečné stopy?
+- Je jasné, co se neotevírá jako nový projekt?
+- Pokud z opravy vznikl větší dopad, založili jste samostatné rozhodnutí místo tichého zavření?
+- Umí další člověk použít aktuální cestu bez znalosti celé historie?
+
+Uzavření drobné opravy není administrativní konec. Je to návrat systému do klidu. Když se podaří, zůstane po něm jen správné pracovní místo, krátká stopa pro budoucí orientaci a méně šumu než předtím. Přesně tak má vypadat údržba webu, SaaS i marketingu, když bere vážně práci lidí i jejich soukromí.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha QD o uzavření ověřené drobné opravy po slabém signálu do tiché rutiny: práce s výsledkem ověření, přepis aktuální cesty bez historie, zavření dočasných háčků, krátká changelogová stopa, privacy-first úklid, uzavírací karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QC o ověření drobné opravy po slabém signálu při přirozeném použití: návrat ke kartě opravy, sledování normálního průchodu, čtyři výsledky ověření, privacy-first evidence bez sledování lidí, ověřovací karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QB o převodu slabého signálu šumu do jedné drobné opravy: potvrzení rozsahu, typy malých oprav, zásah v nejbližším pracovním místě, krátká stopa, privacy-first brzda, přirozené ověření, karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QA o prvním signálu, že tichá provozní paměť znovu šumí: slabé signály v běžné práci, ověření nejbližšího pracovního místa, čtyři stavy návratu šumu, privacy-first kontrola bez sledování lidí, karta, mini workshop a checklist.
