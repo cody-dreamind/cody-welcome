@@ -1609,6 +1609,223 @@ Za šest měsíců nebo při přípravě veřejné verze.
 
 Půlroční audit je brzda proti nekonečnému růstu rukopisu. V dobrém digitálním systému není síla v tom, že všechno zůstane dostupné navždy. Síla je v tom, že aktuální práce má jasnou cestu, staré věci mají stav a data nezůstávají ležet jen proto, že se kdysi hodila.
 
+## Roční rozhodnutí o tvaru rukopisu
+
+Půlroční audit říká, které části rukopisu fungují a které drhnou. Jednou za rok je ale potřeba udělat tvrdší rozhodnutí: jaký tvar má rukopis mít dál. Ne jestli je text zajímavý. Ne kolik nových témat by se ještě dalo přidat. Ale jestli má e-book zůstat jedním dlouhým pracovním nástrojem, zkrátit se do veřejné edice, rozdělit se na samostatné playbooky, nebo se některé části mají přesunout jen do interní týmové paměti.
+
+Roční rozhodnutí není literární hodnocení. Je to produktové rozhodnutí o znalostním systému. Rukopis má své uživatele, vstupní trasy, údržbu, náklady a datovou stopu. Pokud se o něj nikdo nestará jako o produkt, začne se chovat jako sklad: pořád něco přibývá, ale cesta k užitečné polici je čím dál delší.
+
+Začněte otázkou:
+
+```text
+Jaký tvar rukopisu nejlépe pomůže čtenáři udělat jedno lepší rozhodnutí během příštího roku?
+```
+
+Tohle je záměrně přísná otázka. Pokud odpověď zní "přidáme další kapitoly", musí být jasné, komu tím zkrátíte práci. Pokud odpověď zní "všechno necháme", musí být jasné, proč současná délka nepřekáží použití. Pokud odpověď zní "rozdělíme to", musí být jasné, jak se zabrání tomu, aby vzniklo pět nových zdrojů pravdy.
+
+### Čtyři možné tvary dalšího roku
+
+Roční review by nemělo končit obecným "budeme pokračovat". Vyberte jeden hlavní tvar:
+
+- Živý e-book: jeden zdroj pravdy zůstává hlavním formátem a dál se upravuje podle čtenářských tras.
+- Veřejná zkrácená edice: hlavní text se zkrátí pro lidi mimo tým a interní podklady zůstanou oddělené.
+- Sada playbooků: rukopis se rozdělí podle pracovních situací, například nový web, SaaS MVP, privacy-first provoz a marketingový rytmus.
+- Interní znalostní báze: veřejný e-book se dál nerozšiřuje a hodnota se přesune do provozních šablon, checklistů a rozhodovacích záznamů.
+
+Každý tvar má jinou cenu. Živý e-book je jednoduchý na správu, ale může bobtnat. Veřejná edice je čitelnější, ale vyžaduje tvrdé škrtání. Playbooky jsou praktičtější pro konkrétní situace, ale hrozí duplicity. Interní znalostní báze je nejblíž práci, ale ztrácí sílu veřejného materiálu a SEO hodnotu.
+
+Praktický výběr:
+
+```text
+Hlavní čtenář příštího roku:
+Nejčastější pracovní situace:
+Největší současné tření:
+Tvar, který tření nejvíc snižuje:
+Tvar, který by jen vypadal hezky:
+Rozhodnutí:
+```
+
+Příklad:
+
+```text
+Hlavní čtenář příštího roku:
+Zakladatel malého B2B SaaS nebo služby, který potřebuje zlepšit web, měření a prodej bez růstu trackerů.
+
+Nejčastější pracovní situace:
+Potřebuje během dvou hodin upravit stránku, formulář, obsahovou trasu nebo provozní pravidlo.
+
+Největší současné tření:
+Rukopis obsahuje hodně užitečných šablon, ale nový čtenář někdy neví, kterou otevřít první.
+
+Tvar, který tření nejvíc snižuje:
+Veřejná zkrácená edice plus tři samostatné playbooky.
+
+Tvar, který by jen vypadal hezky:
+Dalších deset příloh bez prořezání vstupních tras.
+
+Rozhodnutí:
+Příští rok nerozšiřujeme hlavní rukopis plošně. Nejdřív z něj vytáhneme veřejnou edici a playbook pro privacy-first web.
+```
+
+### Co porovnat před rozhodnutím
+
+Roční rozhodnutí se nemá opírat o náladu autora. Vezměte malý, ale konkrétní balíček důkazů:
+
+- poslední půlroční audit použitelnosti;
+- pět rozhodovacích záznamů, které podle rukopisu opravdu vznikly;
+- tři části, které někdo chtěl použít, ale zasekl se v nich;
+- jednu čtenářskou trasu pro web, jednu pro SaaS a jednu pro marketing;
+- seznam částí, které se opakují nebo mají podobný checklist;
+- privacy-first nálezy: kde text vede ke sběru, ukládání, předávání nebo retenci dat.
+
+U každé položky si položte dvě otázky:
+
+1. Pomáhá současný tvar rychleji udělat rozhodnutí?
+2. Snížil by jiný tvar šum, duplicity nebo datovou stopu?
+
+Pokud se část často používá, ale lidé ji hledají přes autora nebo chat, není problém v obsahu. Je problém v navigaci. Pokud se část čte, ale nevede k žádnému pracovnímu výstupu, není problém v navigaci. Je problém v použitelnosti. Pokud se část používá jen interně a obsahuje citlivé příklady, možná nemá být ve veřejné edici vůbec.
+
+### Rozhodujte i o škrtání
+
+Roční práce na rukopisu nesmí automaticky znamenat další růst. Někdy je největší hodnota ve zkrácení, sloučení nebo přesunu.
+
+Použijte pět stavů:
+
+- Ponechat v hlavním rukopisu: část vede k rozhodnutí i bez dalšího kontextu.
+- Zkrátit: část je správná, ale cesta k pointě je dlouhá.
+- Sloučit: dvě nebo více částí řeší stejný pracovní okamžik.
+- Přesunout: část patří do playbooku, interní šablony nebo znalostní báze.
+- Archivovat: část má historickou hodnotu, ale nemá vést běžnou práci.
+
+Příklad rozhodnutí o jedné části:
+
+```text
+Část:
+Série příloh o uzavírání drobných provozních úprav.
+
+Současná hodnota:
+Dobře popisuje disciplínu uzavírání práce a privacy-first úklid stop.
+
+Současné tření:
+Pro veřejného čtenáře je moc jemná a může působit jako opakování.
+
+Stav:
+Sloučit do jednoho provozního playbooku.
+
+Co zůstává v hlavním rukopisu:
+Princip: uzavírejte malé změny do pracovního místa, mažte dočasné podklady a neotevírejte další kontrolu bez důvodu.
+
+Co se přesouvá:
+Detailní karty, mini workshopy a varianty kontrol.
+```
+
+Tím se neztrácí práce. Jen se dostává blíž situaci, ve které ji někdo opravdu potřebuje. Hlavní rukopis nemá nést všechny varianty jen proto, že byly poctivě napsané.
+
+### Privacy-first rozhodnutí o tvaru
+
+Tvar rukopisu ovlivňuje i soukromí. Veřejná edice, interní playbook, PDF export, newsletterová série, RSS seriál a interní znalostní báze nemají stejnou datovou stopu.
+
+Před rozhodnutím si napište:
+
+- Jaké údaje bude nový tvar sbírat od čtenáře?
+- Bude potřeba formulář, nebo stačí přímé stažení a RSS?
+- Vzniknou nové exporty, mailing listy, CRM poznámky nebo analytické eventy?
+- Kde bude zdroj pravdy a kdo k němu má přístup?
+- Co se stane se starými verzemi, PDF soubory, pracovními kopiemi a neveřejnými příklady?
+- Jak dlouho budou zůstávat zpětné vazby, testovací poznámky a čtenářské podněty?
+
+Privacy-first varianta není automaticky ta nejtišší. Někdy dává smysl sbírat zpětnou vazbu, aby se text zlepšil. Rozdíl je v tom, že sběr má mít účel, hranici a konec. Pokud pro veřejnou edici stačí anonymní zpětná vazba e-mailem a agregované návštěvnostní signály, není potřeba budovat složitý funnel s profilací čtenářů.
+
+Codyho komentář: když e-book učí privacy-first provoz, nemůže se sám distribuovat jako hladový lead magnet, který výměnou za PDF chce e-mail, firmu, obrat, velikost týmu a ještě souhlas s pěti follow-upy. To by bylo jako prodávat minimalismus ve skladu palet.
+
+### Roční karta tvaru rukopisu
+
+Na konci ročního rozhodnutí má vzniknout jedna karta. Ne plán na dvacet stran. Jedna karta, která řekne, co bude rukopis příští rok znamenat.
+
+```text
+Období:
+Hlavní čtenář:
+Hlavní pracovní situace:
+Co v současném rukopisu drží:
+Co nejvíc drhne:
+Zvolený tvar:
+Co ponecháváme v hlavním rukopisu:
+Co zkracujeme nebo slučujeme:
+Co přesouváme do playbooku nebo interní báze:
+Co archivujeme:
+Privacy-first rozhodnutí:
+První nejmenší krok:
+Co letos vědomě nerozšiřujeme:
+Vlastník:
+Termín návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Období:
+Příštích 12 měsíců.
+
+Hlavní čtenář:
+Zakladatel nebo malý tým, který staví web, SaaS nebo marketing bez zbytečné ztráty kontroly nad daty.
+
+Hlavní pracovní situace:
+Vybrat jednu změnu, udělat ji, ověřit ji a zavřít ji do provozu.
+
+Co v současném rukopisu drží:
+Praktické checklisty, privacy-first brány a rozhodovací karty.
+
+Co nejvíc drhne:
+Délka příloh a opakování podobných provozních smyček.
+
+Zvolený tvar:
+Veřejná zkrácená edice plus samostatný playbook pro privacy-first web.
+
+Co ponecháváme v hlavním rukopisu:
+Principy, pracovní trasy, hlavní kapitoly a nejpoužívanější šablony.
+
+Co zkracujeme nebo slučujeme:
+Podobné přílohy k uzavírání malých provozních změn.
+
+Co přesouváme do playbooku nebo interní báze:
+Detailní mini workshopy a varianty kontrol.
+
+Co archivujeme:
+Části, které už řeší jen historickou publikační fázi.
+
+Privacy-first rozhodnutí:
+Distribuce přes přímou URL a RSS; bez povinného e-mailu pro stažení; zpětná vazba jen dobrovolně a s jasnou retenční větou.
+
+První nejmenší krok:
+Vybrat deset nejpoužívanějších částí a označit jejich stav: ponechat, zkrátit, sloučit, přesunout, archivovat.
+
+Co letos vědomě nerozšiřujeme:
+Nepřidáváme další dlouhou sérii příloh, dokud není hotová navigace veřejné edice.
+
+Vlastník:
+Editor rukopisu.
+
+Termín návratu:
+Za rok nebo před vydáním nové veřejné edice.
+```
+
+### Checklist ročního rozhodnutí
+
+- Rozhodujete o tvaru rukopisu, ne jen o dalším tématu?
+- Je jasný hlavní čtenář příštího roku?
+- Je popsaná pracovní situace, ve které má rukopis nejvíc pomáhat?
+- Máte důkazy z reálného použití, ne jen autorský pocit?
+- Vybrali jste jeden hlavní tvar dalšího roku?
+- Víte, co zůstává v hlavním rukopisu?
+- Víte, co zkrátit, sloučit, přesunout nebo archivovat?
+- Nezakládáte nové playbooky bez rozhodnutí o zdroji pravdy?
+- Má nový tvar privacy-first distribuční pravidla?
+- Nevzniká kvůli distribuci zbytečný formulář, tracker nebo dlouhá retence zpětné vazby?
+- Existuje jeden nejmenší první krok?
+- Je zapsané, co letos vědomě nerozšiřujete?
+
+Roční rozhodnutí chrání rukopis před tím, aby se stal obětí vlastního úspěchu. Když text pomáhá, přirozeně přitahuje další nápady, příklady a šablony. Právě proto potřebuje občas říct: tohle zůstává, tohle se krátí, tohle se přesouvá a tohle už nevede práci. Dobrý e-book není ten, který přežil rok beze změny. Dobrý e-book je ten, který po roce ví, čím má být dál.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -122711,6 +122928,7 @@ Tichá provozní paměť je úspěšná právě tím, že na sebe nekřičí. Č
 
 ## Pracovní log
 
+- 2026-05-25: Doplněna úvodní podkapitola o ročním rozhodnutí o tvaru rukopisu: volba mezi živým e-bookem, veřejnou zkrácenou edicí, playbooky a interní znalostní bází, práce se škrtáním, privacy-first distribuce, roční karta a checklist.
 - 2026-05-25: Doplněna Příloha PZ o uzavření potvrzené paměťové úpravy do tiché provozní paměti: přepis aktuálního pravidla do nejbližšího pracovního místa, pracovní věta, zavření dočasných podkladů, oddělení nových nálezů, privacy-first mazání stop, uzavírací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PY o ověření paměťové úpravy při dalším přirozeném použití: čekání na normální práci, sledování původního šumu, čtyři výsledky ověření, privacy-first evidence bez sledování lidí, ověřovací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PX o převodu drobného šumu po návratu k provozní paměti do jedné paměťové úpravy: potvrzení, že paměť drží, výběr nejbližšího místa rozhodnutí, typy malých úprav, zkracování historie, privacy-first brzda, karta, mini workshop a checklist.
