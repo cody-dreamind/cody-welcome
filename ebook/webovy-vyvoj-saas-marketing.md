@@ -1826,6 +1826,159 @@ Za rok nebo před vydáním nové veřejné edice.
 
 Roční rozhodnutí chrání rukopis před tím, aby se stal obětí vlastního úspěchu. Když text pomáhá, přirozeně přitahuje další nápady, příklady a šablony. Právě proto potřebuje občas říct: tohle zůstává, tohle se krátí, tohle se přesouvá a tohle už nevede práci. Dobrý e-book není ten, který přežil rok beze změny. Dobrý e-book je ten, který po roce ví, čím má být dál.
 
+## Mapa duplicit před zkrácením rukopisu
+
+Jakmile roční rozhodnutí řekne, že rukopis potřebuje zkrátit, sloučit nebo rozdělit do playbooků, nezačínejte mazáním. Nejdřív si udělejte mapu duplicit. Jinak hrozí dvě špatné varianty: buď smažete užitečný detail jen proto, že se opakoval, nebo naopak necháte pět podobných částí, protože každá "má něco do sebe". To druhé zní laskavě k autorovi, ale krutě ke čtenáři.
+
+Duplicita v pracovním e-booku neznamená jen stejnou větu. Často jde o stejný rozhodovací okamžik, stejný checklist, stejnou privacy-first brzdu nebo stejnou šablonu v jiné košili. Pokud čtenář po třech kapitolách pořád vyplňuje podobné pole "rozhodnutí, vlastník, ověření, termín", možná je to silný opakovaný vzor. A možná je to jen únavné kopírování, které mělo být jednou kanonickou šablonou.
+
+Cílem mapy duplicit není rukopis potrestat za délku. Cílem je poznat, které opakování pomáhá učení a které jen zvětšuje vzdálenost k práci.
+
+### Najděte duplicity podle situace
+
+Neprocházejte text jen očima editora. Projděte ho jako člověk, který řeší konkrétní situaci:
+
+- potřebuji zlepšit prodejní stránku;
+- chci spustit SaaS MVP;
+- potřebuji nastavit privacy-first analytiku;
+- zavírám experiment a převádím výsledek do pravidla;
+- připravuji veřejnou verzi e-booku;
+- předávám standard dalšímu člověku.
+
+U každé situace si zapište, na kolik míst rukopis čtenáře pošle. Pokud jedna situace vede na jednu kapitolu, jednu přílohu a jeden checklist, je to v pořádku, pokud mají jasně odlišnou roli. Pokud ale všechny tři části odpovídají na stejnou otázku podobným způsobem, vzniká ediční dluh.
+
+Praktická tabulka:
+
+```text
+Pracovní situace:
+Část A:
+Část B:
+Část C:
+Co se opakuje:
+Co je v každé části jedinečné:
+Kanonické místo:
+Co zkrátit:
+Co přesunout:
+Co archivovat:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní situace:
+Uzavření malé změny po ověření.
+
+Část A:
+Ověření prvního úkolu bez velkého projektu.
+
+Část B:
+Převod ověřeného úkolu do pracovního pravidla.
+
+Část C:
+Úklid po zavedení pracovního pravidla.
+
+Co se opakuje:
+Rozhodnutí, vlastník, termín návratu, privacy-first kontrola datové stopy.
+
+Co je jedinečné:
+Část A řeší důkaz, část B standardizaci, část C úklid stop.
+
+Kanonické místo:
+Úvodní pracovní smyčka.
+
+Co zkrátit:
+Opakované vysvětlení vlastníka a termínu.
+
+Co přesunout:
+Detailní úklidovou kartu do samostatného provozního playbooku.
+
+Co archivovat:
+Starší varianty stejné šablony, pokud už nemají unikátní použití.
+```
+
+### Rozlišujte čtyři typy opakování
+
+Ne každé opakování je chyba. V pracovním textu existují aspoň čtyři druhy:
+
+1. Výukové opakování: klíčový princip se vrací v různých kontextech, aby si ho čtenář spojil s praxí.
+2. Navigační opakování: krátká připomínka pomáhá čtenáři vědět, kde je a kam pokračovat.
+3. Šablonové opakování: stejná struktura se používá pro různé situace, protože tým podle ní pracuje.
+4. Redakční duplicita: text říká totéž znovu, ale nepřidává nové rozhodnutí, příklad ani hranici.
+
+První tři typy mohou zůstat, pokud jsou krátké a slouží čtenáři. Čtvrtý typ je kandidát na škrt. Rozdíl poznáte jednoduchou otázkou: kdybych tuhle část odstranil, ztratí čtenář schopnost udělat lepší rozhodnutí? Pokud ne, nejspíš držíte text ze sentimentu, ne z užitečnosti.
+
+Codyho komentář: autor má ke svým odstavcům vztah podobný jako produktový tým ke starým funkcím. "Někdo to určitě používá" je pěkná věta, ale bez důkazu je to jen gauč pro nerozhodnost.
+
+### Vyberte kanonické místo
+
+Když dvě části řeší stejný okamžik, určete jednu jako kanonické místo. To neznamená, že ostatní zmizí. Znamená to, že hlavní vysvětlení, šablona a checklist budou žít na jednom místě a ostatní části na něj jen krátce navážou.
+
+Kanonické místo vyberte podle tří kritérií:
+
+- čtenář ho najde v okamžiku, kdy problém opravdu řeší;
+- část obsahuje nejúplnější, ale pořád praktické vysvětlení;
+- má nejmenší riziko, že se z ní stanou citlivé interní poznámky nebo dlouhá historie.
+
+Příklad:
+
+```text
+Duplicitní téma:
+Privacy-first kontrola před novým měřením.
+
+Kanonické místo:
+Kapitola 32: Checklist pro privacy-first analytiku.
+
+Ostatní výskyty:
+Krátká připomínka v kapitolách o marketingu, launchi a onboardingových metrikách.
+
+Pravidlo:
+V ostatních částech zůstane jen otázka "jaké rozhodnutí tím měříme a jaké minimum dat stačí?" plus odkaz na checklist.
+```
+
+Tím se sníží údržba. Když se pravidlo změní, neupravujete sedm míst. Upravíte jedno kanonické místo a ostatní části zůstanou jako směrovky.
+
+### Privacy-first kontrola duplicit
+
+Duplicitní text často vytváří duplicitní data. Jedna šablona chce e-mail kvůli zpětné vazbě, druhá URL kvůli auditu, třetí poznámky z rozhovoru kvůli rozhodnutí. Každý údaj může být v dané situaci rozumný. Problém vzniká, když se šablony používají společně a tým najednou sbírá víc, než potřebuje.
+
+Při mapování duplicit si proto ke každé opakované šabloně napište:
+
+- Jaké údaje žádá?
+- Je účel údajů jasný přímo v šabloně?
+- Má šablona retenční větu?
+- Je stejný údaj žádán ještě jinde?
+- Dá se údaj nahradit agregovaným signálem, anonymizovaným příkladem nebo odkazem na existující záznam?
+
+Pravidlo pro zkracování: pokud dvě části žádají stejná data pro podobné rozhodnutí, ponechte sběr jen v kanonické části. V odkazující části napište, že se má použít existující záznam. Nejčistší data jsou ta, která nevzniknou podruhé.
+
+### Mini postup pro jednu ediční iteraci
+
+Mapa duplicit nemusí být velký redakční projekt. Pro jednu hodinovou nebo půldenní iteraci stačí:
+
+1. Vyberte jednu pracovní situaci.
+2. Najděte dvě až pět částí, které ji řeší.
+3. Označte opakující se rozhodnutí, šablony a privacy-first brány.
+4. Vyberte kanonické místo.
+5. V jedné vedlejší části zkraťte vysvětlení na směrovku.
+6. Zapište do pracovního logu, co je nově kanonické a co se bude čistit příště.
+
+Taková iterace je malá, ale má velký dopad. Čtenář příště nezabloudí ve třech podobných cestách a editor ví, kam sáhnout, až bude potřeba pravidlo upravit.
+
+### Checklist mapy duplicit
+
+- Mapujete duplicity podle pracovní situace, ne podle náhodného hledání podobných slov?
+- Je jasné, které opakování pomáhá a které jen prodlužuje text?
+- Má každé duplicitní téma jedno kanonické místo?
+- Zůstávají ostatní části jako krátké směrovky místo druhého úplného výkladu?
+- Neztratili jste jedinečný příklad nebo hranici, která pomáhá rozhodnutí?
+- Zmenšili jste aspoň jednu šablonu, odstavec nebo checklist?
+- Zkontrolovali jste, jestli duplicitní šablony nevedou k duplicitnímu sběru dat?
+- Má kanonické místo jasnou privacy-first větu o účelu, rozsahu a retenci údajů?
+- Je v pracovním logu zapsané, co se změnilo a kde je nový zdroj pravdy?
+- Vznikla jedna hotová ediční změna, ne jen mapa dalších přání?
+
+Mapa duplicit je přechod mezi psaním a editací. Psaní přidává možnosti. Editace vybírá cestu. A u pracovního e-booku je výběr cesty často větší služba čtenáři než další chytrá kapitola.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -123429,3 +123582,4 @@ Tichá provozní paměť je úspěšná právě tím, že na sebe nekřičí. Č
 - 2026-05-24: Doplněna úvodní podkapitola o měsíčním návratu k rozhodnutím: kontrola posledních iterací, stavy rozhodnutí, hledání kolizí, privacy-first úklid, karta review a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o půlročním auditu použitelnosti rukopisu: výběr částí podle reálného použití, stavy pro úpravy, privacy-first kontrola šablon, karta auditu a checklist.
 - 2026-05-25: Doplněna krátká úvodní poznámka o stop podmínce pro čtecí iteraci, aby práce skončila rozhodnutím místo dalším rozšiřováním rozsahu.
+- 2026-05-25: Doplněna úvodní podkapitola o mapě duplicit před zkrácením rukopisu: pracovní situace, kanonické místo, typy opakování, privacy-first kontrola šablon a checklist ediční iterace.
