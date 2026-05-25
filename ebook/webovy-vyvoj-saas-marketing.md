@@ -120756,8 +120756,247 @@ Poslední dočištění bylo ověřeno při běžném použití a buď se vráti
 
 Dobré ověření posledního dočištění je skoro neviditelné. Práce pokračuje, stará stopa se nevrací a nikdo nemusí otevírat detektivní spis, aby pochopil platný stav. Přesně to je cílem: ne další vrstva řízení, ale méně šumu v cestě k rozhodnutí.
 
+## Příloha PR: Uzavření ověřeného posledního dočištění do provozního klidu
+
+Když poslední dočištění projde běžným použitím, tým má často chuť ještě jednou "pro jistotu" něco zapsat, zkontrolovat nebo naplánovat. Někdy je to užitečné. Častěji je to jen zvyk nedůvěřovat zavřeným věcem. Tato příloha řeší přesně ten okamžik: ověření dopadlo dobře, stará stopa se nevrátila a teď je potřeba téma nechat v klidu.
+
+Provozní klid neznamená, že systém už nikdy nikdo neupraví. Znamená to, že daná smyčka nemá vlastní další kontrolu, vlastní backlog ani vlastní hlídání. Pokud se v budoucnu objeví nový problém, projde běžnou cestou. Nepřenášíte s sebou historii jen proto, že kdysi existovala.
+
+Uzavírací věta:
+
+```text
+Poslední dočištění bylo ověřeno při běžném použití, stará stopa se nevrátila a téma se vrací do běžného provozního rytmu bez další samostatné evidence.
+```
+
+Pokud tuto větu neumíte napsat, ještě neuzavírejte. Buď se stopa vrátila, ověření nebylo reálné, nebo se z malého dočištění stal nález pro jinou část systému.
+
+### Nechte zavřené věci opravdu zavřené
+
+Uzavření je práce stejně jako změna. Jen vypadá méně efektně. Dobré uzavření odstraní tři zbytečné náklady:
+
+- další kontrolu, která už nemá rozhodovací otázku;
+- pomocné poznámky, které budou za měsíc mást dalšího člověka;
+- mentální dluh, že "tohle se ještě někdy musí dořešit".
+
+Praktický rozdíl:
+
+```text
+Špatně:
+Dočištění drží, ale necháme si k tomu zvláštní položku v backlogu a za měsíc se na to vrátíme.
+
+Lépe:
+Dočištění drží. Zvláštní položku zavíráme, další kontrola proběhne jen v běžném review daného pracovního místa.
+```
+
+Samostatná další kontrola dává smysl jen tehdy, když existuje jasné riziko, které běžný rytmus nezachytí. Například dočasná migrace, velký zákaznický dopad, více kanálů se stejnou starou stopou nebo právní či bezpečnostní důvod. U běžné šablony, checklistu, sales poznámky nebo interního odkazu často stačí návrat do standardního rytmu.
+
+### Přepište závěr do místa, kde lidé pracují
+
+Uzavírací zápis nemá být dlouhý. Má být tam, kde ho příští člověk najde, když bude dané místo používat nebo kontrolovat.
+
+Vhodná místa:
+
+- karta původního dočištění;
+- changelog šablony nebo playbooku;
+- komentář u issue, pokud se změna řešila v repozitáři;
+- krátká poznámka v rozhodovacím logu;
+- provozní karta daného pravidla.
+
+Nevhodná místa:
+
+- nové shrnující vlákno v chatu;
+- samostatný dokument "historie dočištění";
+- tabulka vytvořená jen pro tento jeden závěr;
+- screenshoty před a po, pokud už nejsou potřeba;
+- osobní poznámky jednoho člověka bez vazby na zdroj pravdy.
+
+Uzavírací zápis může vypadat takto:
+
+```text
+Uzavření:
+Poslední dočištění starého odkazu ve šabloně landing page bylo ověřeno při přípravě nové stránky.
+
+Výsledek:
+Drží. Autor našel jen aktuální pravidlo, stará varianta formuláře se nevrátila.
+
+Další rytmus:
+Bez samostatné kontroly. Kontroluje se v běžném měsíčním review landing pages.
+
+Datová stopa:
+Bez screenshotů, exportů a osobních záznamů. Dočasná poznámka byla sloučena do tohoto závěru.
+```
+
+To je celé. Čtyři krátké bloky stačí. Pokud potřebujete půl stránky vysvětlovat, proč je věc zavřená, nejspíš ještě zavřená není.
+
+### Zrušte pomocné háčky
+
+Při dočištění často vzniknou drobné pomocné háčky: připomínka, štítek, dočasný odkaz, kontrolní komentář, pracovní seznam, malá tabulka, poznámka v kalendáři. Po ověření se z nich snadno stane nový nepořádek.
+
+Projít je potřeba hlavně:
+
+- dočasné úkoly a subtasky;
+- připomínky v kalendáři nebo nástroji pro úkoly;
+- štítky typu `ověřit`, `dočasně`, `staré`, `později`;
+- odkazy v chatu, které míří na starou variantu;
+- lokální exporty, screenshoty a kopie;
+- komentáře v dokumentech, které už neříkají aktuální stav.
+
+Malé pravidlo:
+
+```text
+Každý pomocný háček po ověření buď zmizí, nebo se promění v aktuální provozní informaci.
+```
+
+Nic mezi tím. "Necháme to tam, kdyby se to hodilo" je velmi často jen slušně napsané "ať to mate někoho dalšího".
+
+### Privacy-first uzavření znamená méně stop
+
+Privacy-first provoz se pozná i podle toho, jak zavírá malé věci. Není cílem ukládat důkaz o každém kliknutí, každém průchodu a každé staré variantě. Cílem je mít dostatečný závěr pro práci a co nejmenší zbytečnou stopu.
+
+Při uzavření se zeptejte:
+
+- Potřebujeme ponechat konkrétní příklad, nebo stačí neosobní závěr?
+- Obsahuje pomocný podklad osobní údaje, zákaznická data nebo interní citlivý kontext?
+- Má dočasný důkaz jasné datum smazání?
+- Nezůstává starý export v místě, kde ho někdo může omylem použít?
+- Neudržujeme starou variantu jen proto, že se bojíme smazat historii?
+
+Příklad privacy-first uzavření:
+
+```text
+Ponecháno:
+Jedna neosobní věta v changelogu.
+
+Smazáno:
+Dočasný screenshot staré šablony a pracovní kopie kontrolního seznamu.
+
+Neponecháno:
+Seznam lidí, kteří šablonu použili, protože pro rozhodnutí není potřeba.
+```
+
+Codyho komentář: nejlepší provozní paměť není ta, která si pamatuje všechno. Je to ta, která si pamatuje správné minimum a zbytek nechá zmizet. Digitální systémy mají tendenci archivovat i vlastní kašel. Tady je dobré být přísnější.
+
+### Kdy z klidu znovu otevřít práci
+
+Provozní klid neznamená zákaz budoucí změny. Znamená jen, že nový problém musí přijít s novým důvodem.
+
+Práci znovu otevřete, když:
+
+- běžná kontrola najde návrat staré cesty;
+- zákazník nebo tým opakovaně narazí na stejný zmatek;
+- změní se nabídka, produkt, proces nebo odpovědnost;
+- šablona se přesune do nového nástroje;
+- vznikne nový právní, bezpečnostní nebo provozní požadavek;
+- stejný vzor se objeví ve více pracovních místech.
+
+Práci znovu neotevírejte, když:
+
+- někdo jen chce mít "ještě jistotu";
+- starý problém si pamatujete, ale už se v práci neukazuje;
+- existuje jen jedna historická poznámka v uzavřeném logu;
+- běžný rytmus už dané místo kontroluje;
+- otevření by vedlo k nové evidenci bez jasného rozhodnutí.
+
+Dobrá znovuotevírací věta:
+
+```text
+Téma otevíráme znovu, protože při běžném review dvou šablon se vrátil stejný starý odkaz a běžný rytmus ho nezachytil.
+```
+
+Slabá věta:
+
+```text
+Vracíme se k tomu, protože by bylo dobré to ještě zkontrolovat.
+```
+
+Druhá věta nemá spouštěč, dopad ani hranici. To není práce. To je nervozita v kabátu procesu.
+
+### Uzavírací karta provozního klidu
+
+Použijte ji jen tehdy, když původní karta nebo changelog nemá vlastní pole pro uzavření. Karta má být krátká a nemá se stát novým trvalým dokumentem.
+
+```text
+Navazuje na:
+Ověřeno při:
+Výsledek ověření:
+Co bylo uzavřeno:
+Co bylo smazáno nebo sloučeno:
+Kam se vrací běžná kontrola:
+Kdy znovu otevřít:
+Privacy-first poznámka:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Navazuje na:
+Dočištění staré odpovědní šablony supportu po změně retenčního pravidla.
+
+Ověřeno při:
+První běžná odpověď na dotaz k exportu dat.
+
+Výsledek ověření:
+Drží. Support našel jen aktuální formulaci a nemusel řešit starou variantu.
+
+Co bylo uzavřeno:
+Dočasná karta dočištění a připomínka v úkolovníku.
+
+Co bylo smazáno nebo sloučeno:
+Dočasná pracovní kopie šablony byla smazána. Neosobní závěr zůstává v changelogu support playbooku.
+
+Kam se vrací běžná kontrola:
+Měsíční review support šablon.
+
+Kdy znovu otevřít:
+Pokud se při běžné práci znovu objeví stará formulace nebo pokud se změní retenční pravidlo.
+
+Privacy-first poznámka:
+Bez zákaznických citací, bez exportu tiketů, bez seznamu lidí.
+
+Datum:
+2026-05-25.
+```
+
+### Mini workshop na 8 minut
+
+Vyberte jedno dočištění, které už bylo ověřené jako `Drží`.
+
+1. Najděte původní kartu nebo changelog.
+2. Napište jednu uzavírací větu.
+3. Určete, kam se vrací běžná kontrola.
+4. Zrušte dočasné úkoly, připomínky a štítky.
+5. Smažte nebo sloučte pomocné podklady.
+6. Zapište privacy-first poznámku k datové stopě.
+7. Pojmenujte podmínku, kdy se téma smí znovu otevřít.
+8. Zavřete kartu bez vytváření nové kontrolní vrstvy.
+
+Výstup:
+
+```text
+Ověřené poslední dočištění je uzavřené, pomocné stopy jsou uklizené a téma se vrací do běžného provozního rytmu.
+```
+
+### Checklist kapitoly
+
+- Máte reálné ověření, že poslední dočištění drží?
+- Lze napsat uzavírací větu bez výhrad?
+- Vrací se téma do existujícího provozního rytmu?
+- Nevzniká zvláštní další kontrola jen ze zvyku?
+- Je závěr zapsaný v pracovním místě, kde ho tým najde?
+- Zmizely dočasné úkoly, připomínky, štítky a komentáře?
+- Nezůstaly staré odkazy, exporty, screenshoty nebo pracovní kopie?
+- Je jasné, co bylo sloučeno do changelogu nebo rozhodovacího záznamu?
+- Stačí neosobní závěr místo detailního důkazu?
+- Nezůstává osobní, zákaznická nebo citlivá stopa bez důvodu?
+- Je napsané, kdy se téma smí znovu otevřít?
+- Pokud nový problém přijde, půjde běžnou cestou místo návratu do staré smyčky?
+
+Provozní klid je podceňovaná dovednost. Týmy umí začínat iniciativy, hůř je umí zavírat. U malých dočištění je dobré být bez sentimentu: aktuální pravidlo drží, stará stopa zmizela, pomocné důkazy nejsou potřeba. Zavřít, uklidit, pokračovat. Občas je nejlepší produktivní gesto prostě nepřidat další proces.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha PR o uzavření ověřeného posledního dočištění do provozního klidu: uzavírací věta, návrat do běžného rytmu, přepis závěru do pracovního místa, rušení pomocných háčků, privacy-first úklid stop, podmínky znovuotevření, karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PQ o ověření posledního dočištění při dalším běžném použití: čekání na normální použití, čtyři výsledky ověření, kontrola návratu staré cesty místo výkonu člověka, privacy-first ověřovací stopa, karta ověření, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PP o převodu drobné stopy po první kontrole uzavřené úpravy do posledního dočištění: rozlišení stopy od problému pravidla, nejbližší místo zásahu, krátká pracovní trasa bez historie, privacy-first mazání pomocných stop, karta dočištění, Codyho komentář, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PO o první běžné kontrole po uzavřené drobné úpravě: normální použití, návrat k aktuálnímu pravidlu, provozní signály, čtyři výsledky kontroly, privacy-first stopová hygiena, kontrolní karta, Codyho komentář, mini workshop a checklist.
