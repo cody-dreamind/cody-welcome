@@ -121227,8 +121227,199 @@ Uzavřené místo bylo při běžné práci znovu použito, stav návratu je poj
 
 První běžný návrat ke klidu má být krátký a věcný. Buď se ukáže, že uzavření funguje, nebo najdete jeden konkrétní šum k opravě. Obojí je dobrý výsledek. Špatný výsledek je jen ten, kdy se kvůli zdravé opatrnosti znovu založí celý malý aparát kolem věci, která už měla sloužit tiše.
 
+## Příloha PT: Převod drobné stopy po návratu ke klidu do jedné klidové opravy
+
+Stav `Drží s drobnou stopou` je dobrá zpráva, pokud s ním zacházíte opatrně. Znamená, že uzavřené místo v zásadě funguje, jen při běžném návratu zůstala malá překážka: starý název, špatný odkaz, matoucí poznámka, chybějící věta, zastaralý příklad nebo drobná kolize v rozcestníku.
+
+Tato příloha řeší právě tento okamžik. Cílem není znovu otevřít celou smyčku. Cílem je převést drobnou stopu do jedné klidové opravy: malé změny, která odstraní šum a nechá systém dál fungovat bez nové kontrolní vrstvy.
+
+Dobrá klidová oprava se dá popsat jednou větou:
+
+```text
+Při návratu ke klidu se ukázala jedna drobná stopa v konkrétním pracovním místě; opravíme jen toto místo a původní smyčku neotevíráme.
+```
+
+Pokud věta nejde napsat takhle úzce, pravděpodobně už nejde o drobnou stopu. Možná se změnily okolnosti, pravidlo nestačí, nebo se objevil nový problém v sousední části systému. To nevadí, ale patří to do běžné fronty jako nový nález, ne jako tichá oprava pod starou kartou.
+
+### Nejdřív potvrďte, že stopa je opravdu drobná
+
+Drobnost se nepozná podle toho, že někoho málo štve. Pozná se podle dopadu na práci. Drobná stopa práci nezastaví, jen ji trochu zbrzdí nebo znejistí. Člověk nakonec dokončí úkol podle aktuálního pravidla, ale narazí na jeden šum, který by další použití zbytečně opakoval.
+
+Drobné stopy:
+
+- odkaz v rozcestníku vede správně, ale má starý název;
+- checklist funguje, ale jedna položka používá předchozí terminologii;
+- šablona je použitelná, ale příklad obsahuje starý název služby;
+- changelog stačí, ale neříká, kde je aktuální verze šablony;
+- provozní karta drží, ale v patičce zůstal odkaz na archivní poznámku.
+
+Nedrobné stopy:
+
+- člověk neumí najít aktuální zdroj pravdy;
+- dvě platné stránky říkají rozdílné pravidlo;
+- pravidlo nejde použít pro nový běžný typ práce;
+- kvůli nejasnosti vznikne zákaznický, bezpečnostní nebo právní dopad;
+- oprava by vyžadovala změnu procesu, role, automatizace nebo datového toku.
+
+U nedrobné stopy napište nový nález. Nesnažte se ho schovat do malé opravy, protože tím jen založíte další malou nepoctivost v systému. A tyhle drobné nepoctivosti se pak množí rychleji než backlog po větě "tohle bude jen na chvilku".
+
+### Opravujte nejbližší pracovní místo
+
+Klidová oprava má mířit tam, kde člověk skutečně narazil na šum. Ne tam, kde by se teoreticky dal celý systém zlepšit.
+
+Příklad:
+
+```text
+Nález:
+V interním rozcestníku zůstal starý název support šablony.
+
+Špatná reakce:
+Projít všechny support materiály a přepsat celou sekci.
+
+Dobrá reakce:
+Přejmenovat jeden odkaz v rozcestníku a zapsat jednu větu do changelogu.
+```
+
+Nejbližší pracovní místo může být:
+
+- rozcestník;
+- checklist;
+- šablona;
+- changelog;
+- karta rozhodnutí;
+- onboardingová trasa;
+- runbook;
+- odkaz v issue nebo interní poznámce.
+
+Pokud musíte kvůli opravě otevřít pět různých míst, zastavte se. Buď máte špatně zvolený zdroj pravdy, nebo už nejde o klidovou opravu. V obou případech je lepší udělat samostatné rozhodnutí než potichu rozlévat změnu do okolí.
+
+### Držte opravu bez nového projektu
+
+Klidová oprava má mít malou definici hotovo:
+
+1. šum je odstraněný v nejbližším pracovním místě;
+2. aktuální cesta je znovu jasná;
+3. stará smyčka zůstává zavřená;
+4. nevznikla nová evidence, kterou bude nutné udržovat;
+5. privacy-first datová stopa se nezvětšila.
+
+To je celé. Nezakládejte nový meeting, pokud stačí upravit jeden odkaz. Nezakládejte nový dashboard, pokud jde o jednu větu v checklistu. Nezavádějte měření používání, pokud problém byl jen starý název. Tým nemá být odměněn za to, že z drobné opravy vyrobí malý úřad.
+
+Krátká opravná věta:
+
+```text
+Opravujeme jen starý název odkazu v rozcestníku. Zdroj pravdy, šablona i původní uzavření zůstávají beze změny.
+```
+
+Tato věta je užitečná hlavně proto, že říká, co se nedělá. Dobré omezení rozsahu je často největší hodnota celé opravy.
+
+### Privacy-first brzda klidové opravy
+
+Drobné opravy mají nebezpečný zvyk vytvářet zbytečné důkazy. Někdo udělá screenshot před a po, přiloží zákaznický příklad, exportuje seznam použití, nebo začne sledovat, kdo šablonu otevřel. Pro jednu starou formulaci je to přestřelené.
+
+Privacy-first pravidla:
+
+- nepřidávejte měření používání jen kvůli drobné stopě;
+- neukládejte osobní ani zákaznické příklady, pokud stačí neosobný popis;
+- nemažte platný changelog, ale odstraňte dočasné poznámky a kopie;
+- pokud vznikne pomocný podklad, dejte mu vlastníka a datum smazání;
+- zapisujte roli nebo pracovní situaci, ne konkrétní výkon člověka;
+- nepředávejte opravu do dalšího nástroje, pokud ji umíte uzavřít v místě nálezu.
+
+Minimalistický zápis:
+
+```text
+Datová stopa:
+Bez screenshotu a bez exportu. V changelogu zůstává jen neosobná věta, že starý název odkazu byl sjednocen s aktuální šablonou.
+```
+
+Codyho komentář: u klidových oprav je privacy-first přístup zároveň produktivní přístup. Čím méně důkazního materiálu si vyrobíte, tím méně ho budete později uklízet. Někdy je nejchytřejší dokumentace jedna přesná věta a zavřená karta.
+
+### Karta klidové opravy
+
+Použijte ji jen tehdy, když drobná stopa nejde bezpečně opravit jednou větou v changelogu. Pokud stačí changelog, karta je zbytečná.
+
+```text
+Uzavřené místo:
+Drobné tření při návratu:
+Proč je to drobná stopa:
+Nejbližší pracovní místo opravy:
+Co přesně upravíme:
+Co vědomě neměníme:
+Datová stopa:
+Kde bude závěr:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Uzavřené místo:
+Publikační checklist po posledním dočištění rozcestníku.
+
+Drobné tření při návratu:
+Autor našel správnou šablonu, ale v rozcestníku měla starý název.
+
+Proč je to drobná stopa:
+Práce šla dokončit, zdroj pravdy byl správný a pravidlo se nemusí měnit.
+
+Nejbližší pracovní místo opravy:
+Interní rozcestník publikačních šablon.
+
+Co přesně upravíme:
+Sjednotíme název odkazu s aktuálním názvem šablony.
+
+Co vědomě neměníme:
+Nepřepisujeme checklist, neměníme publikační proces a neotevíráme starou kartu.
+
+Datová stopa:
+Bez screenshotu, bez jména autora, jen neosobná poznámka v changelogu.
+
+Kde bude závěr:
+Changelog publikačního playbooku.
+
+Datum:
+2026-05-25.
+```
+
+### Mini workshop na 7 minut
+
+Vezměte jednu drobnou stopu nalezenou při návratu ke klidu.
+
+1. Ověřte, že práce šla dokončit a nejde o nový problém systému.
+2. Pojmenujte jedno nejbližší pracovní místo opravy.
+3. Napište opravnou větu v jedné větě.
+4. Dopište, co se vědomě nemění.
+5. Proveďte opravu nebo ji zapište jako nejmenší konkrétní úkol.
+6. Zkontrolujte, že nevznikl nový screenshot, export ani osobní důkaz.
+7. Uzavřete závěr v changelogu nebo kartě bez nové kontrolní vrstvy.
+
+Výstup:
+
+```text
+Drobné tření po návratu ke klidu je převedené do jedné malé opravy, původní smyčka zůstává zavřená a datová stopa se nezvětšila.
+```
+
+### Checklist kapitoly
+
+- Je jasné, že jde o stav `Drží s drobnou stopou`?
+- Dokázal člověk dokončit práci podle aktuálního místa?
+- Nejde o nový problém, změnu procesu nebo změnu datového toku?
+- Je vybrané jedno nejbližší pracovní místo opravy?
+- Dá se oprava popsat jednou větou?
+- Je napsané, co se vědomě nemění?
+- Zůstává původní smyčka zavřená?
+- Nevzniká nový audit, dashboard, meeting ani zvláštní kontrolní rytmus?
+- Stačí changelog místo samostatné karty?
+- Nevznikl screenshot, export, osobní záznam nebo zákaznická citace bez důvodu?
+- Má případný pomocný podklad vlastníka a datum smazání?
+- Je po opravě aktuální cesta jasnější než před ní?
+
+Klidová oprava je dobrý test provozní dospělosti. Nejde o schopnost najít problém, ale o schopnost nepřerůst mu přes hlavu. Když malou stopu opravíte malým zásahem, systém se zlepší a zároveň zůstane lehký. To je přesně ten druh práce, který skoro nikdo neoslavuje, ale všem šetří čas.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha PT o převodu drobné stopy po návratu ke klidu do jedné klidové opravy: rozlišení drobné a nedrobné stopy, oprava nejbližšího pracovního místa, omezení rozsahu, privacy-first brzda, karta opravy, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PS o první běžný návrat k provoznímu klidu po delším období: kontrola při reálném použití místo podle kalendáře, práce s jednou situací, hledání návratu šumu, čtyři výsledky návratu, privacy-first stopová hygiena, návratová karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PR o uzavření ověřeného posledního dočištění do provozního klidu: uzavírací věta, návrat do běžného rytmu, přepis závěru do pracovního místa, rušení pomocných háčků, privacy-first úklid stop, podmínky znovuotevření, karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PQ o ověření posledního dočištění při dalším běžném použití: čekání na normální použití, čtyři výsledky ověření, kontrola návratu staré cesty místo výkonu člověka, privacy-first ověřovací stopa, karta ověření, mini workshop a checklist.
