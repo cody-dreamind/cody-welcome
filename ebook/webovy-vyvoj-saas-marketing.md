@@ -121594,8 +121594,224 @@ Klidová oprava je potvrzená, drobně doladěná, oddělená od nového nálezu
 
 Ověření klidové opravy je dobré ve chvíli, kdy skoro není vidět. Práce proběhne hladčeji, starý šum se nevrátí a nikdo kvůli tomu nemusí obsluhovat novou vrstvu procesu. Přesně tak se pozná, že malá oprava splnila svůj úkol: systém je o něco jasnější a přitom o nic těžší.
 
+## Příloha PV: Uzavření potvrzené klidové opravy do provozní paměti
+
+Potvrzená klidová oprava ještě není úplně hotová, dokud po ní zůstává pomocná karta, poznámka, připomínka nebo dočasný odkaz. Ověření řeklo, že starý šum zmizel. Uzavření má zařídit, aby se tým nevracel k celé historii opravy pokaždé, když bude používat aktuální pravidlo.
+
+Smysl této přílohy je prostý: po potvrzené malé opravě ponechat jen to, co lidem pomůže při další práci, a odstranit všechno, co sloužilo jen k provedení a ověření opravy.
+
+Dobrá uzavírací věta zní:
+
+```text
+Klidová oprava je potvrzená, aktuální stav je zapsaný v pracovním místě a pomocné stopy po opravě jsou zavřené nebo smazané.
+```
+
+Pokud k tomu potřebujete stránku vysvětlení, oprava pravděpodobně nebyla jen klidová. To není konec světa, jen signál, že místo tichého uzavření máte před sebou běžnou provozní změnu.
+
+### Nechte historii v changelogu, ne v hlavním pravidle
+
+Po ověření bývá lákavé připsat k pravidlu vysvětlení:
+
+```text
+Pozor, dříve se tento odkaz jmenoval jinak, po opravě z 25. 5. se používá nový název...
+```
+
+Tohle je pochopitelné, ale často škodlivé. Člověk, který přijde k aktuálnímu pravidlu, většinou nepotřebuje znát starou chybu. Potřebuje vědět, co má udělat teď. Historie patří do changelogu, rozhodovacího záznamu nebo uzavřené karty. Hlavní pracovní místo má obsahovat současnou pravdu.
+
+Praktické pravidlo:
+
+- hlavní šablona říká, jak pracovat dnes;
+- changelog říká, co se změnilo a proč;
+- uzavřená karta drží kontext jen tehdy, pokud by bez něj vzniklo riziko;
+- staré názvy, staré odkazy a staré screenshoty nechte zmizet, pokud už nemají účel.
+
+Příklad:
+
+```text
+Hlavní pravidlo:
+Pro novou případovou studii použij šablonu `case-study-template.md` v publikačním playbooku.
+
+Changelog:
+2026-05-25: Sjednocen název odkazu na publikační šablonu; starý název odstraněn z rozcestníku.
+```
+
+To stačí. Čtenář hlavního pravidla není nucen procházet interní archeologii.
+
+### Přepište jen místo, kde se bude pracovat příště
+
+Uzavření potvrzené klidové opravy není výzva k procházení celého systému. Zaměřte se na místo, kam člověk sáhne při další práci. Pokud se oprava týkala rozcestníku, uzavírejte rozcestník. Pokud se týkala krátké instrukce ve formuláři, uzavírejte instrukci. Pokud se týkala názvu šablony, uzavírejte odkaz a název v kanonickém seznamu.
+
+Nedělejte při uzavření tyto věci:
+
+- nepřepisujte všechny související dokumenty jen proto, že "už jste u toho";
+- nezakládejte novou stránku s vysvětlením drobné opravy;
+- nepřidávejte povinný review krok pro každé budoucí použití;
+- nevytvářejte tabulku potvrzených drobných oprav;
+- nechte nové nálezy ve vlastní frontě, pokud se opravdu netýkají původního místa.
+
+Malé uzavření má mít malý zásah. Jinak se tým naučí, že i drobná oprava znamená další administrativní ocásek. A pak lidé raději nebudou opravovat nic.
+
+### Zavřete pomocné háčky
+
+Při klidové opravě často vznikne pár pomocných háčků: poznámka v úkolovníku, komentář u dokumentu, dočasný reminder, odkaz v chatu, krátký kontrolní záznam. Tyto věci mají hodnotu během práce. Po potvrzení se ale snadno změní v šum, který bude za měsíc působit jako další otevřená povinnost.
+
+Projděte pomocné stopy a každé dejte jeden stav:
+
+- Smazat: sloužilo jen k provedení nebo ověření opravy.
+- Zavřít: má auditní nebo provozní důvod zůstat, ale už nevyžaduje akci.
+- Přepsat do pracovního místa: obsahuje užitečnou současnou informaci.
+- Povýšit na nový nález: ukázalo se jiné tření mimo původní opravu.
+
+Příklad uzavření:
+
+```text
+Pomocné stopy:
+- komentář u starého odkazu: smazán;
+- karta opravy: zavřena se závěrem `Potvrzeno`;
+- changelog playbooku: ponechán jeden řádek;
+- nový podnět k příkladu v šabloně: přesunut do redakční fronty.
+```
+
+Takový zápis je krátký a praktický. Hlavně jasně říká, že původní oprava už nežije jako otevřený úkol.
+
+### Uložte poučení jen tehdy, když je opakovatelné
+
+Ne každá malá oprava si zaslouží poučení. Někdy šlo prostě o starý odkaz, překlep nebo zbytečnou poznámku. Poučení vytvářejte jen tehdy, když se ukázal opakovatelný vzor.
+
+Poučení dává smysl, pokud platí aspoň jedna z těchto vět:
+
+- stejný typ šumu se objevuje ve více pracovních místech;
+- tým opakovaně neví, kde je zdroj pravdy;
+- drobné opravy vznikají proto, že chybí jednoduché pravidlo pojmenování;
+- staré pomocné materiály se pravidelně zapomínají mazat;
+- změna ukázala lepší způsob, jak příště zavírat podobné smyčky.
+
+V takovém případě nepište dlouhou lekci. Stačí jedna pracovní věta:
+
+```text
+Po přejmenování kanonické šablony vždy zkontrolujeme rozcestník, changelog a jeden nejpoužívanější vstupní odkaz; ostatní místa řešíme jen při konkrétním nálezu.
+```
+
+To je použitelné. Není to památník jedné opravy, ale krátké pravidlo pro příští podobnou situaci.
+
+### Privacy-first uzavření znamená mazat pracovní lešení
+
+Klidové opravy často vznikají kolem dokumentace, šablon, formulářů, supportních odpovědí nebo interních playbooků. Při ověření se může objevit pokušení nechat si všechny mezikroky "pro jistotu". Privacy-first provoz ale nestojí na tom, že si pamatuje úplně všechno. Stojí na tom, že ví, co potřebuje pro práci, odpovědnost a bezpečné rozhodování.
+
+Při uzavření proto zkontrolujte:
+
+- zda pomocné poznámky neobsahují osobní údaje, zákaznické detaily nebo interní konverzace;
+- zda screenshoty opravdu musí zůstat uložené;
+- zda dočasné exporty nezůstaly ve sdílené složce;
+- zda komentáře v dokumentech neobsahují starý kontext, který už mate;
+- zda nový nález nepřebírá zbytečně celou historii původní opravy.
+
+Privacy-first minimum pro uzavření:
+
+```text
+Zůstává:
+- aktuální pravidlo v pracovním místě;
+- jeden řádek v changelogu;
+- případně anonymizovaný závěr uzavřené karty.
+
+Mizí:
+- dočasné screenshoty;
+- osobní poznámky k ověření;
+- staré komentáře;
+- duplicitní odkazy;
+- připomínky, které už nemají další akci.
+```
+
+Codyho komentář: dobrá provozní paměť není skladiště všeho, co se kdy stalo. Je to schopnost najít současné pravidlo bez toho, aby člověk musel odhrnovat vrstvy starých pokusů. Jinak z dokumentace není paměť, ale půda po předchozím nájemníkovi.
+
+### Uzavírací karta klidové opravy
+
+Použijte ji jen tehdy, když nestačí jeden řádek v changelogu.
+
+```text
+Původní oprava:
+Výsledek ověření:
+Aktuální pracovní místo:
+Co bylo přepsáno:
+Co bylo smazáno:
+Co zůstává v changelogu:
+Nové nálezy mimo původní opravu:
+Privacy-first úklid:
+Závěr:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Původní oprava:
+Sjednocení názvu odkazu na publikační šablonu v interním rozcestníku.
+
+Výsledek ověření:
+Potvrzeno při přípravě nové případové studie.
+
+Aktuální pracovní místo:
+Publikační rozcestník a changelog playbooku.
+
+Co bylo přepsáno:
+Hlavní odkaz nyní používá aktuální název šablony.
+
+Co bylo smazáno:
+Starý komentář u odkazu a dočasná ověřovací poznámka.
+
+Co zůstává v changelogu:
+Jeden řádek o sjednocení názvu odkazu.
+
+Nové nálezy mimo původní opravu:
+Chybí příklad pro kratší referenci; přesunuto do redakční fronty.
+
+Privacy-first úklid:
+Bez screenshotů, bez jmen, bez ukládání průchodu konkrétního autora.
+
+Závěr:
+Oprava je uzavřená. Pracovní místo obsahuje jen aktuální pravidlo.
+
+Datum:
+2026-05-25.
+```
+
+### Mini workshop na 7 minut
+
+Vezměte jednu klidovou opravu, která už byla potvrzená.
+
+1. Najděte aktuální pracovní místo, kam člověk sáhne příště.
+2. Ověřte, že hlavní pravidlo neobsahuje zbytečnou historii.
+3. Projděte pomocné poznámky, komentáře, připomínky a odkazy.
+4. Každé stopě dejte stav: smazat, zavřít, přepsat, nebo nový nález.
+5. Nechte v changelogu jen jednu stručnou větu.
+6. Smažte dočasné důkazy, pokud nemají jasný provozní nebo právní důvod zůstat.
+7. Zapište závěr: oprava uzavřená, pracovní místo aktuální, nové nálezy oddělené.
+
+Výstup:
+
+```text
+Potvrzená klidová oprava je uzavřená do provozní paměti: současné pravidlo je snadno použitelné a pomocné stopy už nepřidávají šum.
+```
+
+### Checklist kapitoly
+
+- Je jasné, že klidová oprava byla ověřená?
+- Je aktuální pravidlo zapsané v místě, kde bude člověk pracovat příště?
+- Neobsahuje hlavní pracovní místo zbytečnou historii staré chyby?
+- Zůstal changelog krátký a srozumitelný?
+- Jsou pomocné poznámky, komentáře a připomínky zavřené nebo smazané?
+- Nepřepisujete kvůli malé opravě celý systém?
+- Jsou nové nálezy oddělené od původní opravy?
+- Vzniklo poučení jen tehdy, když jde o opakovatelný vzor?
+- Nezůstaly dočasné screenshoty, exporty nebo osobní záznamy bez účelu?
+- Je jasné, kdo vlastní případný nový nález?
+- Může další člověk použít pracovní místo bez znalosti celé historie opravy?
+
+Uzavřená klidová oprava má zanechat méně věcí než před začátkem. Jeden přesnější odkaz, kratší pravidlo, čistší changelog, žádné dočasné důkazy. To je malá práce s velkým dopadem: systém si pamatuje správné minimum a lidé se nemusí učit další vrstvu procesu.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha PV o uzavření potvrzené klidové opravy do provozní paměti: oddělení aktuálního pravidla od historie, přepis nejbližšího pracovního místa, zavření pomocných háčků, opakovatelné poučení, privacy-first úklid stop, uzavírací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PU o ověření klidové opravy při nejbližším přirozeném použití: čekání na běžnou pracovní situaci, kontrola původního šumu, čtyři výsledky ověření, privacy-first evidence bez stop navíc, ověřovací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PT o převodu drobné stopy po návratu ke klidu do jedné klidové opravy: rozlišení drobné a nedrobné stopy, oprava nejbližšího pracovního místa, omezení rozsahu, privacy-first brzda, karta opravy, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PS o první běžný návrat k provoznímu klidu po delším období: kontrola při reálném použití místo podle kalendáře, práce s jednou situací, hledání návratu šumu, čtyři výsledky návratu, privacy-first stopová hygiena, návratová karta, mini workshop a checklist.
