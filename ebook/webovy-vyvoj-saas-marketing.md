@@ -121417,8 +121417,186 @@ Drobné tření po návratu ke klidu je převedené do jedné malé opravy, pův
 
 Klidová oprava je dobrý test provozní dospělosti. Nejde o schopnost najít problém, ale o schopnost nepřerůst mu přes hlavu. Když malou stopu opravíte malým zásahem, systém se zlepší a zároveň zůstane lehký. To je přesně ten druh práce, který skoro nikdo neoslavuje, ale všem šetří čas.
 
+## Příloha PU: Ověření klidové opravy při nejbližším přirozeném použití
+
+Klidová oprava z předchozí přílohy má zůstat malá i při ověření. Pokud jste opravili jeden starý název, odkaz, formulaci nebo drobný rozcestník, nepotřebujete z toho vyrábět zvláštní audit. Potřebujete jen počkat na nejbližší přirozené použití stejného pracovního místa a ověřit, že šum zmizel.
+
+Smysl této přílohy je jednoduchý: potvrdit, že malá oprava opravdu vrátila práci do klidu, aniž by kolem sebe vytvořila novou kontrolní vrstvu.
+
+Dobrá ověřovací věta zní:
+
+```text
+Při dalším běžném použití ověříme, že opravené místo už nevrací starý šum a že kvůli ověření nevznikla nová evidence.
+```
+
+Pokud se ověření nevejde do takové věty, pravděpodobně kontrolujete víc než původní opravu. To nemusí být špatně, ale není to klidové ověření. Je to nový nález, menší revize nebo začátek další smyčky.
+
+### Čekejte na přirozené použití
+
+Klidovou opravu neověřujte uměle hned po jejím provedení, pokud to není nutné kvůli riziku. Umělý průchod často vytvoří víc hluku než jistoty: někdo projde dokument jen proto, aby ho prošel, najde tři kosmetické věci a najednou se malá oprava tváří jako důvod k dalšímu kolečku.
+
+Lepší postup:
+
+- oprava je hotová;
+- v changelogu nebo kartě je krátký závěr;
+- tým ví, že při nejbližším normálním použití má sledovat jedno konkrétní místo;
+- do té doby se stará smyčka neotevírá.
+
+Příklad:
+
+```text
+Ověříme při nejbližší přípravě nové případové studie, jestli autor najde aktuální publikační šablonu bez starého názvu v rozcestníku.
+```
+
+Takové ověření má přirozený kontext. Člověk něco skutečně potřebuje udělat, a proto se ukáže, jestli oprava pomohla. Není to divadelní test dokumentace.
+
+### Sledujte jen původní šum
+
+Při ověření se držte původní drobné stopy. Pokud oprava řešila starý název odkazu, ověřujte starý název odkazu. Neotevírejte přitom kvalitu celé šablony, tone of voice, strukturu složek ani kompletní proces publikace.
+
+Ověřujte tři otázky:
+
+1. Našel člověk správné místo bez původního tření?
+2. Pochopil aktuální pravidlo bez návratu ke staré stopě?
+3. Dokončil práci bez toho, aby vznikl nový pomocný workaround?
+
+Pokud jsou odpovědi ano, oprava je potvrzená. Nepřidávejte další požadavky jen proto, že jste u toho zahlédli jiné drobnosti. Ty patří do běžné fronty, pokud mají pracovní dopad.
+
+Krátký rozdíl:
+
+```text
+Správně:
+Ověřujeme, že po přejmenování odkazu autor našel aktuální šablonu.
+
+Přestřelené:
+Když už jsme u publikačních šablon, projdeme celý obsahový systém.
+```
+
+Klidové ověření je test jedné opravy, ne pozvánka ke generálnímu úklidu.
+
+### Rozlišujte čtyři výsledky
+
+Po přirozeném použití zapište jeden ze čtyř stavů:
+
+- Potvrzeno: původní šum zmizel a práce běží bez nové pomoci.
+- Ještě drobně doladit: původní oprava pomohla, ale zůstala jedna malá stopa ve stejném místě.
+- Nový nález: objevilo se jiné tření, které nepatří do původní klidové opravy.
+- Bez ověření: pracovní situace zatím nenastala, takže oprava zůstává bez další akce.
+
+Stav `Bez ověření` je v pořádku. Není potřeba honit důkaz za každou cenu. Pokud se pracovní situace nevrátila, možná je dané místo méně důležité, než se zdálo. Po delší době můžete pomocnou poznámku zavřít s tím, že nebyl důvod ji znovu otevírat.
+
+Stav `Ještě drobně doladit` používejte opatrně. Dovoluje jednu malou úpravu ve stejném místě, ne druhý pokus o širší revizi. Pokud se drobné doladění opakuje, už to není klidová oprava; systém vám říká, že pravidlo nebo zdroj pravdy potřebuje normální rozhodnutí.
+
+### Privacy-first ověření bez stop navíc
+
+U klidového ověření často stačí neosobný provozní záznam. Nepište, kdo přesně zaváhal, neukládejte screenshoty, neexportujte seznam otevření dokumentu a nedělejte z jednoho použití metriku výkonu člověka.
+
+Stačí tento typ zápisu:
+
+```text
+Ověření:
+Při další přípravě případové studie byl rozcestník použit bez návratu ke starému názvu. Oprava potvrzena.
+
+Datová stopa:
+Bez osobních záznamů, bez screenshotu, bez dalšího měření používání.
+```
+
+Když je potřeba doložit konkrétnější příklad, anonymizujte ho na pracovní situaci. Místo jména člověka napište roli. Místo zákaznického detailu napište typ úkolu. Místo plného screenshotu napište, které pracovní místo bylo použité.
+
+Privacy-first pravidlo pro tuto fázi:
+
+- ověřujte práci, ne člověka;
+- zapisujte stav opravy, ne osobní výkon;
+- nepřidávejte analytiku pro jednorázovou jistotu;
+- mažte pomocné poznámky, pokud už nejsou potřeba;
+- nové nálezy oddělte od původní opravy bez kopírování celé historie.
+
+Codyho komentář: malé opravy se mají po ověření ztratit v dobrém smyslu. Ne tak, že nikdo neví, co se stalo, ale tak, že po nich nezůstane vrstva nástrojů, tabulek a důkazů. Klid je výsledek, ne další dashboard.
+
+### Ověřovací karta klidové opravy
+
+Použijte ji jen pro opravy, které nejde potvrdit jednou větou v changelogu.
+
+```text
+Původní klidová oprava:
+Kdy nastalo přirozené použití:
+Co přesně ověřujeme:
+Výsledek:
+Co se případně ještě doladí:
+Nové nálezy mimo tuto opravu:
+Datová stopa:
+Kde je závěr uložený:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Původní klidová oprava:
+Sjednocení názvu odkazu na publikační šablonu v interním rozcestníku.
+
+Kdy nastalo přirozené použití:
+Při přípravě nové případové studie.
+
+Co přesně ověřujeme:
+Jestli autor najde aktuální šablonu bez návratu ke starému názvu.
+
+Výsledek:
+Potvrzeno. Rozcestník navedl na správnou šablonu a nebyl potřeba pomocný dotaz.
+
+Co se případně ještě doladí:
+Nic.
+
+Nové nálezy mimo tuto opravu:
+V šabloně chybí příklad pro kratší referenci; zapsáno jako samostatný podnět, ne jako součást této opravy.
+
+Datová stopa:
+Bez jména autora, bez screenshotu, jen neosobný závěr v changelogu.
+
+Kde je závěr uložený:
+Changelog publikačního playbooku.
+
+Datum:
+2026-05-25.
+```
+
+### Mini workshop na 7 minut
+
+Vezměte jednu nedávnou klidovou opravu, která už měla přirozené použití.
+
+1. Přečtěte původní opravnou větu.
+2. Pojmenujte pracovní situaci, při které se oprava skutečně použila.
+3. Odpovězte na tři otázky: nalezení, pochopení, dokončení.
+4. Vyberte jeden ze čtyř výsledků ověření.
+5. Oddělte případné nové nálezy od původní opravy.
+6. Zapište neosobný závěr do changelogu nebo karty.
+7. Smažte pomocné poznámky, pokud už nemají účel.
+
+Výstup:
+
+```text
+Klidová oprava je potvrzená, drobně doladěná, oddělená od nového nálezu nebo ponechaná bez ověření, protože přirozená pracovní situace ještě nenastala.
+```
+
+### Checklist kapitoly
+
+- Ověřujete opravu při přirozeném použití, ne umělou kontrolou?
+- Je jasné, jaký původní šum se ověřuje?
+- Neotevírá se kvůli jedné opravě širší audit?
+- Sledujete nalezení, pochopení a dokončení práce?
+- Má výsledek jeden ze čtyř stavů?
+- Neopakujete drobné doladění tak dlouho, až z něj vznikne skrytý projekt?
+- Jsou nové nálezy oddělené od původní opravy?
+- Stačí neosobná věta v changelogu místo nové karty?
+- Nevznikl screenshot, export, sledování otevření ani osobní záznam?
+- Jsou pomocné poznámky smazané nebo mají jasný účel a datum návratu?
+- Zůstává původní smyčka po ověření opravdu zavřená?
+
+Ověření klidové opravy je dobré ve chvíli, kdy skoro není vidět. Práce proběhne hladčeji, starý šum se nevrátí a nikdo kvůli tomu nemusí obsluhovat novou vrstvu procesu. Přesně tak se pozná, že malá oprava splnila svůj úkol: systém je o něco jasnější a přitom o nic těžší.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha PU o ověření klidové opravy při nejbližším přirozeném použití: čekání na běžnou pracovní situaci, kontrola původního šumu, čtyři výsledky ověření, privacy-first evidence bez stop navíc, ověřovací karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PT o převodu drobné stopy po návratu ke klidu do jedné klidové opravy: rozlišení drobné a nedrobné stopy, oprava nejbližšího pracovního místa, omezení rozsahu, privacy-first brzda, karta opravy, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PS o první běžný návrat k provoznímu klidu po delším období: kontrola při reálném použití místo podle kalendáře, práce s jednou situací, hledání návratu šumu, čtyři výsledky návratu, privacy-first stopová hygiena, návratová karta, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha PR o uzavření ověřeného posledního dočištění do provozního klidu: uzavírací věta, návrat do běžného rytmu, přepis závěru do pracovního místa, rušení pomocných háčků, privacy-first úklid stop, podmínky znovuotevření, karta, mini workshop a checklist.
