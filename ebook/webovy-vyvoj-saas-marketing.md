@@ -124238,8 +124238,197 @@ Máme jednu drobnou opravu, víme kde ji udělat, co nemění a jak poznáme, ž
 
 Drobné opravy jsou dobrý způsob, jak udržet web, SaaS i marketing v provozní kondici bez velkých rituálů. Fungují ale jen tehdy, když zůstanou malé, konkrétní a blízko skutečné práce. Jakmile oprava začne měnit pravidlo, sbírat další data nebo otevírat celý systém, už to není drobná oprava. Je to nové rozhodnutí a zaslouží si vlastní prostor.
 
+## Příloha QC: Ověření drobné opravy po slabém signálu při přirozeném použití
+
+Drobné opravy po slabém signálu mají jednu nepříjemnou vlastnost: vypadají hotově hned po přepsání odkazu, popisku nebo krátké věty. Ve skutečnosti jsou hotové až ve chvíli, kdy je někdo znovu použije v běžné práci a nevznikne stejný šum. Bez tohoto kroku se z opravy snadno stane další tichý předpoklad, který nikdo nepotvrdil.
+
+Ověření nemá být nový audit. Má odpovědět na jednu otázku:
+
+```text
+Pomohla malá oprava člověku projít stejným místem bez starého zaváhání?
+```
+
+Když odpověď neznáte, nesnažte se ji vynutit velkým testem. Počkejte na nejbližší přirozené použití: další publikaci, další obchodní rozhovor, další onboarding, další support odpověď nebo další úpravu produktového nastavení. Právě tam se ukáže, jestli oprava pracuje v realitě, ne jen v dokumentu.
+
+### Vraťte se ke kartě opravy
+
+Před ověřením otevřete původní kartu drobné opravy a přečtěte jen tři pole:
+
+1. slabý signál;
+2. konkrétní změnu;
+3. ověření při nejbližším použití.
+
+Nic dalšího zatím nepřidávejte. Pokud začnete znovu rozebírat celý kontext, vytáhnete do ověření starou historii a oprava přestane být malá. Cílem je porovnat původní tření s novým průchodem.
+
+Krátký pracovní zápis:
+
+```text
+Ověřujeme:
+Původní slabý signál se měl zmenšit díky jedné drobné opravě v nejbližším pracovním místě.
+```
+
+Pokud při čtení karty zjistíte, že konkrétní změna nebyla zapsaná, nejdřív ji doplňte zpětně jednou větou. Bez ní nejde férově poznat, co vlastně ověřujete.
+
+### Sledujte první normální průchod
+
+Ověření má proběhnout při práci, která by se stala i bez testu. Typicky:
+
+- někdo použije onboardingový krok;
+- obchodník otevře sales kartu před hovorem;
+- redaktor začne nový článek z rozcestníku;
+- support použije makro nebo interní poznámku;
+- produktový člověk upraví nastavení podle existujícího checklistu;
+- tým znovu sáhne po šabloně, která dřív mátla.
+
+Nesledujte člověka. Sledujte pracovní místo. Rozdíl je podstatný: nehodnotíte výkon, rychlost ani pozornost konkrétní osoby. Jen zjišťujete, jestli opravené místo vede ke správnému dalšímu kroku bez staré překážky.
+
+Prakticky stačí po průchodu odpovědět:
+
+```text
+Byla správná cesta vidět dřív než stará?
+Musel někdo vysvětlovat historii opravy?
+Vzniklo nové zaváhání kvůli stejné věci?
+Zůstala po použití zbytečná datová stopa?
+```
+
+### Rozlišujte čtyři výsledky ověření
+
+Po prvním přirozeném použití vyberte jeden ze čtyř stavů.
+
+`Drží` znamená, že oprava splnila účel. Člověk našel správné místo, pochopil aktuální pravidlo a nevznikl nový šum. Kartu můžete zavřít krátkou větou.
+
+`Drží s drobnou stopou` znamená, že hlavní problém zmizel, ale zůstala jedna malá věc: starý název v seznamu, pomocná poznámka v šabloně, nejasné pořadí odkazů nebo zbytečný archivní odkaz. Neotevírejte kvůli tomu nový audit. Připravte jednu poslední dočišťovací změnu.
+
+`Nestačí` znamená, že původní signál nebyl jen drobný šum. Oprava sice něco změnila, ale člověk pořád neví, co má udělat, nebo se problém přesunul do sousedního místa. V tu chvíli přestaňte opravovat potichu a otevřete samostatné rozhodnutí.
+
+`Bez důkazu` znamená, že místo se ještě normálně nepoužilo. Kartu nechte otevřenou, ale nepřidávejte novou kontrolní vrstvu. Stačí poznámka, při jaké další práci se ověření vrátí.
+
+Příklad rozhodnutí:
+
+```text
+Výsledek:
+Drží s drobnou stopou.
+
+Důvod:
+Nový člověk začal z rozcestníku, ale v poznámce u šablony zůstal starý název briefu.
+
+Další krok:
+Přejmenovat jednu poznámku u šablony; neměnit strukturu onboardingu.
+```
+
+### Privacy-first ověření bez sledování lidí
+
+Ověření drobné opravy nesmí vytvořit větší datovou stopu než původní problém. U interních procesů je lákavé zapisovat, kdo co udělal, jak dlouho mu to trvalo a kde zaváhal. Většinou to není potřeba. Potřebujete vědět, jestli pracovní místo pomohlo, ne vyrábět osobní audit.
+
+Použijte minimální záznam:
+
+- popis pracovní situace bez jména, pokud jméno není nutné pro vlastnictví úkolu;
+- výsledek ověření;
+- jeden další krok nebo zavření;
+- poznámku, co se po ověření smaže nebo nezakládá.
+
+Nevhodné ověření:
+
+```text
+Nahrát obrazovku nového člověka při onboardingu a porovnat jeho klikání se starým průchodem.
+```
+
+Vhodné ověření:
+
+```text
+Při dalším onboardingu ověřit, zda člověk začne z rozcestníku a nepoužije starý odkaz; po kontrole zapsat jen výsledek bez osobních detailů.
+```
+
+U veřejných webů platí totéž. Kvůli ověření jednoho popisku ve formuláři většinou nepotřebujete novou analytickou událost. Často stačí ruční kontrola několika dalších poptávek, interní poznámka obchodníka nebo krátké kvalitativní vyhodnocení.
+
+### Karta ověření drobné opravy
+
+```text
+Původní slabý signál:
+Drobná oprava:
+Přirozené použití:
+Co se mělo zlepšit:
+Pozorovaný výsledek:
+Stav: Drží / Drží s drobnou stopou / Nestačí / Bez důkazu
+Další krok:
+Co neotevíráme:
+Privacy-first stopa:
+Datum návratu, pokud je potřeba:
+```
+
+Vyplněný příklad:
+
+```text
+Původní slabý signál:
+Nový člověk otevřel starou šablonu případové studie z onboardingové poznámky.
+
+Drobná oprava:
+Odkaz v onboardingovém kroku vede na rozcestník marketingových šablon.
+
+Přirozené použití:
+Další zadání případové studie pro nový segment.
+
+Co se mělo zlepšit:
+Člověk má začít z rozcestníku a nemá potřebovat vysvětlení staré šablony.
+
+Pozorovaný výsledek:
+Začal z rozcestníku, správnou šablonu našel, ale v jedné poznámce zůstal starý název briefu.
+
+Stav:
+Drží s drobnou stopou.
+
+Další krok:
+Přejmenovat poznámku u šablony a zavřít kartu po další běžné kontrole.
+
+Co neotevíráme:
+Neměníme strukturu onboardingu, nepřepisujeme všechny šablony a nezavádíme sledování použití.
+
+Privacy-first stopa:
+Bez jména, screenshotu a časového měření; po přejmenování zůstane jen changelogová věta.
+
+Datum návratu, pokud je potřeba:
+Při nejbližším zadání další případové studie.
+```
+
+### Codyho komentář
+
+Ověření malé opravy má být nudné. To je kompliment. Když po opravě vznikne potřeba dlouhého vysvětlování, tabulky a porady, pravděpodobně jste neověřili drobný šum, ale našli větší rozhodovací problém. Codyho pravidlo: dobrá malá oprava se při dalším použití skoro neukáže. Člověk prostě dojde tam, kam měl.
+
+### Mini workshop na 7 minut
+
+Vezměte jednu kartu drobné opravy, která čeká na použití.
+
+1. Přečtěte původní signál a konkrétní opravu.
+2. Určete první přirozenou pracovní situaci, kde se oprava ukáže.
+3. Napište jednu větu, co se mělo zlepšit.
+4. Po použití vyberte jeden ze čtyř stavů.
+5. Zapište nejmenší další krok nebo zavření.
+6. Smažte osobní, dočasné a pomocné poznámky, které už nejsou potřeba.
+
+Výstup:
+
+```text
+Víme, jestli drobná oprava opravdu snížila původní šum, nebo jestli je potřeba poslední dočištění či nové rozhodnutí.
+```
+
+### Checklist kapitoly
+
+- Vracíte se ke konkrétní kartě drobné opravy?
+- Ověřujete původní slabý signál, ne celý proces?
+- Proběhlo ověření při přirozeném použití?
+- Sledujete pracovní místo, ne výkon konkrétního člověka?
+- Je jasné, co se mělo zlepšit?
+- Vybrali jste jeden ze čtyř stavů?
+- Je další krok menší než původní oprava, pokud jde jen o drobnou stopu?
+- Otevíráte samostatné rozhodnutí, pokud oprava nestačí?
+- Nepřidáváte kvůli ověření nové trackery, nahrávky ani osobní evidence?
+- Zůstane po ověření jen krátká stopa, která pomůže další práci?
+
+Drobné opravy se nesmí hromadit jako nedokončené dobré úmysly. Každá potřebuje lehké ověření, ale jen tak lehké, aby nezvětšilo systém, který měla ztišit. Přirozené použití je nejlepší test: pokud člověk projde bez starého šumu, oprava drží. Pokud ne, máte aspoň přesnější informaci, co už není drobná oprava.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha QC o ověření drobné opravy po slabém signálu při přirozeném použití: návrat ke kartě opravy, sledování normálního průchodu, čtyři výsledky ověření, privacy-first evidence bez sledování lidí, ověřovací karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QB o převodu slabého signálu šumu do jedné drobné opravy: potvrzení rozsahu, typy malých oprav, zásah v nejbližším pracovním místě, krátká stopa, privacy-first brzda, přirozené ověření, karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QA o prvním signálu, že tichá provozní paměť znovu šumí: slabé signály v běžné práci, ověření nejbližšího pracovního místa, čtyři stavy návratu šumu, privacy-first kontrola bez sledování lidí, karta, mini workshop a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o ověření zkrácené čtenářské trasy: scénář jedné reálné pracovní situace, sledování rozhodnutí místo dojmů, typické chyby po zkrácení, privacy-first ověření bez sledování čtenářů, ověřovací karta a checklist.
