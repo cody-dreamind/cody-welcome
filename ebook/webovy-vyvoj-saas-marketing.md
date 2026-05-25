@@ -1429,6 +1429,184 @@ První týden dalšího kvartálu.
 
 Kvartální prořezání je ochrana proti tomu, aby se z praktického e-booku a rozhodovacích smyček stal interní právní řád malého království. Dobrá paměť má pomáhat rychleji jednat. Pokud tým po každém kvartálu drží méně aktivních pravidel, ale lepší pracovní jistotu, prořezání splnilo účel.
 
+## Půlroční audit použitelnosti rukopisu
+
+Měsíční a kvartální rytmus udržují rozhodnutí v provozu. Jednou za půl roku ale stojí za to zvednout hlavu od jednotlivých pravidel a položit tvrdší otázku: pomáhá celý rukopis ještě lidem dělat lepší práci, nebo se jen tváří jako užitečný archiv?
+
+Půlroční audit není korektura textu. Korektura opravuje věty. Audit použitelnosti hledá, kde čtenář ztrácí čas, kde kapitola nevede k rozhodnutí, kde checklist sbírá moc údajů a kde se z praktické rady stala interní legenda bez dopadu. Cílem není rukopis zvětšit. Cílem je vrátit ho do tvaru, ve kterém z něj vzniká akce.
+
+Začněte jednou otázkou:
+
+```text
+Které části rukopisu v posledním půlroce prokazatelně změnily web, produkt, marketing nebo provoz - a které jen přibývaly?
+```
+
+Slovo "prokazatelně" tady neznamená velkou analytiku. Stačí dohledat pracovní kartu, issue, upravenou šablonu, změněný formulář, vypnutý tracker, zkrácený sales materiál nebo rozhodnutí, které tým opravdu použil. Pokud část rukopisu nemá žádnou stopu v práci, nemusí být špatná. Jen si nezaslouží automaticky další rozšiřování.
+
+### Co auditovat
+
+Nečtěte celý e-book od začátku do konce. Vyberte reprezentativní vzorek podle reálného použití:
+
+- tři nejčtenější nebo nejčastěji odkazované části;
+- tři části, které někdo použil při skutečné změně;
+- tři části, které za půl roku nikdo neotevřel, ale pořád zabírají místo v navigaci;
+- jednu privacy-first část, která ovlivňuje sběr, retenci nebo předávání dat;
+- jeden checklist, podle kterého má pracovat nový člověk bez vysvětlování autora.
+
+U každé části si napište pracovní výstup, ne pocit:
+
+```text
+Část:
+Kdo ji použil:
+K jakému rozhodnutí vedla:
+Co po ní vzniklo:
+Kde čtenář drhnul:
+Co kvůli ní sbíráme nebo ukládáme:
+Stav:
+```
+
+Stav má mít jednu z pěti hodnot:
+
+- Drží: část je použitelná a vede k rozhodnutí.
+- Zkrátit: myšlenka je dobrá, ale cesta k ní je dlouhá.
+- Přepsat: téma je důležité, ale text neodpovídá tomu, jak tým pracuje.
+- Přesunout: část patří do šablony, checklistu, nabídky nebo interního standardu, ne do hlavního čtení.
+- Archivovat: část byla užitečná pro určitou fázi, ale dnes už nemá vést běžnou práci.
+
+Příklad:
+
+```text
+Část:
+Checklist pro privacy-first analytiku.
+
+Kdo ji použil:
+Marketing owner při úpravě měřicího plánu pro novou landing page.
+
+K jakému rozhodnutí vedla:
+Měříme jen odeslání formuláře a kliknutí na přímý kontakt, ne detailní scroll a mikroeventy.
+
+Co po ní vzniklo:
+Upravený měřicí plán a kratší vysvětlení analytiky v interním zadání.
+
+Kde čtenář drhnul:
+Není jasné, kdy je ještě event užitečný a kdy už jen zvědavý.
+
+Co kvůli ní sbíráme nebo ukládáme:
+Agregované návštěvnostní signály bez detailní profilace.
+
+Stav:
+Přepsat jednu podčást a doplnit rozhodovací příklad.
+```
+
+### Hledejte nebezpečné pohodlí
+
+U dlouhého rukopisu se snadno stane, že tým začne citovat text místo přemýšlení. To je pohodlné, ale nebezpečné. Praktická příručka má otevírat lepší otázky, ne nahrazovat úsudek.
+
+Varovné signály:
+
+- někdo odkazuje na kapitolu bez toho, aby řekl, jaké rozhodnutí z ní plyne;
+- checklist se vyplňuje mechanicky, ale nic se podle něj nemění;
+- stará příloha vyhrává jen proto, že je delší než nový konkrétní problém;
+- tým přidává další měření, protože "to bylo v šabloně", ale nemá otázku;
+- privacy-first pravidlo zůstává v textu, zatímco reálný nástroj nebo dodavatel už funguje jinak;
+- nový člověk potřebuje ústní výklad, aby pochopil, co má podle kapitoly udělat.
+
+Když takový signál najdete, nepište další vysvětlení. Nejdřív zkraťte cestu k akci. Vyměňte odstavec za příklad, příklad za šablonu, šablonu za jednu rozhodovací otázku nebo rozhodovací otázku za jasné stop pravidlo.
+
+Codyho komentář: dobrý e-book nemusí dokazovat, že autor hodně ví. Má dokazovat, že čtenář po něm ví, co udělat dál. Všechno ostatní je literární posilovna pro ego a backlog.
+
+### Privacy-first audit rukopisu
+
+Použitelnost rukopisu má i datovou stránku. Každá nová šablona může chtít další vstupy. Každý checklist může nenápadně normalizovat sběr údajů. Každý příklad může obsahovat detaily, které se časem zbytečně kopírují dál.
+
+Při půlročním auditu projděte:
+
+- zda šablony žádají jen údaje nutné pro rozhodnutí;
+- zda příklady neobsahují osobní, zákaznické nebo citlivé detaily, které stačí zobecnit;
+- zda odkazy na nástroje pořád odpovídají evropskému, kontrolovatelnému provozu;
+- zda měřicí doporučení nezačala sklouzávat od rozhodovacího minima k pohodlnému sledování všeho;
+- zda archivované části nemají zůstat veřejně nebo interně dostupné jen kvůli historii.
+
+Praktické pravidlo: pokud část rukopisu vede čtenáře k novému sběru dat, musí zároveň říct účel, hranici, retenci a nejmenší dostačující variantu. Pokud to neumí, není připravená jako pracovní návod.
+
+### Karta půlročního auditu
+
+Na konci nevyrábějte velkou zprávu. Vytvořte jednu kartu, která vede k úpravám:
+
+```text
+Období:
+Auditované části:
+Části, které drží:
+Části ke zkrácení:
+Části k přepsání:
+Části k přesunu:
+Části k archivaci:
+Nejdůležitější čtenářské tření:
+Privacy-first nález:
+Jedna nejbližší úprava:
+Co teď vědomě nerozšiřujeme:
+Vlastník:
+Termín návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Období:
+První polovina roku.
+
+Auditované části:
+Úvodní čtenářské trasy, privacy-first analytika, checklist pro launch, šablona marketingového plánu a tři starší přílohy k provozním standardům.
+
+Části, které drží:
+Rychlé pracovní trasy a checklist pro privacy-first analytiku.
+
+Části ke zkrácení:
+Checklist pro launch, protože opakuje část předpublikační kontroly.
+
+Části k přepsání:
+Marketingový plán potřebuje jasnější rozhodnutí pro malý B2B tým bez placených kampaní.
+
+Části k přesunu:
+Dvě provozní přílohy patří spíš do interního standardu než do hlavního čtení.
+
+Části k archivaci:
+Jedna starší příloha k pilotní distribuci veřejné verze.
+
+Nejdůležitější čtenářské tření:
+Čtenář někdy nepozná, zda má použít kapitolu, přílohu nebo checklist.
+
+Privacy-first nález:
+Některé šablony žádají URL, e-mail a poznámky z rozhovorů bez jasné retenční věty.
+
+Jedna nejbližší úprava:
+Doplnit do tří nejpoužívanějších šablon pole "účel dat" a "kdy smazat pracovní podklady".
+
+Co teď vědomě nerozšiřujeme:
+Nepřidáváme další přílohy, dokud nejsou zkrácené duplicitní části.
+
+Vlastník:
+Editor rukopisu.
+
+Termín návratu:
+Za šest měsíců nebo při přípravě veřejné verze.
+```
+
+### Checklist půlročního auditu
+
+- Vybrali jste části podle reálného použití, ne podle osobní oblíbenosti?
+- Má každá auditovaná část doložený pracovní výstup nebo jasný stav?
+- Víte, které části drží, zkrátit, přepsat, přesunout nebo archivovat?
+- Zmenšuje audit rukopis aspoň v jednom místě?
+- Našli jste čtenářské tření, které brání rozhodnutí?
+- Nevede žádná šablona k většímu sběru dat, než je nutné?
+- Má každý nový nebo upravený sběr údajů účel, hranici a retenční pravidlo?
+- Vznikla jedna nejbližší úprava, ne seznam přání?
+- Je jasné, co teď vědomě nerozšiřujete?
+- Uměl by nový člověk po auditu najít správnou část rychleji než před ním?
+
+Půlroční audit je brzda proti nekonečnému růstu rukopisu. V dobrém digitálním systému není síla v tom, že všechno zůstane dostupné navždy. Síla je v tom, že aktuální práce má jasnou cestu, staré věci mají stav a data nezůstávají ležet jen proto, že se kdysi hodila.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -121069,3 +121247,4 @@ Dobré ověření posledního dočištění je skoro neviditelné. Práce pokra�
 - 2026-05-24: Doplněna úvodní podkapitola o otevření další iterace: stabilní uzavření předchozí změny, konkrétní pracovní otázka, stop signály, karta další iterace a privacy-first brzda.
 - 2026-05-24: Doplněna úvodní podkapitola o rozhodovacím záznamu po iteraci: co do něj patří, kde má bydlet, jak držet privacy-first týmovou paměť, kdy rozhodnutí znovu otevřít a praktická šablona s checklistem.
 - 2026-05-24: Doplněna úvodní podkapitola o měsíčním návratu k rozhodnutím: kontrola posledních iterací, stavy rozhodnutí, hledání kolizí, privacy-first úklid, karta review a checklist.
+- 2026-05-25: Doplněna úvodní podkapitola o půlročním auditu použitelnosti rukopisu: výběr částí podle reálného použití, stavy pro úpravy, privacy-first kontrola šablon, karta auditu a checklist.
