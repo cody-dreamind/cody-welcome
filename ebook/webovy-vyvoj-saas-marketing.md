@@ -120112,8 +120112,273 @@ Uzavřená drobná úprava byla ověřena při prvním běžném použití a má
 
 První běžná kontrola po uzavřené drobné úpravě má potvrdit, že malá změna nezůstala v kartě, ale opravdu přešla do práce. Když drží, největší služba týmu je nepřidávat další vrstvu. Jen zapsat stav, uklidit stopu a nechat pravidlo dělat svou nudnou, užitečnou práci.
 
+## Příloha PP: Převod drobné stopy po první kontrole do posledního dočištění
+
+Někdy první běžná kontrola po uzavřené drobné úpravě dopadne skoro dobře. Pravidlo je nalezené, člověk mu rozumí, výsledek odpovídá aktuálnímu stavu, ale někde zůstane drobná stopa: starý odkaz, archivní šablona, poznámka v checklistu, nejasný název, komentář v dokumentu nebo dočasná tabulka, kterou už nikdo nepotřebuje.
+
+Tohle není důvod otevírat další velkou smyčku. Je to poslední dočištění. Jeho úkol je jednoduchý: odstranit nejmenší zbytek staré cesty, aby příští člověk nemusel přemýšlet, která varianta platí. Když se z drobné stopy stane nový projekt, tým si za odměnu za dobré uzavření vyrobí další práci. To je manažerská verze uklizeného stolu, na kterém zůstane krabice s nápisem "někdy roztřídit".
+
+Poslední dočištění má tři hranice:
+
+1. opravuje jen stopu po už uzavřené drobné úpravě;
+2. nemění samotné pravidlo, pokud pravidlo při kontrole fungovalo;
+3. po dokončení se vrací do běžného rytmu bez další samostatné kontroly.
+
+Pokud některá hranice neplatí, pravděpodobně nejde o dočištění. Jde o nový nález, návrat staré cesty nebo samostatnou údržbovou položku. To není tragédie. Jen tomu dejte správné jméno, protože špatně pojmenovaná práce má zvláštní talent nabobtnat.
+
+### Rozlište stopu od problému pravidla
+
+Nejdřív si ověřte, že problém není v pravidle samotném. Drobné dočištění dává smysl jen tehdy, když aktuální pravidlo fungovalo a zbytek staré cesty už je jen rušivý odpad kolem něj.
+
+Stopa po uzavřené úpravě:
+
+```text
+Pravidlo:
+První poptávkový formulář sbírá e-mail, cíl a volitelné URL.
+
+Kontrola:
+Autor pravidlo našel a použil správně.
+
+Stopa:
+V archivní šabloně zůstal odkaz "starý formulář s telefonem" a občas se zobrazuje ve výsledcích vyhledávání v dokumentaci.
+```
+
+Problém pravidla:
+
+```text
+Pravidlo:
+První poptávkový formulář sbírá e-mail, cíl a volitelné URL.
+
+Kontrola:
+Autor nevěděl, co znamená "cíl", a musel se doptat.
+
+Stopa:
+Nejde jen o starý odkaz. Pravidlo potřebuje jasnější formulaci nebo příklad.
+```
+
+V prvním případě uklidíte odkaz. Ve druhém případě upravujete pravidlo, ne jen stopu. To je jiné rozhodnutí, jiná karta a často i jiné ověření. Smíchat tyhle dvě situace je lákavé, protože obě vypadají malé. Jenže jedna je úklid, druhá je změna významu.
+
+Praktická otázka:
+
+```text
+Kdybychom odstranili jen tuto stopu, zůstane aktuální pravidlo beze změny a příště se použije snáz?
+```
+
+Pokud odpověď zní ano, pokračujte dočištěním. Pokud odpověď zní ne, otevřete práci jako úpravu pravidla. Ano, je to méně elegantní než všechno strčit do jednoho řádku. Ale elegantní zkratky jsou často jen dluh s lepším fontem.
+
+### Najděte nejbližší místo zásahu
+
+Dočištění má být co nejblíž místu, kde stopa mate práci. Nehledejte obecné "uklidíme dokumentaci". Najděte konkrétní odkaz, nadpis, šablonu, archivní stránku, automatizaci, pojmenování nebo vyhledávací výsledek.
+
+Příklady nejbližšího zásahu:
+
+- odstranit starý interní odkaz z projektové šablony;
+- přejmenovat archivní šablonu na `Archiv - nepoužívat jako výchozí`;
+- smazat dočasný export po ověření;
+- zkrátit poznámku v checklistu na aktuální pravidlo;
+- přesunout starou variantu do archivu mimo běžnou pracovní trasu;
+- opravit název sekce, který pořád připomíná původní formulaci;
+- vypnout dočasné upozornění v automatizaci, které po uzavření ztratilo smysl.
+
+Špatný zásah:
+
+```text
+Projít všechny marketingové materiály, jestli někde není podobný problém.
+```
+
+To může být legitimní práce, ale není to poslední dočištění po první kontrole. Je to audit. Audit má mít vlastní otázku, rozsah a důvod. Když ho schováte pod drobný úklid, tým ztratí kontrolu nad tím, proč práci dělá a kdy je hotová.
+
+Dobré dočištění se vejde do jedné věty:
+
+```text
+Odstraníme starý odkaz na archivní variantu formuláře z projektové šablony landing page.
+```
+
+Pokud věta obsahuje "a zároveň", "rovnou také" nebo "když už jsme u toho", zastavte se. Tyhle fráze jsou malá červená světla. Ne vždy znamenají problém, ale často ukazují, že se do úklidu snaží nastěhovat další práce.
+
+### Dočišťujte tak, aby příští člověk nemusel znát historii
+
+Cílem není zdokumentovat celý příběh změny. Cílem je, aby další člověk narazil už jen na platný stav. Historie patří do changelogu nebo rozhodovacího záznamu, ne do hlavní pracovní trasy.
+
+Před dočištěním:
+
+```text
+První poptávkový formulář:
+Nově zatím nepoužívejte telefon. Dřív jsme ho měli povinný, ale po úpravě z května a kontrole landing page pro konzultace se ukázalo, že e-mail, cíl a URL stačí. Starý postup je tady: ...
+```
+
+Po dočištění:
+
+```text
+První poptávkový formulář:
+Sbírá e-mail, cíl poptávky a volitelné URL. Telefon řešte až v navazující komunikaci, pokud je pro další krok opravdu potřeba.
+```
+
+Tohle není jen kosmetika. Každá historická vsuvka v pracovním místě zvyšuje šanci, že člověk začne přemýšlet o výjimkách, které už neplatí. Pracovní pravidlo má být použitelné bez znalosti archeologie. Changelog může být nudný a přesný; pracovní místo má být krátké a živé.
+
+Ponechte historii jen tehdy, když má provozní hodnotu:
+
+- vysvětluje bezpečnostní omezení, které se nesmí obejít;
+- ukazuje právní nebo smluvní důvod pravidla;
+- chrání před opakovanou drahou chybou;
+- obsahuje rozhodnutí, které se má pravidelně revidovat.
+
+I tehdy ji držte mimo hlavní větu. Dobrá pracovní trasa říká nejdřív, co platí. Teprve potom, pokud je to nutné, odkazuje na důvod.
+
+### Privacy-first dočištění znamená mazat víc než přidávat
+
+U drobných stop je privacy-first pohled velmi praktický. Ptejte se, jestli po kontrole nezůstaly dočasné důkazy, které už neslouží rozhodnutí: screenshoty formulářů, příklady poptávek, exporty z analytiky, seznam autorů, kopie zákaznických odpovědí nebo pracovní tabulky bez jasného vlastníka.
+
+Dobré dočištění:
+
+```text
+Smazán dočasný export použitý pro kontrolu formuláře. V rozhodovacím logu zůstává jen agregovaný závěr: první použití proběhlo bez návratu telefonu do povinných polí.
+```
+
+Slabé dočištění:
+
+```text
+Export necháme v archivu pro případ, že by se někdy hodil.
+```
+
+"Pro případ" je častý důvod, proč se z malého provozu stane sklad starých dat. Privacy-first provoz neznamená, že nesmíte mít důkazy. Znamená, že důkaz má účel, životnost a nejmenší potřebný rozsah.
+
+Privacy-first mini pravidlo:
+
+```text
+Když stopa už nepomáhá příštímu rozhodnutí, smažte ji nebo ji zkraťte na neosobní závěr.
+```
+
+Příklady:
+
+- místo screenshotu s reálnou poptávkou nechte větu "telefon se do formuláře nevrátil";
+- místo tabulky autorů nechte závěr "pravidlo bylo nalezeno bez dotazu";
+- místo kopie staré šablony nechte archivní poznámku s datem ukončení;
+- místo exportu z měření nechte agregovaný výsledek a datum kontroly;
+- místo komentářového vlákna přepište platný stav do kanonického místa.
+
+Nejde o administrativní čistotu pro radost z čistoty. Jde o snížení budoucího rizika. Staré pomocné stopy se časem mění v nejasné zdroje pravdy, zbytečné osobní údaje a materiály, které někdo jednou omylem použije jako aktuální.
+
+### Kdy dočištění zavřít
+
+Poslední dočištění je hotové, když platí tři věci:
+
+1. stopa, která mátla běžnou práci, zmizela nebo je jasně označená jako archiv;
+2. aktuální pravidlo zůstalo na kanonickém místě krátké a použitelné;
+3. nevznikla nová evidence, kterou bude muset někdo hlídat.
+
+Závěr může být velmi krátký:
+
+```text
+Dočištění:
+Starý odkaz na archivní formulář odstraněn z projektové šablony.
+
+Stav:
+Aktuální pravidlo zůstává beze změny a vrací se do běžného review landing pages.
+
+Privacy-first:
+Dočasný kontrolní export smazán, v logu zůstává jen neosobní závěr.
+```
+
+Nepřidávejte samostatné ověření jen proto, že jste něco dočistili. Pokud šlo opravdu o drobnou stopu, ověří se přirozeně při dalším běžném použití v existujícím rytmu. Výjimka je situace, kdy stopa měla bezpečnostní, právní nebo zákaznický dopad. Tam už ale nejspíš nejde o poslední dočištění, nýbrž o samostatný nález.
+
+### Karta posledního dočištění
+
+Karta má být menší než karta úpravy. Je to potvrzení úklidu, ne nový proces.
+
+```text
+Navazuje na kontrolu:
+Stav z kontroly:
+Drobná stopa:
+Nejbližší místo zásahu:
+Co odstraníme nebo zkrátíme:
+Co neměníme:
+Privacy-first úklid:
+Výsledek:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Navazuje na kontrolu:
+První běžná kontrola po uzavřené drobné úpravě formuláře.
+
+Stav z kontroly:
+Drží s drobnou stopou.
+
+Drobná stopa:
+V projektové šabloně zůstal odkaz na archivní variantu formuláře s povinným telefonem.
+
+Nejbližší místo zásahu:
+Sekce "První poptávkový formulář" v šabloně landing page.
+
+Co odstraníme nebo zkrátíme:
+Odstraníme starý odkaz a ponecháme jen aktuální pravidlo.
+
+Co neměníme:
+Neměníme CRM, follow-up, nabídku ani všechny historické landing pages.
+
+Privacy-first úklid:
+Smažeme dočasný export použitý při kontrole. V logu zůstane jen neosobní závěr.
+
+Výsledek:
+Kanonické místo ukazuje jen platný stav a stará cesta není v běžné trase dostupná.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-25.
+```
+
+### Codyho komentář
+
+Můj pohled: poslední dočištění je disciplína proti pokušení "ještě to trochu vylepšit". Když pravidlo funguje, největší hodnota není další chytrá vrstva. Největší hodnota je odstranit zbytek staré cesty a odejít.
+
+Týmy často podceňují malé stopy, protože žádná z nich sama o sobě nevypadá nebezpečně. Starý odkaz tady, archivní šablona tam, dočasný export v rohu, komentář v dokumentu. Jenže právě z takových drobností vzniká po pár měsících provozní mlha. Nikdo přesně neví, co platí, a všichni se tváří, že je to normální. Není. Je to jen neuklizená minulost.
+
+### Mini workshop na 10 minut
+
+Vyberte jednu kontrolu se stavem `Drží s drobnou stopou`.
+
+1. Pojmenujte stopu jednou pracovní větou.
+2. Ověřte, že pravidlo samo funguje a nemění se.
+3. Najděte nejbližší místo zásahu.
+4. Rozhodněte, co přesně odstraníte, zkrátíte nebo označíte jako archiv.
+5. Zapište, co vědomě neměníte.
+6. Zkontrolujte, jestli po kontrole nezůstaly dočasné exporty, screenshoty nebo osobní evidence.
+7. Proveďte dočištění a zapište krátký závěr.
+8. Vraťte téma do existujícího běžného rytmu.
+
+Výstup:
+
+```text
+Drobná stopa po první kontrole byla odstraněna bez změny pravidla, bez nové kontrolní vrstvy a bez zbytečné datové stopy.
+```
+
+### Checklist kapitoly
+
+- Navazuje dočištění na konkrétní první běžnou kontrolu?
+- Je stav opravdu `Drží s drobnou stopou`, ne návrat staré cesty?
+- Funguje aktuální pravidlo beze změny?
+- Je stopa popsaná podle práce, kterou mate?
+- Našli jste nejbližší místo zásahu?
+- Je jasné, co se odstraní, zkrátí nebo označí jako archiv?
+- Neotevíráte audit, redesign, revizi celé dokumentace ani nový proces?
+- Zůstane příštímu člověku v pracovní trase jen platný stav?
+- Je historie přesunutá do changelogu nebo rozhodovacího záznamu, pokud má smysl ji držet?
+- Smazali jste dočasné exporty, screenshoty nebo tabulky, které už neslouží rozhodnutí?
+- Zůstává jen neosobní nebo agregovaný závěr tam, kde stačí?
+- Je zapsané, co vědomě neměníte?
+- Vrací se téma po dočištění do běžného rytmu bez samostatného sledování?
+
+Poslední dočištění má být malé a trochu nudné. To je jeho přednost. Když po něm další člověk najde jen aktuální pravidlo, použije ho a nemusí znát starý příběh, práce je hotová. Ne všechno si zaslouží další smyčku. Některé věci si zaslouží jen dobře zavřít dveře.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha PP o převodu drobné stopy po první kontrole uzavřené úpravy do posledního dočištění: rozlišení stopy od problému pravidla, nejbližší místo zásahu, krátká pracovní trasa bez historie, privacy-first mazání pomocných stop, karta dočištění, Codyho komentář, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PO o první běžné kontrole po uzavřené drobné úpravě: normální použití, návrat k aktuálnímu pravidlu, provozní signály, čtyři výsledky kontroly, privacy-first stopová hygiena, kontrolní karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PN o uzavření potvrzené drobné úpravy do běžného rytmu: potvrzovací věta, přepis pravidla do kanonického místa, uzavření přechodových artefaktů, napojení na existující review, privacy-first úklid, uzavírací karta, mini workshop a checklist.
 - 2026-05-24: Doplněna Příloha PM o ověření drobné úpravy po dalším běžném použití: návrat ke kartě úpravy, výběr normálního použití, signály nalezení/pochopení/výsledku/ceny, čtyři rozhodovací stavy, poslední lokální doladění, privacy-first ověření, ověřovací karta, mini workshop a checklist.
