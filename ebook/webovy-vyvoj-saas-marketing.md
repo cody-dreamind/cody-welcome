@@ -2310,6 +2310,185 @@ Výstup má být jedna hotová ediční změna. Ne seznam třiceti nápadů. Ruk
 
 Codyho komentář: škrtání není trest za předchozí psaní. Je to servis pro dalšího čtenáře. Text, který se umí zkrátit, stárne líp než text, který si každou historickou větu brání jako rodinné stříbro.
 
+## Ověření zkrácené čtenářské trasy
+
+Redukční rozhodnutí je hotové až ve chvíli, kdy zkrácená část pořád vede čtenáře k práci. Nestačí, že rukopis má méně slov. Kratší text může být lepší, ale také může být jen hubenější a méně použitelný. Po každém větším zkrácení proto ověřte jednu čtenářskou trasu: člověk přijde s konkrétní otázkou, najde správné místo, pochopí další krok a nemusí lovit historii v pěti podobných kapitolách.
+
+Tahle kontrola nemá být uživatelský výzkum s tabulkou respondentů a třemi dashboardy. Pro pracovní e-book často stačí jeden průchod reálnou situací. Ideálně ho udělá někdo, kdo text nepsal, ale rozumí problému: projektový manažer, obchodník, vývojář, zakladatel nebo člověk, který podle rukopisu připravuje konkrétní změnu webu, SaaS nebo marketingu.
+
+Praktická otázka ověření zní:
+
+```text
+Dokáže čtenář po zkrácení udělat stejné nebo lepší rozhodnutí s menším třením a bez nové datové stopy?
+```
+
+Pokud odpověď není jasná, zkrácení ještě není hotové. Možná chybí směrovka, možná jste odstranili důležitý příklad, možná kanonické místo není vidět ve chvíli, kdy ho čtenář potřebuje. To není tragédie. Je to normální kontrola po editaci.
+
+### Vyberte jednu trasu, ne celý rukopis
+
+Neověřujte všechno najednou. Vyberte jednu pracovní situaci, kvůli které jste text zkracovali:
+
+- zakladatel chce upravit prodejní stránku po slabých poptávkách;
+- tým převádí ověřený experiment do pravidla;
+- marketér hledá privacy-first způsob, jak vyhodnotit obsah;
+- produktový člověk připravuje MVP checklist;
+- editor skládá veřejnou verzi e-booku z dlouhého rukopisu.
+
+Ke zvolené situaci napište jednoduchý scénář:
+
+```text
+Jsem:
+Potřebuji rozhodnout:
+Začínám v části:
+Očekávaný výstup:
+Kanonické místo, kam se mám dostat:
+Co nesmím kvůli ověření sbírat navíc:
+```
+
+Příklad:
+
+```text
+Jsem:
+Člověk, který po prvním ověření zkracuje formulář na prodejním webu.
+
+Potřebuji rozhodnout:
+Co zapsat do rozhodovacího záznamu a jak uklidit dočasné poznámky.
+
+Začínám v části:
+Převod duplicit do směrovek.
+
+Očekávaný výstup:
+Jedna věta rozhodnutí, odkaz na kanonické úklidové pravidlo a jasné retenční pravidlo pro pracovní podklady.
+
+Kanonické místo:
+Úklid po zavedení pracovního pravidla.
+
+Co nesmím kvůli ověření sbírat navíc:
+Žádné nové sledování chování čtenáře, žádné osobní poznámky o tom, kdo se kde ztratil.
+```
+
+Scénář musí být dost konkrétní, aby šel projít za deset až dvacet minut. Pokud se nevejde na jednu obrazovku, je pravděpodobně moc široký.
+
+### Sledujte rozhodnutí, ne dojmy
+
+Při průchodu se neptejte jen "líbí se ti to?" Líbivost je příjemná, ale nevypovídá, jestli text vede k práci. Sledujte čtyři věci:
+
+1. Nalezení: našel čtenář správné kanonické místo bez hádání?
+2. Pochopení: ví, proč je hlavní pravidlo právě tam?
+3. Akce: dokáže vyplnit kartu, checklist nebo rozhodovací větu?
+4. Hranice: ví, co teď nemá řešit, měřit ani sbírat?
+
+Záznam může být velmi krátký:
+
+```text
+Trasa:
+Kde čtenář začal:
+Kde se zastavil:
+Co udělal správně:
+Co chybělo:
+Jaká data by kvůli nejasnosti sbíral navíc:
+Jedna oprava:
+```
+
+Všímejte si hlavně míst, kde čtenář začne obcházet text. Pokud si vytváří vlastní poznámku, protože směrovka není dost jasná, je to signál. Pokud se vrací k odstraněné části, protože kanonické místo nepokrývá důležitý příklad, je to další signál. Pokud chce přidat tracker, formulář nebo tabulku jen proto, že neví, jak ověřit rozhodnutí ručně, privacy-first hranice z textu zmizela moc hluboko.
+
+### Tři typické chyby po zkrácení
+
+První chyba: směrovka je moc stručná. Čtenář sice dostane odkaz, ale neví, proč má jít právě tam. Oprava není vrátit celý výklad. Stačí přidat jednu větu kontextu: "Tady řešíte jen lokální použití; plné pravidlo drží kanonická část, protože určuje účel, minimum a retenci dat."
+
+Druhá chyba: kanonické místo je úplné, ale schované. Čtenář ho najde až po delším hledání nebo přes obsah, který neodpovídá jeho pracovní situaci. Oprava je navigační, ne obsahová: přidejte směrovku, přejmenujte nadpis nebo zkraťte úvod části tak, aby se správné místo ukázalo dřív.
+
+Třetí chyba: zkrácení odstranilo příklad, který držel rozhodnutí při zemi. Text je sice čistší, ale abstraktnější. Oprava je přenést jeden konkrétní příklad do kanonického místa, ne obnovit celou vedlejší kapitolu.
+
+Codyho komentář: dobré zkrácení se pozná podle toho, že čtenář pracuje rychleji, ne podle toho, že editor vítězoslavně ukáže nižší počet slov. Počet slov je váha batohu. Důležité je, jestli v něm zůstala mapa, voda a klíče.
+
+### Privacy-first ověření bez sledování čtenářů
+
+Ověření zkrácené trasy nesmí vytvořit nový problém se soukromím. Nepotřebujete nahrávat obrazovku, měřit každý scroll ani sbírat detailní osobní poznámky o člověku, který text zkouší. Stačí pracovní výsledek a anonymizované tření.
+
+Dobrá evidence:
+
+- "Čtenář nenašel kanonické místo z části o směrovkách."
+- "Chyběla věta, že dočasné exporty se po rozhodnutí mažou."
+- "Checklist vedl k novému sběru e-mailů, i když stačil existující záznam."
+
+Špatná evidence:
+
+- dlouhý záznam chování konkrétního člověka;
+- screenshoty interních dat bez důvodu;
+- tabulka osobních reakcí, která nemá retenční pravidlo;
+- nový analytický skript kvůli jedné ediční kontrole.
+
+Retenční pravidlo pro takové ověření může být jednoduché: pracovní poznámky z průchodu smažte po zapracování jedné opravy; v rozhodovacím logu nechte jen anonymizovaný závěr, co se změnilo a proč.
+
+### Karta ověření zkrácené trasy
+
+```text
+Pracovní situace:
+Zkrácená část:
+Kanonické místo:
+Testovaný scénář:
+Výstup čtenáře:
+Kde vzniklo tření:
+Chybějící směrovka nebo příklad:
+Privacy-first nález:
+Jedna oprava:
+Co zůstává mimo rozsah:
+Kdy se vrátíme:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní situace:
+Úklid dočasných podkladů po ověření formuláře.
+
+Zkrácená část:
+Příloha, která byla převedena na směrovku.
+
+Kanonické místo:
+Úklid po zavedení pracovního pravidla.
+
+Testovaný scénář:
+Čtenář má zapsat rozhodnutí a určit, co s poznámkami z pěti poptávek.
+
+Výstup čtenáře:
+Rozhodnutí zapsal správně, ale nevěděl, kdy smazat pracovní export.
+
+Kde vzniklo tření:
+Směrovka připomněla kanonickou část, ale neřekla, že retenční pravidlo je součástí úklidu.
+
+Chybějící směrovka nebo příklad:
+Jedna věta o smazání pracovního exportu po anonymizovaném závěru.
+
+Privacy-first nález:
+Bez opravy by tým mohl držet exporty déle "pro jistotu".
+
+Jedna oprava:
+Doplnit do směrovky větu o použití kanonického retenčního pravidla.
+
+Co zůstává mimo rozsah:
+Nepřepisujeme celou úklidovou kapitolu.
+
+Kdy se vrátíme:
+Při dalším zkrácení navazující přílohy.
+```
+
+### Checklist ověření zkrácené trasy
+
+- Vybrali jste jednu reálnou pracovní situaci?
+- Má scénář jasný začátek, výstup a kanonické místo?
+- Ověřujete rozhodnutí a akci, ne jen pocit z textu?
+- Pozná čtenář, kam má jít pro plné pravidlo?
+- Zůstaly po zkrácení důležité příklady, stop pravidla a privacy-first hranice?
+- Nevzniká kvůli nejasnosti nový sběr dat, export nebo tracker?
+- Je zapsaná jen anonymizovaná pracovní stopa, ne chování konkrétního člověka?
+- Má ověřovací poznámka retenční pravidlo?
+- Vznikla jedna konkrétní oprava, ne další redakční wishlist?
+- Je jasné, co v této iteraci zůstává mimo rozsah?
+
+Ověření zkrácené trasy je malá pojistka proti tomu, aby se editace tvářila jako pokrok jen proto, že ubrala text. Pracovní e-book má být kratší tam, kde to zrychlí rozhodnutí, a úplný tam, kde chybějící věta způsobí horší práci. Tohle rozlišení se nepozná z počtu znaků. Pozná se z průchodu člověka, který podle textu opravdu něco mění.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -123412,6 +123591,7 @@ Tichá provozní paměť je úspěšná právě tím, že na sebe nekřičí. Č
 
 ## Pracovní log
 
+- 2026-05-25: Doplněna úvodní podkapitola o ověření zkrácené čtenářské trasy: scénář jedné reálné pracovní situace, sledování rozhodnutí místo dojmů, typické chyby po zkrácení, privacy-first ověření bez sledování čtenářů, ověřovací karta a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o redukčním rozhodnutí po mapě duplicit: šest stavů duplicitní části, rozhodování podle ceny dalšího čtení, redukční karta, privacy-first kontrola účelu, minima, přístupu a retence, mini workshop a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o převodu duplicit do směrovek: kanonické místo, struktura krátké směrovky, přenos jedinečných detailů, privacy-first kontrola po zkrácení, karta převodu a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o ročním rozhodnutí o tvaru rukopisu: volba mezi živým e-bookem, veřejnou zkrácenou edicí, playbooky a interní znalostní bází, práce se škrtáním, privacy-first distribuce, roční karta a checklist.
