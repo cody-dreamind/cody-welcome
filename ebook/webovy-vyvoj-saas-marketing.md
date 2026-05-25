@@ -124002,8 +124002,245 @@ Víme, jestli tichá provozní paměť pořád drží, nebo potřebuje jednu mal
 
 První návrat šumu je dobrá zpráva, pokud ho zachytíte včas. Ukazuje, kde se pracovní realita trochu posunula od dokumentu. Špatná reakce je vyrobit z toho další vrstvu kontroly. Dobrá reakce je ověřit jedno místo, udělat nejmenší opravu nebo vědomě nezasáhnout. Tichá paměť tím zůstává živá, ale nezačne na sebe křičet.
 
+## Příloha QB: Převod slabého signálu šumu do jedné drobné opravy
+
+Slabý signál šumu je užitečný jen tehdy, když po něm následuje přiměřená reakce. Pokud tým signál přejde, šum se bude vracet. Pokud z něj udělá velký projekt, začne trestat každého, kdo si všiml drobného tření. Správná odpověď je menší: jedna drobná oprava v nejbližším pracovním místě, která člověku příště zkrátí cestu k rozhodnutí.
+
+Tato příloha navazuje na stav `Drobná oprava` z předchozí části. Neřeší situace, kdy signál ukázal na lokální revizi nebo samostatný problém. Tam už je potřeba jiné rozhodnutí. Tady pracujeme jen s případem, kdy je systém v zásadě v pořádku, ale jedno místo je trochu dál, hlučnější nebo starší, než by mělo být.
+
+Vstupní věta může znít:
+
+```text
+Slabý signál ukázal na jedno pracovní místo; opravíme nejmenší překážku a ověříme ji při dalším přirozeném použití.
+```
+
+Tato věta chrání rozsah. Neříká "předěláme dokumentaci". Neříká "zavedeme novou kontrolu". Říká jen: víme, kde vzniklo tření, a uděláme jednu opravu, která má snížit příští zaváhání.
+
+### Začněte potvrzením rozsahu
+
+Než sáhnete do textu, rozcestníku, formuláře nebo šablony, potvrďte si tři věci:
+
+1. Signál vznikl při běžné práci.
+2. Ověřené místo je opravdu nejbližší místu tření.
+3. Oprava nemění význam pravidla, jen zlepšuje cestu k němu.
+
+Pokud některý bod neplatí, nejste ve stavu drobné opravy. Možná jste našli nový problém, možná zastaralé rozhodnutí, možná mezeru v odpovědnosti. To je v pořádku, ale neřešte to potichu malou změnou. Malá oprava má být služba aktuálnímu pravidlu, ne tajná změna pravidla samotného.
+
+Příklad správného rozsahu:
+
+```text
+Signál:
+Člověk použil starý odkaz z onboardingové poznámky.
+
+Potvrzení:
+Kanonický rozcestník je správně, pravidlo se nemění, zastaralý je jen jeden odkaz.
+
+Rozsah:
+Nahradit odkaz a zkrátit větu, která na něj navazuje.
+```
+
+Příklad špatně zvoleného rozsahu:
+
+```text
+Signál:
+Tým se ptá, která nabídka platí pro nový segment.
+
+Problém:
+Nejde o starý odkaz, ale o chybějící rozhodnutí nabídky.
+
+Rozsah:
+Neopravovat rozcestník. Otevřít samostatné rozhodnutí.
+```
+
+### Vyberte jeden typ opravy
+
+Drobná oprava má mít jeden hlavní typ. Když jich uděláte pět najednou, hůř se pozná, co pomohlo, a snadno přidáte novou nejasnost.
+
+Nejčastější typy:
+
+- Přejmenování: název neodpovídá jazyku člověka, který věc hledá.
+- Přesun: správná odpověď existuje, ale je o krok dál, než začíná práce.
+- Zkrácení: text vysvětluje historii místo aktuálního rozhodnutí.
+- Odstranění: poblíž leží stará cesta, která odvádí pozornost.
+- Doplnění hranice: pravidlo je správné, ale chybí jedna věta, kdy ho nepoužít.
+- Oprava odkazu: kanonické místo je správné, ale jeden vstup vede jinam.
+
+Při výběru se ptejte:
+
+```text
+Co člověku příště ušetří první zbytečný krok?
+```
+
+Pokud odpověď zní "přidáme další vysvětlení", zastavte se. Někdy je to správně, ale u tiché provozní paměti bývá lepší ubrat starý šum než přidat další vrstvu textu.
+
+### Opravujte nejbližší pracovní místo
+
+Nejbližší pracovní místo je místo, kde člověk reálně začíná nebo kde se rozhoduje. U webu to může být stránka služby, formulář, interní checklist pro publikaci nebo sales karta. U SaaS to může být onboardingový krok, prázdný stav, help text u kritického nastavení nebo support makro. U marketingu to může být brief, publikační rozcestník, šablona kampaně nebo karta segmentu.
+
+Oprava má být vidět tam, kde vzniká práce. Nestačí upravit vzdálený dokument, pokud se k němu člověk při běžném průchodu nedostane. Stejně tak není nutné přepisovat všechna související místa, když problém vznikl jen v jednom vstupu.
+
+Praktické pravidlo:
+
+```text
+Opravte první místo, které člověk potká před chybou.
+```
+
+Příklad:
+
+- Pokud člověk vybral starou šablonu ze seznamu, opravte seznam.
+- Pokud do formuláře zadal špatný typ informace, opravte popisek pole.
+- Pokud v sales hovoru použil starý popis služby, opravte sales kartu, ne archivní článek.
+- Pokud v onboardingu klikl na starý dokument, opravte onboardingový krok.
+
+### Nechte stopu jen tam, kde pomůže další práci
+
+Drobná oprava nepotřebuje velký záznam. Potřebuje ale krátkou stopu, aby bylo jasné, proč se něco změnilo, pokud se k tomu někdo vrátí. Ideální je jedna changelogová věta u pracovního místa nebo v rozhodovacím logu.
+
+Dobrá stopa:
+
+```text
+2026-05-25: Nahrazen starý odkaz na brief v onboardingové poznámce; kanonické místo zůstává rozcestník marketingových šablon.
+```
+
+Slabá stopa:
+
+```text
+Opraveno podle chatu.
+```
+
+Příliš velká stopa:
+
+```text
+Podrobný popis toho, kdo si čeho všiml, kdy přesně hledal odkaz, jaké další věci by se možná mohly v budoucnu upravit a proč by bylo dobré projít všechny onboardingové materiály.
+```
+
+U malé opravy je cílem dohledatelnost, ne kronika. Pokud se z poznámky stává dlouhý příběh, pravděpodobně buď řešíte větší problém, nebo ukládáte víc kontextu, než budoucí práce potřebuje.
+
+### Privacy-first brzda drobné opravy
+
+Malá oprava má datovou stopu zmenšit, nebo ji aspoň nezvětšit. To platí i pro interní provoz. Nepřidávejte měření použití dokumentu, záznamy obrazovek, osobní hodnocení ani nové formuláře jen proto, že se jednou objevil šum.
+
+Privacy-first kontrola před uzavřením:
+
+- Nezapisujeme jména lidí, pokud nejsou nutná pro vlastnictví úkolu.
+- Neopisujeme zákaznický tiket, když stačí anonymizovaný popis situace.
+- Nenecháváme v aktivním prostoru starý dokument "pro jistotu".
+- Neduplikujeme opravené pravidlo do dalšího místa bez jasného účelu.
+- Mažeme dočasné screenshoty, exporty a pracovní poznámky po uzavření.
+- Nezavádíme nový tracker, auditní tabulku ani review rituál kvůli jedné malé opravě.
+
+U veřejných materiálů je navíc potřeba zkontrolovat, zda oprava nemění slib vůči zákazníkovi. Přepsat špatný odkaz je malá oprava. Změnit formulaci nabídky, cenu, garanci, rozsah služby nebo způsob zpracování dat už malá oprava není, i kdyby šlo o jednu větu.
+
+### Ověřte opravu přirozeným použitím
+
+Drobné opravy se nejlépe ověřují tím, že se pracovní místo znovu normálně použije. Nezakládejte kvůli tomu schůzku, pokud nejde o kritické místo. Stačí si zapsat, při jaké nejbližší situaci poznáte, že oprava drží.
+
+Ověřovací otázky:
+
+1. Našel člověk správné místo bez staré zkratky?
+2. Pochopil aktuální pravidlo bez znalosti historie?
+3. Nevznikla nová duplicita nebo vedlejší vysvětlování?
+4. Nezůstala po opravě zbytečná datová stopa?
+
+Výsledky mohou být čtyři:
+
+- Drží: oprava pomohla a nepotřebuje další akci.
+- Drží s drobnou stopou: jedna stará zmínka ještě překáží.
+- Nestačí: problém je větší než drobná oprava.
+- Bez důkazu: místo se zatím přirozeně nepoužilo.
+
+Stav `Bez důkazu` není chyba. Jen znamená, že oprava čeká na běžné použití. Nevyrábějte umělý test jen proto, abyste mohli kartu zavřít o hodinu dřív. Výjimkou jsou kritická místa, kde chyba může poškodit zákazníka, bezpečnost nebo právní soulad.
+
+### Karta drobné opravy po slabém signálu
+
+```text
+Slabý signál:
+Nejbližší pracovní místo:
+Potvrzení rozsahu:
+Typ opravy: Přejmenování / Přesun / Zkrácení / Odstranění / Doplnění hranice / Oprava odkazu
+Konkrétní změna:
+Co se nemění:
+Krátká stopa:
+Privacy-first kontrola:
+Ověření při nejbližším použití:
+Stav po ověření:
+```
+
+Vyplněný příklad:
+
+```text
+Slabý signál:
+Nový člověk otevřel starou šablonu případové studie z onboardingové poznámky.
+
+Nejbližší pracovní místo:
+Onboardingový krok "Začni briefem".
+
+Potvrzení rozsahu:
+Kanonický rozcestník je aktuální, problém je jen ve starém odkazu.
+
+Typ opravy:
+Oprava odkazu a zkrácení věty.
+
+Konkrétní změna:
+Odkaz vede na rozcestník marketingových šablon, věta už nezmiňuje historický název briefu.
+
+Co se nemění:
+Nemění se struktura onboardingu ani samotná šablona případové studie.
+
+Krátká stopa:
+Changelog u onboardingového kroku.
+
+Privacy-first kontrola:
+Bez jmen, screenshotů a kopírování staré šablony; stará kopie přesunuta mimo aktivní prostor.
+
+Ověření při nejbližším použití:
+Při dalším zadání případové studie zkontrolovat, zda člověk začne z rozcestníku.
+
+Stav po ověření:
+Čeká na přirozené použití.
+```
+
+### Codyho komentář
+
+Drobná oprava je disciplína ega. Skoro vždycky jde najít deset sousedních věcí, které "by se taky měly". Jenže tichá provozní paměť se nerozbíjí tím, že občas chybí velký audit. Rozbíjí se tím, že se malé opravy začnou nabalovat na malé romány. Codyho pravidlo: když je problém malý, oprava má být menší než chuť všechno vysvětlit.
+
+### Mini workshop na 8 minut
+
+Vezměte jeden stav `Drobná oprava` z předchozí přílohy.
+
+1. Potvrďte, že nejde o změnu pravidla.
+2. Vyberte jeden typ opravy.
+3. Najděte první místo, které člověk potká před chybou.
+4. Navrhněte konkrétní změnu v jedné větě.
+5. Zapište, co se nemění.
+6. Proveďte privacy-first kontrolu stopy.
+7. Určete nejbližší přirozené použití pro ověření.
+
+Výstup:
+
+```text
+Máme jednu drobnou opravu, víme kde ji udělat, co nemění a jak poznáme, že drží.
+```
+
+### Checklist kapitoly
+
+- Navazujete na potvrzený stav `Drobná oprava`?
+- Je jasné, že se nemění význam pravidla?
+- Vybrali jste jeden hlavní typ opravy?
+- Opravujete nejbližší pracovní místo, ne vzdálený dokument pro dobrý pocit?
+- Je konkrétní změna menší než původní šum?
+- Zapsali jste, co se vědomě nemění?
+- Stačí krátká changelogová stopa místo nové evidence?
+- Odstranili jste staré odkazy, kopie nebo pomocné poznámky, které by znovu mátly?
+- Nepřidáváte měření, screenshoty ani osobní hodnocení lidí?
+- Má oprava přirozený okamžik ověření?
+- Je jasné, kdy říct `Drží`, `Drží s drobnou stopou`, `Nestačí` nebo `Bez důkazu`?
+
+Drobné opravy jsou dobrý způsob, jak udržet web, SaaS i marketing v provozní kondici bez velkých rituálů. Fungují ale jen tehdy, když zůstanou malé, konkrétní a blízko skutečné práce. Jakmile oprava začne měnit pravidlo, sbírat další data nebo otevírat celý systém, už to není drobná oprava. Je to nové rozhodnutí a zaslouží si vlastní prostor.
+
 ## Pracovní log
 
+- 2026-05-25: Doplněna Příloha QB o převodu slabého signálu šumu do jedné drobné opravy: potvrzení rozsahu, typy malých oprav, zásah v nejbližším pracovním místě, krátká stopa, privacy-first brzda, přirozené ověření, karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QA o prvním signálu, že tichá provozní paměť znovu šumí: slabé signály v běžné práci, ověření nejbližšího pracovního místa, čtyři stavy návratu šumu, privacy-first kontrola bez sledování lidí, karta, mini workshop a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o ověření zkrácené čtenářské trasy: scénář jedné reálné pracovní situace, sledování rozhodnutí místo dojmů, typické chyby po zkrácení, privacy-first ověření bez sledování čtenářů, ověřovací karta a checklist.
 - 2026-05-25: Doplněna úvodní podkapitola o redukčním rozhodnutí po mapě duplicit: šest stavů duplicitní části, rozhodování podle ceny dalšího čtení, redukční karta, privacy-first kontrola účelu, minima, přístupu a retence, mini workshop a checklist.
