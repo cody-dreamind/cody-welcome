@@ -125466,8 +125466,233 @@ Ověřená drobná úprava je součástí aktuálního pracovního místa a pomo
 
 Uzavření ověřené trvalé drobné úpravy je poslední drobný úklid před návratem do klidu. Práce se nemá chlubit tím, kolik stop po sobě nechala. Má příštímu člověku nabídnout správné místo, jasnou větu a minimum zbytečných dat. Když se to povede, malá oprava přestane být událost a stane se normálním způsobem práce.
 
+## Příloha QI: První návrat k běžnému pracovnímu místu po uzavřené drobné úpravě
+
+Když se drobná úprava uzavře do běžného pracovního místa, ještě není nutné hned vymýšlet další vylepšení. První návrat má jinou roli: ověřit, že aktuální místo práce opravdu drží samo. Tým by neměl potřebovat autora úpravy, starou kartu, chatovou poznámku ani vysvětlení bokem.
+
+První návrat zní jednoduše:
+
+```text
+Otevřeme stejné pracovní místo při normální práci a ověříme, jestli vede ke správnému výsledku bez návratu k pomocným stopám.
+```
+
+Tohle není audit, retro ani mini redesign. Je to krátký reality check. Pokud se z něj stane projekt, drobná úprava se změnila v procesní problém. A ten sem nepatří. Sem patří jedna běžná pracovní situace, jeden průchod a jedno rozhodnutí.
+
+### Vraťte se jen při přirozené práci
+
+Návrat má přijít ve chvíli, kdy pracovní místo někdo stejně použije:
+
+- obchodník otevře sales kartu před dalším hovorem;
+- marketér vezme šablonu pro případovou studii;
+- vývojář projde checklist release;
+- support použije odpověď na opakovaný dotaz;
+- zakladatel upraví stránku nabídky;
+- nový člověk hledá správnou trasu v onboardingu.
+
+Nevytvářejte umělou kontrolní schůzku jen proto, že úprava existuje. Pokud pracovní místo nikdo nepoužije, je to samo o sobě signál. Možná je změna v části systému, která není tak důležitá, jak se zdálo. Možná čeká na sezónní okamžik. Možná je potřeba ji nechat spát.
+
+Praktická otázka:
+
+```text
+Přišla situace, kvůli které toto pracovní místo existuje?
+```
+
+Pokud ne, návrat odložte. Nevyrobte práci jen kvůli kontrole práce. To je elegantní cesta k tomu, aby tým měl plný kalendář a prázdnější produkt.
+
+### Sledujte samostatnost pracovního místa
+
+Při prvním návratu nesledujte, jestli člověk pracuje dokonale. Sledujte, jestli pracovní místo pomáhá bez dalšího výkladu. Dobré uzavření poznáte podle toho, že se člověk nemusí ptát na historii úpravy.
+
+Hledejte tři signály:
+
+- Výsledek: vznikl správný výstup, rozhodnutí nebo další krok?
+- Samostatnost: stačilo aktuální pracovní místo bez dotazu bokem?
+- Klid: nevznikla potřeba otevřít starou kartu, chat, screenshot nebo pomocný export?
+
+Příklad:
+
+```text
+Situace:
+Marketér připravuje novou případovou studii.
+
+Pracovní místo:
+Brief případové studie a marketingový rozcestník.
+
+Pozorování:
+Našel správnou šablonu podle nového názvu, použil anonymizační větu a neptal se na starý postup.
+
+Závěr:
+Běžné pracovní místo drží. Není potřeba další úprava.
+```
+
+To je ideální výsledek: nic dramatického se nestalo. V provozu je často nejlepší zpráva právě to, že práce proběhla nudně, správně a bez zvláštní péče.
+
+### Rozlišujte čtyři výsledky návratu
+
+Po prvním návratu zapište jeden ze čtyř stavů:
+
+```text
+Drží:
+Pracovní místo vedlo k dobrému výsledku bez pomocných stop.
+
+Lehce drhne:
+Výsledek vznikl, ale jedna věta, odkaz nebo pořadí zbytečně zdržely.
+
+Vrací starou cestu:
+Člověk musel použít starou poznámku, kartu, screenshot nebo vysvětlení bokem.
+
+Neověřeno:
+Situace zatím nenastala nebo průchod neříká dost.
+```
+
+Každý stav má jinou reakci.
+
+U stavu `Drží` neotevírejte novou práci. Nechte pracovní místo žít a vraťte se až v běžném rytmu. U stavu `Lehce drhne` udělejte jen jednu nejbližší úpravu, pokud je jasná. U stavu `Vrací starou cestu` se vraťte k otázce, jestli jste změnu opravdu propsali do správného místa. U stavu `Neověřeno` nezapisujte úspěch ani selhání; jen určete, kdy může přijít další přirozený průchod.
+
+Chyba je smíchat všechny stavy do jednoho pocitu typu "asi to ještě není ono". Taková věta nic neřídí. Stav musí říct, jestli práci zavřít, drobně opravit, vrátit k pracovnímu místu nebo počkat.
+
+### Nehledejte nové nápady v uzavřené smyčce
+
+První návrat často odhalí další možnosti:
+
+- šablona by mohla mít lepší příklad;
+- rozcestník by mohl být kratší;
+- checklist by se dal rozdělit podle role;
+- sales karta by mohla mít novou námitku;
+- onboardingová trasa by mohla dostat kratší úvod.
+
+Některé nápady budou dobré. Přesto je nelepte automaticky na právě uzavřenou drobnou úpravu. Tato smyčka má ověřit, jestli uzavřené pracovní místo drží. Nové nápady patří do samostatné karty, pokud mají vlastní důvod, vlastníka a ověření.
+
+Pravidlo:
+
+```text
+Pokud nový nápad neřeší původní tření, není součástí této kontroly.
+```
+
+Tím chráníte tým před nekonečným vylepšováním. Drobné úpravy jsou užitečné právě proto, že končí. Když nekončí, nejsou drobné; jen mají slušné vystupování.
+
+### Privacy-first návrat bez nové evidence
+
+První návrat k běžnému pracovnímu místu nesmí vytvořit větší datovou stopu než původní problém. Většinou stačí krátká poznámka u pracovního místa nebo v changelogu. Nepřidávejte sledování kliků, nahrávání obrazovky, detailní tabulku výkonu člověka ani další formulář.
+
+Privacy-first kontrola se ptá:
+
+- Potřebujeme pro ověření osobní údaje, nebo stačí obecný závěr?
+- Vznikla při průchodu pracovní kopie s citlivými údaji?
+- Nezůstala stará pomocná stopa otevřená jen proto, že se na ni někdo znovu podíval?
+- Dá se výsledek zapsat bez jmen zákazníků, konkrétních citací a interních detailů?
+- Potvrzuje pracovní místo datovou hranici jasněji než před úpravou?
+
+Dobrý zápis:
+
+```text
+Při běžném použití šablona stačila bez staré karty. Anonymizační věta byla použita. Nevznikl nový export ani kopie zákaznických citací.
+```
+
+Špatný zápis:
+
+```text
+Přikládáme screenshoty celé práce, seznam zákaznických citací a osobní poznámky pro jistotu.
+```
+
+Pro jistotu je často jen jiný název pro data bez účelu. Pokud účel skončil, data nemají zůstávat jako suvenýr.
+
+### Návratová karta pracovního místa
+
+```text
+Pracovní místo:
+Uzavřená drobná úprava:
+Přirozená situace použití:
+Kdo nebo jaká role místo použila:
+Výsledek:
+Bylo potřeba otevřít pomocnou stopu?
+Stav návratu:
+Jedna případná drobná oprava:
+Co se neotevírá:
+Privacy-first poznámka:
+Další návrat:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Brief případové studie a marketingový rozcestník.
+
+Uzavřená drobná úprava:
+Přejmenování odkazu podle výstupu a doplnění anonymizační věty.
+
+Přirozená situace použití:
+Příprava nové případové studie po zákaznickém rozhovoru.
+
+Kdo nebo jaká role místo použila:
+Marketing.
+
+Výsledek:
+Správná šablona byla nalezená bez dotazu a anonymizační věta se použila před sdílením příkladu.
+
+Bylo potřeba otevřít pomocnou stopu?
+Ne.
+
+Stav návratu:
+Drží.
+
+Jedna případná drobná oprava:
+Žádná.
+
+Co se neotevírá:
+Nestrukturuje se celá knihovna case studies a nepřidává se nové měření.
+
+Privacy-first poznámka:
+Nevznikl nový export ani kopie se zákaznickými citacemi. Příklad zůstává anonymizovaný.
+
+Další návrat:
+Jen při běžné měsíční kontrole marketingových šablon nebo při novém potvrzeném tření.
+```
+
+### Codyho komentář
+
+První návrat má být skoro nudný. Otevřít místo, projít práci, napsat stav a jít dál. Pokud se u každé malé úpravy rozsvítí poradní místnost, tým si brzy začne chránit starý chaos, protože nový pořádek bude moc drahý. To je přesně opačný výsledek, než chceme.
+
+Dobrá provozní úprava má mizet z pozornosti. Není tu od toho, aby si říkala o obdiv. Je tu od toho, aby další práce proběhla tišeji, s menší nejistotou a s menší datovou stopou.
+
+### Mini workshop na 6 minut
+
+Vezměte jedno pracovní místo, kam se nedávno propsala ověřená drobná úprava.
+
+1. Počkejte na nejbližší přirozené použití.
+2. Sledujte jen výsledek, samostatnost a návrat pomocných stop.
+3. Zapište jeden ze čtyř stavů: drží, lehce drhne, vrací starou cestu, neověřeno.
+4. Pokud stav drží, nic dalšího neotevírejte.
+5. Pokud lehce drhne, určete jednu nejbližší opravu.
+6. Pokud se vrací stará cesta, zkontrolujte, jestli aktuální pracovní místo opravdu obsahuje správný stav.
+7. Smažte nebo zavřete pomocné podklady, které se při návratu ukázaly jako zbytečné.
+
+Výstup:
+
+```text
+Pracovní místo po uzavřené drobné úpravě buď drží v běžné práci, nebo má jednu jasně pojmenovanou nejbližší opravu.
+```
+
+### Checklist kapitoly
+
+- Nastal návrat při přirozené práci, ne kvůli umělé kontrole?
+- Sledujete pracovní místo místo výkonu konkrétního člověka?
+- Víte, jestli výsledek vznikl bez staré karty, chatu nebo vysvětlení bokem?
+- Má návrat jeden ze čtyř stavů?
+- Neotevíráte nové nápady, které neřeší původní tření?
+- Pokud pracovní místo drží, umíte opravdu nedělat další práci?
+- Pokud lehce drhne, je oprava jen jedna a na nejbližším místě?
+- Pokud se vrací stará cesta, víte, kam se správný stav nepropsal?
+- Nevzniklo kvůli ověření nové sledování, export nebo zbytečná evidence?
+- Je privacy-first poznámka krátká, obecná a bez osobních údajů?
+- Je další návrat navázaný na běžný rytmus nebo nové potvrzené tření?
+
+První návrat k běžnému pracovnímu místu je test tichosti. Když práce proběhne správně bez vysvětlování, úprava splnila účel. Když ne, neopravujte celý systém. Najděte nejbližší místo, kde se práce zasekla, a rozhodněte, jestli stačí jedna drobná oprava, nebo je potřeba otevřít novou samostatnou smyčku.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QI o prvním návratu k běžnému pracovnímu místu po uzavřené drobné úpravě: přirozené použití, samostatnost pracovního místa, čtyři výsledky návratu, ochrana před novými nápady v uzavřené smyčce, privacy-first návrat bez nové evidence, návratová karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QH o uzavření ověřené trvalé drobné úpravy do běžného pracovního místa: rozhodovací věta, přepis aktuálního pracovního místa, zavření pomocných stop, changelog, privacy-first úklid podkladů, karta uzavření, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QG o ověření trvalé drobné úpravy při dalším přirozeném použití: návrat k původnímu tření, přirozené použití, signály výsledku, samostatnosti a datové stopy, čtyři výsledky ověření, privacy-first kontrola bez nové vrstvy sledování, ověřovací karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QE o první kontrole tiché rutiny po návratu do běžného provozu: přirozený průchod, tiché signály, čtyři výsledky kontroly, omezení nové procesní vrstvy, privacy-first kontrola, kontrolní karta, Codyho komentář, mini workshop a checklist.
