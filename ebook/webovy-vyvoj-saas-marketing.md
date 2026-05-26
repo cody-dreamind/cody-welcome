@@ -127794,8 +127794,200 @@ Standard po stabilizaci buď drží a vrací se do běžného rytmu, nebo má je
 
 První kontrola pracovního standardu má být klidná. Je to krátké ověření, že drobná stabilizace už nemusí být vidět, protože správná práce proběhne bez ní. Když standard drží, nechte ho pracovat. Když drhne, opravte nejbližší pracovní místo. A když se vrací původní problém, otevřete ho poctivě znovu. Žádná velká magie, jen provozní hygiena bez zbytečného šmírování.
 
+## Příloha QR: Převod výsledku kontroly pracovního standardu do jedné korekce standardu
+
+Kontrola pracovního standardu má hodnotu až ve chvíli, kdy z ní vznikne jasné rozhodnutí. Pokud výsledek zní `drží`, není co opravovat. Pokud ale zůstala drobná stopa nebo standard lehce drhne, je potřeba udělat jednu korekci, která zlepší další použití bez toho, aby se z malé kontroly stal nový projekt.
+
+Tato příloha je pro situaci, kdy standard není rozbitý. Jen není dost samostatný, dost viditelný nebo dost čistý. Člověk se k pravidlu nakonec dostane, ale musí obejít starou poznámku. Použije správný postup, ale ptá se na význam jedné věty. Nevznikne incident, ale zůstane pomocný export, který už nikdo nepotřebuje. To jsou přesně ty malé provozní třísky, které se vyplatí vytáhnout hned.
+
+Cíl korekce je jednoduchý: příští člověk má standard najít, pochopit a použít s menším třením než při kontrole. Nic víc. Pokud korekce začne měnit obsah standardu, odpovědnosti, nástroje nebo datové toky, už nejde o korekci po kontrole, ale o novou změnu se samostatným záznamem.
+
+### Vycházejte z výsledku kontroly
+
+Nezačínejte novým brainstormem. Otevřete kontrolní kartu z předchozí přílohy a přepište z ní jen tři věci:
+
+```text
+Výsledek kontroly:
+Kde vzniklo tření:
+Co má být po korekci při dalším použití snazší:
+```
+
+Příklad:
+
+```text
+Výsledek kontroly:
+Drží s drobnou stopou.
+
+Kde vzniklo tření:
+V rozcestníku zůstal starý odkaz na předchozí retenční poznámku.
+
+Co má být po korekci snazší:
+Editor má dojít rovnou na aktuální retenční pravidlo bez staré odbočky.
+```
+
+Tento krátký zápis drží korekci při zemi. Pokud neumíte jednou větou popsat, co má být snazší, pravděpodobně ještě nemáte korekci, ale jen obecný pocit nepořádku.
+
+### Vyberte jeden typ korekce
+
+Většina drobných korekcí pracovního standardu spadá do jedné z pěti skupin:
+
+- směrovka: přejmenovat, přesunout nebo odstranit odkaz na správné pracovní místo;
+- jazyk: zjednodušit jednu větu, která se při použití musela vysvětlovat;
+- pořadí: posunout pravidlo blíž k okamžiku rozhodnutí;
+- úklid: zavřít starý komentář, archivovat duplicitní poznámku nebo smazat pomocný export;
+- hranice: doplnit jednu větu, kdy standard neplatí a kdy se má otevřít nová karta změny.
+
+Vyberte jeden typ. Nemíchejte v jedné korekci směrovku, přepis, úklid i změnu odpovědnosti. Tím byste sice možná uklidili víc věcí najednou, ale další kontrola už nepozná, která změna pomohla a která byla jen kosmetika.
+
+Praktické pravidlo: korekce se má vejít do jednoho pracovního místa. Pokud musíte měnit tři dokumenty, dvě šablony a popis role, zastavte se. To je větší změna a zaslouží si normální rozhodovací kartu.
+
+### Zasáhněte tam, kde člověk opravdu pracoval
+
+Korekce má patřit do místa, které se ukázalo při kontrole. Ne do ideální dokumentace, kterou by lidé měli používat, ale do skutečné trasy, kterou použili.
+
+Pokud editor začal z rozcestníku, opravte rozcestník. Pokud obchodník použil sales kartu, opravte sales kartu. Pokud vývojář narazil v issue šabloně, opravte issue šablonu. Neopravujte obecný playbook jen proto, že vypadá oficiálněji.
+
+Příklad korekce:
+
+```text
+Místo kontroly:
+Ediční rozcestník pro veřejnou verzi.
+
+Tření:
+Starý odkaz "retence exportů" vedl na archivní poznámku.
+
+Korekce:
+Odkaz se přejmenuje na "aktuální retenční pravidlo" a povede na kapitolu o úklidu po zavedení pracovního pravidla.
+
+Co zůstává mimo rozsah:
+Nepřepisujeme celou kapitolu o retenci a nepřidáváme nový formulář pro kontrolu exportů.
+```
+
+Tady je důležitá poslední věta. Malá korekce bez hranice rozsahu má tendenci růst. A když roste, často si začne říkat "ještě to rychle uklidím", což je nebezpečně elegantní věta pro práci bez konce.
+
+### Napište korekční větu před úpravou
+
+Ještě před editací napište jednu korekční větu:
+
+```text
+Po korekci bude [role] v [pracovní situaci] dělat [konkrétní krok] bez [původní tření].
+```
+
+Příklad:
+
+```text
+Po korekci bude editor při úpravě kapitoly s exportem otevírat aktuální retenční pravidlo přímo z edičního rozcestníku bez zastávky ve staré poznámce.
+```
+
+Když věta působí přirozeně, můžete upravit pracovní místo. Když se do ní snažíte nacpat tři role, čtyři situace a půl roadmapy, korekce je moc široká. Zmenšete ji.
+
+Korekční větu nepište jako interní poezii pro changelog. Má být testovatelná při dalším použití. Příště se stačí podívat, jestli se role dostala ke správnému kroku bez původního tření.
+
+### Privacy-first korekce znamená méně stop
+
+Korekce po kontrole má datovou stopu spíš zmenšit než zvětšit. Typický správný výsledek:
+
+- starý export je smazaný nebo přesunutý do omezeného archivu;
+- duplicitní poznámka je zavřená s odkazem na aktuální zdroj pravdy;
+- v kontrolní kartě zůstává jen anonymní popis tření;
+- screenshot s osobními údaji je nahrazen textovým shrnutím;
+- nová korekce nepřidává tracker, dashboard ani sledování jednotlivců.
+
+Pokud kvůli korekci vzniká nový seznam lidí, nová evidence chyb konkrétních osob nebo kopie zákaznických dat, něco je špatně. Opravujete pracovní místo, ne budujete dohled nad tím, kdo se v něm spletl.
+
+Codyho komentář: nejlevnější privacy-first korekce je často smazání staré odbočky. Žádný nový proces, žádná tabulka, žádný hrdinský diagram. Jen méně míst, kde se dá udělat špatné rozhodnutí. Krása? Nenápadná. Účinnost? Velmi slušná.
+
+### Karta korekce standardu
+
+```text
+Standard:
+Výsledek poslední kontroly:
+Původní tření:
+Typ korekce:
+Pracovní místo zásahu:
+Korekční věta:
+Konkrétní úprava:
+Co zůstává mimo rozsah:
+Privacy-first úklid:
+Jak se ověří při dalším použití:
+Kdy korekci zavřít:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Směrovka k retenčnímu pravidlu v edičním checklistu.
+
+Výsledek poslední kontroly:
+Drží s drobnou stopou.
+
+Původní tření:
+V rozcestníku zůstal starý odkaz na archivní retenční poznámku.
+
+Typ korekce:
+Směrovka a úklid.
+
+Pracovní místo zásahu:
+Ediční rozcestník veřejné verze.
+
+Korekční věta:
+Po korekci editor při úpravě kapitoly s exportem otevře aktuální retenční pravidlo přímo z rozcestníku bez zastávky ve staré poznámce.
+
+Konkrétní úprava:
+Starý odkaz se odstraní, aktuální odkaz se přejmenuje podle pracovního rozhodnutí.
+
+Co zůstává mimo rozsah:
+Nemění se celé retenční pravidlo ani struktura rozcestníku.
+
+Privacy-first úklid:
+Archivní poznámka bez další hodnoty se smaže; v kartě zůstane jen anonymní popis tření.
+
+Jak se ověří při dalším použití:
+Při další ediční úpravě se sleduje jen to, jestli editor otevře správné pravidlo bez staré odbočky.
+
+Kdy korekci zavřít:
+Po jednom přirozeném použití bez původního tření.
+```
+
+### Mini workshop na 7 minut
+
+Vezměte jednu kontrolu pracovního standardu se stavem `drží s drobnou stopou` nebo `drhne`.
+
+1. Přepište výsledek kontroly a původní tření.
+2. Vyberte jeden typ korekce.
+3. Najděte pracovní místo, kde tření opravdu vzniklo.
+4. Napište korekční větu.
+5. Udělejte nebo naplánujte jen jednu konkrétní úpravu.
+6. Zapište, co zůstává mimo rozsah.
+7. Smažte, zavřete nebo anonymizujte pomocné stopy, které už nejsou potřeba.
+
+Výstup:
+
+```text
+Kontrola standardu má jednu lokální korekci, která snižuje původní tření a nevytváří novou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Vychází korekce z konkrétní kontrolní karty?
+- Je jasné, jestli šlo o stav `drží s drobnou stopou` nebo `drhne`?
+- Popisujete původní tření jednou větou?
+- Vybrali jste jeden typ korekce, ne balík různých úprav?
+- Zasahujete v pracovním místě, které člověk opravdu použil?
+- Existuje korekční věta ve formátu role, situace, krok a původní tření?
+- Je jasné, co zůstává mimo rozsah?
+- Neotevírá korekce celý standard, odpovědnosti ani datové toky?
+- Snižuje korekce počet starých odboček, kopií, exportů nebo pomocných stop?
+- Nezavádíte kvůli korekci sledování jednotlivců?
+- Dá se ověření provést při dalším přirozeném použití?
+- Je předem jasné, kdy korekci zavřít?
+
+Dobrá korekce pracovního standardu není velká. Je přesná. Odstraní jednu překážku, zkrátí jednu cestu, smaže jednu starou stopu nebo zpřesní jednu větu. Standard pak nemusí být dokonalejší na papíře. Stačí, že příští člověk udělá správnou práci s menším třením a menší datovou stopou.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QR o převodu výsledku kontroly pracovního standardu do jedné korekce: práce s kontrolní kartou, výběr typu korekce, zásah v reálném pracovním místě, korekční věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QQ o první kontrole pracovního standardu po uzavřené stabilizační úpravě: návrat k závěrečné větě, signály nalezení, použití a datové stopy, čtyři výsledky kontroly, privacy-first evidence, kontrolní karta, mini workshop a checklist.
 - 2026-05-26: Doplněna úvodní podkapitola o první zpětné vazbě po předání trasy: ověření v reálné pracovní situaci, zápis tření, čtyři výsledky zpětné vazby, privacy-first evidence, karta a checklist.
 - 2026-05-26: Doplněna Příloha QP o uzavření ověřené stabilizační úpravy do pracovního standardu: závěrečná věta, aktualizace zdroje pravdy, úklid pomocných stop, oddělení nové ambice od standardu, karta uzavření, mini workshop a checklist.
