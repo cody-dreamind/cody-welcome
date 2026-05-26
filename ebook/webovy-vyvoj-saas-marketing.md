@@ -127279,8 +127279,166 @@ Stabilizační úprava má ověřený stav po dalším běžném průchodu a nez
 
 Ověření stabilizační úpravy má být poslední lehké klepnutí na zavřenou smyčku. Pokud původní tření zmizelo, nechte pracovní místo pracovat. Pokud nezmizelo, rozhodněte malý další krok nebo novou iteraci. Hlavní je nenechat drobnou stabilizaci žít ve věčném polostavu, kde se všichni tváří, že je skoro hotovo, a proto ji už nikdo nikdy nedokončí.
 
+## Příloha QP: Uzavření ověřené stabilizační úpravy do pracovního standardu
+
+Ověřená stabilizační úprava má po dalším běžném průchodu přestat být "ta nedávná oprava". Pokud zůstane označená jako výjimka, tým se k ní bude chovat opatrněji, než je potřeba: bude ji znovu vysvětlovat, držet bokem pomocné poznámky a při každém zaváhání otevírat celý příběh jejího vzniku. To je zbytečná režie.
+
+Uzavření do pracovního standardu znamená jednoduchou věc: aktuální pracovní místo už obsahuje správnou verzi, pomocné stopy jsou uklizené a lidé vědí, že se mají řídit standardem, ne historií opravy. Nejde o velkou standardizaci pro celou firmu. Jde o lokální rozhodnutí, že drobná stabilizace se osvědčila a může zmizet v normální práci.
+
+Tento krok dělejte jen u úprav, které mají po ověření stav `ponechat` nebo `ponechat s jednou drobnou textovou korekcí`. Pokud ověření ukázalo širší problém, neuzavírejte ho násilím. Otevřete novou iteraci a původní stabilizační úpravu označte jako dočasný mezistav.
+
+### Začněte závěrečnou větou
+
+Než začnete mazat poznámky nebo přepisovat šablony, napište jednu závěrečnou větu:
+
+```text
+Stabilizační úprava [co] je po ověření součástí běžného pracovního místa [kde], protože [jaké původní tření zmizelo], a znovu ji otevřeme jen při [konkrétní návratový signál].
+```
+
+Příklad:
+
+```text
+Stabilizační úprava krátké směrovky k retenčnímu pravidlu je po ověření součástí běžného edičního checklistu, protože editor našel kanonické místo bez doplňující otázky, a znovu ji otevřeme jen při další situaci, kdy někdo vytvoří druhou retenční tabulku pro stejný typ exportu.
+```
+
+Věta má dvě funkce. Zaprvé zavírá opravu jako hotovou práci. Zadruhé chrání standard před zbytečným znovuotevíráním. Když se za měsíc objeví nový nápad na větší reorganizaci, tým snadno pozná, že nejde o chybu stabilizace, ale o samostatnou kartu změny.
+
+### Přepište jen aktuální zdroj pravdy
+
+Uzavření neznamená, že musíte dohledat a přepsat celou historii. Stačí upravit místo, odkud lidé dnes pracují:
+
+- kanonickou kapitolu, rozcestník nebo checklist;
+- issue šablonu, podle které se zadává stejný typ práce;
+- interní playbook, pokud se podle něj změna opravdu používá;
+- onboardingovou poznámku, pokud noví lidé naráželi na původní tření;
+- veřejnou směrovku, pokud vede čtenáře k pracovnímu standardu.
+
+Historické záznamy nechte jako historii, pokud nejsou matoucí. Přepisovat každý starý komentář a každou pracovní poznámku je často jen produktivně převlečené uklízení šuplíků. Důležité je, aby člověk začínající z dnešního pracovního místa našel správnou verzi bez znalosti celé opravy.
+
+Pokud starý podklad pořád aktivně vede lidi špatně, buď ho smažte, nebo na jeho začátek dejte jasnou větu:
+
+```text
+Tento podklad je archiv. Aktuální pravidlo je v [kanonické místo].
+```
+
+### Zavřete pomocné stopy po stabilizaci
+
+Stabilizační úpravy často po sobě nechají malé pomocné stopy: komentář v dokumentu, dočasný checklist, screenshot problému, export několika poptávek, poznámku z workshopu nebo připomínku v chatu. Během ověření mohou být užitečné. Po uzavření jsou ale náklad.
+
+Projít je stačí prakticky:
+
+- ponechat jen krátký changelogový záznam;
+- anonymizovat příklad, pokud pomáhá budoucímu pochopení;
+- smazat pracovní exporty, screenshoty a kopie, které už neslouží ověření;
+- zavřít komentáře, které popisují stav před opravou;
+- odstranit dočasné štítky typu `ověřit`, `pozor`, `provizorní`, pokud už neplatí.
+
+Privacy-first pravidlo je tady jednoduché: když už podklad nepomáhá dalšímu rozhodnutí, nemá dál držet osobní údaje, zákaznické detaily ani interní pracovní stopu. Ne proto, že bychom byli nudní strážci šanonů. Protože čím méně zbytečných stop existuje, tím menší je provozní riziko a tím lépe se hledá to, co opravdu platí.
+
+### Oddělte standard od nové ambice
+
+Uzavírání stabilizační úpravy často odhalí další nápad. Například při úklidu směrovky zjistíte, že by šel zlepšit celý rozcestník. Nebo při přepisu onboardingové poznámky uvidíte, že by se hodil nový workshop. To může být dobrý nápad, ale nepatří do uzavření.
+
+Použijte malé třídění:
+
+- `standard`: úprava je ověřená a stává se běžnou verzí pracovního místa;
+- `drobný textový detail`: jedna věta nebo odkaz, který uzavření zpřesní bez nové iterace;
+- `nová ambice`: širší zlepšení, které patří do samostatné karty změny;
+- `riziko`: nález, který může poškodit zákazníka, data nebo provoz a potřebuje rychlou samostatnou reakci.
+
+Do uzavření vezměte jen první dvě věci. Novou ambici zapište bokem a riziko řešte jako vlastní incidentní nebo provozní téma. Jinak se ze závěrečného kroku stane další rozpracovaná změna a stabilizace se nikdy nedostane do klidu.
+
+### Karta uzavření stabilizační úpravy
+
+```text
+Stabilizační úprava:
+Původní tření:
+Výsledek ověření:
+Závěrečná věta:
+Aktuální zdroj pravdy:
+Upravená pracovní místa:
+Co se archivuje nebo maže:
+Co zůstává jako krátká historie:
+Návratový signál:
+Privacy-first úklid:
+Nové nápady mimo rozsah:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizační úprava:
+Doplnění jedné směrovky k pravidlu pro mazání pracovních exportů.
+
+Původní tření:
+Editor při zkracování přílohy nevěděl, kde je kanonické retenční pravidlo.
+
+Výsledek ověření:
+Při dalším běžném průchodu našel kanonické místo bez doplňující otázky.
+
+Závěrečná věta:
+Směrovka k retenčnímu pravidlu je součástí běžného edičního checklistu a znovu ji otevřeme jen při další duplicitní retenční tabulce.
+
+Aktuální zdroj pravdy:
+Kapitola o úklidu po zavedení pracovního pravidla.
+
+Upravená pracovní místa:
+Ediční checklist, situační rozcestník, šablona karty změny.
+
+Co se archivuje nebo maže:
+Mažeme pracovní kopii exportu a zavíráme komentář s původním zaváháním.
+
+Co zůstává jako krátká historie:
+Jedna changelogová věta bez zákaznických detailů.
+
+Návratový signál:
+Nová duplicita retenčního pravidla nebo zmatení při předání nové roli.
+
+Privacy-first úklid:
+Nezůstává žádný surový export, screenshot ani poznámka s konkrétní poptávkou.
+
+Nové nápady mimo rozsah:
+Případné přepracování celého rozcestníku půjde do samostatné karty změny.
+```
+
+### Mini workshop na 7 minut
+
+Vezměte jednu stabilizační úpravu se stavem `ponechat`.
+
+1. Napište závěrečnou větu.
+2. Najděte aktuální zdroj pravdy.
+3. Upravte jen pracovní místa, odkud lidé opravdu začínají.
+4. Označte nebo smažte staré podklady, které by vedly špatně.
+5. Vyberte jednu krátkou historii, která má zůstat.
+6. Zapište návratový signál.
+7. Odložte nové ambice do samostatné karty změny.
+
+Výstup:
+
+```text
+Ověřená stabilizační úprava je součástí běžného pracovního standardu, pomocné stopy jsou uklizené a další otevření má jasný návratový signál.
+```
+
+### Checklist kapitoly
+
+- Má úprava po ověření stav, který opravdu umožňuje uzavření?
+- Existuje jedna závěrečná věta, která říká co platí, kde to platí a kdy se to znovu otevře?
+- Je upravený aktuální zdroj pravdy, ne jen poznámka o opravě?
+- Najde člověk správnou verzi bez znalosti historie stabilizace?
+- Jsou staré aktivní podklady označené jako archiv, opravené nebo smazané?
+- Zůstává jen taková historie, která pomůže budoucímu rozhodnutí?
+- Jsou odstraněné dočasné komentáře, pracovní exporty, screenshoty a kopie bez další hodnoty?
+- Nezůstávají v pomocných podkladech osobní údaje, zákaznické detaily ani zbytečné interní poznámky?
+- Jsou nové nápady oddělené od uzavření do samostatné karty změny?
+- Je jasné, jaký signál standard znovu otevře?
+- Nezměnilo se uzavření v další reorganizaci?
+- Ví tým, že se má řídit standardem, ne starým příběhem opravy?
+
+Uzavření do pracovního standardu je dobré poznat podle toho, že po něm není moc co obdivovat. Správné místo obsahuje správnou větu, staré stopy nepřekážejí, nikdo nemusí držet opravu v hlavě a další člověk udělá práci normálně. To je přesně ten druh nenápadné produktivity, který v provozu šetří nejvíc času.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QP o uzavření ověřené stabilizační úpravy do pracovního standardu: závěrečná věta, aktualizace zdroje pravdy, úklid pomocných stop, oddělení nové ambice od standardu, karta uzavření, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QO o ověření stabilizační úpravy při dalším běžném průchodu: návrat ke stabilizační větě, přirozený průchod, signály výsledku, samostatnosti a datové stopy, čtyři výsledky ověření, krátká ověřovací stopa, privacy-first kontrola, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QN o převodu drobného výsledku kontroly pracovního místa do stabilizační úpravy: vstupní stav, typy malých úprav, zásah v nejbližším pracovním místě, stabilizační věta, ověření dalším přirozeným použitím, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QM o kontrole běžného pracovního místa po uzavřené lokální korekci: návrat při přirozeném použití, signály samostatnosti, stability a datové stopy, čtyři výsledky kontroly, ochrana před postupným nánosem, privacy-first úklid, kontrolní karta, mini workshop a checklist.
