@@ -127985,8 +127985,203 @@ Kontrola standardu má jednu lokální korekci, která snižuje původní třen�
 
 Dobrá korekce pracovního standardu není velká. Je přesná. Odstraní jednu překážku, zkrátí jednu cestu, smaže jednu starou stopu nebo zpřesní jednu větu. Standard pak nemusí být dokonalejší na papíře. Stačí, že příští člověk udělá správnou práci s menším třením a menší datovou stopou.
 
+## Příloha QS: Ověření korekce pracovního standardu při dalším přirozeném použití
+
+Korekce standardu je hotová až ve chvíli, kdy ji někdo použije v normální práci. Ne když je upravený odkaz, přepsaná věta nebo smazaný export. To je jen zásah. Ověření přijde teprve v momentu, kdy další člověk projde stejnou pracovní situací a původní tření se buď nevrátí, vrátí slabě, nebo ukáže, že korekce minula skutečný problém.
+
+Tato příloha je pro krátké ověření po jedné lokální korekci. Nejde o audit celého standardu. Nejde ani o hodnocení výkonu člověka, který standard použil. Cíl je užší: zjistit, jestli korekce snížila konkrétní tření popsané v korekční větě a jestli kvůli ní nevznikla nová datová stopa, obcházka nebo skrytá ruční práce.
+
+Praktická otázka zní: projde příští člověk opraveným pracovním místem snáz než před korekcí? Pokud ano, korekci zavřete. Pokud ne, opravujte dál jen tehdy, když je jasné, že další malý zásah odstraní původní tření. Jakmile se začne otevírat jiné téma, založte novou kartu změny.
+
+### Vraťte se ke korekční větě
+
+Nezačínejte tím, že znovu čtete celý standard. Otevřete kartu korekce z předchozí přílohy a vytáhněte z ní jednu větu:
+
+```text
+Po korekci bude [role] v [pracovní situaci] dělat [konkrétní krok] bez [původní tření].
+```
+
+Ověření má odpovědět jen na tuto větu. Pokud korekční věta říká, že editor otevře aktuální retenční pravidlo bez staré odbočky, nesledujte v tom samém kroku kvalitu celé kapitoly, rychlost editace ani počet dalších nápadů. Sledujte, jestli stará odbočka zmizela z pracovní trasy.
+
+Krátký ověřovací zápis před použitím:
+
+```text
+Korekční věta:
+Původní tření:
+Místo ověření:
+Co nesledujeme:
+```
+
+Položka `Co nesledujeme` je důležitější, než vypadá. Chrání ověření před tím, aby se z něj stal tichý výkonový dohled nebo záminka pro další rozšiřování standardu.
+
+### Čekejte na normální práci
+
+Ověření korekce nedělejte v umělém testu, pokud nemusíte. Nejlepší signál vzniká při dalším přirozeném použití: editor upravuje kapitolu, obchodník připravuje follow-up, vývojář zakládá issue, support řeší dotaz, marketing doplňuje distribuční kartu.
+
+Umělý průchod má smysl jen tehdy, když je pracovní situace vzácná nebo riziková. I potom držte scénář malý. Neptejte se: "Je celý standard srozumitelný?" Ptejte se: "Dostane se člověk přes opravené místo bez původního zaváhání?"
+
+Příklad:
+
+```text
+Situace:
+Editor aktualizuje část o exportech v e-booku.
+
+Ověřujeme:
+Jestli rozcestník vede přímo na aktuální retenční pravidlo.
+
+Nesledujeme:
+Kolik času trvala celá editace, jak editor pracuje obecně ani nové nápady na přestavbu kapitoly.
+```
+
+Takové omezení je praktické i lidské. Standard se má zlepšovat podle práce, ne podle toho, že tým najednou začne měřit každý pohyb.
+
+### Sledujte tři signály
+
+Pro ověření lokální korekce obvykle stačí tři signály:
+
+- nalezení: člověk najde správné pracovní místo bez staré odbočky;
+- použití: chápe, co má udělat, bez dodatečného vysvětlování původního problému;
+- stopa: nevznikne nový export, kopie, screenshot, tabulka nebo osobní evidence kvůli samotnému ověření.
+
+Když první dva signály drží a třetí se nezhoršil, korekce splnila účel. Není potřeba z ní dělat větší změnu. Pokud nalezení pořád drhne, opravujte směrovku. Pokud použití drhne, opravujte větu nebo pořadí. Pokud se zhoršila stopa, nejdřív ukliďte datovou vrstvu, teprve potom řešte obsah.
+
+Codyho komentář: u malých standardů bývá největší pokušení přidat "pro jistotu" další kontrolní seznam. Jenže další kontrolní seznam často neřeší tření. Jen ho přestěhuje do jiného dokumentu a tváří se, že uklidil. Elegantní past, ale pořád past.
+
+### Rozlišujte čtyři výsledky ověření
+
+Po prvním přirozeném použití zařaďte korekci do jednoho ze čtyř stavů:
+
+- `potvrdit`: původní tření se nevrátilo a datová stopa se nezvětšila;
+- `doladit jednou větou`: korekce pomohla, ale zůstalo malé zaváhání v jazyce nebo směrovce;
+- `vrátit korekci`: zásah nepomohl nebo zhoršil pracovní trasu;
+- `otevřít nové téma`: ověření ukázalo jiný problém, který přesahuje původní korekci.
+
+Nejnebezpečnější je pátý nepojmenovaný stav: "ještě se na to někdy podíváme". Pokud ověření nemá rozhodnutí, korekce zůstane viset mezi starým třením a novým pořádkem. Tým pak neví, jestli má standard používat, upravit nebo ignorovat.
+
+Příklad rozhodnutí:
+
+```text
+Výsledek:
+Potvrdit.
+
+Důvod:
+Editor otevřel aktuální retenční pravidlo přímo z rozcestníku a nepoužil starou archivní poznámku.
+
+Datová stopa:
+Nevznikl nový export ani screenshot; starý odkaz je odstraněný.
+
+Další krok:
+Korekce se zavírá. Nové nápady na strukturu rozcestníku patří do samostatné karty.
+```
+
+### Privacy-first ověření bez dohledu
+
+Ověření korekce standardu nemá sledovat lidi. Má sledovat pracovní místo. Proto se vyhněte zápisům typu "Petr zase nevěděl, kam kliknout". Užitečnější a bezpečnější zápis zní: "Rozcestník pořád nabízí dvě podobné položky pro stejný krok."
+
+Dobré privacy-first ověření:
+
+- popisuje tření anonymně nebo podle role;
+- nepřikládá screenshoty s osobními údaji, pokud nejsou nutné;
+- nemaže historii, která je potřeba pro odpovědnost, ale zkracuje pomocné stopy;
+- nepřidává analytiku jen kvůli jedné korekci;
+- po rozhodnutí zavře dočasné poznámky, testovací exporty a pracovní kopie.
+
+Pokud k ověření potřebujete konkrétní zákaznický příklad, omezte ho na minimum. Zachyťte situaci, ne identitu. Ve většině případů stačí popis pracovního kroku a výsledku.
+
+### Karta ověření korekce standardu
+
+```text
+Standard:
+Korekční věta:
+Původní tření:
+Přirozená pracovní situace:
+Kdo ověřoval podle role:
+Signál nalezení:
+Signál použití:
+Signál datové stopy:
+Výsledek ověření:
+Rozhodnutí:
+Co zavíráme:
+Co případně otevíráme samostatně:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Směrovka k retenčnímu pravidlu v edičním checklistu.
+
+Korekční věta:
+Po korekci editor při úpravě kapitoly s exportem otevře aktuální retenční pravidlo přímo z rozcestníku bez zastávky ve staré poznámce.
+
+Původní tření:
+Starý odkaz vedl na archivní retenční poznámku.
+
+Přirozená pracovní situace:
+Aktualizace kapitoly, která zmiňuje dočasné exporty.
+
+Kdo ověřoval podle role:
+Editor.
+
+Signál nalezení:
+Editor použil aktuální odkaz v rozcestníku.
+
+Signál použití:
+Retenční pravidlo bylo srozumitelné bez vysvětlování staré poznámky.
+
+Signál datové stopy:
+Nevznikl nový export ani screenshot.
+
+Výsledek ověření:
+Potvrdit.
+
+Rozhodnutí:
+Korekce se zavírá.
+
+Co zavíráme:
+Pomocnou poznámku ke starému odkazu.
+
+Co případně otevíráme samostatně:
+Nic.
+```
+
+### Mini workshop na 6 minut
+
+Vezměte jednu korekci standardu, která už byla provedena a čeká na ověření.
+
+1. Přečtěte korekční větu.
+2. Vyberte nejbližší přirozenou pracovní situaci.
+3. Zapište, co se bude sledovat a co se sledovat nebude.
+4. Po použití zaškrtněte nalezení, použití a datovou stopu.
+5. Vyberte jeden ze čtyř výsledků.
+6. Zavřete dočasné poznámky nebo otevřete nové téma samostatně.
+
+Výstup:
+
+```text
+Korekce standardu má ověřený výsledek a nezůstává viset jako nejasná polozměna.
+```
+
+### Checklist kapitoly
+
+- Ověřujete korekci při přirozené práci, ne ve zbytečně velkém auditu?
+- Vrátili jste se ke korekční větě z původní karty?
+- Je jasné, jaké původní tření má zmizet?
+- Zapsali jste, co se v tomto ověření nesleduje?
+- Sledujete pracovní místo, ne výkon konkrétního člověka?
+- Stačí vám signály nalezení, použití a datové stopy?
+- Umíte výsledek zařadit jako `potvrdit`, `doladit jednou větou`, `vrátit korekci` nebo `otevřít nové téma`?
+- Nezavádíte kvůli ověření nový tracker, dashboard nebo osobní evidenci?
+- Jsou zákaznické nebo interní příklady anonymizované nebo zkrácené na minimum?
+- Zavřeli jste pomocné poznámky, exporty a pracovní kopie, které už nejsou potřeba?
+- Pokud se objevil nový problém, má vlastní kartu místo rozšíření původní korekce?
+- Ví tým, jestli se korekce zavírá, dolaďuje, vrací nebo otevírá znovu?
+
+Dobré ověření korekce je krátké a rozhodné. Nechce po týmu další vrstvu práce. Jen potvrdí, že jedna malá úprava opravdu snížila tření, nebo poctivě řekne, že nestačila. V obou případech je výsledek lepší než mlhavé "asi dobrý", které se za měsíc vrátí jako další drobný chaos.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QS o ověření korekce pracovního standardu při dalším přirozeném použití: návrat ke korekční větě, čekání na normální práci, signály nalezení, použití a datové stopy, čtyři výsledky ověření, privacy-first ověření bez dohledu, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QR o převodu výsledku kontroly pracovního standardu do jedné korekce: práce s kontrolní kartou, výběr typu korekce, zásah v reálném pracovním místě, korekční věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QQ o první kontrole pracovního standardu po uzavřené stabilizační úpravě: návrat k závěrečné větě, signály nalezení, použití a datové stopy, čtyři výsledky kontroly, privacy-first evidence, kontrolní karta, mini workshop a checklist.
 - 2026-05-26: Doplněna úvodní podkapitola o první zpětné vazbě po předání trasy: ověření v reálné pracovní situaci, zápis tření, čtyři výsledky zpětné vazby, privacy-first evidence, karta a checklist.
