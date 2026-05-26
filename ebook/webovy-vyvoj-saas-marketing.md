@@ -128875,8 +128875,207 @@ Drobná poznámka je buď zavřená jako šum, zachycená jako servisní zápis,
 
 Servisní zápis je malá brzda proti dvěma extrémům: všechno hned opravovat, nebo všechno ignorovat. Dobře použitý drží standard klidný. Tým vidí drobný signál, ale neztrácí den v úpravách, které zatím nikomu reálně nepomohly.
 
+## Příloha QW: Ověření servisního zápisu při dalším přirozeném použití
+
+Servisní zápis má smysl jen tehdy, když se k němu tým umí vrátit bez toho, aby z něj vznikla další vrstva administrativy. V minulé příloze jsme drobnou poznámku nezměnili hned na korekci, protože standard držel a problém měl zatím malý dopad. Tato příloha řeší další krok: co udělat, když se stejný standard použije znovu.
+
+Cílem ověření není hledat, jestli by šel standard ještě vylepšit. To by šel skoro vždycky, gratuluju, objevili jsme software i texty. Cílem je rozhodnout, jestli servisní zápis smažeme, povýšíme na korekci, necháme ještě jednou dozrát, nebo ho přesuneme do běžného úklidu.
+
+Dobré ověření servisního zápisu je krátké. Dívá se na jednu reálnou situaci, jednu původní poznámku a jeden výsledek. Pokud se z něj stane obecná revize standardu, přestalo sloužit původnímu účelu.
+
+### Vraťte se až při návratovém signálu
+
+Servisní zápis má mít návratový signál. Bez něj je to poznámka bez brzdy: všichni vědí, že někde něco je, ale nikdo neví, kdy to otevřít a kdy to konečně zahodit.
+
+Typické návratové signály:
+
+- stejný rozcestník použije jiný člověk;
+- stejný standard se použije v jiné zákaznické situaci;
+- vznikne další landing page, formulář, onboardingový krok nebo support odpověď podle stejného pravidla;
+- starý odkaz nebo nejasný název se znovu objeví v cestě práce;
+- servisní poznámka se sama připomene při pravidelném úklidu standardu.
+
+Neotvírejte servisní zápis jen proto, že uplynul týden. Kalendář může být dobrá pojistka proti zapomenutí, ale není důkaz pracovního dopadu. Pokud se standard od té doby nepoužil, stav je pořád `čeká na reálné použití`.
+
+Příklad: poznámka říká, že odkaz "formulářové minimum" nebyl při přípravě landing page okamžitě jasný. Návratový signál není pondělí v 9:00. Návratový signál je další situace, kdy někdo použije stejný ediční rozcestník pro novou prodejní stránku.
+
+### Porovnejte poznámku s realitou, ne s ideálem
+
+Při návratu nehodnoťte, jestli by standard mohl být perfektní. Hodnoťte, jestli původní poznámka znovu ovlivnila práci. To je menší a užitečnější otázka.
+
+Zeptejte se:
+
+- Objevila se stejná nejasnost znovu?
+- Zdržela práci, nebo jen někdo zpětně navrhl hezčí formulaci?
+- Vedla k obejití standardu, staré cestě nebo dotazu na člověka?
+- Ukázala na zbytečnou datovou stopu, kopii, export nebo externí nástroj?
+- Dá se případná oprava udělat jedním zásahem v nejbližším pracovním místě?
+
+Pokud se původní poznámka neobjevila, nechte ji odejít. Týmová paměť nemá být muzeum drobných obav. Pokud se objevila znovu a zdržela práci, už to není poznámka. Je to kandidát na korekci.
+
+### Rozlišujte čtyři výsledky ověření
+
+Po dalším přirozeném použití vyberte jeden ze čtyř stavů:
+
+- Smazat: poznámka se nepotvrdila a další použití prošlo bez zaváhání.
+- Povýšit na korekci: stejná věc se zopakovala, zdržela práci nebo vrátila člověka ke staré cestě.
+- Ponechat na jeden další průchod: signál je pořád nejasný, ale může mít dopad v jiné blízké situaci.
+- Přesunout do běžného úklidu: poznámka není akutní korekce, ale patří do plánovaného sjednocení názvů, odkazů nebo šablon.
+
+Stav `Smazat` je úspěch, ne promarněná práce. Servisní zápis splnil účel: zabránil unáhlené korekci a potom nezabral další místo. V changelogu stačí věta: "Poznámka k názvu odkazu se při dalším použití nepotvrdila, zápis smazán."
+
+Stav `Povýšit na korekci` musí mít nejbližší místo zásahu. Ne "zlepšit dokumentaci", ale třeba "přejmenovat odkaz v edičním rozcestníku z `formulářové minimum` na `minimum polí pro první poptávku`". Korekce má být menší než původní standard.
+
+Stav `Ponechat na jeden další průchod` používejte opatrně. Je vhodný, když další použití nebylo dost podobné původní situaci. Nastavte konkrétní limit: ještě jeden průchod, ještě jedna podobná stránka, ještě jedno použití stejnou rolí. Bez limitu se z něj stane příjemně zdvořilý způsob, jak neuklízet.
+
+Stav `Přesunout do běžného úklidu` je pro poznámky, které jsou platné, ale nemají samostatnou pracovní cenu. Například názvosloví tří odkazů je trochu nejednotné, ale nikomu nebrání dokončit práci. Pak nemá smysl otevírat korekci standardu; stačí přidat položku do pravidelného úklidu rozcestníku.
+
+### Kdy z poznámky udělat korekci
+
+Korekce je správná ve chvíli, kdy servisní zápis přestane být jen pozorování. Poznáte to podle dopadu.
+
+Povýšení na korekci dává smysl, když:
+
+- stejná poznámka zastavila nebo zpomalila dalšího člověka;
+- člověk kvůli ní otevřel starý dokument, starý komentář nebo starou šablonu;
+- vznikl dotaz, který by aktuální standard měl umět zodpovědět sám;
+- poznámka ukazuje na zbytečný sběr osobních údajů nebo uchovávání pomocných podkladů;
+- oprava má jasný rozsah a nebude vyžadovat přepsání celé části.
+
+Korekci naopak neotevírejte, když je jediným důvodem lepší estetika textu. Hezčí formulace je fajn, ale pokud kvůli ní tým otevře další kolečko zápisů, review a ověření, možná právě vyrobil víc tření, než odstranil. Ano, i dobré úmysly umí být provozní spam.
+
+### Privacy-first ověření servisního zápisu
+
+Ověření servisního zápisu nepotřebuje sledovat lidi. Nepotřebuje heatmapu interní wiki, záznam obrazovky ani detailní časové stopy. Stačí vědět, jestli se původní poznámka projevila v práci a co se s ní rozhodlo.
+
+Privacy-first pravidla:
+
+1. Zapisujte situaci, ne osobu.
+2. Nepřikládejte screenshoty, pokud nejsou nezbytné pro opravu.
+3. Pokud poznámku mažete, smažte i pomocné podklady k ní.
+4. Pokud ji povyšujete na korekci, přeneste jen potřebný kontext.
+5. Pokud ji ponecháváte, nastavte další a poslední návratový signál.
+
+Příklad dobrého ověřovacího zápisu:
+
+```text
+Při další přípravě landing page byl odkaz na pravidlo formulářů nalezen bez zaváhání. Původní servisní poznámka se nepotvrdila, zápis smazán. Neukládáme další podklady.
+```
+
+Příklad při povýšení:
+
+```text
+Při druhém použití rozcestníku stejný název odkazu znovu zpomalil výběr pravidla. Servisní poznámka povýšena na lokální korekci: přejmenovat odkaz v rozcestníku. Nepřenášíme jména lidí ani screenshoty.
+```
+
+Oba zápisy jsou krátké a použitelné. Neobsahují víc dat, než je potřeba pro rozhodnutí.
+
+### Karta ověření servisního zápisu
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Původní servisní poznámka:
+
+Návratový signál:
+
+Reálná situace ověření:
+
+Projevila se poznámka znovu?
+Ano / Ne / Nejasné
+
+Pracovní dopad:
+Žádný / malý / opakovaný / vedl ke staré cestě / datové riziko
+
+Rozhodnutí:
+Smazat / Povýšit na korekci / Ponechat na jeden další průchod / Přesunout do běžného úklidu
+
+Nejbližší další krok:
+
+Co teď vědomě neřešíme:
+
+Privacy-first kontrola:
+Jaké osobní údaje, screenshoty, exporty nebo kopie neukládáme nebo mažeme?
+
+Místo závěrečného zápisu:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Formulářové minimum pro první poptávku.
+
+Kanonické pracovní místo:
+Ediční rozcestník pro prodejní stránky.
+
+Původní servisní poznámka:
+Odkaz "formulářové minimum" nebyl okamžitě srozumitelný bez otevření.
+
+Návratový signál:
+Další použití stejného rozcestníku při přípravě landing page.
+
+Reálná situace ověření:
+Editor připravoval novou stránku pro konzultační službu.
+
+Projevila se poznámka znovu?
+Ne.
+
+Pracovní dopad:
+Žádný.
+
+Rozhodnutí:
+Smazat.
+
+Nejbližší další krok:
+Odstranit servisní poznámku z changelogu standardu.
+
+Co teď vědomě neřešíme:
+Nepřejmenováváme celou sadu odkazů v rozcestníku.
+
+Privacy-first kontrola:
+Neukládáme screenshoty ani jméno editora; mažeme pomocnou poznámku.
+
+Místo závěrečného zápisu:
+Krátká věta v changelogu standardu.
+```
+
+### Mini workshop na 7 minut
+
+1. Vyberte jeden servisní zápis s jasným návratovým signálem.
+2. Ověřte, jestli už nastala reálná pracovní situace pro návrat.
+3. Porovnejte původní poznámku s tím, co se opravdu stalo.
+4. Vyberte jeden ze čtyř stavů: smazat, povýšit, ponechat jednou, přesunout do úklidu.
+5. Pokud povyšujete, napište nejmenší korekční větu.
+6. Pokud mažete, smažte i pomocné stopy.
+7. Zapište závěr jednou větou tam, kde tým udržuje standard.
+
+Výstup workshopu:
+
+```text
+Servisní zápis už nemá neurčitý stav. Buď zmizel, stal se korekcí, čeká přesně na jeden další průchod, nebo odešel do běžného úklidu.
+```
+
+### Checklist kapitoly
+
+- Vrátili jsme se k servisnímu zápisu až při reálném návratovém signálu?
+- Hodnotíme původní poznámku, ne celý standard?
+- Umíme říct, jestli se poznámka znovu projevila?
+- Vybrali jsme jeden ze čtyř stavů bez neurčitého mezistavu?
+- Pokud poznámku mažeme, mažeme i pomocné podklady?
+- Pokud ji povyšujeme, má korekce nejbližší pracovní místo a malý rozsah?
+- Pokud ji ponecháváme, má poslední konkrétní návratový signál?
+- Pokud ji přesouváme do úklidu, neblokuje běžnou práci?
+- Nezapisujeme osobní výkon lidí ani zbytečné screenshoty?
+- Je závěr uložený tam, kde tým standard skutečně udržuje?
+
+Servisní zápis je užitečný jen jako dočasná paměť. Buď se ukáže, že šlo o šum, nebo se z něj stane konkrétní korekce. Co nesmí nastat: poznámka přežije půl roku jen proto, že nikdo neměl odvahu ji smazat. To není pečlivost. To je pomalé zanášení pracovního prostoru.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QW o ověření servisního zápisu při dalším přirozeném použití: návratový signál, porovnání poznámky s realitou, čtyři výsledky ověření, povýšení na korekci, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QV o převodu drobné poznámky z návratu stabilního standardu do servisního zápisu: rozlišení poznámky, korekce a šumu, krátký zápis, podmínka návratu a smazání, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QU o prvním běžném návratu ke stabilní verzi pracovního standardu: reálné použití místo umělé kontroly, sledování aktuální cesty, čtyři výsledky návratu, kontrola starých stop, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QT o uzavření potvrzené korekce pracovního standardu do stabilní verze: práce s výsledkem potvrzení, přepis aktuálního pracovního místa, oddělení historie od hlavní trasy, úklid pomocných stop, privacy-first mazání podkladů, karta uzavření, Codyho komentář, mini workshop a checklist.
