@@ -127071,8 +127071,217 @@ Drobné tření z kontroly je převedené do jedné stabilizační úpravy, kter
 
 Stabilizační úprava po kontrole má být téměř neviditelná. Ne proto, že je nedůležitá, ale proto, že dobře fungující pracovní místo nepotřebuje kolem sebe slavnostní aparát. Člověk otevře správnou šablonu, najde správnou větu ve správný okamžik, nevyrobí zbytečnou datovou stopu a jde dál. Přesně tak má vypadat produktivita, která netváří papírování za pokrok.
 
+## Příloha QO: Ověření stabilizační úpravy při dalším běžném průchodu
+
+Stabilizační úprava z předchozí přílohy má smysl až ve chvíli, kdy přežije další normální použití. Ne interní pochvalu. Ne diskusi nad tím, jestli nový název odkazu působí elegantněji. Skutečný test je obyčejná práce: někdo otevře stejné pracovní místo, řeší stejnou situaci a buď se už nezasekne, nebo se tření vrátí.
+
+Cíl této přílohy je ověřit drobnou stabilizaci bez toho, aby z ní vzniklo nové měření, další kontrolní proces nebo malý kult kolem přejmenovaného odkazu.
+
+```text
+Ověřit, jestli stabilizační úprava odstranila původní drobné tření při dalším běžném průchodu, a rozhodnout, zda ji ponechat, doladit, vrátit nebo převést do nové iterace.
+```
+
+Ověření stabilizační úpravy je krátké. Má se vejít do okamžiku, kdy pracovní místo přirozeně znovu používáte. Pokud kvůli němu svoláváte samostatnou schůzku, vytváříte tabulku nebo žádáte lidi, aby uměle simulovali práci, pravděpodobně je ověření větší než změna. A to je obvykle signál, že se proces začal živit sám sebou. Takové procesy mají zdravý apetit hlavně na čas.
+
+### Vraťte se k původní stabilizační větě
+
+Začněte větou, kterou jste napsali před editací:
+
+```text
+Upravujeme [pracovní místo] tak, aby při [přirozeném použití] zmizelo [konkrétní tření], bez změny [co teď neměníme].
+```
+
+Tahle věta je měřítko ověření. Neověřujete, jestli je pracovní místo obecně lepší. Neověřujete, jestli by se dala přidat další sekce. Neověřujete, jestli by celý systém šel přepracovat. Ověřujete jen to, jestli zmizelo tření, kvůli kterému stabilizační úprava vznikla.
+
+Příklad:
+
+```text
+Stabilizační věta:
+Upravujeme brief případové studie tak, aby autor při práci s citací našel pravidlo podle své pracovní otázky, bez změny schvalovacího procesu a bez přidání dalšího pole.
+
+Ověřovací otázka:
+Našel autor při další případové studii pravidlo podle pracovní otázky bez dotazu bokem?
+```
+
+Pokud se při ověření objeví jiný problém, zapište ho mimo tuto kontrolu. Jiný problém může být důležitý, ale není důkazem, že původní stabilizace selhala. Smíchat všechno dohromady je rychlá cesta k tomu, že drobná úprava už nikdy nebude drobná.
+
+### Čekejte na další přirozený průchod
+
+Nejlepší ověření nastane samo: další článek, další landing page, další case study, další zákaznický handoff, další měsíční review, další použití šablony. Ověřujte v takovém okamžiku, kdy by člověk pracovní místo použil i bez experimentu.
+
+Umělé testování má smysl jen tehdy, když je pracovní místo kritické a další přirozený průchod by přišel pozdě. I tehdy držte test malý:
+
+- jeden člověk;
+- jeden reálný scénář;
+- jeden původní problém;
+- jedna poznámka k výsledku;
+- žádné nové osobní sledování.
+
+U stabilizačních úprav je často lepší počkat než tlačit důkaz hned. Pokud se ověření dá udělat až při další skutečné práci, počkejte. Stabilizace má posilovat běžný rytmus, ne vyrábět divadlo pro kontrolu kontrol.
+
+### Sledujte tři věci
+
+Při dalším průchodu stačí sledovat tři signály.
+
+První signál je výsledek:
+
+```text
+Zmizelo původní tření?
+```
+
+Člověk našel správný odkaz, pochopil hranici, nepoužil starou šablonu, nenapsal bokem dotaz, nezaložil pracovní kopii, nevrátil se k neplatnému příkladu.
+
+Druhý signál je samostatnost:
+
+```text
+Dokázal člověk projít místem bez nové pomoci?
+```
+
+Pokud po úpravě pořád potřebuje vysvětlení od člověka, který změnu dělal, stabilizace není dost srozumitelná. Možná je text pořád moc interní, možná je pravidlo na špatném místě, možná odkaz míří jinam, než pracovní otázka slibuje.
+
+Třetí signál je datová stopa:
+
+```text
+Nevznikla kvůli průchodu nová zbytečná data, kopie, export nebo přístup?
+```
+
+Privacy-first ověření sleduje i to, jestli drobná úprava nevytvořila vedlejší náklad. Přejmenovaný odkaz může pomoct. Ale pokud kvůli ověření vznikne sdílená tabulka se jmény autorů, zákaznickými citacemi a poznámkami bez retence, zlepšení si právě přineslo vlastní malý kufřík nepořádku.
+
+### Čtyři výsledky ověření
+
+Po ověření nepoužívejte jen stav "funguje" nebo "nefunguje". Drobná stabilizace má čtyři užitečné výsledky:
+
+- Ponechat: původní tření zmizelo, pracovní místo funguje samostatně a datová stopa se nezvětšila.
+- Doladit jednou větou: směr pomohl, ale chybí malé upřesnění přímo v místě práce.
+- Vrátit úpravu: změna nepomohla nebo vytvořila nové tření větší než původní.
+- Otevřít novou iteraci: ověření ukázalo, že problém není v drobné stabilizaci, ale v širším pravidle, šabloně nebo procesu.
+
+Stav `Doladit jednou větou` používejte opatrně. Není to vstupenka k dalšímu malému projektu. Znamená doslova jednu větu, jeden odkaz, jedno označení stavu nebo jedno odstranění matoucího zbytku. Pokud potřebujete víc, použijte stav `Otevřít novou iteraci`.
+
+Příklad rozhodnutí:
+
+```text
+Výsledek:
+Ponechat.
+
+Co jsme viděli:
+Při další případové studii autor našel pravidlo k citaci podle nového názvu odkazu. Neptal se bokem, nevznikla nová kopie citací a starý komentář byl zavřený.
+
+Co z toho plyne:
+Stabilizační úprava splnila původní účel a může zůstat jako běžná součást briefu.
+```
+
+Příklad, kdy úpravu vrátit:
+
+```text
+Výsledek:
+Vrátit úpravu.
+
+Co jsme viděli:
+Nový název odkazu sice odpovídal otázce autora, ale lidé ho začali chápat jako samostatné povolení použít citaci bez kontroly kontextu.
+
+Co z toho plyne:
+Původní název byl sice interní, ale nová formulace rozmazala hranici odpovědnosti. Vracíme odkaz a otevíráme novou iteraci pro jasnější rozlišení pravidla a schválení.
+```
+
+### Zapište jen ověřovací stopu
+
+Ověřovací zápis má být kratší než karta stabilizační úpravy. Stačí:
+
+```text
+Stabilizační úprava:
+Další běžný průchod:
+Původní tření:
+Co jsme viděli:
+Výsledek:
+Co ponecháváme nebo měníme:
+Datová stopa:
+Changelogová věta:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizační úprava:
+Odkaz v briefu případové studie přejmenovaný na "Kdy smíme použít konkrétní citaci".
+
+Další běžný průchod:
+Nová případová studie pro produktovou službu.
+
+Původní tření:
+Autor hledal pravidlo podle pracovní otázky, ale starý název odkazu zněl jako interní schvalovací proces.
+
+Co jsme viděli:
+Autor našel pravidlo bez dotazu bokem a použil anonymizovaný příklad místo celé zákaznické citace.
+
+Výsledek:
+Ponechat.
+
+Co ponecháváme nebo měníme:
+Nový název odkazu zůstává. Nic dalšího teď nepřidáváme.
+
+Datová stopa:
+Nevznikl nový export ani evidence použití. Do zápisu nejde obsah citace ani jméno zákazníka.
+
+Changelogová věta:
+Ověřeno, že nový název odkazu v briefu případové studie pomohl najít pravidlo bez další pomoci.
+```
+
+Tento zápis stačí. Nepřikládejte screenshoty s reálnými zákaznickými detaily, celé pracovní návrhy ani dlouhý přepis diskuse. Budoucí tým potřebuje vědět, co bylo rozhodnuto a proč. Nepotřebuje digitální muzeum každého zaváhání.
+
+### Privacy-first ověření bez kontrolního stínu
+
+U drobných stabilizací hrozí zvláštní paradox: tým chce být pečlivý, a tak začne sledovat víc než před změnou. Měří, kdo kliknul, kdo se ptal, kdo otevřel šablonu, kdo udělal chybu a kdo se zdržel. Jenže stabilizační úprava většinou nepotřebuje personální stopu. Potřebuje jen vědět, jestli konkrétní tření zmizelo.
+
+Privacy-first pravidla pro ověření:
+
+- nezapisujte jména lidí, pokud nejsou nutná pro vlastnictví dalšího úkolu;
+- nezapisujte zákaznické citace, osobní údaje ani interní detaily, které nejsou nutné pro rozhodnutí;
+- nepřidávejte nový analytický event kvůli jedné lokální úpravě;
+- neskladujte pracovní screenshoty déle, než je nutné k anonymizovanému závěru;
+- po rozhodnutí zavřete komentáře, exporty a dočasné kopie;
+- nehodnoťte výkon člověka, ale použitelnost pracovního místa.
+
+Codyho komentář: dobré ověření stabilizace je skoro trapně malé. Člověk projde místem, nezasekne se, nic zbytečného se nesbírá, zapíše se jedna věta a jede se dál. Kdyby takhle fungovala půlka firemních procesů, poradám by začalo být smutno. Což je riziko, se kterým se dá žít.
+
+### Mini workshop na 6 minut
+
+Vezměte jednu stabilizační úpravu z posledního týdne.
+
+1. Najděte původní stabilizační větu.
+2. Přepište ji na jednu ověřovací otázku.
+3. Určete nejbližší přirozený průchod, kde se otázka ověří.
+4. Sledujte výsledek, samostatnost a datovou stopu.
+5. Rozhodněte: ponechat, doladit jednou větou, vrátit, nebo otevřít novou iteraci.
+6. Zapište changelogovou větu bez osobních a zákaznických detailů.
+7. Zavřete nebo smažte dočasné podklady.
+
+Výstup:
+
+```text
+Stabilizační úprava má ověřený stav po dalším běžném průchodu a nezanechala po sobě novou kontrolní ani datovou vrstvu.
+```
+
+### Checklist kapitoly
+
+- Vrátili jste se k původní stabilizační větě?
+- Ověřujete původní drobné tření, ne celou kvalitu pracovního místa?
+- Proběhlo ověření při přirozené práci, nebo máte dobrý důvod pro malý umělý test?
+- Sledujete výsledek, samostatnost a datovou stopu?
+- Nepřidali jste nový dashboard, tabulku, event nebo sledování konkrétních lidí?
+- Umíte výsledek zařadit jako ponechat, doladit jednou větou, vrátit nebo otevřít novou iteraci?
+- Je případné doladění opravdu jen jedna malá změna?
+- Pokud se objevil širší problém, oddělili jste ho do nové iterace?
+- Je ověřovací zápis kratší než původní karta úpravy?
+- Neobsahuje zápis osobní údaje, zákaznické detaily ani zbytečné pracovní kopie?
+- Jsou dočasné komentáře, screenshoty, exporty a kopie zavřené, smazané nebo anonymizované?
+- Existuje krátká changelogová věta, kterou budoucí tým pochopí bez dalšího výkladu?
+
+Ověření stabilizační úpravy má být poslední lehké klepnutí na zavřenou smyčku. Pokud původní tření zmizelo, nechte pracovní místo pracovat. Pokud nezmizelo, rozhodněte malý další krok nebo novou iteraci. Hlavní je nenechat drobnou stabilizaci žít ve věčném polostavu, kde se všichni tváří, že je skoro hotovo, a proto ji už nikdo nikdy nedokončí.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QO o ověření stabilizační úpravy při dalším běžném průchodu: návrat ke stabilizační větě, přirozený průchod, signály výsledku, samostatnosti a datové stopy, čtyři výsledky ověření, krátká ověřovací stopa, privacy-first kontrola, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QN o převodu drobného výsledku kontroly pracovního místa do stabilizační úpravy: vstupní stav, typy malých úprav, zásah v nejbližším pracovním místě, stabilizační věta, ověření dalším přirozeným použitím, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QM o kontrole běžného pracovního místa po uzavřené lokální korekci: návrat při přirozeném použití, signály samostatnosti, stability a datové stopy, čtyři výsledky kontroly, ochrana před postupným nánosem, privacy-first úklid, kontrolní karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QL o uzavření potvrzené lokální korekce do běžného pracovního místa: potvrzený stav, propsání do aktuální práce, zkrácení historie, úklid pomocných stop, privacy-first uzavření, karta, mini workshop a checklist.
