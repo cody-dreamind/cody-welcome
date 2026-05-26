@@ -3095,6 +3095,135 @@ Při příštím použití karty změny v měsíčním review.
 
 První zpětná vazba uzavírá poslední nejistotu po předání: jestli trasa funguje i bez autora po ruce. Když ano, nechte ji žít. Když ne, opravte nejmenší místo, které brání práci. V obou případech odolejte pokušení udělat z každého signálu nový systém. Rukopis má být užitečný právě tím, že další krok zmenšuje.
 
+## Drobné doladění trasy po první zpětné vazbě
+
+První zpětná vazba často nepřinese velký problém, ale malé tření: chybějící směrovku, nejasný nadpis, příklad na špatném místě, příliš dlouhou větu nebo privacy-first hranici, kterou člověk pochopí až po druhém čtení. Právě tady se rozhoduje, jestli rukopis zůstane praktický. Malé tření se má opravit malou úpravou. Když z něj uděláte novou kapitolu, vracíte do textu objem, který jste před chvílí pracně odebírali.
+
+Drobné doladění má jeden účel: odstranit konkrétní překážku v další práci. Nemá znovu vysvětlovat celou teorii, přepisovat historii editace ani přidávat nový proces. Pokud člověk nenašel kanonické místo, přidejte nebo zpřesněte směrovku. Pokud našel správné místo, ale nevěděl, co použít, doplňte jednu pracovní větu. Pokud vznikla nová duplicita, upravte staré místo tak, aby jasně ukazovalo na zdroj pravdy.
+
+Dobrá doladovací iterace začíná větou:
+
+```text
+Upravujeme jen [konkrétní místo], aby člověk v situaci [pracovní situace] dokázal [výstup] bez [konkrétní tření].
+```
+
+Příklad:
+
+```text
+Upravujeme jen konec části o kartě změny, aby člověk při měsíčním review dokázal zavřít slabý podnět bez vytváření zbytečného úkolu.
+```
+
+Tato věta je brzda. Když ji neumíte napsat, ještě nevíte, co opravujete. A když oprava přesahuje jednu větu, jeden odkaz, jeden krátký příklad nebo jeden přesun, pravděpodobně už nejde o drobné doladění, ale o novou kartu změny.
+
+### Vyberte nejmenší typ úpravy
+
+Doladění nemusí být kreativní. Většinou stačí jeden z pěti typů zásahu:
+
+1. Směrovka: krátká věta, která čtenáře vede na kanonické místo.
+2. Nadpis: přesnější název části, aby odpovídal pracovní situaci.
+3. Příklad: jeden konkrétní příklad přesunutý k pravidlu, které má čtenář použít.
+4. Hranice rozsahu: věta, která říká, co tato část neřeší.
+5. Privacy-first připomínka: věta o datech, exportech, přístupech nebo retenci tam, kde reálně vzniká riziko.
+
+Nejprve zkuste směrovku. Je nejlevnější a nejméně rozšiřuje text. Pokud nestačí, upravte nadpis nebo hranici rozsahu. Nový příklad přidávejte až tehdy, když čtenář chápe směr, ale neumí ho převést do práce. Příklad je užitečný, ale také lákavě bobtná. Má žít jen tam, kde zkracuje rozhodnutí.
+
+### Opravujte místo použití, ne jen místo stížnosti
+
+Zpětná vazba často přijde z místa, kde si člověk problému všiml. To ale nemusí být místo, které se má upravit. Pokud někdo v příloze nenašel privacy-first pravidlo, možná není potřeba přidat pravidlo do přílohy. Možná stačí přidat větu v rozcestníku, která ho pošle na kanonickou kapitolu.
+
+Před editací si položte tři otázky:
+
+- Kde člověk začal pracovat?
+- Kde měl skončit?
+- Které nejmenší místo mezi těmito dvěma body selhalo?
+
+Opravujte právě to třetí místo. Ne celou trasu, ne všechny podobné kapitoly, ne obecný tón rukopisu. Konkrétní selhání má dostat konkrétní opravu.
+
+Příklad:
+
+```text
+Pozorování:
+Člověk začal v části o prvním úkolu z karty změny a nevšiml si, že slabý podnět může skončit bez úkolu.
+
+Špatná oprava:
+Přidat novou podkapitolu o všech stavech karty změny.
+
+Lepší oprava:
+Na konec části o kartě změny přidat jednu větu: pokud karta nevede k úkolu, zavřete ji podle části `Zavření karty změny bez úkolu`.
+```
+
+### Držte doladění uzavřené
+
+Drobné doladění má mít vlastní konec. Po úpravě napište krátký zápis, co se změnilo a co se záměrně neotevírá. Bez toho se oprava snadno promění v tichý začátek další editace.
+
+Šablona:
+
+```text
+Tření:
+Nejmenší oprava:
+Kde upraveno:
+Co se nemění:
+Privacy-first dopad:
+Kdy stačí:
+Co případně patří do nové karty:
+```
+
+Vyplněný příklad:
+
+```text
+Tření:
+Při měsíčním review vznikal úkol i u slabého podnětu, který měl být jen zavřený.
+
+Nejmenší oprava:
+Doplněna směrovka z části o kartě změny na zavření bez úkolu.
+
+Kde upraveno:
+Karta jedné změny po čtení.
+
+Co se nemění:
+Nepřidáváme nový index stavů karty změny.
+
+Privacy-first dopad:
+Nevzniká žádná nová evidence podnětů. Slabý podnět se ukládá jen jako krátké anonymizované rozhodnutí.
+
+Kdy stačí:
+Pokud příští review dokáže slabý podnět zavřít bez doptání.
+
+Co případně patří do nové karty:
+Samostatný rozcestník všech stavů karty změny, pokud se stejný problém zopakuje ve více situacích.
+```
+
+Takový zápis je malý, ale důležitý. Udržuje editaci jako dokončenou smyčku, ne jako otevřené dveře do dalších pěti změn.
+
+### Privacy-first doladění
+
+Při drobné opravě se snadno řekne: "Přidejme ještě poznámku, kde budeme sledovat, jestli to lidé našli." Většinou ne. Pokud jde o jednu směrovku v rukopisu, nepotřebujete měřit čtení lidí. Stačí další přirozené použití nebo krátká kontrola při nejbližší práci.
+
+Privacy-first doladění má tři pravidla:
+
+- nepřidávat nový tracker kvůli jedné textové nejasnosti;
+- nepřenášet surové zákaznické nebo interní podklady do edičního zápisu;
+- po opravě smazat nebo anonymizovat pracovní poznámky, pokud už splnily účel.
+
+Pokud oprava souvisí s daty, zeptejte se ještě před editací: pomáhá tato věta čtenáři sbírat méně, ukládat kratší dobu nebo lépe najít odpovědnost? Pokud ne, možná je to jen další uklidňující odstavec. A uklidňující odstavce jsou přesně ten druh textu, který dlouhé rukopisy nenápadně nafukuje.
+
+Codyho komentář: drobné doladění je test disciplíny. Každý autor umí přidat další vysvětlení. Těžší je přidat jen tolik, aby další člověk udělal práci lépe, a pak přestat. Text se tím neurazí. Maximálně si potichu oddechne, což je u Markdownu slušný výkon.
+
+### Checklist drobného doladění trasy
+
+- Vychází úprava z konkrétní pracovní situace, ne z obecného dojmu?
+- Je jasně pojmenované jedno tření, které má zmizet?
+- Zkusili jste nejdřív směrovku, nadpis, hranici rozsahu nebo přesun příkladu?
+- Opravujete místo skutečného selhání, ne jen místo, odkud přišla stížnost?
+- Nepřidává oprava novou kapitolu, pokud stačí jedna pracovní věta?
+- Je zapsané, co se touto úpravou nemění?
+- Má oprava privacy-first dopad stejný nebo lepší než původní stav?
+- Nevzniká kvůli ověření nový tracker, export, tabulka ani osobní evidence?
+- Jsou dočasné poznámky po editaci smazané nebo anonymizované?
+- Je jasné, kdy doladění stačí a kdy by opakované tření patřilo do nové karty změny?
+
+Dobré doladění je skoro neviditelné. Čtenář si neřekne "tady proběhla ediční strategie". Prostě najde správné místo, udělá rozhodnutí a nepřidá zbytečná data ani nový úkol. To je přesně ten druh tiché užitečnosti, kvůli které má rukopis smysl udržovat.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -128181,6 +128310,7 @@ Dobré ověření korekce je krátké a rozhodné. Nechce po týmu další vrstv
 
 ## Pracovní log
 
+- 2026-05-26: Doplněna úvodní podkapitola o drobném doladění trasy po první zpětné vazbě: výběr nejmenší opravy, zásah v místě skutečného selhání, uzavřený zápis, privacy-first doladění a checklist.
 - 2026-05-26: Doplněna Příloha QS o ověření korekce pracovního standardu při dalším přirozeném použití: návrat ke korekční větě, čekání na normální práci, signály nalezení, použití a datové stopy, čtyři výsledky ověření, privacy-first ověření bez dohledu, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QR o převodu výsledku kontroly pracovního standardu do jedné korekce: práce s kontrolní kartou, výběr typu korekce, zásah v reálném pracovním místě, korekční věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QQ o první kontrole pracovního standardu po uzavřené stabilizační úpravě: návrat k závěrečné větě, signály nalezení, použití a datové stopy, čtyři výsledky kontroly, privacy-first evidence, kontrolní karta, mini workshop a checklist.
