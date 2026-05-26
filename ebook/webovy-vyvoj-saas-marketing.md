@@ -128308,8 +128308,221 @@ Korekce standardu má ověřený výsledek a nezůstává viset jako nejasná po
 
 Dobré ověření korekce je krátké a rozhodné. Nechce po týmu další vrstvu práce. Jen potvrdí, že jedna malá úprava opravdu snížila tření, nebo poctivě řekne, že nestačila. V obou případech je výsledek lepší než mlhavé "asi dobrý", které se za měsíc vrátí jako další drobný chaos.
 
+## Příloha QT: Uzavření potvrzené korekce pracovního standardu do stabilní verze
+
+Ověřená korekce standardu nesmí zůstat jen jako dobrý výsledek v kontrolní kartě. Pokud po přirozeném použití víte, že původní tření zmizelo a datová stopa se nezvětšila, je čas korekci zavřít do stabilní verze pracovního standardu. Jinak se tým za pár týdnů vrátí ke stejné otázce, jen s dalším odkazem navíc a s pocitem, že už se to přece řešilo.
+
+Tato příloha řeší malý, ale důležitý krok: převést potvrzenou korekci z ověřovací evidence do jednoho aktuálního pracovního místa. Nejde o slavnostní release. Nejde ani o přepis celé metodiky. Jde o to, aby příští člověk už nepotřeboval znát historii opravy, starou chybu ani diskusi kolem ní. Má prostě najít správný standard a podle něj udělat práci.
+
+Praktická otázka zní: co musí zůstat viditelné, aby standard fungoval, a co může zmizet, protože už jen připomíná cestu, kterou tým nepotřebuje opakovat?
+
+### Začněte výsledkem `potvrdit`
+
+Uzavření dělejte jen tehdy, když karta ověření skončila stavem `potvrdit` nebo velmi jasným stavem `doladit jednou větou`, který už byl skutečně doladěn. Pokud je výsledek `vrátit korekci` nebo `otevřít nové téma`, standard neuzavírejte. Nejdřív rozhodněte, co se s korekcí stane.
+
+Krátký vstupní zápis:
+
+```text
+Standard:
+Korekční věta:
+Výsledek ověření:
+Co se potvrdilo:
+Co se nesmí přenést do stabilní verze:
+```
+
+Položka `Co se nesmí přenést` chrání standard před nenápadným nabobtnáním. Do stabilní verze často nepatří diagnostické poznámky, staré varianty, screenshoty, dočasné odkazy, jména lidí ani detailní popis toho, kdo kde zaváhal. To všechno mohlo být užitečné při ověření. Po potvrzení by z toho ale vznikla vrstva prachu.
+
+Příklad:
+
+```text
+Standard:
+Ediční checklist pro kapitoly s exportem dat.
+
+Korekční věta:
+Editor při úpravě kapitoly s exportem otevře aktuální retenční pravidlo přímo z rozcestníku bez zastávky ve staré poznámce.
+
+Výsledek ověření:
+Potvrdit.
+
+Co se potvrdilo:
+Nový odkaz vede na správné retenční pravidlo a editor nepotřeboval starou poznámku.
+
+Co se nesmí přenést:
+Archivní odkaz, dočasná ověřovací poznámka, jméno editora a screenshot původní odbočky.
+```
+
+### Přepište pouze aktuální pracovní místo
+
+Stabilní verze standardu má žít tam, kde ji člověk při práci opravdu potká. Pokud se korekce týká checklistu, upravte checklist. Pokud rozcestníku, upravte rozcestník. Pokud šablony issue, upravte šablonu. Nepište dlouhé vysvětlení do dalšího dokumentu jen proto, že je příjemné mít "záznam".
+
+Dobré uzavření mění jednu z těchto věcí:
+
+- aktuální formulaci kroku;
+- pořadí dvou kroků;
+- odkaz na kanonické pravidlo;
+- název položky v rozcestníku;
+- jednu hranici rozsahu;
+- jedno pravidlo pro mazání pomocných stop.
+
+Špatné uzavření přidá další vrstvu:
+
+- nový dokument o tom, jak používat starý dokument;
+- samostatnou tabulku výjimek bez vlastníka;
+- komentář u každé historické varianty;
+- nové ruční schvalování kvůli drobnému tření;
+- kontrolní dashboard pro jednorázovou korekci.
+
+Standard má být po uzavření kratší nebo jasnější. Pokud je delší, musí to mít konkrétní důvod: odstranil nejednoznačnost, kterou nejde vyřešit kratší formulací. Jinak je to jen poctivě napsaný nános.
+
+### Nechte historii mimo hlavní trasu
+
+Historie má smysl pro odpovědnost, ne pro každodenní práci. Po uzavření korekce proto rozdělte informace do tří košů:
+
+- aktuální pravidlo: zůstává v pracovním standardu;
+- krátká stopa změny: zůstává v changelogu, logu nebo kartě;
+- dočasné podklady: mažou se nebo archivují podle retenčního pravidla.
+
+Krátká stopa změny může vypadat takto:
+
+```text
+2026-05-26:
+Opraven odkaz v edičním checklistu na aktuální retenční pravidlo.
+Ověřeno při další úpravě kapitoly; stará archivní poznámka odstraněna.
+```
+
+To stačí. Stabilní standard nemusí vyprávět celý příběh. Pokud někdo později potřebuje auditní kontext, najde ho v kartě nebo logu. Člověk, který dnes jen upravuje kapitolu, nemá procházet archeologii procesu. Archeologie je pěkná disciplína, ale jako UX vzor je to lehce kriminální.
+
+### Zavřete pomocné stopy
+
+Ověření často vytvoří pomocné stopy: pracovní kopii checklistu, poznámku k problému, dočasný export, screenshot, komentář ve vlákně, odkaz v interním chatu nebo malý seznam "ještě se podívat". Po potvrzení korekce projděte tyto stopy a rozhodněte o každé z nich.
+
+Použijte jednoduché pravidlo:
+
+- potřebujeme to pro odpovědnost nebo budoucí audit? Zkraťte a ponechte na správném místě.
+- pomáhá to příštímu člověku udělat práci? Přepište to do standardu.
+- vzniklo to jen kvůli ověření? Zrušte, smažte nebo nechte expirovat.
+
+Privacy-first uzavření je často hlavně mazání. Méně kopií znamená menší riziko, menší zmatek a menší šanci, že někdo za půl roku použije starou variantu jako "ten druhý správný postup".
+
+Zvlášť opatrní buďte u podkladů, které obsahují:
+
+- zákaznická jména, e-maily, URL neveřejných stránek nebo objednávky;
+- screenshoty administrace;
+- exporty formulářů, logů nebo analytiky;
+- osobní poznámky o výkonu konkrétních lidí;
+- staré odkazy na dokumenty s jiným retenčním režimem.
+
+Pokud podklad nepotřebujete, nenechávejte ho "pro jistotu". V privacy-first provozu je "pro jistotu" často jen jiný název pro budoucí problém.
+
+### Oddělte stabilizaci od dalšího zlepšování
+
+Ve chvíli, kdy korekci zavíráte, se skoro vždy objeví další nápady. Někdo si všimne, že by šel přejmenovat celý rozcestník. Někdo navrhne sjednotit tři checklisty. Někdo vytáhne starou debatu o nástroji. To může být užitečné, ale nepatří to do uzavření potvrzené korekce.
+
+Použijte krátkou bránu:
+
+```text
+Zavíráme:
+Jednu ověřenou korekci standardu.
+
+Neotevíráme:
+Novou strukturu standardů, redesign dokumentace ani změnu vlastnictví.
+
+Nové nápady:
+Jen pokud mají vlastní kartu, vlastníka a důvod mimo tuto korekci.
+```
+
+Tahle brána chrání momentum. Uzavření má snížit rozpracovanost, ne ji rafinovaně rozmnožit. Pokud se při zavírání objeví dobrý větší nápad, zapište ho zvlášť a vraťte se k němu později. Standard teď potřebuje klidný konec, ne další zatáčku.
+
+### Karta uzavření korekce standardu
+
+```text
+Standard:
+Potvrzená korekční věta:
+Výsledek ověření:
+Aktuální pracovní místo upraveno kde:
+Co bylo přepsáno:
+Co bylo odstraněno:
+Jaká krátká stopa zůstává:
+Které dočasné podklady se mažou nebo expirují:
+Co se neotevírá:
+Kdy se standard znovu kontroluje:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Ediční checklist pro kapitoly s exportem dat.
+
+Potvrzená korekční věta:
+Editor při úpravě kapitoly s exportem otevře aktuální retenční pravidlo přímo z rozcestníku bez zastávky ve staré poznámce.
+
+Výsledek ověření:
+Potvrdit.
+
+Aktuální pracovní místo upraveno kde:
+V edičním checklistu, část Privacy-first kontrola.
+
+Co bylo přepsáno:
+Odkaz na retenční pravidlo vede na aktuální kanonické místo.
+
+Co bylo odstraněno:
+Archivní odkaz a pomocná poznámka ke staré trase.
+
+Jaká krátká stopa zůstává:
+Jedna věta v pracovním logu checklistu.
+
+Které dočasné podklady se mažou nebo expirují:
+Screenshot starého rozcestníku a pracovní poznámka z ověření.
+
+Co se neotevírá:
+Struktura celého edičního procesu.
+
+Kdy se standard znovu kontroluje:
+Při další běžné měsíční kontrole edičních pomůcek.
+```
+
+### Codyho komentář
+
+Můj pohled: dobrý standard poznáte podle toho, že po čase nepotřebuje vysvětlovat vlastní opravy. Pokud každý krok nese batoh historie, tým se učí dějiny dokumentu místo práce. Někdy je samozřejmě potřeba auditní stopa. Jen by měla být v auditním místě, ne před očima člověka, který chce udělat jednoduchý krok a jít dál.
+
+### Mini workshop na 7 minut
+
+Vezměte jednu korekci standardu, která byla ověřena stavem `potvrdit`.
+
+1. Otevřete ověřovací kartu a zkopírujte korekční větu.
+2. Najděte jedno aktuální pracovní místo, které má nést stabilní pravidlo.
+3. Přepište jen formulaci, odkaz nebo pořadí, které příští člověk opravdu použije.
+4. Zapište jednu krátkou stopu změny.
+5. Smažte nebo označte k expiraci dočasné podklady z ověření.
+6. Nové nápady odložte do samostatné karty, pokud opravdu stojí za návrat.
+
+Výstup:
+
+```text
+Potvrzená korekce je součástí stabilního standardu, stará trasa je zavřená a ověřovací podklady nezůstávají jako zbytečná datová stopa.
+```
+
+### Checklist kapitoly
+
+- Má korekce potvrzený výsledek ověření?
+- Je jasné, které pracovní místo se má stát zdrojem pravdy?
+- Přepisujete aktuální standard, ne další vysvětlující dokument bokem?
+- Zůstává v hlavní trase jen to, co příští člověk opravdu potřebuje?
+- Je historie přesunutá do krátké stopy, ne do pracovního postupu?
+- Odstranili jste archivní odkazy, dočasné poznámky a staré varianty?
+- Prošli jste screenshoty, exporty, pracovní kopie a chatové odkazy z ověření?
+- Nenecháváte osobní nebo zákaznické údaje "pro jistotu"?
+- Je jasné, co se při uzavření neotevírá?
+- Mají nové nápady vlastní kartu místo rozšíření původní korekce?
+- Ví tým, kdy se standard znovu zkontroluje v běžném rytmu?
+- Je výsledný standard kratší, jasnější nebo aspoň méně nejednoznačný?
+
+Uzavřená korekce má působit skoro nudně. Člověk přijde, najde správné místo, udělá práci a nic ho nenutí přemýšlet nad starou chybou. To je přesně ten druh nudy, za který se v provozu platí zlatem: méně vysvětlování, méně datových stop, méně návratů ke stejnému problému.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QT o uzavření potvrzené korekce pracovního standardu do stabilní verze: práce s výsledkem potvrzení, přepis aktuálního pracovního místa, oddělení historie od hlavní trasy, úklid pomocných stop, privacy-first mazání podkladů, karta uzavření, Codyho komentář, mini workshop a checklist.
 - 2026-05-26: Doplněna úvodní podkapitola o drobném doladění trasy po první zpětné vazbě: výběr nejmenší opravy, zásah v místě skutečného selhání, uzavřený zápis, privacy-first doladění a checklist.
 - 2026-05-26: Doplněna Příloha QS o ověření korekce pracovního standardu při dalším přirozeném použití: návrat ke korekční větě, čekání na normální práci, signály nalezení, použití a datové stopy, čtyři výsledky ověření, privacy-first ověření bez dohledu, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QR o převodu výsledku kontroly pracovního standardu do jedné korekce: práce s kontrolní kartou, výběr typu korekce, zásah v reálném pracovním místě, korekční věta, privacy-first úklid, karta, mini workshop a checklist.
