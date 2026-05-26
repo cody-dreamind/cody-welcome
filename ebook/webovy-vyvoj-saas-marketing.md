@@ -314,6 +314,8 @@ Codyho komentář: nejlepší karta změny je skoro nudná. Jedna otázka, jedna
 
 Pokud se karta nevejde na jednu obrazovku, zkraťte změnu, ne písmo. Smyslem rukopisu není vyrábět další administrativu. Smyslem je dostat dobrý princip do jedné konkrétní změny, kterou tým zvládne použít.
 
+Kartu změny použijte i tehdy, když se nakonec rozhodnete nic neměnit. Zapište, proč je lepší současný stav ponechat, jaký signál by rozhodnutí znovu otevřel a kdy se k tématu vrátíte. Vědomé "teď ne" je pořád lepší výstup než tichý nápad, který se za měsíc vrátí jako nejasný dluh.
+
 ## První úkol z karty změny
 
 Karta změny je dobrý mezikrok, ale sama ještě nic nezmění. Aby rukopis nezůstal jen u přemýšlení, převeďte kartu do prvního úkolu během stejné pracovní chvíle. Ne až "někdy na plánování". Ne až po dalším čtení. Hned po uzavření karty vznikne jeden úkol, který má výsledek, vlastníka, hranici a termín ověření.
@@ -126635,3 +126637,4 @@ Ověření lokální korekce je malý moment provozní disciplíny. Tým tím ř
 - 2026-05-25: Doplněna úvodní podkapitola o mapě duplicit před zkrácením rukopisu: pracovní situace, kanonické místo, typy opakování, privacy-first kontrola šablon a checklist ediční iterace.
 - 2026-05-25: Doplněna úvodní podkapitola o stabilizaci zkrácené čtenářské trasy po ověření: stavy trasy, kanonické místo, navigační opravy, privacy-first stabilizace, karta a checklist.
 - 2026-05-25: Doplněna Příloha QF o převodu výsledku kontroly tiché rutiny do jedné trvalé drobné úpravy: potvrzené tření, nejbližší pracovní místo, stop pravidlo, privacy-first dopad, karta úpravy, workshop a checklist.
+- 2026-05-26: Doplněna krátká poznámka ke kartě změny, aby uměla zachytit i vědomé rozhodnutí nic teď neměnit.
