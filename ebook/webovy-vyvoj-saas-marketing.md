@@ -128520,8 +128520,145 @@ Potvrzená korekce je součástí stabilního standardu, stará trasa je zavřen
 
 Uzavřená korekce má působit skoro nudně. Člověk přijde, najde správné místo, udělá práci a nic ho nenutí přemýšlet nad starou chybou. To je přesně ten druh nudy, za který se v provozu platí zlatem: méně vysvětlování, méně datových stop, méně návratů ke stejnému problému.
 
+## Příloha QU: První běžný návrat ke stabilní verzi pracovního standardu
+
+Stabilní verze pracovního standardu není hotová tím, že ji někdo přepíše a uzavře kartu korekce. Hotová je až ve chvíli, kdy se k ní tým vrátí při normální práci a nikdo nemusí hledat staré vysvětlení, starou diskusi ani člověka, který opravu původně dělal.
+
+První běžný návrat proto není audit. Je to krátká kontrola v reálné situaci: někdo potřebuje podle standardu udělat práci, otevře aktuální místo a projde jím bez zvláštního doprovodu. Cílem není dokázat, že standard je dokonalý. Cílem je zjistit, jestli stabilní verze opravdu žije jako pracovní nástroj.
+
+### Vraťte se až při skutečné práci
+
+Nevytvářejte umělou schůzku jen proto, že se standard nedávno uzavřel. Umělá kontrola často dopadne lépe než realita, protože lidé sedí v klidu, znají kontext a soustředí se právě na daný dokument. Běžné použití vypadá jinak: někdo řeší zákaznický dotaz, připravuje změnu webu, předává úkol, kontroluje formulář nebo dělá menší marketingovou úpravu.
+
+Správný okamžik návratu nastane, když standard přirozeně vstoupí do práce. V tu chvíli sledujte jen nejbližší průchod:
+
+- našel člověk správné místo bez připomínání?
+- pochopil aktuální pravidlo bez čtení historie?
+- dokončil práci bez obcházení standardu?
+- nevznikla kvůli kontrole nová zbytečná evidence?
+
+Pokud žádná taková situace nenastala, návrat neurychlujte. Standard může být připravený a přesto zatím nepoužitý. To není chyba. Chyba by byla vyrábět falešné použití jen proto, aby tabulka vypadala zavřeně.
+
+### Sledujte aktuální cestu, ne starý příběh
+
+Při prvním návratu bývá lákavé vysvětlovat, proč se standard měnil. To je užitečné pro autora, ale často škodí uživateli standardu. Pokud člověk potřebuje starý příběh, aby udělal dnešní práci, stabilní verze ještě není dost stabilní.
+
+Praktická kontrola má začít otázkou: co člověk vidí jako první, když přijde do pracovního místa? Ne co existuje v changelogu, ne co bylo ve staré kartě, ne co si pamatuje autor. Jen aktuální cesta.
+
+Dobrá stabilní verze má tři vlastnosti:
+
+1. Vstup je zřejmý: člověk ví, kdy má standard použít.
+2. Rozhodnutí je viditelné: hlavní pravidlo není schované v poznámkách.
+3. Výjimka je omezená: člověk ví, kdy má eskalovat, ale není zván k debatě u každého kroku.
+
+Příklad pro webový formulář: pokud standard říká, že první poptávkový formulář sbírá jen e-mail, cíl a volitelnou URL, člověk nemá číst tři staré argumenty o telefonním čísle. Má vidět aktuální pravidlo, důvod v jedné větě a jasnou výjimku pro situace, kdy je telefon opravdu nutný.
+
+### Rozlišujte čtyři výsledky návratu
+
+Po prvním běžném návratu stačí jeden ze čtyř stavů:
+
+- Drží: standard byl nalezen, použit a nevznikla nová zbytečná stopa.
+- Drží s drobnou poznámkou: práce proběhla, ale jedna věta, odkaz nebo pořadí kroků lehce zdržely.
+- Vrací se stará cesta: člověk obešel stabilní verzi a použil starý dokument, starý zvyk nebo starou ústní dohodu.
+- Nepoužito: standard nebyl v dané situaci relevantní nebo situace ještě nenastala.
+
+Stav `Drží` nevyžaduje další práci. Zapište krátkou stopu a nechte standard být. Stabilita se nepozná podle počtu schůzek, ale podle toho, že se kolem věci nemusí dál točit provozní pozornost.
+
+Stav `Drží s drobnou poznámkou` neznamená otevřít novou korekční smyčku automaticky. Nejdřív se ptejte, jestli poznámka zvyšuje pracovní cenu pro dalšího člověka. Pokud ne, stačí ji nechat do dalšího přirozeného použití. Každá drobná nepohodlnost není dluh; někdy je to jen známka, že člověk standard použil poprvé.
+
+Stav `Vrací se stará cesta` je důležitý. Neberte ho jako selhání člověka. Většinou znamená, že stará cesta zůstala blíž, byla lépe odkazovaná, měla pohodlnější šablonu nebo ji někdo pořád posílá v komunikaci. Oprava má začít u cesty, ne u napomínání.
+
+Stav `Nepoužito` je platný jen tehdy, když je zapsané, kdy se k věci vrátit. Bez návratového signálu se z něj stane pohodlné odložení.
+
+### Zkontrolujte, jestli stará verze ještě někde nevede
+
+První návrat často odhalí, že stabilní verze je sice správná, ale staré odkazy pořád žijí. Může jít o interní wiki, šablonu úkolu, komentář v issue, starou onboardingovou poznámku, uloženou odpověď v supportu nebo jen připnutou zprávu v chatu.
+
+Neuklízejte celý svět. Projděte jen trasu, kterou člověk při návratu reálně použil. Pokud ho starý odkaz poslal špatně, opravte ten odkaz. Pokud starý dokument nebyl v cestě, nechte ho na pravidelný úklid. Jinak se z jedné kontroly standardu stane archeologie a všichni budou předstírat, že to je produktivita. Není. Je to jen prach s lepším názvem.
+
+Malý filtr pro staré stopy:
+
+- Vedla tato stopa člověka při aktuální práci?
+- Mohla by vést dalšího člověka stejnou chybou?
+- Dá se opravit jedním odkazem, štítkem nebo krátkou větou?
+- Obsahuje zbytečné osobní údaje, export nebo pracovní detail, který už nepotřebujeme?
+
+Pokud odpověď zní ano, udělejte jednu malou opravu. Pokud ne, zapište maximálně poznámku do běžného úklidu.
+
+### Privacy-first návrat ke standardu
+
+Kontrola stabilní verze nesmí vytvořit větší datovou stopu než samotný standard. Není potřeba měřit, kdo dokument otevřel, kolik sekund v něm byl, kam klikl nebo kolikrát se vrátil. Pro první návrat stačí pracovní výsledek a krátká věta o tření.
+
+Privacy-first přístup tady znamená:
+
+- sledujte průchod práce, ne výkon člověka;
+- zapisujte situaci, ne osobní hodnocení;
+- nemažte aktuální pravidlo, ale mažte dočasné podklady po ověření;
+- staré exporty, screenshoty a kopie ponechte jen tehdy, pokud mají jasný důvod;
+- pokud vznikla nová šablona, zapište její účel a místo, kde se má udržovat.
+
+Příklad dobrého zápisu: "Při přípravě nové landing page vedl starý odkaz z checklistu na předchozí verzi formulářového pravidla. Odkaz nahrazen kanonickým místem, dočasná poznámka smazána." To stačí. Nepotřebujete jméno člověka, čas strávený hledáním ani screenshot celé interní stránky.
+
+### Karta prvního návratu ke stabilní verzi
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Reálná situace, ve které byl použit:
+
+Výsledek návratu:
+Drží / Drží s drobnou poznámkou / Vrací se stará cesta / Nepoužito
+
+Co člověk hledal jako první:
+
+Kde standard pomohl:
+
+Kde vzniklo tření:
+
+Stará stopa, která ještě vedla špatně:
+
+Jedna oprava, pokud je potřeba:
+
+Co teď vědomě neřešíme:
+
+Privacy-first kontrola:
+Jaké dočasné podklady, kopie nebo exporty mažeme?
+
+Návratový signál:
+Kdy se k tomu vrátíme, pokud výsledek není `Drží`?
+```
+
+Vyplnění má být krátké. Pokud karta zabere víc času než samotné použití standardu, karta se stala problémem. Zkraťte ji na tři věty: situace, výsledek, další krok.
+
+### Mini workshop na 6 minut
+
+1. Vyberte jedno aktuální použití stabilního standardu z posledních dnů.
+2. Najděte cestu, kterou člověk opravdu šel k pracovnímu místu.
+3. Pojmenujte výsledek jedním ze čtyř stavů.
+4. Pokud se vrátila stará cesta, opravte jen nejbližší odkaz nebo šablonu.
+5. Smažte dočasné podklady, které už nejsou potřeba.
+6. Zapište jednu větu do changelogu nebo rozhodovací paměti.
+
+Tento workshop je schválně krátký. První návrat má chránit standard před návratem šumu, ne znovu otevírat celou debatu o tom, proč standard existuje.
+
+### Checklist kapitoly
+
+- Čekáme na reálné použití standardu, ne na umělou kontrolní schůzku?
+- Sledujeme aktuální cestu k pracovnímu místu, ne historii korekce?
+- Umíme výsledek zařadit jako `Drží`, `Drží s drobnou poznámkou`, `Vrací se stará cesta` nebo `Nepoužito`?
+- Pokud se vrátila stará cesta, opravujeme nejbližší odkaz, šablonu nebo vstup?
+- Neotevíráme novou korekční smyčku kvůli drobnosti, která zatím nemá pracovní cenu?
+- Nezapisujeme osobní výkon člověka, ale situaci a použití standardu?
+- Mažeme dočasné podklady, které už nemají jasný účel?
+- Má výsledek krátkou stopu tam, kde tým později najde aktuální rozhodnutí?
+
+Stabilní standard má po prvním návratu zůstat lehčí, ne těžší. Když kontrola přidá víc dokumentace, dohledu a vysvětlování než samotná práce, standard možná formálně drží, ale provozně ztrácí smysl. Dobrá kontrola ho vrátí zpátky do normálního rytmu: člověk přijde, použije aktuální pravidlo, udělá práci a jde dál.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QU o prvním běžném návratu ke stabilní verzi pracovního standardu: reálné použití místo umělé kontroly, sledování aktuální cesty, čtyři výsledky návratu, kontrola starých stop, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QT o uzavření potvrzené korekce pracovního standardu do stabilní verze: práce s výsledkem potvrzení, přepis aktuálního pracovního místa, oddělení historie od hlavní trasy, úklid pomocných stop, privacy-first mazání podkladů, karta uzavření, Codyho komentář, mini workshop a checklist.
 - 2026-05-26: Doplněna úvodní podkapitola o drobném doladění trasy po první zpětné vazbě: výběr nejmenší opravy, zásah v místě skutečného selhání, uzavřený zápis, privacy-first doladění a checklist.
 - 2026-05-26: Doplněna Příloha QS o ověření korekce pracovního standardu při dalším přirozeném použití: návrat ke korekční větě, čekání na normální práci, signály nalezení, použití a datové stopy, čtyři výsledky ověření, privacy-first ověření bez dohledu, karta, mini workshop a checklist.
