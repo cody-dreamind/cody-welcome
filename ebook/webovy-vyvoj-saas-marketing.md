@@ -125918,8 +125918,207 @@ Jedno lehké drhnutí má jednu lokální korekci, jasné omezení rozsahu a př
 
 Lokální korekce po lehkém drhnutí je schopnost nechat fungující systém fungovat a opravit jen to, co opravdu zdrželo práci. Když se to podaří, tým získá přesnější pracovní místo bez nové byrokracie. Když se to přežene, vznikne další vrstva pravidel nad pravidly. A to už není korekce. To je jen chaos v lepším oblečení.
 
+## Příloha QK: Ověření lokální korekce po lehkém drhnutí
+
+Lokální korekce má smysl až ve chvíli, kdy ji někdo použije v normální práci. Ne v review dokumentu, ne při interním vysvětlování a ne v ukázkovém průchodu, kde všichni vědí, co se měnilo. Ověření má proběhnout při nejbližší přirozené situaci, ve které by původní lehké drhnutí mohlo znovu vzniknout.
+
+Cíl této smyčky je malý:
+
+```text
+Zjistit, jestli jedna lokální korekce odstranila konkrétní zaváhání bez nové vrstvy práce, dat nebo vysvětlování.
+```
+
+To je důležité omezení. Neověřujete celý pracovní systém. Nehledáte novou strategii. Jen se díváte, jestli se člověk při dalším použití dostal přes místo, kde minule zaváhal. Pokud ano, korekce se může uzavřít. Pokud ne, potřebujete rozlišit, jestli je problém v textu korekce, v umístění korekce, nebo v tom, že původní drhnutí bylo větší, než se zdálo.
+
+### Čekejte na skutečné použití
+
+Nejhorší ověření lokální korekce je umělé: tým si sedne nad šablonu, přečte novou větu a shodne se, že dává smysl. To může být dobrá kontrola srozumitelnosti, ale není to důkaz použití. Důkaz vzniká teprve ve chvíli, kdy někdo řeší reálný brief, reálnou landing page, reálný support dotaz nebo reálnou interní předávku.
+
+Do ověřovací karty proto napište spouštěč:
+
+```text
+Ověříme při nejbližší nové případové studii, kde autor pracuje s citací zákazníka.
+```
+
+Lépe než:
+
+```text
+Ověříme na příštím meetingu.
+```
+
+Meeting často ověří názor na pravidlo. Přirozené použití ověří, jestli pravidlo pomohlo práci. To jsou dvě různé věci a u provozních korekcí rozhoduje ta druhá.
+
+### Sledujte původní zaváhání, ne celý výkon
+
+Při ověření se držte původního lehkého drhnutí. Pokud byla korekce o anonymizaci citace, nesuďte celou kvalitu případové studie. Pokud byla o názvu odkazu, nesuďte celou informační architekturu. Pokud byla o pořadí dvou kroků v checklistu, nesuďte celý proces.
+
+Praktická ověřovací otázka:
+
+```text
+Pomohla korekce člověku projít přes původní místo zaváhání bez dotazu bokem, staré pomocné stopy nebo nové kopie dat?
+```
+
+Tato věta chrání rozsah. Tým se může během ověření všimnout dalších věcí, ale nesmí je potichu přilepit k uzavřené korekci. Nové téma patří do nové karty, jinak se drobná smyčka znovu nafoukne.
+
+### Čtyři výsledky ověření
+
+Po prvním přirozeném použití dejte korekci jeden ze čtyř stavů:
+
+1. Potvrdit: člověk použil pracovní místo bez původního zaváhání a nevznikla nová datová stopa.
+2. Doladit jednou větou: korekce pomohla, ale pořád chybí malá hranice, název nebo příklad.
+3. Přesunout: věta je správná, ale člověk ji našel pozdě nebo ji při práci minul.
+4. Znovu otevřít: problém není lehké drhnutí, ale širší chyba pracovního místa.
+
+Stav `Potvrdit` neznamená, že je celý systém dokonalý. Znamená jen to, že lokální korekce splnila svůj účel. Stav `Doladit jednou větou` je pořád v původní smyčce, pokud skutečně jde o jednu větu. Stav `Přesunout` je častý u dokumentace: obsah je dobrý, ale bydlí až za okamžikem rozhodnutí. Stav `Znovu otevřít` používejte střídmě, ale poctivě. Když se ukáže, že člověk potřebuje novou šablonu, jiné pořadí práce nebo jasnější vlastnictví, lokální korekce už nestačí.
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Přesunout.
+
+Co jsme viděli:
+Autor našel anonymizační hranici až po vyplnění příkladu. Dotaz bokem už nevznikl, ale věta přišla pozdě.
+
+Rozhodnutí:
+Přesunout hranici nad první příklad vyplnění. Text neměníme.
+
+Co neotevíráme:
+Neřešíme teď celý schvalovací postup citací.
+```
+
+Takové rozhodnutí je pořád malé, ale užitečné. Nepřepisuje svět. Jen dá správnou větu do správného okamžiku.
+
+### Privacy-first ověření bez nové evidence
+
+Ověření lokální korekce nesmí vytvořit víc dat než samotná korekce. U drobných pracovních míst často stačí krátká anonymizovaná poznámka:
+
+```text
+Při další případové studii autor použil anonymizační hranici bez dotazu bokem. Nevznikla nová kopie citací.
+```
+
+Nepotřebujete nahrávat průchod, ukládat celé interní poznámky ani zakládat tabulku s osobními jmény. Pokud ověřujete práci s citacemi, poptávkami, supportem nebo zákaznickými daty, zapište jen tolik, kolik stačí pro rozhodnutí. Důkaz má potvrdit korekci, ne archivovat práci lidí.
+
+Privacy-first otázky:
+
+- Zapisujeme jen výsledek ověření, ne citlivý obsah práce?
+- Nepřidali jsme nový screenshot, export nebo kopii zákaznického textu?
+- Dá se poznámka napsat anonymizovaně?
+- Víme, kde poznámka žije a kdy se smaže nebo sloučí do changelogu?
+- Pokud korekce selhala, nebudeme kvůli tomu sledovat člověka místo pracovního místa?
+
+Codyho komentář: u malých korekcí je největší riziko, že kontrola bude těžší než oprava. To je špatný obchod. Když jedna věta v šabloně vyžaduje půlstránkový report ověření, systém si právě vyrobil vlastní daň.
+
+### Karta ověření lokální korekce
+
+```text
+Pracovní místo:
+Původní lehké drhnutí:
+Lokální korekce:
+Přirozené použití:
+Ověřovací otázka:
+Co jsme viděli:
+Stav korekce:
+Rozhodnutí:
+Privacy-first poznámka:
+Co uklízíme:
+Co případně otevíráme zvlášť:
+Changelog:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Brief případové studie.
+
+Původní lehké drhnutí:
+Autor nevěděl, kdy používat anonymizovanou roli a kdy už konkrétní firmu.
+
+Lokální korekce:
+Doplněna věta nad příklad: "Dokud zákazník citaci nebo název neschválí, pište jen roli, segment a kontext."
+
+Přirozené použití:
+Nová případová studie pro B2B SaaS zákazníka.
+
+Ověřovací otázka:
+Pomohla věta autorovi projít přes anonymizační hranici bez dotazu bokem a bez nové kopie citací?
+
+Co jsme viděli:
+Autor použil roli a segment, konkrétní název nechal prázdný do schválení a neptal se bokem.
+
+Stav korekce:
+Potvrdit.
+
+Rozhodnutí:
+Korekci ponecháváme jako součást aktuálního briefu.
+
+Privacy-first poznámka:
+Do ověření nezapisujeme obsah citace ani jméno zákazníka.
+
+Co uklízíme:
+Mažeme dočasnou poznámku z pracovní kontroly a v changelogu necháváme jen anonymizované rozhodnutí.
+
+Co případně otevíráme zvlášť:
+Nic.
+
+Changelog:
+Ověřena anonymizační hranice v briefu případové studie při prvním přirozeném použití.
+```
+
+### Kdy korekci uzavřít
+
+Korekci uzavřete, když jsou splněné tři podmínky:
+
+1. Původní zaváhání se při přirozeném použití neopakovalo.
+2. Člověk nemusel použít starou pomocnou stopu, chat nebo neformální vysvětlení.
+3. Ověření nevytvořilo novou zbytečnou datovou stopu.
+
+Uzavření má být krátké. Do pracovního místa ponechte aktuální větu. Do changelogu napište jednu lidskou poznámku. Do rozhodovací paměti nepřenášejte celý příběh, pokud už není potřeba. Dlouhá historie korekce může být užitečná během opravy, ale po potvrzení často jen překáží dalšímu použití.
+
+Uzavírací věta:
+
+```text
+Lokální korekce potvrzena při prvním přirozeném použití; ponecháváme ji v pracovním místě a rušíme pomocnou ověřovací poznámku.
+```
+
+Pokud korekce skončí stavem `Doladit jednou větou` nebo `Přesunout`, udělejte danou úpravu a ověřte ji znovu při dalším přirozeném použití. Pokud skončí stavem `Znovu otevřít`, zavřete lokální korekci jako nedostatečnou a založte novou iteraci s jasnějším rozsahem. Není to selhání. Je to zjištění, že problém byl větší než původní štítek.
+
+### Mini workshop na 6 minut
+
+Vezměte jednu lokální korekci, která čeká na ověření.
+
+1. Napište původní lehké drhnutí jednou větou.
+2. Určete nejbližší přirozené použití.
+3. Přepište ověřovací otázku podle původního zaváhání.
+4. Vyberte, co stačí vidět pro stav `Potvrdit`.
+5. Napište, co se nesmí při ověření sbírat nebo kopírovat.
+6. Připravte jednu changelogovou větu pro případ potvrzení.
+
+Výstup:
+
+```text
+Korekce má přirozený ověřovací okamžik, minimální důkaz a jasné rozhodnutí dalšího stavu.
+```
+
+### Checklist kapitoly
+
+- Ověřujete korekci při reálném použití, ne jen na meetingu?
+- Sledujete původní zaváhání místo celého výkonu člověka?
+- Má ověření jednu jasnou otázku?
+- Stačí pro rozhodnutí malý anonymizovaný důkaz?
+- Nevzniká nový export, screenshot, tabulka nebo citlivá kopie?
+- Umíte dát korekci stav `Potvrdit`, `Doladit jednou větou`, `Přesunout` nebo `Znovu otevřít`?
+- Pokud korekce pomohla jen částečně, je další zásah pořád lokální?
+- Pokud problém není lokální, zakládáte novou iteraci místo natahování staré?
+- Po potvrzení uklízíte pomocné poznámky a ponecháváte jen changelog?
+- Je pracovní místo po ověření jednodušší, ne složitější?
+
+Ověření lokální korekce je malý moment provozní disciplíny. Tým tím říká: opravujeme konkrétní tření, čekáme na skutečnou práci a po potvrzení uklízíme vlastní stopy. Tak vzniká dokumentace, která se časem zpřesňuje, místo aby kolem sebe hromadila důkazy o každé historické zatáčce.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QK o ověření lokální korekce po lehkém drhnutí: přirozené použití, sledování původního zaváhání, čtyři výsledky ověření, privacy-first evidence bez nové datové vrstvy, karta ověření, uzavření korekce, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QJ o převodu lehkého drhnutí po návratu pracovního místa do jedné lokální korekce: vstupní stav, nejbližší místo zásahu, typy korekcí, stop pravidlo, privacy-first kontrola, karta korekce, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QI o prvním návratu k běžnému pracovnímu místu po uzavřené drobné úpravě: přirozené použití, samostatnost pracovního místa, čtyři výsledky návratu, ochrana před novými nápady v uzavřené smyčce, privacy-first návrat bez nové evidence, návratová karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QH o uzavření ověřené trvalé drobné úpravy do běžného pracovního místa: rozhodovací věta, přepis aktuálního pracovního místa, zavření pomocných stop, changelog, privacy-first úklid podkladů, karta uzavření, mini workshop a checklist.
