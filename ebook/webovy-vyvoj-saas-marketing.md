@@ -2931,6 +2931,170 @@ Při dalším měsíčním návratu k rozhodnutím.
 
 Předání je poslední krok jedné ediční smyčky. Až po něm má smysl říct, že zkrácená trasa opravdu žije v rukopisu, ne jen v hlavě editora. Dobře předaná změna chrání budoucí práci: lidé vědí, co platí, co nemají znovu vyrábět a kdy je oprava chyba, ne pozvánka k dalšímu nekonečnému rozšiřování.
 
+## První zpětná vazba po předání trasy
+
+Předaná trasa potřebuje první reálné použití, ne další schůzku o tom, jestli zní dobře. Dokud podle ní někdo nezkusí udělat práci, pořád nevíte, jestli je srozumitelná mimo hlavu autora. Zpětná vazba po předání má proto ověřit jednu věc: najde člověk správné kanonické místo, pochopí hranici změny a dokončí pracovní krok bez návratu ke starým duplicitám?
+
+Tento krok držte malý. Neotevírejte celou redakční retrospektivu, nevyhlašujte dotazník pro všechny čtenáře a nepřidávejte sledování chování v rukopisu jen proto, že se změnila jedna trasa. Stačí jedno až tři normální použití v situaci, pro kterou trasa vznikla.
+
+První zpětná vazba má odpovědět na čtyři otázky:
+
+```text
+Kde člověk začal?
+Našel kanonické místo bez vysvětlování?
+Jaké rozhodnutí nebo úkol podle trasy vznikl?
+Co ho zdrželo, zmátlo nebo vedlo ke staré cestě?
+```
+
+Pokud odpověď na třetí otázku chybí, neměřili jste použití trasy, ale jen dojem z textu. Dojem se hodí jako signál, ale sám o sobě neříká, jestli rukopis pomohl udělat práci.
+
+### Vyberte přirozenou situaci
+
+Nejlepší test je běžná práce, která by stejně přišla: příprava stránky, úprava šablony, sales follow-up, měsíční review, audit datové stopy nebo předání výřezu zákazníkovi. Umělý test často zvýhodní text, protože lidé vědí, že mají hledat chybu. Reálná situace ukáže, jestli trasa obstojí, když má člověk omezený čas a řeší skutečný výstup.
+
+Příklad dobrého ověření:
+
+- editor upravuje příbuznou kapitolu a má použít nové kanonické místo místo kopírování starého checklistu;
+- marketing owner připravuje krátký výřez pro článek a má poznat, že nová šablona už žije jinde;
+- delivery člověk převádí workshopový nález do karty změny a má najít privacy-first hranici bez dalšího vysvětlování.
+
+Příklad slabého ověření:
+
+- "Přečti si prosím novou část a řekni, jestli dává smysl."
+
+Taková věta skoro vždycky vyrobí obecný komentář. Lepší zadání zní:
+
+```text
+Použij tuhle trasu pro aktuální kartu změny. Zapiš jen místo, kde jsi začal, kam tě text dovedl, jaké rozhodnutí vzniklo a kde ses musel doptat.
+```
+
+### Zapisujte tření, ne rozsudek
+
+Neptejme se, jestli je trasa dobrá. To je moc široké a svádí k debatě o vkusu. Sledujte konkrétní tření:
+
+- člověk začal ve špatné části;
+- směrovka vedla na kanonické místo, ale nebylo jasné, co z něj použít;
+- privacy-first hranice byla viditelná, ale nevešla se do pracovního výstupu;
+- vznikla nová duplicita, protože starý materiál pořád působil jako platný;
+- člověk dokončil práci, ale musel znát historii editace.
+
+Každé tření přepište jako pracovní pozorování, ne jako soud nad autorem:
+
+```text
+Pozorování:
+Při přípravě workshopové karty člověk našel kapitolu o kartě změny, ale minul novou část o zavření karty bez úkolu.
+
+Dopad:
+Vznikl zbytečný úkol místo vědomého rozhodnutí nic teď neměnit.
+
+Možná malá oprava:
+Přidat jednu směrovku z karty změny na zavření bez úkolu.
+```
+
+Tím se zpětná vazba dá použít. "Je to trochu nejasné" se použít nedá, pokud k němu není situace, místo a dopad.
+
+### Čtyři výsledky první zpětné vazby
+
+Po jednom až třech použitích rozhodněte stav trasy:
+
+- Potvrdit: člověk našel správné místo, dokončil práci a nevznikla nová duplicita.
+- Drobně doladit: trasa funguje, ale jedna směrovka, nadpis nebo příklad potřebuje úpravu.
+- Vrátit k ověření: trasa vyžaduje znalost historie nebo vede ke špatnému typu výstupu.
+- Zastavit rozšiřování: zpětná vazba přinesla dobré nápady, ale nesouvisí s původní stabilizací.
+
+Nejčastější chyba je zaměnit drobné doladění za novou kapitolu. Když zpětná vazba říká "nenašel jsem kanonické místo", často stačí lepší směrovka. Když říká "potřebujeme nový playbook pro celý proces", je to možná pravda, ale patří to do nové karty změny, ne do opravy předané trasy.
+
+### Privacy-first zpětná vazba
+
+Zpětná vazba po předání trasy nemá vytvářet novou vrstvu sledování lidí. Nepotřebujete nahrávky obrazovky, heatmapy, analytiku čtení ani tabulku se jmény všech, kdo kde klikli. Pro účel ověření obvykle stačí krátký pracovní záznam:
+
+```text
+Situace:
+Výstup:
+Kde člověk začal:
+Kanonické místo:
+Tření:
+Rozhodnutí:
+Co mažeme po ověření:
+```
+
+Pokud používáte reálné zákaznické příklady, anonymizujte je ještě před sdílením zpětné vazby. Jestli pro rozhodnutí stačí věta "poptávkový formulář vedl ke zbytečnému poli", neposílejte dál celou poptávku. Privacy-first provoz není jen o nástrojích; je to zvyk převádět surové podklady na nejmenší užitečný závěr.
+
+Codyho komentář: první zpětná vazba po předání má být trochu přízemní. Když z ní vznikne jeden lepší odkaz, jeden přesnější nadpis nebo rozhodnutí nic nepřidávat, je to v pořádku. Rukopis se zlepšuje hlavně tím, že lidem méně překáží při normální práci.
+
+### Karta první zpětné vazby
+
+```text
+Předaná trasa:
+Pracovní situace:
+Kdo trasu použil:
+Kde začal:
+Našel kanonické místo:
+Výstup použití:
+Tření:
+Privacy-first poznámka:
+Rozhodnutí po zpětné vazbě:
+Nejmenší oprava:
+Co patří do nové karty změny:
+Co mažeme nebo anonymizujeme:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Předaná trasa:
+Zavření karty změny bez úkolu.
+
+Pracovní situace:
+Marketing owner třídil podnět z review landing page.
+
+Kde začal:
+Karta jedné změny po čtení.
+
+Našel kanonické místo:
+Ano, ale až přes vyhledání slova "zavřít".
+
+Výstup použití:
+Podnět byl zavřený bez úkolu, protože nebyl spojený s aktuální pracovní otázkou.
+
+Tření:
+V části o kartě změny chyběla krátká směrovka na zavření bez úkolu.
+
+Privacy-first poznámka:
+Nepřenášíme původní zákaznickou poznámku, stačí anonymizovaný důvod zavření.
+
+Rozhodnutí po zpětné vazbě:
+Drobně doladit.
+
+Nejmenší oprava:
+Přidat jednu větu ke kartě změny: pokud výstupem je vědomě nic neměnit, použijte část o zavření karty bez úkolu.
+
+Co patří do nové karty změny:
+Nápad na samostatný index všech stavů karty změny.
+
+Co mažeme nebo anonymizujeme:
+Dočasnou poznámku z review po přepsání do anonymizovaného záznamu.
+
+Další kontrola:
+Při příštím použití karty změny v měsíčním review.
+```
+
+### Checklist první zpětné vazby po předání
+
+- Proběhlo ověření v reálné pracovní situaci?
+- Sleduje zpětná vazba výstup práce, ne jen dojem z textu?
+- Je jasné, kde člověk začal a kam ho trasa dovedla?
+- Vzniklo konkrétní rozhodnutí, úkol nebo vědomé zavření bez úkolu?
+- Je tření zapsané jako situace, místo a dopad?
+- Neotevírá drobné tření zbytečně novou kapitolu nebo nový playbook?
+- Rozlišuje záznam chybu trasy od nového nápadu?
+- Nevyžaduje ověření nové trackery, nahrávky, heatmapy ani osobní sledování?
+- Jsou surové zákaznické nebo interní podklady anonymizované nebo smazané?
+- Je rozhodnuté, jestli trasu potvrdit, drobně doladit, vrátit k ověření nebo nerozšiřovat?
+
+První zpětná vazba uzavírá poslední nejistotu po předání: jestli trasa funguje i bez autora po ruce. Když ano, nechte ji žít. Když ne, opravte nejmenší místo, které brání práci. V obou případech odolejte pokušení udělat z každého signálu nový systém. Rukopis má být užitečný právě tím, že další krok zmenšuje.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -127438,6 +127602,7 @@ Uzavření do pracovního standardu je dobré poznat podle toho, že po něm nen
 
 ## Pracovní log
 
+- 2026-05-26: Doplněna úvodní podkapitola o první zpětné vazbě po předání trasy: ověření v reálné pracovní situaci, zápis tření, čtyři výsledky zpětné vazby, privacy-first evidence, karta a checklist.
 - 2026-05-26: Doplněna Příloha QP o uzavření ověřené stabilizační úpravy do pracovního standardu: závěrečná věta, aktualizace zdroje pravdy, úklid pomocných stop, oddělení nové ambice od standardu, karta uzavření, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QO o ověření stabilizační úpravy při dalším běžném průchodu: návrat ke stabilizační větě, přirozený průchod, signály výsledku, samostatnosti a datové stopy, čtyři výsledky ověření, krátká ověřovací stopa, privacy-first kontrola, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QN o převodu drobného výsledku kontroly pracovního místa do stabilizační úpravy: vstupní stav, typy malých úprav, zásah v nejbližším pracovním místě, stabilizační věta, ověření dalším přirozeným použitím, privacy-first kontrola, karta, mini workshop a checklist.
