@@ -125272,8 +125272,203 @@ Jedna trvalá drobná úprava byla ověřena při normální práci a má jasný
 
 Ověření trvalé drobné úpravy je poslední kontrola, jestli malá změna opravdu ztišila práci. Když ano, zavřete smyčku a nechte systém dýchat. Když ne, opravte jen nejbližší místo nebo změnu vraťte. Nejhorší varianta je nechat drobnou úpravu napůl otevřenou: v dokumentu už je, v praxi jí nikdo nevěří a v hlavě týmu zůstává další malý dluh. To je přesně ten typ šumu, který měl zmizet.
 
+## Příloha QH: Uzavření ověřené trvalé drobné úpravy do běžného pracovního místa
+
+Ověřená trvalá drobná úprava má ještě jeden poslední krok: musí se přestat tvářit jako změna. Dokud ji tým drží v poznámce, changelogu, kontrolní kartě nebo hlavě člověka, který ji ověřil, pořád není úplně součástí běžné práce. Je to jen dobře otestovaná oprava, která čeká na zařazení.
+
+Uzavření do běžného pracovního místa znamená:
+
+```text
+Aktuální artefakt už obsahuje správný stav a pomocné stopy po ověření jsou zavřené nebo uklizené.
+```
+
+Tohle je malý rozdíl s velkým dopadem. Příští člověk nemá číst historii drobné úpravy. Má otevřít šablonu, rozcestník, checklist, sales kartu, runbook nebo rozhodovací log a najít aktuální podobu. Historie zůstává jen tam, kde pomáhá pochopit důvod pravidla, ne jako druhá cesta k práci.
+
+### Začněte výsledkem ověření
+
+Nejdřív se vraťte ke kartě ověření z předchozí přílohy. Uzavírat má smysl jen úpravu, která má jasný stav:
+
+- potvrdit;
+- doladit a potom potvrdit;
+- vrátit;
+- odložit s konkrétním návratem.
+
+Pokud karta končí neurčitě, neuzavírejte ji do provozu. Nejasná drobná úprava je horší než žádná úprava: lidé ji začnou kopírovat, ale nikdo neví, jestli opravdu platí. Nejprve napište jednu rozhodovací větu.
+
+Příklad:
+
+```text
+Rozhodnutí:
+Nový název odkazu na brief případové studie se potvrzuje. Při běžném použití pomohl najít šablonu bez dotazu bokem. Do příkladu se doplnila věta o anonymizaci citací.
+```
+
+Tato věta stačí. Nepotřebujete popisovat celou cestu od prvního tření. Uzavření má být krátké, protože jeho práce je převést potvrzený stav do normálu.
+
+### Přepište aktuální pracovní místo, ne historii
+
+Při uzavírání upravujte místo, kde bude další člověk pracovat:
+
+- aktuální šablonu;
+- rozcestník;
+- checklist;
+- komponentový popis;
+- sales nebo delivery kartu;
+- interní runbook;
+- rozhodovací záznam;
+- onboardingovou trasu.
+
+Nejčastější chyba je přidat další poznámku vedle. Například "ověřeno, používejte novou verzi" v chatu, úkolu nebo komentáři. To možná pomůže na jeden den, ale dlouhodobě to vytváří další zdroj pravdy. Správné řešení je nudnější: přepsat aktuální místo tak, aby pomocná poznámka nebyla potřeba.
+
+Praktická otázka:
+
+```text
+Kdyby příští člověk neviděl žádnou historii změny, našel by správný postup přímo v místě práce?
+```
+
+Pokud odpověď zní ne, uzavření ještě není hotové.
+
+### Zavřete pomocné stopy
+
+Každá drobná úprava po sobě může nechat malé stopy:
+
+- kontrolní poznámku;
+- dočasnou kartu;
+- komentář v dokumentu;
+- pracovní kopii;
+- screenshot;
+- export;
+- osobní poznámku;
+- úkol typu "ověřit příště";
+- starý odkaz na předchozí název.
+
+Po potvrzení změny rozhodněte u každé stopy jeden stav:
+
+- ponechat jako krátký changelog;
+- sloučit do rozhodovacího záznamu;
+- označit jako uzavřené;
+- smazat;
+- anonymizovat;
+- převést do nové samostatné karty, pokud jde o jiný problém.
+
+Pomocné stopy nemají zůstávat jen proto, že jsou malé. Malé stopy se časem skládají do velkého šumu. A šum je přesně to, co drobná úprava měla snížit.
+
+### Nechte jen takovou historii, která pomáhá
+
+Uzavření neznamená vymazat důvod změny. Znamená oddělit důvod od pracovního nepořádku. U malých úprav obvykle stačí jedna changelogová věta:
+
+```text
+Odkaz na brief případové studie byl po ověření přejmenován podle výstupu a příklad doplněn o větu k anonymizaci citací.
+```
+
+Taková věta říká dost: co se změnilo a proč. Nepotřebuje jména lidí, syrové poznámky, screenshoty ani detailní popis zaváhání. Pokud se za půl roku někdo zeptá, proč odkaz vypadá právě takhle, changelog ho navede. Pokud potřebuje víc, může otevřít starší rozhodovací záznam, ale běžná práce na něm nestojí.
+
+Codyho komentář: dobrá historie je jako štítek na zásuvce. Má říct, co je uvnitř, ne vyprávět dramatický příběh o tom, jak se zásuvka montovala. Ten příběh byl možná poučný, ale nepatří do každého dalšího použití šroubováku.
+
+### Privacy-first uzavření
+
+U drobných úprav se privacy-first uzavření často týká pomocných materiálů. Během ověření mohl vzniknout příklad, poznámka, kopie textu, seznam poptávek nebo interní komentář. Po potvrzení změny už většina těchto podkladů nemá důvod zůstávat v původní podobě.
+
+Položte si pět otázek:
+
+- Zůstává někde pracovní kopie s osobními nebo zákaznickými údaji?
+- Obsahuje příklad konkrétní jména, citace nebo interní detaily, které stačí zobecnit?
+- Vznikl během ověření export, screenshot nebo tabulka?
+- Má dočasná poznámka vlastníka a konec, nebo se stala tichým archivem?
+- Drží aktuální pracovní místo datovou hranici jasněji než před úpravou?
+
+Dobrý výsledek uzavření:
+
+```text
+Aktuální šablona obsahuje anonymizační větu, pracovní kopie byla smazaná a v changelogu zůstává jen obecný závěr bez osobních údajů.
+```
+
+Privacy-first uzavření není velké gesto. Je to provozní hygiena: ponechat rozhodnutí, odstranit zbytečné detaily, zmenšit počet míst, kde mohou data zůstat bez účelu.
+
+### Karta uzavření drobné úpravy
+
+```text
+Ověřená úprava:
+Stav po ověření:
+Aktuální pracovní místo:
+Co se propsalo do normální práce:
+Co zůstává jako changelog:
+Co zavíráme:
+Co mažeme nebo anonymizujeme:
+Co případně otevíráme jako novou kartu:
+Privacy-first výsledek:
+Další návrat:
+```
+
+Vyplněný příklad:
+
+```text
+Ověřená úprava:
+Přejmenování odkazu na brief případové studie a doplnění první věty šablony.
+
+Stav po ověření:
+Potvrzeno po běžném použití, s jednou doplněnou větou o anonymizaci citací.
+
+Aktuální pracovní místo:
+Marketingový rozcestník a brief případové studie.
+
+Co se propsalo do normální práce:
+Odkaz se jmenuje podle výstupu a příklad říká, že citace se před sdílením anonymizují.
+
+Co zůstává jako changelog:
+Jedna věta o přejmenování odkazu a doplnění privacy-first poznámky.
+
+Co zavíráme:
+Kontrolní poznámku z ověření názvu odkazu.
+
+Co mažeme nebo anonymizujeme:
+Dočasnou pracovní kopii s konkrétními citacemi po přepsání anonymizovaného příkladu.
+
+Co případně otevíráme jako novou kartu:
+Nic. Další nápady na strukturu case studies zůstávají mimo tuto smyčku.
+
+Privacy-first výsledek:
+Příští použití nevyžaduje osobní kopii s citacemi a aktuální šablona připomíná anonymizaci.
+
+Další návrat:
+Jen při běžné měsíční kontrole marketingových šablon nebo při novém potvrzeném tření.
+```
+
+### Mini workshop na 6 minut
+
+Vezměte jednu ověřenou trvalou drobnou úpravu se stavem `Potvrdit`.
+
+1. Napište rozhodovací větu jednou větou.
+2. Otevřete aktuální pracovní místo, kde má změna žít.
+3. Zkontrolujte, že další člověk nepotřebuje historii změny.
+4. Nechte jednu changelogovou větu.
+5. Zavřete kontrolní poznámku nebo úkol.
+6. Smažte, anonymizujte nebo sloučte pomocné podklady.
+7. Zapište, kdy se k tématu vrátit a kdy ho nechat být.
+
+Výstup:
+
+```text
+Ověřená drobná úprava je součástí aktuálního pracovního místa a pomocné stopy po ověření jsou uzavřené.
+```
+
+### Checklist kapitoly
+
+- Má úprava jasný stav po ověření?
+- Je rozhodovací věta krátká a použitelná bez celé historie?
+- Propsali jste změnu do aktuálního pracovního místa?
+- Nepřidali jste druhý zdroj pravdy vedle šablony, checklistu nebo rozcestníku?
+- Ví příští člověk, co má udělat, i bez znalosti původního tření?
+- Zůstává jen potřebná changelogová stopa?
+- Jsou kontrolní poznámky, dočasné karty a pomocné komentáře zavřené?
+- Byly smazané nebo anonymizované pracovní kopie, exporty a citlivé příklady?
+- Nelepíte nové nápady na uzavřenou smyčku?
+- Je další návrat navázaný na běžnou kontrolu nebo nové potvrzené tření?
+
+Uzavření ověřené trvalé drobné úpravy je poslední drobný úklid před návratem do klidu. Práce se nemá chlubit tím, kolik stop po sobě nechala. Má příštímu člověku nabídnout správné místo, jasnou větu a minimum zbytečných dat. Když se to povede, malá oprava přestane být událost a stane se normálním způsobem práce.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QH o uzavření ověřené trvalé drobné úpravy do běžného pracovního místa: rozhodovací věta, přepis aktuálního pracovního místa, zavření pomocných stop, changelog, privacy-first úklid podkladů, karta uzavření, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QG o ověření trvalé drobné úpravy při dalším přirozeném použití: návrat k původnímu tření, přirozené použití, signály výsledku, samostatnosti a datové stopy, čtyři výsledky ověření, privacy-first kontrola bez nové vrstvy sledování, ověřovací karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QE o první kontrole tiché rutiny po návratu do běžného provozu: přirozený průchod, tiché signály, čtyři výsledky kontroly, omezení nové procesní vrstvy, privacy-first kontrola, kontrolní karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QD o uzavření ověřené drobné opravy po slabém signálu do tiché rutiny: práce s výsledkem ověření, přepis aktuální cesty bez historie, zavření dočasných háčků, krátká changelogová stopa, privacy-first úklid, uzavírací karta, Codyho komentář, mini workshop a checklist.
