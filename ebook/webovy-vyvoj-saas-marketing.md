@@ -129295,8 +129295,209 @@ Servisní zápis je uzavřený, aktuální standard má čistý stav a další �
 
 Servisní zápis má hodnotu jen tehdy, když umí skončit. Čistý stav standardu není slavnostní konec příběhu. Je to obyčejná provozní hygiena: platné pravidlo je vidět, dočasná poznámka zmizela a tým může pokračovat v práci bez drobných dluhů, které se tváří jako pečlivost.
 
+## Příloha QY: První kontrola čistého stavu standardu po uzavření servisního zápisu
+
+Po uzavření servisního zápisu vypadá standard uklizeně. Poznámka zmizela, případná korekce má vlastní kartu, úklidová položka je v existujícím rytmu a aktuální pracovní místo znovu říká jen to, co má člověk použít. To je dobrý konec malé smyčky. Není to ale důvod tvářit se, že standard už nikdy nepotřebuje pozornost.
+
+Tato příloha řeší první kontrolu po čistém stavu. Nejde o další revizi celého standardu. Jde o krátké ověření, jestli uzavření servisního zápisu opravdu zjednodušilo práci: další člověk najde platné pravidlo, stará poznámka se nevrací bokem a tým kvůli čistotě neztratil jediný užitečný kontext.
+
+Čistý stav má být klidnější než stav před uzavřením. Pokud po něm lidé začnou hledat starý komentář, ptát se autora, obnovovat smazané poznámky nebo vytvářet novou pomocnou evidenci, něco se při uzavření přehnalo. Pořádek nesmí být jen hezký stůl, ze kterého někdo shodil pracovní nástroje do krabice bez popisku.
+
+### Kontrolujte až při běžném použití
+
+První kontrola čistého stavu nemá vzniknout hned po editaci. Hned po editaci ví autor přesně, co se změnilo, proč se to změnilo a kam co přesunul. To není skutečný test. Skutečný test nastane, až standard použije člověk v normální práci.
+
+Vhodné spouštěče kontroly:
+
+- někdo podle standardu připraví další landing page, formulář, support odpověď nebo interní šablonu;
+- vlastník role se vrátí ke standardu bez přítomnosti autora uzavření;
+- standard se použije v podobné, ale ne totožné zákaznické situaci;
+- pravidelný úklid otevře místo, kam byla servisní poznámka přesunuta;
+- nový člověk v týmu zkusí najít aktuální pravidlo podle rozcestníku.
+
+Kontrola nemá být samostatná schůzka, pokud k ní není důvod. Stačí malý záznam u běžného pracovního průchodu. Cílem je poznat, jestli čistý stav drží bez speciálního dohledu.
+
+Příklad: po smazání servisní poznámky k názvu odkazu někdo připravuje novou prodejní stránku. Pokud najde pravidlo bez dotazu a nepotřebuje starý kontext, čistý stav drží. Pokud si jde do chatu pro původní vysvětlení, čistý stav je možná moc oholený.
+
+### Sledujte tři signály čistoty
+
+První kontrola má sledovat jen tři věci. Víc není potřeba, jinak se z krátké kontroly zase stane malý audit.
+
+První signál: najitelnost. Člověk má vědět, kde aktuální standard leží a která věta platí. Pokud musí otevřít changelog, starou kartu a chat, standard není čistý. Je jen rozdrobený.
+
+Druhý signál: dostatek kontextu. Čistý standard nemá nést celou historii, ale musí obsahovat minimum pro rozhodnutí. Pokud po úklidu zůstala jen strohá věta bez hranice použití, lidé si začnou kontext vyrábět sami. To je cesta k novým neoficiálním pravidlům.
+
+Třetí signál: žádné nové pomocné stopy. Když tým po uzavření okamžitě založí novou poznámku "pro jistotu", čistý stav ve skutečnosti nedůvěřuje sám sobě. Buď je standard nedostatečný, nebo tým jen neumí nechat drobnou historii odejít.
+
+Praktické otázky:
+
+- Našel člověk platné pravidlo bez návratu ke starému servisnímu zápisu?
+- Stačil aktuální text k rozhodnutí v běžné situaci?
+- Nevznikla nová boková poznámka, export, screenshot nebo duplicitní karta?
+- Je jasné, co se má stát, když se podobné tření objeví znovu?
+- Neztratila se privacy-first hranice, kvůli které byl zápis původně uzavřen?
+
+### Rozlišujte čtyři výsledky kontroly
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Drží: standard je najitelný, srozumitelný a nevznikla nová pomocná stopa.
+- Dodat kontext: standard funguje, ale potřebuje jednu krátkou větu, příklad nebo odkaz na kanonické místo.
+- Otevřít korekci: uzavření odstranilo nebo skrylo něco, co opakovaně brání práci.
+- Vrátit do úklidu: problém není v samotném standardu, ale v okolních názvech, rozcestníku nebo starých odkazech.
+
+Stav `Drží` je nejčastější a nejlepší výsledek. Nevyžaduje další akci. Stačí krátká věta v provozním logu nebo vůbec nic, pokud tým tak malé kontroly nezapisuje. Nenuťte funkční standard, aby dokazoval svou existenci každý týden.
+
+Stav `Dodat kontext` má být opravdu malý. Jedna věta, jeden příklad, jedno zpřesnění názvu. Pokud potřebujete přepsat celou část, nejde o doplnění kontextu, ale o novou korekci.
+
+Stav `Otevřít korekci` použijte, když čistý stav reálně selhal: člověk se vrátil ke staré cestě, musel se ptát autora, vytvořil novou kopii pravidla nebo se znovu objevilo datové riziko. Korekce má vlastní kartu a vlastní ověření. Nelepte ji do kontrolního zápisu.
+
+Stav `Vrátit do úklidu` je pro situace, kdy standard jako takový drží, ale okolní navigace je špinavá. Typicky starý odkaz v indexu, nejednotný název v rozcestníku nebo duplicitní šablona. To patří do existujícího úklidového rytmu, ne do nové velké debaty.
+
+### Nepřivolávejte starou historii bez důvodu
+
+Častá chyba po uzavření je chodit kontrolovat, jestli se stará poznámka opravdu neměla nechat. Tým pak neověřuje aktuální práci, ale vlastní nerozhodnost. Pokud standard drží, starý servisní zápis nechte spát.
+
+Starou historii otevírejte jen ve třech případech:
+
+- stejný problém se reálně vrátí při běžném použití;
+- někdo kvůli chybějícímu kontextu obejde aktuální standard;
+- kontrola ukáže, že uzavření smazalo informaci potřebnou pro privacy-first rozhodnutí.
+
+Jinak platí jednoduché pravidlo: aktuální standard je zdroj pravdy. Changelog a staré karty jsou podpůrná paměť, ne druhé místo rozhodování.
+
+Codyho komentář: největší luxus dobrého standardu je, že se na něj nemusí pořád vzpomínat. Pokud každá kontrola začíná archeologií starých poznámek, standard není pracovní nástroj. Je to rodinné album dokumentace, a to sice dojme, ale landing page samo neopraví.
+
+### Privacy-first kontrola čistého stavu
+
+Privacy-first kontrola se ptá, jestli čistý stav nezvětšil datovou stopu a zároveň neztratil ochranné pravidlo. Obě chyby jsou možné.
+
+První chyba: tým si po smazání servisní poznámky založí nový sledovací dokument, aby "měl jistotu". Tím se z jednoho malého zápisu stane nová evidence lidí, průchodů, screenshotů nebo interních příkladů.
+
+Druhá chyba: při úklidu zmizí věta, která chránila minimalizaci dat, retenci, přístupy nebo zákaznické podklady. Standard je kratší, ale horší.
+
+Při kontrole si položte čtyři otázky:
+
+- Nezaložili jsme kvůli čistému stavu novou evidenci, kterou standard nepotřebuje?
+- Zůstala v aktuálním místě jasná hranice pro data, přístupy, retenci nebo externí nástroje?
+- Pokud jsme něco smazali, zmizely i dočasné kopie a pomocné podklady?
+- Pokud vznikl nový příklad, neobsahuje osobní údaje, zákaznický detail nebo interní informaci bez účelu?
+
+Dobré privacy-first uzavření zanechá méně stop a stejně jasné pravidlo. Špatné uzavření zanechá uklizený text a špinavý provoz kolem něj.
+
+### Karta první kontroly čistého stavu
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Co bylo předtím uzavřeno:
+Smazaný servisní zápis / korekce / přesun do úklidu / poslední průchod
+
+Spouštěč kontroly:
+
+Reálné použití:
+
+Najitelnost:
+Člověk našel pravidlo bez staré historie? Ano / Ne / Částečně
+
+Dostatek kontextu:
+Stačil aktuální standard k rozhodnutí? Ano / Ne / Částečně
+
+Nové pomocné stopy:
+Vznikl nový bokový zápis, screenshot, export nebo duplicitní karta? Ano / Ne
+
+Výsledek:
+Drží / Dodat kontext / Otevřít korekci / Vrátit do úklidu
+
+Nejmenší další krok:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first kontrola:
+Jaké dočasné podklady nevznikly, zmizely nebo zůstávají mimo standard?
+
+Kde je aktuální stav vidět:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Formulářové minimum pro první poptávku.
+
+Kanonické pracovní místo:
+Ediční rozcestník pro prodejní stránky.
+
+Co bylo předtím uzavřeno:
+Smazaný servisní zápis k nejasnému názvu odkazu.
+
+Spouštěč kontroly:
+Další příprava landing page podle stejného rozcestníku.
+
+Reálné použití:
+Editor našel pravidlo pro minimální počet polí ve formuláři a použil ho bez dotazu.
+
+Najitelnost:
+Ano.
+
+Dostatek kontextu:
+Ano.
+
+Nové pomocné stopy:
+Ne.
+
+Výsledek:
+Drží.
+
+Nejmenší další krok:
+Žádný.
+
+Co teď vědomě neotevíráme:
+Nepřejmenováváme celou navigaci rozcestníku.
+
+Privacy-first kontrola:
+Nevznikl screenshot, osobní záznam průchodu ani nová evidence použití.
+
+Kde je aktuální stav vidět:
+V kanonickém edičním rozcestníku.
+```
+
+### Mini workshop na 6 minut
+
+1. Vyberte jeden standard, u kterého byl servisní zápis nedávno uzavřen.
+2. Najděte první běžné použití po uzavření.
+3. Ověřte najitelnost, dostatek kontextu a nové pomocné stopy.
+4. Vyberte jeden ze čtyř stavů: drží, dodat kontext, otevřít korekci, vrátit do úklidu.
+5. Pokud stav drží, nic dalšího nevymýšlejte.
+6. Pokud vzniká další krok, zapište ho na nejbližší pracovní místo a smažte dočasné podklady.
+
+Výstup workshopu:
+
+```text
+Čistý stav standardu obstál při běžném použití, nebo má jeden malý další krok na správném místě. Starý servisní zápis se nevrací jako druhý zdroj pravdy.
+```
+
+### Checklist kapitoly
+
+- Kontrolujeme čistý stav až při běžném použití, ne hned po editaci?
+- Sledujeme jen najitelnost, dostatek kontextu a nové pomocné stopy?
+- Neotevíráme starý servisní zápis, pokud k tomu není reálný důvod?
+- Umíme vybrat jeden ze čtyř výsledků kontroly?
+- Pokud stav drží, nepřidáváme zbytečný úkol?
+- Pokud chybí kontext, doplňujeme jen nejmenší větu, příklad nebo odkaz?
+- Pokud čistý stav selhal, má korekce vlastní kartu mimo kontrolní zápis?
+- Pokud problém patří do úklidu, používáme existující úklidový rytmus?
+- Nevznikla nová evidence lidí, průchodů, screenshotů nebo exportů?
+- Zůstala v aktuálním standardu jasná privacy-first hranice?
+- Pozná další člověk platné pravidlo bez čtení celé historie?
+
+Čistý stav standardu je dobrý tehdy, když se dá používat bez ceremonií. První kontrola po uzavření má chránit přesně tohle: standard zůstal lehký, aktuální a dostatečný. Starý servisní zápis splnil práci a už se nemusí tvářit, že má doživotní nájem.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QY o první kontrole čistého stavu standardu po uzavření servisního zápisu: běžné použití jako spouštěč, tři signály čistoty, čtyři výsledky kontroly, práce se starou historií, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QX o uzavření ověřeného servisního zápisu do čistého stavu standardu: převod výsledku ověření do pracovního místa, závěrečná věta, úklid pomocných stop, oddělení korekce od uzavření, privacy-first mazání podkladů, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QW o ověření servisního zápisu při dalším přirozeném použití: návratový signál, porovnání poznámky s realitou, čtyři výsledky ověření, povýšení na korekci, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QV o převodu drobné poznámky z návratu stabilního standardu do servisního zápisu: rozlišení poznámky, korekce a šumu, krátký zápis, podmínka návratu a smazání, privacy-first minimum dat, karta, mini workshop a checklist.
