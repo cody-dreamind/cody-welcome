@@ -129495,8 +129495,187 @@ Výstup workshopu:
 
 Čistý stav standardu je dobrý tehdy, když se dá používat bez ceremonií. První kontrola po uzavření má chránit přesně tohle: standard zůstal lehký, aktuální a dostatečný. Starý servisní zápis splnil práci a už se nemusí tvářit, že má doživotní nájem.
 
+## Příloha QZ: Uzavření kontroly čistého stavu do dlouhodobého klidu
+
+První kontrola čistého stavu má jeden hlavní úkol: zjistit, jestli standard po úklidu opravdu funguje v běžné práci. Jakmile kontrola proběhne, vzniká další malé rozhodnutí. Buď standard drží a nemá smysl kolem něj dál chodit po špičkách, nebo potřebuje drobný kontext, korekci či úklid okolní navigace. Tato příloha řeší právě převod výsledku kontroly do dlouhodobého klidu.
+
+Dlouhodobý klid neznamená, že se standard už nikdy nezmění. Znamená to, že kolem něj nezůstává otevřená smyčka. Tým ví, co platí, kde to najde, co se případně doplnilo a kdy se má téma vrátit do pozornosti. Bez takového uzavření se i úspěšná kontrola může změnit v další tichou položku: standard funguje, ale někdo má pocit, že by se k němu "pro jistotu" mělo ještě vrátit.
+
+Praktický provoz potřebuje opak: když věc drží, nechte ji držet. Ne každá funkční část systému musí pořád dokazovat, že si zaslouží existovat. U webu, SaaS, marketingu i interních standardů je někdy největší přínos to, že tým přestane točit pozornost kolem části, která už pracuje dost dobře.
+
+### Začněte výsledkem kontroly
+
+Neotvírejte znovu celý příběh servisního zápisu, korekce a úklidu. Vezměte jen výsledek první kontroly čistého stavu:
+
+- drží;
+- dodat kontext;
+- otevřít korekci;
+- vrátit do úklidu.
+
+Každý výsledek má jiný typ uzavření.
+
+Pokud standard drží, uzavření je skoro neviditelné. Stačí krátká věta v changelogu, provozním logu nebo vůbec žádný zápis, pokud tým tak malé kontroly neeviduje. Důležité je nevytvořit nový úkol jen proto, že kontrola dopadla dobře.
+
+Pokud je potřeba dodat kontext, doplňte ho na kanonické pracovní místo a zavřete smyčku jednou větou. Nezakládejte novou revizi. Jedna věta, příklad nebo odkaz má pomoci použít pravidlo, ne otevřít další redakční kapitolu.
+
+Pokud je potřeba otevřít korekci, kontrolu uzavřete tím, že korekce dostane vlastní kartu. Kontrolní zápis není místo, kam se lepí opravy. Je to místo, které říká, proč oprava vzniká a kde pokračuje.
+
+Pokud problém patří do úklidu, přesuňte ho do existujícího úklidového rytmu. Standard sám může zůstat čistý, i když okolní rozcestník, starý odkaz nebo duplicitní šablona potřebuje servis.
+
+### Závěrečná věta pro dlouhodobý klid
+
+Každé uzavření by mělo jít říct jednou pracovní větou:
+
+```text
+Po první kontrole čistého stavu [standard] zůstává v platnosti jako aktuální pracovní pravidlo; další návrat nastane jen při [konkrétní signál].
+```
+
+Příklad:
+
+```text
+Po první kontrole čistého stavu zůstává formulářové minimum pro první poptávku v platnosti jako aktuální pracovní pravidlo; další návrat nastane jen tehdy, když se ve třech relevantních poptávkách po sobě objeví chybějící údaj, který nejde rozumně získat až v navazující komunikaci.
+```
+
+Věta má dvě části. První potvrzuje platný stav. Druhá říká, kdy se téma znovu otevře. Bez druhé části se z klidu může stát zapomenutí. S druhou částí tým ví, že standard není nedotknutelný, jen nepotřebuje další pozornost bez signálu.
+
+Dobrá návratová podmínka je konkrétní:
+
+- tři opakované zákaznické dotazy ve stejné části;
+- první běžné použití novým člověkem, který pravidlo nenajde;
+- návrat starého sběru dat ve veřejném formuláři;
+- změna nabídky, kvůli které standard přestal odpovídat realitě;
+- plánovaná kvartální kontrola pracovních standardů.
+
+Špatná podmínka zní "někdy se k tomu vrátíme". To není klid, to je odložená nejistota s hezčím kabátem.
+
+### Co uzavřít, co ponechat
+
+Při převodu do dlouhodobého klidu zkontrolujte jen čtyři místa:
+
+1. Kanonické pracovní místo: obsahuje aktuální pravidlo a případný doplněný kontext.
+2. Changelog nebo provozní log: obsahuje jen krátkou stopu, pokud je pro tým užitečná.
+3. Pomocné podklady: dočasné poznámky, exporty, screenshoty a kopie jsou smazané nebo anonymizované.
+4. Návratová podmínka: je jasné, kdy se standard znovu otevře.
+
+Všechno ostatní odolejte chuti kontrolovat. Dlouhodobý klid se snadno zkazí tím, že tým začne po uzavření hledat další drobnosti k doladění. Pokud se při uzavírání objeví nový nápad, napište ho jen tehdy, když má vlastní silný důvod. Jinak ho nechte odejít. Ne každý nápad, který se ukáže při úklidu, je povinnost.
+
+Codyho komentář: klid je provozní funkce. Když je něco dost dobré, najitelné a datově čisté, další nejlepší akce může být žádná akce. To zní podezřele jednoduše, takže to v týmech občas vyvolává nervozitu. Ale nervozita není backlogová položka.
+
+### Privacy-first uzavření
+
+Privacy-first dlouhodobý klid má jednu zásadu: po kontrole nesmí zůstat víc dat než před ní, pokud k tomu není jasný účel. Kontrola čistého stavu často pracuje s konkrétním použitím, jmény lidí, screenshoty pracovních míst, interními příklady nebo poznámkami z komunikace. Tyto podklady mohou být užitečné během ověření, ale po uzavření mají zmizet nebo zůstat jen v anonymizovaném závěru.
+
+Ptejte se:
+
+- Potřebujeme uchovat konkrétní příklad, nebo stačí zobecněná věta?
+- Nezůstala někde kopie starého servisního zápisu bez účelu?
+- Nevznikla nová evidence používání standardu podle lidí?
+- Je jasné, kdo smaže dočasné podklady po uzavření?
+- Zůstala v aktuálním pravidle hranice pro data, přístupy, retenci nebo externí nástroje?
+
+Pokud standard drží, privacy-first závěr může být velmi krátký:
+
+```text
+Nevznikla nová evidence použití. Dočasné poznámky z kontroly byly smazané po zapsání agregovaného závěru. Aktuální pravidlo dál omezuje sběr dat na původní minimum.
+```
+
+Takový zápis je lepší než dlouhá složka důkazů. V privacy-first provozu není cílem pamatovat si všechno. Cílem je pamatovat si správné rozhodnutí a nenechávat po cestě zbytečné stopy.
+
+### Karta uzavření do dlouhodobého klidu
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Výsledek první kontroly:
+Drží / Dodat kontext / Otevřít korekci / Vrátit do úklidu
+
+Co jsme udělali:
+
+Závěrečná věta:
+
+Návratový signál:
+
+Co teď vědomě neotevíráme:
+
+Pomocné podklady:
+Smazat / anonymizovat / ponechat agregovaný závěr / přesunout do korekční karty
+
+Privacy-first závěr:
+
+Kde je klidový stav vidět:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Formulářové minimum pro první poptávku.
+
+Kanonické pracovní místo:
+Ediční rozcestník pro prodejní stránky.
+
+Výsledek první kontroly:
+Drží.
+
+Co jsme udělali:
+Žádná další úprava. Aktuální pravidlo je najitelné a použitelné bez staré historie.
+
+Závěrečná věta:
+Po první kontrole čistého stavu zůstává formulářové minimum v platnosti; další návrat nastane jen při opakovaném důkazu, že chybějící údaj brání první odpovědi.
+
+Návratový signál:
+Tři relevantní poptávky po sobě vyžadují stejný doplňující údaj ještě před první odpovědí.
+
+Co teď vědomě neotevíráme:
+Nepřepisujeme celý formulářový standard ani neměníme CRM workflow.
+
+Pomocné podklady:
+Dočasné poznámky z kontroly smazané, zůstává jen tento agregovaný závěr.
+
+Privacy-first závěr:
+Nevznikl nový tracker, export ani evidence lidí. Standard dál drží minimální první sběr dat.
+
+Kde je klidový stav vidět:
+V kanonickém edičním rozcestníku a v krátkém changelogu standardu.
+```
+
+### Mini workshop na 5 minut
+
+1. Otevřete výsledek první kontroly čistého stavu.
+2. Vyberte odpovídající uzavření: žádná akce, doplnit kontext, založit korekci nebo přesunout do úklidu.
+3. Napište jednu závěrečnou větu a konkrétní návratový signál.
+4. Zkontrolujte kanonické pracovní místo.
+5. Smažte nebo anonymizujte pomocné podklady.
+6. Zavřete téma, pokud návratový signál nenastal.
+
+Výstup workshopu:
+
+```text
+Standard je v dlouhodobém klidu: platí, je najitelný, má jasný návratový signál a po kontrole nezůstaly zbytečné datové stopy.
+```
+
+### Checklist kapitoly
+
+- Vycházíme z výsledku první kontroly, neotvíráme celou historii?
+- Umíme říct, jestli stav drží, potřebuje kontext, korekci nebo úklid?
+- Má uzavření jednu závěrečnou větu?
+- Je návratový signál konkrétní a ověřitelný?
+- Je aktuální pravidlo vidět na kanonickém pracovním místě?
+- Pokud se doplňuje kontext, jde jen o nejmenší větu, příklad nebo odkaz?
+- Pokud vzniká korekce, má vlastní kartu a není schovaná v kontrolním zápisu?
+- Pokud problém patří do úklidu, jde do existujícího úklidového rytmu?
+- Nezůstaly po kontrole dočasné poznámky, screenshoty, exporty nebo kopie bez účelu?
+- Nevznikla nová evidence používání standardu podle lidí?
+- Zůstala privacy-first hranice součástí aktuálního pravidla?
+- Ví tým, že další akce není potřeba, dokud nenastane návratový signál?
+
+Uzavření do dlouhodobého klidu je malé, ale důležité. Učí tým nechávat funkční věci pracovat bez další administrativy. Standard má být dost živý na to, aby se změnil při skutečném signálu, a dost klidný na to, aby nepřitahoval pozornost jen proto, že je po ruce.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QZ o uzavření kontroly čistého stavu do dlouhodobého klidu: práce s výsledkem kontroly, závěrečná věta, návratový signál, privacy-first úklid pomocných podkladů, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QY o první kontrole čistého stavu standardu po uzavření servisního zápisu: běžné použití jako spouštěč, tři signály čistoty, čtyři výsledky kontroly, práce se starou historií, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QX o uzavření ověřeného servisního zápisu do čistého stavu standardu: převod výsledku ověření do pracovního místa, závěrečná věta, úklid pomocných stop, oddělení korekce od uzavření, privacy-first mazání podkladů, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QW o ověření servisního zápisu při dalším přirozeném použití: návratový signál, porovnání poznámky s realitou, čtyři výsledky ověření, povýšení na korekci, privacy-first minimum dat, karta, mini workshop a checklist.
