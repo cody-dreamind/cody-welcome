@@ -125690,8 +125690,237 @@ Pracovní místo po uzavřené drobné úpravě buď drží v běžné práci, n
 
 První návrat k běžnému pracovnímu místu je test tichosti. Když práce proběhne správně bez vysvětlování, úprava splnila účel. Když ne, neopravujte celý systém. Najděte nejbližší místo, kde se práce zasekla, a rozhodněte, jestli stačí jedna drobná oprava, nebo je potřeba otevřít novou samostatnou smyčku.
 
+## Příloha QJ: Převod lehkého drhnutí po návratu pracovního místa do jedné lokální korekce
+
+Lehké drhnutí po návratu k pracovnímu místu je dobrá zpráva, pokud ho tým nepřežene. Znamená, že základní směr drží: člověk našel správné místo, práce vznikla a staré pomocné stopy se nevrátily jako hlavní cesta. Jen jedna malá věc zbytečně zpomalila průchod. Právě tady se rozhoduje, jestli tým umí pracovat jemně, nebo jestli z každé drobné nerovnosti udělá další procesní schodiště.
+
+Cíl této smyčky je jednoduchý:
+
+```text
+Převést jedno potvrzené lehké drhnutí do jedné lokální korekce v nejbližším pracovním místě.
+```
+
+Lokální korekce není nové pravidlo, nový playbook ani další revizní rytmus. Je to nejmenší úprava, která odstraní konkrétní zaváhání v místě, kde se skutečně stalo. Pokud člověk našel brief, ale nevěděl, zda má použít anonymizovanou roli nebo jméno zákazníka, neopravujte celou knihovnu šablon. Doplňte jednu větu tam, kde vznikla nejistota. Ano, je to méně slavnostní. Přesně proto to funguje.
+
+### Začněte stavem `Lehce drhne`
+
+Do této přílohy patří jen situace, která v předchozí návratové kartě skončila stavem `Lehce drhne`. To znamená:
+
+- správný výstup vznikl;
+- aktuální pracovní místo bylo použité;
+- stará pomocná stopa nebyla hlavní cestou;
+- problém je malý a lokální;
+- víte, kde přesně člověk zaváhal.
+
+Pokud výstup nevznikl, nejde o lehké drhnutí. Pokud člověk musel otevřít starou kartu, chat nebo screenshot, vraťte se k přepsání pracovního místa. Pokud se objevilo nové téma mimo původní tření, založte novou kartu. Lehká lokální korekce má být nudně přesná.
+
+Praktická vstupní věta:
+
+```text
+Pracovní místo drží, ale při použití zdržela jedna konkrétní formulace, odkaz nebo chybějící hranice.
+```
+
+Příklad:
+
+```text
+Pracovní místo:
+Brief případové studie.
+
+Stav návratu:
+Lehce drhne.
+
+Drhnutí:
+V příkladu není jasné, jestli se před schválením zákazníkem používá jméno firmy, nebo jen obecný popis role.
+```
+
+To je dost konkrétní. Naopak věta "brief by mohl být celkově lepší" je moc široká. Taková věta patří do nové samostatné iterace, ne do korekce po návratu.
+
+### Najděte nejbližší místo zásahu
+
+Lehké drhnutí opravujte co nejblíž místu, kde vzniklo. Tým často sahá po větším zásahu jen proto, že má pocit, že když už něco mění, mělo by to stát za to. Jenže u drobných provozních úprav platí opačné pravidlo: čím dál od skutečného tření zasáhnete, tím větší šanci máte, že vytvoříte nový šum.
+
+Typická nejbližší místa:
+
+- první věta šablony;
+- text odkazu v rozcestníku;
+- jeden řádek checklistu;
+- jeden příklad vyplnění;
+- krátká poznámka u datového pole;
+- pořadí dvou kroků;
+- popisek stavu v tabulce;
+- hranice "kdy eskalovat".
+
+Před editací si položte otázku:
+
+```text
+Které jedno místo by člověku pomohlo ve chvíli, kdy zaváhal?
+```
+
+Pokud odpověď ukazuje na tři dokumenty, nejspíš ještě nerozumíte problému. Vraťte se k návratové kartě a zapište konkrétní okamžik práce. Lokální korekce se nesmí tvářit jako malá, zatímco ve skutečnosti přepisuje půl systému.
+
+### Vyberte typ korekce
+
+Lokální korekce obvykle spadá do jedné z pěti kategorií:
+
+1. Přejmenovat: název odkazu, sekce nebo šablony neodpovídá tomu, jak ji člověk hledá.
+2. Doplnit hranici: není jasné, kdy použít tuto cestu a kdy jinou.
+3. Přidat příklad: pravidlo je správné, ale chybí konkrétní ukázka.
+4. Zkrátit: text vysvětluje moc věcí a důležitý krok se v něm ztrácí.
+5. Přesunout: správná věta existuje, ale je až po okamžiku rozhodnutí.
+
+Vyberte jen jeden typ. Kombinace typu "přejmenujeme, doplníme příklad, přepracujeme pořadí a rovnou upravíme onboarding" už není lokální korekce. To je nová iterace s jiným rozsahem.
+
+Příklad malé korekce:
+
+```text
+Typ korekce:
+Doplnit hranici.
+
+Korekce:
+Do příkladu v briefu doplnit větu: "Dokud zákazník citaci neschválí, používejte jen roli a kontext, ne jméno firmy ani člověka."
+```
+
+Tahle věta pomůže přesně v místě zaváhání. Nepřidává nový proces schvalování, nesbírá další data a nepředstírá, že vyřešila celou práci s case studies.
+
+### Chraňte starou smyčku před rozšířením
+
+Lehké drhnutí má zvláštní riziko: protože už skoro všechno funguje, tým začne přidávat nápady "když už jsme tady". To je nenápadný způsob, jak z uzavřené smyčky udělat trvalý stavební prostor. Proto u korekce napište stop pravidlo.
+
+Stop pravidlo může znít:
+
+```text
+Měníme jen větu, která vysvětluje anonymizaci citací. Neměníme strukturu briefu, rozcestník ani postup schvalování case study.
+```
+
+Dobré stop pravidlo není obrana lenosti. Je to ochrana práce, která už funguje. Pokud se během korekce objeví větší téma, zapište ho zvlášť:
+
+```text
+Nová karta mimo tuto smyčku:
+Zvážit samostatnou šablonu pro veřejné citace zákazníků.
+```
+
+Tím téma neztratíte, ale nepřilepíte ho k drobné korekci. Praktický systém potřebuje obojí: paměť na dobré nápady i schopnost neotevírat je ve špatnou chvíli.
+
+### Privacy-first korekce
+
+Lehké drhnutí často vzniká kolem datové hranice: co napsat do formuláře, jak anonymizovat příklad, kdy mazat dočasné poznámky, kdo smí vidět zákaznický detail. U takových korekcí má privacy-first hodnota přednost před pohodlnější zkratkou.
+
+Zeptejte se:
+
+- Snižuje korekce nejistotu bez sběru nových dat?
+- Nepřidáváme kvůli vysvětlení konkrétní osobní údaj jako ukázku?
+- Dá se příklad zobecnit na roli, typ firmy nebo situaci?
+- Neotevírá korekce nový export, kopii nebo pomocnou tabulku?
+- Je po úpravě jasnější, kdy data nepoužít, zkrátit nebo smazat?
+
+Správná korekce:
+
+```text
+Do šablony doplnit obecný příklad anonymizované citace a pravidlo, že konkrétní jméno se používá až po schválení.
+```
+
+Špatná korekce:
+
+```text
+Do šablony vložit reálnou citaci zákazníka jako vzor, protože se podle ní lidem bude lépe psát.
+```
+
+Druhá varianta je lákavá, ale zvyšuje datovou stopu kvůli pohodlí. Codyho komentář: pokud potřebujete reálný citlivý příklad, aby šablona dávala smysl, možná šablona ještě není dost dobrá. Dobrá šablona má nést rozhodovací logiku, ne kopírovat cizí data jako berličku.
+
+### Karta lokální korekce po lehkém drhnutí
+
+```text
+Pracovní místo:
+Původní uzavřená úprava:
+Stav návratu:
+Lehké drhnutí:
+Nejbližší místo zásahu:
+Typ korekce:
+Jedna korekční věta:
+Stop pravidlo:
+Privacy-first poznámka:
+Jak ověříme:
+Co se zapisuje do changelogu:
+Co případně otevíráme jako novou kartu:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Brief případové studie.
+
+Původní uzavřená úprava:
+Přejmenování odkazu podle výstupu a doplnění anonymizační věty.
+
+Stav návratu:
+Lehce drhne.
+
+Lehké drhnutí:
+V příkladu není jasné, kdy ještě používat anonymizovanou roli a kdy už lze uvést konkrétní firmu.
+
+Nejbližší místo zásahu:
+Příklad vyplnění v briefu.
+
+Typ korekce:
+Doplnit hranici.
+
+Jedna korekční věta:
+"Dokud zákazník citaci nebo název neschválí, pište jen roli, segment a kontext; konkrétní jméno firmy doplňte až po schválení."
+
+Stop pravidlo:
+Neměníme strukturu briefu ani postup schvalování případové studie.
+
+Privacy-first poznámka:
+Příklad zůstává anonymizovaný a nevzniká nová kopie zákaznických citací.
+
+Jak ověříme:
+Při nejbližší nové případové studii se podíváme, zda člověk použil hranici bez dotazu bokem.
+
+Co se zapisuje do changelogu:
+Doplněna hranice pro anonymizované citace v briefu případové studie.
+
+Co případně otevíráme jako novou kartu:
+Samostatně zvážit šablonu pro schvalování veřejných citací, pokud se téma objeví znovu.
+```
+
+### Mini workshop na 7 minut
+
+Vezměte jednu návratovou kartu se stavem `Lehce drhne`.
+
+1. Přepište lehké drhnutí do jedné konkrétní věty.
+2. Určete nejbližší místo zásahu.
+3. Vyberte jeden typ korekce: přejmenovat, doplnit hranici, přidat příklad, zkrátit nebo přesunout.
+4. Napište jednu korekční větu nebo jeden přesun.
+5. Přidejte stop pravidlo.
+6. Zkontrolujte privacy-first dopad.
+7. Určete nejbližší přirozené ověření.
+
+Výstup:
+
+```text
+Jedno lehké drhnutí má jednu lokální korekci, jasné omezení rozsahu a přirozený způsob ověření.
+```
+
+### Checklist kapitoly
+
+- Vstupem je opravdu stav `Lehce drhne`, ne selhání pracovního místa?
+- Je drhnutí popsané konkrétním pracovním okamžikem?
+- Zasahujete nejbližší místo, kde člověk zaváhal?
+- Vybrali jste jen jeden typ korekce?
+- Nepřepisujete víc dokumentů, než je nutné?
+- Má korekce stop pravidlo?
+- Nové nápady jsou oddělené do samostatných karet?
+- Korekce nesbírá nové údaje a nevyrábí nový export?
+- Příklad je anonymizovaný nebo zobecněný, pokud se týká zákazníků či lidí?
+- Je jasné, jak se korekce ověří při dalším přirozeném použití?
+- Vznikla krátká changelogová věta?
+
+Lokální korekce po lehkém drhnutí je schopnost nechat fungující systém fungovat a opravit jen to, co opravdu zdrželo práci. Když se to podaří, tým získá přesnější pracovní místo bez nové byrokracie. Když se to přežene, vznikne další vrstva pravidel nad pravidly. A to už není korekce. To je jen chaos v lepším oblečení.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QJ o převodu lehkého drhnutí po návratu pracovního místa do jedné lokální korekce: vstupní stav, nejbližší místo zásahu, typy korekcí, stop pravidlo, privacy-first kontrola, karta korekce, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QI o prvním návratu k běžnému pracovnímu místu po uzavřené drobné úpravě: přirozené použití, samostatnost pracovního místa, čtyři výsledky návratu, ochrana před novými nápady v uzavřené smyčce, privacy-first návrat bez nové evidence, návratová karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QH o uzavření ověřené trvalé drobné úpravy do běžného pracovního místa: rozhodovací věta, přepis aktuálního pracovního místa, zavření pomocných stop, changelog, privacy-first úklid podkladů, karta uzavření, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QG o ověření trvalé drobné úpravy při dalším přirozeném použití: návrat k původnímu tření, přirozené použití, signály výsledku, samostatnosti a datové stopy, čtyři výsledky ověření, privacy-first kontrola bez nové vrstvy sledování, ověřovací karta, Codyho komentář, mini workshop a checklist.
