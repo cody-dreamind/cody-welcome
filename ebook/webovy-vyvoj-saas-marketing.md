@@ -128656,8 +128656,228 @@ Tento workshop je schválně krátký. První návrat má chránit standard pře
 
 Stabilní standard má po prvním návratu zůstat lehčí, ne těžší. Když kontrola přidá víc dokumentace, dohledu a vysvětlování než samotná práce, standard možná formálně drží, ale provozně ztrácí smysl. Dobrá kontrola ho vrátí zpátky do normálního rytmu: člověk přijde, použije aktuální pravidlo, udělá práci a jde dál.
 
+## Příloha QV: Převod drobné poznámky z návratu stabilního standardu do servisního zápisu
+
+První běžný návrat ke stabilní verzi pracovního standardu může skončit stavem `Drží s drobnou poznámkou`. To je zdravý stav. Standard funguje, práce prošla a nikdo se nemusel vracet k celé historii. Jen se ukázala malá věc: trochu nešikovný název, chybějící odkaz, stará věta v rozcestníku, drobný nesoulad mezi šablonou a aktuálním postupem.
+
+V takové chvíli není potřeba otevírat novou korekční smyčku pokaždé. Kdyby se každá poznámka proměnila v úkol, stabilní standard by přestal být stabilní. Tato příloha je pro situaci, kdy poznámka stojí za zachycení, ale ještě nestojí za samostatnou změnu.
+
+Cílem servisního zápisu je udržet drobný signál dohledatelný bez toho, aby zahltil tým. Je to krátká stopa pro další přirozený návrat: víme, čeho jsme si všimli, víme, proč to teď neřešíme, a víme, podle čeho poznáme, že se z poznámky stává skutečné tření.
+
+### Rozlišujte poznámku od korekce
+
+Drobné poznámky vznikají často. Člověk by přejmenoval nadpis, posunul odkaz, přidal příklad nebo zkrátil formulaci. Některé poznámky jsou užitečné, jiné jsou jen chuť autora dál ladit text, který už práci nebrzdí.
+
+Nejdřív proto položte tři otázky:
+
+- Zpomalila poznámka skutečnou práci, nebo jen esteticky vadila?
+- Hrozí, že stejná drobnost zastaví dalšího člověka?
+- Dá se poznámka ověřit při dalším běžném použití bez nové evidence?
+
+Pokud odpověď zní třikrát ne, nezapisujte ji vůbec. Stabilní standard nepotřebuje archiv každého nápadu, který někoho napadl po cestě. Pokud je jedna odpověď ano, stačí servisní zápis. Pokud jsou ano dvě nebo tři odpovědi a dopad je konkrétní, nejspíš už nejde o poznámku, ale o korekci standardu.
+
+Příklad poznámky:
+
+```text
+Při přípravě nové landing page editor našel správné pravidlo, ale název odkazu "formulářové minimum" nebyl na první pohled jasný. Práce proběhla bez obcházení standardu.
+```
+
+To ještě nemusí být úkol. Stačí sledovat, jestli stejný odkaz zdrží dalšího člověka. Pokud ano, z poznámky vznikne lokální korekce. Pokud ne, poznámka může po dalším návratu zmizet.
+
+### Servisní zápis má být kratší než samotný problém
+
+Servisní zápis není mini projekt, issue ani dokumentace k dokumentaci. Má se vejít do několika řádků a bydlet u místa, kde tým standard udržuje: v changelogu, rozhodovacím logu, provozní kartě nebo krátké poznámce u standardu.
+
+Minimální tvar:
+
+```text
+Poznámka:
+Proč teď neřešíme:
+Kdy se vrátíme:
+Kdy poznámku smažeme:
+```
+
+Příklad:
+
+```text
+Poznámka:
+Název odkazu "formulářové minimum" nebyl okamžitě jasný při přípravě nové landing page.
+
+Proč teď neřešíme:
+Editor pravidlo našel, práci dokončil a nevznikla stará odbočka ani nový dotaz.
+
+Kdy se vrátíme:
+Při dalším použití stejného rozcestníku jiným člověkem.
+
+Kdy poznámku smažeme:
+Pokud další použití proběhne bez zaváhání nebo pokud se odkaz mezitím přirozeně přepíše v jiné schválené úpravě.
+```
+
+Tento tvar má dvě výhody. Zaprvé brání zbytečné akci: tým vidí, že poznámka není zapomenutá, jen zatím nemá pracovní cenu. Zadruhé brání nekonečnému hromadění: každá poznámka má podmínku návratu a podmínku smazání.
+
+### Nepište seznam přání
+
+Servisní zápis se snadno zvrhne do seznamu drobných přání. "Přidat příklad", "zlepšit text", "sjednotit názvy", "možná udělat nový checklist". Takové zápisy vypadají nevinně, ale po měsíci z nich vznikne mlha. Nikdo neví, které poznámky mají dopad, které jsou jen vkus a které už dávno přestaly platit.
+
+Dobrá servisní poznámka má pracovní situaci:
+
+- ne "přejmenovat odkaz", ale "při přípravě landing page nebylo jasné, že odkaz vede na aktuální pravidlo formulářů";
+- ne "přidat víc příkladů", ale "při předání novému editorovi chyběl příklad pro formulář bez telefonu";
+- ne "zlepšit onboarding", ale "nový člověk našel standard až přes starý komentář v úkolu".
+
+Když neumíte poznámku svázat s reálnou situací, nechte ji venku. Nápady bez situace patří do samostatného backlogu, ne k provoznímu standardu. Standard má pomáhat lidem pracovat, ne nést nálady z každé kontroly.
+
+### Kdy poznámku povýšit na korekci
+
+Servisní poznámka se má povýšit na korekci jen tehdy, když se opakuje nebo když se ukáže jasný dopad. Nepotřebujete čekat na tři měsíce dat. Stačí další přirozené použití, ve kterém se stejná věc znovu projeví.
+
+Poznámku povyšte na korekci, když:
+
+- stejná drobnost zdržela dva různé lidi nebo dvě různé situace;
+- člověk kvůli ní sáhl po staré cestě, starém dokumentu nebo ústním vysvětlení;
+- poznámka ukazuje na zbytečný sběr, kopii nebo export dat;
+- nejde jen o jazyk, ale o chybějící hranici rozhodnutí;
+- oprava se dá udělat jednou změnou v nejbližším pracovním místě.
+
+Naopak poznámku nepovyšujte, když:
+
+- jde hlavně o preferenci formulace;
+- práce proběhla bez zaváhání a bez následného dotazu;
+- standard se v dané části používá výjimečně;
+- by oprava vyžadovala otevřít širší strukturu, kterou teď neřešíte;
+- není jasné, kdo a kdy poznámku znovu ověří.
+
+Praktické pravidlo: korekce má snižovat opakované tření. Pokud jen zvyšuje pocit redakční čistoty, počká. Rukopis, standard i týmová wiki mají být dost dobré pro práci, ne dokonale uhlazené pro vitrínu.
+
+### Privacy-first servisní zápis
+
+Servisní zápis má držet minimum dat. Není potřeba ukládat jméno člověka, přesný čas průchodu, screenshot celé interní stránky ani kopii zákaznického vstupu. Stačí popsat pracovní situaci a tření.
+
+Privacy-first servisní zápis dodržuje čtyři pravidla:
+
+1. Popisuje roli nebo situaci, ne výkon konkrétní osoby.
+2. Neukládá kopie dat, které nejsou nutné pro rozhodnutí.
+3. Má datum návratu nebo spouštěč návratu.
+4. Má podmínku smazání, aby z poznámek nevznikl archiv šumu.
+
+Příklad špatného zápisu:
+
+```text
+Jana ve 14:37 hledala pravidlo a otevřela špatný dokument. Screenshot v příloze.
+```
+
+Lepší zápis:
+
+```text
+Při přípravě landing page vedl starý odkaz v rozcestníku k archivnímu pravidlu formulářů. Práce byla dokončena podle aktuálního pravidla; při dalším použití rozcestníku ověřit, jestli odkaz ještě mate.
+```
+
+Druhý zápis stačí pro rozhodnutí a zároveň nevyrábí zbytečnou osobní ani zákaznickou stopu. To je přesně ten typ nudné disciplíny, díky které privacy-first provoz funguje i ve chvíli, kdy tým spěchá.
+
+### Karta servisního zápisu
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Situace návratu:
+
+Výsledek návratu:
+Drží s drobnou poznámkou
+
+Poznámka jednou větou:
+
+Pracovní dopad:
+Žádný / malý / opakovaný / nejasný
+
+Proč teď neotevíráme korekci:
+
+Návratový signál:
+Kdy poznáme, že se poznámka má řešit?
+
+Podmínka smazání:
+Kdy poznámku zavřeme bez změny?
+
+Privacy-first kontrola:
+Jaké osobní údaje, exporty nebo screenshoty neukládáme?
+
+Místo zápisu:
+Kde tým poznámku při další práci najde?
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Formulářové minimum pro první poptávku.
+
+Kanonické pracovní místo:
+Ediční rozcestník pro prodejní stránky.
+
+Situace návratu:
+Příprava nové landing page pro B2B službu.
+
+Výsledek návratu:
+Drží s drobnou poznámkou.
+
+Poznámka jednou větou:
+Odkaz "formulářové minimum" nebyl okamžitě srozumitelný bez otevření.
+
+Pracovní dopad:
+Malý.
+
+Proč teď neotevíráme korekci:
+Editor správné pravidlo našel, práce prošla a nevznikla stará odbočka.
+
+Návratový signál:
+Pokud další člověk při použití stejného rozcestníku zaváhá nad stejným odkazem.
+
+Podmínka smazání:
+Pokud další použití proběhne bez zaváhání.
+
+Privacy-first kontrola:
+Neukládáme screenshot rozcestníku ani jméno editora; stačí popis situace.
+
+Místo zápisu:
+Krátká poznámka u changelogu standardu.
+```
+
+### Mini workshop na 6 minut
+
+Vezměte jednu kartu prvního návratu se stavem `Drží s drobnou poznámkou`.
+
+1. Přečtěte jen situaci, poznámku a dopad.
+2. Rozhodněte, jestli jde o poznámku, korekci nebo šum.
+3. Pokud jde o šum, nezapisujte ji dál.
+4. Pokud jde o poznámku, vyplňte servisní zápis ve čtyřech řádcích.
+5. Pokud jde o korekci, otevřete samostatnou korekční kartu a servisní zápis nepoužívejte.
+6. Doplňte podmínku smazání a privacy-first hranici.
+
+Výstup workshopu:
+
+```text
+Drobná poznámka je buď zavřená jako šum, zachycená jako servisní zápis, nebo povýšená na korekci. Nevzniká neurčitý mezistav.
+```
+
+### Checklist kapitoly
+
+- Vychází poznámka z reálného návratu ke stabilnímu standardu?
+- Je výsledek opravdu `Drží s drobnou poznámkou`, ne skrytý stav `Vrací se stará cesta`?
+- Umíme poznámku popsat jednou pracovní větou?
+- Víme, proč teď neotevíráme korekci?
+- Má poznámka návratový signál?
+- Má poznámka podmínku smazání?
+- Nezapisujeme jméno člověka, screenshoty ani kopie dat, které nepotřebujeme?
+- Bydlí zápis tam, kde se k němu tým při další práci přirozeně dostane?
+- Umíme poznámku povýšit na korekci, pokud se zopakuje?
+- Umíme ji bez lítosti smazat, pokud se nepotvrdí?
+
+Servisní zápis je malá brzda proti dvěma extrémům: všechno hned opravovat, nebo všechno ignorovat. Dobře použitý drží standard klidný. Tým vidí drobný signál, ale neztrácí den v úpravách, které zatím nikomu reálně nepomohly.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QV o převodu drobné poznámky z návratu stabilního standardu do servisního zápisu: rozlišení poznámky, korekce a šumu, krátký zápis, podmínka návratu a smazání, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QU o prvním běžném návratu ke stabilní verzi pracovního standardu: reálné použití místo umělé kontroly, sledování aktuální cesty, čtyři výsledky návratu, kontrola starých stop, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QT o uzavření potvrzené korekce pracovního standardu do stabilní verze: práce s výsledkem potvrzení, přepis aktuálního pracovního místa, oddělení historie od hlavní trasy, úklid pomocných stop, privacy-first mazání podkladů, karta uzavření, Codyho komentář, mini workshop a checklist.
 - 2026-05-26: Doplněna úvodní podkapitola o drobném doladění trasy po první zpětné vazbě: výběr nejmenší opravy, zásah v místě skutečného selhání, uzavřený zápis, privacy-first doladění a checklist.
