@@ -129073,8 +129073,231 @@ Servisní zápis už nemá neurčitý stav. Buď zmizel, stal se korekcí, ček�
 
 Servisní zápis je užitečný jen jako dočasná paměť. Buď se ukáže, že šlo o šum, nebo se z něj stane konkrétní korekce. Co nesmí nastat: poznámka přežije půl roku jen proto, že nikdo neměl odvahu ji smazat. To není pečlivost. To je pomalé zanášení pracovního prostoru.
 
+## Příloha QX: Uzavření ověřeného servisního zápisu do čistého stavu standardu
+
+Po ověření servisního zápisu má standard skončit v čistém stavu. To znamená, že tým ví, co platí, kde to najde a jaká dočasná poznámka už nemá dál zabírat místo. Předchozí příloha řešila rozhodnutí při dalším přirozeném použití. Tato příloha řeší poslední krok: jak závěr zapsat tak, aby po něm nezůstala další malá hromádka administrativy.
+
+Čistý stav není totéž co dokonalý stav. Standard může pořád obsahovat formulaci, která není literární šperk. Může mít jeden kompromis, který dává smysl. Může čekat na větší plánovaný úklid. Podstatné je něco jiného: servisní zápis už nemá neurčitý život. Buď zmizel, proměnil se v konkrétní korekci, nebo byl vědomě zařazen do existujícího úklidového rytmu.
+
+Cílem uzavření je zabránit tomu, aby tým po každém ověření vytvořil další stopu, která bude potřebovat další ověření. Ano, i pořádek umí vyrobit nepořádek. Stačí, když každou poznámku zabalíte do nového dokumentu s velkým názvem a tváříte se, že to je provozní disciplína.
+
+### Začněte rozhodnutím z ověření
+
+Než cokoliv editujete, vraťte se k rozhodnutí z karty ověření servisního zápisu. Nepřemýšlejte znovu od nuly. Ověření už mělo určit jeden ze čtyř stavů:
+
+- smazat;
+- povýšit na korekci;
+- ponechat na jeden další průchod;
+- přesunout do běžného úklidu.
+
+Uzavření má jen převést tento stav do pracovního místa. Pokud se při uzavírání otevře nová debata o tom, jestli standard není potřeba přepsat celý, smyčka se rozpadla. Nové téma si zapište bokem, ale servisní zápis nejdřív zavřete.
+
+Příklad: ověření ukázalo, že odkaz "formulářové minimum" už dalšího editora nezdržel. Rozhodnutí je `Smazat`. Uzavření tedy není "podívejme se ještě na všechny názvy odkazů". Uzavření je odstranit servisní poznámku a nechat krátkou changelogovou větu, pokud ji tým pro dohledatelnost potřebuje.
+
+### Upravte jen místo, které rozhodnutí opravdu mění
+
+Každý výsledek ověření má jiný rozsah zásahu:
+
+- `Smazat`: odstraňte servisní poznámku a případné pomocné podklady.
+- `Povýšit na korekci`: založte nebo doplňte korekční kartu a do ní přeneste jen potřebný kontext.
+- `Ponechat na jeden další průchod`: zpřesněte poslední návratový signál a datum nebo situaci návratu.
+- `Přesunout do běžného úklidu`: přidejte jednu položku do existujícího úklidového seznamu, neotevírejte nový proces.
+
+Rozsah má být nudně malý. Když mažete poznámku, nemažte historii celého standardu. Když povyšujete na korekci, neopisujte původní servisní zápis v plné délce. Když přesouváte do úklidu, nevytvářejte zvláštní schůzku jen kvůli třem odkazům.
+
+Praktické pravidlo: po uzavření musí být jasnější, co platí. Pokud je po uzavření víc dokumentů, víc stavů a víc otázek, neuzavřeli jste zápis. Jen jste mu dali slušivější kabát.
+
+### Zapište závěrečnou větu
+
+Servisní zápis si zaslouží krátkou závěrečnou větu. Ne proto, aby bylo všechno monumentálně zdokumentované, ale proto, aby tým později poznal, proč poznámka zmizela nebo proč z ní vznikla korekce.
+
+Dobrá závěrečná věta má tři části:
+
+1. co se při ověření ukázalo;
+2. jaké rozhodnutí z toho vzniklo;
+3. kde teď žije případný další krok.
+
+Příklady:
+
+```text
+Poznámka k názvu odkazu se při dalším použití nepotvrdila; servisní zápis byl smazán a pomocné podklady odstraněny.
+```
+
+```text
+Stejný odkaz znovu zpomalil výběr pravidla; servisní zápis byl povýšen na lokální korekci v edičním rozcestníku.
+```
+
+```text
+Poznámka se v podobné situaci neověřila, ale další průchod nebyl dost blízký; ponecháváme poslední návrat při přípravě další prodejní stránky.
+```
+
+```text
+Nesoulad názvů neblokuje práci; položka byla přesunuta do měsíčního úklidu rozcestníku.
+```
+
+Závěrečná věta nemá obsahovat jména lidí, přesné minuty hledání ani screenshoty. Má vysvětlit stav standardu. To stačí.
+
+### Zavřete pomocné stopy
+
+Po servisním zápisu často zůstanou malé zbytky: poznámka v komentáři, dočasná karta, screenshot, export, odkaz v chatu, testovací kopie šablony nebo stará připomínka v úkolu. Samy o sobě vypadají nevinně. Dohromady ale vytvářejí falešný pocit, že téma pořád běží.
+
+Při uzavření proto projděte jen nejbližší stopy:
+
+- původní servisní zápis;
+- místo, kde tým udržuje standard;
+- případný changelog nebo rozhodovací log;
+- pomocné podklady vytvořené pro ověření;
+- úkol, ve kterém by po uzavření zůstal otevřený stav.
+
+Nehledejte všechny možné zmínky v celé historii týmu. To by byla archeologie, ne provoz. Stačí odstranit stopy, které by dalšího člověka mohly zmást při běžné práci.
+
+Privacy-first dopad je jednoduchý: co už nepomáhá rozhodnutí, nemá zůstávat jen proto, že se to kdysi hodilo. Dočasné podklady mají mít krátký život. Jinak se z privacy-first hodnoty stane pěkný nápis nad skladem starých exportů.
+
+### Oddělte servisní uzavření od nové korekce
+
+Když se servisní zápis povýší na korekci, uzavření a korekce jsou dvě různé věci. Uzavření říká: servisní zápis už není poznámka. Korekce říká: tady je malá změna, kterou uděláme a ověříme.
+
+Nepište do servisního zápisu celý plán korekce. Stačí:
+
+```text
+Povýšeno na korekci: přejmenovat odkaz v edičním rozcestníku. Další práce je v korekční kartě standardu.
+```
+
+Tím servisní zápis končí. Korekční karta si potom nese vlastní rozsah, vlastníka, ověření a privacy-first hranici. Tým nemá přeskakovat mezi dvěma místy a zjišťovat, kde je skutečná pravda.
+
+Pokud korekci otevřete, servisní zápis odstraňte nebo ho označte jako uzavřený. Nenechávejte obě stopy aktivní. Dvě aktivní pravdy jsou drahý luxus i u tak malé věci, jako je název odkazu.
+
+### Privacy-first uzavření čistého stavu
+
+Privacy-first uzavření se ptá hlavně na to, co může po rozhodnutí zmizet. Nejde jen o osobní údaje. Jde i o provozní stopu, která časem mate tým nebo zbytečně rozšiřuje místa, kde se ukládají pracovní detaily.
+
+Při uzavření si položte čtyři otázky:
+
+- Potřebujeme dál držet původní poznámku, nebo stačí závěrečná věta?
+- Vznikly při ověření screenshoty, exporty, kopie zákaznických vstupů nebo osobní poznámky?
+- Má případná korekce jen minimum kontextu, které potřebuje pro provedení?
+- Nezůstává otevřený úkol, který bude za měsíc vypadat jako nevyřešený problém?
+
+Příklad dobrého uzavření:
+
+```text
+Servisní poznámka se nepotvrdila. Zápis smazán, pomocná poznámka v úkolu odstraněna, changelog ponechává jednu větu bez osobních údajů.
+```
+
+Příklad špatného uzavření:
+
+```text
+Poznámka asi není problém, ale necháme ji pro jistotu v dokumentu, chatu i úkolu, kdyby se někdy hodila.
+```
+
+Druhá varianta zní opatrně, ale ve skutečnosti jen přesouvá nerozhodnost do budoucnosti. Budoucí tým pak neřeší práci, ale luští, proč tu poznámka pořád je. Skvělý způsob, jak si vyrobit vlastní provozní mlhu v domácí kvalitě.
+
+### Karta uzavření servisního zápisu
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Původní servisní zápis:
+
+Výsledek ověření:
+Smazat / Povýšit na korekci / Ponechat na jeden další průchod / Přesunout do běžného úklidu
+
+Závěrečná věta:
+
+Co se mění v pracovním místě:
+
+Co se maže nebo archivuje:
+
+Pokud vzniká korekce:
+Kde je její karta a jaký je nejmenší zásah?
+
+Pokud zápis zůstává ještě jednou:
+Jaký je poslední návratový signál?
+
+Privacy-first kontrola:
+Jaké pomocné podklady, osobní údaje, screenshoty nebo exporty mizí?
+
+Kdo uzavření provedl:
+
+Kde tým pozná aktuální stav standardu:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Formulářové minimum pro první poptávku.
+
+Kanonické pracovní místo:
+Ediční rozcestník pro prodejní stránky.
+
+Původní servisní zápis:
+Název odkazu "formulářové minimum" nebyl při jednom návratu okamžitě jasný.
+
+Výsledek ověření:
+Smazat.
+
+Závěrečná věta:
+Při dalším použití rozcestníku byl odkaz nalezen bez zaváhání; servisní zápis byl smazán.
+
+Co se mění v pracovním místě:
+Nic. Aktuální rozcestník zůstává.
+
+Co se maže nebo archivuje:
+Servisní poznámka u changelogu a pomocná poznámka v pracovním úkolu.
+
+Pokud vzniká korekce:
+Nevzniká.
+
+Pokud zápis zůstává ještě jednou:
+Nezůstává.
+
+Privacy-first kontrola:
+Neukládáme jméno editora, screenshot ani časový detail průchodu.
+
+Kdo uzavření provedl:
+Vlastník edičního standardu.
+
+Kde tým pozná aktuální stav standardu:
+V kanonickém edičním rozcestníku a jeho changelogu.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete jednu ověřovací kartu servisního zápisu.
+2. Přečtěte jen výsledek ověření a nejbližší pracovní místo.
+3. Vyberte přesný uzavírací zásah: smazat, povýšit, ponechat naposledy, přesunout do úklidu.
+4. Napište jednu závěrečnou větu.
+5. Odstraňte nebo označte dočasné stopy, které by další práci mátly.
+6. Zkontrolujte, že aktuální stav standardu je vidět na jednom kanonickém místě.
+
+Výstup workshopu:
+
+```text
+Servisní zápis je uzavřený, aktuální standard má čistý stav a další člověk nemusí luštit, jestli poznámka ještě platí.
+```
+
+### Checklist kapitoly
+
+- Vycházíme z rozhodnutí ověření, neotevíráme znovu celé téma?
+- Je jasné, který ze čtyř stavů nastal?
+- Upravujeme jen pracovní místo, kterého se rozhodnutí týká?
+- Má uzavření jednu krátkou závěrečnou větu?
+- Pokud zápis mažeme, mizí i pomocné podklady?
+- Pokud zápis povyšujeme na korekci, je další práce v jedné korekční kartě?
+- Pokud zápis ponecháváme, má poslední konkrétní návratový signál?
+- Pokud zápis přesouváme do úklidu, používáme existující úklidový rytmus?
+- Nezůstávají dvě aktivní pravdy o stejném standardu?
+- Neuchováváme jména lidí, screenshoty, exporty ani kopie dat bez jasného účelu?
+- Pozná další člověk aktuální stav standardu bez čtení celé historie?
+
+Servisní zápis má hodnotu jen tehdy, když umí skončit. Čistý stav standardu není slavnostní konec příběhu. Je to obyčejná provozní hygiena: platné pravidlo je vidět, dočasná poznámka zmizela a tým může pokračovat v práci bez drobných dluhů, které se tváří jako pečlivost.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QX o uzavření ověřeného servisního zápisu do čistého stavu standardu: převod výsledku ověření do pracovního místa, závěrečná věta, úklid pomocných stop, oddělení korekce od uzavření, privacy-first mazání podkladů, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QW o ověření servisního zápisu při dalším přirozeném použití: návratový signál, porovnání poznámky s realitou, čtyři výsledky ověření, povýšení na korekci, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QV o převodu drobné poznámky z návratu stabilního standardu do servisního zápisu: rozlišení poznámky, korekce a šumu, krátký zápis, podmínka návratu a smazání, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QU o prvním běžném návratu ke stabilní verzi pracovního standardu: reálné použití místo umělé kontroly, sledování aktuální cesty, čtyři výsledky návratu, kontrola starých stop, privacy-first evidence, karta, mini workshop a checklist.
