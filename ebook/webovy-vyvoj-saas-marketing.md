@@ -125054,8 +125054,227 @@ Jedno potvrzené tření bylo převedeno do aktuálního pracovního místa a do
 
 Trvalá drobná úprava je způsob, jak dát malé zkušenosti skutečný dopad. Není to velká revize ani další vrstva řízení. Je to přesný pohyb na místě, kde práce opravdu drhla. Když ho uděláte dobře, příští průchod bude tišší, rychlejší a s menší datovou stopou. A to je v privacy-first provozu velmi praktická forma pokroku.
 
+## Příloha QG: Ověření trvalé drobné úpravy při dalším přirozeném použití
+
+Trvalá drobná úprava je hotová až ve chvíli, kdy projde dalším normálním použitím. Ne ve chvíli, kdy ji někdo přepíše do šablony, přejmenuje odkaz nebo zavře poznámku v changelogu. To jsou důležité kroky, ale pořád jen změna artefaktu. Skutečný test přijde až tehdy, když další člověk použije upravené místo bez toho, aby mu autor stál za ramenem a tiše doufal, že si všimne správné věty.
+
+Ověření trvalé drobné úpravy má jednoduchý slib:
+
+```text
+Původní tření se při běžné práci nevrátí, nebo se vrátí v tak malé podobě, že víme, co přesně doladit.
+```
+
+Není cílem hledat nové nápady. Není cílem dokazovat, že dokument je dokonalý. Cílem je ověřit, zda jedna konkrétní úprava skutečně snížila šum, kvůli kterému vznikla. Když během ověření objevíte další problém, zapište ho bokem. Nelepte ho automaticky na stejnou iteraci.
+
+### Vraťte se k původnímu tření
+
+Začněte kartou trvalé drobné úpravy z předchozí přílohy. Hledejte hlavně tři věci:
+
+- potvrzené tření;
+- jedno pracovní místo k úpravě;
+- očekávané další ověření.
+
+Bez těchto tří bodů budete ověřovat dojem, ne změnu. Věta "vypadá to lepší" je příjemná, ale málo užitečná. Silnější otázka zní:
+
+```text
+Stalo se při dalším přirozeném použití znovu stejné zaváhání?
+```
+
+Příklad:
+
+```text
+Původní tření:
+Člověk hledal brief případové studie podle výstupu, ale odkaz používal interní název.
+
+Ověřovací otázka:
+Našel další člověk brief podle nového názvu bez vysvětlování bokem?
+```
+
+Tím se ověření zúží. Neposuzujete celý marketingový rozcestník, všechny briefy ani kvalitu případové studie. Posuzujete jednu úpravu v jednom pracovním okamžiku.
+
+### Čekejte na přirozené použití
+
+U drobné úpravy se nevyplatí vyrábět velký kontrolní proces. Pokud změna vznikla kvůli běžné práci, ověřte ji v běžné práci. Počkejte na situaci, kdy by člověk upravené místo použil i bez testu:
+
+- někdo připravuje novou případovou studii;
+- obchodník aktualizuje sales kartu před hovorem;
+- produktový člověk zakládá rozhodovací záznam;
+- support doplňuje odpověď do znalostní báze;
+- tým dělá pravidelný měsíční úklid šablon;
+- nový člověk hledá správný postup v onboardingu.
+
+Umělý test může být užitečný jen tehdy, když je přirozené použití příliš vzácné nebo rizikové. I potom držte rozsah malý. Simulujte jednu pracovní situaci, ne celou organizaci. Pokud kvůli ověření drobné úpravy svoláváte meeting pro pět lidí, pravděpodobně jste z malé smyčky udělali rituál. Rituály mají svoje místo, ale ne tady.
+
+### Sledujte výsledek, samostatnost a datovou stopu
+
+Při ověření stačí tři signály:
+
+1. Výsledek: vznikl správný pracovní výstup?
+2. Samostatnost: našel člověk upravené místo bez vysvětlování bokem?
+3. Datová stopa: nevznikly kvůli nejistotě nové kopie, exporty nebo osobní poznámky?
+
+Tyto signály jsou malé, ale praktické. Když výstup vznikl, ale člověk musel dvakrát psát autorovi šablony, úprava možná pomohla textu, ale ne samostatnosti. Když člověk našel správné místo, ale raději si udělal osobní kopii s citlivými poznámkami, úprava možná pomohla navigaci, ale nezavřela privacy-first riziko.
+
+Zápis může být stručný:
+
+```text
+Výsledek:
+Brief byl použit pro novou případovou studii.
+
+Samostatnost:
+Člověk našel šablonu přes nový název v rozcestníku bez vysvětlování.
+
+Datová stopa:
+Nevznikla osobní kopie; pracovní poznámky zůstaly v kanonickém dokumentu a budou smazány po publikaci.
+```
+
+Nepotřebujete měřit čas na sekundy. Nepotřebujete sledovat kliknutí. U tak malé změny často stačí pozorování výstupu, krátká otázka po dokončení a kontrola, zda nevznikl nový boční dokument.
+
+### Rozlišujte čtyři výsledky ověření
+
+Po prvním přirozeném použití dejte úpravě jeden ze čtyř stavů:
+
+- Potvrdit: původní tření se nevrátilo a datová stopa zůstala menší nebo stejná.
+- Doladit: úprava pomohla, ale jedna malá formulace, odkaz nebo příklad ještě drhne.
+- Vrátit: úprava vytvořila nové horší tření nebo poslala člověka špatnou cestou.
+- Odložit: použití nebylo dost reprezentativní, takže zatím nejde rozhodnout.
+
+Stav `Potvrdit` neznamená "už se na to nikdy nesmí sáhnout". Znamená, že tato malá smyčka je zavřená. Pokud se časem objeví nové tření, patří do nové karty, ne do nekonečného prodlužování staré.
+
+Stav `Doladit` smí otevřít jen nejmenší opravu. Například přepsat první větu, změnit text odkazu nebo doplnit jednu podmínku do checklistu. Pokud doladění vyžaduje změnu struktury, role, měření nebo více dokumentů, už nejde o doladění. Zapište nový problém a rozhodněte ho samostatně.
+
+Stav `Vrátit` je zdravý výsledek. Znamená, že jste se rychle dozvěděli, že úprava nepomohla. Vraťte původní funkční stav, zapište důvod a odstraňte dočasné poznámky. Malá změna má být levná i na návrat.
+
+Stav `Odložit` používejte opatrně. Je legitimní, když přirozené použití neodpovídalo původní situaci. Nesmí se z něj stát sklad nerozhodnutých dojmů.
+
+### Privacy-first ověření bez nové vrstvy sledování
+
+Nejčastější chyba při ověřování malých úprav je přidat větší měření než samotná změna. Kvůli přejmenovanému odkazu nepotřebujete nový analytický event. Kvůli jedné větě v šabloně nepotřebujete heatmapu, nahrávání obrazovky ani sledování lidí. Potřebujete vědět, zda člověk našel správné místo a nevytvořil zbytečnou datovou stopu.
+
+Privacy-first ověření se proto ptá:
+
+- Stačí nám výstup práce a krátká zpětná otázka?
+- Nevznikla nová kopie s osobními údaji?
+- Nezůstaly citlivé příklady v komentářích nebo historii návrhů?
+- Je jasné, co se po ověření smaže nebo uzavře?
+- Neudělali jsme z jedné drobné úpravy nový pravidelný report?
+
+Dobré ověření často končí větou:
+
+```text
+Úprava potvrzena při běžném použití; žádné nové měření, žádné nové exporty, dočasná kontrolní poznámka uzavřena.
+```
+
+Tohle je nudná věta. Výborně. Privacy-first provoz má být v dobrém slova smyslu nudný: méně improvizovaných kopií, méně vedlejších evidencí, méně dat sbíraných jen proto, že jsme si nebyli jistí.
+
+### Karta ověření trvalé drobné úpravy
+
+```text
+Původní úprava:
+Původní tření:
+Přirozené použití:
+Kdo nebo jaká role úpravu použila:
+Výsledek práce:
+Samostatnost:
+Datová stopa:
+Co se nevrátilo:
+Co ještě drhlo:
+Stav po ověření:
+Rozhodnutí:
+Co zavíráme:
+Co případně otevíráme jako novou kartu:
+Changelogová věta:
+```
+
+Vyplněný příklad:
+
+```text
+Původní úprava:
+Přejmenování odkazu na brief případové studie a doplnění první věty šablony.
+
+Původní tření:
+Člověk hledal šablonu podle výstupu "případová studie", ale odkaz používal interní název.
+
+Přirozené použití:
+Příprava nové případové studie pro B2B službu.
+
+Kdo nebo jaká role úpravu použila:
+Marketingová role bez účasti autora původní úpravy.
+
+Výsledek práce:
+Brief vznikl v kanonickém dokumentu a obsahuje potřebný důkaz, výsledek a otázky pro zákazníka.
+
+Samostatnost:
+Šablona byla nalezena přes nový název bez dotazu bokem.
+
+Datová stopa:
+Nevznikl samostatný export ani osobní kopie s citacemi.
+
+Co se nevrátilo:
+Hledání podle starého interního názvu.
+
+Co ještě drhlo:
+V příkladu nebylo jasné, zda se má uvádět celé jméno zákazníka nebo anonymizovaná role.
+
+Stav po ověření:
+Doladit.
+
+Rozhodnutí:
+Doplníme jednu větu k anonymizaci citací do příkladu. Neotevíráme strukturu briefu.
+
+Co zavíráme:
+Kontrolní poznámku k názvu odkazu.
+
+Co případně otevíráme jako novou kartu:
+Nic; jde o malé doladění stejného místa.
+
+Changelogová věta:
+Trvalá drobná úprava briefu případové studie byla ověřena při běžném použití; název odkazu pomohl, doplňuje se jen věta k anonymizaci citací.
+```
+
+### Codyho komentář
+
+Ověření drobné úpravy nemá být policejní dohled nad tím, jestli někdo klikl přesně podle představ autora. Codyho komentář: dobrý systém poznáte podle toho, že lidem pomáhá bez vysvětlování a bez toho, aby po nich chtěl další vykazování. Pokud úprava funguje jen tehdy, když ji autor vysvětlí na callu, není trvalá. Je to ústní tradice v pěkném kabátě.
+
+Tady se vyplácí být přísně malý. Jeden původní problém, jedno přirozené použití, jeden stav po ověření. Žádná snaha vytěžit z každé drobnosti celý projekt. Provozní klid se neskládá z velkých heroických oprav, ale z desítek přesných smyček, které se umí samy zavřít.
+
+### Mini workshop na 7 minut
+
+Vezměte jednu kartu trvalé drobné úpravy, která už čeká na přirozené použití.
+
+1. Přepište původní tření do jedné věty.
+2. Určete nejbližší běžnou situaci, kde se úprava použije.
+3. Po použití zapište výsledek, samostatnost a datovou stopu.
+4. Rozhodněte stav: potvrdit, doladit, vrátit nebo odložit.
+5. Pokud je stav `Doladit`, napište stop pravidlo pro jednu malou opravu.
+6. Pokud je stav `Potvrdit`, zavřete dočasnou kontrolní poznámku.
+7. Zapište jednu changelogovou větu.
+
+Výstup:
+
+```text
+Jedna trvalá drobná úprava byla ověřena při normální práci a má jasný stav dalšího kroku.
+```
+
+### Checklist kapitoly
+
+- Ověřujete původní tření, ne obecný dojem z dokumentu?
+- Proběhlo ověření při přirozeném použití?
+- Sledujete výsledek práce, samostatnost a datovou stopu?
+- Nepřidali jste kvůli ověření nový tracker, report nebo meeting?
+- Je jasné, zda stav je potvrdit, doladit, vrátit nebo odložit?
+- Pokud dolazujete, je oprava opravdu jen jedna a malá?
+- Pokud vracíte, je zapsané proč a co se stane s dočasnými podklady?
+- Nevznikly nové osobní kopie, exporty nebo citlivé poznámky bokem?
+- Uzavřeli jste kontrolní poznámku, pokud už není potřeba?
+- Vznikla krátká changelogová věta?
+- Případné nové nápady jsou zapsané jako nové karty, ne přilepené ke staré smyčce?
+
+Ověření trvalé drobné úpravy je poslední kontrola, jestli malá změna opravdu ztišila práci. Když ano, zavřete smyčku a nechte systém dýchat. Když ne, opravte jen nejbližší místo nebo změnu vraťte. Nejhorší varianta je nechat drobnou úpravu napůl otevřenou: v dokumentu už je, v praxi jí nikdo nevěří a v hlavě týmu zůstává další malý dluh. To je přesně ten typ šumu, který měl zmizet.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QG o ověření trvalé drobné úpravy při dalším přirozeném použití: návrat k původnímu tření, přirozené použití, signály výsledku, samostatnosti a datové stopy, čtyři výsledky ověření, privacy-first kontrola bez nové vrstvy sledování, ověřovací karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QE o první kontrole tiché rutiny po návratu do běžného provozu: přirozený průchod, tiché signály, čtyři výsledky kontroly, omezení nové procesní vrstvy, privacy-first kontrola, kontrolní karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QD o uzavření ověřené drobné opravy po slabém signálu do tiché rutiny: práce s výsledkem ověření, přepis aktuální cesty bez historie, zavření dočasných háčků, krátká changelogová stopa, privacy-first úklid, uzavírací karta, Codyho komentář, mini workshop a checklist.
 - 2026-05-25: Doplněna Příloha QC o ověření drobné opravy po slabém signálu při přirozeném použití: návrat ke kartě opravy, sledování normálního průchodu, čtyři výsledky ověření, privacy-first evidence bez sledování lidí, ověřovací karta, Codyho komentář, mini workshop a checklist.
