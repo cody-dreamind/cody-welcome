@@ -126598,8 +126598,249 @@ Potvrzená lokální korekce žije v běžném pracovním místě, pomocné stop
 
 Uzavření potvrzené lokální korekce je poslední krok, díky kterému se malá oprava přestane chovat jako událost. Příští člověk nemá poznat, kolik kolem ní bylo poznámek. Má jen otevřít správné pracovní místo, udělat správný krok a nezanechat po sobě víc dat, než práce opravdu potřebuje.
 
+## Příloha QM: Kontrola běžného pracovního místa po uzavřené lokální korekci
+
+Uzavřená lokální korekce se má časem ztratit v běžné práci. To je dobře. Pokud po ní každý měsíc zůstává zvláštní schůzka, tabulka a sada připomínek, korekce se sice formálně propsala, ale provozně pořád zabírá pozornost. Kontrola po uzavření slouží k jedné věci: ověřit, že pracovní místo funguje samo a že po malé opravě nevznikl nový tichý proces.
+
+Cíl této kontroly je:
+
+```text
+Zjistit, jestli běžné pracovní místo po uzavřené lokální korekci funguje bez vysvětlování, bez návratu starého drhnutí a bez nové datové stopy.
+```
+
+Nejde o audit celého rukopisu, playbooku ani procesu. Kontrolujte jen místo, do kterého byla korekce propsaná. Pokud jste upravili brief případové studie, neotevírejte zároveň celý marketingový systém. Pokud jste opravili jednu směrovku v rozcestníku, nepište nový informační architektonický plán. Vraťte se k nejmenší části, která měla být po korekci lepší.
+
+### Kdy se vrátit
+
+Návrat má smysl až po reálném použití. Kontrola druhý den po uzavření často jen měří čerstvou paměť člověka, který změnu udělal. Lepší je počkat na přirozený okamžik:
+
+- další vyplnění šablony;
+- další přípravu case study;
+- další support odpověď podle upraveného vzoru;
+- další použití rozcestníku novým člověkem;
+- další měsíční review, kde se pracovní místo stejně otevírá;
+- další předání úkolu, ve kterém má korekce pomoct samostatnosti.
+
+Nepište kvůli tomu nový kalendářový rituál, pokud už existuje přirozený provozní rytmus. Přidejte kontrolní otázku tam, kde tým dané místo opravdu používá:
+
+```text
+Fungovalo upravené pracovní místo bez návratu původního zaváhání?
+```
+
+Pokud na otázku nejde odpovědět, možná ještě neproběhlo skutečné použití. V takovém případě kontrolu nevyplňujte z pocitu. Odložte ji na první normální průchod.
+
+### Sledujte tři nenápadné signály
+
+Po uzavření lokální korekce nehledáte velkou výkonnostní metriku. Hledáte tři pracovní signály:
+
+1. Samostatnost: člověk našel správnou větu, odkaz, hranici nebo příklad bez dotazu bokem.
+2. Stabilita: původní lehké drhnutí se nevrátilo v jiné podobě.
+3. Datová stopa: kvůli práci nevznikla nová kopie, screenshot, export nebo osobní poznámka bez jasného účelu.
+
+Příklad:
+
+```text
+Pracovní místo:
+Brief případové studie.
+
+Původní korekce:
+Anonymizační hranice byla přesunuta nad první příklad.
+
+Samostatnost:
+Autor vyplnil brief bez dotazu, kdy smí použít konkrétní citaci.
+
+Stabilita:
+Příklad zůstal obecný do chvíle, kdy zákazník schválil přesné znění.
+
+Datová stopa:
+Nevznikl nový pracovní export citací. Autor použil jen schválený zdroj a výslednou anonymizovanou poznámku.
+```
+
+Tohle je dostatečné ověření. Nepotřebujete měřit každé kliknutí, délku práce ani chování konkrétního člověka. Pracovní místo buď pomáhá ke správnému rozhodnutí, nebo ne.
+
+### Rozlišujte čtyři výsledky kontroly
+
+Po prvním nebo druhém přirozeném použití dejte pracovnímu místu jeden stav:
+
+1. Nechat běžet: korekce funguje a není potřeba další zásah.
+2. Jedna drobná úprava: stačí zpřesnit větu, název odkazu nebo pořadí položek.
+3. Vrátit do lokální korekce: původní drhnutí se vrátilo a pořád je lokální.
+4. Otevřít novou iteraci: problém je širší než pracovní místo nebo souvisí s jinou částí systému.
+
+Stav `Nechat běžet` je legitimní výsledek. Ne každá kontrola má vyrábět práci. Pokud se tým naučí, že každé review musí skončit novým úkolem, začne problémy hledat i tam, kde proces konečně funguje.
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Nechat běžet.
+
+Proč:
+Upravený brief vedl autora správně, anonymizační hranice byla viditelná a nevznikl nový pomocný export.
+
+Co neděláme:
+Nepřidáváme další příklad ani nové pole pro kontrolu citací.
+
+Další návrat:
+Jen při běžné kontrole marketingových šablon nebo při novém potvrzeném zaváhání.
+```
+
+Pokud výsledek zní `Jedna drobná úprava`, držte ji skutečně malou. Například:
+
+```text
+Změnit název odkazu `Schválení citací` na `Kdy smíme použít konkrétní citaci`, protože autor hledal pravidlo podle pracovní otázky, ne podle interního názvu.
+```
+
+To je drobná úprava. Nová schvalovací tabulka pro všechny case studies už je nová iterace.
+
+### Chraňte pracovní místo před postupným nánosem
+
+Největší riziko po úspěšné korekci je nenápadné přidávání dalších pojistek. Jedna věta pomohla, tak někdo přidá ještě druhou. Potom příklad. Potom kontrolní pole. Potom krátký návod. Nakonec je pracovní místo znovu dlouhé a lidé začnou přeskakovat právě část, která měla zabránit původnímu zaváhání.
+
+Při kontrole se proto ptejte:
+
+- Co by se stalo, kdybychom teď nepřidali nic?
+- Je nové tření opravdu důsledek této korekce, nebo jen nový nápad?
+- Dá se problém vyřešit přejmenováním, přesunem nebo smazáním místo přidáním další vrstvy?
+- Nepřidáváme kontrolu jen proto, že nechceme důvěřovat běžné práci?
+- Zůstává pracovní místo kratší nebo srozumitelnější než před korekcí?
+
+Když si nejste jistí, zapište návratový signál místo úkolu:
+
+```text
+Nic teď neměníme. Pokud se u dalších dvou case studies znovu objeví dotaz na schvalování citací před vyplněním briefu, otevřeme lokální korekci názvu pravidla.
+```
+
+Takový zápis je často lepší než okamžitá oprava. Chrání tým před tím, aby z jedné dobré korekce vznikla nová vrstva obrany proti hypotetickým problémům.
+
+### Privacy-first kontrola po uzavření
+
+Po uzavřené lokální korekci je lákavé nechat pomocné stopy být, protože "už ničemu nevadí". Jenže právě drobné korekce často vytvářejí nenápadné zbytky: kopie šablon, screenshoty formulářů, poznámky s citacemi, pracovní exporty, odkazy na staré varianty a komentáře s konkrétními jmény.
+
+Kontrola po uzavření má potvrdit, že běžné pracovní místo nepotřebuje tyto zbytky k dalšímu fungování.
+
+Privacy-first otázky:
+
+- Existuje ještě dočasná kopie, která měla být po uzavření smazaná?
+- Zůstaly v komentářích konkrétní zákaznické údaje, které už nejsou potřeba?
+- Nevznikla nová evidence lidí jen proto, abychom sledovali použití korekce?
+- Je changelog dost stručný a bez osobních detailů?
+- Má pracovní místo jasnou datovou hranici přímo v okamžiku použití?
+- Umíme vysvětlit, proč každý ponechaný podklad ještě potřebujeme?
+
+Dobrý výsledek:
+
+```text
+Pracovní místo funguje z aktuální šablony. Pomocné poznámky jsou zavřené, citlivé příklady anonymizované a kontrola použití proběhla bez nového sledování lidí.
+```
+
+Špatný výsledek:
+
+```text
+Šablona funguje, ale pro jistotu necháváme starý komentář s konkrétním jménem zákazníka a screenshot vyplněného briefu.
+```
+
+Privacy-first provoz se pozná právě tady. Ne v prohlášení, že soukromí je důležité, ale v tom, že po malé úpravě nezůstane zbytečný datový prach.
+
+### Kontrolní karta pracovního místa po korekci
+
+```text
+Pracovní místo:
+Uzavřená lokální korekce:
+Přirozené použití:
+Kdo nebo jaká role místo použila:
+Samostatnost:
+Stabilita původního drhnutí:
+Datová stopa:
+Stav kontroly:
+Co teď měníme:
+Co teď vědomě neměníme:
+Co mažeme nebo anonymizujeme:
+Návratový signál:
+Kde je záznam uložený:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Brief případové studie.
+
+Uzavřená lokální korekce:
+Anonymizační hranice je před prvním příkladem vyplnění.
+
+Přirozené použití:
+Příprava nové case study pro B2B službu.
+
+Kdo nebo jaká role místo použila:
+Marketing owner.
+
+Samostatnost:
+Brief vyplněn bez doplňujícího dotazu na citace.
+
+Stabilita původního drhnutí:
+Původní zaváhání se nevrátilo.
+
+Datová stopa:
+Nevznikl nový export ani screenshot. V poznámce zůstala jen anonymizovaná role zákazníka.
+
+Stav kontroly:
+Nechat běžet.
+
+Co teď měníme:
+Nic.
+
+Co teď vědomě neměníme:
+Nepřidáváme další schvalovací pole ani nový checklist.
+
+Co mažeme nebo anonymizujeme:
+Starý komentář z ověřovací karty s konkrétní citací.
+
+Návratový signál:
+Nový dotaz na použití konkrétní citace před schválením.
+
+Kde je záznam uložený:
+V měsíční kontrole marketingových šablon.
+```
+
+### Mini workshop na 7 minut
+
+Vezměte jedno pracovní místo, do kterého byla propsaná lokální korekce.
+
+1. Najděte první nebo druhé přirozené použití po uzavření.
+2. Napište původní korekci jednou větou.
+3. Ověřte samostatnost: musel někdo vysvětlovat správný krok bokem?
+4. Ověřte stabilitu: vrátilo se původní lehké drhnutí?
+5. Ověřte datovou stopu: vznikl nový export, screenshot, kopie nebo citlivá poznámka?
+6. Dejte kontrole jeden ze čtyř stavů.
+7. Pokud není potřeba změna, napište jasné `nic teď neměníme`.
+8. Smažte nebo anonymizujte zbytky, které už nemají účel.
+
+Výstup:
+
+```text
+Pracovní místo po uzavřené korekci funguje, drhne lokálně, nebo potřebuje novou iteraci. V každém případě je jasné, co se teď nemění a jaká datová stopa po kontrole zůstává.
+```
+
+### Checklist kapitoly
+
+- Proběhlo skutečné použití pracovního místa po uzavření korekce?
+- Kontrolujete jen místo, kam byla korekce propsaná?
+- Neotevíráte celý proces kvůli jedné malé kontrole?
+- Je jasné, jestli člověk pracoval samostatně bez vysvětlení bokem?
+- Vrátilo se původní lehké drhnutí, nebo pracovní místo fungovalo stabilně?
+- Nevznikla nová datová stopa jen kvůli ověření?
+- Má kontrola jeden ze stavů `Nechat běžet`, `Jedna drobná úprava`, `Vrátit do lokální korekce` nebo `Otevřít novou iteraci`?
+- Pokud není potřeba změna, je to výslovně zapsané?
+- Nezůstaly pomocné kopie, screenshoty, exporty nebo citlivé poznámky bez účelu?
+- Je návratový signál konkrétní a navázaný na skutečné použití?
+- Zůstává pracovní místo po kontrole jednodušší než před původní korekcí?
+
+Kontrola po uzavřené lokální korekci je malý test provozní zralosti. Dobrý tým nemusí po každé úpravě vytvářet další proces. Umí se vrátit, podívat se na skutečné použití, říct "funguje, necháme běžet" a uklidit po sobě datovou stopu. To je někdy nejproduktivnější práce, protože nevyrábí práci navíc.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QM o kontrole běžného pracovního místa po uzavřené lokální korekci: návrat při přirozeném použití, signály samostatnosti, stability a datové stopy, čtyři výsledky kontroly, ochrana před postupným nánosem, privacy-first úklid, kontrolní karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QL o uzavření potvrzené lokální korekce do běžného pracovního místa: potvrzený stav, propsání do aktuální práce, zkrácení historie, úklid pomocných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QK o ověření lokální korekce po lehkém drhnutí: přirozené použití, sledování původního zaváhání, čtyři výsledky ověření, privacy-first evidence bez nové datové vrstvy, karta ověření, uzavření korekce, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QJ o převodu lehkého drhnutí po návratu pracovního místa do jedné lokální korekce: vstupní stav, nejbližší místo zásahu, typy korekcí, stop pravidlo, privacy-first kontrola, karta korekce, mini workshop a checklist.
