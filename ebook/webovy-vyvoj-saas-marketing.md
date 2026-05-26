@@ -126189,8 +126189,241 @@ Korekce má přirozený ověřovací okamžik, minimální důkaz a jasné rozho
 
 Ověření lokální korekce je malý moment provozní disciplíny. Tým tím říká: opravujeme konkrétní tření, čekáme na skutečnou práci a po potvrzení uklízíme vlastní stopy. Tak vzniká dokumentace, která se časem zpřesňuje, místo aby kolem sebe hromadila důkazy o každé historické zatáčce.
 
+## Příloha QL: Uzavření potvrzené lokální korekce do běžného pracovního místa
+
+Když se lokální korekce po lehkém drhnutí potvrdí, nesmí zůstat jako poznámka vedle práce. Dokud žije jen v ověřovací kartě, komentáři, chatu nebo v hlavě člověka, který ji provedl, pořád je to dočasná oprava. Běžné pracovní místo se nezlepšilo dostatečně, protože další člověk musí vědět, že existuje ještě nějaká historie.
+
+Cíl této smyčky je:
+
+```text
+Převést potvrzenou lokální korekci do aktuálního pracovního místa a zavřít pomocné stopy po ověření.
+```
+
+Uzavření není další vylepšování. Je to administrativně malý, ale provozně důležitý krok: správná věta, odkaz, příklad nebo hranice se stane součástí normální práce. Všechno, co vzniklo jen kvůli korekci, dostane jasný stav: ponechat jako krátký changelog, sloučit, anonymizovat, smazat nebo otevřít zvlášť.
+
+### Začněte potvrzeným stavem
+
+Do této přílohy patří jen korekce, která v předchozím ověření skončila stavem `Potvrdit`, případně stavem `Doladit jednou větou` nebo `Přesunout` a potom byla znovu potvrzená. Pokud korekce skončila stavem `Znovu otevřít`, neuzavírejte ji do běžného pracovního místa. To by jen zakonzervovalo chybu, o které už víte, že je větší než lokální úprava.
+
+Vstupní věta může znít:
+
+```text
+Lokální korekce odstranila původní zaváhání při přirozeném použití a nezpůsobila novou datovou nebo procesní stopu.
+```
+
+Příklad:
+
+```text
+Korekce:
+Anonymizační hranice byla přesunuta nad první příklad v briefu případové studie.
+
+Výsledek ověření:
+Autor při další případové studii použil roli a segment bez dotazu bokem. Konkrétní název firmy zůstal prázdný do schválení.
+
+Stav:
+Potvrdit.
+```
+
+To je dost. Uzavření nepotřebuje znovu vyprávět celý příběh původního drhnutí. Potřebuje rozhodnout, kam patří potvrzený stav a co po sobě korekce uklidí.
+
+### Přepište místo, kde další člověk skutečně pracuje
+
+Potvrzenou korekci propsat do provozu znamená upravit nejbližší pracovní místo, ne přidat další komentář vedle. Typická místa:
+
+- šablona briefu;
+- rozcestník;
+- checklist;
+- sales karta;
+- support odpověď;
+- runbook;
+- interní formulář;
+- onboardingová trasa;
+- rozhodovací karta;
+- popis stavu v tabulce.
+
+Praktická otázka:
+
+```text
+Kdyby další člověk neviděl ověřovací kartu ani chat, našel by správnou korekci přímo při práci?
+```
+
+Pokud ne, uzavření ještě není hotové. Poznámka typu "nezapomeňte používat novou větu" není uzavření. Je to další zdroj pravdy. Správné uzavření vypadá nudněji: aktuální šablona obsahuje správnou větu, aktuální odkaz má správný název a starý komentář už není potřeba.
+
+Příklad:
+
+```text
+Do briefu případové studie přesunout anonymizační hranici nad první příklad vyplnění. Text hranice neměnit. V marketingovém rozcestníku neměnit nic, protože původní drhnutí vzniklo až uvnitř briefu.
+```
+
+Tahle věta chrání rozsah. Potvrzená korekce se má stát běžnou součástí práce, ne záminkou k přestavbě okolí.
+
+### Zkraťte historii na užitečnou stopu
+
+Během lokální korekce mohly vzniknout tři typy historie:
+
+1. Důvod: proč korekce vznikla.
+2. Důkaz: jak se ověřilo, že pomohla.
+3. Pracovní lešení: poznámky, kopie, komentáře a dočasné úkoly, které už nejsou potřeba.
+
+Po uzavření většinou stačí ponechat jen krátký důvod a výsledek. Pracovní lešení ukliďte. Changelogová věta může být velmi krátká:
+
+```text
+V briefu případové studie byla potvrzená anonymizační hranice přesunuta nad první příklad, aby autor viděl datovou hranici před vyplněním.
+```
+
+To říká dost pro budoucí pochopení. Nepotřebuje jméno autora, konkrétní zákaznický text ani detailní popis zaváhání. Historie má pomáhat dalšímu rozhodnutí, ne nutit každého čtenáře znovu procházet celou operaci.
+
+Codyho komentář: dokumentace často tloustne proto, že se týmy bojí mazat stopy po dobré práci. Jenže dobrá práce nemá zůstávat vidět jako vrstva sedimentu. Má být vidět v tom, že další člověk udělá správný krok bez archeologie.
+
+### Zavřete pomocné stopy po ověření
+
+Seznam pomocných stop projděte hned při uzavření. Hledejte hlavně:
+
+- ověřovací kartu;
+- dočasný úkol;
+- komentář v dokumentu;
+- pracovní kopii šablony;
+- starý screenshot;
+- export;
+- osobní poznámku;
+- odkaz na starou variantu;
+- chatovou instrukci;
+- checklist "ověřit příště".
+
+U každé stopy určete jeden stav:
+
+```text
+Ponechat jako changelog:
+Sloučit do aktuálního pracovního místa:
+Označit jako uzavřené:
+Smazat:
+Anonymizovat:
+Převést do nové samostatné karty:
+```
+
+Nejčastější chyba je ponechat všechno "pro jistotu". Jenže jistota bez účelu se rychle změní v šum. Za měsíc už nikdo neví, která poznámka platí, proč existuje starý screenshot a jestli je chatová instrukce novější než šablona. Uzavření má tuto nejistotu odstranit.
+
+### Privacy-first uzavření korekce
+
+Lokální korekce po lehkém drhnutí se často dotýká hranic dat: anonymizace, schvalování citací, formulářových polí, zákaznických příkladů, support výstupů nebo interních poznámek. Proto uzavření nesmí jen "uklidit dokumentaci". Musí zmenšit datovou stopu.
+
+Privacy-first kontrola:
+
+- Zůstala někde pracovní kopie s osobními nebo zákaznickými údaji?
+- Obsahuje changelog víc detailů, než je nutné pro budoucí rozhodnutí?
+- Dá se příklad přepsat na roli, segment nebo obecnou situaci?
+- Nezůstává starý export jen proto, že se hodil při ověření?
+- Je v aktuálním pracovním místě jasné, kdy data nepoužít, nezapisovat nebo smazat?
+- Víme, kde končí retence pomocné ověřovací poznámky?
+
+Dobrý uzavírací výsledek:
+
+```text
+Aktuální brief obsahuje obecnou anonymizační hranici. Dočasná kopie s konkrétní citací byla smazaná. Changelog neobsahuje jméno zákazníka ani autora.
+```
+
+Špatný uzavírací výsledek:
+
+```text
+Správná věta je v briefu, ale pro jistotu necháváme starý export citací, screenshot vyplnění a chat s konkrétními jmény.
+```
+
+Druhá varianta sice vypadá důkladně, ale nechává za malou korekcí zbytečně velký datový stín. Privacy-first provoz má přesně opačný reflex: ponechat rozhodnutí, ne citlivé lešení.
+
+### Karta uzavření potvrzené lokální korekce
+
+```text
+Pracovní místo:
+Původní lehké drhnutí:
+Potvrzená lokální korekce:
+Stav po ověření:
+Co se propsalo do aktuální práce:
+Kde už korekce nemá zůstávat:
+Changelogová věta:
+Co zavíráme:
+Co mažeme nebo anonymizujeme:
+Co případně otevíráme jako novou kartu:
+Privacy-first výsledek:
+Další návrat:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Brief případové studie.
+
+Původní lehké drhnutí:
+Autor našel anonymizační hranici až po vyplnění příkladu.
+
+Potvrzená lokální korekce:
+Anonymizační hranice byla přesunuta nad první příklad.
+
+Stav po ověření:
+Potvrdit.
+
+Co se propsalo do aktuální práce:
+Brief teď ukazuje anonymizační hranici před prvním místem, kde autor pracuje s citací.
+
+Kde už korekce nemá zůstávat:
+V komentáři dokumentu ani v dočasné ověřovací kartě.
+
+Changelogová věta:
+Přesunuta anonymizační hranice v briefu případové studie před první příklad vyplnění.
+
+Co zavíráme:
+Ověřovací kartu lokální korekce.
+
+Co mažeme nebo anonymizujeme:
+Dočasnou pracovní poznámku s konkrétní zákaznickou citací.
+
+Co případně otevíráme jako novou kartu:
+Nic. Téma veřejného schvalování citací se otevře jen při novém potvrzeném opakování.
+
+Privacy-first výsledek:
+Příští autor vidí datovou hranici dřív a ověřovací stopa neobsahuje osobní ani zákaznické detaily.
+
+Další návrat:
+Jen při běžné kontrole marketingových šablon nebo při novém lehkém drhnutí.
+```
+
+### Mini workshop na 6 minut
+
+Vezměte jednu ověřenou lokální korekci se stavem `Potvrdit`.
+
+1. Napište potvrzený stav jednou větou.
+2. Otevřete aktuální pracovní místo.
+3. Propište korekci přímo do místa, kde další člověk pracuje.
+4. Napište jednu changelogovou větu.
+5. Projděte pomocné stopy a dejte každé jasný stav.
+6. Smažte nebo anonymizujte podklady, které už nemají účel.
+7. Určete, kdy se k tématu vrátit a kdy ho nechat být.
+
+Výstup:
+
+```text
+Potvrzená lokální korekce žije v běžném pracovním místě, pomocné stopy jsou zavřené a datová stopa je menší než během ověření.
+```
+
+### Checklist kapitoly
+
+- Má korekce potvrzený stav z přirozeného použití?
+- Neuzavíráte problém, který měl být znovu otevřen jako širší iterace?
+- Je korekce propsaná přímo do aktuálního pracovního místa?
+- Nepřidali jste druhý zdroj pravdy vedle šablony, checklistu nebo rozcestníku?
+- Stačí další člověk bez ověřovací karty, chatu nebo vysvětlení bokem?
+- Zůstává jen krátká changelogová věta?
+- Jsou dočasné úkoly, komentáře a ověřovací poznámky zavřené?
+- Byly smazané nebo anonymizované pracovní kopie, screenshoty, exporty a citlivé příklady?
+- Neotevíráte nové nápady, které neřeší původní lehké drhnutí?
+- Je další návrat navázaný na běžnou kontrolu nebo nové potvrzené tření?
+- Je výsledná datová stopa menší než během korekce?
+
+Uzavření potvrzené lokální korekce je poslední krok, díky kterému se malá oprava přestane chovat jako událost. Příští člověk nemá poznat, kolik kolem ní bylo poznámek. Má jen otevřít správné pracovní místo, udělat správný krok a nezanechat po sobě víc dat, než práce opravdu potřebuje.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QL o uzavření potvrzené lokální korekce do běžného pracovního místa: potvrzený stav, propsání do aktuální práce, zkrácení historie, úklid pomocných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QK o ověření lokální korekce po lehkém drhnutí: přirozené použití, sledování původního zaváhání, čtyři výsledky ověření, privacy-first evidence bez nové datové vrstvy, karta ověření, uzavření korekce, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QJ o převodu lehkého drhnutí po návratu pracovního místa do jedné lokální korekce: vstupní stav, nejbližší místo zásahu, typy korekcí, stop pravidlo, privacy-first kontrola, karta korekce, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QI o prvním návratu k běžnému pracovnímu místu po uzavřené drobné úpravě: přirozené použití, samostatnost pracovního místa, čtyři výsledky návratu, ochrana před novými nápady v uzavřené smyčce, privacy-first návrat bez nové evidence, návratová karta, mini workshop a checklist.
