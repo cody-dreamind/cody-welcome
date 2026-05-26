@@ -2754,6 +2754,183 @@ Při příštím zkrácení části, která používá exporty nebo poznámky z 
 
 Codyho komentář: stabilizace je nudná jen na papíře. V praxi je to rozdíl mezi rukopisem, který se dá udržovat, a rukopisem, který po každé dobré editaci potichu doroste zpátky. Text se nemá bránit změně. Má si pamatovat, proč změna proběhla.
 
+## Předání stabilizované trasy týmu
+
+Stabilizovaná trasa ještě není hotová pro provoz, pokud o ní ví jen člověk, který ji upravil. U dlouhého rukopisu, playbooku nebo znalostní báze se nejvíc chyb nevrací proto, že by lidé ignorovali pravidla. Často se vrací proto, že nevědí, které pravidlo je teď kanonické, co bylo záměrně zkráceno a kam mají příště sáhnout.
+
+Předání stabilizované trasy je krátký pracovní krok po editaci. Nemá být slavnostní release note ani další dokumentace k dokumentaci. Má odpovědět na tři praktické otázky:
+
+```text
+Co se změnilo?
+Kde teď žije zdroj pravdy?
+Co už nemáme znovu přidávat?
+```
+
+Když tyto tři odpovědi chybí, tým začne stabilizovanou trasu opravovat podle staré paměti. Jeden člověk vrátí delší příklad, druhý přidá lokální checklist, třetí založí novou šablonu pro stejnou situaci. Každý krok vypadá rozumně. Dohromady z nich vznikne nová duplicita.
+
+### Komu trasu předat
+
+Neposílejte změnu všem jen proto, že je rukopis veřejný nebo důležitý. Vyberte lidi podle toho, kdo trasu skutečně používá nebo udržuje:
+
+- editor nebo owner rukopisu;
+- člověk, který podle trasy dělá web, SaaS, marketing nebo provozní rozhodnutí;
+- role, která spravuje kanonické šablony, checklisty nebo rozhodovací log;
+- support, sales nebo delivery tým, pokud se změna dotýká zákaznické komunikace;
+- technický owner, pokud změna upravuje datovou stopu, analytiku, formuláře, exporty nebo oprávnění.
+
+Předání nemá rozšířit publikum zbytečně. U privacy-first provozu je i interní distribuce práce s informacemi. Pokud změna obsahuje poznámky z rozhovorů, ukázky poptávek, support tikety nebo interní rozhodnutí, sdílejte jen agregovaný závěr a odkaz na kanonické místo. Surové podklady nepotřebuje každý, kdo má vědět, že pravidlo platí.
+
+### Co má být ve zprávě
+
+Dobrá předávací zpráva je krátká. Měla by se vejít do jednoho komentáře k issue, poznámky v rozhodovacím logu nebo zprávy v interním kanálu:
+
+```text
+Trasa:
+Co se změnilo:
+Kanonické místo:
+Co se zkrátilo nebo přesunulo:
+Co už neduplikovat:
+Privacy-first dopad:
+Kdy se vrátíme:
+```
+
+Příklad:
+
+```text
+Trasa:
+Úklid po zavedení pracovního pravidla.
+
+Co se změnilo:
+Zkrácené vedlejší části už neobsahují vlastní retenční checklisty. Vedou na jedno kanonické pravidlo.
+
+Kanonické místo:
+Kapitola `Úklid po zavedení pracovního pravidla`.
+
+Co se zkrátilo nebo přesunulo:
+Příklad s dočasným exportem poptávek je jen u kanonického pravidla. Vedlejší části mají krátkou směrovku.
+
+Co už neduplikovat:
+Samostatné retenční tabulky v každé příloze.
+
+Privacy-first dopad:
+Pravidlo pro smazání pracovních exportů zůstává viditelné v trasách, kde export reálně vzniká. Nevzniká nový tracker ani evidence čtenářů.
+
+Kdy se vrátíme:
+Při příští redukci části, která pracuje s formuláři, analytikou nebo exporty.
+```
+
+Taková zpráva není administrativní přítěž. Je to pojistka proti tomu, aby se starý text znovu tvářil jako chybějící práce.
+
+### Oddělte oznámení od diskuse
+
+Předání stabilizované trasy není brainstorming. Pokud po každé editaci otevřete obecnou diskusi o celé struktuře rukopisu, tým se rychle naučí, že žádná změna není hotová. Předávací zpráva má nejdřív oznámit rozhodnutí. Teprve potom může nabídnout jasný způsob, jak hlásit konkrétní chybu.
+
+Použijte jednoduché pravidlo:
+
+- chyba v trase: čtenář nenajde kanonické místo, směrovka je matoucí, chybí důležité privacy-first varování;
+- nový nápad: další kapitola, nová šablona, širší reorganizace, změna tónu nebo další publikační formát.
+
+Chybu opravte v nejbližší malé iteraci. Nový nápad patří do prioritizační fronty nebo karty změny. Nemíchejte je do stejné reakce. Jinak se z předání hotové editace stane další otevřený projekt.
+
+Praktická věta pro předání:
+
+```text
+Tahle trasa je po ověření stabilní. Pokud najdete chybu v nalezení kanonického místa nebo v privacy-first hranici, pošlete konkrétní pracovní situaci. Nové nápady na rozšíření dejte jako samostatnou kartu změny.
+```
+
+### Předání musí aktualizovat pracovní místa
+
+Nestačí poslat zprávu. Pokud tým používá index, rozcestník, issue šablonu, onboardingový materiál nebo interní playbook, upravte právě tam odkaz na kanonické místo. Jinak bude stará trasa dál žít v nástrojích, které lidé používají víc než samotný rukopis.
+
+Zkontrolujte hlavně:
+
+- obsah nebo situační index rukopisu;
+- interní odkazy z příbuzných kapitol;
+- šablony issue, auditů, workshopů a rozhodovacích záznamů;
+- onboardingový materiál pro nové lidi;
+- sales nebo delivery checklisty, pokud používají výřezy z rukopisu;
+- veřejnou landing page, pokud slibuje trasu podle konkrétního problému.
+
+U každého místa se ptejte: když člověk začne tady, najde nové kanonické místo bez znalosti historie? Pokud ne, předání ještě není hotové.
+
+### Privacy-first předání
+
+Při předání stabilizované trasy nešiřte víc podkladů, než je nutné. Tým potřebuje znát rozhodnutí, důvod, kanonické místo a datovou hranici. Nemusí dostat kompletní pracovní export, seznam konkrétních zákaznických poznámek ani interní debatu, pokud k práci stačí anonymizovaný závěr.
+
+Privacy-first předání má tři vrstvy:
+
+1. Veřejná nebo týmová věta: co se změnilo a kde je zdroj pravdy.
+2. Pracovní záznam: proč rozhodnutí vzniklo, jak bylo ověřeno a kdy se vrátí.
+3. Omezený podklad: konkrétní data jen pro role, které je opravdu potřebují, s jasnou retencí.
+
+Pokud si nejste jistí, použijte kratší verzi. Předání má zlepšit práci, ne rozmnožit citlivé poznámky.
+
+Codyho komentář: dobré předání zní skoro podezřele obyčejně. "Tady je nový zdroj pravdy, tohle už neduplikujeme, sem posílejte chyby." Právě proto funguje. Tým nepotřebuje literární rekonstrukci edičního procesu. Potřebuje vědět, kam sáhnout v pondělí ráno.
+
+### Karta předání stabilizované trasy
+
+```text
+Stabilizovaná trasa:
+Komu předáváme:
+Kanonické místo:
+Změněná pracovní místa:
+Co už neduplikovat:
+Jak hlásit chyby:
+Co patří do nové karty změny:
+Privacy-first omezení sdílení:
+Kde je záznam uložený:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizovaná trasa:
+Redukce duplicit u rozhodovacích záznamů po čtecí iteraci.
+
+Komu předáváme:
+Editor rukopisu, marketing owner, člověk připravující workshopové šablony.
+
+Kanonické místo:
+Kapitola `Rozhodovací záznam, který přežije další iteraci`.
+
+Změněná pracovní místa:
+Situační index, šablona karty změny, workshopový checklist.
+
+Co už neduplikovat:
+Samostatné mini šablony rozhodovacího záznamu v každé příloze.
+
+Jak hlásit chyby:
+Konkrétní situace, kde čtenář nenajde zdroj pravdy nebo neví, jak zapsat datovou stopu.
+
+Co patří do nové karty změny:
+Nápady na nový typ rozhodovacího dashboardu nebo rozšíření měsíčního review.
+
+Privacy-first omezení sdílení:
+Neposíláme celé interní poznámky z testování. Stačí agregovaný závěr a anonymizovaný příklad.
+
+Kde je záznam uložený:
+V pracovním logu ediční iterace a v rozhodovacím logu veřejné verze.
+
+Další kontrola:
+Při dalším měsíčním návratu k rozhodnutím.
+```
+
+### Checklist předání stabilizované trasy
+
+- Ví správní lidé, že trasa je stabilizovaná?
+- Je v předání jasné, kde žije kanonické místo?
+- Je napsané, co se zkrátilo, přesunulo nebo už nemá vznikat znovu?
+- Jsou aktualizovaná pracovní místa, odkud lidé trasu skutečně používají?
+- Rozlišuje předání chybu v trase od nového nápadu?
+- Má tým jednoduchý způsob, jak nahlásit konkrétní problém?
+- Neposílají se zbytečně surové poznámky, exporty, poptávky nebo support tikety?
+- Je privacy-first hranice viditelná i pro člověka, který nečetl celou historii editace?
+- Je záznam uložený tam, kde se k němu tým vrátí při další změně?
+- Má trasa další kontrolu jen tehdy, když existuje reálný důvod?
+
+Předání je poslední krok jedné ediční smyčky. Až po něm má smysl říct, že zkrácená trasa opravdu žije v rukopisu, ne jen v hlavě editora. Dobře předaná změna chrání budoucí práci: lidé vědí, co platí, co nemají znovu vyrábět a kdy je oprava chyba, ne pozvánka k dalšímu nekonečnému rozšiřování.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -126943,3 +127120,4 @@ Uzavření potvrzené lokální korekce je poslední krok, díky kterému se mal
 - 2026-05-25: Doplněna Příloha QF o převodu výsledku kontroly tiché rutiny do jedné trvalé drobné úpravy: potvrzené tření, nejbližší pracovní místo, stop pravidlo, privacy-first dopad, karta úpravy, workshop a checklist.
 - 2026-05-26: Doplněna krátká poznámka ke kartě změny, aby uměla zachytit i vědomé rozhodnutí nic teď neměnit.
 - 2026-05-26: Doplněna úvodní podkapitola o zavření karty změny bez úkolu: kdy nic neměnit, jak zapsat návratový signál, privacy-first datovou stopu a checklist zavření.
+- 2026-05-26: Doplněna úvodní podkapitola o předání stabilizované zkrácené trasy týmu: kanonické místo, aktualizace pracovních míst, oddělení chyb od nových nápadů, privacy-first předání, karta a checklist.
