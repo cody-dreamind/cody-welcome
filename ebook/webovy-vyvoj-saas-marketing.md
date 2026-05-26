@@ -127600,8 +127600,203 @@ Ověřená stabilizační úprava je součástí běžného pracovního standard
 
 Uzavření do pracovního standardu je dobré poznat podle toho, že po něm není moc co obdivovat. Správné místo obsahuje správnou větu, staré stopy nepřekážejí, nikdo nemusí držet opravu v hlavě a další člověk udělá práci normálně. To je přesně ten druh nenápadné produktivity, který v provozu šetří nejvíc času.
 
+## Příloha QQ: První kontrola pracovního standardu po uzavřené stabilizační úpravě
+
+Pracovní standard po uzavřené stabilizační úpravě nepotřebuje velký audit. Potřebuje první normální kontrolu, která ověří, že standard opravdu žije v práci a ne jen v pěkně uzavřené kartě. Když se k němu vrátíte moc brzy, budete hodnotit spíš paměť lidí na poslední změnu. Když se k němu nevrátíte vůbec, malá chyba se může znovu usadit jako běžný provozní šum.
+
+Smyslem této kontroly není hledat nová vylepšení. Smyslem je odpovědět na jednoduchou otázku: najde další člověk správné pravidlo, použije ho bez dodatečného vysvětlení a nevznikne kvůli tomu nová zbytečná datová stopa?
+
+Kontrolu dělejte při první přirozené situaci, kdy se standard znovu použije. U webu to může být další úprava stránky, u SaaS další změna formuláře, u marketingu další publikace článku, u interního provozu další předání úkolu nové roli. Pokud musíte kontrolu uměle vytvářet, zmenšete ji na krátký průchod scénářem a jasně napište, že nejde o ostré použití.
+
+### Vraťte se k závěrečné větě
+
+Začněte větou z uzavření stabilizační úpravy. Neotevírejte celý příběh opravy, jen si připomeňte, co mělo po uzavření platit:
+
+```text
+Co je součástí standardu:
+Kde je aktuální zdroj pravdy:
+Jaké původní tření mělo zmizet:
+Jaký návratový signál standard znovu otevře:
+```
+
+Tento návrat chrání kontrolu před rozpliznutím. Bez něj se snadno stane, že člověk začne hodnotit celý proces, celý dokument nebo celou nabídku. To může být užitečné jindy, ale tady kontrolujete jednu uzavřenou stabilizaci.
+
+Příklad:
+
+```text
+Co je součástí standardu:
+Směrovka k retenčnímu pravidlu v edičním checklistu.
+
+Kde je aktuální zdroj pravdy:
+Kapitola o úklidu po zavedení pracovního pravidla.
+
+Původní tření:
+Editor nevěděl, kde hledat kanonické retenční pravidlo.
+
+Návratový signál:
+Vznikne další duplicitní retenční tabulka nebo se někdo znovu zeptá, kde pravidlo platí.
+```
+
+Když se kontrolní situace netýká původního tření, nechte ji být. Nová otázka patří do nové karty změny, ne do kontroly stabilizace.
+
+### Sledujte tři pracovní signály
+
+První kontrola má být lehká. Stačí projít jednu reálnou situaci a sledovat tři signály:
+
+- nalezení: člověk dojde ke správnému pracovnímu místu bez starých odboček;
+- použití: podle standardu udělá rozhodnutí nebo krok bez dodatečného vysvětlování;
+- stopa: nevznikne nový pomocný export, duplicitní dokument, screenshot nebo sledování lidí.
+
+U každého signálu napište jen krátký výsledek. Nehodnoťte výkon člověka. Hodnoťte kvalitu pracovního místa. Pokud někdo standard nepoužil, první otázka není "proč to neudělal správně", ale "odkud pracoval a co mu tam chybělo".
+
+Praktický zápis:
+
+```text
+Nalezení:
+Editor otevřel aktuální checklist z rozcestníku, ne starou poznámku v chatu.
+
+Použití:
+Retenční pravidlo použil bez doplňující otázky.
+
+Stopa:
+Nevznikl nový export ani kopie tabulky; v úkolu zůstala jen krátká poznámka o provedení.
+```
+
+Tři signály stačí. Pokud potřebujete šest metrik a další tabulku, pravděpodobně nekontrolujete standard, ale stavíte nový kontrolní systém. To je jiná práce a má mít vlastní důvod.
+
+### Rozlišujte čtyři výsledky kontroly
+
+Po první kontrole zařaďte standard do jednoho ze čtyř stavů:
+
+- `drží`: standard je nalezený, použitý a nevytváří novou datovou stopu;
+- `drží s drobnou stopou`: standard funguje, ale zůstala malá matoucí odbočka;
+- `drhne`: člověk našel správné místo až po pomoci nebo standard vyžaduje doplňující výklad;
+- `otevřít znovu`: objevil se návratový signál nebo původní tření nezmizelo.
+
+Stav `drží` znamená konec. Není potřeba přidávat další pravidlo o tom, že pravidlo funguje. Stačí krátká poznámka do changelogu nebo karty standardu.
+
+Stav `drží s drobnou stopou` je vhodný pro jednu lokální korekci: přejmenovat odkaz, zavřít starý komentář, odstranit duplicitní větu, doplnit jednu směrovku. Jakmile jsou potřeba dvě a více míst, už nejde o drobnou stopu.
+
+Stav `drhne` znamená, že standard možná není špatně, ale jeho pracovní umístění nebo jazyk ještě není dost samostatný. V takovém případě otevřete malou korekci pracovního místa, ne revizi celého standardu.
+
+Stav `otevřít znovu` použijte jen tehdy, když se vrací původní problém. Tady se nevyplatí hrdinství. Když se stabilizace nepotvrdila, vraťte ji do práce normálně a bez dramatu. Lepší malý návrat než velký rituál, ve kterém všichni předstírají, že standard drží.
+
+### Privacy-first kontrola standardu
+
+První kontrola po uzavření standardu nesmí vytvořit větší datovou stopu než samotný standard. U většiny pracovních pravidel stačí agregovaný nebo anonymní zápis:
+
+- kdo pracoval s rolí nebo funkcí, ne nutně se jménem;
+- jaké pracovní místo použil, ne celý záznam chatu;
+- jestli vznikl nový osobní údaj, export nebo kopie;
+- co se po kontrole s pomocnými podklady stalo;
+- kdy se kontrola zavírá.
+
+Nevkládejte do kontrolní karty zákaznické detaily, celé formulářové odpovědi, screenshoty s osobními údaji ani interní citace, které nejsou nutné pro rozhodnutí. Pokud potřebujete příklad, zkraťte ho na vzor chování:
+
+```text
+Místo:
+Zákazník Novák poslal poptávku na projekt X a v poli Y uvedl...
+
+Pište:
+U jedné nové poptávky vznikla otázka, zda se retenční pravidlo vztahuje i na pracovní export z formuláře.
+```
+
+Privacy-first provoz není jen o výběru nástrojů. Je to i disciplína v malých kontrolách. Když každá kontrola nechá za sebou surové podklady, časem se z dobrého standardu stane skládka důkazů. A skládka důkazů je přesně ten druh produktivity, který na poradě vypadá pracovitě a při incidentu bolí.
+
+### Kontrolní karta pracovního standardu
+
+```text
+Standard:
+Závěrečná věta z uzavření:
+Kontrolovaná pracovní situace:
+Kdo nebo jaká role standard použila:
+Nalezení:
+Použití:
+Datová stopa:
+Výsledek kontroly:
+Drobná korekce, pokud existuje:
+Co se maže nebo zavírá:
+Návratový signál:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Směrovka k retenčnímu pravidlu v edičním checklistu.
+
+Závěrečná věta z uzavření:
+Směrovka je součástí běžného edičního checklistu a znovu ji otevřeme jen při další duplicitní retenční tabulce.
+
+Kontrolovaná pracovní situace:
+Úprava kapitoly s příkladem formulářového exportu.
+
+Kdo nebo jaká role standard použila:
+Editor veřejné verze.
+
+Nalezení:
+Správné pravidlo našel přes checklist bez hledání ve starém vlákně.
+
+Použití:
+Rozhodl, že surový export do rukopisu nepatří, a použil anonymizovaný popis.
+
+Datová stopa:
+Nevznikla nová kopie exportu; do úkolu se zapsala jen anonymní kontrolní věta.
+
+Výsledek kontroly:
+Drží.
+
+Drobná korekce:
+Žádná.
+
+Co se maže nebo zavírá:
+Zavřen dočasný komentář z předchozí kontroly.
+
+Návratový signál:
+Duplicitní retenční pravidlo nebo další dotaz na stejné místo.
+
+Další kontrola:
+Žádná samostatná; standard se vrací do běžného rytmu údržby.
+```
+
+### Mini workshop na 6 minut
+
+Vezměte jeden pracovní standard, který vznikl z uzavřené stabilizační úpravy.
+
+1. Najděte jeho závěrečnou větu.
+2. Vyberte první skutečnou pracovní situaci, kde se znovu použil.
+3. Zapište signály nalezení, použití a datové stopy.
+4. Zařaďte výsledek do jednoho ze čtyř stavů.
+5. Pokud je potřeba drobná korekce, popište ji jednou větou.
+6. Smažte nebo zavřete pomocné podklady, které už nejsou potřeba.
+
+Výstup:
+
+```text
+Standard po stabilizaci buď drží a vrací se do běžného rytmu, nebo má jednu jasně pojmenovanou drobnou korekci. Kontrola nepřidala novou sledovací vrstvu.
+```
+
+### Checklist kapitoly
+
+- Kontrolujete standard při první přirozené pracovní situaci?
+- Vrátili jste se k závěrečné větě místo k celé historii opravy?
+- Týká se kontrola původního tření, ne nové ambice?
+- Sledujete nalezení, použití a datovou stopu?
+- Hodnotíte pracovní místo, ne výkon konkrétního člověka?
+- Umíte výsledek zařadit jako `drží`, `drží s drobnou stopou`, `drhne` nebo `otevřít znovu`?
+- Je případná korekce opravdu jen lokální a jednovětá?
+- Nepřidali jste kvůli kontrole nový tracker, dashboard, export nebo osobní evidenci?
+- Jsou pomocné podklady po kontrole zavřené, smazané nebo anonymizované?
+- Zůstává jen krátký zápis, který pomůže budoucímu rozhodnutí?
+- Je návratový signál pořád konkrétní?
+- Pokud standard drží, umíte kontrolu opravdu ukončit?
+
+První kontrola pracovního standardu má být klidná. Je to krátké ověření, že drobná stabilizace už nemusí být vidět, protože správná práce proběhne bez ní. Když standard drží, nechte ho pracovat. Když drhne, opravte nejbližší pracovní místo. A když se vrací původní problém, otevřete ho poctivě znovu. Žádná velká magie, jen provozní hygiena bez zbytečného šmírování.
+
 ## Pracovní log
 
+- 2026-05-26: Doplněna Příloha QQ o první kontrole pracovního standardu po uzavřené stabilizační úpravě: návrat k závěrečné větě, signály nalezení, použití a datové stopy, čtyři výsledky kontroly, privacy-first evidence, kontrolní karta, mini workshop a checklist.
 - 2026-05-26: Doplněna úvodní podkapitola o první zpětné vazbě po předání trasy: ověření v reálné pracovní situaci, zápis tření, čtyři výsledky zpětné vazby, privacy-first evidence, karta a checklist.
 - 2026-05-26: Doplněna Příloha QP o uzavření ověřené stabilizační úpravy do pracovního standardu: závěrečná věta, aktualizace zdroje pravdy, úklid pomocných stop, oddělení nové ambice od standardu, karta uzavření, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QO o ověření stabilizační úpravy při dalším běžném průchodu: návrat ke stabilizační větě, přirozený průchod, signály výsledku, samostatnosti a datové stopy, čtyři výsledky ověření, krátká ověřovací stopa, privacy-first kontrola, mini workshop a checklist.
