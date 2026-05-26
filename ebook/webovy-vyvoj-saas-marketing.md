@@ -316,6 +316,77 @@ Pokud se karta nevejde na jednu obrazovku, zkraťte změnu, ne písmo. Smyslem r
 
 Kartu změny použijte i tehdy, když se nakonec rozhodnete nic neměnit. Zapište, proč je lepší současný stav ponechat, jaký signál by rozhodnutí znovu otevřel a kdy se k tématu vrátíte. Vědomé "teď ne" je pořád lepší výstup než tichý nápad, který se za měsíc vrátí jako nejasný dluh.
 
+## Kdy kartu zavřít bez úkolu
+
+Ne každá karta změny si zaslouží první úkol. To není selhání. Je to známka toho, že tým umí oddělit nápad od práce. Rukopis má pomáhat k lepším rozhodnutím, ne k tomu, aby se každá přečtená věta automaticky proměnila v položku backlogu.
+
+Kartu zavřete bez úkolu ve chvíli, kdy je současný stav vědomě lepší než změna. Typicky proto, že problém není dost bolestivý, ověření by stálo víc než přínos, změna by otevřela moc široký rozsah, nebo by kvůli ní vznikla zbytečná datová stopa. Důležité je kartu opravdu zavřít, ne ji nechat viset v neurčitém stavu "někdy".
+
+Rozhodnutí bez úkolu má mít stejnou disciplínu jako rozhodnutí se změnou:
+
+```text
+Karta:
+Rozhodnutí:
+Proč teď nic neměníme:
+Jaký signál rozhodnutí znovu otevře:
+Kdy se vrátíme:
+Kdo drží kontext:
+Datová stopa:
+```
+
+Příklad po čtení části o privacy-first analytice:
+
+```text
+Karta:
+Zvážit detailnější měření čtení landing page.
+
+Rozhodnutí:
+Teď nepřidáváme scroll tracking ani heatmapu.
+
+Proč teď nic neměníme:
+Potřebujeme nejdřív ověřit, jestli problém vůbec leží v obsahu stránky. Z obchodních rozhovorů zatím víme hlavně to, že lidé nerozumí rozdílu mezi auditem a dlouhodobou spoluprací.
+
+Jaký signál rozhodnutí znovu otevře:
+Pokud po úpravě vysvětlení nabídky zůstanou tři po sobě jdoucí kvalitní poptávky zmatené ve stejné části stránky.
+
+Kdy se vrátíme:
+Po deseti nových relevantních poptávkách nebo za 30 dní.
+
+Kdo drží kontext:
+Marketing owner.
+
+Datová stopa:
+Nevzniká nový event, cookies, externí skript ani export. Pracujeme jen s existujícími poptávkami a ruční poznámkou ze sales review.
+```
+
+Tento typ zavření je praktický hlavně u lákavých optimalizací. Čím snáz se změna prodává jako "jen drobnost", tím víc stojí za to napsat, proč ji teď nedělat. Drobný tracker, další formulářové pole, nový SaaS nástroj nebo nový interní dokument se často netváří jako velké rozhodnutí. Přesto zvyšují provozní a datovou cenu systému.
+
+### Čtyři dobré důvody pro zavření
+
+První důvod je slabý signál. Pokud nikdo neumí ukázat konkrétní problém, zákaznickou otázku, provozní tření nebo obchodní dopad, karta zatím patří do poznámek, ne do práce.
+
+Druhý důvod je špatné načasování. Některé změny dávají smysl, ale ne před spuštěním kampaně, během incidentu, uprostřed migrace nebo těsně před předáním nové roli. V takové chvíli zapište návratový signál a nechte tým dokončit rozpracovaný cyklus.
+
+Třetí důvod je nepřiměřená datová cena. Pokud ověření vyžaduje nový sledovací skript, delší retenci, práci s citlivějšími daty nebo předání dalšímu dodavateli, musí být přínos výrazně jasnější než u změny, která pracuje s existujícími signály.
+
+Čtvrtý důvod je kolize s jiným rozhodnutím. Karta může být dobrá sama o sobě, ale špatná ve vztahu k aktuální strategii. Například detailní lead scoring nedává smysl ve chvíli, kdy tým záměrně zjednodušuje poptávkový tok a chce mít méně kvalifikace před prvním rozhovorem.
+
+Codyho komentář: zavřená karta není prohra. Prohra je tichý backlog, kde každý nápad čeká na "až bude čas". Čas nebude. Bude jen další pondělí, další schůzka a další pocit, že někde něco dlužíme. Zavřít kartu férově je jedna z nejlevnějších forem produktivity.
+
+### Checklist zavření bez úkolu
+
+- Je jasně napsané, že se teď nic nemění?
+- Je důvod konkrétnější než "není čas"?
+- Víme, jaký signál rozhodnutí znovu otevře?
+- Má karta datum nebo podmínku návratu?
+- Drží někdo kontext, nebo se karta může bezpečně archivovat?
+- Nevzniká kvůli zavření žádný nový tracker, export ani dodavatel?
+- Je zapsané, jestli současný stav ponechává nějaké riziko?
+- Je karta uložená tam, kde ji tým najde při dalším review?
+- Není karta jen odložený projekt bez odvahy říct "ne"?
+
+Když kartu zavřete bez úkolu, udělejte ještě jednu malou věc: odstraňte z okolních poznámek formulace, které naznačují, že změna pořád platí. Jinak se rozhodnutí vrátí zadními dveřmi. Ne jako promyšlená práce, ale jako nejasná připomínka, kterou bude muset někdo znovu vysvětlovat.
+
 ## První úkol z karty změny
 
 Karta změny je dobrý mezikrok, ale sama ještě nic nezmění. Aby rukopis nezůstal jen u přemýšlení, převeďte kartu do prvního úkolu během stejné pracovní chvíle. Ne až "někdy na plánování". Ne až po dalším čtení. Hned po uzavření karty vznikne jeden úkol, který má výsledek, vlastníka, hranici a termín ověření.
@@ -126638,3 +126709,4 @@ Ověření lokální korekce je malý moment provozní disciplíny. Tým tím ř
 - 2026-05-25: Doplněna úvodní podkapitola o stabilizaci zkrácené čtenářské trasy po ověření: stavy trasy, kanonické místo, navigační opravy, privacy-first stabilizace, karta a checklist.
 - 2026-05-25: Doplněna Příloha QF o převodu výsledku kontroly tiché rutiny do jedné trvalé drobné úpravy: potvrzené tření, nejbližší pracovní místo, stop pravidlo, privacy-first dopad, karta úpravy, workshop a checklist.
 - 2026-05-26: Doplněna krátká poznámka ke kartě změny, aby uměla zachytit i vědomé rozhodnutí nic teď neměnit.
+- 2026-05-26: Doplněna úvodní podkapitola o zavření karty změny bez úkolu: kdy nic neměnit, jak zapsat návratový signál, privacy-first datovou stopu a checklist zavření.
