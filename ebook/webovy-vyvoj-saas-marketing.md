@@ -133162,8 +133162,224 @@ Nález z prvního návratu je převedený do jedné minimální opravy. Víme, k
 
 Minimální oprava po návratu je dobrá právě tím, že je trochu nudná. Nemá ohromit tým novou metodikou. Má odstranit jednu překážku, snížit jednu zbytečnou stopu a nechat čistý pracovní stav pokračovat bez další vrstvy hluku.
 
+## Příloha RO: Ověření minimální opravy při dalším běžném použití
+
+Minimální oprava je hotová až ve chvíli, kdy projde dalším běžným použitím. Ne když se přepíše odkaz, doplní věta nebo smaže starý screenshot. Tyto kroky jsou jen zásah. Ověření ukáže, jestli zásah opravdu odstranil tření a zároveň nevytvořil novou vrstvu práce, kterou bude tým za týden znovu uklízet.
+
+Tato příloha navazuje na kartu minimální opravy. Neotevírá novou revizi čistého pracovního stavu a neslouží k hledání dalších nápadů. Řeší jednu otázku:
+
+```text
+Drží minimální oprava při dalším běžném použití bez ruční pomoci, nové objížďky a zbytečné datové stopy?
+```
+
+Odpověď má být krátká. Buď oprava funguje a může se uzavřít, nebo potřebuje drobné dotažení, nebo ukázala, že problém je větší než minimální zásah. Všechny tři výsledky jsou v pořádku. Špatně je jen předstírat, že ověření proběhlo, když se vlastně nikdo nepokusil pracovat po opravené cestě.
+
+### Ověřujte stejnou pracovní situaci
+
+Další běžné použití má být co nejbližší situaci, ve které nález vznikl. Pokud se problém objevil při přípravě briefu, ověřujte další brief. Pokud šlo o cestu k checklistu, ověřujte cestu k checklistu. Pokud šlo o zbytečný export, sledujte, jestli člověk umí práci dokončit bez nového exportu.
+
+Nevhodné ověření:
+
+- vlastník si opravu sám prokliká a prohlásí ji za hotovou;
+- tým projde dokument na poradě bez reálného úkolu;
+- ověření se provede přes přímý odkaz, který obchází opravenou navigaci;
+- místo původní situace se testuje jiný proces, protože je zrovna po ruce;
+- k ověření se přidá nový dotazník, tabulka nebo sledování lidí.
+
+Vhodné ověření:
+
+- editor začne nový brief běžnou cestou přes rozcestník;
+- obchodník použije upravenou kvalifikační větu při skutečném hovoru;
+- support odpoví podle aktuální šablony bez hledání staré kopie;
+- produktový vlastník otevře provozní list přes běžný index;
+- člověk dokončí úkol bez toho, aby se vracel do chatu pro starý kontext.
+
+Ověření má chránit realitu, ne vyrábět laboratorní divadlo. Když se oprava dá potvrdit jen ve speciálně připravených podmínkách, ještě není provozně potvrzená.
+
+### Sledujte tři signály opravy
+
+První signál je nalezení. Člověk má narazit na opravené pracovní místo přirozeně. Pokud stále potřebuje ruční odkaz, oprava cesty není ověřená. Pokud najde starou kopii dřív než aktuální zdroj pravdy, problém žije dál.
+
+Druhý signál je samostatnost. Člověk má podle opraveného místa dokončit práci bez znalosti původního nálezu. Pokud se ptá na jednu drobnost, může stačit doladění. Pokud potřebuje vysvětlit celý kontext, minimální oprava byla možná příliš malá nebo mířila na špatné místo.
+
+Třetí signál je stopa. Po použití nemá vzniknout nová kopie, screenshot, export, přístup nebo pomocná evidence jen proto, aby si tým práci pojistil. Když oprava snižuje tření, ale zvyšuje datovou stopu, není to čisté vítězství.
+
+Krátká ověřovací poznámka:
+
+```text
+Opravené místo:
+
+Použití:
+Stejná situace / podobná situace / jiná situace
+
+Nalezení:
+Bez pomoci / s ručním odkazem / přes starou stopu
+
+Samostatnost:
+Dokončeno / dokončeno s drobným dotazem / bez pomoci nešlo dokončit
+
+Stopa:
+Beze změny / vznikla pracovní poznámka / vznikla nová datová nebo přístupová stopa
+```
+
+Pět řádků stačí. Pokud je potřeba dlouhý zápis, ověřujete víc než minimální opravu.
+
+### Rozhodněte jedním ze čtyř stavů
+
+`Potvrdit` znamená, že oprava prošla stejnou pracovní situací: člověk našel správné místo, dokončil práci a nevznikla nová zbytečná stopa. Zapište potvrzení a připravte uzavření opravy.
+
+`Doladit jednou větou` znamená, že směr je správný, ale chybí drobná opora. Typicky lepší název, krátké omezení rozsahu, příklad nebo vysvětlení stavu. Dolaďte jen nejbližší místo a určete další přirozené použití.
+
+`Opravit cestu` znamená, že obsah nebo opora fungují, ale člověk se k nim pořád nedostane běžnou cestou. Vraťte se k odkazu, indexu, názvu, archivní kopii nebo pinned poznámce. Nepřepisujte obsah, když selhala navigace.
+
+`Otevřít novou změnu` znamená, že ověření ukázalo větší problém: jiný pracovní cíl, nejasnou odpovědnost, chybějící rozhodovací pravidlo, nový typ dat nebo opakované ruční obcházení. V takové chvíli minimální opravu nezvětšujte. Zavřete ji jako nedostatečnou pro nový problém a založte samostatnou kartu.
+
+Příklad:
+
+```text
+Výsledek:
+Doladit jednou větou.
+
+Důvod:
+Editor našel správný brief, ale nebylo jasné, kdy použít krátkou verzi pro interní referenci.
+
+Další krok:
+Do rozcestníku doplnit jednu větu: "Krátkou verzi použijte jen pro interní sales follow-up, ne pro veřejnou case study."
+
+Co se nemění:
+Struktura briefu, schvalování, měření článku ani role vlastníka.
+```
+
+Tohle je pořád minimální práce. Jakmile by další krok zněl "připravit nový systém verzí briefu", už nejste v ověření opravy, ale v nové změně.
+
+### Privacy-first ověření bez nového dozoru
+
+Ověření minimální opravy nesmí být záminka k zavedení sledování lidí. Není potřeba vědět, kolikrát kdo otevřel dokument, jak dlouho v něm byl ani jakou cestou pohyboval kurzorem. Potřebujete vědět, jestli konkrétní pracovní situace proběhla lépe.
+
+Stačí:
+
+- krátká poznámka od člověka, který úkol dělal;
+- ruční kontrola, že běžná cesta vede na aktuální místo;
+- potvrzení, že stará kopie nebo export nebyly použity;
+- obecný závěr bez jmen zákazníků, osobních detailů a interních citací;
+- rozhodnutí, zda opravu potvrdit, doladit, vrátit na cestu nebo převést do nové změny.
+
+Není potřeba:
+
+- nový analytický event;
+- nahrávání obrazovky;
+- detailní log chování člověka;
+- další formulář pro interní použití šablony;
+- uchovávání starých screenshotů "pro jistotu".
+
+Privacy-first ověření je malé a lidské. Jeho síla není v množství důkazů, ale v tom, že odpovídá na správnou otázku bez přidání nové datové zátěže.
+
+### Karta ověření minimální opravy
+
+Použijte ji jen pro jednu opravu a jedno běžné použití. Pokud se během ověření objeví další nápady, zapište je mimo tuto kartu nebo je rovnou odložte.
+
+```text
+Minimální oprava:
+
+Původní nález:
+
+Ověřovací situace:
+
+Nalezení:
+Bez pomoci / s ručním odkazem / přes starou stopu
+
+Samostatnost:
+Dokončeno / drobný dotaz / bez pomoci nešlo dokončit
+
+Stopa:
+Beze změny / pracovní poznámka / nová datová nebo přístupová stopa
+
+Výsledek:
+Potvrdit / doladit jednou větou / opravit cestu / otevřít novou změnu
+
+Další krok:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first poznámka:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Minimální oprava:
+V redakčním rozcestníku zůstal jen aktuální odkaz na brief a archivní varianta je označená jako neaktuální.
+
+Původní nález:
+Editor našel aktuální šablonu až přes starou zprávu v chatu.
+
+Ověřovací situace:
+Příprava dalšího briefu pro veřejný článek.
+
+Nalezení:
+Bez pomoci.
+
+Samostatnost:
+Dokončeno s drobným dotazem.
+
+Stopa:
+Beze změny.
+
+Výsledek:
+Doladit jednou větou.
+
+Další krok:
+Do rozcestníku doplnit větu, kdy použít krátkou interní variantu briefu.
+
+Co teď vědomě neotevíráme:
+Neměníme strukturu case study, SEO šablonu ani schvalovací proces.
+
+Privacy-first poznámka:
+Nevznikl nový screenshot ani export. Ověření zapisujeme obecně bez detailů konkrétního zákazníka.
+
+Vlastník a datum:
+Editor veřejné edice, 2026-05-27.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete kartu jedné minimální opravy.
+2. Najděte nejbližší stejné nebo velmi podobné běžné použití.
+3. Nechte člověka pracovat běžnou cestou, ne přes ruční zkratku.
+4. Zapište nalezení, samostatnost a stopu.
+5. Vyberte jeden ze čtyř výsledků.
+6. Pokud stačí doladění, napište jednu větu a určete další přirozené použití.
+7. Pokud problém přesahuje opravu, založte samostatnou kartu.
+8. Nechte v záznamu jen obecný závěr a ukliďte pomocné stopy.
+
+Výstup workshopu:
+
+```text
+Minimální oprava je ověřená v běžné práci. Víme, jestli ji potvrdit, doladit, vrátit k opravě cesty nebo oddělit jako novou změnu. Ověření nepřidalo nové sledování ani zbytečnou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme stejnou nebo velmi podobnou pracovní situaci?
+- Člověk šel běžnou cestou, ne přes ruční zkratku?
+- Víme, jestli našel aktuální místo bez pomoci?
+- Víme, jestli dokázal práci dokončit samostatně?
+- Nevznikla nová kopie, screenshot, export, tabulka nebo přístup?
+- Rozhodli jsme jedním ze čtyř stavů?
+- Pokud stačí doladění, je to opravdu jedna věta nebo nejmenší opora?
+- Pokud selhala cesta, opravujeme cestu místo obsahu?
+- Pokud se objevil větší problém, dostal vlastní kartu?
+- Je zapsané, co teď vědomě neotevíráme?
+- Nezavedli jsme kvůli ověření nový tracker, dohled nebo formulář?
+- Zůstává záznam obecný a bez zbytečných osobních nebo zákaznických detailů?
+
+Dobré ověření minimální opravy má skoro zmizet. Po jeho dokončení má pracovní místo fungovat normálně, bez vysvětlování a bez další vrstvy evidence. Když se tým přistihne, že kolem malé opravy staví nový proces, je čas ubrat. Malá oprava má čistit cestu, ne si na ní postavit vlastní kancelář.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RO o ověření minimální opravy při dalším běžném použití: stejná pracovní situace, signály nalezení, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first ověření bez nového dozoru, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RN o převodu nálezu z prvního návratu k čistému pracovnímu stavu do jedné minimální opravy: třídění nálezu na cestu, oporu nebo stopu, opravná věta, zásah v nejbližším pracovním místě, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RL o uzavření ověřené servisní poznámky do čistého pracovního stavu: práce se stavem z ověření, zásah v aktuálním pracovním místě, oddělení nových nápadů, privacy-first úklid starých stop, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RK o ověření servisní poznámky při dalším návratovém signálu: návrat k původnímu signálu, rozlišení stejného, podobného a nového nálezu, čtyři rozhodovací stavy, nejmenší korekce, privacy-first evidence, karta, mini workshop a checklist.
