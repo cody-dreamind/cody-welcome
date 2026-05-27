@@ -133377,8 +133377,223 @@ Minimální oprava je ověřená v běžné práci. Víme, jestli ji potvrdit, d
 
 Dobré ověření minimální opravy má skoro zmizet. Po jeho dokončení má pracovní místo fungovat normálně, bez vysvětlování a bez další vrstvy evidence. Když se tým přistihne, že kolem malé opravy staví nový proces, je čas ubrat. Malá oprava má čistit cestu, ne si na ní postavit vlastní kancelář.
 
+## Příloha RP: Uzavření potvrzené minimální opravy do stabilního pracovního stavu
+
+Potvrzená minimální oprava ještě není stabilní pracovní stav. Je to důkaz, že malý zásah pomohl v jednom běžném použití. Stabilní stav vznikne až ve chvíli, kdy je jasné, kde aktuální pravidlo bydlí, co se stalo se starou stopou a kdy se k tématu znovu vrátit. Bez uzavření zůstane v týmu tichá nejistota: oprava možná funguje, ale nikdo přesně neví, jestli už je hlavní cestou.
+
+Tato příloha navazuje na ověření minimální opravy. Neřeší nové nápady, nerozšiřuje rozsah a nepřepisuje celý standard. Řeší jednu otázku:
+
+```text
+Jak z potvrzené minimální opravy uděláme normální pracovní stav, který nepotřebuje další vysvětlování?
+```
+
+Uzavření má být menší než samotná oprava. Když po potvrzení malé věty vznikne velký úklidový projekt, je to signál, že se pod povrchem skrývá širší problém. Ten může být legitimní, ale nepatří do této karty.
+
+### Začněte výsledkem ověření
+
+Nezačínejte tím, co by ještě šlo zlepšit. Začněte větou z ověřovací karty:
+
+```text
+Oprava je potvrzená, protože člověk v běžné situaci našel správné místo, dokončil práci a nevznikla nová zbytečná stopa.
+```
+
+Pokud tato věta nejde napsat, oprava není připravená k uzavření. Možná potřebuje doladit jednou větou, opravit cestu nebo převést do nové změny. Uzavření je až poslední krok, ne náhrada za ověření.
+
+Praktický test:
+
+- víme, jaká původní potíž se řešila;
+- víme, kde přesně byla minimální oprava provedena;
+- máme jedno běžné použití, ve kterém oprava obstála;
+- víme, že nevznikla nová kopie, export, tabulka nebo přístup;
+- víme, co teď vědomě neotevíráme.
+
+Těchto pět bodů je brána. Pokud některý chybí, vraťte se o krok zpět. Stabilní pracovní stav nemá stát na dojmu, že "už je to asi dobré".
+
+### Přepište aktuální stav, ne historii
+
+Uzavření minimální opravy má aktualizovat aktuální pracovní místo. Nemá vyprávět celou historii nálezu, opravy a ověření. Historie patří do karty nebo pracovního logu. Člověk, který přijde za měsíc, potřebuje vědět, jak má pracovat teď.
+
+Špatný stabilní zápis:
+
+```text
+Po problému, kdy editor našel starou šablonu přes chat, jsme doplnili větu do rozcestníku a ověřili ji při dalším briefu.
+```
+
+Lepší stabilní zápis:
+
+```text
+Pro nový veřejný článek začněte vždy v aktuálním redakčním rozcestníku. Archivní briefy slouží jen pro dohledání historie, ne jako výchozí šablona.
+```
+
+Rozdíl je praktický. První text vysvětluje minulost. Druhý řídí budoucí práci.
+
+Při uzavření proto oddělte tři místa:
+
+- aktuální pracovní místo obsahuje jen platné pravidlo;
+- karta opravy obsahuje důvod, ověření a uzavření;
+- pracovní log obsahuje stručnou stopu, že iterace proběhla.
+
+Když se všechno nalije do hlavního pracovního místa, čtenář musí při každém použití znovu procházet archeologii. To je přesný opak stabilizace.
+
+### Zavřete starou stopu viditelně
+
+Minimální opravy často selhávají ne proto, že by byly špatné, ale proto, že stará cesta zůstane dostupnější než nová. Starý odkaz v chatu, neoznačená kopie dokumentu, export v interní složce nebo připnutá poznámka dokážou přežít i sebelepší opravu.
+
+Po potvrzení opravy projděte jen stopy, které souvisejí s původním nálezem:
+
+- starou kopii označte jako archiv nebo ji smažte, pokud nemá retenční důvod;
+- starý odkaz nahraďte kanonickým odkazem tam, kde ho lidé opravdu používají;
+- do rozcestníku doplňte aktuální název, pokud starý název vedl k omylu;
+- pomocný screenshot nebo export smažte, pokud už neslouží právnímu, účetnímu nebo provoznímu účelu;
+- do karty napište, co zůstává záměrně, aby to později někdo znovu neuklízel.
+
+Nevytvářejte přitom plošný audit. Hledáte jen starou stopu, která by mohla zrušit efekt opravy. Pokud během úklidu najdete širší nepořádek, zapište ho jako samostatný návratový signál.
+
+### Nastavte návratový signál místo další kontroly
+
+Po potvrzení malé opravy není potřeba plánovat další schůzku jen proto, aby se tým ujistil, že věta stále existuje. Lepší je nastavit návratový signál: konkrétní situaci, kdy se k tématu má smysl vrátit.
+
+Dobré návratové signály:
+
+- někdo znovu použije archivní šablonu jako aktuální;
+- člověk nedokáže najít pracovní místo běžnou cestou;
+- opravená věta začne být v rozporu s novým procesem;
+- kvůli opravě vznikne nová pomocná kopie nebo export;
+- stejný dotaz se objeví při dvou dalších běžných použitích.
+
+Slabé návratové signály:
+
+- "zkontrolovat za týden";
+- "podívat se na to někdy";
+- "možná by se dalo vylepšit";
+- "až budeme mít čas";
+- "až se bude dělat větší revize".
+
+Návratový signál chrání pozornost. Říká týmu, že téma není ignorované, ale ani zbytečně otevřené. Stabilní stav má být klidný, dokud realita neukáže jinak.
+
+### Privacy-first uzavření potvrzené opravy
+
+Privacy-first uzavření znamená, že po opravě zůstane méně zbytečných dat, ne víc. Karta opravy může obsahovat pracovní závěr, ale nemá skladovat osobní detaily, zákaznické citace, interní screenshoty nebo jména lidí, pokud nejsou nutná pro vlastnictví.
+
+Ponechte:
+
+- obecný popis původního tření;
+- místo opravy;
+- výsledek ověření;
+- závěrečnou větu aktuálního stavu;
+- návratový signál;
+- vlastníka a datum.
+
+Odstraňte nebo zkraťte:
+
+- pomocné screenshoty;
+- pracovní exporty;
+- konkrétní zákaznické údaje;
+- chatové citace, které jen dokládaly problém;
+- duplicitní kopie starých šablon;
+- dočasné přístupy vytvořené kvůli ověření.
+
+*Codyho komentář:* Malá oprava je dobrá chvíle pro malý úklid dat. Ne proto, že by každá poznámka byla nebezpečná, ale protože neudržovaná hromada "jen pro jistotu" časem začne řídit práci víc než aktuální zdroj pravdy.
+
+### Karta uzavření potvrzené minimální opravy
+
+Použijte ji po výsledku `Potvrdit`. Pokud výsledek ověření byl jiný, karta uzavření se nepoužívá.
+
+```text
+Minimální oprava:
+
+Původní nález:
+
+Výsledek ověření:
+Potvrzeno v běžném použití dne:
+
+Aktuální pracovní věta:
+
+Kanonické místo:
+
+Stará stopa:
+Smazána / označena jako archiv / nahrazena odkazem / ponechána z důvodu:
+
+Návratový signál:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first uzavření:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Minimální oprava:
+V redakčním rozcestníku je aktuální brief uveden jako jediný výchozí odkaz. Archivní varianta je označená jako historie.
+
+Původní nález:
+Editor při přípravě článku našel starý brief přes chat a nebylo jasné, která verze je platná.
+
+Výsledek ověření:
+Potvrzeno v běžném použití dne 2026-05-27.
+
+Aktuální pracovní věta:
+Nový veřejný článek začíná vždy v aktuálním redakčním rozcestníku. Archivní briefy slouží jen pro dohledání historie.
+
+Kanonické místo:
+Redakční rozcestník pro veřejný obsah.
+
+Stará stopa:
+Stará kopie označena jako archiv. Pomocný screenshot z ověření smazán.
+
+Návratový signál:
+Téma otevřít znovu jen tehdy, když někdo použije archivní brief jako výchozí šablonu nebo nenajde aktuální brief běžnou cestou.
+
+Co teď vědomě neotevíráme:
+Neměníme strukturu briefu, schvalování článků ani SEO checklist.
+
+Privacy-first uzavření:
+Karta neobsahuje jména zákazníků ani citace z chatu. Zůstává jen obecný popis tření a závěr.
+
+Vlastník a datum:
+Editor veřejné edice, 2026-05-27.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete kartu ověření minimální opravy s výsledkem `Potvrdit`.
+2. Napište jednu aktuální pracovní větu pro budoucí použití.
+3. Určete kanonické místo, kde tato věta má bydlet.
+4. Najděte starou stopu, která by mohla opravu obejít.
+5. Smažte, označte nebo nahraďte jen tuto stopu.
+6. Napište konkrétní návratový signál.
+7. Zkraťte kartu tak, aby neobsahovala zbytečné osobní nebo zákaznické detaily.
+8. Zapište uzavření do pracovního logu.
+
+Výstup workshopu:
+
+```text
+Potvrzená minimální oprava je uzavřená jako stabilní pracovní stav. Aktuální pravidlo bydlí v kanonickém místě, stará stopa už nevede lidi špatně a další návrat má konkrétní signál místo automatické kontroly.
+```
+
+### Checklist kapitoly
+
+- Navazujeme jen na opravu s výsledkem `Potvrdit`?
+- Umíme jednou větou říct, proč byla oprava potvrzená?
+- Přepisujeme aktuální stav místo historie problému?
+- Je jasné kanonické místo, kde pravidlo bydlí?
+- Nezanesli jsme do hlavního pracovního místa dlouhé vysvětlení minulosti?
+- Prošli jsme jen starou stopu související s původním nálezem?
+- Smazali, označili nebo nahradili jsme starou cestu, která by mohla opravu obejít?
+- Máme konkrétní návratový signál místo obecné další kontroly?
+- Je zapsané, co teď vědomě neotevíráme?
+- Nevznikl kvůli uzavření nový audit, tabulka nebo sledování lidí?
+- Karta neobsahuje zbytečné osobní údaje, zákaznické detaily ani chatové citace?
+- Pracovní log má stručný záznam o hotové iteraci?
+
+Uzavření potvrzené minimální opravy je malý akt disciplíny. Tým tím říká: tahle věc už funguje, víme kde žije, víme kdy se k ní vrátit a nebudeme kolem ní stavět další proces. To je udržitelnost v praxi. Ne velká prezentace, ale čisté pracovní místo, které příště nikoho nezdrží.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RP o uzavření potvrzené minimální opravy do stabilního pracovního stavu: práce s výsledkem ověření, aktuální pracovní věta, staré stopy, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RO o ověření minimální opravy při dalším běžném použití: stejná pracovní situace, signály nalezení, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first ověření bez nového dozoru, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RN o převodu nálezu z prvního návratu k čistému pracovnímu stavu do jedné minimální opravy: třídění nálezu na cestu, oporu nebo stopu, opravná věta, zásah v nejbližším pracovním místě, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RL o uzavření ověřené servisní poznámky do čistého pracovního stavu: práce se stavem z ověření, zásah v aktuálním pracovním místě, oddělení nových nápadů, privacy-first úklid starých stop, karta, mini workshop a checklist.
