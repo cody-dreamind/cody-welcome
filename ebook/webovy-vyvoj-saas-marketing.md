@@ -27,6 +27,8 @@ Když máte otázek víc, seřaďte je jednoduchým filtrem. Nejdřív vyberte t
 
 Před čtením si zároveň určete stop podmínku: kolik času tomu dáte, jaký výstup má vzniknout a podle čeho poznáte, že už stačí. Bez stop podmínky se praktická iterace snadno tváří jako poctivá práce, ale ve skutečnosti jen odkládá rozhodnutí.
 
+Stop podmínku pište jako hotový stav, ne jako seznam aktivit. "Projít tři kapitoly" ještě neříká, co se změnilo; "vybrat jednu úpravu formuláře a zapsat způsob ověření" už čtení převádí do práce, kterou jde zavřít.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -131251,3 +131253,4 @@ Dobře uzavřená malá úprava má být skoro neviditelná. Prostě se z ní st
 - 2026-05-26: Doplněna úvodní podkapitola o zavření karty změny bez úkolu: kdy nic neměnit, jak zapsat návratový signál, privacy-first datovou stopu a checklist zavření.
 - 2026-05-26: Doplněna úvodní podkapitola o předání stabilizované zkrácené trasy týmu: kanonické místo, aktualizace pracovních míst, oddělení chyb od nových nápadů, privacy-first předání, karta a checklist.
 - 2026-05-27: Doplněna úvodní podkapitola o ověření drobného doladění trasy při dalším použití: původní tření, stavy ověření, privacy-first kontrola, karta a checklist.
+- 2026-05-27: Doplněna krátká úvodní poznámka, aby stop podmínka popisovala hotový pracovní stav místo pouhého seznamu aktivit.
