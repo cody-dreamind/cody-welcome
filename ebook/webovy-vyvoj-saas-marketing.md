@@ -131357,8 +131357,264 @@ Víme, jestli servisní zásah odstranil původní tření při běžné práci,
 
 Ověření servisního zásahu je malá pojistka proti tichému driftu. Když zásah funguje, zavřete ho a nechte standard pracovat. Když nefunguje, opravte nejbližší příčinu. A když ukáže větší změnu účelu nebo datové stopy, přestaňte tomu říkat servis. Tím se udržuje pořádek bez těžké byrokracie.
 
+## Příloha RH: Uzavření ověřeného servisního zásahu do čistého standardu
+
+Když servisní zásah projde ověřením, ještě není úplně uklizeno. Tým ví, že původní tření zmizelo, ale musí také vědět, co teď platí, kde to platí a jaké pomocné stopy po ověření nemají dál žít vlastním životem. Jinak se z malé opravy stane další historická vrstva: správná věta je někde zapsaná, ale vedle ní zůstává servisní karta, dočasná poznámka, starý screenshot a možná i starý odkaz.
+
+Uzavření ověřeného servisního zásahu má jediný účel: vrátit pracovní standard do čistého stavu. Čistý stav neznamená, že standard je dokonalý. Znamená, že člověk při dalším použití najde aktuální verzi bez vysvětlování, pomocné podklady jsou smazané nebo sloučené a servisní zásah už není otevřený jako samostatná práce.
+
+Pracovní otázka:
+
+```text
+Je ověřený servisní zásah propsaný do aktuálního pracovního místa tak, aby po něm nezůstala dočasná ani datová stopa navíc?
+```
+
+Pokud odpověď zní `ano`, standard může zůstat v klidu. Pokud zní `ne`, uzavření ještě není hotové. Neotevírejte proto další nápady, dokud není jasné, co se stane s ověřovací kartou, starými odkazy a případnými pomocnými daty.
+
+### Začněte výsledkem ověření
+
+Nejdřív se vraťte k ověřovací kartě z předchozí části. Uzavření se dělá jinak podle toho, jaký výsledek ověření vznikl.
+
+Praktická matice:
+
+- Potvrdit: propsat zásah do aktuálního standardu a zavřít servisní smyčku.
+- Doplnit dostupnost: opravit odkazy, navigaci nebo zdroj pravdy, teprve potom standard zavřít.
+- Opravit zásah: neuzavírat, ale založit jednu další servisní opravu.
+- Znovu otevřít změnu: uzavřít servis jako nedostatečný a otevřít nové rozhodnutí.
+
+Tato příloha řeší hlavně stav `potvrdit` a čisté dokončení stavu `doplnit dostupnost`. Pokud ověření skončilo opravou zásahu nebo znovuotevřením změny, nesnažte se ho prohlásit za hotové. To by byla hezká administrativní fikce, což je pořád jen fikce v košili.
+
+Příklad vstupu:
+
+```text
+Výsledek ověření:
+Potvrdit.
+
+Servisní zásah:
+Upřesněná nápověda u pole "počet uživatelů".
+
+Co se potvrdilo:
+Autor při běžném použití pochopil, že stačí odhad prvního běžného provozu, a nevznikl nový účel údaje.
+```
+
+Z toho už nemá vzniknout další debata o formuláři. Má vzniknout čisté uzavření: aktuální nápověda zůstává, servisní karta dostane závěrečnou větu a pomocné podklady zmizí.
+
+### Přepište aktuální stav jednou větou
+
+Uzavírací věta má být kratší než servisní historie. Nemá popisovat všechny diskuse, varianty a důvody. Má říct, co teď platí.
+
+Dobrá uzavírací věta:
+
+```text
+Servisní zásah se potvrzuje: u pole "počet uživatelů" zůstává nápověda "Stačí odhad počtu lidí, kteří budou řešení používat v prvním běžném provozu"; účel údaje se nemění a pole zůstává volitelné.
+```
+
+Slabá uzavírací věta:
+
+```text
+Nápovědu jsme trochu upravili a vypadá to lépe.
+```
+
+Druhá věta je příjemná, ale provozně skoro nepoužitelná. Neříká, kde změna platí, co se nemění ani podle čeho se pozná, že se nemá znovu otevřít.
+
+Uzavírací věta by měla obsahovat:
+
+- servisní zásah;
+- kanonické místo;
+- stav po ověření;
+- hranici, která se nemění;
+- případný návratový signál.
+
+Návratový signál není pozvánka k nekonečnému kontrolování. Je to pojistka pro situaci, kdy se stejné tření vrátí nebo se začne posouvat účel dat.
+
+### Zavřete servisní kartu
+
+Servisní karta po uzavření nemá dál viset jako otevřený úkol. Buď ji přepište do rozhodovacího logu, přesuňte do archivu uzavřených zásahů, nebo ji sloučte do changelogu pracovního standardu. Hlavní je, aby nebyla jediným místem, kde je aktuální pravda.
+
+Kanonické místo musí obsahovat platnou verzi. Servisní karta může vysvětlovat historii, ale nesmí suplovat pracovní návod.
+
+Krátký postup:
+
+1. Ověřte, že aktuální pracovní místo obsahuje potvrzenou úpravu.
+2. Do servisní karty dopište závěrečnou větu.
+3. Označte kartu jako uzavřenou, archivovanou nebo sloučenou.
+4. Odstraňte odkazy, které vedou jen na rozpracovanou verzi.
+5. Nechte v provozu pouze odkaz na kanonický standard.
+
+Příklad:
+
+```text
+Kanonické místo:
+Brief poptávkového formuláře.
+
+Servisní karta:
+Uzavřena a odkazuje zpět na brief.
+
+Changelog standardu:
+2026-05-27: Upřesněna nápověda u volitelného odhadu počtu uživatelů; účel údaje beze změny.
+```
+
+Tím se historie neztratí, ale přestane překážet běžné práci.
+
+### Ukliďte dostupnost a staré stopy
+
+U potvrzeného servisního zásahu často nejde jen o text. Je potřeba uklidit i cestu, kterou se k textu lidé dostávají.
+
+Zkontrolujte hlavně:
+
+- staré odkazy v interních poznámkách;
+- lokální kopie šablony;
+- screenshoty s původním stavem;
+- komentáře typu "dočasně upraveno";
+- rozpracované checklisty, které už neplatí;
+- odkazy z onboardingových materiálů;
+- automatizace nebo šablony, které používají starý název.
+
+Pokud najdete starou stopu, nerozšiřujte uzavření na velký úklid všeho. Opravte jen stopy, které by člověka při dalším použití dovedly ke špatné verzi nebo ho nutily znovu řešit uzavřené tření.
+
+Pravidlo:
+
+```text
+Uzavření uklízí cesty k aktuálnímu standardu, ne celý archiv firmy.
+```
+
+Když se při úklidu objeví větší problém s navigací, zapište ho jako samostatný podnět. Servisní zásah se nemá stát tajným auditem znalostní báze.
+
+### Privacy-first uzavření po servisu
+
+Malý servisní zásah může při ověřování vytvořit malé datové zbytky: screenshot formuláře, export poptávky, kopii zákaznické odpovědi, osobní poznámku z rozhovoru nebo testovací záznam. Tyto podklady často vznikají s dobrým úmyslem, ale po uzavření už nemají důvod zůstávat.
+
+Privacy-first uzavření proto projde tři otázky:
+
+```text
+Co jsme vytvořili jen kvůli ověření?
+Co z toho musí zůstat jako důkaz rozhodnutí?
+Co lze smazat, anonymizovat nebo sloučit do jedné závěrečné věty?
+```
+
+Typické rozhodnutí:
+
+- screenshot s osobními údaji smazat;
+- konkrétní zákaznický příklad nahradit anonymizovanou větou;
+- dočasný export odstranit po kontrole;
+- pracovní poznámku z chatu převést do uzavírací karty a chat už nepoužívat jako zdroj pravdy;
+- přístup k pomocnému podkladu odebrat, pokud už není potřeba.
+
+Codyho komentář: privacy-first provoz se nepozná jen podle velkých rozhodnutí o analytice a hostingu. Pozná se i podle toho, jestli po malé opravě nenecháte někde ležet screenshot s daty jen proto, že "se může hodit". Většina věcí, které se "můžou hodit", se ve skutečnosti hodí hlavně k budoucímu nepořádku.
+
+### Karta uzavření ověřeného servisního zásahu
+
+```text
+Servisní zásah:
+
+Výsledek ověření:
+Potvrdit / Doplnit dostupnost
+
+Kanonické pracovní místo:
+
+Co teď platí:
+
+Co se tím nemění:
+
+Kde je zapsaná závěrečná věta:
+
+Jaké staré odkazy nebo kopie se ruší:
+
+Pomocné podklady:
+Smazat / anonymizovat / sloučit / ponechat s důvodem
+
+Privacy-first kontrola:
+Nové údaje:
+Účel:
+Přístupy:
+Retence:
+
+Návratový signál:
+
+Co teď vědomě neotevíráme:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Servisní zásah:
+Upřesněná nápověda u pole "počet uživatelů".
+
+Výsledek ověření:
+Potvrdit.
+
+Kanonické pracovní místo:
+Brief poptávkového formuláře.
+
+Co teď platí:
+Nápověda říká, že stačí odhad počtu lidí, kteří budou řešení používat v prvním běžném provozu.
+
+Co se tím nemění:
+Pole zůstává volitelné, účel údaje je příprava první odpovědi a nepřidává se lead scoring.
+
+Kde je zapsaná závěrečná věta:
+V changelogu formulářového briefu a uzavřené servisní kartě.
+
+Jaké staré odkazy nebo kopie se ruší:
+Starý odkaz z interní poznámky se přesměruje na aktuální brief.
+
+Pomocné podklady:
+Screenshot s ukázkou vyplněného briefu se maže, závěr zůstává anonymizovaně v kartě.
+
+Privacy-first kontrola:
+Nové údaje: žádné.
+Účel: beze změny.
+Přístupy: beze změny.
+Retence: pomocný screenshot smazán, hlavní poptávka podle běžné retence.
+
+Návratový signál:
+Znovu otevřít jen pokud se stejné tření objeví ve dvou dalších běžných použitích nebo se údaj začne používat k jinému účelu.
+
+Co teď vědomě neotevíráme:
+Povinnost pole, rozpočet, telefon, scoring ani širší redesign formuláře.
+
+Vlastník a datum:
+Owner poptávkového formuláře, 2026-05-27.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete ověřovací kartu servisního zásahu.
+2. Přečtěte výsledek ověření a kanonické pracovní místo.
+3. Napište jednu větu, co teď platí.
+4. Zapište, co se tím nemění.
+5. Zavřete servisní kartu a ponechte jako zdroj pravdy jen aktuální pracovní místo.
+6. Zrušte staré odkazy, lokální kopie a pomocné podklady, které by mátly další použití.
+7. Projděte privacy-first kontrolu a určete návratový signál.
+
+Výstup workshopu:
+
+```text
+Servisní zásah je uzavřený, aktuální standard je čistý, pomocné podklady jsou uklizené a tým ví, kdy má smysl se k tématu znovu vrátit.
+```
+
+### Checklist kapitoly
+
+- Vycházíme z ověřovací karty, ne z nové debaty?
+- Skončilo ověření stavem `potvrdit` nebo čistě dokončeným stavem `doplnit dostupnost`?
+- Je napsaná jedna věta, co teď platí?
+- Je jasné, co se servisním zásahem nemění?
+- Obsahuje aktuální kanonické místo potvrzenou úpravu?
+- Není servisní karta jediným zdrojem pravdy?
+- Jsou staré odkazy, lokální kopie a dočasné poznámky zrušené nebo přesměrované?
+- Jsou pomocné screenshoty, exporty a příklady s osobními údaji smazané, anonymizované nebo sloučené?
+- Nezůstal po ověření nový údaj, účel, přístup, dodavatel ani delší retence?
+- Má uzavření návratový signál?
+- Je zapsané, co teď vědomě neotevíráme?
+- Má uzavření vlastníka a datum?
+
+Dobré uzavření servisního zásahu je tiché. Neoslavuje opravu, jen vrátí standard do stavu, ve kterém se dá znovu normálně pracovat. Když další člověk najde aktuální místo, použije ho bez zaváhání a nemusí číst servisní historii, uzavření splnilo svůj účel.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RH o uzavření ověřeného servisního zásahu do čistého standardu: práce s výsledkem ověření, závěrečná věta, uzavření servisní karty, úklid starých stop, privacy-first mazání pomocných podkladů, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RG o ověření servisního zásahu po dalším běžném použití: návrat k servisní kartě, přirozené použití, signály nalezení, pochopení a datové stopy, čtyři výsledky ověření, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RF o převodu drobné opravy po prvním návratu do servisního zásahu: přesné tření, typy zásahu, kanonické místo, hranice mezi servisem a novou změnou, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RE o prvním návratu k upravenému standardu po zavřené malé úpravě: kontrola nalezení, použití a datové stopy, čtyři výsledky návratu, privacy-first návrat bez nového měření, karta, mini workshop a checklist.
