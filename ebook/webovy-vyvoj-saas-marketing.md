@@ -132021,8 +132021,261 @@ Drobné zjištění z návratu po servisu je buď zavřené, krátce zapsané s 
 
 Servisní poznámka je užitečná právě tím, že je malá. Zachytí opakovatelný signál, ale nenechá ho ovládnout pracovní standard. Když se nález neopakuje, poznámka zmizí. Když se opakuje, přestane být dojmem a stane se důvodem k opravě.
 
+## Příloha RK: Ověření servisní poznámky při dalším návratovém signálu
+
+Servisní poznámka z předchozí přílohy má smysl jen tehdy, když se k ní tým vrátí přesně ve chvíli, kterou si sám určil. Ne při náhodném úklidu backlogu. Ne při poradě, kde někdo zrovna hledá práci. A už vůbec ne po půl roce, kdy už nikdo neví, proč poznámka vznikla. Návratový signál je malá smlouva s budoucností: až se stane tohle, rozhodneme znovu.
+
+Tato příloha řeší okamžik, kdy se návratový signál opravdu objeví. Stejný dotaz padl podruhé. Druhý člověk zabloudil na stejném místě. Stará cesta se znovu připletla do práce. Pomocný screenshot by lákal k uložení, protože "teď už to přece máme důkazem". Tady se rozhoduje, jestli poznámka zůstane malou poznámkou, zmizí, nebo se promění v korekci standardu.
+
+Pracovní otázka:
+
+```text
+Potvrdil se návratový signál servisní poznámky natolik, že máme udělat nejmenší korekci pracovního standardu, nebo poznámku zavřít?
+```
+
+Ověření servisní poznámky není audit. Je to krátké porovnání původního nálezu s novou situací. Pokud je nová situace opravdu stejná, poznámka získala váhu. Pokud je jen podobná na první pohled, ale příčina je jinde, není fér na ni navěsit starý závěr. A pokud se signál neukázal, poznámka nemá strašit v systému jen proto, že už byla jednou zapsaná.
+
+### Začněte původním návratovým signálem
+
+Nejdřív otevřete původní servisní poznámku a přečtěte jen tři položky:
+
+1. konkrétní tření;
+2. dopad na práci;
+3. návratový signál.
+
+Všechno ostatní je vedlejší. Historie umí být svůdná: kdo to psal, proč se tehdy diskutovalo, jaké byly alternativy, co kdo navrhoval. Jenže ověření má odpovědět na jednodušší otázku: stalo se to, na co jsme čekali?
+
+Příklad původního signálu:
+
+```text
+Návratový signál:
+Pokud se stejný dotaz objeví ještě jednou, přejmenovat položku v rozcestníku.
+```
+
+Nová situace:
+
+```text
+Druhý autor se při přípravě briefu zeptal, která ze dvou podobně pojmenovaných položek je aktuální.
+```
+
+To je potvrzený signál. Není potřeba měřit pět dalších průchodů, zakládat tabulku výskytů ani prosit tým, aby si příště dával pozor. Poznámka splnila účel: odlišila jednorázový šum od opakovaného tření.
+
+Slabší příklad:
+
+```text
+Někdo otevřel starý brief, ale našel ho přes vyhledávání podle názvu zákazníka, ne přes rozcestník.
+```
+
+Tady signál potvrzený není. Tření se podobá starému problému, ale příčina je jiná. Možná je problém ve vyhledávání, možná v názvech zákaznických složek, možná jen v konkrétním pracovním návyku. Původní poznámku kvůli tomu automaticky nepovyšujte.
+
+### Porovnejte stejnost, ne jen podobnost
+
+Ověření servisní poznámky stojí na rozlišení mezi `stejné`, `podobné` a `nové`.
+
+`Stejné` znamená, že se opakuje stejné pracovní místo, stejné tření a podobný dopad. Tady má smysl udělat malou korekci.
+
+`Podobné` znamená, že se opakuje pocit, ale ne příčina. Tým má chuť říct "to je zase ono", jenže konkrétní pracovní cesta ukazuje něco jiného. Tady původní poznámku nepoužívejte jako důkaz. Zapište nový nález nebo ho zavřete.
+
+`Nové` znamená, že situace souvisí jen tematicky. Například původní poznámka řešila názvy briefů a nová situace řeší chybějící pole ve formuláři. Obě věci patří k poptávkám, ale nejsou stejný problém. Nové téma potřebuje vlastní kartu, nebo žádnou akci.
+
+Rychlý test:
+
+```text
+Kdybychom opravili přesně to místo, které popisuje původní poznámka, zmizelo by i nové tření?
+```
+
+Pokud ano, signál se pravděpodobně potvrdil. Pokud ne, je to jiný problém. Tohle pravidlo šetří hodiny falešného slučování. Dokumentace často bobtná právě proto, že tým lepí dohromady věci, které mají stejné téma, ale jinou příčinu.
+
+### Rozhodněte jedním ze čtyř stavů
+
+Po porovnání zvolte jeden stav:
+
+- `Zavřít`: signál se nepotvrdil, poznámka byla jednorázový nález nebo šum.
+- `Ponechat`: signál se lehce přiblížil, ale ještě není dost konkrétní.
+- `Upravit signál`: poznámka je pořád užitečná, ale původní návratová podmínka byla moc široká nebo moc úzká.
+- `Povýšit na korekci`: signál se potvrdil a nejmenší oprava je jasná.
+
+Stav `ponechat` používejte opatrně. Je lákavý, protože nikomu nebere možnost se k tématu vrátit. Jenže každé ponechání má mít novou podmínku, jinak se z něj stane odklad. Pokud neumíte napsat přesnější signál, poznámku raději zavřete.
+
+Příklad úpravy signálu:
+
+```text
+Původní signál:
+Pokud se stejný dotaz objeví ještě jednou, přejmenovat položku.
+
+Zjištění:
+Dotaz se objevil, ale ne kvůli názvu položky. Autor hledal starou cestu z uložené záložky.
+
+Nový signál:
+Pokud se stará záložka objeví ještě jednou, odstranit starý odkaz z interního rozcestníku a doplnit přesměrovací větu.
+```
+
+Tady není potřeba měnit název položky. Je potřeba zúžit signál na skutečný zdroj tření.
+
+### Nejmenší korekce po potvrzení
+
+Když se signál potvrdí, korekce má být menší než energie, kterou tým už utratil za opakované vysvětlování. Typická korekce bývá prostá:
+
+- přejmenovat jednu položku;
+- odstranit starý odkaz;
+- doplnit jednu větu k rozhodnutí;
+- přesunout aktuální šablonu nad archiv;
+- zkrátit rozcestník na aktuální cestu;
+- přidat datum platnosti ke standardu;
+- smazat pomocný soubor, který už nemá účel.
+
+Nedělejte z potvrzené servisní poznámky redesign procesu. Kdyby byl potřeba redesign, poznámka by pravděpodobně už dřív spadla do korekce, ne do drobného nálezu. Potvrzení signálu znamená: malý problém se opakuje. Neznamená: otevíráme všechno, čeho se téma dotýká.
+
+Dobrá korekční věta:
+
+```text
+Přejmenujeme položku "Brief formuláře" na "Aktuální brief poptávkového formuláře" a starou položku přesuneme do archivu bez odkazu z hlavního rozcestníku.
+```
+
+Špatná korekční věta:
+
+```text
+Uděláme pořádek v briefech a nastavíme lepší systém dokumentace.
+```
+
+Ta druhá věta zní akčně, ale nedá se zavřít. První věta je nudnější. Proto funguje.
+
+### Privacy-first ověření bez sbírání důkazů navíc
+
+Při druhém výskytu problému má tým často chuť začít sbírat důkazy: uložit screenshot, citovat zprávu, přidat jméno člověka, exportovat historii nebo sledovat další průchody. Většinou to není potřeba. Servisní poznámka už měla popsat vzorec. Ověření má jen potvrdit, že se vzorec zopakoval.
+
+Privacy-first pravidlo:
+
+```text
+Potvrďte opakování vzorce, ne identitu člověka.
+```
+
+Do ověřovacího zápisu obvykle stačí:
+
+- datum nebo období;
+- pracovní místo;
+- stručný popis opakovaného tření;
+- rozhodnutí;
+- případná korekce;
+- úklid staré poznámky.
+
+Nevkládejte celé citace interních zpráv, kopie zákaznických dat ani screenshoty s osobními údaji. Pokud je potřeba konkrétní ukázka, anonymizujte ji na pracovní vzorec:
+
+```text
+Podruhé se objevil dotaz, která ze dvou podobně pojmenovaných položek v rozcestníku je aktuální.
+```
+
+To stačí. Jméno autora, obsah briefu a zákaznický kontext by z ověření udělaly větší datovou stopu, než jakou problém potřebuje.
+
+### Karta ověření servisní poznámky
+
+```text
+Původní servisní poznámka:
+
+Původní návratový signál:
+
+Nová situace:
+
+Je signál potvrzený?
+Ano / Ne / Částečně
+
+Typ shody:
+Stejné / Podobné / Nové
+
+Dopad nové situace:
+Bez dopadu / drobné zdržení / opakovaný dotaz / blokace
+
+Rozhodnutí:
+Zavřít / Ponechat / Upravit signál / Povýšit na korekci
+
+Nejmenší korekce, pokud je potřeba:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first evidence:
+
+Úklid staré poznámky:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Původní servisní poznámka:
+Dvě položky v rozcestníku briefů mají podobný název.
+
+Původní návratový signál:
+Pokud se stejný dotaz objeví ještě jednou, přejmenovat položku v rozcestníku.
+
+Nová situace:
+Druhý autor se při přípravě briefu zeptal, která položka je aktuální.
+
+Je signál potvrzený?
+Ano.
+
+Typ shody:
+Stejné.
+
+Dopad nové situace:
+Opakovaný dotaz, práce dokončena bez blokace.
+
+Rozhodnutí:
+Povýšit na korekci.
+
+Nejmenší korekce:
+Přejmenovat aktuální položku na "Aktuální brief poptávkového formuláře" a starou položku přesunout do archivu.
+
+Co teď vědomě neotevíráme:
+Obsah briefu, formulářová pole, scoring, šablony pro jiné typy poptávek ani nový dokumentační systém.
+
+Privacy-first evidence:
+Bez screenshotu a bez jména autora. Stačí popis opakovaného vzorce.
+
+Úklid staré poznámky:
+Poznámku zavřít odkazem na korekční větu. Po provedení korekce odstranit dočasný návratový signál.
+
+Vlastník a datum:
+Owner poptávkového formuláře, 2026-05-27.
+```
+
+### Mini workshop na 7 minut
+
+1. Otevřete jednu servisní poznámku, jejíž návratový signál se možná objevil.
+2. Přečtěte jen původní tření, dopad a návratový signál.
+3. Popište novou situaci jednou pracovní větou.
+4. Označte shodu jako stejné, podobné nebo nové.
+5. Vyberte stav: zavřít, ponechat, upravit signál, nebo povýšit na korekci.
+6. Pokud povyšujete, napište nejmenší korekční větu.
+7. Zapište, co teď vědomě neotevíráte.
+8. Smažte nebo zavřete pomocné důkazy, které nejsou potřeba.
+
+Výstup workshopu:
+
+```text
+Servisní poznámka je ověřená proti skutečnému návratovému signálu. Buď zmizela, má přesnější signál, nebo se proměnila v jednu malou korekci s jasným vlastníkem.
+```
+
+### Checklist kapitoly
+
+- Vrátili jsme se k poznámce kvůli skutečnému návratovému signálu, ne kvůli náhodnému úklidu?
+- Četli jsme původní tření, dopad a signál dřív než starou debatu?
+- Je nová situace popsaná konkrétně a krátce?
+- Rozlišili jsme stejné, podobné a nové?
+- Odpověděli jsme, jestli by oprava původního místa vyřešila i nové tření?
+- Vybrali jsme jeden ze čtyř stavů: zavřít, ponechat, upravit signál, povýšit?
+- Pokud poznámku ponecháváme, má přesnější návratovou podmínku?
+- Pokud ji povyšujeme, existuje nejmenší korekční věta?
+- Je jasné, co teď vědomě neotevíráme?
+- Nevznikl screenshot, export, citace nebo osobní stopa jen kvůli ověření?
+- Je stará poznámka zavřená, uklizená nebo navázaná na korekci?
+- Ví vlastník, kdy se korekce ověří v běžném použití?
+
+Servisní poznámka nemá být věčná. Buď se nepotvrdí a zmizí, nebo se potvrdí a stane se malou opravou reality. V obou případech udělala svou práci: udržela tým mimo zbytečné drama a zároveň nenechala opakované tření potichu růst.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RK o ověření servisní poznámky při dalším návratovém signálu: návrat k původnímu signálu, rozlišení stejného, podobného a nového nálezu, čtyři rozhodovací stavy, nejmenší korekce, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RJ o převodu drobného nálezu z návratu po servisu do servisní poznámky: rozlišení šumu, nálezu a korekce, krátký zápis, návratový signál, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RI o prvním běžném návratu k čistému standardu po servisu: přirozené použití, signály nalezení, samostatnosti a datové stopy, čtyři výsledky návratu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RH o uzavření ověřeného servisního zásahu do čistého standardu: práce s výsledkem ověření, závěrečná věta, uzavření servisní karty, úklid starých stop, privacy-first mazání pomocných podkladů, karta, mini workshop a checklist.
