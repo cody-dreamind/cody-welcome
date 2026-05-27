@@ -130531,8 +130531,185 @@ Malá ověřovací úprava má rozhodnutí: potvrdit, doladit, vrátit nebo odlo
 
 Ověření malé úpravy je místo, kde se ukáže disciplína týmu. Ne ve schopnosti vymyslet další nápad, ale ve schopnosti zavřít smyčku. Dobrý web i dobrý SaaS rostou přes podobné drobné návraty: změnit málo, ověřit poctivě, uklidit po sobě a teprve potom rozhodnout, jestli si úprava zaslouží trvalé místo.
 
+## Příloha RD: Uzavření malé ověřovací úpravy do trvalého nebo zrušeného stavu
+
+Malá ověřovací úprava nesmí zůstat navždy v polovičním režimu. Buď se stane součástí běžného pracovního standardu, projde jedním dalším doladěním, vrátí se zpět, nebo se vědomě odloží. Když tým tento krok přeskočí, vznikne provozní mlha: někde je už nová verze, někde stará, někdo ji bere jako pravidlo a někdo jako pokus.
+
+Tato příloha navazuje na ověřovací kartu z předchozí části. Jejím cílem je uzavřít rozhodnutí do čistého stavu. Neřeší další velké zlepšování. Řeší praktickou otázku: co přesně teď platí, kde to platí, co se smaže a kdy se k tématu znovu vrátíme jen tehdy, pokud se objeví nový signál.
+
+### Začněte stavem z ověření
+
+Nejdřív vezměte poslední rozhodnutí z ověřovací karty a nepřepisujte ho novou debatou. Pokud karta říká `potvrdit`, práce je jiná než u stavu `vrátit`. Pokud říká `doladit`, neudělejte z toho nový projekt. Pokud říká `odložit`, nezacházejte s úpravou jako s tichým standardem.
+
+Praktická matice:
+
+- Potvrdit: převést úpravu do kanonického pracovního místa a zavřít dočasnost.
+- Doladit: udělat jednu přesně popsanou korekci a založit nové malé ověření.
+- Vrátit: odstranit úpravu, uklidit pomocné podklady a zapsat důvod návratu.
+- Odložit: určit, jestli dočasná úprava zůstává vypnutá nebo omezená, a nastavit návratový signál.
+
+Nejčastější chyba je tvářit se, že `doladit` znamená "necháme to běžet a uvidíme". To není doladění, ale opuštěný experiment. Doladění má mít jednu větu, jedno místo zásahu a jeden další okamžik ověření.
+
+### Přepište jen kanonické místo
+
+Když se úprava potvrzuje, napište ji tam, kde tým skutečně pracuje. Ne do další poznámky. Ne do volné tabulky. Ne do komentáře, který za měsíc nikdo nenajde. Kanonické místo může být formulářový brief, provozní standard, popis lead kvalifikace, šablona nabídky, onboardingový checklist nebo produktový runbook.
+
+Příklad potvrzení:
+
+```text
+Původní dočasnost:
+U týmových B2B poptávek 30 dní testujeme volitelný dotaz na odhad počtu uživatelů.
+
+Nový trvalý standard:
+U týmových B2B poptávek se ptáme na volitelný odhad počtu uživatelů jen tehdy, když návštěvník označí, že řeší týmové použití. Stačí rozsah, například 5-10 lidí. Údaj slouží pouze k přípravě první odpovědi, ne k automatickému lead scoringu.
+```
+
+Všimněte si, že trvalý standard neříká jen "přidat pole". Vysvětluje podmínku, použití, hranici a zakázanou interpretaci. Právě takové věty brání tomu, aby se z malé úpravy časem stal větší sběr dat, než tým původně schválil.
+
+### Zavřete dočasnost viditelně
+
+Dočasná úprava má mít konec. Pokud se potvrzuje, odstraňte štítek `test`, `pilot`, `dočasně` nebo podobnou poznámku z míst, kde by po čase mátla tým. Pokud se vrací, odstraňte samotnou úpravu. Pokud se odkládá, napište, co přesně platí do návratového signálu.
+
+Závěrečná věta může být krátká:
+
+```text
+Rozhodnutí:
+Úprava se potvrzuje jako součást standardu pro týmové B2B poptávky.
+
+Platí od:
+2026-05-27
+
+Dočasná evidence:
+Pomocný týdenní součet byl sloučen do ověřovací karty a pracovní poznámka se maže.
+
+Návratový signál:
+Znovu otevřít jen pokud se ve třech po sobě jdoucích relevantních poptávkách objeví nejasnost kolem počtu uživatelů nebo pokud obchodní tým začne údaj používat k jinému účelu.
+```
+
+Tato věta je nudná správným způsobem. Neprodává změnu jako revoluci. Jen říká, co platí a kdy se k tomu vrátit. V provozu je taková nuda luxus.
+
+### Privacy-first úklid po úpravě
+
+Po uzavření malé úpravy projděte datovou stopu. Nestačí potvrdit, že pole, poznámka nebo nový krok funguje. Je potřeba zavřít i všechno, co vzniklo kvůli ověření.
+
+Kontrolujte hlavně:
+
+- Pomocné součty: sloučit do rozhodovací karty nebo smazat.
+- Exporty: odstranit, pokud už neslouží platnému účelu.
+- Screenshoty a kopie zpráv: nahradit anonymizovaným závěrem.
+- Přístupy: ponechat jen lidem, kteří údaj potřebují pro práci.
+- Retenci: nastavit stejnou nebo kratší dobu než u hlavního záznamu.
+- Vysvětlení člověku: ověřit, že je jasné, proč se nový údaj ptá.
+
+Pokud se úprava vrací, privacy-first úklid je ještě důležitější. Vrácená úprava často zanechá zbytečné stopy: staré sloupce, opuštěné automatizace, pomocné listy, text v nápovědě nebo zapomenuté instrukce v obchodním postupu. Vypnutí bez úklidu je jen přesunutý dluh.
+
+### Karta uzavření malé ověřovací úpravy
+
+```text
+Standard nebo pracovní místo:
+
+Malá ověřovací úprava:
+
+Výsledek ověření:
+Potvrdit / Doladit / Vrátit / Odložit
+
+Co teď platí:
+
+Kde je kanonické místo:
+
+Jaká dočasnost se zavírá:
+
+Jaké pomocné podklady se mažou nebo slučují:
+
+Privacy-first kontrola:
+Nové údaje:
+Účel:
+Přístupy:
+Retence:
+Vysvětlení člověku:
+
+Návratový signál:
+
+Co teď vědomě neotevíráme:
+
+Datum a vlastník uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Standard nebo pracovní místo:
+Formulářové minimum pro první poptávku.
+
+Malá ověřovací úprava:
+Volitelný odhad počtu uživatelů u týmových B2B poptávek.
+
+Výsledek ověření:
+Potvrdit.
+
+Co teď platí:
+U týmového B2B použití se ptáme na volitelný rozsah počtu uživatelů. Údaj slouží k přípravě první odpovědi, ne k automatickému hodnocení leadu.
+
+Kde je kanonické místo:
+Brief poptávkového formuláře a obchodní karta prvního kontaktu.
+
+Jaká dočasnost se zavírá:
+Poznámka "30denní test pole" se odstraňuje.
+
+Jaké pomocné podklady se mažou nebo slučují:
+Týdenní agregovaný součet se přepisuje do ověřovací karty, pracovní poznámka se maže.
+
+Privacy-first kontrola:
+Nové údaje: odhad počtu uživatelů jen u týmového segmentu.
+Účel: příprava první odpovědi.
+Přístupy: obchodní a delivery lidé zapojení do poptávky.
+Retence: stejná jako u poptávky.
+Vysvětlení člověku: "Stačí odhad rozsahu, pomůže nám připravit první odpověď."
+
+Návratový signál:
+Tři relevantní poptávky po sobě s nejasností, proč se na údaj ptáme, nebo interní použití údaje k jinému účelu.
+
+Co teď vědomě neotevíráme:
+Lead scoring, rozpočet, telefon ani další segmentační pole.
+
+Datum a vlastník uzavření:
+2026-05-27, owner poptávkového formuláře.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete ověřovací kartu malé úpravy.
+2. Přečtěte stav `potvrdit`, `doladit`, `vrátit` nebo `odložit`.
+3. Napište jednu větu, co teď platí.
+4. Určete kanonické místo, kam se změna propíše nebo odkud se odstraní.
+5. Zavřete dočasnost a pomocné podklady.
+6. Zapište privacy-first kontrolu a návratový signál.
+
+Výstup workshopu:
+
+```text
+Malá ověřovací úprava už není volný experiment. Má trvalý, doladěný, vrácený nebo odložený stav. Tým ví, kde platí aktuální verze, co se uklidilo a kdy má smysl téma znovu otevřít.
+```
+
+### Checklist kapitoly
+
+- Vycházíme z posledního výsledku ověření, ne z nové debaty?
+- Je jasné, zda úpravu potvrzujeme, dolaďujeme, vracíme nebo odkládáme?
+- Je napsaná jedna věta, co teď platí?
+- Je změna propsaná jen do kanonického pracovního místa?
+- Zmizely matoucí poznámky o testu, pilotu nebo dočasnosti?
+- Jsou pomocné součty, exporty, screenshoty a pracovní poznámky smazané nebo sloučené?
+- Je u nového údaje jasný účel, přístup a retence?
+- Rozumí člověk ve formuláři nebo procesu, proč se na údaj ptáme?
+- Má odložený nebo potvrzený stav návratový signál?
+- Je zapsané, co teď vědomě neotevíráme?
+- Má uzavření vlastníka a datum?
+
+Dobře uzavřená malá úprava má být skoro neviditelná. Prostě se z ní stane čistá součást práce, nebo zmizí bez zbytků. Právě tím se pozná zdravý provoz: tým nemusí pokaždé obdivovat vlastní proces, protože proces tiše drží tvar.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RD o uzavření malé ověřovací úpravy do trvalého nebo zrušeného stavu: práce se stavem ověření, kanonické místo, zavření dočasnosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RC o ověření malé ověřovací úpravy po prvním běžném použití: návrat k hypotéze, kontrola výsledku, tření a ceny dat, čtyři rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RB o převod znovuotevřené změny do malé ověřovací úpravy: hypotéza, výběr jedné varianty, ověřovací okno, minimum důkazů, dočasná věta, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RA o otevření nové změny po dlouhodobém klidu standardu: návratový signál, typy návratu, otázka změny, stop pravidlo, nejmenší zásah, privacy-first brána, karta, mini workshop a checklist.
