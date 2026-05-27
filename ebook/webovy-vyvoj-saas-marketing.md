@@ -129905,8 +129905,281 @@ Standard znovu otevíráme jen kvůli konkrétnímu signálu. Změna má jednu o
 
 Znovuotevření dlouhodobě klidného standardu je zdravé, pokud má dobrý důvod. Standardy nemají být muzeum. Mají pomáhat práci. Právě proto si zaslouží změnu, když realita pošle dost silný signál, a klid, když takový signál chybí.
 
+## Příloha RB: Převod znovuotevřené změny do malé ověřovací úpravy
+
+Znovuotevření standardu ještě neznamená, že máte rovnou měnit celé pravidlo. Znamená jen, že existuje dost silný signál, aby se tým podíval na jedno konkrétní místo a zkusil nejmenší rozumnou úpravu. Tato příloha řeší další krok po znovuotevření: jak z otázky změny udělat malou ověřovací úpravu, která jde použít v reálné práci a zároveň se dá rychle potvrdit, doladit, vrátit nebo odložit.
+
+Typická chyba je přeskočit z otázky rovnou do nového standardu. Tým uvidí opakované tření, přidá novou povinnou položku, upraví checklist, dopíše interní pravidla, rozešle oznámení a po dvou týdnech zjistí, že problém nebyl v pravidle, ale ve špatném příkladu nebo v jednom segmentu zákazníků. Výsledkem je větší proces, víc polí a menší jistota.
+
+Malá ověřovací úprava má být pracovní hypotéza, ne nový zákon. Má pomoct odpovědět na otázku změny s nejmenším dopadem na zákazníka, tým a datovou stopu.
+
+### Vraťte se ke kartě znovuotevření
+
+Nezačínejte prázdným dokumentem. Vraťte se ke kartě znovuotevření standardu a vytáhněte z ní čtyři věci:
+
+- návratový signál;
+- otázku změny;
+- nejmenší místo zásahu;
+- stop pravidlo.
+
+Tyto čtyři body tvoří mantinely. Pokud nová úprava neumí odpovědět na původní otázku, nepatří do této iterace. Pokud porušuje stop pravidlo, je buď moc široká, nebo se změnil problém a karta znovuotevření se musí upravit dřív, než se bude pokračovat.
+
+Příklad:
+
+```text
+Otázka změny:
+Jak získat počet uživatelů jen u týmových B2B poptávek bez plošného rozšíření formuláře?
+
+Nejmenší místo zásahu:
+Poptávkový formulář na stránkách služeb pro týmy.
+
+Stop pravidlo:
+Nepřidáváme telefon, rozpočet ani nový CRM workflow.
+```
+
+Z toho neplyne "přidejme tři nová pole". Plyne z toho jen jedna možná úprava: podmíněný dotaz na počet uživatelů u relevantního scénáře.
+
+### Přepište otázku na ověřitelnou hypotézu
+
+Otázka změny říká, co potřebujete zjistit. Ověřitelná hypotéza říká, co očekáváte, že se stane po malé úpravě.
+
+Dobrá hypotéza má tři části:
+
+1. Změna: co přesně uděláme.
+2. Očekávaný výsledek: co se má zlepšit.
+3. Hranice: co se nesmí zhoršit nebo rozšířit.
+
+Příklad:
+
+```text
+Hypotéza:
+Když u B2B týmových poptávek přidáme volitelný podmíněný dotaz na počet uživatelů, sníží se počet ručních doptání před první odpovědí a nezvýší se počet nedokončených nebo nekvalitních poptávek.
+
+Hranice:
+Nepřidáváme telefon, neposíláme data do nové externí tabulky a neměníme retenci poptávek.
+```
+
+Slabá hypotéza zní: "Formulář bude lepší." To se nedá poctivě vyhodnotit. Lepší pro koho? Podle čeho? Za jakou cenu? Pokud odpověď neznáte, úprava ještě není připravená.
+
+### Vyberte jednu variantu úpravy
+
+Znovuotevřený standard často nabízí víc řešení. U formuláře můžete přidat pole, změnit nápovědu, rozdělit tok, upravit text tlačítka, přidat segmentační volbu nebo změnit následný interní postup. V ověřovací iteraci ale vyberte jednu variantu.
+
+Praktické pořadí výběru:
+
+1. Nejprve zkuste změnu textu, nápovědy nebo pořadí, pokud může problém vyřešit bez nového údaje.
+2. Pokud chybí skutečně nový údaj, zvažte podmíněný a volitelný sběr místo plošného povinného pole.
+3. Pokud problém vzniká až po odeslání, upravte interní zpracování dřív než veřejný formulář.
+4. Pokud je potřeba nový nástroj, nejdřív ověřte ručním nebo existujícím postupem, jestli problém stojí za další integraci.
+
+Příklad rozhodnutí:
+
+```text
+Vybraná varianta:
+Podmíněný volitelný dotaz na počet uživatelů po volbě "řešíme týmové nasazení".
+
+Proč tato varianta:
+Řeší chybějící údaj jen u segmentu, kde je potřeba. Nevyžaduje nové pole pro všechny návštěvníky a nevytváří nový datový tok.
+
+Co nezkoušíme:
+Povinný telefon, rozpočtové rozpětí, automatický lead scoring ani nový CRM krok.
+```
+
+Codyho komentář: když máte pět nápadů, neznamená to, že iterace má mít pět změn. Znamená to, že máte pět kandidátů a potřebujete vybrat toho nejmenšího, který opravdu odpovídá na otázku. Ano, je to méně dramatické. Právě proto to obvykle funguje.
+
+### Nastavte ověřovací okno
+
+Malá úprava musí mít konec. Bez konce se z ní stane nový zvyk, který nikdo nepotvrdil. Ověřovací okno určete před nasazením úpravy.
+
+Použijte jeden z těchto spouštěčů:
+
+- počet relevantních případů, například 20 týmových poptávek;
+- časové okno, například 30 dní;
+- konkrétní provozní událost, například první větší kampaň po změně;
+- nejbližší přirozený průchod týmu daným standardem.
+
+U malého webu bývá lepší kombinace času a počtu případů:
+
+```text
+Ověřovací okno:
+Vyhodnotíme po 20 relevantních B2B poptávkách nebo po 30 dnech, podle toho, co nastane dřív.
+```
+
+Vyhněte se oknu typu "někdy zkontrolujeme". To je jen odložené zapomenutí v hezčím kabátě.
+
+### Určete minimum důkazů
+
+Předem napište, jaké důkazy stačí k rozhodnutí. Nemusí jít o velký dashboard. U drobné úpravy často stačí jednoduché porovnání:
+
+- kolikrát chyběl údaj před první odpovědí;
+- kolikrát tým musel ručně doptávat;
+- jestli se zvýšil počet nedokončených nebo zmatených poptávek;
+- jestli zákazníci novému poli rozuměli;
+- jestli nevznikla nová kopie dat mimo kanonické místo.
+
+Privacy-first pravidlo: důkaz nesmí být invazivnější než problém. Kvůli ověření jedné formulářové úpravy nepotřebujete nahrávat chování návštěvníků, přidávat heatmapu ani sledovat lidi napříč webem. Často stačí ruční záznam agregovaného výsledku.
+
+Příklad:
+
+```text
+Minimum důkazů:
+Jednou týdně zapíšeme jen agregovaný počet relevantních poptávek, počet ručních doptání na počet uživatelů a případné slovní nejasnosti z odpovědí. Neukládáme kopie formulářů mimo běžný systém.
+```
+
+Takový důkaz je skromný, ale použitelný. A hlavně nevyrábí novou vrstvu sledování, kterou pak někdo zapomene uklidit.
+
+### Zapište dočasnost přímo k úpravě
+
+Dočasná úprava má být označená tam, kde ji tým používá. Nestačí mít kartu v poznámkách. Pokud se mění formulářový standard, editační checklist nebo interní rozcestník, přidejte krátkou větu:
+
+```text
+Dočasná ověřovací úprava:
+U B2B týmových poptávek testujeme podmíněný dotaz na počet uživatelů. Vyhodnocení: po 20 relevantních poptávkách nebo po 30 dnech. Neměnit další pole bez nové karty.
+```
+
+Tato věta chrání tým před dvěma problémy. První: někdo změnu začne považovat za definitivní dřív, než je ověřená. Druhý: někdo k ní přidá další drobnost a původní hypotéza se rozpadne.
+
+### Karta malé ověřovací úpravy
+
+```text
+Standard:
+
+Karta znovuotevření:
+
+Návratový signál:
+
+Otázka změny:
+
+Hypotéza:
+
+Vybraná varianta úpravy:
+
+Nejmenší pracovní místo zásahu:
+
+Dočasná věta k úpravě:
+
+Stop pravidlo:
+
+Ověřovací okno:
+
+Minimum důkazů:
+
+Privacy-first kontrola:
+Nový údaj:
+Nová kopie dat:
+Retence:
+Přístupy:
+Externí skripty nebo nástroje:
+
+Co teď vědomě nezkoušíme:
+
+Kdy úpravu potvrdíme:
+
+Kdy ji doladíme:
+
+Kdy ji vrátíme:
+
+Kdy ji odložíme:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Formulářové minimum pro první poptávku.
+
+Karta znovuotevření:
+Znovuotevření po opakovaném chybějícím počtu uživatelů v B2B poptávkách.
+
+Návratový signál:
+Ve čtyřech relevantních týmových poptávkách po sobě chyběl údaj potřebný pro první realistický odhad.
+
+Otázka změny:
+Jak získat počet uživatelů jen u týmových B2B poptávek bez plošného rozšíření formuláře?
+
+Hypotéza:
+Podmíněný volitelný dotaz sníží ruční doptávání a nezhorší dokončení poptávek.
+
+Vybraná varianta úpravy:
+Po volbě "řešíme týmové nasazení" zobrazit dotaz "Kolik lidí má řešení používat?".
+
+Nejmenší pracovní místo zásahu:
+Formulář na stránkách týmových služeb a jedna věta v editačním checklistu.
+
+Dočasná věta k úpravě:
+Testujeme podmíněný dotaz na počet uživatelů u týmových B2B poptávek; další pole nepřidávat bez nové karty.
+
+Stop pravidlo:
+Neměníme celý formulářový standard, nepřidáváme telefon, rozpočet ani nový CRM workflow.
+
+Ověřovací okno:
+20 relevantních B2B poptávek nebo 30 dní.
+
+Minimum důkazů:
+Agregovaný počet relevantních poptávek, počet ručních doptání a případné nejasnosti v odpovědích.
+
+Privacy-first kontrola:
+Nový údaj: počet uživatelů jen u týmového segmentu.
+Nová kopie dat: žádná.
+Retence: stejná jako u poptávky.
+Přístupy: beze změny.
+Externí skripty nebo nástroje: žádné.
+
+Co teď vědomě nezkoušíme:
+Lead scoring, rozpočtové pole, telefon a automatické obohacování kontaktů.
+
+Kdy úpravu potvrdíme:
+Když klesne ruční doptávání bez zhoršení kvality a dokončení poptávek.
+
+Kdy ji doladíme:
+Když lidé otázku chápou různě, ale údaj pomáhá.
+
+Kdy ji vrátíme:
+Když údaj nepomůže nebo zhorší odesílání poptávek.
+
+Kdy ji odložíme:
+Když nepřijde dost relevantních případů a signál se nepotvrdí.
+```
+
+### Mini workshop na 8 minut
+
+1. Otevřete kartu znovuotevření standardu.
+2. Přečtěte návratový signál, otázku změny a stop pravidlo.
+3. Přepište otázku na jednu ověřitelnou hypotézu.
+4. Vyberte jednu nejmenší variantu úpravy.
+5. Nastavte ověřovací okno.
+6. Určete minimum důkazů bez nové sledovací vrstvy.
+7. Napište dočasnou větu k místu, kde se úprava používá.
+8. Rozhodněte, kdy úpravu potvrdit, doladit, vrátit nebo odložit.
+
+Výstup workshopu:
+
+```text
+Znovuotevřená změna je převedená do malé ověřovací úpravy: má hypotézu, jedno místo zásahu, stop pravidlo, privacy-first kontrolu a jasné vyhodnocení.
+```
+
+### Checklist kapitoly
+
+- Vycházíme z konkrétní karty znovuotevření?
+- Držíme původní návratový signál, otázku změny a stop pravidlo?
+- Je otázka přepsaná na ověřitelnou hypotézu?
+- Obsahuje hypotéza změnu, očekávaný výsledek a hranici?
+- Vybrali jsme jednu variantu úpravy, ne balík nápadů?
+- Zkusili jsme nejdřív řešení bez nového údaje, pokud to dává smysl?
+- Pokud přidáváme údaj, je podmíněný, přiměřený a vysvětlený?
+- Má úprava jedno nejmenší pracovní místo zásahu?
+- Je dočasnost napsaná přímo tam, kde tým úpravu používá?
+- Má ověřovací okno konkrétní konec?
+- Je předem jasné minimum důkazů?
+- Nepřidává ověření heatmapu, tracker, externí export nebo osobní evidenci lidí?
+- Je jasné, kdy úpravu potvrdit, doladit, vrátit nebo odložit?
+- Ví tým, co se teď vědomě nezkouší?
+
+Malá ověřovací úprava je most mezi signálem a novým standardem. Když je dobře postavená, tým se nemusí hádat o dojmy: změnu použije, podívá se na důkazy a rozhodne. Když je moc široká, jen přejmenuje nejistotu na proces. A proces bez jasného konce je přesně ten typ luxusu, který si dobrý SaaS ani dobrý web nemá pořizovat.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RB o převod znovuotevřené změny do malé ověřovací úpravy: hypotéza, výběr jedné varianty, ověřovací okno, minimum důkazů, dočasná věta, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RA o otevření nové změny po dlouhodobém klidu standardu: návratový signál, typy návratu, otázka změny, stop pravidlo, nejmenší zásah, privacy-first brána, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QZ o uzavření kontroly čistého stavu do dlouhodobého klidu: práce s výsledkem kontroly, závěrečná věta, návratový signál, privacy-first úklid pomocných podkladů, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QY o první kontrole čistého stavu standardu po uzavření servisního zápisu: běžné použití jako spouštěč, tři signály čistoty, čtyři výsledky kontroly, práce se starou historií, privacy-first kontrola, karta, mini workshop a checklist.
