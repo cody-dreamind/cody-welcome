@@ -3224,6 +3224,145 @@ Codyho komentář: drobné doladění je test disciplíny. Každý autor umí p�
 
 Dobré doladění je skoro neviditelné. Čtenář si neřekne "tady proběhla ediční strategie". Prostě najde správné místo, udělá rozhodnutí a nepřidá zbytečná data ani nový úkol. To je přesně ten druh tiché užitečnosti, kvůli které má rukopis smysl udržovat.
 
+## Ověření doladění při dalším použití trasy
+
+Drobné doladění trasy je hotové až ve chvíli, kdy při dalším normálním použití opravdu odstraní tření, kvůli kterému vzniklo. Nestačí, že nová věta vypadá rozumně v Markdownu. Nestačí ani to, že ji editor po sobě přečte a přikývne. Smyslem doladění je, aby další člověk udělal práci plynuleji, našel správné kanonické místo a nevytvořil další zbytečnou větev rukopisu.
+
+Ověření doladění má být menší než původní zpětná vazba. Neopakujte celý test trasy, pokud se měnila jen jedna směrovka, nadpis nebo hranice rozsahu. Vyberte další přirozenou situaci, ve které by se stejné tření mohlo znovu objevit, a sledujte jen to, jestli zmizelo.
+
+Ověřovací věta:
+
+```text
+Chceme zjistit, jestli doladění v místě [upravená část] pomohlo člověku v situaci [pracovní situace] dokončit [výstup] bez [původní tření].
+```
+
+Příklad:
+
+```text
+Chceme zjistit, jestli směrovka na zavření karty bez úkolu pomohla marketing ownerovi při měsíčním review zavřít slabý podnět bez vytváření zbytečného úkolu.
+```
+
+Tahle věta chrání rozsah. Když při ověření začnete řešit celý systém karet změn, už neověřujete doladění. Otevíráte novou změnu. To může být legitimní, ale patří to do samostatné karty, ne do kontroly malé opravy.
+
+### Sledujte jen původní tření
+
+Při ověření si vezměte zápis z doladění a najděte původní tření. Potom sledujte jen tři věci:
+
+1. Člověk našel upravené místo bez dalšího vysvětlování.
+2. Upravené místo ho navedlo na správný další krok.
+3. Nevznikla nová duplicita, nový úkol nebo nová datová stopa, která nebyla potřeba.
+
+Pokud se objeví jiný problém, zapište ho bokem. Nepřilepujte ho automaticky k ověření doladění. Dlouhé rukopisy se nafukují právě tím, že každá kontrola začne sbírat všechno, co se během práce mihlo kolem stolu.
+
+Příklad rozlišení:
+
+```text
+Původní tření:
+Člověk nevěděl, že slabý podnět může skončit bez úkolu.
+
+Výsledek ověření:
+Po doplnění směrovky podnět správně zavřel bez úkolu.
+
+Nový postřeh:
+Chybí přehled všech stavů karty změny.
+
+Rozhodnutí:
+Doladění potvrzujeme. Nový přehled nezakládáme teď; pokud se potřeba zopakuje ve dvou dalších situacích, vznikne nová karta změny.
+```
+
+Takový zápis brání tomu, aby se úspěšná malá oprava změnila v pozvánku k dalšímu rozšiřování.
+
+### Čtyři výsledky ověření doladění
+
+Ověření doladění uzavřete jedním ze čtyř stavů:
+
+- Potvrdit: původní tření zmizelo a trasa může zůstat beze změny.
+- Drobně opravit: tření se zmenšilo, ale jedna věta, odkaz nebo nadpis pořád mate.
+- Vrátit k předchozímu stavu: doladění zhoršilo orientaci nebo vytvořilo novou duplicitu.
+- Otevřít novou kartu: ověření ukázalo větší problém, který přesahuje původní malou opravu.
+
+Stav `otevřít novou kartu` používejte opatrně. Není to automatické povolení rozšířit text hned. Znamená jen, že problém už nepatří do této ověřovací smyčky. Nejprve napište pracovní otázku, hranici rozsahu a privacy-first dopad. Teprve pak se rozhoduje, jestli nová karta stojí za práci.
+
+### Privacy-first kontrola po doladění
+
+Malá textová oprava nemá kvůli ověření vyrábět větší datovou stopu než původní problém. Nepotřebujete sledovat, kdo přesně co četl, kolik sekund byl u nadpisu ani jak se pohyboval po stránce. Stačí pracovní výstup a krátká anonymizovaná poznámka.
+
+Privacy-first ověření doladění má tři otázky:
+
+- Stačí nám výsledek práce místo sledování chování člověka?
+- Můžeme záznam napsat bez jmen zákazníků, konkrétních poptávek a surových interních poznámek?
+- Mažeme po ověření dočasné podklady, které už nejsou potřeba?
+
+Pokud je odpověď ne, ověření je pravděpodobně moc těžké. Zmenšete ho. Cílem je potvrdit, že jedna oprava pomohla práci, ne vytvořit auditní systém na každou větu v rukopisu.
+
+### Karta ověření doladění
+
+```text
+Doladěná trasa:
+Původní tření:
+Upravené místo:
+Pracovní situace ověření:
+Výstup práce:
+Co se stalo jinak:
+Stav doladění:
+Nové postřehy mimo rozsah:
+Privacy-first poznámka:
+Co mažeme nebo anonymizujeme:
+Další krok:
+```
+
+Vyplněný příklad:
+
+```text
+Doladěná trasa:
+Karta jedné změny po čtení.
+
+Původní tření:
+Slabý podnět se měnil v úkol, i když měl být vědomě zavřený.
+
+Upravené místo:
+Krátká směrovka na část `Kdy kartu zavřít bez úkolu`.
+
+Pracovní situace ověření:
+Měsíční review landing page.
+
+Výstup práce:
+Podnět k přidání scroll trackingu byl zavřený bez úkolu.
+
+Co se stalo jinak:
+Owner dokázal zapsat návratový signál a datovou stopu bez dalšího vysvětlování.
+
+Stav doladění:
+Potvrdit.
+
+Nové postřehy mimo rozsah:
+Možná by se časem hodil rozcestník stavů karty změny, ale zatím se potřeba neopakuje.
+
+Privacy-first poznámka:
+Nevznikl nový tracker ani evidence čtenářů. Zápis používá anonymizovaný důvod zavření.
+
+Co mažeme nebo anonymizujeme:
+Dočasnou poznámku z review po přepsání do rozhodovacího záznamu.
+
+Další krok:
+Beze změny. Vrátit se jen při opakovaném tření ve dvou dalších situacích.
+```
+
+### Checklist ověření doladění
+
+- Ověřuje se další přirozené použití, ne umělý dotaz na názor?
+- Je jasně pojmenované původní tření?
+- Sleduje kontrola jen to, jestli původní tření zmizelo?
+- Vznikl pracovní výstup, ne jen komentář k textu?
+- Je rozhodnuto: potvrdit, drobně opravit, vrátit, nebo otevřít novou kartu?
+- Nezvětšilo ověření rozsah původní opravy?
+- Jsou nové postřehy mimo rozsah oddělené od stavu doladění?
+- Nevznikl nový tracker, export, osobní evidence ani delší retence?
+- Jsou dočasné podklady smazané nebo anonymizované?
+- Ví tým, kdy se k trase vrátit a kdy ji nechat být?
+
+Codyho komentář: ověření doladění je malý test dospělosti rukopisu. Pokud jedna opravená věta funguje, nechte ji fungovat. Nepřidávejte jí doprovodný proces, pamětní desku a tabulku se sledováním. Dobrý text občas potřebuje hlavně to, aby mu tým po malé opravě dal pokoj.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -130718,3 +130857,4 @@ Malá ověřovací úprava je most mezi signálem a novým standardem. Když je 
 - 2026-05-26: Doplněna krátká poznámka ke kartě změny, aby uměla zachytit i vědomé rozhodnutí nic teď neměnit.
 - 2026-05-26: Doplněna úvodní podkapitola o zavření karty změny bez úkolu: kdy nic neměnit, jak zapsat návratový signál, privacy-first datovou stopu a checklist zavření.
 - 2026-05-26: Doplněna úvodní podkapitola o předání stabilizované zkrácené trasy týmu: kanonické místo, aktualizace pracovních míst, oddělení chyb od nových nápadů, privacy-first předání, karta a checklist.
+- 2026-05-27: Doplněna úvodní podkapitola o ověření drobného doladění trasy při dalším použití: původní tření, stavy ověření, privacy-first kontrola, karta a checklist.
