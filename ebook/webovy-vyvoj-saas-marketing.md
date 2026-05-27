@@ -131120,8 +131120,246 @@ Máme jednu servisní úpravu v jednom pracovním místě, jasně víme, co se n
 
 Servisní zásah je malá disciplína proti velkému rozlézání práce. Opraví skutečné tření, ale nenechá tým znovu vyjednávat celý standard. Když je dobře napsaný, člověk při dalším použití skoro nepozná, že se něco změnilo. Jen práce přestane drhnout tam, kde předtím drhla.
 
+## Příloha RG: Ověření servisního zásahu po dalším běžném použití
+
+Servisní zásah není hotový tím, že se přepíše věta, přesune odkaz nebo smaže stará poznámka. Hotový je až ve chvíli, kdy další běžné použití ukáže, že původní tření zmizelo a zároveň nevznikl nový problém. Jinak se z "malé opravy" snadno stane drobná legenda: všichni věří, že pomohla, ale nikdo ji neviděl pracovat.
+
+Ověření servisního zásahu má být lehké. Nemá znovu otevírat celý standard, svolávat workshop ani zavádět měření, které je větší než samotná úprava. Stačí počkat na nejbližší přirozenou situaci, ve které člověk použije upravené pracovní místo, a podívat se na tři věci: našel správnou verzi, pochopil opravené místo a nemusel kvůli tomu vytvořit novou datovou stopu.
+
+Pracovní otázka:
+
+```text
+Zmizelo původní tření při běžné práci, aniž bychom změnili účel standardu nebo rozsah dat?
+```
+
+Pokud odpověď zní `ano`, servisní zásah se může uzavřít. Pokud zní `ne`, neznamená to automaticky velkou změnu. Nejdřív zjistěte, jestli selhal samotný zásah, jeho umístění, nebo představa, že šlo jen o drobný servis.
+
+### Vraťte se k původní servisní kartě
+
+Ověření začíná návratem k servisní kartě, ne novým dojmem. Původní karta drží rozsah práce při zemi: ukazuje, jaké tření se řešilo, kde se měnilo, co se tím nemělo změnit a jak se zásah měl ověřit.
+
+Před ověřením si přečtěte hlavně čtyři řádky:
+
+- přesné tření;
+- kanonické místo;
+- servisní zásah jednou větou;
+- co se tím nemění.
+
+Bez těchto čtyř řádků se ověření rychle rozplyne do obecné kontroly standardu. To je jiná práce. Tady ověřujete jen to, jestli malý zásah odstranil konkrétní zaváhání.
+
+Příklad:
+
+```text
+Původní tření:
+Autor nepoznal, jestli počet uživatelů znamená současný tým nebo očekávaný první běžný provoz.
+
+Servisní zásah:
+Nápovědu přepsat na "Stačí odhad počtu lidí, kteří budou řešení používat v prvním běžném provozu."
+
+Co se nemění:
+Pole zůstává volitelné, účel údaje zůstává příprava první odpovědi a nepřidáváme scoring.
+```
+
+Ověřovací otázka potom není "je formulář ideální?". Správná otázka zní: "Použil autor opravenou nápovědu bez doptávání a bez změny účelu údaje?"
+
+### Čekejte na přirozené použití
+
+Servisní zásah se nejlépe ověřuje v okamžiku, kdy by se pracovní místo použilo tak jako tak. Umělý test může pomoct odhalit překlep, ale často neukáže skutečné tření. Člověk v testu ví, že se něco kontroluje; v běžné práci jen potřebuje dokončit úkol.
+
+Dobré ověřovací situace:
+
+- nový autor vyplní upravený brief;
+- obchodník použije aktualizovanou kartu v reálném rozhovoru;
+- support podle opravené nápovědy odpoví na skutečný dotaz;
+- tým sáhne po standardu při další pravidelné kontrole;
+- vlastník procesu projde poslední výstup, který standard používá.
+
+Slabé ověřovací situace:
+
+- vlastník si po sobě jen přečte upravený text;
+- tým si na poradě řekne, že "to vypadá lépe";
+- někdo kontroluje celou šablonu místo jednoho zásahu;
+- ověření se odloží na velký audit bez termínu.
+
+Codyho komentář: servisní zásah má být tak malý, že jeho ověření skoro splývá s prací. Pokud kvůli němu potřebujete speciální ceremonii, možná jste pod názvem servis schovali větší změnu.
+
+### Sledujte tři signály
+
+Při dalším použití sledujte jen tři signály. Víc jich většinou není potřeba a méně často nestačí.
+
+První signál je nalezení. Člověk musí použít aktuální kanonické místo, ne starou variantu, poznámku z chatu nebo lokální kopii. Pokud použije starou verzi, nejde ještě o selhání servisního zásahu. Je to problém dostupnosti zdroje pravdy.
+
+Druhý signál je pochopení. Člověk projde přes opravené místo bez stejného zaváhání, kvůli kterému servis vznikl. Nemusí pracovat dokonale. Stačí, že původní tření už neblokuje rozhodnutí ani nevyvolává stejnou doplňující otázku.
+
+Třetí signál je datová stopa. Servisní zásah nesmí nenápadně přidat nový sběr, export, kopii, přístup, integraci nebo nový účel údaje. Pokud k tomu došlo, ověření nemůže skončit prostým `potvrdit`. Téma se musí znovu otevřít jako samostatné rozhodnutí.
+
+Krátký zápis:
+
+```text
+Nalezení:
+Použil aktuální kanonické místo / použil starou verzi / místo nebylo jasné
+
+Pochopení:
+Původní tření zmizelo / částečně trvá / vzniklo nové tření
+
+Datová stopa:
+Beze změny / změna účelu nebo dat / není jasné
+```
+
+### Rozlišujte čtyři výsledky ověření
+
+Po jednom přirozeném použití obvykle stačí jeden ze čtyř výsledků.
+
+`Potvrdit` znamená, že zásah funguje. Původní tření zmizelo, člověk našel správné místo a datová stopa se nezměnila. Zapište závěrečnou větu a servisní smyčku zavřete.
+
+`Doplnit dostupnost` znamená, že zásah možná funguje, ale člověk nepoužil aktuální místo. Neopravujte hned text znovu. Nejdřív zrušte starý odkaz, přesměrujte navigaci nebo označte zdroj pravdy.
+
+`Opravit zásah` znamená, že člověk našel správné místo, ale původní tření se částečně opakovalo. Udělejte ještě jednu malou servisní opravu, ale jen pokud pořád platí původní účel a datová stopa.
+
+`Znovu otevřít změnu` znamená, že se ukázal větší problém: standard neodpovídá práci, potřebuje jiný údaj, mění účel dat, nebo servisní oprava odhalila špatné rozhodnutí. V takovém případě nezvětšujte servisní zásah. Zavřete ověření a otevřete novou změnu se samostatnou kartou.
+
+Příklad rozhodnutí:
+
+```text
+Výsledek:
+Doplnit dostupnost.
+
+Důvod:
+Autor použil starý odkaz z interní poznámky, takže opravenou nápovědu vůbec neviděl.
+
+Další krok:
+Přesměrovat starý odkaz na aktuální brief a v poznámce odstranit lokální kopii.
+
+Co se nemění:
+Text nápovědy zatím zůstává beze změny.
+```
+
+### Privacy-first ověření bez dohledu
+
+Ověření servisního zásahu nesmí vytvořit kontrolní režim, který je invazivnější než samotný problém. U drobného zásahu obvykle nepotřebujete session recording, heatmapu, detailní osobní tracking ani nové analytické eventy. Stačí pracovní stopa, která už přirozeně vzniká: vyplněný brief, dokončený úkol, poznámka vlastníka, support odpověď nebo krátký záznam z review.
+
+Privacy-first pravidlo:
+
+```text
+Ověřujeme výsledek práce, ne chování člověka za jeho zády.
+```
+
+Pokud potřebujete vědět, jestli nápověda pomohla, zeptejte se člověka nebo projděte výstup. Pokud potřebujete vědět, jestli starý odkaz mate tým, zkontrolujte kanonické místo a odstraňte duplicitu. Nepřidávejte sledování jen proto, že je pohodlnější než rozhovor nebo úklid.
+
+Do ověřovací karty patří i rozhodnutí o pomocných podkladech:
+
+- dočasný screenshot s osobními údaji smazat;
+- testovací export odstranit po kontrole;
+- poznámku z chatu převést do kanonického místa nebo zavřít;
+- starou lokální kopii archivovat jen tehdy, pokud má jasný důvod;
+- osobní údaje v příkladech nahradit neutrálním vzorkem.
+
+Tím se servisní ověření nezmění v malou datovou skládku. Drobná oprava má po sobě nechat čistší práci, ne další vrstvu podkladů.
+
+### Karta ověření servisního zásahu
+
+```text
+Servisní zásah:
+
+Původní tření:
+
+Ověřovací situace:
+
+Nalezení kanonického místa:
+Aktuální místo / stará verze / nejasné
+
+Pochopení opravy:
+Tření zmizelo / částečně trvá / vzniklo nové tření
+
+Datová stopa:
+Beze změny / změna / není jasné
+
+Výsledek:
+Potvrdit / Doplnit dostupnost / Opravit zásah / Znovu otevřít změnu
+
+Další krok:
+
+Co se teď neotevírá:
+
+Úklid pomocných podkladů:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Servisní zásah:
+Upřesněná nápověda u pole "počet uživatelů".
+
+Původní tření:
+Autor nepoznal, jestli má uvést současný tým nebo očekávaný první běžný provoz.
+
+Ověřovací situace:
+Nový brief poptávkového formuláře vyplněný při běžné přípravě nabídky.
+
+Nalezení kanonického místa:
+Aktuální místo.
+
+Pochopení opravy:
+Tření zmizelo.
+
+Datová stopa:
+Beze změny.
+
+Výsledek:
+Potvrdit.
+
+Další krok:
+Zapsat závěrečnou větu k servisní kartě a nechat standard beze změny.
+
+Co se teď neotevírá:
+Lead scoring, povinnost pole, segmentace poptávek ani nový analytický event.
+
+Úklid pomocných podkladů:
+Smazat pracovní screenshot s příkladem briefu.
+
+Vlastník a datum:
+Owner poptávkového formuláře, 2026-05-27.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete původní servisní kartu.
+2. Přečtěte přesné tření, kanonické místo, servisní zásah a větu "co se nemění".
+3. Najděte jedno přirozené použití upraveného místa.
+4. Zapište tři signály: nalezení, pochopení a datová stopa.
+5. Vyberte výsledek: potvrdit, doplnit dostupnost, opravit zásah nebo znovu otevřít změnu.
+6. Určete jeden další krok a jednu věc, kterou teď neotevíráte.
+7. Smažte nebo převeďte pomocné podklady, které nemají zůstat v kanonickém místě.
+
+Výstup workshopu:
+
+```text
+Víme, jestli servisní zásah odstranil původní tření při běžné práci, a máme uzavřený další krok bez nové datové vrstvy.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme konkrétní servisní zásah, ne celý standard?
+- Vrátili jsme se k původní servisní kartě?
+- Je jasné původní tření, kanonické místo a co se nemělo změnit?
+- Proběhlo ověření při přirozeném použití?
+- Víme, jestli člověk našel aktuální místo?
+- Víme, jestli původní tření zmizelo, částečně trvá nebo vzniklo nové?
+- Nevznikl nový údaj, export, dodavatel, přístup, event ani účel dat?
+- Pokud člověk použil starou verzi, řešíme dostupnost místo přepisování správného textu?
+- Vybrali jsme jeden ze čtyř výsledků: potvrdit, doplnit dostupnost, opravit zásah, znovu otevřít změnu?
+- Je další krok menší než původní servisní zásah?
+- Je zapsané, co teď vědomě neotevíráme?
+- Jsou pomocné podklady smazané, převedené nebo jasně uzavřené?
+- Má ověření vlastníka, datum a závěrečnou větu?
+
+Ověření servisního zásahu je malá pojistka proti tichému driftu. Když zásah funguje, zavřete ho a nechte standard pracovat. Když nefunguje, opravte nejbližší příčinu. A když ukáže větší změnu účelu nebo datové stopy, přestaňte tomu říkat servis. Tím se udržuje pořádek bez těžké byrokracie.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RG o ověření servisního zásahu po dalším běžném použití: návrat k servisní kartě, přirozené použití, signály nalezení, pochopení a datové stopy, čtyři výsledky ověření, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RF o převodu drobné opravy po prvním návratu do servisního zásahu: přesné tření, typy zásahu, kanonické místo, hranice mezi servisem a novou změnou, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RE o prvním návratu k upravenému standardu po zavřené malé úpravě: kontrola nalezení, použití a datové stopy, čtyři výsledky návratu, privacy-first návrat bez nového měření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RD o uzavření malé ověřovací úpravy do trvalého nebo zrušeného stavu: práce se stavem ověření, kanonické místo, zavření dočasnosti, privacy-first úklid, karta, mini workshop a checklist.
