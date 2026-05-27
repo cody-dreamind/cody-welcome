@@ -132273,8 +132273,185 @@ Servisní poznámka je ověřená proti skutečnému návratovému signálu. Bu�
 
 Servisní poznámka nemá být věčná. Buď se nepotvrdí a zmizí, nebo se potvrdí a stane se malou opravou reality. V obou případech udělala svou práci: udržela tým mimo zbytečné drama a zároveň nenechala opakované tření potichu růst.
 
+## Příloha RL: Uzavření ověřené servisní poznámky do čistého pracovního stavu
+
+Ověřená servisní poznámka ještě není hotová práce. Je to jen rozhodnutí, že drobný nález už má dost reality na to, aby se s ním naložilo. Teprve uzavření rozhodne, jestli poznámka zmizí, zůstane jako přesnější návratový signál, nebo se promění v malou korekci pracovního místa.
+
+Bez uzavření vzniká tichý dluh. Poznámka sice vypadá nevinně, ale při dalším průchodu se znovu otevře, někdo ji začne interpretovat po svém a tým znovu platí cenu za stejnou drobnost. To je špatný obchod: malá stopa má stát málo pozornosti, ne se vracet jako nepozvaný host s kufrem plným kontextu.
+
+Uzavření má být krátké. Nejde o novou analýzu, retrospektivu ani změnový projekt. Cílem je dostat pracovní místo do stavu, kde další člověk najde aktuální pravidlo bez čtení staré poznámky.
+
+### Začněte stavem z ověření
+
+Nejdřív otevřete výsledek ověření z předchozí přílohy. Nepřidávejte nové dojmy, dokud nemáte před sebou původní stav. Servisní poznámka může skončit čtyřmi způsoby:
+
+1. Zavřít bez změny.
+2. Ponechat s přesnějším návratovým signálem.
+3. Upravit drobnou větu nebo odkaz.
+4. Povýšit na korekci pracovního místa.
+
+Každý stav má jiný typ uzavření. Když je smícháte, drobný servis se přelije do neurčitého "měli bychom to celé zlepšit". Tam umí produktové týmy utopit překvapivě hodně času.
+
+Příklad:
+
+```text
+Servisní poznámka:
+V onboardingovém checklistu se dvakrát objevuje "připravit první datový import".
+
+Výsledek ověření:
+Podobné tření se objevilo znovu, ale jen proto, že jeden odkaz vede na starý brief.
+
+Stav:
+Upravit drobnou větu nebo odkaz.
+```
+
+Tohle není důvod přepsat celý onboarding. Stačí vyměnit odkaz, zavřít poznámku a při dalším běžném použití sledovat, jestli se člověk dostane na aktuální brief.
+
+### Zaveďte změnu do nejbližšího aktuálního místa
+
+Servisní poznámka často vzniká vedle práce: v komentáři, poznámce z review, interní zprávě nebo kartě. Uzavření ale musí proběhnout v místě, kde lidé skutečně pracují. Pokud je problém ve formulářovém briefu, opravte formulářový brief. Pokud je v checklistu, opravte checklist. Pokud je v šabloně odpovědi, opravte šablonu.
+
+Nejhorší varianta je uzavřít poznámku jen dalším komentářem: "vyřešeno, viz domluva". Takový komentář možná uspokojí nástroj, ale nepomůže člověku, který za měsíc otevře stejný pracovní tok a hledá aktuální pravidlo.
+
+Dobré uzavření má tři vrstvy:
+
+- aktuální místo obsahuje platnou větu, odkaz nebo pravidlo;
+- servisní poznámka říká, že byla uzavřena a kde;
+- pomocné podklady se smažou, archivují nebo přestanou být viditelné v hlavní trase.
+
+Pokud nejbližší aktuální místo neexistuje, nevytvářejte rovnou velkou dokumentační strukturu. Vytvořte nejmenší domov pravidla: jednu položku v checklistu, krátkou poznámku u šablony, název stavu v nástroji nebo řádek v provozním listu.
+
+### Oddělte uzavření od nového nápadu
+
+Při uzavírání drobné poznámky se často objeví lepší nápad. To je normální. Není ale povinné ho hned implementovat. Servisní smyčka má zavřít konkrétní tření, ne otevřít redesign celého workflow.
+
+Použijte jednoduchou větu:
+
+```text
+Nový nápad evidujeme mimo tuto servisní poznámku. Tady uzavíráme pouze opravu odkazu na aktuální brief.
+```
+
+Tím chráníte dvě věci najednou. Servisní poznámka se nezasekne a nový nápad nezmizí v okraji staré diskuse. Pokud stojí za to, dostane vlastní kartu, otázku, vlastníka a ověření. Pokud za to nestojí, aspoň nezdržel malou opravu.
+
+Codyho komentář: nejvíc "procesních" problémů nevzniká tím, že týmy neumí přemýšlet. Vzniká tím, že neumí včas přestat přemýšlet o věci, která už je dost malá na opravu. Ano, bolí to méně než další workshop. Což je přesně pointa.
+
+### Privacy-first uzavření staré stopy
+
+Servisní poznámka může obsahovat citaci, screenshot, jméno člověka, export z nástroje nebo část zákaznické komunikace. Při uzavření se zeptejte, jestli je taková stopa ještě potřeba. Často není. Stačí ponechat abstraktní pracovní poučení: co drhlo, jak se to opravilo a kdy se to případně ověří.
+
+Privacy-first uzavření má čtyři kroky:
+
+1. Ponechat jen závěr potřebný pro budoucí práci.
+2. Odstranit osobní nebo citlivé detaily, které už nepřidávají rozhodovací hodnotu.
+3. Zavřít dočasné odkazy, exporty a screenshoty.
+4. Zapsat, kde je aktuální pravidlo, aby se stará evidence nemusela znovu otevírat.
+
+Příklad dobrého závěru:
+
+```text
+Uzavřeno:
+Duplicitní odkaz na starý importní brief byl nahrazen odkazem na aktuální onboardingový checklist.
+
+Co ponecháváme:
+Jednu větu v servisním logu a datum uzavření.
+
+Co mažeme:
+Screenshot starého menu a citaci interní zprávy, protože už nejsou potřeba pro další práci.
+```
+
+Tohle není kosmetika. Čím méně starých stop musí tým držet, tím menší je provozní riziko a tím snáz se lidem pracuje s aktuální verzí pravdy.
+
+### Karta uzavření servisní poznámky
+
+Použijte ji jen tehdy, když poznámka skutečně prošla ověřením. Pokud ještě nevíte, jestli se nález opakuje, vraťte se k ověřovací kartě z předchozí přílohy.
+
+```text
+Původní servisní poznámka:
+
+Výsledek ověření:
+
+Finální stav:
+Zavřít bez změny / ponechat s přesnějším signálem / drobná úprava / korekce pracovního místa
+
+Aktuální pracovní místo:
+
+Co bylo změněno:
+
+Co teď vědomě neotevíráme:
+
+Co se maže, zavírá nebo archivuje:
+
+Privacy-first poznámka:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Původní servisní poznámka:
+V onboardingovém checklistu je odkaz na starý importní brief.
+
+Výsledek ověření:
+Při dalším použití se člověk opravdu dostal na starý brief, ale zbytek checklistu fungoval.
+
+Finální stav:
+Drobná úprava.
+
+Aktuální pracovní místo:
+Onboardingový checklist pro první datový import.
+
+Co bylo změněno:
+Starý odkaz nahrazen aktuálním odkazem na importní brief. Název položky zkrácen na "Připravit aktuální importní brief".
+
+Co teď vědomě neotevíráme:
+Neměníme strukturu onboardingu, importní flow, oprávnění ani šablony e-mailů.
+
+Co se maže, zavírá nebo archivuje:
+Zavírá se servisní poznámka. Maže se screenshot starého odkazu.
+
+Privacy-first poznámka:
+Bez jména člověka, který na problém narazil. Pro budoucí práci stačí popis tření a místo opravy.
+
+Vlastník a datum:
+Owner onboardingu, 2026-05-27.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete jednu ověřenou servisní poznámku.
+2. Přečtěte její výsledek ověření a vyberte finální stav.
+3. Najděte nejbližší aktuální pracovní místo.
+4. Proveďte nebo napište nejmenší platnou úpravu.
+5. Zapište, co teď vědomě neotevíráte.
+6. Zavřete poznámku jednou větou.
+7. Odstraňte nebo archivujte pomocné stopy, které už nejsou potřeba.
+8. Nechte v hlavní trase jen aktuální pravidlo.
+
+Výstup workshopu:
+
+```text
+Ověřená servisní poznámka je uzavřená. Aktuální pracovní místo obsahuje platnou verzi, stará stopa nepřekáží a tým nemusí příště číst historii, aby věděl, co dělat.
+```
+
+### Checklist kapitoly
+
+- Vycházíme z ověřeného výsledku, ne z nového dojmu?
+- Vybrali jsme jeden finální stav poznámky?
+- Je změna zapsaná v aktuálním pracovním místě, ne jen v komentáři?
+- Je jasné, co bylo změněno a co zůstává mimo rozsah?
+- Neotevřeli jsme kvůli malé poznámce větší redesign workflow?
+- Má případný nový nápad vlastní kartu mimo servisní uzavření?
+- Je stará servisní poznámka zavřená jednou srozumitelnou větou?
+- Odstranili jsme screenshoty, exporty, citace nebo osobní detaily, které už nejsou potřeba?
+- Zůstává v hlavní trase jen aktuální pravidlo?
+- Ví vlastník, kdy se k místu vrátit při dalším běžném použití?
+
+Dobré uzavření není slavnostní. Je spíš uklizený stůl po malé opravě: aktuální věc je na svém místě, starý papír zmizel a další člověk nemusí luštit, proč se tu válelo pět skoro stejných verzí reality.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RL o uzavření ověřené servisní poznámky do čistého pracovního stavu: práce se stavem z ověření, zásah v aktuálním pracovním místě, oddělení nových nápadů, privacy-first úklid starých stop, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RK o ověření servisní poznámky při dalším návratovém signálu: návrat k původnímu signálu, rozlišení stejného, podobného a nového nálezu, čtyři rozhodovací stavy, nejmenší korekce, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RJ o převodu drobného nálezu z návratu po servisu do servisní poznámky: rozlišení šumu, nálezu a korekce, krátký zápis, návratový signál, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RI o prvním běžném návratu k čistému standardu po servisu: přirozené použití, signály nalezení, samostatnosti a datové stopy, čtyři výsledky návratu, privacy-first kontrola, karta, mini workshop a checklist.
