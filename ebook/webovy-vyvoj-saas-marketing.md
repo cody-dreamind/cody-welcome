@@ -132949,8 +132949,222 @@ Víme, jestli čistý pracovní stav po servisní poznámce funguje při běžn�
 
 První návrat k čistému stavu má být krátký. Buď potvrdí, že servis skončil, nebo ukáže nejbližší místo, kde se čistota rozpadá. V obou případech chrání hlavní trasu před tím, aby se z ní znovu stal sklad starých poznámek.
 
+## Příloha RN: Převod nálezu z prvního návratu k čistému stavu do jedné minimální opravy
+
+První návrat k čistému pracovnímu stavu může dopadnout třemi způsoby, které neznamenají katastrofu, ale vyžadují akci: cesta nevedla na aktuální místo, člověk potřeboval drobnou oporu, nebo vznikla nová stopa. Všechny tři situace jsou malé jen tehdy, když je tým malé opravdu nechá.
+
+Tato příloha navazuje na návratovou kartu z předchozí části. Neřeší nový audit, redesign procesu ani další zlepšování jen proto, že je dokument otevřený. Řeší jednu otázku:
+
+```text
+Jak převést nález z prvního návratu do nejmenší opravy, po které zůstane čistý pracovní stav čistý?
+```
+
+Minimální oprava má být vidět v místě práce, ne v dalších debatách okolo ní. Když se člověk ztratil v odkazu, opravte odkaz. Když chyběla jedna věta, doplňte jednu větu. Když vznikla zbytečná kopie, zavřete kopii a upravte cestu tak, aby ji příště nikdo nepotřeboval.
+
+### Začněte přesným typem nálezu
+
+Nejdřív přepište výsledek návratu do jednoho typu. Bez toho se z malé opravy snadno stane seznam všeho, co by šlo zlepšit.
+
+Tři běžné typy nálezu:
+
+- `Cesta`: správný obsah existuje, ale běžná navigace vede jinam nebo člověk potřebuje ruční nasměrování.
+- `Opora`: cesta je správná, ale chybí mikrověta, hranice rozsahu, příklad nebo název stavu.
+- `Stopa`: práce sice proběhla, ale vznikla nová kopie, screenshot, export, přístup nebo pomocná evidence.
+
+Každý typ má jiný zásah. Když z nálezu typu `Cesta` uděláte textovou revizi, necháte rozbitý odkaz žít dál. Když z nálezu typu `Opora` uděláte nový checklist, přidáte víc procesu, než problém zaslouží. Když z nálezu typu `Stopa` uděláte jen poznámku "příště nevytvářet kopii", problém přesunete na disciplínu lidí místo na systém.
+
+Krátké třídění:
+
+```text
+Nález z návratu:
+
+Typ:
+Cesta / opora / stopa
+
+Nejbližší pracovní místo:
+
+Co stačí změnit:
+Odkaz / název / jedna věta / příklad / oprávnění / archivní stav / smazání kopie
+```
+
+Pokud neumíte vybrat jeden typ, vraťte se k návratové situaci. Možná už nejde o minimální opravu, ale o novou změnu s vlastní kartou.
+
+### Opravujte v místě, kde vzniklo tření
+
+Minimální oprava patří do nejbližšího místa, kde člověk narazil na problém. Ne do samostatného vysvětlení, které bude muset někdo najít navíc. Praktické pravidlo: člověk, který příště půjde stejnou pracovní cestou, má narazit na opravenou realitu bez znalosti starého nálezu.
+
+Příklady:
+
+- starý odkaz v rozcestníku nahraďte aktuálním odkazem;
+- nejasný název šablony přejmenujte v indexu i v samotné šabloně;
+- chybějící hranici rozsahu doplňte jako jednu větu nad seznam kroků;
+- archivní kopii označte jako neaktuální nebo ji odstraňte z hlavní trasy;
+- dočasný export smažte nebo nahraďte obecným závěrem bez osobních detailů;
+- zbytečný přístup zavřete a zapište, kde je aktuální zdroj pravdy.
+
+Špatná oprava vypadá takto:
+
+```text
+Přidáme poznámku do servisního logu, že lidé mají používat aktuální checklist.
+```
+
+Lepší oprava:
+
+```text
+V rozcestníku nahradíme starý odkaz aktuálním checklistem a archivní kopii označíme jako neaktuální.
+```
+
+První varianta spoléhá na paměť. Druhá mění pracovní prostředí. A pracovní prostředí je v tomhle spolehlivější než lidské odhodlání číst další poznámky. Překvapivé asi jako mokrá voda, ale týmy na to stejně pravidelně zapomínají.
+
+### Držte rozsah na jedné opravné větě
+
+Opravná věta popisuje zásah tak, aby se dal udělat a ověřit při dalším běžném použití. Nemá být strategická, inspirativní ani kompletní. Má být přesná.
+
+Šablona:
+
+```text
+Protože [konkrétní nález], upravíme [nejbližší pracovní místo] tak, že [jedna změna]. Při dalším běžném použití ověříme [jeden signál].
+```
+
+Příklady:
+
+```text
+Protože rozcestník vedl na archivní brief, upravíme redakční index tak, že ponechá jen aktuální brief a archiv označí jako neaktuální. Při dalším běžném použití ověříme, jestli editor najde správnou verzi bez dotazu.
+```
+
+```text
+Protože šablona neříkala, kdy formulář telefon nepotřebuje, doplníme nad pole jednu větu o volitelném telefonu. Při dalším běžném použití ověříme, jestli obchodník dokáže formulář použít bez ručního vysvětlení.
+```
+
+```text
+Protože při návratu vznikl screenshot starého stavu, smažeme screenshot a doplníme do servisního logu obecnou větu o aktuálním zdroji pravdy. Při dalším běžném použití ověříme, že se starý obrázek znovu nepoužívá jako návod.
+```
+
+Jakmile opravná věta obsahuje dvě spojky "a zároveň", pravděpodobně už opravujete víc věcí. Rozdělte to nebo vyberte jen tu část, která přímo souvisí s návratovým nálezem.
+
+### Privacy-first minimum opravy
+
+Nález z návratu často vznikne proto, že se někdo snažil práci pojistit pomocnou stopou. Udělal kopii, poslal screenshot, vyexportoval tabulku, přidal přístup, opsal příklad s reálným zákazníkem. Záměr může být dobrý, ale výsledek zvyšuje datovou stopu.
+
+Privacy-first minimum znamená:
+
+- oprava nesmí vyžadovat nový tracker, formulář ani sledování lidí;
+- důkaz o nálezu má být zobecněný, pokud konkrétní detail není nutný;
+- dočasné exporty, screenshoty a kopie mají po opravě zmizet nebo být jasně mimo hlavní trasu;
+- přístup k pomocným podkladům se nezachovává jen pro pocit bezpečí;
+- aktuální zdroj pravdy má být jednodušší najít než stará datová stopa.
+
+Dobrá privacy-first oprava:
+
+```text
+Starý screenshot neponecháváme v návodu. V aktuální šabloně je jedna věta, podle které člověk pozná správnou variantu. Servisní log drží jen obecný závěr bez jmen a zákaznických detailů.
+```
+
+Slabá oprava:
+
+```text
+Screenshot necháme v příloze pro jistotu a přidáme další poznámku, aby ho lidé nepoužívali.
+```
+
+To je dokumentační verze zamčených dveří s klíčem nalepeným vedle kliky. Technicky jste něco vysvětlili, prakticky jste problém nechali dýchat.
+
+### Karta minimální opravy po návratu
+
+Použijte ji jen pro nález z prvního návratu k čistému pracovnímu stavu. Pokud návrat ukázal nový pracovní cíl nebo větší změnu odpovědnosti, založte samostatnou kartu a tuto opravu nepřetahujte přes její přirozenou velikost.
+
+```text
+Čistý pracovní stav:
+
+Nález z prvního návratu:
+
+Typ nálezu:
+Cesta / opora / stopa
+
+Nejbližší pracovní místo:
+
+Opravná věta:
+
+Konkrétní změna:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first úklid:
+
+Ověření při dalším běžném použití:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Čistý pracovní stav:
+Redakční rozcestník pro přípravu případové studie.
+
+Nález z prvního návratu:
+Editor našel aktuální šablonu až přes starou zprávu v chatu.
+
+Typ nálezu:
+Cesta.
+
+Nejbližší pracovní místo:
+Redakční rozcestník.
+
+Opravná věta:
+Protože běžná cesta nevedla na aktuální šablonu, upravíme redakční rozcestník tak, že ponechá aktuální odkaz a archivní variantu označí jako neaktuální. Při dalším běžném použití ověříme, jestli editor najde šablonu bez chatu.
+
+Konkrétní změna:
+Nahradit starý odkaz, přejmenovat archivní kopii a odstranit pinned zprávu z hlavní trasy.
+
+Co teď vědomě neotevíráme:
+Neměníme strukturu případové studie, obsahové role ani schvalovací proces.
+
+Privacy-first úklid:
+Neponecháváme screenshot starého rozcestníku. V logu zůstává jen obecný popis opravy.
+
+Ověření při dalším běžném použití:
+První další brief připravit přes redakční rozcestník, bez ručního odkazu z chatu.
+
+Vlastník a datum:
+Editor veřejné edice, 2026-05-27.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete jednu návratovou kartu se stavem `opravit cestu`, `doplnit oporu` nebo `nová stopa`.
+2. Vyberte jeden typ nálezu: cesta, opora nebo stopa.
+3. Najděte nejbližší pracovní místo, kde tření vzniklo.
+4. Napište jednu opravnou větu.
+5. Proveďte nebo zadejte jednu konkrétní změnu.
+6. Zapište, co se teď vědomě neotevírá.
+7. Uklidte pomocné stopy, které oprava nahradila.
+8. Určete nejbližší běžné použití, při kterém se oprava ověří.
+
+Výstup workshopu:
+
+```text
+Nález z prvního návratu je převedený do jedné minimální opravy. Víme, kde se mění pracovní prostředí, jaká datová stopa se uklízí a kdy se ověří, že čistý stav znovu drží.
+```
+
+### Checklist kapitoly
+
+- Vycházíme z konkrétního nálezu z návratové karty?
+- Vybrali jsme jeden typ nálezu: cesta, opora nebo stopa?
+- Opravujeme nejbližší pracovní místo, ne jen komentář okolo něj?
+- Dá se oprava popsat jednou opravnou větou?
+- Neměníme víc částí jen proto, že dokument máme otevřený?
+- Je jasné, co teď vědomě neotevíráme?
+- Nevyžaduje oprava nový tracker, formulář, export nebo sledování lidí?
+- Odstraňujeme nebo zavíráme pomocné stopy, které už nejsou potřeba?
+- Zůstává aktuální zdroj pravdy jednodušší než stará objížďka?
+- Má oprava vlastníka a nejbližší běžné použití pro ověření?
+- Pokud nález přesahuje minimální opravu, dostal vlastní kartu místo přilepení k této smyčce?
+
+Minimální oprava po návratu je dobrá právě tím, že je trochu nudná. Nemá ohromit tým novou metodikou. Má odstranit jednu překážku, snížit jednu zbytečnou stopu a nechat čistý pracovní stav pokračovat bez další vrstvy hluku.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RN o převodu nálezu z prvního návratu k čistému pracovnímu stavu do jedné minimální opravy: třídění nálezu na cestu, oporu nebo stopu, opravná věta, zásah v nejbližším pracovním místě, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RL o uzavření ověřené servisní poznámky do čistého pracovního stavu: práce se stavem z ověření, zásah v aktuálním pracovním místě, oddělení nových nápadů, privacy-first úklid starých stop, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RK o ověření servisní poznámky při dalším návratovém signálu: návrat k původnímu signálu, rozlišení stejného, podobného a nového nálezu, čtyři rozhodovací stavy, nejmenší korekce, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RJ o převodu drobného nálezu z návratu po servisu do servisní poznámky: rozlišení šumu, nálezu a korekce, krátký zápis, návratový signál, privacy-first minimum dat, karta, mini workshop a checklist.
