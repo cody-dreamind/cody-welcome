@@ -130911,8 +130911,218 @@ Upravený standard prošel prvním běžným použitím, nebo má jednu konkrét
 
 První návrat k upravenému standardu je malá kontrola reality. Když proběhne čistě, standard může tiše sloužit dál. Když drhne, opraví se nejbližší pracovní místo. A když odhalí změnu účelu nebo datové stopy, téma se znovu otevře vědomě, ne jako nenápadný posun v provozu. Přesně tak se drží disciplína bez zbytečného dozoru.
 
+## Příloha RF: Převod drobné opravy po prvním návratu do servisního zásahu
+
+První návrat k upravenému standardu může skončit stavem `drobně opravit`. To je dobrý výsledek, pokud s ním tým zachází rozumně. Znamená, že standard v principu funguje, ale jedno místo se při běžné práci ukázalo jako nejasné, moc dlouhé, špatně pojmenované nebo zbytečně těžké najít.
+
+Riziko je v tom, že se z drobné opravy stane nová reforma. Někdo otevře starou debatu, přidá sousední nápady, začne přepisovat celou šablonu a za hodinu už nikdo neví, jestli se řešila nápověda u jednoho pole, nebo budoucnost celého sales procesu. Servisní zásah má tomuhle zabránit.
+
+Servisní zásah je nejmenší změna v kanonickém pracovním místě, která odstraní konkrétní tření z prvního návratu, aniž by změnila účel standardu, rozsah dat nebo pravidlo práce.
+
+Jedna pracovní otázka stačí:
+
+```text
+Jaký nejmenší zásah odstraní zjištěné tření a přitom nezmění rozhodnutí, které už bylo uzavřené?
+```
+
+Pokud na otázku neumíte odpovědět jednou větou, nejspíš už nejde o servisní zásah. Vraťte se k předchozí kapitole a změnu znovu otevřete jako samostatné rozhodnutí.
+
+### Začněte přesným třením
+
+Servisní zásah nesmí začít větou "standard by se dal zlepšit". To je otevřená pozvánka pro všechno, co někomu vadí. Začněte přesným třením z návratové karty.
+
+Dobré vstupy:
+
+- "Autor nepoznal, jestli počet uživatelů znamená aktuální stav nebo první běžný provoz."
+- "Checklist odkazuje na starý název formuláře."
+- "Nápověda je správná, ale je schovaná až pod příkladem."
+- "V obchodní kartě chybí krátká věta, co s údajem nedělat."
+
+Slabé vstupy:
+
+- "Formulář by chtěl doladit."
+- "Sales karta není ideální."
+- "Tým má k tomu víc připomínek."
+- "Když už to otevíráme, mohli bychom vyřešit i segmentaci."
+
+Servisní zásah má vycházet z jedné konkrétní věty tření. Pokud máte tři různé věty, vyberte jednu. Ostatní zapište jako podnět, ne jako součást aktuálního zásahu.
+
+### Vyberte typ zásahu
+
+Většina servisních zásahů patří do jedné z pěti kategorií:
+
+- Pojmenování: přejmenovat pole, sekci, stav nebo odkaz.
+- Nápověda: doplnit krátkou větu, která zabrání špatnému výkladu.
+- Umístění: přesunout existující informaci blíž k místu použití.
+- Úklid: odstranit starý odkaz, poznámku nebo dočasný text.
+- Hranice: doplnit větu, co se tímto údajem nebo pravidlem nedělá.
+
+Příklad:
+
+```text
+Tření:
+Autor nevěděl, jestli "počet uživatelů" znamená aktuální tým nebo očekávaný stav po nasazení.
+
+Typ zásahu:
+Nápověda.
+
+Servisní zásah:
+Změnit nápovědu na "Stačí odhad počtu lidí, kteří budou řešení používat v prvním běžném provozu."
+
+Co se nemění:
+Pole zůstává volitelné, nezavádíme lead scoring a údaj nepoužíváme k automatickému řazení poptávek.
+```
+
+Takový zásah je malý, ale užitečný. Opravuje skutečné zaváhání a zároveň chrání původní privacy-first rozhodnutí.
+
+### Nesahejte mimo kanonické místo
+
+Servisní zásah patří tam, kde člověk opravdu pracuje. Pokud se tření objevilo v briefu formuláře, opravte brief formuláře. Pokud vzniklo v komponentě, opravte komponentu. Pokud se týká obchodní karty, upravte obchodní kartu. Nezakládejte nový vysvětlující dokument jen proto, že je jednodušší napsat další text než uklidit ten platný.
+
+Pravidlo:
+
+```text
+Jedno tření, jedno kanonické místo, jedna malá změna.
+```
+
+Výjimkou je situace, kdy kanonické místo samo není jasné. Pak servisní zásah nesmí být přepis obsahu. Nejdřív označte aktuální zdroj pravdy a odstraňte nebo přesměrujte staré varianty. Teprve potom opravujte text.
+
+Příklad:
+
+```text
+Problém:
+Tým našel dvě verze briefu poptávkového formuláře.
+
+Špatný servisní zásah:
+Upravit nápovědu v obou verzích, aby byly "pro jistotu" stejné.
+
+Správný servisní zásah:
+Označit jednu verzi jako aktuální, druhou archivovat nebo přesměrovat a upravit nápovědu jen v aktuální verzi.
+```
+
+Duplicita je často větší problém než samotná věta. Když opravíte dvě místa, jen potvrzujete, že dvě místa smějí dál existovat.
+
+### Hlídejte hranici mezi servisem a změnou
+
+Servisní zásah nesmí měnit účel pravidla. Pokud se při opravě ukáže, že potřebujete nový údaj, nový stav, nové oprávnění, nový dodavatelský nástroj nebo nové automatické rozhodování, zastavte se. To už není servis. To je nová změna.
+
+Hraniční příklady:
+
+- Servis: upřesnit nápovědu u volitelného pole.
+- Nová změna: udělat z volitelného pole povinné.
+- Servis: odstranit starý odkaz na pilotní šablonu.
+- Nová změna: zavést nový schvalovací krok pro všechny formuláře.
+- Servis: doplnit větu, že údaj slouží jen k přípravě první odpovědi.
+- Nová změna: začít údaj používat k automatickému scoringu leadů.
+
+Codyho komentář: servisní zásah je jako dotažení šroubku, ne přestavba dílny. Jakmile musíte svolat lidi, kteří původně u standardu nebyli, pravděpodobně už šroubujete do jiné věci.
+
+### Privacy-first servisní zásah
+
+Servisní zásah je dobrá chvíle na malý úklid datové stopy. Ne proto, že by každá oprava potřebovala audit, ale protože právě drobné úpravy umí nenápadně rozšiřovat sběr dat.
+
+Před aplikací zásahu si odpovězte:
+
+- Přidáváme nový údaj?
+- Měníme účel existujícího údaje?
+- Posíláme něco do dalšího nástroje?
+- Rozšiřujeme přístup dalším lidem?
+- Vzniká nový export, screenshot nebo dočasná kopie?
+- Potřebujeme upravit retenční poznámku?
+
+Pokud jsou odpovědi `ne`, zapište to krátce a pokračujte. Pokud je některá odpověď `ano`, servisní zásah zastavte a otevřete samostatné rozhodnutí. Privacy-first provoz nestojí na tom, že nikdy nic neměníte. Stojí na tom, že změny účelu a datové stopy nejsou schované pod slovem "drobnost".
+
+### Karta servisního zásahu po prvním návratu
+
+```text
+Vstup z prvního návratu:
+
+Přesné tření:
+
+Typ zásahu:
+Pojmenování / Nápověda / Umístění / Úklid / Hranice
+
+Kanonické místo:
+
+Servisní zásah jednou větou:
+
+Co se tím nemění:
+
+Datová stopa:
+Beze změny / Mění se - otevřít nové rozhodnutí
+
+Jak se ověří:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Vstup z prvního návratu:
+Drobně opravit.
+
+Přesné tření:
+Autor nepoznal, jestli počet uživatelů znamená současný tým nebo očekávaný první běžný provoz.
+
+Typ zásahu:
+Nápověda.
+
+Kanonické místo:
+Brief poptávkového formuláře.
+
+Servisní zásah jednou větou:
+Nápovědu přepsat na "Stačí odhad počtu lidí, kteří budou řešení používat v prvním běžném provozu."
+
+Co se tím nemění:
+Pole zůstává volitelné, účel údaje zůstává příprava první odpovědi a nepřidáváme scoring.
+
+Datová stopa:
+Beze změny.
+
+Jak se ověří:
+Při dalším použití formuláře vlastník zkontroluje, jestli autor použil nápovědu bez doptávání.
+
+Vlastník a datum:
+Owner poptávkového formuláře, 2026-05-27.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete kartu prvního návratu.
+2. Přepište výsledek `drobně opravit` do jedné věty přesného tření.
+3. Vyberte typ zásahu: pojmenování, nápověda, umístění, úklid nebo hranice.
+4. Určete jediné kanonické místo, kde se bude měnit.
+5. Napište servisní zásah jednou větou.
+6. Zapište, co se tím nemění, hlavně u účelu dat.
+7. Pokud se mění datová stopa, workshop ukončete a otevřete nové rozhodnutí.
+
+Výstup workshopu:
+
+```text
+Máme jednu servisní úpravu v jednom pracovním místě, jasně víme, co se nemění, a další použití ukáže, jestli tření zmizelo.
+```
+
+### Checklist kapitoly
+
+- Vychází servisní zásah z konkrétního tření z prvního návratu?
+- Neřešíme víc než jednu věc najednou?
+- Je zvolený typ zásahu: pojmenování, nápověda, umístění, úklid nebo hranice?
+- Mění se jen kanonické pracovní místo?
+- Neopravujeme dvě duplicitní verze místo toho, abychom jednu zavřeli?
+- Je servisní zásah popsaný jednou větou?
+- Je jasné, co se tím nemění?
+- Nemění se účel, povinnost, oprávnění ani automatické rozhodování?
+- Nevzniká nový údaj, export, dodavatel, přístup ani dočasná kopie?
+- Pokud se datová stopa mění, otevřeli jsme samostatné rozhodnutí?
+- Je určené, jak se zásah ověří při dalším běžném použití?
+- Má zásah vlastníka a datum?
+
+Servisní zásah je malá disciplína proti velkému rozlézání práce. Opraví skutečné tření, ale nenechá tým znovu vyjednávat celý standard. Když je dobře napsaný, člověk při dalším použití skoro nepozná, že se něco změnilo. Jen práce přestane drhnout tam, kde předtím drhla.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RF o převodu drobné opravy po prvním návratu do servisního zásahu: přesné tření, typy zásahu, kanonické místo, hranice mezi servisem a novou změnou, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RE o prvním návratu k upravenému standardu po zavřené malé úpravě: kontrola nalezení, použití a datové stopy, čtyři výsledky návratu, privacy-first návrat bez nového měření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RD o uzavření malé ověřovací úpravy do trvalého nebo zrušeného stavu: práce se stavem ověření, kanonické místo, zavření dočasnosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RC o ověření malé ověřovací úpravy po prvním běžném použití: návrat k hypotéze, kontrola výsledku, tření a ceny dat, čtyři rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
