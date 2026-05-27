@@ -3490,6 +3490,176 @@ Codyho komentář: schopnost nechat funkční věc chvíli být je podceňovaná
 
 Klid není konec práce. Je to součást práce. Díky němu rukopis nepůsobí jako nekonečný experiment, ale jako nástroj, kterému může tým věřit právě proto, že se mění jen ve chvíli, kdy změna opravdu pomáhá.
 
+## Návrat k trase po klidovém období
+
+Klidové období má smysl jen tehdy, když po něm umíte rozlišit dvě věci: trasu, která pořád funguje, a trasu, kterou je opravdu potřeba znovu otevřít. Bez tohoto rozlišení se tým vrátí ke starému zvyku: každé další použití rukopisu se tváří jako nová editace. Jenže stabilní pracovní text nemá být permanentní staveniště. Má se otevřít až ve chvíli, kdy existuje jasný návratový signál.
+
+Návrat po klidu proto nezačínejte otázkou "co všechno bychom mohli zlepšit". Začněte otázkou:
+
+```text
+Stalo se během klidového období něco, co mění původní rozhodnutí nechat trasu být?
+```
+
+Pokud odpověď zní ne, nejlepší další krok je často žádný další krok. Zapište, že trasa drží, smažte dočasné poznámky a vraťte pozornost k práci, kterou má rukopis podporovat. Tohle je těžší, než vypadá. Autoři, produktoví lidé i marketéři mají tendenci považovat "nic neupravit" za promarněnou příležitost. Jenže u ověřené trasy je to někdy přesně opačně: neupravit znamená chránit důvěru čtenáře.
+
+### Tři důvody pro znovuotevření
+
+Trasu po klidovém období otevírejte jen ze tří důvodů:
+
+1. Opakované tření: stejný problém se objevil ve více běžných použitích.
+2. Nová duplicita: lidé začali vytvářet druhou šablonu, druhý návod nebo paralelní rozhodovací záznam.
+3. Horší datová stopa: použití trasy vede k většímu sběru, delší retenci nebo sdílení dat, než bylo zamýšlené.
+
+Všechno ostatní je nejdřív podnět. Může být zajímavý, chytrý a jednou užitečný, ale ještě nepatří do otevřené editace. Podnět držte bokem, dokud nezačne opakovaně brzdit práci nebo zvyšovat riziko. Dlouhý rukopis se nejrychleji rozpadá ve chvíli, kdy každá dobrá poznámka získá stejnou váhu jako opakovaný provozní problém.
+
+Příklad:
+
+```text
+Podnět:
+Nadpis části o stop podmínce by mohl být ostřejší.
+
+Návratový signál:
+Dva lidé při samostatném použití nezapsali stop podmínku jako hotový stav a znovu vytvořili jen seznam aktivit.
+
+Rozhodnutí:
+Trasu lze znovu otevřít, ale jen v místě, kde se stop podmínka převádí do pracovního zápisu.
+```
+
+Všimněte si poslední věty. Návratový signál neznamená povolení přepsat celou úvodní část. Znamená povolení najít nejmenší místo, které selhalo, a opravit ho.
+
+### Nejprve potvrďte původní slib trasy
+
+Před každou novou úpravou se vraťte k tomu, proč trasa existuje. Pokud původní slib už neplatí, řešíte větší změnu. Pokud slib platí, držte se ho.
+
+Krátká kontrola:
+
+```text
+Původní slib trasy:
+Co během klidu fungovalo:
+Co během klidu selhalo:
+Je problém uvnitř původního slibu:
+Nejmenší místo zásahu:
+```
+
+Vyplněný příklad:
+
+```text
+Původní slib trasy:
+Pomoci zavřít slabý podnět bez vytváření zbytečného úkolu.
+
+Co během klidu fungovalo:
+V jednom měsíčním review byl slabý podnět správně zavřený.
+
+Co během klidu selhalo:
+V dalším review vznikla duplicitní poznámka, protože člověk nenašel návratový signál.
+
+Je problém uvnitř původního slibu:
+Ano. Jde pořád o zavření bez úkolu, ne o nový systém řízení podnětů.
+
+Nejmenší místo zásahu:
+Zpřesnit část o návratovém signálu v kartě klidového období.
+```
+
+Tento zápis chrání rozsah. Pokud zjistíte, že problém už není uvnitř původního slibu, nelepte ho na starou trasu. Založte novou kartu změny nebo ho odložte do edičního backlogu. Staré rozhodnutí má zůstat čitelné; nemá se stát magnetem na všechno, co se kolem tématu objevilo.
+
+### Rozhodnutí po návratu
+
+Po klidovém období existují čtyři rozumné stavy:
+
+- Ponechat v klidu: trasa funguje a návratový signál nenastal.
+- Lokálně opravit: návratový signál nastal, ale stačí jedna směrovka, věta, odkaz nebo nadpis.
+- Otevřít novou kartu: problém přesahuje původní slib trasy.
+- Sloučit nebo zrušit: trasa už není samostatně užitečná, protože ji nahradilo jiné kanonické místo.
+
+Stav `ponechat v klidu` je plnohodnotné rozhodnutí. Není to lenost. Je to provozní disciplína. Když ho použijete, zapište jednou větou proč. Příště se tým nebude muset hádat, jestli se na něco zapomnělo.
+
+Stav `lokálně opravit` držte opravdu lokální. Pokud se chystáte upravit tři kapitoly, dvě přílohy a rozcestník, už nejde o lokální opravu. Možná je to správná práce, ale potřebuje vlastní kartu, vlastní hranici rozsahu a vlastní ověření.
+
+Stav `sloučit nebo zrušit` používejte bez sentimentu. Některé trasy byly užitečné jen jako mezikrok. Pokud dnes existuje kratší, jasnější a lépe používané místo, starou trasu nenechávejte žít jen proto, že kdysi dala práci. Starý text, který už nikdo nepotřebuje, je také provozní náklad.
+
+### Privacy-first návrat po klidu
+
+Návrat po klidovém období nesmí být záminka k novému sledování. Nepotřebujete zpětně rekonstruovat každé použití, sbírat jména lidí, vytahovat chaty ani přidávat analytiku čtení. Rozhodujte podle nejmenšího důkazu, který stačí k posouzení návratového signálu.
+
+Privacy-first otázky:
+
+- Stačí nám pracovní výstup místo záznamu chování člověka?
+- Umíme popsat tření bez surových zákaznických dat?
+- Můžeme po rozhodnutí smazat dočasné poznámky z klidového období?
+- Neotevíráme trasu jen proto, že máme po ruce víc dat, než skutečně potřebujeme?
+
+Pokud návratový signál souvisí s horší datovou stopou, dejte mu vyšší prioritu než kosmetickému tření. Špatný nadpis zpomalí čtenáře. Špatná datová trasa může vytvořit zbytečnou retenci, přístup nebo export. Privacy-first rukopis má takové signály řešit dřív, protože chrání důvěru i provozní jednoduchost.
+
+Codyho komentář: návrat po klidu je místo, kde se pozná, jestli tým bere "méně, ale lépe" vážně. Otevřít text umí každý. Neotevřít ho, když drží, a přitom neignorovat skutečný signál, to už je dospělá údržba.
+
+### Karta návratu po klidovém období
+
+```text
+Trasa:
+Klidové období od:
+Původní slib trasy:
+Co během klidu fungovalo:
+Návratový signál:
+Stav po návratu:
+Nejmenší zásah:
+Co se neotevírá:
+Privacy-first poznámka:
+Co mažeme nebo anonymizujeme:
+Další kontrola:
+```
+
+Vyplněný příklad:
+
+```text
+Trasa:
+Zavření karty změny bez úkolu.
+
+Klidové období od:
+Po potvrzení směrovky v měsíčním review.
+
+Původní slib trasy:
+Slabý podnět může skončit rozhodnutím nic teď neměnit, bez nového úkolu.
+
+Co během klidu fungovalo:
+Jeden podnět byl správně zavřený a nevznikl tracker ani další evidence.
+
+Návratový signál:
+V dalším review vznikla duplicitní poznámka, protože návratový signál nebyl jasně oddělený od běžného podnětu.
+
+Stav po návratu:
+Lokálně opravit.
+
+Nejmenší zásah:
+Zpřesnit jednu větu u návratového signálu.
+
+Co se neotevírá:
+Nevyrábíme nový index všech stavů karty změny.
+
+Privacy-first poznámka:
+Nepřenášíme původní zákaznický detail, stačí anonymizovaný popis duplicitní poznámky.
+
+Co mažeme nebo anonymizujeme:
+Dočasný zápis z review po převodu do rozhodovací karty.
+
+Další kontrola:
+Při příštím přirozeném použití stejné trasy.
+```
+
+### Checklist návratu po klidu
+
+- Nastal skutečný návratový signál, nebo jde jen o zajímavý podnět?
+- Je jasný původní slib trasy?
+- Víme, co během klidu fungovalo a co selhalo?
+- Je problém uvnitř původního slibu, nebo potřebuje novou kartu?
+- Stačí lokální oprava, nebo by zásah rozbil hranici původní trasy?
+- Je stav po návratu zapsaný jako ponechat, opravit, otevřít novou kartu, sloučit nebo zrušit?
+- Nezvětšujeme datovou stopu kvůli ověření návratu?
+- Jsou surové poznámky, exporty nebo zákaznické detaily smazané či anonymizované?
+- Je zapsané, co se výslovně neotevírá?
+- Má další kontrola přirozený pracovní okamžik, ne umělý kontrolní rituál?
+
+Návrat po klidovém období má být krátká brána, ne nová kapitola života rukopisu. Buď potvrdí, že trasa dál drží, nebo dovolí jednu přesnou opravu, případně poctivě založí novou kartu. V každém případě chrání to nejdůležitější: aby text zůstal stabilní tam, kde funguje, a proměnlivý jen tam, kde změna opravdu zlepší práci.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -133128,3 +133298,4 @@ Dobré uzavření není slavnostní. Je spíš uklizený stůl po malé opravě:
 - 2026-05-27: Doplněna úvodní podkapitola o ověření drobného doladění trasy při dalším použití: původní tření, stavy ověření, privacy-first kontrola, karta a checklist.
 - 2026-05-27: Doplněna krátká úvodní poznámka, aby stop podmínka popisovala hotový pracovní stav místo pouhého seznamu aktivit.
 - 2026-05-27: Doplněna úvodní podkapitola o klidovém období po ověřené trase: návratový signál, omezení další editace, privacy-first klid, karta a checklist.
+- 2026-05-27: Doplněna úvodní podkapitola o návratu k trase po klidovém období: rozlišení podnětu a návratového signálu, potvrzení původního slibu, stavy po návratu, privacy-first brána, karta a checklist.
