@@ -131612,8 +131612,207 @@ Servisní zásah je uzavřený, aktuální standard je čistý, pomocné podklad
 
 Dobré uzavření servisního zásahu je tiché. Neoslavuje opravu, jen vrátí standard do stavu, ve kterém se dá znovu normálně pracovat. Když další člověk najde aktuální místo, použije ho bez zaváhání a nemusí číst servisní historii, uzavření splnilo svůj účel.
 
+## Příloha RI: První běžný návrat k čistému standardu po servisu
+
+Čistý standard po uzavřeném servisu nemá zůstat vitrínový exponát. Má znovu fungovat v běžné práci: někdo přijde, použije aktuální místo, dokončí úkol a nepotřebuje znát historii drobné opravy. První návrat po servisu proto není další audit. Je to rychlá kontrola, jestli se standard opravdu vrátil do normálního provozu.
+
+Pracovní otázka:
+
+```text
+Použil člověk čistý standard při běžné práci bez návratu staré verze, bez nové podpory a bez nové datové stopy?
+```
+
+Pokud ano, standard nechte být. To je celá pointa. Pokud ne, neznamená to automaticky, že servisní zásah byl špatný. Může jít o starý odkaz, nejasnou odpovědnost, nepřepsanou šablonu, nebo o to, že tým pořád hledá starou historii místo aktuálního návodu. Jinými slovy: nejdřív zjistit, potom sahat na text. Ano, revoluční myšlenka.
+
+### Vraťte se až při přirozené práci
+
+První návrat má proběhnout ve chvíli, kdy se standard použije tak jako tak. Neplánujte kvůli němu samostatnou kontrolní schůzku, pokud nejde o kritický provozní standard. U běžných webových, marketingových, produktových nebo interních šablon stačí počkat na nejbližší reálný průchod.
+
+Dobré návratové situace:
+
+- obchodník použije aktuální kvalifikační kartu v dalším rozhovoru;
+- autor připraví nový brief podle čisté šablony;
+- support odpoví podle upraveného interního návodu;
+- produktový tým otevře standard při další malé změně;
+- vlastník procesu projde výstup, který měl standard přirozeně vést.
+
+Slabé návratové situace:
+
+- vlastník si standard přečte a řekne, že je to v pořádku;
+- tým kontroluje celý archiv místo jednoho pracovního použití;
+- někdo hledá nové nápady, protože už je dokument otevřený;
+- návrat se odloží na "až bude větší revize", což je často elegantní název pro nikdy.
+
+První návrat nemá dokázat, že standard je dokonalý. Má ověřit, že po servisu nezůstal rozbitý provozní průchod.
+
+### Sledujte tři signály návratu
+
+První signál je nalezení. Člověk musí přijít na aktuální standard z místa, kde by ho normálně hledal: z issue, interní navigace, onboardingového odkazu, CRM poznámky, šablony, repozitáře nebo provozního indexu. Pokud standard najde jen proto, že mu vlastník pošle přímý odkaz do chatu, návrat ještě není čistý.
+
+Druhý signál je samostatnost. Člověk má zvládnout běžnou práci bez vysvětlování servisní historie. Nemusí znát, proč se věta změnila, jaký screenshot byl smazán ani kdo před týdnem zaváhal. Stačí, že aktuální návod vede k rozhodnutí.
+
+Třetí signál je stopa. První návrat nesmí obnovit pomocné podklady, které byly při uzavření záměrně smazané nebo sloučené. Pokud někdo znovu vytváří lokální kopii, screenshot s osobními údaji nebo nový export jen proto, aby si "byl jistý", standard možná není dostatečně srozumitelný nebo dostupný.
+
+Krátký zápis:
+
+```text
+Nalezení:
+Aktuální standard nalezen běžnou cestou / nalezen přes člověka / nalezena stará verze
+
+Samostatnost:
+Použito bez podpory / použito s drobným dotazem / bez podpory nešlo dokončit
+
+Stopa:
+Beze změny / vznikla pomocná stopa / vznikla nová datová nebo přístupová stopa
+```
+
+### Rozlišujte čtyři výsledky návratu
+
+`Nechat v klidu` znamená, že člověk našel aktuální standard, použil ho samostatně a nevznikla nová datová stopa. To je nejlepší výsledek. Neznamená "pojďme ještě něco zlepšit". Znamená zavřít poznámku a nechat standard pracovat.
+
+`Opravit cestu` znamená, že samotný standard nejspíš funguje, ale člověk k němu nepřišel běžnou cestou. Opravte odkaz, navigaci, index, pinned poznámku nebo šablonu, která odkazuje na starou verzi. Text standardu zatím neměňte.
+
+`Doplnit mikrovětu` znamená, že člověk našel správné místo, ale potřeboval jednu drobnou oporu: například upřesnit volitelný údaj, vysvětlit stav, doplnit hranici rozsahu nebo pojmenovat návratový signál. Pokud stačí jedna věta v kanonickém místě a nemění se účel, pořád jde o lokální servis.
+
+`Znovu otevřít změnu` znamená, že se ukázal větší problém. Standard vede k jinému rozhodnutí, vyžaduje nový údaj, obnovuje starý proces, posouvá odpovědnost nebo vytváří novou privacy stopu. Pak už nejde o první návrat po servisu. Jde o novou změnu se samostatnou kartou.
+
+Příklad:
+
+```text
+Výsledek:
+Opravit cestu.
+
+Důvod:
+Autor použil aktuální šablonu až po přímém odkazu od vlastníka. V interním rozcestníku pořád visela stará kopie.
+
+Další krok:
+Nahradit starý odkaz v rozcestníku kanonickým briefem a starou kopii označit jako archiv.
+
+Co se nemění:
+Text briefu, účel údajů a formulářová pole.
+```
+
+### Privacy-first návrat bez obnovy nepořádku
+
+Po uzavřeném servisu bývá největší riziko nenápadný návrat pomocných stop. Někdo si pro jistotu uloží příklad zákaznického briefu, zkopíruje si starou šablonu, vytáhne screenshot z chatu nebo založí nový seznam "abychom to příště našli". Tím se čistý standard začne zase větvit.
+
+Privacy-first pravidlo:
+
+```text
+První návrat má potvrdit použití standardu, ne obnovit důkazní sklad.
+```
+
+Při návratu proto zkontrolujte:
+
+- nevznikla nová kopie šablony mimo zdroj pravdy;
+- nikdo neuložil screenshot s osobními údaji jen kvůli vysvětlení;
+- starý export se znovu nepoužil jako příklad;
+- přístup k pomocnému podkladu nebyl obnoven bez důvodu;
+- návratový zápis neobsahuje víc detailů o zákazníkovi nebo týmu, než je nutné.
+
+Když potřebujete příklad, použijte anonymizovanou větu nebo neutrální vzorek. Když potřebujete důkaz, opište rozhodnutí, ne osobní data. A když potřebujete jistotu, často pomůže smazat starou kopii víc než přidat další tabulku.
+
+### Karta prvního návratu po servisu
+
+```text
+Čistý standard:
+
+Původní servisní zásah:
+
+Návratová situace:
+
+Nalezení:
+Aktuální standard běžnou cestou / přes člověka / stará verze
+
+Samostatnost:
+Bez podpory / drobný dotaz / nešlo dokončit
+
+Stopa:
+Beze změny / pomocná stopa / nová datová nebo přístupová stopa
+
+Výsledek:
+Nechat v klidu / Opravit cestu / Doplnit mikrovětu / Znovu otevřít změnu
+
+Další krok:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first úklid:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Čistý standard:
+Brief poptávkového formuláře.
+
+Původní servisní zásah:
+Upřesněná nápověda u volitelného pole "počet uživatelů".
+
+Návratová situace:
+Autor připravil nový brief při běžné přípravě nabídky.
+
+Nalezení:
+Stará verze v interním rozcestníku.
+
+Samostatnost:
+Po nalezení aktuálního briefu bez podpory.
+
+Stopa:
+Beze změny.
+
+Výsledek:
+Opravit cestu.
+
+Další krok:
+Aktualizovat interní rozcestník a starou kopii označit jako archiv.
+
+Co teď vědomě neotevíráme:
+Text briefu, povinnost pole, scoring ani nový analytický event.
+
+Privacy-first úklid:
+Nevznikl nový export ani screenshot. Starou kopii ponechat pouze jako archiv bez osobních příkladů.
+
+Vlastník a datum:
+Owner poptávkového formuláře, 2026-05-27.
+```
+
+### Mini workshop na 5 minut
+
+1. Najděte jedno běžné použití čistého standardu po servisu.
+2. Zapište, kudy člověk ke standardu přišel.
+3. Ověřte, jestli ho použil bez vysvětlování servisní historie.
+4. Zkontrolujte, jestli nevznikla nová kopie, export, screenshot nebo přístup.
+5. Vyberte výsledek: nechat v klidu, opravit cestu, doplnit mikrovětu nebo znovu otevřít změnu.
+6. Zapište jeden další krok a jednu věc, kterou teď neotevíráte.
+
+Výstup workshopu:
+
+```text
+Víme, jestli se čistý standard po servisu vrátil do běžného provozu, a případná oprava míří na nejbližší příčinu místo na další rozšiřování dokumentace.
+```
+
+### Checklist kapitoly
+
+- Proběhl návrat při přirozené práci, ne v umělém auditu?
+- Víme, kudy člověk ke standardu přišel?
+- Našel aktuální kanonické místo, nebo starou verzi?
+- Použil standard bez vysvětlování servisní historie?
+- Nevznikla nová lokální kopie, screenshot, export, přístup ani analytický event?
+- Pokud problém byl v dostupnosti, opravujeme cestu místo textu?
+- Pokud chyběla jen drobná opora, stačí jedna mikrověta?
+- Pokud se změnil účel, data nebo odpovědnost, otevíráme samostatnou změnu?
+- Je zapsané, co teď vědomě neotevíráme?
+- Je privacy-first úklid hotový, nebo má vlastníka a termín?
+- Umíme standard po návratu nechat v klidu?
+
+První návrat po servisu má být nudný. To je pochvala, ne problém. Když se čistý standard použije normálně a nikdo nepotřebuje archeologii starých poznámek, servisní smyčka skutečně skončila.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RI o prvním běžném návratu k čistému standardu po servisu: přirozené použití, signály nalezení, samostatnosti a datové stopy, čtyři výsledky návratu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RH o uzavření ověřeného servisního zásahu do čistého standardu: práce s výsledkem ověření, závěrečná věta, uzavření servisní karty, úklid starých stop, privacy-first mazání pomocných podkladů, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RG o ověření servisního zásahu po dalším běžném použití: návrat k servisní kartě, přirozené použití, signály nalezení, pochopení a datové stopy, čtyři výsledky ověření, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RF o převodu drobné opravy po prvním návratu do servisního zásahu: přesné tření, typy zásahu, kanonické místo, hranice mezi servisem a novou změnou, privacy-first kontrola, karta, mini workshop a checklist.
