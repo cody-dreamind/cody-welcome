@@ -129673,8 +129673,241 @@ Standard je v dlouhodobém klidu: platí, je najitelný, má jasný návratový 
 
 Uzavření do dlouhodobého klidu je malé, ale důležité. Učí tým nechávat funkční věci pracovat bez další administrativy. Standard má být dost živý na to, aby se změnil při skutečném signálu, a dost klidný na to, aby nepřitahoval pozornost jen proto, že je po ruce.
 
+## Příloha RA: Otevření nové změny po dlouhodobém klidu standardu
+
+Dlouhodobý klid není konec života standardu. Je to jen stav, kdy tým standard dál používá bez otevřené smyčky. Dřív nebo později ale přijde nový signál: změní se nabídka, přibude jiný typ zákazníka, změní se produktový tok, objeví se právní nebo bezpečnostní požadavek, nebo se standard začne míjet s reálnou prací. Tato příloha řeší okamžik, kdy je potřeba klid znovu otevřít a přitom nerozbít to, co fungovalo.
+
+Největší riziko není samotná změna. Riziko je návrat ke starému zvyku, kdy se pod záminkou "jen drobné úpravy" otevře celý standard, přepíše okolní dokumentace, založí několik nových šablon a přidá další evidence. Po měsíci už nikdo neví, jestli šlo o skutečný návratový signál, nebo jen o nervozitu týmu, který našel něco, co by se dalo vylepšit.
+
+Dobré znovuotevření má proto úzký vstup: jeden signál, jedna pracovní otázka, jedno místo zásahu a předem napsané stop pravidlo. Tým si má dovolit standard změnit, ale nemá kvůli tomu znovu otevírat celou historii.
+
+### Začněte návratovým signálem
+
+Vraťte se k závěrečné větě z dlouhodobého klidu. Obsahovala návratový signál: podmínku, při které se standard znovu dostane do pozornosti. První otázka proto zní:
+
+```text
+Nastal návratový signál, nebo jsme jen našli nový nápad?
+```
+
+Pokud signál nenastal, změnu neotevírejte. Zapište nápad jen tehdy, když má jasný důvod a vlastní místo v backlogu. Standard zůstává v klidu.
+
+Pokud signál nastal, popište ho konkrétně:
+
+- co se stalo;
+- kde se to projevilo;
+- koho se to týká;
+- proč to nestačí vyřešit jednorázovou pomocí;
+- jaký dopad má nechat standard beze změny.
+
+Příklad:
+
+```text
+Návratový signál:
+Ve čtyřech posledních B2B poptávkách po sobě chyběl údaj o počtu uživatelů, bez kterého obchodní tým nedokázal připravit první realistický odhad rozsahu.
+
+Proč to není jen nápad:
+Nejde o kosmetiku formuláře. Chybějící údaj opakovaně zpomaluje první odpověď a vede k ručnímu doptávání.
+```
+
+Takový zápis je lepší než věta "formulář už asi nestačí". Ta totiž neříká, jestli řešíte skutečné tření, nebo jen chuť přidat další pole.
+
+### Oddělte tři typy návratu
+
+Ne každý návratový signál znamená korekci standardu. Před editací vyberte jeden typ návratu:
+
+1. Použití standardu selhalo: člověk pravidlo nenašel, špatně pochopil nebo použil starou verzi.
+2. Kontext se změnil: standard byl správný, ale okolnosti už nejsou stejné.
+3. Datová stopa se zhoršila: standard začal vytvářet víc sběru, kopií, přístupů nebo exportů, než měl.
+
+První typ často nepotřebuje změnu pravidla. Potřebuje lepší navigaci, kratší příklad nebo odstranění starého odkazu. Druhý typ může vyžadovat korekci samotného pravidla. Třetí typ má privacy-first prioritu: pokud standard potichu zvětšuje datovou stopu, otevřete změnu i tehdy, když ostatní části práce zdánlivě běží.
+
+Příklad pro web:
+
+- Selhání použití: editor našel starý formulářový checklist v jiné složce.
+- Změna kontextu: nabídka nově pracuje s týmy, kde je počet uživatelů důležitý už v první odpovědi.
+- Zhoršení datové stopy: někdo začal kvůli kvalifikaci exportovat celé formulářové odpovědi do externí tabulky.
+
+Každý typ vede k jiné akci. Když je smícháte, oprava bude zbytečně velká a pravděpodobně přidá další práci.
+
+### Napište otázku změny před editací
+
+Znovuotevřený standard potřebuje jednu otázku změny. Ne plán celé revize, jen pracovní otázku, na kterou má iterace odpovědět.
+
+Dobrá otázka:
+
+```text
+Jak upravit první poptávkový formulář tak, aby obchod získal počet uživatelů jen u relevantních B2B poptávek, bez plošného rozšíření sběru osobních údajů?
+```
+
+Slabá otázka:
+
+```text
+Jak zlepšit kvalifikaci leadů?
+```
+
+Slabá otázka je moc široká. Může skončit novými poli, novým CRM procesem, novým měřením, novou segmentací a ještě interní poradou navíc. Dobrá otázka drží místo zásahu, segment, důvod a privacy-first hranici.
+
+Před editací si napište i stop pravidlo:
+
+```text
+Stop pravidlo:
+Neměníme celý formulářový standard. Testujeme jen podmíněný dotaz na počet uživatelů u B2B poptávek a necháváme první kontakt bez telefonu.
+```
+
+Stop pravidlo není brzda proti zlepšení. Je to ochrana proti tomu, aby jedna oprávněná změna nepozvala do místnosti všechno, co by se někdy mohlo hodit.
+
+### Zasahujte v nejmenším platném místě
+
+Po dlouhodobém klidu často existuje kanonické pracovní místo: šablona, checklist, rozcestník, interní karta, formulářový standard nebo provozní pravidlo. Zasahujte nejdřív tam. Teprve když změna vyžaduje dopad do okolí, upravujte navazující místa.
+
+Praktické pořadí:
+
+1. Kanonické pravidlo: co se skutečně mění.
+2. Jeden příklad: jak se pravidlo použije v běžné práci.
+3. Jeden odkaz nebo rozcestník: kde má tým nové pravidlo najít.
+4. Jeden ověřovací krok: kdy poznáte, že změna pomohla.
+
+Nezačínejte plošným hledáním všech výskytů podobné věty. To přijde až po ověření, pokud se změna potvrdí. V první iteraci stačí, aby existovalo jedno správné místo a aby se podle něj dala udělat další reálná práce.
+
+Codyho komentář: znovuotevření standardu je jako chirurgický řez, ne generální úklid garáže. Ano, v garáži je určitě co rovnat. Ale pacient na stole čeká na jednu konkrétní věc.
+
+### Privacy-first brána znovuotevření
+
+Každá změna po dlouhodobém klidu musí znovu projít privacy-first bránou. Ne proto, že by tým zapomněl na soukromí, ale proto, že nové požadavky často přicházejí jako "malé doplnění". Malé doplnění ale může znamenat nové pole ve formuláři, nový export, další osobu s přístupem, delší retenci nebo externí nástroj.
+
+Před změnou odpovězte:
+
+- Přidáváme nový údaj, nebo jen lépe používáme existující?
+- Je údaj nutný už v tomto kroku, nebo ho lze získat později?
+- Týká se změna všech lidí, nebo jen konkrétního segmentu?
+- Vznikne nová kopie dat mimo kanonický systém?
+- Je potřeba změnit retenční pravidlo, přístupy nebo text pro uživatele?
+- Dá se ověření udělat bez dalšího trackeru nebo osobní evidence?
+
+Příklad privacy-first rozhodnutí:
+
+```text
+Počet uživatelů přidáme jako podmíněný údaj jen pro B2B poptávky, kde návštěvník sám zvolí, že řeší týmové nasazení. Nevyžadujeme telefon, neposíláme odpovědi do nové externí tabulky a po 30 dnech zkontrolujeme, jestli údaj opravdu zkrátil první odpověď.
+```
+
+To je lepší než plošné přidání povinného pole. Standard se zlepšuje, ale datová stopa neroste víc, než musí.
+
+### Karta znovuotevření standardu
+
+```text
+Standard:
+
+Kanonické pracovní místo:
+
+Původní závěrečná věta:
+
+Návratový signál:
+
+Typ návratu:
+Selhání použití / Změna kontextu / Zhoršení datové stopy
+
+Otázka změny:
+
+Nejmenší zásah:
+
+Stop pravidlo:
+
+Privacy-first brána:
+Nový údaj / žádný nový údaj:
+Nová kopie dat / žádná nová kopie:
+Retence:
+Přístupy:
+Uživatelská komunikace:
+
+Ověření po změně:
+
+Co teď vědomě neotevíráme:
+
+Kdy se změna potvrdí, doladí, vrátí nebo odloží:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Formulářové minimum pro první poptávku.
+
+Kanonické pracovní místo:
+Ediční rozcestník pro prodejní stránky.
+
+Původní závěrečná věta:
+Standard zůstává v platnosti; další návrat nastane při opakovaném důkazu, že chybějící údaj brání první odpovědi.
+
+Návratový signál:
+Ve čtyřech relevantních B2B poptávkách po sobě chyběl počet uživatelů pro první realistický odhad.
+
+Typ návratu:
+Změna kontextu.
+
+Otázka změny:
+Jak získat počet uživatelů jen u týmových B2B poptávek bez plošného rozšíření formuláře?
+
+Nejmenší zásah:
+Podmíněný dotaz "Kolik lidí má řešení používat?" jen po volbě týmového nasazení.
+
+Stop pravidlo:
+Nepřidáváme telefon, rozpočet ani nový CRM workflow.
+
+Privacy-first brána:
+Nový údaj: počet uživatelů jen u relevantního segmentu.
+Nová kopie dat: žádná.
+Retence: stejná jako u poptávky.
+Přístupy: beze změny.
+Uživatelská komunikace: krátce vysvětlit, že údaj pomáhá připravit první odhad rozsahu.
+
+Ověření po změně:
+Po 20 relevantních B2B poptávkách nebo po 30 dnech porovnat počet ručních doptání před první odpovědí.
+
+Co teď vědomě neotevíráme:
+Celý lead scoring, CRM kvalifikaci ani redesign formuláře.
+
+Kdy se změna potvrdí, doladí, vrátí nebo odloží:
+Potvrdit, pokud klesne ruční doptávání a nevznikne víc nedokončených poptávek. Doladit, pokud lidé pole špatně chápou. Vrátit, pokud údaj nepomůže nebo odrazuje. Odložit, pokud se signál nepotvrdí.
+```
+
+### Mini workshop na 7 minut
+
+1. Otevřete původní závěrečnou větu dlouhodobého klidu.
+2. Řekněte, jestli návratový signál opravdu nastal.
+3. Vyberte typ návratu: použití, kontext nebo datová stopa.
+4. Napište jednu otázku změny a stop pravidlo.
+5. Určete nejmenší kanonické místo zásahu.
+6. Projděte privacy-first bránu.
+7. Zapište ověření a datum návratu.
+
+Výstup workshopu:
+
+```text
+Standard znovu otevíráme jen kvůli konkrétnímu signálu. Změna má jednu otázku, nejmenší zásah, privacy-first hranici a ověření.
+```
+
+### Checklist kapitoly
+
+- Vrátili jsme se k původní závěrečné větě dlouhodobého klidu?
+- Nastal skutečný návratový signál, ne jen nový nápad?
+- Je signál popsaný konkrétně: co, kde, koho se týká a proč vadí?
+- Vybrali jsme jeden typ návratu?
+- Neřešíme navigační problém úpravou samotného pravidla?
+- Má změna jednu pracovní otázku?
+- Obsahuje otázka místo zásahu, segment, důvod a privacy-first hranici?
+- Je napsané stop pravidlo před editací?
+- Zasahujeme nejdřív v kanonickém pracovním místě?
+- Přidáváme jen jeden příklad, odkaz nebo ověřovací krok, pokud je potřeba?
+- Prošla změna privacy-first bránou?
+- Nevzniká nová kopie dat, tracker, export nebo evidence lidí bez účelu?
+- Je jasné, kdy změnu potvrdit, doladit, vrátit nebo odložit?
+- Ví tým, co teď vědomě neotevírá?
+
+Znovuotevření dlouhodobě klidného standardu je zdravé, pokud má dobrý důvod. Standardy nemají být muzeum. Mají pomáhat práci. Právě proto si zaslouží změnu, když realita pošle dost silný signál, a klid, když takový signál chybí.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RA o otevření nové změny po dlouhodobém klidu standardu: návratový signál, typy návratu, otázka změny, stop pravidlo, nejmenší zásah, privacy-first brána, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QZ o uzavření kontroly čistého stavu do dlouhodobého klidu: práce s výsledkem kontroly, závěrečná věta, návratový signál, privacy-first úklid pomocných podkladů, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QY o první kontrole čistého stavu standardu po uzavření servisního zápisu: běžné použití jako spouštěč, tři signály čistoty, čtyři výsledky kontroly, práce se starou historií, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QX o uzavření ověřeného servisního zápisu do čistého stavu standardu: převod výsledku ověření do pracovního místa, závěrečná věta, úklid pomocných stop, oddělení korekce od uzavření, privacy-first mazání podkladů, karta, mini workshop a checklist.
