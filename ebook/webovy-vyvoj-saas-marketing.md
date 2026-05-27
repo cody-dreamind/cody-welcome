@@ -132744,6 +132744,211 @@ Ověřená servisní poznámka je uzavřená. Aktuální pracovní místo obsahu
 
 Dobré uzavření není slavnostní. Je spíš uklizený stůl po malé opravě: aktuální věc je na svém místě, starý papír zmizel a další člověk nemusí luštit, proč se tu válelo pět skoro stejných verzí reality.
 
+## Příloha RM: První návrat k čistému pracovnímu stavu po uzavřené servisní poznámce
+
+Čistý pracovní stav po uzavřené servisní poznámce se pozná až při dalším běžném použití. Ne v okamžiku, kdy někdo zavře kartu a napíše "hotovo". Skutečný test přijde ve chvíli, kdy jiný člověk otevře aktuální pracovní místo, použije ho bez znalosti staré poznámky a nedostane se zpět k nepořádku, který měl servis odstranit.
+
+Tato příloha navazuje na předchozí uzavření. Neřeší další vylepšování standardu, nový audit ani velkou revizi. Řeší jednu prostou otázku:
+
+```text
+Funguje aktuální pracovní místo po uzavřené servisní poznámce samo, nebo se stará stopa vrací do práce?
+```
+
+Pokud funguje samo, nechte ho být. Pokud se stará stopa vrací, opravte nejbližší příčinu. Pokud se objevil nový problém, oddělte ho od servisní smyčky a dejte mu vlastní kartu. Tím se z malého návratu nestane druhé kolo stejného úklidu.
+
+### Vraťte se až při skutečném použití
+
+První návrat nemá být kontrolní rituál. Má se stát při práci, která by proběhla i bez e-booku: někdo použije checklist, brief, šablonu, formulářový návod, kvalifikační kartu, provozní list nebo rozcestník. Právě tam se ukáže, jestli uzavřená servisní poznámka opravdu zanechala čistý stav.
+
+Dobré návratové situace:
+
+- editor připravuje novou část podle aktuální šablony;
+- obchodník používá kvalifikační otázky při skutečném hovoru;
+- support odpovídá podle vyčištěného interního návodu;
+- produktový vlastník kontroluje malou změnu v běžném workflow;
+- nový člověk najde pracovní místo přes běžnou navigaci bez vysvětlování historie.
+
+Slabé návratové situace:
+
+- vlastník si dokument přečte a prohlásí ho za čistý;
+- tým znovu otevře celou historii servisní poznámky;
+- někdo začne hledat další možné opravy, protože už má dokument před sebou;
+- návrat se udělá pomocí přímého odkazu z chatu, i když běžná cesta vede jinam.
+
+Návrat má ověřit provozní samostatnost. Pokud člověk potřebuje znát starý příběh, čistý stav ještě není dost čistý.
+
+### Sledujte tři jednoduché signály
+
+První signál je cesta. Člověk se má dostat k aktuálnímu pracovnímu místu normálně: přes index, šablonu, interní navigaci, issue, CRM, repozitář nebo provozní list. Když správnou verzi najde jen díky člověku, problém nemusí být v obsahu, ale v cestě.
+
+Druhý signál je použití. Aktuální místo má vést k rozhodnutí nebo dokončení úkolu bez čtení staré servisní poznámky. Pokud člověk potřebuje vysvětlení, proč se něco změnilo, možná chybí mikrověta. Pokud potřebuje ruční doprovod, problém je větší.
+
+Třetí signál je stopa. Po návratu nesmí vzniknout nová lokální kopie, screenshot, export, tabulka nebo přístup jen proto, aby si tým pamatoval, co bylo opraveno. Čistý stav má snižovat datovou stopu, ne ji tiše obnovovat.
+
+Krátký záznam:
+
+```text
+Cesta:
+Aktuální místo nalezeno běžnou cestou / přes člověka / nalezena stará stopa
+
+Použití:
+Dokončeno samostatně / dokončeno s drobným dotazem / bez pomoci nešlo dokončit
+
+Stopa:
+Beze změny / vznikla pracovní poznámka / vznikla nová datová nebo přístupová stopa
+```
+
+Tři řádky stačí. Pokud návrat potřebuje delší protokol, nejspíš už neřešíte servisní poznámku, ale větší změnu pracovního systému.
+
+### Rozhodněte jedním ze čtyř stavů
+
+`Nechat čisté` znamená, že člověk našel aktuální místo, použil ho samostatně a nevznikla nová stopa. To je nejlepší výsledek. Zapište jednu větu a nechte pracovní místo žít.
+
+`Opravit cestu` znamená, že obsah funguje, ale člověk k němu nepřišel běžně. Opravte odkaz, index, pinned poznámku, název šablony nebo starou kopii. Nezasahujte do textu jen proto, že cesta byla rozbitá.
+
+`Doplnit oporu` znamená, že cesta byla správná, ale k samostatnému použití chyběla jedna krátká věta, hranice rozsahu nebo pojmenování stavu. Přidejte minimum. Neotevírejte novou strukturu.
+
+`Otevřít novou změnu` znamená, že návrat ukázal problém mimo původní servisní poznámku: jiné rozhodnutí, jiná odpovědnost, nový údaj, nová privacy stopa nebo změněný pracovní cíl. V takové chvíli servisní smyčku nezatěžujte dalším obsahem. Založte samostatnou kartu.
+
+Příklad:
+
+```text
+Výsledek:
+Opravit cestu.
+
+Důvod:
+Aktuální checklist fungoval, ale starý odkaz v rozcestníku vedl na archivní variantu.
+
+Další krok:
+Nahradit odkaz v rozcestníku a archivní variantu označit jako neaktuální.
+
+Co se nemění:
+Text checklistu, role vlastníka, formulářová pole ani analytika.
+```
+
+Tady by přepis checklistu jen maskoval skutečný problém. První oprava má mířit na místo, kde se člověk ztratil.
+
+### Privacy-first návrat bez oživování staré stopy
+
+Po uzavření servisní poznámky bývá lákavé ponechat si staré důkazy "pro jistotu". Screenshot, export, citaci z chatu, kopii šablony, anonymizovaný jen napůl. Jenže pokud už rozhodnutí padlo a aktuální místo funguje, staré důkazy často přestávají být pomůcka a začínají být riziko.
+
+Privacy-first otázky při návratu:
+
+- Nevytvořil někdo novou kopii aktuálního pracovního místa mimo zdroj pravdy?
+- Nepoužil se starý screenshot nebo export jako vysvětlení pro dalšího člověka?
+- Neobnovil se přístup k pomocnému podkladu, který měl být zavřený?
+- Neobsahuje návratový zápis jméno, zákaznický detail nebo interní citaci, která pro rozhodnutí není potřeba?
+- Stačí pro budoucí práci obecná věta místo konkrétní osobní stopy?
+
+Dobrá návratová poznámka:
+
+```text
+Aktuální checklist byl nalezen přes interní index a použit bez podpory. Starý odkaz v archivní kopii už není ve vstupní trase. Nevznikl nový export ani screenshot.
+```
+
+Špatná návratová poznámka opisuje starý problém tak podrobně, že znovu vytváří datovou stopu, kterou předchozí uzavření uklidilo. Ano, dokumentace umí být také recyklace nepořádku. Jen má hezčí nadpis.
+
+### Karta prvního návratu k čistému stavu
+
+Použijte ji pro jedno pracovní místo a jedno běžné použití. Ne pro plošnou revizi všech standardů.
+
+```text
+Čistý pracovní stav:
+
+Původní servisní poznámka:
+
+Návratová situace:
+
+Cesta:
+Běžná cesta / přes člověka / stará stopa
+
+Použití:
+Samostatně / drobný dotaz / bez pomoci nešlo dokončit
+
+Stopa:
+Beze změny / pracovní poznámka / nová datová nebo přístupová stopa
+
+Výsledek:
+Nechat čisté / opravit cestu / doplnit oporu / otevřít novou změnu
+
+Další krok:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first úklid:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Čistý pracovní stav:
+Aktuální šablona obsahového briefu pro případovou studii.
+
+Původní servisní poznámka:
+Stará poznámka upozorňovala na duplicitní pole "hlavní důkaz".
+
+Návratová situace:
+Editor připravoval nový brief pro veřejný článek.
+
+Cesta:
+Běžná cesta přes redakční rozcestník.
+
+Použití:
+Samostatně.
+
+Stopa:
+Beze změny.
+
+Výsledek:
+Nechat čisté.
+
+Další krok:
+Žádná úprava. Zapsat potvrzení do servisního logu.
+
+Co teď vědomě neotevíráme:
+Neměníme strukturu case study, měření výkonu článku ani proces schvalování.
+
+Privacy-first úklid:
+Starý anonymizovaný screenshot není potřeba pro další práci a může zůstat smazaný.
+
+Vlastník a datum:
+Editor veřejné edice, 2026-05-27.
+```
+
+### Mini workshop na 5 minut
+
+1. Vyberte jednu uzavřenou servisní poznámku.
+2. Najděte první běžné použití aktuálního pracovního místa.
+3. Zapište cestu, použití a stopu.
+4. Vyberte jeden ze čtyř stavů.
+5. Proveďte nejmenší další krok, pokud je potřeba.
+6. Zapište jednu věc, kterou teď vědomě neotevíráte.
+7. Odstraňte nebo neobnovujte staré podklady, které už nemají rozhodovací hodnotu.
+
+Výstup workshopu:
+
+```text
+Víme, jestli čistý pracovní stav po servisní poznámce funguje při běžném použití. Pokud ne, další krok míří na cestu, oporu nebo samostatnou změnu, ne na neurčité "ještě to celé vylepšit".
+```
+
+### Checklist kapitoly
+
+- Proběhl návrat při skutečné práci, ne při umělé kontrole?
+- Víme, kudy člověk k aktuálnímu místu přišel?
+- Nevedla běžná cesta na starou stopu, kopii nebo archiv?
+- Šlo pracovní místo použít bez znalosti servisní historie?
+- Nevznikla nová lokální kopie, screenshot, export, tabulka nebo přístup?
+- Pokud byl problém v cestě, opravujeme cestu místo obsahu?
+- Pokud chyběla jen opora, stačí jedna věta nebo hranice rozsahu?
+- Pokud se objevil nový pracovní cíl, otevíráme samostatnou kartu?
+- Je zapsané, co teď vědomě neotevíráme?
+- Je privacy-first úklid potvrzený a staré podklady se zbytečně nevrací?
+- Umíme čistý stav nechat čistý bez další editace?
+
+První návrat k čistému stavu má být krátký. Buď potvrdí, že servis skončil, nebo ukáže nejbližší místo, kde se čistota rozpadá. V obou případech chrání hlavní trasu před tím, aby se z ní znovu stal sklad starých poznámek.
+
 ## Pracovní log
 
 - 2026-05-27: Doplněna Příloha RL o uzavření ověřené servisní poznámky do čistého pracovního stavu: práce se stavem z ověření, zásah v aktuálním pracovním místě, oddělení nových nápadů, privacy-first úklid starých stop, karta, mini workshop a checklist.
@@ -133299,3 +133504,4 @@ Dobré uzavření není slavnostní. Je spíš uklizený stůl po malé opravě:
 - 2026-05-27: Doplněna krátká úvodní poznámka, aby stop podmínka popisovala hotový pracovní stav místo pouhého seznamu aktivit.
 - 2026-05-27: Doplněna úvodní podkapitola o klidovém období po ověřené trase: návratový signál, omezení další editace, privacy-first klid, karta a checklist.
 - 2026-05-27: Doplněna úvodní podkapitola o návratu k trase po klidovém období: rozlišení podnětu a návratového signálu, potvrzení původního slibu, stavy po návratu, privacy-first brána, karta a checklist.
+- 2026-05-27: Doplněna Příloha RM o prvním návratu k čistému pracovnímu stavu po uzavřené servisní poznámce: cesta, použití, datová stopa, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
