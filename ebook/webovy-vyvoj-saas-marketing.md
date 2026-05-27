@@ -131810,8 +131810,220 @@ Víme, jestli se čistý standard po servisu vrátil do běžného provozu, a p�
 
 První návrat po servisu má být nudný. To je pochvala, ne problém. Když se čistý standard použije normálně a nikdo nepotřebuje archeologii starých poznámek, servisní smyčka skutečně skončila.
 
+## Příloha RJ: Převod drobného nálezu z návratu po servisu do servisní poznámky
+
+První návrat k čistému standardu po servisu může skončit stavem `nechat v klidu`. Může ale také ukázat drobnost, která nestojí za novou změnu: starý odkaz v jedné poznámce, chybějící mikrovětu, nejasné pojmenování souboru, nebo otázku člověka, která nezastavila práci. Takový nález je užitečný, ale nezaslouží si vlastní drama. Patří do servisní poznámky.
+
+Servisní poznámka je malý záznam mezi ignorováním a korekcí. Neříká "předěláme standard". Říká "při běžném použití se objevila drobnost; víme, kdy ji řešit, a víme, kdy ji nechat být". Tím chrání tým před dvěma chybami: zamést opakované tření pod koberec, nebo z každého šustnutí udělat novou pracovní smyčku.
+
+Pracovní otázka:
+
+```text
+Je nález z návratu po servisu dost konkrétní na krátkou servisní poznámku, ale ještě není dost silný na novou korekci standardu?
+```
+
+Pokud odpověď zní ano, zapište poznámku krátce a s návratovým signálem. Pokud odpověď zní ne, buď ji zavřete bez akce, nebo otevřete samostatnou změnu. Meziprostor bez rozhodnutí je přesně místo, kde se rodí dokumentační bahno.
+
+### Rozlišujte nález, šum a korekci
+
+`Nález` je konkrétní tření z reálného použití. Někdo hledal standard o minutu déle, položil jeden upřesňující dotaz, narazil na starý odkaz, nebo si všiml, že název šablony neodpovídá aktuálnímu procesu. Nález má situaci, místo a dopad.
+
+`Šum` je pocit bez dostatečného pracovního dopadu. "Možná by se to dalo napsat hezčeji" může být pravda, ale pokud člověk práci dokončil samostatně a standard nikoho nemátl, není nutné kvůli tomu otevírat zápis. Šum nearchivujte pro jistotu. Jistota se v dokumentaci často převléká za hromadu starých poznámek.
+
+`Korekce` je stav, kdy drobnost mění práci. Člověk použil špatnou verzi, musel obnovit pomocný podklad, změnil účel údaje, nebo bez zásahu nemohl rozhodnutí dokončit. To už není servisní poznámka. To je samostatná korekce s vlastní kartou, vlastníkem a ověřením.
+
+Jednoduché pravidlo:
+
+```text
+Šum zavřít. Nález zapsat krátce. Korekci otevřít jako změnu.
+```
+
+### Servisní poznámka musí být menší než problém
+
+Dobrá servisní poznámka se vejde do několika řádků. Neobsahuje historii servisu, kompletní debatu ani seznam možných vylepšení. Stačí jí pět položek:
+
+1. kde se nález objevil;
+2. co přesně zdrželo nebo zmátlo;
+3. jaký byl dopad na práci;
+4. kdy se k poznámce vrátit;
+5. co se kvůli ní teď nemění.
+
+Příklad:
+
+```text
+Místo:
+Interní rozcestník k briefům.
+
+Nález:
+Autor našel aktuální brief až po kontrole názvu, protože stará položka měla podobný název.
+
+Dopad:
+Práce dokončena samostatně, zdržení asi dvě minuty, nevznikla nová datová stopa.
+
+Návratový signál:
+Řešit, pokud se stejný dotaz objeví ještě jednou při běžném použití.
+
+Teď neměníme:
+Text briefu, formulářová pole, scoring ani širší strukturu rozcestníku.
+```
+
+Takový zápis je dostatečný. Pokud vás svrbí ruka přidat tři odstavce kontextu, zeptejte se, jestli opravdu chráníte budoucí práci, nebo jen balíte vlastní nejistotu do textu.
+
+### Návratový signál je povinný
+
+Servisní poznámka bez návratového signálu je odložený nepořádek. Tým neví, kdy ji číst, kdy ji smazat a kdy ji povýšit na změnu. Proto musí každá poznámka říct, za jakých podmínek se vrátí do hry.
+
+Použitelné návratové signály:
+
+- stejný dotaz se objeví při dalším běžném použití;
+- druhý člověk narazí na stejnou starou cestu;
+- poznámka začne blokovat dokončení práce;
+- kvůli poznámce vznikne kopie, screenshot, export nebo nový přístup;
+- změní se vlastník standardu nebo pracovní místo, kde standard bydlí.
+
+Slabé návratové signály:
+
+- "až bude čas";
+- "při nejbližší revizi";
+- "někdy to zlepšíme";
+- "necháme v backlogu";
+- "uvidíme".
+
+Slabé signály zní rozumně, protože nikoho neobtěžují. Právě proto jsou nebezpečné. Poznámka buď má podmínku návratu, nebo má být zavřená.
+
+### Privacy-first servisní poznámka
+
+Servisní poznámka má chránit práci, ne rozšiřovat datovou stopu. Nepotřebuje jméno zákazníka, celý screenshot formuláře, kopii poptávky ani výpis interního chatu. Potřebuje popsat tření tak, aby další člověk věděl, jestli se opakuje.
+
+Privacy-first minimum:
+
+```text
+Popisujte vzorec, ne osobu.
+Popisujte pracovní místo, ne celý obsah případu.
+Popisujte rozhodnutí, ne osobní data.
+```
+
+Místo:
+
+```text
+Zákazník Novák z firmy ACME napsal do pole cíl projektu...
+```
+
+stačí:
+
+```text
+V jedné nové poptávce nebylo jasné, jestli volitelné pole "počet uživatelů" znamená aktivní uživatele nebo všechny účty.
+```
+
+Pokud poznámka potřebuje důkaz, uložte anonymizovanou větu nebo neutrální příklad. Pokud potřebuje screenshot, nejdřív se zeptejte, jestli by stejný účel nesplnil textový popis. Většinou splnil. Dokumentace není album provozních screenshotů, i když se tak někdy tváří.
+
+### Karta servisní poznámky po návratu
+
+```text
+Čistý standard:
+
+Návratová situace:
+
+Typ zjištění:
+Šum / Nález / Korekce
+
+Místo nálezu:
+
+Konkrétní tření:
+
+Dopad na práci:
+Bez dopadu / drobné zdržení / opakovaný dotaz / blokace
+
+Datová stopa:
+Beze změny / pomocná stopa / nová datová nebo přístupová stopa
+
+Rozhodnutí:
+Zavřít bez akce / Zapsat servisní poznámku / Otevřít korekci
+
+Návratový signál:
+
+Co teď vědomě neměníme:
+
+Privacy-first úklid:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Čistý standard:
+Brief poptávkového formuláře.
+
+Návratová situace:
+Autor připravoval nový brief po uzavřeném servisním zásahu.
+
+Typ zjištění:
+Nález.
+
+Místo nálezu:
+Interní rozcestník briefů.
+
+Konkrétní tření:
+Dvě položky měly podobný název a autor musel ověřit, která je aktuální.
+
+Dopad na práci:
+Drobné zdržení, brief dokončen samostatně.
+
+Datová stopa:
+Beze změny.
+
+Rozhodnutí:
+Zapsat servisní poznámku.
+
+Návratový signál:
+Pokud se stejný dotaz objeví ještě jednou, přejmenovat položku v rozcestníku.
+
+Co teď vědomě neměníme:
+Obsah briefu, formulář, scoring ani strukturu všech šablon.
+
+Privacy-first úklid:
+Bez nových podkladů. Žádný screenshot ani kopie poptávky.
+
+Vlastník a datum:
+Owner poptávkového formuláře, 2026-05-27.
+```
+
+### Mini workshop na 6 minut
+
+1. Vezměte kartu prvního návratu po servisu.
+2. Vyberte jedno zjištění, které není čisté `nechat v klidu`.
+3. Označte ho jako šum, nález nebo korekci.
+4. U nálezu napište místo, tření, dopad a návratový signál.
+5. Zapište, co kvůli poznámce teď neměníte.
+6. Zkontrolujte, že zápis neobsahuje zbytečné osobní údaje, screenshoty ani kopie.
+7. Pokud jde o šum, zavřete ho. Pokud jde o korekci, otevřete samostatnou kartu změny.
+
+Výstup workshopu:
+
+```text
+Drobné zjištění z návratu po servisu je buď zavřené, krátce zapsané s návratovým signálem, nebo povýšené na samostatnou korekci. Nic nezůstává viset jako neurčitá poznámka "někdy".
+```
+
+### Checklist kapitoly
+
+- Vychází poznámka z reálného návratu, ne z obecného pocitu?
+- Je zjištění rozlišené jako šum, nález nebo korekce?
+- Pokud je to šum, zavřeli jsme ho bez ukládání do dalšího seznamu?
+- Pokud je to nález, má místo, konkrétní tření a dopad?
+- Pokud je to korekce, má vlastní kartu změny místo malé poznámky?
+- Je servisní poznámka kratší než samotný problém?
+- Má poznámka jasný návratový signál?
+- Je zapsané, co teď vědomě neměníme?
+- Nevznikl screenshot, export, kopie nebo nový přístup jen kvůli poznámce?
+- Neobsahuje zápis osobní údaje, interní citace nebo zbytečné detaily případu?
+- Ví vlastník, kdy poznámku smazat, ponechat nebo povýšit?
+
+Servisní poznámka je užitečná právě tím, že je malá. Zachytí opakovatelný signál, ale nenechá ho ovládnout pracovní standard. Když se nález neopakuje, poznámka zmizí. Když se opakuje, přestane být dojmem a stane se důvodem k opravě.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RJ o převodu drobného nálezu z návratu po servisu do servisní poznámky: rozlišení šumu, nálezu a korekce, krátký zápis, návratový signál, privacy-first minimum dat, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RI o prvním běžném návratu k čistému standardu po servisu: přirozené použití, signály nalezení, samostatnosti a datové stopy, čtyři výsledky návratu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RH o uzavření ověřeného servisního zásahu do čistého standardu: práce s výsledkem ověření, závěrečná věta, uzavření servisní karty, úklid starých stop, privacy-first mazání pomocných podkladů, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RG o ověření servisního zásahu po dalším běžném použití: návrat k servisní kartě, přirozené použití, signály nalezení, pochopení a datové stopy, čtyři výsledky ověření, privacy-first kontrola, karta, mini workshop a checklist.
