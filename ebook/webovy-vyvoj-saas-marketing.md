@@ -133812,8 +133812,230 @@ Víme, zda stabilní stav po minimální opravě opravdu funguje v běžné prá
 
 První návrat ke stabilnímu stavu je test dospělosti malé opravy. Neptá se, jestli by šlo ještě něco přidat. Ptá se, jestli práce funguje i bez toho, aby kolem ní tým znovu stavěl lešení. Když odpověď zní ano, nejlepší služba je nechat ji v klidu pracovat.
 
+## Příloha RR: Převod drobného signálu ze stabilního stavu do údržbové poznámky
+
+Stabilní stav občas po běžném použití vyšle slabý signál. Ne rozbití, ne nový projekt, ne důvod svolat poradu s dramatickým názvem. Jen drobnou poznámku: název začíná být trochu matoucí, jeden odkaz vede přes zbytečný mezikrok, příklad je pořád platný, ale už není nejbližší realitě, nebo si člověk při použití udělá malou objížďku.
+
+Tato příloha navazuje na první běžný návrat ke stabilnímu stavu. Neřeší urgentní opravu ani revizi celého pracovního místa. Řeší jednu otázku:
+
+```text
+Jak zachytit drobný signál ze stabilního stavu tak, aby se neztratil, ale zároveň z něj nevznikla zbytečná změnová mašina?
+```
+
+Údržbová poznámka je mezistupeň. Není to úkol, který se musí udělat hned. Není to ani volná myšlenka v chatu, kterou za týden nikdo nenajde. Je to krátký záznam podmínky: pokud se stejný signál vrátí při dalším přirozeném použití, stojí za minimální zásah.
+
+### Nejdřív potvrďte, že jde jen o signál
+
+Drobnost se pozná podle toho, že práce šla dokončit. Člověk našel správné místo, rozuměl hlavnímu postupu, nevznikla nová datová stopa a výsledek není ohrožený. Něco jen trochu drhlo.
+
+Typické drobné signály:
+
+- název položky je srozumitelný, ale dal by se zpřesnit;
+- příklad pořád funguje, ale nový člověk by ocenil bližší variantu;
+- odkaz vede správně, ale přes zbytečnou mezivrstvu;
+- šablona je použitelná, jen jedna hranice rozsahu není hned vidět;
+- člověk si poznamenal krátkou otázku, ale nepotřeboval kvůli ní pomoc;
+- starý pojem se ještě objevuje v jedné pomocné větě mimo hlavní trasu.
+
+To není důvod otevřít revizi. Je to důvod napsat údržbovou poznámku a počkat na potvrzení v reálné práci.
+
+Naopak nejde jen o drobný signál, pokud:
+
+- člověk nemohl úkol dokončit bez ručního vysvětlení;
+- běžná cesta vedla na starou nebo chybnou verzi;
+- vznikla nová kopie, export, screenshot nebo přístup "pro jistotu";
+- poznámka ukazuje změněný cíl práce, nový segment nebo nejasné vlastnictví;
+- stejný problém se už vrací opakovaně.
+
+V takovém případě nepoužívejte údržbovou poznámku jako parkoviště pro problém. Otevřete minimální opravu, návrat k cestě nebo samostatnou kartu podle toho, co se skutečně stalo.
+
+### Napište poznámku jako podmínku návratu
+
+Dobrá údržbová poznámka má dvě části: co se stalo a kdy se k tomu vrátit. Bez druhé části se z poznámky stane sbírka jemných dojmů. Ta vypadá kultivovaně, ale v provozu jen zvyšuje šum.
+
+Šablona:
+
+```text
+Signál:
+
+Proč zatím neměníme:
+
+Návratová podmínka:
+Vrátíme se k tomu, pokud [stejný nebo podobný signál] nastane při [konkrétním běžném použití].
+
+Co teď vědomě neotevíráme:
+```
+
+Příklad:
+
+```text
+Signál:
+Editor při přípravě článku váhal, jestli "důkaz" znamená zákaznický citát nebo interní měření.
+
+Proč zatím neměníme:
+Brief šel dokončit samostatně a výsledný článek měl správný důkaz. Šlo o jedno zaváhání, ne o selhání šablony.
+
+Návratová podmínka:
+Vrátíme se k tomu, pokud další editor znovu zaváhá u stejného pole nebo použije interní měření tam, kde má být zákaznický důkaz.
+
+Co teď vědomě neotevíráme:
+Neměníme strukturu briefu, schvalování článků ani měření obsahu.
+```
+
+Takový zápis chrání obě strany. Signál nezmizí, ale tým kvůli němu hned nepřepíše část systému, která v zásadě funguje.
+
+### Držte poznámku blízko pracovního místa
+
+Údržbová poznámka má být dohledatelná při dalším použití stejného místa. Pokud ji uložíte do obecného backlogu, ztratí kontext. Pokud ji necháte v chatu, ztratí se časem. Pokud ji vložíte přímo do hlavní trasy jako varování, můžete zbytečně znečistit stabilní stav.
+
+Vhodná místa:
+
+- krátká servisní sekce u pracovního místa;
+- rozhodovací log k dané šabloně;
+- poznámka u issue, pokud se pracovní místo spravuje přes issue;
+- údržbový seznam pro konkrétní rozcestník, checklist nebo playbook;
+- interní changelog, pokud už slouží jako provozní zdroj pravdy.
+
+Nevhodná místa:
+
+- osobní poznámky jednoho člověka;
+- nekonečný obecný backlog "někdy zlepšit";
+- komentář v chatu bez odkazu na pracovní místo;
+- nová kopie šablony vytvořená jen kvůli poznámce;
+- hlavní veřejný text, pokud signál ještě není potvrzený.
+
+Praktické pravidlo: další člověk, který použije stejné pracovní místo, má poznámku najít jen tehdy, když ji opravdu potřebuje pro návratovou podmínku. Nemá přes ni klopýtat při každém běžném průchodu.
+
+### Privacy-first poznámka bez zbytečných detailů
+
+Drobné signály často vznikají při reálné práci se zákazníkem, interním rozhodnutím nebo konkrétním člověkem. Údržbová poznámka proto nesmí být nenápadný sklad osobních údajů a citací.
+
+Stačí zapsat:
+
+- typ signálu;
+- pracovní místo;
+- obecný dopad na použití;
+- návratovou podmínku;
+- rozhodnutí, že se zatím nemění nic dalšího.
+
+Není potřeba zapisovat:
+
+- jméno člověka, pokud není vlastníkem dalšího kroku;
+- přesnou zákaznickou citaci, když stačí zobecněný problém;
+- screenshot obrazovky, pokud signál jde popsat větou;
+- export dat nebo historii klikání;
+- seznam všech lidí, kteří se k dokumentu vyjádřili.
+
+Dobrá privacy-first poznámka:
+
+```text
+Při použití kvalifikační otázky vzniklo jedno zaváhání u rozdílu mezi "rozpočtem" a "investičním rámcem". Práce šla dokončit. Vrátíme se k tomu jen při dalším podobném zaváhání v obchodním hovoru.
+```
+
+Slabá poznámka:
+
+```text
+V hovoru s konkrétním leadem jsme v 14:32 řešili přesnou větu z CRM a ukládáme screenshot pro budoucí úpravu.
+```
+
+První varianta stačí k rozhodnutí. Druhá vyrábí stopu, kterou budete muset jednou vysvětlovat, čistit nebo mazat. A to je drahý způsob, jak si zapamatovat jednu malou nejasnost.
+
+### Karta údržbové poznámky ze stabilního stavu
+
+Použijte ji jen tehdy, když stabilní stav funguje a signál ještě nepotřebuje zásah.
+
+```text
+Stabilní pracovní stav:
+
+Běžné použití, při kterém signál vznikl:
+
+Signál:
+
+Typ:
+Název / příklad / cesta / hranice rozsahu / drobná opora / starý pojem / jiný
+
+Proč zatím neměníme:
+
+Návratová podmínka:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first poznámka:
+
+Kde poznámka bydlí:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilní pracovní stav:
+Kvalifikační otázky pro první obchodní rozhovor.
+
+Běžné použití, při kterém signál vznikl:
+Příprava nabídky po discovery hovoru.
+
+Signál:
+U jedné otázky nebylo hned jasné, jestli má zachytit současný problém nebo cílový stav po projektu.
+
+Typ:
+Hranice rozsahu.
+
+Proč zatím neměníme:
+Obchodník otázku použil správně a nabídka šla dokončit. Zatím jde o jedno zaváhání.
+
+Návratová podmínka:
+Vrátíme se k tomu, pokud další obchodní průchod znovu zamění současný problém za cílový stav.
+
+Co teď vědomě neotevíráme:
+Neměníme celý discovery scénář, CRM pole ani strukturu nabídky.
+
+Privacy-first poznámka:
+Bez jména zákazníka a bez citace z hovoru. Pro další rozhodnutí stačí obecný popis zaváhání.
+
+Kde poznámka bydlí:
+Servisní sekce u kvalifikačních otázek.
+
+Vlastník a datum:
+Owner sales procesu, 2026-05-27.
+```
+
+### Mini workshop na 5 minut
+
+1. Vezměte jeden drobný signál ze stabilního pracovního stavu.
+2. Ověřte, že práce šla dokončit bez ruční podpory a nové datové stopy.
+3. Rozhodněte, jestli jde opravdu o poznámku, nebo už o opravu.
+4. Napište signál jednou větou.
+5. Přidejte návratovou podmínku.
+6. Zapište, co se teď vědomě neotevírá.
+7. Uložte poznámku blízko pracovního místa, ale mimo hlavní trasu běžného použití.
+8. Odstraňte konkrétní osobní nebo zákaznické detaily, které nejsou nutné.
+
+Výstup workshopu:
+
+```text
+Drobné zaváhání ze stabilního stavu je zachycené jako údržbová poznámka s jasnou návratovou podmínkou. Stabilní pracovní místo zůstává čisté a tým ví, kdy poznámku povýšit na opravu.
+```
+
+### Checklist kapitoly
+
+- Práce šla dokončit i přes drobný signál?
+- Nešlo o rozbitou cestu, chybějící vlastnictví nebo nový pracovní cíl?
+- Je signál popsaný jednou konkrétní větou?
+- Je jasné, proč zatím neměníme pracovní místo?
+- Má poznámka návratovou podmínku, ne jen obecné "sledovat"?
+- Bydlí poznámka blízko pracovního místa, ale neznečišťuje hlavní trasu?
+- Neobsahuje zbytečná jména, zákaznické detaily, citace, screenshoty ani exporty?
+- Je zapsané, co teď vědomě neotevíráme?
+- Víme, kdy poznámku smazat, potvrdit nebo převést do minimální opravy?
+- Nevznikl kvůli poznámce nový tracker, formulář nebo kontrolní rituál?
+
+Údržbová poznámka je dobrá jen tehdy, když je lehčí než oprava a pevnější než dojem. Má podržet malý signál do další přirozené práce, ne proměnit stabilní stav v čekárnu plnou nápadů s pořadovým číslem.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RR o převodu drobného signálu ze stabilního stavu do údržbové poznámky: rozlišení signálu od opravy, návratová podmínka, uložení blízko pracovního místa, privacy-first zápis bez zbytečných detailů, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RQ o první běžný návrat ke stabilnímu stavu po uzavřené minimální opravě: návrat při skutečné práci, signály cesty, použití a datové stopy, čtyři výsledky návratu, privacy-first kontrola bez nového měření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RP o uzavření potvrzené minimální opravy do stabilního pracovního stavu: práce s výsledkem ověření, aktuální pracovní věta, staré stopy, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RO o ověření minimální opravy při dalším běžném použití: stejná pracovní situace, signály nalezení, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first ověření bez nového dozoru, karta, mini workshop a checklist.
