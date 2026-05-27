@@ -130709,8 +130709,211 @@ Malá ověřovací úprava už není volný experiment. Má trvalý, doladěný,
 
 Dobře uzavřená malá úprava má být skoro neviditelná. Prostě se z ní stane čistá součást práce, nebo zmizí bez zbytků. Právě tím se pozná zdravý provoz: tým nemusí pokaždé obdivovat vlastní proces, protože proces tiše drží tvar.
 
+## Příloha RE: První návrat k upravenému standardu po zavřené malé úpravě
+
+Když malou ověřovací úpravu uzavřete do trvalého nebo zrušeného stavu, práce ještě nekončí úplně. Končí až první běžný návrat k upravenému standardu. To je chvíle, kdy někdo použije formulář, šablonu, checklist, obchodní kartu nebo provozní pravidlo bez toho, aby myslel na původní experiment. Právě tam se ukáže, jestli se úprava opravdu stala součástí práce, nebo jestli jen hezky vypadala v uzavírací kartě.
+
+První návrat není audit. Nemá znovu otevírat celou debatu. Má odpovědět na jednoduchou otázku:
+
+```text
+Použil člověk aktuální standard přirozeně, bez návratu ke staré dočasnosti a bez nové zbytečné datové stopy?
+```
+
+Pokud ano, standard se posouvá do klidnějšího režimu. Pokud ne, neznamená to automaticky, že úprava byla špatná. Může být špatně umístěné kanonické místo, matoucí stará šablona, nejasná výjimka, nebo jen drobná věta, která se při reálné práci čte jinak než při uzavírání.
+
+### Co při prvním návratu sledovat
+
+Sledujte jen to, co souvisí s poslední uzavřenou úpravou. Pokud jste uzavřeli volitelný odhad počtu uživatelů ve formuláři, nekontrolujte najednou celý sales proces, pricing a analytiku. První návrat má být malý, protože malá byla i úprava.
+
+Zajímají vás tři signály:
+
+- Nalezení: člověk našel aktuální pracovní místo bez ptaní.
+- Použití: použil aktuální verzi, ne starou dočasnou nebo archivní variantu.
+- Datová stopa: nevznikl nový údaj, export, poznámka nebo přístup mimo schválenou hranici.
+
+Příklad:
+
+```text
+Uzavřená úprava:
+U týmových B2B poptávek se ptáme na volitelný rozsah počtu uživatelů jen tehdy, když návštěvník označí týmové použití.
+
+První běžné použití:
+Nová landing page pro týmovou službu.
+
+Nalezení:
+Autor použil aktuální brief formuláře, ne starý návrh z pilotu.
+
+Použití:
+Pole zůstalo volitelné a zobrazilo se jen u týmového použití.
+
+Datová stopa:
+Nevznikl nový lead scoring ani export. Údaj jde jen do běžné poptávky se stejnou retencí.
+```
+
+Takový návrat je čistý. Není potřeba další schůzka ani nový experiment. Stačí krátce zapsat, že standard obstál při prvním běžném použití.
+
+### Čtyři výsledky návratu
+
+První návrat může skončit jedním ze čtyř stavů:
+
+- Obstálo: aktuální standard se našel, použil a nezvětšil datovou stopu.
+- Drobně opravit: standard je správný, ale jedno místo mate nebo chybí krátké vysvětlení.
+- Vrátit k uzavírací kartě: někdo použil starou dočasnost, takže je potřeba opravit zdroj pravdy nebo uklidit staré stopy.
+- Znovu otevřít změnu: reálné použití ukázalo nový problém, který už není jen drobná oprava standardu.
+
+Rozdíl mezi drobnou opravou a znovuotevřením je důležitý. Drobná oprava je třeba přejmenování pole, doplnění nápovědy nebo odstranění starého odkazu. Znovuotevření je situace, kdy se ukáže, že samotné pravidlo neodpovídá práci: údaj se používá jinak, než bylo schválené, výjimka se stala běžným stavem, nebo tým musí obcházet standard, aby práci dokončil.
+
+Příklad drobné opravy:
+
+```text
+Výsledek:
+Drobně opravit.
+
+Co se stalo:
+Autor našel správný formulář, ale nevěděl, jestli "počet uživatelů" znamená aktuální tým nebo očekávaný stav po nasazení.
+
+Oprava:
+Nápovědu změnit na "Stačí odhad, kolik lidí bude řešení používat v prvním běžném provozu."
+
+Co neotevíráme:
+Nepřidáváme další segmentační pole ani lead scoring.
+```
+
+Příklad znovuotevření:
+
+```text
+Výsledek:
+Znovu otevřít změnu.
+
+Co se stalo:
+Obchodní tým začal odhad počtu uživatelů používat k automatickému řazení leadů podle velikosti, i když uzavírací karta říkala, že údaj slouží jen k přípravě první odpovědi.
+
+Proč to není drobná oprava:
+Změnil se účel údaje. To je nové rozhodnutí s datovým dopadem.
+```
+
+### Nehledejte problém silou
+
+První návrat k upravenému standardu má být přirozený. Nezakládejte umělou kontrolu jen proto, že standard existuje. Počkejte na nejbližší reálné použití: novou stránku, další poptávku, nový obsahový materiál, přípravu kampaně nebo běžný provozní průchod.
+
+Umělé testování drobných standardů často vyrábí víc šumu než jistoty. Člověk se začne soustředit na proces, ne na práci. Lepší je krátce si všimnout, co se stalo v normálním toku, a zapsat jen výsledek.
+
+Codyho komentář: pokud k ověření každé malé úpravy potřebujete další malý ceremoniál, možná už neřídíte standard. Možná standard řídí vás. To je elegantní cesta, jak z jednoduchého formuláře udělat kancelářský fitness plán.
+
+### Privacy-first návrat bez nového měření
+
+Návrat ke standardu nesmí automaticky znamenat nové sledování lidí. Nepřidávejte event jen proto, abyste zjistili, jestli někdo použil aktuální šablonu. Nepořizujte screenshoty osobních údajů. Nevytvářejte pracovní export, pokud stačí ruční poznámka.
+
+Pro privacy-first návrat obvykle stačí:
+
+- krátká poznámka vlastníka, že standard byl použit;
+- anonymizovaný popis tření, pokud nějaké vzniklo;
+- odkaz na kanonické místo, kde se standard použil;
+- potvrzení, že nevznikl nový údaj, export, dodavatel ani přístup;
+- jedna drobná oprava, pokud je potřeba.
+
+Pokud návrat odhalí novou datovou stopu, zastavte se. Neopravujte ji potichu jako detail. Napište, jaký údaj vznikl, proč vznikl, kdo k němu má přístup, kdy zmizí a jestli je vůbec v souladu s původním účelem. Malé datové posuny jsou nebezpečné právě tím, že vypadají nevinně.
+
+### Karta prvního návratu
+
+```text
+Uzavřená malá úprava:
+
+Kde měla platit:
+
+První běžné použití:
+
+Našel člověk aktuální místo:
+Ano / Ne
+
+Použil aktuální standard:
+Ano / Ne / Částečně
+
+Vznikla nová datová stopa:
+Ne / Ano - jaká
+
+Výsledek návratu:
+Obstálo / Drobně opravit / Vrátit k uzavírací kartě / Znovu otevřít změnu
+
+Jedna věta závěru:
+
+Případná drobná oprava:
+
+Co teď vědomě neotevíráme:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Uzavřená malá úprava:
+Volitelný odhad počtu uživatelů u týmových B2B poptávek.
+
+Kde měla platit:
+Brief poptávkového formuláře a obchodní karta prvního kontaktu.
+
+První běžné použití:
+Landing page pro týmovou implementaci.
+
+Našel člověk aktuální místo:
+Ano.
+
+Použil aktuální standard:
+Částečně. Pole bylo volitelné, ale nápověda nebyla dost jasná.
+
+Vznikla nová datová stopa:
+Ne.
+
+Výsledek návratu:
+Drobně opravit.
+
+Jedna věta závěru:
+Standard drží, jen nápověda musí jasněji říct, že stačí odhad prvního běžného provozu.
+
+Případná drobná oprava:
+Upravit nápovědu v briefu formuláře a komponentě.
+
+Co teď vědomě neotevíráme:
+Nepřidáváme rozpočet, telefon, lead scoring ani další segmentaci.
+
+Vlastník a datum:
+Owner poptávkového formuláře, 2026-05-27.
+```
+
+### Mini workshop na 5 minut
+
+1. Otevřete uzavírací kartu malé úpravy.
+2. Najděte první reálné použití upraveného standardu.
+3. Odpovězte na tři otázky: našel se, použil se, nezvětšil datovou stopu?
+4. Vyberte jeden ze čtyř výsledků návratu.
+5. Pokud je potřeba oprava, zapište jen nejmenší zásah v kanonickém místě.
+6. Zavřete návrat jednou větou a neotevírejte sousední témata.
+
+Výstup workshopu:
+
+```text
+Upravený standard prošel prvním běžným použitím, nebo má jednu konkrétní opravu. Tým ví, zda zůstává v klidu, vrací se k uzavírací kartě, nebo se změna musí znovu otevřít jako samostatné rozhodnutí.
+```
+
+### Checklist kapitoly
+
+- Čekali jsme na první přirozené použití, ne na umělý audit?
+- Kontrolujeme jen poslední uzavřenou úpravu?
+- Víme, jestli člověk našel aktuální pracovní místo?
+- Použil aktuální standard, ne starou dočasnost nebo archivní variantu?
+- Nevznikl nový údaj, export, event, dodavatel ani přístup?
+- Pokud vznikla nová datová stopa, je pojmenovaná jako nové rozhodnutí?
+- Má návrat jeden ze čtyř stavů: obstálo, drobně opravit, vrátit k uzavírací kartě, znovu otevřít?
+- Je případná oprava nejmenší možný zásah v kanonickém místě?
+- Je jasné, co teď vědomě neotevíráme?
+- Má návrat vlastníka, datum a jednu závěrečnou větu?
+
+První návrat k upravenému standardu je malá kontrola reality. Když proběhne čistě, standard může tiše sloužit dál. Když drhne, opraví se nejbližší pracovní místo. A když odhalí změnu účelu nebo datové stopy, téma se znovu otevře vědomě, ne jako nenápadný posun v provozu. Přesně tak se drží disciplína bez zbytečného dozoru.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RE o prvním návratu k upravenému standardu po zavřené malé úpravě: kontrola nalezení, použití a datové stopy, čtyři výsledky návratu, privacy-first návrat bez nového měření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RD o uzavření malé ověřovací úpravy do trvalého nebo zrušeného stavu: práce se stavem ověření, kanonické místo, zavření dočasnosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RC o ověření malé ověřovací úpravy po prvním běžném použití: návrat k hypotéze, kontrola výsledku, tření a ceny dat, čtyři rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RB o převod znovuotevřené změny do malé ověřovací úpravy: hypotéza, výběr jedné varianty, ověřovací okno, minimum důkazů, dočasná věta, privacy-first kontrola, karta, mini workshop a checklist.
