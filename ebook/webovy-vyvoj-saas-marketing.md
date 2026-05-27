@@ -133591,8 +133591,230 @@ Potvrzená minimální oprava je uzavřená jako stabilní pracovní stav. Aktu�
 
 Uzavření potvrzené minimální opravy je malý akt disciplíny. Tým tím říká: tahle věc už funguje, víme kde žije, víme kdy se k ní vrátit a nebudeme kolem ní stavět další proces. To je udržitelnost v praxi. Ne velká prezentace, ale čisté pracovní místo, které příště nikoho nezdrží.
 
+## Příloha RQ: První běžný návrat ke stabilnímu stavu po uzavřené minimální opravě
+
+Stabilní pracovní stav po uzavřené minimální opravě potřebuje ještě jeden klidný návrat. Ne proto, aby se opravě znovu hledaly chyby, ale proto, aby tým ověřil, že se nová normalita opravdu používá bez servisního lešení. Uzavírací karta řekla, kde pravidlo bydlí a kdy se má téma otevřít znovu. První běžný návrat ukáže, jestli lidé opravdu pracují podle aktuálního místa, nebo se ze zvyku vracejí k historii.
+
+Tato příloha navazuje na kartu uzavření potvrzené minimální opravy. Neotevírá novou revizi, nevyrábí kontrolní proces a nehledá další zlepšení. Řeší jednu otázku:
+
+```text
+Funguje stabilní pracovní stav při dalším běžném použití bez návratu ke staré stopě, bez ručního vysvětlování a bez nové datové vrstvy?
+```
+
+Pokud ano, nechte stav být. To je důležitější výsledek, než se zdá. Dobré pracovní prostředí má občas dostat právo prostě fungovat. Když se každá drobná oprava po uzavření okamžitě znovu rozebírá, tým si vypěstuje návyk, že nic není nikdy hotové. To je produktivita s helmou a dvěma zápisníky: vypadá zodpovědně, ale špatně se v tom chodí.
+
+### Vraťte se jen při skutečné práci
+
+První návrat nemá být samostatná schůzka. Má proběhnout ve chvíli, kdy někdo znovu použije pracovní místo, kterého se oprava týkala. Pokud šlo o redakční rozcestník, návrat nastane při dalším briefu. Pokud šlo o formulářovou větu, návrat nastane při další úpravě formuláře nebo při dalším obchodním průchodu. Pokud šlo o provozní checklist, návrat nastane při dalším skutečném provozním zásahu.
+
+Nevhodný návrat:
+
+- vlastník si po týdnu otevře dokument a hledá, co by ještě vylepšil;
+- tým si naplánuje kontrolu jen proto, že oprava byla nedávno uzavřená;
+- používá se přímý odkaz ze staré karty místo běžné pracovní cesty;
+- návrat se spojí s novou ambicí, která s původní opravou nesouvisí;
+- kvůli kontrole vznikne nová tabulka, screenshot nebo sledovací poznámka.
+
+Vhodný návrat:
+
+- editor začne další článek přes běžný rozcestník;
+- obchodník použije aktuální kvalifikační otázku bez staré verze v chatu;
+- support otevře aktuální odpovědní šablonu přes kanonický index;
+- produktový vlastník použije provozní list bez pomocného exportu;
+- nový člověk najde pracovní místo bez znalosti servisní historie.
+
+Návrat má být tak obyčejný, že by se bez problému stal i bez kontroly. Vy jen na chvíli vědomě pozorujete, jestli se staré tření nevrací.
+
+### Sledujte tři známky stabilního stavu
+
+První známka je přirozená cesta. Člověk se dostane k aktuálnímu místu tak, jak se má dostat i příště. Nepotřebuje starou zprávu, interní zkratku ani vysvětlení od vlastníka opravy. Pokud běžná cesta pořád vede přes minulost, stabilní stav je spíš přání než realita.
+
+Druhá známka je tiché použití. Pracovní místo nepotřebuje výklad celé historie. Člověk nemusí vědět, jaký problém se opravoval, kdo ho našel a proč se přepisovala jedna věta. Aktuální stav má být dost jasný sám o sobě. Historie může zůstat v kartě, ale nemá řídit běžnou práci.
+
+Třetí známka je čistá stopa. Po použití nevznikne nová kopie, screenshot, export, záložní dokument, přístup nebo komentář "pro jistotu". Stabilní stav, který při každém použití vyrábí další pojistky, stabilní není. Je jen obalený důkazy, že mu lidé ještě nevěří.
+
+Krátká poznámka k návratu:
+
+```text
+Stabilní stav:
+
+Běžné použití:
+
+Cesta:
+Kanonická / přes starou stopu / s ruční pomocí
+
+Použití:
+Samostatné / s drobným dotazem / závislé na historii
+
+Stopa:
+Beze změny / drobná pracovní poznámka / nová datová nebo přístupová stopa
+```
+
+Tři řádky stačí. Pokud potřebujete složitější formulář, pravděpodobně už neověřujete stabilitu, ale otevíráte nový proces.
+
+### Rozlišujte stav, šum a nový signál
+
+Po prvním návratu mohou nastat čtyři výsledky.
+
+`Nechat stabilní` znamená, že cesta fungovala, použití bylo samostatné a nevznikla nová stopa. Zapište krátké potvrzení, případně ani to neprodlužujte víc než jednou větou. Další kontrolu nespouštějte automaticky.
+
+`Doplnit drobnou oporu` znamená, že stabilní stav v zásadě drží, ale jeden člověk narazil na malou nejasnost: název, příklad, rozsah nebo stav. Oporu doplňte jen tehdy, když pomůže příštímu použití přímo v kanonickém místě. Nezakládejte novou metodiku.
+
+`Vrátit k cestě` znamená, že obsah funguje, ale lidé se k němu pořád nedostávají přirozeně. Pak neopravujte větu uvnitř dokumentu, ale cestu: rozcestník, index, archivní odkaz, pinned zprávu, interní název nebo místo, kde se zdroj pravdy očekává.
+
+`Otevřít nový signál` znamená, že návrat ukázal jinou potřebu než původní minimální oprava. Například se změnil typ práce, přibyl nový segment, vznikla nová datová kategorie nebo se ukázalo, že odpovědnost není jasná. Takový signál má dostat vlastní kartu. Nepřilepujte ho k uzavřené opravě jen proto, že se objevil ve stejném dokumentu.
+
+Příklad rozhodnutí:
+
+```text
+Výsledek:
+Nechat stabilní.
+
+Důvod:
+Editor našel aktuální brief přes rozcestník, připravil nový článek bez dotazu a nepoužil starou chatovou zprávu ani pomocný screenshot.
+
+Další krok:
+Žádný. Téma se otevře jen při návratovém signálu z uzavírací karty.
+
+Co teď vědomě neotevíráme:
+Neměníme strukturu briefu, SEO checklist ani schvalovací tok.
+```
+
+Tohle je hotová práce. Ano, i když další krok je "žádný". V provozu je to často nejlepší další krok, což je věta, která zní líně jen lidem závislým na tabulkách.
+
+### Privacy-first návrat bez nového měření
+
+První návrat ke stabilnímu stavu nemá přidat monitoring. Cílem není sledovat lidi, ale ověřit, že pracovní místo funguje. Privacy-first přístup drží kontrolu malou, ruční a účelovou.
+
+Stačí:
+
+- obecné potvrzení, že běžná cesta vedla na aktuální místo;
+- krátký zápis, jestli člověk pracoval samostatně;
+- poznámka, zda vznikla nová datová nebo přístupová stopa;
+- rozhodnutí, jestli stav nechat, drobně opřít, vrátit k cestě nebo otevřít nový signál;
+- odstranění pomocných stop, které se při návratu ukázaly jako zbytečné.
+
+Není potřeba:
+
+- analytický event pro použití šablony;
+- nahrávání obrazovky nebo detailní log klikání;
+- interní formulář pro každé použití pracovního místa;
+- uchovávání starých screenshotů kvůli dokazování minulého problému;
+- seznam lidí, kteří dokument otevřeli.
+
+Privacy-first stabilita se pozná i podle toho, že po kontrole zůstane méně věcí na uklízení. Pokud ověření stabilního stavu vytvoří víc dat než samotná oprava, něco se utrhlo ze řetězu.
+
+### Karta prvního návratu ke stabilnímu stavu
+
+Použijte ji jen jednou po uzavření minimální opravy. Pokud stav drží, karta se zavře a další návrat spouští už jen konkrétní návratový signál.
+
+```text
+Stabilní pracovní stav:
+
+Uzavřená minimální oprava:
+
+Běžné použití:
+
+Cesta:
+Kanonická / přes starou stopu / s ruční pomocí
+
+Použití:
+Samostatné / s drobným dotazem / závislé na historii
+
+Stopa:
+Beze změny / drobná pracovní poznámka / nová datová nebo přístupová stopa
+
+Výsledek:
+Nechat stabilní / doplnit drobnou oporu / vrátit k cestě / otevřít nový signál
+
+Další krok:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first poznámka:
+
+Návratový signál pro příště:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilní pracovní stav:
+Redakční rozcestník je výchozí místo pro přípravu veřejného článku.
+
+Uzavřená minimální oprava:
+Archivní brief už není výchozí a aktuální brief je jediný hlavní odkaz.
+
+Běžné použití:
+Příprava dalšího článku pro web.
+
+Cesta:
+Kanonická.
+
+Použití:
+Samostatné.
+
+Stopa:
+Beze změny.
+
+Výsledek:
+Nechat stabilní.
+
+Další krok:
+Žádný. Stav zůstává v běžném provozu.
+
+Co teď vědomě neotevíráme:
+Neměníme strukturu článku, schvalování ani publikační checklist.
+
+Privacy-first poznámka:
+Nevznikl nový screenshot, export ani seznam použití. Starý chatový odkaz se nepoužil.
+
+Návratový signál pro příště:
+Téma otevřít jen tehdy, když někdo znovu použije archivní brief jako výchozí šablonu nebo nenajde aktuální brief běžnou cestou.
+
+Vlastník a datum:
+Editor veřejné edice, 2026-05-27.
+```
+
+### Mini workshop na 5 minut
+
+1. Vezměte jednu uzavřenou minimální opravu.
+2. Počkejte na první skutečné běžné použití dotčeného pracovního místa.
+3. Zapište cestu, použití a stopu.
+4. Vyberte jeden ze čtyř výsledků.
+5. Pokud stav drží, nezakládejte další kontrolu.
+6. Pokud je potřeba opora nebo cesta, udělejte jen nejbližší zásah.
+7. Pokud se objevil nový signál, založte samostatnou kartu.
+8. Odstraňte pomocné stopy, které návrat nepotřebuje zachovat.
+
+Výstup workshopu:
+
+```text
+Víme, zda stabilní stav po minimální opravě opravdu funguje v běžné práci. Pokud ano, necháváme ho být. Pokud ne, zasahujeme jen do nejbližší opory, cesty nebo samostatné nové změny.
+```
+
+### Checklist kapitoly
+
+- Proběhl návrat při skutečném běžném použití?
+- Šel člověk kanonickou cestou, ne přes starou kartu nebo ruční odkaz?
+- Dá se pracovní místo použít bez znalosti historie opravy?
+- Nevznikla nová kopie, screenshot, export, tabulka nebo přístup?
+- Rozlišili jsme stabilní stav, drobný šum a nový signál?
+- Pokud stav drží, umíme ho opravdu nechat být?
+- Pokud chybí opora, je zásah jen jedna věta, název nebo příklad?
+- Pokud selhala cesta, opravujeme navigaci místo obsahu?
+- Pokud jde o nový signál, dostal vlastní kartu?
+- Je zapsané, co teď vědomě neotevíráme?
+- Nezavedli jsme kvůli návratu nové měření nebo dohled?
+- Zůstává návratový záznam obecný a bez zbytečných osobních nebo zákaznických detailů?
+
+První návrat ke stabilnímu stavu je test dospělosti malé opravy. Neptá se, jestli by šlo ještě něco přidat. Ptá se, jestli práce funguje i bez toho, aby kolem ní tým znovu stavěl lešení. Když odpověď zní ano, nejlepší služba je nechat ji v klidu pracovat.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RQ o první běžný návrat ke stabilnímu stavu po uzavřené minimální opravě: návrat při skutečné práci, signály cesty, použití a datové stopy, čtyři výsledky návratu, privacy-first kontrola bez nového měření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RP o uzavření potvrzené minimální opravy do stabilního pracovního stavu: práce s výsledkem ověření, aktuální pracovní věta, staré stopy, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RO o ověření minimální opravy při dalším běžném použití: stejná pracovní situace, signály nalezení, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first ověření bez nového dozoru, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RN o převodu nálezu z prvního návratu k čistému pracovnímu stavu do jedné minimální opravy: třídění nálezu na cestu, oporu nebo stopu, opravná věta, zásah v nejbližším pracovním místě, privacy-first úklid, karta, mini workshop a checklist.
