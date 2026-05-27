@@ -134251,8 +134251,261 @@ Výstup workshopu:
 
 Ověření údržbové poznámky je malý filtr proti dvěma špatným extrémům. První extrém je opravovat každé zaváhání. Druhý extrém je schovávat opakované signály do poznámek, které nikdy nic nezmění. Dobrá poznámka umí počkat, ale když se signál vrátí, umí se změnit v přesnou malou akci.
 
+## Příloha RT: Převod ověřené údržbové poznámky do hotové minimální opravy
+
+Když se údržbová poznámka při dalším návratovém signálu potvrdí, práce ještě není hotová. Tým ví, že signál nebyl náhoda, ale pořád může snadno udělat moc velký zásah. Tato příloha řeší přesně ten okamžik: poznámka už nemá čekat, ale oprava se pořád musí vejít do nejmenšího pracovního místa.
+
+Nejde o novou revizi standardu, nový playbook ani nový proces. Jde o malou opravu, která odstraní opakované tření bez toho, aby otevřela další frontu práce. Dobrá minimální oprava má být tak malá, že ji jde popsat jednou větou, provést na jednom místě a ověřit při dalším běžném použití.
+
+Pracovní otázka:
+
+```text
+Jak potvrdíme údržbovou poznámku jako skutečný signál a převedeme ji do jedné hotové opravy bez rozšíření rozsahu?
+```
+
+### Začněte rozhodnutím z ověření
+
+Nejdřív otevřete kartu ověření údržbové poznámky. Nepište opravu znovu od nuly. Pokud už existuje rozhodnutí "povýšit na minimální opravu", použijte ho jako vstupní bránu.
+
+Krátký vstup:
+
+```text
+Původní údržbová poznámka:
+
+Návratová podmínka:
+
+Co se při ověření potvrdilo:
+
+Rozhodnutí:
+Povýšit na minimální opravu.
+```
+
+Pokud rozhodnutí z ověření není jasné, zastavte se. Nejasné ověření nemá přejít do opravy jen proto, že už se o tématu mluvilo dvakrát. V takovém případě nejdřív zpřesněte návratovou podmínku nebo otevřete samostatnou změnu.
+
+Příklad dobrého vstupu:
+
+```text
+Původní údržbová poznámka:
+Lidé si pletou současnou bolest s cílovým stavem.
+
+Návratová podmínka:
+Vrátíme se k tomu, pokud se záměna zopakuje při další přípravě nabídky.
+
+Co se při ověření potvrdilo:
+Při další nabídce se cílový stav znovu použil jako popis současného problému.
+
+Rozhodnutí:
+Povýšit na minimální opravu.
+```
+
+Z tohoto vstupu už nejde legitimně udělat redesign celého sales procesu. Jde z něj udělat přesnou opravu jedné otázky nebo jedné instrukce.
+
+### Najděte nejbližší pracovní místo
+
+Minimální oprava patří tam, kde tření vzniklo. Pokud se problém objevil u kvalifikační otázky, opravte otázku. Pokud se objevil v rozcestníku, opravte rozcestník. Pokud se objevil v názvu šablony, opravte název. Čím dál opravu uložíte od místa použití, tím větší šance, že se z ní stane další zapomenutá poznámka.
+
+Pomocné otázky:
+
+- Kde člověk poprvé narazil na nejasnost?
+- Jaké slovo, pole, odkaz nebo instrukce zaváhání spustily?
+- Které místo uvidí další člověk ve stejné situaci?
+- Dá se oprava provést přímo tam?
+- Pokud ne, existuje nejbližší kanonické místo, kam všichni skutečně chodí?
+
+Špatný převod:
+
+```text
+Do týmové paměti dopíšeme obecné poučení, že máme přesněji oddělovat problém a cíl.
+```
+
+Lepší převod:
+
+```text
+U otázky "Co chcete změnit?" doplníme vodítko: "Nejdřív napište současnou bolest; cílový stav patří do dalšího pole."
+```
+
+Codyho komentář: Obecné poučení vypadá dospěle, ale často jen přesune práci do hlavy dalšího člověka. Minimální oprava má být laskavě líná: opraví místo, kde se chyba rodí, aby nikdo nemusel hrdinsky vzpomínat na kontext z minulé porady. Toto je můj pohled.
+
+### Napište opravnou větu před editací
+
+Před úpravou pracovního místa napište jednu opravnou větu. Slouží jako pojistka proti tomu, aby se z malé údržby stal mini projekt.
+
+Šablona:
+
+```text
+Opravíme [konkrétní místo] tak, aby při [běžná situace] bylo jasné [rozdíl, hranice nebo další krok].
+```
+
+Příklady:
+
+- Opravíme popisek pole "důkaz" tak, aby při psaní case study bylo jasné, že veřejný důkaz nesmí obsahovat interní měření bez schválení.
+- Opravíme odkaz v rozcestníku tak, aby při přípravě kampaně vedl na aktuální brief místo archivní verze.
+- Opravíme název šablony tak, aby při zakládání nové nabídky bylo jasné, která varianta je pro malé B2B týmy.
+- Opravíme jednu větu u retenčního pravidla tak, aby při úklidu exportů bylo jasné, kdy se maže pracovní kopie.
+
+Opravná věta nesmí obsahovat slova jako "celkově", "komplexně", "přehodnotit", "sjednotit všechno" nebo "do budoucna vyřešit". Ta slova často znamenají, že už nejde o minimální opravu.
+
+### Proveďte jen jednu změnu
+
+Po napsání opravné věty proveďte jednu změnu v jednom pracovním místě. Pokud při editaci objevíte další problém, zapište ho mimo rozsah. Nepřilepujte ho k této opravě.
+
+Jedna změna může být:
+
+- přepsání jedné věty;
+- doplnění jedné hranice rozsahu;
+- oprava jednoho odkazu;
+- přejmenování jedné položky;
+- odstranění jedné staré varianty z hlavní cesty;
+- doplnění krátké privacy-first poznámky k existujícímu poli.
+
+Jedna změna není:
+
+- audit všech souvisejících šablon;
+- přepis celého dokumentu;
+- přidání nového kontrolního procesu;
+- zavedení nové metriky;
+- sběr nových osobních údajů pro jistotu;
+- vytvoření dalšího zdroje pravdy.
+
+Praktický stop test:
+
+```text
+Kdybych tuto opravu ukázal člověku, který používá pracovní místo poprvé, pochopí během 30 sekund, co se změnilo a proč?
+```
+
+Pokud ne, oprava je nejspíš moc velká nebo moc abstraktní.
+
+### Privacy-first oprava bez nové datové stopy
+
+Minimální oprava často vzniká u šablon, obchodních materiálů, supportních poznámek nebo interních playbooků. V těchto místech se snadno objeví konkrétní jména, citace, screenshoty nebo zákaznické detaily, které nejsou pro opravu potřeba.
+
+Při převodu poznámky do opravy ponechte jen:
+
+- obecný popis opakovaného signálu;
+- opravené pracovní místo;
+- důvod opravy;
+- návratový signál pro další běžné použití;
+- vlastníka a datum.
+
+Odstraňte nebo nezapisujte:
+
+- jména zákazníků a lidí, pokud nejsou nezbytná;
+- přesné citace z hovorů;
+- screenshoty interních systémů;
+- exporty, nahrávky a dočasné kopie;
+- dlouhou historii debat;
+- nové měření jen kvůli ověření malé opravy.
+
+Privacy-first pravidlo pro tuto chvíli:
+
+```text
+Oprava má zlepšit pracovní místo, ne vytvořit archiv důkazů o tom, kdo se kde spletl.
+```
+
+Pokud potřebujete příklad, anonymizujte ho do pracovní situace. Místo "zákazník X řekl..." napište "při přípravě nabídky se cílový stav použil jako současná bolest". Pro opravu to stačí.
+
+### Karta minimální opravy po údržbové poznámce
+
+Použijte ji ve chvíli, kdy je údržbová poznámka ověřená a má přejít do hotové malé změny.
+
+```text
+Pracovní stav:
+
+Ověřená údržbová poznámka:
+
+Potvrzený signál:
+
+Nejbližší pracovní místo:
+
+Opravná věta:
+
+Provedená minimální oprava:
+
+Co teď vědomě neotevíráme:
+
+Návratový signál:
+
+Privacy-first úklid:
+
+Kde je aktualizovaný zdroj pravdy:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní stav:
+Kvalifikační otázky pro první obchodní rozhovor.
+
+Ověřená údržbová poznámka:
+Lidé si pletou současnou bolest s cílovým stavem.
+
+Potvrzený signál:
+Při další přípravě nabídky se cílový stav znovu použil jako popis současného problému.
+
+Nejbližší pracovní místo:
+Otázka "Co dnes nejvíc brzdí práci týmu?" v discovery šabloně.
+
+Opravná věta:
+Opravíme vodítko u otázky tak, aby bylo jasné, že nejdřív sbíráme současnou bolest a cílový stav patří až do části řešení.
+
+Provedená minimální oprava:
+Doplněno vodítko: "Popište současný stav. Cílový stav zapište až do návrhu řešení."
+
+Co teď vědomě neotevíráme:
+Neměníme celý discovery scénář, CRM pole, scoring ani strukturu nabídky.
+
+Návratový signál:
+Vrátíme se k tomu jen tehdy, pokud další dvě běžné přípravy nabídky znovu smíchají současnou bolest a cílový stav.
+
+Privacy-first úklid:
+Bez jména zákazníka, bez citace z hovoru, bez screenshotu nabídky. Starou servisní poznámku zavíráme.
+
+Kde je aktualizovaný zdroj pravdy:
+Discovery šablona pro první obchodní rozhovor.
+
+Vlastník a datum:
+Owner sales procesu, 2026-05-27.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete ověřenou údržbovou poznámku.
+2. Přečtěte potvrzený signál jednou větou.
+3. Najděte nejbližší pracovní místo.
+4. Napište opravnou větu podle šablony.
+5. Proveďte jednu změnu, ne víc.
+6. Zapište, co teď vědomě neotevíráte.
+7. Nastavte návratový signál pro další běžné použití.
+8. Odstraňte z karty zbytečné osobní, zákaznické a interní detaily.
+
+Výstup workshopu:
+
+```text
+Ověřená údržbová poznámka je převedená do jedné hotové minimální opravy. Oprava leží v nejbližším pracovním místě, má jasný návratový signál a nezvětšila datovou stopu ani rozsah práce.
+```
+
+### Checklist kapitoly
+
+- Vycházíme z jasného rozhodnutí "povýšit na minimální opravu"?
+- Neopravujeme poznámku, která měla zůstat šumem nebo potřebovala přesnější podmínku?
+- Našli jsme místo, kde tření skutečně vzniklo?
+- Je opravná věta konkrétní a krátká?
+- Provedli jsme jen jednu změnu v jednom pracovním místě?
+- Neotevřeli jsme související, ale samostatný problém?
+- Je zapsané, co teď vědomě neřešíme?
+- Má oprava návratový signál pro další běžné použití?
+- Zůstává jeden zdroj pravdy?
+- Nezavedli jsme nový tracker, export, screenshot, nahrávku ani formulář?
+- Odstranili jsme z karty zbytečné osobní a zákaznické detaily?
+- Ví vlastník, kde je oprava hotová a kdy se k ní vrátit?
+
+Minimální oprava je dobrá právě tím, že není působivá. Nevyhraje prezentaci, ale zlepší další reálné použití. A pokud se při dalším použití ukáže, že nestačila, tým se vrátí podle návratového signálu, ne podle dojmu.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RT o převodu ověřené údržbové poznámky do jedné hotové minimální opravy: potvrzený signál, nejbližší pracovní místo, opravná věta, jedna změna, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RS o ověření údržbové poznámky při dalším návratovém signálu: návrat k původní podmínce, rozlišení stejného, podobného, jiného a žádného signálu, čtyři rozhodovací stavy, minimální oprava, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RR o převodu drobného signálu ze stabilního stavu do údržbové poznámky: rozlišení signálu od opravy, návratová podmínka, uložení blízko pracovního místa, privacy-first zápis bez zbytečných detailů, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RQ o první běžný návrat ke stabilnímu stavu po uzavřené minimální opravě: návrat při skutečné práci, signály cesty, použití a datové stopy, čtyři výsledky návratu, privacy-first kontrola bez nového měření, karta, mini workshop a checklist.
