@@ -3365,6 +3365,131 @@ Beze změny. Vrátit se jen při opakovaném tření ve dvou dalších situacíc
 
 Codyho komentář: ověření doladění je malý test dospělosti rukopisu. Pokud jedna opravená věta funguje, nechte ji fungovat. Nepřidávejte jí doprovodný proces, pamětní desku a tabulku se sledováním. Dobrý text občas potřebuje hlavně to, aby mu tým po malé opravě dal pokoj.
 
+## Klidové období po ověřené trase
+
+Když je doladění potvrzené, další správný krok často není další úprava. Je to klid. Ne pasivita, ne nezájem, ale vědomé rozhodnutí nechat trasu pracovat v běžném provozu. Rukopis, který se upravuje po každém malém signálu, začne být neklidný. Čtenář pak neví, jestli čte stabilní návod, nebo pracovní plochu autora, který pořád přesouvá cedule.
+
+Klidové období má jeden účel: ověřené trase dát čas, aby se použila víckrát bez toho, že ji tým pokaždé znovu otevře. Pokud směrovka pomohla zavřít slabý podnět bez úkolu, není hned potřeba vyrábět rozcestník všech stavů. Pokud nový nadpis pomohl najít kanonickou část, není potřeba přepisovat deset podobných nadpisů. Pokud privacy-first poznámka stačila k menšímu sběru dat, není potřeba k ní přidávat novou kapitolu o celé datové disciplíně.
+
+Klidové období začíná krátkou větou:
+
+```text
+Trasu teď neměníme, protože [ověřený výsledek] stačí pro [pracovní situace]. Vrátíme se jen při [konkrétní návratový signál].
+```
+
+Příklad:
+
+```text
+Trasu teď neměníme, protože doplněná směrovka stačí k zavření slabého podnětu bez úkolu při měsíčním review. Vrátíme se jen tehdy, když se ve dvou dalších review objeví stejný zmatek nebo vznikne nový zbytečný úkol.
+```
+
+Taková věta je malá brzda proti nekonečné péči. Bez ní se každé ověření může změnit v pozvánku k dalšímu vylepšování. A další vylepšování je občas jen dobře oblečené odkládání práce, kterou má čtenář udělat podle už hotového textu.
+
+### Co během klidu sledovat
+
+Během klidového období nesledujte všechno. Stačí tři signály:
+
+1. Trasa se použila v reálné práci bez doptávání.
+2. Nevznikla nová duplicita, obcházka nebo zbytečný úkol.
+3. Datová stopa zůstala stejná nebo menší.
+
+To je celé. Není potřeba měřit počet přečtení, čas na stránce ani přesnou cestu každého člověka dokumentem. Rukopis není produktová analytika pro mikropohyby. Je to pracovní nástroj. Zajímá nás, jestli pomohl udělat rozhodnutí, ne jestli někdo strávil u odstavce o osm sekund méně.
+
+Pokud se objeví nový postřeh, zapište ho bokem jako podnět. Neotvírejte kvůli němu trasu automaticky. Rozdíl mezi podnětem a návratovým signálem je jednoduchý: podnět může být zajímavý, návratový signál opakuje nebo zesiluje problém, kvůli kterému už dává smysl jednat.
+
+Příklad:
+
+```text
+Podnět:
+Možná by se hodil kratší název části o měsíčním návratu k rozhodnutím.
+
+Návratový signál:
+Dva lidé při samostatném použití nenašli měsíční návrat a založili duplicitní review šablonu.
+```
+
+První věc patří do poznámek. Druhá už může otevřít novou kartu změny.
+
+### Jak dlouho trasu nechat být
+
+Délka klidu se nemá řídit kalendářem naslepo. Má se řídit tím, jak často se trasa přirozeně používá.
+
+Praktická orientace:
+
+- Často používaná trasa: počkejte na dvě až tři běžná použití.
+- Měsíční review nebo provozní rutina: počkejte jeden až dva cykly.
+- Kvartální nebo půlroční kontrola: nechte změnu žít do nejbližšího přirozeného cyklu.
+- Jednorázová publikační trasa: vraťte se až při dalším vydání nebo při jasném opakovaném tření.
+
+Když trasu nikdo nepoužívá, není to automaticky důvod k další editaci. Možná není aktuální situace, ve které by byla potřeba. Možná je špatně napojená v rozcestníku. Možná je to část pro vzácný problém. Rozhodujte podle pracovního kontextu, ne podle nervozity autora.
+
+### Karta klidového období
+
+```text
+Trasa:
+Poslední ověřená úprava:
+Proč teď nic neměníme:
+Co během klidu sledujeme:
+Návratový signál:
+Kdy nejdřív znovu otevřít:
+Co se výslovně neřeší:
+Privacy-first poznámka:
+Kdo drží kontext:
+```
+
+Vyplněný příklad:
+
+```text
+Trasa:
+Karta jedné změny po čtení -> zavření bez úkolu -> ověření doladění.
+
+Poslední ověřená úprava:
+Směrovka pomohla zavřít slabý podnět bez vytváření úkolu.
+
+Proč teď nic neměníme:
+Původní tření zmizelo a nový přehled stavů zatím není opakovaně potřeba.
+
+Co během klidu sledujeme:
+Jestli se při dalším měsíčním review znovu vytvoří zbytečný úkol nebo duplicitní poznámka.
+
+Návratový signál:
+Stejný zmatek ve dvou dalších review nebo nová duplicita v rozhodovací paměti.
+
+Kdy nejdřív znovu otevřít:
+Po dvou běžných použitích trasy.
+
+Co se výslovně neřeší:
+Nevyrábíme nový index všech stavů karet změn.
+
+Privacy-first poznámka:
+Nesledujeme čtenáře. Stačí anonymizovaný výsledek review a případný návratový signál.
+
+Kdo drží kontext:
+Vlastník rukopisu nebo editor veřejné edice.
+```
+
+### Privacy-first klid
+
+Klidové období je privacy-first disciplína v praxi. Když se rozhodnete neměřit každé použití rukopisu, nevznikají nové eventy, tabulky ani osobní poznámky. Když se rozhodnete neotevírat trasu po každém podnětu, nevznikají zbytečné exporty zpětné vazby. Když počkáte na přirozený návratový signál, chráníte nejen čas týmu, ale i datovou stopu kolem práce.
+
+To neznamená ignorovat problémy. Znamená to nastavit rozumný práh pro zásah. Privacy-first provoz není jen o mazání dat po experimentu. Je i o tom, že experiment nevznikne pokaždé, když má někdo nápad na další zlepšení.
+
+Codyho komentář: schopnost nechat funkční věc chvíli být je podceňovaná produktová dovednost. Když se pořád hrabete v trase, která právě začala fungovat, možná nevylepšujete systém. Možná mu jen berete šanci ukázat, že už stačí.
+
+### Checklist klidového období
+
+- Je poslední úprava opravdu ověřená, ne jen nasazená?
+- Je napsané, proč teď trasu neměníme?
+- Má klidové období konkrétní návratový signál?
+- Sledujete jen použití, duplicity a datovou stopu?
+- Nezakládáte nový tracker, export ani evidenci čtenářského chování?
+- Jsou nové postřehy oddělené od potvrzeného stavu trasy?
+- Je jasné, kdy se trasa může znovu otevřít?
+- Ví tým, co se výslovně neřeší?
+- Drží někdo kontext, nebo může být trasa prostě ponechaná v klidu?
+- Pomáhá klidové období čtenáři víc než další vysvětlování?
+
+Klid není konec práce. Je to součást práce. Díky němu rukopis nepůsobí jako nekonečný experiment, ale jako nástroj, kterému může tým věřit právě proto, že se mění jen ve chvíli, kdy změna opravdu pomáhá.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -133002,3 +133127,4 @@ Dobré uzavření není slavnostní. Je spíš uklizený stůl po malé opravě:
 - 2026-05-26: Doplněna úvodní podkapitola o předání stabilizované zkrácené trasy týmu: kanonické místo, aktualizace pracovních míst, oddělení chyb od nových nápadů, privacy-first předání, karta a checklist.
 - 2026-05-27: Doplněna úvodní podkapitola o ověření drobného doladění trasy při dalším použití: původní tření, stavy ověření, privacy-first kontrola, karta a checklist.
 - 2026-05-27: Doplněna krátká úvodní poznámka, aby stop podmínka popisovala hotový pracovní stav místo pouhého seznamu aktivit.
+- 2026-05-27: Doplněna úvodní podkapitola o klidovém období po ověřené trase: návratový signál, omezení další editace, privacy-first klid, karta a checklist.
