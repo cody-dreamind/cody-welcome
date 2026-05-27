@@ -130316,8 +130316,224 @@ Znovuotevřená změna je převedená do malé ověřovací úpravy: má hypoté
 
 Malá ověřovací úprava je most mezi signálem a novým standardem. Když je dobře postavená, tým se nemusí hádat o dojmy: změnu použije, podívá se na důkazy a rozhodne. Když je moc široká, jen přejmenuje nejistotu na proces. A proces bez jasného konce je přesně ten typ luxusu, který si dobrý SaaS ani dobrý web nemá pořizovat.
 
+## Příloha RC: Ověření malé ověřovací úpravy po prvním běžném použití
+
+Malá ověřovací úprava má smysl jen tehdy, když se po ní tým opravdu vrátí k původní hypotéze. Nestačí říct "nasadili jsme drobnou změnu". Tím práce nekončí. Tím teprve začíná fáze, ve které se ukáže, jestli úprava pomohla, zavedla nové tření, nebo jen elegantně přidala další malý kus procesu.
+
+Tato příloha navazuje na kartu malé ověřovací úpravy. Jejím cílem není udělat velkou retrospektivu. Cílem je po prvním běžném použití nebo po domluveném ověřovacím okně rozhodnout, zda úpravu potvrdit, doladit, vrátit nebo odložit.
+
+Největší chyba je hodnotit úpravu podle pocitu člověka, který ji navrhl. Ten má přirozeně tendenci vidět smysl v tom, co právě vytvořil. Ověření proto musí vycházet z původní hypotézy, minimálních důkazů a privacy-first hranic, které byly zapsané před změnou.
+
+### Začněte původní hypotézou
+
+Neotevírejte diskusi otázkou "jak se nám nová úprava líbí". Otevřete kartu a přečtěte nahlas tři věci:
+
+- hypotézu;
+- ověřovací okno;
+- minimum důkazů.
+
+Tím tým zabrání tomu, aby se ověření rozteklo do debat o úplně jiné části procesu. Pokud byla hypotéza o tom, zda podmíněný dotaz sníží ruční doptávání, nehodnoťte při první kontrole celý formulář, celý obchodní proces ani celou kvalitu leadů.
+
+Příklad:
+
+```text
+Hypotéza:
+Podmíněný volitelný dotaz na počet uživatelů u B2B týmových poptávek sníží ruční doptávání a nezhorší dokončení poptávek.
+
+Ověřovací okno:
+20 relevantních B2B poptávek nebo 30 dní.
+
+Minimum důkazů:
+Agregovaný počet relevantních poptávek, počet ručních doptání a případné nejasnosti v odpovědích.
+```
+
+Pokud tým nemá slíbené minimum důkazů, neznamená to automaticky, že úprava selhala. Znamená to, že nejdřív musí pojmenovat stav důkazů: co skutečně víme, co jen tušíme a co nelze rozhodnout bez dalšího běžného použití.
+
+### Sledujte výsledek, tření a cenu dat
+
+Ověření malé úpravy má tři vrstvy. První je výsledek: pomohla úprava s problémem, kvůli kterému vznikla? Druhá je tření: nezhoršila práci zákazníkovi nebo týmu jinde? Třetí je cena dat: nevytvořila novou stopu, která je větší než přínos?
+
+Praktická kontrola:
+
+- Výsledek: snížil se počet ručních doptání, chyb, nejasností nebo přeskoků?
+- Tření: nezdržuje úprava člověka, který proces používá poprvé?
+- Cena dat: sbíráme nový údaj jen tam, kde je potřeba?
+- Kopie: nevznikly pomocné tabulky, exporty nebo screenshoty mimo kanonické místo?
+- Přístupy: nevidí nový údaj lidé, kteří ho nepotřebují?
+- Retence: má nový údaj stejné nebo kratší retenční pravidlo než původní záznam?
+
+U webu, SaaS i marketingu se drobné úpravy často tváří nevinně. Jedno pole, jedna poznámka, jeden export, jedna automatická kopie do tabulky. Právě tak ale vzniká provozní nepořádek: nikdo neudělal velké rozhodnutí, a přesto má tým za pár měsíců víc dat, víc míst pravdy a méně jistoty.
+
+### Rozlišujte čtyři výsledky ověření
+
+Po kontrole nepište "vypadá to dobře". To není rozhodnutí. Použijte jeden ze čtyř stavů:
+
+- Potvrdit: hypotéza se naplnila a nevznikla nepřijatelná cena.
+- Doladit: směr pomáhá, ale jedna malá část ještě drhne.
+- Vrátit: úprava nepomohla nebo zavedla větší problém.
+- Odložit: není dost relevantních případů nebo se původní signál dočasně ztratil.
+
+Každý stav má jiný další krok.
+
+```text
+Potvrdit:
+Převést úpravu do aktuálního pracovního místa a zavřít dočasnost.
+
+Doladit:
+Udělat jednu lokální korekci a nastavit nové malé ověření.
+
+Vrátit:
+Odstranit úpravu, uklidit datové stopy a zapsat důvod.
+
+Odložit:
+Ponechat nebo vypnout úpravu podle rizika a nastavit návratový signál.
+```
+
+Pokud se tým nedokáže shodnout mezi `doladit` a `vrátit`, vraťte se k ceně dat. Když úprava sbírá nový údaj, komplikuje formulář nebo přidává nový přístup, musí mít jasnější přínos než jen "možná se hodí". Ne každý užitečný nápad si zaslouží místo v provozu.
+
+### Privacy-first ověření bez nového dohledu
+
+Při ověřování malé úpravy je lákavé přidat další měření, aby bylo rozhodnutí "objektivnější". Jenže tím se snadno poruší smysl celé iterace. Pokud kvůli ověření jedné drobnosti nasadíte novou analytiku, heatmapu, session recording nebo externí obohacování leadů, vytvoříte větší zásah než samotná úprava.
+
+Privacy-first ověření se ptá:
+
+- Umíme rozhodnout z existujících provozních záznamů?
+- Stačí agregovaný počet místo osobních detailů?
+- Můžeme použít krátký ruční zápis místo nového nástroje?
+- Lze po rozhodnutí pomocný zápis smazat?
+- Je nový údaj srozumitelně vysvětlen člověku, který ho vyplňuje?
+
+Příklad dobrého ověření:
+
+```text
+Jednou týdně zapíšeme jen agregovaný počet relevantních poptávek a počet ručních doptání. Neexportujeme celé zprávy, nevytváříme nový list s osobními údaji a po rozhodnutí pomocný součet smažeme nebo ho sloučíme do rozhodovací karty.
+```
+
+Takový zápis není dokonale vědecký. Je ale přiměřený. A přiměřenost je v privacy-first provozu často důležitější než honba za falešnou přesností.
+
+### Karta ověření malé ověřovací úpravy
+
+```text
+Standard:
+
+Malá ověřovací úprava:
+
+Původní hypotéza:
+
+Ověřovací okno:
+
+Skutečný okamžik ověření:
+
+Minimum důkazů, které jsme měli:
+
+Co se zlepšilo:
+
+Co se nezlepšilo:
+
+Jaké nové tření vzniklo:
+
+Privacy-first kontrola:
+Nový údaj:
+Nové kopie dat:
+Přístupy:
+Retence:
+Pomocné podklady k úklidu:
+
+Rozhodnutí:
+Potvrdit / Doladit / Vrátit / Odložit
+
+Další nejmenší krok:
+
+Co teď vědomě neotevíráme:
+
+Datum návratu, pokud je potřeba:
+```
+
+Vyplněný příklad:
+
+```text
+Standard:
+Formulářové minimum pro první poptávku.
+
+Malá ověřovací úprava:
+Podmíněný volitelný dotaz na počet uživatelů u týmových B2B poptávek.
+
+Původní hypotéza:
+Dotaz sníží ruční doptávání a nezhorší dokončení poptávek.
+
+Ověřovací okno:
+20 relevantních poptávek nebo 30 dní.
+
+Skutečný okamžik ověření:
+Po 30 dnech a 14 relevantních poptávkách.
+
+Minimum důkazů, které jsme měli:
+Agregovaný počet poptávek, počet ručních doptání a dvě slovní poznámky z odpovědí.
+
+Co se zlepšilo:
+Ruční doptání na počet uživatelů kleslo ze čtyř z pěti případů na dva ze čtrnácti.
+
+Co se nezlepšilo:
+Dvě odpovědi uvedly rozsah "zatím nevíme", takže údaj není vždy přesný.
+
+Jaké nové tření vzniklo:
+Žádné jasné zákaznické tření, ale interní popis pole je potřeba zpřesnit.
+
+Privacy-first kontrola:
+Nový údaj: počet uživatelů jen u týmového segmentu.
+Nové kopie dat: žádné.
+Přístupy: beze změny.
+Retence: stejná jako u poptávky.
+Pomocné podklady k úklidu: týdenní agregovaný součet sloučit do této karty a smazat pracovní poznámku.
+
+Rozhodnutí:
+Doladit.
+
+Další nejmenší krok:
+Zpřesnit nápovědu pole na "stačí odhad rozsahu, například 5-10 lidí".
+
+Co teď vědomě neotevíráme:
+Telefon, rozpočet, lead scoring ani nové CRM pole.
+
+Datum návratu:
+Po dalších 10 relevantních poptávkách.
+```
+
+### Mini workshop na 7 minut
+
+1. Otevřete kartu malé ověřovací úpravy.
+2. Přečtěte hypotézu, ověřovací okno a minimum důkazů.
+3. Zapište skutečný okamžik ověření.
+4. Oddělte zlepšení, nezlepšení a nové tření.
+5. Projděte privacy-first kontrolu nových údajů, kopií, přístupů a retence.
+6. Vyberte stav `potvrdit`, `doladit`, `vrátit` nebo `odložit`.
+7. Napište jeden další nejmenší krok a jednu věc, kterou teď neotevíráte.
+
+Výstup workshopu:
+
+```text
+Malá ověřovací úprava má rozhodnutí: potvrdit, doladit, vrátit nebo odložit. Tým ví, co udělat dál, jak uklidit datovou stopu a co zůstává mimo rozsah.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme podle původní hypotézy, ne podle nového dojmu?
+- Máme před sebou ověřovací okno a minimum důkazů?
+- Víme, kolik relevantních použití skutečně proběhlo?
+- Oddělili jsme výsledek od tření?
+- Zkontrolovali jsme cenu nového údaje, kopie dat, přístupů a retence?
+- Nepřidali jsme kvůli ověření nový tracker, heatmapu, export nebo sledovací nástroj?
+- Umíme rozhodnout jedním ze stavů `potvrdit`, `doladit`, `vrátit` nebo `odložit`?
+- Má další krok jen jednu nejmenší změnu?
+- Je zapsané, co teď vědomě neotevíráme?
+- Jsou pomocné podklady po ověření smazané, sloučené nebo jasně omezené?
+- Má odložené rozhodnutí konkrétní návratový signál?
+
+Ověření malé úpravy je místo, kde se ukáže disciplína týmu. Ne ve schopnosti vymyslet další nápad, ale ve schopnosti zavřít smyčku. Dobrý web i dobrý SaaS rostou přes podobné drobné návraty: změnit málo, ověřit poctivě, uklidit po sobě a teprve potom rozhodnout, jestli si úprava zaslouží trvalé místo.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RC o ověření malé ověřovací úpravy po prvním běžném použití: návrat k hypotéze, kontrola výsledku, tření a ceny dat, čtyři rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RB o převod znovuotevřené změny do malé ověřovací úpravy: hypotéza, výběr jedné varianty, ověřovací okno, minimum důkazů, dočasná věta, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RA o otevření nové změny po dlouhodobém klidu standardu: návratový signál, typy návratu, otázka změny, stop pravidlo, nejmenší zásah, privacy-first brána, karta, mini workshop a checklist.
 - 2026-05-26: Doplněna Příloha QZ o uzavření kontroly čistého stavu do dlouhodobého klidu: práce s výsledkem kontroly, závěrečná věta, návratový signál, privacy-first úklid pomocných podkladů, karta, mini workshop a checklist.
