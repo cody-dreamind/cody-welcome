@@ -134033,8 +134033,227 @@ Drobné zaváhání ze stabilního stavu je zachycené jako údržbová poznámk
 
 Údržbová poznámka je dobrá jen tehdy, když je lehčí než oprava a pevnější než dojem. Má podržet malý signál do další přirozené práce, ne proměnit stabilní stav v čekárnu plnou nápadů s pořadovým číslem.
 
+## Příloha RS: Ověření údržbové poznámky při dalším návratovém signálu
+
+Údržbová poznámka má smysl jen tehdy, když umí počkat. Ne každé drobné zaváhání potřebuje okamžitou opravu. Zároveň ale poznámka nesmí být elegantní odpadkový koš pro věci, ke kterým se tým nikdy nevrátí. Rozhodující okamžik přijde až ve chvíli, kdy nastane její návratová podmínka.
+
+Tato příloha navazuje na údržbovou poznámku ze stabilního pracovního stavu. Neřeší nové zlepšování celého standardu, nesbírá další dojmy a neotevírá revizi jen proto, že někdo dokument znovu viděl. Řeší jednu otázku:
+
+```text
+Vrátil se stejný signál tak jasně, že má údržbová poznámka přejít do minimální opravy, nebo ji můžeme potvrdit jako šum?
+```
+
+Ověření poznámky má být kratší než samotná oprava. Pokud při něm vznikne dlouhá debata, pravděpodobně se už nebavíte o drobném signálu, ale o změně pracovního cíle, vlastnictví nebo cesty.
+
+### Vraťte se k původní návratové podmínce
+
+Začněte přesným zněním návratové podmínky. Ne tím, co si kdo pamatuje z porady. Údržbová poznámka má právě proto existovat u pracovního místa: aby bylo jasné, co mělo nastat, než se bude něco měnit.
+
+Krátký návratový zápis:
+
+```text
+Původní signál:
+
+Návratová podmínka:
+
+Aktuální situace:
+
+Je to stejný signál?
+Ano / podobný / jiný / žádný
+```
+
+`Ano` znamená, že se zopakovalo stejné zaváhání ve stejné nebo velmi podobné práci. `Podobný` znamená, že se objevilo příbuzné tření, ale možná má jinou příčinu. `Jiný` znamená, že poznámka nemá být zkratkou k nové změně. `Žádný` znamená, že se návratová podmínka nenaplnila a stabilní stav dál drží.
+
+Příklad:
+
+```text
+Původní signál:
+Obchodník si nebyl jistý, jestli otázka míří na současný problém nebo cílový stav.
+
+Návratová podmínka:
+Vrátíme se k tomu, pokud další obchodní průchod znovu zamění současný problém za cílový stav.
+
+Aktuální situace:
+Další obchodník při přípravě nabídky použil odpověď na cílový stav jako popis současné bolesti.
+
+Je to stejný signál?
+Ano.
+```
+
+Tohle už není náhodné zaváhání. Je to opakovaný signál v běžné práci. Pořád může být malý, ale už si zaslouží rozhodnutí.
+
+### Rozlišujte potvrzení, šum a nový problém
+
+Po návratu vyberte jeden ze čtyř stavů.
+
+`Povýšit na minimální opravu` znamená, že se vrátil stejný signál, práce sice možná šla dokončit, ale opakované zaváhání už stojí za nejmenší zásah v pracovním místě. Typicky jedna věta, lepší název, přesnější hranice rozsahu nebo oprava cesty.
+
+`Ponechat jako šum` znamená, že návratová podmínka se nenaplnila. Signál se nevrátil, nebo se ukázalo, že šlo o jednorázovou situaci bez dopadu na práci. Poznámku můžete zavřít nebo nechat ještě jedno přirozené použití, pokud byla původně slabá, ale neotevírejte kvůli ní úkol.
+
+`Přepsat návratovou podmínku` znamená, že původní poznámka byla příliš vágní. Nevíte, co by se mělo opakovat, takže by oprava stála na dojmu. V takovém případě neopravujte pracovní místo. Zpřesněte podmínku a počkejte na další přirozené použití.
+
+`Otevřít samostatnou změnu` znamená, že aktuální situace ukázala větší problém než původní poznámka: nový typ zákazníka, jiný cíl práce, rozbitou odpovědnost, bezpečnostní riziko nebo novou datovou stopu. To už není údržbová poznámka. To je nová karta.
+
+Praktická rozhodovací věta:
+
+```text
+Protože se [stejný signál / šum / jiný problém] objevil při [běžné situaci], rozhodujeme [stav] a dál měníme jen [nejmenší pracovní místo / nic / návratovou podmínku / samostatnou kartu].
+```
+
+Codyho komentář: Nejčastější chyba je povýšit podobný, ale jiný problém na opravu původní poznámky. Tým má pak pocit, že je efektivní, ale ve skutečnosti lepí novou nejistotu na starý štítek. Je to rychlé, praktické a skoro vždycky trochu špatně. Toto je můj pohled.
+
+### Pokud opravujete, opravte nejmenší místo
+
+Když se stejný signál opravdu vrátil, minimální oprava má být přímá. Nepište nový playbook, pokud stačí jedna věta. Nepřidávejte kontrolní krok, pokud stačí lepší název. Nepřepisujte proces, pokud selhala jen hranice rozsahu.
+
+Příklady minimálního převodu:
+
+- Opakované zaváhání u pojmu: doplnit krátkou definici vedle pojmu.
+- Opakované hledání správného odkazu: upravit rozcestník, ne psát připomínku do chatu.
+- Opakované použití staré kopie: odstranit starou kopii z hlavní cesty a označit archiv.
+- Opakovaná otázka na rozsah: přidat jednu větu "Toto platí jen pro..." nebo "Toto neřeší...".
+- Opakovaná nejistota u dat: doplnit pravidlo, jaký údaj se nesbírá a proč.
+
+Špatný převod:
+
+```text
+Založíme nový úkol na revizi celé šablony, protože se dvakrát objevila drobná otázka.
+```
+
+Lepší převod:
+
+```text
+Do pole "důkaz" doplníme větu: "Použijte zákaznický důkaz; interní měření patří jen do rozhodovací poznámky." Ověříme při další přípravě článku.
+```
+
+Stabilní stav nepotřebuje slavnostní reformu pokaždé, když zakašle. Potřebuje malou opravu přesně tam, kde se opakovaně zadrhl.
+
+### Privacy-first ověření poznámky
+
+Ověření údržbové poznámky se často děje v reálných zákaznických, obchodních nebo interních situacích. Právě tam hrozí, že tým začne pro jistotu ukládat víc detailů, než potřebuje.
+
+Stačí evidovat:
+
+- původní signál;
+- jestli se návratová podmínka naplnila;
+- obecný popis aktuální situace;
+- rozhodnutí o stavu poznámky;
+- nejmenší opravu nebo důvod, proč se nic nemění.
+
+Není potřeba evidovat:
+
+- jméno zákazníka, pokud není nutné pro práci vlastníka;
+- přesnou citaci z hovoru, když stačí zobecnění;
+- screenshot, nahrávku nebo export;
+- historii všech lidí, kteří se k poznámce vyjádřili;
+- nový sledovací event jen kvůli tomu, že se signál možná vrátí.
+
+Privacy-first pravidlo je jednoduché: pokud se poznámka povyšuje na opravu, nechte v ní jen tolik detailu, aby šla oprava udělat a později pochopit. Zbytek je provozní prach.
+
+### Karta ověření údržbové poznámky
+
+Použijte ji ve chvíli, kdy nastane návratová podmínka nebo kdy si tým potřebuje potvrdit, že nenastala. Karta má pomoci rozhodnout, ne archivovat každou myšlenku.
+
+```text
+Stabilní pracovní stav:
+
+Původní údržbová poznámka:
+
+Návratová podmínka:
+
+Aktuální běžné použití:
+
+Shoda se signálem:
+Stejný / podobný / jiný / žádný
+
+Rozhodnutí:
+Povýšit na minimální opravu / ponechat jako šum / přepsat návratovou podmínku / otevřít samostatnou změnu
+
+Nejmenší další krok:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first poznámka:
+
+Kde se aktualizuje pracovní místo nebo poznámka:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilní pracovní stav:
+Kvalifikační otázky pro první obchodní rozhovor.
+
+Původní údržbová poznámka:
+Jedno zaváhání u rozdílu mezi současným problémem a cílovým stavem.
+
+Návratová podmínka:
+Vrátíme se k tomu, pokud další obchodní průchod znovu zamění současný problém za cílový stav.
+
+Aktuální běžné použití:
+Příprava nabídky po discovery hovoru.
+
+Shoda se signálem:
+Stejný.
+
+Rozhodnutí:
+Povýšit na minimální opravu.
+
+Nejmenší další krok:
+K otázce doplnit jednu větu: "Nejdřív popište současnou bolest; cílový stav patří až do části navrhovaného řešení."
+
+Co teď vědomě neotevíráme:
+Neměníme discovery scénář, CRM pole, nabídku ani pricing.
+
+Privacy-first poznámka:
+Bez jména zákazníka a bez citace z hovoru. Pro opravu stačí obecný popis opakovaného zaváhání.
+
+Kde se aktualizuje pracovní místo nebo poznámka:
+Servisní sekce u kvalifikačních otázek a potom samotná otázka.
+
+Vlastník a datum:
+Owner sales procesu, 2026-05-27.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete jednu údržbovou poznámku.
+2. Přečtěte původní návratovou podmínku nahlas.
+3. Popište aktuální běžné použití jednou větou.
+4. Rozhodněte, jestli jde o stejný, podobný, jiný nebo žádný signál.
+5. Vyberte jeden ze čtyř stavů poznámky.
+6. Pokud vzniká oprava, napište jednu opravnou větu.
+7. Pokud nevzniká oprava, zavřete nebo zpřesněte poznámku.
+8. Odstraňte z karty zbytečné osobní, zákaznické a interní detaily.
+
+Výstup workshopu:
+
+```text
+Údržbová poznámka je ověřená proti návratové podmínce. Víme, jestli zůstává šumem, mění se v minimální opravu, potřebuje přesnější podmínku nebo ukazuje na samostatnou změnu. Stabilní pracovní místo se nemění víc, než situace opravdu vyžaduje.
+```
+
+### Checklist kapitoly
+
+- Vycházíme z původní návratové podmínky, ne z paměti?
+- Popisujeme aktuální běžné použití konkrétně a krátce?
+- Rozlišili jsme stejný, podobný, jiný a žádný signál?
+- Neopravujeme pracovní místo jen proto, že se objevila příbuzná, ale jiná nejistota?
+- Pokud se signál vrátil, je další krok opravdu minimální?
+- Pokud byla podmínka vágní, zpřesnili jsme ji místo předčasné opravy?
+- Pokud se objevil větší problém, dostal samostatnou kartu?
+- Je zapsané, co teď vědomě neotevíráme?
+- Nezavedli jsme nový tracker, formulář, screenshot, nahrávku ani export?
+- Obsahuje záznam jen tolik detailu, kolik je nutné pro rozhodnutí?
+- Víme, kde se aktualizuje pracovní místo nebo kde se poznámka zavře?
+- Má výsledek vlastníka a nejbližší přirozené ověření, pokud vznikla oprava?
+
+Ověření údržbové poznámky je malý filtr proti dvěma špatným extrémům. První extrém je opravovat každé zaváhání. Druhý extrém je schovávat opakované signály do poznámek, které nikdy nic nezmění. Dobrá poznámka umí počkat, ale když se signál vrátí, umí se změnit v přesnou malou akci.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RS o ověření údržbové poznámky při dalším návratovém signálu: návrat k původní podmínce, rozlišení stejného, podobného, jiného a žádného signálu, čtyři rozhodovací stavy, minimální oprava, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RR o převodu drobného signálu ze stabilního stavu do údržbové poznámky: rozlišení signálu od opravy, návratová podmínka, uložení blízko pracovního místa, privacy-first zápis bez zbytečných detailů, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RQ o první běžný návrat ke stabilnímu stavu po uzavřené minimální opravě: návrat při skutečné práci, signály cesty, použití a datové stopy, čtyři výsledky návratu, privacy-first kontrola bez nového měření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RP o uzavření potvrzené minimální opravy do stabilního pracovního stavu: práce s výsledkem ověření, aktuální pracovní věta, staré stopy, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
