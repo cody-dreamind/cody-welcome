@@ -134503,8 +134503,244 @@ Ověřená údržbová poznámka je převedená do jedné hotové minimální op
 
 Minimální oprava je dobrá právě tím, že není působivá. Nevyhraje prezentaci, ale zlepší další reálné použití. A pokud se při dalším použití ukáže, že nestačila, tým se vrátí podle návratového signálu, ne podle dojmu.
 
+## Příloha RU: Ověření hotové minimální opravy při dalším běžném použití
+
+Hotová minimální oprava po údržbové poznámce ještě není nový standard. Je to malý zásah, který má při dalším běžném použití ukázat, jestli opravdu odstranil potvrzené tření. Pokud se oprava hned prohlásí za stabilní stav, tým přeskočí nejdůležitější otázku: fungovalo to v práci, nebo jen na papíře?
+
+Tato příloha navazuje na předchozí krok. Údržbová poznámka byla ověřená, převedená do jedné minimální opravy a uložená v nejbližším pracovním místě. Teď je potřeba počkat na další přirozené použití a ověřit, jestli člověk projde opraveným místem samostatněji, rychleji a bez nové datové stopy.
+
+Pracovní otázka:
+
+```text
+Pomohla hotová minimální oprava při dalším běžném použití, nebo potřebuje další zásah?
+```
+
+### Ověřujte až při skutečné práci
+
+Nevolejte schůzku jen proto, že oprava existuje. Minimální oprava se má ověřit ve chvíli, kdy se pracovní místo znovu přirozeně použije: při přípravě nabídky, úpravě landing page, psaní case study, úklidu exportu, kontrole formuláře nebo předání podkladu dalšímu člověku.
+
+Krátký vstup před ověřením:
+
+```text
+Opravené pracovní místo:
+
+Původní potvrzené tření:
+
+Provedená minimální oprava:
+
+Návratový signál:
+
+Další běžné použití:
+```
+
+Pokud další běžné použití ještě nenastalo, nechte kartu spát. Přidávat umělý test bývá lákavé, ale často vytvoří jiný kontext než skutečná práce. U malé opravy je lepší jeden reálný průchod než tři laboratorní dojmy.
+
+Výjimka dává smysl jen tehdy, když oprava chrání důležitou hranici: například veřejnou komunikaci, právně citlivé tvrzení, práci s osobními údaji nebo kritickou provozní instrukci. V takovém případě použijte krátký scénář, ale pořád držte stejný princip: ověřuje se opravené místo, ne celý proces.
+
+### Sledujte tři signály
+
+Ověření minimální opravy nemá být audit. Stačí sledovat tři signály, které odpovídají původnímu tření.
+
+První signál je průchod. Člověk najde správné místo, rozumí, co má udělat, a nemusí hledat starou poznámku, vysvětlení v chatu ani někoho, kdo si pamatuje důvod opravy.
+
+Druhý signál je samostatnost. Oprava sníží počet doplňujících otázek, ručního vysvětlování nebo oprav po kontrole. Neznamená to, že nikdo nikdy nezaváhá. Znamená to, že běžný uživatel pracovního místa nepotřebuje zvláštní instruktáž.
+
+Třetí signál je datová stopa. Oprava nepřidala nové screenshoty, exporty, formuláře, sledování, duplicitní dokumenty ani osobní detaily. Pracovní místo je jasnější, ale systém kvůli tomu neshromažďuje víc informací.
+
+Zápis signálů může být krátký:
+
+```text
+Průchod:
+Prošel bez hledání / prošel s drobným zaváháním / neprošel.
+
+Samostatnost:
+Bez dotazu / jeden upřesňující dotaz / potřeboval ruční vedení.
+
+Datová stopa:
+Beze změny / vznikl dočasný podklad a byl uklizen / vznikla nová zbytečná stopa.
+```
+
+Codyho komentář: U takhle malých oprav je největší nebezpečí falešná přesnost. Není potřeba měřit sekundové rozdíly a dělat z toho dashboard. Stačí poctivě poznat, jestli příští člověk zakopne o stejný kámen. Toto je můj pohled.
+
+### Rozhodněte jedním ze čtyř stavů
+
+Po ověření vyberte jeden stav. Neotevírejte další debatu bez závěru.
+
+Stav 1: Potvrdit.
+
+Oprava odstranila původní tření a nezvětšila datovou stopu. Pracovní místo se může brát jako aktuální stav. Starou údržbovou poznámku zavřete, ponechte jen krátký changelog a návratový signál pro případ, že se problém objeví znovu.
+
+Stav 2: Doladit.
+
+Oprava pomohla, ale jedna věta, popisek, odkaz nebo hranice je pořád nejasná. Dovolte jednu další minimální korekci ve stejném pracovním místě. Neotvírejte nový projekt a nepřepisujte okolní systém.
+
+Stav 3: Vrátit.
+
+Oprava nepomohla nebo způsobila větší zmatek. Vraťte pracovní místo na předchozí stabilní verzi, pokud existuje, a zapište, co se ukázalo. Neúspěšná malá oprava není ostuda. Ostuda je nechat ji žít jen proto, že už ji někdo napsal.
+
+Stav 4: Povýšit.
+
+Ověření ukázalo, že nejde o drobné tření jednoho místa, ale o širší problém: chybí vlastník, šablona má špatnou strukturu, existují dvě konkurenční verze, nebo se stejná chyba opakuje napříč více pracovními místy. V takovém případě opravu nepřifukujte. Zavřete její výsledek a založte samostatnou změnu s vlastním rozsahem.
+
+Rozhodovací zkratka:
+
+```text
+Potvrdit: příště by člověk prošel lépe bez další pomoci.
+Doladit: stačí jedna další malá korekce stejného místa.
+Vrátit: oprava zhoršila práci nebo neřeší původní tření.
+Povýšit: problém je širší než opravené místo.
+```
+
+### Privacy-first ověření bez nového sledování
+
+Ověření minimální opravy má být lehké i datově. Nejlepší důkaz často vznikne z běžné práce: člověk dokončil úkol, nepotřeboval doplňující vysvětlení a nevznikla nová zbytečná kopie dat. To stačí.
+
+Při ověření nepřidávejte:
+
+- nový analytický skript;
+- nahrávání obrazovky;
+- heatmapu;
+- povinný formulář zpětné vazby;
+- kopii zákaznických dat do testovacího dokumentu;
+- screenshoty interních systémů;
+- přesné citace z hovoru, pokud nejsou nutné.
+
+Stačí zapsat:
+
+- jaká situace nastala;
+- jestli oprava pomohla;
+- jaký stav byl vybrán;
+- co se uklidilo;
+- kdo rozhodnutí drží.
+
+Privacy-first pravidlo pro tuto fázi:
+
+```text
+Ověření má potvrdit použitelnost opravy, ne vyrobit novou evidenční vrstvu nad prací týmu.
+```
+
+Pokud při ověření vznikne dočasný podklad, dejte mu datum smazání hned při vzniku. Ještě lepší je nepoužít ho vůbec, pokud stejný závěr unesete krátkou anonymizovanou poznámkou.
+
+### Karta ověření hotové minimální opravy
+
+Použijte ji při prvním běžném použití opraveného pracovního místa.
+
+```text
+Opravené pracovní místo:
+
+Původní potvrzené tření:
+
+Provedená minimální oprava:
+
+Návratový signál:
+
+Reálné použití:
+
+Signál průchodu:
+
+Signál samostatnosti:
+
+Signál datové stopy:
+
+Rozhodnutí:
+Potvrdit / Doladit / Vrátit / Povýšit
+
+Co přesně se mění:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first úklid:
+
+Kde je aktuální zdroj pravdy:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Opravené pracovní místo:
+Discovery šablona pro první obchodní rozhovor.
+
+Původní potvrzené tření:
+Lidé si pletli současnou bolest s cílovým stavem.
+
+Provedená minimální oprava:
+U otázky "Co dnes nejvíc brzdí práci týmu?" bylo doplněno vodítko: "Popište současný stav. Cílový stav zapište až do návrhu řešení."
+
+Návratový signál:
+Vrátíme se k tomu jen tehdy, pokud další dvě běžné přípravy nabídky znovu smíchají současnou bolest a cílový stav.
+
+Reálné použití:
+Příprava nabídky pro malý B2B tým.
+
+Signál průchodu:
+Autor nabídky našel správné pole bez hledání staré poznámky.
+
+Signál samostatnosti:
+Padl jeden upřesňující dotaz, ale nešlo o původní záměnu bolesti a cíle.
+
+Signál datové stopy:
+Bez nového exportu, screenshotu nebo zákaznické citace v kartě.
+
+Rozhodnutí:
+Potvrdit.
+
+Co přesně se mění:
+Opravená otázka zůstává jako aktuální verze discovery šablony.
+
+Co teď vědomě neotevíráme:
+Neměníme celý discovery scénář, scoring ani strukturu nabídky.
+
+Privacy-first úklid:
+Stará údržbová poznámka zavřená, pomocné poznámky bez zákaznických detailů smazané.
+
+Kde je aktuální zdroj pravdy:
+Discovery šablona pro první obchodní rozhovor.
+
+Vlastník a datum:
+Owner sales procesu, 2026-05-27.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete kartu hotové minimální opravy.
+2. Přečtěte původní potvrzené tření jednou větou.
+3. Popište reálné použití, při kterém se oprava ověřuje.
+4. Zapište signál průchodu.
+5. Zapište signál samostatnosti.
+6. Zkontrolujte datovou stopu a úklid.
+7. Vyberte stav: potvrdit, doladit, vrátit nebo povýšit.
+8. Zapište, co teď vědomě neotevíráte.
+
+Výstup workshopu:
+
+```text
+Hotová minimální oprava je ověřená při běžném použití. Tým ví, jestli ji potvrdit, drobně doladit, vrátit, nebo povýšit na samostatnou změnu. Ověření nepřidalo nové sledování ani zbytečnou evidenci.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme opravu při skutečném běžném použití?
+- Máme po ruce původní potvrzené tření?
+- Je jasné, jaká minimální oprava byla provedena?
+- Sledujeme průchod, samostatnost a datovou stopu?
+- Nezaměňujeme drobné zaváhání za důvod k velkému přepisu?
+- Vybrali jsme jeden ze čtyř stavů?
+- Pokud dolaďujeme, zůstává korekce ve stejném pracovním místě?
+- Pokud vracíme, je jasné, k jaké verzi se vracíme?
+- Pokud povyšujeme, zakládáme samostatnou změnu místo natahování malé opravy?
+- Nevznikl nový tracker, formulář, screenshot, export ani nahrávka?
+- Uklidili jsme dočasné podklady?
+- Zůstává jeden aktuální zdroj pravdy?
+- Je zapsané, co teď vědomě neotevíráme?
+- Má rozhodnutí vlastníka a datum?
+
+Dobrá minimální oprava se po ověření buď tiše stane současným stavem, nebo se férově vrátí, doladí či povýší. Všechny čtyři výsledky jsou v pořádku. Špatný výsledek je jen jeden: oprava zůstane někde mezi, bez rozhodnutí a s novou vrstvou poznámek kolem sebe.
+
 ## Pracovní log
 
+- 2026-05-27: Doplněna Příloha RU o ověření hotové minimální opravy při dalším běžném použití: reálné použití, signály průchodu, samostatnosti a datové stopy, čtyři rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RT o převodu ověřené údržbové poznámky do jedné hotové minimální opravy: potvrzený signál, nejbližší pracovní místo, opravná věta, jedna změna, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RS o ověření údržbové poznámky při dalším návratovém signálu: návrat k původní podmínce, rozlišení stejného, podobného, jiného a žádného signálu, čtyři rozhodovací stavy, minimální oprava, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RR o převodu drobného signálu ze stabilního stavu do údržbové poznámky: rozlišení signálu od opravy, návratová podmínka, uložení blízko pracovního místa, privacy-first zápis bez zbytečných detailů, karta, mini workshop a checklist.
