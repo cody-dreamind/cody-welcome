@@ -137812,8 +137812,209 @@ Stabilní pracovní místo prošlo první běžnou kontrolou. Je jasné, jestli 
 
 První běžná kontrola má chránit stabilní místo před dvěma extrémy: před zapomenutou chybou i před nekonečným dolaďováním. Dobré stabilní místo se po kontrole nestane slavnostním projektem. Prostě dál slouží práci, nevyrábí nové stopy a nechá tým soustředit se na další skutečný problém.
 
+## Příloha SJ: Převod drobného dozvuku po první kontrole do jedné úklidové korekce
+
+Příloha SI rozlišuje čtyři výsledky první běžné kontroly stabilního pracovního místa. Nejčastější užitečný stav není drama, ale `Drobný dozvuk`: aktuální místo funguje, člověk se podle něj dostal k práci, ale v okolí zůstal malý zbytek staré trasy. Typicky jde o nejasný název odkazu, archivní poznámku, duplicitní větu, starý příklad nebo formulaci, která už neodpovídá stabilnímu stavu.
+
+Drobný dozvuk se má řešit jako úklidová korekce, ne jako nová revizní smyčka. Cílem není znovu otevřít celou lokální opravu. Cílem je odstranit jednu malou překážku, která se ukázala při přirozeném použití stabilního místa, a hned potvrdit, že běžná cesta zůstává krátká.
+
+Začněte větou:
+
+```text
+Stabilní pracovní místo funguje. Opravujeme jen drobný dozvuk v jeho nejbližším okolí, aby se běžná cesta nemusela vracet ke staré stopě.
+```
+
+Pokud tahle věta není pravdivá, nejste v této příloze. Jestli se člověk při kontrole dostal zpět na starou šablonu, řešte návrat staré cesty. Jestli se objevil nový problém, založte nový případ. Jestli je výsledek `Klid`, nedělejte nic. Úklidová korekce je malý nástroj pro malý zbytek, ne univerzální povolení přepsat všechno, co už delší dobu lehce štve.
+
+### Vymezte jeden dozvuk
+
+První chyba je sepsat všechny drobnosti, které by šly při té příležitosti vylepšit. To zní pracovně, ale ve skutečnosti tím zahazujete výhodu první kontroly: konkrétní pozorování z reálné práce. Držte se toho, co se opravdu ukázalo při běžném použití.
+
+Jedna korekce může být například:
+
+- přejmenovat odkaz z "nová šablona" na "aktuální karta předání";
+- odstranit větu, která odkazuje na archivní postup;
+- doplnit krátkou poznámku, že starý příklad už není součástí běžné trasy;
+- přesunout archivní podklad mimo rozcestník;
+- sjednotit název pracovního místa mezi indexem a kartou;
+- zkrátit popis, který nutí člověka číst historii opravy.
+
+Korekce už není drobná, pokud vyžaduje změnit více tras, zavést nový proces, přepsat celou šablonu nebo rozhodnout o jiném vlastníkovi. V takovém případě ji nezmenšujte slovem "jen". Slovo "jen" je v provozu nebezpečné. Často stojí před prací, která se tváří jako šroubek a pak se ukáže jako půlka motoru.
+
+Pracovní věta:
+
+```text
+Drobný dozvuk:
+Jedna úklidová korekce:
+Co výslovně neměníme:
+```
+
+### Opravte nejbližší místo
+
+Úklidová korekce patří do nejbližšího místa, kde dozvuk vznikl. Když byl problém v názvu odkazu v indexu, opravte název odkazu. Když byl problém v archivní poznámce vedle aktuální karty, opravte poznámku. Když byl problém v nejasné větě v šabloně, opravte tu větu.
+
+Nepoužívejte drobný dozvuk jako záminku k plošnému hledání podobných problémů. To může být užitečné později, ale není to tato iterace. Tady jde o rychlé narovnání trasy, která byla právě použita. Výhoda je v přesnosti: víte, kde člověk narazil, co potřeboval udělat a jak má vypadat nejbližší lepší stav.
+
+Před úpravou si napište korekční větu:
+
+```text
+V místě X měníme Y na Z, aby člověk při běžné práci nepoužil nebo neotevřel starou stopu.
+```
+
+Příklad:
+
+```text
+V onboardingovém indexu měníme název odkazu "šablona předání" na "aktuální karta předání obsahu", aby nový člověk neotevřel archivní postup.
+```
+
+Dobrá korekční věta má tři vlastnosti: ukazuje konkrétní místo, popisuje konkrétní změnu a říká, jaké staré stopě brání. Pokud jedna z těchto částí chybí, korekce je pravděpodobně příliš mlhavá.
+
+### Ověřte korekci stejným průchodem
+
+Po úpravě nečekejte na další velký review den. Projděte stejnou vstupní cestu, na které se dozvuk ukázal. Ověření má být krátké: člověk jde z běžného vstupu na aktuální místo, rozumí nejbližšímu kroku a nepotřebuje otevřít starý podklad.
+
+Stačí tři otázky:
+
+- Vede vstupní cesta na aktuální pracovní místo?
+- Zmizel konkrétní dozvuk, který se ukázal při kontrole?
+- Nevznikl kvůli korekci nový odkaz, nová evidence nebo nová datová stopa?
+
+Zápis po ověření:
+
+```text
+Korekce ověřena stejným průchodem:
+Ano / Ne
+
+Výsledek:
+Dozvuk odstraněn / Dozvuk zůstal / Vznikl nový případ
+
+Další krok:
+```
+
+Pokud dozvuk zůstal, neopravujte další tři věci naráz. Buď byla korekce na špatném místě, nebo dozvuk nebyl drobný. Vraťte se k rozhodnutí, jestli jde pořád o úklidovou korekci, nebo o návrat staré cesty.
+
+### Privacy-first korekce bez nové stopy
+
+Drobný dozvuk často svádí k tomu, že si tým začne pro jistotu ukládat víc důkazů: screenshot před a po, komentář v chatu, tabulku průchodů, kopii starého znění, seznam lidí, kteří se k místu vraceli. U rizikových změn to někdy dává smysl. U běžné úklidové korekce je to často přehnané.
+
+Privacy-first pravidlo:
+
+```text
+Úklidová korekce má snížit zbytečnou pracovní a datovou stopu. Pokud kvůli ní vzniká víc evidence než kvůli původnímu dozvuku, korekce je moc těžká.
+```
+
+Při korekci zkontrolujte:
+
+- Neuchováváme screenshot staré chyby, pokud stačí stručný popis?
+- Nezapisujeme jména lidí, kteří na dozvuk narazili, pokud pro práci stačí role nebo situace?
+- Nevracíme archivní příklad do běžné trasy jen proto, aby bylo jasné, co se opravilo?
+- Neměníme úklidovou korekci na pravidelné měření chování týmu?
+- Má ponechaný pomocný podklad jasný účel a retenční poznámku?
+
+Codyho komentář: dobrý úklid poznáte i podle toho, že po něm není potřeba vysvětlovat úklid. Když po malé korekci vznikne pět nových poznámek, pravděpodobně jste právě vynalezli miniaturní byrokracii. Gratuluju, ale radši ji hned vypněte.
+
+### Karta úklidové korekce po drobném dozvuku
+
+```text
+Stabilní pracovní místo:
+Výsledek první kontroly:
+Drobný dozvuk:
+Běžná vstupní cesta:
+Nejbližší místo korekce:
+Korekční věta:
+Provedená změna:
+Stejný průchod po změně:
+Výsledek ověření:
+Co neotevíráme:
+Pomocné podklady:
+Retenční poznámka:
+Vlastník pracovního místa:
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilní pracovní místo:
+Onboardingový index pro obsahové workflow.
+
+Výsledek první kontroly:
+Drobný dozvuk.
+
+Drobný dozvuk:
+Odkaz v indexu se jmenoval "šablona předání", což znělo jako starý archivní postup.
+
+Běžná vstupní cesta:
+Onboardingový index, sekce obsahové předání.
+
+Nejbližší místo korekce:
+Název odkazu v onboardingovém indexu.
+
+Korekční věta:
+V onboardingovém indexu měníme název odkazu na "aktuální karta předání obsahu", aby nový člověk neotevřel archivní postup.
+
+Provedená změna:
+Odkaz byl přejmenován. Cíl odkazu zůstal aktuální karta.
+
+Stejný průchod po změně:
+Průchod z onboardingového indexu na kartu předání.
+
+Výsledek ověření:
+Dozvuk odstraněn. Cesta vede na aktuální místo a nevyžaduje starý podklad.
+
+Co neotevíráme:
+Nepřepisujeme celý onboarding, nehledáme podobné názvy v jiných týmech a nezavádíme audit odkazů.
+
+Pomocné podklady:
+Žádné.
+
+Retenční poznámka:
+Bez nové osobní nebo zákaznické stopy.
+
+Vlastník pracovního místa:
+Content owner.
+
+Návratový signál:
+Téma se vrátí jen tehdy, když běžná cesta znovu navede člověka ke starému nebo archivnímu postupu.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek první kontroly a potvrďte, že jde opravdu o `Drobný dozvuk`.
+2. Minuta 2: vyberte jeden konkrétní zbytek, který se ukázal při běžné práci.
+3. Minuta 3: najděte nejbližší místo korekce.
+4. Minuta 4: napište korekční větu a proveďte jen tuto změnu.
+5. Minuta 5: projděte stejnou vstupní cestu.
+6. Minuta 6: zapište výsledek a privacy-first poznámku.
+
+Výstup workshopu:
+
+```text
+Drobný dozvuk po první kontrole byl převedený do jedné úklidové korekce. Stabilní pracovní místo zůstává použitelné, běžná cesta je čistší a nevznikla nová zbytečná datová stopa.
+```
+
+### Checklist kapitoly
+
+- Je výsledek první kontroly opravdu `Drobný dozvuk`?
+- Neřešíme stav `Klid`, `Návrat staré cesty` nebo `Nový případ` špatným nástrojem?
+- Vybrali jsme jeden konkrétní zbytek z reálného použití?
+- Je jasné nejbližší místo korekce?
+- Máme korekční větu před úpravou?
+- Provedli jsme jen jednu změnu?
+- Neotevřeli jsme celý proces, onboarding, index ani sadu šablon?
+- Prošli jsme po korekci stejnou vstupní cestu?
+- Zmizel konkrétní dozvuk?
+- Nevznikl nový odkaz, evidence, tabulka nebo kontrolní rutina?
+- Neuchováváme screenshoty, jména, interní citace ani zákaznické příklady bez účelu?
+- Má ponechaný podklad retenční důvod?
+- Je jasné, co výslovně neotevíráme?
+- Má vlastník pracovního místa návratový signál?
+
+Úklidová korekce po drobném dozvuku je malá, ale důležitá práce. Právě tyhle malé zbytky rozhodují, jestli stabilní pracovní místo časem opravdu zůstane stabilní, nebo se kolem něj začne znovu usazovat starý provozní prach. Dobrá korekce je rychlá, konkrétní a skromná na data. Uklidí jednu věc a pak nechá pracovní místo dál sloužit.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SJ o převodu drobného dozvuku po první kontrole do jedné úklidové korekce: vymezení dozvuku, nejbližší místo opravy, stejný průchod, privacy-first brzda, karta a checklist.
 - 2026-05-28: Doplněna Příloha SI o první běžné kontrole stabilního pracovního místa po uzavřené lokální opravě: přirozený návrat, vstupní cesta, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SG o ověření lokální opravy při dalším běžném použití: návrat k opravné větě, přirozené ověření, signály nalezení, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SF o převod zbytku po návratu do jedné lokální opravy: rozlišení staré stopy a ztraceného kontextu, oprava nejbližšího pracovního místa, opravná věta, ověření stejnou cestou, privacy-first minimum, karta, mini workshop a checklist.
