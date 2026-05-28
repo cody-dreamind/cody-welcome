@@ -136069,8 +136069,220 @@ První běžný návrat po uzavřené servisní korekci proběhl. Víme, jestli 
 
 První návrat po uzavřené servisní korekci má být skoro nudný. To je dobré znamení. Stabilní pracovní místo nemá vyžadovat obdiv, paměť ani vysvětlení. Má prostě pomoct člověku dokončit práci a potom zůstat potichu, dokud se neobjeví skutečný návratový signál.
 
+## Příloha SB: Převod dozvuku po prvním návratu do jedné úklidové opravy
+
+Stav `Dozvuk` z přílohy SA je dobrá zpráva s malým háčkem. Znamená, že aktuální pracovní místo funguje, ale někde kolem něj zůstala stará stopa: odkaz, komentář, duplicitní příklad, pojmenování, dočasný export, nebo poznámka, která už nemá být v běžné trase. Není to důvod otevírat obsah znovu. Je to důvod udělat jednu úklidovou opravu.
+
+Tahle příloha pomáhá zabránit tomu, aby se z drobného dozvuku stal další projekt. Pokud člověk pracovní místo našel, správně použil a nepotřeboval servisní historii, nechte pravidlo být. Ukliďte jen stopu, která by mohla příště někoho svést ke staré cestě.
+
+Začněte větou:
+
+```text
+Pracovní místo funguje, ale při prvním návratu jsme našli jednu starou stopu, kterou uklidíme bez změny pravidla.
+```
+
+Pokud věta nejde napsat bez slov "a ještě bychom mohli", zastavte se. Úklidová oprava není pozvánka k vylepšování. Je to zametení drobku, který zůstal po hotové práci. Ano, digitální úklid má taky drobky. Jen nejsou pod klávesnicí, ale v interních odkazech.
+
+### Nejdřív potvrďte, že pravidlo funguje
+
+Před úklidem si napište, proč nejde o obsahovou opravu. Stačí krátká kontrola:
+
+```text
+Aktuální pracovní místo bylo nalezeno:
+Ano / Ne
+
+Aktuální pracovní místo vedlo ke správnému výstupu:
+Ano / Ne
+
+Starý podklad nebyl potřeba pro pochopení práce:
+Ano / Ne
+```
+
+Úklidovou opravu dělejte jen tehdy, když odpovědi říkají, že samotné místo funguje. Pokud člověk bez staré stopy nevěděl, co dělat, nejde o dozvuk. Jde o lokální drhnutí a patří do servisní poznámky, ne do úklidu.
+
+Dobré příklady dozvuku:
+
+- starý odkaz v interní poznámce míří na servisní kartu místo aktuálního pravidla;
+- ve šabloně zůstal komentář s původním názvem pole;
+- duplicitní příklad v archivu vypadá jako druhá platná varianta;
+- dočasný export z ověření je pořád v pracovní složce;
+- starý úkol má stav otevřeno, i když rozhodnutí už bylo uzavřené.
+
+Špatné příklady dozvuku:
+
+- člověk našel starý podklad dřív než aktuální místo;
+- aktuální věta byla nejasná a blokovala výstup;
+- tým potřeboval historii korekce, aby pochopil pravidlo;
+- starý export obsahoval informace, které v aktuálním místě chybí;
+- stejný problém se opakuje při druhém běžném použití.
+
+V těchto případech už neuklízíte okraj. Opravujete pracovní místo. To je jiná smyčka a zaslouží si vlastní zápis.
+
+### Vyberte jednu stopu
+
+Dozvuk často odhalí víc drobných míst. Neřešte je všechna najednou. Vyberte stopu, která má největší šanci někoho příště zmást, vrátit ke starému podkladu, nebo prodloužit datovou stopu bez účelu.
+
+Priorita úklidu:
+
+1. Stopa vede na starou verzi nebo starý zdroj pravdy.
+2. Stopa obsahuje osobní, zákaznické nebo interně citlivé detaily.
+3. Stopa vypadá jako platná alternativa aktuálního pravidla.
+4. Stopa je na místě, které lidé běžně používají.
+5. Stopa je jen kosmetická a nikoho nevede k práci.
+
+První čtyři typy uklízejte. Pátý typ si zaslouží podezření, jestli vůbec stojí za změnu. Ne každý nehezký zbytek je pracovní riziko. Někdy je to jen důkaz, že někdo moc rád rovná šuplíky, i když hoří backlog.
+
+Příklad výběru:
+
+```text
+Nalezené stopy:
+1. Starý odkaz v interním indexu.
+2. Komentář ve starém úkolu.
+3. Dočasný screenshot v pracovní složce.
+
+Vybraná stopa:
+Starý odkaz v interním indexu.
+
+Proč:
+Index je běžný vstup do práce. Pokud zůstane starý odkaz, další člověk může otevřít servisní kartu místo aktuálního pravidla.
+```
+
+### Oprava má být úklidová, ne ediční
+
+Úklidová oprava má typicky jeden z pěti tvarů:
+
+- smazat dočasný podklad;
+- přesměrovat odkaz na aktuální pracovní místo;
+- označit starý materiál jako archiv;
+- odstranit duplicitní příklad z běžné trasy;
+- zavřít starý úkol nebo komentář s odkazem na aktuální stav.
+
+Neprovádějte současně změnu textu pravidla, přejmenování polí, nové vysvětlení ani rozšíření checklistu. Pokud vás úklid dovede k tomu, že pravidlo potřebuje upravit, zastavte úklid a založte servisní poznámku. Úklidová oprava má udržet stabilitu, ne převléct ji za další iteraci.
+
+Krátká úklidová věta:
+
+```text
+Odstraňujeme starý odkaz na servisní kartu z interního indexu a nahrazujeme ho odkazem na aktuální pracovní místo. Obsah pravidla neměníme.
+```
+
+Slabší věta:
+
+```text
+Upravíme index a rovnou se podíváme, jestli by pravidlo nešlo napsat lépe.
+```
+
+Druhá věta už otevírá novou práci. Možná bude někdy užitečná, ale nepatří do dozvuku. Dozvuk je malý, konkrétní a má po sobě nechat méně stop než předtím.
+
+### Privacy-first úklid dozvuku
+
+Dozvuk je skvělé místo pro datovou hygienu. Stará stopa často vznikla při ověřování: screenshot, export, pracovní kopie, výřez z chatu, příklad z reálné situace nebo poznámka s kontextem, který už pro další práci není potřeba.
+
+Privacy-first pravidlo:
+
+```text
+Pokud stopa nepomáhá aktuálnímu rozhodnutí, školení, auditu ani provozu, má zmizet z běžné trasy.
+```
+
+Při úklidu si položte pět otázek:
+
+- Obsahuje stopa osobní, zákaznické nebo interně citlivé detaily?
+- Má stopa ještě legitimní pracovní účel?
+- Pokud ji archivujeme, víme kde, proč, kdo za ni odpovídá a kdy se vrátí k retenci?
+- Není stará stopa dostupnější než aktuální pracovní místo?
+- Dokáže další člověk použít pravidlo bez otevření této stopy?
+
+Pokud je stopa citlivá a nemá účel, nemažte kolem ní poezii. Smažte ji. Pokud má účel, zkraťte ji na anonymní záznam a přesuňte mimo běžnou pracovní trasu. Privacy-first provoz není soutěž v tom, kolik historických detailů dokážeme zachránit pro případ "co kdyby".
+
+Codyho komentář: většina týmů nemá problém s tím, že by si pamatovala málo. Má problém s tím, že si pamatuje moc věcí na špatných místech. Starý screenshot v běžné trase je jako cedule "tudy" na zavřené dveře. Někdo jí dřív nebo později uvěří.
+
+### Karta úklidové opravy po dozvuku
+
+```text
+Pracovní místo:
+Výsledek prvního návratu:
+Nalezený dozvuk:
+Proč nejde o změnu pravidla:
+Vybraná stopa:
+Úklidová oprava:
+Co mažeme:
+Co přesměrováváme nebo archivujeme:
+Retenční poznámka:
+Co výslovně neměníme:
+Kontrola hotovo:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Karta prvního návratu po servisní korekci.
+
+Výsledek prvního návratu:
+Dozvuk.
+
+Nalezený dozvuk:
+Interní index pořád obsahoval odkaz na starou servisní kartu.
+
+Proč nejde o změnu pravidla:
+Aktuální karta byla nalezena a použita správně. Problém je jen ve starém vstupním odkazu.
+
+Vybraná stopa:
+Starý odkaz v interním indexu.
+
+Úklidová oprava:
+Nahradit starý odkaz odkazem na aktuální pracovní místo.
+
+Co mažeme:
+Duplicitní komentář u starého odkazu.
+
+Co přesměrováváme nebo archivujeme:
+Servisní karta zůstává jen v uzavřeném archivu, ne v běžné navigaci.
+
+Retenční poznámka:
+Archivovaný záznam neobsahuje osobní ani zákaznické detaily.
+
+Co výslovně neměníme:
+Neměníme text aktuální karty, rozhodovací stavy ani návratový signál.
+
+Kontrola hotovo:
+Z interního indexu vede jen aktuální odkaz a stará karta není běžná vstupní cesta.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního návratu a potvrďte stav `Dozvuk`.
+2. Minuta 2: napište, proč samotné pracovní místo funguje.
+3. Minuta 3: vyberte jednu starou stopu s největším rizikem záměny nebo zbytečné datové stopy.
+4. Minuta 4: napište úklidovou větu ve tvaru "uklízíme X, neměníme Y".
+5. Minuta 5: smažte, přesměrujte nebo archivujte stopu podle účelu a retence.
+6. Minuta 6: ověřte, že běžná trasa vede jen na aktuální pracovní místo.
+
+Výstup workshopu:
+
+```text
+Dozvuk po prvním návratu je uklizený jednou úklidovou opravou. Pravidlo zůstalo beze změny, stará stopa nepřekáží v běžné trase a datová stopa se nezvětšila.
+```
+
+### Checklist kapitoly
+
+- Je výsledek prvního návratu opravdu `Dozvuk`, ne lokální drhnutí?
+- Potvrdili jsme, že aktuální pracovní místo funguje bez změny pravidla?
+- Vybrali jsme jednu stopu, ne celý seznam drobností?
+- Je vybraná stopa riziková pro záměnu, návrat ke staré cestě nebo zbytečnou datovou stopu?
+- Má oprava jasnou větu "uklízíme X, neměníme Y"?
+- Nezměnili jsme při úklidu text pravidla, rozhodovací stavy ani návratový signál?
+- Smazali jsme dočasné podklady, které už nemají účel?
+- Pokud něco archivujeme, má to důvod, vlastníka a retenční poznámku?
+- Neobsahuje archiv osobní ani zákaznické detaily, které nejsou nutné?
+- Vede běžná pracovní trasa po úklidu jen na aktuální místo?
+- Je stará stopa mimo běžnou navigaci nebo jasně označená jako archiv?
+- Je zápis kratší než původní problém?
+
+Úklid dozvuku má být malý a definitivní. Když po něm zůstane méně odkazů, méně starých podkladů a stejné stabilní pravidlo, práce se povedla. Ne každá dobrá iterace musí přidat nový obsah. Někdy je nejlepší výsledek ten, že se jedna stará věc už příště nikomu nepřiplete pod ruce.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SB o převodu dozvuku po prvním návratu do jedné úklidové opravy: potvrzení funkčního pravidla, výběr jedné staré stopy, rozlišení úklidu od ediční změny, privacy-first mazání a archivace, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SA o prvním běžném návratu po uzavřené servisní korekci: reálné použití jako spouštěč, signály nalezení, použití a datové stopy, stavy klid, dozvuk, lokální drhnutí a nový signál, privacy-first návrat bez obnovy starých podkladů, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RZ o uzavření ověřené servisní korekce do stabilního pracovního místa: aktuální pracovní věta, zavření servisní karty, návratový signál, úklid starých stop, privacy-first retence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RY o ověření servisní korekce při dalším běžném použití: návrat ke korekční větě, signály cesty, použití a datové stopy, čtyři výsledky ověření, privacy-first minimum, karta, mini workshop a checklist.
