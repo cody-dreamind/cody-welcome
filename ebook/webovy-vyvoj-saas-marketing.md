@@ -139737,8 +139737,235 @@ Lehký dozvuk po návratu čisté trasy je převedený do servisní poznámky. N
 
 Servisní poznámka je dobrý sluha, pokud zůstane malá. Má chránit tým před zapomenutím drobného signálu, ale nemá přebírat řízení práce. Když čistá trasa funguje a dozvuk neblokuje rozhodnutí, nejpraktičtější krok je často jen přesně zapsat, kdy se k němu vrátit. Zbytek nechat v klidu. Ano, klid znovu vítězí nad tabulkou. Nečekané finále, skoro jako v českém provozu.
 
+## Příloha SS: Ověření servisní poznámky po dalším návratovém signálu čisté trasy
+
+Příloha SR nechala lehký dozvuk v režimu servisní poznámky. To je schválně opatrný stav: tým nic hned nepřepisuje, ale ví, při jaké situaci se má vrátit. Příloha SS řeší okamžik, kdy se návratový signál opravdu objeví, nebo se naopak při dalším běžném použití neukáže vůbec.
+
+Cíl není udělat audit všech starých stop. Cíl je ověřit jednu servisní poznámku proti jedné reálné pracovní situaci a rozhodnout, jestli ji smazat, nechat v klidu, zpřesnit, nebo převést do malé lokální opravy.
+
+Začněte větou:
+
+```text
+Ověřujeme jednu servisní poznámku u čisté pracovní trasy. Porovnáváme původní podmínku návratu s tím, co se stalo při dalším běžném použití.
+```
+
+Pokud další použití ještě nenastalo, neověřujte poznámku od stolu. Servisní poznámka má smysl právě proto, že čeká na práci, ne na náladu něco uklidit. Bez reálného návratu vzniká jen spekulace, která se tváří jako pečlivost.
+
+### Vraťte se k původní podmínce
+
+Nejdřív otevřete původní servisní poznámku a přečtěte jen tři věci:
+
+- jaký lehký dozvuk byl zachycený;
+- při jaké situaci se měl vrátit;
+- co se mělo stát, pokud se signál zopakuje.
+
+Nepřidávejte k tomu historii debat, nové nápady ani pocit, že "když už jsme tady, měli bychom zkontrolovat všechno okolo". Servisní poznámka je malá dohoda se sebou samými. Ověření má říct, jestli dohoda pořád platí.
+
+Příklad původní podmínky:
+
+```text
+Vrátíme se k tomu jen tehdy, pokud při dalším použití někdo otevře archivní odkaz na starou formulářovou šablonu nebo se na něj zeptá.
+```
+
+Dobrá ověřovací otázka:
+
+```text
+Stalo se při dalším běžném použití přesně to, kvůli čemu jsme poznámku nechali?
+```
+
+Slabá ověřovací otázka:
+
+```text
+Nešlo by okolo formulářů ještě něco vylepšit?
+```
+
+Druhá otázka možná jednou bude užitečná, ale nepatří do ověření servisní poznámky. Otevírá nový rozsah a rychle z malé provozní hygieny udělá všeobecné přerovnávání skříně. A skříně v SaaS týmu mají většinou hodně hluboké dno.
+
+### Rozlišujte čtyři výsledky
+
+Po reálném návratu vyberte jeden ze čtyř stavů.
+
+`Smazat` znamená, že se signál neukázal a poznámka už nepomáhá. Čistá trasa funguje, starý dozvuk se nevrátil a další držení poznámky by jen prodlužovalo historii.
+
+`Nechat do příštího přirozeného návratu` znamená, že se použití stalo, ale situace nebyla ta, kterou poznámka popisovala. Třeba člověk pracoval s jiným formulářem, jinou rolí nebo jinou částí indexu. Poznámku nevyhodnocujte násilím.
+
+`Zpřesnit podmínku` znamená, že signál byl podobný, ale původní formulace byla moc široká nebo nepřesná. Nepřepisujte celou trasu. Upravte jen podmínku návratu tak, aby příště nemátla.
+
+`Převést do lokální opravy` znamená, že se původní signál potvrdil a začal ovlivňovat práci. Někdo použil starý odkaz, musel se doptat, vytvořil duplicitní kopii nebo se kvůli dozvuku vrátil k archivní variantě. V takové chvíli už poznámka splnila účel: ukázala, že drobnost není jen šum.
+
+Krátká rozhodovací tabulka:
+
+```text
+Signál se neukázal:
+Smazat poznámku.
+
+Použití nebylo srovnatelné:
+Nechat do příštího přirozeného návratu.
+
+Signál byl podobný, ale ne stejný:
+Zpřesnit podmínku.
+
+Signál se zopakoval a ovlivnil práci:
+Převést do lokální opravy.
+```
+
+Nejčastější chyba je držet poznámku navždy, protože "se třeba někdy bude hodit". Pokud servisní poznámka nemá datum, podmínku a rozhodnutí po návratu, přestává být servisní. Stává se z ní zbytek staré práce, který zůstává vidět i tam, kde už nepomáhá.
+
+### Převod do lokální opravy držte malý
+
+Když se signál potvrdí, neznamená to, že máte otevřít všechny související šablony. Znamená to, že se má opravit nejbližší místo, kde práce narazila.
+
+Malé lokální opravy:
+
+- ve starém úkolu ponechat jen odkaz na aktuální index;
+- zkrátit archivní poznámku na jednu větu;
+- odstranit odkaz na starou variantu šablony;
+- přejmenovat jeden matoucí odkaz v kanonickém místě;
+- doplnit mikrovětu, že archivní příklad už není pracovní cesta.
+
+Příliš široké reakce:
+
+- přepsat celý index formulářů;
+- otevřít redesign všech formulářových šablon;
+- založit nový audit starých úkolů;
+- zavést report každého použití;
+- přidat další povinné schválení do běžné práce.
+
+Lokální oprava má mít jednu opravnou větu:
+
+```text
+Protože se při dalším použití zopakoval archivní odkaz na starou formulářovou šablonu, zkracujeme starý úkol na odkaz na aktuální index. Neměníme formulář ani celý systém šablon.
+```
+
+Tahle věta chrání rozsah. Říká, co se opravuje, proč právě teď a co zůstává mimo hru.
+
+### Privacy-first ověření servisní poznámky
+
+Ověření servisní poznámky nepotřebuje nové sledování lidí. Nepotřebuje screenshot s osobními údaji, export starých formulářů ani seznam, kdo přesně kam klikl. Potřebuje jen vědět, jestli se návratový signál objevil v běžné práci.
+
+Stačí takový zápis:
+
+```text
+Návratový signál:
+Archivní odkaz na starou formulářovou šablonu se znovu objeví při použití indexu.
+
+Co se stalo:
+Editor otevřel aktuální index a archivní odkaz nepoužil.
+
+Rozhodnutí:
+Servisní poznámku mažeme.
+
+Data:
+Bez screenshotu, bez jména zákazníka, bez kopie starého formuláře.
+```
+
+Pokud se signál potvrdí, pořád zapisujte jen pracovní fakt, ne detailní osobní stopu. Věta "při přípravě landing page byl použit archivní odkaz" obvykle stačí. Jméno člověka, zákaznický obsah nebo přepis interní konverzace přidejte jen tehdy, když je to opravdu nutné pro odpovědnost nebo bezpečnost. V běžné servisní hygieně to nutné skoro nikdy není.
+
+Codyho komentář: když ověřujete malou poznámku, největší riziko není, že budete mít málo dat. Největší riziko je, že kvůli ní vyrobíte víc dat, než kolik bylo původního problému. To je provozní varianta léčby rýmy motorovou pilou. Efektní, ale prosím ne.
+
+### Karta ověření servisní poznámky
+
+```text
+Čistá pracovní trasa:
+Původní servisní poznámka:
+Původní podmínka návratu:
+Kdy nastalo další běžné použití:
+Byla situace srovnatelná:
+Co se skutečně stalo:
+Výsledek ověření:
+Rozhodnutí:
+Pokud převádíme do opravy, opravná věta:
+Co teď vědomě neměníme:
+Nová data:
+Privacy-first omezení:
+Retence původní poznámky:
+Vlastník trasy:
+Termín dalšího návratu, pokud poznámka zůstává:
+```
+
+Vyplněný příklad:
+
+```text
+Čistá pracovní trasa:
+Index formulářových šablon pro nové landing pages.
+
+Původní servisní poznámka:
+Ve starém úkolu zůstává archivní odkaz na předchozí variantu formuláře.
+
+Původní podmínka návratu:
+Vrátíme se jen tehdy, pokud při dalším použití někdo archivní odkaz otevře nebo se na něj zeptá.
+
+Kdy nastalo další běžné použití:
+Příprava nové landing page pro službu.
+
+Byla situace srovnatelná:
+Ano, editor použil stejný index formulářových šablon.
+
+Co se skutečně stalo:
+Editor šel přes aktuální index. Archivní odkaz neotevřel a nedoptával se.
+
+Výsledek ověření:
+Smazat.
+
+Rozhodnutí:
+Servisní poznámku mažeme. Čistá trasa drží.
+
+Pokud převádíme do opravy, opravná věta:
+Nevzniká.
+
+Co teď vědomě neměníme:
+Nepřepisujeme staré úkoly plošně a neotevíráme formulářový redesign.
+
+Nová data:
+Žádná.
+
+Privacy-first omezení:
+Bez screenshotu a bez záznamu osobních údajů z landing page.
+
+Retence původní poznámky:
+Smazána, v changelogu zůstává jen věta "servisní poznámka se nepotvrdila".
+
+Vlastník trasy:
+Marketing owner.
+
+Termín dalšího návratu, pokud poznámka zůstává:
+Nepotřebuje další návrat.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: otevřete jednu servisní poznámku a přečtěte původní podmínku návratu.
+2. Minuta 2: popište další běžné použití a ověřte, zda bylo srovnatelné.
+3. Minuta 3: vyberte stav: smazat, nechat, zpřesnit nebo převést do opravy.
+4. Minuta 4: pokud vzniká oprava, napište jednu opravnou větu a hranici rozsahu.
+5. Minuta 5: zkontrolujte privacy-first stopu a nastavte retenci poznámky.
+
+Výstup workshopu:
+
+```text
+Jedna servisní poznámka je ověřená proti reálnému návratu. Má rozhodnutí, případně nejmenší opravu, a nevytvořila novou pozorovací ani datovou vrstvu.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme jen jednu servisní poznámku?
+- Nastalo další běžné použití, ne umělá kontrola od stolu?
+- Četli jsme původní podmínku návratu, ne celou historii?
+- Byla nová situace opravdu srovnatelná?
+- Rozlišili jsme stav smazat, nechat, zpřesnit nebo převést do opravy?
+- Pokud se signál nepotvrdil, umíme poznámku smazat?
+- Pokud se signál potvrdil, míří oprava na nejbližší pracovní místo?
+- Má případná oprava jednu větu a jasnou hranici rozsahu?
+- Neotevíráme kvůli poznámce širší audit, redesign nebo novou rutinu?
+- Nevznikl screenshot, export, sledování lidí ani zbytečná osobní stopa?
+- Je zapsaná retence původní poznámky?
+- Ví vlastník trasy, co se má stát při příštím návratu?
+
+Dobrá servisní poznámka má krátký život. Buď se nepotvrdí a zmizí, nebo se potvrdí a promění v nejmenší opravu. Nejhorší varianta je nechat ji viset mezi tím: příliš malou na práci, příliš viditelnou na ignorování a příliš starou na důvěru. Čistá trasa si zaslouží čisté rozhodnutí.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SS o ověření servisní poznámky po dalším návratovém signálu čisté trasy: návrat k původní podmínce, čtyři výsledné stavy, převod do malé lokální opravy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SR o převod lehkého dozvuku po návratu čisté trasy do servisní poznámky: rozlišení dozvuku od problému, podmíněná poznámka, umístění u pracovního místa, návratový signál, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SQ o první běžný návrat k čisté pracovní trase po uzavřené lokální úpravě: přirozené použití, signály nalezení, pochopení a datové stopy, čtyři výsledné stavy, privacy-first návrat bez nové pozorovací vrstvy, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SP o uzavření potvrzené lokální úpravy do čisté pracovní trasy: propsání potvrzení do aktuálního místa, zavření karty bez dalšího úkolu, úklid pomocných stop, návratový signál místo dozoru, privacy-first retence, karta, mini workshop a checklist.
