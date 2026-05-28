@@ -135483,8 +135483,213 @@ Drobné tření je převedené do jedné servisní korekce. Víme, kde se upravu
 
 Servisní korekce je dobrý konec malého tření. Nezvětšuje systém, jen mu ubírá ostrou hranu. Když ji držíte malou, čistý stav zůstane čistý a tým nemusí kvůli jednomu zaváhání znovu rozjíždět celou mašinu.
 
+## Příloha RY: Ověření servisní korekce při dalším běžném použití
+
+Servisní korekce z přílohy RX má smysl jen tehdy, když se při dalším běžném použití chová nenápadně. Člověk najde aktuální místo, pochopí opravenou větu nebo pole, dokončí stejnou práci a nepotřebuje k tomu starou poznámku, autora korekce ani další vysvětlovací dokument.
+
+Neověřujte korekci hned po úpravě jen proto, že je soubor otevřený. To by byl autorský test, ne pracovní test. Počkejte na situaci, ve které by se dané místo použilo i bez kontroly: další review, další předání, další návrat ke kartě, další úklid staré stopy nebo další běžná změna stejného typu.
+
+Začněte větou:
+
+```text
+Servisní korekci ověřujeme při tomto běžném použití:
+```
+
+Pokud takové použití ještě nenastalo, korekce není neověřená chyba. Je jen v čekání. Nepřidávejte kvůli tomu nové měření ani připomínku na každý týden. Stačí návratový signál z původní karty.
+
+### Vraťte se ke korekční větě
+
+Před ověřením si znovu přečtěte korekční větu, ne celou historii opravy. Korekční věta říká, jaké tření měla jedna lokální změna odstranit. Bez ní začne tým hodnotit všechno možné: jestli se mu líbí formulace, jestli by se kapitola neměla přepsat širším stylem, jestli by se podobná karta nehodila i jinde. To může být zajímavé, ale není to ověření servisní korekce.
+
+Krátký návratový zápis:
+
+```text
+Původní drobné tření:
+Korekční věta:
+Jedna provedená korekce:
+Běžné použití, při kterém ověřujeme:
+```
+
+Vyplněný příklad:
+
+```text
+Původní drobné tření:
+Pole "Co teď neotevíráme" vedlo k příliš obecnému seznamu nápadů.
+
+Korekční věta:
+Upravujeme název pole, aby člověk při návratu zapsal hranici původní opravy, ne celý seznam nových témat.
+
+Jedna provedená korekce:
+Pole se přejmenovalo na "Co z původní opravy teď neotevíráme" a dostalo jeden krátký příklad.
+
+Běžné použití:
+Další člověk vyplňuje návratovou kartu po uzavřené opravě.
+```
+
+Tento zápis drží ověření u země. Nekontrolujete kvalitu celého standardu, jen to, jestli jedna opravená hrana přestala překážet.
+
+### Sledujte tři signály
+
+Ověření servisní korekce nepotřebuje tabulku metrik. Stačí tři pracovní signály, které se dají zjistit při použití bez špehování lidí:
+
+1. Cesta: člověk našel aktuální kanonické místo bez návratu do staré stopy.
+2. Použití: opravené místo vedlo ke správnému pracovnímu výstupu bez dalšího vysvětlování.
+3. Datová stopa: ověření nepřidalo nové osobní údaje, exporty, screenshoty ani záznamy chování.
+
+Signál `Cesta` odpovídá na otázku, jestli korekce opravdu žije ve správném místě. Pokud člověk pořád sahá do staré poznámky, starého exportu nebo staré karty, text možná opravený je, ale pracovní trasa pořád vede špatně.
+
+Signál `Použití` odpovídá na otázku, jestli korekce odstranila původní váhání. Výsledek nemusí být poetický. Má být jasný, použitelný a dostatečně přesný pro další krok.
+
+Signál `Datová stopa` drží privacy-first hodnotu v praktické podobě. Neověřujte drobnou korekci metodou, která je větší než korekce sama. U malé změny obvykle stačí anonymní pracovní poznámka typu "pole vedlo k jedné konkrétní hranici".
+
+### Rozlišujte čtyři výsledky ověření
+
+Po běžném použití vyberte jeden stav. Nepište dlouhé shrnutí, pokud stačí rozhodnutí.
+
+```text
+Potvrzeno:
+Korekce odstranila původní tření a není potřeba další zásah.
+
+Doladit:
+Tření se zmenšilo, ale jedno lokální místo pořád mate.
+
+Vrátit:
+Korekce nepomohla nebo vytvořila horší nejasnost.
+
+Nový signál:
+Původní tření je vyřešené, ale objevilo se nové samostatné téma.
+```
+
+`Potvrzeno` je nejčistší konec. Kartu servisní korekce zavřete, dočasný podklad smažte nebo archivujte podle retenčního pravidla a aktuální pracovní místo nechte být.
+
+`Doladit` dovoluje ještě jednu menší korekci, ale jen ve stejném místě a ke stejnému tření. Pokud se z doladění stává druhé kolo vysvětlování, vraťte se k otázce, jestli korekce vůbec mířila na správné místo.
+
+`Vrátit` není ostuda. Malá korekce může znít rozumně při psaní a selhat při použití. Vraťte poslední lokální změnu, obnovte předchozí jasnější stav nebo napište novou korekční větu. Hlavně nenechávejte v kanonickém místě dvě rovnocenné varianty.
+
+`Nový signál` nepatří do stejné servisní karty. Zapište ho odděleně, s návratovou podmínkou nebo jako samostatnou kartu změny. Jinak se z ověření malé korekce stane nenápadná továrna na nový rozsah. Ano, přesně ten typ pracovitosti, který vypadá užitečně a pak vám sní pátek.
+
+### Privacy-first ověření korekce
+
+Ověření má být lehké a přiměřené. U servisní korekce často stačí výstup z reálné práce, ne záznam práce samotné. Nepište, kdo přesně zaváhal, jak dlouho klikáním hledal správné místo nebo co řekl v interním chatu, pokud to není nezbytné. Zapište pracovní signál.
+
+Dobře:
+
+```text
+Při dalším použití karta vedla k jedné konkrétní hranici původní opravy. Starý export nebyl potřeba.
+```
+
+Zbytečně moc:
+
+```text
+Petr v 9:42 otevřel starou poznámku, potom po 37 sekundách našel novou kartu a do chatu napsal...
+```
+
+První zápis chrání rozhodnutí. Druhý vyrábí sledování tam, kde stačí pracovní závěr. Privacy-first provoz se nepozná podle hezké věty v patičce, ale podle těchto malých okamžiků, kdy si tým řekne: tohle vědět nepotřebujeme.
+
+Privacy-first kontrola:
+
+- Stačí nám výsledek použití místo detailního záznamu chování?
+- Je zápis anonymní a bez zákaznických detailů?
+- Nevznikl kvůli ověření nový export, screenshot nebo sledovací nástroj?
+- Mažeme dočasnou ověřovací poznámku po uzavření stavu?
+- Zůstává jen jedno aktuální kanonické místo?
+- Pokud se objevil nový signál, není přilepený k osobě, která ho náhodou našla?
+
+### Karta ověření servisní korekce
+
+```text
+Servisní korekce:
+Kanonické pracovní místo:
+Původní drobné tření:
+Korekční věta:
+Běžné použití:
+Signál cesty:
+Signál použití:
+Signál datové stopy:
+Výsledek ověření:
+Další krok:
+Co mažeme nebo archivujeme:
+Co se neotevírá:
+```
+
+Vyplněný příklad:
+
+```text
+Servisní korekce:
+Přejmenování pole v návratové kartě.
+
+Kanonické pracovní místo:
+Karta prvního návratu po uzavřené hotové opravě.
+
+Původní drobné tření:
+Pole vedlo k obecnému seznamu nápadů místo hranice původní opravy.
+
+Korekční věta:
+Upravujeme název pole, aby člověk při návratu zapsal hranici původní opravy, ne celý seznam nových témat.
+
+Běžné použití:
+Další návratová karta po malé opravě interní šablony.
+
+Signál cesty:
+Člověk použil aktuální kartu a nevracel se ke staré poznámce.
+
+Signál použití:
+Pole bylo vyplněné jednou konkrétní hranicí.
+
+Signál datové stopy:
+Stačila anonymní poznámka k výsledku, nevznikl screenshot ani export chatu.
+
+Výsledek ověření:
+Potvrzeno.
+
+Další krok:
+Zavřít servisní korekci bez další úpravy.
+
+Co mažeme nebo archivujeme:
+Dočasnou poznámku z ověření po propsání výsledku do logu změny.
+
+Co se neotevírá:
+Nerozšiřujeme kartu na nové typy oprav.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete kartu servisní korekce a přečtěte korekční větu.
+2. Minuta 2: pojmenujte běžné použití, při kterém se korekce ověřuje.
+3. Minuta 3: zapište signál cesty.
+4. Minuta 4: zapište signál použití.
+5. Minuta 5: zapište signál datové stopy.
+6. Minuta 6: vyberte výsledek `Potvrzeno`, `Doladit`, `Vrátit` nebo `Nový signál`.
+
+Výstup workshopu:
+
+```text
+Servisní korekce je ověřená při běžném použití. Víme, jestli odstranila původní tření, potřebuje ještě jedno lokální doladění, má se vrátit, nebo jen odhalila nový samostatný signál.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme při skutečném použití, ne při autorském pročítání?
+- Máme po ruce původní korekční větu?
+- Kontrolujeme jen původní drobné tření?
+- Našel člověk aktuální kanonické místo bez staré stopy?
+- Vedla korekce ke správnému pracovnímu výstupu bez dalšího vysvětlování?
+- Nevzniklo kvůli ověření nové sledování, screenshoty ani exporty?
+- Je zápis anonymní a bez zákaznických detailů?
+- Vybrali jsme jeden ze čtyř výsledků ověření?
+- Pokud je stav `Potvrzeno`, opravdu kartu zavíráme?
+- Pokud je stav `Doladit`, jde jen o jednu lokální korekci?
+- Pokud je stav `Vrátit`, odstraníme nejasnou variantu z kanonického místa?
+- Pokud jde o nový signál, zapisujeme ho odděleně?
+- Mažeme nebo archivujeme dočasnou ověřovací poznámku?
+- Zůstává aktuální pracovní místo jediným zdrojem pravdy?
+- Je jasné, co se tímto ověřením výslovně neotevírá?
+
+Ověření servisní korekce je malá disciplína v sebeovládání. Cílem není dokázat, že každá věta v systému je dokonalá. Cílem je potvrdit, že jedna malá hrana už neřeže do práce, a potom ji přestat hladit do lesku. Lesklý chaos je pořád chaos, jen se v něm člověk hezky vidí.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha RY o ověření servisní korekce při dalším běžném použití: návrat ke korekční větě, signály cesty, použití a datové stopy, čtyři výsledky ověření, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RX o převodu drobného tření po návratu k čistému stavu do jedné servisní korekce: rozlišení tření od nového signálu, nejbližší pracovní místo, korekční věta, jedna lokální úprava, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RW o prvním běžném návratu k čistému stavu po uzavřené hotové opravě: skutečné použití, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first návrat bez nového dozoru, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RV o uzavření potvrzené hotové opravy do čistého pracovního stavu: výsledek ověření, aktuální pracovní věta, kanonické místo, zavření starých stop, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
