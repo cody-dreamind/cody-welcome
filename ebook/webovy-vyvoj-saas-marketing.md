@@ -138403,8 +138403,218 @@ Potvrzená úklidová korekce je uzavřená. Běžná pracovní trasa je čistá
 
 Codyho komentář: nejlepší malá korekce po sobě nezanechá pocit velkého procesu. Zanechá pracovní místo, které se používá trochu snáz, a méně starých stop, do kterých může někdo později zakopnout. To je provozní elegance v montérkách: žádné fanfáry, jen kratší cesta a menší nepořádek.
 
+## Příloha SM: První běžný návrat k čisté pracovní trase po uzavřené korekci
+
+Příloha SL uzavřela potvrzenou úklidovou korekci do čisté pracovní trasy. Tím se malá servisní smyčka dostala do klidu: aktuální místo je použitelné, staré stopy jsou uklizené a tým má návratový signál místo další kontroly pro jistotu. První běžný návrat ověřuje, jestli se ten klid udrží, až trasu použije někdo při normální práci.
+
+Nejde o audit ani o hledání dalšího zlepšení. Jde o krátké pozorování okamžiku, který by nastal tak jako tak: někdo otevře index, šablonu, checklist, rozcestník nebo pracovní kartu a potřebuje podle ní udělat nejbližší krok. Pokud čistá trasa funguje, nemá se z návratu stát nová korekční smyčka. Má se jen potvrdit, že práce zůstala jednoduchá.
+
+Začněte větou:
+
+```text
+Čistá pracovní trasa byla použita při běžné práci. Kontrolujeme jen to, jestli vede k aktuálnímu kroku bez návratu ke staré stopě a bez nové datové zátěže.
+```
+
+Pokud větu neumíte napsat, protože žádné běžné použití nenastalo, nechte trasu v klidu. Vynucený návrat často vyrábí umělé nálezy: člověk začne přemýšlet jako auditor, ne jako běžný uživatel pracovního místa. U čisté trasy je nejlepší test obyčejné použití.
+
+### Začněte tam, kde začne práce
+
+První běžný návrat má začít na vstupním místě, které lidé opravdu používají. Ne v pracovním logu, ne v historii korekce, ne ve starém komentáři. Pokud začnete servisní historií, už netestujete čistou trasu. Testujete paměť lidí, kteří vědí, co se opravovalo.
+
+Typická vstupní místa:
+
+- index pracovních šablon;
+- rozcestník onboardingové trasy;
+- checklist před publikací;
+- karta předání výstupu;
+- kanonická šablona formuláře, briefu nebo nabídky;
+- interní stránka s pravidlem pro opakovanou práci.
+
+Kontrolní otázka:
+
+```text
+Když přijdu běžnou cestou, najdu aktuální místo, pochopím nejbližší krok a nepotřebuji servisní historii?
+```
+
+Pokud odpověď zní ano, čistá trasa pravděpodobně drží. Pokud člověk musí otevřít starou korekční kartu, požádat autora o vysvětlení nebo hledat, proč se něco přejmenovalo, trasa ještě není dost čistá. To neznamená, že je potřeba velký zásah. Znamená to, že se někde v okolí drží starý kontext jako berlička.
+
+### Sledujte jen tři signály
+
+První signál je přímá cesta. Člověk se dostane k aktuálnímu místu bez odbočky přes starý odkaz, archivní poznámku nebo pomocný podklad. Důležité není, jestli trasa vypadá elegantně v dokumentaci. Důležité je, jestli funguje v okamžiku práce.
+
+Druhý signál je samostatný krok. Člověk podle aktuálního místa udělá nejbližší akci: vyplní kartu, použije šablonu, zkontroluje checklist, předá výstup nebo zapíše rozhodnutí. Pokud potřebuje výklad autora korekce, čistá trasa je pořád moc závislá na lidech, kteří znají historii.
+
+Třetí signál je tichá datová stopa. Návrat nemá obnovit screenshoty, exporty, chatové citace ani staré příklady jen proto, že jsou po ruce. Čistá trasa má být chudší na pomocná data než stav před korekcí. Když se při běžném návratu znovu vytahují staré podklady, je to signál, že se stopa rozhodnutí a pracovní zdroj pravdy pletou dohromady.
+
+Krátký zápis:
+
+```text
+Přímá cesta:
+Ano / S odbočkou / Přes starou stopu
+
+Samostatný krok:
+Ano / S drobným vysvětlením / Ne
+
+Datová stopa:
+Bez nové stopy / Krátká pracovní poznámka / Obnovené pomocné podklady
+```
+
+Tohle stačí. Nesbírejte počet kliků, jména lidí ani detailní průchody. U malé pracovní trasy většinou stačí vědět, jestli se člověk dostal ke správnému místu a použil ho bez návratu do servisního zákulisí.
+
+### Čtyři výsledky návratu
+
+`Klid` znamená, že čistá trasa funguje. Člověk šel běžnou cestou, našel aktuální místo, použil ho a neotevřel staré podklady. Další krok je žádný. Téma zůstává zavřené do návratového signálu.
+
+`Lehká hrana` znamená, že trasa funguje, ale jedna formulace nebo odkaz ještě trochu drhne. Například název je správný, ale okolní věta pořád připomíná starou terminologii. Pokud oprava zabere jednu větu v nejbližším místě, udělejte ji jako drobnou lokální úpravu a nezakládejte novou servisní smyčku.
+
+`Stará stopa se vrací` znamená, že běžná cesta znovu vedla přes archivní šablonu, starý screenshot, starý komentář nebo pomocný podklad. To už není lehká hrana. Najděte místo, které starou stopu vrátilo do provozu, a opravte vstupní trasu.
+
+`Nový signál` znamená, že návrat odkryl jiný problém než čistotu původní trasy. Například šablona je čistá, ale ukáže se, že celý proces nemá vlastníka. To nelepte na uzavřenou korekci. Založte nový podnět s vlastní otázkou a hranicí.
+
+Rozhodovací věta:
+
+```text
+Výsledek návratu je:
+Klid / Lehká hrana / Stará stopa se vrací / Nový signál
+
+Protože:
+
+Další krok:
+```
+
+Příklad:
+
+```text
+Výsledek návratu je:
+Klid.
+
+Protože:
+Autor nové landing page našel aktuální formulářovou šablonu přes index, použil ji bez vysvětlení a neotevřel starý příklad s povinným telefonem.
+
+Další krok:
+Žádný. Trasa zůstává zavřená; téma se vrátí jen tehdy, když index znovu povede na starý formulář nebo aktuální šablona nebude použitelná samostatně.
+```
+
+### Privacy-first návrat bez nové evidence
+
+První běžný návrat k čisté trase je lákavé měřit. Odolejte. Pokud kvůli malé pracovní trase založíte tabulku průchodů, začnete zapisovat jména lidí nebo ukládat screenshoty každého použití, vytvořili jste větší datovou stopu, než jakou trasa potřebuje.
+
+Privacy-first minimum:
+
+- zapisujte pracovní situaci, ne osobní profil člověka;
+- neukládejte screenshot, pokud stačí popsat výsledek;
+- neotevírejte staré exporty, pokud čistá trasa funguje bez nich;
+- nesbírejte více návratů jen proto, aby záznam vypadal přesvědčivěji;
+- smažte krátkou pracovní poznámku, pokud po měsíčním review už nepřidává hodnotu;
+- ponechte jen návratový signál a stav trasy.
+
+Codyho komentář: čistá pracovní trasa má být trochu nudná. Když se po ní jde a nic se nestane, je to úspěch. Ne všechno, co funguje, potřebuje dashboard, slavnostní zápis a tři další barvy štítků.
+
+### Karta prvního běžného návratu
+
+```text
+Čistá pracovní trasa:
+Původní uzavřená korekce:
+Běžná pracovní situace:
+Vstupní místo:
+Nejbližší očekávaný krok:
+Přímá cesta:
+Samostatný krok:
+Datová stopa:
+Výsledek návratu:
+Další krok:
+Co neotevíráme:
+Staré stopy:
+Retenční poznámka:
+Vlastník trasy:
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Čistá pracovní trasa:
+Index šablon pro nové landing pages.
+
+Původní uzavřená korekce:
+Přejmenování a uzavření staré formulářové šablony s povinným telefonem.
+
+Běžná pracovní situace:
+Vzniká nová landing page pro konzultační nabídku.
+
+Vstupní místo:
+Index šablon, sekce formuláře.
+
+Nejbližší očekávaný krok:
+Použít aktuální první kontaktní formulář s e-mailem, stručným kontextem a volitelným URL.
+
+Přímá cesta:
+Ano. Index vede na aktuální šablonu.
+
+Samostatný krok:
+Ano. Autor použil šablonu bez dotazu na historii korekce.
+
+Datová stopa:
+Bez nové stopy. Nebyl otevřen starý screenshot ani export z ověření.
+
+Výsledek návratu:
+Klid.
+
+Další krok:
+Žádný plánovaný úkol.
+
+Co neotevíráme:
+Nepřepisujeme celý index, neměníme všechny formuláře a nezavádíme pravidelnou kontrolu pro jistotu.
+
+Staré stopy:
+Archivní šablona zůstává mimo běžnou trasu.
+
+Retenční poznámka:
+Zůstává jen tento krátký stav do měsíčního review; bez osobních nebo zákaznických detailů.
+
+Vlastník trasy:
+Marketing owner.
+
+Návratový signál:
+Téma se vrátí, pokud index znovu navede člověka na archivní šablonu nebo aktuální šablona nebude použitelná bez vysvětlení.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: začněte běžným vstupním místem.
+2. Minuta 2: ověřte, jestli cesta vede přímo na aktuální pracovní místo.
+3. Minuta 3: ověřte, jestli člověk udělá nejbližší krok bez servisní historie.
+4. Minuta 4: zkontrolujte, že se neobnovily staré podklady nebo nová evidence.
+5. Minuta 5: vyberte stav `Klid`, `Lehká hrana`, `Stará stopa se vrací` nebo `Nový signál`.
+
+Výstup workshopu:
+
+```text
+Čistá pracovní trasa prošla prvním běžným návratem. Víme, jestli zůstává v klidu, potřebuje jednu drobnou úpravu, vrací starou stopu, nebo otevřela samostatný nový signál.
+```
+
+### Checklist kapitoly
+
+- Proběhl návrat při reálné práci?
+- Začali jsme běžným vstupním místem, ne historií korekce?
+- Vedla trasa přímo k aktuálnímu pracovnímu místu?
+- Šel udělat nejbližší krok bez autora opravy?
+- Nevrátil se starý odkaz, screenshot, export, komentář nebo archivní příklad?
+- Zapsali jsme jen přímou cestu, samostatný krok a datovou stopu?
+- Vybrali jsme jeden ze čtyř výsledků návratu?
+- Pokud je výsledek `Klid`, nepřidáváme další kontrolu pro jistotu?
+- Pokud jde o `Lehkou hranu`, umíme ji opravit jednou větou v nejbližším místě?
+- Pokud se vrací stará stopa, řešíme vstupní trasu, ne další vysvětlivku?
+- Pokud vznikl nový signál, oddělujeme ho od uzavřené korekce?
+- Nevznikla tabulka průchodů, jmenná evidence ani screenshotová sbírka?
+- Má ponechaná poznámka retenční důvod?
+- Ví vlastník, jaký návratový signál znovu otevře téma?
+
+První běžný návrat k čisté pracovní trase má být tichý test provozní dospělosti. Když trasa funguje, nejlepší výsledek je nechat ji fungovat. Když se objeví drobná hrana, opravte ji v místě, kde vzniká. A když se vrátí stará stopa nebo nový signál, pojmenujte to přesně, aby se z uzavřené korekce nestal další nekonečný šuplík práce.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SM o první běžný návrat k čisté pracovní trase po uzavřené korekci: běžné vstupní místo, signály přímé cesty, samostatného kroku a datové stopy, čtyři výsledky návratu, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SL o uzavření potvrzené úklidové korekce do čisté pracovní trasy: aktuální trasa, zavření korekční karty, úklid starých stop, návratový signál místo další kontroly, privacy-first retence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SK o ověření úklidové korekce při dalším běžném použití: reálný návrat, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SJ o převodu drobného dozvuku po první kontrole do jedné úklidové korekce: vymezení dozvuku, nejbližší místo opravy, stejný průchod, privacy-first brzda, karta a checklist.
