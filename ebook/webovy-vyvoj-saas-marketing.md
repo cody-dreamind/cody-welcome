@@ -136724,8 +136724,227 @@ Potvrzená úklidová oprava je uzavřená. Tým ví, jaké aktuální místo pl
 
 Potvrzená úklidová oprava končí stabilním pracovním stavem. To je méně dramatické než velké procesní zlepšení, ale často mnohem cennější: člověk otevře správné místo, starý materiál mu neleze pod ruce a tým nemusí každý měsíc dokazovat, že problém pořád neexistuje.
 
+## Příloha SE: První běžný návrat po stabilizovaném úklidu
+
+Stabilizovaný úklid z přílohy SD není konec práce navždy. Je to konec aktivní smyčky. Rozdíl je důležitý: aktivní úklid se zavřel, ale pracovní místo dál žije v normálním provozu. První běžný návrat má ověřit, že se tým dokáže vrátit k aktuálnímu místu bez staré stopy, bez nového vysvětlování a bez toho, aby někdo znovu otevřel uzavřenou kartu jen ze zvyku.
+
+Tahle příloha se používá až ve chvíli, kdy nastane skutečná práce. Ne při namátkové kontrole, ne při redakčním neklidu a ne proto, že někdo chce mít pocit, že na uzavřenou věc pořád dohlíží. Návrat má vyvolat reálná situace: člověk potřebuje použít šablonu, najít odkaz, vyplnit kartu, předat materiál, připravit zákaznický výstup nebo ověřit provozní pravidlo.
+
+Začněte větou:
+
+```text
+K aktuálnímu pracovnímu místu se vracíme kvůli reálné práci, ne kvůli kontrole uzavřeného úklidu.
+```
+
+Pokud se vracíte jen proto, že "by se na to mělo kouknout", ještě nenastal návratový signál. Nechte uzavřenou věc zavřenou. Stabilní systém potřebuje schopnost nechat hotovou práci chvíli dýchat, jinak se z každé drobné opravy stane nekonečná údržba převlečená za pečlivost.
+
+### Vraťte se stejnou běžnou cestou
+
+První návrat po stabilizovaném úklidu má jít stejnou cestou, kterou použije normální člen týmu. Ne přes historii karty, ne přes archiv, ne přes autora poslední opravy a ne přes interní vysvětlení, které si pamatují jen dva lidé.
+
+Praktický postup:
+
+1. Otevřete místo, odkud by člověk přirozeně začal.
+2. Sledujte, zda cesta vede na aktuální pracovní místo.
+3. Nepoužívejte staré odkazy jako zkratku.
+4. Nehledejte v archivu, pokud to běžná práce sama nevyžaduje.
+5. Zapište jen to, co ovlivnilo průchod.
+
+Testovací věta:
+
+```text
+Našel jsem aktuální pracovní místo běžnou cestou a nepotřeboval jsem otevřít uzavřenou úklidovou kartu.
+```
+
+Pokud věta neplatí, nejde automaticky o selhání. Může jít o malý zbytek staré navigace, chybějící kontext nebo nový typ práce, který předchozí úklid neřešil. Důležité je nerozšířit závěr příliš rychle. Jeden nejasný návrat není důkaz, že je potřeba předělat celý systém.
+
+### Sledujte tři signály návratu
+
+Při prvním návratu po stabilizovaném úklidu sledujte jen tři signály. Víc většinou nepotřebujete a méně by mohlo minout důležitý problém.
+
+První signál je cesta:
+
+```text
+Vede běžná vstupní cesta na aktuální místo?
+```
+
+Pokud ano, úklid pravděpodobně drží. Pokud ne, zapište konkrétní místo, kde se cesta láme: index, odkaz v šabloně, starý komentář, onboardingový materiál, uložený bookmark, projektová karta nebo opakovaně kopírovaný text.
+
+Druhý signál je samostatnost:
+
+```text
+Dokáže člověk aktuální místo použít bez výkladu autora úklidu?
+```
+
+Stabilní pracovní místo nemá vyžadovat archeologii. Pokud člověk potřebuje autora, starou kartu nebo ústní vysvětlení, úklid možná odstranil stopu, ale vzal s sebou kus pracovního kontextu. To je opravitelné, jen se to má opravit v aktuálním místě, ne návratem starého materiálu do běžné trasy.
+
+Třetí signál je datová stopa:
+
+```text
+Nevznikla kvůli návratu nová evidence, export nebo kopie, kterou nepotřebujeme?
+```
+
+Návrat po úklidu nesmí být záminka pro nový kontrolní dokument. Pokud kvůli jednomu běžnému průchodu vznikne tabulka, screenshoty, export komentářů a dlouhý zápis, pravděpodobně jste znovu vytvořili část nepořádku, který měl úklid odstranit.
+
+### Rozlište klid, zbytek, ztracený kontext a nový případ
+
+Výsledek prvního návratu zařaďte do jednoho ze čtyř stavů. Nehledejte jemnější taxonomii. Čím víc stavů, tím snadněji se z návratu stane proces.
+
+Stav `Klid` znamená:
+
+```text
+Běžná cesta vede na aktuální místo, práce jde dokončit samostatně a nevznikla nová zbytečná datová stopa.
+```
+
+U stavu `Klid` nic neopravujte. Zapište krátké potvrzení, případně jen uzavřete poznámku u návratového signálu. Nejlepší výsledek je nudný: člověk pracoval, našel správné místo a šel dál.
+
+Stav `Zbytek staré stopy` znamená:
+
+```text
+Aktuální místo funguje, ale někde v běžné trase pořád leží starý odkaz, starý komentář nebo duplicitní název.
+```
+
+Tady stačí drobná úklidová poznámka. Neotevírejte celou přílohu SD znovu, pokud jde o jeden jasný zbytek. Popište nejbližší místo opravy a vraťte se k němu jako k malé lokální úpravě.
+
+Stav `Ztracený kontext` znamená:
+
+```text
+Stará stopa je pryč, ale aktuální místo neumí člověka provést bez informací, které byly omylem odstraněné.
+```
+
+Tady nevracejte starý materiál do běžné trasy. Doplňte nejmenší pracovní kontext do aktuálního místa: jednu větu, lepší název, příklad vyplnění, jasnější odkaz nebo krátkou retenční poznámku. Cíl je obnovit použitelnost, ne obnovit historii.
+
+Stav `Nový případ` znamená:
+
+```text
+Návrat ukázal situaci, kterou předchozí úklid neřešil a která má vlastní pracovní otázku.
+```
+
+Nový případ patří do samostatné karty. Nemá se schovat pod uzavřený úklid, protože by rozmazal odpovědnost i rozsah. Zapište ho stručně, oddělte od návratu a nerozhodujte o něm ve stejné minutě, pokud to není nutné pro aktuální práci.
+
+### Privacy-first návrat bez obnovy nepořádku
+
+Privacy-first hodnota se při návratu pozná podle toho, že tým kvůli malé nejistotě neobnoví velkou evidenci. Stabilizovaný úklid má snižovat počet kopií, dočasných podkladů a osobních detailů v pracovních materiálech. První návrat nesmí tenhle efekt nenápadně zrušit.
+
+Pravidlo:
+
+```text
+Při prvním návratu po stabilizovaném úklidu zapisujeme jen výsledek průchodu, konkrétní zjištění a nejmenší další krok. Neobnovujeme staré exporty, screenshoty ani zákaznické detaily, pokud nejsou nezbytné pro aktuální rozhodnutí.
+```
+
+Před uložením poznámky si položte pět otázek:
+
+- Potřebujeme tento zápis pro další práci, nebo jen pro pocit jistoty?
+- Obsahuje zápis osobní, zákaznické nebo interně citlivé detaily, které lze nahradit obecnějším popisem?
+- Nevytváříme kopii materiálu, který už má kanonické místo?
+- Má případný dočasný podklad jasný důvod a datum smazání?
+- Dá se výsledek zapsat jednou větou místo nového dokumentu?
+
+Codyho komentář: stabilní provoz se často pozná podle toho, že tým nemá potřebu dokazovat každou drobnost velkým artefaktem. Když věc funguje, někdy je nejprofesionálnější stopa jen krátké "ověřeno při běžném použití, bez další změny". Ano, je to méně dramatické než barevný dashboard. A právě proto je to zdravější.
+
+### Karta prvního návratu po stabilizovaném úklidu
+
+```text
+Pracovní místo:
+Důvod návratu:
+Běžná vstupní cesta:
+Našel jsem aktuální místo bez archivu:
+Aktuální místo šlo použít samostatně:
+Stará stopa se objevila:
+Chyběl pracovní kontext:
+Vznikla nová datová stopa:
+Výsledek:
+Nejmenší další krok:
+Co výslovně neotevíráme:
+Retenční poznámka:
+Vlastník:
+Datum dalšího návratu pouze při signálu:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Kanonická karta pro předání marketingového výřezu ze seriálu.
+
+Důvod návratu:
+Příprava nového dílu pro vlastní web a RSS.
+
+Běžná vstupní cesta:
+Obsahový index -> seriálové výřezy -> kanonická karta.
+
+Našel jsem aktuální místo bez archivu:
+Ano.
+
+Aktuální místo šlo použít samostatně:
+Ano.
+
+Stará stopa se objevila:
+Ne.
+
+Chyběl pracovní kontext:
+Ne.
+
+Vznikla nová datová stopa:
+Ne, použil se jen stávající pracovní záznam.
+
+Výsledek:
+Klid.
+
+Nejmenší další krok:
+Žádná změna.
+
+Co výslovně neotevíráme:
+Nepřepisujeme index, neobnovujeme starý checklist a nevytváříme nový kontrolní export.
+
+Retenční poznámka:
+Bez nových podkladů.
+
+Vlastník:
+Content owner.
+
+Datum dalšího návratu pouze při signálu:
+Bez pevného data; návrat spustí jen starý odkaz, chybějící kontext nebo nový samostatný případ.
+```
+
+Karta je užitečná jen tehdy, když zůstane krátká. Pokud se při vyplňování rozroste na půl stránky komentářů, zastavte se a zeptejte se, jestli opravdu řešíte první návrat, nebo už otevíráte novou pracovní smyčku.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte reálnou práci, kvůli které se k místu vracíte.
+2. Minuta 2: projděte běžnou vstupní cestu bez archivu a bez autora poslední opravy.
+3. Minuta 3: zapište signály cesty, samostatnosti a datové stopy.
+4. Minuta 4: zařaďte výsledek do stavu `Klid`, `Zbytek staré stopy`, `Ztracený kontext` nebo `Nový případ`.
+5. Minuta 5: určete nejmenší další krok a výslovně napište, co se neotevírá.
+
+Výstup workshopu:
+
+```text
+První návrat po stabilizovaném úklidu ukázal, zda aktuální pracovní místo funguje v běžné práci. Výsledek je zařazený do jednoho stavu a další krok neobnovuje starý nepořádek.
+```
+
+### Checklist kapitoly
+
+- Vracíme se kvůli reálné práci, ne kvůli namátkové kontrole?
+- Použili jsme běžnou vstupní cestu?
+- Nepoužili jsme archiv jako zkratku?
+- Vedla cesta na aktuální pracovní místo?
+- Šlo aktuální místo použít bez autora poslední opravy?
+- Nevrátila se stará stopa do běžné trasy?
+- Pokud chyběl kontext, víme, jak ho doplnit do aktuálního místa?
+- Pokud vznikl nový případ, oddělili jsme ho od uzavřeného úklidu?
+- Zařadili jsme výsledek jen do jednoho ze čtyř stavů?
+- Nevytvořili jsme nový export, screenshoty nebo kontrolní tabulku bez jasného účelu?
+- Zapsali jsme nejmenší další krok?
+- Je jasné, co se výslovně neotevírá?
+- Má případný dočasný podklad retenční důvod a datum smazání?
+- Ví vlastník, zda z návratu plyne akce, nebo stav `Klid`?
+
+První návrat po stabilizovaném úklidu má hlavně chránit klid. Pokud aktuální místo funguje, nechte ho fungovat. Pokud se objeví malý zbytek, opravte nejbližší místo. Pokud chybí kontext, vraťte ho do aktuálního zdroje pravdy. A pokud se objeví nový případ, dejte mu vlastní prostor, aby nerozlepil uzavřenou práci.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SE o první běžný návrat po stabilizovaném úklidu: návrat pouze při reálné práci, běžná vstupní cesta, signály cesty, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first návrat bez obnovy nepořádku, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SD o uzavření potvrzené úklidové opravy do stabilního pracovního stavu: práce s výsledkem ověření, aktuální místo místo historie, zavření úklidové karty, návratový signál místo dozoru, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SC o ověření úklidové opravy při dalším běžném průchodu: stejná vstupní cesta, signály čisté trasy, čtyři výsledné stavy, privacy-first ověření bez nových podkladů, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SB o převodu dozvuku po prvním návratu do jedné úklidové opravy: potvrzení funkčního pravidla, výběr jedné staré stopy, rozlišení úklidu od ediční změny, privacy-first mazání a archivace, karta, mini workshop a checklist.
