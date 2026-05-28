@@ -134738,8 +134738,276 @@ Hotová minimální oprava je ověřená při běžném použití. Tým ví, jes
 
 Dobrá minimální oprava se po ověření buď tiše stane současným stavem, nebo se férově vrátí, doladí či povýší. Všechny čtyři výsledky jsou v pořádku. Špatný výsledek je jen jeden: oprava zůstane někde mezi, bez rozhodnutí a s novou vrstvou poznámek kolem sebe.
 
+## Příloha RV: Uzavření potvrzené hotové opravy do čistého pracovního stavu
+
+Když se hotová minimální oprava při běžném použití potvrdí, práce ještě nekončí. Potvrzení říká, že oprava pomohla. Uzavření říká, kde teď žije aktuální pravda, co se stalo se starými poznámkami a kdy má tým důvod se k místu vrátit.
+
+Bez tohoto kroku se i dobrá oprava může změnit v tichý nepořádek. V šabloně je nová věta, vedle ní zůstane stará údržbová poznámka, v chatu leží poloviční vysvětlení a někdo za měsíc neví, jestli platí oprava, poznámka, nebo původní verze. Tým potom neřeší produkt, marketing ani zákazníka. Řeší archeologii vlastního provozu, což je drahý sport a má mizerný merch.
+
+Pracovní otázka:
+
+```text
+Jak potvrzenou hotovou opravu uzavřeme tak, aby zůstalo jedno aktuální pracovní místo, jasný návratový signál a žádná zbytečná datová stopa?
+```
+
+### Začněte výsledkem ověření
+
+Neuzavírejte opravu podle dojmu, ale podle karty z předchozího ověření. Nejdřív si vytáhněte tři informace:
+
+```text
+Opravené pracovní místo:
+
+Původní potvrzené tření:
+
+Výsledek ověření:
+Potvrdit / Doladit / Vrátit / Povýšit
+```
+
+Tato příloha řeší stav `Potvrdit`. Pokud výsledek zní `Doladit`, vraťte se k jedné malé korekci ve stejném místě. Pokud zní `Vrátit`, uzavřete neúspěšnou opravu a obnovte poslední stabilní verzi. Pokud zní `Povýšit`, založte samostatnou změnu s vlastním rozsahem. Nemíchejte tyto stavy dohromady, jinak z uzavření zase vznikne další otevřený projekt.
+
+Potvrzená oprava má být popsána jednou pracovní větou:
+
+```text
+Odteď v [pracovní místo] platí [nové pravidlo nebo věta], protože při [reálné použití] odstranila [původní tření] bez nové datové stopy.
+```
+
+Příklad:
+
+```text
+Odteď v discovery šabloně platí, že současná bolest zákazníka a cílový stav se zapisují do oddělených polí, protože při přípravě nabídky přestalo docházet k jejich míchání bez nového exportu nebo další evidence.
+```
+
+### Přepište aktuální místo, ne historii
+
+Uzavření není memoár. Neopisujte do šablony celé drama opravy, kdo co navrhl a proč původní věta nefungovala. Aktuální pracovní místo má obsahovat jen to, co další člověk potřebuje při práci.
+
+Dobrý zápis:
+
+```text
+Současná bolest:
+Popište, co zákazník řeší dnes.
+
+Cílový stav:
+Popište, jak má práce vypadat po změně.
+```
+
+Slabý zápis:
+
+```text
+Pozor, minule se nám pletla bolest a cílový stav, tak jsme po ověření doplnili toto rozdělení, protože v nabídce pro klienta X vznikl problém.
+```
+
+Druhý zápis možná působí informativně, ale do pracovního místa tahá historii, osobní kontext a často i zákaznické detaily. Ty patří nanejvýš do krátkého interního changelogu, anonymizovaně a s jasnou retencí.
+
+Pravidlo pro přepis:
+
+- pracovní místo má vést další použití;
+- changelog má vysvětlit, že změna proběhla;
+- stará karta má být zavřená;
+- dočasné podklady mají zmizet;
+- návratový signál má říct, kdy se téma znovu otevře.
+
+### Zavřete staré stopy viditelně
+
+Potvrzená oprava často zanechá drobné stopy: údržbovou poznámku, komentář v dokumentu, dočasný checklist, testovací kopii, screenshot, chatovou domluvu nebo pracovní export. Každá z nich je malá, ale dohromady dělají prostředí, ve kterém nikdo neví, co platí.
+
+Při uzavření projděte pět míst:
+
+1. Karta opravy: označit jako potvrzenou a zavřenou.
+2. Kanonické pracovní místo: ponechat jen aktuální znění.
+3. Changelog: přidat jednu větu bez citlivých detailů.
+4. Dočasné podklady: smazat nebo anonymizovat podle účelu.
+5. Chat a komentáře: nechat je být jako historický šum, ale nepoužívat je jako zdroj pravdy.
+
+Krátký uzavírací zápis může vypadat takto:
+
+```text
+Stav:
+Potvrzeno a uzavřeno.
+
+Aktuální zdroj pravdy:
+Discovery šablona pro první obchodní rozhovor.
+
+Changelog:
+Rozděleno pole pro současnou bolest a cílový stav, aby se při přípravě nabídky nemíchal problém s návrhem řešení.
+
+Staré stopy:
+Údržbová karta zavřená, testovací poznámky smazané, zákaznické detaily nepřeneseny.
+```
+
+Viditelné uzavření chrání tým před dvěma chybami. První je opakované řešení stejné věci, protože nikdo nepoznal, že už je hotovo. Druhá je opačná: tichá změna bez stop, u které se za měsíc neví, proč vznikla.
+
+### Nastavte návratový signál místo pravidelné kontroly
+
+Ne každá potvrzená drobná oprava si zaslouží pravidelný review. Kdyby tým každý měsíc kontroloval každou opravenou větu, brzy by víc kontroloval než pracoval. U minimální opravy stačí návratový signál.
+
+Návratový signál popisuje situaci, při které má smysl téma znovu otevřít:
+
+```text
+Vrátíme se k tomu jen tehdy, pokud:
+- se stejný typ záměny objeví ve dvou dalších běžných použitích;
+- nový člověk nenajde správné pole bez vysvětlení;
+- kvůli opravě začne vznikat nový pomocný dokument;
+- oprava přestane odpovídat aktuálnímu procesu.
+```
+
+Dobrý návratový signál je konkrétní a vzácný. Nemá znít "zkontrolovat někdy". Má říct, co se musí stát, aby otevření dávalo smysl.
+
+Příklad:
+
+```text
+Návratový signál:
+Téma otevřeme znovu jen tehdy, pokud se v dalších dvou nabídkách znovu smíchá současná bolest a cílový stav, nebo pokud nový člen týmu nebude vědět, kam cílový stav zapsat.
+```
+
+Codyho komentář: Drobné opravy potřebují víc klidu než péče. Když fungují, nechte je pracovat. Neustálé review je často jen úzkost v hezké tabulce. Toto je můj pohled.
+
+### Privacy-first uzavření čistého stavu
+
+Privacy-first uzavření má jednoduchý cíl: po potvrzené opravě nemá v systému zůstat víc dat než před ní, pokud k tomu není jasný důvod.
+
+Zkontrolujte hlavně:
+
+- jestli v kartě nezůstaly osobní údaje zákazníků nebo členů týmu;
+- jestli příklady nepotřebují anonymizaci;
+- jestli testovací export nebo screenshot ještě slouží účelu;
+- jestli se kvůli opravě nevytvořil nový trvalý dokument;
+- jestli changelog neobsahuje citlivý obchodní nebo zákaznický detail;
+- jestli někdo nepoužívá chat jako neformální zdroj pravdy s konkrétními daty.
+
+Privacy-first uzavírací věta:
+
+```text
+Po uzavření opravy zůstává pouze aktuální pracovní znění, krátký anonymizovaný changelog a návratový signál; dočasné podklady a zákaznické detaily nejsou dál potřeba.
+```
+
+Pokud oprava pracovala s citlivějším materiálem, například poptávkami, supportem, smluvními poznámkami nebo incidentem, přidejte k uzavření i retenční rozhodnutí:
+
+```text
+Dočasné podklady:
+Smazat do [datum] / ponechat anonymizovaný výřez do [datum] / přesunout do řízeného zdroje pravdy.
+
+Důvod ponechání:
+
+Vlastník úklidu:
+```
+
+Bez vlastníka úklidu retenční věta často zůstane jen hezkým přáním. A hezká přání jsou v privacy-first provozu asi tak užitečná jako cedule "tady měl být zámek" na otevřených dveřích.
+
+### Karta uzavření potvrzené hotové opravy
+
+Použijte ji ve chvíli, kdy předchozí ověření skončilo stavem `Potvrdit`.
+
+```text
+Opravené pracovní místo:
+
+Původní potvrzené tření:
+
+Reálné použití, které opravu potvrdilo:
+
+Aktuální pracovní věta:
+
+Kanonické místo:
+
+Co bylo přepsáno:
+
+Co bylo zavřeno:
+
+Co bylo smazáno nebo anonymizováno:
+
+Changelog věta:
+
+Návratový signál:
+
+Co teď vědomě neotevíráme:
+
+Privacy-first poznámka:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Opravené pracovní místo:
+Discovery šablona pro první obchodní rozhovor.
+
+Původní potvrzené tření:
+Současná bolest a cílový stav se zapisovaly do stejného pole.
+
+Reálné použití, které opravu potvrdilo:
+Příprava nabídky pro malý B2B tým.
+
+Aktuální pracovní věta:
+Současná bolest a cílový stav se zapisují odděleně: první popisuje dnešní problém, druhý požadovaný stav po změně.
+
+Kanonické místo:
+Discovery šablona pro první obchodní rozhovor.
+
+Co bylo přepsáno:
+Jedno pole rozděleno na dvě jasně pojmenovaná pole.
+
+Co bylo zavřeno:
+Údržbová poznámka k původní záměně.
+
+Co bylo smazáno nebo anonymizováno:
+Pomocné poznámky s konkrétními zákaznickými detaily.
+
+Changelog věta:
+Discovery šablona nově odděluje současnou bolest od cílového stavu, aby se problém nemíchal s návrhem řešení.
+
+Návratový signál:
+Téma se otevře znovu jen tehdy, pokud se stejná záměna objeví ve dvou dalších běžných nabídkách.
+
+Co teď vědomě neotevíráme:
+Neměníme celý obchodní scénář, scoring ani strukturu výsledné nabídky.
+
+Privacy-first poznámka:
+V kanonickém místě nezůstaly zákaznické detaily, pouze obecné pracovní pravidlo.
+
+Vlastník a datum:
+Owner sales procesu, 2026-05-28.
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete kartu ověření hotové minimální opravy.
+2. Potvrďte, že výsledek je opravdu `Potvrdit`.
+3. Napište jednu aktuální pracovní větu.
+4. Zkontrolujte kanonické pracovní místo.
+5. Zavřete starou kartu nebo poznámku.
+6. Smažte nebo anonymizujte dočasné podklady.
+7. Přidejte jednu changelog větu.
+8. Zapište návratový signál a věc, kterou teď neotevíráte.
+
+Výstup workshopu:
+
+```text
+Potvrzená hotová oprava je uzavřená do čistého pracovního stavu. Existuje jedno aktuální místo, krátký changelog, návratový signál a uklizená datová stopa.
+```
+
+### Checklist kapitoly
+
+- Navazujeme na opravu, která byla při běžném použití potvrzená?
+- Máme po ruce původní potvrzené tření?
+- Je aktuální pracovní věta krátká a použitelná bez historie opravy?
+- Je jasné kanonické místo, kde nové znění platí?
+- Zavřeli jsme starou kartu, poznámku nebo komentář?
+- Přidali jsme jen stručný changelog bez citlivých detailů?
+- Smazali nebo anonymizovali jsme dočasné podklady?
+- Nevznikl nový trvalý dokument jen kvůli drobné opravě?
+- Má návratový signál konkrétní podmínku?
+- Neplánujeme zbytečné pravidelné review něčeho, co už funguje?
+- Je zapsané, co teď vědomě neotevíráme?
+- Zůstává datová stopa stejná nebo menší než před opravou?
+- Má privacy-first úklid vlastníka, pokud není hotový hned?
+- Ví další člověk, kde najde aktuální pravdu?
+
+Uzavřená hotová oprava má být nudná dobrým způsobem. Další člověk ji použije, nevšimne si starého tření a nemusí znát celý příběh. Přesně tak se malé zlepšení stává součástí zdravého provozu: bez fanfár, bez nového trackeru a bez hromady historických poznámek pod nohama.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha RV o uzavření potvrzené hotové opravy do čistého pracovního stavu: výsledek ověření, aktuální pracovní věta, kanonické místo, zavření starých stop, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RU o ověření hotové minimální opravy při dalším běžném použití: reálné použití, signály průchodu, samostatnosti a datové stopy, čtyři rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RT o převodu ověřené údržbové poznámky do jedné hotové minimální opravy: potvrzený signál, nejbližší pracovní místo, opravná věta, jedna změna, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RS o ověření údržbové poznámky při dalším návratovém signálu: návrat k původní podmínce, rozlišení stejného, podobného, jiného a žádného signálu, čtyři rozhodovací stavy, minimální oprava, privacy-first evidence, karta, mini workshop a checklist.
