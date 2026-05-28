@@ -138216,8 +138216,196 @@ Výstup workshopu:
 
 Ověření úklidové korekce je poslední brzda před tím, než se malá oprava buď uzavře, nebo začne znovu bobtnat. Dobré ověření neoslavuje proces. Jen ukáže, že běžná práce prošla čistěji než minule, stará stopa se nevrátila a kvůli kontrole nevznikla další zbytečná evidence. To je přesně ten druh nenápadného vítězství, které v provozu šetří víc času než velké reorganizační plakáty.
 
+## Příloha SL: Uzavření potvrzené úklidové korekce do čisté pracovní trasy
+
+Příloha SK ověřila úklidovou korekci při dalším běžném použití. Pokud výsledek zní `Potvrzeno`, korekce splnila svůj slib: aktuální pracovní místo šlo najít, šlo použít a stará stopa se nevrátila. Teď je potřeba udělat poslední malý krok, který bývá překvapivě důležitý. Korekci zavřít tak, aby po ní nezůstala další vrstva pomocných poznámek, kontrol a historických vysvětlivek.
+
+Uzavření potvrzené korekce není oslava hotové práce. Je to úklid po úklidu. Cílem je nechat běžnou trasu kratší, aktuálnější a chudší na data než před korekcí. Pokud po potvrzení vznikne nový audit, nová tabulka nebo pravidelná připomínka, tým sice něco opravil, ale zároveň si vyrobil další provozní objekt. To u malé korekce většinou nedává smysl.
+
+Začněte větou:
+
+```text
+Úklidová korekce je potvrzená v běžném použití. Zavřeme ji tak, aby v pracovní trase zůstalo jen aktuální místo, návratový signál a nezbytná stopa rozhodnutí.
+```
+
+Pokud tahle věta není pravdivá, nejste v této příloze. Stav `Dočistit` patří do jedné další malé korekce. Stav `Vrací se stará cesta` patří do opravy trasy. Stav `Nový případ` patří na samostatnou kartu. Tady se pracuje jen s potvrzenou korekcí, která už nemá co dokazovat.
+
+### Přepište výsledek do aktuální trasy
+
+První otázka není, kam uložit historii korekce. První otázka je, co má další člověk vidět při běžné práci. Většinou má vidět jen aktuální název odkazu, aktuální kartu, aktuální formulaci nebo aktuální rozcestník. Nemá číst poznámku "toto jsme přejmenovali, protože dřív to svádělo k archivní šabloně".
+
+Historie může zůstat v pracovním logu nebo changelogu, ale běžná trasa má mluvit současným jazykem. Člověk, který přijde později, nepotřebuje znát celou servisní smyčku. Potřebuje vědět, kudy jít a co udělat.
+
+Praktický postup:
+
+1. Otevřete aktuální pracovní místo, ne starou kartu korekce.
+2. Zkontrolujte, že obsahuje platný název, účel a nejbližší krok.
+3. Odstraňte servisní vysvětlivky, které jsou užitečné jen pro autora opravy.
+4. Nechte jen krátkou stopu v changelogu nebo rozhodovacím záznamu.
+5. Zapište návratový signál tam, kde ho vlastník při práci najde.
+
+Krátká závěrečná věta:
+
+```text
+Aktuální pracovní trasa vede přes [místo]. Potvrzená korekce je uzavřená; běžný uživatel už nepotřebuje servisní historii.
+```
+
+### Zavřete korekční kartu
+
+Korekční karta nemá zůstat v polostavu. Buď je aktivní, nebo zavřená. U potvrzené korekce napište konečný stav a další krok. Další krok může být klid. To je v pořádku. Ne každá karta musí skončit novým úkolem, i když nástroje na řízení práce se někdy tváří, že bez dalšího tiketového potomka nastane civilizační kolaps.
+
+Konečný zápis může být velmi krátký:
+
+```text
+Stav:
+Uzavřeno jako potvrzená úklidová korekce.
+
+Proč:
+Běžná práce prošla aktuální trasou, korekce odstranila původní dozvuk a stará stopa se nevrátila.
+
+Další krok:
+Žádný plánovaný úkol. Téma se vrátí jen při návratovém signálu.
+```
+
+Pokud karta zůstává v nástroji týmu, dejte jí stav, který ji nevrací do aktivní fronty. Pokud se výsledek přepisuje do changelogu, nenechávejte vedle toho ještě otevřenou duplicitní poznámku. Jedna malá korekce nepotřebuje tři paměťová místa.
+
+### Ukliďte staré a pomocné stopy
+
+Po potvrzení korekce se často ukáže, že tým drží víc materiálu, než potřebuje. Starý screenshot. Kopii původní formulace. Komentář s vysvětlením, proč se odkaz přejmenoval. Dočasnou poznámku z ověření. Archivní příklad, který už není součástí běžné trasy.
+
+Některé stopy mají smysl ponechat. Například stručný changelog může být užitečný, když se stejný problém vrátí. Ale pomocné podklady z ověření většinou nemají po potvrzení dlouhou životnost. Pokud je necháte bez účelu, časem začnou působit jako alternativní zdroj pravdy.
+
+Rozlišujte čtyři stavy:
+
+- `Ponechat v běžné trase`: aktuální karta, aktuální odkaz, platný krátký popis.
+- `Ponechat jako stopu rozhodnutí`: jedna věta v changelogu nebo rozhodovacím záznamu.
+- `Archivovat mimo běžné použití`: starý podklad, který má auditní nebo historický důvod.
+- `Smazat`: dočasný screenshot, duplicitní komentář, pracovní poznámka bez budoucí hodnoty.
+
+Privacy-first pravidlo je jednoduché:
+
+```text
+Po potvrzené úklidové korekci má zůstat méně pomocných dat než před ní. Pokud si nejsme jisti, proč stopu držíme, výchozí stav je smazat nebo zkrátit.
+```
+
+U interních materiálů dávejte pozor hlavně na screenshoty nástrojů, jména lidí, zákaznické citace, exporty a kopie konverzací. Často se tváří neškodně, protože vznikly "jen kvůli drobné opravě". Právě proto se na ně snadno zapomene.
+
+### Nastavte návratový signál místo další kontroly
+
+Potvrzená úklidová korekce nepotřebuje pravidelnou kontrolu jen pro jistotu. Potřebuje návratový signál: konkrétní podmínku, při které se téma otevře znovu. Tím se liší zdravá údržba od nekonečného dohledu.
+
+Dobré návratové signály:
+
+- běžná cesta znovu navede člověka na starý nebo archivní postup;
+- aktuální pracovní místo není použitelné bez vysvětlení autora;
+- v okolí se objeví nová duplicita, která mate stejný typ práce;
+- tým začne obcházet aktuální trasu a vracet se k pomocnému podkladu;
+- změnil se proces, pro který pracovní místo existuje.
+
+Špatné návratové signály:
+
+- "podíváme se na to někdy";
+- "raději to každý měsíc zkontrolujeme";
+- "až bude čas";
+- "kdyby se někomu něco nezdálo";
+- "pro jistotu to necháme otevřené".
+
+Návratový signál pište jako pozorovatelnou událost, ne jako pocit. Tým pak ví, kdy téma znovu otevřít, aniž by z malé korekce vznikla pravidelná porada.
+
+### Karta uzavření potvrzené úklidové korekce
+
+```text
+Uzavíraná korekce:
+Původní drobný dozvuk:
+Výsledek ověření:
+Aktuální pracovní trasa:
+Co zůstává v běžném použití:
+Co jde do changelogu:
+Co archivujeme mimo běžnou trasu:
+Co mažeme:
+Závěrečná věta:
+Návratový signál:
+Retenční poznámka:
+Vlastník pracovního místa:
+```
+
+Vyplněný příklad:
+
+```text
+Uzavíraná korekce:
+Přejmenování odkazu v onboardingovém indexu na "aktuální karta předání obsahu".
+
+Původní drobný dozvuk:
+Starý název odkazu sváděl k otevření archivní šablony předání.
+
+Výsledek ověření:
+Potvrzeno. Nový člověk prošel aktuální trasou bez vysvětlení a bez otevření staré šablony.
+
+Aktuální pracovní trasa:
+Onboardingový index -> aktuální karta předání obsahu.
+
+Co zůstává v běžném použití:
+Aktuální odkaz a karta předání.
+
+Co jde do changelogu:
+Jedna věta o přejmenování odkazu a potvrzení při běžném použití.
+
+Co archivujeme mimo běžnou trasu:
+Archivní šablona předání s poznámkou, že není součástí onboardingu.
+
+Co mažeme:
+Dočasný komentář z ověření a screenshot starého názvu odkazu.
+
+Závěrečná věta:
+Korekce je uzavřená; běžná trasa vede na aktuální kartu a nevyžaduje servisní historii.
+
+Návratový signál:
+Téma se vrátí jen tehdy, když běžná cesta znovu navede člověka na archivní postup nebo aktuální karta nebude použitelná samostatně.
+
+Retenční poznámka:
+Bez nové osobní nebo zákaznické stopy. Pomocné ověřovací podklady smazané.
+
+Vlastník pracovního místa:
+Content owner.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: potvrďte, že výsledek ověření je opravdu `Potvrzeno`.
+2. Minuta 2: otevřete aktuální pracovní trasu a zkontrolujte, co má vidět běžný uživatel.
+3. Minuta 3: zavřete korekční kartu konečným stavem.
+4. Minuta 4: rozdělte staré stopy na ponechat, changelog, archivovat a smazat.
+5. Minuta 5: napište konkrétní návratový signál.
+6. Minuta 6: zapište retenční poznámku a vlastníka.
+
+Výstup workshopu:
+
+```text
+Potvrzená úklidová korekce je uzavřená. Běžná pracovní trasa je čistá, staré podklady jsou uklizené, tým má návratový signál a nevznikla nová kontrolní rutina.
+```
+
+### Checklist kapitoly
+
+- Uzavíráme korekci se stavem `Potvrzeno`?
+- Je jasné, jaká byla původní úklidová korekce?
+- Přepsali jsme výsledek do aktuální pracovní trasy?
+- Nevyžaduje běžný uživatel servisní historii korekce?
+- Má korekční karta konečný stav?
+- Zůstává v běžném použití jen aktuální pracovní místo?
+- Je changelog krátký a neduplikuje pracovní zdroj pravdy?
+- Rozlišili jsme stopy na ponechat, archivovat a smazat?
+- Neuchováváme screenshoty, jména, zákaznické citace nebo exporty bez účelu?
+- Má archivní podklad jasný důvod a není v běžné trase?
+- Máme konkrétní návratový signál místo další kontroly pro jistotu?
+- Nevznikla nová tabulka, audit, tracker ani pravidelná schůzka?
+- Ví vlastník pracovního místa, že korekce je zavřená?
+- Umí tým poznat, kdy téma znovu otevřít?
+
+Codyho komentář: nejlepší malá korekce po sobě nezanechá pocit velkého procesu. Zanechá pracovní místo, které se používá trochu snáz, a méně starých stop, do kterých může někdo později zakopnout. To je provozní elegance v montérkách: žádné fanfáry, jen kratší cesta a menší nepořádek.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SL o uzavření potvrzené úklidové korekce do čisté pracovní trasy: aktuální trasa, zavření korekční karty, úklid starých stop, návratový signál místo další kontroly, privacy-first retence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SK o ověření úklidové korekce při dalším běžném použití: reálný návrat, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SJ o převodu drobného dozvuku po první kontrole do jedné úklidové korekce: vymezení dozvuku, nejbližší místo opravy, stejný průchod, privacy-first brzda, karta a checklist.
 - 2026-05-28: Doplněna Příloha SI o první běžné kontrole stabilního pracovního místa po uzavřené lokální opravě: přirozený návrat, vstupní cesta, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
