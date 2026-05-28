@@ -135687,8 +135687,193 @@ Servisní korekce je ověřená při běžném použití. Víme, jestli odstrani
 
 Ověření servisní korekce je malá disciplína v sebeovládání. Cílem není dokázat, že každá věta v systému je dokonalá. Cílem je potvrdit, že jedna malá hrana už neřeže do práce, a potom ji přestat hladit do lesku. Lesklý chaos je pořád chaos, jen se v něm člověk hezky vidí.
 
+## Příloha RZ: Uzavření ověřené servisní korekce do stabilního pracovního místa
+
+Ověřená servisní korekce z přílohy RY ještě není úplně hotová ve chvíli, kdy tým řekne `Potvrzeno`. Hotová je až tehdy, když se výsledek propsal do aktuálního pracovního místa, staré pomocné stopy zmizely z cesty a další člověk nemusí vědět, že nějaká korekce vůbec proběhla.
+
+Uzavření není další editace. Je to úklid po editaci. V dobrém případě je kratší než samotná korekce: potvrdit aktuální stav, zavřít servisní kartu, odstranit dočasné poznámky, nastavit návratový signál a nechat pracovní místo v klidu.
+
+Začněte větou:
+
+```text
+Servisní korekce je ověřená a aktuální pracovní místo má odteď znít takto:
+```
+
+Pokud za dvojtečku neumíte napsat jednu čistou pracovní větu, ještě neuzavírejte. Pravděpodobně pořád držíte v hlavě historii změny místo aktuálního stavu.
+
+### Přepište výsledek do aktuální věty
+
+Po ověření svádí napsat shrnutí typu "po několika kolech jsme zjistili, že původní pole bylo matoucí, proto jsme ho upravili". To může být pravda, ale do pracovního místa nepatří. Člověk, který ho použije za měsíc, nepotřebuje příběh korekce. Potřebuje jasnou instrukci.
+
+Místo historie napište aktuální pravidlo:
+
+```text
+Do pole "Co z původní opravy teď neotevíráme" zapisujeme jen hranici původní opravy, ne seznam nových nápadů.
+```
+
+Slabší verze:
+
+```text
+Pole bylo přejmenováno, protože dřív vedlo k obecným seznamům nápadů.
+```
+
+Druhá věta vysvětluje minulost, ale nepomáhá při práci. Pokud historii potřebujete uchovat, dejte ji do changelogu nebo rozhodovacího záznamu, ne do místa, kde člověk vyplňuje kartu.
+
+### Zavřete servisní kartu bez přidávání dalšího úkolu
+
+Karta servisní korekce má po potvrzení dostat jasný stav. Ne "sledovat dál", ne "vrátit se někdy", ne "možná rozšířit". Stav má říct, že konkrétní tření je vyřešené.
+
+Krátký uzavírací zápis:
+
+```text
+Stav:
+Potvrzeno a uzavřeno.
+
+Aktuální pracovní místo:
+[odkaz nebo název místa]
+
+Co bylo propsáno:
+[jedna věta nebo lokální úprava]
+
+Co se zavírá:
+[původní drobné tření]
+
+Návratový signál:
+[kdy má smysl téma znovu otevřít]
+```
+
+Návratový signál je důležitý, protože brání dvěma špatným extrémům. Bez něj se téma buď otevírá při každé malé nejistotě, nebo se naopak tváří navždy vyřešeně. Dobré uzavření říká: teď je klid, ale pokud nastane konkrétní situace, víme, proč se vrátit.
+
+Příklad návratového signálu:
+
+```text
+Téma znovu otevřeme jen tehdy, když dvě po sobě jdoucí běžná použití povedou k obecnému seznamu nápadů místo hranice původní opravy.
+```
+
+To je lepší než "zkontrolovat za měsíc". Kontrola podle kalendáře často vyrábí práci i tam, kde není signál. Kontrola podle návratové podmínky drží pozornost tam, kde se skutečně něco děje.
+
+### Ukliďte staré stopy z pracovní trasy
+
+Ověřená korekce má zůstat viditelná jen v aktuálním místě. Staré pomocné poznámky, dočasné exporty, komentáře v chatu, duplicitní příklady a rozpracované varianty mají po uzavření zmizet nebo být jasně archivované. Jinak se při dalším použití vrátí jako falešná alternativa.
+
+Úklidová mapa:
+
+```text
+Aktuální zdroj pravdy:
+Dočasné podklady:
+Staré odkazy:
+Duplicitní formulace:
+Co mažeme:
+Co archivujeme:
+Kde je zapsaný výsledek:
+```
+
+Mažte odvážněji než přidáváte. Pokud podklad sloužil jen k ověření korekce, po uzavření obvykle nemá důvod zůstat v pracovní trase. Pokud ho musíte archivovat kvůli auditovatelnosti nebo interní paměti, označte ho jako archiv a odkažte na aktuální místo, ne opačně.
+
+Codyho komentář: největší past úklidu je sentiment k vlastním mezikrokům. To, že nám poznámka pomohla vyřešit problém, neznamená, že má strašit každého dalšího člověka. Některé věci jsou užitečné právě tím, že po splnění práce zmizí. Takové malé digitální "děkuju a sbohem".
+
+### Privacy-first uzavření korekce
+
+Uzavření je dobrý okamžik pro datovou hygienu. Ověření korekce mohlo vytvořit krátkou poznámku, pracovní příklad, anonymní záznam signálu nebo odkaz na starý podklad. Zeptejte se, co z toho má dál legitimní účel.
+
+Privacy-first pravidla pro uzavření:
+
+- Aktuální pracovní místo nemá obsahovat osobní detaily z ověření.
+- Dočasné poznámky se mažou, pokud už jejich obsah žije v rozhodovacím záznamu.
+- Archivované podklady mají jasný důvod, vlastníka a retenční pravidlo.
+- Příklady se zobecní tak, aby nebyl poznat člověk, zákazník ani interní situace.
+- Starý export nebo screenshot nesmí zůstat jako pohodlnější cesta než aktuální pravidlo.
+- Výsledek uzavření se dá pochopit bez přístupu k interní komunikaci.
+
+Privacy-first hodnota tady není velké prohlášení o Evropě a kontrole dat. Je to obyčejné rozhodnutí neskladovat drobné pracovní stopy déle, než je potřeba. Méně stop znamená méně budoucích vysvětlování, menší riziko a čistší pracovní prostor.
+
+### Karta uzavření ověřené servisní korekce
+
+```text
+Servisní korekce:
+Výsledek ověření:
+Aktuální pracovní místo:
+Nová aktuální věta:
+Co bylo propsáno:
+Co se zavírá:
+Návratový signál:
+Co mažeme:
+Co archivujeme:
+Retenční poznámka:
+Co se neotevírá:
+```
+
+Vyplněný příklad:
+
+```text
+Servisní korekce:
+Přejmenování pole v návratové kartě.
+
+Výsledek ověření:
+Potvrzeno při dalším běžném použití.
+
+Aktuální pracovní místo:
+Karta prvního návratu po uzavřené hotové opravě.
+
+Nová aktuální věta:
+Do pole "Co z původní opravy teď neotevíráme" zapisujeme jen hranici původní opravy, ne seznam nových nápadů.
+
+Co bylo propsáno:
+Název pole a krátký příklad pod kartou.
+
+Co se zavírá:
+Původní drobné tření, kdy pole vedlo k příliš obecnému seznamu témat.
+
+Návratový signál:
+Téma znovu otevřeme jen při dvou po sobě jdoucích použitích se stejným typem zaváhání.
+
+Co mažeme:
+Dočasnou poznámku z ověření.
+
+Co archivujeme:
+Jen krátký uzavírací záznam v pracovním logu změn.
+
+Retenční poznámka:
+Archivovaný záznam neobsahuje jména ani zákaznické detaily.
+
+Co se neotevírá:
+Neměníme rozhodovací stavy návratové karty ani nerozšiřujeme servisní korekci na jiné šablony.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek ověření servisní korekce.
+2. Minuta 2: napište novou aktuální pracovní větu.
+3. Minuta 3: zavřete servisní kartu stavem `Potvrzeno a uzavřeno`.
+4. Minuta 4: smažte nebo archivujte dočasné podklady.
+5. Minuta 5: zapište návratový signál a co se neotevírá.
+
+Výstup workshopu:
+
+```text
+Ověřená servisní korekce je uzavřená. Aktuální pracovní místo obsahuje jen platnou větu, staré pomocné stopy nepřekážejí a tým ví, při jakém konkrétním signálu má smysl se k tématu vrátit.
+```
+
+### Checklist kapitoly
+
+- Je výsledek ověření opravdu `Potvrzeno`, ne jen dobrý pocit autora?
+- Umíme aktuální stav napsat jednou pracovní větou?
+- Propsali jsme výsledek do nejbližšího kanonického místa?
+- Nezůstala v pracovním místě historie korekce místo instrukce?
+- Má servisní karta jasný stav `Potvrzeno a uzavřeno`?
+- Je návratový signál konkrétnější než kalendářová kontrola?
+- Jsou staré poznámky, exporty a varianty smazané nebo jasně archivované?
+- Nezůstala žádná stará stopa jako pohodlnější cesta než aktuální místo?
+- Neobsahuje uzavírací záznam osobní ani zákaznické detaily?
+- Má archivovaný podklad důvod, vlastníka a retenční pravidlo?
+- Je jasné, co se tímto uzavřením výslovně neotevírá?
+- Může další člověk použít pracovní místo bez znalosti celé servisní historie?
+
+Dobré uzavření ověřené korekce je skoro neviditelné. Práce jde dál, jen s menším třením a menším množstvím starých stop. To je přesně typ zlepšení, který se v týmu neoslavuje, ale po čase je hodně poznat: méně vysvětlování, méně dvojích verzí a méně dat, která nikdo nepotřebuje.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha RZ o uzavření ověřené servisní korekce do stabilního pracovního místa: aktuální pracovní věta, zavření servisní karty, návratový signál, úklid starých stop, privacy-first retence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RY o ověření servisní korekce při dalším běžném použití: návrat ke korekční větě, signály cesty, použití a datové stopy, čtyři výsledky ověření, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RX o převodu drobného tření po návratu k čistému stavu do jedné servisní korekce: rozlišení tření od nového signálu, nejbližší pracovní místo, korekční věta, jedna lokální úprava, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RW o prvním běžném návratu k čistému stavu po uzavřené hotové opravě: skutečné použití, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first návrat bez nového dozoru, karta, mini workshop a checklist.
