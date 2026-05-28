@@ -135873,8 +135873,205 @@ Ověřená servisní korekce je uzavřená. Aktuální pracovní místo obsahuje
 
 Dobré uzavření ověřené korekce je skoro neviditelné. Práce jde dál, jen s menším třením a menším množstvím starých stop. To je přesně typ zlepšení, který se v týmu neoslavuje, ale po čase je hodně poznat: méně vysvětlování, méně dvojích verzí a méně dat, která nikdo nepotřebuje.
 
+## Příloha SA: První běžný návrat po uzavřené servisní korekci
+
+Uzavřená servisní korekce z přílohy RZ by měla nějakou dobu prostě sloužit. Ne každá oprava potřebuje další kontrolní rituál, další tabulku a další statečný výlet do země "ještě to pojďme doladit". Přesto má smysl při prvním přirozeném návratu sledovat, jestli pracovní místo zůstalo čisté i bez servisní historie.
+
+Tahle příloha není audit. Je to krátký sanity check ve chvíli, kdy někdo pracovní místo znovu použije pro skutečnou práci. Cílem není hledat další vylepšení. Cílem je potvrdit, že uzavřená korekce zmizela do běžného provozu: člověk najde správné místo, pochopí aktuální větu, vyplní nebo použije výstup a nepotřebuje se vracet ke staré servisní kartě.
+
+Začněte větou:
+
+```text
+Vracíme se k pracovnímu místu po uzavřené servisní korekci a sledujeme jen to, jestli jde použít bez znalosti opravy.
+```
+
+Pokud věta svádí k přidání "a rovnou zkontrolujeme i další části", zastavte se. To už je nová iterace, ne první návrat po uzavření. Stabilní místo se chrání tím, že ho při každém návratu nerozebíráte na díly.
+
+### Návrat spusťte jen skutečným použitím
+
+První návrat nemá být autorská kontrola nad šálkem kávy. Má nastat ve chvíli, kdy někdo pracovní místo potřebuje pro reálný výstup: vyplnit kartu, předat rozhodnutí, upravit šablonu, zavřít poznámku, nebo podle pravidla provést malý provozní krok.
+
+Dobré spouštěče:
+
+- někdo poprvé použije upravenou kartu v běžné práci;
+- nová role hledá aktuální pravidlo bez znalosti servisní historie;
+- tým se vrací k podobné situaci a má použít stabilní místo místo staré poznámky;
+- při měsíčním review se pracovní místo přirozeně otevře kvůli aktuálnímu rozhodnutí.
+
+Slabé spouštěče:
+
+- autor má pocit, že by text mohl být ještě hezčí;
+- někdo si vzpomněl na další možné vylepšení bez reálného použití;
+- tým chce "pro jistotu" znovu projít celou trasu;
+- stará servisní karta pořád existuje v záložkách a láká k návratu.
+
+První návrat má být krátký právě proto, že stabilní místo už prošlo opravou, ověřením a uzavřením. Pokud se k němu tým vrací bez pracovního důvodu, vyrábí další tření místo toho, aby ho snižoval.
+
+### Sledujte tři jednoduché signály
+
+První signál je nalezení. Člověk má bez nápovědy najít aktuální pracovní místo. Pokud musí lovit ve starých kartách, chatu, exportech nebo duplicitních šablonách, uzavření nebylo úplně čisté.
+
+Otázka:
+
+```text
+Našel člověk aktuální místo dřív než starou servisní stopu?
+```
+
+Druhý signál je použití. Aktuální věta má vést k výstupu, ne k debatě o tom, co tím autor myslel. Pokud člověk pochopí pravidlo, ale stejně potřebuje vysvětlení historie, pracovní místo pořád nese moc servisního příběhu.
+
+Otázka:
+
+```text
+Vznikl správný pracovní výstup bez znalosti původního tření?
+```
+
+Třetí signál je datová stopa. První návrat nesmí znovu otevřít dočasné podklady, screenshoty, exporty nebo zákaznické detaily, které měly po uzavření zmizet. Pokud se bez nich tým neobejde, je potřeba upravit aktuální místo, ne vracet staré stopy do provozu.
+
+Otázka:
+
+```text
+Použili jsme jen aktuální pracovní místo a nezachraňovali se starým podkladem?
+```
+
+Tyto tři signály stačí. Nesledujte náladu týmu, estetiku formulace ani abstraktní "pocit čistoty". Stabilní místo se pozná podle práce: jde najít, jde použít a nevyžaduje stará data.
+
+### Rozlišujte klid, dozvuk a nový signál
+
+Po prvním návratu vyberte jeden ze čtyř stavů:
+
+```text
+Klid:
+Pracovní místo funguje bez znalosti servisní korekce. Nic neměníme.
+
+Dozvuk:
+Někde zůstala stará stopa, ale aktuální místo samo funguje. Uklidíme stopu, neotvíráme obsah.
+
+Lokální drhnutí:
+Aktuální místo je správné, ale jedna formulace při použití zaváhala. Zvažujeme jednu malou servisní poznámku.
+
+Nový signál:
+Objevilo se jiné téma než původní korekce. Zapíšeme ho odděleně a tuto smyčku necháme zavřenou.
+```
+
+Stav `Klid` je nejlepší výsledek a zaslouží si nejméně práce. Stačí krátce zapsat, že první návrat proběhl bez zásahu. Nepřidávejte další kontrolu jen proto, že se nic nerozbilo. To je zhruba digitální verze toho, když člověk začne šťourat do funkční zásuvky, protože podezřele dobře drží.
+
+Stav `Dozvuk` znamená, že obsah je v pořádku, ale v okolí zůstala stará stopa. Typicky záložka na starou kartu, komentář v úkolu, duplicitní příklad nebo export, který někdo použil ze zvyku. Oprava má být úklidová, ne obsahová.
+
+Stav `Lokální drhnutí` otevírejte opatrně. Jedno zaváhání ještě není důkaz. Pokud ale zaváhání blokovalo výstup, napište servisní poznámku s návratovou podmínkou. Nevyrábějte z ní rovnou korekci.
+
+Stav `Nový signál` patří mimo tuto smyčku. Nové téma může být důležité, ale nesmí přepsat závěr, že původní servisní korekce byla uzavřená. Jinak se každé první použití změní v bránu pro nové projekty. A brána pro nové projekty, jak víme, někdy podezřele připomíná díru v plotě.
+
+### Privacy-first návrat bez obnovy starých podkladů
+
+První návrat po uzavření je časté místo, kde se staré datové stopy vracejí zadními dveřmi. Někdo si chce "jen připomenout", jak korekce vznikla, a otevře starý export, screenshot, zákaznickou poznámku nebo interní chat. Pokud je aktuální pracovní místo dobře uzavřené, většinu těchto věcí nepotřebuje.
+
+Privacy-first pravidlo:
+
+```text
+Při prvním návratu používáme aktuální pracovní místo. Staré podklady otevíráme jen tehdy, když bez nich nejde vyřešit konkrétní blokaci.
+```
+
+Pokud starý podklad otevřete, zapište proč. Ne kvůli byrokracii, ale kvůli hygieně: tým má vědět, jestli archiv pořád plní legitimní účel, nebo jen nahrazuje chybějící jasnost v aktuálním pravidle.
+
+Krátká datová kontrola:
+
+- Nepotřebovali jsme osobní ani zákaznické detaily k pochopení aktuálního místa?
+- Nevrátil se do práce starý export jako pohodlnější zdroj pravdy?
+- Pokud jsme otevřeli archiv, víme proč a není potřeba ho nechat v běžné trase?
+- Nevznikla nová evidence jen kvůli prvnímu návratu?
+- Zápis výsledku je anonymní, krátký a navázaný na pracovní místo, ne na člověka.
+
+Codyho komentář: čistý privacy-first provoz často není o velkých prohlášeních, ale o nudném odmítnutí znovu otevírat staré věci. Když systém funguje bez nich, nechte je spát. Archiv není lednice na půlnoční mlsání.
+
+### Karta prvního návratu po servisní korekci
+
+```text
+Pracovní místo:
+Uzavřená servisní korekce:
+Reálné použití:
+Kdo místo použil / role:
+Signál nalezení:
+Signál použití:
+Signál datové stopy:
+Výsledek:
+Co případně uklízíme:
+Co případně zapisujeme odděleně:
+Co se neotevírá:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Karta uzavření ověřené servisní korekce.
+
+Uzavřená servisní korekce:
+Přejmenování pole pro hranici původní opravy.
+
+Reálné použití:
+Marketing owner zavíral drobnou korekci v obsahové šabloně.
+
+Kdo místo použil / role:
+Marketing owner.
+
+Signál nalezení:
+Našel aktuální kartu v kanonickém indexu a neotevřel starou servisní poznámku.
+
+Signál použití:
+Vyplnil hranici původní opravy jednou větou bez seznamu nových nápadů.
+
+Signál datové stopy:
+Nepotřeboval starý export ani zákaznický příklad.
+
+Výsledek:
+Klid.
+
+Co případně uklízíme:
+Odstraňujeme starý odkaz na servisní kartu z interní poznámky.
+
+Co případně zapisujeme odděleně:
+Nic.
+
+Co se neotevírá:
+Neměníme obsah karty ani pravidla pro návratový signál.
+```
+
+Karta má být tak krátká, aby ji šlo vyplnit během práce. Pokud se z ní stane samostatné review, minuli jste účel. První návrat je jen drobné potvrzení, že uzavření opravdu přežilo kontakt s provozem.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte reálné použití, kvůli kterému se k místu vracíte.
+2. Minuta 2: zkontrolujte, jestli člověk našel aktuální místo bez staré stopy.
+3. Minuta 3: ověřte, jestli vznikl správný výstup bez znalosti servisní historie.
+4. Minuta 4: zapište, jestli nebylo potřeba otevřít starý podklad.
+5. Minuta 5: vyberte stav `Klid`, `Dozvuk`, `Lokální drhnutí` nebo `Nový signál`.
+
+Výstup workshopu:
+
+```text
+První běžný návrat po uzavřené servisní korekci proběhl. Víme, jestli pracovní místo zůstává v klidu, potřebuje jen úklid staré stopy, má drobné lokální drhnutí, nebo otevřelo nový oddělený signál.
+```
+
+### Checklist kapitoly
+
+- Spustil návrat skutečný pracovní důvod?
+- Neslouží návrat jako skrytá autorská revize?
+- Našel člověk aktuální pracovní místo bez staré servisní karty?
+- Vedla aktuální věta ke správnému výstupu?
+- Nepotřeboval člověk znát historii původní korekce?
+- Nevrátil se starý export, screenshot, chat nebo zákaznický detail do běžné práce?
+- Pokud zůstala stará stopa, uklízíme stopu místo obsahu?
+- Pokud vzniklo lokální drhnutí, zapisujeme jen servisní poznámku s návratovou podmínkou?
+- Pokud vznikl nový signál, držíme ho odděleně od uzavřené korekce?
+- Je výsledek vybrán jako `Klid`, `Dozvuk`, `Lokální drhnutí` nebo `Nový signál`?
+- Je zápis krátký, anonymní a bez nové evidence navíc?
+- Je jasné, co se tímto návratem výslovně neotevírá?
+
+První návrat po uzavřené servisní korekci má být skoro nudný. To je dobré znamení. Stabilní pracovní místo nemá vyžadovat obdiv, paměť ani vysvětlení. Má prostě pomoct člověku dokončit práci a potom zůstat potichu, dokud se neobjeví skutečný návratový signál.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SA o prvním běžném návratu po uzavřené servisní korekci: reálné použití jako spouštěč, signály nalezení, použití a datové stopy, stavy klid, dozvuk, lokální drhnutí a nový signál, privacy-first návrat bez obnovy starých podkladů, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RZ o uzavření ověřené servisní korekce do stabilního pracovního místa: aktuální pracovní věta, zavření servisní karty, návratový signál, úklid starých stop, privacy-first retence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RY o ověření servisní korekce při dalším běžném použití: návrat ke korekční větě, signály cesty, použití a datové stopy, čtyři výsledky ověření, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RX o převodu drobného tření po návratu k čistému stavu do jedné servisní korekce: rozlišení tření od nového signálu, nejbližší pracovní místo, korekční věta, jedna lokální úprava, privacy-first minimum, karta, mini workshop a checklist.
