@@ -138612,8 +138612,214 @@ Výstup workshopu:
 
 První běžný návrat k čisté pracovní trase má být tichý test provozní dospělosti. Když trasa funguje, nejlepší výsledek je nechat ji fungovat. Když se objeví drobná hrana, opravte ji v místě, kde vzniká. A když se vrátí stará stopa nebo nový signál, pojmenujte to přesně, aby se z uzavřené korekce nestal další nekonečný šuplík práce.
 
+## Příloha SN: Převod lehké hrany z prvního návratu do jedné lokální úpravy
+
+Příloha SM rozlišila čtyři výsledky prvního běžného návratu k čisté pracovní trase. Nejzrádnější z nich není velký problém, ale `Lehká hrana`. Vypadá nevinně: jedna věta ještě používá starý název, jeden odkaz vede o krok bokem, popisek u šablony je správný, ale čtenář si musí domyslet souvislost. Právě proto se z ní snadno stane nepřiměřená práce.
+
+Lehká hrana se nemá řešit novým auditem, novou tabulkou ani otevřením celé historie opravy. Má se převést do jedné lokální úpravy v místě, kde člověk při běžné práci narazil. Cílem není znovu navrhnout trasu. Cílem je odstranit drobný zbytek tření, aby čistá pracovní trasa zůstala čistá.
+
+Začněte větou:
+
+```text
+Při prvním běžném návratu se objevila lehká hrana. Opravíme jen nejbližší místo, kde vzniklo tření, bez otevření celé servisní historie.
+```
+
+Pokud věta nejde napsat bez slov "celý", "všude", "kompletně" nebo "pro jistotu", nejspíš už nejde o lehkou hranu. Vraťte se k výsledkům z Přílohy SM a rozhodněte, jestli se nevrací stará stopa nebo nevznikl nový signál.
+
+### Vymezte hranu jednou pracovní větou
+
+Lehká hrana musí být popsatelná jako malý rozdíl mezi tím, co čistá trasa slíbila, a tím, co člověk při běžném použití skutečně potkal. Nesmí to být vágní pocit, že by "to mohlo být lepší". Takový pocit je nekonečný zdroj úprav, které se tváří jako péče, ale často jen rozmazávají hotovou práci.
+
+Dobré vymezení:
+
+- "Popisek v indexu říká starý název šablony, ale odkaz už vede správně."
+- "Checklist je aktuální, ale poslední bod ještě odkazuje na archivní poznámku."
+- "Karta používá správný formulář, ale příklad vedle ní má starý povinný telefon."
+- "Vstupní stránka vede správně, jen nadpis neříká, kdy šablonu použít."
+
+Slabé vymezení:
+
+- "Index by chtěl zlepšit."
+- "Onboarding je pořád trochu nejasný."
+- "Měli bychom projít všechny šablony."
+- "Někde tam ještě bude starý kontext."
+
+Lehká hrana má mít jednu větu, jedno místo a jeden očekávaný efekt. Když potřebujete seznam deseti nálezů, nejde o hranu. Jde o samostatnou úklidovou nebo revizní práci.
+
+### Opravujte místo nárazu, ne celý systém
+
+Lokální úprava patří tam, kde člověk narazil. Pokud se hrana projevila v indexu, opravte index. Pokud v checklistu, opravte checklist. Pokud v příkladu, opravte příklad. Nesnažte se při tom preventivně přepsat okolní trasy, které při běžném návratu fungovaly.
+
+Praktický postup:
+
+1. Najděte přesnou větu, odkaz, popisek, příklad nebo položku checklistu.
+2. Napište jednu opravnou větu mimo dokument.
+3. Zkontrolujte, jestli opravná věta nemění původní rozhodnutí.
+4. Proveďte úpravu v nejbližším pracovním místě.
+5. Projděte stejný krok ještě jednou a ověřte, že hrana zmizela.
+
+Příklad:
+
+```text
+Hrana:
+Index vede na aktuální šablonu formuláře, ale popisek pořád říká "rychlá poptávka s telefonem".
+
+Lokální úprava:
+Popisek změníme na "první kontaktní formulář s e-mailem, stručným kontextem a volitelným URL".
+
+Co neměníme:
+Nepřepisujeme všechny formulářové šablony a neotevíráme staré ověřovací poznámky.
+```
+
+Tahle disciplína je důležitá hlavně u týmových materiálů. Jakmile se při drobné hraně otevře celý systém, lidé se naučí, že i malý návrat znamená velkou práci. Příště raději nic neřeknou. A to je horší než jeden nepřesný popisek.
+
+### Zkontrolujte, že úprava nevyrábí novou stopu
+
+Lokální úprava má snížit tření, ne založit další vrstvu evidence. Stačí krátký záznam v pracovním logu nebo v kartě trasy. Není potřeba ukládat screenshot před a po, přikládat chatovou diskusi ani sbírat další průchody jen proto, že oprava vypadá odborněji.
+
+Privacy-first otázky před uložením:
+
+- Potřebujeme zachovat konkrétní osobu, která hranu našla?
+- Potřebujeme ukládat zákaznický příklad, nebo stačí zobecněná pracovní situace?
+- Potřebujeme screenshot, nebo stačí popsat změněnou větu?
+- Nevytváříme dočasný export, který nikdo nesmaže?
+- Nevracíme do provozu archivní podklady jen kvůli vysvětlení drobné opravy?
+
+Většinou stačí tento zápis:
+
+```text
+Lehká hrana:
+Lokální úprava:
+Ověřeno stejným průchodem:
+Co jsme neotevřeli:
+Retence poznámky:
+```
+
+Codyho komentář: nejlepší oprava lehké hrany je trochu neokázalá. Nikdo ji neslaví, nikdo kvůli ní nezakládá meeting, jen další člověk projde trasu a nenarazí. Malá sláva, žádné konfety. Přesně tak má provoz občas vypadat.
+
+### Rozlišujte lokální úpravu a nový signál
+
+Lehká hrana se někdy při bližším pohledu ukáže jako nový signál. Rozdíl je v tom, jestli oprava potvrzuje původní čistou trasu, nebo ji nutí změnit předpoklad.
+
+Lokální úprava potvrzuje trasu:
+
+- aktuální zdroj pravdy zůstává stejný;
+- vlastník se nemění;
+- datová stopa se nezvětšuje;
+- pracovní krok zůstává stejný;
+- stačí upravit jednu větu, odkaz, popisek nebo příklad.
+
+Nový signál mění předpoklad:
+
+- ukáže se, že trasa nemá jasného vlastníka;
+- lidé potřebují jiný výstup než ten, pro který byla šablona navržená;
+- aktuální pravidlo vytváří zbytečná data;
+- oprava by zasáhla více pracovních míst;
+- problém se netýká uzavřené korekce, ale širšího procesu.
+
+Pokud jde o nový signál, nezahrabávejte ho pod lokální úpravu. Zapište ho jako samostatný podnět s vlastní otázkou, hranicí a návratovým signálem. Lehká hrana má zůstat malá; nový signál si zaslouží vlastní prostor.
+
+### Karta lokální úpravy po lehké hraně
+
+```text
+Čistá pracovní trasa:
+Výsledek prvního návratu:
+Lehká hrana:
+Místo nárazu:
+Opravná věta:
+Provedená lokální úprava:
+Stejný průchod po úpravě:
+Stav po průchodu:
+Co neměníme:
+Staré stopy, které neotevíráme:
+Nová data:
+Retenční poznámka:
+Vlastník trasy:
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Čistá pracovní trasa:
+Index šablon pro nové landing pages.
+
+Výsledek prvního návratu:
+Lehká hrana.
+
+Lehká hrana:
+Popisek formulářové šablony používá starý název "rychlá poptávka s telefonem".
+
+Místo nárazu:
+Index šablon, sekce formuláře.
+
+Opravná věta:
+Popisek má říkat, že jde o první kontaktní formulář s e-mailem, stručným kontextem a volitelným URL.
+
+Provedená lokální úprava:
+Popisek v indexu byl přepsán na aktuální formulaci.
+
+Stejný průchod po úpravě:
+Autor nové landing page našel šablonu přes index a pochopil, kdy ji použít.
+
+Stav po průchodu:
+Hrana odstraněna.
+
+Co neměníme:
+Nepřepisujeme všechny formuláře, nezakládáme nový audit a neměníme pravidla kvalifikace leadu.
+
+Staré stopy, které neotevíráme:
+Archivní příklad formuláře s povinným telefonem.
+
+Nová data:
+Žádná.
+
+Retenční poznámka:
+Tento záznam zůstává jen do nejbližšího měsíčního review trasy.
+
+Vlastník trasy:
+Marketing owner.
+
+Návratový signál:
+Téma se vrátí, pokud index znovu použije starý název nebo člověk kvůli formuláři otevře archivní příklad.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek `Lehká hrana` z prvního návratu.
+2. Minuta 2: napište hranu jednou pracovní větou.
+3. Minuta 3: najděte přesné místo nárazu.
+4. Minuta 4: napište opravnou větu a ověřte, že nemění původní rozhodnutí.
+5. Minuta 5: proveďte lokální úpravu a projděte stejný krok.
+6. Minuta 6: zapište, co jste vědomě neotevřeli a kdy poznámka zmizí.
+
+Výstup workshopu:
+
+```text
+Lehká hrana z prvního návratu je převedená do jedné lokální úpravy. Trasa zůstává čistá, stará servisní historie se neotevřela a nevznikla nová datová stopa.
+```
+
+### Checklist kapitoly
+
+- Je výsledek z předchozího návratu opravdu `Lehká hrana`?
+- Umíme hranu popsat jednou pracovní větou?
+- Víme, kde přesně člověk narazil?
+- Opravujeme větu, odkaz, popisek, příklad nebo jednu položku checklistu?
+- Neotevíráme celý index, celý onboarding ani celou knihovnu šablon?
+- Nemění lokální úprava původní rozhodnutí nebo vlastníka trasy?
+- Prošli jsme stejný pracovní krok hned po úpravě?
+- Zmizelo tření bez vysvětlení autora opravy?
+- Nevznikl screenshot, export, jmenná evidence ani další tabulka průchodů?
+- Zapsali jsme, které staré stopy vědomě neotevíráme?
+- Má krátká poznámka retenční důvod?
+- Pokud se ukázal nový signál, oddělili jsme ho od lokální úpravy?
+- Ví vlastník, jaký návratový signál téma znovu otevře?
+
+Lehká hrana je dobrý test provozní střídmosti. Tým, který ji umí opravit jednou lokální úpravou, chrání čistou trasu i vlastní pozornost. Tým, který z každé hrany udělá projekt, časem přestane rozlišovat mezi skutečným problémem a obyčejným drobným dozvukem po dobře zavřené práci.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SN o převodu lehké hrany z prvního návratu do jedné lokální úpravy: vymezení hrany jednou větou, oprava místa nárazu, privacy-first kontrola nové stopy, rozlišení lokální úpravy a nového signálu, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SM o první běžný návrat k čisté pracovní trase po uzavřené korekci: běžné vstupní místo, signály přímé cesty, samostatného kroku a datové stopy, čtyři výsledky návratu, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SL o uzavření potvrzené úklidové korekce do čisté pracovní trasy: aktuální trasa, zavření korekční karty, úklid starých stop, návratový signál místo další kontroly, privacy-first retence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SK o ověření úklidové korekce při dalším běžném použití: reálný návrat, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first ověření, karta, mini workshop a checklist.
