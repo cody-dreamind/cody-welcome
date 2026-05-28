@@ -135261,8 +135261,231 @@ První běžný návrat k čistému stavu je vyhodnocený. Víme, jestli místo 
 
 První návrat k čistému stavu má jednu práci: potvrdit, že oprava zmizela do běžného provozu. Když ji lidé používají bez tření, bez starých stop a bez nových datových návyků, není potřeba ji oslavovat další dokumentací. Stačí ji nechat žít.
 
+## Příloha RX: Převod drobného tření po návratu k čistému stavu do servisní korekce
+
+První běžný návrat k čistému stavu může skončit stavem `Drobné tření`. To je záměrně slabší slovo než problém. Neříká, že se celý standard rozpadl, že je potřeba nový workshop nebo že se má znovu otevřít stará karta opravy. Říká jen to, že v jednom konkrétním místě čistý stav ještě potřebuje malou servisní korekci.
+
+Servisní korekce je nejmenší zásah, který odstraní tření bez rozšíření původní změny. Může to být přesnější věta, kratší název, jasnější odkaz, přesun poznámky blíž k místu použití nebo smazání zbytku staré stopy. Nemá přidávat novou šablonu, nový proces ani další kontrolní rituál.
+
+Začněte větou:
+
+```text
+Čistý stav drží, ale při běžném použití zadrhl na tomto jednom místě:
+```
+
+Pokud tuto větu neumíte doplnit konkrétně, korekci ještě nedělejte. Máte spíš dojem než tření. Dojem si můžete poznamenat, ale nemá právo měnit aktuální pracovní místo.
+
+### Rozlište tření od nového signálu
+
+Drobné tření patří do servisní korekce jen tehdy, když splňuje tři podmínky:
+
+1. Objevilo se v aktuálním kanonickém místě.
+2. Brzdí použití už hotové opravy, ne otevírá nové téma.
+3. Dá se odstranit jednou lokální změnou.
+
+Příklad drobného tření:
+
+```text
+Člověk našel aktuální kartu, ale u pole "Co se neotevírá" váhal, jestli má vypsat i nové nápady mimo původní opravu.
+```
+
+Tohle je dobrý kandidát na servisní korekci. Stačí zpřesnit popis pole nebo přidat krátký příklad. Neřešíte nový proces, jen pomáháte aktuálnímu místu fungovat bez vysvětlování.
+
+Příklad nového signálu:
+
+```text
+Tým chce stejný princip používat i pro zákaznické onboardovací šablony.
+```
+
+To už není drobné tření v čistém stavu. Je to možné rozšíření použití a patří do samostatné karty změny. Kdybyste ho přilepili do servisní korekce, malý úklid by se potichu změnil v produktovou ambici. A takhle přesně vznikají dokumenty, které se tváří úsporně, ale bobtnají po stranách.
+
+### Najděte nejbližší pracovní místo
+
+Servisní korekce má proběhnout tam, kde člověk skutečně narazil. Ne v části, která je autorsky nejpohodlnější, ne v historickém popisu a ne v dalším vysvětlujícím dodatku na konci. Pokud tření vzniklo v poli karty, opravte pole karty. Pokud vzniklo v nadpisu, opravte nadpis. Pokud vzniklo v odkazu, opravte odkaz.
+
+Krátká mapa zásahu:
+
+```text
+Kde tření vzniklo:
+Jak se projevilo:
+Co člověk potřeboval vědět:
+Nejbližší pracovní místo:
+Jedna servisní korekce:
+Co se kvůli tomu neotevírá:
+```
+
+Vyplněný příklad:
+
+```text
+Kde tření vzniklo:
+V kartě prvního návratu po uzavřené hotové opravě.
+
+Jak se projevilo:
+Pole "Co teď neotevíráme" bylo vyplněné moc obecně.
+
+Co člověk potřeboval vědět:
+Že má zapsat konkrétní hranici původní opravy, ne celý seznam zakázaných témat.
+
+Nejbližší pracovní místo:
+Popis pole v kartě.
+
+Jedna servisní korekce:
+Přejmenovat pole na "Co z původní opravy teď neotevíráme".
+
+Co se kvůli tomu neotevírá:
+Neměníme celou kartu ani rozhodovací stavy návratu.
+```
+
+Tento zápis vypadá až směšně malý. To je dobře. Servisní korekce má být menší než potřeba svolat schůzku. Když k ní potřebujete velkou debatu, pravděpodobně už nejde o servis.
+
+### Napište korekční větu před editací
+
+Před samotnou úpravou napište jednu korekční větu. Slouží jako brzda rozsahu. Když ji neumíte napsat krátce, zásah je nejasný.
+
+Šablona:
+
+```text
+Upravujeme [místo], aby [uživatel pracovního místa] při [situace] nemusel [tření].
+```
+
+Příklady:
+
+```text
+Upravujeme název pole v návratové kartě, aby člověk při běžném review nemusel hádat, jestli zapisuje hranici původní opravy nebo nové nápady.
+```
+
+```text
+Upravujeme odkaz na kanonické místo, aby tým při dalším použití neskončil ve staré servisní poznámce.
+```
+
+```text
+Mažeme zbytečný historický příklad, aby aktuální pravidlo nepůsobilo jako jedna z více rovnocenných možností.
+```
+
+Korekční věta nemá znít jako "vylepšíme srozumitelnost". To je mlha. Má říct, kdo narazil, kde narazil a jak mu korekce pomůže dokončit stejnou práci bez další podpory.
+
+### Proveďte jen jednu korekci
+
+Při drobném tření bývá největší riziko přehnaná ochota. Jakmile je soubor otevřený, láká přepsat i sousední větu, sjednotit tři nadpisy a opravit starší příklad. Jenže servisní korekce má zachovat důvěru v čistý stav. Čtenář nemá při dalším použití potkat jiný nástroj, jen o chlup jasnější místo.
+
+Dobré typy servisní korekce:
+
+- zpřesnit jedno pole;
+- přejmenovat jeden nadpis;
+- přesunout jednu poznámku blíž k použití;
+- smazat jednu starou stopu;
+- přidat jeden krátký příklad;
+- opravit jeden odkaz nebo směrovku.
+
+Špatné typy servisní korekce:
+
+- přidat novou podkapitolu kvůli jednomu zaváhání;
+- vytvořit další kartu pro stejnou situaci;
+- změnit rozhodovací stavy bez nového důkazu;
+- přidat měření používání jen proto, že někdo jednou zaváhal;
+- opravovat historické části, které při návratu nikdo nepoužil.
+
+Codyho komentář: servisní korekce je údržbářská práce, ne autorská exhibice. Když po ní nikdo nepozná velkou změnu, ale další člověk už nezakopne, mise splněna. Trochu neokázalé, ale účty za chaos to platí spolehlivě.
+
+### Privacy-first servisní korekce
+
+Drobná korekce nesmí zvětšit datovou stopu. Nepotřebujete nahrávku obrazovky, jmenný seznam lidí, kteří zaváhali, ani export interní komunikace. Stačí popsat pracovní tření anonymně a po provedení smazat dočasný podklad.
+
+Privacy-first kontrola před korekcí:
+
+- Umíme tření popsat bez osobních údajů?
+- Stačí pracovní výstup místo záznamu chování konkrétního člověka?
+- Nezavádíme nové sledování kvůli jedné malé korekci?
+- Mažeme po korekci dočasnou poznámku?
+- Neobsahuje příklad zákaznický detail, který není potřeba?
+- Zůstává aktuální pracovní místo jediným zdrojem pravdy?
+
+Pokud korekce souvisí se starou datovou stopou, opravte nejdřív stopu, ne text okolo ní. Například když tým pořád používá starý export, protože je v poznámce viditelnější než aktuální pravidlo, samotné přepsání věty nestačí. Nejmenší správná korekce může být přesun aktuálního odkazu a archivace starého exportu.
+
+### Karta servisní korekce po návratu k čistému stavu
+
+```text
+Čistý stav:
+Kanonické pracovní místo:
+Drobné tření:
+Kde přesně vzniklo:
+Korekční věta:
+Jedna servisní korekce:
+Co se neotevírá:
+Privacy-first poznámka:
+Co mažeme nebo archivujeme:
+Ověření při dalším použití:
+```
+
+Vyplněný příklad:
+
+```text
+Čistý stav:
+Návratová karta po uzavřené hotové opravě.
+
+Kanonické pracovní místo:
+Pole "Co teď neotevíráme".
+
+Drobné tření:
+Člověk zapsal obecný seznam nápadů místo hranice původní opravy.
+
+Kde přesně vzniklo:
+V názvu pole a krátkém popisu pod kartou.
+
+Korekční věta:
+Upravujeme název pole, aby člověk při návratu zapsal hranici původní opravy, ne celý seznam nových témat.
+
+Jedna servisní korekce:
+Přejmenovat pole na "Co z původní opravy teď neotevíráme" a přidat jeden krátký příklad.
+
+Co se neotevírá:
+Neměníme rozhodovací stavy návratu ani starší přílohy.
+
+Privacy-first poznámka:
+Používáme anonymizovaný popis zaváhání, ne jméno člověka ani citaci z interní poznámky.
+
+Co mažeme nebo archivujeme:
+Dočasný zápis z návratu po propsání korekce do kanonického místa.
+
+Ověření při dalším použití:
+Při příštím přirozeném návratu ověřit, zda pole vede k jedné konkrétní hranici.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kartu prvního návratu a najděte stav `Drobné tření`.
+2. Minuta 2: pojmenujte místo, kde tření vzniklo.
+3. Minuta 3: napište korekční větu.
+4. Minuta 4: vyberte jednu servisní korekci.
+5. Minuta 5: zapište, co se kvůli tomu neotevírá.
+6. Minuta 6: smažte nebo anonymizujte dočasný podklad.
+
+Výstup workshopu:
+
+```text
+Drobné tření je převedené do jedné servisní korekce. Víme, kde se upravuje, proč právě tam, co zůstává mimo rozsah a jak se korekce ověří při dalším běžném použití.
+```
+
+### Checklist kapitoly
+
+- Jde opravdu o drobné tření, ne o nový signál?
+- Vzniklo tření v aktuálním kanonickém místě?
+- Dá se odstranit jednou lokální změnou?
+- Je napsaná korekční věta před editací?
+- Víme, které pracovní místo upravujeme?
+- Neotevíráme starou kartu opravy jen proto, že máme chuť dopsat historii?
+- Nepřidáváme novou šablonu, proces ani měření?
+- Je jasné, co se kvůli korekci výslovně neotevírá?
+- Popis tření neobsahuje osobní ani zákaznické detaily?
+- Mažeme nebo archivujeme dočasný podklad po propsání korekce?
+- Zůstává jeden aktuální zdroj pravdy?
+- Má ověření přirozený pracovní okamžik?
+
+Servisní korekce je dobrý konec malého tření. Nezvětšuje systém, jen mu ubírá ostrou hranu. Když ji držíte malou, čistý stav zůstane čistý a tým nemusí kvůli jednomu zaváhání znovu rozjíždět celou mašinu.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha RX o převodu drobného tření po návratu k čistému stavu do jedné servisní korekce: rozlišení tření od nového signálu, nejbližší pracovní místo, korekční věta, jedna lokální úprava, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RW o prvním běžném návratu k čistému stavu po uzavřené hotové opravě: skutečné použití, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first návrat bez nového dozoru, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RV o uzavření potvrzené hotové opravy do čistého pracovního stavu: výsledek ověření, aktuální pracovní věta, kanonické místo, zavření starých stop, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RU o ověření hotové minimální opravy při dalším běžném použití: reálné použití, signály průchodu, samostatnosti a datové stopy, čtyři rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
