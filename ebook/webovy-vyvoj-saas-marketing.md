@@ -136280,8 +136280,225 @@ Dozvuk po prvním návratu je uklizený jednou úklidovou opravou. Pravidlo zůs
 
 Úklid dozvuku má být malý a definitivní. Když po něm zůstane méně odkazů, méně starých podkladů a stejné stabilní pravidlo, práce se povedla. Ne každá dobrá iterace musí přidat nový obsah. Někdy je nejlepší výsledek ten, že se jedna stará věc už příště nikomu nepřiplete pod ruce.
 
+## Příloha SC: Ověření úklidové opravy při dalším běžném průchodu
+
+Úklidová oprava z přílohy SB je hotová až ve chvíli, kdy ji přežije další běžný průchod. Nestačí, že starý odkaz zmizel, export byl smazán nebo archiv dostal správný štítek. Potřebujete ještě vědět, jestli člověk při další práci opravdu dojde k aktuálnímu místu, nepotřebuje starou stopu a úklid mu omylem nevzal kontext, který měl zůstat.
+
+Tahle příloha není kontrola všech archivů. Je to malý test jedné věci: jestli úklid dozvuku zjednodušil pracovní trasu, aniž by z ní udělal detektivku. Když je výsledek čistý, nic dalšího nepřidávejte. Dobře uklizená stopa se neoslavuje novou tabulkou. To by bylo jako koupit si další poličku na důkaz, že máte uklizeno.
+
+Začněte větou:
+
+```text
+Ověřujeme, jestli po úklidové opravě vede běžný průchod na aktuální pracovní místo bez staré stopy a bez ztráty potřebného kontextu.
+```
+
+Pokud věta nejde napsat bez slov "a rovnou zkontrolujeme celý systém", rozsah je moc velký. Ověření úklidu se má držet stejné pracovní trasy, ve které dozvuk vznikl.
+
+### Vraťte se stejnou vstupní cestou
+
+Ověření má použít stejný typ vstupu, který dřív odhalil dozvuk. Pokud byl problém v interním indexu, začněte indexem. Pokud ve starém úkolu, začněte úkolem. Pokud v dočasném exportu v pracovní složce, začněte složkou. Neměňte testovací trasu jen proto, že znáte správnou odpověď.
+
+Krátká vstupní kontrola:
+
+```text
+Původní stará stopa:
+
+Běžná vstupní cesta:
+
+Úklidová oprava:
+
+Dnešní průchod začíná ve stejném místě:
+Ano / Ne
+```
+
+Dobré ověření:
+
+- člověk otevře interní index a najde jen aktuální odkaz;
+- stará karta je v archivu a nevypadá jako aktivní varianta;
+- dočasný export už není v běžné složce;
+- starý komentář odkazuje na aktuální stav nebo je zavřený;
+- pracovní místo jde použít bez hledání historie úklidu.
+
+Slabé ověření:
+
+- autor otevře přímo správnou kartu a prohlásí trasu za čistou;
+- tým kontroluje jiný vstup než ten, kde stopa vznikla;
+- stará stopa je sice pryč, ale lidé ji pořád mají v záložkách;
+- aktuální místo funguje jen díky ústnímu vysvětlení;
+- ověření vytvoří nový export nebo screenshot jako "důkaz".
+
+Smyslem není nachytat úklid při chybě. Smyslem je zjistit, jestli se běžná práce přestala potkávat se starým materiálem.
+
+### Sledujte tři signály čisté trasy
+
+První signál je vstup. Člověk má začít běžnou cestou a skončit u aktuálního pracovního místa. Pokud se po úklidu objeví slepý odkaz, chybějící přesměrování nebo nejistota, úklid nebyl dokončený.
+
+Otázka:
+
+```text
+Vede běžná vstupní cesta přímo k aktuálnímu pracovnímu místu?
+```
+
+Druhý signál je kontext. Odstraněná stopa nesmí být jediným místem, kde byl potřebný význam. Pokud po smazání starého komentáře lidé nevědí, co znamená aktuální pole, problém nebyl ve stopě, ale v pracovním místě.
+
+Otázka:
+
+```text
+Jde pracovní místo použít bez otevření staré stopy?
+```
+
+Třetí signál je datová stopa. Úklid má zmenšit množství zbytečných podkladů, ne je jen přesunout jinam. Pokud starý export zmizel z běžné složky, ale někdo ho zkopíroval do nové "pro jistotu" složky, práce se nepovedla. Jen si převlékla kabát.
+
+Otázka:
+
+```text
+Nevznikla kvůli úklidu nová dočasná nebo citlivá stopa?
+```
+
+Tyto tři signály drží ověření malé. Neřešíte krásu textu, kompletnost archivu ani všeobecnou spokojenost týmu. Řešíte trasu, kontext a data.
+
+### Rozlišujte čtyři výsledky ověření
+
+Po průchodu vyberte jeden stav:
+
+```text
+Čisté:
+Běžná trasa vede na aktuální místo, stará stopa nepřekáží a kontext nechybí.
+
+Stopa se vrátila:
+Stará věc je pořád dostupná v běžné trase nebo ji lidé používají ze zvyku.
+
+Úklid vzal kontext:
+Stopa zmizela, ale s ní zmizelo i něco, co mělo být v aktuálním pracovním místě.
+
+Nový signál:
+Průchod odhalil jiné téma než původní dozvuk. Zapíšeme ho odděleně.
+```
+
+Stav `Čisté` je konec smyčky. Zapište ho jednou větou a nepřidávejte další kontrolu. Pokud se později objeví skutečný návratový signál, otevřete novou malou smyčku. Do té doby nechte místo pracovat.
+
+Stav `Stopa se vrátila` neznamená automaticky změnu pravidla. Nejdřív zjistěte, odkud se vrátila: záložka, sdílený dokument, starý úkol, interní wiki, uložený odkaz v šabloně, nebo lidský zvyk. Opravte nejbližší vstupní místo, ne celé okolí.
+
+Stav `Úklid vzal kontext` je důležitější. Znamená, že stará stopa plnila skrytý účel. Vraťte potřebný význam do aktuálního pracovního místa, ale nevracejte celou starou historii. Cílem je zachránit kontext, ne obnovit nepořádek.
+
+Stav `Nový signál` patří mimo tuto smyčku. Může být užitečný, ale nesmí přepsat závěr o úklidu. Jinak by každá kontrola čistoty skončila novou přestavbou. To je spolehlivý způsob, jak nemít nikdy uklizeno ani hotovo.
+
+### Privacy-first ověření po úklidu
+
+Ověření úklidové opravy má potvrdit, že datová stopa se zmenšila nebo zůstala pod kontrolou. Nesmí kvůli tomu vzniknout nový balík důkazů, který bude za měsíc dalším dozvukem.
+
+Privacy-first pravidlo:
+
+```text
+Ověření úklidu dokumentujeme jen krátkým stavem. Nevyrábíme nové exporty, screenshoty ani kopie starých podkladů, pokud nejsou nutné pro konkrétní blokaci.
+```
+
+Pět otázek:
+
+- Zmizela stará stopa z běžné pracovní trasy?
+- Pokud zůstala v archivu, je jasně označená a má retenční důvod?
+- Nepotřebovali jsme pro ověření otevřít osobní nebo zákaznické detaily?
+- Nevznikla nová kopie starého podkladu "pro jistotu"?
+- Je výsledek ověření anonymní a kratší než původní úklidová karta?
+
+Pokud odpověď na poslední otázku zní ne, zapisujete moc. Úklidová smyčka má po sobě nechat méně materiálu, ne podrobnější muzeum toho, proč jste něco smazali.
+
+Codyho komentář: privacy-first úklid má jednu nepopulární vlastnost: někdy opravdu smaže věci. Ne "přesunout do složky možná někdy", ne "zazipovat a zapomenout", ale odstranit stopu, která už nemá účel. V byznysu i v datech je překvapivě často nejlevnější funkcí tlačítko delete.
+
+### Karta ověření úklidové opravy
+
+```text
+Pracovní místo:
+Původní dozvuk:
+Úklidová oprava:
+Běžná vstupní cesta:
+Kdo trasu prošel / role:
+Signál vstupu:
+Signál kontextu:
+Signál datové stopy:
+Výsledek:
+Co případně opravujeme:
+Co výslovně neotevíráme:
+Retenční poznámka:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Karta prvního návratu po servisní korekci.
+
+Původní dozvuk:
+Interní index vedl na starou servisní kartu.
+
+Úklidová oprava:
+Starý odkaz byl nahrazen odkazem na aktuální pracovní místo a duplicitní komentář byl odstraněn.
+
+Běžná vstupní cesta:
+Interní index standardů.
+
+Kdo trasu prošel / role:
+Marketing owner.
+
+Signál vstupu:
+Z indexu otevřel aktuální kartu bez mezikroku.
+
+Signál kontextu:
+Kartu použil bez staré servisní historie.
+
+Signál datové stopy:
+Neotevřel archiv ani dočasný export.
+
+Výsledek:
+Čisté.
+
+Co případně opravujeme:
+Nic.
+
+Co výslovně neotevíráme:
+Neměníme text aktuální karty ani strukturu indexu.
+
+Retenční poznámka:
+Archiv staré servisní karty zůstává mimo běžnou trasu a neobsahuje zákaznické detaily.
+```
+
+Karta má být poslední malý záznam, ne začátek další dokumentace. Pokud výsledek zní `Čisté`, stačí ho uložit k původní úklidové opravě a smyčku zavřít.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte původní dozvuk a úklidovou opravu.
+2. Minuta 2: projděte stejnou běžnou vstupní cestu, kde se stopa objevila.
+3. Minuta 3: ověřte, že aktuální místo jde použít bez staré stopy.
+4. Minuta 4: zkontrolujte, že nevznikla nová dočasná nebo citlivá stopa.
+5. Minuta 5: vyberte stav `Čisté`, `Stopa se vrátila`, `Úklid vzal kontext` nebo `Nový signál`.
+
+Výstup workshopu:
+
+```text
+Úklidová oprava byla ověřena při běžném průchodu. Víme, jestli je trasa čistá, stará stopa se vrátila, úklid vzal potřebný kontext, nebo vznikl nový oddělený signál.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme stejnou pracovní trasu, ve které vznikl dozvuk?
+- Začali jsme běžnou vstupní cestou, ne přímo správnou odpovědí?
+- Vede trasa na aktuální pracovní místo bez staré stopy?
+- Nezůstal starý odkaz, záložka, komentář nebo export v běžném použití?
+- Jde pracovní místo použít bez znalosti úklidové historie?
+- Nevzal úklid potřebný kontext, který měl být v aktuálním místě?
+- Nevytvořili jsme kvůli ověření nový export, screenshot nebo kopii starého podkladu?
+- Pokud stopa zůstává v archivu, má důvod, vlastníka a retenční poznámku?
+- Vybrali jsme jeden ze čtyř stavů ověření?
+- Pokud se stopa vrátila, opravujeme nejbližší vstupní místo?
+- Pokud úklid vzal kontext, vracíme jen potřebný význam, ne celou historii?
+- Pokud vznikl nový signál, zapisujeme ho odděleně?
+- Je záznam ověření krátký a bez osobních nebo zákaznických detailů?
+
+Ověření úklidové opravy je úspěšné, když se práce zkrátí a záznamy nenarostou. Čistá trasa se pozná jednoduše: člověk začne tam, kde běžně začíná, dojde tam, kam má, a po cestě nepotká starý materiál, který už nemá rozhodovat.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SC o ověření úklidové opravy při dalším běžném průchodu: stejná vstupní cesta, signály čisté trasy, čtyři výsledné stavy, privacy-first ověření bez nových podkladů, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SB o převodu dozvuku po prvním návratu do jedné úklidové opravy: potvrzení funkčního pravidla, výběr jedné staré stopy, rozlišení úklidu od ediční změny, privacy-first mazání a archivace, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SA o prvním běžném návratu po uzavřené servisní korekci: reálné použití jako spouštěč, signály nalezení, použití a datové stopy, stavy klid, dozvuk, lokální drhnutí a nový signál, privacy-first návrat bez obnovy starých podkladů, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RZ o uzavření ověřené servisní korekce do stabilního pracovního místa: aktuální pracovní věta, zavření servisní karty, návratový signál, úklid starých stop, privacy-first retence, karta, mini workshop a checklist.
