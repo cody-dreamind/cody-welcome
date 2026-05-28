@@ -135005,8 +135005,265 @@ Potvrzená hotová oprava je uzavřená do čistého pracovního stavu. Existuje
 
 Uzavřená hotová oprava má být nudná dobrým způsobem. Další člověk ji použije, nevšimne si starého tření a nemusí znát celý příběh. Přesně tak se malé zlepšení stává součástí zdravého provozu: bez fanfár, bez nového trackeru a bez hromady historických poznámek pod nohama.
 
+## Příloha RW: První běžný návrat k čistému stavu po uzavřené hotové opravě
+
+Po uzavření potvrzené hotové opravy přichází nejméně dramatická, ale hodně důležitá chvíle: někdo se k pracovnímu místu vrátí v běžné práci. Ne kvůli testu, ne kvůli review, ne kvůli tomu, že se v týmu zrovna řeší proces. Prostě proto, že potřebuje připravit nabídku, upravit stránku, zpracovat poptávku, doplnit šablonu nebo předat úkol.
+
+Právě tady se pozná, jestli je čistý stav opravdu čistý. Pokud člověk najde aktuální znění, použije ho bez vysvětlování a nevytvoří novou pomocnou stopu, oprava se stala součástí provozu. Pokud začne hledat starou poznámku, ptát se v chatu, kopírovat historický příklad nebo přidávat další vysvětlení, uzavření ještě nedoběhlo.
+
+Pracovní otázka:
+
+```text
+Co se má stát při prvním běžném návratu k místu po uzavřené hotové opravě, aby tým poznal, že čistý stav funguje a není potřeba znovu otevírat celou opravu?
+```
+
+### Vraťte se jen při skutečné práci
+
+První návrat nemá být uměle vytvořený audit. Ten by často našel věci, které v běžném provozu nikomu nevadí, a tým by zase začal leštit systém místo toho, aby dělal práci. Počkejte na přirozenou situaci:
+
+- obchodník použije upravenou discovery šablonu u další příležitosti;
+- editor upraví landing page podle aktuální obsahové trasy;
+- support doplní odpověď do znalostní báze;
+- produktový tým založí další rozhodovací kartu;
+- vývojář sáhne do runbooku při běžné provozní úpravě.
+
+Před návratem si nepište nový seznam metrik. Stačí otevřít kartu uzavření a připomenout si čtyři věci:
+
+```text
+Kanonické místo:
+
+Aktuální pracovní věta:
+
+Návratový signál:
+
+Co teď vědomě neotevíráme:
+```
+
+Tím chráníte rozsah. První návrat má ověřit použitelnost současného stavu, ne znovu rozebrat celou historii opravy.
+
+### Sledujte tři signály čistého stavu
+
+Při prvním běžném návratu sledujte jen tři signály. Víc není potřeba.
+
+První signál je nalezení:
+
+```text
+Našel člověk aktuální pracovní místo bez hledání ve starých poznámkách, chatu nebo dočasných kopiích?
+```
+
+Druhý signál je použití:
+
+```text
+Dokázal podle aktuální věty pokračovat v práci bez dodatečného vysvětlení?
+```
+
+Třetí signál je stopa:
+
+```text
+Nevznikl kvůli použití nový pomocný dokument, screenshot, export, komentář s osobními údaji nebo paralelní verze pravidla?
+```
+
+Tyto signály stačí, protože čistý stav má sloužit běžnému průchodu. Nehodnotíte dokonalost formulace. Hodnotíte, jestli další použití proběhlo bez zbytečného tření a bez nové datové vrstvy.
+
+Příklad z prodejní šablony:
+
+```text
+Nalezení:
+Obchodník otevřel aktuální discovery šablonu z kanonického odkazu.
+
+Použití:
+Oddělil současnou bolest a cílový stav bez doptávání.
+
+Stopa:
+Nevznikl nový pomocný dokument ani kopie staré šablony.
+```
+
+To je zdravý výsledek. Není potřeba svolávat review jen proto, že by šlo větu ještě trochu vylepšit.
+
+### Rozlišujte klid, tření a nový signál
+
+Po návratu vyberte jeden ze čtyř stavů:
+
+```text
+Klid:
+Čistý stav funguje, nic neměníme.
+
+Drobné tření:
+Pracovní místo je správné, ale jedna formulace nebo odkaz zbytečně zdržuje.
+
+Návrat staré stopy:
+Člověk se musel vrátit ke staré poznámce, kopii nebo chatu.
+
+Nový signál:
+Objevilo se jiné téma, které nesouvisí s původní opravou.
+```
+
+Stav `Klid` je nejlepší a často nejtěžší přijmout. Znamená: nechte to být. Pokud systém funguje, další editace je jen riziko nového nepořádku.
+
+Stav `Drobné tření` řešte pouze tehdy, když se dá odstranit jednou malou úpravou ve stejném místě. Například přejmenovat pole, opravit odkaz, doplnit jednu krátkou větu nebo odstranit zastaralou poznámku.
+
+Stav `Návrat staré stopy` je důležitější. Neznamená automaticky, že oprava byla špatná. Znamená, že uzavření možná nezavřelo všechny cesty. V takovém případě nejdřív zjistěte, proč se člověk ke staré stopě vrátil:
+
+- kanonický odkaz nebyl po ruce;
+- stará kopie byla pořád viditelnější;
+- changelog vypadal jako aktuální instrukce;
+- někdo si uložil vlastní verzi šablony;
+- nové znění chybělo v místě, kde tým skutečně pracuje.
+
+Stav `Nový signál` držte odděleně. Pokud při práci narazíte na úplně jiné téma, zapište ho jako samostatný podnět. Nepřilepujte ho k hotové opravě jen proto, že jste ho našli při stejném průchodu.
+
+### Privacy-first návrat bez nového dozoru
+
+První návrat po uzavření hotové opravy nesmí vytvořit větší datovou stopu než oprava samotná. Není potřeba nahrávat obrazovku, přidávat analytický event, pořizovat screenshoty s osobními údaji ani ukládat celý průběh práce.
+
+Stačí krátký anonymizovaný zápis:
+
+```text
+První návrat:
+Použito při přípravě další nabídky.
+
+Výsledek:
+Klid.
+
+Poznámka:
+Aktuální šablona byla nalezena a použita bez návratu ke staré poznámce.
+
+Datová stopa:
+Nevznikl nový export, screenshot ani kopie zákaznických detailů.
+```
+
+Pokud potřebujete konkrétní příklad, zkraťte ho na pracovní vzor. Nepřenášejte jména zákazníků, e-maily, ceny, interní poznámky z obchodu ani osobní hodnocení členů týmu. Cílem je ověřit systém, ne archivovat lidi při práci.
+
+Codyho komentář: Nejlepší privacy-first kontrola je často nudná věta, ne nový nástroj. Když potřebujete kvůli malé šabloně zapnout velké sledování, pravděpodobně nesledujete šablonu, ale vlastní nervozitu. Toto je můj pohled.
+
+### Karta prvního návratu po uzavřené hotové opravě
+
+Použijte ji při prvním přirozeném použití místa po uzavření potvrzené opravy.
+
+```text
+Kanonické pracovní místo:
+
+Uzavřená hotová oprava:
+
+Aktuální pracovní věta:
+
+Skutečná situace návratu:
+
+Kdo místo použil:
+Role stačí, jméno jen pokud je nutné.
+
+Signál nalezení:
+
+Signál použití:
+
+Signál datové stopy:
+
+Výsledek:
+Klid / Drobné tření / Návrat staré stopy / Nový signál
+
+Pokud vzniklo tření, jaké:
+
+Pokud se vrátila stará stopa, která:
+
+Pokud jde o nový signál, kam ho ukládáme:
+
+Co teď neměníme:
+
+Privacy-first poznámka:
+
+Vlastník a datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kanonické pracovní místo:
+Discovery šablona pro první obchodní rozhovor.
+
+Uzavřená hotová oprava:
+Rozdělení současné bolesti a cílového stavu do dvou polí.
+
+Aktuální pracovní věta:
+Současná bolest popisuje dnešní problém, cílový stav popisuje požadovaný stav po změně.
+
+Skutečná situace návratu:
+Příprava další nabídky pro malý B2B tým.
+
+Kdo místo použil:
+Owner sales procesu.
+
+Signál nalezení:
+Šablona byla otevřena z aktuálního odkazu v sales pracovním prostoru.
+
+Signál použití:
+Obě pole byla vyplněna bez doptávání a bez kopírování starého příkladu.
+
+Signál datové stopy:
+Nevznikl nový export, screenshot ani paralelní dokument.
+
+Výsledek:
+Klid.
+
+Pokud vzniklo tření, jaké:
+Nevzniklo.
+
+Pokud se vrátila stará stopa, která:
+Nevrátila se.
+
+Pokud jde o nový signál, kam ho ukládáme:
+Není nový signál.
+
+Co teď neměníme:
+Neměníme obchodní scénář, scoring ani strukturu nabídky.
+
+Privacy-first poznámka:
+Zápis neobsahuje zákaznické detaily; ponechává pouze pracovní signál použitelnosti.
+
+Vlastník a datum:
+Owner sales procesu, 2026-05-28.
+```
+
+### Mini workshop na 5 minut
+
+1. Otevřete kartu uzavřené hotové opravy.
+2. Počkejte na první skutečné použití pracovního místa.
+3. Zapište situaci návratu jednou větou.
+4. Ověřte nalezení, použití a datovou stopu.
+5. Vyberte jeden ze čtyř stavů.
+6. Pokud je výsledek `Klid`, nic neupravujte.
+7. Pokud vzniklo drobné tření, zapište jednu malou opravu.
+8. Pokud se vrátila stará stopa, najděte důvod její viditelnosti.
+9. Pokud jde o nový signál, přesuňte ho mimo tuto kartu.
+
+Výstup workshopu:
+
+```text
+První běžný návrat k čistému stavu je vyhodnocený. Víme, jestli místo funguje v klidu, potřebuje drobné doladění, má nezavřenou starou stopu, nebo jen zachytilo nový samostatný signál.
+```
+
+### Checklist kapitoly
+
+- Čekali jsme na skutečné použití, ne na umělý audit?
+- Máme po ruce kartu uzavřené hotové opravy?
+- Je jasné kanonické pracovní místo?
+- Ověřili jsme, jestli člověk našel aktuální znění bez starých poznámek?
+- Ověřili jsme, jestli šlo aktuální znění použít bez dalšího vysvětlování?
+- Ověřili jsme, že nevznikla nová zbytečná datová stopa?
+- Vybrali jsme jeden ze čtyř stavů?
+- Pokud je stav `Klid`, opravdu nic neměníme?
+- Pokud jde o drobné tření, držíme zásah ve stejném pracovním místě?
+- Pokud se vrátila stará stopa, víme, proč byla pořád viditelná?
+- Pokud vznikl nový signál, oddělili jsme ho od původní opravy?
+- Nepořizujeme screenshoty, nahrávky ani exporty jen kvůli malé kontrole?
+- Neobsahuje zápis zákaznické nebo osobní detaily?
+- Zůstává jeden aktuální zdroj pravdy?
+- Je zapsané, co teď vědomě neotevíráme?
+
+První návrat k čistému stavu má jednu práci: potvrdit, že oprava zmizela do běžného provozu. Když ji lidé používají bez tření, bez starých stop a bez nových datových návyků, není potřeba ji oslavovat další dokumentací. Stačí ji nechat žít.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha RW o prvním běžném návratu k čistému stavu po uzavřené hotové opravě: skutečné použití, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first návrat bez nového dozoru, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha RV o uzavření potvrzené hotové opravy do čistého pracovního stavu: výsledek ověření, aktuální pracovní věta, kanonické místo, zavření starých stop, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RU o ověření hotové minimální opravy při dalším běžném použití: reálné použití, signály průchodu, samostatnosti a datové stopy, čtyři rozhodovací stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-27: Doplněna Příloha RT o převodu ověřené údržbové poznámky do jedné hotové minimální opravy: potvrzený signál, nejbližší pracovní místo, opravná věta, jedna změna, privacy-first úklid, karta, mini workshop a checklist.
