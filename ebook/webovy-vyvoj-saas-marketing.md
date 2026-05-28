@@ -136496,8 +136496,237 @@ Výstup workshopu:
 
 Ověření úklidové opravy je úspěšné, když se práce zkrátí a záznamy nenarostou. Čistá trasa se pozná jednoduše: člověk začne tam, kde běžně začíná, dojde tam, kam má, a po cestě nepotká starý materiál, který už nemá rozhodovat.
 
+## Příloha SD: Uzavření potvrzené úklidové opravy do stabilního pracovního stavu
+
+Když příloha SC potvrdí stav `Čisté`, úklidová oprava nemá pokračovat dalším malým projektem. Má se uzavřít. Stabilní pracovní stav znamená, že aktuální místo je použitelné, stará stopa není v běžné trase, potřebný kontext zůstal zachovaný a tým ví, kdy by se k tématu měl vrátit. Nic víc se po uklizené smyčce nevyžaduje.
+
+Tahle příloha je pro okamžik, kdy už máte ověření v ruce a hrozí běžná past: ještě trochu doladit text, ještě projít okolní odkazy, ještě pro jistotu zkontrolovat archiv, ještě z toho udělat obecnější pravidlo. Někdy je to užitečné. Tady většinou ne. Pokud úklid funguje, nejlepší další krok je zavřít ho tak, aby nepřerostl v novou údržbovou disciplínu.
+
+Začněte větou:
+
+```text
+Úklidová oprava je potvrzená. Aktuální pracovní stav zůstává v platnosti a stará stopa se nevrací do běžné trasy.
+```
+
+Pokud se věta nedá napsat, protože pořád nevíte, jestli je trasa čistá, vraťte se do ověření. Pokud se nedá napsat proto, že chcete rovnou opravit další okolní věci, zapište je odděleně. Uzavření potvrzeného úklidu není generální úklid celého domu. Je to zavření jedné skříně, která už konečně nevrže.
+
+### Začněte výsledkem ověření
+
+Neuzavírejte úklid podle pocitu autora opravy. Uzavírejte ho podle výsledku z přílohy SC. Stav `Čisté` znamená, že běžná vstupní cesta vede na aktuální místo, stará stopa nepřekáží, pracovní kontext nechybí a kvůli ověření nevznikla nová zbytečná datová stopa.
+
+Krátká kontrola před uzavřením:
+
+```text
+Výsledek ověření:
+Čisté / Stopa se vrátila / Úklid vzal kontext / Nový signál
+
+Uzavíráme pouze pokud:
+Výsledek je Čisté.
+```
+
+Pokud výsledek není `Čisté`, tuto přílohu nepoužívejte jako způsob, jak si práci odškrtnout. Stav `Stopa se vrátila` potřebuje opravu vstupního místa. Stav `Úklid vzal kontext` potřebuje vrátit význam do aktuálního pracovního místa. Stav `Nový signál` potřebuje oddělený zápis a klidně i samostatnou budoucí smyčku.
+
+Dobré uzavření stojí na větě:
+
+```text
+Ověřená trasa funguje bez staré stopy a bez ztráty kontextu.
+```
+
+Slabé uzavření zní:
+
+- "Vypadá to hotově."
+- "Nikdo si zatím nestěžoval."
+- "Autor opravy říká, že to smazal."
+- "Ještě to necháme otevřené, kdyby náhodou."
+- "Uděláme z toho radši měsíční kontrolu."
+
+Poslední věta je obzvlášť zrádná. Měsíční kontrola zní zodpovědně, ale často jen prodlužuje život problému, který už byl vyřešený. Pokud nemáte konkrétní návratový signál, nevyrábějte kontrolní rytmus jen proto, že zavřít věc působí moc definitivně.
+
+### Přepište aktuální místo, ne historii úklidu
+
+Stabilní stav má být vidět v aktuálním pracovním místě. Ne v dlouhém komentáři o tom, že kdysi existovala stará stopa, potom dozvuk, potom úklidová oprava a potom ověření. Takový popis sice působí poctivě, ale pro běžného člověka je to zbytečný nános.
+
+Upravujte jen to, co pomůže další práci:
+
+- aktuální odkaz v indexu;
+- krátkou pracovní větu v šabloně;
+- stav karty na `Uzavřeno`;
+- retenční poznámku u archivovaného materiálu;
+- odkaz z provozního listu na aktuální zdroj pravdy.
+
+Neopisujte historii do místa, kde člověk potřebuje pracovat rychle. Pokud je historie důležitá pro audit nebo interní vysvětlení, patří k uzavřené kartě nebo do rozhodovacího logu. Běžná trasa má ukazovat aktuální stav.
+
+Praktická věta pro aktuální místo:
+
+```text
+Pro tuto situaci používejte aktuální kartu [název]. Starší servisní materiál je uzavřený a není součástí běžné pracovní trasy.
+```
+
+Tahle věta stačí jen tam, kde by bez ní mohl vzniknout zmatek. Pokud je aktuální místo samo o sobě jasné, nepřidávejte ani ji. Nejlepší vysvětlení je často správný odkaz, správný název a žádný starý materiál vedle.
+
+### Zavřete úklidovou kartu bez nového úkolu
+
+Úklidová karta má po potvrzení dostat konečný stav. Ne `čeká na později`, ne `monitorovat`, ne `možná navázat`. Pokud z ověření nevznikla další nutná oprava, karta se zavře a zůstane jen návratový signál.
+
+Zavírací zápis může být velmi krátký:
+
+```text
+Stav:
+Uzavřeno jako čisté.
+
+Proč:
+Běžná vstupní cesta vede na aktuální pracovní místo bez staré stopy a bez ztráty kontextu.
+
+Návratový signál:
+Téma otevřeme znovu jen tehdy, když se stará stopa objeví v běžné trase nebo někdo nedokáže aktuální místo použít bez ní.
+```
+
+Do stejného zápisu patří i rozhodnutí, co se nestane:
+
+- nevzniká nový pravidelný audit;
+- nepřepisuje se celý index;
+- neobnovuje se stará dokumentace;
+- nevyrábí se nový export pro důkaz;
+- nerozšiřuje se oprava na okolní trasy bez samostatného důvodu.
+
+Tahle negativní rozhodnutí nejsou byrokracie. Chrání tým před tichým nafukováním práce. Když je nezapíšete, někdo velmi schopný a velmi unavený za dva týdny otevře další "malé doladění" a nikdo si nebude jistý, jestli to byla dohoda, nebo jen reflex.
+
+### Nastavte návratový signál místo dozoru
+
+Po potvrzeném úklidu nepotřebujete dohled. Potřebujete podmínku návratu. Rozdíl je jednoduchý: dohled hledá problém pravidelně, návratový signál otevře téma až ve chvíli, kdy se problém znovu potká s běžnou prací.
+
+Dobré návratové signály:
+
+- v běžném indexu se znovu objeví starý odkaz;
+- člověk při použití aktuální karty musí otevřít archiv;
+- nová šablona zkopíruje uzavřený materiál;
+- zákaznický nebo interní podklad se znovu opírá o starou verzi;
+- někdo vytvoří kopii s poznámkou "pro jistotu", protože aktuální místo není srozumitelné.
+
+Slabé návratové signály:
+
+- "až budeme mít čas";
+- "při příštím úklidu všeho";
+- "kdyby se někomu něco nezdálo";
+- "jednou za měsíc otevřít a kouknout";
+- "až budeme předělávat celý systém".
+
+Návratový signál má být konkrétní, pozorovatelný a napojený na práci. Když je moc vágní, buď se nikdy nepoužije, nebo se použije pořád. Obojí je špatně, jen každé jinak otravně.
+
+### Privacy-first stabilizace po úklidu
+
+Privacy-first uzavření znamená, že po úklidu zůstane méně zbytečných datových stop než před ním. Nejde jen o osobní údaje. Jde i o staré exporty, screenshoty, kopie interních komentářů, dočasné tabulky, duplicitní dokumenty a materiály, které už nemají účel.
+
+Stabilizační pravidlo:
+
+```text
+Po potvrzeném úklidu necháváme jen aktuální pracovní místo, nezbytný uzavírací záznam a archivní stopu s jasným retenčním důvodem. Všechno ostatní maže nebo opouští běžnou trasu.
+```
+
+Pět otázek před zavřením:
+
+- Zůstává v běžné trase jen aktuální pracovní místo?
+- Je stará stopa buď smazaná, nebo jasně archivovaná mimo běžné použití?
+- Má archivní stopa důvod, vlastníka a retenční poznámku?
+- Neobsahuje uzavírací záznam osobní nebo zákaznické detaily, které nejsou nutné?
+- Nevznikla nová evidence jen proto, že jsme chtěli dokázat, že jsme uklidili?
+
+Codyho komentář: nejčistší privacy-first výsledek často nevypadá efektně. Žádný dashboard, žádná velká tabulka, žádný nový proces. Jen méně míst, méně kopií a kratší cesta. To je v provozu velmi podceňovaný luxus.
+
+### Karta uzavření potvrzené úklidové opravy
+
+```text
+Pracovní místo:
+Původní dozvuk:
+Úklidová oprava:
+Výsledek ověření:
+Aktuální stav:
+Co zůstává v běžné trase:
+Co je uzavřené nebo odstraněné:
+Co výslovně neotevíráme:
+Návratový signál:
+Retenční poznámka:
+Vlastník aktuálního místa:
+Datum návratu pouze při signálu:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Karta prvního návratu po servisní korekci.
+
+Původní dozvuk:
+Interní index vedl na starou servisní kartu.
+
+Úklidová oprava:
+Index byl přepsán na aktuální kartu a duplicitní komentář byl odstraněn.
+
+Výsledek ověření:
+Čisté.
+
+Aktuální stav:
+Stabilní pracovní místo.
+
+Co zůstává v běžné trase:
+Aktuální karta a kanonický odkaz v indexu.
+
+Co je uzavřené nebo odstraněné:
+Starý komentář je odstraněný, stará servisní karta je mimo běžnou trasu.
+
+Co výslovně neotevíráme:
+Nepřepisujeme okolní karty a nezavádíme měsíční kontrolu indexu.
+
+Návratový signál:
+Téma otevřeme jen tehdy, když index znovu povede na starou kartu nebo aktuální karta nebude použitelná bez archivu.
+
+Retenční poznámka:
+Archivní karta zůstává jen jako historický záznam bez zákaznických detailů.
+
+Vlastník aktuálního místa:
+Marketing owner.
+
+Datum návratu pouze při signálu:
+Bez pevného data; návrat spouští jen konkrétní signál.
+```
+
+Karta je užitečná hlavně tím, že brání dvěma extrémům. První extrém je nezavřít nic a nechat úklid navždy v polostavu. Druhý extrém je smazat všechno tak rychle, že nikdo nepozná, proč se stará stopa nemá vracet. Stabilní stav potřebuje krátkou paměť, ne amnézii.
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek ověření z přílohy SC a potvrďte stav `Čisté`.
+2. Minuta 2: napište jednu větu aktuálního pracovního stavu.
+3. Minuta 3: určete, co zůstává v běžné trase a co je uzavřené nebo odstraněné.
+4. Minuta 4: napište konkrétní návratový signál místo pravidelné kontroly.
+5. Minuta 5: zkontrolujte retenční poznámku a zavřete úklidovou kartu.
+
+Výstup workshopu:
+
+```text
+Potvrzená úklidová oprava je uzavřená. Tým ví, jaké aktuální místo platí, co se nevrací do běžné trasy a při jakém konkrétním signálu se téma znovu otevře.
+```
+
+### Checklist kapitoly
+
+- Uzavíráme jen výsledek `Čisté` z ověření?
+- Je aktuální pracovní místo použitelné bez staré stopy?
+- Přepsali jsme jen aktuální místo, ne celou historii úklidu?
+- Je úklidová karta zavřená konečným stavem?
+- Je jasné, co zůstává v běžné trase?
+- Je jasné, co je odstraněné, archivované nebo mimo běžné použití?
+- Neotevíráme okolní změny bez samostatného důvodu?
+- Máme konkrétní návratový signál místo pravidelného dozoru?
+- Nevznikl nový audit, export nebo kontrolní dokument jen kvůli pocitu jistoty?
+- Je archivní stopa, pokud existuje, označená retenčním důvodem?
+- Neobsahuje uzavírací karta osobní nebo zákaznické detaily navíc?
+- Ví vlastník aktuálního místa, že smyčka je zavřená?
+- Umí tým říct, při jaké události se téma otevře znovu?
+
+Potvrzená úklidová oprava končí stabilním pracovním stavem. To je méně dramatické než velké procesní zlepšení, ale často mnohem cennější: člověk otevře správné místo, starý materiál mu neleze pod ruce a tým nemusí každý měsíc dokazovat, že problém pořád neexistuje.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SD o uzavření potvrzené úklidové opravy do stabilního pracovního stavu: práce s výsledkem ověření, aktuální místo místo historie, zavření úklidové karty, návratový signál místo dozoru, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SC o ověření úklidové opravy při dalším běžném průchodu: stejná vstupní cesta, signály čisté trasy, čtyři výsledné stavy, privacy-first ověření bez nových podkladů, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SB o převodu dozvuku po prvním návratu do jedné úklidové opravy: potvrzení funkčního pravidla, výběr jedné staré stopy, rozlišení úklidu od ediční změny, privacy-first mazání a archivace, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SA o prvním běžném návratu po uzavřené servisní korekci: reálné použití jako spouštěč, signály nalezení, použití a datové stopy, stavy klid, dozvuk, lokální drhnutí a nový signál, privacy-first návrat bez obnovy starých podkladů, karta, mini workshop a checklist.
