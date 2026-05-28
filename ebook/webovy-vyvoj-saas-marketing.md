@@ -29,6 +29,8 @@ Před čtením si zároveň určete stop podmínku: kolik času tomu dáte, jak�
 
 Stop podmínku pište jako hotový stav, ne jako seznam aktivit. "Projít tři kapitoly" ještě neříká, co se změnilo; "vybrat jednu úpravu formuláře a zapsat způsob ověření" už čtení převádí do práce, kterou jde zavřít.
 
+Když se během čtení ukáže, že původní stop podmínka byla příliš široká, neupravujte ji tak, aby pojmula všechno nové. Zapište nové téma stranou a dokončete menší výstup, kvůli kterému jste rukopis otevřeli. Rozsah se má zužovat, ne nenápadně růst.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
