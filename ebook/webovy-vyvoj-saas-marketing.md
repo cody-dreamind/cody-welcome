@@ -139267,8 +139267,248 @@ Potvrzená lokální úprava je uzavřená do čisté pracovní trasy. Běžné 
 
 Uzavření potvrzené lokální úpravy je malý, ale důležitý hygienický krok. Nejde o slavnostní tečku. Jde o to, aby další člověk našel aktuální pracovní místo, udělal správný krok a nemusel přitom procházet servisní historii. Čistá trasa není ta, která nikdy neměla problém. Je to ta, která po opravě umí zase vypadat jednoduše.
 
+## Příloha SQ: První běžný návrat k čisté pracovní trase po uzavřené lokální úpravě
+
+Příloha SP uzavřela potvrzenou lokální úpravu do čisté pracovní trasy. Tím vznikl aktuální zdroj pravdy, zavřely se pomocné stopy a místo pravidelného dozoru zůstal konkrétní návratový signál. Příloha SQ řeší první běžný návrat po takovém uzavření: okamžik, kdy někdo trasu znovu použije v normální práci a tým potřebuje poznat, jestli čistota opravdu vydržela.
+
+Tento návrat není audit. Není to ani hledání dalšího vylepšení. Je to krátké ověření při reálném použití, že uzavřená lokální úprava nezůstala jen hezky zapsaná v kartě, ale opravdu pomáhá člověku projít trasou bez servisní historie.
+
+Začněte větou:
+
+```text
+Čistá pracovní trasa po uzavřené lokální úpravě byla znovu použita. Sledujeme jen to, jestli člověk našel aktuální místo, pochopil další krok a nevytvořil novou zbytečnou datovou stopu.
+```
+
+Pokud se při návratu hned objeví chuť "rovnou to celé trochu vylepšit", zastavte se. První návrat má chránit stabilitu. Nový nápad může být dobrý, ale patří do samostatné změnové karty. Jinak se z uzavřené malé úpravy stane otevřená nekonečná editace, což je v provozu nenápadně drahá zábava.
+
+### Vraťte se jen přirozeným použitím
+
+První návrat má smysl až ve chvíli, kdy trasa opravdu znovu slouží práci. Umělé otevření "pro jistotu" často najde spíš kosmetické preference než skutečné tření. Reálné použití má kontext: někdo potřebuje připravit stránku, vybrat šablonu, odpovědět zákazníkovi, zkontrolovat formulář nebo předat podklad dál.
+
+Dobré spouštěče návratu:
+
+- nový člověk použije index šablon při tvorbě landing page;
+- marketing owner otevře aktuální formulářový popisek při úpravě webu;
+- delivery tým použije checklist pro předání podkladu;
+- produktový člověk hledá správnou rozhodovací kartu;
+- support sáhne po aktuální odpovědi místo staré interní poznámky.
+
+Slabé spouštěče:
+
+- "máme deset minut, pojďme to projít";
+- "nepamatuju si, co jsme tam minule opravili";
+- "když už je to otevřené, mohli bychom přepsat víc věcí";
+- "zkontrolujme všechny podobné trasy najednou";
+- "možná by se hodilo přidat další metriku".
+
+První návrat se má držet stejné pracovní situace, kvůli které úprava vznikla. Pokud původní hrana byla v indexu šablon, nezačínejte auditem celého webu. Pokud šlo o popisek formuláře, nezačínejte redesignem nabídky. Rozsah se má vejít do jednoho průchodu.
+
+### Sledujte tři signály čisté trasy
+
+Při návratu stačí sledovat tři praktické signály. Každý z nich odpovídá na jinou otázku:
+
+1. Nalezení: našel člověk aktuální pracovní místo bez starých odboček?
+2. Pochopení: poznal z něj, co má udělat dál?
+3. Datová stopa: nevznikl kvůli návratu nový zbytečný záznam, screenshot, export nebo seznam?
+
+Tyto signály jsou záměrně malé. Neříkají, jestli je celý systém dokonalý. Říkají, jestli konkrétní uzavřená úprava drží běžnou práci pohromadě.
+
+Příklad dobrého návratu:
+
+```text
+Situace:
+Autor připravuje novou landing page a hledá první kontaktní formulář.
+
+Nalezení:
+Přes index šablon našel aktuální formulář bez otevření archivního příkladu.
+
+Pochopení:
+Z popisku pochopil, že formulář má e-mail, stručný cíl a volitelné URL.
+
+Datová stopa:
+Nevznikl nový screenshot ani kopie starého formuláře. Stačila krátká poznámka v úkolu.
+```
+
+Příklad slabého návratu:
+
+```text
+Situace:
+Tým otevřel index šablon bez konkrétní práce.
+
+Nalezení:
+Prošel několik souvisejících míst, protože "když už jsme tady".
+
+Pochopení:
+Vznikla debata o budoucí verzi formuláře.
+
+Datová stopa:
+Vznikla nová tabulka nápadů, dva screenshoty a kopie starého popisku.
+```
+
+Druhý příklad není katastrofa, ale není to první návrat k čisté trase. Je to nová ediční práce převlečená za kontrolu. Pokud se to stane, oddělte ji jako nový podnět a původní návrat uzavřete podle skutečného výsledku.
+
+### Rozlište čtyři výsledky návratu
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+1. Klid: trasa funguje a není potřeba nic měnit.
+2. Lehký dozvuk: objevila se drobná stopa po starém stavu, ale neblokuje práci.
+3. Lokální tření: člověk narazil na konkrétní větu, odkaz nebo popisek.
+4. Nový signál: ukázal se jiný problém, který nepatří k uzavřené lokální úpravě.
+
+Stav `Klid` je plnohodnotný výsledek. Neznamená "nic jsme neudělali". Znamená, že uzavřená úprava přežila návrat do běžné práce a není potřeba ji dál zatěžovat kontrolami.
+
+Stav `Lehký dozvuk` použijte, když se například někde objeví starý název, ale člověk i tak našel aktuální trasu. Takový dozvuk může stačit zapsat jako úklidovou poznámku nebo malou korekci při nejbližší údržbě.
+
+Stav `Lokální tření` znamená, že je potřeba malá oprava v jednom konkrétním místě. Třeba odkaz vede správně, ale popisek pořád nechává prostor pro špatnou interpretaci. Neotevírejte kvůli tomu celou kapitolu nebo všechny formuláře.
+
+Stav `Nový signál` oddělte od původní úpravy. Pokud se při použití formuláře ukáže problém v kvalifikaci leadu, není to automaticky chyba popisku. Může to být produktový, sales nebo obsahový problém. Dostane vlastní otázku, vlastní rozsah a vlastní privacy-first kontrolu.
+
+### Privacy-first návrat bez nové pozorovací vrstvy
+
+Čistá pracovní trasa nemá být vykoupená tím, že začnete lidi sledovat při každém použití. První návrat lze většinou ověřit obyčejnou pracovní poznámkou: co člověk hledal, jestli to našel, co musel doptat a jestli kvůli tomu vznikla nová datová stopa.
+
+Nesbírejte:
+
+- jmenný seznam všech, kdo trasu použili;
+- nahrávky obrazovky bez jasného důvodu;
+- screenshoty se zákaznickými údaji;
+- exporty formulářů jen kvůli internímu pohodlí;
+- dlouhodobou tabulku mikrokontrol bez rozhodovací hodnoty.
+
+Stačí krátký záznam:
+
+```text
+Návrat:
+První běžné použití po uzavřené lokální úpravě.
+
+Výsledek:
+Klid.
+
+Poznámka:
+Aktuální místo bylo nalezené přes index a použité bez otevření starých podkladů.
+
+Nová data:
+Žádná.
+
+Retence:
+Poznámka zůstává do dalšího review trasy; bez osobních údajů.
+```
+
+Codyho komentář: když malou úpravu ověřujete větším sledováním, než byla samotná změna, něco se utrhlo ze řetězu. Privacy-first provoz má umět poznat, kdy stačí lidská pracovní poznámka a kdy už by další evidence jen vyráběla pocit kontroly.
+
+### Karta prvního návratu k čisté pracovní trase
+
+```text
+Čistá pracovní trasa:
+Uzavřená lokální úprava:
+První běžná situace:
+Kdo trasu použil rolí:
+Aktuální pracovní místo:
+Signál nalezení:
+Signál pochopení:
+Signál datové stopy:
+Výsledek návratu:
+Pokud je klid, co necháváme beze změny:
+Pokud je dozvuk, kde je nejbližší úklid:
+Pokud je lokální tření, jaká je jedna opravná věta:
+Pokud je nový signál, kam ho oddělujeme:
+Nová data po návratu:
+Retenční poznámka:
+Vlastník trasy:
+Návratový signál do budoucna:
+```
+
+Vyplněný příklad:
+
+```text
+Čistá pracovní trasa:
+Index šablon pro nové landing pages.
+
+Uzavřená lokální úprava:
+Popisek prvního kontaktního formuláře byl sjednocen na e-mail, stručný cíl a volitelné URL.
+
+První běžná situace:
+Autor připravoval novou landing page pro konzultační nabídku.
+
+Kdo trasu použil rolí:
+Marketing editor.
+
+Aktuální pracovní místo:
+Index šablon, sekce formuláře.
+
+Signál nalezení:
+Autor našel aktuální šablonu přes index bez otevření archivního příkladu.
+
+Signál pochopení:
+Z popisku pochopil, kdy použít první kontaktní formulář a jaké údaje po návštěvníkovi chtít.
+
+Signál datové stopy:
+Nevznikl screenshot, export ani kopie starého formuláře.
+
+Výsledek návratu:
+Klid.
+
+Pokud je klid, co necháváme beze změny:
+Aktuální popisek, odkaz na formulář a návratový signál z Přílohy SP.
+
+Pokud je dozvuk, kde je nejbližší úklid:
+Nevztahuje se.
+
+Pokud je lokální tření, jaká je jedna opravná věta:
+Nevztahuje se.
+
+Pokud je nový signál, kam ho oddělujeme:
+Nevztahuje se.
+
+Nová data po návratu:
+Žádná.
+
+Retenční poznámka:
+Krátký záznam zůstává do dalšího měsíčního review trasy; bez osobních údajů a zákaznických detailů.
+
+Vlastník trasy:
+Marketing owner.
+
+Návratový signál do budoucna:
+Téma se znovu otevře jen tehdy, pokud někdo použije starý archivní příklad nebo z aktuálního popisku nepozná další krok.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte skutečnou pracovní situaci, která trasu znovu otevřela.
+2. Minuta 2: ověřte, jestli člověk našel aktuální pracovní místo bez starých odboček.
+3. Minuta 3: ověřte, jestli pochopil další krok bez servisní historie.
+4. Minuta 4: zkontrolujte, jestli nevznikla nová zbytečná datová stopa.
+5. Minuta 5: vyberte stav `Klid`, `Lehký dozvuk`, `Lokální tření` nebo `Nový signál`.
+
+Výstup workshopu:
+
+```text
+První běžný návrat k čisté pracovní trase je uzavřený. Víme, jestli trasa zůstává v klidu, potřebuje drobný úklid, jednu lokální opravu, nebo samostatně oddělený nový signál.
+```
+
+### Checklist kapitoly
+
+- Spustilo návrat skutečné použití, ne kontrola pro kontrolu?
+- Držíme se stejné pracovní situace, kvůli které úprava vznikla?
+- Sledujeme jen nalezení, pochopení a datovou stopu?
+- Neotevíráme celý systém kvůli jedné uzavřené lokální úpravě?
+- Umíme vybrat jeden ze čtyř výsledků návratu?
+- Bereme stav `Klid` jako hotový výsledek, ne jako pozvánku k další kontrole?
+- Pokud vznikl dozvuk, držíme ho jako úklid, ne jako redesign?
+- Pokud vzniklo lokální tření, máme jednu opravnou větu?
+- Pokud vznikl nový signál, oddělujeme ho od původní úpravy?
+- Nevznikl screenshot, export, jmenná tabulka ani nová analytická vrstva?
+- Má krátký záznam retenční důvod a datum návratu?
+- Zůstává aktuální pracovní místo zdrojem pravdy?
+- Je budoucí návrat vázaný na konkrétní signál, ne na periodický dohled?
+
+První běžný návrat k čisté pracovní trase má potvrdit, že uzavřená úprava opravdu přešla z opravárenského režimu do normální práce. Když člověk najde správné místo, pochopí další krok a nevznikne nová datová stopa, největší hodnota je často v tom, že tým nic dalšího nedělá. Klid je produktivní stav, pokud je vědomý.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SQ o první běžný návrat k čisté pracovní trase po uzavřené lokální úpravě: přirozené použití, signály nalezení, pochopení a datové stopy, čtyři výsledné stavy, privacy-first návrat bez nové pozorovací vrstvy, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SP o uzavření potvrzené lokální úpravy do čisté pracovní trasy: propsání potvrzení do aktuálního místa, zavření karty bez dalšího úkolu, úklid pomocných stop, návratový signál místo dozoru, privacy-first retence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SO o ověření lokální úpravy po lehké hraně při dalším běžném použití: návrat k opravné větě, stejná vstupní cesta, signály nalezení, pochopení a datové stopy, čtyři výsledky ověření, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SN o převodu lehké hrany z prvního návratu do jedné lokální úpravy: vymezení hrany jednou větou, oprava místa nárazu, privacy-first kontrola nové stopy, rozlišení lokální úpravy a nového signálu, karta, mini workshop a checklist.
