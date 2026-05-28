@@ -139506,8 +139506,240 @@ První běžný návrat k čisté pracovní trase je uzavřený. Víme, jestli t
 
 První běžný návrat k čisté pracovní trase má potvrdit, že uzavřená úprava opravdu přešla z opravárenského režimu do normální práce. Když člověk najde správné místo, pochopí další krok a nevznikne nová datová stopa, největší hodnota je často v tom, že tým nic dalšího nedělá. Klid je produktivní stav, pokud je vědomý.
 
+## Příloha SR: Převod lehkého dozvuku po návratu čisté trasy do servisní poznámky
+
+Příloha SQ uzavřela první běžný návrat k čisté pracovní trase. Ideální výsledek je klid: člověk našel aktuální místo, pochopil další krok a nevznikla nová datová stopa. Jenže praxe občas vrátí jemnější stav. Trasa funguje, ale někde zůstane drobný dozvuk po starém řešení: starý název v poznámce, archivní odkaz v komentáři, neaktuální příklad ve vedlejší šabloně nebo věta, která ještě svádí k opatrné otázce.
+
+Příloha SR řeší, jak takový lehký dozvuk převést do servisní poznámky, aniž by z něj vznikla nová oprava, redesign nebo další kolečko kontrol. Cíl je jednoduchý: zachytit drobný signál tak, aby nezmizel, ale zároveň nezvětšil rozsah práce.
+
+Začněte větou:
+
+```text
+Čistá trasa funguje. Zachytili jsme jen lehký dozvuk, který teď neblokuje práci, ale má mít jasné místo, návratový signál a privacy-first hranici.
+```
+
+Pokud dozvuk blokuje práci, nejde o servisní poznámku. Pak se vraťte k režimu lokálního tření: jedna opravná věta, jedno místo zásahu a ověření stejnou pracovní cestou. Servisní poznámka patří jen tam, kde práce proběhla, aktuální zdroj pravdy drží a tým pouze nechce zapomenout na malý zbytek.
+
+### Rozlište dozvuk od problému
+
+Lehký dozvuk je stopa starého stavu, která může mást, ale v daném průchodu nemátla natolik, aby zastavila práci. Problém je naopak něco, co člověku brání udělat další krok, vede ho na špatné místo nebo vytváří novou datovou stopu.
+
+Dozvuk:
+
+- ve starém úkolu zůstal odkaz na archivní šablonu, ale aktuální index vedl správně;
+- vedle formuláře je starší interní poznámka, kterou člověk nepotřeboval použít;
+- v checklistu je starý název pole, ale příklad pod ním je aktuální;
+- v komentáři u issue je historická varianta rozhodnutí, ale kanonické místo je jasné;
+- někdo si při použití vzpomněl na starý postup, ale nepoužil ho.
+
+Problém:
+
+- aktuální odkaz vede na špatnou šablonu;
+- člověk z popisku nepozná, co má udělat dál;
+- starý příklad byl použitý místo aktuálního;
+- kvůli nejasnosti vznikl nový screenshot, export nebo duplicitní dokument;
+- tým se musel doptávat na rozhodnutí, které mělo být v trase jasné.
+
+Servisní poznámka má chránit před přehnanou reakcí. Když trasa splnila účel, neotvírejte ji kvůli každé drobné historické stopě. Zapište dozvuk tak, aby měl budoucí smysl, ne aby okamžitě vytvořil další práci.
+
+### Napište poznámku jako podmínku, ne jako úkol
+
+Slabá servisní poznámka zní:
+
+```text
+Někdy uklidit staré odkazy kolem formulářů.
+```
+
+Takový zápis je moc široký. Neříká, kdy se k němu vrátit, proč na něm záleží ani kde přesně leží. Silnější poznámka je podmíněná:
+
+```text
+Pokud se při dalším použití indexu formulářů znovu objeví odkaz na archivní šablonu ve starém úkolu, zkraťme historickou poznámku na odkaz na aktuální index. Teď práci neblokovala a nová datová stopa nevznikla.
+```
+
+Podmíněná poznámka dělá tři věci najednou:
+
+1. drží signál u konkrétní pracovní situace;
+2. chrání tým před okamžitým rozšiřováním rozsahu;
+3. říká, kdy se drobnost změní v opravu.
+
+Když poznámku neumíte napsat jako podmínku, pravděpodobně ještě nevíte, zda jde o dozvuk, problém nebo nový nápad. V takovém případě ji nezapisujte do provozního místa. Dejte ji stranou jako nevyhodnocený podnět a vraťte se až při skutečném použití.
+
+### Umístěte poznámku k nejbližšímu pracovnímu místu
+
+Servisní poznámka nemá bydlet v dlouhém seznamu dobrých nápadů. Patří k místu, kde se při práci může znovu projevit. Pokud se dozvuk objevil u formulářové šablony, poznámka patří k indexu formulářů, šabloně nebo souvisejícímu úkolu. Pokud vznikl v rozhodovacím logu, patří k rozhodnutí, ne do obecného backlogu.
+
+Dobrá místa:
+
+- komentář u aktuální karty trasy;
+- krátká poznámka v kanonickém indexu;
+- changelog konkrétní šablony;
+- servisní část provozního listu;
+- úkol s jasnou podmínkou návratu.
+
+Slabá místa:
+
+- osobní poznámkový soubor jednoho člověka;
+- obecný backlog bez vlastníka;
+- nový dokument jen pro jeden dozvuk;
+- chat bez odkazu na zdroj pravdy;
+- tabulka "někdy zlepšit" bez revizního rytmu.
+
+Poznámka má být blízko práci, ale nesmí překážet hlavní trase. Pokud člověk při každém použití musí číst servisní historii, poznámka už není servisní. Stala se rušivou vrstvou, kterou je potřeba zkrátit nebo přesunout.
+
+### Nastavte návratový signál
+
+Lehký dozvuk se neřeší hned. Potřebuje návratový signál: konkrétní situaci, která ukáže, že se z něj stal opakovaný problém nebo že stále zůstává jen šumem.
+
+Dobré návratové signály:
+
+- stejný starý odkaz se objeví při dalším běžném použití;
+- nový člověk podle poznámky otevře archivní variantu;
+- kvůli starému názvu vznikne dotaz v týmu;
+- dozvuk začne vytvářet duplicitní kopie;
+- při měsíčním review trasy se ukáže, že poznámka už nemá důvod.
+
+Špatné návratové signály:
+
+- "až bude čas";
+- "při nejbližší velké revizi všeho";
+- "někdo by se na to měl podívat";
+- "budeme sledovat každé použití";
+- "přidáme si pravidelný report".
+
+Návratový signál má být levný. Nemá vytvářet monitoring, který je větší než dozvuk samotný. Když drobná historická stopa vyvolá novou reportingovou rutinu, servisní poznámka nechrání provoz; jen vyrábí další provozní dluh.
+
+### Privacy-first servisní poznámka
+
+Dozvuky často vznikají kolem konkrétních pracovních příkladů. Právě proto je snadné do servisní poznámky omylem opsat osobní údaj, zákaznický detail nebo kus interní komunikace, který tam nemá co dělat.
+
+Do servisní poznámky nepatří:
+
+- jména zákazníků, pokud nejsou nezbytná;
+- screenshoty formulářů s osobními údaji;
+- kopie starých exportů;
+- citace interních chatů bez důvodu;
+- jmenný seznam lidí, kteří na dozvuk narazili.
+
+Stačí popsat pracovní situaci a typ stopy:
+
+```text
+Dozvuk:
+Ve starém úkolu zůstává archivní odkaz na předchozí variantu formuláře.
+
+Dopad:
+Při tomto použití neblokoval práci; aktuální index byl nalezený správně.
+
+Privacy-first poznámka:
+Bez zákaznických detailů, bez screenshotu, bez kopírování starého formuláře.
+```
+
+Codyho komentář: servisní poznámka je malý nástroj, ale umí být nebezpečně lepkavá. Když do ní dáte příliš mnoho detailů, začne se tvářit jako důležitý důkaz. Ve skutečnosti má jen podržet podmínku návratu a nezhoršit datovou hygienu. Ano, nudné. Přesně proto to funguje.
+
+### Karta servisní poznámky po lehkém dozvuku
+
+```text
+Čistá pracovní trasa:
+Uzavřená lokální úprava:
+První návrat:
+Výsledek návratu:
+Lehký dozvuk:
+Proč to teď není problém:
+Kde dozvuk leží:
+Nejbližší pracovní místo poznámky:
+Podmínka návratu:
+Co se stane, pokud se signál zopakuje:
+Co teď vědomě neměníme:
+Nová data:
+Privacy-first omezení:
+Retence poznámky:
+Vlastník trasy:
+```
+
+Vyplněný příklad:
+
+```text
+Čistá pracovní trasa:
+Index formulářových šablon pro nové landing pages.
+
+Uzavřená lokální úprava:
+Popisek prvního kontaktního formuláře byl sjednocen na e-mail, stručný cíl a volitelné URL.
+
+První návrat:
+Marketing editor použil index při přípravě nové landing page.
+
+Výsledek návratu:
+Lehký dozvuk.
+
+Lehký dozvuk:
+Ve starém úkolu zůstává odkaz na archivní verzi formuláře.
+
+Proč to teď není problém:
+Editor šel přes aktuální index a archivní odkaz nepoužil.
+
+Kde dozvuk leží:
+Starý úkol k původní formulářové šabloně.
+
+Nejbližší pracovní místo poznámky:
+Servisní poznámka u aktuální karty indexu formulářů.
+
+Podmínka návratu:
+Vrátíme se k tomu jen tehdy, pokud při dalším použití někdo archivní odkaz otevře nebo se na něj zeptá.
+
+Co se stane, pokud se signál zopakuje:
+Zkrátíme starý úkol na odkaz na aktuální index a zavřeme archivní odbočku.
+
+Co teď vědomě neměníme:
+Neměníme formulář, nepřepisujeme všechny staré úkoly a neotevíráme redesign šablon.
+
+Nová data:
+Žádná.
+
+Privacy-first omezení:
+Bez screenshotu, bez zákaznických údajů, bez kopie starého formuláře.
+
+Retence poznámky:
+Poznámka zůstává do dalšího běžného použití nebo nejbližšího měsíčního review trasy.
+
+Vlastník trasy:
+Marketing owner.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte čistou trasu a výsledek prvního návratu.
+2. Minuta 2: jednou větou popište lehký dozvuk.
+3. Minuta 3: ověřte, proč teď nejde o problém blokující práci.
+4. Minuta 4: najděte nejbližší pracovní místo, kam poznámka patří.
+5. Minuta 5: napište podmínku návratu a co se stane při opakování.
+6. Minuta 6: zkontrolujte privacy-first omezení a retenci poznámky.
+
+Výstup workshopu:
+
+```text
+Lehký dozvuk po návratu čisté trasy je převedený do servisní poznámky. Neotevírá novou opravu, má konkrétní návratový signál a neukládá zbytečná data.
+```
+
+### Checklist kapitoly
+
+- Jde opravdu o lehký dozvuk, ne o problém blokující práci?
+- Proběhla čistá trasa v hlavním kroku správně?
+- Umíme říct, proč teď není potřeba oprava?
+- Je dozvuk popsaný jednou konkrétní větou?
+- Má poznámka podmínku návratu místo obecného úkolu?
+- Leží poznámka u nejbližšího pracovního místa?
+- Nevznikl nový dokument jen kvůli jedné drobné stopě?
+- Je jasné, co se stane, pokud se signál zopakuje?
+- Je zapsané, co teď vědomě neměníme?
+- Neotevíráme kvůli dozvuku celou trasu, kapitolu nebo systém?
+- Neuchováváme screenshoty, exporty, jména ani zákaznické detaily?
+- Má poznámka retenční pravidlo?
+- Ví vlastník trasy, kdy poznámku smazat, potvrdit nebo převést do lokální opravy?
+
+Servisní poznámka je dobrý sluha, pokud zůstane malá. Má chránit tým před zapomenutím drobného signálu, ale nemá přebírat řízení práce. Když čistá trasa funguje a dozvuk neblokuje rozhodnutí, nejpraktičtější krok je často jen přesně zapsat, kdy se k němu vrátit. Zbytek nechat v klidu. Ano, klid znovu vítězí nad tabulkou. Nečekané finále, skoro jako v českém provozu.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SR o převod lehkého dozvuku po návratu čisté trasy do servisní poznámky: rozlišení dozvuku od problému, podmíněná poznámka, umístění u pracovního místa, návratový signál, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SQ o první běžný návrat k čisté pracovní trase po uzavřené lokální úpravě: přirozené použití, signály nalezení, pochopení a datové stopy, čtyři výsledné stavy, privacy-first návrat bez nové pozorovací vrstvy, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SP o uzavření potvrzené lokální úpravy do čisté pracovní trasy: propsání potvrzení do aktuálního místa, zavření karty bez dalšího úkolu, úklid pomocných stop, návratový signál místo dozoru, privacy-first retence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SO o ověření lokální úpravy po lehké hraně při dalším běžném použití: návrat k opravné větě, stejná vstupní cesta, signály nalezení, pochopení a datové stopy, čtyři výsledky ověření, privacy-first minimum, karta, mini workshop a checklist.
