@@ -136942,8 +136942,211 @@ První návrat po stabilizovaném úklidu ukázal, zda aktuální pracovní mís
 
 První návrat po stabilizovaném úklidu má hlavně chránit klid. Pokud aktuální místo funguje, nechte ho fungovat. Pokud se objeví malý zbytek, opravte nejbližší místo. Pokud chybí kontext, vraťte ho do aktuálního zdroje pravdy. A pokud se objeví nový případ, dejte mu vlastní prostor, aby nerozlepil uzavřenou práci.
 
+## Příloha SF: Převod zbytku po návratu do jedné lokální opravy
+
+Příloha SE končí čtyřmi možnými výsledky. Nejhezčí je `Klid`: nic neopravovat, nezakládat novou kartu a nechat pracovní místo dál sloužit. Tahle příloha se používá jen tehdy, když první běžný návrat ukázal stav `Zbytek staré stopy` nebo `Ztracený kontext` a zároveň nejde o nový samostatný případ.
+
+Cíl je jednoduchý: převést drobné zjištění z návratu do jedné lokální opravy. Ne do nové úklidové kampaně, ne do auditu celého indexu a ne do přepisování všech šablon, které mají podobné jméno. Po stabilizovaném úklidu je systém křehký hlavně tím, že každý malý zbytek může někoho svést k velké preventivní práci. Tady se tomu bráníme.
+
+Začněte větou:
+
+```text
+Po návratu opravujeme jen nejbližší místo, které skutečně ztížilo běžnou práci.
+```
+
+Pokud se nedá ukázat konkrétní místo, kde se práce zadrhla, ještě neopravujte. Zapište pozorování jako návratovou poznámku a počkejte na další skutečné použití. Pocit, že "tam někde asi bude víc nepořádku", není dost dobrý důvod pro zásah.
+
+### Rozlište zbytek a chybějící kontext
+
+Nejdřív pojmenujte typ nálezu. Pomůže to rozhodnout, co přesně měnit.
+
+`Zbytek staré stopy` vypadá například takto:
+
+- starý odkaz pořád vede na archivní kartu;
+- v indexu zůstal původní název;
+- onboardingový materiál odkazuje na odstraněnou šablonu;
+- v komentáři u úkolu je kopírovaná stará instrukce;
+- někdo používá uložený bookmark na neaktuální místo.
+
+Takový nález většinou řeší úklidová oprava: přesměrovat odkaz, přejmenovat položku, doplnit krátkou poznámku "nahrazeno tímto místem", nebo odstranit zkratku z běžné trasy.
+
+`Ztracený kontext` vypadá jinak:
+
+- aktuální místo existuje, ale člověk nepozná, kdy ho použít;
+- nová verze je stručná až moc a chybí příklad;
+- po odstranění staré karty zmizela hranice, co se nemá řešit;
+- název je čistý, ale nevede k rozhodnutí;
+- člověk najde správné místo, ale musí se ptát autora úklidu.
+
+Tady nevracejte starou stopu. Doplňte nejmenší kontext do aktuálního místa: jednu větu, jeden příklad, jedno pravidlo rozsahu, jeden odkaz nebo jeden mini checklist. Cílem není obnovit historii, ale vrátit samostatnost.
+
+### Opravte místo, kde práce skutečně narazila
+
+Lokální oprava má bydlet co nejblíž místu tření. Pokud se člověk ztratil v indexu, opravte index. Pokud narazil na starý odkaz v šabloně, opravte šablonu. Pokud chyběl příklad v aktuální kartě, doplňte příklad tam. Nezakládejte centrální vysvětlení jen proto, že se zdá elegantnější.
+
+Praktický filtr:
+
+1. Kde člověk poprvé ztratil jistotu?
+2. Které jedno místo by mu příště pomohlo bez dalšího výkladu?
+3. Dá se oprava provést jednou větou, odkazem, přejmenováním nebo krátkým příkladem?
+4. Nevyžaduje oprava změnu více pracovních tras najednou?
+5. Zůstane po opravě uzavřený úklid pořád uzavřený?
+
+Pokud odpověď na čtvrtou otázku zní "ne, musíme projít všechno", zastavte se. Možná jste našli nový případ, ne lokální opravu. Dejte mu vlastní kartu a nerozbalujte ho pod návratem po stabilizovaném úklidu.
+
+### Napište opravnou větu před změnou
+
+Před editací napište jednu opravnou větu. Má chránit rozsah.
+
+```text
+Opravujeme <konkrétní místo>, aby <konkrétní běžná práce> příště vedla na aktuální zdroj bez <konkrétního tření>.
+```
+
+Příklad pro zbytek staré stopy:
+
+```text
+Opravujeme odkaz v onboardingovém indexu, aby nový člen týmu našel aktuální kartu předání obsahu bez otevření archivní šablony.
+```
+
+Příklad pro ztracený kontext:
+
+```text
+Do aktuální karty doplňujeme jednu větu o hranici použití, aby content owner poznal, kdy jde o běžný výřez a kdy už o nový samostatný playbook.
+```
+
+Když se opravná věta nevejde do jedné věty, oprava je pravděpodobně moc široká. Rozdělte ji, nebo si přiznejte, že řešíte novou smyčku.
+
+### Proveďte jednu změnu a hned ji ověřte průchodem
+
+Po lokální opravě nečekejte na měsíční review. Ověřte ji stejnou běžnou cestou, která problém ukázala. Stačí malý průchod:
+
+1. Začněte na původním vstupním místě.
+2. Nepoužívejte znalost autora opravy jako zkratku.
+3. Dojděte k aktuálnímu pracovnímu místu.
+4. Zkontrolujte, zda oprava odstranila konkrétní tření.
+5. Zapište výsledek jednou větou.
+
+Ověřovací věta:
+
+```text
+Po lokální opravě vede původní běžná cesta na aktuální místo a člověk nepotřebuje starou stopu ani autora úklidu.
+```
+
+Pokud věta platí, opravu zavřete. Pokud neplatí, nedělejte druhou opravu automaticky. Nejprve rozhodněte, jestli šlo o špatně zvolené místo, nebo o nový případ. Dvě rychlé opravy za sebou často znamenají, že původní rozsah byl špatně pojmenovaný.
+
+### Privacy-first lokální oprava
+
+Lokální oprava má snížit datovou stopu nebo ji aspoň nezvětšit. Není potřeba ukládat screenshoty starého odkazu, kopie archivní šablony ani osobní detaily člověka, který na problém narazil. Potřebujete vědět, kde se cesta zlomila a co se změnilo.
+
+Pravidlo:
+
+```text
+U lokální opravy po návratu ukládáme jen opravnou větu, změněné místo, výsledek ověření a případnou retenční poznámku. Pomocné podklady mažeme, jakmile přestanou být potřeba pro provedení opravy.
+```
+
+Codyho komentář: největší past po dobrém úklidu je začít sbírat důkazy, že úklid byl opravdu dobrý. To je roztomilé asi jako tisknout si e-mail, že tiskárna funguje. Stačí malý zápis a funkční cesta.
+
+### Karta lokální opravy po návratu
+
+```text
+Pracovní místo:
+Původní výsledek návratu:
+Typ nálezu:
+Kde se práce zadrhla:
+Opravná věta:
+Změněné místo:
+Co přesně se změnilo:
+Ověření stejnou cestou:
+Výsledek ověření:
+Co výslovně neotevíráme:
+Pomocné podklady:
+Retenční poznámka:
+Vlastník:
+Stav:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Kanonická karta pro předání marketingového výřezu.
+
+Původní výsledek návratu:
+Zbytek staré stopy.
+
+Typ nálezu:
+Starý odkaz v onboardingovém indexu.
+
+Kde se práce zadrhla:
+Nový člen týmu šel přes index a otevřel archivní šablonu místo aktuální karty.
+
+Opravná věta:
+Opravujeme odkaz v onboardingovém indexu, aby nový člen týmu našel aktuální kartu předání obsahu bez otevření archivní šablony.
+
+Změněné místo:
+Onboardingový index pro obsahové workflow.
+
+Co přesně se změnilo:
+Starý odkaz nahrazen aktuálním odkazem a archivní položka označená jako mimo běžné použití.
+
+Ověření stejnou cestou:
+Index -> obsahové workflow -> karta předání výřezu.
+
+Výsledek ověření:
+Běžná cesta vede na aktuální místo bez archivu.
+
+Co výslovně neotevíráme:
+Nepřepisujeme celý onboarding a nehledáme všechny historické zmínky mimo běžnou trasu.
+
+Pomocné podklady:
+Žádné nové.
+
+Retenční poznámka:
+Bez nových osobních nebo zákaznických detailů.
+
+Vlastník:
+Content owner.
+
+Stav:
+Zavřeno.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: vraťte se k výsledku z přílohy SE a potvrďte, že nejde o nový případ.
+2. Minuta 2: rozlište `Zbytek staré stopy` a `Ztracený kontext`.
+3. Minuta 3: vyberte nejbližší pracovní místo opravy.
+4. Minuta 4: napište jednu opravnou větu.
+5. Minuta 5: proveďte nebo naplánujte jednu lokální změnu.
+6. Minuta 6: určete, jak ji ověříte stejnou běžnou cestou a jaké podklady po ověření smažete.
+
+Výstup workshopu:
+
+```text
+Drobné tření z prvního návratu je převedené do jedné lokální opravy. Oprava má jasné místo, jednu větu rozsahu, jednoduché ověření a nevytváří novou zbytečnou evidenci.
+```
+
+### Checklist kapitoly
+
+- Navazujeme jen na `Zbytek staré stopy` nebo `Ztracený kontext`?
+- Oddělili jsme nový samostatný případ od lokální opravy?
+- Víme, kde se běžná práce poprvé zadrhla?
+- Opravujeme nejbližší pracovní místo, ne celý systém?
+- Má oprava jednu větu rozsahu?
+- Je jasné, jestli jde o úklid staré stopy, nebo doplnění kontextu?
+- Nevracíme starý materiál do běžné trasy jen proto, že v něm byl užitečný detail?
+- Provedli jsme pouze jednu změnu?
+- Ověřujeme stejnou běžnou cestou, která problém ukázala?
+- Nevznikly nové exporty, screenshoty ani kontrolní tabulky bez jasného účelu?
+- Je zapsané, co výslovně neotevíráme?
+- Má případný pomocný podklad důvod a datum smazání?
+- Je po ověření jasné, zda je oprava zavřená, nebo zda vzniká nová samostatná smyčka?
+
+Lokální oprava po návratu má být malá proto, že chrání výsledek předchozího úklidu. Čím menší zásah stačí, tím víc důvěry si tým může dovolit mít ve stabilní pracovní místo. A důvěra ve stabilní místo je přesně to, kvůli čemu se úklid dělal.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SF o převod zbytku po návratu do jedné lokální opravy: rozlišení staré stopy a ztraceného kontextu, oprava nejbližšího pracovního místa, opravná věta, ověření stejnou cestou, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SE o první běžný návrat po stabilizovaném úklidu: návrat pouze při reálné práci, běžná vstupní cesta, signály cesty, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first návrat bez obnovy nepořádku, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SD o uzavření potvrzené úklidové opravy do stabilního pracovního stavu: práce s výsledkem ověření, aktuální místo místo historie, zavření úklidové karty, návratový signál místo dozoru, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SC o ověření úklidové opravy při dalším běžném průchodu: stejná vstupní cesta, signály čisté trasy, čtyři výsledné stavy, privacy-first ověření bez nových podkladů, karta, mini workshop a checklist.
