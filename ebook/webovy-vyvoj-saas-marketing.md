@@ -138817,8 +138817,234 @@ Lehká hrana z prvního návratu je převedená do jedné lokální úpravy. Tra
 
 Lehká hrana je dobrý test provozní střídmosti. Tým, který ji umí opravit jednou lokální úpravou, chrání čistou trasu i vlastní pozornost. Tým, který z každé hrany udělá projekt, časem přestane rozlišovat mezi skutečným problémem a obyčejným drobným dozvukem po dobře zavřené práci.
 
+## Příloha SO: Ověření lokální úpravy po lehké hraně při dalším běžném použití
+
+Příloha SN převedla lehkou hranu z prvního návratu do jedné lokální úpravy. Teď je potřeba ověřit, jestli úprava opravdu odstranila tření, nebo jen hezky přepsala místo, kde někdo narazil. Rozdíl je praktický: opravená věta ještě není funkční trasa. Funkční trasa se pozná až ve chvíli, kdy ji další člověk použije bez servisního vysvětlení.
+
+Ověření lokální úpravy má být krátké a pozdější než samotná úprava. Neověřujte ji tak, že si autor hned po editaci sám řekne "vypadá to dobře". Autor ví, co chtěl opravit, a jeho hlava doplní chybějící kontext automaticky. Lepší je počkat na další běžné použití stejné trasy: nová landing page, nový brief, nový checklist, nový předávací krok nebo jiný okamžik, ve kterém by člověk na původní hranu znovu narazil.
+
+Začněte větou:
+
+```text
+Lokální úpravu po lehké hraně ověřujeme při dalším běžném použití stejné pracovní trasy. Kontrolujeme jen to, jestli původní tření zmizelo bez návratu ke staré stopě a bez nové evidence.
+```
+
+Pokud žádné další běžné použití nenastalo, neorganizujte umělý test. Lokální úprava může chvíli čekat. Vynucené ověření často vyrobí důkaz, který se tváří objektivně, ale ve skutečnosti jen opakuje autorský záměr. Provozní smysl má až situace, kdy někdo potřebuje trasu použít kvůli práci, ne kvůli kontrole.
+
+### Vraťte se k opravné větě
+
+Než začnete hodnotit výsledek, vraťte se k opravné větě z Přílohy SN. Ta drží rozsah. Bez ní se ověření snadno rozteče do obecného posuzování, jestli by šablona, index nebo checklist nemohly být ještě lepší. Mohly. Skoro vždycky. To ale není otázka této smyčky.
+
+Opravná věta má odpovědět na tři věci:
+
+- jaká lehká hrana se objevila;
+- kde přesně vznikla;
+- jak měla lokální úprava změnit další průchod.
+
+Příklad:
+
+```text
+Opravná věta:
+Popisek v indexu má říkat, že jde o první kontaktní formulář s e-mailem, stručným kontextem a volitelným URL, aby autor nové landing page neotevíral archivní příklad s povinným telefonem.
+```
+
+Ověřovací otázka potom zní:
+
+```text
+Použil další člověk index tak, že našel aktuální formulář, pochopil jeho použití a neotevřel archivní příklad?
+```
+
+Tohle je dostatečně malé. Neřeší celý formulářový systém, kvalitu všech poptávek ani budoucí obchodní strategii. Řeší jednu hranu, jednu úpravu a jeden další průchod. Přesně tak má lokální ověření vypadat.
+
+### Sledujte stejnou cestu, ne lepší cestu
+
+Ověření má použít stejnou vstupní cestu, na které se lehká hrana objevila. Pokud se hrana projevila v indexu, začněte v indexu. Pokud v checklistu, začněte v checklistu. Pokud v příkladu, začněte u příkladu. Nepřepínejte na pohodlnější trasu jen proto, že ji zná autor úpravy.
+
+Tři signály stačí:
+
+1. Nalezení: člověk najde upravené místo bez staré odbočky.
+2. Pochopení: člověk udělá nejbližší krok bez vysvětlení autora.
+3. Datová stopa: člověk nepotřebuje otevřít starý screenshot, export, chatovou citaci ani archivní příklad.
+
+Krátký zápis:
+
+```text
+Stejná vstupní cesta:
+
+Nalezení:
+Ano / S drobnou odbočkou / Přes starou stopu
+
+Pochopení:
+Ano / S krátkým dotazem / Ne
+
+Datová stopa:
+Bez nové stopy / Krátká pracovní poznámka / Obnovené podklady
+```
+
+Pokud někdo použije jinou cestu a všechno funguje, je to dobrá zpráva, ale ne důkaz pro tuto úpravu. Zapište to stranou jako případný nový signál. Ověření lokální úpravy má říct, jestli opravené místo funguje tam, kde předtím drhlo.
+
+### Rozlišujte čtyři výsledky ověření
+
+`Potvrzeno` znamená, že lokální úprava odstranila hranu. Člověk prošel stejnou cestou, pochopil nejbližší krok a nemusel otevřít staré podklady. Další akce není potřeba. Krátký záznam může zůstat do nejbližšího review a potom zmizet, pokud už nepřidává hodnotu.
+
+`Drobně doladit` znamená, že úprava pomohla, ale jeden detail pořád vytváří malé tření. Například popisek je správný, ale sousední odkaz má starý název. Pokud doladění zabere jednu větu v nejbližším místě a nemění původní rozhodnutí, proveďte ho bez nové servisní smyčky.
+
+`Vrací se stará stopa` znamená, že pracovní trasa pořád navádí člověka k archivnímu příkladu, starému exportu, původnímu komentáři nebo vysvětlení z doby opravy. To už není jen slabé doladění. Najděte vstup, který starou stopu vrací do provozu, a opravte ho jako samostatnou úklidovou práci.
+
+`Nový signál` znamená, že ověření odkrylo jiný problém než původní lehkou hranu. Třeba se ukáže, že šablona je srozumitelná, ale chybí rozhodnutí, kdo ji smí měnit. Takový nález nezapisujte jako selhání lokální úpravy. Založte novou otázku s vlastním rozsahem.
+
+Rozhodovací věta:
+
+```text
+Výsledek ověření lokální úpravy je:
+Potvrzeno / Drobně doladit / Vrací se stará stopa / Nový signál
+
+Protože:
+
+Další krok:
+```
+
+Příklad:
+
+```text
+Výsledek ověření lokální úpravy je:
+Potvrzeno.
+
+Protože:
+Autor další landing page našel aktuální formulář přes index, pochopil popisek a nepoužil archivní příklad s povinným telefonem.
+
+Další krok:
+Žádný. Poznámka zůstává do měsíčního review trasy a potom se smaže, pokud se stejná hrana nevrátí.
+```
+
+### Privacy-first ověření bez sledování lidí
+
+U lokální úpravy nepotřebujete jmennou historii, nahrávku průchodu ani screenshotovou dokumentaci. Potřebujete vědět, jestli pracovní místo fungovalo. Zapisujte proto situaci a výsledek, ne detailní profil člověka.
+
+Privacy-first pravidla:
+
+- zapisujte roli nebo pracovní situaci, ne osobní údaje, pokud nejsou nutné;
+- nepřikládejte screenshot, pokud stačí opsat změněnou větu nebo výsledek;
+- neukládejte zákaznický příklad, když lze použít zobecněnou situaci;
+- neobnovujte staré exporty jen kvůli tomu, aby ověření působilo důkladněji;
+- nastavte retenci krátké poznámky předem;
+- po potvrzení nechte v běžné trase jen aktuální pracovní místo.
+
+Codyho komentář: malé ověření má mít malou stopu. Když kvůli jedné opravené větě vznikne dokumentace tlustší než původní problém, neověřujete kvalitu. Budujete pomník vlastní opatrnosti. Hezký pomník, ale pořád pomník.
+
+### Karta ověření lokální úpravy
+
+```text
+Čistá pracovní trasa:
+Původní lehká hrana:
+Lokální úprava:
+Opravná věta:
+Další běžné použití:
+Stejná vstupní cesta:
+Nalezení:
+Pochopení:
+Datová stopa:
+Výsledek ověření:
+Další krok:
+Co nedolazujeme:
+Staré stopy:
+Nová data:
+Retenční poznámka:
+Vlastník trasy:
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Čistá pracovní trasa:
+Index šablon pro nové landing pages.
+
+Původní lehká hrana:
+Popisek formulářové šablony používal starý název "rychlá poptávka s telefonem".
+
+Lokální úprava:
+Popisek byl přepsán na první kontaktní formulář s e-mailem, stručným kontextem a volitelným URL.
+
+Opravná věta:
+Autor nové landing page má podle indexu pochopit, kdy použít aktuální první kontaktní formulář, bez otevření archivního příkladu.
+
+Další běžné použití:
+Vznikla nová landing page pro konzultační nabídku.
+
+Stejná vstupní cesta:
+Ano. Autor začal v indexu šablon.
+
+Nalezení:
+Ano. Index vedl na aktuální šablonu.
+
+Pochopení:
+Ano. Popisek stačil k použití formuláře.
+
+Datová stopa:
+Bez nové stopy. Nebyl otevřen starý screenshot ani archivní příklad.
+
+Výsledek ověření:
+Potvrzeno.
+
+Další krok:
+Žádný plánovaný úkol.
+
+Co nedolazujeme:
+Nepřepisujeme všechny formuláře a nezakládáme nový audit.
+
+Staré stopy:
+Archivní příklad s povinným telefonem zůstává mimo běžnou trasu.
+
+Nová data:
+Žádná.
+
+Retenční poznámka:
+Tento záznam zůstává do měsíčního review trasy; bez osobních údajů a zákaznických detailů.
+
+Vlastník trasy:
+Marketing owner.
+
+Návratový signál:
+Téma se vrátí, pokud další autor znovu otevře archivní příklad nebo popisek nebude stačit k použití formuláře.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: otevřete opravnou větu a připomeňte si původní lehkou hranu.
+2. Minuta 2: začněte stejnou vstupní cestou jako při původním nárazu.
+3. Minuta 3: sledujte nalezení a pochopení nejbližšího kroku.
+4. Minuta 4: zkontrolujte, jestli se neotevřely staré podklady nebo nová evidence.
+5. Minuta 5: vyberte stav `Potvrzeno`, `Drobně doladit`, `Vrací se stará stopa` nebo `Nový signál`.
+
+Výstup workshopu:
+
+```text
+Lokální úprava po lehké hraně je ověřená při běžném použití. Víme, jestli ji nechat v klidu, drobně doladit, řešit návrat staré stopy, nebo oddělit nový signál.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme až při dalším běžném použití?
+- Máme původní opravnou větu z lokální úpravy?
+- Začínáme stejnou vstupní cestou, kde se hrana objevila?
+- Sledujeme nalezení, pochopení a datovou stopu?
+- Nehodnotíme celý systém, ale jednu opravenou hranu?
+- Nepoužíváme pohodlnější cestu jen proto, že ji zná autor úpravy?
+- Umíme vybrat jeden ze čtyř výsledků ověření?
+- Pokud je úprava potvrzená, nepřidáváme další kontrolu pro jistotu?
+- Pokud je potřeba doladit detail, zůstává zásah v nejbližším místě?
+- Pokud se vrací stará stopa, oddělujeme ji jako úklidovou práci?
+- Pokud vznikl nový signál, nelepíme ho na původní lokální úpravu?
+- Nevznikl screenshot, export, jmenný seznam ani nová tabulka průchodů?
+- Má krátká poznámka retenční důvod a datum návratu?
+- Zůstává v běžné trase jen aktuální pracovní místo?
+
+Ověření lokální úpravy má zavřít malou smyčku. Buď ukáže, že hrana zmizela a trasa může zůstat v klidu, nebo přesně pojmenuje, co se ještě děje. Důležité je nepoužít malý nález jako vstupenku do velkého projektu. Dobrá lokální úprava se pozná podle toho, že po ní další člověk pracuje o kousek plynuleji a nikdo kvůli tomu nemusí otevírat servisní zákulisí.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SO o ověření lokální úpravy po lehké hraně při dalším běžném použití: návrat k opravné větě, stejná vstupní cesta, signály nalezení, pochopení a datové stopy, čtyři výsledky ověření, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SN o převodu lehké hrany z prvního návratu do jedné lokální úpravy: vymezení hrany jednou větou, oprava místa nárazu, privacy-first kontrola nové stopy, rozlišení lokální úpravy a nového signálu, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SM o první běžný návrat k čisté pracovní trase po uzavřené korekci: běžné vstupní místo, signály přímé cesty, samostatného kroku a datové stopy, čtyři výsledky návratu, privacy-first evidence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SL o uzavření potvrzené úklidové korekce do čisté pracovní trasy: aktuální trasa, zavření korekční karty, úklid starých stop, návratový signál místo další kontroly, privacy-first retence, karta, mini workshop a checklist.
