@@ -138012,8 +138012,213 @@ Drobný dozvuk po první kontrole byl převedený do jedné úklidové korekce. 
 
 Úklidová korekce po drobném dozvuku je malá, ale důležitá práce. Právě tyhle malé zbytky rozhodují, jestli stabilní pracovní místo časem opravdu zůstane stabilní, nebo se kolem něj začne znovu usazovat starý provozní prach. Dobrá korekce je rychlá, konkrétní a skromná na data. Uklidí jednu věc a pak nechá pracovní místo dál sloužit.
 
+## Příloha SK: Ověření úklidové korekce při dalším běžném použití
+
+Příloha SJ řeší drobný dozvuk po první kontrole stabilního pracovního místa. Úklidová korekce ale není hotová jen proto, že byla provedena a prošla stejnou vstupní cestou. To je dobrý první test. Druhý test přijde až ve chvíli, kdy se k místu vrátí běžná práce bez zvláštní pozornosti autora opravy.
+
+Tahle příloha pomáhá ověřit, jestli úklidová korekce opravdu zmizela v provozu. Ne jestli vypadá hezky v poznámce. Ne jestli si ji autor umí obhájit. Praktická otázka zní: dokáže člověk při dalším běžném použití najít aktuální pracovní místo, udělat nejbližší krok a nevrátit se ke staré stopě, kvůli které korekce vznikla?
+
+Začněte větou:
+
+```text
+Ověřujeme jednu hotovou úklidovou korekci při dalším běžném použití. Nekontrolujeme celý systém a nehledáme nové příležitosti k vylepšení.
+```
+
+Pokud tahle věta není pravdivá, zastavte se. Když chcete kontrolovat celý index, dělat revizi onboardingových materiálů nebo hledat všechny podobné názvy v dokumentaci, je to jiná práce. Může být užitečná, ale není to ověření jedné korekce. Tady je cílem zjistit, jestli malý úklid splnil svůj malý slib.
+
+### Vraťte se až při reálné práci
+
+Ověření korekce nespouštějte uměle jen proto, že v kalendáři bliká review. Počkejte na první přirozenou situaci, kdy by člověk dané pracovní místo stejně použil. Může to být nové předání obsahu, příprava kampaně, úprava šablony, první den onboardingu nebo běžná kontrola rozcestníku.
+
+Rozdíl je důležitý. Umělý test často vede člověka přímo na místo, které má zkontrolovat. Běžná práce začíná jinde: v úkolu, otázce, interním odkazu, staré poznámce nebo rozhovoru. Právě tam se ukáže, jestli korekce opravdu zkrátila cestu, nebo jen uklidila viditelný roh.
+
+Zapište si vstup:
+
+```text
+Původní korekce:
+Běžná situace, která ověření spustila:
+Kdo místo používá:
+Očekávaný nejbližší krok:
+```
+
+Nepotřebujete dlouhý protokol. Stačí takový zápis, aby bylo později jasné, že ověření vycházelo z reálné práce a ne z náhodného edičního průchodu.
+
+### Sledujte tři signály
+
+První signál je nalezení. Člověk se má dostat na aktuální pracovní místo běžnou cestou. Pokud se pořád dostává přes archivní poznámku, starý odkaz nebo ústní vysvětlení autora, korekce odstranila povrch, ale ne trasu.
+
+Druhý signál je použití. Člověk má podle aktuálního místa udělat nejbližší krok bez toho, aby potřeboval historii opravy. Stabilní pracovní místo nemá říkat: "pamatuj, proč jsme to kdysi přejmenovali". Má říkat: "teď udělej toto".
+
+Třetí signál je datová stopa. Ověření nemá kvůli malé korekci vytvořit nový zvyk sbírat důkazy, screenshoty, seznamy lidí nebo detailní záznamy průchodů. Pokud se z malého úklidu stává opakovaná evidence chování týmu, přidali jste větší problém, než jste původně uklidili.
+
+Jednoduchá kontrola:
+
+```text
+Nalezení:
+Bez problému / S drobným třením / Přes starou stopu
+
+Použití:
+Samostatné / S vysvětlením / Nepoužitelné
+
+Datová stopa:
+Bez nové stopy / Malá pracovní poznámka / Zbytečná evidence
+```
+
+### Rozlište čtyři výsledky ověření
+
+První výsledek je `Potvrzeno`. Člověk našel aktuální místo, použil ho bez vysvětlování a stará stopa se nevrátila. V takovém případě korekci zavřete. Nepřidávejte další kontrolu jen proto, že by šla. Hotová malá věc má zůstat malá.
+
+Druhý výsledek je `Dočistit`. Korekce pomohla, ale zůstal jeden přesný zbytek v nejbližším okolí. Například odkaz je už správně pojmenovaný, ale krátká poznámka pod ním pořád mluví starým jazykem. Tady je možné udělat ještě jednu úklidovou korekci, ale jen pokud ji umíte napsat jednou větou.
+
+Třetí výsledek je `Vrací se stará cesta`. Člověk se při běžné práci znovu dostal do archivního postupu, starého dokumentu nebo neaktuálního rozcestníku. To už není drobný dozvuk. To je problém trasy. Neopravujte další větu; najděte, odkud se stará cesta vrací.
+
+Čtvrtý výsledek je `Nový případ`. Ověření ukázalo jiný problém, který s původní korekcí souvisí jen volně. Například při použití aktuální karty se ukáže, že chybí vlastník celého procesu. To nezavírejte jako korekci. Založte samostatnou kartu a původní úklid nechte vyhodnotit podle původního slibu.
+
+Rozhodovací věta:
+
+```text
+Výsledek ověření je:
+
+Protože:
+
+Další krok:
+```
+
+Příklad:
+
+```text
+Výsledek ověření je:
+Potvrzeno.
+
+Protože:
+Nový člověk prošel z onboardingového indexu na aktuální kartu předání obsahu, podle karty udělal první krok a neotevřel archivní šablonu.
+
+Další krok:
+Korekci zavíráme. Neplánujeme další kontrolu; téma se vrátí jen při návratu staré cesty.
+```
+
+### Privacy-first ověření bez pozorovací rutiny
+
+Ověření úklidové korekce má pracovat s tím, co už při práci vzniká. Nepotřebuje nový tracker, heatmapu, nahrávání obrazovky, tabulku průchodů ani jmenný seznam lidí, kteří materiál použili. U interních pracovních míst většinou stačí role, situace a výsledek.
+
+Privacy-first minimum:
+
+- zapište roli nebo pracovní situaci, ne jméno, pokud jméno není nutné;
+- neukládejte screenshoty staré chyby, pokud stačí popis;
+- nesbírejte více průchodů jen pro jistotu;
+- neprodlužujte retenci pomocných podkladů kvůli malé korekci;
+- smažte nebo archivujte starou stopu, pokud už nemá jasný účel;
+- ponechte jen takový záznam, který pomůže při skutečném návratovém signálu.
+
+Codyho komentář: malé ověření má být skoro neviditelné. Jakmile se kolem něj začne stavět kontrolní rutina, je to jako přidat dveřníkovi dveřníka. Možná se všichni tváří zodpovědně, ale někdo by měl zkontrolovat, jestli ještě vůbec řešíme původní problém.
+
+### Karta ověření úklidové korekce
+
+```text
+Úklidová korekce:
+Původní drobný dozvuk:
+Běžná situace ověření:
+Běžná vstupní cesta:
+Očekávaný nejbližší krok:
+Signál nalezení:
+Signál použití:
+Signál datové stopy:
+Výsledek ověření:
+Další krok:
+Co neotevíráme:
+Staré stopy k úklidu:
+Retenční poznámka:
+Vlastník pracovního místa:
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Úklidová korekce:
+Přejmenování odkazu v onboardingovém indexu na "aktuální karta předání obsahu".
+
+Původní drobný dozvuk:
+Starý název odkazu sváděl k otevření archivní šablony předání.
+
+Běžná situace ověření:
+Nový člověk připravuje první předání článku.
+
+Běžná vstupní cesta:
+Onboardingový index, sekce obsahové workflow.
+
+Očekávaný nejbližší krok:
+Otevřít aktuální kartu a vyplnit předávací minimum.
+
+Signál nalezení:
+Bez problému.
+
+Signál použití:
+Samostatné.
+
+Signál datové stopy:
+Bez nové stopy. Vznikla jen krátká poznámka v kartě ověření.
+
+Výsledek ověření:
+Potvrzeno.
+
+Další krok:
+Korekci zavřít.
+
+Co neotevíráme:
+Neděláme audit všech onboardingových odkazů a nepřepisujeme celou sekci.
+
+Staré stopy k úklidu:
+Archivní šablona zůstává mimo běžnou trasu s retenční poznámkou.
+
+Retenční poznámka:
+Karta ověření se ponechá do nejbližšího měsíčního review pracovních míst, potom stačí stav v changelogu.
+
+Vlastník pracovního místa:
+Content owner.
+
+Návratový signál:
+Téma se vrátí jen tehdy, když běžná cesta znovu navede člověka na archivní předávací postup.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte původní korekční větu a potvrďte, co měla uklidit.
+2. Minuta 2: popište běžnou situaci, která ověření spustila.
+3. Minuta 3: projděte vstupní cestu a sledujte nalezení, použití a datovou stopu.
+4. Minuta 4: vyberte stav `Potvrzeno`, `Dočistit`, `Vrací se stará cesta` nebo `Nový případ`.
+5. Minuta 5: zapište další krok a návratový signál.
+
+Výstup workshopu:
+
+```text
+Úklidová korekce byla ověřena při dalším běžném použití. Je jasné, jestli ji zavíráme, dočišťujeme jedním malým krokem, řešíme návrat staré cesty, nebo oddělujeme nový případ.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme jednu hotovou úklidovou korekci?
+- Spustila ověření reálná pracovní situace?
+- Víme, jaký drobný dozvuk měla korekce odstranit?
+- Začali jsme běžnou vstupní cestou?
+- Dostal se člověk na aktuální pracovní místo bez autora opravy?
+- Dokázal udělat nejbližší krok bez čtení historie korekce?
+- Nevrátila se stará stopa přes odkaz, poznámku, ústní vysvětlení nebo archiv?
+- Zapsali jsme signál nalezení, použití a datové stopy?
+- Vybrali jsme jeden ze čtyř výsledků ověření?
+- Pokud je výsledek `Potvrzeno`, nepřidáváme další kontrolu pro jistotu?
+- Pokud je výsledek `Dočistit`, umíme další korekci napsat jednou větou?
+- Pokud se vrací stará cesta, neřešíme ji jako drobný dozvuk?
+- Pokud vznikl nový případ, nelepíme ho na původní korekci?
+- Nevznikl nový tracker, tabulka, screenshotová sbírka ani jmenná evidence?
+- Má ponechaný záznam retenční důvod?
+- Má vlastník pracovního místa jasný návratový signál?
+
+Ověření úklidové korekce je poslední brzda před tím, než se malá oprava buď uzavře, nebo začne znovu bobtnat. Dobré ověření neoslavuje proces. Jen ukáže, že běžná práce prošla čistěji než minule, stará stopa se nevrátila a kvůli kontrole nevznikla další zbytečná evidence. To je přesně ten druh nenápadného vítězství, které v provozu šetří víc času než velké reorganizační plakáty.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SK o ověření úklidové korekce při dalším běžném použití: reálný návrat, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SJ o převodu drobného dozvuku po první kontrole do jedné úklidové korekce: vymezení dozvuku, nejbližší místo opravy, stejný průchod, privacy-first brzda, karta a checklist.
 - 2026-05-28: Doplněna Příloha SI o první běžné kontrole stabilního pracovního místa po uzavřené lokální opravě: přirozený návrat, vstupní cesta, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SG o ověření lokální opravy při dalším běžném použití: návrat k opravné větě, přirozené ověření, signály nalezení, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first minimum, karta, mini workshop a checklist.
