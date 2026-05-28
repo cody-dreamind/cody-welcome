@@ -137144,8 +137144,254 @@ Drobné tření z prvního návratu je převedené do jedné lokální opravy. O
 
 Lokální oprava po návratu má být malá proto, že chrání výsledek předchozího úklidu. Čím menší zásah stačí, tím víc důvěry si tým může dovolit mít ve stabilní pracovní místo. A důvěra ve stabilní místo je přesně to, kvůli čemu se úklid dělal.
 
+## Příloha SG: Ověření lokální opravy při dalším běžném použití
+
+Příloha SF končí lokální opravou: jedním odkazem, jednou větou, jedním příkladem nebo jedním drobným zásahem v nejbližším pracovním místě. Tahle příloha řeší okamžik potom. Oprava už existuje, ale ještě není dobré ji považovat za stabilní součást systému. Nejprve musí projít dalším běžným použitím bez toho, aby se autor opravy opíral o vlastní paměť.
+
+Ověření lokální opravy není audit. Nemá znovu otevírat celý úklid, hledat všechny podobné stopy ani dokazovat, že předchozí rozhodnutí bylo geniální. Má odpovědět na jednu praktickou otázku:
+
+```text
+Pomohla lokální oprava při stejné běžné práci, která původně narazila?
+```
+
+Pokud odpověď neznáte, opravu neuzavírejte. Nechte ji ve stavu `Čeká na běžné ověření` a vraťte se k ní až ve chvíli, kdy nastane skutečná pracovní situace. Umělý test je užitečný hned po editaci, ale stabilitu ukáže až normální použití.
+
+### Vraťte se k opravné větě
+
+Nezačínejte tím, že znovu pročtete celý starý případ. Začněte opravnou větou z přílohy SF. Ta drží rozsah a připomíná, co mělo být opraveno.
+
+```text
+Opravujeme <konkrétní místo>, aby <konkrétní běžná práce> příště vedla na aktuální zdroj bez <konkrétního tření>.
+```
+
+Při ověření si podtrhněte tři části:
+
+1. `konkrétní místo`, kde se měnilo;
+2. `konkrétní běžná práce`, kterou má oprava podpořit;
+3. `konkrétní tření`, které mělo zmizet.
+
+Když některá část chybí, ověřování bude mlhavé. Doplňte ji ještě před průchodem, ale neměňte samotnou opravu. Cílem není vylepšit zápis tak, aby vypadal chytřeji. Cílem je vědět, co přesně se má při běžném použití stát.
+
+Špatně:
+
+```text
+Opravili jsme onboarding, aby byl jasnější.
+```
+
+Lépe:
+
+```text
+Opravili jsme odkaz v onboardingovém indexu, aby nový člen týmu při předání marketingového výřezu otevřel aktuální kartu místo archivní šablony.
+```
+
+Druhá věta se dá ověřit. První věta jen vytváří prostor pro dlouhou debatu o tom, co znamená "jasnější". A dlouhá debata je přesně ten typ luxusu, který se v malých provozních úpravách tváří jako kvalita, ale často jen vyrábí další mlhu.
+
+### Ověřujte při přirozené práci
+
+Lokální oprava má projít stejným typem situace, ve které vznikl původní nález. Pokud šlo o onboarding nového člověka, ověřujte při onboardingové práci. Pokud šlo o předání obsahu, ověřujte při předání obsahu. Pokud šlo o návrat do šablony po měsíci, ověřujte při reálném návratu, ne během interního proklikávání z nudy.
+
+Praktický postup:
+
+1. Vyberte nejbližší přirozenou situaci, která odpovídá opravné větě.
+2. Nechte člověka začít z běžného vstupního místa.
+3. Neříkejte mu, kde přesně byla oprava, pokud to není nutné pro práci.
+4. Sledujte, jestli dojde k aktuálnímu místu bez staré stopy nebo chybějícího kontextu.
+5. Zapište výsledek jednou větou.
+
+Ověření nemusí být tajný test člověka. Naopak: cílem není nachytat kolegu, že něco nepochopil. Cílem je zjistit, jestli pracovní místo pomáhá i bez autora opravy. Pokud člověk potřebuje krátké vysvětlení, zapište to jako signál systému, ne jako osobní selhání.
+
+### Sledujte tři signály
+
+Při ověření stačí tři signály. Víc signálů z malé lokální opravy dělá malý výzkumný projekt, který začne žít vlastním životem.
+
+První signál je `nalezení`. Člověk musí přes běžnou cestu najít aktuální místo. Pokud se pořád vrací do archivu, používá starý bookmark nebo se musí ptát, kde nová verze leží, lokální oprava ještě neodstranila vstupní tření.
+
+Otázky:
+
+- Došel člověk na aktuální místo bez znalosti historie opravy?
+- Vedl ho index, odkaz, název nebo okolní text správně?
+- Zmizela stará stopa z běžné trasy, nebo pořád láká k použití?
+
+Druhý signál je `samostatnost`. Člověk musí pochopit, co má na aktuálním místě udělat. Pokud správnou stránku najde, ale hned potřebuje autora opravy, problém se jen přesunul z navigace do kontextu.
+
+Otázky:
+
+- Je z aktuálního místa jasné, kdy ho použít?
+- Stačí doplněná věta, příklad nebo odkaz k rozhodnutí?
+- Nevznikla nová nejistota kvůli tomu, že starý materiál zmizel?
+
+Třetí signál je `datová stopa`. Oprava nesmí kvůli ověření vytvářet novou vrstvu sledování, exportů nebo osobních poznámek. Stačí výsledek průchodu a případná retenční poznámka.
+
+Otázky:
+
+- Nevznikl kvůli ověření nový seznam lidí, screenshotů nebo interních chyb?
+- Jsou pomocné podklady smazané nebo mají jasné datum smazání?
+- Nepřidali jsme měření, které je větší než samotná oprava?
+
+### Rozlište čtyři výsledky ověření
+
+Po průchodu vyberte jeden ze čtyř stavů. Nepište dlouhou esej, pokud stačí stav a jedna věta důvodu.
+
+`Potvrzeno`: oprava při běžné práci pomohla, člověk našel aktuální místo, zvládl ho použít a nevznikla nová datová stopa.
+
+```text
+Stav: Potvrzeno.
+Důvod: Běžná onboardingová cesta vede na aktuální kartu a archivní šablona se už nepoužila.
+```
+
+`Drobné doladění`: směr opravy je správný, ale chybí jeden malý detail. Třeba název je už správně, ale příklad potřebuje jednu větu navíc. Dovolte jen jednu další lokální úpravu, jinak z toho vzniká nová smyčka.
+
+```text
+Stav: Drobné doladění.
+Důvod: Aktuální karta se našla, ale člověk nepoznal hranici mezi běžným výřezem a samostatným playbookem.
+```
+
+`Špatné místo`: oprava byla provedena jinde, než kde práce skutečně naráží. V tom případě ji nevrstvěte dalšími vysvětlivkami. Vraťte se k otázce, kde člověk poprvé ztratil jistotu, a založte novou lokální opravu s přesnější opravnou větou.
+
+```text
+Stav: Špatné místo.
+Důvod: Index byl opraven, ale běžná cesta začíná ze šablony v projektovém prostoru.
+```
+
+`Nový případ`: ověření ukázalo jiné téma než původní oprava. To je platný signál, ale nepatří do stejné karty. Zapište ho jako samostatný podnět a původní opravu vyhodnoťte podle toho, zda splnila svůj slib.
+
+```text
+Stav: Nový případ.
+Důvod: Odkaz funguje, ale tým narazil na jiný problém v pojmenování navazující sales šablony.
+```
+
+Nejčastější chyba je stav `Drobné doladění` používat jako vstupenku k dalším třem úpravám. Jedna lokální oprava smí mít jednu malou korekci. Když nestačí, nejde o doladění, ale o špatně pojmenovaný problém.
+
+### Privacy-first ověření lokální opravy
+
+Při ověřování lokální opravy držte evidenci chudou. Zapište pracovní situaci, výsledek, stav a případnou retenční poznámku. Nepotřebujete identitu člověka, který ověřením prošel, pokud pro ni není jasný provozní důvod. Nepotřebujete nahrávku obrazovky. Nepotřebujete export historie kliků.
+
+Minimum zápisu:
+
+```text
+Ověřovací situace:
+Výsledek průchodu:
+Stav:
+Další krok:
+Datová stopa:
+Retence:
+```
+
+Privacy-first pravidlo:
+
+```text
+Ověření lokální opravy má prokázat použitelnost pracovního místa, ne sledovat člověka. Ukládáme výsledek práce, ne osobní výkon.
+```
+
+Codyho komentář: když lokální oprava potřebuje vlastní dashboard, asi už není lokální. Malá změna má mít malý důkaz. Všechno ostatní je procesní konfeta a ta se špatně vysává z koberců.
+
+### Karta ověření lokální opravy
+
+```text
+Pracovní místo:
+Opravná věta:
+Co se minule změnilo:
+Běžná ověřovací situace:
+Vstupní místo průchodu:
+Signál nalezení:
+Signál samostatnosti:
+Signál datové stopy:
+Výsledek ověření:
+Stav:
+Další krok:
+Co výslovně neotevíráme:
+Pomocné podklady:
+Retenční poznámka:
+Vlastník:
+Datum návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Onboardingový index pro obsahové workflow.
+
+Opravná věta:
+Opravujeme odkaz v onboardingovém indexu, aby nový člen týmu našel aktuální kartu předání obsahu bez otevření archivní šablony.
+
+Co se minule změnilo:
+Starý odkaz byl nahrazen aktuálním odkazem a archivní položka byla označená jako mimo běžné použití.
+
+Běžná ověřovací situace:
+Předání marketingového výřezu novému člověku v týmu.
+
+Vstupní místo průchodu:
+Onboardingový index.
+
+Signál nalezení:
+Člověk otevřel aktuální kartu bez použití archivní šablony.
+
+Signál samostatnosti:
+Z karty pochopil, jak výřez předat a kdy nejde o samostatný playbook.
+
+Signál datové stopy:
+Nevznikly nové screenshoty ani osobní poznámky; zapsán jen výsledek průchodu.
+
+Výsledek ověření:
+Běžná cesta fungovala bez zásahu autora opravy.
+
+Stav:
+Potvrzeno.
+
+Další krok:
+Převést potvrzenou opravu do stabilního pracovního místa a zavřít kartu.
+
+Co výslovně neotevíráme:
+Nepřepisujeme celý onboarding ani nehledáme staré odkazy mimo běžnou trasu.
+
+Pomocné podklady:
+Žádné.
+
+Retenční poznámka:
+Bez nové osobní nebo zákaznické stopy.
+
+Vlastník:
+Content owner.
+
+Datum návratu:
+Při dalším měsíčním review indexu.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: najděte opravnou větu z lokální opravy.
+2. Minuta 2: vyberte nejbližší běžnou situaci, která opravu opravdu prověří.
+3. Minuta 3: projděte signály nalezení, samostatnosti a datové stopy.
+4. Minuta 4: vyberte stav `Potvrzeno`, `Drobné doladění`, `Špatné místo` nebo `Nový případ`.
+5. Minuta 5: zapište další krok a smažte nebo označte pomocné podklady.
+
+Výstup workshopu:
+
+```text
+Lokální oprava je ověřená v běžné práci. Víme, zda se zavře, jednou doladí, přesune na přesnější místo, nebo oddělí od nového případu.
+```
+
+### Checklist kapitoly
+
+- Vracíme se k opravné větě, ne k celé historii případu?
+- Ověřujeme při skutečné běžné práci?
+- Začíná průchod na stejném typu vstupního místa jako původní problém?
+- Sledujeme jen nalezení, samostatnost a datovou stopu?
+- Nepoužíváme znalost autora opravy jako skrytou navigaci?
+- Umíme vybrat jeden ze čtyř stavů ověření?
+- Pokud jde o drobné doladění, je opravdu jen jedno?
+- Pokud je oprava na špatném místě, nezakrýváme to dalšími vysvětlivkami?
+- Oddělujeme nový případ od původní lokální opravy?
+- Nevznikla nová evidence lidí, kliků, screenshotů nebo exportů bez jasného účelu?
+- Má pomocný podklad datum smazání nebo důvod, proč zůstává?
+- Je jasný další krok: zavřít, doladit, přesunout, nebo založit samostatný podnět?
+
+Ověření lokální opravy je malé, ale důležité. Bez něj se i dobrá oprava může stát jen hezky napsanou změnou, kterou v praxi obchází starý zvyk. Když oprava projde normálním použitím, tým získá něco cennějšího než perfektní dokumentaci: klidnou důvěru, že běžná cesta zase funguje.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SG o ověření lokální opravy při dalším běžném použití: návrat k opravné větě, přirozené ověření, signály nalezení, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SF o převod zbytku po návratu do jedné lokální opravy: rozlišení staré stopy a ztraceného kontextu, oprava nejbližšího pracovního místa, opravná věta, ověření stejnou cestou, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SE o první běžný návrat po stabilizovaném úklidu: návrat pouze při reálné práci, běžná vstupní cesta, signály cesty, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first návrat bez obnovy nepořádku, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SD o uzavření potvrzené úklidové opravy do stabilního pracovního stavu: práce s výsledkem ověření, aktuální místo místo historie, zavření úklidové karty, návratový signál místo dozoru, privacy-first stabilizace, karta, mini workshop a checklist.
