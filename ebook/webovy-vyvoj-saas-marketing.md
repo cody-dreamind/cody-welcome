@@ -137389,6 +137389,234 @@ Lokální oprava je ověřená v běžné práci. Víme, zda se zavře, jednou d
 
 Ověření lokální opravy je malé, ale důležité. Bez něj se i dobrá oprava může stát jen hezky napsanou změnou, kterou v praxi obchází starý zvyk. Když oprava projde normálním použitím, tým získá něco cennějšího než perfektní dokumentaci: klidnou důvěru, že běžná cesta zase funguje.
 
+## Příloha SH: Uzavření potvrzené lokální opravy do stabilního pracovního místa
+
+Příloha SG končí stavem `Potvrzeno`: lokální oprava prošla běžným použitím, člověk našel aktuální místo, dokázal s ním pracovat a kvůli ověření nevznikla zbytečná datová stopa. Tím ale práce ještě nemusí být úplně zavřená. Potvrzená oprava se má převést do stabilního pracovního místa, jinak zůstane viset jako drobný servisní záznam, ke kterému se tým bude vracet častěji, než je potřeba.
+
+Stabilní pracovní místo neznamená, že je všechno dokonalé. Znamená, že běžná práce má jasnou aktuální cestu, stará lokální karta je uzavřená, pomocné podklady jsou uklizené a tým ví, kdy téma znovu otevřít. Pokud po potvrzení opravy vznikne další velké téma, nepatří do stejné smyčky. Patří do samostatného podnětu.
+
+Začněte větou:
+
+```text
+Lokální oprava je potvrzená. Aktuální pracovní místo je stabilní a servisní karta se zavírá bez dalšího rozšiřování.
+```
+
+Pokud se tahle věta nedá napsat, protože výsledek ověření byl `Drobné doladění`, `Špatné místo` nebo `Nový případ`, nejste v uzavření. Jste pořád v práci před uzavřením. To není ostuda, jen špatná fáze procesu. Uzavření má přijít až ve chvíli, kdy už je oprava použitelná bez autora a bez dodatečných berliček.
+
+### Přepište potvrzení do aktuálního místa
+
+První krok není napsat dlouhý závěrečný komentář. První krok je zajistit, že aktuální pracovní místo nese výsledek opravy samo. Člověk, který přijde později, nemá číst celou historii lokální opravy, aby pochopil, co má dělat.
+
+Upravte jen nejbližší místo, kde se běžná práce skutečně odehrává:
+
+- odkaz v indexu;
+- název položky v rozcestníku;
+- krátkou větu v šabloně;
+- příklad u rozhodovacího kroku;
+- stav karty v provozním listu;
+- poznámku u archivované staré verze.
+
+Dobrá stabilizační věta je krátká:
+
+```text
+Pro tuto situaci používejte aktuální kartu předání obsahu. Archivní šablona není součástí běžné trasy.
+```
+
+Špatná stabilizační věta zní jako kronika:
+
+```text
+Původně se používala stará šablona, potom jsme ji jednou opravili, pak se ukázalo, že odkaz v indexu byl nejasný, následně proběhlo ověření a nyní by se měla používat nová karta.
+```
+
+Druhá věta sice říká pravdu, ale v pracovním místě překáží. Historie patří do uzavřené karty nebo rozhodovacího logu. Aktuální místo má vést k akci.
+
+### Zavřete lokální kartu konečným stavem
+
+Lokální karta po potvrzení nesmí zůstat ve stavu `sledovat`. Pokud nemáte konkrétní návratový signál, nevyrábějte ho z nervozity. Malé provozní opravy často trpí tím, že se z nich stane sbírka otevřených "pro jistotu" položek. Po měsíci pak nikdo neví, co je ještě práce a co už je jen stín hotové práce.
+
+Zavírací zápis může vypadat takhle:
+
+```text
+Stav:
+Uzavřeno jako stabilní pracovní místo.
+
+Proč:
+Oprava byla ověřená při běžném použití. Aktuální cesta vede na správné místo bez staré stopy a bez zásahu autora opravy.
+
+Návratový signál:
+Téma otevřeme znovu jen tehdy, když se při stejné běžné práci znovu použije stará cesta nebo člověk nedokáže aktuální místo použít samostatně.
+```
+
+Do stejného zápisu přidejte i hranice:
+
+- neotevíráme celý onboarding;
+- nehledáme všechny podobné historické odkazy;
+- nepřidáváme pravidelný audit jen kvůli jedné potvrzené opravě;
+- nepřenášíme závěr automaticky do jiných týmů nebo produktů;
+- neschováváme nový případ pod starou kartu.
+
+Hranice nejsou pesimismus. Jsou ochrana soustředění. Lokální oprava má zůstat lokální, dokud reálná práce neukáže, že jde o opakovatelný vzor.
+
+### Ukliďte pomocné podklady
+
+Při lokálních opravách často vzniknou drobné podklady: screenshot, dočasný komentář, kopie staré věty, poznámka v chatu, výřez z interního dokumentu, krátká tabulka pro porovnání. V době opravy mohou být užitečné. Po potvrzení se ale mají buď smazat, nebo dostat jasný retenční důvod.
+
+Praktický postup:
+
+1. Sepište, jaké pomocné podklady při opravě a ověření vznikly.
+2. U každého určete `smazat`, `přesunout mimo běžnou trasu`, nebo `ponechat s důvodem`.
+3. Pokud podklad obsahuje osobní, zákaznické nebo interně citlivé detaily, preferujte smazání nebo zkrácený anonymizovaný zápis.
+4. Do uzavírací karty napište jen výsledek, ne celou surovou stopu.
+5. Ověřte, že běžná pracovní cesta nevede přes pomocný podklad.
+
+Minimum, které má zůstat:
+
+```text
+Co bylo potvrzeno:
+Kde je aktuální pracovní místo:
+Jaký je návratový signál:
+Co bylo smazáno nebo archivováno:
+```
+
+Všechno ostatní musí obhájit svůj účel. Pokud ho neobhájí, pryč s tím. Codyho komentář: nejlepší provozní dokumentace často nevypadá jako epický archiv. Vypadá jako pár přesných vět a žádné staré drobky pod stolem.
+
+### Nastavte návratový signál
+
+Stabilní pracovní místo nepotřebuje pravidelný dohled, pokud nejde o rizikovou oblast s jasnou povinností kontroly. U běžné lokální opravy stačí návratový signál: konkrétní událost, která ukáže, že se téma má znovu otevřít.
+
+Dobré návratové signály:
+
+- při onboardingu se znovu použije archivní šablona;
+- interní index znovu vede na starou kartu;
+- člověk musí požádat autora opravy o vysvětlení stejného kroku;
+- aktuální místo se zkopíruje bez klíčové stabilizační věty;
+- pomocný podklad se vrátí do běžné trasy jako zdroj pravdy.
+
+Slabé návratové signály:
+
+- "někdy se na to podíváme";
+- "průběžně hlídat";
+- "až bude čas";
+- "kdyby to někoho napadlo";
+- "při dalším velkém úklidu všeho".
+
+Návratový signál má být pozorovatelný při práci. Když ho neumíte poznat bez nového reportu, pravděpodobně není dost konkrétní. Když by se spouštěl každý týden, možná nejde o uzavřenou lokální opravu, ale o širší systémový problém.
+
+### Privacy-first stabilizace lokální opravy
+
+Privacy-first uzavření lokální opravy má snížit datovou stopu, ne ji zakonzervovat pod záminkou dokumentace. Po potvrzení ponechte jen to, co pomáhá budoucí práci nebo splňuje jasný provozní, právní či bezpečnostní účel.
+
+Kontrolní otázky:
+
+- Zůstává v běžné trase jen aktuální pracovní místo?
+- Jsou staré odkazy, kopie a pomocné komentáře odstraněné nebo označené mimo běžné použití?
+- Neobsahuje uzavírací karta jména, screenshoty, zákaznické ukázky nebo interní citace, které nejsou nutné?
+- Má každý ponechaný podklad důvod a retenční poznámku?
+- Nevytvořili jsme kvůli ověření novou evidenci lidí místo evidence výsledku práce?
+
+Stabilizační pravidlo:
+
+```text
+Po potvrzené lokální opravě ukládáme stav pracovního místa, ne osobní průběh ověření. Běžná trasa má být kratší a datová stopa chudší než před opravou.
+```
+
+Pokud uzavření vyžaduje uchovat citlivější podklad, zapište proč, kdo k němu má přístup a kdy se smaže nebo znovu posoudí. Bez těchto tří věcí nejde o dokumentaci, ale o odložený úklid.
+
+### Karta uzavření potvrzené lokální opravy
+
+```text
+Pracovní místo:
+Původní lokální tření:
+Lokální oprava:
+Výsledek běžného ověření:
+Aktuální stabilní stav:
+Co zůstává v běžné trase:
+Co je zavřené, smazané nebo mimo běžné použití:
+Co výslovně neotevíráme:
+Návratový signál:
+Pomocné podklady:
+Retenční poznámka:
+Vlastník pracovního místa:
+Datum návratu pouze při signálu:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Onboardingový index pro obsahové workflow.
+
+Původní lokální tření:
+Nový člen týmu z indexu otevíral archivní šablonu předání obsahu.
+
+Lokální oprava:
+Odkaz v indexu byl nahrazen aktuální kartou a archivní položka byla označená mimo běžné použití.
+
+Výsledek běžného ověření:
+Při předání marketingového výřezu člověk našel aktuální kartu a zvládl ji použít bez autora opravy.
+
+Aktuální stabilní stav:
+Onboardingový index vede na aktuální kartu předání obsahu.
+
+Co zůstává v běžné trase:
+Aktuální karta a krátká věta, kdy ji použít.
+
+Co je zavřené, smazané nebo mimo běžné použití:
+Archivní šablona je mimo běžnou trasu, dočasný komentář z ověření byl smazán.
+
+Co výslovně neotevíráme:
+Nepřepisujeme celý onboarding, nehledáme staré odkazy mimo tuto pracovní trasu a nezavádíme nový měsíční audit.
+
+Návratový signál:
+Téma se otevře znovu jen tehdy, když se při onboardingu znovu použije archivní šablona nebo aktuální karta nebude použitelná samostatně.
+
+Pomocné podklady:
+Žádné ponechané podklady.
+
+Retenční poznámka:
+Bez nové osobní nebo zákaznické stopy.
+
+Vlastník pracovního místa:
+Content owner.
+
+Datum návratu pouze při signálu:
+Bez pevného data.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte stav z ověření a potvrďte, že je opravdu `Potvrzeno`.
+2. Minuta 2: napište jednu větu stabilního pracovního místa.
+3. Minuta 3: určete, co zůstává v běžné trase a co se zavírá.
+4. Minuta 4: ukliďte pomocné podklady nebo jim dejte retenční důvod.
+5. Minuta 5: napište konkrétní návratový signál.
+6. Minuta 6: zavřete lokální kartu konečným stavem.
+
+Výstup workshopu:
+
+```text
+Potvrzená lokální oprava je převedená do stabilního pracovního místa. Tým ví, co platí, co už se nepoužívá, co se nemaří dalším úkolem a při jakém signálu se téma vrátí.
+```
+
+### Checklist kapitoly
+
+- Uzavíráme jen lokální opravu se stavem `Potvrzeno`?
+- Je aktuální pracovní místo srozumitelné bez historie opravy?
+- Přepsali jsme výsledek do nejbližšího místa, kde se práce opravdu děje?
+- Má lokální karta konečný stav?
+- Je jasné, co zůstává v běžné trase?
+- Je jasné, co je smazané, archivované nebo mimo běžné použití?
+- Neotevíráme celý proces kvůli jedné potvrzené lokální opravě?
+- Oddělujeme nové případy od uzavření původní opravy?
+- Máme konkrétní návratový signál místo vágního dohledu?
+- Nevznikl nový audit, report nebo pravidelná kontrola bez jasného důvodu?
+- Jsou pomocné podklady uklizené nebo mají retenční poznámku?
+- Neuchováváme osobní, zákaznické nebo interně citlivé detaily bez účelu?
+- Ví vlastník pracovního místa, že smyčka je zavřená?
+- Umí tým poznat, kdy téma znovu otevřít?
+
+Uzavření potvrzené lokální opravy je malá disciplína s velkým dopadem. Když ji tým přeskočí, opravy se hromadí jako polotovary. Když ji udělá dobře, běžná práce je zase o kousek kratší, aktuálnější a méně datově upovídaná. To je přesně ten typ zlepšení, který se neprodává na plakátu, ale v provozu šetří nervy.
+
 ## Pracovní log
 
 - 2026-05-28: Doplněna Příloha SG o ověření lokální opravy při dalším běžném použití: návrat k opravné větě, přirozené ověření, signály nalezení, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first minimum, karta, mini workshop a checklist.
@@ -137965,3 +138193,4 @@ Ověření lokální opravy je malé, ale důležité. Bez něj se i dobrá opra
 - 2026-05-27: Doplněna úvodní podkapitola o klidovém období po ověřené trase: návratový signál, omezení další editace, privacy-first klid, karta a checklist.
 - 2026-05-27: Doplněna úvodní podkapitola o návratu k trase po klidovém období: rozlišení podnětu a návratového signálu, potvrzení původního slibu, stavy po návratu, privacy-first brána, karta a checklist.
 - 2026-05-27: Doplněna Příloha RM o prvním návratu k čistému pracovnímu stavu po uzavřené servisní poznámce: cesta, použití, datová stopa, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
+- 2026-05-28: Doplněna Příloha SH o uzavření potvrzené lokální opravy do stabilního pracovního místa: aktuální stav, zavření lokální karty, úklid pomocných podkladů, návratový signál, privacy-first stabilizace, karta a checklist.
