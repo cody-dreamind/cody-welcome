@@ -139042,8 +139042,234 @@ Lokální úprava po lehké hraně je ověřená při běžném použití. Víme
 
 Ověření lokální úpravy má zavřít malou smyčku. Buď ukáže, že hrana zmizela a trasa může zůstat v klidu, nebo přesně pojmenuje, co se ještě děje. Důležité je nepoužít malý nález jako vstupenku do velkého projektu. Dobrá lokální úprava se pozná podle toho, že po ní další člověk pracuje o kousek plynuleji a nikdo kvůli tomu nemusí otevírat servisní zákulisí.
 
+## Příloha SP: Uzavření potvrzené lokální úpravy do čisté pracovní trasy
+
+Příloha SO ověřila, jestli lokální úprava po lehké hraně funguje při dalším běžném použití. Pokud je výsledek `Potvrzeno`, práce ještě není úplně hotová. Potvrzení je důkaz, že úprava pomohla. Uzavření je rozhodnutí, co zůstane v běžné trase, co se smaže nebo archivuje a jak se zabrání tomu, aby z drobné opravy vznikla další vrstva provozní historie.
+
+Tahle fáze se často podceňuje. Tým opraví popisek, ověří průchod a nechá vedle toho ležet kartu, poznámku, screenshot, starý odkaz a dočasné vysvětlení. O měsíc později už nikdo neví, co z toho je aktuální pravidlo a co jen stopa po opravě. Čistá pracovní trasa se tím pomalu zanáší, i když každá jednotlivá oprava byla rozumná.
+
+Začněte větou:
+
+```text
+Lokální úprava po lehké hraně je potvrzená. Do běžné pracovní trasy ponecháme jen aktuální místo a krátký návratový signál; pomocné stopy zavřeme nebo smažeme podle retenčního důvodu.
+```
+
+Pokud věta nejde napsat, protože pořád nevíte, co je aktuální místo, vraťte se k ověření z Přílohy SO. Neuzavírejte úpravu jen proto, že už chcete mít klid. Uzavření má chránit klid, ne ho předstírat.
+
+### Přepište potvrzení do aktuálního místa
+
+Potvrzená lokální úprava nemá žít hlavně v kartě opravy. Má se propsat do místa, které člověk při práci opravdu používá: indexu, checklistu, šablony, briefu, formulářového popisku, provozního listu nebo rozhodovací poznámky. Karta opravy je servisní pomůcka. Aktuální místo je zdroj pravdy.
+
+Praktický postup:
+
+1. Otevřete výsledek ověření z Přílohy SO.
+2. Najděte větu, odkaz, popisek nebo příklad, který teď funguje.
+3. Zkontrolujte, že právě toto místo je součástí běžné trasy.
+4. Přepište do něj konečnou podobu bez servisní historie.
+5. Odstraňte věty typu "po opravě", "nově", "dočasně" nebo "viz starý příklad", pokud už nejsou potřeba.
+
+Konečná pracovní věta má být čitelná i pro člověka, který nezná původní hranu. Například:
+
+```text
+Použijte první kontaktní formulář, když návštěvník potřebuje stručně popsat cíl, zanechat e-mail a volitelně přidat URL pro kontext.
+```
+
+Slabší verze by zněla:
+
+```text
+Použijte opravený formulář podle poslední lokální úpravy, ne starou rychlou poptávku s telefonem.
+```
+
+Druhá věta sice připomíná historii, ale nutí čtenáře znát servisní zákulisí. Čistá trasa má fungovat bez toho.
+
+### Zavřete kartu jako výsledek, ne jako další úkol
+
+Karta lokální úpravy má na konci dostat konečný stav. Nemá se proměnit v dlouhodobý seznam "ještě někdy zkontrolovat". Pokud je úprava potvrzená, další kontrola má vzniknout jen z reálného návratového signálu, ne z opatrnosti.
+
+Dobré uzavření karty:
+
+```text
+Stav:
+Uzavřeno jako potvrzená lokální úprava.
+
+Výsledek:
+Aktuální popisek je součástí běžného indexu a při dalším použití vedl člověka správně.
+
+Další plánovaná kontrola:
+Žádná.
+
+Návratový signál:
+Téma se vrátí, pokud někdo znovu otevře archivní příklad nebo podle popisku nepozná, kdy formulář použít.
+```
+
+Slabé uzavření:
+
+```text
+Stav:
+Hotovo, ale pro jistotu kontrolovat při každém dalším použití.
+```
+
+"Pro jistotu" je drahá fráze. U malých provozních úprav často znamená, že si tým nechává otevřený mikroproces bez jasného důvodu. Když se takových mikroprocesů nasbírá dvacet, najednou máte pocit, že provoz je složitý. Ve skutečnosti jen nikdo nezavřel staré servisní dveře.
+
+### Ukliďte pomocné stopy
+
+Po potvrzení se podívejte, jaké stopy během opravy vznikly. Některé mohou zůstat, pokud mají jasný účel. Většina ale může zmizet nebo se zkrátit na jednu větu v logu.
+
+Typické pomocné stopy:
+
+- pracovní karta lokální úpravy;
+- komentář u šablony;
+- dočasný odkaz na archivní příklad;
+- screenshot před a po;
+- chatová dohoda;
+- export průchodu;
+- duplicitní poznámka v indexu;
+- starý popisek ponechaný "pro kontext".
+
+U každé stopy rozhodněte jeden ze čtyř stavů:
+
+1. Ponechat v aktuální trase: stopa je teď součástí běžné práce.
+2. Zkrátit: stačí krátký log nebo závěrečná věta.
+3. Archivovat s důvodem: má právní, provozní nebo rozhodovací hodnotu.
+4. Smazat: už jen vysvětluje starý stav a zvyšuje šum.
+
+Privacy-first pravidlo je jednoduché: pokud pomocná stopa obsahuje osobní údaje, zákaznický detail, interní citaci nebo screenshot s citlivým kontextem, musí mít jasný retenční důvod. Jinak pryč. Digitální nepořádek je taky riziko, jen se tváří jako pečlivost.
+
+Codyho komentář: nejčistší dokumentace není ta, která všechno uchová. Nejčistší dokumentace je ta, která budoucímu člověku ukáže správný krok a nepřinutí ho číst archeologii jedné opravené věty. Indiana Jones by možná protestoval, ale v SaaS provozu ho nechceme jako defaultní roli.
+
+### Nastavte návratový signál místo periodického dozoru
+
+Potvrzená lokální úprava nepotřebuje pravidelný dohled, pokud nejde o rizikové místo. Potřebuje návratový signál: konkrétní situaci, která téma znovu otevře. Signál musí být pozorovatelný při běžné práci a nesmí vyžadovat novou sledovací vrstvu.
+
+Dobré návratové signály:
+
+- další člověk otevře starý archivní příklad;
+- popisek znovu nestačí k samostatnému použití;
+- odkaz v indexu vede na neaktuální místo;
+- kvůli stejné větě vznikne opakovaný dotaz;
+- aktuální trasa začne vytvářet zbytečná data;
+- vlastník musí vysvětlovat rozhodnutí mimo pracovní místo.
+
+Slabé návratové signály:
+
+- "někdy zkontrolovat";
+- "sledovat průběžně";
+- "až bude čas projít všechno";
+- "pokud se nám to nebude líbit";
+- "po každém použití udělat kontrolu".
+
+Návratový signál pište tak, aby šel poznat bez speciálního nástroje:
+
+```text
+Téma znovu otevřeme, pokud autor nové landing page použije starý formulářový příklad nebo se zeptá, který první kontaktní formulář je aktuální.
+```
+
+Taková věta drží rozsah. Nevyžaduje analytiku, nahrávání obrazovky ani jmennou tabulku. Stačí běžný pracovní náraz.
+
+### Karta uzavření potvrzené lokální úpravy
+
+```text
+Čistá pracovní trasa:
+Původní lehká hrana:
+Lokální úprava:
+Výsledek ověření:
+Aktuální pracovní místo:
+Konečná pracovní věta:
+Co zůstává v běžné trase:
+Co zkracujeme:
+Co archivujeme:
+Co mažeme:
+Nová data po uzavření:
+Retenční rozhodnutí:
+Zavřená karta:
+Vlastník trasy:
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Čistá pracovní trasa:
+Index šablon pro nové landing pages.
+
+Původní lehká hrana:
+Popisek formulářové šablony používal starý název "rychlá poptávka s telefonem".
+
+Lokální úprava:
+Popisek byl přepsán na první kontaktní formulář s e-mailem, stručným kontextem a volitelným URL.
+
+Výsledek ověření:
+Potvrzeno při další landing page. Autor našel aktuální šablonu přes index a nepoužil archivní příklad.
+
+Aktuální pracovní místo:
+Index šablon, sekce formuláře.
+
+Konečná pracovní věta:
+Použijte první kontaktní formulář, když návštěvník potřebuje stručně popsat cíl, zanechat e-mail a volitelně přidat URL pro kontext.
+
+Co zůstává v běžné trase:
+Aktuální popisek a odkaz na platnou šablonu.
+
+Co zkracujeme:
+Kartu lokální úpravy na jeden logový záznam.
+
+Co archivujeme:
+Nic.
+
+Co mažeme:
+Dočasný komentář u indexu a odkaz na archivní příklad s povinným telefonem.
+
+Nová data po uzavření:
+Žádná.
+
+Retenční rozhodnutí:
+Krátký log zůstává do nejbližšího měsíčního review; bez osobních údajů a zákaznických detailů.
+
+Zavřená karta:
+Ano. Stav `Uzavřeno jako potvrzená lokální úprava`.
+
+Vlastník trasy:
+Marketing owner.
+
+Návratový signál:
+Téma se vrátí, pokud další autor znovu otevře archivní příklad nebo podle popisku nepozná aktuální formulář.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete výsledek ověření z Přílohy SO.
+2. Minuta 2: najděte aktuální pracovní místo, kde má potvrzená úprava zůstat.
+3. Minuta 3: napište konečnou pracovní větu bez servisní historie.
+4. Minuta 4: projděte pomocné stopy a rozdělte je na ponechat, zkrátit, archivovat nebo smazat.
+5. Minuta 5: nastavte návratový signál bez nové sledovací vrstvy.
+6. Minuta 6: zavřete kartu konečným stavem a retenční poznámkou.
+
+Výstup workshopu:
+
+```text
+Potvrzená lokální úprava je uzavřená do čisté pracovní trasy. Běžné místo obsahuje aktuální větu, servisní stopy jsou zavřené a téma se vrátí jen při konkrétním návratovém signálu.
+```
+
+### Checklist kapitoly
+
+- Máme výsledek ověření `Potvrzeno`?
+- Víme, které pracovní místo je po úpravě zdrojem pravdy?
+- Je konečná věta srozumitelná bez znalosti původní hrany?
+- Odstranili jsme z běžné trasy slova "dočasně", "po opravě" a odkazy na starý stav?
+- Zavřeli jsme kartu jako výsledek, ne jako další úkol?
+- Rozdělili jsme pomocné stopy na ponechat, zkrátit, archivovat nebo smazat?
+- Má každá ponechaná nebo archivovaná stopa jasný důvod?
+- Nevzniká po uzavření nové měření, screenshotování ani jmenná evidence?
+- Neuchováváme zákaznický detail nebo osobní údaj jen kvůli pohodlí vysvětlení?
+- Má krátký log retenční poznámku?
+- Má trasa konkrétní návratový signál místo periodického dozoru?
+- Ví vlastník, kdy téma znovu otevřít a kdy ho nechat v klidu?
+
+Uzavření potvrzené lokální úpravy je malý, ale důležitý hygienický krok. Nejde o slavnostní tečku. Jde o to, aby další člověk našel aktuální pracovní místo, udělal správný krok a nemusel přitom procházet servisní historii. Čistá trasa není ta, která nikdy neměla problém. Je to ta, která po opravě umí zase vypadat jednoduše.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SP o uzavření potvrzené lokální úpravy do čisté pracovní trasy: propsání potvrzení do aktuálního místa, zavření karty bez dalšího úkolu, úklid pomocných stop, návratový signál místo dozoru, privacy-first retence, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SO o ověření lokální úpravy po lehké hraně při dalším běžném použití: návrat k opravné větě, stejná vstupní cesta, signály nalezení, pochopení a datové stopy, čtyři výsledky ověření, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SN o převodu lehké hrany z prvního návratu do jedné lokální úpravy: vymezení hrany jednou větou, oprava místa nárazu, privacy-first kontrola nové stopy, rozlišení lokální úpravy a nového signálu, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SM o první běžný návrat k čisté pracovní trase po uzavřené korekci: běžné vstupní místo, signály přímé cesty, samostatného kroku a datové stopy, čtyři výsledky návratu, privacy-first evidence, karta, mini workshop a checklist.
