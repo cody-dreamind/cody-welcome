@@ -137617,8 +137617,204 @@ Potvrzená lokální oprava je převedená do stabilního pracovního místa. T�
 
 Uzavření potvrzené lokální opravy je malá disciplína s velkým dopadem. Když ji tým přeskočí, opravy se hromadí jako polotovary. Když ji udělá dobře, běžná práce je zase o kousek kratší, aktuálnější a méně datově upovídaná. To je přesně ten typ zlepšení, který se neprodává na plakátu, ale v provozu šetří nervy.
 
+## Příloha SI: První běžná kontrola stabilního pracovního místa po uzavřené lokální opravě
+
+Příloha SH zavřela potvrzenou lokální opravu do stabilního pracovního místa. To je dobrý konec servisní smyčky, ale neznamená to, že tým má okamžitě spustit další kontrolní kolečko. Stabilní místo se má nejdřív nechat normálně použít. Teprve první přirozený návrat ukáže, jestli uzavření opravdu zkrátilo práci, nebo jen hezky popsalo konec na papíře.
+
+První běžná kontrola není audit. Je to krátké ověření při situaci, která by nastala i bez e-booku: někdo hledá šablonu, předává výstup, otevírá index, používá rozhodovací kartu nebo se vrací k provoznímu pravidlu. Cílem je zjistit, jestli stabilní pracovní místo obstojí bez autora poslední opravy, bez vysvětlování v chatu a bez návratu k pomocným podkladům.
+
+Začněte větou:
+
+```text
+Stabilní pracovní místo bylo použito v běžné práci. Kontrolujeme jen to, jestli aktuální cesta funguje samostatně a bez obnovy staré datové stopy.
+```
+
+Pokud žádná běžná práce nenastala, kontrolu nespouštějte uměle. Vynucený test často najde teoretické detaily, které by v provozu nikoho nebolely. U lokálních oprav je lepší čekat na reálný dotek práce. Dokumentace nemá zaměstnávat tým jen proto, že umí vyrobit další kolonku.
+
+### Vraťte se stejnou pracovní cestou
+
+Kontrola má začít tam, kde by začal člověk při normální práci. Neotevírejte nejdřív historii oprav, pracovní log ani starou servisní kartu. To by výsledek zkreslilo: člověk by měl nápovědu, kterou běžný uživatel pracovního místa nemá.
+
+Použijte původní vstup:
+
+- rozcestník, ze kterého se chodí na šablonu;
+- interní index, který vede k pracovnímu pravidlu;
+- stránku e-booku, kterou tým používá jako trasu;
+- onboardingový seznam pro nového člověka;
+- provozní kartu, která má být zdrojem pravdy;
+- odkaz v issue, checklistu nebo delivery materiálu.
+
+Kontrolní otázka je jednoduchá:
+
+```text
+Když jdu běžnou cestou, dostanu se k aktuálnímu pracovnímu místu a chápu, co mám udělat?
+```
+
+Pokud odpověď vyžaduje znalost toho, co se opravovalo v příloze SH, stabilní místo ještě není dost samostatné. Historie může zůstat uložená, ale nesmí být povinnou četbou pro běžnou práci.
+
+### Sledujte tři signály
+
+První běžná kontrola má sledovat jen tři věci. Víc by z ní udělalo malý procesní festival, a ty mívají stejný problém jako firemní trička: někdo je objedná, všichni je chvíli obdivují a pak zaberou místo ve skříni.
+
+První signál je nalezení. Člověk má aktuální místo najít bez dotazu na autora opravy a bez starého odkazu, který ho stáhne zpět do archivní trasy.
+
+Druhý signál je použití. Aktuální místo má obsahovat dost kontextu pro nejbližší krok: co platí, kdy se to používá, co už je mimo běžnou trasu a kde je hranice rozsahu.
+
+Třetí signál je datová stopa. Kontrola nemá vrátit do hry pomocné screenshoty, citace z chatu, staré exporty nebo osobní poznámky jen proto, že se někdo bojí uzavřít historii. Stabilní místo má být provozně chudší na data než oprava, která k němu vedla.
+
+Krátký záznam může vypadat takhle:
+
+```text
+Nalezení:
+Aktuální karta byla nalezena přes onboardingový index.
+
+Použití:
+Člověk podle ní dokončil předání bez dotazu na autora opravy.
+
+Datová stopa:
+Nebyl otevřen starý screenshot ani dočasný komentář z ověření.
+```
+
+### Čtyři výsledky první kontroly
+
+Po kontrole vyberte jeden stav. Nepište román. Stav má říct, co se děje dál.
+
+`Klid` znamená, že stabilní místo funguje. Není potřeba další práce, pevný termín návratu ani nová evidence. Nechte věc být, dokud se neobjeví návratový signál.
+
+`Drobný dozvuk` znamená, že aktuální místo funguje, ale v okolí zůstal malý zbytek: nejasný název odkazu, archivní poznámka, duplicitní věta nebo stará formulace. Pokud jde opravit hned v nejbližším místě bez nové smyčky, udělejte to jako úklidovou poznámku. Pokud ne, zapište samostatný podnět.
+
+`Návrat staré cesty` znamená, že se člověk při běžné práci znovu dostal ke staré šabloně, starému odkazu nebo pomocnému podkladu. To není katastrofa, ale je to signál, že stabilizace nebyla úplná. Vraťte se k nejbližšímu místu, které člověka svedlo mimo aktuální trasu.
+
+`Nový případ` znamená, že kontrola odkryla jiný problém než původní lokální opravu. Nelepte ho na starou kartu. Založte nový podnět s vlastní otázkou, hranicí a privacy-first kontrolou.
+
+Rozhodovací věta:
+
+```text
+Výsledek první běžné kontroly je: Klid / Drobný dozvuk / Návrat staré cesty / Nový případ.
+Další krok:
+```
+
+Bez téhle věty se kontrola snadno rozteče do obecného pocitu, že "by se to mělo ještě trochu doladit". Trochu doladit lze skoro všechno. Otázka je, jestli to patří do této smyčky.
+
+### Privacy-first kontrola stabilního místa
+
+Privacy-first kontrola se tu nesoustředí jen na zákaznická data. U interních pracovních míst jde často o menší, ale vytrvalou datovou stopu: jména lidí v příkladech, screenshoty interních nástrojů, kopie zákaznických vět, exporty z CRM, poznámky z chatu nebo historické komentáře, které už nikdo nepotřebuje.
+
+Při první běžné kontrole se zeptejte:
+
+- Potřebovali jsme pro použití stabilního místa otevřít pomocný podklad?
+- Vrátil se do běžné trasy starý screenshot, export nebo komentář?
+- Obsahuje aktuální pracovní místo víc osobních nebo zákaznických detailů, než je nutné?
+- Je jasné, co je zdroj pravdy a co je archivní stopa?
+- Nevznikla kvůli kontrole nová tabulka lidí, průchodů nebo chování?
+
+Pravidlo:
+
+```text
+První kontrola stabilního pracovního místa má ověřit použitelnost cesty, ne obnovit historii opravy. Pokud k použití potřebujeme staré podklady, pracovní místo ještě není stabilní.
+```
+
+Codyho komentář: když tým musí při běžném použití sahat do servisního zákulisí, není to stabilní dokumentace. Je to dokumentace s tajnými dveřmi. A tajné dveře v provozu obvykle znamenají, že někdo časem skončí ve sklepě.
+
+### Karta první běžné kontroly
+
+```text
+Stabilní pracovní místo:
+Původní lokální oprava:
+Běžná pracovní situace:
+Vstupní cesta:
+Nalezení:
+Použití:
+Datová stopa:
+Výsledek kontroly:
+Další krok:
+Co neotevíráme:
+Pomocné podklady:
+Retenční poznámka:
+Vlastník pracovního místa:
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilní pracovní místo:
+Onboardingový index pro obsahové workflow.
+
+Původní lokální oprava:
+Archivní šablona předání obsahu byla vyřazená z běžné trasy.
+
+Běžná pracovní situace:
+Nový člověk připravoval první předání marketingového výřezu.
+
+Vstupní cesta:
+Onboardingový index, sekce obsahové předání.
+
+Nalezení:
+Aktuální karta byla nalezena bez dotazu na autora opravy.
+
+Použití:
+Předání šlo dokončit podle karty; nebylo potřeba číst servisní historii.
+
+Datová stopa:
+Nebyl otevřen starý screenshot ani kopie původního komentáře.
+
+Výsledek kontroly:
+Klid.
+
+Další krok:
+Žádná změna. Pracovní místo zůstává stabilní.
+
+Co neotevíráme:
+Nepřepisujeme celý onboarding a nehledáme všechny staré šablony mimo tuto trasu.
+
+Pomocné podklady:
+Žádné.
+
+Retenční poznámka:
+Bez nové osobní nebo zákaznické stopy.
+
+Vlastník pracovního místa:
+Content owner.
+
+Návratový signál:
+Téma se vrátí jen tehdy, když běžná cesta znovu dovede člověka k archivní šabloně nebo aktuální karta nebude použitelná samostatně.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: začněte běžnou vstupní cestou, ne historií opravy.
+2. Minuta 2: ověřte, jestli člověk našel aktuální pracovní místo.
+3. Minuta 3: ověřte, jestli podle něj udělal nejbližší krok bez autora opravy.
+4. Minuta 4: zkontrolujte, jestli se neotevřely staré pomocné podklady nebo zbytečná osobní data.
+5. Minuta 5: vyberte stav `Klid`, `Drobný dozvuk`, `Návrat staré cesty` nebo `Nový případ`.
+
+Výstup workshopu:
+
+```text
+Stabilní pracovní místo prošlo první běžnou kontrolou. Je jasné, jestli zůstává v klidu, potřebuje drobný úklid, vrací se ke staré cestě, nebo otevřelo nový samostatný případ.
+```
+
+### Checklist kapitoly
+
+- Proběhla kontrola při reálné pracovní situaci, ne umělém auditu?
+- Začali jsme běžnou vstupní cestou?
+- Našel člověk aktuální pracovní místo bez autora opravy?
+- Bylo pracovní místo použitelné bez čtení servisní historie?
+- Nevedl žádný odkaz zpět do staré nebo archivní trasy?
+- Neotevřeli jsme pomocné podklady jen ze zvyku?
+- Nevznikla nová evidence lidí, průchodů nebo chování?
+- Umíme vybrat jeden ze čtyř výsledků kontroly?
+- Pokud jde o nový případ, nelepíme ho na starou lokální opravu?
+- Pokud jde o drobný dozvuk, držíme ho v nejbližším pracovním místě?
+- Pokud je výsledek `Klid`, opravdu nepřidáváme další kontrolu pro jistotu?
+- Má vlastník pracovního místa jasný návratový signál?
+
+První běžná kontrola má chránit stabilní místo před dvěma extrémy: před zapomenutou chybou i před nekonečným dolaďováním. Dobré stabilní místo se po kontrole nestane slavnostním projektem. Prostě dál slouží práci, nevyrábí nové stopy a nechá tým soustředit se na další skutečný problém.
+
 ## Pracovní log
 
+- 2026-05-28: Doplněna Příloha SI o první běžné kontrole stabilního pracovního místa po uzavřené lokální opravě: přirozený návrat, vstupní cesta, signály nalezení, použití a datové stopy, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SG o ověření lokální opravy při dalším běžném použití: návrat k opravné větě, přirozené ověření, signály nalezení, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SF o převod zbytku po návratu do jedné lokální opravy: rozlišení staré stopy a ztraceného kontextu, oprava nejbližšího pracovního místa, opravná věta, ověření stejnou cestou, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SE o první běžný návrat po stabilizovaném úklidu: návrat pouze při reálné práci, běžná vstupní cesta, signály cesty, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first návrat bez obnovy nepořádku, karta, mini workshop a checklist.
