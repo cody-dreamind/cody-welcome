@@ -140457,8 +140457,248 @@ Lokální oprava je ověřená při běžném použití. Má jeden výsledný st
 
 Malá lokální oprava má vyhrát tím, že přestane být vidět. Pokud při dalším běžném použití člověk prostě najde správnou cestu a dokončí práci bez nového vysvětlování, oprava splnila účel. Nezaslouží si další ceremonii. Zaslouží si čistý changelog, uklizené podklady a klid, dokud se neobjeví skutečný nový signál.
 
+## Příloha SV: Uzavření potvrzené lokální opravy do čistého pracovního stavu
+
+Příloha SU ověřila malou lokální opravu při dalším běžném použití. Pokud oprava obstála, nastává nenápadný, ale důležitý krok: zavřít ji tak, aby se z ní nestal nový aktivní dokument, další pravidlo, další kontrolní úkol nebo další vrstva historie.
+
+Potvrzená lokální oprava má zůstat ve výsledku práce, ne v provozní pozornosti týmu. Když starý odkaz přestal mást, šablona vede na správné místo a člověk dokončil práci bez doptávání, není potřeba držet původní servisní poznámku, opravnou kartu a ověřovací zápis jako tři živé artefakty. Stačí aktuální pracovní místo, krátký changelog a návratový signál pro případ, že se stejný problém opravdu vrátí.
+
+Začněte větou:
+
+```text
+Lokální oprava byla ověřená běžným použitím. Ponecháváme jen aktuální pracovní místo a krátkou rozhodovací stopu; pomocné podklady uklízíme.
+```
+
+Tahle věta brání tomu, aby se z úspěšné opravy stala další věc k hlídání. Úspěšná drobná změna si nezaslouží dohled. Zaslouží si zmizet do normální práce.
+
+### Rozlišujte výsledek a historii
+
+Po ověření máte obvykle tři vrstvy:
+
+- aktuální pracovní místo, které lidé opravdu používají;
+- rozhodovací stopu, která vysvětluje, proč se místo změnilo;
+- pomocnou historii, která byla užitečná jen při opravě.
+
+Aktuální pracovní místo zůstává. Rozhodovací stopa se zkrátí. Pomocná historie se smaže, archivuje nebo označí jako uzavřená. Pokud všechny tři vrstvy necháte aktivní, budoucí čtenář nebude vědět, která z nich platí.
+
+Příklad:
+
+```text
+Aktuální pracovní místo:
+Index formulářových šablon.
+
+Rozhodovací stopa:
+Starý úkol nově vede jen na aktuální index, protože archivní odkaz mátl při přípravě landing page.
+
+Pomocná historie:
+Servisní poznámka, opravná karta a ověřovací poznámka.
+```
+
+V čistém stavu má člověk při práci otevřít index, ne příběh indexu. Historie má pomoct při budoucím návratu, ne stát uprostřed cesty jako informační značka každé tři metry.
+
+### Zavřete opravu jedním stavem
+
+Potvrzenou lokální opravu zavřete jedním ze čtyř stavů:
+
+`Začleněno`: oprava je součástí aktuálního pracovního místa a nepotřebuje další akci.
+
+`Začleněno s návratovým signálem`: oprava drží, ale víte, při jakém opakovaném signálu se téma znovu otevře.
+
+`Začleněno s odloženým tématem`: oprava drží a vedle ní vzniklo jiné téma, které patří do samostatné fronty.
+
+`Nezačleňovat`: ověření sice proběhlo, ale výsledek ukázal, že oprava nemá být trvalá. Tento stav patří spíš k výjimkám, ale je užitečné ho mít pojmenovaný.
+
+U běžné potvrzené opravy bude nejčastější první stav:
+
+```text
+Stav:
+Začleněno.
+
+Důvod:
+Opravené místo při běžné práci navedlo editora do aktuálního indexu a původní záměna se neopakovala.
+
+Další akce:
+Žádná. Pomocné podklady zkrátit na changelog.
+```
+
+Stav `Začleněno s návratovým signálem` použijte tehdy, když nechcete držet další kontrolu, ale zároveň víte, co by téma znovu otevřelo:
+
+```text
+Návratový signál:
+Stejný typ archivního odkazu znovu zmátne práci ve dvou dalších běžných úkolech.
+```
+
+To není plán kontroly. Je to brzda proti náhodnému znovuotevření.
+
+### Zkraťte pomocné podklady
+
+Pomocné podklady po lokální opravě mají krátkou životnost. Při opravě pomohly udržet rozsah, důvod a privacy-first hranici. Po ověření už nemají být dalším zdrojem pravdy.
+
+Praktické pravidlo:
+
+- servisní poznámku zavřete;
+- opravnou kartu zkraťte na jednu větu;
+- ověřovací kartu ponechte jen tehdy, pokud vysvětluje budoucí návratový signál;
+- pracovní screenshoty, exporty, kopie šablon a dočasné poznámky smažte, pokud nejsou potřeba pro rozhodnutí;
+- aktuální pracovní místo označte jako platné jen tam, kde by hrozila záměna.
+
+Krátký changelogový řádek stačí:
+
+```text
+Starý úkol po ověření už nevede na archivní formulářovou šablonu; platná cesta je aktuální index šablon.
+```
+
+Tato věta má větší hodnotu než dlouhá historie. Říká, co platí a proč. Nezve k debatě o celé minulosti.
+
+Codyho komentář: když po každé drobné opravě ponecháte tři pomocné dokumenty, za měsíc máte systém, který se tváří jako pořádek, ale ve skutečnosti jen archivuje nervozitu. Pořádek je, když další člověk najde správné místo rychleji.
+
+### Ujistěte se, že aktuální místo opravdu drží pravdu
+
+Před uzavřením projděte jednu věc: je aktuální pracovní místo dost jasné i bez pomocných podkladů?
+
+Zkontrolujte:
+
+- nadpis nebo název nevede ke staré interpretaci;
+- odkaz vede na kanonické místo;
+- archivní varianta se netváří jako aktivní;
+- vedlejší poznámky neobsahují starý pokyn;
+- člověk nemusí číst changelog, aby udělal běžnou práci;
+- privacy-first hranice nezmizela při zkrácení.
+
+Pokud aktuální místo potřebuje pomocný dokument, není ještě aktuální dost. Doplňte jednu větu přímo tam, kde člověk pracuje. Nepište další vysvětlení bokem.
+
+Příklad lokální věty:
+
+```text
+Pro nové landing pages používejte jen tento index; starší odkazy ve starých úkolech jsou archivní a nemají zakládat novou variantu formuláře.
+```
+
+Tuto větu použijte jen tehdy, když hrozí reálná záměna. Pokud opravené místo už mluví jasně, nepřidávejte ji. Text má pomáhat, ne se pojišťovat proti každé hypotetické nepozornosti.
+
+### Privacy-first uzavření
+
+Uzavření potvrzené opravy je dobrý moment na úklid datové stopy. Ne proto, že by lokální oprava byla právní drama. Protože malé interní opravy často po sobě nechávají screenshoty, exporty, kopie formulářů, poznámky z review nebo jména lidí, která už nejsou potřeba.
+
+Položte si čtyři otázky:
+
+- Vznikl při opravě nebo ověření nějaký dočasný podklad?
+- Obsahuje osobní, zákaznická nebo interně citlivá data?
+- Stačí místo něj anonymizovaný závěr?
+- Kdo ho smaže, zkrátí nebo archivuje?
+
+Dobrá privacy-first stopa:
+
+```text
+Ponechán changelogový řádek bez osobních údajů. Smazána dočasná kopie staré šablony a ověřovací poznámka bez další hodnoty.
+```
+
+Špatná stopa:
+
+```text
+Vše necháváme pro jistotu.
+```
+
+"Pro jistotu" je často jen jiný název pro budoucí nepořádek. Pokud detail nepomáhá rozhodnout, nemá zůstávat aktivní.
+
+### Karta uzavření potvrzené lokální opravy
+
+```text
+Pracovní cesta:
+Potvrzená lokální oprava:
+Výsledek ověření:
+Stav uzavření:
+Aktuální pracovní místo:
+Co zůstává jako zdroj pravdy:
+Co zkracujeme:
+Co mažeme nebo archivujeme:
+Changelogová věta:
+Návratový signál:
+Odložené téma mimo tuto smyčku:
+Privacy-first úklid:
+Vlastník uzavření:
+Datum dalšího návratu, pokud existuje:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní cesta:
+Výběr formulářové šablony pro novou landing page.
+
+Potvrzená lokální oprava:
+Starý úkol vede jen na aktuální index formulářových šablon.
+
+Výsledek ověření:
+Editor při běžné práci našel platnou šablonu bez doptávání.
+
+Stav uzavření:
+Začleněno.
+
+Aktuální pracovní místo:
+Index formulářových šablon.
+
+Co zůstává jako zdroj pravdy:
+Index a aktuální šablona.
+
+Co zkracujeme:
+Opravnou a ověřovací kartu na jeden changelogový řádek.
+
+Co mažeme nebo archivujeme:
+Servisní poznámku a dočasnou kopii starého odkazu.
+
+Changelogová věta:
+Starý úkol po ověření už nevede na archivní formulářovou šablonu; platná cesta je aktuální index šablon.
+
+Návratový signál:
+Stejný typ archivního odkazu znovu zmátne práci ve dvou dalších běžných úkolech.
+
+Odložené téma mimo tuto smyčku:
+Možné zkrácení názvů dvou šablon, pokud se potvrdí samostatně.
+
+Privacy-first úklid:
+Bez screenshotů, bez jmen a bez kopie klientského obsahu.
+
+Vlastník uzavření:
+Marketing owner.
+
+Datum dalšího návratu, pokud existuje:
+Žádné pevné datum; návrat jen při signálu.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: otevřete kartu ověření a potvrďte výsledný stav.
+2. Minuta 2: pojmenujte aktuální pracovní místo, které zůstává zdrojem pravdy.
+3. Minuta 3: rozhodněte, co zkrátit, smazat nebo archivovat.
+4. Minuta 4: napište jednu changelogovou větu a případný návratový signál.
+5. Minuta 5: proveďte privacy-first úklid pomocných podkladů.
+
+Výstup workshopu:
+
+```text
+Potvrzená lokální oprava je začleněná do aktuálního pracovního místa. Pomocné podklady jsou uklizené, zůstává jen krátká rozhodovací stopa a případný návratový signál.
+```
+
+### Checklist kapitoly
+
+- Je lokální oprava opravdu potvrzená běžným použitím?
+- Má uzavření jeden jasný stav?
+- Zůstává jedno aktuální pracovní místo jako zdroj pravdy?
+- Nepotřebuje člověk při běžné práci číst pomocné podklady?
+- Je changelogová věta krátká a srozumitelná?
+- Víme, co zkrátit, co smazat a co případně archivovat?
+- Nezůstává servisní poznámka jako aktivní paralelní zdroj?
+- Je případný návratový signál konkrétní, ne obecné "sledovat"?
+- Oddělili jsme odložené nové téma od uzavřené opravy?
+- Nezůstaly screenshoty, exporty, jmenné poznámky ani kopie zákaznických dat?
+- Je privacy-first úklid zapsaný lidsky a stručně?
+- Ví vlastník, že další kontrola vznikne jen při skutečném signálu?
+
+Uzavření potvrzené lokální opravy je malý úklidový rituál, který brání tomu, aby se z dobré drobné změny stal nový dokumentační dluh. Když oprava funguje, nechte ji žít v pracovním místě, ne v aktivní paměti týmu. Čistý stav je stav, kde další člověk prostě udělá práci správně.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha SV o uzavření potvrzené lokální opravy do čistého pracovního stavu: rozlišení výsledku a historie, stavy začlenění, zkrácení pomocných podkladů, changelogová věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SU o ověření malé lokální opravy při dalším běžném použití: návrat k opravné větě, přirozené ověření, signály nalezení, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first retence, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha ST o převodu potvrzené servisní poznámky do jedné malé lokální opravy: potvrzený signál, nejbližší pracovní místo, opravná věta, oddělení nových témat, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SS o ověření servisní poznámky po dalším návratovém signálu čisté trasy: návrat k původní podmínce, čtyři výsledné stavy, převod do malé lokální opravy, privacy-first ověření, karta, mini workshop a checklist.
