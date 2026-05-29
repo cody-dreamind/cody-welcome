@@ -143213,8 +143213,252 @@ Potvrzená čekací poznámka je převedena do jedné malé úpravy aktuálního
 
 Malá úprava má být konec malé smyčky, ne začátek další vrstvy správy. Když se potvrzený signál opraví v aktuálním místě, poznámka se zavře a systém po sobě uklidí, práce se vrací tam, kde má být: k běžnému použití bez zbytečné historie.
 
+## Příloha TG: Ověření malé úpravy při prvním běžném použití
+
+Příloha TF skončila provedenou malou úpravou a zavřenou čekací poznámkou. Tato příloha řeší další krok: první běžné použití upraveného pracovního místa. Nejde o audit, ceremonii ani zpětné rozebírání celé historie. Jde o krátké ověření, jestli malý zásah opravdu odstranil potvrzené tření a nevytvořil nové.
+
+Cílem je vrátit úpravu do života. Pokud po změně nikdo pracovní místo reálně nepoužije, tým má jen hezký zápis v changelogu. Ověření proto patří k nejbližšímu přirozenému úkolu: editor vybírá šablonu, obchodník používá popisek, produktový člověk otevírá checklist, support doplňuje provozní kartu. Právě tam se ukáže, jestli je úprava hotová, nebo jen formálně provedená.
+
+Úvodní pracovní věta:
+
+```text
+Malou úpravu ověřujeme při prvním běžném použití upraveného místa. Sledujeme původní návratový signál, neotevíráme nové téma a nepřidáváme měření větší než samotná změna.
+```
+
+Tahle věta chrání rozsah. Po malé úpravě se často objeví chuť "rovnou zkontrolovat všechno kolem". Jenže první ověření má odpovědět na jednu otázku: zmizelo tření, kvůli kterému jsme úpravu udělali?
+
+### Vraťte se k návratovému signálu
+
+Nezačínejte dojmem, že "už je to asi lepší". Otevřete poslední větu z karty provedení malé úpravy: návratový signál. Ten říká, co by se muselo stát, aby úprava potřebovala další zásah.
+
+Příklad:
+
+```text
+Návratový signál:
+Při dalším běžném použití editor znovu potřebuje starou poznámku nebo váhá nad stejnou větou.
+```
+
+Ověření potom není obecná anketa spokojenosti. Stačí odpovědět:
+
+```text
+Nastal návratový signál?
+Ano / Ne / Nelze poznat.
+
+Pokud ano:
+Je stejný jako před úpravou?
+
+Pokud ne:
+Je potřeba něco dalšího dělat?
+```
+
+Když signál nenastal, úpravu nepřikrmujte dalšími hypotézami. Malý systém potřebuje umět říct "stačí". Jinak se každá oprava stane magnetem na další kosmetické zásahy.
+
+### Ověřujte v práci, ne v umělém testu
+
+Nejlepší ověření malé úpravy je normální průchod. Člověk má udělat skutečný úkol a použít upravené místo tak, jak by ho použil bez pozorování. Pokud kvůli ověření vytvoříte speciální schůzku, testovací scénář a tabulku, pravděpodobně vyrábíte víc procesu než hodnoty.
+
+Dobře:
+
+```text
+Při přípravě nové landing page editor vybral formulářovou šablonu bez návratu ke staré poznámce. Popisek stačil.
+```
+
+Špatně:
+
+```text
+Tým uspořádal hodinový workshop nad celým indexem šablon a otevřel šest dalších návrhů na přejmenování.
+```
+
+Druhý výsledek může být užitečný, ale nepatří do této smyčky. Pokud vzniknou nové nápady, zapište je zvlášť a vraťte se k původnímu ověření.
+
+Praktické pravidlo:
+
+```text
+Ověřujeme, jestli upravené místo dovolilo dokončit reálný úkol s menším třením. Neověřujeme, jestli by celý systém nešel vylepšit.
+```
+
+### Rozlište čtyři výsledky
+
+Po prvním běžném použití stačí vybrat jeden ze čtyř stavů.
+
+`Potvrzeno`: upravené místo fungovalo, původní návratový signál nenastal a není potřeba další zásah.
+
+`Doladit jednou`: úprava pomohla, ale zůstala jedna konkrétní drobnost přímo ve stejném místě.
+
+`Vrátit nebo přepsat`: úprava nepomohla, změnila význam pravidla, nebo vytvořila horší tření než původní stav.
+
+`Nové téma`: při použití se ukázal jiný problém, který nesouvisí s původní čekací poznámkou.
+
+Vyplněný příklad:
+
+```text
+První běžné použití:
+Editor připravoval landing page pro nový lead magnet.
+
+Původní návratový signál:
+Váhání nad dlouhou první větou popisku formulářové šablony.
+
+Co se stalo:
+Editor vybral šablonu bez návratu ke staré poznámce. Zeptal se ale na pořadí šablon v indexu.
+
+Výsledek:
+Potvrzeno.
+
+Proč:
+Původní tření nenastalo. Dotaz na pořadí šablon je nové téma mimo tuto smyčku.
+
+Další krok:
+Zavřít ověření a případný dotaz na pořadí zapsat zvlášť jen pokud se zopakuje.
+```
+
+Tento výsledek je záměrně klidný. Neřeší všechno, co se během práce objevilo. Řeší jen to, kvůli čemu úprava vznikla.
+
+### Kdy doladit a kdy už nechat být
+
+Stav `Doladit jednou` používejte opatrně. Hodí se jen tehdy, když je zbývající tření přímo navázané na stejnou drobnou úpravu a oprava je menší než původní zásah.
+
+Dobré doladění:
+
+```text
+Zkrácený popisek funguje, ale chybí v něm slovo "první", takže editor váhal mezi vstupní a následnou kvalifikací. Doplníme jedno slovo bez změny pravidla.
+```
+
+Špatné doladění:
+
+```text
+Když už jsme u popisků, přepracujeme všech třicet šablon a přidáme novou kategorizaci.
+```
+
+Pokud je další zásah větší než původní změna, založte novou kartu. Malá úprava už splnila svou smyčku a nemá nést větší práci na zádech.
+
+Stop pravidlo:
+
+```text
+Jedna malá úprava může mít nejvýš jedno malé doladění. Potom se buď potvrdí, vrátí, nebo oddělí nové téma.
+```
+
+Bez tohoto pravidla se pracovní místo nikdy neuklidní. Každé použití by otevíralo další mikroopravu a tým by se naučil, že "hotovo" znamená jen "čeká na další připomínku".
+
+### Privacy-first ověření
+
+Ověření malé úpravy nepotřebuje detailní sledování člověka. Stačí stav pracovního místa a výsledek reálného úkolu. Často není potřeba ukládat jméno editora, screenshot obrazovky, nahrávku průchodu ani kopii klientského obsahu.
+
+Privacy-first zápis:
+
+```text
+Upravený popisek použit při přípravě nové landing page. Původní návratový signál nenastal. Bez osobních údajů, screenshotů a měření chování konkrétního člověka.
+```
+
+Pokud se při ověření pracuje se zákaznickými nebo interně citlivými podklady, držte zápis na úrovni jevu:
+
+- "šablona byla vybrána bez návratu ke staré poznámce";
+- "checklist stačil k dokončení úkolu";
+- "formulářové pole nepřibylo";
+- "nový dotaz se týká pořadí šablon, ne původního popisku".
+
+Neukládejte příklady jen proto, že jsou po ruce. Pomocné důkazy mají mít krátkou životnost a jasný účel. Jakmile je stav ověření zapsaný, dočasné podklady smažte nebo vraťte do místa, kam patří podle běžných retenčních pravidel.
+
+Codyho komentář: dobré ověření nemá být kamerový systém nad prací týmu. Má být malá kontrolka, že oprava opravdu pomohla a nezanechala za sebou novou datovou stopu.
+
+### Karta ověření malé úpravy
+
+```text
+Upravené pracovní místo:
+Původní čekací poznámka:
+Provedená malá úprava:
+Návratový signál:
+První běžné použití:
+Nastal návratový signál:
+Co se při použití stalo:
+Výsledek ověření:
+Další krok:
+Nové téma mimo tuto smyčku:
+Privacy-first omezení:
+Pomocné stopy k úklidu:
+Vlastník:
+Datum ověření:
+```
+
+Vyplněný příklad:
+
+```text
+Upravené pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Původní čekací poznámka:
+Opakované zaváhání nad dlouhou první větou popisku formulářové šablony.
+
+Provedená malá úprava:
+První věta popisku zkrácena na přímý pokyn.
+
+Návratový signál:
+Editor znovu potřebuje starou poznámku nebo váhá nad stejnou větou.
+
+První běžné použití:
+Příprava nové landing page.
+
+Nastal návratový signál:
+Ne.
+
+Co se při použití stalo:
+Šablona byla vybrána bez návratu ke staré poznámce. Objevil se samostatný dotaz na pořadí šablon.
+
+Výsledek ověření:
+Potvrzeno.
+
+Další krok:
+Zavřít ověření, ponechat jednu větu v changelogu a nové téma zatím jen sledovat bez úkolu.
+
+Nové téma mimo tuto smyčku:
+Možné pořadí šablon v indexu.
+
+Privacy-first omezení:
+Bez jména editora, bez screenshotu, bez kopie klientské stránky a bez měření času nad popiskem.
+
+Pomocné stopy k úklidu:
+Smazat dočasnou poznámku k ověření po zapsání výsledku.
+
+Vlastník:
+Marketing owner.
+
+Datum ověření:
+2026-05-29.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: otevřete kartu provedené malé úpravy a přečtěte návratový signál.
+2. Minuta 2: popište první běžné použití upraveného místa.
+3. Minuta 3: rozhodněte, jestli návratový signál nastal.
+4. Minuta 4: vyberte stav `Potvrzeno`, `Doladit jednou`, `Vrátit nebo přepsat` nebo `Nové téma`.
+5. Minuta 5: zapište jednu větu výsledku a ukliďte pomocné stopy.
+
+Výstup workshopu:
+
+```text
+Malá úprava má po prvním běžném použití jasný stav. Buď je potvrzená, čeká na jedno malé doladění, vrací se k přepsání, nebo odděluje nové téma.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme úpravu při skutečném běžném použití?
+- Máme před sebou původní návratový signál?
+- Sledujeme původní tření, ne obecnou kvalitu celého systému?
+- Umíme říct, jestli návratový signál nastal?
+- Je výsledek zařazený do jednoho ze čtyř stavů?
+- Pokud dolazujeme, je zásah menší než původní úprava?
+- Pokud se objevil jiný problém, je oddělený jako nové téma?
+- Nezůstala původní čekací poznámka znovu otevřená?
+- Zůstala po ověření jen jedna dohledatelná věta?
+- Nevznikly kvůli ověření screenshoty, nahrávky, exporty ani sledování konkrétního člověka?
+- Je jasné, které pomocné stopy se po zapsání výsledku mažou?
+- Ví vlastník, jestli je smyčka zavřená, nebo má udělat jedno malé doladění?
+
+Ověření malé úpravy má být krátké, protože úprava byla malá. Když první běžné použití potvrdí, že původní tření zmizelo, nejlepší další krok je často žádný další krok. Pracovní systém se má po opravě ztišit, ne si říct o další vrstvu správy.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TG o ověření malé úpravy při prvním běžném použití: návratový signál, reálný pracovní průchod, čtyři výsledné stavy, pravidlo jednoho doladění, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TF o provedení malé úpravy po potvrzené čekací poznámce: práce jen s potvrzeným signálem, zásah do aktuálního pracovního místa, zavření původní poznámky, changelogová věta, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TE o ověření čekací poznámky po návratovém signálu nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, úzký převod do malé úpravy, význam expirace, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TD o převod lehkého dozvuku po prvním běžném návratu k čistému pracovnímu místu do čekací poznámky: rozpoznání dozvuku, podmíněná poznámka, umístění blízko práce, expirace, privacy-first omezení, karta, mini workshop a checklist.
