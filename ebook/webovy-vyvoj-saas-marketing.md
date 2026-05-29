@@ -31,6 +31,8 @@ Stop podmínku pište jako hotový stav, ne jako seznam aktivit. "Projít tři k
 
 Když se během čtení ukáže, že původní stop podmínka byla příliš široká, neupravujte ji tak, aby pojmula všechno nové. Zapište nové téma stranou a dokončete menší výstup, kvůli kterému jste rukopis otevřeli. Rozsah se má zužovat, ne nenápadně růst.
 
+Na konci čtení stop podmínku neměňte podle toho, co se zrovna povedlo. Pokud výstup nesedí, zapište to jako výsledek iterace a otevřete další, menší průchod až potom. Jinak se z praktického pravidla stane pohyblivá branka, kterou vždycky nějak trefíte, ale nic se tím nevyjasní.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -141219,6 +141221,7 @@ Lehký dozvuk je zachycený jako podmíněná údržbová poznámka. Neměníme 
 
 ## Pracovní log
 
+- 2026-05-29: Doplněna krátká úvodní poznámka, aby se stop podmínka na konci čtení zpětně neupravovala podle hotového výstupu.
 - 2026-05-29: Doplněna Příloha SX o převodu lehkého dozvuku po prvním běžném návratu do údržbové poznámky: vymezení dozvuku, podmíněná poznámka, umístění blízko práce, expirace, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SW o první běžný návrat k čistému pracovnímu stavu po uzavřené lokální opravě: běžný spouštěč, známky čistoty, rozlišení klidu, dozvuku, návratu staré stopy a nového problému, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SV o uzavření potvrzené lokální opravy do čistého pracovního stavu: rozlišení výsledku a historie, stavy začlenění, zkrácení pomocných podkladů, changelogová věta, privacy-first úklid, karta, mini workshop a checklist.
