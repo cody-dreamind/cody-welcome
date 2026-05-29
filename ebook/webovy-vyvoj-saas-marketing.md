@@ -142173,8 +142173,287 @@ Potvrzená malá oprava je uzavřená. Aktuální pracovní místo nese pravdu s
 
 Uzavření potvrzené malé opravy je drobná disciplína, která šetří budoucí pozornost. Když se dělá poctivě, tým nemá jen opravený odkaz, odstavec nebo krok. Má méně otevřených smyček, méně dočasných stop a čistší místo, kde příští práce začne.
 
+## Příloha TC: První běžný návrat k čistému pracovnímu místu po uzavřené malé opravě
+
+Příloha TB zavřela potvrzenou malou opravu do čistého pracovního místa. Aktuální místo nese pravdu samo, pomocné stopy jsou uklizené a návratový signál říká, kdy má smysl se k tématu znovu vrátit. Tato příloha řeší další přirozený okamžik: první běžnou práci, která čisté místo použije bez toho, aby se tým vracel k příběhu opravy.
+
+Nejde o audit. Nejde ani o další ověření stejné opravy. To už proběhlo. Jde o krátké potvrzení, že pracovní místo se opravdu vrátilo do provozu a člověk ho umí použít bez autora opravy, bez starých screenshotů a bez dočasných komentářů.
+
+Úvodní pracovní věta:
+
+```text
+K čistému pracovnímu místu se vracíme až při dalším běžném použití. Sledujeme, jestli místo stačí samo, jestli se nevrací pomocná historie a jestli klid neproměníme v novou kontrolní rutinu.
+```
+
+Tahle věta chrání před dvěma zlozvyky. První je nedůvěra k hotové práci: tým má potřebu ještě jednou otevřít starou kartu, porovnat předchozí verze a ujistit se, že se opravdu nic nerozbije. Druhý je přehnaná dokumentační horlivost: místo jednoduchého návratu vznikne další tabulka, další poznámka a další "pro jistotu" uložený podklad. Čisté pracovní místo má unést normální práci bez obou extrémů.
+
+### Vraťte se jen přes skutečný pracovní úkol
+
+První návrat má spustit reálný úkol, ne kalendářová nervozita. Někdo připravuje novou stránku, upravuje nabídku, používá šablonu, zakládá položku v checklistu, aktualizuje interní návod nebo posílá podklad zákazníkovi. V tu chvíli se ukáže, jestli pracovní místo funguje samo.
+
+Dobrý spouštěč:
+
+```text
+Příště, až někdo použije aktuální formulářovou šablonu pro novou landing page, krátce ověříme, že mu stačí současný index.
+```
+
+Slabý spouštěč:
+
+```text
+Za tři dny znovu projdeme celou historii opravy a všechny související poznámky.
+```
+
+Druhý spouštěč vypadá pečlivě, ale znovu staví práci na historii. Pokud je oprava potvrzená a uzavřená, běžný člověk nemá potřebovat starou kartu. Má potřebovat aktuální pracovní místo.
+
+Krátký filtr před návratem:
+
+```text
+Běžný úkol:
+Aktuální pracovní místo:
+Co má místo umožnit:
+Co už znovu neotevíráme:
+```
+
+Vyplněný příklad:
+
+```text
+Běžný úkol:
+Příprava nové landing page.
+
+Aktuální pracovní místo:
+Index formulářových šablon.
+
+Co má místo umožnit:
+Vybrat aktuální formulářovou šablonu bez doptávání a bez čtení staré opravy.
+
+Co už znovu neotevíráme:
+Screenshot původního názvu, uzavřenou údržbovou poznámku ani obecnou debatu o názvosloví všech šablon.
+```
+
+Pokud neumíte pojmenovat běžný úkol, návrat ještě nenastal. Nevyvolávejte ho uměle. Čisté místo může zůstat čisté i tím, že se ho nikdo zbytečně nedotýká.
+
+### Sledujte tři jednoduché signály
+
+Při prvním běžném návratu stačí tři signály.
+
+`Samostatnost`: člověk dokončí běžný krok podle aktuálního místa, bez autora opravy a bez návratu ke staré kartě.
+
+`Bez návratu historie`: staré screenshoty, uzavřené poznámky, archivní odkazy a pomocné komentáře nejsou potřeba pro rozhodnutí.
+
+`Bez nové stopy`: kvůli návratu nevzniká nová evidence, osobní hodnocení, nahrávka, export ani další tracker.
+
+Krátký zápis:
+
+```text
+Samostatnost:
+Editor vybral aktuální šablonu z indexu bez doptávání.
+
+Bez návratu historie:
+Nepoužil uzavřenou kartu opravy ani screenshot starého názvu.
+
+Bez nové stopy:
+Zapsaná jen obecná věta o výsledku, bez osobních údajů a bez kopie rozpracované stránky.
+```
+
+Tyto signály nehodnotí, jestli je celý systém dokonalý. Hodnotí, jestli uzavřené pracovní místo plní svůj slib. Pokud při běžné práci vznikne nápad na širší zlepšení, nechte ho mimo tuto smyčku. Jinak se z prvního návratu stane nenápadný backlog generator. Ten se tváří jako produktivita, ale většinou jen rozmazává hranice.
+
+### Rozlište čtyři výsledky návratu
+
+Po prvním běžném návratu zvolte jeden stav.
+
+`Klid`: aktuální místo stačilo, historie se nevrátila a nevznikla nová zbytečná stopa. Další krok není potřeba.
+
+`Malý dozvuk`: místo funguje, ale jeden detail je pořád trochu hrubý. Například popisek je srozumitelný, ale zbytečně dlouhý.
+
+`Návrat pomocné historie`: člověk musel otevřít starou kartu, screenshot, archivní odkaz nebo dočasnou poznámku. To znamená, že čisté místo ještě nenese dost kontextu nebo pomocná stopa zůstala moc viditelná.
+
+`Nové téma`: pracovní místo splnilo svůj účel, ale objevila se jiná otázka. Ta patří do samostatné karty, ne do návratu po uzavřené opravě.
+
+Příklad stavu `Klid`:
+
+```text
+Stav:
+Klid.
+
+Důvod:
+Index stačil pro výběr aktuální šablony, stará karta opravy nebyla potřeba a nevznikly nové podklady.
+
+Další krok:
+Žádný. Ponechat pracovní místo bez další kontroly.
+```
+
+Příklad stavu `Návrat pomocné historie`:
+
+```text
+Stav:
+Návrat pomocné historie.
+
+Důvod:
+Editor otevřel starý komentář, protože byl stále připnutý u aktuálního indexu.
+
+Další krok:
+Odepnout starý komentář a ponechat jen aktuální název šablony. Neměnit celý systém dokumentace.
+```
+
+Stav `Klid` berte vážně. Je to dokončený výsledek, ne prázdné místo čekající na další aktivitu. Codyho komentář: provozní dospělost často vypadá neokázale. Nikdo netleská, jen člověk otevře správné místo a práce pokračuje. To je v digitálním provozu malý zázrak v montérkách.
+
+### Kdy stačí jedna věta
+
+U běžného návratu po malé opravě obvykle není potřeba dlouhý záznam. Stačí jedna věta tam, kde tým drží provozní historii:
+
+```text
+2026-05-29: První běžné použití čistého pracovního místa proběhlo bez návratu k pomocné historii; aktuální index stačil.
+```
+
+Delší kartu vyplňujte jen tehdy, když návrat odhalil dozvuk, starou stopu nebo nové téma. Pokud je stav `Klid`, další dokumentace může být větší zátěž než samotná oprava. Cílem je potvrdit normální provoz, ne vyrábět památník každému hladkému průchodu.
+
+Praktické pravidlo:
+
+```text
+Když se nic nevrátilo, nechte zápis kratší než původní problém.
+```
+
+Pokud původní problém byla jedna matoucí věta, potvrzení nemá mít půlstránkovou retrospektivu. Pokud šlo o drobný odkaz, stačí krátká changelogová věta. Tým má najít aktuální pravdu, ne se brodit stopami úspěšné údržby.
+
+### Privacy-first návrat k čistému místu
+
+Privacy-first přístup tady znamená hlavně zdrženlivost. Nepotřebujete sledovat, kdo přesně jak rychle našel správný odkaz. Nepotřebujete ukládat obrazovku s rozpracovaným zákaznickým obsahem. Nepotřebujete novou analytiku interního kliknutí. Potřebujete vědět, jestli pracovní místo fungovalo.
+
+Privacy-first pravidlo:
+
+```text
+Zapisujeme stav pracovního místa, ne chování konkrétního člověka.
+```
+
+Dobře:
+
+```text
+Aktuální šablona byla nalezena bez návratu ke staré kartě. Bez nových osobních údajů a bez uložených screenshotů.
+```
+
+Špatně:
+
+```text
+Uložíme nahrávku průchodu, jméno editora, čas hledání a kopii rozpracované klientské stránky pro jistotu.
+```
+
+Pokud návrat odkryje problém, opravte nejbližší pracovní místo. Nepřidávejte plošný dohled. Většina těchto návratů potřebuje jednu lepší větu, jeden odepnoutý archivní komentář nebo jedno zkrácené vysvětlení. Ne nový systém sledování interní práce.
+
+### Karta prvního běžného návratu k čistému pracovnímu místu
+
+```text
+Čisté pracovní místo:
+Uzavřená malá oprava:
+Běžný úkol:
+Co mělo místo umožnit:
+Signál samostatnosti:
+Signál bez návratu historie:
+Signál nízké datové stopy:
+Výsledný stav:
+Důvod rozhodnutí:
+Pokud vznikl malý dozvuk, nejmenší další zásah:
+Pokud se vrátila pomocná historie, kde přesně:
+Nové téma mimo tuto smyčku:
+Co teď vědomě neměníme:
+Kanonická věta do historie:
+Privacy-first omezení:
+Retence pomocných stop:
+Vlastník:
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Čisté pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Uzavřená malá oprava:
+Odkaz na aktuální formulářovou šablonu byl přejmenován a potvrzen při dalším použití.
+
+Běžný úkol:
+Příprava další landing page.
+
+Co mělo místo umožnit:
+Vybrat aktuální šablonu bez doptávání a bez čtení staré karty opravy.
+
+Signál samostatnosti:
+Editor vybral správnou šablonu přímo z indexu.
+
+Signál bez návratu historie:
+Neotevřel uzavřenou kartu opravy ani starý screenshot.
+
+Signál nízké datové stopy:
+Nevznikl nový export, nahrávka ani osobní poznámka.
+
+Výsledný stav:
+Klid.
+
+Důvod rozhodnutí:
+Čisté pracovní místo stačilo pro běžnou práci.
+
+Pokud vznikl malý dozvuk, nejmenší další zásah:
+Žádný.
+
+Pokud se vrátila pomocná historie, kde přesně:
+Nevrátila se.
+
+Nové téma mimo tuto smyčku:
+Žádné.
+
+Co teď vědomě neměníme:
+Neměníme názvy ostatních šablon ani archivní strukturu.
+
+Kanonická věta do historie:
+2026-05-29: První běžné použití čistého indexu proběhlo bez návratu ke staré opravě; aktuální místo stačí.
+
+Privacy-first omezení:
+Ponechat jen obecný zápis, bez osobních údajů a bez screenshotů.
+
+Retence pomocných stop:
+Žádné nové pomocné stopy nevznikly.
+
+Vlastník:
+Marketing owner.
+
+Návratový signál:
+Stejné zaváhání nad aktuální a archivní šablonou se znovu objeví při běžné práci.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžný úkol, který čisté pracovní místo právě použil.
+2. Minuta 2: ověřte, jestli člověk pracoval samostatně bez autora opravy.
+3. Minuta 3: zkontrolujte, jestli se neotevřela pomocná historie.
+4. Minuta 4: zapište privacy-first dopad a případné stopy, které mají zmizet.
+5. Minuta 5: zvolte stav `Klid`, `Malý dozvuk`, `Návrat pomocné historie` nebo `Nové téma`.
+
+Výstup workshopu:
+
+```text
+První běžný návrat k čistému pracovnímu místu má jeden stav, krátký důvod a jasné rozhodnutí, jestli se má něco drobně upravit, nebo má pracovní místo zůstat v klidu.
+```
+
+### Checklist kapitoly
+
+- Vrátili jsme se k pracovnímu místu až při skutečném běžném úkolu?
+- Neotevíráme znovu celou historii opravy?
+- Stačilo aktuální místo bez autora opravy?
+- Nepotřeboval člověk starou kartu, screenshot, archivní odkaz ani dočasný komentář?
+- Nevznikl kvůli návratu nový tracker, export, nahrávka, screenshot nebo osobní hodnocení?
+- Umíme zvolit jeden stav: `Klid`, `Malý dozvuk`, `Návrat pomocné historie` nebo `Nové téma`?
+- Pokud je stav `Klid`, nepřidáváme další kontrolu?
+- Pokud je stav `Malý dozvuk`, je další zásah nejmenší možný?
+- Pokud se vrátila pomocná historie, víme přesně, kde zůstala moc viditelná?
+- Pokud vzniklo nové téma, je oddělené od této smyčky?
+- Je jasné, co teď vědomě neměníme?
+- Zůstává hlavní pravda v aktuálním pracovním místě, ne v příběhu opravy?
+
+První běžný návrat má potvrdit, že práce se vrátila do normálu. Když člověk použije čisté místo, dokončí úkol a nepotřebuje staré berličky, máte hotovo. Ne proto, že vznikla další dokumentace, ale právě proto, že vzniknout nemusela.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TC o první běžný návrat k čistému pracovnímu místu po uzavřené malé opravě: návrat přes skutečný pracovní úkol, signály samostatnosti, návratu historie a datové stopy, čtyři výsledné stavy, krátká kanonická věta, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TB o uzavření potvrzené malé opravy do čistého pracovního místa: přepis aktuální pravdy, zavření karty opravy, úklid pomocných stop, předání bez schůzky navíc, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TA o ověření malé opravy po údržbové poznámce při dalším běžném použití: návrat k opravné větě, přirozené ověření, čtyři výsledné stavy, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SZ o provedení malé opravy po potvrzené údržbové poznámce: oddělení potvrzeného signálu od nových nápadů, zásah v aktuálním pracovním místě, uzavření původní poznámky, privacy-first provedení, karta, mini workshop a checklist.
