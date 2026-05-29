@@ -144726,8 +144726,230 @@ Stabilizační úprava je ověřená při běžném použití, má jeden jasný 
 
 Ověření stabilizační úpravy má být tiché. Když úprava drží, provoz se vrátí ke své práci a dokumentace zůstane kratší než problém, který řešila. To je dobrý signál: malá smyčka se uzavřela, stará nejistota nepřežila a tým si nevytvořil nový kontrolní rituál jen proto, že něco jednou drhlo.
 
+## Příloha TN: Uzavření ověřené stabilizační úpravy do kanonického pracovního pravidla
+
+Příloha TM ověřila, že stabilizační úprava při běžném použití drží. Teď zbývá poslední nenápadná práce: přestat s ní zacházet jako s úpravou. Pokud něco opravdu funguje, má se stát běžnou součástí pracovního místa, ne věčně označeným pozůstatkem malé opravy.
+
+Uzavření ověřené stabilizační úpravy má jednoduchý cíl: zapsat aktuální pravidlo tam, kde ho člověk potřebuje při práci, zavřít ověřovací kartu a odstranit jazyk, který připomíná staré váhání. Tým potom nepřichází k místu s otázkou "co jsme tady minule řešili?", ale s jasným pokynem "takhle to teď funguje".
+
+Úvodní pracovní věta:
+
+```text
+Ověřenou stabilizační úpravu převádíme do kanonického pracovního pravidla, zavíráme ověřovací stopu a necháváme jen podmínku návratu pro případ, že se stejné tření znovu objeví.
+```
+
+Tahle věta je krátká, ale drží tři hranice. První: pravidlo se zapisuje do aktuálního pracovního místa, ne do dalšího vysvětlujícího dokumentu. Druhá: ověřovací materiál se zavírá, protože už splnil účel. Třetí: návrat se nastavuje jako podmínka, ne jako pravidelný dohled.
+
+### Přepište výsledek do aktuálního pravidla
+
+Neopisujte celou historii stabilizační úpravy. Kanonické pracovní místo má obsahovat výsledek, ne archeologii. Pokud editor vybírá formulářovou šablonu, potřebuje rozlišovací větu přímo u šablony. Nepotřebuje číst, že před třemi týdny někdo dvakrát váhal a z toho vznikla hlídací poznámka.
+
+Slabý zápis:
+
+```text
+Poznámka: Po opakovaném váhání mezi dvěma šablonami jsme doplnili vysvětlení. Viz karta stabilizace z 2026-05-29.
+```
+
+Lepší zápis:
+
+```text
+Použijte "krátkou poptávku", když stránka nabízí konkrétní službu a návštěvník má popsat záměr prvního kontaktu.
+```
+
+Druhý zápis je pracovní. Nevyžaduje znalost minulosti, neotevírá starou kartu a pomáhá přímo ve chvíli rozhodnutí. Historie může zůstat v changelogu, ale nemá stát mezi člověkem a jeho úkolem.
+
+Praktický postup:
+
+1. Najděte místo, kde se pravidlo skutečně používá.
+2. Přepište stabilizační větu do běžného pracovního jazyka.
+3. Odstraňte odkazy typu "dočasně", "po ověření" nebo "zatím sledujeme".
+4. Nechte v changelogu jen krátký záznam, že ověřená úprava byla začleněna.
+
+Pokud se pravidlo nevejde přímo do pracovního místa, pravděpodobně se snažíte uložit víc než výsledek. Zkraťte ho na rozhodovací větu a zbytek nechte mimo hlavní tok.
+
+### Zavřete ověřovací kartu, ne pracovní místo
+
+Ověřovací karta nemá zůstat aktivní jen proto, že byla užitečná. Užitečnost karty končí ve chvíli, kdy pomohla rozhodnout. Potom se má buď archivovat, nebo zkrátit na jeden řádek v rozhodovacím logu.
+
+Uzavírací stav může být jednoduchý:
+
+```text
+Stav:
+Uzavřeno, úprava začleněna do kanonického pravidla.
+
+Závěr:
+Při běžném použití drží. Další aktivní ověření neplánujeme.
+
+Návratová podmínka:
+Vrátit se pouze tehdy, pokud se stejné váhání objeví ve dvou dalších běžných použitích nebo pokud se změní struktura šablon.
+```
+
+Tím se zachová dohledatelnost bez toho, aby karta zůstala viset jako další tichý úkol. Tým vidí, co se stalo, ale nemusí kolem toho dál chodit po špičkách.
+
+Codyho komentář: otevřená karta po hotovém rozhodnutí je malá továrna na falešnou práci. Nikdo ji nechce řešit, ale všichni ji občas zahlédnou a mají pocit, že něco dluží. Zavřít ji je úklid mozku, ne byrokracie.
+
+### Odstraňte hlídací jazyk
+
+Po ověřené stabilizaci bývá v pracovních místech zbytečně mnoho opatrných slov. "Sledujeme", "zkusíme", "zatím", "dočasně", "ověříme později", "kdyby se ukázalo". Takový jazyk byl možná správný během experimentu, ale po ověření už zbytečně snižuje důvěru v pravidlo.
+
+Příklad před uzavřením:
+
+```text
+Zatím používejte krátkou poptávku pro konkrétní službu a sledujte, jestli editor nebude potřebovat další vysvětlení.
+```
+
+Příklad po uzavření:
+
+```text
+Pro konkrétní službu použijte krátkou poptávku.
+```
+
+Zkrácení není kosmetika. Pracovní pravidlo má být dost silné na běžné použití. Pokud v něm zůstane testovací tón, lidé budou přirozeně hledat autora, kontext nebo výjimku. Tím se vrací závislost, kterou stabilizace měla odstranit.
+
+Neodstraňujte ale každou hranici. Pokud existuje platná výjimka, napište ji přímo:
+
+```text
+Pro konkrétní službu použijte krátkou poptávku. Pokud stránka nabízí dlouhodobý program s kvalifikací rozpočtu, použijte kvalifikační formulář.
+```
+
+To není hlídací jazyk. To je pracovní rozlišení.
+
+### Nastavte podmínku návratu, ne pravidelný dohled
+
+Když je úprava ověřená, nepřidávejte měsíční kontrolu jen pro jistotu. Pravidelný dohled má smysl u rizikových provozních oblastí, bezpečnosti, právních povinností nebo finančních rozhodnutí. Malá stabilizační věta u šablony ho většinou nepotřebuje.
+
+Místo kontroly nastavte návratovou podmínku:
+
+```text
+Vrátit se k pravidlu pouze tehdy, pokud:
+- stejný typ váhání nastane ve dvou dalších běžných použitích;
+- změní se struktura šablon;
+- pravidlo začne kolidovat s novým formulářem nebo novou nabídkou.
+```
+
+Návratová podmínka chrání klid. Tým ví, kdy se má k věci vrátit, ale nemusí ji preventivně obcházet s baterkou každý pátek. Ano, baterka je hezká, ale i ona stojí čas.
+
+Dobrá návratová podmínka má tři vlastnosti:
+
+1. Je pozorovatelná při normální práci.
+2. Nevyrábí nový tracker ani tabulku.
+3. Je dost úzká, aby neotevřela celý proces.
+
+Slabá podmínka zní: "Vrátíme se, až budeme mít pocit, že to zase drhne." Silnější podmínka zní: "Vrátíme se, pokud dva editoři nezávisle použijí špatnou šablonu kvůli stejné rozlišovací větě."
+
+### Privacy-first uzavření stabilizace
+
+Uzavření stabilizační úpravy je dobrý moment pro malý datový úklid. Během ověřování mohly vzniknout pomocné poznámky, screenshoty, kopie šablon, exporty nebo pracovní komentáře. Pokud už z nich vzniklo pravidlo, nemají dál žít jen proto, že se nikomu nechce mazat.
+
+Privacy-first postup:
+
+1. Ponechte kanonické pravidlo a krátký changelog.
+2. Zavřete nebo smažte pomocné podklady, které už nejsou potřeba pro audit ani další práci.
+3. Pokud musíte ponechat příklad, anonymizujte ho a zkraťte na pracovní situaci.
+4. Neuchovávejte osobní průchody lidí jen jako důkaz, že pravidlo bylo kdysi ověřené.
+5. Zapište, že datová stopa po uzavření není větší než před stabilizací.
+
+Praktická věta:
+
+```text
+Po začlenění pravidla zůstává v systému jen kanonická věta a changelogový záznam; pomocné ověřovací poznámky jsou uzavřené a žádná nová osobní ani analytická data se nesbírají.
+```
+
+Tahle věta je užitečně nudná. A přesně tak má privacy-first provoz často vypadat: méně dramatických deklarací, více normálního mazání věcí, které už nemají účel.
+
+### Karta uzavření ověřené stabilizační úpravy
+
+```text
+Ověřená stabilizační úprava:
+Kanonické pracovní místo:
+Nové pracovní pravidlo:
+Co bylo odstraněno z testovacího nebo hlídacího jazyka:
+Uzavřená ověřovací karta:
+Changelogová věta:
+Návratová podmínka:
+Pomocné podklady k úklidu:
+Privacy-first dopad:
+Co dál aktivně nehlídáme:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Ověřená stabilizační úprava:
+Rozlišovací věty u šablon "rychlý kontakt" a "krátká poptávka".
+
+Kanonické pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Nové pracovní pravidlo:
+Pro konkrétní službu použijte krátkou poptávku. Rychlý kontakt použijte pro obecný první dotaz bez vybrané služby.
+
+Co bylo odstraněno z testovacího nebo hlídacího jazyka:
+Zmizela věta "zatím sledujeme, jestli editor nebude váhat".
+
+Uzavřená ověřovací karta:
+Karta stabilizace uzavřena se stavem "Drží".
+
+Changelogová věta:
+Rozlišovací pravidlo pro dvě formulářové šablony bylo ověřené při běžném použití a začleněné do indexu.
+
+Návratová podmínka:
+Vrátit se pouze při dvou dalších nezávislých záměnách těchto šablon nebo při změně struktury formulářů.
+
+Pomocné podklady k úklidu:
+Smazat pracovní screenshot indexu, ponechat jen changelog.
+
+Privacy-first dopad:
+Po uzavření zůstává jen pracovní pravidlo, bez osobních poznámek a bez nového měření.
+
+Co dál aktivně nehlídáme:
+Nesledujeme každé další použití těchto dvou šablon.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-29.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: najděte kanonické pracovní místo, kde má pravidlo žít.
+2. Minuta 2: přepište stabilizační větu do běžného pracovního pravidla.
+3. Minuta 3: odstraňte testovací a hlídací jazyk.
+4. Minuta 4: zavřete ověřovací kartu jedním stavem a changelogovou větou.
+5. Minuta 5: napište návratovou podmínku místo další kontroly.
+6. Minuta 6: projděte pomocné podklady a určete, co se zavře, smaže nebo zkrátí.
+
+Výstup workshopu:
+
+```text
+Ověřená stabilizační úprava je součástí kanonického pracovního pravidla, ověřovací stopa je zavřená a návrat je podmíněný skutečným signálem, ne zvykem dál kontrolovat.
+```
+
+### Checklist kapitoly
+
+- Přepisujeme výsledek do místa, kde člověk skutečně pracuje?
+- Zůstává v kanonickém pravidle jen aktuální pravda, ne historie problému?
+- Je nové pravidlo kratší a jasnější než ověřovací karta?
+- Odstranili jsme slova jako "zatím", "dočasně", "sledujeme" a "ověříme později", pokud už nejsou pravdivá?
+- Zachovali jsme jen ty výjimky, které člověk opravdu potřebuje při rozhodnutí?
+- Je ověřovací karta zavřená jedním jasným stavem?
+- Existuje krátká changelogová věta?
+- Nahradili jsme pravidelný dohled návratovou podmínkou?
+- Je návratová podmínka pozorovatelná při běžné práci?
+- Nevznikl kvůli návratu nový tracker, export, tabulka ani osobní log?
+- Uklidili jsme pomocné podklady, které už nemají účel?
+- Je privacy-first dopad zapsaný jednou praktickou větou?
+- Ví vlastník, co dál aktivně nehlídat?
+
+Uzavřená stabilizační úprava má zmizet z popředí. Ne proto, že by nebyla důležitá, ale proto, že se stala normální součástí práce. Dobrý systém nemusí neustále připomínat každou malou jizvu. Stačí, že se podle něj lidem lépe rozhoduje a že po sobě nenechává zbytečnou datovou stopu.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TN o uzavření ověřené stabilizační úpravy do kanonického pracovního pravidla: přepis výsledku do pracovního místa, zavření ověřovací karty, odstranění hlídacího jazyka, návratová podmínka, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TM o ověření stabilizační úpravy při příštím běžném použití: stabilizační věta, tři signály, čtyři výsledné stavy, pravidlo kdy nechat úpravu být, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TL o převodu potvrzené hlídací poznámky do jedné stabilizační úpravy: potvrzený výrok, nejbližší pracovní místo, typy malých úprav, zavření hlídacího režimu, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TK o ověření hlídací poznámky po opakování nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, úzký převod potvrzeného signálu, aktivní expirace, privacy-first ověření, karta, mini workshop a checklist.
