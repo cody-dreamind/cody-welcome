@@ -141508,8 +141508,247 @@ Výstup workshopu:
 
 Ověření údržbové poznámky je malý, ale důležitý hygienický krok. Učí tým, že slabé signály se berou vážně, ale neuctívají se. Když se vrátí, dostanou malou opravu. Když se nevrátí, zmizí. Tím pracovní prostor zůstává citlivý na realitu, ale odolný proti hromadění opatrných zbytků.
 
+## Příloha SZ: Provedení malé opravy po potvrzené údržbové poznámce
+
+Příloha SY skončila ve chvíli, kdy údržbová poznámka dostala konečný stav. Pokud se signál nepotvrdil, poznámka zmizela. Pokud se ukázalo nové téma, odešlo do samostatné smyčky. Tato příloha řeší jen jeden případ: návratový signál se opravdu potvrdil a tým má provést jednu malou opravu.
+
+Malá oprava po údržbové poznámce má zvláštní disciplínu. Nezačíná nadšením, že jsme konečně našli problém. Začíná omezením rozsahu. Údržbová poznámka vznikla ze slabého dozvuku, ne z velkého incidentu. I potvrzený slabý signál proto opravuje nejbližší pracovní místo, ne celý systém.
+
+Úvodní pracovní věta:
+
+```text
+Potvrzená údržbová poznámka se převádí do jedné malé opravy. Opravujeme místo, kde se signál vrátil, a neměníme okolní systém, dokud se neobjeví samostatný důvod.
+```
+
+Tahle věta je brzda proti nenápadnému rozšiřování. Jakmile se u jedné nejasné věty začne řešit celá navigace, archiv, názvosloví, odpovědnosti a nový dashboard, oprava už není malá. Možná jste našli dobré větší téma. Jen nepatří do této smyčky.
+
+### Vezměte jen potvrzenou část signálu
+
+Nejdřív oddělte tři věci:
+
+- co bylo v původní poznámce;
+- co se při návratu opravdu potvrdilo;
+- co vás napadlo až cestou.
+
+Do opravy patří jen druhá část. Původní poznámka může obsahovat obavu širší než realita. Návrat může potvrdit jen jednu hranu. A nápady vzniklé cestou bývají užitečné, ale nepatří do malé opravy automaticky.
+
+Mini filtr:
+
+```text
+Původní poznámka:
+Potvrzený signál:
+Nejmenší místo zásahu:
+Nápady mimo tuto opravu:
+```
+
+Příklad:
+
+```text
+Původní poznámka:
+Popisek odkazu "Formulářová šablona" může připomínat archivní verzi.
+
+Potvrzený signál:
+Při další landing page editor znovu váhal, jestli je odkaz aktuální.
+
+Nejmenší místo zásahu:
+Jeden popisek odkazu v indexu šablon.
+
+Nápady mimo tuto opravu:
+Sjednotit názvy všech šablon a vyčistit archiv.
+```
+
+Kdyby tým rovnou sjednocoval všechny názvy, oprava by ztratila původní měřítko. Nejpraktičtější krok je přejmenovat jeden odkaz, ověřit další běžné použití a větší téma nechat v samostatné kartě, pokud pořád stojí za pozornost.
+
+### Opravte pracovní místo, ne historii
+
+Potvrzená údržbová poznámka často láká k tomu, aby tým upravoval i staré záznamy. Ve většině případů to není potřeba. Hlavní otázka zní: kde příště člověk narazí na stejnou práci?
+
+Oprava má být v aktuálním pracovním místě:
+
+- v živé šabloně;
+- v aktuálním indexu;
+- v používaném formuláři;
+- v krátkém návodu u kroku;
+- v kanonickém dokumentu, ze kterého tým opravdu pracuje.
+
+Historie se řeší jen tehdy, když sama vytváří tření. Pokud archivní dokument nikdo neotevírá při běžné práci, nechte ho být nebo ho viditelně označte jako archiv při nejbližším úklidu. Neplýtvejte kapacitou na estetické rovnání stop, které už neřídí rozhodnutí.
+
+Dobrá oprava:
+
+```text
+Aktuální odkaz v indexu přejmenovat na "Aktuální formulářová šablona pro landing page".
+```
+
+Přerostlá oprava:
+
+```text
+Přejmenovat všechny historické odkazy, přepsat archivní poznámky a založit novou konvenci pro budoucí formuláře.
+```
+
+První varianta pomáhá příštímu použití. Druhá varianta možná někdy dává smysl, ale není odměnou za potvrzenou údržbovou poznámku. Je to nové ediční téma.
+
+### Zapište změnu jako hotový zásah
+
+Malá oprava má po provedení dostat krátký záznam. Ne proto, aby vznikla další administrativa, ale aby bylo jasné, že poznámka už nežije jako otevřený signál.
+
+Použitelný zápis:
+
+```text
+2026-05-29: Potvrzený návratový signál k popisku odkazu byl vyřešen přejmenováním jednoho odkazu v aktuálním indexu. Bez změny struktury indexu.
+```
+
+Záznam má obsahovat:
+
+- co bylo změněno;
+- kde byla změna provedena;
+- co se vědomě neměnilo;
+- kdy se oprava ověří, pokud to nejde poznat hned.
+
+Nemusí obsahovat celou cestu úvah. Pokud někdo později potřebuje vědět, proč se text změnil, krátká věta mu stačí. Pokud potřebuje rozhodovat o širším systému, má otevřít samostatnou kartu, ne archeologii v údržbové poznámce.
+
+### Zavřete původní poznámku
+
+Po provedení opravy původní údržbovou poznámku nezvětšujte, neponechávejte "pro jistotu" a nepřepisujte ji na nový úkol. Zavřete ji jedním stavem:
+
+- `Vyřešeno malou opravou`;
+- `Vyřešeno bez dalšího sledování`;
+- `Převedeno do samostatného tématu`;
+- `Uzavřeno, protože oprava nebyla po zásahu potřeba`.
+
+U potvrzeného signálu bude nejčastější první stav. Důležité je, aby po něm nezůstala paralelní stopa. Když aktuální pracovní místo říká jednu věc a stará poznámka dál šeptá "možná ještě něco", tým začne znovu váhat.
+
+Krátká uzavírací věta:
+
+```text
+Údržbová poznámka je zavřená. Potvrzený signál byl převeden do jedné malé opravy v aktuálním pracovním místě. Další nápady nejsou součástí této smyčky.
+```
+
+Codyho komentář: nejmenší oprava není zbabělost. Je to způsob, jak nenechat slabý signál přerůst v reorganizaci kuchyňské linky jen proto, že někdo hledal lžičku. Ano, někdy je potřeba přestavět celou kuchyň. Ale ne jako vedlejší efekt jedné lžičky.
+
+### Privacy-first provedení opravy
+
+Malá oprava po údržbové poznámce nesmí vytvářet větší datovou stopu než samotný problém. Typická chyba je, že tým začne kvůli drobnému tření sbírat důkazy, screenshoty, nahrávky nebo kopie zákaznických podkladů, aby "měl jistotu".
+
+Privacy-first pravidlo:
+
+```text
+Provedení opravy dokumentuje změnu pracovního místa, ne chování konkrétních lidí.
+```
+
+Stačí tedy zapsat:
+
+```text
+Přejmenován jeden odkaz v aktuálním indexu. Původní údržbová poznámka smazána, v changelogu zůstává jedna věta. Bez screenshotů, jmen a zákaznického obsahu.
+```
+
+Pokud oprava mění formulář, šablonu nebo návod pracující s osobními údaji, přidejte ještě jednu kontrolní otázku:
+
+```text
+Vzniká kvůli opravě nový údaj, nový přístup, nová kopie, nová integrace nebo delší retence?
+```
+
+U malé opravy by odpověď měla většinou znít ne. Pokud odpověď zní ano, oprava už není jen lokální textová úprava. Potřebuje datovou kontrolu, vlastníka a jasné rozhodnutí, proč je nová stopa nutná.
+
+### Karta malé opravy po údržbové poznámce
+
+```text
+Původní pracovní místo:
+Původní údržbová poznámka:
+Potvrzený návratový signál:
+Nejmenší oprava:
+Místo zásahu:
+Provedená změna:
+Co teď vědomě neměníme:
+Nové nápady mimo tuto opravu:
+Stav původní poznámky:
+Jak ověříme další běžné použití:
+Privacy-first dopad:
+Retence pomocných stop:
+Vlastník kontextu:
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Původní pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Původní údržbová poznámka:
+Popisek odkazu může připomínat archivní šablonu.
+
+Potvrzený návratový signál:
+Editor znovu váhal, jestli je odkaz aktuální.
+
+Nejmenší oprava:
+Přejmenovat jeden odkaz.
+
+Místo zásahu:
+Aktuální index šablon.
+
+Provedená změna:
+"Formulářová šablona" změněno na "Aktuální formulářová šablona pro landing page".
+
+Co teď vědomě neměníme:
+Strukturu indexu, názvy ostatních šablon a archiv.
+
+Nové nápady mimo tuto opravu:
+Pozdější sjednocení názvů všech šablon.
+
+Stav původní poznámky:
+Vyřešeno malou opravou.
+
+Jak ověříme další běžné použití:
+Při další landing page musí editor najít správnou šablonu bez zaváhání nad archivem.
+
+Privacy-first dopad:
+Bez nových údajů, screenshotů, nahrávek a zákaznického obsahu.
+
+Retence pomocných stop:
+Původní poznámku smazat, ponechat jen changelogovou větu.
+
+Vlastník kontextu:
+Marketing owner.
+
+Datum uzavření:
+2026-05-29.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte potvrzený návratový signál.
+2. Minuta 2: určete nejbližší pracovní místo, kde se má zásah provést.
+3. Minuta 3: napište nejmenší opravu jednou větou.
+4. Minuta 4: proveďte nebo přesně zadejte změnu a zapište, co se nemění.
+5. Minuta 5: zavřete původní údržbovou poznámku jedním stavem.
+6. Minuta 6: zkontrolujte privacy-first dopad a retenci pomocných stop.
+
+Výstup workshopu:
+
+```text
+Potvrzená údržbová poznámka už není otevřený signál. Je převedená do jedné malé opravy, původní poznámka je zavřená a pomocné stopy mají jasný konec.
+```
+
+### Checklist kapitoly
+
+- Opravujeme jen potvrzenou část signálu?
+- Je jasné nejbližší pracovní místo zásahu?
+- Je oprava popsaná jednou větou?
+- Neopravujeme historii, pokud historie sama nevytváří tření?
+- Je zapsané, co teď vědomě neměníme?
+- Jsou nové nápady oddělené od této malé opravy?
+- Je původní údržbová poznámka po zásahu zavřená?
+- Zůstává v changelogu jen tolik textu, kolik bude později opravdu užitečné?
+- Nevznikly screenshoty, nahrávky, kopie zákaznických podkladů ani osobní deník?
+- Pokud oprava mění datový tok, má samostatnou datovou kontrolu?
+- Má další běžné použití jednoduchý ověřovací signál?
+- Ví vlastník kontextu, kde je aktuální pravda a které pomocné stopy mají zmizet?
+
+Malá oprava po potvrzené údržbové poznámce má vrátit pracovní místo do klidu. Nevyhrává tím, že vyřeší všechno související. Vyhrává tím, že příští člověk projde stejným místem bez stejného zaváhání a bez nové hromady pomocných stop.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha SZ o provedení malé opravy po potvrzené údržbové poznámce: oddělení potvrzeného signálu od nových nápadů, zásah v aktuálním pracovním místě, uzavření původní poznámky, privacy-first provedení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SY o ověření údržbové poznámky po návratovém signálu nebo expiraci: návrat k původní podmínce, čtyři výsledky ověření, převod do malé opravy, expirace, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna krátká úvodní poznámka, aby se stop podmínka na konci čtení zpětně neupravovala podle hotového výstupu.
 - 2026-05-29: Doplněna Příloha SX o převodu lehkého dozvuku po prvním běžném návratu do údržbové poznámky: vymezení dozvuku, podmíněná poznámka, umístění blízko práce, expirace, privacy-first omezení, karta, mini workshop a checklist.
