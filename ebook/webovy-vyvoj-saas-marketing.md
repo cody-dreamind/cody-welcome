@@ -141953,8 +141953,229 @@ Malá oprava byla ověřena při běžném použití. Smyčka má jeden stav, p�
 
 Ověření malé opravy má ukázat, jestli se pracovní místo vrátilo do normálního použití. Když ano, nejlepší další krok je často žádný další krok. Ano, nudné. Ale nudný klid je v provozu často přesně ten luxus, který si kvalitní údržba má koupit.
 
+## Příloha TB: Uzavření potvrzené malé opravy do čistého pracovního místa
+
+Příloha TA skončila stavem ověření. Pokud je výsledek `Potvrzeno`, malá oprava splnila svůj účel: původní zaváhání se při běžném použití nevrátilo. Tato příloha řeší poslední krok smyčky: jak potvrzenou opravu zapsat do běžného pracovního místa tak, aby po ní nezůstala malá hromádka poznámek, polovičních úkolů a dočasných vysvětlení.
+
+Uzavření není slavnostní ceremonie. Je to úklid provozní pravdy. Aktuální pracovní místo má říkat, jak se pracuje teď. Historie opravy má zůstat jen v takové podobě, která pomůže při pozdějším návratu, auditu nebo podobném problému.
+
+Úvodní pracovní věta:
+
+```text
+Potvrzenou malou opravu uzavíráme tak, aby aktuální pracovní místo neslo pravdu samo a pomocné stopy po ověření měly jasný konec.
+```
+
+Tahle věta brání dvěma častým chybám. První chyba je nechat všude poznámky typu "nově opraveno", "pozor, původně matoucí" nebo "dočasně potvrzeno". Po týdnu už nikomu nepomáhají a po měsíci vytvářejí nový šum. Druhá chyba je opačná: smazat všechno tak důkladně, že tým později nepozná, proč se pracovní místo změnilo.
+
+### Přepište aktuální místo, ne příběh opravy
+
+Začněte u místa, které bude člověk příště opravdu používat. Může to být stránka v e-booku, formulářová šablona, interní checklist, karta služby, stránka nabídky nebo provozní instrukce. Cílem není doplnit velkou retrospektivu. Cílem je, aby další použití nepotřebovalo autora opravy.
+
+Špatný uzavírací zápis v aktuálním místě:
+
+```text
+Tento odkaz byl přejmenován po údržbové poznámce, protože editor minule nevěděl, jestli jde o archiv nebo aktuální verzi.
+```
+
+Lepší aktuální zápis:
+
+```text
+Aktuální formulářová šablona pro landing page
+```
+
+Historie patří do changelogu, rozhodovací karty nebo pracovního logu. Aktuální místo má nést výsledek. Když musí běžný uživatel číst dějiny opravy, oprava ještě není dobře uzavřená.
+
+Krátký filtr:
+
+```text
+Co bude příští člověk potřebovat pro práci:
+Co patří jen do historie:
+Co můžeme smazat bez ztráty rozhodnutí:
+```
+
+Vyplněný příklad:
+
+```text
+Co bude příští člověk potřebovat pro práci:
+Jednoznačný odkaz na aktuální šablonu.
+
+Co patří jen do historie:
+Že původní název mátl editora při přípravě landing page.
+
+Co můžeme smazat bez ztráty rozhodnutí:
+Dočasnou poznámku v úkolu, screenshot starého odkazu a interní komentář "zkontrolovat příště".
+```
+
+### Zavřete kartu opravy jedním stavem
+
+Potvrzená oprava nemá zůstat ve stavu "ještě sledovat". Pokud ověření proběhlo a stav je `Potvrzeno`, napište konečný stav. Stačí krátce:
+
+```text
+Stav:
+Uzavřeno jako potvrzená malá oprava.
+
+Výsledek:
+Při dalším běžném použití se původní zaváhání nevrátilo.
+
+Aktuální pravda:
+Pracovní místo obsahuje nový jednoznačný odkaz.
+
+Návratový signál:
+Znovu otevřít jen pokud se při běžné práci vrátí stejné zaváhání.
+```
+
+Návratový signál je důležitý. Bez něj se tým buď nikdy nevrátí, i když se problém objeví znovu, nebo se naopak vrací pořád, protože oprava "ještě možná potřebuje dohled". Dobrá uzávěrka říká: teď je klid, a tady je přesný důvod, kdy klid skončí.
+
+Pokud výsledek z TA nebyl `Potvrzeno`, tuto přílohu nepoužívejte. Stav `Doladit` patří do malé úpravy stejného místa. Stav `Vrátit` patří do obnovení srozumitelné podoby. Stav `Nové téma` patří do oddělené karty. Uzavírat se má jen smyčka, která opravdu doběhla.
+
+### Ukliďte pomocné stopy bez mazání pravdy
+
+Po malé opravě často zůstane víc stop, než je potřeba: komentář v úkolu, krátká poznámka v chatu, screenshot, dočasný odkaz, kopie starého textu, připomínka v kalendáři nebo ruční checklist "ještě ověřit". Po potvrzení vyberte jen jednu kanonickou stopu a zbytek ukliďte.
+
+Praktické pravidlo:
+
+```text
+Po uzavření má zůstat aktuální pracovní místo a jedna krátká uzavírací věta. Všechno ostatní musí mít důvod nebo retenci.
+```
+
+Uzavírací věta může vypadat takto:
+
+```text
+2026-05-29: Přejmenování odkazu na aktuální šablonu bylo potvrzeno při dalším použití. Původní zaváhání se nevrátilo. Pomocné podklady smazány.
+```
+
+Pokud existuje důvod něco ponechat, pojmenujte ho. Například právní audit, bezpečnostní incident, fakturační spor nebo zákaznická reklamace mohou vyžadovat delší retenci. Běžná drobná oprava interního pracovního místa ji ale obvykle nepotřebuje. Ne každá poznámka je archivní poklad. Některé jsou jen pracovní piliny.
+
+### Předejte změnu bez schůzky navíc
+
+U malé opravy většinou není potřeba meeting. Stačí, aby člověk, kterého se pracovní místo týká, našel aktuální pravdu tam, kde už pracuje. Pokud změna zasahuje více lidí, přidejte krátkou zprávu do existujícího kanálu nebo k existujícímu úkolu:
+
+```text
+Odkaz v indexu šablon je po ověření uzavřený jako aktuální. Příště používejte přímo nový název; stará poznámka a screenshot byly smazané.
+```
+
+Zpráva nemá otevírat diskuzi o širším systému šablon. Pokud takové téma existuje, odkažte ho odděleně. Uzavření malé opravy má zmenšovat počet otevřených smyček, ne svolávat minikonferenci ke každému přejmenovanému odkazu.
+
+### Privacy-first uzavření potvrzené opravy
+
+Privacy-first uzávěrka se ptá hlavně na zbytečné stopy. U interní opravy často nejde o velká osobní data, ale právě proto se malé záznamy hromadí nenápadně: screenshoty obrazovek, jména lidí v komentářích, citace zákaznických textů, exporty z formulářů nebo dočasné kopie dokumentů.
+
+Privacy-first kontrola:
+
+```text
+Ukládáme výsledek opravy, ne detailní stopu toho, kdo kde zaváhal.
+```
+
+Dobře:
+
+```text
+Oprava potvrzena. Původní zaváhání se nevrátilo. Bez ponechaných screenshotů a bez osobního hodnocení editorů.
+```
+
+Špatně:
+
+```text
+Necháme si kompletní záznam průchodu, jména lidí, screenshoty rozpracovaných stránek a starý export pro jistotu.
+```
+
+Pokud v pomocných podkladech zůstaly osobní údaje, zákaznické texty nebo interně citlivé informace, nenechávejte je jen proto, že "se možná budou hodit". U malé potvrzené opravy má skoro vždy stačit krátká anonymní uzavírací věta.
+
+### Karta uzavření potvrzené malé opravy
+
+```text
+Pracovní místo:
+Původní zaváhání:
+Provedená oprava:
+Výsledek ověření:
+Konečný stav:
+Aktuální pravda v pracovním místě:
+Kanonická uzavírací věta:
+Co bylo smazáno:
+Co zůstává a proč:
+Návratový signál:
+Komu byla změna předána:
+Privacy-first dopad:
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Původní zaváhání:
+Editor nevěděl, jestli odkaz vede na aktuální nebo archivní šablonu.
+
+Provedená oprava:
+Odkaz přejmenován na "Aktuální formulářová šablona pro landing page".
+
+Výsledek ověření:
+Při přípravě nové landing page editor otevřel správnou šablonu bez zaváhání.
+
+Konečný stav:
+Uzavřeno jako potvrzená malá oprava.
+
+Aktuální pravda v pracovním místě:
+Index obsahuje jednoznačný název aktuální šablony.
+
+Kanonická uzavírací věta:
+2026-05-29: Přejmenování odkazu potvrzeno při dalším použití, původní zaváhání se nevrátilo.
+
+Co bylo smazáno:
+Screenshot starého názvu, dočasný komentář v úkolu a připomínka ověření.
+
+Co zůstává a proč:
+Jedna uzavírací věta v changelogu kvůli dohledatelnosti změny.
+
+Návratový signál:
+Znovu otevřít jen při stejném zaváhání nad aktuální a archivní verzí.
+
+Komu byla změna předána:
+Marketing ownerovi v existujícím úkolu.
+
+Privacy-first dopad:
+Bez nových osobních údajů, bez nahrávek a bez ponechaných pracovních screenshotů.
+
+Datum uzavření:
+2026-05-29.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek ověření a potvrďte, že stav je opravdu `Potvrzeno`.
+2. Minuta 2: zkontrolujte aktuální pracovní místo a odstraňte z něj historické vysvětlování.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: smažte nebo označte k retenci pomocné stopy.
+5. Minuta 5: napište návratový signál.
+6. Minuta 6: předejte změnu v existujícím pracovním místě nebo kanálu.
+
+Výstup workshopu:
+
+```text
+Potvrzená malá oprava je uzavřená. Aktuální pracovní místo nese pravdu samo, pomocné stopy jsou uklizené a návrat má jasnou podmínku.
+```
+
+### Checklist kapitoly
+
+- Uzavíráme jen opravu se stavem `Potvrzeno`?
+- Je aktuální pracovní místo srozumitelné bez historie opravy?
+- Zůstala historie jen tam, kde opravdu pomáhá dohledatelnosti?
+- Má karta opravy konečný stav?
+- Je napsaná jedna krátká uzavírací věta?
+- Je jasné, co bylo smazáno a co zůstává?
+- Mají ponechané pomocné podklady důvod a retenci?
+- Nezůstaly screenshoty, exporty, osobní poznámky nebo zákaznické ukázky jen "pro jistotu"?
+- Je návratový signál konkrétní?
+- Proběhlo předání bez nové schůzky, pokud nebyla opravdu potřeba?
+- Jsou nová témata oddělená od uzavření této opravy?
+- Umí tým příště použít pracovní místo bez autora opravy?
+
+Uzavření potvrzené malé opravy je drobná disciplína, která šetří budoucí pozornost. Když se dělá poctivě, tým nemá jen opravený odkaz, odstavec nebo krok. Má méně otevřených smyček, méně dočasných stop a čistší místo, kde příští práce začne.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TB o uzavření potvrzené malé opravy do čistého pracovního místa: přepis aktuální pravdy, zavření karty opravy, úklid pomocných stop, předání bez schůzky navíc, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TA o ověření malé opravy po údržbové poznámce při dalším běžném použití: návrat k opravné větě, přirozené ověření, čtyři výsledné stavy, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SZ o provedení malé opravy po potvrzené údržbové poznámce: oddělení potvrzeného signálu od nových nápadů, zásah v aktuálním pracovním místě, uzavření původní poznámky, privacy-first provedení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SY o ověření údržbové poznámky po návratovém signálu nebo expiraci: návrat k původní podmínce, čtyři výsledky ověření, převod do malé opravy, expirace, privacy-first ověření, karta, mini workshop a checklist.
