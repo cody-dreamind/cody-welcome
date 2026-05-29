@@ -141219,8 +141219,298 @@ Lehký dozvuk je zachycený jako podmíněná údržbová poznámka. Neměníme 
 
 Údržbová poznámka po lehkém dozvuku je malá brzda proti dvěma špatným reflexům: hned všechno opravovat, nebo všechno ignorovat. Dobře napsaná poznámka nechá systém dýchat. Když se signál vrátí, tým ví, co udělat. Když se nevrátí, tým má odvahu nechat čistý stav čistým.
 
+## Příloha SY: Ověření údržbové poznámky po návratovém signálu nebo expiraci
+
+Příloha SX zachytila lehký dozvuk jako údržbovou poznámku. Poznámka měla dvě ochrany: návratový signál a expiraci. Tato příloha řeší okamžik, kdy nastane jedno z toho. Buď se signál při běžné práci vrátí, nebo se nevrátí v dohodnutém čase a poznámka má zmizet.
+
+Ověření údržbové poznámky není audit. Je to krátké rozhodnutí nad slabým signálem. Cílem není dokázat, že někdo měl pravdu. Cílem je zabránit dvěma špatným stavům: poznámka se nesmí proměnit v nekonečný seznam opatrných "možná", ale ani se nesmí ztratit, pokud se opravdu ukáže opakované tření.
+
+Začněte větou:
+
+```text
+Ověřujeme údržbovou poznámku jen proto, že nastal její návratový signál nebo expirace. Neotevíráme širší redesign pracovního místa.
+```
+
+Tahle věta drží rozsah. Jakmile při ověření začnete řešit celý index, všechny šablony, historické názvy nebo nové nápady, už neověřujete poznámku. Otevřeli jste nové téma, které potřebuje vlastní smyčku.
+
+### Vraťte se k původní podmínce
+
+Nejdřív si přečtěte původní údržbovou poznámku a vyhledejte dvě věci:
+
+- návratový signál;
+- expirační pravidlo.
+
+Bez nich nejde rozhodnout férově. Poznámka bez návratového signálu je jen obava. Poznámka bez expirace je malý dluh, který se rád tváří jako opatrnost.
+
+Mini šablona pro návrat:
+
+```text
+Původní lehký dozvuk:
+Návratový signál:
+Expirace:
+Co se stalo teď:
+Je to stejný signál, podobný signál, žádný signál, nebo nové téma?
+```
+
+Příklad:
+
+```text
+Původní lehký dozvuk:
+Popisek odkazu "Formulářová šablona" může připomínat starou archivní verzi.
+
+Návratový signál:
+Stejný popisek znovu vyvolá zaváhání při další běžné landing page.
+
+Expirace:
+Po dvou dalších běžných použitích bez signálu nebo při nejbližším měsíčním úklidu.
+
+Co se stalo teď:
+Při další landing page editor znovu hledal, jestli jde o aktuální nebo archivní šablonu.
+
+Klasifikace:
+Stejný signál.
+```
+
+Pokud se původní podmínka nedá najít, ověření nezachraňujte dlouhou debatou. Zapište, že poznámka nebyla použitelná, smažte ji nebo ji přepište do nové poznámky s jasnou podmínkou. I to je výsledek. Slabý signál bez pravidla návratu nemá právo sedět v pracovním prostoru navždy.
+
+### Rozlišujte čtyři výsledky
+
+Údržbová poznámka může skončit čtyřmi způsoby.
+
+`Potvrzený signál`: návratový signál nastal ve stejné pracovní situaci. Poznámka se převádí do jedné malé lokální opravy.
+
+`Podobný signál`: objevilo se příbuzné tření, ale ne přesně to, které bylo zapsané. Původní poznámku nezvětšujte. Buď ji uzavřete a otevřete novou menší poznámku, nebo nové téma odložte.
+
+`Bez signálu`: nastala expirace a signál se nevrátil. Poznámku smažte nebo zkraťte do jedné věty v changelogu pracovního místa.
+
+`Nové téma`: při návratu se ukázalo něco jiného. Původní poznámku uzavřete podle jejího stavu a nové téma založte samostatně, pokud je dost důležité.
+
+Rozhodovací tabulka:
+
+```text
+Co vidíme:
+Stejný signál.
+
+Co uděláme:
+Převedeme poznámku do jedné malé opravy.
+
+Co nesmíme udělat:
+Přibalit další nápady, které se objevily cestou.
+```
+
+```text
+Co vidíme:
+Podobný, ale ne stejný signál.
+
+Co uděláme:
+Původní poznámku uzavřeme a případně založíme novou s přesnější podmínkou.
+
+Co nesmíme udělat:
+Potichu rozšířit původní poznámku tak, aby pojala všechno.
+```
+
+```text
+Co vidíme:
+Žádný signál do expirace.
+
+Co uděláme:
+Poznámku smažeme nebo zkrátíme do historie.
+
+Co nesmíme udělat:
+Nechat ji viset "pro jistotu".
+```
+
+```text
+Co vidíme:
+Nové téma.
+
+Co uděláme:
+Oddělíme ho od původní poznámky.
+
+Co nesmíme udělat:
+Vydávat nové téma za potvrzení starého dozvuku.
+```
+
+Codyho komentář: údržbové poznámky jsou užitečné jen tehdy, když umí skončit. Poznámka, která přežije vlastní expiraci, je jako nalepovací štítek, který už nedrží, ale všichni se tváří, že pořád organizuje kancelář. Organizuje hlavně nepořádek.
+
+### Převod do opravy držte malý
+
+Když se signál potvrdí, nedělejte z poznámky projekt. Vraťte se k nejmenší opravě, která byla napsaná už při založení poznámky.
+
+Dobře:
+
+```text
+Potvrzený signál:
+Popisek odkazu znovu vyvolal zaváhání.
+
+Malá oprava:
+Přejmenovat jeden odkaz na "Aktuální formulářová šablona pro landing page".
+```
+
+Špatně:
+
+```text
+Potvrzený signál:
+Popisek odkazu znovu vyvolal zaváhání.
+
+Rozšířená oprava:
+Přejmenovat všechny šablony, předělat index, zavést nový taxonomický systém a projít archiv.
+```
+
+Potvrzený slabý signál opravuje nejbližší pracovní místo. Pokud během opravy uvidíte větší problém, zapište ho jako nové téma mimo tuto smyčku. Ne proto, že by nebyl důležitý. Protože jinak se malé ověření promění v neřízené přestavování systému.
+
+Krátká karta převodu:
+
+```text
+Údržbová poznámka:
+Potvrzený návratový signál:
+Nejmenší oprava:
+Místo opravy:
+Co teď neměníme:
+Jak ověříme, že oprava stačí:
+Privacy-first omezení:
+```
+
+Ověření po malé opravě má být stejně malé jako oprava. U popisku odkazu často stačí jeden běžný průchod: člověk najde správnou šablonu, nezaváhá nad archivem a nevznikne nová datová stopa. Nepotřebujete měřit každý pohyb kurzoru. Potřebujete vědět, jestli pracovní místo přestalo drhnout.
+
+### Expirace je skutečný konec
+
+Když se signál nevrátil a nastala expirace, poznámku zavřete. Neodkládejte ji do dalšího měsíce jen proto, že "by se mohla hodit". Mohla. Ale cena opatrnosti roste s každou poznámkou, kterou tým musí mentálně nést.
+
+Praktická uzavírací věta:
+
+```text
+Údržbová poznámka expirovala bez návratového signálu. Neprovádíme opravu a mažeme pomocný záznam.
+```
+
+Pokud má tým changelog pracovního místa, stačí jedna krátká věta:
+
+```text
+2026-05-29: Lehký dozvuk k popisku odkazu se po dvou použitích nevrátil; bez změny.
+```
+
+Changelogová věta není nutná vždy. Hodí se tehdy, když by jinak někdo později nechápal, proč poznámka zmizela. Pokud zmizení nikoho nepřekvapí a poznámka neovlivnila práci, smažte ji bez ceremonie. Úklid není méně hodnotný jen proto, že po něm nezůstane pamětní deska.
+
+### Privacy-first ověření poznámky
+
+Ověření údržbové poznámky má pracovat s minimem dat. Protože původní signál byl lehký, i důkaz má být lehký. Nezavádějte kvůli němu nový tracker, nahrávání obrazovky, detailní osobní deník ani kopie klientských podkladů.
+
+Privacy-first pravidlo:
+
+```text
+Ověřujeme návrat pracovního signálu, ne chování konkrétního člověka.
+```
+
+Dobrý záznam:
+
+```text
+Při dalším běžném použití se stejný popisek znovu jevil jako nejasný. Bez jmen, screenshotů a kopie zákaznického obsahu. Převádíme do jedné malé opravy názvu odkazu.
+```
+
+Špatný záznam:
+
+```text
+Uložíme video průchodu editora, screenshoty obrazovky a celé zadání klienta, aby bylo vidět, kde přesně váhal.
+```
+
+Pokud potřebujete konkrétní příklad pro interní domluvu, anonymizujte ho a zkraťte. Cílem je rozhodnout o pracovním místě, ne vytvořit archiv lidských zaváhání. Privacy-first provoz není jen o cookie liště. Je to i disciplína v tom, jak málo pomocných stop vzniká při údržbě vlastního systému.
+
+### Karta ověření údržbové poznámky
+
+```text
+Původní pracovní místo:
+Údržbová poznámka:
+Návratový signál:
+Expirační pravidlo:
+Aktuální událost:
+Výsledek ověření:
+Rozhodnutí:
+Nejmenší oprava, pokud se signál potvrdil:
+Co teď vědomě neměníme:
+Nové téma mimo tuto smyčku:
+Privacy-first omezení:
+Retence pomocného záznamu:
+Vlastník kontextu:
+```
+
+Vyplněný příklad:
+
+```text
+Původní pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Údržbová poznámka:
+Popisek odkazu může připomínat starou archivní šablonu.
+
+Návratový signál:
+Stejný popisek znovu vyvolá zaváhání při další běžné landing page.
+
+Expirační pravidlo:
+Po dvou běžných použitích bez signálu poznámku smažeme.
+
+Aktuální událost:
+Při další landing page se stejné zaváhání vrátilo.
+
+Výsledek ověření:
+Potvrzený signál.
+
+Rozhodnutí:
+Převedeme poznámku do jedné malé opravy.
+
+Nejmenší oprava:
+Přejmenovat jeden odkaz na "Aktuální formulářová šablona pro landing page".
+
+Co teď vědomě neměníme:
+Neměníme strukturu indexu, názvy ostatních šablon ani archiv.
+
+Nové téma mimo tuto smyčku:
+Pozdější sjednocení názvů šablon napříč webem.
+
+Privacy-first omezení:
+Bez jmen, screenshotů, nahrávek a zákaznického obsahu.
+
+Retence pomocného záznamu:
+Po provedení opravy ponechat jen changelogovou větu, poznámku smazat.
+
+Vlastník kontextu:
+Marketing owner.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: najděte původní návratový signál a expiraci.
+2. Minuta 2: popište, co se stalo při aktuálním návratu.
+3. Minuta 3: určete výsledek: potvrzený signál, podobný signál, bez signálu, nebo nové téma.
+4. Minuta 4: rozhodněte o jedné malé opravě, nové poznámce, smazání nebo oddělení tématu.
+5. Minuta 5: zkontrolujte privacy-first omezení a retenci pomocného záznamu.
+
+Výstup workshopu:
+
+```text
+Údržbová poznámka je ověřená a má konečný stav. Buď se převádí do jedné malé opravy, uzavírá bez změny, zpřesňuje jako nová poznámka, nebo odděluje nové téma.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme poznámku jen kvůli návratovému signálu nebo expiraci?
+- Máme před sebou původní znění poznámky, ne jen vzpomínku?
+- Je jasný původní návratový signál?
+- Je jasné expirační pravidlo?
+- Rozlišili jsme stejný signál, podobný signál, žádný signál a nové téma?
+- Pokud se signál potvrdil, drží se oprava nejmenšího možného zásahu?
+- Pokud se signál nepotvrdil, umíme poznámku smazat?
+- Pokud se objevil podobný signál, nerozšiřujeme potichu původní poznámku?
+- Je nové téma oddělené od této smyčky?
+- Nevznikl kvůli ověření nový tracker, nahrávka, screenshotová sada ani osobní deník?
+- Je zapsané, co teď vědomě neměníme?
+- Má pomocný záznam jasnou retenci?
+- Ví vlastník kontextu, jestli má následovat oprava, smazání, nová poznámka nebo samostatná smyčka?
+
+Ověření údržbové poznámky je malý, ale důležitý hygienický krok. Učí tým, že slabé signály se berou vážně, ale neuctívají se. Když se vrátí, dostanou malou opravu. Když se nevrátí, zmizí. Tím pracovní prostor zůstává citlivý na realitu, ale odolný proti hromadění opatrných zbytků.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha SY o ověření údržbové poznámky po návratovém signálu nebo expiraci: návrat k původní podmínce, čtyři výsledky ověření, převod do malé opravy, expirace, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna krátká úvodní poznámka, aby se stop podmínka na konci čtení zpětně neupravovala podle hotového výstupu.
 - 2026-05-29: Doplněna Příloha SX o převodu lehkého dozvuku po prvním běžném návratu do údržbové poznámky: vymezení dozvuku, podmíněná poznámka, umístění blízko práce, expirace, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SW o první běžný návrat k čistému pracovnímu stavu po uzavřené lokální opravě: běžný spouštěč, známky čistoty, rozlišení klidu, dozvuku, návratu staré stopy a nového problému, privacy-first návrat, karta, mini workshop a checklist.
