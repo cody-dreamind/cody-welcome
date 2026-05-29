@@ -144519,8 +144519,216 @@ Potvrzená hlídací poznámka je převedená do jedné stabilizační úpravy v
 
 Stabilizační úprava je dobrý konec malé smyčky. Slabý signál dostal šanci, opakoval se, proměnil se v nejmenší změnu a starý dohled zmizel. Tak má vypadat zdravý provozní rytmus: všímat si tření, ale nekrmit ho větší pozorností, než si zaslouží.
 
+## Příloha TM: Ověření stabilizační úpravy při příštím běžném použití
+
+Příloha TL skončila stabilizační úpravou a zavřením hlídacího režimu. Teď přichází poslední kontrola malé smyčky: nezkoumat úpravu laboratorně, neotevírat staré poznámky a nepořádat kvůli ní schůzku. Stačí počkat na příští běžné použití stejného pracovního místa a zapsat, jestli úprava opravdu drží klid.
+
+Ověření stabilizační úpravy není audit. Je to krátký návrat k pracovnímu místu ve chvíli, kdy ho někdo stejně potřebuje použít. Pokud byla úprava v indexu šablon, ověřujte ji při další šablonové volbě. Pokud byla v předávací kartě, ověřujte ji při dalším předání. Pokud rušila zbytečný datový krok, ověřujte ji při dalším průchodu procesu, kde by se starý krok dřív objevil.
+
+Úvodní pracovní věta:
+
+```text
+Stabilizační úpravu ověřujeme při příštím běžném použití stejného pracovního místa; sledujeme jen to, jestli pomohla bez návratu starého hlídacího režimu a bez nové datové vrstvy.
+```
+
+Tahle věta chrání dvě věci najednou. První je rozsah: ověřuje se konkrétní úprava, ne celý systém. Druhá je klid: stará hlídací poznámka už je zavřená, takže ji nevytahujeme jako hlavní pracovní materiál. Je možné se podívat na její závěr, ale ne znovu otevřít celou historii.
+
+### Vraťte se ke stabilizační větě
+
+Nezačínejte otázkou "funguje nám ten proces?". To je moc široké a rychle z toho vznikne debata o všem, co kolem procesu drhne. Začněte stabilizační větou z minulé karty.
+
+Příklad:
+
+```text
+Stabilizační věta:
+K oběma formulářovým šablonám jsme doplnili rozlišovací větu, aby editor při landing page vybral mezi otevřenou poptávkou a konkrétní službou bez návratu ke staré hlídací poznámce.
+```
+
+Z takové věty jde přímo odvodit ověřovací otázku:
+
+```text
+Při další landing page vybral editor správnou šablonu podle rozlišovací věty, nebo se znovu vracel ke starému váhání?
+```
+
+Když ověřovací otázka nejde napsat jednou větou, úprava byla buď moc neurčitá, nebo se ji snažíte ověřit příliš široce. Vraťte se k tomu, co se konkrétně změnilo v pracovním místě.
+
+### Sledujte tři signály
+
+Ověření držte na třech signálech. Nejde o tabulku pro všechny případy, ale o rychlou kontrolu, jestli stabilizace plní svůj slib.
+
+1. Signál přímé cesty: člověk najde upravené místo bez hledání staré poznámky.
+2. Signál rozhodnutí: upravená věta, poloha, pravidlo nebo odstraněný krok stačí k provedení práce.
+3. Signál datové stopy: ověření neobnoví exporty, screenshoty, osobní poznámky ani trackery, které se už zavřely.
+
+Praktický zápis může být velmi krátký:
+
+```text
+Přímá cesta:
+Editor šel rovnou do indexu šablon.
+
+Rozhodnutí:
+Vybral "krátkou poptávku" podle věty o konkrétní službě bez dalšího doptávání.
+
+Datová stopa:
+Nevznikl nový export ani screenshot, stará hlídací poznámka zůstala zavřená.
+```
+
+Tohle je dost. Pokud tým potřebuje k ověření pět dalších polí, pravděpodobně znovu vyrábí proces kolem procesu. Codyho komentář: nejhezčí ověření je to, které se skoro celé vejde do změnového logu. Méně slavnostních formulářů, více normální práce.
+
+### Rozlište čtyři výsledky
+
+Po prvním běžném použití mohou nastat čtyři rozumné výsledky:
+
+1. Drží: úprava pomohla, staré váhání se nevrátilo a datová stopa se nezvětšila.
+2. Drobně doladit: směr je správný, ale chybí malý detail přímo v upraveném místě.
+3. Vrátit k nové poznámce: stejný problém se opakuje, ale není jasné, jestli příčina sedí s původní úpravou.
+4. Oddělit nový problém: objevilo se jiné tření, které s původní stabilizační úpravou jen sousedí.
+
+Stav `Drží` je konec. Nepište další kontrolu jen proto, že je hezké mít jistotu. Stav `Drobně doladit` dovoluje jednu malou korekci, například zpřesnit slovo, přesunout větu o pár řádků výš nebo smazat duplicitní poznámku.
+
+Stav `Vrátit k nové poznámce` neznamená obnovit původní hlídací režim. Znamená založit novou úzkou poznámku, protože stabilizační úprava nebyla dostatečná nebo cílila vedle. Stav `Oddělit nový problém` patří mimo tuto kartu. Stabilizace se kvůli němu nemá rozrůst.
+
+### Kdy nechat úpravu být
+
+Nejčastější chyba po stabilizaci je přidat ještě jednu "preventivní" úpravu. Tým vidí, že první změna pomohla, a má chuť ji posílit. Jenže příliš mnoho vysvětlování umí z pracovního místa udělat návod, který už nikdo nečte.
+
+Úpravu nechte být, když:
+
+- člověk provedl práci bez návratu ke staré poznámce;
+- nové pravidlo použil bez vysvětlování od autora;
+- nevznikla nová datová stopa;
+- nebylo potřeba měnit sousední šablony, formuláře ani workflow;
+- výsledek se dá uzavřít jednou větou v changelogu.
+
+Krátká uzavírací věta:
+
+```text
+Stabilizační úprava při prvním běžném použití drží; starý hlídací režim neobnovujeme, další kontrolu neplánujeme a pracovní místo zůstává v klidu.
+```
+
+Tahle věta je cennější než dlouhý zápis. Říká, že práce skončila. A to je v dlouhodobém provozu často nejdůležitější druh disciplíny.
+
+### Privacy-first ověření stabilizace
+
+Stabilizační úprava má často uklidit drobné provozní tření. Ověření proto nesmí znovu vyrobit datovou stopu, kterou předchozí krok uklidil. Pokud jste v minulé příloze smazali pomocné screenshoty nebo zavřeli osobní poznámky z pozorování práce, neobnovujte je kvůli "důkazu".
+
+Privacy-first pravidla:
+
+1. Ověřujte na běžném pracovním průchodu, ne na extra sledování člověka.
+2. Zapisujte výsledek úpravy, ne chování konkrétní osoby.
+3. Pokud potřebujete příklad, anonymizujte ho a zkraťte na pracovní situaci.
+4. Nezavádějte nový event, heatmapu ani session recording kvůli jedné stabilizační větě.
+5. Pokud úprava snížila datovou stopu, chraňte ten výsledek před návratem "dočasných" exportů.
+
+Dobrý zápis:
+
+```text
+Ověření proběhlo při běžné přípravě landing page. Zůstává jen závěr v changelogu; žádný nový osobní záznam, export ani tracker nevznikl.
+```
+
+Slabý zápis:
+
+```text
+Pro jistotu budeme u dalších pěti lidí sledovat, jak dlouho se u šablony zastaví.
+```
+
+Druhý zápis dělá z malé stabilizace nový dohled. To je přesně ten moment, kdy privacy-first hodnota není dekorace na webu, ale praktická brzda v každodenním provozu.
+
+### Karta ověření stabilizační úpravy
+
+```text
+Stabilizační úprava:
+Původní potvrzený výrok:
+Běžné použití, při kterém ověřujeme:
+Ověřovací otázka:
+Signál přímé cesty:
+Signál rozhodnutí:
+Signál datové stopy:
+Výsledek: Drží / Drobně doladit / Vrátit k nové poznámce / Oddělit nový problém
+Jedna uzavírací věta:
+Privacy-first dopad:
+Co dál nehlídáme:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizační úprava:
+Rozlišovací věty u šablon "rychlý kontakt" a "krátká poptávka".
+
+Původní potvrzený výrok:
+Editor dvakrát váhal mezi dvěma podobnými formulářovými šablonami.
+
+Běžné použití, při kterém ověřujeme:
+Příprava landing page pro konkrétní službu.
+
+Ověřovací otázka:
+Vybral editor šablonu bez návratu ke staré hlídací poznámce?
+
+Signál přímé cesty:
+Editor otevřel index šablon a použil novou rozlišovací větu.
+
+Signál rozhodnutí:
+Vybral "krátkou poptávku", protože stránka nabízela konkrétní službu.
+
+Signál datové stopy:
+Nevznikl nový export, screenshot ani osobní záznam průchodu.
+
+Výsledek:
+Drží.
+
+Jedna uzavírací věta:
+Stabilizační úprava při prvním běžném použití drží; hlídací režim se neobnovuje.
+
+Privacy-first dopad:
+Datová stopa zůstává menší než před úpravou, v systému je jen pracovní pravidlo.
+
+Co dál nehlídáme:
+Neplánujeme další sledování výběru těchto dvou šablon.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-29.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte stabilizační větu a napište ověřovací otázku.
+2. Minuta 2: projděte signál přímé cesty.
+3. Minuta 3: projděte signál rozhodnutí.
+4. Minuta 4: zkontrolujte datovou stopu.
+5. Minuta 5: vyberte jeden ze čtyř výsledků a napište uzavírací větu.
+
+Výstup workshopu:
+
+```text
+Stabilizační úprava je ověřená při běžném použití, má jeden jasný výsledek a nepřidala nový dohled ani nová data.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme skutečně stabilizační úpravu, ne celý proces kolem ní?
+- Probíhá ověření při běžném použití, které by nastalo i bez kontroly?
+- Máme jednu ověřovací otázku odvozenou ze stabilizační věty?
+- Sledujeme jen přímou cestu, rozhodnutí a datovou stopu?
+- Zůstala původní hlídací poznámka zavřená?
+- Umíme výsledek zařadit jako `Drží`, `Drobně doladit`, `Vrátit k nové poznámce` nebo `Oddělit nový problém`?
+- Pokud úprava drží, plánujeme opravdu přestat?
+- Pokud je potřeba doladit, je korekce menší než původní úprava?
+- Nevznikl nový tracker, export, screenshot, osobní log ani zbytečný analytický event?
+- Je privacy-first dopad zapsaný jednou praktickou větou?
+- Ví vlastník, co dál nehlídat?
+- Je závěr uložený v changelogu nebo jiném kanonickém místě?
+
+Ověření stabilizační úpravy má být tiché. Když úprava drží, provoz se vrátí ke své práci a dokumentace zůstane kratší než problém, který řešila. To je dobrý signál: malá smyčka se uzavřela, stará nejistota nepřežila a tým si nevytvořil nový kontrolní rituál jen proto, že něco jednou drhlo.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TM o ověření stabilizační úpravy při příštím běžném použití: stabilizační věta, tři signály, čtyři výsledné stavy, pravidlo kdy nechat úpravu být, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TL o převodu potvrzené hlídací poznámky do jedné stabilizační úpravy: potvrzený výrok, nejbližší pracovní místo, typy malých úprav, zavření hlídacího režimu, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TK o ověření hlídací poznámky po opakování nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, úzký převod potvrzeného signálu, aktivní expirace, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TJ o převod lehkého dozvuku po návratu ke klidovému stavu do hlídací poznámky: rozlišení dozvuku od návratového signálu, podmíněná poznámka, umístění u pracovního místa, expirace, privacy-first hranice, karta, mini workshop a checklist.
