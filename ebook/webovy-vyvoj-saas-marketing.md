@@ -144947,8 +144947,235 @@ Ověřená stabilizační úprava je součástí kanonického pracovního pravid
 
 Uzavřená stabilizační úprava má zmizet z popředí. Ne proto, že by nebyla důležitá, ale proto, že se stala normální součástí práce. Dobrý systém nemusí neustále připomínat každou malou jizvu. Stačí, že se podle něj lidem lépe rozhoduje a že po sobě nenechává zbytečnou datovou stopu.
 
+## Příloha TO: První běžný návrat ke kanonickému pracovnímu pravidlu
+
+Příloha TN převedla ověřenou stabilizační úpravu do kanonického pracovního pravidla. Tím má malá smyčka skončit v normálním provozu, ne v dalším sledování. Přesto se hodí vědět, jak se k pravidlu vrátit při prvním běžném použití, aby tým neotevřel znovu celou historii jen proto, že se k místu někdo po čase dostal.
+
+První běžný návrat ke kanonickému pravidlu není audit kvality dokumentace. Je to obyčejná pracovní situace: editor vybírá formulářovou šablonu, obchodník používá kvalifikační otázky, produkťák sahá do rozhodovacího logu, marketér připravuje landing page nebo nový člen týmu hledá správný postup v indexu. Cílem je ověřit, že pravidlo opravdu funguje jako pravidlo: člověk ho najde, pochopí a použije bez toho, aby musel číst zavřenou stabilizační kartu.
+
+Začněte větou:
+
+```text
+Kanonické pravidlo bylo použito v běžné práci. Kontrolujeme jen to, zda vedlo k rozhodnutí bez návratu k uzavřené historii a bez nové zbytečné datové stopy.
+```
+
+Pokud tahle věta svádí k tomu, abyste otevřeli staré screenshoty, ověřovací poznámky nebo servisní vlákno, zastavte se. První návrat má projít stejnou cestou jako běžný člověk. Historie slouží k dohledatelnosti, ne jako navigace.
+
+### Jděte od pracovního úkolu, ne od changelogu
+
+Nejčastější chyba po uzavření pravidla je začít changelogem. Changelog je dobrý pro vlastníka a audit rozhodnutí, ale běžný uživatel pravidla má začít úkolem, který právě řeší. Pokud musí nejdřív vědět, že existovala stabilizační úprava, pravidlo ještě není dost kanonické.
+
+Použijte přirozený vstup:
+
+- stránku, na které se vybírá šablona;
+- interní index, který má vést k aktuálnímu pravidlu;
+- checklist pro launch, audit nebo předání;
+- kartu nabídky, kterou používá obchod nebo delivery;
+- rozcestník e-booku, pokud je zdrojem pracovního postupu;
+- provozní list, kde má pravidlo fungovat při opakované práci.
+
+Kontrolní otázka:
+
+```text
+Když řeším běžný úkol a jdu normální cestou, vede mě kanonické pravidlo k rozhodnutí bez doplňujícího vysvětlování?
+```
+
+Pokud odpověď zní "ano, ale jen když si pamatuju, proč jsme to kdysi opravovali", není to ještě čisté použití pravidla. V takovém případě neupravujte hned všechno okolo. Zapište, kde přesně pravidlo potřebovalo paměť minulosti, a vraťte se jen k nejbližšímu pracovnímu místu.
+
+### Sledujte čtyři signály normálního použití
+
+První signál je nalezení. Člověk se k pravidlu dostane z místa, kde by ho rozumně hledal. Nemusí prohledávat staré issue, ptát se autora opravy ani otevírat archivní kartu.
+
+Druhý signál je rozhodnutí. Pravidlo pomůže vybrat další krok: kterou šablonu použít, jakou větu napsat, jaký formulář zvolit, co ponechat ručně nebo co teď výslovně neřešit.
+
+Třetí signál je hranice. Pravidlo neotevře širší debatu, pokud k tomu není jasný důvod. Když se u malé formulářové věty znovu rozjede diskuse o celém webu, pravidlo možná funguje, ale tým ztratil hranici práce.
+
+Čtvrtý signál je datová stopa. Použití pravidla nemá vyžadovat nový tracker, export, screenshot, seznam lidí ani sběr osobních poznámek. Stačí vědět, jestli pravidlo pomohlo rozhodnout.
+
+Krátký záznam:
+
+```text
+Nalezení:
+Pravidlo bylo nalezené v indexu formulářových šablon.
+
+Rozhodnutí:
+Editor vybral krátkou poptávku pro konkrétní službu.
+
+Hranice:
+Neotevřel se redesign formulářů ani celý kvalifikační proces.
+
+Datová stopa:
+Nevznikl nový export ani osobní záznam průchodu.
+```
+
+Takový záznam je dostatečný. Nepište z něj malou případovou studii, pokud nejde o opakovatelný vzor s dopadem na víc týmů.
+
+### Čtyři výsledky prvního návratu
+
+Po prvním návratu vyberte jeden stav.
+
+`Normální provoz` znamená, že pravidlo bylo nalezené, použité a nevyvolalo další práci. V tom případě nedělejte nic. Nechte pravidlo žít a neplánujte další kontrolu jen proto, že kontrola dopadla dobře.
+
+`Drobné zpřesnění` znamená, že pravidlo funguje, ale jedna formulace nebo odkaz při použití zadrhl. Oprava má být menší než pravidlo samotné: přejmenovat odkaz, přesunout větu blíž k rozhodnutí, odstranit staré slovo nebo doplnit jednu výjimku.
+
+`Slabé kanonické místo` znamená, že pravidlo je napsané dobře, ale člověk k němu normální cestou nedojde. Pak nepište delší pravidlo. Opravte vstupní cestu: index, rozcestník, název sekce, interní odkaz nebo místo v checklistu.
+
+`Nová potřeba` znamená, že první návrat odkryl jiný problém, než který pravidlo řešilo. Ten nelepte na starou stabilizační smyčku. Založte nový podnět s vlastní otázkou, hranicí a privacy-first kontrolou.
+
+Rozhodovací věta:
+
+```text
+Výsledek prvního návratu ke kanonickému pravidlu je: Normální provoz / Drobné zpřesnění / Slabé kanonické místo / Nová potřeba.
+Další krok:
+```
+
+Codyho komentář: nejzdravější výsledek je často nuda. Člověk pravidlo použil, práce pokračovala a nikdo neměl chuť svolat schůzku. Provozní dokumentace tím právě vyhrála malý závod, kterého si skoro nikdo nevšiml.
+
+### Kdy pravidlo nechat být
+
+Po prvním použití bývá lákavé pravidlo ještě vylepšit. Tým vidí novou drobnost, někoho napadne lepší příklad a vlastník má pocit, že by se to dalo uhladit. Jenže každé další uhlazení má náklad: lidé se znovu učí drobné rozdíly, roste changelog a kolem jednoduchého pravidla vzniká aura křehkosti.
+
+Pravidlo nechte být, když platí:
+
+- člověk ho našel bez pomoci;
+- podle pravidla udělal správné pracovní rozhodnutí;
+- nevznikla nová zbytečná datová stopa;
+- zadrhla jen stylistická drobnost bez dopadu na rozhodnutí;
+- stejná situace se nebude brzy opakovat s vysokým rizikem.
+
+Vědomé nic je legitimní závěr:
+
+```text
+Pravidlo při prvním běžném návratu fungovalo. Další úpravu neděláme; návrat nastane jen při opakovaném váhání nebo změně pracovního kontextu.
+```
+
+Tahle věta chrání tým před perfekcionismem. Ne každá drobnost si zaslouží další iteraci. Některé si zaslouží jen to, aby nepřerušily práci.
+
+### Privacy-first návrat ke pravidlu
+
+U kanonických pravidel je privacy-first hodnota hlavně v tom, že běžná práce nepotřebuje sledovat lidi. Pravidlo má zlepšit rozhodnutí, ne vytvořit nový systém pozorování, kdo kdy klikl na jakou šablonu nebo kdo si přečetl kterou větu.
+
+Při prvním návratu si položte otázky:
+
+- Stačil k použití pravidla běžný pracovní kontext?
+- Nevznikla kvůli kontrole nová evidence chování lidí?
+- Neotevřeli jsme staré pomocné podklady obsahující osobní, zákaznické nebo interně citlivé detaily?
+- Je případný záznam formulovaný jako výsledek práce, ne jako profil člověka?
+- Umíme zapsat závěr bez screenshotu, exportu nebo citace z interní komunikace?
+
+Praktické pravidlo:
+
+```text
+První návrat ke kanonickému pravidlu zapisuje použitelnost pravidla, ne výkon konkrétního člověka. Pokud záznam nepotřebuje jméno, screenshot ani export, nemá je obsahovat.
+```
+
+Tohle je malé, ale důležité. Privacy-first provoz v Evropě není jen o cookies na webu. Je to i zvyk nesbírat interní stopy, které nepomáhají rozhodnutí a časem jen zvětšují riziko.
+
+### Karta prvního návratu ke kanonickému pravidlu
+
+```text
+Kanonické pravidlo:
+Běžná pracovní situace:
+Vstupní cesta:
+Nalezení:
+Rozhodnutí:
+Hranice:
+Datová stopa:
+Výsledek návratu:
+Další krok:
+Co výslovně neotevíráme:
+Návratová podmínka:
+Pomocné podklady:
+Retenční poznámka:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kanonické pravidlo:
+Pro konkrétní službu použijte krátkou poptávku. Rychlý kontakt použijte pro obecný první dotaz bez vybrané služby.
+
+Běžná pracovní situace:
+Editor připravoval landing page pro novou službu.
+
+Vstupní cesta:
+Index formulářových šablon.
+
+Nalezení:
+Pravidlo bylo u šablon viditelné bez otevření changelogu.
+
+Rozhodnutí:
+Editor vybral krátkou poptávku.
+
+Hranice:
+Neotevřela se změna celé struktury formulářů.
+
+Datová stopa:
+Nevznikl nový screenshot ani seznam průchodů.
+
+Výsledek návratu:
+Normální provoz.
+
+Další krok:
+Bez úpravy.
+
+Co výslovně neotevíráme:
+Nepřepisujeme všechny formulářové šablony a nezavádíme sledování použití.
+
+Návratová podmínka:
+Vrátit se pouze při dvou dalších nezávislých záměnách šablon nebo při změně nabídky.
+
+Pomocné podklady:
+Žádné.
+
+Retenční poznámka:
+Zůstává jen tento stručný pracovní záznam.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-29.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou pracovní situaci, ve které se pravidlo použilo.
+2. Minuta 2: ověřte, zda člověk pravidlo našel normální vstupní cestou.
+3. Minuta 3: napište rozhodnutí, které pravidlo umožnilo.
+4. Minuta 4: zkontrolujte hranici práce a datovou stopu.
+5. Minuta 5: vyberte výsledek návratu a rozhodněte, zda něco opravdu měnit.
+
+Výstup workshopu:
+
+```text
+Kanonické pravidlo prošlo prvním běžným návratem. Víme, zda zůstává v normálním provozu, potřebuje malé zpřesnění, má slabé kanonické místo, nebo odkrylo novou samostatnou potřebu.
+```
+
+### Checklist kapitoly
+
+- Začali jsme běžným pracovním úkolem, ne changelogem?
+- Vedla vstupní cesta ke kanonickému pravidlu bez znalosti historie?
+- Pomohlo pravidlo udělat konkrétní rozhodnutí?
+- Zůstala hranice práce úzká?
+- Neotevřeli jsme starou stabilizační kartu jako povinnou nápovědu?
+- Umíme vybrat jeden ze čtyř výsledků návratu?
+- Pokud je výsledek `Normální provoz`, umíme pravidlo nechat být?
+- Pokud jde o `Drobné zpřesnění`, je oprava menší než pravidlo samotné?
+- Pokud je problém ve vstupu, opravujeme cestu místo rozšiřování pravidla?
+- Pokud vznikla nová potřeba, oddělujeme ji od staré smyčky?
+- Nevznikl nový tracker, export, screenshot ani evidence chování lidí?
+- Zapisujeme použitelnost pravidla, ne výkon konkrétní osoby?
+- Má případný záznam retenční poznámku?
+- Ví vlastník, kdy se k pravidlu vrátit a kdy ho nechat v klidu?
+
+První návrat ke kanonickému pravidlu je test dospělosti malé provozní změny. Když pravidlo obstojí, nejlepší další krok je často žádný další krok. V systému zůstane jasnější rozhodnutí, méně historických berliček a méně dat, která by se musela jednou uklízet. Tak má vypadat normální práce, když se podaří.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TO o první běžný návrat ke kanonickému pracovnímu pravidlu: návrat od pracovního úkolu místo changelogu, signály normálního použití, čtyři výsledné stavy, vědomé nic, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TN o uzavření ověřené stabilizační úpravy do kanonického pracovního pravidla: přepis výsledku do pracovního místa, zavření ověřovací karty, odstranění hlídacího jazyka, návratová podmínka, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TM o ověření stabilizační úpravy při příštím běžném použití: stabilizační věta, tři signály, čtyři výsledné stavy, pravidlo kdy nechat úpravu být, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TL o převodu potvrzené hlídací poznámky do jedné stabilizační úpravy: potvrzený výrok, nejbližší pracovní místo, typy malých úprav, zavření hlídacího režimu, privacy-first stabilizace, karta, mini workshop a checklist.
