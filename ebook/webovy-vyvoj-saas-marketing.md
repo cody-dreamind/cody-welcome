@@ -143456,8 +143456,195 @@ Malá úprava má po prvním běžném použití jasný stav. Buď je potvrzená
 
 Ověření malé úpravy má být krátké, protože úprava byla malá. Když první běžné použití potvrdí, že původní tření zmizelo, nejlepší další krok je často žádný další krok. Pracovní systém se má po opravě ztišit, ne si říct o další vrstvu správy.
 
+## Příloha TH: Uzavření potvrzené malé úpravy do klidového stavu
+
+Příloha TG končí ověřením malé úpravy při prvním běžném použití. Pokud výsledek zní `Potvrzeno`, zbývá poslední drobný krok: převést úpravu do klidového stavu. To znamená, že tým už kolem ní nevyrábí další sledování, další poznámky ani další schůzky. Úprava se stane běžnou součástí práce a její historie se zkrátí na minimum, které stačí pro budoucí orientaci.
+
+Klidový stav není totéž jako zapomenutí. Je to vědomé rozhodnutí, že smyčka je zavřená, aktuální pracovní místo drží pravdu a další návrat nastane jen při konkrétním signálu. Malé úpravy potřebují právě takový konec. Jinak se z nich stane dlouhá řada mikrokontrol, které zabírají víc pozornosti než původní problém.
+
+Úvodní pracovní věta:
+
+```text
+Potvrzenou malou úpravu uzavíráme do klidového stavu: ponecháme aktuální pracovní větu, zavřeme pomocné poznámky, uklidíme dočasné stopy a nastavíme jen konkrétní návratový signál.
+```
+
+Tato věta má chránit tým před dvěma pokušeními. První je pořád ještě něco vylepšovat, protože pracovní místo je otevřené a mozek vidí další detaily. Druhé je smazat celou stopu tak důkladně, že za měsíc nikdo nepozná, proč aktuální formulace platí.
+
+### Přepište výsledek jako aktuální stav
+
+Po potvrzení malé úpravy už není hlavní zpráva "udělali jsme opravu". Hlavní zpráva je "takhle teď pracujeme". Proto výsledek přepište z historie do aktuální věty.
+
+Místo:
+
+```text
+Po čekací poznámce jsme zkrátili popisek šablony a při prvním použití to fungovalo.
+```
+
+Pište:
+
+```text
+Popisek šablony začíná přímým pokynem, aby editor bez návratu ke staré poznámce poznal, kdy šablonu použít.
+```
+
+První věta je kronika. Druhá je pracovní opora. Kronika může zůstat v changelogu, ale aktuální místo má říkat, co platí teď. Člověk, který přijde později, nepotřebuje číst celou malou historii, pokud jen vybírá šablonu, používá checklist nebo upravuje formulář.
+
+### Zavřete pomocné poznámky
+
+Pomocné poznámky vznikají proto, aby tým neztratil kontext během čekání, návratu a ověření. Jakmile je úprava potvrzená, většina z nich už nemá aktivní práci. Nechte jen krátký závěr a zbytek zavřete.
+
+Praktický postup:
+
+1. Najděte původní čekací poznámku, kartu malé úpravy a kartu ověření.
+2. U každé napište konečný stav `Uzavřeno: potvrzeno`.
+3. Přidejte odkaz nebo větu, kde je aktuální pracovní místo.
+4. Odstraňte nebo archivujte dočasné části, které už nejsou potřeba.
+5. Nezakládejte nový úkol, pokud neexistuje nový konkrétní návratový signál.
+
+Vyplněný závěr:
+
+```text
+Stav:
+Uzavřeno: potvrzeno.
+
+Aktuální místo:
+Index formulářových šablon pro landing pages.
+
+Platná věta:
+Popisek šablony začíná přímým pokynem k použití.
+
+Návrat:
+Otevřít znovu jen tehdy, pokud se při běžné přípravě stránky zopakuje stejné váhání nad výběrem šablony.
+```
+
+Takový závěr je dost krátký na to, aby se používal, a dost konkrétní na to, aby zabránil návratu staré nejasnosti.
+
+### Nastavte klid, ne další dozor
+
+Po potvrzení malé úpravy často není potřeba plánovat další pravidelné kontroly. Pokud úprava řešila drobné tření v jednom pracovním místě, stačí návratový signál. Pravidelný dozor si nechte pro věci s vyšším rizikem: bezpečnost, retenci dat, fakturaci, právní texty, zákaznické závazky nebo opakované provozní incidenty.
+
+Klidový návratový signál má být jednoduchý:
+
+```text
+Vrátíme se jen tehdy, když se při běžném použití znovu objeví stejné tření, stejná nejasnost nebo stejná datová stopa, kvůli které úprava vznikla.
+```
+
+Příklady:
+
+- editor znovu hledá starou poznámku, aby pochopil šablonu;
+- obchodník znovu doplňuje údaj, který měl formulář vysvětlit;
+- autor stránky znovu přidává dočasný příklad s osobními údaji;
+- checklist znovu vede člověka k neplatnému kroku;
+- stará automatizace znovu vytvoří výstup podle předchozí verze.
+
+Pokud nastane něco jiného, neotevírejte automaticky starou smyčku. Zapište nový signál zvlášť a nechte ho dozrát. Klidový stav má chránit pracovní pozornost.
+
+### Privacy-first uzavření do klidu
+
+U malé úpravy bývá největší privacy riziko nenápadné: pomocné stopy zůstanou déle než samotný důvod. Screenshot, export, kopie klientského textu, syrová poznámka z rozhovoru nebo seznam lidí, kteří úpravu používali, se může tvářit jako nevinný podklad. Po potvrzení už ale často nemá účel.
+
+Privacy-first uzavření má tři pravidla:
+
+1. Ponechte rozhodnutí, ne syrové podklady.
+2. Ponechte agregovaný nebo anonymizovaný důvod, ne osobní detaily.
+3. Ponechte návratový signál, ne otevřený dozor nad lidmi.
+
+Dobře:
+
+```text
+Původní váhání nad popiskem se při prvním běžném použití nezopakovalo. Pomocná poznámka smazána, zůstává jen závěr u šablony.
+```
+
+Špatně:
+
+```text
+Necháme si screenshoty průchodu a jména editorů pro jistotu, kdybychom se k tomu někdy vrátili.
+```
+
+"Pro jistotu" je v privacy-first provozu drahá věta. Pokud neumíte říct, k jakému rozhodnutí podklad ještě slouží, má se zkrátit, anonymizovat, archivovat podle pravidel nebo smazat.
+
+Codyho komentář: klidový stav je podceňovaná produktivita. Vypadá nenápadně, protože nepřidává další práci. Právě proto je užitečný. Dobrý systém se nepozná jen podle toho, co umí otevřít, ale podle toho, co umí zavřít a nechat být.
+
+### Karta uzavření potvrzené malé úpravy
+
+```text
+Upravené pracovní místo:
+Potvrzený výsledek:
+Aktuální pracovní věta:
+Co zavíráme:
+Co ponecháváme jako rozhodovací stopu:
+Co mažeme nebo anonymizujeme:
+Návratový signál:
+Co není nové téma:
+Vlastník:
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Upravené pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Potvrzený výsledek:
+Při prvním běžném použití editor vybral správnou šablonu bez návratu ke staré poznámce.
+
+Aktuální pracovní věta:
+Popisek šablony začíná přímým pokynem k použití.
+
+Co zavíráme:
+Původní čekací poznámku, kartu malé úpravy a kartu ověření.
+
+Co ponecháváme jako rozhodovací stopu:
+Jednu větu v changelogu u indexu šablon.
+
+Co mažeme nebo anonymizujeme:
+Dočasnou poznámku z ověření bez ukládání jména editora, screenshotu nebo klientského obsahu.
+
+Návratový signál:
+Otevřít znovu jen při opakovaném váhání nad stejným popiskem při běžné přípravě landing page.
+
+Co není nové téma:
+Pořadí všech šablon v indexu se touto smyčkou neřeší.
+
+Vlastník:
+Marketing owner.
+
+Datum uzavření:
+2026-05-29.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek ověření malé úpravy.
+2. Minuta 2: přepište ho do jedné aktuální pracovní věty.
+3. Minuta 3: označte pomocné karty a poznámky jako uzavřené.
+4. Minuta 4: rozhodněte, co se smaže, anonymizuje nebo nechá jako krátká stopa.
+5. Minuta 5: napište návratový signál a vraťte pracovní místo do klidu.
+
+Výstup workshopu:
+
+```text
+Potvrzená malá úprava má aktuální pracovní větu, zavřené pomocné poznámky, uklizenou datovou stopu a jeden konkrétní návratový signál.
+```
+
+### Checklist kapitoly
+
+- Je potvrzený výsledek přepsaný jako aktuální stav, ne jen historie opravy?
+- Ví další člověk, co teď platí, bez čtení celé smyčky?
+- Jsou původní čekací poznámka, karta úpravy a karta ověření uzavřené?
+- Zůstala jen krátká rozhodovací stopa tam, kde ji tým při práci najde?
+- Je napsané, jaký konkrétní signál smyčku znovu otevře?
+- Nevznikla pravidelná kontrola tam, kde stačí návratový signál?
+- Jsou smazané nebo anonymizované dočasné podklady bez dalšího účelu?
+- Nezůstaly screenshoty, exporty, osobní poznámky nebo kopie klientského obsahu "pro jistotu"?
+- Je jasné, které nové téma do této smyčky nepatří?
+- Má klidový stav vlastníka, který pozná, kdy návratový signál opravdu nastal?
+
+Uzavření do klidového stavu je poslední drobný servis po malé úpravě. Není vidět tolik jako samotná změna, ale bez něj se pracovní systém plní otevřenými ocásky. Když se úprava potvrdí, pomocné stopy uklidí a návratový signál zůstane konkrétní, tým může přestat hlídat minulost a normálně pracovat.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TH o uzavření potvrzené malé úpravy do klidového stavu: aktuální pracovní věta, zavření pomocných poznámek, návratový signál místo dozoru, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TG o ověření malé úpravy při prvním běžném použití: návratový signál, reálný pracovní průchod, čtyři výsledné stavy, pravidlo jednoho doladění, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TF o provedení malé úpravy po potvrzené čekací poznámce: práce jen s potvrzeným signálem, zásah do aktuálního pracovního místa, zavření původní poznámky, changelogová věta, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TE o ověření čekací poznámky po návratovém signálu nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, úzký převod do malé úpravy, význam expirace, privacy-first ověření, karta, mini workshop a checklist.
