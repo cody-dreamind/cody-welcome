@@ -144316,8 +144316,212 @@ Hlídací poznámka je uzavřená: buď vedla k jedné malé úpravě, nebo vypr
 
 Ověřená hlídací poznámka má skončit čistě. Potvrzená poznámka se změní v malou úpravu. Nepotvrzená zmizí. Neověřená dostane nejvýš jednu vědomou šanci. A nové téma jde vlastní cestou. Tím zůstává klidový stav opravdu klidový: pozorný, ale ne přetížený.
 
+## Příloha TL: Převod potvrzené hlídací poznámky do jedné stabilizační úpravy
+
+Příloha TK končila stavem `Potvrzeno`: slabý dozvuk se zopakoval podle původní podmínky a už není fér ho jen pozorovat. Tahle příloha řeší další krok. Ne velký redesign, ne nové měření a ne návrat k celé historii. Jen jednu stabilizační úpravu v místě, kde se opakované tření opravdu objevilo.
+
+Stabilizační úprava je malá změna, která pomůže klidovému stavu zůstat klidovým. Její smysl není rozšířit systém, ale snížit pravděpodobnost, že se stejný dozvuk vrátí potřetí. Pokud hlídací poznámka potvrdila váhání mezi dvěma šablonami, úprava nemá otevřít knihovnu šablon. Má zpřesnit rozlišovací větu tam, kde člověk vybírá.
+
+Úvodní pracovní věta:
+
+```text
+Potvrzenou hlídací poznámku převádíme do jedné stabilizační úpravy v aktuálním pracovním místě; neopakujeme původní opravu, nerozšiřujeme rozsah a po provedení zavíráme hlídací režim.
+```
+
+Tato věta je důležitá hlavně proto, že potvrzený signál svádí k přehnané reakci. Jakmile se něco zopakuje, tým má pocit, že "už je to systémový problém". Někdy ano. Ale první reakce má být pořád úměrná původní poznámce. Pokud byla poznámka úzká, úprava zůstane úzká.
+
+### Vezměte jen potvrzený výrok
+
+Začněte tím, že z hlídací poznámky vytáhnete jednu potvrzenou větu. Ne celý příběh, ne všechny domněnky, ne vedlejší pozorování. Jen výrok, který se opravdu potvrdil.
+
+Slabé:
+
+```text
+Lidé pořád trochu váhají u formulářových šablon a možná by celý index potřeboval zlepšit.
+```
+
+Silnější:
+
+```text
+Při dvou dalších landing pages se znovu objevilo váhání mezi šablonou "rychlý kontakt" a "krátká poptávka".
+```
+
+První věta otevírá mlhu. Druhá věta ukazuje místo zásahu. Stabilizační úprava potřebuje druhý typ věty, protože jen z něj jde poznat, co upravit a co nechat být.
+
+Potvrzený výrok si zapište zvlášť. Když se během úpravy objeví chuť řešit i okolní problémy, vraťte se k němu. Pokud nový nápad nejde odvodit přímo z potvrzeného výroku, patří do jiné karty.
+
+### Vyberte nejbližší pracovní místo
+
+Stabilizační úprava patří tam, kde člověk reálně pracuje. Ne do obecného dokumentu "pro jistotu", ne do další poznámky bokem a ne do samostatného checklistu, který se otevře jen při auditu. Pokud tření vzniká při výběru šablony, upravte index šablon. Pokud vzniká při předání obchodní poznámky, upravte předávací šablonu. Pokud vzniká při rozhodnutí, zda měřit nový event, upravte privacy-first bránu u eventů.
+
+Ptejte se:
+
+- Kde se člověk poprvé rozhoduje?
+- Kde by jedna věta zabránila opakovanému váhání?
+- Které místo se už používá bez vysvětlování?
+- Co by bylo horší: úprava zde, nebo další instrukce bokem?
+- Dá se změna ověřit při příštím běžném použití?
+
+Nejbližší pracovní místo často není nejhezčí dokument. Je to místo, které lidé opravdu otevřou ve chvíli rozhodnutí. Tam má stabilizační úprava největší šanci pomoct bez dalšího procesu.
+
+### Zvolte nejmenší typ úpravy
+
+Stabilizační úprava může mít několik podob. Vyberte nejmenší, která řeší potvrzený výrok:
+
+- textová úprava: jedna věta, popisek, příklad nebo varování;
+- polohová úprava: přesun existující informace blíž k rozhodnutí;
+- rozlišovací úprava: jasnější hranice mezi dvěma podobnými možnostmi;
+- mazací úprava: odstranění staré poznámky, která podporuje váhání;
+- datová úprava: zrušení zbytečného pole, eventu, exportu nebo přístupu;
+- vlastnická úprava: doplnění role, která má v dané situaci rozhodnout.
+
+Příklad:
+
+```text
+Potvrzený výrok:
+Editor dvakrát váhal mezi dvěma formulářovými šablonami.
+
+Nejmenší úprava:
+K oběma šablonám doplníme jednu rozlišovací větu:
+"Rychlý kontakt použijte pro otevřenou poptávku bez jasného rozsahu."
+"Krátkou poptávku použijte, když návštěvník vybírá konkrétní službu."
+```
+
+Tady není potřeba přejmenovat šablony, měnit formuláře ani zavádět nový rozhodovací strom. Stačí dát člověku rozlišení ve chvíli, kdy ho potřebuje.
+
+Codyho komentář: dobrá stabilizační úprava má působit skoro nenápadně. Když si po ní tým řekne "aha, to mělo být napsané už dávno", trefili jste správnou velikost. Když kvůli ní vznikne třístránkový návrh, pravděpodobně jste z hlídací poznámky udělali projekt v převleku.
+
+### Zavřete hlídací režim
+
+Po provedení stabilizační úpravy musí hlídací poznámka skončit. Jinak bude tým dál sledovat problém, který už dostal reakci. To vytváří dvojí režim: nové pracovní místo říká jednu věc, stará poznámka připomíná původní nejistotu a při dalším review nikdo neví, co vlastně platí.
+
+Zavření má tři kroky:
+
+1. Označit hlídací poznámku jako převedenou.
+2. Zapsat, kam se hodnota přesunula.
+3. Smazat nebo zkrátit pomocné podklady.
+
+Krátká zavírací věta:
+
+```text
+Hlídací poznámka potvrzena a převedena do rozlišovací věty v indexu šablon; původní poznámku zavíráme, pomocné průchody dál nesledujeme.
+```
+
+Pokud chcete po úpravě ověřit, zda pomohla, udělejte to až při příštím běžném použití. Neprodlužujte hlídací režim pod záminkou kontroly. Kontrola má patřit k nové úpravě, ne ke staré poznámce.
+
+### Privacy-first stabilizace
+
+Potvrzená hlídací poznámka často vzniká z pozorování práce lidí, interních poznámek nebo drobných provozních signálů. Při převodu do úpravy je dobré nechat v systému jen závěr, ne celou stopu pozorování.
+
+Privacy-first pravidla:
+
+1. Do trvalého místa přeneste pouze pracovní pravidlo, ne historii konkrétních lidí.
+2. Pokud jste použili screenshot, export nebo dočasnou poznámku, po převodu ji smažte nebo anonymizujte.
+3. Nepřidávejte nový event jen proto, abyste stabilizační úpravu "pořádně" změřili.
+4. Pokud úprava mění datovou stopu, napište, co se nově sbírá, předává, drží nebo naopak maže.
+5. Ověření držte v běžném pracovním rytmu: stačí příští reálné použití a krátká věta výsledku.
+
+Dobrá datová poznámka:
+
+```text
+Datová stopa se nezvětšuje. Mažeme pomocnou hlídací poznámku a v indexu zůstává jen rozlišovací věta bez osobních údajů a bez nového sledování.
+```
+
+Ještě lepší je situace, kdy stabilizační úprava datovou stopu sníží: odstraní zbytečné pole, starý export, duplicitní log nebo interní poznámku, která už jen držela historický šum.
+
+### Karta stabilizační úpravy
+
+```text
+Původní hlídací poznámka:
+Potvrzený výrok:
+Nejbližší pracovní místo:
+Typ úpravy:
+Konkrétní změna:
+Co tím neotevíráme:
+Co zavíráme:
+Privacy-first dopad:
+Ověření při příštím použití:
+Kam zapisujeme závěr:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Původní hlídací poznámka:
+Váhání mezi šablonami "rychlý kontakt" a "krátká poptávka".
+
+Potvrzený výrok:
+Při dvou dalších landing pages se stejné váhání zopakovalo.
+
+Nejbližší pracovní místo:
+Index formulářových šablon.
+
+Typ úpravy:
+Rozlišovací textová úprava.
+
+Konkrétní změna:
+Ke každé šabloně doplníme jednu větu podle situace návštěvníka a jasného rozsahu poptávky.
+
+Co tím neotevíráme:
+Neměníme názvy šablon, formulářová pole, CRM workflow ani celý obsahový checklist.
+
+Co zavíráme:
+Původní hlídací poznámku a dvě pomocné pracovní poznámky z ověření.
+
+Privacy-first dopad:
+Nevzniká nový event, export ani osobní log. Pomocné poznámky mažeme, zůstává jen pracovní pravidlo.
+
+Ověření při příštím použití:
+Při další landing page vlastník zapíše, jestli editor vybral šablonu bez návratu ke staré poznámce.
+
+Kam zapisujeme závěr:
+Changelog indexu formulářových šablon.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-29.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte potvrzený výrok z hlídací poznámky.
+2. Minuta 2: vyberte nejbližší pracovní místo.
+3. Minuta 3: zvolte nejmenší typ úpravy.
+4. Minuta 4: napište konkrétní změnu jednou větou.
+5. Minuta 5: určete, co se úpravou neotevírá.
+6. Minuta 6: zavřete hlídací poznámku a pomocné podklady.
+7. Minuta 7: zapište privacy-first dopad a ověření při příštím použití.
+
+Výstup workshopu:
+
+```text
+Potvrzená hlídací poznámka je převedená do jedné stabilizační úpravy v aktuálním pracovním místě, starý hlídací režim je zavřený a datová stopa se nezvětšila.
+```
+
+### Checklist kapitoly
+
+- Pracujeme jen s potvrzeným výrokem, ne s celou historií poznámky?
+- Je vybrané nejbližší místo, kde se člověk skutečně rozhoduje?
+- Je úprava menší než původní problém?
+- Víme, jestli jde o textovou, polohovou, rozlišovací, mazací, datovou nebo vlastnickou úpravu?
+- Je konkrétní změna napsaná jednou větou?
+- Je jasné, co úprava neotevírá?
+- Zavřeli jsme původní hlídací poznámku?
+- Odstranili nebo zkrátili jsme pomocné podklady?
+- Nepřidali jsme nový tracker, export, osobní log ani zbytečný event?
+- Pokud se mění datová stopa, je popsaný účel, místo, přístup a retence?
+- Je ověření napojené na příští běžné použití, ne na nový kontrolní projekt?
+- Má úprava vlastníka a místo, kde je dohledatelný závěr?
+
+Stabilizační úprava je dobrý konec malé smyčky. Slabý signál dostal šanci, opakoval se, proměnil se v nejmenší změnu a starý dohled zmizel. Tak má vypadat zdravý provozní rytmus: všímat si tření, ale nekrmit ho větší pozorností, než si zaslouží.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TL o převodu potvrzené hlídací poznámky do jedné stabilizační úpravy: potvrzený výrok, nejbližší pracovní místo, typy malých úprav, zavření hlídacího režimu, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TK o ověření hlídací poznámky po opakování nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, úzký převod potvrzeného signálu, aktivní expirace, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TJ o převod lehkého dozvuku po návratu ke klidovému stavu do hlídací poznámky: rozlišení dozvuku od návratového signálu, podmíněná poznámka, umístění u pracovního místa, expirace, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TI o první běžný návrat ke klidovému stavu po uzavřené malé úpravě: návrat přes skutečný úkol, tři klidové signály, čtyři výsledné stavy, vědomé nic, privacy-first návrat bez obnovy podkladů, karta, mini workshop a checklist.
