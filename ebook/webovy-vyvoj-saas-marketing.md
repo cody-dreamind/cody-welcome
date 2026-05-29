@@ -145425,8 +145425,267 @@ Drobné zpřesnění po prvním návratu je zachycené jako malá revizní pozn�
 
 Drobné zpřesnění je užitečné jen tehdy, když po něm pravidlo působí samozřejměji. Jakmile začne z pravidla dělat památník všech výjimek, je čas zastavit. Kanonické místo má lidem pomáhat rozhodnout, ne dokazovat, kolik práce se kolem něj kdysi odehrálo.
 
+## Příloha TQ: Ověření revizní poznámky po dalším běžném použití nebo expiraci
+
+Příloha TP převedla drobné zpřesnění po prvním návratu ke kanonickému pravidlu do malé revizní poznámky. Teď je potřeba poznámku ověřit. Ne proto, aby vznikla další vrstva kontroly, ale aby se rozhodlo, jestli drobnost opravdu stojí za úpravu pravidla, nebo jestli ji lze klidně zavřít.
+
+Revizní poznámka je užitečná jen tehdy, když má konec. Pokud visí u pravidla měsíce, začne se tvářit jako tichý dluh. Lidé ji obcházejí, připomíná staré váhání a kanonické pravidlo vedle ní už nevypadá úplně kanonicky. Malá poznámka bez ověření je jako lepík na monitoru: první den pomáhá, třetí týden už jen oznamuje, že někdo kdysi něco nestihl rozhodnout.
+
+Úvodní pracovní věta:
+
+```text
+Revizní poznámku ověřujeme při dalším běžném použití nebo při expiraci. Rozhodneme, zda ji zavřít beze změny, převést do jedné malé úpravy, oddělit jako nový podnět, nebo odstranit jako neopakovaný šum.
+```
+
+Tahle věta drží rozsah. Nevrací se k celé historii pravidla. Neptá se, jestli by šlo vylepšit ještě pět dalších věcí. Ptá se jen na původní drobné zadrhnutí.
+
+### Vraťte se k původní podmínce
+
+Ověření začíná původní revizní poznámkou, ne čerstvým dojmem. Přečtěte si zejména tři položky:
+
+- drobné zadrhnutí;
+- nejmenší možný zásah;
+- stop pravidlo.
+
+Potom se zeptejte:
+
+```text
+Nastala přesně ta situace, kvůli které poznámka vznikla?
+```
+
+Pokud ne, poznámku nerozšiřujte. Nová situace může být zajímavá, ale není automaticky důkazem pro starou poznámku. V opačném případě se z jedné drobnosti stane kapsa na všechny pozdější nejistoty.
+
+Příklad:
+
+```text
+Původní poznámka:
+Odkaz "kontaktní varianty" není dost jasný pro výběr poptávkového formuláře.
+
+Nová situace:
+Obchodník chce do formuláře přidat pole pro rozpočet.
+
+Rozhodnutí:
+To není ověření původní poznámky. Původní poznámku necháváme být a obchodní požadavek jde do samostatného podnětu.
+```
+
+Dobré ověření je nudně přesné. Nehoní každé nové téma, které se při práci objeví. Vrací se ke slibu poznámky a řeší jen to, co poznámka slíbila zkontrolovat.
+
+### Čtyři výsledky ověření
+
+Revizní poznámka má skončit jedním ze čtyř stavů.
+
+`Zavřít beze změny` znamená, že se zadrhnutí neopakovalo, situace prošla čistě nebo vypršela expirace bez návratového signálu. V takovém případě nemá smysl měnit pravidlo jen proto, že poznámka existuje.
+
+`Převést do malé úpravy` znamená, že se původní drobnost opakovala a nejmenší zásah je pořád jasný. Typicky jde o přejmenování odkazu, přesun jedné věty, zkrácení nadpisu nebo doplnění jedné výjimky.
+
+`Oddělit nový podnět` znamená, že ověření odhalilo větší nebo jiné téma. Kanonické pravidlo možná funguje, ale vedle něj vznikla potřeba upravit proces, formulář, nabídku, onboarding nebo měření. To nepatří do malé revizní poznámky.
+
+`Smazat jako šum` znamená, že poznámka vznikla z jednorázového váhání, které se nedá dohledat, neopakovalo se a nepomáhá už ani jako kontext. Není to selhání. Je to dobrá hygiena.
+
+Krátká rozhodovací tabulka:
+
+```text
+Původní zadrhnutí se neopakovalo -> zavřít beze změny.
+Původní zadrhnutí se opakovalo a úprava je malá -> převést do malé úpravy.
+Objevilo se jiné téma -> oddělit nový podnět.
+Poznámka už nemá důkaz ani návratový signál -> smazat jako šum.
+```
+
+Nejhorší pátý stav je "necháme otevřené". Použijte ho jen tehdy, když má konkrétní datum, vlastníka a jasnou návratovou podmínku. Jinak je to jen profesionálně znějící odklad.
+
+### Ověřujte v běžné práci
+
+Revizní poznámka se má ověřit při normálním použití pravidla. Ne při umělém workshopu, kde všichni dopředu vědí, co se testuje. Pokud pravidlo pomáhá editorovi vybrat formulář, ověřte ho při přípravě skutečné stránky. Pokud pomáhá supportu třídit dotazy, ověřte ho při reálné frontě požadavků. Pokud pomáhá marketingu rozhodnout o distribuční trase, ověřte ho u skutečného obsahu.
+
+Sledujte tři jednoduché signály:
+
+- člověk pravidlo našel bez zvláštního navádění;
+- rozhodl se podle něj bez nové debaty;
+- původní zadrhnutí se buď opakovalo, nebo neopakovalo.
+
+Nesledujte výkon člověka. Nesbírejte čas na kliknutí, záznam obrazovky ani osobní průchod, pokud k tomu nemáte opravdu silný důvod. Tady nejde o kontrolu lidí. Jde o kontrolu malého tření v pracovním systému.
+
+Praktický zápis po použití:
+
+```text
+Běžná situace:
+Editor připravoval landing page pro novou službu.
+
+Původní zadrhnutí:
+Název odkazu neříkal, že jde o výběr poptávkového formuláře.
+
+Co se stalo:
+Editor pravidlo našel podle nového kontextu v indexu, ale u stejného odkazu znovu váhal.
+
+Výsledek:
+Převést do malé úpravy: přejmenovat odkaz.
+```
+
+Takový zápis stačí. Nepotřebujete z něj vyrábět analýzu použitelnosti. Když se drobnost dá popsat jednou větou, ověření má zůstat podobně malé.
+
+### Expirace musí zavírat
+
+Revizní poznámka má mít expiraci. Expirace není připomínka, že se má vymyslet další připomínka. Je to rozhodovací okamžik. Když do daného data nenastal návratový signál, poznámka se zavře, zkrátí nebo smaže.
+
+Dobrá expirační pravidla:
+
+- po dalším běžném použití stejného pravidla;
+- po 30 dnech bez návratového signálu;
+- po první aktualizaci kanonického indexu;
+- po dokončení konkrétní kampaně, stránky nebo onboardingového průchodu.
+
+Slabé pravidlo:
+
+```text
+Vrátíme se k tomu někdy při větší revizi.
+```
+
+Silnější pravidlo:
+
+```text
+Pokud se do 30 dnů znovu neobjeví stejné váhání při výběru formuláře, poznámku smažeme a kanonické pravidlo necháme beze změny.
+```
+
+Expirace chrání kanonické pravidlo před historickým prachem. Ne každé váhání si zaslouží trvalou stopu. Někdy byl člověk unavený, kontext neobvyklý nebo zrovna všichni řešili tři věci najednou. Ano, i procesy mají špatné pondělky.
+
+### Privacy-first ověření revizní poznámky
+
+U ověření revizní poznámky platí stejné pravidlo jako u jejího založení: sbírejte minimum. Čím menší je úprava, tím hůř vypadá těžká datová stopa kolem ní.
+
+Privacy-first postup:
+
+- zapisujte pracovní situaci, ne jména lidí;
+- nepřikládejte screenshoty, pokud stačí popis místa;
+- neukládejte nahrávky obrazovky kvůli jedné větě v pravidle;
+- neexportujte historii chatu, když stačí stručné shrnutí;
+- po zavření poznámky ponechte jen rozhodovací větu nebo changelog;
+- pomocné podklady smažte podle retenční poznámky.
+
+Příklad uzavírací věty:
+
+```text
+Revizní poznámka k názvu odkazu se po dalším běžném použití potvrdila. Opravujeme pouze název odkazu, bez screenshotů, osobních průchodů a nového měření.
+```
+
+Nebo při zavření beze změny:
+
+```text
+Revizní poznámka se do expirace nepotvrdila. Kanonické pravidlo zůstává beze změny, pomocná poznámka se maže a v changelogu necháváme jen informaci o zavření bez zásahu.
+```
+
+Privacy-first přístup tady není dekorace. Je to způsob, jak zabránit tomu, aby se z drobného edičního tření stala zbytečná evidence lidí, jejich práce a interních nejistot.
+
+### Karta ověření revizní poznámky
+
+```text
+Kanonické pravidlo:
+Původní revizní poznámka:
+Původní zadrhnutí:
+Stop pravidlo:
+Návratová podmínka nebo expirace:
+Běžná situace ověření:
+Co se stalo:
+Výsledek ověření:
+Rozhodnutí:
+Nejmenší další krok:
+Co výslovně neotevíráme:
+Privacy-first uzavření:
+Pomocné podklady k odstranění:
+Changelogová věta:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kanonické pravidlo:
+Pro konkrétní službu použijte krátkou poptávku. Rychlý kontakt použijte pro obecný první dotaz bez vybrané služby.
+
+Původní revizní poznámka:
+Odkaz "kontaktní varianty" může být pro editor účelově nejasný.
+
+Původní zadrhnutí:
+Editor váhal, jestli odkaz řeší výběr formuláře, nebo jen obecnou kontaktní sekci.
+
+Stop pravidlo:
+Po jednom běžném použití bez stejného váhání zavřít. Při opakování přejmenovat jen odkaz.
+
+Návratová podmínka nebo expirace:
+Další příprava landing page pro konkrétní službu, nejpozději 30 dní.
+
+Běžná situace ověření:
+Příprava landing page pro servisní balíček.
+
+Co se stalo:
+Stejné váhání se zopakovalo u názvu odkazu.
+
+Výsledek ověření:
+Převést do malé úpravy.
+
+Rozhodnutí:
+Přejmenovat odkaz na "výběr poptávkového formuláře".
+
+Nejmenší další krok:
+Změnit jen název odkazu v kanonickém indexu.
+
+Co výslovně neotevíráme:
+Neměníme formuláře, text pravidla ani sales proces.
+
+Privacy-first uzavření:
+Bez screenshotu, bez jména editora, bez měření kliknutí.
+
+Pomocné podklady k odstranění:
+Po přejmenování smazat pracovní poznámku.
+
+Changelogová věta:
+Po ověření revizní poznámky byl zpřesněn název odkazu na pravidlo pro výběr poptávkového formuláře.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-29.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní revizní poznámku a stop pravidlo.
+2. Minuta 2: ověřte, zda nastala stejná pracovní situace nebo expirace.
+3. Minuta 3: popište jednou větou, co se skutečně stalo.
+4. Minuta 4: vyberte stav: zavřít beze změny, převést do malé úpravy, oddělit nový podnět, smazat jako šum.
+5. Minuta 5: napište nejmenší další krok a co výslovně neotevíráte.
+6. Minuta 6: uzavřete privacy-first stopu, retenci a changelogovou větu.
+
+Výstup workshopu:
+
+```text
+Revizní poznámka má rozhodnutý stav. Buď končí beze změny, mění se v jednu malou úpravu, odděluje nový podnět, nebo mizí jako neopakovaný šum.
+```
+
+### Checklist kapitoly
+
+- Vrátili jsme se k původní revizní poznámce, ne k novému dojmu?
+- Nastala stejná pracovní situace, návratová podmínka nebo expirace?
+- Nezaměňujeme původní drobné zadrhnutí za nové téma?
+- Umíme výsledek ověření popsat jednou větou?
+- Vybrali jsme jeden ze čtyř stavů poznámky?
+- Pokud se zadrhnutí neopakovalo, umíme poznámku zavřít beze změny?
+- Pokud se zadrhnutí potvrdilo, držíme úpravu na nejmenším zásahu?
+- Pokud se objevilo větší téma, oddělujeme ho do nového podnětu?
+- Pokud poznámka ztratila smysl, mažeme ji jako šum?
+- Nezůstává poznámka otevřená bez vlastníka, data a návratové podmínky?
+- Ověřovali jsme při běžné práci, ne v umělém testu?
+- Nesbíráme osobní průchody, screenshoty, nahrávky ani nové metriky bez skutečné potřeby?
+- Má uzavření krátkou changelogovou větu?
+- Jsou pomocné podklady smazané nebo mají jasnou retenci?
+- Zůstává kanonické pravidlo po ověření jednodušší, ne těžší?
+
+Revizní poznámka má být krátká zastávka, ne druhé pravidlo vedle pravidla. Jakmile splní účel, zavřete ji. Buď tím pustí do světa jednu malou úpravu, nebo nechá kanonické místo v klidu. Obojí je dobrý výsledek, pokud je rozhodnutí jasné.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TQ o ověření revizní poznámky po dalším běžném použití nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, ověření v běžné práci, expirace, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TP o převodu drobného zpřesnění po prvním návratu ke kanonickému pravidlu do revizní poznámky: rozlišení od nové potřeby, nejmenší úprava, stop pravidlo, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TO o první běžný návrat ke kanonickému pracovnímu pravidlu: návrat od pracovního úkolu místo changelogu, signály normálního použití, čtyři výsledné stavy, vědomé nic, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TN o uzavření ověřené stabilizační úpravy do kanonického pracovního pravidla: přepis výsledku do pracovního místa, zavření ověřovací karty, odstranění hlídacího jazyka, návratová podmínka, privacy-first úklid, karta, mini workshop a checklist.
