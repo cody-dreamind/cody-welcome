@@ -143642,8 +143642,233 @@ Potvrzená malá úprava má aktuální pracovní větu, zavřené pomocné pozn
 
 Uzavření do klidového stavu je poslední drobný servis po malé úpravě. Není vidět tolik jako samotná změna, ale bez něj se pracovní systém plní otevřenými ocásky. Když se úprava potvrdí, pomocné stopy uklidí a návratový signál zůstane konkrétní, tým může přestat hlídat minulost a normálně pracovat.
 
+## Příloha TI: První běžný návrat ke klidovému stavu po uzavřené malé úpravě
+
+Příloha TH uzavřela potvrzenou malou úpravu do klidového stavu. Tím práce nekončí navždy, ale končí aktivní hlídání. První další návrat má proto proběhnout jen tehdy, když se pracovní místo znovu přirozeně použije. Ne proto, že někdo chce "pro jistotu" kontrolovat, jestli úprava pořád drží. Klidový stav má dostat šanci být opravdu klidový.
+
+První návrat je sanity check běžné práce. Člověk otevře šablonu, formulář, checklist, index, sales kartu nebo provozní poznámku a udělá práci, kvůli které místo existuje. Teprve při tom se ukáže, jestli uzavřená úprava splynula s provozem, jestli zanechala lehký dozvuk, nebo jestli se znovu objevil stejný signál.
+
+Úvodní pracovní věta:
+
+```text
+Ke klidovému stavu se vracíme jen při běžném použití pracovního místa: ověříme, zda aktuální věta stačí, návratový signál nenastal a nevznikla nová datová stopa.
+```
+
+Tato věta brání tomu, aby se z klidu stala další kontrolní rutina. Pokud tým musí klidové místo pravidelně otevírat jen proto, aby si potvrdil, že je klidové, pravděpodobně ještě neuzavřel skutečnou práci. Klid se neprokazuje schůzkou. Klid se pozná tím, že práce proběhne bez návratu ke staré historii.
+
+### Vraťte se přes skutečný úkol
+
+První návrat má začít konkrétním úkolem, ne kontrolní otázkou. Místo "pojďme se podívat, jestli šablona funguje" použijte situaci "připravujeme novou landing page a potřebujeme vybrat správnou formulářovou šablonu". Rozdíl je zásadní. V prvním případě lidé hledají problémy. Ve druhém případě systém buď pomůže práci, nebo začne drhnout.
+
+Dobré spouštěče:
+
+- vzniká nová stránka a editor vybírá šablonu;
+- obchodník připravuje nabídku a sahá po sales kartě;
+- support řeší podobný dotaz a používá aktualizovaný checklist;
+- produktový owner upravuje formulář a čte platnou pracovní větu;
+- provozní člověk kontroluje rutinní krok podle zkrácené poznámky.
+
+Špatné spouštěče:
+
+- někdo má pocit, že by se stará úprava měla znovu projít;
+- tým chce vyplnit prázdné místo v review agendě;
+- nový nápad se snaží tvářit jako návratový signál;
+- člověk hledá důvod, proč otevřít celou historii opravy.
+
+Praktické pravidlo: pokud neumíte jednou větou popsat reálný pracovní úkol, neotevírejte klidovou smyčku. Zapište nápad bokem, ale neberte mu autoritu návratového signálu.
+
+### Sledujte tři klidové signály
+
+Při prvním běžném návratu stačí sledovat tři věci. Nejsou to metriky výkonu člověka. Jsou to signály, jestli pracovní místo po uzavřené úpravě drží.
+
+1. Průchod: člověk najde aktuální místo bez návratu ke staré poznámce.
+2. Rozhodnutí: aktuální pracovní věta stačí k dalšímu kroku.
+3. Datová stopa: kvůli použití nevzniknou nové dočasné exporty, screenshoty, kopie klientských dat ani osobní poznámky bez účelu.
+
+Vyplněný krátký záznam:
+
+```text
+Běžný úkol:
+Příprava nové landing page.
+
+Průchod:
+Editor našel správnou formulářovou šablonu v aktuálním indexu.
+
+Rozhodnutí:
+Popisek stačil k výběru bez návratu ke staré čekací poznámce.
+
+Datová stopa:
+Nevznikl screenshot ani kopie klientského obsahu. Zůstává jen tato agregovaná věta.
+```
+
+Takový záznam je dostatečný. Pokud k němu začnete přidávat tabulku lidí, časy průchodu a detailní poznámky z obrazovky, už nejspíš neověřujete klid. Vyrábíte nový dohled.
+
+### Rozlište čtyři výsledné stavy
+
+Po prvním běžném návratu vyberte jeden stav:
+
+- `Klid drží`: pracovní místo se použilo samostatně, návratový signál nenastal a datová stopa zůstala minimální.
+- `Lehký dozvuk`: práce proběhla, ale objevila se drobná nejistota, která ještě není potvrzený problém.
+- `Návratový signál nastal`: zopakovalo se stejné tření, kvůli kterému byla úprava uzavřená s podmínkou návratu.
+- `Nové téma`: objevil se jiný problém, který nepatří do staré smyčky.
+
+Příklad `Klid drží`:
+
+```text
+Při přípravě nové landing page editor použil index šablon bez návratu ke staré poznámce. Návratový signál nenastal. Klidový stav zůstává.
+```
+
+Příklad `Lehký dozvuk`:
+
+```text
+Editor šablonu našel, ale na chvíli váhal nad rozdílem mezi dvěma podobnými názvy. Původní problém se nevrátil. Zapíšeme čekací poznámku jen při opakování stejného váhání.
+```
+
+Příklad `Návratový signál nastal`:
+
+```text
+Editor se znovu musel vrátit ke staré poznámce, aby pochopil použití šablony. Nastal původní návratový signál, otevřeme malou úpravu aktuálního popisku.
+```
+
+Příklad `Nové téma`:
+
+```text
+Šablona byla jasná, ale formulář má nové pole, které není popsané v samostatném checklistu. To není návrat původního problému, zakládáme nový signál mimo tuto smyčku.
+```
+
+Nejdůležitější je neplést tyto stavy dohromady. Lehký dozvuk není automaticky úkol. Nové téma není důkaz, že stará úprava selhala. A klid drží i tehdy, když člověk při práci uvidí jiné možné zlepšení.
+
+### Kdy nic nedělat
+
+Nejužitečnější výsledek prvního návratu může být věta "nic neměníme". V pracovních systémech je to těžší, než vypadá. Lidé často chtějí využít otevřené téma k malému vylepšení, protože už jsou u toho. Jenže právě tak se z klidového stavu stává nekonečné ediční pole.
+
+Nic nedělejte, když:
+
+- původní návratový signál nenastal;
+- člověk práci dokončil bez podpory staré historie;
+- nová nejistota se objevila jen jednou a nebrání práci;
+- změna by rozšířila rozsah mimo původní pracovní místo;
+- úprava by vyžadovala nové sledování, export nebo sběr osobních údajů.
+
+Codyho komentář: dobré "nic neměníme" není lenost. Je to disciplína. Malý tým nevyhrává tím, že otevře každou mikropříležitost. Vyhrává tím, že pozná, kdy systém funguje dost dobře a pozornost má jít jinam.
+
+### Privacy-first návrat bez obnovy podkladů
+
+Při návratu ke klidovému stavu je lákavé vytáhnout staré screenshoty, exporty, poznámky z rozhovorů nebo kopie formulářů. Nedělejte z toho výchozí postup. Pokud byla smyčka uzavřená správně, aktuální pracovní místo a návratový signál mají stačit.
+
+Privacy-first postup:
+
+1. Začněte aktuálním pracovním místem, ne archivem.
+2. Ověřujte výsledek při běžné práci, ne záznamem obrazovky.
+3. Zapište agregovaný stav, ne jméno člověka a detail jeho průchodu.
+4. Staré podklady obnovte jen tehdy, když bez nich nejde rozhodnout o potvrzeném návratovém signálu.
+5. Pokud staré podklady obnovíte, rovnou napište, kdy se znovu smažou nebo zkrátí.
+
+Dobře:
+
+```text
+Při běžném použití šablony návratový signál nenastal. Zůstává jen agregovaný záznam v rozhodovacím logu.
+```
+
+Špatně:
+
+```text
+Pro jistotu znovu stáhneme staré screenshoty a projdeme, kdo šablonu použil naposledy.
+```
+
+Klidový stav má snižovat množství pomocných stop. Pokud návrat vytvoří víc dat než původní úprava, zastavte se a zeptejte se, jaké rozhodnutí tím opravdu podporujete.
+
+### Karta prvního návratu ke klidovému stavu
+
+```text
+Klidové pracovní místo:
+Původní návratový signál:
+Běžný úkol, při kterém návrat nastal:
+Stačila aktuální pracovní věta:
+Návratový signál nastal / nenastal:
+Lehký dozvuk:
+Nové téma mimo smyčku:
+Datová stopa návratu:
+Výsledný stav:
+Další krok nebo vědomé nic:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Klidové pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Původní návratový signál:
+Opakované váhání nad stejným popiskem při běžné přípravě stránky.
+
+Běžný úkol, při kterém návrat nastal:
+Příprava nové landing page pro službu.
+
+Stačila aktuální pracovní věta:
+Ano, editor vybral šablonu bez návratu ke staré poznámce.
+
+Návratový signál nastal / nenastal:
+Nenastal.
+
+Lehký dozvuk:
+Žádný.
+
+Nové téma mimo smyčku:
+Neřešíme pořadí šablon v indexu.
+
+Datová stopa návratu:
+Jen agregovaná věta v rozhodovacím logu, žádný screenshot ani osobní detail.
+
+Výsledný stav:
+Klid drží.
+
+Další krok nebo vědomé nic:
+Nic neměníme.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-29.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžný pracovní úkol, při kterém se klidové místo použilo.
+2. Minuta 2: přečtěte původní návratový signál.
+3. Minuta 3: zapište, jestli aktuální pracovní věta stačila.
+4. Minuta 4: vyberte stav `Klid drží`, `Lehký dozvuk`, `Návratový signál nastal` nebo `Nové téma`.
+5. Minuta 5: rozhodněte, jestli následuje malá akce, čekací poznámka, nový signál, nebo vědomé nic.
+
+Výstup workshopu:
+
+```text
+První běžný návrat ukázal, zda klidový stav drží, aniž by obnovil staré podklady nebo vytvořil novou vrstvu dohledu.
+```
+
+### Checklist kapitoly
+
+- Vrátili jsme se ke klidovému místu přes skutečný pracovní úkol?
+- Máme před sebou původní návratový signál?
+- Stačila aktuální pracovní věta k dalšímu kroku?
+- Neotevíráme starou historii jen ze zvyku?
+- Umíme rozlišit klid, lehký dozvuk, návratový signál a nové téma?
+- Pokud klid drží, umíme vědomě nic neměnit?
+- Pokud jde o lehký dozvuk, nezakládáme hned zbytečný úkol?
+- Pokud nastal návratový signál, převádíme ho do malé úpravy aktuálního místa?
+- Pokud vzniklo nové téma, držíme ho mimo původní smyčku?
+- Nevznikly kvůli návratu nové screenshoty, exporty ani osobní sledování?
+- Zůstává po návratu jen krátký agregovaný záznam?
+- Je jasné, kdo pozná, že klid dál drží nebo že se má smyčka znovu otevřít?
+
+První běžný návrat je test disciplíny. Když klid drží, nechte ho držet. Když se vrátí původní signál, otevřete jen nejmenší potřebnou úpravu. A když se objeví jiné téma, nepřilepujte ho na starou smyčku jen proto, že je zrovna po ruce.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TI o první běžný návrat ke klidovému stavu po uzavřené malé úpravě: návrat přes skutečný úkol, tři klidové signály, čtyři výsledné stavy, vědomé nic, privacy-first návrat bez obnovy podkladů, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TH o uzavření potvrzené malé úpravy do klidového stavu: aktuální pracovní věta, zavření pomocných poznámek, návratový signál místo dozoru, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TG o ověření malé úpravy při prvním běžném použití: návratový signál, reálný pracovní průchod, čtyři výsledné stavy, pravidlo jednoho doladění, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TF o provedení malé úpravy po potvrzené čekací poznámce: práce jen s potvrzeným signálem, zásah do aktuálního pracovního místa, zavření původní poznámky, changelogová věta, privacy-first omezení, karta, mini workshop a checklist.
