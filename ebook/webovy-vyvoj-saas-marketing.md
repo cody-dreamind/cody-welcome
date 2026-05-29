@@ -144084,8 +144084,241 @@ Lehký dozvuk je zachycený jako podmíněná hlídací poznámka: bez okamžit�
 
 Hlídací poznámka je dobrý nástroj jen tehdy, když zůstane malá. Má chránit paměť týmu, ne vytvářet další systém práce. Když se signál vrátí, pomůže rychle jednat. Když se nevrátí, má zmizet tak potichu, jak vznikla.
 
+## Příloha TK: Ověření hlídací poznámky po opakování nebo expiraci
+
+Příloha TJ zavedla hlídací poznámku pro lehký dozvuk po návratu ke klidovému stavu. Tahle příloha řeší okamžik, kdy poznámka dozraje: buď se stejný dozvuk zopakuje podle podmínky, nebo poznámka doběhne k expiraci. V obou případech je potřeba ji uzavřít. Jinak se z lehké poznámky stane další nenápadný dluh, který při každém review zabírá pozornost a tváří se důležitěji, než je.
+
+Ověření hlídací poznámky nemá být nová analýza. Je to krátký návrat k původní podmínce: stalo se to, co jsme čekali, nebo ne? Pokud ano, převedeme signál do jedné malé úpravy aktuálního pracovního místa. Pokud ne, poznámku zavřeme a odstraníme pomocné stopy. Pokud se objevilo něco jiného, založíme nový signál mimo původní smyčku.
+
+Úvodní pracovní věta:
+
+```text
+Hlídací poznámku ověřujeme jen proti původní podmínce opakování nebo expiraci; nepotvrzený dozvuk zavíráme, potvrzený převádíme do nejmenší úpravy a nové téma držíme odděleně.
+```
+
+Tato věta chrání tým před přirozeným pokušením poznámku rozšířit. Když už je poznámka jednou zapsaná, mozek má tendenci hledat důkazy, že byla oprávněná. Jenže smysl hlídací poznámky není obhájit vlastní existenci. Smysl je zjistit, jestli slabý signál zesílil dost na malý zásah.
+
+### Vraťte se k původní podmínce
+
+První otázka při ověření zní: co přesně jsme si řekli, že se má stát? Ne "co všechno jsme si mezitím všimli". Ne "co by šlo vylepšit". Jen původní podmínka.
+
+Příklad původní poznámky:
+
+```text
+Pokud se při dalších dvou přípravách landing page znovu objeví váhání mezi šablonou "rychlý kontakt" a "krátká poptávka", upravíme jednu větu popisku v indexu šablon. Pokud se váhání nevrátí do 30 dní, poznámku zavřeme.
+```
+
+Ověření se ptá:
+
+- proběhly dvě další přípravy landing page;
+- objevilo se stejné váhání;
+- bylo potřeba vracet se ke staré poznámce;
+- stačí opravit jednu větu popisku;
+- nebo podmínka nenastala a poznámka má vypršet.
+
+Když se při ověření objeví jiný problém, nelepte ho na původní poznámku. Třeba editor už neváhá mezi dvěma šablonami, ale všimne si, že v indexu chybí šablona pro podporu. To může být legitimní téma. Není to ale potvrzení původního dozvuku.
+
+Codyho komentář: hlídací poznámka není detektivní seriál, kde se v poslední epizodě ukáže, že všechno souviselo se vším. V provozu je zdravější nudnější varianta: původní podmínka buď nastala, nebo nenastala. Zbytek dostane vlastní krabici.
+
+### Čtyři výsledky ověření
+
+Ověření hlídací poznámky končí jedním ze čtyř stavů:
+
+- `Potvrzeno`: stejný dozvuk se zopakoval podle podmínky a převádí se do malé úpravy.
+- `Vypršelo`: pracovní situace nastala, dozvuk se nevrátil, poznámka se zavírá.
+- `Neověřeno`: pracovní situace nenastala; poznámku jednou zkrátit, prodloužit s důvodem, nebo zavřít jako nízkou prioritu.
+- `Nové téma`: objevil se jiný problém, který nepatří do původní poznámky.
+
+Každý stav má jinou reakci.
+
+U potvrzení neotvírejte velký projekt. Původní poznámka měla nejmenší reakci právě proto, aby po potvrzení šla rychle použít. Pokud byla reakce "upravit jednu větu popisku", držte se jedné věty. Pokud teď chcete přepsat celý index, pravděpodobně mícháte potvrzený signál s novou ambicí.
+
+U vypršení zavřete poznámku bez pocitu ztráty. Slabý signál se nevrátil. To je dobrý výsledek, protože systém nemusel nést další úkol.
+
+U neověření buďte přísní. Pokud pracovní situace nenastala, poznámku lze jednou prodloužit, ale jen s jasným důvodem. Automatické prodlužování je tichý způsob, jak z hlídací poznámky udělat věčnou položku.
+
+U nového tématu založte oddělený zápis, pokud má dost síly. Původní poznámku kvůli němu nepřepisujte zpětně.
+
+### Potvrzený signál převádějte úzce
+
+Když se dozvuk potvrdí, cílem není "využít příležitost" k širšímu úklidu. Cílem je odstranit konkrétní tření, které se vrátilo. Nejlepší oprava je ta, která by byla srozumitelná i člověku, který původní poznámku nikdy nečetl.
+
+Úzký převod má tři věty:
+
+```text
+Potvrzený signál:
+Malá úprava:
+Co tím neotevíráme:
+```
+
+Příklad:
+
+```text
+Potvrzený signál:
+Dva editoři znovu váhali mezi šablonami "rychlý kontakt" a "krátká poptávka".
+
+Malá úprava:
+V indexu šablon doplníme k oběma položkám jednu rozlišovací větu podle typu návštěvníka.
+
+Co tím neotevíráme:
+Neměníme názvy šablon, strukturu formulářů ani celý obsahový checklist.
+```
+
+Takový převod má jasnou hranici. Opraví místo, kde se signál opakoval, a nechá ostatní věci být. Pokud se při opravě ukáže větší problém, zapište ho samostatně. Nezvětšujte potvrzenou úpravu během provádění.
+
+### Expiraci opravdu proveďte
+
+Expirace není připomínka, že se k poznámce máte někdy vrátit. Je to datum nebo podmínka, kdy se poznámka zavře, pokud se signál nevrátil. Zavření má být aktivní krok: odstranit nebo zkrátit poznámku, zapsat krátký výsledek a uklidit pomocné stopy.
+
+Krátký zápis po vypršení:
+
+```text
+Hlídací poznámka:
+Výsledek:
+Co jsme viděli:
+Rozhodnutí:
+Co uklízíme:
+```
+
+Příklad:
+
+```text
+Hlídací poznámka:
+Váhání mezi šablonami "rychlý kontakt" a "krátká poptávka".
+
+Výsledek:
+Vypršelo bez opakování.
+
+Co jsme viděli:
+Proběhly dvě nové landing pages a editor vybral správnou šablonu podle stávajícího popisku.
+
+Rozhodnutí:
+Nic neupravujeme a poznámku zavíráme.
+
+Co uklízíme:
+Odstraňujeme hlídací větu z indexu a necháváme jen krátkou stopu v rozhodovacím logu.
+```
+
+Tento zápis je krátký záměrně. Po vypršení není potřeba psát retrospektivu. Stačí vědět, že poznámka měla šanci se potvrdit, nepotvrdila se a nezůstává viset.
+
+### Privacy-first ověření bez nové datové vrstvy
+
+Hlídací poznámka vznikla ze slabého signálu, takže ověření má zůstat lehké. Nepřidávejte kvůli němu detailní sledování, osobní logy, nahrávky práce ani nové exporty. Ve většině případů stačí věta od vlastníka, že pracovní situace nastala a podmínka se potvrdila nebo nepotvrdila.
+
+Privacy-first minimum:
+
+1. Ověřujte jen původní podmínku, ne celé chování lidí.
+2. Zapište agregovaný výsledek, ne jména a konkrétní průchody.
+3. Pokud vznikl pomocný screenshot nebo pracovní poznámka, po uzavření ji smažte nebo anonymizujte.
+4. Nepřidávejte nový nástroj na sledování slabých signálů.
+5. Při potvrzení převeďte jen závěr, ne celou historii pozorování.
+
+Dobře:
+
+```text
+Při dvou dalších přípravách landing page se stejné váhání jednou zopakovalo a jednou ne. Podmínka dvou opakování nenastala, poznámku necháváme vypršet.
+```
+
+Špatně:
+
+```text
+Budeme měsíc sledovat všechny editory při výběru šablon a ukládat záznamy jejich průchodu.
+```
+
+Slabý signál si nezaslouží těžké měření. Pokud potřebujete velké sledování, abyste poznali, jestli poznámka platí, možná je poznámka příliš mlhavá.
+
+### Karta ověření hlídací poznámky
+
+```text
+Hlídací poznámka:
+Původní podmínka:
+Expirace:
+Co se skutečně stalo:
+Výsledek:
+Rozhodnutí:
+Nejmenší úprava, pokud je potvrzeno:
+Co tím neotevíráme:
+Privacy-first úklid:
+Kam zapisujeme závěr:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Hlídací poznámka:
+Váhání mezi formulářovými šablonami pro novou landing page.
+
+Původní podmínka:
+Pokud se stejné váhání objeví při dalších dvou přípravách landing page.
+
+Expirace:
+Po dvou použitích nebo za 30 dní.
+
+Co se skutečně stalo:
+Při dvou použitích se váhání objevilo jednou a autor nakonec vybral správnou šablonu bez starých poznámek.
+
+Výsledek:
+Vypršelo.
+
+Rozhodnutí:
+Popisky teď neměníme.
+
+Nejmenší úprava, pokud je potvrzeno:
+Nepoužito.
+
+Co tím neotevíráme:
+Neměníme názvy šablon ani formulářový checklist.
+
+Privacy-first úklid:
+Mažeme pomocnou poznámku z indexu, ponecháváme jen agregovaný závěr v logu.
+
+Kam zapisujeme závěr:
+Rozhodovací log formulářových šablon.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-29.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní hlídací poznámku a její podmínku.
+2. Minuta 2: napište, jestli pracovní situace nastala.
+3. Minuta 3: rozhodněte stav `Potvrzeno`, `Vypršelo`, `Neověřeno` nebo `Nové téma`.
+4. Minuta 4: u potvrzení napište nejmenší úpravu; u vypršení napište zavírací větu.
+5. Minuta 5: určete, co se neotevírá a co se uklízí.
+6. Minuta 6: zapište závěr do pracovního místa a smažte nebo zkraťte pomocné stopy.
+
+Výstup workshopu:
+
+```text
+Hlídací poznámka je uzavřená: buď vedla k jedné malé úpravě, nebo vypršela bez další práce a bez nové datové vrstvy.
+```
+
+### Checklist kapitoly
+
+- Vracíme se k původní podmínce, ne k novým dojmům?
+- Víme, jestli pracovní situace opravdu nastala?
+- Končí ověření jedním ze stavů: potvrzeno, vypršelo, neověřeno nebo nové téma?
+- Pokud je signál potvrzený, převádíme ho jen do nejmenší úpravy?
+- Je jasně napsané, co potvrzená úprava neotevírá?
+- Pokud poznámka vypršela, zavíráme ji aktivně a bez dalšího úkolu?
+- Pokud je neověřená, neprodlužujeme ji automaticky?
+- Pokud vzniklo nové téma, držíme ho mimo původní poznámku?
+- Nepřidáváme kvůli ověření nový tracker, nahrávky, exporty ani osobní logy?
+- Mažeme nebo anonymizujeme pomocné podklady po uzavření?
+- Zůstává jen krátký závěr v místě, kde ho tým při práci najde?
+- Ví vlastník, jestli má následovat malá úprava, zavření, jednorázové prodloužení nebo nový signál?
+
+Ověřená hlídací poznámka má skončit čistě. Potvrzená poznámka se změní v malou úpravu. Nepotvrzená zmizí. Neověřená dostane nejvýš jednu vědomou šanci. A nové téma jde vlastní cestou. Tím zůstává klidový stav opravdu klidový: pozorný, ale ne přetížený.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TK o ověření hlídací poznámky po opakování nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, úzký převod potvrzeného signálu, aktivní expirace, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TJ o převod lehkého dozvuku po návratu ke klidovému stavu do hlídací poznámky: rozlišení dozvuku od návratového signálu, podmíněná poznámka, umístění u pracovního místa, expirace, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TI o první běžný návrat ke klidovému stavu po uzavřené malé úpravě: návrat přes skutečný úkol, tři klidové signály, čtyři výsledné stavy, vědomé nic, privacy-first návrat bez obnovy podkladů, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TH o uzavření potvrzené malé úpravy do klidového stavu: aktuální pracovní věta, zavření pomocných poznámek, návratový signál místo dozoru, privacy-first úklid podkladů, karta, mini workshop a checklist.
