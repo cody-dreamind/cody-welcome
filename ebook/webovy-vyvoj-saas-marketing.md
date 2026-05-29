@@ -142956,8 +142956,266 @@ Výstup workshopu:
 
 Čekací poznámka je dobrý nástroj jen tehdy, když umí skončit. Někdy skončí malou úpravou. Někdy skončí tím, že se nic nestalo a systém zůstane lehký. Oba výsledky jsou užitečné, pokud jsou vědomé, krátké a bez zbytečné datové stopy.
 
+## Příloha TF: Provedení malé úpravy po potvrzené čekací poznámce
+
+Příloha TE skončila stavem `Potvrzeno k malé úpravě`, nebo poznámku zavřela bez zásahu. Tato příloha řeší jen první případ. Čekací poznámka se vrátila podle své vlastní podmínky, signál je stejný a tým už ví, jaký nejmenší zásah má smysl.
+
+Cílem není z čekací poznámky vyrobit nový projekt. Cílem je provést malou úpravu v aktuálním pracovním místě, zavřít původní poznámku a zanechat za sebou méně stop, než kolik by vzniklo při dalším kole debat. Malá úprava má být tak jasná, že po ní další člověk prostě pracuje, ne studuje historii.
+
+Úvodní pracovní věta:
+
+```text
+Potvrzenou čekací poznámku převádíme do jedné malé úpravy nejbližšího pracovního místa. Neměníme okolní systém, nezvětšujeme sběr dat a původní poznámku po zásahu zavřeme.
+```
+
+Tahle věta je brzda proti nenápadnému růstu. Když už máte potvrzený signál, je lákavé přidat "ještě jednu související drobnost". Jenže čekací poznámka potvrdila konkrétní tření, ne obecné právo leštit všechno kolem. Držte se důkazu, který opravdu máte.
+
+### Vezměte jen potvrzený signál
+
+Než sáhnete do pracovního místa, přepište potvrzený signál jednou větou. Věta má být úzká, konkrétní a ověřitelná.
+
+Dobře:
+
+```text
+První věta popisku formulářové šablony je při běžném výběru zbytečně dlouhá a opakovaně zpomaluje rozhodnutí.
+```
+
+Špatně:
+
+```text
+Formulářový index potřebuje lepší UX.
+```
+
+Druhá věta může být pravdivá, ale je příliš široká. Z malé čekací poznámky by se okamžitě stal redesign indexu. Pokud tým opravdu potřebuje řešit celé UX, založte nové téma mimo tuto smyčku. Tady se řeší jen potvrzený signál.
+
+Krátký filtr před úpravou:
+
+```text
+Potvrzený signál:
+Je to stejný signál jako v čekací poznámce:
+Nejmenší zásah z původní karty:
+Co se nesmí změnit:
+```
+
+Pokud neumíte vyplnit poslední řádek, ještě nezačínejte. Hranice rozsahu je stejně důležitá jako samotná oprava. Bez ní se malá úprava tváří skromně jen na začátku.
+
+### Upravte aktuální pracovní místo
+
+Malá úprava patří do místa, kde člověk skutečně pracuje: šablony, indexu, formuláře, popisku, checklistu, provozní karty, navigačního rozcestníku nebo krátkého pravidla v kanonickém dokumentu. Nepatří jen do komentáře v issue, pokud se při další práci otevírá hlavně aktuální pracovní místo.
+
+Příklad malého zásahu:
+
+```text
+Původní popisek:
+Tuto šablonu použijte v situaci, kdy landing page sbírá první kvalifikační informace od návštěvníka a obchodní tým potřebuje rychle pochopit, jestli jde o vhodnou poptávku.
+
+Upravený popisek:
+Použijte pro první kvalifikaci poptávky na landing page.
+```
+
+Úprava zkrátila větu, ale nezměnila pravidlo. To je důležité. Malá úprava nemá potichu měnit význam, vlastníka, schvalování ani datové požadavky. Pokud by se význam měnil, nejde o drobný zásah po čekací poznámce, ale o rozhodnutí, které potřebuje vlastní kartu.
+
+Praktické pravidlo:
+
+```text
+Po úpravě má být pracovní místo snazší použít, ale stejný člověk má pořád udělat stejné rozhodnutí.
+```
+
+Když po úpravě vznikne jiné rozhodnutí, změna je větší, než jste si mysleli. Zastavte ji, oddělte nové téma a vraťte se k potvrzenému malému zásahu.
+
+### Zavřete původní čekací poznámku
+
+Po provedení úpravy nesmí čekací poznámka zůstat otevřená jako stínový úkol. Zavřete ji krátkým stavem a odkažte na aktuální místo, kde pravda teď bydlí.
+
+Dobrá uzavírací věta:
+
+```text
+2026-05-29: Čekací poznámka potvrzena a převedena do malé úpravy popisku formulářové šablony. Aktuální pravidlo je v indexu šablon; pomocné stopy zavřeny.
+```
+
+Špatně:
+
+```text
+Popisek jsme trochu upravili, poznámku necháme otevřenou pro jistotu.
+```
+
+"Pro jistotu" je v pracovních systémech často jen jiný název pro neuzavřenou smyčku. Pokud chcete úpravu ověřit při dalším použití, založte k tomu jasný návratový signál. Nenechávejte původní poznámku napůl otevřenou.
+
+Stavy zavření:
+
+- `Převedeno do malé úpravy`: potvrzený signál byl opraven v aktuálním pracovním místě.
+- `Převedeno a čeká na první použití`: úprava je hotová, ale má se ověřit při nejbližším běžném úkolu.
+- `Převedeno, nové téma odděleno`: malý zásah je hotový a širší problém má vlastní kartu.
+- `Zastaveno před zásahem`: při přípravě se ukázalo, že by úprava měnila význam nebo rozsah.
+
+Poslední stav není selhání. Je lepší zastavit malou úpravu, která už není malá, než ji protlačit jen proto, že původní poznámka vypadala nevinně.
+
+### Nechte za sebou jednu dohledatelnou větu
+
+Po malé úpravě nepotřebujete dlouhý post-mortem. Potřebujete jednu dohledatelnou větu v changelogu, rozhodovacím logu nebo provozní kartě.
+
+Šablona:
+
+```text
+Datum:
+Co bylo upraveno:
+Proč:
+Kde je aktuální pravda:
+Co se neměnilo:
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Datum:
+2026-05-29.
+
+Co bylo upraveno:
+Zkrácena první věta popisku formulářové šablony v indexu.
+
+Proč:
+Stejné zaváhání nad délkou popisku se potvrdilo při dalším běžném použití.
+
+Kde je aktuální pravda:
+Index formulářových šablon.
+
+Co se neměnilo:
+Názvy šablon, struktura indexu, onboarding editorů ani kvalifikační data formuláře.
+
+Návratový signál:
+Při dalším běžném použití editor znovu potřebuje starou poznámku nebo váhá nad stejnou větou.
+```
+
+Jedna věta nebo krátká karta stačí. Důležité je, aby další člověk poznal, proč se místo změnilo, ale nemusel číst celou historii čekací poznámky.
+
+### Privacy-first provedení malé úpravy
+
+Malá úprava po čekací poznámce nesmí zvyšovat datovou stopu jen proto, že chcete mít pocit důkazu. Potvrzení už proběhlo. Teď opravujete pracovní místo.
+
+Privacy-first minimum:
+
+- nezakládejte nahrávku průchodu, pokud stačí krátký stav;
+- neukládejte jméno člověka, když rozhodnutí stojí na pracovním jevu;
+- nekopírujte zákaznický obsah do příkladu, pokud stačí anonymizovaná formulace;
+- nemažte aktuální pravdu, ale ukliďte dočasné poznámky, screenshoty a exporty;
+- nepřidávejte měření kliknutí, když řešíte srozumitelnost jedné věty;
+- pokud se mění formulář nebo datové pole, zkontrolujte, že nepřibyly nové osobní údaje.
+
+Dobře:
+
+```text
+Popisek zkrácen. Původní čekací poznámka zavřena. Bez nových osobních údajů, bez screenshotů a bez změny formulářových polí.
+```
+
+Špatně:
+
+```text
+Po úpravě budeme měsíc sledovat každého editora zvlášť, měřit čas nad popiskem a ukládat příklady rozpracovaných klientských stránek.
+```
+
+Codyho komentář: malá úprava má být malá i v datech. Když kvůli jedné větě vznikne sledovací aparát, nejspíš jste neopravili pracovní místo, ale založili další problém v hezčím tričku.
+
+### Karta provedení malé úpravy
+
+```text
+Původní čekací poznámka:
+Potvrzený signál:
+Pracovní místo:
+Nejmenší zásah:
+Provedená úprava:
+Co se neměnilo:
+Kde je aktuální pravda:
+Stav původní poznámky:
+Návratový signál po úpravě:
+Nové téma mimo tuto smyčku:
+Privacy-first omezení:
+Pomocné stopy k úklidu:
+Vlastník:
+Datum provedení:
+```
+
+Vyplněný příklad:
+
+```text
+Původní čekací poznámka:
+Sledovat opakované zaváhání nad dlouhou první větou popisku formulářové šablony.
+
+Potvrzený signál:
+Stejné zaváhání se vrátilo při dalším běžném použití indexu.
+
+Pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Nejmenší zásah:
+Zkrátit první větu popisku bez změny pravidla.
+
+Provedená úprava:
+První věta přepsána na přímý pokyn: "Použijte pro první kvalifikaci poptávky na landing page."
+
+Co se neměnilo:
+Struktura indexu, názvy šablon, onboarding editorů a data ve formuláři.
+
+Kde je aktuální pravda:
+Index formulářových šablon.
+
+Stav původní poznámky:
+Převedeno do malé úpravy.
+
+Návratový signál po úpravě:
+Stejné zaváhání nad popiskem při dalším běžném použití.
+
+Nové téma mimo tuto smyčku:
+Žádné.
+
+Privacy-first omezení:
+Bez jména editora, bez screenshotu, bez nahrávky a bez kopie klientského obsahu.
+
+Pomocné stopy k úklidu:
+Zavřít původní čekací poznámku a ponechat jen changelogovou větu.
+
+Vlastník:
+Marketing owner.
+
+Datum provedení:
+2026-05-29.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte potvrzený signál a původní nejmenší zásah.
+2. Minuta 2: napište hranici, co se při úpravě nesmí změnit.
+3. Minuta 3: upravte aktuální pracovní místo, ne pomocnou historii.
+4. Minuta 4: zavřete původní čekací poznámku jedním stavem.
+5. Minuta 5: zapište jednu changelogovou větu a návratový signál.
+6. Minuta 6: ukliďte dočasné stopy a ověřte, že nepřibyla nová data.
+
+Výstup workshopu:
+
+```text
+Potvrzená čekací poznámka je převedena do jedné malé úpravy aktuálního pracovního místa, původní poznámka je zavřená a další návrat má jasný signál.
+```
+
+### Checklist kapitoly
+
+- Pracujeme opravdu jen s potvrzeným signálem z čekací poznámky?
+- Je jasné, že jde o stejný signál, ne nové téma?
+- Máme napsaný nejmenší možný zásah?
+- Víme, co se při úpravě nesmí změnit?
+- Upravujeme aktuální pracovní místo, ne jen komentář v historii?
+- Nezměnila malá úprava význam pravidla, vlastníka, schvalování nebo datové požadavky?
+- Je původní čekací poznámka zavřená jedním stavem?
+- Zůstala po změně jedna dohledatelná věta?
+- Má další návrat jasný signál místo neurčitého "sledovat dál"?
+- Nevznikly nové screenshoty, nahrávky, exporty ani trackery?
+- Nepřibyla nová osobní data ve formuláři, šabloně nebo příkladu?
+- Je jasné, které pomocné stopy se po úpravě mažou nebo archivují?
+
+Malá úprava má být konec malé smyčky, ne začátek další vrstvy správy. Když se potvrzený signál opraví v aktuálním místě, poznámka se zavře a systém po sobě uklidí, práce se vrací tam, kde má být: k běžnému použití bez zbytečné historie.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TF o provedení malé úpravy po potvrzené čekací poznámce: práce jen s potvrzeným signálem, zásah do aktuálního pracovního místa, zavření původní poznámky, changelogová věta, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TE o ověření čekací poznámky po návratovém signálu nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, úzký převod do malé úpravy, význam expirace, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TD o převod lehkého dozvuku po prvním běžném návratu k čistému pracovnímu místu do čekací poznámky: rozpoznání dozvuku, podmíněná poznámka, umístění blízko práce, expirace, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TC o první běžný návrat k čistému pracovnímu místu po uzavřené malé opravě: návrat přes skutečný pracovní úkol, signály samostatnosti, návratu historie a datové stopy, čtyři výsledné stavy, krátká kanonická věta, privacy-first omezení, karta, mini workshop a checklist.
