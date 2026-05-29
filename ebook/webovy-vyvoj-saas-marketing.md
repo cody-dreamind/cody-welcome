@@ -145173,8 +145173,261 @@ Kanonické pravidlo prošlo prvním běžným návratem. Víme, zda zůstává v
 
 První návrat ke kanonickému pravidlu je test dospělosti malé provozní změny. Když pravidlo obstojí, nejlepší další krok je často žádný další krok. V systému zůstane jasnější rozhodnutí, méně historických berliček a méně dat, která by se musela jednou uklízet. Tak má vypadat normální práce, když se podaří.
 
+## Příloha TP: Převod drobného zpřesnění po prvním návratu do revizní poznámky
+
+Příloha TO ukázala, jak se ke kanonickému pravidlu vrátit při prvním běžném použití. Ideální výsledek je normální provoz a žádná další práce. Někdy se ale objeví drobné zpřesnění: pravidlo funguje, člověk ho našel, rozhodnutí udělal, jen jedna věta, odkaz nebo výjimka při použití zbytečně zadrhla.
+
+Tohle není důvod otevírat celou stabilizační historii. Není potřeba znovu zakládat experiment, svolávat revizi ani rozšiřovat pravidlo o všechno, co by se někdy mohlo hodit. Cílem je převést drobné zpřesnění do malé revizní poznámky, která drží rozsah a chrání kanonické pravidlo před nekonečným přilepováním.
+
+Úvodní pracovní věta:
+
+```text
+Kanonické pravidlo při prvním návratu fungovalo, ale jedna malá část zadrhla. Zakládáme jen revizní poznámku s úzkou otázkou, stop pravidlem a privacy-first hranicí.
+```
+
+Tahle věta je brzda i povolení. Brzda proti velké debatě. Povolení opravit jednu konkrétní věc, pokud opravdu pomůže dalšímu běžnému použití.
+
+### Rozlišujte zpřesnění od nové potřeby
+
+Drobné zpřesnění se týká stejného pravidla a stejné pracovní situace. Například:
+
+- odkaz vede správně, ale má nejasný název;
+- věta je správná, ale chybí jedno rozlišení mezi dvěma šablonami;
+- pravidlo je v indexu, ale uživatel ho čekal o jednu úroveň výš;
+- výjimka existuje, ale je napsaná v příliš interním jazyce;
+- checklist funguje, ale poslední bod se opakuje s předchozím.
+
+Nová potřeba je něco jiného. Pokud se při návratu ukáže, že tým potřebuje nový formulář, jiný sales proces, nové měření, novou službu nebo právní kontrolu, nejde o zpřesnění pravidla. Je to samostatný podnět s vlastním vlastníkem a rozsahem.
+
+Krátký test:
+
+```text
+Kdybychom opravili jen jednu větu, jeden odkaz nebo jedno umístění, fungovalo by původní pravidlo lépe?
+```
+
+Pokud ano, jde pravděpodobně o drobné zpřesnění. Pokud ne, nechte kanonické pravidlo být a založte nový podnět mimo tuto smyčku.
+
+### Revizní poznámka má být menší než pravidlo
+
+Revizní poznámka není další dokumentace k dokumentaci. Je to krátká pracovní karta, která říká, co přesně zadrhlo, jaká nejmenší oprava dává smysl a kdy se pozná, že se tím nemá dál zabývat.
+
+Minimální tvar:
+
+```text
+Kanonické pravidlo:
+Drobné zadrhnutí:
+Nejmenší možná úprava:
+Co tím nechceme otevřít:
+Privacy-first hranice:
+Stop pravidlo:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kanonické pravidlo:
+Pro konkrétní službu použijte krátkou poptávku. Rychlý kontakt použijte pro obecný první dotaz bez vybrané služby.
+
+Drobné zadrhnutí:
+Editor pravidlo našel, ale název odkazu "kontaktní varianty" mu připadal moc obecný.
+
+Nejmenší možná úprava:
+Přejmenovat odkaz na "výběr poptávkového formuláře".
+
+Co tím nechceme otevřít:
+Nepřepisujeme všechny formuláře, neměníme nabídku a nezavádíme sledování použití šablon.
+
+Privacy-first hranice:
+Stačí pracovní poznámka bez jména editora, screenshotu a exportu průchodu.
+
+Stop pravidlo:
+Pokud po přejmenování další běžné použití projde bez stejného váhání, poznámku zavřít.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-29.
+```
+
+Poznámka má zůstat tak krátká, aby ji šlo přečíst rychleji než původní pravidlo. Jakmile se z ní stává rozbor procesu, pravděpodobně řeší víc než drobné zpřesnění.
+
+### Vyberte jeden typ malé úpravy
+
+Drobné zpřesnění většinou spadá do jedné z pěti kategorií.
+
+`Přejmenovat` znamená změnit název odkazu, sekce, šablony nebo checklistu tak, aby odpovídal pracovní otázce. Je to vhodné, když člověk pravidlo hledal správně, ale název ho málem poslal jinam.
+
+`Přesunout` znamená dát stejnou větu blíž k místu rozhodnutí. Použijte to, když je pravidlo správné, ale člověk ho uvidí až po rozhodnutí.
+
+`Zkrátit` znamená odstranit slova, která nepomáhají. Často jde o zbytky interní historie, opatrné formulace nebo dvě věty, které říkají totéž.
+
+`Doplnit výjimku` znamená přidat jednu konkrétní hranici. Pozor: výjimka má rozhodnutí zrychlit, ne otevřít seznam všech možných variant.
+
+`Sloučit duplicitu` znamená odstranit druhé místo, které říká skoro totéž a mate tím výběr. Sloučení je dobré jen tehdy, když je jasné, které místo je kanonické.
+
+Praktická volba:
+
+```text
+Typ úpravy:
+Přejmenovat / Přesunout / Zkrátit / Doplnit výjimku / Sloučit duplicitu.
+
+Jedna věta změny:
+```
+
+Nekombinujte typy úpravy jen proto, že už jste u toho. Pokud je potřeba přejmenovat odkaz i přepsat tři odstavce, začněte názvem. Další tření se ukáže až při běžném použití, pokud je opravdu důležité.
+
+### Napište stop pravidlo dřív než úpravu
+
+U malých zpřesnění je největší riziko rozjetí. Úprava začala jako přejmenování odkazu a o hodinu později někdo třídí celý index. Stop pravidlo tomu brání tím, že předem říká, kdy se poznámka zavře.
+
+Dobrá stop pravidla:
+
+- po jedné malé úpravě a jednom běžném použití bez stejného váhání zavřít;
+- pokud se ukáže širší problém, převést ho do nového podnětu a tuto poznámku zavřít;
+- pokud se stejná drobnost neopakuje do dalšího návratového signálu, nic neupravovat;
+- pokud by úprava vyžadovala nový sběr dat, vrátit se k rozhodnutí, zda je problém dost velký.
+
+Slabé stop pravidlo zní: "Podíváme se na to později." To je jen odložené přemýšlení. Silnější pravidlo říká, jaký signál zavírá, potvrzuje nebo převádí poznámku jinam.
+
+Příklad:
+
+```text
+Stop pravidlo:
+Změníme jen název odkazu. Pokud další běžné použití projde bez stejného váhání, poznámku zavřeme. Pokud člověk pravidlo stále nenajde, nejde už o název odkazu, ale o slabé kanonické místo.
+```
+
+Tím se chrání i týmová energie. Malá revize má vyrobit klidnější použití pravidla, ne další dlouhodobě otevřenou kontrolu.
+
+### Privacy-first revizní poznámka
+
+I drobná poznámka může zbytečně sbírat data. Stačí screenshot s interním komentářem, citace z chatu, jméno člověka nebo export z nástroje, který není potřeba. U malých zpřesnění je to obzvlášť špatný obchod: riziko datové stopy roste rychleji než hodnota důkazu.
+
+Privacy-first hranice:
+
+- zapisujte pracovní situaci, ne profil člověka;
+- nepřikládejte screenshot, pokud stačí popsat místo;
+- necitujte interní komunikaci, když stačí shrnout zadrhnutí;
+- nepřidávejte analytiku použití pravidla kvůli jedné větě;
+- nastavte retenci pomocných poznámek hned při založení.
+
+Praktická formulace:
+
+```text
+Revizní poznámka obsahuje jen popis zadrhnutí a návrh nejmenší úpravy. Neuchovává osobní průchod, screenshot ani export, protože pro rozhodnutí nejsou potřeba.
+```
+
+Codyho komentář: když se malá úprava nedá rozhodnout bez hromady důkazů, často není malá. Buď ji zmenšete, nebo ji přiznejte jako samostatný problém. Tvrdohlavě tomu říkat "drobnost" nepomůže nikomu, ani tomu chudákovi odkazu.
+
+### Karta revizní poznámky po prvním návratu
+
+```text
+Kanonické pravidlo:
+Běžná pracovní situace:
+Výsledek prvního návratu:
+Drobné zadrhnutí:
+Typ úpravy:
+Jedna věta změny:
+Nejmenší možný zásah:
+Co výslovně neotevíráme:
+Privacy-first hranice:
+Pomocné podklady:
+Retenční poznámka:
+Stop pravidlo:
+Návratová podmínka:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kanonické pravidlo:
+Pro konkrétní službu použijte krátkou poptávku. Rychlý kontakt použijte pro obecný první dotaz bez vybrané služby.
+
+Běžná pracovní situace:
+Editor připravoval landing page pro novou službu.
+
+Výsledek prvního návratu:
+Drobné zpřesnění.
+
+Drobné zadrhnutí:
+Odkaz na pravidlo byl v indexu, ale jeho název neříkal, že pomáhá vybrat formulář.
+
+Typ úpravy:
+Přejmenovat.
+
+Jedna věta změny:
+Odkaz "kontaktní varianty" přejmenovat na "výběr poptávkového formuláře".
+
+Nejmenší možný zásah:
+Změnit jen název odkazu v indexu.
+
+Co výslovně neotevíráme:
+Neměníme text pravidla, formuláře ani strukturu landing pages.
+
+Privacy-first hranice:
+Bez screenshotu, bez jména editora, bez měření kliknutí.
+
+Pomocné podklady:
+Žádné.
+
+Retenční poznámka:
+Po ověření ponechat jen changelogovou větu nebo poznámku smazat.
+
+Stop pravidlo:
+Po jednom běžném použití bez stejného váhání zavřít.
+
+Návratová podmínka:
+Vrátit se jen při opakovaném nenalezení pravidla nebo při změně struktury indexu.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-29.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte kanonické pravidlo a běžnou situaci, ve které zadrhlo.
+2. Minuta 2: ověřte, že nejde o novou potřebu mimo původní pravidlo.
+3. Minuta 3: napište nejmenší možnou úpravu jednou větou.
+4. Minuta 4: vyberte typ úpravy: přejmenovat, přesunout, zkrátit, doplnit výjimku nebo sloučit duplicitu.
+5. Minuta 5: napište, co výslovně neotevíráte.
+6. Minuta 6: nastavte privacy-first hranici a retenci poznámky.
+7. Minuta 7: určete stop pravidlo a návratovou podmínku.
+
+Výstup workshopu:
+
+```text
+Drobné zpřesnění po prvním návratu je zachycené jako malá revizní poznámka. Víme, jaký je nejmenší zásah, co tím neotevíráme a kdy poznámku zavřeme.
+```
+
+### Checklist kapitoly
+
+- Ověřili jsme, že pravidlo při prvním návratu v zásadě fungovalo?
+- Týká se zadrhnutí stejného pravidla a stejné pracovní situace?
+- Nezaměňujeme drobné zpřesnění za novou potřebu?
+- Dá se nejmenší úprava popsat jednou větou?
+- Vybrali jsme jen jeden typ úpravy?
+- Je revizní poznámka kratší než kanonické pravidlo?
+- Napsali jsme stop pravidlo před rozšiřováním práce?
+- Je jasné, co výslovně neotevíráme?
+- Nepřidáváme nový tracker, export, screenshot ani osobní log?
+- Zapisujeme pracovní zadrhnutí, ne výkon konkrétního člověka?
+- Má pomocná poznámka retenční pravidlo?
+- Umíme poznámku zavřít po jednom běžném použití bez stejného váhání?
+- Pokud se ukáže širší problém, oddělíme ho do nového podnětu?
+- Zůstává kanonické pravidlo po úpravě pořád jednoduché?
+
+Drobné zpřesnění je užitečné jen tehdy, když po něm pravidlo působí samozřejměji. Jakmile začne z pravidla dělat památník všech výjimek, je čas zastavit. Kanonické místo má lidem pomáhat rozhodnout, ne dokazovat, kolik práce se kolem něj kdysi odehrálo.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TP o převodu drobného zpřesnění po prvním návratu ke kanonickému pravidlu do revizní poznámky: rozlišení od nové potřeby, nejmenší úprava, stop pravidlo, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TO o první běžný návrat ke kanonickému pracovnímu pravidlu: návrat od pracovního úkolu místo changelogu, signály normálního použití, čtyři výsledné stavy, vědomé nic, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TN o uzavření ověřené stabilizační úpravy do kanonického pracovního pravidla: přepis výsledku do pracovního místa, zavření ověřovací karty, odstranění hlídacího jazyka, návratová podmínka, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TM o ověření stabilizační úpravy při příštím běžném použití: stabilizační věta, tři signály, čtyři výsledné stavy, pravidlo kdy nechat úpravu být, privacy-first ověření, karta, mini workshop a checklist.
