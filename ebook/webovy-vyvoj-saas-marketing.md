@@ -139963,8 +139963,255 @@ Jedna servisní poznámka je ověřená proti reálnému návratu. Má rozhodnut
 
 Dobrá servisní poznámka má krátký život. Buď se nepotvrdí a zmizí, nebo se potvrdí a promění v nejmenší opravu. Nejhorší varianta je nechat ji viset mezi tím: příliš malou na práci, příliš viditelnou na ignorování a příliš starou na důvěru. Čistá trasa si zaslouží čisté rozhodnutí.
 
+## Příloha ST: Převod potvrzené servisní poznámky do jedné malé lokální opravy
+
+Příloha SS končila stavem, kdy se servisní poznámka při dalším návratu opravdu potvrdila. To je důležitý okamžik: poznámka už není jen opatrná připomínka, ale signál, že v čisté pracovní trase zůstalo jedno malé místo, které někomu překáží.
+
+Příloha ST řeší přesně tuto chvíli. Cíl není otevřít novou vlnu úprav, auditů a "když už jsme u toho" nápadů. Cíl je převést potvrzenou poznámku do jedné malé lokální opravy, provést ji na nejbližším pracovním místě a nechat za sebou čistší trasu, ne nový systém dohledu.
+
+Začněte větou:
+
+```text
+Servisní poznámka se potvrdila v reálné práci. Převádíme ji do jedné lokální opravy v nejbližším pracovním místě a neměníme zbytek trasy.
+```
+
+Tahleta věta vypadá obyčejně, ale drží tým u země. Potvrzený signál snadno vyvolá pocit, že když už jednou něco zlobilo, bude zlobit všechno podobné. Občas ano. Většinou ale stačí opravit jedno místo, které skutečně stálo v cestě.
+
+### Vezměte jen potvrzený signál
+
+Otevřete ověřovací kartu ze servisní poznámky a vyberte z ní jen tři údaje:
+
+- co se při návratu skutečně stalo;
+- jakou práci to zdrželo nebo zmátlo;
+- kde je nejbližší místo, které lze opravit.
+
+Nepřenášejte do opravy celou historii. Starší debaty, alternativní nápady a vedlejší pozorování patří buď do backlogu, nebo nikam. Lokální oprava má vycházet z potvrzeného pracovního nárazu, ne z pocitu, že text, šablony nebo index už dlouho chtějí větší péči.
+
+Příklad potvrzeného signálu:
+
+```text
+Při přípravě nové landing page editor otevřel archivní odkaz na starou formulářovou šablonu a musel se doptat, která verze platí.
+```
+
+Dobrá opravná otázka:
+
+```text
+Kde můžeme jedním zásahem zabránit tomu, aby se stejný archivní odkaz znovu tvářil jako pracovní cesta?
+```
+
+Slabá opravná otázka:
+
+```text
+Neměli bychom konečně přepsat všechny formulářové šablony?
+```
+
+Druhá otázka možná jednou bude platná, ale není odpovědí na potvrzenou servisní poznámku. Je to nové téma. A nové téma si má počkat ve frontě, dokud neprojde vlastním důvodem, vlastníkem a hranicí rozsahu.
+
+### Najděte nejbližší pracovní místo
+
+Nejbližší pracovní místo je první místo, kam člověk při běžné práci přijde a kde se může rozhodnout správně bez dalšího doptávání. Někdy je to aktuální index. Jindy starý úkol, archivní poznámka, šablona, interní návod, onboardingový checklist nebo karta kampaně.
+
+Lokální oprava patří tam, kde se chyba opravdu potkala s prací.
+
+Praktické příklady:
+
+- Pokud někdo otevřel starý odkaz ze starého úkolu, opravte nebo zkraťte starý úkol.
+- Pokud aktuální index neukazuje jasně kanonickou variantu, upravte jednu větu v indexu.
+- Pokud šablona obsahuje starý příklad jako aktivní možnost, přepište popisek u tohoto příkladu.
+- Pokud onboarding odkazuje na dvě místa, ponechte jedno a druhé označte jako archiv.
+- Pokud se člověk doptal kvůli názvu, opravte název, ne celý proces.
+
+Špatné umístění opravy poznáte podle toho, že sice vypadá systémově, ale člověk na něj při příští práci nenarazí. Krásná poznámka v samostatném dokumentu nepomůže, pokud editor začne znovu ve starém úkolu. Oprava má čekat na trase, ne v muzeu dobrých úmyslů.
+
+### Napište opravnou větu
+
+Než cokoliv přepíšete, napište jednu opravnou větu. Má obsahovat důvod, zásah a hranici.
+
+Šablona:
+
+```text
+Protože [potvrzený signál], upravujeme [nejbližší pracovní místo] tak, aby [nové správné chování]. Neměníme [vědomě vynechaný rozsah].
+```
+
+Příklad:
+
+```text
+Protože editor při přípravě nové landing page otevřel archivní odkaz na starou formulářovou šablonu, zkracujeme starý úkol na jeden odkaz na aktuální index. Neměníme formulářový systém ani texty všech šablon.
+```
+
+Tahle věta se může stát i krátkým changelogem. Výhoda je jednoduchá: když se za měsíc někdo zeptá, proč se starý odkaz změnil, odpověď už existuje. Nemusí se znovu lovit v chatu, v paměti nebo v neveselé archeologii úkolů.
+
+Codyho komentář: opravná věta je malá brzda proti provoznímu hrdinství. Bez ní tým často začne "opravovat pořádně" a za hodinu má otevřené tři šablony, dva backlogy a jednu debatu o názvosloví. S ní má jeden zásah. Méně dramatické, víc hotové.
+
+### Proveďte jednu změnu a hned ji zavřete
+
+Malá lokální oprava má mít jasný konec. Po provedení změny zkontrolujte jen to, jestli opravná věta odpovídá skutečnému stavu.
+
+Stačí tento postup:
+
+1. Otevřete nejbližší pracovní místo.
+2. Proveďte nejmenší úpravu, která odstraní potvrzený náraz.
+3. Odstraňte nebo označte starou stopu, pokud by dál mátla.
+4. Zapište jednu větu do changelogu nebo k pracovnímu místu.
+5. Zavřete servisní poznámku jako převedenou do lokální opravy.
+
+Nepřidávejte k tomu novou kontrolní rutinu. Lokální oprava se ověří při dalším běžném použití, pokud dává smysl. Jestli se jedná o opravdu drobnou změnu, často stačí ruční průchod stejnou cestou hned po úpravě.
+
+Příklad ručního průchodu:
+
+```text
+Otevřu starý úkol, najdu už jen odkaz na aktuální index, z indexu se dostanu na platnou šablonu a archivní varianta se netváří jako další možnost.
+```
+
+Pokud tento průchod nevyjde, nerozšiřujte zásah automaticky. Nejdřív opravte chybu v právě provedené změně. Teprve když se ukáže, že problém leží jinde, založte nové rozhodnutí s vlastním rozsahem.
+
+### Oddělte opravu od nového tématu
+
+Potvrzená servisní poznámka často odkryje další zajímavé věci. To je normální. Neznamená to, že do lokální opravy patří.
+
+Rozlišujte tři typy nálezů:
+
+`Součást opravy` je věc, bez které potvrzený signál nezmizí. Například starý odkaz, který se stále zobrazuje jako aktivní.
+
+`Vedlejší poznámka` je věc, která by šla zlepšit, ale neblokuje aktuální pracovní náraz. Například nehezký text vedle správného odkazu.
+
+`Nové téma` je větší otázka, která potřebuje vlastní rozhodnutí. Například sjednocení všech formulářových šablon napříč webem.
+
+Krátká třídicí tabulka:
+
+```text
+Bez toho se stejný signál zopakuje:
+Součást opravy.
+
+Je to jen nepohodlné nebo nehezké:
+Vedlejší poznámka, teď neřešit.
+
+Mění to víc míst, rolí nebo pravidel:
+Nové téma s vlastní kartou.
+```
+
+Toto třídění chrání tempo. Malá oprava má vrátit práci do čistého stavu. Nemá se stát vchodem do dalšího patra projektu.
+
+### Privacy-first lokální oprava
+
+Převod servisní poznámky do opravy má držet stejné privacy-first minimum jako její ověření. Opravujete pracovní místo, ne lidi. Není potřeba ukládat screenshoty s klientským obsahem, kopírovat staré formuláře, zapisovat jména lidí nebo vytvářet stopu každého kliknutí.
+
+Stačí zapsat pracovní fakt:
+
+```text
+Při použití indexu byl otevřen archivní odkaz. Odkaz byl nahrazen odkazem na aktuální index. Bez kopie zákaznických dat a bez záznamu osobních údajů.
+```
+
+Po opravě zkontrolujte starou servisní poznámku a pomocné podklady. Pokud už jejich obsah není potřeba, smažte je nebo zkraťte na jeden changelogový řádek. Retence není jen právní téma. Je to i provozní hygiena: čím méně starých stop leží kolem pracovních tras, tím méně lidí jim omylem uvěří.
+
+### Karta převodu servisní poznámky do lokální opravy
+
+```text
+Čistá pracovní trasa:
+Původní servisní poznámka:
+Potvrzený signál:
+Pracovní dopad:
+Nejbližší pracovní místo:
+Opravná věta:
+Jedna provedená změna:
+Co teď vědomě neměníme:
+Vedlejší poznámky odložené mimo opravu:
+Ruční průchod po opravě:
+Výsledek průchodu:
+Nová data:
+Privacy-first omezení:
+Retence původní servisní poznámky:
+Vlastník opravy:
+Kdy se ověří při běžné práci:
+```
+
+Vyplněný příklad:
+
+```text
+Čistá pracovní trasa:
+Index formulářových šablon pro nové landing pages.
+
+Původní servisní poznámka:
+Ve starém úkolu zůstává archivní odkaz na předchozí variantu formuláře.
+
+Potvrzený signál:
+Editor archivní odkaz otevřel a doptal se, která varianta platí.
+
+Pracovní dopad:
+Zdržení při přípravě landing page a riziko použití starého formuláře.
+
+Nejbližší pracovní místo:
+Starý úkol, ze kterého se na archivní odkaz chodilo.
+
+Opravná věta:
+Protože editor otevřel archivní odkaz na starou formulářovou šablonu, zkracujeme starý úkol na odkaz na aktuální index. Neměníme celý formulářový systém.
+
+Jedna provedená změna:
+Archivní odkaz nahrazen větou "Aktuální pracovní cesta je v indexu formulářových šablon" a jedním odkazem na index.
+
+Co teď vědomě neměníme:
+Nepřepisujeme všechny staré úkoly a neotevíráme redesign formulářů.
+
+Vedlejší poznámky odložené mimo opravu:
+Název jedné šablony by šel časem zkrátit, ale neblokoval tento náraz.
+
+Ruční průchod po opravě:
+Ze starého úkolu vede cesta jen do aktuálního indexu.
+
+Výsledek průchodu:
+Oprava funguje.
+
+Nová data:
+Žádná.
+
+Privacy-first omezení:
+Bez screenshotu klientské landing page, bez jména editora a bez kopie starého formuláře.
+
+Retence původní servisní poznámky:
+Poznámka zavřena jako převedená do lokální opravy, ponechán jen changelogový řádek.
+
+Vlastník opravy:
+Marketing owner.
+
+Kdy se ověří při běžné práci:
+Při další přípravě landing page, bez samostatného auditu.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte potvrzený signál ze servisní poznámky.
+2. Minuta 2: najděte nejbližší pracovní místo, kde se signál potkal s prací.
+3. Minuta 3: napište opravnou větu s hranicí rozsahu.
+4. Minuta 4: proveďte jednu nejmenší změnu.
+5. Minuta 5: projděte stejnou cestu a zkontrolujte, že oprava drží.
+6. Minuta 6: zavřete servisní poznámku, ukliďte podklady a zapište privacy-first omezení.
+
+Výstup workshopu:
+
+```text
+Potvrzená servisní poznámka je převedená do jedné lokální opravy. Oprava leží na nejbližším pracovním místě, má hranici rozsahu, ruční průchod a nevytvořila novou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Převádíme jen potvrzenou servisní poznámku?
+- Vycházíme z reálného pracovního signálu, ne z obecného pocitu?
+- Vybrali jsme nejbližší pracovní místo?
+- Má oprava jednu větu s důvodem, zásahem a hranicí?
+- Provedli jsme jednu změnu místo širšího auditu?
+- Odstranili jsme nebo označili starou stopu, která mátla?
+- Oddělili jsme součást opravy od vedlejší poznámky a nového tématu?
+- Proběhl ruční průchod stejnou cestou?
+- Je původní servisní poznámka zavřená jako převedená do opravy?
+- Nevznikl screenshot, export, jmenný záznam ani kopie zákaznických dat?
+- Je zapsaná retence pomocných podkladů?
+- Ví vlastník, kdy se oprava přirozeně ověří při další práci?
+
+Potvrzená servisní poznámka je dobrý sluha a špatný pán. Má ukázat na jedno místo, kde se čistá trasa ještě zachytává o starou stopu. Jakmile to místo opravíte, poznámka má zmizet z cesty. Práce potřebuje aktuální trasu, ne výstavu všech důvodů, proč kdysi nebyla aktuální.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha ST o převodu potvrzené servisní poznámky do jedné malé lokální opravy: potvrzený signál, nejbližší pracovní místo, opravná věta, oddělení nových témat, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SS o ověření servisní poznámky po dalším návratovém signálu čisté trasy: návrat k původní podmínce, čtyři výsledné stavy, převod do malé lokální opravy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SR o převod lehkého dozvuku po návratu čisté trasy do servisní poznámky: rozlišení dozvuku od problému, podmíněná poznámka, umístění u pracovního místa, návratový signál, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SQ o první běžný návrat k čisté pracovní trase po uzavřené lokální úpravě: přirozené použití, signály nalezení, pochopení a datové stopy, čtyři výsledné stavy, privacy-first návrat bez nové pozorovací vrstvy, karta, mini workshop a checklist.
