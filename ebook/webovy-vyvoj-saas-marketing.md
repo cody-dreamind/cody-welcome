@@ -142451,8 +142451,267 @@ První běžný návrat k čistému pracovnímu místu má jeden stav, krátký 
 
 První běžný návrat má potvrdit, že práce se vrátila do normálu. Když člověk použije čisté místo, dokončí úkol a nepotřebuje staré berličky, máte hotovo. Ne proto, že vznikla další dokumentace, ale právě proto, že vzniknout nemusela.
 
+## Příloha TD: Převod lehkého dozvuku po prvním návratu k čistému pracovnímu místu do čekací poznámky
+
+Příloha TC rozlišila čtyři výsledky prvního běžného návratu k čistému pracovnímu místu. Nejjednodušší výsledek je `Klid`: aktuální místo stačilo a není co řešit. Tato příloha se věnuje jemnějšímu stavu `Malý dozvuk`. Pracovní místo funguje, ale při běžném použití zůstane drobný okraj, který by mohl časem znovu drhnout.
+
+Malý dozvuk není chyba, incident ani důvod otevřít celou historii opravy. Je to lehký signál, že jedna věta, popisek, pořadí nebo umístění možná není úplně pohodlné. Správná reakce není okamžitě opravovat všechno. Správná reakce je uložit podmíněnou čekací poznámku, která se vrátí jen tehdy, když se signál zopakuje nebo narazí na skutečnou práci.
+
+Úvodní pracovní věta:
+
+```text
+Lehký dozvuk po běžném návratu nepřevádíme hned do opravy. Zapíšeme ho jako čekací poznámku s jasnou podmínkou návratu, expirací a privacy-first limitem stop.
+```
+
+Tahle věta chrání čisté pracovní místo před dvěma extrémy. První extrém je puntičkářská oprava každého drobného pocitu. Druhý extrém je úplné přehlédnutí slabého signálu, který se za měsíc vrátí jako větší zmatek. Čekací poznámka drží prostředek: signál nezmizí, ale ani nedostane větší váhu, než si zaslouží.
+
+### Rozpoznejte, že jde opravdu jen o dozvuk
+
+Dozvuk je drobné tření po jinak úspěšném použití. Člověk úkol dokončil, aktuální pracovní místo stačilo a stará historie nebyla nutná. Jen se objevilo malé zaváhání.
+
+Typické příklady:
+
+- název šablony je správný, ale pořád o slovo delší, než by bylo pohodlné;
+- popisek vysvětluje aktuální pravidlo, ale první věta by mohla být přímější;
+- odkaz je na správném místě, ale vedle něj zůstal sousední prvek, který trochu mate;
+- checklist funguje, ale jedna položka se při běžné práci čte dvakrát;
+- novému člověku stačí aktuální instrukce, ale musí si ji přečíst pomaleji, než by bylo ideální.
+
+Tohle ještě není návrat problému. Problém začíná ve chvíli, kdy člověk bez staré karty nedokáže rozhodnout, použije špatnou verzi, vytvoří zbytečná data, obejde pracovní místo nebo musí žádat autora opravy o vysvětlení.
+
+Krátký filtr:
+
+```text
+Úkol byl dokončen:
+Ano / Ne
+
+Aktuální místo stačilo:
+Ano / Ne
+
+Byla potřeba stará historie:
+Ano / Ne
+
+Vzniklo jen malé zaváhání:
+Ano / Ne
+```
+
+Pokud první dvě odpovědi nejsou `Ano`, nejde o malý dozvuk. Pokud byla potřeba stará historie, vraťte se k opravě pracovního místa. Pokud vzniklo jen zaváhání, pokračujte čekací poznámkou.
+
+### Napište poznámku jako podmínku, ne jako úkol
+
+Špatná čekací poznámka vypadá jako nenápadný úkol:
+
+```text
+Zkrátit popisek u formulářové šablony.
+```
+
+Takový zápis už tlačí na změnu, i když signál zatím není potvrzený. Lepší poznámka popisuje podmínku návratu:
+
+```text
+Pokud se při dalším běžném použití znovu objeví zaváhání nad délkou popisku u formulářové šablony, zkrátit první větu bez změny samotného pravidla.
+```
+
+Rozdíl je praktický. První zápis vyrábí práci. Druhý zápis chrání pozornost a říká, kdy práce začne dávat smysl. Tým tak nemusí řešit každé malé nepohodlí hned, ale zároveň neztratí stopu, pokud se začne opakovat.
+
+Dobrá čekací poznámka má pět částí:
+
+```text
+Pozorovaný dozvuk:
+Podmínka návratu:
+Nejmenší možný zásah:
+Expirace:
+Co teď neměníme:
+```
+
+Vyplněný příklad:
+
+```text
+Pozorovaný dozvuk:
+Editor se na chvíli zastavil u popisku aktuální formulářové šablony, ale šablonu vybral správně.
+
+Podmínka návratu:
+Pokud se stejné zaváhání objeví při dalším použití šablony nebo u nového editora.
+
+Nejmenší možný zásah:
+Zkrátit první větu popisku. Neměnit názvy šablon ani strukturu indexu.
+
+Expirace:
+Zrušit poznámku po dvou běžných použitích bez zaváhání nebo po 30 dnech bez signálu.
+
+Co teď neměníme:
+Nepřepisujeme celý index formulářů, neotevíráme starou kartu opravy a nepřidáváme měření kliknutí.
+```
+
+### Umístěte poznámku tam, kde se vrátí sama
+
+Čekací poznámka nemá bydlet v náhodném chatu ani v osobním seznamu autora opravy. Má být blízko pracovnímu místu, kterého se týká, ale nemá ho znečistit. Ideální je krátký provozní changelog, servisní fronta, komentář u interního issue nebo údržbová sekce v kanonickém indexu.
+
+Pravidlo umístění:
+
+```text
+Poznámka má být viditelná při příštím přirozeném použití, ne při každé běžné práci.
+```
+
+Dobře:
+
+```text
+Údržbová poznámka u formulářového indexu: sledovat jedno opakované zaváhání nad délkou popisku. Expiruje po dvou hladkých použitích.
+```
+
+Špatně:
+
+```text
+Připnout varování nahoru do indexu, poslat zprávu celému týmu a založit týdenní kontrolu všech popisků.
+```
+
+U malého dozvuku je přehnaná viditelnost sama o sobě novým problémem. Člověk, který jen potřebuje použít aktuální pracovní místo, nemá pořád číst, jak se kdysi řešil drobný okraj. Poznámka má čekat, ne skákat pod nohy.
+
+### Dejte poznámce expiraci
+
+Čekací poznámka bez expirace se snadno promění v trvalý prach v systému. Nikdo ji nechce řešit, ale nikdo ji nechce smazat, protože "co kdyby". Proto musí mít konec.
+
+Použitelné expirace:
+
+- po dvou běžných použitích bez stejného zaváhání;
+- po jednom měsíci bez návratového signálu;
+- po další aktualizaci daného pracovního místa;
+- po sloučení podobné poznámky do větší potvrzené úpravy;
+- po rozhodnutí, že drobné tření je přijatelné a nemá cenu ho řešit.
+
+Příklad expirační věty:
+
+```text
+Pokud se dozvuk nevrátí do 30 dnů nebo během dvou dalších použití indexu, poznámku zavřít stavem `Vypršelo bez zásahu`.
+```
+
+Expirace není zametení pod koberec. Je to rozhodnutí, že nepotvrzený signál nemá držet pozornost donekonečna. Codyho komentář: spousta týmových systémů nestárne kvůli velkým chybám, ale kvůli tisíci malých poznámek, které nikdo neměl odvahu pohřbít. Digitální kompost taky potřebuje pravidla.
+
+### Privacy-first čekací poznámka
+
+U malého dozvuku zapisujte pracovní jev, ne člověka. Není potřeba ukládat jméno editora, nahrávku průchodu, screenshot rozpracované zákaznické stránky ani čas, jak dlouho váhal. Pro rozhodnutí stačí obecný popis signálu.
+
+Privacy-first zápis:
+
+```text
+Při běžném použití se objevilo krátké zaváhání nad délkou popisku. Úkol byl dokončen bez návratu ke staré historii. Bez screenshotů a bez osobních údajů.
+```
+
+Zbytečně invazivní zápis:
+
+```text
+Uložíme nahrávku obrazovky, jméno editora, přesný čas zaváhání a kopii klientského obsahu, abychom mohli porovnat další použití.
+```
+
+Pokud by ověření dozvuku vyžadovalo novou sledovací vrstvu, je dozvuk pravděpodobně příliš malý na to, aby si ji zasloužil. Počkejte na přirozený návratový signál. Privacy-first provoz není jen o výběru evropských nástrojů; je to i schopnost neukládat věci, které k rozhodnutí nepotřebujete.
+
+### Karta čekací poznámky po lehkém dozvuku
+
+```text
+Čisté pracovní místo:
+První běžný návrat:
+Výsledný stav návratu:
+Pozorovaný dozvuk:
+Proč nejde o potvrzený problém:
+Podmínka návratu:
+Nejmenší možný zásah při potvrzení:
+Kde poznámka bydlí:
+Co teď vědomě neměníme:
+Co zůstává mimo tuto smyčku:
+Expirace:
+Stav po expiraci bez signálu:
+Privacy-first omezení:
+Pomocné stopy k úklidu:
+Vlastník poznámky:
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Čisté pracovní místo:
+Index formulářových šablon pro landing pages.
+
+První běžný návrat:
+Příprava nové landing page po uzavřené malé opravě názvu šablony.
+
+Výsledný stav návratu:
+Malý dozvuk.
+
+Pozorovaný dozvuk:
+Editor šablonu vybral správně, ale krátce zaváhal nad dlouhou první větou popisku.
+
+Proč nejde o potvrzený problém:
+Úkol byl dokončen samostatně, stará karta opravy nebyla otevřena a nevznikla špatná volba.
+
+Podmínka návratu:
+Stejné zaváhání se objeví při dalším použití indexu nebo u nového editora.
+
+Nejmenší možný zásah při potvrzení:
+Zkrátit první větu popisku bez změny pravidla a bez přejmenování šablon.
+
+Kde poznámka bydlí:
+Údržbová sekce u formulářového indexu.
+
+Co teď vědomě neměníme:
+Neměníme strukturu indexu, názvy ostatních šablon ani onboardingový materiál.
+
+Co zůstává mimo tuto smyčku:
+Obecná debata o formulářové strategii a nové požadavky na kvalifikaci leadů.
+
+Expirace:
+Po dvou běžných použitích bez zaváhání nebo po 30 dnech bez signálu.
+
+Stav po expiraci bez signálu:
+Vypršelo bez zásahu.
+
+Privacy-first omezení:
+Bez jména editora, bez screenshotů, bez nahrávky a bez kopie rozpracované stránky.
+
+Pomocné stopy k úklidu:
+Žádné nové pomocné stopy nevznikly.
+
+Vlastník poznámky:
+Marketing owner.
+
+Návratový signál:
+Opakované zaváhání nad stejnou větou při reálném použití indexu.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: potvrďte, že první běžný návrat byl jinak úspěšný.
+2. Minuta 2: pojmenujte jeden konkrétní dozvuk bez dramatizace.
+3. Minuta 3: napište podmínku návratu, ne okamžitý úkol.
+4. Minuta 4: určete nejmenší možný zásah, pokud se signál potvrdí.
+5. Minuta 5: přidejte expiraci a privacy-first omezení stop.
+6. Minuta 6: uložte poznámku k nejbližšímu pracovnímu místu.
+
+Výstup workshopu:
+
+```text
+Lehký dozvuk je uložený jako čekací poznámka s podmínkou návratu, expirací a jasnou hranicí, co se teď nemění.
+```
+
+### Checklist kapitoly
+
+- Šlo opravdu jen o malý dozvuk po jinak úspěšném použití?
+- Byl úkol dokončen bez návratu ke staré historii?
+- Nevyrábíme z dozvuku okamžitý úkol jen proto, že ho umíme pojmenovat?
+- Je poznámka napsaná jako podmínka návratu?
+- Je popsaný nejmenší možný zásah při potvrzení signálu?
+- Bydlí poznámka blízko pracovního místa, ale nepřekáží běžnému použití?
+- Má poznámka expiraci?
+- Víme, jaký stav zapíšeme, když se signál nevrátí?
+- Nezapisujeme chování konkrétního člověka, když stačí popsat pracovní jev?
+- Nevznikl kvůli dozvuku screenshot, nahrávka, export ani další tracker?
+- Je jasné, co teď vědomě neměníme?
+- Zůstává hlavní pracovní místo čisté a aktuální?
+
+Čekací poznámka má jednu skromnou práci: podržet slabý signál bez toho, aby z něj udělala projekt. Když se dozvuk vrátí, máte připravený malý zásah. Když se nevrátí, poznámka vyprší a systém zůstane lehký. To je dobrá údržba: pozorná, ale ne nervózní.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TD o převod lehkého dozvuku po prvním běžném návratu k čistému pracovnímu místu do čekací poznámky: rozpoznání dozvuku, podmíněná poznámka, umístění blízko práce, expirace, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TC o první běžný návrat k čistému pracovnímu místu po uzavřené malé opravě: návrat přes skutečný pracovní úkol, signály samostatnosti, návratu historie a datové stopy, čtyři výsledné stavy, krátká kanonická věta, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TB o uzavření potvrzené malé opravy do čistého pracovního místa: přepis aktuální pravdy, zavření karty opravy, úklid pomocných stop, předání bez schůzky navíc, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TA o ověření malé opravy po údržbové poznámce při dalším běžném použití: návrat k opravné větě, přirozené ověření, čtyři výsledné stavy, privacy-first minimum, karta, mini workshop a checklist.
