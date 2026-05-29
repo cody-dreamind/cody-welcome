@@ -141746,8 +141746,216 @@ Potvrzená údržbová poznámka už není otevřený signál. Je převedená do
 
 Malá oprava po potvrzené údržbové poznámce má vrátit pracovní místo do klidu. Nevyhrává tím, že vyřeší všechno související. Vyhrává tím, že příští člověk projde stejným místem bez stejného zaváhání a bez nové hromady pomocných stop.
 
+## Příloha TA: Ověření malé opravy po údržbové poznámce při dalším běžném použití
+
+Příloha SZ skončila provedenou malou opravou. Původní údržbová poznámka je zavřená, aktuální pracovní místo bylo upravené a větší nápady zůstaly mimo rozsah. Tato příloha řeší další krok: jak poznat, jestli oprava opravdu stačila, aniž by se z ní stala nová kontrolní rutina.
+
+Ověření malé opravy má být stejně malé jako oprava sama. Nevyhlašujte testovací týden, nezakládejte dotazník a nepřidávejte analytiku jen proto, že se změnil jeden popisek, odstavec nebo odkaz. Stačí počkat na další přirozené použití stejného pracovního místa a sledovat, jestli se vrátí původní zaváhání.
+
+Úvodní pracovní věta:
+
+```text
+Malou opravu ověřujeme při dalším běžném použití stejného pracovního místa. Hledáme původní zaváhání, ne nové možnosti vylepšení.
+```
+
+Tahle věta drží hranici. Ověření není druhé kolo editace. Je to kontrola, jestli zásah odstranil konkrétní tření, kvůli kterému vznikl. Pokud se při průchodu objeví nové téma, zapište ho stranou. Nelepte ho na starou opravu jen proto, že leží ve stejné složce nebo na stejné stránce.
+
+### Vraťte se k opravné větě
+
+Než pracovní místo znovu použijete, přečtěte si jednu větu z karty opravy:
+
+```text
+Nejmenší oprava:
+Přejmenovat jeden odkaz tak, aby bylo jasné, že vede na aktuální šablonu.
+```
+
+To je měřítko ověření. Neověřujete, jestli je celý index dokonalý. Neověřujete, jestli by šablony neměly mít nový systém názvů. Ověřujete, jestli člověk příště najde správný odkaz bez stejného váhání nad archivem.
+
+Krátký předstartovní filtr:
+
+```text
+Původní zaváhání:
+Provedená malá oprava:
+Stejná pracovní situace:
+Co teď nehodnotíme:
+```
+
+Vyplněný příklad:
+
+```text
+Původní zaváhání:
+Editor nevěděl, jestli odkaz "Formulářová šablona" vede na aktuální nebo archivní verzi.
+
+Provedená malá oprava:
+Odkaz byl přejmenován na "Aktuální formulářová šablona pro landing page".
+
+Stejná pracovní situace:
+Editor připravuje novou landing page.
+
+Co teď nehodnotíme:
+Celý systém názvů šablon, archivní strukturu ani nový onboarding editorů.
+```
+
+Bez tohoto filtru se ověření rychle rozteče. Jeden člověk začne hodnotit navigaci, druhý archiv, třetí vizuální styl a čtvrtý si vzpomene na starý backlog. Všechno může být užitečné, ale nepatří do ověření malé opravy.
+
+### Ověřujte při práci, ne vedle práce
+
+Nejlepší ověření proběhne ve chvíli, kdy někdo pracovní místo opravdu potřebuje. Pokud musíte vytvářet umělý scénář, počkejte. Malá oprava, která se nedostane do běžné práce, pravděpodobně nebyla urgentní.
+
+Při přirozeném použití sledujte tři věci:
+
+- člověk našel správné místo bez stejného zaváhání;
+- opravený text, odkaz nebo krok vedl ke správné akci;
+- kvůli ověření nevznikla nová pomocná evidence.
+
+Stačí krátký záznam:
+
+```text
+2026-05-29: Při přípravě nové landing page editor použil přejmenovaný odkaz bez zaváhání nad archivem. Oprava potvrzena. Bez dalších podkladů.
+```
+
+Pokud se oprava týká interní šablony, stačí pozorování vlastníka práce nebo poznámka od člověka, který ji použil. Pokud se týká zákaznického toku, držte se agregovaného nebo anonymizovaného signálu: méně doptávání, jasnější odpověď, hladší ruční průchod. Není potřeba ukládat osobní příběh každého použití.
+
+### Rozlište čtyři výsledky ověření
+
+Po dalším běžném použití zvolte jeden stav:
+
+- `Potvrzeno`: původní zaváhání se nevrátilo a oprava může zůstat.
+- `Doladit`: oprava pomohla, ale jedna drobná část pořád drhne.
+- `Vrátit`: oprava nepomohla nebo vytvořila horší nejasnost.
+- `Nové téma`: původní problém je vyřešený, ale objevila se jiná práce.
+
+Stav `Potvrzeno` zavírá smyčku. Nepřidávejte další kontrolu "pro jistotu". Stačí zapsat, že oprava obstála při běžném použití, a nechat pracovní místo žít.
+
+Stav `Doladit` smí vést jen k jedné menší úpravě stejného místa. Například ještě zkrátit popisek, doplnit jedno slovo nebo přesunout odkaz o řádek výš. Pokud doladění vyžaduje měnit více míst, už to není doladění malé opravy.
+
+Stav `Vrátit` není ostuda. Znamená, že hypotéza byla moc rychlá nebo špatně umístěná. Vraťte pracovní místo do předchozí srozumitelné podoby a rozhodněte, jestli má smysl otevřít samostatnou kartu.
+
+Stav `Nové téma` je nejzrádnější. Láká přepsat starou opravu na nový úkol, aby práce nevypadala nedokončeně. Nedělejte to. Starou opravu zavřete podle výsledku a nové téma zapište odděleně, jen pokud má vlastní důvod.
+
+### Privacy-first ověření bez nového dohledu
+
+Ověření malé opravy nesmí zavést dohled, který by tým později zapomněl vypnout. U interních pracovních míst se vyhněte osobním žebříčkům, nahrávkám obrazovky, detailním časovým logům a ukládání pracovních ukázek s citlivým obsahem. U zákaznických toků nepřidávejte nové trackery kvůli ověření textové nebo navigační drobnosti.
+
+Privacy-first pravidlo:
+
+```text
+Ověření ukládá jen výsledek opravy, ne chování konkrétního člověka.
+```
+
+Dobře:
+
+```text
+Oprava potvrzena při dalším použití. Původní zaváhání se nevrátilo. Bez nových osobních údajů a bez screenshotů.
+```
+
+Špatně:
+
+```text
+Uložíme nahrávky tří průchodů, čas kliknutí, jména editorů a screenshoty jejich rozpracovaných materiálů.
+```
+
+Pokud potřebujete konkrétní ukázku kvůli předání kontextu, anonymizujte ji, zkraťte na nezbytné minimum a nastavte retenci. Pomocný důkaz má zmizet dřív než hlavní pracovní místo. Jinak se z ověření stane nenápadný sklad provozních drobků, které za měsíc nikdo nepotřebuje a za rok nikdo nechce vysvětlovat.
+
+### Karta ověření malé opravy
+
+```text
+Původní pracovní místo:
+Původní zaváhání:
+Provedená malá oprava:
+Datum opravy:
+Další běžné použití:
+Kdo ověřoval kontext:
+Výsledek průchodu:
+Stav ověření:
+Co se nemění:
+Nové téma mimo tuto smyčku:
+Privacy-first dopad:
+Retence pomocných stop:
+Další krok:
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Původní pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Původní zaváhání:
+Editor nevěděl, jestli odkaz vede na aktuální nebo archivní šablonu.
+
+Provedená malá oprava:
+Odkaz přejmenován na "Aktuální formulářová šablona pro landing page".
+
+Datum opravy:
+2026-05-29.
+
+Další běžné použití:
+Příprava nové landing page.
+
+Kdo ověřoval kontext:
+Marketing owner.
+
+Výsledek průchodu:
+Editor otevřel správnou šablonu bez zaváhání nad archivem.
+
+Stav ověření:
+Potvrzeno.
+
+Co se nemění:
+Struktura indexu, názvy ostatních šablon a archivní dokumenty.
+
+Nové téma mimo tuto smyčku:
+Pozdější sjednocení názvů šablon, zatím bez priority.
+
+Privacy-first dopad:
+Bez nových údajů, screenshotů, nahrávek a osobního hodnocení lidí.
+
+Retence pomocných stop:
+Ponechat jen tuto uzavírací větu v changelogu, pomocné poznámky smazat.
+
+Další krok:
+Žádný. Návrat jen při novém signálu.
+
+Datum uzavření:
+2026-05-29.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte původní zaváhání a provedenou opravu.
+2. Minuta 2: potvrďte, že další použití je opravdu stejná pracovní situace.
+3. Minuta 3: projděte pracovní místo a sledujte původní zaváhání.
+4. Minuta 4: zvolte stav `Potvrzeno`, `Doladit`, `Vrátit` nebo `Nové téma`.
+5. Minuta 5: zapište privacy-first dopad a smažte pomocné stopy, které už nejsou potřeba.
+
+Výstup workshopu:
+
+```text
+Malá oprava byla ověřena při běžném použití. Smyčka má jeden stav, případné nové téma je oddělené a po ověření nezůstává zbytečná datová stopa.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme stejnou malou opravu, ne širší systém?
+- Vrátili jsme se k původnímu zaváhání jednou větou?
+- Proběhlo ověření při běžném použití, ne v umělém kontrolním režimu?
+- Je jasné, jestli stav je `Potvrzeno`, `Doladit`, `Vrátit` nebo `Nové téma`?
+- Pokud vzniklo doladění, zůstává v nejbližším pracovním místě?
+- Pokud vzniklo nové téma, je oddělené od této smyčky?
+- Nepřidali jsme tracker, nahrávku, osobní hodnocení ani zbytečné screenshoty?
+- Je zapsané, co se po ověření nemění?
+- Mají pomocné stopy jasnou retenci nebo jsou smazané?
+- Ví vlastník kontextu, jestli se má smyčka zavřít, doladit, vrátit nebo otevřít novou kartu?
+- Je další krok opravdu nejmenší možný?
+- Pokud je stav `Potvrzeno`, umíme práci nechat v klidu?
+
+Ověření malé opravy má ukázat, jestli se pracovní místo vrátilo do normálního použití. Když ano, nejlepší další krok je často žádný další krok. Ano, nudné. Ale nudný klid je v provozu často přesně ten luxus, který si kvalitní údržba má koupit.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TA o ověření malé opravy po údržbové poznámce při dalším běžném použití: návrat k opravné větě, přirozené ověření, čtyři výsledné stavy, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SZ o provedení malé opravy po potvrzené údržbové poznámce: oddělení potvrzeného signálu od nových nápadů, zásah v aktuálním pracovním místě, uzavření původní poznámky, privacy-first provedení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SY o ověření údržbové poznámky po návratovém signálu nebo expiraci: návrat k původní podmínce, čtyři výsledky ověření, převod do malé opravy, expirace, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna krátká úvodní poznámka, aby se stop podmínka na konci čtení zpětně neupravovala podle hotového výstupu.
