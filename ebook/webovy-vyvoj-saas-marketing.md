@@ -140951,8 +140951,275 @@ První běžný návrat k čistému pracovnímu stavu má jeden stav, krátký d
 
 První běžný návrat má být skoro nudný. Člověk otevře aktuální místo, udělá práci a nic starého se neozve. Právě tak vypadá dobrý výsledek malé lokální opravy: žádné drama, žádný nový systém, jen práce, která už nenaráží do stejného rohu.
 
+## Příloha SX: Převod lehkého dozvuku po prvním běžném návratu do údržbové poznámky
+
+Příloha SW rozlišila čtyři výsledky prvního běžného návratu k čistému pracovnímu stavu. Stav `Klid` se nechává být. Stav `Návrat staré stopy` potřebuje konkrétní úklid starého místa. Stav `Nový problém` patří do samostatné smyčky. Zbývá stav `Lehký dozvuk`: aktuální pracovní místo funguje, ale v běžné práci se objevila malá nejasnost, kterou ještě není rozumné hned opravovat.
+
+Lehký dozvuk není chyba systému. Je to slabý signál, že čistý stav možná potřebuje jedno budoucí doladění. Klíčové slovo je `možná`. Pokud tým každý dozvuk okamžitě promění v úkol, čistý pracovní stav se znovu zaplní servisními zásahy. Pokud ho naopak úplně ignoruje, malá nejasnost se může tiše opakovat. Údržbová poznámka je prostředek mezi tím: zachytí signál, ale nechá práci dál běžet.
+
+Začněte větou:
+
+```text
+První běžný návrat potvrdil, že aktuální pracovní místo funguje. Zachycujeme jen lehký dozvuk, který znovu otevřeme pouze tehdy, když se opakuje při přirozené práci.
+```
+
+Tahle věta chrání rozsah. Neříká "musíme opravit dokumentaci". Říká "máme slabý signál a podmínku návratu". To je rozdíl mezi údržbou a neklidným přepisováním všeho, co se jednou zatvářilo trochu nekomfortně.
+
+### Vymezte dozvuk bez dramatizace
+
+Dozvuk popište jednou větou a bez osobních detailů. Neřešte, kdo zaváhal, kdo se zeptal nebo kdo si pamatoval starou verzi. Řešte pracovní místo a typ nejasnosti.
+
+Dobré vymezení:
+
+```text
+Dozvuk:
+Název odkazu v indexu je správný, ale pořád zní podobně jako stará archivní šablona.
+```
+
+Slabé vymezení:
+
+```text
+Lidé tomu asi nerozumí, měli bychom předělat index šablon.
+```
+
+První věta drží konkrétní místo i malý rozsah. Druhá věta už otevírá neurčitou práci. U lehkého dozvuku je neurčitost největší riziko: tým má pocit, že "něco není ono", a za chvíli řeší názvosloví celé knihovny místo jednoho opatrného signálu.
+
+Pomáhá rozlišit tři typy dozvuku:
+
+- `Jazykový dozvuk`: slovo, nadpis nebo popisek je platný, ale stále připomíná starou trasu.
+- `Polohový dozvuk`: správné místo existuje, ale leží o krok dál, než by člověk čekal.
+- `Kontextový dozvuk`: aktuální místo stačí, ale chybí mu jedna krátká opora pro běžné rozhodnutí.
+
+Pokud dozvuk nejde zařadit do jedné z těchto kategorií, pravděpodobně nejde o lehký dozvuk. Buď je to nový problém, nebo návrat staré stopy. To je jiné rozhodnutí.
+
+### Napište poznámku jako podmínku
+
+Údržbová poznámka nemá být úkol. Má být podmíněný záznam, který říká, kdy se k signálu vrátit.
+
+Šablona:
+
+```text
+Lehký dozvuk:
+Pracovní místo:
+Typ dozvuku:
+Proč teď neopravujeme:
+Návratový signál:
+Nejmenší možná oprava, pokud se signál potvrdí:
+Co teď neměníme:
+Privacy-first omezení:
+Datum zápisu:
+Vlastník kontextu:
+```
+
+Příklad:
+
+```text
+Lehký dozvuk:
+Popisek odkazu "Formulářová šablona" může připomínat starou archivní verzi.
+
+Pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Typ dozvuku:
+Jazykový dozvuk.
+
+Proč teď neopravujeme:
+Editor práci dokončil bez návratu ke starému úkolu a bez doptávání. Signál je zatím slabý.
+
+Návratový signál:
+Stejný popisek znovu vytvoří zaváhání při jedné další běžné landing page.
+
+Nejmenší možná oprava, pokud se signál potvrdí:
+Přejmenovat odkaz na "Aktuální formulářová šablona pro landing page".
+
+Co teď neměníme:
+Neměníme celý index ani názvy ostatních šablon.
+
+Privacy-first omezení:
+Bez jmenných poznámek, screenshotů a kopie klientského obsahu.
+
+Datum zápisu:
+2026-05-29.
+
+Vlastník kontextu:
+Marketing owner.
+```
+
+Poznámka má být krátká právě proto, aby se snadno smazala, pokud se signál nevrátí. Když k ní připojíte dlouhý popis historie, screenshoty a debatu o variantách, poznámka se začne tvářit jako aktivní projekt. A aktivní projekt bude chtít pozornost, i když ji možná vůbec nepotřebuje.
+
+### Umístěte poznámku blízko práce
+
+Údržbová poznámka patří k pracovnímu místu, kterého se týká. Ne do samostatného seznamu "věcí k promyšlení", pokud takový seznam nikdo při běžné práci neotevírá. Cílem je, aby se poznámka objevila přesně tehdy, kdy může být užitečná, a jinak nerušila.
+
+Dobrá místa:
+
+- krátká poznámka u indexu šablon;
+- komentář v rozhodovacím logu dané stránky;
+- položka v měsíční údržbě stejného pracovního místa;
+- malá poznámka v kanonickém checklistu, pokud se používá při daném kroku.
+
+Špatná místa:
+
+- nový samostatný dokument pro jeden slabý signál;
+- backlog bez návratové podmínky;
+- chatová zpráva jako jediný zdroj pravdy;
+- osobní poznámka člověka, který náhodou dozvuk zahlédl.
+
+Umístění má jednu praktickou zkoušku: kdyby se stejný dozvuk objevil za tři týdny, našel by člověk poznámku při běžné práci? Pokud ne, poznámka není uložená blízko práce. Je jen odložená do papírového lesíka, kde se drobné věci tváří důležitě a potom se ztratí.
+
+### Nastavte expiraci
+
+Každá údržbová poznámka má mít konec. Buď se signál vrátí a poznámka se převede do malé opravy, nebo se nevrátí a poznámka se smaže či zkrátí do changelogu.
+
+Praktické expirační pravidlo:
+
+```text
+Pokud se návratový signál neobjeví při dalších dvou přirozených použitích nebo do nejbližšího měsíčního úklidu pracovního místa, poznámku smažeme.
+```
+
+Tohle pravidlo brání hromadění opatrných poznámek. Slabé signály mají hodnotu jen chvíli. Když se nevrátí, pravděpodobně šlo o jednorázovou hranu, rozdíl v kontextu nebo běžné tření, které nestojí za zásah.
+
+Pokud se signál vrátí, nepřidávejte další poznámku. Převod má být přímý:
+
+```text
+Servisní poznámka se potvrdila. Děláme jednu nejmenší opravu v pracovním místě, kde dozvuk vznikl.
+```
+
+Tím se udrží kontinuita. Poznámka nebyla od toho, aby sbírala důkazy donekonečna. Byla od toho, aby chránila tým před předčasnou opravou i před přehlédnutým opakováním.
+
+### Privacy-first údržbová poznámka
+
+Lehký dozvuk je slabý signál, takže nesmí vytvářet silnou datovou stopu. Kvůli jedné nejasnosti neukládejte nahrávky, screenshoty, kompletní zákaznické formuláře ani jmenné průchody. Většinou stačí obecný pracovní zápis.
+
+Privacy-first věta:
+
+```text
+Poznámka popisuje stav pracovního místa, ne chování konkrétního člověka.
+```
+
+Dobrá poznámka:
+
+```text
+Při běžné přípravě landing page se popisek odkazu jednou jevil jako podobný staré šabloně. Bez uložení osobních údajů a bez kopie obsahu stránky.
+```
+
+Špatná poznámka:
+
+```text
+Uložíme přesný průchod editora a screenshoty všech kroků, kdyby se to hodilo.
+```
+
+Codyho komentář: slabý signál má mít slabou stopu. Když kvůli malému dozvuku vznikne tlustá složka důkazů, systém si právě vyrobil větší problém než ten, který chtěl opatrně sledovat. To je jako vzít si bagr na přesazení bylinky. Technicky působivé, prakticky trochu podezřelé.
+
+### Karta údržbové poznámky po lehkém dozvuku
+
+```text
+Čistý pracovní stav:
+První běžný návrat:
+Výsledný stav návratu:
+Lehký dozvuk:
+Typ dozvuku:
+Pracovní místo:
+Proč aktuální stav pořád funguje:
+Proč teď neopravujeme:
+Návratový signál:
+Nejmenší oprava, pokud se signál potvrdí:
+Expirace poznámky:
+Co teď vědomě neměníme:
+Nové téma mimo tuto smyčku:
+Privacy-first omezení:
+Retence poznámky:
+Vlastník kontextu:
+```
+
+Vyplněný příklad:
+
+```text
+Čistý pracovní stav:
+Index formulářových šablon je zdrojem pravdy pro nové landing pages.
+
+První běžný návrat:
+Editor připravil novou landing page bez návratu ke starému úkolu.
+
+Výsledný stav návratu:
+Lehký dozvuk.
+
+Lehký dozvuk:
+Popisek odkazu je správný, ale pořád trochu připomíná archivní šablonu.
+
+Typ dozvuku:
+Jazykový dozvuk.
+
+Pracovní místo:
+Index formulářových šablon.
+
+Proč aktuální stav pořád funguje:
+Práce byla dokončená a stará stopa se nevrátila.
+
+Proč teď neopravujeme:
+Signál se objevil jednou a neblokoval rozhodnutí.
+
+Návratový signál:
+Stejný popisek znovu vyvolá zaváhání při další běžné landing page.
+
+Nejmenší oprava, pokud se signál potvrdí:
+Přejmenovat jeden odkaz.
+
+Expirace poznámky:
+Po dvou dalších běžných použitích bez signálu nebo při nejbližším měsíčním úklidu.
+
+Co teď vědomě neměníme:
+Názvy ostatních šablon a strukturu indexu.
+
+Nové téma mimo tuto smyčku:
+Možné sjednocení názvů šablon napříč webem.
+
+Privacy-first omezení:
+Bez jmenného záznamu, screenshotů, exportů a zákaznického obsahu.
+
+Retence poznámky:
+Smazat při expiraci nebo převést do jedné opravy při potvrzení signálu.
+
+Vlastník kontextu:
+Marketing owner.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: potvrďte, že první běžný návrat nebyl návrat staré stopy ani nový problém.
+2. Minuta 2: popište lehký dozvuk jednou pracovní větou.
+3. Minuta 3: určete typ dozvuku: jazykový, polohový nebo kontextový.
+4. Minuta 4: napište návratový signál a nejmenší možnou opravu.
+5. Minuta 5: nastavte expiraci poznámky.
+6. Minuta 6: zkontrolujte privacy-first omezení a umístěte poznámku blízko práce.
+
+Výstup workshopu:
+
+```text
+Lehký dozvuk je zachycený jako podmíněná údržbová poznámka. Neměníme pracovní místo hned, víme kdy se vrátit, kdy poznámku smazat a jak nepřidat zbytečnou datovou stopu.
+```
+
+### Checklist kapitoly
+
+- Jde opravdu o lehký dozvuk, ne o návrat staré stopy?
+- Aktuální pracovní místo pořád splnilo svůj hlavní účel?
+- Je dozvuk popsaný jednou konkrétní pracovní větou?
+- Má dozvuk typ: jazykový, polohový nebo kontextový?
+- Je poznámka napsaná jako podmínka, ne jako okamžitý úkol?
+- Je jasné, proč teď neopravujeme?
+- Má poznámka konkrétní návratový signál?
+- Je předem napsaná nejmenší oprava, pokud se signál potvrdí?
+- Víme, kde poznámka bydlí a proč právě tam?
+- Má poznámka expiraci?
+- Neobsahuje jména, screenshoty, exporty ani kopie zákaznického obsahu?
+- Je jasné, co teď vědomě neměníme?
+- Pokud se signál nevrátí, umíme poznámku bez lítosti smazat?
+
+Údržbová poznámka po lehkém dozvuku je malá brzda proti dvěma špatným reflexům: hned všechno opravovat, nebo všechno ignorovat. Dobře napsaná poznámka nechá systém dýchat. Když se signál vrátí, tým ví, co udělat. Když se nevrátí, tým má odvahu nechat čistý stav čistým.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha SX o převodu lehkého dozvuku po prvním běžném návratu do údržbové poznámky: vymezení dozvuku, podmíněná poznámka, umístění blízko práce, expirace, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SW o první běžný návrat k čistému pracovnímu stavu po uzavřené lokální opravě: běžný spouštěč, známky čistoty, rozlišení klidu, dozvuku, návratu staré stopy a nového problému, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SV o uzavření potvrzené lokální opravy do čistého pracovního stavu: rozlišení výsledku a historie, stavy začlenění, zkrácení pomocných podkladů, changelogová věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha SU o ověření malé lokální opravy při dalším běžném použití: návrat k opravné větě, přirozené ověření, signály nalezení, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first retence, karta, mini workshop a checklist.
