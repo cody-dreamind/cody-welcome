@@ -143866,8 +143866,227 @@ První běžný návrat ukázal, zda klidový stav drží, aniž by obnovil star
 
 První běžný návrat je test disciplíny. Když klid drží, nechte ho držet. Když se vrátí původní signál, otevřete jen nejmenší potřebnou úpravu. A když se objeví jiné téma, nepřilepujte ho na starou smyčku jen proto, že je zrovna po ruce.
 
+## Příloha TJ: Převod lehkého dozvuku po návratu ke klidovému stavu do hlídací poznámky
+
+Příloha TI popsala první běžný návrat ke klidovému stavu. Jeden z možných výsledků byl `Lehký dozvuk`: práce proběhla, původní návratový signál se nevrátil, ale člověk si všiml drobné nejistoty. Tato příloha řeší, co s takovým dozvukem dělat, aby se z něj nestal zbytečný úkol, ale ani se neztratil signál, který se může opakovat.
+
+Hlídací poznámka není oprava. Není to backlogová položka, úkol pro vývoj ani důvod otevřít starou historii. Je to malá podmíněná věta poblíž pracovního místa: pokud se stejný dozvuk zopakuje při běžné práci, víme, kam se vrátit a co ověřit. Pokud se nezopakuje, poznámka bez dramatu vyprší.
+
+Úvodní pracovní věta:
+
+```text
+Lehký dozvuk po návratu ke klidovému stavu nepřevádíme hned do úkolu; zapíšeme jen podmínku opakování, místo pozorování, expiraci a privacy-first hranici.
+```
+
+Tato věta chrání klidový stav před dvěma extrémy. První extrém je ignorovat všechno, protože "už jsme to přece zavřeli". Druhý extrém je otevřít opravu při každém zaváhání. Praktická práce potřebuje střed: zachytit slabý signál tak úsporně, aby neřídil tým dřív, než si zaslouží pozornost.
+
+### Rozlište dozvuk od návratového signálu
+
+Lehký dozvuk je drobné tření, které ještě nepotvrdilo problém. Člověk se na chvíli zastaví, zeptá se jednou doplňující otázkou, všimne si trochu nejasného názvu nebo udělá práci o krok pomaleji. Důležité je, že práci dokončí bez návratu ke staré pomocné historii a bez obnovy původních podkladů.
+
+Návratový signál je silnější. Opakuje původní problém nebo splňuje podmínku, kterou tým zapsal při uzavření úpravy. Typicky člověk znovu potřebuje starou poznámku, obchází aktuální pracovní místo, vytváří nový export, ptá se na stejnou věc jako dřív nebo nedokáže samostatně rozhodnout.
+
+Praktické rozlišení:
+
+- Dozvuk: "Váhal jsem nad názvem, ale stačilo přečíst aktuální popisek."
+- Návratový signál: "Musel jsem otevřít starou poznámku, jinak bych nevybral správnou variantu."
+- Dozvuk: "Jednou mi nebylo jasné, jestli formulář patří pro leady nebo support."
+- Návratový signál: "Dva lidé použili špatný formulář ze stejného důvodu jako před úpravou."
+- Dozvuk: "Při prvním použití jsem si všiml možné lepší formulace."
+- Návratový signál: "Aktuální formulace znovu blokuje rozhodnutí."
+
+Codyho komentář: nejčastější chyba je povýšit dobrý postřeh na urgentní úkol jen proto, že ho vyslovil někdo schopný. Schopní lidé vidí hodně možností. To ještě neznamená, že každá možnost má dostat vlastní frontu práce. Jo, produktový backlog není muzeum drobných nápadů s klimatizací.
+
+### Napište hlídací poznámku jako podmínku
+
+Hlídací poznámka má mít tvar `pokud se stane X při Y, uděláme Z`. Bez podmínky se z ní stane volný nápad, který bude časem vypadat důležitěji, než je. S podmínkou zůstane jasné, že tým zatím nic nemění.
+
+Slabá poznámka:
+
+```text
+Možná zlepšit názvy šablon.
+```
+
+Silnější hlídací poznámka:
+
+```text
+Pokud při dalších dvou přípravách landing page někdo znovu zaváhá mezi šablonami "krátká poptávka" a "rychlý kontakt", upravíme popisek v indexu šablon. Do té doby nic neměníme.
+```
+
+Dobrá hlídací poznámka obsahuje:
+
+- konkrétní dozvuk;
+- pracovní situaci, ve které se má opakovat;
+- hranici opakování;
+- nejmenší možnou reakci;
+- expiraci;
+- větu, že bez opakování se nic nemění.
+
+Příklad pro sales kartu:
+
+```text
+Pokud se při dalších třech přípravách nabídky znovu objeví nejistota, jestli větu o privacy-first provozu dávat do úvodu nebo do části o rizicích, doplníme do sales karty jedno pravidlo umístění. Pokud se nejistota nevrátí do 30 dní, poznámku zavřeme.
+```
+
+Tím se chrání rozsah. Tým ví, co sleduje, ale nezačne přepisovat celou sales kartu po jednom rozhovoru. A pokud se stejná věc opravdu vrátí, nemusí začínat od nuly.
+
+### Umístěte ji tam, kde se použije sama
+
+Hlídací poznámka nemá bydlet v odděleném dokumentu, kam se nikdo nepodívá při práci. Má být blízko pracovního místa, kterého se týká: v indexu šablon, u checklistu, v rozhodovacím logu, u sales karty, v issue k dané stránce nebo v poznámce k provoznímu pravidlu.
+
+Dobrá místa:
+
+- poznámka pod konkrétní položkou v indexu šablon;
+- krátký záznam v rozhodovacím logu stránky;
+- komentář u aktivního checklistu, pokud se tam tým při práci skutečně vrací;
+- položka v údržbové frontě s jasnou expirací;
+- changelogová věta u aktuálního pracovního místa.
+
+Špatná místa:
+
+- obecný "nápady někdy" dokument;
+- chatové vlákno bez odkazu z pracovního místa;
+- osobní poznámka jednoho člověka;
+- skrytá tabulka s mikroobservacemi;
+- nová samostatná agenda pro sledování drobných dozvuků.
+
+Pravidlo: člověk, který při další práci použije stejné místo, musí poznámku přirozeně vidět nebo o ní vědět z běžného toku. Pokud musí někdo hlídací poznámky ručně připomínat, nejsou uloženy dobře.
+
+### Dejte poznámce expiraci
+
+Hlídací poznámka bez expirace je tichý dluh. Nehoří, ale zůstává v systému a bere pozornost při každém úklidu. Proto musí mít konec: počet použití, datum, cyklus nebo konkrétní událost.
+
+Dobré expirace:
+
+- po dvou dalších běžných použitích bez opakování;
+- po 30 dnech bez stejného signálu;
+- při dalším měsíčním review daného pracovního místa;
+- po první nové landing page připravené podle stejné šablony;
+- po dalším obchodním rozhovoru, kde se použije stejná sales karta.
+
+Vyhodnocení expirace má být jednoduché:
+
+- `Potvrzeno`: dozvuk se zopakoval podle podmínky a jde do malé úpravy.
+- `Vypršelo`: dozvuk se nezopakoval a poznámka se zavírá.
+- `Nové téma`: objevilo se něco jiného a patří do samostatného signálu.
+- `Neověřeno`: pracovní situace nenastala; jednou prodloužit, nebo zavřít jako nízkou prioritu.
+
+Neprodlužujte poznámku automaticky. Pokud pracovní situace nenastala ani po rozumné době, je to také informace. Možná se místo používá méně, než jste čekali. Možná problém není důležitý. Možná jen nemá právo zabírat další pozornost.
+
+### Privacy-first hranice hlídací poznámky
+
+Lehký dozvuk není důvod zavádět nové sledování. Nepřidávejte kvůli němu nahrávání obrazovky, heatmapu, detailní logování lidí, exporty zákaznických dat ani sdílené screenshoty s osobními údaji. Pokud signál není dost silný bez takového sběru, pravděpodobně ještě není dost silný ani pro úkol.
+
+Privacy-first minimum:
+
+1. Zapište agregovanou větu, ne detailní průchod konkrétní osoby.
+2. Nepřikládejte screenshot, pokud není nezbytný pro pochopení pracovního místa.
+3. Pokud screenshot potřebujete, začerněte osobní a klientská data.
+4. Nezakládejte nový tracker kvůli ověření jednoho dozvuku.
+5. Při expiraci poznámky smažte nebo zkraťte pomocné podklady.
+
+Dobře:
+
+```text
+Při přípravě nabídky se jednou objevila nejistota nad umístěním privacy-first věty. Pokud se zopakuje ve dvou dalších nabídkách, upravíme sales kartu. Bez screenshotů a bez záznamu konkrétního zákazníka.
+```
+
+Špatně:
+
+```text
+Nahrajeme příštích deset průchodů přípravou nabídky, ať vidíme, kde lidé váhají.
+```
+
+Hlídací poznámka má být lehká právě proto, že signál je lehký. Čím slabší signál, tím přísnější má být brzda na sběr dat.
+
+### Karta hlídací poznámky po klidovém návratu
+
+```text
+Klidové pracovní místo:
+Lehký dozvuk:
+Proč to ještě není návratový signál:
+Podmínka opakování:
+Pracovní situace, kde se má ověřit:
+Nejmenší reakce při potvrzení:
+Expirace:
+Privacy-first hranice:
+Kam je poznámka uložená:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Klidové pracovní místo:
+Index formulářových šablon pro landing pages.
+
+Lehký dozvuk:
+Editor na chvíli váhal mezi šablonou "rychlý kontakt" a "krátká poptávka".
+
+Proč to ještě není návratový signál:
+Aktuální popisek stačil k výběru a editor se nevrátil ke staré poznámce.
+
+Podmínka opakování:
+Pokud se stejné váhání objeví při dalších dvou přípravách landing page.
+
+Pracovní situace, kde se má ověřit:
+Běžná příprava nové landing page, ne samostatná kontrolní schůzka.
+
+Nejmenší reakce při potvrzení:
+Upravit jednu větu popisku v indexu šablon.
+
+Expirace:
+Po dvou použitích bez opakování nebo za 30 dní.
+
+Privacy-first hranice:
+Bez screenshotů, bez záznamu jména editora, jen agregovaná věta v rozhodovacím logu.
+
+Kam je poznámka uložená:
+U položky indexu formulářových šablon.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-29.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek prvního návratu ke klidovému stavu.
+2. Minuta 2: jednou větou pojmenujte lehký dozvuk.
+3. Minuta 3: napište, proč to ještě není návratový signál.
+4. Minuta 4: určete podmínku opakování a nejmenší možnou reakci.
+5. Minuta 5: nastavte expiraci a místo uložení poznámky.
+6. Minuta 6: proveďte privacy-first kontrolu, jestli poznámka nevytváří nový sběr dat.
+
+Výstup workshopu:
+
+```text
+Lehký dozvuk je zachycený jako podmíněná hlídací poznámka: bez okamžité opravy, bez nové metriky a s jasným koncem.
+```
+
+### Checklist kapitoly
+
+- Je jasné, jaký lehký dozvuk se po návratu objevil?
+- Umíme říct, proč ještě nejde o návratový signál?
+- Je poznámka napsaná jako podmínka, ne jako volný nápad?
+- Obsahuje hranici opakování?
+- Je definovaná nejmenší reakce při potvrzení?
+- Je poznámka uložená u pracovního místa, kde se má sama připomenout?
+- Má expiraci podle použití, data, cyklu nebo události?
+- Víme, co znamená potvrzení, vypršení, nové téma a neověření?
+- Nezakládáme kvůli dozvuku nový úkol předčasně?
+- Nepřidáváme tracker, nahrávání, screenshoty ani exporty osobních dat?
+- Je jasné, kdo poznámku zavře nebo převede do malé úpravy?
+- Pokud se dozvuk nevrátí, umíme poznámku bez nostalgie smazat nebo zkrátit?
+
+Hlídací poznámka je dobrý nástroj jen tehdy, když zůstane malá. Má chránit paměť týmu, ne vytvářet další systém práce. Když se signál vrátí, pomůže rychle jednat. Když se nevrátí, má zmizet tak potichu, jak vznikla.
+
 ## Pracovní log
 
+- 2026-05-29: Doplněna Příloha TJ o převod lehkého dozvuku po návratu ke klidovému stavu do hlídací poznámky: rozlišení dozvuku od návratového signálu, podmíněná poznámka, umístění u pracovního místa, expirace, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TI o první běžný návrat ke klidovému stavu po uzavřené malé úpravě: návrat přes skutečný úkol, tři klidové signály, čtyři výsledné stavy, vědomé nic, privacy-first návrat bez obnovy podkladů, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TH o uzavření potvrzené malé úpravy do klidového stavu: aktuální pracovní věta, zavření pomocných poznámek, návratový signál místo dozoru, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TG o ověření malé úpravy při prvním běžném použití: návratový signál, reálný pracovní průchod, čtyři výsledné stavy, pravidlo jednoho doladění, privacy-first ověření, karta, mini workshop a checklist.
