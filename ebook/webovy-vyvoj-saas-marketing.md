@@ -148976,8 +148976,212 @@ Malá úprava po čekací poznámce má ověřený stav, návratový signál je 
 
 Ověření malé úpravy po čekací poznámce má udělat jednu věc: rozhodnout, jestli se čekání vyplatilo. Pokud ano, zavřete signál a nechte pravidlo normálně žít. Pokud ne, udělejte nejmenší další krok. V obou případech nevyrábějte kolem malé úpravy větší systém, než byl původní problém.
 
+## Příloha UF: Uzavření ověřené malé úpravy po čekací poznámce do běžného pracovního místa
+
+Příloha UE ověřila, jestli malá úprava po čekací poznámce opravdu pomohla. Teď je potřeba udělat poslední, často opomíjený krok: uzavřít ji do běžného pracovního místa tak, aby po ní nezůstal dočasný jazyk, pomocné poznámky ani zvláštní režim hlídání. Když se to neudělá, tým sice problém vyřeší, ale pracovní místo pořád vypadá jako staveniště s cedulkou "pozor, tady se něco řešilo".
+
+Tahle příloha je o uklidnění systému. Ověřená úprava se má stát normální součástí šablony, checklistu, karty nabídky, sales osnovy nebo provozního listu. Historie rozhodnutí má zůstat dohledatelná, ale nemá bránit běžné práci.
+
+Úvodní pracovní věta:
+
+```text
+Ověřenou malou úpravu převádíme do normálního znění pracovního místa, zavíráme dočasné signály a necháváme jen tolik historie, kolik pomůže při budoucí změně.
+```
+
+Věta drží tři hranice. První říká, že výsledek má být normální, ne experimentální. Druhá zavírá dočasné signály. Třetí chrání před opačným extrémem: nesmazat všechnu historii tak důkladně, že za tři měsíce nikdo nepochopí, proč pravidlo vzniklo.
+
+### Přepište výsledek do přítomného času
+
+Ověřená úprava nemá v hlavním pracovním místě znít jako poznámka z minulosti. Nepište:
+
+```text
+Po čekací poznámce jsme doplnili pole pro důkaz důvěry.
+```
+
+Do šablony patří současné pravidlo:
+
+```text
+Důkaz důvěry nad prvním formulářem:
+uveďte konkrétní referenci, číslo, certifikaci, citaci nebo jiný veřejně použitelný důkaz, který má návštěvník vidět před odesláním kontaktu.
+```
+
+Rozdíl je praktický. První věta nutí člověka přemýšlet o historii změny. Druhá mu pomáhá vyplnit práci. Historie patří do changelogu nebo rozhodovacího záznamu; pracovní místo má říkat, co platí teď.
+
+Při přepisu zkontrolujte tři věci:
+
+- je pravidlo formulované jako aktuální instrukce;
+- neobsahuje slova "zatím", "testujeme", "po ověření" nebo "nově";
+- člověk ho umí použít bez znalosti původní čekací poznámky.
+
+Pokud se bez historie nedá pravidlo pochopit, problém není v chybějícím kontextu, ale v nejasném pravidle. Přepište ho tak, aby stálo samo.
+
+### Zavřete dočasné artefakty
+
+Po ověření bývají kolem úpravy malé stopy: čekací poznámka, ověřovací karta, návratový signál, pracovní komentář, dočasný příklad, interní zpráva nebo pomocný export. Každá sama o sobě nevadí. Dohromady ale vytvářejí pocit, že úprava pořád není hotová.
+
+Projděte tyto stopy a u každé vyberte jeden stav:
+
+- zavřít: poznámka splnila účel a už není potřeba;
+- převést do changelogu: stačí krátká věta o tom, co se změnilo;
+- ponechat jako příklad: jen pokud opravdu pomáhá při běžném použití;
+- odstranit z hlavní trasy: historie je dohledatelná, ale nepřekáží při práci.
+
+Krátký changelog stačí:
+
+```text
+2026-05-30:
+Ověřená úprava šablony landing page ponechána v běžném provozu.
+Pole pro důkaz důvěry nad prvním formulářem bylo použito bez dalšího doptávání.
+Dočasný návratový signál zavřen.
+```
+
+Changelog nemá být román. Má dát budoucímu člověku odpověď na otázku: proč to tady je a kdy se rozhodlo, že to drží.
+
+### Nechte pracovní místo kratší než před smyčkou
+
+Dobrá uzavírka se pozná podle toho, že hlavní pracovní místo není těžší než před změnou. Ano, možná přibylo jedno pole nebo věta. Ale měly by zmizet dočasné komentáře, staré výjimky, pomocné poznámky a hlídací jazyk. Výsledkem má být čistší rozhodování, ne delší dokument.
+
+Praktická kontrola:
+
+1. Najděte místo, kde člověk úpravu použije.
+2. Přečtěte ho bez otevření ověřovací karty.
+3. Zeptejte se, jestli ví, co má udělat.
+4. Smažte nebo přesuňte vše, co slouží jen jako historie.
+5. Nechte jen pravidlo, příklad a případnou stop větu rozsahu.
+
+Stop věta rozsahu je užitečná, pokud chrání před opakováním původního rozšiřování:
+
+```text
+Toto pole slouží jen k výběru důkazu nad prvním formulářem; neřeší celou sekci referencí ani pravidla pro case studies.
+```
+
+Taková věta není historie. Je to provozní brzda. Pokud brání zbytečnému rozšíření práce, v hlavním místě zůstat může.
+
+### Nastavte budoucí návrat jen podle reálného signálu
+
+Po uzavření ověřené úpravy není potřeba nový pravidelný dohled. Pokud se problém vrátí, projeví se v práci: někdo se znovu doptá, pole se opakovaně vyplní špatně, zákaznický výstup bude slabý nebo se objeví kolize s jinou šablonou.
+
+Budoucí návratová podmínka může znít:
+
+```text
+Vrátit se k pravidlu jen tehdy, pokud se při dvou dalších landing pages znovu objeví nejasnost, jaký důkaz patří nad první formulář.
+```
+
+To je jiné než pravidelně kontrolovat všechno. Podmínka čeká na signál. Nevyžaduje tracker, meeting ani evidenci každého použití.
+
+Codyho komentář: hodně týmů si plete odpovědnost s permanentním dohledem. Odpovědnost znamená, že víme, kdy se k věci vrátit. Permanentní dohled znamená, že si vyrábíme další práci, i když se nic neděje. Jedno je dospělý provoz, druhé je procesní karaoke.
+
+### Privacy-first uzavření
+
+Uzavření ověřené úpravy je dobrý okamžik na malý datový úklid. Ne proto, že by každá poznámka byla nebezpečná, ale proto, že dočasné podklady mají zvláštní schopnost přežívat déle než důvod, kvůli kterému vznikly. Screenshoty, exporty, citace zákazníků, interní komentáře a kopie formulářů často zůstávají ve složkách jen proto, že je nikdo výslovně nezavřel.
+
+Privacy-first minimum:
+
+- ponechte v hlavním místě pravidlo, ne dočasné důkazy z ověření;
+- zákaznické citace nechte jen pokud jsou veřejně schválené nebo anonymizované;
+- smažte dočasné exporty, screenshoty a pracovní kopie, které už nejsou zdrojem pravdy;
+- pokud úprava přidala nové pole do formuláře, potvrďte účel, retenci a datovou mapu;
+- pokud úprava pouze zpřesnila šablonu, nepřidávejte žádné nové měření;
+- v changelogu pište pracovní situaci, ne osobní hodnocení lidí;
+- budoucí návratovou podmínku formulujte bez sledování jednotlivců.
+
+Privacy-first uzavření není administrativní dekorace. Je to způsob, jak zabránit tomu, aby se z každé malé úpravy stal další trvalý otisk dat. Čím menší je stopa po dokončené práci, tím snáz se systém udržuje i vysvětluje.
+
+### Karta uzavření ověřené malé úpravy
+
+```text
+Původní čekací poznámka:
+Ověřená malá úprava:
+Výsledek ověření:
+Pracovní místo, kam úprava patří:
+Aktuální znění pravidla:
+Co zavíráme:
+Co ponecháváme v changelogu:
+Co odstraňujeme z hlavní trasy:
+Budoucí návratová podmínka:
+Privacy-first úklid:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Původní čekací poznámka:
+Při dvou stránkách služby nebylo jasné, kam zapsat důkaz důvěry nad prvním formulářem.
+
+Ověřená malá úprava:
+Do šablony landing page bylo doplněno pole "Důkaz důvěry nad prvním formulářem".
+
+Výsledek ověření:
+Drží. Při další landing page bylo pole použito bez dalšího doptávání.
+
+Pracovní místo, kam úprava patří:
+Šablona landing page.
+
+Aktuální znění pravidla:
+"Důkaz důvěry nad prvním formulářem: konkrétní reference, číslo, certifikace, citace nebo jiný veřejně použitelný důkaz, který má návštěvník vidět před odesláním kontaktu."
+
+Co zavíráme:
+Čekací poznámku a návratový signál.
+
+Co ponecháváme v changelogu:
+Krátkou větu, že úprava byla ověřena při další landing page a ponechána v běžném provozu.
+
+Co odstraňujeme z hlavní trasy:
+Dočasnou poznámku "ověřit při příští stránce".
+
+Budoucí návratová podmínka:
+Vrátit se jen při opakované nejasnosti u dvou dalších landing pages.
+
+Privacy-first úklid:
+Použitá reference je veřejně schválená; nevznikl nový osobní údaj, tracker ani pomocný export.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek ověření malé úpravy.
+2. Minuta 2: napište aktuální znění pravidla v přítomném čase.
+3. Minuta 3: určete, co se zavírá, co jde do changelogu a co se odstraňuje z hlavní trasy.
+4. Minuta 4: ověřte, že pracovní místo jde použít bez znalosti historie.
+5. Minuta 5: napište budoucí návratovou podmínku jen pro reálný opakovaný signál.
+6. Minuta 6: proveďte privacy-first úklid dočasných podkladů.
+
+Výstup workshopu:
+
+```text
+Ověřená malá úprava je součástí běžného pracovního místa, dočasné signály jsou zavřené, historie je krátce dohledatelná a nevzniká nový režim sledování.
+```
+
+### Checklist kapitoly
+
+- Je úprava přepsaná do přítomného času jako normální pravidlo?
+- Zmizel z hlavního pracovního místa dočasný jazyk typu "ověřit", "testujeme" nebo "nově"?
+- Dá se pravidlo použít bez znalosti původní čekací poznámky?
+- Zavřeli jsme čekací poznámku a návratový signál?
+- Je v changelogu jen tolik historie, kolik pomůže při budoucí změně?
+- Odstranili jsme z hlavní trasy pomocné komentáře a dočasné podklady?
+- Nezvětšilo se pracovní místo víc, než je nutné?
+- Zůstala případná stop věta rozsahu tam, kde chrání před rozšiřováním?
+- Má budoucí návratová podmínka jasný reálný signál?
+- Nevznikl pravidelný dohled, tracker ani kontrolní meeting jen kvůli této úpravě?
+- Jsou zákaznické příklady anonymizované nebo veřejně schválené?
+- Byly smazány nebo archivovány dočasné exporty, screenshoty a pracovní kopie bez dalšího účelu?
+- Pokud úprava mění sběr dat, je aktualizovaná datová mapa a retence?
+- Má uzavření vlastníka?
+- Je pracovní místo po uzavření klidnější než před celou smyčkou?
+
+Uzavření ověřené malé úpravy má být tiché. Ne proto, že není důležité, ale proto, že dobrý provoz nepotřebuje fanfáry pokaždé, když se zmenší tření. Stačí, že příští člověk otevře šablonu, udělá práci bez doptávání a nenarazí na staré poznámky, které už měly dávno spát v changelogu.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha UF o uzavření ověřené malé úpravy po čekací poznámce do běžného pracovního místa: přepis do přítomného času, zavření dočasných artefaktů, budoucí návratová podmínka, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UE o ověření malé úpravy po potvrzené čekací poznámce: běžné použití, původní tření, čtyři výsledné stavy, zavření návratového signálu, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UD o provedení malé úpravy po potvrzené čekací poznámce: práce z potvrzeného výsledku, výběr nejbližšího pracovního místa, jeden typ zásahu, zavření původní poznámky, lehký návratový signál, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UC o ověření čekací poznámky po opakování nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, úzký převod potvrzeného signálu, aktivní expirace, privacy-first minimum, karta, mini workshop a checklist.
