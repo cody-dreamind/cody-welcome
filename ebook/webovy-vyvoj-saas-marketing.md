@@ -148103,8 +148103,231 @@ Stabilní pravidlo bylo použito při běžné práci. Je jasné, zda zůstává
 
 První návrat je úspěšný i tehdy, když skončí větou "nic neměnit". U stabilních pravidel je to často nejlepší výsledek. Dokumentace nemá dokazovat, že je neustále zaměstnaná. Má tiše držet práci pohromadě, dokud se neobjeví skutečný důvod ji znovu otevřít.
 
+## Příloha UB: Převod slabého tření po návratu ke stabilnímu pravidlu do čekací poznámky
+
+Příloha UA řeší první běžný návrat ke stabilnímu pravidlu po uzavřené malé úpravě. Ideální výsledek je klid: pravidlo se použilo, práce pokračovala a nikdo nepotřeboval starou opravnou historii. Jenže někdy se objeví slabé tření. Nezastaví práci, nevrací tým do minulosti a neukazuje na nový velký problém. Jen lehce cinkne: "tady by se možná někdy hodilo něco zpřesnit".
+
+Tohle je nebezpečný okamžik pro malé týmy. Slabé tření se snadno převlékne za naléhavý úkol, protože je čerstvé a někdo ho právě viděl. Jenže ne každé čerstvé pozorování si zaslouží editaci pravidla, novou šablonu nebo další položku v backlogu. Někdy si zaslouží jen čekací poznámku: malý, podmíněný zápis, který chrání signál před zapomenutím, ale zároveň chrání tým před zbytečnou prací.
+
+Úvodní pracovní věta:
+
+```text
+Po prvním návratu ke stabilnímu pravidlu zapisujeme slabé tření jen jako čekací poznámku s návratovou podmínkou, ne jako okamžitý úkol.
+```
+
+Tahle věta drží dvě brzdy najednou. První brzda brání tomu, aby se slabý signál ztratil. Druhá brání tomu, aby se z každého slabého signálu stal projekt. Praktická dokumentace potřebuje obě. Bez první tým opakuje stejné drobné chyby. Bez druhé se utopí v údržbě věcí, které možná nikdy znovu nenastanou.
+
+### Poznejte slabé tření
+
+Slabé tření je stav, kdy pravidlo v zásadě fungovalo, ale při použití vznikla malá otázka, zdržení nebo nejistota. Důležité je slovo "malá". Člověk práci dokončil, rozhodnutí podle pravidla vzniklo a nebylo potřeba otevřít staré revizní karty. Jen se ukázalo, že okolní pracovní místo by mohlo být o trochu jasnější.
+
+Příklady slabého tření:
+
+- v šabloně chybí jedno pole, ale člověk ví, co do něj patří;
+- příklad je správný, jen neodpovídá nejčastějšímu aktuálnímu scénáři;
+- navigace k pravidlu vede přes o jeden krok delší cestu;
+- formulace je pochopitelná pro zkušeného člověka, ale nový kolega se na ni krátce doptal;
+- checklist má správné body, ale jeden z nich patří blíž ke konkrétní šabloně.
+
+Tohle ještě není důvod okamžitě přepisovat pravidlo. Pokud tým dokáže pokračovat bez improvizace, bez dodatečného sběru dat a bez návratu k historii opravy, jde spíš o kandidáta na čekací poznámku.
+
+Naopak slabé tření není:
+
+- opakovaná chyba, která už způsobila špatné rozhodnutí;
+- nejasnost, kvůli které lidé pravidlo obcházejí;
+- potřeba otevřít starou revizní historii, aby pravidlo dávalo smysl;
+- nová situace, kterou pravidlo vůbec nemělo pokrýt;
+- bezpečnostní, právní nebo zákaznický problém.
+
+Tyto stavy nepatří do čekací poznámky. Patří do nové karty, opravy pravidla nebo samostatného problému podle závažnosti.
+
+### Napište poznámku jako podmínku
+
+Čekací poznámka nemá znít "upravit pravidlo". To je úkol bez důkazu. Lepší tvar je podmínka:
+
+```text
+Pokud se při dalším použití pravidla znovu objeví nejistota, kam zapsat důkaz důvěry, doplníme toto pole do šablony landing page.
+```
+
+Podmínka má tři části:
+
+1. Co se musí znovu stát.
+2. Kde se to má projevit.
+3. Jaká nejmenší úprava bude stačit, pokud se signál potvrdí.
+
+Bez těchto tří částí poznámka rychle zplesniví. "Možná doplnit příklad" za měsíc nikomu neřekne, proč se to řešilo, kde to bolelo ani kdy je správné s tím něco udělat. Podmíněná věta je praktičtější, protože sama říká, kdy ožije a kdy může být smazaná.
+
+Slabá poznámka:
+
+```text
+Zvážit doplnění příkladu do pravidla.
+```
+
+Silnější poznámka:
+
+```text
+Pokud se další člověk při přípravě stránky služby znovu zeptá, kam patří důkaz důvěry nad formulářem, doplníme jeden řádek do šablony landing page. Pravidlo kontaktní varianty zatím neměníme.
+```
+
+Všimněte si poslední věty. Čekací poznámka má říkat i to, co se zatím nemění. Tím zabraňuje nenápadnému rozšiřování rozsahu.
+
+### Uložte ji blízko práce, ale mimo hlavní pravidlo
+
+Čekací poznámka nemá znečistit hlavní pravidlo. Stabilní pravidlo má zůstat stabilní, dokud není důvod ho upravit. Poznámku proto uložte tam, kde ji tým přirozeně potká při dalším použití, ale ne přímo do hlavní trasy.
+
+Vhodná místa:
+
+- poznámka u šablony, které se tření týká;
+- krátký komentář v rozhodovacím logu;
+- drobná položka ve frontě údržby dokumentace;
+- interní changelog s návratovou podmínkou;
+- okrajová poznámka u pracovního checklistu, pokud má jasnou expiraci.
+
+Nevhodná místa:
+
+- hlavní znění stabilního pravidla;
+- nový projektový úkol bez termínu a důkazu;
+- dlouhý dokument s hypotetickými variantami;
+- osobní chat jako jediný zdroj pravdy;
+- analytický dashboard pro sledování používání pravidla.
+
+Princip je jednoduchý: poznámka má být dohledatelná při další práci, ale nemá čtenáři skákat do cesty pokaždé, když pravidlo normálně funguje.
+
+### Dejte poznámce expiraci
+
+Čekací poznámka bez expirace je pomalý růst plevele. Nikomu akutně nepřekáží, ale časem zaplní okraje systému tak, že tým přestane poznávat, co je aktuální rozhodnutí a co je jen staré "možná".
+
+Expirace může být časová nebo událostní:
+
+- po dalším použití stejného pravidla;
+- po dvou podobných situacích;
+- po třiceti dnech bez opakování;
+- při nejbližší úpravě související šablony;
+- při měsíčním úklidu dokumentační fronty.
+
+U slabého tření preferujte událostní expiraci. Čas sám o sobě neříká, jestli se signál opakoval. Dobrý zápis proto může znít:
+
+```text
+Expirace:
+Zavřít bez změny, pokud se při dalších dvou použitích pravidla stejná nejistota neobjeví.
+```
+
+Když expirace nastane, opravdu ji proveďte. Buď poznámku smažte, nebo ji převeďte do malé úpravy podle původní podmínky. Nenechávejte ji v mezistavu "ještě uvidíme". To je jen backlog v teplákách.
+
+### Privacy-first hranice čekací poznámky
+
+Slabé tření nepotřebuje silnou evidenci. Nezapisujte osobní hodnocení člověka, celé citace z chatu ani screenshoty obrazovek jen proto, abyste si pamatovali drobnou nejistotu. Většinou stačí obecný popis situace a výsledek.
+
+Privacy-first čekací poznámka obsahuje:
+
+- pracovní situaci, ne osobní profil člověka;
+- obecný popis tření, ne citaci interní konverzace;
+- návratovou podmínku, ne průběžné sledování používání;
+- nejmenší možnou úpravu, ne otevřenou výzvu ke sběru dalších podkladů;
+- pravidlo pro smazání poznámky.
+
+Pokud slabé tření souvisí se zákaznickými daty, držte zápis ještě úžeji. Nepřikládejte export, neukládejte konkrétní poptávku a nepište do poznámky osobní údaje. Zapište vzor:
+
+```text
+Při jedné poptávce služby nebylo jasné, zda interní poznámka patří do CRM nebo do projektového briefu. Bez ukládání zákaznického obsahu čekáme, zda se stejná nejasnost zopakuje.
+```
+
+Codyho komentář: čekací poznámka je dobrý sluha a hrozný archivář. Má podržet slabý signál, ne vybudovat památník tomu, že někdo jednou zvedl obočí nad šablonou.
+
+### Karta čekací poznámky po slabém tření
+
+```text
+Stabilní pravidlo:
+Pracovní situace:
+Slabé tření:
+Proč nejde o okamžitý úkol:
+Kam tření pravděpodobně patří:
+Návratová podmínka:
+Nejmenší úprava při potvrzení:
+Co zatím neměníme:
+Jakou datovou stopu nevytváříme:
+Expirace:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilní pravidlo:
+Výběr kontaktní varianty pro landing page služby.
+
+Pracovní situace:
+Příprava stránky pro audit webu.
+
+Slabé tření:
+Při použití pravidla vznikla krátká otázka, kam v šabloně stránky zapsat důkaz důvěry nad formulářem.
+
+Proč nejde o okamžitý úkol:
+Rozhodnutí podle pravidla vzniklo, stará historie nebyla potřeba a práce pokračovala.
+
+Kam tření pravděpodobně patří:
+Do šablony landing page, ne do pravidla kontaktní varianty.
+
+Návratová podmínka:
+Pokud se stejná otázka objeví při další stránce služby, doplnit pole do šablony.
+
+Nejmenší úprava při potvrzení:
+Jeden řádek "důkaz důvěry nad formulářem" v šabloně landing page.
+
+Co zatím neměníme:
+Neměníme stabilní pravidlo kontaktní varianty.
+
+Jakou datovou stopu nevytváříme:
+Neukládáme pracovní chat, screenshot ani jména lidí v diskusi.
+
+Expirace:
+Zavřít bez změny po dvou použitích pravidla bez opakování stejné otázky.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte stabilní pravidlo a reálnou situaci použití.
+2. Minuta 2: napište slabé tření jednou větou.
+3. Minuta 3: ověřte, že práce pokračovala bez staré historie a bez špatného rozhodnutí.
+4. Minuta 4: určete, kam tření pravděpodobně patří.
+5. Minuta 5: napište návratovou podmínku a nejmenší možnou úpravu.
+6. Minuta 6: nastavte expiraci a privacy-first hranici zápisu.
+
+Výstup workshopu:
+
+```text
+Slabé tření po návratu ke stabilnímu pravidlu je uložené jako čekací poznámka s návratovou podmínkou, expirací a jasnou hranicí, co se zatím nemění.
+```
+
+### Checklist kapitoly
+
+- Je jasné, že šlo o slabé tření, ne o opakovanou chybu?
+- Vzniklo při reálné práci, ne při umělém pročítání dokumentace?
+- Pravidlo šlo použít bez staré opravné historie?
+- Nevzniklo kvůli tření špatné zákaznické, právní, bezpečnostní nebo produktové rozhodnutí?
+- Je poznámka napsaná jako podmínka, ne jako automatický úkol?
+- Obsahuje podmínka konkrétní spouštěč návratu?
+- Je popsaná nejmenší úprava při potvrzení signálu?
+- Je zapsané, co se zatím nemění?
+- Leží poznámka blízko pracovního místa, ale mimo hlavní stabilní pravidlo?
+- Má poznámka expiraci?
+- Je jasné, kdy se smaže bez změny?
+- Neobsahuje osobní hodnocení lidí, citace z chatu ani zákaznická data?
+- Nevznikl nový tracker nebo pravidelný kontrolní rituál?
+- Má poznámka vlastníka pro zavření, pokud podmínka nastane nebo expiruje?
+
+Čekací poznámka je úspěšná, když zůstane malá. Buď zachytí opakovaný signál a promění ho v jednu drobnou úpravu, nebo zmizí bez zásahu. Oba výsledky jsou v pořádku. Špatný výsledek je třetí možnost: poznámka, která visí navždy, občas někomu připomene neurčitou povinnost a nikdy neřekne, jestli má ještě smysl.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha UB o převod slabého tření po návratu ke stabilnímu pravidlu do čekací poznámky: rozlišení slabého tření, podmíněný zápis, umístění mimo hlavní pravidlo, expirace, privacy-first omezení, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UA o prvním běžném návratu ke stabilnímu pravidlu po uzavřené malé úpravě: reálný pracovní úkol, známky samostatnosti, rozlišení klidu, tření a nového problému, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TZ o uzavření ověřené malé úpravy do stabilního pracovního pravidla: přepis do normálního tónu, zavření pomocných artefaktů, lehký návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TY o ověření malé úpravy po potvrzené revizní poznámce: reálné použití, tři signály, čtyři výsledné stavy, zavření návratového signálu, pravidla pro novou poznámku, privacy-first ověření, karta, mini workshop a checklist.
