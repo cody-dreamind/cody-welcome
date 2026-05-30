@@ -33,6 +33,8 @@ Když se během čtení ukáže, že původní stop podmínka byla příliš ši
 
 Na konci čtení stop podmínku neměňte podle toho, co se zrovna povedlo. Pokud výstup nesedí, zapište to jako výsledek iterace a otevřete další, menší průchod až potom. Jinak se z praktického pravidla stane pohyblivá branka, kterou vždycky nějak trefíte, ale nic se tím nevyjasní.
 
+Když stop podmínka zůstane nesplněná, neberte to jako selhání čtení, ale jako signál ke zmenšení dalšího kroku. Lepší je zavřít drobnou, poctivě ověřitelnou úpravu než pokračovat ve větším tématu jen proto, že už je rozečtené.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -147504,3 +147506,4 @@ Revizní poznámka po prvním návratu je dobrý sluha a mizerný šéf. Má udr
 - 2026-05-27: Doplněna úvodní podkapitola o návratu k trase po klidovém období: rozlišení podnětu a návratového signálu, potvrzení původního slibu, stavy po návratu, privacy-first brána, karta a checklist.
 - 2026-05-27: Doplněna Příloha RM o prvním návratu k čistému pracovnímu stavu po uzavřené servisní poznámce: cesta, použití, datová stopa, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SH o uzavření potvrzené lokální opravy do stabilního pracovního místa: aktuální stav, zavření lokální karty, úklid pomocných podkladů, návratový signál, privacy-first stabilizace, karta a checklist.
+- 2026-05-30: Doplněna krátká úvodní poznámka, aby nesplněná stop podmínka vedla ke zmenšení dalšího kroku místo k rozšíření práce.
