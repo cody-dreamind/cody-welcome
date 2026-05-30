@@ -129,6 +129,97 @@ Datum návratu:
 
 Když se nepodaří zavřít ani zmenšený krok, další odpovědí nemá být větší plán. Vraťte se k otázce, jestli řešíte správný problém. Někdy není chyba v rozsahu, ale v tom, že tým chce potvrdit domněnku, která zatím nemá dost reálných signálů.
 
+## Kdy další krok raději zavřít
+
+Praktická práce nemá povinnost pokračovat jen proto, že už do ní někdo vložil čas. Někdy je nejlepší výsledek iterace věta: "Teď nepokračujeme." Není to rezignace. Je to ochrana pozornosti, rozpočtu, dat a důvěry zákazníka před změnou, která zatím nemá dost dobrý důvod.
+
+Rozhodnutí zavřít krok dává smysl hlavně ve čtyřech situacích:
+
+- Původní problém se při ověřování nepotvrdil.
+- Přínos by byl malý, ale provozní nebo datová stopa by narostla.
+- Tým by musel kvůli změně rozbít stabilní pracovní tok, který dnes funguje.
+- Další zmenšení už nevytváří užitečný důkaz, jen menší a menší úkoly.
+
+Příklad: tým chce přidat do poptávkového formuláře nové pole "rozpočet", protože doufá v lepší kvalifikaci leadů. Po kontrole posledních poptávek ale zjistí, že obchod se stejně nejvíc doptává na cíl projektu, časový tlak a rozhodovací proces. Pole "rozpočet" by přidalo citlivější obchodní informaci, ale neřešilo by hlavní nejistotu. Správný další krok není přidat pole. Správný krok je zavřít tento návrh a případně upravit jednu otázku ve formuláři směrem k cíli projektu.
+
+Zavřený krok musí být zapsaný stejně pečlivě jako hotová změna. Jinak se za měsíc vrátí jako "nápad, který jsme asi nestihli" a tým ho začne řešit od nuly.
+
+Použijte jednoduchý zápis:
+
+```text
+Návrh:
+
+Proč jsme ho ověřovali:
+
+Co jsme zjistili:
+
+Rozhodnutí:
+- zavřít / odložit / nahradit menším krokem
+
+Proč teď nepokračujeme:
+
+Co by muselo nastat, abychom se vrátili:
+
+Jaká data díky tomu nesbíráme:
+
+Kde je rozhodnutí uložené:
+```
+
+### Rozdíl mezi zavřít a odložit
+
+"Zavřít" znamená, že návrh teď nemá dost dobrý důvod a tým ho nemá držet v aktivní paměti. Pokud se někdy vrátí, musí přijít s novým signálem, ne jen se starou chutí něco vylepšit.
+
+"Odložit" znamená, že důvod existuje, ale načasování je špatné. Typicky chybí kapacita, předchozí změna ještě nemá ověření nebo by zásah kolidoval s důležitějším provozním obdobím. Odložený krok má mít datum návratu nebo konkrétní návratový signál. Bez toho je to jen slušně pojmenovaný nepořádek v backlogu.
+
+Dobrá odkládací věta zní:
+
+```text
+K návrhu se vrátíme, až budeme mít deset nových poptávek po úpravě hlavní otázky ve formuláři.
+```
+
+Slabá odkládací věta zní:
+
+```text
+Vrátíme se k tomu později.
+```
+
+První věta chrání rozhodování. Druhá chrání jen pocit, že jsme nic neodmítli.
+
+### Privacy-first důvod pro zavření
+
+Privacy-first provoz není jen otázka cookie lišty nebo hostingu v Evropě. Je to i schopnost říct: "Tahle informace by se nám možná hodila, ale nemáme pro ni dost silný účel." Každé nové pole, export, sledovací pravidlo, interní poznámka nebo automatizace vytváří budoucí práci: přístupy, retenci, vysvětlení zákazníkovi, kontrolu dodavatele a úklid.
+
+Když zavřete krok, který by vyžadoval nová data, zapište to pozitivně:
+
+```text
+Díky zavření návrhu nesbíráme rozpočet v prvním formuláři. Kvalifikaci zatím řešíme otázkou na cíl projektu a ručním obchodním rozhovorem.
+```
+
+Takový zápis není právní formalita. Je to provozní disciplína. Tým si připomene, že méně dat může být lepší produktové rozhodnutí, ne jen opatrnost.
+
+### Mini rozhodovací matice
+
+Pokud si nejste jistí, dejte návrhu jeden ze čtyř stavů:
+
+- Zavřít: problém se nepotvrdil nebo přínos neobhájí náklady.
+- Odložit: problém je platný, ale chybí správné načasování nebo důkaz.
+- Nahradit: původní návrh je moc velký, ale existuje menší smysluplný zásah.
+- Eskalovat: dopad je vysoký a rozhodnutí potřebuje vlastníka s větším mandátem.
+
+Stav "nechat otevřené" používejte jen výjimečně a vždy s datem další kontroly. Otevřené bez data je pasivní dluh. Nevidí se v účetnictví, ale bere pozornost při každém dalším plánování.
+
+### Checklist zavření kroku
+
+- Víme, jaký návrh zavíráme nebo odkládáme?
+- Je zapsané, co jsme zjistili při ověření?
+- Rozlišili jsme zavření, odložení, nahrazení a eskalaci?
+- Má odložený krok datum návratu nebo návratový signál?
+- Je jasné, jaká data, trackery, exporty nebo formulářová pole díky tomu nepřidáváme?
+- Je rozhodnutí uložené u pracovního místa, kde se návrh znovu objeví?
+- Umí tým jednou větou říct, proč teď nepokračuje?
+
+Zavřený krok má zvláštní hodnotu: zmenšuje budoucí šum. V e-booku, webu, SaaS produktu i marketingu často nevyhrává ten, kdo vymyslí nejvíc dalších úprav. Vyhrává ten, kdo umí dost rychle poznat, která úprava si nezaslouží další kolečko práce.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -149977,6 +150068,7 @@ Výstup workshopu:
 
 ## Pracovní log
 
+- 2026-05-30: Doplněna úvodní podkapitola o zavření nebo odložení dalšího kroku: kdy nepokračovat, rozdíl mezi zavřením a odložením, privacy-first důvod pro nesbírání nových dat, rozhodovací matice a checklist.
 - 2026-05-30: Doplněna Příloha UI o ověření čekací poznámky po opakování nebo expiraci: návratová podmínka, čtyři výsledné stavy, převod do malé úpravy, zavření bez změny, oddělení nového problému, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UH o převodu drobného tření po prvním návratu do čekací poznámky: rozlišení slabého tření, návratová podmínka, expirace, oddělení nového problému, privacy-first limit, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UG o první běžný návrat k pracovnímu místu po uzavřené úpravě: reálný pracovní úkol, známky normálního použití, rozlišení výsledků návratu, úklid dočasného jazyka, privacy-first kontrola, karta, mini workshop a checklist.
