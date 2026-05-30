@@ -148767,8 +148767,218 @@ Potvrzená čekací poznámka je převedená do jedné malé úpravy, původní 
 
 Malá úprava po potvrzené čekací poznámce má být skoro nudná. Vezme opakovaný signál, opraví nejbližší pracovní místo a uklidí po sobě. Právě tím je užitečná: neoslavuje proces, jen sníží tření tam, kde se skutečně opakovalo.
 
+## Příloha UE: Ověření malé úpravy po potvrzené čekací poznámce
+
+Příloha UD provedla malou úpravu v nejbližším pracovním místě. Teď přichází nenápadně důležitý okamžik: ověřit, jestli úprava skutečně odstranila opakované tření, kvůli kterému čekací poznámka vznikla. Nejde o slavnostní audit. Jde o první normální použití, při kterém se ukáže, zda opravené místo člověku pomohlo bez dalšího vysvětlování.
+
+Tahle příloha drží ověření malé. Pokud po úpravě otevřete nový kontrolní projekt, z jedné čekací poznámky se stane byrokratický seriál. Správný výsledek je jednodušší: podívat se na jeden skutečný průchod, porovnat ho s původním třením a rozhodnout, jestli úpravu nechat být, drobně doladit, vrátit nebo převést do nového problému.
+
+Úvodní pracovní věta:
+
+```text
+Malou úpravu ověřujeme při příštím běžném použití tím, že porovnáme původní tření se skutečným průchodem a zavřeme návratový signál, pokud už není potřeba.
+```
+
+Tahle věta má chránit dvě věci. Zaprvé ověřujete reálnou práci, ne vlastní dojem z čerstvě upravené šablony. Zadruhé ověření nesmí zůstat viset. Buď se návratový signál zavře, nebo z něj vznikne jasný další krok.
+
+### Vraťte se přes běžné použití
+
+Neověřujte úpravu tím, že ji po sobě autor ještě jednou přečte. To je kontrola textu, ne kontrola práce. Počkejte na situaci, ve které by se opravené místo stejně použilo: nová landing page, další obchodní hovor, předání auditu, kontrola formuláře nebo aktualizace provozního listu.
+
+Správný spouštěč ověření:
+
+```text
+Při příští landing page použít upravenou šablonu a sledovat,
+jestli nové pole pro důkaz důvěry stačí bez dalšího doptávání.
+```
+
+Slabý spouštěč:
+
+```text
+Za týden se podívat, jestli se nám nové pole líbí.
+```
+
+Líbí se nám spousta věcí. Práce je tvrdší soudce. Pokud se nové pole při reálném vyplnění použije bez zmatku, máte lepší signál než z jakékoli interní debaty.
+
+### Sledujte původní tření, ne všechny možné chyby
+
+Ověření má začít původním třením. Čekací poznámka neříkala "šablona je celkově nedokonalá". Říkala, že se opakovaně objevila konkrétní nejasnost. Přesně tu teď ověřujete.
+
+Pomocné otázky:
+
+- Našel člověk opravené místo ve chvíli, kdy ho potřeboval?
+- Pochopil, jak ho použít bez dodatečného vysvětlení?
+- Vznikl správný pracovní výstup?
+- Zmizelo původní opakované doptávání?
+- Nevzniklo nové tření větší než původní problém?
+
+Když během ověření uvidíte další nápady, zapište je stranou. Nelepte je na tuto kartu. Tato smyčka má rozhodnout o jedné úpravě, ne o celém okolním systému.
+
+### Rozlište čtyři výsledné stavy
+
+Po prvním běžném použití většinou stačí jeden ze čtyř stavů:
+
+1. Drží: úprava pomohla, návratový signál se zavírá a pravidlo se dál nehlídá.
+2. Drží s drobným doladěním: směr je správný, ale jedno slovo, pole nebo příklad ještě mate.
+3. Nedrží: úprava původní tření neodstranila nebo ho přesunula jinam.
+4. Nový problém: původní tření je pryč, ale objevilo se jiné téma, které si zaslouží vlastní kartu.
+
+Rozdíl mezi třetím a čtvrtým stavem je důležitý. Pokud úprava nefunguje, vraťte se k původnímu signálu. Pokud funguje, ale odhalila jinou slabinu, neznečišťujte ověřovací kartu. Uzavřete původní smyčku a nový problém otevřete samostatně jen tehdy, když má dost jasný dopad.
+
+Příklad rozhodnutí:
+
+```text
+Stav:
+Drží s drobným doladěním.
+
+Pozorování:
+Nové pole pro důkaz důvěry bylo použito, ale člověk do něj zapsal obecnou frázi místo konkrétního důkazu.
+
+Další krok:
+Do popisu pole doplnit jeden krátký příklad konkrétní reference.
+
+Hranice:
+Neměníme strukturu šablony ani pravidla pro formulář.
+```
+
+To je pořád malá oprava. Pokud by další krok zněl "předělat celé sekce důvěry", už nejste v ověření malé úpravy.
+
+### Zavřete návratový signál
+
+Návratový signál má být dočasný. Jakmile úprava projde běžným použitím, rozhodněte, co s ním. Nejčastější chyba je nechat ho v šabloně, checklistu nebo rozhodovacím záznamu navždy. Pak se z lehkého ověření stane další drobný nepořádek.
+
+Krátká zavírací věta:
+
+```text
+Návratový signál splněn při další landing page.
+Pole pro důkaz důvěry bylo použito bez dalšího doptávání.
+Signál zavřen, pravidlo zůstává v běžném provozu.
+```
+
+Když výsledek není čistý, nezavírejte ho potichu. Přepište ho do dalšího kroku:
+
+```text
+Návratový signál splněn, ale úprava potřebuje jedno doladění:
+doplnit příklad konkrétního důkazu do popisu pole.
+```
+
+Takový zápis je krátký, ale chrání tým před tím, aby se za měsíc ptal, proč úprava vznikla a jestli se vlastně ověřila.
+
+### Privacy-first ověření malé úpravy
+
+Privacy-first ověření tady znamená hlavně nepřidávat pozorovací aparát. Pro první kontrolu obvykle stačí pracovní výstup, krátká poznámka vlastníka a případně anonymizovaný příklad. Není potřeba sledovat jednotlivé lidi, nahrávat průchod obrazovkou ani kopírovat zákaznické podklady do další složky.
+
+Privacy-first minimum:
+
+- ověřujte pracovní výstup, ne výkon konkrétního člověka;
+- zapisujte roli nebo situaci, ne jména, pokud nejsou nutná;
+- nepřidávejte nový tracker jen kvůli jedné úpravě šablony;
+- screenshot použijte jen tehdy, když bez něj nejde popsat tření;
+- zákaznický příklad anonymizujte nebo nahraďte obecným vzorem;
+- pokud úprava změnila sběr dat, ověřte i datovou mapu a retenci;
+- po uzavření ověření smažte dočasné poznámky, které už nejsou zdrojem pravdy.
+
+Codyho komentář: dobré ověření malé úpravy má být skoro neviditelné. Když kvůli němu tým začne vyrábět další evidence, porady a tabulky, problém se možná odstranil v šabloně, ale přestěhoval se do provozu. To není výhra, to je jen outsourcing tření.
+
+### Karta ověření malé úpravy po čekací poznámce
+
+```text
+Původní čekací poznámka:
+Provedená malá úprava:
+Návratový signál:
+Běžné použití:
+Původní tření se objevilo znovu?
+Co se stalo při práci:
+Výsledek ověření:
+Další krok:
+Co zavíráme:
+Co neotevíráme:
+Privacy-first kontrola:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Původní čekací poznámka:
+Při dvou stránkách služby nebylo jasné, kam zapsat důkaz důvěry nad prvním formulářem.
+
+Provedená malá úprava:
+Do šablony landing page bylo doplněno pole "Důkaz důvěry nad prvním formulářem".
+
+Návratový signál:
+Při příští landing page ověřit, jestli nové pole stačí bez dalšího doptávání.
+
+Běžné použití:
+Příprava landing page pro privacy-first audit.
+
+Původní tření se objevilo znovu?
+Ne.
+
+Co se stalo při práci:
+Marketing owner vybral konkrétní veřejnou referenci a umístil ji nad formulář bez další otázky.
+
+Výsledek ověření:
+Drží.
+
+Další krok:
+Žádný. Signál zavřít.
+
+Co zavíráme:
+Návratový signál po čekací poznámce.
+
+Co neotevíráme:
+Nepředěláváme celou šablonu landing page ani pravidla pro důkazy důvěry.
+
+Privacy-first kontrola:
+Použitá reference je veřejně schválená; nevznikl nový osobní údaj ani kopie interních podkladů.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: najděte původní čekací poznámku, provedenou úpravu a návratový signál.
+2. Minuta 2: popište první běžné použití, při kterém se úprava opravdu použila.
+3. Minuta 3: porovnejte původní tření se skutečným průchodem.
+4. Minuta 4: vyberte stav Drží, Drží s drobným doladěním, Nedrží nebo Nový problém.
+5. Minuta 5: napište další krok nebo zavírací větu.
+6. Minuta 6: proveďte privacy-first kontrolu a odstraňte dočasný návratový signál, pokud už splnil účel.
+
+Výstup workshopu:
+
+```text
+Malá úprava po čekací poznámce má ověřený stav, návratový signál je zavřený nebo převedený do jednoho dalšího kroku a hlavní pracovní místo zůstává čisté.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme úpravu při skutečném běžném použití?
+- Vracíme se k původnímu tření, ne k celému okolnímu systému?
+- Je jasné, kdo úpravu použil v pracovní roli nebo situaci?
+- Umíme říct, jestli člověk opravené místo našel a pochopil?
+- Vznikl správný pracovní výstup bez dalšího vysvětlování?
+- Rozlišili jsme stav Drží, Drží s drobným doladěním, Nedrží nebo Nový problém?
+- Nevydáváme nový problém za pokračování původní malé úpravy?
+- Je další krok nejmenší možný?
+- Zavřeli jsme návratový signál, pokud už splnil účel?
+- Nezůstal v hlavní trase dočasný ověřovací jazyk?
+- Nepřidali jsme tracker, dashboard ani sledování lidí?
+- Jsou případné příklady anonymizované nebo veřejně použitelné?
+- Pokud úprava mění sběr dat, je aktualizovaná datová mapa a retence?
+- Je výsledek ověření zapsaný tam, kde ho tým při práci najde?
+- Je po ověření pracovní místo čistší než před ním?
+
+Ověření malé úpravy po čekací poznámce má udělat jednu věc: rozhodnout, jestli se čekání vyplatilo. Pokud ano, zavřete signál a nechte pravidlo normálně žít. Pokud ne, udělejte nejmenší další krok. V obou případech nevyrábějte kolem malé úpravy větší systém, než byl původní problém.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha UE o ověření malé úpravy po potvrzené čekací poznámce: běžné použití, původní tření, čtyři výsledné stavy, zavření návratového signálu, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UD o provedení malé úpravy po potvrzené čekací poznámce: práce z potvrzeného výsledku, výběr nejbližšího pracovního místa, jeden typ zásahu, zavření původní poznámky, lehký návratový signál, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UC o ověření čekací poznámky po opakování nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, úzký převod potvrzeného signálu, aktivní expirace, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UB o převod slabého tření po návratu ke stabilnímu pravidlu do čekací poznámky: rozlišení slabého tření, podmíněný zápis, umístění mimo hlavní pravidlo, expirace, privacy-first omezení, karta, mini workshop a checklist.
