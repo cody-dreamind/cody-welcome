@@ -146616,8 +146616,279 @@ Stabilizované pravidlo prošlo prvním běžným návratem. Víme, jestli ho po
 
 První běžný návrat je hotový ve chvíli, kdy pravidlo obstálo v práci nebo se ukázalo přesné malé tření. V obou případech má tým získat klid, ne další vrstvu dohledu. Stabilní pravidlo není muzeum změny. Je to pracovní nástroj, který má být po ruce, udělat službu a zase zmizet z pozornosti.
 
+## Příloha TV: Převod drobného tření po prvním návratu do revizní poznámky
+
+Příloha TU popsala první běžný návrat ke stabilizovanému kanonickému pravidlu. Někdy návrat dopadne čistě a pravidlo se nechá být. Jindy se objeví drobné tření: člověk pravidlo našel, použil ho, ale jedna malá část zpomalila rozhodnutí, vyvolala zaváhání nebo ho donutila otevřít starší kontext.
+
+Smyslem této přílohy není pravidlo hned přepsat. Smyslem je převést drobné tření do malé revizní poznámky, která má jasnou podmínku návratu. Tím tým zabrání dvěma špatným reakcím: impulzivní editaci stabilního pravidla kvůli jednomu dojmu a ignorování signálu, který se může při dalším použití zopakovat.
+
+Úvodní pracovní věta:
+
+```text
+Po prvním běžném návratu necháváme stabilizované pravidlo v platnosti. Drobné tření zapisujeme jako revizní poznámku s návratovou podmínkou, ne jako okamžitou změnu pravidla.
+```
+
+Tahle věta je brzda. Stabilizované pravidlo už prošlo předchozími úpravami, ověřením a uzavřením. Jedno zaváhání po prvním návratu ještě nemusí znamenat chybu pravidla. Může jít o slabou navigaci, neaktuální příklad, nejasný název odkazu, novou pracovní situaci nebo prostě přirozené napětí při prvním použití po změně.
+
+### Nejprve potvrďte, že jde opravdu o drobné tření
+
+Drobné tření je malé, konkrétní a lokální. Neohrožuje celé pravidlo, neblokuje práci a nevyžaduje nový audit. Jen říká: tady se člověk na chvíli zastavil a stojí za to sledovat, jestli se to zopakuje.
+
+Dobrý popis drobného tření:
+
+```text
+Editor pravidlo našel a vybral správnou variantu formuláře, ale zaváhal u rozdílu mezi "rychlý kontakt" a "poptávka služby".
+```
+
+Slabý popis:
+
+```text
+Pravidlo je možná nejasné.
+```
+
+První věta ukazuje přesné místo. Druhá je mlha v kabátu poznámky. Když tým neumí tření pojmenovat konkrétně, nemá ho převádět do revizní práce. Má se vrátit k reálnému průchodu a zjistit, kde se práce skutečně zadrhla.
+
+Použijte tři kontrolní otázky:
+
+- Došlo ke správnému rozhodnutí i přes tření?
+- Víme, v jaké konkrétní větě, odkazu, příkladu nebo situaci tření vzniklo?
+- Stačí počkat na další podobné použití, než budeme měnit pravidlo?
+
+Pokud jsou odpovědi `ano`, `ano`, `ano`, jde pravděpodobně o revizní poznámku. Pokud rozhodnutí nevzniklo, nejde o drobné tření, ale o otevření zpřesnění. Pokud nevíte, kde tření vzniklo, nezapisujte závěr; nejdřív zkraťte pozorování. Pokud není potřeba čekat a chyba je zjevná, udělejte malou opravu přímo v nejbližším pracovním místě.
+
+### Oddělte tření od nového problému
+
+Při prvním návratu se často objeví něco užitečného, ale mimo původní pravidlo. To je nejnebezpečnější typ signálu, protože se tváří jako související poznámka. Například pravidlo řeší výběr kontaktní varianty na landing page a při použití se ukáže, že tým nemá jednotný postup pro schvalování case studies. To je důležité, ale není to revize pravidla pro kontaktní variantu.
+
+Rozlišení:
+
+- Revizní tření: stejný pracovní okamžik, stejný účel, jen drobná nejasnost v použití pravidla.
+- Nový problém: jiné rozhodnutí, jiný vlastník, jiná datová stopa nebo širší proces.
+- Navigační problém: pravidlo je správné, ale špatně se hledá nebo je nejednotně pojmenované.
+- Kontextový problém: pravidlo funguje, ale okolní šablona, checklist nebo stránka obsahuje starý jazyk.
+
+Příklad:
+
+```text
+Tření:
+Při výběru formuláře nebylo jasné, jestli "konzultace" patří pod krátký kontakt nebo pod poptávku služby.
+
+Typ:
+Revizní tření, protože jde o hranici pojmů přímo v pravidle.
+```
+
+Jiný příklad:
+
+```text
+Tření:
+Při přípravě stránky nebyl dohledatelný souhlas zákazníka s citací v case study.
+
+Typ:
+Nový problém mimo pravidlo pro kontaktní variantu. Založit samostatnou privacy/content kartu.
+```
+
+Codyho komentář: stabilní pravidla se nerozpadají jen tím, že jsou špatně napsaná. Často se rozpadají tím, že do nich tým začne věšet každý sousední problém, protože "už jsme u toho". To je elegantní cesta k dokumentu, který má odpověď na všechno a nepomůže skoro s ničím.
+
+### Revizní poznámka má mít návratovou podmínku
+
+Revizní poznámka bez návratové podmínky je jen odložený neklid. Bude čekat u pravidla, občas někoho znervózní a časem ztratí kontext. Proto musí říkat, kdy se k ní tým vrátí a kdy ji smaže nebo uzavře.
+
+Dobré návratové podmínky:
+
+- stejné tření se zopakuje při dalším běžném použití;
+- do 30 dnů se objeví další situace na stejné hranici pojmů;
+- při nejbližší úpravě stejné šablony se ověří, jestli poznámka pořád platí;
+- pokud se do konkrétního data nic nezopakuje, poznámka se zavře bez změny.
+
+Špatné návratové podmínky:
+
+- "někdy zkontrolovat";
+- "až bude čas";
+- "při větším redesignu";
+- "necháme tady pro jistotu".
+
+"Pro jistotu" je v dokumentaci často jiný název pro nepořádek. Pokud poznámka nemá spouštěč, není to poznámka. Je to drobný odpad v pracovním prostoru. Buď z ní udělejte konkrétní návratovou podmínku, nebo ji nezapisujte.
+
+Minimální tvar revizní poznámky:
+
+```text
+Revizní poznámka:
+Při prvním návratu vzniklo zaváhání u rozdílu mezi "rychlý kontakt" a "poptávka služby".
+
+Návratová podmínka:
+Vrátit se jen tehdy, pokud se stejné zaváhání objeví při dalším použití pravidla nebo při nejbližší úpravě kontaktní šablony do 30 dnů.
+
+Expirace:
+Pokud se signál nezopakuje, poznámku zavřít bez změny.
+```
+
+### Uložte poznámku blízko pravidla, ale mimo hlavní trasu
+
+Revizní poznámka má být dohledatelná, ale nemá rušit běžného čtenáře. Hlavní pravidlo musí zůstat krátké a použitelné. Pokud k němu přilepíte tři drobné poznámky přímo do textu, přestane působit jako pravidlo a začne působit jako zápis z porady.
+
+Vhodná místa:
+
+- krátká poznámka pod kanonickým pravidlem;
+- komentář v rozhodovacím logu propojený s pravidlem;
+- jedna položka v malé revizní frontě daného pracovního místa;
+- poznámka v checklistu, který se používá při stejném workflow.
+
+Nevhodná místa:
+
+- samostatný dokument bez odkazu z pravidla;
+- chatové vlákno jako jediný zdroj pravdy;
+- nový velký backlog pro každý drobný signál;
+- přepis hlavního pravidla do dlouhé opatrné verze.
+
+Praktické pravidlo:
+
+```text
+Revizní poznámka smí být vidět vlastníkovi pravidla, ale nemá zvětšit rozhodovací zátěž běžného uživatele.
+```
+
+To je důležitý rozdíl. Vlastník potřebuje vědět, že existuje slabý signál. Člověk, který pravidlo jen používá, potřebuje udělat rozhodnutí. Když každému ukážete každou pochybnost, pravidlo přestane vést.
+
+### Co nedělat hned
+
+Po prvním drobném tření nedělejte velký revizní zásah. Konkrétně:
+
+- nepřepisujte celé pravidlo;
+- nepřidávejte nový checklist;
+- nezakládejte meeting jen kvůli jedné poznámce;
+- neobnovujte staré pomocné dokumenty;
+- neměřte interní používání novým trackerem;
+- nepřidávejte do pravidla všechny možné výjimky;
+- neměňte název pravidla, pokud problém nebyl v nalezení;
+- nepřevádějte nový sousední problém do stejné revizní poznámky.
+
+Jedna malá poznámka má zůstat malá. Pokud se při zápisu začne rozšiřovat, je to signál, že jste buď našli nový problém, nebo se snažíte vyřešit nejistotu předčasně. Obojí jde zapsat, ale ne jako drobné tření po prvním návratu.
+
+### Privacy-first zacházení s poznámkou
+
+Drobné tření často vzniká při práci s konkrétní stránkou, poptávkou, zákazníkem nebo interním úkolem. Revizní poznámka ale nemusí nést osobní ani obchodně citlivé detaily. Potřebuje zachytit vzor, ne plnou historii situace.
+
+Privacy-first pravidla:
+
+- zapisujte roli, ne jméno člověka, pokud jméno není nutné;
+- anonymizujte zákazníka, stránku nebo poptávku, pokud detail nepomáhá rozhodnutí;
+- neukládejte screenshoty, exporty ani kopie formulářů jen kvůli drobnému tření;
+- určete expiraci poznámky;
+- po expiraci poznámku zavřete nebo smažte podle hodnoty pro budoucí práci;
+- pokud poznámka ukáže nový datový tok, převeďte ho do samostatné privacy karty.
+
+Příklad dobrého zápisu:
+
+```text
+Role editoru při přípravě stránky služby zaváhala u pojmu "rychlý kontakt". Bez zákaznických detailů, bez kopie formuláře, expirace za 30 dnů.
+```
+
+Příklad zbytečné stopy:
+
+```text
+Přiložen screenshot konkrétní poptávky, celé interní vlákno a jméno člověka, který se ptal.
+```
+
+Druhá verze je lákavá, protože vypadá přesně. Ve skutečnosti jen zvyšuje cenu údržby a riziko úniku kontextu. U drobné revizní poznámky stačí pracovní vzor.
+
+### Karta revizní poznámky po prvním návratu
+
+```text
+Stabilizované pravidlo:
+První běžná situace:
+Jaké rozhodnutí pravidlo umožnilo:
+Kde vzniklo drobné tření:
+Typ signálu:
+Proč nejde o okamžitou změnu:
+Návratová podmínka:
+Expirace:
+Kde poznámka bydlí:
+Co neměníme:
+Privacy-first stopa:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilizované pravidlo:
+Výběr kontaktní varianty pro landing page služby.
+
+První běžná situace:
+Příprava nové stránky služby.
+
+Jaké rozhodnutí pravidlo umožnilo:
+Editor vybral kratší poptávkový formulář.
+
+Kde vzniklo drobné tření:
+U rozdílu mezi pojmy "rychlý kontakt" a "poptávka služby".
+
+Typ signálu:
+Revizní tření přímo v hranici pojmů.
+
+Proč nejde o okamžitou změnu:
+Rozhodnutí vzniklo správně a tření se zatím objevilo jen jednou.
+
+Návratová podmínka:
+Vrátit se, pokud se stejné zaváhání zopakuje při dalším použití pravidla nebo při nejbližší úpravě kontaktní šablony do 30 dnů.
+
+Expirace:
+Zavřít bez změny, pokud se signál do 30 dnů nezopakuje.
+
+Kde poznámka bydlí:
+U kanonického pravidla jako skrytá revizní poznámka pro vlastníka.
+
+Co neměníme:
+Hlavní znění pravidla, název pravidla, formulář ani navigaci.
+
+Privacy-first stopa:
+Bez jména editoru, bez zákaznických detailů, bez screenshotu.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: vraťte se k jednomu skutečnému použití pravidla.
+2. Minuta 2: pojmenujte rozhodnutí, které pravidlo umožnilo.
+3. Minuta 3: napište přesné místo drobného tření.
+4. Minuta 4: rozhodněte, jestli jde o revizní tření, navigaci, kontext nebo nový problém.
+5. Minuta 5: nastavte návratovou podmínku a expiraci.
+6. Minuta 6: zapište privacy-first stopu a potvrďte, co teď neměníte.
+
+Výstup workshopu:
+
+```text
+Drobné tření po prvním návratu je zachycené jako revizní poznámka. Stabilizované pravidlo zůstává v platnosti a tým ví, kdy se k poznámce vrátit nebo kdy ji zavřít bez změny.
+```
+
+### Checklist kapitoly
+
+- Víme, že pravidlo i přes tření umožnilo správné rozhodnutí?
+- Je tření popsané konkrétně, ne obecnou náladou?
+- Rozlišili jsme revizní tření od nového problému?
+- Nepleteme problém znění s problémem navigace?
+- Má poznámka jasnou návratovou podmínku?
+- Má poznámka expiraci?
+- Zůstává hlavní pravidlo beze změny, dokud se signál nepotvrdí?
+- Není poznámka uložená jen v chatu?
+- Je poznámka dost blízko pravidla, aby ji vlastník našel?
+- Neruší poznámka běžného člověka při použití pravidla?
+- Neobnovili jsme staré pomocné artefakty bez důvodu?
+- Nepřidali jsme měření interního používání kvůli jednomu zaváhání?
+- Zapsali jsme roli a vzor místo osobních detailů?
+- Je jasné, co teď vědomě neměníme?
+- Ví vlastník, kdy poznámku zavřít bez úpravy?
+
+Revizní poznámka po prvním návratu je dobrý sluha a mizerný šéf. Má udržet slabý signál na očích, ale nesmí převzít řízení stabilního pravidla. Pokud se signál potvrdí, otevře další malou úpravu. Pokud ne, poznámka zmizí a pravidlo pokračuje v klidu. Přesně tak má vypadat údržba, která pomáhá práci místo toho, aby se sama stala prací.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha TV o převodu drobného tření po prvním návratu ke stabilizovanému pravidlu do revizní poznámky: potvrzení drobného signálu, oddělení nového problému, návratová podmínka, umístění poznámky, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TU o prvním běžném návratu ke stabilizovanému kanonickému pravidlu: reálná pracovní situace, tři signály klidného použití, čtyři výsledné stavy, krátký záznam, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TT o uzavření ověřené malé úpravy do stabilního kanonického pravidla: přepis aktuální pravdy, zavření pomocných artefaktů, odstranění revizního jazyka, návratový signál, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TS o ověření malé úpravy po dalším běžném použití: reálný spouštěč, tři signály, čtyři výsledné stavy, pravidlo jednoho doladění, privacy-first ověření, karta, mini workshop a checklist.
