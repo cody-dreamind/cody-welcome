@@ -149631,8 +149631,259 @@ Drobné tření po prvním návratu je zapsané jako podmíněná čekací pozn�
 
 Čekací poznámka je malá brzda proti dvěma extrémům: ignorovat slabý signál, nebo ho okamžitě nafouknout do další úpravy. Dobře napsaná poznámka dovolí systému chvíli dýchat. Pokud se tření vrátí, máte jasný spouštěč. Pokud ne, máte klid a o jeden zbytečný úkol méně.
 
+## Příloha UI: Ověření čekací poznámky po opakování nebo expiraci
+
+Příloha UH popsala, jak po prvním návratu zachytit slabé tření do čekací poznámky. Tahle příloha řeší další krok: poznámka se buď ozve znovu, nebo vyprší. V obou případech musí vzniknout rozhodnutí, ne další neurčitá poznámka vedle té původní.
+
+Čekací poznámka je dobrý nástroj jen tehdy, když má konec. Pokud se signál opakuje, má se proměnit v malou úpravu, samostatnou kartu nebo vědomé odmítnutí. Pokud se nevrátí, má se zavřít bez pocitu viny. Jinak z ní vznikne poloviční backlog: nic se aktivně neřeší, ale každý review cyklus si na to znovu sáhne.
+
+Úvodní pracovní věta:
+
+```text
+Čekací poznámku po návratovém signálu nebo expiraci ověřujeme jedním krátkým rozhodnutím: převést, zavřít, oddělit jako nový problém, nebo nechat jen s novou a přísnější podmínkou.
+```
+
+Tahle věta chrání pracovní systém před tichým bobtnáním. Drobné signály jsou užitečné, ale jen pokud nezabírají víc pozornosti než problém, který mají hlídat. U webu, SaaS i marketingu platí jednoduché pravidlo: čím menší signál, tím kratší evidence a tím jasnější konec.
+
+### Vraťte se k původní podmínce
+
+Nezačínejte debatou, jestli by se "něco nemělo vylepšit". Začněte kontrolou původní návratové podmínky. Čekací poznámka měla říkat, jaký signál očekává, kolikrát se má opakovat a kdy bez opakování vyprší.
+
+Příklad původní poznámky:
+
+```text
+Vrátit se k příkladům důkazu důvěry jen tehdy, pokud se u dvou dalších landing pages znovu objeví nejistota, jestli použít referenci, číslo nebo certifikaci.
+
+Expirace: zavřít bez změny po dvou dalších použitích bez opakování nebo po 30 dnech.
+```
+
+Ověření začíná třemi otázkami:
+
+1. Stal se přesně ten signál, který jsme čekali?
+2. Nastala expirace bez opakování?
+3. Objevilo se něco jiného, co do této poznámky nepatří?
+
+Třetí otázka je důležitá. Často se během kontroly ukáže nové téma: například schvalování zákaznických citací, chybějící zdroj pravdy pro reference nebo nejasná odpovědnost za aktualizaci case studies. To může být důležité, ale není to důkaz, že čekací poznámka byla správná. Je to nový problém s vlastním rámcem.
+
+### Čtyři možné výsledky
+
+Po kontrole vyberte jeden stav. Nepište komentář typu "ještě sledovat". Buď se něco stalo, nebo nestalo. Pokud se stalo jen málo, musí to být popsáno přesněji než předtím.
+
+Možné výsledky:
+
+- Zavřít bez změny: signál se nevrátil a poznámka expirovala.
+- Převést do malé úpravy: signál se vrátil podle podmínky a řešení je lokální.
+- Oddělit jako nový problém: kontrola ukázala širší téma s jinými vlastníky, daty nebo rizikem.
+- Ponechat s přísnější podmínkou: signál je slabý, ale užitečný, a původní podmínka byla moc vágní.
+
+Poslední stav používejte opatrně. Pokud poznámku jen prodloužíte pokaždé, když se k ní vrátíte, přestává být čekací poznámkou a začíná být odkládaným rozhodnutím. Přísnější podmínka má znamenat zúžení, ne pohodlné odsunutí.
+
+Příklad zúžení:
+
+```text
+Původní stav:
+Možná doplnit příklady důkazu důvěry.
+
+Nový stav:
+Vrátit se jen tehdy, pokud se u jedné další landing page znovu objeví nejistota mezi veřejnou referencí a interním číslem z dodávky. Pokud se do 14 dnů nevrátí, zavřít bez změny.
+```
+
+Takový zápis je přísnější: kratší okno, konkrétnější situace, jasný konec.
+
+### Převod do malé úpravy
+
+Když se signál vrátí podle podmínky, nepřepisujte hned celé pracovní místo. Převod do úpravy má začít otázkou: jaká nejmenší změna zabrání stejnému zaváhání příště?
+
+U šablony landing page to může být:
+
+- doplnit jeden příklad rozhodnutí mezi referencí, číslem a certifikací;
+- přidat krátkou otázku "jaký důkaz nejlépe snižuje nejistotu návštěvníka před formulářem?";
+- odkázat na existující kartu schválených referencí;
+- přesunout vysvětlení z poznámky do místa, kde člověk skutečně vybírá důkaz.
+
+Nevytvářejte obecný redesign šablony, když se opakovala jedna nejasnost. Malá úprava má mít malý dopad, krátké ověření a jasnou stopu v changelogu.
+
+Převodový zápis:
+
+```text
+Čekací poznámka:
+Nejistota při výběru důkazu důvěry nad formulářem.
+
+Signál:
+Objevila se u dvou dalších landing pages.
+
+Malá úprava:
+Do šablony doplnit rozhodovací větu: pokud návštěvník ještě nezná značku, použijte konkrétní referenci; pokud řeší riziko dodávky, použijte ověřitelné číslo nebo certifikaci.
+
+Co neměníme:
+Nepřepisujeme celou sekci důkazů, nezavádíme nové pole a neotevíráme systém case studies.
+
+Ověření:
+Při další landing page zkontrolovat, zda autor vybral důkaz bez dodatečné otázky.
+```
+
+Takhle se poznámka promění v práci, která se dá dokončit. Ne v další vrstvu dokumentace.
+
+### Zavření bez změny
+
+Zavření bez změny je plnohodnotný výsledek. Znamená, že systém nepotřeboval další zásah. U malých týmů je to často nejlepší výsledek, protože chrání pozornost před údržbou věcí, které už v praxi nedrhly.
+
+Zápis má být krátký:
+
+```text
+Čekací poznámka:
+Nejistota při výběru důkazu důvěry nad formulářem.
+
+Výsledek:
+Poznámka expirovala. Dvě další landing pages vznikly bez stejné nejistoty.
+
+Rozhodnutí:
+Zavřít bez změny šablony.
+
+Co mažeme:
+Dočasnou poznámku z interního changelogu.
+
+Co necháváme:
+Kanonické pravidlo beze změny.
+```
+
+Neukládejte dlouhé vysvětlení, proč se nic nestalo. Pokud se signál nevrátil, největší hodnota je úklid. Codyho komentář: zavřít malou poznámku bez akce je psychologicky těžší než přidat další větu do dokumentace. Ale přesně tím se z provozního systému nestává muzeum obav.
+
+### Oddělení nového problému
+
+Někdy kontrola čekací poznámky ukáže větší téma. To je dobré zachytit, ale špatné přilepit k původní poznámce. Pokud se při výběru důkazu důvěry ukáže, že tým nemá schválené veřejné reference, nejde jen o příklad v šabloně. Jde o proces získávání, schvalování, ukládání a aktualizace důkazů.
+
+Oddělovací zápis:
+
+```text
+Původní čekací poznámka:
+Nejistota při výběru důkazu nad formulářem.
+
+Kontrola:
+Nejistota se neopakovala kvůli šabloně, ale kvůli chybějícímu seznamu schválených referencí.
+
+Rozhodnutí:
+Čekací poznámku zavřít. Otevřít samostatnou kartu "schválené zákaznické důkazy".
+
+Proč samostatně:
+Má jiné vlastníky, schvalovací rizika, zákaznický kontext a retenční pravidla.
+```
+
+Tím chráníte původní pracovní místo před cizím problémem. Zároveň nový problém nezmizí jen proto, že se nevešel do malé úpravy.
+
+### Privacy-first kontrola ověření
+
+Ověření čekací poznámky nesmí přidat víc dat, než kolik jich původní problém vyžaduje. Kontrola má být založená na pracovních výstupech a situacích, ne na sledování lidí.
+
+Praktická pravidla:
+
+- ověřujte existující pracovní artefakty, ne nové chování lidí;
+- neukládejte celé chaty, komentáře ani pracovní screenshoty, pokud stačí jedna anonymizovaná věta;
+- u zákaznických důkazů používejte jen schválené, veřejné nebo anonymizované příklady;
+- nezavádějte tracker používání šablony kvůli jedné čekací poznámce;
+- pokud poznámka expirovala, smažte nebo archivujte dočasnou evidenci podle původního pravidla;
+- pokud vznikne nová karta, napište její datovou stopu od začátku a nepřenášejte do ní zbytečný historický kontext.
+
+Privacy-first pointa je jednoduchá: čekací poznámka má snížit provozní šum, ne vyrobit nový záznamový aparát. U marketingu a sales materiálů to platí dvojnásob, protože pracovní příklady často obsahují zákaznický kontext, interní obchodní poznámky nebo citace, které nemají žít déle, než je nutné.
+
+### Karta ověření čekací poznámky
+
+```text
+Pracovní místo:
+Původní čekací poznámka:
+Návratová podmínka:
+Expirace:
+Co se reálně stalo:
+Výsledek:
+Rozhodnutí:
+Nejmenší další krok:
+Co neměníme:
+Co mažeme nebo archivujeme:
+Privacy-first kontrola:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Šablona landing page.
+
+Původní čekací poznámka:
+Nejistota při výběru důkazu důvěry nad prvním formulářem.
+
+Návratová podmínka:
+Vrátit se, pokud se stejná nejistota objeví u dvou dalších landing pages.
+
+Expirace:
+Zavřít po dvou dalších použitích bez opakování nebo po 30 dnech.
+
+Co se reálně stalo:
+Nejistota se objevila u dalších dvou landing pages.
+
+Výsledek:
+Převést do malé úpravy.
+
+Rozhodnutí:
+Do šablony doplnit jednu rozhodovací větu pro výběr důkazu.
+
+Nejmenší další krok:
+Přidat větu k poli "důkaz nad formulářem" a ověřit ji při další landing page.
+
+Co neměníme:
+Neotevíráme celý systém referencí ani redesign formuláře.
+
+Co mažeme nebo archivujeme:
+Původní čekací poznámku zavřít po zapracování věty.
+
+Privacy-first kontrola:
+Nepřenášíme pracovní chaty ani zákaznické citace; použijeme obecný anonymizovaný příklad.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte původní návratovou podmínku a expiraci.
+2. Minuta 2: popište, co se reálně stalo, bez debat o řešení.
+3. Minuta 3: vyberte jeden ze čtyř stavů: zavřít, převést, oddělit, ponechat s přísnější podmínkou.
+4. Minuta 4: napište nejmenší další krok nebo rozhodnutí bez změny.
+5. Minuta 5: určete, co zůstává mimo rozsah.
+6. Minuta 6: proveďte privacy-first úklid dočasných poznámek.
+7. Minuta 7: zapište vlastníka a datum zavření nebo dalšího ověření.
+
+Výstup workshopu:
+
+```text
+Čekací poznámka má uzavřený stav: buď zmizela bez změny, přešla do malé úpravy, oddělila nový problém, nebo má jednu přísnější a krátkou podmínku návratu.
+```
+
+### Checklist kapitoly
+
+- Zkontrolovali jsme původní návratovou podmínku místo volné debaty?
+- Víme, jestli se signál opakoval, expiroval, nebo ukázal jiný problém?
+- Vybrali jsme jeden ze čtyř stavů?
+- Pokud poznámku ponecháváme, je nová podmínka přísnější a kratší?
+- Pokud převádíme do úpravy, je změna lokální a nejmenší možná?
+- Pokud zavíráme bez změny, mažeme nebo archivujeme dočasnou evidenci?
+- Pokud vznikl nový problém, má samostatnou kartu a vlastní datovou stopu?
+- Neotevřeli jsme celé pracovní místo kvůli slabému signálu?
+- Nepřidali jsme tracker, dashboard ani další kontrolní rituál?
+- Nepřenášíme do nové karty celé chaty, screenshoty nebo zákaznické citace?
+- Je jasné, co teď neměníme?
+- Má výsledek vlastníka a datum?
+- Umíme za týden poznat, zda poznámka ještě existuje, nebo byla opravdu zavřená?
+
+Čekací poznámka má sloužit jako malý pojistný ventil. Když se signál vrátí, pomůže udělat přesnou úpravu. Když se nevrátí, má zmizet. Obojí je práce na kvalitě systému. Jen ta druhá bývá méně vidět, takže je potřeba ji dělat vědomě.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha UI o ověření čekací poznámky po opakování nebo expiraci: návratová podmínka, čtyři výsledné stavy, převod do malé úpravy, zavření bez změny, oddělení nového problému, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UH o převodu drobného tření po prvním návratu do čekací poznámky: rozlišení slabého tření, návratová podmínka, expirace, oddělení nového problému, privacy-first limit, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UG o první běžný návrat k pracovnímu místu po uzavřené úpravě: reálný pracovní úkol, známky normálního použití, rozlišení výsledků návratu, úklid dočasného jazyka, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UF o uzavření ověřené malé úpravy po čekací poznámce do běžného pracovního místa: přepis do přítomného času, zavření dočasných artefaktů, budoucí návratová podmínka, privacy-first úklid, karta, mini workshop a checklist.
