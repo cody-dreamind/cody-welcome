@@ -150321,8 +150321,262 @@ Výstup workshopu:
 
 Čekací poznámka má sloužit jako malý pojistný ventil. Když se signál vrátí, pomůže udělat přesnou úpravu. Když se nevrátí, má zmizet. Obojí je práce na kvalitě systému. Jen ta druhá bývá méně vidět, takže je potřeba ji dělat vědomě.
 
+## Příloha UJ: Provedení malé úpravy po ověřené čekací poznámce
+
+Příloha UI uzavřela čekací poznámku rozhodnutím: zavřít, převést do malé úpravy, oddělit nový problém, nebo ponechat s přísnější podmínkou. Tahle příloha řeší stav, kdy se signál opravdu potvrdil a dává smysl udělat lokální úpravu. Důležité slovo je "lokální". Ověřená čekací poznámka není volná vstupenka k přepsání celého pracovního místa.
+
+Malá úprava má odstranit konkrétní opakované zaváhání. Ne má znovu otevřít debatu o strategii, design systému, analytice, obchodním procesu nebo kompletním obsahu stránky. Pokud čekací poznámka hlídala drobné tření, má po potvrzení vzniknout drobný zásah. Jinak systém trestá opatrnost: tým si nejdřív počká na důkaz, ale když ho dostane, stejně z toho udělá velký projekt. To je elegantní způsob, jak si rozbít kalendář vlastním procesem.
+
+Úvodní pracovní věta:
+
+```text
+Potvrzenou čekací poznámku převádíme do jedné malé úpravy v nejbližším pracovním místě, původní poznámku zavíráme a nastavujeme jen lehké ověření při dalším běžném použití.
+```
+
+Tahle věta drží čtyři hranice najednou: jeden zásah, jedno místo, uzavření staré poznámky a ověření bez nového dohledového aparátu.
+
+### Začněte potvrzeným výsledkem
+
+Nezačínejte návrhem řešení. Začněte větou, která říká, co se potvrdilo. Pokud ji neumíte napsat, ještě nejste ve fázi provedení úpravy.
+
+Slabý začátek:
+
+```text
+Měli bychom trochu zlepšit část s důkazy důvěry.
+```
+
+Lepší začátek:
+
+```text
+U dvou dalších landing pages se opakovala stejná nejistota: autor nevěděl, jestli nad formulář použít referenci, konkrétní číslo, nebo certifikaci.
+```
+
+První věta vyrábí prostor pro kreativní rozptyl. Druhá věta omezuje úpravu na potvrzené tření. To je přesně to, co po čekací poznámce potřebujete: ne novou ambici, ale přesný důvod zásahu.
+
+Potvrzený výsledek pište ve třech řádcích:
+
+```text
+Původní čekací poznámka:
+Potvrzený signál:
+Nejmenší praktický důsledek:
+```
+
+Příklad:
+
+```text
+Původní čekací poznámka:
+Nejistota při výběru důkazu důvěry nad prvním formulářem.
+
+Potvrzený signál:
+Stejná nejistota se objevila u dvou dalších landing pages.
+
+Nejmenší praktický důsledek:
+Autor potřebuje rozhodovací větu přímo u místa, kde důkaz vybírá.
+```
+
+### Vyberte nejbližší pracovní místo
+
+Malá úprava patří tam, kde tření vzniká. Pokud člověk váhá při vyplňování šablony landing page, úprava nepatří do dlouhého metodického dokumentu, který otevře jednou za kvartál. Patří k poli, instrukci nebo příkladu, který má před sebou v okamžiku rozhodnutí.
+
+Možná pracovní místa:
+
+- popisek pole v šabloně;
+- jeden příklad pod rozhodovacím pravidlem;
+- krátká poznámka v checklistu;
+- odkaz na existující zdroj pravdy;
+- úprava názvu kroku, pokud současný název mate;
+- odstranění staré věty, která posílá práci špatným směrem.
+
+Nejbližší pracovní místo není vždy nejviditelnější místo. Často je to nudná věta uvnitř šablony, kterou používají dva lidé. To je v pořádku. Cílem není udělat změnu slavnostní, ale užitečnou.
+
+Praktický test:
+
+```text
+Kdyby tým zítra řešil stejnou situaci, narazí na úpravu dřív, než zopakuje stejné zaváhání?
+```
+
+Pokud odpověď zní ne, úprava je moc daleko od práce.
+
+### Proveďte jeden typ zásahu
+
+Při malé úpravě nemíchejte přidání, přepsání, přesun, smazání a nový odkaz do jednoho balíčku. Každý typ zásahu mění jiné věci a jinak se ověřuje. Vyberte jeden hlavní typ.
+
+Typy malých zásahů:
+
+- Doplnit jednu rozhodovací větu.
+- Přepsat vágní instrukci do konkrétní otázky.
+- Přidat jeden vyplněný příklad.
+- Přesunout existující poznámku blíž k použití.
+- Smazat starou výjimku, která už mate.
+- Odkázat na kanonický zdroj místo kopírování dalšího vysvětlení.
+
+Příklad dobrého zásahu:
+
+```text
+Do pole "důkaz nad formulářem" doplnit větu:
+Pokud návštěvník ještě nezná značku, použijte konkrétní referenci; pokud se bojí rizika dodávky, použijte ověřitelné číslo nebo certifikaci.
+```
+
+Příklad příliš velkého zásahu:
+
+```text
+Přepracovat celou sekci důkazů, vytvořit novou databázi referencí, sjednotit case studies a přidat měření výkonu jednotlivých důkazů.
+```
+
+Druhá varianta možná jednou bude správná, ale není to provedení malé úpravy po čekací poznámce. Je to samostatný projekt s jinou kartou, vlastníkem a datovou stopou.
+
+### Zavřete původní poznámku při stejném zásahu
+
+Jakmile malou úpravu provedete, původní čekací poznámka má skončit. Nenechávejte ji otevřenou "pro jistotu". Otevřená poznámka po zapracování změny vytváří dvojí pravdu: pracovní místo říká jednu věc a čekací evidence dál naznačuje, že problém není uzavřený.
+
+Zavírací zápis může být krátký:
+
+```text
+Čekací poznámka:
+Nejistota při výběru důkazu důvěry nad formulářem.
+
+Stav:
+Převedeno do malé úpravy šablony landing page.
+
+Co se změnilo:
+Doplněna jedna rozhodovací věta k poli "důkaz nad formulářem".
+
+Co zavíráme:
+Původní čekací poznámku a dočasný záznam z ověření.
+
+Další ověření:
+Jen při další reálné landing page.
+```
+
+Tím se zamezí tomu, aby se stejná věc objevovala v poznámce, changelogu, úkolu, šabloně a ještě v hlavě člověka, který si "není jistý, jestli už je to hotové". Hotové znamená: úprava je v pracovním místě, stará poznámka je zavřená, další kontrola má jasný spouštěč.
+
+### Nastavte lehké ověření
+
+Malá úprava po čekací poznámce nepotřebuje nový dashboard. Stačí ověřit při dalším běžném použití, jestli úprava odstranila původní tření.
+
+Lehké ověření má tři otázky:
+
+1. Narazil člověk na upravené místo ve správný okamžik?
+2. Pomohla úprava udělat rozhodnutí bez dalšího doptávání?
+3. Nevznikl vedlejší efekt, například delší šablona, nové sbírání dat nebo zmatek v odpovědnosti?
+
+Ověření nezapisujte jako obecný úkol "zkontrolovat šablonu". Zapište ho jako návratový signál:
+
+```text
+Ověřit při další landing page, zda autor vybral důkaz nad formulářem bez dodatečné otázky na tým. Pokud ano, úpravu ponechat a nic dál neměnit. Pokud ne, otevřít samostatnou kartu pro problém výběru důkazů.
+```
+
+Tím se další kontrola nezmění v nekonečné ladění. Buď úprava pomohla, nebo ukázala, že problém byl větší než čekací poznámka.
+
+### Privacy-first provedení úpravy
+
+Při převodu čekací poznámky do úpravy je snadné přidat zbytečnou evidenci. Tým chce vědět, jestli změna funguje, a tak ho napadne měřit používání šablony, sbírat komentáře, ukládat screenshoty nebo kopírovat zákaznické citace. U malé úpravy je to většinou moc.
+
+Privacy-first pravidla:
+
+- použijte anonymizovaný nebo obecný příklad, pokud příklad nemusí být veřejná reference;
+- nekopírujte zákaznické citace do šablony bez jasného schválení a účelu;
+- nepřidávejte nové pole do formuláře jen proto, že interní rozhodování bylo nejasné;
+- neukládejte celé pracovní konverzace jako důkaz pro drobnou úpravu;
+- pokud odkazujete na zdroj pravdy, odkazujte na existující místo místo vytváření další kopie;
+- po provedení smažte dočasné poznámky, které už nemají pracovní účel.
+
+Privacy-first hodnota malé úpravy je v tom, že zlepšuje rozhodování bez nového sběru dat. Dobře napsaná věta v šabloně je často lepší než další event v analytice. Méně pohyblivých částí, méně citlivých stop, méně budoucího uklízení. Krása nudné údržby, což zní jako nejméně sexy slogan roku, ale funguje.
+
+### Karta provedení malé úpravy
+
+```text
+Pracovní místo:
+Původní čekací poznámka:
+Potvrzený signál:
+Nejmenší praktický důsledek:
+Typ zásahu:
+Konkrétní úprava:
+Co zavíráme:
+Co výslovně neměníme:
+Lehké ověření:
+Privacy-first kontrola:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Šablona landing page, pole "důkaz nad formulářem".
+
+Původní čekací poznámka:
+Nejistota při výběru důkazu důvěry nad prvním formulářem.
+
+Potvrzený signál:
+Stejná nejistota se objevila u dvou dalších landing pages.
+
+Nejmenší praktický důsledek:
+Autor potřebuje rozhodovací větu v okamžiku výběru důkazu.
+
+Typ zásahu:
+Doplnit jednu rozhodovací větu.
+
+Konkrétní úprava:
+Pokud návštěvník ještě nezná značku, použijte konkrétní referenci; pokud se bojí rizika dodávky, použijte ověřitelné číslo nebo certifikaci.
+
+Co zavíráme:
+Původní čekací poznámku a dočasný záznam ověření.
+
+Co výslovně neměníme:
+Neotevíráme systém case studies, neschvalujeme nové citace a nepřidáváme měření výkonu důkazů.
+
+Lehké ověření:
+Při další landing page ověřit, zda autor vybral důkaz bez dodatečné otázky.
+
+Privacy-first kontrola:
+Používáme obecný příklad, nekopírujeme zákaznické citace ani interní chat.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte potvrzený signál z čekací poznámky.
+2. Minuta 2: napište nejmenší praktický důsledek.
+3. Minuta 3: vyberte nejbližší pracovní místo.
+4. Minuta 4: zvolte jeden typ zásahu.
+5. Minuta 5: napište konkrétní úpravu a co neměníte.
+6. Minuta 6: zavřete původní čekací poznámku a dočasné podklady.
+7. Minuta 7: nastavte lehké ověření při dalším běžném použití.
+
+Výstup workshopu:
+
+```text
+Potvrzená čekací poznámka je převedená do jedné lokální úpravy, stará evidence je zavřená a další ověření proběhne jen při reálném použití.
+```
+
+### Checklist kapitoly
+
+- Začali jsme potvrzeným signálem, ne nápadem na řešení?
+- Umíme popsat nejmenší praktický důsledek jednou větou?
+- Vybrali jsme pracovní místo, kde tření opravdu vzniká?
+- Provedli jsme jen jeden hlavní typ zásahu?
+- Je konkrétní úprava kratší než původní nejistota, kterou řeší?
+- Zavřeli jsme původní čekací poznámku při stejném zásahu?
+- Smazali nebo archivovali jsme dočasné ověřovací podklady?
+- Zapsali jsme, co výslovně neměníme?
+- Nastavili jsme lehké ověření při dalším běžném použití?
+- Nepřidali jsme nový dashboard, tracker ani formulářové pole?
+- Nepřenášíme zákaznické citace, screenshoty nebo chaty bez jasného účelu?
+- Je jasný vlastník úpravy?
+- Dá se za týden poznat, jestli úprava existuje jen na jednom kanonickém místě?
+
+Malá úprava po čekací poznámce je dobrá tehdy, když se skoro ztratí v běžné práci. Člověk příště narazí na lepší větu, vybere správněji a nemusí se ptát. Žádný ohňostroj, žádný nový proces. Jen méně tření tam, kde už bylo dvakrát vidět.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha UJ o provedení malé úpravy po ověřené čekací poznámce: potvrzený signál, nejbližší pracovní místo, jeden typ zásahu, zavření původní poznámky, lehké ověření, privacy-first provedení, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna úvodní podkapitola o držení odloženého kroku mimo aktivní práci: návratový signál, rozdíl mezi backlogem, parkovištěm a archivem, privacy-first hodnota odložení a checklist.
 - 2026-05-30: Doplněna úvodní podkapitola o zavření nebo odložení dalšího kroku: kdy nepokračovat, rozdíl mezi zavřením a odložením, privacy-first důvod pro nesbírání nových dat, rozhodovací matice a checklist.
 - 2026-05-30: Doplněna Příloha UI o ověření čekací poznámky po opakování nebo expiraci: návratová podmínka, čtyři výsledné stavy, převod do malé úpravy, zavření bez změny, oddělení nového problému, privacy-first kontrola, karta, mini workshop a checklist.
