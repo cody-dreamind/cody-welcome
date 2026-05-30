@@ -147901,8 +147901,211 @@ Ověřená malá úprava je uzavřená do stabilního pracovního pravidla. Kano
 
 Stabilní pravidlo je hotové ve chvíli, kdy se dá použít bez vysvětlení jeho vlastní historie. Pokud se čtenář musí prokousat opravnými poznámkami, pravidlo pořád není stabilní. Pokud prostě ví, co udělat, údržba splnila účel a může konečně zmlknout. Ano, i dokumentace má právo na ticho.
 
+## Příloha UA: První běžný návrat ke stabilnímu pravidlu po uzavřené malé úpravě
+
+Příloha TZ uzavírá ověřenou malou úpravu do stabilního pracovního pravidla. Další riziko je nenápadné: tým se k pravidlu vrátí při běžné práci a začne znovu otevírat historii opravy jen proto, že ví, že tam nějaká byla. To je lidské, ale ne moc užitečné. Stabilní pravidlo se nemá při prvním návratu chovat jako čerstvě zalepená prasklina. Má se prostě použít.
+
+První běžný návrat proto není kontrolní audit. Je to obyčejné použití pravidla s jednou krátkou otázkou: funguje aktuální znění bez toho, aby člověk potřeboval pomocné poznámky, staré karty nebo další vysvětlení? Pokud ano, pravidlo necháte být. Pokud ne, nezakládáte hned novou revizi celého systému. Nejdřív pojmenujete konkrétní tření.
+
+Úvodní pracovní věta:
+
+```text
+Stabilní pravidlo po malé úpravě používáme v běžné práci a sledujeme jen to, zda obstojí bez návratu k opravné historii.
+```
+
+Tahle věta drží rozsah. Neptá se, jestli by šlo pravidlo vylepšit ještě víc. Skoro vždycky šlo. Ptá se, jestli pravidlo dnes dostatečně vede práci. To je jiná, praktičtější a výrazně levnější otázka.
+
+### Jděte od reálného úkolu
+
+K pravidlu se nevracejte proto, že je v kalendáři kontrola. Vraťte se ve chvíli, kdy někdo opravdu řeší situaci, pro kterou pravidlo existuje: píše landing page, připravuje formulář, upravuje onboarding, rozhoduje o analytickém eventu, předává práci novému člověku nebo zavírá podpůrný proces.
+
+Umělý návrat často vyrobí umělé problémy. Člověk čte pravidlo izolovaně a začne ladit slovosled, přidávat výjimky nebo řešit hypotetické situace. Reálný úkol je přísnější i laskavější zároveň: rychle ukáže, zda pravidlo pomáhá, ale nevyžaduje dokonalost.
+
+Před použitím si zapište kontext jednou větou:
+
+```text
+Pravidlo používáme při přípravě nové stránky služby, kde potřebujeme rozhodnout mezi obecným kontaktem a poptávkovým tokem.
+```
+
+To stačí. Nepište historii úpravy, nevkládejte odkaz na původní revizní poznámku a neotevírejte staré pomocné podklady. Pokud pravidlo potřebuje starou historii, aby dávalo smysl, není ještě stabilní. Pokud ji nepotřebuje, nechte historii spát.
+
+### Sledujte tři známky samostatnosti
+
+Při prvním běžném návratu sledujte jen tři signály:
+
+1. Člověk ví, co má podle pravidla udělat.
+2. Pravidlo ho neposílá do druhého dokumentu kvůli základnímu rozhodnutí.
+3. Použití pravidla nevyrábí novou datovou stopu, schvalovací kolečko ani ruční kontrolu bez jasného důvodu.
+
+Všechno ostatní je vedlejší. Styl věty, délka odstavce nebo starší formulace mohou počkat, pokud pravidlo vede práci správným směrem. První návrat má potvrdit samostatnost, ne zahájit další redakční sezonu. Ano, dokumentace umí být nekonečná zahrádka. Proto tu držíme nůžky.
+
+Praktický zápis po použití:
+
+```text
+Použito při:
+Rozhodnutí podle pravidla:
+Byla potřeba stará opravná historie:
+Vzniklo tření:
+Vznikla nová datová stopa:
+Další stav:
+```
+
+Vyplněný příklad:
+
+```text
+Použito při:
+Příprava landing page služby audit webu.
+
+Rozhodnutí podle pravidla:
+Použít poptávkový tok, protože návštěvník řeší konkrétní službu.
+
+Byla potřeba stará opravná historie:
+Ne.
+
+Vzniklo tření:
+Jen drobná otázka, kam v interní šabloně zapsat důkaz důvěry.
+
+Vznikla nová datová stopa:
+Ne.
+
+Další stav:
+Pravidlo ponechat, otázku k důkazu řešit v šabloně landing page, ne v tomto pravidle.
+```
+
+Tento zápis je krátký záměrně. Když se první návrat změní v dlouhou retrospektivu, pravděpodobně jste otevřeli víc témat než jedno pravidlo unese.
+
+### Rozlišujte klid, drobné tření a nový problém
+
+Po prvním návratu mohou nastat čtyři stavy:
+
+- Klid: pravidlo šlo použít bez staré historie a bez další pomoci.
+- Drobné tření: pravidlo funguje, ale v okolním pracovním místě chybí malá opora.
+- Návrat historie: člověk musel otevřít staré poznámky, aby pravidlo pochopil.
+- Nový problém: objevila se situace, kterou pravidlo nikdy nemělo řešit.
+
+Klid nekomentujte víc, než je nutné. Zapište použití, zavřete návratový signál a pokračujte v práci. Drobné tření neposílejte automaticky zpět do pravidla. Často patří do šablony, checklistu, příkladu nebo navigace. Návrat historie je signál, že stabilizace nebyla úplná: pravidlo potřebuje jednu jasnější větu, ne exkurzi do minulosti. Nový problém patří do nové karty, pokud opravdu stojí za řešení.
+
+Špatná reakce na drobné tření:
+
+```text
+Otevřeme celé pravidlo a doplníme všechny možné varianty použití.
+```
+
+Lepší reakce:
+
+```text
+Pravidlo ponecháme. Do šablony landing page doplníme pole "důkaz důvěry nad formulářem", protože tření vzniklo tam.
+```
+
+Tím chráníte pravidlo před bobtnáním. Stabilní pravidlo nemá absorbovat každý detail okolní práce. Má držet rozhodovací hranici.
+
+### Privacy-first návrat
+
+První návrat ke stabilnímu pravidlu je ideální místo ke kontrole, jestli se údržba dokumentace nezměnila v nový sběr interních stop. Nepotřebujete sledovat, kdo pravidlo četl, jak dlouho u něj byl ani kolikrát se k němu vrátil. Potřebujete vědět, zda pravidlo při konkrétní práci pomohlo.
+
+Privacy-first záznam proto držte na úrovni situace a výsledku:
+
+- role nebo tým místo jména, pokud jméno není nutné;
+- pracovní situace místo osobního hodnocení;
+- obecný popis tření místo citace interní konverzace;
+- rozhodnutí o dalším stavu místo dlouhého protokolu;
+- smazání dočasných poznámek po přenosu výsledku.
+
+Nevytvářejte nový dashboard používání pravidel jen proto, že chcete mít jistotu. Jistota se dá často získat jednodušeji: jeden reálný průchod, jedna věta výsledku, jeden uzavřený stav. Pokud se stejné tření bude opakovat, návratový signál ho zachytí.
+
+Codyho komentář: dobrá dokumentace nepotřebuje kamery v chodbě. Stačí, když dveře vedou tam, kam mají, a když někdo občas poznamená, že klika drhla. Metaforicky. Fyzické kliky zatím necháme být, nejsme facility management.
+
+### Karta prvního běžného návratu
+
+```text
+Pravidlo:
+Pracovní situace:
+Kdo pravidlo použil:
+Rozhodnutí podle pravidla:
+Byla potřeba stará historie:
+Tření:
+Kam tření patří:
+Vznikla nová datová stopa:
+Co mažeme nebo nezapisujeme:
+Další stav:
+Návratový signál:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Výběr kontaktní varianty pro landing page služby.
+
+Pracovní situace:
+Příprava stránky pro audit webu.
+
+Kdo pravidlo použil:
+Marketing owner.
+
+Rozhodnutí podle pravidla:
+Použít poptávkový tok, ne obecný kontakt.
+
+Byla potřeba stará historie:
+Ne.
+
+Tření:
+Chybělo místo pro důkaz důvěry v šabloně stránky.
+
+Kam tření patří:
+Do šablony landing page, ne do pravidla kontaktní varianty.
+
+Vznikla nová datová stopa:
+Ne.
+
+Co mažeme nebo nezapisujeme:
+Neukládáme pracovní chat ani osobní poznámky z průchodu.
+
+Další stav:
+Pravidlo ponechat v klidu, šablonu stránky drobně doplnit při nejbližší editaci.
+
+Návratový signál:
+Vrátit se k pravidlu jen tehdy, pokud další konkrétní služba znovu narazí na hranici kontakt versus poptávka.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte reálný úkol, při kterém se pravidlo použilo.
+2. Minuta 2: zapište rozhodnutí, které pravidlo umožnilo.
+3. Minuta 3: ověřte, jestli byla potřeba stará opravná historie.
+4. Minuta 4: rozdělte případné tření na pravidlo, okolní šablonu nebo nové téma.
+5. Minuta 5: zapište další stav a smažte pomocné poznámky bez hodnoty.
+
+Výstup workshopu:
+
+```text
+Stabilní pravidlo bylo použito při běžné práci. Je jasné, zda zůstává v klidu, potřebuje malou lokální oporu, nebo se má otevřít jen kvůli konkrétnímu návratu starého tření.
+```
+
+### Checklist kapitoly
+
+- Vrátili jsme se k pravidlu přes reálný pracovní úkol?
+- Nepustili jsme umělý audit jen proto, že pravidlo bylo nedávno upravené?
+- Bylo možné pravidlo použít bez staré opravné historie?
+- Vzniklo jasné rozhodnutí, ne jen další poznámka?
+- Sledujeme tři známky samostatnosti místo kompletní revize?
+- Umíme rozlišit klid, drobné tření, návrat historie a nový problém?
+- Pokud vzniklo tření, patří opravdu do tohoto pravidla?
+- Nezapisujeme osobní hodnocení člověka místo pracovní situace?
+- Nevznikl nový tracker, dashboard nebo kontrolní rituál?
+- Smazali jsme dočasné poznámky po přenosu výsledku?
+- Je další stav pravidla vyjádřený jednou větou?
+- Má návratový signál konkrétní podmínku, ne kalendářový dohled?
+
+První návrat je úspěšný i tehdy, když skončí větou "nic neměnit". U stabilních pravidel je to často nejlepší výsledek. Dokumentace nemá dokazovat, že je neustále zaměstnaná. Má tiše držet práci pohromadě, dokud se neobjeví skutečný důvod ji znovu otevřít.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha UA o prvním běžném návratu ke stabilnímu pravidlu po uzavřené malé úpravě: reálný pracovní úkol, známky samostatnosti, rozlišení klidu, tření a nového problému, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TZ o uzavření ověřené malé úpravy do stabilního pracovního pravidla: přepis do normálního tónu, zavření pomocných artefaktů, lehký návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TY o ověření malé úpravy po potvrzené revizní poznámce: reálné použití, tři signály, čtyři výsledné stavy, zavření návratového signálu, pravidla pro novou poznámku, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TX o provedení jedné malé úpravy po potvrzené revizní poznámce: práce z potvrzené věty, výběr nejbližšího pracovního místa, jeden typ zásahu, zavření původní poznámky, lehký návratový signál, privacy-first provedení, karta, mini workshop a checklist.
