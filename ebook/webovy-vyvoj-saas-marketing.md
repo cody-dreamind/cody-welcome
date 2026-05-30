@@ -220,6 +220,115 @@ Stav "nechat otevřené" používejte jen výjimečně a vždy s datem další k
 
 Zavřený krok má zvláštní hodnotu: zmenšuje budoucí šum. V e-booku, webu, SaaS produktu i marketingu často nevyhrává ten, kdo vymyslí nejvíc dalších úprav. Vyhrává ten, kdo umí dost rychle poznat, která úprava si nezaslouží další kolečko práce.
 
+## Jak držet odložený krok mimo aktivní práci
+
+Odložený krok je užitečný jen tehdy, když opravdu přestane soutěžit o pozornost. Pokud ho tým sice označí jako odložený, ale dál o něm mluví na každém plánování, drží ho v polovině úkolů a nechává kolem něj vznikat nové poznámky, nic se neodložilo. Jen se změnilo slovo na nálepce.
+
+Odložení má chránit aktuální práci. Tým říká: téma není zapomenuté, ale teď nemá právo rozšiřovat rozsah, přidávat data, otevírat nový nástroj ani vytvářet další rozhodovací větev. Aby to fungovalo, musí mít odložený krok jasnou hranici a návratový signál.
+
+Použijte krátký zápis:
+
+```text
+Odložený krok:
+
+Proč ho teď neděláme:
+
+Co by ho znovu otevřelo:
+
+Kde je uložený:
+
+Kdo drží kontext:
+
+Co se kvůli němu teď nesbírá:
+
+Nejdřívější návrat:
+```
+
+Příklad:
+
+```text
+Odložený krok:
+Přidat detailnější lead scoring do poptávkového toku.
+
+Proč ho teď neděláme:
+Nemáme ještě potvrzené, že problém je v kvalifikaci leadů. Poslední poptávky spíš ukazují nejasné vysvětlení služby.
+
+Co by ho znovu otevřelo:
+Po úpravě vysvětlení služby přijdou aspoň tři relevantní poptávky, u kterých obchod opakovaně nepozná prioritu nebo fit.
+
+Kde je uložený:
+U rozhodovacího záznamu k úpravě landing page.
+
+Kdo drží kontext:
+Marketing owner.
+
+Co se kvůli němu teď nesbírá:
+Nepřidáváme rozpočet, velikost firmy ani automatické obohacování kontaktu do prvního formuláře.
+
+Nejdřívější návrat:
+Po deseti nových relevantních poptávkách nebo při dalším měsíčním review.
+```
+
+Takový zápis nebrání návratu. Brání samovolnému návratu. Rozdíl je zásadní. Dobré téma se má vrátit ve chvíli, kdy existuje nový důkaz, ne ve chvíli, kdy si na něj někdo vzpomene při hledání další práce.
+
+### Odložené neznamená připravené k práci
+
+Odložený krok často svádí k tomu, aby si tým "aspoň něco připravil". Vznikne první návrh formuláře, první tabulka eventů, první seznam dodavatelů, první rozpracovaná automatizace. Jenže tím se odložený krok znovu stává aktivní prací, akorát bez jasného vlastnictví.
+
+Pokud je krok odložený, nedělejte k němu přípravu, která vytváří nový provozní stav. Výjimkou je krátký rozhodovací záznam. Všechno ostatní patří až po návratový signál.
+
+Typické věci, které u odloženého kroku nedělejte:
+
+- nezakládejte nový dashboard "pro jistotu";
+- nepřidávejte formulářová pole, která možná jednou pomohou;
+- nevytvářejte pracovní exporty, dokud nevíte, jaké rozhodnutí mají podpořit;
+- neposílejte data novému dodavateli jen kvůli budoucímu porovnání;
+- nepište detailní specifikaci, pokud krok nemá datum ani vlastníka návratu.
+
+Můžete udělat jednu věc: nechat směrovku. Směrovka říká, kde je rozhodnutí uložené a jaký signál ho znovu otevře. To stačí. Odložený krok nemá potřebovat vlastní malý ekosystém.
+
+### Parkoviště není backlog
+
+Mnoho týmů má místo, kam odkládá nápady. Říká se mu backlog, parkoviště, someday list nebo ještě horší kreativní název. Problém není v názvu. Problém je v tom, že se z parkoviště snadno stane druhý aktivní plán.
+
+Backlog má obsahovat práci, která čeká na prioritu. Parkoviště má obsahovat témata, která čekají na důvod. To je jiná věc.
+
+Jednoduché rozlišení:
+
+- Backlog: víme, proč to dělat, jen to teď není nejvyšší priorita.
+- Parkoviště: nevíme ještě, jestli to dělat; čekáme na signál.
+- Archiv: už víme, že to teď práci vést nemá.
+
+Pokud odložený krok nemá návratový signál, nepatří do backlogu. Patří do parkoviště nebo archivu. Jinak bude při každém plánování vypadat jako práce, kterou tým "jen nestíhá", i když ve skutečnosti ještě neprošla rozhodnutím.
+
+Codyho komentář: backlog bez rozlišení důvodu a priority je jako lednice po velkém nákupu. Všechno tam nějak je, ale nikdo už neví, co se má sníst dnes, co je na víkend a co se tam dostalo omylem v roce, kdy jsme byli optimističtější.
+
+### Privacy-first hodnota odložení
+
+Odložení je často nejlepší privacy-first rozhodnutí v dané chvíli. Když neotevřete nový krok, nevznikne nový export, tracker, formulářové pole, dodavatelský účet ani interní kopie dat. Tým si ponechá možnost se k tématu vrátit, ale nezvětší datovou stopu jen kvůli nejistotě.
+
+Do zápisu proto vždy přidejte větu:
+
+```text
+Díky odložení teď nesbíráme:
+```
+
+Tato věta mění tón rozhodnutí. Odložení není pasivní. Je to aktivní ochrana rozsahu a dat. Pokud později návratový signál nastane, tým bude mít čistší start: ví, co zatím nevzniklo, proč to nevzniklo a jaký důkaz nově mění situaci.
+
+### Checklist odloženého kroku
+
+- Je jasné, proč krok teď nejde do aktivní práce?
+- Má odložený krok konkrétní návratový signál?
+- Je uložený na jednom místě, ne roztroušený v chatu, poznámkách a backlogu?
+- Víme, kdo drží kontext, pokud se signál objeví?
+- Neprobíhá kolem odloženého kroku skrytá příprava?
+- Je rozlišené, zda jde o backlog, parkoviště nebo archiv?
+- Je zapsané, jaká data, exporty, trackery nebo dodavatelé díky odložení nevznikají?
+- Má krok nejdřívější datum nebo situaci návratu?
+- Umí tým při plánování říct: "toto teď neotevíráme" bez nové debaty?
+
+Odložený krok je dobře zvládnutý ve chvíli, kdy se k němu tým nemusí pořád vracet, ale zároveň se neztratí důvod, který by ho jednou mohl znovu otevřít. To je zdravý kompromis mezi pamětí a klidem. Rukopis má pomáhat rozhodovat, ne držet každou možnost při životě jen proto, že zněla chytře.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -150068,6 +150177,7 @@ Výstup workshopu:
 
 ## Pracovní log
 
+- 2026-05-30: Doplněna úvodní podkapitola o držení odloženého kroku mimo aktivní práci: návratový signál, rozdíl mezi backlogem, parkovištěm a archivem, privacy-first hodnota odložení a checklist.
 - 2026-05-30: Doplněna úvodní podkapitola o zavření nebo odložení dalšího kroku: kdy nepokračovat, rozdíl mezi zavřením a odložením, privacy-first důvod pro nesbírání nových dat, rozhodovací matice a checklist.
 - 2026-05-30: Doplněna Příloha UI o ověření čekací poznámky po opakování nebo expiraci: návratová podmínka, čtyři výsledné stavy, převod do malé úpravy, zavření bez změny, oddělení nového problému, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UH o převodu drobného tření po prvním návratu do čekací poznámky: rozlišení slabého tření, návratová podmínka, expirace, oddělení nového problému, privacy-first limit, karta, mini workshop a checklist.
