@@ -150574,8 +150574,269 @@ Potvrzená čekací poznámka je převedená do jedné lokální úpravy, stará
 
 Malá úprava po čekací poznámce je dobrá tehdy, když se skoro ztratí v běžné práci. Člověk příště narazí na lepší větu, vybere správněji a nemusí se ptát. Žádný ohňostroj, žádný nový proces. Jen méně tření tam, kde už bylo dvakrát vidět.
 
+## Příloha UK: Ověření malé úpravy po ověřené čekací poznámce při dalším běžném použití
+
+Příloha UJ provedla malou úpravu po ověřené čekací poznámce. Tahle příloha řeší další krok: jak poznat, že úprava opravdu pomohla, aniž by se z ní stal nový dohledový systém. Po malé úpravě není cílem měřit všechno. Cílem je při příštím přirozeném použití zjistit, jestli původní tření zmizelo, zůstalo, nebo se ukázalo jako větší problém.
+
+Ověření má být krátké, konkrétní a blízko práci. Nezakládejte kvůli němu novou analytiku, pokud stačí jeden průchod šablonou, jedna kontrola výstupu nebo krátká poznámka od člověka, který úpravu použil. Malá úprava si zaslouží malé ověření. Když ji obalíte novým procesem, možná získáte víc dat, ale taky víc práce, víc stop a víc budoucího úklidu.
+
+Úvodní pracovní věta:
+
+```text
+Malou úpravu ověříme při prvním běžném použití stejným typem práce, kvůli kterému vznikla; výsledek uzavřeme jako ponechat, jednou doladit, přerámovat problém, nebo vrátit zpět.
+```
+
+Tahleta věta chrání rozsah. Ověření se nespouští hned po nasazení jen proto, že máme chuť "se na to ještě podívat". Spouští se až ve chvíli, kdy člověk opravdu dělá stejnou práci a úprava má mít šanci pomoci.
+
+### Spouštěč ověření
+
+Správný spouštěč není datum v kalendáři, ale reálná pracovní situace. Pokud úprava vznikla u šablony landing page, ověřujte ji při další landing page. Pokud vznikla u rozhodovací věty pro kvalifikaci poptávky, ověřujte ji při další relevantní poptávce. Pokud vznikla u interního checklistu, ověřujte ji při dalším průchodu checklistem.
+
+Slabý spouštěč:
+
+```text
+Za týden zkontrolovat, jestli úprava funguje.
+```
+
+Lepší spouštěč:
+
+```text
+Při další landing page ověřit, jestli autor vybere důkaz nad formulářem bez dodatečné otázky na tým.
+```
+
+První spouštěč zve k obecné debatě. Druhý spouštěč říká, kdy přesně se ověřuje, kdo se úpravy dotkne a jak vypadá původní tření. To je rozdíl mezi kontrolou a pocitem, že se něco kontroluje.
+
+Pokud se reálné použití dlouho neobjeví, neberte to automaticky jako problém. Může to znamenat, že dané pracovní místo není tak frekventované, jak jste si mysleli. V takovém případě po předem domluvené expiraci zapište stav "neověřeno bez další akce" a vraťte se k tématu až tehdy, když se pracovní situace opravdu objeví.
+
+### Tři signály při použití
+
+Při ověření sledujte jen tři signály:
+
+- nalezení: člověk narazil na upravené místo ve správný okamžik;
+- rozhodnutí: úprava pomohla udělat původně váhavý krok bez dalšího doptávání;
+- datová stopa: ověření nepřidalo zbytečné kopie, citace, screenshoty, trackery ani nové formulářové údaje.
+
+Tyhle tři signály stačí. Nepotřebujete skóre spokojenosti s větou, detailní čas strávený nad šablonou ani porovnání pěti variant. Pokud se bavíme o malé úpravě, dobrý výsledek je často nudný: člověk našel větu, použil ji, nic dalšího nevzniklo.
+
+Příklad zápisu:
+
+```text
+Nalezení:
+Autor narazil na rozhodovací větu přímo při vyplňování pole "důkaz nad formulářem".
+
+Rozhodnutí:
+Vybral konkrétní referenci bez dotazu na tým.
+
+Datová stopa:
+Nevznikl nový export ani kopie zákaznické citace; použil se existující schválený příklad.
+```
+
+Pokud jeden signál chybí, nepřeskakujte rovnou k nové úpravě. Nejdřív zjistěte, který typ problému se ukázal. Nenalezení je problém umístění. Nerozhodnutí je problém obsahu. Zbytečná datová stopa je problém provozního chování okolo úpravy. Každý vyžaduje jiný zásah.
+
+### Čtyři výsledné stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Ponechat beze změny: úprava pomohla a nevytvořila nové tření.
+- Jednou doladit: úprava pomohla, ale jedno místo brání samostatnému použití.
+- Přerámovat problém: úprava ukázala, že původní tření bylo jen příznak.
+- Vrátit zpět: úprava zhoršila práci, zavedla nejasnost nebo přidala nežádoucí datovou stopu.
+
+Nepřidávejte pátý stav "ještě sledovat". Pokud potřebujete dál čekat, znamená to buď slabý důkaz, nebo špatně napsaný spouštěč. U malé úpravy se po prvním reálném použití dá většinou rozhodnout dostatečně dobře. Ne dokonale, ale dostatečně pro další krok.
+
+Příklad:
+
+```text
+Stav:
+Jednou doladit.
+
+Proč:
+Autor našel rozhodovací větu, ale nevěděl, jestli "konkrétní reference" znamená logo zákazníka, krátkou citaci, nebo minipříběh.
+
+Doladění:
+Doplnit do věty závorku: "například krátká schválená reference s konkrétním výsledkem".
+
+Co dál nesledujeme:
+Nevytváříme databázi důkazů ani měření výkonu jednotlivých referencí.
+```
+
+Tento výsledek je pořád malý. Doladí jedno slovo nebo příklad a uzavře ověření. Pokud by se z něj měla stát nová struktura referencí, nejde o doladění, ale o přerámování problému.
+
+### Pravidlo jednoho doladění
+
+Malá úprava smí mít po ověření nejvýše jedno doladění. Pokud ani po něm nefunguje, nelepte na ni další vysvětlivku. Otevřete samostatnou kartu a přiznejte, že problém je širší.
+
+Pravidlo:
+
+```text
+Jedno ověření, jedno možné doladění, potom buď klid, přerámování, nebo návrat zpět.
+```
+
+Tohle pravidlo je přísné schválně. Chrání pracovní místa před pomalým zarůstáním poznámkami. Nejhorší šablony nevznikají jedním špatným rozhodnutím. Vznikají dvaceti dobrými dodatky, z nichž každý měl lokálně pravdu a dohromady udělaly nepoužitelný text.
+
+Codyho komentář: malé doladění je jako špetka soli. Jedna pomůže. Pátá už není strategie, ale volání o pomoc z kuchyně.
+
+### Kdy vrátit úpravu zpět
+
+Vrácení zpět není ostuda. Je to normální výsledek ověření. Malá úprava byla hypotéza vložená do pracovního místa. Pokud zhoršila rozhodování, vyrobila novou nejasnost nebo přidala nežádoucí datovou stopu, vraťte ji bez dlouhé obhajoby.
+
+Vrátit zpět dává smysl, když:
+
+- člověk úpravu našel, ale rozhodl se podle ní hůř než předtím;
+- věta je přesnější, ale zpomalila práci víc, než pomohla;
+- úprava posílá lidi k nekanonickému zdroji;
+- po úpravě se začaly kopírovat citlivé příklady do pracovních dokumentů;
+- původní tření se neobjevilo, ale úprava vyvolala nové otázky;
+- z lokální pomůcky se stala autorita pro situace, pro které nebyla určená.
+
+Zápis návratu zpět:
+
+```text
+Úprava:
+Doplněná věta k výběru důkazu nad formulářem.
+
+Proč vracíme:
+Autor ji použil i u stránky pro existující zákazníky, kde vedla k příliš tvrdému prodejnímu důkazu.
+
+Co obnovujeme:
+Původní kratší popisek pole.
+
+Co jsme se naučili:
+Problém není jen výběr důkazu, ale rozlišení fáze vztahu se zákazníkem.
+
+Další krok:
+Samostatná karta pro pravidlo důkazů podle typu publika.
+```
+
+Dobré vrácení zpět zachová poučení, ale nezachová špatnou úpravu. To je důležitý rozdíl. Historie může zůstat v krátké rozhodovací větě, pracovní místo se ale vrátí do čistého stavu.
+
+### Privacy-first ověření
+
+Ověření malé úpravy má být nenápadné i z pohledu dat. Nezvyšujte sběr jen proto, že chcete mít jistotu. U drobné změny často stačí pracovní poznámka od vlastníka, případně anonymizovaný příklad výsledku.
+
+Privacy-first pravidla:
+
+- neukládejte celé průchody obrazovkou, pokud ověřujete jednu větu v šabloně;
+- nepřidávejte session recording kvůli ověření interního pracovního místa;
+- nekopírujte zákaznické citace do ověřovací karty, pokud stačí popsat typ důkazu;
+- nemažte kontext rozhodnutí, ale zkraťte ho na pracovní minimum;
+- pokud úprava vede k novému sběru dat, vraťte se k otázce, jestli problém nejde vyřešit textem, příkladem nebo lepším umístěním;
+- po uzavření ověření smažte dočasné poznámky, které už nemají provozní účel.
+
+Privacy-first ověření není "měřit méně, protože se nám nechce". Je to měřit jen tolik, kolik stačí k rozhodnutí. U malých úprav je dobrá evidence často kratší než debata o tom, jakou evidenci bychom mohli vést.
+
+### Karta ověření malé úpravy
+
+```text
+Pracovní místo:
+Malá úprava:
+Původní čekací poznámka:
+Spouštěč ověření:
+Kdo úpravu použil:
+
+Nalezení:
+Rozhodnutí:
+Datová stopa:
+
+Výsledný stav:
+- ponechat / jednou doladit / přerámovat problém / vrátit zpět
+
+Co případně doladíme:
+Co vracíme nebo zavíráme:
+Co výslovně dál nesledujeme:
+Privacy-first úklid:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Šablona landing page, pole "důkaz nad formulářem".
+
+Malá úprava:
+Doplněna rozhodovací věta pro výběr reference, čísla nebo certifikace.
+
+Původní čekací poznámka:
+Opakovaná nejistota při výběru důkazu důvěry.
+
+Spouštěč ověření:
+Další landing page pro nový segment.
+
+Kdo úpravu použil:
+Marketing owner.
+
+Nalezení:
+Úprava byla přímo u pole a autor ji našel bez hledání v metodice.
+
+Rozhodnutí:
+Vybral schválenou referenci s konkrétním výsledkem bez dotazu na tým.
+
+Datová stopa:
+Nevznikla nová kopie citace ani nový tracker.
+
+Výsledný stav:
+Ponechat beze změny.
+
+Co případně doladíme:
+Nic.
+
+Co vracíme nebo zavíráme:
+Zavíráme ověřovací kartu.
+
+Co výslovně dál nesledujeme:
+Neměříme výkon jednotlivých důkazů a neotevíráme databázi referencí.
+
+Privacy-first úklid:
+Mažeme dočasnou poznámku z ověření, v changelogu necháváme jen výslednou větu.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte původní čekací poznámku a provedenou úpravu.
+2. Minuta 2: potvrďte, že ověření proběhlo při správném reálném spouštěči.
+3. Minuta 3: zapište signál nalezení.
+4. Minuta 4: zapište signál rozhodnutí.
+5. Minuta 5: zapište signál datové stopy.
+6. Minuta 6: vyberte jeden ze čtyř výsledných stavů.
+7. Minuta 7: pokud je potřeba doladění, napište jen jednu konkrétní větu; jinak zavřete kartu.
+8. Minuta 8: smažte nebo zkraťte dočasné ověřovací poznámky.
+
+Výstup workshopu:
+
+```text
+Malá úprava má po prvním běžném použití uzavřený stav: zůstává, jednou se doladí, problém se přerámuje, nebo se úprava vrací zpět.
+```
+
+### Checklist kapitoly
+
+- Ověřovali jsme při reálném použití, ne podle kalendářové nervozity?
+- Byl spouštěč ověření stejný typ práce, kvůli kterému úprava vznikla?
+- Zapsali jsme signál nalezení?
+- Zapsali jsme signál rozhodnutí?
+- Zapsali jsme signál datové stopy?
+- Vybrali jsme jen jeden ze čtyř výsledných stavů?
+- Pokud dolazujeme, je to opravdu jedno malé doladění?
+- Pokud úprava nefunguje, umíme ji vrátit bez obhajování sunk costu?
+- Oddělili jsme širší problém do samostatné karty místo natahování malé úpravy?
+- Nepřidali jsme tracker, session recording, nový dashboard ani nové formulářové pole?
+- Zkrátili jsme ověřovací poznámky na pracovní minimum?
+- Je jasné, co dál nesledujeme?
+- Má výsledek vlastníka a datum?
+- Může další člověk použít pracovní místo bez znalosti celé historie čekací poznámky?
+
+Dobré ověření malé úpravy končí tím, že pracovní místo je zase obyčejné. Buď obsahuje lepší větu, nebo se vrátí zpět, nebo pošle větší problém do samostatné karty. V žádném z těch stavů by po něm neměla zůstat hromada pomocných poznámek, které budou příští měsíc předstírat, že jsou dokumentace.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha UK o ověření malé úpravy po ověřené čekací poznámce při dalším běžném použití: spouštěč ověření, tři signály, čtyři výsledné stavy, pravidlo jednoho doladění, vrácení zpět, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UJ o provedení malé úpravy po ověřené čekací poznámce: potvrzený signál, nejbližší pracovní místo, jeden typ zásahu, zavření původní poznámky, lehké ověření, privacy-first provedení, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna úvodní podkapitola o držení odloženého kroku mimo aktivní práci: návratový signál, rozdíl mezi backlogem, parkovištěm a archivem, privacy-first hodnota odložení a checklist.
 - 2026-05-30: Doplněna úvodní podkapitola o zavření nebo odložení dalšího kroku: kdy nepokračovat, rozdíl mezi zavřením a odložením, privacy-first důvod pro nesbírání nových dat, rozhodovací matice a checklist.
