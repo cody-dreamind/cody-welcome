@@ -146888,8 +146888,263 @@ Drobné tření po prvním návratu je zachycené jako revizní poznámka. Stabi
 
 Revizní poznámka po prvním návratu je dobrý sluha a mizerný šéf. Má udržet slabý signál na očích, ale nesmí převzít řízení stabilního pravidla. Pokud se signál potvrdí, otevře další malou úpravu. Pokud ne, poznámka zmizí a pravidlo pokračuje v klidu. Přesně tak má vypadat údržba, která pomáhá práci místo toho, aby se sama stala prací.
 
+## Příloha TW: Ověření revizní poznámky po opakování nebo expiraci
+
+Příloha TV nechala po prvním návratu vzniknout malou revizní poznámku. Teď přichází její zkouška. Poznámka buď zachytila slabý signál, který se při dalším použití potvrdil, nebo jen dočasné zaváhání, které má bez sentimentu zmizet. Obě možnosti jsou dobrý výsledek, pokud se uzavřou vědomě.
+
+Smyslem této přílohy není hledat důvod, proč poznámku udržet při životě. Smyslem je rozhodnout, jestli má poznámka přejít do malé úpravy, zůstat ještě krátce podmíněně otevřená, nebo se zavřít bez zásahu. Dokumentace má sloužit práci; nemá sbírat připomínky jako suvenýry.
+
+Úvodní pracovní věta:
+
+```text
+Revizní poznámku po prvním návratu otevíráme jen při splnění návratové podmínky nebo při expiraci. Výsledkem musí být potvrzená malá úprava, vědomé zavření, nebo jedna krátká prodloužená podmínka.
+```
+
+Tahle věta chrání stabilizované pravidlo před nenápadným návratem do revizního režimu. Jakmile se k poznámce vracíte bez spouštěče, přestává být poznámkou a stává se dalším kanálem úzkosti. Pokud se k ní vracíte po spouštěči, musí vzniknout rozhodnutí.
+
+### Vraťte se k původní podmínce
+
+Nezačínejte tím, co si o pravidle myslíte dnes. Začněte původní návratovou podmínkou. Právě ona určuje, jestli se poznámka vůbec má otevírat.
+
+Příklad původní podmínky:
+
+```text
+Vrátit se, pokud se stejné zaváhání u rozdílu mezi "rychlý kontakt" a "poptávka služby" objeví při dalším použití pravidla nebo při nejbližší úpravě kontaktní šablony do 30 dnů.
+```
+
+Ověřovací otázka:
+
+```text
+Stalo se přesně to, kvůli čemu jsme poznámku nechali otevřenou?
+```
+
+Možné odpovědi:
+
+- Ano, stejný signál se zopakoval ve stejném pracovním okamžiku.
+- Částečně, objevil se podobný signál, ale v jiném místě nebo s jiným důvodem.
+- Ne, signál se nezopakoval a nastala expirace.
+- Nevíme, protože poznámka neměla použitelný spouštěč nebo nikdo nezapsal další průchod.
+
+První odpověď může vést k malé úpravě. Druhá vyžaduje opatrnost: podobnost ještě není potvrzení. Třetí je důvod poznámku zavřít bez změny. Čtvrtá je chyba poznámky, ne důkaz problému pravidla. Pokud nebyl spouštěč použitelný, opravte příští zapisování poznámek; neprodlužujte aktuální nejistotu jen proto, že se špatně ověřovala.
+
+### Rozlišujte čtyři výsledky ověření
+
+Po návratu k podmínce vyberte jeden stav. Ne dva, ne kompromisní odstavec, ne "ještě uvidíme". Revizní poznámka má malý rozsah, takže i rozhodnutí má být malé.
+
+Čtyři použitelné výsledky:
+
+1. Potvrzeno: stejné tření se zopakovalo a má smysl udělat jednu malou úpravu.
+2. Nepotvrzeno: signál se nezopakoval a poznámka se zavírá bez změny.
+3. Přesměrováno: ukázalo se, že nejde o problém pravidla, ale o navigaci, šablonu, proces nebo nový datový tok.
+4. Krátce prodlouženo: podmínka byla skoro splněná, ale chybí jeden přirozený průchod, který nastane brzy.
+
+Prodloužení používejte vzácně. Musí mít novou, ještě kratší podmínku a datum konce. Pokud poznámku prodlužujete podruhé, už nejde o drobný signál. Buď ji zavřete, nebo z ní udělejte samostatnou pracovní kartu s vlastníkem.
+
+Příklad potvrzení:
+
+```text
+Výsledek:
+Potvrzeno.
+
+Důkaz:
+Dva editoři při dvou běžných úpravách stránky zaváhali u stejného rozdílu mezi "rychlý kontakt" a "poptávka služby".
+
+Další krok:
+Upravit jednu větu v kanonickém pravidle a doplnit krátký příklad hranice.
+```
+
+Příklad zavření:
+
+```text
+Výsledek:
+Nepotvrzeno.
+
+Důkaz:
+Do 30 dnů proběhly dvě běžné úpravy kontaktních šablon bez stejného zaváhání.
+
+Další krok:
+Poznámku zavřít bez změny pravidla.
+```
+
+### Potvrzený signál převádějte do jedné malé úpravy
+
+Když se signál potvrdí, pořád to není pozvánka k velkému přepisu. Potvrdila se jedna konkrétní slabina. Úprava má odpovědět právě na ni.
+
+Vhodné malé úpravy:
+
+- přepsat jednu větu, která rozlišuje dva podobné pojmy;
+- doplnit jeden příklad;
+- přejmenovat jeden odkaz, pokud problém byl v navigaci;
+- odstranit zastaralou poznámku v okolní šabloně;
+- přidat jednu rozhodovací hranici do checklistu.
+
+Nevhodné reakce:
+
+- přepsat celé pravidlo;
+- otevřít novou kapitolu procesu;
+- přidat všechny známé výjimky;
+- založit pravidelný review meeting;
+- obnovit starý dokument jen jako "podklad";
+- začít sledovat interní používání lidí místo kvality pravidla.
+
+Dobrá převodní věta:
+
+```text
+Protože se stejné zaváhání zopakovalo, doplníme do pravidla jednu větu: "Rychlý kontakt slouží pro první dotaz bez jasného rozsahu; poptávka služby slouží pro situaci, kdy návštěvník už vybírá konkrétní dodávku."
+```
+
+Tahle věta je dost malá na provedení a dost konkrétní na ověření. Po úpravě má být jasné, která část se změnila a proč. Pokud se převodní věta nevejde do jedné až dvou vět, úprava je pravděpodobně větší než původní signál.
+
+### Kdy poznámku zavřít bez změny
+
+Zavření bez změny není ztracená práce. Je to důkaz, že tým umí nechat stabilní pravidlo na pokoji. To je u dokumentace vzácnější dovednost, než se tváříme. Přidávat je snadné; nepřidat poctivě je těžší.
+
+Poznámku zavřete bez změny, když:
+
+- návratová podmínka nenastala do data expirace;
+- další běžné použití proběhlo bez stejného tření;
+- původní tření se ukázalo jako jednorázový kontext;
+- problém byl vyřešen jinde a pravidlo se nemá měnit;
+- poznámka neměla dost konkrétní spouštěč a nejde ji férově ověřit.
+
+Závěrečný zápis má být krátký:
+
+```text
+Revizní poznámka zavřena bez změny. Stejné tření se do expirace nezopakovalo a pravidlo zůstává v platnosti.
+```
+
+Nepřidávejte k tomu omluvný odstavec. Když poznámka splnila účel, nemusí po sobě nechávat pomník. Stačí krátká stopa v changelogu nebo u pravidla, pokud je důležité vědět, že signál byl zvažovaný.
+
+### Privacy-first ověření poznámky
+
+Ověření revizní poznámky často svádí k tomu, že tým začne shromažďovat víc kontextu, než potřebuje. U drobného tření ale většinou stačí stručný pracovní důkaz: role, situace, výsledek a rozhodnutí. Ne celé vlákno, ne screenshoty, ne nahrávky obrazovky, ne jména lidí.
+
+Privacy-first minimum:
+
+- zapisujte počet přirozených průchodů, ne detailní chování jednotlivců;
+- uvádějte roli nebo tým, ne jméno, pokud jméno není nutné;
+- neukládejte zákaznické poptávky jako důkaz interního tření;
+- po zavření smažte dočasné poznámky, které už nemají hodnotu;
+- pokud vznikne nová malá úprava, přeneste jen výsledek, ne celou historii;
+- pokud se ukáže nový datový tok, otevřete samostatnou privacy kartu.
+
+Příklad dobrého ověřovacího důkazu:
+
+```text
+Dva běžné průchody šablonou služby. V obou případech role editoru zaváhala u stejné hranice pojmů. Bez osobních detailů, bez zákaznických dat.
+```
+
+Příklad přestřeleného důkazu:
+
+```text
+Uložené celé chatové vlákno, screenshot konkrétní poptávky, jméno editora a interní poznámky obchodníka.
+```
+
+Druhá varianta dává pocit jistoty, ale kupuje ho za zbytečnou datovou stopu. U ověření drobné poznámky se má minimalizovat stejně přísně jako u formuláře na webu: sbírat jen to, co skutečně mění rozhodnutí.
+
+### Karta ověření revizní poznámky
+
+```text
+Původní pravidlo:
+Původní revizní poznámka:
+Návratová podmínka:
+Co návrat spustilo:
+Kolik běžných průchodů jsme zkontrolovali:
+Co se zopakovalo:
+Co se nezopakovalo:
+Výsledek ověření:
+Další krok:
+Co neměníme:
+Privacy-first stopa:
+Co mažeme nebo zavíráme:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Původní pravidlo:
+Výběr kontaktní varianty pro landing page služby.
+
+Původní revizní poznámka:
+Zaváhání u rozdílu mezi "rychlý kontakt" a "poptávka služby".
+
+Návratová podmínka:
+Vrátit se, pokud se stejné zaváhání objeví při dalším použití pravidla nebo při nejbližší úpravě kontaktní šablony do 30 dnů.
+
+Co návrat spustilo:
+Stejné zaváhání při další úpravě stránky služby.
+
+Kolik běžných průchodů jsme zkontrolovali:
+Dva.
+
+Co se zopakovalo:
+Nejasná hranice mezi obecným dotazem a konkrétní poptávkou služby.
+
+Co se nezopakovalo:
+Problém s nalezením pravidla ani problém s formulářem.
+
+Výsledek ověření:
+Potvrzeno.
+
+Další krok:
+Doplnit jednu vysvětlující větu a jeden krátký příklad do pravidla.
+
+Co neměníme:
+Název pravidla, strukturu šablony, formulář ani měření.
+
+Privacy-first stopa:
+Zapsána role editoru a pracovní situace, bez jmen a zákaznických dat.
+
+Co mažeme nebo zavíráme:
+Původní revizní poznámku po provedení úpravy.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní návratovou podmínku.
+2. Minuta 2: napište, co přesně návrat spustilo.
+3. Minuta 3: rozhodněte, jestli je signál potvrzený, nepotvrzený, přesměrovaný nebo krátce prodloužený.
+4. Minuta 4: pokud je potvrzený, napište jednu malou úpravu; pokud není, napište zavírací větu.
+5. Minuta 5: zapište, co se nemění a jaká data se kvůli ověření nesbírají.
+6. Minuta 6: zavřete nebo smažte pomocné poznámky.
+
+Výstup workshopu:
+
+```text
+Revizní poznámka po prvním návratu má uzavřený stav. Buď přechází do jedné malé úpravy, nebo se zavírá bez změny. Stabilizované pravidlo se nevrací do otevřené revize.
+```
+
+### Checklist kapitoly
+
+- Otevřeli jsme poznámku jen kvůli návratové podmínce nebo expiraci?
+- Porovnali jsme aktuální situaci s původní podmínkou?
+- Víme, jestli se zopakovalo stejné tření, podobný signál, nebo nic?
+- Vybrali jsme jeden ze čtyř výsledků ověření?
+- Nepoužíváme prodloužení jako odklad rozhodnutí?
+- Pokud je signál potvrzený, vede jen k jedné malé úpravě?
+- Pokud signál potvrzený není, zavřeli jsme poznámku bez změny?
+- Nepřepisujeme celé pravidlo kvůli lokálnímu tření?
+- Nepřidáváme nový meeting, tracker ani velký backlog?
+- Rozlišili jsme problém pravidla od problému navigace, šablony nebo nového procesu?
+- Zapsali jsme, co zůstává mimo rozsah?
+- Ověřili jsme poznámku bez osobních detailů a zákaznických dat?
+- Zavřeli jsme nebo smazali pomocné poznámky, které už nemají hodnotu?
+- Má další krok vlastníka?
+- Je stabilizované pravidlo po ověření pořád použitelné pro běžnou práci?
+
+Dobře ověřená revizní poznámka má krátký život. Buď se promění v malou přesnou úpravu, nebo zmizí. Obojí je zdravé. Nezdravé je nechat ji žít vedle pravidla tak dlouho, až začne vypadat jako druhá verze pravdy.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha TW o ověření revizní poznámky po opakování nebo expiraci: návrat k původní podmínce, čtyři výsledky ověření, převod potvrzeného signálu do malé úpravy, zavření bez změny, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TV o převodu drobného tření po prvním návratu ke stabilizovanému pravidlu do revizní poznámky: potvrzení drobného signálu, oddělení nového problému, návratová podmínka, umístění poznámky, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TU o prvním běžném návratu ke stabilizovanému kanonickému pravidlu: reálná pracovní situace, tři signály klidného použití, čtyři výsledné stavy, krátký záznam, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TT o uzavření ověřené malé úpravy do stabilního kanonického pravidla: přepis aktuální pravdy, zavření pomocných artefaktů, odstranění revizního jazyka, návratový signál, privacy-first stabilizace, karta, mini workshop a checklist.
