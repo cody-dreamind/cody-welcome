@@ -145683,8 +145683,216 @@ Revizní poznámka má rozhodnutý stav. Buď končí beze změny, mění se v j
 
 Revizní poznámka má být krátká zastávka, ne druhé pravidlo vedle pravidla. Jakmile splní účel, zavřete ji. Buď tím pustí do světa jednu malou úpravu, nebo nechá kanonické místo v klidu. Obojí je dobrý výsledek, pokud je rozhodnutí jasné.
 
+## Příloha TR: Provedení malé úpravy po ověřené revizní poznámce
+
+Příloha TQ rozhodla, co se má stát s revizní poznámkou. Pokud výsledek zní "převést do malé úpravy", práce ještě není hotová. Teď je potřeba úpravu opravdu provést, ale bez toho, aby se z drobného zpřesnění stala další nekonečná revize kanonického pravidla.
+
+Smysl této přílohy je jednoduchý: vzít potvrzenou revizní poznámku, udělat přesně jeden nejmenší zásah, zavřít pomocnou stopu a nechat kanonické místo čistší než předtím. Ne širší, ne slavnostnější, ne "když už jsme u toho" v pěti odstavcích. Jen čistší.
+
+Úvodní pracovní věta:
+
+```text
+Revizní poznámka se potvrdila. Provedeme pouze nejmenší úpravu, kterou poznámka předem popsala, zavřeme její pomocné podklady a v kanonickém místě necháme krátkou aktuální pravdu.
+```
+
+Tahle věta chrání dvě věci najednou. Chrání pravidlo před bobtnáním a chrání tým před tím, aby musel při každém drobném zpřesnění znovu dokazovat celou historii rozhodnutí.
+
+### Začněte ověřeným výsledkem, ne novým nápadem
+
+Při provedení malé úpravy se vraťte k výsledku ověření. Hledejte hlavně tyto položky:
+
+- původní zadrhnutí;
+- rozhodnutý typ úpravy;
+- nejmenší další krok;
+- co výslovně neotevíráte;
+- privacy-first uzavření.
+
+Pokud někdo při provedení přinese nový nápad, nezahazujte ho, ale nedávejte ho do této úpravy. Zapište ho jako samostatný podnět, pokud má vlastní důvod. Malá úprava má být splnění ověřené poznámky, ne volná chvíle pro další optimalizace.
+
+Příklad dobrého držení rozsahu:
+
+```text
+Ověřený výsledek:
+Název odkazu "kontaktní varianty" opakovaně neříká, že pomáhá vybrat poptávkový formulář.
+
+Provedeme:
+Přejmenujeme odkaz na "výběr poptávkového formuláře".
+
+Neprovedeme:
+Nepřepisujeme formuláře, neměníme sales proces a nepřidáváme měření kliknutí.
+```
+
+Když úprava nejde provést bez otevření většího rozsahu, vraťte ji do stavu "oddělit nový podnět". To není selhání. Je to přesné pojmenování toho, že revizní poznámka ve skutečnosti potvrdila větší problém než jednu drobnou úpravu.
+
+### Upravte kanonické místo, ne okolní historii
+
+Malá úprava má zasáhnout místo, kde se bude příště skutečně rozhodovat. Typicky to bude:
+
+- název odkazu v indexu;
+- jedna věta v pravidle;
+- jedna položka checklistu;
+- umístění odkazu v šabloně;
+- krátká výjimka u pracovního pravidla;
+- odstranění duplicitní věty vedle kanonické verze.
+
+Neupravujte staré poznámky jen proto, aby vypadaly stejně jako nový stav. Staré podklady mají dvě možné budoucnosti: buď se smažou, nebo zůstanou jako krátká rozhodovací stopa. Nemají se přepisovat tak dlouho, až začne být nejasné, co bylo původní zjištění a co je aktuální pravidlo.
+
+Praktické pravidlo:
+
+```text
+Aktuální pracovní místo opravujeme. Pomocnou historii zavíráme. Starý kontext nepředstíráme jako nový stav.
+```
+
+Tohle je důležité hlavně u týmové paměti. Pokud někdo za tři měsíce hledá, co platí, má najít aktuální pravidlo. Pokud hledá, proč to platí, stačí mu krátká changelogová věta. Nemá se prohrabávat třemi verzemi revizní poznámky.
+
+### Změňte jen jeden typ věci
+
+Ověřená revizní poznámka obvykle vede k jednomu z pěti zásahů:
+
+`Přejmenovat` znamená změnit název tak, aby lépe odpovídal pracovní otázce.
+
+`Přesunout` znamená dát existující větu nebo odkaz blíž k okamžiku rozhodnutí.
+
+`Zkrátit` znamená odstranit šum, opakování nebo interní historii.
+
+`Doplnit výjimku` znamená přidat jednu úzkou situaci, kdy pravidlo neplatí beze změny.
+
+`Sloučit duplicitu` znamená ponechat jedno kanonické místo a druhé odstranit nebo odkázat.
+
+Kombinace těchto zásahů může být legitimní, ale už to není malá úprava po revizní poznámce. Pokud musíte přejmenovat, přesunout, doplnit výjimku a sloučit tři místa, založte novou ediční kartu. Jedna potvrzená drobnost nemá nést celý úklid dokumentace na zádech. Dokumentace má dost vlastních dramat, netřeba jí přidávat další.
+
+### Zavřete revizní poznámku hned po zásahu
+
+Jakmile je úprava hotová, původní revizní poznámka má skončit. Nezůstává jako otevřená připomínka. Nečeká na "ještě jedno potvrzení", pokud stop pravidlo říkalo, že ověření už proběhlo. Zavření je součást provedení.
+
+Uzavírací věta může být krátká:
+
+```text
+Revizní poznámka potvrzena a provedena: odkaz byl přejmenován na "výběr poptávkového formuláře". Pomocná poznámka se maže, v changelogu zůstává tato věta.
+```
+
+Pokud chcete po úpravě ověřit první běžné použití, založte novou návratovou podmínku. Ale nedržte starou poznámku otevřenou jen proto, že tým má rád pocit opatrnosti. Opatrnost bez konce je jen hezky oblečený nepořádek.
+
+### Privacy-first provedení malé úpravy
+
+Provedení drobné úpravy by nemělo vytvářet novou datovou stopu. Většinou nepotřebujete screenshot před a po, osobní poznámku, jméno člověka, export z nástroje ani měření použití. Potřebujete vědět, co se změnilo a proč.
+
+Privacy-first postup:
+
+- použijte anonymní popis pracovní situace místo osobního průchodu;
+- po provedení smažte pomocnou revizní poznámku, pokud už nemá rozhodovací hodnotu;
+- ponechte jen krátkou changelogovou větu nebo anonymizovaný důvod;
+- nepřidávejte analytiku, pokud jde jen o úpravu názvu, věty nebo odkazu;
+- pokud úprava ruší starý sběr dat, zkontrolujte, že staré místo opravdu zmizelo;
+- pokud vzniká výjimka, napište k ní účel a podmínku návratu.
+
+Příklad:
+
+```text
+Datová stopa po provedení:
+Zůstává jen changelogová věta. Pomocná revizní poznámka bez osobních údajů byla po úpravě smazaná. Nevznikl nový tracker, screenshot ani export.
+```
+
+Codyho komentář: malá úprava pravidla má být jako dobrý úklid stolu. Po práci je na stole méně věcí, ne nová složka "úklid stolu final final opravdu poslední".
+
+### Karta provedení malé úpravy
+
+```text
+Kanonické pravidlo:
+Ověřená revizní poznámka:
+Výsledek ověření:
+Typ úpravy:
+Přesná změna:
+Místo zásahu:
+Co výslovně neotevíráme:
+Pomocné podklady k zavření:
+Changelogová věta:
+Privacy-first uzavření:
+Návratová podmínka po úpravě:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kanonické pravidlo:
+Pro konkrétní službu použijte krátkou poptávku. Rychlý kontakt použijte pro obecný první dotaz bez vybrané služby.
+
+Ověřená revizní poznámka:
+Název odkazu "kontaktní varianty" opakovaně nepomohl editorovi poznat, že řeší výběr formuláře.
+
+Výsledek ověření:
+Převést do malé úpravy.
+
+Typ úpravy:
+Přejmenovat.
+
+Přesná změna:
+Odkaz "kontaktní varianty" přejmenovat na "výběr poptávkového formuláře".
+
+Místo zásahu:
+Kanonický index šablon landing page.
+
+Co výslovně neotevíráme:
+Neměníme formuláře, text pravidla, sales proces ani měření kliknutí.
+
+Pomocné podklady k zavření:
+Smazat revizní poznámku po provedení.
+
+Changelogová věta:
+Po ověření revizní poznámky byl zpřesněn název odkazu na pravidlo pro výběr poptávkového formuláře.
+
+Privacy-first uzavření:
+Bez screenshotu, bez osobního průchodu, bez nového měření. Zůstává jen changelogová věta.
+
+Návratová podmínka po úpravě:
+Vrátit se jen při dalším opakovaném váhání u stejného odkazu.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte ověřenou revizní poznámku a výsledek ověření.
+2. Minuta 2: potvrďte jeden typ úpravy a přesnou změnu.
+3. Minuta 3: najděte kanonické místo zásahu.
+4. Minuta 4: napište, co výslovně neotevíráte.
+5. Minuta 5: proveďte nebo zadejte úpravu a zavřete pomocné podklady.
+6. Minuta 6: zapište changelogovou větu, privacy-first uzavření a návratovou podmínku.
+
+Výstup workshopu:
+
+```text
+Ověřená revizní poznámka se proměnila v jednu konkrétní úpravu kanonického místa. Pomocná stopa je zavřená a pravidlo je pro další běžné použití čistší.
+```
+
+### Checklist kapitoly
+
+- Vycházíme z ověřené revizní poznámky, ne z nového dojmu?
+- Je výsledek ověření opravdu "převést do malé úpravy"?
+- Umíme přesnou změnu napsat jednou větou?
+- Zasahujeme kanonické pracovní místo, ne jen pomocnou historii?
+- Vybrali jsme jeden typ úpravy?
+- Je jasné, co výslovně neotevíráme?
+- Neopravujeme okolní dokumentaci jen proto, že je po ruce?
+- Zavřeli jsme původní revizní poznámku hned po provedení?
+- Zůstala krátká changelogová věta?
+- Smazali jsme nebo anonymizovali pomocné podklady?
+- Nepřidali jsme screenshot, export, osobní průchod ani nové měření bez nutnosti?
+- Pokud vznikla výjimka, má účel a návratovou podmínku?
+- Je pravidlo po úpravě jednodušší k použití?
+- Víme, při jakém signálu se k němu znovu vrátit?
+
+Provedení malé úpravy je dobré právě tehdy, když po něm není moc co obdivovat. Člověk příště najde správný odkaz, pochopí větu, použije pravidlo a jde dál. To je v provozu často nejlepší kompliment: nic nedrhne, nic se nerozpadá a nikdo kvůli jedné větě nezakládá novou poradní tradici.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha TR o provedení malé úpravy po ověřené revizní poznámce: práce z ověřeného výsledku, zásah do kanonického místa, jeden typ úpravy, zavření pomocné poznámky, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TQ o ověření revizní poznámky po dalším běžném použití nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, ověření v běžné práci, expirace, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TP o převodu drobného zpřesnění po prvním návratu ke kanonickému pravidlu do revizní poznámky: rozlišení od nové potřeby, nejmenší úprava, stop pravidlo, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TO o první běžný návrat ke kanonickému pracovnímu pravidlu: návrat od pracovního úkolu místo changelogu, signály normálního použití, čtyři výsledné stavy, vědomé nic, privacy-first kontrola, karta, mini workshop a checklist.
