@@ -149415,8 +149415,225 @@ Uzavřené pracovní místo bylo použito v běžné práci a má jasný stav: z
 
 První návrat po uzavření úpravy má ideálně skončit klidem. To není málo ambiciózní výsledek. Je to důkaz, že systém se umí změnit a potom zase normálně pracovat. Přesně to je rozdíl mezi užitečnou údržbou a nekonečným kutěním v dokumentaci.
 
+## Příloha UH: Převod drobného tření po prvním návratu do čekací poznámky
+
+Příloha UG popsala první běžný návrat k pracovnímu místu po uzavřené úpravě. Ideální výsledek je klid. Někdy se ale objeví lehké tření: člověk práci dokončí, aktuální pravidlo v zásadě stačí, ale v jednom místě zaváhá, doplní si vlastní vysvětlení nebo se zeptá na detail, který by se mohl opakovat. To ještě není důvod znovu otevřít celé pravidlo.
+
+Tahle příloha řeší přesně ten mezistav. Tření je reálné, ale slabé. Nechceme ho ignorovat, protože se může vrátit. Nechceme z něj hned dělat úkol, protože by se z dobře uzavřené úpravy znovu stal rozpracovaný systém. Správný mezikrok je čekací poznámka: krátký podmíněný zápis, který říká, kdy se k tématu vrátit a kdy ho nechat být.
+
+Úvodní pracovní věta:
+
+```text
+Drobné tření po prvním návratu nezvětšujeme do nové úpravy; zapíšeme ho jako čekací poznámku s jasnou podmínkou opakování, expirací a privacy-first limitem.
+```
+
+Věta chrání tři věci. První je klid pracovního místa: pravidlo se nemění jen proto, že se někdo jednou zarazil. Druhá je paměť: signál nezmizí, pokud je užitečný. Třetí je rozsah dat: kvůli malé nejistotě nezačneme sledovat všechna použití šablony, ukládat pracovní chaty ani sbírat osobní poznámky lidí.
+
+### Poznejte slabé tření
+
+Slabé tření má čtyři znaky:
+
+1. Práce byla dokončená.
+2. Výstup není chybný.
+3. Člověk nepotřeboval otevřít celou historii úpravy.
+4. Nejistota se může opakovat, ale zatím k tomu nemáme důkaz.
+
+Příklad:
+
+```text
+Při přípravě landing page bylo jasné, že má být nad formulářem důkaz důvěry. Nebylo ale hned jasné, jestli použít konkrétní referenci, nebo krátké číslo z dodávky. Marketing owner práci dokončil a výsledek je použitelný.
+```
+
+To není rozbité pravidlo. Je to možná hrana v příkladech. Kdyby se stejný dotaz objevil u dalších dvou landing pages, stálo by za to doplnit do šablony rozhodovací pomůcku. Po jednom průchodu stačí čekací poznámka.
+
+Naopak tohle už není slabé tření:
+
+- člověk nevěděl, kde pracovní místo najít;
+- pravidlo vedlo ke špatnému zákaznickému výstupu;
+- kvůli nejasnosti se poslal osobní údaj do špatného nástroje;
+- musela se otevřít stará čekací poznámka, aby práce vůbec šla dokončit;
+- tření blokovalo odeslání stránky, nabídky nebo formuláře.
+
+Takový stav neukládejte do čekací poznámky. Patří do opravy, incidentního záznamu nebo samostatné karty podle závažnosti.
+
+### Zapište jen návratovou podmínku
+
+Čekací poznámka nemá být malý backlog převlečený za opatrnost. Pokud má být užitečná, musí obsahovat podmínku návratu. Bez ní se z ní stane neurčitý úkol, který bude při každém review znovu škrábat do hlavy.
+
+Slabý zápis:
+
+```text
+Možná doplnit příklad důkazu důvěry.
+```
+
+Lepší zápis:
+
+```text
+Vrátit se k příkladům důkazu důvěry jen tehdy, pokud se u dvou dalších landing pages znovu objeví nejistota, jestli použít referenci, číslo nebo certifikaci.
+```
+
+Druhý zápis je praktický, protože říká:
+
+- jaký signál čekáme;
+- kolikrát se má opakovat;
+- čeho se týká;
+- co zatím neměníme.
+
+Čekací poznámka má být blízko pracovnímu místu, ale nemá překážet v hlavní trase. Dobré místo je krátký changelog, rozhodovací log, interní poznámka k šabloně nebo provozní karta. Špatné místo je přímo u pole, které má člověk vyplnit, pokud by poznámka působila jako aktuální instrukce.
+
+### Nastavte expiraci
+
+Každá čekací poznámka potřebuje konec. Jinak se z ní stane sediment: nikdo ji nepoužívá, ale nikdo ji ani nesmaže, protože "možná se jednou bude hodit". Expirace nutí tým rozhodnout, jestli signál opravdu žije.
+
+Praktické možnosti:
+
+- po dvou dalších použitích bez opakování poznámku zavřít;
+- po 30 dnech bez signálu poznámku smazat nebo archivovat;
+- při další kvartální kontrole rozhodnout ponechat, převést nebo zavřít;
+- při prvním opakování otevřít malou kartu úpravy a poznámku zavřít.
+
+Expirace není další schůzka. Je to pravidlo pro úklid. Pokud se signál nevrátí, poznámka splnila účel tím, že nevyrobila zbytečnou práci.
+
+Příklad expirační věty:
+
+```text
+Expirace: pokud se nejistota nevrátí u dvou dalších landing pages nebo do 30 dnů, poznámku zavřít bez změny šablony.
+```
+
+Tahle věta je nepříjemně užitečná. Brání tomu, aby tým donekonečna nosil v hlavě drobnou pochybnost, která se v praxi nevrátila.
+
+### Nepleťte čekací poznámku s novým problémem
+
+První návrat k pracovnímu místu může odhalit i něco, co s uzavřenou úpravou nesouvisí. Například šablona důkazu důvěry funguje, ale tým zjistí, že mu chybí schvalovací proces pro nové zákaznické citace. To není drobné tření po návratu. To je nový problém s vlastním účelem, daty, odpovědností a rizikem.
+
+Rozlišovací otázky:
+
+- Týká se tření stejného rozhodnutí, kvůli kterému vznikla uzavřená úprava?
+- Šlo by ho vyřešit jednou větou, příkladem nebo odkazem v okolí pracovního místa?
+- Je výstup práce pořád použitelný?
+- Nevzniklo nové právní, bezpečnostní, zákaznické nebo datové riziko?
+
+Pokud odpověď na některou otázku zní ne, čekací poznámka je slabý nástroj. Založte samostatnou kartu a uzavřete první návrat vlastním stavem:
+
+```text
+První návrat k pracovnímu místu drží. Nové téma "schvalování zákaznických citací" otevíráme samostatně, protože má jiné vlastníky a jinou datovou stopu.
+```
+
+Tím chráníte obě věci: uzavřená úprava zůstane čistá a nový problém dostane správný rámec.
+
+### Privacy-first limit čekací poznámky
+
+Čekací poznámka je lákavé místo pro přebytečný kontext. Člověk chce zachytit, kdo se ptal, co přesně napsal v chatu, jaké screenshoty viděl a jak vypadala pracovní verze stránky. Většinou to není potřeba.
+
+Privacy-first minimum:
+
+- zapisujte pracovní situaci, ne jméno člověka, pokud není nutné pro vlastnictví;
+- neukládejte celé chaty, screenshoty ani pracovní kopie jen jako důkaz zaváhání;
+- pokud příklad obsahuje zákaznický kontext, použijte anonymizovanou nebo veřejně schválenou verzi;
+- čekací podmínku formulujte podle opakování situace, ne podle sledování konkrétních lidí;
+- nepřidávejte měření používání šablony;
+- nastavte expiraci, aby poznámka nezůstala trvale;
+- pokud se poznámka později převede do úpravy, znovu zkontrolujte datovou mapu jen tehdy, když se mění sběr, předání nebo retence dat.
+
+Codyho komentář: slabý signál nepotřebuje silnou evidenci. Když si kvůli jednomu zaváhání založíte mini surveillance systém nad šablonou, problém už není šablona. Problém je nervózní proces s drahou pamětí.
+
+### Karta čekací poznámky po prvním návratu
+
+```text
+Pracovní místo:
+Uzavřená úprava:
+První běžné použití:
+Drobné tření:
+Proč nejde o chybu:
+Proč nejde o nový problém:
+Návratová podmínka:
+Expirace:
+Kde poznámka bydlí:
+Co teď neměníme:
+Privacy-first limit:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Šablona landing page.
+
+Uzavřená úprava:
+Pole pro důkaz důvěry nad prvním formulářem.
+
+První běžné použití:
+Landing page pro privacy-first audit.
+
+Drobné tření:
+Marketing owner si nebyl jistý, jestli jako první důkaz použít veřejnou referenci, nebo krátké číslo z dodávky.
+
+Proč nejde o chybu:
+Stránka byla dokončená a zvolený důkaz je použitelný.
+
+Proč nejde o nový problém:
+Tření se týká stejného rozhodnutí: jaký důkaz patří nad první formulář.
+
+Návratová podmínka:
+Vrátit se k příkladům jen tehdy, pokud se stejná nejistota objeví u dvou dalších landing pages.
+
+Expirace:
+Zavřít bez změny po dvou dalších použitích bez opakování nebo po 30 dnech.
+
+Kde poznámka bydlí:
+Interní poznámka k šabloně, mimo hlavní vyplňovací pole.
+
+Co teď neměníme:
+Nepřepisujeme pravidlo, nepřidáváme nové pole a neřešíme celý systém referencí.
+
+Privacy-first limit:
+Neukládáme chat ani screenshot pracovní verze; stačí anonymizovaná pracovní situace.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte pracovní místo a první běžné použití.
+2. Minuta 2: popište drobné tření jednou větou.
+3. Minuta 3: ověřte, že práce byla dokončená a nejde o chybu nebo nový problém.
+4. Minuta 4: napište návratovou podmínku s počtem opakování.
+5. Minuta 5: nastavte expiraci a místo, kde poznámka bude bydlet.
+6. Minuta 6: proveďte privacy-first kontrolu a napište, co teď neměníte.
+
+Výstup workshopu:
+
+```text
+Drobné tření po prvním návratu je zapsané jako podmíněná čekací poznámka, hlavní pracovní místo zůstává beze změny a poznámka má jasný konec.
+```
+
+### Checklist kapitoly
+
+- Je tření skutečně slabé, tedy práce byla dokončená a výstup není chybný?
+- Týká se stejného rozhodnutí jako uzavřená úprava?
+- Nepatří nález do incidentu, opravy nebo nové samostatné karty?
+- Neotevíráme hlavní pravidlo po jednom zaváhání?
+- Má čekací poznámka konkrétní návratovou podmínku?
+- Je v podmínce jasné, kolikrát se signál musí opakovat?
+- Má poznámka expiraci?
+- Bydlí poznámka mimo hlavní pracovní pole, pokud by tam překážela?
+- Je zapsané, co teď neměníme?
+- Neobsahuje poznámka zbytečná jména, chaty, screenshoty nebo osobní hodnocení?
+- Nepřidali jsme tracker, dashboard ani kontrolní rituál?
+- Je jasné, kdo poznámku zavře, převede nebo nechá expirovat?
+- Pokud se signál nevrátí, umíme poznámku zavřít bez pocitu ztracené práce?
+
+Čekací poznámka je malá brzda proti dvěma extrémům: ignorovat slabý signál, nebo ho okamžitě nafouknout do další úpravy. Dobře napsaná poznámka dovolí systému chvíli dýchat. Pokud se tření vrátí, máte jasný spouštěč. Pokud ne, máte klid a o jeden zbytečný úkol méně.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha UH o převodu drobného tření po prvním návratu do čekací poznámky: rozlišení slabého tření, návratová podmínka, expirace, oddělení nového problému, privacy-first limit, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UG o první běžný návrat k pracovnímu místu po uzavřené úpravě: reálný pracovní úkol, známky normálního použití, rozlišení výsledků návratu, úklid dočasného jazyka, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UF o uzavření ověřené malé úpravy po čekací poznámce do běžného pracovního místa: přepis do přítomného času, zavření dočasných artefaktů, budoucí návratová podmínka, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UE o ověření malé úpravy po potvrzené čekací poznámce: běžné použití, původní tření, čtyři výsledné stavy, zavření návratového signálu, privacy-first minimum, karta, mini workshop a checklist.
