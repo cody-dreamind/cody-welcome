@@ -149179,8 +149179,245 @@ Ověřená malá úprava je součástí běžného pracovního místa, dočasné
 
 Uzavření ověřené malé úpravy má být tiché. Ne proto, že není důležité, ale proto, že dobrý provoz nepotřebuje fanfáry pokaždé, když se zmenší tření. Stačí, že příští člověk otevře šablonu, udělá práci bez doptávání a nenarazí na staré poznámky, které už měly dávno spát v changelogu.
 
+## Příloha UG: První běžný návrat k pracovnímu místu po uzavřené úpravě
+
+Příloha UF uzavřela ověřenou malou úpravu do běžného pracovního místa. Teď přichází kontrola, která má být skoro nudná: někdo pracovní místo znovu použije a tým ověří, jestli se opravdu chová jako normální součást provozu. Ne jako čerstvě opravený kout, kolem kterého všichni chodí opatrně. Ne jako experiment. Normální pracovní místo.
+
+První návrat po uzavření není další revize. Je to obyčejné použití s jednou otázkou: dokáže člověk udělat práci podle aktuálního znění bez toho, aby musel otevřít čekací poznámku, ověřovací kartu nebo historii změny?
+
+Úvodní pracovní věta:
+
+```text
+Uzavřené pracovní místo používáme při běžné práci a ověřujeme jen to, zda aktuální znění stačí bez návratu k dočasné historii úpravy.
+```
+
+Tahle věta chrání rozsah. Neptá se, jestli by se šablona dala zlepšit obecně. Dala. Skoro všechno se dá zlepšit obecně, a právě proto je tak snadné nikdy nic nedokončit. Tady jde o užší otázku: je uzavřená úprava opravdu absorbovaná do práce?
+
+### Vraťte se přes konkrétní úkol
+
+K pracovnímu místu se nevracejte jen proto, že je v kalendáři kontrola. Vraťte se ve chvíli, kdy ho někdo opravdu potřebuje použít: připravuje landing page, zadává novou case study, vybírá kontaktní variantu, upravuje onboardingový krok, kontroluje datovou stopu formuláře nebo předává šablonu dalšímu člověku.
+
+Umělý návrat svádí k redakčnímu ladění. Reálný úkol je praktičtější: rychle ukáže, jestli člověk najde správné místo, pochopí aktuální pravidlo a dokončí výstup bez starých poznámek.
+
+Před použitím stačí krátký zápis:
+
+```text
+Pracovní místo používáme při přípravě nové landing page pro službu, kde potřebujeme vybrat důkaz důvěry nad prvním formulářem.
+```
+
+Nevkládejte k tomu původní čekací poznámku. Nevysvětlujte historii opravy. Pokud se člověk bez historie ztratí, je to důležitý signál. Pokud se neztratí, historie nemá co dělat v hlavní trase.
+
+### Sledujte čtyři známky normálního použití
+
+Při prvním návratu sledujte jen čtyři věci:
+
+1. Člověk pracovní místo našel bez speciální navigace.
+2. Aktuální znění mu stačilo k rozhodnutí.
+3. Nevznikla potřeba otevřít starou čekací poznámku nebo ověřovací kartu.
+4. Použití nevytvořilo novou datovou stopu, export ani kontrolní rituál.
+
+To je celé. Pokud se tyto čtyři věci splní, nehledejte další práci jen proto, že jste se na místo podívali. Dobře uzavřené pracovní místo má občas projít kontrolou tím, že se nad ním nestane nic dramatického.
+
+Krátký zápis po použití:
+
+```text
+Použito při:
+Výstup práce:
+Byla potřeba historie úpravy:
+Vzniklo nové tření:
+Vznikla nová datová stopa:
+Další stav:
+```
+
+Vyplněný příklad:
+
+```text
+Použito při:
+Landing page pro privacy-first audit.
+
+Výstup práce:
+Do bloku nad prvním formulářem byla vybrána veřejná reference a krátké číslo z dodávky.
+
+Byla potřeba historie úpravy:
+Ne.
+
+Vzniklo nové tření:
+Ne.
+
+Vznikla nová datová stopa:
+Ne, pracovalo se s veřejně použitelným důkazem a existující šablonou.
+
+Další stav:
+Pracovní místo ponechat v klidu.
+```
+
+Takový zápis je dostatečný. Cílem není vyrobit auditní složku. Cílem je vědět, že uzavření drží.
+
+### Rozlišujte čtyři výsledky návratu
+
+Po prvním použití vyberte jeden stav:
+
+- Klid: pracovní místo funguje bez historie a bez další pomoci.
+- Lokální drobnost: pracovní místo funguje, ale v okolní šabloně nebo navigaci chybí malá opora.
+- Návrat dočasného jazyka: člověk narazil na slova typu "ověřit", "zatím" nebo "po úpravě", která měla zmizet.
+- Nový problém: objevila se situace, kterou původní úprava vůbec neměla řešit.
+
+Klid zavřete jednou větou. Lokální drobnost neposílejte automaticky do hlavního pravidla; často stačí doplnit odkaz, název pole nebo příklad v sousedním místě. Návrat dočasného jazyka opravte rychle, protože to je nedokončený úklid, ne nová produktová otázka. Nový problém založte samostatně až potom, co uzavřete tento návrat.
+
+Špatná reakce:
+
+```text
+Když už jsme tady, projdeme celou šablonu a přepíšeme všechny sekce důvěry.
+```
+
+Lepší reakce:
+
+```text
+První návrat drží. V šabloně jen odstraníme dočasnou větu "ověřit při příští stránce"; pravidlo a strukturu neměníme.
+```
+
+První návrat je údržba hranice. Má potvrdit, že uzavřená úprava se stala normální, ne otevřít další kolo přemýšlení.
+
+### Když se vrátí dočasný jazyk
+
+Dočasný jazyk je malý, ale zrádný. Slova jako "nově", "testujeme", "zatím", "ověřit" nebo "po čekací poznámce" v hlavní trase naznačují, že věc pořád není hotová. Čtenář pak neví, jestli se má pravidlem řídit, nebo čekat na další potvrzení.
+
+Při prvním návratu proto udělejte rychlou jazykovou kontrolu:
+
+- pravidlo je v přítomném čase;
+- instrukce říká, co platí teď;
+- historie je v changelogu, ne v pracovním poli;
+- návratový signál není vidět v hlavní trase;
+- příklad je použitelný bez znalosti předchozí smyčky.
+
+Oprava má být co nejmenší:
+
+```text
+Původní věta:
+Nově ověřit důkaz důvěry nad prvním formulářem.
+
+Aktuální věta:
+Důkaz důvěry nad prvním formulářem: uveďte veřejně použitelný důkaz, který má návštěvník vidět před odesláním kontaktu.
+```
+
+Tím se místo uklidní. Neotevíráte věcnou změnu, jen odstraňujete zbytky stavebního lešení.
+
+### Privacy-first návrat
+
+První návrat k uzavřenému pracovnímu místu je i malá privacy-first kontrola. Ne kvůli právnickému sportu, ale kvůli provozní hygieně. Když se po úpravě vracíte, snadno vznikne chuť "pro jistotu" sledovat používání, ukládat příklady nebo sbírat zpětnou vazbu od každého člověka. U malé úpravy je to často víc dat než hodnoty.
+
+Privacy-first minimum:
+
+- zapisujte pracovní situaci, ne osobní hodnocení člověka;
+- neukládejte interní chaty ani screenshoty, pokud nejsou nutné;
+- používejte veřejné nebo anonymizované příklady;
+- nepřidávejte tracker používání šablony;
+- po kontrole smažte pomocné poznámky, které jen potvrzují "bez problému";
+- pokud vznikla lokální drobnost, zapište ji bez zákaznických osobních údajů;
+- pokud se mění formulářové pole nebo retence, vraťte se k datové mapě.
+
+Codyho komentář: privacy-first provoz není jen o velkých rozhodnutích typu hosting a analytika. Je i o tom, že kvůli každé malé nejistotě nevyrábíme další trvalou evidenci. Někdy je nejčistší záznam prostě věta "použito bez problému, nic dalšího nesbíráme".
+
+### Karta prvního návratu po uzavření úpravy
+
+```text
+Pracovní místo:
+Uzavřená úprava:
+První běžné použití:
+Výstup práce:
+Byla potřeba historie úpravy:
+Zůstalo v hlavní trase něco dočasného:
+Vzniklo nové tření:
+Kam případné tření patří:
+Vznikla nová datová stopa:
+Co mažeme nebo nezapisujeme:
+Další stav:
+Návratový signál:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Šablona landing page.
+
+Uzavřená úprava:
+Pole pro důkaz důvěry nad prvním formulářem.
+
+První běžné použití:
+Příprava landing page pro privacy-first audit.
+
+Výstup práce:
+Vybraná veřejná reference a krátké vysvětlení nad formulářem.
+
+Byla potřeba historie úpravy:
+Ne.
+
+Zůstalo v hlavní trase něco dočasného:
+Ne.
+
+Vzniklo nové tření:
+Ne.
+
+Kam případné tření patří:
+Bez tření.
+
+Vznikla nová datová stopa:
+Ne.
+
+Co mažeme nebo nezapisujeme:
+Neukládáme pracovní chat ani osobní poznámky z průchodu.
+
+Další stav:
+Pracovní místo ponechat v klidu.
+
+Návratový signál:
+Vrátit se jen při opakované nejasnosti u dvou dalších landing pages.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte reálný úkol, při kterém se pracovní místo použilo.
+2. Minuta 2: napište výstup práce jednou větou.
+3. Minuta 3: ověřte, jestli byla potřeba historie úpravy nebo dočasný jazyk.
+4. Minuta 4: vyberte stav Klid, Lokální drobnost, Návrat dočasného jazyka nebo Nový problém.
+5. Minuta 5: zapište privacy-first kontrolu a další stav.
+
+Výstup workshopu:
+
+```text
+Uzavřené pracovní místo bylo použito v běžné práci a má jasný stav: zůstává v klidu, potřebuje malý úklid dočasného jazyka, nebo se nové téma řeší samostatně.
+```
+
+### Checklist kapitoly
+
+- Vrátili jsme se k pracovnímu místu přes reálný úkol?
+- Neotevřeli jsme historii úpravy dřív, než byla opravdu potřeba?
+- Stačilo aktuální znění k dokončení práce?
+- Nevznikla potřeba číst čekací poznámku nebo ověřovací kartu?
+- Zmizel z hlavní trasy dočasný jazyk typu "ověřit", "zatím" nebo "nově"?
+- Umíme rozlišit klid, lokální drobnost, návrat dočasného jazyka a nový problém?
+- Pokud vzniklo tření, víme, zda patří do tohoto místa, okolní šablony nebo nové karty?
+- Nepřepsali jsme celé pracovní místo jen kvůli prvnímu návratu?
+- Nevznikl nový tracker, dashboard, export ani kontrolní rituál?
+- Zapsali jsme pracovní situaci bez zbytečných osobních údajů?
+- Smazali jsme pomocné poznámky, které po kontrole nemají hodnotu?
+- Má další návrat jasnou podmínku místo pravidelného dohledu?
+- Je pracovní místo po návratu stejně nebo více použitelné než před ním?
+
+První návrat po uzavření úpravy má ideálně skončit klidem. To není málo ambiciózní výsledek. Je to důkaz, že systém se umí změnit a potom zase normálně pracovat. Přesně to je rozdíl mezi užitečnou údržbou a nekonečným kutěním v dokumentaci.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha UG o první běžný návrat k pracovnímu místu po uzavřené úpravě: reálný pracovní úkol, známky normálního použití, rozlišení výsledků návratu, úklid dočasného jazyka, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UF o uzavření ověřené malé úpravy po čekací poznámce do běžného pracovního místa: přepis do přítomného času, zavření dočasných artefaktů, budoucí návratová podmínka, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UE o ověření malé úpravy po potvrzené čekací poznámce: běžné použití, původní tření, čtyři výsledné stavy, zavření návratového signálu, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UD o provedení malé úpravy po potvrzené čekací poznámce: práce z potvrzeného výsledku, výběr nejbližšího pracovního místa, jeden typ zásahu, zavření původní poznámky, lehký návratový signál, privacy-first minimum, karta, mini workshop a checklist.
