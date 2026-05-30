@@ -35,6 +35,100 @@ Na konci čtení stop podmínku neměňte podle toho, co se zrovna povedlo. Poku
 
 Když stop podmínka zůstane nesplněná, neberte to jako selhání čtení, ale jako signál ke zmenšení dalšího kroku. Lepší je zavřít drobnou, poctivě ověřitelnou úpravu než pokračovat ve větším tématu jen proto, že už je rozečtené.
 
+## Jak zmenšit další krok po nesplněné stop podmínce
+
+Nesplněná stop podmínka často neříká, že tým pracoval špatně. Častěji říká, že otázka byla moc široká, důkaz moc vzdálený nebo změna spolkla víc pracovních míst najednou. V tu chvíli nepomůže přidat další kapitolu, další meeting ani další tabulku. Pomůže přeložit původní záměr do menší jednotky, kterou jde dokončit bez nového systému okolo.
+
+Začněte větou:
+
+```text
+Původně jsme chtěli zjistit:
+Nezavřeli jsme to, protože:
+Nejmenší další krok je:
+Poznáme to podle:
+Dočasně necháváme mimo rozsah:
+```
+
+Příklad:
+
+```text
+Původně jsme chtěli zjistit:
+Jestli homepage dobře kvalifikuje poptávky.
+
+Nezavřeli jsme to, protože:
+Začali jsme současně řešit text, formulář, reference i nový obsah pro segmenty.
+
+Nejmenší další krok:
+Upravíme jen první kontaktní formulář: necháme e-mail, URL projektu a jednu otázku na cíl.
+
+Poznáme to podle:
+U dalších deseti poptávek zkontrolujeme, jestli obchod potřebuje méně ručního doptávání.
+
+Mimo rozsah:
+Neměníme celý web, nepřidáváme nový tracker a neotevíráme redesign referencí.
+```
+
+Tento zápis má jednu výhodu: nepopírá původní ambici, ale odřízne od ní všechno, co teď brání dokončení. Tým si zachová směr a současně získá krok, který se dá opravdu udělat.
+
+### Tři řezy pro zmenšení
+
+Když je další krok pořád moc velký, zmenšete ho jedním ze tří řezů:
+
+- Řez podle místa: řešte jednu stránku, jeden formulář, jeden e-mail, jeden onboardingový krok nebo jeden report.
+- Řez podle publika: řešte jeden segment, jednu roli, jeden typ zákazníka nebo jednu fázi rozhodování.
+- Řez podle důkazu: řešte jeden signál, například kvalitu poptávek, počet ručních doptání, srozumitelnost jedné věty nebo chybovost jednoho průchodu.
+
+Nemíchejte všechny tři řezy najednou. Pokud zúžíte stránku, segment i metriku, může být výstup až moc křehký a přestane ukazovat něco použitelného. Pro běžnou iteraci stačí jeden hlavní řez a jedna jasná hranice.
+
+### Co nechat na později
+
+Zmenšení kroku funguje jen tehdy, když se explicitně řekne, co teď neřešíte. Jinak se vyhozené části vrátí zadními dveřmi jako "jen ještě drobnost".
+
+Typické věci k odložení:
+
+- nové vizuální varianty, pokud ověřujete srozumitelnost nabídky;
+- nové eventy v analytice, pokud stačí ruční kontrola několika poptávek;
+- nový obsahový cluster, pokud testujete jednu rozhodovací stránku;
+- automatizace, pokud zatím nevíte, jak má vypadat ruční standard;
+- právní nebo dodavatelská revize celého provozu, pokud řešíte jen jeden formulář.
+
+Privacy-first poznámka: odložení často chrání data. Když zmenšíte otázku, obvykle nepotřebujete sbírat další identifikátory, nahrávat chování návštěvníků ani posílat víc informací externím službám. Menší důkaz bývá nejen levnější, ale i čistší.
+
+### Karta zmenšeného kroku
+
+```text
+Původní stop podmínka:
+
+Proč zůstala otevřená:
+
+Zmenšovací řez:
+- místo / publikum / důkaz
+
+Nový krok:
+
+Vlastník:
+
+Ověření:
+
+Co teď výslovně neřešíme:
+
+Jaká data kvůli tomu nesbíráme:
+
+Datum návratu:
+```
+
+### Checklist zmenšení
+
+- Je jasné, proč původní stop podmínka zůstala otevřená?
+- Zmenšili jsme krok podle jednoho hlavního řezu?
+- Vede nový krok k hotovému rozhodnutí, ne jen k další analýze?
+- Je zapsané, co teď nejde do rozsahu?
+- Má nový krok vlastníka a datum návratu?
+- Nepřidává ověření nové trackery, zbytečná pole ani exporty?
+- Umí tým říct, co se stane, když se ani zmenšený krok nepodaří zavřít?
+
+Když se nepodaří zavřít ani zmenšený krok, další odpovědí nemá být větší plán. Vraťte se k otázce, jestli řešíte správný problém. Někdy není chyba v rozsahu, ale v tom, že tým chce potvrdit domněnku, která zatím nemá dost reálných signálů.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -150513,3 +150607,4 @@ Výstup workshopu:
 - 2026-05-27: Doplněna Příloha RM o prvním návratu k čistému pracovnímu stavu po uzavřené servisní poznámce: cesta, použití, datová stopa, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-28: Doplněna Příloha SH o uzavření potvrzené lokální opravy do stabilního pracovního místa: aktuální stav, zavření lokální karty, úklid pomocných podkladů, návratový signál, privacy-first stabilizace, karta a checklist.
 - 2026-05-30: Doplněna krátká úvodní poznámka, aby nesplněná stop podmínka vedla ke zmenšení dalšího kroku místo k rozšíření práce.
+- 2026-05-30: Doplněna úvodní podkapitola o zmenšení dalšího kroku po nesplněné stop podmínce: tři řezy zúžení, karta zmenšeného kroku, privacy-first brzda a checklist.
