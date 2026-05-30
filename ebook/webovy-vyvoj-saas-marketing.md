@@ -145890,8 +145890,257 @@ Ověřená revizní poznámka se proměnila v jednu konkrétní úpravu kanonick
 
 Provedení malé úpravy je dobré právě tehdy, když po něm není moc co obdivovat. Člověk příště najde správný odkaz, pochopí větu, použije pravidlo a jde dál. To je v provozu často nejlepší kompliment: nic nedrhne, nic se nerozpadá a nikdo kvůli jedné větě nezakládá novou poradní tradici.
 
+## Příloha TS: Ověření malé úpravy po dalším běžném použití
+
+Příloha TR provedla malou úpravu po ověřené revizní poznámce. Tím se kanonické místo zpřesnilo, ale ještě není jisté, jestli úprava v praxi opravdu pomohla. Další krok proto není další editace, ale obyčejné použití pravidla v situaci, pro kterou bylo upravené.
+
+Smysl této přílohy je ověřit, jestli se drobná změna chová jako zlepšení, nebo jen jako hezčí formulace. U malých úprav je to zrádné: vypadá to hotově hned po přepsání věty, ale skutečná hodnota se ukáže až ve chvíli, kdy člověk pravidlo použije bez autorova komentáře.
+
+Úvodní pracovní věta:
+
+```text
+Malá úprava je provedená. Vrátíme se k ní až při dalším běžném použití stejného pravidla a ověříme, jestli zkrátila rozhodnutí, nezvýšila počet výjimek a nevytvořila novou datovou stopu.
+```
+
+Tahle věta chrání úpravu před dvěma opačnými chybami. První chyba je okamžitě ji oslavit jako definitivní řešení. Druhá chyba je po ní zavést další kontrolní rituál, který je větší než původní problém. Obojí je přehnané. Stačí běžný návrat.
+
+### Vraťte se přes skutečné použití
+
+Ověření malé úpravy nezačínejte otázkou "líbí se nám nová verze?". Začněte pracovním úkolem, při kterém se pravidlo normálně používá. Například:
+
+- editor vybírá správný poptávkový formulář pro novou službu;
+- produktový člověk hledá, kam zapsat změnu v onboardingové šabloně;
+- marketing owner upravuje interní odkaz v obsahovém rozcestníku;
+- provozní člověk kontroluje, jestli starý export po úklidu ještě někde nevisí;
+- nový člen týmu potřebuje podle pravidla udělat první samostatný krok.
+
+Pokud takový úkol nepřichází, ověření nevyrábějte uměle. Návratová podmínka může klidně čekat. Malá úprava, která se měsíc nepoužije, možná není urgentní problém. To je taky užitečná informace.
+
+Špatný spouštěč:
+
+```text
+Máme chvíli, pojďme se podívat, jestli se nám nová formulace pořád líbí.
+```
+
+Lepší spouštěč:
+
+```text
+Při přípravě nové landing page editor použil kanonický index a narazil na upravený odkaz pro výběr poptávkového formuláře.
+```
+
+Rozdíl je praktický. První varianta hodnotí text z odstupu. Druhá ukazuje, jestli text pomáhá v práci. E-book se má opírat o druhý typ signálu, protože právě tam se pozná, jestli pravidlo vydělává svou existenci.
+
+### Sledujte tři signály
+
+Při prvním běžném použití sledujte jen tři věci. Nepřidávejte dotazník, další meeting ani analytiku kliknutí, pokud nejde o změnu, která má skutečný provozní dopad.
+
+První signál: člověk našel správné místo bez objížďky.
+
+Ptejte se, jestli upravený název, věta nebo odkaz zavedl člověka na správné rozhodovací místo. Pokud musel pořád prohledávat staré poznámky, ptát se v chatu nebo otevřít tři duplicity, úprava nepomohla dost.
+
+Druhý signál: rozhodnutí bylo rychlejší nebo jistější.
+
+Nejde o stopky. Stačí poznat, že člověk nemusel znovu řešit stejnou nejistotu, kvůli které revizní poznámka vznikla. Dobrá malá úprava často nezrychlí celý proces dramaticky; zkrátí jednu drobnou odbočku, která se opakovala.
+
+Třetí signál: nevznikla nová datová nebo dokumentační stopa.
+
+Zkontrolujte, jestli ověření nevytvořilo další screenshot, export, osobní poznámku, duplicitní checklist nebo dočasný soubor, který teď bude někdo udržovat. Pokud ano, ověřování začalo stát víc než samotná úprava.
+
+Praktický zápis:
+
+```text
+Nalezení:
+Editor našel pravidlo přes nový název odkazu bez dotazu v chatu.
+
+Rozhodnutí:
+Vybral krátký poptávkový formulář a nepotřeboval doplňující vysvětlení.
+
+Datová stopa:
+Nevznikl screenshot, export ani nové měření. Zůstala jen tato anonymní ověřovací věta.
+```
+
+### Rozlište čtyři výsledky ověření
+
+Po běžném použití rozhodněte jedním ze čtyř stavů. Čím kratší rozhodnutí, tím lépe.
+
+`Potvrdit` znamená, že úprava pomohla a pravidlo může zůstat bez další práce.
+
+`Doladit jednou` znamená, že směr je správný, ale jedna malá věc ještě mate. Použijte to opatrně: doladění má být menší než původní úprava.
+
+`Vrátit` znamená, že úprava zhoršila nalezení, rozhodnutí nebo srozumitelnost. Vraťte se k předchozí funkční verzi a zapište, proč nová nefungovala.
+
+`Oddělit nový signál` znamená, že při použití vyšel najevo jiný problém. Ten nezapojujte do této úpravy. Zapište ho bokem, pokud má vlastní důvod a vlastní pracovní situaci.
+
+Příklad rozhodnutí:
+
+```text
+Výsledek ověření:
+Potvrdit.
+
+Proč:
+Nový název odkazu navedl editora přímo k pravidlu pro výběr formuláře. Nebyl potřeba chatový dotaz ani návrat ke staré revizní poznámce.
+
+Další práce:
+Žádná. Návrat jen při opakovaném váhání u stejného místa.
+```
+
+Příklad stavu "oddělit nový signál":
+
+```text
+Výsledek ověření:
+Oddělit nový signál.
+
+Proč:
+Název odkazu fungoval, ale ukázalo se, že samotné pravidlo neřeší vícejazyčnou landing page.
+
+Další práce:
+Neotevíráme malou úpravu znovu. Zapíšeme samostatný podnět k vícejazyčným stránkám.
+```
+
+Tohle rozlišení je důležité. Když se nový problém přilepí k právě ověřované úpravě, vznikne dojem, že změna selhala. Ve skutečnosti mohla uspět a jen odhalit další vrstvu práce. Dobré ověření umí tyto věci oddělit.
+
+### Kdy z doladění udělat konec
+
+Stav `Doladit jednou` je užitečný jen tehdy, když má tvrdý strop. Po jednom doladění se vraťte k běžnému použití a znovu vyberte stav. Pokud by mělo následovat druhé, třetí a čtvrté doladění, nejde o malou úpravu. Jde o širší problém pravidla, struktury nebo pracovní trasy.
+
+Stop pravidlo:
+
+```text
+Jedna malá úprava smí mít nejvýše jedno malé doladění. Další potřeba změny se zapisuje jako nová karta, ne jako pokračování stejné revizní poznámky.
+```
+
+Tím chráníte kanonické místo před nenápadným bobtnáním. Každé doladění samo o sobě vypadá rozumně. Tři doladění za sebou už ale často znamenají, že tým ztratil původní otázku a jen hladí text, aby přestal klást odpor.
+
+Codyho komentář: když větu potřebujete ladit pořád dokola, možná problém není věta. Možná se pravidlo snaží řídit situaci, která ještě není dost pochopená. To není ostuda, jen signál vrátit se o úroveň výš.
+
+### Privacy-first ověření malé úpravy
+
+Ověření malé úpravy má být datově lehké. Ideální stopa je jedna anonymní věta u changelogu nebo karty pravidla. Nepotřebujete seznam jmen, nahrávku obrazovky, detailní log chování ani další analytický skript.
+
+Privacy-first minimum:
+
+- zapisujte pracovní situaci, ne osobní výkon konkrétního člověka;
+- ponechte jen výsledek ověření a důvod rozhodnutí;
+- smažte pomocné poznámky, pokud už nemají rozhodovací hodnotu;
+- neobnovujte staré screenshoty nebo exporty jen kvůli kontrole;
+- pokud ověření ukáže zbytečný sběr dat, zapište úklid jako samostatný zásah;
+- u potvrzené úpravy nastavte návratový signál místo pravidelného dohledu.
+
+Příklad privacy-first uzavření:
+
+```text
+Zůstává anonymní ověřovací věta: při běžné přípravě landing page nový název odkazu zavedl editora ke správnému pravidlu. Pomocná poznámka byla smazaná. Nevzniklo nové měření ani osobní záznam.
+```
+
+Když tým potřebuje silnější důkaz, protože změna ovlivňuje právní, bezpečnostní nebo zákaznicky citlivý proces, zapište to otevřeně. Ale i tehdy nejdřív hledejte nejmenší důkaz, který stačí k rozhodnutí. Privacy-first provoz není slepota. Je to disciplína, která odmítá sbírat data jen proto, že by se jednou mohla hodit.
+
+### Karta ověření malé úpravy
+
+```text
+Kanonické pravidlo:
+Provedená malá úprava:
+Původní revizní poznámka:
+Návratová podmínka:
+Běžné použití, při kterém ověřujeme:
+Signál nalezení:
+Signál rozhodnutí:
+Signál datové stopy:
+Výsledek ověření:
+Co potvrzujeme:
+Co případně doladíme jednou:
+Co oddělujeme jako nový signál:
+Privacy-first uzavření:
+Návratový signál po uzavření:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kanonické pravidlo:
+Pro konkrétní službu použijte krátkou poptávku. Rychlý kontakt použijte pro obecný první dotaz bez vybrané služby.
+
+Provedená malá úprava:
+Odkaz "kontaktní varianty" byl přejmenovaný na "výběr poptávkového formuláře".
+
+Původní revizní poznámka:
+Starý název odkazu opakovaně nepomohl editorovi poznat, že řeší výběr formuláře.
+
+Návratová podmínka:
+Ověřit při dalším použití kanonického indexu při přípravě landing page.
+
+Běžné použití, při kterém ověřujeme:
+Editor připravoval stránku nové služby a hledal správný formulář.
+
+Signál nalezení:
+Pravidlo našel přes nový název bez dotazu v chatu.
+
+Signál rozhodnutí:
+Vybral krátkou poptávku a nepotřeboval další vysvětlení.
+
+Signál datové stopy:
+Nevznikl screenshot, export ani nové měření.
+
+Výsledek ověření:
+Potvrdit.
+
+Co potvrzujeme:
+Nový název odkazu je srozumitelnější pro běžné použití.
+
+Co případně doladíme jednou:
+Nic.
+
+Co oddělujeme jako nový signál:
+Nic.
+
+Privacy-first uzavření:
+Zůstává jen anonymní ověřovací věta u changelogu.
+
+Návratový signál po uzavření:
+Vrátit se pouze při opakovaném váhání u stejného odkazu.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžné použití, při kterém se úprava skutečně ověřila.
+2. Minuta 2: zapište signál nalezení a signál rozhodnutí.
+3. Minuta 3: zkontrolujte, jestli nevznikla nová datová nebo dokumentační stopa.
+4. Minuta 4: vyberte stav `Potvrdit`, `Doladit jednou`, `Vrátit` nebo `Oddělit nový signál`.
+5. Minuta 5: zapište privacy-first uzavření a návratový signál.
+
+Výstup workshopu:
+
+```text
+Malá úprava byla ověřená při běžném použití. Má jeden rozhodnutý stav, minimální datovou stopu a jasné pravidlo, kdy se k ní vrátit.
+```
+
+### Checklist kapitoly
+
+- Ověřujeme při skutečné práci, ne při umělé kontrole?
+- Vracíme se k původní návratové podmínce?
+- Víme, co byla provedená malá úprava?
+- Sledujeme nalezení, rozhodnutí a datovou stopu?
+- Nepřidali jsme kvůli ověření nový tracker, export nebo osobní záznam?
+- Umíme výsledek zařadit do jednoho ze čtyř stavů?
+- Pokud dolazujeme, je doladění jen jedno a menší než původní úprava?
+- Pokud se objevil nový problém, oddělili jsme ho od ověřované změny?
+- Zavřeli jsme pomocné poznámky bez mazání rozhodovací pravdy?
+- Zůstala krátká anonymní ověřovací věta?
+- Je jasné, kdy se k pravidlu vrátit znovu?
+- Neudělali jsme z malé úpravy nový pravidelný kontrolní proces?
+
+Ověření malé úpravy má být nenápadné. Když se po něm pravidlo používá snadněji a tým nemá víc podkladů než předtím, změna splnila účel. Ne každá dobrá práce musí být vidět jako nová kapitola v provozu. Někdy je nejlepší výsledek prostě ten, že další člověk udělá správný krok bez otázky navíc.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha TS o ověření malé úpravy po dalším běžném použití: reálný spouštěč, tři signály, čtyři výsledné stavy, pravidlo jednoho doladění, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TR o provedení malé úpravy po ověřené revizní poznámce: práce z ověřeného výsledku, zásah do kanonického místa, jeden typ úpravy, zavření pomocné poznámky, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TQ o ověření revizní poznámky po dalším běžném použití nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, ověření v běžné práci, expirace, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TP o převodu drobného zpřesnění po prvním návratu ke kanonickému pravidlu do revizní poznámky: rozlišení od nové potřeby, nejmenší úprava, stop pravidlo, privacy-first hranice, karta, mini workshop a checklist.
