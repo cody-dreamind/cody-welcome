@@ -147705,8 +147705,205 @@ Malá úprava po potvrzené revizní poznámce byla ověřena při běžném pou
 
 Malá úprava je hotová až tehdy, když po ní pravidlo znovu klidně funguje. Ne když je změna napsaná, ne když je zanesena v changelogu, ale když ji někdo použije a svět se kvůli tomu nezastaví. To je možná málo dramatický konec. Přesně takový konec ale u pracovních pravidel chcete.
 
+## Příloha TZ: Uzavření ověřené malé úpravy do stabilního pracovního pravidla
+
+Příloha TY končí potvrzením, že malá úprava po revizní poznámce obstála při běžném použití. Tady je poslední krok: odstranit z pravidla dočasný opravný jazyk a nechat ho znovu fungovat jako samozřejmou součást práce. Pokud se tento krok přeskočí, dokumentace zůstane plná stop po údržbě. Čtenář pak nevidí jasné pravidlo, ale historii drobných zásahů, připomínek a ověřovacích poznámek. To je zbytečně hlučné.
+
+Uzavření ověřené úpravy není další revize. Je to úklid po revizi. Cílem je, aby v kanonickém pracovním místě zůstala jedna aktuální pravda, jeden lehký návratový signál a žádná paralelní poznámka, která se tváří důležitěji než samotné pravidlo.
+
+Úvodní pracovní věta:
+
+```text
+Ověřenou malou úpravu uzavíráme tak, aby zůstala jen aktuální pracovní pravda, krátká stopa v historii a jasná podmínka pro budoucí návrat.
+```
+
+Tahle věta je praktická brzda. Brání tomu, aby se po úspěšném ověření automaticky zakládala další kontrola, další schůzka nebo další poznámka. Když pravidlo funguje, jeho nejlepší další stav je klid.
+
+### Přepište pravidlo do normálního tónu
+
+Ověřovací text často obsahuje slova jako "dočasně", "ověřit", "po prvním použití", "návratový signál" nebo "revizní poznámka". Ta byla užitečná během úpravy, ale po potvrzení začínají překážet. Čtenář, který přijde za měsíc, nepotřebuje vidět, že formulace kdysi vznikla jako oprava. Potřebuje vědět, co má dnes udělat.
+
+Před uzavřením proto projděte aktuální pracovní místo a odstraňte revizní lešení:
+
+- formulace typu "nově doplněno";
+- poznámky "ověřit při příštím použití";
+- odkazy na původní tření, pokud nejsou pro rozhodnutí potřeba;
+- duplicitní vysvětlení vedle pravidla;
+- dočasné komentáře u checklistu;
+- pomocné varianty, které měly sloužit jen při ověření.
+
+Špatný stabilní zápis:
+
+```text
+Nově doplněná věta po revizní poznámce říká, že u konkrétní služby použijeme poptávkový tok. Ověřeno při první landing page.
+```
+
+Lepší stabilní zápis:
+
+```text
+U konkrétní služby použijte poptávkový tok. Obecný kontakt patří jen k rychlým dotazům bez jasného obchodního záměru.
+```
+
+Historie může zůstat v changelogu, ne v hlavním pracovním pravidle. Pracovní pravidlo má být krátké, přítomné a použitelné bez archeologie.
+
+### Zavřete pomocné artefakty
+
+Ověřená úprava po sobě často nechá víc stop než je potřeba. Karta úpravy, ověřovací poznámka, dočasný výpis průchodů, komentář v dokumentu, připomínka na návrat a někdy i paralelní úkol v backlogu. Pokud je všechny necháte žít, systém bude vypadat poctivě, ale v praxi bude matoucí.
+
+Po potvrzení nechte jen tři věci:
+
+1. aktuální znění pravidla;
+2. krátkou changelogovou větu;
+3. návratovou podmínku pro případ, že se stejné tření zopakuje.
+
+Všechno ostatní buď smažte, archivujte mimo běžnou pracovní trasu, nebo sloučte do jednoho rozhodovacího záznamu. Zvlášť pozor na pomocné seznamy "ověřit později". Ty umí přežít déle než samotný problém a při dalším review vytvářejí falešný dojem, že něco pořád visí.
+
+Praktická uzavírací věta:
+
+```text
+Pomocné artefakty k ověření jsou zavřené. Aktuální znění je v kanonickém pravidle, historie je v changelogu a návrat nastane jen při opakování stejného tření.
+```
+
+Pokud tým používá issue tracker, zavřete původní úkol s odkazem na kanonické místo. Pokud používá dokumentaci, odstraňte komentáře přímo v textu. Pokud vznikly dočasné exporty, screenshoty nebo výpisy příkladů, smažte je, pokud už nemají jasný účel.
+
+### Nechte jen lehký návratový signál
+
+Stabilní pravidlo nepotřebuje dohled. Potřebuje podmínku, která říká, kdy se má znovu otevřít. Rozdíl je zásadní. Dohled vytváří povinnost pravidelně kontrolovat i věci, které fungují. Návratový signál říká: vraťte se, až nastane konkrétní situace.
+
+Dobré návratové signály:
+
+- stejné rozhodnutí znovu vyžaduje neoficiální výklad;
+- člověk musí hledat druhý dokument, aby pravidlo použil;
+- pravidlo vede ke zbytečnému sběru dat;
+- při dvou běžných použitích vznikne stejná chyba;
+- obchod, support nebo produkt vytvoří paralelní zkratku.
+
+Slabé návratové signály:
+
+- "zkontrolovat za měsíc";
+- "možná ještě doladit jazyk";
+- "podívat se, jestli se nám to pořád líbí";
+- "projít celou oblast při nejbližší příležitosti";
+- "přidat do pravidelného review, ať na to nezapomeneme".
+
+Stabilní návratová podmínka může být velmi krátká:
+
+```text
+Vrátit se jen tehdy, pokud se stejná hranice znovu ukáže jako nejasná při běžném použití.
+```
+
+Tím je pravidlo chráněné dvěma směry. Nepřehlédnete opakované tření, ale zároveň kvůli němu nezavedete permanentní dohled nad věcí, která se právě osvědčila.
+
+### Privacy-first uzavření
+
+Uzavření je vhodná chvíle k datovému úklidu. Během ověření mohly vzniknout dočasné poznámky, anonymizované příklady, interní komentáře nebo pracovní výpisy. I když neobsahují citlivá data, pořád jsou to stopy bez trvalého účelu. Privacy-first provoz není jen o tom, co nesbírat. Je i o tom, co umět včas pustit z ruky.
+
+Před uzavřením projděte:
+
+- jestli v pomocných poznámkách nezůstala jména lidí;
+- jestli příklady neobsahují zákaznický detail, který není potřeba;
+- jestli screenshoty nebo exporty nepřežily svůj účel;
+- jestli se kvůli ověření nezaložil nový měřicí event;
+- jestli staré komentáře nenaznačují sběr dat, který už neplatí;
+- jestli changelog popisuje obecný vzor, ne konkrétní osobní situaci.
+
+Privacy-first stabilní zápis:
+
+```text
+Zůstává jen obecná rozhodovací hranice, datum potvrzení a návratová podmínka. Dočasné poznámky z ověření byly smazané, bez osobních a zákaznických detailů.
+```
+
+Codyho komentář: nejhezčí údržba dokumentace je ta, která po sobě nezanechá pomník vlastní svědomitosti. Čtenář nepotřebuje vidět, kolik práce stálo pravidlo uklidit. Potřebuje, aby pravidlo bylo uklizené.
+
+### Karta uzavření ověřené malé úpravy
+
+```text
+Pravidlo:
+Ověřená malá úprava:
+Výsledek ověření:
+Aktuální stabilní znění:
+Co zůstává v changelogu:
+Co zavíráme nebo mažeme:
+Návratová podmínka:
+Co už nebudeme kontrolovat:
+Privacy-first úklid:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Výběr kontaktní varianty pro landing page služby.
+
+Ověřená malá úprava:
+Doplněna hranice mezi rychlým kontaktem a poptávkou konkrétní služby.
+
+Výsledek ověření:
+Potvrzeno při přípravě nové landing page.
+
+Aktuální stabilní znění:
+U konkrétní služby použijte poptávkový tok. Obecný kontakt patří jen k rychlým dotazům bez jasného obchodního záměru.
+
+Co zůstává v changelogu:
+2026-05-30: Zpřesněna hranice mezi obecným kontaktem a poptávkou služby.
+
+Co zavíráme nebo mažeme:
+Ověřovací kartu, komentář "ověřit po první landing page" a pracovní poznámku z průchodu.
+
+Návratová podmínka:
+Vrátit se jen při opakování stejného váhání u další landing page.
+
+Co už nebudeme kontrolovat:
+Nezavádíme měsíční kontrolu všech kontaktních formulářů.
+
+Privacy-first úklid:
+Zůstává obecný vzor bez jmen, bez zákaznických detailů a bez nového měření.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte výsledek ověření a potvrďte, že úprava fungovala.
+2. Minuta 2: přepište pravidlo do normálního stabilního tónu.
+3. Minuta 3: rozhodněte, co zůstává jen v changelogu.
+4. Minuta 4: zavřete nebo smažte pomocné artefakty.
+5. Minuta 5: zapište návratovou podmínku a privacy-first úklid.
+
+Výstup workshopu:
+
+```text
+Ověřená malá úprava je uzavřená do stabilního pracovního pravidla. Kanonické místo obsahuje aktuální znění, pomocné podklady jsou zavřené a návrat je omezený jen na opakování stejného tření.
+```
+
+### Checklist kapitoly
+
+- Je ověřená úprava přepsaná do běžného pracovního tónu?
+- Zmizel z hlavního pravidla dočasný revizní jazyk?
+- Zůstala jedna aktuální pravda v kanonickém místě?
+- Je historie zapsaná krátce v changelogu, ne v hlavní trase?
+- Zavřeli jsme původní ověřovací kartu?
+- Smazali nebo archivovali jsme pomocné poznámky bez další hodnoty?
+- Nezůstala v backlogu paralelní položka ke stejné věci?
+- Má pravidlo konkrétní návratovou podmínku?
+- Nezavedli jsme dohled nad věcí, která už funguje?
+- Je jasné, co už se nebude kontrolovat?
+- Odstranili jsme dočasné exporty, screenshoty nebo pracovní výpisy?
+- Nezůstala v dokumentaci osobní nebo zákaznická data z ověření?
+- Popisuje changelog obecný vzor místo interního šumu?
+- Ví vlastník, že další stav pravidla je klid?
+
+Stabilní pravidlo je hotové ve chvíli, kdy se dá použít bez vysvětlení jeho vlastní historie. Pokud se čtenář musí prokousat opravnými poznámkami, pravidlo pořád není stabilní. Pokud prostě ví, co udělat, údržba splnila účel a může konečně zmlknout. Ano, i dokumentace má právo na ticho.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha TZ o uzavření ověřené malé úpravy do stabilního pracovního pravidla: přepis do normálního tónu, zavření pomocných artefaktů, lehký návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TY o ověření malé úpravy po potvrzené revizní poznámce: reálné použití, tři signály, čtyři výsledné stavy, zavření návratového signálu, pravidla pro novou poznámku, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TX o provedení jedné malé úpravy po potvrzené revizní poznámce: práce z potvrzené věty, výběr nejbližšího pracovního místa, jeden typ zásahu, zavření původní poznámky, lehký návratový signál, privacy-first provedení, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TW o ověření revizní poznámky po opakování nebo expiraci: návrat k původní podmínce, čtyři výsledky ověření, převod potvrzeného signálu do malé úpravy, zavření bez změny, privacy-first minimum, karta, mini workshop a checklist.
