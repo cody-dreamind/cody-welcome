@@ -146138,8 +146138,252 @@ Malá úprava byla ověřená při běžném použití. Má jeden rozhodnutý st
 
 Ověření malé úpravy má být nenápadné. Když se po něm pravidlo používá snadněji a tým nemá víc podkladů než předtím, změna splnila účel. Ne každá dobrá práce musí být vidět jako nová kapitola v provozu. Někdy je nejlepší výsledek prostě ten, že další člověk udělá správný krok bez otázky navíc.
 
+## Příloha TT: Uzavření ověřené malé úpravy do stabilního kanonického pravidla
+
+Příloha TS ověřila malou úpravu při dalším běžném použití. Pokud výsledek zní `Potvrdit`, práce ještě potřebuje poslední drobný krok: přestat o úpravě mluvit jako o úpravě. Dobré pravidlo nemá nést cedulku "tady jsme něco opravili". Má být čisté, aktuální a použitelné pro člověka, který celou historii nezná.
+
+Smyslem této přílohy je převést ověřenou změnu z režimu kontroly do normálního provozu. Ne přidat další vrstvu dokumentace. Ne psát dlouhé shrnutí. Jen upravit kanonické místo tak, aby obsahovalo aktuální pravdu, zavřít pomocné poznámky a nechat za sebou návratový signál pro případ, že se stejná nejistota jednou opravdu vrátí.
+
+Úvodní pracovní věta:
+
+```text
+Malá úprava byla ověřená v běžném použití. Přepisujeme ji do kanonického pravidla jako aktuální stav, zavíráme revizní stopu a necháváme jen krátký návratový signál.
+```
+
+Tahle věta brání dvěma zbytečným extrémům. První je archivovat všechno: původní poznámku, ověření, screenshoty, diskusi a ještě novou kartu "sledovat". Druhý je smazat historii tak důkladně, že za měsíc nikdo nepozná, proč pravidlo zní právě takhle. Stabilní pravidlo potřebuje minimum paměti, ne nulovou paměť.
+
+### Přepište pravidlo jako současnou pravdu
+
+Kanonické místo má po uzavření obsahovat platné znění pravidla. Nemá v hlavním textu vysvětlovat celou cestu od revizní poznámky přes malou úpravu až po ověření. Člověk, který pravidlo používá, potřebuje vědět, co má udělat teď.
+
+Slabé uzavření:
+
+```text
+Na základě revizní poznámky jsme odkaz přejmenovali, protože původní název byl méně jasný. Při ověření se ukázalo, že nový název funguje lépe.
+```
+
+Silnější uzavření:
+
+```text
+Pro výběr kontaktní varianty použijte odkaz "výběr poptávkového formuláře". Krátká poptávka patří ke konkrétní službě, rychlý kontakt k obecnému prvnímu dotazu.
+```
+
+Rozdíl je v úhlu pohledu. První text vypráví historii změny. Druhý pomáhá udělat rozhodnutí. Historii lze ponechat v jedné krátké poznámce u changelogu nebo rozhodovací karty, ale nemá stát v cestě běžnému použití.
+
+Praktický postup:
+
+- najděte kanonické místo, které se opravdu používá;
+- nahraďte staré znění aktuálním pravidlem;
+- odstraňte dočasné značky jako "nově", "testujeme", "po úpravě" nebo "zatím";
+- ponechte jen takový kontext, který člověk potřebuje k rozhodnutí;
+- ověřte, že interní odkazy vedou na nové aktuální místo, ne na starou revizní poznámku.
+
+Pokud pravidlo bez historie působí nepochopitelně, není to důvod přilepit historii zpět do hlavního textu. Je to signál, že pravidlo potřebuje lepší pracovní kontext: komu slouží, kdy se používá a jaký výsledek má vzniknout.
+
+### Zavřete pomocné artefakty
+
+Ověřená malá úprava za sebou často nechá několik drobných stop: revizní poznámku, ověřovací kartu, komentář v úkolu, dočasný checklist nebo krátkou tabulku signálů. Po potvrzení už nemají všechny stejnou hodnotu.
+
+Rozdělte je na tři skupiny:
+
+- Zachovat jako rozhodovací paměť: jedna stručná věta, proč pravidlo zní nově.
+- Přepsat do kanonického místa: samotné aktuální znění pravidla.
+- Zavřít nebo smazat: pomocné poznámky, dočasné kontroly, duplicity a pracovní podklady bez další hodnoty.
+
+Příklad uzavírací věty:
+
+```text
+Ověřeno při přípravě landing page: název "výběr poptávkového formuláře" vedl editora přímo ke správnému pravidlu. Starý revizní záznam zavřený, aktuální znění je v kanonickém indexu.
+```
+
+Tahle věta stačí. Neobsahuje jméno člověka, výkon, detailní cestu ani opis celé diskuse. Když se někdo později zeptá "proč se to jmenuje takhle", dostane odpověď. Když pravidlo jen používá, nic ho neruší.
+
+Codyho komentář: čím menší byla původní úprava, tím nebezpečnější je velké uzavření. Dvacet řádků dokumentace k přejmenovanému odkazu je provozní konfeta. Vypadá slavnostně, ale pak se musí uklízet.
+
+### Odstraňte revizní jazyk
+
+Stabilní pravidlo nemá znít jako poznámka z rozpracované dílny. Při uzavření proto projděte text a hledejte slova, která drží čtenáře v minulém režimu:
+
+- dočasně;
+- zatím;
+- testujeme;
+- nová verze;
+- po poslední úpravě;
+- sledujeme;
+- možná upravit;
+- vrátíme se příště;
+- platí, pokud se potvrdí.
+
+Některá z těchto slov byla užitečná během ověření. Po potvrzení ale vytvářejí nejistotu: má se člověk pravidlem řídit, nebo čekat na další rozhodnutí? Kanonické pravidlo má takovou nejistotu odstranit.
+
+Před uzavřením:
+
+```text
+Zatím používejte nový odkaz "výběr poptávkového formuláře" a sledujte, jestli pomůže při přípravě landing page.
+```
+
+Po uzavření:
+
+```text
+Při přípravě landing page vyberte kontaktní variantu přes odkaz "výběr poptávkového formuláře".
+```
+
+Všimněte si, že druhá věta není delší ani formálnější. Je jen rozhodnutá. To je přesně stav, který má kanonické pravidlo nabídnout.
+
+### Nastavte návratový signál místo dohledu
+
+Po potvrzené malé úpravě není potřeba pravidelně kontrolovat, jestli pořád funguje. Pokud se pravidlo používá a nikdo se nezasekává, nechte ho být. Návrat má nastat až při konkrétním signálu.
+
+Dobrý návratový signál:
+
+```text
+Vrátit se k pravidlu pouze tehdy, když se při dvou běžných použitích po sobě znovu objeví váhání, kterou kontaktní variantu vybrat.
+```
+
+Slabý návratový signál:
+
+```text
+Za měsíc zkontrolovat, jestli se nám pravidlo pořád líbí.
+```
+
+První varianta je navázaná na práci. Druhá na pocit. U stabilního pravidla má rozhodovat tření v reálném použití, ne pravidelná chuť editovat. Tým tím získá klid: ví, kdy se k tématu vrátit, ale nemusí kolem něj vytvářet servisní kolečko.
+
+Návratový signál napište tak, aby obsahoval:
+
+- kde se má objevit;
+- kolikrát se má zopakovat;
+- jaký typ tření má znamenat návrat;
+- co se naopak ignoruje jako běžný drobný šum;
+- kdo má právo téma znovu otevřít.
+
+Příklad:
+
+```text
+Návratový signál:
+Marketing owner otevře pravidlo znovu jen tehdy, když se při dvou přípravách landing page po sobě objeví dotaz, který formulář použít. Jednorázová stylistická připomínka není důvod k návratu.
+```
+
+Takový signál je malý, ale velmi užitečný. Chrání pravidlo před nekonečným laděním a zároveň nebrání zlepšení, pokud se skutečný problém vrátí.
+
+### Privacy-first stabilizace pravidla
+
+Uzavření ověřené malé úpravy je dobrá chvíle pro datový úklid. V běžném provozu nemá zůstat víc podkladů, než je potřeba pro rozhodovací paměť a auditovatelnost. To platí hlavně u interních poznámek, které mohou mimoděk obsahovat jména, zákaznické detaily, screenshoty, části poptávek nebo exporty.
+
+Privacy-first stabilizace:
+
+- ponechte v kanonickém pravidle jen aktuální pracovní znění;
+- u rozhodovací paměti používejte anonymní nebo zobecněný popis situace;
+- smažte dočasné exporty, screenshoty a kopie, pokud už nejsou potřeba;
+- neukládejte osobní výkon člověka, který pravidlo ověřil;
+- zkontrolujte, jestli staré odkazy nevedou na duplicitní nebo citlivější podklady;
+- pokud změna omezila sběr dat, zapište to jako pozitivní výsledek, ne jako vedlejší poznámku;
+- pokud změna naopak nový sběr dat vyžaduje, otevřete samostatnou privacy kontrolu.
+
+Příklad privacy-first zápisu:
+
+```text
+Po uzavření zůstává aktuální pravidlo a jedna anonymní rozhodovací věta. Dočasná ověřovací karta byla zavřená, pracovní poznámky bez rozhodovací hodnoty smazané. Nevzniká nové měření ani nový osobní záznam.
+```
+
+Tento zápis je nudný správným způsobem. U privacy-first provozu je nuda často výhra: žádný dramatický nový proces, žádný nenápadný sběr navíc, žádná skrytá kopie dat čekající na budoucí problém.
+
+### Karta stabilizace kanonického pravidla
+
+```text
+Kanonické pravidlo:
+Ověřená malá úprava:
+Výsledek ověření:
+Aktuální znění pravidla po uzavření:
+Co bylo přepsáno do kanonického místa:
+Co zůstává jako rozhodovací paměť:
+Co bylo zavřeno nebo smazáno:
+Odstraněný revizní jazyk:
+Návratový signál:
+Co se nepovažuje za důvod k návratu:
+Privacy-first úklid:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kanonické pravidlo:
+Výběr kontaktní varianty pro landing page služby.
+
+Ověřená malá úprava:
+Odkaz "kontaktní varianty" byl přejmenovaný na "výběr poptávkového formuláře".
+
+Výsledek ověření:
+Potvrdit.
+
+Aktuální znění pravidla po uzavření:
+Při přípravě landing page vyberte kontaktní variantu přes odkaz "výběr poptávkového formuláře". Krátká poptávka patří ke konkrétní službě, rychlý kontakt k obecnému prvnímu dotazu.
+
+Co bylo přepsáno do kanonického místa:
+Nový název odkazu a krátké rozlišení obou formulářů.
+
+Co zůstává jako rozhodovací paměť:
+Jedna anonymní věta, že nový název zavedl editora při běžném použití přímo ke správnému pravidlu.
+
+Co bylo zavřeno nebo smazáno:
+Revizní poznámka, ověřovací karta a pomocný komentář v úkolu.
+
+Odstraněný revizní jazyk:
+"Zatím", "sledujeme" a "po úpravě".
+
+Návratový signál:
+Vrátit se pouze při dvou po sobě jdoucích běžných přípravách landing page, kde se znovu objeví váhání nad výběrem formuláře.
+
+Co se nepovažuje za důvod k návratu:
+Jednorázová stylistická připomínka k názvu odkazu.
+
+Privacy-first úklid:
+Zůstává jen aktuální pravidlo a anonymní rozhodovací věta. Nevzniklo nové měření ani osobní záznam.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek ověření a potvrďte, že stav je opravdu `Potvrdit`.
+2. Minuta 2: přepište aktuální znění pravidla bez revizní historie.
+3. Minuta 3: vyberte jednu větu, která zůstane jako rozhodovací paměť.
+4. Minuta 4: zavřete nebo smažte pomocné artefakty bez další hodnoty.
+5. Minuta 5: nastavte návratový signál navázaný na reálné použití.
+6. Minuta 6: proveďte privacy-first kontrolu zbylé datové stopy.
+
+Výstup workshopu:
+
+```text
+Ověřená malá úprava je součástí stabilního kanonického pravidla. Pomocné stopy jsou zavřené, hlavní text je rozhodnutý a návrat nastane jen při konkrétním pracovním signálu.
+```
+
+### Checklist kapitoly
+
+- Máme ověřený výsledek `Potvrdit`, ne jen pocit, že úprava vypadá lépe?
+- Je aktuální znění pravidla v kanonickém místě?
+- Odstranili jsme z hlavního textu revizní historii?
+- Zmizela slova jako "zatím", "testujeme", "sledujeme" a "po úpravě"?
+- Zůstává rozhodovací paměť krátká a užitečná?
+- Zavřeli jsme revizní poznámku, ověřovací kartu a pomocné komentáře?
+- Nevedou interní odkazy na staré nebo duplicitní místo?
+- Má návratový signál konkrétní pracovní spouštěč?
+- Víme, co se nepovažuje za důvod k návratu?
+- Smazali jsme dočasné exporty, screenshoty nebo kopie bez rozhodovací hodnoty?
+- Nevznikl nový osobní záznam o výkonu člověka, který úpravu ověřil?
+- Pokud změna ovlivnila sběr dat, je dopad jasně zapsaný?
+- Může nový člověk pravidlo použít bez znalosti celé historie?
+
+Stabilizace malé úpravy je hotová ve chvíli, kdy se změna přestane tvářit jako změna. Člověk přijde, najde aktuální pravidlo, udělá správný krok a nepotřebuje vědět, kolik drobných poznámek k tomu vedlo. Historie zůstává jen tak velká, aby chránila rozhodnutí. Všechno ostatní může konečně zmizet z cesty.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha TT o uzavření ověřené malé úpravy do stabilního kanonického pravidla: přepis aktuální pravdy, zavření pomocných artefaktů, odstranění revizního jazyka, návratový signál, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TS o ověření malé úpravy po dalším běžném použití: reálný spouštěč, tři signály, čtyři výsledné stavy, pravidlo jednoho doladění, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TR o provedení malé úpravy po ověřené revizní poznámce: práce z ověřeného výsledku, zásah do kanonického místa, jeden typ úpravy, zavření pomocné poznámky, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-05-29: Doplněna Příloha TQ o ověření revizní poznámky po dalším běžném použití nebo expiraci: návrat k původní podmínce, čtyři výsledné stavy, ověření v běžné práci, expirace, privacy-first uzavření, karta, mini workshop a checklist.
