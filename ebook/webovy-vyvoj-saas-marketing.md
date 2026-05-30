@@ -147142,8 +147142,280 @@ Revizní poznámka po prvním návratu má uzavřený stav. Buď přechází do 
 
 Dobře ověřená revizní poznámka má krátký život. Buď se promění v malou přesnou úpravu, nebo zmizí. Obojí je zdravé. Nezdravé je nechat ji žít vedle pravidla tak dlouho, až začne vypadat jako druhá verze pravdy.
 
+## Příloha TX: Provedení jedné malé úpravy po potvrzené revizní poznámce
+
+Příloha TW skončila ve chvíli, kdy revizní poznámka dostala jasný stav. Pokud byla nepotvrzená, zavřela se bez změny. Pokud byla potvrzená, vznikl malý závazek: udělat přesně jednu úpravu, která odpovídá potvrzenému tření, a neotevřít kvůli tomu celé pravidlo znovu.
+
+Tohle je citlivý okamžik. Tým už má důkaz, takže přirozeně roste chuť "když už jsme tady" opravit i okolní věci. Jenže potvrzená revizní poznámka není vstupenka do generální rekonstrukce. Je to přesný pracovní signál. Čím přesnější byl signál, tím užší má být zásah.
+
+Úvodní pracovní věta:
+
+```text
+Po potvrzené revizní poznámce provedeme jen tu úpravu, která přímo odstraňuje potvrzené tření. Všechno ostatní zapisujeme mimo rozsah nebo necháváme být.
+```
+
+Tahle věta má chránit stabilizované pravidlo před návratem do rozpracovanosti. Pravidlo už bylo použitelné. Jen jedna jeho část potřebuje drobnou korekci, příklad, přejmenování nebo odstranění staré stopy. Pokud se úprava rozroste, ztrácí vazbu na původní důkaz a začne vyrábět novou nejistotu.
+
+### Začněte potvrzenou větou
+
+Nezačínejte otevřeným dokumentem. Začněte větou, která v ověření popsala potvrzené tření. Ta je zdrojem rozsahu.
+
+Příklad potvrzené věty:
+
+```text
+Dva editoři při běžné úpravě stránky zaváhali u rozdílu mezi "rychlý kontakt" a "poptávka služby".
+```
+
+Z téhle věty lze odvodit malou úpravu:
+
+```text
+Doplnit do pravidla jednu větu, která rozlišuje rychlý kontakt od poptávky služby.
+```
+
+Z téhle věty naopak nevyplývá:
+
+- přepsat celou kontaktní strategii;
+- měnit všechny formuláře;
+- dělat nový audit všech landing pages;
+- měnit měření konverzí;
+- zavádět povinné schvalování textů.
+
+To všechno mohou být platná témata, ale nejsou potvrzená touto poznámkou. Pokud se při práci objeví, zapište je do samostatné karty nebo je vědomě odložte. Malá úprava se má vejít do původního pracovního místa.
+
+Praktická kontrolní otázka:
+
+```text
+Kdybychom udělali jen tuto jednu úpravu, odstraní potvrzené tření?
+```
+
+Pokud odpověď zní ano, rozsah je pravděpodobně správný. Pokud odpověď zní "částečně, ale mohli bychom rovnou...", zastavte se. "Rovnou" je často slovo, kterým se drobná údržba převléká za rozumný refaktor a potom sní půl dne.
+
+### Vyberte nejbližší pracovní místo
+
+Úprava patří tam, kde člověk rozhodnutí skutečně dělá. Ne nutně tam, kde je dokument organizačně nejhezčí.
+
+Možná místa zásahu:
+
+- jedna věta v kanonickém pravidle;
+- krátký příklad pod pravidlem;
+- název odkazu v interním indexu;
+- jedna položka checklistu;
+- popisek pole v šabloně;
+- odstranění staré poznámky, která vytváří kolizi;
+- doplnění návratové hranice do rozhodovací karty.
+
+Nevhodné místo je takové, které sice vypadá uklizeně, ale člověk ho při práci neuvidí. Pokud editoři zaváhali při výběru formuláře, nepomůže dlouhá poznámka v obecné metodice obsahu. Pomůže krátká věta u pravidla, podle kterého formulář vybírají.
+
+Příklad:
+
+```text
+Špatně:
+Do obecné kapitoly o konverzích doplnit odstavec o typech kontaktu.
+
+Lépe:
+Do pravidla "Výběr kontaktní varianty pro landing page služby" doplnit jednu hranici: rychlý kontakt je pro první dotaz bez jasného rozsahu, poptávka služby je pro výběr konkrétní dodávky.
+```
+
+Úprava má být viditelná přesně v okamžiku, kdy má zabránit opakování tření. Jinak jen zvyšuje počet dobrých vět, které nikdo v pravou chvíli nepotká.
+
+### Proveďte jeden typ změny
+
+Jedna malá úprava může mít různé podoby, ale v jedné iteraci vyberte jeden typ zásahu.
+
+Typy malých zásahů:
+
+1. Zpřesnění: přepsat jednu nejasnou větu.
+2. Příklad: doplnit jeden krátký příklad hranice.
+3. Navigace: přejmenovat jeden odkaz nebo doplnit jednu směrovku.
+4. Úklid: odstranit starou poznámku, která odporuje aktuálnímu pravidlu.
+5. Checklist: doplnit jednu rozhodovací otázku.
+
+Nemíchejte všechno najednou. Když přepíšete větu, přidáte příklad, změníte navigaci a ještě upravíte checklist, nebude při dalším použití jasné, která část pomohla. Malá údržba nepotřebuje laboratorní přesnost, ale potřebuje dohledatelnost. Tým má vědět, co se změnilo a proč.
+
+Dobrá změnová věta:
+
+```text
+Do pravidla doplněna jedna věta rozlišující rychlý kontakt a poptávku služby; formuláře, navigace a měření zůstávají beze změny.
+```
+
+Slabá změnová věta:
+
+```text
+Upraveno kolem kontaktů.
+```
+
+Druhá verze je příliš gumová. Za měsíc z ní nikdo nepozná, jestli změna řešila text, formulář, obchodní kvalifikaci, privacy stránku nebo interní workflow. Změnová věta má být nudně přesná. Nuda je tady známka zdraví.
+
+### Zavřete revizní poznámku hned po provedení
+
+Po provedení malé úpravy původní revizní poznámku nenechávejte viset vedle pravidla. Buď ji smažte, nebo ji převeďte do krátké uzavírací stopy podle toho, jak váš tým drží historii.
+
+Minimální uzavírací zápis:
+
+```text
+Revizní poznámka uzavřena. Potvrzené tření bylo převedeno do jedné věty v kanonickém pravidle. Další návrat jen při opakování stejného tření.
+```
+
+Co nezůstává otevřené:
+
+- původní poznámka jako paralelní instrukce;
+- seznam nápadů, které vznikly při úpravě;
+- dočasné screenshoty nebo kopie podkladů;
+- nový neurčitý úkol "sledovat";
+- staré znění pravidla bez důvodu.
+
+Pokud potřebujete historii, nechte krátký changelog. Nechte výsledek, ne pracovní bahno. Právě tady se často rozhoduje, jestli dokumentace zůstane použitelná, nebo se časem promění v muzeum vlastních pochybností.
+
+### Nastavte lehký návratový signál
+
+Malá úprava po potvrzené poznámce nemusí spouštět nový kontrolní projekt. Stačí lehký návratový signál, který se aktivuje při běžném použití pravidla.
+
+Dobré návratové signály:
+
+- při příštím použití pravidla ověřit, jestli nová věta stačila k rozhodnutí;
+- vrátit se jen tehdy, pokud se stejné tření zopakuje;
+- zkontrolovat při nejbližší plánované úpravě stejné šablony;
+- po 30 dnech zavřít návratový signál, pokud se nic neozvalo.
+
+Špatné návratové signály:
+
+- založit pravidelný meeting;
+- měřit chování editorů;
+- sbírat všechny příklady použití;
+- vyžadovat schválení každého dalšího použití pravidla;
+- nechat vedle pravidla neurčitou poznámku "ověřit později".
+
+Lehký návratový signál je pojistka, ne nová vrstva řízení. Má chránit před tím, aby se drobná úprava tvářila jako definitivní, ale zároveň nesmí znovu otevřít celý cyklus údržby.
+
+### Privacy-first provedení úpravy
+
+Při provádění malé úpravy často stačí pracovat s anonymizovaným vzorem. Nepotřebujete přenášet zákaznické poptávky, interní jména, celé chaty ani screenshoty do kanonického pravidla. Pravidlo má zachytit rozhodovací hranici, ne historii toho, kdo na ni narazil.
+
+Privacy-first minimum:
+
+- do pravidla přeneste obecný vzor, ne konkrétní osobní nebo zákaznický detail;
+- smažte dočasné důkazy, pokud už nejsou potřeba;
+- pokud důkaz musíte ponechat, zkraťte ho na roli, situaci a výsledek;
+- neměňte formuláře ani sběr dat, pokud potvrzené tření bylo jen v textu pravidla;
+- nepřidávejte měření interního používání kvůli jedné malé úpravě;
+- pokud úprava ukáže nový datový tok, otevřete samostatnou privacy kartu místo tichého přidání do pravidla.
+
+Příklad dobrého přenosu:
+
+```text
+Přenesený vzor:
+Rozlišit první obecný dotaz od konkrétní poptávky služby.
+
+Nepřenášet:
+Jméno editora, konkrétní zákaznickou poptávku, celé interní vlákno.
+```
+
+Codyho komentář: privacy-first údržba není jen o tom, které trackery nepustíte na web. Je to i drobná disciplína v dokumentaci. Když stačí vzor, neukládejte příběh. Příběhy jsou fajn u ohně, méně fajn v interních pravidlech s dlouhou retencí.
+
+### Karta provedení malé úpravy po revizní poznámce
+
+```text
+Původní pravidlo:
+Potvrzená revizní poznámka:
+Potvrzené tření jednou větou:
+Vybraný typ úpravy:
+Místo zásahu:
+Přesné znění změny:
+Co zůstává beze změny:
+Co neotevíráme:
+Jak zavíráme původní poznámku:
+Lehký návratový signál:
+Privacy-first stopa:
+Co mažeme:
+Vlastník:
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Původní pravidlo:
+Výběr kontaktní varianty pro landing page služby.
+
+Potvrzená revizní poznámka:
+Dva běžné průchody ukázaly zaváhání u rozdílu mezi "rychlý kontakt" a "poptávka služby".
+
+Potvrzené tření jednou větou:
+Hranice mezi obecným dotazem a konkrétní poptávkou služby nebyla v pravidle dost jasná.
+
+Vybraný typ úpravy:
+Zpřesnění jedné věty a jeden krátký příklad hranice.
+
+Místo zásahu:
+Kanonické pravidlo pro výběr kontaktní varianty.
+
+Přesné znění změny:
+Rychlý kontakt slouží pro první dotaz bez jasného rozsahu; poptávka služby slouží pro situaci, kdy návštěvník už vybírá konkrétní dodávku.
+
+Co zůstává beze změny:
+Formulář, navigace, analytika, názvy stránek a obchodní kvalifikace.
+
+Co neotevíráme:
+Audit všech kontaktních formulářů.
+
+Jak zavíráme původní poznámku:
+Poznámka uzavřena changelogovou větou u pravidla.
+
+Lehký návratový signál:
+Vrátit se jen při opakování stejného zaváhání při dalším běžném použití.
+
+Privacy-first stopa:
+Zůstává jen obecný vzor, bez jmen editorů a bez zákaznických dat.
+
+Co mažeme:
+Dočasnou ověřovací poznámku a pracovní výpis průchodů.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-30.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte potvrzené tření jednou větou.
+2. Minuta 2: vyberte nejbližší pracovní místo zásahu.
+3. Minuta 3: rozhodněte, jestli jde o zpřesnění, příklad, navigaci, úklid nebo checklist.
+4. Minuta 4: napište přesné znění malé úpravy.
+5. Minuta 5: zapište, co se nemění a co neotevíráte.
+6. Minuta 6: zavřete původní revizní poznámku a smažte dočasné podklady.
+7. Minuta 7: nastavte lehký návratový signál bez nového měření.
+
+Výstup workshopu:
+
+```text
+Potvrzená revizní poznámka byla převedena do jedné malé úpravy v nejbližším pracovním místě. Původní poznámka je zavřená, rozsah se nerozšířil a další návrat nastane jen při opakování stejného tření.
+```
+
+### Checklist kapitoly
+
+- Vycházíme z potvrzené věty, ne z nových dojmů?
+- Umíme říct jednou větou, jaké tření úprava odstraňuje?
+- Vybrali jsme nejbližší pracovní místo, kde člověk rozhodnutí skutečně dělá?
+- Děláme jeden typ zásahu, ne balík drobných změn?
+- Je přesné znění úpravy dohledatelné?
+- Zapsali jsme, co zůstává beze změny?
+- Zapsali jsme, co teď neotevíráme?
+- Nevyužíváme potvrzenou poznámku jako záminku k širší revizi?
+- Zavřeli jsme původní revizní poznámku?
+- Odstranili jsme dočasné podklady, které už nemají hodnotu?
+- Nezůstala vedle pravidla druhá paralelní pravda?
+- Nastavili jsme jen lehký návratový signál?
+- Nepřidali jsme nový tracker, meeting ani měření interního chování?
+- Přenesli jsme do pravidla obecný vzor místo osobních nebo zákaznických detailů?
+- Ví vlastník, kdy úpravu při dalším běžném použití nechat být?
+
+Malá úprava po potvrzené revizní poznámce je dobrá právě tím, že není dramatická. Potvrdil se drobný problém, drobně se opraví a systém se vrátí do klidu. Když se z každé potvrzené poznámky stane malý redesign dokumentace, tým sice pořád pracuje, ale rukopis se nikdy nevrátí do použitelného stavu. A to je dost drahá forma svědomitosti.
+
 ## Pracovní log
 
+- 2026-05-30: Doplněna Příloha TX o provedení jedné malé úpravy po potvrzené revizní poznámce: práce z potvrzené věty, výběr nejbližšího pracovního místa, jeden typ zásahu, zavření původní poznámky, lehký návratový signál, privacy-first provedení, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TW o ověření revizní poznámky po opakování nebo expiraci: návrat k původní podmínce, čtyři výsledky ověření, převod potvrzeného signálu do malé úpravy, zavření bez změny, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TV o převodu drobného tření po prvním návratu ke stabilizovanému pravidlu do revizní poznámky: potvrzení drobného signálu, oddělení nového problému, návratová podmínka, umístění poznámky, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha TU o prvním běžném návratu ke stabilizovanému kanonickému pravidlu: reálná pracovní situace, tři signály klidného použití, čtyři výsledné stavy, krátký záznam, privacy-first návrat, karta, mini workshop a checklist.
