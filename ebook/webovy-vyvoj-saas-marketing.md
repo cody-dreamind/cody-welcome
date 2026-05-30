@@ -129,6 +129,152 @@ Datum návratu:
 
 Když se nepodaří zavřít ani zmenšený krok, další odpovědí nemá být větší plán. Vraťte se k otázce, jestli řešíte správný problém. Někdy není chyba v rozsahu, ale v tom, že tým chce potvrdit domněnku, která zatím nemá dost reálných signálů.
 
+## Když se nezavře ani zmenšený krok
+
+Zmenšený krok má být poslední rozumný pokus převést nejasnost do práce. Když se nezavře ani on, je lákavé zkusit ještě menší variantu: jeden formulářový text, jednu větu v nabídce, jeden event, jeden rozhovor, jednu další tabulku. Občas to pomůže. Častěji je to ale signál, že tým už neřeže problém na menší části, ale obchází otázku, jestli má problém vůbec dost pevný tvar.
+
+V tu chvíli nepokračujte automaticky další mikroiterací. Nejprve zapište, proč se nezavřel ani zmenšený krok:
+
+```text
+Zmenšený krok:
+
+Co mělo být hotovo:
+
+Co se reálně stalo:
+
+Co pořád nevíme:
+
+Proč nám to brání v rozhodnutí:
+
+Jaká data, nástroje nebo pracovní místa by další pokus přidal:
+```
+
+Tento zápis často odhalí jednu ze tří situací. Buď chybí důkaz, protože tým ještě nemá dost kontaktu s realitou. Nebo je otázka špatně položená a vede k práci, která nemůže skončit rozhodnutím. Nebo se rozhodnutí ve skutečnosti netýká dané stránky, produktu či kampaně, ale odpovědnosti, obchodní strategie, kapacity nebo rizika.
+
+Příklad:
+
+```text
+Zmenšený krok:
+Upravit jednu otázku v poptávkovém formuláři tak, aby lépe kvalifikovala zájemce.
+
+Co mělo být hotovo:
+Po deseti nových poptávkách poznáme, jestli obchod potřebuje méně ručního doptávání.
+
+Co se reálně stalo:
+Poptávek bylo málo a tři přišly mimo cílový segment. U relevantních poptávek se obchod stejně doptával hlavně na rozhodovací proces.
+
+Co pořád nevíme:
+Jestli problém leží ve formuláři, v textu nabídky, nebo v tom, komu stránka slib oslovuje.
+
+Proč nám to brání v rozhodnutí:
+Další formulářová úprava by mohla sbírat víc údajů, ale neřešila by nejistotu v positioningu.
+
+Jaká data nebo nástroje by další pokus přidal:
+Hrozí nové kvalifikační pole, ruční scoring a další export poptávek do tabulky.
+```
+
+Takový výsledek neříká "pokračujte menším formulářem". Říká "zastavte formulářovou větev a vraťte se k nabídce". To je jiný druh práce.
+
+### Tři rozhodnutí po nezavřeném zmenšení
+
+Po nezavřeném zmenšeném kroku vyberte jen jeden ze tří stavů:
+
+- Zastavit větev: další práce ve stejné větvi už nemá dost dobrý důvod.
+- Přerámovat otázku: problém je reálný, ale původní otázka mířila na špatné místo.
+- Získat základní realitu: chybí přímý kontakt s prací zákazníka, obchodem, podporou nebo provozem.
+
+Nepřidávejte čtvrtý stav "ještě chvíli zkoušet". Pokud opravdu chcete další pokus, musí spadnout pod jeden z těchto stavů. U přerámování napište novou otázku. U reality napište, odkud přijde důkaz. U zastavení napište, co díky tomu tým nebude dělat.
+
+Šablona:
+
+```text
+Stav:
+- zastavit větev / přerámovat otázku / získat základní realitu
+
+Rozhodnutí:
+
+Co už nezkoušíme:
+
+Nová otázka nebo důkaz:
+
+Nejbližší pracovní místo:
+
+Vlastník:
+
+Datum návratu:
+
+Privacy-first hranice:
+```
+
+### Přerámování místo dalšího štípání
+
+Přerámování je užitečné, když zmenšený krok ukáže, že původní problém byl jen příznak. Málo kvalitních poptávek nemusí být problém formuláře. Může to být problém slibu. Nízká aktivace v SaaS nemusí být problém onboardingu. Může to být problém příliš širokého MVP. Slabý obsahový výkon nemusí být problém SEO. Může to být problém toho, že článek neodpovídá na rozhodovací otázku zákazníka.
+
+Přerámovaná otázka má být konkrétnější, ale ne technicky užší za každou cenu. Dobré přerámování posune práci blíž ke skutečnému rozhodnutí:
+
+- Místo "jak zlepšit formulář" se ptejte "proč zájemce nepozná, jestli je služba pro jeho typ problému".
+- Místo "jak měřit aktivaci" se ptejte "jaký první výsledek má uživatel zažít bez pomoci týmu".
+- Místo "jak získat víc leadů" se ptejte "který segment má dost silný důvod mluvit s námi teď".
+- Místo "jak automatizovat support" se ptejte "které opakované dotazy ukazují chybějící produktové vysvětlení".
+
+Codyho komentář: když se i malý krok lepí na boty, nemusí být problém v botách. Možná jdete špatnou cestou. Ano, metafora je trochu turistická, ale pořád levnější než další zbytečný dashboard.
+
+### Získání základní reality
+
+Někdy není problém v otázce, ale v tom, že tým nemá dost skutečných signálů. V takové chvíli není nejlepší další krok úprava produktu ani webu. Nejlepší další krok je krátký kontakt s realitou:
+
+- projít pět posledních obchodních rozhovorů;
+- ručně zkontrolovat poslední support tikety;
+- poslechnout si jeden onboardingový hovor;
+- projít reálnou cestu uživatele v testovacím účtu;
+- porovnat tři poslední poptávky s tím, co stránka slibuje;
+- zeptat se dvou zákazníků, jak pojmenovali problém před nákupem.
+
+Tento krok má mít hranici. "Promluvit se zákazníky" je moc široké. "Zjistit u dvou posledních relevantních poptávek, která věta na webu je přesvědčila k odeslání formuláře" už je použitelné. Výstupem není další výzkumný program, ale rozhodovací věta.
+
+Privacy-first pravidlo: základní realita se dá často získat bez nového sledování. Než přidáte event, heatmapu, session recording nebo další pole, projděte signály, které už máte z běžné práce. Pokud potřebujete rozhovor, sbírejte jen poznámku k rozhodnutí, ne úplný přepis všeho, co člověk řekl.
+
+### Kdy větev zastavit
+
+Zastavení větve je správné, když další pokus jen zvyšuje cenu bez lepší šance na rozhodnutí. Typické signály:
+
+- každé zmenšení vede k nové otázce místo k odpovědi;
+- změna by vyžadovala nová data, ale přínos zůstává mlhavý;
+- tým nemá vlastníka, který může rozhodnutí opravdu udělat;
+- problém se při kontaktu s realitou nepotvrdil;
+- další krok by sloužil hlavně tomu, aby se nepřiznalo, že původní nápad zatím nemá oporu.
+
+Zastavenou větev zapište bez dramatu:
+
+```text
+Větev zastavujeme:
+
+Původní domněnka:
+
+Co jsme zkusili:
+
+Co se nepotvrdilo:
+
+Co díky zastavení neděláme:
+
+Jaký signál by téma znovu otevřel:
+```
+
+Věta "co díky zastavení neděláme" je důležitá. Zastavení má mít viditelný přínos: nepřidáváme formulářové pole, nespouštíme nový tracker, nevytváříme další šablonu, neotevíráme nástroj, nezdržujeme tým další revizí. Jinak bude vypadat jako pouhé odložení.
+
+### Checklist po nezavřeném zmenšení
+
+- Je zapsané, co mělo být hotovo a co se reálně stalo?
+- Víme, jestli chybí důkaz, je špatně položená otázka, nebo jde o jiné rozhodnutí?
+- Vybrali jsme jeden stav: zastavit, přerámovat, nebo získat základní realitu?
+- Nepokračujeme automaticky jen proto, že už jsme do tématu vložili čas?
+- Má další krok vlastníka, datum návratu a jasnou hranici?
+- Používáme nejdřív existující pracovní signály místo nového sledování?
+- Je napsané, jaká data, nástroje nebo exporty díky rozhodnutí nevzniknou?
+- Umí tým jednou větou říct, proč další mikroiterace není výchozí odpověď?
+
+Když se nezavře ani zmenšený krok, dobrý výsledek není "ještě menší krok". Dobrý výsledek je jasnější úsudek. Někdy povede k jiné otázce, někdy ke krátkému kontaktu s realitou a někdy k zastavení celé větve. Všechny tři možnosti jsou lepší než další práce, která jen elegantně oddaluje rozhodnutí.
+
 ## Kdy další krok raději zavřít
 
 Praktická práce nemá povinnost pokračovat jen proto, že už do ní někdo vložil čas. Někdy je nejlepší výsledek iterace věta: "Teď nepokračujeme." Není to rezignace. Je to ochrana pozornosti, rozpočtu, dat a důvěry zákazníka před změnou, která zatím nemá dost dobrý důvod.
@@ -150810,3 +150956,4 @@ Výstup workshopu:
 - 2026-05-28: Doplněna Příloha SH o uzavření potvrzené lokální opravy do stabilního pracovního místa: aktuální stav, zavření lokální karty, úklid pomocných podkladů, návratový signál, privacy-first stabilizace, karta a checklist.
 - 2026-05-30: Doplněna krátká úvodní poznámka, aby nesplněná stop podmínka vedla ke zmenšení dalšího kroku místo k rozšíření práce.
 - 2026-05-30: Doplněna úvodní podkapitola o zmenšení dalšího kroku po nesplněné stop podmínce: tři řezy zúžení, karta zmenšeného kroku, privacy-first brzda a checklist.
+- 2026-05-30: Doplněna úvodní podkapitola o postupu, když se nezavře ani zmenšený krok: zastavení větve, přerámování otázky, získání základní reality, privacy-first hranice a checklist.
