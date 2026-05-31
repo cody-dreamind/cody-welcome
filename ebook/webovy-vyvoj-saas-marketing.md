@@ -152691,8 +152691,254 @@ Slabý dotaz byl buď uzavřen bez změny, převeden do jedné krátké vysvětl
 
 Slabý dotaz je dobrý sluha a mizerný šéf. Umí ukázat, kde člověk na chvíli zaváhá. Nemá ale automaticky řídit další edici pravidla. Když ho převedete do jedné malé poznámky, zachováte užitečný signál a nepřidáte zbytečnou váhu do systému.
 
+## Příloha US: Ověření vysvětlující poznámky při dalším běžném použití
+
+Vysvětlující poznámka má smysl jen tehdy, když při dalším použití zkrátí váhání a současně nerozšíří pravidlo do další vrstvy šumu. Proto ji po jednom běžném návratu ověřte. Ne jako velký audit, ne jako redakční sprint, ale jako krátkou kontrolu v okamžiku, kdy někdo znovu použije stejné pracovní místo.
+
+Praktická otázka zní:
+
+```text
+Pomohla poznámka člověku rozhodnout rychleji, aniž by změnila hlavní pravidlo nebo přidala nové datové nároky?
+```
+
+Tahle otázka drží ověření malé. Neptá se, jestli je poznámka hezká, úplná nebo teoreticky použitelná pro všechny budoucí situace. Ptá se, jestli v reálné práci splnila úkol, kvůli kterému vznikla.
+
+### Ověřujte při práci, ne při čtení nazpaměť
+
+Poznámku neověřujte tak, že ji tým otevře na poradě a řekne "jo, dává smysl". To většina krátkých poznámek dá. Ověření má proběhnout při skutečném použití: někdo připravuje landing page, vybírá důkaz, upravuje formulář, píše sales brief nebo řeší jinou situaci, u které původní dotaz vznikl.
+
+Stačí sledovat tři věci:
+
+- člověk našel poznámku tam, kde váhal;
+- poznámka pomohla rozhodnout bez dalšího výkladu;
+- hlavní pravidlo zůstalo stejně krátké a použitelné jako předtím.
+
+Pokud musíte poznámku vysvětlovat ústně, není ještě dost pracovní. Pokud člověk kvůli poznámce otevře další tři odkazy, je moc daleko od rozhodnutí. Pokud poznámka vede k nové povinné kontrole, přestala být poznámkou a začala se tvářit jako proces.
+
+Příklad:
+
+```text
+Pracovní místo:
+Checklist landing page, položka "Důkaz u dalšího kroku".
+
+Poznámka:
+Pokud formulář není hlavní další krok, umístěte důkaz k hlavnímu rozhodovacímu kroku stránky.
+
+Reálné použití:
+Autor připravoval stránku, kde hlavní CTA vede na kalendář, ne na formulář.
+
+Výsledek:
+Poznámku našel u položky checklistu a důkaz přesunul ke kroku "domluvit konzultaci" bez dalšího dotazu.
+```
+
+Tady poznámka funguje. Nepotřebuje novou kapitolu, druhý příklad ani zápis do obecné znalostní báze.
+
+### Čtyři výsledné stavy poznámky
+
+Po ověření vyberte jeden stav. Nechte stav rozhodnout další krok, ne náladu týmu.
+
+- Ponechat: poznámka pomohla a nezvětšila pravidlo.
+- Zkrátit: poznámka pomohla, ale je delší, než potřebuje pracovní místo.
+- Přepsat hlavní větu: podobné váhání se opakuje a poznámka jen lepí nejasné pravidlo.
+- Zrušit: poznámka nepomohla, nikdo ji nepoužil nebo odvádí pozornost.
+
+Stav "ještě přidat jeden příklad" používejte opatrně. Pokud poznámka potřebuje další poznámku, pravděpodobně není problém v nedostatku textu. Buď hlavní pravidlo neříká rozhodovací princip, nebo je pracovní místo špatně uspořádané.
+
+Rozhodovací pomůcka:
+
+```text
+Poznámka byla nalezena:
+- ano / ne
+
+Pomohla rozhodnout bez další pomoci:
+- ano / ne
+
+Změnila hlavní pravidlo:
+- ano / ne
+
+Přidala nový povinný krok:
+- ano / ne
+
+Výsledek:
+- ponechat / zkrátit / přepsat hlavní větu / zrušit
+```
+
+### Kdy poznámku zkrátit
+
+Zkrácení je správné, když poznámka pomohla, ale obsahuje víc materiálu, než člověk v daný okamžik potřebuje. Typický signál: lidé používají jen první větu a zbytek přeskakují. Nebo si z poznámky dělají vlastní kratší verzi v chatu, dokumentu či komentáři.
+
+Zkracujte směrem k rozhodnutí:
+
+```text
+Původní poznámka:
+Pokud stránka nemá formulář jako hlavní další krok, například když vede na konzultaci, demo nebo přímý kontakt, nemusíte důkaz dávat k formuláři. Dejte ho k místu, kde se člověk skutečně rozhoduje.
+
+Zkrácená poznámka:
+Pokud formulář není hlavní CTA, dejte důkaz k hlavnímu rozhodovacímu kroku.
+```
+
+Zkrácená poznámka má být kratší než původní dotaz. Pokud není, pravděpodobně se snažíte vysvětlit moc situací najednou.
+
+Codyho komentář: poznámka, kterou lidé používají jen po vlastním zkrácení, vám právě poslala redakční feedback. A byla tak hodná, že ho neoznačila jako "urgentní".
+
+### Kdy přepsat hlavní větu pravidla
+
+Někdy ověření ukáže, že poznámka jen obchází slabé pravidlo. To poznáte podle opakovaného vzoru:
+
+- lidé se ptají na stejnou hranici u různých pracovních míst;
+- poznámka se musí přidat do více šablon;
+- rozhodnutí pořád závisí na ústním vysvětlení;
+- hlavní pravidlo je formálně správné, ale nevede člověka k rozhodnutí.
+
+V takovém případě nepřidávejte další vysvětlující vrstvu. Přepište hlavní větu pravidla tak, aby unesla nejběžnější rozhodovací hranici.
+
+Příklad:
+
+```text
+Původní pravidlo:
+Nad první formulář dáváme jeden důkaz podle hlavní nejistoty zákazníka.
+
+Problém:
+Tým opakovaně řeší stránky, kde formulář není hlavní další krok.
+
+Nové pravidlo:
+K hlavnímu rozhodovacímu kroku stránky dáváme jeden důkaz podle největší nejistoty zákazníka.
+```
+
+Tím poznámka splnila užitečnou roli: nebyla trvalou záplatou, ale dočasným signálem pro přesnější pravidlo.
+
+### Privacy-first ověření poznámky
+
+Ověření vysvětlující poznámky nepotřebuje nový tracking. Nezavádějte event "note_viewed", nenahrávejte průchod pracovníkem a nekopírujte celé příklady z klientské práce do revizního záznamu. Stačí stručný pracovní výsledek.
+
+Do záznamu patří:
+
+- pracovní místo;
+- zda poznámka pomohla rozhodnout;
+- výsledný stav poznámky;
+- případná úprava textu;
+- co se kvůli ověření nesbíralo.
+
+Do záznamu nepatří:
+
+- jméno člověka, který poznámku použil, pokud není nutné pro vlastnictví;
+- screenshoty interních systémů;
+- zákaznické citace bez důvodu a souhlasu;
+- detailní časování práce;
+- nové exporty z analytiky nebo CRM.
+
+Privacy-first pravidlo je jednoduché: ověřujte užitečnost poznámky, ne chování konkrétního člověka. Cílem je lepší pracovní místo, ne mikroměření týmu.
+
+### Karta ověření vysvětlující poznámky
+
+```text
+Poznámka:
+
+Pracovní místo:
+
+Původní dotaz, kvůli kterému vznikla:
+
+Reálné použití:
+
+Byla poznámka nalezena včas:
+- ano / ne
+
+Pomohla rozhodnout bez další pomoci:
+- ano / ne
+
+Změnila hlavní pravidlo nebo přidala povinný krok:
+- ano / ne
+
+Výsledný stav:
+- ponechat / zkrátit / přepsat hlavní větu / zrušit
+
+Nové znění, pokud se mění:
+
+Co výslovně nepřidáváme:
+
+Jaká data kvůli ověření nesbíráme:
+
+Další návratový signál, pokud nějaký zůstává:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Poznámka:
+Pokud formulář není hlavní CTA, dejte důkaz k hlavnímu rozhodovacímu kroku.
+
+Pracovní místo:
+Checklist landing page.
+
+Původní dotaz, kvůli kterému vznikla:
+Co když stránka nemá klasický formulář nad ohybem?
+
+Reálné použití:
+Stránka s CTA na rezervaci konzultace.
+
+Byla poznámka nalezena včas:
+Ano.
+
+Pomohla rozhodnout bez další pomoci:
+Ano.
+
+Změnila hlavní pravidlo nebo přidala povinný krok:
+Ne.
+
+Výsledný stav:
+Ponechat.
+
+Nové znění, pokud se mění:
+Nemění se.
+
+Co výslovně nepřidáváme:
+Nepřidáváme druhý příklad, novou šablonu ani event v analytice.
+
+Jaká data kvůli ověření nesbíráme:
+Nesledujeme použití poznámky na úrovni člověka a nekopírujeme klientské citace.
+
+Další návratový signál:
+Pokud se stejná otázka objeví u dalších dvou typů stránek, přepíšeme hlavní větu pravidla.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: otevřete pracovní místo, kde poznámka žije.
+2. Minuta 2: popište jedno reálné použití bez osobních detailů.
+3. Minuta 3: odpovězte, jestli byla poznámka nalezena včas.
+4. Minuta 4: odpovězte, jestli pomohla rozhodnout bez další pomoci.
+5. Minuta 5: vyberte stav poznámky: ponechat, zkrátit, přepsat hlavní větu nebo zrušit.
+6. Minuta 6: proveďte privacy-first kontrolu záznamu.
+7. Minuta 7: zavřete kartu a smažte dočasné podklady, které už nejsou potřeba.
+
+Výstup workshopu:
+
+```text
+Vysvětlující poznámka je po prvním běžném použití buď potvrzená, zkrácená, převedená do lepší hlavní věty pravidla, nebo zrušená. Nezůstává viset jako neověřená vrstva textu.
+```
+
+### Checklist ověření poznámky
+
+- Ověřovali jsme poznámku při reálné práci, ne jen při redakčním čtení?
+- Bylo jasné pracovní místo, kde poznámka patří?
+- Pomohla poznámka rozhodnout bez dalšího výkladu?
+- Nezměnila poznámka hlavní pravidlo ani nepřidala nový povinný krok?
+- Vybrali jsme jeden ze čtyř stavů: ponechat, zkrátit, přepsat hlavní větu nebo zrušit?
+- Pokud se dotaz opakuje, zvažujeme úpravu hlavní věty místo vrstvení poznámek?
+- Zůstává záznam krátký a bez osobních nebo zákaznických detailů navíc?
+- Nezavedli jsme kvůli ověření nový tracking, export nebo sledování konkrétního člověka?
+- Je jasné, kdy se k poznámce znovu vrátit, pokud návratový signál zůstává?
+
+Dobrá vysvětlující poznámka přežije první běžné použití bez toho, aby si řekla o vlastní proces. Pomůže, zůstane malá a nechá hlavní pravidlo pracovat. Pokud to nedokáže, není ostuda ji zkrátit, zrušit nebo převést do přesnější věty. Ostuda je nechat ji růst jen proto, že už jednou vznikla.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha US o ověření vysvětlující poznámky při dalším běžném použití: reálné ověření v práci, čtyři výsledné stavy, zkrácení poznámky, přepis hlavní věty, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UR o převodu slabého dotazu po klidném návratu do vysvětlující poznámky: rozlišení dotazu od tření, umístění poznámky, pravidlo jedné poznámky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UQ o první běžný návrat ke stabilnímu pravidlu po uzavřeném příkladu: reálný pracovní spouštěč, tři signály normálního použití, čtyři výsledky návratu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UP o uzavření potvrzeného příkladu do stabilního pracovního pravidla: stabilní znění, úklid dočasných artefaktů, hranice standardizace, privacy-first úklid, karta, mini workshop a checklist.
