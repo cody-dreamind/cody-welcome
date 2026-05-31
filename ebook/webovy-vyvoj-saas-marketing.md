@@ -151119,8 +151119,178 @@ Malá úprava už není experiment. Je buď běžné pravidlo, lokální poznám
 
 Codyho komentář: nejlepší konec malé úpravy je ten, kterého si další člověk skoro nevšimne. Prostě použije lepší pracovní místo a jde dál. Žádná archeologie čekacích poznámek, žádný obřad kolem mini změny. Jen čistší pravidlo, méně dočasných stop a o trochu menší šance, že se stejná nejistota vrátí převlečená za nový úkol.
 
+## Příloha UM: První běžný návrat k pracovnímu pravidlu po uzavřené malé úpravě
+
+Když se malá úprava uzavře do pracovního pravidla, práce ještě nekončí úplně. První běžný návrat ukáže, jestli pravidlo opravdu funguje jako pravidlo, nebo jestli je to jen hezky přepsaná vzpomínka na předchozí problém. Rozdíl poznáte jednoduše: člověk pravidlo použije při normální práci bez toho, aby musel číst historii čekací poznámky.
+
+První návrat neplánujte jako velké review. Má přijít ve chvíli, kdy pravidlo znovu přirozeně potřebujete: při další landing page, dalším obchodním follow-upu, další kontrole formuláře, dalším výběru důkazu nebo dalším úklidu datové stopy. Pokud kvůli pravidlu svoláváte zvláštní kontrolu, možná jste z malé úpravy udělali moc velký rituál.
+
+Praktická otázka návratu zní:
+
+```text
+Použil další člověk nové pracovní pravidlo bez znalosti původní čekací poznámky?
+```
+
+Pokud odpověď zní ano, pravidlo se pravděpodobně usadilo. Pokud odpověď zní ne, neznamená to automaticky, že je pravidlo špatné. Možná je jen na špatném místě, má moc historický jazyk, chybí mu příklad nebo se ukázalo, že původní úprava řešila jen jednu úzkou situaci.
+
+### Sledujte použití, ne vzpomínku
+
+Při prvním návratu nekontrolujte, jestli si tým pamatuje, proč změna vznikla. Kontrolujte, jestli podle ní jde pracovat. Dobré pravidlo nemá vyžadovat interní legendu. Má být dost jasné v okamžiku použití.
+
+Příklad:
+
+```text
+Pravidlo:
+Nad první formulář dáváme jeden důkaz, který odpovídá hlavní nejistotě zákazníka.
+
+První návrat:
+Autor nové landing page vybral referenci podle obavy zákazníka z migrace, ne podle toho, která reference byla nejnovější.
+
+Výsledek:
+Pravidlo funguje. Není potřeba další úprava ani nový seznam důkazů.
+```
+
+Slabší návrat vypadá jinak:
+
+```text
+První návrat:
+Autor se ptal, co znamená "hlavní nejistota", a hledal původní rozhodovací záznam.
+
+Výsledek:
+Pravidlo potřebuje jeden krátký příklad přímo u pracovního místa. Nepřepisujeme celý postup.
+```
+
+Všimněte si měřítka. Problém není důvod otevřít novou metodiku důkazů. Stačí doplnit příklad tam, kde se pravidlo používá. První návrat má bránit nafukování, ne ho legitimizovat.
+
+### Čtyři výsledky prvního návratu
+
+Po prvním běžném návratu vyberte jeden stav:
+
+- Klid: pravidlo bylo použité bez tření a zůstává beze změny.
+- Doplnit příklad: pravidlo je správné, ale potřebuje jeden ukázkový průchod.
+- Přesunout pravidlo: obsah je dobrý, ale žije mimo místo, kde se rozhodnutí dělá.
+- Oddělit nový problém: návrat ukázal jiné tření, které nepatří do původní malé úpravy.
+
+Stav "upravit pravidlo" používejte až po pojmenování, který z těchto čtyř stavů nastal. Jinak se snadno stane, že první drobné zaváhání spustí další kolečko editací. U čerstvě uzavřených malých úprav je většinou lepší doplnit příklad nebo přesunout pravidlo než přepisovat jeho jádro.
+
+### Privacy-first návrat
+
+První návrat má být lehký i datově. Nepotřebujete měřit kliky, nahrávat obrazovku ani zakládat nový tracker, abyste poznali, jestli někdo použil pracovní pravidlo. Stačí krátký záznam u pracovního místa:
+
+```text
+První návrat proběhl při přípravě nové landing page.
+Pravidlo šlo použít bez doptání.
+Nevznikl nový export, tracker ani kopie zákaznické poznámky.
+```
+
+Pokud se při návratu pracuje s konkrétní zákaznickou situací, nelepte ji celou do pravidla. Do pravidla patří zobecněný závěr, do rozhodovacího záznamu krátký anonymizovaný důvod a surový podklad jen tam, kde už má vlastní retenční režim. Malé pravidlo nemá být nový sklad citlivých příkladů.
+
+### Karta prvního návratu
+
+```text
+Pracovní pravidlo:
+
+Kde žije:
+
+První běžné použití:
+
+Kdo ho použil:
+
+Co šlo bez vysvětlování:
+
+Kde vzniklo tření:
+
+Výsledný stav:
+- klid / doplnit příklad / přesunout pravidlo / oddělit nový problém
+
+Nejmenší další zásah:
+
+Co zůstává mimo rozsah:
+
+Privacy-first kontrola:
+
+Návratový signál:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní pravidlo:
+Nad první formulář dáváme jeden důkaz podle hlavní nejistoty zákazníka.
+
+Kde žije:
+Šablona landing page a checklist před publikací.
+
+První běžné použití:
+Příprava stránky pro službu migrace interního nástroje.
+
+Kdo ho použil:
+Marketing owner.
+
+Co šlo bez vysvětlování:
+Výběr jednoho důkazu podle obavy zákazníka z rizika migrace.
+
+Kde vzniklo tření:
+Autor si nebyl jistý, jestli má důkaz být reference, číslo, nebo krátký citát.
+
+Výsledný stav:
+Doplnit příklad.
+
+Nejmenší další zásah:
+K pravidlu přidat jednu větu: "Důkaz může být reference, číslo nebo krátký citát; rozhoduje nejistota, kterou má odstranit."
+
+Co zůstává mimo rozsah:
+Nevytváříme knihovnu všech důkazů a neměníme formulář.
+
+Privacy-first kontrola:
+Do šablony nedáváme plný zákaznický výrok ani interní poznámku z obchodu.
+
+Návratový signál:
+Téma otevřeme znovu, pokud se u tří dalších stránek opakuje nejistota ve výběru typu důkazu.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 10 minut
+
+1. Minuta 1: otevřete pracovní místo s novým pravidlem.
+2. Minuta 2: najděte první reálné použití po uzavření úpravy.
+3. Minuta 3: napište, kdo pravidlo použil a v jaké situaci.
+4. Minuta 4: oddělte použití bez tření od míst, kde bylo potřeba vysvětlení.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: pokud je potřeba zásah, zmenšete ho na příklad, přesun nebo samostatnou kartu.
+7. Minuta 7: zapište, co se teď výslovně nepřidává.
+8. Minuta 8: zkontrolujte, že nevznikla nová datová stopa.
+9. Minuta 9: napište návratový signál.
+10. Minuta 10: zavřete záznam a nechte pravidlo pracovat.
+
+Výstup workshopu:
+
+```text
+První návrat potvrdil, že pravidlo funguje v běžné práci, nebo ukázal nejmenší korekci bez návratu k celé historii úpravy.
+```
+
+### Checklist prvního návratu
+
+- Proběhl návrat při reálné práci, ne při umělé kontrole?
+- Použil pravidlo někdo bez znalosti původní čekací poznámky?
+- Je jasné, co šlo bez vysvětlování?
+- Je případné tření zmenšené na příklad, přesun nebo samostatnou kartu?
+- Nepřepisujeme celé pravidlo kvůli prvnímu drobnému zaváhání?
+- Je zapsané, co zůstává mimo rozsah?
+- Nevznikl nový tracker, export, screenshotová složka ani kopie zákaznických výroků?
+- Je surový podklad smazaný, anonymizovaný nebo ponechaný jen v místě s retenčním pravidlem?
+- Má pravidlo návratový signál, ale ne nekonečnou kontrolu?
+- Může pracovní místo dál používat člověk, který nezná celou historii úpravy?
+
+První běžný návrat je dobrý ve chvíli, kdy z pravidla zmizí poslední potřeba vysvětlovat jeho původ. Buď se používá přirozeně, nebo dostane jednu malou korekci. V obou případech zůstává hlavní cíl stejný: méně dočasných stop, méně dat navíc a pracovní místo, které pomáhá rozhodnout rychleji než minulá verze.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha UM o první běžný návrat k pracovnímu pravidlu po uzavřené malé úpravě: použití bez znalosti historie, čtyři výsledné stavy, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UL o uzavření ověřené malé úpravy po čekací poznámce do pracovního pravidla: přepis do přítomného času, čtyři výsledné stavy, úklid čekací poznámky, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UK o ověření malé úpravy po ověřené čekací poznámce při dalším běžném použití: spouštěč ověření, tři signály, čtyři výsledné stavy, pravidlo jednoho doladění, vrácení zpět, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-30: Doplněna Příloha UJ o provedení malé úpravy po ověřené čekací poznámce: potvrzený signál, nejbližší pracovní místo, jeden typ zásahu, zavření původní poznámky, lehké ověření, privacy-first provedení, karta, mini workshop a checklist.
