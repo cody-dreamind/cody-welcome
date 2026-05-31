@@ -722,6 +722,111 @@ Tato věta není kosmetika. Je to provozní důkaz, že se tým vrátil k odlož
 
 Dobré uzavření návratu je krátké, ale šetří hodiny budoucích debat. Tým se nevrací ke starému nápadu jako k nevyřízenému dluhu. Vrací se k němu jako k hypotéze, kterou po novém signálu znovu zhodnotil a zapsal její aktuální stav.
 
+## Jak předat uzavřený návrat týmu
+
+Uzavřený návrat má hodnotu jen tehdy, když se dostane na místo, kde podle něj tým skutečně pracuje. Nestačí mít pěkný zápis v rozhodovacím logu, pokud obchod používá starou šablonu, produkt plánuje podle starého ticketu a marketing pořád počítá s původním větším nápadem. Předání není další schůzka o tématu. Je to malý úklid pracovních míst, aby nový závěr nevznikl jen v dokumentu.
+
+Začněte jednou větou, kterou zvládne zopakovat člověk, který u návratu nebyl:
+
+```text
+Po návratu jsme potvrdili:
+Proto teď děláme:
+Původní větší návrh má stav:
+Znovu se k němu vrátíme jen když:
+Kvůli tomu dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Po návratu jsme potvrdili:
+Obchodu stačí jedna otázka na rozhodovací horizont v prvním hovoru.
+
+Proto teď děláme:
+Upravujeme discovery šablonu a krátkou interní poznámku k prioritě poptávky.
+
+Původní větší návrh má stav:
+Automatický lead scoring je zavřený.
+
+Znovu se k němu vrátíme jen když:
+U dalších dvaceti relevantních poptávek obchod opakovaně nedokáže určit prioritu ani po nové otázce.
+
+Kvůli tomu dál nesbíráme:
+Rozpočet, velikost firmy ani automaticky obohacená data v prvním formuláři.
+```
+
+Tato věta má být kratší než zápis uzavření. Slouží pro běžný provoz: do komentáře v issue, do sales šablony, do poznámky k formuláři, do roadmapy nebo do týdenního přehledu. Když ji nejde napsat stručně, závěr pravděpodobně ještě není dost uzavřený.
+
+### Tři místa předání
+
+Po uzavření návratu zkontrolujte tři pracovní místa:
+
+- Místo rozhodnutí: rozhodovací log, roadmapa, karta změny nebo backlog.
+- Místo provedení: šablona, checklist, formulář, obsahová stránka, konfigurace nebo proces.
+- Místo návratu: signál, podle kterého se má téma znovu otevřít.
+
+Každé místo má jinou funkci. Rozhodovací log říká, proč závěr vznikl. Místo provedení říká, co má člověk zítra udělat jinak. Místo návratu říká, kdy se má tým přestat tvářit, že je téma definitivně uzavřené. Pokud některé z těchto míst chybí, závěr se snadno rozpadne: buď nikdo neví proč platí, nebo nikdo nepracuje jinak, nebo se stará debata vrátí bez jasného důvodu.
+
+Prakticky:
+
+- Pokud se změnila discovery otázka, upravte skutečnou šablonu hovoru, nejen zápis v logu.
+- Pokud se zavřel větší backlogový nápad, změňte jeho stav a přidejte návratový signál.
+- Pokud se ruší dočasný dashboard, napište, kde tým nově ověřuje stejnou věc ručně nebo vůbec.
+- Pokud se potvrzuje menší varianta formuláře, odstraňte přípravné poznámky k nepoužitým polím.
+
+Předání má být malé, ale fyzické. Nestačí "všichni víme". V digitálním provozu všichni víme většinou znamená, že to ví tři lidé, jeden je na dovolené a čtvrtý právě založil nový ticket podle staré představy.
+
+### Co nekomunikovat jako nový projekt
+
+Uzavřený návrat často svádí k tomu, aby z něj vznikla prezentace, nový plán nebo miniprojekt "sjednocení závěrů". To je skoro vždycky moc. Cílem není zvýšit slavnostnost rozhodnutí, ale snížit tření v práci.
+
+Nekomunikujte proto:
+
+- celou historii původního nápadu, pokud není nutná pro další rozhodnutí;
+- všechny zvažované varianty, pokud tým potřebuje jen aktuální stav;
+- osobní poznámky z obchodních hovorů, pokud stačí anonymizovaný vzor;
+- detailní datové výpisy, pokud závěr podporuje stručný souhrn;
+- budoucí možnosti, které zůstávají zavřené a nemají návratový signál.
+
+Privacy-first předání znamená i informační střídmost. Tým má dostat rozhodnutí, hranici a návratový signál. Nemá dostat balík osobních údajů, starých exportů a kontextu, který se bude za tři měsíce tvářit jako zdroj pravdy.
+
+### Šablona předání uzavřeného návratu
+
+```text
+Název návratu:
+
+Jednovětý závěr:
+
+Co se mění v práci:
+
+Kde je změna propsaná:
+- rozhodovací log:
+- pracovní šablona nebo proces:
+- backlog nebo roadmapa:
+
+Co zůstává zavřené:
+
+Návratový signál:
+
+Kdo potřebuje závěr znát:
+
+Jakou starou poznámku, kartu nebo export uklízíme:
+
+Privacy-first hranice:
+```
+
+### Checklist předání
+
+- Existuje jedna krátká věta, kterou lze poslat týmu bez dalšího vysvětlování?
+- Je závěr propsaný do místa, kde se podle něj bude pracovat?
+- Dostal původní větší návrh nový stav i v backlogu nebo roadmapě?
+- Je návratový signál viditelný tam, kde tým plánuje další práci?
+- Uklidili jsme dočasné poznámky, přípravné exporty nebo staré varianty?
+- Sdílíme jen shrnutí rozhodnutí, ne zbytečná osobní data a historické detaily?
+- Ví tým, co má dělat jinak při nejbližším běžném použití?
+
+Codyho komentář: dobré předání uzavřeného návratu je trochu nudné. Žádná fanfára, žádný nový strategický balíček. Jen jasná věta, opravená šablona, uklizený backlog a méně dat, která se nikam nemusela tahat. Nuda je v provozu často známka zdraví.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -152916,3 +153021,4 @@ První běžný návrat má potvrdit, že pravidlo se vrátilo do života týmu.
 - 2026-05-31: Doplněna úvodní podkapitola o znovuotevření odloženého kroku: návratový signál, tři brány, rozhodovací stavy, karta návratu a privacy-first hranice.
 - 2026-05-31: Doplněna krátká poznámka k návratu odloženého kroku, aby menší otevřená varianta výslovně nechala původní rozsah zavřený.
 - 2026-05-31: Doplněna úvodní podkapitola o uzavření návratu k odloženému kroku: nové stavy původního návrhu, privacy-first výsledek, šablona uzavření a checklist.
+- 2026-05-31: Doplněna úvodní podkapitola o předání uzavřeného návratu týmu: jednovětý závěr, tři místa předání, úklid pracovních stop, privacy-first hranice a checklist.
