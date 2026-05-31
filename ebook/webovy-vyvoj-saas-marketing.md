@@ -155474,8 +155474,317 @@ Opakované tření má buď jednu malou opravu v nejbližším pracovním míst�
 
 Dobrá oprava po čekací poznámce má být skoro neviditelná. Při dalším použití člověk prostě projde místem, které dřív drhlo, a nemusí vědět, kolik drobné redakční práce za tím bylo. To je přesně ten druh provozní elegance, která se špatně prodává na slidech, ale výborně funguje v pondělí ráno.
 
+## Příloha VC: Ověření opravy pracovního pravidla po čekací poznámce
+
+Malá oprava po čekací poznámce není hotová ve chvíli, kdy ji zapíšete do pravidla. Hotová je až ve chvíli, kdy projde jedním běžným použitím a nezpůsobí nové tření. Jinak jste jen přesunuli poznámku z okraje do hlavního pracovního místa a doufáte, že se z ní stalo řešení. Doufání je fajn v počasí. V provozním pravidle je lepší ověření.
+
+Tato příloha navazuje na Přílohu VB. Řeší okamžik po provedení malé opravy: přidali jste větu, příklad, pole, přesun, přejmenování nebo zkrácení. Teď potřebujete zjistit, jestli oprava opravdu pomáhá v práci, kvůli které vznikla.
+
+Otázka zní:
+
+```text
+Pomohla malá oprava při prvním běžném použití bez toho, aby vytvořila nové tření, novou datovou stopu nebo potřebu dalšího vysvětlování?
+```
+
+Neověřujte opravu ve speciálním workshopu, pokud to není nutné. Lepší je první normální použití: člověk otevře šablonu, checklist, kartu změny nebo pravidlo v práci, pro kterou existuje. Pokud musí někdo vedle něj stát a vysvětlovat, co nová věta znamená, oprava ještě není samostatná.
+
+### Vyberte skutečný spouštěč ověření
+
+Ověření má začít běžnou pracovní situací, ne kalendářovou připomínkou bez kontextu. "Za týden se na to podíváme" je slabé, pokud se pravidlo mezitím nepoužilo. "Při dalším vyplnění karty změny zkontrolujeme, jestli pole Mimo rozsah zabránilo návratu odložených nápadů do hlavního úkolu" je konkrétní.
+
+Dobré spouštěče:
+
+- první použití opravené šablony;
+- první review výstupu vytvořeného podle opraveného pravidla;
+- první předání pravidla člověku, který nezná historii čekací poznámky;
+- první situace, ve které se dřív opakovalo stejné tření;
+- první uzavření pracovního kroku bez návratu k původní poznámce.
+
+Špatné spouštěče:
+
+- obecný pocit, že "už to asi běží";
+- počet dní od úpravy bez reálného použití;
+- další preventivní schůzka;
+- čtení pravidla bez výstupu;
+- kontrola jen autorem opravy.
+
+Spouštěč zapište hned při zavření čekací poznámky:
+
+```text
+Opravu ověříme při:
+
+Poznáme to podle:
+
+Kdo se podívá na výstup:
+
+Co nebudeme kvůli ověření sbírat:
+```
+
+Tím se ověření nestane dalším volným úkolem. Je připojené k okamžiku, kdy pravidlo samo vstoupí do práce.
+
+### Sledujte tři signály
+
+Při prvním použití nesledujte všechno. Stačí tři signály:
+
+- Plynulost: člověk projde opraveným místem bez doptávání na stejnou věc.
+- Výstup: vznikne správný pracovní výsledek, ne jen pocit, že text je hezčí.
+- Vedlejší efekt: oprava nepřidá nové pole, výklad nebo datovou stopu, která začne překážet.
+
+Příklad:
+
+```text
+Oprava:
+Do karty změny přidáno pole "Mimo rozsah této iterace".
+
+Plynulost:
+Člověk zapsal jednu odloženou věc bez dotazu, kam patří.
+
+Výstup:
+Hlavní úkol zůstal úzký a šel zavřít.
+
+Vedlejší efekt:
+Pole nezpůsobilo nový seznam nápadů, které by tým začal rovnou řešit.
+```
+
+Pokud se oprava použila, ale výstup je pořád špatný, neoslavujte. Opravená věta možná snížila nejistotu, ale nevyřešila pracovní problém. Pokud je výstup správný, ale člověk potřeboval dlouhé vysvětlení, pravidlo ještě není dost samostatné. Pokud výstup funguje a nikdo se neptá, ale nová věta vede ke sběru dalších detailů "pro jistotu", opravili jste tření za cenu datového dluhu.
+
+### Čtyři výsledné stavy
+
+Po prvním běžném použití vyberte jeden stav:
+
+- Potvrzeno: oprava pomohla a nevytvořila nové tření.
+- Drobně doladit: směr je správný, ale jedna formulace nebo umístění ještě překáží.
+- Vrátit zpět: oprava přidala víc zmatku než užitku.
+- Otevřít hlubší problém: opakované tření nebylo v pravidle, ale v odpovědnosti, procesu, nástroji nebo původním slibu.
+
+Nedávejte opravu do neurčitého stavu "sledovat dál", pokud proběhlo reálné použití a máte dost signálů pro jeden z těchto závěrů. Sledovat dál je často jen hezčí název pro nerozhodnutí.
+
+#### Potvrzeno
+
+Potvrzená oprava se zavře do stabilního pravidla. Odstraňte z ní dočasný jazyk typu "nově", "po poslední poznámce", "zatím" nebo "zkusíme". V pracovním místě má zůstat aktuální pravda.
+
+Krátký zápis:
+
+```text
+Výsledek ověření:
+Potvrzeno.
+
+Co fungovalo:
+
+Co necháváme ve stabilním pravidle:
+
+Co mažeme:
+Dočasnou ověřovací poznámku a podklady z čekání.
+
+Další návrat:
+Jen pokud se stejné tření znovu objeví v běžném použití.
+```
+
+#### Drobně doladit
+
+Drobné doladění je povolené, ale jen jednou. Pokud po malé opravě hned následuje série dalších drobných oprav, nejspíš nejde o lokální textový problém. Pravidlo možná stojí na slabém rozhodnutí.
+
+Doladění má být menší než původní oprava:
+
+- změnit jedno slovo;
+- přesunout větu blíž k poli;
+- zkrátit příklad;
+- odstranit pomocnou poznámku;
+- přidat hranici, která zabrání špatnému použití.
+
+Šablona:
+
+```text
+Výsledek ověření:
+Drobně doladit.
+
+Co fungovalo:
+
+Co pořád drhlo:
+
+Jedno doladění:
+
+Co už po doladění nebudeme přidávat:
+
+Další ověření:
+Při nejbližším běžném použití stejného pracovního místa.
+```
+
+Codyho komentář: jedno doladění je servis. Třetí doladění je převlečený redesign. A redesign, který se tváří jako drobná úprava, je oblíbený sport dokumentace, která už ztratila brzdy.
+
+#### Vrátit zpět
+
+Vrácení zpět není ostuda. Je to levná forma učení. Pokud oprava přidala nové nejasnosti, prodloužila práci nebo posunula pozornost na vedlejší téma, vraťte ji a nechte v logu krátký důvod.
+
+Zápis:
+
+```text
+Výsledek ověření:
+Vrátit zpět.
+
+Proč:
+
+Co se obnovuje:
+
+Co jsme se naučili:
+
+Co neotevíráme:
+Nepokračujeme další variantou bez nové pracovní otázky.
+
+Privacy-first úklid:
+Mažeme dočasné podklady z ověření a necháváme jen obecný závěr.
+```
+
+Po návratu zpět se neptejte hned "jakou jinou větu zkusíme". Nejdřív se ptejte, jestli původní tření pořád stojí za řešení. Někdy oprava selže proto, že problém byl menší než cena zásahu.
+
+#### Otevřít hlubší problém
+
+Pokud první použití ukáže, že lidé nerozumí vlastnictví, rozhodovacím právům, cíli kroku nebo datovému toku, už neřešíte malou opravu pravidla. Malá oprava splnila jinou práci: ukázala, kde je systém slabší.
+
+Zapište oddělení:
+
+```text
+Malou opravu:
+- ponechat / vrátit / dočasně zkrátit
+
+Hlubší problém:
+
+Proč už nejde o lokální pravidlo:
+
+Nová pracovní otázka:
+
+Kam problém patří:
+- backlog / rozhodovací log / provozní standard / vlastník procesu
+
+Co nebudeme dál lepit do původního pravidla:
+```
+
+Tím ochráníte pracovní místo před tím, aby neslo celý procesní problém na zádech jedné věty.
+
+### Ověřujte práci, ne člověka
+
+Ověření opravy pravidla nemá hledat, kdo se zasekl. Má zjistit, jestli pravidlo pomohlo práci. Pište záznamy tak, aby neobsahovaly osobní hodnocení:
+
+Špatně:
+
+```text
+Petr zase nepochopil, kam psát odložené věci.
+```
+
+Lépe:
+
+```text
+Při vyplnění karty změny nebylo jasné, zda odložený nápad patří do hlavního úkolu nebo mimo rozsah.
+```
+
+Ještě lépe:
+
+```text
+Pole "Mimo rozsah této iterace" pomohlo oddělit odložený nápad od hlavního úkolu. Výstup šel zavřít bez rozšíření rozsahu.
+```
+
+Takový jazyk chrání lidi i rozhodování. Tým se učí z práce, ne z paměti o tom, kdo kdy zaváhal.
+
+### Privacy-first ověření
+
+Ověření malé opravy má být lehké i datově. Nepřidávejte sledování použití šablony, nahrávání obrazovky, nové povinné pole ani export jen proto, abyste dokázali, že jedna věta funguje. Pokud pravidlo vyžaduje intenzivní tracking, aby se ověřilo, nejspíš není malou opravou.
+
+Stačí:
+
+- stručný anonymní záznam vlastníka;
+- jeden příklad výstupu bez osobních detailů;
+- rozhodnutí o stavu opravy;
+- datum a další návratová podmínka, pokud vůbec existuje.
+
+Nestačí jako privacy-first minimum:
+
+- screenshot s osobními daty "pro kontext";
+- citace interního chatu s konkrétními lidmi;
+- export všech použití šablony;
+- nové měření chování týmu;
+- ukládání zákaznických detailů, které neslouží samotnému rozhodnutí.
+
+Privacy-first věta:
+
+```text
+Opravu pravidla ověřujeme na výsledku práce, ne na sledování lidí. Necháváme jen anonymní rozhodovací závěr a mažeme dočasné podklady, které už neslouží dalšímu použití pravidla.
+```
+
+### Karta ověření opravy
+
+```text
+Pracovní místo:
+
+Původní čekací poznámka:
+
+Provedená oprava:
+
+Spouštěč ověření:
+
+Kdo pravidlo použil:
+- role nebo tým, ne osobní hodnocení
+
+Plynulost:
+
+Výstup:
+
+Vedlejší efekt:
+
+Výsledný stav:
+- potvrzeno / drobně doladit / vrátit zpět / otevřít hlubší problém
+
+Rozhodnutí:
+
+Co zůstává ve stabilním pravidle:
+
+Co mažeme nebo zkracujeme:
+
+Co výslovně neotevíráme:
+
+Další návratová podmínka, pokud existuje:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: připomeňte si původní čekací poznámku a provedenou opravu.
+2. Minuta 2: potvrďte, že proběhlo skutečné běžné použití.
+3. Minuta 3: zapište signál plynulosti.
+4. Minuta 4: zapište kvalitu výstupu.
+5. Minuta 5: zkontrolujte vedlejší efekt a datovou stopu.
+6. Minuta 6: vyberte jeden ze čtyř výsledných stavů.
+7. Minuta 7: rozhodněte, co zůstává v pravidle a co se maže.
+8. Minuta 8: zapište další návratovou podmínku nebo pravidlo zavřete bez ní.
+
+Výstup workshopu:
+
+```text
+Malá oprava po čekací poznámce má ověřený stav, stabilní nebo upravené znění, uklizené dočasné podklady a jasné rozhodnutí, zda se pravidlo zavírá, ladí, vrací zpět nebo odděluje od hlubšího problému.
+```
+
+### Checklist ověření opravy
+
+- Ověřovali jsme opravu při skutečném běžném použití?
+- Byl spouštěč ověření zapsaný konkrétně?
+- Sledovali jsme plynulost, výstup a vedlejší efekt?
+- Vybrali jsme právě jeden výsledný stav?
+- Pokud je oprava potvrzená, odstranili jsme dočasný jazyk?
+- Pokud ji drobně ladíme, jde jen o jedno menší doladění?
+- Pokud ji vracíme zpět, zapsali jsme důvod bez obviňování lidí?
+- Pokud se ukázal hlubší problém, oddělili jsme ho od původního pravidla?
+- Zůstává jeden zdroj pravdy?
+- Nezavedli jsme nové sledování, screenshoty, exporty ani osobní hodnocení?
+- Uklidili jsme dočasné podklady z ověření?
+- Je jasné, kdy se pravidlo znovu otevře, nebo že se teď neotevírá vůbec?
+
+Ověřená malá oprava je tichý konec celé smyčky: slabé tření, čekací poznámka, opakování, lokální oprava, běžné použití, závěr. Když to tým umí, dokumentace přestane být skladištěm historických nejistot a začne fungovat jako pracovní nástroj, který se opravuje jen tehdy, když to práce opravdu potřebuje.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha VC o ověření opravy pracovního pravidla po čekací poznámce: skutečný spouštěč ověření, tři signály plynulosti/výstupu/vedlejšího efektu, čtyři výsledné stavy, práce bez osobního hodnocení, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha VB o převodu opakovaného tření po čekací poznámce do jedné opravy pracovního pravidla: rozlišení malé opravy a nové práce, nejbližší místo zásahu, přítomný čas pravidla, jeden typ zásahu, zavření původní poznámky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o úklidu okolí po falešném poplachu: rozlišení stabilní trasy a okolní staré stopy, stavy úklidu, privacy-first mazání podkladů, karta a checklist.
 - 2026-05-31: Doplněna Příloha VA o uzavření čekací poznámky po expiraci nebo opakování: stavy poznámky, zavření bez změny, převod opakovaného tření do malé úpravy, oddělení nového problému, selhání pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
