@@ -152374,8 +152374,235 @@ Stabilní pravidlo s příkladem bylo poprvé použito v běžné práci. Je bu�
 
 První běžný návrat má potvrdit, že pravidlo se vrátilo do života týmu. Když funguje, nechte ho pracovat. Když lehce drhne, opravte nejbližší hranu. Když otevře nové téma, dejte mu vlastní místo. Nejhorší výsledek by byl znovu obalit stabilní pravidlo péčí, kterou už nepotřebuje.
 
+## Příloha UR: Převod slabého dotazu po klidném návratu do vysvětlující poznámky
+
+Po klidném návratu ke stabilnímu pravidlu se občas objeví drobný dotaz. Není to tření, které by bránilo práci. Není to důkaz, že pravidlo selhalo. Je to spíš okamžik, kdy někdo při použití narazí na hranu významu: "Platí to i pro tento typ stránky?", "Můžu použít stejný důkaz u jiné námitky?", "Kde končí příklad a začíná samostatné rozhodnutí?"
+
+Takový dotaz je užitečný, ale nezaslouží si automaticky novou úpravu pravidla. Pokud tým na každý slabý dotaz reaguje přepisem standardu, pravidlo se začne nafukovat. Po pár týdnech má u sebe výjimky, komentáře, poznámky, odkazy, druhý příklad, třetí příklad a opatrnou větu, která už nikomu nepomáhá rozhodnout.
+
+Praktická otázka zní:
+
+```text
+Je dotaz signál k úpravě pravidla, nebo stačí krátká vysvětlující poznámka u pracovního místa?
+```
+
+Vysvětlující poznámka je malá. Neopravuje pravidlo, pokud pravidlo funguje. Jen doplní kontext v místě, kde člověk pravděpodobně váhá. Má pomoci rozhodnout příště rychleji, ale nesmí z pravidla udělat encyklopedii.
+
+### Rozlište dotaz od tření
+
+Nejdřív pojmenujte, co se opravdu stalo. Slabý dotaz má tři znaky:
+
+- práce pokračovala i bez změny pravidla;
+- člověk se ptal na výklad, ne na to, kde pravidlo najít nebo jak ho použít;
+- odpověď šla dát jednou větou bez nového sběru dat, schvalování nebo procesu.
+
+Tření je jiné. Tření zastaví práci, vede ke špatnému rozhodnutí nebo nutí člověka hledat pomocné podklady. Pokud se někdo bez dotazu rozhodl špatně, není to slabý dotaz. Pokud pravidlo nenašel, není to slabý dotaz. Pokud musel kopírovat interní zákaznickou citaci do nové tabulky, není to slabý dotaz.
+
+Zapište si mini rozlišení:
+
+```text
+Dotaz:
+
+Práce se zastavila:
+- ano / ne
+
+Vzniklo špatné rozhodnutí:
+- ano / ne
+
+Stačí odpověď jednou větou:
+- ano / ne
+
+Stav:
+- vysvětlující poznámka / lokální oprava / nové téma
+```
+
+Příklad:
+
+```text
+Dotaz:
+Platí pravidlo "důkaz nad formulářem" i pro stránku, kde formulář není primární CTA?
+
+Práce se zastavila:
+Ne. Autor stránku dokončil.
+
+Vzniklo špatné rozhodnutí:
+Ne. Důkaz použil správně, jen si nebyl jistý hranicí.
+
+Stačí odpověď jednou větou:
+Ano: pokud formulář není primární CTA, dejte důkaz k hlavnímu rozhodovacímu kroku.
+
+Stav:
+Vysvětlující poznámka.
+```
+
+Tento zápis drží reakci malou. Dotaz nezmizí, ale nedostane víc prostoru, než si zaslouží.
+
+### Kam poznámku dát
+
+Vysvětlující poznámka patří co nejblíž místu váhání. Ne do samostatného dokumentu, ne do obecné znalostní báze, ne do nové sekce "časté otázky ke všemu". Pokud dotaz vznikl při práci s landing page, poznámka patří k šabloně landing page nebo k položce checklistu. Pokud vznikl při obchodním briefu, patří k briefu. Pokud vznikl při výběru důkazu, patří k pravidlu pro důkazy.
+
+Dobrá poznámka má tři části:
+
+```text
+Kdy váhání vzniká:
+Jak rozhodnout:
+Co kvůli tomu neměnit:
+```
+
+Příklad:
+
+```text
+Kdy váhání vzniká:
+Stránka nemá formulář jako hlavní další krok.
+
+Jak rozhodnout:
+Důkaz dejte k hlavnímu rozhodovacímu kroku, ne nutně k formuláři.
+
+Co kvůli tomu neměnit:
+Nepřidávejte nový důkazový blok jen proto, aby stránka napodobila jinou šablonu.
+```
+
+Poznámka má být krátká a pracovní. Pokud potřebuje odstavec historie, dvě varianty, tabulku výjimek nebo nový diagram, pravděpodobně už nejde o vysvětlující poznámku. Buď je pravidlo opravdu nejasné, nebo jste otevřeli nové téma.
+
+### Jedna poznámka, žádný nový standard
+
+Největší riziko slabých dotazů je pomalé vrstvení. Každý dotaz vypadá nevinně, ale po deseti malých doplněních je pravidlo těžší než problém, který mělo řešit.
+
+Použijte proto pravidlo jedné poznámky:
+
+- jeden dotaz může přidat nejvýše jednu krátkou poznámku;
+- poznámka nesmí měnit hlavní znění pravidla;
+- poznámka nesmí přidávat nový povinný krok;
+- poznámka musí mít návratový signál, kdy se znovu podívat, jestli nepřekáží;
+- pokud se objeví druhý podobný dotaz, nepište druhou poznámku automaticky, ale zvažte, zda není potřeba přepsat jednu větu pravidla.
+
+Codyho komentář: vysvětlující poznámka je jako dobrá cedule na chodbě. Pomůže v pravou chvíli a nepožaduje, aby se kvůli ní přestavěla budova. Jakmile cedule začnou pokrývat každé dveře, problém už není v lidech, ale v navigaci.
+
+### Privacy-first poznámka
+
+Slabý dotaz často vznikne kolem důkazů, zákaznických příkladů nebo interních pracovních situací. Právě tam je snadné udělat z malé poznámky zbytečný datový odkladací prostor.
+
+Do vysvětlující poznámky nepatří:
+
+- celé zákaznické citace, pokud stačí typ důkazu;
+- screenshoty z CRM, e-mailu, podpory nebo analytiky;
+- jména lidí, kteří dotaz položili, pokud nejsou nutná;
+- interní poznámky z obchodního hovoru;
+- nové osobní údaje jen proto, aby poznámka působila konkrétněji.
+
+Pište princip, ne syrový podklad. Místo "u klienta XY použijte citaci z hovoru z 12. května" napište "u obavy z migrace použijte schválený důkaz o dokončeném přesunu". Zdroj pravdy pro citaci má zůstat tam, kde se řeší souhlas, přístup a retence.
+
+Privacy-first hodnota vysvětlující poznámky je v tom, že zmenší potřebu ptát se lidí a kopírovat kontext, ale nezvětší množství uložených osobních nebo obchodně citlivých dat.
+
+### Karta vysvětlující poznámky
+
+```text
+Stabilní pravidlo:
+
+Kde se dotaz objevil:
+
+Přesné znění dotazu:
+
+Zastavil dotaz práci:
+- ano / ne
+
+Vzniklo špatné rozhodnutí:
+- ano / ne
+
+Stačí odpověď jednou větou:
+- ano / ne
+
+Rozhodnutí:
+- přidat vysvětlující poznámku / opravit lokální místo / otevřít nové téma / nedělat nic
+
+Znění poznámky:
+
+Kam poznámka patří:
+
+Co výslovně neměníme:
+
+Jaká data kvůli poznámce nesbíráme:
+
+Návratový signál:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilní pravidlo:
+Nad první formulář dáváme jeden důkaz podle hlavní nejistoty zákazníka.
+
+Kde se dotaz objevil:
+Šablona landing page pro stránku s hlavním CTA "domluvit konzultaci".
+
+Přesné znění dotazu:
+Co když stránka nemá klasický formulář nad ohybem?
+
+Zastavil dotaz práci:
+Ne.
+
+Vzniklo špatné rozhodnutí:
+Ne.
+
+Stačí odpověď jednou větou:
+Ano.
+
+Rozhodnutí:
+Přidat vysvětlující poznámku.
+
+Znění poznámky:
+Pokud formulář není hlavní další krok, umístěte důkaz k hlavnímu rozhodovacímu kroku stránky.
+
+Kam poznámka patří:
+Checklist landing page, položka "Důkaz u dalšího kroku".
+
+Co výslovně neměníme:
+Neměníme hlavní pravidlo, nepřidáváme druhý příklad a nevytváříme novou variantu šablony.
+
+Jaká data kvůli poznámce nesbíráme:
+Nekopírujeme zákaznické citace ani screenshoty z CRM do checklistu.
+
+Návratový signál:
+Pokud se stejný typ dotazu objeví ještě dvakrát, přepíšeme hlavní větu pravidla místo další poznámky.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: napište přesné znění dotazu bez interpretace.
+2. Minuta 2: ověřte, jestli práce pokračovala a rozhodnutí nebylo špatně.
+3. Minuta 3: zkuste odpověď jednou větou.
+4. Minuta 4: určete nejbližší pracovní místo, kde poznámka pomůže.
+5. Minuta 5: napište, co poznámka výslovně nemění.
+6. Minuta 6: proveďte privacy-first kontrolu a nastavte návratový signál.
+
+Výstup workshopu:
+
+```text
+Slabý dotaz byl buď uzavřen bez změny, převeden do jedné krátké vysvětlující poznámky, nebo oddělen jako nové téma. Stabilní pravidlo se kvůli němu nerozrostlo bez důkazu.
+```
+
+### Checklist vysvětlující poznámky
+
+- Byl dotaz přesně zapsaný, ne přeložený do většího problému?
+- Ověřili jsme, že práce pokračovala a nevzniklo špatné rozhodnutí?
+- Stačí odpověď jednou větou?
+- Patří poznámka k místu váhání, ne do nového dokumentu?
+- Nemění poznámka hlavní pravidlo ani nepřidává povinný krok?
+- Je zapsané, co výslovně neměníme?
+- Nepřidává poznámka zákaznické citace, screenshoty, osobní údaje ani interní obchodní detaily?
+- Má poznámka návratový signál, aby se z ní nestala trvalá vrstva šumu?
+- Ví tým, kdy místo další poznámky přepsat hlavní větu pravidla?
+
+Slabý dotaz je dobrý sluha a mizerný šéf. Umí ukázat, kde člověk na chvíli zaváhá. Nemá ale automaticky řídit další edici pravidla. Když ho převedete do jedné malé poznámky, zachováte užitečný signál a nepřidáte zbytečnou váhu do systému.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha UR o převodu slabého dotazu po klidném návratu do vysvětlující poznámky: rozlišení dotazu od tření, umístění poznámky, pravidlo jedné poznámky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UQ o první běžný návrat ke stabilnímu pravidlu po uzavřeném příkladu: reálný pracovní spouštěč, tři signály normálního použití, čtyři výsledky návratu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UP o uzavření potvrzeného příkladu do stabilního pracovního pravidla: stabilní znění, úklid dočasných artefaktů, hranice standardizace, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UO o ověření doplněného příkladu při dalším běžném použití: ověřování na stejném pracovním místě, tři signály funkčnosti, čtyři výsledné stavy, pravidlo jedné korekce, privacy-first kontrola, karta, mini workshop a checklist.
