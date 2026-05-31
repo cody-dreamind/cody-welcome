@@ -155193,8 +155193,290 @@ Výstup workshopu:
 
 Dobře uzavřená čekací poznámka dělá z drobné nejistoty buď nulovou změnu, nebo malou přesnou změnu. V obou případech chrání stabilitu systému. To je nudné v tom nejlepším slova smyslu.
 
+## Příloha VB: Převod opakovaného tření po čekací poznámce do opravy pracovního pravidla
+
+Když se čekací poznámka po expiraci nebo opakování nezavře bez změny, neznamená to automaticky, že máte přepsat celé pracovní místo. Znamená to jen, že slabé tření už není jednorázový šum. Teď je potřeba rozhodnout, jestli se z něj stane malá oprava pravidla, nebo jestli odhalilo hlubší problém, který si zaslouží samostatnou kartu.
+
+Rozdíl je praktický. Malá oprava pracovního pravidla mění nejbližší větu, příklad, pořadí kroku nebo hranici rozhodnutí. Samostatná karta mění širší část procesu, odpovědnosti, datovou stopu nebo nástroje. Pokud tyto dvě věci smícháte, z drobného signálu vznikne otevřený projekt a původní pracovní místo ztratí stabilitu.
+
+Začněte krátkým zápisem:
+
+```text
+Čekací poznámka se opakovala:
+
+Opakované tření je stejné jako původní?
+- ano / částečně / ne
+
+Brání tření dokončení práce?
+- ano / ne
+
+Nejbližší pracovní místo zásahu:
+
+Nejmenší oprava:
+
+Co výslovně neotevíráme:
+```
+
+Příklad:
+
+```text
+Čekací poznámka se opakovala:
+Při vyplnění karty změny lidé znovu nevěděli, kam zapsat "věc, kterou teď neměníme".
+
+Opakované tření je stejné jako původní?
+Ano.
+
+Brání tření dokončení práce?
+Nezastaví práci, ale vede k tomu, že se odložený rozsah vrací do hlavního úkolu.
+
+Nejbližší pracovní místo zásahu:
+Šablona karty změny.
+
+Nejmenší oprava:
+Přidat samostatný řádek "Mimo rozsah této iterace".
+
+Co výslovně neotevíráme:
+Nepřepisujeme celý postup iterace, nezavádíme nové štítky v backlogu a neměníme rozhodovací log.
+```
+
+Takový zápis je dost úzký na to, aby šel rovnou provést. Zároveň nechává vidět, proč se opravuje právě tahle věc a proč se neotevírá větší úklid.
+
+### Rozlište opravu pravidla od nové práce
+
+Opakované tření patří do opravy pracovního pravidla, když splňuje tři podmínky:
+
+- objevilo se na stejném pracovním místě;
+- lidé se zadrhli na stejném rozhodnutí nebo stejné formulaci;
+- oprava se dá udělat jednou větou, jedním příkladem, jedním přesunem nebo jedním zrušením pomocné stopy.
+
+Pokud některá z těchto podmínek chybí, buďte opatrní. Tření může být reálné, ale možná už nepatří do aktuálního pravidla. Typický příklad: původní poznámka řešila nejasný řádek v šabloně, ale při opakování se ukáže, že tým nemá shodu na vlastníkovi rozhodnutí. To není textová oprava. To je problém odpovědnosti.
+
+Rychlé třídění:
+
+```text
+Malá oprava pravidla:
+- stejný krok;
+- stejný typ nejasnosti;
+- lokální zásah;
+- ověření při dalším běžném použití.
+
+Samostatná karta:
+- jiné pracovní místo;
+- jiný vlastník;
+- změna nástroje, role nebo toku dat;
+- potřeba rozhodnutí mimo aktuální pravidlo.
+
+Zavření bez změny:
+- opakování není potvrzené;
+- tření vzniklo ze staré verze;
+- člověk použil jinou trasu, než kterou pravidlo popisuje;
+- oprava by přidala víc tření než odstranila.
+```
+
+Codyho komentář: když se drobná poznámka dvakrát ozve, není to pozvánka na procesní festival. Je to pozvánka k otázce: "Která jedna věta by tomuhle zabránila příště?" Pokud odpověď zní "nový board, tři štítky a pravidelný meeting", někdo právě vyměnil šroubovák za bagr.
+
+### Vyberte nejbližší místo zásahu
+
+Dobrá oprava sedí tam, kde člověk tření reálně potká. Nepište ji do obecného changelogu, pokud se problém děje ve formuláři. Nepřidávejte vysvětlení do úvodu playbooku, pokud se člověk zasekne u čtvrtého kroku. Nepřepisujte týmový standard, pokud stačí upravit jednu šablonu.
+
+Ptejte se:
+
+- Kde člověk naposledy zaváhal?
+- Co měl v tu chvíli před sebou?
+- Jaká věta, pole, příklad nebo pořadí by mu pomohly bez čtení historie?
+- Kde by oprava překážela lidem, kteří problém neměli?
+- Dá se oprava udělat tak, aby nebyla vidět mimo danou situaci?
+
+Příklad špatného zásahu:
+
+```text
+Problém:
+Lidé nevědí, jestli mají do karty změny psát i nápady mimo aktuální iteraci.
+
+Špatná oprava:
+Do úvodu celé metodiky přidáme odstavec o práci s rozsahem.
+```
+
+Příklad lepšího zásahu:
+
+```text
+Lepší oprava:
+Do karty změny přidáme pole "Mimo rozsah této iterace" a krátký příklad jedné věty.
+```
+
+Lepší zásah je nudnější a přesnější. Právě proto má šanci přežít v běžné práci.
+
+### Opravu napište jako současné pravidlo
+
+Nejčastější chyba po čekací poznámce je nechat v pracovním pravidle stopu historického vysvětlování:
+
+```text
+Protože se nám dvakrát stalo, že lidé nevěděli, kam zapsat odložené věci, nově prosím používejte...
+```
+
+To patří do rozhodovacího logu, ne do pravidla. Pracovní pravidlo má mluvit k člověku, který ho používá za měsíc a nezajímá ho archeologie rozhodnutí.
+
+Pište takto:
+
+```text
+Mimo rozsah této iterace:
+Zapište jednu věc, kterou teď vědomě neměníte, i když s tématem souvisí.
+```
+
+Nebo:
+
+```text
+Pokud se během kroku objeví nový nápad, nezapisujte ho do hlavního úkolu. Dejte ho do pole "Později" a pokračujte podle původní stop podmínky.
+```
+
+Tři pravidla pro formulaci:
+
+- přítomný čas místo příběhu změny;
+- jedna pracovní věta místo obhajoby;
+- konkrétní akce místo abstraktní zásady.
+
+Historii si nechte v krátkém logu:
+
+```text
+2026-05-31: Po opakované čekací poznámce doplněno pole "Mimo rozsah této iterace", aby se odložené nápady nevracely do hlavního úkolu.
+```
+
+### Udělejte jen jeden typ zásahu
+
+Opakované tření svádí k balíčku oprav. Když už jste ho potvrdili, je přece rozumné "vzít to pořádně". V provozních pravidlech je to často chyba. Jedna potvrzená čekací poznámka opravňuje jednu přesnou změnu, ne preventivní redesign.
+
+Vyberte jeden typ zásahu:
+
+- přidat jednu větu;
+- zkrátit jednu větu;
+- přesunout jednu větu blíž k místu použití;
+- přidat jeden příklad;
+- odebrat jednu pomocnou poznámku;
+- přejmenovat jedno pole;
+- změnit pořadí dvou kroků.
+
+Nekombinujte více typů, pokud nemusíte. Když přidáte větu, příklad, nové pole a změnu pořadí, při dalším ověření nepoznáte, co pomohlo a co jen nafouklo pravidlo.
+
+Šablona rozhodnutí:
+
+```text
+Typ zásahu:
+- přidat / zkrátit / přesunout / doplnit příklad / odebrat / přejmenovat / změnit pořadí
+
+Konkrétní změna:
+
+Proč právě tento zásah:
+
+Co záměrně neděláme:
+
+Jak to ověříme při dalším použití:
+```
+
+### Zavřete čekací poznámku
+
+Jakmile z čekací poznámky vznikne oprava, původní poznámka má skončit. Nenechávejte ji viset vedle nového pravidla jako varovnou ceduli. Pokud zůstane, tým začne číst starý signál i novou opravu a pracovní místo se zbytečně zdvojí.
+
+Zavření může být krátké:
+
+```text
+Čekací poznámka uzavřena.
+Výsledek: opakované tření převedeno do malé opravy pravidla.
+Oprava: přidáno pole "Mimo rozsah této iterace".
+Další návrat: při prvním běžném použití karty změny.
+Dočasné podklady: smazány / zkráceny na anonymní závěr.
+```
+
+Pokud poznámka obsahovala konkrétní lidi, zákazníky, screenshoty nebo citace, nedávejte je do nového pravidla. V pravidle má zůstat zobecněná práce, ne stopa po tom, kdo se kdy zasekl.
+
+### Privacy-first oprava pravidla
+
+Privacy-first hodnota se u malých oprav projevuje hlavně zdrženlivostí. Nepotřebujete zavést sledování každého použití pravidla, abyste ověřili, jestli jedna věta pomohla. Často stačí první běžné použití, krátký záznam vlastníka a rozhodnutí, jestli se tření ztratilo.
+
+Před provedením opravy zkontrolujte:
+
+- Nepřidává oprava nové osobní údaje do šablony?
+- Nevytváří nové povinné pole jen proto, aby se tým cítil jistěji?
+- Nepotřebuje ověření export, screenshot nebo nahrávku obrazovky?
+- Dá se výsledek zapsat anonymně?
+- Má dočasná poznámka jasný konec?
+- Zůstává zdroj pravdy jeden, nebo vzniká další kopie?
+
+Privacy-first věta:
+
+```text
+Opakované tření opravujeme v nejbližším pracovním pravidle. Nesbíráme nová data o používání, neukládáme osobní historii zaváhání a po provedení zavíráme čekací poznámku.
+```
+
+### Karta opravy po čekací poznámce
+
+```text
+Pracovní místo:
+
+Původní čekací poznámka:
+
+Jak se tření opakovalo:
+
+Je to stejné tření?
+- ano / částečně / ne
+
+Rozhodnutí:
+- oprava pravidla / samostatná karta / zavřít bez změny
+
+Nejbližší místo zásahu:
+
+Typ zásahu:
+- přidat / zkrátit / přesunout / příklad / odebrat / přejmenovat / pořadí
+
+Nové znění nebo změna:
+
+Co výslovně neotevíráme:
+
+Jak ověříme při dalším běžném použití:
+
+Jaké dočasné podklady mažeme nebo zkracujeme:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte původní čekací poznámku a její návratovou podmínku.
+2. Minuta 2: ověřte, jestli se opakovalo stejné tření.
+3. Minuta 3: rozhodněte, zda jde o opravu pravidla, samostatnou kartu, nebo zavření bez změny.
+4. Minuta 4: vyberte nejbližší pracovní místo zásahu.
+5. Minuta 5: zvolte jeden typ zásahu.
+6. Minuta 6: napište nové znění v přítomném čase.
+7. Minuta 7: zavřete původní čekací poznámku a ukliďte dočasné podklady.
+8. Minuta 8: určete první běžné použití, při kterém se oprava ověří.
+
+Výstup workshopu:
+
+```text
+Opakované tření má buď jednu malou opravu v nejbližším pracovním místě, samostatnou kartu mimo aktuální pravidlo, nebo vědomé zavření bez změny. Původní čekací poznámka nezůstává otevřená vedle nového pravidla.
+```
+
+### Checklist opravy po čekací poznámce
+
+- Potvrdili jsme, že se tření opravdu opakovalo?
+- Rozlišili jsme stejné tření, jiné tření a hlubší problém?
+- Vybrali jsme mezi opravou pravidla, samostatnou kartou a zavřením bez změny?
+- Zasahujeme do nejbližšího pracovního místa, ne do obecné dokumentace?
+- Zvolili jsme jen jeden typ zásahu?
+- Je nové znění v přítomném čase a bez historické obhajoby?
+- Je zapsané, co výslovně neotevíráme?
+- Zavřeli jsme původní čekací poznámku?
+- Má oprava jasné první běžné ověření?
+- Nepřidali jsme nová pole, exporty, screenshoty ani sledování lidí?
+- Zůstává jeden zdroj pravdy?
+- Umí člověk použít pravidlo bez znalosti celé historie poznámky?
+
+Dobrá oprava po čekací poznámce má být skoro neviditelná. Při dalším použití člověk prostě projde místem, které dřív drhlo, a nemusí vědět, kolik drobné redakční práce za tím bylo. To je přesně ten druh provozní elegance, která se špatně prodává na slidech, ale výborně funguje v pondělí ráno.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha VB o převodu opakovaného tření po čekací poznámce do jedné opravy pracovního pravidla: rozlišení malé opravy a nové práce, nejbližší místo zásahu, přítomný čas pravidla, jeden typ zásahu, zavření původní poznámky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o úklidu okolí po falešném poplachu: rozlišení stabilní trasy a okolní staré stopy, stavy úklidu, privacy-first mazání podkladů, karta a checklist.
 - 2026-05-31: Doplněna Příloha VA o uzavření čekací poznámky po expiraci nebo opakování: stavy poznámky, zavření bez změny, převod opakovaného tření do malé úpravy, oddělení nového problému, selhání pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UZ o převod slabého tření po prvním návratu do čekací poznámky: rozlišení slabého tření od selhání, návratová podmínka, expirace, oddělení nového problému, privacy-first zápis, karta, mini workshop a checklist.
