@@ -596,6 +596,132 @@ Dobře otevřený odložený krok nepůsobí jako návrat starého restu. Působ
 
 Pokud se krok po návratu otevře v menší podobě, zapište vedle něj i původní návrh, který zůstává zavřený. Pomáhá to při dalším plánování: tým vidí, že se ke starému tématu vrátil vědomě, ale nepřevzal automaticky celý historický rozsah.
 
+## Jak uzavřít návrat k odloženému kroku
+
+Znovuotevření odloženého kroku není hotovo ve chvíli, kdy se krok znovu dostane do práce. Hotovo je až tehdy, když tým ví, co se po návratu potvrdilo, co zůstává mimo rozsah a jaký je nový stav původního rozhodnutí. Bez uzavření se odložený krok snadno promění v poloviční návrat: něco se udělá, něco se začne připravovat a starý návrh dál čeká v pozadí jako nevyřízený rest.
+
+Návrat proto uzavírejte stejně jako malou iteraci. Nehledejte velké hodnocení. Stačí krátký záznam, který odpoví na čtyři otázky:
+
+```text
+Co jsme po návratu otevřeli:
+
+Co se reálně změnilo:
+
+Co jsme díky tomu zjistili:
+
+Jaký je nový stav původního odloženého kroku:
+```
+
+Příklad:
+
+```text
+Co jsme po návratu otevřeli:
+Místo plného lead scoringu jsme doplnili jednu discovery otázku na rozhodovací horizont.
+
+Co se reálně změnilo:
+Obchod má v prvním hovoru jasnější informaci, jestli zákazník řeší projekt tento kvartál, později, nebo jen mapuje možnosti.
+
+Co jsme zjistili:
+Problém nebyl v nedostatku automatického skóre, ale v chybějící větě v obchodním rozhovoru.
+
+Nový stav původního kroku:
+Plný lead scoring zůstává zavřený. Vrátí se jen tehdy, když se u dalších relevantních poptávek opakovaně ukáže, že ruční otázka nestačí.
+```
+
+Takový zápis chrání tým před falešným závěrem "něco jsme otevřeli, takže původní nápad platí". Neplatí automaticky. Po návratu platí jen to, co prošlo novým důkazem.
+
+### Čtyři možné konce návratu
+
+Každý návrat k odloženému kroku uzavřete jedním ze čtyř stavů:
+
+- Potvrdit menší změnu: menší varianta pomohla a původní velký rozsah zůstává zavřený.
+- Doladit menší změnu: směr je správný, ale jedna část potřebuje malou opravu.
+- Vrátit zpět: návrat nepomohl nebo vytvořil víc tření než hodnoty.
+- Znovu odložit nebo zavřít: signál byl slabší, než se zdálo, nebo se problém ukázal jako jiný.
+
+Stav "pokračovat dál" nepoužívejte bez nové stop podmínky. Je příliš pohodlný. Když chce tým pokračovat, musí říct, co přesně bude další hotový výstup a co se kvůli němu nebude otevírat.
+
+Šablona:
+
+```text
+Návrat uzavíráme stavem:
+- potvrdit menší změnu / doladit / vrátit zpět / znovu odložit / zavřít
+
+Důvod:
+
+Co zůstává platné:
+
+Co se ruší:
+
+Co zůstává mimo rozsah:
+
+Návratový signál pro další otevření:
+
+Privacy-first výsledek:
+
+Kde je záznam uložený:
+```
+
+### Původní návrh musí dostat nový stav
+
+Nejčastější chyba po návratu je nechat původní návrh viset ve starém stavu. Tým otevře menší variantu, udělá ji, ale původní větší krok pořád zůstane v backlogu, jako by se nic nestalo. To zvyšuje šum při dalším plánování.
+
+Po každém návratu proto výslovně přepište stav původního návrhu:
+
+- zavřený, protože menší změna stačí;
+- znovu odložený, protože čeká na nový signál;
+- nahrazený novou otázkou;
+- otevřený jako samostatný projekt s vlastní stop podmínkou.
+
+Příklad dobrého uzavření:
+
+```text
+Původní návrh:
+Automatický lead scoring v poptávkovém toku.
+
+Nový stav:
+Zavřený.
+
+Proč:
+Menší změna v discovery šabloně snížila ruční nejistotu bez sběru nových údajů ve formuláři.
+
+Návratový signál:
+Vrátíme se jen tehdy, když u dalších dvaceti relevantních poptávek obchod opakovaně nedokáže určit prioritu ani po nové otázce.
+```
+
+Takový zápis je drobný, ale prakticky důležitý. Původní nápad nepřebývá v systému jako tichý dluh. Má nový stav a jasnou podmínku návratu.
+
+### Privacy-first uzavření návratu
+
+Návrat k odloženému kroku často svádí k dodatečnému měření: "když už jsme to otevřeli, pojďme rovnou přidat event, dashboard a dvě pole do formuláře". Někdy to dává smysl. Častěji je to jen pokus udělat z nejistoty infrastrukturu.
+
+Do uzavření proto přidejte jednu větu:
+
+```text
+Díky uzavření návratu dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Díky uzavření návratu dál nesbíráme rozpočet, velikost firmy ani automatické obohacení kontaktu v prvním formuláři. Prioritu zatím určuje obchodní otázka v hovoru a krátká poznámka v CRM.
+```
+
+Tato věta není kosmetika. Je to provozní důkaz, že se tým vrátil k odloženému kroku bez zbytečného růstu datové stopy.
+
+### Checklist uzavření návratu
+
+- Je jasné, co se po návratu skutečně otevřelo?
+- Víme, jaký byl výsledek menší varianty?
+- Dostal původní odložený návrh nový stav?
+- Je napsané, co zůstává zavřené nebo znovu odložené?
+- Má případné pokračování vlastní stop podmínku?
+- Zrušili jsme pomocné poznámky, pracovní exporty nebo dočasné přípravy, které už nejsou potřeba?
+- Je zapsané, jaká data, pole, trackery nebo dodavatelé díky uzavření nevznikají?
+- Najde tým tento závěr v místě, kde bude příště plánovat podobnou změnu?
+
+Dobré uzavření návratu je krátké, ale šetří hodiny budoucích debat. Tým se nevrací ke starému nápadu jako k nevyřízenému dluhu. Vrací se k němu jako k hypotéze, kterou po novém signálu znovu zhodnotil a zapsal její aktuální stav.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -152348,3 +152474,4 @@ Ověření doplněného příkladu má chránit pravidlo před dvěma extrémy. 
 - 2026-05-30: Doplněna úvodní podkapitola o postupu, když se nezavře ani zmenšený krok: zastavení větve, přerámování otázky, získání základní reality, privacy-first hranice a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o znovuotevření odloženého kroku: návratový signál, tři brány, rozhodovací stavy, karta návratu a privacy-first hranice.
 - 2026-05-31: Doplněna krátká poznámka k návratu odloženého kroku, aby menší otevřená varianta výslovně nechala původní rozsah zavřený.
+- 2026-05-31: Doplněna úvodní podkapitola o uzavření návratu k odloženému kroku: nové stavy původního návrhu, privacy-first výsledek, šablona uzavření a checklist.
