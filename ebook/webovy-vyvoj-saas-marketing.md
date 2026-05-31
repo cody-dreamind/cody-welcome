@@ -151480,8 +151480,231 @@ Pravidlo zůstává stejné. Dostalo jeden příklad na správném místě a ž�
 
 Doplnění příkladu je malý zásah, který má zůstat malý. Když se povede, pracovní pravidlo se nestane delším a složitějším. Jen dostane jeden opěrný bod, podle kterého další člověk pozná, jak rozhodnout. To je přesně ten druh úpravy, který šetří čas i data: méně vysvětlování, méně kopií podkladů, méně potřeby sahat do historie.
 
+## Příloha UO: Ověření doplněného příkladu při dalším běžném použití
+
+Doplněný příklad je hotový až ve chvíli, kdy pomůže v běžné práci. Ne v okamžiku, kdy dobře zní v dokumentu. Po doplnění jednoho příkladu proto neotevírejte revizi celé šablony, nevyrábějte knihovnu variant a nevyhlašujte nový standard. Počkejte na další přirozené použití pravidla a sledujte, jestli příklad zmenšil tření, kvůli kterému vznikl.
+
+Praktická otázka zní:
+
+```text
+Použil další člověk pravidlo podle nového příkladu bez dalšího vysvětlování?
+```
+
+Tato otázka je záměrně obyčejná. Neptá se, jestli příklad pokrývá všechny situace, jestli se líbí celému týmu nebo jestli by šel rozšířit na metodiku. Ptá se jen na to, jestli při dalším reálném průchodu snížil potřebu doptávání. Pokud ano, splnil účel. Pokud ne, je potřeba zjistit, jestli chybí lepší umístění, ostřejší formulace, nebo jestli se ukázal jiný problém než ten, který měl příklad řešit.
+
+### Ověřujte na stejném pracovním místě
+
+Příklad ověřujte tam, kde žije. Pokud byl doplněný do checklistu landing page, ověřte ho při další landing page. Pokud byl v sales kartě, ověřte ho při přípravě dalšího obchodního rozhovoru. Pokud byl v onboardingové šabloně, ověřte ho při dalším onboardingovém průchodu.
+
+Slabé ověření:
+
+```text
+Příklad jsme přečetli na interní poradě a všichni souhlasili, že dává smysl.
+```
+
+Lepší ověření:
+
+```text
+Při přípravě další landing page autor použil příklad k výběru důkazu nad formulářem a nepotřeboval dohledávat původní rozhodovací záznam.
+```
+
+Souhlas týmu může být příjemný, ale není to důkaz použitelnosti. Důkazem je normální práce, která se díky příkladu zkrátí nebo zpřesní. Tohle je dobrá zpráva pro produktivitu i pro soukromí: nemusíte sbírat další analytická data, když stačí sledovat jeden pracovní průchod, který už probíhá.
+
+### Tři signály, že příklad funguje
+
+Při dalším použití hledejte tři jednoduché signály:
+
+- Člověk rozhodl rychleji než minule, protože věděl, podle čeho vybírat.
+- Nepotřeboval historii původní poznámky, zákaznický detail ani vysvětlení autora pravidla.
+- Výstup odpovídal záměru pravidla, ne jen doslovnému napodobení příkladu.
+
+Třetí signál je důležitý. Dobrý příklad nemá být forma, kterou všichni kopírují. Má ukázat princip. Pokud se v příkladu řešila migrace, ale další stránka řeší obavu z integrace, člověk nemá opsat migrační větu. Má podle principu vybrat důkaz, který snižuje integrační nejistotu.
+
+Vyplněný záznam může vypadat takto:
+
+```text
+Pravidlo:
+Nad první formulář dáváme jeden důkaz podle hlavní nejistoty zákazníka.
+
+Doplněný příklad:
+Pokud se zákazník bojí rizika migrace, použijte krátkou referenci k bezpečně dokončenému přesunu.
+
+Další použití:
+Landing page pro integraci interního nástroje.
+
+Co se stalo:
+Autor neopsal migrační příklad. Vybral krátký důkaz k bezpečnému napojení na stávající systém.
+
+Výsledek:
+Příklad funguje jako princip, ne jako šablona k opsání.
+```
+
+To je přesně stav, který chcete. Příklad pomohl rozhodnout, ale nepřevzal kontrolu nad přemýšlením.
+
+### Čtyři výsledné stavy
+
+Po dalším běžném použití vyberte jeden stav:
+
+- Potvrzeno: příklad pomohl a zůstává beze změny.
+- Přesunout blíž: příklad je správný, ale člověk ho nenašel v okamžiku rozhodnutí.
+- Zkrátit nebo zostřit: příklad je na správném místě, ale obsahuje moc historie, vágní jazyk nebo zbytečnou podmínku.
+- Oddělit nový problém: použití ukázalo tření, které nesouvisí s doplněným příkladem.
+
+Stav `potvrzeno` je často nejhodnotnější, protože nevede k další práci. Zapište ho a nechte pravidlo žít. Stav `přesunout blíž` řešte přesunem, ne přepisem. Stav `zkrátit nebo zostřit` řešte jednou větou, ne novou sadou příkladů. Stav `oddělit nový problém` znamená, že původní příklad nezatěžujte cizím tématem.
+
+Příklad oddělení nového problému:
+
+```text
+Při použití příkladu se ukázalo, že tým nemá aktuální seznam dostupných referencí.
+```
+
+To není chyba příkladu. Příklad říká, jak vybrat důkaz podle nejistoty. Nedostupnost důkazů je jiná pracovní větev: správa referencí, retenční pravidla pro citace a dohoda, kdo drží zdroj pravdy. Pokud to nalepíte do příkladu, uděláte z něj skladiště problému, který má bydlet jinde.
+
+### Pravidlo jedné korekce
+
+Když příklad při dalším použití drhne, dovolte si jednu korekci. Ne tři. Jedna korekce stačí na přesun blíž k rozhodnutí, zkrácení věty nebo odstranění zavádějícího slova.
+
+Původní příklad:
+
+```text
+Pokud se zákazník bojí rizika migrace, použijte krátkou referenci k bezpečně dokončenému přesunu.
+```
+
+Zostřená verze:
+
+```text
+Příklad: u obavy z migrace použijte důkaz o bezpečně dokončeném přesunu, ne obecné logo klienta.
+```
+
+Změna je malá, ale praktická. Odstraní neurčitost kolem typu důkazu a přidá kontrast proti slabému výběru. Po takové korekci znovu neotevírejte celou kapitolu. Dejte příkladu další běžné použití nebo nastavte návratový signál.
+
+Codyho komentář: nejlepší příklad není ten, který vyhraje literární cenu v interním Notionu. Nejlepší je ten, kvůli kterému se nikdo nemusí ptát "a co tím básník myslel". Básník v tomhle případě stejně pravděpodobně jen chtěl dokončit landing page před obědem.
+
+### Privacy-first ověření
+
+Ověření doplněného příkladu má zůstat lehké. Nepřidávejte tracking jen proto, abyste dokázali, že příklad pomohl. Nepořizujte screenshoty pracovních ploch, pokud nejsou nutné. Nekopírujte celé zákaznické výroky do šablon. Nezakládejte nový export s důkazy jen kvůli jedné větě.
+
+Stačí krátký záznam:
+
+```text
+Příklad byl použit při další landing page.
+Autor rozhodl bez doptání.
+Nevznikl nový tracker, export ani kopie zákaznické poznámky.
+Výsledek: potvrzeno.
+```
+
+Pokud při ověření potřebujete konkrétní zákaznický kontext, použijte anonymizovaný a zkrácený popis. Do pracovního pravidla patří princip, ne surový obchodní podklad. Surové podklady mají zůstat jen v systému, který už má vlastní přístupová práva, retenční pravidla a jasný účel.
+
+### Karta ověření příkladu
+
+```text
+Pracovní pravidlo:
+
+Doplněný příklad:
+
+Kde příklad žije:
+
+Další běžné použití:
+
+Kdo příklad použil:
+
+Co šlo bez vysvětlování:
+
+Kde vzniklo tření:
+
+Výsledný stav:
+- potvrzeno / přesunout blíž / zkrátit nebo zostřit / oddělit nový problém
+
+Jedna korekce, pokud je potřeba:
+
+Co zůstává mimo rozsah:
+
+Privacy-first kontrola:
+
+Návratový signál:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní pravidlo:
+Nad první formulář dáváme jeden důkaz podle hlavní nejistoty zákazníka.
+
+Doplněný příklad:
+Příklad: u obavy z migrace použijte důkaz o bezpečně dokončeném přesunu, ne obecné logo klienta.
+
+Kde příklad žije:
+Checklist landing page, položka "Důkaz nad formulářem".
+
+Další běžné použití:
+Landing page pro integraci interního nástroje.
+
+Kdo příklad použil:
+Marketing owner.
+
+Co šlo bez vysvětlování:
+Výběr důkazu podle hlavní obavy, ne podle nejnovější dostupné reference.
+
+Kde vzniklo tření:
+Autor musel dohledat, které důkazy jsou ještě schválené k veřejnému použití.
+
+Výsledný stav:
+Oddělit nový problém.
+
+Jedna korekce, pokud je potřeba:
+Žádná. Příklad funguje; chybějící zdroj pravdy pro schválené důkazy je samostatná větev.
+
+Co zůstává mimo rozsah:
+Nevytváříme knihovnu referencí uvnitř checklistu a nepřidáváme měření kliků na důkazy.
+
+Privacy-first kontrola:
+Do checklistu nejdou zákaznické výroky ani interní obchodní poznámky. Pracujeme jen se zobecněným principem.
+
+Návratový signál:
+Téma příkladu znovu otevřeme jen tehdy, když další použití ukáže nejasnost ve výběru důkazu, ne v dostupnosti podkladů.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 9 minut
+
+1. Minuta 1: otevřete pracovní místo, kde žije doplněný příklad.
+2. Minuta 2: najděte další reálné použití po doplnění.
+3. Minuta 3: napište, kdo příklad použil a k jakému rozhodnutí.
+4. Minuta 4: určete, co šlo bez vysvětlování.
+5. Minuta 5: zapište tření, pokud nějaké vzniklo.
+6. Minuta 6: vyberte jeden ze čtyř výsledných stavů.
+7. Minuta 7: pokud je potřeba korekce, omezte ji na jednu větu nebo přesun.
+8. Minuta 8: oddělte nový problém od příkladu, pokud se ukázal.
+9. Minuta 9: proveďte privacy-first kontrolu a zavřete kartu.
+
+Výstup workshopu:
+
+```text
+Doplněný příklad je potvrzený, přesunutý blíž k rozhodnutí, jednou zostřený, nebo odlehčený od nového problému, který má vlastní pracovní větev.
+```
+
+### Checklist ověření příkladu
+
+- Ověřili jsme příklad při reálném dalším použití?
+- Proběhlo ověření na stejném pracovním místě, kde příklad žije?
+- Je jasné, jestli příklad pomohl rozhodnout bez doptávání?
+- Rozlišili jsme princip od doslovného opisování příkladu?
+- Vybrali jsme jen jeden výsledný stav?
+- Pokud vzniklo tření, použili jsme nejvýš jednu korekci?
+- Oddělili jsme nový problém od původního příkladu?
+- Nevznikla nová knihovna, metodika ani kontrolní proces kvůli jedné větě?
+- Nepřidali jsme tracker, export, screenshoty ani kopie zákaznických poznámek?
+- Je zapsaný návratový signál, který nevede k nekonečné péči?
+
+Ověření doplněného příkladu má chránit pravidlo před dvěma extrémy. První je slepá důvěra v novou větu, kterou nikdo při práci nepoužil. Druhý je přehnaná údržba, která z jednoho dobrého příkladu vyrobí další systém. Správný střed je prostý: jedno běžné použití, jeden závěr, žádná zbytečná data navíc.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha UO o ověření doplněného příkladu při dalším běžném použití: ověřování na stejném pracovním místě, tři signály funkčnosti, čtyři výsledné stavy, pravidlo jedné korekce, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UN o doplnění jednoho příkladu po prvním návratu k pracovnímu pravidlu: výběr typu příkladu, umístění k rozhodnutí, omezení historie, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UM o první běžný návrat k pracovnímu pravidlu po uzavřené malé úpravě: použití bez znalosti historie, čtyři výsledné stavy, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UL o uzavření ověřené malé úpravy po čekací poznámce do pracovního pravidla: přepis do přítomného času, čtyři výsledné stavy, úklid čekací poznámky, privacy-first úklid podkladů, karta, mini workshop a checklist.
