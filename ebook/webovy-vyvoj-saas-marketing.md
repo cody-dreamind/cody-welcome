@@ -4549,6 +4549,148 @@ Při příštím přirozeném použití stejné trasy.
 
 Návrat po klidovém období má být krátká brána, ne nová kapitola života rukopisu. Buď potvrdí, že trasa dál drží, nebo dovolí jednu přesnou opravu, případně poctivě založí novou kartu. V každém případě chrání to nejdůležitější: aby text zůstal stabilní tam, kde funguje, a proměnlivý jen tam, kde změna opravdu zlepší práci.
 
+## Když se návratový signál ukáže jako falešný poplach
+
+Návratový signál má chránit tým před dvěma extrémy: neotevírat stabilní věc bez důvodu a zároveň nepřehlédnout opakované tření. Občas se ale stane třetí možnost. Signál vypadá vážně, trasa se krátce zkontroluje a potom se ukáže, že problém nebyl v pravidle, šabloně ani textu. Byl to jednorázový kontext, špatně založený úkol, stará kopie, výjimka mimo rozsah nebo jen nedorozumění, které se neopakuje.
+
+V takové chvíli je důležité nevyrobit úpravu jen proto, že už jste téma otevřeli. Falešný poplach má skončit stejně poctivě jako potvrzený problém: krátkým záznamem, úklidem podkladů a rozhodnutím nechat stabilní trasu být.
+
+Začněte větou:
+
+```text
+Mysleli jsme, že návratový signál je:
+Při kontrole se ukázalo:
+Proč to není důvod k úpravě:
+Co uklízíme:
+Kdy by se téma opravdu vrátilo:
+```
+
+Příklad:
+
+```text
+Mysleli jsme, že návratový signál je:
+Člověk při měsíčním review znovu založil úkol pro slabý podnět.
+
+Při kontrole se ukázalo:
+Použil starou kopii review šablony z archivu, ne aktuální kanonickou verzi.
+
+Proč to není důvod k úpravě:
+Nová trasa funguje. Problém není v textu, ale v tom, že archivní šablona pořád vypadala použitelně.
+
+Co uklízíme:
+Archivní šablonu označíme jako neplatnou a přidáme odkaz na aktuální místo.
+
+Kdy by se téma opravdu vrátilo:
+Pokud se stejný zbytečný úkol objeví i při použití aktuální kanonické šablony.
+```
+
+Tento zápis je krátký, ale chrání rozsah. Tým neotevře znovu pravidlo, které funguje, a zároveň uklidí skutečný zdroj zmatku. To je lepší než přidat další vysvětlení do správného textu, zatímco vedle něj dál leží stará nášlapná šablona.
+
+### Rozlišujte chybu trasy a chybu okolí
+
+Falešný poplach často vznikne proto, že problém leží mimo trasu:
+
+- někdo použil starou šablonu, export nebo kopii dokumentu;
+- úkol byl založený bez odkazu na kanonické místo;
+- člověk řešil jinou pracovní situaci, než pro kterou trasa platí;
+- zákaznický příklad měl výjimečný kontext;
+- starý backlog pořád naznačoval, že zavřená věc je aktivní;
+- poznámka z chatu přežila déle než rozhodovací záznam.
+
+V těchto případech není nejlepší odpověď přepisovat stabilní trasu. Nejlepší odpověď je opravit okolí: archivovat starou kopii, přidat odkaz, zavřít duplicitní kartu, smazat dočasný export nebo jasně označit výjimku.
+
+Praktický test:
+
+```text
+Kdyby člověk použil aktuální kanonické místo, vznikl by stejný problém?
+```
+
+Pokud odpověď zní ne, neotevírejte kanonické místo. Opravte cestu k němu nebo starou stopu, která člověka odvedla jinam.
+
+### Nezapisujte falešný poplach jako nový dluh
+
+Falešný poplach nemá skončit v backlogu jako "možná upravit trasu". Tím by se z jednorázové kontroly stal nenápadný dluh. Pokud se signál nepotvrdil, napište to přímo:
+
+```text
+Stav:
+Falešný poplach. Trasu neměníme.
+```
+
+Potom přidejte jednu akci, pokud je potřeba uklidit okolí:
+
+```text
+Úklid:
+Archivní šablonu označit jako neplatnou a odkázat na aktuální kanonické místo.
+```
+
+Pokud není potřeba žádný úklid, napište i to:
+
+```text
+Úklid:
+Žádný. Podnět byl jednorázový a nezanechal pracovní stopu.
+```
+
+Takový zápis může působit až směšně malý. Přesně proto je užitečný. Budoucí editor uvidí, že se téma neztratilo, ale zároveň neexistuje důvod ho držet otevřené.
+
+### Privacy-first úklid falešného poplachu
+
+Falešné poplachy často vytvářejí zbytečné podklady: screenshoty, kopie šablon, výřezy poptávek, exporty z review, poznámky z chatu nebo interní komentáře. Když se signál nepotvrdí, tyto podklady mají obvykle ještě menší důvod zůstat než u běžné opravy.
+
+Privacy-first postup:
+
+- ponechte jen anonymizovaný závěr, že signál se nepotvrdil;
+- smažte pracovní exporty, screenshoty a kopie, které už nic nedokazují;
+- nepřenášejte zákaznické detaily do logu, pokud stačí popis typu problému;
+- neprodlužujte retenci jen proto, že "by se to mohlo hodit";
+- nezakládejte novou evidenci falešných poplachů, pokud z ní nevzniká rozhodnutí.
+
+Krátká věta stačí:
+
+```text
+Privacy-first výsledek:
+Trasu neměníme, pracovní screenshot staré šablony mažeme a v logu zůstává jen anonymizovaný závěr o neplatné archivní kopii.
+```
+
+Codyho komentář: falešný poplach není trapas. Trapas je přidat tři odstavce do funkční kapitoly jen proto, že někdo našel starý soubor a my jsme se lekli. Stabilní text si zaslouží i stabilní nervy.
+
+### Karta falešného poplachu
+
+```text
+Trasa nebo pravidlo:
+
+Podezřelý návratový signál:
+
+Co jsme zkontrolovali:
+
+Výsledek:
+- potvrzený signál / falešný poplach / jiný problém
+
+Proč trasu neměníme:
+
+Co opravujeme v okolí:
+
+Co mažeme nebo anonymizujeme:
+
+Skutečný návratový signál pro příště:
+
+Kdo drží kontext:
+```
+
+### Checklist falešného poplachu
+
+- Byl návratový signál opravdu porovnán s původní podmínkou?
+- Víme, jestli problém vznikl v trase, nebo v okolní pracovní stopě?
+- Pokud šlo o starou kopii, archiv nebo duplicitní kartu, uklidili jsme právě ji?
+- Je jasně napsané, že trasu teď neměníme?
+- Nevznikla nová backlog položka jen ze setrvačnosti?
+- Zůstává pro příště konkrétní návratový signál?
+- Jsou dočasné podklady smazané nebo anonymizované?
+- Neuchováváme zákaznické nebo interní detaily bez účelu?
+- Umí další člověk poznat, proč kontrola skončila bez úpravy?
+- Pomohlo rozhodnutí zachovat stabilitu místo dalšího vysvětlování?
+
+Falešný poplach je dobrý výsledek, pokud po něm zůstane méně šumu. Stabilní trasa zůstane stabilní, stará stopa se uklidí a tým se naučí rozlišovat skutečný signál od ozvěny staré práce. To je přesně ten druh údržby, který nevypadá velkolepě, ale dlouhý rukopis díky němu neztrácí důvěryhodnost.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -153876,6 +154018,7 @@ Ověření malé opravy je drobný uzávěrkový krok. Právě proto je cenný. 
 
 ## Pracovní log
 
+- 2026-05-31: Doplněna úvodní podkapitola o falešném poplachu návratového signálu: rozlišení chyby trasy a okolí, rozhodnutí trasu neměnit, privacy-first úklid podkladů, karta a checklist.
 - 2026-05-31: Doplněna Příloha UW o ověření malé opravy po dalším běžném použití: skutečné použití, čtyři výsledky ověření, potvrzení nebo jedno doladění, převod do hlavního pravidla, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UV o převod lokální nejasnosti po prvním návratu do jedné malé opravy: rozlišení lokální nejasnosti od slabého pravidla, typy oprav, pravidlo jedné věty, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UU o první návrat ke stabilnímu pracovnímu místu po uzavřené vysvětlující poznámce: ověření při reálném úkolu, čtyři výsledky návratu, vědomé nic, privacy-first kontrola, karta, mini workshop a checklist.
