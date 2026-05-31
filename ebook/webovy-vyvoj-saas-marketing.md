@@ -475,6 +475,125 @@ Tato věta mění tón rozhodnutí. Odložení není pasivní. Je to aktivní oc
 
 Odložený krok je dobře zvládnutý ve chvíli, kdy se k němu tým nemusí pořád vracet, ale zároveň se neztratí důvod, který by ho jednou mohl znovu otevřít. To je zdravý kompromis mezi pamětí a klidem. Rukopis má pomáhat rozhodovat, ne držet každou možnost při životě jen proto, že zněla chytře.
 
+## Jak znovu otevřít odložený krok
+
+Odložený krok se nemá vracet do práce podle nálady. Má se vrátit ve chvíli, kdy nastal signál, který byl předem pojmenovaný, nebo když se změnila realita tak výrazně, že původní rozhodnutí už nechrání práci. Bez tohoto pravidla se z odložení stane jen tichá fronta starých nápadů a tým bude při každém plánování znovu platit za stejnou debatu.
+
+Začněte kontrolou původního zápisu. Neotevírejte rovnou úkol, ticket ani specifikaci. Nejdřív si odpovězte:
+
+```text
+Odložený krok:
+
+Původní důvod odložení:
+
+Původní návratový signál:
+
+Co se teď stalo:
+
+Je to stejný signál, nebo nový problém:
+
+Co by se změnilo, kdybychom krok otevřeli:
+
+Jaká data, nástroje nebo pracovní místa by přibyly:
+```
+
+Tato kontrola brání dvěma častým chybám. První chyba je otevřít starý nápad jen proto, že se podobá novému problému. Druhá chyba je ignorovat návratový signál, protože tým už si na odložený krok zvykl jako na něco, co se "jednou možná" udělá.
+
+Příklad:
+
+```text
+Odložený krok:
+Přidat lead scoring do poptávkového toku.
+
+Původní důvod odložení:
+Nebyl důkaz, že problém je v kvalifikaci leadů. Spíš chybělo jasné vysvětlení služby.
+
+Původní návratový signál:
+Po úpravě vysvětlení služby přijdou relevantní poptávky, u kterých obchod opakovaně nepozná prioritu nebo fit.
+
+Co se teď stalo:
+Přišlo dvanáct relevantních poptávek. U pěti z nich obchod řešil stejnou nejistotu: zákazník má fit, ale není jasný rozhodovací termín.
+
+Je to stejný signál, nebo nový problém:
+Je to částečně stejný signál, ale nevolá po plném scoringu. Volá po jedné otázce na rozhodovací horizont.
+
+Co by se změnilo:
+Otevřeme menší krok: upravit první odpověď a discovery šablonu, ne přidávat automatický scoring.
+
+Jaká data by přibyla:
+Zatím žádná nová formulářová pole. Termín se zjistí až v obchodním rozhovoru.
+```
+
+Důležité je, že návrat nemusí znamenat původní řešení. Signál může potvrdit problém, ale ne původní návrh. To je normální a zdravé. Odložený krok není smlouva s minulým nápadem. Je to uložená hypotéza, která se má po návratu znovu zmenšit podle dnešní reality.
+
+### Tři brány před znovuotevřením
+
+Než krok pustíte do aktivní práce, projděte tři brány:
+
+- Brána důkazu: nastal původní návratový signál, nebo existuje nový jasný důkaz?
+- Brána rozsahu: musí se otevřít celý původní krok, nebo stačí menší zásah?
+- Brána dat: jaká nová data, přístupy, exporty, trackery nebo dodavatelé by kvůli kroku vznikli?
+
+Pokud krok projde jen první bránou, ještě není připravený. Důkaz říká, že téma stojí za pozornost. Neříká automaticky, že má dostat původní rozsah. Většina dobrých návratů má začít menší verzí, než jakou měl nápad při odložení.
+
+Prakticky:
+
+- Neotevírejte "lead scoring", pokud stačí upravit discovery otázku.
+- Neotevírejte "novou analytiku", pokud stačí ruční kontrola deseti událostí.
+- Neotevírejte "redesign onboardingového flow", pokud drhne jedna instrukce v prázdném stavu.
+- Neotevírejte "automatizaci supportu", pokud se ukázalo, že chybí jedna stránka dokumentace.
+
+Privacy-first pravidlo: návratový signál nemá být omluva pro sběr všeho, co se tehdy nestihlo. Naopak. Právě při návratu je vhodná chvíle znovu říct, která data stále nepotřebujete.
+
+### Rozhodnutí po návratu
+
+Po kontrole dejte odloženému kroku jeden ze čtyř stavů:
+
+- Neotevřít: signál nenastal, nebo nejde o stejný problém.
+- Otevřít menší krok: problém se potvrdil, ale původní řešení je zbytečně velké.
+- Otevřít původní krok: signál nastal a rozsah pořád dává smysl.
+- Nahradit novou otázkou: realita ukázala, že původní rámec byl špatně.
+
+Stav "otevřít původní krok" používejte opatrně. Čas obvykle změní kontext: produkt je jinde, zákazníci jsou jinde, tým má jiné nástroje a některé staré předpoklady už nemusí platit. Původní návrh si musí znovu zasloužit existenci, ne jen obnovit staré místo v backlogu.
+
+Karta návratu:
+
+```text
+Odložený krok:
+
+Návratový signál:
+
+Co se potvrdilo:
+
+Co se nepotvrdilo:
+
+Nový stav:
+- neotevřít / otevřít menší krok / otevřít původní krok / nahradit novou otázkou
+
+Nejmenší aktivní krok:
+
+Vlastník:
+
+Ověření:
+
+Privacy-first hranice:
+
+Co zůstává dál odložené nebo zavřené:
+```
+
+### Checklist návratu k odloženému kroku
+
+- Našli jsme původní důvod odložení a návratový signál?
+- Víme, zda nastal původní signál, nebo jen podobně vypadající nový problém?
+- Rozlišili jsme potvrzený problém od původního řešení?
+- Vybrali jsme jeden ze čtyř stavů po návratu?
+- Zmenšili jsme krok na nejmenší aktivní zásah, pokud to jde?
+- Má otevřený krok vlastníka, ověření a datum kontroly?
+- Je zapsané, jaká data, exporty, trackery nebo dodavatelé stále nevznikají?
+- Je jasné, co zůstává odložené nebo zavřené, aby se návrat nerozrostl do starého rozsahu?
+
+Dobře otevřený odložený krok nepůsobí jako návrat starého restu. Působí jako nové rozhodnutí na základě lepších signálů. To je rozdíl mezi týmem, který jen recykluje backlog, a týmem, který se učí bez toho, aby si pokaždé přibalil další datovou stopu.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -151472,3 +151591,4 @@ Dobré ověření malé úpravy končí tím, že pracovní místo je zase obyč
 - 2026-05-30: Doplněna krátká úvodní poznámka, aby nesplněná stop podmínka vedla ke zmenšení dalšího kroku místo k rozšíření práce.
 - 2026-05-30: Doplněna úvodní podkapitola o zmenšení dalšího kroku po nesplněné stop podmínce: tři řezy zúžení, karta zmenšeného kroku, privacy-first brzda a checklist.
 - 2026-05-30: Doplněna úvodní podkapitola o postupu, když se nezavře ani zmenšený krok: zastavení větve, přerámování otázky, získání základní reality, privacy-first hranice a checklist.
+- 2026-05-31: Doplněna úvodní podkapitola o znovuotevření odloženého kroku: návratový signál, tři brány, rozhodovací stavy, karta návratu a privacy-first hranice.
