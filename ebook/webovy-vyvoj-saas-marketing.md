@@ -152036,8 +152036,242 @@ Potvrzený příklad je součástí stabilního pracovního pravidla. Dočasné 
 
 Uzavřený příklad má působit nenápadně. Člověk přijde k pracovnímu pravidlu, pochopí princip, rozhodne a jde dál. Pokud kvůli příkladu vzniká další vysvětlování, není uzavřený. Pokud pomáhá bez hluku a bez nových dat, splnil přesně to, co měl.
 
+## Příloha UQ: První běžný návrat ke stabilnímu pravidlu po uzavřeném příkladu
+
+Po uzavření potvrzeného příkladu přichází malá, ale důležitá chvíle: první normální návrat. Nejde o další revizi příkladu. Jde o ověření, že pracovní pravidlo už funguje jako běžná součást systému. Člověk ho najde, použije, rozhodne a nemusí znát historii čekací poznámky, ověřovací karty ani interní debaty.
+
+Praktická otázka zní:
+
+```text
+Použil někdo stabilní pravidlo s příkladem tak, že se dostal k rozhodnutí bez návratu k pomocným podkladům?
+```
+
+Tuto otázku nechte zaznít až při skutečné práci. Nevyvolávejte kvůli ní schůzku, audit ani nové kolečko komentářů. První běžný návrat má být lehký test normálnosti: jestli pravidlo obstojí v provozu, ne v ideální kontrolní situaci.
+
+### Vraťte se přes reálný úkol
+
+Spouštěčem návratu má být konkrétní pracovní situace:
+
+- někdo píše novou landing page;
+- někdo upravuje formulář nebo onboarding;
+- někdo vybírá důkaz pro obchodní stránku;
+- někdo předává brief copywriterovi nebo designerovi;
+- někdo kontroluje, jestli nová stránka drží slíbený standard.
+
+Nepoužívejte jako spouštěč větu "pojďme se podívat, jestli ten příklad pořád sedí". Tím se z běžného pravidla zase stane projektová položka. Lepší je počkat na okamžik, kdy by pravidlo stejně mělo pomoci.
+
+Zapište jen minimum:
+
+```text
+Pracovní úkol:
+Kdo pravidlo použil:
+Kde pravidlo našel:
+Jaké rozhodnutí udělal:
+Potřeboval pomocné podklady:
+```
+
+Pokud poslední řádek zní "ne", máte silný signál. Ne proto, že je pravidlo dokonalé, ale protože se stalo použitelným bez doprovodné paměti týmu.
+
+### Sledujte tři signály normálního použití
+
+Při prvním návratu sledujte tři jednoduché signály.
+
+První signál: člověk se dostane k pravidlu přirozenou cestou. Nemusí hledat ve starých komentářích, ptát se autora změny ani otevírat původní ověřovací kartu. Pravidlo žije tam, kde se rozhoduje.
+
+Druhý signál: příklad vysvětlí princip, ale nenutí k opisování. Uživatel pochopí, jaký typ rozhodnutí má udělat, a umí ho přenést na aktuální situaci. Pokud jen zkopíruje starý příklad na nové místo, pravidlo možná není dost obecné.
+
+Třetí signál: nevznikne nová datová stopa. Není potřeba exportovat zákaznické citace, kopírovat screenshoty, vytvářet tabulku důkazů ani přidávat měření jen proto, aby se potvrdilo použití jedné věty.
+
+Codyho komentář: dobré pravidlo je trochu nudné. Nevyžaduje slavnostní návrat, nepřitahuje drama a nemá potřebu dokazovat svoji existenci v pěti systémech. Prostě pomůže a zmizí z cesty. Ano, je to méně efektní než dashboard, ale výrazně užitečnější.
+
+### Čtyři výsledky prvního návratu
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků.
+
+**1. Klidné použití**
+
+Pravidlo bylo nalezené, pochopené a použité bez pomoci. Příklad zůstal jako opora, ne jako překážka. V takovém případě nic neupravujte. Jen zapište jednu logovou větu a nechte pravidlo běžet.
+
+```text
+Výsledek:
+Klidné použití. Pravidlo pomohlo vybrat důkaz pro novou stránku bez návratu k původním podkladům.
+```
+
+**2. Drobné tření v umístění**
+
+Pravidlo dává smysl, ale člověk ho hledal na špatném místě nebo narazil na nejasný odkaz. Tady nepište nový příklad. Opravte navigaci, název položky nebo umístění pravidla.
+
+Příklad:
+
+```text
+Tření:
+Autor hledal pravidlo v šabloně landing page, ale bylo jen v checklistu kampaně.
+
+Malá úprava:
+Přidat odkaz z šablony landing page na kanonické pravidlo.
+```
+
+**3. Drobné tření ve znění**
+
+Pravidlo je na správném místě, ale formulace příkladu vede k příliš úzkému výkladu. V tom případě proveďte jednu korekci věty. Neotevírejte nový standard a nepřidávejte druhý, třetí a čtvrtý příklad.
+
+Příklad:
+
+```text
+Tření:
+Příklad s migrací svádí k tomu, že se důkaz vybírá jen pro technická rizika.
+
+Jedna korekce:
+"U hlavní obavy zákazníka použijte důkaz, který snižuje právě tuto obavu; u migrace například bezpečně dokončený přesun."
+```
+
+**4. Nový problém mimo pravidlo**
+
+Pravidlo funguje, ale během použití se ukáže jiný problém: chybí schválený zdroj referencí, není jasné, kdo může použít citaci, nebo se naráží na právní souhlas. To není důvod upravovat příklad. Oddělte nové téma do vlastní pracovní větve.
+
+```text
+Nový problém:
+Tým neví, kde najít aktuálně schválené zákaznické důkazy.
+
+Co neděláme:
+Nepřidáváme do pravidla kopie citací ani interní obchodní poznámky.
+
+Další větev:
+Správa schválených důkazů a retenční pravidlo.
+```
+
+### Neprodlužujte péči o pravidlo
+
+Nejčastější chyba po prvním návratu je přehnaná péče. Tým má radost, že pravidlo pomohlo, a hned chce přidat další varianty, lepší šablonu, nový report nebo pravidelnou kontrolu. Vypadá to zodpovědně, ale často to jen vrací do systému práci, kterou jste právě uklidili.
+
+Po klidném použití stačí:
+
+- jedna věta do logu;
+- žádná změna pravidla;
+- žádné nové měření;
+- žádné nové schvalování;
+- návrat jen při opakovaném tření.
+
+Když se objevilo drobné tření, opravte pouze nejbližší příčinu. Pokud byl problém v umístění, nehýbejte formulací. Pokud byl problém ve znění, nepřestavujte dokumentaci. Pokud se ukázal nový problém, nepřilepujte ho k pravidlu, které právě začalo fungovat.
+
+### Privacy-first návrat
+
+První návrat ke stabilnímu pravidlu má být datově lehký. Cílem není vyrobit důkazní balík o tom, že pravidlo bylo použito. Cílem je poznat, jestli pravidlo pomáhá bez dalších kopií a sledování.
+
+Dobrá privacy-first praxe:
+
+- zapište roli nebo pracovní situaci, ne jméno člověka, pokud jméno není nutné;
+- neukládejte zákaznické citace mimo systém, kde mají souhlas a retenci;
+- nepřidávejte analytický event jen kvůli použití interního pravidla;
+- nepřenášejte screenshoty z CRM, podpory nebo e-mailu do obecné šablony;
+- pokud vznikne nový problém se správou důkazů, řešte ho jako samostatné téma s jasným vlastníkem.
+
+Privacy-first hodnota tady není abstraktní. Každá kopie zákaznického výroku, interní poznámky nebo screenshotu zvyšuje budoucí nepořádek. Stabilní pravidlo má držet princip. Citlivé podklady mají zůstat ve zdroji pravdy, kde se dá řídit přístup, účel a doba uchování.
+
+### Karta prvního návratu po uzavřeném příkladu
+
+```text
+Stabilní pravidlo:
+
+Příklad u pravidla:
+
+První běžný úkol:
+
+Kde bylo pravidlo nalezeno:
+
+Jaké rozhodnutí vzniklo:
+
+Byly potřeba pomocné podklady:
+- ne / ano, jaké
+
+Výsledek návratu:
+- klidné použití / tření v umístění / tření ve znění / nový problém mimo pravidlo
+
+Jedna případná úprava:
+
+Co výslovně neměníme:
+
+Privacy-first kontrola:
+
+Návratový signál:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Stabilní pravidlo:
+Nad první formulář dáváme jeden důkaz podle hlavní nejistoty zákazníka.
+
+Příklad u pravidla:
+U hlavní obavy zákazníka použijte důkaz, který snižuje právě tuto obavu; u migrace například bezpečně dokončený přesun.
+
+První běžný úkol:
+Nová landing page pro B2B onboarding.
+
+Kde bylo pravidlo nalezeno:
+Checklist landing page, položka "Důkaz nad formulářem".
+
+Jaké rozhodnutí vzniklo:
+Autor vybral důkaz ke snížení obavy z ruční migrace dat.
+
+Byly potřeba pomocné podklady:
+Ne. Stačilo pravidlo a aktuální schválený důkaz ve zdroji pravdy.
+
+Výsledek návratu:
+Klidné použití.
+
+Jedna případná úprava:
+Žádná.
+
+Co výslovně neměníme:
+Nepřidáváme další příklady, nevytváříme nový report a nerozšiřujeme formulář.
+
+Privacy-first kontrola:
+Do checklistu nepřenášíme citaci zákazníka ani screenshot z CRM. Pracujeme jen s typem důkazu.
+
+Návratový signál:
+Téma otevřeme, pokud se u tří dalších stránek opakuje nejasnost ve výběru důkazu nebo hledání pravidla.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: najděte první reálný úkol, při kterém se pravidlo mělo použít.
+2. Minuta 2: zapište, odkud se člověk k pravidlu dostal.
+3. Minuta 3: napište rozhodnutí, které díky pravidlu vzniklo.
+4. Minuta 4: ověřte, jestli bylo nutné otevřít pomocné podklady.
+5. Minuta 5: vyberte jeden ze čtyř výsledků návratu.
+6. Minuta 6: pokud je potřeba úprava, omezte ji na umístění nebo jednu větu.
+7. Minuta 7: proveďte privacy-first kontrolu a zavřete kartu.
+
+Výstup workshopu:
+
+```text
+Stabilní pravidlo s příkladem bylo poprvé použito v běžné práci. Je buď ponechané bez změny, jednou lokálně upravené, nebo oddělené od nového problému, který má vlastní větev.
+```
+
+### Checklist prvního návratu
+
+- Proběhl návrat při skutečném pracovním úkolu?
+- Našel člověk pravidlo přirozenou cestou?
+- Pomohl příklad pochopit princip, ne jen opsat starou situaci?
+- Vzniklo konkrétní rozhodnutí?
+- Nebylo nutné otevírat původní čekací poznámku, ověřovací kartu ani interní debatu?
+- Vybrali jsme jen jeden výsledný stav?
+- Pokud vzniklo tření, opravujeme pouze nejbližší příčinu?
+- Pokud se ukázal nový problém, oddělili jsme ho od fungujícího pravidla?
+- Nepřidali jsme tracker, export, screenshot ani kopii zákaznického výroku?
+- Je zapsaný návratový signál místo pravidelného dohledu?
+
+První běžný návrat má potvrdit, že pravidlo se vrátilo do života týmu. Když funguje, nechte ho pracovat. Když lehce drhne, opravte nejbližší hranu. Když otevře nové téma, dejte mu vlastní místo. Nejhorší výsledek by byl znovu obalit stabilní pravidlo péčí, kterou už nepotřebuje.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha UQ o první běžný návrat ke stabilnímu pravidlu po uzavřeném příkladu: reálný pracovní spouštěč, tři signály normálního použití, čtyři výsledky návratu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UP o uzavření potvrzeného příkladu do stabilního pracovního pravidla: stabilní znění, úklid dočasných artefaktů, hranice standardizace, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UO o ověření doplněného příkladu při dalším běžném použití: ověřování na stejném pracovním místě, tři signály funkčnosti, čtyři výsledné stavy, pravidlo jedné korekce, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UN o doplnění jednoho příkladu po prvním návratu k pracovnímu pravidlu: výběr typu příkladu, umístění k rozhodnutí, omezení historie, privacy-first kontrola, karta, mini workshop a checklist.
