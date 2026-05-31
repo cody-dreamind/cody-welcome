@@ -153178,8 +153178,213 @@ Ověřená vysvětlující poznámka je buď stabilní součástí pracovního m
 
 Uzavřená vysvětlující poznámka je malý detail, ale dobrý test provozní vyspělosti. Tým tím říká: umíme zachytit dotaz, ověřit ho, ponechat užitečnou část a uklidit zbytek. Právě z takových drobných uzavření vzniká systém, který se dá používat opakovaně bez toho, aby se pokaždé nafoukl o další vrstvu vysvětlování.
 
+## Příloha UU: První návrat ke stabilnímu pracovnímu místu po uzavřené vysvětlující poznámce
+
+Po uzavření vysvětlující poznámky přichází nenápadný test: někdo se ke stejnému pracovnímu místu vrátí bez znalosti celé historie. Nečte kartu dotazu, nezná ověřovací workshop a nepamatuje si, proč poznámka vznikla. Prostě potřebuje udělat práci. Právě tady se ukáže, jestli uzavření opravdu stabilizovalo pracovní místo, nebo jen uklidilo stopu tak důkladně, že zmizel i užitečný kontext.
+
+Návrat nemá být další audit. Má to být krátká kontrola při běžném použití:
+
+```text
+Umí člověk použít pracovní místo správně bez toho, aby musel otevřít historii poznámky?
+```
+
+Pokud ano, poznámka je stabilní. Pokud ne, neznamená to automaticky přidat další vysvětlení. Nejdřív zjistěte, co přesně chybělo: hlavní věta, umístění, příklad, název kroku, nebo hranice, kdy pravidlo nepoužít.
+
+### Návrat přes skutečný úkol
+
+První návrat plánujte jen tehdy, když existuje reálný pracovní úkol. Není potřeba svolávat zvláštní kontrolu jen proto, že poznámka byla uzavřená. Lepší signál vznikne při normální práci: někdo upravuje landing page, kontroluje formulář, připravuje case study, doplňuje checklist nebo předává šablonu novému člověku.
+
+Krátký záznam stačí:
+
+```text
+Pracovní místo:
+
+Skutečný úkol:
+
+Co člověk potřeboval rozhodnout:
+
+Použil stabilizovanou větu bez historie poznámky:
+- ano / částečně / ne
+
+Co bylo nejasné:
+
+Co se kvůli tomu mění:
+```
+
+Příklad:
+
+```text
+Pracovní místo:
+Checklist landing page, položka "Důkaz u hlavního rozhodovacího kroku".
+
+Skutečný úkol:
+Kontrola stránky pro službu s CTA na rezervaci konzultace.
+
+Co člověk potřeboval rozhodnout:
+Kam dát důkaz, když formulář není hlavní akce stránky.
+
+Použil stabilizovanou větu bez historie poznámky:
+Ano.
+
+Co bylo nejasné:
+Nic zásadního. Člověk nepotřeboval původní kartu ani příklad z ověření.
+
+Co se kvůli tomu mění:
+Nic. Pracovní místo zůstává stabilní.
+```
+
+Tento výsledek je dobrý právě tím, že je nudný. Stabilní pracovní místo nemá vyrábět nové drama. Má vést k rozhodnutí bez toho, aby si řeklo o vlastní schůzku.
+
+### Čtyři výsledky prvního návratu
+
+Po prvním návratu vyberte jeden stav:
+
+- Stabilní: pracovní místo funguje bez historie a bez nové pomoci.
+- Lokálně nejasné: stačí upravit umístění, název nebo jednu větu nápovědy.
+- Slabé pravidlo: problém není v poznámce, ale v hlavní větě nebo pořadí kroků.
+- Nový problém: návrat otevřel jiné téma, které nepatří do této poznámky.
+
+Stav "lokálně nejasné" držte opravdu lokální. Pokud člověk poznámku přehlédl, možná stačí přesunout větu blíž ke kroku. Pokud nevěděl, jestli se vztahuje na aktuální situaci, možná stačí přidat hranici "použijte jen když". Není potřeba hned přepisovat celý checklist.
+
+Stav "slabé pravidlo" je vážnější. Pokud se člověk dostal do nejistoty ještě před místem, kde poznámka pomáhá, samostatná poznámka problém nezachrání. V takovém případě otevřete malou úpravu hlavního pravidla, ne další vysvětlivku pod ním.
+
+Stav "nový problém" je ochranný. První návrat často přinese užitečné postřehy, ale ne každý patří do stejné větve práce. Když při kontrole důkazu u CTA vyplave otázka cenotvorby, nelepte ji na poznámku o landing page. Zapište ji zvlášť nebo ji zavřete bez akce.
+
+### Kdy nedělat nic
+
+Po návratu je velmi lákavé udělat malou kosmetickou úpravu "pro jistotu". Jedno slovo, jeden příklad, jeden odkaz, jedna další závorka. Jenže stabilní pracovní místo se nemá měnit po každém dotyku. Pokud člověk práci dokončil správně a bez zbytečného doptávání, výsledek může být prostě:
+
+```text
+Neděláme žádnou změnu. Pracovní místo fungovalo při běžném použití bez otevření historie poznámky.
+```
+
+Tohle je plnohodnotné rozhodnutí. V dobrém systému má být i vědomé nic viditelné. Chrání před tím, aby každé použití šablony skončilo drobnou úpravou a každá drobná úprava dalším ověřením. Tak se totiž z užitečného pracovního místa stane pohyblivý text, kterému nikdo nevěří dost dlouho na to, aby se stal návykem.
+
+### Privacy-first návrat
+
+První návrat ke stabilnímu pracovnímu místu nemá obnovovat data, která jste při uzavření uklidili. Není důvod znovu vytahovat původní zákaznický příklad, screenshot, obchodní poznámku nebo interní komentář jen proto, že kontrolujete, jestli pracovní místo funguje.
+
+Stačí sledovat pracovní výsledek:
+
+- bylo rozhodnutí možné bez historie;
+- vznikl výstup použitelný pro zákazníka nebo tým;
+- nebylo potřeba přidat nové pole, export, tracker ani osobní poznámku;
+- případné tření se dá popsat obecně.
+
+Do záznamu nepatří:
+
+- jméno člověka, který pracovní místo použil;
+- konkrétní zákaznické detaily;
+- screenshoty z interních systémů;
+- časová stopa jednotlivých kroků člověka;
+- hodnocení výkonu osoby místo kvality pracovního místa.
+
+Privacy-first věta po návratu může znít:
+
+```text
+Návrat ověřil použitelnost pracovního místa bez obnovy původních podkladů a bez sběru nových osobních nebo zákaznických detailů.
+```
+
+Codyho komentář: když při kontrole poznámky potřebujete otevřít tři staré dokumenty, možná nekontrolujete stabilitu. Možná jste jen našli hezky uklizenou archeologii. A archeologie je fajn, ale do běžné práce se s lopatkou chodit nemá.
+
+### Karta prvního návratu
+
+```text
+Pracovní místo:
+
+Uzavřená poznámka nebo stabilizovaná věta:
+
+Skutečný pracovní úkol:
+
+Rozhodnutí, které mělo pracovní místo podpořit:
+
+Šlo použít bez historie poznámky:
+- ano / částečně / ne
+
+Výsledek návratu:
+- stabilní / lokálně nejasné / slabé pravidlo / nový problém
+
+Co měníme, pokud něco:
+
+Co výslovně neměníme:
+
+Jaká data kvůli návratu neobnovujeme ani nesbíráme:
+
+Další návratový signál, pokud nějaký zůstává:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Checklist landing page.
+
+Uzavřená poznámka nebo stabilizovaná věta:
+K hlavnímu rozhodovacímu kroku stránky dáváme jeden důkaz podle největší nejistoty zákazníka.
+
+Skutečný pracovní úkol:
+Kontrola stránky s CTA na rezervaci konzultace.
+
+Rozhodnutí, které mělo pracovní místo podpořit:
+Kam umístit důkaz, když hlavní akce není formulář.
+
+Šlo použít bez historie poznámky:
+Ano.
+
+Výsledek návratu:
+Stabilní.
+
+Co měníme, pokud něco:
+Nic.
+
+Co výslovně neměníme:
+Nepřidáváme další příklad ani novou variantu checklistu.
+
+Jaká data kvůli návratu neobnovujeme ani nesbíráme:
+Neotevíráme původní zákaznickou situaci, screenshoty ani interní komentáře.
+
+Další návratový signál:
+Pokud se nejistota objeví u dvou dalších typů stránek, otevřeme úpravu hlavního pravidla.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte skutečný úkol, při kterém se pracovní místo použilo.
+2. Minuta 2: ověřte, zda člověk potřeboval historii poznámky.
+3. Minuta 3: vyberte jeden ze čtyř výsledků návratu.
+4. Minuta 4: rozhodněte, zda se něco mění, nebo vědomě nic.
+5. Minuta 5: proveďte privacy-first kontrolu bez obnovy původních podkladů.
+6. Minuta 6: zapište návratový signál jen tehdy, pokud pořád existuje.
+
+Výstup workshopu:
+
+```text
+Stabilní pracovní místo bylo ověřené při běžném návratu. Buď zůstává beze změny, dostává jednu lokální opravu, otevírá úpravu hlavního pravidla, nebo odděluje nový problém mimo původní poznámku.
+```
+
+### Checklist prvního návratu
+
+- Proběhl návrat při skutečném pracovním úkolu?
+- Ověřovali jsme použitelnost pracovního místa, ne výkon konkrétního člověka?
+- Šlo místo použít bez původní historie poznámky?
+- Vybrali jsme jeden ze čtyř výsledků návratu?
+- Pokud pracovní místo fungovalo, dokázali jsme vědomě nic neměnit?
+- Pokud se objevilo tření, víme, zda je lokální, nebo patří do hlavního pravidla?
+- Oddělili jsme nový problém od původní poznámky?
+- Neobnovili jsme dočasné podklady, zákaznické detaily ani interní komentáře?
+- Nepřidali jsme nový tracking, export, formulářové pole ani dohled nad člověkem?
+- Má případný další návratový signál konkrétní podmínku?
+
+První návrat po uzavřené vysvětlující poznámce je malá zkouška důvěry v systém. Když pracovní místo funguje bez historie, nechte ho pracovat. Když drhne, opravte nejbližší příčinu. A když otevře nové téma, nepřilepujte ho na starou poznámku jen proto, že zrovna leží po ruce.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha UU o první návrat ke stabilnímu pracovnímu místu po uzavřené vysvětlující poznámce: ověření při reálném úkolu, čtyři výsledky návratu, vědomé nic, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha US o ověření vysvětlující poznámky při dalším běžném použití: reálné ověření v práci, čtyři výsledné stavy, zkrácení poznámky, přepis hlavní věty, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UR o převodu slabého dotazu po klidném návratu do vysvětlující poznámky: rozlišení dotazu od tření, umístění poznámky, pravidlo jedné poznámky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UQ o první běžný návrat ke stabilnímu pravidlu po uzavřeném příkladu: reálný pracovní spouštěč, tři signály normálního použití, čtyři výsledky návratu, privacy-first kontrola, karta, mini workshop a checklist.
