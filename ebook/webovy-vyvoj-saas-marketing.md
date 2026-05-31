@@ -152936,6 +152936,248 @@ Vysvětlující poznámka je po prvním běžném použití buď potvrzená, zkr
 
 Dobrá vysvětlující poznámka přežije první běžné použití bez toho, aby si řekla o vlastní proces. Pomůže, zůstane malá a nechá hlavní pravidlo pracovat. Pokud to nedokáže, není ostuda ji zkrátit, zrušit nebo převést do přesnější věty. Ostuda je nechat ji růst jen proto, že už jednou vznikla.
 
+## Příloha UT: Uzavření ověřené vysvětlující poznámky do stabilního pracovního místa
+
+Ověřená vysvětlující poznámka má po prvním běžném použití ještě jeden úkol: zmizet z režimu "něco testujeme" a stát se běžnou součástí pracovního místa, nebo naopak čistě odejít. Pokud tento krok přeskočíte, poznámka často zůstane napůl potvrzená. Tým ji používá, ale pořád kolem ní visí karta, návratový signál, dočasný komentář a pocit, že se k ní má někdo ještě vrátit.
+
+Praktická otázka zní:
+
+```text
+Co musí po ověření zůstat v pracovním místě a co už je jen dočasná stopa?
+```
+
+Tahle otázka chrání dvě věci najednou. Pracovní místo zůstane užitečné, protože v něm zůstane ověřená opora pro rozhodnutí. A systém zůstane lehký, protože nezůstane obalený historií, proč poznámka vznikla, kdo se ptal a jak dlouho se ověřovala.
+
+### Začněte výsledným stavem
+
+Nejdřív vezměte výsledek z ověření a převeďte ho do jednoho záznamu. Stačí čtyři stavy:
+
+- Ponechat: poznámka pomohla, je přiměřeně krátká a patří do pracovního místa.
+- Ponechat zkráceně: poznámka pomohla, ale má zůstat jen její rozhodovací věta.
+- Přepsat do pravidla: poznámka ukázala slabou hlavní větu, takže se stává součástí pravidla a samostatná poznámka mizí.
+- Zrušit: poznámka nepomohla, nebyla nalezena nebo odváděla pozornost.
+
+Neotevírejte další pátý stav typu "ještě promyslet". Pokud ověření nedalo dost důkazů, vraťte se o krok zpět a napište, že poznámka zůstává čekat na další běžné použití. Pokud důkazy máte, rozhodněte. Dočasné věci se v týmu nekazí tím, že jsou špatné. Často se kazí tím, že se nikdy neprohlásí za hotové.
+
+Příklad:
+
+```text
+Poznámka:
+Pokud formulář není hlavní CTA, dejte důkaz k hlavnímu rozhodovacímu kroku.
+
+Výsledek ověření:
+Poznámka pomohla při stránce s CTA na rezervaci konzultace.
+
+Stav:
+Ponechat.
+
+Co zůstává:
+Jedna věta u položky checklistu "Důkaz u dalšího kroku".
+
+Co mizí:
+Původní karta dotazu, dočasný komentář v backlogu a návrh na novou variantu šablony.
+```
+
+Tím se poznámka zavře jako běžná součást práce, ne jako věčný malý experiment.
+
+### Upravte pracovní místo, ne historii
+
+Uzavření poznámky není redakční archeologie. Nemusíte do pracovního místa přenášet původní dotaz, průběh ověření ani celou debatu. Člověk, který šablonu použije za měsíc, nepotřebuje znát cestu. Potřebuje správnou oporu v okamžiku rozhodnutí.
+
+Dobré uzavření proto mění jen nejbližší pracovní místo:
+
+- položku checklistu;
+- krátkou nápovědu v šabloně;
+- jednu větu pravidla;
+- popisek pole;
+- interní instrukci u konkrétního kroku;
+- odkaz na kanonické pravidlo, pokud poznámka zůstane mimo hlavní text.
+
+Špatné uzavření rozlévá poznámku do více míst najednou. Jedna ověřená poznámka se najednou objeví v checklistu, onboardingu, sales dokumentu, wiki a ještě v komentáři u starého ticketu. To vypadá důkladně, ale zvyšuje riziko budoucí nekonzistence. Pokud poznámka skutečně patří na více míst, pravděpodobně už nemá být poznámkou. Má změnit hlavní pravidlo.
+
+### Zkraťte stopu po ověření
+
+Po uzavření smažte nebo archivujte dočasné artefakty. Ne všechno musí přežít jen proto, že to při rozhodování pomohlo.
+
+Typicky můžete zavřít:
+
+- kartu původního slabého dotazu;
+- dočasnou poznámku v backlogu;
+- komentář "ověřit při dalším použití";
+- pracovní kopii delšího vysvětlení;
+- návrh druhého příkladu, který už není potřeba;
+- lokální checklist ověření, pokud výsledek přešel do hlavního pracovního místa.
+
+Neznamená to mazat rozhodovací paměť bezhlavě. V rozhodovacím logu může zůstat krátký záznam, že poznámka byla ověřená a uzavřená. Ale pracovní místo nemá nést batoh všech pomocných stop. Jeho úkolem je pomoci dalšímu člověku udělat práci, ne připomínat minulou nejistotu.
+
+Praktický úklid:
+
+```text
+Zůstává:
+Jedna věta v checklistu landing page.
+
+Archivujeme:
+Kartu slabého dotazu s výsledkem "uzavřeno".
+
+Mažeme:
+Dočasný komentář v pracovním dokumentu a návrh na druhý příklad.
+
+Neměníme:
+Hlavní pravidlo, protože poznámka zatím řeší jen jednu hranu použití.
+```
+
+### Kdy poznámku převést do hlavní věty
+
+Někdy uzavření ukáže, že poznámka už nemá zůstat jako poznámka. Pokud stejná rozhodovací hranice ovlivňuje více pracovních míst, krátká poznámka se snadno stane lokální záplatou na pravidlo, které mělo být přesnější od začátku.
+
+Převod do hlavní věty zvažte, když:
+
+- poznámka pomohla ve více než jednom typu situace;
+- lidé ji hledají i mimo původní pracovní místo;
+- bez poznámky by hlavní pravidlo svádělo ke špatnému rozhodnutí;
+- poznámka je kratší a jasnější než původní pravidlo;
+- další lokální poznámka by jen duplikovala stejný princip.
+
+Příklad převodu:
+
+```text
+Původní pravidlo:
+Nad první formulář dáváme jeden důkaz podle hlavní nejistoty zákazníka.
+
+Ověřená poznámka:
+Pokud formulář není hlavní CTA, dejte důkaz k hlavnímu rozhodovacímu kroku.
+
+Nová hlavní věta:
+K hlavnímu rozhodovacímu kroku stránky dáváme jeden důkaz podle největší nejistoty zákazníka.
+
+Co mizí:
+Samostatná poznámka u checklistu, protože princip už je v pravidle.
+```
+
+Tady je uzavření užitečnější než ponechání poznámky. Místo aby systém nesl pravidlo a jeho výjimku, dostane jedno lepší pravidlo.
+
+### Privacy-first uzavření poznámky
+
+Uzavření poznámky je vhodná chvíle na malý datový úklid. Během vzniku a ověření se často objeví pracovní ukázky, anonymizované výřezy, návrhy formulací, interní komentáře nebo odkazy na konkrétní zákaznickou situaci. Po uzavření už většina z nich nemá v běžném provozu co dělat.
+
+Do stabilního pracovního místa patří:
+
+- obecný rozhodovací princip;
+- krátká opora pro použití;
+- odkaz na kanonické pravidlo, pokud je potřeba;
+- anonymizovaný typ situace, pokud bez něj věta nedává smysl.
+
+Do stabilního pracovního místa nepatří:
+
+- jméno zákazníka nebo konkrétní obchodní kontext;
+- screenshoty z CRM, e-mailu, analytiky nebo podpory;
+- citace lidí, kteří se ptali;
+- pracovní debata o tom, kdo měl pravdu;
+- dočasné exporty použité při ověření.
+
+Privacy-first výsledek uzavření můžete zapsat jednou větou:
+
+```text
+Po uzavření zůstává v pracovním místě jen obecná rozhodovací věta; dočasné příklady a interní komentáře k ověření jsou odstraněné nebo archivované mimo běžnou pracovní trasu.
+```
+
+Codyho komentář: dobrá poznámka po uzavření trochu zhubne. Ne proto, že by byla méně důležitá, ale protože už nemusí nosit kabát z důkazů, obav a historických vysvětlivek. V práci má zůstat sval, ne balicí materiál.
+
+### Karta uzavření vysvětlující poznámky
+
+```text
+Poznámka:
+
+Pracovní místo:
+
+Výsledek ověření:
+- ponechat / ponechat zkráceně / přepsat do pravidla / zrušit
+
+Co zůstává v pracovním místě:
+
+Co se mění v hlavním pravidle, pokud něco:
+
+Co zavíráme nebo mažeme:
+
+Co archivujeme jen jako rozhodovací stopu:
+
+Co výslovně nepřidáváme:
+
+Jaká osobní, zákaznická nebo interní data po uzavření nezůstávají v pracovní trase:
+
+Návratový signál, pokud nějaký zůstává:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Poznámka:
+Pokud formulář není hlavní CTA, dejte důkaz k hlavnímu rozhodovacímu kroku.
+
+Pracovní místo:
+Checklist landing page, položka "Důkaz u dalšího kroku".
+
+Výsledek ověření:
+Ponechat.
+
+Co zůstává v pracovním místě:
+Jedna věta poznámky u položky checklistu.
+
+Co se mění v hlavním pravidle, pokud něco:
+Nic. Hlavní pravidlo zatím zůstává stejné.
+
+Co zavíráme nebo mažeme:
+Dočasný komentář v pracovním dokumentu a návrh na druhý příklad.
+
+Co archivujeme jen jako rozhodovací stopu:
+Kartu původního slabého dotazu se stavem "uzavřeno".
+
+Co výslovně nepřidáváme:
+Novou variantu landing page šablony, nový tracking ani povinný review krok.
+
+Jaká osobní, zákaznická nebo interní data po uzavření nezůstávají v pracovní trase:
+Nezůstávají zákaznické citace, screenshoty z CRM ani jméno člověka, který dotaz položil.
+
+Návratový signál, pokud nějaký zůstává:
+Pokud se stejná hranice objeví u dalších dvou typů stránek, přepíšeme hlavní větu pravidla.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: otevřete kartu ověření poznámky a napište výsledný stav.
+2. Minuta 2: vyberte přesnou větu, která zůstane v pracovním místě.
+3. Minuta 3: rozhodněte, zda poznámka zůstává lokálně, nebo se převádí do hlavního pravidla.
+4. Minuta 4: zavřete původní kartu dotazu nebo ji označte jako archivovanou rozhodovací stopu.
+5. Minuta 5: smažte dočasné komentáře, pracovní kopie a návrhy, které už nemají úkol.
+6. Minuta 6: zkontrolujte, že v pracovní trase nezůstaly osobní nebo zákaznické detaily navíc.
+7. Minuta 7: napište návratový signál, pokud má poznámka zůstat sledovaná.
+8. Minuta 8: proveďte první rychlé přečtení pracovního místa očima člověka, který nezná historii.
+
+Výstup workshopu:
+
+```text
+Ověřená vysvětlující poznámka je buď stabilní součástí pracovního místa, zkrácená do hlavní věty pravidla, nebo čistě zrušená. Dočasné artefakty jsou zavřené a pracovní trasa nenese zbytečná data.
+```
+
+### Checklist uzavření poznámky
+
+- Má poznámka po ověření jasný výsledný stav?
+- Zůstává v pracovním místě jen text, který pomáhá při rozhodnutí?
+- Nepřenesli jsme do pracovního místa historii, původní debatu nebo dočasné důkazy?
+- Je jasné, zda poznámka zůstává lokálně, nebo se převádí do hlavního pravidla?
+- Zavřeli jsme původní kartu dotazu, dočasné komentáře a návrhy navíc?
+- Nezůstávají v běžné pracovní trase zákaznické citace, screenshoty, osobní údaje nebo interní obchodní kontext?
+- Nepřidali jsme kvůli poznámce nový povinný proces, tracking nebo šablonu?
+- Má případný návratový signál konkrétní podmínku, ne jen pocit "někdy se k tomu vrátit"?
+- Umí člověk použít pracovní místo bez znalosti celé historie poznámky?
+
+Uzavřená vysvětlující poznámka je malý detail, ale dobrý test provozní vyspělosti. Tým tím říká: umíme zachytit dotaz, ověřit ho, ponechat užitečnou část a uklidit zbytek. Právě z takových drobných uzavření vzniká systém, který se dá používat opakovaně bez toho, aby se pokaždé nafoukl o další vrstvu vysvětlování.
+
 ## Pracovní log
 
 - 2026-05-31: Doplněna Příloha US o ověření vysvětlující poznámky při dalším běžném použití: reálné ověření v práci, čtyři výsledné stavy, zkrácení poznámky, přepis hlavní věty, privacy-first kontrola, karta, mini workshop a checklist.
@@ -153587,3 +153829,4 @@ Dobrá vysvětlující poznámka přežije první běžné použití bez toho, a
 - 2026-05-31: Doplněna úvodní podkapitola o uzavření návratu k odloženému kroku: nové stavy původního návrhu, privacy-first výsledek, šablona uzavření a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o předání uzavřeného návratu týmu: jednovětý závěr, tři místa předání, úklid pracovních stop, privacy-first hranice a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o ověření předání uzavřeného návratu při prvním použití: mini test, tři výsledné stavy, šablona ověření a privacy-first kontrola.
+- 2026-05-31: Doplněna Příloha UT o uzavření ověřené vysvětlující poznámky do stabilního pracovního místa: výsledný stav, úprava pracovní trasy, úklid dočasných stop, privacy-first uzavření, karta a checklist.
