@@ -154781,8 +154781,278 @@ Slabé tření po prvním návratu je zachycené jako čekací poznámka s návr
 
 Čekací poznámka je dobrá právě tím, že nic nepředstírá. Neříká, že problém neexistuje. Neříká ani, že je potřeba hned měnit pravidlo. Drží drobný signál v malém prostoru, dokud se neukáže, jestli má skutečnou váhu.
 
+## Příloha VA: Uzavření čekací poznámky po expiraci nebo opakování
+
+Čekací poznámka má smysl jen tehdy, když jednou skončí. Pokud zůstane viset bez návratu, stane se z ní tichý backlog: nikdo ji aktivně neřeší, ale pokaždé trochu zpochybní stabilní pracovní místo. To je horší než drobná nejasnost, kvůli které vznikla.
+
+Tato příloha navazuje na Přílohu UZ. Řeší chvíli, kdy nastane jedna ze dvou věcí:
+
+- poznámka expirovala bez opakování slabého tření;
+- návratová podmínka se splnila a stejné tření se objevilo znovu.
+
+V obou případech má být výstup krátký. Buď poznámku zavřete a pracovní místo necháte být, nebo z opakovaného tření uděláte malou úpravu s jasným rozsahem. Neotevírejte znovu celou historii opravy jen proto, že poznámka dospěla ke kontrole.
+
+Otázka zní:
+
+```text
+Co teď víme díky čekací poznámce a jaký nejmenší závěr z toho plyne?
+```
+
+### Nejprve vyberte stav poznámky
+
+U každé čekací poznámky vyberte jeden ze čtyř stavů:
+
+- Expirovala bez opakování: slabé tření se už nevrátilo.
+- Opakovala se stejně: stejná nejistota se objevila znovu u podobného použití.
+- Změnila se v jiné tření: původní otázka se nevrátila, ale objevila se sousední nejasnost.
+- Ukázala skutečné selhání: výstup práce byl špatný nebo člověk musel otevřít starou historii.
+
+Neslučujte tyto stavy dohromady. Expirovaná poznámka není důvod k preventivnímu vylepšování. Opakované stejné tření není důvod k velkému redesignu pravidla. Jiné tření není pokračování původní poznámky. Skutečné selhání už není slabé tření a patří do opravy pracovního místa.
+
+Příklad:
+
+```text
+Původní čekací poznámka:
+Není jasné, jestli "primární akce" zahrnuje i odkaz na ceník.
+
+Návratová podmínka:
+Stejná otázka se objeví při dalším použití checklistu nebo u jiné role.
+
+Stav:
+Opakovala se stejně.
+
+Závěr:
+Do stabilního znění doplníme krátkou závorku: primární akcí může být i ceník, pokud je hlavním rozhodovacím krokem stránky.
+```
+
+To je malá úprava. Nevyžaduje nové příklady pro všechny typy landing pages, nový formulář, nový měřicí event ani revizi celé kapitoly o prodejním webu. Ano, láká to. Ne.
+
+### Když poznámka expirovala
+
+Expirace bez opakování je dobrý výsledek. Znamená, že slabé tření nemělo dost váhy na změnu pracovního místa. Neznamená to, že člověk, který se poprvé zeptal, měl špatnou otázku. Znamená to jen, že systém kvůli jedné otázce nepotřebuje další vrstvu.
+
+Zápis má být stručný:
+
+```text
+Čekací poznámka:
+
+Expirační podmínka:
+
+Co se od té doby stalo:
+
+Rozhodnutí:
+- zavřít bez změny
+
+Co nemažeme:
+Případný stručný záznam, že poznámka existovala a expirovala.
+
+Co neuděláme:
+Nepřepisujeme pracovní místo, nepřidáváme příklady a neotevíráme původní opravu.
+
+Privacy-first úklid:
+Mažeme dočasné podklady, pokud nějaké vznikly; necháváme jen obecný závěr.
+```
+
+Vyplněný příklad:
+
+```text
+Čekací poznámka:
+Krátká nejistota, jestli "primární akce" zahrnuje i ceník.
+
+Expirační podmínka:
+Tři další použití checklistu bez opakování.
+
+Co se od té doby stalo:
+Checklist byl použit u tří stránek, otázka se nevrátila.
+
+Rozhodnutí:
+Zavřít bez změny.
+
+Co neuděláme:
+Nepřidáváme další definici primární akce.
+
+Privacy-first úklid:
+Nenecháváme žádné screenshoty ani osobní poznámky z prvního použití.
+```
+
+Tým by měl umět zavřít poznámku bez pocitu, že něco zanedbal. Právě to je účel expirace: chránit pracovní místo před preventivním zahušťováním.
+
+### Když se stejné tření opakovalo
+
+Opakování stejného tření znamená, že poznámka splnila práci. Zachytila signál, který nebyl dost silný na okamžitou změnu, ale byl dost silný na návrat.
+
+Teď je důležité neudělat z návratu velkou opravu. Vraťte se k původnímu stabilnímu znění a položte si tři otázky:
+
+- Které slovo, věta nebo hranice způsobuje opakovanou nejistotu?
+- Dá se doplnit jednou větou, příkladem nebo odstraněním nejasného slova?
+- Zůstane pracovní místo po úpravě kratší nebo stejně přehledné?
+
+Pokud odpověď na třetí otázku zní "ne", možná nepotřebujete úpravu pravidla, ale lepší trasu, lepší název nebo rozhodnutí, že pracovní místo je už dost dobré.
+
+Malá úprava může vypadat takto:
+
+```text
+Původní znění:
+Důkaz patří k hlavnímu rozhodovacímu kroku stránky.
+
+Opakované tření:
+Není jasné, zda hlavním krokem může být ceník.
+
+Nové znění:
+Důkaz patří k hlavnímu rozhodovacímu kroku stránky: formuláři, rezervaci, ceníku nebo jiné primární akci.
+
+Co se nemění:
+Neměníme strukturu checklistu ani měření stránky.
+```
+
+Taková úprava je dost malá na to, aby se dala ověřit při dalším běžném použití. Nepotřebuje projekt. Potřebuje vlastníka, datum a jednu kontrolu.
+
+### Když vzniklo jiné tření
+
+Někdy se původní nejistota nevrátí, ale objeví se jiná otázka. To není automatické pokračování čekací poznámky.
+
+Příklad:
+
+```text
+Původní tření:
+Není jasné, jestli primární akce zahrnuje ceník.
+
+Nové tření:
+Ceník neříká, co je v základním balíčku.
+```
+
+Nové tření může být důležité. Ale týká se nabídky, ne definice primární akce. Pokud ho přilepíte k původní poznámce, ztratíte hranici a začnete upravovat všechno, co se při kontrole stránky mihlo kolem.
+
+Použijte jednoduché rozhodnutí:
+
+```text
+Původní poznámku:
+- zavřít / ponechat do expirace / převést do malé úpravy
+
+Nové tření:
+- založit samostatnou kartu / vědomě zavřít / předat do jiného pracovního místa
+```
+
+Tím udržíte obě věci čisté. Původní poznámka má vlastní závěr a nové téma vlastní vstupní otázku.
+
+### Když čekací poznámka odkryla selhání
+
+Pokud se při návratu ukáže, že výstup práce byl špatný, člověk musel otevřít starou historii nebo pravidlo bez původních podkladů nedává smysl, nejde už o slabé tření. Čekací poznámka končí a otevírá se oprava pracovního místa.
+
+Zapište to bez obviňování:
+
+```text
+Čekací poznámka odkryla selhání:
+
+Co nefungovalo:
+
+Jaký výstup byl ohrožený:
+
+Nejbližší příčina:
+
+Co otevřeme:
+- trasu / stabilní znění / příklad / vlastnictví / zdroj pravdy
+
+Co neotevřeme:
+
+Privacy-first hranice:
+```
+
+Důležité je nezačít hodnotit člověka. Pokud pravidlo funguje jen pro toho, kdo si pamatuje původní opravu, problém je v pravidle, ne v paměti týmu.
+
+### Privacy-first uzavření poznámky
+
+Uzavření čekací poznámky je vhodná chvíle pro malý datový úklid. Pokud jste si při čekání nechali dočasný screenshot, export, citaci z chatu nebo detailní popis konkrétního zákaznického případu, zeptejte se, jestli ještě slouží rozhodnutí. Ve většině případů ne.
+
+Po uzavření má zůstat:
+
+- obecný popis tření;
+- stav poznámky;
+- rozhodnutí;
+- případná malá úprava stabilního znění;
+- datum a vlastník.
+
+Po uzavření nemá zůstávat:
+
+- osobní hodnocení lidí;
+- screenshoty jen pro jistotu;
+- citace interní komunikace;
+- zákaznické detaily, které nejsou potřeba pro pracovní pravidlo;
+- dočasné exporty z analytiky nebo nástrojů.
+
+Privacy-first věta:
+
+```text
+Čekací poznámku uzavíráme podle pracovního závěru, ne podle osobní historie použití. Necháváme jen zobecněný signál a rozhodnutí; dočasné podklady mažeme nebo zkracujeme na minimum.
+```
+
+Codyho komentář: když poznámka expirovala, nechte ji zemřít důstojně. Neprovádějte nad ní posmrtnou pitvu v podobě tří nových checklistů. I dokumentace má nárok na klid.
+
+### Karta uzavření čekací poznámky
+
+```text
+Pracovní místo:
+
+Čekací poznámka:
+
+Původní slabé tření:
+
+Návratová nebo expirační podmínka:
+
+Co se reálně stalo:
+
+Stav poznámky:
+- expirovala bez opakování / opakovala se stejně / změnila se v jiné tření / odkryla selhání
+
+Rozhodnutí:
+- zavřít bez změny / převést do malé úpravy / založit samostatnou kartu / otevřít opravu pracovního místa
+
+Malá úprava, pokud vzniká:
+
+Co výslovně neotevíráme:
+
+Jaké dočasné podklady mažeme nebo zkracujeme:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte původní čekací poznámku.
+2. Minuta 2: ověřte návratovou nebo expirační podmínku.
+3. Minuta 3: vyberte jeden ze čtyř stavů poznámky.
+4. Minuta 4: rozhodněte, zda se zavírá, mění malou úpravou, odděluje do nové karty, nebo otevírá oprava.
+5. Minuta 5: napište, co výslovně neotevíráte.
+6. Minuta 6: proveďte privacy-first úklid podkladů.
+7. Minuta 7: zapište závěr do pracovního místa nebo rozhodovacího logu.
+
+Výstup workshopu:
+
+```text
+Čekací poznámka má uzavřený stav, jasné rozhodnutí, případnou malou úpravu a uklizené dočasné podklady. Stabilní pracovní místo není zatížené poznámkou, která už nemá další práci.
+```
+
+### Checklist uzavření čekací poznámky
+
+- Nastala návratová nebo expirační podmínka?
+- Vybrali jsme právě jeden stav poznámky?
+- Pokud poznámka expirovala, dokážeme ji zavřít bez preventivní úpravy?
+- Pokud se tření opakovalo, navrhli jsme nejmenší možnou změnu?
+- Pokud vzniklo jiné tření, oddělili jsme ho od původní poznámky?
+- Pokud se ukázalo selhání, otevřeli jsme opravu pracovního místa místo další čekací poznámky?
+- Je zapsané, co výslovně neotevíráme?
+- Zůstává pracovní místo přehledné i po případné malé úpravě?
+- Uklidili jsme dočasné podklady, screenshoty, citace a exporty?
+- Nezavedli jsme tracking používání pravidla jen kvůli jedné poznámce?
+- Má závěr vlastníka, datum a místo, kde ho tým najde?
+
+Dobře uzavřená čekací poznámka dělá z drobné nejistoty buď nulovou změnu, nebo malou přesnou změnu. V obou případech chrání stabilitu systému. To je nudné v tom nejlepším slova smyslu.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha VA o uzavření čekací poznámky po expiraci nebo opakování: stavy poznámky, zavření bez změny, převod opakovaného tření do malé úpravy, oddělení nového problému, selhání pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UZ o převod slabého tření po prvním návratu do čekací poznámky: rozlišení slabého tření od selhání, návratová podmínka, expirace, oddělení nového problému, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UY o první běžný návrat ke stabilnímu pracovnímu místu po uzavřené malé opravě: ověření v reálné práci, čtyři výsledky návratu, klidné použití, čekací poznámka pro slabé tření, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UX o uzavření potvrzené malé opravy do stabilního pracovního místa: přepis do přítomného času, zavření pomocných stop, hranice proti dalšímu zlepšování, privacy-first stabilizace, karta, mini workshop a checklist.
