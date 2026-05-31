@@ -594,6 +594,8 @@ Co zůstává dál odložené nebo zavřené:
 
 Dobře otevřený odložený krok nepůsobí jako návrat starého restu. Působí jako nové rozhodnutí na základě lepších signálů. To je rozdíl mezi týmem, který jen recykluje backlog, a týmem, který se učí bez toho, aby si pokaždé přibalil další datovou stopu.
 
+Pokud se krok po návratu otevře v menší podobě, zapište vedle něj i původní návrh, který zůstává zavřený. Pomáhá to při dalším plánování: tým vidí, že se ke starému tématu vrátil vědomě, ale nepřevzal automaticky celý historický rozsah.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -152345,3 +152347,4 @@ Ověření doplněného příkladu má chránit pravidlo před dvěma extrémy. 
 - 2026-05-30: Doplněna úvodní podkapitola o zmenšení dalšího kroku po nesplněné stop podmínce: tři řezy zúžení, karta zmenšeného kroku, privacy-first brzda a checklist.
 - 2026-05-30: Doplněna úvodní podkapitola o postupu, když se nezavře ani zmenšený krok: zastavení větve, přerámování otázky, získání základní reality, privacy-first hranice a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o znovuotevření odloženého kroku: návratový signál, tři brány, rozhodovací stavy, karta návratu a privacy-first hranice.
+- 2026-05-31: Doplněna krátká poznámka k návratu odloženého kroku, aby menší otevřená varianta výslovně nechala původní rozsah zavřený.
