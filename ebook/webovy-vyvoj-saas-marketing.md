@@ -153382,8 +153382,222 @@ Stabilní pracovní místo bylo ověřené při běžném návratu. Buď zůstá
 
 První návrat po uzavřené vysvětlující poznámce je malá zkouška důvěry v systém. Když pracovní místo funguje bez historie, nechte ho pracovat. Když drhne, opravte nejbližší příčinu. A když otevře nové téma, nepřilepujte ho na starou poznámku jen proto, že zrovna leží po ruce.
 
+## Příloha UV: Převod lokální nejasnosti po prvním návratu do jedné malé opravy
+
+První návrat ke stabilnímu pracovnímu místu někdy neřekne "všechno funguje". Řekne něco jemnějšího: člověk práci dokončil, ale na jednom místě musel hádat, doptat se nebo otevřít starší kontext. To ještě není důvod přepisovat celé pravidlo. Je to důvod převést lokální nejasnost do jedné malé opravy a pak nechat pracovní místo znovu chvíli pracovat.
+
+Lokální nejasnost má tři znaky:
+
+- objevila se v jednom konkrétním pracovním místě;
+- člověk jinak pochopil hlavní pravidlo;
+- oprava se dá udělat bez nové metodiky, bez další šablony a bez návratu k původní debatě.
+
+Pokud některý z těchto znaků chybí, nejde o lokální opravu. Může jít o slabé hlavní pravidlo, nový problém nebo špatně umístěný výstup. V takovém případě malá kosmetická úprava jen oddálí jasnější rozhodnutí.
+
+Začněte zápisem:
+
+```text
+Pracovní místo:
+
+Co při prvním návratu zadrhlo:
+
+Proč je to lokální nejasnost:
+
+Nejmenší oprava:
+
+Co necháváme beze změny:
+
+Jak ověříme příští běžné použití:
+```
+
+Příklad:
+
+```text
+Pracovní místo:
+Checklist landing page, část o důkazu u hlavního rozhodovacího kroku.
+
+Co při prvním návratu zadrhlo:
+Člověk pochopil, že důkaz má být u formuláře, ale nebylo jasné, co dělat u stránky s hlavním CTA na rezervaci konzultace.
+
+Proč je to lokální nejasnost:
+Hlavní pravidlo je použitelné. Chybí jen hranice, že "hlavní rozhodovací krok" nemusí být vždy formulář.
+
+Nejmenší oprava:
+Za větu o důkazu doplníme závorku: "u formuláře, tlačítka rezervace, ceníku nebo jiného hlavního kroku stránky".
+
+Co necháváme beze změny:
+Nepřepisujeme celý checklist a nepřidáváme další příklad pro každý typ stránky.
+
+Jak ověříme příští běžné použití:
+Při další kontrole landing page ověříme, jestli člověk vybere správné místo důkazu bez otevření staré poznámky.
+```
+
+Taková oprava je malá záměrně. Nesnaží se vyřešit všechny budoucí varianty. Řeší jednu konkrétní hranu, která se už ukázala v práci.
+
+### Čtyři typy malé opravy
+
+Lokální nejasnost se obvykle opravuje jedním ze čtyř zásahů:
+
+- Přesunout: text je správný, ale je moc daleko od místa rozhodnutí.
+- Přejmenovat: člověk nerozpoznal, že se pravidlo vztahuje na jeho situaci.
+- Zúžit: pravidlo působí širší, než má být, a svádí k použití mimo rozsah.
+- Doplnit hranici: chybí věta, kdy pravidlo použít a kdy ho nechat být.
+
+Vyberte jen jeden typ zásahu. Kombinace "přesunout, přejmenovat a ještě doplnit příklad" často znamená, že už neopravujete lokální nejasnost, ale přepisujete pracovní místo. To může být správně, ale pak to má dostat vlastní stop podmínku.
+
+Prakticky:
+
+- Pokud člověk větu přehlédl, přesuňte ji blíž ke kroku.
+- Pokud ji našel, ale nepoznal svůj případ, přejmenujte krok běžnějším jazykem.
+- Pokud ji použil moc široce, zúžte její rozsah.
+- Pokud nevěděl, zda platí pro výjimku, doplňte hranici.
+
+Codyho komentář: dobrá malá oprava nemá ambici stát se novou kapitolou. Má být jako dobře dotažený šroubek: nikdo o něm nemluví, ale věc se přestane viklat. Ano, technická metafora, protože jsme u webů a SaaS, ne u poetického kroužku.
+
+### Pravidlo jedné věty
+
+Při lokální opravě si dejte tvrdé omezení: oprava má jít popsat jednou větou. Pokud potřebujete odstavec, tabulku nebo nové rozhodovací schéma, pravděpodobně už nejste v lokální vrstvě.
+
+Dobrá opravná věta:
+
+```text
+V části o důkazu doplňujeme, že hlavní rozhodovací krok může být formulář, rezervace, ceník nebo jiné primární CTA.
+```
+
+Slabá opravná věta:
+
+```text
+Přepracujeme sekci o důkazech, aby lépe pokryla různé typy landing pages, různé fáze zákaznické cesty a různé varianty CTA.
+```
+
+Druhá věta možná popisuje legitimní práci, ale není to lokální oprava po prvním návratu. Je to nová úprava pravidla. Dejte jí vlastní kartu, vlastní ověření a vlastní hranici.
+
+### Co neotevírat
+
+Lokální nejasnost je nebezpečná tím, že vypadá jako pozvánka k pečlivosti. Tým začne "když už jsme tady" doplňovat další příklady, nové poznámky, odkazy na staré debaty a varianty pro budoucí situace. Tím se z malé opravy stane další vrstva.
+
+Při převodu lokální nejasnosti proto výslovně neotevírejte:
+
+- celý původní návrh;
+- další příklady, které se v práci ještě neukázaly;
+- nové měření používání pracovního místa;
+- další povinné pole v checklistu;
+- staré zákaznické podklady, které už byly uklizené;
+- obecnou debatu o tom, jestli pravidlo nemá být celé jinak.
+
+Pokud se obecná debata opakovaně vrací, je to signál pro úpravu hlavního pravidla. Ale jednorázová lokální nejasnost si nezaslouží plný návrat starého rozsahu.
+
+### Privacy-first oprava
+
+Malá oprava po prvním návratu nemá obnovovat dočasná data. Není potřeba přikládat screenshot původního problému, citovat zákaznickou situaci ani evidovat, kdo přesně se zasekl. Stačí popsat nejasnost obecně.
+
+Privacy-first zápis:
+
+```text
+Oprava vychází z prvního běžného použití pracovního místa. Neobnovujeme původní zákaznické podklady, nepřidáváme sledování použití šablony a nezapisujeme osobní hodnocení člověka, který na nejasnost narazil.
+```
+
+Tato věta chrání dvě věci najednou. Chrání soukromí a chrání pracovní kulturu. Cílem není sledovat lidi, jak používají pravidla. Cílem je opravit pravidlo tak, aby lidem méně překáželo.
+
+### Karta malé opravy
+
+```text
+Pracovní místo:
+
+Výsledek prvního návratu:
+- lokálně nejasné
+
+Konkrétní nejasnost:
+
+Typ opravy:
+- přesunout / přejmenovat / zúžit / doplnit hranici
+
+Opravná věta:
+
+Co přesně měníme:
+
+Co výslovně neměníme:
+
+Jaká data neobnovujeme ani nesbíráme:
+
+Ověření při dalším běžném použití:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Checklist landing page.
+
+Výsledek prvního návratu:
+Lokálně nejasné.
+
+Konkrétní nejasnost:
+Nebylo jasné, že hlavní rozhodovací krok může být i rezervace konzultace, nejen formulář.
+
+Typ opravy:
+Doplnit hranici.
+
+Opravná věta:
+Hlavní rozhodovací krok může být formulář, tlačítko rezervace, ceník nebo jiné primární CTA stránky.
+
+Co přesně měníme:
+Přidáváme krátkou závorku k existující větě v checklistu.
+
+Co výslovně neměníme:
+Nepřidáváme nový příklad, novou sekci ani další variantu checklistu.
+
+Jaká data neobnovujeme ani nesbíráme:
+Neotevíráme původní zákaznický kontext, screenshoty ani interní komentáře k prvnímu návratu.
+
+Ověření při dalším běžném použití:
+Při další landing page kontrole člověk vybere místo důkazu bez historie poznámky.
+
+Vlastník:
+Owner checklistu.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte kartu prvního návratu a označte přesné místo nejasnosti.
+2. Minuta 2: ověřte, že jde opravdu o lokální nejasnost, ne o slabé hlavní pravidlo.
+3. Minuta 3: vyberte jeden typ opravy: přesunout, přejmenovat, zúžit nebo doplnit hranici.
+4. Minuta 4: napište opravnou větu jednou větou.
+5. Minuta 5: zapište, co se výslovně nemění.
+6. Minuta 6: proveďte privacy-first kontrolu bez obnovy starých podkladů.
+7. Minuta 7: určete ověření při dalším běžném použití.
+
+Výstup workshopu:
+
+```text
+Lokální nejasnost je převedená do jedné malé opravy v nejbližším pracovním místě. Původní rozsah zůstává zavřený, dočasné podklady se neobnovují a další ověření proběhne až při běžné práci.
+```
+
+### Checklist malé opravy
+
+- Je jasné, co přesně při prvním návratu zadrhlo?
+- Ověřili jsme, že jde o lokální nejasnost, ne o nový problém?
+- Vybrali jsme jen jeden typ opravy?
+- Dá se oprava popsat jednou větou?
+- Měníme nejbližší pracovní místo, ne celý systém kolem něj?
+- Je napsané, co výslovně necháváme beze změny?
+- Neotevíráme původní zákaznické podklady, screenshoty ani interní komentáře?
+- Nepřidáváme tracking používání šablony ani hodnocení konkrétního člověka?
+- Má oprava ověření při dalším běžném použití?
+- Zůstává původní širší návrh zavřený, pokud se neobjevil skutečný návratový signál?
+
+Malá oprava po lokální nejasnosti má být poslední, ne první impuls k větší práci. Když stačí jedna věta, napište jednu větu. Když nestačí, pojmenujte větší problém samostatně. Tím pracovní místo zůstane použitelné a tým se neutopí v nekonečném ladění textu, který už vlastně funguje.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha UV o převod lokální nejasnosti po prvním návratu do jedné malé opravy: rozlišení lokální nejasnosti od slabého pravidla, typy oprav, pravidlo jedné věty, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UU o první návrat ke stabilnímu pracovnímu místu po uzavřené vysvětlující poznámce: ověření při reálném úkolu, čtyři výsledky návratu, vědomé nic, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha US o ověření vysvětlující poznámky při dalším běžném použití: reálné ověření v práci, čtyři výsledné stavy, zkrácení poznámky, přepis hlavní věty, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UR o převodu slabého dotazu po klidném návratu do vysvětlující poznámky: rozlišení dotazu od tření, umístění poznámky, pravidlo jedné poznámky, privacy-first hranice, karta, mini workshop a checklist.
