@@ -154498,8 +154498,292 @@ Stabilní pracovní místo bylo po uzavřené malé opravě použito v běžné 
 
 První návrat po uzavřené malé opravě je zkouška trpělivosti. Když pravidlo funguje, nechte ho fungovat. Když trochu drhne, neskákejte hned po tužce. A když se bez historie nedá použít, opravujte nejbližší příčinu, ne celý svět kolem.
 
+## Příloha UZ: Převod slabého tření po prvním návratu do čekací poznámky
+
+Slabé tření po prvním návratu ke stabilnímu pracovnímu místu není automaticky chyba. Často je to jen signál, že člověk u pravidla na chvíli zpomalil, položil doplňující otázku nebo si ověřil hranici použití. Pokud výstup vznikl správně a nebylo potřeba otevírat původní historii opravy, není rozumné hned přepisovat stabilní text.
+
+Tato příloha navazuje na Přílohu UY. Řeší stav `slabé tření`: pracovní místo fungovalo, ale objevila se drobná nejistota, kterou nechcete ignorovat ani nafouknout do nové opravy.
+
+Otázka zní:
+
+```text
+Jak zachytíme slabé tření tak, aby se neztratilo, ale zároveň nerozbilo stabilitu pracovního místa?
+```
+
+Odpovědí je čekací poznámka. Je krátká, podmíněná a dočasná. Neříká "měníme pravidlo". Říká "všimli jsme si drobného signálu a vrátíme se k němu jen tehdy, když se zopakuje nebo začne bránit práci".
+
+### Nejdřív potvrďte, že jde opravdu o slabé tření
+
+Slabé tření má tři znaky:
+
+- člověk pracovní místo našel bez speciální navigace;
+- úkol dokončil správně nebo jen s malou nejistotou;
+- nebylo nutné otevřít původní opravnou kartu, starý komentář ani zákaznický kontext.
+
+Pokud některý znak chybí, nejde o slabé tření. Když člověk pracovní místo nenašel, řešte trasu. Když musel číst starou historii, řešte stabilizaci. Když vznikl špatný výstup, řešte pravidlo nebo šablonu. Čekací poznámka není náplast na skutečné selhání.
+
+Příklad slabého tření:
+
+```text
+Člověk správně použil checklist landing page a umístil důkaz k rezervaci ukázky. Chvíli si ale nebyl jistý, jestli slovo "primární akce" zahrnuje i odkaz na ceník.
+```
+
+Příklad, který už není slabé tření:
+
+```text
+Člověk musel najít starou kartu opravy, aby pochopil, proč se důkaz nemá vázat jen na formulář.
+```
+
+V druhém případě čekací poznámka nepomůže. Stabilní znění není samostatné a potřebuje úzkou kontrolu.
+
+### Zapište čekací poznámku mimo hlavní pravidlo
+
+Čekací poznámka nemá bydlet přímo v pravidle, pokud pravidlo pořád funguje. Jinak začnete stabilní pracovní místo zahušťovat podmínkami, které se možná už nikdy nevrátí.
+
+Dobrá čekací poznámka obsahuje:
+
+```text
+Slabé tření:
+Kde se objevilo:
+Proč zatím neměníme pravidlo:
+Návratová podmínka:
+Expirace:
+Co výslovně neotevíráme:
+Privacy-first hranice:
+```
+
+Vyplněný příklad:
+
+```text
+Slabé tření:
+Krátká nejistota, jestli "primární akce" zahrnuje i odkaz na ceník.
+
+Kde se objevilo:
+Při kontrole landing page bez formuláře.
+
+Proč zatím neměníme pravidlo:
+Výstup byl správný a nejistota se objevila poprvé.
+
+Návratová podmínka:
+Stejná otázka se objeví při dalším použití checklistu nebo u jiné role.
+
+Expirace:
+Po třech dalších použitích bez opakování poznámku zavřeme.
+
+Co výslovně neotevíráme:
+Nepřepisujeme checklist, nepřidáváme další příklady a neměníme měření landing page.
+
+Privacy-first hranice:
+Neukládáme screenshot stránky ani osobní komentář; stačí zobecněná poznámka o tření.
+```
+
+Tím se zachová signál bez okamžité změny. Tým ví, na co si dát pozor, ale pracovní místo zůstává klidné.
+
+### Nastavte návratovou podmínku, ne pocit
+
+Čekací poznámka bez návratové podmínky je jen odložený neklid. Musí být jasné, co se má stát, aby se téma znovu otevřelo.
+
+Slabé návratové podmínky:
+
+```text
+Až na to bude čas.
+Když to bude někomu připadat nejasné.
+Při příští větší revizi dokumentace.
+```
+
+Lepší návratové podmínky:
+
+```text
+Stejná otázka se objeví při dalším použití pracovního místa.
+Stejné tření se objeví u druhé role.
+Tření začne blokovat dokončení úkolu bez pomoci.
+Kvůli nejistotě vznikne špatný pracovní výstup.
+```
+
+Návratová podmínka chrání před dvěma extrémy. Bez ní tým buď zapomene, že něco drhlo, nebo se k poznámce vrací pokaždé, když někdo otevře dokument. Ani jedno není dobrý provoz.
+
+### Dejte poznámce expiraci
+
+Každá čekací poznámka má mít konec. Když se slabé tření neopakuje, zavřete ji. Jinak se z čekacích poznámek stane skrytý backlog drobných obav.
+
+Použitelné expirace:
+
+- po třech dalších použitích bez opakování;
+- po jednom měsíci běžného provozu;
+- po dokončení další podobné stránky nebo šablony;
+- při nejbližším plánovaném review pracovního místa, pokud k němu dojde dřív.
+
+Expirace neznamená, že problém byl navždy vyřešený. Znamená, že pro něj teď nemáte opakovaný pracovní důkaz. Stabilní místo má přednost před preventivním vrstvením poznámek.
+
+Krátký zápis uzavření:
+
+```text
+Čekací poznámka expirovala bez opakování signálu. Pracovní místo neměníme a poznámku zavíráme.
+```
+
+### Oddělte slabé tření od nového problému
+
+Při prvním návratu se může objevit i nová otázka. Například kontrolujete důkaz u CTA a někdo si všimne, že stránka má nejasný pricing. To může být důležité, ale není to pokračování malé opravy.
+
+Rozlišujte:
+
+```text
+Slabé tření:
+Týká se přímo stabilní věty nebo jejího použití.
+
+Nový problém:
+Týká se sousedního rozhodnutí, jiné části stránky, jiného procesu nebo jiné role.
+```
+
+Příklad:
+
+```text
+Slabé tření:
+Není jasné, jestli "primární akce" zahrnuje ceník.
+
+Nový problém:
+Ceník neříká, co je v základním balíčku.
+```
+
+Slabé tření může jít do čekací poznámky. Nový problém patří do samostatné karty, nebo se vědomě zavře. Nemíchejte ho do původní větve. Jinak přestanete vědět, co vlastně ověřujete.
+
+### Privacy-first čekací poznámka
+
+Čekací poznámka má být datově lehká. Nepotřebuje ukládat kopie obrazovek, přepis interní komunikace ani seznam lidí, kteří se ptali. Stačí obecný popis tření a pracovní podmínka návratu.
+
+Do poznámky patří:
+
+- pracovní místo;
+- obecný popis slabého tření;
+- důvod, proč se teď nic nemění;
+- návratová podmínka;
+- expirace;
+- hranice, jaká data se nebudou sbírat.
+
+Do poznámky nepatří:
+
+- zákaznické údaje;
+- screenshoty nebo exporty;
+- osobní hodnocení člověka;
+- citace interního chatu;
+- nový tracking používání pravidla.
+
+Privacy-first věta:
+
+```text
+Slabé tření zapisujeme jako obecný pracovní signál. Neuchováváme podklady z konkrétní situace, nesledujeme používání pravidla po lidech a k tématu se vrátíme jen při opakování nebo expiraci.
+```
+
+Codyho komentář: čekací poznámka má být malá brzda, ne nová evidence mikropohybů. Pokud kvůli jedné nejistotě začnete sbírat důkazy o každém použití pravidla, slabé tření jste nevysvětlili. Jen jste mu postavili administrativní stojan.
+
+### Karta čekací poznámky po prvním návratu
+
+```text
+Pracovní místo:
+
+Uzavřená malá oprava:
+
+Stabilní znění:
+
+Skutečný pracovní úkol:
+
+Slabé tření:
+
+Výstup práce:
+- správný / částečně správný / špatný
+
+Proč zatím neměníme pracovní místo:
+
+Návratová podmínka:
+
+Expirace:
+
+Co výslovně neotevíráme:
+
+Jaká data neukládáme ani neobnovujeme:
+
+Vlastník kontroly:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Checklist landing page.
+
+Uzavřená malá oprava:
+Důkaz se váže na hlavní rozhodovací krok stránky, nejen na formulář.
+
+Stabilní znění:
+Důkaz patří k hlavnímu rozhodovacímu kroku stránky: formuláři, rezervaci, ceníku nebo jiné primární akci.
+
+Skutečný pracovní úkol:
+Kontrola landing page pro SaaS pilot.
+
+Slabé tření:
+Krátká nejistota, jestli "primární akce" zahrnuje i ceník.
+
+Výstup práce:
+Správný.
+
+Proč zatím neměníme pracovní místo:
+Nejistota se objevila jednou a neblokovala dokončení kontroly.
+
+Návratová podmínka:
+Stejná otázka se objeví při dalším použití checklistu nebo u jiné role.
+
+Expirace:
+Po třech dalších použitích bez opakování.
+
+Co výslovně neotevíráme:
+Nepřidáváme příklady, nepřepisujeme checklist a neměníme strukturu landing page.
+
+Jaká data neukládáme ani neobnovujeme:
+Neukládáme screenshot stránky, zákaznický kontext ani osobní komentář.
+
+Vlastník kontroly:
+Vlastník pracovního místa.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: ověřte, že výsledek práce byl správný.
+2. Minuta 2: pojmenujte slabé tření jednou větou.
+3. Minuta 3: rozhodněte, proč se teď pracovní místo nemění.
+4. Minuta 4: napište návratovou podmínku.
+5. Minuta 5: nastavte expiraci.
+6. Minuta 6: zapište privacy-first hranici a zavřete téma mimo hlavní pravidlo.
+
+Výstup workshopu:
+
+```text
+Slabé tření po prvním návratu je zachycené jako čekací poznámka s návratovou podmínkou, expirací a privacy-first hranicí. Stabilní pracovní místo se zatím nemění.
+```
+
+### Checklist čekací poznámky
+
+- Potvrdili jsme, že šlo opravdu o slabé tření?
+- Vznikl správný pracovní výstup?
+- Nebylo nutné otevírat původní historii opravy?
+- Zapsali jsme poznámku mimo hlavní pravidlo?
+- Je jasné, proč teď pracovní místo neměníme?
+- Má poznámka konkrétní návratovou podmínku?
+- Má poznámka expiraci?
+- Oddělili jsme nový problém od původní větve?
+- Neuložili jsme screenshoty, zákaznická data ani osobní komentáře?
+- Nepřidali jsme tracking používání pravidla?
+- Ví vlastník, kdy poznámku zavřít, převést do malé úpravy nebo zahodit?
+
+Čekací poznámka je dobrá právě tím, že nic nepředstírá. Neříká, že problém neexistuje. Neříká ani, že je potřeba hned měnit pravidlo. Drží drobný signál v malém prostoru, dokud se neukáže, jestli má skutečnou váhu.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha UZ o převod slabého tření po prvním návratu do čekací poznámky: rozlišení slabého tření od selhání, návratová podmínka, expirace, oddělení nového problému, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UY o první běžný návrat ke stabilnímu pracovnímu místu po uzavřené malé opravě: ověření v reálné práci, čtyři výsledky návratu, klidné použití, čekací poznámka pro slabé tření, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UX o uzavření potvrzené malé opravy do stabilního pracovního místa: přepis do přítomného času, zavření pomocných stop, hranice proti dalšímu zlepšování, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o falešném poplachu návratového signálu: rozlišení chyby trasy a okolí, rozhodnutí trasu neměnit, privacy-first úklid podkladů, karta a checklist.
