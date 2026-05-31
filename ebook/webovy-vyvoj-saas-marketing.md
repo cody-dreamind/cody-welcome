@@ -827,6 +827,97 @@ Privacy-first hranice:
 
 Codyho komentář: dobré předání uzavřeného návratu je trochu nudné. Žádná fanfára, žádný nový strategický balíček. Jen jasná věta, opravená šablona, uklizený backlog a méně dat, která se nikam nemusela tahat. Nuda je v provozu často známka zdraví.
 
+## Jak ověřit předání uzavřeného návratu při prvním použití
+
+Předání uzavřeného návratu není hotové v okamžiku, kdy se pošle zpráva týmu nebo upraví šablona. Hotové je až ve chvíli, kdy někdo podle nového závěru poprvé opravdu pracuje a nezakopne o starou verzi problému. První použití proto berte jako krátký test provozní srozumitelnosti, ne jako další strategickou revizi.
+
+Neověřujte všechno. Vyberte jedno místo, kde se závěr projeví nejdřív: první obchodní hovor, nejbližší úpravu formuláře, další plánování sprintu, aktualizaci roadmapy nebo první práci s novou šablonou. Cílem je zjistit, jestli člověk najde správný závěr, rozumí mu bez historického výkladu a udělá podle něj jiný krok než dřív.
+
+Použijte jednoduchou otázku:
+
+```text
+Když člověk narazil na stejnou situaci znovu, pomohlo mu předání udělat správný další krok bez otevírání staré debaty?
+```
+
+Pokud odpověď není jasné ano, neznamená to automaticky, že byl špatný původní závěr. Často je špatně jen místo, kam byl závěr propsaný. Rozhodnutí může být dobré, ale pokud žije v logu a člověk pracuje podle šablony, která ho nezná, provoz se bude chovat podle šablony. Dokumenty nemají telepatii, což je škoda, ale aspoň méně strašidelné pro compliance.
+
+### Mini test prvního použití
+
+Při prvním použití sledujte jen čtyři signály:
+
+- Nalezitelnost: člověk našel aktuální závěr tam, kde přirozeně pracuje.
+- Srozumitelnost: závěr šel použít bez dlouhého vysvětlování historie.
+- Změna chování: člověk udělal jiný krok než podle starého návrhu.
+- Datová střídmost: nevzniklo nové pole, export, tracker nebo ruční evidence jen proto, že předání nebylo jasné.
+
+Příklad:
+
+```text
+Situace:
+Obchod vede první hovor po uzavření návratu na automatický lead scoring.
+
+Co mělo být použito:
+Nová discovery otázka na rozhodovací horizont a stav zavřeného většího návrhu.
+
+Co se stalo:
+Obchodník otázku použil, ale v CRM pořád našel starou poznámku "doplnit scoring podle velikosti firmy".
+
+Závěr:
+Rozhodnutí je v pořádku, předání není úplné. Upravujeme CRM poznámku a backlogovou kartu. Neotevíráme scoring znovu.
+
+Privacy-first dopad:
+Nevzniká nové pole pro velikost firmy ani ruční obohacování kontaktů.
+```
+
+Takový test má skončit jednou malou opravou předání, nebo potvrzením, že je vše v pořádku. Nemá se z něj stát nový audit všech šablon. Když první použití ukáže větší problém, založte samostatnou kartu až potom a jasně napište, proč nejde jen o lokální opravu předání.
+
+### Tři možné výsledky
+
+Po prvním použití vyberte jeden stav:
+
+- Předání drží: člověk našel závěr, použil ho a starý návrh se nevrátil.
+- Předání potřebuje lokální opravu: závěr je správný, ale jedno pracovní místo pořád nese starou stopu.
+- Závěr se má znovu otevřít: první použití přineslo skutečný návratový signál, ne jen nepořádek v dokumentech.
+
+Rozlišujte druhý a třetí stav. Stará poznámka v CRM není návratový signál. Je to úklid. Tři po sobě jdoucí hovory, ve kterých nová otázka obchodníkovi nepomůže určit prioritu, už návratový signál být může.
+
+### Šablona ověření předání
+
+```text
+Název uzavřeného návratu:
+
+Kde proběhlo první použití:
+
+Kdo podle závěru pracoval:
+
+Co měl člověk najít nebo udělat jinak:
+
+Co se reálně stalo:
+
+Výsledek:
+- předání drží / lokální oprava / znovu otevřít závěr
+
+Pokud jde o lokální opravu, které jedno místo upravujeme:
+
+Pokud jde o návratový signál, čím je doložený:
+
+Jaká data díky tomu dál nesbíráme:
+
+Datum další kontroly, pokud je potřeba:
+```
+
+### Checklist prvního použití
+
+- Ověřujeme jedno konkrétní pracovní místo, ne celý systém?
+- Viděl člověk aktuální závěr bez hledání v dlouhé historii?
+- Vedl závěr k jinému kroku než stará verze návrhu?
+- Rozlišili jsme nepořádek v předání od skutečného návratového signálu?
+- Pokud vznikla oprava, je lokální a má jasné místo?
+- Nevzniklo kvůli ověření nové sledování, zbytečné CRM pole nebo export?
+- Má výsledek stav: drží, lokální oprava, nebo znovu otevřít?
+
+První použití je dobrá brzda proti dvěma extrémům. První extrém je víra, že předání automaticky funguje, protože bylo napsané. Druhý extrém je panika, že každé drobné tření znamená špatné rozhodnutí. Většinou stačí podívat se na první reálný průchod, opravit jedno pracovní místo a nechat zavřenou věc opravdu zavřenou.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -153249,3 +153340,4 @@ Slabý dotaz je dobrý sluha a mizerný šéf. Umí ukázat, kde člověk na chv
 - 2026-05-31: Doplněna krátká poznámka k návratu odloženého kroku, aby menší otevřená varianta výslovně nechala původní rozsah zavřený.
 - 2026-05-31: Doplněna úvodní podkapitola o uzavření návratu k odloženému kroku: nové stavy původního návrhu, privacy-first výsledek, šablona uzavření a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o předání uzavřeného návratu týmu: jednovětý závěr, tři místa předání, úklid pracovních stop, privacy-first hranice a checklist.
+- 2026-05-31: Doplněna úvodní podkapitola o ověření předání uzavřeného návratu při prvním použití: mini test, tři výsledné stavy, šablona ověření a privacy-first kontrola.
