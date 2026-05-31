@@ -154237,8 +154237,270 @@ Potvrzená malá oprava je začleněná do stabilního pracovního místa, pomoc
 
 Uzavřená malá oprava má být skoro neviditelná. Člověk, který přijde později, si nemá říct "aha, tady někdo kdysi řešil nejasnost". Má si říct "dobře, tohle pravidlo mi pomohlo rozhodnout". To je tichý, ale důležitý rozdíl mezi dokumentací, která se udržuje kvůli sobě, a pracovním místem, které opravdu pomáhá.
 
+## Příloha UY: První běžný návrat ke stabilnímu pracovnímu místu po uzavřené malé opravě
+
+Po uzavření potvrzené malé opravy se pracovní místo nesmí hned znovu stát projektem. Má se vrátit do běžného provozu a chvíli prostě sloužit. První návrat je proto úmyslně lehký: neověřuje celý systém, ale jen to, jestli stabilizovaná oprava nezůstala závislá na paměti lidí, kteří ji vytvořili.
+
+Otázka zní:
+
+```text
+Použilo se pracovní místo při normální práci tak, že potvrzená oprava pomohla bez připomínání své historie?
+```
+
+Když ano, nic dalšího nedělejte. To není lenost, to je disciplína. Každé stabilní pracovní místo potřebuje období, kdy ho tým používá bez dalšího ladění. Jinak se z něj nestane návyk, ale permanentně otevřený dokument.
+
+### Návrat bez slavnostní kontroly
+
+První návrat po uzavřené malé opravě má přijít z reálné práce. Někdo připravuje novou landing page, kontroluje onboardingový e-mail, doplňuje sales kartu, upravuje poptávkový formulář nebo předává checklist novému člověku. V tu chvíli se pracovní místo použije a krátce se zapíše výsledek.
+
+Stačí tento rámec:
+
+```text
+Pracovní místo:
+
+Uzavřená malá oprava:
+
+Skutečný úkol:
+
+Byla oprava použitelná jako normální součást pravidla:
+- ano / částečně / ne
+
+Co se stalo:
+
+Co se kvůli tomu mění:
+```
+
+Příklad:
+
+```text
+Pracovní místo:
+Checklist landing page.
+
+Uzavřená malá oprava:
+Důkaz patří k hlavnímu rozhodovacímu kroku stránky, nejen k formuláři.
+
+Skutečný úkol:
+Kontrola nové stránky pro SaaS pilot.
+
+Byla oprava použitelná jako normální součást pravidla:
+Ano.
+
+Co se stalo:
+Člověk umístil důkaz k bloku s rezervací ukázky a nepotřeboval vědět, proč byla věta doplněná.
+
+Co se kvůli tomu mění:
+Nic. Pracovní místo zůstává stabilní.
+```
+
+Tento zápis je krátký záměrně. Čím víc kolem stabilního pravidla vytvoříte dokumentace, tím méně stabilně bude působit. První návrat má dodat jistotu, ne další vrstvu.
+
+### Čtyři výsledky návratu
+
+Po prvním běžném návratu vyberte jeden stav:
+
+- Klidné použití: pracovní místo fungovalo a není potřeba nic měnit.
+- Slabé tření: člověk práci dokončil, ale jedna formulace nebo umístění trochu zdržely.
+- Návrat staré historie: člověk musel otevřít původní kartu, poznámku nebo kontext opravy.
+- Nový problém: při použití se objevila jiná otázka, která nepatří k uzavřené opravě.
+
+Stav "klidné použití" je ideální. Zapište ho a nechte pracovní místo být. Nepřidávejte další příklad jen proto, že vás napadl. Nepřepisujte sousední větu jen proto, že teď máte dokument otevřený. Stabilita potřebuje i trochu nudy.
+
+Stav "slabé tření" neznamená okamžitý zásah. Pokud člověk práci dokončil správně, zapište čekací signál. Malá oprava se nemá opravovat po prvním nepatrném zaváhání, jinak se z ní stane nekonečný ping-pong.
+
+Stav "návrat staré historie" je vážnější. Znamená, že stabilizace možná neproběhla dost čistě. Buď stabilní věta nestačí, nebo je na špatném místě, nebo tým pořád spoléhá na kontext, který měl být uklizený. Tady má smysl otevřít úzkou kontrolu pracovního místa.
+
+Stav "nový problém" držte mimo původní větev. Když při kontrole landing page vyplave otázka pricingu, není to chyba opravy důkazu u CTA. Je to jiná pracovní otázka.
+
+### Co znamená klidné použití
+
+Klidné použití má tři znaky:
+
+- člověk našel pravidlo v místě rozhodnutí;
+- dokázal podle něj dokončit úkol bez historie opravy;
+- nevznikla nová datová, procesní ani dokumentační vrstva.
+
+Dobrá závěrečná věta:
+
+```text
+Pracovní místo bylo po uzavřené malé opravě použito v běžné práci bez návratu k původní historii; nic dalšího neměníme.
+```
+
+Tahle věta je silnější, než vypadá. Říká týmu, že stabilní stav je povolený. Ne každá kontrola musí skončit změnou. Ne každé použití pravidla musí vyrobit záznam na půl stránky. A ne každý drobný nápad si zaslouží zápis do backlogu.
+
+Codyho komentář: jestli po každém dobrém použití šablony přidáte další poznámku, gratuluju, právě jste vynalezli dokumentační kompost. Něco z toho možná jednou vyroste, ale nejdřív to začne trochu zapáchat.
+
+### Jak zachytit slabé tření bez nové opravy
+
+Slabé tření je situace, kdy se práce povedla, ale nebyla úplně plynulá. Člověk se na chvíli zastavil, přečetl větu dvakrát nebo se zeptal, jestli pravidlo platí i pro jeho variantu. Pokud výstup nakonec vznikl správně, nemusíte hned opravovat text.
+
+Použijte čekací poznámku:
+
+```text
+Slabé tření:
+
+Kde se objevilo:
+
+Proč zatím neměníme pracovní místo:
+
+Návratová podmínka:
+- stejné tření se zopakuje při dalším použití / objeví se u jiné role / začne blokovat dokončení úkolu
+
+Expirace:
+```
+
+Příklad:
+
+```text
+Slabé tření:
+Člověk si nebyl jistý, jestli "primární akce" zahrnuje i klik na ceník.
+
+Kde se objevilo:
+V checklistu landing page při kontrole stránky bez formuláře.
+
+Proč zatím neměníme pracovní místo:
+Úkol byl dokončen správně a nejasnost se zatím objevila jednou.
+
+Návratová podmínka:
+Pokud se stejná otázka objeví ještě jednou při kontrole jiné stránky, otevřeme lokální úpravu formulace.
+
+Expirace:
+Po třech dalších použitích bez opakování poznámku zavřeme.
+```
+
+Čekací poznámka chrání pracovní místo před unáhleným laděním. Zároveň chrání tým před tím, aby drobné tření zmizelo beze stopy. Je to parkovací brzda, ne nový projekt.
+
+### Privacy-first návrat
+
+První návrat ke stabilnímu pracovnímu místu nepotřebuje sledovat lidi. Nepotřebuje session recording, detailní časové záznamy, screenshoty ani seznam všech kliknutí. Stačí pracovní výsledek a obecný popis tření, pokud nějaké vzniklo.
+
+Do záznamu patří:
+
+- jaké pracovní místo se použilo;
+- jaký úkol se řešil;
+- zda oprava fungovala bez historie;
+- jaký stav návratu tým vybral;
+- co se nemění.
+
+Do záznamu nepatří:
+
+- osobní hodnocení člověka;
+- citace interní komunikace;
+- zákaznické detaily mimo nezbytný kontext;
+- screenshoty z nástrojů;
+- nové trackery pro používání pravidla.
+
+Privacy-first věta:
+
+```text
+Návrat ověřil pracovní výsledek, ne chování jednotlivce. Neobnovujeme původní podklady, nezavádíme tracking používání pravidla a slabé tření zapisujeme jen obecně.
+```
+
+Tohle je důležité hlavně ve chvíli, kdy tým začne měřit "adopci" interních pravidel. Adopce není počet otevření dokumentu. Adopce je to, že práce proběhne lépe, rychleji nebo s menší nejistotou.
+
+### Karta prvního návratu po malé opravě
+
+```text
+Pracovní místo:
+
+Uzavřená malá oprava:
+
+Stabilní znění:
+
+Skutečný pracovní úkol:
+
+Rozhodnutí, které mělo pracovní místo podpořit:
+
+Bylo použitelné bez historie opravy:
+- ano / částečně / ne
+
+Výsledek návratu:
+- klidné použití / slabé tření / návrat staré historie / nový problém
+
+Co se mění:
+
+Co výslovně neměníme:
+
+Čekací poznámka, pokud vzniká:
+
+Jaká data neobnovujeme ani nesbíráme:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Checklist landing page.
+
+Uzavřená malá oprava:
+Důkaz se váže na hlavní rozhodovací krok stránky, nejen na formulář.
+
+Stabilní znění:
+Důkaz patří k hlavnímu rozhodovacímu kroku stránky: formuláři, rezervaci, ceníku nebo jiné primární akci.
+
+Skutečný pracovní úkol:
+Kontrola stránky pro SaaS pilot.
+
+Rozhodnutí, které mělo pracovní místo podpořit:
+Kam umístit důkaz důvěry před hlavním dalším krokem.
+
+Bylo použitelné bez historie opravy:
+Ano.
+
+Výsledek návratu:
+Klidné použití.
+
+Co se mění:
+Nic.
+
+Co výslovně neměníme:
+Nepřidáváme další příklady, neměníme šablonu a neotevíráme původní kartu opravy.
+
+Čekací poznámka:
+Nevzniká.
+
+Jaká data neobnovujeme ani nesbíráme:
+Neotevíráme původní screenshoty, interní komentáře ani zákaznický kontext; nesledujeme používání checklistu po osobách.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte skutečný úkol, při kterém se pracovní místo použilo.
+2. Minuta 2: připomeňte stabilní znění uzavřené opravy.
+3. Minuta 3: ověřte, zda šlo použít bez historie opravy.
+4. Minuta 4: vyberte jeden ze čtyř výsledků návratu.
+5. Minuta 5: rozhodněte, zda se nic nemění, vzniká čekací poznámka, nebo se otevírá úzká kontrola.
+6. Minuta 6: proveďte privacy-first kontrolu bez sledování člověka a bez obnovy starých podkladů.
+
+Výstup workshopu:
+
+```text
+Stabilní pracovní místo bylo po uzavřené malé opravě použito v běžné práci. Výsledek je klidné použití, slabé tření s čekací poznámkou, návrat staré historie k úzké kontrole, nebo nový problém mimo původní větev.
+```
+
+### Checklist prvního návratu
+
+- Proběhl návrat při skutečném pracovním úkolu?
+- Ověřovali jsme pracovní místo, ne výkon člověka?
+- Byla stabilní věta použitelná bez historie opravy?
+- Vybrali jsme jeden ze čtyř výsledků návratu?
+- Pokud šlo o klidné použití, dokázali jsme nic neměnit?
+- Pokud vzniklo slabé tření, použili jsme čekací poznámku místo okamžité úpravy?
+- Pokud se musela otevřít stará historie, víme, kterou část stabilizace zkontrolovat?
+- Oddělili jsme nový problém od původní opravy?
+- Neobnovili jsme zákaznické podklady, screenshoty ani interní komentáře?
+- Nepřidali jsme tracking používání pravidla ani hodnocení konkrétní osoby?
+- Je jasné, kdy se téma znovu otevře a kdy naopak expirovaná poznámka zmizí?
+
+První návrat po uzavřené malé opravě je zkouška trpělivosti. Když pravidlo funguje, nechte ho fungovat. Když trochu drhne, neskákejte hned po tužce. A když se bez historie nedá použít, opravujte nejbližší příčinu, ne celý svět kolem.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha UY o první běžný návrat ke stabilnímu pracovnímu místu po uzavřené malé opravě: ověření v reálné práci, čtyři výsledky návratu, klidné použití, čekací poznámka pro slabé tření, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UX o uzavření potvrzené malé opravy do stabilního pracovního místa: přepis do přítomného času, zavření pomocných stop, hranice proti dalšímu zlepšování, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o falešném poplachu návratového signálu: rozlišení chyby trasy a okolí, rozhodnutí trasu neměnit, privacy-first úklid podkladů, karta a checklist.
 - 2026-05-31: Doplněna Příloha UW o ověření malé opravy po dalším běžném použití: skutečné použití, čtyři výsledky ověření, potvrzení nebo jedno doladění, převod do hlavního pravidla, privacy-first záznam, karta, mini workshop a checklist.
