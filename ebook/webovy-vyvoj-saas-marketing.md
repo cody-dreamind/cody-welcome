@@ -153595,8 +153595,288 @@ Lokální nejasnost je převedená do jedné malé opravy v nejbližším pracov
 
 Malá oprava po lokální nejasnosti má být poslední, ne první impuls k větší práci. Když stačí jedna věta, napište jednu větu. Když nestačí, pojmenujte větší problém samostatně. Tím pracovní místo zůstane použitelné a tým se neutopí v nekonečném ladění textu, který už vlastně funguje.
 
+## Příloha UW: Ověření malé opravy po dalším běžném použití
+
+Malá oprava po lokální nejasnosti není hotová tím, že se zapíše do pracovního místa. Hotová je až tehdy, když ji někdo použije při normální práci a zjistí, jestli opravdu odstranila tření. Bez tohoto kroku se drobná úprava snadno tváří jako vyřešený problém, ale ve skutečnosti jen čeká na další opakování stejné otázky.
+
+Ověření nemá být nové kolo velkého auditu. Má odpovědět na jednu úzkou otázku:
+
+```text
+Pomohla malá oprava při dalším běžném použití bez toho, aby si vyžádala další vysvětlování nebo nový proces?
+```
+
+Pokud ano, oprava se může uzavřít. Pokud ne, je potřeba rozlišit, jestli stačí jedno drobné doladění, nebo zda se ukázalo, že původní problém nebyl lokální.
+
+### Ověřujte při skutečné práci
+
+Ověření malé opravy má proběhnout při dalším přirozeném použití pracovního místa. Ne při zvláštním čtení dokumentu, ne při poradě nad kvalitou textu, ne při kontrole autora. Skutečný signál vzniká ve chvíli, kdy někdo potřebuje podle pravidla dokončit úkol.
+
+Krátký záznam:
+
+```text
+Pracovní místo:
+
+Malá oprava:
+
+Skutečný úkol:
+
+Co měla oprava vyjasnit:
+
+Byla použita bez historie původní nejasnosti:
+- ano / částečně / ne
+
+Co se stalo:
+
+Výsledek ověření:
+```
+
+Příklad:
+
+```text
+Pracovní místo:
+Checklist landing page.
+
+Malá oprava:
+U věty o důkazu doplněno, že hlavní rozhodovací krok může být formulář, rezervace, ceník nebo jiné primární CTA stránky.
+
+Skutečný úkol:
+Kontrola nové stránky pro technický audit webu.
+
+Co měla oprava vyjasnit:
+Kam dát důkaz, když primární akce stránky není kontaktní formulář, ale rezervace konzultace.
+
+Byla použita bez historie původní nejasnosti:
+Ano.
+
+Co se stalo:
+Člověk umístil důkaz k bloku s rezervací konzultace a nemusel otevírat starou kartu poznámky.
+
+Výsledek ověření:
+Potvrdit opravu.
+```
+
+Takové ověření je krátké záměrně. Smyslem není vyrobit novou vrstvu dokumentace. Smyslem je zavřít malý kruh: tření, oprava, běžné použití, rozhodnutí.
+
+### Čtyři výsledky ověření
+
+Po dalším běžném použití vyberte jeden ze čtyř stavů:
+
+- Potvrdit: oprava odstranila nejasnost a pracovní místo funguje bez historie.
+- Drobně doladit: oprava pomohla, ale jedna formulace nebo umístění pořád trochu drhne.
+- Převést do hlavního pravidla: ukázalo se, že nejde o lokální okraj, ale o slabší jádro pravidla.
+- Zrušit opravu: oprava nepomohla, zvyšuje nejasnost nebo řeší problém, který se neopakuje.
+
+Stav "potvrdit" znamená, že oprava přestává být opravou. Stává se normální součástí pracovního místa. Už kolem ní nepotřebujete držet kartu, čekací poznámku ani zvláštní hlídání.
+
+Stav "drobně doladit" použijte jen jednou. Pokud jedna malá oprava potřebuje druhé a třetí doladění, nejde o drobnost. Pravděpodobně se dotýká širšího pravidla, pořadí kroků nebo špatně pojmenované pracovní situace.
+
+Stav "převést do hlavního pravidla" je důležitý proto, že chrání tým před lokálními záplatami. Když se stejná hranice objeví ve více pracovních místech, nepřidávejte stejnou poznámku všude. Přepište princip tam, kde má zdroj pravdy.
+
+Stav "zrušit opravu" není selhání. Je to úklid. Některé drobné úpravy vzniknou po jedné slabé situaci a při dalším použití se ukáže, že zbytečně komplikují text. V takovém případě je lepší je čistě odstranit než držet v systému jako památku na opatrnost.
+
+### Jak poznat potvrzenou opravu
+
+Potvrzená oprava má tři znaky:
+
+- člověk ji našel v okamžiku rozhodnutí;
+- dokončil práci bez otevření historie původní nejasnosti;
+- výstup byl lepší nebo stejně dobrý bez nové datové, procesní nebo textové vrstvy.
+
+Praktická potvrzovací věta:
+
+```text
+Malá oprava je potvrzená: při dalším běžném použití vyjasnila rozhodnutí bez otevření původní historie a bez potřeby nové šablony, metriky nebo další poznámky.
+```
+
+Po této větě zavřete opravnou kartu. Do pracovního místa nepřidávejte vysvětlení typu "toto vzniklo po návratu dne...". Historie patří do rozhodovací stopy, ne do běžného nástroje. Člověk, který bude pracovní místo používat za měsíc, potřebuje dobrý text, ne kroniku jeho vzniku.
+
+### Kdy udělat jedno doladění
+
+Jedno doladění dává smysl, když se oprava ukázala správným směrem, ale narazila na malý problém v provedení.
+
+Příklady:
+
+- věta je správná, ale je moc daleko od kroku;
+- slovo "CTA" je pro část týmu méně jasné než "hlavní tlačítko nebo další krok";
+- hranice je dobrá, ale chybí jedno běžné slovo, podle kterého člověk pozná svůj případ;
+- oprava je v checklistu, ale ne v šabloně, kde se práce skutečně dělá.
+
+Doladění napište jednou větou:
+
+```text
+Opravu ponecháváme, ale přesouváme ji přímo k položce checklistu, kde se rozhoduje o důkazu u hlavního kroku stránky.
+```
+
+Nedělejte z doladění druhou iteraci se stejnou šířkou jako původní oprava. Pokud potřebujete znovu definovat problém, nejde o doladění. Je čas zastavit a přerámovat.
+
+### Kdy otevřít hlavní pravidlo
+
+Někdy ověření malé opravy ukáže, že lokální nejasnost byla jen symptom. Člověk se nezasekl na jedné větě, ale na samotném principu. Pak další závorka nepomůže.
+
+Otevřete hlavní pravidlo, když:
+
+- stejná nejasnost vzniká ve více typech úkolů;
+- lidé obcházejí pracovní místo a ptají se na princip ústně;
+- malá oprava musí být zkopírovaná do více šablon;
+- původní pravidlo používá interní jazyk, kterému cílová role nerozumí;
+- pravidlo svádí k většímu sběru dat, než je potřeba pro rozhodnutí.
+
+Příklad převodu:
+
+```text
+Původní malá oprava:
+Hlavní rozhodovací krok může být formulář, rezervace, ceník nebo jiné primární CTA.
+
+Zjištění při ověření:
+Nejasnost se netýká jen landing page. Objevila se i u produktového onboarding checklistu a u sales stránky.
+
+Nové zadání:
+Přepsat hlavní pravidlo z "důkaz u formuláře" na "důkaz u hlavního rozhodovacího kroku".
+
+Co teď neděláme:
+Nepřidáváme lokální poznámku do všech šablon.
+```
+
+Tohle už není pokračování malé opravy. Je to nová malá práce s vlastním rozsahem a ověřením.
+
+### Privacy-first ověření
+
+Ověření malé opravy nemá sledovat lidi. Nemá měřit, kdo jak dlouho četl checklist, kdo zaváhal a kdo klikl na jaký interní odkaz. Stačí ověřit pracovní výsledek.
+
+Do záznamu patří:
+
+- typ pracovního úkolu;
+- rozhodnutí, které mělo být jasnější;
+- obecný výsledek ověření;
+- případná změna pracovního místa;
+- potvrzení, že se neobnovily staré podklady.
+
+Do záznamu nepatří:
+
+- jméno člověka, pokud není nutné pro vlastnictví úkolu;
+- screenshoty z interních systémů;
+- zákaznické citace z původní nejasnosti;
+- časová stopa práce konkrétní osoby;
+- nové analytické eventy pro sledování používání dokumentace.
+
+Privacy-first věta:
+
+```text
+Ověření proběhlo podle pracovního výsledku, ne podle sledování člověka; neobnovili jsme původní zákaznické podklady a nepřidali jsme nový tracking použití šablony.
+```
+
+Codyho komentář: malá oprava má zmenšit tření. Když kvůli jejímu ověření zavedete nový dohled, nový export a nový report, opravili jste větu a rozbili provozní rozum.
+
+### Karta ověření malé opravy
+
+```text
+Pracovní místo:
+
+Malá oprava:
+
+Původní lokální nejasnost:
+
+Skutečné další použití:
+
+Rozhodnutí, které měla oprava podpořit:
+
+Byla oprava použitelná bez historie:
+- ano / částečně / ne
+
+Výsledek ověření:
+- potvrdit / drobně doladit / převést do hlavního pravidla / zrušit
+
+Co měníme:
+
+Co zavíráme:
+
+Co výslovně neotevíráme:
+
+Jaká data neobnovujeme ani nesbíráme:
+
+Další signál, pokud nějaký zůstává:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Checklist landing page.
+
+Malá oprava:
+Doplněná hranice, že hlavní rozhodovací krok může být formulář, rezervace, ceník nebo jiné primární CTA.
+
+Původní lokální nejasnost:
+Nebylo jasné, kam dát důkaz u stránky bez hlavního formuláře.
+
+Skutečné další použití:
+Kontrola stránky pro technický audit webu.
+
+Rozhodnutí, které měla oprava podpořit:
+Kam umístit důkaz důvěry před hlavním dalším krokem.
+
+Byla oprava použitelná bez historie:
+Ano.
+
+Výsledek ověření:
+Potvrdit.
+
+Co měníme:
+Nic. Oprava zůstává jako běžná součást checklistu.
+
+Co zavíráme:
+Kartu malé opravy a návratový signál k této konkrétní nejasnosti.
+
+Co výslovně neotevíráme:
+Nepřepisujeme celou šablonu landing page a nepřidáváme další příklady.
+
+Jaká data neobnovujeme ani nesbíráme:
+Neotevíráme původní zákaznický kontext, screenshoty ani interní komentáře; nepřidáváme tracking práce s checklistem.
+
+Další signál:
+Pokud se stejná nejasnost objeví mimo landing pages, otevřeme úpravu hlavního pravidla.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte skutečné další použití pracovního místa.
+2. Minuta 2: připomeňte jednou větou, co měla malá oprava vyjasnit.
+3. Minuta 3: ověřte, zda šla použít bez původní historie.
+4. Minuta 4: vyberte jeden ze čtyř výsledků ověření.
+5. Minuta 5: rozhodněte, co se mění a co se zavírá.
+6. Minuta 6: proveďte privacy-first kontrolu bez obnovy starých podkladů.
+7. Minuta 7: napište další signál jen tehdy, pokud opravdu zůstává.
+
+Výstup workshopu:
+
+```text
+Malá oprava je po dalším běžném použití potvrzená, jednou doladěná, převedená do úpravy hlavního pravidla, nebo zrušená. Původní lokální nejasnost nezůstává viset jako otevřený drobný problém.
+```
+
+### Checklist ověření malé opravy
+
+- Proběhlo ověření při skutečné práci?
+- Bylo jasné, co měla malá oprava vyjasnit?
+- Šla oprava použít bez otevření původní historie?
+- Vybrali jsme jeden ze čtyř výsledků ověření?
+- Pokud oprava fungovala, zavřeli jsme její kartu?
+- Pokud drhla, zůstává doladění jednorázové a malé?
+- Pokud se problém ukázal širší, otevřeli jsme hlavní pravidlo místo kopírování poznámek?
+- Pokud oprava nepomohla, umíme ji čistě zrušit?
+- Neobnovili jsme staré zákaznické podklady, screenshoty ani interní komentáře?
+- Nepřidali jsme tracking používání pracovního místa ani hodnocení člověka?
+- Je napsané, co výslovně neotevíráme dál?
+
+Ověření malé opravy je drobný uzávěrkový krok. Právě proto je cenný. Brání tomu, aby se z každé lokální nejasnosti stal trvale pootevřený proces. Buď oprava funguje a stane se normální součástí práce, nebo nefunguje a tým ji bez sentimentu zmenší, přesune, přepíše do pravidla nebo smaže.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha UW o ověření malé opravy po dalším běžném použití: skutečné použití, čtyři výsledky ověření, potvrzení nebo jedno doladění, převod do hlavního pravidla, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UV o převod lokální nejasnosti po prvním návratu do jedné malé opravy: rozlišení lokální nejasnosti od slabého pravidla, typy oprav, pravidlo jedné věty, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UU o první návrat ke stabilnímu pracovnímu místu po uzavřené vysvětlující poznámce: ověření při reálném úkolu, čtyři výsledky návratu, vědomé nic, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha US o ověření vysvětlující poznámky při dalším běžném použití: reálné ověření v práci, čtyři výsledné stavy, zkrácení poznámky, přepis hlavní věty, privacy-first kontrola, karta, mini workshop a checklist.
