@@ -154016,8 +154016,230 @@ Malá oprava je po dalším běžném použití potvrzená, jednou doladěná, p
 
 Ověření malé opravy je drobný uzávěrkový krok. Právě proto je cenný. Brání tomu, aby se z každé lokální nejasnosti stal trvale pootevřený proces. Buď oprava funguje a stane se normální součástí práce, nebo nefunguje a tým ji bez sentimentu zmenší, přesune, přepíše do pravidla nebo smaže.
 
+## Příloha UX: Uzavření potvrzené malé opravy do stabilního pracovního místa
+
+Potvrzená malá oprava ještě není stabilní jen proto, že při dalším použití pomohla. Stabilní je až ve chvíli, kdy zmizí její dočasný režim: opravná karta, poznámka k ověření, starý návratový signál a vysvětlení, proč se vlastně text měnil. Člověk, který pracovní místo použije později, nemá nést historii drobného tření. Má dostat jasné pravidlo, šablonu nebo checklist, který funguje jako běžná součást práce.
+
+Uzavření proto odpovídá na otázku:
+
+```text
+Jak potvrzenou malou opravu začleníme tak, aby pracovní místo bylo jasnější, ale ne těžší?
+```
+
+Když tento krok přeskočíte, vzniká zvláštní provozní mlha. Oprava je sice potvrzená, ale pořád kolem ní visí dočasné poznámky. Tým pak neví, jestli má text brát jako hotové pravidlo, experiment, výjimku nebo něco, co se má ještě sledovat. Uzavření má tuhle mlhu uklidit.
+
+### Přepište opravu do přítomného času
+
+První krok je jazykový, ale není kosmetický. Ověřená oprava nemá znít jako zásah, který se právě testuje. Má znít jako aktuální pravda pracovního místa.
+
+Místo:
+
+```text
+Po posledním ověření doplňujeme, že důkaz může být i u rezervace konzultace.
+```
+
+pište:
+
+```text
+Důkaz patří k hlavnímu rozhodovacímu kroku stránky: formuláři, rezervaci, ceníku nebo jiné primární akci.
+```
+
+Rozdíl je praktický. První věta nutí čtenáře chápat historii. Druhá věta mu rovnou pomáhá rozhodnout. Pracovní místo nemá být kronika. Má být nástroj.
+
+Při přepisu zkontrolujte tři věci:
+
+- věta popisuje současné pravidlo, ne původ změny;
+- stojí tam, kde člověk skutečně rozhoduje;
+- nezvětšuje rozsah mimo potvrzenou opravu.
+
+Pokud při přepisu zjistíte, že oprava potřebuje dlouhé vysvětlení, ještě ji neuzavírejte. Buď je příliš složitá, nebo se už dotýká hlavního pravidla. Stabilizace není místo pro tajné rozšiřování.
+
+### Zavřete pomocné stopy
+
+Potvrzená oprava po sobě obvykle nechá několik drobných stop: kartu opravy, ověřovací poznámku, dočasný checklist, komentář v dokumentu, položku v backlogu nebo připomínku v rozhodovacím logu. Po uzavření mají zůstat jen dvě věci: stabilní pracovní text a stručná dohledatelná změnová věta.
+
+Praktický úklid:
+
+- opravnou kartu označte jako zavřenou;
+- ověřovací poznámku zkraťte na výsledek;
+- do pracovního místa nepřenášejte interní historii;
+- staré podklady nemažte chaoticky, ale přesuňte je podle retenčního pravidla;
+- v backlogu zavřete položky, které už nemají samostatný další krok.
+
+Krátká změnová věta může znít:
+
+```text
+Malá oprava k umístění důkazu byla potvrzena při běžném použití a začleněna do checklistu landing page jako stabilní pravidlo.
+```
+
+Tato věta stačí pro týmovou paměť. Nepotřebuje citace z původní diskuse, screenshoty ani detailní popis toho, kdo se kde zasekl. Pokud by někdo později potřeboval důkaz, najde rozhodovací stopu. Běžný uživatel pravidla ji číst nemusí.
+
+### Rozlište stabilizaci od dalšího zlepšování
+
+Uzavření potvrzené opravy často svádí k tomu, že tým rovnou opraví další věci kolem. Když už jste v checklistu, napadne vás zkrátit ještě dvě věty, přidat příklad, sjednotit terminologii a upravit sousední šablonu. Někdy je to rozumné. V této iteraci ale ne.
+
+Stabilizace má jeden úkol: začlenit potvrzenou opravu. Všechno ostatní patří do nové karty, jen pokud má vlastní důvod.
+
+Použijte jednoduché třídění:
+
+```text
+Patří do uzavření:
+- přepis potvrzené opravy do stabilní věty;
+- přesun věty na správné pracovní místo;
+- zavření ověřovací karty;
+- krátký changelog.
+
+Nepatří do uzavření:
+- nová sada příkladů;
+- redesign celé šablony;
+- změna metrik;
+- nový reporting používání;
+- úprava sousedních pravidel bez vlastního ověření.
+```
+
+Codyho komentář: uzavření není výprodej všech drobných nápadů, které se cestou objevily. Je to spíš zavření okna po vyvětrání. Vzduch lepší, byt pořád stejný, žádná rekonstrukce kuchyně v osm večer.
+
+### Kdy opravu nezačleňovat
+
+Ne každá potvrzená oprava má automaticky skončit jako stabilní pravidlo. Někdy pomohla jen v jedné okrajové situaci a bylo by škoda kvůli ní zatížit běžný text.
+
+Opravu nezačleňujte, když:
+
+- pomohla jen díky znalosti původní historie;
+- zlepšila jeden případ, ale zhoršila čitelnost běžného použití;
+- vyžaduje vysvětlení delší než samotné pravidlo;
+- opakuje princip, který už má lepší kanonické místo jinde;
+- řeší situaci, která se pravděpodobně nebude vracet;
+- kvůli ní by pracovní místo začalo sbírat víc dat nebo důkazů, než potřebuje.
+
+V takovém případě ji uzavřete jinak:
+
+```text
+Oprava byla při ověření užitečná pro konkrétní situaci, ale nezačleňujeme ji do stabilního pracovního místa. Hlavní pravidlo zůstává beze změny; původní karta je zavřená a téma se vrátí jen při opakování stejného signálu.
+```
+
+Tohle je legitimní výsledek. Stabilní pracovní místo má být krátké a použitelné. Není povinností uchovat každou drobnou pomoc, která jednou zabrala.
+
+### Privacy-first stabilizace
+
+Uzavření je dobrý okamžik na úklid datové stopy. Malá oprava často vznikla z konkrétní situace: zákaznického dotazu, interního komentáře, screenshotu, formulářového výstupu nebo pracovního příkladu. Jakmile je pravidlo stabilní, nepotřebujete kolem něj držet živou historii původních dat.
+
+Privacy-first kontrola:
+
+- ponechte jen zobecněné znění pravidla;
+- z rozhodovací stopy odstraňte zbytečné osobní údaje;
+- nepřenášejte zákaznické citace do běžného checklistu;
+- neuchovávejte screenshoty, pokud už nemají účel;
+- nezavádějte sledování toho, kdo stabilní pravidlo používá;
+- nastavte návratový signál podle pracovního výsledku, ne podle aktivity lidí.
+
+Dobrá stabilizační věta:
+
+```text
+Oprava je začleněná do stabilního pracovního místa v zobecněné podobě; původní podklady se neobnovují, osobní údaje se nepřenášejí a další návrat se otevře jen podle opakovaného pracovního signálu.
+```
+
+Tím chráníte dvě věci najednou: čitelnost pracovního místa a soukromí lidí, jejichž situace opravu původně vyvolala.
+
+### Karta uzavření potvrzené malé opravy
+
+```text
+Pracovní místo:
+
+Potvrzená malá oprava:
+
+Výsledek ověření:
+
+Stabilní znění:
+
+Kam je začleněné:
+
+Co zavíráme:
+
+Co výslovně nepřidáváme:
+
+Co neuchováváme nebo mažeme podle retence:
+
+Návratový signál:
+
+Změnová věta:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní místo:
+Checklist landing page.
+
+Potvrzená malá oprava:
+Důkaz nemusí být navázaný jen na formulář, ale na hlavní rozhodovací krok stránky.
+
+Výsledek ověření:
+Potvrzeno při kontrole stránky pro technický audit webu.
+
+Stabilní znění:
+Důkaz patří k hlavnímu rozhodovacímu kroku stránky: formuláři, rezervaci, ceníku nebo jiné primární akci.
+
+Kam je začleněné:
+Přímo k položce checklistu, která řeší důkaz před hlavním dalším krokem.
+
+Co zavíráme:
+Kartu malé opravy, ověřovací poznámku a návratový signál k této konkrétní nejasnosti.
+
+Co výslovně nepřidáváme:
+Nepřidáváme novou sadu příkladů, nepřepisujeme celou šablonu a neměníme měření landing page.
+
+Co neuchováváme nebo mažeme podle retence:
+Neuchováváme původní screenshot ani interní komentář s konkrétní zákaznickou situací.
+
+Návratový signál:
+Stejná nejasnost se objeví u dvou dalších pracovních míst mimo landing pages.
+
+Změnová věta:
+Potvrzená oprava k umístění důkazu byla začleněna do checklistu landing page jako stabilní pravidlo.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: připomeňte potvrzenou opravu a výsledek ověření.
+2. Minuta 2: napište stabilní znění v přítomném čase.
+3. Minuta 3: určete přesné místo, kam věta patří.
+4. Minuta 4: zavřete pomocné karty a poznámky.
+5. Minuta 5: pojmenujte, co teď výslovně nepřidáváte.
+6. Minuta 6: proveďte privacy-first úklid původních podkladů.
+7. Minuta 7: napište návratový signál jen pro skutečné opakování problému.
+8. Minuta 8: zapište jednu změnovou větu do týmové paměti.
+
+Výstup workshopu:
+
+```text
+Potvrzená malá oprava je začleněná do stabilního pracovního místa, pomocné stopy jsou zavřené, původní datové podklady se neobnovují a další práce se otevře jen při jasném návratovém signálu.
+```
+
+### Checklist uzavření malé opravy
+
+- Je jasné, že oprava byla při dalším běžném použití potvrzená?
+- Přepsali jsme ji do přítomného času jako stabilní pravidlo?
+- Je umístěná přímo u pracovního rozhodnutí?
+- Zmizel z běžného textu jazyk experimentu, opravy a historie?
+- Zavřeli jsme opravnou kartu, ověřovací poznámku a související backlogovou položku?
+- Zapsali jsme krátkou změnovou větu?
+- Výslovně jsme odmítli rozšíření, která do této iterace nepatří?
+- Nezačlenili jsme opravu, pokud by zhoršila běžnou čitelnost?
+- Uklidili jsme původní zákaznické nebo interní podklady podle retenčního pravidla?
+- Nepřidali jsme sledování používání pravidla ani hodnocení konkrétních lidí?
+- Zůstal jen jeden návratový signál pro skutečné opakování problému?
+
+Uzavřená malá oprava má být skoro neviditelná. Člověk, který přijde později, si nemá říct "aha, tady někdo kdysi řešil nejasnost". Má si říct "dobře, tohle pravidlo mi pomohlo rozhodnout". To je tichý, ale důležitý rozdíl mezi dokumentací, která se udržuje kvůli sobě, a pracovním místem, které opravdu pomáhá.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha UX o uzavření potvrzené malé opravy do stabilního pracovního místa: přepis do přítomného času, zavření pomocných stop, hranice proti dalšímu zlepšování, privacy-first stabilizace, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o falešném poplachu návratového signálu: rozlišení chyby trasy a okolí, rozhodnutí trasu neměnit, privacy-first úklid podkladů, karta a checklist.
 - 2026-05-31: Doplněna Příloha UW o ověření malé opravy po dalším běžném použití: skutečné použití, čtyři výsledky ověření, potvrzení nebo jedno doladění, převod do hlavního pravidla, privacy-first záznam, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UV o převod lokální nejasnosti po prvním návratu do jedné malé opravy: rozlišení lokální nejasnosti od slabého pravidla, typy oprav, pravidlo jedné věty, privacy-first záznam, karta, mini workshop a checklist.
