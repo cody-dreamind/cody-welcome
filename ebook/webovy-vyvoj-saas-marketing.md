@@ -4691,6 +4691,149 @@ Kdo drží kontext:
 
 Falešný poplach je dobrý výsledek, pokud po něm zůstane méně šumu. Stabilní trasa zůstane stabilní, stará stopa se uklidí a tým se naučí rozlišovat skutečný signál od ozvěny staré práce. To je přesně ten druh údržby, který nevypadá velkolepě, ale dlouhý rukopis díky němu neztrácí důvěryhodnost.
 
+## Úklid okolí po falešném poplachu
+
+Když se návratový signál ukáže jako falešný poplach, práce ještě není hotová. Nestačí říct "trasa byla v pořádku" a odejít. Falešný poplach skoro vždycky vznikl proto, že někde kolem stabilní trasy zůstala stará stopa: archivní šablona, duplicitní karta, odkaz ve starém rozcestníku, neplatná poznámka v backlogu, dočasný export nebo věta v dokumentaci, která pořád vypadá jako aktivní pravidlo.
+
+Úklid okolí má jeden cíl: odstranit zdroj zmatku bez úpravy funkční trasy. Tým tím dává najevo, že stabilní pravidlo drží, ale okolní pracovní prostředí nemá dál vyrábět podezření, že pravidlo nefunguje.
+
+Začněte krátkou větou:
+
+```text
+Trasu neměníme, protože:
+Falešný poplach vznikl v okolí:
+Uklízíme právě:
+Neotevíráme:
+Návratový signál pro příště:
+```
+
+Příklad:
+
+```text
+Trasu neměníme, protože:
+Aktuální karta zavření bez úkolu je srozumitelná a při použití vede ke správnému rozhodnutí.
+
+Falešný poplach vznikl v okolí:
+V archivu zůstala stará šablona měsíčního review bez směrovky na zavření slabého podnětu.
+
+Uklízíme právě:
+Archivní šablonu označíme jako neplatnou, přidáme odkaz na aktuální šablonu a smažeme pracovní kopii vytvořenou při kontrole.
+
+Neotevíráme:
+Nepřepisujeme kapitolu o kartě změny a nevyrábíme nový index stavů.
+
+Návratový signál pro příště:
+Téma se vrátí jen tehdy, když zbytečný úkol vznikne i při použití aktuální šablony.
+```
+
+Tento zápis chrání před zvláštní chybou: opravovat správné místo jen proto, že se kolem něj našla nepořádná stopa. Pokud je problém ve starém odkazu, opravte odkaz. Pokud je problém v archivní šabloně, označte šablonu. Pokud je problém v dočasném exportu, smažte export. Funkční kapitola nepotřebuje další vysvětlování za cizí nepořádek.
+
+### Typická místa úklidu
+
+Po falešném poplachu projděte nejbližší okolí trasy, ne celý rukopis. Hledejte hlavně:
+
+- archivní šablony, které nejsou viditelně označené jako staré;
+- duplicitní odkazy v rozcestníku, které vedou na nekanonickou část;
+- backlogové karty, které pořád naznačují, že zavřený návrh je aktivní;
+- staré checklisty bez návratového signálu;
+- dočasné poznámky z ověření, které se začaly tvářit jako zdroj pravdy;
+- pracovní exporty nebo screenshoty, které už po kontrole nic nedokazují.
+
+U každého místa zvolte jeden stav:
+
+- Označit jako archiv: historická stopa může zůstat, ale nesmí vést práci.
+- Přesměrovat: staré místo zůstane jen jako odkaz na kanonickou část.
+- Sloučit: užitečný detail se přesune do zdroje pravdy a stará stopa zmizí.
+- Smazat: stopa nemá hodnotu ani jako historie.
+- Ponechat: stopa není aktivní riziko a další úklid by stál víc než přínos.
+
+Stav `Ponechat` používejte opatrně. Pokud staré místo může dalšího člověka svést k práci podle neplatného pravidla, není bezpečně ponechané. Je jen odložené v hezčím kabátě.
+
+### Úklidová karta falešného poplachu
+
+```text
+Falešný poplach:
+Stabilní trasa, kterou neměníme:
+Skutečný zdroj zmatku:
+Místo úklidu:
+Stav místa:
+- archivovat / přesměrovat / sloučit / smazat / ponechat
+Jedna úklidová akce:
+Co výslovně nepřepisujeme:
+Privacy-first úklid:
+Návratový signál:
+Kdo drží kontext:
+```
+
+Vyplněný příklad:
+
+```text
+Falešný poplach:
+Při review vznikl dojem, že část o návratu po klidu nevede ke správnému rozhodnutí.
+
+Stabilní trasa, kterou neměníme:
+Návrat k trase po klidovém období.
+
+Skutečný zdroj zmatku:
+Starý odkaz v interním rozcestníku vedl na archivní poznámku před doladěním.
+
+Místo úklidu:
+Interní rozcestník edičních tras.
+
+Stav místa:
+Přesměrovat.
+
+Jedna úklidová akce:
+Nahradit starý odkaz odkazem na kanonickou část a u archivní poznámky přidat větu "nepoužívat pro nové review".
+
+Co výslovně nepřepisujeme:
+Neměníme samotnou kapitolu o návratu po klidu.
+
+Privacy-first úklid:
+Mažeme screenshot starého rozcestníku po zapsání anonymizovaného závěru.
+
+Návratový signál:
+Pokud i po přesměrování vznikne stejný zmatek při aktuální trase.
+
+Kdo drží kontext:
+Editor rukopisu.
+```
+
+### Privacy-first úklid okolí
+
+Falešný poplach je dobrá příležitost smazat podklady, které vznikly jen kvůli kontrole. Často nejde o velké datové balíky, ale o malé zbytky: screenshot staré šablony, kopii poptávky, výřez z interního chatu, export review tabulky nebo poznámku se jménem člověka, který na problém narazil.
+
+Ptejte se:
+
+- Stačí pro budoucnost anonymizovaná věta, proč šlo o falešný poplach?
+- Musí zůstat screenshot, nebo stačí odkaz na opravené místo?
+- Je stará šablona označená jako archiv, aby ji nikdo nepoužil znovu?
+- Nezůstává pracovní export jen proto, že bylo jednodušší ho nesmazat?
+- Nešíříme při předání víc interního kontextu, než tým potřebuje k práci?
+
+Privacy-first výsledek má být viditelný:
+
+```text
+Po kontrole zůstává jen anonymizovaný závěr a opravený odkaz. Pracovní kopie, screenshot a dočasná poznámka se mažou.
+```
+
+Codyho komentář: falešný poplach je jako kontrolka, která nesignalizuje rozbitý motor, ale špatně zavřenou kapotu. Neopravujte motor. Zavřete kapotu, smažte poznámku "motor asi hoří" a pokračujte. Technicky vzato méně dramatické, ale účetně příjemnější.
+
+### Checklist úklidu okolí
+
+- Je jasné, kterou stabilní trasu neměníme?
+- Víme, jaká okolní stopa falešný poplach způsobila?
+- Uklízíme nejbližší zdroj zmatku, ne celý rukopis?
+- Má stará šablona, odkaz, karta nebo poznámka nový stav?
+- Nezůstává v backlogu položka "možná opravit trasu", když se signál nepotvrdil?
+- Je zapsané, co výslovně nepřepisujeme?
+- Jsou dočasné screenshoty, exporty, kopie a poznámky smazané nebo anonymizované?
+- Zůstává pro příště konkrétní návratový signál?
+- Umí další člověk poznat, že šlo o falešný poplach a ne o otevřený problém?
+- Zmenšil úklid šum v okolí trasy?
+
+Dobře uklizený falešný poplach má tichý výsledek: stabilní text se nemění, stará stopa přestane mást a tým nemá v hlavě další nejasný dluh. To je přesně druh práce, který se špatně prodává v prezentaci, ale dobře drží dlouhý rukopis při životě.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -155052,6 +155195,7 @@ Dobře uzavřená čekací poznámka dělá z drobné nejistoty buď nulovou zm�
 
 ## Pracovní log
 
+- 2026-05-31: Doplněna úvodní podkapitola o úklidu okolí po falešném poplachu: rozlišení stabilní trasy a okolní staré stopy, stavy úklidu, privacy-first mazání podkladů, karta a checklist.
 - 2026-05-31: Doplněna Příloha VA o uzavření čekací poznámky po expiraci nebo opakování: stavy poznámky, zavření bez změny, převod opakovaného tření do malé úpravy, oddělení nového problému, selhání pracovního místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UZ o převod slabého tření po prvním návratu do čekací poznámky: rozlišení slabého tření od selhání, návratová podmínka, expirace, oddělení nového problému, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UY o první běžný návrat ke stabilnímu pracovnímu místu po uzavřené malé opravě: ověření v reálné práci, čtyři výsledky návratu, klidné použití, čekací poznámka pro slabé tření, privacy-first návrat, karta, mini workshop a checklist.
