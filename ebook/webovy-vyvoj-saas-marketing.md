@@ -151830,8 +151830,215 @@ Doplněný příklad je potvrzený, přesunutý blíž k rozhodnutí, jednou zos
 
 Ověření doplněného příkladu má chránit pravidlo před dvěma extrémy. První je slepá důvěra v novou větu, kterou nikdo při práci nepoužil. Druhý je přehnaná údržba, která z jednoho dobrého příkladu vyrobí další systém. Správný střed je prostý: jedno běžné použití, jeden závěr, žádná zbytečná data navíc.
 
+## Příloha UP: Uzavření potvrzeného příkladu do stabilního pracovního pravidla
+
+Potvrzený příklad má po ověření přestat být "novým doplňkem". Pokud zůstane označený jako čerstvá změna, tým ho bude dál obcházet, kontrolovat nebo vysvětlovat. Smyslem uzavření je převést příklad do normálního pracovního pravidla tak, aby pomáhal dalšímu rozhodnutí bez toho, že kolem něj zůstane malý ediční provoz.
+
+Praktická otázka zní:
+
+```text
+Co musí zůstat u pravidla, aby další člověk pochopil princip, a co už patří pryč?
+```
+
+Tato otázka je úklidová, ne kreativní. Nehledá lepší příklad, další variantu ani novou metodiku. Hledá nejmenší stabilní podobu: pravidlo, jeden ověřený příklad, jasné místo použití, krátký návratový signál a zavřené pomocné podklady.
+
+### Příklad už není experiment
+
+Po ověření odstraňte z pracovního místa jazyk, který připomíná test. Slova jako "nově", "zatím", "ověřujeme", "zkusit" nebo "pilotní příklad" jsou užitečná během změny. Po potvrzení ale drží tým v dočasném režimu.
+
+Dočasná verze:
+
+```text
+Zatím zkuste u obavy z migrace použít důkaz o bezpečně dokončeném přesunu.
+```
+
+Stabilní verze:
+
+```text
+Příklad: u obavy z migrace použijte důkaz o bezpečně dokončeném přesunu, ne obecné logo klienta.
+```
+
+Rozdíl je malý, ale praktický. Stabilní verze neříká "čekáme, jestli to projde". Říká "takhle se rozhoduje". Pokud má tým pořád potřebu psát "zatím", příklad ještě není uzavřený nebo rozhodnutí nemá vlastníka.
+
+### Nechte jen princip a oporu
+
+Stabilní pracovní pravidlo má po uzavření obsahovat tři vrstvy:
+
+- pravidlo, které říká, jak se rozhoduje;
+- jeden příklad, který ukazuje princip v praxi;
+- návratový signál, který říká, kdy se téma znovu otevře.
+
+Všechno ostatní zvažte jako pomocný podklad. Patří sem původní čekací poznámka, ověřovací karta, interní debata, seznam nepoužitých variant, screenshoty, exporty a pracovní komentáře. Pokud nemají další účel, zavřete je, smažte, anonymizujte nebo přesuňte do místa s retencí.
+
+Stabilní zápis může vypadat takto:
+
+```text
+Pravidlo:
+Nad první formulář dáváme jeden důkaz podle hlavní nejistoty zákazníka.
+
+Příklad:
+U obavy z migrace použijte důkaz o bezpečně dokončeném přesunu, ne obecné logo klienta.
+
+Návratový signál:
+Téma otevřeme, pokud se u tří dalších stránek opakuje nejistota, jaký typ důkazu zvolit.
+```
+
+To stačí. Nepotřebujete k tomu historii, proč věta vznikla, kdo ji navrhl, kolik variant prohrála a jak dlouho se ověřovala. Pracovní místo má pomáhat rozhodnout, ne archivovat malou ságu interního copywritingu. Codyho komentář: když se u jedné věty objeví rodokmen, většinou už neslouží čtenáři, ale našemu pocitu, že jsme pracovali opravdu důkladně.
+
+### Uzavřete pomocné artefakty
+
+Uzavření potvrzeného příkladu je vhodný okamžik pro malý úklid. Ne proto, že pořádek v dokumentech je estetická disciplína, ale proto, že staré pomocné stopy později pletou další rozhodnutí. Člověk najde původní poznámku, neví, jestli ještě platí, a začne řešit problém, který už byl zavřený.
+
+Projít stačí čtyři místa:
+
+- pracovní pravidlo, kde příklad nově žije;
+- ověřovací kartu, která potvrdila použití;
+- původní čekací nebo revizní poznámku;
+- případné dočasné podklady, ze kterých příklad vznikl.
+
+U každého místa napište jeden stav:
+
+```text
+Ponechat v pravidle / zavřít v logu / smazat / anonymizovat / přesunout do zdroje pravdy
+```
+
+Příklad:
+
+```text
+Pracovní pravidlo:
+Ponechat pravidlo a jeden příklad.
+
+Ověřovací karta:
+Zavřít v logu jednou větou.
+
+Původní čekací poznámka:
+Označit jako vyřešenou a odkázat na aktuální pravidlo.
+
+Dočasný obchodní podklad:
+Nepřenášet do šablony, ponechat jen v CRM podle retenčního pravidla.
+```
+
+Tento úklid zabere méně času než pozdější vysvětlování, která verze je pravá. A hlavně snižuje datovou stopu: méně kopií, méně citací mimo původní systém, méně důvodů držet citlivé poznámky v pracovních šablonách.
+
+### Kdy z příkladu nedělat standard
+
+Potvrzený příklad ještě neznamená, že máte vytvořit novou sekci standardu. Jeden příklad často stačí jako opora pro jedno pravidlo. Standardizace dává smysl až ve chvíli, kdy se stejný princip opakuje napříč více místy a tým bez něj dělá viditelně horší rozhodnutí.
+
+Nedělejte nový standard, pokud:
+
+- příklad pomohl jen v jednom úzkém pracovním místě;
+- problém byl způsoben hlavně špatným umístěním původního pravidla;
+- další varianty jsou zatím jen nápady, ne opakované tření;
+- standard by vyžadoval novou evidenci zákaznických důkazů;
+- tým ještě nemá jasný zdroj pravdy pro podklady, které by standard používal.
+
+Naopak zvažte samostatnou kartu, pokud se ukáže, že tým opakovaně neví, kde najít schválené reference, kdo je může používat, jak dlouho platí souhlas s citací nebo jak anonymizovat zákaznický kontext. To už není problém příkladu. To je správa důkazů a má mít vlastní pravidlo, vlastníka a privacy-first hranice.
+
+### Karta uzavření potvrzeného příkladu
+
+```text
+Pracovní pravidlo:
+
+Potvrzený příklad:
+
+Kde příklad žije:
+
+Výsledek ověření:
+- potvrzeno / přesunuto blíž / zostřeno jednou větou
+
+Stabilní znění pravidla:
+
+Co odstraňujeme z dočasného režimu:
+
+Pomocné artefakty:
+- ponechat / zavřít / smazat / anonymizovat / přesunout
+
+Co zůstává mimo rozsah:
+
+Návratový signál:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pracovní pravidlo:
+Nad první formulář dáváme jeden důkaz podle hlavní nejistoty zákazníka.
+
+Potvrzený příklad:
+U obavy z migrace použijte důkaz o bezpečně dokončeném přesunu, ne obecné logo klienta.
+
+Kde příklad žije:
+Checklist landing page, položka "Důkaz nad formulářem".
+
+Výsledek ověření:
+Potvrzeno po další landing page. Autor vybral důkaz podle nejistoty a nepotřeboval původní poznámku.
+
+Stabilní znění pravidla:
+Nad první formulář dáváme jeden důkaz podle hlavní nejistoty zákazníka. Příklad: u obavy z migrace použijte důkaz o bezpečně dokončeném přesunu, ne obecné logo klienta.
+
+Co odstraňujeme z dočasného režimu:
+Mažeme označení "nový příklad" a zavíráme ověřovací kartu.
+
+Pomocné artefakty:
+Původní čekací poznámka je vyřešená. Ověřovací karta zůstává jen v pracovním logu. Obchodní podklad se nepřenáší do checklistu.
+
+Co zůstává mimo rozsah:
+Nevytváříme knihovnu všech důkazů a neřešíme správu referencí v této kartě.
+
+Návratový signál:
+Téma otevřeme, pokud se u tří dalších stránek opakuje nejistota ve výběru typu důkazu.
+
+Privacy-first úklid:
+Do pracovního pravidla nejde zákaznický výrok, interní poznámka ani screenshot. Ponecháváme jen anonymizovaný princip.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-05-31.
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: otevřete ověřený příklad a pracovní pravidlo.
+2. Minuta 2: potvrďte, že výsledek ověření opravdu stačí k uzavření.
+3. Minuta 3: přepište znění do stabilního tónu bez slov "zatím" a "zkusit".
+4. Minuta 4: ponechte u pravidla jen princip, příklad a návratový signál.
+5. Minuta 5: označte původní poznámku jako vyřešenou.
+6. Minuta 6: rozhodněte, které pomocné podklady smazat, anonymizovat nebo ponechat v původním systému.
+7. Minuta 7: napište, co se teď výslovně nestandardizuje.
+8. Minuta 8: zavřete kartu a zapište jednu větu do logu.
+
+Výstup workshopu:
+
+```text
+Potvrzený příklad je součástí stabilního pracovního pravidla. Dočasné poznámky jsou zavřené a žádná nová datová stopa nevznikla.
+```
+
+### Checklist uzavření příkladu
+
+- Je příklad potvrzený běžným použitím, ne jen interním souhlasem?
+- Zmizel z pracovního místa dočasný jazyk typu "zatím", "pilotně" nebo "zkuste"?
+- Zůstalo u pravidla jen to, co pomáhá dalšímu rozhodnutí?
+- Je jasné, kde příklad žije jako kanonická verze?
+- Je původní čekací nebo revizní poznámka zavřená?
+- Jsou pomocné podklady smazané, anonymizované nebo ponechané v systému s retenčním pravidlem?
+- Nepřenášíme do pracovního pravidla zákaznické výroky, osobní údaje ani interní obchodní poznámky?
+- Nevyrábíme z jednoho příkladu novou knihovnu, metodiku ani standard bez opakovaného důvodu?
+- Je zapsané, co zůstává mimo rozsah?
+- Má pravidlo návratový signál, který neznamená trvalý dohled?
+
+Uzavřený příklad má působit nenápadně. Člověk přijde k pracovnímu pravidlu, pochopí princip, rozhodne a jde dál. Pokud kvůli příkladu vzniká další vysvětlování, není uzavřený. Pokud pomáhá bez hluku a bez nových dat, splnil přesně to, co měl.
+
 ## Pracovní log
 
+- 2026-05-31: Doplněna Příloha UP o uzavření potvrzeného příkladu do stabilního pracovního pravidla: stabilní znění, úklid dočasných artefaktů, hranice standardizace, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UO o ověření doplněného příkladu při dalším běžném použití: ověřování na stejném pracovním místě, tři signály funkčnosti, čtyři výsledné stavy, pravidlo jedné korekce, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UN o doplnění jednoho příkladu po prvním návratu k pracovnímu pravidlu: výběr typu příkladu, umístění k rozhodnutí, omezení historie, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha UM o první běžný návrat k pracovnímu pravidlu po uzavřené malé úpravě: použití bez znalosti historie, čtyři výsledné stavy, privacy-first návrat, karta, mini workshop a checklist.
