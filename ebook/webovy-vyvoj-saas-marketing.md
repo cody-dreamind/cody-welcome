@@ -159874,8 +159874,174 @@ Výstup workshopu:
 
 Ověření úklidového zásahu je poslední pojistka proti tomu, aby se z úklidu stala další práce. Dobrý výsledek často zní obyčejně: nic se nevrátilo, nic nového nevzniklo, pravidlo zase běží normálně. Přesně tak má stabilní provoz znít. Trochu nudně. Tím lépe.
 
+## Příloha VU: Uzavření ověřeného úklidu stínu do běžné práce
+
+Příloha VT ověřila, jestli úklidový zásah po nalezeném stínu opravdu zafungoval. Tahle příloha řeší poslední krok: jak ověřený úklid zavřít tak, aby po něm nezůstala další servisní vrstva. Když se úklid povedl, nemá vzniknout nový rituál, nová tabulka ani nový člověk, který "to radši občas zkontroluje". Má vzniknout čistý návrat do běžné práce.
+
+Uzavření je krátké, ale důležité. Tým potřebuje vědět, co už nehlídá, kde je aktuální zdroj pravdy a jaký signál by téma znovu otevřel. Bez toho se z dobře uklizeného stínu snadno stane tichý dohled. Nikdo ho nenazve procesem, ale při každém podobném úkolu se někdo zeptá: "A neměli bychom ještě mrknout, jestli tam není stará stopa?" Gratuluji, stín právě dostal druhý život s lepším PR.
+
+Pracovní otázka:
+
+```text
+Jak ověřený úklid zavřeme tak, aby pravidlo pokračovalo v běžném rytmu bez zvláštního dohledu?
+```
+
+### Začněte uzavírací větou
+
+Uzavření ověřeného úklidu má začít jednou větou, kterou pochopí člověk mimo původní opravu. Nepopisujte celou historii. Napište výsledek:
+
+```text
+Původní stínový export se po úklidu při dalším běžném použití nevrátil. Tým pracoval z kanonické karty, nevznikla nová pomocná stopa a téma se vrací do měsíční revize pravidla.
+```
+
+Věta má obsahovat čtyři části:
+
+- co byl původní stín;
+- co ukázalo první běžné použití;
+- co dál nesledujete zvlášť;
+- kam téma patří, pokud se někdy vrátí.
+
+Špatná uzavírací věta zní:
+
+```text
+Úklid zatím vypadá v pohodě, necháme to otevřené.
+```
+
+To není uzavření. To je odložení rozhodnutí s nenápadnou mašlí. Pokud je výsledek dobrý, zavřete ho. Pokud není dobrý, nepředstírejte uzavření a vraťte téma do běžné revize nebo do dalšího jednoho úklidového zásahu podle stavu z Přílohy VT.
+
+### Upravte jen místa, která lidé opravdu používají
+
+Po ověřeném úklidu není potřeba dělat široký dokumentační průchod. Stačí upravit místa, která by člověk potkal při práci. Typicky:
+
+- kanonickou kartu pravidla;
+- nejbližší šablonu nebo checklist;
+- odkaz v pracovním indexu;
+- rozhodovací záznam;
+- krátký changelog pro tým.
+
+Nepřepisujte celou znalostní bázi jen proto, že se jeden stín povedlo uklidit. Široké přepisování často vytvoří nové rozdíly mezi dokumenty. Cílem je, aby další člověk šel správnou cestou přirozeně, ne aby v systému přibyla kronika drobného úklidu.
+
+Příklad malého uzavření:
+
+```text
+V kanonické kartě ponecháme jen aktuální pravidlo a větu:
+"Dočasný export z pilotu byl po prvním běžném použití smazán; pro revizi se používá pouze tato karta."
+
+V pracovním indexu zůstává odkaz na kartu.
+
+V ověřovací kartě doplníme stav:
+"Uzavřeno, bez dalšího zvláštního sledování."
+```
+
+To stačí. Všechno navíc musí mít konkrétní pracovní důvod.
+
+### Zavřete dočasnou stopu bez archivního reflexu
+
+Ověřený úklid často nechá po sobě vlastní drobnou stopu: kartu ověření, poznámku v chatu, komentář u úkolu, screenshot před smazáním nebo seznam odkazů, které se kontrolovaly. Tyto věci měly smysl během úklidu. Po uzavření se zeptejte, co z nich musí zůstat.
+
+Praktické pravidlo:
+
+```text
+Zůstává jen to, co pomáhá budoucímu rozhodnutí. Všechno ostatní se smaže, zkrátí nebo zavře.
+```
+
+Rozlište tři stavy:
+
+- Smazat: dočasné exporty, kopie, screenshoty, pomocné seznamy a pracovní poznámky bez dalšího účelu.
+- Zkrátit: ověřovací kartu, pokud stačí jedna rozhodovací věta a datum.
+- Ponechat s retencí: podklad, který má právní, zákaznický nebo provozní důvod zůstat.
+
+Privacy-first dopad je tady konkrétní: neukládejte důkaz o úklidu déle než samotný důvod úklidu. Pokud k rozhodnutí stačí věta "export byl smazán a pravidlo se používá z kanonické karty", nepotřebujete držet původní export ani jeho kopii v archivu.
+
+### Nastavte návratový signál, ne nový dohled
+
+Dobré uzavření rozlišuje návratový signál a průběžný dohled. Návratový signál je situace, která znovu otevře téma. Průběžný dohled je zvyk, který udržuje téma při životě.
+
+Použitelný návratový signál:
+
+```text
+Téma se znovu otevře, pokud při dvou běžných revizích za sebou člověk nenajde kanonickou kartu bez dotazu na tým.
+```
+
+Špatný dohled:
+
+```text
+Každý týden někdo zkontroluje, jestli lidé používají správnou kartu.
+```
+
+První věta chrání systém před reálným návratem problému. Druhá vytváří nový kontrolní proces. Pokud pravidlo opravdu potřebuje týdenní kontrolu, možná už nejde o úklid stínu, ale o slabé pravidlo nebo špatně navrženou pracovní trasu. To patří do běžné revize, ne do nekonečného dosledování úklidu.
+
+### Předejte změnu jednou pracovní větou
+
+Tým nepotřebuje detailní oznámení o každém smazaném souboru. Potřebuje vědět, co má dělat příště. Předejte proto uzavření jednou větou v místě, kde lidé práci skutečně potkají:
+
+```text
+Od další revize používejte jen kanonickou kartu pravidla; pilotní export byl po ověření úklidu smazán a zvláštní kontrola se neprodlužuje.
+```
+
+Tahle věta říká začátek, konec i hranici. Nezve k debatě o celé historii. Když někdo potřebuje detail, najde ho v rozhodovacím záznamu. Běžná práce ale nemá nést celý příběh.
+
+### Karta uzavření ověřeného úklidu
+
+```text
+Původní stín:
+
+Úklidový zásah:
+
+Výsledek prvního běžného použití:
+
+Uzavírací věta:
+
+Kanonické místo po uzavření:
+
+Co zůstává:
+
+Co mažeme nebo zkracujeme:
+
+Co už zvlášť nesledujeme:
+
+Návratový signál:
+
+Privacy-first výsledek:
+
+Kdo uzavření předal:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek ověření z Přílohy VT.
+2. Minuta 2: napište jednu uzavírací větu.
+3. Minuta 3: určete kanonické místo, kde věta zůstane.
+4. Minuta 4: smažte nebo zkraťte dočasné podklady po ověření.
+5. Minuta 5: nahraďte další dohled konkrétním návratovým signálem.
+6. Minuta 6: předejte týmu jednu pracovní větu pro další použití.
+
+Výstup workshopu:
+
+```text
+Ověřený úklid stínu je uzavřený. Pravidlo má jedno kanonické místo, dočasné podklady jsou smazané nebo zkrácené, nevzniká další zvláštní dohled a případný návrat má konkrétní signál.
+```
+
+### Checklist uzavření ověřeného úklidu
+
+- Máme jednu srozumitelnou uzavírací větu?
+- Je jasné, že ověřujeme už jen výsledek úklidu, ne celou historii pravidla?
+- Zůstalo aktuální pravidlo na jednom kanonickém místě?
+- Upravili jsme jen pracovní místa, která člověk opravdu používá?
+- Smazali nebo zkrátili jsme dočasné podklady po ověření?
+- Má každá ponechaná stopa účel, vlastníka a retenci?
+- Nenahradili jsme stín novým dohledem?
+- Je návratový signál konkrétní a ověřitelný?
+- Ví tým jednou větou, odkud má příště pracovat?
+- Vrací se téma do běžného revizního rytmu?
+
+Uzavření ověřeného úklidu je malý akt provozní hygieny. Neoslavuje se, neprodlužuje se a nedělá kolem sebe další ceremonii. Prostě vrátí práci do normálu a nechá po sobě méně stop, než kolik jich našlo. To je v privacy-first provozu docela slušná definice dobrého konce.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VU o uzavření ověřeného úklidu stínu do běžné práce: uzavírací věta, kanonické místo, mazání dočasných stop, návratový signál místo dohledu, předání týmu, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VT o ověření úklidového zásahu po nalezeném stínu: první běžný dotyk, čtyři výsledné stavy, ukončení zvláštního sledování, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VS o převodu nalezeného stínu do jednoho úklidového zásahu: pojmenování účelu stínu, výběr nejbližšího místa zásahu, uzavírací formulace, privacy-first mazání a checklist.
 - 2026-06-01: Doplněna Příloha VR o kontrole stínového procesu po uzavřené drobné úpravě: hledání stínu znalosti, kontroly a dat, nejmenší úklidový zásah, privacy-first mazání pomocných stop, karta a checklist.
