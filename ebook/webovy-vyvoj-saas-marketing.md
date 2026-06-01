@@ -160039,8 +160039,199 @@ Ověřený úklid stínu je uzavřený. Pravidlo má jedno kanonické místo, do
 
 Uzavření ověřeného úklidu je malý akt provozní hygieny. Neoslavuje se, neprodlužuje se a nedělá kolem sebe další ceremonii. Prostě vrátí práci do normálu a nechá po sobě méně stop, než kolik jich našlo. To je v privacy-first provozu docela slušná definice dobrého konce.
 
+## Příloha VV: První běžný návrat po uzavřeném úklidu stínu
+
+Příloha VU zavřela ověřený úklid stínu a vrátila pravidlo do běžné práce. Tím ale ještě nevzniká povinnost hlídat, jestli se všechno drží navždy. První běžný návrat má jinou roli: ukázat, že tým umí pracovat podle čistého místa i bez speciální připomínky, staré kontrolní vrstvy a dočasných podkladů.
+
+Nejde o audit. Jde o jeden přirozený průchod. Někdo znovu použije pravidlo, šablonu, checklist nebo kanonickou kartu v normální práci. Pokud najde správnou cestu, použije aktuální znění a neotevře starý stín, téma zůstává v klidu. Pokud narazí na starou stopu, nejdřív se řeší nejbližší pracovní místo, ne celý systém.
+
+Pracovní otázka:
+
+```text
+Když se k pravidlu po uzavřeném úklidu vracíme poprvé běžnou prací, vede nás kanonické místo samo, nebo se starý stín znovu snaží tvářit jako pomoc?
+```
+
+### Vraťte se přes skutečný úkol
+
+První návrat neplánujte jako samostatnou kontrolu dokumentace. Vyberte nejbližší skutečnou situaci, ve které by člověk pravidlo stejně použil:
+
+- měsíční revizi obsahu;
+- přípravu obchodního hovoru;
+- úpravu formuláře;
+- kontrolu kampaně;
+- založení nové stránky;
+- aktualizaci interní šablony;
+- běžné rozhodnutí v backlogu.
+
+Pokud taková situace zatím nenastala, nedělejte náhradní test jen proto, že chcete mít pocit uzavření. Uzavřený úklid má čekat na reálné použití. Umělé testy často znovu vytvářejí přesně tu zvláštní kontrolní vrstvu, kterou jste v Příloze VU zavřeli.
+
+Příklad:
+
+```text
+Situace:
+Marketing připravuje novou landing page a potřebuje použít pravidlo pro důkaz důvěry nad formulářem.
+
+Co se má stát:
+Člověk najde kanonickou kartu, ne starý pilotní export ani komentář z původního úklidu.
+
+Co nesmí vzniknout:
+Nová tabulka "pro jistotu", jestli lidé používají správnou verzi pravidla.
+```
+
+První návrat je dostatečný, pokud odpoví na otázku, zda pracovní cesta vede na správné místo bez zvláštního doprovodu.
+
+### Sledujte tři známky klidného použití
+
+Při prvním návratu sledujte jen tři signály. Víc nepotřebujete:
+
+- Člověk našel kanonické místo bez hledání v historii.
+- Použil aktuální pravidlo bez návratu k dočasným podkladům.
+- Nevznikla nová pomocná evidence, kontrola ani export.
+
+Tyto signály jsou záměrně provozní. Neptají se, jestli se všem líbí formulace pravidla. Ptají se, jestli pravidlo funguje jako pracovní místo. To je jiný standard. Text nemusí být literárně dokonalý, pokud vede ke správnému kroku bez zbytečné datové stopy.
+
+Když se objeví drobné tření, pojmenujte ho přesně:
+
+```text
+Tření:
+Odkaz v pracovním indexu vede na správnou kartu, ale popisek pořád zmiňuje starý pilotní export.
+
+Stav:
+Lokální stopa po úklidu, ne návrat stínu.
+
+Zásah:
+Přepsat popisek odkazu. Neotevírat nový úklid, audit ani kontrolní seznam.
+```
+
+Tím chráníte tým před přehnanou reakcí. Každý zbytek starého jazyka není incident. Často je to jen drobný prach na polici, ne důvod přestavět sklad.
+
+### Čtyři výsledky prvního návratu
+
+Po prvním běžném návratu vyberte jeden stav:
+
+- Klidné použití: člověk našel správné místo, použil pravidlo a starý stín se nevrátil.
+- Lokální oprava: jedno pracovní místo nese starý název, odkaz nebo poznámku.
+- Návrat stínu: stará pomocná stopa znovu vedla práci, ne jen zmátla popisek.
+- Nový problém: současné pravidlo je možná slabé, ale nejde o původní stín.
+
+Rozlišení je důležité. Lokální oprava se má zavřít jedním zásahem. Návrat stínu patří zpět do úklidové větve. Nový problém se nemá maskovat jako starý stín, protože byste opravovali špatné místo.
+
+Příklad rozdílu:
+
+```text
+Lokální oprava:
+V indexu zůstal starý název exportu, ale karta pravidla je správná a člověk podle ní pracoval.
+
+Návrat stínu:
+Člověk použil starý export jako zdroj pravdy, protože kanonická karta nebyla v běžné trase vidět.
+
+Nový problém:
+Kanonická karta je vidět, ale pravidlo neřeší nový typ kampaně.
+```
+
+První stav nechte být. Druhý opravte lokálně. Třetí vraťte do úklidu. Čtvrtý založte jako novou otázku s vlastní stop podmínkou, pokud má dost silný důvod.
+
+### Neprodlužujte péči kvůli dobrému pocitu
+
+Když první návrat dopadne dobře, uzavřete ho. Nepřidávejte druhý návrat, třetí kontrolu ani "ještě jedno ověření za měsíc", pokud nemáte konkrétní návratový signál. Klidné použití je výsledek. Není to pozvánka k další péči.
+
+Dobrá uzavírací věta:
+
+```text
+První běžný návrat po uzavřeném úklidu proběhl klidně: tým našel kanonickou kartu, nepoužil starý export a nevznikla nová kontrolní evidence. Téma zůstává v běžném revizním rytmu.
+```
+
+Slabá věta:
+
+```text
+Zatím dobré, radši to budeme ještě pár týdnů sledovat.
+```
+
+Druhá věta je lákavá, protože působí opatrně. Ve skutečnosti často jen znovu vytváří zvláštní režim. Pokud opravdu potřebujete další sledování, napište, co přesně se má stát, aby skončilo. Bez konce nejde o opatrnost, ale o nový proces.
+
+### Privacy-first návrat bez nové stopy
+
+První návrat po úklidu má potvrdit, že se datová stopa nezvětšila. Proto si položte dvě otázky:
+
+```text
+Vznikl kvůli návratu nový záznam, export, kontrolní seznam nebo kopie dat?
+Pokud ano, má jasný účel, vlastníka a retenci?
+```
+
+Ideální odpověď je, že nevzniklo nic kromě krátké uzavírací věty. Pokud je potřeba lokální oprava, zapište jen výsledek opravy a smažte pomocné poznámky. Neuchovávejte původní starou stopu jako suvenýr k tomu, že už ji nepoužíváte. Suvenýry jsou fajn z výletu, ne z provozu osobních a obchodních dat.
+
+Privacy-first výsledek může znít:
+
+```text
+Po prvním běžném návratu nevzniká žádná nová evidence použití pravidla. Starý export zůstává smazaný, kanonická karta stačí a téma se vrací do běžné měsíční revize.
+```
+
+### Karta prvního návratu po uzavřeném úklidu
+
+```text
+Uzavřený úklid:
+
+Kanonické místo:
+
+První běžná situace:
+
+Kdo pravidlo použil:
+
+Našel člověk správné místo bez historie:
+
+Použil aktuální pravidlo:
+
+Vrátila se stará stopa:
+
+Vznikla nová pomocná evidence:
+
+Výsledek:
+- klidné použití / lokální oprava / návrat stínu / nový problém
+
+Pokud jde o lokální opravu, co přesně upravujeme:
+
+Pokud jde o návrat stínu, odkud se vrátil:
+
+Pokud jde o nový problém, jaká je nová otázka:
+
+Privacy-first výsledek:
+
+Další stav:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: vyberte první skutečnou situaci, kde se pravidlo použilo.
+2. Minuta 2: ověřte, jestli člověk našel kanonické místo.
+3. Minuta 3: zkontrolujte, jestli nepoužil starou pomocnou stopu.
+4. Minuta 4: napište jeden ze čtyř výsledných stavů.
+5. Minuta 5: případnou lokální opravu zúžte na jedno pracovní místo.
+6. Minuta 6: zapište privacy-first výsledek a zavřete návrat.
+
+Výstup workshopu:
+
+```text
+První běžný návrat po uzavřeném úklidu má stav: [stav]. Další práce je: [nic / lokální oprava / návrat do úklidu / nová otázka]. Nevzniká nová pomocná evidence mimo tento zápis.
+```
+
+### Checklist prvního návratu po úklidu
+
+- Proběhl návrat přes skutečný pracovní úkol, ne umělý audit?
+- Našel člověk kanonické místo bez dlouhé historie?
+- Použil aktuální pravidlo místo staré pomocné stopy?
+- Nevznikla nová kontrolní evidence jen kvůli uklidnění týmu?
+- Rozlišili jsme klidné použití, lokální opravu, návrat stínu a nový problém?
+- Je případná lokální oprava omezená na jedno nejbližší pracovní místo?
+- Pokud se stín vrátil, víme přesně odkud?
+- Pokud vznikl nový problém, má vlastní otázku a nemíchá se se starým úklidem?
+- Je zapsané, jaká data, exporty nebo pomocné kopie dál nevznikají?
+- Končí péče o úklid, pokud první návrat dopadl klidně?
+
+První běžný návrat má být nenápadný. Když funguje, skoro se nic nestane: člověk najde správné místo, udělá práci a starý stín nemá kudy zpátky. To je přesně pointa. Dobře uklizený provoz nevyrábí další drama, jen nechává dobrá rozhodnutí pracovat bez doprovodné kapely.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VV o první běžný návrat po uzavřeném úklidu stínu: návrat přes skutečný úkol, tři známky klidného použití, čtyři výsledné stavy, ukončení péče bez nového dohledu, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VU o uzavření ověřeného úklidu stínu do běžné práce: uzavírací věta, kanonické místo, mazání dočasných stop, návratový signál místo dohledu, předání týmu, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VT o ověření úklidového zásahu po nalezeném stínu: první běžný dotyk, čtyři výsledné stavy, ukončení zvláštního sledování, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VS o převodu nalezeného stínu do jednoho úklidového zásahu: pojmenování účelu stínu, výběr nejbližšího místa zásahu, uzavírací formulace, privacy-first mazání a checklist.
