@@ -1744,6 +1744,120 @@ Dobrá stopa říká:
 
 Úklid je nenápadný, ale právě on rozhoduje, jestli změna zůstane v provozu. Bez úklidu se nové pravidlo začne míchat se starými zbytky a tým bude znovu rozhodovat věci, které už jednou ověřil. S úklidem se z jedné dobré iterace stane lepší výchozí stav pro další práci.
 
+## Ověření úklidu po zavedení pracovního pravidla
+
+Úklid po pravidle má vlastní ověření. Ne proto, aby tým vytvářel další kontrolní vrstvu, ale proto, aby se ukázalo, jestli se nové pravidlo opravdu stalo výchozím stavem. Pravidlo může být správné, zápis může být jasný a úklidová karta může vypadat hotově. Přesto může v provozu zůstat stará šablona, archivní odkaz, automatizace nebo poznámka, která člověka při prvním dalším použití vrátí ke staré variantě.
+
+Ověření úklidu je krátký test trasy. Vezměte jednu přirozenou situaci, ve které se nové pravidlo použije, a sledujte, jestli člověk dojde ke správnému pracovnímu místu bez starých stop. Nehodnoťte kvalitu celého procesu. Neotevírejte znovu původní rozhodnutí. Jen zjistěte, jestli úklid opravdu odstranil překážky, které by staré chování vrátily do práce.
+
+Základní otázka zní:
+
+```text
+Když dnes někdo začne stejný typ práce, najde nové pravidlo, použije aktuální šablonu a nenarazí na starý sběr dat, starý návod ani starou automatizaci?
+```
+
+Pokud odpověď není jasné ano, nejdřív doplňte úklid. Nezakládejte novou iteraci. Starý odkaz v dokumentaci není nový produktový problém. Starý povinný telefon v archivní komponentě není důkaz, že pravidlo neplatí. Je to nedokončený úklidový zbytek.
+
+### Test jedné pracovní cesty
+
+Vyberte jednu cestu, která se objeví brzy a přirozeně:
+
+- vytvoření nové landing page podle šablony;
+- první použití upraveného formuláře;
+- založení nového onboardingového e-mailu;
+- přípravu další case study;
+- běžnou kontrolu externích skriptů;
+- zpracování první nové poptávky po změně pravidla.
+
+Nechte člověka začít tam, kde by začal normálně. To je důležité. Pokud mu pošlete přímý odkaz na správnou šablonu, ověřujete poslušnost, ne úklid. Úklid drží tehdy, když správná cesta vyhraje i bez speciální instrukce.
+
+Příklad:
+
+```text
+Pravidlo:
+První kontaktní formulář sbírá jen e-mail, stručný kontext a volitelné URL.
+
+Testovaná cesta:
+Marketing owner zakládá novou landing page ze standardní šablony.
+
+Co se stalo:
+Nová šablona je správná, ale ve starém briefu zůstala věta "doplnit telefon pro rychlé spojení".
+
+Závěr:
+Pravidlo platí. Úklid je neúplný v briefu. Upravujeme brief a neotevíráme znovu debatu o formuláři.
+
+Datový dopad:
+Nevzniká povinný telefon v novém formuláři. Starý brief je opravený, aby ho příště znovu nevyžadoval.
+```
+
+Tento typ ověření je malý, ale užitečný. Tým nerozplétá celé dějiny změny. Najde jednu starou stopu, odstraní ji a nechá pravidlo dál pracovat.
+
+### Čtyři výsledky ověření úklidu
+
+Po testu vyberte jeden stav:
+
+- Úklid drží: člověk našel aktuální pravidlo a nepoužil starý materiál.
+- Doplnit úklid: pravidlo platí, ale jedno pracovní místo ještě nese starou stopu.
+- Opravit kanonické místo: staré chování není jen zbytek, ale vypadá jako stále platný zdroj pravdy.
+- Znovu otevřít pravidlo: první použití ukázalo skutečný návratový signál, ne jen neuklizený artefakt.
+
+Nejčastější zdravý výsledek je "doplnit úklid". Je to normální. Digitální provoz má víc zákoutí než jeden dokument: šablony, komponenty, CRM poznámky, automatizace, interní checklisty, staré kampaně, příklady v onboardingu a občas i ručně zkopírovaný text v něčím osobním pracovním souboru.
+
+Rozlišujte ale mezi lokálním zbytkem a kanonickým problémem. Když je špatně jedna stará poznámka, opravte ji. Když je špatně hlavní šablona, ze které vzniká nová práce, nejde jen o úklidový detail. Kanonické místo musí být opravené před další iterací, jinak bude starý postup dál generovat nové chyby.
+
+### Privacy-first kontrola po úklidu
+
+U pravidel, která zmenšují datovou stopu, má ověření úklidu ještě jednu povinnost: zkontrolovat, že starý sběr dat skutečně přestal. Nestačí, že se o něm už nepíše v novém pravidle. Musí zmizet z formuláře, exportu, automatizace, dashboardu, šablony i pracovního návodu, pokud tam dřív vytvářel reálný údaj.
+
+Krátká kontrola:
+
+- Nevzniká staré pole při nové práci?
+- Neposílá automatizace starý údaj dál?
+- Nečeká někde dočasný export z ověření?
+- Nemá dodavatel nebo člověk přístup, který byl potřeba jen kvůli starému postupu?
+- Je zapsané, co se maže, anonymizuje nebo ponechává jako agregovaný důkaz?
+
+Codyho komentář: nejnebezpečnější věta po privacy-first změně je "to už se nepoužívá". Výborně. Tak to vypněte, smažte, odpojte nebo aspoň jasně archivujte. Nepoužívaná datová stopa je pořád datová stopa, jen se tváří tišeji.
+
+### Karta ověření úklidu
+
+```text
+Pravidlo:
+
+Co mělo být po úklidu čisté:
+
+Testovaná pracovní cesta:
+
+Kde člověk začal:
+
+Co našel:
+
+Výsledek:
+- úklid drží / doplnit úklid / opravit kanonické místo / znovu otevřít pravidlo
+
+Jedna oprava, pokud je potřeba:
+
+Datová stopa po ověření:
+
+Co dál neotevíráme:
+
+Datum další běžné kontroly:
+```
+
+### Checklist ověření úklidu
+
+- Ověřujeme jednu přirozenou pracovní cestu, ne celý provoz?
+- Začal člověk tam, kde by začal bez speciální instrukce?
+- Našel aktuální pravidlo a správnou šablonu?
+- Neobjevila se stará veřejná verze, starý interní návod nebo stará automatizace?
+- Rozlišili jsme lokální zbytek od chyby kanonického místa?
+- Pokud zůstala stará datová stopa, má konkrétní úklidový úkol?
+- Neotevíráme původní rozhodnutí jen kvůli neuklizenému artefaktu?
+- Je zapsané, co po ověření dál nesbíráme, nepředáváme nebo neuchováváme?
+- Stačí výsledek k tomu, aby pravidlo pokračovalo v běžném rytmu?
+
+Ověření úklidu má skončit klidně. Buď potvrdí, že pravidlo už má čistou cestu, nebo najde jednu starou stopu k odstranění. V obou případech chrání tým před tím, aby se další iterace stavěla na neuklizeném základu. Teprve když je cesta čistá, má smysl otevřít další otázku.
+
 ## Kdy otevřít další iteraci
 
 Po úklidu přichází lákavý moment: tým má pocit, že se konečně rozběhl, a chce hned otevřít další tři témata. To je pochopitelné. Je příjemné vidět, že jedna kapitola vedla ke konkrétní změně. Jenže praktický e-book nemá fungovat jako továrna na rozpracovanou práci. Má pomáhat uzavírat smyčky.
@@ -159237,6 +159351,7 @@ Uzavření drobné úpravy je poslední úklid po dobré práci. Není velkolep�
 
 ## Pracovní log
 
+- 2026-06-01: Doplněna úvodní podkapitola o ověření úklidu po zavedení pracovního pravidla: test jedné pracovní cesty, čtyři výsledné stavy, privacy-first kontrola zbylé datové stopy, karta ověření a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o tom, kdy z opakovaných falešných poplachů udělat systémovou opravu: signály opakovaného vzoru, nejmenší archivní/navigační pravidlo, karta systémové opravy, privacy-first brzda a checklist.
 - 2026-06-01: Doplněna Příloha VQ o uzavření ověřené drobné úpravy zpět do běžného rytmu: uzavírací věta, kanonické místo, úklid ověřovací stopy, návrat do normální revize, privacy-first výsledek, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VP o ověření drobné úpravy v rytmu při dalším běžném použití: první přirozené použití, tři signály, čtyři výsledné stavy, privacy-first ověření, karta, mini workshop a checklist.
