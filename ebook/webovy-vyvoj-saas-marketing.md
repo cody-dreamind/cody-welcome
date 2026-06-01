@@ -156547,8 +156547,220 @@ Uzavřená oprava má ověřený první návrat: buď funguje klidně, má jen �
 
 První návrat po uzavřené opravě je malá kontrola, jestli dokumentace přestala vyprávět vlastní minulost a začala znovu sloužit práci. Když projde klidně, největší disciplína je nic nevylepšovat.
 
+## Příloha VF: Převod slabého tření po prvním návratu do čekací poznámky
+
+Slabé tření po prvním návratu je nepříjemně svůdné. Vypadá jako malý problém, který by šel hned opravit jednou větou, novým polem, dalším příkladem nebo krátkou vysvětlivkou. Jenže právě po uzavřené opravě je systém citlivý na přestavování. Když každé zaváhání okamžitě proměníte v úpravu pravidla, stabilní pracovní místo se znovu rozkmitá.
+
+Tato příloha navazuje na Přílohu VE. První běžný návrat proběhl, pravidlo celkově fungovalo, ale objevilo se drobné tření, které ještě není selháním. Cílem není opravit pravidlo. Cílem je zachytit signál tak lehce, aby nepřepsal čerstvě stabilizované místo.
+
+Otázka zní:
+
+```text
+Jak slabé tření zachytíme tak, aby se k němu šlo vrátit jen při opakování, ale aby zatím nerozšířilo pravidlo, šablonu ani datovou stopu?
+```
+
+### Nejdřív potvrďte, že nejde o návrat historie
+
+Slabé tření je jen lokální zaváhání při jinak funkčním pravidle. Pokud člověk potřeboval starou čekací poznámku, ověřovací log nebo vysvětlení původu opravy, nejde o slabé tření. Jde o návrat historie a pravidlo pořád nestojí samo.
+
+Rychlé rozlišení:
+
+```text
+Slabé tření:
+Pravidlo šlo použít, výstup vznikl, ale objevila se drobná nejasnost.
+
+Návrat historie:
+Pravidlo nešlo použít bez znalosti toho, proč a jak bylo opravené.
+
+Nový problém:
+Pravidlo funguje, ale okolní proces ukázal jiné téma.
+```
+
+Příklad slabého tření:
+
+```text
+Pravidlo:
+Karta změny má pole "Mimo rozsah této iterace".
+
+Návrat:
+Tým pole použil správně, ale jeden člověk se zeptal, jestli do něj patří i nápady pro další kvartál.
+
+Výstup:
+Hlavní úkol se zavřel, rozsah se nerozšířil.
+
+Závěr:
+Slabé tření. Neopravujeme pravidlo hned, zapíšeme čekací poznámku.
+```
+
+Příklad, který už slabým třením není:
+
+```text
+Návrat:
+Tým nevěděl, proč pole vzniklo, hledal starou čekací poznámku a rozhodoval podle ní.
+
+Závěr:
+Návrat historie. Je potřeba posílit samostatnost pravidla, ne zapisovat čekací poznámku.
+```
+
+### Zapište čekací poznámku mimo hlavní pravidlo
+
+Čekací poznámka má bydlet u rozhodovacího logu, karty změny nebo krátké servisní poznámky. Nemá se propsat přímo do hlavního pravidla, pokud zatím nevíte, že se tření bude opakovat.
+
+Dobrá čekací poznámka má tři vlastnosti:
+
+- je konkrétní;
+- má návratovou podmínku;
+- neobsahuje řešení předem.
+
+Špatně:
+
+```text
+Přidat do pravidla vysvětlení, že pole Mimo rozsah může obsahovat i kvartální nápady.
+```
+
+Lépe:
+
+```text
+Slabé tření:
+Při prvním návratu se objevil dotaz, jestli do pole Mimo rozsah patří i nápady pro další kvartál.
+
+Proč zatím neopravujeme:
+Výstup vznikl správně a dotaz se objevil jednou.
+
+Návratová podmínka:
+Vrátíme se k tomu jen tehdy, když se stejný dotaz objeví při dvou dalších běžných použitích nebo když kvůli němu někdo zařadí špatný typ položky.
+```
+
+Tím chráníte pravidlo před předčasným vysvětlením. Jedna otázka ještě není důvod dělat z pravidla malý román. A malý román v procesní dokumentaci je jen pomalá verze chaosu.
+
+### Nastavte expiraci
+
+Čekací poznámka nesmí žít navždy. Pokud se tření nevrátí, poznámku smažte nebo zavřete krátkou větou. Jinak se z ní stane malý stín, který bude při každém review šeptat "možná jsem důležitý". Většinou není.
+
+Použitelné expirační hranice:
+
+- dvě další běžná použití pravidla;
+- jeden měsíční pracovní cyklus;
+- další review konkrétního pracovního místa;
+- pevné datum, pokud se pravidlo používá nepravidelně.
+
+Expiraci pište jako pracovní podmínku:
+
+```text
+Expirace:
+Pokud se stejný dotaz neobjeví do dvou dalších použití karty změny, poznámku zavřeme bez úpravy pravidla.
+```
+
+Když pravidlo nemá dost časté použití, zvolte datum:
+
+```text
+Expirace:
+Pokud se téma nevrátí do 2026-07-15, poznámku zavřeme bez změny.
+```
+
+Nepoužívejte expiraci typu "někdy se na to podíváme". To není expirace, to je odložený nepořádek s lepší slovní zásobou.
+
+### Nechte řešení otevřené
+
+Čekací poznámka nemá rovnou diktovat budoucí zásah. Její práce je uchovat signál, ne předčasně vybrat opravu. Když do ní napíšete hotové řešení, tým se při návratu často ptá jen "provedeme to?", místo aby se podíval, jestli se problém opravdu opakoval.
+
+Místo hotového řešení zapisujte možné typy zásahu:
+
+```text
+Možný zásah při opakování:
+- zpřesnit jednu větu;
+- doplnit hranici příkladem;
+- přesunout poznámku blíž k poli;
+- neměnit pravidlo a upravit jen onboardingovou ukázku.
+```
+
+Tím necháváte budoucí rozhodnutí opřené o další použití, ne o první dojem.
+
+### Privacy-first hranice čekací poznámky
+
+Slabé tření po prvním návratu nepotřebuje nové sledování. Nepřidávejte interní analytiku používání pravidla, nahrávání obrazovky, povinné komentáře ani osobní hodnocení. Často stačí jedna anonymní věta o situaci.
+
+Privacy-first minimum:
+
+- zapište pracovní situaci, ne jméno člověka;
+- neukládejte screenshot, pokud stačí popis;
+- nepřidávejte do šablony nové povinné pole jen kvůli jedné nejasnosti;
+- nevracejte do pravidla staré ověřovací podklady;
+- při expiraci poznámku opravdu zavřete nebo smažte.
+
+Privacy-first věta:
+
+```text
+Slabé tření držíme jako krátkou čekací poznámku bez osobních detailů, bez nového sledování a bez rozšíření pravidla, dokud se signál neopakuje.
+```
+
+### Karta čekací poznámky po prvním návratu
+
+```text
+Pracovní místo:
+
+Uzavřená oprava:
+
+Návratová situace:
+
+Slabé tření:
+
+Proč nejde o návrat historie:
+
+Proč nejde o nový problém:
+
+Proč zatím neopravujeme:
+
+Návratová podmínka:
+
+Expirace:
+
+Možné typy zásahu při opakování:
+
+Co výslovně neměníme:
+
+Jaká data kvůli tomu nesbíráme:
+
+Kde poznámka bydlí:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte si výsledek prvního běžného návratu.
+2. Minuta 2: potvrďte, že pravidlo šlo použít bez historie opravy.
+3. Minuta 3: pojmenujte slabé tření jednou větou.
+4. Minuta 4: napište návratovou podmínku.
+5. Minuta 5: nastavte expiraci a místo poznámky.
+6. Minuta 6: zkontrolujte privacy-first hranici a rozsah, který zatím neměníte.
+
+Výstup workshopu:
+
+```text
+Slabé tření je zachycené jako čekací poznámka mimo hlavní pravidlo. Pravidlo zůstává stabilní, návrat má jasnou podmínku a nevzniká nová datová stopa.
+```
+
+### Checklist čekací poznámky
+
+- Potvrdili jsme, že pravidlo šlo použít bez staré historie?
+- Nejde o nový problém mimo původní pravidlo?
+- Je slabé tření popsané jednou konkrétní větou?
+- Zůstává poznámka mimo hlavní pravidlo?
+- Má návratovou podmínku?
+- Má expiraci?
+- Neobsahuje předem vybrané řešení?
+- Je jasné, co zatím neměníme?
+- Nezavádíme nové pole, nový tracker, nový export ani osobní hodnocení?
+- Víme, kde poznámka bydlí a kdo ji při návratu zavře?
+
+Čekací poznámka je dobrá právě proto, že je malá a dočasná. Dává týmu paměť bez toho, aby znovu rozhýbala pravidlo, které se právě podařilo stabilizovat.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VF o převodu slabého tření po prvním návratu do čekací poznámky: rozlišení od návratu historie a nového problému, návratová podmínka, expirace, otevřené řešení, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VE o prvním běžném návratu po uzavřené opravě pracovního pravidla: ověření bez návratu k historii, čtyři výsledné stavy, oddělení slabého tření a nového problému, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o uzavření úklidu po falešném poplachu do provozní paměti: rozhodovací věta, pracovní místa, rozlišení jednorázového úklidu a nového pravidla, privacy-first retence, karta a checklist.
 - 2026-06-01: Doplněna Příloha VD o uzavření potvrzené opravy pracovního pravidla po čekací poznámce: stabilní znění, úprava nejbližší pracovní trasy, zavření ověřovací stopy, sjednocení názvů, privacy-first úklid, karta, mini workshop a checklist.
