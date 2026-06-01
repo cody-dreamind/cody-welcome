@@ -158438,8 +158438,216 @@ Stabilní pravidlo prošlo první běžnou revizí jako součást normálního s
 
 První běžná revize je zkouška dospělosti pravidla. Když projde, nemusí dostat medaili, tabulku ani zvláštní monitoring. Stačí, že dál pomáhá práci a nezabírá víc pozornosti, než si zaslouží.
 
+## Příloha VO: Převod drobného nálezu z běžné revize do jedné úpravy v rytmu
+
+Běžná revize má umět najít drobné tření, aniž by z něj automaticky udělala nový projekt. To je těžší, než to zní. Jakmile se u stabilního pravidla objeví malý nález, tým má často chuť otevřít historii, přidat kontrolní tabulku, navrhnout nový standard nebo rovnou přepsat větší část procesu. Drobné tření pak začne stát víc pozornosti než problém, který mělo opravit.
+
+Tato příloha navazuje na Přílohu VN. První běžná revize skončila stavem "drobně upravit v rytmu". Nejde tedy o návratový signál, sloučení pravidla ani hlubší selhání. Jde o malý nález, který se dá opravit v rámci stejného revizního okna: nejasný název, starý odkaz, příliš dlouhá věta, chybějící příklad, duplicitní zmínka nebo drobná datová stopa bez účelu.
+
+Pracovní otázka:
+
+```text
+Jak drobný nález z běžné revize převést do jedné hotové úpravy, aniž z běžného rytmu vznikne nový opravný režim?
+```
+
+### Potvrďte, že jde opravdu o drobný nález
+
+Než něco opravíte, pojmenujte nález jednou větou:
+
+```text
+Při běžné revizi jsme našli:
+
+Práci to zdržuje tím, že:
+
+Nejde o návratový signál, protože:
+
+Stačí malá úprava:
+ano / ne
+```
+
+Dobrá věta je konkrétní:
+
+```text
+Odkaz z onboardingové šablony vede na starý název pravidla, takže nový člověk musí hádat, jestli jde o stejný postup.
+```
+
+Slabá věta je mlhavá:
+
+```text
+Dokumentace by chtěla celkově zlepšit.
+```
+
+Pokud věta nejde napsat konkrétně, nemáte drobný nález. Máte pocit, téma nebo nevyjasněnou nespokojenost. To nepatří do malé úpravy v rytmu. Buď to zavřete bez změny, nebo otevřete samostatnou otázku s vlastní hranicí.
+
+### Vyberte jeden typ úpravy
+
+Drobné nálezy se často pokazí tím, že se opraví všechno trochu. Název, odkaz, příklad, šablona, vysvětlení, changelog, interní oznámení. Výsledek vypadá pracovitě, ale pravidlo po něm může být méně stabilní než před revizí.
+
+Vyberte jeden typ zásahu:
+
+- Odkaz: opravíte cestu z pracovního místa na kanonické pravidlo.
+- Název: sjednotíte pojmenování pravidla nebo sekce.
+- Formulace: zkrátíte nebo zpřesníte jednu větu.
+- Příklad: přidáte nebo nahradíte jeden krátký příklad.
+- Umístění: přesunete drobnou oporu blíž k místu použití.
+- Úklid stopy: smažete nebo zkrátíte pomocný podklad, který už nemá účel.
+
+Příklad rozhodnutí:
+
+```text
+Typ úpravy:
+odkaz
+
+Co opravíme:
+V onboardingové šabloně změníme odkaz na aktuální kanonické pravidlo.
+
+Co neopravujeme:
+Nepřepisujeme znění pravidla, nepřidáváme nový příklad a neotevíráme starou čekací poznámku.
+```
+
+Tento zápis chrání rozsah. Jedna úprava má být tak malá, aby šla dokončit v témže revizním rytmu a aby po ní nebylo potřeba zavádět zvláštní sledování.
+
+### Opravte nejbližší pracovní místo
+
+U drobného nálezu neopravujte celý systém. Opravte nejbližší místo, kde nález opravdu překáží práci.
+
+Pokud člověk narazil na starý odkaz v onboardingové šabloně, opravte onboardingovou šablonu. Neprocházejte hned všechny interní materiály, pokud revize nepotvrdila širší rozpad odkazů. Pokud je v pravidle jedna dlouhá věta, zkraťte ji v kanonickém znění. Nepište nové vysvětlení do tří dalších míst. Pokud chybí malý příklad u rozhodovacího kroku, přidejte ho tam, kde se rozhodnutí dělá.
+
+Krátká brzda:
+
+```text
+Kde člověk na nález narazil při skutečné práci?
+
+Jaké nejbližší místo může oprava změnit?
+
+Která vzdálenější místa teď necháváme být?
+```
+
+Tím zabráníte tomu, aby drobný nález spustil "preventivní" úklid celého archivu. Preventivní úklid může být užitečný, ale není to malá úprava v rytmu. To je samostatná údržbová práce s vlastní stop podmínkou.
+
+### Zavřete úpravu stejnou revizní větou
+
+Malá úprava v rytmu nepotřebuje dlouhý příběh. Potřebuje krátkou větu, která říká, co se změnilo a proč:
+
+```text
+V běžné revizi jsme opravili [místo], protože [nalezene tření].
+Rozsah zůstal omezený na [jedna úprava].
+Další kontrola běží v normálním rytmu.
+```
+
+Příklad:
+
+```text
+V běžné revizi jsme opravili odkaz v onboardingové šabloně, protože vedl na starý název pravidla.
+Rozsah zůstal omezený na jeden odkaz.
+Další kontrola běží v normálním měsíčním rytmu.
+```
+
+Taková věta je nudná. Výborně. Stabilní provoz má být často trochu nudný. Když se každá drobná oprava tváří jako malý incident, tým se brzy naučí revize obcházet, protože po každé kontrole přichází lavina práce.
+
+Codyho komentář: běžná revize není detektivní seriál. Když najdete špatný odkaz, opravte špatný odkaz. Nemusíte kvůli němu sestavit časovou osu, vyšetřovací komisi a moodboard dokumentační bolesti.
+
+### Kdy drobnou úpravu nepouštět
+
+Nález nepatří do malé úpravy v rytmu, pokud:
+
+- stejný problém se opakuje na více pracovních místech;
+- oprava vyžaduje nové pravidlo, nový proces nebo nového vlastníka;
+- není jasné, které kanonické znění má po úpravě platit;
+- změna by ovlivnila zákaznická data, oprávnění nebo právní text;
+- tým chce kvůli úpravě zavést nové měření;
+- nález ukazuje, že pravidlo se při práci ve skutečnosti nepoužívá.
+
+V takových případech malou úpravu neprotlačujte. Zapište, že běžná revize našla návratový signál nebo nové téma, a přesuňte ho mimo revizní okno. Běžná revize tím nezklamala; naopak splnila práci. Odlišila drobnou údržbu od problému, který si zaslouží vlastní rozhodnutí.
+
+### Privacy-first úprava v rytmu
+
+Drobné úpravy jsou dobré místo pro datovou hygienu. Často se ukáže, že kolem pravidla zůstaly pomocné poznámky, staré screenshoty, duplicitní exporty nebo příklady s detaily, které už nepomáhají rozhodnutí.
+
+Privacy-first postup:
+
+- při opravě odkazu nepřidávejte nové sledování kliknutí;
+- při doplnění příkladu používejte anonymizovaný nebo syntetický scénář;
+- při zkrácení formulace nevracejte do textu staré osobní detaily jen pro kontext;
+- při úklidu pomocných stop smažte to, co nemá aktuální účel;
+- pokud něco necháváte, napište proč to stále pomáhá práci;
+- pokud úprava zasahuje zákaznická data, zastavte ji a otevřete samostatnou kontrolu účelu, přístupu a retence.
+
+Privacy-first věta:
+
+```text
+Drobnou úpravu v běžném rytmu děláme bez nových trackerů, bez rozšiřování osobních nebo zákaznických detailů a bez obnovování starých podkladů, které už neslouží rozhodnutí.
+```
+
+I tady platí stejná brzda: pokud revize najde jen překlep, opravte větu. Nezakládejte kvůli tomu redakční reformu.
+
+### Karta drobné úpravy v rytmu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Běžná revize:
+
+Drobný nález:
+
+Proč nejde o návratový signál:
+
+Typ úpravy:
+- odkaz / název / formulace / příklad / umístění / úklid stopy
+
+Nejbližší pracovní místo:
+
+Konkrétní úprava:
+
+Co výslovně neotevíráme:
+
+Privacy-first kontrola:
+
+Závěrečná revizní věta:
+
+Vlastník:
+
+Další kontrola v normálním rytmu:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledný stav běžné revize a potvrďte, že jde o "drobně upravit v rytmu".
+2. Minuta 2: napište nález jednou pracovní větou.
+3. Minuta 3: ověřte, proč nejde o návratový signál nebo nové téma.
+4. Minuta 4: vyberte jeden typ úpravy.
+5. Minuta 5: určete nejbližší pracovní místo zásahu.
+6. Minuta 6: proveďte nebo zadatelně popište úpravu a napište, co neotevíráte.
+7. Minuta 7: zkontrolujte privacy-first stopu a zapište závěrečnou revizní větu.
+
+Výstup workshopu:
+
+```text
+Drobný nález z běžné revize je převedený do jedné hotové úpravy v rytmu: má konkrétní místo, omezený rozsah, privacy-first hranici a neotevírá nový opravný režim.
+```
+
+### Checklist drobné úpravy v rytmu
+
+- Vyšli jsme ze stavu "drobně upravit v rytmu"?
+- Umíme nález popsat jednou konkrétní větou?
+- Potvrdili jsme, že nejde o návratový signál?
+- Vybrali jsme jeden typ úpravy?
+- Opravujeme nejbližší pracovní místo, ne celý systém?
+- Je jasně napsané, co teď neotevíráme?
+- Nezavádíme novou kontrolní sérii?
+- Nepřidáváme nový tracker, měření používání nebo osobní evidenci?
+- Použili jsme anonymizovaný nebo syntetický příklad, pokud stačí?
+- Smazali nebo zkrátili jsme pomocnou stopu bez účelu?
+- Zapsali jsme závěrečnou revizní větu?
+- Další kontrola běží v normálním rytmu?
+
+Drobná úprava v rytmu je zdravý servis stabilního pravidla. Má být viditelná pro ty, kdo pravidlo používají, ale ne tak hlasitá, aby přepsala plán práce. Když ji tým zvládne rychle zavřít, revize zůstane užitečný návyk místo další továrny na úkoly.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VO o převodu drobného nálezu z běžné revize do jedné úpravy v rytmu: potvrzení drobného nálezu, výběr jednoho typu zásahu, oprava nejbližšího pracovního místa, závěrečná revizní věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VN o první běžné revizi stabilního znění po návratu do rytmu: kontrola pracovního slibu, tři vstupy revize, čtyři výsledné stavy, ochrana před novým opravným režimem, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VM o vrácení stabilního znění do běžného revizního rytmu: kanonické místo, napojení na existující revizi, zavření opravné historie, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VL o druhém běžném použití stabilního znění bez dalšího auditu: rozlišení běžného použití, tichého šumu a návratového signálu, ukončení zvláštního sledování, privacy-first úklid, karta, mini workshop a checklist.
