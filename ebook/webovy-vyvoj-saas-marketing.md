@@ -157911,8 +157911,190 @@ Stabilní znění pravidla má za sebou první běžný návrat, jeden výsledn�
 
 První návrat ke stabilnímu znění má být skoro nudný. Pravidlo se použije, práce se udělá a tým nemá chuť vracet se k celé historii. Když je výsledek takhle nenápadný, systém funguje. Když se z návratu stane detektivka, pravidlo ještě není tak stabilní, jak se tvářilo.
 
+## Příloha VL: Druhé běžné použití stabilního znění bez dalšího auditu
+
+První návrat ukázal, že stabilní znění pravidla jde použít bez znalosti historie. Druhé běžné použití má jiný účel: ověřit, že pravidlo už opravdu patří do normální práce a nepotřebuje zvláštní pozornost. Pokud se z každého dalšího použití stane malý audit, stabilní pravidlo sice přežije na papíře, ale v provozu začne překážet.
+
+Tato příloha navazuje na Přílohu VK. První návrat proběhl, výsledný stav je známý a případné drobné doladění nebo čekací poznámka mají vlastní hranici. Teď už nejde o dokazování, že předchozí změna byla správná. Jde o to, aby se pravidlo přestalo chovat jako projekt a začalo se chovat jako běžná součást pracovního místa.
+
+Pracovní otázka:
+
+```text
+Použije se stabilní znění podruhé stejně přirozeně jako běžný nástroj, bez schůzky, bez historického vysvětlování a bez nové datové stopy?
+```
+
+### Nechte pravidlo pracovat
+
+Druhé použití nesmí začínat větou "pojďme se podívat, jestli to pořád funguje". Tím z běžného pravidla znovu uděláte experiment. Lepší je sledovat skutečnou situaci, ve které by pravidlo stejně přišlo na řadu: někdo zavírá rozhodovací záznam, připravuje poptávkovou úpravu, kontroluje obsahovou trasu, upravuje šablonu nebo předává výstup dalšímu člověku.
+
+Při druhém použití stačí odpovědět na tři otázky:
+
+- Spustilo se pravidlo ve správné pracovní situaci?
+- Vznikl očekávaný výstup bez návratu k historii?
+- Objevilo se stejné tření jako minule, nové tření, nebo žádné tření?
+
+Pokud jsou první dvě odpovědi ano a tření není opakované, pravidlo nechte být. Stabilní systém se nepozná podle toho, že ho pořád kontrolujete. Pozná se podle toho, že ho lidé používají a nemají potřebu o něm mluvit.
+
+### Rozlišujte běžné použití a návratový signál
+
+Ne každé drobné zaváhání je návratový signál. Někdo může přehlédnout odkaz, použít jiný název, ptát se na kontext nebo napsat větu trochu jinak. To ještě neznamená, že pravidlo selhalo. Návratový signál vzniká až tehdy, když se objeví stejný druh tření, který brání pracovnímu výstupu nebo znovu otevírá uzavřenou historii.
+
+Použijte jednoduché rozlišení:
+
+```text
+Běžné použití:
+Pravidlo pomohlo práci a drobné odchylky nebránily výstupu.
+
+Slabý šum:
+Něco bylo neobratné, ale není jasné, jestli jde o pravidlo nebo jednorázový kontext.
+
+Návratový signál:
+Opakuje se stejné tření, které brání použití pravidla nebo vrací tým ke staré rozhodovací větvi.
+```
+
+Příklad:
+
+```text
+Pracovní místo:
+Uzavření malé úpravy pravidla po čekací poznámce.
+
+Druhé použití:
+Člověk použil stabilní znění, ale pojmenoval původní čekací poznámku jiným názvem.
+
+Vyhodnocení:
+Jde o slabý šum, ne návratový signál. Výstup vznikl a historie se neotevřela.
+
+Rozhodnutí:
+Nic neměníme. Název sjednotíme až při opakování ve stejné situaci.
+```
+
+Tento druh zdrženlivosti je důležitý. Když z každého šumu uděláte opravu, tým se naučí, že stabilní pravidlo vlastně nikdy není stabilní. A pak se nedivte, že všichni raději čekají na další verzi místo práce.
+
+### Čtyři výsledné stavy druhého použití
+
+Po druhém běžném použití vyberte jeden stav:
+
+- Normální provoz: pravidlo se použilo bez zvláštní pozornosti a bez návratu k historii.
+- Tichý šum: vznikla drobná odchylka, která nebrání výstupu a zatím nezaslouží zásah.
+- Potvrzený návratový signál: opakuje se stejné tření nebo pravidlo znovu otevírá uzavřenou větev.
+- Nové pracovní místo: použití odkrylo potřebu, která nepatří do tohoto pravidla.
+
+Normální provoz znamená zavřít sledování. Není potřeba další karta, další review ani třetí kontrola jen pro jistotu.
+
+Tichý šum zapište jen tehdy, pokud by se bez zápisu ztratil důležitý kontext. I tehdy stačí jedna věta mimo hlavní pravidlo.
+
+Potvrzený návratový signál už má vést k malé úpravě, čekací poznámce nebo přerámování podle předchozích příloh. Důležité je nepředstírat, že jde o běžný provoz.
+
+Nové pracovní místo oddělte. Stabilní pravidlo nemá spolknout nový proces, nový reporting, novou odpovědnost ani nový datový tok.
+
+### Kdy ukončit sledování
+
+Sledování ukončete, když druhé použití proběhlo normálně nebo jen s tichým šumem, který nebrání výstupu. Stabilní pravidlo nepotřebuje vlastní životní podporu. Potřebuje být v kanonickém místě, mít vlastníka a občas projít běžným rytmem údržby, který už tým používá.
+
+Zápis ukončení:
+
+```text
+Druhé použití:
+Proběhlo v běžné pracovní situaci.
+
+Výsledek:
+Pravidlo vedlo k očekávanému výstupu bez návratu k historii.
+
+Rozhodnutí:
+Sledování ukončujeme. Pravidlo zůstává v normálním provozu.
+
+Další kontrola:
+Pouze v rámci běžného měsíčního nebo kvartálního rytmu, ne jako samostatný úkol.
+```
+
+Pokud se tým bojí sledování ukončit, pojmenujte čeho se bojí. Možná pravidlu nevěří, možná není jasný vlastník, možná se předchozí změna dotkla citlivější části produktu nebo zákaznické komunikace. To jsou legitimní témata, ale nejsou důvodem držet každé pravidlo v nekonečném ověřování.
+
+### Privacy-first provoz po druhém použití
+
+Druhé použití je dobré místo pro úklid posledních zbytků sledování. Pokud jste si kvůli prvnímu návratu nechali pomocnou poznámku, screenshot, export, seznam průchodů nebo kontrolní komentář, zeptejte se, jestli má po druhém normálním použití ještě účel. Většinou nemá.
+
+Privacy-first pravidla:
+
+- po normálním druhém použití nemažte kanonické pravidlo, ale zkraťte pomocné stopy;
+- neukládejte jména lidí, pokud nejsou vlastníky pravidla;
+- neudržujte zvláštní evidenci použití jen proto, že existuje;
+- pokud vznikl tichý šum, zapište ho bez osobních a zákaznických detailů;
+- pokud je potřeba návratový signál, držte ho u pracovního místa, ne v osobní historii člověka;
+- nepřidávejte analytiku používání interních pravidel, když stačí kontrola výstupu v běžném rytmu.
+
+Privacy-first věta:
+
+```text
+Po druhém normálním použití pravidla ukončujeme zvláštní sledování a necháváme jen kanonické znění, vlastníka a běžný revizní rytmus.
+```
+
+### Karta druhého běžného použití
+
+```text
+Pracovní místo:
+
+Stabilní znění:
+
+Druhá běžná situace použití:
+
+Výstup práce:
+
+Návrat k historii:
+- ano / ne / částečně
+
+Tření nebo šum:
+
+Výsledný stav:
+- normální provoz / tichý šum / potvrzený návratový signál / nové pracovní místo
+
+Rozhodnutí:
+
+Co už dál nesledujeme:
+
+Co zůstává v běžném rytmu:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou skutečnou situaci použití.
+2. Minuta 2: ověřte, jestli pravidlo spustilo správnou práci.
+3. Minuta 3: zkontrolujte výstup bez otevření historie.
+4. Minuta 4: rozlište běžné použití, tichý šum a návratový signál.
+5. Minuta 5: rozhodněte, jestli zvláštní sledování končí.
+6. Minuta 6: ukliďte pomocné stopy a nechte jen běžný revizní rytmus.
+
+Výstup workshopu:
+
+```text
+Stabilní znění prošlo druhým běžným použitím, má jeden výsledný stav a buď odchází do normálního provozu, nebo má jasně oddělený návratový signál.
+```
+
+### Checklist druhého použití
+
+- Proběhlo použití v běžné pracovní situaci?
+- Neotevřeli jsme historii změny jen ze zvyku?
+- Vedlo pravidlo k očekávanému výstupu?
+- Rozlišili jsme běžný šum od návratového signálu?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud jde o normální provoz, ukončili jsme zvláštní sledování?
+- Pokud jde o tichý šum, nezměnili jsme pravidlo předčasně?
+- Pokud jde o návratový signál, oddělili jsme ho od osobního výkonu člověka?
+- Pokud vzniklo nové pracovní místo, nenechali jsme ho spolknout původní pravidlo?
+- Zkrátili nebo smazali jsme pomocné poznámky, exporty a kontrolní komentáře?
+- Zůstává pravidlo v kanonickém místě s vlastníkem?
+- Další kontrola běží v normálním rytmu, ne jako nový samostatný projekt?
+
+Druhé běžné použití má v dobrém případě skončit větou "tohle už neřešíme zvlášť". To není lenost. To je známka, že pravidlo přešlo z opravného režimu do provozu. A provoz nemá být muzeum starých rozhodnutí, do kterého chodíme každý týden obdivovat vitríny.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VL o druhém běžném použití stabilního znění bez dalšího auditu: rozlišení běžného použití, tichého šumu a návratového signálu, ukončení zvláštního sledování, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VK o prvním běžném návratu ke stabilnímu znění po uzavřené malé úpravě: použití bez staré historie, první přirozený průchod, čtyři výsledné stavy, kdy nic neměnit, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VJ o uzavření ověřené malé úpravy pravidla do stabilního znění: stabilní jazyk, uzavření ověřovací stopy, sjednocení nejbližších pracovních míst, oddělení nového tématu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VI o ověření malé úpravy pravidla po potvrzené čekací poznámce: přirozený spouštěč, plynulost, správnost výstupu, vedlejší efekt, čtyři výsledné stavy, práce bez hodnocení člověka, privacy-first ověření, karta, mini workshop a checklist.
