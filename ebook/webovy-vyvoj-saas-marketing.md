@@ -157289,8 +157289,267 @@ Potvrzená čekací poznámka je převedená do jedné malé úpravy pravidla, p
 
 Převod potvrzené čekací poznámky je místo, kde se ukáže, jestli tým opravdu umí pracovat v malém. Když se povede, pravidlo je o jednu větu jasnější, stará poznámka zmizí a práce pokračuje bez nové vrstvy řízení.
 
+## Příloha VI: Ověření malé úpravy pravidla po potvrzené čekací poznámce
+
+Malá úprava pravidla po potvrzené čekací poznámce není hotová ve chvíli, kdy se napíše nová věta. Hotová je až tehdy, když ji někdo použije v běžné práci a původní tření se buď nevrátí, nebo se ukáže jako něco jiného. Bez ověření se z malé úpravy stane jen další vrstva textu. A vrstvy textu umí být nenápadně těžké, hlavně když je nikdo nechce mazat, protože "se to možná bude hodit".
+
+Tato příloha navazuje na Přílohu VH. Čekací poznámka byla potvrzená, převedená do jedné malé úpravy a původní pomocná stopa byla zavřená nebo zkrácená. Cílem teď není hledat další zlepšení. Cílem je ověřit, jestli malá úprava opravdu odstranila konkrétní tření, kvůli kterému vznikla.
+
+Pracovní otázka:
+
+```text
+Stačila malá úprava pravidla k tomu, aby se původní potvrzené tření při běžném použití nevrátilo?
+```
+
+### Ověřujte při prvním přirozeném spouštěči
+
+Nezakládejte speciální kontrolní meeting jen proto, že se upravila jedna věta. Počkejte na první přirozenou situaci, ve které se pravidlo stejně používá. Ověření má sedět na práci, ne práce na ověření.
+
+Dobré spouštěče:
+
+- další vyplnění stejné karty změny;
+- další měsíční review, ve kterém se dané pole používá;
+- další předání úkolu podle upraveného pravidla;
+- další kontrola odložené poznámky;
+- další použití šablony novým člověkem nebo jinou rolí.
+
+Slabé spouštěče:
+
+- "někdy se k tomu vrátíme";
+- čtení upraveného pravidla bez reálného výstupu;
+- kontrola autorem úpravy bez použití v práci;
+- obecný pocit, že text vypadá líp;
+- komentář v chatu bez navazujícího rozhodnutí.
+
+Příklad:
+
+```text
+Upravené pravidlo:
+Do pole Mimo rozsah patří i nápady pro pozdější období, pokud nejsou součástí aktuální iterace.
+
+Spouštěč ověření:
+Příští vyplnění karty změny po měsíčním review.
+
+Ověřovací otázka:
+Vznikl znovu stejný dotaz, kam patří nápady pro další kvartál?
+```
+
+Když se přirozený spouštěč dlouho neobjeví, úpravu nechte být. Nepředstírejte ověření tím, že si pravidlo přečtete nanečisto. Pokud se pravidlo nepoužívá, máte možná větší otázku: jestli dané pracovní místo ještě žije.
+
+### Sledujte tři pracovní signály
+
+Ověření malé úpravy má být krátké. Stačí tři signály:
+
+- Plynulost: člověk prošel upraveným místem bez stejného dotazu nebo zastavení.
+- Správnost výstupu: vznikl výstup, který odpovídá záměru pravidla.
+- Vedlejší efekt: úprava nevytvořila novou nejasnost, nové pole, novou ruční kontrolu nebo nový obcházející zvyk.
+
+Zápis může být velmi krátký:
+
+```text
+Plynulost:
+Karta šla vyplnit bez původního dotazu.
+
+Správnost výstupu:
+Odložené nápady skončily v poli Mimo rozsah, ne v aktuální iteraci.
+
+Vedlejší efekt:
+Nevzniklo nové pole ani nový seznam nápadů bokem.
+```
+
+Nehledejte úplnou jistotu. U malé úpravy stačí pracovní jistota: úprava byla použita, původní tření se nevrátilo a nic zjevně nerozbila.
+
+### Čtyři výsledné stavy
+
+Po ověření vyberte jeden stav. Ne dva, ne "zatím uvidíme", ne "dáme tomu ještě šanci, ale zároveň to trochu přepíšeme". To je přesně ten typ mlhy, kvůli kterému čekací poznámky vznikají.
+
+#### Potvrzeno
+
+Úprava stačila. Původní tření se nevrátilo, výstup je správný a nevznikl nový vedlejší efekt.
+
+Zápis:
+
+```text
+Stav:
+Potvrzeno.
+
+Rozhodnutí:
+Malá úprava zůstává součástí pravidla.
+
+Co zavíráme:
+Ověřovací stopu po potvrzené čekací poznámce.
+
+Další návrat:
+Jen při novém signálu z běžné práce.
+```
+
+Tady není potřeba dělat další iteraci. Pravidlo použijte a nechte ho žít. Ano, i dokument může chvíli prostě fungovat. Vzácný úkaz, netřeba ho rušit.
+
+#### Drobně doladit
+
+Úprava pomohla, ale při použití se ukázalo jedno přesně ohraničené doladění. Pozor: doladění musí být menší než původní úprava, jinak už nejde o doladění.
+
+Příklad:
+
+```text
+Výsledek:
+Původní dotaz se nevrátil, ale lidé nevěděli, jestli do stejného pole patří i technické dluhy.
+
+Doladění:
+Do příkladu doplnit jednu negativní větu: "Technický dluh sem nepatří; zapisuje se do technického backlogu."
+```
+
+Doladění udělejte jen tehdy, když má jasné místo a jasné nové znění. Pokud vyžaduje další rozhodování, otevřete nové téma.
+
+#### Vrátit zpět
+
+Úprava nepomohla nebo vytvořila horší nejasnost. V takovém případě ji vraťte zpět, i když byla dobře míněná. Malá oprava, která zhorší práci, není investice. Je to dražší věta.
+
+Zápis:
+
+```text
+Stav:
+Vrátit zpět.
+
+Proč:
+Nová věta vedla k tomu, že lidé začali do pole Mimo rozsah zapisovat i samostatné projekty.
+
+Co obnovujeme:
+Předchozí znění pravidla.
+
+Co otevíráme:
+Samostatnou otázku, kam patří větší odložené nápady.
+```
+
+Vrácení zpět neberte jako prohru. Je to levný způsob, jak neudržovat špatné pravidlo jen proto, že už bylo napsané.
+
+#### Otevřít nové téma
+
+Při ověření se ukáže, že původní tření nebylo problémem věty, ale širšího pracovního místa. V takovém případě malou úpravu buď ponechte beze změny, nebo vraťte zpět, ale nové téma držte odděleně.
+
+Příklad:
+
+```text
+Stav:
+Otevřít nové téma.
+
+Co se ukázalo:
+Tým nemá jedno místo pro nápady, které jsou mimo aktuální iteraci, ale mohou být relevantní pro další plánování.
+
+Co neděláme:
+Nepřidáváme další pravidla do karty změny.
+
+Nové téma:
+Jedno plánovací místo pro odložené nápady.
+```
+
+Tím chráníte malé pravidlo před tím, aby neslo odpovědnost za celý systém plánování. Chudák pravidlo, ono na to fakt nemá záda.
+
+### Nehodnoťte člověka podle tření
+
+Ověření pravidla není výkonnostní hodnocení. Pokud se člověk zasekne, je to signál o pravidle, pracovním místě nebo kontextu. Ne důkaz, že "si to nepřečetl pořádně".
+
+Držte jazyk u práce:
+
+- "Při použití vznikl stejný dotaz" místo "Petr zase nevěděl";
+- "Výstup neodpovídal hranici Mimo rozsah" místo "Tým to špatně pochopil";
+- "Pravidlo potřebuje bližší příklad" místo "Lidé nedodržují proces";
+- "Tahle karta neumí pojmout větší odložené nápady" místo "Někdo to tam cpe".
+
+Takový jazyk má praktický dopad. Když popíšete práci, můžete opravit práci. Když popíšete lidi, vyrobíte obranu, ticho nebo další skrytou ruční práci.
+
+### Privacy-first ověření
+
+Ověření malé úpravy pravidla má používat minimum dat. Nepotřebujete měřit čas nad polem, počet kliknutí, číst soukromé poznámky ani archivovat chatovou historii. Potřebujete jen vědět, zda běžná práce prošla upraveným místem a jaký vznikl výsledek.
+
+Privacy-first pravidla:
+
+- zapisujte pracovní výsledek, ne osobní historii;
+- nepřidávejte sledování chování kvůli jedné větě v pravidle;
+- pokud použijete příklad, anonymizujte ho nebo vytvořte syntetickou variantu;
+- pomocné poznámky po rozhodnutí smažte nebo zkraťte;
+- nové téma oddělte bez přenášení nepotřebných detailů z ověřování;
+- pokud ověření ukáže, že nějaký starý export už není potřeba, smažte ho v rámci stejné iterace.
+
+Privacy-first věta:
+
+```text
+Malou úpravu ověřujeme podle pracovního výstupu při běžném použití. Neukládáme osobní chování, nepřidáváme nové sledování a po rozhodnutí zkracujeme ověřovací stopu na výsledek, stav a další krok.
+```
+
+### Karta ověření malé úpravy
+
+```text
+Pracovní místo:
+
+Původní potvrzená čekací poznámka:
+
+Provedená malá úprava:
+
+Přirozený spouštěč ověření:
+
+Kdo pravidlo použil nebo kde bylo použito:
+- zapisujte roli nebo pracovní situaci, ne osobní hodnocení
+
+Plynulost:
+
+Správnost výstupu:
+
+Vedlejší efekt:
+
+Výsledný stav:
+- potvrzeno / drobně doladit / vrátit zpět / otevřít nové téma
+
+Rozhodnutí:
+
+Co zavíráme:
+
+Co případně otevíráme odděleně:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: připomeňte původní potvrzenou čekací poznámku.
+2. Minuta 2: přečtěte provedenou malou úpravu.
+3. Minuta 3: pojmenujte přirozený spouštěč ověření.
+4. Minuta 4: zapište plynulost a správnost výstupu.
+5. Minuta 5: zkontrolujte vedlejší efekt.
+6. Minuta 6: vyberte jeden výsledný stav.
+7. Minuta 7: zavřete ověřovací stopu a zapište privacy-first úklid.
+
+Výstup workshopu:
+
+```text
+Malá úprava pravidla je ověřená při běžném použití, má jeden výsledný stav a ověřovací stopa je zavřená nebo zkrácená.
+```
+
+### Checklist ověření malé úpravy
+
+- Ověřovali jsme při přirozeném pracovním spouštěči?
+- Neudělali jsme z malé úpravy speciální audit?
+- Porovnali jsme realitu s původním potvrzeným třením?
+- Zapsali jsme plynulost, správnost výstupu a vedlejší efekt?
+- Vybrali jsme právě jeden výsledný stav?
+- Pokud úprava stačila, zavřeli jsme ověřovací stopu?
+- Pokud je potřeba doladění, je opravdu menší než původní úprava?
+- Pokud úprava škodí, umíme ji vrátit zpět bez dramatu?
+- Pokud se ukázal širší problém, oddělili jsme ho jako nové téma?
+- Hodnotíme pravidlo a pracovní místo, ne člověka?
+- Neukládáme osobní chování, screenshoty, chatovou historii ani zbytečné exporty?
+- Po rozhodnutí mažeme nebo zkracujeme pomocné poznámky?
+- Je jasné, kdo případné doladění, návrat zpět nebo nové téma uzavře?
+
+Ověření malé úpravy pravidla je protiváha k dokumentačnímu optimismu. Nestačí, že úprava zní rozumně. Musí přežít běžné použití, nevrátit staré tření a nepřidat novou neviditelnou práci. Když to splní, patří do stabilního pravidla. Když ne, patří zpět na stůl, ale pořád v malém a s čistou datovou stopou.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VI o ověření malé úpravy pravidla po potvrzené čekací poznámce: přirozený spouštěč, plynulost, správnost výstupu, vedlejší efekt, čtyři výsledné stavy, práce bez hodnocení člověka, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VH o převodu potvrzené čekací poznámky do jedné malé úpravy pravidla: potvrzený signál, nejbližší místo zásahu, jeden typ úpravy, zavření původní poznámky, ověření běžným použitím, privacy-first provedení, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VG o kontrole čekací poznámky při dalším běžném použití: spouštěče, porovnání s návratovou podmínkou, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna krátká poznámka k Příloze VF, aby doběhlá expirace čekací poznámky šla zavřít bez náhradní úpravy, nového úkolu a další datové stopy.
