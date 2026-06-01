@@ -156767,8 +156767,282 @@ Slabé tření je zachycené jako čekací poznámka mimo hlavní pravidlo. Prav
 
 Čekací poznámka je dobrá právě proto, že je malá a dočasná. Dává týmu paměť bez toho, aby znovu rozhýbala pravidlo, které se právě podařilo stabilizovat.
 
+## Příloha VG: Kontrola čekací poznámky při dalším běžném použití
+
+Čekací poznámka po slabém tření má smysl jen tehdy, když se k ní tým umí vrátit bez dramatu. Pokud ji nikdo nikdy nezavře, stane se z ní tichý dluh. Pokud ji někdo otevře moc brzy, změní se v předčasnou opravu. Správná kontrola je malá: proběhlo další běžné použití, podíváme se na návratovou podmínku a rozhodneme, jestli poznámka mizí, zůstává, nebo se mění v konkrétní opravu.
+
+Tato příloha navazuje na Přílohu VF. Slabé tření bylo zachycené mimo hlavní pravidlo, mělo návratovou podmínku, expiraci a neobsahovalo hotové řešení. Teď přichází první skutečná zkouška: další normální použití pracovního místa.
+
+Otázka zní:
+
+```text
+Vrací se slabé tření při běžné práci tak, že zaslouží zásah do pravidla, nebo poznámku zavřeme bez změny?
+```
+
+### Neotvírejte poznámku bez spouštěče
+
+Čekací poznámka nemá být pravidelná agenda jen proto, že existuje. Otevřete ji pouze tehdy, když nastane jeden ze spouštěčů:
+
+- proběhne další běžné použití pravidla;
+- doběhne expirační datum;
+- někdo narazí na stejnou otázku, kterou poznámka popisuje;
+- poznámka brání práci, protože kolem ní vzniká nejistota;
+- vlastník pracovního místa dělá krátké servisní review.
+
+Špatný důvod k otevření:
+
+```text
+Máme v logu starou poznámku, tak ji pojďme rovnou zapracovat.
+```
+
+Lepší důvod:
+
+```text
+Při druhém použití karty změny se znovu objevil dotaz, jestli do pole Mimo rozsah patří i kvartální nápady. Návratová podmínka z Přílohy VF se naplnila.
+```
+
+Rozdíl je zásadní. V prvním případě dokumentace řídí práci. Ve druhém případě práce rozhoduje, co dokumentace potřebuje.
+
+### Porovnejte realitu s původní podmínkou
+
+Při kontrole se nejdřív vraťte k původnímu zápisu. Ne k pocitu, že "něco tam bylo". Čekací poznámka má mít návratovou podmínku právě proto, aby se později nerozhodovalo podle nálady.
+
+Zapište si:
+
+```text
+Původní slabé tření:
+
+Návratová podmínka:
+
+Co se stalo při dalším použití:
+
+Je to stejný signál?
+- ano / ne / částečně
+
+Naplnila se podmínka?
+- ano / ne
+```
+
+Příklad:
+
+```text
+Původní slabé tření:
+Jeden člověk se zeptal, jestli do pole Mimo rozsah patří i nápady pro další kvartál.
+
+Návratová podmínka:
+Vrátíme se k tomu, pokud se stejný dotaz objeví při dvou dalších běžných použitích nebo pokud kvůli němu někdo zařadí špatný typ položky.
+
+Co se stalo:
+Při dalším použití dotaz nevznikl a pole bylo vyplněné správně.
+
+Naplnila se podmínka:
+Ne.
+```
+
+Výsledek není "ještě počkáme navždy". Výsledek je buď pokračování do dalšího použití podle původní podmínky, nebo zavření při expiraci. Čekací poznámka má čekat, ne zakořenit.
+
+### Čtyři výsledné stavy
+
+Po kontrole vyberte jeden stav:
+
+- Zavřít bez změny.
+- Nechat čekat do původní expirace.
+- Převést do malé opravy.
+- Oddělit jako nový problém.
+
+#### Zavřít bez změny
+
+Zavřete poznámku, když se signál nevrátil a expirační hranice doběhla, nebo když další použití ukázalo, že původní obava byla jednorázová.
+
+Krátký zápis stačí:
+
+```text
+Výsledek:
+Zavřeno bez změny.
+
+Proč:
+Slabé tření se při dalším běžném použití nevrátilo a výstup vznikl správně.
+
+Co se mění:
+Nic.
+
+Co mažeme:
+Čekací poznámku nebo ji zkracujeme na jeden uzavřený záznam v rozhodovacím logu.
+```
+
+Tohle je vítězství, ne zanedbání. Systém uměl nevytvořit práci z jedné otázky.
+
+#### Nechat čekat do původní expirace
+
+Tento stav použijte, když proběhlo další použití, ale původní podmínka ještě není rozhodnutá. Například poznámka má čekat na dvě další použití a zatím proběhlo jen jedno.
+
+Zapište:
+
+```text
+Výsledek:
+Pokračuje čekání.
+
+Co se stalo:
+Při jednom dalším použití se signál nevrátil.
+
+Co neměníme:
+Pravidlo, šablonu ani expiraci.
+
+Další kontrola:
+Po druhém použití nebo k datu expirace.
+```
+
+Pozor na přepisování podmínky uprostřed cesty. Když ji pokaždé posunete, čekací poznámka přestane být lehký nástroj a stane se trvalou výmluvou, proč něco držet otevřené.
+
+#### Převést do malé opravy
+
+Převod do opravy dává smysl, když se stejný signál vrátí a brání práci. I pak má být oprava malá. Nepřepisujte celé pravidlo kvůli jedné hranici.
+
+Příklad:
+
+```text
+Opakovaný signál:
+Dvakrát vznikl stejný dotaz, jestli do pole Mimo rozsah patří i nápady pro další kvartál.
+
+Nejmenší oprava:
+Do popisu pole doplnit jednu větu: "Patří sem i nápady pro pozdější období, pokud nejsou součástí aktuální iterace."
+
+Co neotevíráme:
+Neměníme strukturu celé karty změny a nezavádíme nové pole pro kvartální nápady.
+```
+
+Malá oprava má být tak malá, aby šla později ověřit běžným použitím. Pokud potřebuje nový proces, nové role nebo nový nástroj, už to není malá oprava. Je to nové téma.
+
+#### Oddělit jako nový problém
+
+Někdy se při kontrole ukáže, že původní slabé tření nebylo problémem pravidla. Jen ukazovalo na sousední slabinu.
+
+Příklad:
+
+```text
+Původní poznámka:
+Dotaz, kam zapisovat nápady pro další kvartál.
+
+Nové zjištění:
+Tým nemá místo, kde se odložené nápady pravidelně vrací do plánování.
+
+Závěr:
+Neopravujeme pole Mimo rozsah. Otevíráme samostatnou otázku pro plánovací rytmus.
+```
+
+Tím chráníte pracovní pravidlo před tím, aby neslo problém celého systému. Dobré pravidlo nemá být batoh pro všechny okolní nejistoty.
+
+### Neprodlužujte čekání kvůli pocitu
+
+Čekací poznámky jsou užitečné, protože mají konec. Když se konec pořád posouvá, tým si zvykne mít věci napůl otevřené. To je jeden z nejtišších zdrojů chaosu v dokumentaci: nic není urgentní, nic není rozhodnuté, všechno možná někdy.
+
+Použijte jednoduché stop pravidlo:
+
+```text
+Pokud se poznámka nedá po expiraci zavřít, musí se převést na konkrétní opravu nebo nové téma. Nesmí jen pokračovat jako neurčitá připomínka.
+```
+
+Výjimka existuje jen pro situaci, kdy původní pracovní místo zatím nebylo znovu použité. Pak nejde o prodloužení kvůli pocitu. Jde o čekání na reálný spouštěč. I tehdy ale napište datum další kontroly, aby poznámka nezmizela v mlze.
+
+### Privacy-first kontrola čekací poznámky
+
+Kontrola čekací poznámky nesmí zavést nové sledování lidí. Není potřeba evidovat, kdo přesně se zeptal, kdo zaváhal, kolik minut hledal pole nebo jakou větu řekl v chatu. Potřebujete pracovní výsledek a rozhodnutí.
+
+Privacy-first minimum:
+
+- zapisujte roli nebo pracovní situaci, ne osobní hodnocení;
+- neukládejte screenshoty, pokud stačí anonymní popis;
+- při zavření smažte dočasné podklady, které už nemají rozhodovací hodnotu;
+- při malé opravě nepřidávejte nové povinné údaje bez jasného účelu;
+- při novém problému oddělte jeho datovou stopu od původní poznámky.
+
+Privacy-first věta:
+
+```text
+Čekací poznámku kontrolujeme podle pracovního výstupu a původní návratové podmínky. Nezakládáme nové sledování lidí a po rozhodnutí mažeme nebo zkracujeme pomocné stopy.
+```
+
+Codyho komentář: největší hodnota čekací poznámky není v tom, že něco připomene. Je v tom, že týmu dovolí nechat jednu nejistotu chvíli být a pak ji disciplinovaně zavřít. Dokumentace, která umí zavírat malé věci, nemusí později zachraňovat velké.
+
+### Karta kontroly čekací poznámky
+
+```text
+Pracovní místo:
+
+Původní čekací poznámka:
+
+Původní návratová podmínka:
+
+Původní expirace:
+
+Spouštěč kontroly:
+- další běžné použití / doběhlá expirace / opakovaný signál / servisní review
+
+Co se stalo při dalším použití:
+
+Je to stejný signál?
+- ano / ne / částečně
+
+Naplnila se podmínka?
+- ano / ne
+
+Výsledný stav:
+- zavřít bez změny / nechat čekat / převést do malé opravy / oddělit jako nový problém
+
+Rozhodnutí:
+
+Nejmenší případná oprava:
+
+Co výslovně neměníme:
+
+Co mažeme nebo zkracujeme:
+
+Privacy-first úklid:
+
+Další kontrola, pokud existuje:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: otevřete původní čekací poznámku a návratovou podmínku.
+2. Minuta 2: popište další běžné použití pracovního místa.
+3. Minuta 3: rozhodněte, jestli se vrátil stejný signál.
+4. Minuta 4: ověřte, jestli se naplnila podmínka nebo expirace.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: zapište, co se nemění a co se maže.
+7. Minuta 7: zkontrolujte privacy-first stopu a případnou další kontrolu.
+
+Výstup workshopu:
+
+```text
+Čekací poznámka má uzavřený stav: je zavřená bez změny, čeká podle původní podmínky, převedla se do malé opravy, nebo se oddělila jako nové téma mimo původní pravidlo.
+```
+
+### Checklist kontroly čekací poznámky
+
+- Otevíráme poznámku kvůli reálnému spouštěči?
+- Máme před sebou původní návratovou podmínku?
+- Porovnali jsme další použití s původním signálem?
+- Rozhodli jsme, jestli se podmínka naplnila?
+- Vybrali jsme právě jeden výsledný stav?
+- Pokud signál zmizel, zavíráme poznámku bez náhradní úpravy?
+- Pokud čekání pokračuje, držíme původní expiraci?
+- Pokud se signál opakoval, volíme nejmenší opravu?
+- Pokud se ukázal nový problém, oddělujeme ho od původního pravidla?
+- Neprodlužujeme poznámku jen kvůli pocitu?
+- Nezavedli jsme nové sledování, screenshoty ani osobní hodnocení?
+- Po rozhodnutí mažeme nebo zkracujeme pomocné stopy?
+- Je jasné, kdo případnou další kontrolu zavře?
+
+Kontrola čekací poznámky je malá provozní disciplína. Bez ní se z poznámek stává bahno. S ní zůstávají tím, čím mají být: krátkou pamětí pro signály, které si zatím nezaslouží měnit pravidlo.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VG o kontrole čekací poznámky při dalším běžném použití: spouštěče, porovnání s návratovou podmínkou, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna krátká poznámka k Příloze VF, aby doběhlá expirace čekací poznámky šla zavřít bez náhradní úpravy, nového úkolu a další datové stopy.
 - 2026-06-01: Doplněna Příloha VF o převodu slabého tření po prvním návratu do čekací poznámky: rozlišení od návratu historie a nového problému, návratová podmínka, expirace, otevřené řešení, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VE o prvním běžném návratu po uzavřené opravě pracovního pravidla: ověření bez návratu k historii, čtyři výsledné stavy, oddělení slabého tření a nového problému, privacy-first návrat, karta, mini workshop a checklist.
