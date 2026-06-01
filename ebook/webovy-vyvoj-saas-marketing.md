@@ -156660,6 +156660,15 @@ Pokud se téma nevrátí do 2026-07-15, poznámku zavřeme bez změny.
 
 Nepoužívejte expiraci typu "někdy se na to podíváme". To není expirace, to je odložený nepořádek s lepší slovní zásobou.
 
+Když expirace doběhne bez opakování, zavřete poznámku bez náhradní úpravy. Stačí jedna věta u původního záznamu: signál se nevrátil, pravidlo zůstává beze změny a pomocná poznámka se dál nepřenáší. Tím zabráníte tomu, aby se z neškodného dotazu stal archivní stín, který bude při dalších revizích znovu soutěžit o pozornost.
+
+Krátké zavření může vypadat takto:
+
+```text
+Výsledek expirace:
+Tření se při dvou dalších použitích nevrátilo. Poznámku zavíráme bez změny pravidla a bez nového úkolu.
+```
+
 ### Nechte řešení otevřené
 
 Čekací poznámka nemá rovnou diktovat budoucí zásah. Její práce je uchovat signál, ne předčasně vybrat opravu. Když do ní napíšete hotové řešení, tým se při návratu často ptá jen "provedeme to?", místo aby se podíval, jestli se problém opravdu opakoval.
@@ -156760,6 +156769,7 @@ Slabé tření je zachycené jako čekací poznámka mimo hlavní pravidlo. Prav
 
 ## Pracovní log
 
+- 2026-06-01: Doplněna krátká poznámka k Příloze VF, aby doběhlá expirace čekací poznámky šla zavřít bez náhradní úpravy, nového úkolu a další datové stopy.
 - 2026-06-01: Doplněna Příloha VF o převodu slabého tření po prvním návratu do čekací poznámky: rozlišení od návratu historie a nového problému, návratová podmínka, expirace, otevřené řešení, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VE o prvním běžném návratu po uzavřené opravě pracovního pravidla: ověření bez návratu k historii, čtyři výsledné stavy, oddělení slabého tření a nového problému, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o uzavření úklidu po falešném poplachu do provozní paměti: rozhodovací věta, pracovní místa, rozlišení jednorázového úklidu a nového pravidla, privacy-first retence, karta a checklist.
