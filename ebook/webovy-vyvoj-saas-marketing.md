@@ -157738,8 +157738,182 @@ Ověřená malá úprava je přepsaná do stabilního znění, pomocné stopy js
 
 Dobře uzavřená malá úprava se pozná podle toho, že ji další člověk nepovažuje za změnu. Prostě použije pravidlo, udělá práci a nevytáhne z šuplíku starou čekací poznámku. To je přesně ten druh nenápadného pořádku, který šetří čas i data.
 
+## Příloha VK: První běžný návrat ke stabilnímu znění po uzavřené malé úpravě
+
+Stabilní znění pravidla není hotové ve chvíli, kdy ho uložíte. Hotové je až tehdy, když se k němu někdo vrátí při běžné práci a nepotřebuje znát původní čekací poznámku, ověřovací komentáře ani důvod poslední úpravy. První návrat proto není audit dokumentace. Je to krátká kontrola, jestli pravidlo opravdu funguje jako součást pracovního místa.
+
+Tato příloha navazuje na Přílohu VJ. Malá úprava pravidla je zavřená, přepsaná do stabilního jazyka a pomocné stopy jsou uklizené. Cílem teď není znovu hodnotit celou změnu. Cílem je podívat se na první přirozené použití a rozhodnout, jestli stabilní znění zůstává klidné, potřebuje drobné doladění, nebo otevřelo jiné téma.
+
+Pracovní otázka:
+
+```text
+Použije další člověk stabilní znění pravidla bez znalosti historie a dostane se k pracovnímu výstupu bez nového tření?
+```
+
+### Nevracejte se ke staré čekací poznámce
+
+První návrat svádí k tomu, že tým vytáhne celý příběh: proč čekací poznámka vznikla, co se opakovalo, jak se úprava ověřovala a kdo u toho byl. To je užitečné jen tehdy, když se pravidlo znovu rozpadá. Pro běžné použití je to zbytečná zátěž.
+
+Začněte jen aktuálním zněním:
+
+```text
+Stabilní pravidlo říká:
+
+Pracovní situace je:
+
+Výstup má být:
+
+Člověk při použití potřeboval / nepotřeboval historii změny:
+```
+
+Pokud člověk bez historie pravidlo použije, starý příběh neotvírejte. Pokud historii potřebuje, nejde ještě o stabilní znění. Buď pravidlu chybí příklad, nebo je pravidlo pořád napsané jazykem změny místo jazykem práce.
+
+### Sledujte první přirozený průchod
+
+První návrat nemá být schůzka navíc. Využijte nejbližší situaci, kdy by se pravidlo stejně použilo: příprava iterace, uzavření šablony, kontrola rozhodovacího zápisu, předání úkolu nebo krátké review pracovního místa.
+
+Sledujte tři věci:
+
+- orientaci: člověk pozná, kdy pravidlo použít;
+- výstup: podle pravidla vznikne správný pracovní výsledek;
+- plynulost: pravidlo nepřidá nové vysvětlování, přepisování ani ruční obcházení.
+
+Neřešte estetiku textu, pokud práce proběhla dobře. Stabilní pravidlo nemusí být literární vítěz. Má být dost jasné, aby pomohlo v konkrétní situaci. Ano, i Cody občas musí nechat větu být, i když by si s ní rád ještě pohrál. Profesionální dospělost bolí.
+
+### Čtyři výsledné stavy
+
+Po prvním návratu vyberte jeden stav:
+
+- Klidné použití: pravidlo fungovalo bez historie a bez nového tření.
+- Drobné doladění: pravidlo fungovalo, ale jedna věta, příklad nebo název brzdí plynulost.
+- Slabé tření k pozorování: objevilo se tření, ale není jasné, jestli patří k pravidlu, pracovní situaci nebo jednorázovému kontextu.
+- Nové téma: návrat ukázal jinou otázku, která nemá být řešena uvnitř stabilního pravidla.
+
+Klidné použití znamená nedělat nic. To je legitimní výsledek, ne promarněná iterace.
+
+Drobné doladění smí upravit jen nejbližší pracovní místo. Typicky zkrátí větu, přidá jeden příklad, sjednotí název pole nebo opraví odkaz.
+
+Slabé tření patří do čekací poznámky s návratovou podmínkou. Ne do okamžité úpravy pravidla.
+
+Nové téma oddělte do samostatné pracovní otázky. Pokud se při použití pravidla ukáže problém vlastnictví, nástroje, procesu nebo nabídky, pravidlo není správné místo pro jeho řešení.
+
+### Kdy nic neměnit
+
+Nejčastější chyba po prvním návratu je vylepšování z pocitu. Někdo řekne, že by pravidlo šlo napsat elegantněji, přehledněji nebo univerzálněji. Možná ano. Ale pokud pravidlo pomohlo práci, nevyrábějte z návratu redakční dílnu.
+
+Nic neměňte, když:
+
+- člověk pravidlo našel bez doptávání;
+- výstup odpovídá očekávání;
+- nebylo potřeba otevřít původní čekací poznámku;
+- nevznikla nová datová stopa;
+- tření je jen stylistické nebo jednorázové;
+- další úprava by rozšířila pravidlo mimo původní pracovní místo.
+
+Zápis pro klidné použití:
+
+```text
+První návrat:
+Stabilní znění bylo použité bez znalosti historie.
+
+Výsledek:
+Výstup odpovídal pracovní situaci.
+
+Rozhodnutí:
+Nic neměníme.
+
+Návratový signál:
+Téma otevřeme jen při opakovaném tření ve stejné pracovní situaci.
+```
+
+### Privacy-first návrat
+
+První návrat nepotřebuje sledovat člověka. Stačí zkontrolovat pracovní výstup a případně stručně zapsat, kde pravidlo pomohlo nebo brzdilo. Pokud kvůli návratu vznikají screenshoty, exporty chování, nahrávky nebo jmenné poznámky, rozsah se utrhl ze řetězu.
+
+Privacy-first hranice:
+
+- nekontrolujte osobní výkon, ale použitelnost pravidla;
+- neukládejte jména lidí, pokud nejsou nutná pro vlastnictví úkolu;
+- nepřidávejte měření používání pravidla;
+- neobnovujte smazané ověřovací podklady;
+- pomocný zápis po klidném použití zkraťte na rozhodovací větu;
+- nové téma zapisujte bez zákaznických a osobních detailů, pokud pro rozhodnutí nejsou nezbytné.
+
+Privacy-first věta:
+
+```text
+Při prvním návratu kontrolujeme výstup práce, ne chování člověka. Pokud stabilní pravidlo fungovalo, necháváme jen krátké rozhodnutí a nepřidáváme novou datovou stopu.
+```
+
+### Karta prvního návratu ke stabilnímu znění
+
+```text
+Pracovní místo:
+
+Stabilní znění pravidla:
+
+První přirozená situace použití:
+
+Použití bez znalosti historie:
+- ano / ne / částečně
+
+Výstup práce:
+
+Tření:
+
+Výsledný stav:
+- klidné použití / drobné doladění / slabé tření k pozorování / nové téma
+
+Co měníme:
+
+Co výslovně neměníme:
+
+Návratový signál:
+
+Privacy-first zápis a úklid:
+
+Vlastník:
+
+Datum návratu:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte jen aktuální stabilní znění, ne historii změny.
+2. Minuta 2: pojmenujte první přirozenou situaci použití.
+3. Minuta 3: ověřte, jestli člověk poznal, kdy pravidlo použít.
+4. Minuta 4: zkontrolujte pracovní výstup.
+5. Minuta 5: zapište tření, pokud nějaké vzniklo.
+6. Minuta 6: vyberte jeden ze čtyř výsledných stavů.
+7. Minuta 7: zapište privacy-first úklid a rozhodnutí, co se nemění.
+
+Výstup workshopu:
+
+```text
+Stabilní znění pravidla má za sebou první běžný návrat, jeden výsledný stav a krátký rozhodovací zápis bez návratu ke staré ověřovací historii.
+```
+
+### Checklist prvního návratu
+
+- Proběhl návrat při přirozené pracovní situaci?
+- Začali jsme aktuálním stabilním zněním, ne starou čekací poznámkou?
+- Uměl člověk pravidlo použít bez znalosti historie?
+- Vedlo pravidlo ke správnému pracovnímu výstupu?
+- Rozlišili jsme orientaci, výstup a plynulost?
+- Vybrali jsme právě jeden výsledný stav?
+- Pokud pravidlo fungovalo, neměníme ho jen kvůli pocitu?
+- Pokud je potřeba drobné doladění, drží se nejbližšího pracovního místa?
+- Pokud se objevilo slabé tření, má návratovou podmínku místo okamžité úpravy?
+- Pokud vzniklo nové téma, je oddělené od stabilního pravidla?
+- Nekontrolovali jsme osobní výkon člověka?
+- Nepřidali jsme nové měření, screenshoty, exporty ani nahrávky?
+- Zůstává po návratu jen krátký rozhodovací zápis?
+
+První návrat ke stabilnímu znění má být skoro nudný. Pravidlo se použije, práce se udělá a tým nemá chuť vracet se k celé historii. Když je výsledek takhle nenápadný, systém funguje. Když se z návratu stane detektivka, pravidlo ještě není tak stabilní, jak se tvářilo.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VK o prvním běžném návratu ke stabilnímu znění po uzavřené malé úpravě: použití bez staré historie, první přirozený průchod, čtyři výsledné stavy, kdy nic neměnit, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VJ o uzavření ověřené malé úpravy pravidla do stabilního znění: stabilní jazyk, uzavření ověřovací stopy, sjednocení nejbližších pracovních míst, oddělení nového tématu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VI o ověření malé úpravy pravidla po potvrzené čekací poznámce: přirozený spouštěč, plynulost, správnost výstupu, vedlejší efekt, čtyři výsledné stavy, práce bez hodnocení člověka, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VH o převodu potvrzené čekací poznámky do jedné malé úpravy pravidla: potvrzený signál, nejbližší místo zásahu, jeden typ úpravy, zavření původní poznámky, ověření běžným použitím, privacy-first provedení, karta, mini workshop a checklist.
