@@ -155912,8 +155912,242 @@ Malá oprava po čekací poznámce má ověřený stav, stabilní nebo upravené
 
 Ověřená malá oprava je tichý konec celé smyčky: slabé tření, čekací poznámka, opakování, lokální oprava, běžné použití, závěr. Když to tým umí, dokumentace přestane být skladištěm historických nejistot a začne fungovat jako pracovní nástroj, který se opravuje jen tehdy, když to práce opravdu potřebuje.
 
+## Příloha VD: Uzavření potvrzené opravy pracovního pravidla po čekací poznámce
+
+Potvrzená oprava po čekací poznámce ještě potřebuje poslední malý krok: převést výsledek z režimu ověření do normálního pracovního pravidla. Pokud to neuděláte, v dokumentaci zůstane stopa po historii problému. Pravidlo pak čtenáři neříká jen "takto pracujeme", ale i "tady jsme kdysi něco řešili, možná to ještě platí". To zbytečně bere pozornost.
+
+Tato příloha navazuje na Přílohu VC. Oprava prošla běžným použitím, pomohla práci a nevytvořila nové tření. Teď je potřeba zavřít ověřovací režim, uklidit pomocné poznámky, sjednotit související pracovní místa a nechat v pravidle jen aktuální pravdu.
+
+Otázka zní:
+
+```text
+Jak potvrzenou opravu začleníme do stabilního pracovního pravidla tak, aby zůstala užitečná, ale nenesla s sebou zbytečnou historii čekání, ověřování a nejistoty?
+```
+
+Nejde o další editorskou vlnu. Jde o uzavření. Dobré uzavření má být menší než oprava samotná: pár slov se přepíše do přítomného času, dočasná poznámka zmizí, jeden zdroj pravdy se aktualizuje a tým ví, kdy se téma znovu otevře.
+
+### Začněte stabilní větou
+
+Potvrzenou opravu přepište jako běžné pravidlo. Odstraňte jazyk, který patří do pokusu:
+
+- "nově doplňujeme";
+- "zatím zapisujeme";
+- "po posledním tření";
+- "na zkoušku";
+- "ověříme, jestli";
+- "pokud se to osvědčí".
+
+Místo toho napište větu, kterou může použít člověk bez znalosti celé historie.
+
+Příklad:
+
+```text
+Dočasné znění:
+Po čekací poznámce zatím přidáváme pole "Mimo rozsah", aby se vidělo, jestli pomůže oddělit vedlejší nápady.
+
+Stabilní znění:
+Karta změny obsahuje pole "Mimo rozsah", kam patří nápady a požadavky, které se v této iteraci vědomě neřeší.
+```
+
+Stabilní věta nemá vysvětlovat, že dřív byl problém. Má pomáhat udělat práci dnes.
+
+### Upravte jen nejbližší pracovní okolí
+
+Po potvrzení opravy bývá lákavé projít všechny šablony, checklisty a návody, kde by se podobná formulace mohla hodit. Nedělejte z uzavření lokální opravy celoplošný úklid. Nejprve aktualizujte jen místa, která jsou přímo součástí stejné pracovní trasy.
+
+Typická nejbližší místa:
+
+- hlavní pravidlo nebo šablona, kde oprava vznikla;
+- checklist na konci stejné části;
+- karta změny, pokud na pravidlo přímo odkazuje;
+- krátký rozcestník, který člověka na pravidlo přivádí;
+- changelog nebo rozhodovací log, kde se uzavírá ověření.
+
+Co nepatří do stejného kroku:
+
+- přepis všech podobných formulací v celé znalostní bázi;
+- nový standard pro úplně jiný tým;
+- rozšíření opravy do onboardingových materiálů bez reálného použití;
+- redesign šablony jen proto, že jste ji zrovna otevřeli;
+- nové měření, jestli lidé pravidlo opravdu používají.
+
+Pokud při uzavírání najdete širší nepořádek, zapište ho jako samostatný podnět. Nelepte ho na potvrzenou opravu. Ta už má hotovo.
+
+### Zavřete ověřovací stopu
+
+Ověřovací stopa má po uzavření zůstat jen v takové podobě, která pomůže budoucímu rozhodování. Historie čekací poznámky, pracovní podklady, screenshoty, surové komentáře a dočasné exporty obvykle nemají být dlouhodobou součástí pravidla.
+
+Nechte:
+
+- stručné rozhodnutí, že oprava byla potvrzena;
+- datum uzavření;
+- vlastníka pravidla;
+- návratovou podmínku, pokud existuje;
+- jeden obecný důvod, proč znění zůstává.
+
+Odstraňte nebo archivujte mimo pracovní trasu:
+
+- pomocné poznámky z čekání;
+- dočasné varianty textu;
+- podklady s osobními nebo zákaznickými detaily;
+- komentáře, které už neslouží k rozhodnutí;
+- staré odkazy na neplatné znění.
+
+Příklad uzavíracího záznamu:
+
+```text
+Rozhodnutí:
+Pole "Mimo rozsah" zůstává v kartě změny jako stabilní součást iterace.
+
+Proč:
+Při prvním běžném použití pomohlo oddělit vedlejší nápad od hlavního úkolu bez rozšíření práce.
+
+Co mažeme:
+Čekací poznámku, dočasné ověřovací komentáře a pomocný seznam variant.
+
+Návratová podmínka:
+Téma se otevře jen tehdy, když se stejné tření zopakuje ve dvou běžných iteracích.
+```
+
+Takový záznam stačí. Budoucí čtenář nepotřebuje malý dokumentární film o tom, jak se věta narodila.
+
+### Sjednoťte odkazy a názvy
+
+Lokální oprava často přidá nový pojem, pole nebo drobný krok. Po potvrzení zkontrolujte, že se všude v nejbližší trase jmenuje stejně. Nekonzistence je malá věc, dokud podle ní někdo nehledá správné místo.
+
+Zkontrolujte:
+
+- název pole v šabloně;
+- název v checklistu;
+- odkaz z rozcestníku;
+- příklad vyplnění;
+- rozhodovací log;
+- případnou interní zkratku v týmu.
+
+Příklad:
+
+```text
+Špatně:
+Mimo rozsah / Odložené věci / Neřešíme teď / Parkoviště
+
+Lépe:
+Všude používáme "Mimo rozsah této iterace".
+```
+
+Jeden název neznamená jeden obří slovník. Znamená to, že člověk nemusí hádat, jestli čtyři podobná slova označují totéž.
+
+### Kdy opravu nezavírat jako stabilní
+
+Někdy oprava v prvním použití pomohla, ale ještě nepatří do stabilního pravidla. Pozor hlavně na tyto situace:
+
+- pomohla jen proto, že u ní byl autor a vše vysvětlil;
+- fungovala v jedné velmi specifické situaci, která se nebude opakovat;
+- přidala další datové pole, které tým zatím neumí udržovat;
+- vyřešila text, ale odkryla slabé vlastnictví rozhodnutí;
+- vyžaduje nový nástroj, oprávnění nebo měření;
+- není jasné, kdo ji bude držet aktuální.
+
+V takovém případě nepište "stabilizováno". Vyberte přesnější stav:
+
+```text
+Stav:
+- nechat jako dočasnou oporu do dalšího použití
+- vrátit zpět
+- převést do hlubší pracovní otázky
+- zúžit jen na konkrétní tým nebo situaci
+```
+
+Stabilní pravidlo má unést běžné používání. Pokud potřebuje asistenci, ještě není stabilní. Je to opora, prototyp nebo připomínka. To není urážka. To je přesnější štítek.
+
+### Privacy-first uzavření
+
+Uzavření potvrzené opravy je dobrý okamžik na datový úklid. Když se ověřovací smyčka uzavře, přestává existovat důvod držet většinu pomocných dat. Privacy-first provoz není jen o tom, co nesbírat. Je i o tom, co po rozhodnutí nechat zmizet.
+
+Privacy-first minimum:
+
+- v pravidle zůstává jen obecné znění, ne osobní příběhy;
+- rozhodovací log obsahuje závěr, ne surové pracovní detaily;
+- pomocné podklady se smažou nebo anonymizují;
+- odkazy na interní chaty a screenshoty se z pracovního místa odstraní;
+- nové znění nepřidává povinné údaje bez jasného účelu;
+- vlastník ví, kdy se téma znovu otevře a kdy ne.
+
+Privacy-first věta:
+
+```text
+Po potvrzení opravy necháváme ve stabilním pravidle jen to, co člověk potřebuje pro další práci. Dočasné podklady z ověření mažeme nebo zkracujeme na anonymní rozhodovací závěr.
+```
+
+Codyho komentář: nejlepší dokumentační archeologie je ta, kterou nikdo nemusí dělat. Když pravidlo říká jasně, co platí dnes, čtenář nemusí vykopávat staré komentáře a hádat, která stará poznámka ještě drží proces pohromadě.
+
+### Karta uzavření potvrzené opravy
+
+```text
+Pracovní místo:
+
+Původní čekací poznámka:
+
+Potvrzená oprava:
+
+Stabilní znění:
+
+Kde se znění upravilo:
+
+Kde se znění výslovně neupravuje:
+
+Co mažeme nebo zkracujeme:
+
+Co necháváme v rozhodovacím logu:
+
+Sjednocený název nebo pojem:
+
+Návratová podmínka:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: připomeňte si výsledek ověření z Přílohy VC.
+2. Minuta 2: přepište potvrzenou opravu do stabilní věty.
+3. Minuta 3: určete nejbližší pracovní místa, která se musí sjednotit.
+4. Minuta 4: řekněte, která podobná místa teď výslovně neotevíráte.
+5. Minuta 5: zapište, co z ověřovací stopy zůstává a co mizí.
+6. Minuta 6: sjednoťte název pole, kroku nebo pojmu.
+7. Minuta 7: zkontrolujte privacy-first úklid podkladů.
+8. Minuta 8: zapište návratovou podmínku nebo pravidlo zavřete bez ní.
+
+Výstup workshopu:
+
+```text
+Potvrzená oprava je přepsaná do stabilního pracovního pravidla, nejbližší trasa používá stejné znění, dočasné ověřovací podklady jsou uklizené a je jasné, kdy se téma znovu otevře.
+```
+
+### Checklist uzavření potvrzené opravy
+
+- Je oprava opravdu potvrzená běžným použitím?
+- Přepsali jsme ji do přítomného času jako stabilní pravidlo?
+- Zmizel dočasný jazyk typu "zatím", "nově" nebo "na zkoušku"?
+- Upravili jsme jen nejbližší pracovní okolí?
+- Zapsali jsme, která podobná místa teď neotevíráme?
+- Sjednotili jsme název pole, kroku nebo pojmu?
+- Zůstává jeden zdroj pravdy?
+- Je v rozhodovacím logu krátký závěr místo dlouhé historie?
+- Smazali nebo zkrátili jsme pomocné podklady z ověření?
+- Nezůstaly v pravidle osobní detaily, screenshoty ani interní chatové citace?
+- Nepřidali jsme nové sledování, nové povinné údaje ani nový nástroj?
+- Má pravidlo vlastníka?
+- Je jasná návratová podmínka, nebo je téma zavřené bez dalšího sledování?
+
+Uzavřená potvrzená oprava má být nudná. Člověk přijde, použije pravidlo a nic ho netahá do minulé nejistoty. To je přesně ten typ nudy, který v provozu chcete: méně vysvětlování, méně historických poznámek, méně datového prachu a víc práce, která jde dokončit.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VD o uzavření potvrzené opravy pracovního pravidla po čekací poznámce: stabilní znění, úprava nejbližší pracovní trasy, zavření ověřovací stopy, sjednocení názvů, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o ověření úklidu po falešném poplachu: kontrola cesty ke kanonickému místu, rozlišení doplnění úklidu a nové navigační karty, privacy-first ověření bez sledování čtenářů, karta a checklist.
 - 2026-05-31: Doplněna Příloha VC o ověření opravy pracovního pravidla po čekací poznámce: skutečný spouštěč ověření, tři signály plynulosti/výstupu/vedlejšího efektu, čtyři výsledné stavy, práce bez osobního hodnocení, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha VB o převodu opakovaného tření po čekací poznámce do jedné opravy pracovního pravidla: rozlišení malé opravy a nové práce, nejbližší místo zásahu, přítomný čas pravidla, jeden typ zásahu, zavření původní poznámky, privacy-first kontrola, karta, mini workshop a checklist.
