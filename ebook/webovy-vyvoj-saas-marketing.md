@@ -158645,8 +158645,238 @@ Drobný nález z běžné revize je převedený do jedné hotové úpravy v rytm
 
 Drobná úprava v rytmu je zdravý servis stabilního pravidla. Má být viditelná pro ty, kdo pravidlo používají, ale ne tak hlasitá, aby přepsala plán práce. Když ji tým zvládne rychle zavřít, revize zůstane užitečný návyk místo další továrny na úkoly.
 
+## Příloha VP: Ověření drobné úpravy v rytmu při dalším běžném použití
+
+Drobně upravené pravidlo není potřeba hlídat jako nový pilot. Přesto se nevyplatí jen mávnout rukou a čekat na další kvartál. Malá úprava v rytmu má být ověřená nejbližším přirozeným použitím: někdo podle pravidla opravdu pracuje, narazí na opravené místo a dokončí výstup bez toho, aby se kolem úpravy spustil nový dohledový proces.
+
+Tato příloha navazuje na Přílohu VO. Drobné tření už bylo převedené do jedné malé úpravy: odkaz, název, formulace, příklad, umístění nebo úklid stopy. Teď jde o to zjistit, jestli oprava v běžné práci pomohla, zůstala neviditelně správná a nepřidala vedlejší práci.
+
+Pracovní otázka:
+
+```text
+Jak ověřit drobnou úpravu v běžném rytmu tak, aby tým potvrdil její užitečnost, ale nezaložil kvůli ní nový kontrolní režim?
+```
+
+### Vyberte první přirozené použití
+
+Ověření nezačínejte speciálním testem, pokud to není nutné. Počkejte na první normální situaci, ve které by se upravené pravidlo stejně použilo: onboarding nového člověka, příprava nabídky, revize kampaně, kontrola support šablony, měsíční úklid dokumentace nebo běžné předání práce.
+
+Zapište:
+
+```text
+Upravené pravidlo:
+
+Drobně opravené místo:
+
+První přirozené použití bude:
+
+Kdo podle pravidla pracuje:
+
+Co má vzniknout:
+
+Co kvůli ověření nepřidáváme:
+```
+
+Dobré ověření je nenápadné. Člověk nedělá extra práci pro kontrolora, ale běžnou práci pro zákazníka, tým nebo produkt. Vy jen sledujete, jestli opravené místo splnilo svůj slib.
+
+Příklad:
+
+```text
+Upravené pravidlo:
+Onboardingová šablona pro první samostatný cyklus.
+
+Drobně opravené místo:
+Odkaz na aktuální kanonické pravidlo.
+
+První přirozené použití:
+Příští nástup nového člena do delivery týmu.
+
+Co má vzniknout:
+Nový člověk najde správné pravidlo bez doptávání a dokončí první pracovní kartu.
+
+Co nepřidáváme:
+Žádný nový dotazník, žádné sledování kliknutí, žádný samostatný audit onboardingu.
+```
+
+### Sledujte jen tři signály
+
+U malé úpravy stačí tři signály:
+
+- Nalezení: člověk se k opravenému místu dostal bez ruční navigace.
+- Použití: opravené místo pomohlo udělat správný krok.
+- Stopová čistota: ověření nepřidalo nové osobní, zákaznické nebo provozní záznamy bez účelu.
+
+Nepřidávejte pět metrik jen proto, že "už to kontrolujeme". Drobné ověření má odpovědět na otázku, jestli úprava funguje v místě, kde měla pomoct. Nemá měřit výkon člověka, rychlost týmu ani celkovou kvalitu procesu.
+
+Krátký záznam:
+
+```text
+Nalezení:
+ano / s pomocí / ne
+
+Použití:
+pomohlo / neutrální / zdrželo
+
+Stopová čistota:
+bez nové stopy / drobná dočasná stopa s účelem / vznikla zbytečná stopa
+
+Jedna věta výsledku:
+```
+
+Pokud člověk opravené místo nenašel, neobviňujte ho z nepozornosti. Pravidlo má být dostupné v pracovní trase. Když se k němu člověk nedostane, problém může být v odkazu, názvu, umístění nebo v tom, že pravidlo stále nebydlí na místě, kde se rozhodnutí reálně dělá.
+
+### Čtyři výsledné stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů.
+
+#### Potvrzeno
+
+Úprava pomohla a nevytvořila novou práci. Zapište jednu větu a nechte pravidlo v běžném rytmu:
+
+```text
+Drobné ověření potvrzeno: opravené místo bylo nalezené, použité a bez nové datové stopy. Další kontrola zůstává v normálním revizním rytmu.
+```
+
+Tady končíte. Nezakládejte druhé ověření jen proto, že první dopadlo dobře. Stabilní pravidlo nepotřebuje oslavu pokaždé, když se zachová stabilně. Ano, dokumentace právě splnila svou práci. Potlesk vestoje necháme divadlu.
+
+#### Drobně dočistit
+
+Úprava pomohla, ale zůstalo malé tření: člověk našel správné místo až po chvilce, příklad byl užitečný, ale moc dlouhý, nebo název sedí v pravidle, ale ne v nejbližší šabloně.
+
+Dočištění smí být stejně malé jako původní úprava:
+
+```text
+Dočištění:
+
+Proč nejde o nové téma:
+
+Jedno místo zásahu:
+
+Co už znovu neotevíráme:
+```
+
+Pokud dočištění vyžaduje víc než jedno místo, nejde už o drobné dočištění. Přesuňte nález do běžné revize jako nové téma.
+
+#### Neutrální, ponechat do rytmu
+
+Někdy úprava neukáže jasný efekt, ale ani neškodí. Třeba se pravidlo při prvním použití obešlo bez opraveného příkladu, protože situace byla jednodušší. V takovém případě nespouštějte další speciální kontrolu. Zapište neutrální výsledek a vraťte pravidlo do normálního rytmu.
+
+```text
+První použití nepotvrdilo zvláštní přínos ani problém. Úpravu ponecháváme, protože nezvyšuje práci ani datovou stopu. Další posouzení proběhne až v běžné revizi.
+```
+
+Neutrální stav je důležitý. Chrání tým před nutkáním dokazovat přínos každé malé změny za každou cenu. U drobných servisních úprav často stačí, že nezhoršily práci a udržely pravidlo čitelné.
+
+#### Otevřít návratový signál
+
+Pokud první použití ukáže, že drobná úprava nestačila, nelepte na ni další drobné záplaty. Typické signály:
+
+- člověk pravidlo znovu obešel;
+- opravené místo vyvolalo novou nejasnost;
+- práce skončila jiným výstupem, než pravidlo slibuje;
+- úprava se dotkla zákaznických dat, přístupů nebo právního textu;
+- vznikl požadavek na nové měření nebo pravidelný dohled.
+
+V takové situaci zapište návratový signál:
+
+```text
+Drobné ověření ukázalo, že problém není jen v opraveném místě.
+Neotevíráme další malou záplatu.
+Vracíme téma do běžné revize s otázkou:
+```
+
+Tohle není prohra malé úpravy. Je to dobrý výsledek kontroly rozsahu: tým zjistil, že nález byl hlubší, než vypadal, a zastavil sérii drobných kosmetických oprav dřív, než začala žrát kapacitu.
+
+### Privacy-first ověření
+
+Ověření drobné úpravy má být lehké i datově. Stačí krátký pracovní záznam, ideálně bez osobních detailů a bez exportů.
+
+Držte hranice:
+
+- nepořizujte screenshoty, pokud stačí textová věta;
+- neukládejte jména lidí tam, kde stačí role nebo tým;
+- nepřidávejte analytics event pro jednorázové ověření interního pravidla;
+- nepřepisujte zákaznické příklady do ověřovací karty, pokud stačí anonymizovaný popis;
+- smažte dočasnou poznámku po uzavření výsledného stavu;
+- pokud ověření narazí na osobní nebo zákaznická data, otevřete samostatnou kontrolu účelu, přístupu a retence.
+
+Privacy-first věta:
+
+```text
+Drobné ověření potvrzuje užitečnost úpravy podle výsledku práce, ne podle sledování lidí. Zapisujeme jen rozhodovací větu a mažeme pomocné stopy bez dalšího účelu.
+```
+
+### Karta ověření drobné úpravy v rytmu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Původní drobný nález:
+
+Provedená úprava:
+
+První přirozené použití:
+
+Očekávaný výstup:
+
+Nalezení:
+ano / s pomocí / ne
+
+Použití:
+pomohlo / neutrální / zdrželo
+
+Stopová čistota:
+bez nové stopy / dočasná stopa s účelem / zbytečná stopa
+
+Výsledný stav:
+- potvrzeno / drobně dočistit / neutrální, ponechat do rytmu / otevřít návratový signál
+
+Jedna věta výsledku:
+
+Co neotevíráme:
+
+Co mažeme nebo zkracujeme:
+
+Další kontrola:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte drobnou úpravu a najděte první přirozené použití.
+2. Minuta 2: potvrďte očekávaný výstup běžné práce.
+3. Minuta 3: zapište signál nalezení.
+4. Minuta 4: zapište signál použití.
+5. Minuta 5: zkontrolujte datovou stopu a smažte pomocné poznámky bez účelu.
+6. Minuta 6: vyberte výsledný stav a napište jednu větu výsledku.
+
+Výstup workshopu:
+
+```text
+Drobně upravené pravidlo bylo ověřené při prvním běžném použití. Výsledek má jeden stav, jednu rozhodovací větu, žádný nový kontrolní režim a čistou datovou stopu.
+```
+
+### Checklist ověření drobné úpravy
+
+- Ověřujeme první přirozené použití, ne speciální test?
+- Je jasné, které drobně opravené místo kontrolujeme?
+- Sledujeme jen nalezení, použití a stopovou čistotu?
+- Nehodnotíme výkon člověka?
+- Umíme vybrat jeden ze čtyř výsledných stavů?
+- Končí stav "potvrzeno" návratem do normálního rytmu?
+- Drží stav "drobně dočistit" jen jedno místo zásahu?
+- Umíme přijmout neutrální výsledek bez další kontroly?
+- Otevíráme návratový signál, pokud drobná úprava nestačila?
+- Nepřidali jsme tracker, dotazník, screenshot ani export bez jasného účelu?
+- Je zapsaná jedna věta výsledku?
+- Jsou pomocné stopy po ověření smazané nebo zkrácené?
+
+Drobné ověření je dobré tehdy, když po něm pravidlo zmizí zpátky do práce. Ne proto, že by bylo tajné, ale protože už nevyžaduje speciální pozornost. Stabilní systém se pozná i podle toho, že umí malé opravy potvrdit potichu.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VP o ověření drobné úpravy v rytmu při dalším běžném použití: první přirozené použití, tři signály, čtyři výsledné stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VO o převodu drobného nálezu z běžné revize do jedné úpravy v rytmu: potvrzení drobného nálezu, výběr jednoho typu zásahu, oprava nejbližšího pracovního místa, závěrečná revizní věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VN o první běžné revizi stabilního znění po návratu do rytmu: kontrola pracovního slibu, tři vstupy revize, čtyři výsledné stavy, ochrana před novým opravným režimem, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VM o vrácení stabilního znění do běžného revizního rytmu: kanonické místo, napojení na existující revizi, zavření opravné historie, privacy-first úklid, karta, mini workshop a checklist.
