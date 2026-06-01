@@ -156314,8 +156314,242 @@ Potvrzená oprava je přepsaná do stabilního pracovního pravidla, nejbližš�
 
 Uzavřená potvrzená oprava má být nudná. Člověk přijde, použije pravidlo a nic ho netahá do minulé nejistoty. To je přesně ten typ nudy, který v provozu chcete: méně vysvětlování, méně historických poznámek, méně datového prachu a víc práce, která jde dokončit.
 
+## Příloha VE: První běžný návrat po uzavřené opravě pracovního pravidla
+
+Po uzavření potvrzené opravy přichází tichá zkouška: někdo pravidlo použije později, bez vědomí celé historie čekací poznámky, ověření a stabilizace. Právě tehdy se ukáže, jestli pravidlo opravdu stojí samo, nebo jen vypadalo čistě ve chvíli, kdy ho měl tým čerstvě v hlavě.
+
+Tato příloha navazuje na Přílohu VD. Oprava je začleněná do stabilního pravidla, dočasné poznámky jsou pryč a nejbližší pracovní trasa používá stejné znění. Teď nehledejte další zlepšení. Sledujte, jestli se pracovní místo dá normálně použít bez návratu k historii opravy.
+
+Otázka zní:
+
+```text
+Funguje uzavřená oprava jako běžná součást pravidla i při dalším normálním použití, kdy už tým neřeší její původ?
+```
+
+### Návrat neplánujte jako audit
+
+První návrat po uzavření nemá být slavnostní kontrola dokumentace. Má přijít s běžnou prací: nová karta změny, další review obsahu, opakované použití šablony, předání výstupu nebo rozhodnutí, pro které pravidlo existuje.
+
+Dobré návratové situace:
+
+- někdo použije pravidlo při nové iteraci bez účasti autora opravy;
+- vznikne výstup, který má podle pravidla projít kontrolou;
+- pravidlo použije jiná role než ta, která opravu navrhla;
+- do pracovního místa se člověk vrátí po několika dnech nebo týdnech;
+- stejná část procesu proběhne bez toho, aby někdo otevřel starý log.
+
+Slabé návratové situace:
+
+- autor pravidla si ho znovu přečte a má dobrý pocit;
+- tým se preventivně sejde bez reálného použití;
+- někdo hledá další formulace, protože už je v editační náladě;
+- kontrola se opírá o paměť místo o výstup;
+- znovu se otevírá celá historie čekací poznámky.
+
+Návrat má potvrdit normální provoz. Pokud z něj uděláte audit, pravidlo se zase začne tvářit jako projekt.
+
+### Sledujte stopu bez historie
+
+Při prvním běžném návratu stačí tři otázky:
+
+```text
+Našel člověk správné místo bez staré vysvětlující stopy?
+
+Vznikl správný výstup bez doptávání na původ opravy?
+
+Nepřidal návrat novou poznámku, nové pole nebo nový sběr dat?
+```
+
+Příklad:
+
+```text
+Pravidlo:
+Karta změny obsahuje pole "Mimo rozsah této iterace".
+
+Návrat:
+Při další iteraci tým zapsal jeden vedlejší nápad do pole Mimo rozsah a hlavní úkol zůstal uzavřitelný.
+
+Signál:
+Nikdo nehledal starou čekací poznámku ani neotevřel otázku, proč pole vzniklo.
+```
+
+To je dobrý výsledek. Pravidlo se stalo normální součástí práce. Gratulace, nic nepřidávejte. Ano, i nic je občas dost ambiciózní plán.
+
+### Čtyři výsledky návratu
+
+Po prvním běžném návratu vyberte jeden stav:
+
+- Klidné použití: pravidlo fungovalo bez další pozornosti.
+- Slabé tření: výstup vznikl, ale objevila se drobná nejasnost, která ještě nestojí za opravu.
+- Návrat historie: lidé potřebovali starý kontext, aby pravidlo použili.
+- Nový problém: pravidlo funguje, ale okolní proces ukázal jiné tření.
+
+#### Klidné použití
+
+Klidné použití znamená, že není co řešit. Nechte pravidlo být a nezapisujte dlouhý záznam.
+
+Stačí:
+
+```text
+Výsledek:
+Klidné použití.
+
+Co se stalo:
+Pravidlo bylo použito v běžné práci bez návratu k historii opravy.
+
+Další krok:
+Žádný. Téma se otevře jen při opakovaném tření.
+```
+
+#### Slabé tření
+
+Slabé tření neznamená automaticky novou opravu. Může jít o jednorázový dotaz, jiné tempo práce nebo situaci, která se nebude opakovat.
+
+Zapište jen čekací signál:
+
+```text
+Slabé tření:
+
+Kdy se objevilo:
+
+Proč zatím neopravujeme:
+
+Návratová podmínka:
+Vrátíme se k tomu jen tehdy, když se stejné tření zopakuje ve dvou běžných použitích.
+```
+
+Nechte ho mimo hlavní pravidlo. Stabilní pravidlo nemá nést každé pousmání, zaváhání a "možná by šlo". Jinak z něj bude sbírka okrajových poznámek, které si časem začnou konkurovat.
+
+#### Návrat historie
+
+Pokud člověk pravidlo nepoužil bez starého kontextu, uzavření nebylo úplné. Neznamená to, že oprava je špatně. Znamená to, že stabilní znění možná pořád spoléhá na znalost minulosti.
+
+Zapište:
+
+```text
+Výsledek:
+Návrat historie.
+
+Kde bylo potřeba staré vysvětlení:
+
+Co v pravidle chybělo:
+
+Nejmenší zásah:
+- přepsat jednu větu / přesunout příklad / sjednotit název / doplnit hranici
+
+Co neotevíráme:
+Neotevíráme znovu celou čekací poznámku.
+```
+
+Zásah má mířit na samostatnost pravidla, ne na další rozšiřování.
+
+#### Nový problém
+
+Někdy se ukáže, že opravené pravidlo funguje, ale okolní proces ne. Třeba pole "Mimo rozsah" pomohlo, ale tým nemá jasné místo, kam se odložené věci vrací. To už není problém původní opravy. Je to nové pracovní téma.
+
+Oddělte ho:
+
+```text
+Původní pravidlo:
+Funguje / nechat stabilní.
+
+Nový problém:
+
+Kam patří:
+- backlog / rozhodovací log / provozní standard / vlastník procesu
+
+Co nebudeme lepit do původního pravidla:
+```
+
+Tím chráníte stabilní místo před tím, aby se z něj stal odkladiště pro všechno sousední tření.
+
+### Privacy-first návrat
+
+První návrat po uzavřené opravě nepotřebuje nové měření. Nezavádějte sledování používání pravidla, interní heatmapy, screenshoty ani exporty z nástrojů. Stačí anonymní záznam o výsledku práce.
+
+Privacy-first minimum:
+
+- zapište stav návratu, ne osobní hodnocení;
+- neukládejte staré chaty jen proto, že vysvětlují historii;
+- pokud vznikl slabý signál, nechte ho bez jmen a bez zákaznických detailů;
+- nemažte stabilní pravidlo kvůli jedné nejistotě;
+- neotvírejte nové datové pole bez jasného rozhodovacího účelu.
+
+Privacy-first věta:
+
+```text
+Návrat po uzavřené opravě ověřujeme na pracovním výsledku. Nevracíme do pravidla historii opravy a nevytváříme nové sledování lidí ani nové datové stopy.
+```
+
+### Karta prvního návratu po uzavřené opravě
+
+```text
+Pracovní místo:
+
+Uzavřená oprava:
+
+Návratová situace:
+
+Použitá role nebo tým:
+
+Výstup práce:
+
+Bylo potřeba znát historii opravy?
+
+Vzniklo nové tření?
+
+Výsledný stav:
+- klidné použití / slabé tření / návrat historie / nový problém
+
+Rozhodnutí:
+
+Co necháváme beze změny:
+
+Co případně zapisujeme mimo hlavní pravidlo:
+
+Privacy-first úklid:
+
+Další návratová podmínka:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte si stabilní znění opravy.
+2. Minuta 2: potvrďte, že proběhlo běžné použití.
+3. Minuta 3: zkontrolujte, jestli člověk potřeboval starou historii.
+4. Minuta 4: porovnejte výstup s účelem pravidla.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: zapište rozhodnutí a privacy-first úklid.
+
+Výstup workshopu:
+
+```text
+Uzavřená oprava má ověřený první návrat: buď funguje klidně, má jen čekací signál, potřebuje malé posílení samostatnosti, nebo odkryla nové téma mimo původní pravidlo.
+```
+
+### Checklist prvního návratu
+
+- Proběhl návrat při skutečné práci?
+- Použil pravidlo někdo bez znalosti celé historie opravy?
+- Vznikl správný výstup?
+- Nepotřeboval člověk starou čekací poznámku nebo ověřovací log?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud šlo o klidné použití, nechali jsme pravidlo být?
+- Pokud šlo o slabé tření, zapsali jsme jen návratovou podmínku mimo hlavní pravidlo?
+- Pokud se vrátila historie, míří zásah jen na samostatnost pravidla?
+- Pokud vznikl nový problém, oddělili jsme ho od původní opravy?
+- Nepřidali jsme nové sledování, screenshoty, exporty ani osobní hodnocení?
+- Zůstává stabilní pravidlo krátké a použitelné?
+
+První návrat po uzavřené opravě je malá kontrola, jestli dokumentace přestala vyprávět vlastní minulost a začala znovu sloužit práci. Když projde klidně, největší disciplína je nic nevylepšovat.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VE o prvním běžném návratu po uzavřené opravě pracovního pravidla: ověření bez návratu k historii, čtyři výsledné stavy, oddělení slabého tření a nového problému, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o uzavření úklidu po falešném poplachu do provozní paměti: rozhodovací věta, pracovní místa, rozlišení jednorázového úklidu a nového pravidla, privacy-first retence, karta a checklist.
 - 2026-06-01: Doplněna Příloha VD o uzavření potvrzené opravy pracovního pravidla po čekací poznámce: stabilní znění, úprava nejbližší pracovní trasy, zavření ověřovací stopy, sjednocení názvů, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o ověření úklidu po falešném poplachu: kontrola cesty ke kanonickému místu, rozlišení doplnění úklidu a nové navigační karty, privacy-first ověření bez sledování čtenářů, karta a checklist.
