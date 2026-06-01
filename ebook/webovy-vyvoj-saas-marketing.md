@@ -160229,8 +160229,200 @@ První běžný návrat po uzavřeném úklidu má stav: [stav]. Další práce 
 
 První běžný návrat má být nenápadný. Když funguje, skoro se nic nestane: člověk najde správné místo, udělá práci a starý stín nemá kudy zpátky. To je přesně pointa. Dobře uklizený provoz nevyrábí další drama, jen nechává dobrá rozhodnutí pracovat bez doprovodné kapely.
 
+## Příloha VW: Převod klidného návratu do normálního provozního rytmu
+
+Příloha VV ověřila, že se tým po uzavřeném úklidu umí vrátit ke správnému pracovnímu místu bez starého stínu. Pokud první běžný návrat dopadl klidně, další krok není další kontrola. Další krok je převést výsledek do normálního provozního rytmu tak, aby téma přestalo být speciální.
+
+To zní skoro moc obyčejně. Právě proto se to vyplatí napsat. Týmy často dobře zavřou úklid, dobře ověří první návrat a pak si nechají bokem malou poznámku "ještě hlídat". Z malé poznámky se časem stane další režim. Ne proto, že by ho někdo vědomě navrhl, ale proto, že nikdo výslovně neřekl: hotovo, odteď to žije jen v běžném rytmu.
+
+Pracovní otázka:
+
+```text
+Co přesně se po klidném návratu stává součástí běžného provozu a co už dál nesledujeme jako zvláštní téma?
+```
+
+### Napište jednu převodní větu
+
+Začněte větou, která oddělí hotový návrat od další práce. Nemá být dlouhá. Má být jednoznačná:
+
+```text
+Po prvním běžném návratu zůstává pravidlo v normálním měsíčním review; nevzniká samostatný dohled nad úklidem stínu.
+```
+
+Tahle věta dělá dvě věci. Za prvé říká, kde se téma znovu přirozeně objeví. Za druhé říká, kde se už objevovat nemá. Bez druhé části tým často zachová běžný rytmus a zároveň si přidá ještě bokem speciální sledování. To je provozní dvojnásobek za cenu jednoho dobrého pocitu.
+
+Slabá převodní věta vypadá takto:
+
+```text
+Pravidlo zatím vypadá dobře, necháme ho v provozu a uvidíme.
+```
+
+Takový zápis neříká, kdo se k tématu vrátí, kdy, ani co se už nemá dělat. Je to spíš povzdech než provozní rozhodnutí. Lepší věta nemusí být krásná, ale musí zavírat dveře, kterými by se vrátil zvláštní režim.
+
+### Vyberte nejbližší existující rytmus
+
+Klidný návrat nepřidávejte do nového kalendáře. Najděte rytmus, který už existuje:
+
+- měsíční review webu;
+- kvartální kontrolu standardů;
+- pravidelnou obsahovou údržbu;
+- revizi prodejních materiálů;
+- sprint review;
+- provozní kontrolu supportu;
+- audit datové mapy.
+
+Pokud žádný rytmus neexistuje, nezakládejte ho jen kvůli jedné uzavřené věci. V takovém případě stačí návratový signál. Téma se otevře, až někdo znovu narazí na konkrétní problém: nefunkční odkaz, nejasné pravidlo, návrat staré pomocné stopy nebo novou pracovní situaci, kterou pravidlo nepokrývá.
+
+Příklad:
+
+```text
+Výsledek návratu:
+Kanonická karta fungovala při přípravě landing page.
+
+Existující rytmus:
+Měsíční review marketingových pracovních míst.
+
+Co se přidává:
+Nic nového. Karta zůstává v indexu a projde běžným review spolu s ostatními kartami.
+
+Co se nepřidává:
+Samostatný checklist "po úklidu stínu".
+```
+
+Když převod skončí novým opakovaným meetingem, novou tabulkou nebo novým pravidelným reportem, pravděpodobně nejde o převod do běžného rytmu. Jde o nový proces, který si jen půjčil nenápadné jméno.
+
+### Přeneste jen vlastnost, ne historii
+
+Do normálního rytmu nepřenášejte celý příběh úklidu. Přeneste jen vlastnost, která má v provozu zůstat. Například:
+
+- aktuální kanonický odkaz;
+- novou formulaci pravidla;
+- jasnější popisek v indexu;
+- zrušenou starou pomocnou stopu;
+- návratový signál;
+- odpovědnost za běžnou údržbu.
+
+Nepřenášejte:
+
+- původní export;
+- starou kontrolní tabulku;
+- komentáře z dočasného ověřování;
+- seznam lidí, kteří se spletli;
+- dlouhou časovou osu úklidu;
+- screenshoty, které už neslouží pracovnímu rozhodnutí.
+
+Historie může být užitečná, pokud vysvětluje rozhodnutí, které by jinak tým znovu otevřel. Ale většina historie po klidném návratu už jen zvětšuje šum. Kanonické místo má člověku pomoct udělat práci, ne ho poslat na exkurzi po tom, proč kdysi existoval stín.
+
+Codyho komentář: dobrá týmová paměť není muzeum. Když v ní necháte každý dočasný artefakt, za chvíli se v ní chodí v návlecích a nikdo neví, kde je východ.
+
+### Nastavte návratový signál místo trvalého dohledu
+
+Návratový signál je věta, která říká, kdy se téma znovu otevře. Není to pravidelný dohled. Je to brzda proti oběma extrémům: proti zapomenutí i proti zbytečnému hlídání.
+
+Dobré návratové signály:
+
+- někdo znovu použije starou pomocnou stopu jako zdroj pravdy;
+- kanonické místo nejde najít při běžném úkolu;
+- nové pracovní místo začne kopírovat starý postup;
+- pravidlo přestane pokrývat opakovanou situaci;
+- kvůli pravidlu vznikne nový export nebo duplicitní evidence.
+
+Slabé návratové signály:
+
+- podíváme se na to někdy znovu;
+- radši to budeme hlídat;
+- kdyby se něco dělo;
+- až bude čas;
+- až někdo bude mít pocit, že je to potřeba.
+
+Příklad návratového signálu:
+
+```text
+Téma znovu otevřeme pouze tehdy, když člověk při běžném úkolu použije starý export místo kanonické karty, nebo když kanonická karta nebude dostupná z pracovního indexu.
+```
+
+Takový signál je dost konkrétní na to, aby tým nemusel téma nosit v hlavě každý týden.
+
+### Privacy-first převod
+
+Převod do běžného rytmu má být datově lehčí než ověřování. Po klidném návratu by měla většina dočasných stop zmizet nebo zůstat jen ve zkrácené podobě rozhodnutí. Zeptejte se:
+
+```text
+Co z ověřování ještě potřebujeme pro běžnou práci?
+Co můžeme smazat, anonymizovat nebo sloučit do kanonického rozhodnutí?
+Kde by nová evidence jen prodlužovala život dat bez užitku?
+```
+
+Privacy-first výsledek může znít:
+
+```text
+Do běžného rytmu přenášíme pouze aktuální kanonickou kartu a návratový signál. Dočasné poznámky z ověření mažeme, protože už neslouží rozhodnutí ani provozu.
+```
+
+Tohle je malá věc, ale má velký efekt. Pokud každý dokončený úklid nechá po sobě zbytečnou stopu, firma časem nevlastní znalostní bázi, ale sediment. A sediment se špatně migruje, špatně vysvětluje a ještě hůř maže.
+
+### Karta převodu do běžného rytmu
+
+```text
+Uzavřený návrat:
+
+Výsledek prvního běžného použití:
+
+Převodní věta:
+
+Existující provozní rytmus:
+
+Co do rytmu přenášíme:
+
+Co výslovně nepřenášíme:
+
+Kanonické místo:
+
+Návratový signál:
+
+Dočasné stopy k odstranění:
+
+Vlastník běžné údržby:
+
+Privacy-first výsledek:
+
+Datum nejbližšího běžného review:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek prvního běžného návratu.
+2. Minuta 2: napište jednu převodní větu.
+3. Minuta 3: vyberte existující provozní rytmus, nebo potvrďte pouze návratový signál.
+4. Minuta 4: určete, co se přenáší do kanonického místa.
+5. Minuta 5: určete, co se nepřenáší a co se smaže.
+6. Minuta 6: napište návratový signál.
+7. Minuta 7: zapište vlastníka běžné údržby a zavřete zvláštní režim.
+
+Výstup workshopu:
+
+```text
+Klidný návrat převádíme do běžného rytmu: [rytmus nebo návratový signál]. Přenášíme pouze [vlastnost]. Nepřenášíme [dočasné stopy]. Samostatný dohled nad úklidem tím končí.
+```
+
+### Checklist převodu do rytmu
+
+- Máme jednu převodní větu, která téma vrací do běžného provozu?
+- Vybrali jsme existující rytmus místo nového dohledu?
+- Je jasné, co se do rytmu přenáší a co zůstává zavřené?
+- Nepřenášíme historii úklidu tam, kde stačí aktuální pravidlo?
+- Máme konkrétní návratový signál místo vágního "budeme sledovat"?
+- Je vlastník běžné údržby stejný jako u souvisejícího pracovního místa?
+- Smazali nebo zkrátili jsme dočasné poznámky, exporty a pomocné kopie?
+- Nezůstala po převodu nová tabulka, meeting ani report bez jasného účelu?
+- Ví tým, kdy téma nechat v klidu?
+- Dá se převod vysvětlit jednou větou člověku, který u úklidu nebyl?
+
+Převod klidného návratu do rytmu je drobná provozní hygiena. Není okázalá, ale drží systém lehký. Dobře zavřená práce nemá vyžadovat věčnou pozornost. Má mít správné místo, jasný návratový signál a dost ticha na to, aby tým mohl dělat další důležitou věc.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VW o převodu klidného návratu do normálního provozního rytmu: převodní věta, výběr existujícího rytmu, přenos vlastnosti místo historie, návratový signál, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VV o první běžný návrat po uzavřeném úklidu stínu: návrat přes skutečný úkol, tři známky klidného použití, čtyři výsledné stavy, ukončení péče bez nového dohledu, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VU o uzavření ověřeného úklidu stínu do běžné práce: uzavírací věta, kanonické místo, mazání dočasných stop, návratový signál místo dohledu, předání týmu, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VT o ověření úklidového zásahu po nalezeném stínu: první běžný dotyk, čtyři výsledné stavy, ukončení zvláštního sledování, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
