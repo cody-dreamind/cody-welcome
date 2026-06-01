@@ -4964,6 +4964,175 @@ Návratový signál:
 
 Ověření úklidu po falešném poplachu uzavírá malou, ale důležitou smyčku. Stabilní pravidlo se nemění, stará cesta se přestane tvářit jako platná a tým nemusí při dalším použití znovu rozhodovat, jestli chyba byla v textu, nebo jen v neuklizeném okolí.
 
+## Uzavření úklidu po falešném poplachu do provozní paměti
+
+Když úklid po falešném poplachu drží, zbývá poslední krok: uložit závěr tak, aby příště nepůsobil jako nové téma. Bez tohoto uzavření se může stejný starý odkaz, archivní šablona nebo neplatná poznámka za měsíc vrátit v jiné podobě. Tým pak znovu zkoumá stabilní trasu, která funguje, místo aby jednoduše viděl: toto už bylo ověřené, problém byl v okolí a tam byl uklizený.
+
+Provozní paměť po falešném poplachu nemá být dlouhá. Nemá popisovat celou kontrolu, všechny debaty ani každý soubor, který se při úklidu otevřel. Má zachytit jen to, co budoucímu člověku zabrání znovu otevřít stejný omyl.
+
+Začněte jednou větou:
+
+```text
+Trasa zůstává stabilní; falešný poplach vznikl kvůli [okolní stopa], kterou jsme [stav úklidu]. Příště trasu otevřeme jen tehdy, když [skutečný návratový signál].
+```
+
+Příklad:
+
+```text
+Trasa zůstává stabilní; falešný poplach vznikl kvůli archivní šabloně měsíčního review, kterou jsme přesměrovali na aktuální kanonické místo. Příště trasu otevřeme jen tehdy, když zbytečný úkol vznikne i při použití aktuální šablony.
+```
+
+Tato věta má být dohledatelná tam, kde člověk příště začne práci: u aktuální šablony, v rozcestníku, v rozhodovacím logu nebo v changelogu dané trasy. Pokud ji schováte jen do dlouhé poznámky z kontroly, splní psychologickou funkci pro autora, ale ne provozní funkci pro tým.
+
+### Co má zůstat v paměti
+
+Po falešném poplachu ponechte jen pět věcí:
+
+- název stabilní trasy nebo pravidla;
+- zdroj falešného poplachu;
+- úklidovou akci, která zdroj zmatku odstranila;
+- skutečný návratový signál pro příště;
+- privacy-first výsledek: co bylo smazané, anonymizované nebo nepředané dál.
+
+Všechno ostatní je kandidát na úklid. Screenshot staré šablony, pracovní kopie rozcestníku, interní chat o tom, kdo co našel, a dočasný export z kontroly většinou nepotřebují přežít. Pokud pro budoucnost stačí věta "starý odkaz byl přesměrován", neponechávejte balík podkladů jen proto, že vznikl při poctivé práci.
+
+Dobrá paměť:
+
+```text
+Stabilní trasa:
+Zavření karty změny bez úkolu.
+
+Falešný poplach:
+Archivní review šablona neobsahovala směrovku na zavření slabého podnětu.
+
+Úklid:
+Šablona označena jako archiv a rozcestník přesměrován na aktuální verzi.
+
+Návratový signál:
+Stejný zmatek při použití aktuální šablony.
+
+Privacy-first výsledek:
+Pracovní screenshot smazán, v logu zůstává jen anonymizovaný závěr.
+```
+
+Slabá paměť:
+
+```text
+Řešili jsme review šablonu, něco bylo staré, asi opraveno. Kdyby se to opakovalo, vrátíme se k tomu.
+```
+
+Slabý zápis je skoro horší než žádný. Vypadá jako stopa rozhodnutí, ale nepomůže rozhodnout, jestli se příště má otevřít trasa, nebo jen uklidit další okolní odkaz.
+
+### Uzavření v pracovních místech
+
+Provozní paměť musí být propsaná do míst, která se opravdu používají. Po falešném poplachu zkontrolujte tři vrstvy:
+
+- aktuální pracovní místo: šablona, karta, checklist nebo rozcestník;
+- archivní místo: stará kopie, historická poznámka nebo odkaz, který nesmí vést novou práci;
+- rozhodovací místo: log, changelog nebo karta, kde je vidět, proč se stabilní trasa neměnila.
+
+Každá vrstva má jiný úkol. Aktuální pracovní místo má vést člověka správně. Archivní místo má jasně říct, že už nové práci neslouží. Rozhodovací místo má vysvětlit, proč se nepřepisovalo kanonické pravidlo.
+
+Prakticky:
+
+- u staré šablony přidejte větu "Archiv, nepoužívat pro nové review";
+- v rozcestníku ponechte jen aktuální odkaz;
+- v changelogu napište, že trasa se neměnila, uklidilo se okolí;
+- v rozhodovacím logu ponechte skutečný návratový signál.
+
+Nepřidávejte další centrální seznam falešných poplachů, pokud ho nikdo nebude používat. Většinou stačí krátký záznam u trasy a opravené pracovní místo. Nový registr by měl smysl až ve chvíli, kdy se falešné poplachy opakují napříč více trasami a tým potřebuje řešit systémovou navigaci.
+
+### Kdy z falešného poplachu vznikne nové pravidlo
+
+Většina falešných poplachů má skončit úklidem, ne novým pravidlem. Nové pravidlo vzniká až tehdy, když se opakuje stejný vzor v různých pracovních místech.
+
+Jednorázový případ:
+
+```text
+Jedna archivní šablona nebyla označená jako neplatná.
+```
+
+Odpověď:
+
+```text
+Označit konkrétní šablonu a přesměrovat odkaz.
+```
+
+Opakovaný vzor:
+
+```text
+Archivní šablony ve třech různých částech pořád vypadají jako použitelné pracovní zdroje.
+```
+
+Odpověď:
+
+```text
+Zavést pravidlo pro archivní materiály: každý archivní artefakt musí mít viditelný stav, datum archivace, odkaz na aktuální zdroj pravdy a privacy-first úklid podkladů.
+```
+
+Rozdíl je v opakovatelnosti. Jedna chyba okolí potřebuje úklid. Opakovaný vzor potřebuje pravidlo. Pokud z každého jednorázového poplachu vytvoříte nové pravidlo, rukopis i týmová paměť začnou bobtnat přesně v místě, kde měly zůstat stabilní.
+
+### Privacy-first uzavření paměti
+
+Falešné poplachy jsou lákavé na zbytečné uchovávání podkladů. Tým chce mít důkaz, že kontrola proběhla, a nechá si screenshoty, kopie, výřezy tiketů nebo staré poznámky. Jenže po vyhodnocení už často stačí anonymizovaný závěr.
+
+Použijte krátké retenční pravidlo:
+
+```text
+Po uzavření falešného poplachu ponecháváme rozhodovací větu a aktuální odkaz. Pracovní podklady mažeme nebo anonymizujeme do [termín], pokud nejsou nutné pro aktivní incident, právní povinnost nebo otevřenou zákaznickou komunikaci.
+```
+
+Příklad:
+
+```text
+Po uzavření falešného poplachu ponecháváme větu o přesměrování archivní šablony. Screenshot starého rozcestníku a kopii review poznámky mažeme po aktualizaci changelogu.
+```
+
+Tím se zachová paměť rozhodnutí, ale nezůstane datový nepořádek. Privacy-first provoz nepotřebuje držet každý důkaz navždy. Potřebuje držet tolik paměti, aby další člověk neudělal stejnou chybu.
+
+Codyho komentář: uzavření falešného poplachu je trochu nevděčná práce. Nic nového se nepřidá, stabilní pravidlo se nepřepíše a výsledek vypadá jako jedna věta v logu. Přesně proto je to dobrá údržba. Systém je lepší, protože se méně tváří, že potřebuje další vysvětlování.
+
+### Karta uzavření do provozní paměti
+
+```text
+Stabilní trasa nebo pravidlo:
+
+Falešný poplach:
+
+Skutečný zdroj zmatku:
+
+Úklidová akce:
+
+Kde je aktuální zdroj pravdy:
+
+Které staré místo je archivované, přesměrované nebo smazané:
+
+Proč trasu neměníme:
+
+Skutečný návratový signál:
+
+Privacy-first výsledek:
+
+Co se už nebude evidovat:
+
+Kdo drží kontext:
+```
+
+### Checklist uzavření
+
+- Je jasně napsané, že stabilní trasu nebo pravidlo neměníme?
+- Je pojmenovaný skutečný zdroj falešného poplachu?
+- Je aktuální pracovní místo opravené nebo potvrzené?
+- Je staré místo označené, přesměrované, sloučené nebo smazané?
+- Zůstává pro příště konkrétní návratový signál?
+- Nevznikl nový seznam, pravidlo nebo proces bez opakovaného vzoru?
+- Jsou pracovní screenshoty, kopie, exporty a citlivé poznámky smazané nebo anonymizované?
+- Je rozhodovací věta uložená tam, kde ji další člověk najde?
+- Ví tým, co se už nemá znovu otevírat?
+- Zmenšil se po uzavření šum v pracovních místech?
+
+Uzavření do provozní paměti je poslední tečka za falešným poplachem. Neřeší další nápady, nevyrábí novou dokumentační vrstvu a nepřepisuje funkční pravidlo. Jen zanechá přesně tolik paměti, aby příště stejná stará stopa nepůsobila jako nový problém.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -156147,6 +156316,7 @@ Uzavřená potvrzená oprava má být nudná. Člověk přijde, použije pravidl
 
 ## Pracovní log
 
+- 2026-06-01: Doplněna úvodní podkapitola o uzavření úklidu po falešném poplachu do provozní paměti: rozhodovací věta, pracovní místa, rozlišení jednorázového úklidu a nového pravidla, privacy-first retence, karta a checklist.
 - 2026-06-01: Doplněna Příloha VD o uzavření potvrzené opravy pracovního pravidla po čekací poznámce: stabilní znění, úprava nejbližší pracovní trasy, zavření ověřovací stopy, sjednocení názvů, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o ověření úklidu po falešném poplachu: kontrola cesty ke kanonickému místu, rozlišení doplnění úklidu a nové navigační karty, privacy-first ověření bez sledování čtenářů, karta a checklist.
 - 2026-05-31: Doplněna Příloha VC o ověření opravy pracovního pravidla po čekací poznámce: skutečný spouštěč ověření, tři signály plynulosti/výstupu/vedlejšího efektu, čtyři výsledné stavy, práce bez osobního hodnocení, privacy-first ověření, karta, mini workshop a checklist.
