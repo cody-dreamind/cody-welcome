@@ -157040,8 +157040,258 @@ Výstup workshopu:
 
 Kontrola čekací poznámky je malá provozní disciplína. Bez ní se z poznámek stává bahno. S ní zůstávají tím, čím mají být: krátkou pamětí pro signály, které si zatím nezaslouží měnit pravidlo.
 
+## Příloha VH: Převod potvrzené čekací poznámky do jedné malé úpravy pravidla
+
+Když se čekací poznámka při dalším běžném použití potvrdí, tým má konečně důvod sáhnout do pravidla. Pořád to ale není pozvánka k velké revizi. Potvrzená poznámka říká jen to, že slabé tření už není náhoda. Neříká, že se má otevřít celý proces, přidat nová šablona, přepsat onboarding nebo vymyslet další evidence. Ano, dokumentace má občas sklony růst jako těsto u topení. Proto tady držíme ruce u jedné malé úpravy.
+
+Tato příloha navazuje na Přílohu VG. Čekací poznámka měla návratovou podmínku, proběhla kontrola a výsledný stav je "převést do malé opravy". Cílem je změnit nejbližší pracovní místo tak, aby se stejné tření příště nevrátilo, a současně nezatížit pravidlo novým balastem.
+
+Pracovní otázka:
+
+```text
+Jaká nejmenší úprava pravidla odstraní potvrzené tření, aniž bychom otevřeli větší téma?
+```
+
+### Začněte potvrzeným signálem
+
+Nezačínejte tím, co by se "možná hodilo". Začněte přesnou větou z kontroly čekací poznámky.
+
+Dobrá vstupní věta:
+
+```text
+Při dvou běžných použitích se opakoval stejný dotaz, jestli do pole Mimo rozsah patří i nápady pro další kvartál.
+```
+
+Slabá vstupní věta:
+
+```text
+Karta změny by mohla být celkově jasnější.
+```
+
+První věta vede k malé úpravě. Druhá vede k redesignu šablony, debatě o názvech polí a pravděpodobně ke třem dalším poznámkám. Pokud neumíte potvrzený signál říct jednou konkrétní větou, vraťte se do Přílohy VG a nejdřív zavřete kontrolu poznámky.
+
+### Vyberte nejbližší místo zásahu
+
+Malá úprava patří co nejblíž místu, kde vzniklo tření. Ne tam, kde se nejlépe píše dokumentace, ale tam, kde člověk skutečně rozhoduje.
+
+Typická místa zásahu:
+
+- název pole;
+- krátký popis pod polem;
+- jedna věta v pravidle;
+- jeden příklad vyplnění;
+- pořadí dvou kroků;
+- odkaz na kanonické místo;
+- odstranění staré věty, která táhne práci jinam.
+
+Příklad:
+
+```text
+Potvrzené tření:
+Lidé nevědí, jestli do pole Mimo rozsah patří i nápady pro další kvartál.
+
+Nejbližší místo zásahu:
+Popis pole Mimo rozsah přímo v kartě změny.
+
+Malá úprava:
+Doplnit větu: "Patří sem i nápady pro pozdější období, pokud nejsou součástí aktuální iterace."
+```
+
+Nevhodná úprava:
+
+```text
+Vytvořit samostatnou šablonu pro kvartální nápady.
+```
+
+To může být legitimní práce, ale není to nejmenší odpověď na potvrzenou čekací poznámku. Pokud se taková potřeba opravdu ukáže, otevřete ji jako nové téma, ne jako vedlejší efekt malé opravy.
+
+### Držte jeden typ úpravy
+
+Jedna potvrzená poznámka má vést k jednomu typu zásahu. Nemíchejte přepis textu, přesun struktury, nový příklad a změnu odpovědnosti v jedné dávce. Pak už nepoznáte, co pomohlo.
+
+Vyberte jeden typ:
+
+- Textová úprava: zpřesní jednu větu nebo název.
+- Příkladová úprava: doplní jeden konkrétní příklad použití.
+- Polohová úprava: přesune větu k místu rozhodnutí.
+- Úklidová úprava: odstraní starou nebo matoucí stopu.
+- Hraniční úprava: jasně řekne, co do pravidla nepatří.
+
+Příklad hraniční úpravy:
+
+```text
+Do pravidla doplníme větu:
+"Do této karty nepatří samostatné projekty; ty jdou do plánovacího backlogu."
+```
+
+Tím se vyřeší konkrétní hranice. Není potřeba současně měnit celý backlog, pojmenování plánovacího rytmu ani způsob priorizace.
+
+### Zavřete původní poznámku
+
+Jakmile malou úpravu provedete, původní čekací poznámka už nemá zůstat otevřená. Buď ji smažte, nebo zkraťte na uzavřený záznam v rozhodovacím logu.
+
+Krátký zápis:
+
+```text
+Čekací poznámka:
+Opakovaný dotaz k poli Mimo rozsah.
+
+Stav:
+Převedeno do malé úpravy pravidla.
+
+Provedená úprava:
+Doplněna jedna věta do popisu pole.
+
+Další ověření:
+Při příštím běžném použití karty změny.
+```
+
+Nenechávejte vedle sebe otevřenou poznámku i hotovou úpravu. Tým by pak nevěděl, jestli se pořád čeká, nebo už se změna má používat.
+
+### Ověření nastavte jako běžné použití
+
+Malou úpravu neověřujte speciálním auditem, pokud to není nutné. Nejlepší ověření je další normální práce: člověk použije pravidlo a stejné tření se nevrátí.
+
+Ověřovací věta:
+
+```text
+Při příštím běžném použití karty změny ověříme, jestli pole Mimo rozsah jde vyplnit bez stejného dotazu.
+```
+
+Co nesledovat:
+
+- kdo se ptal minule;
+- jak dlouho člověk nad polem váhal;
+- kolik zpráv v chatu vzniklo kolem opravy;
+- jestli si každý všiml změny;
+- osobní výkon konkrétního člena týmu.
+
+Stačí sledovat pracovní výsledek: bylo pravidlo použité, vznikl správný výstup a stejné tření se nevrátilo.
+
+### Kdy z malé úpravy udělat nové téma
+
+Během převodu se může ukázat, že potvrzená poznámka nejde vyřešit malým zásahem. To není důvod násilím nacpat opravu do pravidla.
+
+Nové téma otevřete, když:
+
+- stejný signál vyžaduje změnu odpovědnosti mezi rolemi;
+- oprava by přidala nové povinné údaje;
+- problém patří do plánovacího rytmu, ne do pravidla;
+- potvrzené tření vzniká kvůli chybějícímu zdroji pravdy;
+- bez širší změny by malá úprava jen maskovala skutečný problém.
+
+V takovém případě původní poznámku uzavřete takto:
+
+```text
+Výsledek:
+Nepřevádíme do malé úpravy pravidla.
+
+Proč:
+Potvrzené tření ukazuje na chybějící plánovací místo pro odložené nápady.
+
+Nové téma:
+Kam se vrací nápady odložené mimo aktuální iteraci.
+
+Co se teď nemění:
+Karta změny zůstává beze změny, aby nenesla odpovědnost za plánovací proces.
+```
+
+Tohle je pořád dokončená iterace. Neudělala úpravu pravidla, ale zabránila špatné úpravě. I to se počítá, jakkoli to nemá tak hezký pocit jako nový odstavec v šabloně.
+
+### Privacy-first provedení malé úpravy
+
+Převod čekací poznámky do opravy má držet datovou stopu malou. Potvrzený signál už máte. Nepotřebujete kvůli němu dodatečně sbírat další chaty, screenshoty, nahrávky obrazovky ani osobní statistiky používání.
+
+Privacy-first pravidla:
+
+- do pravidla přeneste jen pracovní závěr, ne historii lidí;
+- původní poznámku po převodu smažte nebo zkraťte;
+- neukládejte příklady s osobními údaji, pokud stačí syntetický nebo anonymní příklad;
+- nepřidávejte nové povinné pole bez jasného účelu a retence;
+- ověření nastavte na běžný pracovní výstup, ne na dohled nad člověkem;
+- pokud úprava ruší starý export nebo screenshot, zapište i jeho odstranění.
+
+Privacy-first věta:
+
+```text
+Potvrzenou čekací poznámku převádíme do jedné malé úpravy pravidla. Do stabilního místa přenášíme jen pracovní závěr, pomocné stopy mažeme nebo zkracujeme a ověřujeme výsledek při běžném použití bez nového sledování lidí.
+```
+
+Codyho komentář: malá úprava je dobrá jen tehdy, když po ní zůstane méně nejasnosti, ne víc dokumentace. Když oprava potřebuje vlastní návod, možná právě porodila další problém. Gratuluju, ale do e-booku ho zatím necpěte.
+
+### Karta převodu potvrzené čekací poznámky
+
+```text
+Pracovní místo:
+
+Původní čekací poznámka:
+
+Potvrzený signál:
+
+Výsledek kontroly z Přílohy VG:
+
+Nejbližší místo zásahu:
+
+Typ úpravy:
+- textová / příkladová / polohová / úklidová / hraniční
+
+Provedená malá úprava:
+
+Co výslovně neměníme:
+
+Co zavíráme:
+- původní poznámka / dočasný záznam / starý odkaz / pomocný podklad
+
+Ověření při dalším běžném použití:
+
+Jak poznáme, že úprava stačila:
+
+Jak poznáme, že nestačila:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte potvrzený signál z kontroly čekací poznámky.
+2. Minuta 2: napište jednou větou, jaké tření se vrací.
+3. Minuta 3: vyberte nejbližší místo zásahu v pravidle nebo šabloně.
+4. Minuta 4: zvolte jeden typ úpravy.
+5. Minuta 5: napište přesné nové znění nebo úklidový zásah.
+6. Minuta 6: zapište, co se výslovně nemění.
+7. Minuta 7: zavřete původní čekací poznámku a pomocné stopy.
+8. Minuta 8: nastavte ověření při dalším běžném použití.
+
+Výstup workshopu:
+
+```text
+Potvrzená čekací poznámka je převedená do jedné malé úpravy pravidla, původní poznámka je zavřená a další ověření proběhne při běžné práci.
+```
+
+### Checklist převodu do malé úpravy
+
+- Máme potvrzený signál z kontroly čekací poznámky?
+- Umíme tření popsat jednou konkrétní větou?
+- Vybrali jsme nejbližší místo zásahu?
+- Držíme jeden typ úpravy?
+- Je nové znění nebo zásah hotový, ne jen navržený?
+- Zapsali jsme, co se výslovně nemění?
+- Zavřeli jsme původní čekací poznámku?
+- Odstranili nebo zkrátili jsme pomocné stopy?
+- Nastavili jsme ověření při dalším běžném použití?
+- Nezavedli jsme nový tracker, export, povinné pole ani osobní dohled?
+- Pokud problém nebyl malý, oddělili jsme ho jako nové téma místo nafouknutí pravidla?
+- Je jasné, kdo ověření příště zavře?
+
+Převod potvrzené čekací poznámky je místo, kde se ukáže, jestli tým opravdu umí pracovat v malém. Když se povede, pravidlo je o jednu větu jasnější, stará poznámka zmizí a práce pokračuje bez nové vrstvy řízení.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VH o převodu potvrzené čekací poznámky do jedné malé úpravy pravidla: potvrzený signál, nejbližší místo zásahu, jeden typ úpravy, zavření původní poznámky, ověření běžným použitím, privacy-first provedení, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VG o kontrole čekací poznámky při dalším běžném použití: spouštěče, porovnání s návratovou podmínkou, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna krátká poznámka k Příloze VF, aby doběhlá expirace čekací poznámky šla zavřít bez náhradní úpravy, nového úkolu a další datové stopy.
 - 2026-06-01: Doplněna Příloha VF o převodu slabého tření po prvním návratu do čekací poznámky: rozlišení od návratu historie a nového problému, návratová podmínka, expirace, otevřené řešení, privacy-first hranice, karta, mini workshop a checklist.
