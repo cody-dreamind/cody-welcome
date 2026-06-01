@@ -159519,8 +159519,193 @@ Po uzavřené drobné úpravě nezůstává žádný stínový proces, nebo je z
 
 Kontrola stínového procesu je krátká pojistka proti tomu, aby se z dobré drobné úpravy stal nový neviditelný provoz. Když nic nenajdete, tím lépe. Když něco najdete, opravte nejbližší místo a vraťte se k normální práci. Stabilní systém se nepozná podle množství kontrol, ale podle toho, kolik kontrol už nepotřebuje.
 
+## Příloha VS: Převod nalezeného stínu do jednoho úklidového zásahu
+
+Příloha VR pomáhá najít stínový proces po uzavřené drobné úpravě. Tahle příloha řeší okamžik potom: co přesně udělat, když stín opravdu existuje. Cílem není otevřít novou opravu, založit další kontrolní tabulku nebo sepsat postmortem na něco, co bylo jen drobné provozní tření. Cílem je převést nález do jednoho úklidového zásahu, který vrátí pravidlo do normální práce.
+
+Stínový proces často svádí k přehnané reakci. Když objevíte starý export, ústní obchvat nebo pomocný checklist, tým může mít pocit, že se musí znovu řešit celý standard. Většinou nemusí. Pokud původní pravidlo funguje a stín je jen zbytek přechodového období, stačí malý úklid: odstranit starou stopu, opravit cestu k pravidlu nebo zrušit dodatečnou kontrolu.
+
+Pracovní otázka:
+
+```text
+Jaký jeden zásah odstraní nalezený stín, aniž bychom znovu otevřeli celé pravidlo?
+```
+
+### Nejdřív pojmenujte účel stínu
+
+Než něco smažete nebo přepíšete, zeptejte se, proč stín vznikl. Ne kvůli hledání viníka, ale kvůli správnému typu zásahu. Stejná pomocná tabulka může být zbytečná kopie, nouzová berlička nebo signál, že kanonické místo není v pracovní trase.
+
+Použijte jednoduché třídění:
+
+```text
+Stín existuje proto, že:
+- lidé nevědí, kde je aktuální pravidlo;
+- lidé vědí, kde je pravidlo, ale nevěří mu;
+- stará datová stopa zůstala po ověřování;
+- někdo ji používá jako rychlejší cestu;
+- nikdo si nevšiml, že už nemá účel.
+```
+
+Každý důvod vede k jinému zásahu. Když lidé nevědí, kde je pravidlo, opravte navigaci. Když pravidlu nevěří, zapište konkrétní návratový signál a zrušte zvláštní dohled. Když zůstala datová stopa, smažte ji nebo zkraťte. Když je stará cesta rychlejší, neobviňujte lidi z obcházení. Zlepšete kanonickou cestu tak, aby byla přirozeně použitelná.
+
+Krátký zápis:
+
+```text
+Nalezený stín:
+
+Proč pravděpodobně vznikl:
+
+Co tím lidé získávají:
+
+Co tím systém ztrácí:
+
+Typ zásahu:
+- navigace / důvěra / data / rychlost / prostý úklid
+```
+
+### Vyberte jeden zásah podle nejbližšího místa
+
+Úklid má začít tam, kde stín vzniká v práci, ne tam, kde se nejlépe popisuje v dokumentaci. Pokud člověk používá starý komentář v issue, nestačí upravit hlavní pravidlo. Je potřeba zavřít nebo zkrátit právě ten komentář, případně ho nahradit odkazem na kanonické místo. Pokud se tým doptává v chatu, nestačí přidat odstavec do wiki. Je potřeba opravit místo, ze kterého lidé do chatu přicházejí.
+
+Příklady jednoho zásahu:
+
+- starý export: smazat soubor a do karty zapsat, že rozhodovací věta zůstává v kanonickém místě;
+- pomocná tabulka: nahradit ji jedním odkazem na pravidlo a tabulku archivovat jen s retencí, pokud má právní nebo provozní důvod;
+- ústní instrukce: doplnit jednu větu do šablony, kterou člověk používá při práci;
+- starý checklist: zkrátit ho na odkaz na aktuální postup nebo ho označit jako neplatný;
+- zvláštní ruční kontrola: zrušit ji a zapsat, jaký návratový signál by kontrolu znovu spustil;
+- rychlejší obchvat: opravit kanonickou cestu, aby měla stejný první krok jako obchvat.
+
+Jedno pravidlo:
+
+```text
+Neuklízejte stín v abstraktním seznamu. Uklízejte ho v pracovním místě, kde ho člověk opravdu potká.
+```
+
+### Zásah napište jako uzavření, ne jako nový úkol
+
+Úklidový zásah má být malý a konečný. Proto ho nepište jako "prověřit možnosti", "zlepšit dokumentaci" nebo "sjednotit proces". To jsou otevřené formulace. Pište ho jako hotovou změnu:
+
+```text
+Smažeme dočasný export X.
+Starý komentář Y zkrátíme na odkaz na pravidlo Z.
+V šabloně A přidáme jednu větu, která vede na kanonické místo.
+Rušíme ruční kontrolu B; mimo rytmus se otevře jen při signálu C.
+```
+
+Špatná formulace:
+
+```text
+Podívat se na staré podklady a případně je sjednotit.
+```
+
+Lepší formulace:
+
+```text
+Dočasnou tabulku `pilot-kontrola` smažeme, protože její jediný závěr je už v kartě pravidla. V kartě necháme větu: "Ověření po prvním použití neukázalo potřebu zvláštní kontroly."
+```
+
+Codyho komentář: "sjednotit proces" je často převlečené "nikomu se nechce rozhodnout, který soubor smažeme". Malá krutost, velká úspora času.
+
+### Zkontrolujte, že zásah nevyrábí další stín
+
+Špatný úklid umí vytvořit nový stín. Typicky smažete starou tabulku, ale necháte tři odkazy, které na ni vedou. Nebo zrušíte zvláštní kontrolu, ale nezapíšete návratový signál, takže se kontrola vrátí ústně. Nebo přesunete starý export do archivu bez retence, takže už není na očích, ale pořád existuje.
+
+Před uzavřením se zeptejte:
+
+```text
+Zůstává někde odkaz na starou stopu?
+
+Vznikla nová pomocná poznámka jen kvůli úklidu?
+
+Ví člověk při dalším použití, kde má začít?
+
+Je jasné, kdy se téma znovu otevře?
+
+Smazali jsme data, nebo jsme je jen přestěhovali?
+```
+
+Pokud odpověď ukáže další zásah, nerozšiřujte úklid donekonečna. Rozlišujte mezi dokončením stejného zásahu a novým tématem. Odstranit odkaz na smazaný export je součást stejného úklidu. Přepsat celý onboardingový balíček už je nové téma.
+
+### Privacy-first úklid stínu
+
+Privacy-first hodnota je u stínových procesů jednoduchá: co nemá účel, nemá zůstávat. Uklízení stínu proto není jen pořádková práce. Je to snižování množství dat, kopií, přístupů a neformálních znalostí mimo správu.
+
+Minimální privacy-first postup:
+
+```text
+1. Určete, jestli pomocná stopa obsahuje osobní, zákaznická nebo obchodně citlivá data.
+2. Pokud už nemá účel, smažte ji.
+3. Pokud účel má, zkraťte ji na rozhodovací větu nebo anonymizovaný příklad.
+4. Pokud musí zůstat, zapište vlastníka, přístup a retenci.
+5. Ověřte, že na ni nevedou staré odkazy jako na pracovní zdroj pravdy.
+```
+
+Pozor na "archiv pro jistotu". Archiv je užitečný jen tehdy, když víte, proč existuje, kdo ho smí otevřít a kdy přestane být potřeba. Jinak je to jen sklep s lepším názvem.
+
+### Karta jednoho úklidového zásahu
+
+```text
+Nalezený stín:
+
+Typ stínu:
+- znalost / kontrola / data / rychlost / kombinace
+
+Pravděpodobný důvod vzniku:
+
+Kanonické místo:
+
+Jedno pracovní místo zásahu:
+
+Co přesně měníme:
+
+Co mažeme, zkracujeme nebo zavíráme:
+
+Co výslovně neotevíráme:
+
+Návratový signál:
+
+Privacy-first výsledek:
+
+Kdo zásah udělal:
+
+Datum:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte nález stínu z Přílohy VR.
+2. Minuta 2: pojmenujte, proč stín pravděpodobně vznikl.
+3. Minuta 3: vyberte nejbližší pracovní místo zásahu.
+4. Minuta 4: napište zásah jako hotové uzavření jednou větou.
+5. Minuta 5: smažte, zkraťte nebo zavřete pomocnou stopu.
+6. Minuta 6: ověřte, že nevznikl nový odkaz, archiv nebo ústní obchvat.
+7. Minuta 7: zapište návratový signál a vraťte pravidlo do běžného rytmu.
+
+Výstup workshopu:
+
+```text
+Nalezený stín je zavřený jedním úklidovým zásahem. Pravidlo má jedno kanonické místo, žádnou zbytečnou pomocnou stopu a konkrétní návratový signál.
+```
+
+### Checklist převodu stínu do úklidu
+
+- Víme, proč stín pravděpodobně vznikl?
+- Rozlišili jsme stín znalosti, kontroly, dat a rychlosti?
+- Vybrali jsme jedno nejbližší pracovní místo zásahu?
+- Je zásah formulovaný jako hotová změna, ne jako otevřený úkol?
+- Neotevíráme znovu celé pravidlo ani širší proces?
+- Smazali nebo zkrátili jsme pomocné stopy bez účelu?
+- Má ponechaná stopa jasný účel, přístup a retenci?
+- Nezůstaly odkazy na starý export, komentář, tabulku nebo checklist?
+- Je kanonická cesta pro člověka rychlejší nebo stejně snadná jako obchvat?
+- Má téma konkrétní návratový signál místo pocitu "radši to hlídejme"?
+
+Převod stínu do jednoho úklidu je malá, ale důležitá disciplína. Chrání tým před tím, aby každý nález automaticky znamenal další proces. Když se stín dá zavřít jedním zásahem, zavřete ho. Když se nedá, nepředstírejte drobný úklid a přesuňte téma do normální revize. Rozdíl mezi těmito dvěma stavy je přesně to, co drží provoz lehký.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VS o převodu nalezeného stínu do jednoho úklidového zásahu: pojmenování účelu stínu, výběr nejbližšího místa zásahu, uzavírací formulace, privacy-first mazání a checklist.
 - 2026-06-01: Doplněna Příloha VR o kontrole stínového procesu po uzavřené drobné úpravě: hledání stínu znalosti, kontroly a dat, nejmenší úklidový zásah, privacy-first mazání pomocných stop, karta a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o ověření úklidu po zavedení pracovního pravidla: test jedné pracovní cesty, čtyři výsledné stavy, privacy-first kontrola zbylé datové stopy, karta ověření a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o tom, kdy z opakovaných falešných poplachů udělat systémovou opravu: signály opakovaného vzoru, nejmenší archivní/navigační pravidlo, karta systémové opravy, privacy-first brzda a checklist.
