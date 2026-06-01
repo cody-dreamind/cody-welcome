@@ -158092,8 +158092,170 @@ Stabilní znění prošlo druhým běžným použitím, má jeden výsledný sta
 
 Druhé běžné použití má v dobrém případě skončit větou "tohle už neřešíme zvlášť". To není lenost. To je známka, že pravidlo přešlo z opravného režimu do provozu. A provoz nemá být muzeum starých rozhodnutí, do kterého chodíme každý týden obdivovat vitríny.
 
+## Příloha VM: Vrácení stabilního znění do běžného revizního rytmu
+
+Když stabilní znění pravidla prošlo druhým běžným použitím, vzniká nenápadné riziko: tým sice ukončí zvláštní sledování, ale pravidlo nechá viset v prostoru jako samostatnou památku na poslední úpravu. Není už v opravě, není v čekací poznámce, není v auditu, ale také není pevně zpátky v běžném rytmu. Takové pravidlo časem zestárne potichu.
+
+Tato příloha navazuje na Přílohu VL. Druhé použití dopadlo normálně nebo jen s tichým šumem, který nebrání výstupu. Cílem teď není znovu ověřovat pravidlo. Cílem je uložit ho do provozu tak, aby mělo jasné místo, vlastníka, další běžnou kontrolu a žádnou zbytečnou datovou stopu po opravné epizodě.
+
+Pracovní otázka:
+
+```text
+Je stabilní znění pravidla zpátky v běžném revizním rytmu, takže ho tým najde, použije a zkontroluje bez samostatného opravného režimu?
+```
+
+### Nezakládejte třetí kontrolu
+
+Po dvou použitích se někdy objeví chuť naplánovat ještě třetí "pro jistotu". Třetí kontrola ale často neověřuje pravidlo, jen uklidňuje tým, že něco nezanedbal. Pokud druhé použití proběhlo normálně, další speciální kontrola už nepřidává moc důkazu. Přidává hlavně práci a udržuje v lidech pocit, že pravidlo pořád není hotové.
+
+Místo třetí kontroly napište krátký provozní zápis:
+
+```text
+Stabilní znění:
+
+Druhé použití:
+Proběhlo bez návratu k historii.
+
+Rozhodnutí:
+Zvláštní sledování končí.
+
+Kanonické místo:
+
+Běžný revizní rytmus:
+
+Vlastník:
+```
+
+Tím se pravidlo přesune z opravného příběhu do provozního systému. Starší poznámky mohou zůstat jen tam, kde mají jasný důvod: auditní stopa rozhodnutí, změnový log nebo krátké poučení pro další podobnou situaci. Nemají být skrytým druhým zdrojem pravdy.
+
+### Uložte pravidlo na jedno kanonické místo
+
+Stabilní pravidlo musí mít jedno místo, kde platí. Ne "je to v dokumentu, v komentáři u úkolu, v zápisu ze schůzky a trochu i v šabloně". To je recept na tichý rozpad. Lidé pak nepoužívají pravidlo, ale vlastní vzpomínku na poslední verzi.
+
+Kanonické místo může být:
+
+- konkrétní sekce playbooku;
+- pracovní šablona;
+- checklist u opakované činnosti;
+- provozní runbook;
+- karta standardu v interní znalostní bázi;
+- veřejná část dokumentace, pokud pravidlo ovlivňuje zákazníky.
+
+Vyberte jedno místo jako zdroj pravdy a ostatní odkazy upravte tak, aby na něj odkazovaly. Pokud máte staré kopie pravidla, buď je smažte, nebo je přepište na krátký odkaz. Nejhorší varianta je nechat dvě podobná znění a doufat, že si tým vybere správné. Tým si samozřejmě vybere to, které najde první. To je skoro zákon internetu, jen bez slavnostního razítka.
+
+### Připojte pravidlo k existujícímu rytmu
+
+Běžný revizní rytmus má být něco, co už existuje. Měsíční review webu. Kvartální kontrola produktových standardů. Pravidelný úklid šablon. Retenční kontrola pracovních artefaktů. Pokud kvůli jednomu stabilnímu pravidlu vytvoříte nový rytmus, jen jste zvláštní sledování převlékli do civilu.
+
+Dobré napojení vypadá takto:
+
+```text
+Pravidlo patří do:
+Měsíčního review pracovních šablon.
+
+Při review se kontroluje:
+Jestli pravidlo pořád odpovídá reálné pracovní situaci a nemá duplicitní znění jinde.
+
+Nekontroluje se:
+Historie poslední opravy, jednotlivá použití ani osobní výkon lidí.
+```
+
+Pokud žádný vhodný rytmus neexistuje, nepřidávejte ho automaticky. Nejdřív se zeptejte, jestli pravidlo vůbec potřebuje pravidelnou kontrolu. Některé stabilní texty stačí otevřít až při návratovém signálu: změna nástroje, nový typ projektu, opakované tření nebo změna právního či provozního kontextu.
+
+### Zavřete opravnou historii
+
+Opravná historie má po stabilizaci zůstat čitelná, ale nemá ovládat běžnou práci. Prakticky to znamená:
+
+- původní čekací poznámka je zavřená;
+- ověřovací karta má výsledek, ne otevřený komentář;
+- pomocné exporty, screenshoty a pracovní seznamy jsou smazané nebo zkrácené;
+- odkazy v šablonách míří na stabilní znění;
+- changelog říká, co se změnilo a proč, ale nenutí čtenáře procházet celý příběh;
+- nové nápady z opravy jsou oddělené v backlogu nebo vědomě zahozené.
+
+Zavření historie neznamená mazat odpovědnost. Znamená odstranit všechno, co už neslouží rozhodnutí ani provozu. Když si tým schovává každou meziverzi, často tím nechrání znalost. Chrání nejistotu, že by bez ní neuměl obhájit další krok.
+
+### Privacy-first provozní návrat
+
+Vrácení pravidla do běžného rytmu je dobrý okamžik na malý datový úklid. Opravné režimy často vytvářejí pomocné poznámky: kdo co použil, kde se zasekl, jaký byl příklad, kdo měl připomínku. Některé informace jsou užitečné při rozhodnutí. Po rozhodnutí ale často zbytečně drží osobní nebo zákaznický kontext.
+
+Privacy-first pravidla:
+
+- ponechte kanonické pravidlo, vlastníka a revizní rytmus;
+- zkraťte pracovní poznámky na výsledek, ne na detailní historii lidí;
+- nemažte veřejně potřebné zdůvodnění, ale odstraňte osobní detaily;
+- staré exporty a screenshoty držte jen tehdy, když mají jasný auditní účel;
+- pokud pravidlo obsahuje příklad se zákaznickými daty, nahraďte ho anonymizovaným vzorem;
+- nepřidávejte interní analytiku používání pravidla, když stačí kontrola výstupu při review.
+
+Privacy-first věta:
+
+```text
+Po návratu stabilního znění do provozu necháváme jen data, která pomáhají pravidlo najít, použít a revidovat; opravnou historii zkracujeme na rozhodnutí.
+```
+
+### Karta návratu do běžného rytmu
+
+```text
+Stabilní znění pravidla:
+
+Poslední ověřený stav:
+- normální provoz / tichý šum bez zásahu
+
+Kanonické místo:
+
+Staré kopie nebo odkazy k úklidu:
+
+Běžný revizní rytmus:
+- měsíční / kvartální / pouze při návratovém signálu / jiné
+
+Vlastník:
+
+Co už nesledujeme:
+
+Co zůstává jako návratový signál:
+
+Privacy-first úklid:
+
+Datum zařazení:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: potvrďte, že druhé použití nevyžaduje další speciální kontrolu.
+2. Minuta 2: určete jedno kanonické místo stabilního znění.
+3. Minuta 3: najděte staré kopie, odkazy nebo komentáře, které mohou mást.
+4. Minuta 4: napojte pravidlo na existující revizní rytmus nebo návratový signál.
+5. Minuta 5: zavřete opravnou historii do jedné rozhodovací věty.
+6. Minuta 6: zkraťte pomocnou datovou stopu.
+7. Minuta 7: zapište vlastníka a datum zařazení do provozu.
+
+Výstup workshopu:
+
+```text
+Stabilní znění má jedno kanonické místo, vlastníka, běžný revizní rytmus a uklizenou opravnou historii.
+```
+
+### Checklist návratu do rytmu
+
+- Nepřidali jsme třetí kontrolu jen pro uklidnění?
+- Má pravidlo jedno kanonické místo?
+- Jsou staré kopie smazané, zkrácené nebo převedené na odkaz?
+- Je pravidlo napojené na existující revizní rytmus?
+- Pokud pravidelný rytmus nedává smysl, má pravidlo jasný návratový signál?
+- Je vlastník pravidla zapsaný u stabilního znění?
+- Je opravná historie zavřená rozhodovací větou?
+- Nezůstaly otevřené komentáře, exporty nebo pracovní seznamy bez účelu?
+- Jsou příklady anonymizované nebo zkrácené na nezbytné minimum?
+- Nekontrolujeme používání pravidla jako osobní výkon?
+- Nevyrobili jsme druhý zdroj pravdy v changelogu, šabloně nebo backlogu?
+- Umí další člověk pravidlo najít bez znalosti celé opravné epizody?
+
+Návrat do běžného rytmu je konec opravné smyčky. Ne dramatický konec s fanfárami, spíš zavření okna, vypnutí světla a označení správné police. Právě tahle nudná provozní disciplína rozhoduje, jestli se malé dobré úpravy časem promění v použitelný systém, nebo v hromadu historických poznámek, kterým už nikdo nevěří.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VM o vrácení stabilního znění do běžného revizního rytmu: kanonické místo, napojení na existující revizi, zavření opravné historie, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VL o druhém běžném použití stabilního znění bez dalšího auditu: rozlišení běžného použití, tichého šumu a návratového signálu, ukončení zvláštního sledování, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VK o prvním běžném návratu ke stabilnímu znění po uzavřené malé úpravě: použití bez staré historie, první přirozený průchod, čtyři výsledné stavy, kdy nic neměnit, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VJ o uzavření ověřené malé úpravy pravidla do stabilního znění: stabilní jazyk, uzavření ověřovací stopy, sjednocení nejbližších pracovních míst, oddělení nového tématu, privacy-first úklid, karta, mini workshop a checklist.
