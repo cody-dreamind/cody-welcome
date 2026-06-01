@@ -158874,8 +158874,219 @@ Drobně upravené pravidlo bylo ověřené při prvním běžném použití. Vý
 
 Drobné ověření je dobré tehdy, když po něm pravidlo zmizí zpátky do práce. Ne proto, že by bylo tajné, ale protože už nevyžaduje speciální pozornost. Stabilní systém se pozná i podle toho, že umí malé opravy potvrdit potichu.
 
+## Příloha VQ: Uzavření ověřené drobné úpravy zpět do běžného rytmu
+
+Ověřená drobná úprava má po potvrzení zmizet zpátky do normálního rytmu. To zní jednoduše, ale právě tady často vzniká nenápadný provozní dluh. Tým úpravu ověří, výsledek je dobrý, všichni si oddechnou, ale pomocná karta, poznámka v chatu, dočasný odkaz nebo malá kontrolní tabulka zůstane žít vedle kanonického pravidla. Za měsíc už nikdo neví, jestli je to historie, aktivní závazek nebo další věc k řešení.
+
+Tato příloha navazuje na Přílohu VP. Drobná úprava byla ověřená při běžném použití. Teď je potřeba udělat poslední krátký krok: uzavřít ověřovací stopu, potvrdit nové stabilní znění a vrátit pravidlo do revizního rytmu bez zvláštního režimu.
+
+Pracovní otázka:
+
+```text
+Jak uzavřít ověřenou drobnou úpravu tak, aby zůstalo stabilní pravidlo, čistá historie a žádná nová kontrolní povinnost?
+```
+
+### Začněte jednou uzavírací větou
+
+Než smažete pomocné poznámky nebo přepíšete odkaz, napište jednu uzavírací větu. Nemá popisovat celý příběh. Má říct, co je odteď pravda.
+
+Šablona:
+
+```text
+Odteď platí:
+
+Ověření ukázalo:
+
+Do běžného rytmu vracíme:
+
+Speciální sledování končí, protože:
+
+Co zůstává mimo rozsah:
+```
+
+Příklad:
+
+```text
+Odteď platí:
+Onboardingová šablona odkazuje na aktuální kanonické pravidlo pro první samostatný cyklus.
+
+Ověření ukázalo:
+Nový člověk pravidlo našel bez doptávání a dokončil pracovní kartu.
+
+Do běžného rytmu vracíme:
+Samotné pravidlo i onboardingovou šablonu.
+
+Speciální sledování končí, protože:
+Úprava pomohla a nevytvořila novou datovou stopu.
+
+Mimo rozsah:
+Neotevíráme širší audit onboardingu ani nový dotazník pro nováčky.
+```
+
+Uzavírací věta je důležitá hlavně pro budoucí čtenáře. Ti nepotřebují vědět, kolik drobných debat úprava přežila. Potřebují vědět, jaké pravidlo mají použít dnes.
+
+### Upravte kanonické místo, ne okolní vzduch
+
+Po ověření smí zůstat jen jedno stabilní místo. Pokud se úprava týká pravidla, opravte pravidlo. Pokud se týká šablony, opravte šablonu. Pokud se týká indexu, opravte index. Nepřidávejte vysvětlující poznámku na další místo jen proto, aby bylo vidět, že se něco dělo.
+
+Kontrola kanonického místa:
+
+```text
+Kde se člověk rozhoduje nebo pracuje:
+
+Kde má být nové znění:
+
+Které pomocné místo už nemá být zdrojem pravdy:
+
+Které odkazy je potřeba sjednotit:
+
+Kde se změna zapíše do historie:
+```
+
+Typický dobrý výsledek:
+
+- pravidlo má aktuální formulaci;
+- nejbližší šablona vede na správné místo;
+- starý pomocný komentář je smazaný nebo zkrácený na changelog;
+- ověřovací karta je uzavřená;
+- další kontrola zůstává v normálním revizním rytmu.
+
+Typický špatný výsledek:
+
+- pravidlo je opravené, ale stará poznámka dál visí vedle něj;
+- do backlogu přibyla položka "sledovat, jestli to fakt funguje";
+- někdo založil dočasnou tabulku, která nemá datum smazání;
+- tým přidal novou metriku pro změnu, která měla být jen drobným úklidem.
+
+Codyho komentář: malá úprava se nemá po ověření dožadovat vlastního trůnu. Jestli funguje, ať pracuje. Dokumentace není reality show.
+
+### Zavřete ověřovací stopu
+
+Ověřovací stopa vznikla kvůli rozhodnutí. Jakmile je rozhodnutí hotové, stopa má být buď smazaná, zkrácená, nebo přesunutá do historie. Nesmí dál vypadat jako aktivní práce.
+
+Použijte tři stavy:
+
+- Smazat: pomocná poznámka, pracovní screenshot, dočasný export nebo kopie textu už nemají účel.
+- Zkrátit: zůstane jen rozhodovací věta bez detailů, jmen a zákaznického kontextu.
+- Archivovat: výjimečně, pokud je stopa důležitá pro audit rozhodnutí nebo pozdější revizi.
+
+Krátký zápis:
+
+```text
+Pomocné stopy:
+
+Stav:
+- smazat / zkrátit / archivovat
+
+Proč:
+
+Kdo provede:
+
+Do kdy:
+
+Co zůstane jako jediný dohledatelný výsledek:
+```
+
+Privacy-first pravidlo: pokud ověřovací stopa obsahuje osobní údaje, zákaznický příklad, interní poznámku k výkonu člověka nebo provozní detail bez dalšího účelu, výchozí stav je smazat nebo zkrátit. Archivace musí mít jasný důvod, ne jen pocit "mohlo by se hodit".
+
+### Vraťte pravidlo do normálního revizního rytmu
+
+Uzavření neznamená, že se pravidlo už nikdy neuvidí. Znamená, že nepotřebuje zvláštní péči mimo běžný rytmus. Další kontrola má přijít tam, kde by stejně přišla: měsíční review šablon, kvartální audit standardů, první použití nové role, pravidelný úklid indexu nebo plánovaná revize dokumentace.
+
+Zapište:
+
+```text
+Běžný revizní rytmus:
+
+Nejbližší přirozená kontrola:
+
+Co se při ní má zkontrolovat:
+
+Co se při ní nemá znovu otevírat:
+
+Návratový signál mimo rytmus:
+```
+
+Návratový signál mimo rytmus má být konkrétní. Například:
+
+```text
+Téma otevřeme mimo běžný rytmus jen tehdy, když dva po sobě jdoucí lidé pravidlo nenajdou v pracovní trase nebo když opravené místo povede k chybnému výstupu pro zákazníka.
+```
+
+Slabý signál je:
+
+```text
+Vrátíme se k tomu, kdyby s tím byl problém.
+```
+
+To je příliš měkké. Každá drobná nejistota pak může vypadat jako důvod otevřít starou historii.
+
+### Karta uzavření ověřené drobné úpravy
+
+```text
+Pravidlo nebo pracovní místo:
+
+Původní drobný nález:
+
+Provedená úprava:
+
+Ověření při běžném použití:
+
+Uzavírací věta:
+
+Kanonické místo po uzavření:
+
+Pomocné stopy:
+- smazat / zkrátit / archivovat
+
+Co zůstává mimo rozsah:
+
+Běžný revizní rytmus:
+
+Návratový signál mimo rytmus:
+
+Privacy-first výsledek:
+
+Kdo uzavření provedl:
+
+Datum:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek ověření z Přílohy VP.
+2. Minuta 2: napište jednu uzavírací větu.
+3. Minuta 3: potvrďte kanonické místo, kde má nové znění bydlet.
+4. Minuta 4: projděte pomocné stopy a určete smazat, zkrátit nebo archivovat.
+5. Minuta 5: zapište běžný revizní rytmus.
+6. Minuta 6: napište konkrétní návratový signál mimo rytmus.
+7. Minuta 7: zavřete kartu a smažte nebo zkraťte dočasné poznámky.
+
+Výstup workshopu:
+
+```text
+Ověřená drobná úprava je uzavřená v kanonickém místě, pomocné stopy jsou uklizené a další kontrola se vrací do běžného rytmu.
+```
+
+### Checklist uzavření drobné úpravy
+
+- Máme jednu uzavírací větu, která říká, co odteď platí?
+- Je nové znění v kanonickém pracovním místě?
+- Nezůstala vedle pravidla stará pomocná poznámka jako druhý zdroj pravdy?
+- Jsou odkazy, šablony a indexy sjednocené jen v nezbytném rozsahu?
+- Rozlišili jsme pomocné stopy na smazat, zkrátit a archivovat?
+- Má archivace jasný účel, pokud nějaká stopa zůstává?
+- Je pravidlo vrácené do běžného revizního rytmu?
+- Je návratový signál mimo rytmus konkrétní a ověřitelný?
+- Nezaložili jsme nový dashboard, dotazník, tracker ani kontrolní meeting?
+- Je zapsané, jaká data díky uzavření dál nesbíráme?
+- Umí tým říct, co se při příští revizi nemá znovu otevírat?
+
+Uzavření drobné úpravy je poslední úklid po dobré práci. Není velkolepé, ale rozhoduje o tom, jestli se systém zlepšuje, nebo jen produkuje další vrstvy poznámek. Stabilní rytmus nevzniká tím, že všechno sledujete. Vzniká tím, že hotové věci umíte pustit z ruky.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VQ o uzavření ověřené drobné úpravy zpět do běžného rytmu: uzavírací věta, kanonické místo, úklid ověřovací stopy, návrat do normální revize, privacy-first výsledek, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VP o ověření drobné úpravy v rytmu při dalším běžném použití: první přirozené použití, tři signály, čtyři výsledné stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VO o převodu drobného nálezu z běžné revize do jedné úpravy v rytmu: potvrzení drobného nálezu, výběr jednoho typu zásahu, oprava nejbližšího pracovního místa, závěrečná revizní věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VN o první běžné revizi stabilního znění po návratu do rytmu: kontrola pracovního slibu, tři vstupy revize, čtyři výsledné stavy, ochrana před novým opravným režimem, privacy-first úklid, karta, mini workshop a checklist.
