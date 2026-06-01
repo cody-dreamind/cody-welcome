@@ -4834,6 +4834,136 @@ Codyho komentář: falešný poplach je jako kontrolka, která nesignalizuje roz
 
 Dobře uklizený falešný poplach má tichý výsledek: stabilní text se nemění, stará stopa přestane mást a tým nemá v hlavě další nejasný dluh. To je přesně druh práce, který se špatně prodává v prezentaci, ale dobře drží dlouhý rukopis při životě.
 
+## Ověření úklidu po falešném poplachu
+
+Úklid okolí po falešném poplachu je hotový až ve chvíli, kdy stará stopa přestane reálně vést práci špatným směrem. Nestačí označit archivní šablonu jako neplatnou, opravit odkaz nebo smazat pracovní kopii. Je potřeba při nejbližším běžném použití ověřit, že člověk už nenarazí na stejnou falešnou cestu a že stabilní trasa zůstala opravdu beze změny.
+
+Ověření má být malé. Nejde o audit celého rukopisu, rozcestníku ani znalostní báze. Jde o kontrolu jedné otázky:
+
+```text
+Když člověk znovu řeší stejnou pracovní situaci, vede ho okolí na aktuální kanonické místo, a ne na starou stopu?
+```
+
+Pokud ano, úklid drží a trasu nechte dál v klidu. Pokud ne, neznamená to automaticky, že je špatně stabilní kapitola. Pravděpodobně zůstala ještě jedna stará cesta: odkaz v interním indexu, šablona v kopii projektu, poznámka v backlogu, uložený text v nabídce nebo komentář v issue. Opravte nejbližší zdroj zmatku, ne celý systém.
+
+### Ověřujte cestu, ne člověka
+
+Při kontrole se nedívejte na to, kdo udělal chybu. Dívejte se na to, kudy ho systém vedl. Pokud člověk použije starou šablonu, otázka nezní "proč si nevzpomněl na novou". Otázka zní "proč stará šablona pořád vypadala použitelně".
+
+Krátký záznam může vypadat takto:
+
+```text
+Pracovní situace:
+Kde člověk začal:
+Kam ho měl systém dovést:
+Kam ho systém dovedl:
+Stará stopa, která zůstala:
+Nejmenší oprava okolí:
+Trasu měníme:
+- ano / ne
+```
+
+Příklad:
+
+```text
+Pracovní situace:
+Měsíční review slabého podnětu k novému měření.
+
+Kde člověk začal:
+V interním rozcestníku review šablon.
+
+Kam ho měl systém dovést:
+Na aktuální šablonu, kde slabý podnět může skončit zavřením bez úkolu.
+
+Kam ho systém dovedl:
+Na archivní šablonu bez směrovky na zavření karty.
+
+Stará stopa, která zůstala:
+Odkaz v rozcestníku nebyl přesměrovaný.
+
+Nejmenší oprava okolí:
+Nahradit odkaz a u archivní šablony přidat viditelné "nepoužívat pro nové review".
+
+Trasu měníme:
+Ne.
+```
+
+Takový zápis chrání stabilní text před zbytečnou úpravou a zároveň nenechá starý nepořádek žít dál. Je to malé rozhodnutí, ale přesně takové malé rozhodnutí šetří další kolečko vysvětlování.
+
+### Tři výsledky ověření úklidu
+
+Po ověření vyberte jeden ze tří stavů:
+
+- Úklid drží: člověk se dostal na kanonické místo a stará stopa už nevedla práci.
+- Úklid doplnit: stabilní trasa je v pořádku, ale v okolí zůstalo jedno konkrétní místo k opravě.
+- Otevřít novou kartu: problém už není jen stará stopa, ale opakované selhání navigace nebo zdroje pravdy.
+
+Stav `úklid doplnit` je nejčastější. Zacházejte s ním úsporně. Pokud stačí přesměrovat jeden odkaz, nepište novou kapitolu o navigaci. Pokud stačí archivní šablonu označit jako neplatnou, nepředělávejte všechny šablony. Pokud stačí smazat pracovní export, nezakládejte retenční projekt. Ano, projekt zní důležitěji. Ale jeden smazaný export bývá užitečnější než půlhodinová debata o tom, jak se k mazání stavíme filozoficky.
+
+Stav `otevřít novou kartu` použijte až ve chvíli, kdy se stejný problém vrací přes více míst. Například rozcestník, backlog i šablona ukazují na různé zdroje pravdy. To už není úklid po falešném poplachu. To je problém navigace a zaslouží si vlastní pracovní otázku, vlastní hranici rozsahu a vlastní ověření.
+
+### Privacy-first kontrola ověření
+
+Ověření úklidu nesmí vytvořit větší datovou stopu než původní falešný poplach. Nepotřebujete sledovat klikání lidí v dokumentaci, nahrávat obrazovku ani ukládat osobní historii toho, kdo kudy šel. Stačí pracovní výsledek: jestli stará stopa ještě existuje, kde je a jak se uklidila.
+
+Privacy-first záznam má držet minimum:
+
+```text
+Zůstává:
+Anonymizovaný závěr, které místo bylo opravené.
+
+Maže se:
+Pracovní screenshot, kopie staré šablony, dočasná poznámka nebo export použitý při kontrole.
+
+Nesbírá se:
+Osobní evidence čtenářů, detailní chování v dokumentu ani nové analytické eventy.
+```
+
+Pokud ověření pracuje se zákaznickým nebo interním příkladem, přepište ho do typu problému. V logu stačí "starý formulář pořád naváděl k povinnému telefonu". Není potřeba ukládat konkrétní poptávku, jméno člověka ani celý text interního komentáře.
+
+Codyho komentář: ověření úklidu má být jako kontrola, že jste po sobě zamkli dveře. Podíváte se, klika drží, jdete dál. Nestavíte k tomu kamerový systém, deník otvírání a certifikát o vztahu ke klice. Teda pokud nejste velmi znuděný compliance mág, ale i ten by měl občas pít vodu.
+
+### Karta ověření úklidu
+
+```text
+Falešný poplach:
+
+Uklizené okolí:
+
+První běžné použití po úklidu:
+
+Kanonické místo, kam měl člověk dojít:
+
+Výsledek:
+- úklid drží / úklid doplnit / otevřít novou kartu
+
+Pokud úklid doplnit, jaké jedno místo opravujeme:
+
+Pokud otevřít novou kartu, jaká je pracovní otázka:
+
+Trasu měníme:
+- ano / ne
+
+Privacy-first úklid podkladů:
+
+Návratový signál:
+```
+
+### Checklist ověření úklidu
+
+- Proběhlo ověření při přirozeném použití stejné pracovní situace?
+- Kontrolujeme cestu k aktuálnímu pravidlu, ne výkon konkrétního člověka?
+- Víme, jestli stará stopa opravdu přestala vést práci?
+- Pokud zůstalo tření, je jasné jedno nejbližší místo úklidu?
+- Neměníme stabilní trasu jen proto, že okolí ještě nebylo uklizené?
+- Rozlišili jsme doplnění úklidu od nové navigační karty?
+- Nevznikl nový tracker, export, záznam chování ani osobní evidence?
+- Jsou pracovní screenshoty, kopie a poznámky po kontrole smazané nebo anonymizované?
+- Zůstává pro příště konkrétní návratový signál?
+- Je v logu jasné, jestli úklid drží, nebo co přesně se ještě opravilo?
+
+Ověření úklidu po falešném poplachu uzavírá malou, ale důležitou smyčku. Stabilní pravidlo se nemění, stará cesta se přestane tvářit jako platná a tým nemusí při dalším použití znovu rozhodovat, jestli chyba byla v textu, nebo jen v neuklizeném okolí.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -155784,6 +155914,7 @@ Ověřená malá oprava je tichý konec celé smyčky: slabé tření, čekací 
 
 ## Pracovní log
 
+- 2026-06-01: Doplněna úvodní podkapitola o ověření úklidu po falešném poplachu: kontrola cesty ke kanonickému místu, rozlišení doplnění úklidu a nové navigační karty, privacy-first ověření bez sledování čtenářů, karta a checklist.
 - 2026-05-31: Doplněna Příloha VC o ověření opravy pracovního pravidla po čekací poznámce: skutečný spouštěč ověření, tři signály plynulosti/výstupu/vedlejšího efektu, čtyři výsledné stavy, práce bez osobního hodnocení, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna Příloha VB o převodu opakovaného tření po čekací poznámce do jedné opravy pracovního pravidla: rozlišení malé opravy a nové práce, nejbližší místo zásahu, přítomný čas pravidla, jeden typ zásahu, zavření původní poznámky, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o úklidu okolí po falešném poplachu: rozlišení stabilní trasy a okolní staré stopy, stavy úklidu, privacy-first mazání podkladů, karta a checklist.
