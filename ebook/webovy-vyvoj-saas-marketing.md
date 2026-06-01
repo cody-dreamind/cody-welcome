@@ -158253,8 +158253,194 @@ Stabilní znění má jedno kanonické místo, vlastníka, běžný revizní ryt
 
 Návrat do běžného rytmu je konec opravné smyčky. Ne dramatický konec s fanfárami, spíš zavření okna, vypnutí světla a označení správné police. Právě tahle nudná provozní disciplína rozhoduje, jestli se malé dobré úpravy časem promění v použitelný systém, nebo v hromadu historických poznámek, kterým už nikdo nevěří.
 
+## Příloha VN: První běžná revize stabilního znění po návratu do rytmu
+
+Pravidlo, které se vrátilo do běžného revizního rytmu, už nemá zvláštní ochranný režim. To je správně. První běžná revize ale bývá citlivá, protože tým má ještě v hlavě nedávnou opravu a snadno z ní znovu udělá hlavní téma. Revize pak místo provozní kontroly začne připomínat pokračování staré epizody.
+
+Tato příloha navazuje na Přílohu VM. Stabilní znění má kanonické místo, vlastníka, běžný revizní rytmus a uklizenou opravnou historii. Cílem první běžné revize není dokazovat, že poslední oprava byla dobrá. Cílem je zjistit, jestli pravidlo pořád odpovídá reálné práci, jestli se dá najít a jestli nevytváří zbytečnou datovou stopu.
+
+Pracovní otázka:
+
+```text
+Obstojí stabilní znění v první běžné revizi jako normální součást systému, bez návratu do opravného režimu?
+```
+
+### Kontrolujte pracovní slib, ne historii opravy
+
+Začněte aktuálním slibem pravidla:
+
+```text
+Pravidlo má pomoci s:
+
+Aktuální znění říká:
+
+Běžná revize kontroluje:
+
+Nekontroluje:
+historii poslední opravy, osobní výkon lidí ani staré meziverze.
+```
+
+Tím nastavíte hranici. Pokud revize začne otázkou "proč jsme to tehdy měnili", snadno se propadne zpět do opravného režimu. Historie má smysl jen tehdy, když aktuální znění selhává a tým potřebuje vědět, jak vzniklo. Pokud znění funguje, historie zůstává zavřená.
+
+Dobrá první revize se ptá na práci:
+
+- našel člověk pravidlo tam, kde ho při práci čekal;
+- pravidlo stále odpovídá aktuálnímu procesu, nástroji nebo nabídce;
+- podle pravidla vzniká správný výstup;
+- nevznikly nové kopie, které tvrdí něco jiného;
+- pravidlo nevyžaduje další osobní nebo zákaznická data.
+
+Codyho komentář: když pravidlo při revizi funguje, není potřeba mu dělat rodokmen. Ano, víme, že mělo dramatické mládí v čekací poznámce. Teď má platit v práci, ne vyprávět autobiografii.
+
+### Vezměte jen tři vstupy
+
+První běžná revize se dá snadno nafouknout. Někdo přinese starý komentář, někdo poslední edge case, někdo návrh na lepší šablonu a za chvíli se z kontroly jednoho pravidla stane malý redesign procesu. Držte tři vstupy:
+
+```text
+1. Aktuální kanonické znění.
+2. Jeden poslední reálný výstup, kde se pravidlo použilo nebo mělo použít.
+3. Seznam míst, odkud se na pravidlo odkazuje.
+```
+
+To stačí. Aktuální znění ukáže, co má platit. Reálný výstup ukáže, jestli pravidlo pomáhá práci. Odkazy ukážou, jestli se pravidlo nerozpadá do více verzí.
+
+Co do první běžné revize netahat:
+
+- kompletní historii čekací poznámky;
+- všechny ověřovací karty;
+- seznam lidí, kteří pravidlo použili;
+- staré screenshoty, pokud nejsou nutné k rozhodnutí;
+- nové návrhy na automatizaci;
+- metriky používání interního pravidla.
+
+Pokud se bez některého z těchto vstupů opravdu nedá rozhodnout, zapište proč. Často tím odhalíte, že revize neřeší stabilní pravidlo, ale nový problém v procesu.
+
+### Čtyři výsledné stavy první běžné revize
+
+Po revizi vyberte jeden stav:
+
+- Ponechat beze změny: pravidlo odpovídá práci, odkazy sedí a není potřeba nová datová stopa.
+- Drobně upravit v rytmu: pravidlo potřebuje malou úpravu názvu, odkazu, příkladu nebo formulace, ale nejde o návrat do opravného režimu.
+- Otevřít návratový signál: revize potvrdila opakované tření, změnu procesu nebo rozpad zdroje pravdy.
+- Sloučit nebo vyřadit: pravidlo už je duplicitní, zastaralé nebo ho nahradil jiný stabilní standard.
+
+Ponechat beze změny je plnohodnotný výsledek. Zapište jednu větu a pokračujte v běžné práci.
+
+Drobně upravit v rytmu znamená, že změna patří do stejného revizního okna. Neotevírejte novou sérii čekacích poznámek, pokud stačí opravit odkaz nebo zkrátit větu.
+
+Návratový signál už není obyčejná revizní poznámka. Pokud se opakuje stejné tření, pravidlo se nedá najít nebo se změnil pracovní proces, otevřete samostatnou kartu a držte ji mimo běžnou revizi.
+
+Sloučení nebo vyřazení je správné, když pravidlo ztratilo samostatný účel. Stabilita neznamená nesmrtelnost. Některé dobré pravidlo splní práci tím, že se později rozpustí do lepšího standardu.
+
+### Jak nevyrábět nový opravný režim
+
+První běžná revize má skončit rozhodnutím, ne novou kontrolní sérií. Dávejte pozor na věty:
+
+- "Ještě to jednou ověříme pro jistotu."
+- "Pojďme si vést seznam dalších použití."
+- "Budeme měsíc sledovat, kdo to používá."
+- "Necháme si všechny podklady, kdyby se to vrátilo."
+
+Někdy jsou podobné kroky oprávněné. Většinou ale jen obnovují zvláštní sledování, které už mělo skončit. Pokud pravidlo při běžné revizi obstálo, další kontrola patří do normálního rytmu. Pokud neobstálo, otevřete návratový signál a pojmenujte konkrétní problém.
+
+Krátká brzda:
+
+```text
+Přidává navržený další krok nový důkaz pro rozhodnutí,
+nebo jen prodlužuje pocit kontroly?
+```
+
+Když odpověď zní "jen pocit kontroly", krok škrtněte. Ano, i pěkně pojmenovaný kontrolní list může být jen dražší forma nejistoty.
+
+### Privacy-first revize
+
+První běžná revize je dobrý test, jestli se privacy-first úklid opravdu povedl. Pokud se kvůli revizi musí vytáhnout staré osobní poznámky, zákaznické detaily nebo exporty chování, něco zůstalo v systému déle, než bylo potřeba.
+
+Privacy-first pravidla:
+
+- kontrolujte výstup práce, ne osobní historii použití;
+- používejte anonymizovaný nebo zkrácený příklad, pokud stačí k rozhodnutí;
+- nemažte kanonický důvod pravidla, ale odstraňte pomocné detaily bez účelu;
+- neobnovujte staré screenshoty a exporty jen kvůli pohodlí;
+- odkazy na pravidlo držte v interním systému bez veřejných trackerů;
+- pokud pravidlo ovlivňuje zákaznická data, zkontrolujte účel, přístup a retenci;
+- nové návrhy na měření používání pravidla odmítněte, pokud stačí běžná kontrola výstupu.
+
+Privacy-first věta:
+
+```text
+Při první běžné revizi necháváme pravidlu jen takovou datovou stopu, která pomáhá rozhodnout o jeho použitelnosti; osobní a zákaznický kontext zůstává mimo revizi, pokud není nezbytný.
+```
+
+### Karta první běžné revize
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Běžný revizní rytmus:
+
+Pracovní slib pravidla:
+
+Reálný výstup ke kontrole:
+
+Odkazy nebo kopie ke kontrole:
+
+Zjištění:
+
+Výsledný stav:
+- ponechat beze změny / drobně upravit v rytmu / otevřít návratový signál / sloučit nebo vyřadit
+
+Rozhodnutí:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Další běžná revize nebo návratový signál:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte aktuální kanonické znění a pracovní slib pravidla.
+2. Minuta 2: potvrďte, že revize neotevírá historii poslední opravy.
+3. Minuta 3: projděte jeden reálný výstup z běžné práce.
+4. Minuta 4: zkontrolujte odkazy, kopie a místo zdroje pravdy.
+5. Minuta 5: zapište, zda pravidlo pomohlo práci, překáželo, nebo už není potřeba.
+6. Minuta 6: vyberte jeden ze čtyř výsledných stavů.
+7. Minuta 7: udělejte privacy-first úklid pomocných stop.
+8. Minuta 8: zapište rozhodnutí a další běžný rytmus nebo návratový signál.
+
+Výstup workshopu:
+
+```text
+Stabilní pravidlo prošlo první běžnou revizí jako součást normálního systému: má výsledný stav, rozhodnutí, uklizenou datovou stopu a žádný nový opravný režim bez důvodu.
+```
+
+### Checklist první běžné revize
+
+- Začali jsme aktuálním kanonickým zněním, ne historií opravy?
+- Kontrolovali jsme pracovní slib pravidla?
+- Použili jsme jeden reálný výstup místo kompletního sledování použití?
+- Zkontrolovali jsme odkazy a možné duplicitní kopie?
+- Vybrali jsme právě jeden výsledný stav?
+- Pokud pravidlo funguje, nechali jsme ho beze změny?
+- Pokud jde jen o malou úpravu odkazu nebo formulace, drží se běžného rytmu?
+- Pokud je tu návratový signál, má samostatnou kartu mimo revizi?
+- Pokud je pravidlo duplicitní nebo zastaralé, rozhodli jsme o sloučení nebo vyřazení?
+- Nepřidali jsme novou kontrolní sérii jen pro uklidnění?
+- Nezůstaly v revizním zápisu osobní nebo zákaznické detaily bez účelu?
+- Zkrátili jsme pomocné podklady, které už nepomáhají rozhodnutí?
+- Další kontrola běží v normálním rytmu nebo podle jasného návratového signálu?
+
+První běžná revize je zkouška dospělosti pravidla. Když projde, nemusí dostat medaili, tabulku ani zvláštní monitoring. Stačí, že dál pomáhá práci a nezabírá víc pozornosti, než si zaslouží.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VN o první běžné revizi stabilního znění po návratu do rytmu: kontrola pracovního slibu, tři vstupy revize, čtyři výsledné stavy, ochrana před novým opravným režimem, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VM o vrácení stabilního znění do běžného revizního rytmu: kanonické místo, napojení na existující revizi, zavření opravné historie, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VL o druhém běžném použití stabilního znění bez dalšího auditu: rozlišení běžného použití, tichého šumu a návratového signálu, ukončení zvláštního sledování, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VK o prvním běžném návratu ke stabilnímu znění po uzavřené malé úpravě: použití bez staré historie, první přirozený průchod, čtyři výsledné stavy, kdy nic neměnit, privacy-first návrat, karta, mini workshop a checklist.
