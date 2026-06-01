@@ -159349,8 +159349,179 @@ Ověřená drobná úprava je uzavřená v kanonickém místě, pomocné stopy j
 
 Uzavření drobné úpravy je poslední úklid po dobré práci. Není velkolepé, ale rozhoduje o tom, jestli se systém zlepšuje, nebo jen produkuje další vrstvy poznámek. Stabilní rytmus nevzniká tím, že všechno sledujete. Vzniká tím, že hotové věci umíte pustit z ruky.
 
+## Příloha VR: Kontrola stínového procesu po uzavřené drobné úpravě
+
+Po uzavření drobné úpravy by se pravidlo mělo vrátit do normální práce. Jenže někdy po něm zůstane stínový proces: lidé dál kontrolují pomocnou tabulku, ptají se v chatu na starý postup, drží dočasný export "pro jistotu" nebo si ručně obcházejí nové kanonické místo, protože si nejsou jistí, jestli už změna opravdu platí.
+
+Stínový proces je nebezpečný tím, že nevypadá jako nový projekt. Nemá vlastní název, rozpočet ani oficiálního vlastníka. Přesto bere pozornost a často zvětšuje datovou stopu víc než samotná úprava. Tahle příloha navazuje na Přílohu VQ a řeší krátkou kontrolu po uzavření: jestli hotová drobná úprava skutečně zůstala jen v kanonickém místě, nebo kolem sebe nechala neviditelnou obsluhu.
+
+Pracovní otázka:
+
+```text
+Zůstalo po uzavřené drobné úpravě něco, co lidé používají, kontrolují nebo ukládají mimo běžný rytmus?
+```
+
+### Hledejte chování, ne dokumenty
+
+Nestačí zkontrolovat, že karta je zavřená a odkaz opravený. Stínový proces se pozná podle chování lidí:
+
+- někdo dál používá starou poznámku místo kanonického pravidla;
+- tým se při běžné práci doptává, jestli uzavřená úprava opravdu platí;
+- vznikla neformální kontrola po každém použití pravidla;
+- dočasný export nebo screenshot zůstal uložený "kdyby něco";
+- starý komentář v issue slouží jako druhý návod;
+- nováček dostává ústní instrukci, která v pravidle není.
+
+Kontrolu udělejte při prvním běžném dotyku po uzavření. Nemá to být audit. Stačí se zeptat člověka, který podle pravidla pracoval, kde vzal aktuální postup a jestli potřeboval ještě nějakou pomocnou stopu.
+
+Krátký zápis:
+
+```text
+Uzavřená drobná úprava:
+
+Kanonické místo:
+
+První běžný dotyk po uzavření:
+
+Člověk použil:
+- kanonické místo / starou stopu / ústní instrukci / vlastní obchvat
+
+Vznikla nová pomocná kontrola:
+- ne / ano, jaká:
+
+Jedna věta zjištění:
+```
+
+### Tři typy stínu
+
+Stínový proces se obvykle objeví ve třech podobách.
+
+První je stín znalosti. Lidé pořád potřebují někoho, kdo jim řekne, co platí. Kanonické místo existuje, ale není v pracovní trase. Řešením není školení pro všechny. Nejdřív opravte cestu: odkaz, název, umístění nebo krátkou větu v nejbližší šabloně.
+
+Druhý je stín kontroly. Tým si vytvoří dodatečné ověření, protože nevěří, že drobná úprava stačí. Někdy je to rozumný návratový signál. Častěji je to jen zvyk po období, kdy se téma víc sledovalo. Řešením je znovu říct, kdy se pravidlo kontroluje normálně a jaký konkrétní signál ho otevře mimo rytmus.
+
+Třetí je stín dat. Zůstane export, screenshot, kopie zákaznického příkladu, dočasná tabulka nebo osobní poznámka, která už nemá účel. Tady je nejlepší výchozí akce smazat nebo zkrátit. Archivace potřebuje jasný důvod.
+
+Rozhodovací mini mapa:
+
+```text
+Stín znalosti:
+Opravujeme pracovní cestu.
+
+Stín kontroly:
+Rušíme zvláštní dohled nebo zapisujeme konkrétní návratový signál.
+
+Stín dat:
+Mažeme, zkracujeme nebo výjimečně archivujeme s účelem a retencí.
+```
+
+### Neotvírejte znovu celou úpravu
+
+Když najdete stínový proces, neznamená to automaticky, že původní drobná úprava byla špatně. Možná jen nebyla dobře uklizená. Proto nezačínejte novou revizi celého pravidla.
+
+Nejdřív určete nejmenší zásah:
+
+- opravit jeden odkaz v šabloně;
+- smazat jednu starou poznámku;
+- přidat jednu větu k návratovému signálu;
+- zavřít jeden dočasný export;
+- přejmenovat jedno místo v indexu;
+- zkrátit jeden komentář na rozhodovací větu.
+
+Pokud stínový proces vyžaduje víc zásahů najednou, zastavte se. Může to být signál, že problém není po uzavřené drobné úpravě, ale v širší pracovní trase. V takovém případě ho přesuňte do běžné revize jako nové téma a zapište, co teď výslovně neopravujete.
+
+Codyho komentář: když po malé opravě najdete pět tajných obchvatů, neopravujete malou opravu. Našli jste malý důl na provozní archeologii. Hezké, ale bacha na rozsah.
+
+### Privacy-first kontrola stínu
+
+Stínové procesy jsou privacy-first problém, protože často žijí mimo oficiální správu dat. Dočasné exporty, screenshoty, kopie zákaznických vět a ruční tabulky obvykle nemají jasnou retenci, přístup ani účel. Právě proto je dobré je hledat brzy, dokud jsou malé.
+
+Zeptejte se:
+
+```text
+Jaká data po uzavření pořád existují mimo kanonické místo?
+
+Kdo k nim má přístup?
+
+Mají ještě účel?
+
+Kdy se smažou nebo zkrátí?
+
+Stačí místo nich rozhodovací věta?
+```
+
+Privacy-first pravidlo:
+
+```text
+Pokud pomocná stopa nepomáhá k dnešnímu rozhodnutí, běžnému použití ani auditovatelné povinnosti, nemá zůstávat jen proto, že už vznikla.
+```
+
+### Karta kontroly stínového procesu
+
+```text
+Uzavřená drobná úprava:
+
+Datum uzavření:
+
+Kanonické místo:
+
+Běžný revizní rytmus:
+
+První běžný dotyk po uzavření:
+
+Našli jsme stín:
+- žádný / znalost / kontrola / data / kombinace
+
+Popis stínu:
+
+Nejmenší zásah:
+
+Co neotevíráme:
+
+Co mažeme nebo zkracujeme:
+
+Návratový signál mimo rytmus:
+
+Privacy-first výsledek:
+
+Kdo provedl kontrolu:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavírací větu z Přílohy VQ.
+2. Minuta 2: ověřte, odkud člověk při prvním běžném dotyku vzal aktuální postup.
+3. Minuta 3: najděte případný stín znalosti, kontroly nebo dat.
+4. Minuta 4: vyberte nejmenší zásah, pokud stín existuje.
+5. Minuta 5: smažte nebo zkraťte pomocnou stopu bez účelu.
+6. Minuta 6: napište jednu větu výsledku a vraťte téma do běžného rytmu.
+
+Výstup workshopu:
+
+```text
+Po uzavřené drobné úpravě nezůstává žádný stínový proces, nebo je zapsaný jeden malý úklid bez otevření celé úpravy.
+```
+
+### Checklist kontroly stínu
+
+- Kontrolujeme reálné použití, ne jen stav dokumentů?
+- Víme, kde je kanonické místo po uzavření?
+- Zjistili jsme, jestli lidé používají starou stopu, ústní instrukci nebo obchvat?
+- Rozlišili jsme stín znalosti, kontroly a dat?
+- Neotvíráme celou původní úpravu, pokud stačí jeden úklidový zásah?
+- Má případný širší problém vlastní běžnou revizi místo série drobných záplat?
+- Jsou dočasné exporty, screenshoty, kopie a poznámky smazané nebo zkrácené?
+- Má každá ponechaná stopa jasný účel, přístup a retenci?
+- Je návratový signál mimo rytmus konkrétní?
+- Umí tým říct, co po kontrole už nemusí hlídat?
+
+Kontrola stínového procesu je krátká pojistka proti tomu, aby se z dobré drobné úpravy stal nový neviditelný provoz. Když nic nenajdete, tím lépe. Když něco najdete, opravte nejbližší místo a vraťte se k normální práci. Stabilní systém se nepozná podle množství kontrol, ale podle toho, kolik kontrol už nepotřebuje.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VR o kontrole stínového procesu po uzavřené drobné úpravě: hledání stínu znalosti, kontroly a dat, nejmenší úklidový zásah, privacy-first mazání pomocných stop, karta a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o ověření úklidu po zavedení pracovního pravidla: test jedné pracovní cesty, čtyři výsledné stavy, privacy-first kontrola zbylé datové stopy, karta ověření a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o tom, kdy z opakovaných falešných poplachů udělat systémovou opravu: signály opakovaného vzoru, nejmenší archivní/navigační pravidlo, karta systémové opravy, privacy-first brzda a checklist.
 - 2026-06-01: Doplněna Příloha VQ o uzavření ověřené drobné úpravy zpět do běžného rytmu: uzavírací věta, kanonické místo, úklid ověřovací stopy, návrat do normální revize, privacy-first výsledek, karta, mini workshop a checklist.
