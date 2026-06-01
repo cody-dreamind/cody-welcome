@@ -159703,8 +159703,180 @@ Nalezený stín je zavřený jedním úklidovým zásahem. Pravidlo má jedno ka
 
 Převod stínu do jednoho úklidu je malá, ale důležitá disciplína. Chrání tým před tím, aby každý nález automaticky znamenal další proces. Když se stín dá zavřít jedním zásahem, zavřete ho. Když se nedá, nepředstírejte drobný úklid a přesuňte téma do normální revize. Rozdíl mezi těmito dvěma stavy je přesně to, co drží provoz lehký.
 
+## Příloha VT: Ověření úklidového zásahu po nalezeném stínu
+
+Jedním úklidovým zásahem práce nekončí. Končí až ve chvíli, kdy se při dalším běžném použití ukáže, že stínový proces opravdu zmizel a tým si místo něj nevytvořil nový obchvat. Po smazání exportu, zrušení pomocné kontroly nebo opravě cesty k pravidlu proto udělejte krátké ověření. Ne audit. Jen jeden průchod reálnou prací.
+
+Smyslem ověření není znovu hodnotit celou drobnou úpravu. To už proběhlo dřív. Teď ověřujete jen úklid: jestli člověk najde kanonické místo, nepoužije starou stopu, nepotřebuje dodatečné vysvětlení a nevzniká nová datová kopie "pro jistotu".
+
+Pracovní otázka:
+
+```text
+Zmizel po úklidovém zásahu původní stín bez toho, aby vznikl nový?
+```
+
+### Ověřujte při prvním přirozeném dotyku
+
+Neplánujte kvůli úklidu speciální kontrolní meeting. Počkejte na první běžnou situaci, ve které by se stín dřív objevil. Pokud šlo o starý export k revizi poptávek, ověřujte při další revizi poptávek. Pokud šlo o ústní obchvat v onboardingu, ověřujte při dalším průchodu člověka danou částí. Pokud šlo o pomocnou tabulku u marketingové kampaně, ověřujte při další práci s kampaní.
+
+Krátký záznam:
+
+```text
+Úklidový zásah:
+
+Původní stín:
+
+První běžný dotyk po úklidu:
+
+Člověk začal v:
+- kanonickém místě / staré stopě / nové pomocné stopě / dotazem na člověka
+
+Výsledek:
+- stín zmizel / stín se vrátil / vznikl nový stín / potřebujeme běžnou revizi
+
+Jedna věta rozhodnutí:
+```
+
+Tento záznam má být krátký. Pokud se při jeho psaní rozroste na analýzu procesu, pravděpodobně už neověřujete úklid, ale otevíráte nové téma.
+
+### Čtyři výsledné stavy
+
+Po prvním běžném dotyku vyberte jeden ze čtyř stavů:
+
+- Stín zmizel: kanonické místo funguje, pomocná stopa se nepoužila a není potřeba další dohled.
+- Stín se vrátil: lidé znovu sáhli po staré stopě nebo ji obnovili pod jiným názvem.
+- Vznikl nový stín: původní stopa zmizela, ale nahradila ji nová pomocná kontrola, chatová dohoda, kopie nebo export.
+- Téma je větší než úklid: jeden zásah nestačil, protože problém leží v širší pracovní trase.
+
+Každý stav má jinou odpověď. Když stín zmizel, nic dalšího nepřidávejte. Když se vrátil, vraťte se k důvodu: lidé nevědí, kde pravidlo je, nevěří mu, nebo je stará cesta pořád pohodlnější? Když vznikl nový stín, neopravujte jen jeho název. Hledejte, proč lidé znovu potřebovali pomocnou vrstvu. Když je téma větší, přesuňte ho do běžné revize a jasně napište, že úklidový režim končí.
+
+Rozhodovací mapa:
+
+```text
+Stín zmizel:
+Zavřít ověření a vrátit pravidlo do běžného rytmu.
+
+Stín se vrátil:
+Provést jeden opravný úklid ve stejném pracovním místě, pokud je důvod jasný.
+
+Vznikl nový stín:
+Zastavit další záplaty a pojmenovat, jakou potřebu nový stín nahrazuje.
+
+Téma je větší:
+Přesunout do běžné revize s vlastní otázkou, vlastníkem a rozsahem.
+```
+
+### Neprodlužujte zvláštní sledování
+
+Nejčastější chyba po úklidu stínu je věta: "Ještě to párkrát pohlídejme." Zní rozumně, ale často vytvoří přesně ten nový stín, kterého jste se chtěli zbavit. Pokud první běžný dotyk dopadl dobře, zavřete ověření. Další kontrola má proběhnout v běžném revizním rytmu nebo při konkrétním návratovém signálu.
+
+Dobrá uzavírací věta:
+
+```text
+Při prvním běžném použití tým pracoval z kanonického místa a nepoužil starý export ani novou pomocnou kontrolu. Úklidový zásah zavíráme, další kontrola patří do měsíční revize pravidla.
+```
+
+Slabá uzavírací věta:
+
+```text
+Vypadá to dobře, ale radši to budeme dál sledovat.
+```
+
+První věta vrací práci do normálu. Druhá jen zakládá nenápadný dozor.
+
+Codyho komentář: "radši to budeme dál sledovat" je provozní verze prachu pod kobercem. Vypadá to uklizeně, dokud někdo nezjistí, že koberec má vlastní backlog.
+
+### Privacy-first ověření po úklidu
+
+Úklid stínu má mít viditelný datový výsledek. Nestačí říct, že stará stopa už se nepoužívá. Ověřte, že skutečně nezůstala aktivní kopie, export, screenshot, osobní poznámka nebo chatový pin, který drží stejná data mimo kanonické místo.
+
+Zeptejte se:
+
+```text
+Byla stará datová stopa smazaná, zkrácená nebo archivovaná s účelem?
+
+Nevznikla nová kopie jen kvůli ověření úklidu?
+
+Kdo má po úklidu přístup k ponechaným podkladům?
+
+Je retence jasná i pro archiv, pokud existuje?
+
+Stačí pro další práci rozhodovací věta místo původních dat?
+```
+
+Privacy-first výsledek pište konkrétně:
+
+```text
+Po úklidu nezůstává žádný aktivní export. V kanonické kartě zůstává jen anonymizovaná rozhodovací věta a odkaz na běžný revizní rytmus.
+```
+
+Takový zápis je užitečnější než obecné "data jsou uklizená". Říká, co zůstalo, proč to zůstalo a co už systém nenese.
+
+### Karta ověření úklidu stínu
+
+```text
+Původní stín:
+
+Úklidový zásah:
+
+Kanonické místo po úklidu:
+
+První běžný dotyk:
+
+Co člověk použil:
+
+Vznikla nová pomocná stopa:
+- ne / ano, jaká:
+
+Stav:
+- stín zmizel / stín se vrátil / vznikl nový stín / téma je větší
+
+Rozhodnutí:
+
+Co dál nesledujeme:
+
+Co mažeme, zkracujeme nebo ponecháváme s retencí:
+
+Návrat do běžného rytmu:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kartu jednoho úklidového zásahu z Přílohy VS.
+2. Minuta 2: pojmenujte první běžný dotyk, ve kterém se úklid ověřuje.
+3. Minuta 3: ověřte, odkud člověk vzal aktuální postup.
+4. Minuta 4: určete jeden ze čtyř stavů.
+5. Minuta 5: zkontrolujte, jestli nezůstala nebo nevznikla zbytečná datová stopa.
+6. Minuta 6: napište uzavírací větu nebo přesuňte větší téma do běžné revize.
+
+Výstup workshopu:
+
+```text
+Úklidový zásah po nalezeném stínu je ověřený při běžném použití. Buď se zavírá bez dalšího sledování, nebo se větší problém přesouvá do normální revize mimo úklidový režim.
+```
+
+### Checklist ověření úklidu
+
+- Ověřovali jsme úklid při reálném použití, ne na umělé kontrole?
+- Víme, jestli člověk začal v kanonickém místě?
+- Nepoužil tým starou stopu, ústní instrukci ani nový obchvat?
+- Vybrali jsme jeden ze čtyř stavů?
+- Pokud stín zmizel, nezakládáme další zvláštní sledování?
+- Pokud se stín vrátil, víme proč a držíme opravu v jednom pracovním místě?
+- Pokud vznikl nový stín, pojmenovali jsme potřebu, kterou nahrazuje?
+- Pokud je téma větší, přesunuli jsme ho do běžné revize místo dalších záplat?
+- Je jasné, jaká data byla smazaná, zkrácená nebo ponechaná s retencí?
+- Vrací se pravidlo do běžného rytmu s konkrétním návratovým signálem?
+
+Ověření úklidového zásahu je poslední pojistka proti tomu, aby se z úklidu stala další práce. Dobrý výsledek často zní obyčejně: nic se nevrátilo, nic nového nevzniklo, pravidlo zase běží normálně. Přesně tak má stabilní provoz znít. Trochu nudně. Tím lépe.
+
 ## Pracovní log
 
+- 2026-06-01: Doplněna Příloha VT o ověření úklidového zásahu po nalezeném stínu: první běžný dotyk, čtyři výsledné stavy, ukončení zvláštního sledování, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VS o převodu nalezeného stínu do jednoho úklidového zásahu: pojmenování účelu stínu, výběr nejbližšího místa zásahu, uzavírací formulace, privacy-first mazání a checklist.
 - 2026-06-01: Doplněna Příloha VR o kontrole stínového procesu po uzavřené drobné úpravě: hledání stínu znalosti, kontroly a dat, nejmenší úklidový zásah, privacy-first mazání pomocných stop, karta a checklist.
 - 2026-06-01: Doplněna úvodní podkapitola o ověření úklidu po zavedení pracovního pravidla: test jedné pracovní cesty, čtyři výsledné stavy, privacy-first kontrola zbylé datové stopy, karta ověření a checklist.
