@@ -5133,6 +5133,157 @@ Kdo drží kontext:
 
 Uzavření do provozní paměti je poslední tečka za falešným poplachem. Neřeší další nápady, nevyrábí novou dokumentační vrstvu a nepřepisuje funkční pravidlo. Jen zanechá přesně tolik paměti, aby příště stejná stará stopa nepůsobila jako nový problém.
 
+## Kdy z opakovaných falešných poplachů udělat systémovou opravu
+
+Jeden falešný poplach většinou znamená úklid okolí. Dva podobné falešné poplachy už jsou varování. Tři podobné poplachy obvykle neříkají, že lidé špatně čtou. Říkají, že systém navigace, archivace nebo zdrojů pravdy je moc křehký a nutí tým znovu řešit věci, které měly být zavřené.
+
+Systémová oprava není větší kapitola z principu. Je to malé rozhodnutí, že opakovaný typ zmatku už nejde uklízet pokaždé ručně. Pokud tým třikrát narazí na starou šablonu, problém není v poslední šabloně. Problém je v pravidle, jak archivní materiály vypadají, kde žijí a jak odkazují na aktuální zdroj pravdy.
+
+Začněte otázkou:
+
+```text
+Opakuje se stejný typ falešného poplachu ve více pracovních místech, nebo jde pořád o jeden neuklizený okraj?
+```
+
+Pokud jde o jeden okraj, ukliďte ho a nechte trasu být. Pokud se stejný vzor vrací přes různé šablony, rozcestníky, backlogové karty nebo interní poznámky, potřebujete systémovou opravu. Ne proto, aby vznikl nový proces pro proces. Proto, aby další člověk nemusel hádat, co je archiv, co je kanonické a co už práci vést nemá.
+
+### Tři signály systémového problému
+
+Systémovou opravu otevřete až tehdy, když vidíte aspoň jeden z těchto signálů:
+
+- Stejný typ staré stopy se objevil na více místech.
+- Lidé se opakovaně vracejí ke stabilní trase, i když problém vzniká mimo ni.
+- Falešné poplachy začaly vytvářet nové úkoly, exporty, poznámky nebo kontroly.
+
+Příklad:
+
+```text
+První poplach:
+Starý odkaz v rozcestníku vedl na archivní review šablonu.
+
+Druhý poplach:
+Duplicitní karta v backlogu pořád naznačovala, že zavřený návrh je aktivní.
+
+Třetí poplach:
+Interní checklist použil starý retenční postup místo aktuálního pravidla.
+
+Vzor:
+Archivní a neplatné materiály nejsou viditelně označené a nevedou na zdroj pravdy.
+
+Systémová oprava:
+Zavést minimální pravidlo pro archivní pracovní materiály.
+```
+
+Všimněte si, že systémová oprava nemění původní stabilní trasu. Mění okolní systém, který ji opakovaně zpochybňuje. To je důležitý rozdíl. Když opravíte správnou věc, stabilní kapitola zůstane kratší a okolní práce začne být klidnější.
+
+### Nejmenší systémová oprava
+
+Systémová oprava má být co nejmenší. Většinou stačí jedno pravidlo a jedna šablona, ne reorganizace celé znalostní báze.
+
+Minimální pravidlo pro archivní materiály může znít:
+
+```text
+Každý archivní pracovní materiál musí mít:
+- viditelný stav "Archiv, nepoužívat pro novou práci";
+- odkaz na aktuální kanonické místo;
+- datum archivace;
+- důvod, proč už nevede práci;
+- privacy-first poznámku, co se stalo s dočasnými podklady.
+```
+
+Tohle pravidlo je krátké, ale řeší opakovaný vzor. Další člověk neotevře starou šablonu jako aktivní. Editor neupravuje stabilní trasu jen proto, že někde přežil starý odkaz. A tým nemusí znovu dokazovat, že pravidlo funguje, když problém leží v archivu.
+
+### Karta systémové opravy
+
+```text
+Opakovaný falešný poplach:
+
+Kde se objevil:
+
+Společný vzor:
+
+Stabilní trasy, které neměníme:
+
+Nejmenší systémová oprava:
+
+Které pracovní místo upravujeme:
+
+Co bude nově kanonické:
+
+Co archivujeme, přesměrováváme nebo mažeme:
+
+Privacy-first dopad:
+
+Jak ověříme, že oprava stačí:
+
+Co zůstává mimo rozsah:
+```
+
+Vyplněný příklad:
+
+```text
+Opakovaný falešný poplach:
+Tým se třikrát vrátil k pravidlu zavření slabého podnětu, protože našel staré pracovní materiály.
+
+Kde se objevil:
+Review šablona, backlogová karta a interní rozcestník.
+
+Společný vzor:
+Archivní materiály nebyly jasně odlišené od aktuálního zdroje pravdy.
+
+Stabilní trasy, které neměníme:
+Karta změny, zavření bez úkolu a návrat po klidovém období.
+
+Nejmenší systémová oprava:
+Přidat jednotný archivní štítek a povinný odkaz na kanonické místo.
+
+Které pracovní místo upravujeme:
+Rozcestník šablon a tři archivní materiály, které se už znovu objevily.
+
+Co bude nově kanonické:
+Aktuální šablona měsíčního review.
+
+Co archivujeme, přesměrováváme nebo mažeme:
+Starou review šablonu archivujeme, duplicitní backlogovou kartu zavíráme a pracovní kopii rozcestníku mažeme.
+
+Privacy-first dopad:
+Nepřidáváme nové sledování používání dokumentů. Po úklidu zůstává jen anonymizovaný závěr, pracovní screenshoty se mažou.
+
+Jak ověříme, že oprava stačí:
+Při dalším měsíčním review člověk začne v rozcestníku a má dojít na aktuální šablonu bez doptání.
+
+Co zůstává mimo rozsah:
+Nepředěláváme celou strukturu rukopisu ani nevyrábíme nový centrální registr všech archivů.
+```
+
+### Privacy-first brzda systémové opravy
+
+Opakované falešné poplachy svádějí k tomu, aby tým začal měřit všechno: kdo otevřel jaký dokument, kudy klikl, jak dlouho četl a kde se ztratil. To je často přestřelené. Pokud problém spočívá ve starých odkazech a neoznačených archivech, nepotřebujete sledovat lidi. Potřebujete opravit pracovní místa.
+
+Před systémovou opravou si napište:
+
+- Jaký zmatek umíme opravit strukturou, názvem, stavem nebo odkazem?
+- Které podklady můžeme smazat hned po anonymizovaném závěru?
+- Nepřidáváme novou evidenci jen proto, že se bojíme dalšího poplachu?
+- Stačí ověření jedním přirozeným průchodem?
+
+Codyho komentář: když se třikrát vrátí stejný falešný poplach, není hrdinství přidat další vysvětlení do správné kapitoly. Hrdinství je najít staré cedule, které lidi posílají špatně, a sundat je. Méně dramatické, výrazně účinnější.
+
+### Checklist systémové opravy
+
+- Opakuje se stejný typ falešného poplachu na více místech?
+- Víme, které stabilní trasy nebo pravidla zůstávají beze změny?
+- Je společný vzor konkrétnější než "lidé jsou zmatení"?
+- Stačí jedna minimální oprava pracovního místa, štítku, odkazu nebo archivního pravidla?
+- Nevyrábíme nový proces jen kvůli jednorázové staré stopě?
+- Je jasné, co se archivuje, přesměrovává, slučuje nebo maže?
+- Zůstává privacy-first záznam krátký, anonymizovaný a bez nového sledování?
+- Má oprava přirozené ověření při dalším použití?
+- Je zapsané, co zůstává mimo rozsah?
+- Zmenší oprava počet budoucích poplachů, místo aby přidala další vrstvu kontroly?
+
+Systémová oprava má být vzácnější než lokální úklid. Právě proto má váhu. Když už ji otevřete, nemá přidat další administrativu. Má odstranit opakovaný zdroj zmatku a nechat stabilní rukopis dál fungovat bez zbytečného obhajování.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -159086,6 +159237,7 @@ Uzavření drobné úpravy je poslední úklid po dobré práci. Není velkolep�
 
 ## Pracovní log
 
+- 2026-06-01: Doplněna úvodní podkapitola o tom, kdy z opakovaných falešných poplachů udělat systémovou opravu: signály opakovaného vzoru, nejmenší archivní/navigační pravidlo, karta systémové opravy, privacy-first brzda a checklist.
 - 2026-06-01: Doplněna Příloha VQ o uzavření ověřené drobné úpravy zpět do běžného rytmu: uzavírací věta, kanonické místo, úklid ověřovací stopy, návrat do normální revize, privacy-first výsledek, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VP o ověření drobné úpravy v rytmu při dalším běžném použití: první přirozené použití, tři signály, čtyři výsledné stavy, privacy-first ověření, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VO o převodu drobného nálezu z běžné revize do jedné úpravy v rytmu: potvrzení drobného nálezu, výběr jednoho typu zásahu, oprava nejbližšího pracovního místa, závěrečná revizní věta, privacy-first úklid, karta, mini workshop a checklist.
