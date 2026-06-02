@@ -161850,8 +161850,216 @@ Položka [název] přechází do nízké pozornosti. Zůstává v [kanonické m�
 
 Nízká pozornost je dobrý cíl pro stabilní části systému. Ne všechno musí být aktivní projekt, revize nebo hlídaná karta. Když položka funguje, má být dostupná, uklizená a připravená ozvat se jen při skutečném signálu. Zbytek času má tým raději stavět produkt, mluvit se zákazníky a dělat marketing, který nešpehuje lidi jen proto, že umí kliknout.
 
+## Příloha WD: První návrat k položce v nízké pozornosti
+
+Položka v nízké pozornosti není archiv. Je to normální součást systému, která nemá vlastní hlídací režim, ale pořád má své místo, vlastníka kontextu a návratový signál. První návrat k takové položce je proto citlivý okamžik. Buď potvrdí, že nízká pozornost funguje, nebo ukáže, že jste položku ztišili moc brzy.
+
+Největší chyba je otevřít starý příběh celý znovu. Když se položka po čase ozve, tým často začne vzpomínat na původní rozhodnutí, staré kontroly, tehdejší tabulky a všechny důvody, proč se kdysi věc řešila. To z ní během pěti minut udělá projekt. Správný návrat začíná aktuální pracovní situací, ne historií.
+
+Pracovní otázka:
+
+```text
+Vrací se položka z nízké pozornosti kvůli platnému návratovému signálu, nebo jen proto, že někdo znejistěl?
+```
+
+Tahle otázka je nečekaně užitečná. Oddělí reálné tření od mentálního zvyku všechno raději znovu kontrolovat. Nízká pozornost má smysl jen tehdy, když tým umí vydržet, že stabilní věc není pořád na očích.
+
+### Začněte signálem, ne vzpomínkou
+
+Při prvním návratu si nejdřív přečtěte návratový signál z kanonického místa. Neptejte se "proč jsme to tehdy udělali". Ptejte se "nastala podmínka, kterou jsme si napsali".
+
+Šablona:
+
+```text
+Položka:
+
+Kanonické místo:
+
+Napsaný návratový signál:
+
+Co se stalo teď:
+
+Je to stejný signál?
+- ano / ne / částečně
+```
+
+Příklad:
+
+```text
+Položka:
+Checklist pro poptávkový formulář.
+
+Napsaný návratový signál:
+K tématu se vrátíme, když u pěti relevantních poptávek po sobě chybí stejný údaj nutný pro první odpověď zákazníkovi.
+
+Co se stalo teď:
+U tří poptávek chyběla informace o rozhodovacím termínu, ale dvě z nich nebyly z cílového segmentu.
+
+Je to stejný signál?
+Částečně. Máme slabý signál, ne důvod měnit formulář.
+```
+
+Výsledek není "otevřít úpravu formuláře". Výsledek je "počkat na plný signál nebo ručně doplnit pozorování u dalších relevantních poptávek bez nového pole". Ano, je to méně dramatické. Přesně proto to funguje.
+
+### Čtyři výsledné stavy návratu
+
+Po prvním návratu vyberte jeden stav:
+
+- Planý návrat: návratový signál nenastal, položka se vrací do nízké pozornosti beze změny.
+- Slabý signál: něco se děje, ale důkaz zatím nestačí; doplní se jen nejbližší přirozené pozorování.
+- Platný signál: návratová podmínka nastala a otevírá se malá pracovní úprava.
+- Špatný signál: napsaná návratová podmínka nechrání správnou situaci a je potřeba ji přepsat.
+
+Planý návrat je běžný. Není to trapas, je to důkaz, že systém umí říct "teď ne". Slabý signál je dobré držet velmi krátce, jinak z něj vznikne tichý dohled. Platný signál má vést k jedné konkrétní úpravě, ne k návratu celé historie. Špatný signál je nejzajímavější: položka možná funguje, ale způsob, jakým se má ozvat, je napsaný špatně.
+
+Příklad stavů:
+
+```text
+Planý návrat:
+Někdo chtěl znovu řešit CTA, protože "už je tam dlouho". Žádný nesoulad mezi CTA a obchodními rozhovory se nepotvrdil.
+
+Slabý signál:
+Jeden zákazník nepochopil onboardingový e-mail, ale zatím nevíme, jestli jde o opakovaný vzor.
+
+Platný signál:
+Tři noví zákazníci po sobě odpověděli na stejný onboardingový e-mail dotazem, který měl být vyřešený přímo v textu.
+
+Špatný signál:
+Návrat byl navázaný na počet dotazů, ale skutečné tření se ukazuje v ručním přeposílání podkladů mezi obchodem a supportem.
+```
+
+### Otevřete jen nejbližší pracovní místo
+
+Když se potvrdí platný signál, neotevírejte celou položku. Otevřete nejbližší pracovní místo, kde se signál projevil.
+
+Typické převody:
+
+- chybějící údaj v poptávce: upravit jednu otázku nebo nápovědu ve formuláři;
+- opakovaný dotaz po onboardingu: upravit jeden e-mail nebo jednu obrazovku;
+- nesoulad v sales rozhovoru: upravit jednu větu nabídky nebo jeden interní kvalifikační bod;
+- zbytečný export: změnit jedno pravidlo předání podkladů;
+- návrat staré cesty: odstranit jeden starý odkaz nebo přesměrovat jedno pracovní místo.
+
+Špatný převod vypadá takto:
+
+```text
+Otevřeme celý onboarding, protože se vrátil dotaz k jednomu e-mailu.
+```
+
+Lepší převod:
+
+```text
+Upravíme jen druhý onboardingový e-mail: doplníme jednu větu o tom, kdo má pozvat účetní roli. Ověříme při dalších třech nových účtech, jestli stejný dotaz zmizel.
+```
+
+Tady je vidět podstata nízké pozornosti. Položka se umí ozvat, ale neukradne celý týden.
+
+### Nezavádějte zvláštní sledování návratu
+
+První návrat svádí k tomu založit nový malý dohled: seznam návratů, extra report, kontrolní sloupec, samostatnou připomínku. Nedělejte to automaticky. Pokud položka přešla do nízké pozornosti, má se ověřovat v běžné práci.
+
+Použijte existující rytmus:
+
+- příští měsíční web review;
+- nejbližší příprava kampaně;
+- další onboarding nového zákazníka;
+- další kontrola support dotazů;
+- další obchodní retro;
+- běžná revize datové mapy.
+
+Pokud žádný existující rytmus není, je to samostatný signál. Možná položka neměla přejít do nízké pozornosti, nebo v systému chybí běžný rytmus pro celou oblast. Ani v takovém případě nezačínejte reportem. Začněte jednou pracovní otázkou a jedním vlastníkem.
+
+Codyho komentář: nejrychlejší způsob, jak z nízké pozornosti udělat vysokou únavu, je založit tabulku "položky v nízké pozornosti". Tabulka se bude tvářit nevinně. Pak bude chtít statusy. Pak barvičky. Pak schůzku. A najednou jste zpátky u údržby údržby.
+
+### Privacy-first návrat
+
+Při návratu k tiché položce je snadné přidat data "jen pro jistotu". Jedno nové pole ve formuláři. Jeden export do tabulky. Jeden screenshot. Jeden ruční seznam zákazníků. Všechno malé, všechno zdánlivě rozumné, všechno dohromady drahé.
+
+Privacy-first návrat má tři pravidla:
+
+- nejdřív použijte signály, které už vznikají v běžné práci;
+- pokud potřebujete nový údaj, zapište účel a konec jeho používání;
+- po uzavření návratu smažte pomocné podklady, které už nechrání rozhodnutí.
+
+Příklad:
+
+```text
+Místo nového formulářového pole:
+Obchod u dalších pěti relevantních poptávek ručně označí, jestli chyběl stejný rozhodovací údaj.
+
+Konec používání:
+Po pěti poptávkách rozhodneme, jestli upravit nápovědu formuláře. Ruční poznámka se pak smaže nebo zkrátí do jedné rozhodovací věty.
+```
+
+Tohle je praktická privacy-first práce. Neznamená "nic neměřit". Znamená měřit jen tolik, kolik potřebujete pro rozhodnutí, a nenechat dočasné důkazy žít navždy.
+
+### Karta prvního návratu z nízké pozornosti
+
+```text
+Položka:
+
+Kanonické místo:
+
+Vlastník kontextu:
+
+Napsaný návratový signál:
+
+Co návrat spustilo:
+
+Stav:
+- planý návrat / slabý signál / platný signál / špatný signál
+
+Nejbližší pracovní místo:
+
+Rozhodnutí:
+
+Co neotevíráme z historie:
+
+Jaké nové údaje nesbíráme:
+
+Pokud dočasně sbíráme důkaz, kdy končí:
+
+Co mažeme nebo zkracujeme po uzavření:
+
+Datum příštího normálního výskytu:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: najděte kanonické místo položky a přečtěte návratový signál.
+2. Minuta 2: popište aktuální událost bez historického vyprávění.
+3. Minuta 3: vyberte jeden ze čtyř stavů návratu.
+4. Minuta 4: pokud je signál platný, určete nejbližší pracovní místo.
+5. Minuta 5: napište, co výslovně neotevíráte z historie.
+6. Minuta 6: potvrďte datové minimum a konec případného dočasného důkazu.
+7. Minuta 7: zapište rozhodnutí a příští normální výskyt.
+
+Výstup workshopu:
+
+```text
+Položka [název] se vrátila z nízké pozornosti kvůli [událost]. Stav návratu je [stav]. Otevíráme pouze [nejbližší pracovní místo] a neotevíráme [historie/oblast]. Nový důkaz [nesbíráme / sbíráme jen do ...] a návrat se uzavře v [běžný rytmus].
+```
+
+### Checklist prvního návratu z nízké pozornosti
+
+- Našli jsme původní návratový signál v kanonickém místě?
+- Popsali jsme aktuální událost bez starého příběhu?
+- Rozlišili jsme planý návrat, slabý signál, platný signál a špatný signál?
+- Pokud je návrat planý, vrací se položka zpět do nízké pozornosti beze změny?
+- Pokud je signál slabý, sledujeme jen nejbližší přirozený důkaz?
+- Pokud je signál platný, otevíráme jen nejbližší pracovní místo?
+- Pokud je signál špatný, upravujeme návratovou podmínku místo celé položky?
+- Je jasné, co neotevíráme z historie?
+- Nepřidali jsme nový report, tabulku, tracker ani formulářové pole bez jasného konce?
+- Má případný dočasný důkaz účel, vlastníka a datum ukončení?
+- Uklidíme pomocné podklady po uzavření návratu?
+- Ví tým, kdy se položka znovu potká v normálním rytmu?
+
+První návrat z nízké pozornosti je test zralosti systému. Když tým dokáže říct "signál nenastal", "signál je slabý" nebo "otevíráme jen toto malé místo", nízká pozornost funguje. Když se při prvním zachvění otevře celý starý projekt, položka nebyla ztišená. Jen čekala v záloze, až zase dostane mikrofon.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WD o prvním návratu k položce v nízké pozornosti: ověření návratového signálu, čtyři výsledné stavy, otevření nejbližšího pracovního místa, zákaz zvláštního dohledu, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WC o převodu stabilní položky z dlouhodobé údržby do nízké pozornosti: podmínky převodu po dvou klidných kontrolách, stavová věta, snížení viditelnosti bez ztráty odpovědnosti, úklid zbytků údržby, privacy-first mazání podkladů, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WB o uzavření druhé běžné kontroly položky v dlouhodobé údržbě: uzavírací věta, správné kanonické místo, čtyři typy uzavření, úklid pomocné stopy, návratový signál bez nového dohledu, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WA o druhé běžné kontrole položky v dlouhodobé údržbě: kontrola bez historického vyprávění, stejné otázky jako u ostatních položek, čtyři výsledné stavy, skrytá cena údržby, privacy-first úklid, karta, mini workshop a checklist.
