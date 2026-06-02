@@ -6146,6 +6146,193 @@ Návratový signál:
 
 Druhé běžné použití je dobré zavřít nudně. "Pravidlo drží, nic dalšího neděláme" je často nejlepší možný výsledek. V provozu je nuda podceňovaná metrika. Když se práce dokončí bez příběhu, bez ruční hlídky a bez nového sběru dat, systém je zdravější než v okamžiku, kdy se všichni cítí produktivně nad další kontrolní tabulkou.
 
+## Uzavření druhého běžného použití do běžného rytmu
+
+Po druhém běžném použití pravidla už má tým dost signálů na jedno důležité rozhodnutí: jestli pravidlo patří do normální práce, nebo jestli se pořád tváří jako nedávná oprava, která potřebuje doprovod. Tohle rozhodnutí nemá být velké. Má být krátké, zapsané na správném místě a hlavně má ukončit zvláštní pozornost.
+
+Uzavření druhého použití má odpovědět na otázku:
+
+```text
+Co po druhém běžném použití zůstává jako normální pravidlo, co mažeme jako dočasnou stopu a kdy se k pravidlu znovu vrátíme?
+```
+
+Pokud pravidlo drží, cílem není napsat další důkaz, že drží. Cílem je vrátit ho do rytmu, ve kterém se udržují podobné věci. Pokud pravidlo drží jen částečně, cílem je jedna lokální úprava a uzavření ověřovacího režimu. Pokud pravidlo nedrží, cílem je otevřít novou pracovní otázku bez toho, aby se k ní přilepily všechny poznámky z původní opravy.
+
+### Začněte stavovou větou
+
+Stavová věta má být tak krátká, aby ji šlo vložit do rozhodovacího logu, rozcestníku nebo agendy běžné údržby:
+
+```text
+Po druhém běžném použití pravidlo [název] [stav]. Zůstává v [běžný rytmus] a znovu se otevírá pouze při [návratový signál].
+```
+
+Příklad:
+
+```text
+Po druhém běžném použití pravidlo archivních šablon drží bez zvláštní pozornosti. Zůstává v měsíční údržbě znalostní báze a znovu se otevírá pouze tehdy, když reálná práce skončí v neaktivní šabloně.
+```
+
+Takový zápis neoslavuje opravu. Jen říká, co platí dál. To je přesně pointa: po druhém běžném použití má pravidlo přestat být tématem a stát se součástí prostředí.
+
+Pokud se objevilo drobné tření, stavová věta může vypadat takhle:
+
+```text
+Po druhém běžném použití pravidlo drží, ale rozcestník má slabý název odkazu. Přejmenujeme jeden odkaz, mažeme ověřovací poznámky a pravidlo dál patří do běžné měsíční údržby.
+```
+
+Všimněte si hranice: jedna úprava, jedno místo, žádný návrat k celé historii. Když věta začne růst do odstavce, pravděpodobně už neuzavíráte druhé použití. Otevíráte nové téma.
+
+### Čtyři způsoby uzavření
+
+Po druhém běžném použití vyberte jeden stav:
+
+- Běžný rytmus: pravidlo drží bez zvláštní pozornosti.
+- Lokální doladění: pravidlo drží, ale jedno pracovní místo potřebuje malou úpravu.
+- Nová pracovní otázka: pravidlo nedrží a problém není jen v jedné formulaci nebo odkazu.
+- Ukončení pravidla: pravidlo už nepomáhá, protože původní situace zmizela nebo se přesunula jinam.
+
+`Běžný rytmus` je nejčistší výsledek. Pravidlo se nehlídá zvlášť, jen se kontroluje se stejnými otázkami jako podobné věci.
+
+`Lokální doladění` je vhodné, když je problém viditelný a malý: špatný název, slabý odkaz, chybějící jedna věta, zbytečný starý příklad. Doladění má mít vlastní krátký zápis a po něm se pravidlo vrací do běžného rytmu.
+
+`Nová pracovní otázka` znamená, že druhé použití ukázalo něco širšího. Třeba že rozcestník není jen špatně pojmenovaný, ale tým nemá jasný zdroj pravdy pro daný typ práce. V takovém případě nezachraňujte původní opravu další vrstvou poznámek. Otevřete novou otázku a starou ověřovací stopu uzavřete.
+
+`Ukončení pravidla` je méně časté, ale důležité. Někdy pravidlo vzniklo kvůli přechodové situaci: staré šablony, dočasný proces, migrační období, ruční workaround. Jakmile situace zmizí, pravidlo může být už jen historická brzda. Dobré uzavření umí říct i: tohle už nepotřebujeme.
+
+### Přesuňte výsledek do správného místa
+
+Druhé použití často svádí k tomu nechat zápis tam, kde vznikl: v poznámkách z ověření, v chatu, v dočasné kartě nebo ve sdíleném dokumentu s názvem "kontrola opravy". To je špatné místo. Výsledek patří tam, kde ho člověk potká při normální práci.
+
+Typická správná místa:
+
+- rozcestník, pokud pravidlo pomáhá najít aktuální zdroj pravdy;
+- šablona, pokud pravidlo mění vyplnění konkrétního výstupu;
+- provozní agenda, pokud pravidlo patří do pravidelné údržby;
+- rozhodovací log, pokud pravidlo vysvětluje, proč se tým rozhodl něco dál nedělat;
+- archivní poznámka, pokud pravidlo končí a zůstává jen historický kontext.
+
+Špatná místa:
+
+- osobní připomínka vlastníka;
+- chatové vlákno;
+- screenshotová složka;
+- dočasná ověřovací tabulka;
+- nový dokument jen pro jednu uzavřenou opravu.
+
+Cílem je, aby nový člověk nemusel znát příběh. Má najít současné pravidlo tam, kde začíná práce.
+
+### Zavřete ověřovací stopu
+
+Po druhém použití už ověřovací stopa obvykle splnila účel. Nechte jen minimum, které pomůže dalšímu rozhodnutí. Všechno ostatní smažte, anonymizujte nebo převeďte do krátké poznámky.
+
+Zůstává:
+
+```text
+Stav pravidla:
+Běžný rytmus:
+Návratový signál:
+Případná lokální úprava:
+Datum uzavření:
+```
+
+Mizí:
+
+- dočasné seznamy použití;
+- osobní poznámky, kdo co našel;
+- screenshoty staré cesty;
+- kopie archivních šablon;
+- chatové dohady o původní chybě;
+- pomocné exporty a ruční kontrolní tabulky.
+
+Privacy-first pravidlo je jednoduché: pokud údaj nepomůže dalšímu rozhodnutí, nemá v systému zůstávat jen proto, že už tam je. Staré ověřovací stopy jsou jako drobky po pracovním obědě. Když je necháte všude, nikdo neumře, ale prostředí začne působit podezřele.
+
+### Karta uzavření druhého použití
+
+```text
+Pravidlo:
+
+Druhé běžné použití:
+
+Stav po druhém použití:
+- běžný rytmus / lokální doladění / nová pracovní otázka / ukončení pravidla
+
+Stavová věta:
+
+Kanonické místo výsledku:
+
+Běžný rytmus:
+
+Návratový signál:
+
+Pokud lokální doladění, jedna úprava:
+
+Pokud nová pracovní otázka, jak zní:
+
+Pokud ukončení pravidla, proč už neplatí:
+
+Co mažeme nebo anonymizujeme:
+
+Co výslovně dál nesledujeme:
+
+Vlastník:
+
+Datum další běžné revize:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Archivní šablony nevedou novou práci a ukazují na aktuální zdroj pravdy.
+
+Druhé běžné použití:
+Nový editor připravil měsíční review bez znalosti historie opravy.
+
+Stav po druhém použití:
+Běžný rytmus.
+
+Stavová věta:
+Pravidlo drží bez zvláštní pozornosti a zůstává v měsíční údržbě znalostní báze.
+
+Kanonické místo výsledku:
+Rozcestník review šablon.
+
+Běžný rytmus:
+Měsíční kontrola platnosti rozcestníků.
+
+Návratový signál:
+Reálná práce znovu skončí v neaktivní šabloně.
+
+Co mažeme nebo anonymizujeme:
+Dočasnou poznámku z ověření a osobní trasu prvního použití.
+
+Co výslovně dál nesledujeme:
+Kdo si starou šablonu pamatuje a kdo už nové pravidlo použil.
+
+Vlastník:
+Editor znalostní báze.
+
+Datum další běžné revize:
+Příští měsíční údržba.
+```
+
+### Checklist uzavření druhého použití
+
+- Má druhé běžné použití jasný stav?
+- Je stav zapsaný jednou krátkou větou?
+- Přesunuli jsme výsledek do místa, kde začíná normální práce?
+- Nezůstává zápis jen v chatu, dočasné tabulce nebo osobní poznámce?
+- Pokud pravidlo drží, patří do existujícího rytmu místo nového dohledu?
+- Pokud je potřeba doladění, jde o jednu úpravu v jednom pracovním místě?
+- Pokud pravidlo nedrží, otevřeli jsme novou otázku bez přilepení staré historie?
+- Pokud pravidlo už není potřeba, umíme ho ukončit bez nostalgie?
+- Smazali jsme nebo anonymizovali ověřovací stopu?
+- Nezůstává seznam lidí, klikání, screenshotů nebo pomocných exportů?
+- Je jasný návratový signál a datum další běžné revize?
+- Umí nový člověk pravidlo použít bez příběhu původní opravy?
+
+Uzavření druhého běžného použití má jednu nenápadnou ambici: aby se dobrá oprava přestala tvářit jako projekt. Když pravidlo funguje, vraťte ho do normálního rytmu. Když nefunguje, otevřete přesnou otázku. A když už není potřeba, zrušte ho. Všechny tři možnosti jsou lepší než čtvrtá: držet při životě zvláštní pozornost, protože kdysi dávala smysl.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -164296,6 +164483,7 @@ Převod do dlouhodobého rytmu je povedený tehdy, když položka přestane vypr
 
 ## Pracovní log
 
+- 2026-06-02: Doplněna úvodní podkapitola o uzavření druhého běžného použití pravidla do běžného rytmu: stavová věta, čtyři způsoby uzavření, správné kanonické místo, privacy-first úklid ověřovací stopy, karta a checklist.
 - 2026-06-02: Doplněna Příloha WL o převodu po první běžné údržbě do dlouhodobého rytmu: jeden domov rytmu, běžný a návratový signál, přepis jazyka z opravy na údržbu, levná údržba, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WK o uzavření první běžné údržby po malé opravě: stavová věta, kanonické místo, čtyři typy uzavření, úklid dočasné stopy, zákaz druhé kontroly jen pro jistotu, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WJ o první běžné údržbě po uzavřené malé opravě: kontrola současného průchodu, běžné otázky, čtyři výsledné stavy, zavřená historie opravy, privacy-first kontrola, karta, mini workshop a checklist.
