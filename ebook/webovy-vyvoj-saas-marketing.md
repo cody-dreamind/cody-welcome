@@ -5937,6 +5937,215 @@ Návratový signál:
 
 První běžné použití má chránit stabilitu před dvěma extrémy: před naivním "hotovo navždy" i před nervózním "budeme to teď hlídat pokaždé". Dobré pravidlo má po prvním normálním použití buď klidně pracovat dál, nebo ukázat jedno přesné místo k opravě. Všechno navíc je podezřelé.
 
+## Druhé běžné použití pravidla bez zvláštní pozornosti
+
+První běžné použití ukazuje, jestli pravidlo dokáže přežít návrat do reality. Druhé běžné použití ukazuje něco trochu jiného: jestli tým dokáže nechat pravidlo pracovat bez toho, aby kolem něj pořád nosil příběh opravy, varování, ruční dohled a dobrý úmysl v podobě další tabulky.
+
+Druhé použití má odpovědět na otázku:
+
+```text
+Používá se pravidlo jako normální součást práce, nebo se kolem něj pořád drží zvláštní pozornost?
+```
+
+Zvláštní pozornost nemusí být špatně. Krátce po opravě může pomoct zachytit zbytkové tření. Ale po prvním ověřeném použití už by měla ubývat. Pokud druhé použití pořád potřebuje vysvětlení "proč jsme to takhle zavedli", ruční kontrolu starých podkladů nebo připomínku konkrétního člověka, pravidlo ještě není úplně běžné.
+
+### Sledujte normálnost, ne jen správnost
+
+Správnost říká, že člověk použil aktuální pravidlo a dokončil práci. Normálnost říká, že to udělal bez zvláštní péče. Obě věci jsou důležité, ale po uzavřené systémové opravě bývá normálnost cennější signál.
+
+Příklad:
+
+```text
+Správné, ale ne normální:
+Editor použil aktuální šablonu, protože mu vlastník připomněl, že staré šablony jsou archivované.
+
+Správné a normální:
+Editor začal v rozcestníku, došel na aktuální šablonu a starou historii vůbec nepotřeboval znát.
+```
+
+Druhé použití proto nehodnoťte jen podle výsledku. Krátce se podívejte i na cestu:
+
+- začal člověk v běžném vstupním místě;
+- nemusel se ptát na historii opravy;
+- nevytvořil pomocný seznam, poznámku nebo kontrolu;
+- nepoužil starou šablonu jako srovnávací materiál;
+- výstup šel zavřít stejným způsobem jako ostatní běžná práce.
+
+Pokud pravidlo vyžaduje malou nápovědu, zapište ji jako tření místa, ne jako slabinu člověka. Věta "člověk si nevzpomněl" je skoro vždycky špatný zápis. Věta "rozcestník neukázal aktuální šablonu dost blízko pracovnímu úkolu" už se dá opravit.
+
+### Tři věci, které se nesmí vrátit
+
+Druhé použití je vhodná chvíle zkontrolovat, že se nevrací tři staré věci:
+
+- starý problém, kvůli kterému pravidlo vzniklo;
+- dočasná péče, která pomáhala při ověřování;
+- historický jazyk, který nutí lidi znát příběh opravy.
+
+Krátký zápis:
+
+```text
+Druhé běžné použití:
+
+Starý problém se vrátil:
+- ano / ne
+
+Dočasná péče se vrátila:
+- ano / ne
+
+Historický jazyk se vrátil:
+- ano / ne
+
+Co zůstává jako běžná práce:
+
+Co zavíráme:
+```
+
+Příklad:
+
+```text
+Druhé běžné použití:
+Nový člověk připravuje měsíční review a hledá šablonu pro uzavření slabého podnětu.
+
+Starý problém se vrátil:
+Ne. Nepoužil archivní šablonu.
+
+Dočasná péče se vrátila:
+Ano. Vlastník mu poslal odkaz "pro jistotu", i když rozcestník měl stačit.
+
+Historický jazyk se vrátil:
+Ne.
+
+Co zůstává jako běžná práce:
+Rozcestník a aktuální šablona.
+
+Co zavíráme:
+Ruční posílání odkazu před každým review. Místo toho upravíme pořadí odkazu v rozcestníku.
+```
+
+Tady není potřeba další školení. Stačí přesunout aktuální odkaz blíž ke spouštěči práce a zavřít ruční připomínku. Malá úprava místa, žádná slavnostní reforma dokumentace.
+
+### Kdy už pravidlo nechat být
+
+Po druhém použití je obvykle čas přestat pravidlo komentovat. Pokud fungovalo bez návratu starého problému a bez nové péče, nechte ho spadnout do běžného rytmu: měsíční review, kvartální kontrola, běžná údržba odkazů nebo jiný existující cyklus.
+
+Do logu stačí:
+
+```text
+Pravidlo po druhém běžném použití drží bez zvláštní pozornosti. Zůstává v běžném provozním rytmu. Další návrat nastane jen při návratovém signálu.
+```
+
+Nepřidávejte:
+
+- nový stav "ověřeno podruhé, sledovat potřetí";
+- další kontrolní kartu bez jasného rizika;
+- nový report o používání pravidla;
+- připomínky v kalendáři jen proto, že oprava byla nedávno;
+- školení pro celý tým kvůli jednomu klidnému použití.
+
+Když pravidlo po druhém použití funguje, největší hodnota je právě v tom, že ho necháte být. Pravidla nemají sbírat pozornost za zásluhy. Mají tiše snižovat počet zbytečných rozhodnutí.
+
+### Kdy druhé použití otevře malou úpravu
+
+Druhé použití může ukázat drobný problém, který první průchod neodhalil. Pak je v pořádku udělat jednu malou úpravu, ale držte ji blízko k místu tření.
+
+Vhodné malé úpravy:
+
+- přejmenovat odkaz v rozcestníku;
+- doplnit jednu větu k archivnímu štítku;
+- odstranit starý příklad, který pořád mate;
+- zkrátit historickou poznámku v hlavním návodu;
+- přesunout pravidlo do místa, kde člověk reálně začíná.
+
+Nevhodné reakce:
+
+- přidat další checklist jen pro jistotu;
+- měnit celé pravidlo kvůli jednomu slabému místu;
+- obnovit dočasné sledování průchodů;
+- otevřít starou debatu, proč oprava vznikla;
+- přidat nové datové pole kvůli pohodlnějšímu vyhodnocení.
+
+Rozhodovací věta pro malou úpravu:
+
+```text
+Pravidlo drží, ale druhé použití ukázalo tření v [místo]. Upravíme jen [jedna změna] a neotevíráme [uzavřený rozsah].
+```
+
+Pokud takovou větu nedokážete napsat, nejspíš nejde o malou úpravu. Buď pravidlo nedrží, nebo se objevilo nové téma. Obojí si zaslouží vlastní kartu, ne nenápadné přilepení k uzavřené opravě.
+
+### Privacy-first klid po druhém použití
+
+Druhé použití pravidla je dobrý okamžik smazat poslední zbytky ověřovací stopy. Pokud pravidlo drží, nepotřebujete uchovávat pracovní poznámky z obou použití, screenshoty starých cest, osobní komentáře ani dočasný seznam "kdo už použil nové pravidlo".
+
+Privacy-first minimum:
+
+```text
+Zůstává:
+Anonymizovaný stav pravidla a případná jedna malá úprava pracovního místa.
+
+Maže se:
+Dočasné poznámky z ověření, osobní trasy, screenshoty, pomocné seznamy a kopie starých podkladů.
+
+Nesbírá se:
+Další průchody lidí, klikání v dokumentaci, osobní skóre dodržování ani nový report používání pravidla.
+```
+
+Pokud pravidlo nedrží, stále neznamená, že máte začít sledovat lidi. Potřebujete pochopit pracovní místo. Kde člověk začal? Co mu chybělo? Jaký výstup měl dokončit? To stačí. Jméno, čas čtení a kompletní cesta klikání jsou většinou jen dražší způsob, jak se vyhnout úpravě rozcestníku.
+
+Codyho komentář: druhé použití je test dospělosti pravidla. Když po něm pořád potřebuje doprovod, možná není špatné, jen ještě neumí chodit samo. Ale jestli už chodí, nenoste ho dál v náručí. Vypadá to starostlivě, ale všem to překáží.
+
+### Karta druhého běžného použití
+
+```text
+Uzavřená systémová oprava:
+
+Běžné pravidlo:
+
+Druhá běžná situace:
+
+Kde člověk začal:
+
+Pracovní výstup:
+
+Použil pravidlo bez znalosti historie?
+- ano / ne
+
+Vrátil se starý problém?
+- ano / ne
+
+Vrátila se dočasná péče?
+- ano / ne
+
+Vznikl nový stínový proces?
+- ano / ne
+
+Výsledek:
+- nechat v běžném rytmu / jedna malá úprava místa / pravidlo nedrží / nové téma
+
+Pokud jedna malá úprava, jaká:
+
+Co dál výslovně nehlídáme:
+
+Co mažeme z ověřovací stopy:
+
+Návratový signál:
+```
+
+### Checklist druhého běžného použití
+
+- Proběhlo druhé použití v normální pracovní situaci?
+- Použil člověk pravidlo bez vysvětlování historie opravy?
+- Nevrátil se původní problém?
+- Nevrátila se dočasná péče z ověřovacího režimu?
+- Nevznikl nový stínový proces?
+- Pokud se objevilo tření, je oprava omezená na jedno pracovní místo?
+- Neotevíráme kvůli druhému použití celou historii původní změny?
+- Nepřidáváme nový dohled, report nebo měření používání dokumentace?
+- Smazali jsme dočasné poznámky, screenshoty, osobní trasy a pomocné seznamy?
+- Má pravidlo po druhém použití jasný stav a návratový signál?
+- Umíme ho nechat v běžném rytmu bez zvláštní pozornosti?
+
+Druhé běžné použití je dobré zavřít nudně. "Pravidlo drží, nic dalšího neděláme" je často nejlepší možný výsledek. V provozu je nuda podceňovaná metrika. Když se práce dokončí bez příběhu, bez ruční hlídky a bez nového sběru dat, systém je zdravější než v okamžiku, kdy se všichni cítí produktivně nad další kontrolní tabulkou.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -162874,6 +163083,7 @@ Malá oprava po opakovaném návratu je dobrá, když se po ní věc vrátí do 
 
 ## Pracovní log
 
+- 2026-06-02: Doplněna úvodní podkapitola o druhém běžném použití pravidla po uzavřené systémové opravě: sledování normálnosti místo samotné správnosti, návrat starého problému, dočasné péče a historického jazyka, malé úpravy místa, privacy-first úklid ověřovací stopy, karta a checklist.
 - 2026-06-02: Doplněna Příloha WG o převodu platného vzoru z opakovaného návratu do jedné malé opravy: oddělení vzoru od nápadů, výběr nejbližšího pracovního místa, jeden typ změny, ochrana před otevřením historie, privacy-first hranice, ověření při dalším běžném použití, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WF o opakovaném návratu k položce v nízké pozornosti: porovnání návratů podle důvodu, čtyři stavy opakovaného návratu, zpřesnění návratového signálu, privacy-first kontrola důkazů, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WE o uzavření prvního návratu k položce v nízké pozornosti: stavová věta, čtyři způsoby uzavření, uložení výsledku do kanonického místa, privacy-first uzavření dočasného důkazu, karta, mini workshop a checklist.
