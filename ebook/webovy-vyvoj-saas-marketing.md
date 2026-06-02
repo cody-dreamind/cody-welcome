@@ -5398,6 +5398,194 @@ Codyho komentář: když se třikrát vrátí stejný falešný poplach, není h
 
 Systémová oprava má být vzácnější než lokální úklid. Právě proto má váhu. Když už ji otevřete, nemá přidat další administrativu. Má odstranit opakovaný zdroj zmatku a nechat stabilní rukopis dál fungovat bez zbytečného obhajování.
 
+## Ověření systémové opravy po opakovaných falešných poplaších
+
+Systémová oprava má hodnotu až ve chvíli, kdy přestane vyrábět stejný typ falešného poplachu. Nestačí zavést archivní štítek, opravit rozcestník nebo přidat pravidlo pro neplatné šablony. Potřebujete při nejbližším přirozeném použití ověřit, že člověk opravdu dojde na aktuální zdroj pravdy a že stabilní trasy už nemusí obhajovat svoji existenci.
+
+Ověření systémové opravy není další audit celého rukopisu. Má odpovědět na jednu otázku:
+
+```text
+Přestal se opakovaný falešný poplach vracet stejnou cestou?
+```
+
+Pokud ano, systémová oprava drží a nemá se dál rozšiřovat. Pokud ne, nejdřív zjistěte, jestli selhalo nové pravidlo, nebo jestli zůstalo jedno konkrétní pracovní místo mimo úklid. I po systémové opravě platí stejná disciplína: opravujte nejmenší místo, které stále vede člověka špatně.
+
+### Vyberte nejbližší přirozený průchod
+
+Neověřujte systémovou opravu umělým testem, kde člověku předem řeknete, co má hledat. Vyberte běžnou situaci, ve které se falešné poplachy dřív objevovaly:
+
+- měsíční review používá rozcestník šablon;
+- editor sahá po archivní části rukopisu;
+- marketing owner převádí podnět do karty změny;
+- delivery tým hledá aktuální checklist pro zákaznický výstup;
+- někdo zakládá novou landing page podle starší pracovní šablony.
+
+Scénář má být krátký:
+
+```text
+Pracovní situace:
+Kde člověk přirozeně začíná:
+Kam ho má systém dovést:
+Jaký starý poplach se nemá zopakovat:
+Jaký výstup má vzniknout:
+Co kvůli ověření nesbíráme:
+```
+
+Příklad:
+
+```text
+Pracovní situace:
+Měsíční review slabých podnětů z webu.
+
+Kde člověk přirozeně začíná:
+V rozcestníku review šablon.
+
+Kam ho má systém dovést:
+Na aktuální šablonu, která umí slabý podnět zavřít bez úkolu.
+
+Jaký starý poplach se nemá zopakovat:
+Použití archivní šablony, která ze slabého podnětu automaticky vyráběla úkol.
+
+Jaký výstup má vzniknout:
+Jedno rozhodnutí: zavřít, odložit, nebo otevřít kartu změny.
+
+Co kvůli ověření nesbíráme:
+Nesledujeme klikání v dokumentaci a neukládáme osobní trasu člověka.
+```
+
+Takový průchod ukáže, jestli systémová oprava zasáhla správné místo. Když člověk začne přirozeně, najde aktuální šablonu a dokončí práci bez návratu ke staré cestě, oprava funguje. Když znovu skončí v archivu, problém je pořád v navigaci nebo označení materiálů, ne nutně ve stabilní trase.
+
+### Sledujte výsledek, ne poslušnost
+
+Při ověření nehodnoťte, jestli člověk postupoval "správně" podle očekávání editora. Sledujte, jestli systém vedl k dobrému pracovnímu výstupu:
+
+- člověk našel aktuální zdroj pravdy bez znalosti historie;
+- archivní nebo neplatné místo ho nezmátlo;
+- nevznikla duplicitní šablona, karta ani poznámka;
+- stabilní trasa se nemusela znovu otevřít;
+- datová stopa zůstala stejná nebo menší.
+
+Krátký záznam:
+
+```text
+Systémová oprava:
+Testovaný průchod:
+Kde člověk začal:
+Kam došel:
+Výstup práce:
+Zopakoval se starý poplach:
+Co ještě zůstalo nejasné:
+Stav opravy:
+```
+
+Příklad:
+
+```text
+Systémová oprava:
+Archivní materiály mají viditelný stav, datum archivace a odkaz na aktuální zdroj pravdy.
+
+Testovaný průchod:
+Marketing owner připravuje měsíční review podnětů.
+
+Kde člověk začal:
+V rozcestníku šablon.
+
+Kam došel:
+Na aktuální šablonu review. Archivní šablona byla viditelně označená jako neplatná.
+
+Výstup práce:
+Dva slabé podněty byly zavřené bez úkolu, jeden dostal návratový signál.
+
+Zopakoval se starý poplach:
+Ne.
+
+Co ještě zůstalo nejasné:
+Jedna starší backlogová karta pořád odkazovala na archivní šablonu, ale nebyla použita.
+
+Stav opravy:
+Drží s jedním doplňkovým úklidem.
+```
+
+Tento typ výsledku je dobrý. Neříká "přepište systémovou opravu". Říká "oprava drží, ale ukliďte jeden zbývající odkaz". To je přesně rozdíl mezi udržováním systému a nekonečným rozšiřováním systému.
+
+### Čtyři stavy po ověření
+
+Po prvním průchodu dejte systémové opravě jeden stav:
+
+- Drží: starý poplach se nevrátil a člověk našel aktuální pracovní místo.
+- Doplnit lokální úklid: hlavní oprava funguje, ale zůstalo jedno konkrétní staré místo.
+- Zpřesnit systémové pravidlo: opakovaný problém pokračuje, protože nové pravidlo je moc slabé nebo neviditelné.
+- Otevřít novou navigační kartu: problém je širší než původní falešné poplachy a týká se struktury zdrojů pravdy.
+
+Stav `zpřesnit systémové pravidlo` používejte jen tehdy, když se chyba opakuje přes stejné pravidlo. Pokud jde o jeden zapomenutý odkaz, je to lokální úklid. Pokud tři různé archivní materiály pořád vypadají jako aktivní, pravidlo je slabé. Rozdíl rozhoduje o rozsahu práce.
+
+Stav `otevřít novou navigační kartu` je největší zásah. Patří sem až situace, kdy se ukáže, že tým nemá jasný zdroj pravdy obecně: rozcestník, backlog, šablony a rukopis ukazují na různé verze. To už není ověření jedné systémové opravy. To je samostatný problém informační architektury.
+
+### Privacy-first ověření systémové opravy
+
+Systémové opravy svádějí k systémovému měření. Tady pozor. Pokud opravujete archivní štítky, odkazy a zdroje pravdy, většinou nepotřebujete sledovat chování lidí v dokumentaci. Potřebujete ověřit pracovní výstup a uklidit staré stopy.
+
+Privacy-first minimum:
+
+```text
+Zůstává:
+Anonymizovaný závěr, jestli oprava drží.
+
+Maže se:
+Pracovní screenshoty, kopie starých šablon a dočasné poznámky po zapracování závěru.
+
+Nesbírá se:
+Osobní trasa čtenáře, detailní klikání v dokumentaci ani nová analytika používání šablon.
+```
+
+Pokud při ověření narazíte na zákaznický nebo interní příklad, přepište ho do typu problému. V logu stačí "starý odkaz vedl na neplatnou šablonu". Není potřeba ukládat jméno člověka, obsah konkrétní poptávky ani celé vlákno komentářů.
+
+Codyho komentář: systémová oprava bez privacy-first brzdy se snadno změní v malý dohledový systém nad tím, jak lidé čtou dokumentaci. To je trochu jako hasit svíčku sprinklerem. Technicky účinné, provozně mokré.
+
+### Karta ověření systémové opravy
+
+```text
+Systémová oprava:
+
+Původní opakovaný falešný poplach:
+
+Testovaná pracovní situace:
+
+Kde člověk začal:
+
+Kanonické místo, kam měl dojít:
+
+Výstup práce:
+
+Výsledek:
+- drží / doplnit lokální úklid / zpřesnit systémové pravidlo / otevřít novou navigační kartu
+
+Pokud doplnit úklid, jaké jedno místo opravujeme:
+
+Pokud zpřesnit pravidlo, co bylo moc slabé:
+
+Co výslovně neměníme:
+
+Privacy-first úklid podkladů:
+
+Návratový signál:
+```
+
+### Checklist ověření systémové opravy
+
+- Ověřujeme přirozený pracovní průchod, ne umělý test poslušnosti?
+- Je jasné, jaký opakovaný falešný poplach se už nemá vracet?
+- Začal člověk tam, kde by začal i bez instrukce?
+- Dovedlo ho okolí na aktuální kanonické místo?
+- Nevznikla nová duplicitní šablona, karta, poznámka nebo úkol?
+- Rozlišili jsme lokální zbytek od slabého systémového pravidla?
+- Neměníme stabilní trasy, které při ověření obstály?
+- Nezavedli jsme kvůli ověření sledování čtenářů, klikání ani detailní osobní evidenci?
+- Jsou pracovní screenshoty, kopie a poznámky po závěru smazané nebo anonymizované?
+- Má oprava jasný stav a konkrétní návratový signál?
+
+Ověření systémové opravy má vrátit klid. Pokud oprava drží, přestaňte ji rozšiřovat a nechte ji pracovat. Pokud drží jen částečně, ukliďte nejbližší zbytek. A pokud nedrží vůbec, nepřepisujte stabilní kapitoly naslepo; vraťte se k tomu, jak tým poznává aktuální zdroj pravdy.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -161812,3 +162000,4 @@ Druhá běžná kontrola je dobrý test dospělosti systému. Když položka pro
 - 2026-05-31: Doplněna úvodní podkapitola o předání uzavřeného návratu týmu: jednovětý závěr, tři místa předání, úklid pracovních stop, privacy-first hranice a checklist.
 - 2026-05-31: Doplněna úvodní podkapitola o ověření předání uzavřeného návratu při prvním použití: mini test, tři výsledné stavy, šablona ověření a privacy-first kontrola.
 - 2026-05-31: Doplněna Příloha UT o uzavření ověřené vysvětlující poznámky do stabilního pracovního místa: výsledný stav, úprava pracovní trasy, úklid dočasných stop, privacy-first uzavření, karta a checklist.
+- 2026-06-02: Doplněna úvodní podkapitola o ověření systémové opravy po opakovaných falešných poplaších: přirozený pracovní průchod, stavy opravy, lokální úklid, privacy-first ověření, karta a checklist.
