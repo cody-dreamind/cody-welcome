@@ -161310,8 +161310,202 @@ Položka [název] při druhé běžné kontrole dopadla jako [stav]. Dál žije 
 
 Druhá běžná kontrola je dobrý test dospělosti systému. Když položka projde bez historického vyprávění, zvláštních výjimek a nové datové stopy, stala se opravdu běžnou součástí práce. Když ne, není to tragédie. Jen máte jasnější signál: buď ji lokálně zjednodušit, sloučit, nebo znovu otevřít přes konkrétní příčinu. Hlavně z ní nedělejte věčné muzeum jedné dávné opravy.
 
+## Příloha WB: Uzavření druhé běžné kontroly položky v dlouhodobé údržbě
+
+Příloha WA popsala, jak provést druhou běžnou kontrolu položky v dlouhodobé údržbě. Teď je potřeba kontrolu zavřít. Bez uzavření se i dobrý výsledek může proměnit v neurčitý pocit, že "to asi funguje", nebo v drobný otevřený konec, který se začne vracet na další schůzky.
+
+Uzavření druhé kontroly má jednoduchý cíl: převést výsledek do běžného provozu bez další speciální péče. Pokud položka funguje, zůstane v rytmu. Pokud potřebuje malou opravu, dostane lokální zásah. Pokud se potvrdil návratový signál, otevře se jen konkrétní příčina. Pokud položka ztratila hodnotu, začne řízené sloučení nebo archivace.
+
+Pracovní otázka:
+
+```text
+Co přesně po druhé běžné kontrole měníme, co necháváme být a jak zabráníme tomu, aby z kontroly vznikl nový dohled?
+```
+
+Dobré uzavření je krátké. Nevypráví znovu historii položky, nepřidává nový typ reportu a nevyrábí další "pro jistotu" připomínku. Přesune výsledek na místo, kde s ním tým bude pracovat při příštím normálním rytmu.
+
+### Začněte jednou uzavírací větou
+
+Uzavírací věta má být srozumitelná i člověku, který nebyl u kontroly. Nemá zachytit celý průběh diskuse. Má říct výsledek, nejbližší dopad a hranici další práce.
+
+Šablona:
+
+```text
+Po druhé běžné kontrole položka [název] končí ve stavu [stav]. Dál [zůstává v rytmu / dostává jednu lokální úpravu / otevírá konkrétní příčinu / jde do sloučení nebo archivace]. Nezakládáme nový dohled ani neotevíráme historii opravy.
+```
+
+Příklady:
+
+```text
+Po druhé běžné kontrole karta formulářových polí zůstává v měsíčním review webu beze změny. Nezakládáme samostatnou kontrolu formulářů.
+```
+
+```text
+Po druhé běžné kontrole checklist landing page dostává jednu lokální úpravu: zkrátíme příklad u CTA. Historii původní opravy neotevíráme.
+```
+
+```text
+Po druhé běžné kontrole se potvrdil návratový signál u vlastnictví šablony. Otevíráme samostatnou kartu jen k odpovědné roli, ne k celé šabloně.
+```
+
+Pokud uzavírací věta potřebuje tři odstavce, kontrola pravděpodobně neskončila rozhodnutím. Vraťte se k výslednému stavu a zmenšete závěr na jednu pracovní změnu.
+
+### Přesuňte výsledek do správného místa
+
+Výsledek druhé kontroly nepatří do dalšího zvláštního dokumentu. Patří tam, kde položka žije:
+
+- do kanonického checklistu, pokud jde o změnu formulace;
+- do rozhodovacího logu, pokud jde o vědomé ponechání beze změny;
+- do backlogu, pokud jde o konkrétní lokální opravu se známým důvodem;
+- do archivační nebo slučovací karty, pokud položka ztratila samostatnou hodnotu;
+- do běžného revizního rytmu, pokud se nic nemění.
+
+Nejčastější chyba je nechat výsledek jen v poznámkách ze schůzky. Tam sice existuje, ale příští člověk ho nenajde při práci. Kanonické místo má být upravené tak, aby další použití nevyžadovalo znalost toho, že nějaká druhá kontrola proběhla.
+
+Příklad:
+
+```text
+Špatně:
+V poznámkách z review je napsáno, že karta už je stabilní.
+
+Lépe:
+V kartě je upravený stav na "běžná součást měsíční revize" a v rozhodovacím logu je jedna věta, že po druhé kontrole nevzniká další dohled.
+```
+
+### Rozlište čtyři typy uzavření
+
+Každý výsledný stav z Přílohy WA potřebuje jiný způsob uzavření.
+
+#### Stabilní součást rytmu
+
+Tady je hlavní práce nedělat další práci. Zapište výsledek, potvrďte další běžný výskyt a zavřete pomocné podklady.
+
+```text
+Položka zůstává stabilní součástí [rytmus]. Další kontrola proběhne jen v běžném review. Samostatné sledování končí.
+```
+
+#### Drobná běžná úprava
+
+U lokální úpravy zapište přesně jedno místo a jeden výsledek. Neotevírejte znovu celý standard.
+
+```text
+Děláme jednu běžnou úpravu v [místo]: [úprava]. Ověření proběhne při příštím normálním použití, bez zvláštního reportu.
+```
+
+#### Návratový signál potvrzen
+
+Tady je důležité oddělit příčinu od historie. Návratový signál neznamená, že se má znovu otevřít celá stará větev.
+
+```text
+Potvrdil se návratový signál [signál]. Otevíráme kartu k příčině [příčina]. Původní opravu nehodnotíme znovu, pokud se příčina netýká jejího základu.
+```
+
+#### Sloučit nebo archivovat
+
+Sloučení a archivace potřebují malý plán, protože mohou ovlivnit odkazy, šablony, onboarding a staré pracovní návyky.
+
+```text
+Položka je kandidát na [sloučení/archivaci]. Nejdřív zkontrolujeme odkazy, pracovní místa a datovou stopu. Do té doby ji nepoužíváme jako aktivní standard pro nová rozhodnutí.
+```
+
+Tento stav neznamená, že se položka smaže okamžitě. Znamená, že už nemá právo tvářit se jako normální aktivní část systému, dokud neproběhne úklid.
+
+### Zavřete pomocnou stopu kontroly
+
+Druhá kontrola často vytvoří krátkodobé podklady: poznámky, výpis použití, screenshoty, pracovní seznamy nebo komentáře v ticketu. Po uzavření z nich má zůstat jen to, co je nutné pro budoucí rozhodnutí.
+
+Praktický postup:
+
+- ponechte jednu uzavírací větu v rozhodovacím logu;
+- přeneste případnou lokální úpravu do kanonického místa;
+- smažte nebo zkraťte pracovní poznámky, které jen opakují diskusi;
+- odstraňte screenshoty a exporty, pokud už nepodporují aktivní rozhodnutí;
+- zavřete komentáře v nástrojích, které by příště sváděly k návratu do historie;
+- ověřte, že nevznikl nový seznam výjimek nebo ruční dohled.
+
+Privacy-first pravidlo je tady jednoduché: co nepomáhá budoucímu rozhodnutí, nemá dál držet data. U webu, SaaS produktu i marketingu je čistá stopa často lepší než perfektně zachovaný kontext.
+
+### Nastavte návrat bez dalšího alarmu
+
+I po stabilní druhé kontrole může existovat návratový signál. Nemá se z něj stát nový alarm. Stačí ho uložit k položce nebo do běžného rytmu.
+
+Dobrá formulace:
+
+```text
+K položce se vracíme mimo běžný rytmus jen tehdy, když se dvakrát po sobě objeví stejná chyba rozhodnutí nebo když údržba začne vyžadovat nový export osobních dat.
+```
+
+Slabá formulace:
+
+```text
+Budeme to raději ještě sledovat.
+```
+
+První věta má hranici. Druhá věta má úzkost v pracovním kabátě. A ano, takhle vznikají tabulky, které nikdo nechce vlastnit.
+
+### Karta uzavření druhé běžné kontroly
+
+```text
+Položka:
+
+Běžný rytmus:
+
+Výsledek druhé kontroly:
+- stabilní součást rytmu / drobná běžná úprava / návratový signál potvrzen / sloučit nebo archivovat
+
+Uzavírací věta:
+
+Kanonické místo, kde se výsledek projeví:
+
+Jedna změna, pokud nějaká:
+
+Co výslovně neotevíráme:
+
+Co nebudeme dál sledovat:
+
+Pomocné podklady k mazání nebo zkrácení:
+
+Privacy-first výsledek:
+
+Další návrat jen při signálu:
+
+Další normální výskyt v rytmu:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhé kontroly a vyberte jeden stav.
+2. Minuta 2: napište jednu uzavírací větu.
+3. Minuta 3: určete kanonické místo, kam se výsledek propíše.
+4. Minuta 4: řekněte, co výslovně neotevíráte z historie.
+5. Minuta 5: smažte nebo zkraťte pomocné podklady.
+6. Minuta 6: potvrďte návratový signál bez nového dohledu.
+
+Výstup workshopu:
+
+```text
+Položka [název] je po druhé běžné kontrole uzavřená jako [stav]. Výsledek je uložený v [místo]. Neotevíráme [historie/oblast] a dál nesledujeme [zbytečný signál]. Z datové stopy zůstává jen [minimum].
+```
+
+### Checklist uzavření druhé běžné kontroly
+
+- Máme jednu uzavírací větu?
+- Je výsledek zapsaný v kanonickém místě, ne jen v poznámkách ze schůzky?
+- Rozlišili jsme stabilní stav, drobnou úpravu, potvrzený návratový signál a sloučení nebo archivaci?
+- Pokud je potřeba úprava, je lokální a má nejbližší normální ověření?
+- Pokud se potvrdil návratový signál, otevíráme jen konkrétní příčinu?
+- Pokud položka míří do sloučení nebo archivace, máme kontrolu odkazů a datové stopy?
+- Je jasné, co výslovně neotevíráme z historie?
+- Zavřeli jsme pomocné poznámky, screenshoty, exporty a ruční seznamy bez další hodnoty?
+- Nepřidali jsme nový report, alarm, tracker ani osobní údaje?
+- Má položka další návrat jen při konkrétním signálu?
+- Ví tým, kdy se položka objeví příště v běžném rytmu?
+
+Uzavření druhé běžné kontroly je malý, ale důležitý akt provozní hygieny. Tým tím říká: výsledek jsme viděli, rozhodnutí jsme zapsali, stopu jsme uklidili a dál se vracíme k normální práci. To je přesně ten typ neokázalé disciplíny, která drží web, SaaS i marketing použitelný déle než jednu nadšenou iteraci.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WB o uzavření druhé běžné kontroly položky v dlouhodobé údržbě: uzavírací věta, správné kanonické místo, čtyři typy uzavření, úklid pomocné stopy, návratový signál bez nového dohledu, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WA o druhé běžné kontrole položky v dlouhodobé údržbě: kontrola bez historického vyprávění, stejné otázky jako u ostatních položek, čtyři výsledné stavy, skrytá cena údržby, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha VZ o dlouhodobé údržbě položky po první běžné kontrole: kanonické místo, vlastník, návratový signál, běžný rytmus, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha VY o uzavření první běžné kontroly po převodu do provozního rytmu: uzavírací věta, lokální oprava bez změny rytmu, rozlišení zavření a návratového signálu, privacy-first úklid datové stopy, karta, mini workshop a checklist.
