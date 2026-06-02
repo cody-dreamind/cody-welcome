@@ -164899,8 +164899,194 @@ Položka [název] v prvním dlouhodobém review dopadla jako [stav]. Údržba st
 
 První dlouhodobé review je úspěšné tehdy, když z něj nevznikne nový malý projekt. Buď položka zůstane klidně v rytmu, nebo dostane přesně pojmenovaný zásah. V obou případech se systém posune dopředu bez toho, aby si z každé opravené věci stavěl památníček.
 
+## Příloha WN: Uzavření prvního dlouhodobého review do stabilního rytmu
+
+První dlouhodobé review ještě není konec. Je to kontrolní bod, který má skončit krátkým uzavřením: co se stalo, kde výsledek bydlí a jak se položka dál udržuje bez zvláštní pozornosti. Bez tohoto uzavření se i dobré review může změnit v otevřenou poznámku. Všichni vědí, že položka prošla kontrolou, ale nikdo neví, jestli se má něco přepsat, sloučit, smazat nebo nechat být.
+
+Uzavření má jednu základní větu:
+
+```text
+Výsledek prvního dlouhodobého review položky [název] je uzavřen jako [ponechat / zjednodušit / sloučit / otevřít návrat] a je zapsán v [kanonické místo]. Další práce je [žádná / jedna úprava / sloučení / návratová karta].
+```
+
+Příklad:
+
+```text
+Výsledek prvního dlouhodobého review rozcestníku review šablon je uzavřen jako ponechat a je zapsán v kartě měsíční údržby znalostní báze. Další práce není potřeba; položka zůstává v běžném rytmu.
+```
+
+Tahle věta brání dvěma častým chybám. První chyba je tiché pokračování ve sledování, i když review nic nenašlo. Druhá chyba je otevření příliš velké práce, když review našlo jen malou údržbovou překážku.
+
+### Uzavření podle výsledného stavu
+
+Každý stav z review má jiný typ uzavření.
+
+Ponechat:
+
+```text
+Položka zůstává ve stejném rytmu. Neměníme pravidlo, nepřidáváme metriku a mažeme dočasné poznámky z review.
+```
+
+Zjednodušit:
+
+```text
+Zakládáme jednu malou úpravu údržby. Neměníme účel položky, jen snižujeme cenu kontroly.
+```
+
+Sloučit:
+
+```text
+Přesouváme rozhodovací otázku do existujícího pravidla nebo šablony. Staré místo označíme jako nahrazené a uklidíme duplicitní odkazy.
+```
+
+Otevřít návrat:
+
+```text
+Zakládáme návratovou kartu s nejbližším pracovním místem. Neobnovujeme celou historii opravy, dokud k tomu není konkrétní důkaz.
+```
+
+Nejhorší uzavření je věta "zatím budeme sledovat". Pokud je potřeba sledovat, pojmenujte co přesně: návratový signál, termín a rozhodnutí, které tím půjde udělat. Pokud to pojmenovat nejde, nejspíš nejde o sledování, ale o nechuť zavřít otevřenou věc.
+
+### Kanonické místo, ne zápis do všech koutů
+
+Po review často vznikne chuť zapsat výsledek na víc míst: do changelogu, do šablony, do týmového kanálu, do poznámek z meetingu a ještě do dokumentu "pro jistotu". To zní pečlivě, ale dlouhodobě to vytváří další údržbu.
+
+Vyberte jedno kanonické místo podle toho, kde bude člověk položku příště opravdu hledat:
+
+- pravidlo patří do pravidla;
+- šablona patří do šablony;
+- kontrolní otázka patří do revizní karty;
+- návratový signál patří tam, kde se provádí běžná údržba;
+- rozhodnutí o sloučení patří k nové cílové položce, ne do starého slepého místa.
+
+Pomocné zápisy mohou existovat jen krátce. Pokud výsledek oznamujete týmu, zpráva má odkazovat na kanonické místo, ne opakovat celý obsah. Když se text kopíruje, časem se rozjede. Když se odkazuje na jeden zdroj pravdy, systém má šanci zůstat čitelný.
+
+Privacy-first poznámka: kanonické místo zároveň snižuje datovou stopu. Nemusíte držet osobní poznámky z review ve třech nástrojích, screenshoty v chatu a exporty ve sdílené složce. Stačí rozhodnutí, minimální důkaz a jasný návratový signál.
+
+### Úklid po uzavření
+
+Uzavření prvního dlouhodobého review má obsahovat malý úklid. Ne velký archivní projekt, jen odstranění stop, které splnily účel:
+
+- dočasné poznámky z kontroly;
+- osobní připomínky autora původní opravy;
+- duplicitní odkazy na starší verzi pravidla;
+- screenshoty nebo kopie použité jen k ověření;
+- pracovní seznamy, které nemají sloužit při dalším běžném review;
+- staré formulace typu "po opravě ještě hlídat".
+
+Úklid má být přiměřený. Pokud smazání starého místa rozbije dohledatelnost rozhodnutí, nahraďte ho krátkou stopou:
+
+```text
+Tato položka byla sloučena do [nové místo] dne [datum]. Důvod: první dlouhodobé review potvrdilo překryv.
+```
+
+To stačí. Nepotřebujete román o všech předchozích iteracích. Dokumentace není muzeum dobrých úmyslů.
+
+### Karta uzavření prvního dlouhodobého review
+
+```text
+Položka:
+
+Datum prvního dlouhodobého review:
+
+Výsledek review:
+- ponechat / zjednodušit / sloučit / otevřít návrat
+
+Uzavírací věta:
+
+Kanonické místo:
+
+Co se přepisuje:
+
+Co se nemaže, protože je to zdroj pravdy:
+
+Co se maže, anonymizuje nebo slučuje:
+
+Další běžný rytmus:
+
+Návratový signál:
+
+Co výslovně neotevíráme:
+
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Rozcestník review šablon.
+
+Datum prvního dlouhodobého review:
+2026-06-02.
+
+Výsledek review:
+Ponechat.
+
+Uzavírací věta:
+Rozcestník review šablon zůstává v měsíční údržbě znalostní báze bez zvláštního dohledu.
+
+Kanonické místo:
+Karta měsíční údržby znalostní báze.
+
+Co se přepisuje:
+Jedna věta v kartě údržby: rozcestník se kontroluje jako běžná položka.
+
+Co se nemaže, protože je to zdroj pravdy:
+Aktuální karta měsíční údržby.
+
+Co se maže, anonymizuje nebo slučuje:
+Dočasná osobní poznámka z ověřování a starý odkaz v pomocném checklistu.
+
+Další běžný rytmus:
+Příští měsíční údržba.
+
+Návratový signál:
+Člověk při reálném review skončí v archivní šabloně.
+
+Co výslovně neotevíráme:
+Nevytváříme nový dashboard ani samostatný audit rozcestníku.
+
+Vlastník:
+Editor znalostní báze.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledný stav z prvního dlouhodobého review.
+2. Minuta 2: napište uzavírací větu.
+3. Minuta 3: vyberte jedno kanonické místo.
+4. Minuta 4: určete, co se přepisuje a co zůstává beze změny.
+5. Minuta 5: smažte, anonymizujte nebo slučte dočasné stopy.
+6. Minuta 6: potvrďte další běžný rytmus a návratový signál.
+7. Minuta 7: zapište, co výslovně neotevíráte.
+
+Výstup:
+
+```text
+Review je uzavřené. Výsledek bydlí v [kanonické místo], další běžný rytmus je [rytmus] a mimo rozsah zůstává [co neotevíráme].
+```
+
+### Checklist uzavření
+
+- Je výsledek review převedený do jedné uzavírací věty?
+- Vybrali jsme jeden ze čtyř stavů bez mlhavého sledování?
+- Má výsledek jedno kanonické místo?
+- Nepřepsali jsme stejnou informaci do několika zdrojů pravdy?
+- Je jasné, co se přepisuje a co zůstává?
+- Uklidili jsme dočasné poznámky, screenshoty, kopie a osobní připomínky?
+- Pokud něco zůstává, má to jasný účel?
+- Je další běžný rytmus stejný jako u podobných položek?
+- Je návratový signál konkrétní?
+- Neotevřeli jsme z review větší projekt, než výsledek vyžaduje?
+- Nepřidali jsme nové měření lidí, exporty ani sledování "pro jistotu"?
+- Ví vlastník, kde bude položku příště kontrolovat?
+
+Uzavření prvního dlouhodobého review má být krátké a trochu nudné. To je kompliment. Když se systémová položka po opravě, údržbě a prvním dlouhodobém review vrátí do obyčejného rytmu, vyhrála. Teď už nemá být zajímavá. Má fungovat.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WN o uzavření prvního dlouhodobého review do stabilního rytmu: stavové uzavření, kanonické místo, úklid dočasných stop, privacy-first minimalizace, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WM o prvním dlouhodobém review po převodu do rytmu: kontrola současné použitelnosti, čtyři výsledné stavy, cena údržby, privacy-first hranice bez nových metrik, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o uzavření druhého běžného použití pravidla do běžného rytmu: stavová věta, čtyři způsoby uzavření, správné kanonické místo, privacy-first úklid ověřovací stopy, karta a checklist.
 - 2026-06-02: Doplněna Příloha WL o převodu po první běžné údržbě do dlouhodobého rytmu: jeden domov rytmu, běžný a návratový signál, přepis jazyka z opravy na údržbu, levná údržba, privacy-first úklid datové stopy, karta, mini workshop a checklist.
