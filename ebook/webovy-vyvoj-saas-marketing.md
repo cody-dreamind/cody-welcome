@@ -6333,6 +6333,187 @@ Příští měsíční údržba.
 
 Uzavření druhého běžného použití má jednu nenápadnou ambici: aby se dobrá oprava přestala tvářit jako projekt. Když pravidlo funguje, vraťte ho do normálního rytmu. Když nefunguje, otevřete přesnou otázku. A když už není potřeba, zrušte ho. Všechny tři možnosti jsou lepší než čtvrtá: držet při životě zvláštní pozornost, protože kdysi dávala smysl.
 
+## První návratový signál po zařazení pravidla do běžného rytmu
+
+Pravidlo, které přešlo do běžného rytmu, má mít návratový signál. To ale neznamená, že se při každé podobné drobnosti automaticky otevře celá stará oprava. Návratový signál je brána, ne alarm. Má týmu pomoct rozlišit, jestli se vrací stejný problém, nebo jen vznikla nová situace, která náhodou vypadá podobně.
+
+První návratový signál po běžném rytmu má odpovědět na otázku:
+
+```text
+Vrací se problém, který pravidlo mělo držet zavřený, nebo jde o běžné tření, které patří do normální údržby?
+```
+
+Pokud se vrací původní problém, otevřete nejbližší pracovní místo. Pokud jde jen o běžné tření, opravte ho v běžném rytmu. Pokud signál není dost konkrétní, nezakládejte novou kontrolu. Slabý signál má být zapsaný jako pozorování, ne jako důvod pro návrat celé historie.
+
+### Nejdřív porovnejte signál s původní podmínkou
+
+Návratový signál má být konkrétní. Třeba:
+
+```text
+Reálná práce znovu skončí v neaktivní šabloně.
+```
+
+To je jiné než:
+
+```text
+Někdo si nebyl jistý, kterou šablonu použít.
+```
+
+První věta ukazuje návrat starého problému. Druhá může být jen slabý název odkazu, nový člověk v týmu nebo špatný vstup do rozcestníku. Když obě věci smícháte, staré opravy se budou otevírat pokaždé, když někdo narazí na normální provozní tření.
+
+Krátké porovnání:
+
+```text
+Původní návratový signál:
+
+Aktuální situace:
+
+Co je stejné:
+
+Co je jiné:
+
+Jde o návrat původního problému:
+- ano / ne / zatím nevíme
+
+Nejmenší další krok:
+```
+
+Příklad:
+
+```text
+Původní návratový signál:
+Reálná práce znovu skončí v neaktivní šabloně.
+
+Aktuální situace:
+Nový editor se ptal, jestli má použít šablonu review, nebo kartu změny.
+
+Co je stejné:
+Člověk hledal správný pracovní dokument.
+
+Co je jiné:
+Neskončil ve staré šabloně. Jen rozcestník nerozlišil dvě blízké situace.
+
+Jde o návrat původního problému:
+Ne.
+
+Nejmenší další krok:
+Doplnit do rozcestníku jednu větu: slabý podnět zavírá review šablona, potvrzenou změnu otevírá karta změny.
+```
+
+Tady se neotevírá systémová oprava. Opravuje se běžné tření v místě, kde člověk začal.
+
+### Tři stavy prvního návratového signálu
+
+Po prvním signálu vyberte jeden stav:
+
+- Šum běžné údržby: situace nevypadá jako původní problém a stačí běžný rytmus.
+- Lokální tření: problém je blízko pravidla, ale řeší ho jedna malá úprava pracovního místa.
+- Skutečný návrat: původní problém se vrátil stejnou nebo podobně nebezpečnou cestou.
+
+`Šum běžné údržby` nezapisujte dramaticky. Stačí krátká poznámka v běžném review: signál nenastal, nic neotevíráme.
+
+`Lokální tření` smí otevřít jednu malou úpravu. Typicky lepší název odkazu, kratší rozlišení dvou šablon, odstranění starého příkladu nebo přesun pravidla blíž ke spouštěči práce.
+
+`Skutečný návrat` potřebuje pracovní otázku. Ne "opravit pravidlo znovu", ale přesněji:
+
+```text
+Proč reálná práce znovu skončila v neaktivní šabloně, přestože pravidlo patří do měsíční údržby rozcestníků?
+```
+
+Taková otázka míří na pracovní místo, rytmus a zdroj pravdy. Nemíří na člověka, který problém našel. To je důležité, protože první návratový signál často ukáže slabinu systému, ne slabinu pozornosti.
+
+### Neotevírejte historii dřív než pracovní místo
+
+Když signál vypadá vážně, tým má tendenci vrátit se k celé původní historii: proč oprava vznikla, kdo co našel, jaké byly staré šablony, co se tehdy mazalo a jestli se náhodou nemá zopakovat audit. To je drahé a většinou zbytečné.
+
+První pořadí má být opačné:
+
+- kde člověk v práci začal;
+- kam měl dojít;
+- kde se pravidlo mělo objevit;
+- kde se reálně ztratilo;
+- jaký nejmenší zásah tomu zabrání příště.
+
+Teprve když tento průchod neukáže příčinu, vraťte se k historii opravy. Starý kontext má být záloha pro nejasné případy, ne první mapa pro každé tření.
+
+Praktický stop signál:
+
+```text
+K historii původní opravy se vracíme jen tehdy, když současné pracovní místo nevysvětluje návrat problému.
+```
+
+Tato věta brání tomu, aby se z návratového signálu stala nostalgická exkurze do starého chaosu. Ano, starý chaos byl poučný. Ne, nemusí dostat encore pokaždé, když někdo zakopne o odkaz.
+
+### Privacy-first návratový signál
+
+Návratový signál nesmí automaticky spustit nové sledování lidí. Nepotřebujete měřit, kdo pravidlo otevřel, kolikrát klikl na rozcestník, jak dlouho četl šablonu nebo kdo si pamatoval starou cestu. Potřebujete zjistit, jestli pracovní místo stále vede k bezpečnému výstupu.
+
+Privacy-first minimum:
+
+```text
+Zůstává:
+Typ situace, stav signálu, pracovní místo a rozhodnutí.
+
+Nezůstává:
+Jméno člověka, osobní trasa, screenshoty obrazovky, kompletní chatová debata.
+
+Nesbírá se:
+Klikání v dokumentaci, čas čtení, osobní skóre dodržování pravidla ani nový report použití.
+```
+
+Pokud signál souvisí se zákaznickou prací, zapište jen typ kontextu. "Review nabídky pro větší B2B poptávku" stačí. Není potřeba ukládat název zákazníka, částku, interní komentáře ani kompletní obchodní poznámku, pokud nejsou nezbytné pro rozhodnutí.
+
+### Karta prvního návratového signálu
+
+```text
+Pravidlo v běžném rytmu:
+
+Běžný rytmus:
+
+Původní návratový signál:
+
+Aktuální situace:
+
+Kde člověk začal:
+
+Kde měl skončit:
+
+Co se stalo:
+
+Stav signálu:
+- šum běžné údržby / lokální tření / skutečný návrat
+
+Nejmenší další krok:
+
+Co neotevíráme:
+
+Co nerušíme z klidového režimu:
+
+Co mažeme nebo anonymizujeme:
+
+Návrat k historii původní opravy je potřeba:
+- ano / ne
+
+Vlastník:
+
+Datum kontroly:
+```
+
+### Checklist prvního návratového signálu
+
+- Porovnali jsme aktuální situaci s původním návratovým signálem?
+- Víme, co je stejné a co je jiné?
+- Rozlišili jsme šum, lokální tření a skutečný návrat?
+- Pokud jde o lokální tření, držíme opravu v jednom pracovním místě?
+- Pokud jde o skutečný návrat, formulovali jsme novou pracovní otázku?
+- Neotevíráme historii původní opravy dřív, než projdeme současné pracovní místo?
+- Nezavedli jsme nové sledování lidí, klikání ani používání dokumentace?
+- Zůstává jen anonymizovaný pracovní závěr?
+- Je jasné, co neotevíráme, aby se klidový režim nerozpadl?
+- Má další krok vlastníka a datum kontroly?
+
+První návratový signál je test disciplíny. Tým má ukázat, že umí pravidlo znovu zkontrolovat bez paniky, bez hromadění dat a bez návratu k celé staré bitvě. Někdy signál otevře skutečný problém. Často ale jen připomene, že i dobrý systém potřebuje občas jednu obyčejnou větu na správném místě.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -165427,3 +165608,4 @@ První dlouhodobé review je úspěšné tehdy, když z něj nevznikne nový mal
 - 2026-06-02: Doplněna úvodní podkapitola o ověření systémové opravy po opakovaných falešných poplaších: přirozený pracovní průchod, stavy opravy, lokální úklid, privacy-first ověření, karta a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o uzavření ověřené systémové opravy do běžného pravidla: přepis do přítomného času, zavření zvláštního ověřovacího režimu, rozlišení pravidla, úklidu a paměti, privacy-first úklid, karta a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o prvním běžném použití pravidla po uzavřené systémové opravě: běžná pracovní situace, stínový proces, tři výsledné stavy, privacy-first hranice, karta a checklist.
+- 2026-06-02: Doplněna úvodní podkapitola o prvním návratovém signálu po zařazení pravidla do běžného rytmu: rozlišení šumu, lokálního tření a skutečného návratu, práce bez otevírání celé historie, privacy-first karta a checklist.
