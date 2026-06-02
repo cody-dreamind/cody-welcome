@@ -162618,8 +162618,263 @@ Položka [název] se opakovaně vrátila kvůli [důvod]. Stav návratu je [stav
 
 Opakovaný návrat je dobrý sluha a špatný šéf. Má upozornit, že tichý stav možná potřebuje úpravu. Nemá týmu ukrást právo pracovat normálně. Když ho uzavřete přesně, nízká pozornost zůstane užitečná: položka se umí ozvat, ale neumí si bez důvodu založit vlastní malý provoz.
 
+## Příloha WG: Převod platného vzoru z opakovaného návratu do jedné malé opravy
+
+Platný vzor z opakovaného návratu je už dost silný důvod něco změnit, ale pořád není povolenka otevřít celou oblast. Právě tady týmy často uklouznou: konečně mají důkaz, že se věc vrací, a tak k malé opravě přibalí redesign, nový report, další pole ve formuláři, úpravu obchodní metodiky a "když už jsme u toho" ještě nový obsahový blok. Výsledek pak nevysvětluje vzor. Výsledek otevírá další vzory.
+
+Malá oprava po opakovaném návratu má jednu práci: odstranit nejbližší příčinu opakované skryté práce. Neřeší všechno, co se kolem položky historicky stalo. Neřeší všechny možné budoucí varianty. Neřeší ani to, že by se celé téma dalo jednou pojmout lépe. Bere potvrzený vzor, najde nejbližší pracovní místo a udělá změnu, kterou jde ověřit při dalším běžném použití.
+
+Rozhodovací otázka:
+
+```text
+Která nejmenší oprava odstraní opakovaný důvod návratu bez otevření celé položky?
+```
+
+Pokud na otázku nedokážete odpovědět jednou větou, vzor ještě není připravený na opravu. Vraťte se o krok zpět: buď potřebujete přesněji pojmenovat důvod návratu, nebo přiznat, že nejde o malou opravu, ale o přesun položky z nízké pozornosti do běžné údržby.
+
+### Oddělte vzor od nápadů
+
+Nejdřív přepište opakovaný návrat do věty bez řešení:
+
+```text
+Vzor:
+Ve [pracovní situace] se opakovaně vrací [stejný důvod] a vytváří [konkrétní skrytou práci].
+```
+
+Příklad:
+
+```text
+Vzor:
+V relevantních poptávkách se opakovaně neobjevuje rozhodovací termín a obchod musí ručně doptávat časování projektu.
+```
+
+Teprve potom napište možné opravy. Každá oprava musí být navázaná na vzor, ne na obecnou chuť "vylepšit formulář".
+
+```text
+Možná oprava A:
+Změnit nápovědu u existující otázky na časování projektu.
+
+Možná oprava B:
+Přidat volitelné pole s rozhodovacím obdobím.
+
+Možná oprava C:
+Upravit follow-up šablonu, aby obchod termín doptal stejnou větou.
+```
+
+Vyberte tu opravu, která leží nejblíž místu, kde skrytá práce vzniká. Pokud chybí informace už ve formuláři, začněte formulářem. Pokud informace ve formuláři je, ale obchod ji čte různě, začněte obchodní šablonou. Pokud zákazník otázce nerozumí, začněte textem, ne novým datovým polem.
+
+### Nejbližší pracovní místo
+
+Nejbližší pracovní místo není místo, kde se problém nejhlasitěji projeví. Je to místo, kde nejmenší změna přeruší opakování.
+
+Pomáhá projít tři otázky:
+
+- Kde se poprvé objeví stejná nejistota?
+- Kde kvůli ní vzniká první ruční práce?
+- Kde lze udělat změnu bez nového procesu okolo?
+
+Příklad:
+
+```text
+Projev:
+Obchod ztrácí čas doptáváním termínu.
+
+První nejistota:
+Zájemce ve formuláři neví, jestli má psát deadline, start projektu nebo interní rozhodnutí.
+
+Nejbližší pracovní místo:
+Nápověda u otázky na časování ve formuláři.
+
+Malá oprava:
+Změnit text otázky na "Kdy potřebujete rozhodnout nebo spustit první krok?" a doplnit příklad odpovědi.
+```
+
+Tím se oprava drží u vzniku problému. Kdyby tým rovnou přidal obchodní dashboard, řešil by důsledek, ne příčinu. Kdyby přidal povinné pole, možná by získal víc údajů, ale také by zvýšil tření a datovou stopu. Nápověda je menší zásah, který se dá ověřit bez nového systému.
+
+### Jeden typ změny
+
+Malá oprava má mít jeden hlavní typ:
+
+- textová oprava: změna názvu, nápovědy, příkladu, popisku nebo odpovědi;
+- navigační oprava: lepší odkaz, přesměrování, pořadí kroků nebo viditelnost existujícího místa;
+- procesní oprava: jedna věta do rutiny, handoffu, follow-upu nebo review;
+- datová oprava: zrušení, zkrácení, přejmenování nebo výjimečně přidání jednoho údaje;
+- vlastnická oprava: jasnější vlastník, hranice eskalace nebo místo rozhodnutí.
+
+Nemíchejte typy, pokud nemusíte. "Upravíme nápovědu, přidáme pole, změníme follow-up a připravíme nový report" není malá oprava. Je to malý program v kabátu drobnosti. Ano, kabát může být hezký. Pořád je to program.
+
+Když se oprava zdá příliš slabá, napište, jak přesně má přerušit vzor:
+
+```text
+Oprava:
+
+Jak přeruší vzor:
+
+Co zůstává mimo rozsah:
+
+Jak poznáme při dalším použití, že stačila:
+```
+
+Pokud nedokážete vyplnit druhý řádek, oprava je jen nápad. Pokud nedokážete vyplnit třetí řádek, rozsah se rozjede. Pokud nedokážete vyplnit čtvrtý řádek, nepůjde ji uzavřít.
+
+### Neotevírejte historii položky
+
+Opakovaný návrat má historii, ale malá oprava ji nepotřebuje celou. Stačí poslední uzavření, aktuální vzor a důvod výběru opravy. Starší debaty, alternativní návrhy a původní bolest nechte zavřené, pokud přímo nerozhodují o opravě.
+
+Do zápisu dejte jen:
+
+```text
+Poslední uzavření:
+
+Potvrzený vzor:
+
+Vybraná malá oprava:
+
+Proč právě toto místo:
+
+Co z historie neotevíráme:
+```
+
+Tento řádek "co z historie neotevíráme" je překvapivě praktický. Chrání tým před tím, aby se oprava změnila v archeologii. Historie má sloužit jako hranice, ne jako pozvánka k další výpravě do starých rozhodnutí.
+
+### Privacy-first hranice malé opravy
+
+Platný vzor svádí k tomu říct: "Teď už máme důvod měřit víc." Někdy ano, často ne. Nejprve se ptejte, jestli lze opravu ověřit bez nového sběru dat.
+
+Preferujte:
+
+- ruční kontrolu několika dalších průchodů místo nového trvalého eventu;
+- anonymizované shrnutí místo kopírování celých zákaznických zpráv;
+- úpravu textu místo povinného osobního údaje;
+- existující provozní review místo nové tabulky;
+- krátkou časově omezenou poznámku místo nového dashboardu.
+
+Pokud oprava přidává nové datové pole, musí projít tvrdším filtrem:
+
+```text
+Účel pole:
+
+Kdo ho skutečně potřebuje:
+
+Proč nestačí existující údaj:
+
+Je pole povinné, nebo volitelné:
+
+Jak dlouho údaj držíme:
+
+Kde se ukáže v datové mapě:
+
+Jak zákazník pochopí, proč se ptáme:
+```
+
+U privacy-first provozu není cílem nikdy nesbírat nic. Cílem je nesbírat pohodlné údaje jen proto, že řešení neumíme zmenšit. Malá oprava má snižovat tření i datovou stopu, ne tajně rozšiřovat obojí.
+
+### Ověření při dalším běžném použití
+
+Opravu neověřujte speciálním auditem, pokud to není nutné. Dejte jí nejbližší přirozený test:
+
+- další relevantní poptávka;
+- další obchodní follow-up;
+- další support dotaz stejného typu;
+- další onboardingový průchod;
+- další měsíční review;
+- další publikace stejného formátu.
+
+Ověřovací otázka má být konkrétní:
+
+```text
+Při dalším [běžné použití] poznáme, že oprava stačila, když [konkrétní skrytá práce] nevznikne nebo se zmenší na [přijatelná hranice].
+```
+
+Příklad:
+
+```text
+Při dalších pěti relevantních poptávkách poznáme, že oprava stačila, když obchod nebude muset ručně doptávat základní časování projektu u více než jedné z nich.
+```
+
+To není vědecký experiment. Je to provozní signál. Pro malou opravu stačí vědět, jestli přestala vyrábět stejnou práci. Pokud ne, opravu nešiřte automaticky. Nejdřív rozhodněte, jestli šlo o špatné místo zásahu, slabou formulaci, nebo o signál, že položka už do nízké pozornosti nepatří.
+
+### Karta malé opravy po opakovaném návratu
+
+```text
+Položka:
+
+Kanonické místo:
+
+Stav před opravou:
+- nízká pozornost / opakovaný návrat / platný vzor
+
+Potvrzený vzor:
+
+Skrytá práce, kterou vzor vytváří:
+
+Nejbližší pracovní místo:
+
+Vybraný typ opravy:
+- textová / navigační / procesní / datová / vlastnická
+
+Konkrétní oprava:
+
+Jak oprava přeruší vzor:
+
+Co z historie neotevíráme:
+
+Co teď výslovně neměníme:
+
+Privacy-first hranice:
+
+Přidává oprava nové údaje?
+- ne / ano, proč:
+
+Ověření při dalším běžném použití:
+
+Přijatelný výsledek:
+
+Vlastník:
+
+Datum návratu:
+```
+
+### Mini workshop na 10 minut
+
+1. Minuta 1: přečtěte stav opakovaného návratu a potvrzený vzor.
+2. Minuta 2: pojmenujte skrytou práci, kterou vzor vytváří.
+3. Minuta 3: určete nejbližší pracovní místo.
+4. Minuta 4: napište tři možné malé opravy.
+5. Minuta 5: vyberte jednu podle nejmenšího zásahu do práce a dat.
+6. Minuta 6: napište, co z historie neotevíráte.
+7. Minuta 7: zkontrolujte, jestli oprava nepřidává zbytečný údaj nebo nový dohled.
+8. Minuta 8: určete první běžné použití pro ověření.
+9. Minuta 9: napište přijatelný výsledek.
+10. Minuta 10: zapište vlastníka a datum návratu.
+
+Výstup workshopu:
+
+```text
+Potvrzený vzor [popis] řešíme jednou malou opravou v [pracovní místo]. Měníme [konkrétní oprava], neměníme [rozsah mimo opravu] a neotevíráme [historie]. Ověříme při [běžné použití] podle [přijatelný výsledek]. Datovou stopu držíme jako [minimum].
+```
+
+### Checklist malé opravy
+
+- Je potvrzený vzor napsaný bez řešení?
+- Víme, jakou skrytou práci vzor vytváří?
+- Našli jsme nejbližší pracovní místo, ne jen nejhlasitější projev?
+- Vybrali jsme jeden hlavní typ opravy?
+- Umíme jednou větou říct, jak oprava přeruší vzor?
+- Je jasné, co z historie neotevíráme?
+- Je jasné, co teď výslovně neměníme?
+- Nepřidává oprava nový proces okolo malé věci?
+- Nepřidává oprava nové osobní údaje jen kvůli pohodlnému vyhodnocení?
+- Pokud přidává údaj, má účel, vlastníka, retenci a místo v datové mapě?
+- Má oprava přirozené ověření při dalším běžném použití?
+- Je přijatelný výsledek konkrétní, ne pocitový?
+- Má oprava vlastníka a datum návratu?
+
+Malá oprava po opakovaném návratu je dobrá, když se po ní věc vrátí do ticha. Ne proto, že ji tým ignoruje, ale proto, že přestala vyrábět skrytou práci. Pokud oprava potřebuje vlastní dohled, nové exporty a pravidelné připomínání, nebyla malá. Byla to nová položka v převleku. A převleky v provozu dlouho nevydrží, protože tabulka je nakonec vždycky práskne.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WG o převodu platného vzoru z opakovaného návratu do jedné malé opravy: oddělení vzoru od nápadů, výběr nejbližšího pracovního místa, jeden typ změny, ochrana před otevřením historie, privacy-first hranice, ověření při dalším běžném použití, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WF o opakovaném návratu k položce v nízké pozornosti: porovnání návratů podle důvodu, čtyři stavy opakovaného návratu, zpřesnění návratového signálu, privacy-first kontrola důkazů, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WE o uzavření prvního návratu k položce v nízké pozornosti: stavová věta, čtyři způsoby uzavření, uložení výsledku do kanonického místa, privacy-first uzavření dočasného důkazu, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WD o prvním návratu k položce v nízké pozornosti: ověření návratového signálu, čtyři výsledné stavy, otevření nejbližšího pracovního místa, zákaz zvláštního dohledu, privacy-first datové minimum, karta, mini workshop a checklist.
