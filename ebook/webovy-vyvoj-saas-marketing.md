@@ -160768,8 +160768,156 @@ První běžná kontrola položky [název] je uzavřená ve stavu [stav]. Dalš�
 
 Uzavření první běžné kontroly je poslední brzda proti tomu, aby se hotová věc dál tvářila jako speciální téma. Když kontrola dopadne dobře, nechte ji skončit. Když ukáže drobný problém, opravte nejbližší místo a znovu ji neoslavujte. A když otevře návratový signál, řešte přesně ten signál, ne celou historickou ságu. Provozní dospělost není v tom, že všechno sledujete. Je v tom, že víte, kdy přestat.
 
+## Příloha VZ: Dlouhodobá údržba položky po první běžné kontrole
+
+Příloha VY uzavřela první běžnou kontrolu po návratu položky do provozního rytmu. Tím ale práce nekončí ve smyslu "už nikdy se toho nikdo nedotkne". Končí jen zvláštní režim. Další zralý krok je převést položku do dlouhodobé údržby tak, aby byla normálně viditelná, ale nežila jako trvalé téma s vlastní historií, dohledem a rituálem.
+
+Pracovní otázka:
+
+```text
+Jak bude položka dlouhodobě udržovaná v běžném rytmu, aniž z ní vznikne samostatný proces, nový report nebo další datová stopa?
+```
+
+Dobrá dlouhodobá údržba je nudná. Věc má vlastníka, místo a návratový signál. Nemá zvláštní sloupec "po úklidu", nemá připomínku navždy a nemá samostatný archiv všech kontrol. Pokud ji člověk po třech měsících najde, má poznat, co má dělat teď, ne proč se před půl rokem uklízela.
+
+### Nechte v systému jen tři věci
+
+Po uzavřené první běžné kontrole má v systému zůstat jen minimum, které pomáhá další práci:
+
+- kanonické místo, kde položka žije;
+- vlastník nebo role odpovědná za běžnou údržbu;
+- návratový signál, který říká, kdy se téma otevře znovu.
+
+Všechno ostatní si musí obhájit účel. Dočasné poznámky z review, staré screenshoty, exporty, komentáře k původní opravě a seznamy "pro jistotu" často nechrání kvalitu. Jen vytvářejí dojem, že položka je pořád výjimečná.
+
+Příklad dobrého dlouhodobého zápisu:
+
+```text
+Položka:
+Kanonická karta formulářových polí pro poptávku.
+
+Běžné místo:
+Měsíční review webových pracovních míst.
+
+Vlastník:
+Role odpovědná za webový obsah a kvalifikaci poptávek.
+
+Návratový signál:
+Obchod musí u tří relevantních poptávek za sebou ručně doptávat údaj, který měl formulář nebo navazující text rozumně vysvětlit.
+```
+
+Tento zápis neříká nic o historii úklidu. A to je dobře. Historie patří do uzavřeného logu změny, ne do každodenní práce člověka, který potřebuje upravit formulář.
+
+### Zkontrolujte, že návratový signál není permanentní monitoring
+
+Návratový signál má být práh pro znovuotevření, ne nová metrika, kterou někdo každý týden sleduje jen proto, že existuje. Rozdíl je praktický:
+
+- návratový signál: "když se tento typ problému znovu objeví v běžné práci, otevřeme kartu";
+- permanentní monitoring: "každý týden kontrolujeme, jestli se tento typ problému náhodou neobjevil".
+
+První varianta šetří kapacitu. Druhá pomalu vyrábí provozní šum. U důležitých bezpečnostních, právních nebo produkčních oblastí může být pravidelný monitoring nutný, ale u běžných pracovních šablon, obsahových pravidel a drobných provozních úprav často stačí jasný práh návratu.
+
+Codyho komentář: když má každá drobná oprava vlastní monitoring, tým nakonec nemonitoruje rizika, ale vlastní nervozitu. To je drahý sport a medaile se za něj nerozdávají.
+
+### Připojte položku k existující revizi
+
+Položka po první běžné kontrole má jít do existující revize, ne do nové. Vyberte nejbližší rytmus podle toho, kde se s ní reálně pracuje:
+
+- měsíční review webu pro formuláře, landing pages, navigaci, CTA a obsahové trasy;
+- produktové review pro onboarding, aktivaci, supportní vzory a nápovědu;
+- marketingové review pro distribuční šablony, obsahové série, UTM pravidla a veřejné odkazy;
+- provozní review pro přístupy, dodavatele, incidentní karty, automatizace a retenční pravidla;
+- redakční review pro e-book, playbooky, interní návody a kanonické indexy.
+
+Pokud neexistuje žádný přirozený rytmus, nezakládejte ho kvůli jedné položce hned. Nejdřív zapište, kde by se položka objevila při skutečné práci. Možná nepotřebuje periodickou revizi, ale jen jasné místo a návratový signál.
+
+Příklad:
+
+```text
+Nepřidáváme nový měsíční meeting pro jednu šablonu. Šablona zůstává v indexu sales materiálů a kontroluje se jen při přípravě další nabídky nebo při návratovém signálu z obchodního rozhovoru.
+```
+
+### Dlouhodobá údržba má chránit i data
+
+Privacy-first hodnota se v dlouhodobé údržbě pozná hlavně podle toho, co nesbíráte. Po uzavření první běžné kontroly se neptejte jen "kde to budeme sledovat", ale i "jakou stopu tím vytváříme".
+
+Typické zbytečné stopy:
+
+- jmenné seznamy lidí, kteří položku použili;
+- screenshoty pracovních nástrojů s osobními údaji;
+- exporty poptávek nebo ticketů, které měly sloužit jen jako příklad;
+- permanentní tabulky drobných kontrol;
+- automatické notifikace do externích nástrojů bez jasného účelu;
+- ukládání kompletních rozhovorů, když stačí rozhodovací věta.
+
+Lepší zápis:
+
+```text
+Pro dlouhodobou údržbu sledujeme jen typ situace a výsledné rozhodnutí. Neuchováváme osobní detaily, plné přepisy ani pomocné exporty z první kontroly.
+```
+
+Tím se neztrácí paměť týmu. Ztrácí se jen bordel, který se tváří jako důkaz. A ano, "bordel" je technický termín, když už má vlastní tabulku.
+
+### Karta dlouhodobé údržby
+
+```text
+Položka:
+
+Kanonické místo:
+
+Běžný provozní rytmus:
+
+Vlastník nebo odpovědná role:
+
+Co zůstává po první běžné kontrole:
+
+Co výslovně nepokračuje jako zvláštní režim:
+
+Návratový signál:
+
+Kdy se položka objeví v běžné práci:
+
+Jaké dočasné podklady byly smazány nebo zkráceny:
+
+Jaká data kvůli údržbě nesbíráme:
+
+Datum nejbližší normální revize nebo přirozeného použití:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte položku a její kanonické místo.
+2. Minuta 2: vyberte existující provozní rytmus nebo přirozené použití.
+3. Minuta 3: určete vlastníka nebo odpovědnou roli.
+4. Minuta 4: napište návratový signál jednou větou.
+5. Minuta 5: škrtněte všechno, co by vytvářelo zvláštní dohled.
+6. Minuta 6: smažte nebo zkraťte pomocné podklady, které už neslouží rozhodnutí.
+7. Minuta 7: potvrďte privacy-first hranici: jaká data kvůli údržbě nesbíráte.
+
+Výstup workshopu:
+
+```text
+Položka [název] po první běžné kontrole zůstává v [běžný rytmus / přirozené použití]. Vlastní ji [role]. Znovu ji otevřeme jen při signálu [signál]. Zvláštní dohled ani nové sbírání dat nepokračuje.
+```
+
+### Checklist dlouhodobé údržby
+
+- Má položka jedno kanonické místo?
+- Je jasné, ve kterém existujícím rytmu nebo přirozeném použití dál žije?
+- Je určený vlastník nebo odpovědná role?
+- Je návratový signál konkrétní a ověřitelný?
+- Není návratový signál převlečený permanentní monitoring?
+- Nezakládáme nový meeting, report, tabulku ani kontrolní sloupec jen kvůli této položce?
+- Smazali nebo zkrátili jsme pomocné podklady z první kontroly?
+- Neuchováváme osobní detaily, které nejsou nutné pro systémové rozhodnutí?
+- Umí nový člověk podle kanonického místa poznat, co má dělat teď?
+- Je jasné, co se už po uzavření první běžné kontroly nesleduje?
+
+Dlouhodobá údržba není slavnostní finále. Je to tichý návrat do normální práce. Položka má být dost viditelná na to, aby se neztratila, ale ne tak hlučná, aby kolem sebe držela zvláštní péči navždy. Když systém umí takhle nechat věci žít, má tým víc prostoru na skutečné problémy. A méně složek pojmenovaných "dočasné", což je vždycky malé vítězství civilizace.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha VZ o dlouhodobé údržbě položky po první běžné kontrole: kanonické místo, vlastník, návratový signál, běžný rytmus, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha VY o uzavření první běžné kontroly po převodu do provozního rytmu: uzavírací věta, lokální oprava bez změny rytmu, rozlišení zavření a návratového signálu, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha VX o první běžné kontrole po převodu do provozního rytmu: kontrola aktuální použitelnosti místo historie úklidu, stejné vstupy jako u ostatních položek, čtyři výsledné stavy, zákaz nové zvláštní kontroly, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VW o převodu klidného návratu do normálního provozního rytmu: převodní věta, výběr existujícího rytmu, přenos vlastnosti místo historie, návratový signál, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
