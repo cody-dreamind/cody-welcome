@@ -164481,8 +164481,246 @@ Položka [název] přechází do dlouhodobého rytmu [rytmus]. Běžně sledujem
 
 Převod do dlouhodobého rytmu je povedený tehdy, když položka přestane vyprávět svůj původní příběh. V systému zůstane jen současné pravidlo, běžný signál, návratová hranice a úklid datové stopy. To je nudné správným způsobem.
 
+## Příloha WM: První dlouhodobé review po převodu do rytmu
+
+Položka převedená do dlouhodobého rytmu má za sebou opravu, první běžnou údržbu a rozhodnutí, kde bude dál žít. První dlouhodobé review už nemá ověřovat, jestli byla stará oprava dobrý nápad. To se stalo dřív. Teď má ověřit, jestli položka opravdu funguje jako normální součást systému.
+
+Rozdíl je malý na papíře a velký v praxi. Když review vedete jako "kontrolu opravené věci", znovu otevíráte minulost. Když ho vedete jako běžnou provozní kontrolu, ověřujete současný stav: dá se položka najít, použít, udržet a případně vrátit do práce jen podle jasného signálu?
+
+První dlouhodobé review má jednu základní větu:
+
+```text
+Položka [název] byla v prvním dlouhodobém review zkontrolována jako běžná součást [rytmus]. Stav je [ponechat / zjednodušit / sloučit / otevřít návrat].
+```
+
+Příklad:
+
+```text
+Rozcestník review šablon byl v prvním dlouhodobém review zkontrolován jako běžná součást měsíční údržby znalostní báze. Stav je ponechat: vede na aktuální zdroj pravdy, nevyžaduje zvláštní dohled a návratový signál nenastal.
+```
+
+Tato věta je záměrně obyčejná. Pokud ji nejde napsat bez vysvětlování historie, položka ještě není úplně převedená do rytmu.
+
+### Kontrolujte rytmus, ne starou opravu
+
+První dlouhodobé review má začít otázkou:
+
+```text
+Chová se položka stejně přirozeně jako ostatní položky ve stejném rytmu?
+```
+
+Neptáte se:
+
+- jestli si lidé pamatují, proč oprava vznikla;
+- jestli původní problém působí dostatečně vyřešeně;
+- jestli by se dala oprava ještě vylepšit;
+- jestli někdo nemá chuť přidat další kontrolní vrstvu.
+
+Ptáte se:
+
+- je položka ve správném místě?
+- používá stejný vstup jako ostatní položky?
+- dá se zkontrolovat bez autora původní opravy?
+- končí review jedním stavem?
+- je jasné, kdy by se položka znovu otevřela?
+- nezůstaly zvláštní důkazy, které už nemají účel?
+
+Příklad špatného review:
+
+```text
+Připomeňme si, proč jsme kdysi řešili archivní šablony, a ověřme, jestli se stará chyba opravdu nemůže vrátit.
+```
+
+Lepší review:
+
+```text
+V rámci měsíční údržby znalostní báze ověřme, jestli rozcestník vede na aktuální šablony a jestli existuje reálný návratový signál.
+```
+
+Druhá formulace netahá tým do minulosti. Kontroluje současnou pracovní použitelnost.
+
+### Čtyři výsledné stavy
+
+Po prvním dlouhodobém review vyberte jeden ze čtyř stavů:
+
+- Ponechat: položka funguje v běžném rytmu a nepotřebuje zásah.
+- Zjednodušit: položka funguje, ale údržba je zbytečně těžká.
+- Sloučit: položka se překrývá s jiným pravidlem, šablonou nebo kontrolou.
+- Otevřít návrat: nastal jasný návratový signál a položka potřebuje novou pracovní kartu.
+
+Stav "sledovat dál pro jistotu" sem nepatří. Pokud nic nenastalo, ponechte položku v rytmu. Pokud něco nastalo, pojmenujte to jako zjednodušení, sloučení nebo návrat. Mlžné sledování je nejdražší typ práce: tváří se levně, protože nemá termín, ale bere pozornost pokaždé, když kolem něj někdo projde.
+
+Příklady:
+
+```text
+Ponechat:
+Rozcestník vede na aktuální zdroj pravdy, staré odkazy nejsou v běžné trase a review trvalo dvě minuty.
+
+Zjednodušit:
+Rozcestník funguje, ale kontrola vyžaduje ručně otevřít šest archivních položek. Potřebujeme zkrátit archivní cestu.
+
+Sloučit:
+Kontrola rozcestníku se překrývá s kvartální revizí šablon. Přesuneme otázku do existující revizní karty.
+
+Otevřít návrat:
+Při reálném review člověk znovu skončil v archivní šabloně. Zakládáme návratovou kartu s nejbližším pracovním místem.
+```
+
+Rozhodnutí má být malé. U stavu zjednodušit neotevírejte celý systém znalostní báze. U stavu sloučit neslučujte celé portfolio pravidel. U návratu neobnovujte staré vyšetřování. Stačí nejbližší pracovní místo.
+
+### Měřte cenu údržby
+
+Dlouhodobý rytmus není zdravý jen proto, že se položka nezlomila. Je zdravý tehdy, když její údržba stojí rozumně málo pozornosti.
+
+Použijte jednoduché skóre:
+
+```text
+Cena údržby:
+1 = kontrola proběhla skoro mimochodem v běžném rytmu
+2 = bylo potřeba krátké dohledání, ale bez zvláštní přípravy
+3 = kontrola vyžadovala samostatný seznam, vysvětlení nebo pomoc autora
+4 = kontrola se změnila v malou schůzku nebo novou analýzu
+5 = položka fakticky zakládá vlastní proces
+```
+
+První dlouhodobé review by mělo cílit na 1 nebo 2. Hodnota 3 není katastrofa, ale je to signál ke zjednodušení. Hodnota 4 nebo 5 znamená, že položka sice formálně přešla do dlouhodobého rytmu, ale prakticky si nese vlastní batoh procesů. A batohy v dokumentaci nikdo nechce, pokud zrovna nejde na výlet.
+
+Codyho komentář: jakmile jedna malá šablona potřebuje vlastní malý management, není to šablona. Je to mini produkt, který se tváří jako poznámka.
+
+### Neotevírejte nové metriky
+
+První dlouhodobé review svádí k otázce "jak poznáme, že to dlouhodobě funguje". To je dobrá otázka, ale špatná odpověď bývá nový dashboard, nové štítkování nebo nový export.
+
+Nejdřív použijte signály, které už v rytmu existují:
+
+- výsledek běžné údržby;
+- počet skutečných návratových signálů;
+- čas potřebný na kontrolu;
+- počet míst, kde položka existuje duplicitně;
+- schopnost nového člověka položku najít a použít;
+- rozhodnutí ponechat, zjednodušit, sloučit nebo otevřít návrat.
+
+Novou metriku přidávejte jen tehdy, když bez ní nejde udělat konkrétní rozhodnutí. "Bylo by zajímavé vědět" není důvod. "Bez toho nevíme, jestli sloučit dvě revizní karty" už důvod je.
+
+Privacy-first hranice je jednoduchá: neměřte jednotlivce, pokud řešíte použitelnost pravidla. U většiny týmových standardů stačí anonymizovaný závěr typu "při jednom reálném review se člověk vrátil do archivní šablony". Nepotřebujete seznam lidí, screenshoty jejich práce ani záznamy obrazovky. Ano, i interní přehnané měření umí být otravné. Jen nenosí reklamní banner.
+
+### Karta prvního dlouhodobého review
+
+```text
+Položka:
+
+Dlouhodobý rytmus:
+
+Datum prvního dlouhodobého review:
+
+Kdo review provedl:
+
+Běžný signál:
+
+Návratový signál:
+
+Co se stalo v reálné práci:
+
+Cena údržby:
+- 1 / 2 / 3 / 4 / 5
+
+Výsledný stav:
+- ponechat / zjednodušit / sloučit / otevřít návrat
+
+Rozhodovací věta:
+
+Co neměníme:
+
+Co mažeme, anonymizujeme nebo slučujeme:
+
+Kanonický zápis:
+
+Další běžný návrat:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Rozcestník review šablon.
+
+Dlouhodobý rytmus:
+Měsíční údržba znalostní báze.
+
+Datum prvního dlouhodobého review:
+2026-06-02.
+
+Kdo review provedl:
+Editor znalostní báze.
+
+Běžný signál:
+Rozcestník vede na aktuální zdroj pravdy.
+
+Návratový signál:
+Člověk při reálném review skončí v archivní šabloně.
+
+Co se stalo v reálné práci:
+Rozcestník byl použit při běžné měsíční kontrole a vedl na aktuální šablonu.
+
+Cena údržby:
+1.
+
+Výsledný stav:
+Ponechat.
+
+Rozhodovací věta:
+Rozcestník zůstává v měsíční údržbě znalostní báze bez zvláštního dohledu.
+
+Co neměníme:
+Nezakládáme nový report ani samostatný checklist pro opravenou položku.
+
+Co mažeme, anonymizujeme nebo slučujeme:
+Mažeme osobní připomínku z doby ověřování.
+
+Kanonický zápis:
+Aktuální pravidlo v kartě měsíční údržby.
+
+Další běžný návrat:
+Příští měsíční údržba znalostní báze.
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte převodní větu do dlouhodobého rytmu.
+2. Minuta 2: ověřte, že položka je ve stejném rytmu jako podobné položky.
+3. Minuta 3: zkontrolujte běžný signál.
+4. Minuta 4: ověřte, jestli nastal návratový signál.
+5. Minuta 5: ohodnoťte cenu údržby od 1 do 5.
+6. Minuta 6: vyberte stav ponechat, zjednodušit, sloučit nebo otevřít návrat.
+7. Minuta 7: zapište jednu rozhodovací větu.
+8. Minuta 8: smažte nebo anonymizujte zbytky dočasné stopy.
+
+Výstup:
+
+```text
+Položka [název] v prvním dlouhodobém review dopadla jako [stav]. Údržba stojí [1-5], další krok je [žádný / zjednodušení / sloučení / návratová karta] a zůstává jen [kanonické minimum].
+```
+
+### Checklist prvního dlouhodobého review
+
+- Proběhlo review v existujícím rytmu místo zvláštní kontroly?
+- Kontrolovali jsme současnou použitelnost, ne historii opravy?
+- Šla položka najít bez autora původní změny?
+- Byl jasný běžný signál?
+- Bylo jasné, zda nastal návratový signál?
+- Vybrali jsme jeden ze čtyř stavů?
+- Nezůstalo mlhavé "sledovat dál pro jistotu"?
+- Změřili jsme cenu údržby?
+- Pokud byla cena vysoká, otevřeli jsme zjednodušení místo dalšího dohledu?
+- Nepřidali jsme novou metriku, export ani sledování lidí bez rozhodovacího důvodu?
+- Smazali jsme osobní připomínky, dočasné screenshoty a pomocné kopie?
+- Zůstal jeden kanonický zápis a jeden další běžný návrat?
+
+První dlouhodobé review je úspěšné tehdy, když z něj nevznikne nový malý projekt. Buď položka zůstane klidně v rytmu, nebo dostane přesně pojmenovaný zásah. V obou případech se systém posune dopředu bez toho, aby si z každé opravené věci stavěl památníček.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WM o prvním dlouhodobém review po převodu do rytmu: kontrola současné použitelnosti, čtyři výsledné stavy, cena údržby, privacy-first hranice bez nových metrik, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o uzavření druhého běžného použití pravidla do běžného rytmu: stavová věta, čtyři způsoby uzavření, správné kanonické místo, privacy-first úklid ověřovací stopy, karta a checklist.
 - 2026-06-02: Doplněna Příloha WL o převodu po první běžné údržbě do dlouhodobého rytmu: jeden domov rytmu, běžný a návratový signál, přepis jazyka z opravy na údržbu, levná údržba, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WK o uzavření první běžné údržby po malé opravě: stavová věta, kanonické místo, čtyři typy uzavření, úklid dočasné stopy, zákaz druhé kontroly jen pro jistotu, karta, mini workshop a checklist.
