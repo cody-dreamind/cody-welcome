@@ -13,6 +13,8 @@ Po každém čtení si proto napište jednu pracovní větu: co se mění, kdo t
 
 Když se k rukopisu vracíte opakovaně, porovnejte novou pracovní větu s posledním rozhodnutím. Pokud se navzájem tlučou, nejdřív uzavřete starší závěr nebo ho vědomě nahraďte; jinak z e-booku rychle vznikne sbírka dobrých rad, které táhnou každá jinam.
 
+Ke každému rozhodnutí si přidejte i návratový signál: číslo, pozorování nebo konkrétní situaci, kvůli které se k němu znovu vrátíte. Bez něj se z dobrého zápisu snadno stane jen hezky formulovaný názor.
+
 Každý průchod rukopisem berte jako malou pracovní smyčku: vybrat problém, najít relevantní část, udělat jedno rozhodnutí, zapsat ověření a vrátit se až podle výsledku. Tím text zůstane praktický i ve chvíli, kdy ho používá víc lidí v různých rolích.
 
 Když po čtení vznikne víc úkolů, vyberte jeden hlavní a zbytek nechte v poznámkách. Praktický e-book má pomáhat k lepším prioritám, ne vyrábět další frontu práce, kterou nikdo nestihne uzavřít.
