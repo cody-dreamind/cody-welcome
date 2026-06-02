@@ -163081,8 +163081,219 @@ Potvrzený vzor [popis] řešíme jednou malou opravou v [pracovní místo]. Mě
 
 Malá oprava po opakovaném návratu je dobrá, když se po ní věc vrátí do ticha. Ne proto, že ji tým ignoruje, ale proto, že přestala vyrábět skrytou práci. Pokud oprava potřebuje vlastní dohled, nové exporty a pravidelné připomínání, nebyla malá. Byla to nová položka v převleku. A převleky v provozu dlouho nevydrží, protože tabulka je nakonec vždycky práskne.
 
+## Příloha WH: Ověření malé opravy po opakovaném návratu
+
+Malá oprava po opakovaném návratu není hotová v okamžiku, kdy ji někdo zapíše do formuláře, šablony, navigace nebo pracovního pravidla. Hotová je až tehdy, když projde prvním běžným použitím a tým vidí, jestli opravdu přerušila potvrzený vzor. Bez ověření se z malé opravy stane další dobrý úmysl v systému. Možná pomohla, možná ne, ale nikdo to neví dost přesně na další rozhodnutí.
+
+Ověření nemá být nový audit. Smyslem není dokazovat, že tým pracoval správně. Smyslem je zjistit, jestli se opakovaná skrytá práce zmenšila bez toho, aby oprava vytvořila novou práci jinde.
+
+Rozhodovací otázka:
+
+```text
+Při prvním běžném použití po malé opravě zmizel potvrzený důvod návratu, nebo se jen přesunul na jiné místo?
+```
+
+Pokud otázku nahradíte pocitem "vypadá to lépe", ověření bude slabé. Lepší text, hezčí pole nebo čistší šablona jsou dobré jen tehdy, když přestanou vyrábět stejný návrat.
+
+### Ověřujte původní vzor, ne krásu opravy
+
+Začněte tím, že si vedle sebe položíte tři věty:
+
+```text
+Potvrzený vzor před opravou:
+
+Malá oprava:
+
+Přijatelný výsledek při prvním běžném použití:
+```
+
+Příklad:
+
+```text
+Potvrzený vzor před opravou:
+V relevantních poptávkách chybělo časování projektu a obchod musel ručně doptávat rozhodovací horizont.
+
+Malá oprava:
+Nápověda u otázky ve formuláři nově říká: "Kdy potřebujete rozhodnout nebo spustit první krok? Stačí přibližně."
+
+Přijatelný výsledek:
+U dalších pěti relevantních poptávek obchod nebude muset základní časování ručně doptávat u více než jedné.
+```
+
+Tento zápis chrání tým před dvěma úniky. První únik je hodnotit provedení opravy místo jejího dopadu. Druhý únik je otevřít nové téma, které se při ověření objevilo, a tím neuzavřít původní vzor.
+
+Nové téma si zapište stranou. Ověření malé opravy má odpovědět na původní otázku.
+
+### Čtyři výsledné stavy ověření
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Oprava stačila: potvrzený vzor se nevrátil v přijatelném rozsahu.
+- Oprava potřebuje jedno doladění: vzor se zmenšil, ale je vidět konkrétní drobné tření v tom samém pracovním místě.
+- Oprava mířila vedle: vzor se nezmenšil, protože příčina leží jinde.
+- Položka už není pro nízkou pozornost: oprava ukázala, že téma potřebuje běžnou údržbu nebo širší rozhodnutí.
+
+Stav "ještě nevíme" používejte jen tehdy, když běžné použití opravdu nenastalo. Pokud nastalo a signál je nepohodlný, pojmenujte ho. Nejasnost často není nedostatek dat, ale nechuť říct, že oprava nestačila.
+
+#### Oprava stačila
+
+Když oprava stačila, nedělejte kolem ní vítězné kolečko v podobě dalšího sledování. Přepište stav položky:
+
+```text
+Malá oprava ověřena při běžném použití. Původní vzor se nevrátil v přijatelném rozsahu. Položka zůstává v nízké pozornosti s původním návratovým signálem.
+```
+
+Pak zavřete ověřovací poznámku. Pokud kvůli opravě vznikla dočasná tabulka, komentář nebo ruční seznam příkladů, smažte ho nebo zkraťte na rozhodovací větu. Ověřená oprava nemá v systému držet důkazy, které už neslouží rozhodnutí.
+
+#### Oprava potřebuje jedno doladění
+
+Jedno doladění je přípustné, pokud splňuje tři podmínky:
+
+- zůstává ve stejném pracovním místě;
+- nemění typ opravy;
+- nevyžaduje nové údaje, nový nástroj ani nový vlastnický proces.
+
+Příklad: nápověda ve formuláři pomohla, ale lidé stále pletou start projektu s interním rozhodnutím. Doladění může být jeden příklad odpovědi. Není to důvod přidat povinné pole, scoring a report pro obchod.
+
+Zápis:
+
+```text
+Oprava částečně stačila. Dolaďujeme jen [konkrétní drobnost] ve stejném místě. Původní rozsah zůstává zavřený.
+```
+
+Doladění musí mít další běžné ověření. Pokud se ani po něm vzor nezmenší, neprodlužujte sérii drobných úprav. Pravděpodobně nemáte malé tření, ale špatně zvolené místo zásahu.
+
+#### Oprava mířila vedle
+
+Když oprava mířila vedle, nepřidávejte k ní další vrstvu. Nechte ji buď vrátit zpět, nebo ji ponechte jen tehdy, pokud sama o sobě zlepšila srozumitelnost bez vedlejší ceny. Hlavní práce je přerámovat příčinu.
+
+Krátká šablona:
+
+```text
+Oprava nezmenšila původní vzor, protože:
+
+Co jsme si mysleli:
+
+Co běžné použití ukázalo:
+
+Nové nejbližší pracovní místo:
+
+Co s původní opravou:
+- ponechat / vrátit / upravit jen kvůli srozumitelnosti
+```
+
+Tady je důležité neztratit disciplínu. Neúspěšná malá oprava není pozvánka k velkému projektu. Je to signál, že příčina leží jinde. Další krok má začít novou rozhodovací otázkou, ne automatickým rozšířením původního řešení.
+
+#### Položka už není pro nízkou pozornost
+
+Někdy ověření ukáže, že malá oprava nestačí, protože téma má větší provozní váhu. Opakovaný návrat nebyl lokální tření. Byl to signál, že položka už nemá být v nízké pozornosti.
+
+Takový výsledek zapište bez dramatu:
+
+```text
+Položka se vrací z nízké pozornosti do běžné údržby, protože malé opravy neodstraňují opakovaný vzor a téma vytváří pravidelnou skrytou práci.
+```
+
+Tím se neotevírá celý historický rozsah. Otevírá se jen rozhodnutí, jaké místo má položka nově v provozním rytmu.
+
+### Privacy-first ověření
+
+Ověření malé opravy má často stačit z existujících signálů. Nepřidávejte tracking jen proto, že chcete mít pěknější důkaz. U malých oprav obvykle stačí:
+
+- ruční kontrola několika dalších průchodů;
+- agregovaná poznámka bez kopírování celých zákaznických zpráv;
+- krátký záznam v rozhodovacím logu;
+- kontrola v existujícím review rytmu;
+- porovnání s původním přijatelným výsledkem.
+
+Pokud při ověření vznikly pomocné podklady, nastavte jim konec:
+
+```text
+Dočasný důkaz:
+
+K čemu sloužil:
+
+Co z něj zůstává v rozhodovacím záznamu:
+
+Co mažeme nebo anonymizujeme:
+
+Datum úklidu:
+```
+
+Privacy-first hodnota tady není jen v tom, že se nesbírají nová data. Je i v tom, že ověřovací stopa nezůstane v systému déle, než potřebuje rozhodnutí.
+
+### Karta ověření malé opravy
+
+```text
+Položka:
+
+Kanonické místo:
+
+Potvrzený vzor před opravou:
+
+Malá oprava:
+
+První běžné použití:
+
+Přijatelný výsledek:
+
+Co se reálně stalo:
+
+Výsledný stav:
+- oprava stačila / jedno doladění / mířila vedle / návrat do běžné údržby
+
+Rozhodnutí:
+
+Co se dál nemění:
+
+Co zůstává zavřené z původní historie:
+
+Privacy-first výsledek:
+
+Dočasné podklady k úklidu:
+
+Vlastník:
+
+Datum dalšího návratu:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte potvrzený vzor a malou opravu.
+2. Minuta 2: přečtěte přijatelný výsledek.
+3. Minuta 3: popište první běžné použití bez hodnocení lidí.
+4. Minuta 4: řekněte, co se reálně stalo.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: napište, co se dál nemění.
+7. Minuta 7: rozhodněte, které pomocné podklady se smažou nebo zkrátí.
+8. Minuta 8: zapište další návratový signál nebo uzavření.
+
+Výstup:
+
+```text
+Malou opravu [popis] po prvním běžném použití uzavíráme stavem [stav]. Původní vzor [zmizel / zmenšil se / trvá / ukázal větší téma]. Dál neměníme [rozsah] a ověřovací stopu uklízíme takto: [úklid].
+```
+
+### Checklist ověření malé opravy
+
+- Ověřujeme původní potvrzený vzor, ne jen vzhled nebo pocit z opravy?
+- Nastalo skutečné běžné použití?
+- Máme předem napsaný přijatelný výsledek?
+- Víme, co se reálně stalo bez obviňování člověka nebo týmu?
+- Vybrali jsme jeden ze čtyř stavů?
+- Pokud oprava potřebuje doladění, zůstává ve stejném místě a stejném typu změny?
+- Pokud oprava mířila vedle, pojmenovali jsme nové nejbližší pracovní místo?
+- Pokud se položka vrací do běžné údržby, neotevíráme automaticky celou historii?
+- Nepřidali jsme nový tracker, export ani osobní údaj jen kvůli ověření?
+- Uklidili jsme dočasné podklady, které už neslouží rozhodnutí?
+- Je zapsané, co se dál nemění?
+- Má položka jasný další návratový signál, nebo je ověření zavřené?
+
+Ověření malé opravy je dobré, když po něm tým nemusí dál diskutovat, co se vlastně stalo. Buď oprava stačila, potřebuje jedno přesné doladění, mířila vedle, nebo ukázala větší provozní téma. Všechny čtyři výsledky jsou použitelné. Nepoužitelný je jen mlhavý pocit, že "to asi pomohlo", zatímco v systému zůstane další poznámka, další tabulka a další tichý rest.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WH o ověření malé opravy po opakovaném návratu: kontrola původního vzoru při prvním běžném použití, čtyři výsledné stavy, jedno doladění bez rozšíření rozsahu, privacy-first úklid ověřovací stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o druhém běžném použití pravidla po uzavřené systémové opravě: sledování normálnosti místo samotné správnosti, návrat starého problému, dočasné péče a historického jazyka, malé úpravy místa, privacy-first úklid ověřovací stopy, karta a checklist.
 - 2026-06-02: Doplněna Příloha WG o převodu platného vzoru z opakovaného návratu do jedné malé opravy: oddělení vzoru od nápadů, výběr nejbližšího pracovního místa, jeden typ změny, ochrana před otevřením historie, privacy-first hranice, ověření při dalším běžném použití, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WF o opakovaném návratu k položce v nízké pozornosti: porovnání návratů podle důvodu, čtyři stavy opakovaného návratu, zpřesnění návratového signálu, privacy-first kontrola důkazů, karta, mini workshop a checklist.
