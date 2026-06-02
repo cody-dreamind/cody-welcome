@@ -163498,8 +163498,275 @@ Opravu [název] uzavíráme do běžné údržby. Běžné pravidlo je [pravidlo
 
 Uzavřená malá oprava má vypadat obyčejně. Člověk použije pracovní místo, najde aktuální pravidlo a nemusí znát celou historii návratů, falešných poplachů ani ověřovacích podkladů. To je dobrý konec: méně vysvětlování, méně datové stopy a stabilnější práce.
 
+## Příloha WJ: První běžná údržba po uzavřené malé opravě
+
+První běžná údržba po uzavřené malé opravě je citlivý okamžik. Oprava už nemá zvláštní dohled, ale lidé si často ještě pamatují její historii. Když se kontrola udělá příliš slavnostně, tým nechtěně obnoví výjimečný režim. Když se neudělá vůbec, může se starý problém tiše vrátit do pracovního místa.
+
+Cílem není znovu ověřovat opravu. Cílem je zjistit, jestli se opravená položka chová jako normální součást běžné údržby. Použijte stejný rytmus, stejná vstupní data a stejný jazyk jako u ostatních položek. Žádná speciální tabulka. Žádný "ještě raději dvakrát zkontrolujeme". Údržba má potvrdit normálnost, ne vyrábět další příběh.
+
+Začněte větou:
+
+```text
+Položku kontrolujeme v běžném rytmu [rytmus]. Zajímá nás jen to, jestli aktuální pravidlo funguje při běžné práci a jestli se objevil návratový signál.
+```
+
+Příklad:
+
+```text
+Rozcestník review šablon kontrolujeme v běžném měsíčním rytmu. Zajímá nás jen to, jestli aktuální šablona vede novou práci a jestli se někdo znovu dostal do archivní šablony jako do aktivního místa.
+```
+
+Tato věta drží dvě hranice. První: kontrola je běžná. Druhá: návrat řešíme jen tehdy, když nastal zapsaný signál, ne když má někdo chuť znovu vyprávět celou historii opravy.
+
+### Kontrolujte současný průchod
+
+První otázka nemá znít "pamatujeme si, proč jsme to opravovali". Má znít:
+
+```text
+Co se stalo při posledním běžném použití položky?
+```
+
+Hledejte současný pracovní průchod:
+
+- poslední reálné review;
+- poslední použití šablony;
+- poslední poptávku přes upravený formulář;
+- poslední aktualizaci rozcestníku;
+- poslední předání novému člověku;
+- poslední běžnou kontrolu obsahu, dat nebo procesu.
+
+Když žádný současný průchod neexistuje, nevyvolávejte umělý test jen proto, aby se karta naplnila. Zapište:
+
+```text
+Položka neměla od uzavření běžné použití. Zůstává v rytmu [rytmus] a další kontrola proběhne až po reálném průchodu nebo při nejbližší plánované revizi.
+```
+
+To je platný výsledek. Údržba se nemá živit sama sebou.
+
+### Použijte běžné otázky
+
+První běžná údržba po malé opravě potřebuje jednoduché otázky:
+
+```text
+Je kanonické místo pořád jasné?
+Použil člověk aktuální pravidlo bez vysvětlování historie?
+Objevil se zapsaný návratový signál?
+Vznikla nová datová stopa, která není potřeba?
+Stačí běžný rytmus údržby?
+```
+
+Pokud si tým začne přidávat otázky typu "neměli bychom raději zkontrolovat i všechny podobné případy", zastavte to. Podobné případy patří do samostatného podnětu nebo do plánované portfoliové kontroly, ne do první běžné údržby jedné opravené položky.
+
+Příklad:
+
+```text
+Kontrolujeme archivní review šablony. Neprocházíme všechny historické šablony v celé znalostní bázi. Pokud se ukáže, že archivní značení je problém i jinde, založíme samostatný podnět pro údržbu indexu.
+```
+
+Tím chráníte rozsah i důvěru týmu. Jedna údržba má uzavřít jeden stav, ne otevřít katalog všech možných příbuzných starostí.
+
+### Čtyři výsledné stavy
+
+Po první běžné údržbě vyberte jeden stav.
+
+#### Běžně funguje
+
+Položka se chová jako normální součást systému. Člověk našel aktuální pravidlo, nepoužil starý materiál, návratový signál nenastal a nevznikla nová zbytečná evidence.
+
+Zápis:
+
+```text
+Položka po první běžné údržbě funguje normálně. Zůstává v rytmu [rytmus], bez zvláštního dohledu.
+```
+
+#### Drobné doladění v běžném místě
+
+Položka funguje, ale jedno místo potřebuje lokální zpřesnění: kratší název, jasnější stav, lepší odkaz, odstranění staré poznámky nebo doplnění jedné věty. Doladění nesmí otevřít zvláštní ověřovací režim.
+
+Zápis:
+
+```text
+Položka funguje, ale v kanonickém místě upravujeme [jedna drobnost]. Rytmus se nemění.
+```
+
+#### Návratový signál nastal
+
+Objevil se přesně ten signál, který byl zapsaný při uzavření malé opravy. V tu chvíli nejde o běžné doladění. Otevřete návrat jen v nejbližším pracovním místě a držte se původního signálu.
+
+Zápis:
+
+```text
+Návratový signál nastal: [konkrétní situace]. Otevíráme návrat v místě [místo], ne celou historii opravy.
+```
+
+#### Údržba je sama moc těžká
+
+Položka se sice nerozbila, ale její běžná údržba vyžaduje nečekaně moc ruční práce, vysvětlování nebo datové evidence. To je jiný problém než návrat staré chyby. Neřešte ho rozšířením kontroly; zapište kandidáta na zjednodušení.
+
+Zápis:
+
+```text
+Položka se nerozbila, ale běžná údržba je příliš těžká kvůli [důvod]. Zakládáme podnět na zjednodušení údržby, ne návrat malé opravy.
+```
+
+### Nechte historii zavřenou
+
+Historie malé opravy se má při první běžné údržbě objevit jen jako krátká hranice:
+
+```text
+Původní historie zůstává zavřená. Kontrolujeme současné použití a návratový signál.
+```
+
+Nepotřebujete znovu číst staré screenshoty, exporty, dlouhé poznámky ani debaty. Pokud bez nich nikdo neví, co má dělat, problém není v paměti, ale v kanonickém místě. Pravidlo je potřeba přepsat tak, aby fungovalo bez výkladu.
+
+Praktický test:
+
+- nový člověk najde aktuální pravidlo bez znalosti historie;
+- starý člověk nemusí vysvětlovat, co se kdysi pokazilo;
+- karta údržby neobsahuje odkazy na dočasné důkazy;
+- návratový signál je konkrétnější než "zkontrolovat znovu";
+- běžný rytmus se kvůli jedné položce nezahušťuje.
+
+Když některý bod neplatí, opravte pracovní místo. Neobnovujte minulý ověřovací režim.
+
+### Privacy-first kontrola první běžné údržby
+
+Privacy-first kontrola tady není právní divadlo. Je to ochrana před tím, aby se uzavřená oprava neproměnila ve stálý sběr důkazů.
+
+Ptejte se:
+
+- Nevracíme do údržby podklady, které už měly být smazané?
+- Nevznikl nový seznam lidí, kteří položku použili špatně?
+- Nestačí agregovaná poznámka místo konkrétních jmen a záznamů?
+- Nepřidáváme nový tracker jen kvůli jednomu návratovému signálu?
+- Je možné signál poznat z běžné práce bez dalšího sledování?
+- Má dočasná poznámka jasný konec?
+
+Příklad dobrého privacy-first zápisu:
+
+```text
+Při běžné údržbě zapisujeme jen stav položky a anonymizovaný závěr. Neuchováváme screenshoty použití ani jména lidí, kteří narazili na archivní materiál.
+```
+
+Codyho komentář: jestli údržba potřebuje vlastní údržbu, něco se pokazilo. A jestli k tomu ještě sbírá jména lidí, kteří klikli vedle, pokazilo se to s bonusem.
+
+### Karta první běžné údržby po malé opravě
+
+```text
+Položka:
+
+Uzavřená malá oprava:
+
+Běžný rytmus:
+
+Poslední reálné použití:
+
+Kanonické místo:
+
+Aktuální pravidlo:
+
+Návratový signál z uzavření:
+
+Nastal návratový signál?
+
+Výsledný stav:
+- běžně funguje / drobné doladění / návratový signál nastal / údržba je moc těžká
+
+Jedna lokální změna, pokud je potřeba:
+
+Co z historie zůstává zavřené:
+
+Privacy-first úklid nebo potvrzení:
+
+Další běžný návrat:
+
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Rozcestník review šablon.
+
+Uzavřená malá oprava:
+Archivní štítek a odkaz na aktuální šablonu.
+
+Běžný rytmus:
+Měsíční údržba rozcestníku.
+
+Poslední reálné použití:
+Příprava červnového review.
+
+Kanonické místo:
+Rozcestník review šablon ve znalostní bázi.
+
+Aktuální pravidlo:
+Archivní šablona nesmí vést novou práci a musí odkazovat na aktuální zdroj pravdy.
+
+Návratový signál z uzavření:
+Stejný návrat do archivní šablony při dvou běžných review.
+
+Nastal návratový signál?
+Ne.
+
+Výsledný stav:
+Běžně funguje.
+
+Jedna lokální změna, pokud je potřeba:
+Žádná.
+
+Co z historie zůstává zavřené:
+Nepřepisujeme starou kartu ověření ani nepřidáváme další dohled.
+
+Privacy-first úklid nebo potvrzení:
+Žádné nové screenshoty ani osobní poznámky nevznikly.
+
+Další běžný návrat:
+Další měsíční údržba rozcestníku.
+
+Vlastník:
+Editor rukopisu.
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: pojmenujte položku a běžný rytmus.
+2. Minuta 2: najděte poslední reálné použití.
+3. Minuta 3: přečtěte aktuální pravidlo v kanonickém místě.
+4. Minuta 4: ověřte, jestli nastal návratový signál.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: zapište případnou jednu lokální změnu.
+7. Minuta 7: potvrďte, co z historie zůstává zavřené.
+8. Minuta 8: udělejte privacy-first kontrolu dočasných stop.
+
+Výstup:
+
+```text
+Položka [název] prošla první běžnou údržbou po malé opravě. Stav je [stav]. Rytmus [rytmus] zůstává / mění se na [změna pouze pokud je nutná]. Historie opravy zůstává zavřená a datová stopa je [stav].
+```
+
+### Checklist první běžné údržby
+
+- Kontrolujeme položku v běžném rytmu, ne ve zvláštním režimu?
+- Máme poslední reálné použití, nebo jasně víme, že zatím nenastalo?
+- Je kanonické místo dohledatelné bez znalosti historie?
+- Je aktuální pravidlo napsané provozním jazykem?
+- Ověřili jsme návratový signál přesně tak, jak byl zapsaný?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Neotevřeli jsme celou historii opravy kvůli jednomu dojmu?
+- Pokud je potřeba změna, je lokální a malá?
+- Pokud nastal návratový signál, otevíráme jen nejbližší pracovní místo?
+- Pokud je údržba moc těžká, zapisujeme zjednodušení místo dalšího dohledu?
+- Nevznikl nový tracker, export, screenshot ani seznam lidí?
+- Je zapsané, co zůstává zavřené?
+- Má položka další běžný návrat v existujícím rytmu?
+
+První běžná údržba má být skoro nudná. To je její úspěch. Položka se zkontroluje, zapíše se stav, uklidí se případná drobnost a práce pokračuje dál bez toho, aby se stará oprava znovu stala hlavním hrdinou systému.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WJ o první běžné údržbě po uzavřené malé opravě: kontrola současného průchodu, běžné otázky, čtyři výsledné stavy, zavřená historie opravy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WI o uzavření ověřené malé opravy do běžné údržby: přepis opravy do běžného pravidla, ukončení zvláštního dohledu, návratový signál, privacy-first úklid ověřovací stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WH o ověření malé opravy po opakovaném návratu: kontrola původního vzoru při prvním běžném použití, čtyři výsledné stavy, jedno doladění bez rozšíření rozsahu, privacy-first úklid ověřovací stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o druhém běžném použití pravidla po uzavřené systémové opravě: sledování normálnosti místo samotné správnosti, návrat starého problému, dočasné péče a historického jazyka, malé úpravy místa, privacy-first úklid ověřovací stopy, karta a checklist.
