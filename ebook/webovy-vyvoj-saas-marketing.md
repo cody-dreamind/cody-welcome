@@ -161683,8 +161683,176 @@ Položka [název] je po druhé běžné kontrole uzavřená jako [stav]. Výsled
 
 Uzavření druhé běžné kontroly je malý, ale důležitý akt provozní hygieny. Tým tím říká: výsledek jsme viděli, rozhodnutí jsme zapsali, stopu jsme uklidili a dál se vracíme k normální práci. To je přesně ten typ neokázalé disciplíny, která drží web, SaaS i marketing použitelný déle než jednu nadšenou iteraci.
 
+## Příloha WC: Převod stabilní položky z dlouhodobé údržby do nízké pozornosti
+
+Po dvou klidných běžných kontrolách už položka často nepotřebuje dlouhodobou údržbu ve smyslu aktivního sledování. Potřebuje spíš nízkou pozornost: zůstat dostupná, srozumitelná a napojená na běžný rytmus, ale bez toho, aby kolem sebe dál vyráběla práci.
+
+To je jemný rozdíl. Dlouhodobá údržba pořád říká "tuto věc si hlídáme". Nízká pozornost říká "tato věc je normální součást systému a ozve se jen při konkrétním signálu". Pro web, SaaS i marketing je to zdravé, protože každá aktivně hlídaná položka má provozní cenu. Někdo ji musí číst, připomínat, vysvětlovat a obhajovat. Když takových položek přibývá, tým začne udržovat vlastní údržbu. To je krásně absurdní, ale fakt dost drahé.
+
+Pracovní otázka:
+
+```text
+Může tato položka po dvou klidných kontrolách přejít do nízké pozornosti, aniž ztratíme schopnost poznat skutečný návratový signál?
+```
+
+Dobrá odpověď není "ano, už na to zapomeneme". Dobrá odpověď je "ano, vracíme ji do normální práce a necháváme jen jasnou podmínku návratu". Nízká pozornost není zapomnění. Je to provozní dospělost.
+
+### Kdy položka smí do nízké pozornosti
+
+Položka je kandidát na nízkou pozornost, když splňuje tři podmínky:
+
+- při dvou běžných kontrolách nepřinesla nové rozhodnutí;
+- její kanonické místo je jasné a používá se bez vysvětlování historie;
+- návratový signál je konkrétní, vzácný a navázaný na reálnou práci.
+
+Příklad:
+
+```text
+Položka:
+Checklist pro poptávkový formulář.
+
+Co se stalo:
+Po první i druhé běžné kontrole nebyla potřeba změna. Obchod ví, proč jsou pole nastavená právě takto, a poslední úpravy nevyžadují další dohled.
+
+Návratový signál:
+K tématu se vrátíme jen tehdy, když u pěti relevantních poptávek po sobě chybí stejný údaj nutný pro první odpověď zákazníkovi.
+```
+
+To je položka pro nízkou pozornost. Není mrtvá, není archivovaná, jen už nemá nárok na samostatné místo v hlavě týmu.
+
+Naopak položka do nízké pozornosti nepatří, pokud se pořád musí vysvětlovat její účel, pokud její výsledek stojí na jednom člověku, nebo pokud návratový signál zní jako "kdyby se něco dělo". To není signál. To je mlha v pracovním sešitě.
+
+### Přepište stav položky
+
+Nízká pozornost potřebuje krátký stavový zápis. Ten má říct, kde položka žije, kdy se běžně potká, a kdy se otevře mimo rytmus.
+
+Šablona:
+
+```text
+Položka [název] přechází po dvou klidných kontrolách do nízké pozornosti. Zůstává v [kanonické místo] a objevuje se jen v [běžný rytmus]. Mimo rytmus ji otevíráme pouze při [návratový signál].
+```
+
+Příklady:
+
+```text
+Položka "CTA u produktové stránky" přechází po dvou klidných kontrolách do nízké pozornosti. Zůstává v checklistu produktové stránky a objevuje se jen při měsíčním web review. Mimo rytmus ji otevíráme pouze při opakovaném nesouladu mezi textem CTA a reálným obchodním rozhovorem.
+```
+
+```text
+Položka "export podkladů pro marketing" přechází do nízké pozornosti. Zůstává v provozní kartě kampaní a kontroluje se jen při přípravě nové kampaně. Mimo rytmus ji otevíráme pouze tehdy, když export začne obsahovat osobní údaje, které pro rozhodnutí nepotřebujeme.
+```
+
+Druhá ukázka je privacy-first důležitá. Nízká pozornost neznamená, že datová stopa může žít vlastním životem. Naopak: když se položka přestane aktivně řešit, má mít ještě čistší hranici toho, co nesbírá, neexportuje a nepředává.
+
+### Snižte viditelnost, ne odpovědnost
+
+Převod do nízké pozornosti často selže ve dvou opačných směrech. Buď tým položku nechá příliš viditelnou a pořád ji probírá, i když nepřináší rozhodnutí. Nebo ji úplně odloží a za půl roku nikdo neví, kde leží odpovědnost.
+
+Správný převod snižuje viditelnost, ale nechává odpovědnost:
+
+- položka mizí ze samostatného dohledu;
+- zůstává v kanonickém místě;
+- vlastník není "hlídač", ale správce kontextu;
+- návratový signál je napsaný u položky, ne v hlavě člověka;
+- běžný rytmus je existující, ne nově založený.
+
+Příklad špatného převodu:
+
+```text
+Už to neřešíme, kdyby něco, někdo se ozve.
+```
+
+Příklad lepšího převodu:
+
+```text
+Položka zůstává v checklistu onboardingových e-mailů. Vlastníkem kontextu je produktový owner. Mimo kvartální review se otevře jen tehdy, když tři noví zákazníci po sobě odpoví na stejný e-mail dotazem, který měl být vyřešený přímo v textu.
+```
+
+V první verzi není odpovědnost. Ve druhé verzi není zbytečný dohled, ale existuje cesta zpět.
+
+### Uklidte poslední zbytky údržby
+
+Před převodem do nízké pozornosti projděte okolí položky. Hledejte malé pozůstatky aktivní údržby, které by dál tahaly pozornost.
+
+Typické zbytky:
+
+- kalendářová připomínka, která už nemá vlastní rozhodovací otázku;
+- ticket s komentářem "ještě sledovat";
+- tabulka s ručním výpisem kontrol;
+- interní poznámka, která opakuje historii místo aktuálního pravidla;
+- dočasný export, který vznikl kvůli kontrole;
+- starý screenshot, který už nechrání žádné rozhodnutí;
+- zmínka v onboardingovém materiálu, která z položky dělá větší téma, než je.
+
+Úklid neznamená smazat paměť. Znamená ponechat jen tu část paměti, která pomůže dalšímu rozhodnutí. U stabilní položky obvykle stačí kanonické znění, stav nízké pozornosti a návratový signál.
+
+Privacy-first pravidlo: nízká pozornost je dobrý okamžik na mazání pracovních podkladů. Pokud už položka není aktivně analyzovaná, nemají dál ležet po nástrojích pomocné exporty, screenshoty, kopie formulářů ani seznamy uživatelů. Minimum dat, minimum dramatu.
+
+### Karta převodu do nízké pozornosti
+
+```text
+Položka:
+
+Kanonické místo:
+
+Proč je kandidát na nízkou pozornost:
+
+Dvě klidné kontroly:
+- první:
+- druhá:
+
+Běžný rytmus, ve kterém zůstává:
+
+Vlastník kontextu:
+
+Návratový signál mimo rytmus:
+
+Co končí:
+- samostatný dohled / připomínka / ruční seznam / pracovní export / jiné
+
+Co zůstává:
+
+Co mažeme nebo zkracujeme:
+
+Privacy-first výsledek:
+
+Datum příštího normálního výskytu:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte položku a její kanonické místo.
+2. Minuta 2: ověřte, že první i druhá běžná kontrola byly klidné.
+3. Minuta 3: napište stavovou větu pro nízkou pozornost.
+4. Minuta 4: určete vlastníka kontextu bez nového dohledu.
+5. Minuta 5: zapište návratový signál mimo rytmus.
+6. Minuta 6: najděte a zrušte jeden zbytečný pozůstatek údržby.
+7. Minuta 7: potvrďte, že nevznikl nový tracker, export ani report.
+
+Výstup workshopu:
+
+```text
+Položka [název] přechází do nízké pozornosti. Zůstává v [kanonické místo], vrací se jen v [běžný rytmus] nebo při [návratový signál]. Končí [zbytečný dohled] a z datové stopy mažeme [minimum k úklidu].
+```
+
+### Checklist převodu do nízké pozornosti
+
+- Má položka dvě klidné běžné kontroly za sebou?
+- Je jasné kanonické místo, kde položka dál žije?
+- Nevyžaduje její použití znalost staré historie?
+- Má položka vlastníka kontextu, ne nového hlídače?
+- Je návratový signál konkrétní a navázaný na reálnou práci?
+- Končí samostatné připomínky, ruční seznamy a pomocné kontroly?
+- Zůstává položka v existujícím rytmu místo nového reportu?
+- Uklidili jsme exporty, screenshoty a poznámky bez další hodnoty?
+- Nevznikl nový tracker, nové pole ani nový sběr osobních údajů?
+- Umí tým jednou větou říct, proč položku teď neřeší častěji?
+
+Nízká pozornost je dobrý cíl pro stabilní části systému. Ne všechno musí být aktivní projekt, revize nebo hlídaná karta. Když položka funguje, má být dostupná, uklizená a připravená ozvat se jen při skutečném signálu. Zbytek času má tým raději stavět produkt, mluvit se zákazníky a dělat marketing, který nešpehuje lidi jen proto, že umí kliknout.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WC o převodu stabilní položky z dlouhodobé údržby do nízké pozornosti: podmínky převodu po dvou klidných kontrolách, stavová věta, snížení viditelnosti bez ztráty odpovědnosti, úklid zbytků údržby, privacy-first mazání podkladů, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WB o uzavření druhé běžné kontroly položky v dlouhodobé údržbě: uzavírací věta, správné kanonické místo, čtyři typy uzavření, úklid pomocné stopy, návratový signál bez nového dohledu, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WA o druhé běžné kontrole položky v dlouhodobé údržbě: kontrola bez historického vyprávění, stejné otázky jako u ostatních položek, čtyři výsledné stavy, skrytá cena údržby, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha VZ o dlouhodobé údržbě položky po první běžné kontrole: kanonické místo, vlastník, návratový signál, běžný rytmus, privacy-first datová hranice, karta, mini workshop a checklist.
