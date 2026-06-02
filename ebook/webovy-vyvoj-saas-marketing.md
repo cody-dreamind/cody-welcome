@@ -162405,8 +162405,222 @@ Návrat položky [název] uzavíráme stavem [způsob uzavření]. V kanonickém
 
 Dobré uzavření prvního návratu je krátké. Čtenář ani tým nemají dostat další vrstvu řízení. Mají dostat jasnou odpověď: položka je pořád tichá, potřebuje malou opravu, má lepší návratový signál, nebo už do nízké pozornosti nepatří. Všechno ostatní je šum, který se tváří jako péče.
 
+## Příloha WF: Opakovaný návrat k položce v nízké pozornosti
+
+První návrat k položce v nízké pozornosti může být šum, slabý signál nebo jeden platný důvod k malé opravě. Opakovaný návrat už je jiný typ situace. Neříká automaticky "položka selhala", ale říká "tichý stav už potřebuje lepší rozhodnutí". Pokud se stejná věc vrací podruhé nebo potřetí, tým má přestat debatovat o náladě a podívat se na vzor.
+
+Opakovaný návrat je nebezpečný hlavně tím, že se tváří jako několik malých epizod. Jednou se někdo zeptá na staré CTA, podruhé se objeví podobný problém v obchodním rozhovoru, potřetí se kvůli tomu dopíše poznámka do kampaně. Každý kus samostatně vypadá nevinně. Dohromady ale ukazuje, že položka v nízké pozornosti možná pořád vytváří práci.
+
+Rozhodovací otázka:
+
+```text
+Vrací se stejný důvod, stejný typ nejistoty nebo stejná skrytá práce?
+```
+
+Pokud ano, neřešte jen poslední návrat. Řešte vzor návratů. To pořád neznamená otevřít celou historii položky. Znamená to porovnat poslední návrat s posledním uzavřením a rozhodnout, jestli nízká pozornost ještě odpovídá realitě.
+
+### Porovnejte návraty podle důvodu
+
+Nepište dlouhou kroniku. Stačí malá tabulka nebo karta se třemi řádky:
+
+```text
+Návrat 1:
+Spouštěč:
+Výsledek uzavření:
+Co jsme nechali beze změny:
+
+Návrat 2:
+Spouštěč:
+Co je stejné:
+Co je nové:
+
+Pracovní závěr:
+```
+
+Příklad:
+
+```text
+Návrat 1:
+Jedna neúplná poptávka bez rozhodovacího termínu.
+
+Výsledek uzavření:
+Slabý signál, položka zůstala v nízké pozornosti. Další návrat až při opakování u relevantních poptávek.
+
+Návrat 2:
+Tři relevantní poptávky znovu neobsahují rozhodovací termín a obchod se doptává ručně.
+
+Co je stejné:
+Chybí stejný údaj a ruční doptávání zdržuje obchod.
+
+Co je nové:
+Signál už není izolovaný.
+
+Pracovní závěr:
+Otevíráme malou opravu nápovědy formuláře a neměníme celý kvalifikační proces.
+```
+
+Tento zápis je dost krátký na to, aby se dal udělat během běžné práce, a dost konkrétní na to, aby zabránil pocitovému sporu. Tým neřeší, jestli má někdo "zase obavy". Řeší, jestli se vrátil stejný pracovní důvod.
+
+### Čtyři stavy opakovaného návratu
+
+Po porovnání vyberte jeden ze čtyř stavů:
+
+- Opakovaný šum: návraty vypadají podobně jen povrchně, skutečný důvod je jiný.
+- Potvrzený slabý signál: důvod se vrací, ale pořád nestačí na změnu položky.
+- Platný vzor: stejný důvod se vrátil v běžné práci a má nejbližší místo opravy.
+- Špatný stav položky: položka už nemá být v nízké pozornosti.
+
+Každý stav má jiný další krok:
+
+```text
+Opakovaný šum:
+Položka zůstává v nízké pozornosti. Upřesníme, co se za návratový signál nepočítá.
+
+Potvrzený slabý signál:
+Položka zůstává v nízké pozornosti, ale návratový signál zpřesníme tak, aby příště rozhodl rychleji.
+
+Platný vzor:
+Otevíráme jednu malou opravu na nejbližším pracovním místě.
+
+Špatný stav položky:
+Přesouváme položku do běžné údržby, sloučení nebo archivu.
+```
+
+Důležité je nezaměnit platný vzor za špatný stav. Když se dvakrát vrátí stejný formulářový detail, často stačí opravit formulář. Není nutné znovu zavádět dlouhodobou údržbu celé oblasti. Naopak pokud se položka vrací pokaždé jiným způsobem a tým ji stejně musí ručně hlídat, malá oprava jen zakryje fakt, že nízká pozornost byla předčasná.
+
+### Nechte nízkou pozornost obhájit se prací
+
+Položka v nízké pozornosti nemusí dokazovat, že je dokonalá. Má dokazovat jen to, že nepotřebuje zvláštní režim. Opakovaný návrat proto nehodnoťte podle počtu zmínek v chatu, ale podle práce, kterou vyvolal.
+
+Zeptejte se:
+
+- Musel někdo kvůli položce dělat ruční kontrolu mimo běžný rytmus?
+- Vznikla nová dočasná tabulka, poznámka nebo soukromý checklist?
+- Musel tým znovu vysvětlovat stejnou hranici?
+- Zvětšila se datová stopa jen proto, aby se návrat vyhodnotil?
+- Je nejbližší oprava jasná, nebo se zase otevírá celé téma?
+
+Pokud jsou odpovědi klidné, položka může zůstat tichá. Pokud se kolem ní opakovaně tvoří obsluha, nízká pozornost není úspora. Je to jen přesunutá práce bez jména.
+
+Codyho komentář: tiché položky jsou jako dobré interní pravidlo. Nemusí být slavné, jen nesmí každý měsíc lézt na stůl s tím, že "jen drobnost". Drobnost, která chce pořád pozornost, už není drobnost. Je to malé provozní předplatné.
+
+### Zpřesněte návratový signál, ne celý systém
+
+U opakovaného návratu často pomůže upravit samotnou podmínku návratu. Původní signál mohl být příliš měkký, například "když se objeví zmatek v nabídce". Takový signál pozve každou nejistotu. Lepší je přepsat ho na konkrétní pracovní stav.
+
+Před:
+
+```text
+Položku otevřeme, když se objeví zmatek v nabídce.
+```
+
+Po:
+
+```text
+Položku otevřeme, když se ve dvou po sobě jdoucích relevantních obchodních rozhovorech objeví stejný nesoulad mezi názvem balíčku a tím, co zákazník očekává.
+```
+
+Před:
+
+```text
+Položku otevřeme, když support znovu řeší onboarding.
+```
+
+Po:
+
+```text
+Položku otevřeme, když se během jednoho měsíce objeví tři stejné support dotazy k prvnímu kroku onboardingu a odpověď už není pokrytá existující nápovědou.
+```
+
+Zpřesnění signálu je dobré, když se vrací nejistota, ale ne důkaz. Malá oprava je dobrá, když se vrací stejný důvod. Přesun z nízké pozornosti je dobrý, když se vrací samotná potřeba hlídat.
+
+### Privacy-first kontrola opakovaného návratu
+
+Opakovaný návrat svádí k novému měření: přidat pole do formuláře, značku do CRM, extra event do analytiky, export support dotazů nebo sdílenou tabulku se jmény zákazníků. To může být pohodlné, ale často je to přestřelené.
+
+Nejdřív použijte důkazy, které už přirozeně existují:
+
+- anonymizované shrnutí obchodních rozhovorů;
+- počet relevantních poptávek bez ukládání celých zpráv;
+- krátký výstup ze supportu bez jmen a osobních detailů;
+- kontrolu jedné stránky nebo jednoho formuláře;
+- existující provozní review místo nového sledování.
+
+Do karty opakovaného návratu ukládejte jen závěr, ne surový materiál. Pokud surový materiál potřebujete na krátké ověření, napište datum smazání nebo zkrácení hned při otevření návratu. Data bez konce mají zvláštní talent přežít důvod, kvůli kterému vznikla. Bohužel nejsou za to ani trochu vděčná.
+
+### Karta opakovaného návratu
+
+```text
+Položka:
+
+Kanonické místo:
+
+Stav před návratem:
+- nízká pozornost
+
+Poslední uzavření:
+
+Aktuální návrat:
+
+Co je stejné jako minule:
+
+Co je jiné:
+
+Vybraný stav:
+- opakovaný šum / potvrzený slabý signál / platný vzor / špatný stav položky
+
+Rozhodnutí:
+
+Nejbližší pracovní místo:
+
+Co z historie neotevíráme:
+
+Návratový signál po uzavření:
+
+Privacy-first hranice:
+
+Surový důkaz mažeme nebo zkracujeme kdy:
+
+Vlastník:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte poslední uzavření položky.
+2. Minuta 2: pojmenujte aktuální návrat jednou větou.
+3. Minuta 3: napište, co je stejné jako minule.
+4. Minuta 4: napište, co je skutečně nové.
+5. Minuta 5: vyberte jeden ze čtyř stavů opakovaného návratu.
+6. Minuta 6: určete nejbližší pracovní místo nebo potvrďte návrat do nízké pozornosti.
+7. Minuta 7: zkraťte datovou stopu na rozhodovací minimum.
+8. Minuta 8: napište nový stavový zápis.
+
+Výstup workshopu:
+
+```text
+Položka [název] se opakovaně vrátila kvůli [důvod]. Stav návratu je [stav]. Děláme [konkrétní rozhodnutí] v [nejbližší pracovní místo]. Neotevíráme [historie/oblast] a důkaz držíme jen jako [anonymizovaný závěr / krátký počet / žádný nový důkaz].
+```
+
+### Checklist opakovaného návratu
+
+- Porovnali jsme aktuální návrat s posledním uzavřením?
+- Je jasné, jestli se vrací stejný důvod, nebo jen podobný pocit?
+- Vybrali jsme jeden ze čtyř stavů opakovaného návratu?
+- Pokud jde o opakovaný šum, zpřesnili jsme, co se jako signál nepočítá?
+- Pokud jde o slabý signál, víme, jaký přirozený důkaz by ho příště potvrdil?
+- Pokud jde o platný vzor, otevřeli jsme jen jedno nejbližší pracovní místo?
+- Pokud jde o špatný stav položky, přesouváme ji do běžné údržby, sloučení nebo archivu?
+- Nevznikl nový trvalý dohled jen proto, že se položka vrátila podruhé?
+- Neotevřeli jsme celou historickou větev bez potřeby?
+- Použili jsme existující důkazy dřív než nové měření?
+- Jsou surové poznámky, jména, exporty a dočasné tabulky zkrácené nebo smazané?
+- Má položka po uzavření jasný návratový signál?
+
+Opakovaný návrat je dobrý sluha a špatný šéf. Má upozornit, že tichý stav možná potřebuje úpravu. Nemá týmu ukrást právo pracovat normálně. Když ho uzavřete přesně, nízká pozornost zůstane užitečná: položka se umí ozvat, ale neumí si bez důvodu založit vlastní malý provoz.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WF o opakovaném návratu k položce v nízké pozornosti: porovnání návratů podle důvodu, čtyři stavy opakovaného návratu, zpřesnění návratového signálu, privacy-first kontrola důkazů, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WE o uzavření prvního návratu k položce v nízké pozornosti: stavová věta, čtyři způsoby uzavření, uložení výsledku do kanonického místa, privacy-first uzavření dočasného důkazu, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WD o prvním návratu k položce v nízké pozornosti: ověření návratového signálu, čtyři výsledné stavy, otevření nejbližšího pracovního místa, zákaz zvláštního dohledu, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WC o převodu stabilní položky z dlouhodobé údržby do nízké pozornosti: podmínky převodu po dvou klidných kontrolách, stavová věta, snížení viditelnosti bez ztráty odpovědnosti, úklid zbytků údržby, privacy-first mazání podkladů, karta, mini workshop a checklist.
