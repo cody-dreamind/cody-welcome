@@ -160420,8 +160420,178 @@ Klidný návrat převádíme do běžného rytmu: [rytmus nebo návratový sign�
 
 Převod klidného návratu do rytmu je drobná provozní hygiena. Není okázalá, ale drží systém lehký. Dobře zavřená práce nemá vyžadovat věčnou pozornost. Má mít správné místo, jasný návratový signál a dost ticha na to, aby tým mohl dělat další důležitou věc.
 
+## Příloha VX: První běžná kontrola po převodu do provozního rytmu
+
+Příloha VW převedla klidný návrat do běžného rytmu. Tím ale práce ještě úplně nezmizela z operační reality. Poprvé se má objevit už ne jako speciální téma, ale jako obyčejná položka v rytmu, který tým stejně používá. Právě tohle první běžné review ukáže, jestli se převod povedl.
+
+Smyslem není znovu dokazovat, že úklid byl správný. Smyslem je ověřit, že se výsledek chová jako normální součást systému: dá se najít, dá se použít, nevyžaduje zvláštní vysvětlování a nevyrábí novou datovou stopu.
+
+Pracovní otázka:
+
+```text
+Prošlo převedené pravidlo prvním běžným review jako normální součást provozu, nebo se kolem něj znovu vytvořil zvláštní režim?
+```
+
+### Kontrolujte běžnou položku, ne starý příběh
+
+Do review přineste jen aktuální pracovní věc. Neotevírejte znovu celou historii stínu, úklidu, ověření a převodu. Pokud lidé pro pochopení potřebují dlouhý kontext, převod pravděpodobně nebyl dostatečně čistý.
+
+Správný vstup do review může vypadat takto:
+
+```text
+Kanonická karta pro přípravu landing page je po úklidu v měsíčním review marketingových pracovních míst. Kontrolujeme, zda ji tým umí najít a použít bez starého exportu.
+```
+
+Špatný vstup vypadá takto:
+
+```text
+Vracíme se k celé historii úklidu stínu, abychom si připomněli, proč jsme rušili starý export a jak probíhalo ověření.
+```
+
+Druhá varianta zní pečlivě, ale vrací tým do starého režimu. Když je práce opravdu zavřená, běžné review se ptá na současnou použitelnost, ne na drama kolem cesty, kterou se k ní tým dostal.
+
+### Použijte stejné vstupy jako u ostatních položek
+
+První běžná kontrola nesmí mít speciální formulář. Vezměte stejná kritéria, podle kterých kontrolujete ostatní pracovní pravidla, šablony nebo standardy. Typicky stačí:
+
+- jestli položka pomohla při reálné práci;
+- jestli ji člověk našel bez doptávání;
+- jestli výstup odpovídal očekávání;
+- jestli nevznikla vedlejší evidence;
+- jestli se nevrátil starý zdroj pravdy;
+- jestli je návratový signál pořád srozumitelný.
+
+Pokud kvůli jedné převedené věci přidáte nový blok review, nový sloupec v tabulce nebo samostatný report, už ji nekontrolujete v běžném rytmu. Založili jste další mini proces. Ano, krásně učesaný, ale pořád navíc.
+
+Codyho komentář: provozní rytmus není švýcarský nůž, do kterého se dá přidat nekonečno malých nástrojů. Od určité chvíle už to není nástroj, ale těžítko s ambicí.
+
+### Čtyři výsledné stavy
+
+Po první běžné kontrole vyberte jeden stav:
+
+#### Běžně funguje
+
+Položka prošla review stejně jako ostatní. Nikdo se nevrátil ke staré stopě, kanonické místo bylo použitelné a nevznikla nová evidence. Výsledek: nechte položku v normálním rytmu a nic dalšího nepřidávejte.
+
+#### Drobně zpřesnit v rámci rytmu
+
+Položka funguje, ale jeden detail brání plynulému použití: nejasný název, slabý odkaz, chybějící vlastník nebo nepřesný návratový signál. Výsledek: opravte jen ten detail a zapište ho jako běžnou drobnou úpravu, ne jako návrat k úklidu.
+
+#### Otevřít návratový signál
+
+Objevil se přesně ten problém, který byl uvedený jako návratový signál: někdo použil starý export, kanonické místo nešlo najít, nebo nové pracovní místo začalo kopírovat starý postup. Výsledek: otevřete návratový signál a řešte konkrétní příčinu. Neotevírejte automaticky všechno okolo.
+
+#### Převod selhal
+
+Téma se v review nedá kontrolovat bez zvláštního režimu. Lidé potřebují starou historii, drží bokem pomocné poznámky nebo nevědí, co je aktuální zdroj pravdy. Výsledek: vraťte se o krok zpět a opravte převod do rytmu. Problém není v běžném review, ale v tom, že do něj přišla nehotová věc.
+
+### Nezakládejte kontrolu kontroly
+
+Nejčastější chyba po první běžné kontrole je věta:
+
+```text
+Ještě jednou to pro jistotu zkontrolujeme zvlášť příště.
+```
+
+Tahle věta skoro vždycky znamená, že tým nemá odvahu pustit hotovou věc z ruky. Pokud položka funguje, další zvláštní kontrola nepřidá jistotu. Přidá pouze setrvačnost. Pokud nefunguje, pojmenujte konkrétní stav a opravte konkrétní místo.
+
+Lepší uzavření:
+
+```text
+Položka prošla prvním běžným review bez návratového signálu. Zůstává v normálním měsíčním rytmu, bez samostatné kontroly.
+```
+
+Nebo:
+
+```text
+Při prvním běžném review se otevřel návratový signál: tým použil starý export. Řešíme pouze dostupnost kanonické karty z pracovního indexu.
+```
+
+Obě věty jsou klidné a konkrétní. Jedna zavírá. Druhá otevírá jen přesně vymezenou věc.
+
+### Privacy-first kontrola v běžném rytmu
+
+První běžné review má potvrdit, že datová stopa zůstala lehká. Zeptejte se:
+
+```text
+Vznikla kvůli kontrole nová evidence?
+Zůstaly někde staré exporty nebo pomocné kopie?
+Je v kanonickém místě jen to, co člověk potřebuje k práci?
+Nesbíráme nově informace o tom, kdo se spletl nebo kdo co použil?
+Umíme výsledek vysvětlit bez osobních detailů a historických podkladů?
+```
+
+Privacy-first výsledek:
+
+```text
+Review potvrdilo aktuální pravidlo bez nové evidence. Staré pomocné poznámky zůstávají smazané a návratový signál nevyžaduje sledování lidí ani další exporty.
+```
+
+Když kontrola potřebuje osobní výčet chyb, screenshoty z práce konkrétních lidí nebo sledování chování v dokumentech, pravděpodobně se z provozní hygieny stává dohled. To není dobrý obchod. Tým má zlepšovat pracovní systém, ne sbírat materiál k obhajobě, že někdo klikl špatně.
+
+### Karta první běžné kontroly po převodu
+
+```text
+Převedená položka:
+
+Běžný provozní rytmus:
+
+Datum prvního běžného review:
+
+Kontrolovaný pracovní úkol:
+
+Použité běžné vstupy:
+
+Výsledek:
+- běžně funguje / drobně zpřesnit / otevřít návratový signál / převod selhal
+
+Co jsme zjistili:
+
+Co upravujeme, pokud něco:
+
+Co výslovně neotvíráme:
+
+Návratový signál:
+
+Datová stopa po kontrole:
+
+Vlastník další běžné údržby:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte převodní větu z předchozí přílohy.
+2. Minuta 2: potvrďte běžný rytmus, ve kterém se položka objevila.
+3. Minuta 3: vyberte jeden reálný pracovní úkol, na kterém se použitelnost ukázala.
+4. Minuta 4: zkontrolujte, zda nevznikla zvláštní evidence nebo stará pomocná stopa.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: napište jednu uzavírací nebo opravnou větu.
+7. Minuta 7: smažte nebo zkraťte vše, co v review vzniklo jen jako dočasná opora.
+
+Výstup workshopu:
+
+```text
+Položka [název] prošla prvním běžným review ve stavu [stav]. Další práce je [žádná / jedna drobná úprava / otevřený návratový signál / oprava převodu]. Samostatnou kontrolu nezakládáme.
+```
+
+### Checklist první běžné kontroly
+
+- Objevila se položka ve stejném rytmu jako ostatní podobné věci?
+- Kontrolovali jsme aktuální použitelnost, ne starou historii úklidu?
+- Použili jsme stejná kritéria jako u ostatních položek v rytmu?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud položka funguje, nezaložili jsme další zvláštní kontrolu?
+- Pokud je potřeba úprava, je opravdu nejmenší možná?
+- Pokud se otevřel návratový signál, řešíme jen jeho konkrétní příčinu?
+- Nevznikl nový report, tabulka, export nebo seznam osobních chyb?
+- Zůstalo kanonické místo kratší a použitelnější než dočasná historie?
+- Umí vlastník běžné údržby říct jednou větou, co se stane dál?
+
+První běžná kontrola po převodu je test dospělosti systému. Neptá se, jestli tým umí být pečlivý. To už ukázal úklid. Ptá se, jestli tým umí hotovou věc pustit zpět do normální práce, bez přívěsku zvláštní péče. Když ano, systém je lehčí. A lehčí systém se nejen lépe provozuje, ale taky méně hladově sahá po datech, která ve skutečnosti nepotřebuje.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha VX o první běžné kontrole po převodu do provozního rytmu: kontrola aktuální použitelnosti místo historie úklidu, stejné vstupy jako u ostatních položek, čtyři výsledné stavy, zákaz nové zvláštní kontroly, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VW o převodu klidného návratu do normálního provozního rytmu: převodní věta, výběr existujícího rytmu, přenos vlastnosti místo historie, návratový signál, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VV o první běžný návrat po uzavřeném úklidu stínu: návrat přes skutečný úkol, tři známky klidného použití, čtyři výsledné stavy, ukončení péče bez nového dohledu, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VU o uzavření ověřeného úklidu stínu do běžné práce: uzavírací věta, kanonické místo, mazání dočasných stop, návratový signál místo dohledu, předání týmu, karta, mini workshop a checklist.
