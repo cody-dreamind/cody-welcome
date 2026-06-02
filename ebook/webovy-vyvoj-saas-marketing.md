@@ -164021,8 +164021,282 @@ Položka [název] je po první běžné údržbě uzavřená stavem [stav]. Výs
 
 Dobré uzavření první běžné údržby je krátké, skoro suché a velmi užitečné. Řekne, co platí, kam se výsledek zapsal, co se uklidilo a kdy se položka znovu objeví v normálním rytmu. Všechno ostatní je často jen nostalgie po problému, který už měl skončit.
 
+## Příloha WL: Převod po první běžné údržbě do dlouhodobého rytmu
+
+Po uzavřené první běžné údržbě přichází nenápadně důležitý krok: rozhodnout, jak bude položka žít dál. Ne jako oprava. Ne jako zvláštní případ. Ne jako místo, kam se tým vrací, protože si pamatuje starou chybu. Jako normální součást dlouhodobého rytmu.
+
+To zní suše, ale právě tady se často vrací zbytečná práce. Tým první údržbu uzavře správně, smaže pomocné podklady a řekne, že zvláštní dohled končí. Pak ale někdo do měsíční agendy přidá extra bod "raději zkontrolovat opravenou šablonu", někdo jiný nechá v dashboardu zvláštní sloupec a třetí člověk si drží osobní připomínku. Formálně je oprava zavřená, prakticky pořád stojí u dveří a klepe.
+
+Převod do dlouhodobého rytmu má proto jednu větu:
+
+```text
+Položka [název] je po první běžné údržbě normální součástí [rytmus]. Sledujeme jen [běžný signál] a znovu ji otevíráme pouze při [návratový signál].
+```
+
+Příklad:
+
+```text
+Rozcestník review šablon je po první běžné údržbě normální součástí měsíční údržby znalostní báze. Sledujeme jen platnost odkazů a znovu ho otevíráme pouze tehdy, když běžná práce znovu skončí v archivní šabloně.
+```
+
+Věta je krátká proto, aby se dala vložit do běžné agendy. Dlouhodobý rytmus nemá nést drama staré opravy. Má nést jen odpovědnost za současnou práci.
+
+### Vyberte jeden domov rytmu
+
+Položka po první běžné údržbě potřebuje jeden domov. Pokud ji necháte ve více místech, začne se každé místo tvářit jako malé pojištění. A malé pojištění se časem mění v duplicitní systém.
+
+Typické domovy:
+
+- měsíční údržba obsahu;
+- kvartální revize šablon;
+- běžná kontrola prodejních materiálů;
+- provozní checklist produktu;
+- review znalostní báze;
+- backlog technického dluhu;
+- pravidelná kontrola formulářů, reportů nebo integrací.
+
+Nevybírejte nový domov jen proto, že položka kdysi prošla opravou. Pokud existuje rytmus pro podobné položky, patří tam.
+
+Špatně:
+
+```text
+Založíme zvláštní čtvrtletní kontrolu opraveného rozcestníku.
+```
+
+Lépe:
+
+```text
+Rozcestník patří do existující měsíční údržby znalostní báze. Kontroluje se stejnou otázkou jako ostatní rozcestníky: vede člověka k aktuálnímu zdroji pravdy?
+```
+
+Domov rytmu má být tak obyčejný, že nový člověk nepozná, že položka kdysi měla opravu. Pozná jen to, jak se má udržovat.
+
+### Snižte počet speciálních signálů
+
+Po malé opravě často zůstane víc signálů, než je potřeba:
+
+- jestli se chyba nevrátila;
+- jestli lidé používají správný odkaz;
+- jestli stará šablona někde nepřežila;
+- jestli se nezvyšuje počet dotazů;
+- jestli někdo z týmu nemá pocit nejistoty;
+- jestli se neobjeví podobný problém jinde.
+
+To všechno mohlo být užitečné během ověření. V dlouhodobém rytmu je to moc. Nechte jen jeden běžný signál a jeden návratový signál.
+
+Běžný signál říká, co se kontroluje v normální údržbě:
+
+```text
+Při měsíční údržbě ověřit, že rozcestník vede na aktuální šablonu.
+```
+
+Návratový signál říká, kdy se položka znovu otevře:
+
+```text
+Otevřít návrat jen tehdy, když člověk při reálném review skončí v archivní šabloně.
+```
+
+Nechte si pozor na signály typu "když bude mít někdo špatný pocit". Pocit může spustit rozhovor, ale nemá sám zakládat návrat. Návrat má stát na pracovní situaci.
+
+### Přepište jazyk z opravy na údržbu
+
+Jazyk udržuje stav systému. Pokud v agendě zůstane "kontrola po opravě", lidé budou položku dál vnímat jako opravený problém. Přepište názvy, poznámky a odkazy do běžného jazyka.
+
+Místo:
+
+```text
+Kontrola, zda oprava archivních šablon pořád drží.
+```
+
+Pište:
+
+```text
+Kontrola platnosti rozcestníku review šablon.
+```
+
+Místo:
+
+```text
+Nezapomenout, že jsme tady měli problém s používáním staré verze.
+```
+
+Pište:
+
+```text
+Archivní šablony nevedou novou práci a odkazují na aktuální zdroj pravdy.
+```
+
+První formulace připomíná starou bolest. Druhá popisuje současné pravidlo.
+
+Codyho komentář: když dokumentaci pořád říkáte "ta opravená věc", nemůžete se divit, že se chová jako problém v důchodu. Pořád chce pozornost, jen už nenosí pracovní průkaz.
+
+### Udržujte rytmus levný
+
+Dlouhodobý rytmus musí být levný. Jakmile údržba jedné opravené položky vyžaduje zvláštní přípravu, speciální export, samostatnou schůzku nebo ruční lovení důkazů, něco je špatně.
+
+Levná údržba má tyto vlastnosti:
+
+- používá stejné vstupy jako ostatní položky;
+- trvá minuty, ne hodiny;
+- má jednoho vlastníka;
+- končí stavem, ne debatou;
+- nevyžaduje nové sledování lidí;
+- zapisuje jen změnu nebo potvrzení;
+- umí položku sloučit, zjednodušit nebo archivovat, když přestane dávat smysl.
+
+Pokud údržba drahne, neotevírejte starou opravu. Položte otázku:
+
+```text
+Je drahá samotná položka, nebo způsob, jak ji udržujeme?
+```
+
+Příklad:
+
+```text
+Každý měsíc ručně procházíme šest starých šablon, abychom ověřili, že nevedou novou práci. Problém není v původní opravě, ale v tom, že archivní šablony pořád zůstávají příliš viditelné. Zjednodušení: archivní šablony přesunout mimo běžný rozcestník a ponechat jen přesměrování na zdroj pravdy.
+```
+
+Tohle je zjednodušení údržby, ne návrat malé opravy.
+
+### Privacy-first dlouhodobý rytmus
+
+Dlouhodobá údržba je místo, kde se rády hromadí zbytečné důkazy. Ne proto, že by je někdo opravdu potřeboval, ale protože je snazší "ještě si to nechat" než rozhodnout, co má pryč.
+
+Po převodu do dlouhodobého rytmu si projděte čtyři otázky:
+
+- Jaký údaj opravdu potřebujeme pro další rozhodnutí?
+- Dá se stav ověřit z existujícího pracovního místa?
+- Můžeme ponechat agregovaný nebo anonymizovaný závěr místo surové stopy?
+- Má každý zůstávající podklad účel, vlastníka a datum revize?
+
+Typicky nezůstává:
+
+- seznam lidí, kteří použili špatnou šablonu;
+- screenshoty konkrétní práce;
+- export chování uživatelů;
+- duplicitní kopie formulářů;
+- chatové vlákno s popisem chyby;
+- zvláštní tabulka jen pro opravenou položku.
+
+Typicky stačí:
+
+- aktuální pravidlo;
+- běžný signál v údržbové agendě;
+- návratový signál;
+- datum další běžné revize;
+- krátké anonymizované poučení, pokud pomůže týmu.
+
+Privacy-first provoz není jen o tom, kde běží servery. Je i o tom, že interní systémy neskladují staré pracovní stopy jen pro psychologický komfort.
+
+### Karta převodu do dlouhodobého rytmu
+
+```text
+Položka:
+
+Stav po první běžné údržbě:
+
+Dlouhodobý domov rytmu:
+
+Proč patří právě tam:
+
+Běžný signál:
+
+Návratový signál:
+
+Co už nesledujeme:
+
+Jaký jazyk přepisujeme z opravy na údržbu:
+
+Co se maže, anonymizuje nebo slučuje:
+
+Co zůstává jako kanonický záznam:
+
+Vlastník:
+
+Nejbližší běžná revize:
+
+Stop pravidlo pro příliš těžkou údržbu:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Rozcestník review šablon.
+
+Stav po první běžné údržbě:
+Běžně funguje.
+
+Dlouhodobý domov rytmu:
+Měsíční údržba znalostní báze.
+
+Proč patří právě tam:
+Je to běžný rozcestník, ne samostatný provozní systém.
+
+Běžný signál:
+Rozcestník vede na aktuální zdroj pravdy.
+
+Návratový signál:
+Člověk při reálném review znovu skončí v archivní šabloně.
+
+Co už nesledujeme:
+Kdo konkrétně v minulosti použil starou šablonu a kolikrát se o tom diskutovalo.
+
+Jaký jazyk přepisujeme z opravy na údržbu:
+"Kontrola opravy archivních šablon" měníme na "kontrola platnosti rozcestníku".
+
+Co se maže, anonymizuje nebo slučuje:
+Pomocná poznámka z ověření a screenshot staré cesty.
+
+Co zůstává jako kanonický záznam:
+Aktuální pravidlo, běžný signál, návratový signál a datum další měsíční revize.
+
+Vlastník:
+Editor znalostní báze.
+
+Nejbližší běžná revize:
+Příští měsíční údržba.
+
+Stop pravidlo pro příliš těžkou údržbu:
+Pokud kontrola rozcestníku vyžaduje samostatný seznam starých šablon, otevřeme zjednodušení archivu, ne návrat malé opravy.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte uzavírací větu první běžné údržby.
+2. Minuta 2: vyberte jeden dlouhodobý domov rytmu.
+3. Minuta 3: napište jeden běžný signál.
+4. Minuta 4: napište jeden návratový signál.
+5. Minuta 5: vyškrtněte speciální signály, které už nepatří do provozu.
+6. Minuta 6: přepište jazyk z opravy na běžnou údržbu.
+7. Minuta 7: určete úklid datové stopy a vlastníka další běžné revize.
+
+Výstup:
+
+```text
+Položka [název] přechází do dlouhodobého rytmu [rytmus]. Běžně sledujeme [signál], návrat otevíráme jen při [návratový signál] a z dočasné stopy zůstává [minimum].
+```
+
+### Checklist převodu do dlouhodobého rytmu
+
+- Má položka jeden dlouhodobý domov?
+- Patří do existujícího rytmu místo nového zvláštního procesu?
+- Je jasný jeden běžný signál?
+- Je jasný jeden návratový signál?
+- Smazali jsme nebo vypustili speciální signály z doby ověřování?
+- Přepsali jsme jazyk z "opravy" na běžnou údržbu?
+- Nezůstává osobní připomínka, extra sloupec nebo zvláštní tabulka?
+- Je údržba levná a proveditelná v běžném pracovním čase?
+- Pokud je údržba drahá, řešíme zjednodušení místo návratu staré opravy?
+- Zůstává jen datové minimum potřebné pro další rozhodnutí?
+- Jsou surové důkazy smazané, anonymizované nebo opatřené datem revize?
+- Ví vlastník, kdy se položka znovu objeví v normálním rytmu?
+
+Převod do dlouhodobého rytmu je povedený tehdy, když položka přestane vyprávět svůj původní příběh. V systému zůstane jen současné pravidlo, běžný signál, návratová hranice a úklid datové stopy. To je nudné správným způsobem.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WL o převodu po první běžné údržbě do dlouhodobého rytmu: jeden domov rytmu, běžný a návratový signál, přepis jazyka z opravy na údržbu, levná údržba, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WK o uzavření první běžné údržby po malé opravě: stavová věta, kanonické místo, čtyři typy uzavření, úklid dočasné stopy, zákaz druhé kontroly jen pro jistotu, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WJ o první běžné údržbě po uzavřené malé opravě: kontrola současného průchodu, běžné otázky, čtyři výsledné stavy, zavřená historie opravy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WI o uzavření ověřené malé opravy do běžné údržby: přepis opravy do běžného pravidla, ukončení zvláštního dohledu, návratový signál, privacy-first úklid ověřovací stopy, karta, mini workshop a checklist.
