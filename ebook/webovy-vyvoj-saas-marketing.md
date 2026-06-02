@@ -160589,8 +160589,188 @@ Položka [název] prošla prvním běžným review ve stavu [stav]. Další prá
 
 První běžná kontrola po převodu je test dospělosti systému. Neptá se, jestli tým umí být pečlivý. To už ukázal úklid. Ptá se, jestli tým umí hotovou věc pustit zpět do normální práce, bez přívěsku zvláštní péče. Když ano, systém je lehčí. A lehčí systém se nejen lépe provozuje, ale taky méně hladově sahá po datech, která ve skutečnosti nepotřebuje.
 
+## Příloha VY: Uzavření první běžné kontroly po převodu do provozního rytmu
+
+Příloha VX řešila první běžnou kontrolu položky, která se po úklidu vrátila do provozního rytmu. Teď je potřeba udělat poslední malý krok: uzavřít výsledek tak, aby z kontroly nevznikla další zvláštní vrstva práce. První review má dodat stav, ne založit nový dlouhodobý režim.
+
+Pracovní otázka:
+
+```text
+Co po první běžné kontrole zůstává v normálním rytmu, co upravujeme jedním zásahem a co už výslovně nepokračuje jako samostatná péče?
+```
+
+Uzavření je krátké, ale důležité. Bez něj se i dobrá kontrola může změnit v sérii "ještě se na to podíváme". Taková věta vypadá nevinně, ale postupně vytváří další kalendář, další poznámky a další lidi, kteří si nejsou jistí, jestli je věc opravdu hotová.
+
+### Začněte výsledným stavem
+
+Vezměte stav z první běžné kontroly a převeďte ho do jedné uzavírací věty. Nepište dlouhou historii. Popište jen výsledek a další normální místo.
+
+Příklad pro klidný výsledek:
+
+```text
+Položka prošla prvním běžným review bez návratového signálu. Zůstává v měsíčním review marketingových pracovních míst a samostatná kontrola po úklidu končí.
+```
+
+Příklad pro drobnou opravu:
+
+```text
+Položka funguje, ale v pracovním indexu opravujeme jeden starý popisek. Po opravě zůstává v běžném review; nezakládáme nový úklid ani další kontrolní tabulku.
+```
+
+Příklad pro otevřený návratový signál:
+
+```text
+Při review se otevřel návratový signál: člověk použil starý export místo kanonické karty. Řešíme dostupnost kanonické karty z pracovního indexu, ne celou historii původního úklidu.
+```
+
+Dobrá uzavírací věta má tři části: výsledek, další místo a hranici. Výsledek říká, co se stalo. Další místo říká, kde věc dál žije. Hranice říká, co se už nerozšiřuje.
+
+### Nepřepisujte rytmus kvůli jedné kontrole
+
+Když první běžné review ukáže drobné tření, upravte položku v rámci stávajícího rytmu. Neměňte kvůli tomu celý rytmus. Měsíční review webu nemá dostat nový blok jen proto, že jedna karta měla nejasný popisek. Sprint review nemá dostat novou kolonku jen proto, že jeden návratový signál potřebuje lepší větu.
+
+Praktické pravidlo:
+
+```text
+Oprava po první běžné kontrole se má vejít do stejného pracovního místa, kde se problém objevil.
+```
+
+Typické malé uzavření:
+
+- přepsat jeden název v indexu;
+- doplnit vlastníka běžné údržby;
+- zkrátit návratový signál;
+- odstranit poslední odkaz na starou pomocnou stopu;
+- přesunout jednu větu z dočasné poznámky do kanonické karty;
+- smazat kontrolní poznámku, která byla potřeba jen pro první review.
+
+Typické přestřelení:
+
+- zavést nový pravidelný report;
+- založit checklist jen pro tuto převedenou položku;
+- svolat opakované review historie úklidu;
+- sledovat, kdo přesně položku použil správně nebo špatně;
+- držet starý export jako "důkaz", že už se nepoužívá.
+
+Codyho komentář: držet starý export jako důkaz, že jste ho smazali, je elegantní způsob, jak nesmazat export. Compliance tým z toho nemá radost a upřímně se mu nedivím.
+
+### Rozlište zavření, lokální opravu a návrat
+
+Po první běžné kontrole vyberte jeden ze tří uzavíracích režimů:
+
+- Zavřít bez další práce: položka funguje a zůstává v normálním rytmu.
+- Zavřít po lokální opravě: jeden detail se opraví a zvláštní režim končí.
+- Otevřít návratový signál: nastal předem pojmenovaný problém a řeší se jeho konkrétní příčina.
+
+Nedávejte tomu čtvrtý režim "sledovat". Pokud potřebujete sledovat, napište, jaký signál hledáte a kdy sledování skončí. Bez konce je to jen nový proces v přestrojení.
+
+Příklad rozhodnutí:
+
+```text
+Výsledek první kontroly:
+Drobně zpřesnit v rámci rytmu.
+
+Lokální oprava:
+V pracovním indexu měníme popisek odkazu z "pilotní export" na "kanonická karta pravidla".
+
+Co neotvíráme:
+Neotevíráme úklid znovu, nekontrolujeme historii exportu a nepřidáváme nový report použití.
+
+Další stav:
+Po opravě zůstává položka v běžném měsíčním review.
+```
+
+Tento zápis chrání tým před tím, aby lokální oprava vypadala jako návrat problému. Opravit popisek není incident. Je to údržba.
+
+### Uzavřete datovou stopu kontroly
+
+První běžná kontrola mohla vytvořit krátké poznámky, dočasný seznam, screenshot nebo komentář v issue. Po uzavření zkontrolujte, jestli mají dál účel. Většinou ne.
+
+Privacy-first uzavření:
+
+```text
+Po první běžné kontrole zůstává jen uzavírací věta a případná lokální oprava v kanonickém místě. Dočasné poznámky z review mažeme nebo zkracujeme, protože už neslouží rozhodnutí.
+```
+
+Zvlášť opatrní buďte u záznamů, které popisují práci konkrétních lidí. Cílem review je zlepšit pracovní systém, ne budovat archiv toho, kdo našel starý odkaz nebo použil špatnou kartu. Pokud potřebujete příklad, anonymizujte ho na typ situace.
+
+Dobře:
+
+```text
+Při přípravě landing page člověk našel starý popisek v indexu.
+```
+
+Špatně:
+
+```text
+Jana z marketingu použila v úterý v 10:14 starý export a poslala ho do komentáře u ticketu.
+```
+
+První věta stačí pro opravu systému. Druhá vytváří zbytečnou osobní stopu.
+
+### Karta uzavření první běžné kontroly
+
+```text
+Převedená položka:
+
+Běžný provozní rytmus:
+
+Výsledek první běžné kontroly:
+- běžně funguje / drobně zpřesnit / otevřít návratový signál / převod selhal
+
+Uzavírací režim:
+- zavřít / zavřít po lokální opravě / otevřít návratový signál / vrátit převod k opravě
+
+Jedna uzavírací věta:
+
+Co zůstává v běžném rytmu:
+
+Co upravujeme, pokud něco:
+
+Co výslovně neotvíráme:
+
+Jaké dočasné podklady mažeme nebo zkracujeme:
+
+Privacy-first výsledek:
+
+Vlastník běžné údržby:
+
+Datum dalšího normálního review:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte stav z první běžné kontroly.
+2. Minuta 2: vyberte uzavírací režim.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: určete případnou lokální opravu a jedno místo zásahu.
+5. Minuta 5: smažte nebo zkraťte dočasné podklady z kontroly.
+6. Minuta 6: potvrďte, že další výskyt proběhne jen v normálním rytmu nebo přes konkrétní návratový signál.
+
+Výstup workshopu:
+
+```text
+První běžná kontrola položky [název] je uzavřená ve stavu [stav]. Další práce je [nic / jedna lokální oprava / otevřený návratový signál / oprava převodu]. Samostatný dohled nepokračuje.
+```
+
+### Checklist uzavření první běžné kontroly
+
+- Má kontrola jeden výsledný stav a jeden uzavírací režim?
+- Existuje krátká uzavírací věta s výsledkem, dalším místem a hranicí?
+- Pokud je potřeba oprava, je lokální a má jedno pracovní místo?
+- Nezměnili jsme běžný rytmus kvůli jedné převedené položce?
+- Nezaložili jsme nový report, tabulku, meeting ani kontrolní sloupec?
+- Pokud se otevřel návratový signál, řešíme jen konkrétní příčinu?
+- Smazali nebo zkrátili jsme dočasné poznámky z review?
+- Nezůstaly v záznamu osobní detaily, které nejsou nutné pro systémovou opravu?
+- Je jasné, kdy se položka objeví příště v normálním rytmu?
+- Umí vlastník říct, co se už dál nesleduje?
+
+Uzavření první běžné kontroly je poslední brzda proti tomu, aby se hotová věc dál tvářila jako speciální téma. Když kontrola dopadne dobře, nechte ji skončit. Když ukáže drobný problém, opravte nejbližší místo a znovu ji neoslavujte. A když otevře návratový signál, řešte přesně ten signál, ne celou historickou ságu. Provozní dospělost není v tom, že všechno sledujete. Je v tom, že víte, kdy přestat.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha VY o uzavření první běžné kontroly po převodu do provozního rytmu: uzavírací věta, lokální oprava bez změny rytmu, rozlišení zavření a návratového signálu, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha VX o první běžné kontrole po převodu do provozního rytmu: kontrola aktuální použitelnosti místo historie úklidu, stejné vstupy jako u ostatních položek, čtyři výsledné stavy, zákaz nové zvláštní kontroly, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VW o převodu klidného návratu do normálního provozního rytmu: převodní věta, výběr existujícího rytmu, přenos vlastnosti místo historie, návratový signál, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-01: Doplněna Příloha VV o první běžný návrat po uzavřeném úklidu stínu: návrat přes skutečný úkol, tři známky klidného použití, čtyři výsledné stavy, ukončení péče bez nového dohledu, privacy-first návrat, karta, mini workshop a checklist.
