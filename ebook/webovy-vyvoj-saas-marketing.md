@@ -160915,8 +160915,214 @@ Položka [název] po první běžné kontrole zůstává v [běžný rytmus / p�
 
 Dlouhodobá údržba není slavnostní finále. Je to tichý návrat do normální práce. Položka má být dost viditelná na to, aby se neztratila, ale ne tak hlučná, aby kolem sebe držela zvláštní péči navždy. Když systém umí takhle nechat věci žít, má tým víc prostoru na skutečné problémy. A méně složek pojmenovaných "dočasné", což je vždycky malé vítězství civilizace.
 
+## Příloha WA: Druhá běžná kontrola položky v dlouhodobé údržbě
+
+Příloha VZ převedla položku po první běžné kontrole do dlouhodobé údržby. Další past přichází později: tým se k položce vrátí v normálním rytmu a začne se chovat, jako by šlo pořád o zvláštní případ. Druhá běžná kontrola má potvrdit opak. Položka už nemá dokazovat, že přežila opravu. Má se chovat jako obyčejná součást systému.
+
+Pracovní otázka:
+
+```text
+Funguje položka při druhé běžné kontrole jako normální součást provozu, nebo si pořád žádá zvláštní zacházení, které jsme jen přejmenovali?
+```
+
+Druhá kontrola je užitečná právě tím, že není dramatická. Nevrací se k původnímu incidentu, opravě, čekací poznámce ani první kontrole. Dívá se na současnou použitelnost: najde člověk správné místo, chápe pravidlo, vzniká z toho rozhodnutí a nezůstává po tom zbytečná datová stopa?
+
+### Začněte bez historického vyprávění
+
+Historie opravy je lákavá, protože dává pocit kontextu. Jenže při druhé běžné kontrole často škodí. Pokud tým začne větou "to je ta věc, co jsme kdysi opravovali", položka se okamžitě vrací do zvláštního režimu.
+
+Začněte raději takto:
+
+```text
+Kontrolujeme položku [název] v rámci běžného rytmu [rytmus].
+Dnes potřebujeme zjistit, jestli pomáhá aktuální práci.
+Historii opravy neotevíráme, pokud se neobjeví návratový signál.
+```
+
+To neznamená, že se historie smaže ze světa. Znamená to, že není hlavním vstupem kontroly. Pokud se ukáže návratový signál, dá se starý záznam otevřít později. Běžná kontrola ale nemá začínat archeologií.
+
+Praktický příklad:
+
+```text
+Špatně:
+"Pojďme si připomenout, proč jsme před dvěma měsíci upravovali pravidlo pro formuláře."
+
+Lépe:
+"Dnes v měsíčním review webu kontrolujeme, jestli karta formulářových polí pomáhá upravit aktuální poptávkovou stránku bez nových dotazů na obchod."
+```
+
+Codyho komentář: když musíte pokaždé vyprávět původní příběh, položka není udržovaná. Je mumifikovaná. A to v pracovním systému většinou nevoní po efektivitě.
+
+### Použijte stejné otázky jako u ostatních položek
+
+Druhá běžná kontrola má projít stejným sítem jako srovnatelné položky. Nezaslouží si měkčí zacházení jen proto, že kdysi prošla opravou. Nezaslouží si ani tvrdší zacházení jen proto, že na ni má někdo stále citlivou paměť.
+
+Použijte čtyři neutrální otázky:
+
+- Pomáhá položka rozhodnout nebo udělat konkrétní práci?
+- Je její kanonické místo pořád správné?
+- Je vlastník nebo odpovědná role pořád zřejmá?
+- Nevyžaduje údržba víc dat, ruční práce nebo vysvětlování, než odpovídá její hodnotě?
+
+Pokud odpovědi sedí, položka zůstává v rytmu. Pokud nesedí jen jedna drobnost, opravte ji jako běžnou drobnou úpravu. Pokud se ukáže opakovaný problém, otevřete návratový signál. Nezakládejte zvláštní mezistav "ještě ji budeme trochu sledovat", protože to je obvykle jen starý dohled v novém kabátě.
+
+### Čtyři výsledné stavy druhé kontroly
+
+Druhá kontrola má skončit jedním ze čtyř stavů:
+
+#### Stabilní součást rytmu
+
+Položka funguje normálně. Lidé ji najdou, používají ji bez vysvětlování a nevzniká kvůli ní žádná zvláštní stopa.
+
+Zápis:
+
+```text
+Položka zůstává v běžném rytmu bez změny. Další kontrola proběhne jen v rámci standardního review.
+```
+
+#### Drobná běžná úprava
+
+Položka funguje, ale potřebuje malou opravu: název, odkaz, příklad, hranici vlastnictví nebo jednu větu v kanonickém místě.
+
+Zápis:
+
+```text
+Položka zůstává v rytmu. Děláme jednu běžnou úpravu v místě [místo], bez otevření zvláštního sledování.
+```
+
+#### Návratový signál potvrzen
+
+Objevilo se přesně to, co mělo položku znovu otevřít: opakované tření, špatné rozhodnutí, nejasné vlastnictví nebo zbytečná datová stopa.
+
+Zápis:
+
+```text
+Návratový signál je potvrzený. Otevíráme samostatnou kartu jen pro příčinu [příčina], ne pro celou historii položky.
+```
+
+#### Položka je kandidát na sloučení nebo archivaci
+
+Položka už nepomáhá samostatně. Buď ji nahradil jiný standard, nebo se její účel přesunul do širšího pracovního místa.
+
+Zápis:
+
+```text
+Položka už nemá samostatnou hodnotu. Navrhujeme sloučení do [místo] nebo archivaci po kontrole odkazů a datové stopy.
+```
+
+Tento stav není porážka. Je to normální známka toho, že systém žije. Ne každá užitečná věc musí mít vlastní kartu navždy.
+
+### Zkontrolujte skrytou cenu údržby
+
+Při druhé kontrole už bývá vidět, jestli položka stojí víc pozornosti, než kolik vrací. Skrytá cena se neprojevuje jen časem. Může to být i mentální zátěž, opakované vysvětlování, ruční přepisování, kontrola duplicit nebo strach smazat starý podklad.
+
+Rychlá kontrola skryté ceny:
+
+```text
+Kolikrát jsme položku od poslední kontroly opravdu použili?
+Kolikrát jsme kvůli ní něco vysvětlovali mimo kanonické místo?
+Vznikl kvůli ní nový export, tabulka, screenshot nebo ruční seznam?
+Musel někdo držet v hlavě kontext, který v položce není napsaný?
+Pomohla položka k rozhodnutí, nebo jen připomněla, že něco existuje?
+```
+
+Pokud položka vytváří víc práce, než odstraňuje, neznamená to automaticky, že ji máte smazat. Znamená to, že musíte zmenšit její roli. Často stačí přesunout ji z plné šablony do krátké poznámky v širším pravidle.
+
+Příklad:
+
+```text
+Karta pro kontrolu jedné sekce landing page se používá jen při větším přepisu nabídky. Samostatná karta je moc těžká. Přesuneme z ní tři užitečné otázky do obecného checklistu pro landing page a zbytek archivujeme.
+```
+
+### Privacy-first kontrola druhé běžné kontroly
+
+Druhá kontrola je vhodný moment na úklid zbytků, které první uzavření přehlédlo. V běžném provozu se rychle ukáže, co je skutečně potřeba a co zůstalo jen proto, že se to nikomu nechtělo mazat.
+
+Zkontrolujte hlavně:
+
+- staré pomocné kopie pravidla;
+- screenshoty s osobními údaji nebo zákaznickými detaily;
+- exporty použité jen pro první ověření;
+- komentáře v nástrojích, které už nemají pracovní hodnotu;
+- dočasné odkazy v chatu, dokumentech nebo ticketovacím systému;
+- ruční seznamy lidí, použití nebo výjimek.
+
+Privacy-first závěr má být krátký:
+
+```text
+Po druhé běžné kontrole necháváme jen [kanonické místo] a [nutný záznam rozhodnutí]. Mažeme nebo zkracujeme [podklady]. Pro další údržbu nesbíráme nové osobní údaje ani nepřidáváme monitoring.
+```
+
+Nejde o kosmetický úklid. Každý zbytečný podklad je budoucí odpovědnost: někdo ho bude muset chránit, vysvětlit, aktualizovat nebo smazat později.
+
+### Karta druhé běžné kontroly
+
+```text
+Položka:
+
+Běžný rytmus:
+
+Kanonické místo:
+
+Vlastník nebo odpovědná role:
+
+K čemu měla položka při této kontrole pomoct:
+
+Použitý pracovní vstup:
+
+Výsledek:
+- stabilní součást rytmu / drobná běžná úprava / návratový signál potvrzen / sloučit nebo archivovat
+
+Jedna rozhodovací věta:
+
+Skrytá cena údržby:
+
+Co upravujeme, pokud něco:
+
+Co neotevíráme z historie:
+
+Privacy-first úklid:
+
+Další normální výskyt v rytmu:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: pojmenujte položku bez historického vysvětlování.
+2. Minuta 2: potvrďte běžný rytmus a kanonické místo.
+3. Minuta 3: řekněte, k jaké aktuální práci má položka pomoct.
+4. Minuta 4: odpovězte na čtyři neutrální otázky použitelnosti.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: zapište jednu rozhodovací větu.
+7. Minuta 7: zkontrolujte skrytou cenu údržby.
+8. Minuta 8: smažte nebo zkraťte zbytečné podklady a potvrďte, že nepřibývá monitoring.
+
+Výstup workshopu:
+
+```text
+Položka [název] při druhé běžné kontrole dopadla jako [stav]. Dál žije v [rytmus/místo], případně upravujeme jen [jedna úprava]. Historii opravy znovu neotevíráme. Z datové stopy necháváme pouze [minimum].
+```
+
+### Checklist druhé běžné kontroly
+
+- Začali jsme aktuálním použitím, ne historií opravy?
+- Použili jsme stejné otázky jako u srovnatelných položek?
+- Skončili jsme jedním ze čtyř jasných stavů?
+- Pokud je potřeba úprava, je běžná a lokální?
+- Pokud se potvrdil návratový signál, otevíráme jen konkrétní příčinu?
+- Pokud položka ztratila samostatnou hodnotu, máme návrh sloučení nebo archivace?
+- Zkontrolovali jsme skrytou cenu údržby?
+- Nezakládáme nový dohled jen proto, že kontrola proběhla?
+- Smazali nebo zkrátili jsme pomocné podklady bez další hodnoty?
+- Nepřidali jsme nové osobní údaje, exporty, screenshoty ani monitoring?
+- Je jasné, kdy se položka objeví příště v normálním rytmu?
+- Umí vlastník říct jednou větou, co se po kontrole změnilo nebo nezměnilo?
+
+Druhá běžná kontrola je dobrý test dospělosti systému. Když položka projde bez historického vyprávění, zvláštních výjimek a nové datové stopy, stala se opravdu běžnou součástí práce. Když ne, není to tragédie. Jen máte jasnější signál: buď ji lokálně zjednodušit, sloučit, nebo znovu otevřít přes konkrétní příčinu. Hlavně z ní nedělejte věčné muzeum jedné dávné opravy.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WA o druhé běžné kontrole položky v dlouhodobé údržbě: kontrola bez historického vyprávění, stejné otázky jako u ostatních položek, čtyři výsledné stavy, skrytá cena údržby, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha VZ o dlouhodobé údržbě položky po první běžné kontrole: kanonické místo, vlastník, návratový signál, běžný rytmus, privacy-first datová hranice, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha VY o uzavření první běžné kontroly po převodu do provozního rytmu: uzavírací věta, lokální oprava bez změny rytmu, rozlišení zavření a návratového signálu, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha VX o první běžné kontrole po převodu do provozního rytmu: kontrola aktuální použitelnosti místo historie úklidu, stejné vstupy jako u ostatních položek, čtyři výsledné stavy, zákaz nové zvláštní kontroly, privacy-first datová stopa, karta, mini workshop a checklist.
