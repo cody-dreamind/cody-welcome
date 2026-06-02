@@ -5588,6 +5588,186 @@ Návratový signál:
 
 Ověření systémové opravy má vrátit klid. Pokud oprava drží, přestaňte ji rozšiřovat a nechte ji pracovat. Pokud drží jen částečně, ukliďte nejbližší zbytek. A pokud nedrží vůbec, nepřepisujte stabilní kapitoly naslepo; vraťte se k tomu, jak tým poznává aktuální zdroj pravdy.
 
+## Uzavření ověřené systémové opravy do běžného pravidla
+
+Když systémová oprava po opakovaných falešných poplaších obstojí, přichází méně nápadná část práce: přestat ji držet jako zvláštní projekt. Oprava, která pořád žije v režimu "pozor, tohle jsme nedávno řešili", není ještě úplně hotová. Hotová je až tehdy, když se její výsledek stane obyčejnou součástí pracovního místa a tým už nemusí znát příběh, proč vznikla.
+
+Uzavření ověřené systémové opravy má odpovědět na otázku:
+
+```text
+Co z opravy má zůstat jako běžné pravidlo a co má zmizet jako historie zásahu?
+```
+
+Typický výsledek není nová kapitola, nový audit ani další kontrolní proces. Typický výsledek je upravený rozcestník, jasný archivní štítek, jeden aktuální odkaz, zrušená duplicitní šablona a krátká poznámka v changelogu. Prostě méně cedulí, které lidi posílají do minulosti.
+
+### Přepište opravu do přítomného času
+
+Dokud text říká "po posledním falešném poplachu jsme opravili...", nutí čtenáře znát historii. Běžné pravidlo má popisovat aktuální stav:
+
+```text
+Archivní šablony mají nahoře stav, datum archivace a odkaz na aktuální zdroj pravdy.
+```
+
+Ne:
+
+```text
+Po problému s použitím starých šablon jsme přidali archivní štítek.
+```
+
+Rozdíl je praktický. První věta pomáhá člověku pracovat. Druhá věta vysvětluje, co se kdysi stalo. Historie může zůstat v logu, ale nemá být hlavní návod pro dalšího člověka.
+
+Při přepisu si projděte tři místa:
+
+- kanonické pracovní místo, kde má pravidlo žít;
+- rozcestník nebo index, odkud lidé do místa chodí;
+- archivní nebo staré podklady, které mohou pořád působit aktivně.
+
+Každé místo má dostat jen takovou úpravu, kterou člověk uvidí při normální práci. Pokud musíte přidat další vysvětlující odstavec, možná pravidlo není dost viditelné tam, kde vzniká zmatek.
+
+### Zavřete zvláštní ověřovací režim
+
+Po ověření se snadno stane, že tým nechá běžet pomocné poznámky, provizorní seznamy a ruční sledování "ještě pro jistotu". Jenže jistota se tak rychle změní v nový stínový proces. Pokud oprava drží, zvláštní režim zavřete.
+
+Zavírací zápis může být krátký:
+
+```text
+Systémová oprava:
+
+Výsledek ověření:
+- drží / drží s lokálním úklidem / nedrží
+
+Co se stává běžným pravidlem:
+
+Kde pravidlo žije:
+
+Co maže nebo archivuje historie opravy:
+
+Co už dál zvlášť nekontrolujeme:
+
+Návratový signál:
+```
+
+Příklad:
+
+```text
+Systémová oprava:
+Archivní šablony mají stav, datum archivace a odkaz na aktuální zdroj pravdy.
+
+Výsledek ověření:
+Drží s jedním lokálním úklidem.
+
+Co se stává běžným pravidlem:
+Každý archivní materiál musí už v prvním odstavci říct, že není aktivní, a ukázat na aktuální místo.
+
+Kde pravidlo žije:
+V pravidlech rozcestníku šablon a v šabloně archivního štítku.
+
+Co maže nebo archivuje historie opravy:
+Mažeme dočasný seznam podezřelých odkazů. V changelogu zůstává jen anonymizovaný závěr.
+
+Co už dál zvlášť nekontrolujeme:
+Nesledujeme každý průchod rozcestníkem. Stačí běžná měsíční kontrola neplatných odkazů.
+
+Návratový signál:
+Někdo znovu použije archivní šablonu jako aktivní zdroj nebo vznikne duplicitní karta kvůli starému odkazu.
+```
+
+Tím se oprava vrátí do běžného provozu. Nezmizí její poučení, zmizí jen dočasná péče okolo ní.
+
+### Rozlište pravidlo, úklid a paměť
+
+Po systémové opravě zůstávají tři různé druhy věcí a je užitečné je nemíchat:
+
+- Pravidlo: aktuální instrukce, kterou má člověk použít při práci.
+- Úklid: jednorázové odstranění starých stop, odkazů, kopií nebo duplicit.
+- Paměť: krátký záznam, proč pravidlo existuje a kdy se má znovu otevřít.
+
+Pravidlo patří do pracovního místa. Úklid patří do hotového úkolu nebo changelogu. Paměť patří do rozhodovacího logu, ne do každého návodu. Když všechno nacpete do jednoho odstavce, čtenář musí při běžné práci číst i servisní historii. To je přesně ten typ dokumentační posilovny, kterou nikdo dobrovolně nenavštěvuje.
+
+Praktické třídění:
+
+```text
+Věta:
+
+Patří jako:
+- pravidlo / úklid / paměť
+
+Kde má bydlet:
+
+Kdy se má znovu otevřít:
+
+Co kvůli ní nemažeme:
+
+Co kvůli ní naopak můžeme smazat:
+```
+
+Pokud věta nezařadíte, pravděpodobně skončí v hlavním pravidle "pro kontext". Kontext je užitečný při rozhodování. Při běžném použití má být krátký, jinak z pravidla vyrobí malou kroniku.
+
+### Privacy-first uzavření systémové opravy
+
+Systémová oprava často vzniká z konkrétních příkladů: kdo použil starou šablonu, jaká zákaznická věc se tím zdržela, kde vznikla duplicitní karta. Pro rozhodnutí to mohlo být užitečné. Pro trvalé pravidlo to obvykle není potřeba.
+
+Při uzavření proto proveďte datový úklid:
+
+- ponechte anonymizovaný vzor problému;
+- smažte pracovní screenshoty, exporty a kopie starých dokumentů;
+- zkraťte konkrétní zákaznické nebo interní příklady na typ situace;
+- zrušte dočasné seznamy lidí, průchodů nebo podezřelých dokumentů;
+- nechte návratový signál popsaný jako stav systému, ne jako sledování člověka.
+
+Privacy-first věta do logu:
+
+```text
+Zůstává jen anonymizovaný závěr opravy a návratový signál. Dočasné podklady, osobní trasy a pracovní kopie byly smazané nebo zkrácené na typ problému.
+```
+
+Codyho komentář: dobrá systémová oprava má po sobě uklidit skoro stejně dobře jako po původním problému. Jinak jen přesunete nepořádek z archivu do "procesu kolem archivu" a můžete si pogratulovat k luxusnímu chaosu s lepším názvem.
+
+### Karta uzavření systémové opravy
+
+```text
+Název systémové opravy:
+
+Původní opakovaný falešný poplach:
+
+Výsledek ověření:
+- drží / drží s lokálním úklidem / nedrží
+
+Běžné pravidlo v přítomném čase:
+
+Kanonické místo pravidla:
+
+Upravené vstupní místo nebo rozcestník:
+
+Archivované, sloučené nebo smazané podklady:
+
+Co zůstává jen v rozhodovací paměti:
+
+Co už dál zvlášť nesledujeme:
+
+Návratový signál:
+
+Privacy-first úklid:
+
+Datum běžného návratu:
+```
+
+### Checklist uzavření systémové opravy
+
+- Je oprava ověřená přirozeným pracovním průchodem?
+- Je nové pravidlo napsané v přítomném čase, bez nutnosti znát historii problému?
+- Víme, kde pravidlo kanonicky žije?
+- Jsou rozcestníky, indexy a archivní štítky sladěné s novým stavem?
+- Zůstává servisní historie v logu, ne v hlavním pracovním návodu?
+- Rozlišili jsme trvalé pravidlo, jednorázový úklid a rozhodovací paměť?
+- Zavřeli jsme zvláštní ověřovací režim?
+- Smazali nebo zkrátili jsme pomocné podklady, které už nemají rozhodovací hodnotu?
+- Nepřidali jsme nové sledování lidí, čtenářských tras ani klikání v dokumentaci?
+- Je návratový signál konkrétní a vzácný, ne permanentní dohled?
+- Umí nový člověk použít pravidlo bez vysvětlení, proč vzniklo?
+
+Uzavření systémové opravy je práce proti vlastnímu pokušení všechno zdokumentovat. Nechte v systému to, co pomáhá dalšímu průchodu. Zbytek převeďte do krátké paměti nebo smažte. Stabilní provoz se nepozná podle toho, kolik má poznámek k výjimkám, ale podle toho, že běžná cesta vede správně i bez historické přednášky.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -162197,3 +162377,4 @@ Uzavření druhé běžné kontroly je malý, ale důležitý akt provozní hygi
 - 2026-05-31: Doplněna úvodní podkapitola o ověření předání uzavřeného návratu při prvním použití: mini test, tři výsledné stavy, šablona ověření a privacy-first kontrola.
 - 2026-05-31: Doplněna Příloha UT o uzavření ověřené vysvětlující poznámky do stabilního pracovního místa: výsledný stav, úprava pracovní trasy, úklid dočasných stop, privacy-first uzavření, karta a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o ověření systémové opravy po opakovaných falešných poplaších: přirozený pracovní průchod, stavy opravy, lokální úklid, privacy-first ověření, karta a checklist.
+- 2026-06-02: Doplněna úvodní podkapitola o uzavření ověřené systémové opravy do běžného pravidla: přepis do přítomného času, zavření zvláštního ověřovacího režimu, rozlišení pravidla, úklidu a paměti, privacy-first úklid, karta a checklist.
