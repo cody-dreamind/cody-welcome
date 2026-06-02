@@ -162226,8 +162226,188 @@ Položka [název] se vrátila z nízké pozornosti kvůli [událost]. Stav návr
 
 První návrat z nízké pozornosti je test zralosti systému. Když tým dokáže říct "signál nenastal", "signál je slabý" nebo "otevíráme jen toto malé místo", nízká pozornost funguje. Když se při prvním zachvění otevře celý starý projekt, položka nebyla ztišená. Jen čekala v záloze, až zase dostane mikrofon.
 
+## Příloha WE: Uzavření prvního návratu k položce v nízké pozornosti
+
+První návrat k položce v nízké pozornosti má skončit rychleji než běžná revize. Jeho úkolem není znovu posoudit celou historii položky. Úkolem je rozhodnout, co se stane s aktuálním návratem: položka se vrátí do nízké pozornosti, dostane malou opravu, přepíše se návratový signál, nebo se přesune do běžné údržby či archivu.
+
+Uzavření je důležité právě proto, že návrat bývá nenápadný. Někdo si všimne starého tématu, objeví se jeden slabý signál, v týmu vznikne nejistota a najednou se kolem tiché položky začne sbírat nová péče. Pokud návrat neuzavřete, nízká pozornost se rozpadne. Položka sice nebude oficiálně otevřená, ale lidé ji budou dál obcházet, komentovat a kontrolovat mimo systém.
+
+Uzavírací otázka:
+
+```text
+Co se po tomto návratu mění na stavu položky, jejím návratovém signálu a datové stopě?
+```
+
+Pokud na otázku neumíte odpovědět jednou větou, návrat ještě není uzavřený. Buď chybí rozhodnutí, nebo se do návratu přimíchal větší problém, který má dostat vlastní kartu.
+
+### Začněte stavovou větou
+
+Stavová věta má říct, co návrat znamenal a kam položka patří po uzavření. Napište ji před tím, než začnete upravovat šablony, odkazy nebo pracovní poznámky.
+
+Šablona:
+
+```text
+Položka [název] se vrátila kvůli [spouštěč]. Výsledek návratu je [stav]. Po uzavření patří do [nízká pozornost / běžná údržba / malá oprava / archiv] a další návrat nastane jen při [návratový signál].
+```
+
+Příklady:
+
+```text
+Položka "nápověda k poptávkovému formuláři" se vrátila kvůli jedné neúplné poptávce. Výsledek návratu je slabý signál. Po uzavření zůstává v nízké pozornosti a další návrat nastane až tehdy, když se stejný chybějící údaj objeví u pěti relevantních poptávek.
+```
+
+```text
+Položka "druhý onboardingový e-mail" se vrátila kvůli třem stejným dotazům nových zákazníků. Výsledek návratu je platný signál. Po uzavření se otevírá malá oprava jednoho e-mailu, ne celý onboarding.
+```
+
+Taková věta chrání tým před dvěma extrémy. První extrém je ignorovat signál jen proto, že položka měla být tichá. Druhý extrém je otevřít všechno, co s položkou historicky souvisí. Uzavření má být přesné: ani slepé, ani panické.
+
+### Čtyři způsoby uzavření
+
+Po prvním návratu vyberte jeden ze čtyř způsobů uzavření:
+
+- Vrátit do nízké pozornosti: návrat byl planý nebo slabý a nevyžaduje změnu.
+- Otevřít malou opravu: návratový signál je platný a ukazuje na jedno nejbližší pracovní místo.
+- Přepsat návratový signál: problém není v položce, ale v tom, jak má být znovu otevřená.
+- Přesunout stav položky: položka už nepatří do nízké pozornosti, protože potřebuje běžnou údržbu, sloučení nebo archivaci.
+
+Nepřidávejte pátý stav "necháme otevřené". Pokud opravdu potřebujete čekat na další důkaz, uzavřete návrat jako slabý signál a napište, jaký nejbližší přirozený důkaz rozhodne. Jinak se z čekání stane nepojmenovaná údržba.
+
+Příklad:
+
+```text
+Slabý signál:
+Jeden sales rozhovor ukázal zmatek v názvu balíčku, ale další dva rozhovory ho nepotvrdily.
+
+Uzavření:
+Položka se vrací do nízké pozornosti. Při dalších třech relevantních rozhovorech obchod jen poznamená, jestli se stejný zmatek zopakoval. Nevzniká nová revize nabídky.
+```
+
+Rozdíl je v tom, že tým ví, co se stane dál, aniž by si založil novou práci.
+
+### Uložte výsledek do kanonického místa
+
+Uzavření návratu nepatří do dlouhého chatu, do dočasné tabulky ani do poznámky člověka, který byl zrovna u toho. Patří k položce samotné nebo do jejího nejbližšího provozního rytmu.
+
+Praktické pravidlo:
+
+- pokud se položka vrací do nízké pozornosti, aktualizujte jen její stavovou větu nebo datum posledního návratu;
+- pokud vzniká malá oprava, založte nebo doplňte kartu opravy v místě, kde se bude opravdu dělat;
+- pokud se mění návratový signál, upravte kanonické místo položky a starou podmínku nechte jen jako krátkou poznámku o nahrazení;
+- pokud se položka archivuje nebo slučuje, přidejte odkaz na nový zdroj pravdy.
+
+Neukládejte celý příběh návratu. Stačí výsledek, důvod, další signál a privacy-first poznámka. Historie má pomáhat rozhodnout, ne dokazovat, že tým hodně přemýšlel.
+
+### Zavřete dočasný důkaz
+
+Návrat z nízké pozornosti občas potřebuje krátký důkaz: tři obchodní rozhovory, pět poptávek, jeden onboardingový cyklus, kontrolu posledních support dotazů. Jakmile je rozhodnutí hotové, důkaz zavřete.
+
+Zavření důkazu znamená:
+
+- přepsat surové poznámky do jedné rozhodovací věty;
+- odstranit jména, konkrétní zákaznické detaily a údaje, které nejsou pro rozhodnutí potřeba;
+- smazat dočasnou tabulku nebo ji zkrátit na anonymizovaný výsledek;
+- vypnout ruční značku, pokud měla sloužit jen pro tento návrat;
+- potvrdit, že se nepřidal nový trvalý tracker ani formulářové pole bez jasného účelu.
+
+Příklad uzavření:
+
+```text
+Dočasný důkaz:
+Obchod u pěti relevantních poptávek sledoval, jestli chybí rozhodovací termín.
+
+Výsledek:
+Chyběl u čtyř z pěti relevantních poptávek.
+
+Uzavření datové stopy:
+Do karty opravy ukládáme jen anonymizovaný výsledek. Ruční poznámky z CRM mažeme po přepsání závěru. Nepřidáváme nové povinné pole, nejdřív upravujeme nápovědu formuláře.
+```
+
+Tohle je malý, ale silný rozdíl. Tým používá data k rozhodnutí, ne jako další majetek, o který se pak musí starat.
+
+### Kdy položku nenechat v nízké pozornosti
+
+Nízká pozornost není trezor na věci, které nikdo nechce řešit. Pokud se položka vrací příliš často, má nejasný návratový signál nebo její tichý stav vytváří skrytou práci, změňte stav.
+
+Položku vytáhněte z nízké pozornosti, když:
+
+- stejný návratový signál nastal ve dvou běžných cyklech po sobě;
+- lidé kvůli položce zakládají paralelní poznámky nebo obcházejí kanonické místo;
+- slabé signály se hromadí, ale nikdo neumí říct, co by je potvrdilo;
+- návrat vyžaduje pravidelný ruční dohled;
+- datová stopa kolem položky roste, i když položka měla být tichá.
+
+V takové chvíli nejde o selhání nízké pozornosti. Jde o dobrý signál, že stav položky už neodpovídá realitě. Lepší je vrátit ji do běžné údržby než předstírat, že je tichá, zatímco tým kolem ní potichu pracuje.
+
+Codyho komentář: "nízká pozornost" není kouzelná cedulka, která udělá z živého problému dekoraci. Když se věc pořád vrací, nechce být tichá. A když chce být hlasitá, je fér jí dát normální místo místo šuškání v poznámkách.
+
+### Karta uzavření prvního návratu
+
+```text
+Položka:
+
+Kanonické místo:
+
+Co návrat spustilo:
+
+Výsledek návratu:
+- planý návrat / slabý signál / platný signál / špatný signál
+
+Způsob uzavření:
+- vrátit do nízké pozornosti / otevřít malou opravu / přepsat návratový signál / přesunout stav položky
+
+Stavová věta:
+
+Co se mění v kanonickém místě:
+
+Co z historie neotevíráme:
+
+Dočasný důkaz:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Nový nebo potvrzený návratový signál:
+
+Kdy se položka potká v běžném rytmu:
+
+Vlastník uzavření:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kartu prvního návratu a pojmenujte skutečný spouštěč.
+2. Minuta 2: vyberte způsob uzavření.
+3. Minuta 3: napište stavovou větu jednou větou.
+4. Minuta 4: určete kanonické místo, kam výsledek patří.
+5. Minuta 5: zavřete dočasný důkaz a privacy-first datovou stopu.
+6. Minuta 6: napište nový nebo potvrzený návratový signál.
+
+Výstup workshopu:
+
+```text
+Návrat položky [název] uzavíráme stavem [způsob uzavření]. V kanonickém místě měníme [konkrétní změna]. Historii [neotevíráme]. Dočasný důkaz [mažeme/zkracujeme/anonymizujeme] a další návrat nastane jen při [signál].
+```
+
+### Checklist uzavření prvního návratu
+
+- Je jasné, co návrat spustilo?
+- Vybrali jsme jeden způsob uzavření?
+- Je stavová věta krátká a použitelná pro člověka mimo workshop?
+- Patří výsledek do kanonického místa, ne do dočasné poznámky?
+- Pokud vzniká oprava, je malá a navázaná na nejbližší pracovní místo?
+- Pokud se mění návratový signál, je stará podmínka nahrazená, ne ponechaná vedle nové?
+- Pokud se položka vrací do nízké pozornosti, nevznikl nový dohled?
+- Pokud se položka přesouvá do běžné údržby nebo archivu, je zapsané proč?
+- Jsou surové poznámky, zákaznické detaily a dočasné tabulky smazané nebo anonymizované?
+- Nepřidali jsme tracker, formulářové pole ani report bez jasného účelu a konce?
+- Ví tým, kdy se položka příště potká v normálním rytmu?
+- Je zapsané, co z historie se tímto návratem neotevírá?
+
+Dobré uzavření prvního návratu je krátké. Čtenář ani tým nemají dostat další vrstvu řízení. Mají dostat jasnou odpověď: položka je pořád tichá, potřebuje malou opravu, má lepší návratový signál, nebo už do nízké pozornosti nepatří. Všechno ostatní je šum, který se tváří jako péče.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WE o uzavření prvního návratu k položce v nízké pozornosti: stavová věta, čtyři způsoby uzavření, uložení výsledku do kanonického místa, privacy-first uzavření dočasného důkazu, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WD o prvním návratu k položce v nízké pozornosti: ověření návratového signálu, čtyři výsledné stavy, otevření nejbližšího pracovního místa, zákaz zvláštního dohledu, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WC o převodu stabilní položky z dlouhodobé údržby do nízké pozornosti: podmínky převodu po dvou klidných kontrolách, stavová věta, snížení viditelnosti bez ztráty odpovědnosti, úklid zbytků údržby, privacy-first mazání podkladů, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WB o uzavření druhé běžné kontroly položky v dlouhodobé údržbě: uzavírací věta, správné kanonické místo, čtyři typy uzavření, úklid pomocné stopy, návratový signál bez nového dohledu, karta, mini workshop a checklist.
