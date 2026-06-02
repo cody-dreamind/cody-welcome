@@ -5768,6 +5768,175 @@ Datum běžného návratu:
 
 Uzavření systémové opravy je práce proti vlastnímu pokušení všechno zdokumentovat. Nechte v systému to, co pomáhá dalšímu průchodu. Zbytek převeďte do krátké paměti nebo smažte. Stabilní provoz se nepozná podle toho, kolik má poznámek k výjimkám, ale podle toho, že běžná cesta vede správně i bez historické přednášky.
 
+## První běžné použití pravidla po uzavřené systémové opravě
+
+Když se systémová oprava uzavře do běžného pravidla, ještě není potřeba otevírat další audit. Stačí počkat na první normální situaci, ve které by se pravidlo stejně použilo. Právě tam se ukáže, jestli je opravdu součástí práce, nebo jestli jen hezky sedí v dokumentaci a čeká, až ho někdo slavnostně ignoruje.
+
+První běžné použití má odpovědět na jednoduchou otázku:
+
+```text
+Pomohlo nové pravidlo dokončit práci bez návratu ke starému problému a bez nového stínového procesu?
+```
+
+Pokud ano, pravidlo zůstává v klidovém provozu. Pokud ne, neznamená to automaticky další systémovou opravu. Nejdřív rozlište, jestli selhalo pravidlo, jeho umístění, nebo očekávání, že si člověk pamatuje kontext, který v návodu už není.
+
+### Nepřipravujte speciální test
+
+Speciální test často vypadá čistěji než realita, ale právě tím zkresluje výsledek. Když člověku řeknete "teď ověřujeme nové archivní pravidlo", bude se chovat pozorněji než při běžné práci. První použití má být obyčejné:
+
+- editor hledá aktuální šablonu pro rozhodovací záznam;
+- marketing owner připravuje měsíční review podnětů;
+- delivery tým používá rozcestník při předání výstupu;
+- produktový člověk zavírá malou kartu změny;
+- někdo nový v týmu čte pracovní trasu bez znalosti historie opravy.
+
+Zapište jen minimum:
+
+```text
+Běžná situace:
+Použité pravidlo:
+Kde člověk začal:
+Co měl dokončit:
+Co se stalo:
+Vznikl návrat ke starému problému:
+Vznikl nový stínový proces:
+Stav pravidla:
+```
+
+Příklad:
+
+```text
+Běžná situace:
+Marketing owner uzavírá slabý podnět z měsíčního review.
+
+Použité pravidlo:
+Archivní šablony jsou označené jako neaktivní a ukazují na aktuální zdroj pravdy.
+
+Kde člověk začal:
+V rozcestníku review šablon.
+
+Co měl dokončit:
+Rozhodnout, jestli podnět zavřít, odložit, nebo převést do karty změny.
+
+Co se stalo:
+Došel na aktuální šablonu, podnět zavřel bez úkolu a nepoužil starou variantu.
+
+Vznikl návrat ke starému problému:
+Ne.
+
+Vznikl nový stínový proces:
+Ne. Nevznikl seznam "pro jistotu kontrolovat archiv".
+
+Stav pravidla:
+Drží v běžné práci.
+```
+
+Takový zápis je dostatečný. Není potřeba ukládat screenshoty, kompletní trasu klikání ani detailní historii člověka. Výstup je pracovní stav pravidla, ne behaviorální studie týmu.
+
+### Hledejte stínový proces
+
+Největší riziko po systémové opravě není návrat starého problému. Ten bývá vidět. Horší je nový stínový proces: drobná činnost, kterou tým začne dělat "jen pro jistotu", ale nikdo ji nepovažuje za skutečný náklad.
+
+Typické stíny po uzavřené opravě:
+
+- někdo ručně kontroluje staré odkazy, i když už mají být vyřešené běžným rytmem;
+- tým si vede pomocný seznam výjimek, který nemá vlastníka ani datum smazání;
+- u každého použití pravidla vzniká poznámka "ověřit ještě jednou";
+- noví lidé se musí ptát na historii opravy, aby pravidlo použili;
+- pravidlo funguje jen proto, že ho jeden člověk osobně hlídá.
+
+Stínový proces neřešte dalším pravidlem hned. Nejdřív ho pojmenujte:
+
+```text
+Stínová činnost:
+Proč vznikla:
+Co chrání:
+Co stojí:
+Kdy ji můžeme bezpečně zrušit:
+Co místo ní stačí v běžném rytmu:
+```
+
+Pokud činnost chrání reálné riziko, převeďte ji do normálního provozního rytmu s vlastníkem a stop podmínkou. Pokud chrání jen nervozitu po nedávné opravě, zrušte ji. Systém, který po každé stabilizaci přidá ruční hlídku, se časem tváří spolehlivě, ale ve skutečnosti jen spotřebovává pozornost lidí.
+
+### Tři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden stav:
+
+- Drží bez zásahu: pravidlo pomohlo práci dokončit a nevznikl stínový proces.
+- Drží s drobným vysvětlením: pravidlo funguje, ale jedno místo potřebuje kratší formulaci, příklad nebo lepší odkaz.
+- Nedrží v běžné práci: člověk se vrátil ke starému problému, obešel pravidlo nebo musel vytvořit pomocný proces.
+
+Stav `drží s drobným vysvětlením` má být opravdu drobný. Patří sem jedna věta v rozcestníku, jasnější název odkazu nebo krátký příklad v místě použití. Ne nové školení, ne nový checklist, ne nová příloha. Pokud je potřeba širší zásah, pravidlo pravděpodobně nedrží.
+
+Stav `nedrží v běžné práci` neznamená automaticky selhání člověka. Častěji znamená, že pravidlo není dost viditelné, je na špatném místě, nebo vyžaduje znalost staré historie. Vraťte se k pracovnímu místu, ne k osobě.
+
+### Privacy-first hranice prvního použití
+
+První použití pravidla po systémové opravě má být lehké i datově. Nepřidávejte měření používání dokumentace, osobní sledování průchodů ani automatický audit každého otevření šablony. Stačí krátký anonymizovaný záznam výsledku.
+
+Privacy-first minimum:
+
+```text
+Zůstává:
+Stav pravidla, typ pracovní situace a případná drobná úprava.
+
+Nezůstává:
+Jméno člověka, detailní trasa, screenshoty obrazovek, kompletní zákaznický kontext.
+
+Nesbírá se:
+Klikání v dokumentaci, časy čtení, osobní skóre dodržování pravidla.
+```
+
+Pokud pravidlo používá zákaznický příklad, zkraťte ho na typ situace. "Starý odkaz vedl k neaktivní šabloně při review nabídky" stačí. Není potřeba ukládat název zákazníka, interní komentáře ani celý výstup review.
+
+Codyho komentář: první běžné použití je jako kontrola, jestli se dveře zavírají normálně po opravě pantů. Když fungují, nepotřebujete na kliku nalepit formulář denní spokojenosti. Stačí projít a nechat dveře být.
+
+### Karta prvního běžného použití
+
+```text
+Uzavřená systémová oprava:
+
+Běžné pravidlo:
+
+První běžná situace:
+
+Pracovní výstup:
+
+Zopakoval se starý problém:
+- ano / ne
+
+Vznikl stínový proces:
+- ano / ne
+
+Výsledek pravidla:
+- drží bez zásahu / drží s drobným vysvětlením / nedrží v běžné práci
+
+Pokud drobné vysvětlení, co přesně měníme:
+
+Pokud stínový proces, co rušíme nebo převádíme do běžného rytmu:
+
+Co výslovně dál nesledujeme:
+
+Privacy-first úklid:
+
+Návratový signál:
+```
+
+### Checklist prvního běžného použití
+
+- Proběhlo použití v normální pracovní situaci, ne ve speciálním testu?
+- Pomohlo pravidlo dokončit konkrétní výstup?
+- Nevrátil se starý problém stejnou cestou?
+- Nevznikla ruční kontrola, pomocný seznam nebo jiné hlídání "pro jistotu"?
+- Pokud bylo potřeba vysvětlení, je to jedna malá úprava v místě použití?
+- Pokud pravidlo nedrželo, řešíme pracovní místo místo obviňování člověka?
+- Nezavedli jsme měření čtení, klikání ani osobní dodržování pravidla?
+- Zůstává po použití jen anonymizovaný pracovní závěr?
+- Má pravidlo návratový signál, který je konkrétní a vzácný?
+- Umíme pravidlo po tomto použití nechat v klidu?
+
+První běžné použití má chránit stabilitu před dvěma extrémy: před naivním "hotovo navždy" i před nervózním "budeme to teď hlídat pokaždé". Dobré pravidlo má po prvním normálním použití buď klidně pracovat dál, nebo ukázat jedno přesné místo k opravě. Všechno navíc je podezřelé.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -162754,3 +162923,4 @@ První návrat z nízké pozornosti je test zralosti systému. Když tým doká�
 - 2026-05-31: Doplněna Příloha UT o uzavření ověřené vysvětlující poznámky do stabilního pracovního místa: výsledný stav, úprava pracovní trasy, úklid dočasných stop, privacy-first uzavření, karta a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o ověření systémové opravy po opakovaných falešných poplaších: přirozený pracovní průchod, stavy opravy, lokální úklid, privacy-first ověření, karta a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o uzavření ověřené systémové opravy do běžného pravidla: přepis do přítomného času, zavření zvláštního ověřovacího režimu, rozlišení pravidla, úklidu a paměti, privacy-first úklid, karta a checklist.
+- 2026-06-02: Doplněna úvodní podkapitola o prvním běžném použití pravidla po uzavřené systémové opravě: běžná pracovní situace, stínový proces, tři výsledné stavy, privacy-first hranice, karta a checklist.
