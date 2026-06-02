@@ -165084,8 +165084,234 @@ Review je uzavřené. Výsledek bydlí v [kanonické místo], další běžný r
 
 Uzavření prvního dlouhodobého review má být krátké a trochu nudné. To je kompliment. Když se systémová položka po opravě, údržbě a prvním dlouhodobém review vrátí do obyčejného rytmu, vyhrála. Teď už nemá být zajímavá. Má fungovat.
 
+## Příloha WO: Druhé dlouhodobé review ve stabilním rytmu
+
+Druhé dlouhodobé review je první chvíle, kdy se ukáže, jestli stabilní rytmus opravdu drží sám sebe. První review ještě často těží z čerstvé paměti lidí, kteří opravu zavírali. Druhé review už má být obyčejnější: člověk přijde k položce v běžném provozu, použije stejné otázky jako u ostatních položek a nemusí vědět, jaká malá krize tomu kdysi předcházela.
+
+Základní věta druhého dlouhodobého review zní:
+
+```text
+Položka [název] prošla druhým dlouhodobým review jako běžná součást [rytmus]. Výsledek je [ponechat / zlevnit údržbu / sloučit / snížit pozornost / otevřít návrat].
+```
+
+Příklad:
+
+```text
+Rozcestník review šablon prošel druhým dlouhodobým review jako běžná součást měsíční údržby znalostní báze. Výsledek je snížit pozornost: dvě po sobě jdoucí kontroly proběhly bez návratového signálu a údržba stojí jednu minutu.
+```
+
+Tato věta je užitečná právě tím, že je krátká. Pokud do ní musíte připsat dlouhé vysvětlení staré opravy, položka ještě není stabilní. Pokud naopak stačí pojmenovat rytmus, výsledek a další stav, systém začíná fungovat bez historické berličky.
+
+### Neopakujte první review
+
+Druhé dlouhodobé review není kontrola kontroly. Nemá ověřovat, jestli bylo první review správně vyplněné, jestli autor původní opravy dobře odhadl riziko nebo jestli by se tehdejší rozhodnutí dalo formulovat hezčeji.
+
+Ptejte se jen na současnou práci:
+
+- našel člověk položku tam, kde ji čekal?
+- použil ji bez zvláštního návodu?
+- proběhl běžný signál?
+- nastal návratový signál?
+- je cena údržby pořád rozumná?
+- existuje duplicitní pravidlo, které dělá totéž?
+- může položka přejít do nižší pozornosti?
+
+Nechte minulost zavřenou, dokud se neukáže konkrétní návratový signál. Stabilní rytmus se nerozbije tím, že nečtete staré zápisy. Rozbije se tím, že každá kontrola začne znovu dokazovat, proč položka vznikla.
+
+### Pět výsledných stavů
+
+Po druhém dlouhodobém review vyberte jeden z pěti stavů:
+
+- Ponechat: položka funguje, cena údržby je rozumná a návratový signál nenastal.
+- Zlevnit údržbu: položka funguje, ale kontrola pořád bere víc pozornosti, než má.
+- Sloučit: položka se překrývá s jiným pravidlem, šablonou, reportem nebo review.
+- Snížit pozornost: položka byla dvakrát po sobě klidná a může z běžného rytmu přejít do méně viditelné kontroly.
+- Otevřít návrat: nastal návratový signál a je potřeba nová pracovní karta.
+
+Stav "ponechat" není lenost. Je to platné rozhodnutí, pokud položka pořád plní účel. Stav "snížit pozornost" není totéž co zapomenout. Znamená, že položka zůstává dostupná, má vlastníka a návratový signál, ale už nemusí zabírat místo v každém běžném review.
+
+Příklad rozdílu:
+
+```text
+Ponechat:
+Kontrola je levná, ale položka je pořád důležitá pro měsíční kvalitu výstupů.
+
+Snížit pozornost:
+Kontrola je levná, položka dvě review po sobě nic neukázala a stejný signál zachytí kvartální revize.
+```
+
+Když si nejste jistí, nesnižujte pozornost jen proto, že je položka nudná. Snižte ji až tehdy, když víte, kde ji systém příště zachytí.
+
+### Test snížení pozornosti
+
+Než položku přesunete do nižší pozornosti, projděte krátký test:
+
+```text
+Co se stane, když položku nezkontrolujeme v příštím běžném rytmu?
+Kde se případný problém projeví?
+Kdo ho uvidí?
+Jaký návratový signál položku znovu otevře?
+Jaká data kvůli tomu nemusíme dál držet?
+```
+
+Vyplněný příklad:
+
+```text
+Co se stane, když rozcestník nezkontrolujeme příští měsíc:
+Pravděpodobně nic, protože odkazy se mění hlavně při kvartální revizi šablon.
+
+Kde se případný problém projeví:
+Člověk při review skončí ve staré šabloně nebo nenajde aktuální zdroj pravdy.
+
+Kdo ho uvidí:
+Editor znalostní báze při běžné kvartální revizi.
+
+Návratový signál:
+Jakýkoliv reálný průchod, který skončí v archivní šabloně.
+
+Data, která nemusíme dál držet:
+Pomocný měsíční seznam kontrol a osobní připomínky z opravy.
+```
+
+Tento test chrání před dvěma extrémy. První extrém je věčné hlídání drobnosti, která už jen zabírá pozornost. Druhý extrém je tiché zmizení položky bez jasného návratu. Dobré snížení pozornosti má pořád cestu zpět.
+
+### Privacy-first dopad druhého review
+
+Druhé dlouhodobé review je dobré místo pro další zmenšení datové stopy. Pokud položka funguje dvě kontroly po sobě, často už nepotřebujete:
+
+- osobní poznámky z původního ověřování;
+- screenshoty starého problému;
+- exporty použité jen pro rozhodnutí o opravě;
+- samostatné připomínky mimo kanonický rytmus;
+- seznam lidí, kteří se opravy účastnili;
+- duplicitní kopie šablony v dočasných složkách.
+
+Nechte jen to, co pomáhá budoucímu rozhodnutí: kanonické pravidlo, vlastníka, běžný rytmus, návratový signál a poslední uzavírací větu. V privacy-first provozu není cílem mít o všem co nejvíc důkazů. Cílem je mít dost důkazů pro dobré rozhodnutí a zbytek nechat odejít.
+
+Codyho komentář: stabilní systém se pozná i podle toho, že umí mazat. Ne dramaticky, ne hrdinsky, prostě uklidit věci, které už nemají práci. Digitální prach je pořád prach, jen se hůř vysává.
+
+### Karta druhého dlouhodobého review
+
+```text
+Položka:
+
+Dlouhodobý rytmus:
+
+Datum druhého dlouhodobého review:
+
+Kdo review provedl:
+
+Běžný signál:
+
+Návratový signál:
+
+Co se stalo v reálné práci:
+
+Cena údržby:
+- 1 / 2 / 3 / 4 / 5
+
+Výsledný stav:
+- ponechat / zlevnit údržbu / sloučit / snížit pozornost / otevřít návrat
+
+Pokud snižujeme pozornost, nový rytmus:
+
+Kde se problém znovu zachytí:
+
+Co mažeme, anonymizujeme nebo slučujeme:
+
+Co výslovně neotevíráme:
+
+Kanonická uzavírací věta:
+
+Další návrat:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Rozcestník review šablon.
+
+Dlouhodobý rytmus:
+Měsíční údržba znalostní báze.
+
+Datum druhého dlouhodobého review:
+2026-06-02.
+
+Kdo review provedl:
+Editor znalostní báze.
+
+Běžný signál:
+Rozcestník vede na aktuální zdroj pravdy.
+
+Návratový signál:
+Člověk při reálném review skončí v archivní šabloně.
+
+Co se stalo v reálné práci:
+Druhé review proběhlo bez nálezu, kontrola trvala jednu minutu.
+
+Cena údržby:
+1.
+
+Výsledný stav:
+Snížit pozornost.
+
+Pokud snižujeme pozornost, nový rytmus:
+Kvartální revize šablon.
+
+Kde se problém znovu zachytí:
+Při reálném review šablony nebo při kvartální kontrole odkazů.
+
+Co mažeme, anonymizujeme nebo slučujeme:
+Pomocný měsíční seznam a osobní připomínku po první opravě.
+
+Co výslovně neotevíráme:
+Nezakládáme nový audit celé znalostní báze.
+
+Kanonická uzavírací věta:
+Rozcestník review šablon přechází po druhém klidném dlouhodobém review z měsíční údržby do kvartální revize šablon.
+
+Další návrat:
+Kvartální revize šablon nebo dřív při návratovém signálu.
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte uzavírací větu z prvního dlouhodobého review.
+2. Minuta 2: ověřte, že dnešní kontrola probíhá v běžném rytmu.
+3. Minuta 3: zkontrolujte běžný signál.
+4. Minuta 4: rozhodněte, zda nastal návratový signál.
+5. Minuta 5: ohodnoťte cenu údržby.
+6. Minuta 6: vyberte jeden z pěti stavů.
+7. Minuta 7: pokud snižujete pozornost, napište, kde se problém znovu zachytí.
+8. Minuta 8: smažte nebo slučte dočasné stopy, které už nemají účel.
+
+Výstup:
+
+```text
+Položka [název] po druhém dlouhodobém review končí jako [stav]. Další rytmus je [rytmus], návratový signál je [signál] a datová stopa se zmenšuje o [co uklízíme].
+```
+
+### Checklist druhého dlouhodobého review
+
+- Proběhlo review jako běžná kontrola, ne jako návrat k historii opravy?
+- Je jasné, co byl běžný signál?
+- Je jasné, jestli nastal návratový signál?
+- Změřili jsme cenu údržby?
+- Vybrali jsme jeden z pěti stavů?
+- Pokud položku ponecháváme, víme proč má pořád být v rytmu?
+- Pokud zlevňujeme údržbu, měníme jen cenu kontroly, ne účel položky?
+- Pokud slučujeme, existuje jedno nové kanonické místo?
+- Pokud snižujeme pozornost, víme, kde se problém znovu zachytí?
+- Pokud otevíráme návrat, máme nejbližší pracovní místo místo celé staré historie?
+- Zmenšili jsme datovou stopu po předchozích kontrolách?
+- Nepřidali jsme nové měření, export ani sledování lidí jen kvůli klidu?
+
+Druhé dlouhodobé review má systém naučit, kdy už položka nepotřebuje být vidět tak často. Dobrá údržba není jen schopnost věci opravovat. Je to i schopnost poznat, že opravená věc už může dostat méně pozornosti a pořád zůstat pod kontrolou.
+
 ## Pracovní log
 
+- 2026-06-02: Doplněna Příloha WO o druhém dlouhodobém review ve stabilním rytmu: současná kontrola bez návratu k historii, pět výsledných stavů, test snížení pozornosti, privacy-first zmenšení datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WN o uzavření prvního dlouhodobého review do stabilního rytmu: stavové uzavření, kanonické místo, úklid dočasných stop, privacy-first minimalizace, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WM o prvním dlouhodobém review po převodu do rytmu: kontrola současné použitelnosti, čtyři výsledné stavy, cena údržby, privacy-first hranice bez nových metrik, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o uzavření druhého běžného použití pravidla do běžného rytmu: stavová věta, čtyři způsoby uzavření, správné kanonické místo, privacy-first úklid ověřovací stopy, karta a checklist.
