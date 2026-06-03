@@ -166772,8 +166772,219 @@ V prvním běžném cyklu je položka ve stavu [stav]. Další zásah je [zásah
 
 První běžný cyklus je poslední zkouška toho, jestli se prořezaná položka opravdu stala běžnou. Když drží, nechte ji držet. Když najde drobnou starou stopu, ukliďte ji. Když vrátí starý rytmus, opravte spouštěč. A když ukáže, že položka už nemá důvod žít v aktivním provozu, ukončete ji čistě. Každá z těchto možností je lepší než tiché přidání další vrstvy dohledu.
 
+## Příloha WV: Čisté ukončení položky bez místa v rytmu
+
+První běžný cyklus občas ukáže nepohodlnou věc: položka už nemá kam patřit. Není rozbitá, nevrací starý problém a nevolá po drobné opravě. Jen se ukáže, že ji tým ponechal v provozu ze zvyku, opatrnosti nebo respektu k práci, která do ní kdysi šla. V takové chvíli není správná reakce hledat slabší rytmus, menší kontrolu nebo tišší parkoviště. Správná reakce je položku ukončit.
+
+Ukončení není smazání historie bez paměti. Je to rozhodnutí, že aktivní provoz už položku nepotřebuje. Zůstane jen tolik kontextu, kolik je nutné pro budoucí pochopení, proč zmizela. Všechno ostatní má odejít: staré odkazy, pomocné seznamy, dočasné exporty, zvláštní připomínky a vysvětlovací poznámky, které by ji při příštím plánování znovu vytáhly na stůl.
+
+Začněte krátkou větou:
+
+```text
+Položka nemá v běžném rytmu místo, protože:
+Ukončujeme ji takto:
+Zůstává jen:
+Rušíme:
+Znovu se otevře pouze při:
+```
+
+Příklad:
+
+```text
+Položka nemá v běžném rytmu místo, protože:
+Rozcestník review šablon už nevede k samostatné práci. Kanonický index pokrývá stejné rozhodnutí přímo.
+
+Ukončujeme ji takto:
+Odstraňujeme položku z aktivní kontroly a ponecháváme jen poznámku v archivu rozhodnutí.
+
+Zůstává jen:
+Jednovětý záznam, že samostatný rozcestník byl nahrazen kanonickým indexem.
+
+Rušíme:
+Starý odkaz v plánování, pomocný seznam šablon a připomínku na samostatné review.
+
+Znovu se otevře pouze při:
+Reálný pracovní průchod skončí mimo kanonický index a člověk kvůli tomu použije starou šablonu.
+```
+
+Tento zápis chrání dvě věci najednou. Tým nepřijde o paměť, proč položka zmizela, ale zároveň ji nebude dál potkávat jako poloviční úkol. Ukončená položka nemá čekat na lepší čas. Má přestat soutěžit o pozornost.
+
+### Rozdíl mezi archivem a aktivním systémem
+
+Archiv je místo pro pochopení minulého rozhodnutí. Aktivní systém je místo, podle kterého lidé pracují. Pokud ukončenou položku necháte v aktivním systému jen s nálepkou "historické", pořád bude působit jako součást práce. Lidé ji budou číst, ptát se na ni, porovnávat ji s novými položkami a občas ji omylem použijí.
+
+Ukončení proto potřebuje přesun nebo odstranění z pracovních míst:
+
+- z checklistu pryč, ne jen na konec seznamu;
+- z kalendáře pryč, ne jen přejmenovat připomínku;
+- z backlogu do archivu nebo zavřít, ne do slabší priority;
+- z provozní šablony pryč, pokud podle ní už nikdo nemá pracovat;
+- z dokumentace odstranit aktivní instrukci a nechat jen odkaz na aktuální kanonické místo, pokud je opravdu potřeba.
+
+Archivní věta má být stručná. Nemá znovu vyprávět celou historii prořezání. Stačí:
+
+```text
+Samostatná položka byla ukončena, protože kanonický index pokrývá její účel. Nová práce se vede přes index; starý review rytmus už neplatí.
+```
+
+Pokud archivní věta potřebuje tři odstavce, ukončení pravděpodobně není hotové. Buď položka pořád něco řeší, nebo tým neumí říct, co ji nahradilo.
+
+### Co uklidit hned
+
+Čisté ukončení má mít fyzický úklid. Nestačí napsat "ukončeno". Staré stopy mají tendenci přežít přesně tam, kde se později stane omyl.
+
+Uklízejte v tomto pořadí:
+
+1. Aktivní spouštěče: připomínky, opakované úkoly, kontrolní body, kalendářové rytmy.
+2. Pracovní odkazy: šablony, checklisty, interní navigace, karty v backlogu.
+3. Pomocné důkazy: exporty, screenshoty, dočasné tabulky, poznámky z ověřování.
+4. Vysvětlovací texty: dlouhé komentáře, které už slouží jen k obraně staré položky.
+5. Archivní stopa: jedna krátká věta nebo rozhodovací záznam, pokud je potřeba.
+
+První bod je nejdůležitější. Dokud existuje aktivní spouštěč, položka není ukončená. Je jen přejmenovaná. Zrušený checklist, který pořád posílá připomínku, není zrušený checklist. Je to malý provozní vtip, který bohužel stojí skutečný čas.
+
+### Kdy nic nenahrazovat
+
+Týmy mají při ukončení často automatický reflex: když něco rušíme, musíme za to dát náhradu. Někdy ano. Pokud položka pořád pokrývá reálné riziko, patří do jiného kanonického místa. Ale když první běžný cyklus ukázal, že položka nemá v rytmu místo, náhrada může být jen další převlek stejného šumu.
+
+Nenahrazujte položku, když:
+
+- její účel už pokrývá jiné pracovní místo;
+- nikdo podle ní při běžném průchodu nepracoval;
+- návratový signál je čistě hypotetický a nemá oporu v realitě;
+- její udržování vyžaduje víc vysvětlování než hodnoty;
+- ukončení snižuje datovou stopu bez ztráty rozhodovací schopnosti.
+
+Pokud náhradu opravdu potřebujete, napište ji jako přesměrování, ne jako nový objekt:
+
+```text
+Tuto samostatnou položku už neudržujeme. Pokud se téma objeví při práci, řeší se přes kanonický index standardů.
+```
+
+To je jiné než založit nový seznam "ukončené, ale sledované položky". Takový seznam je často jen starý backlog s lepším sebevědomím.
+
+### Privacy-first ukončení
+
+Ukončení položky je výborná chvíle pro datový úklid. Když položka nemá místo v aktivním rytmu, obvykle nemá důvod držet ani dočasné důkazy, pomocné exporty nebo osobní poznámky, které vznikly při jejím ověřování. Zůstává jen rozhodovací minimum.
+
+Použijte jednoduché pravidlo:
+
+```text
+Zůstává:
+Rozhodnutí, aktuální kanonické místo, případný návratový signál a datum ukončení.
+
+Maže se nebo se přestává udržovat:
+Dočasné exporty, screenshoty, seznamy použití, osobní trasy, pomocné tabulky, staré připomínky a duplicitní šablony.
+
+Nepřidává se:
+Nový tracker, dohled nad ukončenou položkou, zvláštní report ani evidence lidí, kteří starou položku použili.
+```
+
+Pozor na falešnou jistotu. Není potřeba měřit, jestli si všichni všimli, že položka skončila. Potřebujete odstranit staré spouštěče a dát aktuální práci jasné kanonické místo. Pokud se někdo později vrátí starou cestou, je to návratový signál nebo lokální zbytek k úklidu. Není to důvod sledovat všechny preventivně.
+
+### Karta ukončení položky
+
+```text
+Položka:
+
+Proč nemá místo v běžném rytmu:
+
+Co ji případně nahrazuje:
+
+Co se ruší z aktivního provozu:
+
+Kde zůstává archivní věta:
+
+Aktivní spouštěče zrušené:
+
+Pracovní odkazy uklizené:
+
+Dočasné důkazy smazané nebo ponechané jen v minimu:
+
+Co nenahrazujeme:
+
+Návratový signál:
+
+Privacy-first výsledek:
+
+Vlastník úklidu:
+
+Datum ukončení:
+
+Jednověté uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Samostatné kvartální review rozcestníku šablon.
+
+Proč nemá místo v běžném rytmu:
+První běžný cyklus potvrdil, že kanonický index vede člověka přímo k aktuální šabloně.
+
+Co ji případně nahrazuje:
+Nic nového. Téma je součástí půlroční kontroly kanonického indexu.
+
+Co se ruší z aktivního provozu:
+Kvartální připomínka, položka v plánovacím checklistu a starý odkaz v interní navigaci.
+
+Kde zůstává archivní věta:
+V rozhodovacím logu ke kanonickému indexu.
+
+Dočasné důkazy smazané nebo ponechané jen v minimu:
+Mažeme pomocný seznam starých šablon. Ponecháváme jednu větu o důvodu ukončení.
+
+Co nenahrazujeme:
+Nezakládáme seznam ukončených rozcestníků ani další kontrolu po kontrole.
+
+Návratový signál:
+Člověk při reálné práci skončí ve staré šabloně nebo kanonický index nepokryje běžnou cestu.
+
+Privacy-first výsledek:
+Nevzniká žádné sledování čtení dokumentace, seznam uživatelů ani nový report používání šablon.
+
+Jednověté uzavření:
+Samostatné review rozcestníku je ukončené; jeho účel pokrývá půlroční kontrola kanonického indexu a další práce vznikne jen při návratovém signálu.
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte stav "položka nemá v rytmu místo".
+2. Minuta 2: pojmenujte účel, který položka dřív chránila.
+3. Minuta 3: ověřte, jestli účel pokrývá jiné kanonické místo.
+4. Minuta 4: zrušte aktivní spouštěč.
+5. Minuta 5: ukliďte nejbližší pracovní odkaz.
+6. Minuta 6: rozhodněte, které dočasné důkazy se mažou.
+7. Minuta 7: napište jednu archivní větu.
+8. Minuta 8: zapište návratový signál a jednověté uzavření.
+
+Výstup:
+
+```text
+Položka [název] je ukončena, protože [důvod]. Aktivní práce se vede přes [kanonické místo / žádné nové místo], rušíme [spouštěč a pracovní stopu] a návrat nastane pouze při [signál].
+```
+
+### Checklist čistého ukončení
+
+- Je jasné, proč položka nemá místo v běžném rytmu?
+- Rozlišili jsme archivní paměť od aktivního pracovního systému?
+- Zrušili jsme aktivní spouštěče, ne jen text položky?
+- Uklidili jsme pracovní odkazy, které by člověka vrátily ke staré trase?
+- Nezakládáme slabší rytmus jen proto, že je nepříjemné něco ukončit?
+- Pokud existuje náhrada, je to kanonické místo, ne nový skrytý backlog?
+- Je archivní věta krátká a praktická?
+- Smazali jsme dočasné exporty, screenshoty, pomocné tabulky nebo osobní stopy, které už nemají účel?
+- Nepřidali jsme nový dohled nad ukončenou položkou?
+- Je návratový signál konkrétní a spojený s reálnou prací?
+- Ví vlastník, co má být fyzicky uklizené?
+- Umí tým říct jednou větou, co skončilo a kudy se téma řeší, pokud se opravdu vrátí?
+
+Čisté ukončení je jedna z nejpodceňovanějších produktivitních dovedností. Ne proto, že by bylo dramatické, ale právě proto, že není. Dobře ukončená položka nevyvolá aplaus. Prostě přestane zabírat místo, přestane vyrábět data a přestane posílat lidi po staré cestě. To je v provozu často lepší výhra než další elegantní proces.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha WV o čistém ukončení položky bez místa v běžném rytmu: rozdíl mezi archivem a aktivním systémem, fyzický úklid spouštěčů, nenahrazování šumu novým objektem, privacy-first mazání dočasných důkazů, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna úvodní podkapitola o uzavření první reakce na návratový signál: stav reakce, provedený krok, hranice další práce, návratový signál, umístění záznamu, privacy-first datové minimum a checklist.
 - 2026-06-03: Doplněna Příloha WU o první běžný cyklus po uzavřené první kontrole: ověření skutečného běžného průchodu, pět výsledných stavů, lokální oprava bez návratu do zvláštní péče, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WT o uzavření první kontroly nového provozního stavu: uzavírací věta, čtyři typy uzavření, zrušení přechodové stopy, zákaz zvláštní péče bez konkrétního selhání, privacy-first minimum, karta, mini workshop a checklist.
