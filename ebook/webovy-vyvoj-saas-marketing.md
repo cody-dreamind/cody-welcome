@@ -169797,8 +169797,322 @@ První běžný průchod položky [název] po uzavření návratu po klidu skon�
 
 První běžný průchod po klidu má potvrdit, že systém umí zase dýchat normálně. Když dopadne čistě, nechte ho být. Když ukáže malé tření, opravte malé tření. A když ukáže nový problém, otevřete novou otázku místo toho, abyste starou historii oblékli do nového kabátu.
 
+## Příloha XF: Uzavření prvního běžného průchodu po klidu
+
+První běžný průchod po klidu je hotový až ve chvíli, kdy má jasný výsledek a po týmu nezůstane viset zvláštní režim. Nestačí říct "prošli jsme to". Pokud po průchodu zůstanou bokem poznámky, dočasné tabulky, staré kontrolní otázky nebo nejasné rozhodnutí, položka se nenápadně vrací do aktivní péče. Přesně tomu má uzavření zabránit.
+
+Uzavření proto není další audit. Je to krátká provozní brzda: pojmenujte výsledek, proveďte jen nezbytný krok, ukliďte stopu po ověření a vraťte položku do normálního rytmu. Když to nejde udělat jednou větou, průchod pravděpodobně ještě není zavřený.
+
+Začněte větou:
+
+```text
+První běžný průchod po klidu skončil jako [stav] a další práce je [žádná / lokální doladění / úprava rytmu / nová karta].
+```
+
+Příklad:
+
+```text
+První běžný průchod po klidu skončil jako lokální doladění a další práce je jen doplnění jedné věty do kanonického indexu sales materiálů.
+```
+
+Tahle věta chrání rozsah. Tým vidí, že průchod měl výsledek, ale zároveň ví, že se neotevírá celá stará položka. Bez takové věty se z malého tření snadno stane nový projekt s příliš dlouhou pamětí a užitečností rozvrzaného šuplíku.
+
+### Čtyři způsoby uzavření
+
+Uzavření vyberte podle výsledku z předchozí přílohy:
+
+- Čistý průchod: nechte kanonické místo beze změny a zapište jen jednovětý závěr.
+- Lokální doladění: upravte konkrétní místo, které člověku bránilo v průchodu.
+- Slabý rytmus: změňte jen provozní spouštěč nebo frekvenci, ne celý obsah pravidla.
+- Nový signál: otevřete samostatnou rozhodovací kartu a původní průchod zavřete.
+
+Nevymýšlejte pátý stav "ještě to budeme sledovat". Pokud opravdu potřebujete sledování, musí mít vlastní stop podmínku a důvod. Jinak jen držíte při životě téma, které už mělo odejít do běžného provozu.
+
+### Uzavření čistého průchodu
+
+Čistý průchod je nejjednodušší a zároveň nejčastěji překomplikovaný. Když člověk našel správné místo, pochopil pravidlo, dokončil práci a nevznikla nová datová stopa, nedělejte z toho vítězný obřad. Zapište závěr a nechte systém běžet.
+
+Šablona:
+
+```text
+Položka:
+
+Průchod:
+
+Výsledek:
+čistý průchod
+
+Co zůstává beze změny:
+
+Co mažeme nebo zkracujeme:
+
+Návratový signál:
+
+Jednovětý závěr:
+```
+
+Příklad:
+
+```text
+Položka:
+Kanonický index sales materiálů.
+
+Průchod:
+Obchodník připravil nabídku s bezpečnostní přílohou.
+
+Výsledek:
+čistý průchod
+
+Co zůstává beze změny:
+Index, odpovědnost i měsíční kontrola.
+
+Co mažeme nebo zkracujeme:
+Dočasnou poznámku z ověřovacího průchodu necháváme jen jako jednu větu v logu.
+
+Návratový signál:
+Dva lidé po sobě nenajdou bezpečnostní přílohu bez pomoci.
+
+Jednovětý závěr:
+První běžný průchod po klidu byl čistý, kanonický index stačí a starý review režim se neobnovuje.
+```
+
+Privacy-first poznámka: u čistého průchodu obvykle není důvod uchovávat detailní poznámky, jména zákazníků, screenshoty ani přepisy. Stačí pracovní situace, výsledek a návratový signál. Čistý výsledek nemá vyrábět archiv důkazů jen proto, že "by se to jednou mohlo hodit".
+
+### Uzavření lokálního doladění
+
+Lokální doladění zavírejte v místě, kde tření vzniklo. Když chyběla jedna věta v indexu, doplňte jednu větu do indexu. Když název sekce mátl, přejmenujte sekci. Když odkaz vedl na starou šablonu, opravte odkaz. Nepřidávejte nový proces kolem toho, že jedno místo potřebovalo přesnější hranu.
+
+Dobré lokální doladění má tři vlastnosti:
+
+- je viditelné tam, kde člověk pracuje;
+- nevyžaduje nový trénink;
+- nemění návratový signál, pokud se skutečně nezměnil problém.
+
+Příklad:
+
+```text
+Tření:
+Člověk našel správný index, ale nevěděl, jestli bezpečnostní příloha patří do běžné nabídky nebo jen do enterprise varianty.
+
+Lokální doladění:
+Do indexu doplníme větu: "Bezpečnostní příloha se přikládá u všech nabídek, kde zákazník řeší zpracování citlivých dat nebo přístupová oprávnění."
+
+Co neměníme:
+Neobnovujeme starý samostatný review dokument a nepřidáváme novou kontrolní tabulku.
+
+Uzavření:
+Po doplnění věty je průchod zavřený jako lokální doladění.
+```
+
+Po lokálním doladění nedělejte automaticky další kontrolní kolo. Stačí návratový signál. Pokud se stejné tření objeví znovu, bude to důkaz. Pokud se neobjeví, systém nepotřebuje další pozornost.
+
+### Uzavření úpravy rytmu
+
+Slabý rytmus znamená, že samotné pravidlo nebo kanonické místo možná stačí, ale tým se k němu nevrací ve správný okamžik. Typicky chybí spouštěč: kdo má při změně nabídky aktualizovat sales kartu, kdy se má po incidentu zkontrolovat provozní standard, nebo kdy se po změně formuláře uklidí dočasná evidence.
+
+Úprava rytmu má být menší než obsahová revize. Změňte háček, frekvenci nebo odpovědnost, ale nepřepisujte celý materiál jen proto, že se při prvním průchodu ukázalo načasování.
+
+Šablona:
+
+```text
+Slabý rytmus:
+
+Kde se projevil:
+
+Nový nebo upravený spouštěč:
+
+Kdo ho vlastní:
+
+Stop pravidlo:
+
+Co zůstává beze změny:
+
+Privacy-first dopad:
+```
+
+Příklad:
+
+```text
+Slabý rytmus:
+Index sales materiálů stačil, ale aktualizace bezpečnostní přílohy se nedostala do měsíčního review.
+
+Kde se projevil:
+Při přípravě nabídky člověk pracoval se správným místem, ale datum poslední kontroly nebylo viditelné.
+
+Nový nebo upravený spouštěč:
+Při každé změně bezpečnostní přílohy se do indexu doplní datum poslední revize.
+
+Kdo ho vlastní:
+Vlastník sales materiálů.
+
+Stop pravidlo:
+Pokud se po dvou běžných nabídkách datum revize nepoužije k rozhodnutí, pravidlo zrušíme.
+
+Co zůstává beze změny:
+Struktura indexu, starý review režim a obsah bezpečnostní přílohy.
+
+Privacy-first dopad:
+Nepřidáváme nový tracker použití dokumentu, stačí datum revize v kanonickém místě.
+```
+
+Úprava rytmu je hotová až tehdy, když má stop pravidlo. Bez něj se malý spouštěč může stát dalším věčným úkolem.
+
+### Uzavření nového signálu
+
+Když první běžný průchod ukáže nový signál, původní průchod pořád zavřete. Nový signál má dostat vlastní kartu, vlastní otázku a vlastní hranici. Tím se zabrání tomu, aby se stará položka tvářila jako zdroj všech dalších problémů v okolí.
+
+Příklad:
+
+```text
+Výsledek průchodu:
+Nový signál.
+
+Co se ukázalo:
+Sales index stačil pro přípravu nabídky, ale obchodník nevěděl, kdy má zákazníkovi vysvětlit rozdíl mezi hostingem v EU a obecnou právní větou v nabídce.
+
+Co zavíráme:
+První běžný průchod po klidu je zavřený. Kanonický index funguje pro nalezení přílohy.
+
+Nová karta:
+Jak v sales rozhovoru vysvětlit privacy-first provoz bez právního přetěžování nabídky.
+
+Co nepřenášíme:
+Nepřenášíme staré review poznámky, staré tabulky ani ověřovací režim z návratu po klidu.
+```
+
+Nová karta nemá být trest za to, že se při práci objevila nová otázka. Má jen oddělit aktuální problém od staré historie. To je praktické a taky trochu hygienické. Dokumenty, stejně jako lednice po víkendu, potřebují občas zavřít dveře.
+
+### Privacy-first uzavření
+
+Po uzavření prvního běžného průchodu zkontrolujte datovou stopu. Nehledejte jen nové nástroje. Hledejte i malé zbytky, které se tváří nevinně:
+
+- screenshoty z průchodu;
+- poznámky se jmény zákazníků nebo konkrétních lidí;
+- dočasné exporty;
+- duplicitní kopie šablon;
+- staré odkazy v interních chatech;
+- kontrolní tabulky, které už nemají vlastníka;
+- záznamy, které popisují víc detailů, než rozhodnutí potřebuje.
+
+Privacy-first uzavření napište obyčejně:
+
+```text
+Kvůli uzavření průchodu nesbíráme nová data. Dočasné poznámky zkracujeme na rozhodovací větu, osobní a zákaznické detaily neukládáme a kanonické místo zůstává jediným zdrojem pravdy.
+```
+
+Pokud uzavření vyžaduje zachovat citlivější detail, napište proč, kde bude uložený, kdo k němu má přístup a kdy se smaže. Bez těchto čtyř informací detail do běžného provozu nepatří.
+
+### Karta uzavření prvního běžného průchodu po klidu
+
+```text
+Položka:
+
+Kanonické místo:
+
+Původní návratový signál:
+
+První běžný průchod:
+
+Výsledek:
+- čistý průchod / lokální doladění / slabý rytmus / nový signál
+
+Uzavírací věta:
+
+Akce po uzavření:
+- žádná / lokální úprava / úprava spouštěče / nová karta
+
+Co výslovně neobnovujeme:
+
+Co mažeme, zkracujeme nebo archivujeme:
+
+Jaká data kvůli tomu nesbíráme:
+
+Návratový signál pro další otevření:
+
+Vlastník:
+
+Datum dalšího přirozeného review:
+```
+
+Vyplněná karta:
+
+```text
+Položka:
+Kanonický index sales materiálů.
+
+Kanonické místo:
+Interní index sales výstupů.
+
+Původní návratový signál:
+Dva lidé po sobě nenajdou bezpečnostní přílohu bez pomoci.
+
+První běžný průchod:
+Příprava nabídky se zákazníkem, který řešil zpracování citlivých dat.
+
+Výsledek:
+lokální doladění
+
+Uzavírací věta:
+První běžný průchod po klidu fungoval, jen index potřeboval jednu doplňující větu k použití bezpečnostní přílohy.
+
+Akce po uzavření:
+lokální úprava
+
+Co výslovně neobnovujeme:
+Samostatný review dokument všech sales šablon.
+
+Co mažeme, zkracujeme nebo archivujeme:
+Dočasnou poznámku z průchodu zkracujeme na tento záznam.
+
+Jaká data kvůli tomu nesbíráme:
+Nesledujeme otevření dokumentu, neukládáme screenshoty ani zákaznické detaily z nabídky.
+
+Návratový signál pro další otevření:
+Druhé selhání při použití bezpečnostní přílohy po doplnění věty.
+
+Vlastník:
+Vlastník sales materiálů.
+
+Datum dalšího přirozeného review:
+Nejbližší měsíční review sales materiálů.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte uzavřený výsledek prvního běžného průchodu.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete jedinou akci po uzavření, pokud nějaká existuje.
+5. Minuta 5: zkraťte dočasné poznámky a pojmenujte, co se neobnovuje.
+6. Minuta 6: zkontrolujte privacy-first stopu a potvrďte návratový signál.
+
+Výstup:
+
+```text
+První běžný průchod po klidu u položky [název] uzavíráme jako [stav]. Další práce je [žádná / lokální doladění / úprava rytmu / nová karta], starý režim [neobnovujeme] a datová stopa zůstává na [minimum].
+```
+
+### Checklist uzavření prvního běžného průchodu po klidu
+
+- Je výsledek průchodu zařazený do jednoho ze čtyř stavů?
+- Existuje jednovětý závěr, který jde předat týmu?
+- Je jasné, jestli se nedělá nic, lokální doladění, úprava rytmu nebo nová karta?
+- Pokud jde o čistý průchod, nevznikla zbytečná další kontrola?
+- Pokud jde o lokální doladění, je úprava u kanonického místa?
+- Pokud jde o slabý rytmus, má nový spouštěč stop pravidlo?
+- Pokud jde o nový signál, má vlastní kartu a nepřebírá staré artefakty?
+- Je výslovně napsané, co se neobnovuje?
+- Jsou dočasné poznámky zkrácené na rozhodovací minimum?
+- Nevznikl tracker, export, screenshotová evidence ani nová tabulka?
+- Jsou osobní a zákaznické detaily odstraněné nebo nahrazené rolí a typem situace?
+- Je jasný návratový signál pro další otevření?
+- Vrací se položka do běžného rytmu bez zvláštní péče?
+
+Uzavření prvního běžného průchodu po klidu má jednoduchý cíl: nenechat po ověření další vrstvu práce. Když systém funguje, nechte ho fungovat. Když potřebuje drobnou hranu, doplňte ji. Když ukáže nový problém, dejte mu vlastní místo. Všechno ostatní je jen dobře oblečená nerozhodnost.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha XF o uzavření prvního běžného průchodu po dlouhodobém klidu: čtyři uzavírací stavy, čistý průchod, lokální doladění, úprava rytmu, nový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XE o prvním běžném průchodu po uzavření odpovědi na návrat po dlouhodobém klidu: reálná pracovní situace, čtyři výsledné stavy, lokální doladění, slabý rytmus, nový signál, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XD o uzavření odpovědi na návrat po dlouhodobém klidu: čtyři uzavírací stavy, lokální oprava, doplněná hrana, úprava rytmu, nové rozhodnutí, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XB o uzavření druhého běžného průchodu do dlouhodobého klidu: kanonické místo, návratový signál, úklid dočasných stop, privacy-first retence, karta, mini workshop a checklist.
