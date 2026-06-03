@@ -166369,8 +166369,230 @@ První kontrola položky [název] je uzavřena jako [stav]. Platí [rytmus nebo 
 
 Uzavření první kontroly má být krátké, ale nesmí být vágní. Dobrá uzavírací věta říká, co platí, co se ruší a kdy se věc případně vrátí. Když tohle chybí, systém se tváří prořezaně, ale staré větve rostou dál pod stolem. A pod stolem se špatně zalévá i debugguje.
 
+## Příloha WU: První běžný cyklus po uzavřené první kontrole
+
+Po uzavření první kontroly nového provozního stavu se položka vrací do běžného rytmu. To je dobrá zpráva, ale zároveň poslední místo, kde se starý zvláštní dohled často nenápadně vrací. Někdo si nechá pomocnou připomínku "jen pro jistotu", někdo při prvním běžném cyklu otevře starý seznam a někdo začne výsledek znovu vysvětlovat lidem, kteří už měli potkat čistý systém.
+
+První běžný cyklus proto nemá být další mimořádná kontrola. Je to normální průchod, při kterém si všimnete, jestli uzavření první kontroly opravdu splnilo slib:
+
+```text
+Umí položka fungovat v běžném rytmu bez staré historie, přechodové stopy a zvláštního dohledu?
+```
+
+Příklad:
+
+```text
+Uzavření první kontroly:
+Rozcestník review šablon je sloučený do půlroční kontroly kanonického indexu. Starý kvartální rytmus je zrušený a pomocný seznam se dál neudržuje.
+
+První běžný cyklus:
+Při půlroční kontrole editor projde index, potká kontrolní větu u rozcestníku, nic dalšího nehledá a starý pomocný seznam nikdo neotevírá.
+
+Výsledek:
+Položka je běžná součást rytmu. Zůstává jen návratový signál pro případ, že by reálný průchod znovu skončil ve staré šabloně.
+```
+
+Tento cyklus má jednu past. Když všechno funguje, může působit, že se nic nestalo. Ve skutečnosti se stalo přesně to, co mělo: systém unesl položku bez speciální péče. Nehledejte za tím skrytou lekci, novou metriku ani další vylepšení. Běžný cyklus má potvrdit normálnost, ne vyrábět nový projekt.
+
+### Co při běžném cyklu sledovat
+
+Sledujte jen pracovní průchod, který by se stal i bez této přílohy. Pokud jste položku vložili do půlročního indexu, sledujte půlroční index. Pokud má návratový signál, počkejte na signál. Pokud byla položka ukončena, sledujte jen to, jestli se někdo nesnaží obnovit zrušenou trasu.
+
+Čtyři praktické otázky:
+
+- Potkal člověk správné kanonické místo bez hledání starých podkladů?
+- Spustil se pouze běžný rytmus, který byl po uzavření platný?
+- Byla rozhodovací věta dost krátká na to, aby ji šlo použít bez vysvětlování historie?
+- Zůstala datová stopa stejná nebo menší než po uzavření první kontroly?
+
+Neověřujte osobní disciplínu lidí. Ověřujte kvalitu trasy. Když člověk sáhne po staré šabloně, není první otázka "proč neposlechl". První otázka zní: "Kde mu systém pořád nabízí starou cestu?"
+
+### Pět výsledných stavů
+
+Po prvním běžném cyklu vyberte jeden stav:
+
+- Běžně drží: položka funguje v rytmu a nic dalšího nepotřebuje.
+- Drží, ale starý odkaz přežil: běžný rytmus funguje, jen někde zůstal jeden odkaz nebo poznámka.
+- Drží, ale věta je nejasná: lidé našli správné místo, ale váhali nad významem stavu.
+- Starý rytmus se vrátil: stará připomínka, checklist nebo zvyk znovu spustil práci.
+- Položka nemá v rytmu místo: běžný cyklus ukázal, že položka byla ponechána zbytečně.
+
+`Běžně drží` uzavřete bez další akce. Nezakládejte druhou běžnou kontrolu jen proto, že první normální průchod proběhl klidně. Klid je výsledek.
+
+`Drží, ale starý odkaz přežil` řešte okamžitým úklidem. Smažte odkaz, zkraťte poznámku nebo přesměrujte člověka do kanonického místa. Pokud úklid vyžaduje víc než jeden zásah, nejde o přežilý odkaz, ale o návrat staré trasy.
+
+`Drží, ale věta je nejasná` řešte jednou lokální formulací. Přidejte nebo upravte větu přímo u pracovního místa. Neopisujte historii prořezání. Dobrá věta říká, co teď platí:
+
+```text
+Tato položka je součástí půlroční kontroly indexu; samostatné kvartální review už neprobíhá.
+```
+
+`Starý rytmus se vrátil` je konkrétní selhání trasy. Neznamená to automaticky, že roční prořezání bylo špatně. Znamená to, že někde zůstává aktivní spouštěč. Opravujte spouštěč, ne celou minulost.
+
+`Položka nemá v rytmu místo` je užitečný, i když trochu nepříjemný výsledek. Někdy první běžný cyklus ukáže, že položku tým ponechal jen ze zvyku. V takovém případě ji nepřesouvejte do dalšího slabšího rytmu. Zapište ukončení a odstraňte ji z aktivního provozu.
+
+### Oprava bez návratu do zvláštní péče
+
+Když první běžný cyklus najde drobnost, opravte ji v rámci běžné práce. Nepřevádějte položku zpět do mimořádného režimu, pokud není jasné konkrétní selhání.
+
+Použijte tento filtr:
+
+```text
+Je problém v jednom pracovním místě?
+Umíme ho opravit jedním zásahem?
+Zůstane po opravě stejný běžný rytmus?
+Nepotřebujeme kvůli tomu nová data?
+```
+
+Pokud jsou všechny odpovědi ano, jde o běžnou údržbu. Pokud některá odpověď neplatí, napište novou opravnou kartu, ale stále jen na nejbližší pracovní místo. Historii ročního prořezání otevírejte až ve chvíli, kdy se opakuje stejný návrat starého rytmu a lokální oprava už nepomohla.
+
+Codyho komentář: provozní dospělost často nevypadá jako velká změna. Vypadá jako schopnost neudělat z každé drobnosti slavnostní návrat procesu. Což je méně efektní než nový dashboard, ale výrazně šetrnější k nervům i datům.
+
+### Privacy-first běžný cyklus
+
+První běžný cyklus po uzavření kontroly nesmí být záminka k novému sledování. Není potřeba měřit, kdo dokument otevřel, jak dlouho v něm byl, kolikrát klikl na odkaz nebo jestli si přečetl všechny poznámky. Stačí zaznamenat výsledek průchodu a případný jeden zásah do pracovního místa.
+
+Privacy-first minimum:
+
+```text
+Zůstává:
+Výsledek běžného cyklu, případná lokální úprava, aktuální návratový signál a datum dalšího běžného rytmu.
+
+Maže se nebo nezakládá:
+Dočasné pozorovací poznámky, screenshoty obrazovek, osobní trasy, seznam lidí, kteří položku použili, a exporty použití dokumentace.
+
+Nepřidává se:
+Tracker čtení dokumentace, nové skóre dodržování, zvláštní report ani další kontrolní kalendář.
+```
+
+Pokud potřebujete doložit, že starý rytmus byl opravdu zrušený, stačí stav spouštěče nebo jedna provozní poznámka. Neuchovávejte kompletní historii připomínek jen proto, že "by se mohla hodit". V provozu se skoro všechno "může hodit"; rozdíl dělá disciplína držet jen to, co podporuje rozhodnutí.
+
+### Karta prvního běžného cyklu
+
+```text
+Položka:
+
+Uzavření první kontroly:
+
+Běžný rytmus nebo návratový signál:
+
+Kanonické místo:
+
+První běžný průchod:
+
+Co člověk potkal:
+
+Co se nespustilo:
+
+Co se případně vrátilo ze starého rytmu:
+
+Výsledný stav:
+- běžně drží / drží, ale starý odkaz přežil / drží, ale věta je nejasná / starý rytmus se vrátil / položka nemá v rytmu místo
+
+Nejmenší zásah:
+
+Co neotevíráme:
+
+Datová stopa po cyklu:
+
+Návratový signál:
+
+Datum dalšího běžného průchodu nebo ukončení:
+
+Vlastník:
+
+Jednověté uzavření cyklu:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Rozcestník review šablon.
+
+Uzavření první kontroly:
+Položka je sloučená do půlroční kontroly kanonického indexu. Zvláštní dohled skončil.
+
+Běžný rytmus nebo návratový signál:
+Půlroční průchod indexem. Návratový signál nastane, pokud člověk při práci skončí ve staré šabloně.
+
+Kanonické místo:
+Kanonický index standardů.
+
+První běžný průchod:
+Editor prošel index při běžné půlroční kontrole.
+
+Co člověk potkal:
+Krátkou větu u položky rozcestníku a odkaz na aktuální standard.
+
+Co se nespustilo:
+Samostatná kvartální připomínka.
+
+Co se případně vrátilo ze starého rytmu:
+Nic.
+
+Výsledný stav:
+Běžně drží.
+
+Nejmenší zásah:
+Žádný.
+
+Co neotevíráme:
+Neotevíráme review rozcestníků, starý pomocný seznam ani novou kontrolu kontroly.
+
+Datová stopa po cyklu:
+Zůstává jen stav v indexu a tato uzavírací věta. Nevzniká seznam použití.
+
+Návratový signál:
+Reálný průchod skončí ve staré šabloně nebo starý rytmus znovu spustí práci.
+
+Datum dalšího běžného průchodu nebo ukončení:
+Další půlroční kontrola indexu.
+
+Vlastník:
+Editor znalostní báze.
+
+Jednověté uzavření cyklu:
+První běžný cyklus potvrdil, že rozcestník drží v půlročním rytmu bez zvláštního dohledu; staré stopy se nevrátily a další práce vznikne jen při návratovém signálu.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte jednověté uzavření první kontroly.
+2. Minuta 2: popište skutečný běžný průchod.
+3. Minuta 3: ověřte, jestli člověk potkal kanonické místo.
+4. Minuta 4: ověřte, že se nespustil starý rytmus.
+5. Minuta 5: vyberte jeden z pěti výsledných stavů.
+6. Minuta 6: proveďte nejmenší zásah, pokud je opravdu potřeba.
+7. Minuta 7: zapište uzavření cyklu a datové minimum.
+
+Výstup:
+
+```text
+V prvním běžném cyklu je položka ve stavu [stav]. Další zásah je [zásah / žádný], neotevíráme [rozsah] a další návrat nastane jen při [návratový signál].
+```
+
+### Checklist prvního běžného cyklu
+
+- Šlo o skutečný běžný průchod, ne o další mimořádnou kontrolu?
+- Člověk potkal správné kanonické místo bez starých podkladů?
+- Běžel pouze rytmus, který měl po uzavření platit?
+- Starý checklist, připomínka nebo ruční zvyk se znovu nespustil?
+- Je rozhodovací věta dost krátká pro běžnou práci?
+- Pokud zůstal starý odkaz, odstranili jsme ho jedním úkonem?
+- Pokud je věta nejasná, upravili jsme ji lokálně bez nové dokumentační kapitoly?
+- Pokud se starý rytmus vrátil, víme, který spouštěč selhal?
+- Pokud položka nemá v rytmu místo, umíme ji ukončit místo dalšího oslabování?
+- Nevznikla druhá běžná kontrola jen pro pocit jistoty?
+- Nezavedli jsme měření lidí, klikání, čtení ani používání dokumentace?
+- Zůstává po cyklu stejná nebo menší datová stopa?
+- Je návratový signál konkrétní a vztažený k práci, ne k nervozitě týmu?
+
+První běžný cyklus je poslední zkouška toho, jestli se prořezaná položka opravdu stala běžnou. Když drží, nechte ji držet. Když najde drobnou starou stopu, ukliďte ji. Když vrátí starý rytmus, opravte spouštěč. A když ukáže, že položka už nemá důvod žít v aktivním provozu, ukončete ji čistě. Každá z těchto možností je lepší než tiché přidání další vrstvy dohledu.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha WU o první běžný cyklus po uzavřené první kontrole: ověření skutečného běžného průchodu, pět výsledných stavů, lokální oprava bez návratu do zvláštní péče, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WT o uzavření první kontroly nového provozního stavu: uzavírací věta, čtyři typy uzavření, zrušení přechodové stopy, zákaz zvláštní péče bez konkrétního selhání, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WS o první kontrole nového provozního stavu po ročním prořezání: ověření prvního reálného průchodu, čtyři výsledné stavy, zákaz kontroly kontroly, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WR o uzavření ročního prořezání do nového provozního stavu: kanonické místo, aktivní a zrušený spouštěč, jednověté uzavření, privacy-first dočištění datové stopy, karta, mini workshop a checklist.
