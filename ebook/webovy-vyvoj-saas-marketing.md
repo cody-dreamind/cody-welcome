@@ -170932,8 +170932,312 @@ Položka [název] po lehké periodické kontrole zůstává ve stavu [stav]. Pro
 
 Codyho komentář: stabilní věci nepotřebují, aby je tým chodil každý měsíc hladit po hlavě. Potřebují občas zkontrolovat, jestli pořád stojí na správném místě a jestli za sebou netáhnou starý kabel přes celou kancelář. Když kabel neslouží, pryč s ním. Úklid je taky feature.
 
+## Příloha XJ: Uzavření lehké periodické kontroly do dalšího provozního stavu
+
+Lehká periodická kontrola má smysl jen tehdy, když po ní vznikne jasný provozní stav. Nestačí napsat "zkontrolováno". Tým potřebuje vědět, jestli položka zůstává v klidu, jestli se uklidila, jestli se přesunula do jiného rytmu, nebo jestli skončila jako samostatná stopa. Bez uzavření se z lehké kontroly stane další otevřený objekt, který si za měsíc znovu řekne o pozornost.
+
+Uzavření proto napište jako stavovou větu:
+
+```text
+Po lehké periodické kontrole je položka [název] ve stavu [stav]. Provedená akce je [jedna akce], běžný rytmus je [rytmus] a další návrat nastane pouze při [návratový signál / přirozené review].
+```
+
+Tato věta má zavřít kontrolu, ne rozjet nový projekt. Když kontrola ukáže větší problém, založte novou kartu s vlastním důkazem a vlastním vlastníkem. Nelepte ji na periodickou kontrolu. Jinak bude i malý provozní rytmus nenápadně bobtnat, až se z něj stane další vrstva řízení, kterou nikdo nechtěl, ale všichni ji musí obcházet.
+
+### Čtyři uzavírací stavy
+
+Po lehké periodické kontrole vyberte jeden z těchto stavů:
+
+- Klid potvrzen: položka zůstává beze změny a vrací se do běžného rytmu.
+- Úklid proveden: přebytečná stopa byla smazaná, zkrácená nebo sloučená, ale položka dál funguje stejně.
+- Rytmus změněn: položka zůstává užitečná, ale odteď patří do jiného pracovního okamžiku.
+- Položka zavřena: samostatný artefakt končí, užitečná věta je přesunutá jinam nebo už není potřeba.
+
+Stav "kontrolovat dál" používejte jen výjimečně. Pokud kontrola nenašla konkrétní riziko, další kontrola navíc není péče. Je to provozní šum v hezkém kabátě.
+
+### Klid potvrzen
+
+Klid potvrzen znamená, že jste se na položku podívali a neudělali žádnou změnu, protože žádná není potřeba. To je silnější výsledek, než se zdá. V týmech se často odměňuje viditelná úprava, ale stabilní systém občas potřebuje pravý opak: potvrdit, že se nemá sahat na fungující věc.
+
+Zápis:
+
+```text
+Stav:
+klid potvrzen
+
+Provedená akce:
+žádná obsahová ani procesní změna
+
+Proč:
+položka byla použitá v běžné práci, kanonické místo sedí a nevzniká zvláštní dohled
+
+Co neotevíráme:
+historii vzniku, staré ověřovací poznámky, redesign šablony
+
+Další návrat:
+jen při běžném kvartálním review nebo při konkrétním návratovém signálu
+```
+
+Praktický příklad:
+
+```text
+Položka:
+Checklist před publikací case study.
+
+Stav:
+klid potvrzen
+
+Provedená akce:
+bez změny
+
+Proč:
+byl použit při poslední case study, nevyžádal si ruční vysvětlování a neobsahuje přebytečná zákaznická data
+
+Co neotevíráme:
+nepřepisujeme strukturu case study a nepřidáváme nové schvalovací kroky
+
+Další návrat:
+při pololetní redakční kontrole nebo pokud dvě po sobě jdoucí case studies narazí na stejný chybějící krok
+```
+
+Tady je důležité slovo "dvě". Jeden dotaz může být šum, nová situace nebo prostě člověk, který checklist četl rychleji než kávovar stihl doběhnout. Návratový signál má zachytit vzor, ne náladu.
+
+### Úklid proveden
+
+Úklid proveden znamená, že samotná položka funguje, ale kolem ní zůstaly staré pomocné stopy. Tady není cílem zlepšit obsah. Cílem je odstranit provozní a datovou zátěž, která už nepomáhá rozhodnutí.
+
+Typické úklidové akce:
+
+- smazat dočasný export;
+- zkrátit ověřovací poznámku na jednu changelogovou větu;
+- odstranit duplicitní odkaz z chatu;
+- převést konkrétní zákaznický příklad do anonymní obecné verze;
+- sloučit starou mikrošablonu do kanonického checklistu;
+- zavřít pomocný dokument, který jen opakuje hlavní pravidlo.
+
+Privacy-first hranice: pokud úklid zahrnuje osobní údaje, zákaznické ukázky nebo provozní detaily, držte se minimalizace. GDPR v čl. 5 odst. 1 písm. c pracuje s principem, že osobní údaje mají být přiměřené, relevantní a omezené na nezbytný rozsah pro daný účel: [Nařízení GDPR na EUR-Lex](https://eur-lex.europa.eu/eli/reg/2016/679/oj). EDPB k privacy by design a by default připomíná, že ochrana dat má být součástí návrhu i výchozího nastavení, ne doplněk po spuštění: [Guidelines 4/2019 on Article 25](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-42019-article-25-data-protection-design-and_en).
+
+Šablona úklidu:
+
+```text
+Položka:
+
+Co zůstává:
+
+Co uklízíme:
+
+Proč už to nemá účel:
+
+Kam se ukládá minimální stopa:
+
+Jaké osobní nebo zákaznické detaily mizí:
+
+Kdo potvrdil, že kanonické místo zůstává použitelné:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Předávací checklist po SaaS auditu.
+
+Co zůstává:
+Kanonický checklist ve znalostní bázi.
+
+Co uklízíme:
+Starý export připomínek z pilotního auditu a duplicitní odkaz v interním chatu.
+
+Proč už to nemá účel:
+Checklist byl od pilotu dvakrát použitý v aktualizované podobě.
+
+Kam se ukládá minimální stopa:
+Jedna věta v changelogu checklistu.
+
+Jaké osobní nebo zákaznické detaily mizí:
+Konkrétní názvy zákaznických systémů a screenshoty z předání.
+
+Kdo potvrdil, že kanonické místo zůstává použitelné:
+Vlastník delivery procesu při měsíčním review.
+```
+
+### Rytmus změněn
+
+Rytmus změněn je správný stav, když položka pořád slouží, ale kontrola ukáže, že se na ni lidé dívají jinde nebo jindy. Tady pozor: přesun není redesign. Nemá se převážet celá historie, jen aktuální pracovní pravidlo.
+
+Příklad:
+
+```text
+Položka:
+Kontrola marketingových UTM parametrů bez zbytečného trackingu.
+
+Původní rytmus:
+Technické měsíční review webu.
+
+Skutečný pracovní okamžik:
+Příprava kampaně před publikací.
+
+Nový rytmus:
+Předpublikační checklist kampaně.
+
+Co se přesouvá:
+Jedna věta pravidla a odkaz na kanonickou analytickou politiku.
+
+Co se nebere s sebou:
+Historické debaty o starých kampaních, screenshoty a tabulka s testovacími odkazy.
+
+První ověření:
+Při příští kampani se zkontroluje, jestli pravidlo pomohlo před publikací, ne až při měsíčním úklidu.
+```
+
+Tento přesun chrání práci i soukromí. Pravidlo se dostane do okamžiku, kde může zabránit chybě. Zároveň se nepřenáší staré doklady, které by jen prodlužovaly datovou stopu.
+
+### Položka zavřena
+
+Položka zavřena znamená, že už nemá samostatný účel. To neznamená, že byla špatná. Znamená to, že svoji práci odvedla, byla nahrazená lepším místem nebo se její problém přestal objevovat.
+
+Zavření napište bez sentimentu:
+
+```text
+Položku [název] zavíráme jako samostatný artefakt. Užitečná část je [přesunuta do / pokryta v / už není potřeba], staré pracovní stopy byly [smazány / archivovány v minimálním záznamu] a další návrat neprobíhá přes tuto položku.
+```
+
+Příklad:
+
+```text
+Položka:
+Dočasná karta "jak posílat odkaz na e-book po workshopu".
+
+Stav:
+položka zavřena
+
+Užitečná část:
+jedna věta o kanonické URL e-booku
+
+Nové místo:
+sales follow-up šablona po workshopu
+
+Co se ruší:
+samostatná dočasná karta, starý screenshot e-mailu, chatová připomínka
+
+Další návrat:
+pokud se problém vrátí, řeší se v sales follow-up šabloně, ne obnovou staré karty
+```
+
+Codyho komentář: zavření staré položky není neúcta k práci, která ji vytvořila. Je to důkaz, že systém nezaměňuje historii za hodnotu. Kdyby každý užitečný nápad musel navždy zůstat jako samostatný dokument, brzy by tým nepracoval, ale provozoval muzeum dobře míněných poznámek.
+
+### Karta uzavření lehké periodické kontroly
+
+```text
+Položka:
+
+Kanonické místo před kontrolou:
+
+Výsledek lehké kontroly:
+- klid potvrzen / úklid proveden / rytmus změněn / položka zavřena
+
+Jedna uzavírací věta:
+
+Provedená akce:
+
+Co zůstává beze změny:
+
+Co se ruší, maže, zkracuje nebo přesouvá:
+
+Kam patří minimální záznam:
+
+Co výslovně neotevíráme:
+
+Privacy-first dopad:
+
+Další přirozené review nebo návratový signál:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Vyplněná karta:
+
+```text
+Položka:
+Checklist před publikací case study.
+
+Kanonické místo před kontrolou:
+Redakční playbook.
+
+Výsledek lehké kontroly:
+úklid proveden
+
+Jedna uzavírací věta:
+Checklist zůstává v redakčním playbooku, po kontrole byl odstraněn starý pilotní export a další návrat nastane až při pololetní redakční kontrole nebo při dvou opakovaných chybách ve schvalování.
+
+Provedená akce:
+Smazán pilotní export a zkrácena poznámka o ověření na jednu changelogovou větu.
+
+Co zůstává beze změny:
+Pořadí kroků checklistu.
+
+Co se ruší, maže, zkracuje nebo přesouvá:
+Ruší se duplicitní odkaz v chatu, maže se export, zkracuje se ověřovací poznámka.
+
+Kam patří minimální záznam:
+Changelog redakčního playbooku.
+
+Co výslovně neotevíráme:
+Neotevíráme redesign case study, novou schvalovací matici ani nové měření čtení.
+
+Privacy-first dopad:
+Mizí konkrétní pilotní podklady, zůstává jen obecná rozhodovací věta.
+
+Další přirozené review nebo návratový signál:
+Pololetní redakční kontrola nebo dvě opakované chyby ve stejném kroku.
+
+Vlastník:
+Vlastník redakčního playbooku.
+
+Datum uzavření:
+2026-06-03
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek lehké periodické kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište stavovou větu.
+4. Minuta 4: určete jednu provedenou akci.
+5. Minuta 5: napište, co zůstává beze změny.
+6. Minuta 6: ukliďte nebo pojmenujte datovou stopu.
+7. Minuta 7: určete návratový signál nebo přirozené review.
+8. Minuta 8: zapište, co se výslovně neotevírá.
+
+Výstup:
+
+```text
+Položka [název] je po lehké periodické kontrole uzavřená jako [stav]. Provedli jsme [jedna akce], ponecháváme [co zůstává], uklízíme [datová/provozní stopa] a další návrat proběhne jen při [signál/rytmus].
+```
+
+### Checklist uzavření lehké periodické kontroly
+
+- Má kontrola jeden uzavírací stav?
+- Je napsaná stavová věta, které rozumí i člověk mimo původní diskusi?
+- Vede výsledek k jedné provedené akci nebo vědomému ponechání bez změny?
+- Je jasné, co zůstává beze změny?
+- Je jasné, co se ruší, maže, zkracuje nebo přesouvá?
+- Nepřevážíme do nového místa celou historii místo aktuálního pravidla?
+- Pokud položku zavíráme, víme, kam přešla užitečná věta?
+- Pokud potvrzujeme klid, neotevíráme další sledování jen pro pocit jistoty?
+- Má minimální záznam správné kanonické místo?
+- Zmizely dočasné exporty, screenshoty, přepisy nebo chatové odkazy bez účelu?
+- Nezůstávají v poznámkách osobní nebo zákaznické detaily, které už nejsou nutné?
+- Je návratový signál konkrétní a odolný proti běžnému šumu?
+- Je napsané, co výslovně neotevíráme?
+- Má výsledek vlastníka a datum uzavření?
+
+Dobré uzavření je nudné. To je pochvala. Po něm nemá tým chuť svolat další schůzku, zakládat nový tracker ani psát manifest o provozní zralosti. Ví, kde věc žije, co se uklidilo a kdy se k ní vrátit. Všechno ostatní může jít konečně dělat něco užitečného.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha XJ o uzavření lehké periodické kontroly do dalšího provozního stavu: čtyři uzavírací stavy, klid, úklid, změna rytmu, zavření položky, privacy-first odkazy na GDPR a EDPB, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XI o lehké periodické kontrole po dlouhodobém klidu: čtyři stavy kontroly, ponechání bez změny, zkrácení stop, přesun do lepšího rytmu, ukončení nebo sloučení, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XH o uzavření druhého běžného průchodu po dlouhodobém klidu: uzavírací stavy, stabilní uzavření, lokální dozvuk, skrytý dohled, nový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XG o druhém běžném průchodu po uzavřeném klidu: ověření stabilního použití bez zvláštní péče, lokální dozvuk, skrytý dohled, nový návratový signál, privacy-first minimum, karta, mini workshop a checklist.
