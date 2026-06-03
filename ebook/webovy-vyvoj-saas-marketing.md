@@ -6518,6 +6518,188 @@ Datum kontroly:
 
 První návratový signál je test disciplíny. Tým má ukázat, že umí pravidlo znovu zkontrolovat bez paniky, bez hromadění dat a bez návratu k celé staré bitvě. Někdy signál otevře skutečný problém. Často ale jen připomene, že i dobrý systém potřebuje občas jednu obyčejnou větu na správném místě.
 
+## Jak uzavřít první reakci na návratový signál
+
+První reakce na návratový signál nesmí zůstat viset jako další malý dluh. Když tým vybere stav, udělá jednu odpovídající reakci a potom se rozběhne dál, hrozí, že se signál za pár dní vrátí jako nejasná otázka: opravili jsme to, nebo jsme to jen komentovali? Uzavření má být krátké, ale jednoznačné. Říká, co se stalo, jaký stav platí a co se díky tomu neotevírá.
+
+Začněte větou:
+
+```text
+První reakci uzavíráme jako:
+- šum / lokální tření / skutečný návrat
+
+Udělali jsme:
+
+Platí teď:
+
+Neotevíráme:
+
+Další signál by byl:
+
+Datová stopa:
+```
+
+Tato karta nemá opisovat celou historii. Slouží jako tečka za první reakcí. Pokud stačila zavírací věta, napište ji. Pokud proběhla lokální úprava, zapište přesně jedno místo, které se změnilo. Pokud se otevřel skutečný návrat, napište novou pracovní otázku a hranici, aby se z návratu nestal volný audit všeho okolo.
+
+Příklad šumu:
+
+```text
+První reakci uzavíráme jako:
+Šum běžné údržby.
+
+Udělali jsme:
+Zkontrolovali jsme, že editor neskončil ve staré šabloně; jen se ptal na rozdíl mezi review a kartou změny.
+
+Platí teď:
+Rozcestník zůstává beze změny.
+
+Neotevíráme:
+Neotevíráme historii původní opravy ani nový audit šablon.
+
+Další signál by byl:
+Reálná práce znovu použije neaktivní šablonu.
+
+Datová stopa:
+Zůstává jen anonymizovaná poznámka v běžném review.
+```
+
+Příklad lokálního tření:
+
+```text
+První reakci uzavíráme jako:
+Lokální tření.
+
+Udělali jsme:
+Do rozcestníku jsme doplnili jednu větu, která rozlišuje slabý podnět a potvrzenou změnu.
+
+Platí teď:
+Aktuální rozcestník je kanonické místo pro výběr šablony.
+
+Neotevíráme:
+Nepřepisujeme všechny šablony, nezakládáme nový kontrolní proces a neměníme běžný rytmus review.
+
+Další signál by byl:
+Další člověk i po nové větě skončí ve špatné šabloně při reálné práci.
+
+Datová stopa:
+Nevznikl nový tracker, export ani evidence použití dokumentace.
+```
+
+Příklad skutečného návratu:
+
+```text
+První reakci uzavíráme jako:
+Skutečný návrat.
+
+Udělali jsme:
+Otevřeli jsme pracovní otázku: proč se reálná práce znovu dostala do neaktivní šablony, i když rozcestník měl být kanonický vstup?
+
+Platí teď:
+Neřešíme člověka, který na problém narazil. Řešíme pracovní místo, kde se ztratila aktuální cesta.
+
+Neotevíráme:
+Neotevíráme celý historický audit, dokud současné pracovní místo nevysvětlíme.
+
+Další signál by byl:
+Stejný typ návratu se objeví i po opravě vstupního místa.
+
+Datová stopa:
+Zapisujeme typ situace, pracovní místo a rozhodnutí; nemažeme ani nekopírujeme celé chaty nebo osobní poznámky.
+```
+
+### Co patří do uzavření
+
+Uzavření první reakce má zachytit jen to, co bude příště chránit rozhodnutí:
+
+- výsledný stav signálu;
+- jednu provedenou reakci;
+- aktuální pracovní pravidlo nebo otázku;
+- rozsah, který zůstává zavřený;
+- návratový signál pro další otevření;
+- datovou stopu, která vznikla nebo nevznikla.
+
+Nepatří tam kompletní debata, kdo si čeho všiml, screenshoty pracovních nástrojů, osobní komentáře ani dlouhé vysvětlení staré opravy. Když má být stará historie potřeba, přidejte odkaz na původní rozhodovací záznam. Nekopírujte ji do nového uzavření. Kopírování historie je jeden z nejrychlejších způsobů, jak z malého návratu vyrobit další zdroj pravdy.
+
+### Kam uzavření uložit
+
+Uzavření dejte k místu, kde by se signál znovu objevil. Pokud šlo o rozcestník, patří k rozcestníku nebo jeho rozhodovacímu logu. Pokud šlo o formulář, patří ke kartě formuláře nebo k provozní poznámce formuláře. Pokud šlo o obchodní šablonu, patří ke šabloně, ne do obecného dokumentu o produktivitě.
+
+Jednoduché pravidlo:
+
+```text
+Uzavření má bydlet tam, kde by člověk příště začal pracovat.
+```
+
+Když uzavření uložíte jinam, vytvoříte novou paměťovou povinnost. Tým si musí pamatovat, že vysvětlení je někde vedle. To je přesně ten typ drobné provozní daně, který se časem tváří jako normální chaos.
+
+### Kdy první reakci nezavírat hned
+
+Většinou má jít uzavření udělat hned. Existují ale tři výjimky:
+
+- není jasné, jestli jde o šum nebo skutečný návrat;
+- nejmenší lokální úprava ještě nebyla provedena;
+- signál má bezpečnostní, právní nebo zákaznický dopad a potřebuje vlastníka s větším mandátem.
+
+V takovém případě nezakládejte dlouhou analýzu. Zapište krátký mezistav:
+
+```text
+První reakce není uzavřená, protože:
+
+Chybí nám:
+
+Kdo rozhodne:
+
+Nejbližší další krok:
+
+Do kdy:
+
+Co zatím nesbíráme a neotevíráme:
+```
+
+Mezistav je závazek k uzavření, ne nový čekací pokoj pro nejasnosti. Pokud nemá vlastníka a termín, není to mezistav. Je to jen elegantně odložený nepořádek.
+
+### Privacy-first uzavření
+
+U návratových signálů je privacy-first disciplína hlavně o tom, co nezůstane. První reakce často vzniká v konkrétní práci, konkrétním chatu nebo konkrétní zákaznické situaci. To neznamená, že celý kontext má skončit v rozhodovacím záznamu.
+
+Pište raději:
+
+```text
+Typ situace:
+Review nabídky pro větší B2B poptávku.
+
+Pracovní místo:
+Rozcestník obchodních šablon.
+
+Rozhodnutí:
+Doplnit jednu rozlišovací větu.
+```
+
+Nepotřebujete:
+
+- název zákazníka, pokud není nezbytný pro rozhodnutí;
+- jméno člověka, který narazil na tření;
+- kompletní přepis hovoru nebo chatu;
+- screenshoty interních nástrojů;
+- novou metriku "použití pravidla".
+
+Codyho komentář: když první reakce skončí novým reportem, nebyla to první reakce. Byl to nenápadný nábor další administrativy. A administrativa má vzácný talent přežít i problém, kvůli kterému vznikla.
+
+### Checklist uzavření první reakce
+
+- Má první reakce jeden výsledný stav?
+- Je jasné, co se opravdu udělalo?
+- Je zapsané, jaké pravidlo nebo otázka teď platí?
+- Je napsané, co se kvůli reakci neotevírá?
+- Má případný další návrat konkrétní signál?
+- Je uzavření uložené u pracovního místa, kde se signál znovu objeví?
+- Nekopírujeme do záznamu celou historii původní opravy?
+- Nezůstávají v záznamu osobní údaje, screenshoty, chaty nebo zbytečné zákaznické detaily?
+- Nevznikl nový tracker, report, export ani měření lidí?
+- Pokud reakci nelze uzavřít hned, má mezistav vlastníka, termín a hranici?
+
+Dobře uzavřená první reakce je malá brzda proti provoznímu přehánění. Tým vidí, že signál nezmizel pod koberec, ale zároveň z něj nevznikla nová vrstva dohledu. To je přesně ten druh drobné disciplíny, který dělá privacy-first provoz praktickým, ne jen hezky napsaným v zásadách.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -166592,6 +166774,7 @@ První běžný cyklus je poslední zkouška toho, jestli se prořezaná položk
 
 ## Pracovní log
 
+- 2026-06-03: Doplněna úvodní podkapitola o uzavření první reakce na návratový signál: stav reakce, provedený krok, hranice další práce, návratový signál, umístění záznamu, privacy-first datové minimum a checklist.
 - 2026-06-03: Doplněna Příloha WU o první běžný cyklus po uzavřené první kontrole: ověření skutečného běžného průchodu, pět výsledných stavů, lokální oprava bez návratu do zvláštní péče, privacy-first datové minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WT o uzavření první kontroly nového provozního stavu: uzavírací věta, čtyři typy uzavření, zrušení přechodové stopy, zákaz zvláštní péče bez konkrétního selhání, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WS o první kontrole nového provozního stavu po ročním prořezání: ověření prvního reálného průchodu, čtyři výsledné stavy, zákaz kontroly kontroly, privacy-first minimum, karta, mini workshop a checklist.
