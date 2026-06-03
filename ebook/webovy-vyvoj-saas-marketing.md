@@ -168573,8 +168573,260 @@ Druhý běžný průchod po položce [název] skončil stavem [stav]. Položka z
 
 Druhý běžný průchod má být poslední brzda proti zbytečné opatrnosti. Pokud systém drží, nechte ho držet bez dalšího dohledu. Pokud drží jen díky člověku, převeďte jeho tichou práci do správného místa. Pokud se opravdu vrací starý problém, otevřete nové rozhodnutí s čistým rozsahem. V každém případě platí: čím běžnější práce je, tím menší stopu má po sobě nechávat.
 
+## Příloha XB: Uzavření druhého běžného průchodu do dlouhodobého klidu
+
+Druhý běžný průchod po návratu ukončené položky je užitečný jen tehdy, když po něm něco skončí. Pokud po něm zůstane další připomínka, další karta, další "radši ještě jednou ověřit" a další člověk, který si téma drží v hlavě, průchod sice vypadal prakticky, ale ve skutečnosti prodloužil zvláštní režim. Uzavření do dlouhodobého klidu má jednu práci: převést závěr z testu do normálního provozu a odstranit všechno, co vzniklo jen kvůli opatrnosti.
+
+Začněte větou:
+
+```text
+Druhý běžný průchod je uzavřený, když víme, kde položka dál žije, kdy se může vrátit a které dočasné stopy už nemají účel.
+```
+
+Příklad:
+
+```text
+Položka:
+Staré review sales šablon.
+
+Výsledek druhého běžného průchodu:
+Stabilní. Další nabídka vznikla přes aktuální kanonický index bez dotazu na autora opravy.
+
+Dlouhodobý klid:
+Samostatné review zůstává ukončené. Další údržba šablon patří do měsíční kontroly indexu.
+
+Návratový signál:
+Vrátíme se jen tehdy, když aktuální index znovu pošle člověka ke staré nebo neplatné šabloně.
+
+Co rušíme:
+Pomocnou poznámku "ověřit po další nabídce", starý seznam odkazů a ruční připomínku v kalendáři.
+```
+
+Klid není pasivita. Je to aktivní rozhodnutí, že běžný systém unese práci bez speciální vrstvy navíc. Tým tím říká: víme, kde je pravda, víme, kdy se vrátit, a nepotřebujeme preventivně sledovat lidi ani dokumenty.
+
+### Tři podmínky dlouhodobého klidu
+
+Položku zavřete do dlouhodobého klidu jen tehdy, když jsou splněné tři podmínky:
+
+- Kanonické místo je jasné: člověk ví, kam jít bez znalosti historie opravy.
+- Návratový signál je konkrétní: návrat spouští reálná pracovní situace, ne nervozita týmu.
+- Dočasné stopy jsou zavřené: nezůstává pomocný seznam, kontrolní karta, export, screenshot ani osobní připomínka bez účelu.
+
+Když chybí kanonické místo, nejde o klid, ale o odložení chaosu. Když chybí návratový signál, tým bude téma otevírat podle pocitu. Když zůstanou dočasné stopy, starý režim bude dál šeptat lidem do práce, i když už nemá co říct. Ano, dokumenty umí šeptat. Většinou frázi "pro jistotu".
+
+### Rozhodnutí podle výsledného stavu
+
+Uzavření se liší podle toho, jak dopadl druhý běžný průchod.
+
+Stav `stabilní` zavřete do klidu přímo:
+
+```text
+Výsledek:
+Stabilní.
+
+Uzavření:
+Položka zůstává ukončená. Další pozornost patří jen do běžného rytmu [kanonické místo].
+
+Rušíme:
+[dočasné stopy]
+
+Vracíme se při:
+[návratový signál]
+```
+
+Stav `drobné tření` zavřete až po jedné lokální opravě:
+
+```text
+Výsledek:
+Drobné tření.
+
+Jedna oprava:
+[nejbližší pracovní místo a konkrétní změna]
+
+Uzavření:
+Po opravě se položka nevrací do zvláštní kontroly. Ověření proběhne v běžném rytmu daného místa.
+```
+
+Stav `skrytý dohled` nezavírejte jako stabilitu. Nejdřív převeďte tichou práci člověka do systému:
+
+```text
+Výsledek:
+Skrytý dohled.
+
+Co člověk držel:
+[správný odkaz / výklad pravidla / kontrolu verze / rozhodovací hranici]
+
+Kam to patří:
+[kanonické místo]
+
+Jedna systémová oprava:
+[konkrétní změna]
+
+Co se neobnovuje:
+Starý audit, osobní kontrola ani preventivní reporting.
+```
+
+Stav `návratový signál` nezavírejte do klidu. Otevřete nové rozhodnutí s čistým rozsahem:
+
+```text
+Výsledek:
+Návratový signál.
+
+Co se potvrdilo:
+[problém vznikl při správném použití aktuální trasy]
+
+Nové rozhodnutí:
+[co teď potřebujeme rozhodnout]
+
+Co se neobnovuje:
+Historický chaos, starý rytmus ani staré pomocné tabulky.
+```
+
+Tahle čtyři pravidla brání tomu, aby se stabilní výsledek zbytečně sledoval a nestabilní výsledek falešně zametl pod koberec. Klid je dobrý jen tehdy, když je poctivý.
+
+### Co přesně uklidit
+
+Po druhém běžném průchodu projděte pět míst, kde se dočasné stopy nejčastěji zaseknou:
+
+- pracovní poznámky u původní karty;
+- osobní připomínky vlastníka;
+- pomocné odkazy v dokumentaci;
+- dočasné exporty, screenshoty nebo ukázky;
+- neformální instrukce v chatu, které lidé pořád používají jako zdroj pravdy.
+
+U každého místa vyberte jeden stav:
+
+- smazat: stopa vznikla jen kvůli ověření a už nemá účel;
+- přepsat: stopa obsahuje aktuální pravidlo, které má bydlet v kanonickém místě;
+- archivovat: stopa má historickou hodnotu, ale nesmí být pracovní cestou;
+- ponechat v rytmu: stopa je součást běžné údržby, ne zvláštního dohledu.
+
+Nejčastější chyba je archivovat něco, co má být smazané. Archiv není elegantnější koš. Pokud záznam nepomůže pochopit rozhodnutí, auditní důvod nebo další práci, většinou nemá v živém systému co dělat.
+
+### Privacy-first klid
+
+Dlouhodobý klid je privacy-first výhra. Čím méně zvláštního dohledu, tím méně osobních stop, exportů, screenshotů a kontrolních seznamů. Po uzavření druhého průchodu proto zapište nejen to, co se stalo, ale hlavně co už se nebude sbírat.
+
+Privacy-first zápis:
+
+```text
+Zůstává:
+Jednovětý závěr, kanonické místo, běžný rytmus a návratový signál.
+
+Mizí:
+Dočasné ověřovací poznámky, osobní připomínky, screenshoty, exporty a ruční seznamy.
+
+Nesbíráme:
+Kliknutí v dokumentaci, osobní výkon, kompletní historii průchodu ani preventivní reporty.
+
+Retence:
+Pokud existuje archivní důvod, zůstává jen anonymizovaný nebo zkrácený rozhodovací záznam.
+```
+
+Pokud jste při ověření použili zákaznický nebo interní příklad, zeptejte se: musí v záznamu zůstat konkrétní identita? Ve většině případů stačí typ situace. "Enterprise zákazník nenašel aktuální šablonu bezpečnostní přílohy" je pro rozhodnutí užitečnější a bezpečnější než ukládat celé vlákno, jméno člověka a všechny obchodní detaily.
+
+### Karta uzavření do dlouhodobého klidu
+
+```text
+Položka:
+
+Kanonické místo:
+
+Výsledek druhého běžného průchodu:
+- stabilní / drobné tření / skrytý dohled / návratový signál
+
+Uzavírací rozhodnutí:
+
+Co dál patří do běžného rytmu:
+
+Co zůstává ukončené:
+
+Jedna lokální nebo systémová oprava, pokud byla potřeba:
+
+Co rušíme z dočasného režimu:
+
+Co mažeme nebo zkracujeme kvůli privacy-first provozu:
+
+Návratový signál:
+
+Kdo vlastní běžný rytmus:
+
+Datum další běžné revize, pokud existuje:
+
+Jednovětý závěr:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Staré review sales šablon.
+
+Kanonické místo:
+Kanonický index standardů.
+
+Výsledek druhého běžného průchodu:
+Stabilní.
+
+Uzavírací rozhodnutí:
+Položka přechází do dlouhodobého klidu.
+
+Co dál patří do běžného rytmu:
+Měsíční kontrola kanonického indexu.
+
+Co zůstává ukončené:
+Samostatné review šablon, pomocný seznam starých odkazů a ruční kontrola každé nabídky.
+
+Co rušíme z dočasného režimu:
+Připomínku "ověřit ještě jednu nabídku".
+
+Co mažeme nebo zkracujeme kvůli privacy-first provozu:
+Dočasné screenshoty starého rozcestníku a poznámky s konkrétními jmény lidí z ověření.
+
+Návratový signál:
+Vrátíme se jen tehdy, když aktuální index znovu povede ke staré nebo neplatné šabloně.
+
+Kdo vlastní běžný rytmus:
+Owner kanonického indexu.
+
+Jednovětý závěr:
+Druhý běžný průchod potvrdil stabilitu a staré review sales šablon zůstává ukončené bez dalšího zvláštního dohledu.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte položku a výsledek druhého běžného průchodu.
+2. Minuta 2: potvrďte kanonické místo a běžný rytmus.
+3. Minuta 3: vyberte, co se ruší z dočasného režimu.
+4. Minuta 4: zkraťte nebo smažte datové stopy bez dalšího účelu.
+5. Minuta 5: napište návratový signál.
+6. Minuta 6: zapište jednovětý závěr.
+
+Výstup:
+
+```text
+Položka [název] po druhém běžném průchodu přechází do [dlouhodobý klid / běžná lokální údržba / nové rozhodnutí]. Dál patří do [kanonické místo], rušíme [dočasné stopy] a vrátíme se jen při [návratový signál].
+```
+
+### Checklist dlouhodobého klidu
+
+- Je jasné, jak dopadl druhý běžný průchod?
+- Má položka jedno kanonické místo?
+- Patří další pozornost do existujícího běžného rytmu, ne do nového speciálního režimu?
+- Je návratový signál konkrétní a navázaný na reálnou práci?
+- Zůstává ukončené to, co mělo zůstat ukončené?
+- Zrušili jsme osobní připomínky, pomocné seznamy a kontrolní karty bez účelu?
+- Přepsali jsme případné užitečné pravidlo do místa práce místo ponechání v historii?
+- Smazali nebo zkrátili jsme dočasné screenshoty, exporty a citlivé příklady?
+- Nepřidáváme sledování otevření dokumentů, preventivní reporting ani osobní měření výkonu?
+- Má běžný rytmus vlastníka?
+- Dá se závěr říct jednou větou?
+
+Dlouhodobý klid je dobrý konec malé provozní smyčky. Neznamená, že se téma už nikdy nevrátí. Znamená, že návrat má pravidla, běžná práce má čistou trasu a tým nemusí dál nosit v hlavě starou opravu jen proto, že kdysi byla důležitá.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha XB o uzavření druhého běžného průchodu do dlouhodobého klidu: kanonické místo, návratový signál, úklid dočasných stop, privacy-first retence, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XA o druhém běžném průchodu po návratu ukončené položky: ověření stability bez zvláštního dohledu, rozlišení stabilního stavu, drobného tření, skrytého dohledu a návratového signálu, privacy-first úklid a checklist.
 - 2026-06-03: Doplněna Příloha WZ o uzavření prvního běžného průchodu po návratu ukončené položky: čtyři uzavírací stavy, uzavírací věta, úklid zbytků starého rytmu, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WY o prvním běžném průchodu po uzavřeném návratu ukončené položky: ověření kanonické trasy, čtyři výsledné stavy, lokální doladění, nová otázka, privacy-first průchod, karta, mini workshop a checklist.
