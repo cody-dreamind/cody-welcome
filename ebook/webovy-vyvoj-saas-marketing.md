@@ -170398,8 +170398,295 @@ Druhý běžný průchod u položky [název] skončil jako [stav]. Další akce 
 
 Druhý běžný průchod po klidu je dobrý hlavně tehdy, když je trochu nudný. Stabilní systém nepotřebuje dlouhé vysvětlování pokaždé, když zafunguje. Potřebuje jasné místo, lehký záznam, uklizenou datovou stopu a schopnost nechat hotovou věc zase být.
 
+## Příloha XH: Uzavření druhého běžného průchodu po klidu
+
+Po druhém běžném průchodu po klidu už nejde hlavně o to, jestli položka fungovala. To jste právě viděli. Teď jde o těžší disciplínu: nezaložit další kontrolu jen proto, že druhý průchod proběhl dobře a tým má chuť si tu jistotu ještě jednou pojistit. Pokud stabilní věc znovu obalíte zvláštní péčí, nevracíte ji do provozu. Vyrábíte nový poloprojekt.
+
+Uzavření druhého průchodu má být krátké, ale přesné. Má říct, v jakém stavu položka skončila, kde dál žije, co se už nekontroluje zvlášť a který návratový signál ji může znovu otevřít. Bez těchto čtyř vět se stabilní položka často rozpadne do dvou špatných směrů: někdo ji přestane používat, protože neví, kde je aktuální pravidlo, nebo ji někdo začne hlídat ručně, protože se bojí starého problému.
+
+Začněte uzavírací větou:
+
+```text
+Druhý běžný průchod je uzavřený jako [stav]. Položka zůstává v [kanonické místo / běžný rytmus], zvláštní péče se [neobnovuje / převádí do samostatné karty] a návrat nastane jen podle [návratový signál].
+```
+
+Tato věta má být viditelná v místě, kde tým opravdu pracuje. Ne v dlouhé retrospektivě, kterou nikdo při další nabídce, úpravě webu nebo marketingovém review neotevře. Pokud se položka používá v indexu, patří závěr do indexu. Pokud v provozním runbooku, patří do runbooku. Pokud v měsíčním review, patří do jeho šablony nebo poznámky.
+
+### Čtyři uzavírací stavy
+
+Uzavření navazuje na výsledek druhého průchodu. Vyberte jeden stav:
+
+- Stabilní uzavření: položka funguje bez zvláštní péče a zůstává v běžném rytmu.
+- Uzavření lokálního dozvuku: jedna drobná úprava byla provedena v kanonickém místě a nevzniká nová kontrola.
+- Převod skrytého dohledu: tichá pomoc se mění buď na úpravu kanonického místa, nebo na samostatný návratový signál.
+- Oddělení nového signálu: nový problém dostává vlastní kartu a nepřebírá starou ověřovací historii.
+
+Neutrální stav "ještě uvidíme" je většinou past. Pokud opravdu potřebujete čekat, napište na co přesně. Například "čekáme na další přirozenou nabídku v segmentu enterprise" je jasné. "Ještě to budeme sledovat" je ruční dohled bez hranice.
+
+### Stabilní uzavření
+
+Stabilní uzavření má položku ztišit. To neznamená smazat ji z paměti. Znamená to ponechat ji v normálním provozu a odstranit zvláštní ověřovací stopu, která vznikla kolem návratu po klidu.
+
+Příklad:
+
+```text
+Položka:
+Kanonický index sales materiálů.
+
+Druhý průchod:
+Další nabídka s bezpečnostní přílohou proběhla bez dotazu a bez použití starého odkazu.
+
+Uzavření:
+stabilní uzavření
+
+Kde položka dál žije:
+Interní index sales výstupů a měsíční review materiálů.
+
+Co se ruší:
+Dočasná poznámka "ověřit při druhé nabídce".
+
+Co se neobnovuje:
+Samostatné ruční schvalování nabídek s bezpečnostní přílohou.
+
+Návratový signál:
+Dvě selhání po sobě při nalezení nebo použití aktuální bezpečnostní přílohy.
+```
+
+Stabilní uzavření je hotové až ve chvíli, kdy zmizí důvod držet zvláštní pozornost. Pokud v chatu pořád visí připnutá připomínka, v tabulce existuje samostatný sloupec "ověřit klid" nebo vlastník dál bokem kontroluje každý výstup, uzavření není hotové. Je jen hezky napsané.
+
+### Uzavření lokálního dozvuku
+
+Lokální dozvuk se zavírá jednou konkrétní úpravou. Důležité je neudělat z ní nový cyklus. Pokud jste sjednotili název odkazu, doplnili příklad, odstranili starou poznámku nebo zkrátili nejasnou větu, napište to a zavřete.
+
+Šablona:
+
+```text
+Dozvuk:
+
+Úprava v kanonickém místě:
+
+Proč jde pořád jen o lokální dozvuk:
+
+Co tím neotevíráme:
+
+Co mažeme nebo zkracujeme:
+
+Návratový signál po úpravě:
+```
+
+Příklad:
+
+```text
+Dozvuk:
+Název odkazu v indexu byl méně konkrétní než název dokumentu.
+
+Úprava v kanonickém místě:
+Odkaz přejmenován na stejný název jako aktuální dokument.
+
+Proč jde pořád jen o lokální dozvuk:
+Člověk našel správný materiál a práci dokončil bez zvláštní pomoci.
+
+Co tím neotevíráme:
+Neotevíráme revizi všech názvů v sales knihovně.
+
+Co mažeme nebo zkracujeme:
+Mazáme dočasnou poznámku v chatu s přímým odkazem.
+
+Návratový signál po úpravě:
+Opakované použití starého názvu nebo starého odkazu ve dvou běžných průchodech.
+```
+
+Lokální dozvuk má být malý i po zápisu. Pokud jeho uzavření vyžaduje workshop, novou roli nebo kalendářový rituál, už to není dozvuk. Je to nový provozní problém, který si zaslouží vlastní kartu.
+
+### Převod skrytého dohledu
+
+Skrytý dohled se nesmí zavřít jako stabilita. I když výsledek dopadl dobře, systém nefungoval sám. Někdo ho podržel. Správné uzavření musí rozhodnout, jestli se pomoc převádí do kanonického místa, do běžného rytmu, nebo do nové otázky.
+
+Rozlišujte tři možnosti:
+
+- Informace chybí v kanonickém místě: doplňte ji tam a zrušte bokem poskytovanou pomoc.
+- Rytmus nemá vlastníka: doplňte odpovědnost do běžného review, ne do mimořádného dohledu.
+- Problém je širší než položka: otevřete novou kartu a starý průchod zavřete jako zdroj důkazu, ne jako pokračování starého režimu.
+
+Příklad převodu:
+
+```text
+Skrytý dohled:
+Vlastník sales materiálů poslal člověku přímý odkaz, protože aktuální verze nebyla v indexu dost zřetelná.
+
+Rozhodnutí:
+Pomoc patří do kanonického místa.
+
+Úprava:
+Index označuje aktuální verzi a starý odkaz mizí z poznámky v chatu.
+
+Co se neobnovuje:
+Ruční posílání odkazů před každou nabídkou.
+
+Kontrola:
+Nezakládáme třetí zvláštní průchod. Další signál vznikne jen při opakovaném selhání v běžné práci.
+```
+
+Tím se skrytý dohled promění na úpravu systému. Ne na zvyk, že jeden člověk dál tiše hlídá, aby všichni ostatní vypadali samostatně.
+
+### Oddělení nového signálu
+
+Nový signál po druhém průchodu je potřeba oddělit od starého problému. Jinak se tým vrátí do původní historie a začne znovu řešit věci, které už byly uzavřené. Nový signál může vzniknout právě díky tomu, že stará položka funguje: teprve stabilní práce ukáže další hranu.
+
+Špatné uzavření:
+
+```text
+Druhý průchod ukázal nový problém, takže znovu otevíráme celou starou položku.
+```
+
+Lepší uzavření:
+
+```text
+Druhý průchod potvrdil, že původní položka je stabilní. Nový signál se týká [nová otázka] a dostává vlastní kartu bez automatického převzetí starého rozsahu.
+```
+
+Příklad:
+
+```text
+Původní položka:
+Kanonický index sales materiálů.
+
+Stav po druhém průchodu:
+Index funguje.
+
+Nový signál:
+Obchodník nevěděl, kdy má zákazníkovi poslat krátkou bezpečnostní odpověď a kdy celou přílohu.
+
+Oddělení:
+Neotevíráme index. Zakládáme novou kartu pro rozhodovací hranici v sales komunikaci.
+
+Privacy-first hranice:
+Do nové karty nejdou konkrétní zákaznické detaily. Stačí typ situace, otázka a rozhodnutí, které má vzniknout.
+```
+
+### Úklid po uzavření
+
+Po uzavření druhého průchodu projděte tři místa:
+
+- Kanonické místo: obsahuje aktuální pravidlo, odkaz nebo šablonu?
+- Pracovní stopa: nezůstala někde dočasná připomínka, tabulka, chatová poznámka nebo ruční checklist?
+- Návratový signál: je pořád dost konkrétní, aby neotevíral položku při každém drobném šumu?
+
+Úklid není kosmetika. Když dočasné stopy zůstanou, lidé je budou používat. A pokud budou používat dočasné stopy, kanonické místo začne znovu slábnout.
+
+Privacy-first pravidlo: s koncem zvláštní péče končí i potřeba zvláštních důkazů. Nechte jen rozhodovací minimum: stav, kanonické místo, případnou úpravu a návratový signál. Staré screenshoty, detailní příklady, exporty, přepisy a osobní poznámky smažte nebo zkraťte, pokud už neslouží aktivnímu rozhodnutí.
+
+### Karta uzavření druhého průchodu po klidu
+
+```text
+Položka:
+
+Kanonické místo:
+
+Druhý běžný průchod:
+
+Výsledek druhého průchodu:
+- stabilní / lokální dozvuk / skrytý dohled / nový návratový signál
+
+Uzavírací stav:
+- stabilní uzavření / uzavření lokálního dozvuku / převod skrytého dohledu / oddělení nového signálu
+
+Uzavírací věta:
+
+Co zůstává v běžném rytmu:
+
+Co se ruší nebo zkracuje:
+
+Co se výslovně neobnovuje:
+
+Nová karta, pokud vzniká:
+
+Privacy-first úklid:
+
+Návratový signál:
+
+Datum nejbližšího přirozeného review:
+```
+
+Vyplněná karta:
+
+```text
+Položka:
+Kanonický index sales materiálů.
+
+Kanonické místo:
+Interní index sales výstupů.
+
+Druhý běžný průchod:
+Příprava nabídky s bezpečnostní přílohou.
+
+Výsledek druhého průchodu:
+lokální dozvuk
+
+Uzavírací stav:
+uzavření lokálního dozvuku
+
+Uzavírací věta:
+Druhý běžný průchod je uzavřený jako lokální dozvuk. Index zůstává kanonickým místem, zvláštní péče se neobnovuje a návrat nastane jen při opakovaném selhání nalezení aktuální přílohy.
+
+Co zůstává v běžném rytmu:
+Index a měsíční review sales materiálů.
+
+Co se ruší nebo zkracuje:
+Dočasná ověřovací poznámka k druhému průchodu.
+
+Co se výslovně neobnovuje:
+Ruční schvalování všech nabídek s bezpečnostní přílohou.
+
+Nová karta, pokud vzniká:
+Nevzniká.
+
+Privacy-first úklid:
+Ukládáme typ situace, výsledek a úpravu názvu odkazu. Neukládáme zákaznické detaily ani screenshot nabídky.
+
+Návratový signál:
+Dvě selhání po sobě při nalezení nebo použití aktuální bezpečnostní přílohy.
+
+Datum nejbližšího přirozeného review:
+Nejbližší měsíční review sales materiálů.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného průchodu.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete, co zůstává v běžném rytmu a co se ruší.
+5. Minuta 5: zkraťte datovou stopu na rozhodovací minimum.
+6. Minuta 6: potvrďte návratový signál a nejbližší přirozené review.
+
+Výstup:
+
+```text
+Druhý průchod u položky [název] je uzavřený jako [stav]. Položka dál žije v [místo/rytmus], zvláštní péče se [neobnovuje / převádí do nové karty] a dočasná datová stopa byla [smazána / zkrácena / ponechána v minimálním záznamu].
+```
+
+### Checklist uzavření druhého průchodu po klidu
+
+- Je výsledek druhého průchodu jasně pojmenovaný?
+- Vybrali jsme jeden uzavírací stav, ne vágní "ještě uvidíme"?
+- Existuje jedna uzavírací věta?
+- Je jasné, kde položka dál žije?
+- Je napsané, co se ruší, zkracuje nebo nechává bez vzniku?
+- Neobnovuje se třetí kontrolní kolo jen pro jistotu?
+- Pokud šlo o lokální dozvuk, byla úprava provedena v jednom kanonickém místě?
+- Pokud šlo o skrytý dohled, nepopsali jsme ho jako stabilitu?
+- Pokud vznikl nový signál, má vlastní kartu a nepřebírá starý rozsah?
+- Je návratový signál konkrétní a nepouští zpět každý drobný šum?
+- Zůstává datová stopa na minimu nutném pro rozhodnutí?
+- Byly odstraněny dočasné screenshoty, exporty, chatové poznámky nebo ruční checklisty, které už nemají účel?
+- Ví tým, kdy nastane další přirozené review?
+
+Codyho komentář: druhý stabilní průchod je dobrý okamžik přestat si dokazovat, že věc funguje. Software, web, marketing i týmové procesy se dají udusit láskyplnou kontrolou. Někdy je nejprofesionálnější krok prostě uklidit stopu a nechat hotovou věc pracovat.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha XH o uzavření druhého běžného průchodu po dlouhodobém klidu: uzavírací stavy, stabilní uzavření, lokální dozvuk, skrytý dohled, nový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XG o druhém běžném průchodu po uzavřeném klidu: ověření stabilního použití bez zvláštní péče, lokální dozvuk, skrytý dohled, nový návratový signál, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XF o uzavření prvního běžného průchodu po dlouhodobém klidu: čtyři uzavírací stavy, čistý průchod, lokální doladění, úprava rytmu, nový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XE o prvním běžném průchodu po uzavření odpovědi na návrat po dlouhodobém klidu: reálná pracovní situace, čtyři výsledné stavy, lokální doladění, slabý rytmus, nový signál, privacy-first stopa, karta, mini workshop a checklist.
