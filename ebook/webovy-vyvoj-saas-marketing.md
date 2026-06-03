@@ -169416,8 +169416,390 @@ Návrat položky [název] po dlouhodobém klidu uzavíráme jako [stav]. Změnil
 
 Dobré uzavření odpovědi po dlouhodobém klidu má být skoro nudné. Téma se objevilo, tým ho správně rozlišil, udělal jednu odpovídající reakci a znovu uklidil pracovní prostor. To je přesně ten druh nudy, který šetří peníze, čas i data.
 
+## Příloha XE: První běžný průchod po uzavření odpovědi na návrat po klidu
+
+Uzavřená odpověď na návrat po dlouhodobém klidu ještě není úplný konec. Skutečný konec přijde až ve chvíli, kdy někdo projde běžnou práci bez toho, aby musel znát celou historii staré položky, návratového signálu a poslední opravy. První běžný průchod proto nemá ověřovat, jestli bylo minulé rozhodnutí hezky popsané. Má ověřit, jestli se aktuální systém dá normálně použít.
+
+Tento průchod držte nízko nad zemí. Neorganizujte zvláštní review, nesvolávejte rozsáhlou retrospektivu a nehledejte staré důkazy jen proto, že se téma nedávno otevřelo. Vyberte jednu reálnou pracovní situaci, ve které by se nově uzavřený stav měl přirozeně projevit, a sledujte, jestli člověk dojde k výsledku bez návratu ke starému režimu.
+
+Začněte větou:
+
+```text
+První běžný průchod ověřuje, jestli [aktuální kanonické místo] stačí pro [reálná pracovní situace] bez obnovy [starý režim].
+```
+
+Příklad:
+
+```text
+První běžný průchod ověřuje, jestli kanonický index sales materiálů stačí pro přípravu nabídky s bezpečnostní přílohou bez obnovy samostatného review všech sales šablon.
+```
+
+Taková věta brání tomu, aby se z ověření stal audit všeho, co se tématu kdysi týkalo. První běžný průchod není prohrabávání sklepa. Je to kontrola, jestli dveře, které dnes používáte, vedou tam, kam mají.
+
+### Co při průchodu sledovat
+
+Sledujte jen čtyři věci:
+
+- člověk najde správné kanonické místo;
+- pochopí aktuální pravidlo bez doplňujícího výkladu;
+- dokončí pracovní výsledek bez starého režimu;
+- nevznikne nová zbytečná datová stopa.
+
+Pokud potřebujete pátý bod, nejspíš už ověřujete moc. Přidejte ho jen tehdy, když přímo souvisí s rozhodnutím po posledním návratu. V opačném případě ho zapište jako samostatný podnět a nechte první průchod zavřít.
+
+Příklad jednoduchého pozorování:
+
+```text
+Situace:
+Obchodník připravuje nabídku pro zákazníka, který vyžaduje bezpečnostní přílohu.
+
+Kanonické místo:
+Sales index, sekce bezpečnostní přílohy.
+
+Výsledek:
+Správná příloha byla nalezena a použita bez dotazu na starou tabulku.
+
+Tření:
+Název podsekce byl srozumitelný, ale datum poslední revize bylo příliš nízko v dokumentu.
+
+Datová stopa:
+Nevznikl export, screenshot ani sledování otevření dokumentu.
+```
+
+Výstupem není rozsáhlý zápis. Stačí rozhodovací věta: průchod byl čistý, průchod potřebuje lokální doladění, průchod ukázal slabý rytmus, nebo průchod ukázal nový signál.
+
+### Čtyři výsledné stavy průchodu
+
+Po prvním běžném průchodu vyberte jeden ze čtyř stavů:
+
+- Čistý průchod: aktuální stav funguje a není potřeba další akce.
+- Lokální doladění: práce funguje, ale jedno místo zaslouží malou úpravu.
+- Slabý rytmus: problém není v jedné větě, ale v tom, kdy a jak se místo udržuje.
+- Nový signál: aktuální trasa selhala i při správném použití a vzniká nová otázka.
+
+Čistý průchod uzavřete bez dalších úkolů. Lokální doladění proveďte u kanonického místa a zavřete ho v changelogu nebo poznámce. Slabý rytmus řešte pouze v rozsahu, který odpovídá poslednímu návratu. Nový signál nepřilepujte ke starému procesu: založte novou rozhodovací kartu s vlastním důvodem.
+
+Rozlišovací otázky:
+
+```text
+Dokončil člověk práci bez znalosti historie?
+Pokud ano, je problém jen v drobném tření?
+Pokud ne, chybělo pravidlo, údržba, nebo celé rozhodnutí?
+Vznikla kvůli průchodu nová evidence, kterou už teď nechceme živit?
+```
+
+### Jak zavřít čistý průchod
+
+Čistý průchod je nejcennější výsledek, protože říká, že systém se vrátil do běžného života. Nepřidávejte mu zbytečnou oslavu ani další dohled.
+
+Zápis může být krátký:
+
+```text
+První běžný průchod:
+Čistý.
+
+Co fungovalo:
+Kanonický index stačil pro přípravu nabídky s bezpečnostní přílohou.
+
+Co neobnovujeme:
+Samostatné review sales šablon.
+
+Další akce:
+Žádná.
+
+Návratový signál:
+Druhý neplatný odkaz ve stejné sekci při správném použití indexu.
+```
+
+Po čistém průchodu nedávejte do kalendáře "ještě jednu kontrolu pro jistotu". Jistota je drahá, pokud kvůli ní znovu vyrábíte práci, kterou jste právě ukončili.
+
+### Jak udělat lokální doladění
+
+Lokální doladění je vhodné, když člověk došel k výsledku, ale narazil na malé tření: nejasný název, špatné pořadí, chybějící datum, nepřesnou větu nebo odkaz na sousední místo. Oprava má bydlet tam, kde se práce děje.
+
+Šablona lokálního doladění:
+
+```text
+Tření:
+
+Doladění:
+
+Kanonické místo:
+
+Co neměníme:
+
+Co nemažeme ani nesbíráme:
+
+Jak poznáme, že stačí:
+```
+
+Příklad:
+
+```text
+Tření:
+Datum poslední revize bezpečnostní přílohy bylo až pod seznamem odkazů.
+
+Doladění:
+Přesuneme datum hned pod název podsekce.
+
+Kanonické místo:
+Sales index, sekce bezpečnostní přílohy.
+
+Co neměníme:
+Nerozšiřujeme review šablon ani strukturu nabídky.
+
+Co nemažeme ani nesbíráme:
+Nevytváříme log otevření dokumentů.
+
+Jak poznáme, že stačí:
+Při další přípravě nabídky je datum vidět bez doptání.
+```
+
+Lokální doladění má skončit u jedné úpravy. Jakmile se kolem něj objeví druhý dokument, druhá role nebo druhý opakovaný termín, už to není doladění. Je to nový rozsah, který potřebuje vlastní rozhodnutí.
+
+### Když průchod ukáže slabý rytmus
+
+Slabý rytmus znamená, že aktuální kanonické místo je správné, ale jeho údržba není dost dobře napojená na práci. Typicky se ukáže, že odkazy stárnou, příklady nemají vlastníka, kontrola běží moc zřídka nebo se výsledek review nepromítá do místa, kde lidé skutečně pracují.
+
+Neopravujte slabý rytmus tak, že přidáte plošný dohled. Nejprve napište:
+
+```text
+Kanonické místo je správné, ale rytmus selhal v:
+
+Nejmenší úprava rytmu:
+
+Jak dlouho poběží:
+
+Kdy ji zrušíme nebo zkrátíme:
+
+Co neobnovujeme:
+
+Jaká data kvůli tomu nesbíráme:
+```
+
+Příklad:
+
+```text
+Kanonické místo je správné, ale rytmus selhal v:
+Revize bezpečnostních příloh se nepromítla do sales indexu.
+
+Nejmenší úprava rytmu:
+Po bezpečnostní revizi zkontrolovat jen odkazy v podsekci bezpečnostních příloh.
+
+Jak dlouho poběží:
+Dva revizní cykly.
+
+Kdy ji zrušíme nebo zkrátíme:
+Po dvou čistých cyklech zůstane jen obecná kvartální kontrola odkazů.
+
+Co neobnovujeme:
+Přednabídkové review všech šablon.
+
+Jaká data nesbíráme:
+Nesledujeme, kdo nabídku připravoval ani kdo dokument otevřel.
+```
+
+Slabý rytmus je často důsledek dobrého úklidu. Tým zrušil starý proces, ale ještě nedotáhl přirozený provozní háček. To není tragédie. Tragédie by byla obnovit starý proces celý, protože chyběla jedna malá spojka.
+
+### Když průchod ukáže nový signál
+
+Nový signál vzniká tehdy, když člověk použil aktuální trasu správně, ale práce stejně selhala způsobem, který nejde vysvětlit lokálním třením ani slabým rytmem. Tady už neřešíte uzavřený návrat po klidu. Řešíte nové rozhodnutí.
+
+Zapište ho odděleně:
+
+```text
+Nový signál:
+
+Proč nejde o lokální doladění:
+
+Proč nejde jen o rytmus:
+
+Jaké rozhodnutí se otevírá:
+
+Nejmenší další krok:
+
+Co nepřenášíme ze staré historie:
+
+Privacy-first hranice:
+```
+
+Příklad:
+
+```text
+Nový signál:
+Zákazník potřebuje bezpečnostní přílohu podle nového typu regulovaného provozu, který v současném indexu vůbec nemá kategorii.
+
+Proč nejde o lokální doladění:
+Nechybí odkaz ani datum, chybí rozhodnutí, jak tento typ provozu v nabídce obsluhovat.
+
+Proč nejde jen o rytmus:
+Ani častější kontrola by nevytvořila chybějící kategorii.
+
+Jaké rozhodnutí se otevírá:
+Jak rozlišovat bezpečnostní přílohy podle typu provozu zákazníka.
+
+Nejmenší další krok:
+Projít dvě poslední nabídky s tímto typem požadavku a napsat jednu rozhodovací větu.
+
+Co nepřenášíme ze staré historie:
+Neobnovujeme starou tabulku všech šablon ani plošné review.
+
+Privacy-first hranice:
+Pracujeme s anonymizovaným typem požadavku, ne se jménem zákazníka ani kompletní nabídkou.
+```
+
+Codyho komentář: nový signál není výmluva pro archeologii. Staré dokumenty se dají otevřít jako inspirace, ale ne jako soudce. Dnešní práce má dostat dnešní otázku.
+
+### Privacy-first průchod po klidu
+
+První běžný průchod svádí ke sběru "pro jistotu". Tým chce vědět, kdo co otevřel, jak dlouho u toho byl, kolik kroků udělal a jestli se někde nezasekl. Ve většině případů to není potřeba. Stačí sledovat pracovní výsledek a typ tření.
+
+Privacy-first pravidla:
+
+- Nezapisujte jména lidí, pokud stačí role.
+- Neuchovávejte screenshoty, pokud stačí popis místa.
+- Nevytvářejte export otevření dokumentů, pokud ověřujete jen použitelnost trasy.
+- Neprodlužujte retenci dočasných poznámek po zavření průchodu.
+- Nepřidávejte nový tracker k dokumentům ani interním šablonám kvůli jednomu ověření.
+
+Dobrá stopa po průchodu vypadá takto:
+
+```text
+Role:
+Obchod.
+
+Situace:
+Příprava nabídky s bezpečnostní přílohou.
+
+Výsledek:
+Příloha nalezena v kanonickém indexu.
+
+Tření:
+Datum revize bylo hůř viditelné.
+
+Rozhodnutí:
+Lokální doladění umístění data, bez nového měření.
+```
+
+To je dost. Systém nepotřebuje vědět víc jen proto, že může. Takové pokušení je přesně místo, kde privacy-first přestává být plakát a začíná být provozní disciplína.
+
+### Karta prvního běžného průchodu po klidu
+
+```text
+Položka:
+
+Kanonické místo:
+
+Starý režim, který neobnovujeme:
+
+Reálná pracovní situace:
+
+Kdo průchod provádí:
+- role stačí, jméno jen pokud je opravdu potřeba
+
+Co mělo stačit:
+
+Co se reálně stalo:
+
+Výsledný stav:
+- čistý průchod / lokální doladění / slabý rytmus / nový signál
+
+Pokud je potřeba úprava, jaká nejmenší:
+
+Co výslovně neotevíráme:
+
+Jaká data kvůli průchodu nesbíráme:
+
+Jaké dočasné stopy mažeme nebo zkracujeme:
+
+Návratový signál:
+
+Jednovětý závěr:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Bezpečnostní přílohy v sales indexu.
+
+Kanonické místo:
+Sales index, sekce bezpečnostní přílohy.
+
+Starý režim, který neobnovujeme:
+Samostatné review všech sales šablon.
+
+Reálná pracovní situace:
+Příprava nabídky pro zákazníka s požadavkem na bezpečnostní přílohu.
+
+Kdo průchod provádí:
+Obchodní role.
+
+Co mělo stačit:
+Najít správnou přílohu v kanonickém indexu a ověřit datum poslední revize.
+
+Co se reálně stalo:
+Příloha byla nalezena, ale datum revize bylo méně viditelné.
+
+Výsledný stav:
+Lokální doladění.
+
+Pokud je potřeba úprava, jaká nejmenší:
+Přesunout datum revize pod název podsekce.
+
+Co výslovně neotevíráme:
+Strukturu celé nabídky, starou tabulku šablon ani plošné review.
+
+Jaká data kvůli průchodu nesbíráme:
+Nesledujeme otevření dokumentů ani práci konkrétního člověka.
+
+Jaké dočasné stopy mažeme nebo zkracujeme:
+Zkracujeme poznámku z průchodu na typ situace a výsledek.
+
+Návratový signál:
+Druhé selhání při správném použití stejné sekce.
+
+Jednovětý závěr:
+První běžný průchod fungoval s jedním lokálním doladěním, bez obnovy starého review a bez nového sledování.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: vyberte jednu reálnou pracovní situaci pro první běžný průchod.
+2. Minuta 2: pojmenujte kanonické místo a starý režim, který se neobnovuje.
+3. Minuta 3: projděte práci nebo si ji nechte krátce popsat člověkem v roli.
+4. Minuta 4: zapište jen výsledek, tření a datovou stopu.
+5. Minuta 5: vyberte jeden ze čtyř výsledných stavů.
+6. Minuta 6: rozhodněte, jestli je potřeba žádná akce, lokální doladění, úprava rytmu nebo nová karta.
+7. Minuta 7: smažte nebo zkraťte dočasné poznámky a napište jednovětý závěr.
+
+Výstup:
+
+```text
+První běžný průchod položky [název] po uzavření návratu po klidu skončil jako [stav]. Aktuální kanonické místo [stačí / potřebuje lokální doladění / potřebuje úpravu rytmu / otevřelo nový signál], starý režim neobnovujeme a datovou stopu držíme na [minimum].
+```
+
+### Checklist prvního běžného průchodu po klidu
+
+- Je vybraná jedna reálná pracovní situace, ne umělý audit?
+- Je jasné kanonické místo, které má dnes stačit?
+- Je pojmenovaný starý režim, který se neobnovuje?
+- Dokázal člověk projít práci bez znalosti celé historie?
+- Je výsledek zařazený do jednoho ze čtyř stavů?
+- Pokud je průchod čistý, nevzniká zbytečná další kontrola?
+- Pokud je potřeba doladění, je lokální a u kanonického místa?
+- Pokud jde o slabý rytmus, má úprava stop pravidlo?
+- Pokud jde o nový signál, má vlastní rozhodovací kartu a nepřenáší staré artefakty automaticky?
+- Nezapisují se osobní detaily tam, kde stačí role a typ situace?
+- Nevznikl tracker, export, screenshotová evidence ani nová tabulka kvůli jednomu průchodu?
+- Je dočasná poznámka po průchodu zkrácená na rozhodovací minimum?
+- Dá se závěr vysvětlit jednou větou člověku, který nebyl u posledního návratu?
+
+První běžný průchod po klidu má potvrdit, že systém umí zase dýchat normálně. Když dopadne čistě, nechte ho být. Když ukáže malé tření, opravte malé tření. A když ukáže nový problém, otevřete novou otázku místo toho, abyste starou historii oblékli do nového kabátu.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha XE o prvním běžném průchodu po uzavření odpovědi na návrat po dlouhodobém klidu: reálná pracovní situace, čtyři výsledné stavy, lokální doladění, slabý rytmus, nový signál, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XD o uzavření odpovědi na návrat po dlouhodobém klidu: čtyři uzavírací stavy, lokální oprava, doplněná hrana, úprava rytmu, nové rozhodnutí, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XB o uzavření druhého běžného průchodu do dlouhodobého klidu: kanonické místo, návratový signál, úklid dočasných stop, privacy-first retence, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XA o druhém běžném průchodu po návratu ukončené položky: ověření stability bez zvláštního dohledu, rozlišení stabilního stavu, drobného tření, skrytého dohledu a návratového signálu, privacy-first úklid a checklist.
