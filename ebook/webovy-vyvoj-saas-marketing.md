@@ -165506,8 +165506,228 @@ Položka [název] je uzavřena jako [zralý stav]. Platí [kanonické místo], [
 
 Uzavření druhého dlouhodobého review je tichý, ale důležitý moment. Položka přestává být příběhem o opravě a stává se součástí běžného systému. Když se to povede, další člověk nemusí obdivovat historii práce. Prostě najde správné místo, použije správný rytmus a ví, kdy se má ozvat návratový signál.
 
+## Příloha WQ: Roční prořezání zralého rytmu
+
+Zralý rytmus nesmí žít navždy jen proto, že přežil dvě dlouhodobá review. To, že položka fungovala po stabilizaci, ještě neznamená, že má stejnou cenu i za rok. Web, SaaS, marketing i interní standardy se mění: některé kontroly se stanou samozřejmostí, některé se sloučí do většího provozního rituálu a některé už jen připomínají starý problém, který se nevrací.
+
+Roční prořezání zralého rytmu není velký audit všeho. Je to krátké rozhodnutí, jestli daný rytmus pořád platí jako nejlepší způsob péče o konkrétní pracovní místo.
+
+Základní otázka:
+
+```text
+Kdybychom tento rytmus dnes navrhovali poprvé, vytvořili bychom ho stejně, levněji, jinde, nebo vůbec?
+```
+
+Příklad:
+
+```text
+Rytmus:
+Kvartální kontrola rozcestníku review šablon.
+
+Roční otázka:
+Potřebujeme samostatnou kvartální kontrolu, nebo už stačí ověření při běžné kontrole kanonického indexu?
+
+Rozhodnutí:
+Samostatný rytmus rušíme a kontrolu slučujeme do půlročního průchodu indexem. Návratový signál zůstává: reálný průchod skončí v archivní šabloně.
+```
+
+Smyslem je uvolnit pozornost tam, kde už zvláštní rytmus nepřináší dost hodnoty. Dobrý systém není ten, který si pamatuje každou historickou péči. Dobrý systém umí poznat, kdy péče dospěla do běžného provozu nebo kdy už vůbec není potřeba.
+
+### Neotevírejte celou historii
+
+Roční prořezání se snadno zvrhne v archeologii: kdo rytmus založil, proč tehdy vznikl, které opravy mu předcházely a co všechno se během roku změnilo. Historie má smysl jen jako kontrola původního slibu, ne jako povinnost znovu projít všechny staré karty.
+
+Stačí čtyři vstupy:
+
+```text
+Aktuální kanonické místo:
+Současný rytmus:
+Původní slib rytmu:
+Poslední reálný signál z práce:
+```
+
+Pokud bez pátého vstupu nejde rozhodnout, zapište, co přesně chybí. Nepřidávejte automaticky nový report ani další měření. Chybějící důkaz často znamená, že rytmus už dlouho nikdo nepotřeboval.
+
+### Pět rozhodnutí po roce
+
+Po ročním prořezání vyberte jeden stav:
+
+- Ponechat beze změny: rytmus pořád zachytává reálné riziko nebo pomáhá kvalitě práce.
+- Zlevnit: účel platí, ale stačí méně častá, kratší nebo sdružená kontrola.
+- Sloučit: položka patří do širšího provozního rytmu a samostatná péče už jen dubluje práci.
+- Uspat: položka zůstává v kanonickém místě, ale bez plánované kontroly; vrací se jen přes návratový signál.
+- Ukončit: rytmus ani návratový signál už nemají pracovní důvod a zůstane jen archivní poznámka.
+
+Nejčastější chyba je vybrat "ponechat", protože je to nejméně konfliktní. Jenže ponechání také něco stojí: pozornost, čas, připomínky, dokumenty a někdy i zbytečně dlouhou datovou stopu. Pokud rytmus nikdo rok nepoužil k rozhodnutí, musí si ponechání obhájit stejně tvrdě jako nová práce.
+
+### Test živosti
+
+Před rozhodnutím položte tři jednoduché otázky:
+
+```text
+Kdy naposledy tento rytmus změnil rozhodnutí?
+Kdo by si všiml, kdyby rytmus příští cyklus neproběhl?
+Jaký problém by se vrátil, kdybychom rytmus zlevnili nebo uspali?
+```
+
+Dobré odpovědi jsou konkrétní:
+
+```text
+Při posledním kvartálním průchodu jsme našli dvě šablony, které stále vedly na starý postup. Editor je sloučil do nové karty a support od té doby neposílá zákazníkům starý odkaz.
+```
+
+Slabé odpovědi jsou mlhavé:
+
+```text
+Je dobré to mít pod kontrolou.
+Nikdy nevíme, kdy se to bude hodit.
+Raději bych to ještě nechal.
+```
+
+Codyho komentář: "raději bych to ještě nechal" je často elegantní převlek pro "nechci rozhodnout". Chápu, pohodlné. Ale provozní systém není půda po babičce. Všechno, co tam necháte, někdo jednou bude muset obejít, oprášit nebo vysvětlit.
+
+### Privacy-first prořezání
+
+Roční prořezání je výborný okamžik pro snížení datové stopy. U zralých rytmů bývají největší riziko staré pomocné důkazy: exporty, screenshoty, osobní poznámky, přepisy rozhovorů, testovací tabulky nebo historické kopie šablon. Když už rytmus nežije jako oprava, většina těchto stop nemá co dělat v běžném provozu.
+
+Privacy-first otázky:
+
+- Držíme ještě důkaz, který už nepodporuje žádné aktuální rozhodnutí?
+- Je v pomocných poznámkách osobní údaj, interní citace nebo zákaznický detail, který stačí zkrátit?
+- Můžeme ponechat anonymizovaný vzor místo konkrétního příkladu?
+- Pokud rytmus uspáváme nebo ukončujeme, mažeme i připomínky, exporty a dočasné seznamy?
+- Pokud rytmus slučujeme, nepřenášíme starou datovou stopu do nového místa jen ze zvyku?
+
+Praktické pravidlo: po ročním prořezání má zůstat jen to, co nový člověk potřebuje pro další pracovní rozhodnutí. Všechno ostatní je kandidát na smazání, anonymizaci nebo krátkou archivní větu.
+
+### Karta ročního prořezání
+
+```text
+Položka:
+
+Kanonické místo:
+
+Současný rytmus:
+
+Původní slib rytmu:
+
+Poslední reálný pracovní signál:
+
+Test živosti:
+- kdy naposledy změnil rozhodnutí:
+- kdo by si všiml vynechání:
+- co by se vrátilo po zlevnění nebo uspání:
+
+Rozhodnutí:
+- ponechat / zlevnit / sloučit / uspat / ukončit
+
+Nový stav:
+
+Nový nebo zrušený rytmus:
+
+Návratový signál:
+
+Co rušíme:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Co výslovně nepřidáváme:
+
+Vlastník:
+
+Datum dalšího návratu:
+
+Jednověté uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Rozcestník review šablon.
+
+Kanonické místo:
+Kanonický index standardů.
+
+Současný rytmus:
+Kvartální kontrola odkazů.
+
+Původní slib rytmu:
+Zachytit návrat ke starým review šablonám.
+
+Poslední reálný pracovní signál:
+Poslední dvě kontroly nic nenašly a editor při běžném průchodu indexem stejně kontroluje odkazy.
+
+Rozhodnutí:
+Sloučit.
+
+Nový stav:
+Součást půlroční kontroly kanonického indexu.
+
+Nový nebo zrušený rytmus:
+Rušíme samostatnou kvartální kontrolu.
+
+Návratový signál:
+Reálný průchod skončí v archivní šabloně.
+
+Co rušíme:
+Osobní připomínku a pomocný seznam rozcestníků.
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+Mažeme staré screenshoty a ponecháváme jen archivní větu v changelogu.
+
+Co výslovně nepřidáváme:
+Nepřidáváme nový report použití šablon.
+
+Vlastník:
+Editor znalostní báze.
+
+Datum dalšího návratu:
+Příští půlroční kontrola indexu.
+
+Jednověté uzavření:
+Rozcestník review šablon už nemá samostatný rytmus; je součástí půlroční kontroly kanonického indexu a vrací se jen při průchodu, který skončí v archivní šabloně.
+```
+
+### Mini workshop na 9 minut
+
+1. Minuta 1: přečtěte kanonické místo a současný rytmus.
+2. Minuta 2: zopakujte původní slib rytmu jednou větou.
+3. Minuty 3 až 4: projděte test živosti.
+4. Minuta 5: vyberte jeden z pěti stavů.
+5. Minuta 6: určete nový nebo zrušený rytmus.
+6. Minuta 7: zapište privacy-first úklid.
+7. Minuta 8: potvrďte vlastníka a návratový signál.
+8. Minuta 9: napište jednověté uzavření.
+
+Výstup:
+
+```text
+Rytmus [název] po ročním prořezání [ponecháváme / zlevňujeme / slučujeme / uspáváme / ukončujeme]. Nový stav je [stav], návratový signál je [signál] a rušíme [zbytečné stopy].
+```
+
+### Checklist ročního prořezání
+
+- Kontrolovali jsme současný rytmus, ne celou historii opravy?
+- Víme, jaký byl původní slib rytmu?
+- Máme poslední reálný pracovní signál?
+- Položili jsme test živosti?
+- Vybrali jsme jeden z pěti stavů?
+- Pokud rytmus ponecháváme, máme konkrétní důvod, ne jen opatrnost?
+- Pokud rytmus zlevňujeme, zůstává zachovaný účel péče?
+- Pokud rytmus slučujeme, existuje jedno nové kanonické místo?
+- Pokud rytmus uspáváme, je návratový signál dost konkrétní?
+- Pokud rytmus ukončujeme, zůstává jen potřebná archivní věta?
+- Zrušili jsme připomínky, seznamy a exporty, které nový stav nepotřebuje?
+- Smazali, zkrátili nebo anonymizovali jsme staré pomocné důkazy?
+- Nepřidali jsme nové měření jen proto, aby se ukončení rytmu zdálo bezpečnější?
+- Umí vlastník vysvětlit nový stav bez odkazování na celou starou historii?
+
+Roční prořezání drží zralý systém lehký. Není to oslava mazání pro mazání. Je to pravidelná otázka, jestli pozornost pořád míří tam, kde pomáhá rozhodování. Když odpověď zní ne, nejlepší práce je často ubrat.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha WQ o ročním prořezání zralého rytmu: test živosti, pět rozhodnutí po roce, privacy-first úklid starých důkazů, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WP o uzavření druhého dlouhodobého review do zralého rytmu: přepis z opravárenského jazyka do provozu, uzavření podle výsledného stavu, zmenšení provozní a datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WO o druhém dlouhodobém review ve stabilním rytmu: současná kontrola bez návratu k historii, pět výsledných stavů, test snížení pozornosti, privacy-first zmenšení datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WN o uzavření prvního dlouhodobého review do stabilního rytmu: stavové uzavření, kanonické místo, úklid dočasných stop, privacy-first minimalizace, karta, mini workshop a checklist.
