@@ -170684,8 +170684,257 @@ Druhý průchod u položky [název] je uzavřený jako [stav]. Položka dál ži
 
 Codyho komentář: druhý stabilní průchod je dobrý okamžik přestat si dokazovat, že věc funguje. Software, web, marketing i týmové procesy se dají udusit láskyplnou kontrolou. Někdy je nejprofesionálnější krok prostě uklidit stopu a nechat hotovou věc pracovat.
 
+## Příloha XI: Lehká periodická kontrola po dlouhodobém klidu
+
+Když je položka po návratu z klidu stabilně uzavřená, další práce nemá být třetí kontrolní kolo. Má to být lehká periodická kontrola, která jen ověří, že položka pořád patří do svého běžného rytmu a že kolem ní nevznikl nový zbytečný dohled. Rozdíl je zásadní: kontrolní kolo se soustředí na jednu nedávnou nejistotu, periodická kontrola se ptá, jestli pravidlo, šablona, odkaz, metrika nebo pracovní dohoda pořád slouží.
+
+Tato kontrola má být krátká a předvídatelná. Ideálně se připojí k existujícímu měsíčnímu, kvartálnímu nebo pololetnímu review. Pokud kvůli ní zakládáte nový meeting, nový dashboard nebo nový report, už jste pravděpodobně přestřelili. Stabilní věc nepotřebuje vlastní pódium. Potřebuje občas zkontrolovat, jestli se z ní nestal zapomenutý relikt, tichá práce navíc nebo datová stopa bez účelu.
+
+Začněte otázkou:
+
+```text
+Je tato položka pořád užitečná ve svém běžném rytmu, bez zvláštní péče a bez zbytečné datové stopy?
+```
+
+Odpověď má vést k jednomu ze čtyř stavů. Ne k dlouhému seznamu zlepšení, který vznikne jen proto, že jste se na položku po čase podívali zblízka.
+
+### Čtyři stavy periodické kontroly
+
+- Ponechat bez změny: položka je používaná, srozumitelná a nevyrábí zvláštní dohled.
+- Zkrátit nebo uklidit: položka funguje, ale má kolem sebe přebytečné poznámky, odkazy, příklady nebo důkazy.
+- Přesunout do lepšího rytmu: položka je užitečná, ale její současné místo neodpovídá tomu, kde tým opravdu pracuje.
+- Ukončit nebo sloučit: položka už nemá samostatný účel, duplikuje jiný artefakt nebo ji tým obchází.
+
+Stav "vylepšit pro jistotu" sem nepatří. Pokud se ukáže nový problém, založte samostatnou kartu s vlastní otázkou. Periodická kontrola nemá otevírat staré záznamy jen proto, že čtení starého textu svádí k redakčnímu nadšení.
+
+### Co při kontrole opravdu projít
+
+Držte se tří míst:
+
+- Použití: kdy se položka naposledy objevila v reálné práci?
+- Místo: je stále v kanonickém zdroji, který lidé při práci přirozeně otevřou?
+- Stopa: zůstávají u ní jen data, příklady a poznámky, které pořád pomáhají rozhodnutí?
+
+Příklad:
+
+```text
+Položka:
+Kanonický index sales materiálů.
+
+Použití:
+V posledním kvartálu byl použit při třech nabídkách a jednom předání nové obchodní role.
+
+Místo:
+Index je pořád správné kanonické místo, ale odkaz na bezpečnostní přílohu je duplicitně i ve staré chatové poznámce.
+
+Stopa:
+Dočasný záznam z ověřování po návratu už nemá rozhodovací účel.
+
+Stav:
+zkrátit nebo uklidit
+
+Rozhodnutí:
+Ponechat index bez změny, odstranit starou chatovou poznámku a zkrátit ověřovací záznam na jednu větu v changelogu.
+```
+
+Tím se kontrola uzavře. Není potřeba nový audit všech sales materiálů, pokud kontrola neukázala problém se sales materiály. Ukázala jen starou stopu, která už nemá práci.
+
+### Ponechat bez změny
+
+Ponechání bez změny je plnohodnotné rozhodnutí. Napište ho. Bez zápisu se může stát, že někdo za měsíc otevře stejnou položku znovu, protože "se na ni dlouho nikdo nedíval".
+
+Dobrá věta:
+
+```text
+Položku ponecháváme beze změny. V posledním období byla použitá v běžné práci, kanonické místo sedí a nevzniká zvláštní dohled ani nová datová stopa.
+```
+
+Špatná věta:
+
+```text
+Zatím dobré, ještě sledovat.
+```
+
+Druhá věta vrací položku do mlhavého dohledu. První ji nechává v klidu a zároveň potvrzuje, proč je klid oprávněný.
+
+### Zkrátit nebo uklidit
+
+Zkrácení je nejčastější výsledek. Stabilní položky kolem sebe sbírají drobné pomocné stopy: staré screenshoty, dočasné exporty, přímé odkazy v chatu, kontrolní poznámky, příklady z pilotu, historické komentáře nebo duplicitní šablony. Každá z nich možná kdysi pomohla. To ale neznamená, že má zůstat navždy.
+
+Při úklidu se ptejte:
+
+- Pomáhá tato stopa dnešnímu rozhodnutí?
+- Je bezpečné ji smazat, zkrátit nebo převést do anonymního příkladu?
+- Nevede lidi mimo kanonické místo?
+- Neobsahuje víc osobních, zákaznických nebo provozních detailů, než je dnes nutné?
+
+Privacy-first pravidlo: starý důkaz není suvenýr. Pokud už neslouží aktivnímu rozhodnutí, má zmizet nebo se zkrátit na minimum. Čím déle v týmu zůstávají staré exporty, screenshoty a přepisy, tím hůř se vysvětluje, proč je vlastně pořád držíte.
+
+### Přesunout do lepšího rytmu
+
+Někdy položka funguje, ale žije na špatném místě. Tým ji používá při měsíčním marketingovém review, ale záznam je v technickém runbooku. Nebo se pravidlo používá při supportu, ale sedí v onboardingovém checklistu. V takovém případě položku nepřepisujte jako nový proces. Přesuňte ji tam, kde se rozhodnutí skutečně děje.
+
+Šablona přesunu:
+
+```text
+Položka:
+
+Současné místo:
+
+Skutečný pracovní okamžik:
+
+Nové kanonické místo:
+
+Co se přesouvá:
+
+Co se nebere s sebou:
+
+Kdo ověří první použití po přesunu:
+
+Kdy:
+```
+
+Důležité je pole "co se nebere s sebou". Při přesunu se snadno přestěhuje celá historie, i když nové místo potřebuje jen aktuální pravidlo. Do nového rytmu patří pracovní verze, ne muzeum všech důvodů, proč vznikla.
+
+### Ukončit nebo sloučit
+
+Ukončení je správné, když položka už nedává samostatný smysl. Možná ji nahradil lepší artefakt. Možná se problém přestal objevovat. Možná se z ní stal duplicitní checklist, který lidé ignorují, protože skutečné rozhodnutí je jinde.
+
+Ukončení pište klidně:
+
+```text
+Položku ukončujeme jako samostatnou stopu. Aktuální pravidlo je pokryté v [nové místo], starý záznam nepoužíváme pro rozhodování a po úklidu nezůstává žádný zvláštní návratový signál.
+```
+
+Sloučení je vhodné, když položka pořád nese užitečnou větu, ale nepotřebuje samostatnou kartu. Vezměte jen tuto větu, vložte ji do silnějšího kanonického místa a starý artefakt zavřete.
+
+Příklad:
+
+```text
+Užitečná věta:
+Bezpečnostní přílohu posíláme až ve chvíli, kdy zákazník řeší technickou nebo právní kontrolu.
+
+Nové místo:
+Sales karta pro fáze komunikace.
+
+Co se ruší:
+Samostatná poznámka "kdy posílat bezpečnostní přílohu".
+
+Co se nemaže:
+Krátký changelog, že věta byla sloučená do sales karty.
+```
+
+### Karta lehké periodické kontroly
+
+```text
+Položka:
+
+Kanonické místo:
+
+Běžný rytmus, ke kterému kontrola patří:
+
+Poslední reálné použití:
+
+Je položka pořád užitečná?
+
+Je kanonické místo pořád správné?
+
+Nevznikl kolem ní zvláštní dohled?
+
+Jaká datová stopa už nemá účel?
+
+Výsledek kontroly:
+- ponechat bez změny / zkrátit nebo uklidit / přesunout do lepšího rytmu / ukončit nebo sloučit
+
+Jedna provedená akce:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+
+Další přirozené review:
+```
+
+Vyplněná karta:
+
+```text
+Položka:
+Kanonický index sales materiálů.
+
+Kanonické místo:
+Interní index sales výstupů.
+
+Běžný rytmus:
+Kvartální kontrola sales materiálů.
+
+Poslední reálné použití:
+Tři nabídky a jedno předání nové role.
+
+Je položka pořád užitečná?
+Ano, zkracuje hledání aktuálních materiálů.
+
+Je kanonické místo pořád správné?
+Ano.
+
+Nevznikl kolem ní zvláštní dohled?
+Ne, ale zůstala stará chatová poznámka s přímým odkazem.
+
+Jaká datová stopa už nemá účel?
+Dočasný ověřovací záznam po návratu z klidu.
+
+Výsledek kontroly:
+zkrátit nebo uklidit
+
+Jedna provedená akce:
+Smazána chatová poznámka a ověřovací záznam zkrácen na changelogovou větu.
+
+Co výslovně neotevíráme:
+Neotevíráme revizi všech sales materiálů.
+
+Privacy-first úklid:
+Bez zákaznických detailů, bez screenshotů nabídek, jen rozhodovací věta.
+
+Další přirozené review:
+Příští kvartální kontrola sales materiálů.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: vyberte jednu stabilní položku, která prošla klidem.
+2. Minuta 2: najděte poslední reálné použití.
+3. Minuta 3: ověřte kanonické místo.
+4. Minuta 4: najděte přebytečné stopy nebo skrytý dohled.
+5. Minuta 5: vyberte jeden ze čtyř stavů.
+6. Minuta 6: proveďte jednu akci.
+7. Minuta 7: zapište, co se výslovně neotevírá.
+
+Výstup:
+
+```text
+Položka [název] po lehké periodické kontrole zůstává ve stavu [stav]. Provedli jsme [jedna akce], neotevíráme [rozsah] a další návrat proběhne jen v [běžný rytmus / návratový signál].
+```
+
+### Checklist lehké periodické kontroly
+
+- Je kontrola napojená na existující rytmus, ne na nový meeting?
+- Víme, kdy se položka naposledy reálně použila?
+- Je kanonické místo pořád správné?
+- Nevzniká kolem stabilní položky zvláštní dohled?
+- Vybrali jsme jeden ze čtyř stavů?
+- Pokud položku ponecháváme bez změny, je to napsané jako rozhodnutí?
+- Pokud uklízíme, mažeme nebo zkracujeme jen stopy bez aktuálního účelu?
+- Pokud přesouváme, bereme s sebou aktuální pravidlo, ne celou historii?
+- Pokud ukončujeme nebo slučujeme, je jasné, kam případná užitečná věta přešla?
+- Neotevíráme starý problém jen proto, že jsme starý záznam znovu četli?
+- Zůstává datová stopa na rozhodovacím minimu?
+- Je napsané, co výslovně neotevíráme?
+- Je další návrat navázaný na běžný rytmus nebo konkrétní signál?
+
+Codyho komentář: stabilní věci nepotřebují, aby je tým chodil každý měsíc hladit po hlavě. Potřebují občas zkontrolovat, jestli pořád stojí na správném místě a jestli za sebou netáhnou starý kabel přes celou kancelář. Když kabel neslouží, pryč s ním. Úklid je taky feature.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha XI o lehké periodické kontrole po dlouhodobém klidu: čtyři stavy kontroly, ponechání bez změny, zkrácení stop, přesun do lepšího rytmu, ukončení nebo sloučení, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XH o uzavření druhého běžného průchodu po dlouhodobém klidu: uzavírací stavy, stabilní uzavření, lokální dozvuk, skrytý dohled, nový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XG o druhém běžném průchodu po uzavřeném klidu: ověření stabilního použití bez zvláštní péče, lokální dozvuk, skrytý dohled, nový návratový signál, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XF o uzavření prvního běžného průchodu po dlouhodobém klidu: čtyři uzavírací stavy, čistý průchod, lokální doladění, úprava rytmu, nový signál, privacy-first úklid, karta, mini workshop a checklist.
