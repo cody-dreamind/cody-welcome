@@ -169119,8 +169119,306 @@ Položka [název] se po dlouhodobém klidu vrací jako [typ návratu]. Uděláme
 
 Návrat po dlouhodobém klidu má být klidný. Starý příběh už znáte, ale nemusíte ho pokaždé znovu hrát celý od začátku. Stačí ověřit nový signál, vybrat správný typ reakce a nechat běžný systém dál nést práci, pokud to pořád zvládá.
 
+## Příloha XD: Uzavření odpovědi na návrat po dlouhodobém klidu
+
+Návrat po dlouhodobém klidu má dvě části. První část je rozpoznání signálu: lokální chyba, chybějící hrana, slabý rytmus nebo skutečný návrat problému. Druhá část je stejně důležitá: uzavřít odpověď tak, aby se staré téma znovu nepřilepilo k aktivní práci jen proto, že ho tým na chvíli otevřel.
+
+Uzavření odpovědi není administrativní závěr. Je to návrat systému do klidu. Po něm má být jasné, co se změnilo, kde to platí, co se neobnovuje a jaký signál by téma otevřel znovu. Bez této věty se i malý návrat snadno promění v nový dohled, další revizi, pomocnou tabulku nebo neformální pravidlo v hlavách lidí.
+
+Začněte uzavírací větou:
+
+```text
+Návrat po dlouhodobém klidu jsme uzavřeli jako [výsledný stav]. Změnilo se [jedna věc], neobnovujeme [starý režim] a další návrat řešíme jen při [konkrétní signál].
+```
+
+Příklad:
+
+```text
+Návrat po dlouhodobém klidu jsme uzavřeli jako lokální opravu se zpřesněním běžného rytmu.
+Změnilo se umístění bezpečnostní přílohy a jedna kontrolní otázka v měsíčním review.
+Neobnovujeme samostatné review všech sales šablon.
+Další návrat řešíme jen tehdy, když se při správném použití indexu objeví druhý neplatný odkaz ve stejné sekci.
+```
+
+Taková věta chrání tým před dvěma extrémy. První extrém je bagatelizace: "Byla to jen chyba, nic neřešme." Druhý extrém je přehnaná reakce: "Když se to vrátilo, obnovme celý starý proces." Dobré uzavření nechá prostor pro poučení, ale nepustí historii zpět na scénu bez dnešního důvodu.
+
+### Čtyři uzavírací stavy
+
+Po odpovědi na návrat po dlouhodobém klidu vyberte jeden ze čtyř stavů:
+
+- Uzavřeno lokální opravou: jedno místo bylo rozbité a je opravené.
+- Uzavřeno doplněnou hranou: aktuální systém zůstává, jen dostal pravidlo pro nový případ.
+- Uzavřeno úpravou rytmu: problém byl v běžné kontrole, ne v celé staré větvi.
+- Uzavřeno novým rozhodnutím: starý klid skončil a vznikla nová rozhodovací větev.
+
+Každý stav má jiný důsledek. Lokální oprava má zmizet z aktivní práce. Doplněná hrana má bydlet u kanonického pravidla. Úprava rytmu má mít stop pravidlo, aby se z ní nestala trvalá přidaná povinnost. Nové rozhodnutí má dostat vlastní kartu a nesmí jen přejmenovat starý proces.
+
+Pokud tým nedokáže vybrat stav, odpověď ještě není uzavřená. Neznamená to, že musí vzniknout větší projekt. Znamená to, že je potřeba doplnit jednu větu: co se vlastně změnilo v práci.
+
+### Jak zavřít lokální opravu
+
+Lokální oprava se zavírá rychle a úzce. Cílem není zapsat celý příběh, ale odstranit rozbitou stopu a zabránit tomu, aby se kolem ní vytvořil nový dohled.
+
+Uzavření lokální opravy obsahuje:
+
+- opravené místo;
+- kontrolu nejbližšího sousedního místa, pokud dává smysl;
+- smazání nebo zkrácení dočasné poznámky;
+- větu, že původní režim se neobnovuje;
+- návratový signál pro případ opakování.
+
+Příklad:
+
+```text
+Oprava:
+V kanonickém indexu byl nahrazen starý odkaz na bezpečnostní přílohu.
+
+Sousední kontrola:
+Prošli jsme další odkazy ve stejné sekci, bez další chyby.
+
+Co mažeme:
+Dočasnou poznámku s popisem nálezu v chatu.
+
+Co neobnovujeme:
+Samostatné review sales šablon.
+
+Návratový signál:
+Další neplatný odkaz ve stejné sekci nalezený při správném použití indexu.
+```
+
+Lokální oprava je hotová ve chvíli, kdy člověk v běžné práci narazí na aktuální stav a nepotřebuje znát historii opravy. Pokud musí někdo vysvětlovat, "proč to tu teď tak je", oprava možná ještě není uzavřená v kanonickém místě.
+
+### Jak zavřít doplněnou hranu
+
+Doplněná hrana má být malá, čitelná a připojená ke stávajícímu pravidlu. Zavření hrany proto není jen napsání nové výjimky. Je to kontrola, že nový případ neodtrhl práci do paralelního systému.
+
+Dobrá uzavírací věta:
+
+```text
+Nový případ [situace] řešíme jako doplněnou hranu k [kanonické místo]. Původní pravidlo zůstává stejné, doplňuje se jen [jedna věta]. Starý zvláštní režim se neobnovuje.
+```
+
+Příklad:
+
+```text
+Nový případ regulované bezpečnostní přílohy řešíme jako doplněnou hranu k sales indexu.
+Původní pravidlo zůstává: nabídky vznikají z jednoho kanonického indexu.
+Doplňuje se věta: regulované přílohy mají vlastní podsekci a datum poslední revize.
+Neobnovujeme přednabídkové review všech šablon.
+```
+
+Po doplnění hrany zkontrolujte, jestli nevznikly nové skryté objekty: pomocná složka, zvláštní checklist, soukromý dokument, dočasná tabulka nebo neformální dohoda "zeptej se vždycky člověka X". Pokud ano, hrana ještě není čistě uzavřená.
+
+### Jak zavřít úpravu rytmu
+
+Úprava rytmu je nebezpečně pohodlná. Vypadá skromně: jedna otázka navíc, jeden krátký průchod, jedna pravidelná kontrola. Jenže každá trvalá otázka navíc má cenu. Bere pozornost, vyrábí důkazy a může časem začít sledovat věci, které už nikdo nepotřebuje.
+
+Proto má úprava rytmu při uzavření obsahovat stop pravidlo:
+
+```text
+Do běžného rytmu přidáváme:
+
+Proč:
+
+Kde přesně:
+
+Jak dlouho:
+
+Kdy otázku zrušíme nebo zkrátíme:
+
+Co díky tomu neobnovujeme:
+
+Jaká data kvůli tomu nesbíráme:
+```
+
+Příklad:
+
+```text
+Do běžného rytmu přidáváme:
+V měsíční kontrole indexu projít sekci bezpečnostních příloh a ověřit platnost odkazů.
+
+Proč:
+Jeden starý odkaz se objevil při správném použití aktuální trasy.
+
+Kde přesně:
+Pouze v sekci bezpečnostních příloh.
+
+Jak dlouho:
+Dva měsíční cykly.
+
+Kdy otázku zrušíme nebo zkrátíme:
+Po dvou čistých průchodech se vrací do kvartální obecné kontroly odkazů.
+
+Co neobnovujeme:
+Samostatné review všech sales šablon.
+
+Jaká data nesbíráme:
+Nesledujeme, kdo dokumenty otevřel, a nevytváříme nový export použití indexu.
+```
+
+Tím se rytmus zlepší, ale nezvětší bez konce. Praktické pravidlo: každá dočasně přidaná kontrola má mít vlastní datum smrti. Zní to dramaticky, ale je to jen zdravá hygiena systému.
+
+### Jak zavřít nové rozhodnutí
+
+Skutečný návrat problému se nezavírá lokální opravou. Pokud aktuální trasa selhala i při správném použití a nejde o hranu ani slabý rytmus, vzniká nové rozhodnutí. I to se ale musí zavřít čistě: jako nová větev, ne jako vzkříšení starého procesu.
+
+Uzavření nového rozhodnutí má říct:
+
+- co se nově rozhoduje;
+- proč původní klid končí;
+- které staré artefakty se nepřenášejí automaticky;
+- jaký je nejmenší další krok;
+- kde bude nový zdroj pravdy;
+- jaká datová hranice platí od začátku.
+
+Šablona:
+
+```text
+Nové rozhodnutí:
+
+Proč vzniklo teď:
+
+Proč nestačí lokální oprava, hrana ani rytmus:
+
+Co nepřenášíme ze staré větve:
+
+Nejmenší další krok:
+
+Zdroj pravdy:
+
+Privacy-first hranice:
+
+Datum první kontroly:
+```
+
+Codyho komentář: když se starý problém opravdu vrátí, neznamená to, že starý proces měl celou dobu pravdu. Znamená to jen, že dnešní systém potkal novou realitu. Starý proces může být inspirace, ne dědictví po strýčkovi, které musíte celé přestěhovat do obýváku.
+
+### Privacy-first uzavření
+
+Uzavření odpovědi po dlouhodobém klidu je dobrý okamžik pro úklid datové stopy. Návrat často vznikne v konkrétní situaci s konkrétním člověkem, zákazníkem nebo dokumentem. Pro rozhodnutí ale obvykle stačí typ situace, pracovní místo a výsledek.
+
+Privacy-first uzavření proveďte ve třech krocích:
+
+1. Ponechte jen rozhodovací minimum: typ signálu, kanonické místo, výsledný stav a návratový signál.
+2. Smažte nebo zkraťte dočasné důkazy: screenshoty, chatové poznámky, jména, osobní vysvětlení a pomocné exporty.
+3. Pokud vznikla nová kontrola, napište její retenci: jak dlouho poběží, kdo ji uvidí a kdy se zruší nebo zkrátí.
+
+Nevytvářejte nový metrický systém kvůli jednomu návratu. Pokud potřebujete ověřit opakování, často stačí návratový signál v pracovním rytmu: "pokud se stejný typ chyby objeví znovu při správném použití trasy". To je méně elegantní než dashboard, ale také méně hladové po datech.
+
+### Karta uzavření odpovědi po klidu
+
+```text
+Položka po dlouhodobém klidu:
+
+Kanonické místo:
+
+Nový signál:
+
+Výsledný stav:
+- lokální oprava / doplněná hrana / úprava rytmu / nové rozhodnutí
+
+Co bylo provedeno:
+
+Co se změnilo v kanonickém místě:
+
+Co se neobnovuje ze starého režimu:
+
+Co se výslovně nepřenáší dál:
+
+Jaké dočasné stopy mažeme nebo zkracujeme:
+
+Jaká data kvůli tomu nesbíráme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum kontroly, pokud je potřeba:
+
+Jednovětý závěr:
+```
+
+Vyplněný příklad:
+
+```text
+Položka po dlouhodobém klidu:
+Staré review sales šablon.
+
+Kanonické místo:
+Kanonický index sales materiálů.
+
+Nový signál:
+Neplatný odkaz na bezpečnostní přílohu nalezený při přípravě nabídky.
+
+Výsledný stav:
+Úprava rytmu po lokální opravě.
+
+Co bylo provedeno:
+Odkaz byl nahrazen, sousední odkazy ve stejné sekci byly zkontrolovány.
+
+Co se změnilo v kanonickém místě:
+Měsíční review dočasně kontroluje platnost odkazů v sekci bezpečnostních příloh.
+
+Co se neobnovuje ze starého režimu:
+Samostatné review všech sales šablon.
+
+Co se výslovně nepřenáší dál:
+Historická agenda starého review a pomocná tabulka nálezů.
+
+Jaké dočasné stopy mažeme nebo zkracujeme:
+Chatovou poznámku s osobním popisem nálezu nahrazujeme anonymizovaným typem situace.
+
+Jaká data kvůli tomu nesbíráme:
+Nesledujeme otevření dokumentů ani práci konkrétního obchodníka.
+
+Návratový signál:
+Další neplatný odkaz ve stejné sekci při správném použití indexu.
+
+Vlastník:
+Marketing owner.
+
+Datum kontroly:
+Po dvou měsíčních průchodech.
+
+Jednovětý závěr:
+Návrat po dlouhodobém klidu uzavíráme lokální opravou a dočasným zpřesněním běžného rytmu, bez obnovy starého review.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní kartu návratu po dlouhodobém klidu.
+2. Minuta 2: vyberte jeden výsledný stav uzavření.
+3. Minuta 3: napište, co se změnilo v kanonickém místě.
+4. Minuta 4: napište, co se neobnovuje ze starého režimu.
+5. Minuta 5: smažte nebo zkraťte dočasnou datovou stopu.
+6. Minuta 6: zapište návratový signál a jednovětý závěr.
+
+Výstup:
+
+```text
+Návrat položky [název] po dlouhodobém klidu uzavíráme jako [stav]. Změnilo se [kanonická změna], neobnovuje se [starý režim], datovou stopu zkracujeme na [minimum] a znovu se vrátíme jen při [signál].
+```
+
+### Checklist uzavření odpovědi po klidu
+
+- Je vybraný jeden výsledný stav uzavření?
+- Je jasné, co se skutečně změnilo v kanonickém místě?
+- Je napsané, co se neobnovuje ze starého režimu?
+- Pokud šlo o lokální opravu, zmizela z aktivní práce?
+- Pokud šlo o doplněnou hranu, je krátká a připojená ke stávajícímu pravidlu?
+- Pokud šlo o úpravu rytmu, má stop pravidlo nebo datum zkrácení?
+- Pokud vzniklo nové rozhodnutí, má vlastní kartu a nepřenáší staré artefakty automaticky?
+- Jsou smazané nebo zkrácené dočasné poznámky, screenshoty, exporty a identifikující detaily?
+- Nepřibylo nové sledování lidí, dokumentů ani zákazníků jen kvůli jednomu návratu?
+- Je návratový signál konkrétní a navázaný na správné použití aktuální trasy?
+- Má uzavření vlastníka, pokud z něj plyne další kontrola?
+- Dá se výsledek vysvětlit jednou větou člověku, který starou historii nezná?
+
+Dobré uzavření odpovědi po dlouhodobém klidu má být skoro nudné. Téma se objevilo, tým ho správně rozlišil, udělal jednu odpovídající reakci a znovu uklidil pracovní prostor. To je přesně ten druh nudy, který šetří peníze, čas i data.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha XD o uzavření odpovědi na návrat po dlouhodobém klidu: čtyři uzavírací stavy, lokální oprava, doplněná hrana, úprava rytmu, nové rozhodnutí, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XB o uzavření druhého běžného průchodu do dlouhodobého klidu: kanonické místo, návratový signál, úklid dočasných stop, privacy-first retence, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XA o druhém běžném průchodu po návratu ukončené položky: ověření stability bez zvláštního dohledu, rozlišení stabilního stavu, drobného tření, skrytého dohledu a návratového signálu, privacy-first úklid a checklist.
 - 2026-06-03: Doplněna Příloha WZ o uzavření prvního běžného průchodu po návratu ukončené položky: čtyři uzavírací stavy, uzavírací věta, úklid zbytků starého rytmu, privacy-first minimum, karta, mini workshop a checklist.
