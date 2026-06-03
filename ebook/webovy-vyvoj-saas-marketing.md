@@ -165725,8 +165725,222 @@ Rytmus [název] po ročním prořezání [ponecháváme / zlevňujeme / slučuje
 
 Roční prořezání drží zralý systém lehký. Není to oslava mazání pro mazání. Je to pravidelná otázka, jestli pozornost pořád míří tam, kde pomáhá rozhodování. Když odpověď zní ne, nejlepší práce je často ubrat.
 
+## Příloha WR: Uzavření ročního prořezání do nového provozního stavu
+
+Roční prořezání nekončí tím, že tým vybere stav. Končí až ve chvíli, kdy se nový stav projeví v běžné práci: zmizí zbytečná připomínka, přesune se kontrola do správného rytmu, uspí se stará položka nebo zůstane jen krátká archivní věta. Bez tohoto uzavření je roční prořezání jen hezky vyplněná karta, která přidala další vrstvu dokumentace. Přesně to jsme chtěli odstranit. Gratuluji, právě jsme vynalezli kancelářský bumerang.
+
+Uzavření má jednu hlavní otázku:
+
+```text
+Co se po ročním prořezání prakticky mění v tom, kde lidé pracují, co kontrolují a jakou datovou stopu držíme?
+```
+
+Příklad:
+
+```text
+Rozhodnutí po ročním prořezání:
+Samostatnou kvartální kontrolu rozcestníku review šablon slučujeme do půlroční kontroly kanonického indexu.
+
+Uzavření:
+Mazáme samostatnou připomínku, v kanonickém indexu přidáváme jednu kontrolní větu k půlročnímu průchodu a starou kartu necháváme jen jako archivní poznámku.
+
+Co se nemění:
+Nepřidáváme nový report ani sledování použití šablon.
+```
+
+Tento krok je drobný, ale důležitý. Roční prořezání často mění rytmus pozornosti, ne samotný obsah pravidla. Pokud se změna nepropíše do pracovních míst, tým bude dál potkávat staré připomínky, staré checklisty a staré "raději ještě jednou zkontrolujeme". Systém pak vypadá prořezaně jen na papíře.
+
+### Tři místa uzavření
+
+Po ročním prořezání zkontrolujte jen tři místa:
+
+- Kanonické místo: stránka, karta, index nebo šablona, kde má nový stav opravdu bydlet.
+- Provozní spouštěč: připomínka, kalendář, rutinní checklist, issue, opakovaný úkol nebo ruční zvyk, který práci spouští.
+- Datová stopa: pomocné důkazy, exporty, screenshoty, poznámky, kopie a dočasné seznamy, které nový stav už nepotřebuje.
+
+Nechoďte hledat všechna místa, kde se starý rytmus historicky objevil. To by z uzavření udělalo další audit. Stačí projít místa, která mohou po příštím cyklu reálně spustit práci nebo zmást člověka, který hledá aktuální pravidlo.
+
+Příklad uzavření podle tří míst:
+
+```text
+Kanonické místo:
+V kanonickém indexu měníme stav položky z "samostatná kvartální kontrola" na "součást půlroční kontroly indexu".
+
+Provozní spouštěč:
+Rušíme kvartální připomínku a do půlročního checklistu přidáváme jednu větu: "Zkontrolovat, zda rozcestník review šablon nevede na archivní postup."
+
+Datová stopa:
+Mažeme starý pomocný seznam rozcestníků a ponecháváme jen archivní větu v changelogu.
+```
+
+### Uzavření podle vybraného stavu
+
+Každý stav z ročního prořezání má jiný typ uzavření:
+
+- Ponechat beze změny: potvrďte, že kanonické místo, spouštěč i datová stopa pořád odpovídají účelu; nic dalšího nepřidávejte.
+- Zlevnit: upravte frekvenci, rozsah nebo délku kontroly a smažte starý silnější spouštěč.
+- Sloučit: přesuňte jednu kontrolní větu do nového rytmu a zrušte samostatný starý rytmus.
+- Uspat: odstraňte plánovanou kontrolu, ponechte návratový signál a zkraťte archivní kontext.
+- Ukončit: zrušte spouštěč, uzavřete kanonické místo archivní větou a smažte pomocné podklady.
+
+Nejvíc pozornosti potřebují stavy "zlevnit" a "sloučit". Vypadají nenápadně, ale snadno nechají starý režim běžet vedle nového. Pokud snížíte frekvenci a současně necháte starou připomínku, nic jste nezlevnili. Pokud něco sloučíte a starý checklist zůstane aktivní, jen jste vyrobili duplicitu s lepším názvem.
+
+### Jedna uzavírací věta
+
+Uzavření napište jako větu, která jde vložit do changelogu, kanonického místa nebo předání týmu:
+
+```text
+Po ročním prořezání [položku] [ponecháváme / zlevňujeme / slučujeme / uspáváme / ukončujeme]; nový provozní stav je [stav], aktivní spouštěč je [spouštěč nebo žádný] a staré pomocné stopy [mažeme / zkracujeme / anonymizujeme / ponecháváme v rozsahu].
+```
+
+Vyplněný příklad:
+
+```text
+Po ročním prořezání rozcestník review šablon slučujeme do půlroční kontroly kanonického indexu; nový provozní stav je "součást indexu", aktivní spouštěč je půlroční průchod indexem a staré pomocné stopy mažeme kromě jedné archivní věty v changelogu.
+```
+
+Tato věta má být trochu nudná. To je dobře. Uzavření zralého rytmu není místo pro velký příběh. Je to přesné směrové značení pro další práci.
+
+### Privacy-first uzavření
+
+Roční prořezání je vhodný okamžik položit tvrdší otázku: co zůstává jen proto, že se to kdysi hodilo? Staré důkazy mívají špatnou vlastnost: už nepomáhají rozhodnutí, ale pořád nesou kontext, jména, citace, interní poznámky nebo zákaznické detaily.
+
+Privacy-first uzavření má tři pravidla:
+
+- Nechte jen důkaz, který podporuje nový provozní stav.
+- Konkrétní příklady nahraďte anonymizovaným vzorem, pokud už není potřeba přesný případ.
+- Do nového rytmu nepřenášejte staré exporty ani screenshoty jen proto, že se "mohou hodit".
+
+Praktický test:
+
+```text
+Kdyby nový člověk otevřel tento materiál za šest měsíců, potřeboval by tento detail k rozhodnutí, nebo by ho jen musel bezpečně přehlédnout?
+```
+
+Pokud by ho musel přehlédnout, materiál zkraťte. Pokud obsahuje osobní nebo zákaznický detail, zvažte smazání nebo anonymizaci. Pokud je to jen pomocný důkaz z doby, kdy položka byla v opravě, do zralého provozu nepatří.
+
+Codyho komentář: "mohlo by se to hodit" je nejdražší věta v interní dokumentaci. Ne proto, že by byla zlá. Protože je nekonečná. Vejde se pod ni každá tabulka, každý screenshot a každá poznámka z roku, kdy někdo ještě používal jiný název tlačítka.
+
+### Karta uzavření po ročním prořezání
+
+```text
+Položka:
+
+Rozhodnutí po ročním prořezání:
+- ponechat / zlevnit / sloučit / uspat / ukončit
+
+Nový provozní stav:
+
+Kanonické místo po uzavření:
+
+Aktivní spouštěč:
+
+Zrušený spouštěč:
+
+Návratový signál:
+
+Co měníme v pracovním místě:
+
+Co rušíme:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Co ponecháváme jen jako archivní větu:
+
+Co výslovně nepřidáváme:
+
+Vlastník uzavření:
+
+Datum první kontroly nového stavu:
+
+Jednověté uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Rozcestník review šablon.
+
+Rozhodnutí po ročním prořezání:
+Sloučit.
+
+Nový provozní stav:
+Součást půlroční kontroly kanonického indexu.
+
+Kanonické místo po uzavření:
+Kanonický index standardů.
+
+Aktivní spouštěč:
+Půlroční průchod indexem.
+
+Zrušený spouštěč:
+Samostatná kvartální připomínka.
+
+Návratový signál:
+Reálný průchod skončí v archivní šabloně.
+
+Co měníme v pracovním místě:
+Do půlročního checklistu přidáváme jednu kontrolní větu.
+
+Co rušíme:
+Pomocný seznam rozcestníků a starou kartu kvartální kontroly.
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+Mažeme screenshoty starých odkazů a necháváme jen anonymizovaný příklad v changelogu.
+
+Co ponecháváme jen jako archivní větu:
+Samostatná kvartální kontrola byla v roce 2026 sloučena do půlroční kontroly indexu.
+
+Co výslovně nepřidáváme:
+Nepřidáváme měření použití šablon ani nový report.
+
+Vlastník uzavření:
+Editor znalostní báze.
+
+Datum první kontroly nového stavu:
+Příští půlroční průchod indexem.
+
+Jednověté uzavření:
+Po ročním prořezání rozcestník review šablon slučujeme do půlroční kontroly kanonického indexu; nový provozní stav je "součást indexu", aktivní spouštěč je půlroční průchod indexem a staré pomocné stopy mažeme kromě jedné archivní věty v changelogu.
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte rozhodnutí z ročního prořezání.
+2. Minuta 2: určete nové kanonické místo.
+3. Minuta 3: určete aktivní a zrušený spouštěč.
+4. Minuta 4: zapište návratový signál.
+5. Minuta 5: projděte datovou stopu a vyberte, co se maže, zkracuje nebo anonymizuje.
+6. Minuta 6: napište jednu archivní větu.
+7. Minuta 7: napište jednověté uzavření.
+8. Minuta 8: potvrďte vlastníka a první kontrolu nového stavu.
+
+Výstup:
+
+```text
+Po ročním prořezání je [položka] ve stavu [stav]. Pracuje se s ní přes [kanonické místo nebo spouštěč], vrací se jen při [návratový signál] a staré pomocné stopy jsou [uzavření datové stopy].
+```
+
+### Checklist uzavření
+
+- Přepsali jsme rozhodnutí z ročního prořezání do praktického provozního stavu?
+- Je jasné nové kanonické místo?
+- Je jasný aktivní spouštěč, nebo víme, že už žádný plánovaný spouštěč nemá být?
+- Zrušili jsme starý spouštěč, pokud už nemá běžet?
+- Nezůstaly vedle sebe starý a nový rytmus?
+- Má položka návratový signál odpovídající novému stavu?
+- Zkrátili jsme archivní kontext na to, co nový člověk opravdu potřebuje?
+- Smazali, zkrátili nebo anonymizovali jsme pomocné důkazy, které už nepodporují rozhodnutí?
+- Nepřidali jsme nový report, tracker nebo kontrolu jen pro pocit bezpečí?
+- Umí vlastník říct jednou větou, co se od příštího cyklu mění?
+- Je zapsané datum první kontroly nového stavu, pokud nějaká kontrola ještě dává smysl?
+
+Dobré uzavření po ročním prořezání je skoro neviditelné. Tým prostě příště potká méně věcí, méně připomínek a méně starých stop. To je přesně pointa: zralý systém nemá působit jako muzeum dobrých úmyslů. Má v pravý čas ukázat správné místo a zbytek nechat v klidu zmizet.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha WR o uzavření ročního prořezání do nového provozního stavu: kanonické místo, aktivní a zrušený spouštěč, jednověté uzavření, privacy-first dočištění datové stopy, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WQ o ročním prořezání zralého rytmu: test živosti, pět rozhodnutí po roce, privacy-first úklid starých důkazů, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WP o uzavření druhého dlouhodobého review do zralého rytmu: přepis z opravárenského jazyka do provozu, uzavření podle výsledného stavu, zmenšení provozní a datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WO o druhém dlouhodobém review ve stabilním rytmu: současná kontrola bez návratu k historii, pět výsledných stavů, test snížení pozornosti, privacy-first zmenšení datové stopy, karta, mini workshop a checklist.
