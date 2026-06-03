@@ -6700,6 +6700,191 @@ Codyho komentář: když první reakce skončí novým reportem, nebyla to prvn�
 
 Dobře uzavřená první reakce je malá brzda proti provoznímu přehánění. Tým vidí, že signál nezmizel pod koberec, ale zároveň z něj nevznikla nová vrstva dohledu. To je přesně ten druh drobné disciplíny, který dělá privacy-first provoz praktickým, ne jen hezky napsaným v zásadách.
 
+## Jak převést uzavřenou první reakci do běžného rytmu
+
+Uzavřená první reakce ještě neznamená, že se tým vrátil do klidu. Znamená jen, že signál dostal stav, jednu odpovídající reakci a hranici. Další krok je převést výsledek zpět do běžného rytmu tak, aby kolem něj nevznikla nová mimořádná péče.
+
+Ptejte se jednoduše:
+
+```text
+Co se má po uzavřené první reakci změnit v běžné práci, aby se stejná situace nemusela znovu řešit jako zvláštní případ?
+```
+
+Odpověď má být malá. Pokud byla první reakce šum, běžný rytmus se možná nezmění vůbec. Pokud šlo o lokální tření, stačí drobná úprava pracovního místa. Pokud šlo o skutečný návrat, běžný rytmus se nemá obnovit automaticky; nejdřív musí existovat nová pracovní otázka a stop podmínka.
+
+### Tři převody podle výsledného stavu
+
+Uzavřenou reakci převeďte podle jejího výsledku:
+
+- Šum: zapište, že rytmus zůstává beze změny, a smažte pomocné poznámky.
+- Lokální tření: zapracujte jednu malou úpravu do pracovního místa a vraťte kontrolu do běžného review.
+- Skutečný návrat: otevřete samostatnou otázku s vlastníkem, ale běžný rytmus nepřepisujte dřív, než se otázka uzavře.
+
+Příklad šumu:
+
+```text
+Výsledek první reakce:
+Šum běžné údržby.
+
+Převod do rytmu:
+Měsíční review rozcestníku zůstává beze změny.
+
+Co uklízíme:
+Mažeme dočasnou poznámku v chatu, ponecháváme jen anonymizovaný záznam v review.
+
+Co neotevíráme:
+Nezakládáme nový kontrolní bod pro každé použití rozcestníku.
+```
+
+Příklad lokálního tření:
+
+```text
+Výsledek první reakce:
+Lokální tření.
+
+Převod do rytmu:
+Do kanonického rozcestníku přibyla jedna věta rozlišující slabý podnět a potvrzenou změnu.
+
+Co uklízíme:
+Dočasný komentář v issue se zavírá, protože kanonické místo je aktualizované.
+
+Co neotevíráme:
+Nepřidáváme samostatné školení, tracker používání ani nový report.
+```
+
+Příklad skutečného návratu:
+
+```text
+Výsledek první reakce:
+Skutečný návrat.
+
+Převod do rytmu:
+Běžný rytmus zatím neměníme. Otevíráme pracovní otázku, proč se práce znovu dostala mimo kanonické místo.
+
+Co uklízíme:
+Oddělujeme aktuální návrat od staré historie; starý audit zůstává jen jako odkaz.
+
+Co neotevíráme:
+Nepřepisujeme celý standard, dokud nevíme, kde současná cesta selhala.
+```
+
+Tři stavy mají společnou zásadu: výsledek první reakce nemá automaticky zvětšit systém. Má jen změnit přesně to místo, kde se má příště pracovat lépe.
+
+### Co znamená návrat do běžného rytmu
+
+Návrat do běžného rytmu není slavnostní stav. Znamená, že téma už nemá zvláštní režim, zvláštní schůzku, zvláštní export ani zvláštní paměťovou povinnost. Pokud se má kontrolovat, kontroluje se v existujícím rytmu: měsíční review, kvartální údržba, běžná kontrola formuláře, pravidelné sales retro nebo standardní obsahová revize.
+
+Dobrá věta zní:
+
+```text
+Téma se vrací do měsíčního review rozcestníku; mimo tento rytmus se otevře jen při návratovém signálu.
+```
+
+Slabá věta zní:
+
+```text
+Budeme na to dávat pozor.
+```
+
+První věta má místo, hranici a signál. Druhá věta vytváří neviditelnou práci. Někdo má něco hlídat, ale není jasné kdo, kdy, kde a podle čeho. Tak vzniká tichý provozní dluh.
+
+### Úklid po převodu
+
+Po převodu do běžného rytmu ukliďte pomocné stopy. Ne kvůli estetice, ale kvůli tomu, aby se příště nepracovalo se starou verzí reality.
+
+Zkontrolujte:
+
+- dočasné komentáře v issue nebo chatu;
+- rozpracované poznámky, které už jen opakují rozhodnutí;
+- pracovní exporty, screenshoty nebo tabulky vytvořené kvůli signálu;
+- odkazy na starou šablonu nebo starý postup;
+- upozornění, připomínky a kalendářové bloky, které patřily jen první reakci.
+
+Ne každý artefakt se musí smazat. Někdy stačí označit ho jako uzavřený a odkázat na kanonické místo. Důležité je, aby nezůstal působit jako aktivní práce.
+
+Krátká úklidová karta:
+
+```text
+Kanonické místo po převodu:
+
+Co zůstává:
+
+Co mažeme:
+
+Co označujeme jako uzavřené:
+
+Co nesmí zůstat jako druhý zdroj pravdy:
+
+Další kontrola v běžném rytmu:
+```
+
+### Kdy převod raději nedělat
+
+Někdy je lepší nepřevádět výsledek hned do běžného rytmu. Typicky když:
+
+- první reakce byla uzavřená jen formálně, ale nejmenší krok se ještě neudělal;
+- není jasné kanonické místo, kam výsledek patří;
+- lokální tření se ukázalo jako příznak většího návratu;
+- dopad se týká zákaznické důvěry, bezpečnosti, právní odpovědnosti nebo zásadní obchodní změny;
+- převod by vyžadoval nové sbírání dat, které ještě nemá jasný účel.
+
+V takovém případě nechte téma v mezistavu, ale jen s vlastníkem a termínem:
+
+```text
+Převod do běžného rytmu odkládáme, protože:
+
+Chybí:
+
+Kdo rozhodne:
+
+Do kdy:
+
+Co zatím neotevíráme:
+
+Jaká data zatím nesbíráme:
+```
+
+Mezistav nesmí být úkryt. Má být krátká ochrana před ukvapeným převodem. Pokud se z něj stane trvalé místo, tým znovu vytváří zvláštní režim, kterého se právě snažil zbavit.
+
+### Privacy-first převod
+
+Převod do běžného rytmu je dobrá chvíle zkontrolovat, jestli po první reakci nezůstala zbytečná data. Privacy-first úklid se ptejte prakticky:
+
+- Potřebujeme dál uchovávat osobní příklad, nebo stačí anonymizovaný typ situace?
+- Vznikl dočasný export, který už splnil účel?
+- Přibylo ruční sledování lidí, používání šablon nebo klikání v dokumentaci?
+- Nezůstala zákaznická informace v místě, kde pro ni není jasný účel?
+- Dá se rozhodnutí dohledat bez kopírování celé debaty?
+
+Do převodu napište jednu větu:
+
+```text
+Díky převodu do běžného rytmu dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Díky převodu do běžného rytmu dál nesbíráme jména lidí, kteří narazili na tření, ani klikání v rozcestníku. Zůstává jen typ situace, upravené kanonické místo a návratový signál.
+```
+
+Codyho komentář: dobrý provoz se pozná i podle toho, co po něm nezůstane. Když po malé reakci zůstane nová tabulka, nový report a nové hlídání lidí, možná jste nevyřešili problém. Možná jste mu pořídili kancelář.
+
+### Checklist převodu do běžného rytmu
+
+- Má uzavřená první reakce jasný výsledný stav?
+- Víme, zda se má běžný rytmus změnit, nebo zůstat beze změny?
+- Pokud šlo o lokální tření, změnilo se jen jedno kanonické pracovní místo?
+- Pokud šlo o skutečný návrat, má nová otázka vlastníka a stop podmínku?
+- Je jasné, kde bude téma příště kontrolované?
+- Uklidili jsme dočasné komentáře, exporty, screenshoty nebo pomocné poznámky?
+- Nezůstává druhý zdroj pravdy vedle kanonického místa?
+- Nevznikl nový tracker, report ani osobní měření používání pravidla?
+- Je zapsané, jaká data díky převodu dál nesbíráme?
+- Umí tým jednou větou říct, kdy se téma znovu otevře mimo běžný rytmus?
+
+Převod do běžného rytmu je malý konec malé epizody. Když se udělá dobře, tým neztratí poučení, ale taky si neponechá mimořádný režim pro situaci, která už mimořádná není. To je praktická produktivita: méně zvláštních výjimek, víc jasných míst, kde práce normálně začíná a končí.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -168005,3 +168190,4 @@ Návrat ukončené položky není ostuda. Ostuda je tvářit se, že každé ozv
 - 2026-06-02: Doplněna úvodní podkapitola o prvním běžném použití pravidla po uzavřené systémové opravě: běžná pracovní situace, stínový proces, tři výsledné stavy, privacy-first hranice, karta a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o prvním návratovém signálu po zařazení pravidla do běžného rytmu: rozlišení šumu, lokálního tření a skutečného návratu, práce bez otevírání celé historie, privacy-first karta a checklist.
 - 2026-06-03: Doplněna krátká úvodní poznámka k první reakci na návratový signál: nejdřív vybrat stav, udělat jednu odpovídající reakci a teprve potom rozhodovat o dalším rozboru.
+- 2026-06-03: Doplněna úvodní podkapitola o převodu uzavřené první reakce na návratový signál zpět do běžného rytmu: tři převody podle stavu, úklid pracovních stop, mezistav, privacy-first hranice a checklist.
