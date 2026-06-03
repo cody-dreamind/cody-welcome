@@ -170110,8 +170110,297 @@ První běžný průchod po klidu u položky [název] uzavíráme jako [stav]. D
 
 Uzavření prvního běžného průchodu po klidu má jednoduchý cíl: nenechat po ověření další vrstvu práce. Když systém funguje, nechte ho fungovat. Když potřebuje drobnou hranu, doplňte ji. Když ukáže nový problém, dejte mu vlastní místo. Všechno ostatní je jen dobře oblečená nerozhodnost.
 
+## Příloha XG: Druhý běžný průchod po uzavřeném klidu
+
+Druhý běžný průchod po uzavřeném klidu má jiný účel než první. První průchod ověřuje, jestli se člověk dokáže vrátit do normální práce bez staré historie. Druhý průchod ověřuje, jestli se normální práce udrží i bez zvláštní pozornosti. To je důležitý rozdíl. Pokud druhý průchod znovu vedete jako malý audit, pořád jste klid neuzavřeli. Jen jste ho přejmenovali na kontrolní rituál.
+
+Druhý průchod vybírejte z běžného provozu. Nemá to být workshop, generální revize ani "ještě jednou pro jistotu" schůzka. Ideální je situace, která by stejně nastala: další nabídka, další úprava formuláře, další měsíční kontrola materiálů, další onboardingový krok nebo další rozhodnutí v marketingovém rytmu.
+
+Začněte větou:
+
+```text
+Druhý běžný průchod ověřuje, jestli položka zůstává použitelná bez zvláštní péče.
+```
+
+Pokud tato věta nesedí, ještě nejste u druhého běžného průchodu. Možná pořád zavíráte první průchod, opravujete lokální doladění nebo řešíte nový signál. To není problém. Problém je tvářit se, že běžný rytmus běží, zatímco ve skutečnosti kolem položky stojí lidé s poznámkami a čekají, co se pokazí.
+
+### Co má druhý průchod potvrdit
+
+Druhý průchod má potvrdit čtyři věci:
+
+- člověk našel kanonické místo bez připomínání;
+- pravidlo nebo šablona stačily pro reálnou práci;
+- nevznikla nová pomocná evidence;
+- návratový signál zůstal jasný a nepoužil se jen ze zvyku.
+
+Příklad:
+
+```text
+Položka:
+Kanonický index sales materiálů.
+
+První průchod:
+Nabídka se zákazníkem, který řešil citlivá data, ukázala potřebu jedné doplňující věty.
+
+Uzavření prvního průchodu:
+Věta byla doplněna do indexu. Starý review dokument se neobnovil.
+
+Druhý běžný průchod:
+Jiný obchodník připravil nabídku pro podobnou situaci bez dotazu na tým.
+
+Co se potvrdilo:
+Index stačí, doplněná věta je na správném místě a není potřeba další kontrolní tabulka.
+```
+
+Tento výsledek je užitečný právě tím, že není dramatický. Druhý průchod nemá vyrábět velké poučení. Má ukázat, že systém umí obyčejně fungovat.
+
+### Čtyři výsledné stavy
+
+Po druhém průchodu vyberte jeden stav:
+
+- Stabilní: položka funguje bez zvláštní péče.
+- Lokální dozvuk: objevilo se drobné tření, které patří do stejného kanonického místa.
+- Skrytý dohled: práce proběhla jen díky neformální pomoci, připomenutí nebo ručnímu obcházení.
+- Nový návratový signál: ukázal se opakovaný problém, který si zaslouží samostatné rozhodnutí.
+
+Stabilní stav zavřete bez další akce. Lokální dozvuk opravte jednou úpravou. Skrytý dohled nepovažujte za stabilitu, i když výsledek navenek dopadl dobře. Nový návratový signál oddělte od starého klidu a dejte mu vlastní kartu.
+
+### Jak zavřít stabilní stav
+
+Stabilní druhý průchod zavírejte krátce:
+
+```text
+Druhý běžný průchod byl stabilní. Položka zůstává v běžném rytmu, zvláštní péče se neobnovuje a další návrat nastane jen podle původního návratového signálu.
+```
+
+Do záznamu nepište víc detailů, než rozhodnutí potřebuje. U sales, supportu nebo zákaznických situací často stačí typ práce a výsledek. Jména lidí, konkrétní zákaznické věty, screenshoty a interní obchodní detaily většinou nepomáhají rozhodnutí, ale zvyšují datovou stopu.
+
+Příklad stabilního uzavření:
+
+```text
+Položka:
+Kanonický index sales materiálů.
+
+Druhý průchod:
+Příprava nabídky s bezpečnostní přílohou.
+
+Výsledek:
+stabilní
+
+Co zůstává:
+Index, doplněná věta a měsíční review.
+
+Co neobnovujeme:
+Starý samostatný review dokument.
+
+Návratový signál:
+Dvě selhání po sobě při nalezení nebo použití bezpečnostní přílohy.
+
+Privacy-first stopa:
+Ukládáme jen typ situace a výsledek, ne zákaznické detaily.
+```
+
+### Jak poznat lokální dozvuk
+
+Lokální dozvuk je malé tření, které nevyvrací uzavřený klid. Typicky jde o název odkazu, chybějící příklad, nejasnou větu nebo starý odkaz v jednom místě. Důležité je, že člověk práci dokončil bez zvláštního dohledu a problém neotevírá širší otázku.
+
+Lokální dozvuk řešte pravidlem "jedno místo, jedna úprava, žádná nová péče".
+
+Příklad:
+
+```text
+Dozvuk:
+Člověk našel správnou přílohu, ale název odkazu v indexu byl méně konkrétní než název dokumentu.
+
+Úprava:
+Sjednotíme název odkazu s názvem dokumentu.
+
+Co neotevíráme:
+Nepřepisujeme celý index a neděláme revizi všech sales materiálů.
+
+Uzavření:
+Druhý průchod zavřený jako lokální dozvuk.
+```
+
+Lokální dozvuk není důvod přidat novou kontrolu. Pokud se podobné tření opakuje, stane se návratovým signálem. Pokud se neopakuje, byla to jen hrana, kterou bylo správné zarovnat.
+
+### Skrytý dohled není stabilita
+
+Nejnebezpečnější výsledek druhého průchodu je zdánlivý úspěch se skrytým dohledem. Práce vypadá hotově, ale jen proto, že někdo bokem poslal odkaz, připomněl starý kontext, ručně zkontroloval výstup nebo opravil chybu dřív, než byla vidět. To není běžný rytmus. To je ruční hlídání převlečené za provoz.
+
+Skrytý dohled zapisujte věcně:
+
+```text
+Kde se objevil skrytý dohled:
+
+Kdo nebo co práci podrželo:
+
+Co by se stalo bez této pomoci:
+
+Patří pomoc do kanonického místa, nebo do rytmu:
+
+Nejmenší úprava:
+
+Co tím nechceme rozšířit:
+```
+
+Příklad:
+
+```text
+Kde se objevil skrytý dohled:
+Při přípravě nabídky člověk našel správnou přílohu, ale jen díky tomu, že mu vlastník sales materiálů poslal přímý odkaz.
+
+Co by se stalo bez pomoci:
+Pravděpodobně by použil starou verzi přílohy.
+
+Patří pomoc do kanonického místa, nebo do rytmu:
+Do kanonického místa. Index má ukazovat aktuální verzi výrazněji.
+
+Nejmenší úprava:
+Přidat k odkazu štítek "aktuální verze" a odstranit starý odkaz z poznámky v chatu.
+
+Co tím nechceme rozšířit:
+Nezavádíme ruční schvalování každé nabídky.
+```
+
+Po skrytém dohledu neotevírejte automaticky celou položku. Nejdřív zjistěte, jestli chybí informace v kanonickém místě, nebo jestli rytmus pořád vyžaduje člověka, který tiše drží systém pohromadě. První opravíte lokálně. Druhé je nový signál.
+
+### Privacy-first druhý průchod
+
+Druhý průchod svádí k tomu, aby si tým "pro jistotu" schoval víc důkazů. Odolejte. Pokud je cílem ověřit běžný rytmus, důkaz má být stejně lehký jako běžná práce.
+
+Dobré privacy-first minimum:
+
+- typ pracovní situace;
+- výsledek průchodu;
+- stav položky;
+- případná lokální úprava;
+- návratový signál.
+
+Co obvykle nepotřebujete:
+
+- jména zákazníků;
+- přepisy rozhovorů;
+- screenshoty interních dokumentů;
+- seznam všech kliknutí;
+- exporty z CRM;
+- novou analytiku nad používáním šablony.
+
+Codyho komentář: když k ověření klidu potřebujete tři tabulky, dvě nové evidence a malé slavnostní razítko, není to klid. Je to projekt, který se naučil šeptat.
+
+### Karta druhého běžného průchodu po klidu
+
+```text
+Položka:
+
+Kanonické místo:
+
+Co bylo uzavřeno po prvním průchodu:
+
+Druhý běžný průchod:
+
+Kdo pracoval s položkou:
+- role, ne osobní detail, pokud osobní údaj není nutný
+
+Výsledek:
+- stabilní / lokální dozvuk / skrytý dohled / nový návratový signál
+
+Co se potvrdilo:
+
+Co se ukázalo jako tření:
+
+Nejmenší akce:
+- žádná / lokální úprava / úprava kanonického místa / nová karta
+
+Co výslovně neotevíráme:
+
+Co mažeme, zkracujeme nebo necháváme bez vzniku:
+
+Návratový signál:
+
+Datum dalšího přirozeného review:
+```
+
+Vyplněná karta:
+
+```text
+Položka:
+Kanonický index sales materiálů.
+
+Kanonické místo:
+Interní index sales výstupů.
+
+Co bylo uzavřeno po prvním průchodu:
+Doplněna věta k použití bezpečnostní přílohy.
+
+Druhý běžný průchod:
+Příprava další nabídky s bezpečnostní přílohou.
+
+Kdo pracoval s položkou:
+Obchodní role.
+
+Výsledek:
+stabilní
+
+Co se potvrdilo:
+Index stačí pro nalezení aktuální přílohy i rozhodnutí, kdy ji použít.
+
+Co se ukázalo jako tření:
+Nic podstatného.
+
+Nejmenší akce:
+žádná
+
+Co výslovně neotevíráme:
+Neotevíráme revizi všech sales materiálů ani nový scoring bezpečnostních požadavků.
+
+Co mažeme, zkracujeme nebo necháváme bez vzniku:
+Dočasnou ověřovací poznámku zkracujeme na tento záznam. Nevzniká tracker použití dokumentu.
+
+Návratový signál:
+Dvě selhání po sobě při nalezení nebo použití bezpečnostní přílohy.
+
+Datum dalšího přirozeného review:
+Nejbližší měsíční review sales materiálů.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte druhý běžný průchod, který už v provozu nastal.
+2. Minuta 2: vraťte se k uzavření prvního průchodu a ověřte, co mělo zůstat beze zvláštní péče.
+3. Minuta 3: vyberte jeden ze čtyř stavů druhého průchodu.
+4. Minuta 4: zapište nejmenší akci, pokud nějaká existuje.
+5. Minuta 5: pojmenujte, co se výslovně neotevírá.
+6. Minuta 6: zkraťte datovou stopu na typ situace, výsledek a návratový signál.
+7. Minuta 7: potvrďte další přirozené review nebo nechte položku bez nové kontroly.
+
+Výstup:
+
+```text
+Druhý běžný průchod u položky [název] skončil jako [stav]. Další akce je [žádná / lokální úprava / nová karta], zvláštní péče se [neobnovuje / převádí do nové otázky] a datová stopa zůstává na rozhodovacím minimu.
+```
+
+### Checklist druhého běžného průchodu po klidu
+
+- Byl druhý průchod vybraný z reálné práce, ne z umělého auditu?
+- Je jasné, co bylo uzavřeno po prvním průchodu?
+- Dokázal člověk použít kanonické místo bez zvláštního připomínání?
+- Vybrali jsme jeden ze čtyř stavů: stabilní, lokální dozvuk, skrytý dohled, nový návratový signál?
+- Pokud je stav stabilní, nevzniká další kontrolní kolo?
+- Pokud jde o lokální dozvuk, řeší se jedním místem a jednou úpravou?
+- Pokud se objevil skrytý dohled, je pojmenované, co by se stalo bez něj?
+- Pokud jde o nový návratový signál, má vlastní kartu a nepřebírá starou historii automaticky?
+- Je výslovně napsané, co se neotevírá?
+- Nevznikl tracker, export, screenshotová evidence ani nová tabulka?
+- Jsou osobní a zákaznické detaily nahrazené rolí a typem situace, pokud nejsou nutné?
+- Zůstává návratový signál jasný a použitelný?
+- Vrací se položka do běžného rytmu bez zvláštní péče?
+
+Druhý běžný průchod po klidu je dobrý hlavně tehdy, když je trochu nudný. Stabilní systém nepotřebuje dlouhé vysvětlování pokaždé, když zafunguje. Potřebuje jasné místo, lehký záznam, uklizenou datovou stopu a schopnost nechat hotovou věc zase být.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha XG o druhém běžném průchodu po uzavřeném klidu: ověření stabilního použití bez zvláštní péče, lokální dozvuk, skrytý dohled, nový návratový signál, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XF o uzavření prvního běžného průchodu po dlouhodobém klidu: čtyři uzavírací stavy, čistý průchod, lokální doladění, úprava rytmu, nový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XE o prvním běžném průchodu po uzavření odpovědi na návrat po dlouhodobém klidu: reálná pracovní situace, čtyři výsledné stavy, lokální doladění, slabý rytmus, nový signál, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XD o uzavření odpovědi na návrat po dlouhodobém klidu: čtyři uzavírací stavy, lokální oprava, doplněná hrana, úprava rytmu, nové rozhodnutí, privacy-first úklid, karta, mini workshop a checklist.
