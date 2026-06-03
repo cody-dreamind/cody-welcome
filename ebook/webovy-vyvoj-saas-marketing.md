@@ -6422,6 +6422,10 @@ Proč reálná práce znovu skončila v neaktivní šabloně, přestože pravidl
 
 Taková otázka míří na pracovní místo, rytmus a zdroj pravdy. Nemíří na člověka, který problém našel. To je důležité, protože první návratový signál často ukáže slabinu systému, ne slabinu pozornosti.
 
+### Jedna reakce před dalším rozborem
+
+U prvního návratového signálu si hlídejte pořadí. Nejdřív vyberte stav, potom udělejte jednu odpovídající reakci a až nakonec rozhodněte, jestli je potřeba další rozbor. U šumu stačí zavírací věta. U lokálního tření stačí jedna drobná úprava pracovního místa. U skutečného návratu stačí otevřít novou pracovní otázku. Pokud tým přeskočí rovnou k analýze, snadno z jednoduchého signálu vyrobí nový kontrolní režim.
+
 ### Neotevírejte historii dřív než pracovní místo
 
 Když signál vypadá vážně, tým má tendenci vrátit se k celé původní historii: proč oprava vznikla, kdo co našel, jaké byly staré šablony, co se tehdy mazalo a jestli se náhodou nemá zopakovat audit. To je drahé a většinou zbytečné.
@@ -167082,3 +167086,4 @@ Uzavření první kontroly má být krátké, ale nesmí být vágní. Dobrá uz
 - 2026-06-02: Doplněna úvodní podkapitola o uzavření ověřené systémové opravy do běžného pravidla: přepis do přítomného času, zavření zvláštního ověřovacího režimu, rozlišení pravidla, úklidu a paměti, privacy-first úklid, karta a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o prvním běžném použití pravidla po uzavřené systémové opravě: běžná pracovní situace, stínový proces, tři výsledné stavy, privacy-first hranice, karta a checklist.
 - 2026-06-02: Doplněna úvodní podkapitola o prvním návratovém signálu po zařazení pravidla do běžného rytmu: rozlišení šumu, lokálního tření a skutečného návratu, práce bez otevírání celé historie, privacy-first karta a checklist.
+- 2026-06-03: Doplněna krátká úvodní poznámka k první reakci na návratový signál: nejdřív vybrat stav, udělat jednu odpovídající reakci a teprve potom rozhodovat o dalším rozboru.
