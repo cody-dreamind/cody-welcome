@@ -168824,6 +168824,301 @@ Položka [název] po druhém běžném průchodu přechází do [dlouhodobý kli
 
 Dlouhodobý klid je dobrý konec malé provozní smyčky. Neznamená, že se téma už nikdy nevrátí. Znamená, že návrat má pravidla, běžná práce má čistou trasu a tým nemusí dál nosit v hlavě starou opravu jen proto, že kdysi byla důležitá.
 
+## Příloha XC: Návrat k položce po dlouhodobém klidu
+
+Dlouhodobý klid neznamená zákaz návratu. Znamená jen to, že návrat nemá řídit úzkost, zvyk ani historická stopa, ale konkrétní pracovní signál. Po několika týdnech nebo měsících se může objevit nová situace: někdo narazí na starý odkaz, nový člověk se zeptá na pravidlo, změnila se nabídka, nebo běžný rytmus ukáže, že původní rozhodnutí už nestačí.
+
+V tu chvíli je důležité neotevírat celou starou větev. Cílem není znovu dokázat, proč se položka kdysi zavřela. Cílem je zjistit, jestli se objevila nová práce, která patří do aktuálního systému.
+
+Začněte větou:
+
+```text
+Položku po dlouhodobém klidu otevíráme jen tehdy, když nový signál vznikl při správném použití aktuální pracovní trasy.
+```
+
+Příklad:
+
+```text
+Položka v dlouhodobém klidu:
+Staré review sales šablon.
+
+Nový signál:
+Nový obchodník při přípravě nabídky našel v kanonickém indexu odkaz na neplatnou bezpečnostní přílohu.
+
+Co to není:
+Není to důkaz, že se má obnovit celé samostatné review šablon.
+
+Co to je:
+Je to signál, že aktuální index má jednu chybu nebo že měsíční kontrola neodhaluje neplatné přílohy.
+
+Nejbližší práce:
+Opravit odkaz, zkontrolovat sousední odkazy ve stejné sekci a rozhodnout, jestli běžný rytmus potřebuje malý kontrolní krok.
+```
+
+Tohle rozlišení šetří čas i nervy. Starý problém se totiž často vrací v převleku. Někdy je to opravdový návrat. Častěji je to jen lokální chyba, nový edge case nebo připomínka, že kanonické místo potřebuje drobnou údržbu.
+
+### Čtyři typy návratu po klidu
+
+Každý návrat zařaďte do jednoho ze čtyř typů:
+
+- Lokální chyba: aktuální systém je správný, ale jedno místo je rozbité.
+- Chybějící hrana: systém funguje pro běžné případy, ale nový typ situace v něm nemá pravidlo.
+- Slabý rytmus: kanonické místo je správné, ale běžná kontrola neodhaluje opakované tření.
+- Skutečný návrat problému: aktuální trasa selhává i při správném použití a původní rozhodnutí už nestačí.
+
+Lokální chyba se opravuje lokálně. Chybějící hrana se doplní jako malé pravidlo. Slabý rytmus se zlepší v existujícím rytmu. Skutečný návrat problému teprve otevírá novou rozhodovací větev.
+
+Největší riziko je přeskočit rovnou ke čtvrtému typu. Tým pak obnoví audit, meeting, tabulku nebo automatizaci kvůli věci, kterou šlo vyřešit jednou větou a jedním odkazem. Ano, tabulka se vždycky tváří jako dospělé řešení. Občas je to jen dražší poznámkový blok.
+
+### Jak poznat lokální chybu
+
+Lokální chyba má tři znaky:
+
+- problém je v jednom konkrétním místě;
+- člověk použil správnou pracovní trasu;
+- oprava nemění pravidlo, jen uvádí skutečnost do souladu s pravidlem.
+
+Příklad lokální chyby:
+
+```text
+Signál:
+V indexu je starý odkaz na šablonu nabídky.
+
+Aktuální pravidlo:
+Nabídky vznikají z jedné aktuální šablony v kanonickém indexu.
+
+Oprava:
+Vyměnit odkaz a smazat starou zkratku z pomocné poznámky.
+
+Co neotevíráme:
+Historii nabídky, celý sales proces ani nové review všech šablon.
+```
+
+Lokální chyba nepotřebuje zvláštní projekt. Potřebuje vlastníka, rychlou opravu, krátký zápis a případně kontrolu sousedního místa. Když lokální chybu nafouknete do nové iniciativy, učíte tým, že každý drobný nález znamená návrat chaosu.
+
+### Jak doplnit chybějící hranu
+
+Chybějící hrana znamená, že staré rozhodnutí bylo dobré, ale nová situace do něj ještě nebyla promítnutá. Typicky se objeví nový segment zákazníků, nový typ integrace, nová role v týmu nebo nová verze nabídky.
+
+Doplnění hrany pište jako malé pravidlo:
+
+```text
+Když nastane:
+[nová situace]
+
+Použij:
+[aktuální kanonické místo]
+
+Doplňující pravidlo:
+[jedna věta, která odlišuje nový případ]
+
+Co zůstává stejné:
+[původní pravidlo nebo rytmus]
+
+Co výslovně neobnovujeme:
+[starý zvláštní režim]
+```
+
+Příklad:
+
+```text
+Když nastane:
+Nabídka obsahuje nový typ bezpečnostní přílohy pro regulovaný segment.
+
+Použij:
+Kanonický index sales šablon.
+
+Doplňující pravidlo:
+Bezpečnostní přílohy pro regulovaný segment mají vlastní sekci a datum poslední revize.
+
+Co zůstává stejné:
+Nabídka pořád vzniká z jednoho indexu, ne z osobních složek.
+
+Co neobnovujeme:
+Samostatné review všech sales šablon před každou nabídkou.
+```
+
+Dobrá hrana je krátká. Pokud potřebuje půl stránky výjimek, pravděpodobně nejde o hranu, ale o nový problém.
+
+### Kdy zlepšit rytmus
+
+Slabý rytmus poznáte tak, že jednotlivé opravy dávají smysl, ale opakují se ve stejném pracovním místě. Nejde o selhání lidí. Jde o signál, že běžný rytmus nemá dost dobrý háček.
+
+Místo nového speciálního dohledu zlepšete existující rytmus:
+
+- přidejte jednu kontrolní otázku do měsíčního review;
+- zkraťte seznam míst, která se mají kontrolovat;
+- přesuňte kontrolu blíž k okamžiku, kdy vzniká práce;
+- změňte vlastníka, pokud současný vlastník nemá reálný kontakt s daným místem;
+- přidejte stop pravidlo, aby se kontrola nerozšiřovala donekonečna.
+
+Příklad zlepšení rytmu:
+
+```text
+Opakovaný signál:
+Třikrát během kvartálu se objevil starý odkaz ve stejné sekci indexu.
+
+Zlepšení rytmu:
+Měsíční kontrola indexu nově projde jen sekci bezpečnostních příloh a ověří, že každý odkaz má platný zdroj pravdy.
+
+Stop pravidlo:
+Po dvou stabilních měsících se kontrola vrátí do běžného kvartálního průchodu.
+```
+
+Rytmus zlepšujte jen tam, kde má někdo praktickou šanci ho používat. Kontrola, kterou nikdo přirozeně nepotká při práci, se časem změní v tichý dluh.
+
+### Kdy otevřít nové rozhodnutí
+
+Nové rozhodnutí otevřete až tehdy, když jsou splněné tři podmínky:
+
+- signál vznikl při správném použití aktuální trasy;
+- lokální oprava ani doplnění hrany problém nevysvětlí;
+- další práce vyžaduje změnu pravidla, vlastnictví, rytmu nebo zdroje pravdy.
+
+Šablona nového rozhodnutí:
+
+```text
+Původní položka:
+
+Stav po dlouhodobém klidu:
+
+Nový signál:
+
+Proč nejde jen o lokální chybu:
+
+Proč nestačí doplnit hranu:
+
+Co se musí rozhodnout nově:
+
+Co se neobnovuje z původního režimu:
+
+Nejmenší další krok:
+
+Privacy-first hranice:
+```
+
+Nové rozhodnutí nemá být nostalgie po starém procesu. Má být čistá odpověď na současný stav. Pokud se tým přistihne, že kopíruje starou kartu, starou agendu a staré kontrolní seznamy, zastavte se. Možná znovu otevíráte způsob práce, ne problém.
+
+### Privacy-first návrat po klidu
+
+Návrat po dlouhodobém klidu svádí ke sběru důkazů "pro jistotu". Jenže právě po klidu je dobré držet datovou stopu malou. Stačí zaznamenat pracovní situaci, typ signálu a rozhodnutí. Nepotřebujete kompletní historii člověka, screenshoty všech průchodů ani měření, kdo dokument otevřel.
+
+Privacy-first pravidla:
+
+- používejte typ situace místo jmen, pokud identita není nutná;
+- nevytvářejte nový export, když stačí opravit kanonické místo;
+- neobnovujte session recording, heatmapu ani detailní sledování dokumentace kvůli jednomu nálezu;
+- dočasné poznámky mažte hned po převodu do rozhodnutí nebo pravidla;
+- pokud přidáte kontrolní otázku do rytmu, napište i datum, kdy ji znovu zkrátíte nebo zrušíte.
+
+Codyho komentář: privacy-first provoz není jen o právních dokumentech. Je to schopnost říct "tohle už nepotřebujeme vědět" dřív, než se z jedné malé opravy stane archiv všeho, co kdo kdy pokazil. A takový archiv nikdo nepotřebuje. Ani archiv.
+
+### Karta návratu po dlouhodobém klidu
+
+```text
+Položka v dlouhodobém klidu:
+
+Kanonické místo:
+
+Nový signál:
+
+Kde vznikl:
+
+Použil člověk správnou aktuální trasu?
+- ano / ne / nevíme
+
+Typ návratu:
+- lokální chyba / chybějící hrana / slabý rytmus / skutečný návrat problému
+
+Jedna odpovídající reakce:
+
+Co se neobnovuje:
+
+Co se opravuje v kanonickém místě:
+
+Co zůstává v běžném rytmu:
+
+Co mažeme nebo zkracujeme kvůli privacy-first provozu:
+
+Návratový signál pro další otevření:
+
+Vlastník:
+
+Datum kontroly, pokud je potřeba:
+
+Jednovětý závěr:
+```
+
+Vyplněný příklad:
+
+```text
+Položka v dlouhodobém klidu:
+Staré review sales šablon.
+
+Kanonické místo:
+Kanonický index standardů.
+
+Nový signál:
+Nový obchodník našel starý odkaz na bezpečnostní přílohu.
+
+Kde vznikl:
+Při přípravě nabídky podle aktuálního indexu.
+
+Použil člověk správnou aktuální trasu?
+Ano.
+
+Typ návratu:
+Lokální chyba s možnou slabinou v měsíční kontrole.
+
+Jedna odpovídající reakce:
+Vyměnit odkaz, zkontrolovat sousední odkazy v sekci bezpečnostních příloh a do měsíční kontroly přidat jednu otázku na platnost odkazů v této sekci.
+
+Co se neobnovuje:
+Samostatné review všech sales šablon.
+
+Co mažeme nebo zkracujeme kvůli privacy-first provozu:
+Dočasnou poznámku se jménem obchodníka nahradíme typem situace.
+
+Návratový signál pro další otevření:
+Další starý odkaz nalezený při správném použití aktuálního indexu.
+
+Jednovětý závěr:
+Nález po dlouhodobém klidu řešíme lokální opravou a malým zpřesněním běžného rytmu, ne obnovou starého review.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte položku v dlouhodobém klidu a nový signál.
+2. Minuta 2: ověřte, jestli signál vznikl při správném použití aktuální trasy.
+3. Minuta 3: vyberte typ návratu.
+4. Minuta 4: napište jednu odpovídající reakci.
+5. Minuta 5: určete, co se neobnovuje ze starého režimu.
+6. Minuta 6: zkraťte datovou stopu.
+7. Minuta 7: zapište jednovětý závěr a případný návratový signál.
+
+Výstup:
+
+```text
+Položka [název] se po dlouhodobém klidu vrací jako [typ návratu]. Uděláme [jedna reakce], neobnovujeme [starý režim] a znovu se vrátíme jen při [návratový signál].
+```
+
+### Checklist návratu po dlouhodobém klidu
+
+- Vznikl signál při správném použití aktuální pracovní trasy?
+- Je jasné, jestli jde o lokální chybu, chybějící hranu, slabý rytmus nebo skutečný návrat problému?
+- Vybrali jsme jednu odpovídající reakci místo obnovy celého starého režimu?
+- Je kanonické místo pořád jasné?
+- Je zapsané, co se výslovně neobnovuje?
+- Pokud doplňujeme hranu, je krátká a srozumitelná?
+- Pokud zlepšujeme rytmus, děje se to v existujícím pracovním rytmu?
+- Pokud otevíráme nové rozhodnutí, víme, proč nestačí lokální oprava?
+- Zkrátili jsme dočasné poznámky, příklady a identifikující údaje?
+- Nepřidáváme nové sledování lidí, dokumentů ani zákazníků kvůli jednomu nálezu?
+- Má reakce vlastníka?
+- Dá se závěr říct jednou větou?
+
+Návrat po dlouhodobém klidu má být klidný. Starý příběh už znáte, ale nemusíte ho pokaždé znovu hrát celý od začátku. Stačí ověřit nový signál, vybrat správný typ reakce a nechat běžný systém dál nést práci, pokud to pořád zvládá.
+
 ## Pracovní log
 
 - 2026-06-03: Doplněna Příloha XB o uzavření druhého běžného průchodu do dlouhodobého klidu: kanonické místo, návratový signál, úklid dočasných stop, privacy-first retence, karta, mini workshop a checklist.
@@ -169553,3 +169848,4 @@ Dlouhodobý klid je dobrý konec malé provozní smyčky. Neznamená, že se té
 - 2026-06-02: Doplněna úvodní podkapitola o prvním návratovém signálu po zařazení pravidla do běžného rytmu: rozlišení šumu, lokálního tření a skutečného návratu, práce bez otevírání celé historie, privacy-first karta a checklist.
 - 2026-06-03: Doplněna krátká úvodní poznámka k první reakci na návratový signál: nejdřív vybrat stav, udělat jednu odpovídající reakci a teprve potom rozhodovat o dalším rozboru.
 - 2026-06-03: Doplněna úvodní podkapitola o převodu uzavřené první reakce na návratový signál zpět do běžného rytmu: tři převody podle stavu, úklid pracovních stop, mezistav, privacy-first hranice a checklist.
+- 2026-06-03: Doplněna Příloha XC o návratu k položce po dlouhodobém klidu: rozlišení lokální chyby, chybějící hrany, slabého rytmu a skutečného návratu problému, karta návratu, privacy-first hranice, mini workshop a checklist.
