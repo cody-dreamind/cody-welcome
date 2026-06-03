@@ -168299,8 +168299,283 @@ První běžný průchod po ukončené položce [název] skončil stavem [stav].
 
 Dobré uzavření prvního běžného průchodu má působit klidně. Ne proto, že by se nic nestalo, ale protože se stalo přesně tolik, kolik bylo potřeba: položka zůstala zavřená, okolí se uklidilo, případná nová otázka se oddělila a data nezůstala ležet jen kvůli pocitu jistoty.
 
+## Příloha XA: Druhý běžný průchod po návratu ukončené položky
+
+Druhý běžný průchod má jinou práci než první. První průchod ověřil, že se tým po uzavřeném návratu dokáže vrátit k aktuálnímu kanonickému místu. Druhý průchod ověřuje, že se z toho nestala nová malá kontrolní tradice. Jinak řečeno: nejde už o to, zda aktuální trasa funguje jednou. Jde o to, zda funguje bez zvláštní pozornosti.
+
+Začněte větou:
+
+```text
+Druhý běžný průchod ověřuje, že položka zůstává ve správném stavu i bez dočasného dohledu, pomocné evidence a návratu ke starému rytmu.
+```
+
+Příklad:
+
+```text
+Ukončená položka:
+Samostatné review starých sales šablon.
+
+První běžný průchod:
+Potvrdil aktuální kanonický index a lokálně sjednotil název sekce.
+
+Druhý běžný průchod:
+Další člověk připravuje nabídku bez účasti autora opravy.
+
+Co má být běžné:
+Najde aktuální šablonu, použije ji a nevznikne nový kontrolní seznam.
+
+Co nesmí vzniknout:
+Pravidelné ověřování každé nabídky, sběr kliknutí v dokumentaci ani obnova starého review.
+```
+
+Druhý průchod je dobrý hlavně proto, že umí odhalit skrytou závislost na čerstvé paměti. Po první opravě všichni ještě vědí, co se měnilo. Po druhém běžném použití už by systém měl nést závěr sám: názvem, umístěním, aktuální šablonou, viditelným stavem a jasným návratovým signálem.
+
+### Co se při druhém průchodu mění
+
+První průchod se ptá:
+
+```text
+Dokáže člověk použít aktuální trasu po uzavřeném návratu?
+```
+
+Druhý průchod se ptá:
+
+```text
+Dokáže jiný nebo pozdější člověk použít stejnou trasu bez znalosti celé opravy?
+```
+
+To je přísnější test, ale pořád má být malý. Neotevírá se celý audit. Neprochází se historie. Nesbírá se osobní aktivita. Stačí jeden reálný pracovní průchod, který už není těsně přilepený k původní opravě.
+
+Sledujte čtyři signály:
+
+- Samostatnost: člověk nepotřebuje autora opravy ani ústní vysvětlení.
+- Stálost: aktuální kanonické místo pořád odpovídá tomu, co se dělá v práci.
+- Klid: nevzniká nový pomocný dohled jen proto, že téma bylo nedávno citlivé.
+- Datová střídmost: průchod nevytváří nové sledování, export ani osobní evidenci.
+
+Pokud druhý průchod projde, neprodlužujte kontrolní období. Tím by se běžná práce znovu změnila ve zvláštní režim. Výsledek má být opačný: méně pozornosti, méně pomocných stop, jasnější návrat do normální údržby.
+
+### Čtyři výsledné stavy
+
+Po druhém průchodu vyberte jeden stav:
+
+- Stabilní: aktuální trasa funguje bez zvláštní podpory.
+- Drobné tření: jedna část trasy pořád mate, ale položka zůstává ukončená.
+- Skrytý dohled: práce funguje jen proto, že ji někdo ručně hlídá.
+- Návratový signál: stejný problém se potvrdil v aktuální trase a už nejde o lokální zbytek.
+
+Stav `stabilní` znamená, že položka už nepotřebuje samostatnou pozornost. Zůstává jen v běžném rytmu místa, kam patří. Pokud jde o šablonu, stačí běžná údržba šablon. Pokud jde o rozhodovací pravidlo, stačí běžné review pravidel. Pokud jde o navigaci, stačí běžná kontrola kanonického indexu.
+
+Stav `drobné tření` řešte jednou lokální opravou. Třeba sjednotit termín, odstranit starý odkaz, doplnit krátký popisek nebo přesunout větu blíž k místu použití. Po takové opravě není automaticky potřeba třetí zvláštní průchod. Ověření patří do nejbližšího běžného použití daného místa.
+
+Stav `skrytý dohled` je důležitý signál. Znamená, že proces vypadá funkčně, ale ve skutečnosti ho drží ruční kontrola, osobní připomínka nebo člověk, který potichu opravuje chyby za ostatní. Neobnovujte kvůli tomu starou položku. Nejdřív pojmenujte, co přesně dohled nahrazuje: chybějící odkaz, nejasný název, špatné vlastnictví nebo příliš složité pravidlo.
+
+Stav `návratový signál` používejte jen tehdy, když se problém vrací při správném použití aktuální trasy. Pokud lidé použili starý archivní odkaz, je to úklid. Pokud aktuální kanonické místo opakovaně vede k témuž špatnému rozhodnutí, signál se potvrdil a zaslouží si nové rozhodnutí.
+
+### Jak zavřít stabilní druhý průchod
+
+Stabilní průchod zavřete krátce:
+
+```text
+Druhý běžný průchod:
+Výsledek:
+Stabilní.
+
+Co to znamená:
+Položka zůstává ukončená a další kontrola patří jen do běžného rytmu [kanonické místo].
+
+Co rušíme:
+Dočasnou poznámku, ruční připomínku a pomocný seznam z průchodu.
+
+Návratový signál:
+Vrátíme se jen když:
+```
+
+Příklad:
+
+```text
+Druhý běžný průchod:
+Další nabídka vznikla z aktuální sales šablony bez dotazu na starý rozcestník.
+
+Výsledek:
+Stabilní.
+
+Co to znamená:
+Staré review šablon zůstává ukončené. Další údržba patří do běžné měsíční kontroly kanonického indexu.
+
+Co rušíme:
+Pomocnou poznámku "ověřit ještě jednou po další nabídce".
+
+Návratový signál:
+Vrátíme se jen tehdy, když aktuální index znovu pošle člověka ke staré nebo neplatné šabloně.
+```
+
+Nejsilnější část tohoto zápisu je věta "co rušíme". Pokud po stabilním průchodu necháte pomocnou poznámku žít dál, systém sice prošel testem, ale vy jste mu za odměnu přidali další údržbu. To není dobrý obchod.
+
+### Když se objeví skrytý dohled
+
+Skrytý dohled se pozná podle vět jako:
+
+- "Já to zatím vždycky zkontroluju."
+- "Pošli mi to, než to použiješ."
+- "Radši si držím bokem seznam správných odkazů."
+- "Vím, kde je správná verze, ale ostatní by ji asi nenašli."
+
+Tyto věty nejsou chyba člověka. Jsou důkaz, že pracovní místo ještě nenese pravidlo samo. Odpověď má být malá:
+
+```text
+Skrytý dohled:
+Co člověk ručně hlídá:
+Které pracovní místo to má nést místo něj:
+Jedna oprava:
+Co se neobnovuje:
+```
+
+Příklad:
+
+```text
+Skrytý dohled:
+Marketing owner ručně kontroluje, jestli lidé používají aktuální landing page checklist.
+
+Co člověk ručně hlídá:
+Správný odkaz a aktuální verzi checklistu.
+
+Které pracovní místo to má nést:
+Kanonický index šablon a popisek u checklistu.
+
+Jedna oprava:
+Doplnit do indexu datum poslední aktualizace a odstranit starý odkaz z onboardingové poznámky.
+
+Co se neobnovuje:
+Samostatný audit používání checklistu ani sledování otevření dokumentu.
+```
+
+Codyho komentář: když proces funguje jen díky člověku, který ho po večerech mentálně přidržuje, není to stabilní proces. Je to dobře maskovaný úkol navíc. A úkoly navíc mají nepříjemný talent tvářit se jako "jen malá kontrola".
+
+### Privacy-first druhý průchod
+
+Druhý průchod nesmí být záminka k tomu, aby se z běžné práce stal měřený experiment. Pokud chcete vědět, jestli šablona funguje, nepotřebujete sledovat každé otevření dokumentu. Potřebujete vědět, jestli člověk dokončil reálný úkol přes správné místo a zda nevznikla nová výjimka.
+
+Privacy-first minimum:
+
+```text
+Zapisujeme:
+Pracovní situaci, výsledný stav, jednu případnou opravu a návratový signál.
+
+Nezapisujeme:
+Osobní výkon člověka, klikací stopu, kompletní historii průchodu ani detail zákaznických dat.
+
+Mažeme:
+Pomocné poznámky, dočasné screenshoty, kontrolní exporty a ruční seznamy, které vznikly jen kvůli ověření.
+```
+
+Pokud je potřeba použít zákaznický příklad, přepište ho na typ situace. Věta "zákazník se ptal, kde je aktuální checklist" obvykle stačí. Jméno, firma, kompletní vlákno a obchodní detail patří do rozhodnutí jen tehdy, když bez nich nejde pochopit dopad. Většinou jde.
+
+### Karta druhého běžného průchodu
+
+```text
+Ukončená položka:
+
+Kanonické místo:
+
+Výsledek prvního běžného průchodu:
+
+Druhý běžný průchod:
+
+Kdo nebo jaká role průchod provedla:
+
+Výsledný stav:
+- stabilní / drobné tření / skrytý dohled / návratový signál
+
+Co se reálně stalo:
+
+Co zůstává ukončené:
+
+Jedna lokální oprava, pokud je potřeba:
+
+Jaký skrytý dohled mizí nebo se převádí do pracovního místa:
+
+Co se ruší z dočasné kontroly:
+
+Návratový signál:
+
+Privacy-first úklid:
+
+Jednovětý závěr:
+```
+
+Vyplněný příklad:
+
+```text
+Ukončená položka:
+Samostatné review starých sales šablon.
+
+Kanonické místo:
+Kanonický index standardů.
+
+Výsledek prvního běžného průchodu:
+Lokální sjednocení názvu sekce.
+
+Druhý běžný průchod:
+Další nabídka připravená bez účasti autora opravy.
+
+Výsledný stav:
+Stabilní.
+
+Co se reálně stalo:
+Člověk našel aktuální šablonu, použil ji a neotevřel starý rozcestník.
+
+Co zůstává ukončené:
+Samostatné review šablon a pomocný seznam starých odkazů.
+
+Co se ruší z dočasné kontroly:
+Poznámka "ověřit při další nabídce".
+
+Návratový signál:
+Téma se otevře jen tehdy, když aktuální index znovu povede ke staré nebo neplatné šabloně.
+
+Privacy-first úklid:
+Nesledujeme otevření dokumentů ani osobní aktivitu. Zůstává jen anonymizovaný závěr průchodu.
+
+Jednovětý závěr:
+Druhý běžný průchod potvrdil stabilní návrat do kanonického indexu a ukončuje zvláštní dohled nad starou položkou.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: připomeňte ukončenou položku a výsledek prvního průchodu.
+2. Minuta 2: pojmenujte druhý reálný pracovní průchod.
+3. Minuta 3: ověřte, zda člověk potřeboval autora opravy nebo zvláštní vysvětlení.
+4. Minuta 4: vyberte jeden ze čtyř výsledných stavů.
+5. Minuta 5: napište, co zůstává ukončené a co se neobnovuje.
+6. Minuta 6: rozhodněte, která dočasná stopa se ruší.
+7. Minuta 7: doplňte návratový signál a privacy-first úklid.
+
+Výstup:
+
+```text
+Druhý běžný průchod po položce [název] skončil stavem [stav]. Položka zůstává [ukončená / lokálně opravená / nově rozhodnutá], další práce patří do [kanonické místo] a dočasná kontrola [co] končí.
+```
+
+### Checklist druhého běžného průchodu
+
+- Proběhl druhý průchod v reálné práci, ne jako umělý audit?
+- Použil člověk aktuální kanonické místo bez znalosti celé historie?
+- Vybrali jsme jeden ze čtyř stavů: stabilní, drobné tření, skrytý dohled, nebo návratový signál?
+- Pokud je stav stabilní, ukončili jsme zvláštní dohled?
+- Pokud vzniklo drobné tření, řeší se jednou lokální opravou?
+- Pokud se ukázal skrytý dohled, víme, které pracovní místo má nést pravidlo místo člověka?
+- Pokud se potvrdil návratový signál, vzniká nové rozhodnutí, ne návrat do starého chaosu?
+- Je jasné, co zůstává ukončené?
+- Zrušili jsme pomocné poznámky, připomínky, screenshoty, exporty a seznamy bez dalšího účelu?
+- Nepřidáváme sledování otevření dokumentů, osobní výkon ani preventivní reporting?
+- Má závěr jednu větu, kterou lze vložit do běžného logu?
+
+Druhý běžný průchod má být poslední brzda proti zbytečné opatrnosti. Pokud systém drží, nechte ho držet bez dalšího dohledu. Pokud drží jen díky člověku, převeďte jeho tichou práci do správného místa. Pokud se opravdu vrací starý problém, otevřete nové rozhodnutí s čistým rozsahem. V každém případě platí: čím běžnější práce je, tím menší stopu má po sobě nechávat.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha XA o druhém běžném průchodu po návratu ukončené položky: ověření stability bez zvláštního dohledu, rozlišení stabilního stavu, drobného tření, skrytého dohledu a návratového signálu, privacy-first úklid a checklist.
 - 2026-06-03: Doplněna Příloha WZ o uzavření prvního běžného průchodu po návratu ukončené položky: čtyři uzavírací stavy, uzavírací věta, úklid zbytků starého rytmu, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WY o prvním běžném průchodu po uzavřeném návratu ukončené položky: ověření kanonické trasy, čtyři výsledné stavy, lokální doladění, nová otázka, privacy-first průchod, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WX o uzavření odpovědi na návrat ukončené položky: výsledné stavy, zavření zbytkové stopy, lokální mezery, nového případu i skutečného znovuotevření, privacy-first úklid, karta, mini workshop a checklist.
