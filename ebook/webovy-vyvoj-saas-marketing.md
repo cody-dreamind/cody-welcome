@@ -167864,8 +167864,294 @@ Odpověď na návrat položky [název] uzavíráme ve stavu [stav]. Kanonické m
 
 Uzavření odpovědi na návrat ukončené položky je malý, ale důležitý krok. Bez něj se ukončené věci pomalu vracejí přes odkazy, výjimky a "radši to ještě necháme". S ním tým drží archiv archivem, aktivní systém aktivním systémem a nové důkazy řeší podle dnešní práce.
 
+## Příloha WY: První běžný průchod po uzavřeném návratu ukončené položky
+
+Po uzavření odpovědi na návrat ukončené položky přijde nenápadně důležitý okamžik: první běžný průchod. Tým už opravil zbytkovou stopu, lokální mezeru, nový případ nebo skutečné znovuotevření. Teď se ukáže, jestli se práce opravdu vrátila do normálního rytmu, nebo jestli po malé odpovědi zůstal stínový proces.
+
+První běžný průchod není audit. Není to slavnostní kontrola, zda bylo ukončení historicky správné. Je to obyčejné použití aktuální pracovní trasy: člověk otevře kanonické místo, udělá běžný úkol a nenarazí na starý rytmus, starý odkaz ani povinnost něco zvlášť sledovat.
+
+Začněte krátkou větou:
+
+```text
+Při prvním běžném průchodu po uzavřeném návratu ověřujeme, zda člověk dokončí aktuální práci přes kanonické místo bez obnovy starého procesu.
+```
+
+Příklad:
+
+```text
+Situace:
+Nový člen týmu připravuje nabídku a potřebuje ověřit aktuální sales šablonu.
+
+Kanonické místo:
+Kanonický index standardů.
+
+Co má být běžné:
+Najde aktuální šablonu, použije ji a nepoužije starý odkaz na samostatné review šablon.
+
+Co nesmí vzniknout:
+Nový seznam kontrol, sledování lidí, kteří šablonu otevřeli, ani preventivní měsíční audit všech historických materiálů.
+```
+
+Tento průchod má jeden účel: potvrdit, že odpověď na návrat nezanechala rozpracovanou výjimku. Pokud běžná práce projde čistě, položka zůstává zavřená. Pokud se objeví tření, řešte nejbližší pracovní místo, ne celou historii.
+
+### Ověřujte trasu, ne minulost
+
+Ukončená položka má tendenci tahat tým zpět do příběhu: proč vznikla, kdo ji používal, kdo ji ukončil, proč se vrátila. To může být zajímavé, ale při prvním běžném průchodu to většinou nepomáhá. Důležitější je otázka:
+
+```text
+Dokáže dnes člověk dokončit aktuální úkol bez staré položky?
+```
+
+Pokud ano, minulost nechte zavřenou. Pokud ne, zapište konkrétní místo selhání:
+
+- chybí odkaz v kanonickém indexu;
+- nová věta je srozumitelná jen lidem, kteří znali starý proces;
+- aktivní šablona pořád obsahuje starý termín;
+- návratový signál je napsaný tak široce, že spouští zbytečnou opatrnost;
+- úkol se dá dokončit, ale jen díky ústní znalosti jednoho člověka.
+
+Každý z těchto nálezů může vést k malé opravě. Ani jeden sám o sobě neznamená, že se má obnovit starý rytmus.
+
+### Čtyři výsledné stavy průchodu
+
+Po prvním běžném průchodu vyberte jeden stav:
+
+- Čistý průchod: aktuální trasa funguje a stará položka zůstává zavřená.
+- Lokální doladění: běžná práce narazila na jednu konkrétní mezeru, kterou lze opravit na místě.
+- Nová otázka mimo starou položku: průchod otevřel téma, které patří do jiného backlogu nebo rozhodovacího místa.
+- Skutečný návratový signál: nastala předem popsaná situace, která opravňuje znovu otevřít otázku.
+
+Nepřidávejte stav "sledovat dál pro jistotu". Pokud průchod prošel, uzavřete ho. Pokud neprošel, pojmenujte konkrétní stav. Jistota bez rozhodnutí je jen údržba navíc, převlečená za opatrnost.
+
+Šablona:
+
+```text
+První běžný průchod:
+
+Použité kanonické místo:
+
+Výsledný stav:
+- čistý průchod / lokální doladění / nová otázka mimo starou položku / skutečný návratový signál
+
+Co se stalo:
+
+Co zůstává zavřené:
+
+Nejbližší odpověď:
+
+Co se neměří ani nesleduje:
+```
+
+### Jak vypadá čistý průchod
+
+Čistý průchod neznamená, že lidé jsou nadšení a proces je dokonalý. Znamená, že aktuální práce šla dokončit bez staré položky a bez pomocné výjimky. To stačí.
+
+Zápis může být krátký:
+
+```text
+Průchod:
+Nový člen týmu našel sales šablonu přes kanonický index a použil aktuální verzi v nabídce.
+
+Výsledek:
+Čistý průchod.
+
+Co zůstává zavřené:
+Samostatné review šablon, starý rozcestník a pomocný seznam používání.
+
+Další krok:
+Žádný. Vracíme se k běžnému rytmu indexu.
+```
+
+Tady je důležité neodměnit čistý průchod novým sledováním. Když věc funguje, nemá dostat nový formulář jen proto, že se kdysi vrátila. Dobře zavřená položka má být v systému cítit méně, ne víc.
+
+### Lokální doladění bez znovuotevření
+
+Lokální doladění je nejčastější stav. Člověk úkol dokončí, ale najde drobnost: věta je moc interní, odkaz vede na správné místo, ale se špatným názvem, nebo šablona používá staré slovo. To není návrat ukončené položky. To je běžná údržba aktivního místa.
+
+Použijte zápis:
+
+```text
+Lokální tření:
+Kde se objevilo:
+Jedna oprava:
+Kdy ji ověříme:
+Co tím neotevíráme:
+```
+
+Příklad:
+
+```text
+Lokální tření:
+V kanonickém indexu je sekce "Šablony" pojmenovaná jinak než v onboardingové poznámce.
+
+Kde se objevilo:
+Při přípravě první nabídky novým členem týmu.
+
+Jedna oprava:
+Sjednotit název sekce na "Sales šablony a standardy".
+
+Kdy ji ověříme:
+Při dalším běžném použití indexu.
+
+Co tím neotevíráme:
+Staré review šablon ani audit všech onboardingových poznámek.
+```
+
+Codyho komentář: ne každá nerovnost na cestě je důvod stavět novou silnici. Někdy stačí opravit ceduli a jít dál. Ano, provozní poezie, ale pořád levnější než komise pro cedule.
+
+### Když průchod ukáže novou otázku
+
+Někdy první běžný průchod ukáže něco užitečného, co ale nepatří ke staré položce. Například se ukáže, že sales šablona je aktuální, ale zákazníci nerozumí tomu, jak často se obsah kontroluje. To není důkaz pro obnovu interního review. Je to otázka pro sales komunikaci.
+
+Oddělte ji:
+
+```text
+Nová otázka:
+Proč nepatří ke staré položce:
+Kam ji ukládáme:
+Nejmenší další důkaz:
+Co ze staré položky zůstává zavřené:
+```
+
+Příklad:
+
+```text
+Nová otázka:
+Má nabídka lépe vysvětlit, jak udržujeme šablony aktuální?
+
+Proč nepatří ke staré položce:
+Průchod interním indexem funguje. Problém je ve vysvětlení hodnoty zákazníkovi.
+
+Kam ji ukládáme:
+Backlog sales materiálů.
+
+Nejmenší další důkaz:
+Projít tři poslední nabídky a ověřit, zda se dotaz opakuje.
+
+Co ze staré položky zůstává zavřené:
+Samostatné review šablon, historický rozcestník a pomocné měření používání.
+```
+
+Oddělení nové otázky chrání dvě věci najednou. Starý proces se nevrátí jen proto, že se objevil příbuzný problém. Nový problém zároveň nezapadne do archivu, kde by ho nikdo neřešil.
+
+### Privacy-first průchod
+
+První běžný průchod se dá ověřit bez sledování lidí. Nepotřebujete měřit, kdo otevřel který dokument, kolik sekund v něm strávil ani kdo klikl na starý odkaz. Stačí pracovní pozorování: šel úkol dokončit, kde se objevilo tření a jaká jedna oprava případně vznikla.
+
+Privacy-first pravidla:
+
+- zapisujte pracovní situaci, ne osobní profil člověka;
+- nepřidávejte eventy jen kvůli jednomu ověření;
+- nemažte historický důvod ukončení, ale mažte dočasné podklady bez účelu;
+- pokud vznikne nová otázka, uložte jen důkaz potřebný k rozhodnutí;
+- neobnovujte staré exporty a kontrolní tabulky;
+- u zákaznických signálů ukládejte typ dotazu, ne zbytečné osobní detaily.
+
+Dobrý privacy-first průchod má malou stopu. Tým ví, co se stalo, ale nevyrábí další vrstvu pozorování pro situaci, která má zůstat běžná.
+
+### Karta prvního běžného průchodu
+
+```text
+Ukončená položka:
+
+Poslední odpověď na návrat:
+
+Kanonické místo:
+
+Běžná pracovní situace:
+
+Kdo průchod vlastní:
+
+Výsledný stav:
+- čistý průchod / lokální doladění / nová otázka mimo starou položku / skutečný návratový signál
+
+Co se při průchodu stalo:
+
+Co zůstává zavřené:
+
+Jedna případná oprava:
+
+Kam patří nová otázka, pokud vznikla:
+
+Jaký návratový signál se potvrdil, pokud se potvrdil:
+
+Jaká data kvůli průchodu nesbíráme:
+
+Dočasné podklady k úklidu:
+
+Jednovětý závěr:
+```
+
+Vyplněný příklad:
+
+```text
+Ukončená položka:
+Samostatné review rozcestníku šablon.
+
+Poslední odpověď na návrat:
+Starý onboardingový odkaz byl odstraněn a nahrazen odkazem na kanonický index.
+
+Kanonické místo:
+Kanonický index standardů.
+
+Běžná pracovní situace:
+Nový člen týmu připravuje nabídku z aktuální sales šablony.
+
+Výsledný stav:
+Lokální doladění.
+
+Co se při průchodu stalo:
+Šablonu našel, ale název sekce v indexu se lišil od názvu v onboardingové poznámce.
+
+Co zůstává zavřené:
+Staré review šablon, historický rozcestník a pomocný seznam používání.
+
+Jedna případná oprava:
+Sjednotit název sekce na "Sales šablony a standardy".
+
+Jaká data kvůli průchodu nesbíráme:
+Nesledujeme čtení dokumentu, kliknutí ani osobní aktivitu nového člena týmu.
+
+Jednovětý závěr:
+První běžný průchod potvrdil aktuální trasu, potřebuje jen lokální sjednocení názvu.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte běžnou pracovní situaci.
+2. Minuta 2: otevřete kanonické místo, ne archiv staré položky.
+3. Minuta 3: popište, zda šel úkol dokončit.
+4. Minuta 4: vyberte jeden výsledný stav.
+5. Minuta 5: napište, co zůstává zavřené.
+6. Minuta 6: zapište případnou jednu lokální opravu nebo novou otázku.
+7. Minuta 7: doplňte privacy-first hranici a jednovětý závěr.
+
+Výstup:
+
+```text
+První běžný průchod po uzavřeném návratu položky [název] skončil stavem [stav]. Aktuální kanonické místo je [místo], starý rytmus zůstává zavřený a případná další práce je jen [oprava/otázka/signál].
+```
+
+### Checklist prvního běžného průchodu
+
+- Ověřovali jsme běžnou pracovní situaci, ne historický příběh položky?
+- Použili jsme kanonické místo?
+- Šel úkol dokončit bez starého procesu?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud průchod prošel čistě, nepřidali jsme nové sledování?
+- Pokud vzniklo lokální tření, má jednu konkrétní opravu?
+- Pokud vznikla nová otázka, má vlastní místo mimo starou položku?
+- Pokud se potvrdil návratový signál, je zapsané nové rozhodnutí?
+- Je jasné, co zůstává zavřené?
+- Nepřidáváme eventy, klikací tracking, osobní dohled ani preventivní reporting?
+- Uklidíme dočasné podklady, které vznikly jen kvůli průchodu?
+- Dá se závěr říct jednou pracovní větou?
+
+První běžný průchod je test dospělosti uzavření. Když projde, není potřeba ho oslavovat další tabulkou. Když neprojde, stačí přesně pojmenovat, zda jde o lokální doladění, novou otázku nebo skutečný návratový signál. Tak se ukončená položka nestane věčným hostem v provozu.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha WY o prvním běžném průchodu po uzavřeném návratu ukončené položky: ověření kanonické trasy, čtyři výsledné stavy, lokální doladění, nová otázka, privacy-first průchod, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WX o uzavření odpovědi na návrat ukončené položky: výsledné stavy, zavření zbytkové stopy, lokální mezery, nového případu i skutečného znovuotevření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna karta převodu první reakce na návratový signál do běžného rytmu: původní signál, výsledný stav, kanonické místo, běžná údržba, privacy-first úklid a návratový signál.
 - 2026-06-03: Doplněna Příloha WW o návratu ukončené položky bez obnovy starého rytmu: čtyři typy návratu, lokální oprava zbytkových stop, nové případy bez dědění staré struktury, znovuotevření jen při opakovaném pracovním důkazu, privacy-first návrat, karta, mini workshop a checklist.
