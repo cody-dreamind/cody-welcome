@@ -167526,8 +167526,347 @@ Ukončená položka [název] se vrátila jako [typ návratu]. Reagujeme jedním 
 
 Návrat ukončené položky není ostuda. Ostuda je tvářit se, že každé ozvěně patří vlastní proces. Dobrá reakce drží ukončení pevně, opraví nejbližší realitu a nechá starý rytmus spát, dokud reálná práce neukáže něco silnějšího.
 
+## Příloha WX: Uzavření odpovědi na návrat ukončené položky
+
+Když se ukončená položka vrátí a tým na ni jednou odpoví, práce ještě není hotová. Hotovo není ve chvíli, kdy se smaže starý odkaz, doplní přesměrování nebo zapíše nový případ. Hotovo je až ve chvíli, kdy je jasné, že odpověď nezaložila nový skrytý rytmus, neotevřela starý proces pod jiným názvem a nezanechala po sobě další dočasné stopy.
+
+Uzavření odpovědi má být krátké. Není to druhé review ukončené položky. Je to kontrola, že jeden konkrétní zásah skončil tam, kde měl skončit. Tým si ověří, co bylo provedeno, co zůstává zavřené, kde je kanonické místo a jaký signál by jako jediný opravňoval další návrat.
+
+Začněte pěti větami:
+
+```text
+Položka se vrátila jako:
+Odpověděli jsme tímto jedním krokem:
+Po odpovědi zůstává zavřené:
+Kanonické místo je:
+Další návrat uznáme jen při:
+```
+
+Příklad:
+
+```text
+Položka se vrátila jako:
+Zbytková stopa ve staré onboardingové poznámce.
+
+Odpověděli jsme tímto jedním krokem:
+Odstranili jsme starý odkaz a doplnili větu, že aktuální šablony jsou v kanonickém indexu.
+
+Po odpovědi zůstává zavřené:
+Samostatné review šablon, pomocný seznam a kontrolní rytmus používání.
+
+Kanonické místo je:
+Kanonický index standardů.
+
+Další návrat uznáme jen při:
+Dalším reálném pracovním průchodu, ve kterém člověk kvůli stejné mezeře skončí mimo index.
+```
+
+Tento zápis brání dvěma častým chybám. První chyba je podcenit návrat a nechat po odpovědi nepořádek. Druhá chyba je přecenit návrat a nechat z malé odpovědi vyrůst nový proces. Obě chyby vypadají pracovně, ale obě zvyšují údržbu bez jasného důvodu.
+
+### Čtyři výsledné stavy
+
+Po odpovědi na návrat ukončené položky vyberte jeden ze čtyř stavů:
+
+- Uzavřeno bez další péče: šlo o zbytkovou stopu nebo drobnou lokální mezeru a odpověď stačila.
+- Uzavřeno s návratovým signálem: odpověď stačila, ale existuje konkrétní situace, která by další návrat znovu otevřela.
+- Převedeno na novou otázku: návrat ukázal nový případ, který nepatří do staré položky.
+- Znovuotevřeno novým rozhodnutím: opakovaný důkaz ukázal, že aktivní systém má skutečnou mezeru.
+
+Nepoužívejte stav "necháme to sledovat". Sledování bez rozhodovací otázky je jen pomalejší forma obnovy starého rytmu. Pokud nevíte, co by další pozorování změnilo, položku uzavřete a napište návratový signál.
+
+Šablona:
+
+```text
+Výsledný stav:
+- uzavřeno bez další péče / uzavřeno s návratovým signálem / převedeno na novou otázku / znovuotevřeno novým rozhodnutím
+
+Proč:
+
+Co se už nedělá:
+
+Co se případně dělá nově:
+
+Kde je zdroj pravdy:
+
+Jaká data se mažou nebo nesbírají:
+```
+
+### Jak zavřít zbytkovou stopu
+
+Zbytková stopa se zavírá fyzickým úklidem a jednou větou v záznamu. Nestačí si říct, že starý odkaz nikdo používat nemá. Pokud odkaz zůstal v pracovním místě, bude znovu nalezen. Pokud starý screenshot zůstal v onboardingové složce, někdo ho časem použije jako vysvětlení. Pokud připomínka zůstala v kalendáři, vyrobí falešný signál, že se téma má znovu řešit.
+
+Uzavření zbytkové stopy:
+
+```text
+Zbytková stopa:
+Kde byla:
+Co jsme s ní udělali:
+Kam případně vede přesměrování:
+Co tím neobnovujeme:
+Který dočasný důkaz mažeme:
+```
+
+Příklad:
+
+```text
+Zbytková stopa:
+Starý odkaz na review šablon.
+
+Kde byla:
+V onboardingové poznámce pro nového člověka.
+
+Co jsme s ní udělali:
+Odkaz odstraněn, nahrazen větou o kanonickém indexu.
+
+Kam vede přesměrování:
+Do sekce "Šablony a standardy" v kanonickém indexu.
+
+Co tím neobnovujeme:
+Samostatné review šablon ani pomocnou evidenci používání.
+
+Který dočasný důkaz mažeme:
+Screenshot starého rozcestníku z ověřování.
+```
+
+Privacy-first poznámka: zbytková stopa se neřeší sledováním, kdo ji našel. Řeší se odstraněním stopy. Zapište pracovní místo, ne člověka. To stačí pro opravu a zbytečně to nevyrábí osobní historii.
+
+### Jak zavřít lokální mezeru
+
+Lokální mezera po odpovědi často svádí k širší úpravě dokumentace. "Když už jsme upravili onboarding, pojďme projít všechny šablony." To je přesně moment, kdy se malý návrat mění v plíživý audit. Pokud důkaz ukázal jednu mezeru, zavřete jednu mezeru.
+
+Dobré uzavření lokální mezery má tři části:
+
+- konkrétní místo, kde se mezera objevila;
+- konkrétní věta, odkaz nebo příklad, který ji opravuje;
+- konkrétní hranice, co se teď neprochází.
+
+Zápis:
+
+```text
+Lokální mezera:
+Opravené pracovní místo:
+Přidaná nebo změněná věta:
+Co teď neprocházíme:
+Návratový signál:
+```
+
+Příklad:
+
+```text
+Lokální mezera:
+Sales šablona mluvila o starém review šablon, i když aktuální zdroj pravdy je index.
+
+Opravené pracovní místo:
+Jedna sales šablona pro nabídku produktizované služby.
+
+Přidaná nebo změněná věta:
+Kvalitu šablon kontrolujeme v rámci kanonického indexu, ne samostatným review.
+
+Co teď neprocházíme:
+Neauditujeme všechny sales materiály ani neotevíráme starý review rytmus.
+
+Návratový signál:
+Druhá reálná nabídka narazí na stejnou nejasnost.
+```
+
+Tady je důležitá disciplína: hranice není výmluva, proč nedělat pořádnou práci. Hranice je ochrana před tím, aby se každá drobná oprava tvářila jako povinnost projít celý systém.
+
+### Jak převést nový případ
+
+Nový případ se neuzavírá opravou staré položky. Uzavírá se tím, že se oddělí od historie a dostane vlastní otázku. Pokud zákazník otevře téma, které připomíná starý proces, může to být obchodní otázka, produktová otázka nebo komunikační otázka. Nemusí to být provozní otázka.
+
+Použijte převod:
+
+```text
+Nový případ:
+Proč není kopií staré položky:
+Nová otázka:
+Nejbližší důkaz:
+Kde bude otázka žít:
+Co ze staré položky zůstává zavřené:
+```
+
+Příklad:
+
+```text
+Nový případ:
+Zákazník se ptal, jak ve službě udržujeme kvalitu šablon.
+
+Proč není kopií staré položky:
+Nejde o interní provozní rytmus, ale o srozumitelnost nabídky.
+
+Nová otázka:
+Má sales materiál lépe vysvětlit, jak funguje kanonický index a revize šablon?
+
+Nejbližší důkaz:
+Projít tři poslední nabídky a ověřit, zda chybí stejné vysvětlení.
+
+Kde bude otázka žít:
+V backlogu sales materiálů, ne v archivu provozních standardů.
+
+Co ze staré položky zůstává zavřené:
+Samostatné review šablon, jeho metriky a pomocné exporty.
+```
+
+Codyho komentář: nový případ je nový případ. Když vypadá trochu jako starý, ještě to neznamená, že má zdědit jeho kalendář, tabulku a dramatický soundtrack.
+
+### Jak zavřít skutečné znovuotevření
+
+Pokud se návrat ukáže jako skutečné znovuotevření, uzavření odpovědi neznamená "starý proces je zpět". Znamená to, že tým udělal nové rozhodnutí a přesně popsal, co se znovu aktivuje. To má být co nejmenší aktivní tvar, který pokryje nový důkaz.
+
+Zápis pro znovuotevření:
+
+```text
+Znovuotevřené téma:
+Nový důkaz:
+Proč lokální oprava nestačí:
+Nový minimální rytmus:
+Co ze staré položky nevracíme:
+První kontrola nového rytmu:
+Privacy-first hranice:
+```
+
+Příklad:
+
+```text
+Znovuotevřené téma:
+Kontrola shody sales šablon s kanonickým indexem.
+
+Nový důkaz:
+Tři různé nabídky použily staré vysvětlení šablon a vedly ke stejnému dotazu zákazníka.
+
+Proč lokální oprava nestačí:
+Nejde o jeden starý odkaz, ale o opakovanou nejasnost v aktivních sales materiálech.
+
+Nový minimální rytmus:
+Jednou měsíčně projít jen aktivně použité sales šablony proti kanonickému indexu.
+
+Co ze staré položky nevracíme:
+Pomocný seznam všech historických šablon, sledování lidí a staré kvartální review.
+
+První kontrola nového rytmu:
+Po jednom měsíci ověřit, zda dotazy zákazníků ubyly nebo se přesunuly jinam.
+
+Privacy-first hranice:
+Evidujeme typ dotazu a šablonu, ne osobní profil obchodníka ani zákazníka mimo nutný obchodní záznam.
+```
+
+Skutečné znovuotevření je legitimní, když má důkaz. Právě proto musí být přesné. Čím přesnější je nové rozhodnutí, tím menší šance, že se vrátí stará údržba jen ze zvyku.
+
+### Karta uzavření odpovědi
+
+```text
+Ukončená položka:
+
+Jak se vrátila:
+
+Typ návratu:
+- zbytková stopa / lokální mezera / nový případ / skutečné znovuotevření
+
+Jedna provedená odpověď:
+
+Výsledný stav:
+- uzavřeno bez další péče / uzavřeno s návratovým signálem / převedeno na novou otázku / znovuotevřeno novým rozhodnutím
+
+Kanonické místo po odpovědi:
+
+Co zůstává zavřené:
+
+Co případně vzniká nově:
+
+Co bylo fyzicky uklizeno:
+
+Dočasná data k mazání:
+
+Co se neměří ani nesleduje:
+
+Návratový signál:
+
+Vlastník:
+
+Datum uzavření:
+
+Jednovětý závěr:
+```
+
+Vyplněný příklad:
+
+```text
+Ukončená položka:
+Samostatné review rozcestníku šablon.
+
+Jak se vrátila:
+Nový člen týmu našel starý odkaz v onboardingové poznámce.
+
+Typ návratu:
+Zbytková stopa.
+
+Jedna provedená odpověď:
+Starý odkaz odstraněn a nahrazen odkazem na kanonický index.
+
+Výsledný stav:
+Uzavřeno s návratovým signálem.
+
+Kanonické místo po odpovědi:
+Kanonický index standardů.
+
+Co zůstává zavřené:
+Samostatné review, starý seznam šablon a kontrolní rytmus.
+
+Co případně vzniká nově:
+Nic.
+
+Co bylo fyzicky uklizeno:
+Onboardingová poznámka a jeden starý screenshot.
+
+Dočasná data k mazání:
+Pomocný screenshot z ověřování starého rozcestníku.
+
+Co se neměří ani nesleduje:
+Kdo starý odkaz otevřel a kolikrát ho kdo viděl.
+
+Návratový signál:
+Další reálný pracovní průchod skončí kvůli stejné stopě mimo kanonický index.
+
+Jednovětý závěr:
+Návrat byl zbytková stopa; uklidili jsme odkaz, starý rytmus zůstává zavřený.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte typ návratu a jednu provedenou odpověď.
+2. Minuta 2: vyberte výsledný stav.
+3. Minuta 3: napište, co zůstává zavřené.
+4. Minuta 4: určete kanonické místo a fyzický úklid.
+5. Minuta 5: zapište privacy-first hranici, hlavně co nesledujete.
+6. Minuta 6: napište návratový signál a jednovětý závěr.
+
+Výstup:
+
+```text
+Odpověď na návrat položky [název] uzavíráme ve stavu [stav]. Kanonické místo je [místo], starý rytmus zůstává zavřený a další návrat uznáme jen při [signál].
+```
+
+### Checklist uzavření odpovědi
+
+- Je jasné, jak se ukončená položka vrátila?
+- Je popsaná jedna provedená odpověď, ne nový seznam nápadů?
+- Vybrali jsme jeden výsledný stav?
+- Víme, co po odpovědi zůstává zavřené?
+- Pokud vzniká nová otázka, má vlastní místo mimo archiv staré položky?
+- Pokud se téma znovuotevírá, vzniklo nové rozhodnutí místo kopie starého procesu?
+- Je kanonické místo po odpovědi jednoznačné?
+- Proběhl fyzický úklid starých odkazů, připomínek, screenshotů nebo exportů?
+- Mažeme dočasná data, která už nemají účel?
+- Nepřidáváme sledování lidí, čtení dokumentů ani preventivní reporting?
+- Je návratový signál konkrétní a spojený s reálnou prací?
+- Dá se jednou větou říct, proč je odpověď hotová?
+
+Uzavření odpovědi na návrat ukončené položky je malý, ale důležitý krok. Bez něj se ukončené věci pomalu vracejí přes odkazy, výjimky a "radši to ještě necháme". S ním tým drží archiv archivem, aktivní systém aktivním systémem a nové důkazy řeší podle dnešní práce.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha WX o uzavření odpovědi na návrat ukončené položky: výsledné stavy, zavření zbytkové stopy, lokální mezery, nového případu i skutečného znovuotevření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna karta převodu první reakce na návratový signál do běžného rytmu: původní signál, výsledný stav, kanonické místo, běžná údržba, privacy-first úklid a návratový signál.
 - 2026-06-03: Doplněna Příloha WW o návratu ukončené položky bez obnovy starého rytmu: čtyři typy návratu, lokální oprava zbytkových stop, nové případy bez dědění staré struktury, znovuotevření jen při opakovaném pracovním důkazu, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WV o čistém ukončení položky bez místa v běžném rytmu: rozdíl mezi archivem a aktivním systémem, fyzický úklid spouštěčů, nenahrazování šumu novým objektem, privacy-first mazání dočasných důkazů, karta, mini workshop a checklist.
