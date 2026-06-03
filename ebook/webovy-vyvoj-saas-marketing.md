@@ -6870,6 +6870,64 @@ Díky převodu do běžného rytmu dál nesbíráme jména lidí, kteří narazi
 
 Codyho komentář: dobrý provoz se pozná i podle toho, co po něm nezůstane. Když po malé reakci zůstane nová tabulka, nový report a nové hlídání lidí, možná jste nevyřešili problém. Možná jste mu pořídili kancelář.
 
+### Karta převodu první reakce
+
+Pro běžnou práci stačí jedna krátká karta. Nemá znovu analyzovat signál. Má říct, jak se uzavřená reakce promítla do rytmu, kde je zdroj pravdy a co se už dál nehlídá.
+
+```text
+Původní signál:
+
+Výsledek první reakce:
+- šum / lokální tření / skutečný návrat
+
+Co jsme udělali:
+
+Kanonické místo po převodu:
+
+Běžný rytmus:
+
+Co už zvlášť nesledujeme:
+
+Co mažeme nebo anonymizujeme:
+
+Návratový signál:
+
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Původní signál:
+Nový editor nevěděl, jestli slabý podnět patří do review šablony, nebo do karty změny.
+
+Výsledek první reakce:
+Lokální tření.
+
+Co jsme udělali:
+Do rozcestníku jsme doplnili jednu větu, která rozlišuje slabý podnět od potvrzené změny.
+
+Kanonické místo po převodu:
+Rozcestník review šablon.
+
+Běžný rytmus:
+Měsíční údržba rozcestníku.
+
+Co už zvlášť nesledujeme:
+Nevedeme seznam lidí, kteří se ptali na rozdíl mezi šablonami.
+
+Co mažeme nebo anonymizujeme:
+Dočasnou poznámku z kontroly po zapsání anonymizovaného závěru.
+
+Návratový signál:
+Další člověk i po úpravě skončí ve špatné šabloně při reálné práci.
+
+Vlastník:
+Editor rukopisu.
+```
+
+Karta je užitečná hlavně tím, že odděluje změnu v pracovním místě od dočasné kontroly. Jakmile je kanonické místo upravené a návratový signál zapsaný, zbytek reakce může zmizet.
+
 ### Checklist převodu do běžného rytmu
 
 - Má uzavřená první reakce jasný výsledný stav?
@@ -167470,6 +167528,7 @@ Návrat ukončené položky není ostuda. Ostuda je tvářit se, že každé ozv
 
 ## Pracovní log
 
+- 2026-06-03: Doplněna karta převodu první reakce na návratový signál do běžného rytmu: původní signál, výsledný stav, kanonické místo, běžná údržba, privacy-first úklid a návratový signál.
 - 2026-06-03: Doplněna Příloha WW o návratu ukončené položky bez obnovy starého rytmu: čtyři typy návratu, lokální oprava zbytkových stop, nové případy bez dědění staré struktury, znovuotevření jen při opakovaném pracovním důkazu, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WV o čistém ukončení položky bez místa v běžném rytmu: rozdíl mezi archivem a aktivním systémem, fyzický úklid spouštěčů, nenahrazování šumu novým objektem, privacy-first mazání dočasných důkazů, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna úvodní podkapitola o uzavření první reakce na návratový signál: stav reakce, provedený krok, hranice další práce, návratový signál, umístění záznamu, privacy-first datové minimum a checklist.
