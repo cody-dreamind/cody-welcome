@@ -165309,8 +165309,206 @@ Položka [název] po druhém dlouhodobém review končí jako [stav]. Další ry
 
 Druhé dlouhodobé review má systém naučit, kdy už položka nepotřebuje být vidět tak často. Dobrá údržba není jen schopnost věci opravovat. Je to i schopnost poznat, že opravená věc už může dostat méně pozornosti a pořád zůstat pod kontrolou.
 
+## Příloha WP: Uzavření druhého dlouhodobého review do zralého rytmu
+
+Po druhém dlouhodobém review už položka nemá žít jako "ta věc, kterou jsme kdysi opravovali". Má se zařadit mezi zralé části provozu: buď zůstává v běžném rytmu, přechází do levnější kontroly, slučuje se s jiným artefaktem, padá do nižší pozornosti, nebo se z ní znovu otevírá konkrétní pracovní karta. Uzavření druhého review je proto hlavně přepis stavu. Ne další analýza.
+
+Základní uzavírací věta:
+
+```text
+Po druhém dlouhodobém review je položka [název] uzavřena jako [zralý stav]. Její domov je [kanonické místo], rytmus je [rytmus] a návratový signál je [signál].
+```
+
+Příklad:
+
+```text
+Po druhém dlouhodobém review je rozcestník review šablon uzavřen jako položka v nižší pozornosti. Jeho domov je kanonický index standardů, rytmus je kvartální kontrola odkazů a návratový signál je reálný průchod, který skončí v archivní šabloně.
+```
+
+Tato věta má být poslední zvláštní věta kolem dané opravy. Pokud tým za měsíc potřebuje pochopit, co s položkou dělat, nemá číst historii všech kontrol. Má najít domov, rytmus a návratový signál.
+
+### Přepište výsledek do provozního jazyka
+
+Zralý rytmus nepoužívá jazyk opravárenského deníku. Slova jako "po incidentu", "ověřovací režim", "dočasná kontrola" nebo "ještě hlídáme" mají po druhém dlouhodobém review zmizet, pokud položka opravdu prošla do stabilního stavu.
+
+Přepisujte takto:
+
+- "dočasná kontrola po opravě" na "měsíční kontrola kvality";
+- "sledování, jestli se chyba nevrací" na "návratový signál";
+- "speciální seznam po změně" na "kanonický index";
+- "ještě jedna kontrola pro jistotu" na "další běžný rytmus";
+- "historie opravy" na "poslední uzavírací věta".
+
+Příklad:
+
+```text
+Před uzavřením:
+Rozcestník je po opravě ještě pod měsíčním dohledem, abychom viděli, jestli se starý problém nevrací.
+
+Po uzavření:
+Rozcestník je součást kvartální kontroly odkazů. Návratový signál nastane, když reálný průchod skončí v archivní šabloně.
+```
+
+Rozdíl není kosmetický. První věta drží tým v minulosti. Druhá věta říká, co se má dělat příště.
+
+### Uzavření podle výsledného stavu
+
+Každý stav z druhého dlouhodobého review potřebuje jiné uzavření:
+
+- Ponechat: zapište, proč položka zůstává v rytmu, a smažte dočasné poznámky z review.
+- Zlevnit údržbu: ponechte účel, ale zkraťte kontrolní otázky, snižte frekvenci nebo přesuňte kontrolu do existujícího rituálu.
+- Sloučit: určete jedno nové kanonické místo a staré místo nahraďte odkazem nebo krátkou archivní větou.
+- Snížit pozornost: přesuňte položku do méně častého rytmu a napište, kde se znovu zachytí problém.
+- Otevřít návrat: nezavírejte položku jako zralou; vytvořte novou pracovní kartu s nejbližším místem zásahu.
+
+Špatné uzavření vypadá tak, že tým vybere stav, ale nechá všechny staré artefakty ležet vedle sebe. Pak se za pár týdnů neví, jestli platí nový rytmus, starý dohled, nebo osobní připomínka někoho z týmu. Dobré uzavření zanechá jednu cestu.
+
+### Zmenšete provozní stopu
+
+Zralý rytmus má být levnější než oprava. Pokud po druhém review pořád udržujete stejný počet poznámek, připomínek, exportů a kontrolních seznamů, položka se možná formálně stabilizovala, ale provozně pořád stojí moc.
+
+Po uzavření druhého review projděte čtyři otázky:
+
+```text
+Který artefakt je zdroj pravdy?
+Které pomocné artefakty už jen opakují totéž?
+Které osobní nebo dočasné poznámky můžeme smazat?
+Který budoucí signál stačí místo průběžného dohledu?
+```
+
+Privacy-first poznámka: úklid provozní stopy není jen pořádek v dokumentech. Je to i snížení množství dat, která držíte bez jasného účelu. Když už rozhodnutí existuje v kanonickém místě, osobní poznámky, staré screenshoty a pomocné exporty často přestávají být důkazem a začínají být rizikem.
+
+### Nenechte zralý rytmus bobtnat
+
+Zralý rytmus se často rozbije nenápadně: někdo při uzavření přidá "pro jistotu" ještě jednu kontrolu, druhý člověk vytvoří připomínku v kalendáři a třetí ponechá starý checklist, protože "se může hodit". Výsledek je systém, který má být klidnější, ale ve skutečnosti přidal další místa pozornosti.
+
+Pravidlo:
+
+```text
+Za každé nové kontrolní místo musí jedno staré místo zmizet nebo se sloučit.
+```
+
+Příklad:
+
+```text
+Přidáváme položku do kvartální kontroly odkazů.
+Rušíme měsíční osobní připomínku.
+Slučujeme pomocný seznam s kanonickým indexem.
+Necháváme jen návratový signál v kartě položky.
+```
+
+Codyho komentář: "ještě jedna kontrola" zní zodpovědně asi pět minut. Pak se z ní stane malý administrativní kamínek v botě. Když těch kamínků nasbíráte dvacet, už neřešíte kvalitu systému, ale proč každý krok bolí.
+
+### Karta uzavření druhého review
+
+```text
+Položka:
+
+Výsledek druhého dlouhodobého review:
+- ponechat / zlevnit údržbu / sloučit / snížit pozornost / otevřít návrat
+
+Zralý stav:
+
+Kanonické místo:
+
+Nový nebo potvrzený rytmus:
+
+Návratový signál:
+
+Co přepisujeme do provozního jazyka:
+
+Co rušíme nebo slučujeme:
+
+Co mažeme nebo anonymizujeme:
+
+Co výslovně nepřidáváme:
+
+Kdo vlastní další rytmus:
+
+Datum dalšího běžného návratu:
+
+Poslední uzavírací věta:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Rozcestník review šablon.
+
+Výsledek druhého dlouhodobého review:
+Snížit pozornost.
+
+Zralý stav:
+Položka v nižší pozornosti.
+
+Kanonické místo:
+Kanonický index standardů.
+
+Nový nebo potvrzený rytmus:
+Kvartální kontrola odkazů.
+
+Návratový signál:
+Reálný průchod skončí v archivní šabloně.
+
+Co přepisujeme do provozního jazyka:
+"Dohled po opravě" měníme na "kvartální kontrolu odkazů".
+
+Co rušíme nebo slučujeme:
+Rušíme měsíční osobní připomínku, pomocný seznam slučujeme do indexu.
+
+Co mažeme nebo anonymizujeme:
+Mažeme dočasné poznámky z prvního a druhého review.
+
+Co výslovně nepřidáváme:
+Nepřidáváme nový report ani další měření použití.
+
+Kdo vlastní další rytmus:
+Editor znalostní báze.
+
+Datum dalšího běžného návratu:
+Příští kvartální kontrola.
+
+Poslední uzavírací věta:
+Rozcestník review šablon je po druhém dlouhodobém review uzavřen jako položka v nižší pozornosti v rámci kvartální kontroly odkazů.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek druhého dlouhodobého review.
+2. Minuta 2: vyberte zralý stav položky.
+3. Minuta 3: určete jediné kanonické místo.
+4. Minuta 4: přepište jazyk z opravy na provoz.
+5. Minuta 5: zrušte nebo slučte staré kontrolní stopy.
+6. Minuta 6: potvrďte návratový signál.
+7. Minuta 7: napište poslední uzavírací větu.
+
+Výstup:
+
+```text
+Položka [název] je uzavřena jako [zralý stav]. Platí [kanonické místo], [rytmus] a [návratový signál]. Rušíme [staré stopy] a nepřidáváme [co by jen zvětšilo dohled].
+```
+
+### Checklist uzavření druhého review
+
+- Má položka jeden jasný zralý stav?
+- Je zapsané jedno kanonické místo?
+- Přepsali jsme jazyk z opravy na běžný provoz?
+- Zůstává jen jeden rytmus, ne starý dohled vedle nového?
+- Je návratový signál konkrétní a pozorovatelný v reálné práci?
+- Zrušili jsme osobní připomínky a dočasné seznamy, které už nemají účel?
+- Smazali nebo anonymizovali jsme pomocné důkazy, které už nepotřebujeme?
+- Pokud něco slučujeme, ví tým, kam odteď chodit?
+- Pokud něco snižuje pozornost, víme, kde se problém znovu zachytí?
+- Pokud se otevírá návrat, vznikla nová pracovní karta místo nekonečného review?
+- Nepřidali jsme nové měření, report ani tracker jen kvůli pocitu jistoty?
+- Umí nový člověk pochopit další krok bez čtení celé historie opravy?
+
+Uzavření druhého dlouhodobého review je tichý, ale důležitý moment. Položka přestává být příběhem o opravě a stává se součástí běžného systému. Když se to povede, další člověk nemusí obdivovat historii práce. Prostě najde správné místo, použije správný rytmus a ví, kdy se má ozvat návratový signál.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha WP o uzavření druhého dlouhodobého review do zralého rytmu: přepis z opravárenského jazyka do provozu, uzavření podle výsledného stavu, zmenšení provozní a datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WO o druhém dlouhodobém review ve stabilním rytmu: současná kontrola bez návratu k historii, pět výsledných stavů, test snížení pozornosti, privacy-first zmenšení datové stopy, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WN o uzavření prvního dlouhodobého review do stabilního rytmu: stavové uzavření, kanonické místo, úklid dočasných stop, privacy-first minimalizace, karta, mini workshop a checklist.
 - 2026-06-02: Doplněna Příloha WM o prvním dlouhodobém review po převodu do rytmu: kontrola současné použitelnosti, čtyři výsledné stavy, cena údržby, privacy-first hranice bez nových metrik, karta, mini workshop a checklist.
