@@ -168149,8 +168149,159 @@ První běžný průchod po uzavřeném návratu položky [název] skončil stav
 
 První běžný průchod je test dospělosti uzavření. Když projde, není potřeba ho oslavovat další tabulkou. Když neprojde, stačí přesně pojmenovat, zda jde o lokální doladění, novou otázku nebo skutečný návratový signál. Tak se ukončená položka nestane věčným hostem v provozu.
 
+## Příloha WZ: Uzavření prvního běžného průchodu po návratu ukončené položky
+
+První běžný průchod po uzavřeném návratu ukončené položky ukáže, jestli se stará věc opravdu vrátila jen jako výjimečný signál, nebo jestli si tým nenápadně obnovuje starý rytmus. Po průchodu proto nesmí zůstat neurčitý stav "uvidíme příště". Buď současná trasa drží, nebo potřebuje jednu lokální opravu, nebo vznikla nová pracovní otázka, nebo se potvrdil skutečný návratový signál.
+
+Uzavření má odpovědět na jednu otázku:
+
+```text
+Co po prvním běžném průchodu zůstává v normální práci a co se nesmí vrátit jako starý proces?
+```
+
+Pokud na tuto otázku neodpovíte, stará položka se začne vracet přes bok. Ne jako otevřený projekt, ale jako kontrolní poznámka, opatrný úkol, pomocná tabulka nebo věta "raději to ještě jednou projdeme". Přesně tak se ukončené věci mění v tichou údržbu bez vlastníka.
+
+### Začněte uzavírací větou
+
+Uzavírací věta má být krátká a vložitelná do rozhodovacího logu, backlogu nebo rozcestníku:
+
+```text
+Po prvním běžném průchodu položka [název] zůstává [stav]. Dál používáme [kanonické místo] a neobnovujeme [starý rytmus]. Vrátíme se jen při [návratový signál].
+```
+
+Příklad:
+
+```text
+Po prvním běžném průchodu položka staré review šablony zůstává ukončená. Dál používáme aktuální měsíční review a neobnovujeme pomocný seznam slabých podnětů. Vrátíme se jen tehdy, když se i v aktuální šabloně znovu vytvoří zbytečný úkol bez rozhodovacího důvodu.
+```
+
+Tato věta je důležitější než dlouhý popis průchodu. Říká, co platí dál. Nevypráví celý příběh staré položky. Když se za měsíc objeví podobný podnět, tým má rychle poznat, jestli jde o nový problém, nebo jen ozvěnu už ukončené věci.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném průchodu vyberte jeden stav:
+
+- Nechat ukončené: průchod potvrdil, že položka nemá místo v běžném rytmu.
+- Lokálně uklidit: položka zůstává ukončená, ale jedno okolní místo ještě mate.
+- Otevřít novou otázku: objevil se nový problém, který nemá dědit starou strukturu.
+- Potvrdit návratový signál: stejný problém se reálně vrátil i přes aktuální kanonické místo.
+
+Stav `nechat ukončené` je plnohodnotný výsledek. Nepotřebuje další kontrolu jen proto, že se nic neopravovalo. Pokud práce proběhla čistě, nejvyšší hodnota je nechat starou položku zavřenou.
+
+Stav `lokálně uklidit` používejte, když se problém objevil v okolí: starý odkaz, archivní poznámka, špatný název sekce, duplicitní karta nebo neplatná kopie. Opravte právě toto místo. Neotvírejte starou položku a nepřepisujte kanonické pravidlo.
+
+Stav `otevřít novou otázku` znamená, že se objevil nový případ. Třeba stará položka byla o review šabloně, ale průchod ukázal, že lidé obecně nepoznají rozdíl mezi aktivním rozcestníkem a archivem. To už není návrat staré položky. To je nová pracovní otázka s vlastním rozsahem.
+
+Stav `potvrdit návratový signál` používejte až tehdy, když problém vznikl při použití aktuálního kanonického místa. Pokud člověk použil starou šablonu z archivu, signál se nepotvrdil. Pokud aktuální šablona stále vede ke stejnému zbytečnému úkolu, signál se potvrdit může.
+
+### Zavřete zbytky starého rytmu
+
+Po uzavření průchodu hledejte malé zbytky starého rytmu:
+
+- opakovanou připomínku v kalendáři;
+- pomocný seznam položek "pro jistotu";
+- backlogovou kartu bez aktuálního rozhodnutí;
+- starý odkaz v rozcestníku;
+- dočasný export z kontroly;
+- ruční hlídání jedním člověkem.
+
+Každý zbytek dostane jeden stav:
+
+```text
+Zbytek starého rytmu:
+Stav:
+- smazat / archivovat / přesměrovat / převést do nové otázky / ponechat s důvodem
+Důvod:
+```
+
+Stav `ponechat s důvodem` má být vzácný. Pokud něco ponecháváte, musí být jasné, jak pomáhá aktuální práci a kdy se znovu zkontroluje. Jinak jen měníte starý dluh na novou opatrnost.
+
+### Privacy-first uzavření
+
+První běžný průchod často vytvoří drobné pracovní stopy: poznámku z review, screenshot staré šablony, odkaz na archivní kartu nebo výřez z interního komentáře. Po uzavření průchodu většinou stačí anonymizovaný závěr.
+
+Privacy-first minimum:
+
+```text
+Zůstává:
+Uzavírací věta, stav položky, kanonické místo a návratový signál.
+
+Maže se:
+Dočasné poznámky, screenshoty, kopie starých karet a osobní komentáře použité jen pro kontrolu.
+
+Nesbírá se:
+Klikání v dokumentaci, osobní trasy lidí, preventivní evidence všech dalších průchodů.
+```
+
+Pokud průchod pracoval se zákaznickým příkladem, přepište ho na typ situace. V logu stačí "starý formulář vedl k povinnému telefonu". Není potřeba uchovávat konkrétní poptávku, jméno zákazníka ani interní detail, který už nepomůže rozhodnout.
+
+Codyho komentář: ukončená položka se má po dobrém průchodu chovat jako slušný host po návštěvě. Odejde, nezaloží si vlastní šuplík v předsíni a nenechá po sobě tabulku "pro příště". Ano, i procesy by se mohly naučit odcházet bez dramatu.
+
+### Karta uzavření prvního běžného průchodu
+
+```text
+Ukončená položka:
+
+První běžný průchod:
+
+Kanonické místo:
+
+Výsledek průchodu:
+- nechat ukončené / lokálně uklidit / otevřít novou otázku / potvrdit návratový signál
+
+Uzavírací věta:
+
+Co zůstává v běžné práci:
+
+Co se nesmí obnovit ze starého rytmu:
+
+Jedna lokální oprava, pokud je potřeba:
+
+Nová otázka, pokud vznikla:
+
+Návratový signál:
+
+Privacy-first úklid:
+
+Kdo drží kontext:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: pojmenujte ukončenou položku a aktuální kanonické místo.
+2. Minuta 2: napište, co se při prvním běžném průchodu skutečně stalo.
+3. Minuta 3: vyberte jeden ze čtyř uzavíracích stavů.
+4. Minuta 4: napište uzavírací větu.
+5. Minuta 5: označte zbytky starého rytmu.
+6. Minuta 6: rozhodněte, co smazat, archivovat nebo přesměrovat.
+7. Minuta 7: doplňte privacy-first úklid podkladů.
+8. Minuta 8: zapište návratový signál a tím průchod zavřete.
+
+Výstup:
+
+```text
+První běžný průchod po ukončené položce [název] skončil stavem [stav]. Aktuální zdroj pravdy je [místo], starý rytmus [co] se neobnovuje a další návrat nastane jen při [signál].
+```
+
+### Checklist uzavření prvního běžného průchodu
+
+- Má průchod jeden jasný výsledný stav?
+- Je zapsané aktuální kanonické místo?
+- Existuje krátká uzavírací věta?
+- Je jasné, co zůstává v běžné práci?
+- Je výslovně napsané, co se ze starého rytmu neobnovuje?
+- Pokud vzniklo lokální tření, má jednu konkrétní opravu?
+- Pokud vznikla nová otázka, nedědí automaticky starou strukturu?
+- Pokud se potvrdil návratový signál, vzniká nové rozhodnutí místo návratu k historickému chaosu?
+- Jsou dočasné poznámky, screenshoty, kopie a osobní detaily smazané nebo anonymizované?
+- Nevzniká nové preventivní sledování dalších průchodů?
+- Ví další člověk, kdy téma znovu otevřít a kdy ho nechat zavřené?
+
+Dobré uzavření prvního běžného průchodu má působit klidně. Ne proto, že by se nic nestalo, ale protože se stalo přesně tolik, kolik bylo potřeba: položka zůstala zavřená, okolí se uklidilo, případná nová otázka se oddělila a data nezůstala ležet jen kvůli pocitu jistoty.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha WZ o uzavření prvního běžného průchodu po návratu ukončené položky: čtyři uzavírací stavy, uzavírací věta, úklid zbytků starého rytmu, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WY o prvním běžném průchodu po uzavřeném návratu ukončené položky: ověření kanonické trasy, čtyři výsledné stavy, lokální doladění, nová otázka, privacy-first průchod, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WX o uzavření odpovědi na návrat ukončené položky: výsledné stavy, zavření zbytkové stopy, lokální mezery, nového případu i skutečného znovuotevření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna karta převodu první reakce na návratový signál do běžného rytmu: původní signál, výsledný stav, kanonické místo, běžná údržba, privacy-first úklid a návratový signál.
