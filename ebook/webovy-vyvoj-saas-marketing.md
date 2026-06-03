@@ -166164,8 +166164,210 @@ Po první kontrole nový stav [drží / drží s úklidem / drží s upřesněn�
 
 První kontrola nového provozního stavu je dobrá tehdy, když po ní systém nepotřebuje víc pozornosti než před ní. Buď potvrdí, že prořezání funguje, nebo ukáže jedno konkrétní místo k úklidu. V obou případech má skončit menší stopou, ne dalším patrem procesu.
 
+## Příloha WT: Uzavření první kontroly nového provozního stavu
+
+První kontrola po ročním prořezání má hodnotu až ve chvíli, kdy se její výsledek uzavře. Samotné zjištění "nový stav drží" nebo "zůstala jedna stará stopa" nestačí. Pokud ho nepřepíšete do provozu, začne se kolem něj tvořit další dočasná vrstva: poznámka v chatu, připomínka v kalendáři, otázka na příštím review a nenápadná věta "raději to ještě hlídejme".
+
+Uzavření má odpovědět na jednu otázku:
+
+```text
+Co se po první kontrole stává běžnou pravdou systému a co se už nemá dál sledovat zvlášť?
+```
+
+Příklad:
+
+```text
+Výsledek první kontroly:
+Nový půlroční rytmus drží, jen ve staré interní poznámce zůstal odkaz na pomocný seznam.
+
+Uzavření:
+Odkaz mažeme, v kanonickém indexu necháváme položku v půlroční kontrole a žádnou další zvláštní kontrolu nezakládáme.
+```
+
+Tohle je malá věta, ale dělá velkou službu. Chrání tým před tím, aby se z každého prořezání stala nová údržbová povinnost. Smyslem ročního prořezání nebylo přejmenovat starý dohled. Smyslem bylo snížit provozní zátěž a nechat v systému jen to, co má pořád pracovní důvod.
+
+### Uzavírací věta
+
+Uzavírací věta má být krátká a provozní. Nemá obhajovat celé prořezání ani připomínat historii všech předchozích oprav.
+
+Použijte tvar:
+
+```text
+Po první kontrole je [položka] uzavřena jako [stav]. Platí [běžný rytmus nebo spouštěč], upravujeme pouze [lokální krok] a rušíme [zbytečná stopa].
+```
+
+Když není žádný lokální krok, napište to výslovně:
+
+```text
+Po první kontrole je rozcestník review šablon uzavřen jako sloučený do půlroční kontroly indexu. Další zvláštní krok není, starý kvartální rytmus zůstává zrušený a pomocné důkazy se neudržují.
+```
+
+Věta má být dohledatelná tam, kde tým s položkou pracuje. Pokud uzavření zůstane jen v zápisu ze schůzky, další člověk při reálné práci uvidí starý problém znovu. Kanonické místo má říkat aktuální stav, ne nutit čtenáře luštit historii.
+
+### Uzavření podle výsledného stavu
+
+Výsledek první kontroly uzavřete podle jednoho ze čtyř stavů:
+
+- Drží bez zásahu: potvrďte běžný rytmus a smažte dočasnou kontrolní kartu.
+- Drží s drobným úklidem: proveďte jeden úklidový úkon a uzavřete položku jako držící.
+- Drží s lokálním upřesněním: přidejte jednu větu, název nebo odkaz do pracovního místa a uzavřete zvláštní kontrolu.
+- Nedrží: otevřete jednu opravnou kartu na konkrétní pracovní místo, ne celé roční prořezání.
+
+`Drží bez zásahu` nevyžaduje žádnou "nulovou" úpravu, aby měl tým pocit práce. Stačí zapsat, že stav platí. Dobrá údržba často vypadá jako absence dalšího úkolu. Ano, projektové tabulky z toho nemají ohňostroj, ale provoz si oddechne.
+
+`Drží s drobným úklidem` uzavřete až po provedení úklidu. Pokud jen napíšete "smazat starý odkaz" a necháte to jako úkol, položka ve skutečnosti ještě není zavřená. Drobný úklid má být tak malý, že se udělá v rámci uzavření.
+
+`Drží s lokálním upřesněním` neznamená, že se otevírá nové ediční kolečko. Upřesnění má být nejbližší věta u pracovního místa: například "Tato položka je součástí půlroční kontroly indexu" nebo "Samostatná kvartální kontrola už neplatí". Pokud potřebujete tři odstavce vysvětlení, nejspíš nový stav nebyl po prořezání dost jasný.
+
+`Nedrží` uzavírejte jinak. Tam není cílem napsat, že všechno platí. Cílem je zabránit rozšíření problému. Otevřete opravnou kartu s jedním místem selhání:
+
+```text
+Nový stav nedrží, protože [pracovní místo] pořád vede ke [starý rytmus]. Opravujeme pouze [nejbližší zásah] a roční prořezání znovu neotevíráme.
+```
+
+### Zrušte přechodovou stopu
+
+První kontrola často vytvoří přechodovou stopu: poznámku, mini checklist, dočasný úkol, odkaz na starý seznam nebo komentář v rozhodovacím logu. Po uzavření musí být jasné, co z toho zůstává.
+
+Zůstává jen minimum:
+
+- aktuální stav položky;
+- běžný rytmus nebo spouštěč;
+- případný návratový signál;
+- jednověté uzavření první kontroly;
+- odkaz na kanonické místo, pokud není uzavření přímo v něm.
+
+Všechno ostatní buď smažte, archivujte, nebo zkraťte na informaci potřebnou pro budoucí rozhodnutí. Pomocné screenshoty, kompletní poznámky z chatu a seznam "kdo co našel" většinou nepatří do aktivní trasy. Pokud je musíte kvůli právnímu nebo smluvnímu důvodu držet, dejte jim jasnou retenci a oddělte je od pracovního místa.
+
+Privacy-first poznámka: uzavření první kontroly je dobrý okamžik pro mazání. Staré podklady už splnily účel. Když je necháte v aktivním provozu, časem se z nich stane falešný zdroj pravdy a zároveň zbytečná datová stopa. Minimum dat není jen bezpečnostní princip, ale i ochrana před provozním zmatkem.
+
+### Nevracejte položku do zvláštní péče
+
+Nejčastější chyba po první kontrole zní:
+
+```text
+Nový stav vypadá dobře, ale necháme ho ještě měsíc ve zvláštním sledování.
+```
+
+Tato věta může být správná jen tehdy, když kontrola našla konkrétní selhání a další měsíc ověřuje konkrétní opravu. Pokud nový stav držel, zvláštní péče ruší výsledek prořezání. Položka se má vrátit do rytmu, který jste jí určili: měsíčního, kvartálního, půlročního, návratového nebo žádného.
+
+Pravidlo:
+
+```text
+Bez konkrétního selhání nevzniká zvláštní sledování.
+```
+
+Když tým cítí nejistotu, pojmenujte ji. Je to riziko, nebo jen nezvyk? Riziko má signál, dopad a vlastníka. Nezvyk má skončit tím, že starý režim už dál neživíte.
+
+### Karta uzavření první kontroly
+
+```text
+Položka:
+
+Výsledek první kontroly:
+- drží bez zásahu / drží s drobným úklidem / drží s lokálním upřesněním / nedrží
+
+Kanonické místo:
+
+Aktuální provozní stav:
+
+Běžný rytmus nebo spouštěč:
+
+Co se upravilo během uzavření:
+
+Co se výslovně neotevírá:
+
+Co se ruší jako přechodová stopa:
+
+Co zůstává jako návratový signál:
+
+Datová stopa po uzavření:
+
+Vlastník:
+
+Datum dalšího běžného průchodu nebo návratová podmínka:
+
+Jednověté uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Rozcestník review šablon.
+
+Výsledek první kontroly:
+Drží s drobným úklidem.
+
+Kanonické místo:
+Kanonický index standardů.
+
+Aktuální provozní stav:
+Součást půlroční kontroly indexu.
+
+Běžný rytmus nebo spouštěč:
+Půlroční průchod indexem.
+
+Co se upravilo během uzavření:
+Smazán odkaz na starý pomocný seznam z interní poznámky.
+
+Co se výslovně neotevírá:
+Neotevíráme samostatné review rozcestníků ani historii původní opravy.
+
+Co se ruší jako přechodová stopa:
+Dočasná kontrolní poznámka k prvnímu průchodu.
+
+Co zůstává jako návratový signál:
+Reálný průchod indexem skončí ve staré nebo archivní šabloně.
+
+Datová stopa po uzavření:
+Zůstává jen uzavírací věta v indexu a stručný changelog.
+
+Vlastník:
+Editor znalostní báze.
+
+Datum dalšího běžného průchodu nebo návratová podmínka:
+Další půlroční kontrola indexu, případně dřív při návratovém signálu.
+
+Jednověté uzavření:
+První kontrola potvrdila sloučený stav rozcestníku; starý odkaz je smazaný, položka zůstává v půlročním rytmu a zvláštní dohled končí.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek první kontroly.
+2. Minuta 2: vyberte správný typ uzavření.
+3. Minuta 3: proveďte drobný úklid nebo napište jednu lokální větu.
+4. Minuta 4: zrušte přechodovou stopu.
+5. Minuta 5: potvrďte běžný rytmus nebo návratový signál.
+6. Minuta 6: zapište jednověté uzavření do kanonického místa.
+
+Výstup:
+
+```text
+První kontrola položky [název] je uzavřena jako [stav]. Platí [rytmus nebo spouštěč], rušíme [přechodová stopa] a zvláštní dohled [končí / pokračuje jen kvůli konkrétní opravě].
+```
+
+### Checklist uzavření první kontroly
+
+- Je výsledek první kontroly převedený do provozní věty?
+- Je věta uložená v kanonickém místě nebo na něj jasně odkazuje?
+- Provedli jsme drobný úklid rovnou, místo abychom z něj udělali další úkol?
+- Pokud bylo potřeba upřesnění, je lokální a krátké?
+- Pokud nový stav nedržel, otevřeli jsme jen jedno konkrétní pracovní místo?
+- Je starý rytmus pořád zrušený?
+- Zmizela přechodová kontrolní poznámka, připomínka nebo pomocný seznam?
+- Zůstává jen minimum potřebné pro budoucí rozhodnutí?
+- Je návratový signál konkrétní?
+- Nevzniklo zvláštní sledování jen pro pocit jistoty?
+- Neuchováváme osobní trasy, screenshoty nebo exporty, které už splnily účel?
+- Ví vlastník, kdy se položka příště potká v běžném rytmu?
+
+Uzavření první kontroly má být krátké, ale nesmí být vágní. Dobrá uzavírací věta říká, co platí, co se ruší a kdy se věc případně vrátí. Když tohle chybí, systém se tváří prořezaně, ale staré větve rostou dál pod stolem. A pod stolem se špatně zalévá i debugguje.
+
 ## Pracovní log
 
+- 2026-06-03: Doplněna Příloha WT o uzavření první kontroly nového provozního stavu: uzavírací věta, čtyři typy uzavření, zrušení přechodové stopy, zákaz zvláštní péče bez konkrétního selhání, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WS o první kontrole nového provozního stavu po ročním prořezání: ověření prvního reálného průchodu, čtyři výsledné stavy, zákaz kontroly kontroly, privacy-first minimum, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WR o uzavření ročního prořezání do nového provozního stavu: kanonické místo, aktivní a zrušený spouštěč, jednověté uzavření, privacy-first dočištění datové stopy, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha WQ o ročním prořezání zralého rytmu: test živosti, pět rozhodnutí po roce, privacy-first úklid starých důkazů, karta, mini workshop a checklist.
