@@ -174638,8 +174638,331 @@ Položku [název] po prvním běžném použití uzavíráme jako [stav]. Dělá
 
 Uzavření prvního běžného použití je malá brzda proti nekonečné péči. Když klid drží, nechte ho držet. Když zůstane stopa, ukliďte ji. Když systém závisí na člověku, doplňte nejbližší nápovědu. Když se objeví nový signál, dejte mu vlastní malou otázku. Codyho komentář: dobrý provoz není ten, kde se všechno pořád kontroluje. Dobrý provoz je ten, kde se ví, kdy už se kontrolovat přestává.
 
+## Příloha XS: Druhé běžné použití v klidovém provozu
+
+Po prvním běžném použití už víte, jestli položka opravdu přešla do klidového provozu, nebo jestli po sobě nechala jednu stopu, nepsanou znalost či nový signál. Druhé běžné použití má jinou roli. Nemá znovu dokazovat totéž. Má potvrdit, že se uzavírací stav z minula nevrátil zadními dveřmi do zvláštní péče.
+
+Začněte jednoduchou kontrolní větou:
+
+```text
+Při druhém běžném použití jsme pracovali podle uzavření z minula, ne podle jeho historie.
+```
+
+Pokud tato věta nejde napsat pravdivě, položka není v klidovém provozu. Možná je pořád užitečná, ale tým kolem ní ještě nese starý dohled, staré materiály nebo závislost na konkrétním člověku. Druhý průchod je dobrý právě tím, že to ukáže bez velkého auditu.
+
+Příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Uzavření z minula:
+Ponechat v klidovém provozu; další návrat jen při dvou case studies po sobě mimo kanonický checklist.
+
+Druhé běžné použití:
+Nová case study vznikla z redakčního playbooku, bez dočasné karty a bez dotazu na autora poslední opravy.
+
+Výsledek:
+Klid se opakuje. Položka zůstává mimo zvláštní péči.
+```
+
+Tady není potřeba slavit, zakládat nový report ani hledat další zlepšení. Dvě běžná použití za sebou jsou praktický signál, že položka se může chovat jako součást systému, ne jako téma, které vyžaduje samostatnou pozornost.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden stav:
+
+- Opakovaný klid: položka se použila normálně a není potřeba žádná akce.
+- Vrácená stará stopa: stejný nebo podobný zbytek minulého režimu se objevil znovu.
+- Vrácená lidská nápověda: průchod znovu závisel na člověku, i když měla pomoct systémová nápověda.
+- Nový signál mimo klid: objevila se nová otázka, která nesouvisí s původní opravou ani s minulou stopou.
+
+Nejdůležitější je nerozšiřovat stav automaticky. Vrácená stará stopa neznamená hned audit všech dokumentů. Vrácená lidská nápověda neznamená školení celého týmu. Nový signál neznamená, že původní klid selhal. Každý stav má jednu přiměřenou reakci.
+
+### Opakovaný klid
+
+Když klid proběhl podruhé, uzavřete ho ještě kratší větou než minule:
+
+```text
+Položka prošla druhým běžným použitím bez zvláštní péče. Zůstává v klidovém provozu a nevyžaduje další kontrolní průchod.
+```
+
+Potom se zastavte. Opravdu. Další kontrola by už nebyla opatrnost, ale nová práce bez jasného účelu. Pokud se tým bojí pustit položku z ruky i po dvou čistých použitích, problém možná neleží v položce, ale v nedůvěře k vlastnímu provoznímu rytmu.
+
+Doplňková věta pro privacy-first provoz:
+
+```text
+Nadále nesbíráme data o jednotlivých použitích, nevedeme seznam uživatelů položky a nezakládáme nový report stability.
+```
+
+Tím si tým připomene, že dobrý pracovní systém nepotřebuje sledovat každý svůj nádech. Pokud položka funguje v běžné práci, stačí návratový signál, ne průběžné pozorování lidí.
+
+### Vrácená stará stopa
+
+Když se stará stopa objeví podruhé, už nejde jen o náhodný zbytek. Je to pravděpodobně slabé místo v cestě ke zdroji pravdy. Pořád ale platí: řešte nejbližší místo, ne celou historii.
+
+Zápis:
+
+```text
+Vrácená stopa:
+
+Kde se objevila poprvé:
+
+Kde se objevila podruhé:
+
+Co mají místa společné:
+
+Nejmenší oprava cesty:
+
+Co se neotevírá:
+
+Kdy je hotovo:
+```
+
+Příklad:
+
+```text
+Vrácená stopa:
+Odkaz na starou briefingovou šablonu.
+
+Kde se objevila poprvé:
+V interní poznámce k redakčnímu rozcestníku.
+
+Kde se objevila podruhé:
+V checklistu pro publikaci case study.
+
+Co mají místa společné:
+Obě místa odkazují na podklady pro začátek práce, ale nejsou kanonickým domovem briefu.
+
+Nejmenší oprava cesty:
+Upravit jeden vstupní odkaz v redakčním rozcestníku tak, aby vedl na playbook, a ve staré šabloně přidat archivní poznámku.
+
+Co se neotevírá:
+Celý obsahový systém, všechny historické case studies ani nový schvalovací proces.
+
+Kdy je hotovo:
+Nový editor začne brief z playbooku bez otevření staré šablony.
+```
+
+Privacy-first hranice: nesnažte se vrácenou stopu dokazovat sledováním kliků v dokumentech. Stačí projít pracovní cestu a opravit vstupní bod. Pokud ke zjištění potřebujete osobní historii používání dokumentů, pravděpodobně jste z malého úklidu udělali zbytečně invazivní měření.
+
+### Vrácená lidská nápověda
+
+Pokud se i druhý běžný průchod opřel o stejného člověka, původní systémová nápověda nebyla dost blízko práci, nebo nebyla dost konkrétní. Neberte to jako chybu člověka. Člověk jen zakryl díru v systému.
+
+Nejdřív porovnejte:
+
+```text
+Jaká nápověda měla pomoct:
+
+Kde byla umístěná:
+
+Jaká pomoc od člověka se přesto stala:
+
+Proč systémová nápověda nestačila:
+
+Jedna oprava nápovědy:
+
+Další průchod bez člověka:
+```
+
+Příklad:
+
+```text
+Jaká nápověda měla pomoct:
+V rozcestníku je věta, že nové case studies používají brief v redakčním playbooku.
+
+Kde byla umístěná:
+Pod seznamem starých materiálů.
+
+Jaká pomoc od člověka se přesto stala:
+Editor se zeptal, jestli je stará šablona pořád platná.
+
+Proč nápověda nestačila:
+Byla vidět až po starých odkazech, takže přišla pozdě.
+
+Jedna oprava:
+Přesunout kanonický odkaz nahoru a staré šablony označit jako archiv.
+
+Další průchod:
+Další case study začne z horního odkazu bez dotazu.
+```
+
+Tento stav ještě není důvod k velkému školení. Školení často jen přenese zodpovědnost ze systému na paměť lidí. Lepší je přepsat nejbližší pracovní místo tak, aby správná volba byla vidět dřív než stará možnost.
+
+### Nový signál mimo klid
+
+Nový signál při druhém použití může být cenný, ale nesmí se přilepit k původní položce jako důkaz, že klid selhal. Původní položka mohla fungovat dobře a současně se při práci mohla objevit nová potřeba.
+
+Oddělte je:
+
+```text
+Původní položka:
+
+Stav původní položky:
+
+Nový signál:
+
+Proč nepatří do původního klidového provozu:
+
+Nová úzká otázka:
+
+Nejmenší bezpečný důkaz:
+
+Co se neotevírá:
+
+Co kvůli tomu nesbíráme:
+```
+
+Příklad:
+
+```text
+Původní položka:
+Checklist případové studie.
+
+Stav původní položky:
+Zůstává v klidovém provozu.
+
+Nový signál:
+Editor potřebuje odlišit veřejný přínos projektu od interního provozního detailu zákazníka.
+
+Proč nepatří do původního klidu:
+Checklist funguje, ale nová otázka se týká bezpečné formulace důkazu.
+
+Nová úzká otázka:
+Jak přidat jeden vzor věty pro popis přínosu bez identifikovatelných provozních detailů?
+
+Nejmenší bezpečný důkaz:
+Jedna syntetická formulace použitá v návrhu case study bez přenosu interních dat do nové tabulky.
+
+Co se neotevírá:
+Nová databáze citací, plošná revize všech case studies ani externí nástroj na schvalování textů.
+
+Co nesbíráme:
+Neukládáme nové zákaznické screenshoty, interní čísla ani osobní poznámky z obchodních hovorů.
+```
+
+Codyho komentář: nová otázka není automaticky požár. Někdy je to jen produkt, marketing nebo provoz, který potkal další normální situaci. Hasičskou stanici kvůli tomu nestavte; stačí vědět, kde je kýbl s vodou.
+
+### Karta druhého běžného použití
+
+```text
+Položka:
+
+Kanonické místo:
+
+Uzavírací stav z prvního použití:
+
+Druhá běžná pracovní situace:
+
+Jak se položka použila:
+
+Výsledek:
+- opakovaný klid / vrácená stará stopa / vrácená lidská nápověda / nový signál
+
+Jedna věta závěru:
+
+Jedna akce nebo žádná:
+
+Stop podmínka akce:
+
+Co se neotevírá:
+
+Co mažeme, přesouváme nebo zkracujeme:
+
+Co nesbíráme:
+
+Další návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Kanonické místo:
+Redakční playbook.
+
+Uzavírací stav z prvního použití:
+Ponechat v klidovém provozu.
+
+Druhá běžná pracovní situace:
+Příprava další case study pro web.
+
+Jak se položka použila:
+Editor otevřel checklist z playbooku a nepotřeboval dočasnou kartu ani dotaz na autora poslední opravy.
+
+Výsledek:
+opakovaný klid
+
+Jedna věta závěru:
+Checklist se podruhé použil jako běžná součást práce a zůstává mimo zvláštní péči.
+
+Jedna akce nebo žádná:
+Žádná.
+
+Stop podmínka akce:
+Není potřeba.
+
+Co se neotevírá:
+Další kontrolní průchod, redakční audit ani nové měření používání.
+
+Co mažeme, přesouváme nebo zkracujeme:
+Nic.
+
+Co nesbíráme:
+Nesbíráme data o konkrétních lidech, kteří checklist otevřeli.
+
+Další návratový signál:
+Dvě po sobě jdoucí case studies obejdou kanonický checklist nebo se vrátí stará briefingová šablona.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-04
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: připomeňte uzavírací stav z prvního použití.
+2. Minuta 2: popište druhou běžnou pracovní situaci.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: napište jednu akci nebo potvrďte, že žádná akce není.
+5. Minuta 5: zavřete rozsah, data a návratový signál.
+
+Výstup:
+
+```text
+Položka [název] při druhém běžném použití dopadla jako [výsledek]. Děláme [akce/žádná akce], neotevíráme [rozsah], nesbíráme [data] a další návrat nastane při [signál].
+```
+
+### Checklist druhého běžného použití
+
+- Navazuje druhý průchod na uzavírací stav z prvního použití?
+- Šlo znovu o běžnou práci, ne o další kontrolu pro jistotu?
+- Použila se položka z kanonického místa?
+- Vybrali jsme jeden ze čtyř výsledků?
+- U opakovaného klidu nevzniká žádná nová akce?
+- U vrácené staré stopy opravujeme nejbližší cestu ke zdroji pravdy?
+- U vrácené lidské nápovědy zlepšujeme systém, ne paměť člověka?
+- U nového signálu oddělujeme novou otázku od původní položky?
+- Je napsané, co se neotevírá?
+- Je jasné, co mažeme, přesouváme nebo zkracujeme?
+- Nevzniká nové sledování jednotlivých lidí, kliků, dokumentů ani pomocné exporty bez účelu?
+- Má položka návratový signál, který nevyžaduje průběžný dohled?
+- Ví vlastník, jestli má něco udělat, nebo položku nechat v klidu?
+
+Druhé běžné použití je test zdrženlivosti. Pokud klid drží podruhé, nechte ho být. Pokud se vrací stará stopa nebo lidská nápověda, opravte nejbližší pracovní místo. Pokud se objeví nový signál, oddělte ho od původní položky a otevřete malou otázku. Smyslem není mít dokonale opečovaný systém. Smyslem je mít systém, který pomáhá, uklízí po sobě a nesbírá data jen proto, že má strach z ticha.
+
 ## Pracovní log
 
+- 2026-06-04: Doplněna Příloha XS o druhém běžném použití v klidovém provozu: opakovaný klid, vrácená stará stopa, vrácená lidská nápověda, nový signál, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o převodu potvrzené lokální opravy do stabilního předávacího pravidla: kanonický domov, přepis do přítomného času, předání, privacy-first úklid, karta a checklist.
 - 2026-06-04: Doplněna Příloha XQ o prvním běžném použití po klidovém provozu: rozlišení klidu, staré stopy, nepsané znalosti a nového signálu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XP o uzavření první lehké kontroly do klidového provozu: čtyři uzavírací stavy, návrat do klidu, drobný úklid, přepnutí rytmu, úzká otázka, privacy-first uzavření, karta, mini workshop a checklist.
