@@ -7673,6 +7673,173 @@ Návratový signál:
 
 Ověření převodu první reakce je malá pojistka proti tomu, aby se uzavřená epizoda dál táhla v provozu. Když běžný rytmus stačí, nechte ho stačit. Když nestačí, opravte nejbližší pracovní místo. A když se ukáže větší problém, otevřete novou otázku bez toho, aby se z každé staré opravy stal trvalý dohled.
 
+## Jak uzavřít ověřený převod jako běžné pravidlo
+
+Ověřený převod první reakce je hotový až ve chvíli, kdy tým ví, co z něj zůstává v běžné práci a co už se nemá dál hlídat. Bez tohoto uzavření se snadno stane zvláštní věc: převod sice drží, ale kolem něj dál přežívá malý servisní režim. Někdo kontroluje starou poznámku, někdo připomíná pravidlo v chatu, někdo si nechává pomocný export "pro jistotu". Problém je pryč, ale jeho provozní stín zůstal.
+
+Uzavření proto udělejte jednou větou:
+
+```text
+Převod drží v běžném rytmu, proto z něj zůstává jen:
+```
+
+Za dvojtečku patří konkrétní pracovní pravidlo, ne pocit. Například:
+
+```text
+Převod drží v běžném rytmu, proto z něj zůstává jen jedna věta v rozcestníku šablon, návratový signál při opakovaném špatném zařazení a běžná měsíční údržba rozcestníku.
+```
+
+Taková věta říká tři věci najednou: pravidlo má domov, návrat má podmínku a mimořádná péče končí. Pokud některá část chybí, uzavření ještě není úplné.
+
+### Co převést do pravidla
+
+Do běžného pravidla patří jen to, co pomůže při dalším přirozeném použití. Ne celá historie signálu, ne seznam lidí, kteří u něj byli, ne důvody všech zamítnutých variant.
+
+Ponechte:
+
+- krátkou pracovní větu v kanonickém místě;
+- odkaz na aktuální šablonu, postup nebo rozhodovací kartu;
+- návratový signál, který říká, kdy se téma otevře mimo běžný rytmus;
+- vlastníka běžného rytmu, pokud už v systému existuje;
+- stručný záznam v pracovním logu, že mimořádná péče skončila.
+
+Odstraňte nebo zavřete:
+
+- dočasný seznam dotazů;
+- screenshoty a exporty pořízené jen kvůli ověření;
+- ruční připomínky v chatu;
+- duplicitní poznámky mimo kanonické místo;
+- staré příklady, které už vysvětlují problém místo aktuálního pravidla.
+
+Praktický test zní:
+
+```text
+Kdyby nový člověk narazil na stejnou situaci za měsíc, našel by pravidlo v běžném pracovním místě bez znalosti celé historie?
+```
+
+Pokud ano, pravidlo může žít v provozu. Pokud ne, ještě nejde o uzavření; jde jen o dobře popsaný závěr, který se do práce nepropsal.
+
+### Přepište jazyk z opravy na provoz
+
+Ověřovací text často mluví jazykem opravy: "po posledním problému", "aby se to neopakovalo", "dočasně sledujeme", "zkontrolovat po dalším použití". V běžném pravidle už takový jazyk překáží. Připomíná minulou epizodu a drží tým v režimu opatrnosti.
+
+Přepište ho do přítomného času:
+
+```text
+Opravárenská věta:
+Po posledním zmatku kontrolujeme, jestli editor správně rozlišil slabý podnět a potvrzenou změnu.
+
+Běžné pravidlo:
+Slabý podnět se zavírá poznámkou nebo návratovým signálem. Potvrzená změna se převádí do karty změny.
+```
+
+Druhá věta nepotřebuje znát incident. Vede práci přímo. To je rozdíl mezi pamětí systému a věčným připomínáním staré chyby.
+
+### Uzavírací karta pravidla
+
+```text
+Ověřený převod:
+
+Běžný rytmus:
+
+Kanonické místo:
+
+Pravidlo, které zůstává:
+
+Návratový signál:
+
+Co končí jako mimořádná péče:
+
+Co mažeme, anonymizujeme nebo označujeme jako uzavřené:
+
+Co dál výslovně nesbíráme:
+
+Vlastník běžného rytmu:
+
+Datum další běžné kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Ověřený převod:
+První reakce na nejasnost v rozcestníku šablon drží i při měsíčním review.
+
+Běžný rytmus:
+Měsíční údržba rozcestníku.
+
+Kanonické místo:
+Rozcestník review šablon.
+
+Pravidlo, které zůstává:
+Slabý podnět se zavírá poznámkou nebo návratovým signálem. Potvrzená změna se převádí do karty změny.
+
+Návratový signál:
+Další člověk i po úpravě opakovaně zařadí potvrzenou změnu jako slabý podnět.
+
+Co končí jako mimořádná péče:
+Ruční připomínka před review a dočasný seznam dotazů k rozcestníku.
+
+Co mažeme, anonymizujeme nebo označujeme jako uzavřené:
+Mažeme dočasný seznam dotazů, ponecháváme anonymizovanou poznámku v logu.
+
+Co dál výslovně nesbíráme:
+Nesledujeme klikání v dokumentaci, čas čtení ani jména lidí, kteří rozcestník použili.
+
+Vlastník běžného rytmu:
+Editor rukopisu.
+
+Datum další běžné kontroly:
+Příští měsíční údržba, jen v rámci standardního review.
+```
+
+### Kdy pravidlo ještě nezavírat
+
+Nezavírejte převod do běžného pravidla, pokud se při ověření ukázalo, že běžný rytmus funguje jen díky člověku, který si pamatuje historii. To není stabilita. To je tichá ruční záloha.
+
+Pozor hlavně na tyto signály:
+
+- pravidlo fungovalo jen proto, že ho někdo předem připomněl;
+- člověk našel správný postup až po prohledání starého chatu;
+- kanonické místo obsahuje správný odkaz, ale neříká, kdy ho použít;
+- návratový signál existuje jen v hlavě vlastníka;
+- dočasné poznámky pořád vypadají jako aktivní instrukce.
+
+V takové situaci neotevírejte celou historii. Opravte nejbližší pracovní místo a ověřte jen změněnou část při dalším běžném použití.
+
+### Privacy-first uzavření
+
+Uzavření ověřeného převodu má snížit datovou stopu. Pokud po něm zůstává víc evidence než před ním, něco je špatně. Běžné pravidlo má potřebovat méně dohledu, ne víc.
+
+Do uzavření napište:
+
+```text
+Po uzavření pravidla nepotřebujeme:
+```
+
+Příklad:
+
+```text
+Po uzavření pravidla nepotřebujeme sledovat osobní použití rozcestníku, ukládat screenshoty rozhodnutí ani držet dočasný seznam dotazů. Stačí aktuální věta v rozcestníku, návratový signál a anonymizovaný záznam změny.
+```
+
+Codyho komentář: dobré pravidlo je trochu neviditelné. Člověk podle něj pracuje a nemá pocit, že kvůli tomu vstoupil do zvláštního režimu. Jakmile pravidlo potřebuje vlastní hlídání, vlastní export a vlastní hlídání hlídání, už to není pravidlo. Je to malý interní seriál. A ty mívají moc epizod.
+
+### Checklist uzavření ověřeného převodu
+
+- Je jasné, že převod držel v běžném rytmu, ne jen ve speciálním testu?
+- Má pravidlo jedno kanonické místo?
+- Je text přepsaný z jazyka opravy do jazyka běžné práce?
+- Ví nový člověk, co má udělat, bez znalosti celé historie?
+- Je návratový signál konkrétní a navázaný na výsledek práce?
+- Skončily ruční připomínky, dočasné seznamy a pomocné kontroly?
+- Nezůstává druhý zdroj pravdy mimo kanonické místo?
+- Smazali jsme nebo anonymizovali ověřovací stopy, které už nemají účel?
+- Je napsané, jaká data, kliky, exporty nebo osobní evidence dál nevznikají?
+- Zůstává další kontrola jen v běžném rytmu?
+
+Uzavření ověřeného převodu je malý konec, ale důležitý. Tým si nechá poučení, ne dočasnou nervozitu. Pravidlo dál žije tam, kde se podle něj pracuje, a stará epizoda se nevrací pokaždé, když někdo otevře šablonu.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -175429,6 +175596,7 @@ Uzavření druhého běžného použití je poslední brzda před nekonečnou ú
 
 ## Pracovní log
 
+- 2026-06-04: Doplněna úvodní podkapitola o uzavření ověřeného převodu jako běžného pravidla: přepis z opravy do provozu, kanonické místo, konec mimořádné péče, privacy-first úklid, karta a checklist.
 - 2026-06-04: Doplněna Příloha XT o uzavření druhého běžného použití v klidovém provozu: čtyři uzavírací stavy, návratový signál, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XS o druhém běžném použití v klidovém provozu: opakovaný klid, vrácená stará stopa, vrácená lidská nápověda, nový signál, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o převodu potvrzené lokální opravy do stabilního předávacího pravidla: kanonický domov, přepis do přítomného času, předání, privacy-first úklid, karta a checklist.
