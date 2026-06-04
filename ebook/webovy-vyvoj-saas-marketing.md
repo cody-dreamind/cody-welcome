@@ -435,6 +435,8 @@ Typické věci, které u odloženého kroku nedělejte:
 
 Můžete udělat jednu věc: nechat směrovku. Směrovka říká, kde je rozhodnutí uložené a jaký signál ho znovu otevře. To stačí. Odložený krok nemá potřebovat vlastní malý ekosystém.
 
+Když někdo navrhne "aspoň malou přípravu", vraťte se k návratovému signálu. Pokud ještě nenastal, příprava je jen práce bez oprávnění. Užitečnější je zapsat, co by se připravovalo jako první po návratu, a tím téma zavřít do chvíle, kdy pro něj existuje nový důvod.
+
 ### Parkoviště není backlog
 
 Mnoho týmů má místo, kam odkládá nápady. Říká se mu backlog, parkoviště, someday list nebo ještě horší kreativní název. Problém není v názvu. Problém je v tom, že se z parkoviště snadno stane druhý aktivní plán.
