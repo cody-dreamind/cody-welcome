@@ -920,6 +920,120 @@ Datum další kontroly, pokud je potřeba:
 
 První použití je dobrá brzda proti dvěma extrémům. První extrém je víra, že předání automaticky funguje, protože bylo napsané. Druhý extrém je panika, že každé drobné tření znamená špatné rozhodnutí. Většinou stačí podívat se na první reálný průchod, opravit jedno pracovní místo a nechat zavřenou věc opravdu zavřenou.
 
+## Jak udělat lokální opravu předání
+
+Lokální oprava předání je správná ve chvíli, kdy rozhodnutí samo o sobě drží, ale jedno pracovní místo pořád nese starou verzi. Může to být poznámka v CRM, starý text v interní šabloně, komentář v backlogu, popisek u formuláře nebo automatizace, která stále čeká na původní větší návrh. Cílem není znovu otevřít celé téma. Cílem je odstranit konkrétní stopu, která by při další práci zbytečně vrátila starou debatu.
+
+Začněte rozlišením:
+
+```text
+Co je pořád správně:
+
+Kde předání selhalo:
+
+Jaká stará stopa tam zůstala:
+
+Jaký jeden pracovní artefakt upravujeme:
+
+Co tím výslovně znovu neotevíráme:
+
+Jaká data díky tomu dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Co je pořád správně:
+Plný lead scoring zůstává zavřený. Obchodu zatím stačí jedna otázka na rozhodovací horizont.
+
+Kde předání selhalo:
+V CRM zůstala stará poznámka "doplnit scoring podle velikosti firmy".
+
+Jaká stará stopa tam zůstala:
+Poznámka naznačuje, že se má sbírat velikost firmy, i když rozhodnutí říká opak.
+
+Jeden pracovní artefakt:
+Upravíme CRM poznámku u poptávkového procesu.
+
+Co znovu neotevíráme:
+Neotevíráme scoring, nové formulářové pole ani obohacování kontaktů.
+
+Jaká data dál nesbíráme:
+Velikost firmy, rozpočet a automaticky doplněné firemní profily.
+```
+
+Dobrá lokální oprava je nepompézní. Má změnit místo, kde člověk skutečně pracuje, a pak skončit. Pokud se z ní stane nové kolečko analýzy, tým pravděpodobně plete špatně propsané rozhodnutí se špatným rozhodnutím.
+
+### Co patří do lokální opravy
+
+Lokální oprava může být:
+
+- přepsání jedné věty v pracovní šabloně;
+- změna stavu jedné backlogové karty;
+- odstranění staré poznámky, která už neplatí;
+- doplnění návratového signálu na místo, kde tým plánuje práci;
+- zrušení dočasného exportu, který vznikl během ověřování;
+- oprava popisku pole, aby nenutil člověka sbírat údaj, který už není potřeba.
+
+Lokální oprava nemá být:
+
+- redesign celého procesu;
+- nový měřicí plán;
+- plošný audit všech šablon;
+- návrat k původnímu velkému návrhu;
+- automatizace jen proto, že se jednou něco zapomnělo propsat.
+
+Pravidlo je jednoduché: opravte nejbližší pracovní místo, které způsobilo tření. Pokud najdete druhé a třetí místo se stejnou chybou, zapište to jako nový signál. Ale první reakce má být pořád malá.
+
+### Lokální oprava bez růstu datové stopy
+
+Privacy-first hodnota lokální opravy je v tom, že drží problém u zdroje. Když člověk nenajde správnou šablonu, nemusíte hned přidávat nový tracker, auditní tabulku nebo detailnější CRM pole. Často stačí opravit text, stav karty nebo vlastnictví rozhodnutí.
+
+Před opravou si položte tři otázky:
+
+- Jde problém vyřešit úpravou existujícího pracovního místa?
+- Potřebujeme kvůli opravě sbírat nový údaj, nebo jen odstranit starou stopu?
+- Nevzniká z lokální chyby zbytečný požadavek na nový nástroj?
+
+Codyho komentář: nejlevnější privacy-first zlepšení je často smazaná věta. Není to tak efektní jako nový dashboard, ale má jednu krásnou vlastnost: nikam neposílá další data a obvykle funguje hned.
+
+### Karta lokální opravy
+
+```text
+Název předání:
+
+První použití ukázalo:
+
+Rozhodnutí zůstává:
+- platné / částečně platné / znovu otevřít
+
+Lokální problém:
+
+Jedno místo opravy:
+
+Konkrétní změna:
+
+Co znovu neotevíráme:
+
+Co uklízíme:
+
+Jaká data dál nesbíráme:
+
+Kdy ověříme, že oprava drží:
+```
+
+### Checklist lokální opravy
+
+- Je jasné, že problém je v předání, ne v samotném rozhodnutí?
+- Vybrali jsme jedno pracovní místo, které opravíme?
+- Nepřepisujeme celý proces kvůli jedné staré stopě?
+- Je zapsané, co znovu neotevíráme?
+- Uklízíme starou poznámku, kartu, export nebo šablonu, která by téma vracela?
+- Nevzniká kvůli opravě nové pole, tracker, dashboard nebo dodavatelský účet?
+- Má oprava jednoduché ověření při dalším běžném použití?
+
+Lokální oprava je hotová, když další člověk narazí na stejnou situaci a už neuvidí starou instrukci. Nemusí znát celou historii. Má jen najít správné aktuální pravidlo a podle něj udělat další krok.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -173380,3 +173494,4 @@ Uzavření druhého běžného použití je malý, ale důležitý konec. Stabil
 - 2026-06-03: Doplněna krátká úvodní poznámka k první reakci na návratový signál: nejdřív vybrat stav, udělat jednu odpovídající reakci a teprve potom rozhodovat o dalším rozboru.
 - 2026-06-03: Doplněna úvodní podkapitola o převodu uzavřené první reakce na návratový signál zpět do běžného rytmu: tři převody podle stavu, úklid pracovních stop, mezistav, privacy-first hranice a checklist.
 - 2026-06-03: Doplněna Příloha XC o návratu k položce po dlouhodobém klidu: rozlišení lokální chyby, chybějící hrany, slabého rytmu a skutečného návratu problému, karta návratu, privacy-first hranice, mini workshop a checklist.
+- 2026-06-04: Doplněna úvodní podkapitola o lokální opravě předání po prvním použití: rozlišení chyby v předání od chyby rozhodnutí, úklid jedné staré stopy, privacy-first hranice a checklist.
