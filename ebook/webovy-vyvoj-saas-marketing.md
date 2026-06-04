@@ -172907,8 +172907,401 @@ Položka [název] se po druhém běžném použití uzavírá jako [stav]. Děl�
 
 Uzavření druhého běžného použití je malý, ale důležitý konec. Stabilní věc necháte být. Drobnou stopu uklidíte. Rytmus posunete blíž ke skutečné práci. Vrácený problém otevřete úzce. Všechno ostatní je jen snaha nepustit z ruky něco, co už má žít bez vás.
 
+## Příloha XO: První lehká kontrola stabilního provozního stavu
+
+Stabilní provozní stav není výmluva pro nekonečný dohled. Jakmile položka prošla druhým běžným použitím a byla uzavřená jako stabilní, má se vrátit do normální práce. První lehká kontrola slouží jen k tomu, aby tým po čase ověřil, že stabilita opravdu drží bez zvláštní péče, starých pomocných stop a nového měření "pro jistotu".
+
+Tahle kontrola má být malá. Nevracejte se k celé historii opravy. Nečtěte všechny staré poznámky. Nehledejte, jestli by šlo položku ještě zlepšit. Zeptejte se jen:
+
+```text
+Použila se položka v běžné práci?
+Pomohla tam, kde měla?
+Nepotřebovala zvláštní vysvětlení, starou stopu nebo autora poslední opravy?
+Nevytváří zbytečnou datovou nebo provozní cenu?
+```
+
+Pokud na tyto otázky odpovíte čistě, kontrola končí. Nejlepší výsledek první lehké kontroly je krátká věta, ne nová sada úkolů.
+
+Příklad:
+
+```text
+Checklist případové studie se po stabilním uzavření použil při další běžné case study. Vlastník ho našel v redakčním playbooku, nepotřeboval starý export příkladů a nevzniklo nové měření. Stav zůstává stabilní, další kontrola proběhne až v běžném pololetním review playbooku.
+```
+
+Tahle věta dělá dvě věci najednou: potvrzuje stabilitu a brání návratu do opravárenského režimu. Stabilní věc nemá každý týden dokazovat, že smí existovat. Ano, i dokumenty mají právo nebýt pořád na koberečku.
+
+### Kdy kontrolu vůbec dělat
+
+První lehká kontrola dává smysl jen tehdy, když nastal jeden z těchto okamžiků:
+
+- položka byla od stabilního uzavření alespoň jednou použita v běžné práci;
+- přišel přirozený revizní rytmus, například měsíční nebo pololetní review;
+- objevil se návratový signál zapsaný v uzavírací kartě;
+- někdo narazil na starou stopu, která měla být po uzavření pryč.
+
+Pokud nenastal žádný z těchto okamžiků, kontrolu nespouštějte. Čekání není problém. Problém je předstírat aktivitu tam, kde se zatím nic reálného nestalo.
+
+Špatný důvod ke kontrole:
+
+```text
+Už je to pár týdnů, tak se na to radši podíváme celé znovu.
+```
+
+Lepší důvod:
+
+```text
+Položka se použila při dalším zákaznickém výstupu a chceme ověřit, jestli proběhla bez staré pomocné karty.
+```
+
+První formulace otevírá historii. Druhá ověřuje současnou práci.
+
+### Čtyři výsledné stavy
+
+Po lehké kontrole vyberte jeden ze čtyř stavů:
+
+- Stabilita potvrzena: položka drží a zůstává v běžném rytmu.
+- Drobný úklid: položka drží, ale jedna stará stopa se musí odstranit.
+- Rytmus nesedí: položka funguje, ale její kontrola nebo použití se děje ve špatný okamžik.
+- Návratový signál potvrzen: původní nebo příbuzný problém se opravdu vrátil a otevírá se úzká otázka.
+
+Neexistuje stav "ještě ji budeme sledovat". Pokud se má něco sledovat, napište co, proč, kde skončí a jaká data kvůli tomu nevzniknou. Bez těchto čtyř věcí je sledování jen nepojmenovaná nejistota.
+
+### Stabilita potvrzena
+
+Stabilita je potvrzená, když položka splní původní pracovní slib bez toho, aby musel někdo sahat do starých poznámek, dočasných exportů nebo hlavy člověka, který změnu naposledy opravoval.
+
+Zapište jen minimum:
+
+```text
+Stav:
+stabilita potvrzena
+
+Kde se položka použila:
+
+Co fungovalo:
+
+Co nebylo potřeba:
+
+Další běžný rytmus:
+
+Co teď nemažeme, protože má stále účel:
+
+Co dál neřešíme:
+```
+
+Příklad:
+
+```text
+Stav:
+stabilita potvrzena
+
+Kde se položka použila:
+Při přípravě další případové studie.
+
+Co fungovalo:
+Vlastník našel checklist v redakčním playbooku a použil ho před rozhovorem.
+
+Co nebylo potřeba:
+Starý export připomínek, dotaz v chatu ani pomoc autora poslední opravy.
+
+Další běžný rytmus:
+Pololetní review redakčního playbooku.
+
+Co teď nemažeme:
+Kanonický checklist a obecné modelové formulace.
+
+Co dál neřešíme:
+Nepřidáváme další kontrolu po každé case study.
+```
+
+Stabilitu nezapisujte jako vítězný román. Čím kratší zápis, tím jasnější signál týmu: položka je běžná součást práce, ne křehká výjimka pod sklem.
+
+### Drobný úklid
+
+Drobný úklid je správný, když položka funguje, ale kontrola odhalí jednu zbytkovou stopu. Typicky starý odkaz v poznámce, dočasnou kartu po ověření, duplicitní alias nebo pomocný dokument, který už nikdo nemá používat.
+
+Pravidlo je jednoduché: jedna stopa, jedno místo, jeden vlastník.
+
+Šablona:
+
+```text
+Stav:
+drobný úklid
+
+Stará stopa:
+
+Proč vadí:
+
+Jedna úklidová akce:
+
+Kde se provede:
+
+Kdo ji zavře:
+
+Co se tím neotevírá:
+
+Privacy-first dopad:
+```
+
+Příklad:
+
+```text
+Stav:
+drobný úklid
+
+Stará stopa:
+V interním rozcestníku je pořád odkaz na dočasnou kartu ověření checklistu.
+
+Proč vadí:
+Nový člověk by mohl obejít kanonický redakční playbook.
+
+Jedna úklidová akce:
+Odkaz smazat a ponechat jen odkaz na playbook.
+
+Kde:
+Interní rozcestník pro obsah.
+
+Kdo ji zavře:
+Vlastník rozcestníku.
+
+Co se tím neotevírá:
+Neřeší se celá informační architektura, onboarding ani struktura playbooku.
+
+Privacy-first dopad:
+Dočasná karta se smaže, protože už nemá pracovní účel.
+```
+
+Pokud během drobného úklidu najdete další dvě stopy, nezvětšujte automaticky rozsah. Zapište je do samostatné poznámky a zavřete původní jednu věc. Jinak se z lehké kontroly stane archeologická výprava po všech zapomenutých dokumentech. To zní dobrodružně, ale většinou to jen sežere odpoledne.
+
+### Rytmus nesedí
+
+Někdy je obsah stabilní, ale jeho kontrola nebo použití přichází ve špatný čas. Položka se najde až po rozhodnutí, připomínka chodí moc pozdě, nebo se kontroluje v měsíčním review, i když reálný spouštěč nastává při každém zákaznickém předání.
+
+V takové situaci neměňte hned obsah. Nejdřív opravte napojení na práci.
+
+Šablona:
+
+```text
+Stav:
+rytmus nesedí
+
+Položka obsahově:
+drží / potřebuje jen drobnou formulaci
+
+Kde rytmus selhal:
+
+Skutečný pracovní spouštěč:
+
+Nové napojení:
+
+Co rušíme:
+
+Další ověření:
+
+Co neměříme:
+```
+
+Příklad:
+
+```text
+Stav:
+rytmus nesedí
+
+Položka obsahově:
+drží
+
+Kde rytmus selhal:
+Kontrola checklistu proběhla až při předpublikačním review, ale rozhodnutí o publikovatelných důkazech se dělá před rozhovorem.
+
+Skutečný pracovní spouštěč:
+Brief před zákaznickým rozhovorem.
+
+Nové napojení:
+Do briefu přidat jednu větu a odkaz na checklist.
+
+Co rušíme:
+Samostatnou pozdní připomínku v předpublikačním review.
+
+Další ověření:
+Při další case study ověřit, zda se checklist otevřel před rozhovorem.
+
+Co neměříme:
+Nesledujeme otevření dokumentu, čas v dokumentu ani aktivitu konkrétních lidí.
+```
+
+Rytmická oprava má odstranit tření, ne přidat dohled. Když potřebujete vědět, jestli se něco použilo, často stačí zkontrolovat hotový pracovní výstup. Nemusíte kvůli tomu sledovat každý klik.
+
+### Návratový signál potvrzen
+
+Návratový signál je potvrzený, když se objeví přesně ten typ problému, kvůli kterému jste si v uzavírací kartě řekli, že se k položce vrátíte. Ne každé nepohodlí je návratový signál. Jeden dotaz nového člověka může být normální učení. Návrat stejné chyby ve dvou výstupech už je jiný případ.
+
+Nejdřív oddělte signál od šumu:
+
+```text
+Co se stalo:
+
+Je to zapsaný návratový signál?
+ano / ne / částečně
+
+Jaký je pracovní důkaz:
+
+Co by se stalo, kdybychom nic neměnili:
+
+Jak úzce to otevřeme:
+```
+
+Příklad:
+
+```text
+Co se stalo:
+Dvě nové case studies znovu použily zákaznické formulace, které neměly být publikované.
+
+Je to zapsaný návratový signál?
+Ano, uzavírací karta uváděla opakovaný problém s publikovatelnými důkazy.
+
+Pracovní důkaz:
+Problém se objevil ve dvou předpublikačních kontrolách, ne jen v jednom dotazu.
+
+Co by se stalo bez změny:
+Tým by dál zachytával citlivé formulace až pozdě a ručně je přepisoval.
+
+Jak úzce to otevřeme:
+Otevřeme jen otázku modelových anonymizovaných formulací v checklistu.
+```
+
+Úzké otevření potom napište stejně přísně jako v předchozích přílohách:
+
+```text
+Nová úzká otázka:
+
+Nejmenší další krok:
+
+Co se neotevírá:
+
+Privacy-first hranice:
+
+Kdy se znovu zavře:
+```
+
+Privacy-first hranice je tady zásadní. Návratový signál často láká k tomu, aby tým začal sbírat víc podkladů, přepisů nebo příkladů. Někdy je to potřeba, ale výchozí otázka má být opačná: jak opravit pracovní místo bez rozšíření sběru dat?
+
+### Karta první lehké kontroly
+
+```text
+Položka:
+
+Kanonické místo:
+
+Původní stabilizační věta:
+
+Důvod kontroly:
+- běžné použití / revizní rytmus / návratový signál / nalezená stará stopa
+
+Co jsme kontrolovali:
+
+Výsledek:
+- stabilita potvrzena / drobný úklid / rytmus nesedí / návratový signál potvrzen
+
+Jedna věta závěru:
+
+Jedna akce:
+- žádná / úklid / rytmické napojení / úzké znovuotevření
+
+Co se ruší:
+
+Co se výslovně neotevírá:
+
+Privacy-first úklid nebo hranice:
+
+Další běžný rytmus nebo návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Kanonické místo:
+Redakční playbook.
+
+Původní stabilizační věta:
+Checklist žije v redakčním playbooku a používá se před rozhovorem.
+
+Důvod kontroly:
+běžné použití
+
+Co jsme kontrolovali:
+Jednu novou case study a cestu k checklistu.
+
+Výsledek:
+drobný úklid
+
+Jedna věta závěru:
+Checklist funguje v běžné práci, ale starý odkaz v interním rozcestníku může obejít kanonické místo.
+
+Jedna akce:
+Smazat starý odkaz a ponechat jen odkaz na redakční playbook.
+
+Co se ruší:
+Dočasná karta ověření a starý alias v rozcestníku.
+
+Co se neotevírá:
+Celý redakční playbook, struktura case studies ani nové měření obsahu.
+
+Privacy-first úklid:
+Dočasná karta se smaže po přenosu závěru do changelogu.
+
+Další rytmus:
+Pololetní review redakčního playbooku.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-04
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte důvod kontroly.
+2. Minuta 2: projděte jedno reálné použití nebo jednu nalezenou stopu.
+3. Minuta 3: vyberte jeden ze čtyř výsledných stavů.
+4. Minuta 4: napište jednu větu závěru.
+5. Minuta 5: určete jednu akci nebo vědomě žádnou.
+6. Minuta 6: zapište privacy-first úklid, hranici a další rytmus.
+
+Výstup:
+
+```text
+Položka [název] po první lehké kontrole zůstává ve stavu [stav]. Děláme [žádná akce / jedna akce], rušíme [stopa], neotevíráme [rozsah] a vrátíme se k ní při [rytmus nebo návratový signál].
+```
+
+### Checklist první lehké kontroly
+
+- Má kontrola skutečný důvod, ne jen pocit, že "už by se mělo něco projít"?
+- Kontrolovali jsme současnou práci, ne celou historii opravy?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- U potvrzené stability nevzniká další dohled?
+- U drobného úklidu řešíme jen jednu stopu?
+- U rytmického problému měníme napojení na práci, ne automaticky obsah?
+- U potvrzeného návratového signálu otevíráme jen úzkou otázku?
+- Je napsané, co se ruší?
+- Je napsané, co se výslovně neotevírá?
+- Smazali nebo přesunuli jsme dočasné podklady, které už nemají účel?
+- Nevznikl nový tracker, report, export ani sledování konkrétních lidí?
+- Má položka další běžný rytmus nebo jasný návratový signál?
+- Ví vlastník, jestli má dělat akci, nebo naopak nic nedělat?
+
+První lehká kontrola má stabilní položku nechat dospět. Když drží, nechte ji být. Když překáží jedna stará stopa, ukliďte ji. Když nesedí rytmus, přesuňte napojení. Když se opravdu vrátil problém, otevřete jen jeho nejmenší pracovní část. Všechno ostatní je jen další vrstva správy nad věcí, která měla původně práci zjednodušit.
+
 ## Pracovní log
 
+- 2026-06-04: Doplněna Příloha XO o první lehké kontrole stabilního provozního stavu: důvod kontroly, čtyři výsledné stavy, potvrzení stability, drobný úklid, rytmická oprava, návratový signál, privacy-first karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XN o uzavření druhého běžného použití do stabilního provozního stavu: čtyři uzavírací stavy, stabilní stav, lokální dočištění, rytmická úprava, úzké znovuotevření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XM o druhém běžném použití po uzavření prvního průchodu: ověření návratu do provozu, čtyři výsledky, lokální dočištění, rytmická oprava, návrat problému, privacy-first karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XL o uzavření prvního běžného použití po lehké periodické kontrole: čtyři uzavírací stavy, čistý průchod, lokální tření, návrat staré stopy, nový signál, karta, mini workshop, privacy-first hranice a checklist.
