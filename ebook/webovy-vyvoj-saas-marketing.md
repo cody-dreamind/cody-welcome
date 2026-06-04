@@ -7840,6 +7840,200 @@ Codyho komentář: dobré pravidlo je trochu neviditelné. Člověk podle něj p
 
 Uzavření ověřeného převodu je malý konec, ale důležitý. Tým si nechá poučení, ne dočasnou nervozitu. Pravidlo dál žije tam, kde se podle něj pracuje, a stará epizoda se nevrací pokaždé, když někdo otevře šablonu.
 
+## První běžná údržba po uzavření pravidla
+
+Uzavřené pravidlo se nemá hned znovu hlídat jako čerstvá oprava. Má projít první běžnou údržbou přesně tam, kde žije: v měsíčním review, v kontrole šablon, v produktovém rituálu, v provozním checklistu nebo v edičním rytmu. Pokud kvůli němu vytvoříte speciální schůzku, speciální tabulku a speciální připomínku, pravidlo sice formálně skončilo jako mimořádná péče, ale prakticky jste mu jen dali nový kabát.
+
+První běžná údržba má odpovědět na jednu otázku:
+
+```text
+Funguje pravidlo i tehdy, když mu nevěnujeme zvláštní pozornost?
+```
+
+To je jiná otázka než "je pravidlo dokonalé". Běžná práce nepotřebuje dokonalé pravidlo. Potřebuje pravidlo, které je najitelné, použitelné a nezvyšuje zbytečně datovou stopu. Pokud tyto tři věci drží, nechte ho být. Stabilita často vzniká tím, že tým přestane do dobře fungujícího místa pořád sahat.
+
+### Nezačínejte historií
+
+Při první údržbě neotevírejte starý incident, starou první reakci ani celý ověřovací záznam. Historie pomohla pravidlo vytvořit, ale při běžné údržbě má být jen zálohou. Začněte aktuálním pracovním místem.
+
+Postup:
+
+1. Otevřete kanonické místo pravidla.
+2. Přečtěte pravidlo bez starých poznámek.
+3. Zkuste podle něj projít jednu reálnou nebo čerstvě typickou situaci.
+4. Zapište jen tření, které by bránilo dalšímu použití.
+5. Teprve pokud pravidlo nejde použít, vraťte se k historii.
+
+Příklad:
+
+```text
+Kanonické místo:
+Rozcestník review šablon.
+
+Běžná situace:
+Přišel podnět, že jedna šablona mate nového kolegu.
+
+Pravidlo říká:
+Slabý podnět se zavírá poznámkou nebo návratovým signálem. Potvrzená změna se převádí do karty změny.
+
+Výsledek:
+Pravidlo stačí. Podnět je slabý, protože zatím popisuje jeden neověřený případ. Zapisujeme návratový signál při opakování, neotvíráme kartu změny.
+```
+
+Taková kontrola je krátká a klidná. Nehledá drama. Hledá, jestli pravidlo pořád pomáhá rozhodnout.
+
+### Tři servisní otázky
+
+Při první běžné údržbě položte jen tři otázky:
+
+- Najde člověk pravidlo ve chvíli, kdy ho potřebuje?
+- Řekne pravidlo, co má udělat teď, ne jen proč kdysi vzniklo?
+- Nepotřebuje pravidlo další osobní údaje, exporty, screenshoty nebo ruční dohled?
+
+Když odpověď na všechny tři otázky zní ano, údržba je hotová. Nepřidávejte vylepšení jen proto, že vás při čtení napadla hezčí formulace. Hezčí formulace je povolená jen tehdy, když snižuje tření v reálném použití.
+
+Když jedna odpověď zní ne, řešte nejbližší pracovní místo:
+
+- Pravidlo nejde najít: opravte rozcestník, název, interní odkaz nebo umístění.
+- Pravidlo nevede k akci: přepište jednu větu do rozhodovacího tvaru.
+- Pravidlo žádá moc dat: zkraťte evidenci na nejmenší důkaz nebo vraťte ruční agregovaný signál.
+
+Neřešte všechny tři oblasti najednou, pokud nemusíte. První údržba má potvrdit provozní životnost, ne spustit nový redesign systému pravidel.
+
+### Karta první běžné údržby
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Běžný rytmus, ve kterém kontrola proběhla:
+
+Reálná nebo typická situace:
+
+Šlo pravidlo najít?
+
+Vedlo pravidlo k rozhodnutí?
+
+Jaká datová stopa při použití vznikla?
+
+Výsledek údržby:
+- nechat beze změny / drobně upravit místo / přepsat jednu větu / otevřít novou otázku
+
+Co výslovně neotevíráme:
+
+Co mažeme, zavíráme nebo dál nesbíráme:
+
+Datum další běžné kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Slabý podnět se zavírá poznámkou nebo návratovým signálem. Potvrzená změna se převádí do karty změny.
+
+Kanonické místo:
+Rozcestník review šablon.
+
+Běžný rytmus, ve kterém kontrola proběhla:
+Měsíční údržba rozcestníku.
+
+Reálná nebo typická situace:
+Jeden kolega označil šablonu jako nejasnou, ale zatím chybí druhý signál nebo dopad na výstup.
+
+Šlo pravidlo najít?
+Ano, v rozcestníku u části "podněty k úpravám".
+
+Vedlo pravidlo k rozhodnutí?
+Ano, podnět zůstává jako návratový signál, nevzniká karta změny.
+
+Jaká datová stopa při použití vznikla?
+Jen anonymizovaná poznámka v logu údržby.
+
+Výsledek údržby:
+Nechat beze změny.
+
+Co výslovně neotevíráme:
+Starou ověřovací epizodu ani kompletní redesign rozcestníku.
+
+Co mažeme, zavíráme nebo dál nesbíráme:
+Nevzniká screenshot, osobní skóre použití ani seznam lidí, kteří šablonu otevřeli.
+
+Datum další běžné kontroly:
+Příští měsíční údržba.
+```
+
+### Kdy údržba otevře novou otázku
+
+Nová otázka je na místě jen tehdy, když běžné použití ukáže problém, který pravidlo nemá řešit. To je důležité rozlišení. Když pravidlo nejde najít, opravte navigaci. Když má věta nejasný slovesný tvar, přepište větu. Když ale situace ukáže, že tým neví, kdo smí rozhodnout, zda je podnět slabý nebo potvrzený, už nejde o text pravidla. Jde o vlastnictví rozhodnutí.
+
+Novou otázku pište takto:
+
+```text
+Během údržby jsme zjistili:
+
+Pravidlo samo o sobě nestačí, protože:
+
+Nová otázka je:
+
+Nejbližší malé ověření:
+
+Původní pravidlo zatím:
+- necháváme / drobně upravujeme / dočasně označujeme jako omezené
+```
+
+Příklad:
+
+```text
+Během údržby jsme zjistili:
+Podněty k šablonám se hromadí, protože nikdo nemá jasně dané právo je zavřít jako slabé.
+
+Pravidlo samo o sobě nestačí, protože:
+Říká rozdíl mezi slabým podnětem a potvrzenou změnou, ale neříká, kdo rozhodne v případě sporu.
+
+Nová otázka je:
+Kdo vlastní rozhodnutí o stavu podnětu v měsíčním review šablon?
+
+Nejbližší malé ověření:
+V příštím review určíme jednoho vlastníka a sledujeme, jestli se podněty zavřou bez další schůzky.
+
+Původní pravidlo zatím:
+Necháváme, jen k němu přidáme vlastníka review.
+```
+
+Takový zápis chrání rozsah. Pravidlo není automaticky špatně jen proto, že odhalilo sousední díru v odpovědnosti.
+
+### Privacy-first údržba
+
+První běžná údržba má být co nejméně invazivní. Nepotřebujete měřit, kdo pravidlo četl, kolikrát klikl na odkaz, jak dlouho měl otevřený dokument ani kdo udělal chybu. Potřebujete vědět, jestli pracovní situace skončila rozhodnutím.
+
+Stačí obvykle jeden z těchto signálů:
+
+- anonymizovaný záznam, že pravidlo pomohlo zavřít situaci;
+- jedna poznámka o tření v kanonickém místě;
+- počet otevřených a zavřených podnětů v běžném review bez jmen;
+- konkrétní rozhodovací věta, která vznikla při použití pravidla.
+
+Pokud údržba vyžaduje nový tracker, nový export nebo osobní kontrolní seznam, nejdřív se ptejte, jestli pravidlo není příliš složité. Privacy-first provoz nezačíná bannerem ani právním textem. Začíná tím, že si tým neplete kontrolu systému s kontrolou lidí.
+
+Codyho komentář: dobrá údržba pravidla je nudná v tom nejlepším smyslu. Otevřete místo, projdete situaci, zapíšete výsledek a jdete dál. Když z toho vznikne festival komentářů, barevných stavů a osobních tabulek, pravidlo možná přežilo, ale zdravý rozum si vzal volno.
+
+### Checklist první běžné údržby
+
+- Proběhla kontrola v běžném rytmu, ne ve speciálním režimu?
+- Začali jsme kanonickým místem místo starou historií?
+- Vyzkoušeli jsme pravidlo na jedné reálné nebo typické situaci?
+- Je jasné, jestli pravidlo šlo najít?
+- Vedlo pravidlo ke konkrétnímu rozhodnutí?
+- Nevznikla kvůli kontrole nová osobní evidence?
+- Opravili jsme jen nejbližší pracovní místo, pokud stačila drobná úprava?
+- Otevřeli jsme novou otázku pouze tehdy, když problém leží mimo pravidlo?
+- Je zapsané, co výslovně neotevíráme?
+- Zůstává další kontrola v běžném rytmu?
+
+První běžná údržba je test dospělosti pravidla. Pokud pravidlo funguje bez zvláštní péče, nechte ho pracovat. Pokud potřebuje drobnou opravu, udělejte ji tam, kde se používá. A pokud odhalí větší otázku, otevřete ji jako novou práci, ne jako nekonečné pokračování staré epizody.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -176914,3 +177108,4 @@ Uzavření prvního tichého měsíce je práce proti provozní setrvačnosti. K
 - 2026-06-04: Doplněna úvodní podkapitola o ověření stabilního předávacího pravidla při prvním běžném předání: mini test, čtyři výsledné stavy, návrat pravidla do běžného rytmu, privacy-first úklid, karta a checklist.
 - 2026-06-04: Doplněna Příloha XR o uzavření prvního běžného použití po klidovém provozu: čtyři uzavírací stavy, práce se starou stopou, systémová nápověda, oddělení nového signálu, privacy-first karta a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o ověření převodu první reakce v běžném rytmu: běžný cyklus, návrat mimořádné péče, privacy-first ověření, karta a checklist.
+- 2026-06-04: Doplněna úvodní podkapitola o první běžné údržbě po uzavření pravidla: kontrola v normálním rytmu, servisní otázky, karta údržby, otevření nové otázky jen při skutečném přesahu a privacy-first hranice.
