@@ -176353,8 +176353,308 @@ Položku [název] po prvním tichém měsíci uzavíráme jako [stav]. Děláme 
 
 Uzavření prvního tichého měsíce je práce proti provozní setrvačnosti. Když klid drží, nenechte ho proměnit v nový rituál. Když zůstala jedna stopa, ukliďte ji. Když se signál vrátil, reagujte úzce. To je celé kouzlo, žádná slavobrána z procesních diagramů.
 
+## Příloha XW: První kvartální návrat po dlouhodobém klidu
+
+Dlouhodobý klid neznamená, že položka už nikdy nepotřebuje pozornost. Znamená, že pozornost dostane jen v rytmu, který má smysl, nebo při návratovém signálu, který byl předem pojmenovaný. První kvartální návrat je proto kontrola zdravého odstupu: ověří, jestli položka pořád slouží práci, aniž by kolem ní vznikla nová vrstva sledování.
+
+Nezačínejte otázkou "co bychom mohli zlepšit". Ta je příliš hladová. Začněte otázkou:
+
+```text
+Změnilo se za poslední kvartál něco tak podstatného, že dlouhodobý klid přestal chránit práci?
+```
+
+Pokud odpověď není jasné ano, položka nemá dostat nový projekt. Má dostat krátký záznam, že klid drží, a vrátit se zpět do běžného provozu.
+
+### Co při kvartálním návratu nezkoumat
+
+Kvartální návrat není audit celé historie. Neprocházejte všechny staré debaty, pomocné poznámky, exporty a dávno zavřené varianty. Kontrolujte jen tři věci:
+
+- aktuální pracovní výstupy, které položku používaly;
+- návratový signál uložený v kanonickém místě;
+- změny v okolí, které mohly pravidlo zneplatnit.
+
+Příklad: pokud je v dlouhodobém klidu checklist případové studie, nepotřebujete číst všechny staré návrhy osnov. Podívejte se na poslední dvě case studies, ověřte, jestli začaly z kanonického checklistu, a zkontrolujte, zda se nezměnila nabídka, publikum nebo distribuční kanál tak výrazně, že checklist už nemůže dávat dobrý výstup.
+
+Typické věci, které při kvartálním návratu nepatří do rozsahu:
+
+- měření kliků na dokumentaci;
+- kontrola, kdo přesně pravidlo otevřel;
+- obnovení starých pracovních tabulek;
+- porovnávání všech historických verzí;
+- nové formulářové pole nebo tracker jen kvůli pocitu jistoty;
+- plošný dotazník týmu, pokud stačí jeden reálný pracovní výstup.
+
+Privacy-first princip je jednoduchý: dlouhodobý klid se ověřuje výsledkem práce, ne dohledem nad lidmi.
+
+### Čtyři výsledky kvartálního návratu
+
+Po prvním kvartálním návratu vyberte jeden ze čtyř stavů:
+
+- Klid drží: položka pořád funguje a nic neměníte.
+- Klid potřebuje drobný úklid: pravidlo funguje, ale jedna stará stopa nebo odkaz ruší orientaci.
+- Rytmus se má ztenčit: i kvartální návrat je zbytečně častý a položka stačí kontrolovat jen při signálu.
+- Návratový signál nastal: otevírá se jedna úzká reakce, ne celý starý problém.
+
+Stav "přidat pravidelné sledování" používejte jen tehdy, když víte, jaké rozhodnutí bude sledování opravdu podporovat. Pokud neumíte dokončit větu "budeme to sledovat, abychom rozhodli...", sledování zatím nemá účel.
+
+### Klid drží
+
+Klid drží, když poslední pracovní výstupy vznikly bez návratu starého problému, kanonické místo je pořád správné a návratový signál nenastal.
+
+Zápis:
+
+```text
+Položka:
+
+Kanonické místo:
+
+Co jsme v kvartálu ověřili:
+
+Proč klid drží:
+
+Další návrat:
+- jen při signálu / při dalším kvartálním review / v jiném rytmu
+
+Co dál neděláme:
+```
+
+Příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Kanonické místo:
+Redakční playbook.
+
+Co jsme v kvartálu ověřili:
+Tři nové case studies začaly z checklistu a nepotřebovaly starou briefingovou šablonu.
+
+Proč klid drží:
+Výstupy mají konzistentní strukturu a obchod neposílá starý odkaz.
+
+Další návrat:
+Jen při návratovém signálu: dvě po sobě jdoucí case studies obejdou checklist.
+
+Co dál neděláme:
+Nezavádíme kvartální report používání, nesledujeme otevření dokumentu a neobnovujeme starý seznam kontrol.
+```
+
+Pokud klid drží, nejlepší akce je žádná akce. Ano, je to podezřele těžké rozhodnutí na to, že se tváří tak jednoduše.
+
+### Klid potřebuje drobný úklid
+
+Drobný úklid zvolte, když samotné pravidlo funguje, ale jedna stopa v okolí pořád vytváří tření. Tady se neotevírá pravidlo. Opravuje se okolí pravidla.
+
+Šablona:
+
+```text
+Funkční část:
+
+Rušící stopa:
+
+Proč nejde o návrat problému:
+
+Jedna úklidová akce:
+
+Stop podmínka úklidu:
+
+Co zůstává zavřené:
+
+Co dál nesledujeme:
+```
+
+Příklad:
+
+```text
+Funkční část:
+Autoři používají checklist v playbooku.
+
+Rušící stopa:
+V onboardingovém rozcestníku zůstává archivní odkaz na starou šablonu.
+
+Proč nejde o návrat problému:
+Nové case studies vznikly správně; chyba je jen v orientačním odkazu pro nové lidi.
+
+Jedna úklidová akce:
+Označit starý odkaz jako archiv a přidat kanonický odkaz na checklist.
+
+Stop podmínka úklidu:
+Nový autor najde checklist z onboardingového rozcestníku bez dotazu.
+
+Co zůstává zavřené:
+Redakční workflow, stará šablona a měření používání dokumentace.
+
+Co dál nesledujeme:
+Kliky, časy čtení, osobní průchody a ruční historii otevření.
+```
+
+Drobný úklid má zůstat drobný. Pokud během něj najdete tři další staré stopy, nepokračujte potichu. Zapište nový vzor a otevřete samostatnou otázku se stop podmínkou.
+
+### Rytmus se má ztenčit
+
+Někdy první kvartální návrat ukáže, že i kvartální rytmus je moc. Položka je stabilní, návratový signál je jasný a běžná práce ji používá bez tření. V takové situaci je zdravé rytmus ztenčit: například z kvartální kontroly na kontrolu jen při návratovém signálu, nebo na pololetní kontrolu společně s širším review standardů.
+
+Ztenčení rytmu není zanedbání. Je to úklid pozornosti.
+
+Zápis:
+
+```text
+Proč byl dosavadní rytmus:
+
+Co jsme ověřili:
+
+Proč už stačí slabší rytmus:
+
+Nový rytmus:
+
+Návratový signál mimo rytmus:
+
+Co díky ztenčení neděláme:
+```
+
+Příklad:
+
+```text
+Proč byl dosavadní rytmus:
+Po uzavření prvního tichého měsíce jsme chtěli ověřit, že checklist nepřestane být viditelný.
+
+Co jsme ověřili:
+Checklist se použil ve třech reálných výstupech a stará šablona se nevrátila.
+
+Proč už stačí slabší rytmus:
+Riziko není v samotném checklistu, ale jen v budoucí změně nabídky nebo distribučního kanálu.
+
+Nový rytmus:
+Kontrola jen při změně nabídky, změně redakčního playbooku nebo při dvou obejitých case studies.
+
+Návratový signál mimo rytmus:
+Dvě po sobě jdoucí case studies nevzniknou z checklistu.
+
+Co díky ztenčení neděláme:
+Nevedeme kvartální kontrolní tabulku, neposíláme připomínky a neměříme používání dokumentu.
+```
+
+Privacy-first hodnota ztenčení je velká: méně kontrol znamená méně poznámek, méně osobních stop a méně pokušení měřit chování lidí místo kvality výstupu.
+
+### Návratový signál nastal
+
+Když se návratový signál opravdu potvrdí, nebraňte se mu. Kvůli tomu byl zapsaný. Důležité je nepřevést signál automaticky na původní velký rozsah.
+
+Postup:
+
+```text
+Původní návratový signál:
+
+Co se přesně potvrdilo:
+
+Co se nepotvrdilo:
+
+Nejmenší reakce:
+
+Stop podmínka reakce:
+
+Co zůstává zavřené:
+
+Privacy-first hranice:
+```
+
+Příklad:
+
+```text
+Původní návratový signál:
+Dvě po sobě jdoucí case studies obejdou checklist.
+
+Co se přesně potvrdilo:
+Obě začaly ze starého odkazu v obchodní follow-up šabloně.
+
+Co se nepotvrdilo:
+Nejde o slabý redakční checklist ani o potřebu nového schvalovacího workflow.
+
+Nejmenší reakce:
+Vyměnit odkaz v obchodní follow-up šabloně a přidat jednu větu, kdy checklist použít.
+
+Stop podmínka reakce:
+Další case study začne z nového odkazu bez ručního přesměrování.
+
+Co zůstává zavřené:
+Redesign playbooku, nový approval proces a tracking používání dokumentace.
+
+Privacy-first hranice:
+Ověřujeme další výstup, ne osobní chování obchodníků nebo autorů.
+```
+
+Návratový signál není povolenka k širšímu zásahu. Je to povolenka k přesné reakci.
+
+### Karta kvartálního návratu
+
+```text
+Položka:
+
+Kanonické místo:
+
+Datum kvartálního návratu:
+
+Původní stav:
+
+Původní návratový signál:
+
+Co jsme ověřili v reálné práci:
+
+Výsledek:
+- klid drží / drobný úklid / ztenčit rytmus / signál nastal
+
+Jedna věta rozhodnutí:
+
+Jedna akce nebo žádná:
+
+Nový rytmus nebo návratový signál:
+
+Co zůstává zavřené:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Co dál nesledujeme:
+
+Vlastník:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: otevřete kanonické místo a původní návratový signál.
+2. Minuta 2: najděte jeden až tři poslední reálné pracovní výstupy.
+3. Minuta 3: ověřte, jestli výstupy použily aktuální pravidlo.
+4. Minuta 4: pojmenujte, zda se změnilo okolí položky.
+5. Minuta 5: vyberte jeden ze čtyř výsledků.
+6. Minuta 6: napište jednu akci nebo výslovně žádnou.
+7. Minuta 7: zapište, co dál nesledujete a co zůstává zavřené.
+
+Výstup:
+
+```text
+Po kvartálním návratu je položka [název] ve stavu [výsledek]. Děláme [akce/žádná akce], další návrat nastane při [signál/rytmus] a dál nesledujeme [data].
+```
+
+### Checklist prvního kvartálního návratu
+
+- Kontrolujeme dlouhodobě klidnou položku, ne starý projekt?
+- Ověřujeme reálné pracovní výstupy, ne chování jednotlivých lidí?
+- Našli jsme původní návratový signál v kanonickém místě?
+- Rozlišili jsme klid, drobný úklid, ztenčení rytmu a potvrzený signál?
+- Pokud klid drží, nevzniká nová kontrola?
+- Pokud jde o drobný úklid, opravujeme jen jednu rušící stopu?
+- Pokud rytmus ztenčujeme, zůstává jasný návratový signál mimo rytmus?
+- Pokud signál nastal, otevíráme nejmenší reakci?
+- Je napsané, co zůstává zavřené?
+- Mažeme nebo anonymizujeme dočasné poznámky bez dalšího účelu?
+- Nevzniká měření kliků, otevření dokumentů, osobních průchodů ani výkonu lidí?
+- Umí vlastník jednou větou říct, proč se položka vrací do klidu, ztenčuje rytmus, nebo otevírá jen úzkou reakci?
+
+První kvartální návrat má chránit dlouhodobý klid před dvěma chybami: zapomenutím a přehnanou péčí. Když položka funguje, nechte ji fungovat. Když ruší jedna stopa, ukliďte jednu stopu. Když je rytmus moc silný, ztenčete ho. A když se signál opravdu vrátí, reagujte přesně tam, kde vznikl.
+
 ## Pracovní log
 
+- 2026-06-04: Doplněna Příloha XW o prvním kvartálním návratu po dlouhodobém klidu: kontrola reálných výstupů, čtyři výsledné stavy, ztenčení rytmu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XV o uzavření prvního tichého měsíce do dlouhodobého klidu: tři uzavírací stavy, kanonické místo, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XU o první tichý měsíc po uzavření do klidu: rozlišení potvrzeného klidu, rušeného klidu a potvrzeného signálu, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o uzavření ověřeného převodu jako běžného pravidla: přepis z opravy do provozu, kanonické místo, konec mimořádné péče, privacy-first úklid, karta a checklist.
