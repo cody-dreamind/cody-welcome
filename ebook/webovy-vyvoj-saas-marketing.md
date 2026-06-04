@@ -1356,6 +1356,142 @@ Datum převodu:
 
 Stabilizace lokální opravy je hotová, když se další člověk nepotká s opravou, ale s normálním pravidlem. To je dobrý konec. Ne proto, že by historie nebyla důležitá, ale proto, že běžná práce nemá nést každou minulou chybu na zádech.
 
+## Jak ověřit stabilní předávací pravidlo při prvním běžném předání
+
+Stabilní pravidlo není ověřené tím, že dobře vypadá v dokumentu. Ověřené je až tehdy, když ho někdo použije při běžném předání bez toho, aby potřeboval znát původní opravu, historickou debatu nebo člověka, který pravidlo přepsal. První běžné předání po stabilizaci proto není audit. Je to krátký test, jestli pravidlo opravdu žije v práci.
+
+Dobrá otázka zní:
+
+```text
+Dokáže nový nebo méně zasvěcený člověk použít aktuální pravidlo ve správném místě, bez návratu ke staré stopě a bez nového sběru dat?
+```
+
+Pokud ano, pravidlo se může vrátit do normálního rytmu. Pokud ne, neotvírejte hned celou historii opravy. Nejdřív zjistěte, co přesně selhalo: domov pravidla, formulace, předávací trasa, nebo datová hranice.
+
+### Mini test prvního předání
+
+Vyberte jedno skutečné předání, které by stejně proběhlo: předání leadu do obchodu, převod zákaznického požadavku do delivery, onboarding nového člověka, publikaci nové stránky, předání supportního zjištění do produktu nebo kontrolu marketingového výstupu. Nevyrábějte umělou zkoušku jen proto, aby bylo co měřit. Umělá zkouška často testuje pozornost týmu, ne kvalitu pravidla.
+
+Při předání sledujte jen čtyři věci:
+
+- Najde člověk správný zdroj pravdy bez doptávání?
+- Použije aktuální pracovní větu, ne starou historickou poznámku?
+- Vznikne očekávaný výstup bez skryté ruční pomoci?
+- Zůstane zachovaná privacy-first hranice, tedy nepřidá se zbytečný údaj, export, screenshot ani tracker?
+
+To stačí. Pokud test rozšíříte na všechno, co by se dalo zlepšit, zase z prvního předání uděláte malý audit. A malý audit má nepříjemný zvyk převléknout se za velký audit, jen co mu dáte druhou tabulku.
+
+### Čtyři výsledné stavy
+
+Po prvním běžném předání vyberte jeden stav:
+
+- Drží: pravidlo bylo nalezené, použité a nevytvořilo novou datovou stopu.
+- Drží s drobným třením: výstup vznikl, ale člověk se musel jednou doptat nebo hledal zdroj pravdy moc dlouho.
+- Nedrží lokálně: problém je v jednom pracovním místě, například ve špatném odkazu, staré šabloně nebo nejasné formulaci.
+- Ukazuje širší vzor: stejné tření se objevuje mimo toto pravidlo nebo se opakuje napříč více předáními.
+
+Stav "drží s drobným třením" nepoužívejte jako omluvu k dalšímu projektu. Většinou stačí jedno zkrácení věty, lepší odkaz nebo odstranění staré poznámky. Stav "ukazuje širší vzor" naopak neřešte jedním rychlým přepisem, pokud je jasné, že problém leží v celé trase předání. Tam už vzniká nová pracovní otázka.
+
+Příklad:
+
+```text
+První běžné předání:
+Obchod předával nový kvalifikovaný lead do delivery.
+
+Aktuální pravidlo:
+Předáváme rozhodovací horizont, problém a očekávaný výsledek. Velikost firmy nepoužíváme jako automatický kvalifikační údaj.
+
+Co se stalo:
+Obchod našel discovery šablonu, vyplnil tři správné otázky a nepoužil staré skóre podle velikosti firmy. Delivery se doptalo jen na termín první technické konzultace.
+
+Stav:
+Drží s drobným třením.
+
+Jedna oprava:
+Do šablony přidáme místo pro domluvený další krok. Nevracíme staré scoringové pole.
+
+Privacy-first výsledek:
+Nevzniká nové CRM pole ani automatické obohacování firmy.
+```
+
+Tady pravidlo funguje. Drobná oprava se týká dalšího kroku, ne původního scoringu. To je důležitý rozdíl: nevracíte se k historii, jen dotahujete běžnou práci.
+
+### Kdy už pravidlo nehlídat zvlášť
+
+Pravidlo se může vrátit do normálního rytmu, když platí tři podmínky:
+
+- první běžné předání proběhlo bez návratu ke staré stopě;
+- případné tření má lokální opravu s jasným vlastníkem;
+- privacy-first hranice se udržela bez nového kontrolního mechanismu.
+
+Po splnění těchto podmínek zavřete zvláštní sledování. Není potřeba držet další "pro jistotu" kontrolu, pokud by jen připomínala starý problém. Stabilní pravidlo má být normální práce. Když ho budete hlídat jako výjimku, naučíte tým, že opravy nikdy doopravdy nekončí.
+
+Zápis může být velmi krátký:
+
+```text
+Stabilní předávací pravidlo prošlo prvním běžným předáním. Zdroj pravdy byl použitý, stará stopa se nevrátila a nevznikl nový údaj. Pravidlo se vrací do běžného revizního rytmu.
+```
+
+### Privacy-first kontrola po prvním předání
+
+Po prvním předání projděte datovou stopu stejně prakticky jako pracovní výstup. Hledejte hlavně dočasné věci, které vznikly kvůli ověření: poznámky v chatu, kopie šablony, screenshoty, exporty z CRM, komentáře s osobními údaji nebo ruční seznam "pro jistotu".
+
+Rozdělte je do tří stavů:
+
+- Nechat: aktuální pravidlo, krátký výsledek ověření, návratový signál.
+- Zkrátit: rozhodovací poznámku, pokud obsahuje zbytečné detaily o konkrétním člověku, firmě nebo interním průchodu.
+- Smazat: pracovní kopie, screenshoty, exporty a dočasné komentáře, které už neslouží žádnému rozhodnutí.
+
+Privacy-first hodnota není jen v tom, že nepřidáte nový tracker. Je i v tom, že po dobrém ověření uklidíte stopy, které byly užitečné jen během ověření. Jinak se z "dočasně" stane "někde to asi ještě máme" a to je oblíbený evropský sport, který bychom mohli konečně nechat jiným.
+
+### Karta prvního běžného předání
+
+```text
+Stabilní pravidlo:
+
+Kanonický domov:
+
+První běžné předání:
+
+Kdo pravidlo použil:
+- role, ne nutně jméno
+
+Výsledek:
+- drží / drží s drobným třením / nedrží lokálně / ukazuje širší vzor
+
+Co člověk našel bez pomoci:
+
+Kde vzniklo tření:
+
+Jedna lokální oprava, pokud je potřeba:
+
+Co neotevíráme:
+
+Privacy-first výsledek:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Návrat do běžného rytmu:
+- ano / ne / po lokální opravě
+
+Datum:
+```
+
+### Checklist prvního běžného předání
+
+- Proběhlo ověření při skutečném předání, které by nastalo i bez testu?
+- Našel člověk kanonický zdroj pravdy bez znalosti původní opravy?
+- Použil aktuální pravidlo místo staré historické poznámky?
+- Vznikl očekávaný pracovní výstup bez skryté ruční podpory?
+- Rozlišili jsme drobné tření od lokální chyby a širšího vzoru?
+- Pokud pravidlo drží, vrací se do běžného rytmu místo zvláštního hlídání?
+- Pokud nedrží lokálně, opravujeme jedno pracovní místo?
+- Pokud ukazuje širší vzor, vznikla nová pracovní otázka s hranicí?
+- Nevznikl nový údaj, tracker, export ani kontrolní seznam lidí?
+- Uklidili jsme dočasné poznámky a důkazy z ověření?
+
+První běžné předání má dát pravidlu klid, ne další pozornost. Když obstojí, nechte ho pracovat. Když neobstojí, opravte přesně místo, kde selhalo. A když ukáže širší vzor, otevřete novou otázku bez toho, aby se stará lokální oprava tvářila jako nekonečný seriál.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -174920,3 +175056,4 @@ První běžné použití po klidovém provozu má potvrdit obyčejnost. Když p
 - 2026-06-03: Doplněna Příloha XC o návratu k položce po dlouhodobém klidu: rozlišení lokální chyby, chybějící hrany, slabého rytmu a skutečného návratu problému, karta návratu, privacy-first hranice, mini workshop a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o lokální opravě předání po prvním použití: rozlišení chyby v předání od chyby rozhodnutí, úklid jedné staré stopy, privacy-first hranice a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o uzavření lokální opravy předání po dalším použití: stavy opravy, rozlišení nedotažené opravy od širšího vzoru, privacy-first úklid, karta uzavření a checklist.
+- 2026-06-04: Doplněna úvodní podkapitola o ověření stabilního předávacího pravidla při prvním běžném předání: mini test, čtyři výsledné stavy, návrat pravidla do běžného rytmu, privacy-first úklid, karta a checklist.
