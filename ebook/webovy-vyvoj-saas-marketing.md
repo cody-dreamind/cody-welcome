@@ -171841,8 +171841,388 @@ Po prvním běžném použití má položka [název] stav [uzavírací stav]. Pr
 
 Uzavření prvního použití je malé, ale chrání celý rytmus. Bez něj se dobré položky drží pod zbytečným dohledem a drobná tření se tváří jako strategické problémy. S ním tým ví, co funguje, co se lokálně opravilo, co se uklidilo a co dostalo vlastní otázku. To je přesně ten druh pořádku, který není vidět na screenshotu, ale je cítit v každém dalším pracovním průchodu.
 
+## Příloha XM: Druhé běžné použití po uzavření prvního průchodu
+
+Druhé běžné použití je zkouška, jestli se položka opravdu vrátila do provozu. První průchod mohl být čistý, lokálně opravený, uklizený po staré stopě nebo oddělený od nového signálu. Druhý průchod má ukázat, jestli se z toho nestal nenápadný speciální režim: člověk si pořád pamatuje, že se má dívat pozorněji, vlastník čeká na hlášení, starý export zůstává po ruce "pro jistotu" a tým se tváří, že běžná práce je normální, i když kolem ní stojí malá kontrolní věž.
+
+Vyberte druhé použití jen tehdy, když přijde přirozeně. Neplánujte ho jako samostatný audit. Pokud se položka používá týdně, ověřte další běžný týden. Pokud se používá jednou za měsíc, počkejte na další měsíc. Pokud se používá jen při konkrétní situaci, nechte ji spustit skutečnou prací. Uměle vyvolaný průchod často potvrdí jen to, že tým umí hrát testovací scénář.
+
+Krátký vstup:
+
+```text
+Položka:
+
+Stav po prvním použití:
+- klid potvrzen / lokální oprava provedena / stará stopa uklizena / nový signál oddělen
+
+Druhé běžné použití:
+
+Kdo položku použil:
+
+Co mělo proběhnout bez zvláštní péče:
+
+Co se skutečně stalo:
+
+Výsledek druhého použití:
+- drží / drží s drobnou stopou / potřebuje rytmickou opravu / vrací problém
+```
+
+Tahle karta má být kratší než předchozí kontrola. Když je delší, pravděpodobně už nejde o druhé použití, ale o nový audit s převlečeným názvem. Ano, provozní dokumenty umí cosplay taky. Jen jim za to nedávejte další formulář.
+
+### Co druhé použití ověřuje
+
+Druhé použití neověřuje všechno. Ověřuje jen čtyři praktické věci:
+
+- Položka je dohledatelná bez autora poslední opravy.
+- Práce proběhne podle kanonického místa, ne podle staré historie.
+- Nevzniká vedlejší evidence, která by nahradila běžný rytmus.
+- Tým umí výsledek zavřít bez dalšího sledování.
+
+Pokud chcete při druhém použití měřit výkon celé šablony, spokojenost všech rolí, dopad na obchod a kvalitu zákaznických dat, zastavte se. To jsou jiné otázky. Druhé použití má být levný provozní sanity check: věc žije tam, kde má, a nepotřebuje doprovod.
+
+Příklad dobré otázky:
+
+```text
+Najde nový člověk checklist v kanonickém indexu a použije ho bez starého chatového odkazu?
+```
+
+Příklad příliš široké otázky:
+
+```text
+Zlepšil checklist kvalitu všech případových studií a marketingovou efektivitu obsahu?
+```
+
+První otázka se dá zavřít při jednom průchodu. Druhá může být užitečná, ale patří do obsahového review, ne do druhého běžného použití.
+
+### Čtyři výsledky druhého použití
+
+Po druhém použití vyberte jeden stav:
+
+- Drží: položka funguje v běžné práci bez zvláštní pomoci.
+- Drží s drobnou stopou: práce proběhla, ale zůstala malá lokální nejasnost.
+- Potřebuje rytmickou opravu: problém není v jedné větě, ale v tom, kdy nebo kde se položka používá.
+- Vrací problém: druhý průchod ukázal, že původní uzavření bylo předčasné.
+
+Stav vybírejte podle práce, ne podle pocitu. "Myslím, že je to dobré" nestačí. "Člověk našel šablonu přes index, použil ji bez dotazu a nevznikl nový export" už je použitelné.
+
+### Když stav drží
+
+Stav drží, když položka prošla druhým běžným použitím bez asistence, bez návratu starých stop a bez nové evidence. V takové chvíli je nejlepší akce žádná akce. Zapište krátkou větu a nechte položku v běžném rytmu.
+
+Šablona:
+
+```text
+Výsledek:
+drží
+
+Důkaz:
+
+Uzavření:
+Položka zůstává v běžném rytmu bez další kontroly.
+
+Co neděláme:
+
+Další návrat:
+```
+
+Příklad:
+
+```text
+Výsledek:
+drží
+
+Důkaz:
+Při další case study použil marketing redakční checklist z kanonického indexu bez dotazu v chatu a bez starého exportu.
+
+Uzavření:
+Checklist zůstává v pololetním redakčním review.
+
+Co neděláme:
+Nepřidáváme další ověřovací průchod, interní report ani sledování otevření dokumentu.
+
+Další návrat:
+Jen při dvou opakovaných problémech s dohledáním checklistu nebo při pololetním review.
+```
+
+Tady je důležité slovní spojení "bez další kontroly". Pokud po druhém čistém průchodu vznikne třetí potvrzovací průchod, tým si nevytváří kvalitu. Vytváří si zvyk nedůvěřovat vlastním uzávěrům.
+
+### Když drží s drobnou stopou
+
+Drobná stopa je malá nejasnost, která práci nezastavila. Typicky jde o nepřesný alias v indexu, starou formulaci v poznámce, chybějící odkaz z jednoho pracovního místa nebo nejasný název části. Opravuje se lokálně a hned. Nepovyšuje se na projekt.
+
+Šablona:
+
+```text
+Drobná stopa:
+
+Proč nezastavila práci:
+
+Lokální dočištění:
+
+Kde je provedeno:
+
+Co tím neotevíráme:
+
+Ověření:
+bez zvláštního ověření / při příštím přirozeném použití
+```
+
+Příklad:
+
+```text
+Drobná stopa:
+V indexu byl správný název checklistu, ale starší alias zůstal v jedné onboardingové poznámce.
+
+Proč nezastavila práci:
+Člověk checklist našel přes index a poznámka nebyla zdrojem rozhodnutí.
+
+Lokální dočištění:
+Přepsat alias v onboardingové poznámce.
+
+Kde:
+Onboardingová trasa marketing role.
+
+Co neotevíráme:
+Neotevíráme celý onboarding, redakční proces ani historii pilotu.
+
+Ověření:
+Bez zvláštního ověření; pokud se poznámka použije příště, má vést na stejný kanonický název.
+```
+
+Privacy-first hodnota: drobné dočištění se dělá bez nového sběru dat. Nechcete vědět, kdo kdy otevřel kterou poznámku. Chcete odstranit jednu nejasnou hranu.
+
+### Když je potřeba rytmická oprava
+
+Rytmická oprava je potřeba, když položka sama o sobě dává smysl, ale nesedí do pracovního rytmu. Lidé ji nepoužívají v okamžiku, kdy ji potřebují. Review přichází moc pozdě. Vlastník je jinde než reálná práce. Kanonické místo existuje, ale není součástí přirozené trasy.
+
+V takové situaci nepřepisujte celý obsah. Nejprve změňte napojení na rytmus:
+
+- přidejte odkaz do místa, kde práce skutečně začíná;
+- přesuňte kontrolu z měsíčního review do konkrétního předpublikačního kroku;
+- změňte vlastníka z autora dokumentu na roli, která položku používá;
+- zkraťte připomínku na jednu větu v běžném checklistu;
+- zrušte samostatnou kartu, pokud stačí jedna položka v existujícím rytmu.
+
+Šablona:
+
+```text
+Rytmické tření:
+
+Kde práce reálně začíná:
+
+Kde položka teď žije:
+
+Rytmická oprava:
+
+Co zůstává obsahově stejné:
+
+Ověření při dalším přirozeném použití:
+
+Privacy-first hranice:
+```
+
+Příklad:
+
+```text
+Rytmické tření:
+Checklist je správně napsaný, ale používá se až po rozpracování case study.
+
+Kde práce začíná:
+V briefu před prvním rozhovorem se zákazníkem.
+
+Kde položka žije:
+V redakčním playbooku.
+
+Rytmická oprava:
+Do briefu přidat jeden odkaz na checklist a větu "zkontroluj publikovatelnost důkazů před rozhovorem".
+
+Co zůstává stejné:
+Checklist, vlastník redakčního playbooku i pololetní review.
+
+Ověření:
+Při další case study ověřit, že brief otevřel checklist před rozhovorem.
+
+Privacy-first hranice:
+Bez ukládání přepisů rozhovorů; stačí poznámka, zda byly důkazy použitelné pro publikaci.
+```
+
+Rytmická oprava často přinese víc než obsahová revize. Dokument může být dobrý a přesto nepoužitelný, pokud leží o dva kroky vedle skutečné práce.
+
+### Když se problém vrací
+
+Vrací problém znamená, že druhé použití ukázalo stejnou větev nejistoty, kterou měla předchozí práce uzavřít. Tady už nestačí drobná stopa ani rytmická oprava. Je potřeba přiznat, že původní uzavření bylo moc optimistické, a otevřít novou, ale úzkou otázku.
+
+Pozor: neotevírá se celá historie. Otevírá se jen konkrétní rozpor mezi uzavřením a realitou.
+
+Šablona:
+
+```text
+Co se vrátilo:
+
+Jaký závěr tím přestává platit:
+
+Co pořád platí:
+
+Nová úzká otázka:
+
+Nejmenší další krok:
+
+Co neotevíráme:
+
+Jaká data kvůli tomu nesbíráme:
+```
+
+Příklad:
+
+```text
+Co se vrátilo:
+Tým znovu použil starý export připomínek, protože kanonický checklist neobsahuje praktické příklady schválených důkazů.
+
+Jaký závěr přestává platit:
+Nestačí jen uklidit starý odkaz a sjednotit název.
+
+Co pořád platí:
+Kanonický checklist je správné místo a redakční review zůstává běžným rytmem.
+
+Nová úzká otázka:
+Jak do checklistu doplnit dva anonymizované příklady důkazů, aby nebyl potřeba starý export?
+
+Nejmenší další krok:
+Přidat dvě obecné modelové formulace bez zákaznických detailů.
+
+Co neotevíráme:
+Neotevíráme celý pilotní audit, strukturu case studies ani nové měření obsahu.
+
+Jaká data nesbíráme:
+Bez přepisů rozhovorů, bez screenshotů zákaznických materiálů, bez nové databáze příkladů.
+```
+
+Codyho komentář: návrat problému není ostuda. Ostuda je tvářit se, že druhý průchod byl "skoro čistý", když tým právě použil starý export jako záchranné lano. Staré záchranné lano bývá plné dat, která už nemají v aktivní práci co dělat.
+
+### Karta druhého běžného použití
+
+```text
+Položka:
+
+Kanonické místo:
+
+Stav po prvním použití:
+- klid potvrzen / lokální oprava provedena / stará stopa uklizena / nový signál oddělen
+
+Druhé běžné použití:
+
+Kdo použil položku:
+
+Co mělo proběhnout bez zvláštní péče:
+
+Co se skutečně stalo:
+
+Výsledek:
+- drží / drží s drobnou stopou / potřebuje rytmickou opravu / vrací problém
+
+Jedna akce:
+
+Co zůstává beze změny:
+
+Co se výslovně neotevírá:
+
+Privacy-first výsledek:
+
+Další návrat:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Checklist před publikací případové studie.
+
+Kanonické místo:
+Redakční playbook.
+
+Stav po prvním použití:
+stará stopa uklizena
+
+Druhé běžné použití:
+Další case study pro SaaS službu.
+
+Kdo použil položku:
+Marketing owner.
+
+Co mělo proběhnout bez zvláštní péče:
+Najít checklist přes index, použít ho před publikací a nevracet se ke starému exportu připomínek.
+
+Co se skutečně stalo:
+Checklist byl nalezen přes index. Při přípravě důkazů ale tým hledal starý export kvůli příkladům formulací.
+
+Výsledek:
+vrací problém
+
+Jedna akce:
+Otevřít úzkou otázku doplnění dvou anonymizovaných modelových formulací do checklistu.
+
+Co zůstává beze změny:
+Kanonické místo, vlastník, redakční review a základní kroky checklistu.
+
+Co se neotevírá:
+Pilotní audit, struktura case studies, nový sběr zákaznických citací ani obsahový dashboard.
+
+Privacy-first výsledek:
+Do checklistu mají jít obecné modelové formulace, ne přepisy rozhovorů ani zákaznické screenshoty.
+
+Další návrat:
+Po doplnění dvou formulací ověřit při jedné další case study, zda starý export už není potřeba.
+
+Vlastník:
+Vlastník redakčního playbooku.
+
+Datum:
+2026-06-04
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte uzavírací kartu prvního použití.
+2. Minuta 2: popište druhé skutečné použití jednou větou.
+3. Minuta 3: ověřte, zda práce proběhla bez zvláštní péče.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište jednu akci nebo vědomě žádnou.
+6. Minuta 6: zapište, co zůstává beze změny a co se neotevírá.
+7. Minuta 7: uzavřete privacy-first výsledek a další návrat.
+
+Výstup:
+
+```text
+Při druhém běžném použití má položka [název] výsledek [stav]. Provedeme [jedna akce / žádná akce], neměníme [stabilní části], neotevíráme [rozsah] a další návrat nastane při [signál/rytmus].
+```
+
+### Checklist druhého běžného použití
+
+- Proběhlo druhé použití v přirozené práci?
+- Nešlo o uměle svolaný audit?
+- Víme, jaký stav měla položka po prvním použití?
+- Člověk našel kanonické místo bez autora poslední opravy?
+- Práce proběhla bez staré historie nebo pomocného exportu?
+- Nevznikla nová vedlejší evidence?
+- Vybrali jsme jeden ze čtyř výsledků?
+- U stavu "drží" jsme nepřidali další kontrolu?
+- U drobné stopy opravujeme jen nejbližší pracovní místo?
+- U rytmické opravy měníme napojení na práci, ne celý obsah?
+- U návratu problému otevíráme jen úzkou otázku?
+- Je napsané, co zůstává beze změny?
+- Je napsané, co se výslovně neotevírá?
+- Nepřidáváme tracker, export, přepis, screenshot ani nový dodavatelský nástroj?
+- Má další návrat konkrétní signál nebo běžný rytmus?
+
+Druhé běžné použití je dobrý test provozní dospělosti. Pokud věc drží, tým ji nechá být. Pokud má drobnou stopu, uklidí ji bez dramatu. Pokud drhne rytmus, připojí ji blíž ke skutečné práci. Pokud se problém vrací, otevře úzkou otázku a chrání původní rozsah. To je přesně ten rozdíl mezi systémem, který se učí, a systémem, který si jen zapisuje další povinnosti.
+
 ## Pracovní log
 
+- 2026-06-04: Doplněna Příloha XM o druhém běžném použití po uzavření prvního průchodu: ověření návratu do provozu, čtyři výsledky, lokální dočištění, rytmická oprava, návrat problému, privacy-first karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XL o uzavření prvního běžného použití po lehké periodické kontrole: čtyři uzavírací stavy, čistý průchod, lokální tření, návrat staré stopy, nový signál, karta, mini workshop, privacy-first hranice a checklist.
 - 2026-06-04: Doplněna Příloha XK o prvním běžném použití po uzavřené lehké periodické kontrole: čtyři výsledky průchodu, lokální tření, návrat staré stopy, nový signál, karta, mini workshop, privacy-first hranice a checklist.
 - 2026-06-03: Doplněna Příloha XJ o uzavření lehké periodické kontroly do dalšího provozního stavu: čtyři uzavírací stavy, klid, úklid, změna rytmu, zavření položky, privacy-first odkazy na GDPR a EDPB, karta, mini workshop a checklist.
