@@ -174309,6 +174309,335 @@ Položka [název] byla použita v běžné situaci [situace] ze zdroje [místo].
 
 První běžné použití po klidovém provozu má potvrdit obyčejnost. Když položka pomůže bez zvláštní péče, nechte ji žít. Když zůstane jedna stopa, ukliďte ji. Když klid drží jen díky člověku, přepište nepsanou znalost do nejbližšího pracovního místa. Když se objeví nový signál, otevřete novou malou otázku. Ve všech případech chraňte hlavní hodnotu: pracovní systém má zmenšovat tření a datovou stopu, ne vyrábět další dohled nad sebou samým.
 
+## Příloha XR: Uzavření prvního běžného použití po klidovém provozu
+
+První běžné použití po klidovém provozu je užitečné jen tehdy, když ho umíte zavřít. Bez uzavření zůstane v hlavách týmu drobná nejistota: fungovalo to opravdu běžně, nebo se má ještě něco hlídat? Tato nejistota se rychle mění v nenápadný dohled. Někdo si nechá starou kartu pro jistotu, někdo připomene poslední opravu v dalším meetingu a někdo začne znovu sbírat podklady, které už nemají rozhodovací účel.
+
+Uzavření má být krátké. Nejde o novou revizi, ale o návrat položky do správného provozního stavu. Výsledek prvního běžného použití jste už vybrali: klid drží, zůstala jedna stará stopa, klid drží jen díky člověku, nebo se objevil nový signál. Teď k němu přiřaďte jednu uzavírací akci.
+
+Začněte větou:
+
+```text
+Po prvním běžném použití položku uzavíráme jako:
+```
+
+A doplňte jeden stav:
+
+```text
+- ponechat v klidovém provozu
+- uklidit jednu starou stopu a vrátit do klidu
+- doplnit jednu systémovou nápovědu a ověřit dalším běžným průchodem
+- otevřít novou úzkou otázku mimo původní klidový provoz
+```
+
+Tím zabráníte nejčastější chybě: míchání úklidu, školení a nového problému do jednoho rozmazaného pokračování. Každý stav má jiný typ práce. Pokud je smícháte, vznikne pocit důkladnosti, ale tým nebude vědět, co je vlastně hotovo.
+
+### Čtyři uzavírací stavy
+
+Uzavírací stav vybírejte podle toho, co se reálně stalo při běžném použití, ne podle toho, jak moc chcete mít věc konečně pryč.
+
+- Ponechat v klidovém provozu: položka fungovala bez zvláštní péče.
+- Uklidit jednu starou stopu: práce fungovala, ale zůstal jeden neaktuální odkaz, dokument nebo připomínka.
+- Doplnit systémovou nápovědu: práce fungovala jen díky znalosti konkrétního člověka.
+- Otevřít novou úzkou otázku: běžné použití ukázalo nový problém mimo poslední opravu.
+
+Každý stav potřebuje jinou stop podmínku. U potvrzeného klidu je hotovo hned po zápisu jedné věty. U staré stopy je hotovo po jedné úklidové akci. U systémové nápovědy je hotovo až po doplnění a jednom dalším běžném průchodu bez stejné nápovědy od člověka. U nového signálu je hotovo až ve chvíli, kdy je nová otázka oddělená od původní položky a má vlastní hranici.
+
+### Ponechat v klidovém provozu
+
+Když klid drží, neodměňujte systém další kontrolou. Zapište krátký závěr:
+
+```text
+Položka prošla prvním běžným použitím bez zvláštní péče. Zůstává v klidovém provozu. Další návrat nastane jen při původním návratovém signálu.
+```
+
+Potom zrušte pokušení něco přidat:
+
+```text
+Nepřidáváme:
+novou kontrolní kartu, nový report, nové připomenutí, nový meeting ani sledování použití položky.
+```
+
+Příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Běžné použití:
+Editor ho použil při přípravě nové case study z redakčního playbooku.
+
+Uzavření:
+Položka zůstává v klidovém provozu.
+
+Co neděláme:
+Nezakládáme další kontrolní dokument a neměříme, kdo checklist otevřel.
+
+Další návrat:
+Jen pokud dvě case studies po sobě obejdou kanonický checklist nebo použijí starou šablonu.
+```
+
+Tento typ uzavření je záměrně nudný. Nuda je tady signál kvality. Pracovní pravidlo nemá každý měsíc dokazovat, že je chytré. Má být po ruce, když ho člověk potřebuje.
+
+### Uklidit jednu starou stopu a vrátit do klidu
+
+Pokud zůstala jedna stará stopa, uzavření má dvě části: uklidit stopu a vrátit položku do klidu. Neotevírejte kvůli tomu obecný audit starých dokumentů. Jedna stopa není důkaz chaosu, je to jen konkrétní zbytek.
+
+Šablona:
+
+```text
+Stará stopa:
+
+Jedna úklidová akce:
+
+Kde zůstává zdroj pravdy:
+
+Co se neotevírá:
+
+Hotovo, když:
+
+Návrat do klidu:
+ano / ne
+```
+
+Příklad:
+
+```text
+Stará stopa:
+V interní poznámce zůstal odkaz na dočasnou kartu pro ověření checklistu.
+
+Jedna úklidová akce:
+Smazat odkaz a ponechat jen kanonický odkaz na redakční playbook.
+
+Kde zůstává zdroj pravdy:
+Redakční playbook.
+
+Co se neotevírá:
+Neprocházíme všechny historické poznámky a neměníme strukturu rozcestníku.
+
+Hotovo, když:
+Poznámka už nevede na dočasnou kartu.
+
+Návrat do klidu:
+ano
+```
+
+Pokud při úklidu najdete druhou nebo třetí podobnou stopu, nezvětšujte aktuální akci za pochodu. Zapište samostatný návratový signál:
+
+```text
+Pokud se podobná stará stopa objeví ještě ve dvou dalších pracovních místech, otevřeme úzkou otázku úklidu odkazů.
+```
+
+Tím chráníte rozsah. Úklid má odstranit konkrétní překážku, ne proměnit klidový provoz v archeologii firemní paměti.
+
+### Doplnit jednu systémovou nápovědu
+
+Když klid držel jen díky člověku, problém není v tom, že někdo pomohl. Problém je v tom, že systém potřeboval nepsanou znalost. Uzavření proto nesmí skončit větou "příště si na to dáme pozor". To je jen další závislost na paměti.
+
+Nejmenší dobré uzavření vypadá takto:
+
+```text
+Nepsaná znalost:
+
+Kde měla být vidět:
+
+Jedna nápověda, kterou doplníme:
+
+Co tím neměníme:
+
+Další běžný průchod bez stejné pomoci:
+
+Privacy-first hranice:
+```
+
+Příklad:
+
+```text
+Nepsaná znalost:
+Editor věděl, že starý briefingový dokument se už nemá používat.
+
+Kde měla být vidět:
+V redakčním rozcestníku u case studies.
+
+Jedna nápověda:
+Přidat větu: "Pro nové case studies používejte brief v redakčním playbooku; staré briefingové dokumenty jsou jen archiv."
+
+Co tím neměníme:
+Neměníme celý redakční playbook ani onboarding obsahu.
+
+Další běžný průchod:
+Další editor připraví brief bez dotazu na autora poslední opravy.
+
+Privacy-first hranice:
+Nesledujeme klikání lidí v dokumentech; ověření proběhne jako pracovní průchod.
+```
+
+Tento stav se nevrací do úplného klidu hned. Ne proto, že by šlo o velký problém, ale protože je potřeba ověřit, že nápověda opravdu nahradila konkrétní lidskou paměť. Po jednom čistém běžném průchodu může položka zpět do klidu.
+
+### Otevřít novou úzkou otázku
+
+Nový signál nepatří do starého uzavření. Pokud ho přilepíte k původní položce, klidový provoz se stane nekonečným místem pro všechno, co se při práci náhodou objevilo. To je přesně ten typ systému, který vypadá pečlivě a funguje jako lepidlo na botách.
+
+Oddělte nový signál takto:
+
+```text
+Původní položka:
+
+Původní stav:
+zůstává v klidovém provozu / po jedné úklidové akci se vrací do klidu
+
+Nový signál:
+
+Proč je nový:
+
+Nová úzká otázka:
+
+Nejmenší důkaz:
+
+Co se neotevírá:
+
+Kde bude nová otázka žít:
+```
+
+Příklad:
+
+```text
+Původní položka:
+Checklist případové studie.
+
+Původní stav:
+Zůstává v klidovém provozu.
+
+Nový signál:
+Tým potřebuje popsat dopad automatizace bez zveřejnění citlivých provozních detailů zákazníka.
+
+Proč je nový:
+Checklist funguje, ale nová situace se týká anonymizace příkladů dopadu.
+
+Nová úzká otázka:
+Jak doplnit jeden bezpečný modelový příklad formulace dopadu automatizace?
+
+Nejmenší důkaz:
+Editor použije modelovou formulaci v jedné case study bez přenosu interních detailů do nového dokumentu.
+
+Co se neotevírá:
+Celý checklist, všechny case studies, nový sběr zákaznických citací ani plošné schvalování textů.
+
+Kde bude nová otázka žít:
+V redakčním backlogu jako samostatná malá položka.
+```
+
+Privacy-first hranice je tady zvlášť důležitá. Nový signál často svádí ke sběru dalších příkladů, citací, screenshotů nebo interních detailů. Nejdřív zkuste syntetický nebo dostatečně zobecněný příklad. Pokud nepotřebujete reálná zákaznická data, nesbírejte je. Pokud je potřebujete, napište přesný účel, vlastníka, retenci a místo, kde budou schválená.
+
+### Uzavírací karta
+
+```text
+Položka:
+
+Kanonické místo:
+
+Výsledek prvního běžného použití:
+- klid drží / stará stopa / klid díky člověku / nový signál
+
+Uzavírací stav:
+- ponechat v klidu / uklidit stopu / doplnit nápovědu / otevřít novou otázku
+
+Jedna věta závěru:
+
+Jedna akce nebo žádná:
+
+Stop podmínka akce:
+
+Co se neotevírá:
+
+Co mažeme, zkracujeme nebo archivujeme:
+
+Co nesbíráme:
+
+Další návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Kanonické místo:
+Redakční playbook.
+
+Výsledek prvního běžného použití:
+stará stopa
+
+Uzavírací stav:
+uklidit stopu
+
+Jedna věta závěru:
+Checklist funguje v běžné práci, ale v jedné interní poznámce zůstal odkaz na dočasnou ověřovací kartu.
+
+Jedna akce:
+Smazat starý odkaz a ponechat odkaz na redakční playbook.
+
+Stop podmínka:
+Poznámka už nevede na dočasnou kartu.
+
+Co se neotevírá:
+Celý redakční rozcestník ani historie poslední opravy.
+
+Co mažeme:
+Jeden neaktuální odkaz.
+
+Co nesbíráme:
+Žádná data o tom, kdo checklist používá.
+
+Další návratový signál:
+Podobná stará stopa se objeví ve dvou dalších pracovních místech.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-04
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte výsledek prvního běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednu větu závěru.
+4. Minuta 4: určete jednu akci nebo potvrďte, že žádná akce není.
+5. Minuta 5: napište, co se neotevírá a co se nesbírá.
+6. Minuta 6: zavřete návratový signál, vlastníka a datum.
+
+Výstup:
+
+```text
+Položku [název] po prvním běžném použití uzavíráme jako [stav]. Děláme [akce/žádná akce], neotevíráme [rozsah], nesbíráme [data] a další návrat nastane jen při [signál].
+```
+
+### Checklist uzavření prvního běžného použití
+
+- Navazuje uzavření na skutečný výsledek běžného použití?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- U potvrzeného klidu nevzniká další kontrola?
+- U staré stopy řešíme jen jednu konkrétní úklidovou akci?
+- U nepsané znalosti doplňujeme nejbližší systémovou nápovědu?
+- U nového signálu oddělujeme novou otázku od původní položky?
+- Má případná akce stop podmínku?
+- Je jasné, co se neotevírá?
+- Je jasné, co mažeme, zkracujeme nebo archivujeme?
+- Je napsané, jaká data nesbíráme?
+- Nezavádíme sledování konkrétních lidí, nové reporty ani pomocné exporty?
+- Zůstává kanonické místo položky srozumitelné?
+- Má uzavření vlastníka a datum?
+- Ví tým, kdy se položka vrátí do klidu a kdy se má znovu otevřít?
+
+Uzavření prvního běžného použití je malá brzda proti nekonečné péči. Když klid drží, nechte ho držet. Když zůstane stopa, ukliďte ji. Když systém závisí na člověku, doplňte nejbližší nápovědu. Když se objeví nový signál, dejte mu vlastní malou otázku. Codyho komentář: dobrý provoz není ten, kde se všechno pořád kontroluje. Dobrý provoz je ten, kde se ví, kdy už se kontrolovat přestává.
+
 ## Pracovní log
 
 - 2026-06-04: Doplněna úvodní podkapitola o převodu potvrzené lokální opravy do stabilního předávacího pravidla: kanonický domov, přepis do přítomného času, předání, privacy-first úklid, karta a checklist.
@@ -175057,3 +175386,4 @@ První běžné použití po klidovém provozu má potvrdit obyčejnost. Když p
 - 2026-06-04: Doplněna úvodní podkapitola o lokální opravě předání po prvním použití: rozlišení chyby v předání od chyby rozhodnutí, úklid jedné staré stopy, privacy-first hranice a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o uzavření lokální opravy předání po dalším použití: stavy opravy, rozlišení nedotažené opravy od širšího vzoru, privacy-first úklid, karta uzavření a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o ověření stabilního předávacího pravidla při prvním běžném předání: mini test, čtyři výsledné stavy, návrat pravidla do běžného rytmu, privacy-first úklid, karta a checklist.
+- 2026-06-04: Doplněna Příloha XR o uzavření prvního běžného použití po klidovém provozu: čtyři uzavírací stavy, práce se starou stopou, systémová nápověda, oddělení nového signálu, privacy-first karta a checklist.
