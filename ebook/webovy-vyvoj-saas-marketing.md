@@ -171514,8 +171514,336 @@ Položka [název] po prvním běžném použití dopadla jako [výsledek]. Prove
 
 První běžné použití má jednu práci: zkontrolovat, že po lehké kontrole nezůstala položka viset mezi provozem a dohledem. Když projde čistě, nechte ji být. Když drhne, opravte jedno místo. Když se vrátí stará stopa, ukliďte ji. Když se objeví nový signál, dejte mu vlastní kartu. Jednoduché, což je v provozu skoro podezřele vzácný luxus.
 
+## Příloha XL: Uzavření prvního běžného použití po lehké periodické kontrole
+
+První běžné použití po uzavřené lehké periodické kontrole má skončit uzavřením, ne novým dohledem. Pokud tým po prvním průchodu jen zapíše "fungovalo", ale neurčí další stav, položka zůstane v polovičním režimu. Není jasné, jestli se má dál sledovat, jestli se opravilo lokální tření, jestli stará stopa opravdu zmizela, nebo jestli nový signál patří do samostatné práce.
+
+Uzavření prvního použití proto napište hned po průchodu a držte ho krátké:
+
+```text
+Položka:
+
+Výsledek prvního běžného použití:
+- čistý průchod / lokální tření / návrat staré stopy / nový signál
+
+Uzavírací rozhodnutí:
+
+Jedna provedená akce:
+
+Co zůstává beze změny:
+
+Co se výslovně neotevírá:
+
+Privacy-first výsledek:
+
+Další návrat:
+```
+
+Cílem není hodnotit kvalitu celé položky. Cílem je zavřít jeden průchod tak, aby se tým věděl vrátit do běžné práce. První použití je malý provozní test, ne vstupenka do dalšího auditu.
+
+### Čtyři uzavírací stavy
+
+Každý výsledek prvního použití má mít odpovídající uzavírací stav:
+
+- Čistý průchod: potvrdit klid a nepřidávat žádnou akci.
+- Lokální tření: provést jednu lokální opravu a ověřit ji při příštím přirozeném použití.
+- Návrat staré stopy: uklidit konkrétní stopu a odstranit důvod, proč byla dostupnější než kanonické místo.
+- Nový signál: oddělit novou otázku od původní položky a ponechat původní uzavření platné.
+
+Nejdůležitější je nezaměnit uzavření za pokračování. "Ještě to budeme chvíli sledovat" je často jen strach říct, že věc buď drží, nebo potřebuje jednu konkrétní opravu. Sledování bez otázky vytváří administrativu, ne jistotu.
+
+### Uzavření čistého průchodu
+
+Čistý průchod má dostat nejmenší možný záznam. Pokud člověk našel kanonické místo, použil ho bez historie, nevznikla nová stopa a práce dopadla dobře, není co vylepšovat. V provozu je to cenný výsledek: položka se vrátila do normálního rytmu a nepotřebuje zvláštní pozornost.
+
+Šablona:
+
+```text
+Výsledek:
+čistý průchod
+
+Uzavření:
+Položka funguje v běžné práci bez další akce.
+
+Co neděláme:
+nepřidáváme kontrolu, dashboard, druhé ověření ani novou poznámku v backlogu
+
+Další návrat:
+jen v běžném rytmu nebo při konkrétním návratovém signálu
+```
+
+Příklad:
+
+```text
+Položka:
+Redakční checklist pro případové studie.
+
+Výsledek:
+čistý průchod
+
+Uzavření:
+Checklist byl použit při nové case study bez dotazu na starý pilotní export.
+
+Akce:
+žádná
+
+Co neotevíráme:
+neotevíráme strukturu checklistu, měření čtenosti ani další schvalovací krok
+
+Další návrat:
+pololetní redakční review nebo dvě opakované chyby ve stejné části checklistu
+```
+
+Slovo "žádná" je tady praktické. Chrání tým před tím, aby každá úspěšná kontrola vytvořila další kontrolu. Fungující pravidlo má dostat klid, ne mikrořízení.
+
+### Uzavření lokálního tření
+
+Lokální tření se uzavírá jednou opravou v místě, kde tření vzniklo. Ne v celé historii. Ne v metodice. Ne v pěti podobných dokumentech preventivně. Pokud je problém v názvu položky v indexu, opravte název v indexu. Pokud chybí odkaz, doplňte odkaz. Pokud je popisek nejasný, přepište jednu větu.
+
+Šablona:
+
+```text
+Tření:
+
+Lokální oprava:
+
+Kde je oprava provedená:
+
+Co tím neměníme:
+
+Ověření:
+
+Co díky tomu nesbíráme:
+```
+
+Příklad:
+
+```text
+Tření:
+Člověk našel šablonu až přes chat, protože interní index používal starý název.
+
+Lokální oprava:
+Sjednocen název v indexu a přidán jeden alias.
+
+Kde:
+Kanonický index redakčních šablon.
+
+Co tím neměníme:
+Neměníme kroky checklistu, vlastnictví ani revizní rytmus.
+
+Ověření:
+Při další case study ověřit, že šablonu šlo najít bez dotazu v chatu.
+
+Co nesbíráme:
+Nepřidáváme sledování kliků na interní dokumenty ani ruční log hledání.
+```
+
+Privacy-first hodnota lokální opravy je v tom, že nepromění drobnou nejasnost v měřicí systém. Jedno skutečné použití a jedna opravená hrana často stačí.
+
+### Uzavření návratu staré stopy
+
+Návrat staré stopy uzavírejte úklidem, ne dalším vysvětlováním. Pokud někdo použil starý export, screenshot, připnutou zprávu nebo kopii dokumentu, nejdřív odstraňte důvod, proč byla tato stopa dostupnější než kanonické místo. Potom rozhodněte, jestli se z ní má převést jedna obecná věta, nebo se má celá stopa uklidit.
+
+Šablona:
+
+```text
+Stará stopa:
+
+Proč se vrátila:
+
+Co v kanonickém místě chybělo:
+
+Úklid:
+
+Převedená minimální věta, pokud je potřeba:
+
+Co mažeme nebo odpojujeme:
+
+Co neotevíráme:
+```
+
+Příklad:
+
+```text
+Stará stopa:
+Připnutý chatový odkaz na export připomínek z pilotního auditu.
+
+Proč se vrátila:
+Měla konkrétnější název než kanonický checklist.
+
+Co chybělo:
+V checklistu nechyběl obsah, chyběl jen alias názvu.
+
+Úklid:
+Odepnout starou zprávu, doplnit alias do indexu a zapsat jednu changelogovou větu.
+
+Převedená věta:
+Pilotní připomínky jsou uzavřené; aktuální kontrola žije v redakčním checklistu.
+
+Co mažeme nebo odpojujeme:
+Dočasný export a chatový odkaz se dál nepoužívají jako zdroj pravdy.
+
+Co neotevíráme:
+Neotevíráme pilotní audit ani strukturu checklistu.
+```
+
+U starých stop buďte přísnější než u běžných poznámek. Často obsahují víc osobních, zákaznických nebo interních detailů, než je potřeba pro dnešní rozhodnutí. Pokud z nich něco zůstává, má to být krátká obecná věta v kanonickém místě, ne celý historický balík.
+
+### Uzavření nového signálu
+
+Nový signál se uzavírá oddělením. Původní položka může být v pořádku a nový problém přesto stojí za pozornost. Když se tyto dvě věci smíchají, stará položka začne nést rozsah, který nikdy neměla řešit.
+
+Šablona:
+
+```text
+Nový signál:
+
+Proč nejde o selhání původní položky:
+
+Nová rozhodovací otázka:
+
+Kde bude řešená:
+
+Vlastník:
+
+Co zůstává u původní položky zavřené:
+
+Privacy-first hranice:
+```
+
+Příklad:
+
+```text
+Nový signál:
+Při použití redakčního checklistu se ukázalo, že nový typ zákaznické reference potřebuje vlastní schvalovací větu.
+
+Proč nejde o selhání původní položky:
+Checklist správně pokryl publikaci case study; nový problém se týká jiného formátu reference.
+
+Nová rozhodovací otázka:
+Jak schvalovat krátké zákaznické citace bez ukládání zbytečného kontextu z obchodních hovorů?
+
+Kde:
+Samostatná karta pro formát krátké reference.
+
+Vlastník:
+Marketing owner.
+
+Co zůstává zavřené:
+Lehká periodická kontrola checklistu i první běžné použití jsou uzavřené.
+
+Privacy-first hranice:
+Do nové karty patří jen schvalovací věta a odkaz na veřejně použitelnou citaci, ne přepisy rozhovorů.
+```
+
+Nový signál má dostat vlastní otázku hlavně proto, aby si zasloužil vlastní důkaz. Ne každý problém poblíž stabilní položky je důkaz, že stabilní položka selhala.
+
+### Uzavírací karta prvního použití
+
+```text
+Položka:
+
+Kanonické místo:
+
+První běžné použití:
+
+Výsledek:
+- čistý průchod / lokální tření / návrat staré stopy / nový signál
+
+Uzavírací stav:
+- klid potvrzen / lokální oprava provedena / stará stopa uklizena / nový signál oddělen
+
+Jedna provedená akce:
+
+Co zůstává beze změny:
+
+Co se výslovně neotevírá:
+
+Jaká data, exporty, screenshoty, přepisy nebo trackery nevznikají:
+
+Další návrat:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Checklist před publikací případové studie.
+
+Kanonické místo:
+Redakční playbook.
+
+První běžné použití:
+Publikace case study pro SaaS audit.
+
+Výsledek:
+návrat staré stopy
+
+Uzavírací stav:
+stará stopa uklizena
+
+Jedna provedená akce:
+Odepnut starý chatový odkaz a doplněn alias názvu do kanonického indexu.
+
+Co zůstává beze změny:
+Kroky checklistu, vlastník i pololetní review.
+
+Co se výslovně neotevírá:
+Neotevíráme pilotní audit, nový dashboard ani další sběr zpětné vazby.
+
+Jaká stopa nevzniká:
+Bez nového exportu připomínek, bez screenshotů zákaznických materiálů, bez sledování použití dokumentu.
+
+Další návrat:
+Při další case study ověřit jen dohledatelnost checklistu.
+
+Vlastník:
+Vlastník redakčního playbooku.
+
+Datum:
+2026-06-04
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte kartu prvního běžného použití.
+2. Minuta 2: vyberte jeden ze čtyř výsledků.
+3. Minuta 3: přiřaďte odpovídající uzavírací stav.
+4. Minuta 4: napište jednu provedenou akci nebo vědomě žádnou.
+5. Minuta 5: zapište, co zůstává beze změny.
+6. Minuta 6: zapište, co se výslovně neotevírá.
+7. Minuta 7: uzavřete privacy-first výsledek a další návrat.
+
+Výstup:
+
+```text
+Po prvním běžném použití má položka [název] stav [uzavírací stav]. Provedli jsme [akce / žádná akce], neměníme [co zůstává], neotevíráme [rozsah] a další návrat nastane při [signál/rytmus].
+```
+
+### Checklist uzavření prvního běžného použití
+
+- Má první použití jeden jasný výsledek?
+- Přiřadili jsme k výsledku odpovídající uzavírací stav?
+- U čistého průchodu jsme opravdu nepřidali další práci?
+- U lokálního tření opravujeme jedno nejbližší pracovní místo?
+- U návratu staré stopy víme, proč byla stará stopa dostupnější?
+- U nového signálu jsme založili samostatnou otázku místo rozšíření staré položky?
+- Je napsané, co zůstává beze změny?
+- Je napsané, co se výslovně neotevírá?
+- Uklidili jsme zbytečné exporty, screenshoty, přepisy, odkazy nebo dočasné poznámky?
+- Nevzniká nový tracker, pole, ruční evidence nebo dodavatel jen kvůli uzavření?
+- Má další návrat konkrétní signál nebo běžný rytmus?
+- Ví vlastník, že položka se po uzavření vrací do běžné práce?
+
+Uzavření prvního použití je malé, ale chrání celý rytmus. Bez něj se dobré položky drží pod zbytečným dohledem a drobná tření se tváří jako strategické problémy. S ním tým ví, co funguje, co se lokálně opravilo, co se uklidilo a co dostalo vlastní otázku. To je přesně ten druh pořádku, který není vidět na screenshotu, ale je cítit v každém dalším pracovním průchodu.
+
 ## Pracovní log
 
+- 2026-06-04: Doplněna Příloha XL o uzavření prvního běžného použití po lehké periodické kontrole: čtyři uzavírací stavy, čistý průchod, lokální tření, návrat staré stopy, nový signál, karta, mini workshop, privacy-first hranice a checklist.
 - 2026-06-04: Doplněna Příloha XK o prvním běžném použití po uzavřené lehké periodické kontrole: čtyři výsledky průchodu, lokální tření, návrat staré stopy, nový signál, karta, mini workshop, privacy-first hranice a checklist.
 - 2026-06-03: Doplněna Příloha XJ o uzavření lehké periodické kontroly do dalšího provozního stavu: čtyři uzavírací stavy, klid, úklid, změna rytmu, zavření položky, privacy-first odkazy na GDPR a EDPB, karta, mini workshop a checklist.
 - 2026-06-03: Doplněna Příloha XI o lehké periodické kontrole po dlouhodobém klidu: čtyři stavy kontroly, ponechání bez změny, zkrácení stop, přesun do lepšího rytmu, ukončení nebo sloučení, privacy-first úklid, karta, mini workshop a checklist.
