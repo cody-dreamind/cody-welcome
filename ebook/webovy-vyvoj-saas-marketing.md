@@ -173704,8 +173704,310 @@ Položka [název] se po první lehké kontrole uzavírá jako [stav]. Děláme [
 
 Dobré uzavření první lehké kontroly je nenápadné. Neoslavuje stabilitu, nezakládá nový proces a nepíše dlouhou historii. Jen řekne: tady položka dál žije, tohle končí, tohle mažeme, k tomuhle se nevracíme a další návrat potřebuje konkrétní signál. Přesně tak se z pracovního systému nestane muzeum vlastních oprav.
 
+## Příloha XQ: První běžné použití po klidovém provozu
+
+Klidový provoz je ověřený až ve chvíli, kdy se položka použije bez zvláštní připomínky, bez dočasné kontrolní karty a bez toho, aby někdo musel oživovat historii poslední opravy. První běžné použití po klidovém provozu proto nemá být nová kontrola. Má to být obyčejný pracovní průchod, při kterém si tým jen všimne, jestli se stabilní pravidlo opravdu chová jako součást práce.
+
+Začněte otázkou:
+
+```text
+Použili jsme položku proto, že přirozeně patří do práce, nebo proto, že jsme ji chtěli znovu kontrolovat?
+```
+
+Pokud odpověď zní "chtěli jsme ji znovu kontrolovat", nejste v běžném použití. Jste pořád v dohledovém režimu. To není tragédie, ale je dobré to pojmenovat. Klidový provoz má tým zbavit speciální péče. Pokud speciální péče pokračuje, buď položka není dost stabilní, nebo tým neumí pustit poslední opravu z ruky.
+
+Příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Běžná pracovní situace:
+Vzniká nová case study pro web.
+
+Jak se položka použila:
+Editor vzal checklist z redakčního playbooku při přípravě briefu, ne z dočasné ověřovací karty.
+
+Co se nestalo:
+Nikdo nehledal starý export připomínek, nikdo nezakládal nový kontrolní dokument a nikdo neotevíral historii poslední opravy.
+
+Výsledek:
+Klidový provoz drží.
+```
+
+Takový průchod je skoro nudný. A právě proto je dobrý. Stabilní pracovní systém nemá být pořád zajímavý. Má v pravý okamžik pomoct a potom zmizet z pozornosti.
+
+### Čtyři výsledky prvního běžného použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Klid drží: položka se použila přirozeně a není potřeba žádná akce.
+- Zůstala jedna stará stopa: práce funguje, ale někde přežil starý odkaz, připomínka nebo pomocný materiál.
+- Klid drží jen díky člověku: položka fungovala, ale jen proto, že si někdo pamatoval nepsané pravidlo.
+- Objevil se nový signál: běžná práce ukázala problém, který nesouvisí jen s poslední opravou.
+
+Nepřidávejte stav "ještě jednou ověřit". Pokud klid drží, další ověření nepotřebujete. Pokud nedrží, zvolte konkrétní stav a udělejte jednu odpovídající reakci. "Ještě jednou ověřit" je často jen měkčí název pro nerozhodnutí.
+
+### Klid drží
+
+Když klid drží, napište jen krátkou větu a nic dalšího nepřidávejte:
+
+```text
+Položka se použila v běžné práci bez zvláštního dohledu; zůstává v klidovém provozu a další návrat nastane jen při původním návratovém signálu.
+```
+
+Tato věta může stačit do changelogu, interní poznámky nebo rozhodovacího logu. Nepotřebuje novou kartu, nový dashboard ani další review. Hodnota klidu je v tom, že se systém nemusí pořád sám vysvětlovat.
+
+Když chcete být důslední, zapište i to, co díky stabilitě neděláte:
+
+```text
+Neděláme:
+další kontrolní průchod, nový report, nové připomenutí ani sběr dat o tom, kdo položku použil.
+```
+
+Privacy-first pointa je jednoduchá: pokud práce proběhla dobře bez nového měření, nechte to tak. Stabilní proces nepotřebuje sledovat každé vlastní použití jen proto, aby si dokázal, že existuje.
+
+### Zůstala jedna stará stopa
+
+Stará stopa není důkaz, že položka selhala. Může to být jen zbytek po minulém režimu: starý odkaz v rozcestníku, připomínka v kalendáři, poznámka v chatu, export z ověření nebo dočasná šablona, kterou už nikdo nepotřebuje.
+
+Zápis:
+
+```text
+Stará stopa:
+
+Kde se objevila:
+
+Proč nepatří do klidového provozu:
+
+Jedna úklidová akce:
+
+Co se neotevírá:
+
+Kdy je hotovo:
+```
+
+Příklad:
+
+```text
+Stará stopa:
+Odkaz na dočasnou kontrolní kartu.
+
+Kde se objevila:
+V poznámce k redakčnímu rozcestníku.
+
+Proč nepatří do klidového provozu:
+Kanonické místo je redakční playbook; karta měla účel jen během první lehké kontroly.
+
+Jedna úklidová akce:
+Smazat odkaz a ponechat jen odkaz na playbook.
+
+Co se neotevírá:
+Celý rozcestník, nový systém štítků ani další kontrola všech starých poznámek.
+
+Kdy je hotovo:
+Po smazání odkazu.
+```
+
+Důležité je neudělat ze staré stopy inventuru všeho. Jedna nalezená stopa znamená jednu úklidovou akci. Pokud se objeví další opakované stopy, teprve potom má smysl řešit širší vzor.
+
+### Klid drží jen díky člověku
+
+Tohle je nejzrádnější výsledek. Na povrchu všechno fungovalo, ale jen proto, že jeden člověk věděl, kde je správné místo, co se dřív rušilo nebo jakou výjimku nemá tým opakovat. Pokud tento člověk vypadne, klid se rozpadne.
+
+Neřešte to školením celého týmu. Nejdřív zjistěte, jaká nepsaná znalost držela průchod pohromadě.
+
+```text
+Co člověk věděl navíc:
+
+Kde se to mělo objevit v systému:
+
+Nejmenší doplnění:
+
+Co tím nechceme měnit:
+
+Jak ověříme, že další průchod nepotřebuje stejného člověka:
+```
+
+Příklad:
+
+```text
+Co člověk věděl navíc:
+Že starý briefingový dokument se už nemá používat.
+
+Kde se to mělo objevit v systému:
+V redakčním rozcestníku u case studies.
+
+Nejmenší doplnění:
+Přidat větu "pro nové case studies používejte pouze brief v redakčním playbooku".
+
+Co tím nechceme měnit:
+Neměníme celý onboarding obsahu ani strukturu playbooku.
+
+Jak ověříme:
+Další editor najde správný brief bez dotazu na autora poslední opravy.
+```
+
+Privacy-first hranice: nezkoumejte tento stav sledováním lidí. Nepotřebujete měřit, kdo kam kliká, kolik času strávil v dokumentu ani kdo si co otevřel. Stačí pracovní test: zvládne další člověk najít správné místo bez nápovědy?
+
+### Objevil se nový signál
+
+Nový signál je problém, který se objevil při běžném použití, ale není pouhým zbytkem poslední opravy. Může ukázat, že se změnil typ práce, publikum, nabídka, právní hranice, technický provoz nebo marketingový kontext.
+
+Neotvírejte kvůli tomu celou historii položky. Napište novou úzkou otázku:
+
+```text
+Nový signál:
+
+Proč nejde jen o dozvuk poslední opravy:
+
+Nejmenší otázka:
+
+Nejmenší důkaz:
+
+Co zůstává v klidovém provozu:
+
+Co se neotevírá:
+
+Privacy-first hranice:
+```
+
+Příklad:
+
+```text
+Nový signál:
+Při přípravě nové case study tým potřeboval vysvětlit dopad AI automatizace bez zveřejnění citlivých provozních detailů zákazníka.
+
+Proč nejde jen o dozvuk poslední opravy:
+Checklist fungoval, ale neobsahuje modelový způsob, jak popsat automatizaci bez identifikovatelných dat.
+
+Nejmenší otázka:
+Jak doplnit jeden anonymizovaný příklad formulace dopadu AI automatizace?
+
+Nejmenší důkaz:
+Editor použije příklad v jedné case study bez dotazu na obchod a bez přenosu interních detailů do nového dokumentu.
+
+Co zůstává v klidovém provozu:
+Kanonické místo, rytmus review a původní checklist.
+
+Co se neotevírá:
+Nový sběr zákaznických citací, databáze interních detailů ani schvalovací kolečko pro všechny case studies.
+
+Privacy-first hranice:
+Příklad bude syntetický nebo dostatečně zobecněný; žádná reálná zákaznická data se nepřenesou do pomocné šablony.
+```
+
+Nový signál má být začátek malé otázky, ne vstupenka zpět do velké údržby. Codyho komentář: když se při klidném průchodu ozve nová věc, neznamená to, že starý problém vstal z hrobu. Často jen produkt konečně potkal další reálnou situaci. Ano, dramatické, ale pořád levnější než plošný redesign.
+
+### Karta prvního běžného použití
+
+```text
+Položka:
+
+Kanonické místo:
+
+Běžná pracovní situace:
+
+Jak se položka použila:
+
+Výsledek:
+- klid drží / stará stopa / klid drží díky člověku / nový signál
+
+Jedna věta závěru:
+
+Jedna akce nebo žádná:
+
+Co se neotevírá:
+
+Co se ruší nebo maže:
+
+Privacy-first hranice:
+
+Další návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Kanonické místo:
+Redakční playbook.
+
+Běžná pracovní situace:
+Vznikla nová case study pro web.
+
+Jak se položka použila:
+Editor použil checklist při briefu a nemusel hledat dočasnou kartu z poslední kontroly.
+
+Výsledek:
+klid drží
+
+Jedna věta závěru:
+Checklist funguje jako běžná součást redakční práce a zůstává v klidovém provozu.
+
+Jedna akce nebo žádná:
+Žádná.
+
+Co se neotevírá:
+Redakční systém, staré ověřovací karty ani nové měření použití.
+
+Co se ruší nebo maže:
+Nic nového; dočasné stopy už byly uzavřené.
+
+Privacy-first hranice:
+Nesbíráme data o používání checklistu konkrétními lidmi a nevytváříme nový export.
+
+Další návratový signál:
+Dvě case studies po sobě obejdou kanonický checklist nebo znovu použijí starou šablonu.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-04
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou pracovní situaci.
+2. Minuta 2: řekněte, odkud se položka opravdu použila.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: napište jednu větu závěru a jednu akci nebo žádnou.
+5. Minuta 5: zavřete privacy-first hranici a další návratový signál.
+
+Výstup:
+
+```text
+Položka [název] byla použita v běžné situaci [situace] ze zdroje [místo]. Výsledek je [stav]. Děláme [akce/žádná akce], neotevíráme [rozsah] a další návrat nastane jen při [signál].
+```
+
+### Checklist prvního běžného použití
+
+- Šlo opravdu o běžnou práci, ne o další kontrolu?
+- Použila se položka z kanonického místa?
+- Nepotřeboval tým dočasnou kartu, starý export ani historii poslední opravy?
+- Vybrali jsme jeden ze čtyř výsledků?
+- U potvrzeného klidu nevzniká žádné nové sledování?
+- U staré stopy řešíme jen jednu úklidovou akci?
+- U nepsané znalosti doplňujeme nejmenší systémovou nápovědu?
+- U nového signálu otevíráme novou úzkou otázku, ne celou starou historii?
+- Je napsané, co se neotevírá?
+- Je jasné, co se ruší nebo maže?
+- Nevzniká nový tracker, report, export ani měření konkrétních lidí?
+- Má položka návratový signál, který není jen "až si zase vzpomeneme"?
+- Ví vlastník, jestli má dělat akci, nebo nechat věc v klidu?
+
+První běžné použití po klidovém provozu má potvrdit obyčejnost. Když položka pomůže bez zvláštní péče, nechte ji žít. Když zůstane jedna stopa, ukliďte ji. Když klid drží jen díky člověku, přepište nepsanou znalost do nejbližšího pracovního místa. Když se objeví nový signál, otevřete novou malou otázku. Ve všech případech chraňte hlavní hodnotu: pracovní systém má zmenšovat tření a datovou stopu, ne vyrábět další dohled nad sebou samým.
+
 ## Pracovní log
 
+- 2026-06-04: Doplněna Příloha XQ o prvním běžném použití po klidovém provozu: rozlišení klidu, staré stopy, nepsané znalosti a nového signálu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XP o uzavření první lehké kontroly do klidového provozu: čtyři uzavírací stavy, návrat do klidu, drobný úklid, přepnutí rytmu, úzká otázka, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XO o první lehké kontrole stabilního provozního stavu: důvod kontroly, čtyři výsledné stavy, potvrzení stability, drobný úklid, rytmická oprava, návratový signál, privacy-first karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XN o uzavření druhého běžného použití do stabilního provozního stavu: čtyři uzavírací stavy, stabilní stav, lokální dočištění, rytmická úprava, úzké znovuotevření, privacy-first úklid, karta, mini workshop a checklist.
