@@ -8336,6 +8336,153 @@ Vlastník:
 
 Drobné tření je užitečné, když zůstane drobné. Opravte nejbližší místo, ověřte při dalším běžném použití a nenechte starou epizodu znovu zabrat prostor, který si nezaslouží.
 
+## Jak uzavřít drobnou úpravu po první běžné údržbě
+
+Drobné tření po první běžné údržbě má mít krátký život. Pokud jste opravili odkaz, doplnili jednu pracovní větu, přejmenovali položku v rozcestníku nebo přidali vlastníka k existujícímu rytmu, další krok nemá být nové review celé oblasti. Další krok má ověřit, jestli se konkrétní tření při běžném použití ztratilo.
+
+Uzavření drobné úpravy začněte otázkou:
+
+```text
+Použil člověk opravené místo bez návratu ke staré historii a bez nové pomocné evidence?
+```
+
+Když odpověď zní ano, úpravu zavřete. Když odpověď zní ne, neznamená to automaticky, že potřebujete větší projekt. Nejdřív určete, jestli selhala samotná úprava, nebo jestli úprava odhalila širší vzor.
+
+### Čtyři výsledky po dalším použití
+
+Po dalším běžném použití vyberte jeden ze čtyř stavů:
+
+- Zavřeno: tření zmizelo a pravidlo funguje v běžném rytmu.
+- Dočistit stejné místo: tření zůstalo, ale pořád je lokální a víte přesně kde.
+- Zapsat širší vzor: podobné tření se ukázalo i jinde a už nejde jen o jednu větu nebo odkaz.
+- Otevřít novou otázku: použití ukázalo problém vlastnictví, rozhodovací pravomoci, obsahu nebo procesu mimo původní pravidlo.
+
+Největší chyba je nechat tyto stavy promíchané. Když je úprava zavřená, nedávejte ji do backlogu. Když je potřeba dočistit stejné místo, neotevírejte audit celé dokumentace. Když se ukáže širší vzor, nepředstírejte, že ho vyřeší další malá záplata. A když jde o novou otázku, oddělte ji od staré opravy, aby se z ní nestal nekonečný přívěsek.
+
+### Příklad uzavření
+
+```text
+Původní drobné tření:
+Pravidlo šlo najít až po otevření starého ověřovacího záznamu.
+
+Lokální úprava:
+Do rozcestníku review šablon jsme doplnili větu: "Použijte při třídění podnětů k šablonám v měsíčním review."
+
+Další běžné použití:
+Při dalším měsíčním review člověk otevřel rozcestník, našel pravidlo a zavřel slabý podnět bez starého záznamu.
+
+Výsledek:
+Zavřeno.
+
+Co dál neděláme:
+Nezakládáme další kontrolu rozcestníku, nepřidáváme report použití a neotevíráme původní opravu.
+
+Návratový signál:
+Pokud někdo při třídění podnětů znovu potřebuje otevřít starý ověřovací záznam.
+```
+
+Takový závěr je krátký, ale stačí. Cílem není vyrobit památník drobné úpravě. Cílem je vrátit ji do běžného provozu a nechat pracovní systém dýchat.
+
+### Kdy ještě dočistit stejné místo
+
+Dočištění stejného místa je správné, když se potvrdí původní diagnóza, ale první úprava nebyla dost přesná. Například odkaz už je ve správném rozcestníku, ale název pořád mate. Věta už říká kdy pravidlo použít, ale neříká kdo zavře výsledek. Starý záznam už není hlavní cesta, ale pořád se zobrazuje jako první v interním hledání.
+
+Dočištění musí mít stejnou disciplínu jako první úprava:
+
+```text
+Co přesně zůstalo nejasné:
+
+Proč je to pořád stejné místo:
+
+Jedna další úprava:
+
+Kdy ji ověříme:
+
+Co kvůli tomu pořád neotevíráme:
+```
+
+Pokud nedokážete napsat "proč je to pořád stejné místo", dočištění nedělejte. Pravděpodobně už řešíte širší vzor nebo novou otázku.
+
+### Kdy zapsat širší vzor
+
+Širší vzor vzniká, když se podobné tření objeví na více místech. Jeden nejasný odkaz je lokální problém. Pět rozcestníků, ve kterých lidé hledají aktuální pravidla přes staré záznamy, už je vzor. Jedna historická věta je jazykové dočištění. Celá sada pravidel napsaná jako kronika minulých oprav je redakční problém.
+
+Širší vzor nezapisujte jako dramatický audit. Stačí malá karta:
+
+```text
+Opakovaný vzor:
+
+Kde se ukázal:
+
+Jaký dopad má na rozhodnutí:
+
+Nejmenší společná úprava:
+
+Co teď neopravujeme jednotlivě:
+
+Privacy-first hranice:
+```
+
+Praktická hodnota zápisu je v tom, že zastaví tiché lepení dalších záplat. Tým si řekne: "Toto už není jedna špatná věta, ale způsob, jakým píšeme pravidla." To je jiná práce a zaslouží si vlastní rozsah.
+
+### Privacy-first uzavření drobné úpravy
+
+Uzavřená drobná úprava má po sobě nechat méně provozních stop než před opravou. Není potřeba držet seznam lidí, kteří pravidlo použili, ukládat screenshoty průchodu ani měřit kliky v interním rozcestníku. Stačí výsledek použití, stav úpravy a návratový signál.
+
+Zapište:
+
+```text
+Po uzavření mažeme nebo dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Po uzavření dál nesbíráme osobní poznámky z ověření, screenshoty rozcestníku ani ruční seznam průchodů. Zůstává jen anonymizovaný záznam, že upravené místo vedlo k rozhodnutí při dalším běžném použití.
+```
+
+Codyho komentář: drobná úprava, která po sobě zanechá tři nové kontrolní mechanismy, nebyla drobná. Jen se převlékla za drobnou, protože měla slušivý název. Privacy-first provoz je v tomhle dobrý detektor přehánění: když kvůli malé opravě najednou sbíráte víc dat, něco se utrhlo ze řetězu.
+
+### Karta uzavření drobné úpravy
+
+```text
+Původní tření:
+
+Lokální úprava:
+
+Další běžné použití:
+
+Výsledek:
+- zavřeno / dočistit stejné místo / zapsat širší vzor / otevřít novou otázku
+
+Důvod výsledku:
+
+Co dál neděláme:
+
+Co zůstává v běžném rytmu:
+
+Návratový signál:
+
+Co mažeme nebo dál nesbíráme:
+
+Vlastník:
+```
+
+### Checklist uzavření drobné úpravy
+
+- Ověřili jsme úpravu při běžném použití, ne ve speciálním testu?
+- Je jasné, jestli výsledek je zavřeno, dočištění, širší vzor nebo nová otázka?
+- Pokud je zavřeno, nevznikl nový backlog?
+- Pokud dočišťujeme, zůstává oprava opravdu na stejném místě?
+- Pokud jde o širší vzor, přestali jsme lepit další lokální záplaty?
+- Pokud vznikla nová otázka, oddělili jsme ji od původní opravy?
+- Zůstává pravidlo v kanonickém místě a běžném rytmu?
+- Je návratový signál konkrétní?
+- Smazali jsme dočasné ověřovací stopy, které už nemají účel?
+- Nevznikla nová osobní evidence, tracker nebo report používání?
+
+Drobná úprava je hotová až tehdy, když už nepotřebuje vlastní pozornost. Buď se zavře, nebo se poctivě přepíše do jiného typu práce. Oba výsledky jsou lepší než tichý mezistav, ve kterém oprava pořád visí v hlavě vlastníka a při každém review se tváří, že možná ještě něco chce.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -177984,3 +178131,4 @@ Uzavření kvartálního návratu je malý, ale důležitý konec. Bez něj zůs
 - 2026-06-04: Doplněna Příloha XR o uzavření prvního běžného použití po klidovém provozu: čtyři uzavírací stavy, práce se starou stopou, systémová nápověda, oddělení nového signálu, privacy-first karta a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o ověření převodu první reakce v běžném rytmu: běžný cyklus, návrat mimořádné péče, privacy-first ověření, karta a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o první běžné údržbě po uzavření pravidla: kontrola v normálním rytmu, servisní otázky, karta údržby, otevření nové otázky jen při skutečném přesahu a privacy-first hranice.
+- 2026-06-04: Doplněna úvodní podkapitola o uzavření drobné úpravy po první běžné údržbě: čtyři výsledné stavy, dočištění stejného místa, rozlišení širšího vzoru, privacy-first úklid, karta a checklist.
