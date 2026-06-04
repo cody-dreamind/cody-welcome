@@ -7515,6 +7515,164 @@ Karta je užitečná hlavně tím, že odděluje změnu v pracovním místě od 
 
 Převod do běžného rytmu je malý konec malé epizody. Když se udělá dobře, tým neztratí poučení, ale taky si neponechá mimořádný režim pro situaci, která už mimořádná není. To je praktická produktivita: méně zvláštních výjimek, víc jasných míst, kde práce normálně začíná a končí.
 
+## Ověření převodu první reakce v běžném rytmu
+
+Převod první reakce zpět do běžného rytmu je užitečný až tehdy, když se v tom rytmu opravdu použije. Jinak je to jen dobře napsaná věta v logu. Tým může mít pocit, že téma zavřel, ale při nejbližší běžné práci znovu vznikne ruční připomínka, druhý zdroj pravdy nebo nejistota, jestli se má signál řešit mimořádně.
+
+Ověření převodu proto nedělejte jako nový test. Počkejte na nejbližší běžný okamžik, ve kterém by se téma stejně objevilo: měsíční review, údržbu rozcestníku, založení nové karty změny, úpravu šablony nebo kontrolu starého odkazu. Cílem je zjistit, jestli se uzavřená první reakce opravdu vstřebala do normální práce.
+
+Základní otázka zní:
+
+```text
+Když se stejná situace objevila v běžném rytmu, stačilo aktuální pracovní místo a návratový signál, nebo tým znovu vytvořil mimořádnou péči?
+```
+
+Pokud stačilo aktuální pracovní místo, převod drží. Pokud vznikla mimořádná péče, podívejte se, jestli chybí malá věta v kanonickém místě, nebo jestli první reakce nebyla uzavřená dost poctivě. Nevracejte se automaticky k celé historii původní opravy.
+
+### Ověřujte jeden běžný cyklus
+
+Vyberte jeden cyklus, ve kterém se pravidlo přirozeně používá. Pro rozcestník to může být další měsíční review. Pro formulář další úprava landing page. Pro archivní šablonu první situace, kdy člověk hledá aktuální zdroj pravdy. Nečekejte na perfektní vzorek. Pracovní e-book se udržuje podle použitelných signálů, ne podle laboratorních podmínek.
+
+Krátký scénář:
+
+```text
+Běžný rytmus:
+
+Situace:
+
+Kanonické místo:
+
+Co měla první reakce změnit:
+
+Jaký výstup má vzniknout:
+
+Co se nesmí znovu objevit:
+
+Jaká data kvůli ověření nesbíráme:
+```
+
+Vyplněný příklad:
+
+```text
+Běžný rytmus:
+Měsíční review rozcestníku šablon.
+
+Situace:
+Editor třídí slabý podnět z review webu.
+
+Kanonické místo:
+Rozcestník review šablon.
+
+Co měla první reakce změnit:
+Rozlišit slabý podnět, který lze zavřít, od potvrzené změny, která patří do karty.
+
+Jaký výstup má vzniknout:
+Jedno rozhodnutí: zavřít bez úkolu, odložit s návratovým signálem, nebo otevřít kartu změny.
+
+Co se nesmí znovu objevit:
+Mimořádný seznam lidí, kteří se ptali na rozdíl mezi šablonami.
+
+Jaká data kvůli ověření nesbíráme:
+Nesledujeme klikání v dokumentaci ani osobní trasu editora.
+```
+
+Tento scénář je dost malý na to, aby šel použít v běžné práci. Zároveň chrání hranici: ověřujete převod do rytmu, ne celý systém šablon.
+
+### Tři výsledky ověření
+
+Po běžném cyklu vyberte jeden ze tří stavů:
+
+- Převod drží: kanonické místo stačilo a nevznikla mimořádná péče.
+- Převod potřebuje lokální doplnění: rytmus funguje, ale jedno pracovní místo potřebuje přesnější větu, odkaz nebo hranici.
+- Převod nedrží: tým znovu otevřel mimořádný režim nebo neumí podle aktuálního místa rozhodnout.
+
+`Převod drží` znamená konec zvláštní pozornosti. Zapište krátký stav, smažte pomocné poznámky a nechte téma v existujícím rytmu.
+
+`Převod potřebuje lokální doplnění` znamená jednu malou opravu. Typicky lepší text odkazu, doplnění návratového signálu nebo odstranění staré poznámky, která pořád vypadá aktivně.
+
+`Převod nedrží` už není drobné doladění. Znamená, že první reakce se sice uzavřela, ale běžná práce ji neumí použít. V takovém případě otevřete novou pracovní otázku a napište, co zatím nebudete měřit, sbírat ani přepisovat.
+
+### Hledejte návrat mimořádné péče
+
+Nejčastější selhání převodu není návrat původního problému. Je to návrat mimořádné péče. Tým sice používá správné pravidlo, ale pořád kolem něj dělá něco navíc:
+
+- posílá ruční připomínky před každým review;
+- vede dočasný seznam dotazů, který nemá termín smazání;
+- ukládá screenshoty pro jistotu;
+- kontroluje lidi místo pracovních míst;
+- drží starou poznámku, aby "byl kontext".
+
+Taková péče může být krátce užitečná, ale nesmí se stát součástí běžného rytmu bez rozhodnutí. Pokud něco opravdu chrání hodnotu, převeďte to do normálního pravidla s vlastníkem a stop podmínkou. Pokud to jen tlumí nervozitu po poslední opravě, zrušte to.
+
+Codyho komentář: mimořádná péče je jako lešení. Skvělé, když opravujete fasádu. Divné, když tam stojí i rok po opravě a všichni se tváří, že je to architektonický prvek.
+
+### Privacy-first ověření
+
+Ověření převodu má být datově lehké. Nepotřebujete nový tracker, report používání dokumentace ani evidenci lidí, kteří prošli rozcestníkem. Stačí pracovní výstup a anonymizovaná poznámka, jestli běžný rytmus stačil.
+
+Minimum:
+
+```text
+Zůstává:
+Stav převodu, pracovní situace, případná lokální oprava a návratový signál.
+
+Maže se:
+Dočasné poznámky, screenshoty, pomocné seznamy a osobní trasy.
+
+Nesbírá se:
+Klikání v dokumentaci, čas čtení, osobní skóre dodržování pravidla ani nové eventy.
+```
+
+Pokud ověření ukáže, že převod nedrží, nezačínejte tím, že budete sbírat víc dat o lidech. Začněte u pracovního místa. Kde člověk začal? Co tam chybělo? Jaký výstup měl vzniknout? Která věta nebo hranice nebyla vidět?
+
+### Karta ověření převodu
+
+```text
+Uzavřená první reakce:
+
+Běžný rytmus:
+
+Ověřená situace:
+
+Kanonické místo:
+
+Výstup práce:
+
+Vznikla mimořádná péče:
+- ano / ne
+
+Vrátil se původní problém:
+- ano / ne
+
+Výsledek:
+- převod drží / lokální doplnění / převod nedrží
+
+Pokud lokální doplnění, jedno místo opravy:
+
+Pokud převod nedrží, nová pracovní otázka:
+
+Co dál výslovně nesledujeme:
+
+Co mažeme nebo anonymizujeme:
+
+Návratový signál:
+```
+
+### Checklist ověření převodu
+
+- Ověřili jsme převod v běžném rytmu, ne ve speciálním testu?
+- Je jasné, které kanonické místo mělo práci vést?
+- Vznikl konkrétní pracovní výstup?
+- Stačil běžný rytmus bez ruční mimořádné péče?
+- Pokud vznikla péče navíc, víme, jestli chrání hodnotu, nebo jen nervozitu?
+- Pokud je potřeba oprava, je lokální a v jednom pracovním místě?
+- Pokud převod nedrží, má nová otázka vlastní hranici rozsahu?
+- Nezavedli jsme sledování lidí, klikání, času čtení ani osobní skóre?
+- Smazali jsme dočasné poznámky, screenshoty a pomocné seznamy?
+- Je zapsaný návratový signál pro další otevření mimo běžný rytmus?
+
+Ověření převodu první reakce je malá pojistka proti tomu, aby se uzavřená epizoda dál táhla v provozu. Když běžný rytmus stačí, nechte ho stačit. Když nestačí, opravte nejbližší pracovní místo. A když se ukáže větší problém, otevřete novou otázku bez toho, aby se z každé staré opravy stal trvalý dohled.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -175710,3 +175868,4 @@ Druhé běžné použití je test zdrženlivosti. Pokud klid drží podruhé, ne
 - 2026-06-04: Doplněna úvodní podkapitola o uzavření lokální opravy předání po dalším použití: stavy opravy, rozlišení nedotažené opravy od širšího vzoru, privacy-first úklid, karta uzavření a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o ověření stabilního předávacího pravidla při prvním běžném předání: mini test, čtyři výsledné stavy, návrat pravidla do běžného rytmu, privacy-first úklid, karta a checklist.
 - 2026-06-04: Doplněna Příloha XR o uzavření prvního běžného použití po klidovém provozu: čtyři uzavírací stavy, práce se starou stopou, systémová nápověda, oddělení nového signálu, privacy-first karta a checklist.
+- 2026-06-04: Doplněna úvodní podkapitola o ověření převodu první reakce v běžném rytmu: běžný cyklus, návrat mimořádné péče, privacy-first ověření, karta a checklist.
