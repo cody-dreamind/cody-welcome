@@ -1036,6 +1036,158 @@ Kdy ověříme, že oprava drží:
 
 Lokální oprava je hotová, když další člověk narazí na stejnou situaci a už neuvidí starou instrukci. Nemusí znát celou historii. Má jen najít správné aktuální pravidlo a podle něj udělat další krok.
 
+## Jak uzavřít lokální opravu předání po dalším použití
+
+Lokální oprava předání není hotová ve chvíli, kdy přepíšete starou poznámku. Hotová je až ve chvíli, kdy se opravené pracovní místo znovu použije a stará verze už do práce neproklouzne. Bez tohoto malého uzavření se z lokální opravy snadno stane další nejasný mezistav: něco jsme upravili, ale nikdo neví, jestli to stačilo, jestli se má hlídat další místo a jestli se původní rozhodnutí opravdu vrátilo do klidu.
+
+Ověření má být malé. Nepotřebujete audit všech šablon, nový report ani kontrolní schůzku jen pro opravu jedné věty. Vyberte první běžnou situaci, ve které by se stará stopa projevila, a podívejte se, jestli člověk najde aktuální pravidlo bez historického vysvětlování.
+
+Začněte otázkou:
+
+```text
+Když se opravené pracovní místo použilo znovu, vedlo člověka k aktuálnímu rozhodnutí bez návratu staré stopy?
+```
+
+Pokud ano, opravu zavřete a vraťte téma do běžného rytmu. Pokud ne, rozlišujte, jestli pořád selhává stejné místo, nebo se ukázalo druhé pracovní místo se stejnou starou stopou. První případ je nedotažená lokální oprava. Druhý už může být signál, že předání nebylo lokální a potřebuje novou otázku.
+
+### Tři výsledky po dalším použití
+
+Po dalším použití vyberte jeden stav:
+
+- Oprava drží: stará stopa se nevrátila a člověk pracoval podle aktuálního rozhodnutí.
+- Oprava nedotažená: stejné pracovní místo pořád obsahuje nejasnost nebo starou instrukci.
+- Vzor je širší: našlo se další místo se stejným typem staré stopy a lokální oprava už nestačí.
+
+`Oprava drží` znamená konec zvláštní pozornosti. Zapište krátký závěr, ukliďte pomocné poznámky a nechte téma žít v běžném rytmu. Není potřeba sledovat další tři použití jen proto, že jednou vznikla chyba v předání.
+
+`Oprava nedotažená` neznamená návrat k původnímu velkému rozhodnutí. Znamená, že oprava nebyla dost přesná. Upravte stejné pracovní místo ještě jednou, ale napište stop podmínku: pokud ani další běžné použití neprojde, už to není drobný úklid.
+
+`Vzor je širší` znamená, že problém pravděpodobně nebyl jedna stará poznámka. Možná existují dvě šablony, dva backlogy, dvě onboardingové trasy nebo dvě různé verze rozhodnutí. V tu chvíli nezvětšujte lokální opravu potichu. Otevřete novou pracovní otázku a jasně napište, že původní lokální oprava ukázala širší vzor.
+
+### Příklad uzavření
+
+```text
+Lokální oprava:
+V CRM poznámce jsme odstranili starou instrukci k lead scoringu podle velikosti firmy.
+
+Další použití:
+Obchodník připravil nový discovery hovor z aktuální šablony.
+
+Co se stalo:
+Použil otázku na rozhodovací horizont a v CRM už nenašel starou poznámku ke scoringu.
+
+Výsledek:
+Oprava drží.
+
+Co zavíráme:
+Zvláštní kontrolu předání.
+
+Co zůstává v běžném rytmu:
+Měsíční review obchodních šablon.
+
+Co dál nesbíráme:
+Velikost firmy, automaticky obohacené profily ani nové interní skóre leadu.
+```
+
+Příklad širšího vzoru:
+
+```text
+Lokální oprava:
+Upravili jsme CRM poznámku.
+
+Další použití:
+Obchodník CRM poznámku použil správně, ale v onboardingové šabloně pro nového obchodníka zůstala stará instrukce ke scoringu.
+
+Výsledek:
+Vzor je širší.
+
+Nová pracovní otázka:
+Kde všude obchodní tým začíná práci s kvalifikací leadu a které z těchto míst ještě nese starý slib scoringu?
+
+Hranice:
+Neotevíráme scoring jako produktovou funkci. Ověřujeme jen zdroje pravdy pro obchodní práci.
+```
+
+Tady už lokální oprava nesmí růst po kouskách. Když začnete opravovat druhé, třetí a čtvrté místo bez nové otázky, ztratíte hranici a za chvíli budete dělat tichý audit. Tichý audit je nejhorší druh auditu: tváří se jako drobnost, ale žere stejný čas a často sbírá stejná data.
+
+### Co uklidit po potvrzené opravě
+
+Když oprava drží, ukliďte pracovní stopy, které vznikly jen kvůli ověření:
+
+- dočasný komentář v issue nebo chatu;
+- přípravnou poznámku se starou formulací;
+- export, který měl ukázat jediný problém;
+- kopii šablony vytvořenou pro kontrolu;
+- seznam míst, pokud už byl převeden do kanonického zdroje pravdy.
+
+Neuklízejte samotné rozhodnutí. To má zůstat tam, kde se podle něj pracuje. Maže se jen pomocná stopa, ne zdroj pravdy. Rozdíl je důležitý: privacy-first úklid nemá mazat paměť týmu, má mazat nadbytečné cesty, které už nemají účel.
+
+### Privacy-first uzavření
+
+Uzavření lokální opravy má být datově štíhlé. Zapište typ situace, pracovní místo, stav opravy a rozhodnutí o návratu do rytmu. Nepotřebujete ukládat, kdo přesně podle šablony pracoval, screenshot jeho obrazovky, kompletní obchodní kontext ani seznam všech lidí, kterým se oprava připomněla.
+
+Minimum:
+
+```text
+Zůstává:
+Pracovní místo, stav opravy, aktuální pravidlo a běžný rytmus.
+
+Maže se:
+Dočasné komentáře, kontrolní kopie, pomocné exporty a osobní poznámky z ověření.
+
+Nevzniká:
+Tracker používání šablony, nové CRM pole, osobní skóre dodržování procesu ani report čtení dokumentace.
+```
+
+Codyho komentář: když po opravě jedné staré věty vznikne dashboard, věta vyhrála. Bohužel na špatné straně. Dobrý provoz poznáte i podle toho, že umí po malé opravě přestat.
+
+### Karta uzavření lokální opravy
+
+```text
+Název lokální opravy:
+
+Opravené pracovní místo:
+
+Další běžné použití:
+
+Co mělo být jinak:
+
+Co se reálně stalo:
+
+Výsledek:
+- oprava drží / oprava nedotažená / vzor je širší
+
+Pokud oprava drží, kam se téma vrací:
+
+Pokud je oprava nedotažená, jaké stejné místo ještě upravujeme:
+
+Pokud je vzor širší, jakou novou otázku otevíráme:
+
+Co znovu neotevíráme:
+
+Co uklízíme nebo anonymizujeme:
+
+Jaká data dál nesbíráme:
+
+Vlastník:
+
+Datum návratu jen pokud je potřeba:
+```
+
+### Checklist uzavření lokální opravy
+
+- Proběhlo ověření při jednom běžném použití, ne při umělém auditu?
+- Víme, jestli oprava drží, je nedotažená, nebo ukázala širší vzor?
+- Pokud drží, vrací se téma do existujícího rytmu?
+- Pokud je nedotažená, opravujeme stejné místo místo otevírání celého rozhodnutí?
+- Pokud je vzor širší, vznikla nová pracovní otázka s hranicí?
+- Je zapsané, co znovu neotevíráme?
+- Uklidili jsme dočasné poznámky, kopie, exporty nebo osobní stopy z ověření?
+- Nevznikl nový tracker, CRM údaj, dashboard ani kontrola lidí?
+- Zůstává aktuální pravidlo v místě, kde se podle něj bude dál pracovat?
+
+Uzavření lokální opravy je malý provozní úkon, ale chrání větší věc: důvěru v rozhodovací systém. Tým vidí, že drobné chyby se opravují tam, kde vznikly, a že každá stará stopa nemusí automaticky otevřít celé téma. Díky tomu se rozhodnutí dají měnit, předávat i uklízet bez toho, aby za sebou nechávala další vrstvu nejasností.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -173497,3 +173649,4 @@ Uzavření druhého běžného použití je malý, ale důležitý konec. Stabil
 - 2026-06-03: Doplněna úvodní podkapitola o převodu uzavřené první reakce na návratový signál zpět do běžného rytmu: tři převody podle stavu, úklid pracovních stop, mezistav, privacy-first hranice a checklist.
 - 2026-06-03: Doplněna Příloha XC o návratu k položce po dlouhodobém klidu: rozlišení lokální chyby, chybějící hrany, slabého rytmu a skutečného návratu problému, karta návratu, privacy-first hranice, mini workshop a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o lokální opravě předání po prvním použití: rozlišení chyby v předání od chyby rozhodnutí, úklid jedné staré stopy, privacy-first hranice a checklist.
+- 2026-06-04: Doplněna úvodní podkapitola o uzavření lokální opravy předání po dalším použití: stavy opravy, rozlišení nedotažené opravy od širšího vzoru, privacy-first úklid, karta uzavření a checklist.
