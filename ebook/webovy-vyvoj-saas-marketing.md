@@ -8209,6 +8209,133 @@ Editor rukopisu.
 
 Uzavření bez další práce je disciplína. Když systém funguje, nepřidávejte mu nové podpěry. Nechte pravidlo žít v běžném rytmu, držte návratový signál a ušetřenou pozornost použijte tam, kde práce opravdu drhne.
 
+## Když první běžná údržba ukáže drobné tření
+
+Ne každá první běžná údržba skončí čistým "necháváme beze změny". Někdy pravidlo funguje, ale člověk při použití narazí na drobnou překážku: odkaz je moc hluboko, jedna věta je zbytečně historická, příklad neodpovídá běžné situaci nebo kanonické místo neříká, kdo má rozhodnutí zavřít. To není důvod otevřít celou historii opravy. Je to důvod udělat jednu lokální úpravu.
+
+Drobné tření poznáte podle toho, že pravidlo pořád vede ke správnému rozhodnutí, jen cesta k němu není dost hladká. Pokud pravidlo nevede k rozhodnutí vůbec, řešíte větší otázku. Pokud vede, ale člověk musel jednou hledat, doptat se nebo přeskočit starou formulaci, držte reakci malou.
+
+Začněte zápisem:
+
+```text
+Pravidlo pořád platí:
+
+Drobné tření bylo:
+
+Kde přesně vzniklo:
+
+Jedna lokální úprava:
+
+Co díky tomu znovu neotevíráme:
+
+Jaká data kvůli tomu dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Pravidlo pořád platí:
+Slabý podnět se zavírá poznámkou nebo návratovým signálem. Potvrzená změna se převádí do karty změny.
+
+Drobné tření bylo:
+Člověk našel pravidlo až po otevření starého ověřovacího záznamu.
+
+Kde přesně vzniklo:
+V rozcestníku review šablon chybí krátká věta, kdy pravidlo použít.
+
+Jedna lokální úprava:
+Do rozcestníku doplníme větu: "Použijte při třídění podnětů k šablonám v měsíčním review."
+
+Co znovu neotevíráme:
+Neotevíráme starou opravu rozcestníku, strukturu všech šablon ani nový schvalovací proces.
+
+Jaká data dál nesbíráme:
+Nesledujeme kliky v rozcestníku, osobní použití pravidla ani časy čtení dokumentace.
+```
+
+Tento zápis má zabránit tomu, aby se z jednoho tření stal nový projekt. Lokální úprava má opravit nejbližší pracovní místo, ne vyrobit novou vrstvu řízení.
+
+### Tři typy drobného tření
+
+Nejčastěji jde o tři typy.
+
+První je navigační tření. Pravidlo existuje, ale člověk ho hledá déle, než je rozumné. Oprava bývá odkaz, název, kotva v dokumentu, přesun do správné části nebo odstranění duplicitní staré poznámky.
+
+Druhé je jazykové tření. Pravidlo je správné, ale pořád mluví jako záznam z opravy: "po posledním ověření jsme zjistili..." Místo toho má říct přítomnou pracovní větu: "Slabý podnět zavřete poznámkou nebo návratovým signálem."
+
+Třetí je vlastnické tření. Pravidlo říká, co má nastat, ale není jasné, kdo udělá poslední rozhodnutí. Pokud stačí doplnit roli v existujícím rytmu, pořád jde o lokální úpravu. Pokud se ukáže, že vlastnictví chybí napříč celým procesem, už to není drobné tření a patří to do nové pracovní otázky.
+
+### Malá úprava má mít malý důkaz
+
+Po lokální úpravě nepotřebujete velké ověření. Stačí nejbližší běžné použití stejného místa.
+
+```text
+Ověříme při:
+Příštím měsíčním review šablon.
+
+Stačí, když:
+Člověk najde pravidlo v rozcestníku a použije ho bez otevření starého záznamu.
+
+Nepotřebujeme:
+Report použití, sledování kliků, screenshoty ani seznam lidí, kteří pravidlo četli.
+```
+
+Když další použití proběhne čistě, úpravu zavřete a pravidlo vraťte do běžného rytmu. Když se objeví stejné tření znovu ve stejném místě, úprava nebyla dost přesná. Když se objeví podobné tření na jiném místě, zapište nový signál a rozhodněte, jestli už jde o širší vzor.
+
+### Co nedělat
+
+U drobného tření nedělejte tyto věci:
+
+- neotevírejte celou historii původní opravy;
+- nezakládejte nový audit všech pravidel;
+- nepřidávejte druhý zdroj pravdy;
+- nevytvářejte dočasnou tabulku jen kvůli jednomu použití;
+- neměřte chování lidí, pokud problém leží v textu nebo navigaci;
+- nepřepisujte pravidlo do delší verze, když stačí jedna pracovní věta.
+
+Codyho komentář: drobné tření je dobrý sluha a špatný šéf. Když vám ukáže jedno místo k opravě, pomohlo. Když mu dovolíte řídit celý další týden práce, gratuluji, právě jste z jedné nejasné věty vyrobili provozní hobby.
+
+### Karta lokální úpravy po údržbě
+
+```text
+Pravidlo nebo položka:
+
+Kanonické místo:
+
+Výsledek první běžné údržby:
+
+Typ tření:
+- navigace / jazyk / vlastnictví / jiné
+
+Jedno místo úpravy:
+
+Konkrétní změna:
+
+Co znovu neotevíráme:
+
+Co zůstává beze změny:
+
+Ověření při dalším běžném použití:
+
+Co dál nesbíráme:
+
+Vlastník:
+```
+
+### Checklist drobného tření
+
+- Vede pravidlo pořád ke správnému rozhodnutí?
+- Je tření lokalizované na jedno pracovní místo?
+- Víme, jestli jde o navigaci, jazyk nebo vlastnictví?
+- Má úprava jednu konkrétní větu, odkaz, roli nebo odstraněnou starou stopu?
+- Je jasné, co znovu neotevíráme?
+- Nezakládáme nový audit, tracker ani osobní kontrolu?
+- Ověříme úpravu při dalším běžném použití, ne speciálním testem?
+- Pokud se tření zopakuje jinde, zapíšeme ho jako nový signál místo tichého rozšiřování opravy?
+- Zůstává privacy-first hranice vidět tam, kde člověk pracuje?
+
+Drobné tření je užitečné, když zůstane drobné. Opravte nejbližší místo, ověřte při dalším běžném použití a nenechte starou epizodu znovu zabrat prostor, který si nezaslouží.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -176829,6 +176956,7 @@ První kvartální návrat má chránit dlouhodobý klid před dvěma chybami: z
 
 ## Pracovní log
 
+- 2026-06-04: Doplněna úvodní podkapitola o drobném tření po první běžné údržbě: rozlišení navigačního, jazykového a vlastnického tření, lokální oprava, malé ověření, privacy-first hranice, karta a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o uzavření první běžné údržby bez další práce: rozhodnutí nic nepřidávat, návratový signál, kosmetické podněty, privacy-first hranice, karta a checklist.
 - 2026-06-04: Doplněna Příloha XW o prvním kvartálním návratu po dlouhodobém klidu: kontrola reálných výstupů, čtyři výsledné stavy, ztenčení rytmu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XV o uzavření prvního tichého měsíce do dlouhodobého klidu: tři uzavírací stavy, kanonické místo, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
