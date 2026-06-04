@@ -1188,6 +1188,174 @@ Datum návratu jen pokud je potřeba:
 
 Uzavření lokální opravy je malý provozní úkon, ale chrání větší věc: důvěru v rozhodovací systém. Tým vidí, že drobné chyby se opravují tam, kde vznikly, a že každá stará stopa nemusí automaticky otevřít celé téma. Díky tomu se rozhodnutí dají měnit, předávat i uklízet bez toho, aby za sebou nechávala další vrstvu nejasností.
 
+## Jak převést potvrzenou lokální opravu do stabilního předávacího pravidla
+
+Když lokální oprava po dalším použití drží, svádí to k jednoduchému závěru: hotovo, jdeme dál. Prakticky je to skoro pravda. Chybí ale poslední malý krok: přepsat opravu z jazyka incidentu do jazyka běžné práce. Pokud to neuděláte, bude se oprava dál připomínat jako historická výjimka. Tým pak místo jednoduchého pravidla vidí příběh o tom, co se kdysi pokazilo, kdo to opravil a proč se to hlídalo. To je zbytečná zátěž.
+
+Stabilní předávací pravidlo nemá vysvětlovat celou opravu. Má říct, co má další člověk udělat, kde najde aktuální zdroj pravdy a jak pozná, že téma znovu stojí za pozornost. Historie patří do rozhodovací paměti, pokud má pořád účel. Do pracovního místa patří aktuální věta.
+
+Začněte převodní otázkou:
+
+```text
+Kdyby nový člověk přišel k tomuto předání bez znalosti opravy, jaké jedno pravidlo má najít a použít?
+```
+
+Pokud na otázku nejde odpovědět jednou nebo dvěma větami, oprava ještě není připravená do stabilního pravidla. Možná stále drží jen díky tomu, že si lidé pamatují kontext. To není stabilita, to je šikovně maskovaná závislost na paměti týmu.
+
+### Co převést a co nechat v historii
+
+Do stabilního předávacího pravidla patří:
+
+- aktuální pracovní pravidlo;
+- místo, kde se podle něj pracuje;
+- vlastník nebo role, která pravidlo udržuje;
+- běžný rytmus kontroly, pokud už existuje;
+- návratový signál, který opravňuje nové otevření;
+- privacy-first hranice, hlavně co dál nesbírat.
+
+Do historie patří:
+
+- původní chybná formulace;
+- detailní popis opravy;
+- jména lidí, kteří na chybu narazili;
+- dočasné komentáře, exporty a screenshoty;
+- staré varianty šablon, které už nemají pracovní účel.
+
+Příklad stabilního přepisu:
+
+```text
+Historie opravy:
+V CRM byla stará poznámka, která obchod vedla ke scoringu podle velikosti firmy.
+
+Stabilní pravidlo:
+Při kvalifikaci nového leadu se ptáme na rozhodovací horizont, problém a očekávaný výsledek. Velikost firmy nepoužíváme jako automatický kvalifikační údaj.
+
+Kde pravidlo bydlí:
+Obchodní discovery šablona.
+
+Návratový signál:
+Pokud se v některém pracovním místě znovu objeví scoring podle velikosti firmy jako výchozí pravidlo.
+
+Privacy-first hranice:
+Nepřidáváme nové CRM pole, automatické obohacování profilu ani interní skóre člověka nebo firmy.
+```
+
+Takový přepis chrání dvě věci najednou. Tým nemusí znovu číst historii drobné chyby a zákazníkovi ani internímu systému nevzniká nová datová stopa jen kvůli tomu, že kdysi existovala nejasná instrukce.
+
+### Vyberte jeden domov pravidla
+
+Potvrzená lokální oprava často odkryje, že stejná informace žije ve více místech: CRM poznámka, onboardingová šablona, interní wiki, checklist pro předání, starý issue komentář. Stabilizace neznamená opravit všechna místa tak, aby všude stála stejná dlouhá věta. Stabilizace znamená vybrat jeden domov a ostatní místa na něj odkázat, zkrátit nebo uklidit.
+
+Pravidlo pro výběr domova:
+
+- Pokud se podle věty pracuje při konkrétním úkolu, patří do šablony nebo checklistu toho úkolu.
+- Pokud věta vysvětluje důvod rozhodnutí, patří do rozhodovacího záznamu.
+- Pokud věta slouží jen jako připomínka staré chyby, obvykle patří pryč.
+- Pokud věta nastavuje datovou hranici, musí být vidět tam, kde člověk data zadává, exportuje nebo předává.
+
+Nepřidávejte nový dokument jen proto, aby měla oprava hezké místo. Nový dokument je nový povrch údržby. Pokud pravidlo neumíte vložit do existující pracovní trasy, nejdřív se ptejte, jestli daná trasa vůbec má jasný zdroj pravdy.
+
+### Přepište pravidlo do přítomného času
+
+Stabilní pravidlo má mluvit přítomným časem:
+
+- "Používáme tuto otázku."
+- "Tento údaj nesbíráme."
+- "Tento návratový signál otevírá revizi."
+- "Tato šablona je zdroj pravdy."
+
+Vyhněte se formulacím:
+
+- "Po opravě už bychom měli..."
+- "Minule se ukázalo, že..."
+- "Dávejte pozor, ať se neopakuje..."
+- "Historicky jsme používali..."
+
+Tyto věty mohou být pravdivé, ale tlačí pracovní místo zpět do minulosti. Člověk pak musí nejdřív pochopit příběh, teprve potom pravidlo. V dobrém provozu to má být obráceně: pravidlo je použitelné hned a historie je dohledatelná jen tehdy, když je potřeba.
+
+### Předání stabilního pravidla
+
+Předání má být krátké a praktické. Stačí jedna zpráva do místa, kde tým běžně sleduje změny pracovních pravidel:
+
+```text
+Lokální oprava předání je uzavřená.
+
+Aktuální pravidlo:
+Při kvalifikaci leadu se ptáme na rozhodovací horizont, problém a očekávaný výsledek. Velikost firmy nepoužíváme jako automatické skóre.
+
+Zdroj pravdy:
+Obchodní discovery šablona.
+
+Co bylo uklizeno:
+Stará CRM poznámka a dočasná kontrolní kopie.
+
+Návratový signál:
+Scoring podle velikosti firmy se znovu objeví jako výchozí pracovní pravidlo.
+```
+
+Neoznamujte z toho nový projekt. Nežádejte tým o plošné potvrzení, pokud pravidlo už prošlo běžným použitím. Předání nemá spustit další diskusi, jen zviditelnit aktuální stav a místo pravdy.
+
+### Privacy-first stabilizace
+
+Privacy-first stabilizace má jednoduchý cíl: aby po opravě nezůstalo víc dat, než bylo potřeba k rozhodnutí. Proto při převodu do stabilního pravidla projděte tři hromádky:
+
+- Zachovat: aktuální pravidlo, zdroj pravdy, návratový signál a datovou hranici.
+- Zkrátit: rozhodovací záznam tak, aby nesl důvod bez osobních detailů a surových podkladů.
+- Smazat nebo anonymizovat: dočasné exporty, screenshoty, komentáře s osobními údaji, pracovní kopie a staré šablony.
+
+Když je důkazem jen to, že nová šablona fungovala při jednom běžném použití, obvykle není potřeba ukládat celý průchod. Stačí věta:
+
+```text
+Ověřeno při dalším běžném použití: člověk našel aktuální šablonu, nepoužil starý scoring a nevznikl nový údaj.
+```
+
+To je dost pro provozní paměť a zároveň málo pro budoucí datový nepořádek. Přesně ten druh nudné rovnováhy, kterou mám rád. Ano, Cody umí mít rád nudné věci. Hlavně když šetří lidem čas a firmě odpovědnost.
+
+### Karta stabilního předávacího pravidla
+
+```text
+Název pravidla:
+
+Původní lokální oprava:
+
+Potvrzení, že oprava drží:
+
+Stabilní pracovní věta:
+
+Kanonický domov pravidla:
+
+Místa, která už jen odkazují nebo byla uklizena:
+
+Role, která pravidlo udržuje:
+
+Běžný rytmus kontroly:
+
+Návratový signál:
+
+Privacy-first hranice:
+
+Co zůstává v rozhodovací paměti:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Datum převodu:
+```
+
+### Checklist stabilizace lokální opravy
+
+- Je oprava potvrzená při běžném použití?
+- Přepsali jsme ji do aktuální pracovní věty, ne do historického vysvětlení?
+- Má pravidlo jeden kanonický domov?
+- Jsou ostatní místa uklizená, zkrácená nebo jen odkazují na zdroj pravdy?
+- Zůstává návratový signál konkrétní a úzký?
+- Ví tým, kde pravidlo najde, bez znalosti původní chyby?
+- Nevznikl nový dokument jen kvůli tomu, že jsme nevěděli, kam pravidlo patří?
+- Jsou dočasné důkazy smazané, zkrácené nebo anonymizované?
+- Je privacy-first hranice vidět tam, kde člověk reálně pracuje s daty?
+- Neudržujeme opravu jako výjimku, když už má být běžným pravidlem?
+
+Stabilizace lokální opravy je hotová, když se další člověk nepotká s opravou, ale s normálním pravidlem. To je dobrý konec. Ne proto, že by historie nebyla důležitá, ale proto, že běžná práce nemá nést každou minulou chybu na zádech.
+
 Praktický filtr na výběr jedné kapitoly:
 
 1. Kdybychom vyřešili jen tuto věc, co se zlepší pro zákazníka?
@@ -174007,6 +174175,7 @@ První běžné použití po klidovém provozu má potvrdit obyčejnost. Když p
 
 ## Pracovní log
 
+- 2026-06-04: Doplněna úvodní podkapitola o převodu potvrzené lokální opravy do stabilního předávacího pravidla: kanonický domov, přepis do přítomného času, předání, privacy-first úklid, karta a checklist.
 - 2026-06-04: Doplněna Příloha XQ o prvním běžném použití po klidovém provozu: rozlišení klidu, staré stopy, nepsané znalosti a nového signálu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XP o uzavření první lehké kontroly do klidového provozu: čtyři uzavírací stavy, návrat do klidu, drobný úklid, přepnutí rytmu, úzká otázka, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XO o první lehké kontrole stabilního provozního stavu: důvod kontroly, čtyři výsledné stavy, potvrzení stability, drobný úklid, rytmická oprava, návratový signál, privacy-first karta, mini workshop a checklist.
