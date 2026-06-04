@@ -175864,8 +175864,304 @@ Po prvním tichém měsíci je položka [název] ve stavu [stav]. Děláme [akce
 
 První tichý měsíc je test disciplíny. Ne test toho, jestli umíte přidat další kontrolu. Když klid drží, ukliďte opory a nechte práci běžet. Když klid ruší vlastní nejistota týmu, zrušte rušení. Když se signál opravdu vrátí, reagujte úzce. Tak se privacy-first provoz drží čistý: minimum dohledu, minimum stop a jasný důvod pro každé další otevření.
 
+## Příloha XV: Uzavření prvního tichého měsíce do dlouhodobého klidu
+
+První tichý měsíc má smysl jen tehdy, když po něm opravdu zmizí zvláštní péče. Jinak se z něj stane další vrstva provozu: po kontrole přijde kontrola kontroly, po úklidu přijde úklidový report a položka, která měla odpočívat v běžném rytmu, se zase tváří jako malý projekt. Uzavření prvního tichého měsíce proto neřeší, jestli byla práce zajímavá. Řeší, jestli se položka může vrátit do dlouhodobého klidu bez nové administrativy.
+
+Použijte jednoduchou větu:
+
+```text
+První tichý měsíc končí jako [stav]. Položka dál žije v [kanonické místo], další návrat nastane jen při [signál] a zvláštní péče končí.
+```
+
+Tato věta je malá, ale důležitá. Odděluje klid od zapomenutí. Položka nezmizí: zůstává na správném místě, má jasný návratový signál a má vlastníka. Jen už kolem ní neběží vedlejší kontrolní režim.
+
+### Tři uzavírací stavy
+
+Po prvním tichém měsíci vyberte jeden ze tří stavů:
+
+- Dlouhodobý klid: položka funguje v běžné práci a nic dalšího nepotřebuje.
+- Klid po úklidu: položka funguje, ale před uzavřením je nutné odstranit jednu zbylou oporu.
+- Malý návrat: původní návratový signál se potvrdil a má vzniknout jedna úzká reakce.
+
+Nepřidávejte stav "budeme to ještě sledovat". Sledování je práce. Pokud pro něj není konkrétní rozhodovací otázka, není to opatrnost, ale šum v systému. Privacy-first provoz má radši jasnou hranici než nekonečné "pro jistotu".
+
+### Dlouhodobý klid
+
+Dlouhodobý klid zvolte, když se položka během měsíce nevrátila, nevznikla nová dočasná evidence a běžné výstupy proběhly bez mimořádné pomoci.
+
+Uzavírací zápis:
+
+```text
+Položka:
+
+Kanonické místo:
+
+Co v prvním tichém měsíci proběhlo:
+
+Proč klid drží:
+
+Další návratový signál:
+
+Co dál neděláme:
+```
+
+Příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Kanonické místo:
+Redakční playbook.
+
+Co v prvním tichém měsíci proběhlo:
+Dvě nové case studies vznikly z kanonického checklistu bez dotazů na starou šablonu.
+
+Proč klid drží:
+Autoři našli správný vstup a výstup odpovídal novému pravidlu.
+
+Další návratový signál:
+Dvě po sobě jdoucí case studies obejdou kanonický checklist.
+
+Co dál neděláme:
+Nepřidáváme měsíční kontrolu, nesledujeme otevření dokumentu a nevedeme seznam průchodů.
+```
+
+V tomto stavu už není žádná akce. Pokud někdo navrhne "jen rychlou kontrolu za měsíc", vraťte se k návratovému signálu. Buď existuje konkrétní signál, nebo kontrola nemá co rozhodnout.
+
+### Klid po úklidu
+
+Klid po úklidu zvolte, když výsledek práce drží, ale v okolí zůstala jedna stará stopa. Může to být pomocná tabulka, starý odkaz v rozcestníku, připomínka v kalendáři, archivní šablona bez označení nebo poznámka v agendě, která pořád zve položku zpět do debaty.
+
+Tady neotevírejte samotnou položku. Upravte jen stopu, která ruší klid:
+
+```text
+Rušící stopa:
+
+Proč už nemá účel:
+
+Co s ní uděláme:
+- smazat / označit jako archiv / přesunout / zkrátit / anonymizovat
+
+Kde zůstává aktuální pravidlo:
+
+Jak poznáme, že úklid stačí:
+
+Co dál nesledujeme:
+```
+
+Příklad:
+
+```text
+Rušící stopa:
+Starý odkaz na briefingovou šablonu v redakčním rozcestníku.
+
+Proč už nemá účel:
+Nový checklist je kanonické místo a stará šablona vede k duplicitním otázkám.
+
+Co s ní uděláme:
+Označíme ji jako archiv a přesuneme pod historické materiály.
+
+Kde zůstává aktuální pravidlo:
+V redakčním playbooku u tvorby case studies.
+
+Jak poznáme, že úklid stačí:
+Další autor začne z playbooku, ne ze starého rozcestníku.
+
+Co dál nesledujeme:
+Nesledujeme kliky na odkazy ani osobní historii autorů.
+```
+
+Klid po úklidu je pořád klid. Rozdíl je jen v tom, že před zavřením uklidíte jednu věc, která by mohla budoucímu člověku poslat špatný signál.
+
+### Malý návrat
+
+Malý návrat zvolte, když se původní návratový signál opravdu potvrdil. Důležité slovo je "původní". Pokud se objevil nový problém, otevřete novou úzkou otázku mimo tuto položku. Pokud se vrátil přesně ten signál, kvůli kterému položka neměla být zapomenutá, udělejte jednu reakci.
+
+Zápis:
+
+```text
+Původní návratový signál:
+
+Co se potvrdilo:
+
+Nejmenší reakce:
+
+Stop podmínka reakce:
+
+Co zůstává zavřené:
+
+Privacy-first hranice:
+```
+
+Příklad:
+
+```text
+Původní návratový signál:
+Dvě po sobě jdoucí case studies obejdou kanonický checklist.
+
+Co se potvrdilo:
+Obě nové case studies začaly ze staré šablony, protože ji obchod pořád posílá zákazníkům jako přípravu.
+
+Nejmenší reakce:
+V obchodní follow-up šabloně nahradit starý odkaz kanonickým checklistem.
+
+Stop podmínka reakce:
+Další case study začne z nového odkazu bez ručního vysvětlování.
+
+Co zůstává zavřené:
+Neotevíráme celý redakční proces, nový schvalovací workflow ani měření používání dokumentů.
+
+Privacy-first hranice:
+Ověřujeme výsledek další case study, ne chování konkrétního obchodníka nebo autora.
+```
+
+Malý návrat není prohra klidového provozu. Je to důkaz, že návratový signál měl smysl. Systém si pamatoval jen to, co potřeboval k rozhodnutí, a neudržoval kolem položky permanentní dohled.
+
+### Co zapsat do kanonického místa
+
+Po uzavření prvního tichého měsíce nepište dlouhou historii. Kanonické místo má obsahovat hlavně aktuální pravidlo a návratový signál.
+
+Stačí krátký blok:
+
+```text
+Stav:
+dlouhodobý klid
+
+Aktuální pravidlo:
+
+Další návratový signál:
+
+Poslední uzavření:
+první tichý měsíc potvrzen dne [datum]
+```
+
+Pokud jste dělali úklid nebo malý návrat, přidejte jen jednu větu změny. Archivní příběh nechte v rozhodovacím logu, ne v pracovním návodu. Člověk, který chce dnes udělat case study, nepotřebuje vědět, kolik debat vedlo k checklistu. Potřebuje vědět, který checklist použít.
+
+Codyho komentář: dokumentace má někdy zvláštní talent převléct staré drama za "kontext". Kontext je užitečný, když pomáhá rozhodnout. Když jen nutí dalšího člověka číst detektivku o interních šablonách, je to literární žánr, ne provozní pomůcka.
+
+### Privacy-first uzavření
+
+Uzavření do dlouhodobého klidu je dobrý okamžik pro poslední datový úklid. Zeptejte se:
+
+- Má dočasná poznámka ještě rozhodovací účel?
+- Obsahuje osobní údaje, jména, e-maily, screenshoty, komentáře nebo citace lidí?
+- Stačí ponechat anonymizované poučení místo celé pracovní stopy?
+- Je aktuální pravidlo dostupné bez starých exportů?
+- Nevznikla při kontrole nová evidence, která sama potřebuje retenci?
+
+Praktické pravidlo: ponechte výsledek, smažte cestu, pokud už k ničemu neslouží. Výjimkou jsou rozhodnutí, která musí zůstat kvůli odpovědnosti, auditu nebo budoucímu vysvětlení. I tam ale často stačí krátký záznam bez zbytečných osobních detailů.
+
+### Karta uzavření tichého měsíce
+
+```text
+Položka:
+
+Kanonické místo:
+
+Datum uzavření prvního tichého měsíce:
+
+Výsledek:
+- dlouhodobý klid / klid po úklidu / malý návrat
+
+Jedna věta rozhodnutí:
+
+Jedna akce nebo žádná:
+
+Stop podmínka akce, pokud existuje:
+
+Aktuální pravidlo:
+
+Další návratový signál:
+
+Co zůstává zavřené:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Co dál nesledujeme:
+
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Kanonické místo:
+Redakční playbook.
+
+Datum uzavření prvního tichého měsíce:
+2026-06-04.
+
+Výsledek:
+klid po úklidu
+
+Jedna věta rozhodnutí:
+Checklist funguje, ale starý odkaz v rozcestníku ruší dlouhodobý klid.
+
+Jedna akce nebo žádná:
+Označit starou šablonu jako archiv a v rozcestníku ponechat jen kanonický checklist.
+
+Stop podmínka akce:
+Další autor začne z playbooku bez dotazu na editora.
+
+Aktuální pravidlo:
+Case study začíná z checklistu v redakčním playbooku.
+
+Další návratový signál:
+Dvě po sobě jdoucí case studies obejdou kanonický checklist.
+
+Co zůstává zavřené:
+Redakční proces, staré ověřovací poznámky a nový monitoring používání dokumentů.
+
+Co mažeme, anonymizujeme nebo archivujeme:
+Archivujeme starou šablonu, mažeme dočasnou kontrolní poznámku.
+
+Co dál nesledujeme:
+Kliky, otevření dokumentů, osobní průchody ani časy čtení.
+
+Vlastník:
+Vlastník obsahu.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kartu prvního tichého měsíce.
+2. Minuta 2: vyberte jeden ze tří uzavíracích stavů.
+3. Minuta 3: napište jednu větu rozhodnutí.
+4. Minuta 4: určete jednu akci nebo výslovně žádnou.
+5. Minuta 5: zapište návratový signál a zavřený rozsah.
+6. Minuta 6: rozhodněte, co se maže, anonymizuje nebo archivuje.
+
+Výstup:
+
+```text
+Položku [název] po prvním tichém měsíci uzavíráme jako [stav]. Děláme [akce/žádná akce], další návrat nastane jen při [signál] a dál nesledujeme [data].
+```
+
+### Checklist uzavření prvního tichého měsíce
+
+- Vybrali jsme jen jeden ze tří uzavíracích stavů?
+- Nevzniká další kontrola jen ze zvyku?
+- Je jasné, kde položka dál žije?
+- Má položka aktuální pravidlo napsané bez dlouhé historie?
+- Je návratový signál konkrétní a navázaný na výsledek práce?
+- U dlouhodobého klidu opravdu neděláme žádnou akci?
+- U klidu po úklidu opravujeme jen jednu rušící stopu?
+- U malého návratu reagujeme jen na původní potvrzený signál?
+- Je zapsané, co zůstává zavřené?
+- Mažeme, anonymizujeme nebo archivujeme dočasné poznámky bez dalšího účelu?
+- Nevzniká měření lidí, kliků, otevření dokumentů ani osobních průchodů?
+- Umí vlastník jednou větou říct, kdy se položka smí znovu otevřít?
+
+Uzavření prvního tichého měsíce je práce proti provozní setrvačnosti. Když klid drží, nenechte ho proměnit v nový rituál. Když zůstala jedna stopa, ukliďte ji. Když se signál vrátil, reagujte úzce. To je celé kouzlo, žádná slavobrána z procesních diagramů.
+
 ## Pracovní log
 
+- 2026-06-04: Doplněna Příloha XV o uzavření prvního tichého měsíce do dlouhodobého klidu: tři uzavírací stavy, kanonické místo, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XU o první tichý měsíc po uzavření do klidu: rozlišení potvrzeného klidu, rušeného klidu a potvrzeného signálu, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o uzavření ověřeného převodu jako běžného pravidla: přepis z opravy do provozu, kanonické místo, konec mimořádné péče, privacy-first úklid, karta a checklist.
 - 2026-06-04: Doplněna Příloha XT o uzavření druhého běžného použití v klidovém provozu: čtyři uzavírací stavy, návratový signál, privacy-first hranice, karta, mini workshop a checklist.
