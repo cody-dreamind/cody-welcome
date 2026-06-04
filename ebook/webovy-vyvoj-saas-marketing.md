@@ -173299,8 +173299,414 @@ Položka [název] po první lehké kontrole zůstává ve stavu [stav]. Děláme
 
 První lehká kontrola má stabilní položku nechat dospět. Když drží, nechte ji být. Když překáží jedna stará stopa, ukliďte ji. Když nesedí rytmus, přesuňte napojení. Když se opravdu vrátil problém, otevřete jen jeho nejmenší pracovní část. Všechno ostatní je jen další vrstva správy nad věcí, která měla původně práci zjednodušit.
 
+## Příloha XP: Uzavření první lehké kontroly do klidového provozu
+
+První lehká kontrola má cenu až ve chvíli, kdy po ní něco skončí. Pokud kontrola jen vytvoří další připomínku, další poznámku a další "radši to ještě příště ověříme", stabilní položka se nikdy nevrátí do klidu. Uzavření první lehké kontroly proto slouží k jedné věci: převést výsledek kontroly do normálního provozního stavu a zavřít kontrolní režim.
+
+Začněte větou:
+
+```text
+Po první lehké kontrole je položka ve stavu:
+
+Do běžného provozu se převádí takto:
+
+Kontrolní režim končí tím, že:
+
+Další návrat nastane jen při:
+```
+
+Tato věta je důležitější než dlouhý zápis. Tým díky ní ví, zda má položku dál používat, uklidit jednu stopu, změnit rytmus, nebo otevřít úzkou otázku. Bez uzavírací věty zůstane kontrola viset ve vzduchu a při dalším plánování se bude tvářit jako nedokončená práce.
+
+Příklad:
+
+```text
+Po první lehké kontrole je checklist případové studie stabilní s jedním drobným úklidem.
+
+Do běžného provozu se převádí takto:
+Starý odkaz v interním rozcestníku se smaže a kanonickým místem zůstává redakční playbook.
+
+Kontrolní režim končí tím, že:
+Dočasná karta ověření se po zapsání závěru smaže.
+
+Další návrat nastane jen při:
+Opakovaném obejití redakčního playbooku při přípravě nové case study.
+```
+
+Všimněte si, že uzavření neotevírá celý obsahový proces. Řeší jen to, co první lehká kontrola opravdu našla. To je dobrý standard pro web, SaaS i marketing: kontrola nemá být záminka k další expanzi práce.
+
+### Čtyři způsoby uzavření
+
+Výsledek první lehké kontroly uzavřete jedním ze čtyř způsobů:
+
+- Vrátit do klidu: stabilita se potvrdila a není potřeba žádná akce.
+- Uklidit a vrátit do klidu: položka funguje, ale jedna zbytková stopa se odstraní.
+- Přepnout rytmus: položka funguje, ale musí se napojit na jiný pracovní okamžik.
+- Otevřít úzkou otázku: návratový signál se potvrdil a vzniká jeden malý další krok.
+
+Nepřidávejte pátý stav "sledovat". Pokud něco opravdu potřebuje sledování, nejspíš ještě nejde o uzavření. V takovém případě napište úzkou otázku, nejmenší důkaz a konec sledování. Jinak si tým jen vyrábí dlouhou chodbu mezi kontrolou a rozhodnutím.
+
+### Vrátit do klidu
+
+Vrácení do klidu je správné, když položka fungovala v běžné práci, nenašla se stará stopa a další kontrola by nepřinesla nic kromě pocitu opatrnosti.
+
+Zápis má být krátký:
+
+```text
+Stav:
+vrátit do klidu
+
+Co kontrola potvrdila:
+
+Kde položka dál žije:
+
+Co tím končí:
+
+Další běžný rytmus:
+
+Návratový signál:
+```
+
+Příklad:
+
+```text
+Stav:
+vrátit do klidu
+
+Co kontrola potvrdila:
+Checklist se použil při běžné case study bez staré pomocné karty a bez dotazu na autora poslední opravy.
+
+Kde položka dál žije:
+Redakční playbook.
+
+Co tím končí:
+První lehká kontrola a dočasná poznámka k ověření stability.
+
+Další běžný rytmus:
+Pololetní review playbooku.
+
+Návratový signál:
+Dvě po sobě jdoucí case studies obejdou checklist nebo použijí starou šablonu.
+```
+
+U stabilního výsledku nepřidávejte další mezikrok. Stabilita se má projevit tím, že věc přestane vyžadovat zvláštní pozornost. Pokud tým neumí stabilní položku nechat být, bude časem spravovat hlavně vlastní správu.
+
+### Uklidit a vrátit do klidu
+
+Někdy první lehká kontrola najde jednu starou stopu, ale ne problém v samotné položce. Tehdy neotevírejte novou opravu. Udělejte úklidovou akci a vraťte položku do klidu.
+
+Šablona:
+
+```text
+Stav:
+uklidit a vrátit do klidu
+
+Stabilní část:
+
+Zbytková stopa:
+
+Úklidová akce:
+
+Kdy je hotovo:
+
+Co se neotevírá:
+
+Privacy-first úklid:
+
+Další rytmus nebo signál:
+```
+
+Příklad:
+
+```text
+Stav:
+uklidit a vrátit do klidu
+
+Stabilní část:
+Checklist v redakčním playbooku se používá správně.
+
+Zbytková stopa:
+V poznámkách k minulému sprintu zůstal odkaz na starou ověřovací kartu.
+
+Úklidová akce:
+Odkaz odstranit a ponechat jen uzavírací větu v changelogu playbooku.
+
+Kdy je hotovo:
+Po smazání odkazu a kontrole, že rozcestník vede jen na kanonické místo.
+
+Co se neotevírá:
+Celý rozcestník, struktura dokumentace ani nový systém štítků.
+
+Privacy-first úklid:
+Stará ověřovací karta se smaže, protože obsahovala dočasné pracovní příklady bez dalšího účelu.
+
+Další rytmus:
+Pololetní review redakčního playbooku.
+```
+
+Úklid nesmí růst do inventury všeho. Když najdete další stopu mimo původní místo, zapište ji samostatně a zavřete tuto jednu akci. Jinak drobný úklid začne vypadat jako výhodný vstup do nekonečné reorganizace.
+
+### Přepnout rytmus
+
+Přepnutí rytmu je uzavření, ne nová velká oprava. Použijte ho, když položka obsahově drží, ale kontrola ukázala, že se objevuje ve špatný okamžik. Typicky je checklist v pořádku, ale lidé ho vidí až po rozhodnutí, které měl podpořit.
+
+Zápis:
+
+```text
+Stav:
+přepnout rytmus
+
+Co funguje:
+
+Kde byl špatný okamžik:
+
+Nový pracovní spouštěč:
+
+Jedna změna napojení:
+
+Co se ruší:
+
+Co neměříme:
+
+Ověření:
+```
+
+Příklad:
+
+```text
+Stav:
+přepnout rytmus
+
+Co funguje:
+Pravidlo pro anonymizované zákaznické formulace je srozumitelné.
+
+Kde byl špatný okamžik:
+Kontrola probíhala až při finální editaci, kdy už byly citace zapsané v draftu.
+
+Nový pracovní spouštěč:
+Brief před rozhovorem se zákazníkem.
+
+Jedna změna napojení:
+Do briefu přidat odkaz na část playbooku s modelovými anonymizovanými formulacemi.
+
+Co se ruší:
+Samostatná připomínka při finální editaci.
+
+Co neměříme:
+Nesledujeme otevření dokumentu, aktivitu konkrétních lidí ani čas strávený v playbooku.
+
+Ověření:
+Při další case study zkontrolovat, jestli brief obsahoval odkaz před rozhovorem.
+```
+
+Rytmus se má posunout blíž k rozhodnutí. Ne blíž k reportu. Pokud kvůli změně rytmu vzniká nový dashboard, nejspíš jste místo napojení na práci vytvořili kontrolu kontroly.
+
+### Otevřít úzkou otázku
+
+Když se návratový signál opravdu potvrdí, uzavření první lehké kontroly neznamená návrat celé historie. Znamená otevřít úzkou otázku, která odpovídá dnešnímu důkazu.
+
+Začněte takto:
+
+```text
+Stav:
+otevřít úzkou otázku
+
+Potvrzený signál:
+
+Co přesně nefunguje:
+
+Nejmenší otázka:
+
+Nejmenší další krok:
+
+Co zůstává stabilní:
+
+Co se neotevírá:
+
+Privacy-first hranice:
+
+Kdy se úzká otázka zavře:
+```
+
+Příklad:
+
+```text
+Stav:
+otevřít úzkou otázku
+
+Potvrzený signál:
+Dvě nové case studies znovu použily zákaznické formulace, které nemají být veřejné.
+
+Co přesně nefunguje:
+Tým ví, že má anonymizovat, ale nemá po ruce dost dobré modelové formulace.
+
+Nejmenší otázka:
+Jak doplnit tři bezpečné modelové formulace do existujícího checklistu?
+
+Nejmenší další krok:
+Přidat tři anonymizované příklady bez reálných zákaznických detailů.
+
+Co zůstává stabilní:
+Kanonické místo, vlastník playbooku a pololetní review.
+
+Co se neotevírá:
+Nový sběr citací, session recording, databáze zákaznických výroků ani nový schvalovací proces.
+
+Privacy-first hranice:
+Použijí se jen syntetické nebo dostatečně zobecněné příklady, žádné citace z interních rozhovorů.
+
+Kdy se úzká otázka zavře:
+Po dalším použití checklistu v jedné case study.
+```
+
+Úzká otázka chrání tým před historickou gravitací. Starý problém se může vrátit, ale nemusí si s sebou přinést všechny staré nápady. Codyho komentář: minulost má sklon chodit na porady s kufrem. Nenechte ji vybalit všechno.
+
+### Privacy-first uzavření
+
+Každé uzavření první lehké kontroly musí říct, co se stane s dočasnými důkazy. Kontrola často vytvoří pomocnou kartu, screenshot, poznámku z průchodu, export odkazů nebo malý seznam příkladů. Tyto věci mají smysl jen po dobu rozhodnutí. Jakmile je rozhodnutí hotové, buď se přepíšou do kanonického místa, nebo se smažou.
+
+Použijte jednoduchou větu:
+
+```text
+Do kanonického místa přenášíme:
+
+Mažeme:
+
+Ponecháváme jen do:
+
+Nepředáváme žádnému novému nástroji:
+```
+
+Příklad:
+
+```text
+Do kanonického místa přenášíme:
+Jednu uzavírací větu a nový odkaz v briefu.
+
+Mažeme:
+Dočasnou kontrolní kartu a starý export připomínek.
+
+Ponecháváme jen do:
+Uzavření další case study, pokud se ověřuje změna rytmu.
+
+Nepředáváme žádnému novému nástroji:
+Nevzniká nový reporting, tracker ani externí databáze příkladů.
+```
+
+Tento zápis je praktický, ne slavnostní. Pomáhá udržet evropský privacy-first provoz v každodenních detailech: data mají účel, místo a konec. Bez konce se z každé malé kontroly časem stane další vrstva interního šumu.
+
+### Karta uzavření první lehké kontroly
+
+```text
+Položka:
+
+Kanonické místo:
+
+Výsledek první lehké kontroly:
+- stabilita potvrzena / drobný úklid / rytmus nesedí / návratový signál potvrzen
+
+Uzavírací stav:
+- vrátit do klidu / uklidit a vrátit do klidu / přepnout rytmus / otevřít úzkou otázku
+
+Jedna věta závěru:
+
+Jedna akce nebo žádná:
+
+Co končí:
+
+Co se ruší nebo maže:
+
+Co se výslovně neotevírá:
+
+Privacy-first hranice:
+
+Další běžný rytmus nebo návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Kanonické místo:
+Redakční playbook.
+
+Výsledek první lehké kontroly:
+drobný úklid
+
+Uzavírací stav:
+uklidit a vrátit do klidu
+
+Jedna věta závěru:
+Checklist funguje v běžné práci, ale starý odkaz v rozcestníku se musí odstranit, aby tým neobcházel kanonické místo.
+
+Jedna akce:
+Smazat starý odkaz a ponechat jen odkaz na redakční playbook.
+
+Co končí:
+První lehká kontrola a dočasná ověřovací karta.
+
+Co se ruší nebo maže:
+Starý alias, export připomínek a pomocná karta ověření.
+
+Co se neotevírá:
+Celý redakční systém, struktura case studies ani nové měření obsahu.
+
+Privacy-first hranice:
+Žádné reálné zákaznické citace nepřenášíme do nového dokumentu; do playbooku jde jen zobecněná formulace pravidla.
+
+Další rytmus:
+Pololetní review redakčního playbooku.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-04
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte výsledek první lehké kontroly.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište jednu větu závěru.
+4. Minuta 4: určete jednu akci nebo vědomě žádnou.
+5. Minuta 5: napište, co končí a co se ruší.
+6. Minuta 6: zapište, co se neotevírá.
+7. Minuta 7: zavřete privacy-first hranici a další návratový signál.
+
+Výstup:
+
+```text
+Položka [název] se po první lehké kontrole uzavírá jako [stav]. Děláme [akce/žádná akce], končí [kontrolní režim], rušíme [stopy], neotevíráme [rozsah] a vrátíme se jen při [signál/rytmus].
+```
+
+### Checklist uzavření první lehké kontroly
+
+- Má uzavření jeden ze čtyř stavů?
+- Je napsaná jedna věta závěru?
+- Víme, zda děláme jednu akci, nebo žádnou?
+- Končí kontrolní režim, pokud není potvrzená úzká otázka?
+- Je jasné, co se ruší, maže nebo přesouvá do kanonického místa?
+- U stabilního výsledku nevzniká další zvláštní kontrola?
+- U drobného úklidu řešíme jen jednu zbytkovou stopu?
+- U přepnutí rytmu měníme pracovní spouštěč, ne celý obsah?
+- U úzké otázky je jasné, co zůstává stabilní?
+- Je výslovně napsané, co se neotevírá?
+- Dočasné důkazy mají účel, místo a konec?
+- Nevzniká nový tracker, export, report ani dodavatelský účet?
+- Má položka další běžný rytmus nebo konkrétní návratový signál?
+- Ví vlastník, kdy je hotovo?
+
+Dobré uzavření první lehké kontroly je nenápadné. Neoslavuje stabilitu, nezakládá nový proces a nepíše dlouhou historii. Jen řekne: tady položka dál žije, tohle končí, tohle mažeme, k tomuhle se nevracíme a další návrat potřebuje konkrétní signál. Přesně tak se z pracovního systému nestane muzeum vlastních oprav.
+
 ## Pracovní log
 
+- 2026-06-04: Doplněna Příloha XP o uzavření první lehké kontroly do klidového provozu: čtyři uzavírací stavy, návrat do klidu, drobný úklid, přepnutí rytmu, úzká otázka, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XO o první lehké kontrole stabilního provozního stavu: důvod kontroly, čtyři výsledné stavy, potvrzení stability, drobný úklid, rytmická oprava, návratový signál, privacy-first karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XN o uzavření druhého běžného použití do stabilního provozního stavu: čtyři uzavírací stavy, stabilní stav, lokální dočištění, rytmická úprava, úzké znovuotevření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XM o druhém běžném použití po uzavření prvního průchodu: ověření návratu do provozu, čtyři výsledky, lokální dočištění, rytmická oprava, návrat problému, privacy-first karta, mini workshop a checklist.
