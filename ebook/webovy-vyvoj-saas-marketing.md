@@ -175594,8 +175594,279 @@ Položku [název] po druhém běžném použití uzavíráme jako [stav]. Dělá
 
 Uzavření druhého běžného použití je poslední brzda před nekonečnou údržbou. Když klid drží, zavřete ho. Když se něco vrací, opravte nejbližší pracovní místo. Když se objeví nová otázka, dejte jí vlastní malý rámec. Privacy-first provoz tím zůstává klidný: méně dohledu, méně dat, víc jasných rozhodnutí.
 
+## Příloha XU: První tichý měsíc po uzavření do klidu
+
+Uzavření do klidu neznamená, že položka zmizela ze světa. Znamená, že se přestala chovat jako aktivní práce. První tichý měsíc po uzavření je dobrý test toho, jestli tým opravdu respektuje klidový stav, nebo jestli si kolem něj nenápadně vytvořil nový dohled: někdo se na položku ptá "jen pro jistotu", někdo ji drží v review poznámkách, někdo si nechal pomocnou tabulku, někdo při každém podobném úkolu znovu otevírá starý příběh.
+
+Tichý měsíc nemá být další kontrolní projekt. Je to spíš krátké provozní ohlédnutí:
+
+```text
+Položka byla uzavřená do klidu.
+Za poslední měsíc se stalo:
+Klid byl respektovaný / klid byl rušený / signál se opravdu vrátil.
+```
+
+Tři řádky stačí. Pokud potřebujete dlouhý report, položka pravděpodobně nebyla v klidu. Byla jen přesunutá do méně viditelné vrstvy práce.
+
+### Co v tichém měsíci sledovat
+
+Nesledujte lidi. Sledujte pracovní stopu. Nezajímá vás, kdo otevřel dokument, kolikrát klikl na odkaz nebo jak dlouho četl checklist. Zajímá vás, jestli vznikl výstup, který měl klidový stav umožnit, a jestli se při něm položka sama nevrátila do aktivní debaty.
+
+Prakticky projděte jen čtyři signály:
+
+- vznikl běžný výstup bez zvláštní nápovědy;
+- stará stopa se neobjevila v novém pracovním místě;
+- návratový signál nenastal, nebo nastal jasně;
+- kolem položky nevznikla nová evidence, tabulka, připomínka ani ruční kontrola.
+
+Příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Klidový stav:
+Po druhém běžném použití zůstává v redakčním playbooku, návrat jen při opakovaném obejití checklistu.
+
+Tichý měsíc:
+Vznikly dvě nové case studies. Obě začaly z kanonického checklistu. Nikdo nepoužil starou briefingovou šablonu a nevznikl nový report používání.
+
+Závěr:
+Klid je respektovaný. Nic dalšího neotevíráme.
+```
+
+To je dobrá kontrola právě proto, že je nudná. Klidový provoz má být trochu nudný. Pokud je dramatický, není klidový.
+
+### Tři výsledky tichého měsíce
+
+Po krátkém ohlédnutí vyberte jeden ze tří stavů:
+
+- Klid potvrzen: položka se nevrátila, výstupy vznikají normálně a nevznikl skrytý dohled.
+- Klid rušený: návratový signál nenastal, ale tým kolem položky pořád vytváří péči navíc.
+- Signál potvrzen: návratový signál opravdu nastal a položka má dostat jednu malou reakci.
+
+Nepřidávejte stav "raději ještě měsíc sledovat". Pokud klid drží, potvrďte ho. Pokud je rušený, uklidte rušení. Pokud se signál vrátil, otevřete malou reakci. Další sledování bez rozhodnutí je jen elegantní způsob, jak si ponechat neklid.
+
+### Když je klid potvrzen
+
+Potvrzený klid uzavřete větou:
+
+```text
+První tichý měsíc potvrzuje klid. Položka zůstává jen v běžném rytmu a další návrat nastane při [signál].
+```
+
+Potom odstraňte poslední přechodové zbytky, pokud ještě existují:
+
+- starou poznámku v review agendě;
+- připomínku v chatu;
+- dočasnou položku v checklistu "zkontrolovat po uzavření";
+- pomocný odkaz na archivní materiál;
+- ruční seznam výjimek, který už nemá účel.
+
+Nedělejte z potvrzeného klidu oslavu s novou dokumentací. Stačí zkrátit pracovní stopu tak, aby další člověk našel aktuální pravidlo, ne celou historii jeho stabilizace.
+
+Privacy-first hranice: potvrzený klid je dobrý moment smazat nebo anonymizovat dočasné ověřovací poznámky. Pokud už nevedou k rozhodnutí, nemají zůstávat jen proto, že "by se mohly hodit".
+
+### Když je klid rušený
+
+Rušený klid je zrádný. Položka se objektivně nevrátila, ale tým se k ní pořád chová jako k riziku. To může vypadat nevinně:
+
+```text
+Jen se zeptám, jestli checklist pořád sedí.
+Jen si necháme tabulku pro případ.
+Jen to dáme do měsíční agendy, ať máme jistotu.
+```
+
+Tady není potřeba opravovat položku. Je potřeba opravit okolní chování. Použijte zápis:
+
+```text
+Co ruší klid:
+
+Proč návratový signál nenastal:
+
+Která přechodová opora se má zrušit:
+
+Kde zůstává aktuální pravidlo:
+
+Co díky zrušení dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Co ruší klid:
+Editor drží pomocnou tabulku "case studies ke kontrole", i když checklist prošel dvěma použitími.
+
+Proč návratový signál nenastal:
+Žádná case study neobešla kanonický checklist.
+
+Která opora se ruší:
+Tabulka se smaže, v playbooku zůstává jen návratový signál.
+
+Co nesbíráme:
+Nesbíráme seznam autorů, kteří case study připravovali, ani ruční historii průchodů.
+```
+
+Codyho komentář: rušený klid je takové interní "všechno je v pořádku, proto to budeme dál kontrolovat". To je logika, která umí vyrobit práci i z prázdné místnosti. Nehezký trik, ale v backlogu se tváří velmi seriózně.
+
+### Když je signál potvrzen
+
+Pokud návratový signál opravdu nastal, neotevírejte celou minulou větev. Otevřete jen reakci odpovídající signálu.
+
+Zápis:
+
+```text
+Návratový signál:
+
+Co přesně se stalo:
+
+Co to potvrzuje:
+
+Nejmenší reakce:
+
+Stop podmínka:
+
+Co zůstává zavřené:
+
+Privacy-first hranice:
+```
+
+Příklad:
+
+```text
+Návratový signál:
+Dvě po sobě jdoucí case studies obešly kanonický checklist.
+
+Co se stalo:
+Autoři začali z odkazu ve starém redakčním rozcestníku.
+
+Co to potvrzuje:
+Problém je ve vstupním rozcestníku, ne v samotném checklistu.
+
+Nejmenší reakce:
+Přesunout kanonický checklist na první místo a starý odkaz označit jako archiv.
+
+Stop podmínka:
+Další case study začne z kanonického checklistu bez dotazu na editora.
+
+Co zůstává zavřené:
+Neotevíráme celý redakční proces, nové schvalování ani měření kliků.
+
+Privacy-first hranice:
+Nesbíráme osobní historii použití dokumentů. Ověřujeme jen výsledek další case study.
+```
+
+Signál potvrzuje důvod k malé reakci. Nepotvrzuje automaticky právo vrátit celou starou kapitolu do aktivní práce.
+
+### Karta tichého měsíce
+
+```text
+Položka:
+
+Kanonické místo:
+
+Datum uzavření do klidu:
+
+Původní návratový signál:
+
+Co se stalo v prvním tichém měsíci:
+
+Výsledek:
+- klid potvrzen / klid rušený / signál potvrzen
+
+Jedna věta rozhodnutí:
+
+Jedna akce nebo žádná:
+
+Co rušíme, mažeme nebo anonymizujeme:
+
+Co zůstává zavřené:
+
+Co dál nesledujeme:
+
+Další návratový signál:
+
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Checklist případové studie.
+
+Kanonické místo:
+Redakční playbook.
+
+Datum uzavření do klidu:
+2026-06-04.
+
+Původní návratový signál:
+Dvě po sobě jdoucí case studies obejdou kanonický checklist.
+
+Co se stalo v prvním tichém měsíci:
+Vznikly dvě case studies, obě z checklistu. Pomocná kontrolní tabulka zůstala otevřená, ale nikdo ji nepotřeboval.
+
+Výsledek:
+klid rušený
+
+Jedna věta rozhodnutí:
+Klid drží, ale ruší ho nepotřebná pomocná tabulka.
+
+Jedna akce nebo žádná:
+Smazat pomocnou tabulku a ponechat návratový signál v playbooku.
+
+Co rušíme, mažeme nebo anonymizujeme:
+Mažeme tabulku ručních kontrol.
+
+Co zůstává zavřené:
+Redakční proces, staré briefingové šablony a měření používání dokumentů.
+
+Co dál nesledujeme:
+Kliky, otevření dokumentů, autory průchodů ani osobní kontrolní historii.
+
+Další návratový signál:
+Dvě po sobě jdoucí case studies obejdou kanonický checklist.
+
+Vlastník:
+Vlastník obsahu.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: najděte položku uzavřenou do klidu.
+2. Minuta 2: přečtěte původní návratový signál.
+3. Minuta 3: pojmenujte, co se v prvním tichém měsíci reálně stalo.
+4. Minuta 4: vyberte stav: klid potvrzen, klid rušený, nebo signál potvrzen.
+5. Minuta 5: napište jednu akci nebo výslovně žádnou.
+6. Minuta 6: zavřete data, dočasné opory a další návrat.
+
+Výstup:
+
+```text
+Po prvním tichém měsíci je položka [název] ve stavu [stav]. Děláme [akce/žádná akce], rušíme [dočasná stopa], nesledujeme [data] a další návrat nastane při [signál].
+```
+
+### Checklist prvního tichého měsíce
+
+- Kontrolujeme jen položky, které už byly uzavřené do klidu?
+- Díváme se na pracovní výstup, ne na chování jednotlivých lidí?
+- Víme, jaký byl původní návratový signál?
+- Rozlišili jsme potvrzený klid, rušený klid a potvrzený signál?
+- U potvrzeného klidu nevzniká nová kontrola?
+- U rušeného klidu rušíme přechodovou oporu, ne samotné pravidlo?
+- U potvrzeného signálu otevíráme jen nejmenší reakci?
+- Je jasné, co zůstává zavřené?
+- Mažeme nebo anonymizujeme dočasné poznámky, tabulky a screenshoty bez dalšího účelu?
+- Nevzniká měření kliků, otevření dokumentů, času čtení ani osobní historie průchodů?
+- Zůstává další návrat navázaný na výsledek práce?
+- Umí vlastník říct jednou větou, proč položka zůstává v klidu, nebo proč se otevírá jen malá reakce?
+
+První tichý měsíc je test disciplíny. Ne test toho, jestli umíte přidat další kontrolu. Když klid drží, ukliďte opory a nechte práci běžet. Když klid ruší vlastní nejistota týmu, zrušte rušení. Když se signál opravdu vrátí, reagujte úzce. Tak se privacy-first provoz drží čistý: minimum dohledu, minimum stop a jasný důvod pro každé další otevření.
+
 ## Pracovní log
 
+- 2026-06-04: Doplněna Příloha XU o první tichý měsíc po uzavření do klidu: rozlišení potvrzeného klidu, rušeného klidu a potvrzeného signálu, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o uzavření ověřeného převodu jako běžného pravidla: přepis z opravy do provozu, kanonické místo, konec mimořádné péče, privacy-first úklid, karta a checklist.
 - 2026-06-04: Doplněna Příloha XT o uzavření druhého běžného použití v klidovém provozu: čtyři uzavírací stavy, návratový signál, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XS o druhém běžném použití v klidovém provozu: opakovaný klid, vrácená stará stopa, vrácená lidská nápověda, nový signál, privacy-first hranice, karta, mini workshop a checklist.
