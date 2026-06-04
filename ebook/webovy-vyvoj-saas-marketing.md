@@ -172220,8 +172220,428 @@ Při druhém běžném použití má položka [název] výsledek [stav]. Provede
 
 Druhé běžné použití je dobrý test provozní dospělosti. Pokud věc drží, tým ji nechá být. Pokud má drobnou stopu, uklidí ji bez dramatu. Pokud drhne rytmus, připojí ji blíž ke skutečné práci. Pokud se problém vrací, otevře úzkou otázku a chrání původní rozsah. To je přesně ten rozdíl mezi systémem, který se učí, a systémem, který si jen zapisuje další povinnosti.
 
+## Příloha XN: Uzavření druhého běžného použití do stabilního provozního stavu
+
+Druhé běžné použití samo o sobě ještě není konec. Je to poslední kontrolní okamžik před tím, než položku buď necháte opravdu žít v běžném provozu, lokálně dočistíte, přesunete do lepšího rytmu, nebo otevřete úzkou opravu. Bez uzavření se i dobrý druhý průchod snadno promění v další čekající poznámku: někdo ví, že "bylo by fajn se k tomu vrátit", ale nikdo neví kdy, proč a podle čeho.
+
+Uzavření má být kratší než samotné druhé použití. Neopisujte znovu celou historii. Vezměte výsledek, vyberte jeden provozní stav a zapište, co tím končí. Důležitá je hlavně hranice: co už není zvláštní péče, co zůstává v běžném rytmu a co se neotevírá jen proto, že položka prošla kontrolou.
+
+Krátká uzavírací věta:
+
+```text
+Po druhém běžném použití má položka [název] stav [stabilní / lokálně dočištěná / rytmicky upravená / znovu otevřená úzkou otázkou]. Dál bude žít v [kanonické místo nebo rytmus], bez [zvláštní péče / staré stopy / nového měření] a vrátíme se k ní při [návratový signál].
+```
+
+Příklad:
+
+```text
+Po druhém běžném použití má checklist případové studie stav rytmicky upravený. Dál bude žít v redakčním playbooku a jeho odkaz bude součástí briefu před rozhovorem, bez starého exportu připomínek a bez sledování otevření dokumentu. Vrátíme se k němu při další case study, pokud brief checklist znovu mine.
+```
+
+Tahle věta má jednu práci: zabránit tomu, aby tým z druhého použití vytvořil třetí kontrolu ze zvyku. Pokud je potřeba další práce, napište ji přesně. Pokud není, zavřete to. Provoz není sbírka otevřených záložek.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř uzavíracích stavů:
+
+- Stabilní stav: položka drží a zůstává v běžném rytmu.
+- Lokální dočištění: položka drží, ale jedna drobná stopa se uklidí v nejbližším pracovním místě.
+- Rytmická úprava: obsah drží, ale položka se musí lépe napojit na skutečnou práci.
+- Úzké znovuotevření: vrátil se původní problém a otevírá se jen konkrétní rozpor.
+
+Nepřidávejte mezi stavy šedou zónu "budeme sledovat". Sledování je akce a musí mít důvod, rozsah a konec. Pokud důvod nemá, je to jen měkká forma neuzavření.
+
+### Stabilní stav
+
+Stabilní stav znamená, že položka prošla druhým běžným použitím bez autora poslední opravy, bez staré historie, bez pomocného exportu a bez nové evidence. V takové chvíli je nejlepší výsledek nudný: nic dalšího nevzniká.
+
+Zapište:
+
+```text
+Stav:
+stabilní
+
+Důkaz:
+
+Kanonické místo:
+
+Běžný rytmus:
+
+Co rušíme:
+
+Co nepřidáváme:
+
+Návratový signál:
+```
+
+Příklad:
+
+```text
+Stav:
+stabilní
+
+Důkaz:
+Vlastník obsahu použil checklist při další případové studii z redakčního playbooku a nepotřeboval starý export ani dotaz v chatu.
+
+Kanonické místo:
+Redakční playbook.
+
+Běžný rytmus:
+Předpublikační kontrola každé případové studie a pololetní review playbooku.
+
+Co rušíme:
+Poznámku "ověřit při dalším průchodu" z dočasné karty.
+
+Co nepřidáváme:
+Žádný třetí ověřovací průchod, sledování otevření checklistu ani nový report.
+
+Návratový signál:
+Dva opakované problémy s dohledáním checklistu nebo pololetní review.
+```
+
+Stabilní stav má být opravdu stabilní. Pokud si necháte dočasnou kartu "jen pro jistotu", dáváte týmu signál, že uzávěry nejsou skutečné. Po dvou běžných průchodech už položka nepotřebuje cedulku "pozor, nedávno jsme ji opravovali".
+
+### Lokální dočištění
+
+Lokální dočištění je správné, když druhé použití prošlo, ale zůstala malá stopa, která by při dalším použití mohla zbytečně šustit v cestě. Nejde o novou otázku ani změnu rytmu. Jde o jednu konkrétní hranu.
+
+Typické lokální dočištění:
+
+- přepsat starý alias v jedné onboardingové poznámce;
+- odstranit zbytečný odkaz ze staré karty;
+- doplnit jeden odkaz do pracovního checklistu;
+- sjednotit název položky v indexu a šabloně;
+- zavřít dočasnou poznámku po ověření.
+
+Šablona:
+
+```text
+Stav:
+lokální dočištění
+
+Drobná stopa:
+
+Jedna úprava:
+
+Kde se provede:
+
+Kdo ji zavře:
+
+Co se tím neotevírá:
+
+Ověření:
+bez ověření / při příštím přirozeném použití
+
+Privacy-first úklid:
+```
+
+Příklad:
+
+```text
+Stav:
+lokální dočištění
+
+Drobná stopa:
+V onboardingové trase zůstal starý název checklistu.
+
+Jedna úprava:
+Přepsat název a odkázat na kanonický redakční playbook.
+
+Kde:
+Onboardingová trasa marketing role.
+
+Kdo ji zavře:
+Vlastník onboardingové trasy.
+
+Co se tím neotevírá:
+Neotevírá se celý onboarding, redakční workflow ani historie původní opravy.
+
+Ověření:
+Bez zvláštního ověření; pokud se trasa použije, má vést na stejný kanonický název.
+
+Privacy-first úklid:
+Smazat dočasnou poznámku s odkazem na starý export.
+```
+
+Lokální dočištění musí skončit rychle. Pokud k němu potřebujete schůzku, nové vlastnictví a další kontrolní datum, pravděpodobně už nejde o lokální dočištění. Pojmenujte skutečný stav a neschovávejte projekt do malého políčka.
+
+### Rytmická úprava
+
+Rytmická úprava je potřeba, když položka obsahově funguje, ale její místo v práci není přirozené. Lidé ji najdou až pozdě, používají ji po paměti, nebo se k ní dostanou přes starou trasu. Tady není chyba v samotném textu. Chyba je v napojení.
+
+Uzavření rytmické úpravy má tři části:
+
+- pojmenovat skutečný začátek práce;
+- přesunout nebo napojit položku do tohoto místa;
+- určit jeden přirozený návrat, který ukáže, jestli rytmus sedí.
+
+Šablona:
+
+```text
+Stav:
+rytmická úprava
+
+Obsahově zůstává:
+
+Rytmicky se mění:
+
+Skutečný začátek práce:
+
+Nové napojení:
+
+Co rušíme nebo zjednodušujeme:
+
+Další přirozené ověření:
+
+Co neměříme:
+```
+
+Příklad:
+
+```text
+Stav:
+rytmická úprava
+
+Obsahově zůstává:
+Checklist pro případovou studii se nemění.
+
+Rytmicky se mění:
+Kontrola publikovatelných důkazů se přesouvá z pozdní předpublikační kontroly do briefu před zákaznickým rozhovorem.
+
+Skutečný začátek práce:
+Brief před rozhovorem.
+
+Nové napojení:
+Do briefu přidat odkaz na checklist a jednu větu: "Před rozhovorem ověř, jaké důkazy lze bezpečně publikovat."
+
+Co rušíme:
+Samostatnou připomínku v dočasné kartě po druhém použití.
+
+Další ověření:
+Při další case study ověřit, jestli brief otevřel checklist před rozhovorem.
+
+Co neměříme:
+Nesledujeme otevření dokumentu, neukládáme přepisy rozhovorů a nevytváříme nový report aktivit.
+```
+
+Rytmická úprava je hotová až tehdy, když zmizí starý spouštěč nebo dočasná připomínka. Jinak tým jen přidá další cestu k té samé věci a bude doufat, že tentokrát lidé vyberou tu správnou. To je optimismus, ne provozní design.
+
+### Úzké znovuotevření
+
+Úzké znovuotevření je správné, když druhé běžné použití ukáže návrat původního problému. Tady se nesnažte zachránit uzavření hezkou formulací. Když se problém vrátil, uzavření bylo neúplné. To nevadí. Vadí až to, když otevřete všechno.
+
+Znovuotevření musí mít ostrou hranici:
+
+```text
+Stav:
+úzké znovuotevření
+
+Co se vrátilo:
+
+Který závěr už neplatí:
+
+Který závěr pořád platí:
+
+Nová úzká otázka:
+
+Nejmenší další krok:
+
+Co se výslovně neotevírá:
+
+Privacy-first hranice:
+
+Kdy se otázka znovu zavře:
+```
+
+Příklad:
+
+```text
+Stav:
+úzké znovuotevření
+
+Co se vrátilo:
+Tým znovu hledal starý export příkladů, protože checklist nemá anonymizované modelové formulace.
+
+Který závěr neplatí:
+Samotné sjednocení názvu a odkazů nestačí.
+
+Který závěr platí:
+Redakční playbook zůstává správné kanonické místo.
+
+Nová úzká otázka:
+Jak doplnit dva modelové příklady bez zákaznických detailů, aby starý export nebyl potřeba?
+
+Nejmenší další krok:
+Přidat dvě obecné formulace do checklistu.
+
+Co se neotevírá:
+Celý redakční proces, nový sběr citací, struktura case studies ani měření obsahu.
+
+Privacy-first hranice:
+Bez přepisů rozhovorů, screenshotů zákaznických materiálů a nové databáze příkladů.
+
+Kdy se otázka zavře:
+Po jedné další case study, pokud checklist pokryje potřebu příkladů bez starého exportu.
+```
+
+Úzké znovuotevření nemá být trest za špatné uzavření. Je to korekce. Tým říká: "Tohle jsme zavřeli moc brzy, ale víme přesně, kterou část vracíme do práce." Takový zápis chrání čas i data.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití je dobrý okamžik na úklid datové stopy. Ne kvůli velké právní ceremonii, ale proto, že právě teď víte, které pomocné stopy už nemají pracovní účel.
+
+Projít stačí pět míst:
+
+- dočasná karta ověření;
+- staré exporty, screenshoty nebo kopie příkladů;
+- odkazy v chatu, poznámkách a onboardingových trasách;
+- pomocné tabulky použité jen pro kontrolu;
+- přístupy nebo sdílení vytvořené kvůli ověření.
+
+U každého místa vyberte stav:
+
+```text
+Ponechat v kanonickém místě / přesunout do anonymizovaného příkladu / smazat / archivovat mimo aktivní trasu / ponechat beze změny s důvodem
+```
+
+Příklad:
+
+```text
+Dočasná karta ověření:
+smazat po přenosu uzavírací věty do changelogu playbooku
+
+Starý export připomínek:
+smazat, protože už nemá pracovní účel
+
+Onboardingová poznámka:
+přepsat starý alias na kanonický název
+
+Modelové příklady:
+ponechat jen obecné formulace bez zákaznických detailů
+
+Sdílení:
+ověřit, že pomocný dokument není sdílen mimo tým
+```
+
+Codyho komentář: privacy-first provoz není o tom mít na všechno obří policy. Často je to obyčejné "tenhle export už nepotřebujeme, tak ho nenecháme ležet v rohu". Méně tajemná magie, víc koštěte.
+
+### Uzavírací karta druhého použití
+
+```text
+Položka:
+
+Kanonické místo před uzavřením:
+
+Výsledek druhého běžného použití:
+- drží / drží s drobnou stopou / potřebuje rytmickou opravu / vrací problém
+
+Uzavírací stav:
+- stabilní / lokální dočištění / rytmická úprava / úzké znovuotevření
+
+Uzavírací věta:
+
+Jedna akce:
+
+Kde je provedena:
+
+Co zůstává stejné:
+
+Co se ruší:
+
+Co se výslovně neotevírá:
+
+Privacy-first úklid:
+
+Běžný rytmus nebo návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Položka:
+Checklist před publikací případové studie.
+
+Kanonické místo před uzavřením:
+Redakční playbook.
+
+Výsledek druhého běžného použití:
+potřebuje rytmickou opravu
+
+Uzavírací stav:
+rytmická úprava
+
+Uzavírací věta:
+Checklist zůstává v redakčním playbooku, ale jeho první použití se přesouvá do briefu před zákaznickým rozhovorem.
+
+Jedna akce:
+Doplnit do briefu odkaz na checklist a větu o ověření publikovatelných důkazů.
+
+Kde je provedena:
+Šablona briefu pro případovou studii.
+
+Co zůstává stejné:
+Checklist, vlastník playbooku a pololetní review.
+
+Co se ruší:
+Dočasná připomínka po druhém použití.
+
+Co se neotevírá:
+Celá struktura case studies, nový sběr citací ani obsahový dashboard.
+
+Privacy-first úklid:
+Smazat starý export připomínek a ponechat jen obecné modelové formulace.
+
+Běžný rytmus nebo návratový signál:
+Ověřit při další case study, zda brief otevře checklist před rozhovorem.
+
+Vlastník:
+Vlastník redakčního playbooku.
+
+Datum:
+2026-06-04
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte kartu druhého běžného použití.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: napište uzavírací větu.
+4. Minuta 4: určete jednu akci nebo vědomě žádnou.
+5. Minuta 5: napište, co se ruší a co se neotevírá.
+6. Minuta 6: zavřete privacy-first úklid a návratový signál.
+
+Výstup:
+
+```text
+Položka [název] se po druhém běžném použití uzavírá jako [stav]. Děláme [jedna akce / žádná akce], rušíme [dočasná stopa], neotevíráme [rozsah] a vrátíme se jen při [signál/rytmus].
+```
+
+### Checklist uzavření druhého použití
+
+- Je výsledek druhého běžného použití zapsaný jedním ze čtyř stavů?
+- Vybrali jsme jeden uzavírací stav?
+- Má uzavření jednu krátkou větu?
+- Je jasné, kde položka dál žije?
+- U stabilního stavu nepřidáváme další kontrolu?
+- U lokálního dočištění opravujeme jen nejbližší pracovní místo?
+- U rytmické úpravy měníme napojení na práci, ne celý obsah?
+- U úzkého znovuotevření je jasné, který závěr neplatí a který pořád platí?
+- Je napsané, co se ruší?
+- Je napsané, co se výslovně neotevírá?
+- Uklidili jsme dočasné karty, exporty, screenshoty nebo pomocné odkazy, které už nemají účel?
+- Nevzniká nové sledování, report ani dodavatelský nástroj jen kvůli pocitu jistoty?
+- Má položka běžný rytmus nebo konkrétní návratový signál?
+- Ví vlastník, co má být hotovo?
+
+Uzavření druhého běžného použití je malý, ale důležitý konec. Stabilní věc necháte být. Drobnou stopu uklidíte. Rytmus posunete blíž ke skutečné práci. Vrácený problém otevřete úzce. Všechno ostatní je jen snaha nepustit z ruky něco, co už má žít bez vás.
+
 ## Pracovní log
 
+- 2026-06-04: Doplněna Příloha XN o uzavření druhého běžného použití do stabilního provozního stavu: čtyři uzavírací stavy, stabilní stav, lokální dočištění, rytmická úprava, úzké znovuotevření, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XM o druhém běžném použití po uzavření prvního průchodu: ověření návratu do provozu, čtyři výsledky, lokální dočištění, rytmická oprava, návrat problému, privacy-first karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XL o uzavření prvního běžného použití po lehké periodické kontrole: čtyři uzavírací stavy, čistý průchod, lokální tření, návrat staré stopy, nový signál, karta, mini workshop, privacy-first hranice a checklist.
 - 2026-06-04: Doplněna Příloha XK o prvním běžném použití po uzavřené lehké periodické kontrole: čtyři výsledky průchodu, lokální tření, návrat staré stopy, nový signál, karta, mini workshop, privacy-first hranice a checklist.
