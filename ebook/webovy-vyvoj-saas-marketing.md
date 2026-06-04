@@ -8034,6 +8034,181 @@ Codyho komentář: dobrá údržba pravidla je nudná v tom nejlepším smyslu. 
 
 První běžná údržba je test dospělosti pravidla. Pokud pravidlo funguje bez zvláštní péče, nechte ho pracovat. Pokud potřebuje drobnou opravu, udělejte ji tam, kde se používá. A pokud odhalí větší otázku, otevřete ji jako novou práci, ne jako nekonečné pokračování staré epizody.
 
+## Uzavření první běžné údržby bez další práce
+
+Když první běžná údržba ukáže, že pravidlo funguje, největší riziko není technické. Riziko je chuť ještě něco přidat: krátkou připomínku, kontrolní řádek, malou poznámku k poznámce, záložní seznam "kdyby se to vrátilo". Tím se z úspěšné údržby potichu stane nová vrstva provozu.
+
+Uzavření bez další práce znamená vědomě říct:
+
+```text
+Pravidlo funguje v běžném rytmu. Teď nepřidáváme další kontrolu, šablonu ani měření. Další návrat nastane jen při pojmenovaném signálu.
+```
+
+Tato věta je důležitá hlavně pro týmy, které jsou zvyklé dokazovat práci počtem následných úkolů. Někdy je nejlepší výsledek údržby právě žádný nový úkol. Ne proto, že by tým nic neviděl, ale protože viděl dost: pravidlo je najitelné, použitelné a nevyrábí zbytečnou datovou stopu.
+
+### Co znamená žádná další práce
+
+"Žádná další práce" neznamená, že se pravidlo ignoruje. Znamená, že zůstává tam, kde už patří: v kanonickém místě a v běžném rytmu. Nevzniká kolem něj nový servisní režim.
+
+Ponechte:
+
+- aktuální pravidlo v kanonickém místě;
+- běžný rytmus, který už existuje;
+- konkrétní návratový signál;
+- stručný záznam, že první běžná údržba dopadla bez změny.
+
+Nepřidávejte:
+
+- extra kontrolní schůzku;
+- nový sloupec v tabulce;
+- ruční připomínku v chatu;
+- nový report používání pravidla;
+- screenshoty nebo exporty "pro jistotu";
+- osobní evidenci, kdo pravidlo použil správně.
+
+Praktický test:
+
+```text
+Kdybychom tuto položku měsíc vůbec neotevřeli mimo běžný rytmus, co by se reálně pokazilo?
+```
+
+Pokud odpověď zní "asi nic", nechte položku být. Pokud odpověď zní konkrétně, nejspíš nejde o uzavření bez práce, ale o návratový signál nebo úzkou opravu.
+
+### Příklad uzavření
+
+```text
+Pravidlo:
+Slabý podnět se zavírá poznámkou nebo návratovým signálem. Potvrzená změna se převádí do karty změny.
+
+Výsledek první běžné údržby:
+Pravidlo šlo najít v rozcestníku, vedlo k rozhodnutí a nevznikla nová osobní evidence.
+
+Rozhodnutí:
+Necháváme beze změny.
+
+Co nepřidáváme:
+Nepřidáváme druhou kontrolu, nové štítky podnětů ani report použití rozcestníku.
+
+Návratový signál:
+Dva po sobě jdoucí potvrzené podněty skončí jen jako slabá poznámka.
+
+Další kontrola:
+Pouze v příští běžné měsíční údržbě, pokud se téma přirozeně objeví.
+```
+
+Všimněte si, že výstup obsahuje rozhodnutí, ale neobsahuje nový backlog. To je záměr. Uzavřená údržba má uvolnit pozornost pro práci, která opravdu potřebuje zásah.
+
+### Jak odolat kosmetickým úpravám
+
+Po úspěšné údržbě často přijdou dobré nápady. Některé budou rozumné. Třeba kratší věta, lepší název odkazu nebo přesnější příklad. Problém je, že dobrý nápad ještě není důvod k zásahu.
+
+Použijte tři otázky:
+
+- Brání současný stav konkrétnímu rozhodnutí?
+- Sníží úprava reálné tření při nejbližším použití?
+- Zmenší úprava datovou nebo provozní stopu?
+
+Pokud alespoň jedna odpověď není jasné ano, úpravu teď nedělejte. Zapište ji nanejvýš jako slabý podnět s návratovým signálem. Rukopis, playbook ani provozní standard nemají být muzeum dokonalých formulací. Mají vést práci.
+
+Codyho komentář: kosmetické úpravy jsou zákeřné, protože vypadají jako péče. A někdy péčí jsou. Jenže když po každé úspěšné kontrole přelakujete zábradlí, jednou zjistíte, že nikdo nechodí po schodech, protože všude schnou cedulky.
+
+### Privacy-first uzavření bez práce
+
+Uzavření bez další práce je silné privacy-first rozhodnutí. Nezavádí nové sledování, nerozšiřuje logy a nevyžaduje osobní kontrolu lidí. Pravidlo se ověřilo pracovním výsledkem, takže není důvod měřit chování okolo něj.
+
+Zapište si proto i negativní rozsah:
+
+```text
+Kvůli uzavření bez další práce dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Kvůli uzavření bez další práce dál nesbíráme kliky v rozcestníku, časy otevření dokumentu, osobní průchody ani screenshoty rozhodnutí. Stačí anonymizovaný záznam údržby a návratový signál.
+```
+
+Tento zápis chrání tým před pozdějším "jen si to začneme měřit". Pokud se má něco nově měřit, musí nejdřív vzniknout rozhodovací otázka. Bez ní je měření jen dražší forma nervozity.
+
+### Karta uzavření bez další práce
+
+```text
+Pravidlo nebo položka:
+
+Kanonické místo:
+
+Výsledek první běžné údržby:
+
+Rozhodnutí:
+- necháváme bez další práce
+
+Proč není potřeba zásah:
+
+Co výslovně nepřidáváme:
+
+Co výslovně neotevíráme:
+
+Návratový signál:
+
+Další běžný rytmus:
+
+Co dál nesbíráme:
+
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo položka:
+Rozlišení slabého podnětu a potvrzené změny.
+
+Kanonické místo:
+Rozcestník review šablon.
+
+Výsledek první běžné údržby:
+Pravidlo pomohlo zavřít jeden slabý podnět bez nové karty změny.
+
+Rozhodnutí:
+Necháváme bez další práce.
+
+Proč není potřeba zásah:
+Pravidlo šlo najít, vedlo k rozhodnutí a nevznikla žádná zbytečná evidence.
+
+Co výslovně nepřidáváme:
+Nepřidáváme speciální kontrolu podnětů ani report používání rozcestníku.
+
+Co výslovně neotevíráme:
+Neotevíráme historii původní opravy, strukturu všech šablon ani nový proces schvalování.
+
+Návratový signál:
+Dva potvrzené podněty po sobě skončí jen jako slabá poznámka.
+
+Další běžný rytmus:
+Příští měsíční údržba rozcestníku.
+
+Co dál nesbíráme:
+Kliky, otevření dokumentů, časy čtení, osobní skóre ani screenshoty rozhodnutí.
+
+Vlastník:
+Editor rukopisu.
+```
+
+### Checklist uzavření bez další práce
+
+- Je jasně napsané, že první běžná údržba skončila bez zásahu?
+- Víme, proč není potřeba další práce?
+- Zůstává pravidlo v kanonickém místě?
+- Zůstává další návrat jen v běžném rytmu nebo při konkrétním signálu?
+- Nepřidali jsme kontrolu jen proto, že kontrola působí zodpovědně?
+- Neotevíráme historii staré opravy?
+- Nezapisujeme kosmetické nápady jako závazné úkoly?
+- Je výslovně uvedené, co nepřidáváme?
+- Je výslovně uvedené, co dál nesbíráme?
+- Umí vlastník jednou větou říct, proč je nejlepší další krok žádný?
+
+Uzavření bez další práce je disciplína. Když systém funguje, nepřidávejte mu nové podpěry. Nechte pravidlo žít v běžném rytmu, držte návratový signál a ušetřenou pozornost použijte tam, kde práce opravdu drhne.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -176654,6 +176829,7 @@ První kvartální návrat má chránit dlouhodobý klid před dvěma chybami: z
 
 ## Pracovní log
 
+- 2026-06-04: Doplněna úvodní podkapitola o uzavření první běžné údržby bez další práce: rozhodnutí nic nepřidávat, návratový signál, kosmetické podněty, privacy-first hranice, karta a checklist.
 - 2026-06-04: Doplněna Příloha XW o prvním kvartálním návratu po dlouhodobém klidu: kontrola reálných výstupů, čtyři výsledné stavy, ztenčení rytmu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XV o uzavření prvního tichého měsíce do dlouhodobého klidu: tři uzavírací stavy, kanonické místo, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna Příloha XU o první tichý měsíc po uzavření do klidu: rozlišení potvrzeného klidu, rušeného klidu a potvrzeného signálu, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
