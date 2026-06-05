@@ -177371,8 +177371,123 @@ Kvartální návrat položky [název] uzavíráme jako [stav]. Dál platí [rytm
 
 Uzavření kvartálního návratu je malý, ale důležitý konec. Bez něj zůstává klid jen dobrým úmyslem. S ním má tým jasné pravidlo: co funguje, necháváme fungovat; co ruší, uklidíme; co je moc časté, ztenčíme; co se opravdu vrátilo, řešíme přesně a bez datového apetitu navíc.
 
+## Jak převést uzavřený kvartální návrat do běžného provozu
+
+Uzavřený kvartální návrat má po sobě nechat provozní klid, ne další zvláštní režim. Když kontrola skončí stavem, akcí a návratovým signálem, zbývá poslední praktický krok: propsat výsledek tam, kde se podle něj bude příště pracovat, a odstranit dočasné stopy po kontrole. Jinak se kvartální návrat začne tvářit jako nová pravidelná agenda, i když měl právě potvrdit, že položka může žít bez další péče.
+
+Začněte krátkou převodní větou:
+
+```text
+Po kvartálním návratu položka [název] přechází do běžného provozu jako [stav]. V práci se mění [jedna věc / nic], další návrat nastane při [signál/rytmus] a do té doby nesbíráme [data].
+```
+
+Příklad:
+
+```text
+Po kvartálním návratu checklist případové studie přechází do běžného provozu jako dlouhodobě klidná položka. V práci se nemění nic, další návrat nastane jen při dvou obejitých case studies po sobě a do té doby nesbíráme kliky, otevření dokumentu ani osobní průchody autorů.
+```
+
+Tato věta není shrnutí pro archiv. Je to provozní instrukce. Má se dostat do kanonického místa, do plánovacího rytmu a do pracovního artefaktu, pokud se ho závěr dotýká. Když ji tým najde až v dlouhém logu kvartální kontroly, převod není hotový.
+
+### Tři převodní místa
+
+Po uzavření kvartálního návratu zkontrolujte tři místa:
+
+- Kanonické místo: dokument, playbook, karta standardu nebo rozhodovací log, kde žije aktuální pravidlo.
+- Provozní rytmus: kalendář, review agenda, checklist údržby nebo signál, podle kterého se téma znovu otevře.
+- Pracovní artefakt: šablona, formulář, rozcestník, sales karta, onboardingová trasa nebo backlogová položka, podle které člověk skutečně pracuje.
+
+Ne každé místo bude potřebovat změnu. Pokud kvartální návrat jen potvrdil klid, často stačí aktualizovat kanonické místo a zrušit dočasnou připomínku. Pokud se rytmus ztenčil, musí se změnit provozní rytmus. Pokud proběhl drobný úklid, musí být opravené konkrétní pracovní místo, ne jen poznámka o tom, že by se mělo opravit.
+
+Příklad převodu po ztenčení rytmu:
+
+```text
+Kanonické místo:
+Redakční playbook u checklistu případové studie obsahuje aktuální návratový signál.
+
+Provozní rytmus:
+Rušíme kvartální připomínku. Kontrola se vrátí jen při změně nabídky nebo při dvou obejitých výstupech.
+
+Pracovní artefakt:
+Obchodní follow-up šablona dál odkazuje na kanonický checklist. Starý odkaz zůstává v archivu, ne v běžné trase.
+```
+
+### Co po převodu uklidit
+
+Kvartální návrat často vytvoří pomocné poznámky: seznam ověřených výstupů, krátký komentář v issue, dočasnou připomínku, kopii staré šablony nebo kontrolní tabulku. Po uzavření mají buď jasný účel, nebo mají zmizet.
+
+Uklízejte hlavně:
+
+- dočasné připomínky, pokud se rytmus ruší nebo ztenčuje;
+- pracovní tabulky vytvořené jen pro jednu kontrolu;
+- screenshoty, exporty a kopie, které už nepodporují aktivní rozhodnutí;
+- staré odkazy v rozcestnících, pokud byly nahrazené kanonickou trasou;
+- poznámky s osobním kontextem, pokud stačí anonymizovaný závěr.
+
+Neuklízejte kanonické rozhodnutí ani návratový signál. Ty mají zůstat viditelné. Privacy-first úklid nemá mazat paměť systému; má odstranit nadbytečné stopy, které by už jen vytvářely šum nebo zbytečně držely data.
+
+### Kdy převod nedělat jako nový projekt
+
+Převod do běžného provozu nesmí dostat větší rozsah než samotné uzavření. Pokud uzavřený kvartální návrat říká "klid drží", převod nemá spustit workshop o budoucí podobě standardu. Pokud říká "drobný úklid hotov", převod nemá vytvořit audit všech podobných šablon. Pokud říká "otevíráme úzkou reakci", převod má předat jen tuto reakci, ne celý starý problém.
+
+Typické varovné signály:
+
+- kvůli převodu vzniká nová pravidelná schůzka;
+- někdo navrhuje měřit používání dokumentace, i když závěr se dá ověřit z hotových výstupů;
+- z jednoho uklizeného odkazu se nenápadně stává audit všech odkazů;
+- starý návrh se vrací do backlogu bez nového signálu;
+- do provozu se ukládají osobní poznámky z kontroly, které nejsou potřeba pro další rozhodnutí.
+
+Codyho komentář: převod do provozu má být jako vrácení nářadí po opravě. Když kvůli jednomu dotaženému šroubu postavíte novou dílnu, možná máte rádi pořádek, ale rozpočet už pláče do klávesnice.
+
+### Karta převodu do běžného provozu
+
+```text
+Položka:
+
+Výsledek kvartálního návratu:
+
+Uzavírací stav:
+
+Jedna provozní věta:
+
+Kanonické místo aktualizováno:
+- ano / ne / není potřeba
+
+Provozní rytmus:
+- zůstává / ztenčen / zrušen / jen při signálu
+
+Pracovní artefakt:
+
+Co se v práci mění:
+
+Co se výslovně nemění:
+
+Co rušíme jako dočasnou provozní vrstvu:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Jaká data dál nesbíráme:
+
+Kdo drží vlastnictví:
+```
+
+### Checklist převodu
+
+- Existuje jedna provozní věta, kterou lze vložit do kanonického místa?
+- Je jasné, zda se mění pravidlo, rytmus, pracovní artefakt, nebo nic?
+- Zmizely dočasné připomínky, tabulky a pomocné poznámky bez dalšího účelu?
+- Zůstal viditelný návratový signál, pokud má položka dál žít v klidu?
+- Nevrátil se původní větší návrh do backlogu bez nového důkazu?
+- Nevznikla nová schůzka, metrika nebo kontrola jen kvůli tomu, že proběhl kvartální návrat?
+- Jsou osobní nebo citlivé poznámky smazané, anonymizované nebo nahrazené stručným závěrem?
+- Ví vlastník, kdy se téma příště smí otevřít a kdy má naopak zůstat bez pozornosti?
+
+Převod uzavřeného kvartálního návratu je hotový ve chvíli, kdy běžná práce pokračuje bez zvláštní péče. Tým ví, kde je aktuální pravidlo, kdy se má téma vrátit a co se už nesleduje. To je praktický výsledek dobré údržby: ne víc procesu, ale méně nejasností.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o převodu uzavřeného kvartálního návratu do běžného provozu: provozní věta, tři převodní místa, úklid dočasných stop, privacy-first hranice, karta a checklist.
 - 2026-06-04: Doplněna Příloha XX o uzavření prvního kvartálního návratu do dalšího klidu: čtyři uzavírací stavy, ztenčení rytmu, úzká reakce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o drobném tření po první běžné údržbě: rozlišení navigačního, jazykového a vlastnického tření, lokální oprava, malé ověření, privacy-first hranice, karta a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o uzavření první běžné údržby bez další práce: rozhodnutí nic nepřidávat, návratový signál, kosmetické podněty, privacy-first hranice, karta a checklist.
