@@ -181073,8 +181073,161 @@ Když se v workshopu objeví nové téma, nesmí se přilepit k uzavírané polo
 
 Uzavření prvního běžného review je malý konec jedné dlouhé smyčky. Položka se nejdřív řešila, pak zmenšovala, stabilizovala, kontrolovala a nakonec přešla do normální práce. Teď má dostat klid. Ne proto, že už nikdy nemůže selhat, ale proto, že tým ví, podle jakého signálu ji znovu zvednout.
 
+## Druhé běžné review po uzavřeném prvním review
+
+Po uzavřeném prvním běžném review už položka nemá dokazovat, že si zaslouží klid. To už bylo rozhodnuto. Druhé běžné review má jiný účel: ověřit, jestli se klid nezačal nenápadně měnit v nepsaný dohled. Tým může formálně tvrdit, že samostatnou kontrolu neobnovil, ale v praxi se k položce pořád vracet přes poznámky, opatrné otázky nebo ruční potvrzování.
+
+Otázka druhého běžného review zní:
+
+```text
+Zůstává položka opravdu součástí běžného rytmu, nebo kolem ní vzniká neformální kontrola bez platného návratového signálu?
+```
+
+Tohle review má být ještě menší než první. Pokud první review opravilo dohledatelnost, druhé jen ověří, že oprava stačí v reálné práci. Pokud první review skončilo beze změny, druhé se položky dotkne jen tehdy, když se přirozeně objeví v běžném výstupu. Pokud první review přidalo stop větu, druhé zkontroluje, jestli stop věta skutečně zastavila zvláštní péči.
+
+Začněte jednou větou:
+
+```text
+Druhé běžné review položky [název] ověřuje jen to, zda po prvním uzavření nevznikla neformální kontrola a zda platí návratový signál [signál].
+```
+
+Příklad:
+
+```text
+Druhé běžné review položky "telefon není povinné pole v prvním kontaktním formuláři" ověřuje jen to, zda obchod ani webový tým po prvním uzavření nezačali ručně hlídat každý formulář mimo běžný checklist a zda platí návratový signál: telefon se znovu objeví jako povinné pole před prvním kontaktem.
+```
+
+Všimněte si hranice. Review neřeší, jestli je telefon někdy užitečný v pozdější obchodní fázi. Neřeší nový CRM proces. Neřeší redesign všech formulářů. Dívá se jen na to, jestli se uzavřená položka drží v normální práci bez skrytého dohledu.
+
+### Co druhé review nesmí rozšiřovat
+
+Druhé běžné review má chránit provozní jednoduchost. Proto nesmí dělat tři věci:
+
+- znovu otevírat původní důvody, které už byly uzavřené;
+- přidávat nový důkaz jen proto, že je tým nervózní;
+- měnit návratový signál bez konkrétního pracovního důvodu.
+
+Pokud se někdo zeptá "neměli bychom se na to raději podívat ještě jednou celé", vraťte diskusi k signálu. Buď nastal, nebo nenastal. Pokud nenastal, celé téma se neotvírá. Pokud nastal, neřeší se druhým běžným review, ale úzkou kartou návratu.
+
+Praktické minimum pro druhé review:
+
+- podívat se jen na aktuální výstup, který běžné review stejně řeší;
+- ověřit, že pravidlo je použité bez zvláštní připomínky;
+- zkontrolovat, že nikdo nevytvořil bokem nový seznam, ruční kontrolu nebo "dočasnou" tabulku;
+- potvrdit, že návratový signál zůstává konkrétní.
+
+Když nic z toho neukáže problém, nic dalšího nevzniká. Žádná poznámka "zatím dobré", žádný nový bod na příště, žádný screenshot pro klid duše. Klid se nemá dokazovat archivem důkazů. Klid se má nést tím, že běžná práce funguje.
+
+### Čtyři výsledky druhého běžného review
+
+Po druhém běžném review vyberte jeden výsledek:
+
+- Běžný rytmus potvrzen: položka se objevila jen v normální práci a nepotřebuje zápis.
+- Navigační oprava drží: předchozí oprava dohledatelnosti funguje bez další vrstvy.
+- Skrytý dohled nalezen: položka nemá samostatnou kontrolu na papíře, ale lidé ji ručně hlídají bokem.
+- Návratový signál nastal: objevil se předem pojmenovaný důvod k úzkému otevření.
+
+`Běžný rytmus potvrzen` je stav, kdy se prakticky nic neděje. To je správně. U webového formuláře to může znamenat, že při běžné kontrole nové landing page checklist automaticky zabránil návratu povinného telefonu. U SaaS to může být onboardingová šablona, která už obsahuje platné pravidlo. U marketingu redakční checklist, který nepouští zpět starý trackingový nápad.
+
+`Navigační oprava drží` potvrzuje, že první review nezaložilo novou vrstvu, ale opravdu zkrátilo cestu. Závěr může znít:
+
+```text
+Oprava dohledatelnosti drží. Pravidlo je použité v běžném checklistu a samostatnou kontrolu neobnovujeme.
+```
+
+`Skrytý dohled nalezen` je nejzajímavější stav. Tady se ukáže rozdíl mezi formálním a skutečným uzavřením. Typické signály:
+
+- někdo má vlastní neoficiální seznam "pro jistotu";
+- výstupy se posílají na ruční schválení, i když to není v procesu;
+- v meetingu se položka zmiňuje pokaždé, ale nikdo neumí říct, jaký signál nastal;
+- vznikl nový tracker, export nebo poznámkový soubor bez jasného rozhodovacího účelu.
+
+Reakce nemá být "tak si skrytý dohled pojďme formalizovat". Reakce má být zmenšení:
+
+```text
+Skrytý dohled rušíme. Platné pravidlo zůstává v [kanonické místo]. Pokud nastane [návratový signál], otevřeme úzkou kartu; do té doby položku nehlídáme bokem.
+```
+
+`Návratový signál nastal` je jediný stav, který přidává práci. I tehdy ale druhé review končí krátce: zaznamená signál, odkáže na úzkou kartu a dál neřeší historii.
+
+### Privacy-first kontrola skrytého dohledu
+
+Skrytý dohled je nebezpečný nejen pro produktivitu, ale i pro data. Když lidé něco hlídají bokem, často k tomu vznikají bokem i podklady: kopie zákaznických zpráv, screenshoty, exporty formulářů, seznamy problematických případů nebo interní poznámky se jmény. Všechno to může vypadat jako drobná provozní opatrnost. Ve skutečnosti je to často nová datová stopa bez jasného účelu.
+
+Při druhém běžném review se proto zeptejte:
+
+- Vznikl kolem položky nový ruční seznam?
+- Přeposílají se kvůli ní zákaznické příklady mimo běžný systém?
+- Ukládáme screenshoty nebo exporty jen kvůli uklidnění týmu?
+- Má každý uložený detail jasný rozhodovací účel a vlastníka?
+- Dá se skrytý dohled nahradit jednou větou v kanonickém místě?
+
+Privacy-first reakce je jednoduchá: zrušit dočasné podklady, které nemají účel, a ponechat jen platné pravidlo, návratový signál a případně odkaz na běžný pracovní postup. Pokud už podklady obsahují osobní nebo zákaznické detaily, zkraťte je na obecný závěr nebo je smažte podle interních retenčních pravidel.
+
+Codyho komentář: skrytý dohled nevypadá dramaticky, ale bere čas, pozornost a data. Protilátka je nudně účinná: jedna jasná věta, zrušené bokové podklady a žádný nový spreadsheet.
+
+### Karta druhého běžného review
+
+```text
+Položka:
+
+Datum druhého běžného review:
+
+Kanonické místo:
+
+Platný návratový signál:
+
+Co se ověřilo v běžné práci:
+
+Výsledek:
+- běžný rytmus potvrzen / navigační oprava drží / skrytý dohled nalezen / návratový signál nastal
+
+Vznikla neformální kontrola?
+- ne / ano, kde:
+
+Jedna reakce:
+
+Co výslovně neobnovujeme:
+
+Co rušíme, zkracujeme nebo mažeme:
+
+Co zůstává jako jediné platné pravidlo:
+
+Vlastník běžného rytmu:
+
+Kdy se položka smí znovu otevřít:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte kanonické místo a návratový signál.
+2. Minuta 1-2: ověřte jeden aktuální výstup v běžné práci.
+3. Minuta 2-3: zeptejte se, zda kolem položky nevznikl skrytý dohled.
+4. Minuta 3-4: vyberte jeden ze čtyř výsledků.
+5. Minuta 4-5: pokud existuje skrytý dohled, napište stop větu a zrušte zbytečné podklady.
+6. Minuta 5-6: potvrďte, že další práce vzniká jen při platném návratovém signálu.
+
+Pokud workshop potřebuje víc než šest minut, obvykle se neřeší druhé běžné review. Buď nastal návratový signál, nebo se tým vrací k původní debatě bez důkazu. V obou případech je lepší pojmenovat stav než natahovat review, které mělo být lehké.
+
+### Checklist druhého běžného review
+
+- Proběhlo review jako součást normální práce?
+- Ověřovali jsme jen aktuální výstup, ne celou historii?
+- Je kanonické místo stále jasné?
+- Zůstává návratový signál konkrétní?
+- Nevznikla neformální kontrola mimo běžný proces?
+- Pokud vznikla, zrušili jsme ji místo formalizace nové vrstvy?
+- Nepřidali jsme nový důkaz jen kvůli nervozitě?
+- Neuložili jsme nové zákaznické, osobní nebo provozní detaily bez účelu?
+- Pokud předchozí navigační oprava drží, nepřidali jsme další navigaci?
+- Pokud návratový signál nastal, otevřeli jsme jen úzkou kartu návratu?
+- Umí tým říct, co se kolem položky už nebude hlídat?
+
+Druhé běžné review má potvrdit, že uzavřená položka nezůstala v hlavách jako speciální starost. Když drží, nechte ji být. Když se kolem ní objevil skrytý dohled, zrušte ho. A když opravdu nastal návratový signál, otevřete úzkou práci bez návratu do celé staré historie.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o druhém běžném review po uzavřeném prvním review: kontrola neformálního dohledu, čtyři výsledky, privacy-first úklid skrytých podkladů, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním návratovém signálu po klidovém provozu širšího vzoru: rozlišení lokální staré stopy, slabé hrany, skutečného návratu a nového tématu, privacy-first reakce, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného review bez samostatné kontroly: čtyři uzavírací stavy, úklid artefaktů, prevence nové práce, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném review bez samostatné kontroly: ověření kanonického místa, čtyři výsledky review, oprava dohledatelnosti bez nové vrstvy, privacy-first hranice, karta, mini workshop a checklist.
