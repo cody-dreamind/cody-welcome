@@ -178153,8 +178153,184 @@ Když se diskuse nevejde do šesti minut, pravděpodobně se objevil nový rozsa
 
 Druhý běžný měsíc je hotový, když položka buď zůstává v klidu, nebo se z ní oddělí přesná malá reakce. V obou případech se nesmí ztratit nejdůležitější výsledek celé předchozí práce: tým ví, co platí, kdy se to smí otevřít a jaká data kvůli tomu nemusí sbírat.
 
+## Ukončení pravidelné pozornosti po druhém běžném měsíci
+
+Když druhý běžný měsíc potvrdí stabilní klid, je čas udělat krok, který týmy často vynechávají: ukončit pravidelnou pozornost. Ne odložit ji. Ne nechat ji "ještě chvíli pro jistotu". Opravdu ji zavřít a vrátit položku do běžného provozního pozadí.
+
+Pravidelná pozornost je užitečná, když chrání čerstvé rozhodnutí, ověřuje návratový signál nebo pomáhá uklidit dočasné stopy. Jakmile ale položka dva běžné cykly po sobě drží, další kontrola už často nepřidává jistotu. Přidává hlavně práci. A práce, která existuje jen proto, že se kdysi něco opravovalo, je přesně ten druh nenápadného provozního tuku, který dlouhodobě zpomaluje web, SaaS, marketing i týmovou paměť.
+
+Ukončovací věta může být krátká:
+
+```text
+Po druhém běžném měsíci položka drží bez opakovaného tření. Rušíme zvláštní pozornost a necháváme ji jen v běžném rytmu. Vrátí se pouze při konkrétním návratovém signálu.
+```
+
+Tato věta má dvě funkce. První: chrání tým před třetí kontrolou bez důvodu. Druhá: zanechá jasnou stopu, že klid je rozhodnutí, ne zapomenutí. Bez toho se za měsíc někdo může zeptat, jestli se "to ještě sleduje", a téma se zbytečně probudí.
+
+### Kdy pozornost opravdu ukončit
+
+Zvláštní pozornost ukončete, když platí tři podmínky:
+
+- druhý běžný měsíc nepřinesl návratový signál;
+- případné lokální tření bylo opravené nebo vědomě ponechané v běžné údržbě;
+- nevznikla nová datová stopa, kterou by bylo potřeba zvlášť uklízet.
+
+Příklad:
+
+```text
+Položka:
+Pravidlo pro zavírání slabých podnětů bez úkolu.
+
+Druhý běžný měsíc:
+Ve dvou review se slabé podněty správně zavřely nebo dostaly návratový signál.
+
+Tření:
+Žádné opakované. Jedna poznámka k názvu šablony byla opravena v rozcestníku.
+
+Datová stopa:
+Nevznikl nový tracker, export ani seznam podnětů mimo běžný review zápis.
+
+Rozhodnutí:
+Zvláštní pozornost končí. Položka se vrací do měsíčního review jen jako běžná součást práce, ne jako samostatný bod.
+```
+
+Tady by třetí kontrola byla spíš úzkost než disciplína. Pokud položka funguje, tým ji nemá pořád vodit za ruku.
+
+### Co přesně zavřít
+
+Ukončení pravidelné pozornosti není jen věta v logu. Je potřeba uklidit drobné pracovní háčky, které téma drží uměle při životě:
+
+- připomínky v kalendáři, které už nemají rozhodovací otázku;
+- dočasné kontrolní body v agendě;
+- pomocné tabulky průchodů;
+- osobní poznámky vlastníka;
+- komentáře typu "ještě sledovat";
+- duplicitní odkazy na starou kontrolu.
+
+Neuklízejte kanonické pravidlo, návratový signál ani rozhodovací stopu. Ty mají zůstat. Mažou se jen dočasné berličky, které měly smysl během ověřování.
+
+Praktické rozlišení:
+
+```text
+Zůstává:
+Kanonické pravidlo, návratový signál, běžný rytmus a krátký závěr po druhém měsíci.
+
+Mizí:
+Zvláštní kontrolní agenda, dočasné poznámky, pomocné seznamy a připomínky bez dalšího účelu.
+```
+
+Pokud se tým bojí něco smazat, napište si, jaké rozhodnutí by daný podklad v budoucnu umožnil. Když odpověď zní "možná by se hodil", je to slabé. Když odpověď zní "při návratovém signálu ukáže, proč jsme pravidlo nechali běžet", může zůstat jako zkrácený anonymizovaný závěr.
+
+### Převod do běžného rytmu
+
+Položka po ukončení zvláštní pozornosti nezmizí ze světa. Jen přestane mít vlastní reflektor. Musí být jasné, do jakého běžného rytmu patří:
+
+- měsíční review rozhodnutí;
+- kvartální prořezání pravidel;
+- běžná údržba rozcestníků;
+- kontrola šablon při další nové stránce;
+- pravidelný privacy-first úklid pracovních stop;
+- roční rozhodnutí o tvaru rukopisu.
+
+Pokud položku neumíte přiřadit k žádnému běžnému rytmu, možná nebyla stabilní. Možná jste jen zavřeli kontrolu bez místa, kde bude pravidlo přirozeně žít. V takovém případě nevyrábějte novou periodickou kontrolu hned. Nejdřív najděte nejbližší existující rytmus, kde se stejný typ práce už řeší.
+
+Příklad:
+
+```text
+Položka:
+Archivní štítky u starých šablon.
+
+Běžný rytmus:
+Měsíční kontrola rozcestníků a neplatných odkazů.
+
+Co se už nesleduje zvlášť:
+Kdo použil novou šablonu a kdo si všiml archivního štítku.
+
+Návratový signál:
+Reálná práce znovu skončí v archivní šabloně.
+```
+
+Tím se z opravy stane standard. Ne nový rituál. To je zdravý konec.
+
+### Privacy-first konec pozornosti
+
+Ukončení zvláštní pozornosti je výborný moment pro datový úklid. Všechno, co vzniklo jen kvůli sledování položky po prvním a druhém měsíci, má dostat stav: ponechat jako anonymizovaný závěr, smazat, nebo přesunout do běžného rytmu.
+
+Ptejte se:
+
+- Držíme seznam použití, který už nemá rozhodovací otázku?
+- Zůstaly v poznámkách konkrétní osoby, zákazníci nebo interní komentáře?
+- Existují screenshoty nebo exporty, které měly jen ověřit zaniklé tření?
+- Má dočasná tabulka vlastníka, účel a datum smazání?
+- Neponecháváme data jen proto, že jejich smazání je nudné?
+
+Privacy-first výsledek může znít:
+
+```text
+Po ukončení zvláštní pozornosti zůstává jen anonymizovaný závěr, že položka dva měsíce držela bez návratového signálu. Dočasné poznámky z review a pomocný seznam průchodů mažeme.
+```
+
+Codyho komentář: nejčistší kontrola je ta, která umí sama skončit. Jinak z ní není kontrola, ale trvalá položka v projektovém řízení. Příjemná možná první týden, drahá další rok.
+
+### Karta ukončení pravidelné pozornosti
+
+```text
+Položka:
+
+Proč měla zvláštní pozornost:
+
+Výsledek prvního běžného měsíce:
+
+Výsledek druhého běžného měsíce:
+
+Rozhodnutí:
+- ukončit zvláštní pozornost / ponechat jednu lokální opravu / otevřít úzkou reakci
+
+Běžný rytmus, kam položka patří:
+
+Návratový signál:
+
+Co rušíme:
+
+Co zůstává jako kanonické pravidlo:
+
+Co mažeme nebo anonymizujeme:
+
+Jaká data dál nesbíráme:
+
+Vlastník běžného rytmu:
+
+Datum další běžné revize:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: přečíst výsledek prvního a druhého běžného měsíce.
+2. Minuta 1-2: rozhodnout, jestli zvláštní pozornost končí, nebo existuje úzká reakce.
+3. Minuta 2-3: přiřadit položku do existujícího běžného rytmu.
+4. Minuta 3-4: zapsat návratový signál a co se dál nesleduje.
+5. Minuta 4-5: smazat nebo označit dočasné podklady k úklidu.
+
+Pokud se workshop natáhne, pravděpodobně neuzavíráte pozornost. Otevíráte nové téma. To může být správně, ale napište ho jako novou kartu změny a tuto položku nenechte viset mezi stavy.
+
+### Checklist ukončení pozornosti
+
+- Držela položka po dva běžné měsíce bez potvrzeného návratového signálu?
+- Je jasné, zda končí zvláštní pozornost, nebo zůstává úzká reakce?
+- Patří položka do existujícího běžného rytmu?
+- Je návratový signál konkrétní a srozumitelný?
+- Rušíme připomínky, pomocné seznamy a kontrolní body bez dalšího účelu?
+- Zůstává kanonické pravidlo dostupné tam, kde se podle něj pracuje?
+- Nezůstaly osobní poznámky, screenshoty, exporty nebo tabulky z ověřování?
+- Je zapsané, jaká data dál nesbíráme?
+- Ví vlastník běžného rytmu, kdy položku znovu otevřít?
+- Umí tým říct: "toto už nesledujeme zvlášť" bez pocitu, že něco zanedbal?
+
+Ukončení pravidelné pozornosti je jeden z nejdůležitějších malých návyků v produktivitě. Díky němu se dobré opravy nestávají trvalou administrativou. Položka má pravidlo, návratový signál a běžný rytmus. Víc nepotřebuje. A tým může věnovat pozornost další věci, která ji opravdu potřebuje.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o ukončení pravidelné pozornosti po druhém běžném měsíci: podmínky zavření, převod do běžného rytmu, úklid dočasných kontrol, privacy-first konec pozornosti, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna podkapitola o druhém běžném měsíci po uzavření prvního běžného měsíce: ověření stabilního klidu, opakované lokální tření, potvrzený návratový signál, nový nesouvisející signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného měsíce po převodu kvartálního návratu: čtyři uzavírací stavy, lokální úklid, úzká reakce, falešný návrat, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném měsíci po převodu kvartálního návratu: sledování hotových výstupů, rozlišení klidu, lokálního tření, návratového signálu a falešného návratu, privacy-first hranice, karta a checklist.
