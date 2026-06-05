@@ -178464,8 +178464,199 @@ Vlastník:
 
 První návrat po ukončení zvláštní pozornosti je test dospělosti provozu. Když tým dokáže rozlišit šum, lokální stopu, úzkou reakci a nové téma, staré problémy se nevracejí jako nekonečný seriál. Vrací se jen tehdy, když opravdu přinesou nový důkaz. A i potom se řeší malým, ohraničeným krokem.
 
+## Uzavření prvního návratu po ukončení zvláštní pozornosti
+
+První návrat má hodnotu jen tehdy, když se také umí zavřít. Jinak se z něj stane nová čekárna: položka už není ve zvláštní pozornosti, ale všichni se k ní v hlavě pořád vracejí. Tým potom mluví o běžném provozu, zatímco reálně drží otevřené malé napětí. To je únavné a postupně to kazí důvěru v pravidla.
+
+Uzavření prvního návratu proto neznamená "vyřešili jsme všechno navždy". Znamená přesnější větu: viděli jsme první událost po ukončení pozornosti, zařadili jsme ji do správného stavu, udělali jsme odpovídající malou reakci a teď víme, co dál nesledujeme. Dobrý závěr má být kratší než původní návrat. Když je delší, nejspíš jste do něj přibalili nové téma.
+
+Začněte kontrolou, zda reakce opravdu proběhla:
+
+```text
+Položka:
+Vybraný stav prvního návratu:
+Co jsme udělali:
+Kde je výsledek vidět:
+Co se tím změnilo pro další běžnou práci:
+Co zůstává mimo rozsah:
+Jaký návratový signál platí odteď:
+```
+
+Tento zápis je schválně obyčejný. Nehledá velkou retrospektivu. Hledá důkaz, že se reakce nestala jen rozhovorem, ale změnila jedno pracovní místo, jednu šablonu, jednu větu, jeden odkaz nebo jedno rozhodnutí.
+
+### Čtyři uzavírací stavy
+
+Po první reakci vyberte jeden ze čtyř uzavíracích stavů:
+
+- Zavřeno jako šum: událost se podobala starému problému, ale nenaplnila návratový signál.
+- Zavřeno po lokální opravě: jedno konkrétní místo bylo opravené a kanonické pravidlo zůstává stejné.
+- Zavřeno s úzkou reakcí v běhu: návratový signál nastal, ale další práce má vlastní malou stop podmínku a neobnovuje celou zvláštní pozornost.
+- Znovuotevřeno jako zvláštní pozornost: opakovaný nebo systémový signál ukázal, že běžný rytmus nestačí.
+
+Nejdůležitější je rozdíl mezi třetím a čtvrtým stavem. Úzká reakce je malý úkol, který má opravit jedno místo a zase zmizet. Zvláštní pozornost je dočasný režim, ve kterém se položka znovu sleduje napříč běžnou prací. Když tyto stavy smícháte, začne se i malá oprava tvářit jako návrat celého problému.
+
+Příklad:
+
+```text
+Položka:
+Telefon nesmí být povinné pole v prvním kontaktním formuláři.
+
+První návrat:
+Nová kampaň zdědila starý formulář z archivní landing page.
+
+Reakce:
+Opravena zdrojová šablona kampaně, archivní stránka označena jako nepoužitelný zdroj pro nové stránky.
+
+Uzavírací stav:
+Zavřeno po lokální opravě.
+
+Co neotevíráme:
+Neděláme audit všech formulářů, protože kanonické pravidlo je jasné a problém vznikl kopírováním jedné staré stránky.
+
+Návratový signál odteď:
+Pokud se povinný telefon objeví v nové práci z jiného zdroje než z této archivní kopie, otevřeme úzkou reakci.
+```
+
+Takové uzavření chrání tým před dvěma extrémy. Neignoruje reálnou chybu, ale zároveň z ní nedělá velké téma. Přesně to má dobrý provoz umět.
+
+### Kdy stačí lokální uzavření
+
+Lokální uzavření stačí, když platí tři věci:
+
+- problém má jasné jedno místo vzniku;
+- oprava je vidět v nejbližší běžné pracovní trase;
+- kanonické pravidlo se nemusí měnit.
+
+Typické lokální uzávěry:
+
+- starý odkaz v šabloně se nahradí kanonickým odkazem;
+- archivní stránka dostane jasné označení, že se nemá kopírovat;
+- příklad v dokumentaci se zkrátí, protože obsahoval zbytečné osobní údaje;
+- automatizace se nepředělává, jen se opraví jeden vstupní filtr;
+- obchodní šablona se přepíše podle už schváleného slibu.
+
+Lokální uzavření se nemá natahovat. Pokud po opravě začnete preventivně kontrolovat všechna podobná místa, už nejste v lokálním uzavření. Buď máte důvod otevřít úzkou reakci, nebo vás jen znervóznila stará historie. To druhé není pracovní signál.
+
+### Kdy uzavřít s úzkou reakcí
+
+Úzká reakce je vhodná, když se signál potvrdil, ale ještě neukazuje systémové selhání. Potřebujete malý krok navíc, aby se návrat nezopakoval, ale nemusíte obnovovat zvláštní pozornost.
+
+Dobrá úzká reakce má jednu větu:
+
+```text
+Do příštího běžného použití opravíme [jedno místo] tak, aby [konkrétní návratový signál] nemohl vzniknout stejnou cestou.
+```
+
+Příklady:
+
+- Do příští kampaně opravíme zdrojovou šablonu formuláře, aby se staré povinné pole nemohlo kopírovat do nové stránky.
+- Do dalšího onboardingového průchodu doplníme do role jednu větu, kde hledat kanonické pravidlo.
+- Do příští měsíční kontroly odstraníme dočasný export, který už nemá účel.
+- Do další publikace článku upravíme checklist, aby autor před odesláním zkontroloval datovou stopu vložených nástrojů.
+
+Úzká reakce se uzavírá samostatně. Nepřipisujte ji donekonečna ke staré položce. Jakmile je hotová, napište, jestli se návrat zavřel, nebo jestli se z něj stal nový důkaz pro obnovení zvláštní pozornosti.
+
+### Kdy opravdu znovuotevřít zvláštní pozornost
+
+Zvláštní pozornost obnovte jen tehdy, když první návrat ukáže, že běžný provoz neumí pravidlo udržet. Nestačí jedna chyba. Nestačí pocit, že by se "něco mohlo stát". Potřebujete pracovní důkaz.
+
+Silné důkazy:
+
+- lokální oprava nezabrala a stejný návrat se objevil znovu;
+- problém vznikl ve více nezávislých místech;
+- lidé nemají přístup ke kanonickému pravidlu ve chvíli, kdy ho potřebují;
+- automatizace obnovuje staré chování bez lidského rozhodnutí;
+- běžný rytmus nemá místo, kde by se položka dala zachytit.
+
+Když zvláštní pozornost obnovíte, napište hned i její konec:
+
+```text
+Znovuotevíráme zvláštní pozornost kvůli:
+Nejbližší pracovní důkaz:
+Dočasný rytmus:
+Hotovo bude, až:
+Co výslovně nesledujeme:
+Datum ukončení nebo dalšího rozhodnutí:
+```
+
+Bez data ukončení nebo dalšího rozhodnutí se ze zvláštní pozornosti stane trvalý dohled. A trvalý dohled je drahý, nudný a často datově hladový. Codyho komentář: když něco potřebuje permanentní hlídání, možná to ještě není pravidlo, ale křehká dohoda s hezkým názvem.
+
+### Privacy-first uzavření návratu
+
+Uzavření prvního návratu je dobré místo pro úklid datové stopy. V tu chvíli už víte, jestli šlo o šum, lokální stopu, úzkou reakci nebo systémový problém. Podle toho můžete zkrátit podklady.
+
+Zkontrolujte:
+
+- vznikl při návratu dočasný export, screenshot, seznam lidí, přepis rozhovoru nebo kopie formulářových dat?
+- má tento podklad ještě účel po uzavření?
+- dá se nahradit anonymizovaným závěrem?
+- je v kanonickém místě zapsané rozhodnutí bez zbytečných osobních údajů?
+- ví vlastník, co smazat a kdy?
+
+Privacy-first pravidlo: po uzavření má zůstat rozhodnutí, ne vycpaný batoh důkazů. Pokud stačí věta "starý formulář byl v jedné archivní kopii, šablona je opravená", nepotřebujete držet export poptávek ani screenshoty všech variant.
+
+### Karta uzavření prvního návratu
+
+```text
+Položka:
+
+Původní návratový signál:
+
+Co se vrátilo:
+
+První vybraný stav:
+- šum / lokální stopa / úzká reakce / nové téma
+
+Provedená reakce:
+
+Uzavírací stav:
+- zavřeno jako šum / zavřeno po lokální opravě / úzká reakce v běhu / znovuotevřeno jako zvláštní pozornost
+
+Kde je výsledek vidět:
+
+Co dál neotevíráme:
+
+Kanonické místo:
+
+Platný návratový signál odteď:
+
+Dočasné podklady ke smazání nebo zkrácení:
+
+Vlastník:
+
+Datum další kontroly, pokud existuje:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta: přečtěte původní návratový signál a aktuální událost.
+2. Minuta: pojmenujte provedenou reakci jednou větou.
+3. Minuta: vyberte uzavírací stav.
+4. Minuta: napište, kde je výsledek vidět v běžné práci.
+5. Minuta: určete, co dál neotevíráte.
+6. Minuta: smažte nebo zkraťte dočasné podklady, které už nemají účel.
+
+Workshop neslouží k hledání dalších nápadů. Když se objeví nový nápad, zapište ho stranou s vlastní otázkou. Uzavření prvního návratu má chránit konec, ne rozjet další vlak.
+
+### Checklist uzavření prvního návratu
+
+- Víme, jaký návratový signál původně platil?
+- Je jasné, co se skutečně vrátilo?
+- Proběhla jedna konkrétní reakce, ne jen rozhovor?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud šlo o lokální opravu, je výsledek vidět v nejbližším pracovním místě?
+- Pokud běží úzká reakce, má vlastní stop podmínku a konec?
+- Pokud obnovujeme zvláštní pozornost, máme pracovní důkaz a datum dalšího rozhodnutí?
+- Zůstává kanonické pravidlo jasné a dostupné?
+- Je zapsané, co dál vědomě neotevíráme?
+- Uklidili jsme dočasné exporty, screenshoty, kopie a osobní údaje, které už nejsou potřeba?
+- Umí tým jednou větou říct, proč je první návrat uzavřený?
+
+Uzavření prvního návratu je malé, ale důležité. Učí tým, že návratový signál není trest za staré rozhodnutí. Je to jen test, zda pravidlo pořád drží v realitě. Když test projde, zavřete ho. Když neprojde, otevřete přesně tolik práce, kolik důkaz vyžaduje. Ani o metr víc.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního návratu po ukončení zvláštní pozornosti: čtyři uzavírací stavy, lokální oprava, úzká reakce, obnovení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním návratu po ukončení zvláštní pozornosti: rozlišení šumu, lokální stopy, úzké reakce a nového tématu, privacy-first brzda, karta návratu a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o ukončení pravidelné pozornosti po druhém běžném měsíci: podmínky zavření, převod do běžného rytmu, úklid dočasných kontrol, privacy-first konec pozornosti, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna podkapitola o druhém běžném měsíci po uzavření prvního běžného měsíce: ověření stabilního klidu, opakované lokální tření, potvrzený návratový signál, nový nesouvisející signál, privacy-first úklid, karta, mini workshop a checklist.
