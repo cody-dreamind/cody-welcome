@@ -179379,8 +179379,179 @@ Když během workshopu vzniknou tři nové nápady, neznamená to, že kontrola 
 
 První nízká kontrola je test dospělosti provozního rytmu. Pokud položka zůstává klidná, nejlepší výsledek je málo textu, žádný nový systém a jasná věta, kdy se k ní vrátit. Stabilní práce se pozná i podle toho, že umí projít kontrolou bez toho, aby si vyrobila další práci.
 
+## Uzavření první nízké kontroly po stabilním klidu
+
+První nízká kontrola má smysl jen tehdy, když po ní opravdu něco skončí. Pokud ji tým nechá viset jako "ještě uvidíme", vrátí se starý zvláštní režim jinými dveřmi. Položka sice formálně zůstala v klidu, ale v praxi kolem ní dál běží pozornost, která měla dávno zmizet.
+
+Uzavření nízké kontroly proto začněte větou:
+
+```text
+Nízkou kontrolu položky [název] uzavíráme stavem [stav]. Další práce je [žádná / lokální úklid / úzký návrat / samostatné nové téma]. Původní historii znovu neotevíráme.
+```
+
+Tato věta je krátká, ale dělá tři věci najednou. Zavře kontrolu, pojmenuje jedinou další reakci a brání tomu, aby se původní rozhodnutí znovu rozbalilo jen proto, že někdo při kontrole našel sousední nápad.
+
+Příklad:
+
+```text
+Nízkou kontrolu pravidla "telefon není povinné pole v prvním kontaktním formuláři" uzavíráme stavem klid potvrzen. Další práce není potřeba. Původní historii kvalifikace leadů znovu neotevíráme; k položce se vrátíme jen tehdy, pokud se telefon znovu objeví jako povinné pole v prvním formuláři.
+```
+
+Dobré uzavření není slavnostní. Je praktické. Někdo z týmu má po jeho přečtení vědět, co může pustit z hlavy, kde najde platný závěr a jaký signál má v budoucnu brát vážně.
+
+### Čtyři uzavírací stavy
+
+Použijte stejné čtyři stavy jako v kontrole, ale přepište je do ukončovacího jazyka:
+
+- Klid ponechán: kontrola nic neotevřela a položka zůstává jen v běžném rytmu.
+- Lokální úklid zavřen: drobná stará stopa je opravena nebo označena a tím práce končí.
+- Návrat otevřen úzce: platný návratový signál nastal a má vlastní kartu, stop podmínku a vlastníka.
+- Nové téma odpojeno: užitečný podnět je zapsán zvlášť a nepoužívá starou položku jako nosič.
+
+`Klid ponechán` je nejlepší výsledek, pokud opravdu nic nehoří. Nepřidávejte k němu další "pro jistotu" kontrolu jen proto, že kontrola proběhla hladce. Stabilní klid nepotřebuje odměnu v podobě nového dohledu.
+
+`Lokální úklid zavřen` používejte, když jste opravili jedno konkrétní místo: starý odkaz, matoucí název šablony, archivní poznámku nebo pomocný soubor. Uzavření má říct, že nejde o širší problém pravidla.
+
+`Návrat otevřen úzce` je jediný stav, který vytváří další práci uvnitř původní položky. I tady ale neotevíráte celý příběh. Otevíráte jen novou kartu k potvrzenému signálu.
+
+`Nové téma odpojeno` je ochrana proti nenápadnému růstu rozsahu. Pokud se při nízké kontrole formuláře objeví otázka ceny, segmentu nebo copywritingu, zapište ji jako novou otázku. Původní položka tím není horší ani lepší.
+
+### Jak napsat závěr bez zbytečné váhy
+
+Závěr nízké kontroly má být kratší než původní oprava. Pokud je delší, něco se pokazilo: buď znovu vysvětlujete starou historii, nebo do závěru pašujete nové téma.
+
+Použitelný zápis má pět řádků:
+
+```text
+Položka:
+Výsledek kontroly:
+Co se stalo:
+Co dál neděláme:
+Návratový signál:
+```
+
+Příklad:
+
+```text
+Položka:
+Telefon není povinné pole v prvním kontaktním formuláři.
+
+Výsledek kontroly:
+Klid ponechán.
+
+Co se stalo:
+Aktuální první formulář telefon jako povinné pole neobsahuje.
+
+Co dál neděláme:
+Neotevíráme staré debaty o kvalifikačních polích ani nepřidáváme nové měření formuláře.
+
+Návratový signál:
+Telefon se znovu objeví jako povinné pole před prvním kontaktem.
+```
+
+Takový závěr se dá přečíst za půl minuty a použít při další práci. Nevyžaduje znalost celé historie a současně nepřepisuje původní rozhodnutí do mlhy.
+
+### Co uzavřít v artefaktech
+
+Po nízké kontrole stačí aktualizovat jen místa, která lidé opravdu používají. Obvykle to budou:
+
+- kanonická karta položky;
+- changelog pracovního pravidla;
+- index šablon nebo provozních standardů;
+- krátká poznámka v měsíčním review;
+- odkaz z úklidové karty, pokud vznikl lokální úklid.
+
+Naopak není potřeba vyrábět samostatný report, prezentaci, export ani nový dashboard. Nízká kontrola má potvrdit, že systém nepotřebuje další vrstvu. Když kvůli ní vznikne nová vrstva, výsledek si trochu protiřečí.
+
+Pokud uzavíráte lokální úklid, zapište jen opravené místo a datum. Nepopisujte znovu celý původní incident. Příklad:
+
+```text
+Lokální úklid zavřen 2026-06-05: starý screenshot v šabloně kontaktní stránky nahrazen aktuálním odkazem na kanonický formulář. Pravidlo se nemění.
+```
+
+Pokud otevíráte úzký návrat, vytvořte novou kartu a do staré položky vložte jen odkaz:
+
+```text
+Návratový signál potvrzen 2026-06-05. Další práce je v kartě [název karty]. Tato položka zůstává zdrojem původního rozhodnutí, ne místem pro novou opravu.
+```
+
+Tím držíte historii čitelnou. Staré rozhodnutí zůstává starým rozhodnutím a nový zásah má vlastní konec.
+
+### Privacy-first uzavření nízké kontroly
+
+Uzavření je dobrý okamžik na úklid datové stopy. Nečekejte na velký audit. Malá kontrola má mít malý konec.
+
+Prakticky:
+
+- pokud závěr stačí jednou větou, neukládejte screenshot;
+- pokud screenshot potřebujete, ořízněte ho na relevantní část a nemažte tím kontext rozhodnutí;
+- pokud jste prošli zákaznický příklad, anonymizujte ho před uložením závěru;
+- pokud vznikl dočasný export, smažte ho po zapsání výsledku;
+- pokud nové téma odpojujete, nepřenášejte do něj osobní detaily ze staré položky;
+- pokud kontrola nic neotevřela, neprodlužujte retenci podkladů jen kvůli pocitu jistoty.
+
+Privacy-first hodnota se tady neukazuje ve velkých prohlášeních. Ukazuje se v tom, že tým umí říct: víme dost, závěr máme, zbytek nepotřebujeme skladovat. Ano, je to méně dramatické než nový monitoring, ale také méně invazivní. A většinou levnější. Což je příjemný bonus, ne hřích.
+
+### Karta uzavření první nízké kontroly
+
+```text
+Položka:
+
+Běžný rytmus:
+
+Kontrolované pracovní místo:
+
+Výsledek nízké kontroly:
+- klid ponechán / lokální úklid zavřen / návrat otevřen úzce / nové téma odpojeno
+
+Jednovětý závěr:
+
+Co se změnilo v kanonickém místě:
+
+Co dál výslovně neděláme:
+
+Platný návratový signál:
+
+Dočasné podklady k úklidu:
+
+Samostatné nové téma, pokud vzniklo:
+
+Vlastník:
+
+Datum dalšího běžného návratu:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte výsledek první nízké kontroly.
+2. Minuta 1-2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 2-3: napište jednovětý závěr.
+4. Minuta 3-4: určete, které jedno kanonické místo se aktualizuje.
+5. Minuta 4-5: smažte, anonymizujte nebo neukládejte dočasné podklady.
+6. Minuta 5-6: oddělte případné nové téma od původní položky.
+
+Workshop nesmí skončit větou "domluvíme se později". Pokud je pozdější domluva nutná, znamená to, že nízká kontrola našla návrat nebo nové téma. V tom případě mu dejte vlastní kartu a původní položku uzavřete podle toho, co víte teď.
+
+### Checklist uzavření první nízké kontroly
+
+- Má nízká kontrola jeden vybraný uzavírací stav?
+- Je závěr kratší než původní oprava?
+- Je jasné, jestli další práce nevzniká, je lokální, nebo má vlastní kartu?
+- Neotevírá závěr starou historii bez potvrzeného návratového signálu?
+- Je aktualizované jen kanonické místo, které tým opravdu používá?
+- Pokud vznikl lokální úklid, je zavřený jako lokální?
+- Pokud vznikl návrat, má vlastní stop podmínku a vlastníka?
+- Pokud vzniklo nové téma, je oddělené od původní položky?
+- Je platný návratový signál pořád konkrétní?
+- Uklidili jsme dočasné screenshoty, exporty a osobní detaily?
+- Nevznikl nový report, tracker ani dohledový rituál?
+- Umí tým po přečtení závěru říct, co už nemusí řešit?
+
+Uzavřená nízká kontrola má působit skoro nezajímavě. Právě to je dobré znamení. Položka prošla návratem do klidu, první nenápadnou kontrolou a tým dokázal nevyrobit další práci. V provozu je tohle malá disciplína s velkým dopadem: méně otevřených smyček, méně dočasných dat a více prostoru pro věci, které si pozornost opravdu zaslouží.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o uzavření první nízké kontroly po stabilním klidu: čtyři uzavírací stavy, krátký závěr, aktualizace artefaktů, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o první nízké kontrole po stabilním klidu: návratový signál, kontrolované pracovní místo, čtyři výsledky, privacy-first nízká pozornost, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření druhého běžného cyklu do stabilního klidu: čtyři uzavírací stavy, zápis stabilního klidu, práce se slabou hranou, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o druhém běžném cyklu po vrácení položky do klidu: přirozená pracovní situace, čtyři výsledky, příklad, privacy-first hranice, karta a checklist.
