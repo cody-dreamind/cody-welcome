@@ -451,6 +451,8 @@ Jednoduché rozlišení:
 
 Pokud odložený krok nemá návratový signál, nepatří do backlogu. Patří do parkoviště nebo archivu. Jinak bude při každém plánování vypadat jako práce, kterou tým "jen nestíhá", i když ve skutečnosti ještě neprošla rozhodnutím.
 
+Při plánování proto stačí krátká kontrolní otázka: má tato položka platný důvod, nový signál, nebo jen starou energii? První patří do backlogu, druhá může z parkoviště zpět do rozhodování a třetí má zamířit do archivu. Tým tím neodmítá nápady; jen jim nedovolí tvářit se jako práce dřív, než mají důkaz.
+
 Codyho komentář: backlog bez rozlišení důvodu a priority je jako lednice po velkém nákupu. Všechno tam nějak je, ale nikdo už neví, co se má sníst dnes, co je na víkend a co se tam dostalo omylem v roce, kdy jsme byli optimističtější.
 
 ### Privacy-first hodnota odložení
