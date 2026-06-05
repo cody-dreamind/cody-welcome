@@ -8676,6 +8676,183 @@ Codyho komentář: širší vzor je užitečný jen tehdy, když zmenší počet
 
 Když se z drobných úprav stane širší vzor, nezvětšujte automaticky rozsah. Zvětšete přesnost. Pojmenujte společnou příčinu, opravte nejmenší společné místo a nechte ověření proběhnout v běžné práci. Tím se systém učí bez toho, aby kvůli každému učení sbíral další data a stavěl další proces.
 
+## Jak uzavřít širší vzor po první společné opravě
+
+Pojmenovat širší vzor je užitečné jen tehdy, když po něm přijde uzavření. Jinak se ze vzoru stane nová cedulka pro stejný neklid: tým už nelepí lokální záplaty, ale pořád drží zvláštní kartu, pořád čeká na další důkaz a pořád se při každém review ptá, jestli to celé náhodou nebylo větší. To není učení. To je opatrnost bez konce.
+
+První společná oprava má proto jasnou stop podmínku:
+
+```text
+Zmenšila nejmenší společná oprava opakované tření v běžné práci bez toho, aby vznikl nový kontrolní systém?
+```
+
+Pokud ano, vzor uzavřete. Ne tím, že smažete paměť. Uzavřete ho tak, že platné pravidlo přenesete do běžného pracovního místa, návratový signál necháte viditelný a dočasné podklady uklidíte. Vzor splnil svou práci: ukázal příčinu, pomohl opravit společné místo a teď má přestat být samostatným tématem.
+
+Použijte uzavírací větu:
+
+```text
+Vzor [název] jsme ověřili opravou [nejmenší společná oprava]. Při [běžné použití] tření [zmizelo / zůstalo lokálně / ukázalo další hranici]. Platné pravidlo je teď v [kanonické místo]. Vzor znovu otevřeme pouze při [návratový signál].
+```
+
+Příklad:
+
+```text
+Vzor "pravidla napsaná jako historie oprav" jsme ověřili přepsáním prvních vět u tří nejpoužívanějších pravidel. Při měsíčním review šablon šla dvě pravidla použít bez otevření starého záznamu a u třetího zůstalo jen nejasné pojmenování v rozcestníku. Platné pravidlo je teď v checklistu review šablon. Vzor znovu otevřeme pouze tehdy, když se lidé znovu opakovaně vrátí ke starým ověřovacím záznamům místo k aktuálnímu pravidlu.
+```
+
+Tato věta je delší než běžné uzavření lokální úpravy, protože nese víc kontextu. Pořád ale nesmí být kronikou. Má říct, co bylo opraveno, co se ověřilo, kde věc žije a kdy se vrací.
+
+### Čtyři uzavírací stavy širšího vzoru
+
+Po první společné opravě vyberte jeden ze čtyř stavů:
+
+- Uzavřít do běžného pravidla: společná příčina se zmenšila a další zvláštní práce není potřeba.
+- Dočistit jednu hranu: oprava funguje, ale jedno konkrétní místo ještě mate.
+- Přerámovat vzor: první oprava ukázala, že společná příčina je jinde.
+- Otevřít systémovou práci: vzor je potvrzený, dopad je širší a nejmenší oprava nestačí.
+
+`Uzavřít do běžného pravidla` je ideální výsledek. Nezakládejte k němu nové review jen proto, že vzor zněl důležitě. Pokud běžná práce prošla a návratový signál je jasný, zvláštní pozornost končí.
+
+`Dočistit jednu hranu` použijte, když hlavní oprava zabrala, ale zůstalo jedno jasné tření: název sekce, chybějící vlastník, starý odkaz, nejednoznačný příklad. Dočištění musí být menší než původní společná oprava. Pokud se dočištění začne rozšiřovat, už nejde o hranu.
+
+`Přerámovat vzor` znamená přiznat, že první pojmenování nebylo přesné. Mysleli jste, že problém je jazyk pravidel, ale ukázalo se, že lidé nevědí, kdo smí rozhodnutí zavřít. Nebo jste řešili rozcestníky, ale příčina je v duplicitních zdrojích pravdy. Přerámování není chyba. Chyba je pokračovat ve špatně pojmenovaném vzoru jen proto, že už má kartu.
+
+`Otevřít systémovou práci` používejte opatrně. Je správné ve chvíli, kdy první oprava potvrdí větší dopad a tým má jasný důvod řešit širší oblast. Nesmí to být únik z nepohodlí. Systémová práce potřebuje vlastní rozsah, vlastníka, stop podmínku a privacy-first hranici. Starý vzor se nesmí nenápadně proměnit v nekonečný audit.
+
+### Co převést po uzavření
+
+Po uzavření širšího vzoru nepřenášejte celý balík zjištění. Přeneste jen to, co bude fungovat v běžné práci:
+
+- pracovní pravidlo v přítomném čase;
+- jeden návratový signál;
+- krátký odkaz na důvod změny, pokud pomůže orientaci;
+- odpovědnost role nebo rytmu;
+- změnu v šabloně, rozcestníku, checklistu nebo rozhodovacím logu;
+- záznam, co se už nebude opravovat jednotlivě.
+
+Praktický zápis:
+
+```text
+Do běžného provozu převádíme:
+
+Kanonické místo:
+
+Platné pravidlo:
+
+Co se už neopravuje po jednom:
+
+Návratový signál:
+
+Co rušíme:
+
+Co archivujeme jen stručně:
+
+Co mažeme nebo dál nesbíráme:
+```
+
+U webu může jít o pravidlo v checklistu formulářů. U SaaS o jednu onboardingovou instrukci. U marketingu o šablonu pro aktualizaci sales stránky. U interní dokumentace o přepis prvních vět pravidel do pracovního tvaru. Důležité je, aby závěr bydlel tam, kde člověk práci opravdu dělá, ne v krásně popsané kartě vzoru, kterou už nikdo neotevře.
+
+### Kdy vzor nepřevádět do standardu
+
+Ne každý potvrzený vzor si zaslouží standard. Standard je vhodný, když se situace opakuje, má vlastníka a tým ji bude znovu používat. Pokud první společná oprava problém odstranila a návratový signál je slabý, stačí uzavření v běžném místě.
+
+Nevytvářejte standard, když:
+
+- vzor vznikl z přechodného stavu, který už neexistuje;
+- oprava se týkala jen tří konkrétních míst bez budoucího opakování;
+- tým by kvůli standardu musel zavést nový schvalovací krok;
+- standard by byl delší než samotné pracovní pravidlo;
+- hlavní přínos opravy je odstranění starých stop, ne nová metoda práce.
+
+Dobré pravidlo: pokud standard nezkrátí příští rozhodnutí, nedělejte ho. Stačí aktualizovat kanonické místo a zapsat návratový signál. Standardy mají šetřit pozornost, ne vyrábět další dokumenty, které potřebují vlastní údržbu.
+
+### Privacy-first úklid po vzoru
+
+Širší vzor často během ověřování vytvoří víc stop než lokální úprava: seznam příkladů, kopie starých pravidel, poznámky z review, screenshoty rozcestníků, ruční srovnání verzí nebo dočasnou tabulku nálezů. Po uzavření se z těchto podkladů rychle stane datový a provozní nepořádek.
+
+Uklízejte ve třech vrstvách:
+
+- Aktivní práce: zůstává jen platné pravidlo, návratový signál a běžné pracovní místo.
+- Stručný archiv: zůstává krátká věta, proč se vzor uzavřel.
+- Dočasné důkazy: mažou se, anonymizují nebo se vyřadí z pracovní trasy.
+
+Zápis:
+
+```text
+Po uzavření vzoru zůstává:
+
+Do archivu patří:
+
+Mažeme nebo anonymizujeme:
+
+Dál nesbíráme:
+```
+
+Privacy-first pointa není jen právní opatrnost. Když po každém vzoru necháte v systému hromadu pomocných důkazů, lidé je budou při další práci otevírat a starý kontext se vrátí jako šum. Méně stop znamená rychlejší rozhodování a menší riziko, že se pracovní paměť znovu zaplní minulostí.
+
+### Karta uzavření širšího vzoru
+
+```text
+Název vzoru:
+
+Původní společná příčina:
+
+Nejmenší společná oprava:
+
+Běžné použití, ve kterém jsme ověřovali:
+
+Výsledek:
+- uzavřít do běžného pravidla / dočistit jednu hranu / přerámovat vzor / otevřít systémovou práci
+
+Důvod výsledku:
+
+Kanonické místo po uzavření:
+
+Platné pravidlo nebo závěr:
+
+Co už neopravujeme jednotlivě:
+
+Návratový signál:
+
+Co rušíme:
+
+Co archivujeme stručně:
+
+Co mažeme, anonymizujeme nebo dál nesbíráme:
+
+Vlastník běžného rytmu:
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 0-1: přečtěte původní kartu širšího vzoru.
+2. Minuta 1-2: pojmenujte nejmenší společnou opravu jednou větou.
+3. Minuta 2-3: projděte běžné použití, ve kterém se oprava ověřila.
+4. Minuta 3-4: vyberte jeden ze čtyř uzavíracích stavů.
+5. Minuta 4-5: napište uzavírací větu.
+6. Minuta 5-6: určete kanonické místo a návratový signál.
+7. Minuta 6-7: rozhodněte, které dočasné podklady zmizí z aktivní práce.
+8. Minuta 7-8: potvrďte, že nevzniká nový standard, pokud opravdu nezkrátí příští rozhodnutí.
+
+Když workshop potřebuje víc než osm minut, pravděpodobně neuzavíráte vzor, ale otevíráte novou systémovou práci. To není zakázané. Jen tomu dejte vlastní kartu a neschovávejte to pod uzavření.
+
+### Checklist uzavření širšího vzoru
+
+- Máme jasně pojmenovanou nejmenší společnou opravu?
+- Ověřili jsme ji v běžné práci, ne v umělém testu?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud vzor uzavíráme, je platné pravidlo v kanonickém pracovním místě?
+- Pokud dočišťujeme hranu, je opravdu jedna a menší než původní oprava?
+- Pokud přerámováváme, je nová příčina napsaná přesněji než původní?
+- Pokud otevíráme systémovou práci, má vlastní rozsah a stop podmínku?
+- Je zapsané, co už neopravujeme po jednom?
+- Nevytváříme standard, který nešetří příští rozhodnutí?
+- Uklidili jsme dočasné příklady, screenshoty, tabulky a poznámky bez dalšího účelu?
+- Nesbíráme nové osobní signály jen kvůli pocitu kontroly?
+- Umí tým jednou větou říct, kdy se vzor znovu otevře?
+
+Širší vzor je hotový až ve chvíli, kdy přestane být zvláštní položkou a začne zlepšovat běžné rozhodování. Pokud po něm zůstane jen větší dokumentace a víc kontrol, vzor se nepovedl. Pokud po něm zůstane kratší pravidlo, čistší pracovní místo a méně lokálních záplat, udělal svou práci.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -180062,6 +180239,7 @@ Uzavření druhé nízké kontroly je místo, kde se údržba konečně přestan
 
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o uzavření širšího vzoru po první společné opravě: uzavírací stavy, převod do běžného pravidla, hranice standardizace, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření druhé nízké kontroly do běžného rytmu: čtyři uzavírací stavy, převod pravidla do kanonického místa, úklid dočasných stop, privacy-first redukce, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o druhé nízké kontrole bez nové pozornosti: návaznost na první nízkou kontrolu, čtyři výsledky, snížení pozornosti, privacy-first redukce datové stopy, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření první nízké kontroly po stabilním klidu: čtyři uzavírací stavy, krátký závěr, aktualizace artefaktů, privacy-first úklid, karta, mini workshop a checklist.
