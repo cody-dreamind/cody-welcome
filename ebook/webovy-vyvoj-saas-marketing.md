@@ -177632,8 +177632,263 @@ Další návrat:
 
 První běžný měsíc je úspěšný ve chvíli, kdy se dá říct: práce běžela, pravidlo nepřekáželo, návratový signál buď nenastal, nebo byl řešen v dohodnutém rozsahu. Není potřeba slavnostní review. Stačí krátký zápis a ochota nechat klid opravdu klidem.
 
+## Uzavření prvního běžného měsíce po převodu kvartálního návratu
+
+První běžný měsíc po převodu kvartálního návratu má skončit stejně nenápadně, jako probíhal. Pokud tým měsíc přežil bez návratového signálu, není potřeba vyrábět další proces, certifikát ani tabulku vítězství. Stačí uzavřít stav, zapsat jednu provozní větu a odstranit všechno, co vzniklo jen proto, aby se první měsíc dal rozumně pozorovat.
+
+Uzavření je důležité hlavně proto, že chrání klid před návratem mimořádné péče. Bez uzavření zůstane položka viset v mezistavu: už není problém, ale pořád se o ní mluví; už nevyžaduje kontrolu, ale pořád má poznámku v agendě; už nemá důvod sbírat data, ale někde zůstala pracovní tabulka. To je přesně ten typ drobného provozního prachu, který se tváří neškodně a za půl roku z něj máte pět nejasných pravidel.
+
+Začněte uzavírací větou:
+
+```text
+První běžný měsíc po převodu položky [název] končí stavem [stav]. V běžné práci zůstává [co], rušíme [co] a další návrat nastane pouze při [signál].
+```
+
+Příklad:
+
+```text
+První běžný měsíc po převodu checklistu případové studie končí stavem klid potvrzen. V běžné práci zůstává odkaz v redakčním playbooku, rušíme měsíční poznámku v review agendě a další návrat nastane pouze tehdy, když dvě relevantní case studies po sobě obejdou kanonický checklist.
+```
+
+Tato věta má být krátká, protože její účel není popsat celý příběh. Má zavřít měsíc tak, aby se podle ní dalo příště pracovat. Pokud potřebujete tři odstavce vysvětlení, pravděpodobně ještě neuzavíráte. Ještě třídíte.
+
+### Čtyři uzavírací stavy
+
+Na konci prvního běžného měsíce vyberte jeden ze čtyř stavů:
+
+- Klid potvrzen: běžná práce proběhla bez návratového signálu a bez smysluplného tření.
+- Klid po lokálním úklidu: pravidlo fungovalo, ale bylo potřeba opravit jedno nejbližší pracovní místo.
+- Úzká reakce otevřena: návratový signál opravdu nastal a otevírá se jen předem vymezená reakce.
+- Falešný návrat zavřen: téma se ozvalo, ale nešlo o původní problém ani o důvod otevírat větší práci.
+
+Nevymýšlejte pátý stav "ještě měsíc sledovat". Pokud po měsíci neumíte rozhodnout, často to znamená, že návratový signál byl napsaný moc měkce. V takovém případě nezakládejte další pozorovací období. Zpřesněte signál a vraťte položku do běžného rytmu, nebo otevřete úzkou otázku, proč signál neumíte poznat z hotových výstupů.
+
+Rozhodnutí má mít tento tvar:
+
+```text
+Stav:
+- klid potvrzen / klid po lokálním úklidu / úzká reakce otevřena / falešný návrat zavřen
+
+Důvod:
+
+Co zůstává v běžném provozu:
+
+Co se ruší:
+
+Další návratový signál:
+```
+
+### Klid potvrzen
+
+Klid potvrzen je nejlepší výsledek a zároveň ten, který týmy nejčastěji neumí přijmout. Vzniká nutkání něco přece jen vylepšit, když už jsme se na položku podívali. Jenže dobrý provoz není soutěž v počtu úprav. Pokud pravidlo měsíc fungovalo, lidé našli kanonické místo a hotové výstupy nevykazují návrat problému, uzavřete měsíc bez akce.
+
+Příklad:
+
+```text
+Stav:
+Klid potvrzen.
+
+Důvod:
+Za měsíc vznikly tři relevantní výstupy. Všechny použily aktuální trasu a návratový signál nenastal.
+
+Co zůstává:
+Kanonický checklist v playbooku a návratový signál v rozhodovacím logu.
+
+Co se ruší:
+Dočasná měsíční poznámka v review agendě.
+
+Další návrat:
+Jen při dvou obejitých výstupech po sobě nebo při změně nabídky, která mění smysl checklistu.
+```
+
+U potvrzeného klidu nedoplňujte nové doporučení "pro jistotu". Jestli v kanonickém místě něco zásadního chybí, pravděpodobně by se to projevilo jako lokální tření. Pokud se to neprojevilo, nechte text dýchat. Dokument, který se upravuje po každém pohledu, přestává být zdrojem pravdy a stává se hřištěm pro redakční nervozitu.
+
+Privacy-first poznámka: potvrzený klid je také dobrý okamžik pro smazání dočasných stop. Pokud jste si během měsíce vedli pomocnou poznámku, ponechte jen agregovaný závěr. Není důvod archivovat osobní komentáře, seznamy průchodů ani časové detaily, když rozhodnutí stojí na hotových výstupech.
+
+### Klid po lokálním úklidu
+
+Lokální úklid znamená, že pravidlo fungovalo, ale jedno místo v trase bylo zbytečně nepohodlné. Typicky šlo o starý odkaz, nejasný název, duplicitní rozcestník, chybějící větu u šablony nebo matoucí poznámku v agendě. Důležité je slovo lokální. Nejde o revizi pravidla. Jde o odstranění drobné překážky, která by jinak znovu vyráběla otázky.
+
+Příklad:
+
+```text
+Stav:
+Klid po lokálním úklidu.
+
+Důvod:
+Pravidlo fungovalo, ale autor začínající ze sales rozcestníku nenašel kanonickou šablonu napoprvé.
+
+Lokální úklid:
+Do sales rozcestníku přidán jeden odkaz na kanonický checklist. Původní checklist se nemění.
+
+Co se ruší:
+Dočasná poznámka "prověřit šablonu case study" v měsíční agendě.
+
+Další návrat:
+Jen pokud se stejná navigační překážka zopakuje u dalšího relevantního výstupu.
+```
+
+Lokální úklid uzavírejte až ve chvíli, kdy je opravdu provedený v pracovním místě, kde tření vzniklo. Zápis "mělo by se přidat do rozcestníku" není uzavření. To je nový úkol. Uzavření zní "odkaz je přidaný, stará poznámka je zrušená, návratový signál zůstává stejný".
+
+Codyho komentář: lokální úklid je jako opravit cedulku na dveřích. Nepotřebujete kvůli tomu rebranding budovy, workshop o architektuře značení ani nový systém měření pohybu lidí po chodbě. Ano, produktové týmy jsou v tomhle občas až kreativně nebezpečné.
+
+### Úzká reakce otevřena
+
+Pokud návratový signál opravdu nastal, první běžný měsíc nekončí klidem. Nekončí ale ani návratem celého starého projektu. Otevírá se úzká reakce podle toho, co bylo předem dohodnuté. Tím chráníte rozsah: řeší se potvrzený problém, ne všechny historické obavy kolem něj.
+
+Příklad:
+
+```text
+Stav:
+Úzká reakce otevřena.
+
+Důvod:
+Dvě relevantní case studies po sobě obešly kanonický checklist.
+
+Úzká otázka:
+Je problém v dohledatelnosti checklistu, nebo v tom, že checklist neodpovídá aktuálnímu typu zakázek?
+
+Stop podmínka reakce:
+Do pěti pracovních dnů projít dvě obejité case studies, určit jednu příčinu a buď opravit nejbližší pracovní místo, nebo přepsat jednu část checklistu.
+
+Co neotevíráme:
+Nepředěláváme celý redakční playbook, neměníme sales proces a nezavádíme měření otevření dokumentů.
+```
+
+Úzká reakce má mít vlastní kartu, vlastníka a stop podmínku. Neměla by pokračovat pod hlavičkou "první běžný měsíc". Ten skončil. Teď běží nová malá práce. Toto oddělení je praktické: v logu pak jasně vidíte, kdy skončilo pozorování a kdy začala oprava.
+
+Privacy-first hranice u úzké reakce je jednoduchá: použijte existující pracovní důkazy dřív, než zavedete nové měření. Když dvě hotové case studies obešly checklist, většinou stačí projít jejich výstupy a pracovní trasu s vlastníkem. Nepotřebujete zjistit, kdo kdy klikl, kdo kolikrát dokument otevřel ani jak dlouho byl na stránce.
+
+### Falešný návrat zavřen
+
+Falešný návrat nastává, když se téma ozve, ale po krátké kontrole nejde o původní návratový signál. Někdo se zeptal na šablonu, ale neobešel ji. Vznikla kosmetická připomínka, ale výstup fungoval. Objevila se nová situace, která s původním problémem souvisí jen vzdáleně. V takové chvíli je potřeba falešný návrat zavřít, jinak se z něj stane záminka k otevření staré práce.
+
+Příklad:
+
+```text
+Podnět:
+Nový člověk se ptal, jestli má case study použít kratší nebo delší formát.
+
+Kontrola:
+Kanonický checklist našel. Otázka se týkala obchodního použití konkrétní case study, ne dohledatelnosti ani kvality checklistu.
+
+Stav:
+Falešný návrat zavřen.
+
+Reakce:
+Do sales poznámky přidána jedna věta, že délka case study se volí podle rozhodovací fáze zákazníka. Checklist se neotevírá.
+
+Co neotevíráme:
+Neotevíráme revizi redakčního playbooku ani nové měření používání šablon.
+```
+
+Falešný návrat má být zapsaný stručně, protože jeho hlavní hodnota je hranice. Tým si připomene, že ne každý dotaz je důkaz systémového problému. Zároveň se neztratí užitečný detail: pokud šlo o lokální větu v sales poznámce, můžete ji opravit bez dramatického návratu.
+
+### Úklid po uzavření měsíce
+
+Po výběru uzavíracího stavu projděte tři druhy stop:
+
+- Provozní stopy: připomínky, agendy, dočasné štítky, kontrolní úkoly.
+- Pracovní stopy: poznámky k výstupům, pomocné tabulky, kopie šablon, seznamy průchodů.
+- Datové stopy: exporty, screenshoty, osobní komentáře, časové údaje, interní kliky nebo jiné údaje bez dalšího účelu.
+
+U každé stopy rozhodněte:
+
+```text
+Ponechat jako kanonické rozhodnutí:
+Ponechat dočasně kvůli otevřené úzké reakci:
+Anonymizovat do agregovaného závěru:
+Smazat nebo archivovat mimo běžnou trasu:
+```
+
+Nejčastější chyba je ponechat všechno "kdyby se to hodilo". Jenže dlouhodobý privacy-first provoz nestojí na tom, že si necháte každou stopu pro případ budoucí zvědavosti. Stojí na jasném účelu. Pokud stopa nepodporuje aktivní rozhodnutí, právní povinnost, provozní bezpečnost nebo dohledatelnou týmovou paměť, nemá v běžném pracovním prostoru co dělat.
+
+Praktické minimum po uzavření:
+
+```text
+Ponecháno:
+Jedna provozní věta v kanonickém místě.
+
+Zrušeno:
+Dočasná měsíční připomínka.
+
+Anonymizováno:
+Poznámka "u jednoho výstupu bylo navigační tření" bez jména autora.
+
+Smazáno:
+Pomocná tabulka průchodů vytvořená jen pro první měsíc.
+```
+
+### Karta uzavření prvního běžného měsíce
+
+```text
+Položka:
+
+Datum převodu do běžného provozu:
+
+Uzavíraný měsíc:
+
+Původní návratový signál:
+
+Hotové výstupy:
+
+Zjištěný stav:
+- klid potvrzen / klid po lokálním úklidu / úzká reakce otevřena / falešný návrat zavřen
+
+Důvod stavu:
+
+Jedna uzavírací věta:
+
+Co zůstává v kanonickém místě:
+
+Co se změnilo v pracovním artefaktu:
+
+Co se výslovně nemění:
+
+Co se ruší z provozního rytmu:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Jaká data dál nesbíráme:
+
+Další návratový signál nebo nová úzká otázka:
+
+Vlastník:
+```
+
+### Mini workshop na 7 minut
+
+Pokud se uzavření týká týmu, stačí krátký průchod:
+
+1. Minuta 0-1: vlastník přečte původní návratový signál a hotové výstupy za měsíc.
+2. Minuta 1-3: tým vybere jeden ze čtyř uzavíracích stavů.
+3. Minuta 3-4: zapíše se jedna uzavírací věta.
+4. Minuta 4-5: určí se, co se ruší, maže, anonymizuje nebo archivuje.
+5. Minuta 5-6: potvrdí se další návratový signál nebo úzká otázka.
+6. Minuta 6-7: vlastník vloží závěr do kanonického místa a zavře dočasnou stopu.
+
+Sedm minut je záměrně málo. Když potřebujete víc, pravděpodobně už neuzavíráte první měsíc, ale otevíráte novou otázku. To může být správně, jen to pojmenujte jako novou práci.
+
+### Checklist uzavření prvního běžného měsíce
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je stav opřený o hotové výstupy, ne o osobní dohady?
+- Máme jednu uzavírací větu pro kanonické místo?
+- Pokud je klid potvrzen, nevzniká žádná nová akce?
+- Pokud proběhl lokální úklid, je už provedený v konkrétním pracovním místě?
+- Pokud nastal návratový signál, otevíráme jen úzkou reakci s vlastní stop podmínkou?
+- Pokud šlo o falešný návrat, je jasně zapsané, proč se starý problém neotevírá?
+- Rušíme dočasné připomínky, tabulky a poznámky bez dalšího účelu?
+- Mažeme nebo anonymizujeme osobní a citlivé pracovní stopy, které nepotřebujeme?
+- Nezavádíme nový tracker, metriky otevření dokumentů ani dohled nad průchody jednotlivců?
+- Zůstává viditelný návratový signál nebo nová úzká otázka?
+- Ví vlastník, co se příště stane a co se naopak nesmí otevřít bez nového důkazu?
+
+Uzavřený první běžný měsíc má týmu ulevit. Buď potvrdí, že převod opravdu funguje, nebo otevře přesnou malou reakci. V obou případech je výsledek lepší než nekonečné "ještě to sledujme". Sledování bez rozhodnutí je jen pomalý způsob, jak z jednoduchého pravidla udělat interní mlhu.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného měsíce po převodu kvartálního návratu: čtyři uzavírací stavy, lokální úklid, úzká reakce, falešný návrat, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném měsíci po převodu kvartálního návratu: sledování hotových výstupů, rozlišení klidu, lokálního tření, návratového signálu a falešného návratu, privacy-first hranice, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o převodu uzavřeného kvartálního návratu do běžného provozu: provozní věta, tři převodní místa, úklid dočasných stop, privacy-first hranice, karta a checklist.
 - 2026-06-04: Doplněna Příloha XX o uzavření prvního kvartálního návratu do dalšího klidu: čtyři uzavírací stavy, ztenčení rytmu, úzká reakce, privacy-first úklid, karta, mini workshop a checklist.
