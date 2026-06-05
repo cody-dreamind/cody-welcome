@@ -179235,8 +179235,153 @@ Když workshop začne řešit starou historii, vraťte se k otázce druhého cyk
 
 Uzavření druhého běžného cyklu je dobrý konec malé provozní smyčky. Položka už prošla návratem, reakcí, prvním běžným použitím i druhým použitím bez čerstvé podpory. Když drží, nechte ji držet. Síla systému není v tom, že všechno pořád kontroluje. Je v tom, že ví, kdy kontrolu ukončit.
 
+## První nízká kontrola po stabilním klidu
+
+Stabilní klid neznamená, že položka navždy zmizela z pozornosti. Znamená to, že už si nezaslouží zvláštní režim. První nízká kontrola je proto schválně nenápadná: má ověřit, že se položka vešla do běžného provozního rytmu a nezačala znovu tahat tým do staré historie.
+
+Nízká kontrola má jednu otázku:
+
+```text
+Zůstává položka v klidu i bez zvláštní pozornosti, nebo se objevil konkrétní návratový signál?
+```
+
+To je všechno. Neptá se, jestli by šlo pravidlo ještě zlepšit. Neptá se, jestli někdo mezitím dostal nový nápad. Neptá se, jestli by se hodil lepší dashboard. Pokud návratový signál nenastal, výsledek kontroly může být prostě "nic neměníme".
+
+Začněte krátkým vymezením:
+
+```text
+Nízká kontrola položky [název] probíhá v rámci [běžný rytmus]. Kontrolujeme jen platný návratový signál [signál]. Neotevíráme původní opravu, staré podklady ani nové zlepšovací nápady bez samostatné otázky.
+```
+
+Příklad:
+
+```text
+Nízká kontrola pravidla "telefon není povinné pole v prvním kontaktním formuláři" probíhá v rámci měsíční kontroly webových šablon. Kontrolujeme jen to, zda se telefon znovu neobjevil jako povinné pole ve zveřejněném prvním formuláři. Neotevíráme historii starých kampaní, původní debatu o kvalifikaci leadů ani nové nápady na lead scoring.
+```
+
+Taková věta působí skoro zbytečně, dokud ji tým nepotřebuje. Její hodnota se ukáže ve chvíli, kdy někdo při kontrole přinese sousední téma a stará položka se začne tvářit jako vhodný nosič nové práce.
+
+### Co při nízké kontrole stačí vidět
+
+Nízká kontrola nemá hledat důkazy za každou cenu. Stačí projít nejbližší přirozený výstup nebo běžné pracovní místo, kde by se návratový signál ukázal.
+
+U webu to může být:
+
+- poslední zveřejněná landing page;
+- aktuální kontaktní formulář;
+- rozcestník šablon;
+- měsíční seznam publikovaných změn;
+- jedna nová case study nebo článek.
+
+U SaaS to může být:
+
+- poslední běžný release;
+- jeden onboardingový průchod;
+- supportní odpověď podle aktuální šablony;
+- změna nastavení v administraci;
+- provozní poznámka z běžného review.
+
+U marketingu to může být:
+
+- poslední distribuční balíček;
+- jeden follow-up;
+- další newsletter nebo RSS položka;
+- aktuální sales karta;
+- jedna ruční kontrola kvality leadů.
+
+Důležité je, že kontrola sleduje výstup, ne člověka. Pokud pravidlo říká, že telefon nemá být povinný v prvním formuláři, zkontrolujte formulář. Nezjišťujte, kdo si na pravidlo vzpomněl, kdo otevřel dokument, kdo klikl na šablonu a kdo si přečetl starý zápis. To by z nízké kontroly udělalo dohled, ne údržbu.
+
+### Čtyři výsledky první nízké kontroly
+
+Po kontrole vyberte jeden ze čtyř výsledků:
+
+- Klid potvrzen: návratový signál nenastal a položka zůstává v běžném rytmu.
+- Lokální úklid: signál nenastal, ale jedno pracovní místo má starý odkaz, matoucí název nebo zbytečný podklad.
+- Návratový signál nastal: přesně ten problém, který měl položku otevřít, se znovu objevil.
+- Nové téma odděleno: objevila se užitečná otázka vedle položky, ale není to návrat původního problému.
+
+`Klid potvrzen` má být nejkratší zápis. Ideálně jedna věta:
+
+```text
+Nízká kontrola dne [datum] nepotvrdila návratový signál. Položka zůstává v [běžný rytmus] a další zásah nastane až při [signál].
+```
+
+`Lokální úklid` je vhodný pro drobnosti, které nevypovídají o selhání pravidla. Například starý screenshot ve wiki, archivní odkaz ve starém ticketu nebo duplicitní název šablony. Uklidit ano. Otevírat téma znovu ne.
+
+`Návratový signál nastal` znamená, že už nejde o nízkou kontrolu. Vytvořte úzkou kartu návratu, napište stop podmínku a rozhodněte, jestli jde o lokální opravu, systémovou opravu nebo obnovu zvláštní pozornosti.
+
+`Nové téma odděleno` chrání starou položku před tím, aby na sebe nabalila čerstvý problém. Když se při kontrole formuláře objeví otázka, jestli má stránka jasněji říkat cenu, je to samostatná marketingová otázka. Ne důkaz, že pravidlo o telefonu selhalo.
+
+### Privacy-first kontrola nízké pozornosti
+
+Nízká pozornost má být lehká i datově. Čím stabilnější je položka, tím menší důvod máte ukládat další podklady. Prakticky:
+
+- neukládejte screenshoty, pokud závěr stačí zapsat jednou větou;
+- nevytvářejte exporty jen kvůli periodické jistotě;
+- nesbírejte osobní průběhy práce konkrétních lidí;
+- nemažte kanonický závěr, ale mažte dočasné důkazy, které už nemají účel;
+- nové téma zapisujte bez přenášení starých osobních nebo zákaznických detailů.
+
+Codyho komentář: nízká kontrola je dobrá právě tím, že je nudná. Pokud z ní pokaždé vznikne nový report, nový graf a nová debata, není nízká. Je to starý audit v přestrojení za údržbu.
+
+### Karta první nízké kontroly
+
+```text
+Položka:
+
+Stabilní klid potvrzen dne:
+
+Běžný rytmus:
+
+Platný návratový signál:
+
+Kontrolované pracovní místo:
+
+Co bylo vidět:
+
+Výsledek:
+- klid potvrzen / lokální úklid / návratový signál nastal / nové téma odděleno
+
+Jedna reakce:
+
+Co dál neotevíráme:
+
+Co mažeme, anonymizujeme nebo neukládáme:
+
+Vlastník rytmu:
+
+Další kontrola:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: přečtěte platný návratový signál.
+2. Minuta 1-2: zkontrolujte jedno přirozené pracovní místo.
+3. Minuta 2-3: vyberte jeden ze čtyř výsledků.
+4. Minuta 3-4: napište jednu reakci nebo větu "nic neměníme".
+5. Minuta 4-5: smažte nebo zkraťte podklady, které už nemají účel.
+
+Když během workshopu vzniknou tři nové nápady, neznamená to, že kontrola selhala. Znamená to jen, že tým má energii. Energie je fajn, ale potřebuje vlastní otázku. Nízká kontrola má zavřít stav položky, ne otevřít malý festival možností.
+
+### Checklist první nízké kontroly
+
+- Kontrolovali jsme jen platný návratový signál?
+- Proběhla kontrola v běžném rytmu, ne jako zvláštní audit?
+- Dívali jsme se na pracovní výstup místo sledování člověka?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud je klid potvrzený, nepřidáváme další dohled?
+- Pokud vznikl lokální úklid, zůstává opravdu lokální?
+- Pokud nastal návratový signál, má další krok vlastní kartu a stop podmínku?
+- Pokud vzniklo nové téma, oddělili jsme ho od původní položky?
+- Uložili jsme jen závěr, který pomůže příští práci?
+- Smazali nebo zkrátili jsme dočasné podklady bez dalšího účelu?
+- Nevznikly nové trackery, exporty ani osobní kontrolní záznamy?
+
+První nízká kontrola je test dospělosti provozního rytmu. Pokud položka zůstává klidná, nejlepší výsledek je málo textu, žádný nový systém a jasná věta, kdy se k ní vrátit. Stabilní práce se pozná i podle toho, že umí projít kontrolou bez toho, aby si vyrobila další práci.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o první nízké kontrole po stabilním klidu: návratový signál, kontrolované pracovní místo, čtyři výsledky, privacy-first nízká pozornost, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření druhého běžného cyklu do stabilního klidu: čtyři uzavírací stavy, zápis stabilního klidu, práce se slabou hranou, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o druhém běžném cyklu po vrácení položky do klidu: přirozená pracovní situace, čtyři výsledky, příklad, privacy-first hranice, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného cyklu po uzavřeném návratu: čtyři uzavírací stavy, provozní závěr, kanonické místo, privacy-first úklid podkladů, karta a checklist.
