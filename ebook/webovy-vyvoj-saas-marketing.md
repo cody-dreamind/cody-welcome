@@ -180729,8 +180729,183 @@ Když workshop narazí na nové téma, nedovolte mu použít starou položku jak
 
 První běžné review bez samostatné kontroly má potvrdit, že stabilní položka nepotřebuje vlastní malou scénu. Buď drží v normálním rytmu, nebo potřebuje drobnou navigační opravu, nebo se opravdu vrátil signál. Vše ostatní je většinou jen ozvěna staré opatrnosti. A ozvěna není backlog.
 
+## Uzavření prvního běžného review bez samostatné kontroly
+
+První běžné review bez samostatné kontroly je hotové až ve chvíli, kdy po něm nevznikne nový stínový režim. Nestačí říct "zkontrolovali jsme to". Je potřeba rozhodnout, jestli položka zůstává v běžném rytmu, jestli se udělala drobná navigační oprava, nebo jestli se opravdu otevřel platný návratový signál.
+
+Uzavírací otázka zní:
+
+```text
+Co se po prvním běžném review mění v normálním provozu, a co se naopak výslovně neobnovuje?
+```
+
+Tato otázka brání dvěma častým chybám. První chyba je předstírat, že review bylo uzavřené, i když po něm zůstala nejasná poznámka typu "raději ještě příště ověřit". Druhá chyba je udělat z drobné opravy dohledatelnosti novou kontrolní vrstvu. V obou případech se položka tváří jako klidná, ale ve skutečnosti si zase bere pozornost.
+
+Začněte jednou větou:
+
+```text
+První běžné review položky [název] uzavíráme stavem [stav]. Samostatnou kontrolu [neobnovujeme / otevíráme jen pro návratový signál X]. Do běžného rytmu se mění pouze [konkrétní drobná změna].
+```
+
+Příklad:
+
+```text
+První běžné review položky "telefon není povinné pole v prvním kontaktním formuláři" uzavíráme stavem: chyběla dohledatelnost. Samostatnou kontrolu neobnovujeme. Do formulářového checklistu doplňujeme jednu větu a starou kontrolní poznámku zkracujeme na odkaz na platné pravidlo.
+```
+
+Takový závěr je malý, ale důležitý. Nevrací tým do staré debaty, nepopisuje znovu celý příběh a současně říká, co se po review opravdu stalo.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném review použijte jeden ze čtyř uzavíracích stavů:
+
+- Uzavřeno bez změny: rytmus drží a není potřeba nic zapisovat mimo běžné review.
+- Uzavřeno s navigační opravou: pravidlo platí, ale bylo potřeba zlepšit cestu k němu.
+- Uzavřeno se stop větou: položka se zbytečně vracela jako zvláštní péče, ale návratový signál nenastal.
+- Otevřena úzká karta návratu: návratový signál nastal a další práce má samostatnou úzkou kartu.
+
+`Uzavřeno bez změny` je nejčistší stav. Pokud váš běžný rytmus nezapisuje klidové položky, nedělejte výjimku. Stačí, že vlastník review ví, že položka prošla bez reakce. Někdy je nejlepší důkaz provozní zralosti právě to, že se nevyrábí další dokument.
+
+`Uzavřeno s navigační opravou` znamená, že rozhodnutí bylo správné, ale špatně dostupné. Závěr proto nemá znít "budeme to víc hlídat". Má znít "přesunuli jsme pravidlo tam, kde ho lidé při práci potřebují". Kontrola se nezvětšuje, jen se zkracuje cesta.
+
+`Uzavřeno se stop větou` použijte, když se položka pořád objevuje v rozhovoru bez nového důkazu. Stop věta má být klidná a konkrétní:
+
+```text
+Položku nevracíme do samostatné kontroly. Platný návratový signál nenastal; další zmínky patří jen do běžného review [místo/rytmus].
+```
+
+`Otevřena úzká karta návratu` je jediný stav, který přidává novou práci. I tady ale platí, že se neotevírá celá historie. Otevírá se jen signál, který byl předem pojmenovaný. Pokud byl návratový signál "telefon se znovu objeví jako povinné pole", neřešte v téže kartě redesign formuláře, segmentaci poptávek ani nový CRM proces.
+
+### Co uzavřít v artefaktech
+
+Uzavření review má projít jen ta místa, která se přirozeně dotýkají běžné práce:
+
+- běžný review zápis, pokud existuje;
+- kanonické místo pravidla;
+- nejbližší checklist, šablona nebo pracovní postup;
+- dočasná kontrolní poznámka, pokud po ní zůstala stopa;
+- návratový signál, pokud se ukázal jako nejasný.
+
+Neprocházejte starou historii jen proto, že existuje. Staré záznamy mají smysl pouze tehdy, když mate aktuální práci. Pokud starý zápis nikdo nepoužívá a není na něj aktivní odkaz, často stačí nechat ho být. Úklid má snížit tření, ne otevřít archeologii dokumentace.
+
+Praktický postup:
+
+```text
+1. Zapište výsledek review jednou větou.
+2. Pokud chyběla dohledatelnost, opravte nejbližší pracovní místo.
+3. Pokud se vracela zvláštní péče, přidejte stop větu.
+4. Pokud návratový signál nastal, založte úzkou kartu návratu.
+5. Zrušte nebo zkraťte dočasné poznámky, které už nemají rozhodovací účel.
+```
+
+Tento postup drží uzavření v rozsahu. Výsledkem není "lepší dokumentační systém". Výsledkem je jasné provozní rozhodnutí po jednom review.
+
+### Jak poznat, že uzavření nevytváří novou práci
+
+Dobré uzavření má tři vlastnosti:
+
+- další člověk ví, kde pravidlo najde;
+- běžné review ví, kdy si položky všimnout;
+- nikdo nemusí ručně hlídat, že položka zůstala zavřená.
+
+Pokud po uzavření vznikne úkol "příště zkontrolovat, jestli jsme to opravdu zavřeli", něco je špatně. Buď závěr nebyl dost jasný, nebo návratový signál není dost konkrétní, nebo se tým bojí pustit položku z ruky. V takové situaci neopravujte pocit další kontrolou. Opravte samotný závěr.
+
+Lepší zápis:
+
+```text
+Položka je uzavřená v běžném rytmu. Znovu ji otevřeme jen tehdy, když [konkrétní signál]. Do té doby ji nevedeme jako samostatný bod.
+```
+
+Horší zápis:
+
+```text
+Zatím to vypadá dobře, ale pro jistotu se k tomu ještě vrátíme.
+```
+
+Druhá věta vypadá opatrně, ale často jen převádí nejistotu do budoucího kalendáře. Opatrnost má být navázaná na signál, ne na nervozitu.
+
+### Privacy-first uzavření review
+
+Uzavírání prvního běžného review je dobré místo pro malý datový úklid. Pokud položka opravdu přešla do běžného rytmu, nepotřebuje zvláštní důkazní složku. Nepotřebuje nové kopie zákaznických příkladů, screenshoty starých stavů ani exporty, které už neslouží rozhodnutí.
+
+Zeptejte se:
+
+- Který záznam musí zůstat, aby tým znal platné pravidlo?
+- Který záznam už sloužil jen k dočasné kontrole?
+- Je v dočasných poznámkách osobní, zákaznický nebo provozní detail, který už není potřeba?
+- Stačí starou stopu zkrátit na obecný závěr a návratový signál?
+- Nevzniká kvůli uzavření nový seznam lidí, chyb nebo příkladů bez jasného účelu?
+
+Privacy-first závěr může být velmi krátký:
+
+```text
+Dočasné podklady po prvním běžném review rušíme. V kanonickém místě necháváme jen platné pravidlo, návratový signál a datum poslední úpravy.
+```
+
+Tohle je provozně zdravé. Tým si nechává rozhodnutí, ale nepěstuje zbytečnou datovou stopu kolem každého malého pravidla.
+
+### Karta uzavření prvního běžného review
+
+```text
+Položka:
+
+Datum prvního běžného review:
+
+Kanonické místo:
+
+Výsledek review:
+- rytmus drží / chybí dohledatelnost / vrací se zvláštní péče / návratový signál nastal
+
+Uzavírací stav:
+- uzavřeno bez změny / uzavřeno s navigační opravou / uzavřeno se stop větou / otevřena úzká karta návratu
+
+Jedna uzavírací věta:
+
+Co se mění v běžném rytmu:
+
+Co výslovně neobnovujeme:
+
+Platný návratový signál:
+
+Co přesouváme, zkracujeme nebo rušíme:
+
+Privacy-first úklid:
+
+Vlastník kanonického místa:
+
+Kdy se položka smí znovu otevřít:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte výsledek prvního běžného review.
+2. Minuta 1-2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 2-3: napište jednu uzavírací větu.
+4. Minuta 3-4: opravte jen nejbližší pracovní místo, pokud je potřeba.
+5. Minuta 4-5: zrušte nebo zkraťte dočasné kontrolní stopy.
+6. Minuta 5-6: potvrďte návratový signál a to, že samostatná kontrola se neobnovuje.
+
+Když se v workshopu objeví nové téma, nesmí se přilepit k uzavírané položce. Buď má vlastní otázku a vlastní kartu, nebo počká. Uzavírání má zavírat, ne otevírat širší zásuvku na všechno, co zrovna někoho napadlo.
+
+### Checklist uzavření prvního běžného review
+
+- Vybrali jsme jeden jasný uzavírací stav?
+- Umíme výsledek říct jednou větou?
+- Je jasné, co se mění v běžném rytmu?
+- Je výslovně řečeno, že samostatná kontrola se neobnovuje?
+- Pokud chyběla dohledatelnost, opravili jsme nejbližší pracovní místo místo nové vrstvy?
+- Pokud se vracela zvláštní péče, máme stop větu?
+- Pokud návratový signál nastal, otevřeli jsme jen úzkou kartu návratu?
+- Zůstává platné pravidlo v kanonickém místě?
+- Zkrátili nebo zrušili jsme dočasné kontrolní stopy bez dalšího účelu?
+- Nevznikl nový sběr osobních, zákaznických nebo provozních detailů jen kvůli pocitu jistoty?
+- Ví vlastník běžného rytmu, kdy se položka smí znovu otevřít?
+
+Uzavření prvního běžného review je malý konec jedné dlouhé smyčky. Položka se nejdřív řešila, pak zmenšovala, stabilizovala, kontrolovala a nakonec přešla do normální práce. Teď má dostat klid. Ne proto, že už nikdy nemůže selhat, ale proto, že tým ví, podle jakého signálu ji znovu zvednout.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného review bez samostatné kontroly: čtyři uzavírací stavy, úklid artefaktů, prevence nové práce, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném review bez samostatné kontroly: ověření kanonického místa, čtyři výsledky review, oprava dohledatelnosti bez nové vrstvy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném použití po uzavření širšího vzoru: stop podmínka, signály zdravého uzavření, rozlišení dočištění a návratu vzoru, privacy-first hranice, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření širšího vzoru po první společné opravě: uzavírací stavy, převod do běžného pravidla, hranice standardizace, privacy-first úklid podkladů, karta, mini workshop a checklist.
