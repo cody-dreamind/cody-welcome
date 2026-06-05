@@ -180394,8 +180394,178 @@ Pokud workshop potřebuje víc času, nejspíš uzavíráte víc než druhou ní
 
 Uzavření druhé nízké kontroly je místo, kde se údržba konečně přestane tvářit jako projekt. Dobře zavřená položka nezmizí. Jen přestane vyžadovat vlastní světlo, vlastní kalendář a vlastní hromádku dat. To je v malém týmu často rozdíl mezi provozem, který se učí, a provozem, který jen sbírá důkazy o tom, že se kdysi učil.
 
+## První běžné review bez samostatné kontroly
+
+Když položka projde druhou nízkou kontrolou a vrátí se do běžného rytmu, přichází nenápadná, ale důležitá zkouška: první normální review, ve kterém už položka nemá vlastní bod agendy. Tady se ukáže, jestli tým opravdu převedl rozhodnutí do provozu, nebo jen přejmenoval zvláštní kontrolu na "rychlou připomínku".
+
+Otázka prvního běžného review zní:
+
+```text
+Drží položka v normálním pracovním rytmu bez vlastní agendy, nebo se samovolně vrací jako speciální starost?
+```
+
+Toto review nemá položku znovu kontrolovat do hloubky. Má ověřit, jestli ji běžná práce dokáže nést sama. Rozdíl je praktický. Pokud jste dřív řešili pravidlo pro první kontaktní formulář, běžné review se nedívá do celé historie formulářů. Jen při normální kontrole webu ověří, že platné pravidlo je v checklistu, že se podle něj pracuje a že se nevrací starý návrh v jiné podobě.
+
+Začněte jednou větou:
+
+```text
+Položka [název] už nemá samostatnou kontrolu. Při tomto běžném review pouze ověřujeme, jestli žije v [kanonické místo] a nevrací se mimo platný návratový signál [signál].
+```
+
+Příklad:
+
+```text
+Položka "telefon není povinné pole v prvním kontaktním formuláři" už nemá samostatnou kontrolu. Při tomto běžném review pouze ověřujeme, jestli pravidlo žije ve formulářovém checklistu a nevrací se mimo signál: telefon se znovu objeví jako povinné pole před prvním kontaktem.
+```
+
+Tato věta chrání review před sklouznutím do starého režimu. Tým si připomene, co je platné, ale neotevírá důvody, které už byly uzavřené.
+
+### Co při běžném review stačí vidět
+
+První běžné review bez samostatné kontroly má být vedlejší efekt práce, ne nová pracovní větev. Stačí tři signály:
+
+- kanonické místo obsahuje platné pravidlo nebo závěr;
+- poslední relevantní výstup se podle něj dá posoudit;
+- neobjevil se platný návratový signál.
+
+Pokud musíte kvůli této položce zakládat nový úkol, hledat staré poznámky, vytahovat export nebo svolávat zvláštní schůzku, položka se pravděpodobně nevrátila do běžného rytmu dost čistě. To není tragédie. Je to provozní signál: buď je kanonické místo špatně dostupné, nebo pravidlo není dost srozumitelné, nebo se do review vrátila nervozita místo důkazu.
+
+Praktické minimum:
+
+- otevřít kanonické místo, kde má pravidlo bydlet;
+- podívat se na jeden aktuální výstup, kterého se pravidlo přirozeně týká;
+- zapsat jednu větu do běžného review jen tehdy, když se něco změnilo;
+- pokud se nic nezměnilo, nepřidávat samostatný důkaz.
+
+U webu může jít o aktuální formulář, jednu landing page nebo šablonu briefu. U SaaS o onboardingový checklist, release note nebo produktovou definici hotovo. U marketingu o sales kartu, distribuční šablonu nebo redakční checklist. Smyslem není kontrolovat všechno. Smyslem je ověřit, že pravidlo není závislé na zvláštní péči.
+
+### Čtyři výsledky běžného review
+
+Po prvním běžném review vyberte jeden ze čtyř výsledků:
+
+- Rytmus drží: položka žije v kanonickém místě a nepotřebuje žádnou reakci.
+- Chybí dohledatelnost: pravidlo platí, ale tým ho v běžné práci obtížně najde.
+- Vrací se zvláštní péče: někdo položku znovu vytahuje jako samostatnou kontrolu bez nového signálu.
+- Návratový signál nastal: objevil se důvod otevřít úzkou kartu návratu.
+
+`Rytmus drží` je nejlepší výsledek a má zůstat krátký:
+
+```text
+Běžné review dne [datum]: položka drží v [kanonické místo]. Samostatnou kontrolu neobnovujeme.
+```
+
+Tuto větu ani nemusíte psát pokaždé. Pokud běžný review rytmus nevyžaduje zápis klidových položek, nechte ji jen jako ústní kontrolu. Pracovní paměť nemá bobtnat jen proto, že věci fungují.
+
+`Chybí dohledatelnost` znamená, že problém není v rozhodnutí, ale v cestě k němu. Opravte navigaci, název, odkaz nebo umístění pravidla. Neotevírejte původní věcnou debatu. Příklad: pravidlo je správné, ale schované ve staré poznámce z kontroly. Přesuňte ho do checklistu a starou poznámku zkraťte.
+
+`Vrací se zvláštní péče` je jemnější problém. Položka drží, ale tým ji pořád zmiňuje, protože si není jistý, jestli smí opravdu zmizet z agendy. V tom případě nezakládejte další kontrolu. Zapište stop větu:
+
+```text
+Položku nevracíme do samostatné kontroly. Platný návratový signál nenastal; další zmínky patří jen k běžnému review [místo/rytmus].
+```
+
+`Návratový signál nastal` je jediný stav, který otevírá novou práci. I tady držte rozsah úzký. Neotevírá se starý projekt, ale konkrétní signál, který byl předem pojmenovaný.
+
+### Jak opravit dohledatelnost bez nové vrstvy
+
+Když běžné review ukáže, že pravidlo nejde snadno najít, nepřidávejte další index, další stránku ani další tabulku. Nejprve opravte nejbližší pracovní místo.
+
+Dobré malé opravy:
+
+- přidat pravidlo do existujícího checklistu;
+- přejmenovat šablonu tak, aby nevedla ke starému postupu;
+- přesunout závěr z dočasné poznámky do kanonické karty;
+- přidat jeden odkaz z místa, kde lidé práci skutečně začínají;
+- zkrátit starý rozhodovací záznam na platný závěr a návratový signál.
+
+Špatné opravy:
+
+- vytvořit nový "přehled pravidel", který nikdo dosud nepoužívá;
+- obnovit samostatnou kontrolu jen proto, že odkaz nebyl po ruce;
+- přepsat původní historii místo opravy aktuální navigace;
+- založit dashboard, který má dokazovat, že pravidlo existuje.
+
+Jedna dobrá navigační oprava je často víc než další kontrolní rituál. Pokud lidé pravidlo nenajdou ve chvíli, kdy ho potřebují, problém je v pracovním toku, ne v počtu schůzek.
+
+Codyho komentář: když kvůli pravidlu potřebujete mapu k mapě, není to robustní knowledge management. Je to turistický oddíl pro dokumentaci. Hezké výlety, mizerný provoz.
+
+### Privacy-first běžné review
+
+První běžné review bez samostatné kontroly má zvláštní privacy-first hodnotu: ověřuje, že pravidlo přežije bez dalšího sběru důkazů. Pokud se položka už vrátila do běžného rytmu, nemá potřebovat nové screenshoty, exporty, přepisy rozhovorů ani samostatnou tabulku.
+
+Držte tři hranice:
+
+- neukládejte důkaz klidu, pokud k ničemu nepovede;
+- nepřenášejte zákaznické příklady do nového zápisu, když stačí obecný závěr;
+- neobnovujte dočasné exporty jen proto, že je review první po zrušení kontroly.
+
+Když se objeví problém dohledatelnosti, ukládejte minimum: co bylo špatně k nalezení, kde je teď platné místo a co se ruší. Nepopisujte, kdo pravidlo nenašel, v jakém kontextu se spletl a jaké zákaznické detaily u toho viděl. Cílem je zlepšit systém, ne vyrábět záznamy o lidech.
+
+Praktická věta:
+
+```text
+Při běžném review jsme přesunuli platné pravidlo do [místo]. Dočasné kontrolní poznámky rušíme; žádné nové podklady neukládáme.
+```
+
+To je dost. Privacy-first provoz často stojí na schopnosti nechat auditní stopu přesně tak dlouhou, jakou potřebuje rozhodnutí. Ani o řádek víc.
+
+### Karta prvního běžného review
+
+```text
+Položka:
+
+Kanonické místo:
+
+Platný návratový signál:
+
+Běžný review rytmus:
+
+Kontrolovaný aktuální výstup:
+
+Výsledek:
+- rytmus drží / chybí dohledatelnost / vrací se zvláštní péče / návratový signál nastal
+
+Jedna reakce:
+
+Co neobnovujeme:
+
+Co přesouváme nebo zkracujeme:
+
+Co mažeme, anonymizujeme nebo neukládáme:
+
+Vlastník běžného rytmu:
+
+Kdy se položka smí znovu otevřít:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: přečtěte kanonické místo a návratový signál.
+2. Minuta 1-2: ověřte jeden aktuální výstup v běžné práci.
+3. Minuta 2-3: vyberte jeden ze čtyř výsledků.
+4. Minuta 3-4: opravte dohledatelnost, pokud je to jediný problém.
+5. Minuta 4-5: potvrďte, že samostatná kontrola se neobnovuje bez návratového signálu.
+
+Když workshop narazí na nové téma, nedovolte mu použít starou položku jako nosič. Zapište novou otázku zvlášť a původní položku ponechte v běžném rytmu, pokud její návratový signál nenastal.
+
+### Checklist prvního běžného review
+
+- Proběhlo review jako součást normální práce, ne jako zvláštní kontrola?
+- Je jasné kanonické místo platného pravidla?
+- Ověřili jsme jen jeden aktuální výstup, kde se pravidlo přirozeně používá?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud rytmus drží, nevytvořili jsme nový důkaz jen pro pocit jistoty?
+- Pokud chyběla dohledatelnost, opravili jsme nejbližší pracovní místo?
+- Pokud se vracela zvláštní péče, neobnovili jsme ji bez návratového signálu?
+- Pokud návratový signál nastal, má další práce úzkou kartu?
+- Nepřenesli jsme do běžného review osobní detaily, staré exporty ani zákaznické příklady bez účelu?
+- Umí tým říct, kde pravidlo žije a kdy se smí znovu otevřít?
+
+První běžné review bez samostatné kontroly má potvrdit, že stabilní položka nepotřebuje vlastní malou scénu. Buď drží v normálním rytmu, nebo potřebuje drobnou navigační opravu, nebo se opravdu vrátil signál. Vše ostatní je většinou jen ozvěna staré opatrnosti. A ozvěna není backlog.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o prvním běžném review bez samostatné kontroly: ověření kanonického místa, čtyři výsledky review, oprava dohledatelnosti bez nové vrstvy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném použití po uzavření širšího vzoru: stop podmínka, signály zdravého uzavření, rozlišení dočištění a návratu vzoru, privacy-first hranice, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření širšího vzoru po první společné opravě: uzavírací stavy, převod do běžného pravidla, hranice standardizace, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření druhé nízké kontroly do běžného rytmu: čtyři uzavírací stavy, převod pravidla do kanonického místa, úklid dočasných stop, privacy-first redukce, karta, mini workshop a checklist.
