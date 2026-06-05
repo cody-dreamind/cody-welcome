@@ -179087,8 +179087,157 @@ Další rytmus:
 
 Druhý běžný cyklus je dobrý filtr mezi skutečně stabilním pravidlem a pravidlem, které drželo jen díky čerstvé péči. Když projde čistě, zavřete ho bez dalšího dohledu. Když neprojde, řešte přesně to, co se ukázalo. Ne víc, ne méně.
 
+## Uzavření druhého běžného cyklu do stabilního klidu
+
+Druhý běžný cyklus po vrácení položky do klidu má jednu výhodu: už většinou není zatížený čerstvou vzpomínkou na původní opravu. Když projde dobře, je škoda ho nechat viset jako další otevřenou poznámku. Právě tady se rozhoduje, jestli se z položky stane normální součást systému, nebo jestli bude tým dál nosit v hlavě starý příběh.
+
+Uzavření druhého cyklu není audit. Je to krátké provozní rozhodnutí:
+
+```text
+Druhý běžný cyklus ukázal:
+Odteď položka patří do:
+Další zásah nastane pouze když:
+```
+
+Pokud tyto tři věty nejdou napsat, cyklus není připravený k uzavření. Buď chybí jasný výsledek, nebo se během práce objevilo nové téma, které je potřeba oddělit. Nedoplňujte chybějící jistotu dalším dohledem. Nejprve pojmenujte stav.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném cyklu vyberte jeden ze čtyř stavů:
+
+- Stabilní klid potvrzen: položka funguje bez připomínky a zůstává v běžném nebo lehčím rytmu.
+- Zavřeno po opravě slabé hrany: pravidlo drží, jen se dočistilo jedno místo, které nutilo člověka hádat.
+- Otevřena úzká systémová oprava: stejný návrat se zopakoval a potřebuje samostatný zásah s vlastním koncem.
+- Odděleno nové téma: objevila se sousední otázka, která nesmí zdědit historii původní položky.
+
+`Stabilní klid potvrzen` je plnohodnotný závěr. Nepřidávejte k němu větu "ještě to radši budeme sledovat". Pokud pravidlo prošlo druhým běžným cyklem bez připomínky, další práce se spouští až návratovým signálem nebo běžným revizním rytmem.
+
+`Zavřeno po opravě slabé hrany` použijte, když se ukázal drobný problém v navigaci, textu nebo vlastnictví. Příklad: člověk použil správnou šablonu, ale musel se doptat, která verze je aktuální. Oprava je lokální: přejmenuje se odkaz, smaže se stará varianta, doplní se jedna věta. Pokud změna zasahuje víc pracovních míst, už nejde o slabou hranu.
+
+`Otevřena úzká systémová oprava` znamená, že druhý cyklus potvrdil opakovaný návrat. V takové chvíli už nestačí uklidit jednu poznámku. Oprava musí mířit na příčinu: zdrojovou šablonu, vlastnictví, automatizaci, oprávnění, onboarding nebo místo, odkud se staré chování vrací.
+
+`Odděleno nové téma` drží pořádek. Když se při druhém použití formulářového pravidla objeví otázka k ceně, neznamená to, že formulářové pravidlo selhalo. Znamená to, že cenová komunikace potřebuje vlastní otázku, vlastníka a stop podmínku.
+
+### Jak zapsat stabilní klid
+
+Zápis stabilního klidu má být tak krátký, aby ho člověk za měsíc opravdu přečetl:
+
+```text
+Po druhém běžném cyklu dne [datum] položka fungovala bez připomínky. Zůstává v běžném rytmu [název rytmu]. Další zásah nastane pouze při [konkrétní návratový signál].
+```
+
+Příklad:
+
+```text
+Po druhém běžném cyklu dne 2026-06-05 pravidlo "telefon není povinné pole v prvním kontaktním formuláři" fungovalo bez připomínky. Zůstává v měsíční kontrole webových šablon. Další zásah nastane pouze tehdy, když se telefon znovu objeví jako povinné pole ve zveřejněném prvním formuláři.
+```
+
+Takový zápis je lepší než dlouhá historie. Ukládá provozní pravidlo, ne emocionální stopu po opravě. Tým ví, co platí, kde to žije a kdy má znovu reagovat.
+
+### Co udělat se slabou hranou
+
+Slabá hrana se má zavřít v nejbližším pracovním místě. Nepatří do velkého backlogu, pokud je jasné, kde překáží. Postup:
+
+1. Pojmenujte hranu jednou větou.
+2. Opravte jen místo, kde člověk musel hádat.
+3. Zapište, že pravidlo jako celek zůstává stabilní.
+4. Určete nejbližší běžné použití, ve kterém se hrana přirozeně ukáže.
+
+Příklad:
+
+```text
+Slabá hrana:
+V rozcestníku šablon jsou dvě podobně pojmenované varianty formuláře.
+
+Oprava:
+Starou variantu archivujeme a aktuální přejmenujeme na "První kontaktní formulář - aktuální".
+
+Stav pravidla:
+Pravidlo drží. Neotevíráme znovu formulářovou strategii ani povinná pole.
+
+Ověření:
+Při další nové landing page stačí zkontrolovat, jestli autor najde aktuální formulář bez doptávání.
+```
+
+Slabá hrana není pozvánka k novému procesu. Je to drobná nerovnost na jinak použitelné cestě. Opravte ji a nenechte ji vyrůst do nového rituálu.
+
+### Privacy-first uzavření stabilního klidu
+
+Když druhý cyklus potvrzuje klid, má se zmenšit i datová stopa. V kanonickém místě má zůstat závěr a návratový signál. Dočasné podklady z ověřování mají odejít pryč.
+
+Praktické pravidlo:
+
+- smažte dočasné screenshoty, exporty a kopie, které sloužily jen k ověření;
+- anonymizujte příklad, pokud má zůstat jako učební poznámka;
+- neukládejte osobní průběh práce konkrétního člověka;
+- nerestartujte dočasnou tabulku jen proto, že se dobře vyplňovala;
+- nepřidávejte nové měření šablon, kliků nebo otevření dokumentů, pokud stačí provozní závěr.
+
+Codyho komentář: stabilní klid je jedna z nejpodceňovanějších metrik. Nejde dát hezky do dashboardu, což je vlastně dobře. Když systém funguje bez dramatu a bez nových datových výhonků, je to často přesně ten výsledek, který jste chtěli.
+
+### Karta uzavření druhého cyklu
+
+```text
+Položka:
+
+První běžný cyklus byl uzavřen jako:
+
+Druhý běžný cyklus:
+
+Co mělo fungovat bez připomínky:
+
+Co skutečně fungovalo:
+
+Uzavírací stav:
+- stabilní klid potvrzen / zavřeno po opravě slabé hrany / otevřena úzká systémová oprava / odděleno nové téma
+
+Provozní závěr jednou větou:
+
+Kde závěr bydlí:
+
+Platný návratový signál:
+
+Co dál neotevíráme:
+
+Co mažeme, anonymizujeme nebo neukládáme:
+
+Vlastník rytmu:
+
+Další běžná revize:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 0-1: přečtěte výsledek prvního a druhého běžného cyklu.
+2. Minuta 1-2: rozhodněte, jestli pravidlo fungovalo bez připomínky.
+3. Minuta 2-3: vyberte jeden uzavírací stav.
+4. Minuta 3-4: napište provozní závěr jednou větou.
+5. Minuta 4-5: určete platný návratový signál.
+6. Minuta 5-6: smažte nebo zkraťte dočasné podklady.
+7. Minuta 6-7: řekněte, co dál vědomě neotevíráte.
+
+Když workshop začne řešit starou historii, vraťte se k otázce druhého cyklu: funguje položka bez čerstvé připomínky? Pokud ano, zavřete. Pokud ne, otevřete přesně jednu úzkou opravu nebo oddělte nové téma.
+
+### Checklist uzavření druhého cyklu
+
+- Víme, co měl druhý cyklus ověřit?
+- Proběhl v přirozené práci, ne jako umělý audit?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud je stabilní klid potvrzený, nepřidáváme další zvláštní dohled?
+- Pokud vznikla slabá hrana, opravili jsme jen nejbližší pracovní místo?
+- Pokud se vrátil stejný signál, má úzká systémová oprava vlastní konec?
+- Pokud vzniklo nové téma, oddělili jsme ho od původní položky?
+- Je provozní závěr uložený v kanonickém místě?
+- Je návratový signál konkrétní a pozorovatelný?
+- Uklidili jsme dočasné podklady a osobní detaily?
+- Nezavedli jsme nové trackery, exporty ani dohled nad lidmi?
+- Umí tým říct, kdy má položku znovu otevřít a kdy ji nechat být?
+
+Uzavření druhého běžného cyklu je dobrý konec malé provozní smyčky. Položka už prošla návratem, reakcí, prvním běžným použitím i druhým použitím bez čerstvé podpory. Když drží, nechte ji držet. Síla systému není v tom, že všechno pořád kontroluje. Je v tom, že ví, kdy kontrolu ukončit.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o uzavření druhého běžného cyklu do stabilního klidu: čtyři uzavírací stavy, zápis stabilního klidu, práce se slabou hranou, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o druhém běžném cyklu po vrácení položky do klidu: přirozená pracovní situace, čtyři výsledky, příklad, privacy-first hranice, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného cyklu po uzavřeném návratu: čtyři uzavírací stavy, provozní závěr, kanonické místo, privacy-first úklid podkladů, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném cyklu po uzavřeném návratu: výběr běžné situace, čtyři výsledky, příklad, privacy-first hranice, karta, mini workshop a checklist.
