@@ -178654,8 +178654,159 @@ Workshop neslouží k hledání dalších nápadů. Když se objeví nový nápa
 
 Uzavření prvního návratu je malé, ale důležité. Učí tým, že návratový signál není trest za staré rozhodnutí. Je to jen test, zda pravidlo pořád drží v realitě. Když test projde, zavřete ho. Když neprojde, otevřete přesně tolik práce, kolik důkaz vyžaduje. Ani o metr víc.
 
+## První běžný cyklus po uzavřeném návratu
+
+Po uzavření prvního návratu přichází nenápadná, ale prakticky důležitá fáze: první běžný cyklus. Položka už není v mimořádném režimu, návrat byl vyhodnocený a reakce má uzavřený stav. Teď je potřeba ověřit, že se tým opravdu vrátil k normální práci. Ne k zapomnění. Ne k trvalému dohledu. K normální práci.
+
+Běžný cyklus znamená nejbližší přirozenou situaci, ve které se pravidlo znovu použije. U webu to může být další landing page, úprava formuláře, publikace článku nebo měsíční kontrola obsahu. U SaaS produktu to může být další onboardingový průchod, změna nastavení tenantu, supportní odpověď nebo release drobné funkce. U marketingu to může být další kampaň, follow-up, případová studie nebo distribuce obsahu.
+
+Nezačínejte otázkou "máme to celé znovu zkontrolovat?". Začněte otázkou:
+
+```text
+Jaká je nejbližší běžná situace, kde se uzavřený návrat přirozeně projeví?
+```
+
+Pokud taková situace není, není co ověřovat. Zapište datum návratu nebo nechte položku v klidu. Vynucené ověření mimo běžnou práci často vytvoří víc šumu než jistoty.
+
+### Co v prvním běžném cyklu sledovat
+
+Sledujte jen to, jestli uzavření změnilo práci tam, kde mělo. Nehledejte všechny možné souvislosti. První běžný cyklus má tři jednoduché signály:
+
+- pravidlo bylo použité bez speciální připomínky;
+- lokální oprava nezpůsobila nové tření;
+- návratový signál se neobjevil stejnou cestou.
+
+Příklad: pokud byl problém ve staré šabloně kampaně, první běžný cyklus je další kampaň vytvořená z aktuální šablony. Ne audit všech starých kampaní. Ne rozhovor s každým, kdo kdy formulář kopíroval. Stačí ověřit, že nová práce používá správný zdroj a nevytváří povinné pole, které jste chtěli odstranit.
+
+Zápis může být krátký:
+
+```text
+Položka:
+Uzavřený návrat:
+Nejbližší běžný cyklus:
+Co mělo být vidět:
+Co bylo skutečně vidět:
+Byla potřeba speciální připomínka:
+Objevil se návratový signál stejnou cestou:
+```
+
+Tento zápis chrání hranici mezi ověřením a kontrolní posedlostí. Ověření se ptá, jestli běžná práce prošla. Kontrolní posedlost se ptá, jestli by někde náhodou nemohlo existovat další riziko. To druhé umí spolknout den a vyrobit nulové rozhodnutí.
+
+### Čtyři výsledky běžného cyklu
+
+Po prvním běžném cyklu vyberte jeden stav:
+
+- Čistý průchod: práce proběhla bez připomínky a bez návratového signálu.
+- Drobné tření: pravidlo drží, ale jedno místo je nepohodlné, nejasné nebo zbytečně dlouhé.
+- Stejný návrat: signál se vrátil stejnou cestou, takže lokální uzavření nestačilo.
+- Nový signál: objevilo se jiné téma, které nemá být přilepené ke staré položce.
+
+`Čistý průchod` je nejlepší výsledek a zároveň nejčastěji podceňovaný. Když se nic zvláštního nestalo, neznamená to, že musíte hledat další práci. Znamená to, že pravidlo funguje dost dobře pro běžný provoz. Zapište jednu větu a zavřete cyklus.
+
+`Drobné tření` řešte malou úpravou, jen pokud brání dalšímu použití. Pokud jde o kosmetickou připomínku, zapište ji do běžného backlogu nebo ji nechte být. Ne každá nepohodlnost si zaslouží nový režim.
+
+`Stejný návrat` je silnější důkaz. Pokud se problém vrátil stejnou cestou hned v prvním běžném cyklu, předchozí reakce pravděpodobně opravila příznak, ne příčinu. V takovém případě nehledejte další lokální záplatu. Otevřete úzkou reakci s jasnou stop podmínkou, nebo obnovte zvláštní pozornost, pokud běžný rytmus selhal systémově.
+
+`Nový signál` oddělte. Pokud při další kampani objevíte problém v nabídce, nelepte ho k původnímu formulářovému pravidlu jen proto, že se objevil ve stejné práci. Dejte mu vlastní otázku, vlastníka a stop podmínku.
+
+### Příklad prvního běžného cyklu
+
+```text
+Položka:
+Telefon není povinné pole v prvním kontaktním formuláři.
+
+Uzavřený návrat:
+Archivní landing page byla omylem použitá jako zdroj nové kampaně.
+
+Nejbližší běžný cyklus:
+Vytvoření další kampaně z aktuální šablony.
+
+Co mělo být vidět:
+Nová stránka používá aktuální formulář bez povinného telefonu a autor nemusí dostat zvláštní připomínku.
+
+Co bylo skutečně vidět:
+Autor použil správnou šablonu. Telefon zůstal nepovinný. Archivní stránku neotevřel.
+
+Výsledek:
+Čistý průchod.
+
+Další krok:
+Žádný zvláštní krok. Položka zůstává v běžném rytmu.
+```
+
+Takový zápis je krátký, ale užitečný. Neříká jen "všechno v pohodě". Říká, ve které běžné situaci se pravidlo ověřilo a proč není potřeba další péče.
+
+### Privacy-first hranice běžného cyklu
+
+První běžný cyklus nesmí rozšířit datovou stopu jen proto, že tým chce mít klid. Nepřidávejte nové eventy, osobní kontrolní seznamy, nahrávky průchodů ani exporty, pokud k rozhodnutí stačí běžný pracovní výstup.
+
+Praktická hranice:
+
+- ověřujte hotový výstup, ne člověka;
+- ukládejte závěr, ne detailní historii průchodu;
+- dočasné podklady smažte po uzavření cyklu;
+- pokud potřebujete příklad, anonymizujte ho a zkraťte na rozhodovací část;
+- když čistý průchod stačí, neprodlužujte retenci jen pro pocit jistoty.
+
+Codyho komentář: dobrý privacy-first provoz poznáte i podle toho, že umí přestat měřit. Ne proto, že by byl líný. Protože ví, kdy už má dost důkazů pro rozhodnutí.
+
+### Karta prvního běžného cyklu
+
+```text
+Položka:
+
+Uzavřený návrat:
+
+Nejbližší běžná situace:
+
+Očekávaný projev v práci:
+
+Skutečný průchod:
+
+Výsledek:
+- čistý průchod / drobné tření / stejný návrat / nový signál
+
+Jedna reakce, pokud je potřeba:
+
+Co dál neotevíráme:
+
+Jaká data dál nesbíráme:
+
+Co uklízíme:
+
+Vlastník běžného rytmu:
+
+Datum další běžné revize, pokud existuje:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: pojmenujte nejbližší běžnou situaci.
+2. Minuta 1-2: porovnejte očekávaný a skutečný průchod.
+3. Minuta 2-3: vyberte jeden ze čtyř výsledků.
+4. Minuta 3-4: napište jednu reakci nebo větu "bez další práce".
+5. Minuta 4-5: zapište, co dál nesbíráte a co uklízíte.
+
+Když workshop potřebuje víc než pět minut, pravděpodobně už nejde o první běžný cyklus. Buď se objevil stejný návrat, nebo nové téma. V obou případech ho oddělte do vlastní karty a nenechte z jednoduchého ověření vyrůst další schůzkový proces.
+
+### Checklist prvního běžného cyklu
+
+- Vybrali jsme skutečnou běžnou situaci, ne umělý test?
+- Víme, co mělo být po uzavřeném návratu vidět?
+- Ověřili jsme pracovní výstup místo chování konkrétního člověka?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud šlo o čistý průchod, opravdu nepřidáváme další práci?
+- Pokud vzniklo drobné tření, řešíme jen nejmenší potřebnou úpravu?
+- Pokud se vrátil stejný signál, má další reakce jasnou stop podmínku?
+- Pokud vznikl nový signál, oddělili jsme ho od staré položky?
+- Nevznikl nový tracker, export, osobní dohled ani zbytečně dlouhá retence?
+- Zůstává v kanonickém místě jen závěr, který pomůže příště?
+
+První běžný cyklus je návrat do dospělého provozu. Neoslavuje opravu, nerozebírá starou historii a netváří se, že klid je podezřelý. Jen ověří, že běžná práce drží, a potom nechá položku znovu dýchat v normálním rytmu.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o prvním běžném cyklu po uzavřeném návratu: výběr běžné situace, čtyři výsledky, příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního návratu po ukončení zvláštní pozornosti: čtyři uzavírací stavy, lokální oprava, úzká reakce, obnovení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním návratu po ukončení zvláštní pozornosti: rozlišení šumu, lokální stopy, úzké reakce a nového tématu, privacy-first brzda, karta návratu a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o ukončení pravidelné pozornosti po druhém běžném měsíci: podmínky zavření, převod do běžného rytmu, úklid dočasných kontrol, privacy-first konec pozornosti, karta, mini workshop a checklist.
