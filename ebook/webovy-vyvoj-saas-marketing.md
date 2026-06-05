@@ -177886,8 +177886,276 @@ Sedm minut je záměrně málo. Když potřebujete víc, pravděpodobně už neu
 
 Uzavřený první běžný měsíc má týmu ulevit. Buď potvrdí, že převod opravdu funguje, nebo otevře přesnou malou reakci. V obou případech je výsledek lepší než nekonečné "ještě to sledujme". Sledování bez rozhodnutí je jen pomalý způsob, jak z jednoduchého pravidla udělat interní mlhu.
 
+## Druhý běžný měsíc po uzavření prvního běžného měsíce
+
+Druhý běžný měsíc je kontrola, jestli klid nebyl jen slavnostní výsledek jedné dobře hlídané iterace. V prvním měsíci ještě tým často ví, že se položka nedávno převáděla, a podvědomě se k ní chová opatrněji. Ve druhém měsíci už má pravidlo působit normálně: bez zvláštního připomínání, bez dočasné tabulky, bez nenápadného "já to pro jistotu sleduju".
+
+Smyslem druhého měsíce není přidat další vrstvu údržby. Smyslem je ověřit, že uzavření prvního měsíce opravdu drží v běžném rytmu. Pokud drží, další práce je hlavně v tom nic zbytečně neotevřít. Ano, zní to jako lenost. Ve skutečnosti je to provozní disciplína s menším datovým apetitem, což je mnohem méně efektní, ale výrazně užitečnější.
+
+Začněte jednoduchou větou:
+
+```text
+Ve druhém běžném měsíci u položky [název] ověřujeme jen to, zda předchozí uzavírací stav drží bez mimořádné péče. Sledujeme hotové výstupy, návratový signál a případné opakované tření; nezavádíme nové měření ani další kontrolní rytmus.
+```
+
+Příklad:
+
+```text
+Ve druhém běžném měsíci u checklistu případové studie ověřujeme jen to, zda stav "klid potvrzen" drží bez mimořádné péče. Sledujeme hotové case studies, návratový signál dvou obejitých checklistů po sobě a případné opakované navigační tření; nezavádíme měření otevření dokumentu ani novou review schůzku.
+```
+
+Tato věta je ochrana proti dvěma opačným chybám. První chyba je ignorovat skutečný návratový signál, protože "minule už jsme to přece zavřeli". Druhá chyba je znovu rozjet kontrolní režim jen proto, že se položka objevila v hlavě vlastníka. Druhý měsíc má mezi těmito extrémy držet praktickou rovnováhu.
+
+### Co druhý měsíc potvrzuje
+
+Druhý měsíc potvrzuje tři věci:
+
+- Uzavírací stav z prvního měsíce nebyl závislý na mimořádné pozornosti.
+- Návratový signál je pořád poznatelný z běžných pracovních výstupů.
+- Lokální úklid, pokud proběhl, nevyrobil nové tření jinde.
+
+To je celé. Pokud začnete během druhého měsíce hodnotit kvalitu celé oblasti, spokojenost všech rolí, budoucí podobu šablon nebo strategii nabídky, už neděláte druhý běžný měsíc. Děláte novou revizi. Ta může být správná, ale má mít vlastní otázku, vlastní rozsah a vlastní stop podmínku.
+
+Praktický záznam může vypadat takto:
+
+```text
+Položka:
+Checklist případové studie
+
+Uzavírací stav prvního měsíce:
+Klid potvrzen
+
+Hotové výstupy ve druhém měsíci:
+Jedna nová case study a dva obchodní follow-upy.
+
+Návratový signál:
+Nenastal.
+
+Opakované tření:
+Nenastalo.
+
+Rozhodnutí:
+Stav drží. Položka zůstává v běžném provozu bez další měsíční kontroly.
+```
+
+Všimněte si, že zápis neříká, kdo dokument otevřel, kdy ho otevřel ani kolikrát se někdo proklikl playbookem. Z pohledu rozhodnutí je to zbytečné. Stačí hotové výstupy a stav návratového signálu.
+
+### Čtyři výsledky druhého měsíce
+
+Na konci druhého měsíce vyberte jeden ze čtyř výsledků:
+
+- Stabilní klid: předchozí uzavírací stav drží a nic dalšího se nedělá.
+- Opakované lokální tření: stejná drobná překážka se vrátila, ale pořád nejde o širší problém.
+- Návratový signál potvrzen: předem definovaný signál opravdu nastal.
+- Nový nesouvisející signál: objevilo se něco užitečného, ale není to návrat této položky.
+
+Největší past je poslední stav. Nový nesouvisející signál často vypadá lákavě, protože je čerstvý, konkrétní a někdo ho právě přinesl. Jenže pokud nepatří k původní položce, nepřilepujte ho k ní. Vytvořte samostatnou malou kartu, nebo ho zahoďte, pokud není dost silný. Staré téma nemá být skladištěm všech nových nápadů, které zrovna nemají domov.
+
+### Stabilní klid
+
+Stabilní klid znamená, že druhý měsíc nepřinesl návratový signál ani opakované tření. V takovém případě je správný výsledek nudný:
+
+```text
+Stav:
+Stabilní klid.
+
+Důvod:
+Druhý měsíc proběhl bez návratového signálu a bez opakovaného tření.
+
+Reakce:
+Žádná změna.
+
+Další návrat:
+Jen podle původního návratového signálu nebo při změně kontextu, která mění smysl pravidla.
+```
+
+Tady se často objeví návrh "aspoň to dejme do kvartálního review". Pokud položka už má návratový signál a druhý měsíc potvrdil klid, další pravidelná kontrola má smysl jen tehdy, když existuje reálné riziko stárnutí. Jinak znovu vyrábíte provozní šum.
+
+Codyho komentář: stabilní klid je podceňovaný produktový výsledek. Neumí udělat pěkný graf, nedá se moc prodat na poradě, ale šetří pozornost. A pozornost je u malých týmů dražší než většina SaaS nástrojů, které si koupíte, abyste šetřili pozornost. Ironie si právě sundala boty a sedla si do kuchyně.
+
+### Opakované lokální tření
+
+Opakované lokální tření znamená, že se drobná překážka vrátila i po předchozím uzavření. Pořád nemusí jít o systémový problém. Může to být jen špatně umístěný odkaz, matoucí název nebo nejasná jedna věta. Rozdíl proti prvnímu měsíci je v tom, že opakování už stojí za přesnější lokální opravu.
+
+Postup:
+
+```text
+1. Pojmenujte stejné místo tření.
+2. Ověřte, že nejde o nový větší problém.
+3. Opravte nejbližší pracovní artefakt.
+4. Zapište, proč se neotevírá celé pravidlo.
+5. Nastavte jeden krátký návratový signál pro stejnou překážku.
+```
+
+Příklad:
+
+```text
+Stav:
+Opakované lokální tření.
+
+Důvod:
+Druhý člověk během dvou měsíců nenašel checklist ze sales rozcestníku.
+
+Lokální oprava:
+V sales rozcestníku je přejmenovaná položka "Case study checklist" na "Checklist případové studie pro obchodní použití" a starý duplicitní odkaz je odstraněn.
+
+Co neotevíráme:
+Neměníme checklist ani redakční playbook.
+
+Návrat:
+Pokud se stejná navigační překážka objeví u dalšího relevantního výstupu, otevřeme úzkou otázku navigace mezi sales a redakčními materiály.
+```
+
+Privacy-first hranice je pořád stejná: neopravujte lokální tření sledováním lidí. Opravte trasu. Když někdo nenašel odkaz, nepotřebujete heatmapu interní dokumentace. Potřebujete lepší název, jedno kanonické místo a méně duplicit.
+
+### Návratový signál potvrzen
+
+Pokud se ve druhém měsíci potvrdí návratový signál, neznamená to selhání předchozího uzavření. Znamená to, že návratový signál plní svou práci. Systém neříkal "tohle se už nikdy nestane". Říkal "když se to stane, poznáme to a zareagujeme úzce".
+
+Zápis by měl oddělit tři věci:
+
+```text
+Co se stalo:
+
+Proč je to návratový signál:
+
+Jaká úzká reakce se otevírá:
+```
+
+Příklad:
+
+```text
+Co se stalo:
+Dvě relevantní case studies po sobě obešly kanonický checklist.
+
+Proč je to návratový signál:
+Přesně tento stav byl definovaný při převodu do běžného provozu.
+
+Úzká reakce:
+Do pěti pracovních dnů zjistit, zda je problém v dohledatelnosti checklistu, nebo v nesouladu checklistu s aktuálním typem zakázek. Neotevírá se kompletní revize obsahu.
+```
+
+Tím se chrání historická paměť i rozsah. Otevíráte reakci proto, že nastal domluvený signál, ne proto, že někdo dostal chuť "podívat se na celý systém". Chuť dívat se na celý systém je lidská. Rozpočet, kapacita a privacy-first provoz jsou méně romantické.
+
+### Nový nesouvisející signál
+
+Nový nesouvisející signál je podnět, který během druhého měsíce vyplave na povrch, ale nepatří k původní položce. Například při práci s checklistem případové studie zjistíte, že zákazníci častěji chtějí krátký PDF výstup. To může být užitečné, ale není to návrat problému s checklistem. Pokud to přilepíte k původní položce, ztratíte čistotu rozhodování.
+
+Použijte krátké třídění:
+
+```text
+Podnět:
+
+Patří k původnímu návratovému signálu?
+- ano / ne
+
+Pokud ne, kam patří?
+- zahodit / backlog / samostatná malá karta / jiný vlastník
+
+Co zůstává zavřené:
+```
+
+Příklad:
+
+```text
+Podnět:
+Obchod chce kratší verzi case study do follow-upu.
+
+Patří k původnímu návratovému signálu?
+Ne. Checklist nebyl obejitý a navigace fungovala.
+
+Kam patří:
+Samostatná malá karta pro sales materiál.
+
+Co zůstává zavřené:
+Checklist případové studie i jeho provozní rytmus.
+```
+
+Tento krok je drobný, ale zásadní. Dobrý tým neumí jen otevírat práci. Umí také říct: "Tohle je dobrý podnět, ale nepatří sem." Bez téhle věty se z každého provozního tématu stane měkká hromada souvisejících nápadů.
+
+### Privacy-first kontrola druhého měsíce
+
+Druhý měsíc je poslední dobrý moment zastavit zbytečné sledování, které vzniklo kolem původní kontroly. Ptejte se:
+
+- Zůstala někde dočasná poznámka z prvního měsíce?
+- Držíme seznam průchodů, který už nepodporuje aktivní rozhodnutí?
+- Máme uložené osobní komentáře, které stačí nahradit agregovaným závěrem?
+- Vznikl návrh na nové měření jen proto, že chceme mít "jistotu"?
+- Dá se rozhodnutí udělat z hotových výstupů a návratového signálu?
+
+Pokud ano, uklízejte. Privacy-first není jen výběr evropského hostingu nebo odmítnutí cizího trackeru. Je to i schopnost neukládat vlastní interní stopy, které nepomáhají rozhodnutí. Data, která nevzniknou, nemusíte zabezpečovat, vysvětlovat, exportovat ani mazat. To je provozní magie bez kouře a bez právního dramatu.
+
+### Karta druhého běžného měsíce
+
+```text
+Položka:
+
+Uzavírací stav prvního měsíce:
+
+Druhý běžný měsíc:
+
+Původní návratový signál:
+
+Hotové výstupy:
+
+Opakované tření:
+- ano / ne
+
+Návratový signál:
+- nenastal / potvrzen
+
+Nový nesouvisející signál:
+- ano / ne
+
+Výsledek druhého měsíce:
+- stabilní klid / opakované lokální tření / návratový signál potvrzen / nový nesouvisející signál
+
+Jedna reakce:
+
+Co zůstává zavřené:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Jaká data dál nesbíráme:
+
+Další návrat:
+
+Vlastník:
+```
+
+### Mini workshop na 6 minut
+
+Pokud je potřeba týmový průchod, držte ho krátký:
+
+1. Minuta 0-1: vlastník přečte uzavírací stav prvního měsíce a původní návratový signál.
+2. Minuta 1-2: pojmenují se hotové výstupy druhého měsíce.
+3. Minuta 2-3: vybere se jeden ze čtyř výsledků.
+4. Minuta 3-4: zapíše se jedna reakce a co zůstává zavřené.
+5. Minuta 4-5: uklidí se dočasné a osobní datové stopy.
+6. Minuta 5-6: potvrdí se další návrat nebo konec pravidelné pozornosti.
+
+Když se diskuse nevejde do šesti minut, pravděpodobně se objevil nový rozsah. To není tragédie, jen ho oddělte od druhého běžného měsíce. Malý provozní rituál nemá nést strategickou debatu na zádech.
+
+### Checklist druhého běžného měsíce
+
+- Navazujeme na konkrétní uzavírací stav prvního měsíce?
+- Sledujeme hotové výstupy a návratový signál, ne aktivitu jednotlivců?
+- Umíme říct, zda jde o stabilní klid, opakované lokální tření, potvrzený návratový signál nebo nový nesouvisející signál?
+- Pokud je stabilní klid, neděláme žádnou novou akci?
+- Pokud je opakované lokální tření, opravujeme nejbližší pracovní místo?
+- Pokud je návratový signál potvrzen, otevíráme úzkou reakci s vlastní stop podmínkou?
+- Pokud jde o nový nesouvisející signál, nepřilepujeme ho k původní položce?
+- Zůstává jasně napsané, co se neotevírá?
+- Rušíme dočasné poznámky, tabulky a připomínky bez dalšího účelu?
+- Mažeme nebo anonymizujeme osobní pracovní stopy, které nejsou potřeba pro rozhodnutí?
+- Nezavádíme nové měření jen kvůli uklidnění vlastní nejistoty?
+- Ví vlastník, jestli položka končí bez další pozornosti, nebo má přesný další návrat?
+
+Druhý běžný měsíc je hotový, když položka buď zůstává v klidu, nebo se z ní oddělí přesná malá reakce. V obou případech se nesmí ztratit nejdůležitější výsledek celé předchozí práce: tým ví, co platí, kdy se to smí otevřít a jaká data kvůli tomu nemusí sbírat.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna podkapitola o druhém běžném měsíci po uzavření prvního běžného měsíce: ověření stabilního klidu, opakované lokální tření, potvrzený návratový signál, nový nesouvisející signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného měsíce po převodu kvartálního návratu: čtyři uzavírací stavy, lokální úklid, úzká reakce, falešný návrat, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném měsíci po převodu kvartálního návratu: sledování hotových výstupů, rozlišení klidu, lokálního tření, návratového signálu a falešného návratu, privacy-first hranice, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o převodu uzavřeného kvartálního návratu do běžného provozu: provozní věta, tři převodní místa, úklid dočasných stop, privacy-first hranice, karta a checklist.
