@@ -177485,8 +177485,156 @@ Kdo drží vlastnictví:
 
 Převod uzavřeného kvartálního návratu je hotový ve chvíli, kdy běžná práce pokračuje bez zvláštní péče. Tým ví, kde je aktuální pravidlo, kdy se má téma vrátit a co se už nesleduje. To je praktický výsledek dobré údržby: ne víc procesu, ale méně nejasností.
 
+## První běžný měsíc po převodu kvartálního návratu
+
+Po převodu uzavřeného kvartálního návratu přichází nejméně nápadná část práce: nechat nové nastavení měsíc normálně žít. To zní skoro podezřele jednoduše. Jenže právě tady se často pokazí dobrá údržba. Tým kvartální návrat hezky uzavře, zapíše provozní větu, zruší dočasné poznámky a hned v dalším týdnu začne vymýšlet, jak téma ještě lépe sledovat. Tím se z klidu znovu stane projekt.
+
+První běžný měsíc proto není audit. Není to ani nový experiment. Je to krátké období, ve kterém ověříte, zda převod opravdu zapadl do běžné práce bez mimořádné péče.
+
+Začněte větou:
+
+```text
+Po převodu položky [název] sledujeme první běžný měsíc jen podle hotových výstupů. Neotevíráme nové měření, neobnovujeme starou kontrolu a zasáhneme pouze při [návratový signál].
+```
+
+Příklad:
+
+```text
+Po převodu checklistu případové studie sledujeme první běžný měsíc jen podle hotových case studies a obchodních follow-upů. Neotevíráme měření kliků do dokumentu, neobnovujeme kvartální připomínku a zasáhneme pouze tehdy, když dvě relevantní case studies po sobě obejdou kanonický checklist.
+```
+
+Tato věta chrání dvě věci najednou: kvalitu provozu a klid týmu. Kvalitu, protože pořád existuje návratový signál. Klid, protože se nesleduje všechno, co by teoreticky šlo sledovat.
+
+### Co během měsíce pozorovat
+
+První běžný měsíc má mít jen tři typy signálů:
+
+- Hotový výstup: vznikl dokument, stránka, nabídka, kampaň, onboardingový krok nebo jiný artefakt podle aktuálního pravidla?
+- Průchod trasou: našel člověk kanonické místo bez zvláštní pomoci, nebo se musel doptávat mimo pravidlo?
+- Návratový signál: stalo se přesně to, kvůli čemu se položka smí znovu otevřít?
+
+Všechno ostatní nechte stranou. Pocit, že by se pravidlo dalo napsat elegantněji, není návratový signál. Jedna kosmetická poznámka v dokumentu není návratový signál. Návrh na nový dashboard není návratový signál, pokud původní dohoda říká, že se kvalita pozná z hotových výstupů.
+
+Praktický příklad:
+
+```text
+Položka:
+Checklist případové studie
+
+Hotový výstup:
+Vznikly dvě nové case studies.
+
+Průchod trasou:
+Autor našel checklist přes redakční playbook. Obchodní follow-up použil aktuální odkaz.
+
+Návratový signál:
+Nenastal. Ani jedna case study checklist neobešla.
+
+Rozhodnutí:
+Měsíc potvrzuje klid. Neotevíráme úpravu ani nové měření.
+```
+
+Takový zápis je záměrně suchý. Nemá být literárně krásný. Má týmu ušetřit debatu, jestli se něco musí dělat jen proto, že se na položku někdo podíval.
+
+### Kdy zasáhnout
+
+Zásah během prvního běžného měsíce má být výjimka. Vyberte jeden ze čtyř stavů:
+
+- Klid potvrzen: běžná práce proběhla bez návratového signálu.
+- Lokální tření: někdo našel pravidlo, ale drobnost v trase mu zbytečně překážela.
+- Návratový signál nastal: stalo se přesně to, co bylo předem definované jako důvod k otevření.
+- Falešný návrat: téma se ozvalo, ale po kontrole nejde o původní problém.
+
+U klidu potvrzeného nedělejte nic. To je pointa. U lokálního tření opravte jen nejbližší pracovní místo: odkaz, název, jednu větu, popisek ve formuláři, zařazení v rozcestníku. U návratového signálu otevřete úzkou reakci podle předchozí dohody. U falešného návratu zapište, proč se položka neotevírá, a držte klid.
+
+Příklad falešného návratu:
+
+```text
+Podnět:
+Autor se ptal, jestli existuje nová šablona case study.
+
+Kontrola:
+Neobešel checklist. Jen začínal z jiné části playbooku.
+
+Stav:
+Falešný návrat.
+
+Reakce:
+Do rozcestníku přidáme jeden odkaz na kanonický checklist. Neotevíráme revizi checklistu.
+```
+
+Codyho komentář: první měsíc po převodu je test disciplíny. Ne té přísné, školní, s pravítkem přes prsty. Spíš té produktové: když jste si řekli, že klid je platný výsledek, tak ho po týdnu nezrušte jen proto, že někoho svědí backlog.
+
+### Privacy-first hranice prvního měsíce
+
+Největší riziko prvního měsíce je nenápadné měření lidí. "Jen zjistíme, kdo dokument otevřel." "Jen si necháme event na klik." "Jen uvidíme, kdo šablonu použil." Tohle většinou nepřidá lepší rozhodnutí. Přidá datovou stopu, kterou pak musíte vlastnit, vysvětlovat a uklízet.
+
+Držte se jednoduššího pravidla:
+
+- Ověřujte hotové výstupy, ne osobní chování.
+- Sledujte návratový signál, ne všechny průchody.
+- Ptejte se vlastníka na kvalitu artefaktu, ne na výkon jednotlivce.
+- Nezavádějte nový tracker kvůli položce, která právě přešla do klidu.
+- Když stačí ruční kontrola dvou až pěti výstupů, neautomatizujte sběr dat.
+
+Pokud opravdu potřebujete poznámku z prvního měsíce, pište ji agregovaně:
+
+```text
+Za první měsíc vznikly tři relevantní výstupy. Dva použily kanonickou trasu bez zásahu, u jednoho bylo doplněno lokální odkazové místo. Návratový signál nenastal.
+```
+
+Nepotřebujete k tomu seznam lidí, přesné časy otevření, nahrávky obrazovky ani export interních kliků. Privacy-first provoz stojí na tom, že dobré rozhodnutí často nepotřebuje detailní dohled.
+
+### Karta prvního běžného měsíce
+
+```text
+Položka:
+
+Datum převodu do běžného provozu:
+
+První běžný měsíc:
+
+Původní uzavírací stav:
+
+Návratový signál:
+
+Hotové výstupy za měsíc:
+
+Průchod kanonickou trasou:
+- bez tření / lokální tření / trasa obejita / neověřeno
+
+Stav měsíce:
+- klid potvrzen / lokální tření / návratový signál nastal / falešný návrat
+
+Jedna reakce:
+
+Co výslovně neotevíráme:
+
+Co mažeme, anonymizujeme nebo neukládáme:
+
+Jaká data kvůli tomu nezavádíme:
+
+Další návrat:
+```
+
+### Checklist prvního měsíce
+
+- Kontrolujeme první měsíc podle hotových výstupů, ne podle aktivity lidí?
+- Je návratový signál pořád stejný jako při převodu do běžného provozu?
+- Umíme rozlišit lokální tření od skutečného návratu problému?
+- Pokud klid drží, neděláme žádnou novou akci?
+- Pokud opravujeme lokální tření, měníme jen nejbližší pracovní místo?
+- Pokud nastal návratový signál, otevíráme úzkou reakci, ne celý starý projekt?
+- Pokud šlo o falešný návrat, je jasně zapsané, proč položka zůstává zavřená?
+- Nevzniká nová metrika, připomínka, tracker ani pravidelná schůzka jen kvůli prvnímu měsíci?
+- Neuchováváme osobní poznámky, kliky, časy otevření ani jiné datové stopy bez jasného účelu?
+- Ví vlastník, kdy další návrat přijde a kdy se téma naopak nemá otevírat?
+
+První běžný měsíc je úspěšný ve chvíli, kdy se dá říct: práce běžela, pravidlo nepřekáželo, návratový signál buď nenastal, nebo byl řešen v dohodnutém rozsahu. Není potřeba slavnostní review. Stačí krátký zápis a ochota nechat klid opravdu klidem.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o prvním běžném měsíci po převodu kvartálního návratu: sledování hotových výstupů, rozlišení klidu, lokálního tření, návratového signálu a falešného návratu, privacy-first hranice, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o převodu uzavřeného kvartálního návratu do běžného provozu: provozní věta, tři převodní místa, úklid dočasných stop, privacy-first hranice, karta a checklist.
 - 2026-06-04: Doplněna Příloha XX o uzavření prvního kvartálního návratu do dalšího klidu: čtyři uzavírací stavy, ztenčení rytmu, úzká reakce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o drobném tření po první běžné údržbě: rozlišení navigačního, jazykového a vlastnického tření, lokální oprava, malé ověření, privacy-first hranice, karta a checklist.
