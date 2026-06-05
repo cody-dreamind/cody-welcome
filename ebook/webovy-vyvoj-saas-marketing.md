@@ -178946,8 +178946,150 @@ Když se workshop zasekne na sporu, nejspíš nejde o uzavření cyklu, ale o no
 
 Uzavření prvního běžného cyklu je malý administrativní krok s velkým provozním dopadem. Říká týmu: ověřili jsme návrat do normálu, víme, co platí dál, a nepřidáváme péči jen proto, že jsme zrovna měli téma otevřené. To je přesně ten druh disciplíny, díky kterému se web, SaaS i marketing dají zlepšovat bez nekonečného nabalování práce.
 
+## Druhý běžný cyklus po vrácení položky do klidu
+
+Po uzavření prvního běžného cyklu se položka nemá tvářit jako slavnostně opravený problém. Má se stát obyčejnou součástí práce. Druhý běžný cyklus proto není další velký test. Je to krátké ověření, že klid opravdu vydržel i ve chvíli, kdy už tým neměl čerstvě v hlavě předchozí návrat, opravu ani uzavírací zápis.
+
+Druhý cyklus má jednu hlavní otázku:
+
+```text
+Funguje položka i bez čerstvé paměti na předchozí opravu?
+```
+
+To je rozdíl proti prvnímu cyklu. První cyklus ověřoval, jestli se uzavření návratu propsalo do běžné práce. Druhý cyklus ověřuje, jestli pravidlo, šablona nebo pracovní místo obstojí samo. Bez speciální připomínky. Bez člověka, který ještě pamatuje, proč se věc měnila. Bez dočasné tabulky, která šeptá "podívej se sem".
+
+Začněte krátkou větou:
+
+```text
+Druhý běžný cyklus položky [název] ověřuje jen to, zda aktuální pravidlo funguje bez čerstvé připomínky. Neotevíráme historii, neměříme osobní průchody a zasáhneme pouze při [návratový signál].
+```
+
+Příklad:
+
+```text
+Druhý běžný cyklus pravidla "telefon není povinné pole v prvním kontaktním formuláři" ověřuje jen to, zda další stránka vznikne z aktuální šablony bez čerstvé připomínky. Neotevíráme historii starých kampaní, neměříme kliky autora a zasáhneme pouze tehdy, když se povinný telefon znovu objeví ve zveřejněném formuláři.
+```
+
+Tato věta chrání rozsah. Pokud ji nenapíšete, druhý cyklus se snadno změní v retrospektivu všeho, co kdy kolem položky proběhlo. To je zbytečně těžké a skoro vždycky to vyrobí nové nápady rychleji než nové důkazy.
+
+### Co je dobrý druhý cyklus
+
+Dobrý druhý cyklus je přirozená pracovní situace, která by nastala i bez ověřování. U webu to může být další formulář, další landing page, další publikace článku nebo aktualizace case study. U SaaS to může být další onboardingový průchod, supportní odpověď, změna nastavení nebo drobný release. U marketingu to může být další kampaň, follow-up, distribuce obsahu nebo měsíční obsahová úprava.
+
+Špatný druhý cyklus je umělá kontrola vytvořená jen proto, aby tým měl pocit jistoty. Typicky:
+
+- svolat schůzku bez nové pracovní situace;
+- projít všechny staré výstupy, i když návratový signál míří na nové použití;
+- ptát se lidí, jestli pravidlo znají, místo kontroly hotového výstupu;
+- obnovit dočasnou kontrolní tabulku z první opravy;
+- přidat měření používání dokumentu, i když rozhodnutí stačí ověřit ručně.
+
+Praktické pravidlo: pokud druhý cyklus nevzniká z reálné práce, ještě není čas ho dělat. Zapište návratový signál a nechte položku v klidu.
+
+### Čtyři výsledky druhého cyklu
+
+Po druhém běžném cyklu vyberte jeden ze čtyř výsledků:
+
+- Stabilní klid: pravidlo fungovalo bez připomínky a návratový signál nenastal.
+- Slabá hrana: pravidlo fungovalo, ale jen proto, že člověk udělal malý výklad navíc.
+- Opakovaný návrat: původní signál se objevil znovu i po uzavření prvního cyklu.
+- Nové sousední téma: objevila se otázka vedle položky, ne v ní.
+
+`Stabilní klid` znamená, že není potřeba žádná další práce. Položka může zůstat v běžném rytmu, případně se přesunout do ještě lehčí pozornosti, pokud to odpovídá dohodě.
+
+`Slabá hrana` je jemnější než chyba. Výstup prošel, ale člověk musel hádat, který odkaz je aktuální, jakou variantu šablony použít nebo co znamená jedna nejasná věta. Neotevírejte celou položku. Opravte hranu tam, kde vznikla, a při dalším běžném použití jen zkontrolujte, zda už nepřekáží.
+
+`Opakovaný návrat` je silný signál. Pokud se stejný problém vrací i ve druhém cyklu, běžné uzavření pravděpodobně nestačilo. V tu chvíli má smysl otevřít úzkou opravu s vlastním koncem, nebo obnovit zvláštní pozornost, pokud problém ukazuje na chybějící vlastnictví, špatný zdroj pravdy nebo automatizaci, která vrací staré chování.
+
+`Nové sousední téma` oddělte od původní položky. Když při druhé kampani zjistíte, že cenový slib je nejasný, není to důkaz, že formulářové pravidlo selhalo. Je to nové téma. Dejte mu vlastní otázku a nenechte ho nalepit na starou historii.
+
+### Příklad druhého cyklu
+
+```text
+Položka:
+Telefon není povinné pole v prvním kontaktním formuláři.
+
+První běžný cyklus:
+Další kampaň použila aktuální šablonu bez povinného telefonu.
+
+Druhý běžný cyklus:
+Nová landing page pro jiný segment vznikla z rozcestníku šablon.
+
+Co bylo vidět:
+Autor našel aktuální formulář bez připomínky. Telefon zůstal nepovinný. Starou archivní stránku nepoužil.
+
+Výsledek:
+Stabilní klid.
+
+Reakce:
+Žádná. Položka zůstává v běžném rytmu a další návrat nastane jen při opětovném povinném telefonu ve zveřejněném formuláři.
+```
+
+Tento zápis má cenu právě proto, že je krátký. Nevrací tým do historie. Jen potvrzuje, že pravidlo už není křehké.
+
+### Privacy-first hranice druhého cyklu
+
+Druhý cyklus je časté místo, kde se do provozu vrací zbytečný dohled. První cyklus byl čistý, ale někdo chce "pro jistotu" vidět víc. Jenže víc dat není totéž co lepší rozhodnutí.
+
+Držte tyto hranice:
+
+- Ověřujte výstup, ne člověka.
+- Nepřidávejte eventy na kliky, otevření dokumentu ani použití šablony.
+- Neuchovávejte osobní poznámky, když stačí anonymizovaný závěr.
+- Do kanonického místa přenášejte jen stav a platný návratový signál.
+- Pokud je výsledek stabilní klid, smažte dočasné podklady z ověřování.
+
+Codyho komentář: druhý čistý průchod je dobrý moment přestat se tvářit, že pravidlo je pacient na jednotce intenzivní péče. Když dýchá samo, nechte ho dýchat. A hlavně mu nezačněte preventivně montovat další senzory.
+
+### Karta druhého běžného cyklu
+
+```text
+Položka:
+
+První běžný cyklus uzavřen jako:
+
+Druhý běžný cyklus:
+
+Přirozená pracovní situace:
+
+Co mělo být vidět bez připomínky:
+
+Co bylo skutečně vidět:
+
+Výsledek:
+- stabilní klid / slabá hrana / opakovaný návrat / nové sousední téma
+
+Jedna reakce:
+
+Co dál neotevíráme:
+
+Platný návratový signál:
+
+Co mažeme, anonymizujeme nebo neukládáme:
+
+Vlastník:
+
+Další rytmus:
+```
+
+### Checklist druhého cyklu
+
+- Proběhl druhý cyklus v přirozené práci, ne jako umělý audit?
+- Ověřili jsme, že pravidlo funguje bez čerstvé připomínky?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud nastal stabilní klid, nepřidáváme žádnou další práci?
+- Pokud vznikla slabá hrana, opravujeme jen nejbližší pracovní místo?
+- Pokud se vrátil stejný signál, otevíráme úzkou opravu s vlastním koncem?
+- Pokud vzniklo nové sousední téma, oddělili jsme ho od staré položky?
+- Neotevíráme historii jen proto, že máme téma znovu před očima?
+- Nevzniklo nové měření lidí, kliků, otevření dokumentů ani osobních průchodů?
+- Zůstává v kanonickém místě jen závěr, který pomůže příští práci?
+
+Druhý běžný cyklus je dobrý filtr mezi skutečně stabilním pravidlem a pravidlem, které drželo jen díky čerstvé péči. Když projde čistě, zavřete ho bez dalšího dohledu. Když neprojde, řešte přesně to, co se ukázalo. Ne víc, ne méně.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o druhém běžném cyklu po vrácení položky do klidu: přirozená pracovní situace, čtyři výsledky, příklad, privacy-first hranice, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného cyklu po uzavřeném návratu: čtyři uzavírací stavy, provozní závěr, kanonické místo, privacy-first úklid podkladů, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném cyklu po uzavřeném návratu: výběr běžné situace, čtyři výsledky, příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního návratu po ukončení zvláštní pozornosti: čtyři uzavírací stavy, lokální oprava, úzká reakce, obnovení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
