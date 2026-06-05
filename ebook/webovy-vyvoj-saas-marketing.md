@@ -9010,6 +9010,172 @@ Datum dalšího běžného návratu, pokud nějaké je:
 
 První běžné použití po uzavření širšího vzoru je test klidu. Když pravidlo funguje, nechte ho být. Když drhne okraj, opravte okraj. Když se vrátí společná příčina, otevřete vzor znovu, ale už s lepší otázkou. Tak se systém zlepšuje bez toho, aby každé zlepšení spustilo další kontrolní režim.
 
+## Jak pustit uzavřený širší vzor do klidového provozu
+
+První běžné použití ukáže, jestli oprava drží v reálné práci. Ještě ale nemusí ukázat, jestli tým umí žít bez zvláštní pozornosti. Po první úspěšné kontrole bývá lákavé nechat téma "pro jistotu" v review, připnout ho do agendy a ještě měsíc sledovat, jestli se něco nevrátí. To zní rozumně, ale často to jen prodlužuje mimořádný režim.
+
+Klidový provoz znamená, že pravidlo přestane být zvláštní téma a stane se běžnou součástí práce. Neznamená to, že tým zapomene, proč vzniklo. Znamená to, že se k historii vrací jen při návratovém signálu, ne při každém běžném použití.
+
+Stop podmínka pro přechod do klidu:
+
+```text
+Po dalším běžném průchodu šlo pravidlo použít bez zvláštního vysvětlení, starých podkladů a nového kontrolního úkolu.
+```
+
+Pokud je tato věta pravdivá, téma pusťte z aktivní péče. Pokud není, nevracejte automaticky celý širší vzor. Nejdřív pojmenujte, která část ještě drží mimořádný režim: umístění pravidla, jazyk pravidla, stará stopa, chybějící vlastník nebo skutečný návrat společné příčiny.
+
+Praktický zápis:
+
+```text
+Uzavřený vzor:
+
+Druhý běžný průchod:
+
+Pravidlo bylo použito bez zvláštní pomoci:
+- ano / ne
+
+Co ještě drží mimořádnou pozornost:
+- nic / umístění / jazyk pravidla / stará stopa / vlastnictví / návrat příčiny
+
+Rozhodnutí:
+- pustit do klidu / dočistit jednu věc / znovu otevřít vzor
+
+Návratový signál zůstává:
+
+Co z aktivní agendy mizí:
+
+Jaká data nebo kontrolní stopy dál nevznikají:
+```
+
+Příklad:
+
+```text
+Uzavřený vzor:
+Pravidla napsaná jako historie oprav.
+
+Druhý běžný průchod:
+Další měsíční review šablon poptávkového toku.
+
+Pravidlo bylo použito bez zvláštní pomoci:
+Ano. Vlastník otevřel checklist, použil aktuální pravidlo a nevracel se ke kartě vzoru.
+
+Co ještě drží mimořádnou pozornost:
+Nic.
+
+Rozhodnutí:
+Pustit do klidu.
+
+Návratový signál zůstává:
+Vzor otevřeme jen tehdy, když se u dvou různých šablon znovu použije starý ověřovací záznam místo aktuálního pravidla.
+
+Co z aktivní agendy mizí:
+Samostatný bod "kontrola přepsaných pravidel".
+
+Jaká data nebo kontrolní stopy dál nevznikají:
+Žádný seznam lidí, kteří pravidlo použili. Žádné sledování otevření dokumentu. Stačí běžný záznam z review.
+```
+
+Tento zápis je nudný správným způsobem. Potvrzuje, že systém nepotřebuje další zvláštní režim. Tým ví, kdy se má vrátit, ale nemusí si téma nosit v hlavě při každé další práci.
+
+### Co znamená pustit do klidu
+
+Pustit pravidlo do klidového provozu znamená udělat čtyři věci:
+
+- odstranit téma z aktivní kontrolní agendy;
+- nechat platné pravidlo v kanonickém pracovním místě;
+- ponechat jen návratový signál;
+- uklidit dočasné poznámky, které už neslouží rozhodování.
+
+Nedělejte z klidu nový stavový štítek, který se bude samostatně reportovat. Pokud máte u každého pravidla kolonku "klidový provoz", další datum kontroly a vlastní tabulku, klid ještě nezačal. Jen jste mimořádný režim přejmenovali tak, aby vypadal civilizovaněji.
+
+Klid má být poznat v práci. Lidé jdou do běžného checklistu, rozcestníku, formulářové šablony nebo onboardingového postupu. Najdou aktuální pravidlo. Použijí ho. Pokud nic nedrhne, nevznikne další úkol.
+
+### Tři zbytky, které brání klidu
+
+Nejčastější překážky nejsou velké. Jsou to malé zbytky po opravě:
+
+- Stará stopa je pořád viditelnější než platné pravidlo.
+- Vlastník má pocit, že musí téma ručně připomínat.
+- Návratový signál je napsaný tak obecně, že spouští kontrolu skoro pořád.
+
+Každý zbytek řešte jinak.
+
+U staré stopy ji přesuňte do stručného archivu, anonymizujte nebo smažte, pokud už nemá účel. U ručního připomínání přeneste odpovědnost do běžného rytmu: ne "někdo to bude hlídat", ale "při měsíčním review se použije tento checklist". U příliš širokého návratového signálu ho zpřesněte tak, aby spouštěl návrat jen při opakovaném a relevantním tření.
+
+Slabý návratový signál:
+
+```text
+Vrátíme se, když pravidlo nebude fungovat.
+```
+
+Použitelnější návratový signál:
+
+```text
+Vrátíme se, když se ve dvou různých pracovních průchodech během jednoho měsíce lidé znovu opřou o staré lokální opravy místo aktuálního pravidla.
+```
+
+Rozdíl je v provozní klidnosti. První věta zve k dojmu. Druhá věta čeká na konkrétní opakování.
+
+### Privacy-first klid
+
+Klidový provoz je dobrý moment pro privacy-first úklid, protože už víte, co se osvědčilo. Dočasné důkazy, screenshoty, výpisy, přepisy rozhovorů, kopie formulářů nebo ruční seznamy nálezů nemají zůstávat aktivní jen proto, že "se třeba budou hodit". Pokud nepatří k platnému pravidlu, stručnému archivu nebo návratovému signálu, mají zmizet z pracovní trasy.
+
+Nízkodatový standard:
+
+- Neuchovávejte seznam použití pravidla podle lidí.
+- Neměřte otevření interní dokumentace, pokud z toho nevzniká konkrétní rozhodnutí.
+- Nezakládejte nový report pro pravidlo, které už běžně funguje.
+- Ponechte jen anonymizovanou nebo obecnou formulaci příkladu, pokud příklad pomáhá budoucí práci.
+- Zrušte dočasné exporty, které vznikly kvůli ověření širšího vzoru.
+
+Codyho komentář: dobrý systém se pozná i podle toho, že po opravě nepotřebuje vlastní kamerový štáb. Když pravidlo funguje jen pod dohledem, není to pravidlo. Je to křehká dohoda s drahým dozorem.
+
+### Karta přechodu do klidu
+
+```text
+Uzavřený širší vzor:
+
+Kanonické pravidlo:
+
+Kanonické místo:
+
+První běžné použití:
+
+Druhý běžný průchod:
+
+Výsledek:
+- pustit do klidu / dočistit jednu věc / znovu otevřít vzor
+
+Co potvrzuje klid:
+
+Co z aktivní agendy mizí:
+
+Co zůstává jako návratový signál:
+
+Co uklízíme z pracovních stop:
+
+Co archivujeme pouze stručně:
+
+Co dál nesbíráme:
+
+Vlastník běžného rytmu:
+```
+
+### Checklist přechodu do klidu
+
+- Proběhl po prvním použití ještě jeden běžný průchod?
+- Šlo pravidlo použít bez karty širšího vzoru?
+- Neotevřel tým staré lokální opravy?
+- Nevznikl nový kontrolní úkol jen pro pocit jistoty?
+- Je návratový signál konkrétní a nepřehnaně citlivý?
+- Zmizelo téma z aktivní agendy?
+- Zůstalo platné pravidlo v kanonickém pracovním místě?
+- Jsou dočasné důkazy uklizené, smazané nebo anonymizované?
+- Nesledujeme lidi místo výsledku práce?
+- Umí vlastník říct, co se stane při skutečném návratu signálu?
+
+Přechod do klidu je malá, ale důležitá dovednost. Bez něj se každá oprava mění v další dlouhodobou péči. S ním se systém postupně čistí: pravidla zůstávají tam, kde se používají, staré stopy mizí a tým má víc pozornosti na nové skutečné problémy.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -181343,3 +181509,4 @@ První běžné review bez samostatné kontroly má potvrdit, že stabilní polo
 - 2026-06-04: Doplněna úvodní podkapitola o první běžné údržbě po uzavření pravidla: kontrola v normálním rytmu, servisní otázky, karta údržby, otevření nové otázky jen při skutečném přesahu a privacy-first hranice.
 - 2026-06-04: Doplněna úvodní podkapitola o uzavření drobné úpravy po první běžné údržbě: čtyři výsledné stavy, dočištění stejného místa, rozlišení širšího vzoru, privacy-first úklid, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o tom, kdy se z drobných úprav stane širší vzor: rozlišení náhody od opakované příčiny, nejmenší společná oprava, privacy-first ověření, karta a checklist.
+- 2026-06-05: Doplněna úvodní podkapitola o přechodu uzavřeného širšího vzoru do klidového provozu: druhý běžný průchod, odstranění mimořádné agendy, zpřesnění návratového signálu, privacy-first úklid, karta a checklist.
