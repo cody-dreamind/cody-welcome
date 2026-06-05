@@ -8853,6 +8853,163 @@ Když workshop potřebuje víc než osm minut, pravděpodobně neuzavíráte vzo
 
 Širší vzor je hotový až ve chvíli, kdy přestane být zvláštní položkou a začne zlepšovat běžné rozhodování. Pokud po něm zůstane jen větší dokumentace a víc kontrol, vzor se nepovedl. Pokud po něm zůstane kratší pravidlo, čistší pracovní místo a méně lokálních záplat, udělal svou práci.
 
+## První běžné použití po uzavření širšího vzoru
+
+Uzavřený širší vzor se nemá hned znovu testovat jako projekt. Má projít normální prací. To je rozdíl mezi opraveným systémem a systémem, který se pořád pozoruje, protože mu tým ještě nevěří. První běžné použití po uzavření proto neotevírejte speciální kontrolou, ale krátkou otázkou u skutečného pracovního průchodu.
+
+Stop podmínka zní:
+
+```text
+Dokáže člověk použít nové běžné pravidlo bez návratu ke kartě širšího vzoru, starým lokálním opravám nebo zvláštnímu vysvětlování?
+```
+
+Pokud ano, nedělejte další ceremonii. Zapište krátký stav a nechte pravidlo pracovat. Pokud ne, nejdřív určete, jestli selhalo pravidlo, jeho umístění, nebo jen konkrétní okrajový případ. Teprve potom rozhodujte, zda jde o dočištění, návrat vzoru nebo novou otázku.
+
+Praktický zápis:
+
+```text
+Uzavřený vzor:
+
+Běžné použití:
+
+Člověk použil:
+- kanonické pravidlo / starou lokální stopu / pomoc od týmu / jinou cestu
+
+Co se stalo:
+
+Potřeboval kartu vzoru?
+
+Výsledek:
+- drží / dočistit umístění / dočistit pravidlo / znovu otevřít vzor / otevřít novou otázku
+
+Privacy-first stopa:
+
+Další krok nebo žádný krok:
+```
+
+Příklad:
+
+```text
+Uzavřený vzor:
+Pravidla napsaná jako historie oprav.
+
+Běžné použití:
+Měsíční review šablon poptávkového toku.
+
+Člověk použil:
+Kanonické pravidlo v checklistu review.
+
+Co se stalo:
+Review šlo uzavřít bez otevření starých ověřovacích poznámek. U jedné šablony byl nejasný název odkazu, ale pravidlo samotné bylo srozumitelné.
+
+Potřeboval kartu vzoru?
+Ne.
+
+Výsledek:
+Dočistit umístění: přejmenovat odkaz v rozcestníku. Vzor zůstává uzavřený.
+
+Privacy-first stopa:
+Žádné nové sledování používání dokumentu. Stačí poznámka z review.
+
+Další krok:
+Přejmenovat jeden odkaz a zavřít.
+```
+
+Tento příklad je důležitý, protože drobné tření po uzavření neznamená automatický návrat širšího vzoru. Může jít jen o špatně pojmenovaný odkaz, nevhodné místo v checklistu nebo starou poznámku, která zůstala moc viditelná. Opravte přesně to. Nevracejte celé téma do zvláštní péče jen proto, že první běžné použití nebylo dokonale hladké.
+
+### Čtyři signály zdravého uzavření
+
+Při prvním běžném použití sledujte jen čtyři signály:
+
+- Člověk našel kanonické místo bez doprovodného vysvětlení.
+- Pravidlo šlo použít v přítomném pracovním čase, ne jako historii oprav.
+- Staré lokální záplaty nebyly potřeba.
+- Nevznikl nový požadavek na měření, kontrolu nebo export.
+
+Pokud jsou tyto čtyři signály splněné, vzor drží. Zápis může být velmi krátký:
+
+```text
+První běžné použití proběhlo bez návratu ke kartě vzoru. Pravidlo zůstává v běžném rytmu. Bez další akce.
+```
+
+Tohle je často nejlepší výsledek. Ne každý dobrý výsledek si zaslouží další úkol. Někdy je nejvyšší forma údržby opravdu nic nepřidat.
+
+### Kdy dočistit a kdy znovu otevřít
+
+Dočištění je správné, když problém leží v nejbližším pracovním místě:
+
+- název odkazu není jasný;
+- pravidlo je ve správném dokumentu, ale o sekci níž, než ho lidé hledají;
+- jedna věta pořád zní jako historie místo aktuálního pravidla;
+- stará lokální poznámka je viditelnější než nové kanonické místo.
+
+Znovuotevření vzoru je správné až ve chvíli, kdy se opakuje původní společná příčina:
+
+- lidé znovu používají staré lokální opravy napříč více místy;
+- kanonické pravidlo nestačí pro běžné rozhodnutí;
+- stejný typ tření se objeví v jiné části systému;
+- tým začne vytvářet nové pomocné evidence, aby pravidlo obešel.
+
+Rozdíl je praktický. Dočištění má jeden malý zásah a zavření. Znovuotevření má novou stop podmínku, vlastníka a jasnou hranici. Pokud se mezi nimi neumíte rozhodnout, začněte dočištěním nejbližšího místa a nechte si návratový signál. Větší práce si má počkat na opakování, ne na nervozitu.
+
+### Privacy-first hranice prvního použití
+
+První běžné použití po uzavření širšího vzoru nesmí vytvořit nový dohled nad týmem. Nepotřebujete měřit, kdo pravidlo otevřel, jak dlouho ho četl, kolikrát klikl na odkaz ani kdo se zeptal v chatu. Potřebujete vědět, jestli pracovní průchod skončil rozhodnutím bez návratu ke starým stopám.
+
+V praxi stačí jedna z těchto nízkých stop:
+
+- krátká poznámka v měsíčním review;
+- označení "použito bez návratu" u rozhodovací karty;
+- jedna věta v changelogu šablony;
+- ruční poznámka vlastníka, že staré lokální opravy nebyly potřeba.
+
+Vše ostatní zvažujte až tehdy, když se problém opakovaně vrátí. Privacy-first provoz tady znamená, že opravené pravidlo necháte žít bez sledovacího systému okolo. Důvěra v pravidlo se pozná i podle toho, že ho nemusíte špehovat.
+
+### Karta prvního běžného použití
+
+```text
+Uzavřený širší vzor:
+
+Kanonické místo:
+
+Běžné použití:
+
+Kdo vlastní běžný rytmus:
+
+Co mělo jít bez zvláštní pomoci:
+
+Co se reálně stalo:
+
+Byla potřeba karta vzoru nebo stará lokální oprava:
+- ano / ne
+
+Výsledek:
+- drží / dočistit umístění / dočistit pravidlo / znovu otevřít vzor / otevřít novou otázku
+
+Nejmenší další krok:
+
+Co zůstává zavřené:
+
+Jaká data nebo kontrolní stopy nevznikají:
+
+Datum dalšího běžného návratu, pokud nějaké je:
+```
+
+### Checklist prvního použití
+
+- Proběhlo ověření v reálné práci, ne ve zvláštním testu?
+- Našel člověk kanonické místo bez starého kontextu?
+- Nepotřeboval otevřít kartu širšího vzoru?
+- Rozlišili jsme problém umístění, problém pravidla a návrat vzoru?
+- Pokud jde jen o dočištění, je zásah menší než původní společná oprava?
+- Pokud se vzor vrací, má nové otevření stop podmínku a vlastníka?
+- Zůstaly staré lokální opravy zavřené?
+- Nevzniká nový dashboard, export ani sledování používání dokumentu?
+- Je zapsané, co dál nesbíráme a proč?
+- Umí tým říct, zda po prvním použití následuje akce, nebo žádná akce?
+
+První běžné použití po uzavření širšího vzoru je test klidu. Když pravidlo funguje, nechte ho být. Když drhne okraj, opravte okraj. Když se vrátí společná příčina, otevřete vzor znovu, ale už s lepší otázkou. Tak se systém zlepšuje bez toho, aby každé zlepšení spustilo další kontrolní režim.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -180239,6 +180396,7 @@ Uzavření druhé nízké kontroly je místo, kde se údržba konečně přestan
 
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o prvním běžném použití po uzavření širšího vzoru: stop podmínka, signály zdravého uzavření, rozlišení dočištění a návratu vzoru, privacy-first hranice, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření širšího vzoru po první společné opravě: uzavírací stavy, převod do běžného pravidla, hranice standardizace, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření druhé nízké kontroly do běžného rytmu: čtyři uzavírací stavy, převod pravidla do kanonického místa, úklid dočasných stop, privacy-first redukce, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o druhé nízké kontrole bez nové pozornosti: návaznost na první nízkou kontrolu, čtyři výsledky, snížení pozornosti, privacy-first redukce datové stopy, karta, mini workshop a checklist.
