@@ -179900,8 +179900,169 @@ Když se workshop zasekne na debatě, jestli kontrolu opakovat "ještě jednou p
 
 Druhá nízká kontrola má být poslední kontrolou kontroly. Pokud je klid potvrzený, přestaňte dokazovat, že je klid. Přesuňte pozornost na práci, kde se opravdu něco rozhoduje. Stabilní systém se nepozná podle počtu revizí, ale podle schopnosti revize ukončit.
 
+## Uzavření druhé nízké kontroly do běžného rytmu
+
+Druhá nízká kontrola sama o sobě ještě nesnižuje provozní zátěž. Snižuje ji až uzavření, které řekne, co se odteď děje bez zvláštní pozornosti. Pokud tento krok přeskočíte, položka sice dvakrát prošla kontrolou, ale v systému pořád zůstane jako samostatná starost: někdo ji připomíná, někdo drží dočasnou kartu, někde čeká pomocný export a v kalendáři možná visí další kontrola "pro jistotu".
+
+Uzavření druhé nízké kontroly má proto jednu hlavní otázku:
+
+```text
+Jak položku vracíme do normálního provozu tak, aby byla dohledatelná, ale už nevyžadovala vlastní pozornost?
+```
+
+Normální provoz neznamená zapomenout. Znamená mít správný domov. Pravidlo patří do šablony, checklistu, rozhodovacího logu, kanonického indexu nebo běžného review rytmu. Nepatří do zvláštního seznamu věcí, které jsou už stabilní, ale stejně se na ně pořád chodíme dívat. To je jen archiv s tepem.
+
+Začněte uzavírací větou:
+
+```text
+Druhá nízká kontrola potvrdila stav [výsledek]. Položku [název] dál držíme v běžném rytmu [kde/jak], bez samostatné kontroly. Vrací se pouze při signálu [signál].
+```
+
+Příklad:
+
+```text
+Druhá nízká kontrola potvrdila klid. Pravidlo "telefon není povinné pole v prvním kontaktním formuláři" dál držíme v checklistu formulářů a v rozhodovacím logu, bez samostatné měsíční kontroly. Vrací se pouze tehdy, když se telefon znovu objeví jako povinné pole v prvním kontaktu nebo když obchod doloží opakovaný problém, který nejde vyřešit bez něj.
+```
+
+Tato věta je krátká, ale dělá tři důležité věci. Ruší samostatnou pozornost, ponechává návratový signál a říká, kde má tým hledat aktuální pravidlo. Bez těchto tří částí je uzavření měkké a stará kontrola se snadno vrátí jako "radši to ještě projdeme".
+
+### Čtyři uzavírací stavy
+
+Podle výsledku druhé nízké kontroly vyberte jeden ze čtyř uzavíracích stavů:
+
+- Vrátit do běžného rytmu: klid byl potvrzený podruhé a samostatná kontrola končí.
+- Uzavřít po lokálním úklidu: opakované tření bylo v jednom pracovním místě a po opravě se zvláštní pozornost dál nezvyšuje.
+- Otevřít úzký návrat: návratový signál opravdu nastal a potřebuje vlastní kartu.
+- Vyjmout nové téma: kontrola odhalila jinou otázku, která nesmí používat starou položku jako záminku.
+
+`Vrátit do běžného rytmu` je výchozí stav po druhém potvrzeném klidu. Zapište, kde pravidlo žije, jaký signál ho znovu otevře a které kontrolní podklady mizí. Nic dalšího nevymýšlejte.
+
+`Uzavřít po lokálním úklidu` použijte, když se dvakrát vrátila stejná drobná stopa: starý odkaz, špatný název šablony, neplatná poznámka v backlogu. Opravte ji a napište, že nejde o návrat původního problému. Pokud se stejná stopa vrátí potřetí, otevřete otázku kanonického místa, ne původní věcný problém.
+
+`Otevřít úzký návrat` znamená přestat uzavírat a založit novou malou práci. Důležité je slovo úzký. Návratový signál neotevírá celou historii, všechny staré varianty ani celou ediční nebo produktovou větev. Otevírá jen otázku, kterou signál skutečně doložil.
+
+`Vyjmout nové téma` chrání starou položku před tím, aby se na ni lepily nové nápady. Pokud kontrola formuláře ukáže, že privacy-first pravidlo drží, ale text nabídky je slabý, nezapište to jako návrat formulářového pravidla. Založte samostatnou otázku k nabídce a původní položku zavřete podle jejího výsledku.
+
+### Co přesunout do běžného rytmu
+
+Při uzavření druhé nízké kontroly přesuňte jen to, co bude tým opravdu používat. Typicky:
+
+- jedno platné pravidlo do šablony nebo checklistu;
+- jeden návratový signál do rozhodovacího logu;
+- jeden odkaz na kanonické místo do backlogu nebo roadmapy;
+- jeden řádek do changelogu;
+- jednu odpovědnost do role, ne do jména člověka, pokud je to možné.
+
+Nepřenášejte celou historii kontrol. Běžný rytmus nepotřebuje vědět, kdo kdy našel starou poznámku, kolik bylo meziverzí a proč první kontrola ještě působila nervózně. Potřebuje aktuální pravidlo, hranici a signál návratu.
+
+Praktický zápis:
+
+```text
+Do běžného rytmu převádíme:
+
+Kanonické místo:
+
+Platné pravidlo:
+
+Návratový signál:
+
+Co se ruší:
+
+Co zůstává jen v archivu:
+
+Kdo drží běžný rytmus:
+```
+
+U webu to může být jednoduché: pravidlo je ve formulářovém checklistu, návratový signál v rozhodovacím logu a samostatná připomínka v kalendáři se ruší. U SaaS to může být produktový checklist pro onboarding. U marketingu sales karta nebo distribuční šablona.
+
+### Úklid po uzavření
+
+Uzavření bez úklidu je jen hezky napsané přání. Po druhé nízké kontrole projděte podpůrné stopy a nechte jen ty, které mají budoucí účel.
+
+Uklidit typicky znamená:
+
+- smazat dočasné kontrolní tickety;
+- zrušit připomínky další samostatné kontroly;
+- zavřít pomocné poznámky, které jen vysvětlovaly přechodný stav;
+- odstranit screenshoty, exporty nebo kopie formulářů, pokud už nejsou potřeba jako důkaz;
+- zkrátit rozhodovací záznam na aktuální pravidlo a návratový signál;
+- označit staré varianty jako neplatné, nebo je archivovat mimo pracovní trasu.
+
+Privacy-first poznámka: nejcennější úklid často není přepsaný odstavec, ale odstraněný podpůrný materiál. Starý screenshot formuláře, export poptávek nebo pracovní tabulka s poznámkami možná pomohly při kontrole. Po uzavření ale mohou zůstat jen jako zbytečná datová stopa. Pokud už nepomáhají rozhodnutí, nemají v aktivním provozu bydlet.
+
+### Kdy přece jen nechat stopu
+
+Někdy potřebujete zachovat krátkou stopu kvůli auditovatelnosti nebo budoucímu rozhodování. I tehdy držte minimum:
+
+```text
+Dne [datum] byla po druhé nízké kontrole samostatná pozornost ukončena. Platné pravidlo je v [místo]. Návratový signál je [signál]. Dočasné podklady byly uklizeny.
+```
+
+To stačí pro orientaci. Pokud někdo za tři měsíce potřebuje vědět, proč položka není v samostatném sledování, najde odpověď. Nemusí kvůli tomu číst všechno, co se během kontrol stalo.
+
+Codyho komentář: provozní paměť má mít krátkou paměť na šum a dlouhou paměť na rozhodnutí. Obráceně je to bohužel častější: týmy skladují screenshoty, staré debaty a tabulky, ale po půl roce nikdo neví, jaké pravidlo vlastně platí. To je drahý způsob, jak si připadat důkladně.
+
+### Karta uzavření druhé nízké kontroly
+
+```text
+Položka:
+
+Výsledek druhé nízké kontroly:
+
+Uzavírací stav:
+- vrátit do běžného rytmu / uzavřít po lokálním úklidu / otevřít úzký návrat / vyjmout nové téma
+
+Jednovětý závěr:
+
+Kanonické místo po uzavření:
+
+Platné pravidlo nebo závěr:
+
+Návratový signál:
+
+Co rušíme:
+
+Co archivujeme jen jako stručnou stopu:
+
+Co mažeme, anonymizujeme nebo neukládáme:
+
+Kdo drží běžný rytmus:
+
+Datum dalšího běžného review, pokud existuje:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 0-1: přečtěte výsledek druhé nízké kontroly.
+2. Minuta 1-2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 2-3: napište jednovětý závěr.
+4. Minuta 3-4: určete kanonické místo a návratový signál.
+5. Minuta 4-5: zrušte samostatnou kontrolu, pokud klid drží.
+6. Minuta 5-6: vyberte dočasné podklady k mazání, anonymizaci nebo archivaci.
+7. Minuta 6-7: zapište, kdo drží běžný rytmus a kde se závěr najde.
+
+Pokud workshop potřebuje víc času, nejspíš uzavíráte víc než druhou nízkou kontrolu. Oddělte nové téma, návrat nebo systémovou opravu do vlastní karty. Stabilní položku nenechte platit za novou nejistotu.
+
+### Checklist uzavření druhé nízké kontroly
+
+- Má druhá nízká kontrola jasný výsledek?
+- Vybrali jsme jeden uzavírací stav?
+- Zrušili jsme samostatnou pozornost, pokud byl klid potvrzen podruhé?
+- Je platné pravidlo v pracovním místě, které tým opravdu používá?
+- Je návratový signál konkrétní a dohledatelný?
+- Pokud proběhl lokální úklid, je uzavřený jako lokální, ne jako návrat celé historie?
+- Pokud vznikl úzký návrat, má vlastní kartu a stop podmínku?
+- Pokud vzniklo nové téma, je oddělené od původní položky?
+- Uklidili jsme připomínky, tickety, screenshoty, exporty a pomocné poznámky bez dalšího účelu?
+- Zůstala jen stručná stopa rozhodnutí, ne celý balík kontrolních důkazů?
+- Ví tým, kde závěr najde při běžné práci?
+- Umí někdo jednou větou říct, proč další nízká kontrola nevzniká?
+
+Uzavření druhé nízké kontroly je místo, kde se údržba konečně přestane tvářit jako projekt. Dobře zavřená položka nezmizí. Jen přestane vyžadovat vlastní světlo, vlastní kalendář a vlastní hromádku dat. To je v malém týmu často rozdíl mezi provozem, který se učí, a provozem, který jen sbírá důkazy o tom, že se kdysi učil.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o uzavření druhé nízké kontroly do běžného rytmu: čtyři uzavírací stavy, převod pravidla do kanonického místa, úklid dočasných stop, privacy-first redukce, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o druhé nízké kontrole bez nové pozornosti: návaznost na první nízkou kontrolu, čtyři výsledky, snížení pozornosti, privacy-first redukce datové stopy, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření první nízké kontroly po stabilním klidu: čtyři uzavírací stavy, krátký závěr, aktualizace artefaktů, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o první nízké kontrole po stabilním klidu: návratový signál, kontrolované pracovní místo, čtyři výsledky, privacy-first nízká pozornost, karta, mini workshop a checklist.
