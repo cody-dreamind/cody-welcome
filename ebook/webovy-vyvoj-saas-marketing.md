@@ -9176,6 +9176,176 @@ Vlastník běžného rytmu:
 
 Přechod do klidu je malá, ale důležitá dovednost. Bez něj se každá oprava mění v další dlouhodobou péči. S ním se systém postupně čistí: pravidla zůstávají tam, kde se používají, staré stopy mizí a tým má víc pozornosti na nové skutečné problémy.
 
+## První návratový signál po klidovém provozu širšího vzoru
+
+Klidový provoz neznamená, že se širší vzor už nikdy neozve. Znamená, že se neozývá bez důvodu. První návratový signál po klidu je proto citlivý moment: tým má rozpoznat, jestli se opravdu vrací původní společná příčina, nebo jestli jen někdo narazil na obyčejné lokální tření.
+
+Nezačínejte tím, že znovu otevřete celou kartu vzoru. Začněte větou:
+
+```text
+Co přesně se stalo teď:
+
+Kde se to stalo:
+
+Připomíná to původní vzor, protože:
+
+Liší se to od původního vzoru tím, že:
+
+Jaký návratový signál jsme měli nastavený:
+
+Nastal opravdu, nebo jen něco podobného:
+```
+
+Tento zápis zpomalí reflex "už je to zpátky". To je užitečné. Starý vzor má často silnou paměť: jakmile se objeví podobná situace, tým má chuť otevřít známou opravu, protože ji už jednou uměl řešit. Jenže podobnost není důkaz. Návratový signál má chránit právě před tím, aby se každé povědomé tření stalo pokračováním starého tématu.
+
+Příklad:
+
+```text
+Co přesně se stalo teď:
+Při review nové šablony člověk použil starou poznámku z ověřování místo aktuálního pravidla.
+
+Kde se to stalo:
+V jedné produktové šabloně, která nebyla součástí původního úklidu.
+
+Připomíná to původní vzor, protože:
+Znovu se objevilo rozhodování podle historické poznámky.
+
+Liší se to od původního vzoru tím, že:
+Nejde o více míst napříč systémem. Je to jedna šablona, která měla starou kopii pravidla.
+
+Návratový signál:
+Vzor otevřeme, když se ve dvou různých pracovních průchodech během jednoho měsíce lidé znovu opřou o staré lokální opravy místo aktuálního pravidla.
+
+Nastal opravdu?
+Ne. Jde o lokální starou stopu.
+```
+
+Výsledek není "znovu otevřít vzor". Výsledek je "uklidit jednu šablonu a nechat klidový provoz dál běžet". To je rozdíl mezi systémem, který se učí, a systémem, který se lekne vlastního archivu.
+
+### Čtyři druhy prvního signálu
+
+První signál po klidu dejte do jedné ze čtyř skupin:
+
+- Lokální stará stopa: jedno místo nese starou poznámku, název, odkaz nebo příklad.
+- Slabá hrana pravidla: pravidlo platí, ale jeden běžný okraj není dost dobře popsaný.
+- Skutečný návrat vzoru: opakuje se původní společná příčina napříč více místy nebo průchody.
+- Nové téma: situace vypadá podobně, ale příčina je jiná a potřebuje vlastní otázku.
+
+Každá skupina má jinou reakci.
+
+U lokální staré stopy opravte jedno místo a zapište, že návratový signál nenastal. U slabé hrany pravidla doplňte nebo přepište nejmenší část kanonického pravidla, ale neotvírejte staré ověřovací podklady. U skutečného návratu vzoru otevřete vzor znovu, ale s novou stop podmínkou a dnešní realitou. U nového tématu založte novou otázku a starý vzor nechte zavřený.
+
+Prakticky:
+
+```text
+Signál:
+
+Skupina:
+- lokální stará stopa / slabá hrana pravidla / skutečný návrat vzoru / nové téma
+
+Reakce:
+- uklidit jedno místo / doladit pravidlo / znovu otevřít vzor / založit novou otázku
+
+Co výslovně neotevíráme:
+
+Co zůstává v klidovém provozu:
+
+Jaká data kvůli reakci nesbíráme:
+```
+
+### Kdy opravdu otevřít vzor znovu
+
+Znovuotevření širšího vzoru má být vzácné, ale ne tabu. Pokud návratový signál opravdu nastal, není důvod dělat hrdiny a tvářit se, že klid musí vydržet za každou cenu. Klidový provoz není dekorace. Je to dohoda, že se tým vrátí až ve chvíli, kdy k tomu existuje konkrétní důvod.
+
+Vzor otevřete znovu, když platí aspoň dvě z těchto podmínek:
+
+- stejný typ selhání se objevil ve více než jednom pracovním místě;
+- lidé znovu obcházejí kanonické pravidlo pomocnými poznámkami;
+- lokální oprava by jen přesunula problém jinam;
+- návrat odpovídá předem napsanému signálu, ne jen dojmu;
+- další ignorování by vedlo k novému sběru dat, exportu nebo ručnímu dohledu.
+
+Když vzor otevřete, nezačínejte starým řešením. Začněte novou otázkou:
+
+```text
+Co se změnilo od posledního uzavření?
+
+Která část pravidla už nestačí?
+
+Kde se návrat projevil v reálné práci?
+
+Jaký nejmenší zásah by otestoval dnešní příčinu?
+
+Které staré podklady už nepoužijeme?
+```
+
+Tím se vyhnete tomu, že tým znovu nasadí původní opravu na jiný provozní stav. Systém se mezitím mohl změnit: jiné šablony, jiný vlastník, jiný rytmus, jiné zákaznické situace. Starý vzor je kontext, ne automatická instrukce.
+
+### Privacy-first reakce na návratový signál
+
+První návratový signál často láká k přeměření: "pojďme radši sledovat, kdo pravidlo používá", "udělejme evidenci všech případů", "přidejme pole do šablony, ať víme víc". To může vypadat prakticky, ale často je to jen dražší verze nejistoty.
+
+Privacy-first reakce má tři kroky:
+
+- nejdřív použít existující pracovní důkaz;
+- potom opravit nejbližší místo, pokud stačí;
+- teprve při skutečném opakování zvažovat nové měření nebo evidenci.
+
+Nízkodatový zápis může vypadat takto:
+
+```text
+Signál jsme ověřili z běžného review a jedné šablony. Nevzniká nový seznam použití pravidla, sledování dokumentu ani evidence podle lidí. Uklízíme jednu starou poznámku a návratový signál necháváme beze změny.
+```
+
+Pokud se vzor opravdu vrací, i tehdy sbírejte jen to, co pomůže rozhodnout další krok. Nepotřebujete kompletní historii všech použití pravidla. Potřebujete vědět, kde se společná příčina opakuje, jak brání rozhodnutí a jaký nejmenší zásah ji může odstranit.
+
+Codyho komentář: první signál po klidu je jako pípnutí v kuchyni. Někdy hoří, někdy jen někdo nechal minutku běžet. Než koupíte nový požární systém, podívejte se, co vlastně pípá.
+
+### Karta prvního návratového signálu po klidu
+
+```text
+Uzavřený širší vzor:
+
+Kanonické pravidlo:
+
+Nastavený návratový signál:
+
+Co se stalo:
+
+Kde se to stalo:
+
+Skupina signálu:
+- lokální stará stopa / slabá hrana pravidla / skutečný návrat vzoru / nové téma
+
+Rozhodnutí:
+- uklidit jedno místo / doladit pravidlo / znovu otevřít vzor / založit novou otázku
+
+Nejmenší další krok:
+
+Co výslovně neotevíráme:
+
+Co zůstává v klidovém provozu:
+
+Privacy-first hranice:
+
+Datum kontroly, pokud je potřeba:
+```
+
+### Checklist prvního návratového signálu
+
+- Porovnali jsme signál s původně nastavenou návratovou podmínkou?
+- Popsali jsme, v čem se situace podobá původnímu vzoru a v čem se liší?
+- Zařadili jsme signál do jedné ze čtyř skupin?
+- Neotevíráme celý vzor kvůli jedné staré lokální stopě?
+- Pokud doladíme pravidlo, víme přesně kterou větu nebo místo měníme?
+- Pokud vzor otevíráme znovu, má novou stop podmínku a vlastníka?
+- Pokud jde o nové téma, zůstává starý vzor zavřený?
+- Používáme existující pracovní důkazy před novým měřením?
+- Nevzniká nový tracker, export, osobní evidence ani ruční dohled jen kvůli nervozitě?
+- Umí tým jednou větou říct, proč klid pokračuje, nebo proč se opravdu otevírá nová práce?
+
+První návratový signál po klidu má být rozhodovací brána, ne poplach. Když je slabý, opravte nejbližší stopu a nechte systém dál běžet. Když je skutečný, otevřete vzor znovu bez dramatu a s menším, přesnějším záběrem než minule. V obou případech platí totéž: práce má začít důkazem, ne vzpomínkou na starý problém.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -180905,6 +181075,7 @@ Uzavření prvního běžného review je malý konec jedné dlouhé smyčky. Pol
 
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o prvním návratovém signálu po klidovém provozu širšího vzoru: rozlišení lokální staré stopy, slabé hrany, skutečného návratu a nového tématu, privacy-first reakce, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného review bez samostatné kontroly: čtyři uzavírací stavy, úklid artefaktů, prevence nové práce, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném review bez samostatné kontroly: ověření kanonického místa, čtyři výsledky review, oprava dohledatelnosti bez nové vrstvy, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném použití po uzavření širšího vzoru: stop podmínka, signály zdravého uzavření, rozlišení dočištění a návratu vzoru, privacy-first hranice, karta a checklist.
