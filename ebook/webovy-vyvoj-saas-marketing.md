@@ -181225,8 +181225,156 @@ Pokud workshop potřebuje víc než šest minut, obvykle se neřeší druhé bě
 
 Druhé běžné review má potvrdit, že uzavřená položka nezůstala v hlavách jako speciální starost. Když drží, nechte ji být. Když se kolem ní objevil skrytý dohled, zrušte ho. A když opravdu nastal návratový signál, otevřete úzkou práci bez návratu do celé staré historie.
 
+## Uzavření druhého běžného review do tichého rytmu
+
+Druhé běžné review má smysl jen tehdy, když po něm položka opravdu ztichne. Pokud se po review dál objevuje v plánování, v komentářích nebo v neformálních kontrolách, review sice proběhlo, ale neuzavřelo provozní starost. Cílem této části není napsat další dokument. Cílem je rozhodnout, jestli položka zůstává v tichém běžném rytmu, nebo jestli existuje konkrétní důvod otevřít úzkou práci.
+
+Uzavírací otázka zní:
+
+```text
+Může položka po druhém běžném review zůstat bez samostatné pozornosti, dokud nenastane platný návratový signál?
+```
+
+Pokud odpověď zní ano, nehledejte další důkaz. Napište maximálně jednu krátkou větu do místa, kde běžné review stejně žije, a položku nechte zmizet z agendy. Pokud odpověď zní ne, pojmenujte přesně proč. Nejasná nervozita není důvod. Skrytý dohled, chybějící kanonické místo nebo skutečný návratový signál důvod být může.
+
+Příklad uzavírací věty:
+
+```text
+Druhé běžné review položky "telefon není povinné pole v prvním formuláři" uzavíráme stavem: tichý rytmus potvrzen. Pravidlo zůstává ve formulářovém checklistu; samostatnou kontrolu ani ruční dohled neobnovujeme.
+```
+
+Tato věta má dvě důležité vlastnosti. Je krátká a neotevírá historii. Neříká znovu, proč se telefon kdysi řešil, kdo co navrhoval ani jaké varianty byly na stole. Říká jen aktuální provozní stav.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném review použijte jeden ze čtyř stavů:
+
+- Tichý rytmus potvrzen: položka zůstává v běžné práci bez další pozornosti.
+- Oprava dohledatelnosti potvrzena: předchozí navigační oprava funguje a nevzniká další vrstva.
+- Skrytý dohled zrušen: našla se neformální kontrola, byla odstraněna a pravidlo zůstává v kanonickém místě.
+- Úzký návrat otevřen: platný návratový signál nastal a další práce má samostatnou kartu.
+
+`Tichý rytmus potvrzen` je nejčistší konec. Položka se už nemá připomínat sama od sebe. Zůstává jen pravidlo, návratový signál a běžný pracovní tok. Pokud tým používá review log, stačí jedna věta. Pokud log klidové položky nezapisuje, není potřeba nic přidávat.
+
+`Oprava dohledatelnosti potvrzena` znamená, že první review opravilo cestu a druhé review ověřilo, že cesta stačí. Nezakládejte další index. Nezavádějte pravidelné ruční potvrzení. Jen ponechte opravené kanonické místo a zrušte odkaz na dočasnou poznámku, pokud ještě někde mate práci.
+
+`Skrytý dohled zrušen` je stav pro situaci, kdy se ukázalo, že někdo položku hlídal bokem. Uzavření má být jasné:
+
+```text
+Neformální kontrolu rušíme. Platné pravidlo zůstává v [místo]. Bez návratového signálu [signál] položku znovu nehlídáme ani nevyhodnocujeme samostatně.
+```
+
+Tento zápis má být doprovázen úklidem. Pokud existuje bokem tabulka, interní poznámka, export nebo seznam výjimek bez účelu, zrušte ho nebo zkraťte na obecný závěr. Jinak se skrytý dohled jen přesune na jiné místo a bude se tvářit jako opatrnost.
+
+`Úzký návrat otevřen` je jediný stav, který vytváří novou práci. I tady ale druhé review končí. Neřeší se v něm celý návrat, jen se zaznamená, že signál nastal, a založí se úzká karta. Starou historii nepřenášejte jako povinný balík. Přeneste jen platné pravidlo, signál, poslední výsledek a privacy-first hranici.
+
+### Co přesně umlčet
+
+Tichý rytmus není totéž jako zapomenutí. Položka má zůstat dostupná v kanonickém místě, ale nemá se sama vracet do práce. Umlčte proto hlavně tyto věci:
+
+- samostatný bod v pravidelném meetingu;
+- ruční kontrolu výstupů, která nemá platný signál;
+- bokem vedenou tabulku případů;
+- poznámku "raději ještě hlídat" bez jasného účelu;
+- starý ticket, který pořád čeká na původní větší návrh;
+- dočasný export nebo screenshoty z ověřování.
+
+Neumlčujte samotné pravidlo. To má být dobře vidět tam, kde člověk pracuje. Rozdíl je jednoduchý: pravidlo pomáhá udělat správný krok v běžném toku, kontrola vyžaduje pozornost navíc. Po druhém běžném review má zůstat první a zmizet druhé.
+
+Příklad:
+
+```text
+Zůstává:
+Formulářový checklist obsahuje větu "Telefon nevyžadujeme před prvním kontaktem, pokud pro něj není konkrétní účel."
+
+Mizí:
+Samostatná měsíční poznámka "zkontrolovat telefon ve formulářích" a dočasný seznam formulářových variant z ověřování.
+```
+
+Takové uzavření je praktické: člověk při tvorbě formuláře pravidlo uvidí, ale nikdo nemusí mimo proces dokazovat, že se telefon nevrátil.
+
+### Privacy-first tichý rytmus
+
+Tichý rytmus má silnou privacy-first hodnotu. Když položka nepotřebuje samostatné hlídání, nevznikají ani samostatné důkazy. Tým neukládá další zákaznické příklady, nesbírá nové screenshoty, nevyrábí exporty pro klid a neposílá data na nová místa jen proto, aby potvrdil, že pravidlo pořád platí.
+
+Při uzavření se zeptejte:
+
+- Které podklady vznikly jen pro ověření a už nemají účel?
+- Je někde uložený zákaznický detail, který stačí nahradit obecným závěrem?
+- Má kanonické místo pravidlo a návratový signál bez zbytečné historie?
+- Nevznikl kvůli skrytému dohledu nový datový tok?
+- Dá se výsledek uzavřít bez nového měření?
+
+Privacy-first uzavírací věta:
+
+```text
+Po druhém běžném review ponecháváme jen platné pravidlo a návratový signál. Dočasné podklady rušíme; žádné nové exporty, screenshoty ani zákaznické příklady neukládáme.
+```
+
+Codyho komentář: tichý rytmus není lenost. Je to provozní dospělost. Když pravidlo funguje bez extra péče, nechte ho pracovat a nedělejte mu manažera jen proto, že máte rádi pocit kontroly.
+
+### Karta uzavření druhého běžného review
+
+```text
+Položka:
+
+Datum druhého běžného review:
+
+Kanonické místo:
+
+Platný návratový signál:
+
+Výsledek druhého review:
+- běžný rytmus potvrzen / navigační oprava drží / skrytý dohled nalezen / návratový signál nastal
+
+Uzavírací stav:
+- tichý rytmus potvrzen / oprava dohledatelnosti potvrzena / skrytý dohled zrušen / úzký návrat otevřen
+
+Jedna uzavírací věta:
+
+Co zůstává v běžném toku:
+
+Co umlčujeme nebo rušíme:
+
+Co výslovně neobnovujeme:
+
+Co zůstává jako návratový signál:
+
+Privacy-first úklid:
+
+Vlastník kanonického místa:
+
+Kdy se položka smí znovu objevit v agendě:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: přečtěte výsledek druhého běžného review.
+2. Minuta 1-2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 2-3: napište jednu uzavírací větu bez historie.
+4. Minuta 3-4: zrušte nebo zkraťte skryté kontrolní stopy.
+5. Minuta 4-5: potvrďte, že položka se vrátí do agendy jen při platném návratovém signálu.
+
+Pokud workshop začne řešit nové nápady, zastavte ho. Nový nápad může být dobrý, ale nesmí se svézt na uzavírání staré položky. Buď má vlastní otázku, nebo teď nepatří do práce.
+
+### Checklist uzavření druhého běžného review
+
+- Vybrali jsme jeden jasný uzavírací stav?
+- Umíme výsledek říct jednou větou bez návratu k celé historii?
+- Zůstává pravidlo v kanonickém místě, kde ho člověk při práci najde?
+- Zrušili jsme skrytý dohled, pokud vznikl?
+- Nezaložili jsme novou kontrolní vrstvu místo tichého rytmu?
+- Pokud nastal návratový signál, otevřeli jsme jen úzkou kartu?
+- Zrušili nebo zkrátili jsme dočasné podklady bez dalšího účelu?
+- Nevznikly nové exporty, screenshoty, zákaznické příklady nebo osobní detaily jen pro pocit jistoty?
+- Je jasné, kdy se položka smí znovu objevit v agendě?
+- Ví vlastník kanonického místa, že pravidlo má udržovat v běžném toku, ne ve zvláštní kontrole?
+
+Uzavření druhého běžného review je okamžik, kdy se položka přestane chovat jako téma a začne se chovat jako normální součást provozu. Má svoje místo, svoje pravidlo a svůj návratový signál. Nemá vlastní nervozitu. To je dobrý konec.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o uzavření druhého běžného review do tichého rytmu: čtyři uzavírací stavy, umlčení skrytého dohledu, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o druhém běžném review po uzavřeném prvním review: kontrola neformálního dohledu, čtyři výsledky, privacy-first úklid skrytých podkladů, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním návratovém signálu po klidovém provozu širšího vzoru: rozlišení lokální staré stopy, slabé hrany, skutečného návratu a nového tématu, privacy-first reakce, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného review bez samostatné kontroly: čtyři uzavírací stavy, úklid artefaktů, prevence nové práce, privacy-first uzavření, karta, mini workshop a checklist.
