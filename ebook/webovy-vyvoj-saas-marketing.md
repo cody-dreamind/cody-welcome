@@ -8485,6 +8485,197 @@ Vlastník:
 
 Drobná úprava je hotová až tehdy, když už nepotřebuje vlastní pozornost. Buď se zavře, nebo se poctivě přepíše do jiného typu práce. Oba výsledky jsou lepší než tichý mezistav, ve kterém oprava pořád visí v hlavě vlastníka a při každém review se tváří, že možná ještě něco chce.
 
+## Když se z drobných úprav stane širší vzor
+
+Jedna drobná úprava je normální údržba. Dvě podobné drobné úpravy jsou ještě možná náhoda. Tři podobné úpravy na různých místech už často znamenají, že tým neřeší jednotlivé chyby, ale opakovaný způsob práce. V tu chvíli přestává být poctivé lepit další lokální záplatu a tvářit se, že jde pořád o jednu větu, jeden odkaz nebo jednu chybějící roli.
+
+Širší vzor poznáte podle toho, že se stejné tření vrací v různých pracovních situacích:
+
+- lidé opakovaně hledají aktuální pravidlo přes staré ověřovací záznamy;
+- více šablon mluví jazykem minulých oprav místo jazykem běžné práce;
+- několik rozcestníků obsahuje správný obsah, ale špatně vede k rozhodnutí;
+- podobné podněty zůstávají viset, protože nikdo neví, kdo je smí zavřít;
+- každá malá oprava přidává další poznámku, místo aby zjednodušila pracovní místo.
+
+Takový vzor není důvod spustit velký audit všeho. Je to důvod zastavit další záplaty a převést opakování do jedné malé systémové otázky.
+
+Začněte zápisem:
+
+```text
+Opakovaný vzor:
+
+Kde se ukázal:
+
+Co mají případy společné:
+
+Jak brání rozhodnutí:
+
+Nejmenší společná oprava:
+
+Co už nebudeme opravovat jednotlivě:
+
+Privacy-first hranice:
+```
+
+Příklad:
+
+```text
+Opakovaný vzor:
+Pravidla v rozcestnících jsou napsaná jako historie oprav, ne jako běžná pracovní instrukce.
+
+Kde se ukázal:
+Review šablon, kontrola podnětů, uzavření lokální opravy.
+
+Co mají případy společné:
+Člověk musí pochopit minulou epizodu, aby věděl, co má udělat teď.
+
+Jak brání rozhodnutí:
+Zpomaluje zavření slabých podnětů a podporuje návrat ke starým záznamům.
+
+Nejmenší společná oprava:
+U tří nejpoužívanějších pravidel přepsat první větu do přítomného rozhodovacího tvaru.
+
+Co už nebudeme opravovat jednotlivě:
+Nebudeme po jednom přidávat další historické vysvětlivky ke každému rozcestníku.
+
+Privacy-first hranice:
+Nebudeme měřit osobní použití pravidel. Ověříme jen to, jestli běžné review skončí rozhodnutím bez starého záznamu.
+```
+
+Tento zápis je krátký, ale mění typ práce. Už nejde o "opravit odkaz v rozcestníku". Jde o "přepsat nejpoužívanější pravidla tak, aby vedla k rozhodnutí bez historie". To je pořád malý krok, jen míří na příčinu opakování.
+
+### Kdy ještě nejde o vzor
+
+Ne každé opakování je systémový problém. Někdy jsou dvě podobné chyby jen dvě podobné chyby. Rozdíl je v dopadu na rozhodnutí.
+
+Ještě nejde o širší vzor, když:
+
+- druhý případ vznikl ve stejném místě a první úprava se jen nedotáhla;
+- problém nemá dopad na rozhodnutí, pouze na estetiku textu;
+- případy vypadají podobně, ale každý má jinou příčinu;
+- tým zatím nemá běžné použití, jen domněnku z čtení dokumentace;
+- oprava jednoho kanonického místa pravděpodobně odstraní i druhý případ.
+
+V takové situaci neotevírejte vzor. Dočistěte stejné místo nebo počkejte na další skutečný návratový signál. Předčasně pojmenovaný vzor je nebezpečný, protože dává malému problému větší autoritu, než si zaslouží.
+
+Praktická kontrolní věta:
+
+```text
+Kdybychom opravili jen jedno nejbližší místo, vrátil by se stejný problém jinde?
+```
+
+Pokud odpověď nevíte, ještě nemáte vzor. Máte hypotézu. A hypotéza patří do návratového signálu, ne do nového procesu.
+
+### Nejmenší společná oprava
+
+Širší vzor neřešte největším společným jmenovatelem. Řešte ho nejmenší společnou opravou. To je změna, která zasáhne opakovanou příčinu, ale neotevře celý systém.
+
+Příklady nejmenší společné opravy:
+
+- přepsat první větu u tří nejpoužívanějších pravidel do pracovního tvaru;
+- sjednotit název jedné sekce v několika rozcestnících;
+- odstranit staré ověřovací odkazy z míst, kde vypadají jako aktuální instrukce;
+- doplnit vlastníka rozhodnutí do jednoho běžného rytmu;
+- vytvořit jednu krátkou šablonu rozhodovací věty a použít ji jen tam, kde se vzor už ukázal.
+
+Příklady příliš velké reakce:
+
+- audit všech interních dokumentů;
+- nový systém štítků pro všechny podněty;
+- povinné měření používání každého pravidla;
+- kompletní redesign znalostní báze;
+- nový schvalovací proces pro každou drobnou úpravu.
+
+Velká reakce může být někdy potřeba, ale ne jako první odpověď na čerstvě pojmenovaný vzor. Nejdřív ověřte, že nejmenší společná oprava opravdu sníží opakované tření.
+
+### Jak vzor ověřit bez špehování
+
+Ověření širšího vzoru má sledovat výsledek práce, ne chování lidí. Nepotřebujete vědět, kdo dokument otevřel, jak dlouho četl pravidlo nebo kolikrát klikl na odkaz. Potřebujete vědět, jestli se stejná situace zavřela bez staré pomoci.
+
+Stačí jeden z těchto signálů:
+
+- běžné review skončilo rozhodnutím bez otevření historického záznamu;
+- podnět byl správně zatříděn podle aktuálního pravidla;
+- nový člověk použil pravidlo bez ručního dovysvětlení;
+- počet otevřených podnětů ve stejném rytmu klesl bez nového reportingu;
+- vlastník dokázal jednou větou říct, proč se další lokální záplaty nedělají.
+
+Zápis ověření:
+
+```text
+Ověřujeme při:
+
+Stačí, když:
+
+Nepotřebujeme:
+
+Když se vzor vrátí:
+
+Když se vzor nevrátí:
+```
+
+Příklad:
+
+```text
+Ověřujeme při:
+Příštím měsíčním review šablon.
+
+Stačí, když:
+Tři upravená pravidla povedou k rozhodnutí bez otevření starých ověřovacích záznamů.
+
+Nepotřebujeme:
+Sledování kliků, osobní checklisty, screenshoty ani tabulku času hledání.
+
+Když se vzor vrátí:
+Zkontrolujeme, jestli problém leží v názvech rozcestníků nebo ve vlastnictví review.
+
+Když se vzor nevrátí:
+Uzavřeme opravu jako malý systémový zásah a necháme další kontrolu v běžném rytmu.
+```
+
+### Karta širšího vzoru
+
+```text
+Název vzoru:
+
+První lokální případy:
+
+Společná příčina:
+
+Dopad na rozhodnutí:
+
+Nejmenší společná oprava:
+
+Místa, kterých se oprava týká:
+
+Místa, kterých se oprava výslovně netýká:
+
+Ověření v běžném rytmu:
+
+Návratový signál:
+
+Co neměříme a nesbíráme:
+
+Vlastník:
+```
+
+### Checklist širšího vzoru
+
+- Máme víc než jeden skutečný případ, ne jen obavu?
+- Ukazují případy stejnou příčinu, ne jen podobný povrch?
+- Brání vzor konkrétnímu rozhodnutí nebo běžnému průchodu práce?
+- Přestali jsme přidávat další lokální záplaty?
+- Je nejmenší společná oprava menší než nový audit?
+- Je jasné, kterých míst se oprava týká a kterých ne?
+- Ověřujeme výsledek práce místo osobního chování lidí?
+- Nepřidáváme tracker, export ani nový report bez rozhodovací otázky?
+- Má vzor vlastníka a návratový signál?
+- Umíme říct, kdy vzor uzavřeme a kdy ho přerámujeme?
+
+Codyho komentář: širší vzor je užitečný jen tehdy, když zmenší počet budoucích oprav. Pokud po jeho pojmenování vznikne víc schůzek, víc tabulek a víc nejistoty, neobjevili jste vzor. Objevili jste nový způsob, jak mít moc práce a málo hotovo.
+
+Když se z drobných úprav stane širší vzor, nezvětšujte automaticky rozsah. Zvětšete přesnost. Pojmenujte společnou příčinu, opravte nejmenší společné místo a nechte ověření proběhnout v běžné práci. Tím se systém učí bez toho, aby kvůli každému učení sbíral další data a stavěl další proces.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -180484,3 +180675,4 @@ Druhá nízká kontrola má být poslední kontrolou kontroly. Pokud je klid pot
 - 2026-06-04: Doplněna úvodní podkapitola o ověření převodu první reakce v běžném rytmu: běžný cyklus, návrat mimořádné péče, privacy-first ověření, karta a checklist.
 - 2026-06-04: Doplněna úvodní podkapitola o první běžné údržbě po uzavření pravidla: kontrola v normálním rytmu, servisní otázky, karta údržby, otevření nové otázky jen při skutečném přesahu a privacy-first hranice.
 - 2026-06-04: Doplněna úvodní podkapitola o uzavření drobné úpravy po první běžné údržbě: čtyři výsledné stavy, dočištění stejného místa, rozlišení širšího vzoru, privacy-first úklid, karta a checklist.
+- 2026-06-05: Doplněna úvodní podkapitola o tom, kdy se z drobných úprav stane širší vzor: rozlišení náhody od opakované příčiny, nejmenší společná oprava, privacy-first ověření, karta a checklist.
