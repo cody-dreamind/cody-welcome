@@ -178804,8 +178804,151 @@ Když workshop potřebuje víc než pět minut, pravděpodobně už nejde o prvn
 
 První běžný cyklus je návrat do dospělého provozu. Neoslavuje opravu, nerozebírá starou historii a netváří se, že klid je podezřelý. Jen ověří, že běžná práce drží, a potom nechá položku znovu dýchat v normálním rytmu.
 
+## Uzavření prvního běžného cyklu po uzavřeném návratu
+
+První běžný cyklus má smysl jen tehdy, když po něm nezůstane další poloviční dohled. Tým ověřil, že uzavřený návrat se projevil v normální práci. Teď musí rozhodnout, co s tím výsledkem udělá. Ne velké review, ne nový plán, ne preventivní audit všeho podobného. Jen přesné uzavření, které vrátí položku do správného rytmu.
+
+Uzavření prvního běžného cyklu odpovídá na tři otázky:
+
+```text
+Co jsme v běžném cyklu opravdu viděli:
+Co to znamená pro pravidlo, šablonu nebo pracovní místo:
+Jaký rytmus platí dál:
+```
+
+Když tyto tři věty nevzniknou, cyklus se sice mohl stát, ale tým z něj nemá provozní závěr. A bez závěru se lidé začnou chovat podle nálady: někdo bude pravidlo dál hlídat, někdo ho pustí úplně, někdo otevře starou debatu. To je přesně ten typ drobného chaosu, který pak vypadá jako "asi potřebujeme lepší proces". Často stačí lepší uzavření.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném cyklu vyberte jeden ze čtyř stavů:
+
+- Vráceno do klidu: cyklus prošel čistě a není potřeba žádná další zvláštní práce.
+- Zavřeno po drobném doladění: pravidlo drží, jen se upravilo jedno pracovní místo.
+- Otevřena úzká oprava: cyklus ukázal stejné tření, které potřebuje malou samostatnou reakci.
+- Odděleno nové téma: objevila se jiná otázka, která nepatří ke staré položce.
+
+`Vráceno do klidu` je plnohodnotný výsledek. Nepotřebuje doprovodné "ale ještě to budeme sledovat". Pokud máte jasný čistý průchod, zapište ho a položku vraťte do běžného rytmu. Další pozornost se spustí jen podle návratového signálu, ne podle nervozity.
+
+`Zavřeno po drobném doladění` je vhodné, když se během cyklu našla malá překážka, ale směr je správný. Typicky jde o nejasný odkaz, moc dlouhý checklist, starý příklad v šabloně nebo formulaci, kterou nový člověk musí zbytečně luštit. Doladění má být hotové v tom samém pracovním místě. Jakmile se začne přepisovat více artefaktů, už nejde o drobné doladění.
+
+`Otevřena úzká oprava` znamená, že běžný cyklus neprošel dost čistě. Neznamená to automaticky návrat zvláštní pozornosti. Znamená to, že vzniká nový malý úkol s vlastním koncem: opravit zdrojovou šablonu, doplnit jednu rozhodovací větu, odstranit starý odkaz nebo vyjasnit vlastnictví. Úzká oprava se má zavřít při nejbližším dalším použití.
+
+`Odděleno nové téma` chrání starou položku před tím, aby do ní tým přilepil všechno, co se objevilo ve stejném cyklu. Když při kampani najdete nový problém v cenové komunikaci, není to důkaz, že formulářové pravidlo selhalo. Je to nové téma s vlastní otázkou.
+
+### Jak napsat provozní závěr
+
+Provozní závěr má být krátký a použitelný. Nepište ho jako zápis z porady. Pište ho jako větu, kterou najde člověk při další práci a okamžitě ví, co má dělat.
+
+Dobré závěry:
+
+- První kampaň po lokální opravě použila aktuální šablonu bez povinného telefonu; položka se vrací do běžného rytmu.
+- Pravidlo drží, ale checklist byl zkrácen o duplicitní otázku, aby další autor nemusel kontrolovat totéž dvakrát.
+- Stejný návrat se objevil znovu při kopírování šablony; otevíráme úzkou opravu zdrojové šablony do další kampaně.
+- Během cyklu vznikla otázka k cenovému slibu; oddělujeme ji od formulářového pravidla a zakládáme samostatnou stop podmínku.
+
+Špatné závěry:
+
+- Budeme to dál sledovat.
+- Asi je to lepší.
+- Je potřeba udělat větší audit.
+- Někdo by měl zkontrolovat šablony.
+
+Špatné závěry nejsou špatné proto, že jsou pesimistické. Jsou špatné proto, že neříkají, co přesně platí dál. Tým po nich musí hádat.
+
+### Co převést do kanonického místa
+
+Po uzavření cyklu nepřenášejte do kanonického místa celý průběh. Přeneste jen závěr, který má hodnotu při dalším použití. Typicky stačí:
+
+- výsledný stav;
+- jedna změna pravidla nebo šablony, pokud vznikla;
+- platný návratový signál;
+- vlastník běžného rytmu;
+- datum další běžné revize, pokud existuje.
+
+Nepřenášejte do kanonického místa dočasné poznámky, osobní komentáře, screenshoty, exporty ani celou diskusi. Tyto věci možná pomohly při rozhodnutí, ale většinou nepomohou člověku, který za měsíc potřebuje udělat další stránku, kampaň nebo onboardingový průchod.
+
+Praktická věta do kanonického místa:
+
+```text
+Po prvním běžném cyklu dne [datum] pravidlo drží / drží po drobném doladění / potřebuje úzkou opravu / otevřelo nové oddělené téma. Platný další signál je [konkrétní situace].
+```
+
+### Privacy-first uzavření cyklu
+
+Uzavření je poslední šance uklidit podklady, které vznikly jen kvůli ověření. Čím déle je necháte ležet, tím spíš se z nich stane falešný zdroj pravdy. Ještě horší je, když obsahují osobní údaje, interní poznámky nebo zbytečné detaily o práci konkrétního člověka.
+
+Zeptejte se:
+
+- Potřebujeme dál držet dočasný screenshot, export, přepis nebo kopii formulářových dat?
+- Dá se důkaz nahradit jednou anonymizovanou větou?
+- Zůstává v kanonickém místě jen to, co pomůže další práci?
+- Má úzká oprava vlastní datum smazání podkladů?
+- Nevznikl z prvního běžného cyklu nový zvyk sledovat lidi místo výstupů?
+
+Privacy-first provoz se pozná podle toho, že důkaz po rozhodnutí zeštíhlí. Ne proto, aby se něco zametlo pod koberec, ale proto, aby tým nenosil datový batoh, který už nemá účel.
+
+Codyho komentář: když po čistém průchodu necháte otevřenou tabulku "pro jistotu", ta tabulka si časem najde práci. Tabulky jsou v tomhle jako špatné porady: když existují, někdo je začne plnit. Lepší je zavřít je dřív, než začnou vypadat důležitě.
+
+### Karta uzavření prvního běžného cyklu
+
+```text
+Položka:
+
+Uzavřený návrat:
+
+První běžný cyklus:
+
+Co jsme očekávali:
+
+Co jsme viděli:
+
+Uzavírací stav:
+- vráceno do klidu / zavřeno po drobném doladění / otevřena úzká oprava / odděleno nové téma
+
+Provozní závěr jednou větou:
+
+Co se mění v kanonickém místě:
+
+Co dál neotevíráme:
+
+Platný návratový signál:
+
+Dočasné podklady ke smazání nebo zkrácení:
+
+Vlastník:
+
+Datum dalšího běžného návratu, pokud existuje:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte očekávaný a skutečný průchod.
+2. Minuta 1-2: vyberte jeden uzavírací stav.
+3. Minuta 2-3: napište provozní závěr jednou větou.
+4. Minuta 3-4: určete, co patří do kanonického místa.
+5. Minuta 4-5: smažte nebo zkraťte dočasné podklady.
+6. Minuta 5-6: řekněte, co dál vědomě neotevíráte.
+
+Když se workshop zasekne na sporu, nejspíš nejde o uzavření cyklu, ale o nový pracovní signál. V takovém případě nepřepisujte uzávěrku tak, aby unesla celý spor. Oddělte nový signál do vlastní karty a první běžný cyklus zavřete podle toho, co skutečně ukázal.
+
+### Checklist uzavření prvního běžného cyklu
+
+- Máme zapsané, co jsme očekávali a co se skutečně stalo?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Umíme provozní závěr říct jednou větou?
+- Pokud je položka vrácená do klidu, nepřidáváme další zvláštní sledování?
+- Pokud vzniklo drobné doladění, zůstává v jednom pracovním místě?
+- Pokud vznikla úzká oprava, má vlastní stop podmínku a nejbližší ověření?
+- Pokud vzniklo nové téma, oddělili jsme ho od staré položky?
+- Je kanonické místo aktualizované jen o užitečný závěr?
+- Uklidili jsme dočasné podklady, exporty, screenshoty a osobní detaily?
+- Ví vlastník, jaký návratový signál platí odteď?
+
+Uzavření prvního běžného cyklu je malý administrativní krok s velkým provozním dopadem. Říká týmu: ověřili jsme návrat do normálu, víme, co platí dál, a nepřidáváme péči jen proto, že jsme zrovna měli téma otevřené. To je přesně ten druh disciplíny, díky kterému se web, SaaS i marketing dají zlepšovat bez nekonečného nabalování práce.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného cyklu po uzavřeném návratu: čtyři uzavírací stavy, provozní závěr, kanonické místo, privacy-first úklid podkladů, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním běžném cyklu po uzavřeném návratu: výběr běžné situace, čtyři výsledky, příklad, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního návratu po ukončení zvláštní pozornosti: čtyři uzavírací stavy, lokální oprava, úzká reakce, obnovení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním návratu po ukončení zvláštní pozornosti: rozlišení šumu, lokální stopy, úzké reakce a nového tématu, privacy-first brzda, karta návratu a checklist.
