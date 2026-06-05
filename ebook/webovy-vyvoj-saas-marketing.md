@@ -178330,8 +178330,143 @@ Pokud se workshop natáhne, pravděpodobně neuzavíráte pozornost. Otevíráte
 
 Ukončení pravidelné pozornosti je jeden z nejdůležitějších malých návyků v produktivitě. Díky němu se dobré opravy nestávají trvalou administrativou. Položka má pravidlo, návratový signál a běžný rytmus. Víc nepotřebuje. A tým může věnovat pozornost další věci, která ji opravdu potřebuje.
 
+## První návrat po ukončení zvláštní pozornosti
+
+Když zvláštní pozornost skončí, položka nezmizí. Jen se vrátí do běžného rytmu a čeká na konkrétní návratový signál. První návrat po takovém ukončení je citlivý okamžik: tým může reagovat příliš rychle, znovu otevřít celou historii a obnovit kontrolní režim, který se právě podařilo zavřít. Nebo může signál podcenit, protože si zvykl, že položka už je "vyřešená".
+
+Správná reakce je mezi tím. Nejdřív ověřte, jestli opravdu nastal návratový signál z posledního záznamu, nebo jen podobně vypadající šum. Návratový signál má být konkrétní situace, ne pocit. "Někdo si vzpomněl na starý problém" nestačí. "Nová landing page znovu použila archivní formulář s povinným telefonem" už je signál, který stojí za práci.
+
+Začněte krátkou kontrolou:
+
+```text
+Položka:
+Kdy skončila zvláštní pozornost:
+Původní návratový signál:
+Co se teď stalo:
+Je to stejný signál, lokální chyba, nebo nový problém:
+Jaká data nebo pracovní stopy by přibyly, kdybychom otevřeli celou historii:
+```
+
+Tento zápis brání reflexu "otevřeme to celé znovu". Často se ukáže, že nejde o návrat starého problému, ale o jeden neuklizený artefakt, nový kontext nebo chybu v navigaci. V takovém případě není potřeba obnovit zvláštní pozornost. Stačí přesná malá reakce.
+
+### Čtyři první reakce
+
+Po kontrole vyberte jeden ze čtyř stavů:
+
+- Ignorovat jako šum: událost se podobá starému tématu, ale nenaplňuje návratový signál.
+- Opravit lokální stopu: pravidlo platí, jen jedno místo zůstalo staré nebo nejasné.
+- Otevřít úzkou reakci: návratový signál nastal, ale stačí menší krok než původní kontrolní režim.
+- Otevřít nové téma: situace není návrat staré položky, ale samostatný problém s vlastním vlastníkem a stop podmínkou.
+
+Stav `Otevřít úzkou reakci` neznamená návrat k měsíčnímu sledování. Znamená, že vytvoříte jeden malý úkol: opravit šablonu, ověřit jednu pracovní cestu, doplnit návratový signál nebo uklidit konkrétní datovou stopu. Zvláštní pozornost se vrací jen tehdy, když úzká reakce ukáže opakované tření nebo širší vzor.
+
+Příklad:
+
+```text
+Položka:
+První kontaktní formulář bez povinného telefonu.
+
+Původní návratový signál:
+Nová relevantní práce znovu zavede telefon jako povinné pole bez výjimky.
+
+Co se teď stalo:
+Jedna starší landing page byla zkopírovaná do nové kampaně a obsahovala starý telefon.
+
+Stav:
+Opravit lokální stopu.
+
+Reakce:
+Upravit zdrojovou šablonu kampaně a označit starou stránku jako archivní. Neotevíráme debatu o formulářích obecně.
+
+Privacy-first výsledek:
+Telefon nevzniká v nové kampani. Starou kopii nepoužíváme jako zdroj pravdy.
+```
+
+Tady by obnovení zvláštní pozornosti bylo zbytečné. Problém není v pravidle, ale v kopii. Opravte kopii, ne celý systém.
+
+### Kdy obnovit zvláštní pozornost
+
+Obnovení zvláštní pozornosti je silný krok a má mít silný důvod. Dává smysl jen tehdy, když se po ukončení objeví opakovaný nebo systémový signál:
+
+- stejná stará stopa se vrací ve více pracovních místech;
+- kanonické pravidlo je nejasné nebo ho lidé nemohou najít;
+- výjimka se začala používat jako výchozí stav;
+- starý sběr dat se obnovil automatizací, ne jednou ruční chybou;
+- běžný rytmus neumí položku zachytit ani po lokální opravě.
+
+I v takové chvíli nezačínejte návratem ke všemu. Nejprve napište novou stop podmínku:
+
+```text
+Zvláštní pozornost obnovujeme jen kvůli:
+Hotovo bude, až:
+Neotevíráme:
+Jaká data kvůli tomu dál nesbíráme:
+Kdy pozornost znovu ukončíme:
+```
+
+Obnovená pozornost má mít plán vlastního konce hned při startu. Jinak se z ní stane trvalé sledování v novém kabátě.
+
+### Privacy-first brzda při návratu
+
+Návrat po ukončení pozornosti nesmí být záminka k novému sledování. Když se objeví signál, tým často chce "mít jistotu" a přidat log, tabulku, dashboard nebo osobní kontrolu používání pravidla. Před tím se zastavte.
+
+Položte si otázky:
+
+- Stačí ověřit jednu pracovní cestu místo měřit všechny průchody?
+- Stačí opravit zdroj pravdy místo sbírat data o tom, kdo použil starou verzi?
+- Můžeme ponechat anonymizovaný závěr místo pracovního exportu?
+- Má každé dočasné měření datum smazání?
+- Je nový sběr dat menší než problém, který řešíme?
+
+Codyho komentář: návratový signál není pozvánka k datovému bufetu. Je to pracovní zvonek. Zazvoní, podíváte se, co se děje, opravíte správné místo a zase zavřete dveře. Pokud u každého zazvonění instalujete nový kamerový systém, problém už není zvonek.
+
+### Karta prvního návratu
+
+```text
+Položka:
+
+Datum ukončení zvláštní pozornosti:
+
+Původní návratový signál:
+
+Aktuální událost:
+
+Vybraný stav:
+- šum / lokální stopa / úzká reakce / nové téma
+
+Jedna reakce:
+
+Co neotevíráme:
+
+Kanonické místo, které zůstává platné:
+
+Co uklízíme:
+
+Jaká data dál nesbíráme:
+
+Kdy se vrátíme:
+
+Vlastník:
+```
+
+### Checklist prvního návratu
+
+- Našli jsme původní návratový signál z ukončení pozornosti?
+- Víme, jestli aktuální událost signál opravdu naplňuje?
+- Vybrali jsme jeden ze čtyř stavů místo automatického znovuotevření?
+- Pokud jde o lokální stopu, opravujeme nejbližší pracovní místo?
+- Pokud jde o úzkou reakci, má vlastní stop podmínku a konec?
+- Pokud jde o nové téma, nelepíme ho ke staré položce jen kvůli podobnosti?
+- Zůstává kanonické pravidlo jasně dostupné?
+- Nepřidáváme tracker, export, osobní kontrolu ani delší retenci bez silného důvodu?
+- Je zapsané, co dál vědomě neotevíráme?
+- Umí tým říct, kdy se obnovená pozornost znovu ukončí?
+
+První návrat po ukončení zvláštní pozornosti je test dospělosti provozu. Když tým dokáže rozlišit šum, lokální stopu, úzkou reakci a nové téma, staré problémy se nevracejí jako nekonečný seriál. Vrací se jen tehdy, když opravdu přinesou nový důkaz. A i potom se řeší malým, ohraničeným krokem.
+
 ## Pracovní log
 
+- 2026-06-05: Doplněna úvodní podkapitola o prvním návratu po ukončení zvláštní pozornosti: rozlišení šumu, lokální stopy, úzké reakce a nového tématu, privacy-first brzda, karta návratu a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o ukončení pravidelné pozornosti po druhém běžném měsíci: podmínky zavření, převod do běžného rytmu, úklid dočasných kontrol, privacy-first konec pozornosti, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna podkapitola o druhém běžném měsíci po uzavření prvního běžného měsíce: ověření stabilního klidu, opakované lokální tření, potvrzený návratový signál, nový nesouvisející signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření prvního běžného měsíce po převodu kvartálního návratu: čtyři uzavírací stavy, lokální úklid, úzká reakce, falešný návrat, privacy-first úklid stop, karta, mini workshop a checklist.
