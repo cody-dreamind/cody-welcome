@@ -183864,7 +183864,154 @@ Workshop nesmí otevřít starý návrat jen proto, že ho někdo umí dobře p�
 
 První měsíc po návratu do běžného rytmu je test odvahy nechat dobré rozhodnutí pracovat bez publika. Když téma drží, nechte ho držet. Když má malou hranu, opravte nejbližší větu. Když se objeví nový signál, dejte mu vlastní otázku. A když někde zůstal tichý dohled, ukliďte ho dřív, než se z něj stane nový proces s vlastním životem.
 
+## Uzavření prvního měsíce po návratu do běžného rytmu
+
+První měsíc v běžném rytmu má skončit jasným stavem. Pokud ho necháte jen jako "vypadá to v pořádku", za další měsíc se tým znovu zeptá, jestli se téma ještě hlídá, jestli se má kontrolovat ručně a jestli stará návratová větev pořád něco čeká. Uzavření prvního měsíce proto není další analýza. Je to krátká tečka, která říká, jestli téma zůstává v rytmu, potřebuje drobnou opravu, nebo se z něj stal nový samostatný signál.
+
+Začněte větou:
+
+```text
+Po prvním měsíci v běžném rytmu téma uzavíráme jako:
+- drží / drobný šum / zrušit skrytou péči / nový signál
+
+Platí teď:
+
+Co jsme upravili:
+
+Co už dál nehlídáme:
+
+Co mažeme nebo anonymizujeme:
+
+Další návrat nastane jen když:
+```
+
+Tato věta má být použitelná i pro člověka, který nebyl u původní návratové větve. Nemá znát celý příběh, proč pravidlo vzniklo, kolikrát se ověřovalo a kdo se u toho mračil do tabulky. Má vidět aktuální stav a vědět, co dělat příště.
+
+### Čtyři uzavírací stavy
+
+Po prvním měsíci použijte jeden ze čtyř stavů:
+
+- Drží: téma se chová jako běžná součást práce a další zvláštní pozornost končí.
+- Drobný šum: pravidlo funguje, ale jedno pracovní místo potřebuje malou úpravu.
+- Zrušit skrytou péči: pravidlo funguje, ale někdo kolem něj pořád drží ruční dohled.
+- Nový signál: objevilo se nové opakované tření, které potřebuje vlastní otázku.
+
+Stav `Drží` zapisujte bez ostychu. Není potřeba přidávat další měsíc ověřování jen proto, že předchozí větev byla dlouhá. Pokud pravidlo obstálo v běžné práci, odměnou není další kontrola, ale klid.
+
+Stav `Drobný šum` má vést k jedné opravě: přejmenovat odkaz, doplnit větu, odstranit starý příklad nebo přesunout krátkou směrovku blíž k místu práce. Jakmile oprava potřebuje vlastní schůzku, už to není drobný šum.
+
+Stav `Zrušit skrytou péči` je důležitý hlavně pro produktivitu i soukromí. Ruční dohled často sbírá víc stop než samotné pravidlo: kdo co poslal, kdo co kontroloval, kdo se ptal. Pokud pravidlo funguje, ale lidé ho stále obcházejí přes osobní kontrolu, přesuňte důvěru zpět do kanonického místa.
+
+Stav `Nový signál` neznamená otevřít starou větev. Znamená napsat novou pracovní otázku a oddělit ji od uzavřené historie.
+
+### Příklad uzavření
+
+```text
+Po prvním měsíci v běžném rytmu téma uzavíráme jako:
+Zrušit skrytou péči.
+
+Platí teď:
+Checklist formulářů je kanonické místo pro rozhodnutí, jestli telefon patří do prvního kontaktu.
+
+Co jsme upravili:
+Do checklistu jsme doplnili jednu větu: telefon je výjimka jen tehdy, když je nutný pro slíbený další krok a má datum ověření.
+
+Co už dál nehlídáme:
+Vlastník webu už ručně nekontroluje každý nový formulář před publikací.
+
+Co mažeme nebo anonymizujeme:
+Mažeme dočasný seznam formulářů ke kontrole. V logu zůstává jen anonymizovaný závěr o zrušení ručního dohledu.
+
+Další návrat nastane jen když:
+Dva nové formuláře mimo výjimku znovu udělají telefon povinným údajem.
+```
+
+Tady se neotevírá starý spor o telefon. Nezakládá se nový audit formulářů. Jen se opraví checklist, zruší se ruční dohled a nastaví se návratový signál. To stačí.
+
+### Kam závěr uložit
+
+Závěr prvního měsíce patří ke kanonickému místu nebo do běžného rytmu, který téma převzal. Pokud se týká formulářů, dejte ho ke checklistu formulářů. Pokud se týká rozcestníku, dejte ho k rozcestníku. Pokud se týká měsíčního review, dejte ho do agendy review. Nezakládejte samostatný dokument "měsíční kontrola po návratu", pokud ho nikdo nebude při práci otevírat.
+
+Dobré uložení:
+
+```text
+Kanonické místo:
+Checklist formulářů.
+
+Závěr:
+Po prvním měsíci pravidlo drží. Ruční kontrola každého formuláře končí. Další návrat nastane jen při dvou porušeních mimo výjimku.
+```
+
+Špatné uložení:
+
+```text
+Poznámka v chatu:
+Asi to vypadá dobře, ještě uvidíme.
+```
+
+První zápis vede práci. Druhý jen uklidňuje náladu.
+
+### Privacy-first uzavření měsíce
+
+Po prvním měsíci ukliďte všechno, co vzniklo jen kvůli přechodu zpět do rytmu:
+
+- dočasné seznamy kontrolovaných výstupů;
+- screenshoty a kopie pracovních formulářů;
+- osobní poznámky, kdo se kde ptal;
+- ruční exporty používané jen pro kontrolu;
+- připomínky a pingy, které nahrazovaly důvěru v kanonické místo.
+
+Zůstává jen stav, kanonické místo, případná malá úprava a návratový signál. Pokud pro rozhodnutí stačí věta "ruční dohled končí, protože checklist stačil při běžné práci", neuchovávejte původní kontrolní tabulku jen proto, že byla pracná.
+
+Codyho komentář: nejhezčí závěr po měsíci je často "nic dalšího neděláme". Vím, nezní to jako ohňostroj produktivity. Ale když systém funguje bez ručního dohledu, je to lepší než další tabulka, která hrdě dokazuje, že možná jednou přestaneme tabulkovat.
+
+### Karta uzavření prvního měsíce
+
+```text
+Téma nebo pravidlo:
+
+Kanonické místo:
+
+Běžný rytmus:
+
+Měsíční stav:
+- drží / drobný šum / zrušit skrytou péči / nový signál
+
+Jednovětý závěr:
+
+Jedna úprava, pokud je potřeba:
+
+Co už dál samostatně nehlídáme:
+
+Kam půjdou další signály:
+
+Co mažeme nebo anonymizujeme:
+
+Co dál nesbíráme:
+
+Vlastník běžného rytmu:
+
+Datum další běžné kontroly:
+```
+
+### Checklist uzavření prvního měsíce
+
+- Má první měsíc jeden jasný stav?
+- Je závěr uložený u kanonického místa nebo běžného rytmu?
+- Pokud téma drží, končí zvláštní pozornost?
+- Pokud vznikl drobný šum, opravujeme jen jedno pracovní místo?
+- Pokud existuje skrytá péče, rušíme ji nebo ji převádíme do systému?
+- Pokud vznikl nový signál, má vlastní pracovní otázku místo otevření staré větve?
+- Je jasné, co už dál samostatně nehlídáme?
+- Jsou dočasné seznamy, screenshoty, exporty a osobní poznámky smazané nebo anonymizované?
+- Nepřidáváme nový tracker, report, CRM pole ani evidenci lidí?
+- Ví vlastník běžného rytmu, kdy se téma znovu otevře?
+
+Uzavření prvního měsíce má dát týmu povolení přestat se dívat na téma jako na čerstvou opravu. Pokud drží, je z něj běžné pravidlo. Pokud drhne, opraví se nejbližší místo. Pokud vznikl nový signál, dostane vlastní otázku. Všechno ostatní je jen způsob, jak nechat starou větev žít déle, než si zaslouží.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního měsíce po návratu do běžného rytmu: čtyři uzavírací stavy, zrušení skryté péče, uložení závěru ke kanonickému místu, privacy-first úklid, karta a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o prvním měsíci po návratu do běžného rytmu: čtyři měsíční stavy, rušení skryté mimořádné péče, privacy-first měsíční kontrola, karta, mini workshop a checklist.
 
