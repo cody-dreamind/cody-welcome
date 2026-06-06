@@ -184818,7 +184818,237 @@ Workshop nesmí skončit novým pravidelným bodem jen proto, že téma bylo kdy
 
 První běžné review po stabilním rytmu je dobré tehdy, když skoro nic nepřinese. To není promarněná práce. Je to důkaz, že předchozí úsilí se konečně změnilo v normální provoz. A normální provoz má jednu krásnou vlastnost: nechce být středem pozornosti.
 
+## Uzavření prvního běžného review po stabilním rytmu
+
+První běžné review po stabilizaci nemá zůstat otevřené jen proto, že se v něm objevilo téma, které kdysi dostalo mimořádnou péči. Review má skončit jedním jasným závěrem: pravidlo funguje v běžném rytmu, potřebuje malou korekci, vrací starou paměť, nebo ukázalo nový pracovní signál. Bez tohoto uzavření se i zdravé review může proměnit v další opatrné hlídání.
+
+Základní uzavírací otázka zní:
+
+```text
+Co se po prvním běžném review mění v běžné práci, a co se naopak dál nebude samostatně sledovat?
+```
+
+Pokud odpověď není konkrétní, review ještě není hotové. Nestačí napsat "zkontrolováno". Takový zápis sice vypadá uklidňujícím dojmem, ale neříká, jestli pravidlo zůstává v normálním rytmu, jestli se má upravit kanonické místo, nebo jestli někde dál žije stará stopa.
+
+Dobré uzavření je malé:
+
+```text
+Pravidlo prošlo prvním běžným review jako součást měsíční kontroly formulářů. Stačilo aktuální kanonické místo, nevznikla nová evidence a další signály zůstávají v běžném review.
+```
+
+Nebo:
+
+```text
+Review ukázalo lehké tření: odkaz na kanonické pravidlo byl schovaný ve staré poznámce. Přesouváme odkaz do checklistu formulářů, starou poznámku zkracujeme a pravidlo dál zůstává v běžném review.
+```
+
+Obě věty dělají víc než shrnutí. Zavřou rozhodnutí, ukážou další místo práce a zabrání tomu, aby se pravidlo znovu tvářilo jako samostatný projekt.
+
+### Čtyři uzavírací stavy
+
+Po review použijte stejnou logiku jako při jeho vyhodnocení, ale převeďte ji do konkrétního konce:
+
+- Uzavřít bez akce: pravidlo tiše drží a není potřeba nic měnit.
+- Uzavřít s lokální korekcí: pravidlo drží, ale jedno místo potřebuje drobnou úpravu.
+- Zkrátit starou paměť: pravidlo drží, ale tým nebo dokumentace pořád sahá do historie.
+- Otevřít novou otázku: review ukázalo nový pracovní signál, který nemá být přilepený ke starému pravidlu.
+
+Stav "ještě sledovat" používejte jen tehdy, když má jasnou stop podmínku. Například:
+
+```text
+Ještě jednou ověříme při dalším měsíčním review, jestli upravený odkaz v checklistu stačí. Pokud ano, zvláštní poznámku mažeme.
+```
+
+Bez stop podmínky je "ještě sledovat" jen zdvořilé označení pro novou kontrolu, kterou nikdo nechtěl vlastnit nahlas.
+
+### Kdy uzavřít bez akce
+
+Uzavření bez akce je správné, když se pravidlo buď použilo normálně, nebo se v review vůbec nemuselo otevřít. To druhé je důležité. Stabilní pravidlo nemusí v každém review dokazovat svoji existenci. Pokud v daném měsíci nevznikl nový formulář, nová šablona ani situace, kde by se pravidlo přirozeně použilo, není potřeba vytvářet záznam jen proto, že pravidlo žije.
+
+Krátký zápis může znít:
+
+```text
+V tomto review nevznikl průchod, kde by se pravidlo přirozeně použilo. Nevzniká žádná samostatná kontrola; další signály zůstávají v běžném review formulářů.
+```
+
+Tento zápis je užitečný hlavně tehdy, když by někdo mohl chtít téma uměle hlídat. Pokud takové riziko není, není nutné psát nic. Ne každé ticho potřebuje dokument.
+
+Codyho komentář: někdy je nejlepší evidence absence evidence. Ano, zní to jako věta z compliance semináře, ale v praxi to znamená jednoduchou věc: když se nic relevantního nestalo, nevyrábějte práci, která bude dokazovat, že se nic nestalo.
+
+### Lokální korekce po review
+
+Lokální korekce po běžném review má být ještě menší než oprava po incidentu. Pravidlo už prošlo stabilizací, takže se nevracejte k původní historii. Opravte místo, které brzdilo běžné použití.
+
+Typické korekce:
+
+- přesun odkazu z rozhodovacího logu do pracovního checklistu;
+- zkrácení příkladu, který je moc historický;
+- doplnění jedné věty k návratovému signálu;
+- odstranění staré poznámky, která naznačuje neplatné řešení;
+- sjednocení názvu pravidla mezi roadmapou a šablonou.
+
+Korekce nemá zakládat nový dokument, nový report ani novou odpovědnost. Pokud by to potřebovala, nejde o lokální korekci, ale o nový pracovní signál.
+
+Příklad:
+
+```text
+Review:
+Měsíční kontrola webových formulářů.
+
+Tření:
+Checklist odkazuje na starý rozhodovací záznam místo na aktuální pravidlo.
+
+Lokální korekce:
+V checklistu ponecháme aktuální větu pravidla a starý záznam zkrátíme na historický důvod.
+
+Co neotevíráme:
+Neotevíráme znovu otázku povinného telefonu u všech formulářů.
+
+Co dál nesbíráme:
+Nevzniká evidence použití pravidla ani nový tracker formulářových průchodů.
+```
+
+### Zkrácení staré paměti
+
+Slabý návrat staré paměti je zvláštní případ. Pravidlo může být správné, kanonické místo může existovat, ale stará historie pořád láká tým k delšímu vysvětlování. Poznáte to podle vět typu "radši si projdeme, proč jsme to tehdy řešili" nebo "otevřeme starý export, ať víme". Někdy je to oprávněné. Často je to jen zvyk.
+
+Zkrácení staré paměti má tři kroky:
+
+- ponechat aktuální závěr a návratový signál;
+- zkrátit starý popis na důvod, ne na kompletní příběh;
+- odstranit nebo anonymizovat pomocné podklady, které už nejsou potřeba pro rozhodnutí.
+
+Praktický přepis:
+
+```text
+Před zkrácením:
+Třístránková historie rozhodování o telefonním poli, včetně příkladů konkrétních poptávek.
+
+Po zkrácení:
+Telefon je povinný jen tehdy, když je nutný pro slíbený další krok a má datum ověření. Původní důvod pravidla: obecná poptávka nepotřebovala telefon jako výchozí údaj. Návratový signál: opakovaně nejde doručit slíbený další krok bez telefonu.
+```
+
+Privacy-first přínos je tady přímý. Staré příklady a exporty často obsahují víc detailů, než současné pravidlo potřebuje. Když se pravidlo osamostatní, historické důkazy mají buď zůstat výrazně zkrácené, nebo zmizet.
+
+### Nová otázka není starý návrat
+
+Když review ukáže nový pracovní signál, nelepte ho automaticky ke starému pravidlu. Stabilizované pravidlo má zůstat zavřené, pokud nový signál řeší jiné rozhodnutí.
+
+Příklad:
+
+```text
+Stabilizované pravidlo:
+Telefon je povinný jen tehdy, když je nutný pro slíbený další krok.
+
+Nový signál:
+U nového typu auditu lidé nerozumí rozdílu mezi telefonickou konzultací a asynchronním vyhodnocením.
+
+Špatná reakce:
+Znovu otevřít pravidlo povinného telefonu u všech formulářů.
+
+Správná reakce:
+Otevřít novou otázku: jak na stránce auditu vysvětlit formát dalšího kroku tak, aby člověk věděl, proč a kdy zadává telefon.
+```
+
+Nová otázka potřebuje vlastní stop podmínku, vlastní nejmenší důkaz a vlastní privacy-first hranici. Staré pravidlo může být kontext, ale nemá být batoh, do kterého naházíte každou další nejistotu.
+
+### Privacy-first uzavření review
+
+Uzavření review je dobrá chvíle zkontrolovat, jestli kvůli běžné kontrole nevznikly zbytečné stopy. Nejčastější riziko není velký nový nástroj, ale drobná pomocná evidence: seznam použití pravidla, export formulářů, screenshoty, poznámky s konkrétními poptávkami nebo kopie starých šablon.
+
+Použijte krátké třídění:
+
+```text
+Zůstává:
+Aktuální pravidlo, kanonické místo, výsledek review a případný nový signál.
+
+Zkracuje se:
+Historie, která už nemá rozhodovací funkci.
+
+Maže se:
+Dočasné exporty, screenshoty, pracovní kopie a osobní poznámky z review.
+
+Nevzniká:
+Nová evidence použití pravidla, sledování lidí, další formulářové pole ani analytický event.
+```
+
+Privacy-first hodnota není v tom, že si všechno zakážete. Je v tom, že po každém rozhodnutí víte, co opravdu potřebujete nést dál. Zbytek je budoucí odpovědnost, která se jen tváří jako pečlivost.
+
+### Karta uzavření prvního běžného review
+
+```text
+Téma nebo pravidlo:
+
+Kanonické místo:
+
+Běžné review:
+
+Výsledek review:
+- tiché držení
+- lehká korekce místa
+- slabý návrat staré paměti
+- nový pracovní signál
+
+Uzavírací stav:
+- bez akce
+- s lokální korekcí
+- zkrátit starou paměť
+- otevřít novou otázku
+
+Jednovětý závěr:
+
+Co se mění v běžné práci:
+
+Co zůstává zavřené:
+
+Co už samostatně nehlídáme:
+
+Kam půjdou další signály:
+
+Pokud vznikla nová otázka, její stop podmínka:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Co dál nesbíráme:
+
+Vlastník běžného review:
+
+Datum další přirozené kontroly:
+```
+
+Kartu nepoužívejte jako povinný formulář pro každé review. Použijte ji tehdy, když review něco opravdu otevřelo nebo když hrozí návrat zvláštní pozornosti. Pokud pravidlo tiše drží, stačí jednovětý závěr. Pokud ani ten nepřináší rozhodnutí, nepište ho.
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: pojmenujte výsledek review a kanonické místo.
+2. Minuta 1-2: vyberte jeden uzavírací stav.
+3. Minuta 2-3: napište jednovětý závěr a co se mění v běžné práci.
+4. Minuta 3-4: určete, co už samostatně nehlídáte a kam půjdou další signály.
+5. Minuta 4-5: zapište privacy-first úklid: co se maže, zkracuje a dál nesbírá.
+
+Workshop končí, když je jasné, jestli se pravidlo vrací do obyčejného review, nebo jestli vzniká nová otázka. Nesmí skončit větou "budeme to sledovat". Pokud něco sledujete, napište proč, jak dlouho a jaké rozhodnutí tím vznikne.
+
+### Checklist uzavření review
+
+- Má review jeden konkrétní výsledek?
+- Vybrali jsme jeden uzavírací stav?
+- Je jednovětý závěr srozumitelný bez staré historie?
+- Pokud pravidlo drží, nevzniká další samostatná kontrola?
+- Pokud je potřeba korekce, týká se jednoho pracovního místa?
+- Pokud se vrací stará paměť, zkracujeme historii místo otevírání celého tématu?
+- Pokud vznikl nový signál, má vlastní otázku a stop podmínku?
+- Je jasné, co zůstává zavřené?
+- Víme, kam půjdou další signály v běžném rytmu?
+- Uklízíme dočasné exporty, screenshoty, pracovní kopie a osobní poznámky?
+- Nezakládáme evidenci použití pravidla bez jasného rozhodnutí?
+- Nevedeme osobní sledování lidí, dotazů, kliků ani ručních kontrol?
+- Je privacy-first hranice vidět v místě, kde se s daty opravdu pracuje?
+
+Uzavření prvního běžného review má pravidlu vrátit obyčejnost. Když review nic neotevřelo, nechte ho skončit. Když něco otevřelo, vyberte jednu reakci a zavřete zbytek. Tím se z mimořádně opečované změny konečně stane normální součást provozu.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního běžného review po stabilním rytmu: čtyři uzavírací stavy, lokální korekce, zkrácení staré paměti, oddělení nové otázky, privacy-first úklid, karta, mini workshop a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o prvním běžném review po stabilním běžném rytmu: zařazení do existující agendy, čtyři výsledky review, prevence nové evidence, privacy-first kontrola, karta, mini workshop a checklist.
 
