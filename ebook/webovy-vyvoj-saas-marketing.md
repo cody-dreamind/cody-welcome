@@ -9346,6 +9346,169 @@ Datum kontroly, pokud je potřeba:
 
 První návratový signál po klidu má být rozhodovací brána, ne poplach. Když je slabý, opravte nejbližší stopu a nechte systém dál běžet. Když je skutečný, otevřete vzor znovu bez dramatu a s menším, přesnějším záběrem než minule. V obou případech platí totéž: práce má začít důkazem, ne vzpomínkou na starý problém.
 
+## Uzavření první reakce na návratový signál po klidu
+
+První reakce na návratový signál po klidovém provozu má ještě jeden úkol: nesmí sama vytvořit nový dlouhodobý dohled. Když tým uklidí jednu starou stopu, doladí jednu hranu pravidla nebo znovu otevře širší vzor, musí potom říct, v jakém stavu téma pokračuje. Bez toho se z reakce stane další polootevřená poznámka, která za měsíc vypadá jako nový důkaz, že problém pořád žije.
+
+Začněte krátkým uzavíracím zápisem:
+
+```text
+Původní návratový signál:
+
+Co se opravdu stalo:
+
+Jakou skupinu signálu jsme vybrali:
+
+Jakou reakci jsme udělali:
+
+Co je po reakci hotové:
+
+Co zůstává zavřené:
+
+Co se vrací do klidu:
+
+Co bude další signál, pokud nějaký potřebujeme:
+```
+
+Tento zápis má být malý. Neopisujte celou historii vzoru, nevyrábějte novou revizní kartu a nepište retrospektivu, pokud jste jen odstranili starý odkaz v jedné šabloně. Cílem je zavřít reakci tak, aby příští člověk poznal, jestli se má vrátit k běžné práci, nebo jestli opravdu začala nová smyčka.
+
+Příklad lokální staré stopy:
+
+```text
+Původní návratový signál:
+Vzor otevřeme, když se ve dvou různých pracovních průchodech během jednoho měsíce lidé znovu opřou o staré lokální opravy místo aktuálního pravidla.
+
+Co se opravdu stalo:
+Jedna starší šablona obsahovala kopii původní ověřovací poznámky.
+
+Skupina signálu:
+Lokální stará stopa.
+
+Reakce:
+Šablona byla opravena na kanonické pravidlo a stará poznámka smazána.
+
+Co je hotové:
+Dané pracovní místo už neodkazuje na historii opravy.
+
+Co zůstává zavřené:
+Širší vzor, staré ověřovací podklady i mimořádný dohled.
+
+Co se vrací do klidu:
+Kanonické pravidlo a běžná údržba šablon.
+
+Další signál:
+Beze změny. Jeden lokální nález ho nenaplnil.
+```
+
+Takový závěr je skoro nudný. To je dobře. Provozní klid často nevypadá jako velké rozhodnutí, ale jako správně zavřená drobná reakce.
+
+### Čtyři uzavírací stavy
+
+Po první reakci vyberte jeden ze čtyř uzavíracích stavů:
+
+- Klid pokračuje: reakce odstranila lokální stopu nebo slabé tření a návratový signál nenastal.
+- Pravidlo je doladěné: kanonické místo dostalo malou úpravu a nepotřebuje zvláštní ověřovací režim.
+- Vzor je znovu otevřený: návratový signál opravdu nastal a vznikla nová stop podmínka.
+- Vznikla nová otázka: situace připomínala starý vzor, ale příčina je jiná.
+
+Každý stav má jiný úklid.
+
+U pokračujícího klidu smažte nebo přepište jen nalezenou starou stopu. U doladěného pravidla aktualizujte kanonické místo a jedno nejbližší pracovní místo, kde se pravidlo používá. U znovuotevřeného vzoru založte novou kartu s dnešní realitou a jasně napište, které staré podklady nejsou rozhodovací. U nové otázky nenechávejte odkaz na starý vzor jako argument, že problém je už napůl vyřešený.
+
+Praktická věta pro uzavření:
+
+```text
+Stav po reakci:
+
+Uklizené místo:
+
+Aktuální zdroj pravdy:
+
+Co už neslouží jako důkaz:
+
+Další kontrola:
+- žádná / běžný rytmus / konkrétní datum / nová stop podmínka
+```
+
+### Kdy reakci nezvětšovat
+
+Reakce na návratový signál se zvětšuje hlavně ze tří důvodů: tým si není jistý, nechce zmeškat skutečný návrat problému, nebo má pocit, že když už se téma otevřelo, měla by se udělat pořádná kontrola. Jenže pořádná kontrola bez jasného důvodu je často jen nový provozní dluh.
+
+Reakci nezvětšujte, pokud platí aspoň dvě z těchto vět:
+
+- nález je jen v jednom pracovním místě;
+- kanonické pravidlo pořád odpovídá běžné práci;
+- oprava nevyžaduje změnu rolí, procesu ani nástrojů;
+- pro rozhodnutí stačí existující důkaz;
+- další sběr dat by jen uklidnil nervozitu, ne zlepšil rozhodnutí.
+
+V takové situaci stačí malá úprava a uzavření. Tým se nemusí tvářit, že ignoruje riziko. Naopak: bere riziko vážně tím, že ho nepřifukuje bez důkazu.
+
+Codyho komentář: provozní dospělost není v tom, že všechno otevřete "pro jistotu". Je v tom, že poznáte rozdíl mezi signálem, úklidem a obyčejným pocitem, že by tabulka ještě snesla jeden sloupec. Většinou nesnesla.
+
+### Privacy-first uzavření reakce
+
+Uzavření první reakce je dobré místo pro malý datový úklid. Pokud jste kvůli signálu otevřeli pomocnou poznámku, dočasný export, screenshot, ruční seznam nebo komentářové vlákno, hned rozhodněte, jestli má zůstat. Ve většině případů nemá.
+
+Privacy-first uzavření položte na čtyřech otázkách:
+
+- Jaký důkaz potřebujeme zachovat pro budoucí rozhodnutí?
+- Dá se zachovat jako anonymizovaná nebo zkrácená pracovní věta?
+- Které dočasné podklady mažeme po uzavření reakce?
+- Nevznikla kvůli signálu nová osobní evidence, která přežila svůj účel?
+
+Nízkodatový závěr může znít:
+
+```text
+Po reakci zůstává jen stavová věta v kanonickém pravidle. Dočasný screenshot staré šablony a pracovní komentář mažeme, protože už neslouží k rozhodnutí. Nevzniká evidence podle lidí ani nový měřicí bod.
+```
+
+Tím se privacy-first princip dostane do běžné práce, ne jen do právní stránky webu. Data se nemažou proto, že překáží. Mažou se proto, že už nemají účel.
+
+### Karta uzavření první reakce po klidu
+
+```text
+Uzavřený širší vzor:
+
+První návratový signál:
+
+Vybraná skupina signálu:
+
+Provedená reakce:
+
+Stav po reakci:
+- klid pokračuje / pravidlo je doladěné / vzor je znovu otevřený / vznikla nová otázka
+
+Aktuální zdroj pravdy:
+
+Uklizené pracovní místo:
+
+Co zůstává zavřené:
+
+Co už nepoužíváme jako důkaz:
+
+Dočasné podklady k odstranění:
+
+Další kontrola:
+
+Vlastník:
+```
+
+### Checklist uzavření první reakce
+
+- Je jasné, jestli návratový signál opravdu nastal?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je reakce uzavřená ve správném pracovním místě, ne jen v diskusi?
+- Pokud klid pokračuje, nezůstal po reakci nový mimořádný dohled?
+- Pokud se pravidlo doladilo, je upravené kanonické místo?
+- Pokud se vzor otevřel znovu, má dnešní stop podmínku a vlastníka?
+- Pokud vznikla nová otázka, nezneužívá starý vzor jako falešný důkaz?
+- Uklidili jsme dočasné screenshoty, exporty, komentáře nebo kopie?
+- Nevznikla osobní evidence používání pravidla?
+- Umí tým jednou větou říct, co je po reakci hotové a co zůstává zavřené?
+
+Dobře uzavřená reakce chrání klidový provoz. Neznamená ignorovat signály. Znamená dát každému signálu přiměřenou odpověď a potom uklidit po vlastní práci. V malém týmu je to rozdíl mezi živým systémem a nekonečnou vrstvou starých poznámek.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -182325,3 +182488,4 @@ První měsíc v tichém rytmu je zkouška, jestli tým umí věci nejen řešit
 - 2026-06-04: Doplněna úvodní podkapitola o uzavření drobné úpravy po první běžné údržbě: čtyři výsledné stavy, dočištění stejného místa, rozlišení širšího vzoru, privacy-first úklid, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o tom, kdy se z drobných úprav stane širší vzor: rozlišení náhody od opakované příčiny, nejmenší společná oprava, privacy-first ověření, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o přechodu uzavřeného širšího vzoru do klidového provozu: druhý běžný průchod, odstranění mimořádné agendy, zpřesnění návratového signálu, privacy-first úklid, karta a checklist.
+- 2026-06-06: Doplněna úvodní podkapitola o uzavření první reakce na návratový signál po klidu: čtyři uzavírací stavy, pravidla pro nezvětšování reakce, privacy-first úklid, karta a checklist.
