@@ -185220,8 +185220,200 @@ Workshop končí, když je jasné, jestli se pravidlo vrací do obyčejného rev
 
 Uzavření prvního běžného review má pravidlu vrátit obyčejnost. Když review nic neotevřelo, nechte ho skončit. Když něco otevřelo, vyberte jednu reakci a zavřete zbytek. Tím se z mimořádně opečované změny konečně stane normální součást provozu.
 
+## Druhé běžné review po uzavření prvního review
+
+Druhé běžné review má jinou roli než první. První review ověřuje, jestli pravidlo po stabilizaci přežije návrat do obyčejného rytmu. Druhé review ověřuje, jestli se z pravidla nestala tichá výjimka: něco, co se sice formálně nehlídá zvlášť, ale v praxi kolem toho tým pořád vytváří zvláštní poznámky, doplňkové kontroly nebo opatrné obchůzky.
+
+Základní otázka druhého review zní:
+
+```text
+Používáme pravidlo opravdu jako běžnou součást práce, nebo kolem něj pořád držíme skrytou zvláštní péči?
+```
+
+Tato otázka je praktická hlavně u věcí, které dřív prošly větší opravou: formuláře, onboarding, obchodní šablony, reporting, analytika, zákaznická komunikace, retenční úklid nebo interní standardy. Tým může říkat "už je to normální", ale normálnost se pozná až podle toho, že nikdo nemusí sahat do staré historie, připravovat zvláštní kontrolu ani přidávat data jen kvůli jistotě.
+
+Druhé review proto nezačínejte novým hodnocením kvality pravidla. Začněte pozorováním běžného průchodu:
+
+```text
+Kde se pravidlo od posledního review přirozeně použilo:
+
+Kdo ho použil:
+
+Co k tomu potřeboval:
+
+Sáhl někdo do staré historie:
+
+Vznikla zvláštní kontrola, evidence nebo ruční pomoc:
+
+Co by se stalo, kdyby pravidlo nebylo samostatně připomenuté:
+```
+
+Pokud poslední otázka ukáže, že by se nic nerozbilo, pravidlo se pravděpodobně usadilo. Pokud by bez připomenutí někdo otevřel starý dokument, volal původního vlastníka nebo vytvořil nový export, pravidlo ještě není úplně běžné. To nemusí být katastrofa. Je to jen přesnější signál než obecná věta "funguje".
+
+### Co druhé review nehledá
+
+Druhé review nemá znovu dokazovat, že původní změna byla správná. Nemá otevírat historickou debatu, jestli se měl formulář, onboarding nebo standard řešit jinak. A nemá hledat dokonalost. Hledá jen to, jestli pravidlo žije v normálním pracovním místě.
+
+Typické chyby:
+
+- znovu číst celý původní rozhodovací log místo aktuálního pravidla;
+- porovnávat dnešní použití se všemi historickými variantami;
+- sbírat příklady "pro jistotu", i když review nepotřebuje nový důkaz;
+- přidávat kontrolní otázku do každého týdenního meetingu;
+- dělat z jednoho drobného tření další systémovou opravu.
+
+Správný rozsah je menší. Podívejte se na jeden nebo dva běžné průchody a odpovězte, jestli člověk našel správné pravidlo bez mimořádné pomoci. Pokud ano, druhé review může být velmi krátké. Stabilita se nemá trestat další administrativou.
+
+Codyho komentář: když něco funguje potichu, nechte to potichu fungovat. Ne každé pravidlo potřebuje dort, diplom a dashboard. Někdy stačí, že se už nikdo neptá, kde je pravda.
+
+### Čtyři výsledky druhého review
+
+Po druhém běžném review vyberte jeden ze čtyř stavů:
+
+- Stabilně běžné: pravidlo se použilo bez zvláštní pomoci a další signály patří do normálního review.
+- Běžné s jednou hranou: pravidlo funguje, ale jedno místo ještě mate, například název, odkaz nebo krátký příklad.
+- Skrytá zvláštní péče: pravidlo vypadá stabilně, ale tým kolem něj drží pomocné kontroly, staré poznámky nebo ruční připomínání.
+- Nový samostatný signál: review ukázalo jiné téma, které nemá být přilepené ke starému pravidlu.
+
+Stav "běžné s jednou hranou" má vést k jedné opravě, ne k nové revizi. Například přejmenovat odkaz v checklistu, zkrátit příklad, doplnit návratový signál nebo odstranit starou poznámku v šabloně. Pokud by oprava vyžadovala nové role, nový proces nebo nové měření, pravděpodobně nejde o jednu hranu.
+
+Stav "skrytá zvláštní péče" je citlivější. Tam nejdřív zapište, co přesně se pořád děje navíc:
+
+```text
+Skrytá zvláštní péče:
+
+Kdo ji dělá:
+
+Kdy vzniká:
+
+Čemu má zabránit:
+
+Je pořád potřebná:
+
+Jak ji zrušíme nebo převedeme do běžného místa:
+```
+
+Často se ukáže, že zvláštní péče přežívá jen ze zvyku. Někdo pořád připomíná pravidlo v chatu, někdo drží pomocný seznam, někdo se ptá původního vlastníka, i když aktuální pravidlo už stačí. V takové chvíli není potřeba vylepšovat pravidlo. Je potřeba ukončit obchůzku.
+
+### Jak ukončit skrytou zvláštní péči
+
+Skrytou péči nezavírejte mlhavě. Nestačí říct "už to nebudeme dělat". Přesuňte odpovědnost do konkrétního pracovního místa a zbytek odstraňte.
+
+Příklad:
+
+```text
+Skrytá péče:
+Marketing owner pořád kontroluje každý nový formulář ručně, i když pravidlo je v checklistu.
+
+Proč vznikla:
+Po původním incidentu se tým bál návratu povinného telefonu bez důvodu.
+
+Co platí teď:
+Checklist obsahuje aktuální pravidlo i návratový signál.
+
+Ukončení:
+Ruční kontrola ownerem končí. Další signály jdou do měsíční kontroly formulářů.
+
+Co mažeme:
+Pomocný seznam nových formulářů a osobní připomínku v kalendáři.
+
+Co dál nesbíráme:
+Nevzniká evidence každého použití pravidla ani seznam lidí, kteří formulář upravovali.
+```
+
+Tento zápis je užitečný, protože ukončení dělá viditelným. Bez něj se skrytá péče snadno vrátí jako "jen rychlá kontrola". Rychlé kontroly jsou zrádné: každá je malá, ale dohromady drží starý problém při životě.
+
+### Privacy-first kontrola druhého review
+
+Druhé review je dobrá chvíle zkontrolovat nejen pravidlo, ale i zbytky opatrnosti. Zbytky opatrnosti často vytvářejí datovou stopu: pomocné seznamy, screenshoty, exporty, poznámky k jednotlivým poptávkám, kopie šablon, ruční auditní tabulky nebo osobní úkoly v kalendáři.
+
+Privacy-first otázka proto zní:
+
+```text
+Které podpůrné stopy existují jen proto, že jsme pravidlu ještě úplně nevěřili?
+```
+
+Co udělat:
+
+- ponechat aktuální pravidlo v kanonickém místě;
+- ponechat jen poslední relevantní výsledek review, pokud má rozhodovací hodnotu;
+- zkrátit historické důkazy na důvod pravidla;
+- smazat dočasné exporty, screenshoty a pomocné seznamy;
+- zrušit osobní připomínky, pokud je kontrola už v běžném rytmu;
+- nepřidávat novou evidenci použití pravidla jen proto, že review proběhlo.
+
+Privacy-first provoz není jen "nesbírat citlivá data". Je to i schopnost ukončit stopy, které vznikly během opatrného přechodu. Když pravidlo dospěje, nemá dál vláčet všechny své dětské poznámky.
+
+### Karta druhého běžného review
+
+```text
+Téma nebo pravidlo:
+
+Kanonické místo:
+
+Kde se pravidlo od posledního review přirozeně použilo:
+
+Kdo ho použil:
+
+Co k tomu potřeboval:
+
+Byla potřeba stará historie:
+
+Vznikla zvláštní kontrola nebo ruční pomoc:
+
+Výsledek:
+- stabilně běžné
+- běžné s jednou hranou
+- skrytá zvláštní péče
+- nový samostatný signál
+
+Jedna případná lokální oprava:
+
+Co ukončujeme:
+
+Kam půjdou další signály:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Co dál nesbíráme:
+
+Vlastník běžného rytmu:
+
+Datum další přirozené kontroly:
+```
+
+Kartu použijte jen tehdy, když review něco odhalilo. Pokud pravidlo prošlo druhým review tiše a bez tření, stačí krátká věta v běžném záznamu. Stabilita má snižovat počet dokumentů, ne vyrábět další.
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: vyberte jeden běžný průchod od posledního review.
+2. Minuta 1-2: zjistěte, jestli člověk použil kanonické místo bez staré historie.
+3. Minuta 2-3: pojmenujte výsledek druhého review jedním ze čtyř stavů.
+4. Minuta 3-4: pokud existuje skrytá péče, určete, co přesně končí.
+5. Minuta 4-5: zapište privacy-first úklid a kam půjdou další signály.
+
+Workshop končí ve chvíli, kdy pravidlo buď zůstává v běžném rytmu, nebo má jednu lokální opravu. Pokud vznikne nové téma, oddělte ho do nové otázky. Druhé review nemá být zadními dveřmi pro návrat celé staré historie.
+
+### Checklist druhého běžného review
+
+- Proběhlo review na reálném běžném průchodu, ne na hypotetické debatě?
+- Našel člověk pravidlo v kanonickém místě bez zvláštní pomoci?
+- Nesahali jsme do staré historie jen ze zvyku?
+- Vybrali jsme jeden ze čtyř výsledků druhého review?
+- Pokud existuje jedna hrana, má jednu lokální opravu?
+- Pokud existuje skrytá zvláštní péče, víme, kdo ji dělá a proč?
+- Je jasně napsané, co po review končí?
+- Jdou další signály do běžného rytmu, ne do nové samostatné evidence?
+- Pokud vznikl nový signál, oddělili jsme ho od starého pravidla?
+- Mažeme nebo zkracujeme dočasné exporty, screenshoty, pomocné seznamy a staré pracovní kopie?
+- Nevzniká sledování použití pravidla bez konkrétního rozhodnutí?
+- Umí tým říct, proč pravidlo už nepotřebuje mimořádnou péči?
+
+Druhé běžné review je malé, ale důležité. První review vrací pravidlo do běžné práce. Druhé review kontroluje, jestli se tam opravdu udrželo bez skrytého doprovodu. Pokud ano, nejlepší výsledek je klid: pravidlo žije v kanonickém místě, další signály mají normální trasu a staré pomocné stopy mizí.
+
 ## Pracovní log
 
+- 2026-06-06: Doplněna úvodní podkapitola o druhém běžném review po uzavření prvního review: kontrola skryté zvláštní péče, čtyři výsledné stavy, ukončení obchůzek, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního běžného review po stabilním rytmu: čtyři uzavírací stavy, lokální korekce, zkrácení staré paměti, oddělení nové otázky, privacy-first úklid, karta, mini workshop a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o prvním běžném review po stabilním běžném rytmu: zařazení do existující agendy, čtyři výsledky review, prevence nové evidence, privacy-first kontrola, karta, mini workshop a checklist.
