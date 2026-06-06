@@ -182254,8 +182254,164 @@ Když workshop začne řešit, jak pravidlo vylepšit, zastavte ho. Vylepšení 
 
 Uzavřené dlouhodobé review nemá být vidět každý týden. Má se projevit tím, že lidé najdou pravidlo ve správnou chvíli, nepřidají zbytečný dohled a nebojí se položku nechat být. To je nenápadná, ale velmi praktická disciplína: dobrý systém nejen ví, kdy jednat, ale taky kdy už opravdu skončit.
 
+## První návrat po trvalém minimu
+
+Trvalé minimum neznamená, že se položka už nikdy nevrátí. Znamená jen, že se nevrací podle nálady, zvyku ani neurčité nervozity. Když po uzavřeném dlouhodobém review přijde nový signál, tým ho má umět zpracovat bez toho, aby znovu otevřel celou historii, obnovil starý dohled nebo přidal novou kontrolní vrstvu.
+
+První otázka proto není "co všechno bychom měli znovu prověřit". První otázka je:
+
+```text
+Nastal návratový signál, který jsme si po review opravdu zapsali?
+```
+
+Pokud odpověď zní ne, položku neotevírejte. Může jít o nový problém, lokální chybu, slabý odkaz, špatně pochopené pravidlo nebo jen pracovní šum. To všechno může potřebovat reakci, ale nemusí dědit váhu starého tématu.
+
+Pokud odpověď zní ano, pořád neotevírejte celý minulý proces. Otevřete nejmenší pracovní místo, kde se signál projevil, a ověřte, jestli stačí lokální oprava, úzká změna pravidla, nebo jestli se opravdu vrací původní problém.
+
+### Čtyři typy návratu
+
+Po trvalém minimu rozlišujte čtyři návraty:
+
+- Šum: někdo si vzpomněl na staré téma, ale není tu nový důkaz.
+- Lokální stopa: pravidlo platí, jen se někde objevila stará poznámka, špatný odkaz nebo nejasná věta.
+- Úzký návrat: návratový signál nastal, ale týká se jednoho místa, jedné šablony, jednoho formuláře nebo jednoho typu předání.
+- Skutečný návrat tématu: problém se opakuje napříč místy a původní pravidlo už nestačí chránit práci.
+
+Toto rozlišení je důležité hlavně proto, že každý typ má jinou cenu. Šum se neřeší prací. Lokální stopa se uklízí tam, kde vznikla. Úzký návrat dostane malou kartu. Skutečný návrat tématu si zaslouží novou rozhodovací otázku, ale i ta má začít od dnešní reality, ne od historického seznamu všech možností.
+
+Příklad:
+
+```text
+Položka v trvalém minimu:
+Telefon ve formulářích je volitelný, pokud není nutný pro slíbený další krok.
+
+Návratový signál:
+Nový formulář udělá telefon povinný bez jasného důvodu.
+
+Co se stalo:
+Na jedné nové landing page se telefon objevil jako povinné pole, protože někdo zkopíroval starou šablonu.
+
+Typ návratu:
+Lokální stopa.
+
+Reakce:
+Opravit šablonu landing page a odstranit starou kopii. Neotevírat nové review všech formulářů.
+
+Privacy-first dopad:
+Nevzniká nové měření vyplňování telefonu ani export formulářových průchodů.
+```
+
+Stejná situace by se změnila na úzký návrat ve chvíli, kdy by nové landing pages opakovaně používaly povinný telefon kvůli nejasné formulaci v kanonickém checklistu. A na skutečný návrat tématu by přerostla až tehdy, kdyby se ukázalo, že obchodní proces už opravdu potřebuje jiný první kontakt a současné pravidlo přestalo odpovídat práci.
+
+### Jak reagovat bez návratu staré agendy
+
+První reakce má mít pevný strop. Než začnete cokoliv upravovat, napište:
+
+```text
+Co se vrátilo:
+
+Kde se to projevilo:
+
+Je to původní návratový signál:
+- ano / ne / částečně
+
+Typ návratu:
+- šum / lokální stopa / úzký návrat / skutečný návrat tématu
+
+Jedna povolená reakce:
+
+Co výslovně neotevíráme:
+
+Jaká data kvůli tomu dál nesbíráme:
+```
+
+Tento zápis zabraňuje tomu, aby drobný návrat automaticky obnovil starou péči. Pokud je povolená reakce "opravit jednu šablonu", nepatří do ní audit všech šablon. Pokud je reakce "ověřit jeden formulář", nepatří do ní nový dashboard. Pokud je reakce "zapsat nový signál", nepatří do ní změna procesu bez vlastníka.
+
+Codyho komentář: staré téma je jako kabel v šuplíku. Jakmile za něj zatáhnete, najednou máte v ruce tři nabíječky, adaptér z roku 2017 a otázku, proč jste vlastně otevřeli šuplík. U pravidel je to podobné. Tahejte jen za konkrétní konec.
+
+### Privacy-first brzda návratu
+
+Návrat po trvalém minimu je citlivý okamžik pro datovou stopu. Tým může mít pocit, že když se něco vrátilo, musí se to začít víc měřit. Jenže první návrat často nepotřebuje víc dat. Potřebuje lepší rozlišení typu signálu.
+
+Před přidáním jakéhokoliv měření se zeptejte:
+
+- Stačí zkontrolovat místo, kde se signál objevil?
+- Stačí opravit zdroj pravdy nebo odstranit starou kopii?
+- Stačí krátká poznámka o výsledku místo exportu?
+- Je nový údaj nutný pro rozhodnutí, nebo jen uklidňuje nejistotu?
+- Nevzniká z jednoho návratu nový dohled nad lidmi, formuláři nebo zákaznickými průchody?
+
+Privacy-first odpověď může znít:
+
+```text
+Návrat řešíme lokálně. Nepřidáváme nový tracker, nové CRM pole, kontrolní export ani pravidelný report. Uchováme jen závěr: šlo o starou kopii šablony, kanonické pravidlo zůstává beze změny.
+```
+
+To je dobrý výsledek. Ne proto, že se nic nestalo, ale proto, že se stalo přesně tolik, kolik signál unesl.
+
+### Karta prvního návratu po trvalém minimu
+
+```text
+Položka:
+
+Kanonická věta:
+
+Původní návratový signál:
+
+Co se teď stalo:
+
+Kde se to projevilo:
+
+Typ návratu:
+- šum / lokální stopa / úzký návrat / skutečný návrat tématu
+
+Rozhodnutí:
+- neotevřít / uklidit lokálně / otevřít úzkou kartu / otevřít novou otázku
+
+Jedna nejbližší reakce:
+
+Co zůstává v trvalém minimu:
+
+Co výslovně neotevíráme:
+
+Privacy-first hranice:
+
+Co smažeme, zkrátíme nebo anonymizujeme:
+
+Datum dalšího návratu jen pokud je potřeba:
+```
+
+Karta má být krátká. Pokud se začne plnit dlouhým historickým kontextem, je to signál, že tým znovu otevírá minulost místo současného pracovního místa.
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte kanonickou větu a původní návratový signál.
+2. Minuta 1-2: popište, co se teď skutečně stalo a kde.
+3. Minuta 2-3: vyberte typ návratu: šum, lokální stopa, úzký návrat, nebo skutečný návrat tématu.
+4. Minuta 3-4: napište jednu povolenou reakci a jednu věc, kterou neotevíráte.
+5. Minuta 4-5: zapište privacy-first hranici.
+6. Minuta 5-6: rozhodněte, jestli vzniká úzká karta, nebo se položka vrací zpět do trvalého minima.
+
+Workshop končí rozhodnutím, ne seznamem nápadů. Pokud vznikne pět možných reakcí, vraťte se k typu návratu. Buď je signál slabší, než se zdá, nebo už nejde o první návrat po trvalém minimu, ale o novou pracovní otázku.
+
+### Checklist prvního návratu
+
+- Našli jsme původní kanonickou větu a návratový signál?
+- Víme, co se teď reálně stalo a kde se to projevilo?
+- Rozlišili jsme šum, lokální stopu, úzký návrat a skutečný návrat tématu?
+- Neotevíráme staré review jen proto, že se objevila jedna chyba?
+- Má reakce jedno nejbližší pracovní místo?
+- Je jasně napsané, co zůstává v trvalém minimu?
+- Nevzniká nový tracker, export, CRM pole, report ani kontrola lidí?
+- Uklízíme jen stopy, které ztratily účel?
+- Pokud vzniká nová otázka, vychází z dnešní reality, ne z historické agendy?
+- Umí tým jednou větou říct, proč je reakce přiměřená signálu?
+
+První návrat po trvalém minimu je test zralosti systému. Nejde o to dokázat, že staré rozhodnutí bylo perfektní. Jde o to zareagovat přesně: malý signál malou reakcí, skutečný návrat novou otázkou a šum žádnou prací. Tak zůstává systém živý, ale ne nervózní.
+
 ## Pracovní log
 
+- 2026-06-06: Doplněna úvodní podkapitola o prvním návratu po trvalém minimu: rozlišení šumu, lokální stopy, úzkého návratu a skutečného návratu tématu, reakce bez obnovy staré agendy, privacy-first brzda, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review do trvalého minima: ponechané minimum, úklid pracovních stop, návratová věta, uzavírací zpráva, privacy-first omezení dat, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním dlouhodobém review tichého rytmu: důvody otevření review, čtyři výsledné stavy, privacy-first kontrola bez nového dohledu, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o převodu prvního tichého měsíce do dlouhodobého tichého rytmu: ponechané minimum, ukončení přechodové kontroly, tři převodní stavy, privacy-first úklid, karta, mini workshop a checklist.
