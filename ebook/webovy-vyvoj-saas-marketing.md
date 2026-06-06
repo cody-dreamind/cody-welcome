@@ -184578,7 +184578,249 @@ Workshop končí, když někdo umí říct: "Příště se to řeší tady, tím
 
 Uzavření druhého měsíce je poslední pojistka proti nekonečné péči o opravenou věc. Když pravidlo drží, vraťte mu obyčejnost. Když nedrží, oddělte nový problém a dejte mu vlastní hranici. Praktická práce není v tom, že všechno pořád sledujete. Praktická práce je v tom, že víte, kdy už sledovat přestat.
 
+## První běžné review po stabilním běžném rytmu
+
+Když je téma po dvou měsících uzavřené do stabilního běžného rytmu, nemá dostat další zvláštní péči. Má se objevit až tam, kde se stejně kontrolují podobné věci: v měsíčním review webu, produktové údržbě, redakčním plánování, obchodním vyhodnocení nebo provozní kontrole. První běžné review po stabilizaci proto není návrat staré větve. Je to krátké ověření, že pravidlo umí sedět mezi ostatními pravidly bez toho, aby na sebe pořád svítilo.
+
+Základní otázka zní:
+
+```text
+Objevilo se stabilizované pravidlo v běžném review jen jako normální součást práce, nebo znovu zabírá samostatnou pozornost?
+```
+
+Tato otázka je záměrně malá. Neptá se, jestli bylo původní rozhodnutí nejlepší možné, jestli by nešlo vymyslet chytřejší řešení ani jestli by se pravidlo nemělo rovnou proměnit v nový standard pro všechno. Ptá se jen na provozní chování: je pravidlo dohledatelné, použitelné a přiměřeně tiché?
+
+Pokud odpověď zní ano, review končí jednou větou. Pokud odpověď zní ne, opravuje se nejbližší pracovní místo. Stabilní rytmus se neotevírá celý jen proto, že review našlo jednu hranu.
+
+### Jak review zařadit
+
+Pravidlo nezařazujte do agendy jako samostatný bod s vlastní historií. Přidejte ho k existujícímu místu, kde se stejně dělá podobné rozhodnutí.
+
+Příklady:
+
+- Pravidlo pro telefon ve formuláři patří do části review, kde se kontrolují nové nebo změněné formuláře.
+- Pravidlo pro první hodnotu v onboardingu patří do kontroly nových produktových změn.
+- Pravidlo pro anonymizaci ukázek patří do redakční kontroly obsahu a case studies.
+- Pravidlo pro rušení dočasných exportů patří do provozního úklidu po kampani nebo sprintu.
+- Pravidlo pro návratový signál patří do rozhodovacího logu, ne do nové tabulky sledování.
+
+Dobré zařazení vypadá takto:
+
+```text
+Běžné review:
+Měsíční kontrola webu.
+
+Místo v agendě:
+Nové a změněné formuláře.
+
+Stabilizované pravidlo:
+Telefon je povinný jen tehdy, když je nutný pro slíbený další krok a má datum ověření.
+
+Kontrola:
+U nových formulářů stačí odpovědět, jestli pravidlo platí nebo jestli vznikl nový signál.
+```
+
+Špatné zařazení:
+
+```text
+Samostatný bod:
+Znovu projít historii telefonního pole, staré rozhodnutí, všechny výjimky a možné nové přístupy.
+```
+
+První varianta drží rytmus. Druhá varianta z normálního review udělá muzeum starého problému.
+
+### Tři signály zdravého review
+
+Zdravé první review po stabilizaci má tři signály:
+
+- Práce začíná v aktuálním kanonickém místě.
+- Rozhodnutí jde udělat bez starých podkladů.
+- Z review nevzniká nová samostatná evidence.
+
+Příklad:
+
+```text
+Téma:
+Povinný telefon ve formulářích.
+
+Běžné review:
+Měsíční kontrola webu.
+
+Co se kontrolovalo:
+Dva nové formuláře a jedna úprava staré landing page.
+
+Pozorování:
+Tým použil checklist formulářů. Telefon zůstal volitelný u obecné poptávky a povinný jen u formuláře, kde byl slíbený telefonický audit. U povinného telefonu je datum návratu.
+
+Závěr:
+Pravidlo funguje jako běžná součást review. Žádná samostatná kontrola nevzniká.
+```
+
+Tady není potřeba vracet se k tomu, proč pravidlo kdysi vzniklo. Důležité je, že současný systém vede současnou práci.
+
+### Čtyři výsledky běžného review
+
+Po prvním běžném review vyberte jeden stav:
+
+- Tiché držení: pravidlo se použilo nebo se přirozeně neobjevilo a není potřeba nic měnit.
+- Lehká korekce místa: pravidlo je správné, ale jeho umístění, odkaz nebo příklad trochu brzdí práci.
+- Slabý návrat staré paměti: lidé znovu sahají po staré historii, i když aktuální pravidlo stačí.
+- Nový pracovní signál: review ukázalo problém, který má vlastní důvod a nepatří do staré větve.
+
+Reakce:
+
+```text
+Stav:
+Tiché držení
+Reakce:
+Zapsat bez akce nebo nezapisovat vůbec, pokud review žádný relevantní průchod nemělo.
+
+Stav:
+Lehká korekce místa
+Reakce:
+Přesunout odkaz, doplnit jednu větu nebo odstranit starý příklad.
+
+Stav:
+Slabý návrat staré paměti
+Reakce:
+Vrátit tým k aktuálnímu kanonickému místu a zkrátit starou směrovku, která láká do historie.
+
+Stav:
+Nový pracovní signál
+Reakce:
+Založit novou otázku se stop podmínkou. Stabilizované pravidlo zůstává zavřené.
+```
+
+Stav `Slabý návrat staré paměti` je častý u týmů, které si prošly dlouhou opravou. Staré podklady působí uklidňujícím dojmem, protože v nich je hodně práce. Jenže hodně práce není totéž co aktuální užitečnost. Pokud aktuální pravidlo stačí, starou směrovku zkraťte na závěr a nechte historii spát.
+
+Codyho komentář: když se v běžném review pořád otevírá starý román, pravidlo není tiché. Je to proces, který si nosí vlastní soundtrack. Hezké pro drama, horší pro práci.
+
+### Jak zabránit nové evidenci
+
+První běžné review po stabilizaci svádí k drobné pasti: "budeme si jen zapisovat, jestli se pravidlo použilo". To zní nevinně, dokud z toho nevznikne tabulka lidí, výstupů, datumů, poznámek a výjimek, kterou nikdo nepotřebuje pro rozhodnutí.
+
+Použijte jednoduchou brzdu:
+
+```text
+Jaké rozhodnutí tato evidence umožní?
+Kdy evidenci smažeme?
+Stačí místo evidence jednovětý závěr v běžném review?
+```
+
+Pokud neumíte odpovědět, evidenci nezakládejte. U stabilizovaného pravidla obvykle stačí závěr typu:
+
+```text
+Pravidlo se v review použilo bez staré historie. Další signály zůstávají v běžném měsíčním review.
+```
+
+Nebo:
+
+```text
+Téma se v tomto review neobjevilo. Nevzniká žádná samostatná kontrola.
+```
+
+Obě věty jsou lepší než nová tabulka. Věta uzavírá rozhodnutí. Tabulka často jen čeká, až ji někdo začne krmit.
+
+### Privacy-first kontrola review
+
+Privacy-first pravidlo je jednoduché: běžné review má hodnotit výstupy a rozhodnutí, ne chování lidí. Nesledujte, kdo otevřel dokument, kdo kolikrát použil checklist, kdo se ptal na výjimku nebo kdo formulář poslal ke kontrole. Pokud potřebujete zlepšit pravidlo, stačí anonymizovaný popis pracovního tření.
+
+Zapisujte:
+
+- stav pravidla v review;
+- případnou malou úpravu kanonického místa;
+- nový pracovní signál, pokud opravdu vznikl;
+- co dál nesbíráte.
+
+Nezapisujte:
+
+- osobní evidenci použití pravidla;
+- přehled lidí, kteří se ptali;
+- screenshoty pracovních obrazovek bez účelu;
+- exporty zákaznických dat jen pro kontrolu pravidla;
+- nové analytické eventy kvůli jednomu stabilizovanému pravidlu.
+
+Krátký privacy-first zápis:
+
+```text
+První běžné review hodnotilo jen hotové výstupy. Nevedeme osobní evidenci použití pravidla, nezakládáme nový report a ponecháváme jen anonymizovaný závěr v běžné agendě.
+```
+
+### Karta prvního běžného review
+
+```text
+Téma nebo pravidlo:
+
+Kanonické místo:
+
+Běžné review:
+
+Místo v agendě review:
+
+Objevilo se téma přirozeně:
+- ano / ne
+
+Stačilo aktuální kanonické místo:
+- ano / ne / téma se neobjevilo
+
+Byla potřeba stará historie:
+- ano / ne
+
+Vznikla nebo hrozila nová evidence:
+- ano / ne
+
+Výsledek review:
+- tiché držení
+- lehká korekce místa
+- slabý návrat staré paměti
+- nový pracovní signál
+
+Jedna reakce:
+
+Co se mění v kanonickém místě:
+
+Co zkracujeme ve staré historii:
+
+Kam půjdou další signály:
+
+Co dál nesbíráme:
+
+Vlastník běžného review:
+```
+
+Karta má být použitá jen tehdy, když review opravdu něco otevřelo. Pokud téma drží a nevznikla žádná změna, stačí krátká věta v agendě nebo vůbec nic. Někdy je nejčistší evidence ta, kterou nevytvoříte.
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: najděte, kde se téma v běžném review přirozeně objevilo.
+2. Minuta 1-2: ověřte, jestli stačilo aktuální kanonické místo.
+3. Minuta 2-3: vyberte jeden ze čtyř výsledků review.
+4. Minuta 3-4: určete jednu reakci nebo zapište "bez akce".
+5. Minuta 4-5: rozhodněte, co se dál nebude sbírat ani samostatně hlídat.
+
+Workshop nesmí skončit novým pravidelným bodem jen proto, že téma bylo kdysi důležité. Důležitost už se proměnila do kanonického místa. Běžné review má ověřit, že toto místo funguje, ne pořádat výroční sraz starých argumentů.
+
+### Checklist prvního běžného review
+
+- Je téma zařazené do existujícího review, ne do nové zvláštní agendy?
+- Víme, kde je kanonické místo?
+- Objevilo se téma přirozeně, nebo ho uměle nevytahujeme?
+- Stačilo aktuální pravidlo bez staré historie?
+- Pokud vzniklo tření, týká se nejbližšího pracovního místa?
+- Vybrali jsme jeden ze čtyř výsledků review?
+- Pokud pravidlo tiše drží, nepřidáváme další kontrolu?
+- Pokud je potřeba korekce, je malá a konkrétní?
+- Pokud se vrací stará paměť, zkracujeme směrovku do historie?
+- Pokud vznikl nový signál, má vlastní otázku a stop podmínku?
+- Nezakládáme novou evidenci použití pravidla bez jasného rozhodnutí?
+- Nevedeme osobní stopu lidí, kliků, dotazů ani ručních kontrol?
+- Mažeme nebo zkracujeme pomocné podklady, které už nemají účel?
+
+První běžné review po stabilním rytmu je dobré tehdy, když skoro nic nepřinese. To není promarněná práce. Je to důkaz, že předchozí úsilí se konečně změnilo v normální provoz. A normální provoz má jednu krásnou vlastnost: nechce být středem pozornosti.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o prvním běžném review po stabilním běžném rytmu: zařazení do existující agendy, čtyři výsledky review, prevence nové evidence, privacy-first kontrola, karta, mini workshop a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření druhého měsíce do stabilního běžného rytmu: čtyři uzavírací stavy, propsání závěru do kanonického místa, hranice mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 
