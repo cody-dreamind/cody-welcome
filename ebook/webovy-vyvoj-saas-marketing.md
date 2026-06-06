@@ -181372,8 +181372,176 @@ Pokud workshop začne řešit nové nápady, zastavte ho. Nový nápad může b�
 
 Uzavření druhého běžného review je okamžik, kdy se položka přestane chovat jako téma a začne se chovat jako normální součást provozu. Má svoje místo, svoje pravidlo a svůj návratový signál. Nemá vlastní nervozitu. To je dobrý konec.
 
+## První měsíc v tichém rytmu
+
+Po uzavření druhého běžného review přichází fáze, která se v týmech snadno podcení: první měsíc, kdy položka nemá vlastní kontrolu, vlastní bod agendy ani vlastní drobnou nervozitu. Pokud se během něj nic zvláštního nestane, je to dobrá zpráva. Neznamená to ale, že tým má na konci měsíce uspořádat slavnostní audit klidu. Znamená to jen, že normální provoz unesl pravidlo bez další vrstvy.
+
+Otázka prvního tichého měsíce zní:
+
+```text
+Zůstala položka během prvního měsíce součástí běžné práce, aniž by kolem ní vznikla nová kontrola, nový důkazní balík nebo nový datový tok?
+```
+
+Tato otázka je záměrně úzká. Neptá se, jestli by se pravidlo dalo vylepšit, jestli by se dalo měřit přesněji nebo jestli by se z něj nedal udělat nový interní standard pro půl firmy. Ptá se jen, jestli uzavření opravdu vydrželo první normální období. To je prakticky důležitější než další nápady.
+
+Začněte krátkým zápisem:
+
+```text
+Položka [název] byla po uzavření druhého běžného review ponechána v tichém rytmu. Během prvního měsíce sledujeme pouze to, zda nastal návratový signál [signál] nebo vznikl skrytý dohled.
+```
+
+Příklad:
+
+```text
+Položka "telefon není povinné pole v prvním kontaktním formuláři" byla po uzavření druhého běžného review ponechána v tichém rytmu. Během prvního měsíce sledujeme pouze to, zda se telefon znovu objeví jako povinné pole před prvním kontaktem nebo zda tým začne formuláře ručně hlídat bokem.
+```
+
+Takový zápis neotevírá práci. Jen nastavuje hranici, aby první měsíc nebyl záminkou pro návrat staré pozornosti v jiném kabátě.
+
+### Co během měsíce nesledovat
+
+Tichý rytmus se snadno pokazí tím, že tým začne sledovat všechno "jen pro jistotu". U uzavřené položky ale nepotřebujete vědět, kolikrát na ni někdo pomyslel, kolik lidí ji vidělo, kolik výstupů teoreticky ovlivnila ani jestli se k ní v komentářích vrátila náhodná poznámka.
+
+Nesledujte:
+
+- počet běžných výstupů, pokud z něj nevznikne rozhodnutí;
+- reakce jednotlivých lidí, pokud nejde o návratový signál;
+- staré varianty, které už byly uzavřené;
+- nové screenshoty pro potvrzení, že pravidlo stále platí;
+- ruční seznam "případů k pozorování", pokud neexistuje konkrétní signál;
+- zákaznické příklady, které nejsou potřeba k rozhodnutí.
+
+Sledujte jen dvě věci:
+
+- návratový signál, který byl předem pojmenovaný;
+- vznik skrytého dohledu, který by z tichého rytmu znovu udělal neformální kontrolu.
+
+Tohle omezení je trochu nepohodlné, protože opatrnost se ráda tváří jako profesionalita. Jenže provozní dospělost není v tom, že umíte sledovat všechno. Je v tom, že víte, co už sledovat nemusíte.
+
+### Jak poznat zdravý tichý měsíc
+
+Zdravý tichý měsíc nevypadá jako prázdnota. Vypadá jako normální práce, ve které se pravidlo občas použije, ale nevolá na sebe pozornost.
+
+Typické signály zdravého měsíce:
+
+- pravidlo se použilo v běžném checklistu nebo šabloně bez zvláštní připomínky;
+- nikdo nevytvořil nový úkol jen kvůli dané položce;
+- návratový signál nenastal;
+- pokud se objevil dotaz, vyřešilo ho kanonické místo, ne stará historie;
+- nevznikl nový export, tabulka, screenshotová složka ani ruční schvalování;
+- tým umí říct, kdy by se položka otevřela, ale nemá potřebu ji otevírat teď.
+
+Příklad u SaaS: pravidlo "aktivační checklist nemá vyžadovat integraci před prvním výsledkem" se během měsíce přirozeně použije při úpravě onboardingové obrazovky. Produktový člověk otevře kanonický checklist, upraví text kroku a hotovo. Nevznikne meeting o celé historii aktivace. To je zdravé.
+
+Příklad u marketingu: redakční šablona už obsahuje pravidlo "u praktických checklistů nabízíme přímý odkaz, ne povinný e-mail". Autor podle něj připraví nový materiál. Nikdo nezakládá tabulku, kolikrát se pravidlo dodrželo. To je také zdravé.
+
+Codyho komentář: když tichý měsíc vypadá nudně, gratuluju. Nudný provoz je často draze vydobytý luxus. Jen ho prosím nezačněte měřit sedmnácti ukazateli, jinak si z luxusu uděláte zase brigádu.
+
+### Tři výsledky prvního měsíce
+
+Na konci prvního tichého měsíce vyberte jeden ze tří výsledků:
+
+- Ticho drží: položka zůstává v běžném toku a nepotřebuje žádnou reakci.
+- Ticho ruší skrytý dohled: návratový signál nenastal, ale někde vznikla neformální kontrola.
+- Návratový signál nastal: položka se otevírá úzkou kartou návratu.
+
+`Ticho drží` je výsledek, který má zůstat skoro bez zápisu. Pokud máte pravidelný měsíční provozní log, stačí jedna věta:
+
+```text
+První tichý měsíc položky [název]: návratový signál nenastal, skrytý dohled nevznikl, položka zůstává v běžném rytmu.
+```
+
+Pokud takový log nemáte, nezakládejte ho kvůli jedné klidové položce. Platné pravidlo už má kanonické místo. Klid nemusí dostat vlastní dokument, aby byl skutečný.
+
+`Ticho ruší skrytý dohled` použijte, když se objeví bokem vedená opatrnost: někdo si drží vlastní seznam, někdo posílá výstupy ke schválení navíc, někdo znovu sbírá screenshoty. Reakce má být krátká:
+
+```text
+Skrytý dohled rušíme. Návratový signál nenastal. Platné pravidlo zůstává v [kanonické místo] a další kontrolu nevedeme bokem.
+```
+
+`Návratový signál nastal` otevírá práci, ale ne starou historii. Vznikne úzká karta s konkrétní otázkou, důkazem a privacy-first hranicí. První tichý měsíc tím končí; další práce patří do návratové karty.
+
+### Privacy-first hranice tichého měsíce
+
+Tichý měsíc je velmi dobrý test privacy-first kultury. Pokud tým věří pravidlu jen tehdy, když kolem něj dál ukládá důkazy, pravidlo ještě není opravdu provozní. Data se pak sbírají ne kvůli rozhodnutí, ale kvůli uklidnění. To je slabý účel.
+
+Držte tyto hranice:
+
+- neukládejte nové zákaznické příklady, pokud nenastal návratový signál;
+- nemažte kanonické pravidlo, ale smažte nebo zkraťte dočasné kontrolní podklady;
+- nepřidávejte analytický event jen proto, že položka vstoupila do klidu;
+- nevyžadujte ruční potvrzení každého běžného výstupu;
+- pokud se objeví skrytý dohled, uklízejte podklady dřív, než se z nich stane zvyk.
+
+Privacy-first věta pro konec měsíce:
+
+```text
+Během prvního tichého měsíce nevznikl nový datový tok. Ponecháváme jen kanonické pravidlo a návratový signál; dočasné podklady bez účelu rušíme.
+```
+
+Tato věta má větší hodnotu než další dashboard. Říká, že tým umí provozovat pravidlo bez rozšiřování datové stopy.
+
+### Karta prvního tichého měsíce
+
+```text
+Položka:
+
+Začátek tichého měsíce:
+
+Kanonické místo:
+
+Platný návratový signál:
+
+Běžný pracovní rytmus, ve kterém má pravidlo žít:
+
+Vznikl návratový signál?
+- ne / ano, jaký:
+
+Vznikl skrytý dohled?
+- ne / ano, kde:
+
+Výsledek:
+- ticho drží / ticho ruší skrytý dohled / návratový signál nastal
+
+Jedna reakce:
+
+Co výslovně neobnovujeme:
+
+Co mažeme, zkracujeme nebo necháváme neuložené:
+
+Vlastník kanonického místa:
+
+Kdy se položka smí znovu objevit v agendě:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: přečtěte kanonické místo a návratový signál.
+2. Minuta 1-2: ověřte, zda během měsíce návratový signál opravdu nastal.
+3. Minuta 2-3: zeptejte se, zda vznikl skrytý dohled nebo bokem vedené podklady.
+4. Minuta 3-4: vyberte jeden ze tří výsledků.
+5. Minuta 4-5: zrušte zbytečnou kontrolní stopu, nebo potvrďte pokračování tichého rytmu.
+
+Pokud workshop začne řešit, jak pravidlo vylepšit, oddělte to. První tichý měsíc nemá hledat nová vylepšení. Má potvrdit, že uzavřená věc už nepotřebuje vlastní pozornost.
+
+### Checklist prvního tichého měsíce
+
+- Zůstala položka mimo samostatnou agendu?
+- Je pravidlo pořád v kanonickém místě?
+- Nastal skutečný návratový signál, nebo jen běžný šum?
+- Nevznikl skrytý dohled v podobě ručního seznamu, schvalování, exportu nebo poznámek bokem?
+- Pokud skrytý dohled vznikl, zrušili jsme ho bez nové vrstvy?
+- Nepřidali jsme nové měření jen kvůli pocitu jistoty?
+- Neuložili jsme nové osobní, zákaznické nebo provozní detaily bez jasného účelu?
+- Pokud ticho drží, nevytvořili jsme zbytečný zápis navíc?
+- Pokud návratový signál nastal, má další práce úzkou kartu?
+- Umí tým říct, co se teď nechává být?
+
+První měsíc v tichém rytmu je zkouška, jestli tým umí věci nejen řešit, ale také přestat řešit. To je v SaaS, marketingu i webovém provozu podstatná dovednost. Bez ní se každé dobré pravidlo časem promění v další pravidelnou povinnost. A těch má provoz obvykle dost i bez naší kreativní pomoci.
+
 ## Pracovní log
 
+- 2026-06-06: Doplněna úvodní podkapitola o prvním měsíci v tichém rytmu: hranice sledování, zdravý tichý měsíc, tři výsledky, privacy-first pravidla, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření druhého běžného review do tichého rytmu: čtyři uzavírací stavy, umlčení skrytého dohledu, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o druhém běžném review po uzavřeném prvním review: kontrola neformálního dohledu, čtyři výsledky, privacy-first úklid skrytých podkladů, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o prvním návratovém signálu po klidovém provozu širšího vzoru: rozlišení lokální staré stopy, slabé hrany, skutečného návratu a nového tématu, privacy-first reakce, karta a checklist.
