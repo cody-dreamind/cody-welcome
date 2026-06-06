@@ -182033,8 +182033,228 @@ Když během workshopu vznikne chuť otevřít širší téma, dejte ho stranou 
 
 Nejlepší první dlouhodobé review je krátké a trochu nudné. Potvrdí, že pravidlo žije tam, kde má, nevyrábí dohled, nesbírá zbytečná data a nemusí se tvářit jako projekt. V dobrém systému je spousta důležitých věcí nudná. Drama si necháme na incidenty, faktury po splatnosti a nekonečné diskuse o tom, jestli tlačítko má být tyrkysové.
 
+## Uzavření prvního dlouhodobého review do trvalého minima
+
+První dlouhodobé review má cenu jen tehdy, když po něm systém opravdu ztichne. Pokud review potvrdí, že pravidlo funguje, ale tým si k tomu přidá nový report, novou kontrolní tabulku nebo připomínku do kalendáře, výsledek je horší než před review. Původní pravidlo možná přežilo, ale pozornost se nevrátila zpět do práce. Jen se přestěhovala do jiné kolonky.
+
+Uzavření review proto nedělejte jako další analýzu. Dělejte ho jako úklid rozhodnutí:
+
+```text
+Co zůstává:
+
+Co končí:
+
+Kde je kanonická věta:
+
+Kdy se položka smí vrátit:
+
+Jaká data kvůli tomu dál nesbíráme:
+```
+
+Těchto pět řádků je důležitější než dlouhá zápisová disciplína. Uzavírá totiž nejen obsah pravidla, ale i pozornost kolem něj. Tým má vědět, kde pravidlo najde, kdy ho znovu otevřít a co už nemá kontrolovat jen ze zvyku.
+
+Příklad:
+
+```text
+Co zůstává:
+Kontaktní formulář sbírá telefon jen tehdy, když je nutný pro slíbený další krok.
+
+Co končí:
+Kvartální ruční kontrola všech formulářů.
+
+Kde je kanonická věta:
+Checklist pro nové landing pages, část Formulář.
+
+Kdy se položka smí vrátit:
+Nový formulář udělá telefon povinný bez jasného obchodního nebo provozního důvodu.
+
+Jaká data kvůli tomu dál nesbíráme:
+Nepřidáváme event pro vyplňování telefonního pole, session recording ani export formulářových průchodů.
+```
+
+Takové uzavření je malé, ale drží několik hranic najednou. Pravidlo nezmizí. Historie se nemusí znovu číst. Kontrola se neprodlužuje. A privacy-first hodnota nezůstane jen ve vznešené větě, ale projeví se v tom, že systém nesbírá data navíc.
+
+### Trvalé minimum
+
+Po prvním dlouhodobém review ponechte jen tři věci:
+
+- kanonickou větu pravidla;
+- návratový signál;
+- vlastníka místa, kde pravidlo bydlí.
+
+Všechno ostatní musí obhájit existenci. Pokud má zůstat příklad, musí pomáhat při reálném použití. Pokud má zůstat odkaz na původní rozhodnutí, musí být potřeba pro kontext, ne pro pocit bezpečí. Pokud má zůstat kontrolní otázka, musí být součástí běžného checklistu, ne samostatné hlídky.
+
+Trvalé minimum není chudá dokumentace. Je to dokumentace, která přestala tahat za rukáv. V dobrém webovém, SaaS nebo marketingovém systému nemá každé pravidlo vlastní památník. Má mít správné místo v práci, kde se přirozeně použije.
+
+Praktická věta:
+
+```text
+Toto pravidlo už neřídíme jako téma. Používáme ho jako součást běžného pracovního místa.
+```
+
+Pokud tu větu neumíte napsat pravdivě, review ještě není uzavřené. Buď chybí kanonické místo, návratový signál je moc vágní, nebo se kolem pravidla stále drží neformální dohled.
+
+### Co po review uklidit
+
+Po uzavření prvního dlouhodobého review projděte pomocné stopy. Ne proto, abyste uklízeli pro krásu, ale proto, že staré stopy umí spouštět starou práci.
+
+Typicky zkontrolujte:
+
+- dočasné tabulky z ověřování;
+- screenshoty, které už neslouží k rozhodnutí;
+- duplicitní checklistové body;
+- připomínky v kalendáři;
+- interní komentáře typu "ještě sledovat";
+- exporty dat vytvořené jen pro review;
+- staré návrhy, které vypadají jako otevřené úkoly;
+- automatizace nebo notifikace, které měly jen přechodovou roli.
+
+Každou stopu zařaďte do jednoho ze tří stavů:
+
+- `ponechat v kanonickém místě`;
+- `zkrátit na jednu pracovní větu`;
+- `smazat nebo archivovat mimo aktivní trasu`.
+
+Archivace má být výjimka, ne elegantní způsob, jak si všechno nechat. Pokud stopa obsahuje osobní údaje, zákaznické detaily nebo interně citlivý kontext, ptejte se tvrději: jaký konkrétní účel má další uchování? Když účel není jasný, úklid není kosmetika, ale součást odpovědného provozu.
+
+Privacy-first poznámka: po review často není potřeba uchovat důkaz, ale jen závěr. "Pravidlo prošlo třemi běžnými použitími bez návratového signálu" bývá bezpečnější a užitečnější než sada konkrétních průchodů s lidmi, projekty, poptávkami nebo interními poznámkami.
+
+### Jak zabránit novému rituálu
+
+Největší riziko po úspěšném review je nenápadné: někdo řekne, že by bylo dobré "to jednou za čas stejně mrknout". Zní to rozumně. Jenže pokud neexistuje konkrétní spouštěč, vzniká nový rituál bez jasného rozhodnutí.
+
+Místo periodické kontroly napište návratovou větu:
+
+```text
+K této položce se vracíme pouze tehdy, když:
+```
+
+Dobré návratové věty:
+
+- nový formulář sbírá nové povinné osobní pole bez jasného účelu;
+- nová landing page obchází kanonický checklist;
+- nový onboardingový krok vyžaduje ruční zásah, který pravidlo mělo odstranit;
+- nový dodavatel navrhne tracker, export nebo sdílení dat mimo domluvený rámec;
+- nový člen týmu nenajde pravidlo v běžném pracovním místě.
+
+Slabé návratové věty:
+
+- pro jistotu se k tomu vrátíme za měsíc;
+- uvidíme podle pocitu;
+- když se někomu bude zdát, že to nefunguje;
+- až bude čas to celé vylepšit;
+- budeme to průběžně sledovat.
+
+Slabé věty nemají hranu. A bez hrany se tichý rytmus rozpadne na šum. Každý dojem se pak může tvářit jako důvod k návratu.
+
+Codyho komentář: "budeme to průběžně sledovat" je často jen dospělácký způsob, jak říct "nevíme, kdy s tím přestat". Chápu, zní to profesionálně. Ale profesionální je hlavně vědět, co se nedělá.
+
+### Uzavírací zpráva týmu
+
+Když se review týká pravidla, které používá víc lidí, pošlete krátkou uzavírací zprávu. Nemá vysvětlovat celou historii. Má odstranit nejistotu.
+
+Šablona:
+
+```text
+Uzavřeli jsme první dlouhodobé review položky:
+
+Výsledek:
+
+Pravidlo zůstává zde:
+
+Vracíme se k němu jen při:
+
+Co už neděláme:
+
+Privacy-first dopad:
+```
+
+Příklad:
+
+```text
+Uzavřeli jsme první dlouhodobé review položky:
+Povinný telefon ve formulářích.
+
+Výsledek:
+Pravidlo zůstává v tichém rytmu.
+
+Pravidlo zůstává zde:
+Checklist pro landing pages, část Formulář.
+
+Vracíme se k němu jen při:
+Nový formulář udělá telefon povinný bez jasného důvodu pro další krok.
+
+Co už neděláme:
+Neděláme samostatnou kvartální kontrolu formulářů.
+
+Privacy-first dopad:
+Nepřidáváme nové měření formulářových průchodů ani export osobních údajů.
+```
+
+Taková zpráva je krátká schválně. Pokud potřebuje pět odstavců, pravděpodobně se neuzavírá pravidlo, ale obhajuje stará debata. Tu nechte v archivu, pokud má stále účel. Do běžné práce patří jen výsledek.
+
+### Karta uzavření prvního dlouhodobého review
+
+```text
+Položka:
+
+Datum review:
+
+Rozhodnutí review:
+- ponechat v tichu / dočistit kanonické místo / otevřít úzkou kartu / ukončit pravidlo
+
+Kanonická věta, která zůstává:
+
+Kanonické místo:
+
+Vlastník místa:
+
+Návratový signál:
+
+Co končí:
+- kontrola / report / tabulka / export / schvalování / připomínka / jiné
+
+Co se zkracuje:
+
+Co se maže nebo archivuje:
+
+Jaká data dál nesbíráme:
+
+Komu stačí poslat uzavírací zprávu:
+
+Další návrat pouze při:
+```
+
+Tuto kartu neproměňujte v nový provozní dokument. Vyplňte ji, převeďte výsledek do kanonického místa a kartu zavřete. Pokud musí zůstat dohledatelná, nechte ji v rozhodovacím logu, ale nevytvářejte z ní nový aktivní artefakt.
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: přečtěte rozhodnutí prvního dlouhodobého review.
+2. Minuta 1-2: vyberte kanonickou větu a návratový signál, které zůstávají.
+3. Minuta 2-3: označte jednu až tři pracovní stopy, které končí nebo se zkracují.
+4. Minuta 3-4: napište, jaká data kvůli tomu dál nesbíráte.
+5. Minuta 4-5: připravte krátkou uzavírací zprávu a zavřete kartu.
+
+Když workshop začne řešit, jak pravidlo vylepšit, zastavte ho. Vylepšení patří do nové úzké karty jen tehdy, když existuje návratový signál. Uzavření review má vrátit pravidlo do trvalého minima.
+
+### Checklist uzavření prvního dlouhodobého review
+
+- Má review jasné uzavírací rozhodnutí?
+- Zůstává jen kanonická věta, návratový signál a vlastník místa?
+- Je pravidlo dostupné v pracovním místě, kde ho člověk opravdu potřebuje?
+- Skončila samostatná kontrola, pokud už nemá konkrétní důvod?
+- Zmizely dočasné tabulky, exporty, screenshoty nebo připomínky bez dalšího účelu?
+- Nezakládáme nový pravidelný rituál jen proto, že review dopadlo dobře?
+- Je návratový signál konkrétnější než obecné "když se to bude zdát důležité"?
+- Stačí týmu krátká uzavírací zpráva bez celé historie?
+- Uchováváme jen závěr, ne zbytečné osobní, zákaznické nebo interní detaily?
+- Je jasně napsané, jaká data díky uzavření dál nesbíráme?
+
+Uzavřené dlouhodobé review nemá být vidět každý týden. Má se projevit tím, že lidé najdou pravidlo ve správnou chvíli, nepřidají zbytečný dohled a nebojí se položku nechat být. To je nenápadná, ale velmi praktická disciplína: dobrý systém nejen ví, kdy jednat, ale taky kdy už opravdu skončit.
+
 ## Pracovní log
 
+- 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review do trvalého minima: ponechané minimum, úklid pracovních stop, návratová věta, uzavírací zpráva, privacy-first omezení dat, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním dlouhodobém review tichého rytmu: důvody otevření review, čtyři výsledné stavy, privacy-first kontrola bez nového dohledu, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o převodu prvního tichého měsíce do dlouhodobého tichého rytmu: ponechané minimum, ukončení přechodové kontroly, tři převodní stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním měsíci v tichém rytmu: hranice sledování, zdravý tichý měsíc, tři výsledky, privacy-first pravidla, karta, mini workshop a checklist.
