@@ -184379,7 +184379,208 @@ Workshop končí ve chvíli, kdy je jasné, zda téma zůstává v normálním r
 
 Druhý měsíc po uzavření prvního měsíce má chránit klid. Ne pasivitu, ale klid dobře uloženého pravidla. Pokud systém funguje bez speciální péče, nechte ho pracovat. Pokud se objeví malá hrana, obruste ji. Pokud vznikne nový problém, dejte mu vlastní otázku. A pokud se jen vrací starý zvyk všechno jistit ručně, ukliďte ho dřív, než si najde vlastní židli na poradě.
 
+## Uzavření druhého měsíce do stabilního běžného rytmu
+
+Druhý měsíc po uzavření prvního měsíce má skončit jedním praktickým rozhodnutím: má téma zůstat jen v běžném rytmu, nebo ještě potřebuje poslední malou opravu? Bez takového závěru se i klidný druhý měsíc může změnit v neurčitý mezistav. Všichni tuší, že je to asi hotové, ale nikdo neví, jestli další kontrola ještě platí, kdo ji drží a kdy se stará větev konečně přestane objevovat v plánování.
+
+Uzavření druhého měsíce není nové review. Je to administrativně malá, ale provozně důležitá tečka. Potvrzuje, že kanonické místo stačí, stará historie už není potřeba a další signály mají jasnou běžnou trasu. Pokud se během druhého měsíce ukázalo lokální tření, uzavření zároveň říká, jestli se opravilo, nebo jestli už vzniká nová samostatná otázka.
+
+Začněte větou:
+
+```text
+Po druhém měsíci téma uzavíráme jako:
+- stabilní rytmus / stabilní rytmus s drobnou opravou / nová otázka / vrátit do mimořádné péče
+
+Platí teď:
+
+Co jsme naposledy upravili:
+
+Kam půjdou další signály:
+
+Co už nebudeme kontrolovat samostatně:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Další návrat nastane jen když:
+```
+
+Tato věta má být krátká a použitelná bez znalosti celé předchozí větve. Pokud se do ní nevejde všechno, není potřeba ji nafukovat. Starší důkazy patří do archivované rozhodovací stopy, ne do aktuálního provozního pravidla.
+
+### Čtyři uzavírací stavy
+
+Po druhém měsíci použijte jeden ze čtyř stavů:
+
+- Stabilní rytmus: pravidlo se používá jako normální součást práce a další zvláštní pozornost končí.
+- Stabilní rytmus s drobnou opravou: pravidlo drží, ale jedno pracovní místo potřebuje poslední malé zpřesnění.
+- Nová otázka: objevilo se tření, které má vlastní důvod a nemá se lepit na starou větev.
+- Vrátit do mimořádné péče: pravidlo stále nefunguje bez ručního dohledu a kanonické místo nestačí.
+
+Stav `Stabilní rytmus` je výchozí dobrý konec. Neplánujte třetí měsíc jen proto, že první dva měsíce existovaly. Když systém funguje bez skryté péče, další kontrola by už sama vytvářela práci navíc.
+
+Stav `Stabilní rytmus s drobnou opravou` použijte jen tehdy, když je oprava opravdu malá: jedna věta v checklistu, jeden odkaz, jeden příklad, jedno přejmenování karty nebo odstranění staré poznámky. Pokud oprava potřebuje nový vlastnický kontrakt, nové měření nebo širší rozhodování, už nejde o drobnou opravu.
+
+Stav `Nová otázka` je zdravý, pokud se změnil kontext. Například pravidlo pro telefon ve formuláři drží, ale zároveň se ukáže, že lidé nerozumí rozdílu mezi konzultací a auditem. To není návrat staré telefonní větve. To je nová otázka k nabídce.
+
+Stav `Vrátit do mimořádné péče` používejte opatrně. Má smysl jen tehdy, když běžný rytmus opakovaně selhal, kanonické místo nestačí a existuje jasné riziko pro zákazníka, provoz nebo data. I tehdy napište stop podmínku. Mimořádná péče bez konce je jen starý chaos s lepším názvem.
+
+### Příklad uzavření
+
+```text
+Po druhém měsíci téma uzavíráme jako:
+Stabilní rytmus.
+
+Platí teď:
+Checklist formulářů je zdroj pravdy pro první kontaktní formulář. Telefon je volitelný, pokud není nutný pro slíbený další krok.
+
+Co jsme naposledy upravili:
+V checklistu zůstává jeden příklad pro konzultační formulář. Nic dalšího nepřidáváme.
+
+Kam půjdou další signály:
+Do měsíčního review webu, jen pokud se stejný problém objeví ve dvou nových formulářích.
+
+Co už nebudeme kontrolovat samostatně:
+Nevzniká třetí měsíční kontrola telefonního pole.
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+Mažeme pomocnou poznámku z přechodového období. V rozhodovacím logu zůstává jen anonymizovaný závěr.
+
+Další návrat nastane jen když:
+Dva nové formuláře mimo výjimku znovu udělají telefon povinným údajem.
+```
+
+Takové uzavření dává týmu klid i hranici. Neříká "už nikdy se k tomu nevrátíme". Říká "vrátíme se jen podle jasného signálu a běžnou cestou".
+
+### Kam závěr propsat
+
+Závěr druhého měsíce patří na tři místa jen tehdy, když všechna tři existují už dnes:
+
+- kanonické pracovní místo, například checklist, šablona nebo karta pravidla;
+- běžný rytmus, například měsíční review webu nebo produktové údržby;
+- rozhodovací log, pokud tým potřebuje vědět, proč zvláštní pozornost skončila.
+
+Nevyrábějte nové místo jen proto, že uzavření vypadá důležitě. Pokud závěr nemá přirozený domov, problém je v informační architektuře, ne v délce zápisu. V takové chvíli vyberte nejbližší pracovní místo a napište závěr tam.
+
+Dobrá provozní věta:
+
+```text
+Po dvou běžných měsících pravidlo drží. Další signály řeší měsíční review webu; samostatná kontrola končí.
+```
+
+Slabá provozní věta:
+
+```text
+Zatím to necháváme a uvidíme.
+```
+
+První věta přesměruje práci. Druhá věta jen prodlouží nejistotu.
+
+### Kdy uzavření neuspěchat
+
+Někdy druhý měsíc ukáže, že téma ještě není připravené do stabilního rytmu. Ne kvůli jedné drobné chybě, ale proto, že běžný systém pořád neumí práci vést. Typické signály:
+
+- lidé opakovaně začínají mimo kanonické místo;
+- pravidlo potřebuje ústní vysvětlení člověka, který ho psal;
+- ruční dohled se vrací i po jeho zrušení;
+- výjimky vznikají bez důvodu a bez data návratu;
+- kvůli kontrole se začala sbírat nová data bez jasného rozhodnutí;
+- stejné tření se ukázalo ve více pracovních místech.
+
+V takové situaci nepište "stabilní rytmus" jen proto, že chcete větev zavřít. Zapište `nová otázka` nebo `vrátit do mimořádné péče` a zmenšete problém:
+
+```text
+Neuzavíráme do stabilního rytmu, protože:
+
+Nejbližší selhávající pracovní místo:
+
+Co opravíme před dalším pokusem:
+
+Co dál neotevíráme:
+
+Stop podmínka mimořádné péče:
+
+Privacy-first hranice:
+```
+
+Tím zabráníte tomu, aby se mimořádná péče znovu rozlila po celém tématu. I návrat do péče má být úzký, dočasný a datově střídmý.
+
+### Privacy-first uzavření
+
+Po druhém měsíci by měla zmizet většina přechodových stop. Pokud pravidlo drží, nepotřebujete dál uchovávat pomocné seznamy, screenshoty, exporty, osobní poznámky ani evidenci toho, kdo pravidlo použil. Zůstává jen stav, kanonické místo, návratový signál a případná anonymizovaná poznámka, proč zvláštní péče skončila.
+
+Privacy-first závěr může znít:
+
+```text
+Po druhém měsíci ponecháváme jen rozhodovací závěr a návratový signál. Mažeme pomocné poznámky z přechodu, nevedeme evidenci použití pravidla lidmi a další kontrola probíhá jen v běžném review.
+```
+
+Pokud se uzavření mění na novou otázku, nezačínejte ji kopírováním starých podkladů. Nová otázka má dostat jen to, co opravdu potřebuje: současný stav, pracovní místo, důvod otevření a datovou hranici. Staré exporty nejsou automaticky nový důkaz.
+
+Codyho komentář: po dvou měsících je dobré téma buď normální, nebo má nový problém. Třetí možnost "ještě to budeme tak nějak hlídat bokem" je oblíbená hlavně u procesů, které si chtějí pořídit vlastní pohovku v koutě kanceláře. Nedávejte jim ji.
+
+### Karta uzavření druhého měsíce
+
+```text
+Téma nebo pravidlo:
+
+Kanonické místo:
+
+Běžný rytmus:
+
+Stav druhého měsíce:
+- stabilní rytmus
+- stabilní rytmus s drobnou opravou
+- nová otázka
+- vrátit do mimořádné péče
+
+Jednovětý závěr:
+
+Poslední drobná oprava, pokud existuje:
+
+Kam půjdou další signály:
+
+Kdy vznikne nová karta:
+
+Co už samostatně nehlídáme:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Co dál nesbíráme:
+
+Vlastník běžného rytmu:
+
+Datum další přirozené revize:
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: přečtěte stav druhého měsíce a kanonické místo.
+2. Minuta 1-2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 2-3: napište jednovětý závěr a trasu dalších signálů.
+4. Minuta 3-4: rozhodněte, co už samostatně nehlídáte.
+5. Minuta 4-5: zapište privacy-first úklid a smažte pomocné stopy bez účelu.
+
+Workshop končí, když někdo umí říct: "Příště se to řeší tady, tímto rytmem a bez staré historie." Pokud tato věta nevznikne, uzavření ještě není hotové.
+
+### Checklist uzavření druhého měsíce
+
+- Má druhý měsíc jeden jasný stav?
+- Je závěr srozumitelný bez znalosti staré návratové větve?
+- Je napsané, kde pravidlo žije dál?
+- Jdou další signály do existujícího běžného rytmu?
+- Pokud pravidlo drží, končí samostatná kontrola?
+- Pokud existuje drobná oprava, týká se jednoho pracovního místa?
+- Pokud vznikla nová otázka, má vlastní stop podmínku?
+- Pokud se téma vrací do mimořádné péče, má tato péče konec?
+- Jsou zrušené pomocné seznamy, ruční dohled a přechodové připomínky?
+- Nevedeme osobní evidenci použití pravidla ani nové sledování lidí?
+- Mažeme, zkracujeme nebo anonymizujeme dočasné exporty a poznámky?
+- Ví vlastník běžného rytmu, kdy vznikne nová karta a kdy ne?
+
+Uzavření druhého měsíce je poslední pojistka proti nekonečné péči o opravenou věc. Když pravidlo drží, vraťte mu obyčejnost. Když nedrží, oddělte nový problém a dejte mu vlastní hranici. Praktická práce není v tom, že všechno pořád sledujete. Praktická práce je v tom, že víte, kdy už sledovat přestat.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o uzavření druhého měsíce do stabilního běžného rytmu: čtyři uzavírací stavy, propsání závěru do kanonického místa, hranice mimořádné péče, privacy-first úklid, karta, mini workshop a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o druhém měsíci po uzavření prvního měsíce: kontrola běžného návyku, čtyři stavy, pravidla pro nezvětšování reakce, privacy-first hranice, karta, mini workshop a checklist.
 
