@@ -9511,6 +9511,149 @@ Vlastník:
 
 Dobře uzavřená reakce chrání klidový provoz. Neznamená ignorovat signály. Znamená dát každému signálu přiměřenou odpověď a potom uklidit po vlastní práci. V malém týmu je to rozdíl mezi živým systémem a nekonečnou vrstvou starých poznámek.
 
+## Převod uzavřené reakce po klidu do běžného rytmu
+
+Uzavřená reakce po klidovém provozu ještě není automaticky běžný rytmus. Je to hotová odpověď na jeden signál. Aby se z ní nestala nová drobná agenda, musí tým rozhodnout, kam její výsledek patří: do existujícího pravidla, do běžné údržby, do nové otázky, nebo nikam dál.
+
+Začněte převodní větou:
+
+```text
+Reakce je uzavřená jako:
+
+Výsledek má zůstat v systému jako:
+- beze změny / drobné doladění pravidla / nová otázka / znovuotevřený vzor
+
+Kanonické místo:
+
+Běžný rytmus, který to ponese:
+
+Co už dál nesledujeme samostatně:
+
+Jaký návratový signál zůstává:
+```
+
+Tahle věta brání tichému zdvojení práce. Když ji přeskočíte, lidé si často ponechají pomocnou poznámku "pro jistotu", přidají kontrolní bod do review a zároveň upraví pravidlo. Výsledek vypadá pečlivě, ale ve skutečnosti má systém tři místa pro jednu věc. A tři místa znamenají tři příležitosti, kde se za měsíc objeví rozpor.
+
+Příklad:
+
+```text
+Reakce je uzavřená jako:
+Klid pokračuje. Šlo o lokální starou stopu v jedné šabloně.
+
+Výsledek má zůstat v systému jako:
+Beze změny pravidla.
+
+Kanonické místo:
+Aktuální předávací pravidlo v interním playbooku.
+
+Běžný rytmus:
+Měsíční údržba šablon, bez samostatného sledování tohoto signálu.
+
+Co už dál nesledujeme samostatně:
+Danou starou poznámku, screenshot opravy ani komentářové vlákno.
+
+Návratový signál:
+Zůstává původní: dva různé pracovní průchody během jednoho měsíce se opřou o staré lokální opravy místo aktuálního pravidla.
+```
+
+Výsledek není nový úkol. Výsledek je návrat do normální práce s jedním uklizeným místem.
+
+### Čtyři převodní cesty
+
+Po uzavřené reakci vyberte jednu převodní cestu:
+
+- Bez změny: reakce potvrdila, že pravidlo drží a stačil lokální úklid.
+- Malé doladění: kanonické pravidlo potřebuje jednu přesnější větu, příklad nebo odkaz.
+- Nová otázka: signál otevřel jiné téma, které nesmí zdědit starou historii.
+- Znovuotevřený vzor: návratový signál opravdu nastal a začíná nová smyčka s vlastní stop podmínkou.
+
+U cesty "bez změny" je práce hotová až tehdy, když zmizí dočasná stopa reakce. Nejen když je opravená šablona. Smažte pracovní screenshot, uzavřete komentář, odstraňte pomocnou poznámku a nechte jen krátkou stavovou větu tam, kde ji tým najde při běžné údržbě.
+
+U malého doladění upravte kanonické místo, ne okolní vysvětlující vrstvy. Pokud potřebujete doplnit příklad, měl by popsat běžnou situaci, ne historii posledního incidentu. Pravidlo má sloužit dalšímu použití, ne archivovat nervozitu z posledního signálu.
+
+U nové otázky sepište novou pracovní otázku a výslovně napište, že starý vzor zůstává zavřený. Jinak se nová práce sveze na starém kontextu a tým začne řešit jinou příčinu starým jazykem.
+
+U znovuotevřeného vzoru založte novou kartu. Staré podklady mohou sloužit jako orientační paměť, ale ne jako důkaz dnešního rozhodnutí. Dnešní smyčka potřebuje dnešní pracovní důkaz, vlastníka a stop podmínku.
+
+### Jak poznat správný běžný rytmus
+
+Běžný rytmus není další schůzka. Je to místo, kde by se téma přirozeně objevilo i bez posledního signálu. Může to být měsíční údržba šablon, review onboardingového materiálu, kvartální audit standardů, kontrola webového obsahu nebo běžné support review.
+
+Vyberte rytmus podle otázky:
+
+- Kde se pravidlo reálně používá?
+- Kdo by si všiml, že znovu drhne?
+- Které existující review už má potřebný kontext?
+- Kde lze výsledek uložit bez nové evidence?
+- Jak poznáme návrat bez sledování jednotlivých lidí?
+
+Pokud odpověď zní "nikde", neznamená to automaticky založit nový rytmus. Nejdřív zkontrolujte, jestli téma vůbec potřebuje pokračovat. U lokální staré stopy často stačí žádný další rytmus: uklidit, zapsat stav a skončit. Nový rytmus má smysl jen tehdy, když by jeho absence vedla k opakované ztrátě kvality, důvěry, datové kontroly nebo zákaznického výsledku.
+
+### Převod bez nové datové stopy
+
+Převod do běžného rytmu je ideální chvíle pro privacy-first zmenšení. Pokud jste během reakce vytvořili dočasný důkaz, měl by mít krátký život. Pokud jste kvůli signálu přidali ruční evidenci, měla by buď zmizet, nebo se přepsat na anonymizovanou stavovou větu.
+
+Ptejte se:
+
+- Co musí zůstat, aby budoucí člověk pochopil rozhodnutí?
+- Co je jen pracovní stopa z řešení a nemá další účel?
+- Lze záznam převést z detailu o člověku na popis pravidla?
+- Nevznikl nový report jen proto, že jsme chtěli mít lepší pocit?
+- Je návratový signál formulovaný tak, aby nevyžadoval průběžné sledování lidí?
+
+Nízkodatový převod:
+
+```text
+V běžném pravidle zůstává jen věta: "Staré ověřovací poznámky nejsou rozhodovací zdroj; při rozporu platí kanonické pravidlo." Dočasný seznam míst z kontroly mažeme. Další návrat poznáme při běžné údržbě šablon, ne podle evidence uživatelů pravidla.
+```
+
+To je praktická privacy-first práce: méně stop, méně míst, méně vysvětlování, stejná nebo lepší schopnost rozhodnout.
+
+### Karta převodu uzavřené reakce po klidu
+
+```text
+Uzavřený širší vzor:
+
+Uzavřená reakce:
+
+Stav po reakci:
+- klid pokračuje / pravidlo je doladěné / vzor je znovu otevřený / vznikla nová otázka
+
+Převodní cesta:
+- bez změny / malé doladění / nová otázka / znovuotevřený vzor
+
+Kanonické místo:
+
+Běžný rytmus:
+
+Co se uklidilo:
+
+Co už dál samostatně nesledujeme:
+
+Co zůstává jako návratový signál:
+
+Dočasné podklady k odstranění:
+
+Vlastník běžného rytmu:
+
+Datum další běžné kontroly, pokud existuje:
+```
+
+### Checklist převodu
+
+- Je jasné, jestli výsledek patří do pravidla, běžného rytmu, nové otázky, nebo nikam dál?
+- Vybrali jsme jednu převodní cestu místo více paralelních stop?
+- Má výsledek jedno kanonické místo?
+- Pokud pravidlo neměníme, uklidili jsme dočasné podklady reakce?
+- Pokud pravidlo doladíme, měníme nejmenší potřebnou část?
+- Pokud vznikla nová otázka, zůstává starý vzor zavřený?
+- Pokud se vzor otevřel znovu, má dnešní důkaz, vlastníka a stop podmínku?
+- Nepřidali jsme nový review bod, report ani evidenci lidí bez jasného důvodu?
+- Je návratový signál dohledatelný v běžné práci?
+- Umí tým říct, co po převodu už dál nesleduje?
+
+Převod uzavřené reakce je malý, ale rozhodující krok. Udrží systém štíhlý: hotové věci se vrací do běžného rytmu, nové otázky dostávají vlastní místo a staré signály se nepřemění v permanentní dohled. To je přesně typ pořádku, který není vidět na první pohled, ale po třech měsících rozhoduje, jestli se v práci dá normálně dýchat.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -184010,6 +184153,8 @@ Datum další běžné kontroly:
 Uzavření prvního měsíce má dát týmu povolení přestat se dívat na téma jako na čerstvou opravu. Pokud drží, je z něj běžné pravidlo. Pokud drhne, opraví se nejbližší místo. Pokud vznikl nový signál, dostane vlastní otázku. Všechno ostatní je jen způsob, jak nechat starou větev žít déle, než si zaslouží.
 
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o převodu uzavřené reakce po klidu do běžného rytmu: převodní věta, čtyři cesty, výběr běžného rytmu, privacy-first zmenšení datové stopy, karta a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního měsíce po návratu do běžného rytmu: čtyři uzavírací stavy, zrušení skryté péče, uložení závěru ke kanonickému místu, privacy-first úklid, karta a checklist.
 
