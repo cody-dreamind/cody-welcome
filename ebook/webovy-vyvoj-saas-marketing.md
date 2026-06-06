@@ -182765,7 +182765,168 @@ Workshop nesmí skončit větou "pro jistotu to začneme sledovat". Buď je př�
 
 Druhý návrat po trvalém minimu je dobrý test pokory. Jeden signál může být náhoda, dva signály mohou být vzor, ale pořád to není povolenka k otevření všeho. Zralý tým nejdřív hledá společnou příčinu, potom volí nejmenší opravu a nakonec uklízí datovou stopu. Díky tomu systém nezaspí, ale ani se neprobudí při každém zapraskání.
 
+## Uzavření druhého návratu po trvalém minimu
+
+Druhý návrat je potřeba uzavřít ještě pečlivěji než první. Po prvním návratu tým hlavně brání staré téma před zbytečným probuzením. Po druhém návratu už ale brání dvě věci najednou: aby nepřehlédl skutečně opakovanou příčinu a aby ze dvou podobných událostí nevyrobil falešný systémový problém.
+
+Uzavření proto nezačínejte otázkou, jestli "už se to děje znovu". Začněte přesnější větou:
+
+```text
+Druhý návrat uzavíráme podle toho, co opravdu sdílel s prvním návratem.
+```
+
+Tato věta nutí tým zůstat u důkazů. Pokud se sdílí jen povrch, uzavření má být lokální. Pokud se sdílí příčina, uzavření má opravit společné místo. Pokud se potvrdí opakovaný vzor, uzavření může otevřít novou úzkou otázku. A pokud příčina zůstala nejasná, uzavření nemá předstírat jistotu; má nastavit krátké ověřovací okno s jasným koncem.
+
+Příklad:
+
+```text
+První návrat:
+Telefon byl povinný na landing page kvůli staré kopii šablony.
+
+Druhý návrat:
+Telefon byl povinný v kvalifikačním dotazníku, protože checklist neříká, kdy je telefon oprávněný požadavek.
+
+Co se sdílí:
+Povrch je podobný, ale druhý návrat odhalil slabé společné pravidlo.
+
+Co jsme udělali:
+Doplnili jsme do checklistu jednu větu: telefon je povinný jen tehdy, když je nutný pro slíbený další krok a nejde získat šetrnějším způsobem.
+
+Uzavírací stav:
+Oprava společného místa bez otevření auditu všech formulářů.
+
+Privacy-first výsledek:
+Nepřidáváme nové měření formulářových průchodů. Do rozhodovacího logu ukládáme jen anonymizovaný závěr a rušíme dočasnou poznámku k druhému případu.
+```
+
+Takové uzavření je malé, ale není povrchní. Opravuje příčinu, která se ukázala, a současně nedovolí, aby druhý návrat nafoukl starý problém do plošného programu.
+
+### Čtyři uzavírací stavy
+
+Po druhém návratu vyberte jeden ze čtyř stavů:
+
+- Lokální rozdílné příčiny: oba návraty vypadaly podobně, ale každý měl vlastní lokální důvod.
+- Opravené společné místo: návraty ukázaly jednu společnou slabinu v checklistu, šabloně, předání nebo zdroji pravdy.
+- Úzký opakovaný vzor: návraty potvrzují stejnou příčinu a zaslouží si úzkou systémovou kartu.
+- Nejasná příčina s krátkým ověřením: signál je reálný, ale zatím nestačí na změnu pravidla.
+
+Nepoužívejte stav "otevřít celé téma", dokud neumíte napsat, proč úzká karta nestačí. Celé téma se má otevřít jen tehdy, když druhý návrat ukazuje, že původní rozhodnutí už neodpovídá práci napříč místy. To je silnější závěr než "něco se stalo dvakrát".
+
+Dobrá uzavírací věta:
+
+```text
+Druhý návrat uzavíráme jako opravu společného místa. Doplňujeme jednu větu do checklistu formulářů, ověříme ji při nejbližším novém formuláři a neotevíráme audit historických formulářů.
+```
+
+Slabá uzavírací věta:
+
+```text
+Formuláře jsou pořád problém, musíme to celé víc hlídat.
+```
+
+První věta říká, co se mění, kde se to ověří a co zůstává zavřené. Druhá věta jen zvyšuje úzkost a pravděpodobně vyrobí nový dohled bez lepšího rozhodnutí.
+
+### Co po druhém návratu uklidit
+
+Druhý návrat po sobě často nechá víc pracovních stop než první. Lidé porovnávají dva případy, kopírují screenshoty, vytahují staré poznámky, otevírají checklisty a někdy začnou sbírat příklady "pro jistotu". Po uzavření je potřeba tyto stopy zkrátit na závěr, který má další pracovní hodnotu.
+
+Uklízejte hlavně:
+
+- dočasné porovnávací tabulky, pokud už je uzavřený rozdíl mezi povrchem a příčinou;
+- screenshoty nebo exporty, které jen dokládaly druhý případ;
+- duplicitní komentáře v backlogu, které by příště znovu otevíraly celý rozsah;
+- staré odkazy na nekanonické šablony;
+- neurčité úkoly typu "zkontrolovat formuláře", pokud uzavření říká jen "opravit checklist".
+
+Naopak neuklízejte závěr. Ten patří do kanonického místa, kde se stejná práce příště stane: checklist formulářů, šablona předání, rozhodovací log, onboardingová poznámka nebo provozní karta. Závěr má být krátký a použitelný v běžném pracovním okamžiku.
+
+### Privacy-first uzavření druhého návratu
+
+Druhý návrat je typická chvíle, kdy se tým začne cítit oprávněně zvědavě. Chce víc příkladů, víc měření, víc historie. Jenže privacy-first uzavření se ptá jinak:
+
+```text
+Jaký nejmenší závěr potřebujeme zachovat, aby se práce zlepšila?
+```
+
+Pokud odpověď zní "doplnit pravidlo v checklistu", nepotřebujete dlouhodobě držet konkrétní odeslání formulářů. Pokud odpověď zní "odstranit starou šablonu", nepotřebujete nový report. Pokud odpověď zní "ověřit jednu výjimku při příštím použití", potřebujete krátké ověřovací okno, ne trvalý dohled.
+
+Praktická privacy-first věta:
+
+```text
+Po uzavření druhého návratu mažeme dočasné porovnání případů. V kanonickém checklistu necháváme jen upravené pravidlo a v rozhodovacím logu anonymizovaný závěr. Ověření má konec při nejbližším novém formuláři.
+```
+
+Codyho komentář: druhý návrat má zvláštní schopnost tvářit se jako detektivka. Najednou chcete posbírat všechny stopy, vyslechnout všechny podezřelé a udělat nástěnku. Jenže většina provozních problémů nepotřebuje nástěnku. Potřebuje jednu jasnější větu tam, kde člověk příště pracuje.
+
+### Karta uzavření druhého návratu
+
+```text
+Položka:
+
+Původní stav:
+- trvalé minimum / úzká karta / krátké ověřovací okno
+
+První návrat a jeho uzavření:
+
+Druhý návrat:
+
+Co se sdílí:
+- povrch / příčina / pracovní místo / nejistota
+
+Co se liší:
+
+Uzavírací stav:
+- lokální rozdílné příčiny
+- opravené společné místo
+- úzký opakovaný vzor
+- nejasná příčina s krátkým ověřením
+
+Co měníme:
+
+Kde se změna zapíše:
+
+Co výslovně neotevíráme:
+
+Jaké dočasné stopy uklízíme:
+
+Privacy-first výsledek:
+
+Ověření a jeho konec:
+
+Datum návratu jen pokud je nutné:
+```
+
+Karta uzavření nesmí být delší než samotná oprava. Pokud tým potřebuje tři stránky vysvětlení, pravděpodobně už neuzavírá druhý návrat, ale otevírá nové téma. To může být správně, ale má to dostat vlastní otázku a vlastní stop podmínku.
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte první návrat, jeho uzavření a druhý návrat.
+2. Minuta 1-2: napište, co se opravdu sdílí a co se liší.
+3. Minuta 2-3: vyberte jeden uzavírací stav.
+4. Minuta 3-4: určete, co se mění v kanonickém pracovním místě.
+5. Minuta 4-5: zapište privacy-first úklid dočasných stop.
+6. Minuta 5-6: napište jednu větu, která říká, co se neotevírá.
+
+Workshop končí uložením závěru do pracovního místa, ne debatou o všech příbuzných problémech. Pokud se objeví nové téma, zapište ho stranou jako samostatný signál. Druhý návrat má nejdřív dostat čistý stav.
+
+### Checklist uzavření druhého návratu
+
+- Porovnali jsme první a druhý návrat podle příčiny, ne jen podle dojmu?
+- Vybrali jsme jeden uzavírací stav?
+- Víme, jestli šlo o lokální rozdílné příčiny, společné místo, opakovaný vzor, nebo nejasnou příčinu?
+- Je změna zapsaná v kanonickém pracovním místě?
+- Má případné ověřovací okno konkrétní konec?
+- Je jasné, co výslovně neotevíráme?
+- Neukládáme dlouhodobě screenshoty, exporty ani osobní detaily, které už splnily účel?
+- Nepřidáváme nový tracker, report, CRM pole ani kontrolu lidí?
+- Umí tým jednou větou říct, co druhý návrat opravdu změnil?
+- Vrací se položka po uzavření do nejnižší potřebné úrovně pozornosti?
+
+Uzavřený druhý návrat má po sobě nechat klidnější systém než předtím. Ne proto, že tým všechno zametl, ale proto, že rozlišil příčinu od povrchu, opravil nejmenší společné místo a zbytek nechal zavřený. To je praktická disciplína, která chrání práci, data i nervy.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o uzavření druhého návratu po trvalém minimu: čtyři uzavírací stavy, úklid dočasných stop, privacy-first zkrácení důkazů, karta, mini workshop a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o druhém návratu po trvalém minimu: rozlišení povrchu a příčiny, matice druhého návratu, úzká systémová karta, privacy-first hranice, karta a checklist.
 
