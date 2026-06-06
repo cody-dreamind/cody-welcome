@@ -9654,6 +9654,180 @@ Datum další běžné kontroly, pokud existuje:
 
 Převod uzavřené reakce je malý, ale rozhodující krok. Udrží systém štíhlý: hotové věci se vrací do běžného rytmu, nové otázky dostávají vlastní místo a staré signály se nepřemění v permanentní dohled. To je přesně typ pořádku, který není vidět na první pohled, ale po třech měsících rozhoduje, jestli se v práci dá normálně dýchat.
 
+## První běžné použití po převodu uzavřené reakce
+
+Po převodu uzavřené reakce do běžného rytmu přijde nenápadný test: první skutečné použití bez mimořádné péče. Tým už nemá zvláštní kontrolu, starou pomocnou kartu ani pocit, že se k tématu musí chovat jako k incidentu. Práce se prostě objeví v normálním místě, normálním čase a s normálním vlastníkem.
+
+Právě tady se ukáže, jestli byl převod opravdu dokončený. Pokud lidé při prvním použití znovu hledají starou poznámku, ptají se na výjimku nebo zakládají další seznam "pro jistotu", převod sice vypadá uzavřeně, ale v provozu ještě nedrží. Pokud naopak použijí kanonické pravidlo a po práci nezůstane nová stopa, téma se skutečně vrátilo do běžného rytmu.
+
+Začněte malým pozorováním, ne novým auditem:
+
+```text
+Běžná situace:
+
+Kdo pravidlo použil:
+
+Kde našel zdroj pravdy:
+
+Co musel dohledat mimo běžné místo:
+
+Jaký výstup vznikl:
+
+Co po použití zůstalo otevřené:
+
+Vznikla nová datová stopa?
+```
+
+Výstup má být krátký. Nehodnotíte celou historii reakce. Jen ověřujete, jestli první normální průchod nepotřeboval skrytou oporu. Pokud potřeboval, opravte nejbližší pracovní místo. Pokud nepotřeboval, nic dalšího nepřidávejte.
+
+Příklad:
+
+```text
+Běžná situace:
+Měsíční údržba šablon.
+
+Kdo pravidlo použil:
+Člověk odpovědný za interní playbook.
+
+Kde našel zdroj pravdy:
+V kanonickém předávacím pravidle.
+
+Co musel dohledat mimo běžné místo:
+Nic. Starý komentář ani screenshot nebyly potřeba.
+
+Jaký výstup vznikl:
+Jedna šablona byla potvrzena jako aktuální, bez změny pravidla.
+
+Co po použití zůstalo otevřené:
+Nic samostatného.
+
+Vznikla nová datová stopa:
+Ne. Zůstala jen běžná poznámka v měsíční údržbě.
+```
+
+Takový výsledek je přesně to, co chcete. Nepůsobí efektně, ale potvrzuje, že systém už nepotřebuje berličky.
+
+### Tři otázky pro první použití
+
+První běžné použití ověřte třemi otázkami:
+
+- Našel člověk správné pravidlo bez znalosti poslední reakce?
+- Stačil mu běžný rytmus, nebo se znovu otevřela mimořádná kontrola?
+- Zůstalo po práci méně nebo stejně stop než před ní?
+
+První otázka testuje zdroj pravdy. Pokud pravidlo funguje jen pro lidi, kteří si pamatují poslední diskusi, není dost kanonické. Doplňte jednu větu, odkaz nebo příklad do místa, kde se pravidlo používá. Nezakládejte vysvětlující dokument bokem.
+
+Druhá otázka testuje rytmus. Pokud se běžná práce okamžitě mění v zvláštní review, převod nebyl dostatečně jasný. Napište, zda šlo o skutečný návratový signál, nebo jen o nejistotu po nedávné reakci. Nejistota sama o sobě není důvod k novému procesu.
+
+Třetí otázka testuje datovou hygienu. Dobré první použití by nemělo zanechat nový export, osobní seznam, screenshotovou složku ani komentářové vlákno, které nikdo neuzavře. Pokud důkaz potřebujete, přepište ho do pracovní věty. Detailní podklady mažte, jakmile přestanou rozhodovat.
+
+### Kdy první použití nechat být
+
+Ne každé první použití po převodu potřebuje opravu. Nechte ho být, pokud platí:
+
+- výsledek vznikl v běžném rytmu;
+- zdroj pravdy byl dohledatelný bez vysvětlování historie;
+- nikdo nemusel použít starý podklad jako rozhodovací důkaz;
+- nevznikl nový dohled, report ani seznam podle lidí;
+- případný drobný dotaz šel zodpovědět z existujícího pravidla.
+
+V takovém stavu je nejlepší další krok žádný další krok. Zapište, že první použití proběhlo běžně, a nechte téma pokračovat ve stejném rytmu. Provozní systém se stabilizuje i tím, že se do něj po každém dobrém průchodu nepřidá další kontrola.
+
+Codyho komentář: někdy je nejtěžší část práce přestat sahat na věc, která konečně funguje. Ano, ruce svrbí. Ne, další sloupec v tabulce to nevyléčí.
+
+### Kdy udělat nejmenší opravu
+
+Nejmenší oprava dává smysl, když první použití odhalí tření, ale ne návrat problému. Typicky:
+
+- pravidlo je správné, ale špatně pojmenované;
+- odkaz vede na správné místo, ale z jiného pracovního artefaktu není vidět;
+- příklad popisuje starý stav a mate nového člověka;
+- šablona obsahuje jednu větu z dočasné reakce;
+- běžný rytmus funguje, ale vlastník neví, kde zapsat stav.
+
+Oprava má směřovat do nejbližšího místa použití. Nepřepisujte celý playbook, pokud stačí upravit nadpis, jeden odkaz nebo příklad. A hlavně neměňte návratový signál jen proto, že první běžný průchod nebyl dokonale hladký. Návratový signál měňte až tehdy, když se ukáže, že neodpovídá realitě, ne když se někdo jednou doptal.
+
+Krátký zápis opravy:
+
+```text
+Tření při prvním použití:
+
+Nejmenší oprava:
+
+Kde je oprava provedena:
+
+Co neměníme:
+
+Proč nejde o návrat vzoru:
+
+Další kontrola:
+- žádná / běžný rytmus / konkrétní datum
+```
+
+### Privacy-first hranice prvního použití
+
+První běžné použití nesmí zavést tiché sledování toho, kdo pravidlo používá správně. Pokud potřebujete ověřit, že systém drží, sledujte pracovní výsledek, ne lidi. Stačí vědět, že šablona šla použít, že výstup vznikl bez starých podkladů a že po práci nezůstaly nové dočasné stopy.
+
+Nevhodné záznamy:
+
+- seznam lidí, kteří pravidlo použili;
+- screenshoty jednotlivých průchodů bez jasné retenční lhůty;
+- komentáře u dokumentů, které slouží jako skrytý audit;
+- ruční tabulka "správných" a "špatných" použití;
+- nový měřicí bod jen kvůli prvnímu běžnému průchodu.
+
+Vhodný záznam:
+
+```text
+První běžné použití proběhlo v měsíční údržbě šablon. Kanonické pravidlo stačilo, staré podklady nebyly potřeba a nevzniká samostatná evidence. Téma zůstává v běžném rytmu.
+```
+
+Taková věta chrání paměť systému i soukromí lidí. Zachová rozhodnutí, ale nepromění běžnou práci v dohled.
+
+### Karta prvního běžného použití po převodu
+
+```text
+Převedená reakce:
+
+Běžný rytmus:
+
+První běžná situace:
+
+Zdroj pravdy použitý při práci:
+
+Výstup:
+
+Co bylo potřeba mimo běžný rytmus:
+
+Stav po použití:
+- běžně drží / drobné tření / slabé kanonické místo / skutečný návratový signál
+
+Nejmenší oprava, pokud je potřeba:
+
+Co neměníme:
+
+Co dál samostatně nesledujeme:
+
+Privacy-first úklid:
+
+Další kontrola:
+```
+
+### Checklist prvního běžného použití
+
+- Proběhlo použití ve skutečném pracovním rytmu, ne v umělém testu?
+- Našel člověk kanonické pravidlo bez znalosti poslední reakce?
+- Nevrátil se starý podklad jako rozhodovací důkaz?
+- Nevznikla nová mimořádná kontrola jen kvůli nejistotě?
+- Pokud bylo tření, opravujeme nejbližší pracovní místo?
+- Neměníme celý vzor kvůli jednomu dotazu?
+- Je jasné, jestli stav běžně drží, potřebuje drobnou opravu, nebo naplnil návratový signál?
+- Uklidili jsme dočasné poznámky z prvního použití?
+- Nevzniká evidence podle lidí?
+- Umí tým říct, že téma pokračuje v běžném rytmu bez samostatné agendy?
+
+První běžné použití po převodu je kontrola bez dramatu. Pokud drží, nechte ho držet. Pokud drhne, opravte nejbližší místo. Pokud opravdu spustí návratový signál, otevřete novou smyčku s dnešním důkazem. Všechno ostatní je jen převlečená nervozita, a ta do provozního systému nepatří.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -185864,3 +186038,4 @@ Uzavření prvního běžného review má pravidlu vrátit obyčejnost. Když re
 - 2026-06-05: Doplněna úvodní podkapitola o tom, kdy se z drobných úprav stane širší vzor: rozlišení náhody od opakované příčiny, nejmenší společná oprava, privacy-first ověření, karta a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o přechodu uzavřeného širšího vzoru do klidového provozu: druhý běžný průchod, odstranění mimořádné agendy, zpřesnění návratového signálu, privacy-first úklid, karta a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření první reakce na návratový signál po klidu: čtyři uzavírací stavy, pravidla pro nezvětšování reakce, privacy-first úklid, karta a checklist.
+- 2026-06-06: Doplněna úvodní podkapitola o prvním běžném použití po převodu uzavřené reakce: ověření bez mimořádné péče, tři kontrolní otázky, nejmenší oprava, privacy-first hranice, karta a checklist.
