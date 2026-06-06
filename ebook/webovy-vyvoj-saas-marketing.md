@@ -1446,6 +1446,8 @@ Rozdělte je do tří stavů:
 
 Privacy-first hodnota není jen v tom, že nepřidáte nový tracker. Je i v tom, že po dobrém ověření uklidíte stopy, které byly užitečné jen během ověření. Jinak se z "dočasně" stane "někde to asi ještě máme" a to je oblíbený evropský sport, který bychom mohli konečně nechat jiným.
 
+Dočasné důkazy proto rovnou zapisujte s datem úklidu. Věta "export smažeme po prvním běžném předání" je praktičtější než neurčité "později uklidit". Tým pak nemusí znovu rozhodovat, jestli pomocný podklad ještě slouží účelu; podmínka byla daná už ve chvíli, kdy vznikl.
+
 ### Karta prvního běžného předání
 
 ```text
