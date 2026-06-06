@@ -183477,7 +183477,195 @@ Workshop nesmí skončit neurčitým "uvidíme". Buď pravidlo odchází do bě�
 
 Druhé běžné použití po uzavřeném druhém návratu má být poslední kontrola, že systém nepotřebuje ruční uklidňování. Když drží, nechte ho žít v běžné práci. Když potřebuje jednu větu, napište ji. Když ukáže nové téma, oddělte ho. Hlavní hodnota je v tom, že se návratová větev nenechá znovu vyrůst jen proto, že tým umí být velmi pečlivý.
 
+## Uzavření druhého běžného použití do běžného rytmu
+
+Druhé běžné použití je už skoro konec návratové větve. Ne úplně konec práce, protože pravidlo bude dál žít v produktu, webu, procesu nebo checklistu. Ale konec zvláštní pozornosti ano. Pokud se po druhém běžném průchodu všechno tváří normálně, tým nemá hledat další kontrolní bod jen proto, že už si na kontroly zvykl.
+
+Uzavření proto začíná jednoduchou větou:
+
+```text
+Po druhém běžném použití zůstává téma v běžném rytmu, protože:
+```
+
+Za dvojtečku nepatří dlouhá historie. Patří tam důvod, který by pochopil člověk, který u návratu nebyl. Například: "pravidlo se použilo ve dvou běžných situacích, lidé začali v kanonickém místě a nevznikla nová agenda." Taková věta stačí. Když nestačí, pravděpodobně ještě neuzavíráte, ale snažíte se obhájit poloviční rozhodnutí.
+
+### Co se uzavírá
+
+Uzavírá se zvláštní režim kolem návratové větve. To znamená:
+
+- neplánuje se třetí průchod jen pro jistotu;
+- nevede se samostatný seznam návratových signálů k této položce;
+- nepřidává se nový report ani nový vlastník dohledu;
+- staré porovnání prvního a druhého návratu se nepoužívá jako běžná pracovní pomůcka;
+- případné další signály jdou do standardního měsíčního, kvartálního nebo produktového rytmu.
+
+Neuzavírá se samotná odpovědnost za kvalitu. Pravidlo pořád může mít vlastníka, revizi nebo místo v checklistu. Rozdíl je v tom, že už není pod zvýšenou péčí. Je to obyčejná součást systému.
+
+Příklad:
+
+```text
+Téma:
+Povinný telefon v poptávkových formulářích.
+
+Druhé běžné použití:
+Kvalifikační dotazník pro pilotní SaaS nabídku.
+
+Výsledek:
+Telefon zůstal volitelný, pravidlo bylo dohledatelné a nevznikla nová otázka.
+
+Uzavření:
+Návratová větev se zavírá. Pravidlo zůstává v checklistu formulářů a další signály se budou řešit v běžném měsíčním review webu.
+
+Co už neděláme:
+Neplánujeme třetí kontrolu, nesbíráme osobní použití checklistu a neudržujeme starou pomocnou poznámku.
+```
+
+Tento zápis je krátký, ale praktický. Říká, kde pravidlo žije, co se dál nehlídá a kam půjdou budoucí signály. To je přesně úroveň, kterou běžný provoz potřebuje.
+
+### Tři uzavírací varianty
+
+Po druhém běžném použití vyberte jednu variantu:
+
+- Uzavřít bez změny: pravidlo funguje, kanonické místo je srozumitelné a další zvláštní péče končí.
+- Uzavřít s jednou větou: druhý průchod ukázal drobnou hranu, kterou stačí doplnit do kanonického místa.
+- Neuzavírat návratovou větev, ale zúžit ji: pravidlo se pořád vrací ke staré historii, takže ještě není připravené na běžný rytmus.
+
+Čtvrtá varianta "necháme otevřené pro jistotu" sem nepatří. Otevřený stav bez rozhodnutí je jen tichý úkol navíc. Nikdo ho nebude chtít vlastnit, ale bude strašit v hlavě pokaždé, když se otevře související stránka, formulář nebo šablona.
+
+Rozhodovací tabulka:
+
+```text
+Pozorování:
+Druhé použití proběhlo normálně.
+Varianta:
+Uzavřít bez změny.
+
+Pozorování:
+Pravidlo fungovalo, ale lidé se ptali na jednu konkrétní hranu.
+Varianta:
+Uzavřít s jednou větou.
+
+Pozorování:
+Lidé bez staré historie nevěděli, proč pravidlo existuje.
+Varianta:
+Neuzavírat, zúžit na přepis pravidla do pracovního jazyka.
+```
+
+Pokud vyberete třetí variantu, další krok musí být malý. Neotevírejte znovu celou cestu od prvního návratu. Napište jen otázku: "Jak má být pravidlo formulované, aby ho použil člověk bez znalosti staré historie?" To je dost konkrétní problém.
+
+### Převod do běžného rytmu
+
+Běžný rytmus musí být místo, které už existuje. Může to být měsíční review webu, produktové plánování, support review, redakční údržba, kontrola formulářů nebo provozní retro. Pokud kvůli uzavření vytváříte nový rytmus, pravděpodobně uzavíráte moc těžce.
+
+Převod napište do jedné z těchto podob:
+
+```text
+Další signály k tomuto pravidlu půjdou do:
+- měsíčního review webu
+- kvartální kontroly formulářů
+- produktového backlogu
+- redakční údržby
+- provozního retro
+- bez další zvláštní evidence
+```
+
+U každé volby doplňte, co se má stát, když se signál objeví. Nestačí říct "dáme to do backlogu". Lepší je:
+
+```text
+Pokud se pravidlo znovu zasekne v běžné práci, vlastník webu zapíše jednu větu do měsíčního review. Nová karta vznikne jen tehdy, když se stejné tření objeví ve dvou různých pracovních situacích.
+```
+
+Tím se chrání tým před dvěma extrémy. Na jedné straně se signály neztratí. Na druhé straně se z každé drobné nejistoty nestane samostatný projekt.
+
+### Privacy-first uzavření
+
+Uzavření druhého běžného použití je dobrá chvíle pro úklid datové stopy. Většina pomocných poznámek už splnila účel. Pokud v nich zůstaly konkrétní poptávky, screenshoty formulářů, interní jména, poznámky z obchodních hovorů nebo dočasné exporty, zkraťte je na rozhodovací závěr.
+
+Privacy-first závěr může znít:
+
+```text
+Pro běžný rytmus ponecháváme jen anonymizovaný závěr a aktuální pravidlo v kanonickém místě. Mažeme pomocné exporty, staré screenshoty a osobní poznámky z ověřování. Další signály se budou zapisovat jako pracovní situace, ne jako osobní stopa lidí, kteří pravidlo použili.
+```
+
+Nevyhodnocujte lidi podle toho, jestli pravidlo použili "správně". Vyhodnocujte systém: bylo pravidlo dohledatelné, srozumitelné a dost blízko práci? Pokud ne, opravte systém. Pokud ano, nechte lidi pracovat.
+
+Codyho komentář: dobrý proces poznáte i podle toho, že po sobě uklidí. Proces, který potřebuje vlastní památník, výroční schůzku a tři reporty, možná nebyl proces. Možná to byl jen velmi sebevědomý nepořádek.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Téma nebo pravidlo:
+
+Kanonické místo:
+
+První běžné použití:
+
+Druhé běžné použití:
+
+Výsledek druhého použití:
+- stabilní bez akce
+- jedna drobná hrana
+- slabá přenositelnost
+- nový samostatný problém
+
+Uzavírací varianta:
+- uzavřít bez změny
+- uzavřít s jednou větou
+- neuzavírat, zúžit na přepis pravidla
+
+Jednovětý závěr:
+
+Co se mění v kanonickém místě:
+
+Kam půjdou další signály:
+
+Kdy vznikne nová karta:
+
+Co už samostatně nehlídáme:
+
+Co mažeme nebo zkracujeme:
+
+Co dál nesbíráme:
+
+Vlastník běžného rytmu:
+
+Datum další přirozené revize:
+```
+
+Karta nemá být důkazní spis. Má být most z mimořádného režimu zpět do normální práce. Pokud se nevejde na jednu obrazovku, nejspíš do ní taháte historii, kterou už kanonické pravidlo nemá potřebovat.
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte výsledek druhého běžného použití.
+2. Minuta 1-2: vyberte jednu uzavírací variantu.
+3. Minuta 2-3: napište jednovětý závěr pro člověka, který u návratu nebyl.
+4. Minuta 3-4: určete existující běžný rytmus, kam půjdou další signály.
+5. Minuta 4-5: zapište, co už samostatně nehlídáte a co dál nesbíráte.
+6. Minuta 5-6: smažte nebo zkraťte pomocné stopy, které už nemají rozhodovací hodnotu.
+
+Workshop končí jen tehdy, když je jasné, kde pravidlo žije dál. Pokud tým řekne "někdo se na to občas podívá", není to rytmus. Je to přání oblečené jako odpovědnost.
+
+### Checklist uzavření do běžného rytmu
+
+- Máme zapsané první i druhé běžné použití?
+- Víme, zda druhý průchod proběhl bez mimořádné péče?
+- Vybrali jsme jednu uzavírací variantu?
+- Je jednovětý závěr srozumitelný člověku bez staré historie?
+- Pokud doplňujeme pravidlo, jde jen o jednu větu nebo jeden příklad?
+- Pokud neuzavíráme, je další krok zúžený na konkrétní přepis pravidla?
+- Další signály jdou do existujícího běžného rytmu?
+- Je napsané, kdy vznikne nová karta a kdy ne?
+- Ukončili jsme samostatné hlídání návratové větve?
+- Zkrátili jsme pomocné poznámky na rozhodovací závěr?
+- Mažeme dočasné exporty, screenshoty a osobní stopy, které už nemají účel?
+- Nepřidáváme nový tracker, report, CRM pole ani evidenci lidí?
+- Ví vlastník běžného rytmu, co má dělat při dalším signálu?
+
+Uzavření druhého běžného použití má vrátit tématu normální váhu. Ne nulu, protože pravidlo pořád existuje. Ale ani mimořádnou pozornost, protože ta už splnila účel. Dvě běžná použití mají týmu dát dost klidu na to, aby nechal systém fungovat a řešil další otázky až ve chvíli, kdy opravdu přijdou.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o uzavření druhého běžného použití do běžného rytmu: tři uzavírací varianty, převod signálů do existujícího rytmu, privacy-first úklid, karta, mini workshop a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o druhém běžném použití po uzavření druhého návratu: ověření dohledatelnosti, použitelnosti a klidu, čtyři výsledky, ukončení zvláštní pozornosti, privacy-first zápis, karta, mini workshop a checklist.
 
