@@ -184152,7 +184152,236 @@ Datum další běžné kontroly:
 
 Uzavření prvního měsíce má dát týmu povolení přestat se dívat na téma jako na čerstvou opravu. Pokud drží, je z něj běžné pravidlo. Pokud drhne, opraví se nejbližší místo. Pokud vznikl nový signál, dostane vlastní otázku. Všechno ostatní je jen způsob, jak nechat starou větev žít déle, než si zaslouží.
 
+## Druhý měsíc po uzavření prvního měsíce
+
+Po uzavření prvního měsíce přichází období, které bývá zrádné právě tím, že vypadá úplně obyčejně. Téma už nemá zvláštní pozornost, stará návratová větev je zavřená a kanonické místo má nést práci samo. Jenže lidé mají paměť. Pokud se kolem tématu dřív hodně diskutovalo, někdo ho může dál potichu hlídat, obcházet pravidlo přes zkušenějšího kolegu nebo při každé podobné situaci připomínat starý problém.
+
+Druhý měsíc proto není další test pravidla. Je to kontrola, jestli se uzavření opravdu stalo běžným návykem. Rozdíl je důležitý. Test pravidla hledá chyby v pravidle. Kontrola návyku hledá, jestli lidé používají správné pracovní místo bez speciálního divadla kolem.
+
+Základní otázka zní:
+
+```text
+Umí téma ve druhém měsíci fungovat bez staré paměti, bez skryté péče a bez nové evidence?
+```
+
+Když odpověď zní ano, další práce je jednoduchá: nic nepřidávat. Když odpověď zní ne, opravte nejbližší místo, kde se běžný návyk rozpadá. Nevracejte se k celé historii, pokud k tomu nevznikl skutečný nový návratový signál.
+
+### Co druhý měsíc sleduje
+
+Druhý měsíc sleduje tři věci:
+
+- zda člověk začne práci v kanonickém místě;
+- zda mu stačí aktuální pravidlo nebo příklad;
+- zda výsledek nevyžaduje ruční dohled mimo běžný rytmus.
+
+To je všechno. Není potřeba měřit, kdo pravidlo četl, jak dlouho ho používal, kolikrát otevřel dokument ani jestli si při tom udělal kávu. Potřebujete vidět hotový pracovní výstup a zjistit, zda odpovídá pravidlu bez mimořádného zásahu.
+
+Příklad pro web:
+
+```text
+Téma:
+Telefon ve formulářích.
+
+Kanonické místo:
+Checklist formulářů.
+
+Druhý měsíc:
+Vznikla jedna nová vstupní stránka pro konzultaci.
+
+Pozorování:
+Editor začal v checklistu, telefon nechal volitelný a doplnil důvod dalšího kroku do textu formuláře. Nikdo neposílal formulář na zvláštní kontrolu.
+
+Závěr:
+Návyk drží. Žádná další akce.
+```
+
+Příklad pro SaaS:
+
+```text
+Téma:
+První aktivace uživatele v onboardingu.
+
+Kanonické místo:
+Produktový checklist pro první hodnotu.
+
+Druhý měsíc:
+Tým upravil jednu prázdnou obrazovku v nastavení účtu.
+
+Pozorování:
+Úprava se opřela o aktuální definici první hodnoty. Nevznikl nový event, nový onboardingový report ani ruční kontrola každého účtu.
+
+Závěr:
+Pravidlo se používá jako součást běžné produktové práce.
+```
+
+Dobrý druhý měsíc často nepřinese nic dramatického. To je v pořádku. Jeho smysl není vyrobit další poznatky, ale potvrdit, že předchozí uzavření nebylo jen hezké administrativní gesto.
+
+### Čtyři stavy druhého měsíce
+
+Po druhém měsíci vyberte jeden stav:
+
+- Stabilní návyk: práce začíná ve správném místě a nepotřebuje starou historii.
+- Lokální tření: pravidlo se používá, ale jedno místo pořád mate nebo zpomaluje.
+- Návrat skryté péče: někdo znovu ručně hlídá téma mimo běžný rytmus.
+- Nový samostatný signál: objevil se problém, který už není pokračováním staré větve.
+
+Každý stav má jinou reakci:
+
+```text
+Stav:
+Stabilní návyk
+Reakce:
+Zapsat klidný stav a neplánovat další speciální kontrolu.
+
+Stav:
+Lokální tření
+Reakce:
+Opravit jedno konkrétní místo, například příklad, odkaz nebo pořadí otázky v checklistu.
+
+Stav:
+Návrat skryté péče
+Reakce:
+Pojmenovat ruční dohled, ukončit ho a doplnit nejmenší chybějící oporu do systému.
+
+Stav:
+Nový samostatný signál
+Reakce:
+Otevřít novou otázku se stop podmínkou. Staré uzavření zůstává zavřené.
+```
+
+Stav `Lokální tření` svádí k přepsání celého pravidla. Nedělejte to. Pokud lidé pravidlo našli a použili, jen narazili na jednu hranu, opravte tu hranu. Užitečná oprava je třeba věta "u konzultačního formuláře smí být telefon povinný jen tehdy, když je telefonický hovor slíbený jako další krok". Neužitečná oprava je nový dvoustránkový standard, který vznikne kvůli jedné nejasné větě.
+
+Stav `Návrat skryté péče` je signál, že tým pravidlu ještě úplně nevěří. Neřešte to výčitkou. Zeptejte se, co ruční dohled nahrazoval. Chyběl příklad? Chyběla hranice výjimky? Bál se vlastník, že kvalita spadne? Jakmile důvod pojmenujete, převeďte ho do systému nebo ho vědomě ukončete.
+
+Codyho komentář: druhý měsíc je test dospělosti procesu. Když pravidlo funguje jen za dozoru člověka, který ho kdysi napsal, není to pravidlo. Je to znalost s bodyguardem. Efektní, ale drahé.
+
+### Jak nezvětšit reakci
+
+Nejčastější chyba po druhém měsíci je nepřiměřená reakce. Jedna nejasná situace vyrobí nový report. Jeden dotaz vyrobí nový checklist. Jedna výjimka vyrobí pravidlo pro všechny výjimky v galaxii. Takhle vzniká provozní bahno.
+
+Použijte filtr tří otázek:
+
+```text
+Je problém opakovaný?
+Brání rozhodnutí právě teď?
+Stačí oprava v nejbližším pracovním místě?
+```
+
+Pokud je problém jednorázový, zapište ho jako poznámku k výstupu a nechte ho být. Pokud nebrání rozhodnutí, vraťte se k němu až při běžném review. Pokud stačí oprava v nejbližším pracovním místě, neotevírejte celý proces.
+
+Praktické řezy:
+
+- Místo nového reportu doplňte jednu větu do existujícího checklistu.
+- Místo nového meetingu přidejte návratový signál do běžné agendy.
+- Místo osobního dohledu nastavte jasnou hranici, kdy se výstup eskaluje.
+- Místo nové analytiky projděte dva hotové výstupy, které už vznikly v běžné práci.
+- Místo přepisování historie napište aktuální provozní větu.
+
+Reakce po druhém měsíci má být tak malá, aby ji tým dokázal provést hned a pak se vrátit k práci. Pokud potřebuje samostatné plánování, pravděpodobně už nejde o druhý měsíc, ale o nový problém. Ten si zaslouží vlastní kartu, ne nenápadné přilepení ke starému uzavření.
+
+### Privacy-first hranice druhého měsíce
+
+Druhý měsíc nesmí zavést novou datovou stopu jen proto, že tým chce mít jistotu. Jistota se tady bere z hotových výstupů a běžných rozhodnutí, ne ze sledování lidí.
+
+Nesbírejte:
+
+- osobní evidenci, kdo pravidlo použil;
+- kliky do checklistu;
+- čas strávený v dokumentu;
+- screenshoty pracovních obrazovek bez jasného účelu;
+- nové CRM pole jen pro kontrolu staré větve;
+- exporty poptávek nebo uživatelů, pokud stačí anonymizovaný závěr.
+
+Ponechte:
+
+- stav druhého měsíce;
+- jednu případnou lokální opravu;
+- nový návratový signál, pokud opravdu vznikl;
+- anonymizovaný závěr o tom, co už dál nesbíráte.
+
+Privacy-first zápis může znít:
+
+```text
+Druhý měsíc ověřujeme jen z hotových pracovních výstupů. Nevedeme osobní evidenci použití pravidla, nezavádíme nový report a mažeme pomocné poznámky po uzavření stavu.
+```
+
+Tohle není jen právnická opatrnost. Je to i produktivita. Každá zbytečná evidence chce někoho, kdo ji založí, vysvětlí, udržuje a jednou uklidí. Když ji nepotřebujete pro rozhodnutí, nevyrábějte ji.
+
+### Karta druhého měsíce
+
+```text
+Téma nebo pravidlo:
+
+Kanonické místo:
+
+Běžný rytmus:
+
+Druhý měsíc:
+
+Přirozené pracovní situace:
+
+Začala práce v kanonickém místě:
+- ano / ne / téma se neobjevilo
+
+Stačilo aktuální pravidlo:
+- ano / ne / téma se neobjevilo
+
+Objevil se ruční dohled mimo běžný rytmus:
+- ano / ne
+
+Stav druhého měsíce:
+- stabilní návyk
+- lokální tření
+- návrat skryté péče
+- nový samostatný signál
+
+Jedna reakce:
+
+Co se mění v nejbližším pracovním místě:
+
+Co dál nehlídáme:
+
+Co mažeme nebo anonymizujeme:
+
+Co dál nesbíráme:
+
+Kdy vznikne nová karta:
+```
+
+Karta má zavřít otázku, ne otevřít archiv. Pokud při jejím vyplňování začnete dohledávat staré poznámky, staré spory a staré exporty, zastavte se. Druhý měsíc má ukázat, zda současný systém funguje bez nich.
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: pojmenujte kanonické místo a běžný rytmus.
+2. Minuta 1-2: napište, zda se téma ve druhém měsíci přirozeně objevilo.
+3. Minuta 2-3: ověřte, jestli práce začala ve správném místě a bez staré historie.
+4. Minuta 3-4: vyberte jeden ze čtyř stavů druhého měsíce.
+5. Minuta 4-5: určete nejmenší odpovídající reakci nebo "bez akce".
+6. Minuta 5-6: zapište, co dál nesbíráte, a ukliďte pomocné stopy.
+
+Workshop končí ve chvíli, kdy je jasné, zda téma zůstává v normálním rytmu. Pokud někdo navrhne "ještě to pro jistotu měsíc sledujme", musí říct, jaké rozhodnutí tím vznikne. Bez rozhodnutí je to jen odklad klidu.
+
+### Checklist druhého měsíce
+
+- Je jasné, že druhý měsíc kontroluje návyk, ne znovu celé pravidlo?
+- Sledujeme jen přirozené pracovní situace?
+- Začala práce v kanonickém místě bez ruční navigace?
+- Stačilo aktuální pravidlo nebo příklad?
+- Nevznikl nový ruční dohled mimo běžný rytmus?
+- Vybrali jsme jeden ze čtyř stavů druhého měsíce?
+- Pokud je stav stabilní, neplánujeme další zvláštní kontrolu?
+- Pokud vzniklo lokální tření, opravujeme jedno nejbližší místo?
+- Pokud se vrátila skrytá péče, pojmenovali jsme, co nahrazovala?
+- Pokud vznikl nový signál, má vlastní otázku a neotevírá starou větev?
+- Nepřidáváme nový report, tracker, CRM pole ani osobní evidenci použití?
+- Mažeme nebo anonymizujeme pomocné poznámky bez další rozhodovací hodnoty?
+- Ví vlastník běžného rytmu, kdy téma nechat být a kdy založit novou kartu?
+
+Druhý měsíc po uzavření prvního měsíce má chránit klid. Ne pasivitu, ale klid dobře uloženého pravidla. Pokud systém funguje bez speciální péče, nechte ho pracovat. Pokud se objeví malá hrana, obruste ji. Pokud vznikne nový problém, dejte mu vlastní otázku. A pokud se jen vrací starý zvyk všechno jistit ručně, ukliďte ho dřív, než si najde vlastní židli na poradě.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o druhém měsíci po uzavření prvního měsíce: kontrola běžného návyku, čtyři stavy, pravidla pro nezvětšování reakce, privacy-first hranice, karta, mini workshop a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o převodu uzavřené reakce po klidu do běžného rytmu: převodní věta, čtyři cesty, výběr běžného rytmu, privacy-first zmenšení datové stopy, karta a checklist.
 
