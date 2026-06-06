@@ -181857,8 +181857,185 @@ Pokud workshop začne vyrábět novou sadu pravidel, vraťte se k otázce převo
 
 Dlouhodobý tichý rytmus je dobrý výsledek právě proto, že nevypadá jako velký výsledek. Pravidlo je dostupné, návratový signál existuje, zbytečné podklady zmizely a tým se může věnovat práci, která právě teď opravdu potřebuje pozornost.
 
+## První dlouhodobé review tichého rytmu
+
+Dlouhodobý tichý rytmus neznamená, že se k položce už nikdy nesmíte vrátit. Znamená, že návrat nemá vznikat z nervozity, z pocitu "měli bychom to zase probrat", ani z toho, že někdo našel starou kartu a dostal chuť ji vylepšit. První dlouhodobé review má ověřit jen jednu věc: jestli tiché pravidlo pořád drží bez zvláštní péče a bez skrytého dohledu.
+
+Dobrá otázka pro první dlouhodobé review zní:
+
+```text
+Funguje položka v běžném provozu tak tiše, že stačí ponechat kanonické pravidlo a návratový signál, nebo se objevila konkrétní práce, která vyžaduje úzké znovuotevření?
+```
+
+Slovo "konkrétní" je důležité. Review nemá sbírat nálady, dojmy ani obecné obavy. Má se podívat na několik reálných pracovních průchodů a rozhodnout, jestli tichý rytmus pořád šetří pozornost. Pokud ano, nejlepším výsledkem je žádná nová práce.
+
+Příklad:
+
+```text
+Položka:
+Poptávkové formuláře nemají povinně sbírat telefon, pokud pro první odpověď stačí e-mail a popis cíle.
+
+Kanonické místo:
+Redakční a webový checklist pro kontaktní formuláře.
+
+Návratový signál:
+Nový formulář přidává telefon jako povinné pole bez jasného obchodního důvodu.
+
+Review:
+Za poslední období vznikly dva nové formuláře. Oba použily pravidlo bez ruční kontroly. Neobjevil se požadavek na nový tracker, export ani schvalování.
+
+Rozhodnutí:
+Ponechat v tichém rytmu. Nic dalšího neotvíráme.
+```
+
+Takový výsledek může působit až podezřele nenápadně. To je v pořádku. Tiché pravidlo má mizet do běžné práce, ne vytvářet dojem důležitosti tím, že si vyžaduje pravidelné obřady.
+
+### Kdy review vůbec otevřít
+
+První dlouhodobé review otevřete jen tehdy, když nastane jeden z těchto důvodů:
+
+- uplynulo předem domluvené delší okno, například kvartál nebo první větší provozní cyklus;
+- položka se objevila v běžném review jiné práce, ale zatím bez jasného návratového signálu;
+- nový člověk použil kanonické pravidlo a není jisté, jestli ho našel správně;
+- změnil se pracovní kontext, třeba nový typ nabídky, formuláře, onboardingového kroku nebo marketingového materiálu;
+- někdo navrhuje obnovit sledování, schvalování nebo sběr dat "pro jistotu".
+
+Review neotvírejte jen proto, že položka dlouho mlčí. Ticho je očekávaný stav. Pokud mlčení samo o sobě vyvolává nejistotu, problém často není v položce, ale v tom, že tým nevěří vlastnímu uzavření.
+
+Praktická brzda:
+
+```text
+Než otevřeme review, umíme ukázat pracovní situaci, ve které se pravidlo mohlo projevit?
+```
+
+Pokud neumíte, nechte položku být. Kontrolovat pravidlo bez pracovního průchodu je jako vážit prázdnou krabici a tvářit se, že z toho poznáte kvalitu balení.
+
+### Co při review kontrolovat
+
+Držte review na čtyřech jednoduchých otázkách:
+
+- Našlo se pravidlo v kanonickém místě bez hledání v historii?
+- Použilo se pravidlo v reálné práci bez zvláštního dohledu?
+- Nevrátil se původní problém v konkrétní podobě?
+- Nevznikla nová datová stopa, schvalování nebo ruční kontrola jen kvůli pocitu jistoty?
+
+Nepotřebujete kompletní audit. Stačí jeden až tři průchody, které odpovídají běžnému použití. U webu to může být nová landing page, formulář nebo case study. U SaaS to může být onboardingový krok, support odpověď, export dat nebo role v účtu. U marketingu to může být nový obsah, distribuční balíček nebo lead magnet.
+
+Výstupem review není tabulka se skóre. Výstupem je krátké rozhodnutí:
+
+```text
+Ponechat v tichu / dočistit kanonické místo / otevřít úzkou kartu / ukončit pravidlo.
+```
+
+### Čtyři výsledky review
+
+`Ponechat v tichu` použijte, když pravidlo funguje, návratový signál se neobjevil a nikdo kvůli němu nedělá skrytou práci. Zapište jednu větu a nic dalšího nerozšiřujte:
+
+```text
+Review potvrzuje tichý rytmus. Pravidlo zůstává v [kanonické místo], návratový signál zůstává [signál], nové sledování nevzniká.
+```
+
+`Dočistit kanonické místo` použijte, když pravidlo funguje, ale bylo hůř dohledatelné, než má být. Oprava má být lokální: jeden odkaz, jedna věta v checklistu, jasnější název šablony nebo doplnění vlastníka místa. Neotvírejte historii původního rozhodnutí, pokud se nevrátil původní problém.
+
+`Otevřít úzkou kartu` použijte, když se návratový signál opravdu objevil. Úzká karta nesmí začínat větou "pojďme znovu probrat celé téma". Začíná konkrétní situací:
+
+```text
+Návratový signál:
+
+Kde se objevil:
+
+Jak zasáhl práci:
+
+Co potřebujeme rozhodnout teď:
+
+Co výslovně neotvíráme:
+```
+
+`Ukončit pravidlo` použijte, když pravidlo přestalo odpovídat realitě a tým už ho nepotřebuje ani jako návratový signál. Ukončení není selhání. Je to úklid. Zapište, kde se pravidlo ruší, co ho nahrazuje, a jaké staré podklady se mažou nebo archivují.
+
+### Privacy-first review bez nového dohledu
+
+První dlouhodobé review je citlivé na jednu nenápadnou chybu: tým začne dokazovat, že pravidlo funguje, pomocí nového sledování. Přidá event, povinné pole, kontrolní sloupec, session recording, export, schvalovací krok nebo měsíční report. Formálně tím jen "ověřuje stav". Prakticky tím ruší tichý rytmus.
+
+Privacy-first pravidlo:
+
+```text
+Review používá existující pracovní stopy. Nové sledování vzniká jen tehdy, když bez něj nejde udělat konkrétní rozhodnutí a zároveň je jasně omezené účelem, rozsahem a životností.
+```
+
+Ve většině případů stačí projít to, co už přirozeně existuje: poslední vydané stránky, aktuální checklist, několik support odpovědí, poslední změny v produktové šabloně nebo krátký rozhovor s člověkem, který pravidlo použil. Pokud se bez nových dat neobejdete, napište předem stop podmínku a datum úklidu.
+
+Příklad:
+
+```text
+Potřebujeme ověřit jen to, zda nové poptávkové formuláře nepřidaly zbytečné povinné pole. Projdeme poslední tři formuláře ručně. Nevytváříme nový event, nesbíráme chování návštěvníků a neexportujeme osobní údaje.
+```
+
+Codyho komentář: když kvůli kontrole tichého pravidla spustíte nový sledovací aparát, pravidlo není tiché. Jen jste mu dali malý mikrofon a řekli, že je to dočasné. Dočasné mikrofony mají zvláštní talent zůstávat zapnuté.
+
+### Karta prvního dlouhodobého review
+
+```text
+Položka:
+
+Kanonické místo:
+
+Původní návratový signál:
+
+Důvod review:
+- domluvené okno / nový pracovní kontext / nejistota v použití / návrh na obnovení sledování / jiné
+
+Pracovní průchody, které jsme ověřili:
+
+Co fungovalo bez zvláštní péče:
+
+Co se muselo dohledávat nebo ručně hlídat:
+
+Objevil se návratový signál?
+
+Vznikla nebo hrozí nová datová stopa?
+
+Rozhodnutí:
+- ponechat v tichu / dočistit kanonické místo / otevřít úzkou kartu / ukončit pravidlo
+
+Lokální úprava, pokud existuje:
+
+Co výslovně neotevíráme:
+
+Co mažeme, zkracujeme nebo necháváme nesbírat:
+
+Další návrat pouze při:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte kanonické pravidlo a návratový signál.
+2. Minuta 1-2: vyberte jeden až tři reálné pracovní průchody.
+3. Minuta 2-3: ověřte, jestli se pravidlo použilo bez hledání v historii.
+4. Minuta 3-4: hledejte jen skutečný návratový signál, ne nové nápady.
+5. Minuta 4-5: zkontrolujte, že review nevyrábí nový sběr dat ani skrytý dohled.
+6. Minuta 5-6: vyberte jeden ze čtyř výsledků a zapište závěrečnou větu.
+
+Když během workshopu vznikne chuť otevřít širší téma, dejte ho stranou jako samostatný podnět. Review tichého rytmu má chránit uzavření. Není to zadní vchod pro redesign starého rozhodnutí.
+
+### Checklist prvního dlouhodobého review
+
+- Má review konkrétní důvod, ne jen neklid z dlouhého ticha?
+- Ověřujeme reálné pracovní průchody, ne abstraktní dojmy?
+- Je kanonické místo stále dohledatelné bez čtení historie?
+- Použilo se pravidlo bez zvláštního dohledu?
+- Objevil se skutečný návratový signál, nebo jen nový nápad?
+- Nevzniká kvůli review nový event, export, schvalování nebo report bez jasného účelu?
+- Pokud je potřeba lokální oprava, vejde se do jedné věty, odkazu nebo checklistového bodu?
+- Pokud otevíráme úzkou kartu, je jasné, co výslovně neotevíráme?
+- Pokud pravidlo ukončujeme, víme, co ho nahrazuje a kde se ruší staré odkazy?
+- Končí review rozhodnutím, ne další pravidelnou kontrolou pro jistotu?
+
+Nejlepší první dlouhodobé review je krátké a trochu nudné. Potvrdí, že pravidlo žije tam, kde má, nevyrábí dohled, nesbírá zbytečná data a nemusí se tvářit jako projekt. V dobrém systému je spousta důležitých věcí nudná. Drama si necháme na incidenty, faktury po splatnosti a nekonečné diskuse o tom, jestli tlačítko má být tyrkysové.
+
 ## Pracovní log
 
+- 2026-06-06: Doplněna úvodní podkapitola o prvním dlouhodobém review tichého rytmu: důvody otevření review, čtyři výsledné stavy, privacy-first kontrola bez nového dohledu, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o převodu prvního tichého měsíce do dlouhodobého tichého rytmu: ponechané minimum, ukončení přechodové kontroly, tři převodní stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním měsíci v tichém rytmu: hranice sledování, zdravý tichý měsíc, tři výsledky, privacy-first pravidla, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření druhého běžného review do tichého rytmu: čtyři uzavírací stavy, umlčení skrytého dohledu, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
