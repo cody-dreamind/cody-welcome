@@ -183294,7 +183294,192 @@ Workshop je krátký schválně. Jakmile se začne řešit širší historie dru
 
 Uzavření prvního běžného použití je dobré tehdy, když po něm systém nepotřebuje zvláštní pozornost. Buď pravidlo drží a mlčí, nebo dostane jednu praktickou větu, nebo se nový signál oddělí bez přilepení ke staré historii. V každém případě se práce vrací na nejnižší úroveň pozornosti, která ještě chrání rozhodnutí.
 
+## Druhé běžné použití po uzavření druhého návratu
+
+Druhé běžné použití po uzavřeném druhém návratu má jinou roli než první. První průchod ověřil, že kanonické místo po uzavření nezůstalo jen hezkou větou v logu. Druhý průchod má ukázat, jestli se pravidlo umí chovat nenápadně i bez čerstvé pozornosti týmu.
+
+Tohle je drobný, ale důležitý rozdíl. Při prvním použití si lidé často ještě pamatují, že se něco řešilo. Při druhém už se má ukázat, jestli systém opravdu nese rozhodnutí sám: checklist je na správném místě, formulace je použitelná, stará historie se neotevírá a nikdo kvůli tomu nevyrábí novou kontrolní vrstvu.
+
+Základní otázka zní:
+
+```text
+Proběhlo druhé běžné použití jako normální práce, nebo se kolem něj znovu objevila mimořádná péče?
+```
+
+Normální práce znamená, že člověk použije pravidlo tam, kde zrovna stojí. Neptá se, proč vzniklo. Nehledá staré srovnání prvního a druhého návratu. Nevytváří nový seznam výjimek. Udělá rozhodnutí, dokončí výstup a systém po něm nezůstane těžší.
+
+### Co druhý průchod opravdu ověřuje
+
+Druhý běžný průchod neověřuje celou historii návratů. Ověřuje tři praktičtější věci:
+
+- dohledatelnost: člověk najde aktuální pravidlo bez ruční navigace;
+- použitelnost: pravidlo stačí v jiné běžné situaci než minule;
+- klid: po použití nevzniká další agenda, která by obnovila zvláštní pozornost.
+
+Příklad:
+
+```text
+Uzavřený druhý návrat:
+Checklist formulářů má pravidlo pro povinný telefon.
+
+První běžné použití:
+Nová landing page. Telefon zůstal volitelný a pravidlo stačilo.
+
+Druhé běžné použití:
+Úprava kvalifikačního dotazníku pro pilotní SaaS nabídku.
+
+Co se stalo:
+Tým použil stejný checklist, telefon nechal nepovinný a přidal jasnou větu, kdy přijde další kontakt.
+
+Co nevzniklo:
+Žádný nový audit formulářů, žádné školení pro jistotu, žádné měření lidí, kteří checklist použili.
+
+Stav:
+Pravidlo drží i mimo první ověřovací situaci. Položka zůstává v nízké pozornosti.
+```
+
+Druhý průchod tím potvrzuje, že oprava není vázaná jen na jeden případ. Pořád to ale není důvod k rozšiřování. Pokud pravidlo funguje, nejlepší reakce je zapsat krátký závěr a nechat ho dál pracovat.
+
+### Čtyři výsledky druhého běžného použití
+
+Po druhém průchodu vyberte jeden výsledek:
+
+- Stabilní bez akce: pravidlo se použilo normálně a není potřeba nic měnit.
+- Jedna drobná hrana: pravidlo drží, ale druhá situace ukázala malou výjimku nebo příklad, který patří do kanonického místa.
+- Slabá přenositelnost: pravidlo fungovalo v první situaci, ale v druhé se lidé vraceli ke staré historii nebo se ptali na základní smysl.
+- Nový samostatný problém: druhý průchod odhalil jiné tření, které s uzavřeným druhým návratem nesdílí příčinu.
+
+Reakce má být úměrná výsledku. Stabilní stav se neprodlužuje kontrolou. Drobná hrana se doplní jednou větou nebo příkladem. Slabá přenositelnost se řeší překladem pravidla do praktičtějšího jazyka, ne otevřením celé minulosti. Nový problém se oddělí a dostane vlastní otázku jen tehdy, když má jasný pracovní dopad.
+
+Krátká rozhodovací tabulka:
+
+```text
+Výsledek:
+Stabilní bez akce
+Reakce:
+Zapsat závěr a nechat pravidlo v běžném rytmu.
+
+Výsledek:
+Jedna drobná hrana
+Reakce:
+Doplnit nejmenší příklad do kanonického místa a smazat pomocnou poznámku.
+
+Výsledek:
+Slabá přenositelnost
+Reakce:
+Přepsat pravidlo tak, aby obstálo i bez znalosti staré historie.
+
+Výsledek:
+Nový samostatný problém
+Reakce:
+Oddělit ho od návratové větve a rozhodnout, zda vůbec vzniká nová karta.
+```
+
+### Kdy už neplánovat další průchod
+
+Druhé běžné použití je často dobrá chvíle k ukončení zvláštní pozornosti. Pokud první i druhý průchod proběhly čistě, další ověřování už obvykle nepřidá lepší rozhodnutí. Přidá jen administrativu.
+
+Další zvláštní průchod neplánujte, pokud platí:
+
+- pravidlo se použilo ve dvou běžných situacích;
+- lidé začali v kanonickém místě;
+- stará historie nebyla potřeba;
+- nevznikla nová datová potřeba;
+- nevznikl nový vlastník jen pro dohled nad pravidlem;
+- výsledek nevyvolal zákaznické, právní ani provozní riziko.
+
+Uzavírací věta může být krátká:
+
+```text
+Druhé běžné použití proběhlo bez mimořádné péče. Pravidlo zůstává v kanonickém místě, návratová větev se dál nehlídá samostatně a případné další signály půjdou běžným rytmem.
+```
+
+Pokud se vám zdá, že by se "pro jistotu" hodilo ještě třetí ověření, napište nejdřív, jaké rozhodnutí by třetí průchod změnil. Když odpověď není jasná, nejde o ověření. Je to nervozita převlečená za kvalitu.
+
+Codyho komentář: systém, který po dvou normálních průchodech pořád žádá zvláštní dohled, není pečlivý. Je jen trochu závislý na dozoru. A dozor je drahý koníček, hlavně když místo něj stačí dobrá věta v checklistu.
+
+### Privacy-first druhý průchod
+
+Druhý běžný průchod nesmí být záminka k měření adopce pravidla na úrovni lidí. Nepotřebujete vědět, kdo přesně checklist otevřel, jak dlouho v něm byl ani kolikrát klikl na odkaz. Potřebujete vědět, jestli pracovní výstup vznikl správně a bez obnovy staré historie.
+
+Privacy-first zápis může znít:
+
+```text
+Druhé použití ověřujeme z hotového pracovního výstupu a krátkého anonymizovaného závěru. Nevedeme osobní evidenci použití checklistu, neexportujeme formulářová data a nevytváříme nový report. Do kanonického místa přidáváme jen jednu větu, pokud ji druhý průchod opravdu potřeboval.
+```
+
+Pokud se objevila drobná hrana, po jejím přepsání smažte pomocné poznámky. Pokud se objevilo nové téma, nepřenášejte do něj staré screenshoty, exporty ani osobní detaily. Nová otázka má začít s vlastním minimem důkazů, ne s batohem starých stop.
+
+### Karta druhého běžného použití
+
+```text
+Uzavřený druhý návrat:
+
+Kanonické místo:
+
+První běžné použití a jeho uzavření:
+
+Druhá běžná situace:
+
+Kde práce začala:
+
+Byla potřeba stará historie:
+- ano / ne
+
+Výsledek:
+- stabilní bez akce
+- jedna drobná hrana
+- slabá přenositelnost
+- nový samostatný problém
+
+Jedna odpovídající reakce:
+
+Co se mění v kanonickém místě:
+
+Co zůstává zavřené:
+
+Co už samostatně nehlídáme:
+
+Co mažeme nebo zkracujeme:
+
+Co dál nesbíráme:
+
+Další stav:
+- běžný rytmus / drobná oprava s ověřením / nová otázka / bez další akce
+```
+
+Karta má být kratší než samotná debata. Pokud se začne plnit dlouhými citacemi z minulosti, je to signál, že pravidlo pořád není dost přeložené do pracovního jazyka.
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: pojmenujte druhou běžnou situaci a kanonické místo.
+2. Minuta 1-2: ověřte, jestli práce začala bez staré historie.
+3. Minuta 2-3: vyberte jeden ze čtyř výsledků.
+4. Minuta 3-4: napište jednu odpovídající reakci nebo "bez akce".
+5. Minuta 4-5: určete, zda se zvláštní pozornost končí a co dál nesbíráte.
+
+Workshop nesmí skončit neurčitým "uvidíme". Buď pravidlo odchází do běžného rytmu, dostává jednu drobnou opravu, nebo se odděluje nový problém. Vše ostatní je jen neuklizená nejistota.
+
+### Checklist druhého běžného použití
+
+- Proběhl druhý průchod v přirozené pracovní situaci?
+- Začal člověk v kanonickém místě?
+- Nebylo potřeba otevírat staré porovnání návratů?
+- Ověřili jsme dohledatelnost, použitelnost a klid?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud je stav stabilní, neplánujeme další speciální kontrolu?
+- Pokud vznikla drobná hrana, doplňujeme ji jednou větou místo nového procesu?
+- Pokud je přenositelnost slabá, přepisujeme pravidlo do pracovního jazyka?
+- Pokud vznikl nový problém, oddělujeme ho od uzavřené návratové větve?
+- Nevzniká evidence lidí, klikání, exportů, CRM polí ani nových osobních údajů?
+- Je jasné, co už se samostatně nehlídá?
+- Vrací se téma do běžného rytmu, pokud dva průchody proběhly čistě?
+
+Druhé běžné použití po uzavřeném druhém návratu má být poslední kontrola, že systém nepotřebuje ruční uklidňování. Když drží, nechte ho žít v běžné práci. Když potřebuje jednu větu, napište ji. Když ukáže nové téma, oddělte ho. Hlavní hodnota je v tom, že se návratová větev nenechá znovu vyrůst jen proto, že tým umí být velmi pečlivý.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o druhém běžném použití po uzavření druhého návratu: ověření dohledatelnosti, použitelnosti a klidu, čtyři výsledky, ukončení zvláštní pozornosti, privacy-first zápis, karta, mini workshop a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření druhého návratu: čtyři uzavírací stavy, zápis do kanonického místa, pravidla pro další průchod, privacy-first úklid, karta, mini workshop a checklist.
 
