@@ -185643,8 +185643,192 @@ Workshop končí teprve tehdy, když někdo umí říct: "Tohle pravidlo už nem
 
 Uzavření druhého review je tichý konec mimořádné pozornosti. V dobrém provozu nemá každé opravené pravidlo věčně vlastní malý pomník. Má mít jasné místo, krátký důvod, normální cestu pro signály a žádné zbytečné datové zbytky. V praxi jsou to jen budoucí otázky typu kdo to vlastní, proč to existuje a jestli to ještě smíme držet.
 
+## První dlouhodobé review po trvalém běžném rytmu
+
+Když se pravidlo dostane do trvalého běžného rytmu, nemá se ztratit z dohledu úplně. Má jen přestat dostávat zvláštní péči. První dlouhodobé review proto není návrat ke staré opravě ani kontrola, jestli tým pořád "nezlobí". Je to klidná otázka po delším čase: slouží pravidlo ještě stejné práci, ve stejném místě a se stejnou datovou hranicí?
+
+Dobré dlouhodobé review začíná až tehdy, když má pravidlo za sebou dost běžných průchodů. U některých věcí to může být měsíc, u jiných kvartál. U formuláře s desítkami poptávek měsíčně stačí kratší okno. U onboardingového standardu, který se reálně použije jednou za pár týdnů, nemá smysl předstírat review po kalendářním měsíci jen proto, že datum vypadá hezky.
+
+Základní otázka zní:
+
+```text
+Drží pravidlo po delším běžném provozu pořád svůj původní účel, nebo už jen přežívá jako zvyk?
+```
+
+Tahle otázka je záměrně širší než otázky z prvního a druhého review. Už neověřujete, jestli se pravidlo propsalo do práce. Ověřujete, jestli má pravidlo stále důvod existovat v aktuální podobě. Produkt se mohl změnit, zákazníci se mohli posunout, tým mohl zjednodušit proces, dodavatel mohl odejít, měření mohlo přestat být užitečné. Stabilní pravidlo není automaticky správné navždy. Jen už nemá být otevírané bez důvodu.
+
+### Co při dlouhodobém review kontrolovat
+
+Nečtěte celou historii pravidla. Vezměte aktuální kanonické místo a posledních několik reálných použití. Stačí odpovědět na pět otázek:
+
+```text
+Jaký účel má pravidlo dnes:
+
+Kde podle něj lidé opravdu pracují:
+
+Jaký poslední reálný průchod ukazuje, že pravidlo pomohlo:
+
+Kde pravidlo naopak vytváří tření nebo zbytečnou práci:
+
+Jakou datovou stopu kvůli pravidlu pořád držíme:
+```
+
+Příklad:
+
+```text
+Pravidlo:
+Nový poptávkový formulář smí chtít jen údaje nutné pro první odpověď.
+
+Účel dnes:
+Držet první kontakt jednoduchý a nesbírat údaje bez jasného důvodu.
+
+Kde se používá:
+Checklist landing pages a šablona poptávkového formuláře.
+
+Poslední průchod:
+Při spuštění nové služby tým nepřidal telefon ani velikost firmy, protože první odpověď šla napsat z popisu problému a e-mailu.
+
+Tření:
+U jedné služby obchod opakovaně potřeboval znát preferovaný čas hovoru, ale řešil to až ručním doptáním.
+
+Datová stopa:
+Držíme jen obsah poptávky a e-mail. Telefon dál není povinný.
+```
+
+Z takového zápisu neplyne automaticky změna formuláře. Plyne z něj pracovní otázka: je preferovaný čas hovoru nový oprávněný údaj pro jeden konkrétní typ služby, nebo jen pohodlí obchodního procesu? Dlouhodobé review má vytvářet přesné otázky, ne plošné úpravy.
+
+### Čtyři výsledky dlouhodobého review
+
+Po review vyberte jeden ze čtyř stavů:
+
+- Ponechat beze změny: pravidlo pořád slouží, tření je malé a datová stopa odpovídá účelu.
+- Zjednodušit: pravidlo funguje, ale obsahuje starou historii, nadbytečný příklad nebo příliš opatrnou formulaci.
+- Lokálně upravit: pravidlo má jednu konkrétní hranu, kterou jde opravit v nejbližším pracovním místě.
+- Otevřít novou otázku: změnila se realita a pravidlo už naráží na problém, který nejde vyřešit drobnou úpravou.
+
+Stav "ponechat beze změny" je plnohodnotný výsledek. Pokud review neukáže důvod k zásahu, neodměňujte tým novým úkolem. Zapište, že pravidlo drží, a nechte ho v běžném rytmu.
+
+Stav "zjednodušit" je vhodný, když pravidlo pořád platí, ale jeho text nese příliš mnoho staré opatrnosti. Například kanonické místo stále vysvětluje původní incident, i když novému člověku stačí aktuální pravidlo a jedna věta důvodu.
+
+Stav "lokálně upravit" patří pro jednu hranu. Třeba doplnit, že preferovaný čas hovoru je volitelný údaj jen u služeb, kde první odpověď rovnou nabízí termín konzultace. To není přestavba formulářové strategie. Je to jedna přesná hrana.
+
+Stav "otevřít novou otázku" používejte, když review ukáže změnu kontextu. Například se změnil typ zákazníků, obchodní model, retenční požadavky, právní základ zpracování, dostupné interní nástroje nebo role vlastníka. V tu chvíli pravidlo neohýbejte potichu. Otevřete novou otázku se stop podmínkou.
+
+### Dlouhodobé review není inventura všeho
+
+Největší riziko dlouhodobého review je přerůstání. Tým začne u jednoho pravidla a skončí u revize celého procesu, všech formulářů, všech šablon a historických exportů. To může být někdy potřeba, ale nemá to být výchozí reakce.
+
+Držte review u jednoho pravidla pomocí věty:
+
+```text
+V tomto review posuzujeme jen:
+Mimo rozsah necháváme:
+Novou otázku otevřeme pouze když:
+```
+
+Příklad:
+
+```text
+V tomto review posuzujeme jen:
+Pravidlo minimálního prvního poptávkového formuláře.
+
+Mimo rozsah necháváme:
+Celý obchodní follow-up, CRM scoring, redesign landing pages a nové analytické eventy.
+
+Novou otázku otevřeme pouze když:
+Najdeme opakovaný pracovní důkaz, že pravidlo brání slíbené první odpovědi zákazníkovi.
+```
+
+Taková hranice není byrokracie. Je to ochrana před tím, aby se z dobrého review stal neplánovaný projekt. Pokud se nový projekt opravdu ukáže jako nutný, dostane vlastní otázku, vlastníka a stop podmínku. Nepřilepí se k pravidlu jen proto, že review bylo po ruce.
+
+### Privacy-first dlouhodobá kontrola
+
+Dlouhodobé review je dobrá chvíle ptát se, jestli datová stopa pravidla nezůstala větší než jeho současný účel. Některá data vznikla kvůli ověření, jiná kvůli přechodové opatrnosti a další kvůli původnímu problému, který už nemusí platit.
+
+Privacy-first kontrola:
+
+- Potřebujeme pořád všechny údaje, které pravidlo dovoluje sbírat?
+- Nezůstaly kolem pravidla staré exporty nebo screenshoty z ověřování?
+- Neuchováváme příklady s osobními údaji, když by stačil anonymizovaný vzor?
+- Nevznikla vedle kanonického místa druhá neoficiální evidence?
+- Má pravidlo jasnou retenci pro pracovní podklady, které kvůli němu vznikají?
+
+Pokud review ukáže, že datová stopa je větší než dnešní účel, nejmenší dobrý krok často není nové pravidlo. Je to zkrácení, anonymizace nebo smazání starých podpůrných stop.
+
+Codyho komentář: data mají zvláštní talent tvářit se jako paměť týmu. Část z nich je ale jen starý strach v tabulce. Když už pravidlo funguje, není hrdinství ten strach archivovat navždy.
+
+### Karta dlouhodobého review
+
+```text
+Téma nebo pravidlo:
+
+Kanonické místo:
+
+Okno review:
+
+Kolik reálných průchodů bereme v úvahu:
+
+Původní účel pravidla:
+
+Účel pravidla dnes:
+
+Kde pravidlo pomohlo:
+
+Kde vzniklo tření:
+
+Datová stopa, která kvůli pravidlu existuje:
+
+Výsledek:
+- ponechat beze změny
+- zjednodušit
+- lokálně upravit
+- otevřít novou otázku
+
+Jedna případná změna:
+
+Co zůstává mimo rozsah:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Kam půjdou další signály:
+
+Datum další přirozené kontroly:
+```
+
+Kartu použijte přiměřeně. Pokud review skončí ponecháním beze změny, stačí vyplnit jen účel, poslední reálný průchod, výsledek a datum další přirozené kontroly. Dlouhodobé review má snižovat nejistotu, ne vyrábět dokumentační vrstvu pro dokumentační vrstvu.
+
+### Mini workshop na 7 minut
+
+1. Minuta 0-1: najděte aktuální kanonické místo pravidla.
+2. Minuta 1-2: vyberte poslední dva nebo tři reálné průchody, kde se pravidlo použilo.
+3. Minuta 2-3: napište původní účel a dnešní účel pravidla.
+4. Minuta 3-4: pojmenujte jedno místo, kde pravidlo pomohlo, a jedno místo, kde vytvořilo tření.
+5. Minuta 4-5: zkontrolujte datovou stopu a staré podpůrné stopy.
+6. Minuta 5-6: vyberte jeden ze čtyř výsledků review.
+7. Minuta 6-7: zapište jednu změnu nebo větu "beze změny" a určete další přirozenou kontrolu.
+
+Workshop končí, když je jasné, jestli pravidlo dál žije beze změny, zkracuje se, dostává jednu lokální úpravu, nebo předává problém nové otázce. Nemá skončit seznamem nápadů. Seznam nápadů je často jen odložené rozhodnutí s lepším účesem.
+
+### Checklist dlouhodobého review
+
+- Kontrolujeme aktuální pravidlo, ne celou historickou opravu?
+- Máme dost reálných průchodů, aby review dávalo smysl?
+- Víme, jaký účel mělo pravidlo původně a jaký má dnes?
+- Rozlišili jsme tření v pravidle od nového samostatného problému?
+- Vybrali jsme jeden ze čtyř výsledků review?
+- Pokud pravidlo drží, nezakládáme novou kontrolu jen pro jistotu?
+- Pokud zjednodušujeme, mažeme starou historii místo přidávání vysvětlení?
+- Pokud upravujeme, držíme se jednoho pracovního místa?
+- Pokud otevíráme novou otázku, má vlastní stop podmínku a rozsah?
+- Zkontrolovali jsme podpůrné stopy, exporty, screenshoty a příklady s osobními údaji?
+- Je jasné, co dál nesbíráme nebo co nově zkracujeme?
+- Ví nový člověk po review lépe, co má dělat dnes, ne co se kdysi stalo?
+
+První dlouhodobé review má pravidlu dát dospělou podobu. Buď potvrdit, že je pořád užitečné a nepotřebuje pozornost, nebo ho zkrátit, jemně opravit či oddělit novou otázku. Nejlepší výsledek často vypadá nenápadně: pravidlo je kratší, datová stopa menší a tým se nemusí vracet k historii, aby udělal správný další krok.
+
 ## Pracovní log
 
+- 2026-06-06: Doplněna úvodní podkapitola o prvním dlouhodobém review po trvalém běžném rytmu: kontrola současného účelu pravidla, čtyři výsledné stavy, ochrana rozsahu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření druhého běžného review do trvalého běžného rytmu: čtyři uzavírací stavy, přepis do kanonického místa, úklid podpůrných stop, uzavírací zpráva, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o druhém běžném review po uzavření prvního review: kontrola skryté zvláštní péče, čtyři výsledné stavy, ukončení obchůzek, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního běžného review po stabilním rytmu: čtyři uzavírací stavy, lokální korekce, zkrácení staré paměti, oddělení nové otázky, privacy-first úklid, karta, mini workshop a checklist.
