@@ -183663,7 +183663,210 @@ Workshop končí jen tehdy, když je jasné, kde pravidlo žije dál. Pokud tým
 
 Uzavření druhého běžného použití má vrátit tématu normální váhu. Ne nulu, protože pravidlo pořád existuje. Ale ani mimořádnou pozornost, protože ta už splnila účel. Dvě běžná použití mají týmu dát dost klidu na to, aby nechal systém fungovat a řešil další otázky až ve chvíli, kdy opravdu přijdou.
 
+## První měsíc po návratu do běžného rytmu
+
+Když se návratová větev uzavře do běžného rytmu, práce nekončí slavnostním prohlášením. Končí tím, že se téma během nejbližšího měsíce chová obyčejně. Nevyžaduje vlastní kontrolní meeting, nevytahuje staré důkazy, nevyrábí novou tabulku výjimek a nepřilepí se ke každému podobnému problému jen proto, že má čerstvou historii.
+
+První měsíc po návratu do běžného rytmu proto není další speciální ověřovací fáze. Je to lehký sanity check v existující práci. Sledujete jen to, jestli se uzavření opravdu rozpustilo do normálního provozu. Pokud ano, necháte věc být. Pokud ne, opravíte nejbližší pracovní místo, ne celou minulou větev.
+
+Základní otázka:
+
+```text
+Chová se téma po měsíci jako běžná součást systému, nebo kolem něj zůstala mimořádná pozornost?
+```
+
+Tato otázka chrání před dvěma špatnými konci. První je falešné zapomenutí: tým sice uzavřel větev, ale pravidlo se v praxi nepoužívá nebo není dohledatelné. Druhý je falešná pečlivost: pravidlo funguje, ale tým si kolem něj nechal ruční dohled, protože se mu těžko pouští nedávná práce.
+
+### Co během měsíce pozorovat
+
+Pozorujte jen běžné situace, ve kterých by se pravidlo nebo rozhodnutí stejně objevilo. U webu to může být úprava formuláře, krátké review landing page, redakční kontrola článku nebo aktualizace nabídky. U SaaS to může být změna onboardingového kroku, úprava e-mailové šablony, support review nebo malá produktová úprava. U marketingu to může být příprava kampaně, vyhodnocení poptávek nebo kontrola distribučního kanálu.
+
+Nesbírejte nové důkazy pro jistotu. Stačí odpovědět na tři otázky:
+
+- Našlo se kanonické místo bez ruční navigace?
+- Stačilo pravidlo k rozhodnutí bez staré historie?
+- Nevznikla nová agenda, která by z tématu udělala zvláštní projekt?
+
+Příklad:
+
+```text
+Téma:
+Pravidlo pro povinný telefon v poptávkových formulářích.
+
+Běžný rytmus:
+Měsíční review webu.
+
+Co se během měsíce stalo:
+Vznikla jedna nová landing page a jedna drobná úprava formuláře.
+
+Pozorování:
+Checklist formulářů stačil, telefon zůstal volitelný tam, kde nebyl nutný pro slíbený další krok, a tým neotevíral staré porovnání návratů.
+
+Závěr:
+Téma se chová jako běžná součást systému. Žádná samostatná kontrola nepokračuje.
+```
+
+Takový měsíc není nudný. Je zdravý. Ukazuje, že rozhodnutí už neleží na paměti lidí, kteří byli u původního problému, ale na pracovním místě, které používají i ostatní.
+
+### Čtyři měsíční stavy
+
+Po prvním měsíci vyberte jeden stav:
+
+- Klidný běžný rytmus: téma se použilo normálně, nebo se vůbec neobjevilo a nevznikl důvod ho otevírat.
+- Drobný pracovní šum: lidé našli pravidlo, ale jedna formulace, příklad nebo odkaz pořád vytváří malé tření.
+- Skrytá mimořádná péče: někdo téma ručně hlídá, připomíná nebo kontroluje mimo běžný rytmus.
+- Nový návratový signál: objevilo se opakované nebo dost silné tření, které má vlastní důvod k otevření.
+
+Reakce má být malá:
+
+```text
+Stav:
+Klidný běžný rytmus
+Reakce:
+Zapsat bez akce a další zvláštní pozornost ukončit.
+
+Stav:
+Drobný pracovní šum
+Reakce:
+Upravit jednu větu v kanonickém místě a smazat pomocnou poznámku.
+
+Stav:
+Skrytá mimořádná péče
+Reakce:
+Zrušit ruční dohled a přesměrovat signály do existujícího rytmu.
+
+Stav:
+Nový návratový signál
+Reakce:
+Oddělit novou otázku se stop podmínkou; starou větev neotevírat automaticky.
+```
+
+Nejnebezpečnější stav je skrytá mimořádná péče. Na první pohled vypadá odpovědně: někdo se "jen pro jistotu" ptá, jestli se pravidlo použilo, drží si bokem seznam příkladů nebo kontroluje výstupy lidí. Ve skutečnosti tím systém říká, že kanonické místo ještě nemá důvěru. Buď ho opravte, nebo dohled ukončete. Tichý ruční dozor je drahý a často privacy rizikovější než samotná chyba, protože začne sbírat stopy bez jasného účelu.
+
+### Jak zrušit skrytou mimořádnou péči
+
+Skrytá péče se ruší konkrétně, ne domluvou "už to nebudeme řešit". Nejprve pojmenujte, kde žije:
+
+- opakovaná připomínka na poradě;
+- soukromý seznam kontrolovaných výstupů;
+- ruční ping vlastníkovi po každé podobné úpravě;
+- dočasná tabulka příkladů, která přežila účel;
+- starý odkaz v checklistu, který posílá lidi do historie;
+- neformální pravidlo, že "to ještě raději projde někdo zkušenější".
+
+Pak vyberte jednu náhradu:
+
+```text
+Skrytá péče:
+Editor posílá každý nový formulář ke kontrole vlastníkovi webu.
+
+Proč vznikla:
+Tým si nebyl jistý pravidlem pro povinný telefon.
+
+Náhrada:
+Do checklistu formulářů doplníme jeden příklad pro konzultační další krok.
+
+Co končí:
+Ruční kontrola každého formuláře.
+
+Kam půjdou budoucí signály:
+Do měsíčního review webu, jen pokud se stejné tření objeví ve dvou různých formulářích.
+```
+
+Tím se nebere odpovědnost za kvalitu. Jen se přesouvá z osobního dohledu zpět do systému. Kvalitní provoz nemá stát na tom, že někdo pořád tiše hlídá, jestli ostatní použili pravidlo správně.
+
+Codyho komentář: když se po uzavření pořád někdo dívá přes rameno každému formuláři, není to klidný provoz. Je to babysitting převlečený za proces. A proces má být dospělý člověk, ne batole s tabulkou.
+
+### Privacy-first měsíční kontrola
+
+První měsíc po návratu do běžného rytmu ověřujte z hotových pracovních výstupů, ne z chování lidí. Nepotřebujete sledovat, kdo otevřel checklist, kolikrát klikl na odkaz ani jak dlouho editoval formulář. Potřebujete vědět, jestli výstup odpovídá pravidlu a jestli pravidlo bylo dost blízko práci.
+
+Privacy-first závěr může být velmi krátký:
+
+```text
+Po prvním měsíci ponecháváme jen anonymizovaný závěr o stavu pravidla. Nevedeme osobní evidenci použití checklistu, nemažeme ani neexportujeme zákaznická data a rušíme dočasné poznámky, které už nemají rozhodovací účel.
+```
+
+Pokud se během měsíce neobjevil žádný relevantní průchod, nezakládejte umělý test jen proto, aby karta měla výsledek. Zapište, že se téma v běžném rytmu neobjevilo a že další pozornost vznikne až při přirozeném signálu. I nepřítomnost signálu je použitelný výsledek, pokud kvůli ní nezačnete vyrábět nové měření.
+
+### Karta prvního měsíce v běžném rytmu
+
+```text
+Téma nebo pravidlo:
+
+Kanonické místo:
+
+Běžný rytmus, do kterého bylo téma převedené:
+
+První měsíc:
+
+Přirozené situace, kde se téma objevilo:
+
+Začala práce v kanonickém místě:
+- ano / ne / téma se neobjevilo
+
+Byla potřeba stará historie:
+- ano / ne / téma se neobjevilo
+
+Objevila se skrytá mimořádná péče:
+- ano / ne
+
+Měsíční stav:
+- klidný běžný rytmus
+- drobný pracovní šum
+- skrytá mimořádná péče
+- nový návratový signál
+
+Jedna odpovídající reakce:
+
+Co se mění v kanonickém místě:
+
+Co rušíme jako zbytečný dohled:
+
+Kam půjdou další signály:
+
+Co mažeme nebo zkracujeme:
+
+Co dál nesbíráme:
+
+Další stav:
+- bez zvláštní pozornosti / běžný rytmus / drobná oprava / nová otázka
+```
+
+Karta má být krátká. Pokud vyžaduje složité dokazování, pravděpodobně už nejde o první měsíc v běžném rytmu, ale o nový návratový signál. V tom případě ho oddělte a starou větev nechte zavřenou.
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: pojmenujte běžný rytmus a kanonické místo.
+2. Minuta 1-2: napište, zda se téma během měsíce přirozeně objevilo.
+3. Minuta 2-3: vyberte jeden ze čtyř měsíčních stavů.
+4. Minuta 3-4: určete jednu odpovídající reakci nebo "bez akce".
+5. Minuta 4-5: zapište privacy-first úklid a co už se nesleduje.
+
+Workshop nesmí otevřít starý návrat jen proto, že ho někdo umí dobře převyprávět. První měsíc po návratu do běžného rytmu má potvrdit normálnost. Když nic zvláštního nevzniklo, největší hodnota je v tom, že to tým umí nechat být.
+
+### Checklist prvního měsíce
+
+- Je jasné, do kterého běžného rytmu bylo téma převedené?
+- Víme, kde je kanonické pracovní místo?
+- Ověřujeme jen přirozené situace, ne uměle vytvořený test?
+- Pokud se téma neobjevilo, nezakládáme měření jen kvůli prázdnému měsíci?
+- Pokud se téma objevilo, začala práce v kanonickém místě?
+- Nebylo potřeba otevírat starou historii?
+- Vybrali jsme jeden ze čtyř měsíčních stavů?
+- Pokud je stav klidný, neplánujeme další zvláštní kontrolu?
+- Pokud vznikl drobný šum, opravujeme jednu větu místo nového procesu?
+- Pokud existuje skrytá mimořádná péče, rušíme ji nebo překládáme do systému?
+- Pokud vznikl nový signál, oddělujeme ho od staré uzavřené větve?
+- Nevedeme osobní evidenci použití pravidla, klikání, autorů úprav ani ručních kontrol?
+- Mažeme nebo zkracujeme dočasné poznámky, exporty a screenshoty bez dalšího účelu?
+- Ví vlastník běžného rytmu, kdy vznikne nová karta a kdy ne?
+
+První měsíc po návratu do běžného rytmu je test odvahy nechat dobré rozhodnutí pracovat bez publika. Když téma drží, nechte ho držet. Když má malou hranu, opravte nejbližší větu. Když se objeví nový signál, dejte mu vlastní otázku. A když někde zůstal tichý dohled, ukliďte ho dřív, než se z něj stane nový proces s vlastním životem.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o prvním měsíci po návratu do běžného rytmu: čtyři měsíční stavy, rušení skryté mimořádné péče, privacy-first měsíční kontrola, karta, mini workshop a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření druhého běžného použití do běžného rytmu: tři uzavírací varianty, převod signálů do existujícího rytmu, privacy-first úklid, karta, mini workshop a checklist.
 
