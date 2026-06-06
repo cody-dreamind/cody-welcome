@@ -185411,8 +185411,241 @@ Workshop končí ve chvíli, kdy pravidlo buď zůstává v běžném rytmu, neb
 
 Druhé běžné review je malé, ale důležité. První review vrací pravidlo do běžné práce. Druhé review kontroluje, jestli se tam opravdu udrželo bez skrytého doprovodu. Pokud ano, nejlepší výsledek je klid: pravidlo žije v kanonickém místě, další signály mají normální trasu a staré pomocné stopy mizí.
 
+## Uzavření druhého běžného review do trvalého běžného rytmu
+
+Druhé běžné review nekončí ve chvíli, kdy tým řekne "vypadá to dobře". Končí až tehdy, když je jasné, co se s pravidlem dál neděje. To je drobný, ale důležitý rozdíl. Po prvním review může být rozumné nechat pravidlu ještě trochu pozornosti. Po druhém review už má mimořádná pozornost buď jasný důvod, nebo má skončit.
+
+Uzavírací otázka zní:
+
+```text
+Co přesně po druhém review zůstává v běžném rytmu a co už dál neživíme jako samostatnou věc?
+```
+
+Tato otázka chrání tým před dvěma běžnými chybami. První chyba je předčasné vítězství: pravidlo vypadá stabilně, ale někdo pořád drží vedlejší seznam, osobní připomínku nebo starý návod. Druhá chyba je opačná: pravidlo už funguje, ale tým si neumí dovolit ho pustit, takže k němu přidá další review "pro jistotu". Obě varianty zvyšují práci bez odpovídající hodnoty.
+
+Uzavření druhého review má proto tři výstupy:
+
+- jedna věta o aktuálním stavu pravidla;
+- jedna věta o tom, kam půjdou další signály;
+- jedna věta o tom, co po review končí.
+
+Příklad:
+
+```text
+Pravidlo pro minimální poptávkový formulář je stabilně běžné.
+Další signály patří do měsíční kontroly kvality poptávek.
+Končí osobní kontrola každého nového formuláře a maže se pomocný seznam změn.
+```
+
+Takový závěr je krátký, ale praktický. Člověk, který za tři měsíce narazí na stejnou otázku, nemusí číst celou historii. Vidí, co platí, kde se mají řešit další signály a které staré opatrnosti už nemá obnovovat.
+
+### Čtyři uzavírací stavy
+
+Po druhém review vyberte jeden ze čtyř uzavíracích stavů:
+
+- Trvalý běžný rytmus: pravidlo funguje bez zvláštní pomoci a další signály patří do existujícího provozního rytmu.
+- Běžný rytmus s lokálním dočištěním: pravidlo funguje, ale před uzavřením potřebuje jednu drobnou opravu v kanonickém místě.
+- Ukončení skryté péče: pravidlo funguje, ale tým musí výslovně zrušit starou obchůzku, pomocný seznam, připomínku nebo ruční kontrolu.
+- Oddělený nový signál: review ukázalo jiné téma, které nemá být přilepené ke starému pravidlu.
+
+Trvalý běžný rytmus je nejčistší stav. Závěr je krátký, bez dalšího úkolu:
+
+```text
+Stav:
+Trvalý běžný rytmus.
+
+Platí:
+Pravidlo zůstává v checklistu pro nové landing pages.
+
+Další signály:
+Řeší se v běžném měsíčním review webu.
+
+Co končí:
+Žádné samostatné review k tomuto pravidlu neplánujeme.
+```
+
+Běžný rytmus s lokálním dočištěním má mít opravdu jen jednu opravu. Například přepsat název odkazu, zkrátit příklad, doplnit vlastníka nebo odstranit neaktuální větu. Jakmile se z toho stane sada změn napříč šablonami, není to lokální dočištění, ale nová pracovní větev.
+
+Ukončení skryté péče je nejdůležitější tam, kde původní problém bolel. Po incidentu s formulářem, špatným měřením, nepřehledným onboardingem nebo exportem dat tým často dál drží opatrnost, i když už ji nepotřebuje. Uzavření má tuto opatrnost převést do normálního místa nebo ji zrušit.
+
+Oddělený nový signál je zdravý stav, pokud se opravdu oddělí. Když review pravidla pro poptávkové formuláře ukáže problém v obchodním follow-upu, nelepte ho k formulářům. Zapište novou otázku a staré pravidlo uzavřete podle jeho vlastního stavu.
+
+### Co propsat do kanonického místa
+
+Kanonické místo po druhém review nemá obsahovat celý příběh. Má obsahovat aktuální pravdu. Historie je užitečná jen do té míry, do jaké pomáhá člověku správně jednat.
+
+Do kanonického místa obvykle patří:
+
+- aktuální pravidlo v přítomném čase;
+- krátký důvod pravidla, pokud bez něj hrozí špatná interpretace;
+- vlastník běžného rytmu;
+- cesta pro další signály;
+- návratový signál, pokud má pravidlo zůstat sledovatelné;
+- odkaz na poslední rozhodovací záznam, jen pokud má stále hodnotu.
+
+Naopak tam nepatří:
+
+- celý průběh původního incidentu;
+- seznam všech minulých variant;
+- pracovní komentáře z ladění;
+- pomocné screenshoty a exporty;
+- osobní poznámky jednotlivých lidí;
+- evidence každého použití pravidla.
+
+Praktický přepis:
+
+```text
+Místo dlouhé historie:
+"Po incidentu z března se hlídá, aby formulář nesbíral telefon bez důvodu. Marketing owner kontroluje nové formuláře a zapisuje je do tabulky."
+
+Napište aktuální pravidlo:
+"Nový poptávkový formulář smí chtít jen údaje potřebné pro první odpověď. Telefon je volitelný a musí mít jasný důvod u konkrétního typu služby. Další signály jdou do měsíční kontroly formulářů."
+```
+
+Rozdíl není jen stylistický. První verze drží tým v minulosti a vytváří dojem, že se má pořád hlídat incident. Druhá verze říká, jak pracovat teď.
+
+### Jak zavřít staré podpůrné stopy
+
+Po druhém review projděte podpůrné stopy, které vznikly během opatrného období. Ne každý záznam je špatně. Špatně je záznam, který už nemá rozhodovací hodnotu, ale dál nese data, práci nebo falešný pocit kontroly.
+
+Typické stopy k uzavření:
+
+- dočasné tabulky kontrol;
+- osobní kalendářové připomínky;
+- pomocné exporty z analytiky, CRM nebo supportu;
+- screenshoty problémových stavů;
+- pracovní kopie šablon;
+- staré komentáře v dokumentech;
+- checklistové položky, které jen opakují pravidlo z kanonického místa.
+
+U každé stopy vyberte jednu akci:
+
+```text
+Ponechat:
+Má stále přímou rozhodovací hodnotu.
+
+Zkrátit:
+Stačí shrnutí důvodu, detailní data už nejsou potřeba.
+
+Přesunout:
+Patří do kanonického místa nebo běžného review.
+
+Smazat:
+Byla dočasná a po uzavření už jen vytváří šum nebo datovou stopu.
+```
+
+Privacy-first poznámka: mazání není estetický úklid. Je to provozní návyk. Když necháte kolem pravidla žít staré exporty a pomocné seznamy, časem nikdo neví, jestli jsou ještě pravdivé, kdo za ně odpovídá a proč obsahují data. Menší paměť je často přesnější paměť.
+
+### Uzavírací zpráva týmu
+
+Pokud se pravidlo dotýká více lidí, napište krátkou uzavírací zprávu. Nemá vysvětlovat celý proces. Má lidem říct, co se mění v jejich práci.
+
+Šablona:
+
+```text
+Uzavíráme druhé review pravidla:
+
+Co platí:
+
+Kde je kanonické místo:
+
+Co už dál neděláme:
+
+Kam posílat další signály:
+
+Co jsme uklidili nebo zkrátili:
+```
+
+Příklad:
+
+```text
+Uzavíráme druhé review pravidla pro minimální poptávkový formulář.
+
+Co platí:
+Formulář sbírá jen údaje nutné pro první odpověď; telefon zůstává volitelný a jen s jasným důvodem.
+
+Kde je kanonické místo:
+Checklist landing pages.
+
+Co už dál neděláme:
+Nekontrolujeme každý nový formulář ručně mimo běžné review.
+
+Kam posílat další signály:
+Do měsíční kontroly kvality poptávek.
+
+Co jsme uklidili:
+Smazali jsme pomocný seznam kontrol a zkrátili původní poznámku na důvod pravidla.
+```
+
+Dobrá uzavírací zpráva má jeden nenápadný efekt: brání návratu staré opatrnosti. Když se za měsíc někdo zeptá "neměli bychom to radši ještě hlídat?", odpověď není pocit. Odpověď je uzavřený závěr.
+
+### Karta uzavření druhého review
+
+```text
+Téma nebo pravidlo:
+
+Kanonické místo:
+
+Výsledek druhého review:
+- trvalý běžný rytmus
+- běžný rytmus s lokálním dočištěním
+- ukončení skryté péče
+- oddělený nový signál
+
+Aktuální věta pravidla:
+
+Kam půjdou další signály:
+
+Co po review končí:
+
+Jedna lokální oprava před uzavřením:
+
+Podpůrné stopy k ponechání:
+
+Podpůrné stopy ke zkrácení:
+
+Podpůrné stopy ke smazání:
+
+Co dál nesbíráme:
+
+Kdo vlastní běžný rytmus:
+
+Datum další přirozené kontroly:
+```
+
+Kartu nevyplňujte mechanicky. Pokud je pravidlo malé a review skončilo čistě, stačí třívětý závěr. Karta je užitečná hlavně tehdy, když existují podpůrné stopy, skrytá péče nebo riziko, že se nová otázka přilepí ke starému pravidlu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte výsledek druhého review a vyberte jeden ze čtyř uzavíracích stavů.
+2. Minuta 1-2: napište aktuální větu pravidla v přítomném čase.
+3. Minuta 2-3: určete, kam půjdou další signály bez nové evidence.
+4. Minuta 3-4: pojmenujte jednu věc, která po review končí.
+5. Minuta 4-5: projděte podpůrné stopy a vyberte ponechat, zkrátit, přesunout nebo smazat.
+6. Minuta 5-6: zapište uzavírací zprávu nebo krátký závěr do kanonického místa.
+
+Workshop končí teprve tehdy, když někdo umí říct: "Tohle pravidlo už nemá samostatnou agendu." Pokud to říct nejde, není potřeba panika. Jen ještě neuzavírejte trvalý běžný rytmus a pojmenujte, co tomu brání.
+
+### Checklist uzavření druhého review
+
+- Máme vybraný jeden uzavírací stav?
+- Je aktuální pravidlo napsané v přítomném čase?
+- Víme, kde je kanonické místo?
+- Je jasné, kam půjdou další signály?
+- Nekládeme nový signál na staré pravidlo jen proto, že se objevil při review?
+- Je jasně napsané, co po druhém review končí?
+- Zrušili jsme skrytou zvláštní péči, pokud už nemá důvod?
+- Zůstává případná lokální oprava opravdu lokální?
+- Prošli jsme dočasné tabulky, exporty, screenshoty, pracovní kopie a osobní připomínky?
+- Zkrátili nebo smazali jsme stopy, které už nemají rozhodovací hodnotu?
+- Nevzniká evidence každého použití pravidla jen kvůli pocitu jistoty?
+- Umí nový člověk použít pravidlo bez původní historie?
+
+Uzavření druhého review je tichý konec mimořádné pozornosti. V dobrém provozu nemá každé opravené pravidlo věčně vlastní malý pomník. Má mít jasné místo, krátký důvod, normální cestu pro signály a žádné zbytečné datové zbytky. V praxi jsou to jen budoucí otázky typu kdo to vlastní, proč to existuje a jestli to ještě smíme držet.
+
 ## Pracovní log
 
+- 2026-06-06: Doplněna úvodní podkapitola o uzavření druhého běžného review do trvalého běžného rytmu: čtyři uzavírací stavy, přepis do kanonického místa, úklid podpůrných stop, uzavírací zpráva, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o druhém běžném review po uzavření prvního review: kontrola skryté zvláštní péče, čtyři výsledné stavy, ukončení obchůzek, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního běžného review po stabilním rytmu: čtyři uzavírací stavy, lokální korekce, zkrácení staré paměti, oddělení nové otázky, privacy-first úklid, karta, mini workshop a checklist.
 
