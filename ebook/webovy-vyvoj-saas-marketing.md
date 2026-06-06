@@ -181702,8 +181702,164 @@ Pokud workshop začne řešit, jak pravidlo vylepšit, oddělte to. První tich�
 
 První měsíc v tichém rytmu je zkouška, jestli tým umí věci nejen řešit, ale také přestat řešit. To je v SaaS, marketingu i webovém provozu podstatná dovednost. Bez ní se každé dobré pravidlo časem promění v další pravidelnou povinnost. A těch má provoz obvykle dost i bez naší kreativní pomoci.
 
+## Převod prvního tichého měsíce do dlouhodobého tichého rytmu
+
+Když první tichý měsíc proběhne bez návratového signálu a bez skrytého dohledu, práce není "hotová víc než hotová". Je prostě normální. Právě proto je další krok malý: převést položku z prvního tichého měsíce do dlouhodobého tichého rytmu tak, aby zůstala dohledatelná, ale nevyžadovala vlastní pozornost.
+
+Otázka převodu zní:
+
+```text
+Co musí zůstat zapsané, aby se položka dala bezpečně znovu otevřít, a co už smíme přestat sledovat, připomínat nebo uchovávat?
+```
+
+Tato otázka chrání před dvěma opačnými chybami. První chyba je zapomenout všechno: tým ztratí kanonické místo, návratový signál i důvod původního pravidla. Druhá chyba je nechat všechno: tým si ponechá karty, exporty, poznámky a kontrolní stopu, která už nemá rozhodovací účel. Dlouhodobý tichý rytmus potřebuje něco mezi tím. Má mít paměť, ale ne starost.
+
+Začněte jednou převodní větou:
+
+```text
+Položka [název] po prvním tichém měsíci zůstává v dlouhodobém tichém rytmu. Zachováváme kanonické pravidlo a návratový signál [signál]. Rušíme samostatné měsíční sledování a dočasné podklady bez aktuálního účelu.
+```
+
+Příklad:
+
+```text
+Položka "u praktických checklistů nabízíme přímý odkaz, ne povinný e-mail" po prvním tichém měsíci zůstává v dlouhodobém tichém rytmu. Zachováváme pravidlo v redakční šabloně a návratový signál "nový materiál znovu vyžaduje e-mail bez jasného důvodu". Rušíme samostatné měsíční sledování a staré poznámky z ověření.
+```
+
+Tím nevzniká nový proces. Jen se uklidí přechodová péče, která byla užitečná během prvního měsíce, ale nemá přežít jako zvyk.
+
+### Co ponechat
+
+Dlouhodobý tichý rytmus má ponechat pouze věci, které pomohou při budoucím rozhodnutí:
+
+- kanonické pravidlo v místě, kde tým skutečně pracuje;
+- krátký návratový signál, podle kterého se pozná, že položka stojí za otevření;
+- vlastníka kanonického místa, ne vlastníka celé historické debaty;
+- datum posledního podstatného uzavření, pokud ho tým používá v běžném changelogu;
+- odkaz na stabilní šablonu, checklist nebo provozní pravidlo;
+- hranici, co se při běžném použití už nemá znovu dokazovat.
+
+Neponechávejte zvláštní kartu jen proto, že na ní bylo odpracováno dost hodin. Hodiny nejsou účel. Pokud je výstup převedený do kanonického místa, stará pracovní karta může být archivovaná, zkrácená nebo úplně smazaná podle citlivosti a interních pravidel.
+
+Praktický test:
+
+```text
+Kdyby se za tři měsíce objevil návratový signál, našel by tým správné pravidlo bez čtení celé historie?
+```
+
+Pokud ano, ponechané minimum stačí. Pokud ne, doplňte kanonické místo, ne novou kontrolní vrstvu.
+
+### Co ukončit
+
+Po prvním tichém měsíci ukončete vše, co sloužilo jen k ověření klidu:
+
+- měsíční připomínku k jedné položce;
+- dočasnou tabulku případů;
+- screenshoty, které potvrzovaly běžné chování;
+- ruční schvalování výstupů "pro jistotu";
+- komentářové vlákno, které už není zdrojem pravdy;
+- poznámky s osobními nebo zákaznickými detaily, které nejsou potřeba pro pravidlo;
+- neformální dohled jednoho člověka nad tím, zda ostatní pravidlo dodržují.
+
+Ukončení napište bez velkého dramatu:
+
+```text
+Přechodové sledování končí. Pravidlo žije v [kanonické místo]. Další práce vzniká pouze při návratovém signálu [signál].
+```
+
+Tato věta je užitečná hlavně pro týmy, které jsou zvyklé držet otevřené věci "ještě chvíli". Ještě chvíli se snadno změní v další kvartál. A další kvartál už je proces, jenom se tváří jako opatrnost.
+
+### Tři převodní stavy
+
+Na konci převodu vyberte jeden ze tří stavů:
+
+- Převést do dlouhodobého ticha: první měsíc držel, skrytý dohled nevznikl a kanonické místo je použitelné.
+- Převést s lokálním dočištěním: klid držel, ale kanonické místo, návratový signál nebo vlastnictví potřebuje drobnou úpravu.
+- Nepřevádět a otevřít úzkou kartu: objevil se návratový signál nebo skrytý dohled, který nejde zrušit jednou větou.
+
+`Převést do dlouhodobého ticha` je nejlehčí stav. Udělejte jen úklid přechodových stop a nechte položku být.
+
+`Převést s lokálním dočištěním` použijte, když problém není v pravidle, ale v jeho dohledatelnosti. Typicky chybí odkaz v checklistu, návratový signál je moc široký nebo vlastník kanonického místa není zřejmý. Oprava má být lokální:
+
+```text
+Doplníme jednu větu do [kanonické místo]: [věta]. Návratový signál zůstává [signál]. Samostatné sledování neobnovujeme.
+```
+
+`Nepřevádět a otevřít úzkou kartu` použijte jen tehdy, když je opravdu co rozhodnout. Pokud někdo jen navrhl vylepšení, není to návratový signál. Pokud starý problém skutečně znovu zasáhl práci, napište úzkou otázku a vraťte se k režimu návratové karty.
+
+### Privacy-first převod
+
+Převod do dlouhodobého ticha je dobrý okamžik pro úklid datové stopy. Během ověřování se často nahromadí podklady, které byly dočasně užitečné: příklady poptávek, komentáře z podpory, interní poznámky, screenshoty obrazovek, exporty z formulářů nebo ruční seznamy průchodů. Jakmile položka vstoupí do dlouhodobého ticha, tyto podklady znovu projděte.
+
+Privacy-first pravidlo:
+
+```text
+Necháváme jen informaci, která pomáhá pravidlo použít nebo bezpečně znovu otevřít. Podklady, které sloužily jen k dočasnému ověření, mažeme, zkracujeme nebo archivujeme bez citlivých detailů.
+```
+
+Příklad u webu: pokud jste ověřovali, že kratší poptávkový formulář stačí, v kanonickém pravidle nechte rozhodnutí a návratový signál. Neponechávejte export konkrétních poptávek jen proto, že pomohl v ověřovacím měsíci.
+
+Příklad u SaaS: pokud jste ověřovali, že onboardingový krok nepotřebuje povinnou integraci, ponechte produktové pravidlo v onboardingovém checklistu. Neponechávejte zbytečné screenshoty uživatelských účtů, pokud z nich nevzniká další rozhodnutí.
+
+Codyho komentář: dlouhodobý klid není šuplík, kam se ukládá všechno, co už nechceme řešit. Je to spíš malý štítek na správném místě. Když do něj nacpete staré podklady, jen jste přestěhovali nepořádek a dali mu hezčí jméno.
+
+### Karta převodu do dlouhodobého tichého rytmu
+
+```text
+Položka:
+
+Kanonické místo:
+
+Výsledek prvního tichého měsíce:
+- ticho drží / skrytý dohled / návratový signál
+
+Převodní stav:
+- převést do dlouhodobého ticha / převést s lokálním dočištěním / otevřít úzkou kartu
+
+Co ponecháváme:
+
+Návratový signál:
+
+Co ukončujeme:
+
+Co mažeme, zkracujeme nebo archivujeme:
+
+Kdo vlastní kanonické místo:
+
+Kdy se položka smí znovu objevit:
+
+Co výslovně neobnovujeme:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte výsledek prvního tichého měsíce.
+2. Minuta 1-2: ověřte, že kanonické místo obsahuje platné pravidlo.
+3. Minuta 2-3: přečtěte návratový signál a zkraťte ho, pokud je moc široký.
+4. Minuta 3-4: vyberte jeden ze tří převodních stavů.
+5. Minuta 4-5: zrušte přechodovou kontrolu a dočasné podklady bez účelu.
+6. Minuta 5-6: napište jednu větu, kdy se položka smí znovu objevit.
+
+Pokud workshop začne vyrábět novou sadu pravidel, vraťte se k otázce převodu. Cílem není z položky udělat lepší standard. Cílem je bezpečně přestat držet přechodovou pozornost.
+
+### Checklist převodu
+
+- Je jasné, že první tichý měsíc opravdu skončil?
+- Má položka kanonické místo, které tým používá v běžné práci?
+- Je návratový signál dost konkrétní, aby neotvíral každou kosmetickou poznámku?
+- Ukončili jsme samostatné měsíční sledování?
+- Nevznikl nový kontrolní rituál jen proto, že převod proběhl úspěšně?
+- Zrušili jsme skryté seznamy, screenshoty, exporty nebo schvalování bez účelu?
+- Ponecháváme jen pravidlo, návratový signál a nezbytný provozní kontext?
+- Neuchováváme zákaznické, osobní nebo interně citlivé detaily jen kvůli pocitu jistoty?
+- Ví tým, kdo vlastní kanonické místo, ale nemusí vlastnit celou starou debatu?
+- Je jasně napsané, co se teď výslovně neobnovuje?
+
+Dlouhodobý tichý rytmus je dobrý výsledek právě proto, že nevypadá jako velký výsledek. Pravidlo je dostupné, návratový signál existuje, zbytečné podklady zmizely a tým se může věnovat práci, která právě teď opravdu potřebuje pozornost.
+
 ## Pracovní log
 
+- 2026-06-06: Doplněna úvodní podkapitola o převodu prvního tichého měsíce do dlouhodobého tichého rytmu: ponechané minimum, ukončení přechodové kontroly, tři převodní stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním měsíci v tichém rytmu: hranice sledování, zdravý tichý měsíc, tři výsledky, privacy-first pravidla, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o uzavření druhého běžného review do tichého rytmu: čtyři uzavírací stavy, umlčení skrytého dohledu, privacy-first úklid dočasných podkladů, karta, mini workshop a checklist.
 - 2026-06-05: Doplněna úvodní podkapitola o druhém běžném review po uzavřeném prvním review: kontrola neformálního dohledu, čtyři výsledky, privacy-first úklid skrytých podkladů, karta, mini workshop a checklist.
