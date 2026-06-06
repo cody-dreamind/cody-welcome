@@ -182924,7 +182924,198 @@ Workshop končí uložením závěru do pracovního místa, ne debatou o všech 
 
 Uzavřený druhý návrat má po sobě nechat klidnější systém než předtím. Ne proto, že tým všechno zametl, ale proto, že rozlišil příčinu od povrchu, opravil nejmenší společné místo a zbytek nechal zavřený. To je praktická disciplína, která chrání práci, data i nervy.
 
+## První běžné použití po uzavření druhého návratu
+
+Uzavření druhého návratu je rozhodnutí. První běžné použití po něm je zkouška, jestli rozhodnutí opravdu žije tam, kde lidé pracují. Tým může mít perfektně napsaný závěr, upravený checklist a smazané dočasné podklady, ale při nejbližším reálném průchodu se ukáže něco praktičtějšího: najde člověk správnou větu bez připomínání, použije ji bez starého kontextu a nevytvoří kolem ní nový dohled?
+
+Neplánujte kvůli tomu speciální test. Počkejte na nejbližší běžnou situaci, ve které by se opravené místo stejně použilo: nový formulář, aktualizace šablony, review landing page, předání sales materiálu, onboarding nového člověka nebo měsíční údržba rozcestníku. Cílem není dokázat, že systém je dokonalý. Cílem je zjistit, jestli po druhém návratu stačí nejnižší potřebná úroveň pozornosti.
+
+Základní otázka:
+
+```text
+Při prvním běžném použití po uzavření druhého návratu stačilo kanonické místo, nebo se lidé znovu opřeli o mimořádnou historii?
+```
+
+Pokud stačilo kanonické místo, nechte věc v klidu. Pokud lidé znovu potřebovali staré porovnání prvního a druhého návratu, uzavření ještě není dobře přeložené do práce. Pokud vznikl nový signál, nejdřív rozhodněte, jestli patří k uzavřenému druhému návratu, nebo jde o nové téma.
+
+### Jak poznat zdravé použití
+
+Zdravé první použití po uzavření druhého návratu má čtyři znaky:
+
+- člověk začne v aktuálním pracovním místě, ne ve starém vlákně;
+- pravidlo nebo checklist stačí k rozhodnutí bez zvláštního vysvětlování;
+- nevznikne nový seznam sledování, kdo pravidlo použil;
+- po práci zůstane jen běžný výstup, ne další servisní agenda.
+
+Příklad:
+
+```text
+Uzavřený druhý návrat:
+Doplnili jsme do checklistu formulářů větu, kdy je telefon oprávněný požadavek.
+
+První běžné použití:
+Vzniká nová landing page pro B2B službu.
+
+Kanonické místo:
+Checklist formulářů.
+
+Co se stalo:
+Editor použil checklist, nechal telefon nepovinný a doplnil stručné vysvětlení dalšího kroku.
+
+Co nevzniklo:
+Žádný audit historických formulářů, žádný export odeslání, žádný seznam lidí k proškolení.
+
+Stav:
+Uzavření drží. Položka zůstává v trvalém minimu.
+```
+
+Takový výsledek není dramatický, ale je přesně to, co chcete. Pravidlo se použilo v běžné práci, nikdo nepotřeboval vytahovat starý případ a privacy-first hranice zůstala nízkodatová.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Drží bez akce: kanonické místo stačilo a nic dalšího není potřeba.
+- Potřebuje drobnou nápovědu: pravidlo je správné, ale pracovní místo potřebuje jednu větu, odkaz nebo příklad.
+- Vrací starou historii: člověk musel otevřít staré porovnání návratů, protože závěr není dost přeložený do práce.
+- Ukazuje nový signál: objevilo se jiné tření, které nesmí být přilepené k uzavřenému druhému návratu bez důkazu.
+
+Reakce má odpovídat výsledku. U stavu "drží bez akce" nedělejte nic navíc. U drobné nápovědy upravte nejbližší pracovní místo a uzavřete změnu stejný den. U vracející se historie přepište závěr do praktičtější věty v kanonickém místě; neobnovujte celý audit. U nového signálu založte novou otázku, pokud má dost důvodů, a starý druhý návrat nechte zavřený.
+
+Krátký zápis:
+
+```text
+První běžné použití:
+
+Kde začala práce:
+
+Které kanonické místo se použilo:
+
+Výsledek:
+- drží bez akce / potřebuje drobnou nápovědu / vrací starou historii / ukazuje nový signál
+
+Jedna odpovídající reakce:
+
+Co výslovně neotevíráme:
+
+Co zůstává v trvalém minimu:
+
+Jaká data kvůli tomu dál nesbíráme:
+```
+
+### Kdy nechat věc být
+
+Nejtěžší část prvního použití po uzavřeném druhém návratu je často neudělat nic. Když práce proběhne dobře, tým má chuť aspoň zapsat kontrolu, připomenout pravidlo na poradě nebo přidat drobný monitoring. To je pochopitelné, ale obvykle zbytečné.
+
+Nechte věc být, pokud platí:
+
+- člověk našel aktuální pravidlo bez ruční pomoci;
+- rozhodnutí vzniklo v běžném pracovním místě;
+- nebylo potřeba otevřít staré důkazy;
+- výsledek nevyžaduje změnu procesu ani role;
+- nevznikla nová datová potřeba.
+
+Uzavírací věta může být velmi krátká:
+
+```text
+První běžné použití po uzavření druhého návratu proběhlo bez mimořádné pomoci. Položka zůstává v trvalém minimu a další kontrola se nedělá.
+```
+
+Tato věta má cenu právě tím, že neotevírá další práci. Někdy je nejlepší výsledek údržby ticho, které má jasný důvod.
+
+### Když se vrátí stará historie
+
+Pokud člověk při prvním použití musí otevřít staré porovnání prvního a druhého návratu, neznamená to automaticky selhání pravidla. Často to znamená, že závěr byl napsaný moc archivně. V rozhodovacím logu je srozumitelný, ale v pracovním checklistu chybí věta, kterou člověk potřebuje v daném okamžiku.
+
+Nepište další vysvětlení vedle. Přepište kanonické místo.
+
+Slabé řešení:
+
+```text
+K checklistu přidáme odkaz na uzavření druhého návratu, aby si lidé mohli přečíst kontext.
+```
+
+Lepší řešení:
+
+```text
+Do checklistu přidáme větu: Telefon požadujte jen tehdy, když bez něj nejde splnit slíbený další krok; jinak použijte e-mail nebo volitelný kontakt.
+```
+
+První řešení posílá člověka do historie. Druhé mu dá rozhodovací oporu přímo v práci. Historie má zůstat archivem, ne náhradním uživatelským rozhraním pro interní pravidla.
+
+Codyho komentář: když pravidlo funguje jen po přečtení tří starých záznamů, není to pravidlo. Je to malý archeologický výlet. Občas poučný, ale špatný způsob, jak vyplnit formulář v úterý odpoledne.
+
+### Privacy-first první použití
+
+První použití po druhém návratu nesmí vytvořit novou pozorovací vrstvu. Ověřujte z běžné práce a uchovávejte jen závěr, který pomůže příště. Nepotřebujete měřit klikání v checklistu, sledovat konkrétního člověka ani ukládat kopie formulářových dat, pokud rozhodnutí vzniklo bez nich.
+
+Nízkodatový závěr:
+
+```text
+Ověření proběhlo při běžné tvorbě landing page. Nevedeme osobní evidenci použití checklistu, neexportujeme odeslání formulářů a nemažeme ani neměníme data zákazníků. V pracovním logu zůstává jen anonymizovaná věta, že kanonické pravidlo stačilo.
+```
+
+Pokud vznikla drobná nápověda, uložte ji do pracovního místa a smažte pomocné poznámky. Pokud vznikl nový signál, nepřibalujte k němu staré osobní detaily jen proto, že se vyskytly poblíž. Nová otázka má dostat vlastní minimální důkazy.
+
+### Karta prvního běžného použití
+
+```text
+Uzavřený druhý návrat:
+
+Kanonické místo:
+
+První běžná situace:
+
+Kde práce začala:
+
+Bylo potřeba otevřít starou historii:
+- ano / ne
+
+Výsledek:
+- drží bez akce / potřebuje drobnou nápovědu / vrací starou historii / ukazuje nový signál
+
+Jedna reakce:
+
+Co zůstává zavřené:
+
+Co zůstává v trvalém minimu:
+
+Co mažeme nebo zkracujeme:
+
+Co dál nesbíráme:
+
+Další kontrola:
+- žádná / běžný rytmus / nová otázka se stop podmínkou
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: pojmenujte první běžnou situaci po uzavřeném druhém návratu.
+2. Minuta 1-2: ověřte, kde práce opravdu začala.
+3. Minuta 2-3: vyberte jeden ze čtyř výsledků.
+4. Minuta 3-4: napište jednu odpovídající reakci nebo větu "bez akce".
+5. Minuta 4-5: zavřete privacy-first hranici: co dál nesbíráte a co mažete.
+
+Workshop končí jen tehdy, když je jasné, zda vzniká práce. Pokud nevzniká, zapište to. Stav "bez akce" je platný výsledek, ne lenost.
+
+### Checklist prvního použití po druhém návratu
+
+- Proběhlo ověření v přirozené pracovní situaci?
+- Začal člověk v kanonickém místě, ne ve starém záznamu?
+- Stačilo pravidlo k rozhodnutí bez mimořádného vysvětlování?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud pravidlo drží, nevyrábíme další kontrolu pro jistotu?
+- Pokud chybí nápověda, upravujeme pracovní místo místo přidání odkazu do historie?
+- Pokud se vrací stará historie, překládáme závěr do aktuální věty?
+- Pokud vzniká nový signál, nelepíme ho automaticky na druhý návrat?
+- Nevzniká evidence lidí, klikání, exportů ani nových osobních údajů?
+- Je jasné, co zůstává v trvalém minimu a kdy se věc znovu otevře?
+
+První běžné použití po uzavření druhého návratu má potvrdit, že systém umí pokračovat bez zvláštní péče. Když pravidlo drží, nechte ho pracovat. Když potřebuje jednu větu, přidejte ji tam, kde člověk stojí. Když se ukáže nový signál, dejte mu vlastní otázku. Nejhorší výsledek by byl proměnit každé úspěšné ověření v další vrstvu sledování.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o prvním běžném použití po uzavření druhého návratu: čtyři výsledky použití, práce bez staré historie, privacy-first ověření, karta, mini workshop a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření druhého návratu po trvalém minimu: čtyři uzavírací stavy, úklid dočasných stop, privacy-first zkrácení důkazů, karta, mini workshop a checklist.
 
