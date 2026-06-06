@@ -182559,7 +182559,215 @@ Codyho komentář: uzavření prvního návratu je trochu jako zhasnout v místn
 
 První návrat po trvalém minimu je uzavřený ve chvíli, kdy po něm nezůstává nervozita ani skrytý dohled. Zůstává jen aktualizovaný stav, uklizené pracovní místo a jasná hranice, kdy by dávalo smysl téma znovu otevřít.
 
+## Druhý návrat po trvalém minimu
+
+Druhý návrat je citlivější než první. První návrat se dá často vysvětlit jako šum, stará kopie, slabý odkaz nebo lokální chyba. Když se ale něco podobného objeví podruhé, tým má přirozenou chuť říct: "Takže se to vrací." Někdy je to pravda. Jindy jen dvě různé lokální události vypadají podobně, protože sdílejí starý slovník, stejnou šablonu nebo stejnou nejistotu v hlavách lidí.
+
+Proto druhý návrat neuzavírejte rychlým pocitem. Nejdřív položte otázku:
+
+```text
+Opakuje se stejná příčina, nebo jen podobný povrch?
+```
+
+Povrch je to, co vidíte: znovu povinný telefon, znovu nejasná předávací poznámka, znovu starý checklist, znovu ruční export. Příčina je to, proč se to stalo: neaktuální zdroj pravdy, chybějící vlastník, slabá formulace pravidla, špatně nastavená šablona, nebo skutečná změna práce, kterou staré pravidlo už nepokrývá.
+
+Bez tohoto rozlišení druhý návrat snadno přeroste do přehnané reakce. Tým obnoví pravidelné kontroly, přidá nové pole, začne sbírat víc důkazů a za měsíc zjistí, že řešil dvě staré kopie místo živého problému.
+
+### Matice druhého návratu
+
+Druhý návrat zařaďte do jedné ze čtyř situací:
+
+- Stejný povrch, jiná příčina: vypadá to podobně, ale kořen je lokální a nemá společný vzor.
+- Jiný povrch, stejná příčina: projev je jiný, ale za oběma návraty stojí jedna slabina pravidla nebo pracovního místa.
+- Stejný povrch i stejná příčina: pravděpodobně vzniká opakovaný vzor a trvalé minimum už nestačí.
+- Nejasná příčina: druhý signál je reálný, ale zatím není dost informací pro změnu pravidla.
+
+Každá situace má jinou odpověď. Stejný povrch s jinou příčinou se řeší lokálně a bez velkého závěru. Jiný povrch se stejnou příčinou si zaslouží opravu společného místa. Stejný povrch i příčina už může otevřít úzkou systémovou kartu. Nejasná příčina potřebuje krátké ověřovací okno, ne nový dohled bez konce.
+
+Příklad:
+
+```text
+První návrat:
+Telefon byl povinný na nové landing page kvůli staré kopii šablony.
+
+Druhý návrat:
+Telefon se objevil jako povinný v novém kvalifikačním dotazníku.
+
+Povrch:
+Znovu povinný telefon.
+
+Příčina:
+Tentokrát nejde o starou kopii. V checklistu pro nové formuláře chybí věta, kdy je telefon oprávněný požadavek.
+
+Zařazení:
+Stejný povrch, nová příčina s dopadem do kanonického checklistu.
+
+Reakce:
+Doplnit jednu větu do checklistu formulářů a ověřit ji na nejbližším novém formuláři. Neotevírat audit všech historických formulářů.
+```
+
+Taková reakce je větší než lokální úklid, ale pořád malá. Nemění celý obchodní proces, nepřidává plošné měření a nevrací staré téma do mimořádné péče. Opravuje společné místo, které druhý návrat odhalil.
+
+### Jak neudělat z druhého návratu důkaz všeho
+
+Druhý návrat svádí k silným větám: "tohle se nám děje pořád", "lidi to nechápou", "proces nefunguje", "musíme to celé přepsat". Takové věty mohou být pravdivé, ale nesmí být první verzí rozhodnutí. Nejdřív napište pracovní rozdíl mezi prvním a druhým návratem:
+
+```text
+První návrat byl:
+
+Druhý návrat je:
+
+Co je stejné:
+
+Co je jiné:
+
+Společná příčina:
+- potvrzená / pravděpodobná / nepotvrzená
+
+Nejmenší společná oprava:
+
+Co zatím nepovažujeme za důkaz:
+```
+
+Poslední řádek je důležitý. Dva případy nejsou automaticky důkaz, že selhává celý systém. Mohou být důkaz, že jeden checklist má slabou větu. Mohou být důkaz, že onboarding nové role vynechává jeden krok. Mohou být jen dvě různé chyby v době, kdy tým řeší víc změn najednou.
+
+Codyho komentář: dvě tečky už svádějí k nakreslení čáry. Jenže produktová práce není spojovačka pro děti. Nejdřív zkontrolujte, jestli ty tečky patří do stejného obrázku.
+
+### Kdy otevřít úzkou systémovou kartu
+
+Úzkou systémovou kartu otevřete, když druhý návrat ukáže společnou příčinu, která neleží v jednom místě. Typicky:
+
+- stejný nejasný pokyn se propsal do dvou šablon;
+- dvě různé role pochopily pravidlo stejným špatným způsobem;
+- starý zdroj pravdy pořád žije vedle kanonického místa;
+- ruční obcházka se objevila ve dvou navazujících krocích;
+- privacy-first pravidlo je správné, ale chybí příklad pro běžnou výjimku.
+
+Karta nemá otevřít celý minulý problém. Má opravit společnou příčinu:
+
+```text
+Úzká systémová karta:
+
+Společná příčina:
+
+Kde se projevila:
+
+Co opravíme:
+
+Co nebudeme kontrolovat:
+
+První ověření:
+
+Stop podmínka:
+
+Privacy-first hranice:
+```
+
+Dobrá stop podmínka může znít:
+
+```text
+Při nejbližším novém formuláři člověk použije aktualizovaný checklist bez doptávání na telefon. Pokud se problém nevrátí, karta se uzavře a položka zůstává v trvalém minimu.
+```
+
+Špatná stop podmínka:
+
+```text
+Budeme sledovat, jestli se to ještě někdy objeví.
+```
+
+Sledování bez konkrétního pracovního okamžiku jen vrací mimořádnou pozornost. Úzká karta má mít začátek, první ověření a konec.
+
+### Privacy-first hranice druhého návratu
+
+Druhý návrat často vytváří tlak na plošnější sběr dat. "Když se to stalo dvakrát, pojďme to měřit všude." To je pochopitelná, ale drahá reakce. Nejdřív hledejte společnou příčinu v existujících artefaktech: checklistu, šabloně, předávacím místě, rozhodovacím logu, onboardingové poznámce nebo formulářovém návrhu.
+
+Před novým měřením projděte pět otázek:
+
+- Umíme příčinu ověřit z existujících pracovních stop?
+- Stačí jeden příklad výjimky v kanonickém místě?
+- Potřebujeme nový osobní údaj, nebo jen lepší pravidlo?
+- Nepřidáváme kontrolu lidí místo kontroly pracovního artefaktu?
+- Má nové ověřovací okno datum konce a jasné mazání dočasných podkladů?
+
+Privacy-first výsledek může být:
+
+```text
+Druhý návrat řešíme opravou checklistu a jedním ověřením při příštím formuláři. Nesbíráme nové eventy, neexportujeme historická odeslání a nepřidáváme nové povinné pole. Do rozhodovacího logu ukládáme jen anonymizovaný závěr.
+```
+
+Tohle je přesně ten typ provozní disciplíny, která drží evropský, kontrolovatelný a datově střídmý systém. Ne proto, že by tým ignoroval signály, ale proto, že reaguje na příčinu, ne na nervozitu.
+
+### Karta druhého návratu
+
+```text
+Položka:
+
+Kanonická věta:
+
+První návrat:
+
+Jak byl první návrat uzavřen:
+
+Druhý návrat:
+
+Co je stejné:
+
+Co je jiné:
+
+Společná příčina:
+- potvrzená / pravděpodobná / nepotvrzená
+
+Zařazení:
+- stejný povrch, jiná příčina
+- jiný povrch, stejná příčina
+- stejný povrch i stejná příčina
+- nejasná příčina
+
+Rozhodnutí:
+- lokální úklid / oprava společného místa / úzká systémová karta / krátké ověřovací okno
+
+Nejmenší další reakce:
+
+Co výslovně neotevíráme:
+
+Privacy-first hranice:
+
+Co smažeme, zkrátíme nebo anonymizujeme:
+
+Stop podmínka:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 0-1: přečtěte závěr prvního návratu a současný druhý signál.
+2. Minuta 1-2: oddělte povrch od příčiny u obou návratů.
+3. Minuta 2-3: napište, co je stejné a co je jiné.
+4. Minuta 3-4: vyberte jednu situaci z matice druhého návratu.
+5. Minuta 4-5: určete nejmenší společnou opravu nebo lokální úklid.
+6. Minuta 5-6: nastavte stop podmínku a privacy-first hranici.
+7. Minuta 6-7: řekněte nahlas, co kvůli druhému návratu výslovně neotevíráte.
+
+Workshop nesmí skončit větou "pro jistotu to začneme sledovat". Buď je příčina dost jasná pro malou opravu, nebo je potřeba krátké ověřovací okno. V obou případech musí být jasné, kdy práce skončí.
+
+### Checklist druhého návratu
+
+- Porovnali jsme druhý návrat s uzavřením prvního návratu?
+- Oddělili jsme podobný povrch od skutečné společné příčiny?
+- Víme, co je stejné a co je jiné?
+- Nebereme dva případy automaticky jako důkaz selhání celého systému?
+- Vybrali jsme jednu situaci z matice druhého návratu?
+- Má reakce nejmenší společné pracovní místo?
+- Pokud otevíráme úzkou systémovou kartu, má stop podmínku a první ověření?
+- Neobnovujeme staré review, pravidelný dohled ani neurčité "budeme sledovat"?
+- Nepřidáváme nový tracker, export, osobní údaj, report ani kontrolu lidí?
+- Je napsané, co po ověření smažeme, zkrátíme nebo anonymizujeme?
+- Umí tým říct, co druhý návrat opravdu dokazuje a co zatím nedokazuje?
+
+Druhý návrat po trvalém minimu je dobrý test pokory. Jeden signál může být náhoda, dva signály mohou být vzor, ale pořád to není povolenka k otevření všeho. Zralý tým nejdřív hledá společnou příčinu, potom volí nejmenší opravu a nakonec uklízí datovou stopu. Díky tomu systém nezaspí, ale ani se neprobudí při každém zapraskání.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o druhém návratu po trvalém minimu: rozlišení povrchu a příčiny, matice druhého návratu, úzká systémová karta, privacy-first hranice, karta a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního návratu po trvalém minimu: čtyři uzavírací stavy, lokální úklid, privacy-first zkrácení důkazů, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním návratu po trvalém minimu: rozlišení šumu, lokální stopy, úzkého návratu a skutečného návratu tématu, reakce bez obnovy staré agendy, privacy-first brzda, karta, mini workshop a checklist.
