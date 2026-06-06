@@ -183113,7 +183113,190 @@ Workshop končí jen tehdy, když je jasné, zda vzniká práce. Pokud nevzniká
 
 První běžné použití po uzavření druhého návratu má potvrdit, že systém umí pokračovat bez zvláštní péče. Když pravidlo drží, nechte ho pracovat. Když potřebuje jednu větu, přidejte ji tam, kde člověk stojí. Když se ukáže nový signál, dejte mu vlastní otázku. Nejhorší výsledek by byl proměnit každé úspěšné ověření v další vrstvu sledování.
 
+## Uzavření prvního běžného použití po uzavření druhého návratu
+
+První běžné použití po uzavřeném druhém návratu nesmí zůstat jako neurčitý pocit, že "to asi prošlo". Pokud má být systém klidný, potřebuje krátké uzavření. Ne proto, aby vznikl další report, ale aby bylo jasné, jestli opravené pracovní místo opravdu stačilo, jestli se má doplnit drobná nápověda, nebo jestli se objevilo něco nového, co už nepatří do staré návratové větve.
+
+Uzavření začněte otázkou:
+
+```text
+Co první běžné použití dokázalo o aktuálním pracovním místě?
+```
+
+Ne o celé historii. Ne o tom, jestli tým kdysi udělal správné rozhodnutí. Ne o všech podobných případech. Jen o aktuálním místě, ve kterém člověk právě pracoval. To drží reakci úzkou a brání návratu staré mimořádné péče.
+
+Příklad:
+
+```text
+Uzavřený druhý návrat:
+Doplnili jsme do checklistu formulářů pravidlo pro povinný telefon.
+
+První běžné použití:
+Nová landing page pro službu s konzultačním dalším krokem.
+
+Co se stalo:
+Editor použil checklist, telefon nechal volitelný a přidal větu, že první odpověď přijde e-mailem.
+
+Co to dokázalo:
+Kanonické místo stačilo bez staré historie.
+
+Uzavírací stav:
+Drží bez akce.
+
+Privacy-first výsledek:
+Nevzniká nový report, export ani evidence použití checklistu. V logu zůstává jen anonymizovaný závěr.
+```
+
+Takové uzavření je úmyslně obyčejné. Výhra není v tom, že tým vytvořil další dokument. Výhra je v tom, že po reálném použití umí říct "hotovo, necháváme být" a opravdu podle toho jedná.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden stav:
+
+- Uzavřít bez akce: kanonické místo stačilo a není potřeba nic doplňovat.
+- Doplnit jednu pracovní nápovědu: pravidlo drží, ale konkrétní místo potřebuje větu, příklad nebo jasnější odkaz.
+- Přepsat archivní závěr do pracovního jazyka: člověk musel otevřít starou historii, protože současné místo nebylo dost použitelné.
+- Oddělit nový signál: objevilo se jiné tření, které má dostat vlastní otázku, nebo má zůstat jen jako poznámka bez zásahu.
+
+Stav "ještě raději zkontrolujeme příště" používejte jen tehdy, když zároveň napíšete, co přesně má příště stačit k ukončení. Bez stop podmínky to není kontrola, ale návrat nervozity. Pokud první použití drželo, další speciální kontrola většinou není potřeba.
+
+Dobrá uzavírací věta:
+
+```text
+První běžné použití drželo bez mimořádné pomoci. Kanonické místo stačilo, stará historie se neotevírala a položka zůstává v trvalém minimu.
+```
+
+Slabá uzavírací věta:
+
+```text
+Zatím to vypadá dobře, budeme dál sledovat.
+```
+
+První věta uzavírá stav. Druhá věta nechává práci otevřenou a pravděpodobně vytvoří další neurčité připomínky.
+
+### Co zapsat do kanonického místa
+
+Do kanonického místa patří jen to, co člověk příště použije při práci. Nepatří tam popis celého druhého návratu, dlouhé odůvodnění ani interní debata. Pokud první použití ukázalo, že stačí současná věta, neměňte ji. Pokud chyběla nápověda, přidejte ji přímo do pracovního místa.
+
+Praktický rozdíl:
+
+```text
+Nepřidávat:
+Podrobnosti druhého návratu najdete v rozhodovacím logu ze dne X.
+
+Přidat:
+Telefon požadujte jen tehdy, když je nutný pro slíbený další krok; jinak nabídněte e-mail nebo volitelný kontakt.
+```
+
+Kanonické místo má pomáhat v okamžiku rozhodnutí. Archiv má pomáhat, když se někdo ptá, proč pravidlo vzniklo. Když tyto dvě role smícháte, pracovní pravidla začnou bobtnat a lidé se vrátí k ústnímu vysvětlování.
+
+### Kdy otevřít další běžné použití
+
+Druhé běžné použití po tomto uzavření otevírejte jen při jednom z těchto důvodů:
+
+- první použití potřebovalo drobnou nápovědu a chcete ověřit, že nápověda stačí;
+- první použití vracelo starou historii a přepsali jste závěr do pracovního jazyka;
+- nový signál souvisí s aktuálním pracovním místem a má jasnou stop podmínku;
+- jde o přirozený běžný rytmus, ve kterém by se místo stejně použilo.
+
+Neotevírejte druhé použití jen proto, že "jednou je málo". Pokud první běžné použití proběhlo čistě, jeho smysl je právě v tom, že systém nepotřebuje další mimořádnou pozornost. Další běžný průchod může nastat přirozeně, ale nemá dostat vlastní agendu.
+
+Krátká rozhodovací pomůcka:
+
+```text
+Vznikla po prvním použití práce?
+- ne: uzavřít bez akce
+- ano, jedna věta: doplnit a ověřit při nejbližším přirozeném použití
+- ano, stará historie: přepsat kanonické místo a ověřit při nejbližším použití
+- ano, jiné téma: oddělit nový signál
+```
+
+Codyho komentář: když něco funguje, není nutné kolem toho postavit malý slavnostní proces. Stačí zapsat, že to funguje, a nechat lidi dělat práci. Ano, zní to podezřele jednoduše. Proto to bývá tak těžké.
+
+### Privacy-first uzavření prvního použití
+
+Po prvním běžném použití se držte nejmenší datové stopy. Pokud pravidlo drželo, není důvod ukládat konkrétní formulářová data, sledovat autora úpravy, měřit kliknutí v checklistu nebo vytvářet tabulku použití. Stačí krátký anonymizovaný závěr.
+
+Použijte větu:
+
+```text
+Po prvním použití uchováváme jen:
+```
+
+Příklad:
+
+```text
+Po prvním použití uchováváme jen anonymizovaný závěr, že checklist stačil pro novou landing page. Nevedeme osobní evidenci použití pravidla, neexportujeme formulářová data a nemažeme žádná zákaznická data, protože jsme s nimi pro rozhodnutí vůbec nepracovali.
+```
+
+Pokud vznikla drobná nápověda, smažte pracovní poznámku po jejím přepsání do kanonického místa. Pokud vznikl nový signál, založte ho bez přenášení starých detailů, které k němu nejsou nutné. Privacy-first uzavření není jen mazání dat. Je to schopnost nepřibalit k novému kroku historický náklad, který už neslouží rozhodnutí.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Uzavřený druhý návrat:
+
+Kanonické místo:
+
+První běžné použití:
+
+Výsledek použití:
+- drží bez akce / potřebuje drobnou nápovědu / vrací starou historii / ukazuje nový signál
+
+Co použití dokázalo:
+
+Uzavírací stav:
+- uzavřít bez akce
+- doplnit jednu pracovní nápovědu
+- přepsat archivní závěr do pracovního jazyka
+- oddělit nový signál
+
+Co se mění v kanonickém místě:
+
+Co zůstává zavřené:
+
+Co zůstává v trvalém minimu:
+
+Co mažeme nebo zkracujeme:
+
+Co dál nesbíráme:
+
+Další průchod:
+- žádný / nejbližší přirozené použití / nová otázka se stop podmínkou
+```
+
+Karta má sloužit k zavření, ne k dalšímu plánování. Pokud se při vyplňování rozroste do seznamu úkolů, zastavte se a oddělte nový signál od uzavření původní větve.
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte první běžné použití a jeho výsledek.
+2. Minuta 1-2: řekněte, co použití dokázalo o kanonickém místě.
+3. Minuta 2-3: vyberte jeden uzavírací stav.
+4. Minuta 3-4: rozhodněte, zda se mění kanonické místo, nebo se věc nechává bez akce.
+5. Minuta 4-5: zapište privacy-first úklid a co dál nesbíráte.
+6. Minuta 5-6: napište, jestli další průchod vůbec vzniká.
+
+Workshop je krátký schválně. Jakmile se začne řešit širší historie druhého návratu, vraťte se k otázce, co první běžné použití opravdu dokázalo. Uzavření má uklidnit systém, ne obnovit vyšetřování.
+
+### Checklist uzavření prvního běžného použití
+
+- Víme, v jaké běžné situaci se pravidlo poprvé použilo?
+- Umíme říct, co použití dokázalo o kanonickém místě?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud pravidlo drželo, nevyrábíme další kontrolu pro jistotu?
+- Pokud chyběla nápověda, doplňujeme ji přímo do pracovního místa?
+- Pokud se otevřela stará historie, překládáme závěr do pracovního jazyka?
+- Pokud vznikl nový signál, oddělujeme ho od uzavřeného druhého návratu?
+- Je jasné, co zůstává v trvalém minimu?
+- Mažeme nebo zkracujeme dočasné poznámky, které už splnily účel?
+- Nepřidáváme nový tracker, report, CRM pole, osobní evidenci ani export?
+- Má případný další průchod přirozený pracovní okamžik a stop podmínku?
+
+Uzavření prvního běžného použití je dobré tehdy, když po něm systém nepotřebuje zvláštní pozornost. Buď pravidlo drží a mlčí, nebo dostane jednu praktickou větu, nebo se nový signál oddělí bez přilepení ke staré historii. V každém případě se práce vrací na nejnižší úroveň pozornosti, která ještě chrání rozhodnutí.
+
 ## Pracovní log
+
+- 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření druhého návratu: čtyři uzavírací stavy, zápis do kanonického místa, pravidla pro další průchod, privacy-first úklid, karta, mini workshop a checklist.
 
 - 2026-06-06: Doplněna úvodní podkapitola o prvním běžném použití po uzavření druhého návratu: čtyři výsledky použití, práce bez staré historie, privacy-first ověření, karta, mini workshop a checklist.
 
