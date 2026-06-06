@@ -182409,8 +182409,159 @@ Workshop končí rozhodnutím, ne seznamem nápadů. Pokud vznikne pět možnýc
 
 První návrat po trvalém minimu je test zralosti systému. Nejde o to dokázat, že staré rozhodnutí bylo perfektní. Jde o to zareagovat přesně: malý signál malou reakcí, skutečný návrat novou otázkou a šum žádnou prací. Tak zůstává systém živý, ale ne nervózní.
 
+## Uzavření prvního návratu po trvalém minimu
+
+První návrat po trvalém minimu nemá zůstat viset jako "něco se zase objevilo". Jakmile tým udělá jednu přiměřenou reakci, musí návrat uzavřít. Jinak se z drobného signálu stane tichý důvod, proč se při každém dalším plánování znovu sahá po staré agendě.
+
+Uzavření má odpovědět na jednoduchou otázku:
+
+```text
+Co jsme se z prvního návratu naučili a jaký stav má položka teď?
+```
+
+Nestačí napsat, že se chyba opravila. Je potřeba rozhodnout, jestli šlo o šum, lokální stopu, úzký návrat, nebo skutečný návrat tématu. Podle toho se položka buď vrací do trvalého minima, dostane drobnou lokální stopu v kanonickém místě, otevře úzkou kartu, nebo se promění v novou pracovní otázku.
+
+Příklad:
+
+```text
+Položka v trvalém minimu:
+Telefon ve formulářích je volitelný, pokud není nutný pro slíbený další krok.
+
+Co se vrátilo:
+Jedna nová landing page měla telefon znovu jako povinné pole.
+
+Co jsme udělali:
+Opravili jsme formulář a smazali starou kopii šablony, ze které chyba vznikla.
+
+Co jsme zjistili:
+Kanonické pravidlo je srozumitelné. Problém byla stará pracovní kopie.
+
+Nový stav:
+Položka se vrací do trvalého minima.
+
+Privacy-first výsledek:
+Nepřidáváme žádné nové měření formulářových průchodů ani exporty vyplněných polí.
+```
+
+Takové uzavření je krátké, ale prakticky silné. Tým má jasno, že se neotevírá nové review všech formulářů. Zároveň ví, co se uklidilo a proč se podobná chyba nemá vrátit stejnou cestou.
+
+### Čtyři uzavírací stavy
+
+Po prvním návratu vyberte jeden stav:
+
+- Vrátit do trvalého minima: šlo o šum nebo lokální stopu a kanonické pravidlo pořád drží.
+- Nechat drobnou poznámku: pravidlo drží, ale jedno pracovní místo potřebuje připomenutí nebo odkaz.
+- Otevřít úzkou kartu: signál se týká jednoho konkrétního místa a potřebuje malé ověření.
+- Otevřít novou otázku: problém se opravdu vrací napříč místy a staré pravidlo už nestačí.
+
+Stav "sledovat dál" používejte jen tehdy, když má přesnou stop podmínku. Bez ní je to návrat mimořádné pozornosti pod jiným jménem. Pokud tým neumí říct, co přesně bude stačit k dalšímu rozhodnutí, položka ještě není připravená na sledování.
+
+Dobrá uzavírací věta:
+
+```text
+Návrat uzavíráme jako lokální stopu. Opravili jsme jednu starou kopii šablony, kanonické pravidlo zůstává beze změny a položka se vrací do trvalého minima.
+```
+
+Slabá uzavírací věta:
+
+```text
+Budeme si na to dávat pozor.
+```
+
+První věta mění stav systému. Druhá jen přidává neurčitou povinnost do hlav lidí, kteří už těch povinností mají dost.
+
+### Co po návratu uklidit
+
+Uzavření návratu je vhodná chvíle pro malý úklid. Ne pro nový audit, ne pro reorganizaci celého procesu, ale pro odstranění stop, které návrat způsobily nebo které by po něm zůstaly bez účelu.
+
+Typicky uklízejte:
+
+- starou kopii šablony, ze které návrat vznikl;
+- komentář v ticketu, který odporuje aktuální kanonické větě;
+- dočasný seznam kontrol, pokud návrat skončil lokální opravou;
+- pracovní export, který měl ověřit jednu situaci a už nemá další účel;
+- duplicitní poznámku v backlogu, která by příště znovu otevřela starý rozsah.
+
+Neuklízejte tak široce, aby se z toho stal samostatný projekt. Pokud při úklidu najdete další problém, zapište ho jako nový signál a nejdřív rozhodněte, jestli patří k původnímu návratu. Automatické přibalování dalších nálezů je nejrychlejší cesta zpět k neklidnému systému.
+
+### Privacy-first uzavření
+
+Návrat po trvalém minimu často zanechá dočasné důkazy: screenshot, export, kopii formuláře, interní poznámku nebo seznam případů. Po uzavření se zeptejte, které z nich ještě mají účel. Pokud už jen dokazují, že tým pracoval, nejsou potřeba.
+
+Použijte větu:
+
+```text
+Po uzavření návratu mažeme nebo zkracujeme:
+```
+
+Příklad:
+
+```text
+Po uzavření návratu mažeme dočasný export formulářových odeslání. V rozhodovacím logu necháváme jen anonymizovaný závěr: chyba vznikla ze staré kopie šablony, kanonické pravidlo zůstává beze změny.
+```
+
+Privacy-first přístup tady není brzda. Je to způsob, jak zabránit tomu, aby se z krátkého ověření stala nová datová vrstva. Když důkaz splnil účel, má se zkrátit, anonymizovat nebo odstranit.
+
+### Karta uzavření prvního návratu
+
+```text
+Položka:
+
+Původní stav:
+- trvalé minimum
+
+Co se vrátilo:
+
+Typ návratu:
+- šum / lokální stopa / úzký návrat / skutečný návrat tématu
+
+Jedna reakce, kterou jsme udělali:
+
+Co jsme zjistili:
+
+Uzavírací stav:
+- vrátit do trvalého minima / nechat drobnou poznámku / otevřít úzkou kartu / otevřít novou otázku
+
+Co zůstává beze změny:
+
+Co výslovně neotevíráme:
+
+Co uklízíme:
+
+Privacy-first výsledek:
+
+Další stop podmínka jen pokud je potřeba:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte, jaký návrat nastal a jaká byla povolená reakce.
+2. Minuta 1-2: ověřte, co se opravdu změnilo v pracovním místě.
+3. Minuta 2-3: řekněte, co se potvrdilo a co se nepotvrdilo o původním pravidle.
+4. Minuta 3-4: vyberte jeden uzavírací stav.
+5. Minuta 4-5: napište, co se uklízí a co se dál nesbírá.
+6. Minuta 5-6: uložte jednu uzavírací větu tam, kde se položka příště objeví.
+
+Codyho komentář: uzavření prvního návratu je trochu jako zhasnout v místnosti, kde už nikdo nepracuje. Není to velké rozhodnutí, ale když to neuděláte, někdo bude za týden řešit, proč tam pořád svítí.
+
+### Checklist uzavření prvního návratu
+
+- Víme, jaký typ návratu nastal?
+- Udělali jsme jen jednu přiměřenou reakci?
+- Rozhodli jsme nový stav položky po návratu?
+- Vrací se položka do trvalého minima, pokud šlo jen o šum nebo lokální stopu?
+- Má úzká karta vlastní stop podmínku, pokud ji opravdu otevíráme?
+- Je jasné, co zůstává beze změny?
+- Je napsané, co výslovně neotevíráme?
+- Uklidili jsme staré kopie, dočasné poznámky nebo exporty, které už nemají účel?
+- Nevznikl nový tracker, report, CRM údaj ani kontrolní rituál?
+- Najde tým uzavírací větu tam, kde by se stejný návrat mohl objevit znovu?
+
+První návrat po trvalém minimu je uzavřený ve chvíli, kdy po něm nezůstává nervozita ani skrytý dohled. Zůstává jen aktualizovaný stav, uklizené pracovní místo a jasná hranice, kdy by dávalo smysl téma znovu otevřít.
+
 ## Pracovní log
 
+- 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního návratu po trvalém minimu: čtyři uzavírací stavy, lokální úklid, privacy-first zkrácení důkazů, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním návratu po trvalém minimu: rozlišení šumu, lokální stopy, úzkého návratu a skutečného návratu tématu, reakce bez obnovy staré agendy, privacy-first brzda, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review do trvalého minima: ponechané minimum, úklid pracovních stop, návratová věta, uzavírací zpráva, privacy-first omezení dat, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním dlouhodobém review tichého rytmu: důvody otevření review, čtyři výsledné stavy, privacy-first kontrola bez nového dohledu, karta, mini workshop a checklist.
