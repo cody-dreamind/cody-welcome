@@ -186414,8 +186414,217 @@ Workshop končí až tehdy, když po něm nevznikne nová samostatná evidence. 
 
 Uzavření druhého dlouhodobého review má vrátit pravidlu obyčejnost. Obyčejnost je v dobrém provozu silná věc: pravidlo je dohledatelné, signál má cestu, stará data nezabírají místo a nikdo kolem tématu nechodí po špičkách. Když se problém jednou opravdu vrátí, tým ho pozná podle návratového signálu. Do té doby má systém dělat práci, ne udržovat památník na minulou nejistotu.
 
+## První návratový signál po klidovém provozu
+
+Klidový provoz neznamená, že se téma už nikdy neozve. Znamená, že se neozývá bez důvodu. Dřív nebo později přijde signál: obchod se znovu doptává na stejnou věc, zákazník narazí na staré tření, někdo najde nejasnost v šabloně, formulář po změně nabídky začne sbírat moc málo kontextu nebo se v review objeví poznámka, která připomíná původní problém.
+
+První reakce po klidovém provozu je důležitá. Když tým zpanikaří, otevře celou starou historii a obnoví mimořádnou péči. Když signál odmávne, může přehlédnout skutečný návrat problému. Správný postup je menší: nejdřív rozlišit typ signálu a udělat jen takovou reakci, kterou typ signálu opravdu potřebuje.
+
+Základní otázka zní:
+
+```text
+Je to skutečný návrat původního problému, lokální tření, šum, nebo nová otázka vedle původního pravidla?
+```
+
+Tahle otázka chrání rozsah. Neptá se "co všechno bychom mohli znovu zkontrolovat". Ptá se, jestli signál vůbec patří ke starému pravidlu a jak malý krok stačí k rozhodnutí.
+
+Začněte krátkým zápisem:
+
+```text
+Návratový signál:
+
+Kde se objevil:
+
+Kdo ho viděl při běžné práci:
+
+Kterého pravidla nebo pracovního místa se týká:
+
+Původní návratová podmínka:
+
+Co by se stalo, kdybychom teď nic neměnili:
+```
+
+Poslední řádek je nenápadně užitečný. Pokud odpověď zní "nic zásadního, jen by někdo měl drobné tření", nejspíš nejde o návrat starého problému. Pokud odpověď zní "zákazník nedostane odpověď, obchod začne sbírat data bokem, nebo tým obejde kanonické pravidlo", signál si zaslouží pozornost.
+
+### Tři brány před otevřením tématu
+
+Než téma otevřete, projděte tři brány:
+
+- Shoda se signálem: odpovídá situace návratové podmínce, kterou jste dřív zapsali?
+- Běžná cesta: objevil se signál v normální práci, nebo jen v mimořádném dohledávání?
+- Rozhodnutí: existuje konkrétní rozhodnutí, které se podle signálu může změnit?
+
+Když signál neprojde první bránou, neotevírejte starý problém. Zapište ho jako šum nebo novou samostatnou otázku. Když neprojde druhou bránou, zkontrolujte, jestli jste si nevyrobili nový dohled jen proto, abyste něco našli. Když neprojde třetí bránou, není připravený na akci; možná stačí počkat na opakování v běžném rytmu.
+
+Příklad:
+
+```text
+Návratový signál:
+Obchod se u dvou poptávek znovu doptával na termín hovoru.
+
+Původní návratová podmínka:
+Téma otevřeme jen když se třikrát po sobě objeví stejné doptání, které brání první odpovědi.
+
+Brána shody:
+Neprošlo. Jsou to dvě poptávky a první odpověď šla poslat.
+
+Brána běžné cesty:
+Prošlo. Signál přišel z běžného měsíčního review webu.
+
+Brána rozhodnutí:
+Zatím neprošlo. Neměníme formulář ani pravidlo, jen zapisujeme anonymizovaný vzor do review.
+```
+
+Výsledek není "nic". Výsledek je vědomé neotevření tématu. To je v klidovém provozu legitimní rozhodnutí.
+
+### Čtyři stavy prvního signálu
+
+Po průchodu branami vyberte jeden ze čtyř stavů:
+
+- Šum: signál nesedí na návratovou podmínku a nemění rozhodnutí.
+- Lokální servis: signál ukazuje drobnou nejasnost v jednom místě, kterou lze opravit bez otevření staré větve.
+- Nová malá otázka: signál je reálný, ale týká se nového problému vedle původního pravidla.
+- Skutečný návrat: signál splnil návratovou podmínku a pravidlo znovu potřebuje omezenou iteraci.
+
+Šum zapište krátce a dál ho nerozvíjejte. Typická věta:
+
+```text
+Signál bereme jako šum: nesplnil návratovou podmínku, nebrání běžné práci a nemění rozhodnutí.
+```
+
+Lokální servis použijte, když stačí opravit jedno pracovní místo. Například šablona odpovědi používá staré slovo, které mate obchod, ale pravidlo minimálního formuláře pořád funguje. Opravte větu, zapište změnu do kanonického místa a neotevírejte celé review.
+
+Nová malá otázka vzniká, když signál připomíná starý problém, ale ve skutečnosti míří jinam. Třeba poptávky nejsou slabé kvůli formuláři, ale kvůli nové landing page, která slibuje příliš širokou službu. V takovém případě nepište "vrací se problém formuláře". Napište novou otázku s vlastním rozsahem.
+
+Skutečný návrat je nejvzácnější stav. Použijte ho jen tehdy, když signál splní dříve zapsanou návratovou podmínku a existuje konkrétní rozhodnutí, které může změnit pravidlo. Ani tehdy neotvírejte celou historii. Otevřete nejmenší iteraci kolem současného pracovního místa.
+
+### Jak reagovat bez návratu mimořádné péče
+
+Pro každý stav platí jiná reakce:
+
+```text
+Šum:
+Zapsat jednou větou do běžného review a dál nehlídat.
+
+Lokální servis:
+Opravit jedno místo, zapsat změnu a ověřit při dalším běžném použití.
+
+Nová malá otázka:
+Otevřít samostatnou kartu s vlastním rozsahem, stop podmínkou a vlastníkem.
+
+Skutečný návrat:
+Otevřít omezenou iteraci pravidla podle návratové podmínky, ne celou původní historii.
+```
+
+Největší riziko je stav "lokální servis" přefouknout do "skutečného návratu". Tým má po dlouhé práci kolem pravidla paměť, a paměť ráda hledá vzory. Jenže ne každé drobné zakopnutí je návrat staré bolesti. Někdy je to prostě jedna špatná věta, zastaralý odkaz nebo člověk, který použil starou šablonu.
+
+Praktické stop pravidlo:
+
+```text
+Dokud signál nesplní návratovou podmínku, nesmí vytvořit samostatnou kontrolu.
+```
+
+To neznamená, že se ignoruje. Znamená to, že se drží v běžném rytmu, dokud neprokáže, že potřebuje víc.
+
+### Privacy-first hranice prvního signálu
+
+První návratový signál po klidovém provozu svádí k tomu přidat měření: další event, export, screenshoty, kopie poptávek, nahrávání průchodů, nové pole ve formuláři nebo dočasný tracker "jen na ověření". Právě tady je potřeba brzdit.
+
+Nejdřív použijte existující signály:
+
+- běžné review webu, produktu nebo supportu;
+- anonymizovaný vzor z několika případů;
+- poznámku vlastníka bez osobních údajů;
+- rozhodovací log;
+- ruční kontrolu jednoho pracovního místa;
+- krátký zákaznický dotaz bez sběru zbytečného kontextu.
+
+Nové sbírání dat povolte až tehdy, když umíte doplnit větu:
+
+```text
+Bez tohoto nového údaje nemůžeme rozhodnout, protože:
+Údaj budeme držet nejdéle do:
+Přístup bude mít:
+Po rozhodnutí údaj smažeme, zkrátíme nebo anonymizujeme takto:
+```
+
+Pokud větu neumíte doplnit, nejde o nutné měření. Jde o uklidňovací sběr. Ten do privacy-first provozu nepatří, i kdyby byl technicky snadný a vypadal nevinně.
+
+Codyho komentář: "jen dočasný export" je v mnoha týmech nejdelší žijící pracovní soubor. Jakmile mu dáte jméno a sdílenou složku, začne se tvářit jako infrastruktura. Nedávejte mu tu šanci bez dobrého důvodu.
+
+### Karta prvního návratového signálu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Návratový signál:
+
+Kde se objevil:
+
+Původní návratová podmínka:
+
+Brána shody:
+- prošlo / neprošlo
+
+Brána běžné cesty:
+- prošlo / neprošlo
+
+Brána rozhodnutí:
+- prošlo / neprošlo
+
+Stav:
+- šum
+- lokální servis
+- nová malá otázka
+- skutečný návrat
+
+Reakce:
+
+Co výslovně neotevíráme:
+
+Jaká nová data nesbíráme:
+
+Pokud sbíráme nový údaj, proč a na jak dlouho:
+
+Vlastník:
+
+Další kontrola v běžném rytmu:
+```
+
+Karta má chránit tým před dvěma chybami najednou: před ignorováním skutečného signálu a před velkým návratem starého procesu. Dobrý zápis je krátký, rozhodovací a nudně konkrétní.
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: pojmenujte signál jednou větou.
+2. Minuta 1-2: porovnejte ho s původní návratovou podmínkou.
+3. Minuta 2-3: projděte tři brány.
+4. Minuta 3-4: vyberte jeden ze čtyř stavů.
+5. Minuta 4-5: zapište reakci a jednu věc, kterou teď výslovně neotevíráte.
+
+Workshop končí, když je jasné, zda signál zůstává v běžném rytmu, dostane lokální opravu, stává se novou malou otázkou, nebo opravdu otevírá omezenou iteraci pravidla.
+
+### Checklist prvního návratového signálu
+
+- Umíme signál popsat jednou konkrétní větou?
+- Víme, kde se objevil a kdo ho viděl při běžné práci?
+- Porovnali jsme ho s původní návratovou podmínkou?
+- Prošel signál branou shody, běžné cesty a rozhodnutí?
+- Vybrali jsme jeden ze čtyř stavů místo volného "budeme sledovat"?
+- Pokud jde o šum, nezakládáme kvůli němu evidenci?
+- Pokud jde o lokální servis, opravujeme jen jedno místo?
+- Pokud jde o novou otázku, má vlastní rozsah a stop podmínku?
+- Pokud jde o skutečný návrat, otevíráme jen omezenou iteraci pravidla?
+- Je zapsané, co výslovně neotevíráme?
+- Nepřidáváme nový tracker, export ani pole jen kvůli uklidnění?
+- Pokud potřebujeme nový údaj, má účel, vlastníka, retenci a plán smazání nebo anonymizace?
+
+První návratový signál po klidovém provozu je test zralosti systému. Nejde o to, jestli se signál objeví. Objeví se skoro vždycky. Jde o to, jestli tým umí reagovat přiměřeně: ani panika, ani slepota. Klidový provoz zůstane klidový jen tehdy, když má pro návrat signálu jasnou, malou a datově střídmou cestu.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o prvním návratovém signálu po klidovém provozu: tři brány před otevřením tématu, čtyři stavy signálu, reakce bez návratu mimořádné péče, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review do klidového provozu: čtyři uzavírací výsledky, odstranění skryté péče z běžné trasy, privacy-first úklid datové stopy, karta, týmová zpráva, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém dlouhodobém review bez nové mimořádné péče: inventura skrytých kontrol, čtyři výsledky review, přesun signálů do běžného rytmu, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review: převod výsledku do kanonického místa, čtyři způsoby uzavření, úklid starých podkladů, uzavírací zpráva týmu, privacy-first zkrácení datové stopy, karta, mini workshop a checklist.
