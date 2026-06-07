@@ -189261,8 +189261,160 @@ První věta zavírá práci. Druhá věta ji nechává viset v prostoru, kde se
 
 Uzavření první tiché kontroly má být skoro nudný administrativní konec. Právě v tom je jeho síla. Pravidlo prošlo běžnou prací, nezvětšilo datovou stopu a nepotřebuje nový dohled. Pokud po něm zůstane jasná věta, uklizené podklady a žádná nová agenda, tichý provoz není jen hezký název. Je to skutečný provozní stav.
 
+## Druhý tichý měsíc po uzavřené první tiché kontrole
+
+Když první tichá kontrola skončila dobře, druhý měsíc nemá znovu dokazovat totéž. Má ověřit, že pravidlo vydrží v běžném rytmu bez toho, aby kolem něj tým držel zvláštní pozornost. To je jiný typ jistoty. První tichá kontrola říká: pravidlo šlo použít po uzavření. Druhý tichý měsíc říká: pravidlo nezačalo znovu vytvářet vlastní malou agendu.
+
+Začněte otázkou:
+
+```text
+Použilo se pravidlo během dalšího běžného měsíce jako součást normální práce, nebo si znovu vyžádalo zvláštní dohled?
+```
+
+Pokud se pravidlo nepoužilo, nepanikařte. Ne každé pravidlo má každý měsíc přirozený průchod. Důležité je nezakládat umělý test jen proto, aby bylo co vyhodnotit. Umělý test by z tichého provozu znovu udělal mimořádnou péči. Místo toho zapište, že v daném měsíci nenastal běžný pracovní okamžik, a nechte návratový signál platit dál.
+
+Příklad:
+
+```text
+Pravidlo:
+Slabý podnět může být při měsíčním review zavřený bez úkolu.
+
+Druhý tichý měsíc:
+V review se neobjevil žádný slabý podnět, který by pravidlo potřeboval.
+
+Rozhodnutí:
+Pravidlo neměníme a netestujeme uměle. Vrátí se při dalším přirozeném použití nebo při opakovaném zbytečném úkolu.
+```
+
+Takový výsledek je v pořádku. Tichý provoz není povinnost pravidelně vyrábět důkazy. Je to schopnost nechat stabilní věc žít, dokud se neobjeví skutečná práce nebo skutečný signál.
+
+### Co druhý tichý měsíc kontroluje
+
+Druhý tichý měsíc sleduje tři praktické věci:
+
+- pravidlo se nevrátilo do zvláštního dohledu;
+- nevznikla nová duplicita, pomocná tabulka, ruční připomínka ani paralelní šablona;
+- privacy-first datová stopa zůstala stejná nebo menší než po první tiché kontrole.
+
+To stačí. Nesnažte se z druhého měsíce vytěžit detailní analýzu použití. Pokud pravidlo funguje, jeho nejlepší vlastnost je právě to, že nepotřebuje další pozornost. Měřit jeho nenápadnost příliš horlivě je trochu jako kontrolovat ticho hlasitým megafonem.
+
+Příklad zdravého druhého měsíce:
+
+```text
+Pravidlo:
+Discovery šablona používá otázku na rozhodovací horizont místo automatického lead scoringu.
+
+Co se stalo:
+Šablona byla použita ve dvou hovorech. Nevznikl požadavek na nové pole, scoring ani dashboard.
+
+Co se neobjevilo:
+Žádná ruční evidence použití šablony, žádná tabulka výjimek, žádná skrytá kontrola ownerem.
+
+Výsledek:
+Tichý provoz drží.
+```
+
+Tohle je přesně typ výsledku, který by se neměl dál rozebírat. Stačí krátký zápis do měsíčního review nebo rozhodovacího logu.
+
+### Čtyři stavy druhého tichého měsíce
+
+Po druhém tichém měsíci vyberte jeden stav:
+
+- Drží bez použití: nenastal přirozený pracovní okamžik, ale nevznikl ani nový signál.
+- Drží při použití: pravidlo se použilo v běžné práci bez mimořádné péče.
+- Skrytá péče se vrátila: někdo znovu ručně hlídal, připomínal nebo evidoval použití pravidla.
+- Návratový signál nastal: pravidlo selhalo podle předem popsané hranice.
+
+Stav `drží bez použití` je plnohodnotný. Nepřepisujte kvůli němu pravidlo. Neznamená, že je zbytečné. Znamená jen, že v daném měsíci nebyla situace, kde by se projevilo.
+
+Stav `drží při použití` je nejlepší kandidát na konec i zbytkové pozornosti. Pokud už první tichá kontrola proběhla a druhý měsíc ukázal normální použití bez návratu starého problému, pravidlo může zůstat jen v běžném rytmu.
+
+Stav `skrytá péče se vrátila` berte vážně. Ne proto, že by pravidlo nutně selhalo, ale protože tichý provoz není samostatný. Pokud owner znovu posílá správný odkaz před každým review, pravidlo nežije v systému. Žije v paměti ownera.
+
+Stav `návratový signál nastal` neřešte v rámci druhého tichého měsíce. Otevřete samostatnou kartu návratu a držte nejmenší možný rozsah.
+
+### Jak ukončit zbytkovou pozornost
+
+Pokud druhý tichý měsíc drží, napište větu:
+
+```text
+Zbytkovou pozornost ukončujeme; pravidlo zůstává jen v běžném rytmu a vrací se při návratovém signálu.
+```
+
+Tato věta ruší neviditelné "ještě na to koukneme". Tým tím získá jasnou hranici: pravidlo je součást normální práce, ne položka ve zvláštním režimu. Pokud se později objeví problém, nebude to pokračování staré kontroly. Bude to nový návrat podle známého signálu.
+
+Krátký zápis:
+
+```text
+Pravidlo:
+
+Stav druhého tichého měsíce:
+
+Zbytková pozornost:
+- ukončit / ponechat jen do přirozeného použití / převést do krátké stabilizace / otevřít návrat
+
+Co dál neděláme:
+
+Návratový signál:
+
+Privacy-first stav:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Slabý podnět může být zavřený bez úkolu.
+
+Stav druhého tichého měsíce:
+Drží při použití. V review byl jeden slabý podnět zavřený bez úkolu a bez nové evidence.
+
+Zbytková pozornost:
+Ukončit.
+
+Co dál neděláme:
+Nezakládáme přehled všech slabých podnětů ani samostatnou kontrolu karet změn.
+
+Návratový signál:
+Dva po sobě jdoucí slabé podněty znovu skončí zbytečným úkolem.
+
+Privacy-first stav:
+Zůstává jen anonymizovaný rozhodovací záznam. Nevznikl tracker, export ani osobní evidence použití.
+```
+
+### Privacy-first konec pozornosti
+
+Konec zbytkové pozornosti má mít i datový konec. Pokud během první kontroly nebo druhého měsíce vznikly pomocné poznámky, pracovní kopie, screenshoty, seznamy průchodů nebo exporty, teď je správný čas je smazat, anonymizovat nebo převést na krátký závěr.
+
+Ptejte se:
+
+- Zůstává nějaký podklad jen proto, že se hodil při kontrole?
+- Dá se nahradit jednou anonymizovanou větou?
+- Má pomocná evidence jasný účel mimo uzavřenou kontrolu?
+- Nevznikla nová interní zvyklost sledovat použití pravidla?
+
+Pokud podklad nemá účel, pryč s ním. Tichý provoz má být tichý i v datech. Nejen v kalendáři.
+
+Codyho komentář: druhý tichý měsíc je zkouška, jestli tým opravdu umí přestat. Ne dramaticky, ne s fanfárou. Prostě nechat fungující pravidlo fungovat a nepřilepit k němu další cedulku "pozor, funguje".
+
+### Checklist druhého tichého měsíce
+
+- Nastal přirozený pracovní okamžik pro použití pravidla?
+- Pokud nenastal, netestujeme pravidlo uměle?
+- Pokud nastal, použilo se pravidlo bez zvláštní podpory?
+- Nevznikla nová pomocná tabulka, připomínka, kontrola ani paralelní šablona?
+- Vybrali jsme jeden ze čtyř stavů druhého tichého měsíce?
+- Pokud pravidlo drží, ukončili jsme zbytkovou pozornost?
+- Pokud se vrátila skrytá péče, pojmenovali jsme nejmenší stabilizační opravu?
+- Pokud nastal návratový signál, otevíráme ho odděleně a v nejmenším rozsahu?
+- Jsou dočasné poznámky, exporty a pracovní kopie smazané nebo anonymizované?
+- Zůstává jasný návratový signál pro budoucí běžný rytmus?
+
+Druhý tichý měsíc má uzavřít poslední pokušení dál hlídat něco, co už funguje. Když pravidlo obstojí, vraťte ho do normální práce a věnujte pozornost dalšímu skutečnému rozhodnutí. Dlouhý rukopis se udržuje nejen tím, co přidáváte a opravujete, ale i tím, co po dobrém výsledku necháte být.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o druhém tichém měsíci po uzavřené první tiché kontrole: přirozené použití pravidla, čtyři stavy měsíce, ukončení zbytkové pozornosti, privacy-first konec podkladů a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření první tiché kontroly po uzavření do tichého provozu: čtyři uzavírací stavy, prevence nového dohledu, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o první tiché kontrole po uzavření do tichého provozu: ověření v existujícím rytmu, čtyři výsledky kontroly, skrytá zvláštní péče, privacy-first kontrola bez nové evidence, karta a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém běžném review po uzavření review zvláštní pozornosti: kontrola zbytkové pozornosti, čtyři výsledky review, rušení skrytých kontrol, privacy-first úklid, karta, mini workshop a checklist.
