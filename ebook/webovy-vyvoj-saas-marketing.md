@@ -188843,8 +188843,198 @@ Mažeme pomocnou tabulku a nepřidáváme nové sledování použití šablony.
 
 Uzavření do tichého provozu je dobrý konec jedné dlouhé smyčky. Pravidlo prošlo opravou, běžným použitím, review i úklidem. Teď nemá potřebovat pozornost jen proto, že ji kdysi mělo. Má být po ruce, fungovat v normálním rytmu a vrátit se na stůl až ve chvíli, kdy se objeví skutečný signál. V tom je hodnota dobře udržovaného rukopisu: pomáhá týmu pracovat klidněji, ne jen přesněji.
 
+## První tichá kontrola po uzavření do tichého provozu
+
+Tichý provoz se nejlépe ověřuje tak, že mu nedáte vlastní slavnostní proces. Pokud po uzavření druhého review vznikne speciální "kontrola ticha", pravidlo se ve skutečnosti nevrátilo do normálu. Jen dostalo novou nálepku. První tichá kontrola má proto proběhnout uvnitř běžné práce, která by stejně nastala: měsíční sales review, pravidelné čtení poptávek, redakční kontrola, support retro nebo krátké provozní review.
+
+Cílem není znovu dokázat celou historii. Cílem je zjistit, jestli pravidlo žije bez dodatečné opory. Člověk ho najde, použije, případnou výjimku zapíše běžným způsobem a nepřidává k tomu žádnou zvláštní tabulku. Když tohle funguje, tichý provoz je opravdový. Když ne, máte konkrétní tření, ne neurčitý pocit, že by se to "mělo ještě hlídat".
+
+Začněte otázkou:
+
+```text
+Použilo se pravidlo v běžném rytmu bez zvláštní připomínky, vysvětlování a nové evidence?
+```
+
+Pokud odpověď zní ano, kontrola má být krátká. Pokud zní ne, pořád neotevírejte celou minulou smyčku. Nejprve pojmenujte, kde přesně tichý provoz selhal: dohledatelnost, srozumitelnost, odpovědnost, návratový signál nebo datový úklid.
+
+### Kdy tichou kontrolu udělat
+
+První tichou kontrolu nedělejte hned druhý den. Příliš brzká kontrola měří čerstvou paměť, ne stabilní provoz. Počkejte na první přirozený okamžik, kdy by se pravidlo mělo použít bez toho, aby ho někdo připomínal.
+
+Typické okamžiky:
+
+- při prvním běžném sales review po uzavření pravidla;
+- při první nové poptávce, která používá aktualizovanou discovery otázku;
+- při prvním redakčním sprintu, kde se pracuje s upravenou obsahovou šablonou;
+- při první support situaci, kde má tým sáhnout po stabilizované odpovědi;
+- při prvním měsíčním privacy-first úklidu, který už nemá obsahovat staré pomocné podklady.
+
+Kontrola má být připojená k existujícímu místu. Neposílejte kvůli ní samostatnou pozvánku, nezakládejte nový dokument a nepřidávejte nový připomínkový rytmus. Stačí jedna položka v běžném review:
+
+```text
+Tiché pravidlo bylo použité bez zvláštní podpory?
+```
+
+Pokud by se kvůli této otázce musela vytvořit nová agenda, otázka je moc velká nebo pravidlo ještě není připravené na tichý provoz.
+
+### Čtyři výsledky první tiché kontroly
+
+Po kontrole vyberte jeden ze čtyř výsledků:
+
+- Potvrzený tichý provoz: pravidlo bylo dohledatelné, použitelné a nevznikla nová evidence.
+- Lokální tření: pravidlo funguje, ale jeden odkaz, název nebo formulace zbytečně brzdí běžné použití.
+- Skrytá zvláštní péče: pravidlo se použilo jen díky tomu, že ho někdo připomněl, vysvětlil nebo ručně dohlédl.
+- Návratový signál: objevila se situace, která odpovídá předem zapsanému signálu pro znovuotevření.
+
+Každý výsledek má jinou reakci. Potvrzený tichý provoz nevyžaduje další práci. Lokální tření opravte co nejblíž místu použití a nezakládejte širší téma. Skrytá zvláštní péče znamená, že tichý provoz ještě není samostatný; upravte předání nebo kanonické místo. Návratový signál otevřete podle pravidel návratu, ale jen v nejmenším potřebném rozsahu.
+
+Příklad:
+
+```text
+Situace:
+Discovery šablona se použila při prvním měsíčním sales review po uzavření do tichého provozu.
+
+Co se stalo:
+Obchod našel aktuální otázky bez připomínky. U jedné poptávky si nebyl jistý, zda zapsat rozhodovací horizont jako datum, nebo slovní prioritu.
+
+Výsledek:
+Lokální tření.
+
+Reakce:
+Do šablony přidat krátký příklad zápisu: "rozhodnutí do konce kvartálu" nebo "bez pevného termínu".
+
+Co neotevíráme:
+Neotevíráme scoring, nový formulář ani další kontrolní tabulku.
+```
+
+Taková reakce je malá, protože problém byl malý. Tým nepotřebuje nový proces. Potřebuje jednu přesnější větu.
+
+### Jak poznat skrytou zvláštní péči
+
+Skrytá zvláštní péče je zrádná, protože na první pohled vypadá jako úspěch. Pravidlo se použilo, výsledek vznikl, nikdo si nestěžoval. Jenže někdo musel předem poslat připomínku, dohledat starý odkaz, vysvětlit rozdíl mezi starou a novou verzí, nebo ručně zkontrolovat, že se pracuje se správným místem.
+
+Varovné věty:
+
+- "Radši jsem jim poslal aktuální odkaz."
+- "Ještě jsem jim připomněl, že stará tabulka už neplatí."
+- "Pro jistotu jsem prošel všechny výstupy."
+- "Zatím to držím já, ať se to nerozpadne."
+- "Uvidíme ještě příští měsíc."
+
+Tyto věty neznamenají, že pravidlo je špatné. Znamenají, že tichý provoz závisí na neviditelné práci. Tu je potřeba buď odstranit, nebo přiznat jako běžnou odpovědnost. Neponechávejte ji mezi tím.
+
+Krátký zápis:
+
+```text
+Skrytá péče:
+
+Kdo ji udělal:
+
+Proč byla potřeba:
+
+Co upravíme, aby příště nebyla potřeba:
+
+Co tím nepřidáváme:
+```
+
+Codyho komentář: když pravidlo funguje jen proto, že ho jeden člověk pokaždé ručně zachrání, není to pravidlo. Je to člověk s hezky pojmenovanou zátěží.
+
+### Privacy-first kontrola bez nové evidence
+
+První tichá kontrola nesmí obnovit datovou stopu, kterou jste právě uklidili. Nepřidávejte měření používání šablony, osobní checklisty, kopie zákaznických odpovědí ani nové screenshoty jen proto, abyste měli "důkaz". Pokud potřebujete zápis, držte ho na úrovni rozhodnutí, ne na úrovni sledování lidí.
+
+Stačí například:
+
+```text
+Tichá kontrola:
+Pravidlo se použilo v měsíčním sales review bez zvláštní podpory.
+
+Výsledek:
+Potvrzený tichý provoz.
+
+Privacy-first stopa:
+Nevznikla nová evidence použití, nové formulářové pole ani kopie zákaznických dat.
+```
+
+Pokud kontrola odhalí lokální tření, zapisujte tření, ne zákaznické detaily. Pokud odhalí návratový signál, otevřete rozhodovací kartu a hned napište, jaká data kvůli ní stále nesbíráte. Tichý provoz má chránit nejen pozornost týmu, ale i datovou střídmost.
+
+### Karta první tiché kontroly
+
+```text
+Pravidlo nebo pracovní místo:
+
+Běžný okamžik, ve kterém se pravidlo použilo:
+
+Použilo se bez zvláštní podpory:
+- ano / ne
+
+Výsledek:
+- potvrzený tichý provoz / lokální tření / skrytá zvláštní péče / návratový signál
+
+Co se potvrdilo:
+
+Co případně brzdilo použití:
+
+Nejmenší reakce:
+
+Co výslovně neotevíráme:
+
+Privacy-first stopa:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Discovery šablona pro první kvalifikaci poptávky.
+
+Běžný okamžik:
+Měsíční sales review.
+
+Použilo se bez zvláštní podpory:
+Ano.
+
+Výsledek:
+Lokální tření.
+
+Co se potvrdilo:
+Tým našel aktuální šablonu a nepoužil starý scoring.
+
+Co brzdilo použití:
+Nebyl jasný příklad zápisu rozhodovacího horizontu.
+
+Nejmenší reakce:
+Doplnit jeden příklad přímo do šablony.
+
+Co výslovně neotevíráme:
+Neotevíráme scoring, formulář ani dashboard.
+
+Privacy-first stopa:
+Nevzniká nové sledování použití šablony ani kopie zákaznických dat.
+```
+
+### Checklist první tiché kontroly
+
+- Proběhla kontrola uvnitř existujícího pracovního rytmu?
+- Nepřibyla kvůli ní nová agenda, tabulka ani připomínka?
+- Víme, jestli se pravidlo použilo bez zvláštní podpory?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Reagujeme nejmenším možným zásahem?
+- Neotevírá lokální tření celou starou smyčku?
+- Je skrytá zvláštní péče buď odstraněná, nebo přiznaná jako odpovědnost?
+- Pokud nastal návratový signál, otevírá se jen nejmenší potřebný krok?
+- Nevzniklo nové sledování lidí, používání šablon ani zákaznických detailů?
+- Je jasné, co po kontrole zůstává v tichém provozu?
+
+První tichá kontrola je úspěšná ve chvíli, kdy po ní zůstane buď nic, nebo jedna malá oprava. Pokud po ní vznikne nový proces, tichý provoz se nepovedlo ochránit. Vraťte se k hranici: pravidlo má fungovat v normální práci, ne vytvářet vlastní malou administrativní planetu.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o první tiché kontrole po uzavření do tichého provozu: ověření v existujícím rytmu, čtyři výsledky kontroly, skrytá zvláštní péče, privacy-first kontrola bez nové evidence, karta a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém běžném review po uzavření review zvláštní pozornosti: kontrola zbytkové pozornosti, čtyři výsledky review, rušení skrytých kontrol, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního běžného review po ukončení zvláštní pozornosti: čtyři uzavírací stavy, propsání do kanonického místa, uzavírací zpráva týmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o prvním běžném review po ukončení zvláštní pozornosti: kontrola aktuální použitelnosti, čtyři výsledky review, prevence návratu mimořádné péče, privacy-first review bez nové evidence, karta, mini workshop a checklist.
