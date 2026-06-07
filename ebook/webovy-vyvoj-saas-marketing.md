@@ -189774,8 +189774,199 @@ Když se tým začne bavit o starých detailních podkladech, vraťte ho k návr
 
 První dlouhodobé review má být nenápadné. Jeho nejlepší výsledek je věta, která nikoho neohromí: signál nenastal, pravidlo zůstává zavřené. Přesně tak vypadá dospělý provoz. Ne proto, že je nudný, ale protože neplýtvá pozorností tam, kde už stačí dobře umístěné pravidlo.
 
+## Uzavření prvního dlouhodobého review po tichém provozu
+
+První dlouhodobé review samo o sobě nestačí. Stejně jako každá jiná kontrola má mít uzavření: krátkou větu, jasný stav pravidla a rozhodnutí, jestli se něco mění. Bez uzavření zůstane review viset v týmu jako neurčitý pocit, že "jsme se na to podívali". To je málo. Praktický provoz potřebuje vědět, jestli pravidlo dál žije tiše, jestli se lokálně opravilo, nebo jestli se znovu otevírá rozhodovací práce.
+
+Uzavření dělejte hned po review, dokud je zřejmé, co bylo skutečně zjištěno. Nečekejte na další planning. Čím déle závěr čeká, tím víc do něj začne prosakovat nová práce, staré dojmy a snaha přibalit ještě jednu související úpravu.
+
+Začněte větou:
+
+```text
+První dlouhodobé review uzavíráme se stavem:
+```
+
+A doplňte jeden ze čtyř stavů:
+
+- `Zůstává tiché`: návratový signál nenastal a pravidlo nepotřebuje změnu.
+- `Lokálně opraveno`: pravidlo funguje, ale jedno kanonické místo bylo zpřesněno.
+- `Otevírá se návratová karta`: návratový signál nastal a potřebuje nejmenší další rozhodnutí.
+- `Vrací se do aktivní údržby`: pravidlo nežije samo a vyžaduje opravu pracovního místa, odpovědnosti nebo rytmu.
+
+Stav `Zůstává tiché` je plnohodnotný výsledek. Nepřidávejte k němu úkol jen proto, aby review působilo produktivně. Pokud signál nenastal, nejproduktivnější věc je nic nezakládat.
+
+### Uzavírací věta
+
+Uzavírací věta má být krátká a konkrétní. Má odpovědět na tři otázky: co bylo zkontrolováno, jaký je stav a co se díky tomu nedělá.
+
+Příklad pro klidný výsledek:
+
+```text
+První dlouhodobé review nepotvrdilo návratový signál. Pravidlo zůstává v tichém provozu a nezakládáme žádnou novou kontrolu, tabulku ani ověřovací okno.
+```
+
+Příklad pro lokální opravu:
+
+```text
+První dlouhodobé review neotevírá pravidlo znovu. Zpřesnili jsme jen větu v měsíční review šabloně, aby bylo jasné, kdy slabý podnět zavřít bez úkolu.
+```
+
+Příklad pro návratovou kartu:
+
+```text
+První dlouhodobé review potvrdilo návratový signál: dva slabé podněty po sobě vytvořily úkol bez vlastníka. Otevíráme novou návratovou kartu s nejmenším dalším krokem.
+```
+
+Všimněte si, že ani třetí věta neříká "otevíráme celý proces". Říká jen, že se otevírá návratová karta. Historie může pomoct jako kontext, ale nemá automaticky obnovit starý rozsah práce.
+
+### Co propsat a co nechat být
+
+Po uzavření propisujte jen ta místa, která musí znát nový stav:
+
+- pracovní log nebo rozhodovací záznam;
+- kanonické místo pravidla, pokud se lokálně upravilo;
+- backlog, jen pokud vzniká skutečný další krok;
+- datovou mapu, pokud se mění sběr, retence, přístup nebo dodavatel;
+- týmovou zprávu, pokud by bez ní lidé očekávali další kontrolu.
+
+Nepropisujte uzavření do všech starých podkladů. Staré poznámky, pracovní tabulky a pomocné karty nejsou místo, kde má pravidlo dál žít. Pokud je budete aktualizovat, jen si vytvoříte iluzi pořádku a novou povinnost udržovat mrtvé stopy.
+
+Praktické pravidlo:
+
+```text
+Aktualizujeme jen místo, odkud se bude pravidlo příště opravdu používat.
+```
+
+Pokud si nejste jistí, které místo to je, problém není v uzavření review. Problém je v tom, že pravidlo nemá jasný domov. V takové situaci neotevírejte širší audit. Vyberte jedno kanonické místo a zapište ho do uzavírací karty.
+
+### Privacy-first úklid po review
+
+Uzavření prvního dlouhodobého review je dobrý okamžik pro malý úklid datové stopy. Ne proto, že by review muselo být právní projekt. Protože dlouhodobý rytmus nemá nést staré pomocné podklady jen ze zvyku.
+
+Projděte tři otázky:
+
+- Vznikl při review nový podklad, který není potřeba pro další rozhodnutí?
+- Zůstala někde pomocná evidence z tichého období, která už nemá účel?
+- Obsahuje uzavírací záznam konkrétní osobní údaje, které stačí nahradit anonymizovaným příkladem?
+
+Pokud je odpověď ano, ukliďte hned. Typicky stačí smazat dočasný seznam průchodů, zavřít pomocnou kartu, odstranit starý export nebo přepsat příklad tak, aby popisoval situaci bez identifikace člověka či zákazníka.
+
+Privacy-first věta do uzavření může znít:
+
+```text
+Po review nezůstává žádná nová pomocná evidence. V pracovním logu je jen anonymizovaná uzavírací věta.
+```
+
+Nebo u návratové karty:
+
+```text
+Do návratové karty přenášíme jen popis opakovaného problému, ne seznam všech jednotlivých případů.
+```
+
+Codyho komentář: dlouhodobé review, po kterém zůstane víc stop než před ním, je podezřele pracovité. A podezřele pracovité věci často jen maskují, že jsme neuměli říct "stačí".
+
+### Karta uzavření prvního dlouhodobého review po tichém provozu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Datum review:
+
+Výsledek review:
+- bez signálu / lokální úprava / návratový signál / skrytý dohled
+
+Uzavírací stav:
+- zůstává tiché
+- lokálně opraveno
+- otevírá se návratová karta
+- vrací se do aktivní údržby
+
+Jedna uzavírací věta:
+
+Co se mění:
+
+Co se výslovně nemění:
+
+Co nezakládáme:
+
+Kde je nový stav propsaný:
+
+Privacy-first úklid:
+
+Nejbližší běžný návrat:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Slabý podnět může být zavřený bez úkolu.
+
+Kanonické místo:
+Měsíční review, část "Podněty bez další práce".
+
+Datum review:
+2026-06-07.
+
+Výsledek review:
+Bez signálu.
+
+Uzavírací stav:
+Zůstává tiché.
+
+Jedna uzavírací věta:
+První dlouhodobé review nepotvrdilo návratový signál a pravidlo zůstává v běžném rytmu bez další péče.
+
+Co se mění:
+Nic.
+
+Co se výslovně nemění:
+Neotevíráme pravidlo, šablonu ani staré ověřovací podklady.
+
+Co nezakládáme:
+Žádnou novou tabulku slabých podnětů, připomínku ani měřicí event.
+
+Kde je nový stav propsaný:
+Pracovní log měsíčního review.
+
+Privacy-first úklid:
+Zůstává jen anonymizovaná uzavírací věta; pomocné poznámky z review se mažou.
+
+Nejbližší běžný návrat:
+Při dalším měsíčním review jen v případě, že nastane původní návratový signál.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek dlouhodobého review.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: určete jedno kanonické místo, kam se závěr propíše.
+5. Minuta 5: smažte nebo zavřete pomocné stopy, které už nemají účel.
+6. Minuta 6: řekněte, co se výslovně nezakládá.
+
+Pokud se tým během workshopu začne bavit o nové úpravě, vraťte se ke stavu. Nová úprava patří jen ke stavům `Otevírá se návratová karta` nebo `Vrací se do aktivní údržby`. U stavů `Zůstává tiché` a `Lokálně opraveno` nemá vznikat další projekt.
+
+### Checklist uzavření dlouhodobého review
+
+- Má review jeden ze čtyř uzavíracích stavů?
+- Existuje jedna uzavírací věta, která říká stav i to, co se nedělá?
+- Propsali jsme závěr jen do míst, která se budou příště opravdu používat?
+- Neaktualizujeme staré pomocné podklady jen kvůli pocitu pořádku?
+- Pokud vzniká návratová karta, má nejmenší další krok a neobnovuje celý historický rozsah?
+- Pokud jde o lokální opravu, zůstala opravdu u jednoho kanonického místa?
+- Je zapsané, co nezakládáme: tabulku, tracker, export, připomínku nebo nové ověřovací okno?
+- Uklidili jsme pomocné podklady bez dalšího účelu?
+- Neobsahuje pracovní log zbytečné osobní údaje nebo identifikovatelné příklady?
+- Ví tým, kdy se pravidlo příště objeví v běžném rytmu?
+
+Uzavření prvního dlouhodobého review má zavřít dveře potichu. Když není signál, pravidlo se neoslavuje, nereviduje a nepřipomíná všem pro jistotu. Jen zůstane tam, kde má být. A to je přesně ten druh provozní dospělosti, který šetří čas, data i nervy.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review po tichém provozu: čtyři uzavírací stavy, uzavírací věta, propsání jen do kanonických míst, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o prvním dlouhodobém review po tichém provozu: kontrola návratového signálu v běžném rytmu, čtyři výsledky review, ochrana před novým dohledem, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého tichého měsíce do dlouhodobého rytmu: kanonické místo pravidla, tři výsledky uzavření, týmová zpráva, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém tichém měsíci po uzavřené první tiché kontrole: přirozené použití pravidla, čtyři stavy měsíce, ukončení zbytkové pozornosti, privacy-first konec podkladů a checklist.
