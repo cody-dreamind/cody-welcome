@@ -186020,8 +186020,177 @@ Workshop končí, když člověk mimo review umí použít aktuální pravidlo b
 
 Uzavření prvního dlouhodobého review má udělat jednu věc: nechat užitečné pravidlo dál pracovat bez batohu staré nejistoty. Když se to povede, tým má kratší instrukci, menší datovou stopu a čistší cestu pro budoucí signály. To je přesně ten druh nenápadného zlepšení, které se v provozu počítá víc než další velká prezentace.
 
+## Druhé dlouhodobé review bez nové mimořádné péče
+
+Druhé dlouhodobé review má jinou práci než první. První review ověřuje, jestli pravidlo po delším čase pořád dává smysl. Druhé review ověřuje, jestli se z prvního review nestal nenápadný nový proces: extra kontrola, zvláštní tabulka, opatrnický report, pravidelná připomínka nebo člověk, který se k tématu vrací častěji, než pravidlo opravdu potřebuje.
+
+Základní otázka zní:
+
+```text
+Po uzavření prvního dlouhodobého review vznikla nějaká nová mimořádná péče, kterou pravidlo samo nepotřebuje?
+```
+
+Tahle otázka je záměrně nepříjemná. Týmy si často řeknou, že něco uzavřely, ale nechají kolem toho běžet malé bezpečnostní obchůzky. Nikdo jim neříká projekt, protože to zní moc velkolepě. Jen se "pro jistotu" každý měsíc koukne do exportu, připomene se vlastníkovi, přidá řádek do dashboardu nebo zkontroluje formulář mimo běžný rytmus. Samostatně to vypadá nevinně. Dohromady to ale vytváří provoz, který má víc dozoru než hodnoty.
+
+Druhé dlouhodobé review proto nezačínejte otázkou, co zlepšit. Začněte inventurou péče:
+
+```text
+Pravidlo nebo pracovní místo:
+
+Co platilo po prvním dlouhodobém review:
+
+Jak se pravidlo od té doby použilo v běžné práci:
+
+Jaké kontroly, poznámky, exporty nebo připomínky kolem něj nově vznikly:
+
+Které z nich jsou opravdu součástí běžného rytmu:
+
+Které existují jen kvůli dozoru po review:
+```
+
+Pokud neumíte vyplnit poslední dvě položky, review ještě není připravené. Nejdřív najděte, kde téma ve skutečnosti žije: v kanonickém pravidle, v měsíčním review, v poznámkách vlastníka, v analytice, v CRM, v projektovém nástroji nebo jen v hlavách lidí. Druhé dlouhodobé review má odhalit právě tato skrytá místa.
+
+### Tři signály skryté mimořádné péče
+
+Skrytá mimořádná péče se pozná podle tří signálů:
+
+- Kontrola nemá vlastní rozhodnutí: někdo se na něco dívá, ale není jasné, co by změnilo výsledek kontroly.
+- Evidence se nevrací do práce: tabulka, poznámka nebo report existuje, ale člověk při běžném použití pravidla ji nepotřebuje.
+- Vlastník se chová opatrněji než pravidlo: pravidlo říká "řeš v běžném review", ale vlastník téma kontroluje stranou, protože se bojí návratu starého problému.
+
+Příklad:
+
+```text
+Pravidlo:
+Poptávkový formulář sbírá jen údaje nutné pro první odpověď.
+
+Po prvním dlouhodobém review:
+Pravidlo bylo potvrzené, jen u konzultačních služeb zůstala volitelná otázka na preferovaný čas hovoru.
+
+Skrytá péče:
+Obchod si každý týden ručně exportuje poslední poptávky a kontroluje, jestli někdo nevyplnil málo informací.
+
+Problém:
+Export nemá jasné rozhodnutí. Když poptávka nemá dost informací, obchod stejně odpovídá běžným discovery e-mailem.
+
+Závěr:
+Týdenní export rušíme. Signál "obchod opakovaně potřebuje stejné doptání" patří do měsíčního review webu.
+```
+
+Tady nejde o to, že obchod udělal chybu. Udělal rozumnou věc v nejistotě. Druhé dlouhodobé review má tu nejistotu ukončit, ne ji proměnit v tradici.
+
+### Čtyři výsledky druhého dlouhodobého review
+
+Po review vyberte jeden ze čtyř výsledků:
+
+- Čistý běžný stav: pravidlo se používá bez zvláštní péče a není potřeba nic měnit.
+- Zrušení skryté péče: pravidlo funguje, ale kolem něj vznikla zbytečná kontrola, kterou rušíte.
+- Přesun signálu do běžného rytmu: signál je užitečný, ale nemá mít vlastní proces.
+- Nové tření v pravidle: problém není v péči, ale v tom, že pravidlo při běžné práci znovu drhne.
+
+Čistý běžný stav je nejlepší výsledek. Neznamená "nic jsme neudělali". Znamená "ověřili jsme, že není potřeba další práce". To je plnohodnotné provozní rozhodnutí.
+
+Zrušení skryté péče je druhý nejlepší výsledek. Tým tím získá čas a sníží datovou stopu. Pokud rušíte export, screenshoty, ruční evidence nebo připomínky, zapište i to, co díky tomu už nebudete sbírat. Bez toho se zrušená péče někdy vrátí pod novým názvem.
+
+Přesun signálu do běžného rytmu použijte, když kontrola má hodnotu, ale nepotřebuje samostatnou trasu. Například kvalita poptávek patří do měsíčního review webu, ne do samostatného hlídání formuláře. Opakované support dotazy patří do product/support review, ne do nové tabulky "věci, které by možná mohly souviset s onboardingem".
+
+Nové tření v pravidle berte jako novou pracovní otázku, ne jako důvod obnovit mimořádnou péči. Pokud pravidlo znovu drhne, otevřete malou lokální iteraci se stop podmínkou. Nevracejte se automaticky k celé historii původního problému.
+
+### Privacy-first kontrola druhého review
+
+Druhé dlouhodobé review je silné privacy-first místo, protože často odhalí data, která se sbírají jen ze zvyku po starém strachu. Ptejte se:
+
+- Má každý nově vzniklý podklad jasný současný účel?
+- Potřebujeme identifikovat konkrétní lidi, nebo stačí anonymizovaný vzor?
+- Musí signál zůstat v samostatné evidenci, nebo patří do existujícího review?
+- Existuje datum, kdy podklad zmizí?
+- Umí vlastník rozhodnout bez exportu, screenshotu nebo kopie cizí komunikace?
+
+Praktické pravidlo:
+
+```text
+Když kontrola existuje jen proto, že jsme se kdysi báli návratu problému, nesmí si automaticky držet data navždy.
+```
+
+U evropského privacy-first provozu je tohle důležité i bez velké právní přednášky. Méně zbytečných podkladů znamená menší riziko, jednodušší předávání a jasnější odpovědnost. Data nemají sloužit jako uklidňující polštář pro každou minulou nejistotu. Mají sloužit konkrétnímu rozhodnutí.
+
+### Karta druhého dlouhodobého review
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Datum prvního dlouhodobého uzavření:
+
+Co od té doby platilo:
+
+Jak se pravidlo použilo v běžné práci:
+
+Nově nalezené kontroly, exporty, připomínky nebo poznámky:
+
+Stav review:
+- čistý běžný stav
+- rušíme skrytou péči
+- přesouváme signál do běžného rytmu
+- otevíráme nové lokální tření
+
+Co rušíme:
+
+Co přesouváme do běžného rytmu:
+
+Co zůstává v kanonickém pravidle:
+
+Jaká data mažeme, zkracujeme nebo anonymizujeme:
+
+Kam patří další signály:
+
+Kdy se téma znovu otevře:
+
+Vlastník:
+```
+
+Karta má být krátká hlavně u čistého běžného stavu. Pokud pravidlo funguje, nepotřebujete tři odstavce, abyste vysvětlili, že funguje. Stačí říct, co bylo zkontrolováno, že nevznikla zvláštní péče a kdy by se téma mělo znovu otevřít.
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte poslední kanonickou větu pravidla.
+2. Minuta 1-2: sepište všechna místa, kde se téma od té doby objevilo.
+3. Minuta 2-3: označte, co je běžný rytmus a co je skrytá mimořádná péče.
+4. Minuta 3-4: vyberte jeden ze čtyř výsledků review.
+5. Minuta 4-5: rozhodněte, co zrušit, přesunout, zkrátit nebo anonymizovat.
+6. Minuta 5-6: zapište jednu větu pro tým a jedno místo pro další signály.
+
+Příklad týmové věty:
+
+```text
+Druhé dlouhodobé review potvrdilo, že pravidlo minimálního poptávkového formuláře funguje v běžném rytmu; rušíme týdenní ruční export poptávek a případné opakované doptávání dál patří do měsíčního review webu.
+```
+
+Tahle věta je dobrá, protože má rozhodnutí, úklid i další trasu. Neříká "budeme sledovat". Říká, kde má signál bydlet, když se opravdu vrátí.
+
+Codyho komentář: druhé dlouhodobé review je kontrola, jestli jste po úklidu nenechali uprostřed místnosti ceduli "pozor, uklizeno". Jestli ano, sundat ceduli je taky práce. Malá, ale překvapivě osvobozující.
+
+### Checklist druhého dlouhodobého review
+
+- Víme, co přesně platilo po prvním dlouhodobém review?
+- Prošli jsme reálná místa, kde se pravidlo od té doby používalo?
+- Našli jsme všechny nové kontroly, exporty, připomínky a poznámky kolem tématu?
+- Rozlišili jsme běžný rytmus od skryté mimořádné péče?
+- Vybrali jsme jeden ze čtyř výsledků review?
+- Pokud pravidlo funguje, nezakládáme kvůli tomu novou evidenci?
+- Pokud rušíme skrytou péči, je jasné, co tím přestáváme sbírat?
+- Pokud přesouváme signál, víme přesně do kterého běžného review patří?
+- Pokud vzniklo nové tření, má vlastní malou stop podmínku?
+- Smazali, zkrátili nebo anonymizovali jsme podklady bez současného účelu?
+- Umí vlastník říct, kdy se téma znovu otevře?
+- Dostane tým jednu krátkou větu místo dalšího procesu?
+
+Druhé dlouhodobé review má chránit stabilní práci před návratem zvláštního režimu. Když je pravidlo zdravé, nechte ho dýchat v běžném rytmu. Když signál opravdu přijde, má mít jasnou cestu. Ale dokud nepřijde, není potřeba kolem něj stavět hlídku.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o druhém dlouhodobém review bez nové mimořádné péče: inventura skrytých kontrol, čtyři výsledky review, přesun signálů do běžného rytmu, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review: převod výsledku do kanonického místa, čtyři způsoby uzavření, úklid starých podkladů, uzavírací zpráva týmu, privacy-first zkrácení datové stopy, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním dlouhodobém review po trvalém běžném rytmu: kontrola současného účelu pravidla, čtyři výsledné stavy, ochrana rozsahu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření druhého běžného review do trvalého běžného rytmu: čtyři uzavírací stavy, přepis do kanonického místa, úklid podpůrných stop, uzavírací zpráva, karta, mini workshop a checklist.
