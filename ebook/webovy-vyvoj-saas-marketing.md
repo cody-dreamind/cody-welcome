@@ -188001,8 +188001,217 @@ Datum:
 
 Třetí běžný cyklus má být brána zpět do normálu. Pokud pravidlo drží, nechte ho být pravidlem, ne bývalým incidentem s doživotním doprovodem. Pokud se objeví nový problém, dejte mu vlastní rámec. A pokud se vrací stará stopa, opravte přesné místo, ne celou minulost.
 
+## První běžné review po ukončení zvláštní pozornosti
+
+Když zvláštní pozornost skončí, první běžné review je zkouška dospělosti celého pracovního místa. Už se nekontroluje, jestli tým správně uzavřel starou opravu. Kontroluje se, jestli pravidlo umí žít mezi ostatními pravidly: bez dodatečné vysvětlovací vrstvy, bez ručního hlídání autora změny a bez nostalgického návratu ke každému detailu původního problému.
+
+Tohle review má být krátké. V ideálním případě se vejde do běžné měsíční, provozní, obchodní nebo produktové kontroly. Pokud kvůli němu vznikne samostatná velká schůzka, je to první varování, že zvláštní režim možná neskončil, jen si vzal nové jméno.
+
+Začněte jednou větou:
+
+```text
+Toto pracovní místo je po ukončení zvláštní pozornosti v běžném rytmu a dnes kontrolujeme jen jeho aktuální použitelnost.
+```
+
+Věta je důležitá, protože chrání rozsah. Bez ní se lidé snadno vrátí k otázce, proč se původní problém stal, kdo ho tehdy řešil, které varianty se zvažovaly a jestli by nešlo udělat ještě větší systémové zlepšení. Někdy ano. Ale první běžné review po ukončení zvláštní pozornosti má jiný úkol: potvrdit, že normál je opravdu normál.
+
+### Co review kontroluje
+
+Kontrolujte pouze čtyři věci:
+
+- aktuální pracovní věta je dohledatelná tam, kde člověk práci začíná;
+- návratový signál je srozumitelný bez znalosti staré historie;
+- pravidlo pomohlo alespoň v jednom reálném běžném průchodu;
+- nevznikla nová skrytá evidence jen proto, aby měl tým pocit jistoty.
+
+Všechno ostatní patří jinam. Pokud se objeví otázka ceny, segmentu, právní formulace, nové automatizace nebo změny odpovědnosti, založte samostatnou kartu. Nepřilepujte ji k bývalé opravě jen proto, že se objevila ve stejné části systému.
+
+Příklad:
+
+```text
+Pracovní místo:
+Šablona první odpovědi na kvalifikovanou poptávku.
+
+Co kontrolujeme:
+Jestli obchodník najde aktuální šablonu, použije ji bez staré diskuse a ví, kdy eskalovat výjimku.
+
+Co nekontrolujeme:
+Celý sales proces, ceník, CRM workflow ani kvalitu všech poptávek za měsíc.
+```
+
+Tento rámec vypadá banálně, ale šetří hodně času. Review má mít ostrý okraj. Jakmile se z něj stane obecná debata o oblasti, kde pravidlo leží, starý problém sice možná zůstane zavřený, ale práce se znovu rozteče.
+
+### Čtyři výsledky prvního běžného review
+
+Po review vyberte jeden ze čtyř výsledků:
+
+- Běžný rytmus stačí: pracovní místo funguje a další kontrola proběhne jen v obvyklém review.
+- Stačí lokální úprava: jedna věta, odkaz, příklad nebo vlastník potřebuje malé dotažení.
+- Chybí návratový signál: pravidlo funguje, ale tým nepozná, kdy se k němu vrátit.
+- Vznikla nová otázka: review ukázalo jiné téma, které má dostat vlastní kartu.
+
+Nepoužívejte výsledek "sledovat dál". Pokud není jasné, co přesně sledovat a proč, je to jen pokračování zvláštní pozornosti. Lepší je zapsat, že běžný rytmus zatím stačí, a vrátit se až při signálu.
+
+Příklad běžného rytmu:
+
+```text
+Výsledek:
+Běžný rytmus stačí.
+
+Důkaz:
+Dva lidé použili šablonu bez dotazu na autora původní opravy a bez hledání staré diskuse.
+
+Rozhodnutí:
+Žádná nová kontrola. Další pohled jen v měsíčním sales review nebo při návratovém signálu.
+```
+
+Příklad lokální úpravy:
+
+```text
+Výsledek:
+Stačí lokální úprava.
+
+Důkaz:
+Šablona je správná, ale v indexu má starý název.
+
+Rozhodnutí:
+Přejmenujeme položku v indexu. Neměníme obsah šablony ani sales proces.
+```
+
+Příklad chybějícího návratového signálu:
+
+```text
+Výsledek:
+Chybí návratový signál.
+
+Důkaz:
+Tým ví, jak pravidlo použít, ale neví, kdy by se k němu měl vrátit.
+
+Rozhodnutí:
+Doplňujeme jeden návratový signál: tři po sobě jdoucí výjimky, které obchod neumí vyřešit běžnou eskalací.
+```
+
+Příklad nové otázky:
+
+```text
+Výsledek:
+Vznikla nová otázka.
+
+Důkaz:
+Pravidlo první odpovědi funguje, ale opakovaně chybí vlastník technického odhadu.
+
+Rozhodnutí:
+Zakládáme novou kartu pro hranici technického předprodeje. Staré pravidlo neotevíráme.
+```
+
+### Jak poznat návrat zvláštní pozornosti
+
+Zvláštní pozornost se často vrací nenápadně. Nikdo neřekne "pojďme znovu otevřít starou věc". Místo toho se objeví měkké věty:
+
+- "Radši si to ještě párkrát zkontrolujeme."
+- "Dáme si k tomu jeden pomocný report."
+- "Necháme starou poznámku, kdyby se hodila."
+- "Přidáme jedno pole, ať víme, že se to používá."
+- "Budeme si psát příklady pro jistotu."
+
+Každá z těch vět může být v konkrétní situaci rozumná. Problém je, když nemá jasný konec. První běžné review má takové věty zastavit a přeložit je do rozhodnutí:
+
+```text
+Co přesně se bojíme přehlédnout?
+Jaký signál by ukázal, že se to opravdu děje?
+Kde už tento signál máme v běžné práci?
+Kdy pomocný zápis smažeme?
+```
+
+Pokud na tyto otázky nejde odpovědět, pomocný zápis nevytvářejte. Pocit jistoty není dost dobrý účel pro novou datovou stopu.
+
+### Privacy-first review bez nové evidence
+
+První běžné review po ukončení zvláštní pozornosti má ideálně pracovat s tím, co už vzniká v běžném provozu. Nepřidávejte nové trackery, povinná pole, screenshoty ani exporty jen proto, abyste si potvrdili, že pravidlo funguje.
+
+Stačí často tři zdroje:
+
+- aktuální kanonické místo pravidla;
+- běžný výstup práce, například odpověď zákazníkovi, uzavřený tiket nebo aktualizovaný záznam;
+- krátká poznámka z review bez osobních detailů, které nejsou potřeba pro rozhodnutí.
+
+Do poznámky nepatří celé zákaznické zprávy, interní komentáře lidí ani kopie dat z CRM. Patří tam jen závěr:
+
+```text
+Pravidlo bylo použitelné bez staré historie.
+Návratový signál zůstává stejný.
+Nevznikla nová evidence.
+Další kontrola jen v běžném rytmu.
+```
+
+Codyho komentář: když kvůli kontrole uklizeného pravidla vytvoříte nový tracker, je to trochu jako umýt stůl a hned si na něj položit šanon "důkazy o čistotě stolu". Chápu tu potřebu, ale pracovní plocha tím čistší nebude.
+
+### Karta prvního běžného review
+
+```text
+Pracovní místo:
+
+Kdy skončila zvláštní pozornost:
+
+Běžný rytmus, ve kterém review proběhlo:
+
+Co jsme kontrolovali:
+
+Co jsme výslovně nekontrolovali:
+
+Reálný pracovní průchod:
+
+Výsledek:
+- běžný rytmus stačí
+- stačí lokální úprava
+- chybí návratový signál
+- vznikla nová otázka
+
+Rozhodnutí:
+
+Co neotevíráme:
+
+Co nepřidáváme za evidenci:
+
+Privacy-first úklid:
+
+Další kontrola:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: Přečtěte aktuální pracovní větu a návratový signál z kanonického místa.
+2. Minuta 2: Pojmenujte jeden reálný průchod, kde se pravidlo použilo.
+3. Minuta 3: Řekněte, co review dnes výslovně nekontroluje.
+4. Minuta 4: Vyberte jeden ze čtyř výsledků.
+5. Minuta 5: Zapište rozhodnutí jednou větou.
+6. Minuta 6: Smažte nebo uzavřete pomocné stopy, které by držely zvláštní pozornost při životě.
+
+### Checklist prvního běžného review
+
+- Proběhlo review v existujícím běžném rytmu?
+- Začali jsme aktuální pracovní větou, ne historií opravy?
+- Je jasné, co review kontroluje a co nekontroluje?
+- Existuje alespoň jeden reálný pracovní průchod?
+- Umí člověk použít pravidlo bez staré diskuse a bez autora změny?
+- Je návratový signál srozumitelný bez minulého kontextu?
+- Vybrali jsme jeden ze čtyř výsledků review?
+- Pokud stačí běžný rytmus, nevytvořili jsme další kontrolu?
+- Pokud vznikla lokální úprava, je opravdu blízko pracovnímu místu?
+- Pokud chybí návratový signál, doplnili jsme jen jeden konkrétní signál?
+- Pokud vznikla nová otázka, má vlastní kartu?
+- Nevrátili jsme staré screenshoty, exporty ani pomocné komentáře do běžné práce?
+- Nevznikl nový tracker, CRM pole nebo tabulka jen kvůli pocitu jistoty?
+- Zůstává privacy-first datová stopa stejná nebo menší?
+- Ví tým, kdy se k pravidlu vrátit příště?
+
+První běžné review po ukončení zvláštní pozornosti má jeden tichý úspěch: nic dramatického se nestane. Pravidlo se použije, tým ho zkontroluje v běžném rytmu, stará historie zůstane zavřená a žádná nová evidence nepřibude. Přesně tak vypadá provoz, který se zlepšuje, aniž by si z každého zlepšení vyráběl další malý systém.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o prvním běžném review po ukončení zvláštní pozornosti: kontrola aktuální použitelnosti, čtyři výsledky review, prevence návratu mimořádné péče, privacy-first review bez nové evidence, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o třetím běžném cyklu a ukončení zvláštní pozornosti: kdy cyklus zapisovat, tři konce zvláštního režimu, privacy-first úklid, karta a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření první běžné údržby: tři uzavírací stavy, propsání změn do kanonického místa, lokální dočištění, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o první běžné údržbě po uzavření prvního běžného použití: běžný údržbový rytmus, tři stavy po údržbě, skrytý návrat mimořádné péče, privacy-first úklid podkladů, karta, mini workshop a checklist.
