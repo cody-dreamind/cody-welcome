@@ -185826,8 +185826,203 @@ Workshop končí, když je jasné, jestli pravidlo dál žije beze změny, zkrac
 
 První dlouhodobé review má pravidlu dát dospělou podobu. Buď potvrdit, že je pořád užitečné a nepotřebuje pozornost, nebo ho zkrátit, jemně opravit či oddělit novou otázku. Nejlepší výsledek často vypadá nenápadně: pravidlo je kratší, datová stopa menší a tým se nemusí vracet k historii, aby udělal správný další krok.
 
+## Uzavření prvního dlouhodobého review
+
+První dlouhodobé review je hotové až ve chvíli, kdy jeho výsledek přestane žít jako samostatná rozpracovaná poznámka. Nestačí říct, že pravidlo pořád funguje, že se má zjednodušit nebo že z něj vznikla nová otázka. Je potřeba uzavřít stopu tak, aby další člověk nemusel číst celý průběh review a hádat, co z něj vlastně platí pro běžnou práci.
+
+Uzavření má jednoduchou základní větu:
+
+```text
+Po dlouhodobém review platí:
+Do běžného pravidla se mění:
+Samostatně otevíráme:
+Z review zavíráme:
+Kvůli datové stopě mažeme, zkracujeme nebo anonymizujeme:
+```
+
+Příklad:
+
+```text
+Po dlouhodobém review platí:
+První poptávkový formulář dál sbírá jen údaje nutné pro první odpověď.
+
+Do běžného pravidla se mění:
+U konzultačních služeb lze přidat volitelný preferovaný čas hovoru, pokud první odpověď rovnou nabízí termín.
+
+Samostatně otevíráme:
+Neotevíráme nic. Obchodní follow-up zůstává mimo rozsah tohoto pravidla.
+
+Z review zavíráme:
+Dočasnou poznámku s porovnáním tří posledních poptávek.
+
+Kvůli datové stopě mažeme, zkracujeme nebo anonymizujeme:
+Mažeme pracovní export poptávek; v kanonickém místě zůstává jen anonymizovaný příklad formulářové hrany.
+```
+
+Tahle věta chrání před dvěma běžnými chybami. První chyba je nechat review viset v poznámkách jako "něco se k tomu řešilo". Druhá chyba je nacpat do pravidla celou historii review, aby prý nikdo neztratil kontext. Kontext má být v rozhodovacím záznamu, ne v každodenním pracovním kroku.
+
+### Čtyři způsoby uzavření
+
+Uzavření se liší podle výsledku dlouhodobého review:
+
+- Potvrzení bez změny: zapište, že pravidlo drží, a uzavřete review bez nového úkolu.
+- Zjednodušení pravidla: přepište kanonické místo kratším aktuálním textem a starou historii nechte jen jako krátký changelogový záznam.
+- Lokální úprava: proveďte jednu přesnou změnu v pracovním místě, kde vzniklo tření, a určete první přirozené použití pro ověření.
+- Nová otázka: oddělte ji od starého pravidla, dejte jí vlastní stop podmínku a staré review zavřete jako zdroj vstupu, ne jako otevřený proces.
+
+Potvrzení bez změny má být opravdu bez změny. Nepřidávejte "jen malý kontrolní sloupec", "jen jednu připomínku za měsíc" nebo "jen drobný report". Pokud review nenašlo důvod k zásahu, nový dohled by byl jen daň z nejistoty.
+
+Zjednodušení má odstranit text, který už neslouží práci. Typicky pryč půjdou věty typu "po incidentu jsme zjistili", "dočasně kontrolujeme", "zatím si hlídáme" nebo "pro jistotu evidujeme". Pokud je poučení pořád důležité, napište ho jako současné pravidlo. Pokud už důležité není, nechte ho v historii a necpěte ho do cesty novému člověku.
+
+Lokální úprava má zůstat lokální. Když jedna služba potřebuje volitelný čas hovoru, neznamená to, že všechny formuláře mají získat nový povinný údaj. Když jeden tým potřebuje přesnější handoff, neznamená to redesign celého provozního standardu. Uzavření má udržet původní pravidlo stabilní a opravit jen hranu, kterou review skutečně ukázalo.
+
+Nová otázka má dostat vlastní život. Pokud dlouhodobé review ukáže, že se změnil segment, obchodní model, produktová hranice nebo právní odpovědnost, už nejde jen o údržbu pravidla. Staré review se uzavře větou, co ukázalo, a nová otázka pokračuje se svým vlastním rozsahem. Jinak se ze starého pravidla stane přívěs pro každé další téma, které jelo okolo.
+
+### Co propsat do kanonického místa
+
+Do kanonického místa patří jen to, co člověk potřebuje při běžném použití:
+
+```text
+Aktuální pravidlo:
+Kdy se používá:
+Jedna důležitá hrana:
+Kam dát nový signál:
+Datum poslední věcné kontroly:
+```
+
+Nepatří tam plná karta review, seznam všech zvažovaných variant, pracovní exporty, screenshoty, osobní poznámky ani debata o tom, kdo měl kdy pravdu. Kanonické místo není soudní spis. Je to pracovní mapa.
+
+Příklad krátkého kanonického zápisu:
+
+```text
+Aktuální pravidlo:
+První poptávkový formulář sbírá jen údaje nutné pro první odpověď.
+
+Kdy se používá:
+Při tvorbě nebo úpravě landing page, kontaktního formuláře a kvalifikačního dotazníku.
+
+Jedna důležitá hrana:
+Volitelný preferovaný čas hovoru lze přidat jen tam, kde první odpověď rovnou nabízí konzultační termín.
+
+Kam dát nový signál:
+Do měsíčního review webu jako poznámku k lead kvalitě, ne do samostatné evidence formulářů.
+
+Datum poslední věcné kontroly:
+2026-06-07.
+```
+
+Takový zápis je krátký, ale dostatečný. Nový člověk ví, co dělat, kdy pravidlo použít a kam dát signál. Nemusí znát celou cestu, kterou tým prošel, aby se k větě dostal.
+
+### Úklid starých podkladů
+
+Dlouhodobé review často vytáhne staré podklady, které měly smysl jen při původním ověřování. Po uzavření je projděte jedním rozhodnutím:
+
+- Ponechat: podklad je stále nutný pro aktuální pravidlo nebo auditovatelný důvod.
+- Zkrátit: stačí anonymizovaný příklad, souhrn nebo rozhodovací věta.
+- Přesunout: podklad nepatří do pracovního pravidla, ale do uzavřeného changelogu nebo archivu.
+- Smazat: podklad už nemá rozhodovací hodnotu a zbytečně drží data.
+
+U privacy-first provozu je "smazat" často nejzdravější stav. Starý export poptávek, screenshot CRM, kopie support tiketu nebo seznam lidí z pilotu nemusí žít jen proto, že kdysi pomohl k rozhodnutí. Pokud rozhodnutí zůstalo, podklad může odejít.
+
+Praktické pravidlo:
+
+```text
+Pokud podklad neumí změnit dnešní rozhodnutí ani doložit povinnost, nemá bydlet v pracovní trase.
+```
+
+To neznamená mazat naslepo. Znamená to rozlišit pracovní paměť od datového skladu strachu. Pracovní paměť říká, co platí. Datový sklad strachu si nechává všechno pro případ, že by se jednou někdo cítil nejistě. Ten druhý způsob provozu bývá drahý, nepřehledný a zbytečně rizikový.
+
+### Uzavírací zpráva pro tým
+
+Po dlouhodobém review pošlete nebo zapište krátkou zprávu ve formátu:
+
+```text
+Uzavřeli jsme dlouhodobé review [pravidlo].
+Výsledek: [beze změny / zjednodušeno / lokální úprava / nová otázka].
+Odteď platí: [jedna pracovní věta].
+Další signály patří do: [běžné místo].
+Staré podklady: [ponecháno / zkráceno / smazáno].
+```
+
+Příklad:
+
+```text
+Uzavřeli jsme dlouhodobé review minimálního poptávkového formuláře.
+Výsledek: lokální úprava.
+Odteď platí: preferovaný čas hovoru je volitelný jen u konzultačních služeb, kde první odpověď nabízí termín.
+Další signály patří do měsíčního review webu.
+Staré pracovní exporty poptávek byly smazané, v pravidle zůstal anonymizovaný příklad.
+```
+
+Zpráva nemá prodávat práci, obhajovat rozhodnutí ani otevírat diskusi o všem okolo. Má převést review do běžného režimu. Když někdo potřebuje detail, najde uzavřený záznam. Běžná práce ale pokračuje podle jedné aktuální věty.
+
+Codyho komentář: dlouhodobé review je jako servis kola. Po servisu chcete vědět, že brzdy brzdí a řetěz je namazaný. Nechcete jezdit s mechanikem na nosiči, který vám každých pět minut připomíná, co všechno kontroloval.
+
+### Karta uzavření dlouhodobého review
+
+```text
+Pravidlo nebo téma:
+
+Kanonické místo:
+
+Datum review:
+
+Výsledek review:
+- beze změny
+- zjednodušeno
+- lokálně upraveno
+- otevřena nová otázka
+
+Aktuální pracovní věta:
+
+Co se propsalo do kanonického místa:
+
+Co zůstalo jen v uzavřeném záznamu:
+
+Co se smazalo, zkrátilo nebo anonymizovalo:
+
+Kam patří další signály:
+
+Kdy se pravidlo znovu otevře:
+
+Co výslovně neotevíráme:
+
+Vlastník:
+```
+
+Kartu nevyplňujte románově. Nejlepší karta uzavření je tak krátká, že ji někdo opravdu přečte při příštím rozhodnutí. Pokud potřebujete dlouhé vysvětlení, pravděpodobně ještě nemáte uzavřeno, jen máte hodně materiálu.
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte výsledek dlouhodobého review a vyberte způsob uzavření.
+2. Minuta 1-2: napište jednu aktuální pracovní větu pravidla.
+3. Minuta 2-3: určete, co patří do kanonického místa a co jen do uzavřeného záznamu.
+4. Minuta 3-4: projděte staré podklady a vyberte ponechat, zkrátit, přesunout nebo smazat.
+5. Minuta 4-5: napište, kam půjdou další signály bez nové samostatné evidence.
+6. Minuta 5-6: zapište krátkou uzavírací zprávu pro tým.
+
+Workshop končí, když člověk mimo review umí použít aktuální pravidlo bez vysvětlení celé historie. Pokud to nejde, vraťte se ke kanonické větě. Nejspíš je v ní pořád moc minulosti nebo málo rozhodnutí.
+
+### Checklist uzavření dlouhodobého review
+
+- Má review jeden jasný výsledek?
+- Je aktuální pracovní věta krátká a použitelná?
+- Propsali jsme do kanonického místa jen to, co je potřeba pro běžnou práci?
+- Zůstala historie mimo každodenní trasu?
+- Pokud vznikla lokální úprava, zůstala opravdu lokální?
+- Pokud vznikla nová otázka, má vlastní rozsah a stop podmínku?
+- Je jasné, kam patří další signály?
+- Nevznikla nová samostatná evidence jen kvůli dozoru?
+- Prošli jsme pracovní exporty, screenshoty, příklady, kopie tiketů a osobní poznámky?
+- Smazali, zkrátili nebo anonymizovali jsme podklady bez současné hodnoty?
+- Ví vlastník, kdy se pravidlo znovu otevře?
+- Umí nový člověk použít pravidlo bez původního review?
+
+Uzavření prvního dlouhodobého review má udělat jednu věc: nechat užitečné pravidlo dál pracovat bez batohu staré nejistoty. Když se to povede, tým má kratší instrukci, menší datovou stopu a čistší cestu pro budoucí signály. To je přesně ten druh nenápadného zlepšení, které se v provozu počítá víc než další velká prezentace.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review: převod výsledku do kanonického místa, čtyři způsoby uzavření, úklid starých podkladů, uzavírací zpráva týmu, privacy-first zkrácení datové stopy, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním dlouhodobém review po trvalém běžném rytmu: kontrola současného účelu pravidla, čtyři výsledné stavy, ochrana rozsahu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření druhého běžného review do trvalého běžného rytmu: čtyři uzavírací stavy, přepis do kanonického místa, úklid podpůrných stop, uzavírací zpráva, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o druhém běžném review po uzavření prvního review: kontrola skryté zvláštní péče, čtyři výsledné stavy, ukončení obchůzek, privacy-first úklid, karta, mini workshop a checklist.
