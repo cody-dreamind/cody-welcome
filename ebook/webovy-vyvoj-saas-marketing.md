@@ -188438,8 +188438,234 @@ Workshop má skončit zápisem, ne diskusí o ideálním systému. Když se obje
 
 Dobře uzavřené první běžné review vrátí pravidlo do normálního života. Neudělá z něj relikvii staré opravy, nenechá kolem něj běžet tichý dohled a nepřidá novou datovou stopu jen proto, aby měl tým lepší pocit. Výsledek má být prostý: aktuální pravidlo, správné místo, úzký návratový signál a méně věcí, které se musí příště vysvětlovat.
 
+## Druhé běžné review po uzavření review zvláštní pozornosti
+
+Druhé běžné review po uzavřeném prvním review už nemá kontrolovat, jestli se uzavření povedlo. To se mělo stát v předchozím kroku. Teď jde o nenápadnější otázku: nezůstala kolem pravidla nějaká zbytková pozornost, která se tváří jako běžná práce, ale ve skutečnosti pořád chrání starý problém?
+
+Toto review má proběhnout v normálním rytmu a má být kratší než první. Pokud se z něj stane stejně velká kontrola jako minule, tým pravděpodobně neuvěřil vlastnímu uzavření. Druhé review má potvrdit, že pravidlo je součástí provozu, ne samostatná agenda.
+
+Začněte větou:
+
+```text
+Druhé běžné review kontroluje jen současné použití pravidla a případné zbytkové stopy po prvním review.
+```
+
+Tato věta drží hranici. Bez ní se lidé snadno vrátí k předchozímu zápisu a začnou znovu debatovat, jestli byl stav správně vybraný, jestli se neměla udělat větší úprava, nebo jestli by se přece jen nemělo něco sledovat. Pokud se objeví nový důkaz, patří do běžného rozhodování. Ale druhé review nemá znovu soudit celé první review.
+
+### Co druhé review hledá
+
+Hledejte jen čtyři věci:
+
+- pravidlo se použilo v běžné práci bez odkazu na starou historii;
+- závěr prvního review je vidět v kanonickém místě, ne jen v poznámce;
+- nevznikla nová pomocná evidence po uzavření prvního review;
+- případné nové téma má vlastní kartu a netahá za sebou starý návratový signál.
+
+Příklad:
+
+```text
+Pracovní místo:
+Discovery šablona pro první kvalifikaci poptávky.
+
+Závěr prvního review:
+Běžný rytmus stačí. Nepřidáváme automatický scoring ani nové pole v prvním formuláři.
+
+Druhé review:
+Šablona je v indexu, obchodník ji použil bez dotazu a nevznikla nová tabulka používání.
+
+Závěr:
+Pravidlo zůstává v běžném rytmu. Starý scoring se neotevírá.
+```
+
+Tady není potřeba znovu dokazovat, proč se scoring nedělal. Stačí ověřit, že rozhodnutí nezůstalo jen ve vzpomínce a že práce podle něj opravdu proběhla.
+
+### Čtyři výsledky druhého review
+
+Po druhém review vyberte jeden ze čtyř výsledků:
+
+- Tichý běžný rytmus: pravidlo funguje bez zbytkové pozornosti a další kontrola proběhne jen podle běžného plánu.
+- Poslední úklid stopy: pravidlo funguje, ale někde zůstal starý odkaz, poznámka, název nebo pomocný podklad.
+- Skrytá kontrola se vrátila: tým po prvním review začal vést novou evidenci, připomínku nebo ruční dohled bez jasného konce.
+- Nové téma oddělit: review ukázalo novou otázku, která nepatří do starého pravidla.
+
+Rozdíl mezi posledním úklidem a skrytou kontrolou je praktický. Poslední úklid je jednorázová oprava blízko pracovního místa. Skrytá kontrola je nový rytmus, který se potichu přidal po uzavření. První opravte a zavřete. Druhou zastavte, nebo převeďte na konkrétní návratový signál.
+
+Dobré zápisy:
+
+```text
+Tichý běžný rytmus:
+Pravidlo bylo použito v běžném sales review, zdroj pravdy je dohledatelný a žádná nová evidence nevznikla.
+```
+
+```text
+Poslední úklid stopy:
+V indexu zůstal odkaz "kontrola po opravě". Přejmenujeme ho na aktuální název šablony a starý kontrolní odkaz smažeme.
+```
+
+```text
+Skrytá kontrola se vrátila:
+Po prvním review si tým začal psát každý případ použití do tabulky. Tabulku rušíme. Pokud nastanou tři běžné výjimky za měsíc, otevře se návratový signál.
+```
+
+```text
+Nové téma oddělit:
+Pravidlo kvalifikace funguje, ale objevila se otázka, kdo má připravit technický odhad. Dostává vlastní kartu a nepřepisuje aktuální šablonu.
+```
+
+### Jak zrušit skrytou kontrolu
+
+Skrytá kontrola bývá dobře míněná. Někdo chce mít jistotu, že se starý problém nevrátí, a tak přidá malou tabulku, pravidelnou připomínku nebo ruční poznámku do review. Problém je, že tím znovu vzniká mimořádná péče, jen bez pojmenování.
+
+Postupujte ve třech krocích:
+
+1. Pojmenujte, čeho se kontrola bojí.
+2. Přepište obavu na návratový signál.
+3. Zrušte kontrolu, která neslouží žádnému rozhodnutí.
+
+Šablona:
+
+```text
+Skrytá kontrola:
+
+Čeho se bojíme:
+
+Jaký běžný signál by to ukázal:
+
+Co rušíme:
+
+Co zůstává:
+
+Kdy by se téma znovu otevřelo:
+```
+
+Příklad:
+
+```text
+Skrytá kontrola:
+Týdenní připomínka, aby obchod hlásil použití discovery šablony.
+
+Čeho se bojíme:
+Že lidé budou používat starou otázku na rozpočet.
+
+Jaký běžný signál by to ukázal:
+Ve třech po sobě jdoucích poptávkách obchod znovu požádá o rozpočet v prvním kontaktu.
+
+Co rušíme:
+Týdenní připomínku a tabulku použití.
+
+Co zůstává:
+Aktuální šablona a návratový signál v obchodním indexu.
+```
+
+Tím se kontrola nezahodí bez náhrady. Jen se z ní odstraní trvalá ruční práce a zůstane signál, který má skutečný rozhodovací smysl.
+
+### Privacy-first úklid druhého review
+
+Druhé review je dobrý okamžik zkontrolovat, jestli po prvním review nevznikla nová datová stopa "pro jistotu". Typicky se objeví malé věci, které nevypadají nebezpečně: seznam použití šablony, screenshoty odpovědí, kopie zákaznických zpráv, ruční export z CRM nebo poznámky, kdo přesně pravidlo použil.
+
+Ptejte se:
+
+```text
+Jaké rozhodnutí tato stopa podporuje?
+Kdy ji smažeme?
+Stačí anonymizovaný závěr místo konkrétního případu?
+Je tato evidence součástí běžného provozu, nebo vznikla jen po staré opravě?
+```
+
+Pokud stopa nepodporuje konkrétní rozhodnutí, smažte ji nebo zkraťte na závěr. Pokud rozhodnutí podporuje, dejte jí vlastníka a konec platnosti. Privacy-first provoz není jen o tom, kde data leží. Je i o tom, jestli vůbec měla vzniknout.
+
+Codyho komentář: "malá tabulka pro jistotu" je jeden z nejnenápadnějších způsobů, jak si tým vyrobí trvalou práci. Tabulka se tváří skromně, ale za měsíc chce vysvětlit, kdo ji udržuje, proč v ní chybí tři řádky a jestli z ní nebude dashboard. Takže ano, nejdřív se ptejme, jestli má právo existovat.
+
+### Karta druhého běžného review
+
+```text
+Pracovní místo:
+
+Závěr prvního běžného review:
+
+Běžný rytmus druhého review:
+
+Co jsme kontrolovali:
+
+Co jsme výslovně nekontrolovali:
+
+Reálné použití od prvního review:
+
+Vznikla zbytková nebo skrytá kontrola:
+- ne / ano, jaká:
+
+Výsledek:
+- tichý běžný rytmus
+- poslední úklid stopy
+- skrytá kontrola se vrátila
+- nové téma oddělit
+
+Rozhodnutí:
+
+Co rušíme, mažeme nebo zkracujeme:
+
+Co zůstává v kanonickém místě:
+
+Návratový signál:
+
+Co neotevíráme:
+
+Privacy-first datová stopa:
+
+Další kontrola:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: Přečtěte závěr prvního review a aktuální pracovní větu.
+2. Minuta 2: Pojmenujte jedno reálné použití od prvního review.
+3. Minuta 3: Najděte případnou zbytkovou kontrolu, tabulku, připomínku nebo starý odkaz.
+4. Minuta 4: Vyberte jeden ze čtyř výsledků druhého review.
+5. Minuta 5: Zapište, co se ruší, co zůstává a co se neotevírá.
+6. Minuta 6: Uzavřete datovou stopu a další kontrolu.
+
+Workshop končí větou:
+
+```text
+Druhé běžné review potvrzuje:
+Rušíme nebo uklízíme:
+Další pozornost patří:
+```
+
+Příklad:
+
+```text
+Druhé běžné review potvrzuje, že discovery šablona žije v běžném rytmu.
+Rušíme týdenní připomínku použití šablony a mažeme pomocnou tabulku bez dalšího účelu.
+Další pozornost patří jen měsíčnímu sales review nebo návratovému signálu.
+```
+
+### Checklist druhého běžného review
+
+- Proběhlo review v běžném rytmu, ne jako obnovená mimořádná kontrola?
+- Začali jsme závěrem prvního review a aktuální pracovní větou?
+- Existuje reálné použití od prvního review?
+- Je závěr prvního review propsaný do kanonického místa?
+- Nepotřeboval tým starou historii, autora opravy ani pomocnou poznámku?
+- Nevznikla po prvním review nová ruční evidence bez konce?
+- Pokud vznikla skrytá kontrola, přepsali jsme ji na návratový signál nebo ji zrušili?
+- Vybrali jsme jeden ze čtyř výsledků druhého review?
+- Pokud jde jen o poslední úklid stopy, je oprava malá a blízko pracovnímu místu?
+- Pokud vzniklo nové téma, má vlastní kartu a vlastní hranici?
+- Neotevřeli jsme starý návrh jen proto, že se objevil podobný provozní podnět?
+- Smazali nebo zkrátili jsme dočasné tabulky, screenshoty, exporty a kopie?
+- Zůstává datová stopa stejná nebo menší?
+- Je jasné, kdy se pravidlo znovu otevře a kdy naopak zůstane bez pozornosti?
+
+Druhé běžné review má být důkaz, že první uzavření nebylo jen pěkně napsané. Když pravidlo funguje, nechte ho v tichém rytmu. Když zůstala stará stopa, ukliďte ji. Když se vrátila skrytá kontrola, zrušte ji nebo ji převeďte na konkrétní signál. A když se objeví nové téma, dejte mu vlastní život, aby staré rozhodnutí nemuselo znovu nést celý tým na zádech.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o druhém běžném review po uzavření review zvláštní pozornosti: kontrola zbytkové pozornosti, čtyři výsledky review, rušení skrytých kontrol, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního běžného review po ukončení zvláštní pozornosti: čtyři uzavírací stavy, propsání do kanonického místa, uzavírací zpráva týmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o prvním běžném review po ukončení zvláštní pozornosti: kontrola aktuální použitelnosti, čtyři výsledky review, prevence návratu mimořádné péče, privacy-first review bez nové evidence, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o třetím běžném cyklu a ukončení zvláštní pozornosti: kdy cyklus zapisovat, tři konce zvláštního režimu, privacy-first úklid, karta a checklist.
