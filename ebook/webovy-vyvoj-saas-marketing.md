@@ -189599,8 +189599,184 @@ Když se tým zasekne u návratového signálu, neprodlužujte workshop. Zapišt
 
 Uzavření druhého tichého měsíce má být konec péče, ne začátek další údržbové vrstvy. Dobrý systém nepotřebuje pořád dokazovat, že funguje. Stačí, že má jasné místo, jasný návratový signál a čisté datové okolí. Zbytek je normální práce.
 
+## První dlouhodobé review po tichém provozu
+
+Když pravidlo projde druhým tichým měsícem a zůstane v dlouhodobém rytmu, další kontrola už nemá být pokračování zvláštní péče. Má být součást běžného review, které stejně probíhá kvůli webu, produktu, marketingu nebo provozu. Rozdíl je jednoduchý: neptáte se "funguje pořád naše stará oprava?", ale "nevznikl v běžném provozu signál, kvůli kterému má smysl pravidlo znovu otevřít?".
+
+Tohle review má být krátké. Pokud z něj vznikne samostatná agenda, nová tabulka nebo pravidelná připomínka, tichý provoz ve skutečnosti skončil. První dlouhodobé review má potvrdit, že pravidlo umí žít bez vlastní scény.
+
+Začněte větou:
+
+```text
+V běžném review kontrolujeme jen to, jestli nastal návratový signál pro [pravidlo]. Pokud nenastal, pravidlo zůstává zavřené.
+```
+
+Příklad:
+
+```text
+V běžném měsíčním review kontrolujeme jen to, jestli dva slabé podněty po sobě vytvořily úkol bez vlastníka nebo bez rozhodovací otázky. Pokud ne, pravidlo pro zavření slabého podnětu bez úkolu zůstává zavřené.
+```
+
+Tahle formulace je záměrně úzká. Neotevírá historii opravy, nehodnotí všechny související šablony a nehledá preventivně další slabá místa. Ptá se jen na návratový signál. Když signál není, není práce.
+
+### Co review opravdu kontroluje
+
+První dlouhodobé review má čtyři otázky:
+
+- Nastal návratový signál, který byl zapsaný při uzavření druhého tichého měsíce?
+- Použilo se pravidlo v běžné práci bez neformální pomoci ownera?
+- Nevznikla nová pomocná evidence, která by měla pravidlo nenápadně hlídat?
+- Zůstává kanonické místo pravidla srozumitelné pro člověka, který u uzavření nebyl?
+
+Pokud jsou odpovědi klidné, review končí jednou větou. Pokud se objeví tření, nejdřív ho pojmenujte jako lokální, návratové nebo systémové. Lokální tření znamená, že stačí opravit jedno místo: odkaz, větu, nadpis, pozici v šabloně. Návratové tření znamená, že nastal původní návratový signál. Systémové tření znamená, že pravidlo sice formálně existuje, ale tým ho bez zvláštní pomoci neumí používat.
+
+Nepřeskakujte rovnou k systémovému závěru. Jedna nejasná věta v šabloně není důkaz, že se rozpadl celý proces. Stejně tak ale nelepte lokální náplast na situaci, kde se pravidlo opakovaně používá jen díky někomu, kdo ho pokaždé připomene.
+
+### Čtyři výsledky prvního dlouhodobého review
+
+Po průchodu vyberte jeden ze čtyř výsledků:
+
+- `Bez signálu`: návratový signál nenastal, pravidlo zůstává zavřené a nic se nemění.
+- `Lokální úprava kanonického místa`: pravidlo funguje, ale jedno místo potřebuje zpřesnit.
+- `Návratový signál potvrzen`: nastala situace, kvůli které se má pravidlo znovu otevřít.
+- `Skrytý dohled se vrátil`: pravidlo žije hlavně díky ručnímu hlídání, ne díky běžnému systému.
+
+U stavu `Bez signálu` napište jen krátký záznam:
+
+```text
+První dlouhodobé review: návratový signál nenastal, pravidlo zůstává v běžném rytmu bez další práce.
+```
+
+U lokální úpravy opravte jen kanonické místo. Typicky stačí přepsat jednu větu, přesunout pravidlo do správné části šablony nebo odstranit starý odkaz na tichou kontrolu. Po opravě nezakládejte nové ověřovací okno; nejbližší běžné review ukáže dost.
+
+U potvrzeného návratového signálu neotevírejte celou historii. Otevřete jen rozhodovací kartu pro návrat: co se stalo, kde se to projevilo, proč původní hranice nestačí a jaký je nejmenší další krok.
+
+U skrytého dohledu pojmenujte konkrétní práci, která se děje mimo systém. Například: owner posílá před review vlastní připomínku, někdo ručně přepisuje podněty do pomocné tabulky, nebo se tým ptá na správný postup mimo kanonické místo. Teprve potom rozhodněte, jestli se má upravit pravidlo, pracovní místo nebo odpovědnost.
+
+### Jak nezměnit review v nový dohled
+
+První dlouhodobé review má svádět k preventivnímu opakování. Tým si řekne: "Když už jsme tady, podívejme se ještě na související věci." To je pochopitelné, ale nebezpečné. Z jednoho návratového signálu se snadno stane nový pravidelný audit.
+
+Použijte stop pravidla:
+
+- Nekontrolujte staré podklady, pokud nenastal návratový signál.
+- Nevytvářejte seznam případů, kde pravidlo fungovalo správně.
+- Nepřidávejte nové metriky jen proto, že je review v kalendáři.
+- Nehodnoťte člověka podle toho, jestli si na pravidlo vzpomněl bez kontextu.
+- Nepřepisujte pravidlo kvůli jedné hypotetické situaci, která se zatím nestala.
+
+Dlouhodobý rytmus není paměťová soutěž. Správně navržené pravidlo se má objevit v okamžiku práce: v šabloně, checklistu, formuláři, review agendě nebo rozhodovacím logu. Pokud musí člověk lovit pravidlo z hlavy, problém není v člověku. Problém je v umístění pravidla.
+
+### Privacy-first review bez nového sledování
+
+První dlouhodobé review má být skoro bez nové datové stopy. Stačí existující pracovní signály: zápis z měsíčního review, rozhodovací log, kanonická šablona, případně anonymizovaný příklad. Není potřeba zakládat nový tracker, přidávat event, nahrávat chování lidí ani sbírat důkazy o tom, že pravidlo někdo četl.
+
+Privacy-first otázka zní:
+
+```text
+Dokážeme rozhodnout, jestli nastal návratový signál, z dat a podkladů, které už oprávněně vznikají při běžné práci?
+```
+
+Pokud ano, nic nepřidávejte. Pokud ne, pravděpodobně je návratový signál špatně napsaný. Dobrý signál se pozná v běžném provozu: opakovaný zbytečný úkol, nejasný vlastník, opakované doptávání, návrat starého ručního dohledu, kolize v šabloně. Špatný signál vyžaduje nové sledování jen proto, aby ho bylo možné vůbec najít.
+
+Codyho komentář: když pravidlo potřebuje vlastní monitoring, vlastní metriku a vlastní mini ceremonii, není v dlouhodobém rytmu. Je na malém piedestalu a čeká, kdo mu zase utře prach.
+
+### Karta prvního dlouhodobého review
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Původní návratový signál:
+
+Nastal návratový signál?
+- ano / ne / nejasné
+
+Použilo se pravidlo bez neformální pomoci?
+
+Vznikla nová pomocná evidence?
+
+Výsledek review:
+- bez signálu
+- lokální úprava kanonického místa
+- návratový signál potvrzen
+- skrytý dohled se vrátil
+
+Nejmenší další krok:
+
+Co dál výslovně nekontrolujeme:
+
+Privacy-first datová stopa po review:
+
+Jedna věta do pracovního logu:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Slabý podnět může být zavřený bez úkolu.
+
+Kanonické místo:
+Měsíční review, část "Podněty bez další práce".
+
+Původní návratový signál:
+Dva slabé podněty po sobě vytvoří úkol bez vlastníka nebo bez rozhodovací otázky.
+
+Nastal návratový signál?
+Ne.
+
+Použilo se pravidlo bez neformální pomoci?
+Ano, v review stačila kanonická šablona.
+
+Vznikla nová pomocná evidence?
+Ne.
+
+Výsledek review:
+Bez signálu.
+
+Nejmenší další krok:
+Žádný.
+
+Co dál výslovně nekontrolujeme:
+Nehledáme zpětně všechny slabé podněty a nezakládáme seznam správně zavřených případů.
+
+Privacy-first datová stopa po review:
+Zůstává jen jedna anonymizovaná věta v měsíčním zápisu.
+
+Jedna věta do pracovního logu:
+První dlouhodobé review nepotvrdilo návratový signál a pravidlo zůstává bez další péče v běžném rytmu.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: přečtěte kanonické pravidlo a původní návratový signál.
+2. Minuta 2: rozhodněte, jestli signál nastal.
+3. Minuta 3: ověřte, jestli pravidlo nepotřebovalo neformální pomoc.
+4. Minuta 4: vyberte jeden ze čtyř výsledků review.
+5. Minuta 5: napište jednu větu do pracovního logu nebo jeden lokální krok.
+
+Když se tým začne bavit o starých detailních podkladech, vraťte ho k návratovému signálu. Když signál nenastal, staré podklady nejsou vstup. Když signál nastal, otevřete novou rozhodovací kartu a nechte starou historii jen jako kontext, ne jako místo, kde se znovu soudí všechno od začátku.
+
+### Checklist prvního dlouhodobého review
+
+- Probíhá review v existujícím rytmu, ne jako nová zvláštní kontrola?
+- Díváme se jen na původní návratový signál?
+- Je jasné, zda signál nastal, nenastal nebo je potřeba lokálně zpřesnit jeho formulaci?
+- Použilo se pravidlo bez neformální pomoci ownera?
+- Nevznikla nová pomocná tabulka, připomínka, export nebo seznam průchodů?
+- Pokud je výsledek bez signálu, opravdu nic dalšího nezakládáme?
+- Pokud jde o lokální úpravu, je omezená na jedno kanonické místo?
+- Pokud se potvrdil návratový signál, otevíráme jen nejmenší další rozhodovací kartu?
+- Pokud se vrátil skrytý dohled, pojmenovali jsme konkrétní práci mimo systém?
+- Zůstává privacy-first datová stopa stejná nebo menší než před review?
+
+První dlouhodobé review má být nenápadné. Jeho nejlepší výsledek je věta, která nikoho neohromí: signál nenastal, pravidlo zůstává zavřené. Přesně tak vypadá dospělý provoz. Ne proto, že je nudný, ale protože neplýtvá pozorností tam, kde už stačí dobře umístěné pravidlo.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o prvním dlouhodobém review po tichém provozu: kontrola návratového signálu v běžném rytmu, čtyři výsledky review, ochrana před novým dohledem, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého tichého měsíce do dlouhodobého rytmu: kanonické místo pravidla, tři výsledky uzavření, týmová zpráva, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém tichém měsíci po uzavřené první tiché kontrole: přirozené použití pravidla, čtyři stavy měsíce, ukončení zbytkové pozornosti, privacy-first konec podkladů a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření první tiché kontroly po uzavření do tichého provozu: čtyři uzavírací stavy, prevence nového dohledu, privacy-first úklid podkladů, karta, mini workshop a checklist.
