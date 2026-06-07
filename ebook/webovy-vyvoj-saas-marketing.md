@@ -188663,6 +188663,186 @@ Další pozornost patří jen měsíčnímu sales review nebo návratovému sign
 
 Druhé běžné review má být důkaz, že první uzavření nebylo jen pěkně napsané. Když pravidlo funguje, nechte ho v tichém rytmu. Když zůstala stará stopa, ukliďte ji. Když se vrátila skrytá kontrola, zrušte ji nebo ji převeďte na konkrétní signál. A když se objeví nové téma, dejte mu vlastní život, aby staré rozhodnutí nemuselo znovu nést celý tým na zádech.
 
+## Uzavření druhého běžného review do tichého provozu
+
+Druhé běžné review má po sobě zanechat méně práce, než kolik našlo. Pokud po něm vznikne další pravidelná kontrola, nová tabulka nebo pocit, že se téma musí ještě chvíli hlídat, review nesplnilo svůj účel. Uzavření druhého review je proto krátký krok, který říká: pravidlo se vrací do tichého provozu, zbytkové stopy jsou uklizené a další pozornost vznikne jen při konkrétním návratovém signálu.
+
+Tichý provoz neznamená, že se pravidlo už nikdy nezmění. Znamená to, že se nepohybuje mimo běžný rytmus jen kvůli staré historii. Člověk, který podle něj příště pracuje, nemá vědět, že kdysi existovalo první review, druhé review a pomocná tabulka. Má najít aktuální pracovní větu, použít ji a případnou výjimku zapsat normálním způsobem.
+
+Uzavření začněte větou:
+
+```text
+Druhé běžné review uzavíráme do tichého provozu, protože pravidlo obstálo v běžné práci a další pozornost má jen tento návratový signál:
+```
+
+Pokud takovou větu neumíte napsat, něco ještě není uzavřené. Buď pravidlo neobstálo, zůstala skrytá kontrola, nebo tým nemá jasno, co má příště spustit návrat.
+
+### Co musí být před uzavřením hotové
+
+Před převodem do tichého provozu zkontrolujte čtyři věci:
+
+- kanonické místo obsahuje aktuální pravidlo bez servisní historie;
+- staré odkazy, pomocné poznámky a dočasné tabulky mají stav: smazat, archivovat nebo přesměrovat;
+- návratový signál je konkrétní, vzácný a pozorovatelný v běžné práci;
+- žádná nová evidence nevznikla jen proto, že tým chtěl po druhém review klidnější pocit.
+
+Příklad:
+
+```text
+Pravidlo:
+První kvalifikace poptávky používá otázku na cíl, rozhodovací horizont a očekávaný výsledek.
+
+Co je hotové:
+Discovery šablona je aktuální, starý odkaz na scoring je smazaný a pomocná tabulka použití byla zrušená.
+
+Návratový signál:
+Ve třech relevantních poptávkách za měsíc obchod opakovaně nedokáže určit prioritu ani po použití aktuální otázky.
+
+Tichý provoz:
+Pravidlo se dál kontroluje jen v běžném sales review.
+```
+
+Tento zápis je dost krátký na to, aby ho tým opravdu použil. Neobsahuje celou historii, ale drží rozhodnutí, hranici a návratový signál.
+
+### Přepište pravidlo bez stop po opravě
+
+Když se pravidlo vrací do tichého provozu, odstraňte z pracovního místa jazyk typu:
+
+- "po poslední opravě";
+- "zatím sledujeme";
+- "pro jistotu hlídat";
+- "ověřeno v druhém review";
+- "dočasně ponechat".
+
+Tyto věty mohou být pravdivé v logu, ale v pracovním pravidle vytvářejí dojem, že téma je pořád mimořádné. Běžné pravidlo má znít v přítomném čase:
+
+```text
+Při první kvalifikaci zjišťujeme cíl, rozhodovací horizont a očekávaný výsledek. Rozpočet a velikost firmy nejsou výchozí kvalifikační údaje v prvním kontaktu.
+```
+
+Historie zůstává v rozhodovací paměti:
+
+```text
+Pravidlo bylo po druhém běžném review vrácené do tichého provozu. Pomocná tabulka použití byla smazaná a návratový signál je opakovaná nemožnost určit prioritu po použití aktuální otázky.
+```
+
+Rozdíl je praktický. První věta vede práci. Druhá věta vysvětluje údržbu. Nemají bydlet na stejném místě.
+
+### Tichý provoz má mít vlastní hranici
+
+Tiché pravidlo není pravidlo bez odpovědnosti. Má jen jiný režim pozornosti. Místo zvláštní kontroly používá běžné okamžiky, které už v provozu existují: měsíční review, sales retro, kontrolu formulářů, redakční sprint, provozní checklist nebo kvartální privacy-first úklid.
+
+Špatný návrat do ticha:
+
+```text
+Budeme to dál sledovat.
+```
+
+Lepší návrat:
+
+```text
+Pravidlo se kontroluje jen v měsíčním sales review. Mimo něj se otevře pouze při třech opakovaných výjimkách za měsíc.
+```
+
+První věta vytváří nekonečnou pozornost. Druhá věta používá existující rytmus a konkrétní signál. Tím šetří čas i data.
+
+### Privacy-first uzavření
+
+Při uzavření druhého review projděte hlavně podklady, které vznikly během mimořádné péče. Typicky jde o pomocné tabulky, seznamy použití, screenshoty, kopie šablon, ruční exporty nebo poznámky z review. Pokud už pravidlo přechází do tichého provozu, tyto podklady většinou ztrácejí účel.
+
+Použijte jednoduché třídění:
+
+```text
+Ponechat:
+Aktuální pravidlo, návratový signál a anonymizovaný závěr druhého review.
+
+Smazat nebo anonymizovat:
+Pomocné tabulky, screenshoty, pracovní exporty a konkrétní poznámky bez dalšího rozhodovacího účelu.
+
+Nepřidávat:
+Nové měření používání pravidla, osobní evidence čtenářů nebo ruční dohled bez termínu konce.
+```
+
+Codyho komentář: nejlepší důkaz, že pravidlo přešlo do tichého provozu, je absence nového "malého sledování". Malé sledování má zvláštní talent stát se velkým zvykem. A zvyky bez účelu jsou jen proces v pohodlných botách.
+
+### Karta uzavření do tichého provozu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Závěr druhého běžného review:
+
+Co potvrzujeme:
+
+Co rušíme nebo mažeme:
+
+Co zůstává v kanonickém místě:
+
+Co zůstává jen v rozhodovací paměti:
+
+Běžný rytmus kontroly:
+
+Návratový signál:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Discovery šablona pro první kvalifikaci poptávky.
+
+Závěr druhého běžného review:
+Pravidlo funguje bez zbytkové kontroly.
+
+Co potvrzujeme:
+První kontakt nevyžaduje automatický scoring ani nové pole ve formuláři.
+
+Co rušíme nebo mažeme:
+Pomocnou tabulku používání šablony a starý kontrolní odkaz v indexu.
+
+Co zůstává v kanonickém místě:
+Aktuální otázky discovery a návratový signál.
+
+Co zůstává jen v rozhodovací paměti:
+Anonymizovaný závěr, proč byla tabulka zrušená.
+
+Běžný rytmus kontroly:
+Měsíční sales review.
+
+Návratový signál:
+Tři relevantní poptávky za měsíc, u kterých nelze určit prioritu ani po použití aktuální otázky.
+
+Co výslovně neotevíráme:
+Neotevíráme scoring, nový formulář ani dashboard kvalifikace.
+
+Privacy-first úklid:
+Mažeme pomocnou tabulku a nepřidáváme nové sledování použití šablony.
+```
+
+### Checklist uzavření do tichého provozu
+
+- Je druhé běžné review opravdu uzavřené jedním výsledkem?
+- Je aktuální pravidlo zapsané v přítomném čase?
+- Zmizely z pracovního místa servisní poznámky po opravě?
+- Je jasné, co zůstává v kanonickém místě a co jen v rozhodovací paměti?
+- Byly zrušené skryté kontroly, pomocné tabulky a připomínky bez konce?
+- Má pravidlo běžný rytmus kontroly místo mimořádné péče?
+- Je návratový signál konkrétní a dost vzácný?
+- Neotevírá uzavření starý návrh, scoring, dashboard, redesign ani další širší téma?
+- Jsou dočasné podklady smazané nebo anonymizované?
+- Nevzniklo nové sledování lidí, čtení dokumentace, používání šablon ani zákaznických detailů?
+- Ví vlastník, kdy pravidlo nechat být a kdy ho znovu otevřít?
+
+Uzavření do tichého provozu je dobrý konec jedné dlouhé smyčky. Pravidlo prošlo opravou, běžným použitím, review i úklidem. Teď nemá potřebovat pozornost jen proto, že ji kdysi mělo. Má být po ruce, fungovat v normálním rytmu a vrátit se na stůl až ve chvíli, kdy se objeví skutečný signál. V tom je hodnota dobře udržovaného rukopisu: pomáhá týmu pracovat klidněji, ne jen přesněji.
+
 ## Pracovní log
 
 - 2026-06-07: Doplněna úvodní podkapitola o druhém běžném review po uzavření review zvláštní pozornosti: kontrola zbytkové pozornosti, čtyři výsledky review, rušení skrytých kontrol, privacy-first úklid, karta, mini workshop a checklist.
@@ -189499,3 +189679,4 @@ Druhé běžné review má být důkaz, že první uzavření nebylo jen pěkně
 - 2026-06-07: Doplněna úvodní podkapitola o prvním běžném použití po uzavření prvního návratového signálu: tři otázky použití, čtyři výsledky, nejbližší oprava, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření prvního návratového signálu: čtyři uzavírací stavy, propsání do kanonického místa, úklid podkladů, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém běžném cyklu po uzavřené první údržbě: samostatnost pravidla v běžné práci, čtyři výsledky cyklu, poslední lokální dotažení, privacy-first datová stopa, karta, mini workshop a checklist.
+- 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého běžného review do tichého provozu: přepis pravidla do přítomného času, zrušení skryté kontroly, privacy-first úklid, karta a checklist.
