@@ -186836,6 +186836,227 @@ Workshop končí, když signál nemá vlastní mimořádnou trasu. Buď zmizel j
 
 Uzavření prvního návratového signálu je malý, ale důležitý protijed proti procesnímu neklidu. Když se udělá poctivě, tým získá odpověď bez toho, aby znovu nesl celý starý batoh. A když se neudělá, signál se promění v neurčitou opatrnost. Ta bývá dražší než samotná oprava.
 
+## První běžné použití po uzavření prvního návratového signálu
+
+Uzavřený návratový signál se má co nejrychleji vrátit do normální práce. Ne do zvláštního dohledu, ne do nové tabulky a ne do pocitu, že "teď to musíme chvíli hlídat". První běžné použití po uzavření je přesně ten okamžik, kdy se ukáže, jestli závěr opravdu sedí do provozu. Člověk použije pravidlo, šablonu, formulář, nabídku nebo pracovní postup tak, jak by ho použil i bez předchozí debaty.
+
+Smyslem prvního použití není znovu dokazovat celou historii. Smyslem je ověřit tři malé věci:
+
+- člověk najde aktuální pravidlo bez autora původní změny;
+- pravidlo vede k rozhodnutí nebo hotovému výstupu;
+- uzavřený signál nevytváří novou mimořádnou péči.
+
+Pokud tyto tři věci drží, práce je hotová. Nepřidávejte další kontrolní kolo jen proto, že je příjemné mít jistotu. V provozu se jistota nevyrábí sledováním všeho. Vyrábí se dobrými hranicemi a schopností nechat funkční pravidlo pracovat.
+
+Začněte krátkým zápisem před prvním použitím:
+
+```text
+Uzavřený signál:
+
+Výsledek uzavření:
+- šum bez akce / lokální servis / nová malá otázka / omezená iterace
+
+První běžná situace, kde se pravidlo použije:
+
+Co má člověk najít:
+
+Jaký minimální výstup má vzniknout:
+
+Co při tomto použití výslovně nehlídáme:
+```
+
+Poslední řádek je důležitý. Když ho vynecháte, tým si často doplní vlastní tichý dohled: někdo bude bokem počítat případy, někdo bude ukládat screenshoty, někdo se po každém použití zeptá v chatu, jestli "to bylo dobré". To už není běžné použití. To je stará mimořádná péče v civilním oblečení.
+
+### Tři otázky při prvním použití
+
+Při prvním běžném použití nepouštějte velké review. Stačí tři otázky:
+
+```text
+1. Našel člověk aktuální pravidlo tam, kde ho při práci čekal?
+2. Pomohlo pravidlo dokončit rozhodnutí nebo výstup bez dodatečného vysvětlování?
+3. Zůstala datová stopa stejná nebo menší než před uzavřením signálu?
+```
+
+První otázka testuje dohledatelnost. Pokud člověk musí hledat ve starém vlákně, ptát se autora nebo otevírat historickou kartu, uzavření nebylo propsané dost prakticky.
+
+Druhá otázka testuje použitelnost. Pravidlo nemusí být krásné, dlouhé ani dokonale vysvětlené. Musí pomoci člověku udělat práci bez toho, aby si vytvořil vlastní náhradní postup.
+
+Třetí otázka drží privacy-first hranici. Po uzavření signálu se nemá objevit nový export, nové pole, nové kopírování detailů ani nový zvyk ukládat příklady "pro jistotu". Pokud pravidlo funguje jen s větší datovou stopou, není uzavřené čistě. Jen vyměnilo procesní nejistotu za datový dluh.
+
+Příklad:
+
+```text
+Uzavřený signál:
+Dvě poptávky ukázaly nejasnost v první odpovědi na termín hovoru.
+
+Výsledek uzavření:
+Lokální servis. Změněna jedna věta v šabloně odpovědi.
+
+První běžná situace:
+Další relevantní poptávka z webu.
+
+Co má člověk najít:
+Aktuální šablonu první odpovědi v kanonickém obchodním místě.
+
+Minimální výstup:
+Odeslaná první odpověď bez ručního doptávání na interním chatu.
+
+Co nehlídáme:
+Nevedeme samostatný seznam všech poptávek, neukládáme kopie e-mailů a neotevíráme formulářovou větev.
+```
+
+Takový zápis je dost konkrétní na ověření a dost malý na to, aby nezaložil nový proces. Přesně to po uzavřeném signálu potřebujete.
+
+### Čtyři výsledky prvního použití
+
+Po prvním použití vyberte jeden ze čtyř výsledků:
+
+- Běžné použití prošlo: pravidlo bylo nalezeno, použito a nevznikla nová stopa.
+- Drobná navigační oprava: pravidlo funguje, ale člověk ho hledal na špatném místě nebo mu chyběl odkaz.
+- Lokální obsahové tření: pravidlo je na správném místě, ale jedna věta, název pole nebo příklad mate práci.
+- Nový signál mimo původní uzavření: použití ukázalo jiný problém, který nepatří do uzavřeného návratového signálu.
+
+U výsledku "běžné použití prošlo" nedělejte nic dalšího kromě krátkého zápisu:
+
+```text
+První běžné použití proběhlo bez mimořádné pomoci. Pravidlo zůstává v běžném rytmu a další kontrola se nedělá.
+```
+
+U navigační opravy změňte jen cestu k pravidlu: odkaz, název, umístění v indexu, kotvu v dokumentu nebo krátkou větu v pracovním místě. Nepřepisujte obsah jen proto, že cesta byla slabá.
+
+U lokálního obsahového tření opravte jednu nejbližší větu. Neotevírejte celou kartu signálu. Pokud člověk narazil na nejasný pojem v šabloně, upravte pojem. Pokud narazil na chybějící příklad, přidejte jeden krátký anonymizovaný příklad. Pokud narazil na starý odkaz, vyměňte odkaz a zavřete starou trasu.
+
+U nového signálu buďte přísní: pokud problém nepatří k uzavřenému signálu, nedovolte mu přepsat starý závěr. Založte samostatnou malou otázku jen tehdy, když existuje rozhodnutí, které se může změnit. Jinak ho zapište jako poznámku do běžného review.
+
+### Jak opravit jen nejbližší místo
+
+Když první použití drhne, nejčastější pokušení je opravit "celý systém kolem". To je většinou moc. Ptejte se:
+
+```text
+Kde přesně se člověk zastavil?
+Co potřeboval vědět v té jedné chvíli?
+Které jedno místo viděl těsně před zastavením?
+Jaká nejmenší změna by mu příště pomohla pokračovat?
+```
+
+Oprava má být tam, kde člověk stojí, ne v dokumentu, který by si ideálně měl někdy přečíst. Pokud se chyba stala při odesílání nabídky, opravte šablonu nebo kontrolní řádek u nabídky. Pokud se stala při práci s formulářem, opravte formulářový popisek nebo interní pravidlo pro odpověď. Pokud se stala při review kampaně, opravte review checklist, ne vzdálený strategický dokument.
+
+Dobrá drobná oprava vypadá takto:
+
+```text
+Tření:
+Člověk našel šablonu, ale nevěděl, jestli má použít novou větu i u menších projektů.
+
+Nejbližší místo:
+Řádek v šabloně první odpovědi.
+
+Oprava:
+Přidat závorku: "Použij i u menších projektů, pokud poptávka žádá termín hovoru."
+
+Co neotevíráme:
+Neměníme segmentaci nabídky, nepřidáváme nové pole a nepíšeme novou sales příručku.
+```
+
+Tahle oprava je malá, ale hodnotná. Snižuje tření přímo v práci a přitom nespouští širší revizi.
+
+### Privacy-first kontrola prvního použití
+
+První běžné použití nesmí být záminka pro nový dohled. Nepotřebujete vědět, kdo pravidlo otevřel, jak dlouho ho četl, kolikrát se vrátil do dokumentu ani jestli při tom přepnul okno. Potřebujete jen výsledek práce a případné tření, které bránilo dokončení.
+
+Privacy-first zápis po použití má být krátký:
+
+```text
+Použití:
+
+Výsledek:
+
+Tření:
+- žádné / navigace / obsah / nový signál
+
+Datová stopa:
+- beze změny / menší / dočasně větší s retencí do:
+
+Co mažeme nebo nezakládáme:
+```
+
+Pokud se během použití pracovalo s konkrétní poptávkou, zákaznickým dotazem nebo interním výstupem, nezapisujte zbytečné detaily. Stačí vzor: "u menšího projektu nebylo jasné použití nové věty". Jméno zákazníka, celý text e-mailu ani obchodní kontext do ověřovací poznámky nepatří, pokud nejsou nezbytné pro rozhodnutí. A většinou nejsou.
+
+Codyho komentář: když po jedné drobné úpravě vznikne nový report, úprava možná nebyla drobná. Nebo tým jen trpí přirozenou lidskou potřebou vyrobit tabulku, aby se cítil dospěle. Tabulka není dospělost. Někdy je to jen pastelkový plot kolem nejistoty.
+
+### Karta prvního běžného použití
+
+```text
+Uzavřený návratový signál:
+
+Uzavírací výsledek:
+
+Kanonické místo:
+
+První běžná pracovní situace:
+
+Kdo pravidlo použil:
+- role stačí, ne jméno, pokud není nutné
+
+Našel člověk aktuální pravidlo?
+- ano / ne / s pomocí
+
+Vznikl minimální výstup?
+- ano / ne / částečně
+
+Vznikla mimořádná pomoc?
+- ne / ano, jaká
+
+Výsledek prvního použití:
+- běžné použití prošlo
+- drobná navigační oprava
+- lokální obsahové tření
+- nový signál mimo původní uzavření
+
+Nejmenší reakce:
+
+Co výslovně neotevíráme:
+
+Datová stopa:
+
+Co mažeme, zkracujeme nebo vůbec nezakládáme:
+
+Další kontrola:
+- žádná mimo běžný rytmus / při dalším běžném použití / samostatná karta nové otázky
+
+Datum:
+```
+
+Karta je hotová, když dokáže říct, zda pravidlo pokračuje v běžném rytmu. Pokud karta končí větou "budeme to sledovat", není hotová. Doplňte, co přesně by změnilo rozhodnutí, kdo to uvidí a proč k tomu nestačí běžný rytmus.
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: připomeňte uzavřený signál a výsledek uzavření.
+2. Minuta 1-2: pojmenujte první běžnou pracovní situaci.
+3. Minuta 2-3: odpovězte na tři otázky nalezení, výstupu a datové stopy.
+4. Minuta 3-4: vyberte jeden ze čtyř výsledků prvního použití.
+5. Minuta 4-5: zapište nejmenší reakci a co se výslovně neotevírá.
+
+Workshop končí buď návratem do běžného rytmu, jednou drobnou opravou nejbližšího místa, nebo oddělením nové otázky. Nemá skončit novou obecnou opatrností.
+
+### Checklist prvního běžného použití
+
+- Použili jsme pravidlo v normální pracovní situaci, ne v umělém testu?
+- Našel člověk kanonické místo bez autora původní změny?
+- Vedlo pravidlo k hotovému rozhodnutí nebo výstupu?
+- Nevznikla mimořádná pomoc, která by maskovala slabé předání?
+- Vybrali jsme jeden ze čtyř výsledků prvního použití?
+- Pokud pravidlo prošlo, opravdu nepřidáváme další kontrolu?
+- Pokud drhla navigace, opravujeme cestu, ne celý obsah?
+- Pokud drhl obsah, opravujeme nejbližší větu nebo příklad?
+- Pokud vznikl nový signál, nepřipisujeme ho automaticky starému problému?
+- Je zapsané, co výslovně neotevíráme?
+- Zůstala datová stopa stejná nebo menší?
+- Pokud dočasně vznikl podklad, má účel, vlastníka a konec platnosti?
+- Smazali nebo zkrátili jsme konkrétní příklady, které nejsou potřeba?
+- Vrací se téma po použití do běžného rytmu?
+
+První běžné použití po uzavření návratového signálu je malá zkouška důvěry. Když pravidlo funguje, nechte ho být. Když drhne, opravte nejbližší místo. Když ukáže nový problém, dejte mu vlastní malou otázku. Hlavní výhra není v tom, že už nikdy nic nezadrhne. Hlavní výhra je, že jedno zadrhnutí už automaticky neotevře celý starý svět.
+
 ## Pracovní log
 
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po klidovém provozu: čtyři uzavírací výsledky, propsání do kanonického místa, zavření pomocných stop, privacy-first úklid, týmová zpráva, karta, mini workshop a checklist.
@@ -187663,3 +187884,4 @@ Uzavření prvního návratového signálu je malý, ale důležitý protijed pr
 - 2026-06-05: Doplněna úvodní podkapitola o přechodu uzavřeného širšího vzoru do klidového provozu: druhý běžný průchod, odstranění mimořádné agendy, zpřesnění návratového signálu, privacy-first úklid, karta a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření první reakce na návratový signál po klidu: čtyři uzavírací stavy, pravidla pro nezvětšování reakce, privacy-first úklid, karta a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním běžném použití po převodu uzavřené reakce: ověření bez mimořádné péče, tři kontrolní otázky, nejmenší oprava, privacy-first hranice, karta a checklist.
+- 2026-06-07: Doplněna úvodní podkapitola o prvním běžném použití po uzavření prvního návratového signálu: tři otázky použití, čtyři výsledky, nejbližší oprava, privacy-first kontrola, karta, mini workshop a checklist.
