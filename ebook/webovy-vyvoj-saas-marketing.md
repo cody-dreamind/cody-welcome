@@ -188209,8 +188209,238 @@ Datum:
 
 První běžné review po ukončení zvláštní pozornosti má jeden tichý úspěch: nic dramatického se nestane. Pravidlo se použije, tým ho zkontroluje v běžném rytmu, stará historie zůstane zavřená a žádná nová evidence nepřibude. Přesně tak vypadá provoz, který se zlepšuje, aniž by si z každého zlepšení vyráběl další malý systém.
 
+## Jak uzavřít první běžné review po ukončení zvláštní pozornosti
+
+První běžné review po ukončení zvláštní pozornosti má skončit jasným provozním stavem. Nestačí říct "vypadá to dobře" a nechat poznámku viset v dokumentu. Tím by se stará mimořádná péče jen přesunula do mlhy: nikdo neví, jestli pravidlo opravdu žije v běžném rytmu, jestli se má ještě sledovat, nebo jestli se k němu tým vrátí při nejbližší drobné nejistotě.
+
+Uzavření review proto udělejte hned na konci kontroly. Ne jako další úkol na později. Cílem není vyrobit dlouhý report, ale převést výsledek do jednoho ze čtyř stavů a propsat ho do správného místa.
+
+Začněte větou:
+
+```text
+První běžné review uzavíráme stavem:
+```
+
+Tato věta nutí tým vybrat závěr. Bez ní se review často rozpadne na dojmy: pravidlo asi funguje, něco by se dalo doladit, možná se na to podíváme příště. To je přesně jazyk, který znovu otevírá zvláštní pozornost. Dobré uzavření má být menší a tvrdší.
+
+### Čtyři uzavírací stavy
+
+Použijte stejné čtyři výsledky, které review nabídlo, ale přepište je do akce:
+
+- Běžný rytmus stačí: nic dalšího nezakládáme, pravidlo zůstává v kanonickém místě a příště se kontroluje jen běžným rytmem nebo návratovým signálem.
+- Lokální úprava hotová: opravili jsme jednu blízkou větu, odkaz, název nebo vlastnictví a tím review končí.
+- Doplněný návratový signál: pravidlo funguje, ale chyběla podmínka návratu; po doplnění signálu se téma vrací do běžného rytmu.
+- Nová otázka oddělená: review ukázalo jiné téma, které dostává vlastní kartu; původní pravidlo se kvůli tomu znovu neotevírá.
+
+Nepřidávejte pátý stav "sledovat". Pokud chcete sledovat dál, napište konkrétní signál a rytmus. V opačném případě jen prodlužujete mimořádnou péči bez rozhodnutí. To je drahé i datově nečisté: tým začne vyrábět pomocné poznámky, kontrolní seznamy a ruční evidence, aby ospravedlnil pozornost, která už nemá jasný účel.
+
+Příklad uzavření do běžného rytmu:
+
+```text
+Stav:
+Běžný rytmus stačí.
+
+Co review ukázalo:
+Šablona první odpovědi je dohledatelná, použila se ve dvou běžných poptávkách a nevrátila starou diskusi o scoringu.
+
+Rozhodnutí:
+Zvláštní pozornost zůstává ukončená. Další kontrola jen v měsíčním sales review nebo při návratovém signálu.
+
+Co neotevíráme:
+Nový scoring, audit všech šablon ani report používání.
+
+Privacy-first výsledek:
+Nevzniká nový tracker, export ani CRM pole.
+```
+
+Příklad oddělení nové otázky:
+
+```text
+Stav:
+Nová otázka oddělená.
+
+Co review ukázalo:
+Pravidlo první odpovědi funguje, ale u větších projektů není jasné, kdo schvaluje technický odhad.
+
+Rozhodnutí:
+Zakládáme samostatnou kartu "schvalování technického odhadu u větších poptávek". Pravidlo první odpovědi zůstává v běžném rytmu.
+
+Co neotevíráme:
+Neotvíráme starou opravu šablony ani automatický lead scoring.
+
+Privacy-first výsledek:
+Nová karta zatím pracuje jen s rozhodovací rolí, ne se seznamem zákaznických dat.
+```
+
+### Propsání závěru do kanonického místa
+
+Uzavření musí změnit místo, podle kterého lidé pracují. Pokud závěr zůstane jen v poznámce z review, nebude mít provozní sílu.
+
+U každého uzavíracího stavu proto určete jedno kanonické místo:
+
+- šablonu, pokud se mění konkrétní pracovní věta;
+- index nebo rozcestník, pokud šlo o dohledatelnost;
+- rozhodovací záznam, pokud se mění stav původního pravidla;
+- backlog nebo roadmapu, pokud vznikla nová otázka;
+- datovou mapu nebo provozní kartu, pokud se mění hranice sběru dat.
+
+Neopisujte stejný závěr do pěti míst. To je recept na budoucí nesoulad. Lepší je jedno místo pravdy a krátké odkazy z míst, kde člověk pravidlo potká. Pokud musí být věta vidět přímo v pracovním toku, zkraťte ji na akční pravidlo a důvod nechte v rozhodovacím záznamu.
+
+Příklad:
+
+```text
+Kanonické místo:
+Obchodní discovery šablona.
+
+Pracovní věta:
+Při první kvalifikaci se ptáme na rozhodovací horizont, problém a očekávaný výsledek. Velikost firmy nepoužíváme jako automatický kvalifikační údaj.
+
+Rozhodovací záznam:
+Obsahuje důvod a návratový signál.
+
+Index:
+Odkazuje jen na aktuální šablonu, ne na starou opravu.
+```
+
+Tím se oddělí práce od historie. Člověk v provozu dostane krátké pravidlo. Ten, kdo potřebuje auditovat důvod, najde záznam. Nikdo nemusí při každém použití znovu nést celý příběh opravy.
+
+### Uzavírací zpráva týmu
+
+Pokud se změna týká více lidí, pošlete nebo zapište krátkou uzavírací zprávu. Nemá být slavnostní. Má zabránit tomu, aby si každý nesl v hlavě jiný stav.
+
+Použijte formát:
+
+```text
+První běžné review je uzavřené.
+
+Stav:
+
+Aktuální pravidlo:
+
+Kde je zdroj pravdy:
+
+Co už dál nehlídáme zvlášť:
+
+Co by téma znovu otevřelo:
+
+Co kvůli tomu nesbíráme:
+```
+
+Příklad:
+
+```text
+První běžné review je uzavřené.
+
+Stav:
+Běžný rytmus stačí.
+
+Aktuální pravidlo:
+Používáme discovery otázku na rozhodovací horizont a nepřidáváme automatický scoring.
+
+Kde je zdroj pravdy:
+Obchodní discovery šablona.
+
+Co už dál nehlídáme zvlášť:
+Nepíšeme zvláštní kontrolní poznámky k použití šablony.
+
+Co by téma znovu otevřelo:
+Tři po sobě jdoucí relevantní poptávky, u kterých obchod nedokáže určit prioritu ani po nové otázce.
+
+Co kvůli tomu nesbíráme:
+Velikost firmy, rozpočet v prvním formuláři ani automaticky obohacené profily.
+```
+
+Tato zpráva má jednu práci: ukončit mezistav. Pokud po ní vznikne dlouhá diskuse, něco v uzavření nebylo dost jasné. Vraťte se ke stavu, kanonickému místu a návratovému signálu.
+
+### Privacy-first úklid po review
+
+Uzavřené review je vhodný okamžik k úklidu pomocných stop. Ne proto, že by se mělo mazat všechno. Protože pomocné důkazy mají účel jen do chvíle, kdy pomohly rozhodnout.
+
+Projděte čtyři otázky:
+
+- Co musí zůstat, aby tým znal aktuální pravidlo?
+- Co musí zůstat, aby šlo pochopit důvod rozhodnutí?
+- Co vzniklo jen kvůli review a po uzavření už nemá účel?
+- Co obsahuje osobní, zákaznické nebo provozní detaily, které stačí zkrátit nebo anonymizovat?
+
+Typicky zůstává krátký rozhodovací záznam, aktuální šablona a návratový signál. Mizí pracovní exporty, kontrolní kopie, screenshoty, dočasné komentáře a osobní poznámky z ověřování. Pokud některý podklad potřebujete nechat kvůli nové otázce, přesuňte ho do její karty a zkraťte na minimum potřebné pro rozhodnutí.
+
+Codyho komentář: když review skončí, ale všechny pomocné důkazy zůstanou ležet kolem, systém se tváří jako uklizený pokoj s kabely přes celou podlahu. Technicky se dá projít. Prakticky o ně budete zakopávat při každém dalším plánování.
+
+### Karta uzavření prvního běžného review
+
+```text
+Pracovní místo:
+
+Původní důvod zvláštní pozornosti:
+
+Běžný rytmus review:
+
+Co review kontrolovalo:
+
+Co review výslovně nekontrolovalo:
+
+Výsledek review:
+- běžný rytmus stačí
+- lokální úprava hotová
+- doplněný návratový signál
+- nová otázka oddělená
+
+Uzavírací rozhodnutí:
+
+Kanonické místo, kde je závěr propsaný:
+
+Aktuální pracovní věta:
+
+Návratový signál:
+
+Co neotevíráme:
+
+Co uklízíme, mažeme nebo anonymizujeme:
+
+Co nepřidáváme za evidenci:
+
+Kdo potřebuje znát závěr:
+
+Další kontrola:
+- běžný rytmus / návratový signál / samostatná karta nové otázky
+
+Datum:
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: Přečtěte výsledek review a vyberte jeden uzavírací stav.
+2. Minuta 2: Napište jednu aktuální pracovní větu.
+3. Minuta 3: Určete kanonické místo, kam věta patří.
+4. Minuta 4: Zapište návratový signál nebo potvrďte, že zůstává stejný.
+5. Minuta 5: Pojmenujte, co se kvůli review dál neotevírá.
+6. Minuta 6: Vyberte pomocné stopy k úklidu, zkrácení nebo anonymizaci.
+7. Minuta 7: Pošlete nebo uložte krátkou uzavírací zprávu.
+
+Workshop má skončit zápisem, ne diskusí o ideálním systému. Když se objeví větší téma, dejte ho do samostatné karty a vraťte se k uzavření review. První běžné review není místo, kde se má z bývalé opravy stát nový transformační program. Ano, i když to zní manažersky lákavě. Právě proto ne.
+
+### Checklist uzavření review
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je jasné, jestli pravidlo zůstává v běžném rytmu, dostává lokální úpravu, doplněný návratový signál, nebo oddělenou novou otázku?
+- Je závěr propsaný do kanonického místa, podle kterého lidé pracují?
+- Neopisujeme stejný závěr do více zdrojů pravdy?
+- Existuje krátká pracovní věta bez historického vysvětlování?
+- Je návratový signál konkrétní a viditelný?
+- Je napsané, co znovu neotevíráme?
+- Pokud vznikla nová otázka, má vlastní kartu a vlastní hranici?
+- Uklidili jsme pomocné exporty, screenshoty, kopie a kontrolní komentáře?
+- Zkrátili nebo anonymizovali jsme podklady, které obsahují víc detailů, než je potřeba?
+- Nevznikl nový tracker, CRM pole, report ani ruční evidence jen kvůli pocitu jistoty?
+- Ví tým, kde najde aktuální pravidlo a kdy se k němu vrátit?
+- Končí zvláštní pozornost opravdu uzavřením review?
+
+Dobře uzavřené první běžné review vrátí pravidlo do normálního života. Neudělá z něj relikvii staré opravy, nenechá kolem něj běžet tichý dohled a nepřidá novou datovou stopu jen proto, aby měl tým lepší pocit. Výsledek má být prostý: aktuální pravidlo, správné místo, úzký návratový signál a méně věcí, které se musí příště vysvětlovat.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního běžného review po ukončení zvláštní pozornosti: čtyři uzavírací stavy, propsání do kanonického místa, uzavírací zpráva týmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o prvním běžném review po ukončení zvláštní pozornosti: kontrola aktuální použitelnosti, čtyři výsledky review, prevence návratu mimořádné péče, privacy-first review bez nové evidence, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o třetím běžném cyklu a ukončení zvláštní pozornosti: kdy cyklus zapisovat, tři konce zvláštního režimu, privacy-first úklid, karta a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření první běžné údržby: tři uzavírací stavy, propsání změn do kanonického místa, lokální dočištění, privacy-first úklid datové stopy, karta, mini workshop a checklist.
