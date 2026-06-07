@@ -187454,8 +187454,210 @@ Workshop končí tehdy, když pravidlo nemá zvláštní status. Buď drží v b
 
 První běžná údržba po uzavřeném použití je chvíle, kdy se ukáže, jestli tým opravdu věří vlastnímu uzavření. Když pravidlo drží, nechte ho v klidu. Když zůstala stará cesta, dočistěte ji. Když se objevil nový problém, dejte mu vlastní malý rámec. Hlavně nedovolte, aby se z jednoho vyřešeného signálu stal trvalý zvyk hlídat věci, které už mají normálně fungovat.
 
+## Uzavření první běžné údržby
+
+První běžná údržba má skončit jinak než původní návratový signál. Návratový signál potřeboval pozornost, protože upozornil na možné selhání pravidla. Údržba má naopak potvrdit, že pravidlo už zase patří do normálního provozu, případně že stačí jedna lokální oprava nebo samostatná karta pro nový nález. Pokud po údržbě zůstane pocit "ještě to radši sledujme", údržba nesplnila hlavní úkol: zmenšit mimořádnou pozornost zpět na běžný rytmus.
+
+Uzavření údržby proto začněte větou:
+
+```text
+Po první běžné údržbě se mění:
+
+Nemění se:
+
+Další pozornost vznikne jen pokud:
+```
+
+Tři řádky stačí. První řekne, co se opravdu upraví. Druhý chrání stabilní část pravidla před nechtěným přepisem. Třetí zabrání tomu, aby se z opatrnosti stal nekonečný dohled bez spouštěče.
+
+Příklad:
+
+```text
+Po první běžné údržbě se mění:
+V interním obchodním checklistu vyměníme starý odkaz za aktuální šablonu první odpovědi.
+
+Nemění se:
+Text šablony, kvalifikační otázky ani způsob měření poptávek.
+
+Další pozornost vznikne jen pokud:
+Někdo při další běžné poptávce nenajde šablonu bez dotazu v chatu.
+```
+
+Tento zápis uzavírá údržbu a zároveň nechává jasnou podmínku návratu. Není potřeba svolávat další kontrolu jen proto, že se něco kdysi opravovalo. Stačí vědět, jaký signál by ukázal, že uzavření nefunguje.
+
+### Tři uzavírací stavy
+
+Po první běžné údržbě vyberte jeden ze tří uzavíracích stavů:
+
+- Zavřít bez akce: pravidlo drží, staré cesty se nevrátily a datová stopa je čistá.
+- Zavřít po lokálním dočištění: pravidlo drží, ale jedna konkrétní věc se musí opravit ještě před úplným zavřením.
+- Zavřít jako nový samostatný nález: starý signál je uzavřený, ale údržba odkryla jiný problém, který dostane vlastní malý rámec.
+
+Nejsou to tři stupně závažnosti. Jsou to tři druhy práce. První znamená "nic nepřidávat". Druhý znamená "opravit nejbližší místo a nepřepisovat zbytek". Třetí znamená "nelepit nový problém na starou historii".
+
+Stav "zavřít bez akce" je často nejtěžší, protože působí nepracovně. Ve skutečnosti je to výborný výsledek. Tým zkontroloval pravidlo, nenašel důvod k zásahu a nevyrobil práci jen proto, aby údržba vypadala užitečně. To je provozní disciplína, ne lenost.
+
+Stav "zavřít po lokálním dočištění" musí mít malou hranici. Pokud dočištění vyžaduje přepsat pravidlo, změnit formulář, aktualizovat onboarding a přidat měření, není to lokální dočištění. Je to nové téma. Lokální dočištění typicky znamená jeden odkaz, jeden popisek, jednu větu, jednu starou poznámku nebo jeden zbytečný podklad.
+
+Stav "zavřít jako nový samostatný nález" používejte ve chvíli, kdy údržba narazí na reálný problém, ale ten nesouvisí s původním návratovým signálem. Například šablona první odpovědi funguje, ale tým zjistí, že u malých zakázek neumí rozhodnout, kdy nabídnout placené discovery. To není selhání šablony. To je obchodní pravidlo, které si zaslouží vlastní malou otázku.
+
+### Co přesně propsat
+
+Uzavření první běžné údržby má změnit jen místa, která lidé opravdu používají. Nejčastější chyba je propsat závěr do dlouhého logu a nechat starý odkaz v checklistu, šabloně nebo indexu. Pak je formálně hotovo, ale práce dál naráží na stejnou překážku.
+
+Propisujte podle typu výsledku:
+
+- U stavu "zavřít bez akce" stačí krátká uzavírací věta v pracovním logu nebo revizní poznámce.
+- U stavu "zavřít po lokálním dočištění" upravte nejbližší pracovní místo a teprve potom zapište uzavření.
+- U stavu "zavřít jako nový samostatný nález" založte novou malou kartu a v původní údržbě napište, že starý signál zůstává zavřený.
+
+Příklad uzavírací věty:
+
+```text
+První běžná údržba potvrzuje, že pravidlo drží v běžném rytmu. Starý návratový signál zůstává zavřený. Jediná změna: opraven starý odkaz v obchodním checklistu.
+```
+
+Příklad věty pro nový nález:
+
+```text
+Uzavřený návratový signál se nevrací. Nový nález "kdy nabídnout placené discovery u menších poptávek" dostává vlastní kartu v obchodním review a nemění pravidlo první odpovědi.
+```
+
+Takové věty vypadají obyčejně, ale šetří spoustu budoucího tření. Člověk, který se za měsíc vrátí k pravidlu, uvidí současný stav místo archeologické vrstvy starých obav.
+
+### Zavření lokálního dočištění
+
+Když údržba skončí stavem "lokálně dočistit", nezakládejte novou dlouhou smyčku. Dočištění má být tak malé, aby šlo zavřít stejným pracovním průchodem nebo při nejbližším normálním použití.
+
+Použijte jednoduché pravidlo:
+
+```text
+Lokální dočištění zavřeme, když:
+- upravené místo člověk najde bez starého odkazu;
+- nemusí se ptát autora původní změny;
+- výstup práce je stejný nebo lepší;
+- nevznikla nová datová stopa;
+- starý podklad už není potřeba.
+```
+
+Pokud dočištění nejde ověřit takto jednoduše, pravděpodobně není lokální. Vraťte ho do nového nálezu nebo přerámujte otázku. Lepší je přiznat, že se otevřel větší problém, než schovat ho pod nevinné "jen to dočistíme".
+
+Příklad:
+
+```text
+Lokální dočištění:
+Vyměnit odkaz v obchodním checklistu.
+
+Ověření:
+Při další poptávce obchodník použil checklist, našel aktuální šablonu a neposlal dotaz do chatu.
+
+Uzavření:
+Dočištění zavřeno. Starý odkaz smazán. Další kontrola jen v měsíčním obchodním review.
+```
+
+Všimněte si, že ověření nevyžaduje nový tracker, nahrávání práce ani další report. Stačí přirozená pracovní situace.
+
+### Privacy-first uzavření
+
+Uzavření údržby je dobrý okamžik pro poslední úklid datové stopy. Ne proto, že by každý dočasný podklad byl katastrofa. Proto, že provoz se zanáší malými výjimkami. Jedna kopie poptávky v chatu, jeden screenshot v poznámkách, jeden export pro kontrolu, jeden seznam "jen pro jistotu". Po měsíci nikdo neví, co z toho je zdroj pravdy a co jen opuštěná pracovní stopa.
+
+Při uzavření projděte čtyři otázky:
+
+```text
+Zůstává nějaký podklad mimo kanonické místo?
+Obsahuje osobní, zákaznická nebo obchodně citlivá data?
+Je ještě potřeba pro konkrétní rozhodnutí?
+Má jasné smazání, zkrácení nebo anonymizaci?
+```
+
+Výsledek napište jako stav, ne jako dojem:
+
+```text
+Datová stopa po uzavření:
+Starý screenshot smazán. V kanonickém místě zůstává anonymizovaný příklad bez názvu firmy. Žádný nový tracker, export ani ruční seznam nevzniká.
+```
+
+To je přesně typ provozní věty, která podporuje privacy-first kulturu v Evropě. Neříká jen "data chráníme". Ukazuje, jak se ochrana dat projevuje při běžné údržbě.
+
+Codyho komentář: privacy-first není svíčka na dortu, kterou zapíchneme až při auditu. Je to způsob, jak po sobě nenechávat drobné digitální drobky všude, kde jsme zrovna řešili problém. Drobky jsou fajn v kuchyni. V zákaznických datech už méně.
+
+### Karta uzavření první běžné údržby
+
+```text
+Pravidlo nebo pracovní místo:
+
+Původní uzavřený návratový signál:
+
+Výsledek první běžné údržby:
+- zavřít bez akce
+- zavřít po lokálním dočištění
+- zavřít jako nový samostatný nález
+
+Co se mění:
+
+Co se nemění:
+
+Kanonické místo po uzavření:
+
+Lokální dočištění:
+- není / popis:
+
+Ověření lokálního dočištění:
+
+Nový samostatný nález:
+- není / název karty:
+
+Starý signál se vrátí jen pokud:
+
+Datová stopa po uzavření:
+- stejná / menší / dočasně větší do:
+
+Podklady smazané, zkrácené nebo anonymizované:
+
+Další kontrola:
+- jen v běžném rytmu / po jednom běžném použití lokální opravy / podle nové karty
+
+Vlastník:
+
+Datum:
+```
+
+Karta má chránit dvě věci najednou: současné pravidlo a pozornost týmu. Současné pravidlo chrání tím, že říká, co se mění a co ne. Pozornost týmu chrání tím, že starý signál dostane jasnou podmínku návratu místo neurčitého sledování.
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte výsledek první běžné údržby jednou větou.
+2. Minuta 1-2: vyberte jeden ze tří uzavíracích stavů.
+3. Minuta 2-3: napište, co se mění a co se nemění.
+4. Minuta 3-4: určete, jestli existuje lokální dočištění nebo nový samostatný nález.
+5. Minuta 4-5: zavřete datovou stopu a pomocné podklady.
+6. Minuta 5-6: napište podmínku, kdy se starý signál smí vrátit.
+
+Workshop končí teprve tehdy, když starý návratový signál nemá zvláštní status. Buď je zavřený bez akce, zavřený po malé opravě, nebo oddělený od nového nálezu. Nic mezi tím nemusí viset ve vzduchu.
+
+### Checklist uzavření první běžné údržby
+
+- Vybrali jsme jeden ze tří uzavíracích stavů?
+- Je jasné, co se po údržbě mění?
+- Je stejně jasné, co se po údržbě nemění?
+- Pokud pravidlo drží, nezakládáme další kontrolu mimo běžný rytmus?
+- Pokud je potřeba lokální dočištění, je opravdu lokální?
+- Má lokální dočištění jednoduché ověření v přirozené práci?
+- Pokud vznikl nový nález, dostal vlastní kartu místo přilepení ke staré historii?
+- Je starý návratový signál výslovně zavřený?
+- Má starý signál konkrétní podmínku návratu?
+- Je kanonické místo aktuální a bez starých odboček?
+- Smazali jsme staré odkazy, poznámky, screenshoty nebo exporty bez dalšího účelu?
+- Zůstává datová stopa stejná nebo menší?
+- Pokud je dočasně větší, má vlastníka a datum konce?
+- Ví tým, že další kontrola proběhne jen v běžném rytmu nebo podle nové samostatné karty?
+- Nepřibylo osobní hlídání autora původní změny?
+
+Uzavření první běžné údržby je drobný, ale důležitý bod. Tým tím říká: pravidlo prošlo běžným životem, starý signál neřídí naši pozornost a další práce vznikne jen z konkrétního důvodu. Právě tak se z oprav, návratů a údržby nestává nekonečná procesní mlha.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o uzavření první běžné údržby: tři uzavírací stavy, propsání změn do kanonického místa, lokální dočištění, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o první běžné údržbě po uzavření prvního běžného použití: běžný údržbový rytmus, tři stavy po údržbě, skrytý návrat mimořádné péče, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po klidovém provozu: čtyři uzavírací výsledky, propsání do kanonického místa, zavření pomocných stop, privacy-first úklid, týmová zpráva, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o prvním návratovém signálu po klidovém provozu: tři brány před otevřením tématu, čtyři stavy signálu, reakce bez návratu mimořádné péče, privacy-first hranice, karta, mini workshop a checklist.
