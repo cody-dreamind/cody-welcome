@@ -187057,6 +187057,203 @@ Workshop končí buď návratem do běžného rytmu, jednou drobnou opravou nejb
 
 První běžné použití po uzavření návratového signálu je malá zkouška důvěry. Když pravidlo funguje, nechte ho být. Když drhne, opravte nejbližší místo. Když ukáže nový problém, dejte mu vlastní malou otázku. Hlavní výhra není v tom, že už nikdy nic nezadrhne. Hlavní výhra je, že jedno zadrhnutí už automaticky neotevře celý starý svět.
 
+## Uzavření prvního běžného použití po uzavření prvního návratového signálu
+
+První běžné použití je ověřovací okamžik. Uzavření tohoto použití je okamžik rozhodnutí. Tým si musí říct, jestli se pravidlo vrací do normálního provozu, jestli stačí malá oprava nejbližšího místa, nebo jestli se objevil nový signál, který má dostat vlastní malý rámec. Bez uzavření zůstane použití viset jako neurčitá poznámka: "asi to funguje, ale ještě uvidíme". To je nenápadný návrat mimořádné péče.
+
+Uzavření nemá být dlouhé review. Má být krátký pracovní závěr, který se dá přečíst při příštím podobném použití. V ideálním případě se vejde do jedné karty, jedné věty v kanonickém místě a jedné drobné úklidové akce.
+
+Začněte jednoduchou otázkou:
+
+```text
+Co se po prvním běžném použití mění v normální práci?
+```
+
+Možné odpovědi jsou jen čtyři:
+
+- nic, pravidlo prošlo a zůstává v běžném rytmu;
+- mění se cesta k pravidlu;
+- mění se jedna věta, příklad nebo popisek;
+- odděluje se nová malá otázka mimo původní návratový signál.
+
+Pokud odpověď zní "budeme to víc hlídat", vraťte se o krok zpět. To není uzavření. To je nová kontrolní vrstva bez jasného rozhodnutí.
+
+### Čtyři uzavírací stavy
+
+První stav je čisté uzavření bez akce. Pravidlo bylo nalezeno, použito a nevznikla mimořádná pomoc ani větší datová stopa. Do kanonického místa stačí dopsat krátkou větu:
+
+```text
+První běžné použití po uzavření signálu proběhlo bez tření. Pravidlo zůstává v běžném rytmu. Další zvláštní kontrola se nedělá.
+```
+
+Tohle je nejvíc podceňovaný výsledek. Tým často cítí potřebu udělat "ještě něco", aby práce nepůsobila moc malá. Jenže dobré uzavření někdy znamená přesně tohle: nedělat další práci.
+
+Druhý stav je navigační oprava. Pravidlo fungovalo, ale člověk ho hledal na špatném místě, chyběl odkaz, název v indexu nebyl jasný nebo pracovní trasa vedla přes starou poznámku. V takovém případě opravte jen navigaci. Obsah nechte být.
+
+Příklad:
+
+```text
+Výsledek:
+Pravidlo fungovalo, ale člověk ho hledal ve starém checklistu.
+
+Uzavření:
+Do obchodního indexu přidán odkaz na aktuální šablonu první odpovědi.
+
+Co neměníme:
+Text šablony, kvalifikační otázky ani formulář.
+```
+
+Třetí stav je lokální obsahová oprava. Pravidlo bylo na správném místě, ale jedna formulace vedla k nejistotě. Tady opravte nejbližší větu, krátký příklad, název pole nebo hranici použití. Neotevírejte celý dokument.
+
+Příklad:
+
+```text
+Výsledek:
+Člověk nevěděl, jestli se nová věta používá i u menších poptávek.
+
+Uzavření:
+Do šablony doplněna závorka: "Platí i pro menší projekty, pokud poptávka žádá termín hovoru."
+
+Co neměníme:
+Nabídku, segmentaci, cenu ani formulář.
+```
+
+Čtvrtý stav je oddělení nové otázky. První použití může ukázat něco reálného, ale mimo původní signál. To je v pořádku. Nesmí to ale zpětně přepsat uzavřený závěr. Nová otázka dostane vlastní malý rozsah, vlastní návratový signál a vlastní hranici dat.
+
+```text
+Nová otázka:
+U menších poptávek chybí jasná hranice, kdy nabídnout hovor a kdy poslat stručnou odpověď.
+
+Nepatří do původního signálu, protože:
+Původní signál řešil srozumitelnost věty v první odpovědi, ne obchodní kvalifikaci menších poptávek.
+
+Nejmenší další krok:
+U dalších tří menších poptávek ručně zapsat, jestli šlo rozhodnout podle existující nabídky.
+
+Privacy-first hranice:
+Bez nového pole ve formuláři, bez exportu e-mailů, jen anonymizovaná rozhodovací poznámka.
+```
+
+### Co propsat do kanonického místa
+
+Kanonické místo nemá nést celou historii. Má nést aktuální pravidlo a nejkratší důvod, proč platí. Po uzavření prvního běžného použití proto propsání rozdělte:
+
+- do kanonického místa patří aktuální pravidlo, případně opravený odkaz nebo jedna nová věta;
+- do pracovního logu patří stručný záznam, že první použití bylo uzavřeno;
+- do dočasných podkladů patří jen to, co má jasný konec platnosti;
+- do běžné paměti nepatří kopie zákaznických zpráv, screenshoty ani celé diskuse, pokud nejsou nezbytné.
+
+Dobré kanonické propsání vypadá obyčejně:
+
+```text
+Při první odpovědi na poptávku s požadavkem na termín hovoru použij aktuální šablonu "První odpověď". Platí i pro menší projekty, pokud poptávka žádá konkrétní další krok.
+```
+
+Špatné propsání vypadá jako kronika:
+
+```text
+Po návratovém signálu z ledna a následné debatě v týmu jsme zjistili, že...
+```
+
+Kronika má místo v archivu, ne v pracovní trase. Člověk v provozu nepotřebuje vědět všechno, co se stalo. Potřebuje vědět, co má udělat teď.
+
+### Úklid po uzavření
+
+Uzavření bez úklidu je jen poloviční práce. Po prvním běžném použití často zůstanou malé stopy: dočasná karta, poznámka v chatu, kopie příkladu, screenshot, pomocný odkaz, lokální checklist nebo osobní poznámka autora změny. Každá z nich může později vytáhnout tým zpět do starého kontextu.
+
+Použijte krátký úklidový průchod:
+
+```text
+Dočasné podklady:
+
+Co mažeme:
+
+Co zkracujeme:
+
+Co přesouváme do kanonického místa:
+
+Co necháváme dočasně a do kdy:
+
+Které staré odkazy přestanou být pracovní:
+```
+
+Privacy-first pravidlo je jednoduché: pokud podklad nepomáhá příštímu rozhodnutí, pryč s ním. U zákaznických příkladů většinou stačí vzor bez jména, bez celého e-mailu a bez detailů, podle kterých by šel člověk nebo firma zbytečně poznat.
+
+Codyho komentář: staré pomocné poznámky jsou jako šuplík "na jistotu". Jeden šuplík nevadí. Osm šuplíků je už strategie chaosu s výmluvou, že "se to může hodit". Většinou se to nehodí. Většinou to jen překáží člověku, který chce udělat práci.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Uzavřený návratový signál:
+
+První běžné použití:
+
+Výsledek použití:
+- prošlo bez tření
+- navigační oprava
+- lokální obsahová oprava
+- nová otázka mimo původní signál
+
+Rozhodnutí:
+
+Co se mění v běžné práci:
+
+Co se nemění:
+
+Kanonické místo:
+
+Propsaná věta nebo odkaz:
+
+Dočasné podklady k úklidu:
+
+Datová stopa po uzavření:
+- stejná / menší / dočasně větší do:
+
+Nová otázka, pokud vznikla:
+
+Další kontrola:
+- žádná mimo běžný rytmus / jen při dalším běžném použití / samostatná karta nové otázky
+
+Datum:
+```
+
+Karta je uzavřená až ve chvíli, kdy člověk ví, co má příště udělat bez čtení celé historie. Pokud karta vyžaduje autora původního rozhodnutí jako živou dokumentaci, není uzavřená. Jen přesunula práci z textu do člověka.
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: připomeňte první běžné použití a jeho výsledek.
+2. Minuta 1-2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 2-3: napište, co se mění a co se nemění.
+4. Minuta 3-4: určete kanonické místo a přesnou větu, odkaz nebo opravu.
+5. Minuta 4-5: projděte dočasné podklady a vyberte, co se maže nebo zkracuje.
+6. Minuta 5-6: potvrďte další kontrolu, ideálně žádnou mimo běžný rytmus.
+
+Workshop končí jednou pracovní větou. Například:
+
+```text
+První běžné použití prošlo po drobné navigační opravě; aktuální odkaz je v obchodním indexu, stará poznámka v chatu se nepoužívá a další zvláštní kontrola se nedělá.
+```
+
+Taková věta je lepší než dlouhé shrnutí, protože určuje chování při příští práci.
+
+### Checklist uzavření prvního běžného použití
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je jasné, co se po uzavření mění v běžné práci?
+- Je stejně jasné, co se nemění?
+- Pokud pravidlo prošlo, nepřidali jsme novou kontrolu jen kvůli pocitu jistoty?
+- Pokud šlo o navigaci, opravili jsme cestu místo obsahu?
+- Pokud šlo o obsahové tření, opravili jsme nejbližší větu, příklad nebo popisek?
+- Pokud vznikla nová otázka, oddělili jsme ji od původního signálu?
+- Je kanonické místo aktuální a čitelné bez staré historie?
+- Zmizely staré odkazy, dočasné poznámky nebo screenshoty, které už nejsou potřeba?
+- Zůstala datová stopa stejná nebo menší?
+- Pokud je datová stopa dočasně větší, má konec platnosti?
+- Ví tým, že téma se vrací do běžného rytmu?
+- Nevznikl nový osobní dohled autora původní změny?
+
+Uzavření prvního běžného použití je malý test provozní dospělosti. Nejde o to, aby se už nikdy nic nevrátilo. Jde o to, aby návratový signál po vyřešení nezanechal za sebou nový zvyk všechno hlídat. Dobré pravidlo má po ověření pracovat tiše. A dobrý tým mu to dovolí.
+
 ## Pracovní log
 
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po klidovém provozu: čtyři uzavírací výsledky, propsání do kanonického místa, zavření pomocných stop, privacy-first úklid, týmová zpráva, karta, mini workshop a checklist.
@@ -187885,3 +188082,4 @@ První běžné použití po uzavření návratového signálu je malá zkouška
 - 2026-06-06: Doplněna úvodní podkapitola o uzavření první reakce na návratový signál po klidu: čtyři uzavírací stavy, pravidla pro nezvětšování reakce, privacy-first úklid, karta a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním běžném použití po převodu uzavřené reakce: ověření bez mimořádné péče, tři kontrolní otázky, nejmenší oprava, privacy-first hranice, karta a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o prvním běžném použití po uzavření prvního návratového signálu: tři otázky použití, čtyři výsledky, nejbližší oprava, privacy-first kontrola, karta, mini workshop a checklist.
+- 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření prvního návratového signálu: čtyři uzavírací stavy, propsání do kanonického místa, úklid podkladů, privacy-first datová stopa, karta, mini workshop a checklist.
