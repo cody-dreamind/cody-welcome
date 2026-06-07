@@ -189032,8 +189032,238 @@ Nevzniká nové sledování použití šablony ani kopie zákaznických dat.
 
 První tichá kontrola je úspěšná ve chvíli, kdy po ní zůstane buď nic, nebo jedna malá oprava. Pokud po ní vznikne nový proces, tichý provoz se nepovedlo ochránit. Vraťte se k hranici: pravidlo má fungovat v normální práci, ne vytvářet vlastní malou administrativní planetu.
 
+## Uzavření první tiché kontroly po uzavření do tichého provozu
+
+První tichá kontrola nemá zůstat jako další otevřená poznámka. Pokud proběhla uvnitř běžného rytmu, její uzavření má být stejně nenápadné: potvrdit výsledek, opravit případné lokální tření a vrátit pravidlo zpět do práce bez nové zvláštní pozornosti. Tiché pravidlo se neoslavuje. Tiché pravidlo prostě funguje.
+
+Uzavření začněte jednou větou:
+
+```text
+Po první tiché kontrole má pravidlo stav:
+```
+
+Do věty nepište historii celé opravy. Nepopisujte, proč pravidlo vzniklo, kdo ho kdysi prosadil ani jaké varianty se zvažovaly. To už patří do staršího rozhodovacího záznamu. Teď jde o provozní stav po první kontrole: drží, potřebuje lokální opravu, není samostatné, nebo se opravdu otevřel návratový signál.
+
+Příklad:
+
+```text
+Po první tiché kontrole má discovery šablona stav:
+Drží v tichém provozu. Doplnili jsme jeden příklad zápisu rozhodovacího horizontu a neotevíráme scoring ani nové formulářové pole.
+```
+
+Tato věta je krátká, ale důležitá. Říká týmu, že kontrola skončila. Bez ní se i dobrý výsledek může změnit v měkký mezistav: všichni vědí, že "to asi funguje", ale někdo to příští měsíc stejně raději zkontroluje znovu. A přesně tak se tichý provoz nenápadně vrátí do zvláštní péče.
+
+### Čtyři uzavírací stavy
+
+Po první tiché kontrole vyberte jeden ze čtyř uzavíracích stavů:
+
+- Uzavřít bez další práce: pravidlo bylo použité samostatně a nevzniklo tření.
+- Uzavřít po lokální opravě: pravidlo funguje, ale jedno pracovní místo potřebovalo drobné dočištění.
+- Vrátit do krátké stabilizace: pravidlo se použilo jen díky skryté zvláštní péči.
+- Otevřít návratový signál: objevila se situace, která odpovídá předem popsané hranici návratu.
+
+Každý stav má jiný konec. U prvního stačí zápis a hotovo. U druhého proveďte nejbližší opravu a potom kontrolu zavřete; neopakujte celé review. U třetího přiznejte, že tichý provoz ještě není samostatný, ale nevracejte automaticky celou starou smyčku. U čtvrtého otevřete návrat podle dřívějších pravidel, ale oddělte ho od uzavření kontroly.
+
+Příklad lokální opravy:
+
+```text
+Výsledek kontroly:
+Lokální tření v příkladu zápisu rozhodovacího horizontu.
+
+Oprava:
+Do discovery šablony doplněn příklad: "rozhodnutí do konce kvartálu" a "bez pevného termínu".
+
+Uzavírací stav:
+Uzavřít po lokální opravě.
+
+Co neotevíráme:
+Neotevíráme lead scoring, úpravu formuláře ani nový dashboard.
+```
+
+Příklad skryté zvláštní péče:
+
+```text
+Výsledek kontroly:
+Pravidlo se použilo jen proto, že owner předem poslal správný odkaz.
+
+Uzavírací stav:
+Vrátit do krátké stabilizace.
+
+Nejmenší reakce:
+Přesunout odkaz do kanonického indexu a odstranit starý odkaz z CRM poznámky.
+
+Co neotevíráme:
+Nezakládáme měsíční kontrolu používání šablony.
+```
+
+Rozdíl mezi těmito dvěma příklady je zásadní. Lokální oprava říká: pravidlo je zdravé, jen jedno místo vrzalo. Krátká stabilizace říká: pravidlo zatím potřebuje lepší pracovní domov. Obě reakce jsou malé, ale nemají stejný význam.
+
+### Jak nezaložit nový dohled
+
+Největší riziko po první tiché kontrole je věta "pro jistotu to ještě jednou zkontrolujeme". Občas je oprávněná. Často ale jen prodlužuje zvláštní pozornost, která už měla skončit. Pokud po kontrole nenastal návratový signál a pravidlo se použilo bez zásadního tření, další kontrola nepotřebuje vlastní termín.
+
+Místo dalšího dohledu napište:
+
+```text
+Další pozornost vznikne jen při:
+```
+
+Příklad:
+
+```text
+Další pozornost vznikne jen při opakované situaci, kdy obchod po použití aktuální otázky nedokáže určit rozhodovací horizont.
+```
+
+Tato věta je lepší než "zkontrolujeme příště". Ponechává možnost návratu, ale neudržuje téma při životě jen ze zvyku. Tým ví, co má sledovat v běžné práci, ale nezakládá novou agendu.
+
+Pozor na skryté varianty dohledu:
+
+- nová připomínka v kalendáři bez jasného signálu;
+- pomocná tabulka "jen na pár týdnů";
+- ruční procházení všech výstupů ownerem;
+- pravidelné posílání aktuálního odkazu týmu;
+- dočasný export dat pro kontrolu, který nemá datum smazání.
+
+Pokud něco z toho vzniklo, nejde o uzavření tiché kontroly. Jde o pokračování zvláštní péče. Buď ji pojmenujte jako krátkou stabilizaci, nebo ji zrušte.
+
+Codyho komentář: "pro jistotu" je v provozu moc drahá věta. Zní nevinně, ale často znamená další tabulku, další připomínku a další člověka, který bude za měsíc luštit, proč to vůbec existuje.
+
+### Privacy-first uzavření kontroly
+
+Uzavření první tiché kontroly je dobré místo pro poslední datový úklid. Když kontrola potvrdí, že pravidlo funguje, smažte nebo zavřete dočasné věci, které vznikly kvůli ověření: pomocné poznámky, pracovní kopie šablon, seznamy průchodů, screenshoty, exporty nebo ruční evidence. Pokud mají zůstat, musí mít jasný účel mimo kontrolu.
+
+Do záznamu přidejte krátkou větu:
+
+```text
+Po uzavření kontroly dál nesbíráme ani nedržíme:
+```
+
+Příklad:
+
+```text
+Po uzavření kontroly dál nesbíráme ani nedržíme seznam jednotlivých použití discovery šablony, kopie zákaznických odpovědí ani dočasný export poptávek. Zůstává jen aktuální šablona a návratový signál v rozhodovacím logu.
+```
+
+Tím se tichý provoz vrací i do datové stopy. Nejde jen o méně práce pro tým. Jde o menší počet míst, kde mohou žít zákaznické informace, interní poznámky nebo staré pracovní domněnky. Privacy-first přístup se často pozná právě podle toho, že po dobrém ověření nezůstane hromada důkazů "kdyby náhodou".
+
+Pokud kontrola odhalila návratový signál, úklid pořád platí. Jen oddělte dvě věci: staré dočasné podklady zavřete, nový návratový signál otevřete s vlastním účelem a minimem dat. Starý export nemá automaticky dostat nový život jen proto, že se téma znovu objevilo.
+
+### Karta uzavření první tiché kontroly
+
+```text
+Pravidlo nebo pracovní místo:
+
+Běžný okamžik kontroly:
+
+Výsledek první tiché kontroly:
+- potvrzený tichý provoz / lokální tření / skrytá zvláštní péče / návratový signál
+
+Uzavírací stav:
+- uzavřít bez další práce / uzavřít po lokální opravě / krátká stabilizace / otevřít návratový signál
+
+Co se mění:
+
+Co zůstává v tichém provozu:
+
+Co výslovně neotevíráme:
+
+Další pozornost vznikne jen při:
+
+Jaké dočasné podklady uklízíme:
+
+Po uzavření dál nesbíráme ani nedržíme:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Discovery šablona pro první kvalifikaci poptávky.
+
+Běžný okamžik kontroly:
+Měsíční sales review.
+
+Výsledek první tiché kontroly:
+Lokální tření.
+
+Uzavírací stav:
+Uzavřít po lokální opravě.
+
+Co se mění:
+Do šablony doplněn příklad zápisu rozhodovacího horizontu.
+
+Co zůstává v tichém provozu:
+Pravidlo pro první kvalifikační otázku.
+
+Co výslovně neotevíráme:
+Lead scoring, nové pole ve formuláři ani dashboard kvalifikace.
+
+Další pozornost vznikne jen při:
+Opakované nemožnosti určit prioritu po použití aktuální otázky.
+
+Jaké dočasné podklady uklízíme:
+Poznámku z první kontroly a pracovní kopii šablony.
+
+Po uzavření dál nesbíráme ani nedržíme:
+Seznam jednotlivých použití šablony ani kopie zákaznických odpovědí.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-06-07
+```
+
+### Mini workshop pro tým
+
+Pokud se na uzavření podílí víc lidí, držte workshop pod deset minut:
+
+```text
+1. Jaký byl výsledek první tiché kontroly?
+2. Jaký uzavírací stav vybíráme?
+3. Co je nejmenší změna, pokud nějaká?
+4. Co výslovně neotevíráme?
+5. Jaké dočasné podklady uklízíme?
+```
+
+Na konci musí být jedna uzavírací věta. Pokud tým začne řešit širší nápady, zapište je mimo kartu kontroly a vraťte se ke stavu. Cílem není vymyslet, co všechno by šlo zlepšit. Cílem je zavřít první tichou kontrolu bez toho, aby se z ní stal nový plán.
+
+Dobrá uzavírací věta:
+
+```text
+První tichá kontrola potvrdila použití pravidla; po jednom lokálním doplnění příkladu zůstává pravidlo v tichém provozu a další pozornost vznikne jen při opakovaném návratovém signálu.
+```
+
+Slabá uzavírací věta:
+
+```text
+Zatím to vypadá dobře, ještě uvidíme.
+```
+
+První věta zavírá práci. Druhá věta ji nechává viset v prostoru, kde se z ní časem stane další drobná kontrola.
+
+### Checklist uzavření první tiché kontroly
+
+- Má první tichá kontrola jeden jasný výsledek?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Pokud šlo o lokální tření, opravili jsme nejbližší pracovní místo?
+- Pokud šlo o skrytou zvláštní péči, přiznali jsme krátkou stabilizaci místo falešného klidu?
+- Pokud nastal návratový signál, otevřeli jsme ho odděleně a v nejmenším rozsahu?
+- Nezakládáme novou kontrolu jen "pro jistotu"?
+- Je napsané, co výslovně neotevíráme?
+- Je další pozornost navázaná na konkrétní signál, ne na neurčitý termín?
+- Uklidili jsme dočasné poznámky, kopie, exporty a pomocné evidence?
+- Zůstává jen kanonické pravidlo, návratový signál a nezbytný rozhodovací záznam?
+
+Uzavření první tiché kontroly má být skoro nudný administrativní konec. Právě v tom je jeho síla. Pravidlo prošlo běžnou prací, nezvětšilo datovou stopu a nepotřebuje nový dohled. Pokud po něm zůstane jasná věta, uklizené podklady a žádná nová agenda, tichý provoz není jen hezký název. Je to skutečný provozní stav.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o uzavření první tiché kontroly po uzavření do tichého provozu: čtyři uzavírací stavy, prevence nového dohledu, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o první tiché kontrole po uzavření do tichého provozu: ověření v existujícím rytmu, čtyři výsledky kontroly, skrytá zvláštní péče, privacy-first kontrola bez nové evidence, karta a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém běžném review po uzavření review zvláštní pozornosti: kontrola zbytkové pozornosti, čtyři výsledky review, rušení skrytých kontrol, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního běžného review po ukončení zvláštní pozornosti: čtyři uzavírací stavy, propsání do kanonického místa, uzavírací zpráva týmu, privacy-first úklid, karta, mini workshop a checklist.
