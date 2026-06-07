@@ -189964,8 +189964,238 @@ Pokud se tým během workshopu začne bavit o nové úpravě, vraťte se ke stav
 
 Uzavření prvního dlouhodobého review má zavřít dveře potichu. Když není signál, pravidlo se neoslavuje, nereviduje a nepřipomíná všem pro jistotu. Jen zůstane tam, kde má být. A to je přesně ten druh provozní dospělosti, který šetří čas, data i nervy.
 
+## Druhé dlouhodobé review po tichém provozu
+
+Druhé dlouhodobé review už nemá dokazovat, že pravidlo přežilo první návrat. To udělalo předchozí review. Jeho smysl je jiný: ověřit, jestli se z pravidla nestala tichá povinnost bez hodnoty, jestli návratový signál pořád odpovídá realitě a jestli v systému nezůstaly staré stopy jen proto, že se nikomu nechtělo říct "tohle už nepotřebujeme".
+
+Toto review má být ještě menší než první. Pokud se první dlouhodobé review ptalo "vrátil se problém?", druhé se ptá:
+
+```text
+Je pravidlo pořád užitečné, nenápadné a úměrné riziku?
+```
+
+Slovo úměrné je důležité. Některá pravidla mají zůstat navždy, protože chrání bezpečnost, právní povinnost, data zákazníků nebo důvěru v produkt. Jiná pravidla vznikla jen kvůli dočasnému tření. Když tření zmizí, nemá smysl vláčet za sebou pravidlo jako starý batoh s kamením. Ano, provozní turistika je zvláštní disciplína.
+
+### Co druhé dlouhodobé review kontroluje
+
+Nekontrolujte celou historii. Vyberte jen tři věci:
+
+- zda se pravidlo v posledním období objevilo v reálné práci;
+- zda jeho návratový signál pořád rozlišuje skutečný problém od běžného šumu;
+- zda pravidlo nevytváří víc evidence, schvalování nebo opatrnosti, než kolik odpovídá riziku.
+
+Příklad:
+
+```text
+Pravidlo:
+Slabý podnět může být zavřený bez úkolu.
+
+Reálné použití:
+Při měsíčním review se dvakrát zavřel slabý podnět bez další práce.
+
+Návratový signál:
+Dva slabé podněty po sobě vytvoří úkol bez vlastníka.
+
+Kontrola úměrnosti:
+Pravidlo nevyžaduje novou evidenci. Stačí jedna věta v měsíčním review.
+```
+
+Když neumíte najít reálné použití, neznamená to automaticky, že pravidlo selhalo. Možná jen nebyla situace, kde by bylo potřeba. Rozlišujte proto nečinnost zdravou od nečinnosti mrtvé.
+
+Zdravá nečinnost vypadá takto:
+
+```text
+Situace nenastala a pravidlo kvůli tomu nevytváří žádnou práci navíc.
+```
+
+Mrtvá nečinnost vypadá takto:
+
+```text
+Pravidlo nikdo nepoužívá, ale tým kvůli němu pořád drží šablonu, pole, připomínku nebo kontrolu.
+```
+
+První stav nechte být. Druhý stav ukliďte.
+
+### Čtyři výsledky druhého dlouhodobého review
+
+Po review vyberte jeden ze čtyř stavů:
+
+- `Zůstává beze změny`: pravidlo je stále užitečné, nenápadné a úměrné riziku.
+- `Zjednodušuje se`: pravidlo je užitečné, ale jeho forma je těžší než potřeba.
+- `Přesouvá se do archivní paměti`: pravidlo už není aktivně potřeba, ale poučení má zůstat dohledatelné.
+- `Otevírá se nové rozhodnutí`: realita se změnila natolik, že staré pravidlo už neodpovídá práci.
+
+Stav `Zjednodušuje se` je častější, než tým čeká. Po několika měsících bývá jasné, že stačí kratší věta, méně polí nebo přesun pravidla z hlavní šablony do poznámky pod čarou. To není ztráta disciplíny. To je údržba.
+
+Stav `Přesouvá se do archivní paměti` používejte opatrně. Archiv není skládka. Pokud se do něj něco přesune, musí být jasné, kdy by se to znovu otevřelo. Jinak si jen vytvoříte elegantnější zaprášenou poličku.
+
+Příklad archivního zápisu:
+
+```text
+Pravidlo přesouváme do archivní paměti, protože riziko se v posledních dvou review neobjevilo a aktivní pravidlo už nevytváří rozhodnutí. Znovu ho otevřeme jen tehdy, když se stejný problém objeví ve dvou po sobě jdoucích měsíčních review.
+```
+
+### Jak zjednodušovat bez ztráty ochrany
+
+Zjednodušení nemá být kosmetická editace. Má odstranit práci, která už nepřináší ochranu ani lepší rozhodnutí.
+
+Nejdřív označte ochranné jádro:
+
+```text
+Toto pravidlo chrání:
+Minimální věta, která musí zůstat:
+Co už je jen historická opatrnost:
+```
+
+Příklad:
+
+```text
+Toto pravidlo chrání:
+Aby slabý podnět automaticky nevznikal jako úkol bez vlastníka.
+
+Minimální věta, která musí zůstat:
+Slabý podnět zavíráme bez úkolu, pokud nemá vlastníka, dopad ani návratový signál.
+
+Co už je jen historická opatrnost:
+Samostatná pomocná karta a kontrolní připomínka po každém review.
+```
+
+Potom odstraňte jen historickou opatrnost. Ochranné jádro zůstává. Pokud tým nedokáže ochranné jádro pojmenovat, pravidlo zatím nezjednodušujte. Nejdřív zjistěte, před čím vlastně chrání.
+
+### Privacy-first úměrnost
+
+Druhé dlouhodobé review je vhodné místo pro otázku, jestli pravidlo nesbírá víc dat, než kolik užitečně používá. U starších pravidel se často stane, že původní kontrola měla smysl v době nejistoty, ale později už jen drží starý export, seznam případů nebo identifikovatelné příklady.
+
+Projděte čtyři otázky:
+
+- Potřebujeme pro další rozhodnutí jednotlivé případy, nebo stačí agregovaná věta?
+- Potřebujeme jména lidí, zákazníků a projektů, nebo stačí typ situace?
+- Má pomocný podklad aktuální účel, vlastníka a retenční konec?
+- Zůstává nějaký dodavatel, nástroj nebo automatizace jen kvůli starému pravidlu?
+
+Privacy-first výsledek má být konkrétní:
+
+```text
+Z aktivního pravidla odstraňujeme seznam jednotlivých případů. Pro dlouhodobé review stačí anonymizovaná věta v měsíčním záznamu a návratový signál.
+```
+
+Nebo:
+
+```text
+Archivní zápis neobsahuje jména zákazníků ani odkazy na původní exporty. Zůstává jen popis vzoru a podmínka znovuotevření.
+```
+
+Codyho komentář: když pravidlo po půl roce potřebuje vlastní datový sklad, možná už to není pravidlo. Možná je to malý provozní produkt, který se tváří jako poznámka. A malé provozní produkty mají nepříjemný zvyk chtít údržbu.
+
+### Karta druhého dlouhodobého review
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Datum druhého dlouhodobého review:
+
+Poslední běžné použití:
+
+Návratový signál:
+
+Je signál pořád platný:
+- ano / zpřesnit / ne
+
+Stav review:
+- zůstává beze změny
+- zjednodušuje se
+- přesouvá se do archivní paměti
+- otevírá se nové rozhodnutí
+
+Ochranné jádro pravidla:
+
+Co odstraňujeme nebo zkracujeme:
+
+Co výslovně necháváme:
+
+Privacy-first úklid:
+
+Podmínka dalšího návratu:
+
+Kde je závěr propsaný:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Slabý podnět může být zavřený bez úkolu.
+
+Kanonické místo:
+Měsíční review, část "Podněty bez další práce".
+
+Datum druhého dlouhodobého review:
+2026-06-07.
+
+Poslední běžné použití:
+Dvě měsíční review po sobě bez návratového signálu.
+
+Návratový signál:
+Dva slabé podněty po sobě vytvoří úkol bez vlastníka.
+
+Je signál pořád platný:
+Ano.
+
+Stav review:
+Zjednodušuje se.
+
+Ochranné jádro pravidla:
+Slabý podnět nezakládá práci bez vlastníka, dopadu a návratového signálu.
+
+Co odstraňujeme nebo zkracujeme:
+Rušíme pomocnou připomínku po review a necháváme jen jednu větu v šabloně.
+
+Co výslovně necháváme:
+Návratový signál a kanonickou větu v měsíčním review.
+
+Privacy-first úklid:
+Mažeme starý seznam jednotlivých podnětů; v logu zůstává anonymizované shrnutí.
+
+Podmínka dalšího návratu:
+Otevřít jen při naplnění návratového signálu nebo při změně review rytmu.
+
+Kde je závěr propsaný:
+Měsíční review šablona a pracovní log.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte kanonické pravidlo a návratový signál.
+2. Minuta 2: pojmenujte poslední reálné použití nebo zdravou nečinnost.
+3. Minuta 3: rozhodněte, jestli je pravidlo úměrné riziku.
+4. Minuta 4: vyberte jeden ze čtyř stavů review.
+5. Minuta 5: napište ochranné jádro pravidla jednou větou.
+6. Minuta 6: odstraňte jednu historickou opatrnost, pokud existuje.
+7. Minuta 7: zapište privacy-first úklid a podmínku dalšího návratu.
+
+Když workshop nenajde žádnou historickou opatrnost, je to dobrý výsledek. Nehledejte práci silou. Druhé dlouhodobé review má potvrdit úměrnost, ne vyrábět změny jen proto, že se tým sešel.
+
+### Checklist druhého dlouhodobého review
+
+- Ptáme se na užitečnost, nenápadnost a úměrnost pravidla?
+- Rozlišili jsme zdravou nečinnost od mrtvé nečinnosti?
+- Kontrolujeme reálné použití, návratový signál a provozní váhu pravidla?
+- Vybrali jsme jeden ze čtyř stavů review?
+- Pokud pravidlo zjednodušujeme, zůstalo ochranné jádro jasné?
+- Pokud pravidlo archivujeme, existuje podmínka znovuotevření?
+- Pokud otevíráme nové rozhodnutí, neobnovujeme automaticky starý rozsah?
+- Odstranili jsme historickou opatrnost, která už nepřináší ochranu?
+- Snížila se datová stopa tam, kde už jednotlivé případy nejsou potřeba?
+- Nezůstal aktivní nástroj, export nebo připomínka jen kvůli starému zvyku?
+- Je závěr propsaný jen do kanonického místa a pracovního logu?
+
+Druhé dlouhodobé review je dobrá zkouška provozní dospělosti. Tým, který umí pravidlo ponechat, zjednodušit nebo archivovat bez dramatu, si chrání pozornost. A pozornost je v malém SaaS týmu skoro stejně vzácná jako dobře pojmenovaný formulářový field. Skoro.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o druhém dlouhodobém review po tichém provozu: kontrola užitečnosti a úměrnosti pravidla, rozlišení zdravé a mrtvé nečinnosti, zjednodušení bez ztráty ochrany, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review po tichém provozu: čtyři uzavírací stavy, uzavírací věta, propsání jen do kanonických míst, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o prvním dlouhodobém review po tichém provozu: kontrola návratového signálu v běžném rytmu, čtyři výsledky review, ochrana před novým dohledem, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého tichého měsíce do dlouhodobého rytmu: kanonické místo pravidla, tři výsledky uzavření, týmová zpráva, privacy-first úklid podkladů, karta, mini workshop a checklist.
