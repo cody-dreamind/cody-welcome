@@ -190193,8 +190193,213 @@ Když workshop nenajde žádnou historickou opatrnost, je to dobrý výsledek. N
 
 Druhé dlouhodobé review je dobrá zkouška provozní dospělosti. Tým, který umí pravidlo ponechat, zjednodušit nebo archivovat bez dramatu, si chrání pozornost. A pozornost je v malém SaaS týmu skoro stejně vzácná jako dobře pojmenovaný formulářový field. Skoro.
 
+## Uzavření druhého dlouhodobého review po tichém provozu
+
+Druhé dlouhodobé review má hodnotu až ve chvíli, kdy po něm nezůstane rozmazaný závěr. Nestačí říct, že pravidlo "vypadá pořád dobře", "asi ho zjednodušíme" nebo "někdy uklidíme staré podklady". Po druhém review už má být jasné, jestli pravidlo zůstává v běžném provozu, zkracuje se, přesouvá do archivní paměti, nebo otevírá nové rozhodnutí.
+
+Uzavření proto udělejte hned na konci review. Cíl není vytvořit velký zápis. Cíl je odříznout zbytečnou další péči a nechat po sobě jen stav, který další člověk pochopí bez účasti na původní historii.
+
+Začněte větou:
+
+```text
+Druhé dlouhodobé review uzavíráme takto:
+```
+
+A vyberte jeden stav:
+
+- `Ponechat`: pravidlo je pořád užitečné, nenápadné a úměrné riziku.
+- `Zkrátit`: ochranné jádro zůstává, ale forma pravidla je těžší, než musí být.
+- `Archivovat`: aktivní pravidlo už nepřináší rozhodnutí, ale poučení má zůstat dohledatelné.
+- `Otevřít nové rozhodnutí`: realita se změnila a starý rámec už nestačí.
+
+Stav `Ponechat` neznamená "pokračovat v kontrolách". Znamená "nechat pravidlo tam, kde je, bez další vrstvy péče". Stav `Zkrátit` neznamená přepsat celou šablonu. Znamená odstranit jednu historickou opatrnost. Stav `Archivovat` neznamená schovat problém pod koberec. Znamená ukončit aktivní pravidlo a nechat jen podmínku návratu. Stav `Otevřít nové rozhodnutí` neznamená obnovit starý projekt. Znamená založit novou kartu k dnešní realitě.
+
+### Uzavírací věta podle stavu
+
+Uzavírací věta má říct tři věci: co review ukázalo, jaký je nový stav a co díky tomu nevzniká.
+
+Příklad pro ponechání:
+
+```text
+Druhé dlouhodobé review potvrzuje, že pravidlo je pořád úměrné riziku. Zůstává v měsíční review šabloně beze změny a nezakládáme žádnou novou kontrolu.
+```
+
+Příklad pro zkrácení:
+
+```text
+Druhé dlouhodobé review potvrzuje ochranné jádro pravidla, ale ruší historickou připomínku po review. Zůstává jen jedna věta v kanonické šabloně a návratový signál.
+```
+
+Příklad pro archivaci:
+
+```text
+Druhé dlouhodobé review přesouvá pravidlo do archivní paměti. Aktivně ho nepoužíváme, protože poslední review neukázala relevantní situaci; znovu ho otevřeme jen při opakovaném návratu stejného problému.
+```
+
+Příklad pro nové rozhodnutí:
+
+```text
+Druhé dlouhodobé review ukázalo změnu reality: původní návratový signál už nerozlišuje skutečné riziko od běžného šumu. Otevíráme novou rozhodovací kartu a neobnovujeme starý rozsah pravidla.
+```
+
+Nejčastější chyba je nechat větu otevřenou. Například: "Pravidlo zatím necháváme a ještě se na něj podíváme." To není uzavření. To je nová skrytá kontrola. Pokud potřebujete další pohled, napište přesně proč, kdy a podle jakého signálu. Jinak práci zavřete.
+
+### Co změnit v kanonickém místě
+
+Po uzavření druhého review upravujte jen pracovní místo, ze kterého se pravidlo příště opravdu použije. Typicky je to šablona review, rozhodovací log, provozní checklist nebo interní playbook. Staré ověřovací poznámky, pomocné tabulky a dočasné karty už nejsou zdroj pravdy.
+
+Praktické pravidlo:
+
+```text
+Po druhém dlouhodobém review upravujeme jen kanonické místo a pracovní log. Všechno ostatní buď mažeme, archivujeme s podmínkou návratu, nebo necháváme být bez další údržby.
+```
+
+Příklad zkrácení v šabloně:
+
+```text
+Původní věta:
+Při každém review ověřte, zda slabé podněty nevytvářejí úkoly bez vlastníka, a zapište výsledek do pomocné kontroly.
+
+Zkrácená věta:
+Slabý podnět nezakládá práci bez vlastníka, dopadu a návratového signálu.
+```
+
+Zkrácená věta je lepší, protože žije přímo v okamžiku rozhodnutí. Nepotřebuje pomocnou kontrolu. Nevyžaduje nový záznam. Připomíná pravidlo přesně tam, kde může zabránit zbytečné práci.
+
+Příklad archivace:
+
+```text
+Archivní záznam:
+Pravidlo pro slabé podněty bylo aktivní po období, kdy tým zakládal úkoly bez vlastníka. Po dvou dlouhodobých review už aktivní pravidlo nevytváří rozhodnutí. Znovu otevřít jen při dvou po sobě jdoucích review, kde slabý podnět založí úkol bez vlastníka nebo bez návratového signálu.
+```
+
+Archivní záznam má být krátký. Nepotřebuje kompletní historii, seznam jednotlivých případů ani odkazy na staré exporty. Potřebuje jen poučení a podmínku návratu.
+
+### Privacy-first úklid po druhém review
+
+Druhé dlouhodobé review je dobrá chvíle odstranit poslední zbytky mimořádné péče. Pokud pravidlo přežilo dvě dlouhodobé kontroly, nemá kolem něj zůstávat datový ocas z doby, kdy se teprve ověřovalo.
+
+Projděte čtyři místa:
+
+- dočasné kontrolní poznámky;
+- pomocné tabulky nebo seznamy případů;
+- screenshoty, exporty a kopie pracovních záznamů;
+- příklady, které obsahují jména lidí, zákazníků nebo konkrétní interní situace.
+
+U každého místa vyberte jeden stav:
+
+- `Smazat`: podklad už nemá účel.
+- `Anonymizovat`: stačí typ situace bez identifikace.
+- `Převést do kanonického místa`: je to skutečné pravidlo, ne pomocný důkaz.
+- `Ponechat s retencí`: podklad má jasný účel, vlastníka a konec.
+
+Privacy-first uzavření může znít:
+
+```text
+Po druhém dlouhodobém review zůstává jen kanonická věta a anonymizovaný záznam v pracovním logu. Pomocné příklady a seznam průchodů mažeme, protože už nejsou potřeba pro další rozhodnutí.
+```
+
+Tento úklid není kosmetika. Je to způsob, jak zabránit tomu, aby se z jedné užitečné opravy stala dlouhodobá evidence lidí, zákazníků nebo interních chyb. Dobrý provoz si pamatuje vzor, ne všechno, co se kdy stalo kolem něj.
+
+### Karta uzavření druhého dlouhodobého review
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Výsledek druhého dlouhodobého review:
+- zůstává beze změny / zjednodušuje se / archivuje se / otevírá se nové rozhodnutí
+
+Uzavírací stav:
+- ponechat / zkrátit / archivovat / otevřít nové rozhodnutí
+
+Ochranné jádro:
+
+Jedna uzavírací věta:
+
+Co se mění v kanonickém místě:
+
+Co se výslovně nemění:
+
+Co po review nezakládáme:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Podmínka dalšího návratu:
+
+Jedna věta do pracovního logu:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Slabý podnět může být zavřený bez úkolu.
+
+Kanonické místo:
+Měsíční review, část "Podněty bez další práce".
+
+Výsledek druhého dlouhodobého review:
+Zjednodušuje se.
+
+Uzavírací stav:
+Zkrátit.
+
+Ochranné jádro:
+Slabý podnět nezakládá práci bez vlastníka, dopadu a návratového signálu.
+
+Jedna uzavírací věta:
+Druhé dlouhodobé review potvrzuje ochranné jádro pravidla, ale ruší historickou připomínku po review.
+
+Co se mění v kanonickém místě:
+V šabloně zůstává jen krátká rozhodovací věta a návratový signál.
+
+Co se výslovně nemění:
+Neotevíráme starou kartu změny ani celý proces měsíčního review.
+
+Co po review nezakládáme:
+Žádnou pomocnou tabulku slabých podnětů, další připomínku ani samostatné měření.
+
+Co mažeme, anonymizujeme nebo archivujeme:
+Mažeme dočasný seznam příkladů a ponecháváme anonymizované shrnutí v pracovním logu.
+
+Podmínka dalšího návratu:
+Dva slabé podněty po sobě vytvoří úkol bez vlastníka nebo bez návratového signálu.
+
+Jedna věta do pracovního logu:
+Po druhém dlouhodobém review zůstává pravidlo pro slabé podněty zkrácené na ochranné jádro v měsíční review šabloně.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého dlouhodobého review.
+2. Minuta 2: vyberte uzavírací stav: ponechat, zkrátit, archivovat, nebo otevřít nové rozhodnutí.
+3. Minuta 3: napište ochranné jádro jednou větou.
+4. Minuta 4: určete jedinou změnu v kanonickém místě.
+5. Minuta 5: rozhodněte, které pomocné podklady se smažou, anonymizují nebo archivují.
+6. Minuta 6: napište podmínku dalšího návratu a větu do pracovního logu.
+
+Když se během workshopu objeví nápad na širší úpravu, nedávejte ho automaticky do této karty. Buď patří do stavu `Otevřít nové rozhodnutí`, nebo je to nový podnět s vlastní rozhodovací otázkou. Uzavření druhého dlouhodobého review nemá být zadní vrátka pro další redesign procesu.
+
+### Checklist uzavření druhého dlouhodobého review
+
+- Má review jasný uzavírací stav?
+- Je napsané ochranné jádro pravidla?
+- Pokud pravidlo zkracujeme, odstraňujeme jen historickou opatrnost?
+- Pokud pravidlo archivujeme, má podmínku znovuotevření?
+- Pokud otevíráme nové rozhodnutí, neobnovujeme automaticky starý rozsah?
+- Upravujeme jen kanonické místo, ne všechny staré podklady?
+- Je jasné, co po review nezakládáme?
+- Jsou pomocné tabulky, seznamy, screenshoty a exporty smazané, anonymizované nebo ponechané s retencí?
+- Zůstává v pracovním logu jen stručná, anonymizovaná věta?
+- Umí tým za měsíc poznat stav pravidla bez čtení celé historie?
+
+Dobře uzavřené druhé dlouhodobé review je malé, ale důležité. V ideálním případě po něm pravidlo zabírá méně místa než předtím: má kratší větu, čistší domov, méně podkladů a přesnější návratový signál. To není ústup od disciplíny. To je disciplína, která po sobě uklízí.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review po tichém provozu: uzavírací stavy, věta podle výsledku, úprava kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém dlouhodobém review po tichém provozu: kontrola užitečnosti a úměrnosti pravidla, rozlišení zdravé a mrtvé nečinnosti, zjednodušení bez ztráty ochrany, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review po tichém provozu: čtyři uzavírací stavy, uzavírací věta, propsání jen do kanonických míst, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o prvním dlouhodobém review po tichém provozu: kontrola návratového signálu v běžném rytmu, čtyři výsledky review, ochrana před novým dohledem, privacy-first datová stopa, karta, mini workshop a checklist.
