@@ -187850,8 +187850,160 @@ Starý signál zůstává zavřený a vrátí se jen při reálném selhání do
 
 Druhý běžný cyklus je potvrzení, že uzavření nebylo jen dobrý zápis. Když pravidlo funguje bez doprovodu, nechte ho pracovat. Když potřebuje poslední drobnou oporu, doplňte ji na nejbližším místě. Když se otevře nové téma, dejte mu vlastní rámec. Provoz se zlepšuje hlavně tím, že staré věci umíme opravdu zavřít a nové nezačínáme tahat za jejich minulost.
 
+## Třetí běžný cyklus a konec zvláštní pozornosti
+
+Po druhém běžném cyklu má tým často poslední pokušení: ještě jednou se podívat, jestli pravidlo opravdu drží. Je to pochopitelné, ale ne vždy užitečné. Pokud pravidlo prošlo prvním použitím, první údržbou a druhým běžným cyklem bez návratu staré závislosti, další zvláštní sledování už může být větší problém než samotné riziko.
+
+Třetí běžný cyklus proto není další test staré opravy. Je to rozhodnutí, že pravidlo definitivně patří do normálního provozu. Tým se přestává ptát "funguje ta naše oprava?" a vrací se k běžnější otázce:
+
+```text
+Funguje toto pracovní místo dost dobře pro aktuální práci?
+```
+
+Rozdíl je malý jen na papíře. První otázka drží pozornost u minulého problému. Druhá otázka dívá se na současný účel. Pravidlo už nemusí obhajovat svou existenci kvůli staré chybě. Stačí, aby dál pomáhalo práci.
+
+### Kdy třetí cyklus vůbec zapisovat
+
+Třetí cyklus zapisujte jen tehdy, když by bez zápisu vznikla nejistota. Pokud pravidlo běží tiše, lidé ho používají a žádná stará stopa se nevrací, není nutné vyrábět další kartu jen kvůli pocitu pořádku. Stačí, že pravidlo žije v kanonickém místě a je součástí běžného rytmu.
+
+Zápis dává smysl hlavně ve třech situacích:
+
+- druhý cyklus skončil posledním lokálním dotažením a teď se ověřuje, že dotažení stačilo;
+- tým má tendenci vracet se ke staré historii při každé podobné výjimce;
+- pravidlo je součástí citlivějšího toku, kde by návrat staré stopy znamenal zbytečný sběr dat, nový export nebo horší vysvětlení zákazníkovi.
+
+Pokud žádná z těchto situací neplatí, třetí cyklus neorganizujte. Nechte pravidlo projít běžnou prací a vraťte se k němu až v pravidelném review nebo při skutečném návratovém signálu.
+
+Codyho komentář: nejlepší třetí kontrola je často žádná třetí kontrola. Ne proto, že bychom byli líní. Protože dobrý systém nemá potřebovat slavnostní dohled pokaždé, když udělá přesně to, co má.
+
+### Tři možné konce zvláštní pozornosti
+
+Pokud třetí cyklus zapisujete, vyberte jeden ze tří konců:
+
+- Konec bez další akce: pravidlo drží a zvláštní pozornost končí.
+- Konec po lokálním dočištění: pravidlo drží, ale uklízí se poslední blízká stopa.
+- Nová otázka: cyklus ukázal problém, který už nepatří ke staré opravě.
+
+Nepřidávejte stav "ještě jednou sledovat". Pokud ho chcete použít, napište přesně proč. Většinou se ukáže, že buď chybí konkrétní návratový signál, nebo tým nechce pustit staré téma z ruky. Ani jedno není dobrý důvod pro další zvláštní režim.
+
+Příklad konce bez další akce:
+
+```text
+Třetí běžný cyklus:
+Nový obchodník použil šablonu první odpovědi z kanonického indexu.
+
+Výsledek:
+Pravidlo drží bez vysvětlení historie a bez dotazu na autora změny.
+
+Rozhodnutí:
+Zvláštní pozornost končí. Další kontrola proběhne jen v měsíčním obchodním review nebo při návratovém signálu.
+
+Privacy-first výsledek:
+Nevznikl nový export, screenshot ani evidence použití šablony.
+```
+
+Příklad konce po lokálním dočištění:
+
+```text
+Třetí běžný cyklus:
+Pravidlo fungovalo, ale v onboardingové poznámce zůstal starý odkaz na původní diskusi.
+
+Výsledek:
+Pravidlo drží, problém je jen poslední stopa v sousedním pracovním místě.
+
+Rozhodnutí:
+Odstraňujeme odkaz z onboardingové poznámky. Neotevíráme starou diskusi ani novou revizi šablony.
+```
+
+Příklad nové otázky:
+
+```text
+Třetí běžný cyklus:
+Pravidlo první odpovědi drží, ale opakovaně vzniká nejasnost, kdo má schvalovat nabídku nad určitou částku.
+
+Výsledek:
+To není návrat starého problému se šablonou. Je to nová otázka obchodní odpovědnosti.
+
+Rozhodnutí:
+Zakládáme samostatnou kartu pro schvalování nabídek. Starý návratový signál zůstává zavřený.
+```
+
+### Jak ukončit zvláštní režim
+
+Konec zvláštní pozornosti musí být vidět v pracovním systému. Jinak lidé dál drží v hlavě, že téma je "nějak hlídané", a při každé podobné situaci se vrací k minulosti.
+
+Udělejte tři malé kroky:
+
+1. U kanonického pravidla nechte aktuální pracovní větu a běžný návratový signál.
+2. U staré opravy dopište, že zvláštní režim skončil.
+3. Smažte nebo zkraťte pomocné poznámky, které existovaly jen kvůli ověřování.
+
+Neznamená to mazat rozhodovací paměť. Znamená to odstranit servisní konstrukci kolem pravidla. Pokud někdo za půl roku potřebuje pochopit důvod, najde ho v rozhodovacím záznamu. Při běžné práci ale nemá narážet na stopu každého ověření, které už skončilo.
+
+### Privacy-first konec zvláštní pozornosti
+
+Zvláštní pozornost často vytváří vedlejší data: seznam použití, kontrolní komentáře, screenshoty, exporty, kopie zákaznických zpráv nebo osobní poznámky z předání. Když zvláštní režim končí, tato data musí dostat stav.
+
+Rozdělte je do čtyř skupin:
+
+- Zachovat: kanonické pravidlo, návratový signál a krátký závěr.
+- Zkrátit: rozhodovací záznam, pokud obsahuje příliš mnoho detailů z konkrétních případů.
+- Smazat: dočasné exporty, screenshoty, pracovní kopie a duplicitní komentáře.
+- Přesunout do nové karty: jen podklady, které opravdu souvisí s novou otázkou.
+
+Neukládejte pomocné důkazy "pro jistotu". Pokud už zvláštní režim skončil, jistota má být v dobrém pravidle a návratovém signálu, ne v hromadě historických stop. Privacy-first provoz se pozná i podle toho, že umí po ověření uklidit vlastní lešení.
+
+### Karta ukončení zvláštní pozornosti
+
+```text
+Pravidlo nebo pracovní místo:
+
+Proč mělo zvláštní pozornost:
+
+Co ukázal první a druhý běžný cyklus:
+
+Třetí běžný cyklus zapisujeme, protože:
+
+Výsledek:
+- konec bez další akce
+- konec po lokálním dočištění
+- nová otázka
+
+Co zůstává v kanonickém místě:
+
+Co uklízíme:
+
+Co neotevíráme:
+
+Návratový signál do budoucna:
+
+Privacy-first úklid:
+
+Další kontrola:
+- jen běžný rytmus / samostatná karta nové otázky
+
+Datum:
+```
+
+### Checklist ukončení
+
+- Víme, proč by třetí cyklus měl být vůbec zapsaný?
+- Neorganizujeme další kontrolu jen ze zvyku nebo z opatrnosti bez konkrétního rizika?
+- Rozlišili jsme starou opravu od aktuálního účelu pracovního místa?
+- Vybrali jsme jeden ze tří konců zvláštní pozornosti?
+- Pokud pravidlo drží, končí zvláštní režim opravdu teď?
+- Pokud je potřeba dočištění, je lokální a nevrací starou diskusi?
+- Pokud vznikla nová otázka, má vlastní kartu a netahá za sebou starou historii?
+- Zůstává v kanonickém místě jen aktuální pracovní pravidlo a návratový signál?
+- Uklidili jsme dočasné exporty, screenshoty, kontrolní poznámky a kopie?
+- Nevzniká nový tracker, nové CRM pole ani evidence používání pravidla jen kvůli konci ověřování?
+- Ví tým, že další pozornost patří do běžného rytmu?
+
+Třetí běžný cyklus má být brána zpět do normálu. Pokud pravidlo drží, nechte ho být pravidlem, ne bývalým incidentem s doživotním doprovodem. Pokud se objeví nový problém, dejte mu vlastní rámec. A pokud se vrací stará stopa, opravte přesné místo, ne celou minulost.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o třetím běžném cyklu a ukončení zvláštní pozornosti: kdy cyklus zapisovat, tři konce zvláštního režimu, privacy-first úklid, karta a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření první běžné údržby: tři uzavírací stavy, propsání změn do kanonického místa, lokální dočištění, privacy-first úklid datové stopy, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o první běžné údržbě po uzavření prvního běžného použití: běžný údržbový rytmus, tři stavy po údržbě, skrytý návrat mimořádné péče, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po klidovém provozu: čtyři uzavírací výsledky, propsání do kanonického místa, zavření pomocných stop, privacy-first úklid, týmová zpráva, karta, mini workshop a checklist.
