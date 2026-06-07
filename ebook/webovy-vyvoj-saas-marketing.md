@@ -186622,8 +186622,221 @@ Workshop končí, když je jasné, zda signál zůstává v běžném rytmu, dos
 
 První návratový signál po klidovém provozu je test zralosti systému. Nejde o to, jestli se signál objeví. Objeví se skoro vždycky. Jde o to, jestli tým umí reagovat přiměřeně: ani panika, ani slepota. Klidový provoz zůstane klidový jen tehdy, když má pro návrat signálu jasnou, malou a datově střídmou cestu.
 
+## Uzavření prvního návratového signálu po klidovém provozu
+
+První návratový signál se nemá jen roztřídit. Musí se také uzavřít. Jinak zůstane viset v hlavách lidí jako nejasná poznámka: "něco se tam možná vrací". A přesně tahle nejasnost je živná půda pro tichý návrat mimořádné péče, nových tabulek, opatrných kontrol a starých debat, které už jednou měly skončit.
+
+Uzavření neznamená, že signál zmizel. Znamená, že tým ví, co s ním udělal, co z toho plyne pro běžnou práci a co se dál nehlídá. Dobrý závěr je kratší než původní karta signálu. Nemá znovu vyprávět historii pravidla. Má říct, jestli signál skončil jako šum, lokální servis, nová malá otázka nebo skutečný návrat, a kam se výsledek propsal.
+
+Začněte jednou uzavírací větou:
+
+```text
+Návratový signál uzavíráme jako:
+Znamená to pro běžnou práci:
+Do kanonického místa propisujeme:
+Dál výslovně nehlídáme:
+```
+
+Příklad:
+
+```text
+Návratový signál uzavíráme jako:
+Lokální servis.
+
+Znamená to pro běžnou práci:
+V šabloně odpovědi měníme jednu větu o termínu prvního hovoru.
+
+Do kanonického místa propisujeme:
+Aktuální znění šablony a krátkou poznámku v changelogu.
+
+Dál výslovně nehlídáme:
+Neotevíráme původní formulářovou větev, nepřidáváme nové pole a nezakládáme zvláštní měsíční kontrolu.
+```
+
+Takový zápis je praktický, protože nevyžaduje dlouhé vysvětlování. Kdo přijde později, vidí aktuální pravidlo, krátký důvod změny a hranici, za kterou se starý problém znovu neroztahuje.
+
+### Čtyři uzavírací výsledky
+
+Podle stavu signálu uzavřete práci jedním ze čtyř výsledků:
+
+- Šum uzavřený bez akce: signál se zapíše jednou větou do běžného review a dál se nesleduje.
+- Lokální servis dokončený: jedno pracovní místo se opraví, změna se propíše do kanonického zdroje a ověření zůstane v dalším běžném použití.
+- Nová malá otázka oddělená: signál se nepřipisuje starému pravidlu, ale dostane samostatnou kartu s vlastním rozsahem.
+- Skutečný návrat omezeně otevřený: původní pravidlo se otevře jen v rozsahu návratové podmínky, ne v celé historické šířce.
+
+Nejčastější chyba je tvářit se, že uzavření je "někdo se na to podívá". To není uzavření. To je neurčitý přesun napětí na jiného člověka. Uzavřený výsledek musí říct, co je aktuální stav práce, kde je zapsaný a kdy se k němu tým vrátí jen v běžném rytmu.
+
+U šumu je dobré být opravdu stručný:
+
+```text
+Signál uzavřen jako šum. Nesplnil návratovou podmínku, nebrání běžné práci a nezakládá novou evidenci.
+```
+
+U lokálního servisu doplňte přesné místo změny:
+
+```text
+Signál uzavřen jako lokální servis. Aktualizována jedna věta v šabloně odpovědi; ověření proběhne při dalším běžném použití šablony.
+```
+
+U nové malé otázky chraňte staré pravidlo:
+
+```text
+Signál uzavřen jako nová malá otázka. Staré pravidlo zůstává zavřené; nová karta řeší jen landing page pro nový segment.
+```
+
+U skutečného návratu omezte šířku:
+
+```text
+Signál uzavřen jako skutečný návrat. Otevírá se omezená iterace současného formuláře podle návratové podmínky, bez obnovy původního auditního režimu.
+```
+
+### Co propsat do kanonického místa
+
+Kanonické místo nemá spolknout celou kartu signálu. Má dostat jen to, co bude někdo potřebovat při běžné práci:
+
+- aktuální znění pravidla, šablony, formuláře nebo postupu;
+- jednu větu, proč se změna udělala nebo proč se neudělala;
+- hranici, co se znovu neotevírá;
+- návratovou podmínku, pokud se změnila;
+- datum a vlastníka posledního uzavření.
+
+Historii, pracovní poznámky a dočasné důkazy držte mimo hlavní trasu. Pokud jsou ještě potřeba, dejte jim jasnou retenci. Pokud potřeba nejsou, smažte je nebo zkraťte na anonymizovanou lekci. Kanonické místo má být použitelné, ne archeologické naleziště.
+
+Dobré kanonické shrnutí vypadá třeba takto:
+
+```text
+Aktuální pravidlo:
+Poptávkový formulář zůstává beze změny. Šablona první odpovědi nově obsahuje jasnější větu o domluvě termínu.
+
+Důvod:
+Dvě poptávky ukázaly lokální nejasnost v odpovědi, ne návrat problému formuláře.
+
+Neotevíráme:
+Nepřidáváme pole na preferovaný termín a nezavádíme nový export poptávek.
+
+Návratová podmínka:
+Formulář znovu otevřeme jen při třech po sobě jdoucích případech, kdy chybějící termín brání první odpovědi.
+```
+
+Tahle forma drží rozhodnutí blízko práce. Člověk, který šablonu použije za měsíc, nepotřebuje znát celou diskusi. Potřebuje vědět, jak má postupovat teď.
+
+### Jak zavřít pomocné stopy
+
+Návratový signál často vytvoří dočasné stopy: poznámku v chatu, screenshot formuláře, kopii poptávky, krátký export, dokument s úvahou nebo komentář v backlogu. Po uzavření signálu projděte tyto stopy dřív, než si zvyknou bydlet ve sdíleném prostoru.
+
+Použijte jednoduché třídění:
+
+```text
+Ponechat v kanonickém místě:
+Jen aktuální pravidlo a krátké rozhodnutí.
+
+Ponechat dočasně:
+Podklad, který bude potřeba pro nejbližší běžné ověření.
+
+Zkrátit:
+Podklad s užitečným vzorem, ale bez potřeby detailů.
+
+Smazat:
+Screenshoty, kopie konkrétních případů, duplicitní poznámky a uklidňovací exporty.
+```
+
+Privacy-first pravidlo je prosté: po uzavření signálu nesmí zůstat víc osobních, obchodních nebo provozních detailů, než kolik je potřeba pro aktuální rozhodnutí. Pokud jste během reakce pracovali s konkrétní poptávkou, přepište ji do vzoru bez identifikátorů. Pokud jste si udělali export, smažte ho po propsání závěru. Pokud jste kvůli signálu založili dočasný dokument, zavřete ho odkazem na kanonické místo nebo ho archivujte s jasným důvodem a koncem platnosti.
+
+Codyho komentář: největší nebezpečí po uzavření není starý problém. Je to stará složka s názvem "dočasně". Ta má v týmech zvláštní talent přežít všechno kromě vědomého smazání.
+
+### Uzavírací zpráva týmu
+
+Když se signál týkal víc než jednoho člověka, pošlete krátkou zprávu. Nemá být reportem. Má odstranit nejasnost:
+
+```text
+Návratový signál kolem [pracovní místo] jsme uzavřeli jako [stav].
+Mění se: [jedna konkrétní změna / nic].
+Nemění se: [co výslovně neotevíráme].
+Další kontrola proběhne jen v běžném rytmu: [kdy/kde].
+```
+
+Příklad:
+
+```text
+Návratový signál kolem první odpovědi na poptávku jsme uzavřeli jako lokální servis.
+Mění se jedna věta v šabloně odpovědi.
+Nemění se formulář, nepřidáváme nové pole a nezakládáme zvláštní sledování.
+Další kontrola proběhne jen při běžném měsíčním review poptávek.
+```
+
+Zpráva je užitečná hlavně proto, že ukončí šeptandu kolem "možná se něco vrací". Když tým ví, že se mění jedna věta a nic dalšího, nevyrobí si bokem vlastní preventivní režim.
+
+### Karta uzavření prvního návratového signálu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Návratový signál:
+
+Původní stav signálu:
+- šum / lokální servis / nová malá otázka / skutečný návrat
+
+Uzavírací výsledek:
+- bez akce
+- lokální servis dokončen
+- nová otázka oddělena
+- omezená iterace otevřena
+
+Co se mění v běžné práci:
+
+Co se nemění:
+
+Co výslovně neotevíráme:
+
+Co se propsalo do kanonického místa:
+
+Jaké pomocné stopy mažeme nebo zkracujeme:
+
+Jaká data dál nesbíráme:
+
+Další kontrola:
+- žádná mimo běžný rytmus / při dalším běžném použití / samostatná karta nové otázky / omezená iterace
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Karta je hotová až ve chvíli, kdy lze odpovědět na otázku: "Co má člověk udělat příště jinak?" Pokud odpověď zní "musí si přečíst celou historii", karta není uzavřená. Je jen přesunutá.
+
+### Mini workshop na 6 minut
+
+1. Minuta 0-1: přečtěte stav signálu z původní karty.
+2. Minuta 1-2: vyberte jeden uzavírací výsledek.
+3. Minuta 2-3: napište, co se mění a co se nemění v běžné práci.
+4. Minuta 3-4: určete, co se propíše do kanonického místa.
+5. Minuta 4-5: projděte pomocné stopy a rozhodněte smazat, zkrátit, ponechat dočasně nebo propsat.
+6. Minuta 5-6: pošlete krátkou uzavírací zprávu nebo zapište, proč není potřeba.
+
+Workshop končí, když signál nemá vlastní mimořádnou trasu. Buď zmizel jako šum, skončil lokální opravou, oddělil se do nové malé otázky, nebo otevřel omezenou iteraci s jasnou hranicí.
+
+### Checklist uzavření prvního návratového signálu
+
+- Vybrali jsme jeden konkrétní uzavírací výsledek?
+- Je jasné, co se mění v běžné práci?
+- Je stejně jasné, co se nemění?
+- Propsali jsme do kanonického místa jen aktuální pravidlo a krátký důvod?
+- Nechali jsme historii a pracovní podklady mimo hlavní trasu?
+- Smazali nebo zkrátili jsme screenshoty, exporty, kopie případů a duplicitní poznámky?
+- Pokud zůstává dočasný podklad, má účel, vlastníka a konec platnosti?
+- Nepřidali jsme zvláštní kontrolu jen kvůli jednomu slabému signálu?
+- Pokud vznikla nová malá otázka, má vlastní rozsah a nepřepisuje staré pravidlo?
+- Pokud jde o skutečný návrat, otevřeli jsme jen omezenou iteraci podle návratové podmínky?
+- Ví tým, zda má příště postupovat jinak?
+- Vrací se téma po uzavření do běžného rytmu, ne do mimořádné péče?
+
+Uzavření prvního návratového signálu je malý, ale důležitý protijed proti procesnímu neklidu. Když se udělá poctivě, tým získá odpověď bez toho, aby znovu nesl celý starý batoh. A když se neudělá, signál se promění v neurčitou opatrnost. Ta bývá dražší než samotná oprava.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po klidovém provozu: čtyři uzavírací výsledky, propsání do kanonického místa, zavření pomocných stop, privacy-first úklid, týmová zpráva, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o prvním návratovém signálu po klidovém provozu: tři brány před otevřením tématu, čtyři stavy signálu, reakce bez návratu mimořádné péče, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review do klidového provozu: čtyři uzavírací výsledky, odstranění skryté péče z běžné trasy, privacy-first úklid datové stopy, karta, týmová zpráva, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém dlouhodobém review bez nové mimořádné péče: inventura skrytých kontrol, čtyři výsledky review, přesun signálů do běžného rytmu, privacy-first úklid podkladů, karta, mini workshop a checklist.
