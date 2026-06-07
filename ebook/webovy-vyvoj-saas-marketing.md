@@ -189412,8 +189412,196 @@ Codyho komentář: druhý tichý měsíc je zkouška, jestli tým opravdu umí p
 
 Druhý tichý měsíc má uzavřít poslední pokušení dál hlídat něco, co už funguje. Když pravidlo obstojí, vraťte ho do normální práce a věnujte pozornost dalšímu skutečnému rozhodnutí. Dlouhý rukopis se udržuje nejen tím, co přidáváte a opravujete, ale i tím, co po dobrém výsledku necháte být.
 
+## Uzavření druhého tichého měsíce do dlouhodobého rytmu
+
+Druhý tichý měsíc je poslední místo, kde má smysl držet kolem pravidla zbytkovou pozornost. Pokud i tady pravidlo obstojí, další práce už nemá být "ještě jedna kontrola". Má to být návrat do normálního rytmu: pravidlo existuje v kanonickém místě, tým ví, kdy se má použít, a další otevření nastane jen při konkrétním návratovém signálu.
+
+Začněte jednou rozhodovací větou:
+
+```text
+Po druhém tichém měsíci necháváme pravidlo v dlouhodobém rytmu, protože [důkaz], a znovu ho otevřeme jen při [návratový signál].
+```
+
+Tahle věta má dvě práce. Zaprvé zavírá starou péči. Zadruhé chrání tým před tím, aby za měsíc někdo řekl: "Radši se na to ještě podívejme." Pokud není nový signál, není důvod otevírat starou opravu. Jestli se pravidlo použilo a fungovalo, je hotovo. Jestli se nepoužilo, ale nevznikl žádný problém ani skrytý dohled, je to také hotovo. Tichý provoz není divadlo s pravidelným potleskem.
+
+### Co musí být před uzavřením jasné
+
+Před uzavřením druhého tichého měsíce si ověřte pět věcí:
+
+- pravidlo má jedno kanonické místo;
+- tým ví, při jaké pracovní situaci pravidlo použít;
+- návratový signál je konkrétní a měřitelný bez nového sledování lidí;
+- neexistuje pomocná evidence, která vznikla jen kvůli tiché kontrole;
+- nikdo nemá neformální povinnost pravidlo hlídat mimo běžný rytmus.
+
+Pokud některý bod chybí, neopravujte celý proces. Dolaďte jen nejbližší místo. Chybí kanonické místo? Doplňte odkaz do indexu nebo šablony. Není jasný návratový signál? Přepište jednu větu. Zůstala pomocná tabulka? Smažte ji nebo ji nahraďte anonymizovaným závěrem. Uzavření nemá být nová optimalizace. Je to úklid posledních opěr.
+
+Příklad:
+
+```text
+Pravidlo:
+Slabý podnět může být při měsíčním review zavřený bez úkolu.
+
+Co druhý tichý měsíc ukázal:
+Pravidlo se použilo jednou a nevznikl žádný zbytečný úkol, tabulka ani zvláštní připomínka.
+
+Kanonické místo:
+Šablona měsíčního review, sekce "Podněty bez další práce".
+
+Návratový signál:
+Dva slabé podněty po sobě znovu skončí úkolem bez vlastníka nebo bez rozhodovací otázky.
+
+Uzavření:
+Pravidlo necháváme v dlouhodobém rytmu. Pomocnou poznámku z kontroly mažeme.
+```
+
+### Tři výsledky uzavření
+
+Po uzavíracím průchodu vyberte jeden ze tří výsledků:
+
+- `Dlouhodobý rytmus potvrzen`: pravidlo je součást běžné práce a nepotřebuje další pozornost.
+- `Lokální úklid před potvrzením`: pravidlo funguje, ale zůstala jedna technická nebo dokumentační stopa k dočištění.
+- `Tichý režim nebyl skutečný`: ukázalo se, že pravidlo pořád žije díky ručnímu dohledu nebo nepsané práci ownera.
+
+U prvního stavu nic dalšího nevymýšlejte. Zapište větu do pracovního logu nebo měsíčního review a hotovo.
+
+U druhého stavu si dejte jednu drobnou opravu s jasným koncem. Ne "udělat pořádek v procesu", ale třeba "smazat pomocný seznam průchodů" nebo "doplnit odkaz na kanonickou šablonu". Po opravě už nedělejte nové review. Stačí ověřit, že stopa zmizela.
+
+U třetího stavu nepředstírejte klid. Když owner pořád posílá správnou formulaci před každým review, pravidlo není v systému. Je v jeho hlavě. V takovém případě vraťte práci o krok zpět: pojmenujte skrytý dohled, převeďte ho do nejbližšího pracovního místa a teprve potom znovu nechte pravidlo běžet.
+
+### Uzavírací zpráva týmu
+
+Tým nepotřebuje dlouhý report. Potřebuje jasnou hranici:
+
+```text
+Uzavřeno:
+[název pravidla] zůstává v dlouhodobém rytmu.
+
+Kde pravidlo najdete:
+[kanonické místo]
+
+Co dál neděláme:
+[žádné další kontroly / žádná pomocná tabulka / žádné ruční připomínky]
+
+Kdy se k tomu vrátíme:
+[konkrétní návratový signál]
+```
+
+Vyplněný příklad:
+
+```text
+Uzavřeno:
+Pravidlo pro zavření slabého podnětu bez úkolu zůstává v dlouhodobém rytmu.
+
+Kde pravidlo najdete:
+Měsíční review, část "Podněty bez další práce".
+
+Co dál neděláme:
+Nevedeme samostatný seznam slabých podnětů a neptáme se na ně mimo review.
+
+Kdy se k tomu vrátíme:
+Když dva slabé podněty po sobě vytvoří úkol bez vlastníka nebo bez rozhodovací otázky.
+```
+
+Tohle je dost. Pokud zpráva potřebuje tři odstavce vysvětlení, uzavření pravděpodobně není hotové.
+
+### Privacy-first uzavření dlouhodobého rytmu
+
+Privacy-first provoz se pozná i podle toho, že po ověření nenechává zbytečné stopy. Druhý tichý měsíc často vytvoří nenápadné drobnosti: dočasnou poznámku, kopii šablony, screenshot pro porovnání, export z nástroje nebo ruční seznam průchodů. Všechny tyto věci mají po uzavření projít stejnou otázkou:
+
+```text
+Potřebujeme tento podklad pro budoucí rozhodnutí, nebo jen dokazuje, že jsme kontrolu udělali?
+```
+
+Pokud jen dokazuje kontrolu, nahraďte ho jednou větou v rozhodovacím logu. Pokud obsahuje zákaznická, osobní nebo provozní data, zkraťte ho na anonymizovaný závěr. Pokud má zůstat, musí mít vlastní účel, vlastní místo a vlastní retenční pravidlo. Jinak z tichého provozu vznikne tichý archiv. A tiché archivy mají nepříjemný zvyk růst, dokud je někdo jednou nemusí uklízet v pátek odpoledne. Skvělý sport, pokud nesnášíte víkendy.
+
+Codyho komentář: uzavření druhého tichého měsíce je malé cvičení v dospělosti systému. Funguje to? Tak to nechte fungovat. Ne každý dobrý výsledek si zaslouží dashboard, meeting a pamětní desku.
+
+### Karta uzavření druhého tichého měsíce
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Co druhý tichý měsíc ukázal:
+
+Výsledek uzavření:
+- dlouhodobý rytmus potvrzen
+- lokální úklid před potvrzením
+- tichý režim nebyl skutečný
+
+Co dál neděláme:
+
+Návratový signál:
+
+Dočasné podklady k odstranění nebo anonymizaci:
+
+Privacy-first stav po uzavření:
+
+Jedna věta do pracovního logu:
+```
+
+Vyplněná karta:
+
+```text
+Pravidlo nebo pracovní místo:
+Slabý podnět může být zavřený bez úkolu.
+
+Kanonické místo:
+Šablona měsíčního review.
+
+Co druhý tichý měsíc ukázal:
+Pravidlo se použilo jednou bez další podpory a bez vzniku nové evidence.
+
+Výsledek uzavření:
+Dlouhodobý rytmus potvrzen.
+
+Co dál neděláme:
+Nezakládáme seznam slabých podnětů, neposíláme zvláštní připomínky a nevracíme se ke staré kartě změny.
+
+Návratový signál:
+Dva slabé podněty po sobě vytvoří úkol bez vlastníka nebo bez rozhodovací otázky.
+
+Dočasné podklady k odstranění nebo anonymizaci:
+Pracovní poznámka z první tiché kontroly bude nahrazena jednou větou v rozhodovacím logu.
+
+Privacy-first stav po uzavření:
+Zůstává jen kanonické pravidlo a anonymizovaný závěr. Nevzniká nová osobní ani zákaznická evidence.
+
+Jedna věta do pracovního logu:
+Pravidlo pro slabé podněty je po druhém tichém měsíci v dlouhodobém rytmu a vrátí se jen při opakovaném zbytečném úkolu.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: napište název pravidla a jeho kanonické místo.
+2. Minuta 2: vyberte jeden ze tří výsledků uzavření.
+3. Minuta 3: pojmenujte, co dál výslovně neděláte.
+4. Minuta 4: ověřte návratový signál.
+5. Minuta 5: najděte dočasné podklady k odstranění nebo anonymizaci.
+6. Minuta 6: napište jednu větu do pracovního logu.
+
+Když se tým zasekne u návratového signálu, neprodlužujte workshop. Zapište lokální úklid před potvrzením a opravte jen tu jednu větu. Když se tým začne bavit o dalších vylepšeních pravidla, dejte je do samostatného backlogu. Uzavření druhého tichého měsíce není produktový brainstorming. Je to zavření dveří, které už nemají zůstat pootevřené.
+
+### Checklist uzavření druhého tichého měsíce
+
+- Má pravidlo jedno kanonické místo?
+- Je jasné, při jaké běžné situaci se pravidlo použije?
+- Vybrali jsme jeden ze tří výsledků uzavření?
+- Pokud je dlouhodobý rytmus potvrzen, nezakládáme další kontrolu?
+- Pokud zbývá lokální úklid, je omezený na jedno nejbližší místo?
+- Pokud tichý režim nebyl skutečný, pojmenovali jsme skrytý dohled bez obviňování lidí?
+- Je napsané, co dál výslovně neděláme?
+- Je návratový signál konkrétní a použitelný bez nového sledování lidí?
+- Jsou dočasné poznámky, kopie, screenshoty, exporty a seznamy průchodů smazané, anonymizované nebo jasně odůvodněné?
+- Zůstává po uzavření menší nebo stejná datová stopa než před tichými kontrolami?
+
+Uzavření druhého tichého měsíce má být konec péče, ne začátek další údržbové vrstvy. Dobrý systém nepotřebuje pořád dokazovat, že funguje. Stačí, že má jasné místo, jasný návratový signál a čisté datové okolí. Zbytek je normální práce.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého tichého měsíce do dlouhodobého rytmu: kanonické místo pravidla, tři výsledky uzavření, týmová zpráva, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém tichém měsíci po uzavřené první tiché kontrole: přirozené použití pravidla, čtyři stavy měsíce, ukončení zbytkové pozornosti, privacy-first konec podkladů a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření první tiché kontroly po uzavření do tichého provozu: čtyři uzavírací stavy, prevence nového dohledu, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o první tiché kontrole po uzavření do tichého provozu: ověření v existujícím rytmu, čtyři výsledky kontroly, skrytá zvláštní péče, privacy-first kontrola bez nové evidence, karta a checklist.
