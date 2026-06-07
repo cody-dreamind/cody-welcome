@@ -186188,8 +186188,235 @@ Codyho komentář: druhé dlouhodobé review je kontrola, jestli jste po úklidu
 
 Druhé dlouhodobé review má chránit stabilní práci před návratem zvláštního režimu. Když je pravidlo zdravé, nechte ho dýchat v běžném rytmu. Když signál opravdu přijde, má mít jasnou cestu. Ale dokud nepřijde, není potřeba kolem něj stavět hlídku.
 
+## Uzavření druhého dlouhodobého review do klidového provozu
+
+Druhé dlouhodobé review není hotové tím, že najdete skrytou mimořádnou péči, zrušíte ji nebo potvrdíte, že žádná nevznikla. Hotové je až ve chvíli, kdy se tým nemusí k review vracet jako k nové malé agendě. Jinak se stane zvláštní věc: review, které mělo zrušit dohled navíc, si samo vyrobí dohled navíc. To je provozní verze toho, když někdo založí komisi pro omezení komisí. Papírově krásné, prakticky trochu únavné.
+
+Uzavření druhého dlouhodobého review má proto jednu pracovní otázku:
+
+```text
+Co po tomto review zůstává v běžné práci a co se zavírá bez dalšího dohledu?
+```
+
+Odpověď musí být krátká. Pokud potřebujete dlouhou obhajobu, pravděpodobně ještě nerozlišujete mezi pravidlem, signálem a starou nejistotou. Pravidlo říká, co se dělá při běžné práci. Signál říká, kdy se téma znovu otevře. Stará nejistota říká, čeho se tým bojí, i když už pro to nemá současný důkaz. Uzavření má první dvě věci ponechat a třetí nechat odejít.
+
+Použijte jednoduchou uzavírací větu:
+
+```text
+Po druhém dlouhodobém review platí:
+V běžném rytmu zůstává:
+Rušíme nebo zavíráme:
+Další signál patří do:
+Téma znovu otevřeme jen když:
+Kvůli datové stopě mažeme, zkracujeme nebo anonymizujeme:
+```
+
+Příklad:
+
+```text
+Po druhém dlouhodobém review platí:
+Minimální poptávkový formulář dál sbírá jen údaje nutné pro první odpověď.
+
+V běžném rytmu zůstává:
+Kvalita poptávek se řeší v měsíčním review webu.
+
+Rušíme nebo zavíráme:
+Týdenní ruční export posledních poptávek a samostatnou poznámku "hlídat formulář po review".
+
+Další signál patří do:
+Měsíčního review webu jako poznámka k opakovanému doptávání.
+
+Téma znovu otevřeme jen když:
+Se třikrát po sobě objeví stejné doptání, které brání první odpovědi.
+
+Kvůli datové stopě mažeme, zkracujeme nebo anonymizujeme:
+Mažeme pracovní exporty poptávek; v rozhodovacím logu zůstává jen anonymizovaný vzor.
+```
+
+Tahle věta je důležitější než samotná délka review. Chrání tým před mlhavým "něco jsme kontrolovali". Po uzavření je jasné, co platí, co mizí a kde se objeví nový signál, pokud bude opravdu potřeba.
+
+### Čtyři uzavírací výsledky
+
+Druhé dlouhodobé review uzavřete jedním ze čtyř výsledků:
+
+- Klidový provoz bez změny: pravidlo funguje a nevznikla žádná skrytá mimořádná péče.
+- Klidový provoz po úklidu: pravidlo funguje, ale zrušili jste kontrolu, export, připomínku nebo poznámku navíc.
+- Klidový provoz s přesunem signálu: užitečný signál zůstává, ale jen uvnitř existujícího review nebo pracovního rytmu.
+- Nová malá otázka mimo starý režim: pravidlo drhne, ale problém pokračuje jako nová omezená iterace, ne jako obnovená mimořádná péče.
+
+Klidový provoz bez změny je nejčistší výsledek. Nepište k němu nový kontrolní plán. Stačí záznam, že druhé dlouhodobé review neukázalo skrytou péči ani nové tření. Pokud k čistému výsledku přidáte pravidelnou připomínku "ověřit, že je pořád čistý", právě jste ho trochu zašpinili.
+
+Klidový provoz po úklidu je prakticky častější. Najdete jeden export, jednu poznámku, jeden sloupec v tabulce nebo jeden zvyk vlastníka, který už nemá rozhodovací hodnotu. Uzavření má říct nejen "rušíme", ale i "co místo toho". Jinak se zrušená kontrola vrátí, jakmile někdo znovu pocítí nejistotu.
+
+Přesun signálu použijte, když by bylo hloupé signál zahodit, ale drahé držet mu vlastní proces. Typicky jde o kvalitu leadů, opakované support dotazy, onboardingové tření, chyby v handoffu nebo nejasné odpovědnosti. Signál má žít tam, kde se o dané oblasti stejně rozhoduje. Nemá mít vlastní malou kapličku s vlastní tabulkou a vlastním správcem.
+
+Nová malá otázka je jediný stav, kdy po review vzniká další práce. I tady ale zavřete starý režim. Nepište "vracíme se k původnímu problému". Napište přesnou novou otázku:
+
+```text
+Nová otázka:
+Při prvním kontaktu u konzultačních služeb chybí zákazníkům jasná volba termínu?
+
+Rozsah:
+Pouze landing page konzultační služby a první odpověď na poptávku.
+
+Stop podmínka:
+Po úpravě ověříme tři nové poptávky nebo 30 dní provozu, podle toho, co nastane dřív.
+
+Co neotevíráme:
+Celý poptávkový formulář, CRM pipeline ani pricing konzultací.
+```
+
+Tím chráníte rozsah. Nová otázka může být užitečná, ale nesmí si půjčovat nekonečnou energii starého problému.
+
+### Co odstranit z běžné trasy
+
+Po druhém dlouhodobém review projděte běžnou trasu a odstraňte vše, co existuje jen kvůli staré obavě:
+
+- dočasné připomínky v kalendáři,
+- ruční exporty,
+- samostatné kontrolní tabulky,
+- poznámky "ještě chvíli hlídat",
+- screenshoty a kopie tiketů,
+- soukromé checklisty vlastníka,
+- duplicitní dashboardové metriky,
+- komentáře v šablonách, které vysvětlují minulý incident místo současného pravidla.
+
+Každá položka musí dostat jeden ze čtyř stavů:
+
+```text
+Ponechat v běžné trase:
+Přesunout do existujícího review:
+Zkrátit do rozhodovací věty:
+Smazat nebo anonymizovat:
+```
+
+Příklad:
+
+```text
+Ponechat v běžné trase:
+Jednu větu v šabloně formuláře: "Sbíráme jen údaje nutné pro první odpověď."
+
+Přesunout do existujícího review:
+Signál opakovaného doptávání do měsíčního review webu.
+
+Zkrátit do rozhodovací věty:
+Poučení z původního review: "Volitelný čas hovoru jen tam, kde první odpověď nabízí termín."
+
+Smazat nebo anonymizovat:
+Týdenní export poptávek, screenshoty konkrétních leadů a poznámku se jmény zákazníků.
+```
+
+Nejčastější chyba je ponechat "pro jistotu" všechno, jen to schovat do archivu. Archiv není kouzelný koš. Pokud má někdo přístup k citlivým starým exportům, pořád držíte data. Pokud existuje starý screenshot s osobními údaji, pořád je to stopa. Pokud se tým musí prohrabávat třemi místy, pořád platíte cenu za neuzavřenou minulost.
+
+### Privacy-first klidový provoz
+
+Privacy-first uzavření druhého dlouhodobého review stojí na jedné disciplíně: data se nemají držet jako talisman proti návratu starého problému. Pokud podklad nepomáhá dnešnímu rozhodnutí, nepatří do běžné práce. Pokud musí zůstat kvůli auditu, smlouvě nebo právní povinnosti, patří do řízeného archivu s omezeným přístupem a retenčním pravidlem.
+
+Praktické otázky:
+
+- Která data vznikla jen kvůli kontrole po prvním review?
+- Má každý podklad aktuální účel?
+- Stačí anonymizovaný vzor místo konkrétních osob?
+- Je jasné datum nebo spouštěč smazání?
+- Má k podkladům přístup jen člověk, který ho opravdu potřebuje?
+- Umí tým použít pravidlo bez starých exportů?
+
+Privacy-first hodnota tady není dekorace na konec kapitoly. Je to provozní úspora. Méně starých podkladů znamená méně rizika, méně vysvětlování, méně přístupů a méně falešného pocitu kontroly. Evropský provoz, kontrola nad daty a minimální stopy nejsou brzda. Jsou způsob, jak nedělat z každé minulé nejistoty malý datový sklad.
+
+Codyho komentář: nejlepší kontrola po kontrole je často žádná další kontrola. Zní to podezřele jednoduše, ale jednoduché věci bývají v provozu nejvíc podezřelé právě proto, že fungují.
+
+### Karta uzavření druhého dlouhodobého review
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kanonické místo:
+
+Datum druhého dlouhodobého review:
+
+Výsledek:
+- klidový provoz bez změny
+- klidový provoz po úklidu
+- klidový provoz s přesunem signálu
+- nová malá otázka mimo starý režim
+
+Co teď platí v běžné práci:
+
+Co rušíme:
+
+Co přesouváme do existujícího rytmu:
+
+Co zkracujeme do rozhodovací věty:
+
+Co mažeme nebo anonymizujeme:
+
+Kam patří další signál:
+
+Kdy se téma znovu otevře:
+
+Co výslovně neotevíráme:
+
+Vlastník:
+```
+
+Karta má být poslední pracovní stopou review, ne začátkem nového řízení. Pokud po jejím vyplnění vznikne další sada úkolů typu "sledovat, jestli jsme dobře zrušili sledování", zastavte se. Buď máte skutečnou novou otázku, nebo jen zbytkovou úzkost. Tyhle dvě věci se v provozu tváří podobně, ale zachází se s nimi úplně jinak.
+
+### Uzavírací zpráva pro tým
+
+Týmu stačí krátká zpráva:
+
+```text
+Uzavřeli jsme druhé dlouhodobé review [pravidlo].
+Výsledek: [klidový provoz / úklid / přesun signálu / nová malá otázka].
+Odteď platí: [jedna pracovní věta].
+Rušíme: [konkrétní kontrola, export, připomínka nebo poznámka].
+Další signál patří do: [běžné místo].
+Znovu otevřeme jen když: [konkrétní návratový signál].
+```
+
+Příklad:
+
+```text
+Uzavřeli jsme druhé dlouhodobé review minimálního poptávkového formuláře.
+Výsledek: klidový provoz po úklidu.
+Odteď platí: kvalita poptávek se řeší v měsíčním review webu, ne v samostatné kontrole formuláře.
+Rušíme týdenní export poptávek a poznámku "hlídat formulář".
+Další signál patří do měsíčního review webu.
+Znovu otevřeme jen když se třikrát po sobě objeví stejné doptání, které brání první odpovědi.
+```
+
+Zpráva nesmí končit větou "budeme průběžně sledovat". To je často jen otevřená vrátka pro návrat zvláštní péče. Pokud něco opravdu sledujete, napište kde, proč a jaké rozhodnutí z toho vznikne. Pokud ne, zavřete to.
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: přečtěte výsledek druhého dlouhodobého review.
+2. Minuta 1-2: vyberte jeden ze čtyř uzavíracích výsledků.
+3. Minuta 2-3: označte vše, co se ruší, přesouvá, zkracuje nebo maže.
+4. Minuta 3-4: napište jednu větu, kam patří další signál.
+5. Minuta 4-5: pošlete nebo uložte uzavírací zprávu pro tým.
+
+Workshop končí až tehdy, když po něm nevznikne nová samostatná evidence. Pokud vznikla, musí mít vlastní rozhodovací otázku a stop podmínku. Bez toho je to jen mimořádná péče v novém kabátě.
+
+### Checklist uzavření druhého dlouhodobého review
+
+- Má review jeden jasný uzavírací výsledek?
+- Je zřejmé, co zůstává v běžné práci?
+- Zrušili jsme kontroly, exporty a připomínky bez současného rozhodnutí?
+- Přesunuli jsme užitečné signály do existujícího rytmu místo nové evidence?
+- Pokud vznikla nová otázka, má vlastní malý rozsah a stop podmínku?
+- Nevracíme se automaticky k celé historii původního problému?
+- Má další signál konkrétní místo a konkrétní návratovou podmínku?
+- Smazali, zkrátili nebo anonymizovali jsme podklady vzniklé jen kvůli staré obavě?
+- Je jasné, které podklady případně zůstávají v řízeném archivu a proč?
+- Dostane tým krátkou zprávu místo dalšího procesu?
+- Umí nový člověk použít pravidlo bez znalosti obou dlouhodobých review?
+- Nevznikla kontrola toho, že jsme zrušili kontrolu?
+
+Uzavření druhého dlouhodobého review má vrátit pravidlu obyčejnost. Obyčejnost je v dobrém provozu silná věc: pravidlo je dohledatelné, signál má cestu, stará data nezabírají místo a nikdo kolem tématu nechodí po špičkách. Když se problém jednou opravdu vrátí, tým ho pozná podle návratového signálu. Do té doby má systém dělat práci, ne udržovat památník na minulou nejistotu.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review do klidového provozu: čtyři uzavírací výsledky, odstranění skryté péče z běžné trasy, privacy-first úklid datové stopy, karta, týmová zpráva, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém dlouhodobém review bez nové mimořádné péče: inventura skrytých kontrol, čtyři výsledky review, přesun signálů do běžného rytmu, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review: převod výsledku do kanonického místa, čtyři způsoby uzavření, úklid starých podkladů, uzavírací zpráva týmu, privacy-first zkrácení datové stopy, karta, mini workshop a checklist.
 - 2026-06-06: Doplněna úvodní podkapitola o prvním dlouhodobém review po trvalém běžném rytmu: kontrola současného účelu pravidla, čtyři výsledné stavy, ochrana rozsahu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
