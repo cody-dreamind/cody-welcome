@@ -1581,6 +1581,8 @@ Když takový zápis vznikne, rukopis splnil účel. Ne proto, že přidal dalš
 
 Pokud iterace vznikla v chatu, přepište její výsledek ještě do místa, kde se změna opravdu udělá. Chat je dobrý na rychlé přemýšlení, ale špatný jako jediný zdroj pravdy: za týden v něm tým těžko pozná, která varianta platí, kdo ji drží a podle čeho se ověří.
 
+Když se při uzavírání objeví další dobré nápady, nelepte je na hotovou iteraci. Zapište je jako samostatné kandidáty s jednou větou důvodu a vraťte se k nim až po ověření hlavního rozhodnutí. Uzavření má chránit výsledek, ne otevírat další nenápadnou větev práce.
+
 ## Rychlé pracovní trasy
 
 Rukopis je dlouhý záměrně, ale první krok má být krátký. Pokud nevíte, kde začít, vyberte trasu podle aktuální situace a po přečtení zapište jednu pracovní větu.
