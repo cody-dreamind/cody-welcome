@@ -187254,8 +187254,209 @@ Taková věta je lepší než dlouhé shrnutí, protože určuje chování při 
 
 Uzavření prvního běžného použití je malý test provozní dospělosti. Nejde o to, aby se už nikdy nic nevrátilo. Jde o to, aby návratový signál po vyřešení nezanechal za sebou nový zvyk všechno hlídat. Dobré pravidlo má po ověření pracovat tiše. A dobrý tým mu to dovolí.
 
+## První běžná údržba po uzavření prvního běžného použití
+
+Když se první běžné použití uzavře, přichází nenápadně těžší část: nechat pravidlo žít v normálním rytmu. Tým už má důkaz, že pravidlo jde najít, použít a nezvětšuje datovou stopu. To ale neznamená, že má vzniknout další zvláštní kontrola. Znamená to, že pravidlo vstupuje do běžné údržby stejným způsobem jako ostatní pracovní místa.
+
+První běžná údržba není opakované ověření. Je to lehká kontrola, jestli se uzavřený signál nezačal znovu tvářit jako samostatné téma. Pokud ano, údržba ho má vrátit na správné místo: buď do běžného pravidla, do malé lokální opravy, nebo do nové samostatné otázky. Pokud ne, údržba nemá vyrábět práci.
+
+Začněte otázkou:
+
+```text
+Co by se při běžné údržbě změnilo, kdybychom o starém návratovém signálu vůbec nevěděli?
+```
+
+Pokud odpověď zní "nic", je to dobrý výsledek. Starý signál už nemá právo přitahovat pozornost jen proto, že kdysi vznikl. Pravidlo prošlo prvním použitím, bylo uzavřeno a teď má být kontrolováno jen podle ceny a užitečnosti v normální práci.
+
+### Co při první údržbě kontrolovat
+
+První běžná údržba má být krátká. Nepouštějte se do celé historie rozhodnutí. Stačí pět kontrolních bodů:
+
+- Je kanonické místo pořád tam, kde ho člověk při práci čeká?
+- Je pravidlo stále napsané jako aktuální pracovní instrukce, ne jako vzpomínka na opravu?
+- Nevznikla kolem něj nová pomocná evidence, která nebyla součástí uzavření?
+- Nevrátil se starý signál přes bok, například jako osobní poznámka, ruční dohled nebo chatová připomínka?
+- Zůstává datová stopa stejná nebo menší než při uzavření?
+
+Tyto otázky jsou záměrně obyčejné. Běžná údržba není audit odvahy ani psychologický rozbor týmu. Je to kontrola, že pravidlo pořád slouží práci a že kolem něj neroste procesní mech.
+
+Příklad:
+
+```text
+Pravidlo:
+Při první odpovědi na poptávku s požadavkem na termín hovoru použij aktuální šablonu "První odpověď".
+
+Stav při údržbě:
+Šablona je v obchodním indexu, lidé ji našli bez dotazu, stará chatová poznámka už se nepoužívá.
+
+Nález:
+V jednom interním checklistu zůstal starý odkaz na původní poznámku.
+
+Reakce:
+Vyměnit odkaz v checklistu. Neměnit šablonu ani formulář.
+```
+
+Tady údržba našla skutečné tření, ale nemusí otevřít celé téma. Stačí opravit nejbližší starou cestu. To je přesně práce, kvůli které běžná údržba existuje.
+
+### Tři stavy po údržbě
+
+Po první běžné údržbě vyberte jeden ze tří stavů:
+
+- Drží v rytmu: pravidlo funguje a není potřeba žádná akce.
+- Lokálně dočistit: pravidlo funguje, ale jedna cesta, věta nebo stará stopa mate práci.
+- Oddělit nový nález: údržba ukázala jiný problém, který nepatří ke starému návratovému signálu.
+
+Stav "sledovat dál" nepoužívejte bez konkrétní podmínky. Pokud opravdu potřebujete kontrolu, napište, co přesně ji spustí. Jinak se údržba změní v permanentní dohled, což je jen pomalejší způsob, jak starý signál nikdy nezavřít.
+
+Dobré zápisy:
+
+```text
+Drží v rytmu:
+Pravidlo je na správném místě, první odpovědi se posílají bez zvláštní pomoci a nevznikla nová evidence. Další kontrola jen v běžném měsíčním review.
+```
+
+```text
+Lokálně dočistit:
+V interním checklistu zůstal starý odkaz. Vyměníme odkaz za aktuální šablonu a starou poznámku nepoužíváme jako pracovní zdroj.
+```
+
+```text
+Oddělit nový nález:
+U menších poptávek se objevuje otázka, kdy nabídnout hovor. To není problém uzavřené šablony první odpovědi. Dostane vlastní malou otázku v obchodním review.
+```
+
+Špatný zápis:
+
+```text
+Budeme to ještě chvíli sledovat.
+```
+
+Taková věta nemá vlastníka, hranici ani důvod. Je to jen neurčitá opatrnost převlečená za odpovědnost.
+
+### Jak nedovolit návrat mimořádné péče
+
+Mimořádná péče se po uzavření často vrací potichu. Nikdo nezaloží nový proces, ale někdo začne "pro jistotu" kontrolovat každý výstup. Někdo si drží kopii staré poznámky. Někdo se ptá autora původní změny, jestli je konkrétní případ v pořádku. Vypadá to nevinně, ale pravidlo tím ztrácí samostatnost.
+
+Při první údržbě proto hledejte hlavně skrytou závislost:
+
+```text
+Musel někdo použít starý kontext?
+Musel někdo požádat autora změny o potvrzení?
+Vznikla ruční kontrola, která není zapsaná v pravidle?
+Ukládá si někdo příklady mimo kanonické místo?
+Používá se starý odkaz, protože aktuální místo není dost vidět?
+```
+
+Pokud najdete skrytou závislost, neobviňujte člověka. Opravte pracovní místo. Člověk si obvykle nedělá boční poznámku proto, že miluje chaos. Dělá ji proto, že aktuální pravidlo není dost blízko práci, není dost jasné, nebo se bojí, že při výjimce nebude mít oporu.
+
+Reakce má být malá:
+
+- přidat jeden odkaz tam, kde člověk práci opravdu začíná;
+- doplnit jednu větu k hranici použití;
+- smazat starý odkaz, který vede do historie;
+- přesunout krátký anonymizovaný příklad do kanonického místa;
+- zapsat, že konkrétní výjimka se řeší běžnou eskalací, ne starým návratovým signálem.
+
+Nejhorší reakce je založit další kontrolní seznam pro kontrolu kontrolního seznamu. To zní absurdně, ale v provozu se podobné věci rodí s výrazem naprosté serióznosti.
+
+### Privacy-first údržba
+
+Privacy-first hodnota první údržby je v tom, že kontroluje i zbytkovou datovou stopu. Po uzavření běžného použití se mohly objevit malé pomocné artefakty: screenshoty, kopie poptávky, ruční seznam případů, dočasná poznámka v chatu nebo export "jen pro jistotu". Údržba má rozhodnout, jestli mají ještě účel.
+
+Použijte jednoduchý průchod:
+
+```text
+Jaký podklad vznikl:
+
+K čemu ještě slouží:
+
+Je potřeba pro příští rozhodnutí:
+- ano / ne
+
+Co s ním uděláme:
+- smazat / zkrátit / anonymizovat / přesunout do kanonického místa / ponechat do:
+
+Kdo to zavře:
+```
+
+Pokud podklad nevede k příštímu rozhodnutí, pryč s ním. Pokud vede, zkraťte ho na vzor. U zákaznických nebo obchodních situací většinou není potřeba celý text zprávy, jméno firmy ani interní obchodní kontext. Stačí popis pracovního tření: "u menší poptávky nebylo jasné, zda nabídnout hovor".
+
+Codyho komentář: dobrá údržba poznámek není uklízení pro uklízení. Je to schopnost nezaměnit paměť týmu za skládku starých důkazů. Historie má pomáhat rozhodovat, ne kazit lidem výhled z pracovního stolu.
+
+### Karta první běžné údržby
+
+```text
+Pravidlo nebo pracovní místo:
+
+Původní uzavřený návratový signál:
+
+Kanonické místo:
+
+Běžný údržbový rytmus:
+
+Co jsme kontrolovali:
+- dohledatelnost
+- aktuální znění
+- staré cesty
+- mimořádná pomoc
+- datová stopa
+
+Výsledek údržby:
+- drží v rytmu
+- lokálně dočistit
+- oddělit nový nález
+
+Nejmenší reakce:
+
+Co výslovně neotevíráme:
+
+Staré stopy k úklidu:
+
+Datová stopa po údržbě:
+- stejná / menší / dočasně větší do:
+
+Další kontrola:
+- jen v běžném rytmu / po lokálním dočištění / samostatná karta nového nálezu
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně jste místo běžné údržby znovu otevřeli staré rozhodnutí. To se může stát, ale pak tomu říkejte pravým jménem a vraťte se k návratovému signálu.
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: najděte kanonické místo a připomeňte uzavřený signál jednou větou.
+2. Minuta 1-2: projděte pět údržbových bodů.
+3. Minuta 2-3: vyberte jeden ze tří stavů po údržbě.
+4. Minuta 3-4: určete nejmenší reakci a co se výslovně neotevírá.
+5. Minuta 4-5: zavřete datovou stopu a další kontrolu.
+
+Workshop končí tehdy, když pravidlo nemá zvláštní status. Buď drží v běžném rytmu, má jednu lokální opravu, nebo nový nález dostal vlastní malý rámec.
+
+### Checklist první běžné údržby
+
+- Kontrolujeme pravidlo v běžném údržbovém rytmu, ne ve zvláštním testu?
+- Neotevřeli jsme celou historii návratového signálu bez nového důvodu?
+- Je kanonické místo pořád dohledatelné v reálné práci?
+- Je pravidlo napsané jako aktuální instrukce, ne jako popis minulého incidentu?
+- Nevznikla skrytá mimořádná pomoc autora původní změny?
+- Nevrátily se staré odkazy, chatové poznámky nebo osobní checklisty?
+- Vybrali jsme jeden ze tří stavů po údržbě?
+- Pokud pravidlo drží, neděláme další kontrolu mimo běžný rytmus?
+- Pokud je potřeba lokální dočištění, opravujeme nejbližší místo?
+- Pokud vznikl nový nález, oddělili jsme ho od původního signálu?
+- Smazali, zkrátili nebo anonymizovali jsme pomocné podklady, které už nejsou potřeba?
+- Zůstala datová stopa stejná nebo menší?
+- Má případná dočasná stopa vlastníka a konec platnosti?
+- Ví tým, že starý návratový signál už nemá zvláštní režim?
+
+První běžná údržba po uzavřeném použití je chvíle, kdy se ukáže, jestli tým opravdu věří vlastnímu uzavření. Když pravidlo drží, nechte ho v klidu. Když zůstala stará cesta, dočistěte ji. Když se objevil nový problém, dejte mu vlastní malý rámec. Hlavně nedovolte, aby se z jednoho vyřešeného signálu stal trvalý zvyk hlídat věci, které už mají normálně fungovat.
+
 ## Pracovní log
 
+- 2026-06-07: Doplněna úvodní podkapitola o první běžné údržbě po uzavření prvního běžného použití: běžný údržbový rytmus, tři stavy po údržbě, skrytý návrat mimořádné péče, privacy-first úklid podkladů, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po klidovém provozu: čtyři uzavírací výsledky, propsání do kanonického místa, zavření pomocných stop, privacy-first úklid, týmová zpráva, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o prvním návratovém signálu po klidovém provozu: tři brány před otevřením tématu, čtyři stavy signálu, reakce bez návratu mimořádné péče, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review do klidového provozu: čtyři uzavírací výsledky, odstranění skryté péče z běžné trasy, privacy-first úklid datové stopy, karta, týmová zpráva, mini workshop a checklist.
