@@ -187655,6 +187655,201 @@ Workshop končí teprve tehdy, když starý návratový signál nemá zvláštn�
 
 Uzavření první běžné údržby je drobný, ale důležitý bod. Tým tím říká: pravidlo prošlo běžným životem, starý signál neřídí naši pozornost a další práce vznikne jen z konkrétního důvodu. Právě tak se z oprav, návratů a údržby nestává nekonečná procesní mlha.
 
+## Druhý běžný cyklus po uzavřené první údržbě
+
+Po uzavření první běžné údržby přichází další tichý test: druhý běžný cyklus. Není to nová kontrola starého návratového signálu. Je to normální práce, při které se ukáže, jestli údržba opravdu zavřela zvláštní pozornost, nebo jestli se starý signál pořád nenápadně lepí na každé další použití.
+
+Druhý běžný cyklus má jednoduchý smysl. Potvrdit, že pravidlo, šablona, index nebo pracovní dohoda funguje bez servisního komentáře. Člověk nemá číst historii opravy, hledat vysvětlení v chatu ani se ptát autora změny, jestli "tohle je ještě ten správný postup". Má udělat práci.
+
+Začněte otázkou:
+
+```text
+Co by člověk v tomto cyklu udělal, kdyby žádný starý návratový signál nikdy neexistoval?
+```
+
+Pokud odpověď odpovídá aktuálnímu pravidlu, jste na dobré cestě. Pokud člověk sahá po starých poznámkách nebo používá dodatečné vysvětlení, první údržba se sice formálně zavřela, ale pravidlo ještě není dost samostatné.
+
+### Co ve druhém cyklu pozorovat
+
+Ve druhém běžném cyklu nesledujte všechno. Vyberte jen chování, které ukazuje samostatnost pravidla:
+
+- člověk začne práci ze správného kanonického místa;
+- nepotřebuje starou historii ani autora původní změny;
+- výsledek odpovídá aktuálnímu pravidlu;
+- případná výjimka se řeší běžnou eskalací, ne návratem ke starému signálu;
+- nevznikne nová pomocná evidence jen proto, že se tým bojí opakování.
+
+Příklad:
+
+```text
+Pravidlo:
+Při první odpovědi na poptávku použij šablonu v obchodním indexu.
+
+Druhý běžný cyklus:
+Obchodník otevře index, použije aktuální šablonu, u specifické poptávky doplní jednu větu podle běžného obchodního úsudku a neposílá dotaz do chatu.
+
+Výsledek:
+Pravidlo je samostatné. Neotevíráme starý návratový signál.
+```
+
+Tady není potřeba měřit nový event ani zakládat report. Důkaz je v přirozeném průchodu prací. To je často nejčistší forma ověření: málo dat, málo hluku, jasný závěr.
+
+### Čtyři výsledky druhého cyklu
+
+Po druhém běžném cyklu vyberte jeden ze čtyř výsledků:
+
+- Samostatně drží: pravidlo funguje bez zvláštní péče a zůstává v běžném rytmu.
+- Potřebuje poslední lokální dotažení: pravidlo funguje, ale jedna blízká věta, odkaz nebo popisek pořád zdržuje práci.
+- Vrací starou závislost: člověk znovu potřeboval historii, autora změny nebo starý podklad.
+- Otevírá nový problém: cyklus odhalil jiné téma, které nepatří ke starému návratovému signálu.
+
+Rozdíl mezi třetím a čtvrtým výsledkem je důležitý. Vrácená stará závislost znamená, že původní uzavření nebylo dost čisté. Nový problém znamená, že starý signál může zůstat zavřený, ale vedle něj vzniká nová otázka. Nemíchejte je dohromady, jinak se z každého provozního nálezu stane nekonečné pokračování staré historie.
+
+Dobré zápisy:
+
+```text
+Samostatně drží:
+Druhý běžný cyklus proběhl z aktuálního indexu bez dotazu a bez nové evidence. Pravidlo zůstává jen v měsíčním obchodním review.
+```
+
+```text
+Poslední lokální dotažení:
+Postup drží, ale v checklistu je popisek "starší šablona", který mate nové lidi. Přejmenujeme popisek. Obsah šablony neměníme.
+```
+
+```text
+Vrací starou závislost:
+Člověk použil starý chatový příklad, protože aktuální pravidlo neříká, co dělat u poptávky bez rozpočtu. Doplníme jednu hranici použití do kanonického místa.
+```
+
+```text
+Otevírá nový problém:
+Pravidlo první odpovědi funguje. Nově se ukázalo, že nemáme jasnou hranici pro placené discovery. To dostává vlastní kartu a nemění uzavřený návratový signál.
+```
+
+### Jak udržet cyklus běžný
+
+Největší riziko druhého cyklu je, že ho tým sám promění ve zvláštní test. Začne předem upozorňovat lidi, že "teď ověřujeme pravidlo", připraví jim kontext, připomene starou historii a pak se diví, že pravidlo funguje. Takové ověření je pohodlné, ale slabé. Testuje připravené prostředí, ne běžný provoz.
+
+Druhý cyklus má proběhnout tam, kde práce přirozeně vzniká:
+
+- v reálné poptávce;
+- při běžném support tiketu;
+- v pravidelném review;
+- při přípravě obsahu;
+- v onboardingovém kroku;
+- při aktualizaci interního checklistu.
+
+Pokud musíte člověku předem vysvětlit, co má najít, neověřujete pravidlo. Ověřujete živou nápovědu. To může být užitečné při školení, ale není to důkaz samostatnosti pracovního místa.
+
+Codyho komentář: druhý běžný cyklus je trochu nevděčný, protože nejlepší výsledek je skoro nudný. Práce prostě proběhne. Nikdo netleská, žádný dashboard se nerozzáří, jen se nic zbytečně nerozbije. V provozu je tohle často luxusní výsledek.
+
+### Privacy-first hranice druhého cyklu
+
+Při druhém cyklu neotevírejte novou datovou stopu jen proto, že chcete mít hezký důkaz. Pokud potřebujete ověřit samostatnost pravidla, většinou stačí krátká anonymizovaná poznámka:
+
+```text
+Druhý cyklus:
+typ situace, ne jméno zákazníka
+
+Použité místo:
+odkaz na kanonické pravidlo
+
+Výsledek:
+samostatně drží / lokálně dotáhnout / vrací starou závislost / nový problém
+
+Datová stopa:
+bez nového exportu, bez screenshotu, bez kopie zákaznické zprávy
+```
+
+Pokud někdo navrhne screenshot, export nebo detailní opis případu, ptejte se:
+
+```text
+Jaké rozhodnutí bez toho nedokážeme udělat?
+```
+
+Když na otázku není konkrétní odpověď, podklad nevytvářejte. U privacy-first provozu není cílem dokázat každou drobnost maximem dat. Cílem je dělat dostatečně dobrá rozhodnutí s nejmenší rozumnou stopou.
+
+### Karta druhého běžného cyklu
+
+```text
+Pravidlo nebo pracovní místo:
+
+Uzavřená první údržba:
+
+Běžná situace druhého cyklu:
+
+Kde člověk práci začal:
+
+Potřeboval starou historii, autora změny nebo pomocný podklad:
+- ne / ano, co přesně:
+
+Výsledek cyklu:
+- samostatně drží
+- potřebuje poslední lokální dotažení
+- vrací starou závislost
+- otevírá nový problém
+
+Nejmenší reakce:
+
+Co výslovně neotevíráme:
+
+Datová stopa:
+- žádná nová / zkrácená poznámka / dočasná stopa do:
+
+Další kontrola:
+- jen běžný rytmus / po lokálním dotažení / samostatná karta nového problému
+
+Vlastník:
+
+Datum:
+```
+
+Karta druhého cyklu nemá být archivní román. Její úkol je rozhodnout, zda pravidlo už opravdu běží samo. Pokud ano, další práce je jednoduchá: nechat ho být.
+
+### Mini workshop na 5 minut
+
+1. Minuta 0-1: popište reálnou situaci druhého cyklu bez staré historie.
+2. Minuta 1-2: ověřte, odkud člověk práci začal a zda potřeboval pomoc.
+3. Minuta 2-3: vyberte jeden ze čtyř výsledků.
+4. Minuta 3-4: napište nejmenší reakci a co se výslovně neotevírá.
+5. Minuta 4-5: zavřete datovou stopu a další kontrolu.
+
+Workshop končí větou:
+
+```text
+Druhý běžný cyklus ukázal, že:
+Další akce je:
+Starý signál zůstává:
+```
+
+Příklad:
+
+```text
+Druhý běžný cyklus ukázal, že pravidlo první odpovědi drží bez zvláštní pomoci.
+Další akce není potřeba.
+Starý signál zůstává zavřený a vrátí se jen při reálném selhání dohledatelnosti šablony.
+```
+
+### Checklist druhého běžného cyklu
+
+- Proběhl cyklus v přirozené práci, ne jako připravený test?
+- Začal člověk ze správného kanonického místa?
+- Nepotřeboval starou historii, autora změny ani chatovou nápovědu?
+- Výsledek práce odpovídal aktuálnímu pravidlu?
+- Pokud vznikla výjimka, řešila se běžnou eskalací?
+- Vybrali jsme jeden ze čtyř výsledků cyklu?
+- Pokud pravidlo samostatně drží, nepřidali jsme další kontrolu?
+- Pokud je potřeba lokální dotažení, je opravdu malé a blízko práci?
+- Pokud se vrátila stará závislost, pojmenovali jsme přesnou chybějící hranu?
+- Pokud vznikl nový problém, dostal vlastní kartu?
+- Starý návratový signál zůstal zavřený, pokud se opravdu nevrátil?
+- Nevznikl nový export, screenshot ani kopie zákaznických dat bez jasného účelu?
+- Datová stopa je stejná, menší nebo má konkrétní konec platnosti?
+- Ví tým, že další pozornost patří do běžného rytmu?
+
+Druhý běžný cyklus je potvrzení, že uzavření nebylo jen dobrý zápis. Když pravidlo funguje bez doprovodu, nechte ho pracovat. Když potřebuje poslední drobnou oporu, doplňte ji na nejbližším místě. Když se otevře nové téma, dejte mu vlastní rámec. Provoz se zlepšuje hlavně tím, že staré věci umíme opravdu zavřít a nové nezačínáme tahat za jejich minulost.
+
 ## Pracovní log
 
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření první běžné údržby: tři uzavírací stavy, propsání změn do kanonického místa, lokální dočištění, privacy-first úklid datové stopy, karta, mini workshop a checklist.
@@ -188486,3 +188681,4 @@ Uzavření první běžné údržby je drobný, ale důležitý bod. Tým tím �
 - 2026-06-06: Doplněna úvodní podkapitola o prvním běžném použití po převodu uzavřené reakce: ověření bez mimořádné péče, tři kontrolní otázky, nejmenší oprava, privacy-first hranice, karta a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o prvním běžném použití po uzavření prvního návratového signálu: tři otázky použití, čtyři výsledky, nejbližší oprava, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření prvního návratového signálu: čtyři uzavírací stavy, propsání do kanonického místa, úklid podkladů, privacy-first datová stopa, karta, mini workshop a checklist.
+- 2026-06-07: Doplněna úvodní podkapitola o druhém běžném cyklu po uzavřené první údržbě: samostatnost pravidla v běžné práci, čtyři výsledky cyklu, poslední lokální dotažení, privacy-first datová stopa, karta, mini workshop a checklist.
