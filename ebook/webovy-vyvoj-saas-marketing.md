@@ -96,6 +96,8 @@ Typické věci k odložení:
 
 Privacy-first poznámka: odložení často chrání data. Když zmenšíte otázku, obvykle nepotřebujete sbírat další identifikátory, nahrávat chování návštěvníků ani posílat víc informací externím službám. Menší důkaz bývá nejen levnější, ale i čistší.
 
+U každé odložené věci si zároveň napište, co by ji znovu otevřelo. Nemusí to být datum; často stačí návratový signál, například deset relevantních poptávek, opakovaná otázka od zákazníků nebo konkrétní provozní problém. Bez signálu se odložení rychle změní v tichý backlog.
+
 ### Karta zmenšeného kroku
 
 ```text
