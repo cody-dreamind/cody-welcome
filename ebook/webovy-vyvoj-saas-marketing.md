@@ -194011,8 +194011,227 @@ Kompas [název] byl podruhé použit v běžné situaci [situace]. Výsledek je 
 
 Druhé nenápadné použití je hranice mezi pravidlem, které ještě někdo drží za ruku, a pravidlem, které už opravdu žije v práci. Když po něm nezůstane nová agenda, ale jen jasnější pracovní místo a méně zbytečných dat, kompas si zaslouží zůstat tichý.
 
+## Uzavření druhého nenápadného použití kompasu
+
+Po druhém nenápadném použití už tým nepotřebuje dokazovat, že kompas existuje. Potřebuje rozhodnout, jestli se pravidlo opravdu stalo součástí práce, nebo jestli se kolem něj pořád vrací malá zvláštní péče. Uzavření proto nemá být delší než samotné použití. Má zavřít jednu smyčku: co se stalo, co zůstává, co mizí a kdy se k tématu vrátit.
+
+Pracovní otázka:
+
+```text
+Můžeme druhé nenápadné použití uzavřít tak, aby kompas zůstal v běžném provozu bez evidence, dohledu a nové servisní agendy?
+```
+
+Pokud odpověď zní ano, nedělejte z toho slavnostní zápis. Tichý provoz se nejlépe potvrzuje tím, že po něm nezůstane nová vrstva. Pokud odpověď zní ne, opravte nejbližší pracovní místo, které bránilo samostatnému použití. Neotevírejte celou historii kompasu jen proto, že jedna situace ukázala chybějící hranu.
+
+### Čtyři uzavírací stavy
+
+Vyberte jeden stav a podle něj uzavřete práci:
+
+- `Nechat tiché`: druhé použití proběhlo samostatně, bez dohledu a bez potřeby zápisu.
+- `Zapsat jednu lokální větu`: pravidlo fungovalo, ale konkrétní pracovní místo potřebuje krátké doplnění.
+- `Zkrátit cestu`: problém nebyl v pravidle, ale v tom, že ho člověk hledal přes zbytečný odkaz, starý název nebo pomocnou poznámku.
+- `Vrátit do krátkého ověření`: zvláštní dohled se vrátil tak silně, že kompas ještě není připravený na tichý provoz.
+
+`Nechat tiché` je plnohodnotný výsledek. Neznamená "nic jsme neudělali". Znamená "práce proběhla správně a nepotřebuje další stopu". V provozu je to často nejlepší známka dospělosti pravidla.
+
+`Zapsat jednu lokální větu` použijte jen tam, kde chybějící hrana přímo pomůže dalšímu člověku. Věta má bydlet v existující šabloně, checklistu, formuláři nebo interním návodu. Nemá z ní vzniknout nový dokument "Používání kompasu v praxi".
+
+`Zkrátit cestu` je údržba navigace. Přesměrujte starý odkaz, přejmenujte nejasný nadpis, smažte mezivrstvu nebo přidejte odkaz na kanonické místo. Princip kompasu se nemění.
+
+`Vrátit do krátkého ověření` je výjimečný stav. Použijte ho jen tehdy, když se při druhém nenápadném použití znovu objevilo ruční schvalování, kontrolní schůzka, tabulka případů nebo pocit, že rozhodnutí nemůže udělat běžná role. I tehdy má být ověření krátké: jedna další běžná situace, jedna oprava, jeden návratový signál.
+
+### Uzavírací věta podle výsledku
+
+Každý stav si zaslouží jinou délku zápisu:
+
+```text
+Nechat tiché:
+Druhé nenápadné použití proběhlo samostatně. Nic nezapisujeme, nic neměníme a kompas zůstává v běžném provozu.
+
+Zapsat jednu lokální větu:
+Druhé použití ukázalo chybějící hranu v [pracovní místo]. Doplněna je věta [věta]. Kompas jako celek se nemění.
+
+Zkrátit cestu:
+Pravidlo fungovalo, ale cesta k němu vedla přes [mezivrstva]. Opravujeme [odkaz/název/umístění] a nevzniká nový proces.
+
+Vrátit do krátkého ověření:
+Při druhém použití se vrátil [typ dohledu]. Ověříme jednu další běžnou situaci po opravě [pracovní místo].
+```
+
+Uzavírací věta má být nudná. To je kompliment. Jakmile potřebuje tři odstavce vysvětlování, pravděpodobně nezavíráte druhé nenápadné použití, ale otevíráte nový problém.
+
+Příklad dobrého uzavření:
+
+```text
+Druhé nenápadné použití kompasu datového minima proběhlo v support šabloně samostatně. Konkrétní zákaznický detail byl nahrazen anonymním vzorem, nevzniká evidence použití a kompas zůstává v běžném provozu. Návrat nastane jen tehdy, když se ve dvou dalších šablonách znovu objeví ruční schvalování anonymizace.
+```
+
+Příklad slabého uzavření:
+
+```text
+Druhé použití dopadlo dobře, proto založíme měsíční kontrolu všech situací, kde kompas mohl pomoci.
+```
+
+To není uzavření. To je nový dohled s hezkou nálepkou. Pokud je pravidlo opravdu živé, nemusí se počítat pokaždé, když někomu zabrání ve špatném rozhodnutí.
+
+### Co po uzavření zůstává
+
+Po uzavření druhého nenápadného použití smí zůstat jen jedna z těchto věcí:
+
+- původní kanonické místo beze změny;
+- jedna lokální věta v existujícím pracovním místě;
+- opravená navigace ke kompasu;
+- krátké ověřovací okno, pokud se vrátil zvláštní dohled.
+
+Všechno ostatní je podezřelé. Hlavně:
+
+- seznam použití kompasu;
+- nová tabulka "příklady dobré praxe";
+- pravidelný report aktivity;
+- kopie pravidla v dalších dokumentech;
+- dlouhé komentáře u konkrétních zákaznických případů;
+- nový tracker nebo formulářové pole jen kvůli kontrole.
+
+Pokud chcete zachovat příklad pro učení, přepište ho na anonymní vzor. Nepotřebujete jméno zákazníka, přesnou doménu, screenshot ani celé vlákno. Stačí rozhodovací tvar:
+
+```text
+Když konkrétní příklad není nutný pro řešení, nahraď ho anonymním vzorem problému.
+```
+
+Codyho komentář: dobré pravidlo po druhém nenápadném použití nepůsobí jako vítězství. Působí jako uklizený stůl. Trochu méně dramatu, trochu méně dat, trochu méně "radši to ještě někam napišme". Překvapivě luxusní věc.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření druhého nenápadného použití má tři části:
+
+1. Smazat nebo zkrátit dočasné pracovní stopy.
+2. Nenechat vzniknout novou evidenci lidí, případů ani rozhodnutí.
+3. Vrátit návratový signál do běžného provozního review, ne do nového sledování.
+
+Kontrolní otázky:
+
+```text
+Zůstává někde konkrétní zákaznický detail, který už není nutný?
+Vznikl seznam použití pravidla?
+Vznikla kopie kompasu v dalším dokumentu?
+Přibyl nový pravidelný report?
+Je návratový signál pozorovatelný z běžné práce?
+```
+
+Dobré uzavření může vypadat takto:
+
+```text
+Dočasné poznámky z druhého použití se mažou. V šabloně zůstává jen anonymní vzor a jedna lokální věta. Nevzniká evidence použití kompasu. Návratový signál je opakované ruční schvalování anonymizace ve dvou dalších běžných šablonách.
+```
+
+Slabé uzavření:
+
+```text
+Dočasné poznámky zatím necháme v archivu, kdyby se hodily pro budoucí školení.
+```
+
+Pokud se mají hodit pro školení, přepište je hned na obecný vzor. Archiv konkrétních detailů "pro jistotu" je jen pomalý způsob, jak ztratit kontrolu nad datovou stopou.
+
+### Karta uzavření druhého nenápadného použití
+
+Kartu vyplňujte jen tehdy, když po uzavření něco měníte. U čistého tichého výsledku stačí žádný zápis, případně jedna věta v běžném review.
+
+```text
+Kompas:
+
+Druhá nenápadná situace:
+
+Výsledek uzavření:
+- nechat tiché
+- zapsat jednu lokální větu
+- zkrátit cestu
+- vrátit do krátkého ověření
+
+Co zůstává:
+
+Co se mění:
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Co výslovně nevzniká:
+- evidence použití
+- nový report
+- nový tracker
+- nová kopie pravidla
+- nová schůzka
+- nová exportní stopa
+
+Návratový signál:
+
+Kde bude vidět bez nového sběru dat:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v pracovních příkladech.
+
+Druhá nenápadná situace:
+Support šablona pro opakovanou chybu v onboardingu.
+
+Výsledek uzavření:
+Zapsat jednu lokální větu.
+
+Co zůstává:
+Kanonický kompas beze změny.
+
+Co se mění:
+Do support šablony přibývá věta: "Konkrétní zákaznický detail nahraď anonymním vzorem, pokud detail není nutný pro řešení."
+
+Co se maže, zkracuje nebo anonymizuje:
+Původní konkrétní příklad v návrhu šablony.
+
+Co výslovně nevzniká:
+Evidence použití, nový report, tracker, kopie pravidla, schůzka ani export.
+
+Návratový signál:
+Dvě další situace, kdy vlastník šablony potřebuje ruční schválení anonymizace.
+
+Kde bude vidět bez nového sběru dat:
+V běžném review support šablon.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou nenápadnou situaci.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: rozhodněte, co po uzavření zůstává.
+4. Minuta 4: smažte nebo anonymizujte dočasné stopy.
+5. Minuta 5: řekněte nahlas, co výslovně nevzniká.
+6. Minuta 6: určete návratový signál v běžném review.
+
+Výstup:
+
+```text
+Druhé nenápadné použití kompasu [název] uzavíráme stavem [stav]. Zůstává [kanonické místo / lokální věta / opravená cesta / krátké ověření], mizí [stopy] a návrat nastane jen při [signál].
+```
+
+### Checklist uzavření druhého nenápadného použití
+
+- Je vybraný jeden ze čtyř uzavíracích stavů?
+- Pokud je stav `nechat tiché`, nevzniká zbytečný zápis?
+- Pokud se zapisuje věta, bydlí v existujícím pracovním místě?
+- Pokud se zkracuje cesta, nemění se samotný princip kompasu?
+- Pokud se vrací krátké ověření, má jednu situaci a jednu stop podmínku?
+- Je jasné, co po uzavření zůstává?
+- Jsou dočasné poznámky smazané, zkrácené nebo anonymizované?
+- Nevzniká evidence použití, nový report, tracker, export ani kopie pravidla?
+- Zůstává návratový signál v běžném review?
+- Nepřibylo žádné nové osobní nebo zákaznické datum?
+- Umí další člověk použít pravidlo bez znalosti tohoto případu?
+- Je uzavření kratší než problém, který řeší?
+
+Uzavření druhého nenápadného použití je dobré místo, kde přestat. Ne proto, že už nikdy nic nepřijde, ale proto, že pravidlo si zaslouží běžný život. Další práce má začít až ve chvíli, kdy se objeví skutečný návratový signál. Do té doby je nejlepší údržba ta, která nevyrábí sama sebe.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého nenápadného použití stálého provozního kompasu: čtyři uzavírací stavy, uzavírací věta, omezení zbytkových stop, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém nenápadném použití stálého provozního kompasu bez obnovení dohledu: samostatnost pravidla, přenos mezi situacemi, čtyři výsledky, odstranění vráceného dohledu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního nenápadného použití stálého provozního kompasu: čtyři uzavírací stavy, práce s jednou větou, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním nenápadném použití stálého provozního kompasu po převodu do tichého provozu: rozlišení běžného použití a nového problému, čtyři výsledky, pracovní věta, privacy-first úklid, karta, mini workshop a checklist.
