@@ -193399,8 +193399,214 @@ Druhé použití kompasu [název] uzavíráme stavem [stav]. V kanonickém míst
 
 Po druhém použití už kompas nepotřebuje dokazovat, že existuje. Potřebuje zůstat na správném místě, držet krátký princip a nechat tým pracovat bez nové vrstvy dohledu. Když se to podaří, největší změna je vlastně nenápadná: pravidlo přestane být projekt a stane se běžnou pracovní hranicí.
 
+## První nenápadné použití kompasu po převodu do tichého provozu
+
+Po převodu kompasu do tichého provozu přichází nejzrádnější fáze: první situace, ve které pravidlo někdo použije, aniž by o tom vznikla zvláštní řeč. Pokud se kolem toho hned svolá kontrola, kompas se ve skutečnosti do tichého provozu nevrátil. Jen dostal nový název pro dohled.
+
+První nenápadné použití má ověřit jednu věc: jestli kompas zůstává součástí práce i bez toho, aby ho někdo slavnostně vytahoval. Člověk narazí na rozhodovací situaci, najde kanonické místo, použije krátký princip, udělá rozhodnutí a pokračuje. Žádný nový report, žádná tabulka použití, žádné dokazování, že pravidlo pořád žije.
+
+Pracovní otázka:
+
+```text
+Dokáže tým použít stálý provozní kompas v běžné situaci tak nenápadně, že po něm zůstane jen správné rozhodnutí a případně jedna krátká pracovní věta?
+```
+
+Nenápadnost neznamená tajnost. Znamená úměrnost. Pokud rozhodnutí mění zákaznickou cestu, formulář, datový tok nebo odpovědnost role, má být dohledatelné. Ale dohledatelnost se nemá měnit v novou evidenční vrstvu jen proto, že kompas konečně funguje.
+
+### Co je ještě použití a co už je nový problém
+
+Za běžné použití kompasu považujte situaci, která splňuje tři podmínky:
+
+- patří do stejné rozhodovací oblasti jako původní kompas;
+- dá se vyřešit existujícím principem nebo jednou přenosovou větou;
+- nevyžaduje nové systematické měření, nový právní výklad ani změnu vlastnictví procesu.
+
+Příklad běžného použití:
+
+```text
+Marketing chce přidat do formuláře pole "rozpočet". Kompas pro datové minimum říká, že údaj sbíráme jen tehdy, když je nutný pro nejbližší rozhodnutí. Tým pole nepřidá plošně a místo toho upraví navazující obchodní otázku v ručním follow-upu.
+```
+
+To je použití kompasu. Nepotřebuje novou kartu, pokud se nezměnil princip.
+
+Příklad nového problému:
+
+```text
+Obchod chce rozlišovat poptávky podle regulovaného odvětví, protože některé typy spolupráce vyžadují jinou smluvní přípravu a jiný bezpečnostní režim.
+```
+
+Tady už nejde jen o datové minimum formuláře. Může jít o obchodní kvalifikaci, odpovědnost, riziko a provozní režim. Starý kompas může pomoct položit otázku, ale nemá novou oblast spolknout.
+
+Codyho komentář: dobrý kompas není univerzální kladivo. Když ho začnete používat na každý šroubek v provozu, za chvíli máte po ruce hlavně ohnuté šroubky a pocit, že nástroj je viník. Není. Jen dostal moc práce.
+
+### Čtyři výsledky nenápadného použití
+
+Po prvním nenápadném použití vyberte jeden ze čtyř stavů:
+
+- `Funguje bez zápisu`: rozhodnutí bylo malé, princip jasný a nevznikla změna, kterou by bylo potřeba dohledat.
+- `Stačí jedna pracovní věta`: rozhodnutí má dopad na aktivní trasu, ale nevyžaduje úpravu kompasu.
+- `Opravit najitelnost`: princip funguje, ale člověk ho hledal moc dlouho nebo skončil u starší kopie.
+- `Oddělit nový problém`: situace vypadala podobně, ale otevřela jinou otázku, která má mít vlastní stop podmínku.
+
+`Funguje bez zápisu` je legitimní výsledek. Ne každé správné rozhodnutí potřebuje stopu. Pokud tým odmítl zbytečné pole, nepřidal tracker nebo nepřenesl data do nové služby, aniž by tím měnil kanonické místo, často stačí žádná nová dokumentace.
+
+`Stačí jedna pracovní věta` použijte tehdy, když se rozhodnutí dotklo pracovního místa, kde by příště mohl vzniknout zmatek. Věta patří tam, kde člověk pracuje: k formuláři, checklistu, šabloně poptávky, sales kartě nebo provoznímu standardu. Ne do nové poznámky "použití kompasu".
+
+`Opravit najitelnost` je lokální úklid. Pokud člověk kompas našel až přes starý odkaz, interní chat nebo něčí paměť, není potřeba měnit princip. Je potřeba opravit cestu k principu.
+
+`Oddělit nový problém` je důležité hlavně pro ochranu krátkosti. Jakmile by doplnění kompasu vyžadovalo nový příklad, novou roli, nový datový účel a nový návratový signál, už to není nenápadné použití. Je to nový pracovní kus.
+
+### Jak vypadá jedna pracovní věta
+
+Jedna pracovní věta nemá shrnovat historii. Má pomoct příštímu člověku udělat stejné rozhodnutí bez rozboru:
+
+```text
+U tohoto formuláře nepřidáváme nový údaj jen kvůli předběžné segmentaci; pokud je údaj potřeba až pro obchodní rozhodnutí, patří do navazující ruční komunikace.
+```
+
+Slabší varianta:
+
+```text
+Rozhodli jsme se zatím rozpočet nepřidávat, ale možná se k tomu vrátíme podle dalších poptávek.
+```
+
+Druhá věta je mlhavá. Neříká, podle jakého principu se rozhodlo, kde je hranice ani co má příští člověk udělat. Takový zápis se tváří opatrně, ale ve skutečnosti jen přesouvá nejistotu do budoucna.
+
+Dobrá pracovní věta má čtyři znaky:
+
+- obsahuje rozhodovací hranici;
+- říká, kde údaj, krok nebo kontrola patří;
+- nepoužívá konkrétní osobní data ani zákaznický detail;
+- dá se vložit do existujícího pracovního místa bez nové sekce.
+
+Pokud věta potřebuje odstavec vysvětlení, nejde o pracovní větu. Zkraťte ji, nebo přiznejte, že otevíráte novou otázku.
+
+### Privacy-first nenápadnost
+
+Tichý provoz je privacy-first výhoda jen tehdy, když opravdu snižuje stopu. Po nenápadném použití se proto ptejte:
+
+```text
+Přidali jsme kvůli rozhodnutí nový údaj?
+Vznikl nový export, screenshot nebo kopie zákaznického příkladu?
+Zůstala někde dočasná poznámka s osobními údaji?
+Začali jsme měřit použití pravidla jen proto, že pravidlo existuje?
+Umí příští člověk rozhodnout podle principu bez znalosti konkrétního případu?
+```
+
+Dobrá odpověď:
+
+```text
+Rozhodnutí se propsalo jednou anonymní větou do checklistu formuláře. Nevznikl nový údaj, tracker, export ani evidence použití kompasu. Dočasná poznámka se maže po propsání věty.
+```
+
+Špatná odpověď:
+
+```text
+Pro jistotu si necháme konkrétní poptávku, interní diskusi a screenshot formuláře, abychom mohli doložit, proč jsme pole nepřidali.
+```
+
+To je přesně typ poctivě vypadajícího odpadu, který privacy-first provoz nemá hromadit. Důkaz má mít účel a životnost. Jakmile se princip propsal do správného místa, citlivý příklad obvykle ztratil práci.
+
+### Karta nenápadného použití kompasu
+
+Kartu vyplňujte jen tehdy, když stav není `Funguje bez zápisu`, nebo když rozhodnutí mění aktivní pracovní místo:
+
+```text
+Kompas:
+
+Běžná situace:
+
+Rozhodnutí jednou větou:
+
+Výsledek:
+- funguje bez zápisu
+- stačí jedna pracovní věta
+- opravit najitelnost
+- oddělit nový problém
+
+Kde se věta propsala, pokud se propsala:
+
+Co se nemění:
+
+Co nevzniká:
+- nová evidence použití
+- nový tracker
+- nový export
+- nové pole
+- nová pravidelná kontrola
+
+Co se maže nebo anonymizuje:
+
+Nový problém, pokud vznikl:
+
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum při úpravě poptávkového formuláře.
+
+Běžná situace:
+Návrh na pole "rozpočet" pro předběžnou segmentaci poptávek.
+
+Rozhodnutí jednou větou:
+Rozpočet nesbíráme plošně ve formuláři, pokud je potřeba až pro obchodní kvalifikaci konkrétní poptávky.
+
+Výsledek:
+Stačí jedna pracovní věta.
+
+Kde se věta propsala:
+Checklist úprav poptávkového formuláře.
+
+Co se nemění:
+Kanonický kompas, struktura formuláře, analytika ani obchodní proces.
+
+Co nevzniká:
+Evidence použití, nový tracker, export poptávek, nové pole ani pravidelná kontrola.
+
+Co se maže nebo anonymizuje:
+Dočasná poznámka k návrhu se maže po propsání věty.
+
+Návratový signál:
+Dva další návrhy na plošné sbírání kvalifikačních údajů během jednoho kvartálu.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte běžnou situaci jednou větou.
+2. Minuta 2: ověřte, jestli patří do stávajícího kompasu.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: napište pracovní větu nebo opravte najitelnost.
+5. Minuta 5: smažte nebo anonymizujte dočasnou stopu a zapište, co nevzniká.
+
+Výstup:
+
+```text
+Kompas [název] byl použit v běžné situaci [situace]. Výsledek je [stav]. Zůstává [nic / jedna věta / opravený odkaz / nová karta], nevzniká [evidence] a dočasné stopy [stav úklidu].
+```
+
+### Checklist nenápadného použití
+
+- Patří situace opravdu do stávajícího kompasu?
+- Šlo rozhodnout bez návratu k celé historii pravidla?
+- Je výsledek jeden ze čtyř stavů?
+- Pokud nevzniká zápis, je to vědomé rozhodnutí, ne zapomenutí?
+- Pokud vzniká pracovní věta, je krátká a vložená do existujícího pracovního místa?
+- Pokud se opravuje najitelnost, nemění se zbytečně princip?
+- Pokud vznikl nový problém, má vlastní kartu mimo starý kompas?
+- Nevznikla evidence použití pravidla?
+- Nepřibylo nové pole, tracker, export ani pravidelná kontrola?
+- Jsou dočasné poznámky smazané nebo anonymizované podle účelu?
+- Umí příští člověk použít kompas bez znalosti konkrétního případu?
+- Je návratový signál dost konkrétní a bez nového sběru dat?
+
+První nenápadné použití je dobrý test dospělosti provozního pravidla. Když vše proběhne tiše, není to známka malé hodnoty. Je to známka toho, že pravidlo konečně přestalo být projektem a začalo chránit práci přímo v místě, kde se rozhoduje.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o prvním nenápadném použití stálého provozního kompasu po převodu do tichého provozu: rozlišení běžného použití a nového problému, čtyři výsledky, pracovní věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití stálého provozního kompasu: čtyři uzavírací stavy, přenos bez nové agendy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém běžném použití stálého provozního kompasu: přenositelnost pravidla, čtyři výsledky druhého použití, přenosová věta, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití stálého provozního kompasu: čtyři uzavírací stavy, lokální opravy, privacy-first zkrácení datové stopy, karta, mini workshop a checklist.
