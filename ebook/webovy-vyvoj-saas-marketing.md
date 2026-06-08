@@ -192531,8 +192531,203 @@ Roční návrat k [rutina] uzavíráme stavem [výsledek]. Aktivní pravidlo je 
 
 Dobré uzavření ročního návratu je skoro nudné. Právě v tom je jeho síla. Neoslavuje proces, nevyrábí další proces a nesnaží se z ročního review udělat novou disciplínu. Jen nechá užitečné pravidlo dál pracovat, zkrátí jeho stopu a jasně řekne, kdy má tým znovu zvednout hlavu.
 
+## První běžné použití stálého provozního kompasu
+
+Stálý provozní kompas je hotový až ve chvíli, kdy podle něj někdo udělá běžnou práci. Ne v ročním review, ne v kartě uzavření, ne v hezké závěrečné větě. Běžné použití je první situace, kdy se pravidlo potká s realitou bez zvláštní pozornosti.
+
+Tohle použití nemá být audit. Je to krátká kontrola směru při normální práci. Člověk se podívá do kanonického místa, použije aktuální pravidlo a po cestě si všimne, jestli kompas skutečně pomáhá rozhodnout, nebo jestli pořád vyžaduje starou historii, staré vysvětlování a staré pomocné soubory.
+
+Pracovní otázka zní:
+
+```text
+Dokáže člověk použít stálý provozní kompas v běžné situaci bez návratu k ročnímu review, pomocným exportům a mimořádnému dohledu?
+```
+
+Pokud odpověď zní ano, pravidlo je opravdu v provozu. Pokud odpověď zní ne, není potřeba spouštět další velkou revizi. Nejdřív zjistěte, co přesně chybí v běžné trase.
+
+### Co při prvním použití ověřit
+
+První běžné použití má tři jednoduché kontroly:
+
+- najitelnost: člověk ví, kde kompas najít;
+- použitelnost: kompas vede k rozhodnutí bez čtení staré historie;
+- přiměřenost: kompas nevyžaduje nová data, nový report ani novou kontrolní vrstvu.
+
+Příklad:
+
+```text
+Běžná situace:
+Marketing chce přidat do poptávkového formuláře pole "velikost firmy".
+
+Kanonické místo:
+Checklist pro úpravy formulářů.
+
+Použitý kompas:
+Každé nové pole musí mít účel, vlastníka dat a retenční důvod. Pokud účel nejde říct jednou větou, pole se nepřidává.
+
+Výsledek:
+Pole se teď nepřidává. Obchod místo toho doplní do follow-up šablony jednu otázku pro relevantní enterprise poptávky.
+
+Datová stopa:
+Nevzniká nový tracker ani nový export. Zůstává jen krátký rozhodovací záznam v checklistu.
+```
+
+Důležité je, že výsledek není "formulář se nikdy nesmí změnit". Výsledek je "pravidlo umělo rozhodnout o konkrétní změně bez většího sběru dat". To je přesně práce, kterou má provozní kompas dělat.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- `Kompas funguje`: člověk našel pravidlo, použil ho a rozhodnutí bylo jasné.
+- `Chybí pracovní hrana`: pravidlo je správné, ale běžná situace potřebuje jednu konkrétní formulaci navíc.
+- `Zůstala stará stopa`: člověk se musel vrátit k pomocnému podkladu, který měl být po ročním uzavření uklizený.
+- `Vznikla nová otázka`: běžná situace ukazuje jiný problém, který nepatří do starého kompasu.
+
+Stav `Kompas funguje` nevyžaduje další práci. Stačí krátká věta do běžného záznamu:
+
+```text
+Kompas použit při [situace]. Rozhodnutí bylo jasné, nevznikla nová evidence ani potřeba úpravy.
+```
+
+Stav `Chybí pracovní hrana` řešte malou úpravou v kanonickém místě. Nepište novou metodiku. Doplňte jednu větu, jeden příklad nebo jednu stop podmínku.
+
+Stav `Zůstala stará stopa` je hlavně úklidový signál. Pokud člověk potřeboval starý export, starou kartu nebo starý příklad, rozhodněte, jestli má být skutečně součástí aktivní trasy. Pokud ano, přepište ho do krátké anonymizované podoby. Pokud ne, odstraňte odkaz, který k němu člověka posílá.
+
+Stav `Vznikla nová otázka` neřešte rozšiřováním kompasu. Zapište ji samostatně:
+
+```text
+Původní kompas zůstává:
+
+Nová otázka:
+
+Proč není součástí starého pravidla:
+
+Nejmenší další krok:
+
+Privacy-first hranice:
+```
+
+Tím chráníte staré pravidlo před postupným bobtnáním. Kompas má ukazovat směr v opakované situaci. Nemá být kapsa na všechny nové nápady, které zrovna prošly kolem.
+
+### Jak opravit jen nejbližší místo
+
+Když první použití ukáže drobné tření, opravujte nejbližší pracovní místo. To je místo, kde člověk při běžné práci narazil. Ne místo, kde se problém historicky vysvětloval nejlépe.
+
+Typické nejbližší opravy:
+
+- doplnit jednu rozhodovací otázku do checklistu;
+- přepsat starý příklad do anonymizované aktuální verze;
+- odstranit odkaz na pomocný dokument, který už nemá účel;
+- přidat stop větu, kdy pravidlo stačí a kdy se znovu otevírá;
+- přesunout kompas z archivní karty do místa, kde člověk opravdu pracuje.
+
+Nejbližší oprava má mít hotovo během jednoho průchodu. Pokud potřebuje vlastní workshop, nový report nebo zásah do více týmových artefaktů, pravděpodobně už nejde o první použití kompasu, ale o novou otázku.
+
+Codyho komentář: kompas, který funguje jen po přečtení ročního review, není kompas. Je to mapa složená do osmi vrstev a politá kávou. Dá se s ní dojít do cíle, ale člověk má podezřele moc práce s papírem.
+
+### Privacy-first kontrola prvního použití
+
+První běžné použití je dobrá chvíle ověřit, že roční úklid nebyl jen hezká věta v logu. Položte si pět otázek:
+
+- Potřebovali jsme kvůli použití pravidla nová osobní data?
+- Vznikl nový export, screenshot, nahrávka, tracker nebo tabulka?
+- Vedl kompas k menšímu sběru dat, nebo jen přesunul sběr jinam?
+- Zůstaly pomocné podklady mimo aktivní trasu?
+- Dá se rozhodnutí zpětně pochopit bez citlivých detailů?
+
+Dobré první použití obvykle zanechá jen krátký rozhodovací záznam. Ne kompletní kopii situace, ne přepis rozhovoru, ne screenshot obrazovky s osobními údaji. Stačí popsat rozhodnutí, důvod a návratový signál.
+
+Příklad privacy-first zápisu:
+
+```text
+Situace:
+Návrh na nové pole ve formuláři.
+
+Rozhodnutí:
+Pole teď nepřidáváme.
+
+Důvod:
+Účel jde vyřešit v obchodním follow-upu bez plošného sběru údaje od všech návštěvníků.
+
+Návratový signál:
+Pokud se ve třech relevantních poptávkách za sebou ukáže, že bez tohoto údaje obchod neumí rozhodnout další krok, otevřeme samostatnou otázku.
+
+Datová stopa:
+Bez nového exportu a bez rozšíření formuláře.
+```
+
+Tohle je dostatečné pro tým i pro budoucí kontrolu. Neříká všechno, ale říká to podstatné. Privacy-first provoz není soutěž v množství důkazů.
+
+### Karta prvního běžného použití kompasu
+
+```text
+Kompas nebo pravidlo:
+
+Běžná situace:
+
+Kanonické místo:
+
+Kdo kompas použil:
+
+Rozhodnutí:
+
+Výsledek:
+- kompas funguje / chybí pracovní hrana / zůstala stará stopa / vznikla nová otázka
+
+Co bylo jasné:
+
+Co drhlo:
+
+Nejbližší oprava, pokud je potřeba:
+
+Co se výslovně neotevírá znovu:
+
+Datová stopa:
+- nevznikla / zkrácená / anonymizovaná / vyžaduje úklid
+
+Návratový signál:
+
+Vlastník:
+
+Datum návratu:
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, ve které byl kompas použit.
+2. Minuta 2: zkontrolujte, jestli člověk našel správné kanonické místo.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: napište nejbližší opravu, pokud je potřeba.
+5. Minuta 5: zapište, co se neotevírá znovu.
+6. Minuta 6: uzavřete datovou stopu a návratový signál.
+
+Výstup:
+
+```text
+Kompas [název] byl použit v situaci [situace]. Výsledek je [stav]. Rozhodnutí je [věta]. Opravujeme jen [nejbližší místo / nic], nevzniká [nová evidence] a návrat nastane při [signál].
+```
+
+### Checklist prvního běžného použití
+
+- Byla situace opravdu běžná, ne speciálně připravený test?
+- Našel člověk kanonické místo bez hledání ve staré historii?
+- Vedl kompas k jednomu konkrétnímu rozhodnutí?
+- Je výsledek jeden ze čtyř stavů?
+- Pokud kompas funguje, nevzniká zbytečná oslava ani nová kontrola?
+- Pokud chybí pracovní hrana, je oprava jen v nejbližším místě?
+- Pokud zůstala stará stopa, víme, jestli ji přepsat, archivovat nebo smazat?
+- Pokud vznikla nová otázka, má vlastní kartu a nerozšiřuje starý kompas?
+- Je zapsané, co se výslovně neotevírá znovu?
+- Nevznikl nový tracker, export, screenshot, formulářové pole ani kontrolní report?
+- Je rozhodnutí pochopitelné bez citlivých detailů?
+- Má návratový signál konkrétní podobu v běžné práci?
+- Umí tým použít stejný kompas příště bez asistence člověka, který dělal roční review?
+
+První běžné použití stálého kompasu má být krátké a praktické. Když dopadne dobře, skoro se o něm nemluví. Když ukáže tření, opraví se nejbližší místo. A když otevře novou otázku, starý kompas zůstane v klidu. To je dospělý provoz: pravidla pomáhají práci, ale nesnaží se sežrat celý kalendář.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o prvním běžném použití stálého provozního kompasu: ověření najitelnosti, použitelnosti a přiměřenosti, čtyři výsledky použití, nejbližší oprava, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního ročního návratu do stálého provozního kompasu: převod výsledku ročního review, prevence nové agendy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním ročním návratu k dlouhodobé rutině: ověření účelu, použití, ceny a datové stopy, pět výsledků návratu, privacy-first roční úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého kvartálního sanity checku do dlouhodobé rutiny: čtyři uzavírací stavy, propsání do kanonického místa, privacy-first úklid zbytkových stop, karta, mini workshop a checklist.
