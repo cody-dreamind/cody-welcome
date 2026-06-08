@@ -191881,8 +191881,203 @@ Druhý kvartální sanity check pravidla [název] skončil stavem [výsledek]. T
 
 Druhý sanity check je dobrý tehdy, když zmenší počet věcí, které tým musí držet v hlavě. Nechává funkční pravidlo na pokoji, odstraňuje zbytky staré péče a odmítá vyrábět nový proces jen proto, že kontrola proběhla. To je přesně ten druh provozní disciplíny, který webům, SaaS i marketingu šetří energii.
 
+## Uzavření druhého kvartálního sanity checku do dlouhodobé rutiny
+
+Druhý kvartální sanity check má po sobě nechat méně práce, než kolik jí našel. Pokud po něm vznikne nový kalendář, nová tabulka, nový report a nový rituál, check selhal i v případě, že byl napsaný krásně. Uzavření má udělat jednoduchou věc: potvrdit, co se stává běžnou rutinou, co se uklízí a při jakém signálu se téma smí znovu otevřít.
+
+Pracovní otázka zní:
+
+```text
+Je pravidlo po druhém kvartálním checku dost stabilní na běžný provoz, nebo po něm zůstává konkrétní oprava, kterou musíme uzavřít teď?
+```
+
+Nejde o finální tečku navždy. Web, SaaS i marketing se mění. Jde o konec zvláštní péče o jednu konkrétní opravu. Další návrat má přijít z reálné pracovní situace, ne z pocitu, že když už jsme dvakrát kontrolovali, měli bychom kontrolovat potřetí. To je oblíbený administrativní sport. Bohužel medaile z něj nejsou, jen více poznámek.
+
+Příklad:
+
+```text
+Druhý kvartální check:
+Pravidlo pro partnerské marketingové podněty funguje. Tým ho použil bez připomínky.
+
+Nález:
+V osobním dokumentu zůstala stará pomocná poznámka se dvěma konkrétními jmény zákazníků.
+
+Uzavření:
+Poznámka se maže. Do kanonické karty se nic nepřidává, protože anonymizovaný příklad už stačí.
+
+Návratový signál:
+Dva partnerské podněty za sebou projdou do backlogu bez vlastníka nebo bez návratového termínu.
+```
+
+Tady uzavření neznamená "všechno je navždy vyřešené". Znamená "pro tuto opravu už nepotřebujeme zvláštní režim". To je důležitý rozdíl.
+
+### Čtyři uzavírací stavy
+
+Vyberte jeden stav a nenuťte text, aby vypadal chytřeji, než je realita:
+
+- `Rutina potvrzena`: pravidlo funguje, žádná zbytková stopa není potřeba a další check nevzniká.
+- `Lokální úklid hotov`: pravidlo funguje, ale při uzavření se smazala, archivovala nebo anonymizovala poslední pomocná stopa.
+- `Trasa zpřesněna`: pravidlo funguje, ale běžné pracovní místo potřebovalo drobnou navigační úpravu.
+- `Nová otázka oddělena`: objevil se nový kontext, který nepatří do starého pravidla a dostává vlastní kartu.
+
+`Rutina potvrzena` je nejčistší stav. Zapište jednu větu, zavřete check a nechte pravidlo žít. Když se někdo ptá "a kdy to zkontrolujeme příště?", odpověď má být návratový signál, ne datum bez důvodu.
+
+`Lokální úklid hotov` je stav pro malé zbytky. Smazání osobní poznámky, odstranění starého odkazu, anonymizace příkladu nebo zrušení pomocného exportu je hotová iterace. Nepište k tomu třístránkový úklidový plán. Když úklid potřebuje plán, pravděpodobně už nejde o lokální úklid.
+
+`Trasa zpřesněna` použijte tehdy, když pravidlo samotné není špatně, ale člověk ho ve správnou chvíli nevidí. Typická oprava: doplnit odkaz z agendy měsíčního review, přejmenovat položku v rozcestníku, nebo zkrátit větu v šabloně. Neměňte význam pravidla jen proto, že navigace byla nešikovná.
+
+`Nová otázka oddělena` chrání starou opravu před nafukováním. Pokud se změnil segment zákazníků, obchodní model, právní rámec dat nebo odpovědnost týmu, otevřete novou kartu. Staré pravidlo tím automaticky není rozbité. Jen už neřeší všechno. Což je zdravé; pravidla nejsou univerzální šroubovák na život.
+
+### Co propsat do kanonického místa
+
+Po druhém kvartálním checku se do kanonického místa propsuje jen to, co pomáhá příštímu rozhodnutí. Všechno ostatní patří do logu, archivu s retenčním koncem, nebo do koše.
+
+Do kanonického místa patří:
+
+- zpřesněná věta pravidla, pokud se opravdu změnil pracovní návod;
+- jeden anonymizovaný příklad, pokud bez něj lidé opakovaně tápou;
+- odkaz na správné pracovní místo, pokud byl problém v navigaci;
+- návratový signál, pokud má být součástí běžného rytmu.
+
+Do kanonického místa nepatří:
+
+- historie všech předchozích kontrol;
+- konkrétní jména zákazníků, lidí nebo citlivé detaily zakázek;
+- screenshoty interních diskusí;
+- pomocné exporty;
+- vysvětlení, proč se tým kdysi bál, že pravidlo nebude fungovat.
+
+Krátký zápis stačí:
+
+```text
+Pravidlo zůstává beze změny. Druhý kvartální check odstranil poslední pomocnou poznámku; návrat nastane jen tehdy, když se ve dvou běžných cyklech objeví podnět bez vlastníka.
+```
+
+Tohle je užitečné pro člověka, který přijde za tři měsíce. Nepotřebuje detektivku. Potřebuje vědět, co platí.
+
+### Privacy-first uzavření bez stop navíc
+
+Uzavření druhého sanity checku je dobrý moment na privacy-first úklid, protože tým už má dost důkazů, že pravidlo funguje. Tím pádem často nepotřebuje staré podklady, které vznikly jen pro ověření.
+
+Projděte pět míst:
+
+- osobní poznámky lidí, kteří pravidlo opravovali;
+- pomocné dokumenty a tabulky z prvního a druhého checku;
+- exporty z analytiky, CRM, supportu nebo formulářů;
+- screenshoty a citace interních diskusí;
+- odkazy z kanonického místa do pracovních podkladů.
+
+U každého podkladu rozhodněte:
+
+```text
+Potřebujeme to pro příští rozhodnutí?
+Ano: zkrať, anonymizuj a dej tomu vlastníka i retenční konec.
+Ne: smaž nebo vyřaď z aktivní trasy.
+```
+
+Codyho komentář: privacy-first provoz není jen o tom, že si vyberete evropský nástroj a slavnostně si zatleskáte. Je to hlavně schopnost říct "tenhle podklad už nám nepomáhá, pryč s ním". Méně stop znamená méně rizik, méně vysvětlování a méně budoucího úklidu. Elegantní nuda, přesně jak to má být.
+
+### Karta uzavření druhého kvartálního checku
+
+```text
+Pravidlo nebo pracovní místo:
+
+Výsledek druhého sanity checku:
+- rutina potvrzena
+- lokální úklid hotov
+- trasa zpřesněna
+- nová otázka oddělena
+
+Co se mění v kanonickém místě:
+
+Co se výslovně nemění:
+
+Co se maže, archivuje nebo anonymizuje:
+
+Co už není zdroj pravdy:
+
+Návratový signál:
+
+Vzniká nová karta?
+- ne
+- ano, pro:
+
+Jedna věta pro tým:
+
+Jedna věta do logu:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Partnerské marketingové podněty v měsíčním review.
+
+Výsledek druhého sanity checku:
+Lokální úklid hotov.
+
+Co se mění v kanonickém místě:
+Nic. Pravidlo i anonymizovaný příklad stačí.
+
+Co se výslovně nemění:
+Nevzniká samostatná evidence partnerství ani třetí sanity check.
+
+Co se maže, archivuje nebo anonymizuje:
+Maže se osobní pomocná poznámka se starými konkrétními příklady.
+
+Co už není zdroj pravdy:
+Starý pracovní dokument z prvního checku.
+
+Návratový signál:
+Dva partnerské podněty za sebou bez vlastníka nebo termínu návratu.
+
+Vzniká nová karta?
+Ne.
+
+Jedna věta pro tým:
+Pravidlo pro partnerské podněty běží v normálním review; odstranili jsme poslední pomocnou poznámku a další check nevzniká.
+
+Jedna věta do logu:
+Druhý kvartální check uzavřen lokálním úklidem bez změny pravidla a bez nové evidence.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: otevřete výsledek druhého sanity checku.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: rozhodněte, jestli se mění kanonické místo.
+4. Minuta 4: najděte poslední zbytkové podklady a určete jejich osud.
+5. Minuta 5: napište návratový signál bez nového sběru dat.
+6. Minuta 6: výslovně napište, co nevzniká.
+7. Minuta 7: pošlete týmu jednu větu a zavřete kartu.
+
+Výstup:
+
+```text
+Druhý kvartální sanity check [pravidlo] uzavíráme stavem [stav]. V kanonickém místě měníme [nic / konkrétní drobnost], uklízíme [podklad], nezakládáme [nový check / evidenci / report] a návrat nastane jen při [signál].
+```
+
+### Checklist uzavření druhého kvartálního checku
+
+- Má uzavření jeden ze čtyř stavů?
+- Je jasné, jestli se kanonické místo mění, nebo zůstává stejné?
+- Pokud se mění pravidlo, je změna opravdu nutná pro příští rozhodnutí?
+- Pokud se mění jen trasa, zůstává význam pravidla stejný?
+- Je zapsané, co se výslovně nemění?
+- Nevzniká třetí check jen ze setrvačnosti?
+- Má návratový signál konkrétní pracovní podobu?
+- Nevyžaduje návratový signál nový tracker, export nebo report?
+- Jsou staré pomocné podklady smazané, anonymizované nebo archivované s retenčním koncem?
+- Je jasné, co už není zdroj pravdy?
+- Pokud vznikla nová otázka, má vlastní kartu a nepřepisuje staré pravidlo?
+- Dá se závěr poslat týmu jednou větou?
+- Zůstalo po uzavření méně aktivních stop než před checkem?
+
+Uzavření druhého kvartálního sanity checku je malé, ale důležité řemeslo. Dobře napsané pravidlo nestačí, pokud kolem něj zůstane lešení. Jakmile stojí samo, lešení má pryč. Tým pak nemusí uctívat starý problém, jen používá čistší pracovní místo a ví, kdy se má vrátit.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého kvartálního sanity checku do dlouhodobé rutiny: čtyři uzavírací stavy, propsání do kanonického místa, privacy-first úklid zbytkových stop, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém kvartálním sanity checku bez nového procesu: ověření konce první kontroly, zbytkové stopy a závislosti, prevence třetího checku, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního kvartálního sanity checku: čtyři uzavírací stavy, propsání do kanonického místa, negativní vymezení nové evidence, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním kvartálním sanity checku po dlouhodobém klidu: kontrola dohledatelnosti a přiměřenosti pravidla, čtyři výsledné stavy, skrytá závislost, privacy-first úklid, karta, mini workshop a checklist.
