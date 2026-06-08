@@ -193801,8 +193801,219 @@ Po použití kompasu [název] zůstává [výsledek]. Stav uzavření je [stav].
 
 Uzavření prvního nenápadného použití je malé, ale důležité. Potvrzuje, že kompas umí přežít mimo zvláštní režim, a zároveň brání tomu, aby se kolem něj začal stavět nový dohled. Když po uzavření zůstane jen lepší pracovní místo a méně zbytečných stop, pravidlo splnilo přesně to, kvůli čemu vzniklo.
 
+## Druhé nenápadné použití kompasu bez obnovení dohledu
+
+Druhé nenápadné použití je jemnější test než první. První použití ukazuje, jestli kompas dokáže fungovat mimo zvláštní režim. Druhé ukazuje, jestli se z prvního tichého úspěchu nestala skrytá výjimka, kterou někdo pořád hlídá koutkem oka.
+
+Pokud se tým po prvním nenápadném použití uklidil dobře, druhá situace by neměla začínat slovy "pojďme ověřit kompas". Měla by začít normální prací: někdo upravuje formulář, řeší předání poptávky, vybírá nástroj, píše support odpověď nebo rozhoduje o datové stopě. Kompas se objeví jen jako krátká hranice v existujícím pracovním místě.
+
+Pracovní otázka:
+
+```text
+Použije tým kompas podruhé stejně přirozeně jako běžné pravidlo práce, aniž by kvůli tomu obnovil kontrolní režim, evidenci použití nebo novou servisní poznámku?
+```
+
+Druhé nenápadné použití není závod v tom, kolikrát se pravidlo cituje. Čím méně se kolem něj mluví navíc, tím lépe. Důkazem není počet zmínek, ale kvalita rozhodnutí: nevznikl zbytečný údaj, staré pravidlo zůstalo krátké, nový problém se oddělil a pracovní místo bylo srozumitelné i bez autora původního kompasu.
+
+### Co druhé použití ověřuje navíc
+
+Oproti prvnímu nenápadnému použití sledujte tři rozdíly:
+
+- `Samostatnost`: rozhodnutí udělal člověk nebo role bez návratu k tomu, kdo kompas zaváděl.
+- `Přenos mezi situacemi`: princip fungoval i v lehce jiné běžné situaci, ne jen v opakování stejného příkladu.
+- `Bez návratu do dohledu`: po použití nevznikla žádná nová kontrola, evidence, report ani zvláštní schůzka.
+
+Příklad:
+
+```text
+První nenápadné použití:
+Tým odmítl přidat do poptávkového formuláře pole "rozpočet", protože údaj nebyl nutný pro nejbližší rozhodnutí.
+
+Druhé nenápadné použití:
+Support chtěl v interní šabloně ponechat konkrétní zákaznický příklad pro vysvětlení opakované chyby. Kompas datového minima pomohl příklad nahradit anonymním vzorem a konkrétní detail se smazal.
+```
+
+To není stejná situace, ale je to stejný princip. Kompas se přenesl z formuláře do support šablony, aniž by se z něj stal obecný privacy manuál na dvacet odstavců. Právě to je dobrý signál: pravidlo je dost krátké na použití a dost přesné na rozhodnutí.
+
+Špatný vývoj by vypadal takto:
+
+```text
+Po druhém použití zakládáme tabulku všech případů, kdy kompas pomohl, aby bylo vidět, že pravidlo funguje.
+```
+
+To je návrat do zvláštního režimu v převleku za odpovědnost. Pokud potřebujete dokazovat hodnotu každého nenápadného použití zvláštní evidencí, kompas ještě není v tichém provozu. Je jen obklopený zdvořilým monitoringem.
+
+### Čtyři výsledky druhého nenápadného použití
+
+Po druhém nenápadném použití vyberte jeden ze čtyř stavů:
+
+- `Tichý provoz potvrzen`: kompas se použil samostatně, rozhodnutí bylo správné a nevzniká žádný zápis.
+- `Jedna hrana doplněna`: princip fungoval, ale v pracovním místě chyběla krátká věta pro lehce jiný typ situace.
+- `Cesta k pravidlu zkrácena`: člověk pravidlo použil, ale pořád ho hledal přes zbytečnou mezivrstvu.
+- `Zvláštní dohled se vrátil`: kolem použití vznikla nová kontrola, zápis nebo debata, která ukazuje, že tichý provoz ještě není stabilní.
+
+`Tichý provoz potvrzen` je nejlepší výsledek a často nevyžaduje žádnou dokumentaci. Tým udělal dobré rozhodnutí, žádná stopa navíc nevznikla a pravidlo zůstalo na svém místě. Zní to skoro podezřele jednoduše, ale přesně tak má fungovat provozní standard.
+
+`Jedna hrana doplněna` použijte, když se princip přenesl správně, ale příštímu člověku by pomohla jedna věta v konkrétní šabloně, formuláři nebo checklistu. Věta nemá rozšiřovat kompas. Má jen doplnit místní hranu:
+
+```text
+V support šablonách neponecháváme konkrétní zákaznický příklad, pokud stejnou práci udělá anonymní vzor chyby.
+```
+
+`Cesta k pravidlu zkrácena` je technický nebo obsahový úklid. Opravte index, odkaz, název sekce nebo umístění v checklistu. Neměňte samotný princip, pokud problém nebyl v principu.
+
+`Zvláštní dohled se vrátil` je varovný, ale užitečný stav. Neznamená automaticky, že kompas selhal. Znamená, že tým si kolem něj pořád nechává ochrannou vrstvu. Tu je potřeba pojmenovat a odstranit, nebo přiznat, že pravidlo ještě není připravené na tichý provoz.
+
+### Jak odstranit vrácený dohled
+
+Když se po druhém použití objeví zvláštní dohled, neřešte ho dalším dohledem. Položte tři úzké otázky:
+
+```text
+Kdo měl pocit, že použití kompasu musí ještě někdo schválit?
+Které pracovní místo nebylo dost jasné?
+Jakou jednu věc můžeme upravit, aby příští použití proběhlo bez kontroly navíc?
+```
+
+Odpověď má vést k jedné lokální opravě:
+
+- doplnit větu do existující šablony;
+- zrušit pomocnou kontrolní poznámku;
+- přesměrovat starý odkaz na kanonické místo;
+- odstranit interní připomínku, která vyvolává pocit zvláštního režimu;
+- vrátit rozhodnutí do role, která ho má vlastnit.
+
+Nezakládejte "postup pro používání kompasu". To by z jednoduchého pravidla udělalo další proces. Pokud kompas potřebuje vlastní návod k použití, problém je buď v jeho délce, nebo v umístění. Opravte nejbližší pracovní místo, ne celý systém.
+
+Codyho komentář: když se pravidlo po každém použití musí slavnostně potvrdit, není to tichý provoz. Je to malé procesní divadlo s lepšími titulky. A divadlo je fajn, jen ne v poptávkovém formuláři.
+
+### Privacy-first hranice druhého použití
+
+Druhé nenápadné použití často svádí k tomu, aby si tým nechal důkaz "pro jistotu". První použití bylo tiché, druhé také, a někdo začne mít pocit, že bez záznamu se hodnota ztratí. Privacy-first odpověď zní: hodnota se nemá dokazovat hromaděním stop, ale lepším pracovním místem.
+
+Po druhém použití zkontrolujte:
+
+```text
+Vznikla kvůli použití pravidla evidence lidí, případů nebo rozhodnutí?
+Zůstává někde konkrétní zákaznický detail, který už nahradil anonymní princip?
+Přibyl nový report jen proto, že chceme vidět, zda kompas žije?
+Upravili jsme existující pracovní místo místo zakládání nové vrstvy?
+Je jasné, kdy se pravidlo znovu otevře, aniž bychom sledovali každé použití?
+```
+
+Dobré privacy-first uzavření:
+
+```text
+Druhé použití kompasu proběhlo v support šabloně. Konkrétní zákaznický příklad se nahradil anonymním vzorem, stará poznámka se maže a nevzniká evidence použití. Návratový signál je opakované ruční schvalování anonymizace ve dvou dalších případech.
+```
+
+Slabé uzavření:
+
+```text
+Uložíme oba příklady použití kompasu do sdílené tabulky a budeme jednou měsíčně kontrolovat, kdo ho použil.
+```
+
+Druhá varianta měří aktivitu místo kvality práce. Navíc vytváří datovou stopu lidí, případů a rozhodnutí, kterou pravděpodobně nikdo nepotřebuje. Pokud chcete kontrolovat užitečnost kompasu, kontrolujte výsledek v běžném review: méně zbytečných polí, méně citlivých příkladů, méně exportů, méně ručního schvalování.
+
+### Karta druhého nenápadného použití
+
+Kartu vyplňujte jen tehdy, když výsledek není `Tichý provoz potvrzen`, nebo když se vrátil zvláštní dohled. U čistého tichého provozu často stačí žádný zápis.
+
+```text
+Kompas:
+
+Druhá běžná situace:
+
+Kdo rozhodl v běžné roli:
+
+Výsledek:
+- tichý provoz potvrzen
+- jedna hrana doplněna
+- cesta k pravidlu zkrácena
+- zvláštní dohled se vrátil
+
+Jedna lokální úprava, pokud je potřeba:
+
+Co se nemění:
+
+Co nevzniká:
+- evidence použití
+- nový tracker
+- nový report
+- nový export
+- nová schůzka
+- nová kopie pravidla
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Návratový signál bez nového sběru dat:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických a interních příkladech.
+
+Druhá běžná situace:
+Support chtěl ponechat konkrétní zákaznický příklad v interní šabloně opakované chyby.
+
+Kdo rozhodl v běžné roli:
+Vlastník support šablon.
+
+Výsledek:
+Jedna hrana doplněna.
+
+Jedna lokální úprava:
+Do support šablony přibyla věta: "Konkrétní zákaznický příklad nahrazujeme anonymním vzorem, pokud detail není nutný pro řešení."
+
+Co se nemění:
+Kanonický kompas, support proces, analytika ani přístupy.
+
+Co nevzniká:
+Evidence použití, nový tracker, report, export, schůzka ani kopie pravidla.
+
+Co se maže, zkracuje nebo anonymizuje:
+Původní zákaznický detail v návrhu šablony se anonymizuje.
+
+Návratový signál:
+Dvě další situace během kvartálu, kdy vlastník šablony potřebuje ruční schválení anonymizace.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci.
+2. Minuta 2: ověřte, že rozhodnutí proběhlo v běžné roli.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: pokud je potřeba, napište jednu lokální úpravu.
+5. Minuta 5: zrušte nebo smažte všechno, co by obnovovalo zvláštní dohled.
+6. Minuta 6: určete návratový signál bez nového sledování.
+
+Výstup:
+
+```text
+Kompas [název] byl podruhé použit v běžné situaci [situace]. Výsledek je [stav]. Zůstává [nic / lokální věta / opravená cesta], nevzniká [dohled] a návrat nastane jen při [signál].
+```
+
+### Checklist druhého nenápadného použití
+
+- Proběhlo rozhodnutí v běžné roli, ne přes autora kompasu?
+- Šlo o lehce jinou situaci, nebo jen opakování prvního příkladu?
+- Je výsledek jeden ze čtyř stavů?
+- Pokud je potvrzen tichý provoz, nevzniká zbytečný zápis?
+- Pokud se doplňuje hrana, je to jedna lokální věta v existujícím místě?
+- Pokud se zkracuje cesta k pravidlu, nemění se zbytečně princip?
+- Pokud se vrátil zvláštní dohled, je pojmenovaná jedna lokální oprava?
+- Nevzniká evidence použití kompasu, nový report ani kontrolní schůzka?
+- Nepřibyl tracker, export, formulářové pole ani kopie pravidla?
+- Jsou konkrétní zákaznické detaily smazané, zkrácené nebo anonymizované?
+- Kontroluje tým kvalitu výsledku místo aktivity lidí?
+- Je návratový signál konkrétní a bez nového sběru dat?
+
+Druhé nenápadné použití je hranice mezi pravidlem, které ještě někdo drží za ruku, a pravidlem, které už opravdu žije v práci. Když po něm nezůstane nová agenda, ale jen jasnější pracovní místo a méně zbytečných dat, kompas si zaslouží zůstat tichý.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o druhém nenápadném použití stálého provozního kompasu bez obnovení dohledu: samostatnost pravidla, přenos mezi situacemi, čtyři výsledky, odstranění vráceného dohledu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního nenápadného použití stálého provozního kompasu: čtyři uzavírací stavy, práce s jednou větou, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním nenápadném použití stálého provozního kompasu po převodu do tichého provozu: rozlišení běžného použití a nového problému, čtyři výsledky, pracovní věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití stálého provozního kompasu: čtyři uzavírací stavy, přenos bez nové agendy, privacy-first úklid, karta, mini workshop a checklist.
