@@ -193174,8 +193174,234 @@ Kompas [název] byl použit podruhé v situaci [situace]. Výsledek je [stav]. P
 
 Druhé běžné použití kompasu má uzavřít jednu důležitou nejistotu: jestli pravidlo funguje mimo první pečlivý případ. Když ano, nechte ho dál tiše pracovat. Když ne, opravte jen přenos, roli nebo hranici. Stabilní kompas nepotřebuje velké publikum. Potřebuje druhé použití, které nerozšíří práci a nezvětší datovou stopu.
 
+## Uzavření druhého běžného použití stálého provozního kompasu
+
+Druhé použití kompasu neuzavíráte proto, aby vznikl další hezký důkaz. Uzavíráte ho proto, aby se pravidlo mohlo stát obyčejnou součástí práce. Po prvním použití ještě dává smysl krátce hlídat, jestli kompas vůbec stojí. Po druhém použití už je hlavní otázka jiná: umí tým přestat kompas pozorovat a přesto ho dál používat?
+
+Uzavření druhého použití má proto dvě brzdy. První brání tomu, aby se z úspěšného pravidla stala nová pravidelná agenda. Druhá brání tomu, aby se do kompasu přilepila každá podobná situace jen proto, že prošla kolem. Stálý kompas má být krátký, dohledatelný a použitelný. Pokud po druhém použití naroste na malou příručku, tým pravděpodobně neuzavírá přenos, ale otevírá nový provozní problém.
+
+Pracovní otázka zní:
+
+```text
+Co musí po druhém běžném použití zůstat v kanonickém místě, aby kompas fungoval dál bez zvláštní pozornosti?
+```
+
+Pokud odpověď zní "nic nového", napište to. Prázdná změna je legitimní výsledek, když pravidlo fungovalo, člověk ho našel, rozhodnutí šlo udělat a nevznikla nová datová stopa. V provozu není cílem mít po každém průchodu víc dokumentace. Cílem je mít po každém průchodu méně nejistoty.
+
+### Čtyři uzavírací stavy po druhém použití
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- `Převést do tichého provozu`: kompas se přenesl, druhé použití neukázalo nové tření a nevzniká další kontrola.
+- `Dopsat přenosovou větu`: princip funguje, ale kanonické místo potřebuje jednu krátkou větu, aby další role nečetla pravidlo moc úzce.
+- `Sladit výklad role`: problém není v kompasu jako takovém, ale v tom, že jedna role chápe účel, hranici nebo stop stav jinak.
+- `Oddělit novou oblast`: druhý případ vypadá podobně, ale patří do jiné otázky, která má mít vlastní kartu a vlastní návratový signál.
+
+`Převést do tichého provozu` znamená, že kompas už nepotřebuje vlastní pozornost. Zůstává v běžné trase, ale nevzniká tabulka použití, další sanity check ani speciální vlastník sledování. Vlastník existuje jen pro kanonické místo, ne pro dohled nad každým použitím.
+
+`Dopsat přenosovou větu` je lokální oprava. Jedna věta má stačit člověku, který nebyl u prvního ani druhého použití. Pokud se přenos nedá vysvětlit jednou větou, pravděpodobně nejde o přenos, ale o další pravidlo.
+
+`Sladit výklad role` použijte tehdy, když se například obchod, marketing, produkt nebo provoz dívá na stejný kompas jinou optikou. Nehledejte viníka. Napište, co role potřebovala rozhodnout, jak kompas pochopila a jaká hranice má být příště jasná. Někdy stačí doplnit slovo "plošně", "v tomto kroku" nebo "bez jasného účelu". Ano, někdy jeden výraz zachrání víc práce než půldenní workshop. Taky mě to občas uráží, ale funguje to.
+
+`Oddělit novou oblast` je správné, když by doplnění do starého kompasu změnilo jeho účel. Například kompas pro datové minimum ve formulářích nemá potichu spolknout pravidla pro telefonický prodej, bezpečnostní ověřování nebo cenové segmenty. Nová oblast dostane vlastní otázku. Starý kompas dostane závěr.
+
+### Jak uzavřít přenos bez nové agendy
+
+Uzavření přenosu má být kratší než samotné druhé použití. Držte se pěti řádků:
+
+```text
+Kompas:
+Druhé použití:
+Uzavírací stav:
+Co zůstává v kanonickém místě:
+Co nevzniká:
+```
+
+Příklad:
+
+```text
+Kompas:
+Datové minimum při úpravě poptávkového formuláře.
+
+Druhé použití:
+Návrh na plošný checkbox pro telefonické kontaktování.
+
+Uzavírací stav:
+Dopsat přenosovou větu.
+
+Co zůstává v kanonickém místě:
+Nový údaj nebo souhlas nepřidáváme plošně, pokud je potřeba až pro další krok konkrétního vztahu.
+
+Co nevzniká:
+Tabulka použití kompasu, nový report souhlasů, další kontrolní schůzka ani rozšířený formulář.
+```
+
+Tento zápis říká přesně tolik, kolik příští člověk potřebuje. Nevrací se k celé historii, nepopisuje konkrétní poptávku a nepřidává nové měření. Přenos je uzavřený tím, že princip je srozumitelný v kanonickém místě.
+
+Slabé uzavření vypadá takto:
+
+```text
+Je potřeba se ještě podívat na další podobné případy a možná připravit širší metodiku pro všechna kontaktní pole.
+```
+
+To není uzavření. To je nenápadné otevření nové fronty práce. Pokud opravdu potřebujete širší metodiku, napište novou otázku a dejte jí vlastní stop podmínku. Starý kompas kvůli tomu neroztahujte.
+
+### Co se po uzavření druhého použití nemaže
+
+Tichý provoz neznamená, že smažete všechno. Některé věci mají zůstat:
+
+- kanonická verze kompasu;
+- jedna krátká přenosová věta, pokud byla potřeba;
+- návratový signál;
+- odkaz na místo, kde se řeší nová oblast, pokud vznikla;
+- anonymizovaná rozhodovací věta, která vysvětluje princip bez citlivých detailů.
+
+Naopak obvykle nemají zůstat:
+
+- pomocné poznámky z prvního a druhého použití;
+- konkrétní zákaznické příklady v aktivní trase;
+- staré exporty, screenshoty nebo kopie formulářů;
+- zvláštní kontrolní seznam pro další použití;
+- duplicitní verze stejného pravidla v jiných dokumentech.
+
+Rozdíl je jednoduchý. Zůstává to, co pomůže příště rozhodnout. Mizí to, co jen dokazuje, že někdo minule pracoval pečlivě. Pečlivost je fajn, ale není důvod ji archivovat v pěti souborech.
+
+### Privacy-first uzavření druhého použití
+
+Privacy-first uzavření po druhém použití má být ještě přísnější než po prvním. Pokud pravidlo už obstálo dvakrát, tým nepotřebuje uchovávat detailní důkazy. Potřebuje zachovat princip a uklidit stopy, které vznikly při ověřování přenosu.
+
+Položte si otázky:
+
+```text
+Zůstává v kanonickém místě jen rozhodovací princip?
+Jsou konkrétní příklady anonymizované nebo odstraněné?
+Nevznikla nová evidence použití pravidla?
+Nezůstává starý podklad dostupný jen proto, že "se může hodit"?
+Je návratový signál dost jasný bez sběru dalších osobních údajů?
+```
+
+Dobré uzavření:
+
+```text
+V kanonickém checklistu zůstává jedna přenosová věta. Dočasné poznámky z obou použití se mažou. V logu zůstává anonymizovaný závěr: kompas brání plošnému sběru údajů, pokud údaj není nutný pro nejbližší rozhodnutí.
+```
+
+Špatné uzavření:
+
+```text
+Necháme si oba konkrétní příklady, screenshot formuláře a export poptávek, aby bylo vidět, proč pravidlo vzniklo.
+```
+
+Druhý zápis možná působí poctivě, ale z privacy-first pohledu je to zbytečná zátěž. Historie pravidla nemá být skladiště osobních údajů. Má být krátká stopa rozhodnutí.
+
+### Karta uzavření druhého použití kompasu
+
+```text
+Kompas nebo pravidlo:
+
+První použití jednou větou:
+
+Druhé použití jednou větou:
+
+Uzavírací stav:
+- převést do tichého provozu
+- dopsat přenosovou větu
+- sladit výklad role
+- oddělit novou oblast
+
+Co zůstává v kanonickém místě:
+
+Co se mění, pokud něco:
+
+Co se výslovně neotevírá:
+
+Co nevzniká:
+- nová evidence použití
+- nový tracker
+- nový report
+- nový formulářový údaj
+- další pravidelná kontrola
+
+Co se maže, anonymizuje nebo archivuje:
+
+Nová oblast, pokud vznikla:
+
+Návratový signál:
+
+Jedna věta do pracovního logu:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas nebo pravidlo:
+Datové minimum při úpravě poptávkového formuláře.
+
+První použití jednou větou:
+Nepřidali jsme pole "velikost firmy", protože účel patřil až do obchodního follow-upu.
+
+Druhé použití jednou větou:
+Nepřidali jsme plošný checkbox pro telefonické kontaktování, protože telefon patří až do konkrétní navazující komunikace.
+
+Uzavírací stav:
+Dopsat přenosovou větu.
+
+Co zůstává v kanonickém místě:
+Nový údaj nebo souhlas nepřidáváme plošně, pokud je potřeba až pro další krok konkrétního vztahu.
+
+Co se výslovně neotevírá:
+Celý formulář, lead scoring, obchodní metodika ani právní revize všech souhlasů.
+
+Co nevzniká:
+Evidence použití pravidla, nový report souhlasů, rozšířený formulář ani další pravidelná kontrola.
+
+Co se maže, anonymizuje nebo archivuje:
+Dočasné poznámky z obou použití se mažou; v logu zůstává jen anonymizovaný princip.
+
+Návratový signál:
+Dva další návrhy na plošný sběr údajů během jednoho kvartálu.
+
+Jedna věta do pracovního logu:
+Druhé použití kompasu uzavíráme přenosovou větou a bez nové evidence.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: přečtěte první a druhé použití jednou větou.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: rozhodněte, co zůstává v kanonickém místě.
+4. Minuta 4: napište, co se výslovně neotevírá.
+5. Minuta 5: určete, co nevzniká za novou evidenci nebo kontrolu.
+6. Minuta 6: zavřete datovou stopu: smazat, anonymizovat, archivovat nebo ponechat.
+7. Minuta 7: napište jednu větu do pracovního logu.
+
+Výstup:
+
+```text
+Druhé použití kompasu [název] uzavíráme stavem [stav]. V kanonickém místě zůstává [věta / nic nového]. Neotevíráme [rozsah], nevzniká [evidence] a návrat nastane při [signál].
+```
+
+### Checklist uzavření druhého použití
+
+- Je druhé použití shrnuté jednou větou?
+- Je jasné, jestli se kompas přenesl, potřebuje větu, vyžaduje sladění role nebo odděluje novou oblast?
+- Pokud se převádí do tichého provozu, nevzniká další kontrolní bod?
+- Pokud se dopisuje přenosová věta, je to opravdu jedna věta?
+- Pokud se slaďuje výklad role, je rozdíl popsaný věcně a bez obviňování?
+- Pokud vznikla nová oblast, má vlastní kartu mimo starý kompas?
+- Je jasné, co zůstává v kanonickém místě?
+- Je zapsané, co se výslovně neotevírá?
+- Nevzniká nová evidence použití, tracker, report, formulářové pole ani pravidelné review?
+- Jsou dočasné poznámky smazané, anonymizované nebo archivované podle účelu?
+- Dá se pravidlo příště použít bez znalosti prvního a druhého příkladu?
+- Má návratový signál konkrétní podobu v běžném provozu?
+- Umí tým říct jednou větou, proč kompas zůstává krátký?
+
+Po druhém použití už kompas nepotřebuje dokazovat, že existuje. Potřebuje zůstat na správném místě, držet krátký princip a nechat tým pracovat bez nové vrstvy dohledu. Když se to podaří, největší změna je vlastně nenápadná: pravidlo přestane být projekt a stane se běžnou pracovní hranicí.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití stálého provozního kompasu: čtyři uzavírací stavy, přenos bez nové agendy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém běžném použití stálého provozního kompasu: přenositelnost pravidla, čtyři výsledky druhého použití, přenosová věta, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití stálého provozního kompasu: čtyři uzavírací stavy, lokální opravy, privacy-first zkrácení datové stopy, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním běžném použití stálého provozního kompasu: ověření najitelnosti, použitelnosti a přiměřenosti, čtyři výsledky použití, nejbližší oprava, privacy-first kontrola, karta, mini workshop a checklist.
