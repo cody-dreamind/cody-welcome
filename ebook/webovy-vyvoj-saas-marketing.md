@@ -191466,8 +191466,214 @@ Kvartální sanity check pravidla [název] skončil stavem [výsledek]. Měníme
 
 První kvartální sanity check má chránit dvě věci najednou: užitečnost pravidla a klid týmu. Když pravidlo slouží, nechte ho sloužit. Když zestárlo, opravte nejbližší hranu. Když se změnil kontext, otevřete novou otázku. A když po checku nezůstane žádná nová evidence, privacy-first provoz zase jednou vyhrál bez fanfár. Tak to má být.
 
+## Uzavření prvního kvartálního sanity checku
+
+Sanity check není hotový ve chvíli, kdy tým dojde ke stavu. Je hotový až ve chvíli, kdy je jasné, co se po něm nebude dít. Právě tady se malé kontroly často kazí: výsledek je v pořádku, ale někdo pro jistotu založí další tabulku, připomínku, komentář nebo mini review. Tím se pravidlo vrátí ze dlouhodobého klidu zpět do zvláštní péče, jen pod jiným jménem.
+
+Uzavření prvního kvartálního sanity checku má proto jednu pracovní otázku:
+
+```text
+Co přesně po checku zůstává v běžném provozu a co se vědomě nezakládá?
+```
+
+Odpověď má být krátká. Pokud je potřeba vysvětlovat historii tří předchozích review, check nebyl uzavřený čistě. Dobrý závěr se dá poslat týmu jednou větou a člověk, který původní opravu nezažil, podle ní pozná, jak pravidlo používat dál.
+
+Příklad:
+
+```text
+Kvartální check pravidla pro slabé marketingové podněty je uzavřený: pravidlo zůstává v běžném kvartálním rytmu, doplnil se jeden anonymizovaný příklad partnerského podnětu a nezakládá se žádné další sledování.
+```
+
+Tato věta říká čtyři věci najednou: check skončil, pravidlo zůstává, změna je malá a nevzniká nový dohled. To je přesně typ závěru, který chrání klid.
+
+### Čtyři uzavírací stavy
+
+Po sanity checku vyberte jeden uzavírací stav:
+
+- `Zavřít bez změny`: pravidlo je použitelné a není potřeba nic upravovat.
+- `Zavřít s lokálním zpřesněním`: mění se jedna věta, příklad, odkaz nebo návratový signál.
+- `Zavřít trasovou opravou`: pravidlo je v pořádku, ale cesta k němu nebo kolem něj vytváří závislost.
+- `Zavřít starou větev a otevřít novou otázku`: původní pravidlo zůstává uzavřené, ale objevil se nový kontext, který zaslouží vlastní nejmenší krok.
+
+`Zavřít bez změny` je plnohodnotný výsledek. Neznamená "nic jsme neudělali". Znamená "ověřili jsme, že není důvod přidávat práci". To je v provozu webu, SaaS i marketingu často nejlevnější dobré rozhodnutí.
+
+`Zavřít s lokálním zpřesněním` použijte jen tehdy, když úprava nemění smysl pravidla. Typicky doplníte nový anonymizovaný příklad, upravíte formulaci, odstraníte matoucí slovo nebo zpřesníte návratový signál. Pokud se mění vlastník, pracovní tok nebo rozhodovací kritérium, už to není lokální zpřesnění.
+
+`Zavřít trasovou opravou` je stav pro situace, kdy pravidlo funguje, ale lidé ho nacházejí přes starý odkaz, osobní připomínku nebo archivní podklad. Tady není nutné znovu psát pravidlo. Opravte rozcestník, název položky, odkaz v agendě nebo místo, kde se pravidlo používá.
+
+`Zavřít starou větev a otevřít novou otázku` chrání před směšováním problémů. Nový kontext má dostat vlastní kartu, vlastní stop podmínku a vlastní privacy-first hranici. Původní pravidlo se nepřepisuje jen proto, že se objevilo jiné téma.
+
+### Co propsat do kanonického místa
+
+Do kanonického místa patří jen to, co bude člověk potřebovat při dalším použití pravidla. Nepište tam celý příběh sanity checku.
+
+Obvykle stačí jedna z těchto změn:
+
+- jedna nová formulace pravidla;
+- jeden anonymizovaný příklad;
+- jeden aktualizovaný návratový signál;
+- jeden opravený odkaz;
+- jedna poznámka, že starý podklad už není zdroj pravdy;
+- jedna věta do changelogu, pokud takový changelog už existuje.
+
+Špatný zápis:
+
+```text
+Po kvartálním checku jsme řešili partnerské podněty, historii marketingového backlogu, staré review a možnou budoucí změnu kvalifikace. Zatím necháváme pravidlo a budeme sledovat, jestli se to neopakuje.
+```
+
+Lepší zápis:
+
+```text
+Partnerský podnět jde do backlogu jen tehdy, když má vlastníka, očekávaný obchodní dopad a termín návratu. Dva partnerské podněty bez vlastníka v jednom kvartálu jsou návratový signál pro nové pravidlo.
+```
+
+První verze ukládá nejistotu. Druhá verze ukládá pravidlo použitelné při práci.
+
+### Co po uzavření výslovně nevzniká
+
+Každé uzavření sanity checku by mělo obsahovat krátké negativní vymezení. Ne proto, aby tým působil přísně, ale proto, aby se z kontrolního okamžiku nestal nový proces.
+
+Napište jednu větu:
+
+```text
+Po tomto checku nezakládáme:
+```
+
+A doplňte konkrétní věc:
+
+- další pravidelné sledování stejného pravidla mimo existující kvartální rytmus;
+- novou tabulku historických výjimek;
+- nový formulář pro nápady;
+- nové analytické eventy;
+- nový report pro vedení;
+- nové povinné připomínkování každého použití;
+- novou archivní složku s pracovními kopiemi.
+
+Příklad:
+
+```text
+Po tomto checku nezakládáme samostatné sledování partnerských podnětů. Pokud se v jednom kvartálu objeví dva bez vlastníka, otevře se nová otázka; do té doby stačí běžný backlog.
+```
+
+Taková věta je malá provozní brzda. Pomáhá hlavně týmům, které mají zdravou chuť věci zlepšovat, ale občas zlepšují tak důkladně, až si přidají práci, kterou pak musí zlepšovat znovu. Ano, software tohle umí dokonale. Lidé taky.
+
+### Privacy-first uzavření
+
+Uzavření sanity checku je správný okamžik na poslední datový úklid. Nečekejte na velký audit. Stačí se zeptat, co po checku zůstává v aktivní trase a proč.
+
+Privacy-first minimum:
+
+- V aktivní trase zůstává jen aktuální pravidlo, anonymizovaný příklad a návratový signál.
+- Staré screenshoty, exporty, citace a detailní zákaznické poznámky nejsou zdroj pravdy.
+- Pokud je potřeba archiv, má účel, vlastníka a retenční konec.
+- Odkazy z kanonického místa nevedou do podkladů s širším přístupem, než je potřeba.
+- Nový kontext se neřeší přidáním sledování, dokud není jasná rozhodovací otázka.
+
+Dobré uzavření:
+
+```text
+Aktivní pravidlo neobsahuje žádné osobní údaje ani detail konkrétní poptávky. Příklad je anonymizovaný. Starý pracovní export se neodkazuje z kanonického místa a po retenční době se smaže.
+```
+
+Codyho komentář: privacy-first provoz se často nepozná podle velkého prohlášení na webu. Pozná se podle toho, že po malém review nezůstane pět zbytečných kopií dat. Romantika to není, ale funguje.
+
+### Karta uzavření kvartálního sanity checku
+
+```text
+Pravidlo nebo pracovní místo:
+
+Výsledek sanity checku:
+- klid potvrzen
+- drobné zestárnutí
+- skrytá závislost
+- nový kontext
+
+Uzavírací stav:
+- zavřít bez změny
+- zavřít s lokálním zpřesněním
+- zavřít trasovou opravou
+- zavřít starou větev a otevřít novou otázku
+
+Co se propsalo do kanonického místa:
+
+Co se výslovně nezakládá:
+
+Co už není zdroj pravdy:
+
+Privacy-first úklid:
+
+Návratový signál:
+
+Jedna věta pro tým:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Slabé marketingové podněty bez vlastníka.
+
+Výsledek sanity checku:
+Drobné zestárnutí.
+
+Uzavírací stav:
+Zavřít s lokálním zpřesněním.
+
+Co se propsalo do kanonického místa:
+Doplněn anonymizovaný příklad partnerského podnětu a návratový signál dvou partnerských podnětů bez vlastníka v jednom kvartálu.
+
+Co se výslovně nezakládá:
+Samostatný report partnerských podnětů ani nová tabulka výjimek.
+
+Co už není zdroj pravdy:
+Starý seznam podnětů z přípravy původního pravidla.
+
+Privacy-first úklid:
+V aktivní trase nezůstává detail konkrétního partnera. Starý export není odkazovaný z kanonického místa.
+
+Návratový signál:
+Dva partnerské podněty bez jasného vlastníka v jednom kvartálu.
+
+Jedna věta pro tým:
+Kvartální check pravidla je uzavřený lokálním zpřesněním; pravidlo zůstává v běžném rytmu a nevzniká žádná nová evidence.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek sanity checku.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: určete, co se propsalo do kanonického místa.
+4. Minuta 4: napište, co po checku výslovně nevzniká.
+5. Minuta 5: zkontrolujte aktivní datovou stopu.
+6. Minuta 6: napište jednu větu pro tým.
+
+Výstup:
+
+```text
+Sanity check [pravidlo] uzavíráme stavem [uzavírací stav]. Do kanonického místa jde [změna / nic], nezakládáme [nová evidence / nový dohled / nový report] a privacy-first výsledek je [datové minimum].
+```
+
+### Checklist uzavření sanity checku
+
+- Je jasné, že sanity check skončil?
+- Má uzavření jeden ze čtyř uzavíracích stavů?
+- Pokud se nic nemění, je to zapsané jako legitimní výsledek?
+- Pokud se mění jen lokální detail, nemění se tím smysl pravidla?
+- Pokud problém ležel v trase, opravuje se trasa místo přepisování historie?
+- Pokud vznikl nový kontext, dostává vlastní otázku a původní pravidlo zůstává zavřené?
+- Je zapsané, co se po checku výslovně nezakládá?
+- Nezůstala v aktivní trase stará tabulka, export, screenshot nebo citace?
+- Je jasné, co už není zdroj pravdy?
+- Má případný archiv účel, vlastníka a retenční konec?
+- Dá se závěr poslat týmu jednou větou?
+- Nepřibyl žádný nový tracker, report ani povinné sledování bez jasné rozhodovací otázky?
+
+Uzavření sanity checku má být nenápadné. Když proběhne dobře, tým nemá pocit, že právě vznikl nový proces. Má jen o něco čistší pravidlo, méně starých stop a jasnější hranici, kdy se k tématu vrátit. To je dobrý provoz: ne dramatický, ale použitelný.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního kvartálního sanity checku: čtyři uzavírací stavy, propsání do kanonického místa, negativní vymezení nové evidence, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním kvartálním sanity checku po dlouhodobém klidu: kontrola dohledatelnosti a přiměřenosti pravidla, čtyři výsledné stavy, skrytá závislost, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití do dlouhodobého klidu: čtyři uzavírací stavy, oddělení aktivní trasy od archivu, privacy-first zkrácení datové stopy, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního běžného použití: zkouška všednosti pravidla, čtyři výsledné stavy, prevence třetí kontroly, privacy-first úklid, karta, mini workshop a checklist.
