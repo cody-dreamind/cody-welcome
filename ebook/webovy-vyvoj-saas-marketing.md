@@ -192277,8 +192277,263 @@ Roční návrat k rutině [název] končí stavem [ponechat / zkrátit / slouči
 
 Roční návrat má být lehký, ale ne povrchní. Jeho cílem není znovu prožít všechny staré důvody, proč rutina vznikla. Cílem je zjistit, jestli pořád pomáhá současné práci, a pokud ano, nechat ji běžet s menší stopou. Dobrý dlouhodobý provoz není plný kontrol. Je plný pravidel, která lidé používají bez divadla, a starých podkladů, které už nikdo nemusí hlídat.
 
+## Uzavření prvního ročního návratu do stálého provozního kompasu
+
+Roční návrat sám o sobě ještě nic neuzavírá. Ukáže stav, cenu a datovou stopu dlouhodobé rutiny, ale skutečná práce končí až ve chvíli, kdy se výsledek propíše do běžného provozu. Jinak z ročního review vznikne další hezký zápis, který si tým pochválí, odloží a za rok znovu objeví jako archeologický nález. To je dojemné, ale ne moc užitečné.
+
+Uzavření ročního návratu má jeden praktický cíl: převést výsledek do stálého provozního kompasu. Tím nemyslím nový dashboard ani nový proces. Kompas je krátké pravidlo, které říká, kam se tým při běžné práci vrací, kdy má rutinu nechat být a kdy ji má znovu otevřít.
+
+Pracovní otázka zní:
+
+```text
+Jak roční výsledek přepíšeme do jednoho stabilního pravidla, aby rutina dál pomáhala běžné práci, ale nevyráběla novou kontrolní agendu?
+```
+
+Tahle otázka je důležitá hlavně u pravidel, která už fungují. U rozbité rutiny je směr zřejmý: opravit, sloučit, archivovat nebo otevřít novou otázku. U funkční rutiny je riziko jemnější. Tým může začít hlídat něco, co už nepotřebuje hlídat. Výsledkem je provoz plný kontrol nad kontrolami. Kdyby to byl produkt, nikdo by ho nekoupil; v interních procesech se to bohužel občas tváří jako zodpovědnost.
+
+### Co se po ročním návratu uzavírá
+
+Po ročním návratu uzavřete tři věci:
+
+- stav rutiny: jestli zůstává, zkracuje se, slučuje, archivuje nebo otevírá novou otázku;
+- provozní kompas: kam se člověk vrátí při dalším běžném použití a podle čeho pozná, že stačí;
+- datovou stopu: co se maže, anonymizuje, archivuje nebo výslovně nechává bez změny.
+
+Neuzavírejte znovu celou historii. Pokud roční návrat potvrdil, že rutina funguje, není potřeba opisovat staré důvody, pilotní poznámky ani všechny předchozí kontroly. Stačí krátký závěr:
+
+```text
+Rutina zůstává v provozu jako [stručné pravidlo].
+Kanonické místo je [odkaz nebo název dokumentu].
+Další návrat nastane při [konkrétní signál], ne podle nové kontrolní agendy.
+Datová stopa po ročním návratu je [čistá / zkrácená / archivovaná].
+```
+
+Příklad:
+
+```text
+Rutina zůstává v provozu jako pravidlo datového minima pro formuláře.
+Kanonické místo je checklist pro úpravy formulářů.
+Další návrat nastane, pokud během kvartálu vzniknou dva návrhy na nové pole bez jasného účelu.
+Datová stopa po ročním návratu je zkrácená: pilotní exporty jsou smazané a příklad je anonymizovaný.
+```
+
+Takový zápis je dost krátký na běžnou práci a dost přesný na pozdější audit. Nepotřebuje nový meeting, novou tabulku ani nový štítek v nástroji pro úkoly.
+
+### Pět uzavíracích převodů
+
+Každý výsledek ročního návratu potřebuje jiný převod:
+
+- `Ponechat` přepište do přítomného času: pravidlo platí, kanonické místo zůstává, další návrat řídí signál.
+- `Zkrátit` přepište do menší pracovní trasy: aktivní text zůstává krátký, starší vysvětlení jde do archivu nebo pryč.
+- `Sloučit` přepište do jednoho zdroje pravdy: staré odkazy se přesměrují, duplicitní checklist se zavře.
+- `Archivovat` přepište do archivní karty: účel skončil, nový zdroj pravdy je jasný, archiv má retenční konec.
+- `Otevřít novou otázku` oddělte od staré rutiny: stará rutina dostane svůj stav a nová otázka vlastní kartu.
+
+Nejnebezpečnější je poslední stav. Nová otázka se často tváří jako "jen doplnění" starého pravidla. Ve skutečnosti ale mění rozhodovací situaci. Když ji nacpete do staré rutiny, vznikne dokument, který má chránit všechno a tím pádem nechrání skoro nic.
+
+Rozdíl je vidět na formulaci:
+
+```text
+Špatně:
+Do pravidla pro datové minimum ve formulářích přidáme novou část o enterprise self-service prodeji.
+
+Lépe:
+Pravidlo datového minima ve formulářích zůstává beze změny. Nově otevíráme samostatnou otázku, jak kvalifikovat enterprise self-service poptávky bez zbytečného sběru dat.
+```
+
+Druhá formulace chrání staré pravidlo i novou práci. Tým ví, že původní rutina není rozbitá, a zároveň nová otázka dostane vlastní rozsah, vlastní důkaz a vlastní privacy-first hranici.
+
+### Jak nezaložit novou roční agendu
+
+Uzavření ročního návratu nesmí skončit větou "budeme to každý rok kontrolovat podrobněji". To je obvykle známka, že tým nemá jasný návratový signál. Když je signál dobrý, nepotřebujete další agendu. Stačí vědět, co má člověk udělat v běžném cyklu a kdy má pravidlo znovu otevřít.
+
+Návratový signál pište jako pozorovatelnou situaci:
+
+- dva opakované návrhy na nové formulářové pole bez účelu;
+- tři support dotazy, které ukazují nejasnou onboardingovou instrukci;
+- změna dodavatele, který zpracovává stejný typ dat;
+- nový segment zákazníků s jiným rozhodovacím procesem;
+- incident, při kterém pravidlo nepomohlo tam, kde mělo.
+
+Nepoužívejte signály typu:
+
+- "až bude čas";
+- "při dalším review, pokud se k tomu dostaneme";
+- "až bude potřeba";
+- "když to někdo navrhne";
+- "pravidelně kontrolovat".
+
+Tyhle věty nevypadají dramaticky, ale v provozu jsou slabé. Neříkají, co se má stát. Buď se kvůli nim nic neotevře, nebo se naopak otevře všechno, protože "potřeba" se dá vyložit podle nálady, kapacity i poslední schůzky.
+
+Codyho komentář: "pravidelně kontrolovat" je procesní obdoba věty "někdy si dáme kafe". Zní to společensky, ale nikdo podle toho neví, kdy má dorazit.
+
+### Privacy-first uzavření po roce
+
+Roční uzavření je dobré místo pro tvrdé zkrácení paměti. Ne proto, že by stará práce byla špatná, ale protože stará data mají vlastní cenu. Zabírají pozornost, zvyšují riziko úniku, komplikují orientaci a často přežijí původní účel.
+
+Použijte čtyři jednoduchá pravidla:
+
+- pracovní příklady bez současného účelu anonymizujte nebo smažte;
+- exporty z pilotů, kontrol a dočasných měření nemažte jen tehdy, když mají jasný aktuální důvod;
+- odkazy na staré podklady nechte jen v archivní kartě, ne v aktivní pracovní trase;
+- přístupy k dokumentům a nástrojům snižte na lidi, kteří je pro současnou práci opravdu potřebují.
+
+Privacy-first provoz není o tom, že tým nikdy nic nezapíše. Je o tom, že ví, proč daný zápis existuje, kdo ho potřebuje a kdy má zmizet. Po roce už často nepotřebujete detailní důkaz. Potřebujete stručný závěr a čisté místo, kam se dá vrátit.
+
+Šablona úklidu:
+
+```text
+Aktivní pravidlo po uzavření:
+
+Podklady, které zůstávají v aktivní trase:
+
+Podklady, které jdou do archivu:
+
+Podklady, které se mažou:
+
+Co se anonymizuje:
+
+Kdo má dál přístup:
+
+Kdo přístup ztrácí:
+
+Retenční konec archivu:
+```
+
+Pokud tým neumí říct, proč má starý export zůstat, nemažte ho naslepo v panice, ale založte rychlé rozhodnutí:
+
+```text
+Do [datum] ověří [vlastník], jestli má export současný účel. Pokud ne, smaže se. Do té doby nevzniká žádný další export stejného typu.
+```
+
+Tím se zabrání dvěma slabým variantám: věčnému skladování "pro jistotu" i chaotickému mazání bez odpovědnosti.
+
+### Karta uzavření ročního návratu
+
+```text
+Rutina nebo pravidlo:
+
+Výsledek ročního návratu:
+- ponechat / zkrátit / sloučit / archivovat / otevřít novou otázku
+
+Jednovětý závěr:
+
+Kanonické místo po uzavření:
+
+Provozní kompas:
+- co člověk udělá při běžném použití
+- kdy stačí
+- kdy se pravidlo znovu otevře
+
+Co se mění:
+
+Co se výslovně nemění:
+
+Co nevzniká:
+- nový tracker
+- nový report
+- nový formulář
+- nový kontrolní meeting
+- jiná agenda
+
+Datová stopa po uzavření:
+- aktivní
+- archivovaná
+- smazaná
+- anonymizovaná
+
+Přístupy po uzavření:
+
+Návratový signál:
+
+Vlastník:
+
+Datum dalšího přirozeného review:
+```
+
+Vyplněný příklad:
+
+```text
+Rutina nebo pravidlo:
+Datové minimum při úpravě poptávkového formuláře.
+
+Výsledek ročního návratu:
+Ponechat se zkráceným příkladem.
+
+Jednovětý závěr:
+Pravidlo zůstává, protože pořád brání přidávání polí bez jasného účelu.
+
+Kanonické místo po uzavření:
+Checklist pro úpravy formulářů.
+
+Provozní kompas:
+Při každém návrhu nového pole se zapíše účel, vlastník dat a retenční důvod. Pokud účel nejde říct jednou větou, pole se nepřidává. Pravidlo se znovu otevře při dvou sporných návrzích za kvartál.
+
+Co se mění:
+Starý příklad se zkracuje a anonymizuje.
+
+Co se výslovně nemění:
+Formulář se nerozšiřuje a nevzniká nové měření chování návštěvníků.
+
+Co nevzniká:
+Žádný nový tracker, report ani pravidelný meeting.
+
+Datová stopa po uzavření:
+Pilotní exporty smazané, anonymizovaný příklad ponechaný v checklistu.
+
+Přístupy po uzavření:
+Přístup zůstává jen lidem, kteří upravují web nebo vyhodnocují poptávky.
+
+Návratový signál:
+Dva sporné návrhy na nové pole za kvartál.
+
+Vlastník:
+Majitel webu.
+
+Datum dalšího přirozeného review:
+Roční review webu a datové mapy.
+```
+
+### Mini workshop na 8 minut
+
+1. Minuta 1: přečtěte výsledek ročního návratu.
+2. Minuta 2: napište jednovětý závěr.
+3. Minuta 3: určete kanonické místo po uzavření.
+4. Minuta 4: přepište provozní kompas do tří vět.
+5. Minuta 5: napište, co se výslovně nemění.
+6. Minuta 6: rozhodněte, co nevzniká za novou agendu.
+7. Minuta 7: uzavřete datovou stopu a přístupy.
+8. Minuta 8: pošlete týmu závěrečnou větu.
+
+Výstup:
+
+```text
+Roční návrat k [rutina] uzavíráme stavem [výsledek]. Aktivní pravidlo je [kompas]. Měníme [minimum], uklízíme [datová stopa], nevzniká [nová agenda] a návrat nastane při [signál].
+```
+
+### Checklist uzavření ročního návratu
+
+- Má roční návrat jeden jasný výsledek?
+- Je výsledek přepsaný do jedné věty pro tým?
+- Je jasné kanonické místo po uzavření?
+- Popisuje provozní kompas běžné použití, stop stav i návratový signál?
+- Je zapsané, co se výslovně nemění?
+- Nevzniká nový tracker, report, formulář, meeting ani kontrolní tabulka?
+- Pokud se pravidlo ponechává, není kolem něj nová mimořádná pozornost?
+- Pokud se zkracuje, odešla stará opatrnost z aktivní trasy?
+- Pokud se slučuje, nezůstávají dvě paralelní místa?
+- Pokud se archivuje, má archiv retenční konec?
+- Pokud se otevírá nová otázka, má vlastní kartu a nepřepisuje starou rutinu?
+- Jsou staré exporty, příklady a pomocné podklady smazané, anonymizované nebo odůvodněně archivované?
+- Jsou přístupy po roce pořád přiměřené?
+- Je návratový signál pozorovatelný v běžné práci?
+- Dá se celé uzavření vysvětlit bez čtení staré historie?
+
+Dobré uzavření ročního návratu je skoro nudné. Právě v tom je jeho síla. Neoslavuje proces, nevyrábí další proces a nesnaží se z ročního review udělat novou disciplínu. Jen nechá užitečné pravidlo dál pracovat, zkrátí jeho stopu a jasně řekne, kdy má tým znovu zvednout hlavu.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního ročního návratu do stálého provozního kompasu: převod výsledku ročního review, prevence nové agendy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním ročním návratu k dlouhodobé rutině: ověření účelu, použití, ceny a datové stopy, pět výsledků návratu, privacy-first roční úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého kvartálního sanity checku do dlouhodobé rutiny: čtyři uzavírací stavy, propsání do kanonického místa, privacy-first úklid zbytkových stop, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém kvartálním sanity checku bez nového procesu: ověření konce první kontroly, zbytkové stopy a závislosti, prevence třetího checku, privacy-first úklid, karta, mini workshop a checklist.
