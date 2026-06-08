@@ -194733,8 +194733,254 @@ Signál [popis] uzavíráme jako [stav]. Mění se [nejmenší změna]. Nemění
 
 Uzavření prvního návratového signálu je malý test dospělosti pravidla. Nejde o to dokázat, že kompas byl dokonalý. Jde o to ukázat, že se umí ozvat, dostat přiměřenou reakci a zase zmizet do běžné práce. Dobrý kompas není ten, kolem kterého tým chodí po špičkách. Dobrý kompas je ten, který se používá bez ceremoniálu a nezanechává za sebou zbytečné stopy.
 
+## První běžné použití po uzavřeném návratovém signálu kompasu
+
+Po uzavření návratového signálu přichází nejdůležitější nenápadná zkouška: další běžné použití kompasu. Nejde o nové review, kontrolu ani audit. Jde o obyčejnou pracovní situaci, ve které má tým použít pravidlo tak, jako by se předchozí signál už opravdu uzavřel.
+
+Pracovní otázka:
+
+```text
+Umí tým po uzavřeném návratovém signálu použít kompas v běžné práci bez zvláštního dohledu, dodatečné evidence a návratu staré nejistoty?
+```
+
+Tato otázka chrání dvě věci najednou. Na jedné straně brání tomu, aby uzavřený signál žil dál jako tichá obava. Na druhé straně brání tomu, aby tým ignoroval drobný zbytek tření jen proto, že nechce znovu otevírat téma. První běžné použití po signálu má ukázat, jestli se uzavření proměnilo ve skutečný pracovní stav.
+
+Začněte bez formuláře. Stačí si při použití všimnout tří bodů:
+
+- člověk kompas našel tam, kde ho čekal;
+- rozhodnutí šlo udělat bez návratu ke starým podkladům;
+- po použití nevznikl nový seznam, komentář, kontrola ani ruční schvalování.
+
+Pokud všechny tři body platí, nic dalšího nedělejte. Právě to je výsledek, který chcete. Funkční pravidlo po návratovém signálu se nemá oslavovat novým zápisem, protože pak by se každé dobré použití stalo další prací.
+
+### Co při prvním běžném použití sledovat
+
+Sledujte jen reálné tření v práci, ne dojmy z toho, jestli pravidlo působí dokonale. Pomáhají tři krátké kontrolní otázky:
+
+```text
+Kde člověk začal hledat pravidlo?
+
+Co musel udělat navíc oproti běžné práci?
+
+Vznikla po použití nějaká nová stopa, kterou by bez návratového signálu nikdo nezakládal?
+```
+
+První otázka testuje dohledatelnost. Pokud člověk pravidlo hledá v jiném dokumentu, než kde má být, problém nemusí být v obsahu pravidla. Možná je špatný odkaz, název nebo pracovní trasa.
+
+Druhá otázka testuje samostatnost. Pokud člověk po uzavřeném signálu pořád potřebuje ruční potvrzení, signál možná nebyl uzavřený dost jasně. Neznamená to automaticky, že celý kompas selhal. Znamená to, že někde zůstala věta, kterou tým neumí použít bez pomocné berličky.
+
+Třetí otázka testuje datovou stopu. Pokud po běžném použití vznikne nová tabulka případů, screenshot pro jistotu nebo komentář s konkrétním zákaznickým detailem, uzavření signálu se ještě nepropsalo do privacy-first provozu.
+
+Příklad:
+
+```text
+Situace:
+Autor připravuje další case study a znovu řeší zákaznickou metriku.
+
+Použití kompasu:
+Najde větu v šabloně, nahradí přesnou hodnotu rozmezím a pokračuje bez schvalování.
+
+Výsledek:
+Kompas funguje. Nevzniká karta ani další zápis.
+```
+
+Jiný příklad:
+
+```text
+Situace:
+Autor připravuje další case study, ale novou větu v šabloně nenajde.
+
+Použití kompasu:
+Ptá se vlastníka obsahu, kde pravidlo je.
+
+Výsledek:
+Neopravujeme kompas. Opravujeme odkaz v pracovním checklistu, aby vedl na šablonu s novou větou.
+```
+
+Rozdíl je praktický. V prvním případě pravidlo žije. Ve druhém případě princip pravidla drží, ale pracovní trasa má lokální díru.
+
+### Čtyři výsledky prvního běžného použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- `Použito bez stopy`: kompas pomohl a nic nového nevzniká.
+- `Lokálně dotaženo`: princip funguje, ale jedno pracovní místo potřebuje drobnou opravu.
+- `Zbytkový dohled`: tým pravidlo použil, ale zároveň si nechal pomocnou kontrolu.
+- `Návrat potvrzen`: stejný problém se vrátil i po uzavření signálu.
+
+`Použito bez stopy` je nejlepší výsledek a zároveň nejkratší. Nezapisujte ho jen proto, že chcete mít důkaz, že všechno klaplo. Pokud potřebujete někomu říct, že je hotovo, stačí jedna pracovní věta:
+
+```text
+Kompas byl použit v běžné situaci bez nové evidence a zůstává v tichém provozu.
+```
+
+`Lokálně dotaženo` znamená, že stačí opravit nejbližší místo: odkaz, název, příklad, větu v šabloně nebo pořadí kroku v checklistu. Neotevírejte původní návratový signál znovu. Ten už splnil svou práci.
+
+`Zbytkový dohled` je zrádný. Tým sice tvrdí, že pravidlo funguje, ale někdo si pro jistotu nechává interní poznámku, hlídací komentář nebo ruční schválení. Tady nejde o obsah pravidla, ale o návrat starého chování. Reakce má být odstraňovací:
+
+```text
+Rušíme pomocnou kontrolu [název] a další použití bude vidět pouze v běžném pracovním rytmu [místo].
+```
+
+`Návrat potvrzen` je jediný výsledek, který znovu otevírá práci na pravidle. I tady ale nezačínejte od nuly. Otevřete jen tu situaci, která se vrátila po uzavření signálu:
+
+```text
+Po uzavření signálu se stejná nejistota vrátila v běžné situaci [situace]. Otevíráme úzké ověření [co přesně] a mimo rozsah zůstává [co se nemění].
+```
+
+### Jak odstranit zbytkový dohled
+
+Zbytkový dohled často nevypadá jako proces. Vypadá jako nevinná věta:
+
+- "Ještě si to necháme v komentáři."
+- "Pro jistotu to pošleme ke schválení."
+- "Zatím si uděláme malý seznam případů."
+- "Jednou měsíčně se na to mrkneme."
+
+Každá z těchto vět může být rozumná, pokud má jasný účel a konec. Po uzavřeném návratovém signálu je ale podezřelá. Ptejte se:
+
+```text
+Jaké rozhodnutí tato kontrola umožní, které neuvidíme v běžné práci?
+
+Kdy přesně kontrola skončí?
+
+Jakou datovou stopu kvůli ní zakládáme?
+```
+
+Když odpověď není jasná, kontrolu nezakládejte nebo ji rovnou zrušte. Pokud někdo namítne, že "aspoň budeme mít jistotu", převeďte jistotu na konkrétní signál. Jistota sama o sobě není pracovní výstup. Je to pocit, který umí sežrat hodně času a tvářit se u toho zodpovědně.
+
+Codyho komentář: "pro jistotu" je nejdražší dvouslovný plán v malém týmu. Hned po "rychlý redesign". Oba znějí nevinně a oba umí nenápadně převzít kalendář.
+
+### Privacy-first použití po signálu
+
+První běžné použití po návratovém signálu má být čistší než samotný signál. Signál mohl vzniknout v konkrétním kontextu. Běžné použití už má pracovat s pravidlem, ne s citlivou historií.
+
+Privacy-first hranice:
+
+- nepřenášejte původní zákaznický příklad do nové situace;
+- nepoužívejte přesná data, pokud stačí rozmezí, anonymní vzor nebo rozhodovací věta;
+- nemažte kanonické pravidlo, ale mažte dočasné komentáře kolem něj;
+- nezakládejte evidenci dobrých použití jen kvůli dokazování;
+- pokud se problém vrací, otevřete úzké ověření s minimálním datovým polem a koncem.
+
+Dobrá pracovní věta:
+
+```text
+Při nové case study bylo pravidlo použito bez schvalování: přesná metrika byla nahrazena rozmezím a nevznikl žádný nový pomocný seznam.
+```
+
+Slabá pracovní věta:
+
+```text
+Pro jistotu si ponecháme původní i novou metriku v interním seznamu, abychom mohli později porovnat podobné případy.
+```
+
+Slabá věta možná zní analyticky, ale ve skutečnosti zvyšuje datovou stopu bez jasného rozhodnutí. Privacy-first provoz stojí na schopnosti říct: tady už přesná data nepotřebujeme.
+
+### Karta prvního běžného použití po signálu
+
+Kartu použijte jen tehdy, když výsledek není `Použito bez stopy`. U čistého použití karta nevzniká.
+
+```text
+Kompas:
+
+Předchozí návratový signál:
+
+Běžná situace:
+
+Kde člověk kompas použil:
+
+Výsledek:
+- použito bez stopy
+- lokálně dotaženo
+- zbytkový dohled
+- návrat potvrzen
+
+Co se mění:
+
+Co se nemění:
+
+Co se ruší, maže, zkracuje nebo anonymizuje:
+
+Kde bude další použití vidět bez nové evidence:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v pracovních příkladech.
+
+Předchozí návratový signál:
+Nejistota autora case study při práci s přesnou zákaznickou metrikou.
+
+Běžná situace:
+Další case study pro sales enablement.
+
+Kde člověk kompas použil:
+Šablona case study.
+
+Výsledek:
+Lokálně dotaženo.
+
+Co se mění:
+V checklistu pro přípravu case study se opravuje odkaz na aktuální šablonu.
+
+Co se nemění:
+Kanonický kompas datového minima a pravidlo pro nahrazení přesné metriky rozmezím.
+
+Co se ruší, maže, zkracuje nebo anonymizuje:
+Dočasný komentář s dotazem na schválení se maže.
+
+Kde bude další použití vidět bez nové evidence:
+V běžném obsahovém review.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-08.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, ve které se kompas použil.
+2. Minuta 2: řekněte, zda člověk pravidlo našel bez pomoci.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: určete nejmenší opravu nebo potvrďte, že žádná nevzniká.
+5. Minuta 5: smažte zbytkové komentáře, screenshoty nebo pomocné poznámky.
+6. Minuta 6: napište jednu větu, kde bude další použití vidět bez nové evidence.
+
+Výstup:
+
+```text
+Po uzavřeném signálu byl kompas použit v situaci [situace] s výsledkem [výsledek]. Mění se [nejmenší změna / nic]. Nemění se [kompas/proces] a další použití zůstává viditelné v [běžný rytmus].
+```
+
+### Checklist prvního běžného použití po signálu
+
+- Proběhlo použití v běžné pracovní situaci, ne v umělém testu?
+- Našel člověk kompas bez návratu ke starým podkladům?
+- Šlo rozhodnutí udělat bez ručního schvalování?
+- Nevznikl nový tracker, seznam případů, kontrolní komentář ani report?
+- Je vybraný jeden ze čtyř výsledků?
+- U čistého použití nevzniká karta jen kvůli pocitu jistoty?
+- U lokálního dotažení opravujeme nejbližší pracovní místo?
+- U zbytkového dohledu rušíme pomocnou kontrolu místo jejího formalizování?
+- U potvrzeného návratu otevíráme jen úzké ověření konkrétní situace?
+- Jsou původní citlivé příklady odstraněné, zkrácené nebo anonymizované?
+- Je další použití vidět v existujícím pracovním rytmu?
+- Umí vlastník říct jednou větou, proč se kompas nevrací do zvláštní péče?
+
+První běžné použití po uzavřeném návratovém signálu má být skoro nudné. Tým použije pravidlo, rozhodne, uklidí zbytečné stopy a jde dál. Když se to podaří, kompas se vrací do tichého provozu o něco silnější. Ne proto, že jste o něm napsali další dokument, ale proto, že přežil běžnou práci bez toho, aby si vyžádal novou agendu.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratovém signálu stálého provozního kompasu: kontrola běžné práce bez nového dohledu, čtyři výsledky použití, odstranění zbytkové kontroly, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po tichém provozu stálého provozního kompasu: čtyři uzavírací stavy, propsání do kanonického místa, prevence obnovení dohledu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu stálého provozního kompasu: rozlišení běžné hrany, lokálního tření, slabého návratu a skutečného návratu, nejmenší reakce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého nenápadného použití stálého provozního kompasu: čtyři uzavírací stavy, uzavírací věta, omezení zbytkových stop, privacy-first úklid, karta, mini workshop a checklist.
