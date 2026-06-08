@@ -192941,8 +192941,242 @@ První použití kompasu [název] uzavíráme stavem [stav]. Rozhodnutí bylo [v
 
 Uzavření prvního použití kompasu je ochrana proti procesnímu přehřívání. Pokud pravidlo funguje, nechte ho fungovat. Pokud drhne, opravte nejbližší místo. Pokud ukáže nové téma, oddělte ho. A pokud po něm zůstane méně dat, méně podkladů a méně dohledu než předtím, není to málo práce. Je to přesně správná práce.
 
+## Druhé běžné použití stálého provozního kompasu
+
+Druhé běžné použití kompasu je důležitější než první, i když působí méně slavnostně. První použití často proběhne s čerstvou pamětí na roční review, uzavírací kartu a lidi, kteří pravidlo tvořili. Druhé použití už lépe ukáže, jestli kompas stojí sám. Jiná situace, jiný člověk nebo jiné pracovní tempo odhalí, jestli pravidlo opravdu pomáhá rozhodovat, nebo jestli jen dobře fungovalo v jednom pečlivě ošetřeném případě.
+
+Cílem druhého použití není znovu dokazovat celý smysl kompasu. Cílem je ověřit přenositelnost. Kompas má člověku říct, jak se rozhodnout v opakované třídě situací, aniž by musel hledat autora pravidla, procházet staré poznámky nebo sbírat další důkazy pro jistotu.
+
+Pracovní otázka zní:
+
+```text
+Funguje stálý provozní kompas i při druhém běžném použití bez mimořádné pomoci, nového sběru dat a návratu k historii?
+```
+
+Pokud ano, kompas se může ještě víc ztišit. Pokud ne, neznamená to automaticky selhání pravidla. Znamená to, že druhý průchod ukázal konkrétní hranu: pravidlo je možná moc úzké, moc závislé na prvním příkladu, špatně umístěné nebo nejasné pro roli, která ho právě použila.
+
+### Co druhé použití ověřuje navíc
+
+První použití ověřuje hlavně najitelnost a základní použitelnost. Druhé použití přidává tři další otázky:
+
+- přenositelnost: kompas funguje i v trochu jiné situaci stejného typu;
+- nezávislost: člověk nepotřebuje autora pravidla ani paměť z původního review;
+- stabilitu rozsahu: druhé použití neotevírá původní téma víc, než je nutné.
+
+Příklad:
+
+```text
+Kompas:
+Datové minimum při úpravě poptávkového formuláře.
+
+První použití:
+Nepřidali jsme pole "velikost firmy", protože účel šel vyřešit v obchodním follow-upu.
+
+Druhé použití:
+Produkt chce přidat checkbox "souhlasím s telefonickým kontaktováním".
+
+Rozhodnutí:
+Checkbox se nepřidává jako plošné pole. Pokud obchod potřebuje telefon, požádá o něj až v navazující komunikaci s jasným účelem.
+
+Co kompas potvrdil:
+Pravidlo není jen o jednom konkrétním poli. Pomáhá odmítnout plošný sběr údajů, když účel patří až do dalšího kroku vztahu.
+
+Co nevzniká:
+Nové pole, nový export kontaktů, nový report souhlasů ani další schvalovací vrstva.
+```
+
+Druhé použití v tomto příkladu nerozšiřuje kompas o telefonní komunikaci jako nové velké téma. Jen potvrzuje pracovní princip: nepřidávat plošný sběr dat tam, kde stačí konkrétní navazující krok.
+
+### Čtyři výsledky druhého použití
+
+Po druhém použití vyberte jeden ze čtyř stavů:
+
+- `Kompas se přenesl`: pravidlo fungovalo v druhé běžné situaci bez úpravy.
+- `Chybí přenosová věta`: princip funguje, ale příští člověk potřebuje jednu větu, která ukáže šířku použití.
+- `Role čte pravidlo jinak`: pravidlo je dobré, ale jiná role si ho vykládá jiným směrem.
+- `Druhá situace patří jinam`: případ vypadá podobně, ale ve skutečnosti patří do jiné pracovní otázky.
+
+Stav `Kompas se přenesl` je signál k uklidnění. Není potřeba přidávat další kontrolu jen proto, že pravidlo prošlo druhým použitím. Stačí krátký záznam:
+
+```text
+Kompas byl použit podruhé v běžné situaci. Princip se přenesl bez úpravy, bez nové evidence a bez návratu k historii.
+```
+
+Stav `Chybí přenosová věta` řešte jednou větou v kanonickém místě. Například:
+
+```text
+Pravidlo platí pro každé nové pole, které plošně sbírá údaj od návštěvníka, i když se důvod tváří jako obchodní pohodlí.
+```
+
+To je lepší než přidat dlouhý seznam všech možných polí. Seznam stárne, princip drží.
+
+Stav `Role čte pravidlo jinak` neřešte obviňováním role. Často jen vidí jiný pracovní tlak. Obchod může chtít víc informací kvůli kvalifikaci, produkt kvůli segmentaci, marketing kvůli kampani a provoz kvůli bezpečnosti. Kompas má těmto tlakům dát společnou hranici, ne vyhrát nad jednou rolí. Pokud se výklady liší, doplňte do kanonického místa jednu větu o účelu, vlastnictví nebo stop stavu.
+
+Stav `Druhá situace patří jinam` je zdravé rozpoznání hranice. Kompas nemá řešit všechno, co se trochu podobá původnímu tématu. Pokud druhý případ patří do bezpečnosti, právní revize, cenotvorby nebo produktové strategie, založte samostatnou kartu a starý kompas nechte být.
+
+### Jak poznat přenosovou větu
+
+Přenosová věta je krátká formulace, která pomůže použít stejný princip v další běžné situaci. Není to nové pravidlo, nová metodika ani rozšířený checklist. Je to most mezi konkrétním příkladem a opakovaným rozhodováním.
+
+Dobrá přenosová věta:
+
+- říká, na jaký typ situací se kompas vztahuje;
+- pomáhá jiné roli rozhodnout bez dotazu na autora;
+- nevyžaduje nové měření ani novou evidenci;
+- zůstává pravdivá i bez původního příkladu;
+- má hranici, kdy se téma otevře samostatně.
+
+Slabá přenosová věta:
+
+- jen zopakuje první příklad jinými slovy;
+- přidá výjimku pro každou roli;
+- schová nové rozhodnutí do starého pravidla;
+- začne sbírat další důkazy "pro jistotu";
+- zní tak obecně, že podle ní nejde nic rozhodnout.
+
+Příklad dobré přenosové věty:
+
+```text
+Nový údaj přidáváme do formuláře jen tehdy, když bez něj nejde udělat nejbližší rozhodnutí v daném kroku; pohodlnější pozdější práce týmu sama o sobě nestačí.
+```
+
+Tato věta pomůže u velikosti firmy, telefonu, rozpočtu i dalších podobných údajů. Současně neříká, že formulář se nikdy nesmí rozšířit. Jen stanoví hranici: nejbližší rozhodnutí, jasný účel, žádný plošný sběr pro pohodlí.
+
+Codyho komentář: druhé použití je takový tichý test, jestli pravidlo umí žít i bez svého autora. Pokud se musí pokaždé volat člověk, který ho napsal, není to kompas. Je to interní folklór s hezkým nadpisem.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití má jednu typickou past: tým chce porovnat první a druhý případ tak důkladně, že začne znovu vytahovat staré podklady. Tím si nechtěně obnoví datovou stopu, kterou už jednou uklidil.
+
+Privacy-first postup je jednoduchý:
+
+- porovnávejte princip, ne konkrétní osoby nebo zákazníky;
+- nevracejte do aktivní trasy starý export jen kvůli analogii;
+- pokud potřebujete příklad, použijte anonymizovanou větu;
+- zapište rozdíl mezi situacemi jen v rozsahu potřebném pro rozhodnutí;
+- novou otázku oddělte bez kopírování citlivých detailů.
+
+Špatný zápis:
+
+```text
+Podobné jako u poptávky od konkrétní firmy z minulého měsíce, kde jsme řešili jméno člověka, telefon a rozpočet.
+```
+
+Lepší zápis:
+
+```text
+Podobné jako u předchozího návrhu na nové formulářové pole: údaj by pomohl až v navazujícím obchodním kroku, ne při odeslání poptávky.
+```
+
+Druhý zápis drží rozhodovací princip a nevrací do textu citlivý detail. To je přesně rozdíl mezi užitečnou týmovou pamětí a datovým skladištěm převlečeným za kontext.
+
+### Karta druhého běžného použití kompasu
+
+```text
+Kompas nebo pravidlo:
+
+První běžné použití jednou větou:
+
+Druhá běžná situace:
+
+Kdo kompas použil:
+
+Rozhodnutí:
+
+Výsledek:
+- kompas se přenesl
+- chybí přenosová věta
+- role čte pravidlo jinak
+- druhá situace patří jinam
+
+Co bylo stejné jako v prvním použití:
+
+Co bylo jiné:
+
+Přenosová věta, pokud je potřeba:
+
+Co se výslovně neotevírá:
+
+Nová karta, pokud situace patří jinam:
+
+Datová stopa:
+- nevznikla / zkrácená / anonymizovaná / vyžaduje úklid
+
+Návratový signál:
+
+Vlastník:
+
+Datum návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas nebo pravidlo:
+Datové minimum při úpravě poptávkového formuláře.
+
+První běžné použití jednou větou:
+Nepřidali jsme pole "velikost firmy", protože účel patřil až do obchodního follow-upu.
+
+Druhá běžná situace:
+Návrh na plošný checkbox pro telefonické kontaktování.
+
+Rozhodnutí:
+Checkbox se nepřidává do formuláře; telefon se řeší až v navazující komunikaci, pokud má jasný účel.
+
+Výsledek:
+Chybí přenosová věta.
+
+Přenosová věta:
+Nový údaj nebo souhlas nepřidáváme plošně, pokud je potřeba až pro další krok konkrétního vztahu.
+
+Co se výslovně neotevírá:
+Celý formulář, scoring leadů ani nová obchodní metodika.
+
+Datová stopa:
+Bez nového pole, bez exportu a bez kopírování konkrétních poptávek.
+
+Návratový signál:
+Dva další návrhy na plošný sběr údajů během jednoho kvartálu.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte první použití jednou větou.
+2. Minuta 2: pojmenujte druhou běžnou situaci.
+3. Minuta 3: určete, co je stejné a co jiné.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: napište přenosovou větu, pokud je potřeba.
+6. Minuta 6: určete, co se neotevírá a jaká data nevznikají.
+7. Minuta 7: zapište návratový signál.
+
+Výstup:
+
+```text
+Kompas [název] byl použit podruhé v situaci [situace]. Výsledek je [stav]. Princip [přenesl se / doplňujeme jednou větou / vyžaduje sladění role / patří jinam]. Nevzniká [evidence] a návrat nastane při [signál].
+```
+
+### Checklist druhého použití
+
+- Byla druhá situace opravdu běžná, ne umělý test?
+- Je první použití shrnuté jednou větou, ne celou historií?
+- Je jasné, co je mezi prvním a druhým použitím stejné?
+- Je jasné, co je jiné?
+- Vybral tým jeden ze čtyř výsledků?
+- Pokud se kompas přenesl, nevzniká další kontrolní agenda?
+- Pokud chybí přenosová věta, je to opravdu jedna věta?
+- Pokud role čte pravidlo jinak, je rozdíl zapsaný věcně a bez obviňování?
+- Pokud druhá situace patří jinam, má vlastní kartu a starý kompas se nerozšiřuje?
+- Nevrátily se do aktivní trasy staré exporty, citlivé příklady ani pomocné podklady?
+- Nevznikl nový tracker, formulářové pole, report ani tabulka použití?
+- Je rozhodnutí pochopitelné pro člověka, který nebyl u ročního review?
+- Má návratový signál konkrétní podobu v běžném provozu?
+
+Druhé běžné použití kompasu má uzavřít jednu důležitou nejistotu: jestli pravidlo funguje mimo první pečlivý případ. Když ano, nechte ho dál tiše pracovat. Když ne, opravte jen přenos, roli nebo hranici. Stabilní kompas nepotřebuje velké publikum. Potřebuje druhé použití, které nerozšíří práci a nezvětší datovou stopu.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o druhém běžném použití stálého provozního kompasu: přenositelnost pravidla, čtyři výsledky druhého použití, přenosová věta, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití stálého provozního kompasu: čtyři uzavírací stavy, lokální opravy, privacy-first zkrácení datové stopy, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním běžném použití stálého provozního kompasu: ověření najitelnosti, použitelnosti a přiměřenosti, čtyři výsledky použití, nejbližší oprava, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního ročního návratu do stálého provozního kompasu: převod výsledku ročního review, prevence nové agendy, privacy-first úklid, karta, mini workshop a checklist.
