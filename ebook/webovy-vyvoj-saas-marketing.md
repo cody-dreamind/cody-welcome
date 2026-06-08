@@ -193604,8 +193604,206 @@ Kompas [název] byl použit v běžné situaci [situace]. Výsledek je [stav]. Z
 
 První nenápadné použití je dobrý test dospělosti provozního pravidla. Když vše proběhne tiše, není to známka malé hodnoty. Je to známka toho, že pravidlo konečně přestalo být projektem a začalo chránit práci přímo v místě, kde se rozhoduje.
 
+## Uzavření prvního nenápadného použití kompasu
+
+První nenápadné použití má smysl uzavřít stejně nenápadně, jako proběhlo. Pokud po něm vznikne velká retrospektiva, kompas se zase dostane do zvláštního režimu. Cílem uzavření není dokázat, že pravidlo funguje. Cílem je odstranit drobné stopy, nechat správnou větu na správném místě a zabránit tomu, aby z jednoho běžného rozhodnutí vznikl nový proces.
+
+Uzavírací otázka:
+
+```text
+Co musí po prvním nenápadném použití zůstat, aby příští člověk rozhodl stejně dobře, a co naopak musí zmizet, aby z kompasu nevznikla nová evidence?
+```
+
+Tato otázka drží dvě věci najednou. Nechce mazat užitečnou paměť, ale zároveň nechce schovávat každou pracovní stopu "pro jistotu". Pro privacy-first provoz je to důležité: dobré pravidlo má snižovat množství dat, kopií a interních vysvětlení, ne vyrábět další dokumentační sediment.
+
+### Čtyři uzavírací stavy
+
+Po prvním nenápadném použití vyberte jeden ze čtyř uzavíracích stavů:
+
+- `Beze změny zavřeno`: pravidlo bylo použité správně, nevznikl dopad do pracovního místa a není co zapisovat.
+- `Jedna věta propsána`: vznikla krátká pracovní věta v existujícím místě a dočasné podklady mizí.
+- `Najitelnost opravena`: princip byl správný, ale cesta k němu byla slabá, takže se opraví odkaz, název nebo umístění.
+- `Nový problém oddělen`: situace otevřela jinou otázku a ta se odkládá do samostatné karty mimo původní kompas.
+
+`Beze změny zavřeno` používejte odvážně. Pokud tým díky kompasu nepřidal zbytečné pole do formuláře, neotevřel nový tracker a neměnil kanonické místo, může být správný závěr opravdu jen zavření bez zápisu. Ticho tady není zanedbání. Je to důkaz, že pravidlo už nemusí být doprovázené zvláštní administrativou.
+
+`Jedna věta propsána` použijte tehdy, když by příští člověk mohl narazit na stejnou hranu. Věta nemá popisovat konkrétní případ. Má z něj vytáhnout princip a vložit ho do místa, kde se rozhoduje. Pokud se řešil formulář, věta patří k formuláři. Pokud se řešil support, patří do support šablony. Pokud se řešil sales handoff, patří do obchodní karty.
+
+`Najitelnost opravena` je servisní stav, ne revize pravidla. Když někdo kompas našel až přes starý chat, interní poznámku nebo paměť kolegy, neopravujte hned samotný kompas. Nejdřív opravte cestu: odkaz v indexu, název sekce, popisek v checklistu nebo místo, odkud tým pravidlo běžně hledá.
+
+`Nový problém oddělen` chrání kompas před přejídáním. Pokud první nenápadné použití ukáže téma, které má jiný účel, jiné role, jiné riziko nebo jinou datovou stopu, nedopisujte ho do původního pravidla bokem. Zapište ho jako novou otázku se stop podmínkou a původní kompas zavřete.
+
+### Co po uzavření zůstává
+
+Po uzavření má zůstat jen to, co má práci při příštím použití:
+
+- aktuální kanonické místo kompasu;
+- jedna pracovní věta, pokud je opravdu potřeba;
+- opravený odkaz nebo název, pokud byl problém v najitelnosti;
+- samostatná karta nového problému, pokud se téma oddělilo;
+- návratový signál, pokud se má stejná otázka znovu otevřít.
+
+Všechno ostatní je podezřelé. Dočasná poznámka z diskuse, screenshot s konkrétním zákaznickým příkladem, export poptávky, kopie formuláře nebo osobní detail v komentáři má mít jasný účel. Pokud účel skončil propsáním věty, stopa se smaže, zkrátí nebo anonymizuje.
+
+Příklad dobrého zůstatku:
+
+```text
+V checklistu formuláře zůstala věta: "Kvalifikační údaj nepřidáváme plošně, pokud je potřeba až pro ruční obchodní rozhodnutí." Starý komentář k návrhu pole se smaže. Kompas se nemění.
+```
+
+Příklad špatného zůstatku:
+
+```text
+Necháme si celou interní diskusi, screenshot konkrétní poptávky a zvláštní poznámku, kdyby se někdo ptal, proč pole nepřibylo.
+```
+
+První varianta pomáhá příštímu rozhodnutí. Druhá varianta jen skladuje kontext, který bude za měsíc polovičatý, citlivější než samotné pravidlo a pravděpodobně stejně nepoužitelný.
+
+### Uzavírací věta
+
+Uzavření napište jednou větou podle vybraného stavu:
+
+```text
+Kompas [název] byl použit v běžné situaci [situace] a uzavírá se stavem [stav]; zůstává [nic / jedna věta / opravený odkaz / nová karta], nevzniká [evidence] a dočasné stopy [stav úklidu].
+```
+
+Příklady:
+
+```text
+Kompas datového minima byl použit při návrhu pole "rozpočet" a uzavírá se stavem jedna věta propsána; zůstává věta v checklistu formuláře, nevzniká evidence použití a dočasný komentář se maže.
+```
+
+```text
+Kompas zákaznického handoffu byl použit při předání nové poptávky a uzavírá se beze změny; nezůstává nový zápis, nevzniká kontrolní report a žádné dočasné podklady nevznikly.
+```
+
+```text
+Kompas provozního rozhodování narazil na otázku regulovaného odvětví a uzavírá se stavem nový problém oddělen; vzniká samostatná karta pro obchodní kvalifikaci, původní kompas se nemění a pracovní poznámky se anonymizují.
+```
+
+Uzavírací věta není zápis do kroniky. Je to pojistka proti plíživému rozšiřování rozsahu. Když ji nejde napsat krátce, obvykle se snažíte uzavřít víc věcí najednou.
+
+### Privacy-first úklid po uzavření
+
+Po uzavření projděte tři úklidové otázky:
+
+```text
+Zůstává někde konkrétní zákaznický nebo osobní detail, který už není potřeba?
+Vznikla nová kopie pravidla mimo kanonické místo?
+Začali jsme měřit, kdo kompas používá, místo toho, abychom zlepšili samotné pracovní místo?
+```
+
+Pokud je odpověď ano, opravte nejmenší možnou věc:
+
+- osobní detail nahraďte anonymním principem;
+- kopii pravidla smažte nebo přesměrujte na kanonické místo;
+- měření použití nahraďte kontrolou výstupu v běžném review;
+- dočasný export zkraťte na rozhodovací větu;
+- starý komentář uzavřete odkazem na aktuální pracovní místo.
+
+Privacy-first úklid nemá být dramatický audit. Má být malý hygienický pohyb hned po práci. Čím déle čekáte, tím víc se dočasné stopy začnou tvářit jako archiv a tím hůř se odlišuje, co je ještě důkaz a co už jen digitální prach.
+
+Codyho komentář: nejnebezpečnější věta v provozu je "necháme to tam, kdyby náhodou". Takhle nevzniká paměť týmu. Takhle vzniká interní skladiště, kde se po třech měsících bojíte cokoli smazat, protože nikdo neví, proč to existuje. Elegantní? Ani omylem.
+
+### Karta uzavření nenápadného použití
+
+Kartu použijte jen tehdy, když vznikla pracovní věta, oprava najitelnosti nebo nový problém. U stavu `Beze změny zavřeno` ji obvykle nepotřebujete.
+
+```text
+Kompas:
+
+Běžná situace:
+
+Uzavírací stav:
+- beze změny zavřeno
+- jedna věta propsána
+- najitelnost opravena
+- nový problém oddělen
+
+Uzavírací věta:
+
+Kde zůstává výsledek:
+
+Co se nemění:
+
+Co nevzniká:
+- evidence použití
+- nový tracker
+- nový export
+- nová pravidelná kontrola
+- nová kopie pravidla
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Návratový signál:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v poptávkovém formuláři.
+
+Běžná situace:
+Návrh přidat pole "velikost firmy" kvůli předběžnému třídění.
+
+Uzavírací stav:
+Jedna věta propsána.
+
+Uzavírací věta:
+Kompas datového minima byl použit při návrhu pole "velikost firmy" a uzavírá se jednou větou v checklistu; nevzniká evidence použití ani nový export a dočasná poznámka se maže.
+
+Kde zůstává výsledek:
+Checklist úprav poptávkového formuláře.
+
+Co se nemění:
+Kanonický kompas, formulář, analytika, CRM pole i obchodní proces.
+
+Co nevzniká:
+Evidence použití, nový tracker, nový export, pravidelná kontrola ani kopie pravidla.
+
+Co se maže, zkracuje nebo anonymizuje:
+Interní návrh s příkladem konkrétní poptávky se zkracuje na anonymní princip.
+
+Návratový signál:
+Dva další návrhy na plošné sbírání kvalifikačních údajů během jednoho kvartálu.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: zopakujte běžnou situaci a použitý kompas.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: rozhodněte, co musí zůstat v existujícím pracovním místě.
+4. Minuta 4: napište nebo potvrďte uzavírací větu.
+5. Minuta 5: smažte, zkraťte nebo anonymizujte dočasné stopy.
+6. Minuta 6: zapište, co nevzniká, aby se z uzavření nestal nový proces.
+
+Výstup:
+
+```text
+Po použití kompasu [název] zůstává [výsledek]. Stav uzavření je [stav]. Dočasné stopy [úklid], nevzniká [evidence] a návrat nastane jen při [signál].
+```
+
+### Checklist uzavření nenápadného použití
+
+- Je vybraný jeden ze čtyř uzavíracích stavů?
+- Nezvětšilo uzavření původní rozhodovací oblast?
+- Pokud se nic nezapisuje, je jasné proč?
+- Pokud se zapisuje jedna věta, je v existujícím pracovním místě?
+- Pokud se opravuje najitelnost, nemění se zbytečně princip?
+- Pokud vznikl nový problém, má vlastní kartu a stop podmínku?
+- Zůstává jen kanonické místo, pracovní věta, opravená cesta nebo oddělená karta?
+- Nevzniká evidence použití kompasu?
+- Nepřibyl tracker, export, kopie pravidla ani pravidelná kontrola?
+- Jsou osobní údaje, zákaznické příklady a dočasné poznámky smazané, zkrácené nebo anonymizované?
+- Je návratový signál konkrétní a bez nového sběru dat?
+- Umí příští člověk rozhodnout bez znalosti konkrétního případu?
+
+Uzavření prvního nenápadného použití je malé, ale důležité. Potvrzuje, že kompas umí přežít mimo zvláštní režim, a zároveň brání tomu, aby se kolem něj začal stavět nový dohled. Když po uzavření zůstane jen lepší pracovní místo a méně zbytečných stop, pravidlo splnilo přesně to, kvůli čemu vzniklo.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního nenápadného použití stálého provozního kompasu: čtyři uzavírací stavy, práce s jednou větou, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním nenápadném použití stálého provozního kompasu po převodu do tichého provozu: rozlišení běžného použití a nového problému, čtyři výsledky, pracovní věta, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití stálého provozního kompasu: čtyři uzavírací stavy, přenos bez nové agendy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém běžném použití stálého provozního kompasu: přenositelnost pravidla, čtyři výsledky druhého použití, přenosová věta, privacy-first kontrola, karta, mini workshop a checklist.
