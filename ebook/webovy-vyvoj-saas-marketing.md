@@ -194475,8 +194475,267 @@ Signál [popis] bereme jako [typ]. Reakce je [nejmenší reakce]. Kompas [název
 
 První návratový signál po tichém provozu má ukázat, jestli kompas opravdu žije v práci. Když signál zvládnete malou reakcí, pravidlo zesílí bez nové byrokracie. Když se ukáže skutečný návrat problému, otevřete ho úzce a věcně. V obou případech platí totéž: čím méně zbytečné evidence po reakci zůstane, tím větší šanci má kompas zůstat užitečný.
 
+## Uzavření prvního návratového signálu po tichém provozu kompasu
+
+První návratový signál nesmí zůstat viset jako nenápadná výjimka. Když ho tým jen "nějak vyřeší", v praxi vznikne šedá zóna: někdo si pamatuje, že se něco stalo, někdo čeká další kontrolu a někdo začne pro jistotu znovu sbírat důkazy. Uzavření signálu je krátký krok, který říká, co se stalo, co se změnilo a proč se kompas nevrací do zvláštního dohledu.
+
+Pracovní otázka:
+
+```text
+Je první návratový signál uzavřený tak, aby se tým mohl vrátit k běžnému použití kompasu bez nové evidence?
+```
+
+Uzavření není další analýza. Je to převod reakce do pracovního stavu. Pokud byla reakce malá, uzavření má být ještě menší. Pokud šlo o skutečný návrat, uzavření má přesně říct, jaké úzké ověření se otevírá a co zůstává mimo rozsah.
+
+### Čtyři uzavírací stavy
+
+Po první reakci vyberte jeden ze čtyř stavů:
+
+- `Bez změny`: signál byl běžná hrana a kompas ho unesl.
+- `Lokálně opraveno`: jedno pracovní místo dostalo přesnější větu, odkaz nebo příklad.
+- `Signál zpřesněn`: zatím nejde o změnu pravidla, ale je jasné, co by muselo nastat podruhé.
+- `Úzce otevřeno`: problém se skutečně vrátil a otevírá se jen jedna běžná situace k ověření.
+
+`Bez změny` je legitimní výsledek. Není to selhání práce. Naopak: kompas má umět přežít běžné hrany bez toho, aby po každé z nich vznikal záznam. Uzavírací věta může být jednoduchá:
+
+```text
+Signál bereme jako běžnou hranu. Kompas se nemění a situaci dál neevidujeme.
+```
+
+`Lokálně opraveno` znamená, že problém nebyl v principu, ale v místě použití. Typicky chyběla věta v šabloně, odkaz v indexu, příklad v briefu nebo jasnější odpovědnost v checklistu. Uzavírací věta:
+
+```text
+Kompas zůstává stejný. Opravili jsme [pracovní místo] větou [stručný popis] a dočasnou poznámku mažeme.
+```
+
+`Signál zpřesněn` se hodí pro slabý návrat. Tým nechce dělat změnu na základě jednoho výskytu, ale nechce ani zapomenout, co by už důvodem ke změně bylo. Uzavírací věta:
+
+```text
+Pravidlo teď neměníme. Další otevření nastane jen tehdy, když se [konkrétní situace] zopakuje v [běžné místo nebo časové okno].
+```
+
+`Úzce otevřeno` je jediný stav, který vytváří další práci. I ten ale musí držet hranice. Neotevírá se celá historie kompasu, jen jedna situace, ve které se problém vrátil. Uzavírací věta:
+
+```text
+Signál potvrzuje skutečný návrat problému. Otevíráme ověření situace [situace] a mimo rozsah zůstává [co se nemění].
+```
+
+Codyho komentář: největší past je falešná opatrnost. Tým tvrdí, že "jen pro jistotu" založí malý seznam signálů. O měsíc později má seznam vlastní schůzku, vlastní sloupce a vlastní pocit důležitosti. Gratuluju, právě jste rebrandovali byrokracii.
+
+### Co propsat do kanonického místa
+
+Do kanonického místa se propsuje jen to, co bude člověk potřebovat při dalším použití. Ne celá úvaha, ne všechny varianty, ne screenshoty a už vůbec ne jména lidí, kteří u toho byli.
+
+Použijte toto pravidlo:
+
+```text
+Když další člověk nepotřebuje informaci k rozhodnutí, nepatří do kanonického místa.
+```
+
+Podle uzavíracího stavu se propisuje různě:
+
+```text
+Bez změny:
+Nic se nepropisuje. Maximálně se smaže dočasná poznámka.
+
+Lokálně opraveno:
+Do pracovního místa se přidá jedna věta, lepší odkaz nebo anonymní příklad.
+
+Signál zpřesněn:
+Do karty kompasu se přidá návratový signál, ne nový proces.
+
+Úzce otevřeno:
+Vznikne krátká ověřovací karta s jednou situací, vlastníkem a stop podmínkou.
+```
+
+Příklad lokálního propsání:
+
+```text
+Původní tření:
+Autor case study nevěděl, jestli přesnou zákaznickou metriku ponechat v interní šabloně.
+
+Kanonická úprava:
+V šabloně case study je nová věta: "Přesnou zákaznickou metriku použij jen tehdy, když je nutná pro rozhodnutí; jinak ji nahraď rozmezím nebo anonymním vzorem."
+
+Co se nepropisuje:
+Název zákazníka, původní hodnota metriky, interní komentář ani historie rozhodování.
+```
+
+Tento zápis pomáhá další práci. Neuchovává citlivý kontext, který se hodil jen v okamžiku rozhodování.
+
+### Jak neobnovit dohled zadními dveřmi
+
+Po návratovém signálu má tým přirozenou chuť přidat kontrolní bod. "Ať víme, jestli se to neopakuje." Jenže tichý provoz stojí právě na tom, že signál poznáte v běžné práci. Pokud kvůli jednomu signálu založíte nové měření, pravidlo se vrací do režimu, ze kterého jste ho už jednou dostali ven.
+
+Před přidáním jakékoliv kontroly se zeptejte:
+
+```text
+Uvidíme další relevantní signál v existujícím review, supportu, obsahové kontrole nebo provozním rytmu?
+```
+
+Pokud ano, nová kontrola nevzniká. Jen napište, kde bude signál vidět. Například:
+
+```text
+Další výskyt bude vidět v běžném obsahovém review case studies.
+```
+
+Nebo:
+
+```text
+Další výskyt bude vidět při měsíční kontrole šablon, protože autor znovu narazí na stejnou rozhodovací větu.
+```
+
+Nová kontrola dává smysl jen tehdy, když platí všechny tři podmínky:
+
+- bez ní se signál v běžné práci neukáže,
+- dopad opakování je významný,
+- kontrola má předem daný konec.
+
+I potom ji pište jako dočasné ověření, ne jako trvalý proces:
+
+```text
+Po dobu dvou obsahových review sledujeme, jestli autoři znovu žádají ruční schválení anonymizace. Pokud ne, ověření končí bez dalšího zápisu.
+```
+
+### Privacy-first uzavření signálu
+
+Uzavření návratového signálu je dobrý okamžik na úklid datové stopy. Vznikly poznámky, komentáře, kopie ukázek, interní screenshoty nebo exporty? Nečekejte na "později". Později znamená, že z pomocného materiálu bude archeologie.
+
+Privacy-first uzavření má pět kroků:
+
+1. Zapište rozhodnutí bez osobních a zákaznických detailů.
+2. Přepište příklad do anonymního vzoru, pokud má zůstat v šabloně.
+3. Smažte dočasné komentáře, screenshoty a pomocné kopie.
+4. Zkontrolujte, že nevznikl nový seznam případů bez jasného účelu.
+5. U skutečného návratu stanovte konec ověření a minimální datové pole.
+
+Dobré uzavření:
+
+```text
+Lokální tření v šabloně case study je uzavřené. Přidali jsme pravidlo pro nahrazení přesné zákaznické metriky rozmezím a smazali pracovní komentář s konkrétním příkladem.
+```
+
+Slabé uzavření:
+
+```text
+Případ ponecháváme v seznamu pro budoucí srovnání a u dalších case studies budeme sbírat podobné metriky.
+```
+
+Druhá věta si říká o problém. Neříká, jaké rozhodnutí má seznam podporovat, kdo ho vlastní, kdy skončí ani proč je nutné sbírat podobné metriky. Privacy-first provoz neznamená, že nikdy nic nezapíšete. Znamená, že každý zápis umí obhájit svůj účel, rozsah a konec.
+
+### Karta uzavření prvního návratového signálu
+
+Karta má uzavřít reakci, ne založit archiv. Použijte ji jen u lokální opravy, zpřesněného signálu nebo úzkého otevření.
+
+```text
+Kompas:
+
+Původní signál:
+
+Typ signálu:
+- běžná hrana
+- lokální tření
+- slabý návrat
+- skutečný návrat
+
+Uzavírací stav:
+- bez změny
+- lokálně opraveno
+- signál zpřesněn
+- úzce otevřeno
+
+Co se změnilo:
+
+Co se nemění:
+
+Kanonické místo:
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Kde bude další signál vidět bez nového dohledu:
+
+Stop podmínka:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v pracovních příkladech.
+
+Původní signál:
+Autor case study požádal o ruční potvrzení, jestli ponechat přesnou zákaznickou metriku.
+
+Typ signálu:
+Lokální tření.
+
+Uzavírací stav:
+Lokálně opraveno.
+
+Co se změnilo:
+Šablona case study má novou větu o nahrazení přesné metriky rozmezím nebo anonymním vzorem.
+
+Co se nemění:
+Kanonický kompas datového minima a běžný obsahový review rytmus.
+
+Kanonické místo:
+Šablona case study.
+
+Co se maže, zkracuje nebo anonymizuje:
+Pracovní komentář s konkrétní zákaznickou metrikou.
+
+Kde bude další signál vidět bez nového dohledu:
+V běžném obsahovém review.
+
+Stop podmínka:
+Nevzniká tracker návratových signálů. Další otevření jen při opakovaném ručním schvalování ve dvou dalších šablonách.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum uzavření:
+2026-06-08.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte původní signál a vybraný typ.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednu větu, co se mění.
+4. Minuta 4: napište jednu větu, co se nemění.
+5. Minuta 5: určete, co se maže, zkracuje nebo anonymizuje.
+6. Minuta 6: řekněte, kde bude další signál vidět bez nového dohledu.
+
+Výstup:
+
+```text
+Signál [popis] uzavíráme jako [stav]. Mění se [nejmenší změna]. Nemění se [kompas/proces]. Dočasné stopy [úklid] a další otevření nastane jen při [návratový signál].
+```
+
+### Checklist uzavření prvního návratového signálu
+
+- Je vybraný jeden uzavírací stav?
+- Je jasné, co se mění?
+- Je stejně jasné, co se nemění?
+- Nevzniká nová kontrola jen kvůli pocitu jistoty?
+- Je další signál vidět v existujícím pracovním rytmu?
+- Pokud vzniká ověření, má úzký rozsah a konec?
+- Je kanonické místo upravené jen o informaci nutnou pro další rozhodnutí?
+- Jsou dočasné komentáře, screenshoty, exporty a pomocné kopie smazané?
+- Jsou zákaznické nebo osobní detaily odstraněné, zkrácené nebo anonymizované?
+- Nezůstává po signálu paralelní seznam případů bez vlastníka?
+- Umí vlastník vysvětlit uzavření jednou větou?
+- Vrací se kompas po uzavření do běžného použití?
+
+Uzavření prvního návratového signálu je malý test dospělosti pravidla. Nejde o to dokázat, že kompas byl dokonalý. Jde o to ukázat, že se umí ozvat, dostat přiměřenou reakci a zase zmizet do běžné práce. Dobrý kompas není ten, kolem kterého tým chodí po špičkách. Dobrý kompas je ten, který se používá bez ceremoniálu a nezanechává za sebou zbytečné stopy.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po tichém provozu stálého provozního kompasu: čtyři uzavírací stavy, propsání do kanonického místa, prevence obnovení dohledu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu stálého provozního kompasu: rozlišení běžné hrany, lokálního tření, slabého návratu a skutečného návratu, nejmenší reakce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého nenápadného použití stálého provozního kompasu: čtyři uzavírací stavy, uzavírací věta, omezení zbytkových stop, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém nenápadném použití stálého provozního kompasu bez obnovení dohledu: samostatnost pravidla, přenos mezi situacemi, čtyři výsledky, odstranění vráceného dohledu, privacy-first hranice, karta, mini workshop a checklist.
