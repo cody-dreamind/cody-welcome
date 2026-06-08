@@ -191671,8 +191671,219 @@ Sanity check [pravidlo] uzavíráme stavem [uzavírací stav]. Do kanonického m
 
 Uzavření sanity checku má být nenápadné. Když proběhne dobře, tým nemá pocit, že právě vznikl nový proces. Má jen o něco čistší pravidlo, méně starých stop a jasnější hranici, kdy se k tématu vrátit. To je dobrý provoz: ne dramatický, ale použitelný.
 
+## Druhý kvartální sanity check bez nového procesu
+
+Druhý kvartální sanity check je zkouška, jestli první check opravdu skončil. Po první kvartální kontrole bývá tým ještě trochu citlivý: pamatuje si staré review, ví, kde se naposledy něco dočišťovalo, a snadno začne preventivně hlídat pravidlo víc, než je potřeba. Druhý check má tuhle zbytkovou pozornost vypnout, pokud pro ni není skutečný důvod.
+
+Pracovní otázka zní:
+
+```text
+Používá se pravidlo po dalším kvartálu jako běžná součást práce, nebo kolem něj potichu vznikl nový proces?
+```
+
+Neřešte, jestli je pravidlo dokonalé. Dokonalost je v provozu podezřelá věc: často znamená, že někdo udělal hodně práce navíc a ještě ji hezky pojmenoval. Druhý sanity check má zjistit, jestli pravidlo stačí k rozhodnutí v reálné situaci, jestli lidé nepotřebují staré podklady a jestli se kvůli němu nesbírá víc dat než dřív.
+
+Příklad:
+
+```text
+Pravidlo:
+Partnerský marketingový podnět jde do backlogu jen tehdy, když má vlastníka, očekávaný obchodní dopad a termín návratu.
+
+První kvartální check:
+Doplnil anonymizovaný příklad a nezaložil samostatnou evidenci.
+
+Druhý kvartální check:
+Tým použil pravidlo u dvou podnětů. Jeden šel do backlogu, druhý byl odmítnut bez další schůzky.
+
+Zjištění:
+Pravidlo funguje bez staré tabulky. Jeden člověk si ale pořád drží pomocnou poznámku se starými příklady.
+
+Rozhodnutí:
+Pomocná poznámka se smaže nebo anonymizovaně přesune do archivu s retenčním koncem. Pravidlo se nemění a další samostatný check nevzniká.
+```
+
+Tady není cílem přepsat pravidlo. Cílem je odstranit poslední drobnou berličku, která by z běžného pravidla mohla znovu udělat hlídanou výjimku.
+
+### Co druhý check hledá
+
+Druhý kvartální sanity check má čtyři malé kontroly:
+
+- Běžné použití: použilo se pravidlo v normálním rytmu bez zvláštní připomínky?
+- Žádná stínová evidence: nevznikla bokem tabulka, poznámka, checklist nebo komentářová nit?
+- Žádná osobní závislost: neumí pravidlo používat jen člověk, který byl u původní opravy?
+- Žádné nové sbírání dat: nepřibyl tracker, export, formulářové pole nebo ruční report jen kvůli jistotě?
+
+Pokud jsou všechny čtyři odpovědi čisté, check skončil. Zapište nejvýš jednu větu do existujícího logu a pravidlo vraťte do klidu. Když se objeví problém, opravujte nejbližší pracovní místo, ne celou historii.
+
+Špatná reakce:
+
+```text
+Pro jistotu založíme kvartální přehled všech partnerských podnětů a budeme sledovat, jestli pravidlo funguje.
+```
+
+Lepší reakce:
+
+```text
+Pravidlo se použilo ve dvou běžných situacích. Starou pomocnou poznámku mažeme, protože kanonická karta už obsahuje dostatečný anonymizovaný příklad.
+```
+
+První reakce přidává provoz. Druhá ubírá zbytek starého provozu.
+
+### Čtyři výsledky druhého sanity checku
+
+Vyberte jeden stav:
+
+- `Tichý provoz potvrzen`: pravidlo funguje bez zvláštní péče a bez nové evidence.
+- `Zbytková stopa`: pravidlo funguje, ale někde zůstala stará poznámka, odkaz, export nebo osobní návyk.
+- `Zbytková závislost`: lidé pravidlo používají jen díky jednomu člověku, připomínce nebo skryté kontrole.
+- `Skutečný nový problém`: objevila se nová pracovní situace, kterou původní pravidlo nemělo řešit.
+
+`Tichý provoz potvrzen` znamená konec zvláštní pozornosti. Další návrat má přijít jen přes běžný návratový signál, ne přes naplánované kontrolování stejné věci pořád dokola.
+
+`Zbytková stopa` je nejčastější malý nález. Smažte ji, archivujte s jasným účelem, nebo ji nahraďte anonymizovaným příkladem v kanonickém místě. Nerozepisujte kolem ní nový úklidový projekt.
+
+`Zbytková závislost` opravujte přenosem do běžné trasy. Pokud pravidlo funguje jen proto, že ho někdo na poradě pokaždé připomene, změňte agendu, rozcestník nebo šablonu. Nepřidávejte "owner musí připomenout pravidlo" jako nový povinný krok. To je jen závislost s visačkou.
+
+`Skutečný nový problém` oddělte od starého pravidla. Pokud se například změnil obchodní model, typ partnerství nebo odpovědnost týmu, dejte nové situaci vlastní otázku. Staré pravidlo zůstává zavřené, pokud pořád chrání původní rozhodnutí.
+
+### Jak nezaložit třetí check
+
+Druhý sanity check svádí k větě "ještě jednou to ověříme příště". Tu větu používejte opatrně. Pokud nemáte konkrétní návratový signál, třetí check je jen pokračování nejistoty.
+
+Místo dalšího checku napište jednu z těchto vět:
+
+```text
+Další samostatný check nevzniká. K tématu se vracíme jen při [návratový signál].
+```
+
+```text
+Zbytkovou stopu mažeme teď. Pokud se objeví znovu ve dvou běžných cyklech, otevře se nová otázka vlastnictví trasy.
+```
+
+```text
+Nový problém oddělujeme do vlastní karty. Původní pravidlo dál žije v běžném rytmu bez zvláštní kontroly.
+```
+
+Tím se tým vyhne nekonečnému seriálu kontrol. Kontrola má sloužit rozhodnutí, ne sama sobě.
+
+### Privacy-first kontrola druhého checku
+
+Privacy-first hodnota druhého checku je v úklidu zbytků. První check často odstraní velké věci. Druhý check najde malé zbytky: osobní poznámky, kopie exportů, staré screenshoty, odkazy do pracovních dokumentů nebo komentáře s detaily zákazníků.
+
+Kontrolní otázky:
+
+- Má každý zbytkový podklad jasný účel?
+- Potřebuje ho někdo k běžnému použití pravidla?
+- Dá se smazat bez ztráty rozhodovací schopnosti?
+- Pokud musí zůstat, je anonymizovaný a má retenční konec?
+- Nevede odkaz z kanonického místa do širšího interního kontextu, než člověk potřebuje?
+
+Dobré pravidlo pro druhý check:
+
+```text
+Co nepomáhá příštímu rozhodnutí, nemá být v aktivní trase.
+```
+
+Codyho komentář: největší privacy-first výhra někdy není nový nástroj, ale stará poznámka, která konečně zmizí. Není to efektní na konferenci, ale v reálném provozu to šetří data, nervy i budoucí vysvětlování.
+
+### Karta druhého kvartálního sanity checku
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kde pravidlo žije:
+
+Co ukázal první kvartální check:
+
+Druhá běžná kvartální situace:
+
+Výsledek:
+- tichý provoz potvrzen
+- zbytková stopa
+- zbytková závislost
+- skutečný nový problém
+
+Co se mění teď:
+
+Co se výslovně nezakládá:
+
+Co mažeme, archivujeme nebo anonymizujeme:
+
+Návratový signál:
+
+Jedna věta pro log:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Partnerské marketingové podněty.
+
+Kde pravidlo žije:
+Kanonická karta měsíčního marketingového review.
+
+Co ukázal první kvartální check:
+Pravidlo potřebovalo jeden anonymizovaný příklad a žádnou novou evidenci.
+
+Druhá běžná kvartální situace:
+Dva partnerské podněty během kvartálního plánování.
+
+Výsledek:
+Zbytková stopa.
+
+Co se mění teď:
+Maže se osobní pomocná poznámka se starými příklady.
+
+Co se výslovně nezakládá:
+Třetí sanity check, samostatný report partnerství ani nová tabulka výjimek.
+
+Co mažeme, archivujeme nebo anonymizujeme:
+Pomocná poznámka se smaže; kanonická karta už obsahuje anonymizovaný příklad.
+
+Návratový signál:
+Dva partnerské podněty bez vlastníka v jednom kvartálu.
+
+Jedna věta pro log:
+Druhý kvartální check potvrdil funkčnost pravidla a odstranil poslední pomocnou poznámku bez nové evidence.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: otevřete kanonické místo pravidla.
+2. Minuta 2: ověřte, jestli se pravidlo použilo bez zvláštní připomínky.
+3. Minuta 3: najděte případnou zbytkovou stopu nebo závislost.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: rozhodněte, co se smaže, archivuje nebo nechá být.
+6. Minuta 6: zapište návratový signál a větu, že třetí check nevzniká, pokud pro něj není důvod.
+
+Výstup:
+
+```text
+Druhý kvartální sanity check pravidla [název] skončil stavem [výsledek]. Teď měníme [nejmenší změna / nic], rušíme [zbytková stopa / nic], nezakládáme [další check / evidenci] a návrat nastane jen při [signál].
+```
+
+### Checklist druhého sanity checku
+
+- Proběhl check v existujícím kvartálním rytmu?
+- Ověřil, že první check opravdu skončil?
+- Použilo se pravidlo bez zvláštní připomínky?
+- Nevznikla bokem nová tabulka, poznámka, report nebo komentářová nit?
+- Nezávisí použití pravidla na jednom člověku?
+- Nepřibylo nové sledování, formulářové pole, export ani tracker?
+- Má výsledek jeden ze čtyř stavů?
+- Pokud je tichý provoz potvrzen, nevzniká třetí check?
+- Pokud zůstala stopa, maže se nebo archivuje s účelem a retenčním koncem?
+- Pokud zůstala závislost, opravuje se běžná trasa místo přidání další povinnosti?
+- Pokud vznikl nový problém, má vlastní kartu a původní pravidlo zůstává zavřené?
+- Je návratový signál konkrétní a bez nového sběru dat?
+- Je log stručný a použitelný pro člověka, který nebyl u původní opravy?
+
+Druhý sanity check je dobrý tehdy, když zmenší počet věcí, které tým musí držet v hlavě. Nechává funkční pravidlo na pokoji, odstraňuje zbytky staré péče a odmítá vyrábět nový proces jen proto, že kontrola proběhla. To je přesně ten druh provozní disciplíny, který webům, SaaS i marketingu šetří energii.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o druhém kvartálním sanity checku bez nového procesu: ověření konce první kontroly, zbytkové stopy a závislosti, prevence třetího checku, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního kvartálního sanity checku: čtyři uzavírací stavy, propsání do kanonického místa, negativní vymezení nové evidence, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním kvartálním sanity checku po dlouhodobém klidu: kontrola dohledatelnosti a přiměřenosti pravidla, čtyři výsledné stavy, skrytá závislost, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití do dlouhodobého klidu: čtyři uzavírací stavy, oddělení aktivní trasy od archivu, privacy-first zkrácení datové stopy, karta, mini workshop a checklist.
