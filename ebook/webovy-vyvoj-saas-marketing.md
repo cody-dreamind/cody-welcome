@@ -191278,8 +191278,195 @@ Pravidlo [název] po druhém běžném použití uzavíráme stavem [stav]. V ak
 
 Uzavření druhého běžného použití má pravidlu vrátit přirozenou velikost. Pokud funguje, nechť slouží. Pokud potřebuje poslední hranu, opravte ji. Pokud se objeví nová otázka, dejte jí vlastní rámec. A pokud po práci zůstane méně aktivních stop než před ní, privacy-first provoz se právě tiše zlepšil.
 
+## První kvartální sanity check po dlouhodobém klidu
+
+Dlouhodobý klid neznamená, že se pravidlo už nikdy neuvidí. Znamená, že se k němu nevracíte jen ze zvyku. První kvartální sanity check je krátké zastavení v existujícím rytmu týmu: při kvartálním review obsahu, produktu, šablon nebo provozních standardů se ověří, že pravidlo je pořád dohledatelné, přiměřené a nezaložilo kolem sebe nový stínový proces.
+
+Není to audit historie. Není to návrat do review. Je to otázka:
+
+```text
+Slouží pravidlo po několika měsících pořád svému účelu bez zbytečné práce, dat a výjimek?
+```
+
+Pokud odpověď zní ano, sanity check má skončit rychle. Pokud odpověď zní ne, neopravujte hned celý systém. Nejprve pojmenujte, co přesně se změnilo: pracovní situace, jazyk pravidla, vlastnictví, návratový signál nebo datová stopa.
+
+Příklad:
+
+```text
+Pravidlo:
+Slabý marketingový podnět bez vlastníka, dopadu a návratového signálu se nezakládá jako úkol.
+
+Kvartální situace:
+Tým během kvartálního plánování prošel poslední obsahové podněty.
+
+Zjištění:
+Pravidlo se použilo bez zvláštního vysvětlování. Jeden nový partnerský podnět ale nepasoval do příkladu v šabloně.
+
+Rozhodnutí:
+Původní pravidlo zůstává v klidu. Doplníme jeden anonymizovaný příklad pro partnerský podnět, ale neotevíráme staré review ani obsahový backlog.
+```
+
+### Co sanity check kontroluje
+
+Držte kontrolu malou. Stačí pět otázek:
+
+- Je pravidlo pořád na kanonickém místě, kde ho člověk při práci najde?
+- Dá se použít bez znalosti starého review?
+- Nepoužívá tým neformální obchůzku, například "raději se zeptej ownera"?
+- Je návratový signál pořád úměrný a konkrétní?
+- Nezůstaly v aktivní trase staré exporty, screenshoty, tabulky nebo zákaznické detaily?
+
+Tyto otázky nesbírají nové metriky. Pracují s tím, co už tým vidí při běžné práci. Pokud kvůli sanity checku potřebujete nový tracker, novou tabulku nebo ruční report, check se nafoukl nad svůj účel.
+
+### Čtyři výsledky kvartálního checku
+
+Po prvním kvartálním sanity checku vyberte jeden ze čtyř výsledků:
+
+- `Klid potvrzen`: pravidlo je dohledatelné, použitelné a bez nové datové stopy.
+- `Drobné zestárnutí`: jazyk, příklad nebo návratový signál potřebuje malé zpřesnění.
+- `Skrytá závislost`: pravidlo funguje jen díky člověku, připomínce nebo starému podkladu mimo kanonickou trasu.
+- `Nový kontext`: změnil se produkt, nabídka, kanál nebo týmová odpovědnost natolik, že vzniká samostatná otázka.
+
+`Klid potvrzen` znamená konec checku. Zapište jednu větu jen tehdy, pokud máte běžný rozhodovací log. Nezakládejte další "kvartální sledování pravidla"; pravidlo už je součástí obecného rytmu.
+
+`Drobné zestárnutí` opravte co nejblíž místu použití. Typicky stačí upravit jednu větu, přidat jeden anonymizovaný příklad nebo zúžit návratový signál. Pokud musíte upravit tři šablony, dvě agendy a sales podklady, už to není drobné zestárnutí.
+
+`Skrytá závislost` je varování. Pravidlo může být napsané dobře, ale ve skutečnosti ho drží člověk, který před review posílá správný odkaz, připomíná výjimky nebo ručně maže staré podklady. V takovém případě neotevírejte obsah pravidla jako první. Opravte trasu: odkaz, rozcestník, vlastnictví nebo archiv.
+
+`Nový kontext` neznamená, že staré pravidlo selhalo. Znamená, že realita přinesla jiný pracovní problém. Dejte mu vlastní nejmenší krok:
+
+```text
+Nový kontext:
+Do marketingových podnětů začaly přicházet partnerské nápady s obchodním dopadem.
+
+Co neotevíráme:
+Původní pravidlo pro slabé interní podněty.
+
+Nová otázka:
+Kdy má partnerský podnět dostatečný obchodní důvod pro zařazení do backlogu?
+
+Nejmenší krok:
+U tří posledních partnerských podnětů ručně ověřit, jestli měly vlastníka, očekávaný dopad a termín návratu.
+```
+
+### Privacy-first sanity check
+
+Kvartální check je dobrý moment podívat se, jestli se kolem pravidla nenahromadily staré důkazy. Privacy-first provoz není jen výběr evropských nástrojů. Je to i disciplína nenechávat v aktivní práci víc dat, než lidé potřebují k rozhodnutí.
+
+Zeptejte se:
+
+- Zůstává v aktivní trase zákaznická citace, screenshot, export nebo detail poptávky?
+- Potřebuje ho člověk k použití pravidla, nebo jen vysvětluje starou historii?
+- Dá se nahradit anonymizovaným příkladem?
+- Má archivovaný podklad retenční konec?
+- Nevede starý odkaz do nástroje, kde lidé uvidí víc dat, než potřebují?
+
+Dobré privacy-first uzavření:
+
+```text
+Kvartální check potvrdil klid pravidla. V aktivní trase zůstává jen kanonická věta, anonymizovaný příklad a návratový signál. Staré review podklady nejsou zdroj pravdy a po retenční době se mažou.
+```
+
+Codyho komentář: sanity check má být jako rychlé otevření okna, ne kompletní rekonstrukce domu. Když kvůli němu stěhujete nábytek, něco se utrhlo z řetězu.
+
+### Karta kvartálního sanity checku
+
+```text
+Pravidlo nebo pracovní místo:
+
+Kde pravidlo žije:
+
+Kvartální pracovní situace:
+
+Výsledek:
+- klid potvrzen
+- drobné zestárnutí
+- skrytá závislost
+- nový kontext
+
+Co případně měníme:
+
+Co výslovně neotevíráme:
+
+Co rušíme z aktivní trasy:
+
+Privacy-first výsledek:
+
+Návratový signál:
+
+Jedna věta do logu:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Slabé marketingové podněty bez vlastníka.
+
+Kde pravidlo žije:
+Kanonická karta měsíčního marketingového review.
+
+Kvartální pracovní situace:
+Kvartální plán obsahu a kontrola nevyřízených podnětů.
+
+Výsledek:
+Drobné zestárnutí.
+
+Co případně měníme:
+Doplňujeme jeden anonymizovaný příklad partnerského podnětu.
+
+Co výslovně neotevíráme:
+Původní review pravidla, staré pomocné tabulky ani celý obsahový backlog.
+
+Co rušíme z aktivní trasy:
+Odkaz na starý seznam podnětů z přípravy pravidla.
+
+Privacy-first výsledek:
+V aktivní trase nezůstává žádný detail konkrétního partnera ani zákazníka.
+
+Návratový signál:
+Dva partnerské podněty bez jasného vlastníka v jednom kvartálu.
+
+Jedna věta do logu:
+Kvartální sanity check potvrdil použitelnost pravidla a doplnil jeden anonymizovaný příklad bez nové evidence.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: najděte pravidlo v kanonickém místě.
+2. Minuty 2 až 3: ověřte pět sanity otázek.
+3. Minuta 4: vyberte jeden ze čtyř výsledků.
+4. Minuta 5: určete nejmenší změnu nebo potvrďte klid.
+5. Minuta 6: ukliďte jeden starý odkaz, export nebo pomocný podklad, pokud se objevil.
+6. Minuta 7: zapište jednu větu do logu.
+
+Výstup:
+
+```text
+Kvartální sanity check pravidla [název] skončil stavem [výsledek]. Měníme [nic / jednu hranu / aktivní trasu / otevíráme novou otázku], neotevíráme [starý rozsah] a datová stopa zůstává [privacy-first výsledek].
+```
+
+### Checklist kvartálního sanity checku
+
+- Proběhl check v existujícím kvartálním rytmu, ne jako nová agenda?
+- Je pravidlo dohledatelné v kanonickém místě?
+- Dá se použít bez znalosti starého review?
+- Nevznikla neformální závislost na jednom člověku?
+- Je návratový signál pořád konkrétní a úměrný?
+- Má výsledek jeden ze čtyř stavů?
+- Pokud je klid potvrzen, nevzniká další samostatná kontrola?
+- Pokud pravidlo zestárlo, opravuje se jen nejbližší věta, příklad nebo signál?
+- Pokud se ukázala skrytá závislost, opravuje se trasa místo přepisování historie?
+- Pokud vznikl nový kontext, dostává vlastní nejmenší krok?
+- Zůstává původní pravidlo zavřené, pokud stále plní svůj účel?
+- Nezůstávají v aktivní trase osobní údaje, screenshoty, exporty ani detailní zákaznické poznámky?
+- Má archivovaný podklad jasný účel a retenční konec?
+
+První kvartální sanity check má chránit dvě věci najednou: užitečnost pravidla a klid týmu. Když pravidlo slouží, nechte ho sloužit. Když zestárlo, opravte nejbližší hranu. Když se změnil kontext, otevřete novou otázku. A když po checku nezůstane žádná nová evidence, privacy-first provoz zase jednou vyhrál bez fanfár. Tak to má být.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o prvním kvartálním sanity checku po dlouhodobém klidu: kontrola dohledatelnosti a přiměřenosti pravidla, čtyři výsledné stavy, skrytá závislost, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití do dlouhodobého klidu: čtyři uzavírací stavy, oddělení aktivní trasy od archivu, privacy-first zkrácení datové stopy, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního běžného použití: zkouška všednosti pravidla, čtyři výsledné stavy, prevence třetí kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití po druhém dlouhodobém review: čtyři uzavírací stavy, propsání do kanonického místa, oddělení nové otázky od starého review, privacy-first úklid, karta, mini workshop a checklist.
