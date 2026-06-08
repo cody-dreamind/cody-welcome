@@ -192075,8 +192075,211 @@ Druhý kvartální sanity check [pravidlo] uzavíráme stavem [stav]. V kanonick
 
 Uzavření druhého kvartálního sanity checku je malé, ale důležité řemeslo. Dobře napsané pravidlo nestačí, pokud kolem něj zůstane lešení. Jakmile stojí samo, lešení má pryč. Tým pak nemusí uctívat starý problém, jen používá čistší pracovní místo a ví, kdy se má vrátit.
 
+## První roční návrat k dlouhodobé rutině
+
+Dlouhodobá rutina si zaslouží jiný druh pozornosti než čerstvá oprava. Čerstvá oprava potřebuje kontrolu, jestli funguje. Dlouhodobá rutina potřebuje občas ověřit, jestli ještě stojí za místo, které zabírá v hlavách, šablonách, kalendářích a datových stopách. To je jemnější otázka. Neptá se "rozbilo se to?", ale "má to pořád stejný účel?".
+
+První roční návrat dělejte až ve chvíli, kdy pravidlo opravdu přežilo běžný provoz. Nemá vzniknout jen proto, že uplynul rok v kalendáři a tým má chuť na nostalgickou prohlídku starých rozhodnutí. Spouštěčem má být existující roční review webu, produktu, marketingu, bezpečnosti, dodavatelů nebo provozních standardů. Pokud takové review nemáte, nezakládejte kvůli jedné rutině nové. Připojte ji k nejbližšímu přirozenému místu.
+
+Pracovní otázka zní:
+
+```text
+Má dlouhodobá rutina pořád jasný účel, přiměřenou cenu a čistou datovou stopu, nebo ji máme ponechat beze změny, zkrátit, sloučit, archivovat či otevřít jako novou otázku?
+```
+
+Tahle otázka chrání tým před dvěma špatnými extrémy. První extrém je zapomenout na rutinu úplně a nechat ji tiše zastarat. Druhý extrém je z každého ročního návratu udělat nový auditní seriál. Obě varianty jsou drahé. Jedna vyrábí mrtvá pravidla, druhá živí pravidla, která si zasloužila už dávno odejít do archivu s důstojností a bez dortu.
+
+### Co ověřit po roce
+
+Roční návrat má projít čtyři oblasti:
+
+- účel: jestli rutina pořád chrání reálné rozhodnutí, zákaznickou důvěru, provozní kvalitu nebo datové minimum;
+- použití: jestli ji lidé nacházejí ve správném pracovním místě a nepoužívají paralelní zkratky;
+- cena: jestli nezabírá víc času, pozornosti nebo koordinace, než kolik vrací;
+- datová stopa: jestli kolem ní nezůstaly staré exporty, citlivé příklady, přístupy, poznámky nebo metriky bez účelu.
+
+Nezačínejte historií všech starých kontrol. Začněte současným použitím. Otevřete poslední běžný případ, kde se rutina měla použít, a zeptejte se:
+
+```text
+Kde se člověk k pravidlu dostal?
+Co podle něj udělal?
+Co se díky tomu nerozbilo nebo zrychlilo?
+Co musel obejít?
+Jaká data se kvůli tomu drží?
+```
+
+Pokud na tyto otázky neumíte odpovědět bez hodinového pátrání, není to důvod založit nový tracker. Je to signál, že kanonické místo nebo pracovní trasa ztratily čitelnost.
+
+### Pět výsledků ročního návratu
+
+Po ročním návratu vyberte jeden z pěti stavů:
+
+- `Ponechat`: rutina má jasný účel, rozumnou cenu a čistou stopu.
+- `Zkrátit`: účel platí, ale pravidlo je delší, než současná práce potřebuje.
+- `Sloučit`: rutina dubluje jiný standard, checklist nebo review.
+- `Archivovat`: účel už zmizel, ale historický kontext se může hodit pro budoucí rozhodnutí.
+- `Otevřít novou otázku`: objevil se nový problém, který nepatří do staré rutiny.
+
+`Ponechat` je aktivní rozhodnutí, ne lenost. Zapište, proč rutina pořád platí, a hlavně co se kvůli ní nemění. Dobrý zápis zní například: "Pravidlo ponecháváme, protože stále brání sběru zbytečných dat v poptávkovém formuláři; nevzniká nové měření ani rozšířený dotazník."
+
+`Zkrátit` použijte, když lidé pravidlo používají správně, ale text je nafouknutý starou opatrností. Zkraťte ho na rozhodovací větu, jeden příklad a návratový signál. Staré vysvětlování dejte pryč z aktivní trasy. Když si nejste jistí, jestli ho smazat, archivujte ho s retenčním koncem.
+
+`Sloučit` je správné, když dvě rutiny řeší stejnou situaci jinými slovy. Typicky se to stane u marketingových review, obsahových checklistů, provozních incidentů nebo dodavatelské hygieny. Sloučení má vybrat jeden zdroj pravdy. Nenechávejte obě položky "pro jistotu", protože jistota se pak změní ve dvě místa, která se časem rozejdou.
+
+`Archivovat` neznamená popřít starou práci. Znamená přiznat, že její účel skončil. Například pravidlo pro ruční kontrolu pilotního formuláře může být po přepracování formuláře, změně segmentu nebo ukončení kampaně zbytečné. Archivujte stručnou kartu: co pravidlo řešilo, proč končí, kde je nový zdroj pravdy a kdy lze archiv smazat.
+
+`Otevřít novou otázku` použijte jen tehdy, když roční návrat odhalí skutečně nový kontext. Například pravidlo pro B2B poptávky pořád funguje, ale firma nově prodává i enterprise self-service a vzniká jiný typ rizika. Starou rutinu nepřepisujte do univerzální příručky. Nechte ji zavřenou a novou otázku založte zvlášť.
+
+### Privacy-first roční úklid
+
+Po roce bývá největším rizikem zbytečná paměť. Ne technická chyba, ale staré podklady, které nikdo nepotřebuje a přitom pořád někde leží. Privacy-first roční návrat proto neřeší jen text pravidla, ale i jeho okolí.
+
+Projít stačí těchto šest míst:
+
+- kanonickou kartu pravidla;
+- odkazy z checklistů, šablon a rozcestníků;
+- pomocné dokumenty z původního zavedení;
+- exporty z analytiky, CRM, supportu nebo formulářů;
+- příklady se jmény zákazníků, lidí, projektů nebo citlivými detaily;
+- přístupy lidí a nástrojů, kteří se na rutině už nepodílejí.
+
+U každého místa rozhodněte:
+
+```text
+Potřebujeme to pro současné rozhodnutí?
+Pokud ano, stačí kratší nebo anonymizovaná verze?
+Pokud ne, kdo to smaže nebo archivuje?
+Kdy se archiv smaže?
+```
+
+Codyho komentář: po roce se dá z privacy-first provozu poznat charakter týmu. Ne podle toho, jestli má v dokumentaci hezkou větu o Evropě, ale podle toho, jestli umí uklidit vlastní pracovní drobky. Ano, "pracovní drobky" zní roztomile. V incidentu už tak roztomile nevypadají.
+
+### Karta ročního návratu
+
+```text
+Rutina nebo pravidlo:
+
+Kde dnes bydlí:
+
+Poslední reálné použití:
+
+Původní účel:
+
+Platí účel pořád?
+- ano / částečně / ne
+
+Cena rutiny:
+- nízká / přiměřená / vysoká
+
+Datová stopa:
+- čistá / potřebuje zkrácení / potřebuje úklid
+
+Výsledek:
+- ponechat
+- zkrátit
+- sloučit
+- archivovat
+- otevřít novou otázku
+
+Co se mění v kanonickém místě:
+
+Co se výslovně nemění:
+
+Co se maže, anonymizuje nebo archivuje:
+
+Nový zdroj pravdy, pokud se mění:
+
+Návratový signál:
+
+Jedna věta pro tým:
+```
+
+Vyplněný příklad:
+
+```text
+Rutina nebo pravidlo:
+Kontrola, aby poptávkový formulář nesbíral zbytečná kvalifikační pole.
+
+Kde dnes bydlí:
+Checklist pro úpravy formulářů.
+
+Poslední reálné použití:
+Úprava kontaktní stránky pro nový segment služeb.
+
+Původní účel:
+Zabránit tomu, aby marketing přidával pole jen kvůli zvědavosti a obchod potom držel data bez jasného účelu.
+
+Platí účel pořád?
+Ano.
+
+Cena rutiny:
+Nízká.
+
+Datová stopa:
+Potřebuje zkrácení. V archivu zůstaly dva staré exporty z pilotu.
+
+Výsledek:
+Ponechat.
+
+Co se mění v kanonickém místě:
+Zkracuje se příklad na anonymizovanou formulaci bez názvů zákazníků.
+
+Co se výslovně nemění:
+Nevzniká nové měření formuláře ani rozšířený dotazník.
+
+Co se maže, anonymizuje nebo archivuje:
+Mažou se staré exporty z pilotu; příklad v checklistu se anonymizuje.
+
+Nový zdroj pravdy:
+Beze změny, checklist pro úpravy formulářů.
+
+Návratový signál:
+Dva návrhy na nové formulářové pole bez jasného účelu během jednoho kvartálu.
+
+Jedna věta pro tým:
+Pravidlo pro datové minimum ve formulářích ponecháváme, zkracujeme starý příklad a mažeme pilotní exporty.
+```
+
+### Mini workshop na 9 minut
+
+1. Minuta 1: otevřete rutinu v jejím současném kanonickém místě.
+2. Minuta 2: najděte poslední reálné použití.
+3. Minuta 3: pojmenujte původní účel jednou větou.
+4. Minuta 4: ověřte, jestli účel pořád platí.
+5. Minuta 5: zhodnoťte cenu rutiny v běžné práci.
+6. Minuta 6: projděte datovou stopu a staré podklady.
+7. Minuta 7: vyberte jeden z pěti výsledků.
+8. Minuta 8: napište, co se výslovně nemění.
+9. Minuta 9: pošlete týmu jednu větu a zavřete kartu.
+
+Výstup:
+
+```text
+Roční návrat k rutině [název] končí stavem [ponechat / zkrátit / sloučit / archivovat / otevřít novou otázku]. Měníme [konkrétní minimum], uklízíme [datová stopa], nezakládáme [nový proces] a návrat nastane při [signál].
+```
+
+### Checklist ročního návratu
+
+- Proběhl návrat v existujícím ročním review, ne jako nový izolovaný rituál?
+- Je jasný původní účel rutiny?
+- Bylo ověřeno poslední reálné použití?
+- Je výsledek jeden z pěti stavů?
+- Pokud se rutina ponechává, je to zapsané jako aktivní rozhodnutí?
+- Pokud se zkracuje, mizí stará opatrnost z aktivní trasy?
+- Pokud se slučuje, vzniká jeden zdroj pravdy?
+- Pokud se archivuje, má archiv účel a retenční konec?
+- Pokud vzniká nová otázka, nepřepisuje starou rutinu?
+- Je zapsané, co se výslovně nemění?
+- Nevzniká nový tracker, report, formulářové pole ani kontrolní tabulka?
+- Jsou staré exporty, příklady a pomocné poznámky smazané nebo anonymizované?
+- Je návratový signál konkrétní a použitelný v běžné práci?
+- Dá se výsledek vysvětlit týmu jednou větou?
+
+Roční návrat má být lehký, ale ne povrchní. Jeho cílem není znovu prožít všechny staré důvody, proč rutina vznikla. Cílem je zjistit, jestli pořád pomáhá současné práci, a pokud ano, nechat ji běžet s menší stopou. Dobrý dlouhodobý provoz není plný kontrol. Je plný pravidel, která lidé používají bez divadla, a starých podkladů, které už nikdo nemusí hlídat.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o prvním ročním návratu k dlouhodobé rutině: ověření účelu, použití, ceny a datové stopy, pět výsledků návratu, privacy-first roční úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého kvartálního sanity checku do dlouhodobé rutiny: čtyři uzavírací stavy, propsání do kanonického místa, privacy-first úklid zbytkových stop, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém kvartálním sanity checku bez nového procesu: ověření konce první kontroly, zbytkové stopy a závislosti, prevence třetího checku, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního kvartálního sanity checku: čtyři uzavírací stavy, propsání do kanonického místa, negativní vymezení nové evidence, privacy-first úklid, karta, mini workshop a checklist.
