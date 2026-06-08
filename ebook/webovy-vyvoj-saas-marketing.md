@@ -194229,8 +194229,255 @@ Druhé nenápadné použití kompasu [název] uzavíráme stavem [stav]. Zůstá
 
 Uzavření druhého nenápadného použití je dobré místo, kde přestat. Ne proto, že už nikdy nic nepřijde, ale proto, že pravidlo si zaslouží běžný život. Další práce má začít až ve chvíli, kdy se objeví skutečný návratový signál. Do té doby je nejlepší údržba ta, která nevyrábí sama sebe.
 
+## První návratový signál po tichém provozu kompasu
+
+Tichý provoz neznamená, že se pravidlo už nikdy neozve. Znamená, že se nehlídá zvláštní agendou a že návrat poznáte z běžné práce. První návratový signál po tichém provozu je proto citlivé místo: tým má chuť znovu otevřít historii, připomenout si všechny minulé karty a pro jistotu založit kontrolu. Většinou stačí méně.
+
+Pracovní otázka:
+
+```text
+Je to skutečný návratový signál kompasu, nebo jen běžná situace, kterou má kompas bez nové péče unést?
+```
+
+Na tuto otázku odpovězte dřív, než začnete cokoliv přepisovat. První signál po tichém provozu má být třídění, ne rozsudek. Jedna nejasná situace ještě neznamená, že kompas selhal. Stejně tak ale není dobré ji zamést pod koberec jen proto, že jste si předchozí uzavření chtěli udržet hezky čisté.
+
+Začněte krátkým zápisem:
+
+```text
+Co se stalo:
+
+Kde se to objevilo:
+
+Kdo to musel řešit:
+
+Jaké rozhodnutí bylo potřeba:
+
+Proč to může být návratový signál:
+
+Co by bylo riziko zbytečného otevření:
+```
+
+Tento zápis nemá obnovit starou evidenci. Má jen zabránit tomu, aby tým reagoval pocitem. Pokud už po vyplnění není jasné, proč by šlo o návratový signál, pravděpodobně jde o běžné použití kompasu.
+
+### Čtyři typy prvního signálu
+
+První návrat po tichém provozu obvykle spadne do jednoho ze čtyř typů:
+
+- `Běžná hrana`: situace je nová, ale princip kompasu ji zvládá.
+- `Lokální tření`: jedno pracovní místo potřebuje přesnější větu, odkaz nebo příklad.
+- `Slabý návrat`: problém se podobá starému vzoru, ale zatím se objevil jen jednou a bez většího dopadu.
+- `Skutečný návrat`: vrátil se stejný typ dohledu, ručního schvalování, nejistoty nebo zbytečné datové stopy, kvůli kterému kompas původně vznikl.
+
+`Běžná hrana` nepotřebuje opravu. Stačí použít existující pravidlo a nechat situaci odejít bez zápisu navíc. Pokud pokaždé zapisujete, že kompas fungoval, tichý provoz se pomalu mění na audit s lepší náladou.
+
+`Lokální tření` opravujte na nejbližším místě. Když člověk nemohl najít správnou větu v šabloně, upravte šablonu. Když starý odkaz vede na neaktuální dokument, opravte odkaz. Když příklad mate, přepište příklad. Princip se nemění.
+
+`Slabý návrat` si zaslouží návratový signál, ne projekt. Zapište, co by muselo nastat podruhé, aby se téma otevřelo. Do té doby nechte kompas v tichém provozu.
+
+`Skutečný návrat` poznáte podle toho, že lidé znovu obcházejí pravidlo stejným způsobem jako dřív. Například znovu vzniká ruční schvalování anonymizace, znovu se kopírují zákaznické detaily do pomocných poznámek, znovu se zakládá paralelní checklist nebo znovu nikdo neví, kdo má rozhodnout. Tady už nejde o hranu. Tady se vrátil problém.
+
+### Reakce podle typu
+
+Každý typ má jinou reakci:
+
+```text
+Běžná hrana:
+Použijeme kompas beze změny. Situaci dál neevidujeme.
+
+Lokální tření:
+Opravíme jedno pracovní místo a smažeme dočasnou poznámku.
+
+Slabý návrat:
+Necháme kompas v tichém provozu a zpřesníme návratový signál.
+
+Skutečný návrat:
+Otevřeme krátké ověření jedné běžné situace, ve které se problém vrací.
+```
+
+Nejnebezpečnější je zaměnit slabý návrat za skutečný návrat. Tým pak obnoví kontrolu, kterou předtím pracně odstranil. Druhá nejčastější chyba je opačná: skutečný návrat se označí za běžnou hranu, protože nikdo nechce přiznat, že pravidlo už v běžném provozu nestačí.
+
+Pomáhá jednoduchý test:
+
+```text
+Kdyby se stejná situace opakovala ještě dvakrát, změnili bychom pravidlo?
+```
+
+Pokud ne, neotevírejte ho ani teď. Pokud ano, zapište přesný návratový signál. Pokud se stejná situace už opakuje, nečekejte na třetí výskyt jen proto, že formulář říká "dvakrát".
+
+Příklad:
+
+```text
+Co se stalo:
+Při přípravě nové case study vznikl návrh ponechat konkrétní zákaznickou metriku v interní šabloně.
+
+Kde se to objevilo:
+V pracovním dokumentu pro sales enablement.
+
+Kdo to musel řešit:
+Vlastník obsahu požádal o ruční potvrzení, jestli metriku anonymizovat.
+
+Typ signálu:
+Lokální tření.
+
+Reakce:
+Do šablony case study přibývá jedna věta: "Interní pracovní metriky zapisuj jako rozmezí nebo anonymní vzor, pokud přesná hodnota není nutná pro rozhodnutí." Dočasný komentář se maže.
+```
+
+Tady není potřeba měnit kompas datového minima. Stačí opravit místo, kde se člověk zasekl.
+
+Jiný příklad:
+
+```text
+Co se stalo:
+Ve třech různých šablonách se během měsíce vrátilo ruční schvalování, jestli lze použít konkrétní zákaznický detail.
+
+Typ signálu:
+Skutečný návrat.
+
+Reakce:
+Otevíráme krátké ověření jedné běžné obsahové situace: jak má autor nahradit zákaznický detail anonymním vzorem bez schvalování.
+```
+
+Tady už nejde o jednu šablonu. Vrací se nejistota v rozhodování.
+
+### Privacy-first reakce na signál
+
+První návratový signál často vznikne u konkrétního zákazníka, konkrétního leadu, konkrétního support tiketu nebo konkrétní interní chyby. Právě proto je potřeba řešit ho úsporně.
+
+Privacy-first postup:
+
+1. Pojmenujte problém bez osobních údajů, pokud to jde.
+2. Nechte v zápisu jen takové detaily, které jsou nutné pro rozhodnutí.
+3. Dočasné screenshoty, komentáře a exporty smažte hned po rozhodnutí.
+4. Pokud potřebujete příklad pro šablonu, přepište ho na anonymní vzor.
+5. Nezakládejte tracker návratových signálů, dokud nejde o opakovaný provozní problém.
+
+Dobrá věta:
+
+```text
+V obsahové šabloně se vrátila nejistota, jestli přesnou zákaznickou metriku nahradit rozmezím. Opravujeme lokální instrukci v šabloně a konkrétní příklad mažeme.
+```
+
+Slabá věta:
+
+```text
+U zákazníka [název] se řešilo, zda ponechat metriku [hodnota], proto zakládáme seznam případů pro budoucí rozhodování.
+```
+
+První věta řeší rozhodnutí. Druhá věta vyrábí novou datovou stopu a novou agendu. To je přesně ten okamžik, kdy se privacy-first hodnota pozná v praxi, ne v deklaraci na webu.
+
+Codyho komentář: návratový signál není siréna. Je to spíš klepnutí na stůl. Když po každém klepnutí svoláte krizový štáb, stůl za chvíli nikdo nechce používat.
+
+### Karta prvního návratového signálu
+
+Kartu použijte jen tehdy, když signál nejde uzavřít jednou větou. U běžné hrany karta nevzniká.
+
+```text
+Kompas:
+
+Signál:
+
+Kde se objevil:
+
+Typ signálu:
+- běžná hrana
+- lokální tření
+- slabý návrat
+- skutečný návrat
+
+Rozhodnutí:
+
+Nejmenší reakce:
+
+Co se nemění:
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Návratový signál pro další otevření:
+
+Kde bude vidět bez nového sledování:
+
+Vlastník:
+
+Datum návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v pracovních příkladech.
+
+Signál:
+Autor case study si nebyl jistý, jestli v interní šabloně ponechat přesnou zákaznickou metriku.
+
+Kde se objevil:
+Šablona case study pro sales enablement.
+
+Typ signálu:
+Lokální tření.
+
+Rozhodnutí:
+Kompas funguje, ale šablona potřebuje jednu lokální větu.
+
+Nejmenší reakce:
+Doplnit instrukci pro nahrazení přesné metriky rozmezím nebo anonymním vzorem.
+
+Co se nemění:
+Kanonický kompas datového minima.
+
+Co se maže, zkracuje nebo anonymizuje:
+Konkrétní zákaznická metrika v pracovním komentáři.
+
+Návratový signál pro další otevření:
+Dvě další šablony během měsíce znovu vyžádají ruční schválení anonymizace.
+
+Kde bude vidět bez nového sledování:
+V běžném obsahovém review.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum návratu:
+Příští obsahové review.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte signál jednou větou.
+2. Minuta 2: určete, kde přesně se objevil.
+3. Minuta 3: vyberte jeden ze čtyř typů signálu.
+4. Minuta 4: rozhodněte nejmenší reakci.
+5. Minuta 5: řekněte, co se nemění.
+6. Minuta 6: smažte, zkraťte nebo anonymizujte dočasné stopy.
+7. Minuta 7: napište návratový signál pro další otevření.
+
+Výstup:
+
+```text
+Signál [popis] bereme jako [typ]. Reakce je [nejmenší reakce]. Kompas [název] se [nemění / lokálně doplňuje / krátce ověřuje] a další návrat nastane jen při [signál].
+```
+
+### Checklist prvního návratového signálu
+
+- Je jasné, co se stalo a kde se signál objevil?
+- Je vybraný jeden ze čtyř typů signálu?
+- Neotevíráme starou historii dřív, než víme proč?
+- U běžné hrany nevzniká žádný zápis navíc?
+- U lokálního tření opravujeme jen nejbližší pracovní místo?
+- U slabého návratu zpřesňujeme signál místo zakládání projektu?
+- U skutečného návratu otevíráme jen krátké ověření jedné běžné situace?
+- Je zapsané, co se nemění?
+- Jsou konkrétní zákaznické nebo osobní detaily odstraněné, zkrácené nebo anonymizované?
+- Nevzniká nový tracker, report, export ani paralelní seznam případů?
+- Je další návrat pozorovatelný v běžném review?
+- Umí vlastník vysvětlit rozhodnutí jednou větou?
+
+První návratový signál po tichém provozu má ukázat, jestli kompas opravdu žije v práci. Když signál zvládnete malou reakcí, pravidlo zesílí bez nové byrokracie. Když se ukáže skutečný návrat problému, otevřete ho úzce a věcně. V obou případech platí totéž: čím méně zbytečné evidence po reakci zůstane, tím větší šanci má kompas zůstat užitečný.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o prvním návratovém signálu po tichém provozu stálého provozního kompasu: rozlišení běžné hrany, lokálního tření, slabého návratu a skutečného návratu, nejmenší reakce, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého nenápadného použití stálého provozního kompasu: čtyři uzavírací stavy, uzavírací věta, omezení zbytkových stop, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém nenápadném použití stálého provozního kompasu bez obnovení dohledu: samostatnost pravidla, přenos mezi situacemi, čtyři výsledky, odstranění vráceného dohledu, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního nenápadného použití stálého provozního kompasu: čtyři uzavírací stavy, práce s jednou větou, privacy-first úklid dočasných stop, karta, mini workshop a checklist.
