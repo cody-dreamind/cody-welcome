@@ -191080,8 +191080,207 @@ Druhé běžné použití pravidla [název] skončilo stavem [výsledek]. Mění
 
 Druhé běžné použití má z pravidla sundat poslední zbytečnou pozornost. Když funguje podruhé, nechte ho být. Když zadrhne, opravte nejbližší hranu. A když se objeví nová situace, dejte jí vlastní malý rámec místo toho, aby se přilepila na starou uzavřenou práci.
 
+## Uzavření druhého běžného použití do dlouhodobého klidu
+
+Druhé běžné použití je poslední rozumné místo, kde má pravidlo dostat zvláštní pozornost. Po něm už se tým musí rozhodnout, jestli pravidlo patří do dlouhodobého klidu, jestli potřebuje jednu lokální opravu, nebo jestli se objevila samostatná nová otázka. Bez uzavření se i dobré pravidlo může stát drobnou provozní povinností, která se pravidelně kontroluje jen proto, že se kdysi kontrolovat začala.
+
+Uzavření druhého běžného použití proto není další audit. Je to úklid po důkazu. Tým si vezme výsledek druhého použití, vybere jeden uzavírací stav, zapíše krátký závěr a odstraní z aktivní trasy všechno, co by vracelo zvláštní režim.
+
+Základní věta:
+
+```text
+Po druhém běžném použití pravidla [název] volíme stav [stav]. Pravidlo zůstává [v dlouhodobém klidu / po jedné lokální opravě / mimo rozsah nové otázky] a další návrat nastane pouze při [návratový signál].
+```
+
+Tato věta má být obyčejná. Není to tisková zpráva, post-mortem ani nová metodika. Je to poslední pracovní uzel, který říká: víme, co se stalo, víme, co se nemění, a víme, kdy má smysl se vrátit.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- `Dlouhodobý klid`: pravidlo fungovalo i podruhé a nepotřebuje další pozornost.
+- `Lokální dotažení`: pravidlo funguje, ale jedna věta, příklad nebo návratový signál potřebuje drobnou úpravu.
+- `Úklid staré stopy`: pravidlo je v pořádku, ale starý podklad pořád tahá lidi zpět do minulého review.
+- `Samostatná nová otázka`: druhé použití ukázalo nový případ, který nemá být přilepený na staré pravidlo.
+
+`Dlouhodobý klid` znamená konec zvláštní péče. Nezakládejte kvartální kontrolu pravidla jen proto, že dvě použití dopadla dobře. Pokud už existuje obecný rytmus revize šablon, pravidlo v něm může zůstat. Nevytvářejte mu vlastní minikalendář.
+
+Příklad uzavření:
+
+```text
+Stav:
+Dlouhodobý klid.
+
+Závěr:
+Pravidlo pro slabé marketingové podněty fungovalo i při druhém běžném použití. Zůstává v kanonické kartě bez další samostatné kontroly.
+
+Návratový signál:
+Dva podobné podněty ze stejného segmentu v jednom review cyklu vytvoří rozhodovací otázku, ne automatický úkol.
+```
+
+`Lokální dotažení` je menší než review. Týká se nejbližšího místa, kde člověk pravidlo používá. Typicky upravíte jednu větu v šabloně, doplníte jeden příklad nebo zpřesníte, kdy se spouští návratový signál. Jakmile úprava vyžaduje přepsat více pracovních míst, už to není lokální dotažení. V tu chvíli je poctivější otevřít novou otázku.
+
+`Úklid staré stopy` je vhodný, když druhé použití ukázalo, že lidé sahají po starém exportu, screenshotu, review zápisu nebo pomocné tabulce. Neopravujte kvůli tomu pravidlo, pokud pravidlo samo funguje. Opravte cestu: odstraňte odkaz z aktivního rozcestníku, přidejte štítek "archiv, není zdroj pravdy" nebo zkraťte příklad, který vyvolává potřebu vracet se do detailu.
+
+`Samostatná nová otázka` je stav pro situace, kdy realita přinese nový problém. Tady je důležité ochránit starou práci. Nová otázka může být legitimní, ale nemá právo znovu otevřít celý příběh jen proto, že se objevila u stejného pravidla.
+
+Špatný závěr:
+
+```text
+Druhé použití ukázalo nový případ, tak znovu otevřeme celé review pravidla.
+```
+
+Lepší závěr:
+
+```text
+Druhé použití ukázalo nový případ u partnerských podnětů. Původní pravidlo pro slabé marketingové podněty zůstává zavřené. Otevíráme samostatnou otázku: kdy má partnerský podnět dostatečný obchodní důvod pro zařazení do backlogu?
+```
+
+### Co se po uzavření nemaže
+
+Uzavření neznamená, že tým zahodí paměť. Znamená, že oddělí aktivní trasu od archivu. V aktivní trase má zůstat jen to, co člověk potřebuje při běžném rozhodnutí:
+
+- kanonická věta pravidla;
+- jeden krátký příklad, pokud snižuje tření;
+- návratový signál;
+- odkaz na zdroj pravdy, pokud pravidlo žije v širším playbooku.
+
+Do archivu mohou odejít:
+
+- původní review zápis;
+- pomocná tabulka podnětů;
+- anonymizované poznámky z testu;
+- starší varianty formulace;
+- podklady, které sloužily jen k uzavření nejistoty.
+
+Archiv má mít účel a retenční konec. Pokud není jasné, proč ho držíte, jak dlouho a kdo ho může potřebovat, pravděpodobně nejde o paměť, ale o odložený nepořádek.
+
+### Privacy-first uzavření
+
+Privacy-first hodnota se při uzavření projevuje hlavně zkrácením datové stopy. Když je pravidlo ověřené v běžném provozu, nepotřebujete dál držet detailní důkazy. Nechte jen anonymizovaný závěr a aktuální pracovní větu.
+
+Zeptejte se:
+
+- Zůstává v aktivní trase nějaký osobní údaj, zákaznická citace, screenshot nebo export?
+- Je potřeba pro budoucí rozhodnutí, nebo jen připomíná, jak jsme k závěru došli?
+- Dá se nahradit anonymizovanou větou?
+- Má archivovaný podklad retenční konec?
+- Nevede starý odkaz k nástroji, kde by lidé zbytečně viděli víc dat, než potřebují?
+
+Příklad privacy-first výsledku:
+
+```text
+Po uzavření druhého běžného použití zůstává v aktivní trase jen kanonická věta, krátký anonymizovaný příklad a návratový signál. Pomocná tabulka je archivovaná na 30 dní kvůli dohledatelnosti změny a potom se smaže.
+```
+
+Codyho komentář: archiv bez retenčního konce je jen sklep s lepším názvem. Občas se hodí, ale nechcete v něm bydlet.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Datum druhého běžného použití:
+
+Výsledek druhého použití:
+- potvrzený klid
+- jedna poslední hrana
+- návrat staré stopy
+- nová pracovní situace
+
+Uzavírací stav:
+- dlouhodobý klid
+- lokální dotažení
+- úklid staré stopy
+- samostatná nová otázka
+
+Jedna uzavírací věta:
+
+Co zůstává v aktivní trase:
+
+Co přesouváme do archivu nebo mažeme:
+
+Co výslovně neotevíráme:
+
+Privacy-first výsledek:
+
+Návratový signál:
+
+Jedna věta do pracovního logu:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Slabé marketingové podněty bez vlastníka.
+
+Datum druhého běžného použití:
+2026-06-08
+
+Výsledek druhého použití:
+Potvrzený klid.
+
+Uzavírací stav:
+Dlouhodobý klid.
+
+Jedna uzavírací věta:
+Pravidlo fungovalo i při druhém běžném použití a zůstává v kanonické kartě bez další samostatné kontroly.
+
+Co zůstává v aktivní trase:
+Kanonická věta, jeden anonymizovaný příklad a návratový signál.
+
+Co přesouváme do archivu nebo mažeme:
+Pomocná tabulka podnětů zůstává mimo aktivní rozcestník a po retenční době se smaže.
+
+Co výslovně neotevíráme:
+Druhé dlouhodobé review, staré marketingové podklady ani celý obsahový backlog.
+
+Privacy-first výsledek:
+Nevznikl nový export, screenshot ani detail konkrétního zákaznického podnětu.
+
+Návratový signál:
+Dva podobné podněty ze stejného segmentu v jednom review cyklu.
+
+Jedna věta do pracovního logu:
+Druhé běžné použití pravidla bylo uzavřeno do dlouhodobého klidu bez nové evidence.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte výsledek druhého běžného použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište jednu uzavírací větu.
+4. Minuta 4: určete, co zůstává v aktivní trase.
+5. Minuta 5: smažte, archivujte nebo označte staré stopy.
+6. Minuta 6: zapište privacy-first výsledek a návratový signál.
+
+Výstup:
+
+```text
+Pravidlo [název] po druhém běžném použití uzavíráme stavem [stav]. V aktivní trase zůstává [minimum], mimo rozsah necháváme [starý rozsah] a návrat nastane pouze při [signál].
+```
+
+### Checklist uzavření
+
+- Má druhé běžné použití jasný výsledek?
+- Je vybraný jeden uzavírací stav?
+- Pokud pravidlo funguje, nevzniká další samostatná kontrola?
+- Pokud se dělá lokální dotažení, týká se jen nejbližší věty, příkladu nebo návratového signálu?
+- Pokud se vrací stará stopa, uklízíme aktivní trasu místo přepisování pravidla?
+- Pokud vznikla nová otázka, zůstává původní pravidlo zavřené?
+- Je jasné, co zůstává v aktivní trase?
+- Je jasné, co se archivuje, maže nebo označuje jako nekanonické?
+- Má archivovaný podklad účel, vlastníka a retenční konec?
+- Nezůstávají v běžné trase osobní údaje, screenshoty, exporty ani detaily zákaznické komunikace?
+- Je návratový signál konkrétní, úměrný a bez nového sledování?
+- Má pracovní log jednu stručnou větu o uzavření?
+
+Uzavření druhého běžného použití má pravidlu vrátit přirozenou velikost. Pokud funguje, nechť slouží. Pokud potřebuje poslední hranu, opravte ji. Pokud se objeví nová otázka, dejte jí vlastní rámec. A pokud po práci zůstane méně aktivních stop než před ní, privacy-first provoz se právě tiše zlepšil.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o uzavření druhého běžného použití do dlouhodobého klidu: čtyři uzavírací stavy, oddělení aktivní trasy od archivu, privacy-first zkrácení datové stopy, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního běžného použití: zkouška všednosti pravidla, čtyři výsledné stavy, prevence třetí kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití po druhém dlouhodobém review: čtyři uzavírací stavy, propsání do kanonického místa, oddělení nové otázky od starého review, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním běžném použití po druhém dlouhodobém review: ověření kanonické věty v reálné práci, čtyři výsledné stavy, nejmenší oprava, privacy-first kontrola, karta, mini workshop a checklist.
