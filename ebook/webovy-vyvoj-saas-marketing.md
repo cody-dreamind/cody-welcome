@@ -190397,8 +190397,244 @@ Když se během workshopu objeví nápad na širší úpravu, nedávejte ho auto
 
 Dobře uzavřené druhé dlouhodobé review je malé, ale důležité. V ideálním případě po něm pravidlo zabírá méně místa než předtím: má kratší větu, čistší domov, méně podkladů a přesnější návratový signál. To není ústup od disciplíny. To je disciplína, která po sobě uklízí.
 
+## První běžné použití po druhém dlouhodobém review
+
+Druhé dlouhodobé review může být uzavřené krásně: má stav, ochranné jádro, kanonické místo, návratový signál a uklizené pomocné podklady. Jenže skutečný test přijde až ve chvíli, kdy pravidlo někdo znovu potká v běžné práci. Bez zvláštní přípravy. Bez připomenutí "tady jsme přece něco řešili". Bez historické mapy v ruce.
+
+První běžné použití po druhém dlouhodobém review proto nekontroluje minulost. Kontroluje, jestli nový stav pravidla unese normální pracovní průchod.
+
+Základní otázka:
+
+```text
+Dokáže člověk použít pravidlo v běžné práci bez návratu k celé historii review?
+```
+
+Pokud ano, pravidlo je zralé. Pokud ne, neznamená to automaticky selhání. Možná jen chybí krátká věta v kanonickém místě, přesnější návratový signál nebo čistší archivní stopa. Opravujte nejbližší místo, ne celou minulost. Historie je užitečná jako poučení, ne jako povinná četba před každým kliknutím.
+
+### Co při prvním použití sledovat
+
+Vyberte jednu reálnou situaci, kde se pravidlo přirozeně objeví. Nemá to být cvičení navíc. Ideální je běžné měsíční review, úprava šablony, rozhodnutí o marketingovém podnětu, kontrola poptávky, supportní odpověď nebo práce s interním playbookem.
+
+Sledujte jen čtyři věci:
+
+- člověk našel kanonické místo bez hledání ve starých podkladech;
+- krátká věta pravidla stačila k rozhodnutí;
+- návratový signál byl srozumitelný a nenutil k preventivnímu otevírání problému;
+- nevznikla nová evidence jen proto, že pravidlo kdysi prošlo review.
+
+Příklad:
+
+```text
+Situace:
+Editor při měsíčním review zavírá slabý marketingový podnět.
+
+Kanonické místo:
+Měsíční review šablona, část "Podněty bez další práce".
+
+Použitá věta:
+Slabý podnět nezakládá práci bez vlastníka, dopadu a návratového signálu.
+
+Výsledek:
+Podnět byl zavřený bez úkolu. Nevznikla pomocná karta ani další kontrola.
+```
+
+To je dobrý výsledek. Není potřeba slavit, rozepisovat poučení ani přidávat nový sloupec do tabulky. Provozní dospělost se často pozná podle toho, že po správném rozhodnutí nevznikne žádná další práce.
+
+### Čtyři výsledky prvního běžného použití
+
+Po prvním použití vyberte jeden stav:
+
+- `Funguje tiše`: pravidlo se použilo bez zvláštní pomoci a bez nové datové stopy.
+- `Chybí drobná hrana`: pravidlo funguje, ale kanonická věta nebo návratový signál potřebuje malé zpřesnění.
+- `Vrací se stará opatrnost`: někdo znovu otevřel pomocné podklady, kontrolu nebo evidenci, která měla být po review pryč.
+- `Otevírá se nové rozhodnutí`: běžná práce ukázala, že realita je jiná než při druhém review.
+
+Stav `Funguje tiše` uzavřete jednou větou v pracovním logu nebo vůbec, pokud log pro daný rytmus nevzniká. Nepřidávejte "pro jistotu" kontrolu po druhém použití. Tiché fungování je přesně ten stav, kvůli kterému se druhé dlouhodobé review dělalo.
+
+Stav `Chybí drobná hrana` řešte nejmenší opravou v kanonickém místě. Typicky stačí doplnit jedno slovo, zkrátit příliš dlouhou větu, přidat příklad špatného použití nebo zpřesnit návratový signál.
+
+Příklad drobné hrany:
+
+```text
+Původní návratový signál:
+Dva slabé podněty po sobě vytvoří úkol bez vlastníka.
+
+Zpřesnění:
+Dva slabé podněty po sobě vytvoří úkol bez vlastníka, dopadu nebo termínu dalšího rozhodnutí.
+```
+
+Stav `Vrací se stará opatrnost` je nejzajímavější. Pravidlo možná funguje, ale tým se pod tlakem vrací k pomocným kontrolám, které už nemají účel. Tady neopravujte pravidlo. Opravte chování kolem něj: smažte starý odkaz, zavřete připomínku, odstraňte archivní šablonu z aktivního rozcestníku nebo napište do kanonického místa, že staré ověřovací podklady nejsou zdroj pravdy.
+
+Stav `Otevírá se nové rozhodnutí` používejte jen tehdy, když nová situace opravdu mění rámec. Ne každé tření je nová strategie. Někdy je to jen špatně pojmenované pole. Ano, i pole umí dělat drama. Nenápadně, ale vytrvale.
+
+### Jak neopravit už uklizené pravidlo znovu celé
+
+Po druhém dlouhodobém review má tým tendenci brát každé nové tření vážně. To je pochopitelné, ale ne vždy užitečné. První běžné použití má držet rozsah při zemi.
+
+Použijte jednoduché pravidlo:
+
+```text
+Opravujeme jen místo, kde se člověk zasekl při reálném použití.
+```
+
+Neopravujte:
+
+- celou kapitolu, když se zasekla jedna věta;
+- celý review rytmus, když chyběl jeden návratový signál;
+- všechny staré šablony, když se používala jen jedna;
+- archiv, když problém vznikl v aktivním kanonickém místě;
+- proces, když šlo o nejasný příklad.
+
+Příklad správného zúžení:
+
+```text
+Nález:
+Editor nevěděl, jestli slabý podnět bez vlastníka může zavřít, když má velký možný dopad.
+
+Nejmenší oprava:
+Do kanonické věty doplnit, že podnět s dopadem patří do rozhodovací karty, i když zatím nemá vlastníka.
+
+Co neotevíráme:
+Neotevíráme celé pravidlo slabých podnětů, staré review zápisy ani marketingový backlog.
+```
+
+Tím zůstane oprava přesná. Systém se učí z reálného tření, ale neodemyká celý sklep starých rozhodnutí.
+
+### Privacy-first kontrola prvního použití
+
+První běžné použití svádí k tomu, aby si tým "pro jistotu" ponechal příklad. Jenže po druhém dlouhodobém review už by se měla datová stopa zmenšovat, ne znovu růst.
+
+Ptejte se:
+
+- Stačí pro poučení typ situace místo konkrétního zákazníka, člověka nebo projektu?
+- Potřebujeme uchovat text původního podnětu, nebo jen rozhodnutí a návratový signál?
+- Nevzniká screenshot, export nebo kopie jen proto, že někdo nevěří kanonické větě?
+- Má případný zápis retenční konec?
+
+Privacy-first zápis může vypadat takto:
+
+```text
+První běžné použití po druhém dlouhodobém review proběhlo bez návratu staré evidence. V logu zůstává jen anonymizovaná věta: slabý podnět bez vlastníka, dopadu a návratového signálu byl zavřen bez úkolu.
+```
+
+Nebo při drobné opravě:
+
+```text
+Při prvním běžném použití se zpřesnil návratový signál. Neuchováváme původní podnět ani identifikaci projektu; v kanonické šabloně zůstává jen obecné pravidlo.
+```
+
+Codyho komentář: pokud k ověření jednoduchého pravidla potřebujete osobní údaje, screenshoty a tři exporty, problém pravděpodobně není v pravidle. Problém je v tom, že mu systém nevěří. A nedůvěra se má řešit lepším kanonickým místem, ne větší hromadou dat.
+
+### Karta prvního běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Stav po druhém dlouhodobém review:
+- ponechat / zkrátit / archivovat / otevřít nové rozhodnutí
+
+Kanonické místo:
+
+Běžná situace, kde se pravidlo použilo:
+
+Stačila kanonická věta:
+- ano / skoro / ne
+
+Byl návratový signál srozumitelný:
+- ano / zpřesnit / ne
+
+Vznikla nová evidence:
+- ne / ano, proč
+
+Výsledek prvního použití:
+- funguje tiše
+- chybí drobná hrana
+- vrací se stará opatrnost
+- otevírá se nové rozhodnutí
+
+Nejmenší další krok:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+
+Jedna věta do pracovního logu:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Slabý podnět může být zavřený bez úkolu.
+
+Stav po druhém dlouhodobém review:
+Zkrátit.
+
+Kanonické místo:
+Měsíční review šablona.
+
+Běžná situace, kde se pravidlo použilo:
+Editor zavíral slabý marketingový podnět bez vlastníka.
+
+Stačila kanonická věta:
+Ano.
+
+Byl návratový signál srozumitelný:
+Ano.
+
+Vznikla nová evidence:
+Ne.
+
+Výsledek prvního použití:
+Funguje tiše.
+
+Nejmenší další krok:
+Žádný.
+
+Co výslovně neotevíráme:
+Neotevíráme staré review zápisy ani pomocnou tabulku podnětů.
+
+Privacy-first úklid:
+Neuchováváme detail podnětu; stačí anonymizovaná věta v měsíčním review.
+
+Jedna věta do pracovního logu:
+První běžné použití zkráceného pravidla proběhlo bez nové evidence a bez návratu staré opatrnosti.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte běžnou situaci, kde se pravidlo objevilo.
+2. Minuta 2: ověřte, jestli člověk našel kanonické místo.
+3. Minuta 3: rozhodněte, zda stačila krátká věta pravidla.
+4. Minuta 4: vyberte jeden ze čtyř výsledků prvního použití.
+5. Minuta 5: napište nejmenší další krok, pokud vůbec nějaký existuje.
+6. Minuta 6: smažte nebo nezakládejte datovou stopu, která není potřeba.
+
+Výstup:
+
+```text
+Pravidlo [název] při prvním běžném použití po druhém dlouhodobém review skončilo stavem [výsledek]. Měníme jen [nejmenší krok] a neotevíráme [co zůstává zavřené].
+```
+
+### Checklist prvního běžného použití
+
+- Šlo o skutečnou běžnou situaci, ne zvláštní test?
+- Našel člověk kanonické místo bez starých pomocných podkladů?
+- Stačila krátká věta pravidla k rozhodnutí?
+- Byl návratový signál jasný bez výkladu původní historie?
+- Nevznikla nová tabulka, připomínka, export nebo screenshot?
+- Vybrali jsme jeden ze čtyř výsledků prvního použití?
+- Pokud chybí drobná hrana, opravujeme jen nejbližší větu nebo signál?
+- Pokud se vrací stará opatrnost, uklízíme staré stopy místo přepisování pravidla?
+- Pokud otevíráme nové rozhodnutí, má vlastní otázku a nejmenší další krok?
+- Je privacy-first zápis anonymizovaný a úměrný?
+- Je jasné, co výslovně neotevíráme?
+
+První běžné použití po druhém dlouhodobém review je poslední kontrola, jestli pravidlo opravdu přešlo z opravované věci do provozního návyku. Když funguje tiše, nechte ho tiše fungovat. Když zadrhne, opravte nejbližší hranu. A když se někdo pokusí obnovit celou historii "pro jistotu", laskavě mu podejte kanonickou větu a zavřete starou krabici.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o prvním běžném použití po druhém dlouhodobém review: ověření kanonické věty v reálné práci, čtyři výsledné stavy, nejmenší oprava, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review po tichém provozu: uzavírací stavy, věta podle výsledku, úprava kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém dlouhodobém review po tichém provozu: kontrola užitečnosti a úměrnosti pravidla, rozlišení zdravé a mrtvé nečinnosti, zjednodušení bez ztráty ochrany, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního dlouhodobého review po tichém provozu: čtyři uzavírací stavy, uzavírací věta, propsání jen do kanonických míst, privacy-first úklid podkladů, karta, mini workshop a checklist.
