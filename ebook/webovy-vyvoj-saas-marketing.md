@@ -190877,8 +190877,212 @@ Po prvním běžném použití pravidla [název] volíme stav [uzavírací stav]
 
 Uzavření prvního běžného použití je malý administrativní konec, který chrání velkou věc: aby se pravidlo nestalo věčným projektem. Dobré pravidlo má po review sloužit, ne vyžadovat pozornost. Pokud po uzavření zůstane jen aktuální věta, čisté kanonické místo a jasný návratový signál, práce se zmenšila přesně tam, kde měla.
 
+## Druhé běžné použití po uzavření prvního běžného použití
+
+Po uzavření prvního běžného použití už pravidlo nemá dostávat výhodu zvláštní pozornosti. Druhé běžné použití proto není další review, ale zkouška všednosti. Člověk narazí na pracovní situaci, použije kanonickou větu, rozhodne se a jde dál. Pokud se kolem toho musí znovu sejít tým, otevírat staré podklady nebo vysvětlovat historii review, pravidlo sice možná existuje, ale ještě nežije dost samostatně.
+
+Cíl druhého běžného použití je prostý:
+
+```text
+Ověřit, že pravidlo funguje i podruhé bez mimořádného režimu, bez staré opatrnosti a bez nové evidence.
+```
+
+Nečekejte ideální situaci. Druhé použití má proběhnout v normálním provozu: v měsíčním review, při úpravě stránky, během prioritizace backlogu, v supportu, v sales follow-upu nebo při úklidu šablon. Právě obyčejnost je důkaz. Pokud pravidlo funguje jen tehdy, když si všichni pamatují, že se právě testuje, není to pravidlo. Je to ještě pořád projekt v převleku.
+
+Příklad:
+
+```text
+Situace:
+Při marketingovém review přijde slabý návrh na nový obsahový formát.
+
+Kanonická věta:
+Slabý podnět bez vlastníka, dopadu a návratového signálu se nezakládá jako úkol.
+
+Druhé běžné použití:
+Tým návrh nezakládá do backlogu, jen do poznámky doplní, že se vrátí pouze při dvou podobných podnětech ze stejného segmentu.
+
+Výsledek:
+Pravidlo funguje bez nové tabulky, bez starého review a bez dalšího schvalovacího kolečka.
+```
+
+### Co při druhém použití kontrolovat
+
+Druhé použití má hlídat méně věcí než první. Pokud znovu otevřete celý seznam kontrol, vyrábíte si nový dohled. Stačí tři otázky:
+
+- Stačila kanonická věta k rozhodnutí?
+- Nevytáhl tým staré pomocné podklady jen pro jistotu?
+- Nevznikla nová evidence, která nemá vlastní účel, vlastníka a konec?
+
+Když odpovědi zní ano, ne a ne, pravidlo je v dobrém stavu. Nemusíte dokazovat víc. Zapište jen krátký výsledek, pokud pro dané pracovní místo existuje log, a nechte pravidlo pokračovat v běžném rytmu.
+
+Když se některá odpověď zlomí, nepřeskakujte do velké opravy. Druhé použití má pořád chránit rozsah. Nejdřív určete, jestli problém leží ve větě pravidla, ve staré stopě, nebo v nové situaci.
+
+### Čtyři výsledky druhého běžného použití
+
+Po druhém běžném použití vyberte jeden ze čtyř výsledků:
+
+- `Potvrzený klid`: pravidlo funguje i podruhé bez zvláštní péče.
+- `Jedna poslední hrana`: chybí drobné upřesnění v kanonickém místě.
+- `Návrat staré stopy`: problém není v pravidle, ale ve starém podkladu, který pořád láká k používání.
+- `Nová pracovní situace`: druhé použití ukázalo případ, který původní pravidlo nemělo řešit.
+
+`Potvrzený klid` je ideální výsledek a má být krátký. Nezakládejte třetí kontrolu jen proto, že druhá dopadla dobře. Dobré pravidlo nepotřebuje slavnostní průvod, potřebuje být po ruce ve správném místě.
+
+`Jedna poslední hrana` patří k drobným nejasnostem. Třeba věta neříká, zda se počítá podnět od partnera, nebo zda má návratový signál běžet za měsíc či až při dalším review. Opravte jednu větu, ne celou metodiku.
+
+```text
+Hrana:
+Není jasné, jestli se opakovaný podnět počítá podle tématu, nebo podle segmentu.
+
+Poslední lokální úprava:
+Návratový signál se spouští při dvou podobných podnětech ze stejného segmentu, ne jen ze stejného tématu.
+```
+
+`Návrat staré stopy` je častější, než se týmu chce přiznat. Starý export, pomocná tabulka, screenshot nebo dlouhý review zápis může působit jako bezpečnostní deka. Jenže po uzavření už má být aktivní trasa kratší. Pokud lidé sahají po staré stopě, opravte navigaci: odstraňte odkaz z rozcestníku, označte archiv jako nekanonický nebo zkraťte příklad v šabloně.
+
+`Nová pracovní situace` není selhání pravidla. Je to signál, že realita přinesla nový okraj. Otevřete samostatnou otázku jen tehdy, když lokální oprava nestačí a staré pravidlo by se kvůli nové situaci muselo ohnout proti svému účelu.
+
+### Jak nezaložit třetí kontrolu
+
+Největší riziko druhého běžného použití je nenápadné prodloužení péče. Tým si řekne: "Ještě to jednou zkontrolujeme příště." Pokud k tomu není konkrétní návratový signál, je to jen znovuzrozený dohled.
+
+Místo třetí kontroly napište jednu ze tří vět:
+
+```text
+Pravidlo fungovalo i při druhém běžném použití; zůstává v běžném rytmu bez další kontroly.
+```
+
+```text
+Druhé použití ukázalo jednu hranu v [místo]; opravujeme pouze kanonickou větu a neotevíráme původní review.
+```
+
+```text
+Druhé použití ukázalo novou pracovní situaci; původní pravidlo zůstává zavřené a nová otázka dostává vlastní nejmenší krok.
+```
+
+Všimněte si, že žádná věta neříká "budeme sledovat". Buď je pravidlo v klidu, má jednu lokální opravu, nebo vzniká nová samostatná otázka. Tohle rozlišení šetří pozornost týmu a brání tomu, aby každá hotová věc měla vlastní stínový monitoring.
+
+### Privacy-first kontrola druhého použití
+
+Druhé běžné použití je dobrý moment na poslední úklid datové stopy. Pokud pravidlo funguje podruhé, není důvod držet nové důkazy. Nechte jen anonymizovaný pracovní závěr a aktuální kanonické místo.
+
+Zeptejte se:
+
+- Vznikl při druhém použití nový screenshot, export, seznam podnětů nebo kopie zákaznické komunikace?
+- Je tento podklad opravdu potřeba pro příští rozhodnutí?
+- Dá se výsledek nahradit jednou anonymizovanou větou?
+- Nevede odkaz v šabloně zpět do starého review s detaily, které už lidé nepotřebují?
+
+Privacy-first výsledek může znít:
+
+```text
+Druhé běžné použití nezaložilo žádnou novou evidenci. V aktivní trase zůstává jen kanonická věta a anonymizovaný návratový signál.
+```
+
+Když se objevila stará stopa:
+
+```text
+Starý export byl odstraněn z aktivní šablony a ponechán jen v archivu podle retenčního pravidla. Pro další práci není zdroj pravdy.
+```
+
+Codyho komentář: druhé běžné použití je trochu jako kontrola, jestli dveře po opravě normálně zavřete i v pondělí ráno. Když ano, nepotřebujete kameru na kliku. Potřebujete přestat na tu kliku myslet.
+
+### Karta druhého běžného použití
+
+```text
+Pravidlo nebo pracovní místo:
+
+Druhá běžná situace:
+
+Kanonická věta použitá při rozhodnutí:
+
+Výsledek:
+- potvrzený klid
+- jedna poslední hrana
+- návrat staré stopy
+- nová pracovní situace
+
+Co případně měníme:
+
+Co výslovně neotevíráme:
+
+Co rušíme z aktivní trasy:
+
+Privacy-first výsledek:
+
+Návratový signál:
+
+Jedna věta do logu:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo nebo pracovní místo:
+Slabé marketingové podněty bez vlastníka.
+
+Druhá běžná situace:
+V měsíčním review přišel návrh na nový formát článku bez segmentu, vlastníka a dopadu.
+
+Kanonická věta použitá při rozhodnutí:
+Slabý podnět bez vlastníka, dopadu a návratového signálu se nezakládá jako úkol.
+
+Výsledek:
+Potvrzený klid.
+
+Co případně měníme:
+Nic.
+
+Co výslovně neotevíráme:
+Druhé dlouhodobé review, staré pomocné tabulky ani obsahový backlog.
+
+Co rušíme z aktivní trasy:
+Nic nového; stará pomocná tabulka zůstává mimo aktivní rozcestník.
+
+Privacy-first výsledek:
+Nevznikl export ani detail konkrétního podnětu.
+
+Návratový signál:
+Dva podobné podněty ze stejného segmentu v jednom review cyklu.
+
+Jedna věta do logu:
+Pravidlo fungovalo i při druhém běžném použití a zůstává v běžném rytmu bez další kontroly.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte druhou běžnou situaci.
+2. Minuta 2: přečtěte kanonickou větu, která vedla k rozhodnutí.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: určete, co se nemění a co se neotevírá.
+5. Minuta 5: zapište privacy-first výsledek a jednu větu do logu.
+
+Výstup:
+
+```text
+Druhé běžné použití pravidla [název] skončilo stavem [výsledek]. Měníme [nic / jednu hranu / aktivní trasu / otevíráme novou otázku], neotevíráme [starý rozsah] a další návrat nastane pouze při [návratový signál].
+```
+
+### Checklist druhého běžného použití
+
+- Proběhlo druhé použití v normální pracovní situaci?
+- Stačila kanonická věta k rozhodnutí?
+- Nespoléhal tým na paměť původního review?
+- Nevznikla nová kontrola jen pro jistotu?
+- Má výsledek jeden ze čtyř stavů?
+- Pokud je stav potvrzený klid, zůstává pravidlo bez dalšího dohledu?
+- Pokud chybí hrana, opravujeme jen nejbližší větu, příklad nebo návratový signál?
+- Pokud se vrací stará stopa, uklízíme aktivní trasu místo přepisování pravidla?
+- Pokud vzniká nová pracovní situace, má vlastní otázku a nejmenší krok?
+- Je jasné, co z původního review zůstává zavřené?
+- Nevznikl nový export, screenshot, detail podnětu ani pomocná tabulka?
+- Je návratový signál konkrétní a úměrný?
+
+Druhé běžné použití má z pravidla sundat poslední zbytečnou pozornost. Když funguje podruhé, nechte ho být. Když zadrhne, opravte nejbližší hranu. A když se objeví nová situace, dejte jí vlastní malý rámec místo toho, aby se přilepila na starou uzavřenou práci.
+
 ## Pracovní log
 
+- 2026-06-08: Doplněna úvodní podkapitola o druhém běžném použití po uzavření prvního běžného použití: zkouška všednosti pravidla, čtyři výsledné stavy, prevence třetí kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití po druhém dlouhodobém review: čtyři uzavírací stavy, propsání do kanonického místa, oddělení nové otázky od starého review, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním běžném použití po druhém dlouhodobém review: ověření kanonické věty v reálné práci, čtyři výsledné stavy, nejmenší oprava, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého dlouhodobého review po tichém provozu: uzavírací stavy, věta podle výsledku, úprava kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
