@@ -196675,8 +196675,257 @@ Po druhém měsíci je kompas [uzavírací stav]. Zůstává [kanonické pravidl
 
 Po druhém měsíci už kompas nemá potřebovat zvláštní pozornost. Buď zůstává v dlouhodobém klidu, nebo se opraví jedna konkrétní hrana. Všechno mezi tím je drahá mlha: vypadá opatrně, ale přidává práci, data a závislosti. Dobrý kompas má být po ruce, ne na poradě.
 
+## První změna kontextu po dlouhodobém klidu kompasu
+
+Po uzavření druhého měsíce už kompas nemá mít pravidelnou kontrolu. To ale neznamená, že se nikdy neotevře. Dlouhodobý klid může přerušit změna kontextu: nový typ zákazníka, jiný prodejní kanál, nová šablona, přesun odpovědnosti, změna produktu, nový dodavatel, jiný způsob sběru poptávek nebo výrazně odlišná rozhodovací situace.
+
+Pracovní otázka není "je kompas pořád aktuální?". To je příliš široké a snadno z toho vznikne revize všeho. Lepší otázka zní:
+
+```text
+Mění nová situace rozhodnutí, kvůli kterému kompas existuje, nebo jen používá staré pravidlo v novém místě?
+```
+
+Tato otázka drží rozsah. Pokud se mění jen místo použití, stačí přenést pravidlo do nové šablony nebo pracovního kroku. Pokud se mění samotné rozhodnutí, otevřete úzkou úpravu kompasu. Pokud se nemění ani jedno, nechte kompas v klidu a zapište jen, že změna kontextu nevyžaduje zásah.
+
+Příklad:
+
+```text
+Změna kontextu:
+Nová landing page cílí na větší firmy místo menších SaaS týmů.
+
+Otázka:
+Potřebujeme kvůli tomu měnit pravidlo datového minima v zákaznických příkladech?
+
+Závěr:
+Ne. Pravidlo zůstává stejné: přesná čísla jen tehdy, když jsou schválená a nutná pro rozhodnutí čtenáře. Mění se jen šablona důkazů pro větší firmy, kde se častěji použije anonymizované rozmezí a popis dopadu.
+```
+
+Tady se neotevírá celý kompas. Mění se pracovní místo, kde se pravidlo používá. To je rozdíl mezi údržbou systému a návratem do starého kontrolního režimu.
+
+### Čtyři typy změny kontextu
+
+Změnu kontextu nejdřív pojmenujte jedním typem:
+
+- `Nové místo`: stejné pravidlo se má použít v nové šabloně, stránce, procesu nebo nástroji.
+- `Nové publikum`: pravidlo se týká jiného segmentu, role nebo velikosti zákazníka.
+- `Nový tok dat`: mění se, odkud data přicházejí, kam se ukládají nebo kdo k nim má přístup.
+- `Nové rozhodnutí`: původní pravidlo už neodpovídá otázce, kterou tým reálně řeší.
+
+Většina změn patří do prvních dvou kategorií. To jsou lokální úpravy trasy. `Nový tok dat` už vyžaduje opatrnější privacy-first kontrolu. `Nové rozhodnutí` je jediný typ, který může otevřít samotné pravidlo.
+
+Praktická brzda:
+
+```text
+Pokud neumíme jednou větou říct, jaké nové rozhodnutí vzniklo, neotevíráme celý kompas.
+```
+
+Tato brzda chrání před preventivní revizí. Tým často cítí změnu, ale ještě neví, co přesně se změnilo. V takové chvíli je lepší zapsat pozorování a počkat na reálný průchod než hned předělávat pravidlo.
+
+### Rozhodnutí podle typu změny
+
+Po určení typu vyberte jednu reakci:
+
+- U `Nového místa` přidejte odkaz nebo jednu rozhodovací větu do nejbližší pracovní trasy.
+- U `Nového publika` ověřte, jestli příklad, jazyk a důkaz pořád pomáhají rozhodnutí, ale neměňte datové minimum jen kvůli většímu nebo známějšímu zákazníkovi.
+- U `Nového toku dat` zastavte změnu, dokud není jasné, jaká data se sbírají, kde bydlí, kdo je vidí a kdy se mažou.
+- U `Nového rozhodnutí` otevřete úzký návrat kompasu s jednou otázkou, jedním vlastníkem a jedním výstupem.
+
+Příklad úzkého návratu:
+
+```text
+Úzký návrat:
+Jak má pravidlo datového minima pracovat s agregovanými výsledky z více zákaznických projektů, aby text zůstal obchodně užitečný a zároveň neodhaloval citlivé detaily jednotlivých klientů?
+```
+
+Příklad příliš širokého návratu:
+
+```text
+Zkontrolovat všechna pravidla pro obsah, analytiku a case studies, protože teď míříme na větší klienty.
+```
+
+Druhá věta zní zodpovědně, ale otevírá tři různé světy najednou. Úzký návrat má jednu hranu. Široká revize má mlhu, schůzky a obvykle i nové tabulky. Takže ano, past na produktivitu v kravatě.
+
+### Jak nepřenést starý dohled do nové situace
+
+Změna kontextu často svádí k návratu starého dohledu. Někdo navrhne, že se bude prvních pár výstupů schvalovat, sbírat příklady, posílat do chatu nebo ukládat do kontrolního dokumentu. Někdy je krátká kontrola nutná, ale nesmí vzniknout bez konce.
+
+Než přidáte kontrolu, vyplňte čtyři řádky:
+
+```text
+Kontrola chrání před:
+
+Skončí, když:
+
+Co se po konci smaže:
+
+Kdo ji může ukončit:
+```
+
+Pokud nejde vyplnit `Skončí, když`, kontrola není ochrana. Je to nový proces bez brzd. V privacy-first provozu je to dvojnásobný problém: kontrola často vytváří další kopie, poznámky, screenshoty, exporty nebo citace reálných zákaznických situací.
+
+Lepší postup je opravit pracovní trasu:
+
+- přidat rozhodovací větu do nové šablony;
+- vložit odkaz na kanonické pravidlo do místa, kde vzniká výstup;
+- nahradit konkrétní zákaznický příklad anonymizovaným vzorem;
+- doplnit retenční větu k novému datovému toku;
+- jasně pojmenovat vlastníka rozhodnutí místo skupinového schvalování.
+
+Tím se pravidlo dostane blíž práci a tým nemusí držet v hlavě další výjimku.
+
+### Privacy-first brána změny kontextu
+
+Každá změna kontextu má projít krátkou datovou bránou. Ne jako právní román, spíš jako pracovní kontrola, jestli si tým omylem nevyrábí větší stopu než předtím.
+
+Otázky:
+
+```text
+Sbíráme kvůli nové situaci nový typ údajů?
+
+Posíláme existující údaje novému nástroji, dodavateli nebo roli?
+
+Vznikají nové kopie, screenshoty, exporty nebo školící příklady?
+
+Je nová stopa nutná pro rozhodnutí, nebo jen pro pocit jistoty?
+
+Má každá ponechaná stopa účel, vlastníka a konec?
+```
+
+Pokud odpověď na první tři otázky zní ano, změna není jen obsahová nebo procesní. Je to i datová změna. V takovém případě nestačí říct "použijeme stejný kompas". Je potřeba zapsat, jak se datová stopa mění a co zůstává mimo rozsah.
+
+Dobrá privacy-first věta:
+
+```text
+Nová landing page používá stejné pravidlo datového minima; nepřidáváme nový tracker, přesné zákaznické metriky zůstávají jen ve schváleném zdroji a pracovní komentáře s konkrétními hodnotami se mažou po publikaci.
+```
+
+Slabá věta:
+
+```text
+Pro větší jistotu si budeme ukládat všechny varianty důkazů a později vybereme, co použít.
+```
+
+Slabá věta vyrábí sklad citlivých podkladů bez jasného rozhodnutí. Pokud si tým není jistý, má zmenšit otázku, ne zvětšit archiv.
+
+### Karta změny kontextu
+
+```text
+Kompas:
+
+Změna kontextu:
+
+Typ změny:
+- nové místo
+- nové publikum
+- nový tok dat
+- nové rozhodnutí
+
+Mění se původní rozhodnutí?
+- ano / ne / zatím nevíme
+
+Nejmenší reakce:
+
+Co zůstává v kanonickém pravidle:
+
+Co se mění v pracovní trase:
+
+Jaká data se nově sbírají, přesouvají nebo kopírují:
+
+Co se výslovně nezakládá:
+
+Kontrola skončí, když:
+
+Co se po kontrole smaže:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických příkladech.
+
+Změna kontextu:
+Nová landing page pro větší firmy.
+
+Typ změny:
+Nové publikum.
+
+Mění se původní rozhodnutí?
+Ne. Pořád rozhodujeme, jak ukázat důkaz bez zbytečných citlivých údajů.
+
+Nejmenší reakce:
+Do šablony důkazů přidáváme větu, že přesné hodnoty se používají jen po schválení a jen tehdy, když jsou nutné pro rozhodnutí čtenáře.
+
+Co zůstává v kanonickém pravidle:
+Datové minimum a preference anonymizovaného rozmezí před přesnou hodnotou.
+
+Co se mění v pracovní trase:
+Nová landing page má v části "Důkaz" odkaz na pravidlo a anonymizovaný vzor.
+
+Jaká data se nově sbírají, přesouvají nebo kopírují:
+Žádná.
+
+Co se výslovně nezakládá:
+Nevzniká archiv metrik, schvalovací tabulka ani pravidelná kontrola prvních výstupů.
+
+Kontrola skončí, když:
+Po prvním publikovaném výstupu vlastník potvrdí, že šablona stačila bez dotazu na autora kompasu.
+
+Co se po kontrole smaže:
+Pracovní komentáře s konkrétními hodnotami.
+
+Návratový signál:
+Téma se vrátí jen tehdy, když anonymizovaný důkaz nebude stačit obchodnímu rozhodnutí čtenáře.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: pojmenujte konkrétní změnu kontextu.
+2. Minuta 2: vyberte jeden ze čtyř typů změny.
+3. Minuta 3: řekněte, jestli se mění původní rozhodnutí kompasu.
+4. Minuta 4: navrhněte nejmenší reakci v pracovní trase.
+5. Minuta 5: projděte privacy-first bránu.
+6. Minuta 6: napište, co se výslovně nezakládá.
+7. Minuta 7: určete návratový signál a konec případné kontroly.
+
+Výstup:
+
+```text
+Změna kontextu je [změna]. Typ změny je [typ]. Původní rozhodnutí se [mění / nemění / zatím nevíme]. Děláme jen [nejmenší reakce], datově se mění [datová změna / nic], nezakládáme [nová agenda] a návrat vznikne při [návratový signál].
+```
+
+### Checklist změny kontextu
+
+- Je změna kontextu popsaná konkrétně, ne jako obecný pocit?
+- Vybrali jsme jeden hlavní typ změny?
+- Víme, jestli se mění původní rozhodnutí kompasu?
+- Pokud se mění jen místo použití, opravujeme pracovní trasu místo celého pravidla?
+- Pokud se mění publikum, neměníme datové minimum jen kvůli vyšší obchodní atraktivitě důkazů?
+- Pokud vzniká nový tok dat, víme kde data bydlí, kdo je vidí a kdy mizí?
+- Pokud vzniká nové rozhodnutí, má úzký návrat tvar jedné otázky?
+- Nevzniká preventivní schvalování bez konce?
+- Nezakládáme archiv příkladů, metrik, screenshotů nebo pracovních kopií pro jistotu?
+- Je každá dočasná kontrola ukončitelná jednou jasnou podmínkou?
+- Je zapsané, co se po kontrole smaže nebo anonymizuje?
+- Dá se výsledek změny kontextu shrnout jednou pracovní větou?
+
+Změna kontextu není výmluva k velkému úklidu všeho. Je to test, jestli stávající pravidlo pořád odpovídá reálnému rozhodnutí. Když ano, přesuňte ho do nového pracovního místa a nechte ho fungovat. Když ne, otevřete jednu přesnou otázku. A když si nejste jistí, nesbírejte víc dat "pro klid". Zmenšete situaci, použijte první reálný průchod a vraťte se jen s důkazem.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o první změně kontextu po dlouhodobém klidu stálého provozního kompasu: typy změn, rozhodnutí podle dopadu na původní pravidlo, ochrana před návratem starého dohledu, privacy-first datová brána, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého měsíce po návratu stálého provozního kompasu do tichého provozu: čtyři uzavírací stavy, pravidla proti třetí kontrole, privacy-first mazání náhradních stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o druhém měsíci po návratu stálého provozního kompasu do tichého provozu: ověření samostatnosti bez připomínání, čtyři výsledky, oprava závislosti na autorovi, privacy-first úklid náhradních stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního měsíce po návratu stálého provozního kompasu do tichého provozu: čtyři uzavírací stavy, rušení skrytého dohledu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
