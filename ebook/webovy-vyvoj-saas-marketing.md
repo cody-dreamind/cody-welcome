@@ -9834,6 +9834,228 @@ Další kontrola:
 
 První běžné použití po převodu je kontrola bez dramatu. Pokud drží, nechte ho držet. Pokud drhne, opravte nejbližší místo. Pokud opravdu spustí návratový signál, otevřete novou smyčku s dnešním důkazem. Všechno ostatní je jen převlečená nervozita, a ta do provozního systému nepatří.
 
+## Uzavření prvního běžného použití po převodu reakce
+
+První běžné použití po převodu uzavřené reakce má být krátká kontrola. Ještě důležitější je ale jeho uzavření. Pokud výsledek necháte jen jako poznámku v hlavě vlastníka, téma se za pár dní vrátí v nepříjemné podobě: někdo bude chtít vědět, jestli pravidlo drží, jestli se má ještě sledovat, jestli se má opravit rozcestník, nebo jestli se má znovu otevřít starý vzor.
+
+Uzavření má říct jednu věc: co po prvním běžném použití platí dál. Neopisuje celou reakci, nevrací se k historii, neotvírá nový audit. Jen převede výsledek do stavu, který se dá najít při další práci.
+
+Začněte větou:
+
+```text
+Po prvním běžném použití převodu platí:
+```
+
+Za tuto větu doplňte jeden ze čtyř stavů:
+
+- Běžně drží: pravidlo šlo použít bez zvláštní pomoci a bez nové datové stopy.
+- Drobně dočistit: pravidlo drží, ale jedno pracovní místo potřebuje malou opravu.
+- Slabé kanonické místo: výsledek je správný, ale zdroj pravdy není dost viditelný.
+- Skutečný návratový signál: problém se vrátil tak, že potřebuje novou smyčku.
+
+Příklad:
+
+```text
+Po prvním běžném použití převodu platí:
+Běžně drží.
+
+Proč:
+Měsíční údržba šablon použila kanonické pravidlo bez otevření staré reakce.
+
+Co zůstává:
+Pravidlo v rozcestníku a návratový signál.
+
+Co končí:
+Dočasná poznámka z ověření a ruční připomínka vlastníka.
+
+Co dál nesbíráme:
+Klikání v rozcestníku, osobní použití pravidla ani screenshoty průchodu.
+```
+
+Takový zápis je dost krátký na běžný log a dost konkrétní na to, aby příští člověk neotevíral starou epizodu jen proto, že nenašel stav.
+
+### Kdy výsledek jen potvrdit
+
+Výsledek potvrďte bez další práce, když platí tři věci:
+
+- člověk našel kanonické místo bez znalosti poslední reakce;
+- pracovní výstup vznikl bez starých podkladů;
+- po použití nezůstala nová kontrola, export, pomocná tabulka ani osobní evidence.
+
+V takovém případě nehledejte kosmetické zlepšení. Zapište stav a nechte pravidlo v běžném rytmu. Pokud vás napadne lepší formulace, položte si otázku, jestli současná formulace někomu opravdu bránila v rozhodnutí. Pokud ne, nejde o práci, ale o autorskou nervozitu převlečenou za péči.
+
+Codyho komentář: dobře fungující pravidlo nepotřebuje potlesk ani nový štítek "ověřeno". Potřebuje hlavně to, aby ho nikdo nezačal znovu vylepšovat jen proto, že zrovna fungovalo pod rukama.
+
+### Kdy dočistit jedno místo
+
+Drobné dočištění je správné, když se výstup povedl, ale cesta měla malé tření. Například člověk našel správné pravidlo až přes starý odkaz, musel se doptat na rozdíl mezi dvěma šablonami, nebo v kanonickém místě chyběla jedna věta o tom, co se dál nemá sledovat.
+
+Dočištění držte v jednom místě:
+
+```text
+Tření:
+
+Jedno místo opravy:
+
+Konkrétní změna:
+
+Co zůstává beze změny:
+
+Proč nejde o návratový signál:
+
+Další ověření:
+```
+
+Příklad:
+
+```text
+Tření:
+Člověk našel pravidlo, ale název odkazu v rozcestníku zněl jako historický záznam.
+
+Jedno místo opravy:
+Název odkazu v rozcestníku šablon.
+
+Konkrétní změna:
+Přejmenovat "reakce po klidu" na "aktuální pravidlo pro slabé podněty".
+
+Co zůstává beze změny:
+Samotné pravidlo, návratový signál i běžný rytmus.
+
+Proč nejde o návratový signál:
+Práce neskončila ve staré šabloně a nevznikla duplicitní karta.
+
+Další ověření:
+Příští běžné použití rozcestníku, bez speciálního testu.
+```
+
+Pokud úprava vyžaduje víc než jednu větu, jeden odkaz, jeden název nebo jedno odstranění staré stopy, nejspíš už nejde o dočištění. Zastavte se a napište novou pracovní otázku.
+
+### Kdy je slabé kanonické místo
+
+Někdy pravidlo samo o sobě funguje, ale místo, kde žije, není dost silné. Člověk ho najde jen přes vyhledávání, ne přes pracovní trasu. Nebo existuje v dokumentu, ale rozcestník vede jinam. Nebo je správně napsané, ale stará šablona je viditelnější.
+
+Slabé kanonické místo neřešte přidáním další kopie pravidla. Tím by vznikl druhý zdroj pravdy. Opravte cestu ke zdroji pravdy:
+
+- přesměrujte starý odkaz;
+- označte archivní místo jako neaktivní;
+- posuňte aktuální pravidlo do části, kde člověk reálně začíná;
+- zkraťte starou poznámku na odkaz;
+- doplňte rozcestník, ne další výklad.
+
+Zápis:
+
+```text
+Pravidlo drží, ale kanonické místo je slabé, protože:
+
+Zdroj pravdy zůstává:
+
+Cestu opravíme takto:
+
+Co nekopírujeme:
+
+Co uklízíme:
+```
+
+Privacy-first poznámka: slabé kanonické místo často vytváří datový nepořádek. Když lidé nenajdou aktuální pravidlo, zakládají pomocné tabulky, kopírují staré příklady nebo ukládají screenshoty "pro jistotu". Oprava navigace proto může být i oprava soukromí: méně kopií, méně pracovních exportů, méně míst, kde žijí citlivé poznámky.
+
+### Kdy otevřít novou smyčku
+
+Novou smyčku otevřete až tehdy, když první běžné použití skutečně naplní návratový signál. To znamená, že nejde jen o slabý odkaz nebo jednu starou poznámku. Problém se vrátil v podobě, která brání práci nebo znovu vytváří datovou stopu.
+
+Příklady skutečného návratu:
+
+- reálná práce znovu skončila v neaktivní šabloně;
+- lidé opakovaně použili starý ověřovací záznam místo aktuálního pravidla;
+- vznikla duplicitní karta, protože kanonické pravidlo nestačilo;
+- tým začal znovu vést ruční evidenci, která měla po převodu skončit;
+- kvůli nejasnosti vznikl nový export nebo delší retence bez účelu.
+
+Novou smyčku neotvírejte větou "musíme to celé zkontrolovat". Otevřete ji přesnou otázkou:
+
+```text
+Co se v běžném rytmu pokazilo tak, že původní návratový signál opravdu nastal?
+```
+
+Potom zapište stop podmínku:
+
+```text
+Smyčku zavřeme, až:
+
+Nejmenší důkaz:
+
+Co zatím neotevíráme:
+
+Jaká data zatím nesbíráme:
+```
+
+Tím se návrat drží jako práce, ne jako panika.
+
+### Privacy-first uzavření prvního použití
+
+Po prvním běžném použití si vždy napište, co se nestane s daty. Ne kvůli právnímu rituálu, ale kvůli provozní hygieně. Malé kontroly mají sklon zanechávat malé stopy a malé stopy se časem sečtou.
+
+Minimum:
+
+```text
+Zůstává:
+Stav pravidla, kanonické místo, případná jedna oprava a návratový signál.
+
+Maže se:
+Dočasné poznámky, screenshoty, pracovní kopie a pomocné komentáře bez dalšího účelu.
+
+Nevzniká:
+Evidence podle lidí, sledování klikání, report používání pravidla ani nový export.
+```
+
+Pokud potřebujete ponechat příklad, převeďte ho do typu situace. "Při měsíční údržbě šablon vznikl dotaz na rozdíl mezi slabým podnětem a potvrzenou změnou" stačí. Nepotřebujete jméno člověka, celý chat ani screenshot rozcestníku.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Převedená reakce:
+
+První běžné použití:
+
+Kanonické místo:
+
+Výstup práce:
+
+Stav:
+- běžně drží / drobně dočistit / slabé kanonické místo / skutečný návratový signál
+
+Důvod stavu:
+
+Jedna oprava, pokud je potřeba:
+
+Co zůstává beze změny:
+
+Co končí jako mimořádná péče:
+
+Co mažeme nebo anonymizujeme:
+
+Co dál nesbíráme:
+
+Návratový signál:
+
+Vlastník:
+```
+
+### Checklist uzavření prvního běžného použití
+
+- Má první běžné použití jasný stav?
+- Je stav uložený u místa, kde další práce začne?
+- Pokud pravidlo drží, nepřidáváme další kontrolu?
+- Pokud je potřeba dočištění, týká se jednoho pracovního místa?
+- Pokud je slabé kanonické místo, opravujeme cestu ke zdroji pravdy místo kopírování pravidla?
+- Pokud nastal návratový signál, má nová smyčka stop podmínku?
+- Je zapsané, co zůstává beze změny?
+- Končí mimořádná péče, která už nemá účel?
+- Mažeme nebo anonymizujeme dočasné podklady?
+- Nevzniká evidence lidí, klikání, screenshotů ani pomocných exportů?
+- Umí vlastník jednou větou říct, co bude příště spouštět návrat?
+
+Uzavření prvního běžného použití je krátké, ale šetří hodně budoucího zmatku. Buď potvrdí, že pravidlo může žít dál v klidu, nebo přesně řekne, kde ho dočistit. A když se opravdu vrátí problém, otevře novou smyčku s dnešním důkazem, ne s celou tíhou staré historie.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -197326,3 +197548,4 @@ Po druhém měsíci už kompas nemá potřebovat zvláštní pozornost. Buď zů
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavření prvního návratového signálu: čtyři uzavírací stavy, propsání do kanonického místa, úklid podkladů, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o druhém běžném cyklu po uzavřené první údržbě: samostatnost pravidla v běžné práci, čtyři výsledky cyklu, poslední lokální dotažení, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého běžného review do tichého provozu: přepis pravidla do přítomného času, zrušení skryté kontroly, privacy-first úklid, karta a checklist.
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po převodu reakce: čtyři stavy výsledku, dočištění jednoho místa, slabé kanonické místo, nová smyčka při návratovém signálu, privacy-first úklid, karta a checklist.
