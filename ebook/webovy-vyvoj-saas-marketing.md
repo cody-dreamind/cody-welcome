@@ -195779,8 +195779,240 @@ Po prvním měsíci v tichém provozu je stav [výsledek]. Mění se [nejmenší
 
 První měsíc v tichém provozu má potvrdit, že kompas umí zůstat obyčejnou pracovní pomůckou. Když drží, nechte ho být. Když se objeví malé tření, opravte nejbližší místo. A když se vrátí dohled, odstraňte ho dřív, než se začne tvářit jako standard. Tichý provoz se neudržuje tím, že se o něm pořád mluví. Udržuje se tím, že pravidlo pomáhá rozhodovat a po rozhodnutí po sobě uklidí.
 
+## Uzavření prvního měsíce po návratu kompasu do tichého provozu
+
+Nízká měsíční kontrola má smysl jen tehdy, když po ní opravdu přijde uzavření. Jinak se z ní stane nenápadný nový rytmus: jednou za měsíc se někdo podívá, jestli je všechno v pořádku, pak z toho vznikne poznámka, potom tabulka a nakonec pravidlo, které mělo žít potichu, potřebuje vlastní provozní péči. To je přesně opačný výsledek.
+
+Uzavření prvního měsíce proto odpovídá na jednu otázku:
+
+```text
+Co po první měsíční kontrole zůstává v běžné práci a co se tímto okamžikem končí?
+```
+
+Tato otázka je důležitější než samotné skóre kontroly. Měsíc mohl dopadnout dobře, neutrálně, s lokálním třením nebo s návratem tichého dohledu. Ve všech případech musí být jasné, jestli kompas pokračuje jako obyčejná pracovní pomůcka, jestli se opravuje jedno nejbližší místo, nebo jestli se ruší pomocná kontrola, která se kolem něj přilepila.
+
+Neuzavírejte kontrolu větou "budeme sledovat dál". To je skoro vždycky příliš široké. Pokud je potřeba další akce, napište ji jako jednu lokální změnu nebo jeden návratový signál. Pokud další akce není potřeba, nechte po kontrole jen kanonické místo a krátkou větu v pracovním logu.
+
+### Čtyři uzavírací stavy měsíce
+
+Po první měsíční kontrole vyberte jeden uzavírací stav:
+
+- `Vráceno do tichého rytmu`: kompas je najitelný, rozhoduje bez pomoci a nezanechává novou stopu.
+- `Zůstává v klidu bez použití`: kompas se nepoužil a není důvod testovat ho uměle.
+- `Uzavřeno s lokální opravou`: jedno pracovní místo se opravilo a kompas se dál neotevírá.
+- `Dohled odstraněn, návrat zpřesněn`: pomocná kontrola byla zrušená a návratový signál je užší než předtím.
+
+`Vráceno do tichého rytmu` je nejkratší uzavření. Nepřidává další kontrolní datum. Stačí zapsat:
+
+```text
+Po prvním měsíci kompas zůstává v tichém rytmu; další otevření vznikne jen při návratovém signálu.
+```
+
+`Zůstává v klidu bez použití` chrání tým před falešnou prací. Pokud se pravidlo za měsíc nepoužilo, není to chyba. Možná prostě nenastala situace, ve které by mělo rozhodovat. Uzavření má znít:
+
+```text
+Kompas se během měsíce nepoužil. Nezakládáme test ani novou evidenci; první reálné použití se vyhodnotí až tehdy, když přirozeně nastane.
+```
+
+`Uzavřeno s lokální opravou` znamená, že se něco drobného změnilo v nejbližším pracovním místě. Typicky odkaz, věta v checklistu, popisek šablony nebo příklad. Po opravě už nehlídejte celou oblast. Ověření přijde při dalším normálním použití, ne jako samostatný projekt.
+
+`Dohled odstraněn, návrat zpřesněn` je stav pro situaci, kdy se kolem kompasu začala tvořit nová evidence. Tady nestačí říct "už to nebudeme dělat". Smažte nebo zkraťte konkrétní pomocnou stopu a přepište návratový signál tak, aby nevyvolával preventivní kontroly.
+
+### Co po měsíci zůstává
+
+Po uzavření měsíce mají zůstat jen tři typy věcí:
+
+- kanonické pravidlo tam, kde ho člověk použije;
+- případná lokální oprava v nejbližším pracovním místě;
+- návratový signál napsaný jako konkrétní situace, ne jako pravidelná připomínka.
+
+Všechno ostatní je podezřelé. Pomocné poznámky z kontroly, seznamy použití, exporty, screenshoty, interní komentáře s metrikami a dočasné úkoly mají buď jasný účel, nebo mají zmizet. Pokud jejich účel nedokážete říct jednou větou, nejspíš už ho nemají.
+
+Praktický příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických příkladech.
+
+Výsledek měsíce:
+Lokální tření.
+
+Zůstává:
+Jedna věta v checklistu case study: "Po uzavření smaž interní komentář s přesnou metrikou."
+
+Mizí:
+Dočasný komentář s původní přesnou hodnotou.
+
+Nezůstává:
+Seznam všech case studies, kde byl kompas použit.
+
+Návratový signál:
+Téma se otevře jen tehdy, když anonymizace nebo rozmezí změní obchodní význam příkladu.
+```
+
+Tento zápis je malý, ale dostačující. Další člověk najde pravidlo tam, kde píše case study. Zákaznická nebo obchodní data nezůstávají v pomocných komentářích. A tým si nezakládá nové měření jen proto, že jednou provedl kontrolu.
+
+### Jak zrušit skrytý dohled
+
+Skrytý dohled se často tváří jako rozumná opatrnost. Někdo si založí připomínku, že za měsíc znovu zkontroluje příklady. Někdo přidá sloupec "použit kompas" do obsahové tabulky. Někdo začne posílat výstupy ke schválení, i když pravidlo mělo rozhodování zjednodušit.
+
+Zrušení skrytého dohledu má tři kroky:
+
+1. Pojmenujte konkrétní stopu: připomínku, tabulku, komentář, schvalování nebo export.
+2. Rozhodněte, co se s ní stane: smazat, zkrátit, přesunout do kanonického pravidla nebo jednorázově uzavřít.
+3. Zpřesněte návratový signál tak, aby nevolal po další preventivní kontrole.
+
+Příklad:
+
+```text
+Skrytý dohled:
+V redakční tabulce vznikl sloupec "zkontrolovat datové minimum".
+
+Akce:
+Sloupec se maže. Do šablony case study se doplňuje jedna věta k anonymizaci.
+
+Nový návratový signál:
+Téma se vrátí jen při sporu, zda anonymizovaná metrika ještě věrně popisuje výsledek.
+
+Co nevzniká:
+Nevzniká měsíční audit všech publikovaných příkladů.
+```
+
+Codyho komentář: opatrnost je dobrá služebnice a mizerná produktová manažerka. Když dostane vlastní sloupec, začne se tvářit jako strategie. Radši jí dejte jasnou hranici a pošlete ji zpátky dělat užitečnou práci.
+
+### Privacy-first uzavření měsíce
+
+Uzavření prvního měsíce je privacy-first práce hlavně proto, že maže to, co vzniklo jen pro jistotu. V praxi se největší datová stopa často netvoří ve finálním webu, ale v pomocných místech: pracovní komentáře, screenshoty, exporty, návrhy textů, sdílené tabulky a staré úkoly. Právě tam zůstávají přesná čísla, jména zákazníků, interní kontext nebo detaily, které už nikdo nepotřebuje.
+
+Privacy-first uzavření proto projděte takto:
+
+- ponechte jen kanonické pravidlo bez konkrétních osobních nebo zákaznických detailů;
+- lokální opravu pište jako obecný pracovní vzor, ne jako opis reálného případu;
+- smažte nebo anonymizujte dočasné poznámky po rozhodnutí;
+- nepřidávejte evidenci používání kompasu, pokud podle ní nebudete dělat konkrétní rozhodnutí;
+- návratový signál formulujte podle pracovního problému, ne podle kalendáře;
+- pokud něco zůstává kvůli auditu nebo právní povinnosti, napište účel, vlastníka a retenci.
+
+Dobré privacy-first uzavření:
+
+```text
+Po měsíční kontrole zůstává jen obecná věta v checklistu. Dočasné metrické komentáře byly smazány a další kontrola vznikne jen při sporu o význam anonymizované hodnoty.
+```
+
+Slabé uzavření:
+
+```text
+Pro jistotu budeme evidovat všechny příklady, původní hodnoty a způsob anonymizace.
+```
+
+Slabé uzavření vypadá pečlivě, ale ve skutečnosti posouvá tým od datového minima k datovému skladu důkazů. Pokud takový sklad nemá jasný účel, vlastníka, retenci a přístupová pravidla, nemá vzniknout.
+
+### Karta uzavření prvního měsíce
+
+```text
+Kompas:
+
+Období:
+
+Výsledek měsíční kontroly:
+- tichý provoz drží
+- neutrální klid
+- lokální tření
+- tichý dohled se vrátil
+
+Uzavírací stav:
+- vráceno do tichého rytmu
+- zůstává v klidu bez použití
+- uzavřeno s lokální opravou
+- dohled odstraněn, návrat zpřesněn
+
+Co zůstává v kanonickém místě:
+
+Co se opravilo v nejbližším pracovním místě:
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Co se výslovně nezakládá:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických příkladech.
+
+Období:
+První měsíc po návratu do tichého provozu.
+
+Výsledek měsíční kontroly:
+Lokální tření.
+
+Uzavírací stav:
+Uzavřeno s lokální opravou.
+
+Co zůstává v kanonickém místě:
+Pravidlo používat rozmezí nebo anonymizované formulace, pokud přesné hodnoty nejsou nutné pro rozhodnutí čtenáře.
+
+Co se opravilo v nejbližším pracovním místě:
+Checklist case study doplněn o smazání dočasného komentáře s přesnou metrikou.
+
+Co se maže, zkracuje nebo anonymizuje:
+Dočasný komentář s původní přesnou hodnotou.
+
+Co se výslovně nezakládá:
+Nevzniká seznam použití kompasu ani měsíční audit všech case studies.
+
+Návratový signál:
+Téma se vrátí jen tehdy, když anonymizace nebo rozmezí změní obchodní význam příkladu.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte výsledek měsíční kontroly.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: řekněte, co zůstává v kanonickém místě.
+4. Minuta 4: proveďte lokální opravu nebo potvrďte, že žádná není.
+5. Minuta 5: smažte, zkraťte nebo anonymizujte pomocné stopy.
+6. Minuta 6: zapište návratový signál a co se výslovně nezakládá.
+
+Výstup:
+
+```text
+Po prvním měsíci v tichém provozu je kompas [uzavírací stav]. Zůstává [kanonické pravidlo], mění se [lokální oprava / nic], mizí [pomocná stopa / nic], nezakládáme [nová evidence] a návrat vznikne jen při [návratový signál].
+```
+
+### Checklist uzavření prvního měsíce
+
+- Je vybraný jeden uzavírací stav?
+- Je jasné, co zůstává v kanonickém místě?
+- Pokud vznikla lokální oprava, je v nejbližším pracovním místě?
+- Pokud se kompas nepoužil, neplánujeme umělý test?
+- Pokud se vrátil skrytý dohled, je konkrétní pomocná stopa zrušená?
+- Je návratový signál užší než preventivní měsíční kontrola?
+- Jsou dočasné komentáře, exporty, screenshoty a pracovní poznámky uklizené?
+- Nezůstávají přesné zákaznické, osobní nebo obchodní detaily bez účelu?
+- Nevzniká evidence použití kompasu, pokud nepodporuje konkrétní rozhodnutí?
+- Má případná ponechaná evidence účel, vlastníka a retenci?
+- Umí vlastník shrnout uzavření jednou větou?
+- Skončila měsíční kontrola opravdu, nebo se jen přejmenovala?
+
+Uzavření prvního měsíce má vrátit kompas z krátké kontrolní chvíle zpět do normální práce. Pokud pravidlo pomáhá, nemá kolem sebe budovat provoz. Pokud něco drhne, opravte nejbližší místo. Pokud se kolem něj znovu tvoří dohled, zrušte ho konkrétně. Tichý provoz není absence odpovědnosti; je to odpovědnost bez zbytečné administrativy a bez zbytečných dat.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního měsíce po návratu stálého provozního kompasu do tichého provozu: čtyři uzavírací stavy, rušení skrytého dohledu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním měsíci po návratu stálého provozního kompasu do tichého provozu: nízká kontrola najitelnosti, rozhodnutelnosti a čistoty stopy, čtyři výsledky, prevence tichého dohledu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu stálého provozního kompasu: uzavírací stavy, kanonické změny, úklid pomocných stop, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratovém signálu stálého provozního kompasu: přenos pravidla do sousední situace, prevence třetího kontrolního kolečka, privacy-first úklid, karta, mini workshop a checklist.
