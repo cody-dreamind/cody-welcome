@@ -197198,8 +197198,255 @@ Změnu kontextu uzavíráme jako [stav]. Kanonické pravidlo [zůstává / měn�
 
 Uzavřená změna kontextu má po sobě nechat buď stejné pravidlo v novém místě, jednu lokální opravu, jednu úzkou otázku, nebo jasně popsanou datovou změnu. Nic pátého není potřeba. Když výsledek nejde zařadit, pravděpodobně jste ještě neuzavřeli změnu, ale jen popsali pocit, že se něco změnilo. Pocit si klidně zapište, ale systém podle něj nepřestavujte.
 
+## První běžné použití po uzavřené změně kontextu kompasu
+
+Po uzavření změny kontextu přichází drobný, ale důležitý test: první běžné použití v nové situaci. Nejde už o mimořádnou kontrolu, revizi ani pilot. Jde o normální pracovní průchod, ve kterém má pravidlo fungovat bez člověka, který u něj sedí s baterkou a tváří se, že to není dohled.
+
+Pracovní otázka:
+
+```text
+Umí člověk v novém kontextu použít kompas jako součást běžné práce, bez návratu k dočasné kontrole?
+```
+
+Tato otázka chrání před dvěma opačnými chybami. První chyba je nechat změnu kontextu bez ověření a doufat, že se lokální oprava opravdu propsala do práce. Druhá chyba je z prvního běžného použití udělat další schvalovací kolečko. Správný střed je jednoduchý: použijte pravidlo jednou v normální situaci, zapište výsledek a opravte jen nejbližší místo, pokud se ukáže tření.
+
+Příklad:
+
+```text
+Uzavřená změna kontextu:
+Nová landing page pro větší firmy používá pravidlo datového minima v zákaznických důkazech.
+
+První běžné použití:
+Vlastník obsahu připravuje další sekci s výsledkem bez účasti autora původního kompasu.
+
+Co se má stát:
+V šabloně najde větu o anonymizovaném rozmezí, použije ji a pracovní komentář s přesnou hodnotou po publikaci smaže.
+
+Co se nemá stát:
+Nevzniká nový dokument "kontrola enterprise důkazů", neukládají se všechny varianty metrik a autor kompasu neschvaluje každý odstavec.
+```
+
+Když tento průchod proběhne hladce, kompas se vrací do tichého provozu. Když neproběhne hladce, neznamená to automaticky novou revizi. Znamená to, že tým má pojmenovat konkrétní tření: chyběl odkaz, věta byla nejasná, šablona sváděla k přesné hodnotě, nebo vznikla nová datová stopa.
+
+### Co při prvním běžném použití sledovat
+
+Sledujte jen věci, které dokazují samostatnost pravidla v práci:
+
+- `Najitelnost`: člověk našel pravidlo tam, kde výstup skutečně vzniká.
+- `Rozhodnutelnost`: pravidlo mu pomohlo rozhodnout bez další schůzky.
+- `Datová čistota`: kvůli použití nevznikla zbytečná kopie, export, screenshot nebo citlivý pracovní komentář.
+- `Konec kontroly`: nikdo znovu neotevřel dočasný dohled jen proto, že jde o nový segment, kanál nebo šablonu.
+
+Nesledujte všechno. Pokud začnete zapisovat čas práce, počet komentářů, všechny varianty textu a jména lidí, kteří do výstupu sáhli, vytvoříte víc stopy než původní problém. První běžné použití má být lehké. Stačí jedna pracovní věta a případně jedna lokální oprava.
+
+Dobrá pracovní věta:
+
+```text
+Pravidlo datového minima bylo v nové landing page použité samostatně; stačila šablonová věta o anonymizovaném rozmezí, nevznikl nový export a dočasná kontrola se neobnovuje.
+```
+
+Slabá pracovní věta:
+
+```text
+Zatím to vypadá dobře, ale raději to budeme ještě nějakou dobu sledovat.
+```
+
+Slabá věta nemá konec. A všechno bez konce se v provozu dřív nebo později tváří jako proces.
+
+### Čtyři výsledky prvního běžného použití
+
+Po průchodu vyberte jeden výsledek:
+
+- `Funguje tiše`: pravidlo bylo najitelné, rozhodnutí proběhlo a nevznikla nová datová stopa.
+- `Chybí lokální vodítko`: pravidlo platí, ale v pracovní trase chybí odkaz, příklad, věta nebo pořadí kroků.
+- `Vrací se dočasný dohled`: tým pravidlo použil, ale zároveň znovu zapojil kontrolu, která už měla skončit.
+- `Vzniká nová datová hrana`: použití otevřelo nový tok dat, nový typ citlivého podkladu nebo nového příjemce informací.
+
+U `Funguje tiše` nic neopravujte. Zapište výsledek a jděte dál. To je nejhezčí typ údržby: žádná fanfára, žádný meeting, žádný památníček v Notionu.
+
+U `Chybí lokální vodítko` opravte nejbližší pracovní místo. Pokud vlastník obsahu nevěděl, kde v šabloně hledat pravidlo, přidejte odkaz do šablony. Pokud nevěděl, jak formulovat anonymizované rozmezí, přidejte jeden vzor. Nepřepisujte celý kompas.
+
+U `Vrací se dočasný dohled` zapište, kdo se cítil nejistý a proč. Pak rozhodněte, jestli chybí pravomoc, věta v pravidle, nebo důvěra v pracovní trasu. Bez tohoto rozlišení tým často řeší nejistotu přidáním schvalování, i když stačila jedna jasnější rozhodovací věta.
+
+U `Vzniká nová datová hrana` zastavte obsahovou část a nejdřív uzavřete datovou otázku. Nový export, screenshot nebo sdílený příklad není "jen pomocný materiál", pokud obsahuje zákaznické, osobní nebo obchodně citlivé informace.
+
+### Jak opravit jen nejbližší tření
+
+První běžné použití po změně kontextu má mít malé opravy. Použijte pravidlo nejbližšího tření:
+
+```text
+Opravujeme místo, kde se práce zastavila, ne celý systém, který by teoreticky mohl mít podobný problém.
+```
+
+Příklady nejbližších oprav:
+
+- doplnit jeden odkaz na kompas do nové šablony;
+- přidat jednu vzorovou větu pro anonymizovaný důkaz;
+- přejmenovat pole tak, aby nesvádělo k přesné zákaznické hodnotě;
+- přidat krátkou mazací větu k pracovnímu komentáři;
+- určit jednoho vlastníka rozhodnutí místo skupinového schválení.
+
+Příklady příliš velkých reakcí:
+
+- audit všech landing pages;
+- revize celého systému case studies;
+- nové povinné schvalování obchodních důkazů;
+- tabulka všech použitých metrik napříč projekty;
+- nový tracker nebo event jen proto, aby šlo měřit, jestli lidé pravidlo používají.
+
+Codyho komentář: když první běžné použití odhalí jednu chybějící větu, nevolejte kvůli tomu architekta katedrály. Přidejte větu. Katedrála si dá kafe a přežije to.
+
+### Privacy-first hranice běžného použití po změně
+
+Privacy-first kontrola tady není velký audit. Je to otázka, jestli běžné použití nevytvořilo novou stopu kvůli nejistotě.
+
+Krátká kontrola:
+
+```text
+Vznikla při použití nová kopie citlivé informace?
+
+Byla nutná pro rozhodnutí, nebo jen pro kontrolu?
+
+Má ponechaná kopie vlastníka a konec?
+
+Smazali jsme pomocné komentáře, které měly smysl jen před publikací?
+
+Neobnovili jsme schvalování, které ukládá další zákaznické podklady?
+```
+
+Pokud použití proběhlo bez nové stopy, napište to přímo. Je to důležité, protože tým pak nemá důvod později hledat neexistující důkazy.
+
+```text
+Datová stopa se nemění: nepřibyl tracker, export, screenshot ani archiv pracovních variant; po publikaci zůstává jen anonymizovaný veřejný text.
+```
+
+Pokud nová stopa vznikla, neuklidňujte se tím, že je "jen interní". Interní kopie je pořád kopie. Musí mít účel, přístup, vlastníka a konec.
+
+### Karta prvního běžného použití po změně kontextu
+
+```text
+Kompas:
+
+Uzavřená změna kontextu:
+
+První běžné použití:
+
+Kdo pravidlo použil:
+
+Bylo pravidlo najitelné v pracovní trase?
+- ano / ne / částečně
+
+Pomohlo k rozhodnutí bez dalšího dohledu?
+- ano / ne / částečně
+
+Výsledek:
+- funguje tiše
+- chybí lokální vodítko
+- vrací se dočasný dohled
+- vzniká nová datová hrana
+
+Nejmenší oprava, pokud je potřeba:
+
+Co se výslovně neotevírá:
+
+Jaká pomocná stopa vznikla:
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Co zůstává a proč:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických důkazech.
+
+Uzavřená změna kontextu:
+Nová landing page pro větší firmy.
+
+První běžné použití:
+Příprava druhé sekce "Výsledky" v nové šabloně.
+
+Kdo pravidlo použil:
+Vlastník obsahu.
+
+Bylo pravidlo najitelné v pracovní trase?
+Ano.
+
+Pomohlo k rozhodnutí bez dalšího dohledu?
+Ano.
+
+Výsledek:
+Funguje tiše.
+
+Nejmenší oprava, pokud je potřeba:
+Žádná.
+
+Co se výslovně neotevírá:
+Neotevíráme další review enterprise důkazů ani schvalování všech budoucích sekcí.
+
+Jaká pomocná stopa vznikla:
+Dočasný komentář s přesnou hodnotou při psaní.
+
+Co se maže, zkracuje nebo anonymizuje:
+Komentář se po publikaci maže.
+
+Co zůstává a proč:
+Veřejný anonymizovaný popis dopadu, protože pomáhá čtenáři rozhodnout bez odhalení citlivé hodnoty.
+
+Návratový signál:
+Obchod opakovaně nedokáže anonymizovaný důkaz vysvětlit zákazníkovi.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte uzavřenou změnu kontextu.
+2. Minuta 2: popište první běžné použití v nové situaci.
+3. Minuta 3: ověřte najitelnost a rozhodnutelnost pravidla.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: určete nejbližší opravu nebo potvrďte, že žádná není.
+6. Minuta 6: projděte privacy-first stopu a napište návratový signál.
+
+Výstup:
+
+```text
+Po uzavřené změně kontextu bylo pravidlo použité v [situace]. Výsledek je [stav]. Opravujeme jen [nejbližší oprava / nic], neotevíráme [rozsah], datová stopa [se nemění / mění se takto] a vrátíme se jen při [návratový signál].
+```
+
+### Checklist prvního běžného použití po změně kontextu
+
+- Proběhlo použití v normální práci, ne v umělé kontrole?
+- Člověk našel pravidlo bez pomoci autora kompasu?
+- Pomohlo pravidlo k rozhodnutí bez další schůzky nebo schvalování?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud chybělo vodítko, opravujeme jen nejbližší pracovní místo?
+- Pokud se vrátil dohled, víme, jakou nejistotu ve skutečnosti řeší?
+- Pokud vznikla datová hrana, zastavili jsme obsahové nadšení a popsali účel, přístup, retenci a mazání?
+- Neotevíráme audit všech podobných míst jen kvůli jednomu tření?
+- Nevznikl nový tracker, export, archiv variant nebo kontrolní tabulka pro jistotu?
+- Pomocné komentáře, screenshoty a pracovní kopie bez účelu se mažou nebo anonymizují?
+- Ponechaná evidence má vlastníka a konec?
+- Návratový signál vychází z reálné práce, ne z obecné nervozity?
+- Dá se výsledek shrnout jednou pracovní větou?
+
+První běžné použití po změně kontextu je malá zkouška dospělosti pravidla. Pokud pravidlo funguje, nechte ho být. Pokud škobrtne, opravte místo, kde škobrtlo. A pokud kvůli němu začnete znovu sbírat data "pro jistotu", zastavte se: možná neověřujete kompas, ale vyrábíte si nový kontrolní systém.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené změně kontextu stálého provozního kompasu: ověření samostatnosti pravidla v nové situaci, čtyři výsledky použití, nejbližší oprava tření, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření první změny kontextu po dlouhodobém klidu stálého provozního kompasu: čtyři uzavírací stavy, kanonické místo, dočasné kontroly, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o první změně kontextu po dlouhodobém klidu stálého provozního kompasu: typy změn, rozhodnutí podle dopadu na původní pravidlo, ochrana před návratem starého dohledu, privacy-first datová brána, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého měsíce po návratu stálého provozního kompasu do tichého provozu: čtyři uzavírací stavy, pravidla proti třetí kontrole, privacy-first mazání náhradních stop, karta, mini workshop a checklist.
