@@ -197671,8 +197671,237 @@ První běžné použití po změně kontextu uzavíráme jako [stav]. Děláme 
 
 Uzavření prvního běžného použití má být nudné v tom nejlepším smyslu. Buď pravidlo funguje a tým ho nechá být, nebo se opraví jedno nejbližší místo, nebo se dočistí konkrétní datová stopa. Když závěr začne vonět jako nový program řízení kvality, vraťte se k první otázce. Nechtěli jste vybudovat nový systém. Chtěli jste zjistit, jestli kompas v novém kontextu funguje jako součást běžné práce.
 
+## Druhé běžné použití po změně kontextu kompasu
+
+Druhé běžné použití je důležitější, než na první pohled vypadá. První průchod mohl fungovat proto, že všichni ještě měli změnu kontextu v hlavě, autor pravidla byl poblíž nebo tým věděl, že se výsledek bude uzavírat. Druhý průchod už má být obyčejnější. Pravidlo se má objevit v normální práci bez připomínání, bez doprovodné kontroly a bez toho, aby se z jedné nové situace stal nový proces.
+
+Pracovní otázka:
+
+```text
+Umí kompas po změně kontextu pomoct i při druhém běžném použití bez dohledu, nových datových stop a zvláštní péče?
+```
+
+Tato otázka má dvě brzdy. První brzdí perfekcionismus: druhé použití nemá dokazovat, že pravidlo zvládne všechny budoucí varianty. Druhá brzdí kontrolní reflex: pokud něco funguje, nesmí z toho vzniknout měření používání pravidla, další schvalování ani archiv pracovních verzí "pro jistotu".
+
+Příklad:
+
+```text
+Změna kontextu:
+Kompas datového minima se začal používat i pro enterprise landing page.
+
+První běžné použití:
+Sekce s anonymizovaným výsledkem zákazníka fungovala bez nové datové stopy.
+
+Druhé běžné použití:
+Tým připravuje krátký sales follow-up e-mail, který odkazuje na stejný anonymizovaný důkaz.
+
+Otázka:
+Použije vlastník obsahu stejné pravidlo bez toho, aby vytáhl původní citlivý podklad, založil novou kopii nebo žádal autora kompasu o kontrolu?
+```
+
+Pokud druhé použití projde, kompas je blíž skutečnému tichému provozu. Pokud neprojde, ještě to nemusí znamenat velkou revizi. Často stačí doplnit přenosovou větu: jak se pravidlo používá v sousední situaci, která není totožná s první, ale řeší stejnou rozhodovací hranu.
+
+### Co druhé použití ověřuje navíc
+
+Druhé použití ověřuje tři věci, které první průchod neumí spolehlivě ukázat:
+
+- Přenositelnost: pravidlo pomůže i v sousedním pracovním místě, nejen v původní šabloně.
+- Samostatnost: člověk nemusí znovu žádat o výklad, povolení nebo kontrolu.
+- Datovou střídmost: tým nepoužije nový kontext jako záminku k dalším kopiím, exportům nebo podpůrným tabulkám.
+
+Přenositelnost neznamená, že pravidlo musí platit všude. Znamená, že tým pozná, kdy je situace pořád stejný typ rozhodnutí. Pokud se anonymizovaný důkaz použije na landing page a potom ve follow-up e-mailu, je to pořád otázka datového minima v zákaznickém důkazu. Pokud se z toho stane interní case study pro obchodní školení, může už jít o jiné publikum, jiný účel a jinou datovou hranici.
+
+Samostatnost není hrdinství jednotlivce. Je to kvalita pracovního systému. Když se vlastník obsahu musí pokaždé ptát autora pravidla, pravidlo ještě neběží tiše. Oprava ale nemá být "přidejme školení". Nejdřív hledejte nejbližší chybějící vodítko: odkaz u šablony, příklad v kanonickém místě, hranici pro citlivé údaje nebo mazací větu.
+
+Datová střídmost je praktická privacy-first kontrola. Druhé použití často láká k větě "vezmeme si původní podklad, ať to máme přesné". Přesnost je fajn, ale citlivý podklad má zůstat jen tam, kde má jasný účel, omezený přístup a konec. Ve většině marketingových a sales situací stačí anonymizovaný veřejný výstup nebo krátká interní poznámka bez identifikátorů.
+
+### Čtyři výsledky druhého běžného použití
+
+Po druhém použití vyberte jeden stav:
+
+- `Přenos funguje`: pravidlo bylo použité samostatně, výstup vznikl bez nové stopy a není potřeba další akce.
+- `Chybí přenosová věta`: pravidlo platí, ale člověk nepoznal, že sousední situace patří do stejné rozhodovací hrany.
+- `Vrátil se autor pravidla`: použití bylo správné, ale tým si znovu vyžádal ruční kontrolu nebo potvrzení.
+- `Vznikla nová datová stopa`: kvůli druhému použití vznikla kopie, export, přesná hodnota, screenshot nebo nová evidence bez jasného účelu.
+
+U `Přenos funguje` nezakládejte třetí ověření. Zapište, že druhé použití prošlo, a nechte pravidlo v běžném rytmu. Když systém nepotřebuje pomoc, nepomáhejte mu násilím.
+
+U `Chybí přenosová věta` doplňte jednu krátkou větu do místa, kde člověk pracuje. Například: "Stejné pravidlo platí i pro follow-up e-mail, pokud používá stejný anonymizovaný důkaz a nemění účel z veřejného vysvětlení na interní vyhodnocení." To je lepší než nové školení, protože oprava leží přesně tam, kde vzniklo tření.
+
+U `Vrátil se autor pravidla` se neptejte jen, kdo si řekl o kontrolu. Ptejte se, jaká nejistota ji vyvolala. Chyběl příklad? Nebyla jasná hranice účelu? Bál se vlastník obsahu obchodního dopadu? Každá z těchto příčin má jinou opravu. Přidat obecné schvalování je nejdražší a obvykle nejslabší odpověď.
+
+U `Vznikla nová datová stopa` nejdřív zastavte práci s podkladem. Rozhodněte, co se maže, co se anonymizuje a co smí zůstat. Teprve potom řešte text pravidla. Pokud nová stopa vznikla kvůli nejasnému účelu, doplňte účel. Pokud vznikla kvůli pohodlí, zkraťte pracovní trasu tak, aby nebylo potřeba sahat na citlivý zdroj.
+
+### Přenosová věta
+
+Přenosová věta má být kratší než vysvětlení pravidla. Její úkol není učit celý kompas znovu. Má jen říct, kdy se stejná logika použije v sousedním pracovním místě.
+
+Šablona:
+
+```text
+Stejné pravidlo použij i v [sousední situace], pokud [stejný účel / stejný typ rozhodnutí]. Nepřenášej [citlivý podklad / dočasnou stopu / schvalování], stačí [nejmenší bezpečný důkaz].
+```
+
+Vyplněná verze:
+
+```text
+Stejné pravidlo použij i ve follow-up e-mailu, pokud e-mail jen odkazuje na anonymizovaný důkaz z landing page. Nepřenášej původní zákaznický podklad ani přesnou hodnotu, stačí veřejná anonymizovaná formulace a odkaz na kanonickou stránku.
+```
+
+Slabá verze:
+
+```text
+Myslete na privacy i v dalších materiálech.
+```
+
+Slabá verze je sympatická, ale neoperativní. Člověk z ní nepozná, co má udělat ve čtvrtek odpoledne, když potřebuje poslat e-mail a nechce čekat na další kontrolu. Dobrá přenosová věta drží rozhodnutí u konkrétní práce.
+
+### Privacy-first hranice druhého použití
+
+Při druhém použití projděte jen čtyři otázky:
+
+```text
+Používáme stejný účel jako při prvním použití?
+
+Stačí nám už existující anonymizovaný výstup?
+
+Nevzniká kvůli druhému použití nová kopie citlivého podkladu?
+
+Nesbíráme data o lidech nebo zákaznících jen proto, abychom si potvrdili, že pravidlo funguje?
+```
+
+Pokud je odpověď na první otázku ne, nejde o druhé běžné použití stejného pravidla. Je to nová otázka účelu. Zastavte se a pojmenujte ji úzce.
+
+Pokud odpověď na druhou otázku zní ne, napište proč. Možná je anonymizovaný výstup příliš vágní a obchod s ním neumí pracovat. To je legitimní signál, ale ne automatické oprávnění vytahovat přesná zákaznická data. Nejprve zkuste lepší anonymizované rozmezí, kontext dopadu nebo vysvětlení metody.
+
+Pokud vznikla nová kopie podkladu, uzavření druhého použití začíná úklidem. Kopie bez účelu se maže. Kopie s účelem dostane vlastníka, přístupovou hranici a datum revize. Bez toho nejde o privacy-first provoz, ale o dobrý úmysl s dlouhým poločasem rozpadu.
+
+Codyho komentář: druhé použití je místo, kde se pozná, jestli pravidlo opravdu žije, nebo jen mělo pěkný start. Je to jako recept, který zvládnete podruhé bez autora receptu za zády. Pokud při tom založíte tři nové tabulky, recept možná není tak jednoduchý, jak vypadal.
+
+### Karta druhého běžného použití po změně kontextu
+
+```text
+Kompas:
+
+Uzavřená změna kontextu:
+
+První běžné použití:
+
+Druhé běžné použití:
+
+Sousední pracovní místo:
+
+Stejný účel:
+- ano / ne / nejisté
+
+Výsledek druhého použití:
+- přenos funguje
+- chybí přenosová věta
+- vrátil se autor pravidla
+- vznikla nová datová stopa
+
+Přenosová věta, pokud je potřeba:
+
+Co se neopravuje:
+
+Dočasný dohled:
+- nevzniká / končí / má přesnou podmínku konce
+
+Datová stopa:
+- nevznikla
+- maže se
+- anonymizuje se
+- zůstává s účelem, vlastníkem a revizí
+
+Nejmenší bezpečný důkaz:
+
+Návratový signál:
+
+Jednovětý závěr:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických důkazech.
+
+Uzavřená změna kontextu:
+Použití pravidla v enterprise landing page.
+
+První běžné použití:
+Anonymizovaný důkaz v sekci "Výsledky".
+
+Druhé běžné použití:
+Follow-up e-mail pro poptávky z enterprise segmentu.
+
+Sousední pracovní místo:
+Sales e-mail odkazující na stejný veřejný důkaz.
+
+Stejný účel:
+Ano, vysvětlit dopad bez odhalení citlivých detailů.
+
+Výsledek druhého použití:
+Chybí přenosová věta.
+
+Přenosová věta:
+Stejné pravidlo použij i ve follow-up e-mailu, pokud e-mail jen odkazuje na anonymizovaný důkaz z landing page. Nepřenášej původní zákaznický podklad ani přesnou hodnotu, stačí veřejná anonymizovaná formulace a odkaz na kanonickou stránku.
+
+Co se neopravuje:
+Neotevírá se celý sales playbook ani schvalování všech e-mailů.
+
+Dočasný dohled:
+Nevzniká.
+
+Datová stopa:
+Nevznikla.
+
+Nejmenší bezpečný důkaz:
+Veřejná anonymizovaná formulace a odkaz na stránku.
+
+Návratový signál:
+Dva různí lidé si znovu nebudou jistí, zda stejný důkaz smí použít v sousedním materiálu.
+
+Jednovětý závěr:
+Druhé použití ukázalo potřebu jedné přenosové věty pro follow-up e-mail, bez nové datové stopy a bez otevření sales playbooku.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: pojmenujte druhé běžné použití a sousední pracovní místo.
+2. Minuta 2: ověřte, jestli účel zůstal stejný.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: napište přenosovou větu nebo potvrďte, že není potřeba.
+5. Minuta 5: zkontrolujte datovou stopu a případný návrat autora pravidla.
+6. Minuta 6: napište jednovětý závěr a návratový signál.
+
+Výstup workshopu:
+
+```text
+Druhé běžné použití v [sousední pracovní místo] skončilo stavem [výsledek]. Účel je [stejný / jiný], mění se [přenosová věta / nic / datový úklid], neotevíráme [rozsah] a návrat nastane při [signál].
+```
+
+### Checklist druhého běžného použití po změně kontextu
+
+- Je druhé použití reálná pracovní situace, ne umělá kontrola?
+- Je jasné, jak souvisí s první změnou kontextu?
+- Ověřili jsme, jestli účel zůstal stejný?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud chyběla přenosová věta, doplnili jsme ji do nejbližšího pracovního místa?
+- Pokud se vrátil autor pravidla, víme, jaká nejistota ho přivolala?
+- Pokud vznikla nová datová stopa, je rozhodnuté, co se maže, anonymizuje nebo ponechává?
+- Nepřidáváme třetí kontrolní použití jen proto, že chceme mít klid?
+- Neotevíráme celý playbook, šablony ani schvalovací proces kvůli jednomu sousednímu místu?
+- Stačí nejmenší bezpečný důkaz místo původního citlivého podkladu?
+- Má ponechaná stopa účel, vlastníka, omezený přístup a případnou revizi?
+- Je závěr předatelný jednou větou?
+- Návratový signál vychází z opakovaného reálného tření, ne z nervozity?
+
+Druhé běžné použití má kompas poslat dál do tichého provozu, ne ho vrátit na operační stůl. Pokud přenos funguje, zavřete. Pokud chybí věta, doplňte větu. Pokud se vrátil dohled, opravte příčinu nejistoty. A pokud vznikla datová stopa, ukliďte ji dřív, než se začne tvářit jako standardní součást práce.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o druhém běžném použití po změně kontextu stálého provozního kompasu: přenositelnost pravidla do sousedního pracovního místa, samostatnost bez autora, privacy-first datová střídmost, přenosová věta, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po změně kontextu stálého provozního kompasu: čtyři uzavírací stavy, uzavírací věta, privacy-first dočištění pomocných stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené změně kontextu stálého provozního kompasu: ověření samostatnosti pravidla v nové situaci, čtyři výsledky použití, nejbližší oprava tření, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření první změny kontextu po dlouhodobém klidu stálého provozního kompasu: čtyři uzavírací stavy, kanonické místo, dočasné kontroly, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
