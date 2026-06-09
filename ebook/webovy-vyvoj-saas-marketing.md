@@ -200173,8 +200173,236 @@ Otevíráme jen rozsah, který odpovídá návratovému signálu.
 
 První návratový signál po úplném uzavření je zkouška dospělosti pravidla. Ne tím, že se už nikdy nic nestane. Ale tím, že tým umí reagovat přesně: nepanikařit, neignorovat, nezvětšovat dohled a nechat privacy-first hranici stát i ve chvíli, kdy se ozve realita.
 
+## Uzavření prvního návratového signálu po úplném uzavření pravidla
+
+Návratový signál nemá zůstat otevřený jako nový polotrvalý stav. Jakmile projdete filtry, vyberete výsledek a uděláte nejmenší odpovídající reakci, je potřeba signál uzavřít. Jinak se z původně zdravé brzdy stane další zdroj nejistoty: pravidlo je sice "uzavřené", ale někde vedle něj visí poznámka, že se k němu možná ještě vrátíme.
+
+Uzavření návratového signálu odpovídá na tři otázky:
+
+```text
+Co signál skutečně znamenal?
+
+Jaká nejmenší reakce proběhla?
+
+V jakém stavu pravidlo pokračuje od teď?
+```
+
+Příklad:
+
+```text
+Signál skutečně znamenal:
+Nešlo o rozpad pravidla, ale o slabý příklad v jedné sales kartě.
+
+Nejmenší reakce:
+Příklad jsme nahradili anonymizovanou rozhodovací větou a zkrátili starý screenshotový kontext.
+
+Stav pravidla od teď:
+Pravidlo pokračuje beze změny; návratový signál zůstává stejný.
+```
+
+Tento zápis je krátký, ale důležitý. Bez něj si tým za měsíc nebude pamatovat, jestli signál skončil jako šum, lokální oprava, revize pravidla nebo nová samostatná otázka. A když si to nepamatuje, začne znovu od začátku. To je oblíbený sport pracovních systémů: dělat kolečka a tvářit se, že běží maraton.
+
+### Čtyři uzavírací stavy signálu
+
+Po reakci vyberte jeden ze čtyř uzavíracích stavů:
+
+1. Signál zavřen jako šum: nic se nemění a nevzniká úkol.
+2. Signál zavřen lokální opravou: opravené je jedno pracovní místo, pravidlo zůstává stejné.
+3. Signál zavřen revizí pravidla: kanonické místo se změnilo a revizní okno končí.
+4. Signál předán jako nová otázka: původní pravidlo se nezvětšuje, nová práce má vlastní kartu.
+
+`Signál zavřen jako šum` použijte, když se ukáže, že situace neodpovídala návratové hranici. Do logu stačí jedna věta. Nezakládejte "pro jistotu" připomínku. Pokud se stejná situace opravdu vrátí, bude novým signálem sama o sobě.
+
+`Signál zavřen lokální opravou` je nejčastější zdravý výsledek. Jedno místo bylo neaktuální, jeden příklad byl zavádějící, jeden odkaz vedl na starší verzi. Opravte konkrétní bod, zapište změnu a nechte pravidlo dál běžet.
+
+`Signál zavřen revizí pravidla` znamená, že návratová hranice platila a pravidlo potřebovalo úpravu. Po revizi musí skončit mimořádné okno: žádná dočasná kontrola, žádný dodatečný seznam výjimek, žádná nová schvalovací fronta jen proto, že se pravidlo jednou otevřelo.
+
+`Signál předán jako nová otázka` chrání původní pravidlo před přerůstáním. Když se ukáže jiné téma, dejte mu vlastní místo. Původní pravidlo nemá nést každou sousední nejistotu, jinak se z něj stane odkládací police pro všechno, co se týmu nechce rozhodnout samostatně.
+
+### Co propsat zpět do pravidla
+
+Do kanonického místa patří jen to, co bude užitečné při příštím běžném použití. Ne kompletní historie signálu.
+
+Propisujte:
+
+- aktuální znění pravidla;
+- jasnější hranici použití, pokud se změnila;
+- jeden stručný příklad, pokud odstraní opakované nedorozumění;
+- návratový signál, pokud byl zpřesněn;
+- datum poslední věcné změny.
+
+Nepropisujte:
+
+- kdo chybu udělal;
+- všechny pracovní poznámky z revize;
+- původní zákaznický kontext;
+- dlouhý seznam variant, které se nakonec neřešily;
+- dočasný dozorový postup.
+
+Dobré kanonické místo po uzavření signálu vypadá skoro nudně. Pravidlo je jasnější, ale není tlustší o celý příběh. Člověk, který ho otevře za dva měsíce, má pochopit, co má dělat, ne archeologicky zkoumat, proč se tým v úterý odpoledne vyděsil.
+
+### Uzavírací šablona
+
+```text
+Pravidlo:
+
+Návratový signál:
+
+Co se stalo:
+
+Vybraný výsledek:
+- šum bez zásahu
+- lokální oprava
+- návrat k pravidlu
+- nová samostatná otázka
+
+Uzavírací stav:
+- zavřeno jako šum
+- zavřeno lokální opravou
+- zavřeno revizí pravidla
+- předáno jako nová otázka
+
+Co se změnilo v kanonickém místě:
+
+Co výslovně nezůstává otevřené:
+
+Co se smaže nebo zkrátí:
+
+Nový nebo potvrzený návratový signál:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Zákaznický důkaz používáme anonymizovaně a bez původního screenshotu.
+
+Návratový signál:
+Původní screenshot nebo zákaznický kontext se znovu objeví ve dvou různých obchodních situacích.
+
+Co se stalo:
+Screenshot se objevil ve follow-upu a v interní sales kartě.
+
+Vybraný výsledek:
+Návrat k pravidlu.
+
+Uzavírací stav:
+Zavřeno revizí pravidla.
+
+Co se změnilo v kanonickém místě:
+Doplněna věta, kdy anonymizovaný důkaz nestačí a je potřeba samostatně schválená case study.
+
+Co výslovně nezůstává otevřené:
+Neotevíráme monitoring všech obchodních zpráv ani plošné školení.
+
+Co se smaže nebo zkrátí:
+Pracovní poznámky z revize a původní screenshotové příklady.
+
+Nový nebo potvrzený návratový signál:
+Beze změny: původní zákaznický kontext ve dvou různých obchodních situacích.
+
+Vlastník:
+Marketing owner.
+
+Datum uzavření:
+2026-06-09.
+```
+
+### Jak nezaložit skrytou následnou kontrolu
+
+Největší riziko po uzavření návratového signálu je věta:
+
+```text
+Ještě to raději měsíc sledujme.
+```
+
+Někdy je oprávněná, ale většinou jen vrací mimořádnou péči zadními dveřmi. Pokud chcete následnou kontrolu, musí mít vlastní důvod a vlastní stop podmínku. Nestačí, že se pravidlo jednou otevřelo.
+
+Lepší rozlišení:
+
+- Pokud signál skončil jako šum, žádná následná kontrola nevzniká.
+- Pokud stačila lokální oprava, ověření proběhne při nejbližším přirozeném použití opraveného místa.
+- Pokud proběhla revize pravidla, první běžné použití může ověřit srozumitelnost, ale nesmí obnovit starý dohled.
+- Pokud vznikla nová otázka, sleduje se v nové kartě, ne v původním pravidle.
+
+Věta pro uzavření:
+
+```text
+Návratový signál je uzavřený; další práce začne jen při potvrzeném návratovém signálu, při nejbližším přirozeném použití opraveného místa, nebo v samostatné kartě nové otázky.
+```
+
+Tahle věta je trochu dlouhá, ale dělá dobrou práci: chrání před třetím typem práce, který nikdo nepojmenoval, ale všichni ho najednou musí krmit.
+
+### Privacy-first uzavření
+
+Uzavření návratového signálu má snížit datovou stopu. Pokud po signálu zůstane víc osobních údajů, screenshotů, exportů a pracovních kopií než před ním, tým sice možná opravil proces, ale zhoršil hygienu.
+
+Po uzavření projděte čtyři úklidové otázky:
+
+- Zůstaly někde zákaznické detaily, které už nejsou potřeba?
+- Vznikla dočasná kopie, screenshot, export nebo sdílený dokument?
+- Je v kanonickém místě příklad anonymizovaný a zkrácený na rozhodovací pointu?
+- Nezaložili jsme nový seznam lidí, chyb nebo výjimek bez jasného účelu a retence?
+
+Privacy-first uzavírací věta:
+
+```text
+Po uzavření signálu zůstává jen aktuální pravidlo, anonymizovaný příklad a rozhodovací věta; pracovní podklady se mažou nebo zkracují podle účelu.
+```
+
+Codyho komentář: dobré pravidlo po návratu nezanechá za sebou skládku důkazů. Nejsme muzeum screenshotů. Jsme tým, který chce příště rozhodnout rychleji a s menší datovou stopou.
+
+### Mini workshop na 6 minut
+
+Minuta 1: vlastník přečte původní návratový signál a vybraný výsledek.
+
+Minuta 2: tým potvrdí, jaká nejmenší reakce opravdu proběhla.
+
+Minuta 3: vybere se jeden ze čtyř uzavíracích stavů.
+
+Minuta 4: určí se, co přesně patří do kanonického místa.
+
+Minuta 5: určí se, co se smaže, zkrátí nebo přesune do nové samostatné otázky.
+
+Minuta 6: zapíše se uzavírací věta a nový nebo potvrzený návratový signál.
+
+Zakázaná věta:
+
+```text
+Necháme si všechny podklady, kdyby se to zase hodilo.
+```
+
+Povolená náhrada:
+
+```text
+Necháme jen to, co bude potřeba pro příští rozhodnutí; zbytek smažeme nebo anonymizujeme.
+```
+
+### Checklist uzavření prvního návratového signálu
+
+- Je jasné, jaký návratový signál jsme uzavírali?
+- Víme, jestli šlo o šum, lokální opravu, návrat k pravidlu nebo novou otázku?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je nejmenší reakce skutečně hotová?
+- Pokud se změnilo pravidlo, je změna propsaná do kanonického místa?
+- Pokud vznikla nová otázka, má vlastní kartu mimo původní pravidlo?
+- Nezůstala otevřená dočasná kontrola bez stop podmínky?
+- Je potvrzený nebo zpřesněný návratový signál?
+- Zmizely pracovní poznámky, screenshoty, exporty a kopie, které už nemají účel?
+- Zůstal příklad anonymizovaný a krátký?
+- Nevznikl seznam lidí nebo chyb bez jasného účelu, retence a vlastníka?
+- Umí vlastník říct jednou větou, v jakém stavu pravidlo pokračuje?
+- Další práce začne jen při konkrétním signálu, přirozeném použití opraveného místa nebo v nové samostatné otázce?
+
+Uzavřený návratový signál má vrátit pravidlu normální váhu. Ne větší, ne menší. Tým se poučil z reality, upravil jen to, co mělo smysl, a uklidil po sobě. To je nenápadná disciplína, ze které vzniká dobrý provoz.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po úplném uzavření pravidla: čtyři uzavírací stavy, propsání do kanonického místa, prevence skryté následné kontroly, privacy-first úklid, šablona, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním návratovém signálu po úplném uzavření pravidla: tři filtry před otevřením, čtyři výsledky signálu, krátké revizní okno, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném měsíci: čtyři uzavírací stavy, kanonické místo, prevence třetí kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném měsíci: čtyři uzavírací stavy, propsání do kanonického místa, ukončení dočasné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
