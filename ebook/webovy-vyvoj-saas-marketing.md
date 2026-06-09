@@ -197444,8 +197444,236 @@ Po uzavřené změně kontextu bylo pravidlo použité v [situace]. Výsledek je
 
 První běžné použití po změně kontextu je malá zkouška dospělosti pravidla. Pokud pravidlo funguje, nechte ho být. Pokud škobrtne, opravte místo, kde škobrtlo. A pokud kvůli němu začnete znovu sbírat data "pro jistotu", zastavte se: možná neověřujete kompas, ale vyrábíte si nový kontrolní systém.
 
+## Uzavření prvního běžného použití po změně kontextu kompasu
+
+První běžné použití po změně kontextu samo o sobě nestačí. Je potřeba ho ještě uzavřít, jinak zůstane viset jako tichá kontrola, která se bude při každé další podobné situaci vracet. Uzavření tady neznamená velké vyhodnocení. Znamená krátce říct, co se stalo, co z toho plyne pro běžnou práci a co se už nemá znovu otevírat.
+
+Pracovní otázka:
+
+```text
+Můžeme po prvním běžném použití nechat kompas v novém kontextu fungovat tiše, nebo musíme opravit jedno konkrétní pracovní místo?
+```
+
+Tato otázka drží rozsah u země. Neptá se, jestli je kompas dokonalý pro všechny budoucí situace. Ptá se, jestli první reálné použití ukázalo něco, co brání dalšímu běžnému průchodu. Pokud ne, uzavřete. Pokud ano, opravte nejbližší místo a uzavřete až po této opravě.
+
+Příklad:
+
+```text
+První běžné použití:
+Vlastník obsahu použil pravidlo datového minima při přípravě druhé sekce nové landing page.
+
+Výsledek použití:
+Pravidlo našel, anonymizovaný důkaz zapsal správně a po publikaci smazal pracovní komentář s přesnou hodnotou.
+
+Uzavření:
+Kompas v novém kontextu funguje tiše. Dočasná kontrola se neobnovuje, nevzniká nový seznam enterprise důkazů a další návrat nastane jen tehdy, když obchod opakovaně nedokáže anonymizovaný důkaz vysvětlit zákazníkovi.
+```
+
+Dobré uzavření má tři části: stav pravidla, stav pracovních stop a návratový signál. Když jedna část chybí, tým má tendenci doplnit si ji po svém. Někdo nechá starý komentář "pro jistotu". Někdo si založí vlastní kontrolní tabulku. Někdo začne každou podobnou sekci znovu posílat autorovi pravidla. Všechno to může vypadat jako pečlivost, ale ve skutečnosti to kompas vrací z tichého provozu do ručního hlídání.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden stav:
+
+- `Uzavřít beze změny`: pravidlo bylo najitelné, rozhodlo práci a datová stopa se nezvětšila.
+- `Uzavřít s lokální opravou`: pravidlo platí, ale jedno pracovní místo potřebuje odkaz, příklad nebo přesnější větu.
+- `Zastavit a dočistit data`: použití vytvořilo novou kopii, export, citlivý komentář nebo sdílený podklad, který nemá jasný účel a konec.
+- `Otevřít úzkou otázku`: použití ukázalo skutečně nový kontext, který nejde spravit jednou lokální větou.
+
+U `Uzavřít beze změny` nehledejte práci navíc. Zapište větu a zavřete. Největší disciplína je v tom, že když systém funguje, nespustíte oslavný proces na potvrzení, že funguje.
+
+U `Uzavřít s lokální opravou` oddělte opravu od revize. Oprava je jedna změna v místě, kde vznikl výstup: odkaz v šabloně, příklad v komentáři, přejmenované pole, kratší instrukce nebo mazací věta. Revize je návrat k celému pravidlu. Po prvním běžném použití má být revize výjimka.
+
+U `Zastavit a dočistit data` nejdřív ukliďte stopu, potom teprve pište závěr. Pokud někde zůstal screenshot zákaznického dashboardu, export poptávek nebo pracovní komentář s přesnou obchodní hodnotou, není hotovo. Hotovo je až ve chvíli, kdy víte, co se maže, co zůstává, proč to zůstává, kdo k tomu má přístup a kdy se k tomu vrátíte.
+
+U `Otevřít úzkou otázku` napište novou otázku tak, aby nebyla přestrojenou generální revizí. Špatně: "musíme znovu promyslet kompas pro enterprise obsah". Dobře: "jak anonymizovat důkaz, když zákazník dovolí název firmy, ale ne konkrétní výsledek". To je otázka, která má hranice.
+
+### Co se při uzavření nesmí znovu rozrůst
+
+Uzavření prvního běžného použití často rozbije drobná věta "raději to ještě chvíli sledujme". Někdy je opatrnost na místě, ale tady musí mít přesný tvar. Sledujte návratový signál, ne obecný pocit nejistoty.
+
+Neotevírejte znovu:
+
+- audit všech podobných šablon, pokud problém vznikl v jedné větě;
+- povinné schvalování každého dalšího výstupu, pokud šlo o najitelnost odkazu;
+- novou metriku používání pravidla, pokud stačí výsledek pracovního průchodu;
+- archiv všech pracovních variant, pokud zůstává jen jedna veřejná verze;
+- další kanonický dokument, pokud stačí doplnit existující zdroj pravdy.
+
+Otevřít se smí jen to, co první použití opravdu ukázalo. Pokud člověk pravidlo nenašel, opravte trasu. Pokud pravidlo našel, ale nerozhodlo mu práci, opravte rozhodovací větu. Pokud rozhodlo, ale vznikla datová stopa, opravte datovou hranici. Pokud všechno fungovalo, neopravujte nic. Ano, nic je legitimní výstup. Provozní dospělost, ne lenost.
+
+### Uzavírací věta
+
+Uzavírací věta má být krátká a použitelná pro člověka, který u prvního průchodu nebyl:
+
+```text
+Po prvním běžném použití v [situace] je stav [uzavírací stav]. Mění se [jedna lokální oprava / nic], dočasná kontrola [končí / nekončí kvůli ...], datová stopa [se nemění / čistí se takto] a vrátíme se jen při [návratový signál].
+```
+
+Vyplněná verze:
+
+```text
+Po prvním běžném použití v nové enterprise landing page je stav uzavřít beze změny. Nemění se nic, dočasná kontrola končí, datová stopa se nemění po smazání pracovního komentáře a vrátíme se jen při opakované neschopnosti obchodu vysvětlit anonymizovaný důkaz.
+```
+
+Slabá verze:
+
+```text
+Použití proběhlo dobře, ale budeme to dál kontrolovat.
+```
+
+Slabá verze neříká, kdo co udělá, kdy kontrola skončí ani jaká data zůstávají. Je to hezký začátek nekonečného procesu. Těch má většina firem už dost, netřeba zakládat další.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má být součástí závěru, ne dodatečná právní nálepka. Stačí projít čtyři otázky:
+
+```text
+Zůstává po prvním použití jen stopa, která má účel?
+
+Je jasné, kdo k ní má přístup?
+
+Má dočasná stopa termín smazání nebo už je smazaná?
+
+Nevznikl nový dohled nad lidmi jen proto, že pravidlo vstoupilo do nového kontextu?
+```
+
+Praktické rozhodnutí:
+
+- Dočasné pracovní komentáře s přesnými hodnotami se mažou po publikaci.
+- Veřejný text drží anonymizované rozmezí nebo popis dopadu bez identifikace zákazníka.
+- Interní odkaz na zdroj pravdy zůstává v šabloně, ale neukládá kopie zákaznických podkladů.
+- Pokud je potřeba ponechat citlivý podklad, má vlastníka, účel, omezený přístup a datum revize.
+
+Codyho komentář: privacy-first provoz není soutěž v tom, kdo má nejprázdnější disk. Je to schopnost nechat si jen to, co má jasný důvod. Zbytek smažte dřív, než se z toho stane "historie pro kontext", což je často jen uhlazenější název pro nepořádek.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Kompas:
+
+Uzavřená změna kontextu:
+
+První běžné použití:
+
+Výsledek použití:
+- fungovalo tiše
+- chybělo lokální vodítko
+- vrátil se dočasný dohled
+- vznikla nová datová hrana
+
+Uzavírací stav:
+- uzavřít beze změny
+- uzavřít s lokální opravou
+- zastavit a dočistit data
+- otevřít úzkou otázku
+
+Jedna lokální oprava:
+
+Co se výslovně neotevírá:
+
+Dočasná kontrola:
+- končí / pokračuje do [konkrétní podmínka]
+
+Pomocné stopy:
+- co se maže
+- co se anonymizuje
+- co zůstává
+
+Účel ponechané stopy:
+
+Vlastník ponechané stopy:
+
+Datum další revize, pokud je potřeba:
+
+Návratový signál:
+
+Uzavírací věta:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických důkazech.
+
+Uzavřená změna kontextu:
+Použití pravidla v enterprise landing page.
+
+První běžné použití:
+Druhá sekce "Výsledky" v nové šabloně.
+
+Výsledek použití:
+Fungovalo tiše.
+
+Uzavírací stav:
+Uzavřít beze změny.
+
+Jedna lokální oprava:
+Žádná.
+
+Co se výslovně neotevírá:
+Neotevírá se audit všech důkazů ani nové schvalování enterprise obsahu.
+
+Dočasná kontrola:
+Končí.
+
+Pomocné stopy:
+Maže se pracovní komentář s přesnou hodnotou. Zůstává jen anonymizovaný veřejný text.
+
+Účel ponechané stopy:
+Pomoci čtenáři pochopit dopad bez odhalení citlivých detailů.
+
+Vlastník ponechané stopy:
+Vlastník obsahu.
+
+Datum další revize, pokud je potřeba:
+Bez pravidelné revize; návrat jen při signálu.
+
+Návratový signál:
+Obchod opakovaně nedokáže anonymizovaný důkaz vysvětlit zákazníkovi.
+
+Uzavírací věta:
+Po prvním běžném použití v enterprise landing page se kompas uzavírá beze změny, dočasná kontrola končí, pracovní komentář se maže a návrat nastane jen při opakovaném obchodním tření.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: zopakujte první běžné použití jednou větou.
+2. Minuta 2: vyberte výsledek použití.
+3. Minuta 3: vyberte uzavírací stav.
+4. Minuta 4: pojmenujte jednu lokální opravu nebo potvrďte, že žádná není.
+5. Minuta 5: řekněte, co se výslovně neotevírá.
+6. Minuta 6: projděte pomocné stopy a privacy-first otázky.
+7. Minuta 7: napište uzavírací větu a návratový signál.
+
+Výstup workshopu:
+
+```text
+První běžné použití po změně kontextu uzavíráme jako [stav]. Děláme [jedna oprava / žádná oprava], neotevíráme [rozsah], dočasná kontrola [končí / má přesnou podmínku], datová stopa [stav] a návrat nastane při [signál].
+```
+
+### Checklist uzavření prvního běžného použití
+
+- Je první běžné použití popsané konkrétní pracovní situací?
+- Vybrali jsme jeden výsledek použití?
+- Vybrali jsme jeden uzavírací stav?
+- Neopravujeme celý kompas kvůli jednomu lokálnímu tření?
+- Pokud stačí lokální oprava, je opravdu v nejbližším pracovním místě?
+- Pokud vznikla datová hrana, víme, co se maže, anonymizuje nebo ponechává?
+- Má ponechaná stopa účel, vlastníka, přístupovou hranici a případný termín revize?
+- Je jasné, jestli dočasná kontrola končí?
+- Pokud dočasná kontrola pokračuje, má přesnou podmínku konce?
+- Je výslovně zapsané, co se neotevírá?
+- Nevzniká nový tracker, report, archiv variant ani schvalovací kolečko pro jistotu?
+- Návratový signál vychází z reálné práce?
+- Dá se závěr předat jednou větou člověku, který u použití nebyl?
+
+Uzavření prvního běžného použití má být nudné v tom nejlepším smyslu. Buď pravidlo funguje a tým ho nechá být, nebo se opraví jedno nejbližší místo, nebo se dočistí konkrétní datová stopa. Když závěr začne vonět jako nový program řízení kvality, vraťte se k první otázce. Nechtěli jste vybudovat nový systém. Chtěli jste zjistit, jestli kompas v novém kontextu funguje jako součást běžné práce.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po změně kontextu stálého provozního kompasu: čtyři uzavírací stavy, uzavírací věta, privacy-first dočištění pomocných stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené změně kontextu stálého provozního kompasu: ověření samostatnosti pravidla v nové situaci, čtyři výsledky použití, nejbližší oprava tření, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření první změny kontextu po dlouhodobém klidu stálého provozního kompasu: čtyři uzavírací stavy, kanonické místo, dočasné kontroly, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o první změně kontextu po dlouhodobém klidu stálého provozního kompasu: typy změn, rozhodnutí podle dopadu na původní pravidlo, ochrana před návratem starého dohledu, privacy-first datová brána, karta, mini workshop a checklist.
