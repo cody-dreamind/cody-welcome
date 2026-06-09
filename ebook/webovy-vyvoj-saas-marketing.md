@@ -196923,8 +196923,284 @@ Změna kontextu je [změna]. Typ změny je [typ]. Původní rozhodnutí se [měn
 
 Změna kontextu není výmluva k velkému úklidu všeho. Je to test, jestli stávající pravidlo pořád odpovídá reálnému rozhodnutí. Když ano, přesuňte ho do nového pracovního místa a nechte ho fungovat. Když ne, otevřete jednu přesnou otázku. A když si nejste jistí, nesbírejte víc dat "pro klid". Zmenšete situaci, použijte první reálný průchod a vraťte se jen s důkazem.
 
+## Uzavření první změny kontextu po dlouhodobém klidu kompasu
+
+První změna kontextu je nebezpečná hlavně tím, že vypadá jako malá výjimka. Tým si řekne, že pravidlo přece pořád platí, jen ho pro jistotu jednou zkontroluje. Pak ještě jednou u další šablony. Pak vznikne pomocný komentář, kontrolní dokument, schvalovací kolečko a po měsíci už nikdo neví, jestli kompas opravdu žije v práci, nebo kolem něj zase běží malý dohledový systém.
+
+Uzavření změny kontextu má proto přijít hned po prvním reálném průchodu. Nečekejte na "víc případů", pokud první průchod stačil k rozhodnutí. Cílem není potvrdit pravidlo statisticky, ale rozhodnout, jestli se změna chovala jako lokální přenos, úzký návrat, datová změna nebo falešný poplach.
+
+Pracovní otázka:
+
+```text
+Co se po první změně kontextu opravdu změnilo: pravidlo, pracovní trasa, datová stopa, nebo nic podstatného?
+```
+
+Tato otázka je schválně nudná. Nudné otázky bývají v provozu užitečné, protože nezvou tým na velkou výpravu po všech možných souvislostech. Drží pozornost u toho, co se stalo v jednom pracovním místě.
+
+Příklad:
+
+```text
+Změna kontextu:
+Nová landing page pro větší firmy používá pravidlo datového minima v zákaznických důkazech.
+
+První průchod:
+Vlastník obsahu připravil sekci "Výsledky" podle nové šablony.
+
+Co se ukázalo:
+Pravidlo zůstává stejné, ale v šabloně chyběla věta, že anonymizované rozmezí má přednost před přesnou hodnotou, pokud přesná hodnota není nutná pro rozhodnutí čtenáře.
+
+Uzavření:
+Jde o lokální doplnění pracovní trasy. Kompas se nemění, nepřidává se kontrola a pracovní komentář s přesnou hodnotou se po publikaci maže.
+```
+
+Tohle je dobré uzavření: přesné, malé a bez nové agendy. Všimněte si, že výsledek neříká "budeme sledovat další stránky". Říká, co se změnilo, kde to bydlí a co se smaže.
+
+### Čtyři uzavírací stavy změny kontextu
+
+Po prvním průchodu vyberte jeden stav:
+
+- `Beze změny`: nové místo, publikum nebo situace pravidlo použily bez tření.
+- `Lokální přenos`: pravidlo platí, ale chyběl odkaz, věta, pole v šabloně nebo drobný krok v pracovní trase.
+- `Úzký návrat`: změna kontextu odhalila novou rozhodovací hranu, kterou pravidlo zatím nepokrývá.
+- `Datová změna`: změna vytvořila nový tok, kopii, přístup, export, příklad nebo retenci, kterou nejde odbýt jako obsahovou úpravu.
+
+Stav `Beze změny` je plnohodnotný výsledek. Neznamená, že tým nic neudělal. Znamená, že systém obstál a nepotřebuje další péči.
+
+Stav `Lokální přenos` má skončit opravou nejbližší pracovní trasy, ne úpravou všech příbuzných dokumentů. Pokud chybí věta v jedné šabloně, doplňte ji tam. Teprve když se stejné tření objeví v dalším nezávislém místě, vzniká kandidát na širší vzor.
+
+Stav `Úzký návrat` musí mít jednu otázku. Ne "zkontrolovat pravidlo pro enterprise zákazníky", ale například:
+
+```text
+Jak má kompas zacházet s agregovaným výsledkem z více projektů, když přesné číslo není citlivé samo o sobě, ale v kombinaci s odvětvím a časem by mohlo odhalit klienta?
+```
+
+Stav `Datová změna` má přednost před obsahovým nadšením. Pokud nová landing page, case study, onboarding nebo reporting vytváří nové kopie zákaznických informací, nejdřív vyřešte účel, přístup, retenci a mazání. Teprve potom řešte, jestli text zní dost přesvědčivě.
+
+### Co zapsat do kanonického místa
+
+Kanonické místo nemá být skladiště všech průchodů. Po změně kontextu do něj patří jen to, co bude další člověk potřebovat při běžné práci.
+
+Zapisujte:
+
+- novou rozhodovací větu, pokud se pravidlo opravdu zpřesnilo;
+- odkaz na nové pracovní místo, pokud tam pravidlo nově bydlí;
+- retenční nebo mazací pravidlo, pokud vznikla datová změna;
+- návratový signál, pokud se téma nemá řešit preventivně;
+- krátký changelog, aby bylo jasné, proč úprava vznikla.
+
+Nezapisujte:
+
+- kompletní historii diskuze;
+- konkrétní zákaznické hodnoty, pokud už nemají účel;
+- screenshoty pracovních verzí;
+- seznam lidí, kteří se k tomu vyjádřili;
+- "pro jistotu" archiv variant textu, které se nepoužily.
+
+Dobrá kanonická věta:
+
+```text
+Při použití zákaznického důkazu pro nový segment platí stejné datové minimum: přesné hodnoty jen po schválení a jen tehdy, když jsou nutné pro rozhodnutí čtenáře; jinak použij anonymizované rozmezí nebo popis dopadu.
+```
+
+Slabá kanonická věta:
+
+```text
+U větších zákazníků raději vše konzultovat.
+```
+
+Slabá věta vypadá opatrně, ale přesouvá rozhodnutí na lidi a schůzky. Dobrá věta drží rozhodnutí v práci.
+
+### Jak zavřít dočasnou kontrolu
+
+Pokud jste při změně kontextu přidali krátkou kontrolu, zavřete ji stejným během. Dočasná kontrola bez zavření je proces v převleku. Stačí čtyři kroky:
+
+1. Porovnejte kontrolu s původním důvodem.
+2. Řekněte, jestli důvod pořád trvá.
+3. Přesuňte trvalou část do pracovní trasy nebo kanonického pravidla.
+4. Smažte, zkraťte nebo anonymizujte pomocné podklady.
+
+Šablona:
+
+```text
+Kontrola chránila před:
+
+Po prvním průchodu víme:
+
+Trvale zůstává:
+
+Dočasně mizí:
+
+Kontrolu ukončuje:
+
+Návratový signál:
+```
+
+Příklad:
+
+```text
+Kontrola chránila před:
+Použitím přesné zákaznické metriky bez jasného důvodu.
+
+Po prvním průchodu víme:
+Šablona stačí, pokud v části "Důkaz" výslovně připomíná anonymizované rozmezí.
+
+Trvale zůstává:
+Jedna věta v šabloně důkazů a odkaz na kompas.
+
+Dočasně mizí:
+Komentář s přesnou hodnotou, pracovní kopie tabulky a poznámka ve sdíleném chatu.
+
+Kontrolu ukončuje:
+Vlastník obsahu po publikaci první stránky.
+
+Návratový signál:
+Obchod neumí z anonymizovaného důkazu vysvětlit dopad zákazníkovi.
+```
+
+Codyho komentář: "ještě chvíli to budeme kontrolovat" je často jen elegantnější verze "nevíme, kdo smí říct hotovo". Elegantní chaos je pořád chaos, jen má lepší font.
+
+### Privacy-first uzavření změny kontextu
+
+Změna kontextu často přesune informace do nových míst: komentář v dokumentu, pracovní screenshot, export z CRM, kopie textu do prezentace, příklad pro obchodní tým nebo návrh ve sdíleném chatu. Každé takové místo má být po uzavření buď kanonické, nebo pryč.
+
+Krátká privacy-first kontrola:
+
+```text
+Kde se během změny objevila zákaznická, osobní nebo obchodně citlivá informace?
+
+Která kopie má dál účel?
+
+Kdo je vlastník ponechané kopie?
+
+Kdy se smaže nebo anonymizuje?
+
+Která kopie vznikla jen kvůli kontrole a teď mizí?
+```
+
+Pokud tým neumí pojmenovat vlastníka kopie, kopie pravděpodobně nemá v systému bydlet. Výjimkou jsou zákonné, smluvní nebo provozně nutné záznamy, ale i ty mají mít jasné místo, přístup a retenční pravidlo.
+
+Privacy-first uzavření není jen mazání. Někdy je správná akce přesunout informaci do lepšího místa: například z volného komentáře v dokumentu do schválené case study, z chatu do rozhodovacího logu nebo z osobní poznámky do anonymizované šablony. Důležité je, aby po uzavření nezůstaly tři poloverze stejné citlivé informace.
+
+### Karta uzavření změny kontextu
+
+```text
+Kompas:
+
+Změna kontextu:
+
+První reálný průchod:
+
+Uzavírací stav:
+- beze změny
+- lokální přenos
+- úzký návrat
+- datová změna
+
+Co se ukázalo:
+
+Co zůstává v kanonickém místě:
+
+Co se mění v pracovní trase:
+
+Co se výslovně neotevírá:
+
+Dočasná kontrola:
+- nebyla / končí / pokračuje do [konkrétní podmínka]
+
+Jaké pomocné stopy se mažou, zkracují nebo anonymizují:
+
+Jaká ponechaná data mají účel, vlastníka a konec:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických důkazech.
+
+Změna kontextu:
+Nová landing page pro větší firmy.
+
+První reálný průchod:
+Příprava sekce "Výsledky" pro první stránku.
+
+Uzavírací stav:
+Lokální přenos.
+
+Co se ukázalo:
+Pravidlo platí, ale v nové šabloně chyběla připomínka anonymizovaného rozmezí.
+
+Co zůstává v kanonickém místě:
+Původní pravidlo datového minima beze změny.
+
+Co se mění v pracovní trase:
+Do šablony důkazů se přidává věta o preferenci anonymizovaného rozmezí a odkaz na kompas.
+
+Co se výslovně neotevírá:
+Neotevíráme pravidla pro všechny case studies, pricing, analytics ani obecný enterprise positioning.
+
+Dočasná kontrola:
+Končí po publikaci první stránky.
+
+Jaké pomocné stopy se mažou, zkracují nebo anonymizují:
+Komentář s přesnou metrikou a pracovní kopie porovnávací tabulky.
+
+Jaká ponechaná data mají účel, vlastníka a konec:
+Publikovaná anonymizovaná formulace ve stránce; vlastníkem je vlastník obsahu, revize při příští obsahové aktualizaci.
+
+Návratový signál:
+Obchod opakovaně hlásí, že anonymizovaný důkaz nestačí k vysvětlení dopadu.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: připomeňte změnu kontextu a první reálný průchod.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: napište, co se mění v kanonickém místě nebo pracovní trase.
+4. Minuta 4: řekněte, co se výslovně neotevírá.
+5. Minuta 5: projděte pomocné stopy a privacy-first úklid.
+6. Minuta 6: určete návratový signál a vlastníka.
+
+Výstup:
+
+```text
+Změnu kontextu uzavíráme jako [stav]. Kanonické pravidlo [zůstává / mění se takto], pracovní trasa [zůstává / mění se takto], neotevíráme [rozsah], mažeme nebo anonymizujeme [stopy] a vrátíme se jen při [návratový signál].
+```
+
+### Checklist uzavření změny kontextu
+
+- Je jasné, jaký první reálný průchod změnu ověřil?
+- Vybrali jsme jeden uzavírací stav?
+- Nezaměňujeme lokální přenos za úpravu celého pravidla?
+- Pokud vznikl úzký návrat, má jednu otázku, vlastníka a výstup?
+- Pokud vznikla datová změna, je popsaný účel, přístup, retence a mazání?
+- Je zapsané, co zůstává v kanonickém místě?
+- Je zapsané, co se mění jen v pracovní trase?
+- Je výslovně řečeno, co se neotevírá?
+- Končí dočasná kontrola jasnou podmínkou?
+- Mizí pomocné komentáře, screenshoty, exporty a pracovní kopie bez dalšího účelu?
+- Má ponechaná evidence vlastníka a konec?
+- Je návratový signál navázaný na reálnou práci, ne na nervozitu týmu?
+- Dá se uzavření shrnout jednou větou?
+- Nepřidali jsme kvůli jistotě nový dohled, který bude za měsíc zase potřeba rušit?
+
+Uzavřená změna kontextu má po sobě nechat buď stejné pravidlo v novém místě, jednu lokální opravu, jednu úzkou otázku, nebo jasně popsanou datovou změnu. Nic pátého není potřeba. Když výsledek nejde zařadit, pravděpodobně jste ještě neuzavřeli změnu, ale jen popsali pocit, že se něco změnilo. Pocit si klidně zapište, ale systém podle něj nepřestavujte.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření první změny kontextu po dlouhodobém klidu stálého provozního kompasu: čtyři uzavírací stavy, kanonické místo, dočasné kontroly, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o první změně kontextu po dlouhodobém klidu stálého provozního kompasu: typy změn, rozhodnutí podle dopadu na původní pravidlo, ochrana před návratem starého dohledu, privacy-first datová brána, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého měsíce po návratu stálého provozního kompasu do tichého provozu: čtyři uzavírací stavy, pravidla proti třetí kontrole, privacy-first mazání náhradních stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o druhém měsíci po návratu stálého provozního kompasu do tichého provozu: ověření samostatnosti bez připomínání, čtyři výsledky, oprava závislosti na autorovi, privacy-first úklid náhradních stop, karta, mini workshop a checklist.
