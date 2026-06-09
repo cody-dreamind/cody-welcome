@@ -196010,8 +196010,234 @@ Po prvním měsíci v tichém provozu je kompas [uzavírací stav]. Zůstává [
 
 Uzavření prvního měsíce má vrátit kompas z krátké kontrolní chvíle zpět do normální práce. Pokud pravidlo pomáhá, nemá kolem sebe budovat provoz. Pokud něco drhne, opravte nejbližší místo. Pokud se kolem něj znovu tvoří dohled, zrušte ho konkrétně. Tichý provoz není absence odpovědnosti; je to odpovědnost bez zbytečné administrativy a bez zbytečných dat.
 
+## Druhý měsíc po návratu kompasu do tichého provozu
+
+Po uzavření prvního měsíce už není potřeba opakovat stejnou kontrolu. Druhý měsíc má jiný účel: ověřit, jestli kompas opravdu přežil bez speciální péče. Ne tím, že znovu projdete všechny signály, ale tím, že se podíváte na jednu normální pracovní situaci, ve které by pravidlo mělo být samozřejmé.
+
+Pracovní otázka:
+
+```text
+Umí kompas ve druhém měsíci fungovat jako běžná součást práce, i když ho nikdo nepřipomíná?
+```
+
+Tato otázka chrání před dvěma omyly. První omyl je opakovat měsíční kontrolu jen proto, že minule byla užitečná. Druhý omyl je nechat kompas úplně zmizet a všimnout si problému až ve chvíli, kdy se vrátí stará chyba. Druhý měsíc proto není další audit. Je to krátký pohled na normální práci bez mimořádné pozornosti.
+
+Vyberte jen jednu situaci, která se opravdu stala: nový článek, úpravu landing page, obchodní follow-up, support odpověď, interní šablonu, malý release nebo zákaznický příklad. Pokud žádná taková situace nenastala, nehledejte náhradní scénář. Zapište klid a vraťte se až při reálném použití.
+
+### Co druhý měsíc ověřuje navíc
+
+První měsíc ověřoval, jestli kompas po návratu do tichého provozu nezpůsobil tření nebo novou datovou stopu. Druhý měsíc ověřuje samostatnost. To znamená:
+
+- pravidlo se našlo bez toho, aby ho někdo poslal do chatu;
+- člověk podle něj rozhodl bez návratu ke starým kontrolním poznámkám;
+- výstup nevytvořil nové pomocné místo;
+- případná drobná nejistota se vyřešila v pracovním místě, ne novou poradou;
+- po použití zůstala jen stopa, která má jasný účel.
+
+Prakticky stačí projít jeden normální průchod a položit tři otázky:
+
+```text
+Kde člověk kompas našel?
+
+Jaké rozhodnutí podle něj udělal?
+
+Co po rozhodnutí zůstalo a co zmizelo?
+```
+
+Pokud odpovědi vzniknou bez pátrání v historii, kompas je pravděpodobně dost stabilní. Pokud musíte otevřít staré úkoly, dohledávat původní debatu nebo se ptát autora pravidla, druhý měsíc ukazuje, že tichý provoz je zatím spíš přání než realita.
+
+### Čtyři výsledky druhého měsíce
+
+Po jednom normálním průchodu vyberte jeden ze čtyř výsledků:
+
+- `Samostatný provoz`: kompas se použil bez připomínky, bez schvalování a bez nové evidence.
+- `Klid bez situace`: nenastala reálná práce, ve které měl kompas rozhodovat.
+- `Závislost na paměti autora`: pravidlo existuje, ale lidé ho používají jen přes člověka, který ho zavedl.
+- `Náhradní stopa`: pravidlo se použilo, ale vznikla nová tabulka, komentář, export nebo ruční kontrola.
+
+`Samostatný provoz` je nejlepší výsledek. Nevyžaduje další rozbor. Stačí zapsat:
+
+```text
+Ve druhém měsíci se kompas použil samostatně v běžné práci; další otevření vznikne jen při návratovém signálu.
+```
+
+`Klid bez situace` neznamená selhání. Pokud nenastala relevantní práce, nevyrábějte test. Nechte návratový signál beze změny:
+
+```text
+Ve druhém měsíci nenastala situace pro použití kompasu. Nezakládáme kontrolní průchod; čekáme na první reálné použití.
+```
+
+`Závislost na paměti autora` je tiché riziko. Vypadá neškodně, protože práce se nakonec dokončí. Jenže pravidlo ve skutečnosti nežije v systému, ale v hlavě jednoho člověka. Oprava má být malá: doplnit odkaz, zkrátit pravidlo, přejmenovat krok v checklistu nebo odstranit starý název, který člověka posílá špatně.
+
+`Náhradní stopa` znamená, že se kompas formálně použil, ale někde vznikla nová opora. Typicky interní komentář "zkontrolovat později", kopie citlivého příkladu, pomocný seznam, screenshot nebo export. Tady neřešte celý kompas. Zrušte náhradní stopu a upravte nejbližší místo tak, aby příště nebyla potřeba.
+
+### Jak opravit závislost bez školení
+
+Když se ukáže závislost na paměti autora, nesklouzněte hned ke školení týmu. Školení je drahé, snadno se odkládá a často zakrývá jednoduchou chybu v pracovním místě. Nejprve opravte cestu.
+
+Typické malé opravy:
+
+- přidat odkaz na kompas do šablony, kde člověk rozhoduje;
+- přejmenovat nadpis tak, aby odpovídal slovům, která tým používá;
+- přesunout pravidlo z historické poznámky do aktuálního checklistu;
+- zkrátit příklad na obecný vzor;
+- odstranit starou větu, která vede k původnímu kontrolnímu režimu;
+- doplnit jednu rozhodovací otázku přímo do pracovního formuláře.
+
+Příklad:
+
+```text
+Situace:
+Autor case study se ptal vlastníka obsahu, jestli může ponechat přesnou metriku.
+
+Zjištění:
+Pravidlo existuje v kompasu, ale šablona case study na něj neodkazuje.
+
+Nejmenší oprava:
+Do části "Výsledky" se přidává věta: "Přesnou metriku ponech jen tehdy, když je schválená a nutná pro rozhodnutí čtenáře; jinak použij rozmezí nebo anonymizovaný popis."
+
+Co nevzniká:
+Nevzniká školení pro autory ani seznam všech metrik v case studies.
+```
+
+Tady je důležité, že oprava míří do místa práce. Nepřidává další vědomost do hlavy týmu. Zlepšuje trasu, po které člověk stejně jde.
+
+### Privacy-first druhý měsíc
+
+Druhý měsíc je privacy-first zkouška nenápadnosti. Pokud pravidlo chrání data, mělo by snižovat potřebu pomocných kopií, ne je přesouvat jinam. Zvlášť si všímejte situací, kdy někdo kvůli nejistotě uloží víc údajů "na později".
+
+Privacy-first hranice:
+
+- neuchovávejte příklady jen proto, že se podle nich možná jednou bude školit;
+- nepřidávejte sloupec, štítek ani metrikový export bez rozhodovacího účelu;
+- pokud se použije zákaznický příklad, ponechte jen veřejně bezpečnou verzi;
+- staré komentáře s přesnými hodnotami mažte po rozhodnutí;
+- lokální opravu pište jako pravidlo, ne jako popis konkrétního zákazníka;
+- další kontrolu neplánujte podle kalendáře, ale podle návratového signálu.
+
+Dobrá věta po druhém měsíci:
+
+```text
+Kompas se použil při nové case study bez připomínky autora; šablona nyní obsahuje jednu rozhodovací větu a dočasný komentář s přesnou metrikou byl smazán.
+```
+
+Slabá věta:
+
+```text
+Pro jistotu budeme ukládat všechny příklady použití kompasu, abychom měli materiál pro pozdější školení.
+```
+
+Slabá věta možná zní pečlivě, ale vyrábí archiv citlivých situací bez jasné potřeby. Pokud tým opravdu potřebuje školit, ať školí na anonymizovaném vzoru, ne na hromadě reálných pracovních stop.
+
+### Karta druhého měsíce v tichém provozu
+
+Kartu použijte jen při výsledku `Závislost na paměti autora` nebo `Náhradní stopa`. U samostatného provozu stačí jedna věta v logu.
+
+```text
+Kompas:
+
+Druhý měsíc / období:
+
+Reálná pracovní situace:
+
+Výsledek:
+- samostatný provoz
+- klid bez situace
+- závislost na paměti autora
+- náhradní stopa
+
+Kde člověk kompas našel:
+
+Jaké rozhodnutí podle něj udělal:
+
+Nejmenší oprava pracovní trasy:
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Co se výslovně nezakládá:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických příkladech.
+
+Druhý měsíc / období:
+Druhý měsíc po návratu do tichého provozu.
+
+Reálná pracovní situace:
+Nová case study pro službu redesignu webu.
+
+Výsledek:
+Závislost na paměti autora.
+
+Kde člověk kompas našel:
+Nenašel ho v šabloně case study; zeptal se vlastníka obsahu.
+
+Jaké rozhodnutí podle něj udělal:
+Přesná metrika se nahradila rozmezím, protože přesná hodnota nebyla nutná pro rozhodnutí čtenáře.
+
+Nejmenší oprava pracovní trasy:
+Do části "Výsledky" v šabloně case study se doplňuje jedna rozhodovací věta k přesným metrikám.
+
+Co se maže, zkracuje nebo anonymizuje:
+Dočasný komentář s původní hodnotou.
+
+Co se výslovně nezakládá:
+Nevzniká seznam metrik ani školící archiv case studies.
+
+Návratový signál:
+Téma se vrátí jen tehdy, když autor kvůli anonymizaci nedokáže zachovat obchodní význam výsledku.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: vyberte jednu reálnou pracovní situaci z druhého měsíce.
+2. Minuta 2: řekněte, jestli člověk našel kompas bez připomínky.
+3. Minuta 3: pojmenujte rozhodnutí, které podle něj vzniklo.
+4. Minuta 4: vyberte jeden ze čtyř výsledků.
+5. Minuta 5: proveďte nejmenší opravu trasy nebo smažte náhradní stopu.
+6. Minuta 6: zapište, co se výslovně nezakládá a kdy se téma vrátí.
+
+Výstup:
+
+```text
+Ve druhém měsíci je stav kompasu [výsledek]. V reálné situaci [situace] se rozhodlo [rozhodnutí]. Mění se [nejmenší oprava / nic], mizí [náhradní stopa / nic], nezakládáme [nová evidence] a návrat vznikne jen při [návratový signál].
+```
+
+### Checklist druhého měsíce
+
+- Vybrali jsme jednu skutečnou pracovní situaci, ne umělý test?
+- Pokud žádná situace nenastala, nechali jsme kompas v klidu?
+- Je jasné, zda se pravidlo našlo bez autora nebo vlastníka?
+- Popsali jsme konkrétní rozhodnutí, které podle kompasu vzniklo?
+- Neotevřeli jsme znovu první měsíční kontrolu?
+- Pokud vznikla závislost na autorovi, opravujeme pracovní trasu místo školení?
+- Pokud vznikla náhradní stopa, je zrušená nebo zkrácená?
+- Nezůstávají přesné zákaznické, osobní nebo obchodní údaje bez účelu?
+- Je případná oprava v nejbližším pracovním místě?
+- Nezakládáme archiv příkladů, seznam použití ani další kontrolní sloupec?
+- Je návratový signál konkrétnější než "za měsíc se podívat znovu"?
+- Dá se výsledek druhého měsíce shrnout jednou pracovní větou?
+
+Druhý měsíc nemá dokazovat, že kompas je dokonalý. Má ukázat, jestli už nepotřebuje držet za ruku. Když se použije samostatně, nechte ho pracovat. Když se nepoužije, nechte ho čekat. Když závisí na paměti autora, opravte cestu k pravidlu. A když po sobě nechá náhradní stopu, ukliďte ji dřív, než se zabydlí.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o druhém měsíci po návratu stálého provozního kompasu do tichého provozu: ověření samostatnosti bez připomínání, čtyři výsledky, oprava závislosti na autorovi, privacy-first úklid náhradních stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního měsíce po návratu stálého provozního kompasu do tichého provozu: čtyři uzavírací stavy, rušení skrytého dohledu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním měsíci po návratu stálého provozního kompasu do tichého provozu: nízká kontrola najitelnosti, rozhodnutelnosti a čistoty stopy, čtyři výsledky, prevence tichého dohledu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu stálého provozního kompasu: uzavírací stavy, kanonické změny, úklid pomocných stop, privacy-first hranice, karta, mini workshop a checklist.
