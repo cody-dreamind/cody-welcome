@@ -199863,8 +199863,319 @@ Pokud odpověď není jasná, vraťte se ke čtyřem stavům. Neřešte slovíč
 
 Uzavření druhého běžného použití má být klidné. Ne proto, že by na pravidle nezáleželo, ale právě proto, že na něm záleží. Fungující pravidlo má pomáhat práci, ne pořádat kolem sebe nekonečnou konferenci. Jakmile obstojí i podruhé, vraťte mu normální život.
 
+## První návratový signál po úplném uzavření pravidla
+
+Úplné uzavření pravidla neznamená, že se k němu tým už nikdy nesmí vrátit. Znamená to, že návrat má mít jasný důvod. Ne pocit, ne preventivní kontrolu, ne větu "raději se na to podívejme". Skutečný návratový signál je konkrétní situace v běžné práci, která odpovídá hranici zapsané v kanonickém místě.
+
+Tahle část je brzda proti dvěma extrémům. První extrém je pravidlo znovu otevřít při každém drobném šumu. Druhý extrém je ignorovat opakovaný problém jen proto, že jsme přece už jednou řekli hotovo. Dobré uzavření má umět obojí: chránit klid i pustit dovnitř reálný signál.
+
+Začněte větou:
+
+```text
+Návratový signál se objevil, protože [konkrétní běžná situace] odpovídá zapsané hranici [citace nebo krátký popis signálu].
+```
+
+Příklad:
+
+```text
+Návratový signál se objevil, protože se ve dvou různých obchodních situacích znovu připojil původní zákaznický screenshot místo anonymizované rozhodovací věty.
+```
+
+Pokud takovou větu neumíte napsat, nejspíš ještě nemáte návratový signál. Máte podnět, obavu nebo jednotlivou chybu. To není totéž. Jednotlivá chyba může chtít lokální opravu. Opakovaný signál může chtít návrat k pravidlu. Rozdíl je drahý, protože rozhoduje, jestli otevřete malé místo, nebo celý pracovní systém.
+
+### Tři filtry před otevřením pravidla
+
+Než pravidlo znovu otevřete, projděte tři filtry. Stačí krátce, ale písemně.
+
+1. Filtr shody: odpovídá situace původnímu návratovému signálu?
+2. Filtr opakování: stalo se to víc než jednou nebo v místě, kde je dopad opravdu vysoký?
+3. Filtr rozsahu: vyžaduje reakce změnu pravidla, nebo stačí opravit nejbližší pracovní místo?
+
+Šablona:
+
+```text
+Situace:
+
+Zapsaný návratový signál:
+
+Shoda:
+- ano / částečně / ne
+
+Opakování nebo dopad:
+
+Nejmenší možná reakce:
+
+Otevíráme pravidlo?
+- ano / ne / zatím jen lokální oprava
+```
+
+Příklad:
+
+```text
+Situace:
+Obchodník jednou přiložil starý screenshot do interního návrhu follow-upu.
+
+Zapsaný návratový signál:
+Původní screenshot nebo zákaznický kontext se znovu objeví ve dvou různých obchodních situacích.
+
+Shoda:
+Částečně.
+
+Opakování nebo dopad:
+Zatím jednou, návrh neodešel zákazníkovi.
+
+Nejmenší možná reakce:
+Opravit konkrétní návrh a připomenout anonymizovanou větu v sales kartě.
+
+Otevíráme pravidlo?
+Ne, zatím jen lokální oprava.
+```
+
+Tento zápis chrání tým před tím, aby z každého škrábnutí dělal nové kolečko governance. Zároveň ale nedovolí schovat opakovaný problém pod koberec jen proto, že slovo "uzavřeno" vypadá hezky v logu.
+
+### Čtyři výsledky návratového signálu
+
+Po filtrech vyberte jeden ze čtyř výsledků:
+
+1. Šum bez zásahu: situace neodpovídá návratovému signálu a není potřeba žádná změna.
+2. Lokální oprava: signál je částečný, ale stačí opravit jedno nejbližší pracovní místo.
+3. Návrat k pravidlu: signál odpovídá zapsané hranici a pravidlo potřebuje revizi.
+4. Nová samostatná otázka: situace je reálná, ale netýká se původního pravidla.
+
+`Šum bez zásahu` není lenost. Je to disciplína. Pokud někdo jednou položí otázku, která už je v pravidle zodpovězená, nemusíte hned upravovat pravidlo. Stačí odkázat na kanonické místo a nezakládat další stopu.
+
+`Lokální oprava` je vhodná, když problém vznikl v jednom formuláři, jedné šabloně, jednom odkazu nebo jednom neaktuálním příkladu. Opravte to tam. Neotevírejte historii, nevytvářejte workshop, nepřepisujte celou kapitolu procesu.
+
+`Návrat k pravidlu` použijte až tehdy, když signál odpovídá hranici. Například se stejná chyba objeví ve dvou různých situacích, nový kontext pravidlo reálně láme, nebo lidé opakovaně potřebují původní autora, aby pravidlo vysvětlil.
+
+`Nová samostatná otázka` je správná, když se ukáže jiný problém. Třeba pravidlo o anonymizovaných důkazech funguje, ale obchod nemá jasnou šablonu pro veřejnou case study. To není důvod rozšiřovat anonymizační pravidlo. To je nová otázka k případovým studiím.
+
+### Jak otevřít pravidlo bez návratu do mimořádného režimu
+
+Když filtry ukážou, že návrat k pravidlu je oprávněný, otevřete jen revizní okno. Neobnovujte starý dohled.
+
+Revizní okno má mít:
+
+- jednu otázku;
+- jednoho vlastníka;
+- jedno pracovní místo, kde se problém projevil;
+- jeden typ důkazu;
+- datum uzavření;
+- privacy-first hranici, co se kvůli revizi nesbírá.
+
+Šablona:
+
+```text
+Revizní otázka:
+
+Proč návratový signál platí:
+
+Kde se projevil:
+
+Co ověříme:
+
+Co kvůli tomu nesbíráme:
+
+Co zůstává mimo rozsah:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Revizní otázka:
+Je hranice mezi anonymizovaným důkazem a veřejnou případovou studií dost jasná?
+
+Proč návratový signál platí:
+Původní zákaznický kontext se objevil ve dvou různých obchodních materiálech.
+
+Kde se projevil:
+Follow-up e-mail a interní sales karta.
+
+Co ověříme:
+Jestli kanonické místo jasně říká, kdy anonymizovaný důkaz nestačí a kdy je potřeba samostatně schválená case study.
+
+Co kvůli tomu nesbíráme:
+Nekontrolujeme všechny obchodní e-maily, nestahujeme historii komunikace a nevytváříme seznam lidí, kteří pravidlo porušili.
+
+Co zůstává mimo rozsah:
+Nová šablona veřejné case study, redesign sales materiálů a plošné školení.
+
+Vlastník:
+Marketing owner.
+
+Datum uzavření:
+Do pěti pracovních dnů.
+```
+
+Krátké revizní okno je lepší než mlhavé "pojďme to probrat". Když má návrat hranici, tým ví, kdy skončit. Když hranici nemá, mimořádný režim se vrátí pod záminkou péče.
+
+### Privacy-first hranice návratu
+
+Návratový signál nesmí být omluva pro rozšíření sledování. Pokud pravidlo selhalo v běžné práci, první otázka zní: co už máme k dispozici z normálního provozu? Teprve potom přemýšlejte, jestli opravdu chybí nový záznam.
+
+Zakázané zkratky:
+
+- plošně kontrolovat všechny e-maily, follow-upy nebo dokumenty;
+- přidat nové povinné pole jen proto, aby šla chyba lépe najít;
+- ukládat osobní seznam lidí, kteří pravidlo použili špatně;
+- dělat screenshoty zákaznického kontextu pro "důkaz";
+- zavést nový tracker, když stačí ruční kontrola dvou anonymizovaných výstupů.
+
+Lepší postup:
+
+```text
+Použijeme existující anonymizované pracovní výstupy.
+Ověříme jen místo, kde se signál projevil.
+Zapíšeme rozhodovací větu, ne historii lidí.
+Dočasné poznámky smažeme po uzavření revizního okna.
+Pokud potřebujeme příklad, zkrátíme ho na pointu bez osobních a zákaznických detailů.
+```
+
+Codyho komentář: návratový signál není policejní siréna. Je to klepnutí na rameno od reality. Když kvůli němu spustíte plošný dohled, realita vám příště radši nic neřekne, protože bude mít oprávněný strach z tabulky.
+
+### Karta prvního návratového signálu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Zapsaný návratový signál:
+
+Nová situace:
+
+Filtr shody:
+- ano / částečně / ne
+
+Filtr opakování nebo dopadu:
+
+Filtr rozsahu:
+
+Výsledek:
+- šum bez zásahu
+- lokální oprava
+- návrat k pravidlu
+- nová samostatná otázka
+
+Rozhodovací věta:
+
+Nejmenší reakce:
+
+Co výslovně neotevíráme:
+
+Privacy-first hranice:
+
+Co smažeme nebo zkrátíme po uzavření:
+
+Vlastník:
+
+Datum návratu nebo uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Zákaznický důkaz používáme anonymizovaně a bez původního screenshotu.
+
+Kanonické místo:
+Sales karta pro práci s důkazy.
+
+Zapsaný návratový signál:
+Původní screenshot nebo zákaznický kontext se znovu objeví ve dvou různých obchodních situacích.
+
+Nová situace:
+Screenshot se objevil ve follow-upu a potom v interní sales kartě.
+
+Filtr shody:
+Ano.
+
+Filtr opakování nebo dopadu:
+Dvě různé obchodní situace, stejný typ chyby.
+
+Filtr rozsahu:
+Pravděpodobně chybí hranice mezi anonymizovaným důkazem a veřejnou case study.
+
+Výsledek:
+Návrat k pravidlu.
+
+Rozhodovací věta:
+Otevíráme krátké revizní okno, protože návratový signál odpovídá zapsané hranici a týká se hranice použití pravidla.
+
+Nejmenší reakce:
+Doplnit do kanonického místa větu, kdy anonymizovaný důkaz nestačí a je potřeba schválená case study.
+
+Co výslovně neotevíráme:
+Monitoring všech obchodních zpráv, redesign sales materiálů ani plošné školení.
+
+Privacy-first hranice:
+Pracujeme jen s anonymizovanými příklady; nemažeme historii zákazníka do nového dokumentu.
+
+Co smažeme nebo zkrátíme po uzavření:
+Dočasné poznámky z revize a pracovní příklady se zkrátí na jednu anonymizovanou větu.
+
+Vlastník:
+Marketing owner.
+
+Datum návratu nebo uzavření:
+Do pěti pracovních dnů.
+```
+
+### Mini workshop na 7 minut
+
+Workshop použijte jen tehdy, když není jasné, jestli jde o lokální opravu, návrat k pravidlu nebo novou otázku. Pro jasný šum workshop nezakládejte.
+
+Minuta 1: vlastník přečte původní pravidlo a zapsaný návratový signál.
+
+Minuta 2: popíše novou situaci jednou větou.
+
+Minuta 3: tým projde filtr shody.
+
+Minuta 4: tým projde filtr opakování nebo dopadu.
+
+Minuta 5: tým projde filtr rozsahu.
+
+Minuta 6: vybere se jeden ze čtyř výsledků.
+
+Minuta 7: zapíše se nejmenší reakce a privacy-first hranice.
+
+Zakázaná věta:
+
+```text
+Když už to otevíráme, pojďme rovnou zkontrolovat všechno související.
+```
+
+Povolená náhrada:
+
+```text
+Otevíráme jen rozsah, který odpovídá návratovému signálu.
+```
+
+### Checklist prvního návratového signálu
+
+- Máme konkrétní situaci z běžné práce, ne jen pocit?
+- Umíme ji porovnat se zapsaným návratovým signálem?
+- Prošli jsme filtr shody, opakování nebo dopadu a rozsahu?
+- Rozlišili jsme šum, lokální opravu, návrat k pravidlu a novou samostatnou otázku?
+- Pokud jde jen o šum, nezakládáme nový úkol?
+- Pokud jde o lokální opravu, opravujeme nejbližší pracovní místo?
+- Pokud jde o návrat k pravidlu, má revizní okno jasnou otázku, vlastníka a datum uzavření?
+- Pokud jde o novou otázku, nepřilepili jsme ji na staré pravidlo?
+- Neobnovili jsme starý dohled, kontrolní tabulku ani plošné schvalování?
+- Pracujeme s existujícími nebo anonymizovanými výstupy místo nového sběru dat?
+- Je jasné, co se po uzavření smaže nebo zkrátí?
+- Rozhodovací věta říká, proč reakce odpovídá signálu?
+- Zůstává kanonické místo jednoduché?
+
+První návratový signál po úplném uzavření je zkouška dospělosti pravidla. Ne tím, že se už nikdy nic nestane. Ale tím, že tým umí reagovat přesně: nepanikařit, neignorovat, nezvětšovat dohled a nechat privacy-first hranici stát i ve chvíli, kdy se ozve realita.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o prvním návratovém signálu po úplném uzavření pravidla: tři filtry před otevřením, čtyři výsledky signálu, krátké revizní okno, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném měsíci: čtyři uzavírací stavy, kanonické místo, prevence třetí kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném měsíci: čtyři uzavírací stavy, propsání do kanonického místa, ukončení dočasné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního měsíce po změně kontextu stálého provozního kompasu: čtyři uzavírací stavy, propsání do kanonického místa, ukončení mimořádné pozornosti, privacy-first datový úklid, karta, mini workshop a checklist.
