@@ -534,6 +534,8 @@ Zatím žádná nová formulářová pole. Termín se zjistí až v obchodním r
 
 Důležité je, že návrat nemusí znamenat původní řešení. Signál může potvrdit problém, ale ne původní návrh. To je normální a zdravé. Odložený krok není smlouva s minulým nápadem. Je to uložená hypotéza, která se má po návratu znovu zmenšit podle dnešní reality.
 
+Před první novou úpravou proto napište jednu větu, co se od původního odložení změnilo. Pokud věta popisuje jen návrat staré chuti téma řešit, krok zatím neotevírejte. Pokud popisuje nový důkaz, změnu rizika nebo konkrétní provozní tlak, máte důvod pokračovat menší verzí návrhu.
+
 ### Tři brány před znovuotevřením
 
 Než krok pustíte do aktivní práce, projděte tři brány:
