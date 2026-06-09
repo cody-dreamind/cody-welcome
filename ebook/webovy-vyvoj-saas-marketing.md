@@ -198981,8 +198981,271 @@ Datum:
 
 První běžné použití po uzavřeném měsíci je malý test samostatnosti. Když pravidlo obstojí, nechte ho být. Když neobstojí, opravte nejbližší pracovní místo. A když ukáže nový problém, otevřete novou úzkou otázku bez toho, aby se stará měsíční kontrola znovu probudila a začala si říkat "proces".
 
+## Uzavření prvního běžného použití po uzavřeném měsíci
+
+První běžné použití po uzavřeném měsíci samo o sobě ještě nestačí. Je potřeba ho zavřít tak, aby z něj nevznikla nová opakovaná kontrola. V praxi to znamená: vzít výsledek prvního použití, rozhodnout jeden stav, propsat jen nezbytnou změnu a ukončit dočasnou pozornost.
+
+Smyslem uzavření není dokázat, že pravidlo bude fungovat navždy. Smyslem je rozhodnout, jestli se po měsíčním uzavření opravdu vrací do běžného provozu. Pokud ano, tým má přestat pravidlo sledovat zvláštním režimem. Pokud ne, má opravit nejbližší příčinu tření, ne znovu otevřít celý měsíční příběh.
+
+Začněte větou:
+
+```text
+Po prvním běžném použití pravidlo:
+- zůstává v běžném provozu
+- potřebuje jedno dočištění
+- vrací se k lokální opravě
+- otevřelo novou úzkou otázku
+```
+
+Vyberte jen jednu možnost. Směs typu "funguje, ale raději to ještě měsíc sledujme" je většinou jen tichý návrat mimořádné péče. Pokud opravdu potřebujete další sledování, nejspíš nejde o uzavření, ale o novou otázku s vlastním rozsahem.
+
+### Čtyři uzavírací stavy
+
+Stav `zůstává v běžném provozu` použijte, když člověk pravidlo našel, použil a nepotřeboval k tomu historický výklad, schválení autora ani nový pomocný podklad. Uzavírací věta může být krátká:
+
+```text
+Pravidlo po uzavřeném měsíci obstálo při běžném použití; mimořádnou kontrolu dál nevedeme.
+```
+
+Tento stav neznamená, že pravidlo zamykáte navždy. Znamená jen, že další návrat má přijít až přes definovaný návratový signál, ne přes preventivní dohled.
+
+Stav `potřebuje jedno dočištění` použijte, když pravidlo fungovalo, ale okolní pracovní místo pořád nese drobnou starou stopu. Typicky jde o neaktuální větu, starý odkaz, duplicitní šablonu, matoucí název nebo ponechaný dočasný komentář. Dočištění má mít jednu větu:
+
+```text
+Dočistíme jen [místo], aby běžné použití nevracelo starou stopu.
+```
+
+Stav `vrací se k lokální opravě` použijte, když pravidlo člověk našel, ale pracovní místo ho vedlo ke špatnému nebo nejistému výstupu. Lokální oprava se pořád týká stejného pravidla a stejného místa. Neotvíráte strategii, onboarding, celý sales proces ani širší standard.
+
+Stav `otevřelo novou úzkou otázku` použijte jen tehdy, když první běžné použití ukázalo problém mimo původní pravidlo. Například pravidlo pro anonymizovaný důkaz fungovalo, ale ukázalo se, že jiný segment potřebuje úplně jiný typ důkazu. V takové chvíli původní pravidlo nezatěžujte dalšími podmínkami. Zavřete ho pro původní situaci a novou otázku zapište zvlášť.
+
+### Co propsat do kanonického místa
+
+Po uzavření prvního běžného použití se do kanonického místa propsuje jen to, co další člověk potřebuje při práci. Ne historie měsíční kontroly, ne výčet všech pochybností, ne osobní poznámky z ověření.
+
+Stačí jedna z těchto změn:
+
+- ponechat pravidlo beze změny a doplnit datum posledního ověření;
+- upravit jednu větu v šabloně;
+- odstranit starý odkaz, komentář nebo dočasnou kopii;
+- doplnit návratový signál, pokud byl moc vágní;
+- přidat krátkou hranici samostatného použití.
+
+Příklad kanonického zápisu:
+
+```text
+Pravidlo:
+V sales follow-upu používáme anonymizovaný zákaznický důkaz bez původního screenshotu.
+
+Samostatné použití:
+Pokud šablona obsahuje anonymizovaný důkaz a není potřeba nový zákaznický detail, follow-up se neposílá na mimořádné schválení.
+
+Návratový signál:
+Dočasný podklad nebo export se znovu objeví ve dvou různých sales situacích.
+```
+
+To je dost. Není potřeba přidávat seznam lidí, kteří pravidlo použili, ani evidenci všech follow-upů. Kanonické místo má vést práci, ne archivovat úzkost.
+
+### Jak ukončit dočasnou pozornost
+
+Dočasná pozornost po prvním běžném použití se ukončuje aktivně. Pokud ji jen necháte v chatu, poznámkách nebo hlavě vlastníka, bude se vracet pokaždé, když někdo narazí na podobnou situaci.
+
+Projděte tři místa:
+
+- pracovní artefakt, kde pravidlo žije;
+- dočasné poznámky z měsíčního uzavření;
+- komunikační místo, kde tým řešil první použití.
+
+U každého napište, co se s ním stane:
+
+```text
+Pracovní artefakt:
+- aktualizovat / beze změny
+
+Dočasné poznámky:
+- smazat / anonymizovat / ponechat s účelem a datem návratu
+
+Komunikace:
+- uzavřít jednou větou / bez akce
+```
+
+Jednověté uzavření pro tým:
+
+```text
+První běžné použití po uzavřeném měsíci proběhlo bez mimořádné pomoci; pravidlo necháváme v běžném provozu a vracíme se jen při návratovém signálu.
+```
+
+Pokud proběhla drobná oprava:
+
+```text
+První běžné použití ukázalo jen starý odkaz v šabloně; odkaz je odstraněný, pravidlo dál běží bez zvláštní kontroly.
+```
+
+Tahle věta je důležitá hlavně proto, že říká, co se neděje. Nezačíná nová kontrola, nevzniká nový report, nikdo nedostává novou povinnost dokazovat, že pravidlo používá správně.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření se ptá na jednoduchou věc: nezůstala po ověření větší datová stopa než před ním?
+
+Zkontrolujte hlavně:
+
+- screenshoty běžných výstupů;
+- exporty nebo kopie zákaznických údajů;
+- osobní seznamy použití pravidla;
+- dočasné tabulky se jmény lidí;
+- chatová vlákna s citlivými příklady;
+- archivované pracovní poznámky bez účelu.
+
+U každé stopy vyberte jednu akci:
+
+```text
+Smazat:
+
+Anonymizovat:
+
+Ponechat, protože:
+
+Datum dalšího úklidu:
+```
+
+Ponechání musí mít účel. "Pro jistotu" není účel, to je jen datový batoh, který si tým nasazuje před každou cestou do kuchyňky. Pokud důkaz potřebujete kvůli rozhodnutí, zkraťte ho na rozhodovací větu. Pokud ho potřebujete kvůli příkladu, anonymizujte ho a oddělte od původního zákaznického kontextu. Pokud ho nepotřebujete, smažte ho.
+
+Codyho komentář: dobré pravidlo po sobě nemá nechávat konfety z dat. Když každé ověření vyrobí další screenshoty, exporty a poznámky, tak jste možná sice zlepšili proces, ale zároveň jste si založili malý sklad věcí, které jednou někdo bude muset uklízet. A ten někdo budete nejspíš vy, jen unavenější.
+
+### Karta uzavření prvního běžného použití po měsíci
+
+```text
+Pravidlo:
+
+Měsíční uzavření:
+
+První běžné použití:
+
+Výstup práce:
+
+Potřebovalo použití mimořádnou pomoc:
+- ano / ne
+
+Vznikla nová datová stopa:
+- ano / ne
+
+Uzavírací stav:
+- zůstává v běžném provozu
+- potřebuje jedno dočištění
+- vrací se k lokální opravě
+- otevřelo novou úzkou otázku
+
+Uzavírací věta:
+
+Co propsat do kanonického místa:
+
+Co uklidit z dočasných stop:
+
+Co výslovně neotevíráme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Sales follow-up používá anonymizovaný zákaznický důkaz bez původního screenshotu.
+
+Měsíční uzavření:
+Po prvním měsíci pravidlo drželo, měsíční kontrola byla ukončena.
+
+První běžné použití:
+Obchodník poslal follow-up po úvodním hovoru.
+
+Výstup práce:
+E-mail použil anonymizovanou formulaci a nevytvořil nový interní screenshot.
+
+Potřebovalo použití mimořádnou pomoc:
+Ne.
+
+Vznikla nová datová stopa:
+Ne.
+
+Uzavírací stav:
+Zůstává v běžném provozu.
+
+Uzavírací věta:
+Pravidlo obstálo při prvním běžném použití po uzavřeném měsíci; další kontrolu nevedeme.
+
+Co propsat do kanonického místa:
+Doplnit datum ověření a ponechat návratový signál beze změny.
+
+Co uklidit z dočasných stop:
+Uzavřít chatovou poznámku jednou větou, nic nearchivovat.
+
+Co výslovně neotevíráme:
+Neotevíráme sales playbook, monitoring použití šablony ani schvalování follow-upů.
+
+Návratový signál:
+Dočasný podklad nebo export se znovu objeví ve dvou různých sales situacích.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 6 minut
+
+Tento workshop použijte, pokud je u prvního běžného použití víc lidí a hrozí, že si každý odnese jiný závěr.
+
+Minuta 1: vlastník přečte původní pravidlo a výsledek prvního běžného použití.
+
+Minuta 2: tým odpoví jen na otázku, jestli použití potřebovalo mimořádnou pomoc.
+
+Minuta 3: tým odpoví jen na otázku, jestli vznikla nová datová stopa.
+
+Minuta 4: vybere se jeden uzavírací stav.
+
+Minuta 5: zapíše se uzavírací věta a případné jedno dočištění.
+
+Minuta 6: řekne se, co se výslovně neotevírá a kdy se pravidlo znovu vrátí na stůl.
+
+Zakázaná věta pro workshop:
+
+```text
+Pro jistotu to ještě chvíli sledujme.
+```
+
+Povolená náhrada:
+
+```text
+Vrátíme se k tomu jen tehdy, když nastane tento návratový signál:
+```
+
+### Checklist uzavření prvního běžného použití po měsíci
+
+- Vybrali jsme jeden uzavírací stav?
+- Neprodlužujeme měsíční kontrolu jen ze zvyku?
+- Je jasné, jestli použití potřebovalo mimořádnou pomoc?
+- Je jasné, jestli vznikla nová datová stopa?
+- Pokud pravidlo drží, opravdu končí zvláštní pozornost?
+- Pokud je potřeba dočištění, týká se jednoho pracovního místa?
+- Pokud je potřeba lokální oprava, neotevírá celý systém?
+- Pokud vznikla nová otázka, má vlastní rozsah, důkaz a datovou hranici?
+- Propsali jsme do kanonického místa jen to, co další člověk potřebuje při práci?
+- Uklidili jsme dočasné poznámky, screenshoty, exporty nebo osobní evidence?
+- Je zapsané, co výslovně neotevíráme?
+- Návratový signál je konkrétnější než "až budeme mít pocit"?
+- Nezavedli jsme osobní monitoring používání pravidla?
+- Zůstává pravidlo po uzavření lehčí než během měsíční kontroly?
+
+Uzavření prvního běžného použití po měsíci je dobré místo pro zdrženlivost. Pokud pravidlo fungovalo, největší hodnota je nechat ho být. Pokud drhlo, největší hodnota je opravit jedno místo. A pokud ukázalo nový problém, největší hodnota je nepřilepit nový problém na staré pravidlo jen proto, že už máte otevřený dokument.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném měsíci: čtyři uzavírací stavy, propsání do kanonického místa, ukončení dočasné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního měsíce po změně kontextu stálého provozního kompasu: čtyři uzavírací stavy, propsání do kanonického místa, ukončení mimořádné pozornosti, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním měsíci po změně kontextu stálého provozního kompasu: tři měsíční signály, čtyři výsledky kontroly, ochrana před obnovením dohledu, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po změně kontextu stálého provozního kompasu: čtyři uzavírací stavy, uzavírací věta, privacy-first dočištění datové stopy, karta, mini workshop a checklist.
