@@ -197899,8 +197899,286 @@ Druhé běžné použití v [sousední pracovní místo] skončilo stavem [výsl
 
 Druhé běžné použití má kompas poslat dál do tichého provozu, ne ho vrátit na operační stůl. Pokud přenos funguje, zavřete. Pokud chybí věta, doplňte větu. Pokud se vrátil dohled, opravte příčinu nejistoty. A pokud vznikla datová stopa, ukliďte ji dřív, než se začne tvářit jako standardní součást práce.
 
+## Uzavření druhého běžného použití po změně kontextu kompasu
+
+Druhé běžné použití po změně kontextu má jeden hlavní smysl: ověřit, že pravidlo se nepovedlo jen jednou pod dohledem, ale že se umí přenést do sousední práce. Uzavření druhého použití proto nemá být další kontrolní patro. Má rozhodnout, jestli kompas zůstává v tichém provozu, jestli potřebuje jednu přenosovou větu, nebo jestli se ukázala nová datová nebo rozhodovací hrana.
+
+Pracovní otázka:
+
+```text
+Můžeme po druhém běžném použití nechat kompas v novém kontextu běžet bez zvláštní pozornosti, nebo druhé použití ukázalo jednu konkrétní věc k uzavření?
+```
+
+Tato otázka chrání před dvěma typickými přestřely. První je vítězný optimismus: "dvakrát to prošlo, už nikdy se k tomu nevracíme", i když druhé použití proběhlo jen díky neformální pomoci autora pravidla. Druhý je kontrolní úzkost: "dvakrát to prošlo, pro jistotu zavedeme pravidelný dohled". Ani jedno není dobrý provoz. Dobrý provoz umí říct, co se stalo, co se nemění a kdy se věc znovu otevře.
+
+Příklad:
+
+```text
+První použití:
+Anonymizovaný důkaz na enterprise landing page.
+
+Druhé použití:
+Follow-up e-mail odkazující na stejný anonymizovaný důkaz.
+
+Co se ukázalo:
+Účel zůstal stejný, původní citlivý podklad nebyl znovu kopírován a autor kompasu nebyl potřeba.
+
+Uzavření:
+Přenos funguje. Kompas zůstává v tichém provozu, nepřidává se nový sales checklist a návrat nastane jen tehdy, když se ve dvou různých materiálech znovu objeví nejistota, jak důkaz bezpečně použít.
+```
+
+Takové uzavření je krátké, ale důležité. Z druhého použití dělá důkaz samostatnosti, ne další položku na věčné sledování.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden stav:
+
+- `Uzavřít do tichého provozu`: přenos fungoval, nevznikla nová stopa, autor pravidla se nevrátil a není potřeba další oprava.
+- `Uzavřít s přenosovou větou`: pravidlo platí, ale sousední pracovní místo potřebuje krátké vodítko.
+- `Uzavřít po dočištění dat`: druhé použití vytvořilo nebo odhalilo pomocnou stopu, kterou je potřeba smazat, anonymizovat nebo omezit.
+- `Otevřít novou úzkou hranu`: druhé použití už nebylo stejný účel, ale nový typ rozhodnutí.
+
+U `Uzavřít do tichého provozu` nedělejte třetí ověření. Napište uzavírací větu, nechte pravidlo v kanonickém místě a ukončete mimořádnou pozornost. Třetí průchod má přijít přirozeně, ne jako test.
+
+U `Uzavřít s přenosovou větou` doplňte větu tam, kde člověk pracuje. Ne do nové metodiky, ne do prezentace o kultuře, ne do dalšího playbooku. Pokud tření vzniklo ve follow-up e-mailu, věta patří k e-mailové šabloně nebo k místu, odkud se e-mail skládá.
+
+U `Uzavřít po dočištění dat` nejdřív uklízejte, potom zavírejte. Když zůstala kopie původního zákaznického podkladu, přesná hodnota v komentáři nebo screenshot v pracovním vlákně, závěr ještě není hotový. Hotový je až ve chvíli, kdy je jasné, co se maže, co zůstává, proč to zůstává a kdo za to odpovídá.
+
+U `Otevřít novou úzkou hranu` si dejte pozor na maskovanou revizi celého kompasu. Nová hrana má mít úzkou otázku. Například: "jak použít anonymizovaný důkaz v interním sales školení" je úzká otázka. "jak předělat pravidla pro všechny důkazy ve firmě" je rozjetý vlak s pěkným nátěrem.
+
+### Kdy druhé použití opravdu zavřít
+
+Druhé použití je připravené k uzavření, když platí tři věci:
+
+- člověk dokázal určit, jestli jde o stejný účel;
+- výstup vznikl bez neplánovaného dohledu;
+- datová stopa je menší nebo stejná jako při prvním použití.
+
+Pokud některá věc neplatí, neznamená to automaticky velkou opravu. Znamená to jen, že uzavření musí obsahovat konkrétní reakci.
+
+Příklad reakce:
+
+```text
+Problém:
+Vlastník obsahu nevěděl, jestli může použít anonymizovaný důkaz i v e-mailu.
+
+Nejmenší reakce:
+Do šablony follow-up e-mailu doplnit jednu přenosovou větu.
+
+Co se neotevírá:
+Neotevírá se celý sales playbook, obchodní školení ani nový schvalovací proces.
+
+Privacy-first dopad:
+Nevzniká nová kopie zákaznického podkladu; používá se veřejná anonymizovaná formulace.
+```
+
+Dobré uzavření je konkrétní a malé. Slabé uzavření nechává neurčitou péči:
+
+```text
+Budeme sledovat, jestli se to v dalších materiálech používá správně.
+```
+
+Tahle věta vypadá rozumně, ale neříká, kdo co sleduje, kdy přestane, jaká data sbírá a jaký signál vlastně čeká. Pokud chcete sledování, přepište ho na návratový signál. Pokud návratový signál nejde napsat, pravděpodobně jde jen o neklid.
+
+### Uzavírací věta po druhém použití
+
+Použijte krátký formát:
+
+```text
+Druhé běžné použití v [sousední pracovní místo] uzavíráme jako [stav]. Mění se [nic / jedna přenosová věta / datový úklid / nová úzká otázka], neotevíráme [rozsah], datová stopa [stav] a návrat nastane při [signál].
+```
+
+Vyplněná verze:
+
+```text
+Druhé běžné použití ve follow-up e-mailu uzavíráme do tichého provozu. Nemění se nic, neotevíráme sales playbook ani schvalování e-mailů, datová stopa zůstává u veřejné anonymizované formulace a návrat nastane jen při opakované nejistotě ve dvou různých sousedních materiálech.
+```
+
+Verze s přenosovou větou:
+
+```text
+Druhé běžné použití ve follow-up e-mailu uzavíráme s jednou přenosovou větou v e-mailové šabloně. Neotevíráme celý sales playbook, datová stopa se nemění a návrat nastane, pokud dva lidé znovu sáhnou po původním zákaznickém podkladu místo veřejného anonymizovaného důkazu.
+```
+
+Rozdíl je praktický. První závěr říká "nechte to být". Druhý říká "opravte jedno místo a potom to nechte být". Ani jeden nevyrábí novou pravidelnou kontrolu.
+
+### Privacy-first uzavření druhého použití
+
+Privacy-first uzavření druhého použití je přísnější než u prvního v jedné věci: druhý průchod často svádí k opakovanému použití původních podkladů. Tým si řekne, že když už jednou citlivý podklad viděl, může ho znovu vytáhnout pro přesnost. To je přesně chvíle, kdy má kompas pomoci.
+
+Krátká kontrola:
+
+```text
+Použili jsme při druhém průchodu stejný účel?
+
+Stačil nám veřejný nebo interně bezpečný anonymizovaný výstup?
+
+Nevznikla nová kopie původního citlivého podkladu?
+
+Pokud kopie vznikla, má jasný účel, omezený přístup, vlastníka a datum smazání?
+
+Nevzniklo sledování lidí jen proto, abychom hlídali používání pravidla?
+```
+
+Privacy-first závěr může být jednoduchý:
+
+```text
+Datová stopa se po druhém použití nezvětšuje: follow-up e-mail používá jen veřejnou anonymizovanou formulaci, původní podklad se znovu nekopíruje a nevzniká evidence používání pravidla podle lidí.
+```
+
+Pokud stopa vznikla, napište konkrétní úklid:
+
+```text
+Dočasný screenshot se maže z pracovního vlákna, v šabloně zůstává jen anonymizovaná věta a přístup k původnímu podkladu zůstává omezený na původní zdroj pravdy.
+```
+
+Codyho komentář: druhé použití je skvělé místo pro prevenci "malých výjimek". Jedna kopie pro přesnost, druhá kopie pro obchod, třetí kopie pro školení a najednou máte datovou botanickou zahradu. Hezké na pohled, mizerné na údržbu.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Kompas:
+
+Uzavřená změna kontextu:
+
+První běžné použití:
+
+Druhé běžné použití:
+
+Sousední pracovní místo:
+
+Stejný účel:
+- ano / ne / nejisté
+
+Výsledek druhého použití:
+- přenos funguje
+- chybí přenosová věta
+- vrátil se autor pravidla
+- vznikla nová datová stopa
+
+Uzavírací stav:
+- uzavřít do tichého provozu
+- uzavřít s přenosovou větou
+- uzavřít po dočištění dat
+- otevřít novou úzkou hranu
+
+Co se mění:
+
+Co se výslovně neotevírá:
+
+Dočasná kontrola:
+- končí / nevzniká / pokračuje do [konkrétní podmínka]
+
+Datová stopa:
+- nevznikla
+- maže se
+- anonymizuje se
+- zůstává s účelem, vlastníkem a revizí
+
+Nejmenší bezpečný důkaz:
+
+Návratový signál:
+
+Uzavírací věta:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických důkazech.
+
+Uzavřená změna kontextu:
+Použití pravidla v enterprise landing page.
+
+První běžné použití:
+Anonymizovaný důkaz v sekci "Výsledky".
+
+Druhé běžné použití:
+Follow-up e-mail pro poptávky z enterprise segmentu.
+
+Sousední pracovní místo:
+Sales e-mail odkazující na stejný veřejný důkaz.
+
+Stejný účel:
+Ano.
+
+Výsledek druhého použití:
+Přenos funguje.
+
+Uzavírací stav:
+Uzavřít do tichého provozu.
+
+Co se mění:
+Nic.
+
+Co se výslovně neotevírá:
+Sales playbook, audit všech e-mailů ani nové schvalování důkazů.
+
+Dočasná kontrola:
+Nevzniká.
+
+Datová stopa:
+Nevznikla.
+
+Nejmenší bezpečný důkaz:
+Veřejná anonymizovaná formulace a odkaz na kanonickou stránku.
+
+Návratový signál:
+Dva různí lidé si znovu nebudou jistí, zda mohou stejný anonymizovaný důkaz použít v sousedním materiálu.
+
+Uzavírací věta:
+Druhé běžné použití ve follow-up e-mailu uzavíráme do tichého provozu; datová stopa se nezvětšuje, neotevírá se sales playbook a návrat nastane jen při opakované nejistotě ve dvou různých sousedních materiálech.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 7 minut
+
+1. Minuta 1: připomeňte první a druhé použití.
+2. Minuta 2: potvrďte, jestli druhé použití mělo stejný účel.
+3. Minuta 3: vyberte výsledek druhého použití.
+4. Minuta 4: vyberte uzavírací stav.
+5. Minuta 5: napište jednu změnu nebo potvrďte, že se nemění nic.
+6. Minuta 6: projděte datovou stopu a dočasnou kontrolu.
+7. Minuta 7: napište uzavírací větu a návratový signál.
+
+Výstup:
+
+```text
+Druhé použití kompasu v [situace] mělo [stejný / jiný] účel a uzavírá se jako [stav]. Mění se [jedna věc / nic], neotevíráme [rozsah], datová stopa [stav] a další návrat nastane jen při [signál].
+```
+
+### Checklist uzavření druhého běžného použití
+
+- Je jasně popsané první i druhé použití?
+- Víme, jestli druhé použití mělo stejný účel?
+- Vybrali jsme jeden výsledek druhého použití?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud přenos fungoval, opravdu nezakládáme třetí kontrolu?
+- Pokud chyběla přenosová věta, patří do nejbližšího pracovního místa?
+- Pokud se vrátil autor pravidla, víme, jaká nejistota ho přivolala?
+- Pokud vznikla datová stopa, je uklizená nebo má účel, vlastníka, přístupovou hranici a konec?
+- Je výslovně zapsané, co se neotevírá?
+- Nevzniká nový tracker, report, archiv variant ani schvalovací proces pro jistotu?
+- Stačí nejmenší bezpečný důkaz místo původního citlivého podkladu?
+- Dočasná kontrola končí nebo má přesnou podmínku konce?
+- Návratový signál vychází z opakovaného pracovního tření?
+- Dá se závěr předat jednou větou?
+
+Uzavření druhého běžného použití je chvíle, kdy kompas přestává být čerstvě opravená věc a vrací se do normálního života. Pokud funguje, nechte ho v klidu. Pokud potřebuje jednu větu, doplňte jednu větu. Pokud odhalil datovou stopu, ukliďte ji. A pokud ukázal novou hranu, otevřete ji úzce, bez přepisování všeho, co už funguje.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po změně kontextu stálého provozního kompasu: čtyři uzavírací stavy, uzavírací věta, privacy-first dočištění datové stopy, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o druhém běžném použití po změně kontextu stálého provozního kompasu: přenositelnost pravidla do sousedního pracovního místa, samostatnost bez autora, privacy-first datová střídmost, přenosová věta, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po změně kontextu stálého provozního kompasu: čtyři uzavírací stavy, uzavírací věta, privacy-first dočištění pomocných stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním běžném použití po uzavřené změně kontextu stálého provozního kompasu: ověření samostatnosti pravidla v nové situaci, čtyři výsledky použití, nejbližší oprava tření, privacy-first hranice, karta, mini workshop a checklist.
