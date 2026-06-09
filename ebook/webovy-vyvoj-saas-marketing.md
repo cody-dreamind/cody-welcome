@@ -195558,8 +195558,230 @@ Po druhém běžném použití po signálu je stav [uzavírací stav]. Zůstáv�
 
 Uzavření druhého běžného použití po návratovém signálu je poslední brzda před návratem do klidu. Pokud kompas funguje, nechte ho být. Pokud nefunguje, otevřete jen konkrétní hranu. A pokud po něm zůstaly stopy, ukliďte je dřív, než začnou vypadat jako nový systém.
 
+## První měsíc po návratu kompasu do tichého provozu
+
+Po druhém běžném použití se kompas nemá dál hlídat jako zvláštní téma. Přesto je užitečné po prvním měsíci v tichém provozu udělat velmi nízkou kontrolu. Ne jako audit, ne jako nový report, ale jako krátké ověření, že se z pravidla nestal skrytý proces nebo zapomenutá věta v dokumentu.
+
+Pracovní otázka:
+
+```text
+Zůstal kompas po měsíci v tichém provozu použitelný, dohledatelný a bez nové datové stopy?
+```
+
+Tato otázka má tři hranice. Kontroluje jen měsíc od návratu do tichého provozu. Sleduje jen běžná pracovní místa, kde se kompas přirozeně používá. A hledá jen signály, které už vznikly v práci: dokončené články, upravené landing pages, obchodní materiály, support odpovědi, interní checklisty nebo krátké poznámky vlastníka.
+
+Není cílem zjistit, kolikrát přesně byl kompas použit. To by často znamenalo zavést evidenci používání, a tím tichý provoz rozbít. Cílem je ověřit, jestli při reálné práci nevzniklo nové tření, nové obcházení nebo nová stopa, kterou tým založil "pro jistotu".
+
+### Tři tiché signály
+
+První měsíční kontrola má pracovat se třemi tichými signály:
+
+- `Najitelnost`: lidé vědí, kde kompas je, nebo ho najdou přes běžnou pracovní trasu.
+- `Rozhodnutelnost`: kompas pomáhá rozhodnout bez návratu k historii a bez ručního schvalování.
+- `Čistota stopy`: po použití nezůstávají nové komentáře, exporty, seznamy případů ani citlivé detaily.
+
+Každý signál ověřte jednou otázkou:
+
+```text
+Najitelnost:
+Kde by člověk kompas hledal při běžné práci?
+
+Rozhodnutelnost:
+Jaké rozhodnutí podle něj udělal bez další pomoci?
+
+Čistota stopy:
+Co po použití vzniklo a co se po uzavření smazalo?
+```
+
+Pokud na otázky nemáte odpověď, neznamená to hned problém. Možná se kompas za měsíc prostě nepoužil. To je legitimní stav. Problém vzniká až tehdy, když se kompas použil a tým kvůli němu založil novou kontrolu, nebo když se měl použít, ale člověk ho nenašel a rozhodoval podle starých podkladů.
+
+### Čtyři výsledky prvního měsíce
+
+Po nízké měsíční kontrole vyberte jeden ze čtyř výsledků:
+
+- `Tichý provoz drží`: kompas je dostupný, použitelný a bez nové evidence.
+- `Neutrální klid`: kompas se za měsíc nepoužil a není důvod ho uměle testovat.
+- `Lokální tření`: jedno pracovní místo brání použití, ale jádro kompasu je v pořádku.
+- `Tichý dohled se vrátil`: kolem kompasu vznikla neformální kontrola, seznam nebo schvalování.
+
+`Tichý provoz drží` nevyžaduje další akci. Pokud už kontrola proběhla, uzavřete ji jednou větou:
+
+```text
+Kompas po prvním měsíci v tichém provozu zůstává v běžném rytmu; další kontrola vznikne jen při návratovém signálu.
+```
+
+`Neutrální klid` je důležitý stav, protože brání falešné aktivitě. Pokud se kompas nepoužil, nepřipravujte umělý test jen proto, aby bylo co napsat do review. Zapište pouze návratový signál:
+
+```text
+Kompas se za měsíc nepoužil. Neotevíráme ověření; téma se vrátí při první reálné situaci, kde pravidlo rozhoduje.
+```
+
+`Lokální tření` řešte u nejbližšího místa. Typicky stačí opravit odkaz, název kroku, chybějící větu v checklistu nebo příliš dlouhý příklad. Neotevírejte celý kompas, pokud problém spočívá jen v tom, že ho člověk našel o jeden dokument vedle.
+
+`Tichý dohled se vrátil` je varování. Znamená, že někdo založil pomocnou kontrolu bez jasného konce: poznámku v tasku, seznam případů, měsíční připomínku, dodatečné schvalování nebo ruční export. První reakce má být odstranění této kontroly, ne její přejmenování na "minimální governance".
+
+Codyho komentář: když se tichý provoz začne jmenovat governance, většinou už někde vznikla tabulka. A tabulka, která vznikla ze strachu, málokdy sama od sebe odejde. Musí se slušně, ale pevně vyprovodit.
+
+### Jak kontrolu udržet nízkou
+
+Nízká kontrola má trvat několik minut a nemá vytvářet samostatnou agendu. Držte se těchto pravidel:
+
+- projděte jen existující pracovní místa, ne celý archiv;
+- ptejte se vlastníka, ne celé skupiny;
+- nehledáte počet použití, ale známky tření;
+- neopisujte historii návratového signálu;
+- nezakládejte nový dokument, pokud není potřeba lokální oprava;
+- pokud něco mažete, smažte to hned při kontrole.
+
+Praktický příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických příkladech.
+
+Měsíční signál:
+V měsíci vznikly dvě krátké landing page ukázky a jedna case study.
+
+Kontrola:
+Autoři použili šablonu bez schvalování. V jednom tasku zůstal komentář s přesnou metrikou.
+
+Výsledek:
+Lokální tření.
+
+Akce:
+Komentář se maže a v checklistu se doplňuje věta "po zveřejnění smaž interní metrický komentář".
+
+Co nevzniká:
+Nevzniká evidence všech metrik ani další měsíční kontrola case studies.
+```
+
+Tento příklad ukazuje správný rozsah. Neřeší celý obsahový proces. Neotevírá právní revizi. Jen uklízí konkrétní stopu a vrací kompas do normální práce.
+
+### Privacy-first měsíční kontrola
+
+První měsíc po návratu do tichého provozu je dobrý okamžik zkontrolovat, jestli kompas opravdu snižuje datovou stopu. Pokud pravidlo chrání zákaznické údaje, interní obchodní informace nebo osobní data, nemá po něm zůstat nový archiv citlivých příkladů.
+
+Privacy-first hranice:
+
+- nekopírujte konkrétní zákaznické příklady do měsíční kontroly;
+- používejte anonymizované vzory místo přesných metrik;
+- mažte dočasné komentáře, které už neslouží rozhodnutí;
+- ponechte jen kanonickou větu nebo odkaz, který další člověk použije;
+- pokud vzniká lokální oprava, napište ji bez osobních a obchodních detailů;
+- další kontrolu plánujte jen při návratovém signálu, ne z preventivní nervozity.
+
+Dobrá měsíční věta:
+
+```text
+Po prvním měsíci kompas zůstává použitelný bez nové evidence; jeden dočasný komentář s přesnou metrikou byl smazán a pravidlo zůstává v šabloně.
+```
+
+Slabá měsíční věta:
+
+```text
+Pro lepší přehled budeme ukládat všechny příklady, kde se kompas použil, včetně původních hodnot a interních poznámek.
+```
+
+Slabá věta vyrábí přesně to, čemu se kompas snažil zabránit: další datové místo bez jasného rozhodovacího účelu.
+
+### Karta prvního měsíce v tichém provozu
+
+Kartu použijte jen tehdy, když výsledek není čistý `Tichý provoz drží`, nebo když při kontrole mažete konkrétní stopu.
+
+```text
+Kompas:
+
+Období:
+
+Kde byl přirozeně vidět:
+
+Výsledek:
+- tichý provoz drží
+- neutrální klid
+- lokální tření
+- tichý dohled se vrátil
+
+Nejmenší akce:
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Co se výslovně nezakládá:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických příkladech.
+
+Období:
+První měsíc po návratu do tichého provozu.
+
+Kde byl přirozeně vidět:
+Case study a dvě landing page ukázky.
+
+Výsledek:
+Lokální tření.
+
+Nejmenší akce:
+Do checklistu se doplňuje věta o smazání dočasného metrického komentáře po uzavření.
+
+Co se maže, zkracuje nebo anonymizuje:
+Komentář s přesnou zákaznickou metrikou se maže.
+
+Co se výslovně nezakládá:
+Nevzniká seznam použití kompasu ani měsíční report metrik.
+
+Návratový signál:
+Téma se vrátí jen při situaci, kdy rozmezí nebo anonymizace mění obchodní význam příkladu.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: pojmenujte kompas a období.
+2. Minuta 2: řekněte, kde byl kompas přirozeně vidět.
+3. Minuta 3: vyberte jeden ze čtyř výsledků.
+4. Minuta 4: proveďte nejmenší akci nebo potvrďte, že žádná není.
+5. Minuta 5: smažte zbytečné stopy a pojmenujte návratový signál.
+
+Výstup:
+
+```text
+Po prvním měsíci v tichém provozu je stav [výsledek]. Mění se [nejmenší akce / nic], mizí [stopa / nic], nezakládáme [nová evidence] a kompas se vrátí jen při [návratový signál].
+```
+
+### Checklist prvního měsíce v tichém provozu
+
+- Kontrola vychází z běžné práce, ne z umělého testu?
+- Je jasné, zda byl kompas přirozeně použit?
+- Pokud použit nebyl, neotevíráme ověření jen kvůli pocitu aktivity?
+- Je vybraný jeden ze čtyř výsledků?
+- U lokálního tření opravujeme nejbližší pracovní místo?
+- U vráceného dohledu rušíme pomocnou kontrolu místo její formalizace?
+- Nezapisujeme počet použití, pokud k tomu nemáme rozhodovací důvod?
+- Jsou dočasné komentáře, exporty a screenshoty smazané nebo zkrácené?
+- Nezůstávají přesné zákaznické, osobní nebo obchodní detaily bez účelu?
+- Je návratový signál viditelný v běžné práci?
+- Nevzniká další měsíční review jen proto, že jedno právě proběhlo?
+- Umí vlastník říct výsledek jednou větou?
+
+První měsíc v tichém provozu má potvrdit, že kompas umí zůstat obyčejnou pracovní pomůckou. Když drží, nechte ho být. Když se objeví malé tření, opravte nejbližší místo. A když se vrátí dohled, odstraňte ho dřív, než se začne tvářit jako standard. Tichý provoz se neudržuje tím, že se o něm pořád mluví. Udržuje se tím, že pravidlo pomáhá rozhodovat a po rozhodnutí po sobě uklidí.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o prvním měsíci po návratu stálého provozního kompasu do tichého provozu: nízká kontrola najitelnosti, rozhodnutelnosti a čistoty stopy, čtyři výsledky, prevence tichého dohledu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu stálého provozního kompasu: uzavírací stavy, kanonické změny, úklid pomocných stop, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratovém signálu stálého provozního kompasu: přenos pravidla do sousední situace, prevence třetího kontrolního kolečka, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratovém signálu stálého provozního kompasu: čtyři uzavírací stavy, rozlišení kanonické změny a dočasných stop, privacy-first úklid, karta, mini workshop a checklist.
