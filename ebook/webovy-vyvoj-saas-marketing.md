@@ -198754,6 +198754,233 @@ První měsíc po změně kontextu kompasu uzavíráme jako [stav]. Mění se [j
 
 Uzavření prvního měsíce je poslední brzda proti tomu, aby se z dobrého pravidla stal malý dohledový systém. Když kompas drží, nechte ho pracovat. Když potřebuje jednu opravu, udělejte jednu opravu. Když po sobě nechal data, ukliďte je. A když nový kontext ukázal jiný problém, otevřete novou úzkou otázku místo toho, abyste starou kontrolu natahovali jako gumu od tepláků.
 
+## První běžné použití po uzavřeném měsíci
+
+Když se první měsíc po změně kontextu uzavře, pravidlo se má vrátit do normální práce. To zní jednoduše, ale právě tady se často objeví nový drobný problém: tým sice formálně ukončil mimořádnou kontrolu, ale při prvním dalším použití se pořád chová, jako by pravidlo bylo křehké. Lidé si nechávají další kopie, posílají výsledek na schválení, doplňují kontrolní poznámky nebo raději znovu vytahují historii, aby měli jistotu.
+
+První běžné použití po uzavřeném měsíci má proto ověřit, že se pravidlo opravdu vrátilo do provozu. Ne že je perfektní. Ne že se už nikdy nezmění. Jen že ho člověk umí použít bez mimořádné péče, bez dalšího reportu a bez nové datové stopy.
+
+Začněte otázkou:
+
+```text
+Dokáže člověk po uzavřeném měsíci použít pravidlo jako běžnou součást práce, aniž by znovu otevíral měsíční kontrolu?
+```
+
+Pokud ano, pravidlo má klid. Pokud ne, nejdřív zjistěte, co se opravdu stalo. Možná chybí jedna věta v šabloně. Možná zůstal starý odkaz v rozcestníku. Možná člověk nevěděl, že mimořádná kontrola skončila. To jsou malé provozní opravy, ne důvod znovu spustit celý měsíční režim.
+
+### Co znamená běžné použití
+
+Běžné použití je situace, která by nastala i bez testu:
+
+- obchodník použije sales follow-up šablonu;
+- editor upraví krátký výřez z rukopisu;
+- marketing owner zavře slabý podnět z review;
+- delivery tým použije anonymizovaný zákaznický důkaz;
+- vlastník obsahu aktualizuje jednu pracovní kartu.
+
+Neříkejte člověku dopředu, že právě ověřuje pravidlo. Stačí sledovat výstup práce. Pokud mu předem připomenete celou historii, ověřujete paměť člověka, ne kvalitu pracovního místa.
+
+Krátký scénář:
+
+```text
+Pravidlo po uzavřeném měsíci:
+
+Běžná pracovní situace:
+
+Kde člověk začíná:
+
+Jaký výstup má vzniknout:
+
+Co už se nemá dít:
+
+Jaká data kvůli tomu nesbíráme:
+```
+
+Příklad:
+
+```text
+Pravidlo po uzavřeném měsíci:
+V sales follow-upu používáme anonymizovaný zákaznický důkaz a nevytahujeme původní pracovní screenshot.
+
+Běžná pracovní situace:
+Obchodník posílá follow-up po úvodním hovoru.
+
+Kde člověk začíná:
+Ve follow-up šabloně.
+
+Jaký výstup má vzniknout:
+E-mail s anonymizovaným důkazem a odkazem na veřejně použitelný kontext.
+
+Co už se nemá dít:
+Nemá vzniknout další screenshot, interní kopie ani dotaz na mimořádné schválení.
+
+Jaká data kvůli tomu nesbíráme:
+Neevidujeme, kdo přesně šablonu použil; stačí kontrola, jestli šablona nevede k novému dočasnému podkladu.
+```
+
+Tento scénář je záměrně úzký. Neřeší celý sales proces, kvalitu nabídky ani všechny možné varianty follow-upu. Kontroluje jen to, jestli pravidlo po měsíčním uzavření opravdu žije jako normální pracovní věta.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Drží v běžném provozu: pravidlo bylo použité bez mimořádné pomoci a bez nové datové stopy.
+- Drobně dočistit pracovní místo: pravidlo platí, ale jedna šablona, odkaz nebo popisek pořád nese starou stopu.
+- Vrátit k lokální opravě: člověk pravidlo našel, ale pracovní místo ho vedlo k nejasnému nebo špatnému výstupu.
+- Otevřít novou úzkou otázku: problém není v návratu do provozu, ale v novém kontextu, který pravidlo nepokrývá.
+
+Stav `držet v běžném provozu` je plnohodnotný výsledek. Nepřidávejte další kontrolu jen proto, že jste nic neopravili. Právě to je cílem: pravidlo se použilo a systém nepotřeboval zvláštní péči.
+
+Stav `drobně dočistit pracovní místo` má skončit jednou opravou. Například přepsat starý popisek, odstranit archivní odkaz nebo smazat kopii šablony. Jakmile oprava začne vyžadovat víc míst, napište novou kartu. Jinak z drobného úklidu potichu vyroste druhé review.
+
+Stav `otevřít novou úzkou otázku` nepoužívejte jako zkratku k velkému přepisu. Nová otázka musí mít vlastní rozsah, důkaz a datovou hranici. Staré pravidlo se tím neprodlužuje; uzavírá se jako použitelné pro původní situaci a vedle něj vzniká nová práce.
+
+### Nevracejte mimořádnou péči zadními dveřmi
+
+Typické skryté návraty mimořádné péče:
+
+- někdo si vede osobní seznam použití pravidla;
+- tým posílá každý běžný výstup na schválení autorovi pravidla;
+- v chatu vznikají screenshoty "pro jistotu";
+- šablona obsahuje větu "raději ověřit s týmem";
+- kontrola pravidla se dostane do každého týdenního meetingu, i když návratový signál nenastal.
+
+Tyto věci vypadají opatrně. Ve skutečnosti říkají, že pravidlo ještě není opravdu předané. Pokud musí běžný výstup pokaždé projít mimořádnou kontrolou, nejde o stabilní pravidlo. Jde o pravidlo s lidskou berličkou.
+
+Správná reakce není přidat další vysvětlení. Nejdřív zjistěte, proč berlička vznikla:
+
+```text
+Které místo nedalo člověku dost jistoty?
+Je to šablona, nadpis, příklad, návratový signál, nebo stará stopa v okolí?
+```
+
+Potom opravte právě to místo. Pokud člověk neví, jestli může pravidlo použít bez schválení, doplňte do šablony větu o samostatném použití. Pokud se bojí datové stopy, doplňte privacy-first hranici. Pokud ho mate starý odkaz, ukliďte odkaz. Nepřidávejte nový kontrolní rituál.
+
+### Privacy-first kontrola prvního použití
+
+První běžné použití po uzavřeném měsíci nesmí vytvořit novou evidenci jen proto, že chcete mít jistotu. Privacy-first varianta je jednoduchá: sledujte výsledek práce a případnou starou stopu, ne člověka.
+
+Stačí zapsat:
+
+```text
+Výstup vznikl:
+- ano / ne
+
+Pravidlo šlo použít bez mimořádné pomoci:
+- ano / ne
+
+Vznikl nový dočasný podklad, export, screenshot nebo osobní evidence:
+- ano / ne
+
+Jedna oprava, pokud je potřeba:
+```
+
+Nevzniká:
+
+- analytika čtení šablony;
+- osobní skóre dodržování pravidla;
+- tabulka všech použití podle lidí;
+- archiv screenshotů běžných výstupů;
+- delší retence pracovních poznámek jen kvůli pocitu jistoty.
+
+Codyho komentář: když pravidlo po měsíci funguje, neinstalujte mu chůvičku. Jestli opravdu potřebuje chůvičku, tak není dospělé pravidlo, ale rozpracovaný experiment v kabátě standardu. A kabáty standardům sluší jen tehdy, když pod nimi není chaos.
+
+### Karta prvního běžného použití po uzavřeném měsíci
+
+```text
+Pravidlo:
+
+Měsíční uzavření:
+
+Běžná pracovní situace:
+
+Kde člověk začal:
+
+Výstup práce:
+
+Použil pravidlo bez mimořádné pomoci:
+- ano / ne
+
+Výsledek:
+- drží v běžném provozu
+- drobně dočistit pracovní místo
+- vrátit k lokální opravě
+- otevřít novou úzkou otázku
+
+Pokud dočistit, jaké jedno místo:
+
+Pokud lokální oprava, jaké tření:
+
+Pokud nová otázka, jaká:
+
+Co výslovně neotevíráme:
+
+Privacy-first výsledek:
+
+Co mažeme nebo anonymizujeme:
+
+Návratový signál:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Sales follow-up používá anonymizovaný zákaznický důkaz bez původního screenshotu.
+
+Měsíční uzavření:
+Pravidlo drží po datovém úklidu; mimořádná měsíční kontrola skončila.
+
+Běžná pracovní situace:
+Follow-up po úvodním hovoru.
+
+Kde člověk začal:
+Ve follow-up šabloně.
+
+Výstup práce:
+E-mail použil anonymizovanou formulaci a nevyžádal nový interní podklad.
+
+Použil pravidlo bez mimořádné pomoci:
+Ano.
+
+Výsledek:
+Drží v běžném provozu.
+
+Co výslovně neotevíráme:
+Neotevíráme sales playbook, schvalování každého follow-upu ani report používání důkazů.
+
+Privacy-first výsledek:
+Nevznikl nový screenshot, export ani evidence podle lidí.
+
+Co mažeme nebo anonymizujeme:
+Žádný nový podklad nevznikl.
+
+Návratový signál:
+Dočasný podklad nebo export se znovu objeví ve dvou různých sales situacích.
+
+Datum:
+2026-06-09.
+```
+
+### Checklist prvního běžného použití
+
+- Proběhlo použití v přirozené pracovní situaci?
+- Začal člověk tam, kde by začal i bez testu?
+- Vznikl běžný pracovní výstup?
+- Pravidlo šlo použít bez mimořádné pomoci, schválení nebo historického výkladu?
+- Nevznikl nový dočasný podklad, export, screenshot ani osobní evidence?
+- Rozlišili jsme drobné dočištění od lokální opravy a nové otázky?
+- Pokud je potřeba oprava, týká se jednoho pracovního místa?
+- Pokud vznikla nová otázka, má vlastní rozsah a datovou hranici?
+- Nevrátili jsme měsíční kontrolu zadními dveřmi?
+- Je zapsané, co výslovně neotevíráme?
+- Je návratový signál pořád konkrétní a opakovatelný?
+- Zůstává pravidlo po kontrole lehčí, ne těžší?
+
+První běžné použití po uzavřeném měsíci je malý test samostatnosti. Když pravidlo obstojí, nechte ho být. Když neobstojí, opravte nejbližší pracovní místo. A když ukáže nový problém, otevřete novou úzkou otázku bez toho, aby se stará měsíční kontrola znovu probudila a začala si říkat "proces".
+
 ## Pracovní log
 
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního měsíce po změně kontextu stálého provozního kompasu: čtyři uzavírací stavy, propsání do kanonického místa, ukončení mimořádné pozornosti, privacy-first datový úklid, karta, mini workshop a checklist.
@@ -199636,3 +199863,4 @@ Uzavření prvního měsíce je poslední brzda proti tomu, aby se z dobrého pr
 - 2026-06-07: Doplněna úvodní podkapitola o druhém běžném cyklu po uzavřené první údržbě: samostatnost pravidla v běžné práci, čtyři výsledky cyklu, poslední lokální dotažení, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého běžného review do tichého provozu: přepis pravidla do přítomného času, zrušení skryté kontroly, privacy-first úklid, karta a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po převodu reakce: čtyři stavy výsledku, dočištění jednoho místa, slabé kanonické místo, nová smyčka při návratovém signálu, privacy-first úklid, karta a checklist.
+- 2026-06-09: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném měsíci: samostatné použití pravidla bez mimořádné péče, čtyři výsledné stavy, privacy-first kontrola, karta a checklist.
