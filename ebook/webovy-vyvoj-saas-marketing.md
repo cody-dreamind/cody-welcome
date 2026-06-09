@@ -200645,8 +200645,174 @@ Pokud je odpověď "uklízíme jedno místo", nedělejte z toho revizi pravidla.
 
 První běžné použití po uzavřeném návratovém signálu má být skoro obyčejné. Právě v tom je jeho hodnota. Pravidlo se vrátí do práce, nezvětší kolem sebe dohled a tým si ověří, že umí reagovat na realitu bez toho, aby pokaždé postavil nový proces.
 
+## Uzavření prvního běžného použití po uzavřeném návratovém signálu
+
+První běžné použití po uzavřeném návratovém signálu nekončí tím, že se člověk podívá, jestli pravidlo šlo použít. Končí až ve chvíli, kdy tým ví, co se s tímto zjištěním děje dál. Jinak se z běžného použití snadno stane další poloviční dohled: pravidlo sice funguje, ale někdo ho ještě "pro jistotu" sleduje, ukládá pomocné poznámky a při každém dalším použití se tváří, že možná zase začíná mimořádná fáze.
+
+Uzavření má být krátké. Nejde o druhou revizi návratového signálu. Jde o rozhodnutí, jestli se pravidlo vrací do úplně normálního provozu, potřebuje jednu lokální úpravu, má slabě propsané uzavření signálu, nebo přineslo novou otázku mimo původní větev.
+
+Začněte větou:
+
+```text
+První běžné použití ukázalo:
+
+Proto teď:
+
+Do běžného pravidla se propsalo:
+
+Co neotevíráme:
+
+Jaká data, kontroly nebo exporty rušíme nebo dál nevytváříme:
+```
+
+Příklad:
+
+```text
+První běžné použití ukázalo:
+Obchodník našel aktuální pravidlo v discovery šabloně a použil novou otázku bez vysvětlování historie návratového signálu.
+
+Proto teď:
+Pravidlo se vrací do normálního obchodního rytmu.
+
+Do běžného pravidla se propsalo:
+Jedna věta u otázky na rozhodovací horizont: pokud zákazník neumí termín pojmenovat, obchod zapisuje jen nejbližší známý spouštěč rozhodnutí.
+
+Co neotevíráme:
+Neotevíráme lead scoring, novou kvalifikační tabulku ani kontrolní meeting k návratovému signálu.
+
+Jaká data dál nevytváříme:
+Nevzniká nové pole pro velikost firmy, automatické obohacení kontaktu ani export hovorů pro samostatné sledování.
+```
+
+Takový zápis je schválně neokázalý. Má zavřít zvláštní pozornost, ne vytvořit novou složku dokumentace. Když je pravidlo použitelné, běžný provoz si ho má vzít zpět bez doprovodné kapely.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden stav:
+
+- Vrátit do běžného provozu: pravidlo fungovalo, člověk ho našel a starý návratový signál se nevrátil.
+- Dočistit jedno místo: pravidlo fungovalo, ale jedno pracovní místo pořád nese starou stopu nebo slabou formulaci.
+- Dopsat uzavření signálu: běžné použití ukázalo, že problém není v pravidle, ale v tom, že původní návratový signál nebyl dost jasně uzavřený.
+- Otevřít novou otázku: objevilo se nové tření, které nesouvisí s původním návratovým signálem a zaslouží si vlastní kartu.
+
+První stav znamená konec zvláštní péče. Nezakládejte druhé běžné použití jen proto, že první prošlo dobře. Druhé použití má smysl jen tehdy, když bylo součástí původní stop podmínky, nebo když první průchod ukázal přenosové riziko mezi rolemi, šablonami nebo kanonickými místy.
+
+Druhý stav má být opravdu lokální. Pokud je stará stopa v jedné šabloně, opravte jednu šablonu. Pokud je ve třech místech, už to není lokální dočištění a je fér otevřít novou otázku o zdroji pravdy.
+
+Třetí stav neznamená návrat do mimořádného režimu. Znamená jen to, že závěr návratového signálu potřebuje lepší větu. Typicky chybí hranice: co se po signálu změnilo, co zůstalo stejné a kdy by se téma otevřelo znovu.
+
+Čtvrtý stav je nejzrádnější. Nová otázka se ráda tváří jako pokračování staré smyčky, protože se objevila na stejném pracovním místě. Nenechte ji přilepit k původnímu pravidlu jen kvůli místu nálezu. Pokud jde o jiný problém, dejte mu vlastní začátek, vlastní stop podmínku a vlastní privacy-first hranici.
+
+### Co propsat a co smazat
+
+Uzavření prvního běžného použití má dvě části: propsání a úklid.
+
+Propsání znamená, že pravidlo v kanonickém místě odpovídá tomu, co se při běžném použití skutečně osvědčilo. Nemusí obsahovat celou historii. Stačí krátká pracovní věta, kterou člověk použije při další stejné situaci.
+
+Úklid znamená, že zmizí pomocné stopy, které vznikly jen kvůli návratovému signálu nebo ověření po něm. Typicky:
+
+- dočasná poznámka "zkontrolovat po prvním použití";
+- pomocný seznam situací, který už nemá vlastní účel;
+- interní připomínka, která by dál vyvolávala dojem mimořádného režimu;
+- stará varianta šablony s původní instrukcí;
+- export nebo ruční tabulka, která měla sloužit jen k jednorázovému ověření.
+
+Neuklízejte ale důkaz, který je součástí rozhodovací paměti. Rozdíl je jednoduchý: rozhodovací záznam vysvětluje, proč pravidlo platí. Dočasná stopa pomáhala během ověření. První ponechte stručně a na správném místě. Druhou smažte nebo archivujte podle interního režimu, aby se netvářila jako živá práce.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má být konkrétní. Nestačí napsat "bez nových dat". Napište, co přesně nevzniká, protože pravidlo prošlo běžným použitím:
+
+```text
+Díky uzavření prvního běžného použití dál nevzniká:
+```
+
+Příklady:
+
+- nové formulářové pole pro obchodní kvalifikaci;
+- export hovorů do pomocné tabulky;
+- sledování kliknutí na interní šablonu;
+- nový dashboard jen pro kontrolu jednoho pravidla;
+- automatické obohacování kontaktů;
+- delší retence poznámek, které už neslouží rozhodnutí.
+
+Tato věta je důležitá hlavně u malých procesních věcí. Týmy často nepřidají velký tracker najednou. Přidají "jen" jednu tabulku, jeden screenshot, jedno pole, jeden dočasný report. Po půl roce z toho vznikne datová krajina, kterou nikdo původně neplánoval a každý ji trochu obchází. Uzavření běžného použití je dobré místo, kde takové stopy zastavit dřív, než se usadí.
+
+Codyho komentář: dočasná tabulka je jako dočasná polička v kanceláři. Vznikne za pět minut, slouží "jen chvíli" a za rok na ní leží věci, o kterých nikdo nechce mluvit. U dat je to stejné, jen méně viditelné a otravnější při úklidu.
+
+### Karta uzavření prvního běžného použití po signálu
+
+```text
+Název pravidla:
+
+Původní návratový signál:
+
+Jak byl signál uzavřený:
+
+Kde proběhlo první běžné použití:
+
+Co se stalo:
+
+Výsledek:
+- vrátit do běžného provozu / dočistit jedno místo / dopsat uzavření signálu / otevřít novou otázku
+
+Co se propsalo do kanonického místa:
+
+Co se uklízí:
+
+Co výslovně neotevíráme:
+
+Jaká data, kontroly nebo exporty dál nevznikají:
+
+Kde zůstává rozhodovací záznam:
+
+Datum uzavření:
+```
+
+Karta má být poslední zvláštní stopa této smyčky. Pokud po ní vznikají další poznámky, je něco špatně: buď pravidlo není připravené do běžného provozu, nebo tým jen neumí pustit mimořádnou pozornost.
+
+### Mini workshop na 6 minut
+
+Minuta 1: vlastník přečte původní návratový signál a jeho uzavření.
+
+Minuta 2: člověk, který pravidlo použil, řekne, co při běžném použití skutečně udělal.
+
+Minuta 3: tým vybere jeden ze čtyř uzavíracích stavů.
+
+Minuta 4: zapíše jednu větu do kanonického místa nebo potvrdí, že už tam je.
+
+Minuta 5: smaže nebo označí k úklidu dočasné ověřovací stopy.
+
+Minuta 6: doplní privacy-first větu o tom, jaká data dál nevznikají.
+
+Hlídací otázka:
+
+```text
+Zavíráme smyčku, nebo si jen potichu necháváme další dohled?
+```
+
+Pokud si necháváte další dohled, pojmenujte proč. Když důvod nejde napsat jednou větou, pravděpodobně ho nepotřebujete.
+
+### Checklist uzavření prvního běžného použití po signálu
+
+- Je jasné, kde proběhlo první běžné použití?
+- Víme, co se při použití skutečně stalo, bez dlouhé historie?
+- Vybrali jsme jeden uzavírací stav?
+- Pokud pravidlo drží, vrací se do běžného provozu bez další zvláštní kontroly?
+- Pokud je potřeba dočištění, je omezené na jedno pracovní místo?
+- Pokud chybí věta k uzavření signálu, doplňujeme ji místo obnovy mimořádného režimu?
+- Pokud vznikla nová otázka, má vlastní kartu a vlastní stop podmínku?
+- Je kanonické místo aktuální?
+- Uklízíme dočasné poznámky, seznamy, exporty nebo připomínky?
+- Je zapsané, co výslovně neotevíráme?
+- Je konkrétně napsané, jaká data, kontroly nebo exporty dál nevznikají?
+- Umí tým říct, proč tato smyčka končí právě teď?
+
+Dobře uzavřené první běžné použití po návratovém signálu má tichý výsledek: pravidlo dál pracuje, starý signál je vyřízený a kolem tématu nevzniká nový dohled. To je praktická disciplína. Ne proto, že by tým ignoroval realitu, ale protože umí rozlišit běžnou práci od dalšího procesu.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, propsání a úklid pracovních stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratovém signálu: ověření pravidla bez mimořádné péče, čtyři výsledky použití, prevence návratu dohledu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po úplném uzavření pravidla: čtyři uzavírací stavy, propsání do kanonického místa, prevence skryté následné kontroly, privacy-first úklid, šablona, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním návratovém signálu po úplném uzavření pravidla: tři filtry před otevřením, čtyři výsledky signálu, krátké revizní okno, privacy-first hranice, karta, mini workshop a checklist.
