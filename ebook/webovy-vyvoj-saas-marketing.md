@@ -201091,8 +201091,227 @@ Když odpověď míří k jistotě bez rozhodnutí, workshop ukončete. Jistota 
 
 Druhé běžné použití po uzavřeném návratovém signálu má pravidlu vrátit přenositelnost. Když obstojí, nechte ho být. Když neobstojí, opravte nejbližší místo nebo otevřete novou úzkou otázku. Hlavně z něj nedělejte třetí, čtvrté a páté dokazování, že tým umí pracovat bez dohledu.
 
+## Uzavření druhého běžného použití po uzavřeném návratovém signálu
+
+Druhé běžné použití po uzavřeném návratovém signálu je už konec velmi úzké smyčky. Nezačínalo proto, aby tým znovu prověřil celé pravidlo. Začínalo proto, že první běžné použití ukázalo konkrétní přenosové riziko: pravidlo mohlo fungovat v jednom pracovním místě, ale ještě nebylo jasné, jestli ho najde a použije i sousední role, šablona nebo provozní situace.
+
+Uzavření proto nesmí znít obecně. Věta "ověřili jsme, že to funguje" je příliš měkká. Lepší je napsat, co se stalo s přenosovým rizikem, co se propsalo do kanonického místa a co se po této smyčce už dál nehlídá.
+
+Použijte větu:
+
+```text
+Druhé běžné použití uzavíráme jako [přenos potvrzen / lokální navigace dočištěna / návratový signál znovu otevřen / samostatná otázka oddělena], protože [konkrétní důkaz]. Dál už neověřujeme [rozsah], dokud se neobjeví [návratový signál].
+```
+
+Příklad:
+
+```text
+Druhé běžné použití uzavíráme jako lokální navigaci dočištěnou, protože onboardingový e-mail použil anonymizovaný důkaz správně po doplnění odkazu na pravidlo. Dál už neověřujeme další onboardingové šablony, dokud se znovu neobjeví původní screenshot nebo žádost o výjimku.
+```
+
+Tahle věta chrání tým před rozpliznutím. Druhé použití buď potvrdilo přenos, vyžádalo si jednu lokální opravu, vrátilo původní signál, nebo odkrylo samostatnou otázku. Nic mezi tím není potřeba dlouze hýčkat.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden stav:
+
+1. Přenos potvrzen: pravidlo obstálo i v sousedním pracovním místě bez mimořádné pomoci.
+2. Lokální navigace dočištěna: pravidlo platí, ale sousední místo potřebovalo odkaz, nadpis nebo krátkou vysvětlivku.
+3. Návratový signál znovu otevřen: původní problém se vrátil a nestačí ho opravit jen v lokální šabloně.
+4. Samostatná otázka oddělena: druhé použití ukázalo jiné téma, které nepatří do původního pravidla.
+
+`Přenos potvrzen` znamená tichý provoz. Karta druhého použití se zavře, do pracovního rytmu se nepřidává další kontrola a pravidlo se znovu otevře jen při návratovém signálu.
+
+`Lokální navigace dočištěna` znamená jednu malou úpravu vstupního místa. Neopravujte celou dokumentaci. Pokud problém byl v tom, že onboardingová šablona neodkazovala na pravidlo, doplňte odkaz. Pokud se člověk ztratil v názvu sekce, upravte název. Pokud chyběla věta "použij anonymizovaný důkaz bez screenshotu", doplňte ji tam, kde práce začíná.
+
+`Návratový signál znovu otevřen` znamená návrat k příčině. Tady se smyčka nezavírá jako úspěšná. Neznamená to ale ani návrat do širokého auditu. Otevřete jen otázku, proč se stejný signál vrátil v sousedním místě. Často nejde o text pravidla, ale o slabé vlastnictví zdroje pravdy.
+
+`Samostatná otázka oddělena` chrání původní pravidlo před přetížením. Pokud druhé použití ukázalo nejasnou odpovědnost za veřejné reference, bezpečnost schvalování, tón komunikace nebo obchodní výjimky, založte novou kartu. Původní pravidlo nezvětšujte tak, aby začalo řešit všechno.
+
+### Co se propsat smí
+
+Po druhém použití se do kanonického místa smí propsat jen to, co zlepší další běžné použití bez dalšího dohledu:
+
+- jedna uzavírací věta;
+- zpřesněný návratový signál;
+- odkaz z lokální šablony do kanonického pravidla;
+- krátká vysvětlivka u pracovního místa, kde lidé začínají;
+- nová samostatná karta, pokud vznikla jiná otázka.
+
+Do kanonického místa naopak nepatří celý průběh ověření, jména lidí, kompletní zákaznické příklady, screenshoty, pracovní chat ani srovnávací tabulka týmů. Tyto věci mohou krátkodobě pomoct při práci, ale po uzavření smyčky obvykle jen zvětšují datovou stopu a zamlžují pravidlo.
+
+Mini příklad správného propsání:
+
+```text
+Pravidlo:
+Zákaznické důkazy používáme anonymizovaně a bez původního screenshotu.
+
+Návratový signál:
+Původní screenshot se znovu objeví v obchodním, onboardingovém nebo veřejném materiálu.
+
+Lokální navigace:
+Onboardingová šablona odkazuje na toto pravidlo v části "důkaz hodnoty".
+```
+
+To stačí. Tým nepotřebuje vědět, kdo kdy šablonu upravil a jak dlouho se o tom mluvilo. Potřebuje vědět, jak se má příště rozhodnout.
+
+### Uzavírací karta
+
+```text
+Pravidlo:
+
+Uzavřený návratový signál:
+
+Proč existovalo druhé běžné použití:
+
+Sousední pracovní místo:
+
+Výsledek druhého použití:
+- přenos potvrzen
+- lokální navigace dočištěna
+- návratový signál znovu otevřen
+- samostatná otázka oddělena
+
+Důkaz jednou větou:
+
+Co se propsalo do kanonického místa:
+
+Co se lokálně upravilo:
+
+Co se dál neověřuje:
+
+Návratový signál po uzavření:
+
+Dočasné podklady smazané nebo ponechané do:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Zákaznické důkazy používáme anonymizovaně a bez původního screenshotu.
+
+Uzavřený návratový signál:
+Screenshot zákaznického výstupu se objevil v obchodním materiálu.
+
+Proč existovalo druhé běžné použití:
+První běžné použití proběhlo v sales follow-upu, ale customer success používá podobný důkaz v onboardingovém e-mailu.
+
+Sousední pracovní místo:
+První onboardingový e-mail po zahájení spolupráce.
+
+Výsledek druhého použití:
+Lokální navigace dočištěna.
+
+Důkaz jednou větou:
+Customer success použil anonymizovanou větu správně po doplnění odkazu do onboardingové šablony.
+
+Co se propsalo do kanonického místa:
+Zpřesněný návratový signál a lokální odkaz z onboardingové šablony.
+
+Co se lokálně upravilo:
+Jedna věta v části "důkaz hodnoty".
+
+Co se dál neověřuje:
+Nekontrolujeme další onboardingové e-maily ani nezakládáme schvalování důkazů.
+
+Návratový signál po uzavření:
+Původní screenshot se znovu objeví v jakémkoli zákaznickém materiálu.
+
+Dočasné podklady smazané nebo ponechané do:
+Dočasná pracovní poznámka smazaná po propsání věty do šablony.
+
+Vlastník:
+Customer success owner.
+
+Datum:
+2026-06-09.
+```
+
+### Jak smyčku opravdu zavřít
+
+Uzavření není hotové ve chvíli, kdy někdo dopíše kartu. Hotové je až tehdy, když další člověk ví, co má udělat bez znalosti celé historie. Pro praktické uzavření stačí projít tři otázky:
+
+- Kde člověk příště začne práci?
+- Najde tam pravidlo nebo odkaz bez vysvětlování?
+- Je jasné, kdy se pravidlo znovu otevře?
+
+Pokud odpověď na první otázku není konkrétní, pravidlo ještě nemá pracovní místo. Pokud odpověď na druhou otázku zní "zeptá se autora", pravidlo ještě není předané. Pokud odpověď na třetí otázku zní "uvidíme", smyčka ještě nemá návratový signál.
+
+Nejmenší dobré uzavření může vypadat takto:
+
+```text
+Příště práce začíná v onboardingové šabloně. Šablona odkazuje na kanonické pravidlo práce s důkazy. Pravidlo znovu otevřeme jen tehdy, když se původní screenshot nebo jiný identifikovatelný důkaz objeví v zákaznickém materiálu.
+```
+
+To je klidný provoz. Není potřeba nový meeting, nový report ani nový sloupec v tabulce.
+
+### Privacy-first uzavření
+
+Privacy-first hodnota se při uzavírání ukáže hlavně v tom, co po sobě nenecháte. Po druhém běžném použití smažte nebo zkraťte dočasné stopy, které vznikly jen kvůli ověření přenosu:
+
+- pracovní screenshoty;
+- neanonymizované příklady;
+- exporty e-mailů nebo poptávek;
+- komentáře s osobními detaily;
+- tabulky porovnávající role nebo lidi;
+- dočasné checklisty, které už nebudou součástí běžné práce.
+
+Zachovejte jen rozhodnutí, návratový signál a případnou lokální navigační opravu. Pokud něco musíte ponechat kvůli právnímu, smluvnímu nebo provoznímu důvodu, napište účel a retenční dobu. Bez účelu a retenční doby je to jen stará data v kabátu "pro jistotu".
+
+Privacy-first uzavírací věta:
+
+```text
+Po druhém použití zůstává jen rozhodnutí a lokální odkaz. Dočasné podklady k ověření přenosu se mažou; další data se nesbírají, dokud se neobjeví návratový signál.
+```
+
+Codyho komentář: nejhezčí důkaz dobrého pravidla je, že se po uzavření stane nudným. Lidé ho najdou, použijí a nikdo kolem toho nezačne stavět malý kontrolní chrám. Ano, velmi efektní chrám. Pořád zbytečný.
+
+### Mini workshop na 5 minut
+
+Minuta 1: vlastník přečte výsledek druhého běžného použití.
+
+Minuta 2: tým vybere jeden ze čtyř uzavíracích stavů.
+
+Minuta 3: zapíše jednu větu, co se propsalo do kanonického místa nebo lokální šablony.
+
+Minuta 4: určí, co se dál neověřuje a jaký návratový signál pravidlo znovu otevře.
+
+Minuta 5: smaže nebo označí dočasné podklady k úklidu.
+
+Hlídací otázka:
+
+```text
+Pomáhá nám další zápis příště rozhodnout, nebo jen dokazuje, že jsme byli pečliví?
+```
+
+Když zápis jen dokazuje pečlivost, zkraťte ho. Pečlivost má být vidět v kvalitě rozhodnutí, ne v tloušťce záznamu.
+
+### Checklist uzavření druhého běžného použití po signálu
+
+- Je jasné, proč druhé běžné použití vůbec existovalo?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Máme důkaz zapsaný jednou větou?
+- Je jasné, co se propsalo do kanonického místa?
+- Pokud chyběla lokální navigace, opravili jsme jen nejbližší pracovní místo?
+- Pokud se návratový signál vrátil, otevřeli jsme úzkou otázku místo další lokální záplaty?
+- Pokud vznikla samostatná otázka, oddělili jsme ji mimo původní pravidlo?
+- Je napsané, co se dál neověřuje?
+- Má pravidlo návratový signál pro další otevření?
+- Smazali jsme nebo časově omezili dočasné podklady?
+- Nevznikl nový tracker, export, seznam lidí ani archiv screenshotů?
+- Umí další člověk pravidlo najít bez znalosti celé historie?
+- Končí smyčka běžným provozem, ne skrytou třetí kontrolou?
+
+Uzavřené druhé běžné použití má být krátké, konkrétní a trochu nezajímavé. To je dobře. Pravidlo se už nemá předvádět. Má tiše pomáhat v práci, dokud ho reálný návratový signál znovu nepozve ke stolu.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, propsání do kanonického místa, uzavírací karta, privacy-first úklid, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratovém signálu: přenosové riziko, čtyři výsledky použití, prevence třetí kontroly, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, propsání a úklid pracovních stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratovém signálu: ověření pravidla bez mimořádné péče, čtyři výsledky použití, prevence návratu dohledu, privacy-first kontrola, karta, mini workshop a checklist.
