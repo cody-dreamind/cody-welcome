@@ -196235,8 +196235,225 @@ Ve druhém měsíci je stav kompasu [výsledek]. V reálné situaci [situace] se
 
 Druhý měsíc nemá dokazovat, že kompas je dokonalý. Má ukázat, jestli už nepotřebuje držet za ruku. Když se použije samostatně, nechte ho pracovat. Když se nepoužije, nechte ho čekat. Když závisí na paměti autora, opravte cestu k pravidlu. A když po sobě nechá náhradní stopu, ukliďte ji dřív, než se zabydlí.
 
+## Uzavření druhého měsíce po návratu kompasu do tichého provozu
+
+Druhý měsíc po návratu kompasu do tichého provozu je poslední místo, kde má smysl kompas ještě vědomě zavírat jako samostatné téma. Pokud se i tady začne plánovat další kontrola, kompas se pomalu vrací z tiché pomůcky do provozní agendy. To může být někdy oprávněné, ale nemá se to stát jen proto, že tým rád kontroluje věci, které už fungují.
+
+Uzavření druhého měsíce odpovídá na jednu otázku:
+
+```text
+Je kompas po druhém měsíci dost samostatný na dlouhodobý klid, nebo se ukázala konkrétní hrana, kterou musíme opravit?
+```
+
+Tato otázka má záměrně jen dvě hlavní možnosti. Buď kompas zůstává v dlouhodobém klidu a další práce vznikne až při návratovém signálu. Nebo se ukázala jedna konkrétní hrana: závislost na autorovi, náhradní stopa, špatně umístěné pravidlo, nejasné rozhodovací slovo nebo datová stopa, kterou je potřeba uklidit. V takovém případě neotevírejte celý kompas. Zavřete druhý měsíc jednou opravou.
+
+Nejhorší výsledek je mezistav "raději to ještě chvíli sledujme". Ten nevypadá dramaticky, ale často založí nový rytmus bez vlastníka, účelu a konce. Pokud je potřeba sledování, napište přesně co, proč, kdo a kdy skončí. Pokud to napsat nejde, nejspíš nejde o sledování, ale o nervozitu.
+
+### Čtyři uzavírací stavy druhého měsíce
+
+Po druhém měsíci vyberte jeden uzavírací stav:
+
+- `Dlouhodobý klid`: kompas funguje samostatně nebo nenastala situace, která by vyžadovala zásah.
+- `Zavřeno lokální opravou`: jedna pracovní trasa byla opravena a není potřeba další zvláštní kontrola.
+- `Zrušena náhradní stopa`: pomocná evidence, komentář, export nebo schvalování byly odstraněny.
+- `Úzký návrat`: kompas se neotevírá celý, ale vzniká jedna přesná otázka k úpravě pravidla.
+
+`Dlouhodobý klid` je výchozí stav. Použijte ho, když druhý měsíc ukázal samostatný provoz, nebo když nenastala reálná situace pro použití kompasu. Zápis má být krátký:
+
+```text
+Po druhém měsíci kompas zůstává v dlouhodobém klidu. Další otevření vznikne jen při návratovém signálu v reálné práci.
+```
+
+`Zavřeno lokální opravou` patří k situaci, kdy pravidlo fungovalo, ale cesta k němu nebyla dost dobrá. Oprava má zůstat v nejbližším pracovním místě: šabloně, checklistu, briefu, redakčním procesu, obchodní kartě nebo support odpovědi. Po této opravě už neplánujte další kontrolu jen kvůli tomu, že oprava vznikla.
+
+`Zrušena náhradní stopa` použijte, když se kolem kompasu objevila pomocná evidence. Tady je důležité stopu nejen smazat, ale i pochopit, proč vznikla. Pokud vznikla z nejistoty, doplňte jednu rozhodovací větu. Pokud vznikla z chybějícího místa pro pravidlo, přesuňte pravidlo tam. Pokud vznikla z obavy o odpovědnost, pojmenujte vlastníka rozhodnutí.
+
+`Úzký návrat` je jediný stav, který dovoluje další práci na kompasu. Musí ale mít tvar jedné otázky, ne otevřeného review:
+
+```text
+Úzký návrat:
+Jak formulovat pravidlo pro metriky v zákaznických příkladech, aby anonymizace nezničila obchodní význam výsledku?
+```
+
+To je něco jiného než:
+
+```text
+Znovu projít celý kompas a zkontrolovat, jestli je aktuální.
+```
+
+Druhá věta otevírá široké dveře. První věta má kliku jen na jednom místě.
+
+### Co se po druhém měsíci už nemá dít
+
+Po uzavření druhého měsíce by se neměly dít tři věci:
+
+- pravidelná kontrola kompasu bez návratového signálu;
+- sběr příkladů použití kompasu pro budoucí jistotu;
+- neformální schvalování výstupů člověkem, který kompas zavedl.
+
+Každá z nich vypadá bezpečně. Ve skutečnosti ale vrací do systému práci, kterou měl kompas odstranit. Pravidelná kontrola vyrábí agendu. Sběr příkladů vyrábí datovou stopu. Neformální schvalování vyrábí závislost na člověku.
+
+Pokud některá z těchto věcí zůstává, napište její účel a konec:
+
+```text
+Pomocná kontrola zůstává jen do:
+
+Její rozhodovací účel:
+
+Vlastník:
+
+Co se po konci smaže:
+```
+
+Když neumíte vyplnit aspoň první dvě položky, pomocná kontrola nemá po uzavření druhého měsíce co dělat.
+
+### Praktický příklad uzavření
+
+```text
+Kompas:
+Datové minimum v zákaznických příkladech.
+
+Výsledek druhého měsíce:
+Závislost na paměti autora.
+
+Uzavírací stav:
+Zavřeno lokální opravou.
+
+Co se opravilo:
+Šablona case study má v části "Výsledky" jednu rozhodovací větu k přesným metrikám.
+
+Co se maže:
+Dočasný komentář s původní hodnotou a poznámkou "ověřit s vlastníkem".
+
+Co se výslovně nezakládá:
+Nevzniká školení, seznam použití kompasu ani nový schvalovací krok.
+
+Návratový signál:
+Téma se vrátí jen tehdy, když autor nedokáže bez přesné hodnoty zachovat obchodní význam příkladu.
+```
+
+Tento výsledek je dostatečný. Pravidlo je blíž práci, autor nemusí příště hledat vlastníka, citlivá stopa zmizela a tým si nevyrábí novou kontrolní vrstvu. Zároveň se nezavírají oči před tím, že kompas může mít hranu. Jen se čeká na reálný signál, ne na kalendář.
+
+### Privacy-first uzavření druhého měsíce
+
+Uzavření druhého měsíce má být přísnější než první měsíc. První měsíc ještě toleruje krátkou kontrolu, protože kompas se právě vrátil do ticha. Druhý měsíc už má chránit dlouhodobý klid. To znamená méně poznámek, méně kopií a méně "pro jistotu".
+
+Privacy-first pravidla pro uzavření:
+
+- ponechte jen kanonické pravidlo a případnou lokální opravu;
+- smažte pracovní komentáře, které už neslouží rozhodnutí;
+- nepřenášejte zákaznické příklady do školících archivů;
+- anonymizované vzory pište bez osobních, obchodních a zbytečně přesných údajů;
+- pokud musí něco zůstat kvůli jasnému provoznímu účelu, nechte to v systému určeném pro tento účel, ne v obsahových poznámkách;
+- další návrat vázejte na reálnou rozhodovací situaci, ne na preventivní datum.
+
+Codyho komentář: dlouhodobý klid není lenost. Je to disciplína nechat fungující věc nebýt centrem pozornosti. Produktivita někdy znamená přestat se tvářit, že další kontrola je automaticky zodpovědnější než žádná kontrola.
+
+### Karta uzavření druhého měsíce
+
+```text
+Kompas:
+
+Období:
+
+Výsledek druhého měsíce:
+- samostatný provoz
+- klid bez situace
+- závislost na paměti autora
+- náhradní stopa
+
+Uzavírací stav:
+- dlouhodobý klid
+- zavřeno lokální opravou
+- zrušena náhradní stopa
+- úzký návrat
+
+Co zůstává v kanonickém místě:
+
+Co se opravilo v nejbližší pracovní trase:
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Co se výslovně nezakládá:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických příkladech.
+
+Období:
+Druhý měsíc po návratu do tichého provozu.
+
+Výsledek druhého měsíce:
+Závislost na paměti autora.
+
+Uzavírací stav:
+Zavřeno lokální opravou.
+
+Co zůstává v kanonickém místě:
+Pravidlo používat přesné hodnoty jen tehdy, když jsou schválené a nutné pro rozhodnutí čtenáře.
+
+Co se opravilo v nejbližší pracovní trase:
+Do šablony case study se doplnila rozhodovací věta v části "Výsledky".
+
+Co se maže, zkracuje nebo anonymizuje:
+Dočasný komentář s původní přesnou hodnotou.
+
+Co se výslovně nezakládá:
+Nevzniká školení, seznam metrik, pravidelná kontrola ani nový schvalovací krok.
+
+Návratový signál:
+Téma se vrátí jen tehdy, když anonymizace nebo rozmezí oslabí obchodní význam výsledku.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 5 minut
+
+1. Minuta 1: připomeňte výsledek druhého měsíce.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: řekněte, co zůstává v kanonickém místě.
+4. Minuta 4: smažte, zkraťte nebo anonymizujte pomocnou stopu.
+5. Minuta 5: zapište, co se nezakládá a kdy se téma vrátí.
+
+Výstup:
+
+```text
+Po druhém měsíci je kompas [uzavírací stav]. Zůstává [kanonické pravidlo], mění se [lokální oprava / nic], mizí [pomocná stopa / nic], nezakládáme [nová agenda] a návrat vznikne jen při [návratový signál].
+```
+
+### Checklist uzavření druhého měsíce
+
+- Je vybraný jeden uzavírací stav?
+- Je jasné, zda kompas přechází do dlouhodobého klidu?
+- Pokud vznikla lokální oprava, je v nejbližší pracovní trase?
+- Pokud vznikla náhradní stopa, je smazaná nebo zkrácená?
+- Pokud vzniká úzký návrat, má tvar jedné otázky?
+- Nevzniká třetí měsíční kontrola bez návratového signálu?
+- Nezakládáme archiv příkladů použití kompasu?
+- Nekopírujeme zákaznické, osobní nebo obchodní detaily mimo systém, kde mají účel?
+- Má případná ponechaná evidence účel, vlastníka a konec?
+- Je návratový signál navázaný na reálnou práci, ne na kalendář?
+- Umí vlastník shrnout uzavření jednou větou?
+- Neskončilo uzavření větou "budeme sledovat dál" bez jasného konce?
+
+Po druhém měsíci už kompas nemá potřebovat zvláštní pozornost. Buď zůstává v dlouhodobém klidu, nebo se opraví jedna konkrétní hrana. Všechno mezi tím je drahá mlha: vypadá opatrně, ale přidává práci, data a závislosti. Dobrý kompas má být po ruce, ne na poradě.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého měsíce po návratu stálého provozního kompasu do tichého provozu: čtyři uzavírací stavy, pravidla proti třetí kontrole, privacy-first mazání náhradních stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o druhém měsíci po návratu stálého provozního kompasu do tichého provozu: ověření samostatnosti bez připomínání, čtyři výsledky, oprava závislosti na autorovi, privacy-first úklid náhradních stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního měsíce po návratu stálého provozního kompasu do tichého provozu: čtyři uzavírací stavy, rušení skrytého dohledu, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním měsíci po návratu stálého provozního kompasu do tichého provozu: nízká kontrola najitelnosti, rozhodnutelnosti a čistoty stopy, čtyři výsledky, prevence tichého dohledu, privacy-first úklid, karta, mini workshop a checklist.
