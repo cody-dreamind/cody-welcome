@@ -199243,6 +199243,320 @@ Vrátíme se k tomu jen tehdy, když nastane tento návratový signál:
 
 Uzavření prvního běžného použití po měsíci je dobré místo pro zdrženlivost. Pokud pravidlo fungovalo, největší hodnota je nechat ho být. Pokud drhlo, největší hodnota je opravit jedno místo. A pokud ukázalo nový problém, největší hodnota je nepřilepit nový problém na staré pravidlo jen proto, že už máte otevřený dokument.
 
+## Druhé běžné použití po uzavřeném měsíci
+
+Druhé běžné použití po uzavřeném měsíci má jiný smysl než první. První použití ověřilo, že se pravidlo dá po měsíčním uzavření vůbec použít bez mimořádné péče. Druhé použití ověřuje, že nešlo o šťastnou náhodu, příliš připraveného člověka nebo situaci, která byla tak jednoduchá, že by pravidlo obstálo i napsané na ubrousku.
+
+Není to návrat měsíční kontroly. Je to poslední lehký dotyk v běžném provozu. Pokud druhé použití dopadne dobře, pravidlo má zůstat tiché. Pokud drhne, opravuje se nejbližší společná příčina, neotevírá se znovu celý příběh změny kontextu, měsíčního uzavření a prvního použití.
+
+Začněte otázkou:
+
+```text
+Použije se pravidlo podruhé v běžné práci stejně lehce jako poprvé, bez mimořádné pomoci a bez nové datové stopy?
+```
+
+Slovo `stejně` je důležité. Druhé použití nemusí být totožné. Může ho udělat jiný člověk, v jiné zákaznické situaci nebo v jiném kanálu. Pořád ale musí patřit do stejného pracovního slibu pravidla. Pokud druhá situace testuje něco úplně jiného, nejde o druhé použití; jde o novou otázku převlečenou za ověření.
+
+### Co druhé použití ověřuje navíc
+
+Druhé použití doplňuje tři věci, které první použití většinou neukáže:
+
+- přenositelnost: pravidlo funguje i mimo první konkrétní situaci;
+- samostatnost: člověk se neopírá o autora pravidla ani o historii opravy;
+- lehkost: po použití nevzniká pocit, že by se měla založit nová kontrola.
+
+Vyberte běžnou situaci, která je dost podobná, aby testovala stejné pravidlo, ale dost odlišná, aby odhalila křehkost. Například:
+
+- první follow-up šel po úvodním hovoru, druhý jde po odpovědi na námitku;
+- první obsahový výřez použil editor, druhý použije obchodník;
+- první anonymizovaný důkaz šel do e-mailu, druhý jde na interní sales kartu;
+- první úklid dočasné poznámky udělal vlastník, druhý udělá člověk, který nebyl u původní debaty;
+- první aktualizace šablony proběhla v jednom playbooku, druhá proběhne v sousední pracovní trase.
+
+Nevybírejte nejtěžší okrajový případ. Druhé běžné použití není stres test celého systému. Je to kontrola, že pravidlo žije v běžném rytmu a nepotřebuje doprovodný výklad.
+
+Krátký zápis před použitím:
+
+```text
+Pravidlo:
+
+První běžné použití:
+
+Druhá běžná situace:
+
+Co je stejné:
+
+Co je záměrně jiné:
+
+Co už se nesmí vrátit:
+
+Jaká data kvůli ověření nesbíráme:
+```
+
+Příklad:
+
+```text
+Pravidlo:
+Zákaznický důkaz používáme anonymizovaně a bez původního screenshotu.
+
+První běžné použití:
+Follow-up e-mail po úvodním hovoru.
+
+Druhá běžná situace:
+Sales karta pro odpověď na námitku "máme moc interních procesů".
+
+Co je stejné:
+Používá se stejný anonymizovaný důkaz.
+
+Co je záměrně jiné:
+Výstup nejde přímo zákazníkovi, ale pomáhá obchodníkovi připravit odpověď.
+
+Co už se nesmí vrátit:
+Původní screenshot, interní kopie zákaznického kontextu ani schvalování každého použití.
+
+Jaká data kvůli ověření nesbíráme:
+Neevidujeme použití podle obchodníka; stačí zkontrolovat, jestli sales karta nevyžaduje nový podklad.
+```
+
+Tento zápis drží ověření malé. Neptá se, jestli je celý sales proces perfektní. Ptá se, jestli jedno pravidlo zůstává použitelné, když se přesune o krok vedle.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden stav:
+
+- Potvrzený běžný provoz: druhé použití proběhlo bez mimořádné pomoci, bez nové stopy a bez doplňování pravidla.
+- Poslední lokální dočištění: pravidlo drží, ale jedno blízké místo pořád vytváří staré tření.
+- Slabý přenos: pravidlo fungovalo poprvé, ale druhá běžná situace ukázala, že není dost jasné mimo původní kontext.
+- Nová samostatná otázka: druhé použití odkrylo problém, který nepatří do tohoto pravidla.
+
+Stav `potvrzený běžný provoz` znamená konec zvláštní pozornosti. Nepište další kontrolu za týden, nepřidávejte tabulku použití, nevyžadujte pravidelné hlášení. Návrat má přijít jen přes návratový signál.
+
+Stav `poslední lokální dočištění` použijte opatrně. Smí to být opravdu poslední drobná oprava stejného místa: starý popisek, duplicitní odkaz, matoucí formulace, neuklizený komentář. Pokud se objevují dvě nebo tři místa, už nejde o dočištění. Je to slabý přenos.
+
+Stav `slabý přenos` je nejdůležitější rozlišit od lokální opravy. Slabý přenos znamená, že pravidlo sice funguje v původní situaci, ale při malém posunu ztrácí jasnost. Reakce nemá být "přidejme pět výjimek". Lepší je napsat přenosovou větu:
+
+```text
+Pravidlo platí pro [situace], ale nevede dobře [sousední situace]. Sousední situaci řešíme samostatně.
+```
+
+Příklad:
+
+```text
+Pravidlo platí pro anonymizovaný zákaznický důkaz ve follow-upu, ale nevede dobře interní sales odpovědi na námitky. Sales odpovědi řešíme samostatnou kartou důkazů.
+```
+
+Stav `nová samostatná otázka` použijte, když druhé použití odkryje jiný typ rozhodnutí. Například zjistíte, že problém není anonymizace důkazu, ale chybějící knihovna námitek. To je užitečný nález, ale není to důvod zatížit původní pravidlo dalšími vrstvami.
+
+### Jak poznat slabý přenos
+
+Slabý přenos bývá nenápadný. Pravidlo nevypadá rozbité, jen se kolem něj začne tvořit ruční výklad. Typické signály:
+
+- člověk pravidlo najde, ale musí se ptát, jestli platí i tady;
+- výstup je správný až po ústním dovysvětlení;
+- šablona vede k bezpečnému, ale nepoužitelně obecnému textu;
+- lidé si vytvářejí vlastní varianty pravidla;
+- privacy-first hranice je jasná v jednom kanálu, ale mlhavá v druhém;
+- opakuje se věta "tady je to trochu jiné".
+
+Věta "tady je to trochu jiné" není problém sama o sobě. Web, SaaS, marketing i obchod mají různé situace. Problém nastává, když se kvůli každému "trochu jinému" případu začne původní pravidlo rozšiřovat. Pravidlo pak přestane být pracovní pomůcka a stane se malým právním dokumentem pro každou náladu počasí.
+
+Použijte tento filtr:
+
+```text
+Je druhá situace pořád uvnitř původního slibu pravidla?
+- ano: opravte nejbližší formulaci nebo pracovní místo
+- ne: zavřete původní pravidlo a otevřete samostatnou otázku
+```
+
+Příklad uvnitř slibu:
+
+```text
+Pravidlo říká, že anonymizovaný důkaz lze použít bez screenshotu. Druhá situace je pořád použití stejného důkazu ve follow-upu, jen pro jiný segment. Stačí doplnit jednu větu k segmentu.
+```
+
+Příklad mimo slib:
+
+```text
+Pravidlo řeší anonymizovaný důkaz. Druhá situace chce vytvořit argumentační knihovnu pro námitky. To není rozšíření pravidla, ale nový pracovní artefakt.
+```
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití má tendenci vyrábět metriky, protože tým chce mít jistotu, že pravidlo už opravdu drží. Jenže právě tady je privacy-first brzda nejcennější. Pokud pravidlo po druhém běžném použití potřebuje osobní monitoring, screenshoty všech výstupů nebo tabulku podle lidí, není v běžném provozu. Je v dohledu.
+
+Stačí zkontrolovat čtyři věci:
+
+```text
+Druhé použití potřebovalo mimořádnou pomoc:
+- ano / ne
+
+Vznikl nový podklad, screenshot, export nebo osobní evidence:
+- ano / ne
+
+Vznikla potřeba rozšířit pravidlo mimo původní slib:
+- ano / ne
+
+Je návratový signál pořád lepší než průběžný dohled:
+- ano / ne
+```
+
+Nevzniká:
+
+- evidence všech budoucích použití pravidla;
+- porovnávání výkonu lidí podle toho, kdo pravidlo použil rychleji;
+- archiv běžných výstupů "pro audit", pokud nemá jasný účel;
+- nahrávání porad jen kvůli tomu, aby se dohledal výklad pravidla;
+- další tracker v dokumentaci nebo nástroji.
+
+Pokud potřebujete příklad pro učení týmu, použijte zkrácený anonymizovaný výřez. Nechte v něm rozhodovací pointu a odstraňte zákaznické detaily, jména, interní poznámky a kontext, který není nutný k pochopení pravidla.
+
+Codyho komentář: druhé použití není konkurz na policejní spis. Když pravidlo funguje, nechte po něm jednu čistou větu, ne složku důkazů. Složky důkazů mají jednu zákeřnou vlastnost: tváří se jako pořádek, dokud je nemusíte uklidit.
+
+### Karta druhého běžného použití po uzavřeném měsíci
+
+```text
+Pravidlo:
+
+První běžné použití:
+
+Uzavírací stav po prvním použití:
+
+Druhá běžná situace:
+
+Co je stejné jako poprvé:
+
+Co je záměrně jiné:
+
+Výstup práce:
+
+Použití potřebovalo mimořádnou pomoc:
+- ano / ne
+
+Vznikla nová datová stopa:
+- ano / ne
+
+Výsledek:
+- potvrzený běžný provoz
+- poslední lokální dočištění
+- slabý přenos
+- nová samostatná otázka
+
+Pokud dočištění, jaké jedno místo:
+
+Pokud slabý přenos, přenosová věta:
+
+Pokud nová otázka, její rozsah:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Zákaznický důkaz používáme anonymizovaně a bez původního screenshotu.
+
+První běžné použití:
+Follow-up e-mail po úvodním hovoru.
+
+Uzavírací stav po prvním použití:
+Zůstává v běžném provozu.
+
+Druhá běžná situace:
+Sales karta pro odpověď na námitku o interních procesech.
+
+Co je stejné jako poprvé:
+Používá se stejný anonymizovaný důkaz.
+
+Co je záměrně jiné:
+Výstup je interní příprava odpovědi, ne e-mail zákazníkovi.
+
+Výstup práce:
+Sales karta obsahuje anonymizovaný důkaz, ale žádný původní screenshot.
+
+Použití potřebovalo mimořádnou pomoc:
+Ne.
+
+Vznikla nová datová stopa:
+Ne.
+
+Výsledek:
+Potvrzený běžný provoz.
+
+Co výslovně neotevíráme:
+Neotevíráme monitoring použití důkazů, schvalování sales karet ani celou knihovnu námitek.
+
+Privacy-first úklid:
+Dočasnou poznámku z ověření mažeme; v kanonické sales kartě zůstává jen anonymizovaný příklad.
+
+Návratový signál:
+Dočasný podklad nebo export se znovu objeví ve dvou různých sales situacích.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 7 minut
+
+Workshop použijte jen tehdy, když druhé použití ukáže slabý přenos nebo novou otázku. Pokud všechno drží, stačí zapsat kartu a skončit.
+
+Minuta 1: vlastník přečte pravidlo a uzavírací stav po prvním použití.
+
+Minuta 2: tým popíše druhou běžnou situaci jednou větou.
+
+Minuta 3: tým řekne, co je stejné jako poprvé.
+
+Minuta 4: tým řekne, co je záměrně jiné.
+
+Minuta 5: vybere se jeden ze čtyř výsledků druhého použití.
+
+Minuta 6: pokud jde o slabý přenos, napíše se přenosová věta.
+
+Minuta 7: zapíše se privacy-first úklid a věta, co se výslovně neotevírá.
+
+Zakázaná věta:
+
+```text
+Přidáme to do pravidla jako další výjimku.
+```
+
+Povolená náhrada:
+
+```text
+Nejdřív rozhodneme, jestli druhá situace patří do původního slibu pravidla.
+```
+
+### Checklist druhého běžného použití po uzavřeném měsíci
+
+- Druhá situace je běžná, ne uměle vybraná pro test?
+- Je jasné, co je stejné jako při prvním použití?
+- Je jasné, co je záměrně jiné?
+- Ověřujeme stejné pravidlo, ne novou pracovní oblast?
+- Použití proběhlo bez autora pravidla, historického výkladu a mimořádného schválení?
+- Nevznikl nový screenshot, export, osobní seznam ani pomocná evidence?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud pravidlo drží, opravdu končí zvláštní pozornost?
+- Pokud je potřeba dočištění, týká se jednoho blízkého místa?
+- Pokud jde o slabý přenos, napsali jsme přenosovou větu?
+- Pokud vznikla nová otázka, oddělili jsme ji od původního pravidla?
+- Nezvětšili jsme pravidlo sadou výjimek?
+- Návratový signál zůstává konkrétní a opakovatelný?
+- Privacy-first úklid odstranil dočasné poznámky a zkrátil příklady na minimum?
+- Zůstává běžný provoz běžným provozem, ne tichým dohledem?
+
+Druhé běžné použití po uzavřeném měsíci je poslední kontrola lehkosti. Když pravidlo obstojí podruhé, nechte ho pracovat. Když neobstojí, rozlišujte přesně: jedno místo dočistit, slabý přenos oddělit, novou otázku otevřít zvlášť. Nejhorší varianta je nafouknout původní pravidlo tak, aby pokrylo všechno. To už pak není pravidlo. To je koberec, pod který se zametly všechny nerozhodnuté otázky.
+
 ## Pracovní log
 
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném měsíci: čtyři uzavírací stavy, propsání do kanonického místa, ukončení dočasné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
@@ -200127,3 +200441,4 @@ Uzavření prvního běžného použití po měsíci je dobré místo pro zdrže
 - 2026-06-07: Doplněna úvodní podkapitola o uzavření druhého běžného review do tichého provozu: přepis pravidla do přítomného času, zrušení skryté kontroly, privacy-first úklid, karta a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po převodu reakce: čtyři stavy výsledku, dočištění jednoho místa, slabé kanonické místo, nová smyčka při návratovém signálu, privacy-first úklid, karta a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném měsíci: samostatné použití pravidla bez mimořádné péče, čtyři výsledné stavy, privacy-first kontrola, karta a checklist.
+- 2026-06-09: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném měsíci: přenositelnost pravidla, slabý přenos, poslední lokální dočištění, privacy-first kontrola, karta, mini workshop a checklist.
