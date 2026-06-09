@@ -195376,8 +195376,191 @@ Po druhém běžném použití je stav [výsledek]. Mění se [nejbližší změ
 
 Druhé běžné použití po uzavřeném návratovém signálu má kompasu vrátit obyčejnost. Když se pravidlo použije podruhé bez zvláštní péče, není potřeba víc dokazovat. Nechte ho pracovat v tichu. Další pozornost si zaslouží až ve chvíli, kdy se objeví skutečný návratový signál, ne když má tým jen chuť ještě jednou zkontrolovat, že už kontrolovat nemusí.
 
+## Uzavření druhého běžného použití po uzavřeném návratovém signálu kompasu
+
+Druhé běžné použití je dobré znamení jen tehdy, když po něm tým opravdu zavře dveře za mimořádnou péčí. Pokud se výsledek jen konstatuje a vedle něj zůstane poznámka, pomocný dokument, dočasný checklist nebo interní domluva "ještě to chvíli hlídat", kompas se sice tváří jako stabilní pravidlo, ale pořád kolem sebe táhne malý dohled. Uzavření druhého použití má tento dohled odstranit.
+
+Pracovní otázka:
+
+```text
+Co přesně po druhém běžném použití zůstává v kanonickém místě, co mizí jako pomocná stopa a kdy se téma znovu otevře?
+```
+
+Tato otázka není administrativní formalita. Je to ochrana před tím, aby se z úspěšného ověření nestal nový proces. V dobře vedeném webovém, SaaS nebo marketingovém provozu musí být pravidla použitelná bez toho, aby každé pravidlo dostalo vlastní životopis, hlídací tabulku a archiv příkladů.
+
+Příklad:
+
+```text
+Situace:
+Kompas datového minima byl podruhé použit u zákaznického příkladu na landing page.
+
+Výsledek druhého použití:
+Přenos lokálně dotažen. Do sousedního checklistu byl přidán odkaz na šablonu.
+
+Uzavření:
+Odkaz zůstává v checklistu. Pomocná poznámka "ověřit metriku" se maže. Další kontrola nevzniká. Téma se otevře jen při novém sporném použití přesné zákaznické metriky.
+```
+
+Takové uzavření je krátké, ale obsahuje všechno podstatné: kanonickou změnu, úklid, stop pravidlo a návratový signál. Nic víc není potřeba.
+
+### Čtyři uzavírací stavy po druhém použití
+
+Po druhém běžném použití vyberte jeden uzavírací stav:
+
+- `Zavřeno do tichého provozu`: kompas funguje, pomocné stopy mizí a další kontrola nevzniká.
+- `Zavřeno s lokální opravou`: jedna cesta ke kompasu byla opravena a tím věc končí.
+- `Zavřeno s úzkým návratem`: stejný signál se opakuje, ale otevírá se jen konkrétní hrana pravidla.
+- `Nezavřeno kvůli skrytému dohledu`: tým nedokázal pomocnou kontrolu pustit a musí nejdřív odstranit závislost.
+
+`Zavřeno do tichého provozu` je nejčistší stav. Nepište k němu dlouhý záznam. Stačí jedna věta v místě, kde se změna skutečně používá, nebo žádná věta, pokud kompas nepotřeboval upravit. Tichý provoz není tichý, když má třístránkové potvrzení.
+
+`Zavřeno s lokální opravou` znamená, že kanonické pravidlo zůstává stejné, ale zlepšila se cesta k němu. Typicky jde o odkaz v checklistu, název kroku, krátký příklad nebo sjednocenou formulaci. Po opravě se nemaže historie rozhodnutí, ale mažou se pracovní stopy, které vznikly jen kvůli uzavření.
+
+`Zavřeno s úzkým návratem` je stav pro situaci, kdy se opakuje stejná nejistota. Neotevírejte celý kompas. Otevřete jen jednu hranu:
+
+```text
+Otevíráme pouze otázku:
+Kdy může zákaznický příklad uvést přesné číslo a kdy musí použít rozmezí nebo slovní formulaci?
+```
+
+`Nezavřeno kvůli skrytému dohledu` je nepříjemné, ale užitečné pojmenování. Znamená, že problém není v pravidle, ale v důvěře týmu v pravidlo. Neřešte to novým dokumentem. Najděte konkrétní pomocnou kontrolu, která se vrací, a zrušte ji nebo převeďte její jedinou užitečnou větu do kanonického místa.
+
+### Co po uzavření zůstává
+
+Po uzavření druhého použití mají zůstat jen tři typy věcí:
+
+- kanonické pravidlo nebo jeho lokální odkaz;
+- krátká změna v pracovním místě, kde se pravidlo používá;
+- návratový signál, který říká, kdy se téma znovu otevře.
+
+Všechno ostatní je podezřelé. Pomocné screenshoty, dočasné exporty, seznamy příkladů, staré komentáře, ruční poznámky a kontrolní tabulky mají po uzavření jasný osud: smazat, zkrátit, anonymizovat nebo přesunout do kanonického místa jen v podobě obecného pravidla.
+
+Rozdíl mezi užitečným zápisem a zbytečnou stopou:
+
+```text
+Užitečný zápis:
+U zákaznických příkladů s citlivou metrikou používej rozmezí nebo slovní formulaci, pokud přesné číslo není nutné pro rozhodnutí čtenáře.
+
+Zbytečná stopa:
+Seznam všech konkrétních případů, kde jsme v červnu řešili přesné metriky, včetně interních komentářů a zákaznických detailů.
+```
+
+První zápis pomáhá další práci. Druhý zápis hlavně uchovává data, která budou za měsíc buď zastaralá, nebo nebezpečně konkrétní.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření má jednoduchou logiku: když se pravidlo osvědčilo, nepotřebujete víc dat. Když se pravidlo neosvědčilo, potřebujete jen ta data, která pomohou rozhodnout úzkou otázku. V obou případech je špatně zakládat novou širokou evidenci.
+
+Praktická pravidla:
+
+- smažte dočasné poznámky, které obsahují konkrétní zákaznické nebo osobní detaily;
+- anonymizujte příklady, pokud mají zůstat jako vzor pro tým;
+- nenechávejte v tasku odkazy na exporty, které už nikdo nepotřebuje;
+- nepřidávejte nový analytický event jen kvůli potvrzení, že pravidlo někdo použil;
+- pokud se téma vrací, otevřete jednu rozhodovací otázku místo dlouhodobého monitoringu.
+
+Codyho komentář: dobrý privacy-first provoz není o tom, že se všechno zamkne do trezoru a všichni dostanou špatnou náladu. Je o tom, že si tým neschovává pracovní odpad jen proto, že se mu jednou hodil při rozhodování.
+
+### Karta uzavření druhého použití po signálu
+
+```text
+Kompas:
+
+Druhé běžné použití:
+
+Výsledek druhého použití:
+- tichý provoz potvrzen
+- přenos lokálně dotažen
+- skrytý dohled se vrátil
+- signál se opakuje
+
+Uzavírací stav:
+- zavřeno do tichého provozu
+- zavřeno s lokální opravou
+- zavřeno s úzkým návratem
+- nezavřeno kvůli skrytému dohledu
+
+Co zůstává v kanonickém místě:
+
+Co se maže, zkracuje nebo anonymizuje:
+
+Co se výslovně nezakládá:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických příkladech.
+
+Druhé běžné použití:
+Landing page pro novou službu.
+
+Výsledek druhého použití:
+Přenos lokálně dotažen.
+
+Uzavírací stav:
+Zavřeno s lokální opravou.
+
+Co zůstává v kanonickém místě:
+V checklistu landing page zůstává odkaz na šablonu zákaznického příkladu.
+
+Co se maže, zkracuje nebo anonymizuje:
+Maže se dočasná poznámka s konkrétní metrikou a interním komentářem.
+
+Co se výslovně nezakládá:
+Nevzniká evidence všech použití kompasu ani měsíční kontrola metrik.
+
+Návratový signál:
+Téma se otevře jen tehdy, když autor narazí na zákaznický příklad, kde rozmezí mění obchodní význam sdělení.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: řekněte, jak dopadlo druhé běžné použití.
+2. Minuta 2: vyberte jeden uzavírací stav.
+3. Minuta 3: určete, co zůstává v kanonickém místě.
+4. Minuta 4: smažte, zkraťte nebo anonymizujte pomocné stopy.
+5. Minuta 5: pojmenujte, co se výslovně nezakládá.
+6. Minuta 6: zapište návratový signál jednou větou.
+
+Výstup:
+
+```text
+Po druhém běžném použití po signálu je stav [uzavírací stav]. Zůstává [kanonická věc], mizí [pomocná stopa], nezakládáme [nová evidence] a téma se vrátí jen při [návratový signál].
+```
+
+### Checklist uzavření druhého použití po signálu
+
+- Je vybraný jeden uzavírací stav?
+- Je jasné, zda kompas opravdu míří zpět do tichého provozu?
+- Pokud zůstává lokální oprava, je zapsaná v pracovním místě, kde ji další člověk použije?
+- Pokud se otevírá úzký návrat, je formulovaný jako jedna rozhodovací otázka?
+- Pokud se vrátil skrytý dohled, je pojmenovaná konkrétní pomocná kontrola?
+- Jsou dočasné poznámky, exporty, screenshoty a komentáře smazané nebo zkrácené?
+- Nezůstávají konkrétní zákaznické nebo osobní detaily bez jasného účelu?
+- Nevzniká seznam použití kompasu, pravidelný report ani nový analytický event?
+- Je návratový signál viditelný v běžné práci?
+- Umí vlastník uzavření vysvětlit jednou větou?
+- Není třetí kontrola schovaná pod slovem "opatrnost"?
+
+Uzavření druhého běžného použití po návratovém signálu je poslední brzda před návratem do klidu. Pokud kompas funguje, nechte ho být. Pokud nefunguje, otevřete jen konkrétní hranu. A pokud po něm zůstaly stopy, ukliďte je dřív, než začnou vypadat jako nový systém.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu stálého provozního kompasu: uzavírací stavy, kanonické změny, úklid pomocných stop, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratovém signálu stálého provozního kompasu: přenos pravidla do sousední situace, prevence třetího kontrolního kolečka, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratovém signálu stálého provozního kompasu: čtyři uzavírací stavy, rozlišení kanonické změny a dočasných stop, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-08: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratovém signálu stálého provozního kompasu: kontrola běžné práce bez nového dohledu, čtyři výsledky použití, odstranění zbytkové kontroly, privacy-first hranice, karta, mini workshop a checklist.
