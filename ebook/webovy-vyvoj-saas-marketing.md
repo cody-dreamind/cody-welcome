@@ -199557,8 +199557,315 @@ Nejdřív rozhodneme, jestli druhá situace patří do původního slibu pravidl
 
 Druhé běžné použití po uzavřeném měsíci je poslední kontrola lehkosti. Když pravidlo obstojí podruhé, nechte ho pracovat. Když neobstojí, rozlišujte přesně: jedno místo dočistit, slabý přenos oddělit, novou otázku otevřít zvlášť. Nejhorší varianta je nafouknout původní pravidlo tak, aby pokrylo všechno. To už pak není pravidlo. To je koberec, pod který se zametly všechny nerozhodnuté otázky.
 
+## Uzavření druhého běžného použití po uzavřeném měsíci
+
+Uzavření druhého běžného použití je bod, kde má pravidlo konečně ztratit zvláštní pozornost. Už prošlo změnou kontextu, prvním měsícem, prvním běžným použitím a druhým běžným použitím. Pokud pořád potřebuje vlastní hlídku, není to běžné pravidlo. Je to proces v převleku.
+
+Cílem uzavření není oslavit, že se nic nerozbilo. Cílem je rozhodnout, co se stane dál s pracovním místem, které pravidlo používá:
+
+- zůstane v tichém provozu;
+- dostane jednu poslední lokální opravu;
+- oddělí slabě přenositelnou sousední situaci;
+- nebo otevře novou otázku mimo původní pravidlo.
+
+Začněte uzavírací větou:
+
+```text
+Po druhém běžném použití pravidlo [zůstává v tichém provozu / dostává poslední lokální opravu / odděluje sousední situaci / otevírá novou otázku mimo pravidlo], protože [konkrétní důvod].
+```
+
+Příklad:
+
+```text
+Po druhém běžném použití pravidlo zůstává v tichém provozu, protože anonymizovaný důkaz šel použít v druhé běžné situaci bez původního screenshotu, bez autora pravidla a bez nové evidence.
+```
+
+Tahle věta je důležitější než dlouhý zápis. Pokud ji tým neumí napsat, pravděpodobně ještě neví, co uzavírá.
+
+### Čtyři uzavírací stavy
+
+Vyberte jeden stav a nepřidávejte pátý. Druhé použití už má dát hranici, ne otevřít další měkký mezistav.
+
+1. Tichý provoz potvrzen: pravidlo obstálo i podruhé a zvláštní pozornost končí.
+2. Poslední lokální oprava uzavřena: opravilo se jedno blízké místo a není potřeba další ověření mimo běžný návratový signál.
+3. Slabý přenos oddělen: pravidlo zůstává pro původní slib, ale sousední situace dostává vlastní otázku.
+4. Nová otázka předána mimo pravidlo: druhé použití odkrylo jiný problém, který se nepřilepí na původní pravidlo.
+
+Stav `tichý provoz potvrzen` je nejčistší výsledek. Do kanonického místa se zapíše aktuální pravidlo, návratový signál a datum uzavření. Dočasné poznámky, exporty, screenshoty a pracovní komentáře se smažou nebo zkrátí na jednu bezpečnou stopu.
+
+Stav `poslední lokální oprava uzavřena` použijte jen tehdy, když oprava už proběhla a její dopad je zřejmý. Neznamená to "ještě někdy opravíme". Znamená to "dnes jsme zavřeli jeden konkrétní šev v pracovním místě". Pokud oprava teprve čeká, není uzavřeno.
+
+Stav `slabý přenos oddělen` chrání pravidlo před rozšiřováním. Původní pravidlo zůstává jednoduché a sousední situace dostane vlastní kartu. Není ostuda zjistit, že pravidlo není univerzální. Ostuda je z něj univerzální pravidlo předstírat.
+
+Stav `nová otázka předána mimo pravidlo` použijte, když se objevilo jiné rozhodnutí: nový typ důkazu, jiný obchodní materiál, jiná šablona, jiná role nebo širší provozní problém. Zapište otázku do backlogu nebo rozhodovacího logu, ale původní pravidlo nezvětšujte.
+
+### Co zůstává v kanonickém místě
+
+Po uzavření druhého běžného použití má kanonické místo obsahovat jen to, co člověk potřebuje při další normální práci. Ne historii záchrany pravidla, ne poznámky z ověřování, ne argumenty z porad.
+
+Minimum:
+
+```text
+Aktuální pravidlo:
+
+Kdy ho použít:
+
+Kdy ho nepoužít:
+
+Jeden krátký příklad:
+
+Návratový signál:
+
+Datum posledního uzavření:
+```
+
+Příklad:
+
+```text
+Aktuální pravidlo:
+Zákaznický důkaz používáme anonymizovaně a bez původního screenshotu.
+
+Kdy ho použít:
+Ve follow-upu, sales kartě nebo interním pracovním příkladu, pokud stačí rozhodovací pointa bez zákaznických detailů.
+
+Kdy ho nepoužít:
+Když materiál potřebuje veřejnou případovou studii, právně citovatelný výrok nebo schválené použití jména zákazníka.
+
+Jeden krátký příklad:
+"Tým zkrátil schvalování interních podkladů z několika kol na jednu rozhodovací kartu." Bez jména, screenshotu a interních poznámek.
+
+Návratový signál:
+Ve dvou různých situacích se znovu objeví původní screenshot nebo požadavek na ukládání zákaznického kontextu.
+
+Datum posledního uzavření:
+2026-06-09.
+```
+
+Do kanonického místa nepatří:
+
+- seznam všech testovacích použití;
+- jména lidí, kteří pravidlo použili správně nebo špatně;
+- původní screenshoty, plné citace a interní zákaznický kontext;
+- dlouhá historie, proč pravidlo vzniklo;
+- pomocná tabulka "jen kdyby se to hodilo";
+- staré varianty pravidla, které už nemají platit.
+
+Pokud máte pocit, že bez historie pravidlu nikdo neporozumí, pravidlo ještě není dost jednoduché. Zkraťte ho do pracovního tvaru, ne do muzejní vitríny.
+
+### Jak neudělat třetí kontrolu
+
+Největší riziko po druhém použití je třetí kontrola. Zní zodpovědně, ale často jen prodlužuje mimořádný režim. Třetí kontrola dává smysl jen tehdy, když druhé použití skončilo slabým přenosem a nová sousední situace má vlastní otázku. Pak ale nekontrolujete původní pravidlo. Pracujete s novou kartou.
+
+Zakázané pokračování:
+
+```text
+Ještě jednou to za měsíc raději zkontrolujeme.
+```
+
+Lepší náhrady:
+
+```text
+Pravidlo je uzavřené; vracíme se jen při návratovém signálu.
+```
+
+```text
+Sousední situaci řešíme samostatně, bez rozšíření původního pravidla.
+```
+
+```text
+Jedno lokální místo jsme opravili; další kontrola bude jen při přirozeném použití, ne jako zvláštní agenda.
+```
+
+Třetí kontrola bývá maskovaný strach z odpovědnosti. Pokud má někdo obavu, pojmenujte ji:
+
+```text
+Bojíme se, že:
+
+Co by to ukázalo v běžné práci:
+
+Jaký návratový signál stačí:
+
+Proč kvůli tomu nezavádíme další dohled:
+```
+
+Příklad:
+
+```text
+Bojíme se, že:
+Obchodníci začnou znovu přikládat původní screenshoty.
+
+Co by to ukázalo v běžné práci:
+V sales kartě nebo follow-upu se objeví příloha se zákaznickým kontextem.
+
+Jaký návratový signál stačí:
+Stejný typ přílohy se objeví ve dvou různých obchodních situacích.
+
+Proč kvůli tomu nezavádíme další dohled:
+Kontrola všech follow-upů by sbírala víc dat než problém vyžaduje.
+```
+
+Codyho komentář: třetí kontrola je často pracovní placebo. Člověk má pocit, že dělá odpovědnou věc, ale ve skutečnosti jen odmítá říct "hotovo". Placebo někdy uklidní nervy. Backlog ale nevyléčí.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření po druhém použití je hlavně úklid. V téhle fázi už nemá přibývat žádná datová vrstva. Naopak má zmizet všechno, co vzniklo jen kvůli ověření.
+
+Projít:
+
+- dočasné poznámky z prvního a druhého použití;
+- pracovní screenshoty, přílohy a exporty;
+- kopie zákaznického kontextu ve sdílených dokumentech;
+- komentáře v dokumentech, které obsahují osobní nebo interní detaily;
+- pomocné tabulky s použitím pravidla;
+- připomínky v kalendáři nebo úkolovníku, které měly jen držet dočasnou kontrolu.
+
+U každé stopy vyberte stav:
+
+```text
+Smazat:
+
+Zkrátit a anonymizovat:
+
+Přesunout do kanonického místa:
+
+Ponechat kvůli jasnému účelu do:
+```
+
+Příklad:
+
+```text
+Smazat:
+Dočasný screenshot původního zákaznického důkazu.
+
+Zkrátit a anonymizovat:
+Pracovní poznámku z druhého použití na jednu větu bez jména zákazníka.
+
+Přesunout do kanonického místa:
+Aktuální pravidlo, kdy ho použít a návratový signál.
+
+Ponechat kvůli jasnému účelu do:
+Nic. Ověření je uzavřené.
+```
+
+Pokud něco ponecháváte, napište účel a datum návratu. "Pro jistotu" není účel. "Kvůli příštímu školení" také nestačí, pokud není jasné, kdy školení proběhne a proč nejde použít anonymizovaný příklad.
+
+### Karta uzavření druhého běžného použití po měsíci
+
+```text
+Pravidlo:
+
+První běžné použití:
+
+Druhé běžné použití:
+
+Výsledek druhého použití:
+- tichý provoz potvrzen
+- poslední lokální oprava uzavřena
+- slabý přenos oddělen
+- nová otázka předána mimo pravidlo
+
+Uzavírací věta:
+
+Co zůstává v kanonickém místě:
+
+Co mažeme nebo zkracujeme:
+
+Co výslovně neotevíráme:
+
+Pokud jde o slabý přenos, samostatná sousední otázka:
+
+Pokud jde o novou otázku, kam ji předáváme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Zákaznický důkaz používáme anonymizovaně a bez původního screenshotu.
+
+První běžné použití:
+Follow-up e-mail po úvodním hovoru.
+
+Druhé běžné použití:
+Sales karta pro odpověď na námitku o interních procesech.
+
+Výsledek druhého použití:
+Tichý provoz potvrzen.
+
+Uzavírací věta:
+Po druhém běžném použití pravidlo zůstává v tichém provozu, protože šlo použít bez autora pravidla, bez screenshotu a bez nové evidence.
+
+Co zůstává v kanonickém místě:
+Jedna formulace pravidla, hranice použití, anonymizovaný příklad a návratový signál.
+
+Co mažeme nebo zkracujeme:
+Mažeme dočasnou poznámku z ověření; ponecháváme jen anonymizovanou větu v sales kartě.
+
+Co výslovně neotevíráme:
+Monitoring obchodních follow-upů, schvalování každé sales karty ani knihovnu všech námitek.
+
+Návratový signál:
+Původní screenshot nebo zákaznický kontext se znovu objeví ve dvou různých obchodních situacích.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 6 minut
+
+Workshop použijte jen při uzavření slabého přenosu nebo nové otázky. Pokud je stav `tichý provoz potvrzen`, kartu vyplní vlastník a workshop není potřeba.
+
+Minuta 1: vlastník přečte pravidlo a druhé běžné použití.
+
+Minuta 2: tým vybere jeden ze čtyř uzavíracích stavů.
+
+Minuta 3: napíše se uzavírací věta.
+
+Minuta 4: vybere se, co zůstane v kanonickém místě.
+
+Minuta 5: zapíše se privacy-first úklid dočasných stop.
+
+Minuta 6: potvrdí se návratový signál a věta, co se výslovně neotevírá.
+
+Hlídací otázka:
+
+```text
+Opravdu uzavíráme pravidlo, nebo jen zakládáme další formu dohledu?
+```
+
+Pokud odpověď není jasná, vraťte se ke čtyřem stavům. Neřešte slovíčka v pravidle, dokud nevíte, jestli má pravidlo pokračovat, zúžit se, nebo předat novou otázku jinam.
+
+### Checklist uzavření druhého běžného použití po měsíci
+
+- Je jasné, jaké pravidlo se uzavírá?
+- Je druhé běžné použití zapsané jednou větou?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Umíme napsat uzavírací větu bez dlouhého vysvětlování?
+- Pokud pravidlo drží, končí zvláštní pozornost?
+- Pokud byla lokální oprava, je opravdu hotová?
+- Pokud se ukázal slabý přenos, oddělili jsme sousední situaci od původního pravidla?
+- Pokud vznikla nová otázka, má vlastní místo mimo pravidlo?
+- Kanonické místo obsahuje aktuální pravidlo, hranice použití, příklad a návratový signál?
+- Smazali jsme nebo zkrátili dočasné poznámky, screenshoty, exporty a kopie kontextu?
+- Nezavedli jsme třetí kontrolu jen kvůli pocitu jistoty?
+- Návratový signál je konkrétnější než "když to bude divné"?
+- Vlastník ví, že další práce nastane jen při návratovém signálu nebo nové samostatné otázce?
+- Privacy-first úklid snížil datovou stopu, ne ji jen přesunul jinam?
+
+Uzavření druhého běžného použití má být klidné. Ne proto, že by na pravidle nezáleželo, ale právě proto, že na něm záleží. Fungující pravidlo má pomáhat práci, ne pořádat kolem sebe nekonečnou konferenci. Jakmile obstojí i podruhé, vraťte mu normální život.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném měsíci: čtyři uzavírací stavy, kanonické místo, prevence třetí kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném měsíci: čtyři uzavírací stavy, propsání do kanonického místa, ukončení dočasné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního měsíce po změně kontextu stálého provozního kompasu: čtyři uzavírací stavy, propsání do kanonického místa, ukončení mimořádné pozornosti, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním měsíci po změně kontextu stálého provozního kompasu: tři měsíční signály, čtyři výsledky kontroly, ochrana před obnovením dohledu, privacy-first datový úklid, karta, mini workshop a checklist.
