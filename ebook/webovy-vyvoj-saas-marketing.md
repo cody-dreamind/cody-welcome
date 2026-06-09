@@ -200400,8 +200400,254 @@ Necháme jen to, co bude potřeba pro příští rozhodnutí; zbytek smažeme ne
 
 Uzavřený návratový signál má vrátit pravidlu normální váhu. Ne větší, ne menší. Tým se poučil z reality, upravil jen to, co mělo smysl, a uklidil po sobě. To je nenápadná disciplína, ze které vzniká dobrý provoz.
 
+## První běžné použití po uzavřeném návratovém signálu
+
+Když se návratový signál uzavře, pravidlo se nemá vrátit do vitríny. Má se znovu použít v běžné práci. Právě první běžné použití po uzavřeném signálu ukáže, jestli tým opravdu jen zpřesnil pravidlo, nebo si nevědomky vytvořil nový zvláštní režim.
+
+Cíl není znovu testovat všechno. Cíl je ověřit, že člověk dokáže pravidlo použít bez autora revize, bez starých podkladů, bez mimořádné kontroly a bez nového sběru dat.
+
+Začněte krátkou větou:
+
+```text
+Po uzavřeném návratovém signálu používáme pravidlo znovu v běžné situaci [kde], bez [jaké mimořádné pomoci].
+```
+
+Příklad:
+
+```text
+Po uzavřeném návratovém signálu používáme pravidlo znovu v běžném sales follow-upu, bez kontroly všech obchodních zpráv a bez původních screenshotů.
+```
+
+Tahle věta drží rozsah při zemi. Neříká "otevíráme další kontrolní fázi". Říká "vracíme se do normální práce a sledujeme, jestli pravidlo stačí".
+
+### Co první běžné použití ověřuje
+
+První běžné použití po uzavřeném signálu ověřuje čtyři věci:
+
+- jestli je aktuální pravidlo nalezitelné v kanonickém místě;
+- jestli jde použít bez vysvětlování celé historie signálu;
+- jestli uzavřená reakce opravdu odstranila nejbližší tření;
+- jestli se nevrátila stará mimořádná péče pod jiným názvem.
+
+Neověřuje celou kvalitu procesu. Neověřuje výkon týmu. Neověřuje všechny sousední situace. Když z jednoho použití uděláte generální audit, pravidlo sice možná přežije, ale běžná práce si odnese další batoh.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Zákaznický důkaz používáme anonymizovaně a bez původního screenshotu.
+
+Uzavřený návratový signál:
+Doplnili jsme hranici, kdy anonymizovaný důkaz nestačí a je potřeba schválená case study.
+
+První běžné použití:
+Obchodník posílá follow-up po hovoru a chce použít krátký důkaz z podobného projektu.
+
+Co ověřujeme:
+Najde hranici v sales kartě, použije anonymizovanou větu a neotevře původní screenshotový kontext.
+
+Co neověřujeme:
+Nekontrolujeme všechny follow-upy, nehodnotíme celý sales proces a nezakládáme novou knihovnu důkazů.
+```
+
+Tím zůstává ověření malé. Když pravidlo obstojí, pokračuje. Když neobstojí, reakce má mířit na konkrétní místo, kde se zaseklo.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+1. Pravidlo drží: člověk pravidlo našel, použil a mimořádná péče se nevrátila.
+2. Chybí drobná opora: pravidlo je správné, ale jedno pracovní místo potřebuje lokální doplnění.
+3. Signál nebyl dobře uzavřený: stejný problém se vrací, protože reakce neodstranila příčinu.
+4. Objevila se nová otázka: použití odkrylo jiné téma, které nepatří do původního pravidla.
+
+`Pravidlo drží` je výchozí zdravý stav. Do logu stačí jedna věta a není důvod zavádět další kontrolu.
+
+`Chybí drobná opora` znamená například nejasný odkaz, starý příklad, chybějící větu v šabloně nebo špatné umístění pravidla. Opravte jedno místo. Neotevírejte revizi pravidla, pokud pravidlo jako takové funguje.
+
+`Signál nebyl dobře uzavřený` je vážnější. Pokud se vrací stejný problém, nepište další komentář k šabloně. Vraťte se k uzavření signálu a zkontrolujte, jestli byla reakce opravdu hotová, nebo jen hezky popsaná.
+
+`Nová otázka` má dostat vlastní kartu. Třeba zjistíte, že anonymizované důkazy fungují, ale obchod nemá jasné pravidlo pro veřejné reference. To není selhání anonymizace. To je samostatná práce.
+
+### Jak zabránit návratu starého dohledu
+
+Největší riziko po uzavřeném signálu je nenápadná věta:
+
+```text
+Teď už to necháme běžet, jen si budeme pro jistotu ukládat příklady.
+```
+
+To není běžný provoz. To je nový dohled, který se tváří jako opatrnost. Pokud ukládáte příklady, musíte vědět proč, na jak dlouho, kdo k nim má přístup a kdy zmizí. V mnoha případech stačí zapsat rozhodovací větu bez pracovních podkladů.
+
+Lepší věta:
+
+```text
+První běžné použití proběhlo; ukládáme jen výsledek a případnou lokální opravu, ne nové podklady z práce.
+```
+
+Pokud někdo chce pokračovat v dohledu, ptejte se:
+
+```text
+Čeho se bojíme:
+
+Jak by se to projevilo v běžné práci:
+
+Jaký návratový signál už máme zapsaný:
+
+Proč nestačí:
+
+Jaká data by nový dohled sbíral:
+```
+
+Často se ukáže, že zapsaný návratový signál stačí. Pokud nestačí, zpřesněte ho v kanonickém místě. Nezakládejte plošné sledování jen proto, že se týmu nechce věřit vlastnímu pravidlu.
+
+### Privacy-first kontrola
+
+První běžné použití po uzavřeném signálu má být datově lehčí než samotná revize. Revize mohla dočasně potřebovat pracovní poznámku nebo anonymizovaný příklad. Běžné použití už nemá přidávat další vrstvu.
+
+Kontrolní otázky:
+
+- Vznikl kvůli použití nový screenshot, export, tabulka nebo kopie zákaznického kontextu?
+- Zapisujeme výsledek práce, nebo chování konkrétního člověka?
+- Stačí anonymizovaná rozhodovací věta místo plného příkladu?
+- Má případná dočasná poznámka účel, vlastníka a datum smazání?
+- Nevrátil se původní podklad, který měl být po uzavření signálu odstraněný?
+
+Privacy-first zápis:
+
+```text
+Po prvním běžném použití zůstává jen [stručný výsledek / lokální oprava / potvrzený návratový signál]. Nevzniká [nový export / screenshot / tracker / seznam chyb / další evidence].
+```
+
+Příklad:
+
+```text
+Po prvním běžném použití zůstává jen potvrzení, že sales follow-up použil anonymizovanou větu. Nevzniká nový export follow-upů, screenshot zákaznického kontextu ani seznam obchodních chyb.
+```
+
+Codyho komentář: jestli pravidlo po uzavřeném signálu potřebuje vlastní kamerový štáb, tak není v běžném provozu. Je na reality show. A ty mají s produktivitou společné hlavně to, že člověk po nich chce uklidit.
+
+### Karta prvního běžného použití po signálu
+
+```text
+Pravidlo:
+
+Uzavřený návratový signál:
+
+Co bylo po signálu změněno:
+
+Běžná situace použití:
+
+Kde člověk pravidlo našel:
+
+Použil ho bez mimořádné pomoci?
+- ano / částečně / ne
+
+Výsledek:
+- pravidlo drží
+- chybí drobná opora
+- signál nebyl dobře uzavřený
+- objevila se nová otázka
+
+Nejmenší reakce:
+
+Co výslovně neotevíráme:
+
+Privacy-first výsledek:
+
+Návratový signál zůstává:
+- stejný / zpřesněný
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Zákaznický důkaz používáme anonymizovaně a bez původního screenshotu.
+
+Uzavřený návratový signál:
+Původní screenshot se objevil ve dvou obchodních materiálech; doplnili jsme hranici mezi anonymizovaným důkazem a schválenou case study.
+
+Co bylo po signálu změněno:
+Sales karta má novou větu, kdy anonymizovaný důkaz nestačí.
+
+Běžná situace použití:
+Follow-up po úvodním obchodním hovoru.
+
+Kde člověk pravidlo našel:
+V sales kartě u práce s důkazy.
+
+Použil ho bez mimořádné pomoci?
+Ano.
+
+Výsledek:
+Pravidlo drží.
+
+Nejmenší reakce:
+Žádná další změna.
+
+Co výslovně neotevíráme:
+Monitoring obchodních zpráv, novou knihovnu důkazů ani plošné schvalování follow-upů.
+
+Privacy-first výsledek:
+Zůstává jen potvrzení výsledku; nevzniká screenshot ani export komunikace.
+
+Návratový signál zůstává:
+Stejný.
+
+Vlastník:
+Marketing owner.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 5 minut
+
+Workshop použijte jen tehdy, když první použití neskončilo čistým stavem `pravidlo drží`. Jinak stačí karta.
+
+Minuta 1: vlastník přečte pravidlo a uzavřený návratový signál.
+
+Minuta 2: popíše první běžné použití jednou větou.
+
+Minuta 3: tým vybere jeden ze čtyř výsledků.
+
+Minuta 4: určí nejmenší reakci a co se výslovně neotevírá.
+
+Minuta 5: zapíše privacy-first výsledek a stav návratového signálu.
+
+Hlídací otázka:
+
+```text
+Řešíme problém v pravidle, nebo jen uklízíme jedno pracovní místo po návratu?
+```
+
+Pokud je odpověď "uklízíme jedno místo", nedělejte z toho revizi pravidla. Opravte místo a nechte pravidlo pracovat.
+
+### Checklist prvního běžného použití po signálu
+
+- Proběhlo použití v normální pracovní situaci?
+- Člověk našel aktuální pravidlo v kanonickém místě?
+- Nebylo potřeba vysvětlovat celou historii návratového signálu?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud pravidlo drží, nevzniká další kontrola?
+- Pokud chybí drobná opora, opravujeme jedno nejbližší místo?
+- Pokud signál nebyl dobře uzavřený, vracíme se k uzavření signálu, ne k plošnému dohledu?
+- Pokud vznikla nová otázka, má vlastní kartu mimo původní pravidlo?
+- Nevznikl nový screenshot, export, tracker ani seznam chyb?
+- Zůstává záznam krátký, anonymizovaný a zaměřený na rozhodnutí?
+- Návratový signál je potvrzený nebo zpřesněný?
+- Umí vlastník říct, proč pravidlo pokračuje v běžném provozu?
+
+První běžné použití po uzavřeném návratovém signálu má být skoro obyčejné. Právě v tom je jeho hodnota. Pravidlo se vrátí do práce, nezvětší kolem sebe dohled a tým si ověří, že umí reagovat na realitu bez toho, aby pokaždé postavil nový proces.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném návratovém signálu: ověření pravidla bez mimořádné péče, čtyři výsledky použití, prevence návratu dohledu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po úplném uzavření pravidla: čtyři uzavírací stavy, propsání do kanonického místa, prevence skryté následné kontroly, privacy-first úklid, šablona, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním návratovém signálu po úplném uzavření pravidla: tři filtry před otevřením, čtyři výsledky signálu, krátké revizní okno, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném měsíci: čtyři uzavírací stavy, kanonické místo, prevence třetí kontroly, privacy-first úklid, karta, mini workshop a checklist.
