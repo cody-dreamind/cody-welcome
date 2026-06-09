@@ -198447,8 +198447,316 @@ První měsíc po změně kontextu kompasu uzavíráme jako [výsledek]. Mění 
 
 První měsíc po změně kontextu není oslava ani audit. Je to krátké ověření, že se kompas v novém prostředí chová jako normální pracovní pravidlo. Když drží, nechte ho být. Když drhne, opravte jedno místo. Když vznikla stopa, ukliďte ji. A když nedrží, otevřete úzkou otázku, ne celou historii.
 
+## Uzavření prvního měsíce po změně kontextu kompasu
+
+První měsíc po změně kontextu má skončit jasně. Pokud zůstane jen pocit "asi to funguje", tým si odnese neurčitou opatrnost a kompas se začne znovu chovat jako křehké pravidlo, které někdo musí hlídat. Pokud se naopak z měsíční kontroly udělá nový provozní rituál, změna kontextu se nikdy opravdu neuzavře. Správný výstup je kratší: jeden stav, jedna věta, případně jedna oprava nebo úklid.
+
+Pracovní otázka pro uzavření:
+
+```text
+Můžeme po prvním měsíci uzavřít změnu kontextu jako běžný stav, nebo máme otevřít jednu přesně ohraničenou opravu?
+```
+
+Tato otázka nemá znovu hodnotit celý kompas. Hodnotí jen měsíc v novém kontextu. Pokud se původní pravidlo při změně kontextu nerozpadlo, nechte jeho starší rozhodnutí zavřené. Když najdete tření, zapište ho v místě, kde vzniklo. Když najdete datovou stopu, ukliďte ji. Když najdete nový problém, otevřete novou otázku, ne historickou rekonstrukci všech předchozích iterací.
+
+Příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických důkazech.
+
+Nový kontext:
+Sales follow-up e-maily.
+
+Měsíční výsledek:
+Drží s datovým úklidem.
+
+Uzavření:
+Změna kontextu se uzavírá. Mažeme dočasný screenshot z pracovního vlákna, do šablony doplňujeme odkaz na anonymizovanou formulaci a další návrat nastane jen tehdy, když dočasný podklad vznikne ve dvou různých sales situacích.
+```
+
+Všimněte si, že závěr neříká "budeme e-maily dál kontrolovat". Říká, co se stalo, co se uklidilo, co se nemění a jaký signál by téma znovu otevřel. To je přesně ten rozdíl mezi provozním klidem a nenápadným dohledem v kabátu péče.
+
+### Čtyři uzavírací stavy prvního měsíce
+
+Po měsíci vyberte jeden uzavírací stav:
+
+- `Uzavřít bez změny`: kompas drží, lidé ho používají samostatně a datová stopa se nezvětšila.
+- `Uzavřít po jedné lokální opravě`: kompas drží, ale jedno pracovní místo potřebovalo zpřesnit odkaz, větu, příklad nebo vlastnictví.
+- `Uzavřít po datovém úklidu`: pravidlo funguje, ale vznikla dočasná stopa, která se musí smazat, anonymizovat nebo přesunout do správného zdroje pravdy.
+- `Neuzavírat, otevřít novou úzkou otázku`: nový kontext ukázal jiný problém, který nejde vyřešit drobnou opravou stejného pravidla.
+
+U stavu `Uzavřít bez změny` nezakládejte pamětní zápis dlouhý jako obecní kronika. Stačí jedna věta v rozhodovacím logu nebo u kanonického místa:
+
+```text
+Po prvním měsíci v novém kontextu kompas drží bez změny; mimořádná kontrola končí a návrat nastane jen při opakovaném tření v běžné práci.
+```
+
+U stavu `Uzavřít po jedné lokální opravě` musí být oprava opravdu lokální. Dobré příklady:
+
+- doplnit odkaz na kanonickou formulaci do e-mailové šablony;
+- přepsat jednu nejasnou větu v checklistu;
+- přesunout pravidlo blíž k pracovnímu místu, kde se používá;
+- doplnit jeden anonymizovaný příklad;
+- zrušit starou poznámku, která ukazovala na původní kontext.
+
+Špatné příklady:
+
+- přepsat celý sales playbook;
+- založit nový schvalovací proces;
+- vytvořit měsíční dashboard používání pravidla;
+- sesbírat další vzorky zákaznických podkladů pro jistotu;
+- pozvat půl firmy na revizi jedné věty.
+
+U stavu `Uzavřít po datovém úklidu` nejdřív zavřete stopu, potom až text. Pokud pomocný export zůstane v chatu, odkazu, složce nebo osobní poznámce, uzavírací věta jen nalepí hezkou cedulku na neuklizené místo. A to je sice estetické, ale pořád nepořádek.
+
+U stavu `Neuzavírat, otevřít novou úzkou otázku` napište, proč se původní změna kontextu nedá zavřít stejným pravidlem. Důvod má být konkrétní:
+
+```text
+Neuzavíráme změnu kontextu jako běžný stav, protože follow-up e-maily neřeší stejný účel jako landing page: v e-mailu zákazník potřebuje rozhodovací důkaz pro interní předání, ne jen veřejnou důvěryhodnost. Otevíráme novou otázku: jak poskytnout bezpečný interně použitelný důkaz bez ukládání původních citlivých podkladů.
+```
+
+Tohle je nová otázka. Ne důvod vrátit se na začátek a pitvat celý kompas. Chirurgie ano, archeologie jen po pracovní době.
+
+### Co propsat do kanonického místa
+
+Uzavření prvního měsíce má zanechat stopu tam, kde ji další člověk najde při práci. Ne v dočasném vlákně, ne v poznámkách autora, ne v kalendářové události s názvem "rychle projít". Kanonické místo může být šablona, rozhodovací log, provozní karta, README procesu nebo konkrétní checklist.
+
+Do kanonického místa patří:
+
+- výsledný stav prvního měsíce;
+- jedna provedená oprava nebo věta "beze změny";
+- aktuální návratový signál;
+- případná privacy-first hranice;
+- odkaz na živý zdroj pravdy, pokud se změnil.
+
+Do kanonického místa nepatří:
+
+- seznam všech kontrolovaných případů, pokud nejsou potřeba pro práci;
+- osobní jména lidí, kteří pravidlo použili dobře nebo špatně;
+- kopie zákaznických podkladů;
+- dočasné screenshoty;
+- dlouhé vysvětlení historie, které nikdo při práci nepřečte.
+
+Krátký zápis může vypadat takto:
+
+```text
+Stav po prvním měsíci:
+Kompas drží v sales follow-up e-mailech po datovém úklidu.
+
+Změna:
+Do šablony doplněn odkaz na anonymizovanou formulaci; dočasný screenshot z pracovního vlákna smazán.
+
+Návratový signál:
+Dočasný podklad nebo export vznikne ve dvou různých sales situacích.
+
+Privacy-first hranice:
+Evidence používání pravidla se nevede podle jednotlivých lidí; stačí kontrola pracovního místa při návratovém signálu.
+```
+
+Tento zápis je krátký, ale použitelný. Člověk, který za měsíc otevře šablonu, nepotřebuje znát celé drama. Potřebuje vědět, jak má pracovat teď a kdy se má téma znovu otevřít.
+
+### Jak ukončit mimořádnou měsíční pozornost
+
+Po první změně kontextu se snadno vytvoří zvyk opatrnosti: ještě jednou se zeptáme autora, ještě jeden měsíc to podržíme v agendě, ještě jednou projdeme vzorky. Jenže každé "ještě jednou" přidává pravidlu skrytou obsluhu. Kompas pak možná funguje, ale jen proto, že ho někdo po nocích rovná do latě. Tomu se v odborné literatuře říká špatný nápad; v kanceláři obvykle "jen rychlá kontrola".
+
+Mimořádnou měsíční pozornost ukončete explicitně:
+
+```text
+Měsíční kontrola končí. Kompas se vrací do běžného rytmu a znovu se otevře jen při návratovém signálu.
+```
+
+Pokud byla lokální oprava:
+
+```text
+Měsíční kontrola končí po lokální opravě [místo]. Ověření proběhne při nejbližším běžném použití, ne samostatným reportem.
+```
+
+Pokud byl datový úklid:
+
+```text
+Měsíční kontrola končí po úklidu [stopa]. Zůstává pouze [bezpečný důkaz] v [zdroj pravdy] s revizí [datum nebo rytmus].
+```
+
+Pokud se otevírá nová otázka:
+
+```text
+Měsíční kontrolu neprodlužujeme. Uzavíráme ji jako nedržící v novém kontextu a otevíráme novou úzkou otázku [otázka] s vlastním rozsahem, důkazem a datovou hranicí.
+```
+
+Pravidlo: jakmile se uzavírací věta nevejde do jedné pracovní věty, pravděpodobně se snažíte schovat novou práci do staré kontroly. Rozdělte to. Starou kontrolu zavřete, novou otázku otevřete zvlášť.
+
+### Privacy-first uzavření měsíce
+
+Privacy-first uzavření se neptá jen na to, jestli kompas fungoval. Ptá se, jakou stopu po sobě zanechal:
+
+```text
+Co po měsíci zůstává v datech, přístupech, odkazech, exportech a pracovních poznámkách?
+```
+
+Projděte čtyři místa:
+
+- pracovní vlákna: nezůstaly tam citlivé příklady, exporty nebo screenshoty?
+- šablony: neobsahují starý odkaz na původní kontext nebo zbytečně osobní příklad?
+- složky a dokumenty: nevznikla paralelní kopie zdroje pravdy?
+- měření: nezačalo se sledovat používání pravidla podle lidí místo kvality pracovního místa?
+
+Privacy-first uzavření má jednu z těchto podob:
+
+```text
+Datová stopa se nezvětšila; žádný úklid není potřeba.
+```
+
+```text
+Mažeme dočasnou stopu [co], protože už splnila ověřovací účel a nepatří do dlouhodobého zdroje pravdy.
+```
+
+```text
+Anonymizujeme [co] a ponecháváme jen pracovní formulaci bez identifikátorů zákazníka.
+```
+
+```text
+Ponecháváme [co], protože má účel [účel], vlastníka [role] a revizi [datum nebo rytmus].
+```
+
+Pokud něco ponecháváte, napište proč. "Mohlo by se hodit" není účel, ale vstupenka do budoucího bordelu. V privacy-first provozu má každý ponechaný důkaz pracovat pro rozhodnutí, podporu, audit nebo zákaznický výsledek. Když neumíte říct pro který, je čas ho smazat, anonymizovat nebo odpojit od běžné pracovní trasy.
+
+### Karta uzavření prvního měsíce po změně kontextu
+
+```text
+Kompas:
+
+Původní kontext:
+
+Nový kontext:
+
+Měsíční kontrolní okno:
+
+Výsledek prvního měsíce:
+- uzavřít bez změny
+- uzavřít po jedné lokální opravě
+- uzavřít po datovém úklidu
+- neuzavírat, otevřít novou úzkou otázku
+
+Proč tento stav:
+
+Jedna provedená oprava:
+
+Datový úklid:
+- není potřeba
+- maže se
+- anonymizuje se
+- přesouvá se do zdroje pravdy
+- zůstává s účelem, vlastníkem a revizí
+
+Co se propsalo do kanonického místa:
+
+Co se výslovně neotevírá:
+
+Mimořádná měsíční pozornost:
+- končí
+- končí po nejbližším běžném použití
+- nahrazuje se novou úzkou otázkou
+
+Nová úzká otázka, pokud existuje:
+
+Návratový signál:
+
+Uzavírací věta:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Kompas:
+Datové minimum v zákaznických důkazech.
+
+Původní kontext:
+Landing page.
+
+Nový kontext:
+Sales follow-up e-maily.
+
+Měsíční kontrolní okno:
+Tři relevantní follow-upy za poslední měsíc.
+
+Výsledek prvního měsíce:
+Uzavřít po datovém úklidu.
+
+Proč tento stav:
+E-maily používají anonymizovanou formulaci samostatně, ale v jednom pracovním vlákně zůstal dočasný screenshot původního podkladu.
+
+Jedna provedená oprava:
+Do follow-up šablony doplněn odkaz na kanonickou anonymizovanou formulaci.
+
+Datový úklid:
+Screenshot se maže; v šabloně zůstává pouze anonymizovaná formulace.
+
+Co se propsalo do kanonického místa:
+Stav po měsíci, odkaz na formulaci, návratový signál a privacy-first hranice bez evidence podle lidí.
+
+Co se výslovně neotevírá:
+Sales playbook, schvalování každého e-mailu, nový report používání zákaznických důkazů.
+
+Mimořádná měsíční pozornost:
+Končí.
+
+Nová úzká otázka, pokud existuje:
+Nevzniká.
+
+Návratový signál:
+Dočasný podklad nebo export se znovu objeví ve dvou různých sales situacích.
+
+Uzavírací věta:
+První měsíc po změně kontextu uzavíráme po datovém úklidu: pravidlo v sales follow-upech drží, screenshot se maže, do šablony přibyl odkaz na anonymizovanou formulaci, neotevíráme sales playbook a další návrat nastane jen při opakovaném vzniku dočasných podkladů ve dvou různých sales situacích.
+
+Vlastník:
+Vlastník obsahu.
+
+Datum:
+2026-06-09.
+```
+
+### Mini workshop na 6 minut
+
+1. Minuta 1: přečtěte měsíční výsledek a připomeňte původní i nový kontext.
+2. Minuta 2: vyberte jeden ze čtyř uzavíracích stavů.
+3. Minuta 3: určete jednu opravu nebo potvrďte, že žádná není potřeba.
+4. Minuta 4: projděte datovou stopu a rozhodněte, co se maže, anonymizuje nebo ponechává s účelem.
+5. Minuta 5: napište kanonický zápis a návratový signál.
+6. Minuta 6: ukončete mimořádnou měsíční pozornost jednou větou.
+
+Výstup:
+
+```text
+První měsíc po změně kontextu kompasu uzavíráme jako [stav]. Mění se [jedna věc / nic], datová stopa [stav], mimořádná měsíční kontrola [končí / končí po nejbližším běžném použití / nahrazuje se novou úzkou otázkou] a další návrat nastane jen při [signál].
+```
+
+### Checklist uzavření prvního měsíce po změně kontextu
+
+- Vybíráme jeden uzavírací stav, ne směs dojmů?
+- Hodnotíme jen první měsíc v novém kontextu, ne celý historický kompas?
+- Pokud kompas drží, opravdu končí mimořádná měsíční pozornost?
+- Pokud je potřeba oprava, je lokální a navázaná na konkrétní pracovní místo?
+- Pokud vznikla datová stopa, je smazaná, anonymizovaná nebo ponechaná s účelem?
+- Nezakládáme nový report používání pravidla podle lidí?
+- Propsali jsme závěr do kanonického místa, kde ho další člověk najde při práci?
+- Nezůstává důležitý závěr jen v dočasném vlákně nebo osobních poznámkách?
+- Je zapsané, co se výslovně neotevírá?
+- Pokud se otevírá nová otázka, má vlastní rozsah, důkaz a datovou hranici?
+- Návratový signál je konkrétní, opakovatelný a navázaný na pracovní tření?
+- Uzavírací věta se dá přečíst bez znalosti celé historie?
+- Zůstává privacy-first hodnota silnější než pohodlí sbírat víc podkladů?
+
+Uzavření prvního měsíce je poslední brzda proti tomu, aby se z dobrého pravidla stal malý dohledový systém. Když kompas drží, nechte ho pracovat. Když potřebuje jednu opravu, udělejte jednu opravu. Když po sobě nechal data, ukliďte je. A když nový kontext ukázal jiný problém, otevřete novou úzkou otázku místo toho, abyste starou kontrolu natahovali jako gumu od tepláků.
+
 ## Pracovní log
 
+- 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního měsíce po změně kontextu stálého provozního kompasu: čtyři uzavírací stavy, propsání do kanonického místa, ukončení mimořádné pozornosti, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním měsíci po změně kontextu stálého provozního kompasu: tři měsíční signály, čtyři výsledky kontroly, ochrana před obnovením dohledu, privacy-first datový úklid, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po změně kontextu stálého provozního kompasu: čtyři uzavírací stavy, uzavírací věta, privacy-first dočištění datové stopy, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o druhém běžném použití po změně kontextu stálého provozního kompasu: přenositelnost pravidla do sousedního pracovního místa, samostatnost bez autora, privacy-first datová střídmost, přenosová věta, karta, mini workshop a checklist.
