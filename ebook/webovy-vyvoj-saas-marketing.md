@@ -202366,8 +202366,180 @@ Workshop končí ve chvíli, kdy je jasné, co se mění a co se nevrací. Pokud
 
 Uzavření prvního běžného použití má z pravidla sundat mimořádnou pozornost. Buď potvrdí, že pravidlo pracuje samo, nebo ho drobně posune do místa, kde má pracovat příště. Jakmile je výsledek propsaný, stopa uklizená a návratový signál jasný, nechte pravidlo být. V provozu je někdy největší známka dospělosti právě to, že se dokážete nedívat dál.
 
+## Druhé běžné použití po uzavření pozdějšího signálu
+
+Druhé běžné použití po uzavření pozdějšího signálu není další kontrola ze zvyku. Je to poslední lehké ověření, že pravidlo přežilo mimo první situaci, první osobu a první opravené pracovní místo. Pokud první použití ukázalo, že pravidlo jde použít, druhé použití má ukázat, že nejde jen o dobře připravenou výjimku.
+
+Otázka druhého použití je jednoduchá:
+
+```text
+Umí pravidlo fungovat v druhé běžné situaci bez návratu starého dohledu a bez nové evidence?
+```
+
+Slovo `druhé` je tady důležité. Neznamená druhý audit, druhé školení ani druhý pokus autora přesvědčit tým, že pravidlo je dobré. Znamená další normální průchod prací, ve kterém se pravidlo použije trochu jinde: jiný člověk, jiná stránka, jiný zákaznický důkaz, jiný onboardingový krok nebo jiná marketingová šablona.
+
+Příklad:
+
+```text
+První použití:
+Editor použil pravidlo u segmentové landing page a nahradil screenshot demo ukázkou.
+
+Druhé použití:
+Product marketer připravuje e-mail s odkazem na případovou studii a podle stejného pravidla zkontroluje, že ukázka výsledku neobsahuje neveřejná zákaznická data.
+
+Co se ověřuje:
+Pravidlo není svázané jen s landing page. Funguje i v dalším publikačním místě.
+
+Co se nevrací:
+Nevzniká nová kontrola všech e-mailů, tabulka zákaznických ukázek ani plošné schvalování marketingu.
+```
+
+Druhé použití má být malé, ale reálné. Pokud ho musíte složitě vyrábět, možná ještě nemáte běžnou situaci, ve které se pravidlo přirozeně používá. V takovém případě nečekejte na umělý test. Zapište návratový signál a vraťte se až ve chvíli, kdy situace nastane sama.
+
+### Co druhé použití ověřuje
+
+Druhé běžné použití ověřuje čtyři věci:
+
+- Přenositelnost: pravidlo funguje mimo první konkrétní případ.
+- Samostatnost: člověk nepotřebuje autora pravidla ani zvláštní připomenutí.
+- Nízké tření: pravidlo nezpomaluje práci víc, než odpovídá riziku.
+- Datovou střídmost: ověření nevyrábí nové kopie, exporty ani sledování.
+
+`Přenositelnost` neznamená, že pravidlo musí pokrýt všechny možné situace. Znamená jen, že jeho jádro není příliš lokální. Pokud pravidlo funguje jen na jedné stránce, může to být pořád užitečné, ale neměli byste ho vydávat za týmový standard.
+
+`Samostatnost` je přísnější než souhlas. Člověk může s pravidlem souhlasit, a přesto ho nepoužít, pokud není ve správné šabloně. Druhé použití proto sleduje hlavně pracovní trasu: kde člověk pravidlo viděl, jak ho pochopil a jestli podle něj rozhodl bez eskalace.
+
+`Nízké tření` chrání pravidlo před tím, aby se z něj stal malý byrokratický stroj. Dobré pravidlo má zpomalit práci jen v místě, kde je riziko skutečné. Pokud zpomaluje každý průchod, i když se rozhodnutí netýká citlivých dat, potřebuje zúžit.
+
+`Datová střídmost` je privacy-first pojistka. Druhé použití nemá dokazovat správnost pravidla tím, že uložíte další příklady, screenshoty nebo zákaznické materiály. Stačí zapsat typ situace, výsledek a případnou jednu opravu.
+
+### Čtyři výsledky druhého použití
+
+Po druhém běžném použití vyberte jeden ze čtyř výsledků:
+
+- Stabilní přenos: pravidlo fungovalo v druhé situaci bez pomoci a bez nové evidence.
+- Poslední lokální dočištění: pravidlo fungovalo, ale jedna formulace, odkaz nebo příklad ještě potřebuje drobnou úpravu.
+- Příliš úzké pravidlo: pravidlo bylo dobré pro první případ, ale druhá situace ukázala, že nemá být obecný standard.
+- Nový samostatný signál: druhé použití odkrylo jiné rozhodnutí, které nepatří do původního pravidla.
+
+`Stabilní přenos` je stav, kdy má pravidlo dostat klid. Neplánujte třetí použití jako kontrolu. Zapište, že pravidlo obstálo ve dvou běžných situacích, a vraťte ho do normálního provozu.
+
+`Poslední lokální dočištění` je přípustné, ale jen jednou. Například doplnit do šablony e-mailu stejnou rozhodovací otázku, která už dobře funguje v publikačním checklistu. Pokud druhé použití vyvolá tři opravy, nejde o poslední dočištění; pravidlo ještě není stabilní nebo má příliš široký slib.
+
+`Příliš úzké pravidlo` není selhání. Je to poctivé zjištění, že pravidlo má zůstat u konkrétního pracovního místa. V takovém případě ho nepřepisujte na obecný týmový standard. Ponechte ho tam, kde pomáhá, a pro širší téma otevřete novou otázku až ve chvíli, kdy se objeví další důkaz.
+
+`Nový samostatný signál` znamená, že druhá situace odkryla něco jiného. Například pravidlo pro zákaznické screenshoty je v pořádku, ale e-mailový proces nemá jasné vlastnictví právních textů. To nepatří do stejného pravidla. Zapište nový signál s vlastním názvem a původní pravidlo nezvětšujte.
+
+### Jak nevyrobit třetí kontrolu
+
+Po druhém použití bývá tým blízko k jedné zbytečné větě: "Ještě to jednou ověříme." Někdy je to rozumné. Častěji je to jen stará nejistota v novém kabátě. Pokud pravidlo obstálo dvakrát, třetí kontrola musí mít nový důvod, ne jen touhu po jistotě.
+
+Místo třetí kontroly napište návratový signál:
+
+```text
+Vrátíme se k pravidlu až tehdy, když druhý člověk v jiné běžné situaci nedokáže rozhodnout podle aktuální šablony bez mimořádné pomoci.
+```
+
+Nebo:
+
+```text
+Vrátíme se k pravidlu až tehdy, když se objeví nový typ zákaznického důkazu, který nepasuje do veřejného zdroje, anonymizované ukázky ani demo dat.
+```
+
+Třetí kontrola dává smysl jen tehdy, když druhé použití skončilo jako `poslední lokální dočištění` a chcete ověřit právě tuto jednu opravu. I tehdy ji držte úzce:
+
+```text
+Ověříme jen nově doplněnou otázku v e-mailové šabloně při nejbližším reálném e-mailu. Neotevíráme pravidlo, landing page ani starý signál.
+```
+
+To je rozdíl mezi úzkým ověřením opravy a návratem celé smyčky. První pomáhá. Druhé bobtná.
+
+### Privacy-first kontrola druhého použití
+
+Druhé použití bývá zrádné tím, že se tváří jako nevinné potvrzení. "Jen si uložíme příklad pro srovnání." "Jen si necháme screenshot, kdyby se někdo ptal." "Jen si uděláme tabulku sporných situací." Tak přesně vznikají datové stopy, které nikdo nechtěl vlastnit.
+
+Privacy-first pravidla pro druhé použití:
+
+- Zapisujte kategorii situace, ne kopii zákaznického materiálu.
+- Pokud potřebujete příklad, vytvořte demo nebo anonymizovanou variantu.
+- Nepřidávejte nový měřicí event jen proto, že pravidlo zrovna ověřujete.
+- Pomocné podklady smažte hned po uzavření výsledku.
+- Pokud pravidlo zůstává jen lokální, nešiřte k němu zbytečně přístupy.
+
+Dobrá věta do záznamu:
+
+```text
+Druhé běžné použití proběhlo v e-mailové šabloně bez nové evidence; zůstává jen rozhodnutí o typu ukázky a anonymizovaný popis situace.
+```
+
+Codyho komentář: privacy-first provoz není paranoia. Je to schopnost říct: "K rozhodnutí nám stačí méně." V praxi je to často nejlevnější bezpečnostní opatření, protože data, která nevzniknou, nemusíte později mazat, hlídat ani vysvětlovat.
+
+### Karta druhého běžného použití po pozdějším signálu
+
+```text
+Uzavřený pozdější signál:
+
+První běžné použití:
+
+Druhé běžné použití:
+
+Pracovní místo:
+
+Kdo pravidlo použil:
+
+Bylo pravidlo přenositelné mimo první situaci?
+
+Potřebovalo mimořádnou pomoc?
+
+Vzniklo nové tření?
+
+Výsledek:
+- stabilní přenos / poslední lokální dočištění / příliš úzké pravidlo / nový samostatný signál
+
+Jedna případná oprava:
+
+Co se výslovně neotevírá potřetí:
+
+Návratový signál:
+
+Jaká data jsme nesbírali:
+
+Co mažeme nebo anonymizujeme:
+
+Kanonické místo:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Vyberte druhé reálné použití pravidla, které není kopií prvního případu.
+2. Zeptejte se, jestli člověk pravidlo našel a použil bez mimořádné pomoci.
+3. Rozhodněte jeden ze čtyř výsledků.
+4. Pokud vznikla oprava, omezte ji na jednu větu, odkaz, příklad nebo pracovní místo.
+5. Napište, co se nebude ověřovat potřetí.
+6. Smažte nebo anonymizujte pomocné podklady.
+
+Workshop má skončit návratem pravidla do klidu. Pokud během něj vznikne nové téma, pojmenujte ho jako nový signál. Nepřidávejte ho do původního pravidla jen proto, že se objevilo ve stejném rozhovoru.
+
+### Checklist druhého běžného použití
+
+- Bylo druhé použití skutečně jiné než první případ?
+- Proběhlo v běžné práci, ne jako inscenovaný test?
+- Našel člověk pravidlo bez autora nebo mimořádného připomenutí?
+- Vedlo pravidlo ke konkrétnímu rozhodnutí?
+- Nevznikla nová tabulka, evidence, tracker ani schvalovací role?
+- Je jasné, zda pravidlo obstálo, potřebuje poslední lokální dočištění, zůstává úzké, nebo otevřelo nový signál?
+- Pokud vznikla oprava, je opravdu jen jedna?
+- Je zapsané, co se nebude kontrolovat potřetí?
+- Smazali jsme nebo anonymizovali pomocné podklady?
+- Má pravidlo návratový signál místo další naplánované kontroly?
+
+Druhé běžné použití po uzavření pozdějšího signálu je malá zkouška přenosu. Když pravidlo obstojí, nechte ho být. Když potřebuje jednu lokální opravu, udělejte ji a zavřete. Když ukáže nový problém, dejte mu vlastní smyčku. Hlavní pravidlo si zaslouží klid, ne další vrstvu dohledu, která se tváří jako péče.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o druhém běžném použití po uzavření pozdějšího signálu: přenositelnost, samostatnost, výsledné stavy, prevence třetí kontroly, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního běžného použití po pozdějším signálu: čtyři uzavírací stavy, uzavírací věta, kanonické místo, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním běžném použití po uzavření pozdějšího signálu: najitelnost, rozhodnutelnost, klid pravidla, čtyři výsledky použití, lokální opravy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření pozdějšího návratového signálu: čtyři uzavírací stavy, kanonická změna, prevence návratu staré kontroly, privacy-first úklid, karta a checklist.
