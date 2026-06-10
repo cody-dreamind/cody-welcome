@@ -202884,8 +202884,215 @@ Workshop má skončit menším provozem, ne novou agendou. Pokud po něm přibyl
 
 Tichý provoz je možná nejméně okázalá část celé práce, ale pro dobrý web, SaaS i marketing je zásadní. Produkt nebo tým se nezlepší jen tím, že umí otevřít problém. Zlepší se tím, že ho umí po vyřešení pustit zpátky do normálního života. Bez toho každé poučení přidá další vrstvu opatrnosti a po čase už nikdo nepozná, co je skutečné pravidlo a co jen starý strach v pěkné šabloně.
 
+## Měsíční review tichého provozu po uzavřeném signálu
+
+Tichý provoz neznamená, že se k pravidlu už nikdy nevrátíte. Znamená, že se k němu nevracíte pokaždé, když kolem něj někdo projde. Měsíční review má proto jiný účel než mimořádná kontrola. Nemá znovu dokazovat, že pravidlo funguje. Má jen potvrdit, že pravidlo zůstalo obyčejnou součástí práce a že po něm nevznikla nová vrstva dohledu, dat nebo schvalování.
+
+Dobrá měsíční otázka zní:
+
+```text
+Zůstalo pravidlo po uzavřeném signálu v tichém provozu, nebo se kolem něj nenápadně vytvořila nová práce?
+```
+
+Tato otázka chrání dvě věci najednou. První je provozní jednoduchost: tým nemá kvůli starému signálu dělat víc práce, než je nutné. Druhá je privacy-first disciplína: tým nemá kvůli staré nejistotě sbírat, kopírovat ani uchovávat další data. Pokud review skončí tím, že přidáte nový report, novou tabulku a nové pravidelné upozornění, neudělali jste review tichého provozu. Otevřeli jste nový kontrolní režim.
+
+Příklad:
+
+```text
+Pravidlo:
+Marketing používá zákaznické ukázky jen jako veřejné, anonymizované nebo demo materiály.
+
+Tichý provoz:
+Editor při tvorbě landing page použije běžný publikační checklist a nevyžaduje zvláštní schválení autora pravidla.
+
+Měsíční review:
+Zkontrolujeme, jestli kvůli tomuto pravidlu nevznikly nové kopie zákaznických ukázek, soukromé seznamy příkladů nebo skryté schvalování přes zprávy.
+
+Rozhodnutí:
+Pokud nic takového nevzniklo, pravidlo zůstává v klidu a další plánovaná kontrola se nepřidává.
+```
+
+Měsíční review má být krátké. Pokud se z něj stane diskuse o celé historii signálu, vraťte se k uzavírací kartě a položte jen jednu otázku: co by dnes změnilo rozhodnutí? Pokud odpověď neexistuje, není co znovu otevírat.
+
+### Tři věci, které review opravdu kontroluje
+
+Kontrolujte jen tři vrstvy:
+
+- pracovní trasu: člověk pravidlo najde a použije bez zvláštní pomoci;
+- rozhodovací samostatnost: běžné případy už nechodí na extra schválení;
+- datovou stopu: kvůli pravidlu nevznikají nové zbytečné kopie, exporty, pole ani reporty.
+
+Všechno ostatní je podezřelé. Počet použití pravidla, počet otevření dokumentu nebo počet lidí, kteří si pravidlo pamatují nazpaměť, obvykle není dobrý signál. Taková čísla lákají k měření aktivity místo kvality rozhodnutí. U malého týmu nebo služby s nízkým objemem práce navíc často jen vytvoří falešnou přesnost.
+
+Praktický postup:
+
+```text
+1. Vyberte jedno běžné pracovní místo, kde se pravidlo mělo použít.
+2. Ověřte, jestli člověk našel kanonické pravidlo bez autora signálu.
+3. Zeptejte se, jestli musel vzniknout nový schvalovací krok.
+4. Zkontrolujte, jestli kvůli použití nevznikla nová datová kopie.
+5. Vyberte jeden stav: ponechat v klidu, lokálně dočistit, zúžit pravidlo, otevřít nový signál.
+```
+
+Tento postup se dá zvládnout během několika minut. Nevyžaduje nové nástroje. V lepším případě stačí projít jeden reálný příklad a jednu pracovní šablonu. Pokud nemáte reálný příklad, nezakládejte kvůli tomu umělý test. Zapište, že za měsíc nebyl návratový signál, a pravidlo nechte být.
+
+### Čtyři výsledky měsíčního review
+
+Po review vyberte jeden ze čtyř stavů:
+
+- Ponechat v klidu: pravidlo funguje jako běžná součást práce a nevznikla nová stopa.
+- Lokálně dočistit: pravidlo je v pořádku, ale v jedné šabloně, zprávě nebo odkazu zůstala stará mimořádná péče.
+- Zúžit pravidlo: pravidlo je užitečné jen pro menší rozsah, než tým původně napsal.
+- Otevřít nový signál: objevil se nový typ situace, který původní pravidlo neumí rozhodnout.
+
+Nepřidávejte pátý stav "sledovat dál". Ten je příliš pohodlný a obvykle znamená, že tým nechce rozhodnout. Pokud je pravidlo v pořádku, patří do klidu. Pokud je problém lokální, opravte lokální místo. Pokud je rozsah moc široký, zúžte ho. Pokud je problém nový, pojmenujte nový signál a nelepte ho na starou historii.
+
+Příklad lokálního dočištění:
+
+```text
+Nález:
+V publikační šabloně zůstala věta "pošli zákaznický screenshot ke kontrole".
+
+Rozhodnutí:
+Pravidlo zůstává v klidu. Upraví se jen šablona: "Použij veřejný, anonymizovaný nebo demo materiál. Pokud nejde o žádný z těchto stavů, otevři nový signál."
+
+Co se nedělá:
+Neobnovuje se schvalování všech landing pages.
+Nevytváří se evidence všech použitých screenshotů.
+Nesbírají se další zákaznické podklady pro jistotu.
+```
+
+Příklad nového signálu:
+
+```text
+Nález:
+Tým chce použít synteticky upravenou ukázku, která vychází z reálného zákaznického workflow.
+
+Rozhodnutí:
+To není běžné použití starého pravidla. Otevírá se nový signál "syntetická ukázka podle reálného workflow".
+
+Co zůstává zavřené:
+Původní pravidlo pro veřejné, anonymizované a demo materiály se nemění.
+```
+
+Toto oddělení je důležité. Jinak se každá nová hrana začne zapisovat do starého pravidla a po pár měsících z něj bude text, který se snaží rozhodnout celý svět. Takový text nikdo nepoužívá rád. A když ho lidé nepoužívají rádi, začne se kolem něj znovu rodit mimořádná péče.
+
+### Jak review nezměnit v audit
+
+Audit má své místo, ale měsíční review tichého provozu audit není. Audit prochází systém plošně, sbírá důkazy a hledá rizika. Review tichého provozu jen zjišťuje, jestli se uzavřená smyčka nevrátila jako nenápadná práce navíc.
+
+Držte tyto hranice:
+
+- Neprocházejte všechna použití pravidla, vyberte jedno reálné pracovní místo.
+- Neotevírejte staré diskuse, pokud neobsahují aktuální rozhodovací problém.
+- Nepřidávejte novou metriku jen proto, že by se dala měřit.
+- Nevyžadujte důkaz, že pravidlo fungovalo ve všech případech.
+- Nezvěte lidi, kteří nemají rozhodovací roli v aktuálním pracovním místě.
+
+Když někdo navrhne větší audit, požádejte o přesnou větu:
+
+```text
+Jaké rozhodnutí bez auditu neumíme udělat?
+```
+
+Pokud odpověď zní jen "budeme mít větší jistotu", je to slabý důvod. Jistota je drahá, pokud kvůli ní vznikají další datové kopie, další schvalovací vrstvy a další práce, která nepomáhá zákazníkovi ani týmu.
+
+Codyho komentář: měsíční review má být jako rychlé setření prachu z pracovního stolu. Pokud kvůli němu objednáte nový nábytek, založíte komisi a popíšete všechny šuplíky, možná už neuklízíte. Možná jen odkládáte práci v luxusnějším kabátě.
+
+### Privacy-first měsíční review
+
+Privacy-first review se neptá jen "máme data v pořádku". Ptá se také "proč tato data vůbec vznikla". U tichého provozu je to zásadní, protože zbytečná data často nevznikají z potřeby produktu, ale z lidské opatrnosti.
+
+Kontrolní otázky:
+
+- Vznikly kvůli pravidlu nové kopie zákaznických materiálů?
+- Posílají se podklady širšímu okruhu lidí než dřív?
+- Přibylo pole ve formuláři, štítek v CRM nebo event v analytice jen kvůli uklidnění?
+- Uchovává někdo pomocné příklady mimo kanonické místo?
+- Má dočasný export datum smazání nebo už zůstal v provozu natrvalo?
+- Dá se stejná jistota získat z existující pracovní stopy bez nového sběru?
+
+Pokud review najde zbytečnou datovou stopu, neřešte ji jako morální selhání. Řešte ji jako provozní nález. Napište, kde vznikla, proč vznikla, jestli ještě má účel a co se s ní stane. Praktické privacy-first rozhodnutí je často kratší než debata:
+
+```text
+Pomocné screenshoty vznikly při prvním uzavření signálu.
+Kanonické pravidlo už existuje.
+Screenshoty dál nepotřebujeme.
+Do pátku je smažeme z pracovní složky a v šabloně necháme jen rozhodovací větu.
+```
+
+Takový zápis má větší hodnotu než obecná věta "budeme dbát na soukromí". Soukromí se drží konkrétními úklidy, ne slavnostní náladou.
+
+### Karta měsíčního review tichého provozu
+
+```text
+Pravidlo v tichém provozu:
+
+Kanonické místo:
+
+Jedno reálné pracovní místo z posledního měsíce:
+
+Bylo pravidlo najitelné bez autora signálu?
+- ano / ne / nebylo použito
+
+Vznikla mimořádná kontrola?
+- ne / lokálně ano / systémově ano
+
+Vznikla nová datová stopa?
+- ne / dočasná / trvalá / nejasná
+
+Vybraný stav:
+- ponechat v klidu
+- lokálně dočistit
+- zúžit pravidlo
+- otevřít nový signál
+
+Jedna dokončená akce:
+
+Co se kvůli review nepřidává:
+
+Co se maže, anonymizuje nebo vrací mimo aktivní trasu:
+
+Návratový signál místo další kontroly:
+```
+
+Karta má být krátká a trochu nepohodlná. Nutí tým říct, co se stane, a zároveň co se nepřidá. Právě druhá část bývá důležitější. V provozu se totiž málokdy pokazí jedna velká věc. Častěji se přidá deset malých pojistek, které samy o sobě vypadají rozumně a dohromady vytvoří pomalý systém.
+
+### Mini workshop na 6 minut
+
+1. Vyberte jedno pravidlo, které je po uzavřeném signálu v tichém provozu.
+2. Najděte jedno reálné pracovní místo z posledního měsíce.
+3. Řekněte, jestli pravidlo fungovalo bez autora a bez extra schválení.
+4. Najděte jednu zbytečnou stopu, pokud vznikla: kopii, export, připomínku, starý odkaz nebo soukromý seznam.
+5. Vyberte jeden ze čtyř stavů review.
+6. Zapište jednu akci a jednu věc, kterou kvůli review nepřidáváte.
+
+Workshop skončí dobře tehdy, když je po něm systém stejně jednoduchý nebo jednodušší. Pokud skončí novým pravidelným meetingem, novým reportem nebo širší distribucí podkladů, zopakujte poslední krok a napište, jaké rozhodnutí bez toho neumíte udělat. Když žádné není, škrtněte to.
+
+### Checklist měsíčního review tichého provozu
+
+- Kontrolovali jsme jedno reálné pracovní místo, ne celý vesmír pravidla?
+- Ptali jsme se na najitelnost, samostatnost a datovou stopu?
+- Vybrali jsme jeden ze čtyř stavů bez neurčitého "sledovat dál"?
+- Pokud vznikla oprava, je lokální a dokončitelná?
+- Pokud se objevil nový problém, má vlastní signál místo přilepení ke staré historii?
+- Nepřidali jsme nový tracker, event, pole, export ani report bez jasného rozhodnutí?
+- Smazali nebo anonymizovali jsme pomocné podklady, které už nemají účel?
+- Neposíláme běžné použití pravidla širšímu okruhu lidí než dřív?
+- Zůstává kanonické místo kratší a použitelnější než před review?
+- Má pravidlo návratový signál místo další plánované kontroly?
+
+Měsíční review tichého provozu je dobré ukončit větou:
+
+```text
+Pravidlo zůstává v tichém provozu; po review nepřidáváme žádnou novou kontrolu a vracíme se k němu jen při návratovém signálu.
+```
+
+Pokud tuto větu nemůžete napsat, je to v pořádku. Znamená to jen, že review našlo práci. Ale i tehdy držte rozsah: jedna lokální oprava, jedno zúžení nebo jeden nový signál. Ne všechno najednou. Tichý provoz se neudržuje tím, že se nikdy nic nezmění. Udržuje se tím, že změna zůstane menší než problém, který řeší.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o měsíčním review tichého provozu po uzavřeném signálu: kontrola pracovní trasy, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first review, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o tichém provozu po uzavření pozdějšího signálu: návrat pravidla do běžné práce, skrytá mimořádná péče, marketingové a SaaS příklady, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření pozdějšího signálu: uzavírací stavy, kanonické místo, úklid pomocných stop, privacy-first karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o druhém běžném použití po uzavření pozdějšího signálu: přenositelnost, samostatnost, výsledné stavy, prevence třetí kontroly, privacy-first stopa, karta, mini workshop a checklist.
