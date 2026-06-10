@@ -202692,8 +202692,201 @@ Workshop nesmí skončit seznamem dalších námětů. Pokud se během něj obje
 
 Uzavření druhého běžného použití je dobré místo, kde být trochu přísný. Ne na lidi, ale na rozsah. Pokud pravidlo funguje, vraťte ho do klidu. Pokud funguje jen někde, zúžte ho. Pokud ukázalo nový problém, oddělte ho. Hlavní výhra není další dokonalejší formulace, ale provoz, který se umí učit bez toho, aby po každém poučení zanechal novou vrstvu dohledu.
 
+## Tichý provoz po uzavření pozdějšího signálu
+
+Tichý provoz začíná ve chvíli, kdy už pravidlo nepotřebuje mimořádnou pozornost, ale tým má pořád čerstvou paměť na to, že se k němu nedávno vracel. Právě tady vzniká zvláštní riziko: lidé formálně uzavřou smyčku, ale v běžné práci se dál ptají, jestli to "raději ještě někdo nezkontroluje". Výsledkem není lepší kvalita. Výsledkem je neviditelná brzda, která se tváří jako odpovědnost.
+
+Tichý provoz má proto vlastní otázku:
+
+```text
+Umí pravidlo po uzavřeném pozdějším signálu fungovat stejně obyčejně jako ostatní pravidla?
+```
+
+Slovo `obyčejně` je záměrné. Nejde o slavnostní stabilizaci, nový audit ani další kolečko ověřování. Jde o to, aby se pravidlo vrátilo do normální pracovní trasy: člověk ho najde, použije, rozhodne a pokračuje. Bez zvláštního pingnutí autora. Bez nové tabulky. Bez dočasné poznámky, která "tam ještě chvíli zůstane".
+
+Příklad:
+
+```text
+Uzavřený signál:
+Tým si ujasnil pravidlo pro zákaznické ukázky v marketingových materiálech.
+
+Tichý provoz:
+Při další tvorbě landing page editor použije běžný publikační checklist. Neotevírá starý rozhodovací záznam, nežádá extra schválení a nevytváří kopii ukázky pro jistotu.
+
+Návratový signál:
+K pravidlu se vracíme jen tehdy, když se objeví ukázka, která není veřejná, anonymizovaná ani demo.
+```
+
+Tichý provoz není ignorování rizika. Je to dohoda, že riziko už má svoje místo v běžné práci. Pokud kvůli každému uzavřenému signálu necháte běžet zvláštní kontrolu, systém se nikdy nevrátí do klidu. Jen v něm přibývají malé pojistky, které časem nikdo neumí odlišit od skutečně nutných kroků.
+
+### Co v tichém provozu sledovat
+
+V tichém provozu nesledujte pravidlo plošně. Sledujte jen signály, které by opravdu změnily rozhodnutí:
+
+- člověk pravidlo v běžné práci nenajde;
+- pravidlo vede ke dvěma různým výkladům;
+- pravidlo zpomalí práci víc, než odpovídá riziku;
+- objeví se nový typ situace, který pravidlo neumí rozhodnout;
+- kvůli pravidlu vzniká nová datová stopa, kterou nikdo vědomě neschválil.
+
+Naopak nesledujte:
+
+- jestli si všichni pravidlo pamatují nazpaměť;
+- kolikrát se na něj kdo podíval;
+- jestli se někdo zeptal jednou pro jistotu;
+- historické důvody, proč se signál kdysi otevřel;
+- všechny případy, ve kterých pravidlo fungovalo normálně.
+
+Rozdíl je praktický. První seznam říká, kdy je potřeba jednat. Druhý seznam jen vyrábí dohled. Když pravidlo funguje, nepotřebujete o tom sbírat důkazy donekonečna. Potřebujete vědět, co by znamenalo, že fungovat přestalo.
+
+Dobrá věta pro tichý provoz:
+
+```text
+Pravidlo po uzavřeném signálu běží bez zvláštní kontroly; vracíme se k němu jen při nejasné nové situaci, dvojím výkladu nebo nechtěné datové stopě.
+```
+
+Špatná věta:
+
+```text
+Budeme si zatím zapisovat všechna použití pravidla, abychom viděli, jestli je opravdu stabilní.
+```
+
+Ta druhá věta vypadá pečlivě, ale vrací smyčku zpět do ověřování. Pokud k tomu není nový důvod, tichý provoz tím končí dřív, než začal.
+
+### Jak poznat skrytou mimořádnou péči
+
+Skrytá mimořádná péče se často neobjeví jako oficiální proces. Objeví se jako malé chování okolo:
+
+- autor pravidla je pořád v kopii zpráv, i když už nemá rozhodovat;
+- tým posílá hotové materiály "jen na rychlý pohled";
+- v šabloně zůstaly dvě podobné otázky, jedna stará a jedna nová;
+- někdo si drží soukromý seznam příkladů mimo kanonické místo;
+- při každém použití se znovu vysvětluje historie signálu.
+
+Jedna taková věc nemusí být problém. Dvě a více už ukazují, že pravidlo formálně zavřené je, ale psychologicky ne. V takovém případě neotevírejte celý signál. Opravte nejbližší pracovní místo, které mimořádnou péči drží při životě.
+
+Příklad lokální opravy:
+
+```text
+Skrytá péče:
+Product marketer posílá každý nový e-mail autorovi pravidla, protože ve starém vlákně zůstala věta "raději ještě kontrolujme ukázky".
+
+Lokální oprava:
+Do e-mailové šablony se doplní finální rozhodovací otázka a staré vlákno se odkáže na kanonické místo. Autor pravidla se z běžné kontroly vyjme.
+
+Co se neotevírá:
+Neřeší se znovu pravidlo pro všechny zákaznické důkazy.
+```
+
+Codyho komentář: nejhorší procesy často nezačnou jako procesy. Začnou jako "pošli mi to ještě radši". A pak se jednoho dne probudíte v zemi, kde každý kontroluje všechno a nikdo si nepamatuje proč. Romantika asi jen pro milovníky tabulek.
+
+### Tichý provoz a marketing
+
+V marketingu je tichý provoz zvlášť důležitý, protože uzavřené signály se snadno mění v publikační brzdy. Tým opraví pravidlo pro reference, screenshoty, případové studie nebo formuláře, ale pak se každá nová stránka chová jako výjimka.
+
+U marketingových materiálů si proto držte tři hranice:
+
+- Co se kontroluje vždy: například veřejnost zdroje, anonymizace ukázky nebo souhlas s použitím citace.
+- Co se kontroluje jen při novém typu materiálu: například první interaktivní demo, nový formát případové studie nebo nový distribuční kanál.
+- Co se po uzavření už nekontroluje: například běžné opakované použití stejného typu anonymizované ukázky.
+
+Tato hranice pomáhá rychlosti i soukromí. Když víte, co se nekontroluje znovu, nepotřebujete vytvářet další kopie zákaznických podkladů ani posílat materiály do širšího okruhu lidí. Marketing zůstane svižný a datová stopa se nerozlévá po nástrojích.
+
+### Tichý provoz a SaaS produkt
+
+V SaaS produktu se tichý provoz týká hlavně pravidel pro onboarding, podporu, automatizace, billing, oprávnění a práci s uživatelskými daty. Po uzavřeném signálu může tým snadno sklouznout k tomu, že do produktu přidá nový interní stav, nový štítek nebo nový report, aby měl jistotu, že se problém nevrátí.
+
+Nejdřív se zeptejte:
+
+```text
+Stačí upravit existující pracovní místo, nebo opravdu potřebujeme nový stav v systému?
+```
+
+Často stačí menší zásah:
+
+- doplnit jednu otázku do support makra;
+- zpřesnit text v admin rozhraní;
+- přidat příklad do interního checklistu;
+- odstranit starý odkaz z onboardingové šablony;
+- pojmenovat návratový signál v existujícím provozním záznamu.
+
+Nový stav v systému, nový event nebo nový report dávejte až tehdy, když bez něj člověk opakovaně nemůže rozhodnout. Jinak kvůli jedné uzavřené smyčce vytvoříte trvalou provozní vrstvu. Ta bude žít déle než problém, kvůli kterému vznikla.
+
+### Privacy-first hranice tichého provozu
+
+Tichý provoz je dobrý test privacy-first kultury. Pokud tým opravdu věří, že méně dat je často lepší provozní rozhodnutí, dokáže po uzavření signálu nesbírat další důkazy jen pro uklidnění.
+
+Pravidla:
+
+- Nezavádějte nové sledování jen kvůli tomu, že se pravidlo nedávno řešilo.
+- Neuchovávejte pomocné příklady, pokud už existuje finální rozhodovací věta.
+- Neposílejte běžné materiály širšímu okruhu lidí jen proto, že kdysi vznikl signál.
+- Nepřidávejte nová pole do formulářů, pokud návratový signál jde poznat z běžné práce.
+- U citlivějších ukázek používejte demo nebo anonymizovaný materiál místo reálných kopií.
+- Staré pracovní podklady držte mimo aktivní trasu, případně je smažte podle retenčního pravidla.
+
+Privacy-first tichý provoz má jednoduchý výsledek: pravidlo funguje, ale po jeho fungování nezůstává zbytečná stopa. To je přesně ten druh nenápadné kvality, kterou zákazník nevidí přímo, ale pozná ji ve chvíli, kdy se ptá, kde jeho data končí.
+
+### Karta tichého provozu
+
+```text
+Uzavřený pozdější signál:
+
+Kanonické pravidlo:
+
+Kde se používá v běžné práci:
+
+Co už není mimořádná kontrola:
+
+Návratové signály:
+- nenajitelnost pravidla
+- dvojí výklad
+- nové rozhodnutí
+- nechtěná datová stopa
+- jiné:
+
+Nejbližší pracovní místo, které by mohlo držet skrytou péči:
+
+Co se z něj odstraňuje nebo zjednodušuje:
+
+Jaká data kvůli tichému provozu nesbíráme:
+
+Kdo smí pravidlo znovu otevřít:
+
+Datum návratu jen při signálu:
+```
+
+Karta není nový report. Je to krátká pojistka proti tomu, aby se uzavřený signál nevrátil jako zvyk. Pokud ji tým vyplňuje déle než pár minut, pravděpodobně z ní dělá další kontrolu. V tom případě ji zkraťte na tři věty: co platí, co končí a kdy se vracíme.
+
+### Mini workshop na 5 minut
+
+1. Přečtěte poslední uzavírací kartu po druhém běžném použití.
+2. Řekněte jednou větou, jak pravidlo běží v normální práci.
+3. Najděte jedno místo, kde může zůstávat skrytá mimořádná péče.
+4. Odstraňte jednu zbytečnou kontrolu, kopii, připomínku nebo starý odkaz.
+5. Napište návratový signál místo další plánované kontroly.
+6. Zapište, jaká data díky tomu nevzniknou.
+
+Workshop má skončit menším provozem, ne novou agendou. Pokud po něm přibyla tabulka, pravidelný meeting nebo nový schvalovací krok, něco se pokazilo. Tichý provoz má odlehčit, ne přidat další patro.
+
+### Checklist tichého provozu
+
+- Je jasné, že pravidlo už neběží ve zvláštním režimu?
+- Ví tým, kde pravidlo najít v běžné pracovní trase?
+- Skončila dočasná kontrola, připomínka nebo role autora pravidla?
+- Je zapsaný návratový signál místo další plánované kontroly?
+- Nevzniká soukromý seznam příkladů mimo kanonické místo?
+- Neuchovávají se pomocné screenshoty, exporty nebo zákaznické materiály bez účelu?
+- Nešíří se přístup k podkladům širšímu okruhu lidí jen kvůli staré nejistotě?
+- Je jasné, co se při novém signálu otevře jako samostatná smyčka?
+- Umí vlastník říct, jaká data se díky tichému provozu nesbírají?
+- Je výsledek opravdu jednodušší než stav před uzavřením signálu?
+
+Tichý provoz je možná nejméně okázalá část celé práce, ale pro dobrý web, SaaS i marketing je zásadní. Produkt nebo tým se nezlepší jen tím, že umí otevřít problém. Zlepší se tím, že ho umí po vyřešení pustit zpátky do normálního života. Bez toho každé poučení přidá další vrstvu opatrnosti a po čase už nikdo nepozná, co je skutečné pravidlo a co jen starý strach v pěkné šabloně.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o tichém provozu po uzavření pozdějšího signálu: návrat pravidla do běžné práce, skrytá mimořádná péče, marketingové a SaaS příklady, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření pozdějšího signálu: uzavírací stavy, kanonické místo, úklid pomocných stop, privacy-first karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o druhém běžném použití po uzavření pozdějšího signálu: přenositelnost, samostatnost, výsledné stavy, prevence třetí kontroly, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního běžného použití po pozdějším signálu: čtyři uzavírací stavy, uzavírací věta, kanonické místo, privacy-first úklid, karta, mini workshop a checklist.
