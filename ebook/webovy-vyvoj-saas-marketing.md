@@ -201818,8 +201818,189 @@ Datum návratu:
 
 Pozdější návratový signál je zdravý, když po něm pravidlo neztratí klid. Buď se přenese do nového místa, opraví se staré tření, nebo vznikne nová úzká otázka. Nezdravý je ve chvíli, kdy jen znovu otevře všechno, co už bylo jednou uzavřené.
 
+## Uzavření pozdějšího návratového signálu
+
+Pozdější návratový signál se má uzavřít rychleji než původní smyčka. Už totiž nemáte dokazovat celý princip od nuly. Máte jen rozhodnout, jestli se pravidlo použilo ve starém místě špatně, potřebuje krátký přenos do nového místa, nebo se pod starým názvem objevil jiný problém.
+
+Uzavření proto nezačínejte otázkou "co všechno znovu zkontrolujeme". Začněte otázkou:
+
+```text
+Co musí po tomto signálu zůstat jasnější než před ním?
+```
+
+Dobrá odpověď má být malá:
+
+```text
+Po tomto signálu bude jasné, že segmentové landing pages používají zákaznické důkazy bez identifikovatelných screenshotů.
+```
+
+Špatná odpověď zní moc široce:
+
+```text
+Znovu zkontrolujeme všechny zákaznické důkazy napříč webem, sales materiály a interními šablonami.
+```
+
+Ta druhá odpověď může být někdy nutná, ale už to není uzavření pozdějšího signálu. Je to nová provozní revize. Pokud ji opravdu potřebujete, otevřete ji jako samostatnou smyčku s vlastním důvodem, vlastníkem a stop podmínkou. Nepřilepujte ji k malému signálu jen proto, že se tým bojí nechat věc v klidu.
+
+### Čtyři uzavírací stavy
+
+Pozdější signál uzavřete jedním ze čtyř stavů:
+
+- Lokální oprava: stejné místo selhalo a stačí opravit kanonické pravidlo, šablonu nebo odpovědnost.
+- Přenos do nového místa: princip platí, ale nové pracovní místo nemělo jasnou větu, podle které se řídit.
+- Nová úzká smyčka: signál ukázal nové rozhodnutí, které nejde vyřešit lokálním přenosem.
+- Žádná změna: signál byl šum, starý slovník pro jiný problém, nebo situace, kterou pravidlo už pokrývá.
+
+`Lokální oprava` má skončit úpravou jednoho místa. Ne tří checklistů, dvou dokumentů a jedné schůzky "pro jistotu". Pokud se musíte dotknout více míst, napište si, které je kanonické a která jen odkazují.
+
+`Přenos do nového místa` má skončit přenosovou větou vloženou do běžné práce. Typicky do briefu, publikačního checklistu, šablony nabídky, onboardingového postupu nebo rozhodovací karty.
+
+`Nová úzká smyčka` má mít nový název. Když ji nazvete stejně jako starý problém, tým bude automaticky opakovat staré řešení. Nový název nutí pojmenovat nové rozhodnutí.
+
+`Žádná změna` je legitimní výsledek. Napište ho stručně a bez pocitu viny. Někdy je nejprofesionálnější reakce na signál právě to, že nezavedete další proces. Ano, i nicnedělání se dá zapsat inteligentně. Zázraky administrativy, kapitola devadesátá sedmá.
+
+### Příklad uzavření
+
+```text
+Signál:
+V konceptu segmentové landing page se objevil screenshot zákaznického účtu.
+
+Typ:
+Stejný princip, nové místo.
+
+Uzavírací stav:
+Přenos do nového místa.
+
+Rozhodnutí:
+Segmentové landing pages mohou používat zákaznický důkaz jen jako veřejný odkaz, anonymizovanou ukázku nebo textový popis výsledku.
+
+Kanonická změna:
+Do publikačního checklistu pro segmentové landing pages přidáváme otázku:
+"Je každý zákaznický důkaz veřejný, anonymizovaný nebo nahrazený popisem?"
+
+Co neděláme:
+Neobnovujeme měsíční kontrolu všech zákaznických důkazů.
+Nevytváříme evidenci všech screenshotů.
+Nepřidáváme schvalování každého marketingového návrhu.
+
+Privacy-first úklid:
+Dočasný screenshot z návrhu mažeme. V záznamu necháváme jen anonymizovaný popis situace a odkaz na checklist.
+```
+
+Všimněte si, že výsledek je konkrétní, ale ne nafouknutý. Tým má lepší pravidlo pro nové místo, stará smyčka zůstává zavřená a datová stopa se nezvětšila jen kvůli nervozitě.
+
+### Co propsat do kanonického místa
+
+Do kanonického místa nepište celou historii signálu. Kanonické pravidlo má sloužit člověku, který přijde za měsíc a chce udělat práci správně, ne číst seriál o tom, jak jste se k pravidlu citově propracovali.
+
+Stačí tři věci:
+
+```text
+Pravidlo:
+
+Kde platí:
+
+Jak poznáme výjimku:
+```
+
+Příklad:
+
+```text
+Pravidlo:
+Zákaznický důkaz ve veřejném materiálu nesmí identifikovat zákazníka bez jasného souhlasu a účelu.
+
+Kde platí:
+Case studies, landing pages, sales PDF, newsletterové ukázky a veřejné prezentace.
+
+Jak poznáme výjimku:
+Existuje výslovný souhlas, materiál má jasný účel a vlastník obsahu ví, kde je souhlas uložený.
+```
+
+Tento zápis je použitelnější než dlouhá poznámka "po incidentu se screenshotem jsme se dohodli, že...". Historie může zůstat v pracovním logu, ale pracovní místo potřebuje pravidlo v přítomném čase.
+
+### Jak zabránit návratu staré kontroly
+
+Po uzavření pozdějšího signálu si explicitně napište, co se nevrací:
+
+- nevrací se pravidelná schůzka;
+- nevrací se stará kontrolní tabulka;
+- nevrací se zvláštní schvalovací role;
+- nevrací se plošný audit všeho podobného;
+- nevrací se sběr příkladů "pro jistotu".
+
+Tento zápis není byrokracie navíc. Je to pojistka proti tomu, aby malá oprava potichu obnovila starý dohled. Pokud tým potřebuje novou kontrolu, má ji pojmenovat jako nové rozhodnutí, ne schovat pod uzavření signálu.
+
+### Privacy-first uzavírací pravidlo
+
+Pozdější signál často vznikne kolem citlivých ukázek, zákaznických důkazů, obchodních poznámek nebo interních materiálů. Proto platí jednoduché pravidlo:
+
+```text
+Po uzavření má zůstat jen to, co pomáhá budoucímu rozhodnutí.
+```
+
+Typicky zůstává:
+
+- rozhodnutí;
+- kanonické pravidlo;
+- přenosová věta;
+- anonymizovaný příklad;
+- datum návratu, pokud je opravdu potřeba.
+
+Typicky mizí:
+
+- původní screenshot;
+- export z nástroje;
+- dočasná kopie zákaznického materiálu;
+- pracovní poznámky s osobními údaji;
+- duplicitní checklist vytvořený jen pro vyhodnocení signálu.
+
+Codyho komentář: dobré uzavření poznáte podle toho, že za sebou nenechá malou skládku "dočasných" souborů. Slovo dočasné je v týmech často jen formální název pro věci, které budou strašit ještě po dvou migracích.
+
+### Karta uzavření pozdějšího signálu
+
+```text
+Signál:
+
+Typ signálu:
+
+Uzavírací stav:
+- lokální oprava / přenos do nového místa / nová úzká smyčka / žádná změna
+
+Rozhodnutí:
+
+Kanonické místo:
+
+Co se mění:
+
+Co se výslovně nevrací:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Kdo ověří první použití:
+
+Návratový signál:
+
+Datum:
+```
+
+### Checklist uzavření
+
+- Má signál jeden jasný uzavírací stav?
+- Neopakujeme původní smyčku bez nového důvodu?
+- Je kanonická změna vložená do místa, kde tým skutečně pracuje?
+- Je zapsané, co se výslovně nevrací?
+- Pokud vzniká nová smyčka, má nový úzký název a vlastní stop podmínku?
+- Zůstává pravidlo srozumitelné v přítomném čase?
+- Smazali jsme nebo anonymizovali dočasné podklady?
+- Nezavedli jsme nový tracker, export ani evidenci jen kvůli uklidnění?
+- Ví vlastník, podle čeho pozná první správné použití?
+- Dá se celé uzavření vysvětlit jednou pracovní větou?
+
+Uzavřený pozdější signál má po sobě nechat méně neklidu, ne víc procesu. Pokud po něm tým ví, kde pravidlo platí, co se změnilo a co se nevrací, práce je hotová. Další kontrola má přijít až ve chvíli, kdy ji vyvolá skutečný návratový signál, ne jen pocit, že by bylo hezké mít ještě jednu jistotu v záloze.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o uzavření pozdějšího návratového signálu: čtyři uzavírací stavy, kanonická změna, prevence návratu staré kontroly, privacy-first úklid, karta a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o pozdějším návratovém signálu po uzavřeném měsíci: rozlišení typů signálu, přenosová věta, otevření nové smyčky jen při novém rozhodnutí, privacy-first hranice, karta a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního měsíce po uzavřeném návratovém signálu: čtyři uzavírací stavy, uzavírací karta, prevence druhé kontroly ze zvyku, privacy-first úklid a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním měsíci po uzavřeném návratovém signálu: samostatné použití pravidla, tichá závislost, čtyři výsledky kontroly, karta měsíce, privacy-first úklid, mini workshop a checklist.
