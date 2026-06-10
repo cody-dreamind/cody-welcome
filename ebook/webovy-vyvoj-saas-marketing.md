@@ -201513,8 +201513,143 @@ Pokud odpověď směřuje k další kontrole, zastavte se. Měsíční kontrola 
 
 První měsíc po uzavřeném návratovém signálu má potvrdit, že pravidlo přežilo návrat do běžné práce. Když ano, neoslavujte to novým procesem. Prostě ho nechte dělat svou práci. Někdy je nejvyšší forma provozní zralosti věc, o které už nikdo nemusí mluvit.
 
+## Uzavření prvního měsíce po uzavřeném návratovém signálu
+
+Měsíční kontrola po uzavřeném návratovém signálu má skončit rozhodnutím, ne dalším sledováním. Pokud se pravidlo měsíc používalo bez mimořádné péče, není důvod mu přidělovat zvláštní status. Pokud se objevilo lokální tření, opravte nejbližší pracovní místo. Pokud se vrátil skutečný signál, otevřete úzkou kartu. A pokud se při kontrole narodil nový nápad, odložte ho mimo původní smyčku.
+
+Uzavření měsíce proto začněte jednou větou:
+
+```text
+Za první měsíc po uzavřeném signálu jsme zjistili:
+Proto teď:
+Do běžného provozu se vrací:
+Mimo rozsah zůstává:
+Kvůli tomu dál nesbíráme:
+```
+
+Příklad:
+
+```text
+Za první měsíc po uzavřeném signálu jsme zjistili:
+Pravidlo pro anonymizované zákaznické důkazy se použilo v sales follow-upu i onboardingovém e-mailu. Jediné tření byl chybějící odkaz v onboardingové šabloně.
+
+Proto teď:
+Doplňujeme odkaz do šablony a měsíční kontrolu uzavíráme.
+
+Do běžného provozu se vrací:
+Pravidlo, že zákaznické důkazy používáme anonymizovaně a bez původních screenshotů.
+
+Mimo rozsah zůstává:
+Neotevíráme nový schvalovací proces pro všechny materiály.
+
+Kvůli tomu dál nesbíráme:
+Archiv screenshotů, seznam kontrolovaných lidí ani export zákaznických příkladů.
+```
+
+Tato věta je důležitá hlavně proto, že brání skrytému pokračování kontroly. Bez ní tým snadno skončí ve stavu "ještě to budeme chvíli sledovat". To někdy zní opatrně, ale často jen prodlužuje mimořádnou pozornost bez nového důvodu.
+
+### Čtyři uzavírací stavy
+
+Po prvním měsíci vyberte jeden stav:
+
+- Vrátit do klidu: pravidlo fungovalo samostatně a není potřeba žádná zvláštní akce.
+- Zavřít po lokální opravě: našlo se jedno tření, opravilo se a nevzniká nová kontrola.
+- Otevřít návratový signál: původní problém se opravdu vrátil a má úzkou pracovní kartu.
+- Odložit nový nápad: kontrola ukázala něco zajímavého, ale nepatří to do této smyčky.
+
+`Vrátit do klidu` je plnohodnotný výsledek. Není potřeba přidávat další měsíc kontroly jen proto, že se nic nepokazilo. Stabilita se nemá trestat dalším procesem.
+
+`Zavřít po lokální opravě` použijte tehdy, když stačilo opravit jedno místo: odkaz, větu, popisek, stav karty nebo starou poznámku. Po opravě nedělejte nový miniaudit. Zapište, co se opravilo, a nechte pravidlo běžet.
+
+`Otevřít návratový signál` patří pro situace, kdy se vrátila stejná nejistota, kvůli které smyčka vznikla. Například pravidlo říká, že nepoužíváte identifikovatelné zákaznické důkazy, ale v materiálu pro zákazníka se znovu objeví rozpoznatelný screenshot. To už není jen stará poznámka. To je důvod otevřít úzkou otázku.
+
+`Odložit nový nápad` je ochrana před rozšiřováním. Měsíční kontrola může ukázat, že by se podobné pravidlo hodilo i pro case studies, produktové screenshoty nebo interní onboarding. To může být dobrý nápad, ale nepatří do uzavření původní smyčky. Zapište ho zvlášť s návratovým signálem a vraťte původní pravidlo do klidu.
+
+### Uzavírací karta
+
+```text
+Pravidlo:
+
+Původní návratový signál:
+
+Výsledek prvního měsíce:
+- vrátit do klidu / zavřít po lokální opravě / otevřít návratový signál / odložit nový nápad
+
+Důkaz jednou větou:
+
+Co se případně opravilo:
+
+Co se dál nehlídá:
+
+Co zůstává mimo rozsah:
+
+Návratový signál pro další otevření:
+
+Privacy-first výsledek:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Kanonické místo pravidla:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+Karta má být kratší než samotná měsíční kontrola. Její účel není znovu vysvětlit historii, ale dát budoucímu čtenáři jasný stav: pravidlo je v klidu, oprava je hotová, signál je otevřený, nebo nový nápad čeká mimo tuto větev.
+
+### Jak nepřidat druhý měsíc omylem
+
+Druhý měsíc kontroly má vzniknout jen tehdy, když pro něj existuje jasný důvod. Ne proto, že "by bylo dobré to ještě hlídat". Pokud první měsíc skončil klidem, další zvláštní kontrola je většinou jen zbytková nervozita.
+
+Než napíšete další kontrolní termín, položte si tři otázky:
+
+- Co se má za druhý měsíc změnit proti prvnímu měsíci?
+- Jaké rozhodnutí nebude možné udělat bez druhé kontroly?
+- Nepůjde stejný signál zachytit v běžném rytmu, který už existuje?
+
+Pokud nemáte konkrétní odpověď, druhý měsíc nepřidávejte. Pravidlo už má návratový signál. Běžný provoz ho znovu otevře, když bude potřeba.
+
+Codyho komentář: "ještě to měsíc pohlídáme" je někdy rozumné. Ale často je to jen pohodlnější věta než "věříme vlastnímu pravidlu". Pokud pravidlu nevěříte ani po uzavřené smyčce, neopravujte kalendář. Opravte pravidlo.
+
+### Privacy-first uzavření měsíce
+
+Po měsíci bývá největší privacy-first práce v úklidu. Během návratového signálu, běžného použití a měsíční kontroly mohly vzniknout dočasné podklady: screenshoty, pracovní exporty, komentáře s detaily zákazníka, kopie šablon, seznamy použití nebo ruční poznámky. Pokud už neslouží rozhodnutí, nemají zůstávat.
+
+Rozdělte podklady do tří skupin:
+
+- Zachovat: aktuální pravidlo, návratový signál, krátký závěr měsíce a kanonický odkaz.
+- Zkrátit: rozhodovací poznámky, které obsahují víc detailů, než je nutné pro budoucí pochopení.
+- Smazat nebo anonymizovat: dočasné screenshoty, osobní příklady, exporty, kopie a kontrolní seznamy.
+
+Privacy-first uzavírací věta:
+
+```text
+Měsíční kontrola je uzavřená. Zachováváme pravidlo, stav a návratový signál; dočasné podklady z ověřování mažeme nebo anonymizujeme. Další data nesbíráme, dokud se neobjeví nový návratový signál.
+```
+
+Tím se z privacy-first nedělá dodatečný compliance úkol. Je to normální součást uzavření práce: co už nemá účel, nemá v systému zůstávat jen proto, že mazání není tak zábavné jako přidávání.
+
+### Checklist uzavření prvního měsíce
+
+- Má měsíční kontrola jeden jasný výsledek?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je důkaz zapsaný jednou větou?
+- Pokud proběhla lokální oprava, zůstala opravdu lokální?
+- Pokud se vrátil návratový signál, má úzkou pracovní kartu?
+- Pokud vznikl nový nápad, je oddělený od původní smyčky?
+- Je napsané, co se dál nehlídá?
+- Nevzniká druhý měsíc kontroly jen ze zvyku?
+- Je návratový signál dost jasný pro běžný provoz?
+- Uklidili jsme dočasné screenshoty, exporty, kopie a osobní poznámky?
+- Zůstává kanonické pravidlo tam, kde ho člověk při práci najde?
+- Končí uzavření klidem, ne novou servisní vrstvou?
+
+Uzavření prvního měsíce je dobré ve chvíli, kdy po něm zůstane méně věcí než před ním: méně dočasných podkladů, méně mimořádné pozornosti, méně skrytých kontrol a jasnější návratový signál. Pokud po uzavření přibyly nové tabulky, kalendářové připomínky a kontrolní role, smyčka se ve skutečnosti nezavřela. Jen si oblékla hezčí procesní kabát.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního měsíce po uzavřeném návratovém signálu: čtyři uzavírací stavy, uzavírací karta, prevence druhé kontroly ze zvyku, privacy-first úklid a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním měsíci po uzavřeném návratovém signálu: samostatné použití pravidla, tichá závislost, čtyři výsledky kontroly, karta měsíce, privacy-first úklid, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, propsání do kanonického místa, uzavírací karta, privacy-first úklid, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratovém signálu: přenosové riziko, čtyři výsledky použití, prevence třetí kontroly, privacy-first kontrola, karta, mini workshop a checklist.
