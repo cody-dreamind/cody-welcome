@@ -201647,8 +201647,180 @@ Tím se z privacy-first nedělá dodatečný compliance úkol. Je to normální 
 
 Uzavření prvního měsíce je dobré ve chvíli, kdy po něm zůstane méně věcí než před ním: méně dočasných podkladů, méně mimořádné pozornosti, méně skrytých kontrol a jasnější návratový signál. Pokud po uzavření přibyly nové tabulky, kalendářové připomínky a kontrolní role, smyčka se ve skutečnosti nezavřela. Jen si oblékla hezčí procesní kabát.
 
+## Pozdější návratový signál po uzavřeném měsíci
+
+Když se po uzavřeném měsíci objeví další signál, není to automatický důkaz, že se původní smyčka měla sledovat déle. Běžný provoz má občas narazit na hranu pravidla. Důležité je rozlišit, jestli se vrátil stejný problém, vznikl nový kontext, nebo jen někdo použil starý jazyk pro jinou situaci.
+
+Začněte krátkým rozlišením:
+
+```text
+Co se objevilo:
+
+Kde se to objevilo:
+
+Je to stejný návratový signál jako dřív?
+
+Co se změnilo od uzavřeného měsíce:
+
+Jaké rozhodnutí je teď potřeba:
+
+Co kvůli tomu nebudeme znovu zavádět:
+```
+
+Příklad:
+
+```text
+Co se objevilo:
+V návrhu nové landing page je znovu použitý screenshot zákaznického účtu.
+
+Kde se to objevilo:
+V konceptu stránky pro nový segment, ne v běžném sales follow-upu.
+
+Je to stejný návratový signál jako dřív?
+Částečně. Problém je pořád identifikovatelný zákaznický důkaz, ale vznikl v novém typu materiálu.
+
+Co se změnilo od uzavřeného měsíce:
+Začali jsme připravovat veřejné stránky pro segmenty, kde šablona zatím nemá jasné pravidlo pro screenshoty.
+
+Jaké rozhodnutí je teď potřeba:
+Doplnit pravidlo pro veřejné segmentové stránky, ne obnovit měsíční kontrolu všech materiálů.
+
+Co kvůli tomu nebudeme znovu zavádět:
+Nevracíme kontrolní tabulku použití zákaznických důkazů ani schvalování každého follow-upu.
+```
+
+Tím se signál vezme vážně, ale nepřenese se na něj stará mimořádná péče. Uzavřený měsíc nebyl slib, že se problém nikdy nevrátí. Byl to důkaz, že pravidlo umí fungovat v běžném rytmu a že další reakce má začít od konkrétní situace, ne od celé historie.
+
+### Tři typy pozdějšího signálu
+
+Pozdější signál obvykle patří do jedné ze tří skupin:
+
+- Stejný problém, stejné místo: pravidlo se vrátilo do starého tření a je potřeba opravit kanonické místo nebo odpovědnost.
+- Stejný princip, nové místo: pravidlo fungovalo, ale nový materiál, kanál, role nebo workflow nemá jasné napojení.
+- Nový problém se starým slovníkem: lidé používají starý název signálu pro situaci, která už patří do jiné otázky.
+
+`Stejný problém, stejné místo` je nejvážnější. Pokud se po uzavření měsíce znovu objeví stejné selhání ve stejném pracovním místě, nepomůže jen připomenutí pravidla. Zkontrolujte, jestli kanonické místo vůbec někdo používá, jestli je součástí šablony a jestli má vlastník právo ho změnit.
+
+`Stejný princip, nové místo` je nejběžnější. Pravidlo se osvědčilo v jednom kanálu, ale práce se posunula jinam: nový typ landing page, nový onboardingový e-mail, nový sales materiál, nový interní checklist. Tady obvykle stačí přenosová věta, ne restart celé smyčky.
+
+`Nový problém se starým slovníkem` je záludný. Tým řekne "zase máme problém s anonymizací", ale ve skutečnosti řeší například slabou knihovnu veřejných důkazů, nejasné vlastnictví obsahu nebo tlak na rychlé publikování. V takovém případě staré pravidlo nechte být a otevřete novou otázku.
+
+### Přenosová věta místo nové kontroly
+
+Když jde o stejný princip v novém místě, napište jednu přenosovou větu:
+
+```text
+Pravidlo zůstává stejné:
+
+Nové pracovní místo je:
+
+Při práci to poznáme podle:
+
+Do šablony doplňujeme:
+
+Kontrolu navíc nezavádíme, protože:
+```
+
+Příklad:
+
+```text
+Pravidlo zůstává stejné:
+Zákaznický důkaz nesmí odhalit identitu zákazníka bez jasného souhlasu a účelu.
+
+Nové pracovní místo je:
+Koncept segmentové landing page.
+
+Při práci to poznáme podle:
+Každý screenshot má buď veřejný zdroj, anonymizovanou podobu, nebo je nahrazen popisem výsledku.
+
+Do šablony doplňujeme:
+Krátkou kontrolu "obsahuje stránka identifikovatelný zákaznický důkaz?"
+
+Kontrolu navíc nezavádíme, protože:
+Stačí doplnit existující publikační checklist, nepotřebujeme samostatnou evidenci všech screenshotů.
+```
+
+Přenosová věta je most mezi starým pravidlem a novou situací. Má být krátká a vložená tam, kde se práce reálně děje. Pokud kvůli ní vznikne nový dokument, nová tabulka a nová pravidelná schůzka, skoro jistě jste z přenosu udělali projekt.
+
+### Kdy otevřít novou smyčku
+
+Novou smyčku otevřete jen tehdy, když pozdější signál ukáže nové rozhodnutí. Typicky:
+
+- vznikl nový veřejný kanál, kde se pracuje s citlivějšími důkazy;
+- staré pravidlo chrání jedno riziko, ale současná práce vytváří jiné;
+- tým nemá jasné místo, kam nové příklady ukládat;
+- rozhodnutí ovlivní web, sales i delivery najednou;
+- nejde udělat lokální přenos bez změny vlastnictví.
+
+Nová smyčka má začít malou otázkou, ne názvem starého problému. Místo "znovu anonymizace" napište třeba "jak mají segmentové landing pages používat zákaznické důkazy bez identifikovatelných screenshotů". To je otázka, ze které jde udělat konkrétní pravidlo, checklist a ověření.
+
+Codyho komentář: návratový signál není pozvánka k opakování celé staré kontroly. Je to pracovní signál. Když ho pojmenujete přesně, často zjistíte, že nepotřebuje terapii celé historie, ale jednu slušně napsanou větu ve správné šabloně.
+
+### Privacy-first hranice pozdějšího signálu
+
+Pozdější signál svádí k tomu, že si tým začne "pro jistotu" ukládat víc příkladů. To je přesně chvíle, kdy má privacy-first brzda největší hodnotu. Nepotřebujete archiv všech sporných screenshotů, pokud rozhodnutí vyřeší anonymizovaná ukázka, popis situace a aktualizovaná šablona.
+
+Před sběrem nových podkladů se zeptejte:
+
+- Stačí nám popsat situaci bez osobních nebo zákaznických detailů?
+- Umíme použít anonymizovaný příklad místo skutečného screenshotu?
+- Musíme ukládat původní materiál, nebo stačí odkaz na kanonické pravidlo?
+- Má nový podklad jasnou retenci?
+- Kdo ho po uzavření smaže nebo zkrátí?
+
+Privacy-first uzavření pozdějšího signálu:
+
+```text
+Pozdější signál jsme vyhodnotili bez obnovení průběžného dohledu. Zachováváme jen rozhodnutí, přenosovou větu a odkaz na kanonické pravidlo. Dočasné příklady po úpravě mažeme nebo anonymizujeme.
+```
+
+### Karta pozdějšího signálu
+
+```text
+Signál:
+
+Místo výskytu:
+
+Typ signálu:
+- stejný problém, stejné místo / stejný princip, nové místo / nový problém se starým slovníkem
+
+Rozhodnutí:
+
+Přenosová věta:
+
+Co neopakujeme ze staré smyčky:
+
+Co případně doplňujeme do šablony:
+
+Privacy-first hranice:
+
+Co mažeme nebo anonymizujeme:
+
+Kanonické místo:
+
+Vlastník:
+
+Datum návratu:
+```
+
+### Checklist pozdějšího signálu
+
+- Popsali jsme konkrétně, co se objevilo a kde?
+- Rozlišili jsme stejný problém, nový kontext a nový problém?
+- Neobnovili jsme měsíční kontrolu jen proto, že se signál objevil?
+- Pokud jde o nové místo, vznikla přenosová věta?
+- Je přenosová věta vložená do pracovního místa, kde ji tým použije?
+- Pokud jde o nový problém, má vlastní úzkou otázku?
+- Nevracíme staré tabulky, schvalování ani mimořádné role bez důvodu?
+- Sbíráme jen podklady nutné pro rozhodnutí?
+- Má dočasný materiál jasné smazání, zkrácení nebo anonymizaci?
+- Zůstává kanonické pravidlo čitelné i bez znalosti celé historie?
+
+Pozdější návratový signál je zdravý, když po něm pravidlo neztratí klid. Buď se přenese do nového místa, opraví se staré tření, nebo vznikne nová úzká otázka. Nezdravý je ve chvíli, kdy jen znovu otevře všechno, co už bylo jednou uzavřené.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o pozdějším návratovém signálu po uzavřeném měsíci: rozlišení typů signálu, přenosová věta, otevření nové smyčky jen při novém rozhodnutí, privacy-first hranice, karta a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního měsíce po uzavřeném návratovém signálu: čtyři uzavírací stavy, uzavírací karta, prevence druhé kontroly ze zvyku, privacy-first úklid a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním měsíci po uzavřeném návratovém signálu: samostatné použití pravidla, tichá závislost, čtyři výsledky kontroly, karta měsíce, privacy-first úklid, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, propsání do kanonického místa, uzavírací karta, privacy-first úklid, mini workshop a checklist.
