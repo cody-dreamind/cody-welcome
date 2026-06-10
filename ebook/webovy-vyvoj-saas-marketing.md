@@ -204451,8 +204451,280 @@ Workshop má skončit menší agendou než začal. Pokud po něm vzniknou tři n
 
 Dlouhodobý klid je dobrý konec stabilizační smyčky. Ne proto, že tým přestane být pozorný, ale proto, že pozornost přesune zpátky do práce. Pravidlo zůstává tam, kde rozhoduje. Zbytek se uklidí. A když přijde skutečný návratový signál, otevře se nová malá smyčka, ne celé staré album provozních obav.
 
+## První návratový signál po dlouhodobém klidu
+
+Dlouhodobý klid končí jen tehdy, když se opravdu stane něco, co pravidlo neumí pokrýt běžným provozem. První návratový signál po dvou kvartálních sanity checkech je proto citlivý okamžik: tým může udělat dospělý malý návrat, nebo se polekat a obnovit celou starou kontrolní mašinerii.
+
+Nejdřív zpomalte. Návratový signál není automatické povolení znovu otevřít všechno, co se kdysi řešilo. Je to pozvánka položit jednu novou rozhodovací otázku.
+
+Začněte zápisem:
+
+```text
+Pravidlo v dlouhodobém klidu:
+
+Kanonické místo:
+
+Co se právě stalo:
+
+Proč to může být návratový signál:
+
+Co se od posledního uzavření změnilo:
+
+Jaká nejmenší otázka teď potřebuje odpověď:
+
+Co z původní historie znovu neotevíráme:
+
+Jaká data zatím nesbíráme:
+```
+
+Příklad z marketingu:
+
+```text
+Pravidlo v dlouhodobém klidu:
+U kampaní neposíláme kontakty do nových nástrojů bez účelu, vlastníka a data smazání.
+
+Co se právě stalo:
+Tým chce otestovat nový nástroj pro segmentaci publika u partnerské kampaně.
+
+Proč to může být návratový signál:
+Vznikl by nový dodavatel, nový export kontaktů a nový účel zpracování.
+
+Nejmenší otázka:
+Umíme rozhodnout kvalitu partnerské kampaně bez exportu osobních kontaktů do nového nástroje?
+
+Co znovu neotevíráme:
+Neděláme audit všech minulých kampaní.
+
+Jaká data zatím nesbíráme:
+Nepřipravujeme export kontaktů, segmentační kopii ani testovací import.
+```
+
+Tady nejde o to být brzda. Jde o to nepustit starou energii zpátky do provozu větším otvorem, než je nutné. Pokud se objevil nový nástroj, řešte nový nástroj. Nevracejte se automaticky ke všem dávným debatám o analytice, kampaních a retenci.
+
+### Rozlišujte signál, kopii a nervozitu
+
+Po dlouhodobém klidu vypadají tři věci podobně, ale vedou k různým akcím:
+
+- Skutečný návratový signál: mění se kontext, datový tok, odpovědnost, kanál nebo riziko.
+- Stará kopie: někde přežil neplatný dokument, komentář, checklist nebo export.
+- Provozní nervozita: někdo má pocit, že by se pravidlo mělo znovu zkontrolovat "pro jistotu".
+
+Každá situace má jinou odpověď:
+
+```text
+Skutečný návratový signál:
+Otevřít novou malou smyčku s jednou otázkou.
+
+Stará kopie:
+Uklidit nebo přesměrovat kopii na kanonické místo.
+
+Provozní nervozita:
+Vrátit se k návratovému signálu a nic nového nezakládat.
+```
+
+Příklad staré kopie:
+
+```text
+Situace:
+V interní wiki je starý návod, který doporučuje exportovat kontakty do pomocné tabulky.
+
+Výsledek:
+Není to návratový signál. Kanonické pravidlo pořád platí.
+
+Akce:
+Smazat starý návod nebo ho nahradit odkazem na aktuální kampaňový brief.
+```
+
+Příklad nervozity:
+
+```text
+Situace:
+Nikdo nehlásí problém, ale po čtvrtletním plánování zazní "neměli bychom radši projít všechny kampaně?".
+
+Výsledek:
+Není to návratový signál. Chybí nová skutečnost.
+
+Akce:
+Napsat, že samostatná kontrola se neobnovuje bez nového nástroje, exportu, datového toku nebo incidentu.
+```
+
+Příklad skutečného signálu:
+
+```text
+Situace:
+Do SaaS produktu má přibýt nové měření chování uživatele v onboardingovém průchodu.
+
+Výsledek:
+Je to návratový signál, protože vzniká nový event a možná nová retenční potřeba.
+
+Akce:
+Otevřít malou smyčku: jaké jedno rozhodnutí má event podpořit a kdy se data smažou nebo agregují?
+```
+
+Rozlišení těchto tří stavů je praktické hlavně proto, že chrání tým před falešnou prací. Stará kopie potřebuje úklid. Nervozita potřebuje hranici. Skutečný signál potřebuje otázku.
+
+### Malá smyčka místo obnovy dohledu
+
+Když se potvrdí skutečný návratový signál, nezačínejte plánem kontroly. Začněte malou smyčkou:
+
+```text
+Nová otázka:
+
+Nejmenší pracovní místo:
+
+Nejmenší důkaz:
+
+Kdo rozhodne:
+
+Kdy se smyčka zavře:
+
+Co se kvůli ní neotevírá:
+
+Jaká data zatím nevznikají:
+```
+
+Příklad:
+
+```text
+Nová otázka:
+Potřebujeme pro vyhodnocení partnerské kampaně osobní kontakty v novém segmentačním nástroji?
+
+Nejmenší pracovní místo:
+Brief jedné partnerské kampaně.
+
+Nejmenší důkaz:
+Porovnáme, zda stačí agregované výsledky z existující analytiky a ruční kvalita poptávek.
+
+Kdo rozhodne:
+Marketing owner spolu s vlastníkem datového toku.
+
+Kdy se smyčka zavře:
+Před prvním importem nebo před rozhodnutím nástroj nepoužít.
+
+Co se neotevírá:
+Neotevíráme plošné přenastavení marketingové analytiky.
+
+Jaká data zatím nevznikají:
+Žádný export kontaktů, žádná testovací kopie publika, žádné obohacené segmenty.
+```
+
+Tato smyčka je dost malá na to, aby se dala dokončit. Zároveň je dost konkrétní, aby zabránila oblíbenému provoznímu sportu: začít "jen zjišťovat možnosti" a o týden později mít tři účty u dodavatelů, dvě tabulky a nikdo neví, kdo to má smazat.
+
+### Co nebrat z historie
+
+První návrat po dlouhodobém klidu často svádí k vytažení celé historie. To je většinou zbytečné. Z historie vezměte jen:
+
+- aktuální kanonické pravidlo;
+- důvod, proč přešlo do dlouhodobého klidu;
+- návratový signál;
+- privacy-first hranici;
+- poslední známý vlastník pracovního místa.
+
+Neberte automaticky:
+
+- staré exporty;
+- kompletní rozhodovací zápisy;
+- screenshoty starých stavů;
+- jména lidí, kteří na původní problém narazili;
+- dávné varianty řešení, pokud dnešní otázka začíná jinde.
+
+Historie má pomoci neudělat stejnou chybu. Nemá z nové malé smyčky udělat rekonstrukci původního seriálu. Ano, seriály mají rády návraty postav. Provoz ne. Provoz má rád čistou otázku a krátkou cestu k rozhodnutí.
+
+### Privacy-first návrat
+
+Privacy-first návrat začíná tím, že data ještě nevzniknou. Dokud nevíte, jaké rozhodnutí nový signál vyžaduje, nesbírejte si "pro jistotu" podklady. To platí pro webové eventy, kontakty, exporty, session recording, screenshoty interních obrazovek i ruční poznámky s osobními detaily.
+
+Dobrá věta při návratu:
+
+```text
+Návratový signál otevírá rozhodovací otázku, ne sběr dat; nové podklady vzniknou až po určení účelu, vlastníka a retenční hranice.
+```
+
+Pokud už někdo podklady vytvořil, přidejte úklid do stejné smyčky:
+
+```text
+Dočasně vzniklo:
+
+Kdo má přístup:
+
+K čemu to bylo použito:
+
+Co se smaže nebo anonymizuje:
+
+Do kdy:
+```
+
+Codyho komentář: "jen testovací export" je často nejdražší věta v privacy-first provozu. Ne proto, že by export sám o sobě zničil svět, ale protože umí přežít důvod, kvůli kterému vznikl. A pak sedí někde v koutě jako soubor s názvem final_final_leads.xlsx, což je skoro hororový žánr.
+
+### Karta prvního návratového signálu po dlouhodobém klidu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Stav před signálem:
+- dlouhodobý klid
+
+Co se stalo:
+
+Typ situace:
+- skutečný návratový signál / stará kopie / provozní nervozita
+
+Pokud jde o starou kopii, co uklízíme:
+
+Pokud jde o nervozitu, jakou hranici potvrzujeme:
+
+Pokud jde o skutečný signál, nová malá otázka:
+
+Nejmenší pracovní místo:
+
+Nejmenší důkaz:
+
+Co z původní historie znovu neotevíráme:
+
+Jaká data zatím nesbíráme:
+
+Pokud data už vznikla, co smažeme nebo anonymizujeme:
+
+Vlastník:
+
+Stop podmínka:
+
+Datum návratu:
+```
+
+### Mini workshop na 7 minut
+
+1. Otevřete kanonické místo pravidla.
+2. Pojmenujte, co se právě stalo.
+3. Rozhodněte, zda jde o skutečný signál, starou kopii nebo nervozitu.
+4. U staré kopie určete jedno místo úklidu.
+5. U nervozity potvrďte návratový signál a nic nového nezakládejte.
+6. U skutečného signálu napište jednu malou rozhodovací otázku.
+7. Zapište, jaká data zatím nevzniknou nebo co se smaže.
+
+Workshop má skončit jednou ze tří akcí: úklid kopie, potvrzení klidu, nebo malá smyčka. Pokud skončí "uděláme širší review", nejspíš jste přeskočili rozlišení signálu.
+
+### Checklist prvního návratového signálu
+
+- Ověřili jsme kanonické místo před otevřením nové práce?
+- Rozlišili jsme skutečný signál, starou kopii a provozní nervozitu?
+- Pokud jde o starou kopii, řešíme ji úklidem, ne novou strategií?
+- Pokud jde o nervozitu, nezakládáme další kontrolu bez signálu?
+- Pokud jde o skutečný signál, má nová smyčka jednu rozhodovací otázku?
+- Je vybrané nejmenší pracovní místo?
+- Víme, co z původní historie znovu neotevíráme?
+- Nevznikl předčasný export, tracker, screenshot ani pomocná databáze?
+- Pokud už dočasná data vznikla, mají vlastníka a datum smazání?
+- Má smyčka stop podmínku a datum návratu?
+- Zůstává dlouhodobý klid výchozím stavem pro všechno, co signál opravdu nezasáhl?
+
+První návratový signál po dlouhodobém klidu má být přesný, ne dramatický. Dobrý tým se nelekne, že se pravidlo znovu objevilo. Jen rozliší, jestli jde o úklid, nervozitu nebo nové rozhodnutí, a podle toho udělá nejmenší odpovídající krok.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o prvním návratovém signálu po dlouhodobém klidu: rozlišení skutečného signálu, staré kopie a provozní nervozity, malá smyčka, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o dlouhodobém klidu po dvou kvartálních sanity checkech: ukončení samostatné kontroly, návratové signály, privacy-first provoz bez nových evidencí, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření druhého kvartálního sanity checku: uzavírací stavy, kanonické propsání, úklid podkladů, prevence třetí kontroly, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o druhém kvartálním sanity checku po stabilním návratu pravidla: tichý provoz, poslední lokální připomínka, sloučení do širšího standardu, privacy-first kontrola, karta, mini workshop a checklist.
