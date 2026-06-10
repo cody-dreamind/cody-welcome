@@ -205914,8 +205914,226 @@ Pokud workshop potřebuje víc času, nejspíš neuzavíráte druhé použití. 
 
 Uzavření druhého běžného použití je malá tečka za dlouhou smyčkou. Pravidlo se vrátilo z klidu, obstálo v první situaci, obstálo i v druhé, a teď má znovu zmizet do běžné práce. To je dobrý konec: žádná fanfára, žádný nový dohled, jen čisté pravidlo na správném místě a méně datového šumu okolo.
 
+## Archivace návratové smyčky po druhém běžném použití
+
+Po uzavření druhého běžného použití zbývá ještě jedna nenápadná práce: archivovat návratovou smyčku tak, aby z ní zůstala použitelná paměť, ne provozní sediment. Tým často umí napsat pravidlo, ověřit ho a vrátit do běžného rytmu. Pak ale nechá v dokumentech viset staré poznámky, pracovní kopie, screenshoty, provizorní checklisty a komentáře z doby, kdy pravidlo ještě nebylo stabilní.
+
+Archivace není oslava hotové práce. Je to technický úklid. Má odpovědět na tři otázky:
+
+- Co potřebuje další člověk, aby pravidlo správně použil?
+- Co potřebuje vlastník, aby poznal skutečný návratový signál?
+- Co už jen vysvětluje minulost, ale nepomáhá další práci?
+
+Pokud něco nepatří ani do jedné z prvních dvou odpovědí, pravděpodobně to nepatří do živého provozu.
+
+Začněte archivační větou:
+
+```text
+Návratová smyčka [název] je uzavřená. V živém provozu zůstává [pravidlo / věta / karta], v archivu zůstává [krátký anonymizovaný závěr] a mažeme [dočasné podklady].
+```
+
+Příklad:
+
+```text
+Návratová smyčka kampanových exportů je uzavřená. V živém provozu zůstává věta v kampaňovém briefu, v archivu zůstává krátký anonymizovaný závěr a mažeme pracovní kopie exportních checklistů, screenshoty návrhů a komentáře z ověřování.
+```
+
+Dobrá archivační věta je nudná. Neobsahuje dramata, zásluhy ani kroniku incidentu. Říká, co je dál pracovní realita.
+
+### Tři vrstvy archivu
+
+Rozdělte výstupy smyčky do tří vrstev:
+
+1. Živý provoz.
+2. Krátká týmová paměť.
+3. Odstraněné nebo anonymizované podklady.
+
+`Živý provoz` je místo, kde pravidlo opravdu pracuje. Typicky brief, checklist, šablona nabídky, onboardingový krok, provozní karta nebo produktové rozhodovací místo. Sem nepatří popis celé historie. Patří sem jen formulace, kterou člověk použije při práci.
+
+`Krátká týmová paměť` je stručný záznam, proč pravidlo existuje a jak poznat návratový signál. Může mít tři až pět vět. Pokud potřebuje celou stránku, nejspíš do ní přenášíte staré podklady místo závěru.
+
+`Odstraněné nebo anonymizované podklady` jsou všechno, co pomohlo rozhodnout, ale už nemá být používáno. Pracovní komentáře, osobní poznámky, dočasné exporty, kopie briefů, screenshoty a tabulky s lidmi často vypadají neškodně. Jenže v součtu tvoří datovou stopu, kterou nikdo nepotřebuje a někdo ji jednou bude muset vysvětlovat.
+
+Praktické pravidlo:
+
+```text
+Pokud podklad nevede k budoucímu rozhodnutí, nepatří do živého místa.
+Pokud obsahuje osobní nebo zákaznický detail, musí mít jasný účel a retenci.
+Pokud má jen historickou hodnotu, zkraťte ho na anonymizovaný závěr.
+```
+
+### Co ponechat v živém provozu
+
+V živém provozu ponechte jen to, co přímo pomáhá další práci:
+
+- aktuální pravidlo v přítomném čase;
+- místo, kde se pravidlo používá;
+- návratový signál;
+- vlastnictví pravidla nebo části procesu;
+- jedna věta s hranicí, co se nesmí sbírat, měřit nebo exportovat;
+- odkaz na krátký anonymizovaný závěr, pokud je opravdu potřeba.
+
+Příklad živého zápisu v kampaňovém briefu:
+
+```text
+Export kontaktů vzniká jen pro konkrétní rozhodovací nebo doručovací účel. Každý export má vlastníka, datum smazání a omezený rozsah polí. Návratový signál: návrh kampaně žádá export kontaktů bez účelu, vlastníka nebo data smazání.
+```
+
+To stačí. Další člověk nepotřebuje vědět, kdo se před třemi měsíci bál ztráty dat v tabulce, kolik bylo komentářů v dokumentu ani proč se první návrh checklistu nepovedl. Potřebuje pravidlo, hranici a signál.
+
+### Co dát do krátké týmové paměti
+
+Krátká týmová paměť má být komprimovaná. Ne archivní šanon, spíš štítek na krabici.
+
+Použijte tuto šablonu:
+
+```text
+Název smyčky:
+
+Proč vznikla:
+
+Aktuální pravidlo:
+
+Návratový signál:
+
+Co jsme výslovně nezavedli:
+
+Co jsme smazali nebo anonymizovali:
+
+Datum uzavření:
+
+Vlastník:
+```
+
+Vyplněný příklad:
+
+```text
+Název smyčky:
+Kampaňové exporty kontaktů.
+
+Proč vznikla:
+Tým potřeboval zabránit exportům bez jasného účelu a data smazání.
+
+Aktuální pravidlo:
+Export kontaktů vzniká jen s účelem, vlastníkem, minimálním rozsahem polí a datem smazání.
+
+Návratový signál:
+Nová kampaň žádá export kontaktů bez účelu, vlastníka nebo data smazání.
+
+Co jsme výslovně nezavedli:
+Trvalý seznam exportů podle lidí, detailní klikový tracking ani centrální tabulku všech kampaní.
+
+Co jsme smazali nebo anonymizovali:
+Pracovní komentáře, kopie starých briefů a screenshoty návrhů.
+
+Datum uzavření:
+2026-06-10.
+
+Vlastník:
+Marketing lead.
+```
+
+Tento záznam je dostatečný pro týmovou paměť a zároveň zbytečně neprodlužuje život starých detailů.
+
+### Jak nearchivovat strach
+
+Největší chyba po návratové smyčce je archivovat strach místo rozhodnutí. Poznáte to podle formulací:
+
+- "Raději si necháme i původní kopii."
+- "Možná se bude hodit celý export."
+- "Pro jistotu ponecháme tabulku použití."
+- "Ještě měsíc budeme kontrolovat, jestli to někdo dodržuje."
+- "Necháme tam komentáře, ať je vidět kontext."
+
+Každá z těch vět může znít rozumně. Dohromady ale říkají: pravidlu ještě nevěříme, tak si necháme data navíc. Privacy-first provoz má opačný reflex. Když pravidlo funguje, zmenší stopu. Nezvětší ji.
+
+Nahraďte strach rozhodovací hranicí:
+
+```text
+Neponecháváme původní podklady. Pokud se objeví návratový signál, otevřeme novou krátkou smyčku podle aktuální situace.
+```
+
+Codyho komentář: archiv nemá být mrazák na staré nervy. Když se bojíte něco smazat, napište přesně, jaké budoucí rozhodnutí by bez toho nešlo udělat. Pokud žádné nenajdete, mazejte nebo anonymizujte.
+
+### Privacy-first archivační kontrola
+
+Před uzavřením archivu projděte pět kontrolních otázek:
+
+1. Obsahuje archiv osobní údaje, zákaznické detaily nebo interní poznámky lidí?
+2. Je pro každý ponechaný detail jasný budoucí účel?
+3. Má každý ponechaný detail vlastníka a retenční hranici?
+4. Je živé pravidlo použitelné bez starých podkladů?
+5. Lze návratový signál poznat bez průběžného sledování lidí?
+
+Pokud je odpověď na první otázku ano a na druhou nebo třetí ne, podklad nepatří do archivu. Pokud je odpověď na čtvrtou otázku ne, neopravujte archiv. Opravte pravidlo v živém místě. Pokud je odpověď na pátou otázku ne, návratový signál je příliš široký nebo moc špehovací.
+
+Privacy-first archivace není jen mazání. Je to důkaz, že tým umí provozovat pravidla bez toho, aby si z každé epizody nechal datový batoh.
+
+### Karta archivace návratové smyčky
+
+```text
+Název smyčky:
+
+Uzavřené pravidlo:
+
+Živé pracovní místo:
+
+Krátký anonymizovaný závěr:
+
+Návratový signál:
+
+Co zůstává v živém provozu:
+
+Co zůstává v týmové paměti:
+
+Co mažeme:
+
+Co anonymizujeme:
+
+Co výslovně nezavádíme:
+
+Retenční hranice:
+
+Vlastník:
+
+Datum uzavření:
+```
+
+### Mini workshop na 6 minut
+
+1. Vlastník přečte uzavřené pravidlo a návratový signál.
+2. Tým určí živé pracovní místo, kde pravidlo zůstává.
+3. Vybere maximálně pět vět do týmové paměti.
+4. Sepíše dočasné podklady ke smazání nebo anonymizaci.
+5. Potvrdí, že nevzniká žádné nové měření lidí, kliků ani používání dokumentace.
+6. Zapíše retenční hranici a vlastníka archivu.
+
+Hlídací otázka:
+
+```text
+Pomáhá tento archiv dalšímu rozhodnutí, nebo jen uklidňuje náš pocit, že nic neztratíme?
+```
+
+Pokud odpověď míří k pocitu jistoty, zkraťte archiv. Jistota má být v pravidle a návratovém signálu, ne v hromadě starých podkladů.
+
+### Checklist archivace návratové smyčky
+
+- Je návratová smyčka skutečně uzavřená po druhém běžném použití?
+- Má pravidlo jasné živé pracovní místo?
+- Je pravidlo formulované v přítomném čase?
+- Je návratový signál konkrétní a použitelný bez průběžného dohledu?
+- Zůstává v týmové paměti jen krátký anonymizovaný závěr?
+- Jsou dočasné pracovní kopie, screenshoty, exporty a komentáře označené ke smazání?
+- Má každý ponechaný detail jasný účel, vlastníka a retenční hranici?
+- Nevzniká nová evidence podle lidí, klikání nebo používání dokumentace?
+- Je jasně napsané, co výslovně nezavádíme?
+- Dokáže nový člověk pravidlo použít bez přístupu ke starým podkladům?
+
+Archivace návratové smyčky je poslední test provozní dospělosti. Nejde o to, jestli umíte napsat další dokument. Jde o to, jestli umíte nechat v provozu jen to, co pomáhá práci, a zbytek pustit. Dobré pravidlo má být lehké. Dobrý archiv taky.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o archivaci návratové smyčky po druhém běžném použití: tři vrstvy archivu, živé pravidlo, krátká týmová paměť, prevence archivace strachu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z dlouhodobého klidu: uzavírací stavy, konec mimořádné péče, podmínky pro nepouštění do klidu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o druhém běžném použití po návratu z dlouhodobého klidu: přenositelnost pravidla, výsledné stavy, prevence třetí kontroly ze zvyku, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z dlouhodobého klidu: uzavírací stavy, kanonické propsání, úklid stop, prevence nové kontroly ze zvyku, privacy-first závěr, karta, mini workshop a checklist.
