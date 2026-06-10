@@ -205726,8 +205726,197 @@ Pokud odpověď míří k prodlužování režimu, vraťte se ke stop podmínce.
 
 Druhé běžné použití má být poslední lehký dotek po návratu z dlouhodobého klidu. Když pravidlo funguje i mimo čerstvý kontext, nechte ho pracovat. Přesně tak vypadá zralý provoz: méně zvláštních kontrol, méně datového šumu a víc energie na věci, které zákazník opravdu pozná.
 
+## Uzavření druhého běžného použití po návratu z dlouhodobého klidu
+
+Druhé běžné použití po návratu z dlouhodobého klidu má smysl jen tehdy, když po něm opravdu skončí mimořádná pozornost. Pokud pravidlo obstálo ve dvou běžných situacích, už nepotřebuje další kolečko dokazování. Potřebuje krátké uzavření, které řekne: pravidlo je přenositelné, žije v kanonickém místě, další návrat má jasný signál a dočasné stopy z ověřování se uklízejí.
+
+Bez uzavření se snadno stane opak. Tým sice řekne, že pravidlo funguje, ale ponechá si pomocnou poznámku, ruční kontrolu, připomínku v chatu nebo třetí ověření "kdyby náhodou". Tím se dlouhodobý klid nikdy doopravdy nevrátí. Pravidlo sice prošlo testem, ale pořád kolem něj chodíte po špičkách.
+
+Začněte uzavírací větou:
+
+```text
+Po druhém běžném použití pravidlo [název] [drží / potřebuje lokální oporu / není přenositelné / otevřelo nové téma]. Dál zůstává v [kanonické místo] a mimo běžný rytmus se otevře jen při [návratový signál].
+```
+
+Příklad:
+
+```text
+Po druhém běžném použití pravidlo o kampanových exportech drží. Dál zůstává v části "data a měření" kampaňového briefu a mimo běžný rytmus se otevře jen tehdy, když návrh kampaně znovu vyžádá export kontaktů bez účelu, vlastníka a data smazání.
+```
+
+Tato věta má jednu důležitou vlastnost: není v ní žádná nostalgie. Neříká, jak složité bylo pravidlo vrátit z dlouhodobého klidu, kdo u toho byl ani jaké všechny podklady se tehdy řešily. Říká jen to, co potřebuje další člověk při práci.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden ze čtyř stavů:
+
+- Uzavřít do běžného rytmu: pravidlo je přenositelné a nepotřebuje další zvláštní péči.
+- Uzavřít s lokální oporou: pravidlo funguje, ale jedno pracovní místo potřebuje drobnou větu, odkaz nebo příklad.
+- Vrátit k přepisu pravidla: pravidlo je pořád příliš závislé na původní historii.
+- Otevřít nové téma: druhá situace ukázala jiný problém, který nepatří do původního pravidla.
+
+`Uzavřít do běžného rytmu` je nejčistší výsledek. Zapište stav, ukliďte ověřovací stopu a nepřidávejte třetí použití. Pokud pravidlo obstálo u člověka, který nebyl u původního návratu, a v jiné běžné situaci, už máte dost signálů pro klid.
+
+`Uzavřít s lokální oporou` použijte, když pravidlo drží, ale potřebuje malou oporu v místě práce. Například doplnit do briefu jednu větu "export kontaktů vzniká jen po schválení účelu a data smazání". Lokální opora není nová kapitola. Je to malá pojistka, aby další člověk nemusel znát historii.
+
+`Vrátit k přepisu pravidla` znamená, že pravidlo pořád mluví jazykem staré epizody. Člověk bez kontextu ho sice najde, ale nerozumí, kdy ho použít. V takové chvíli nepřidávejte další vysvětlení pod pravidlo. Přepište samotné pravidlo do přítomného pracovního tvaru.
+
+`Otevřít nové téma` je správné, když druhé použití ukáže jiný problém. Například pravidlo o kampanových exportech funguje, ale při úpravě landing page se ukáže, že tým nemá jasnou odpovědnost za obsahové segmenty. To není chyba exportního pravidla. To je nová otázka.
+
+### Co uzavřením končí
+
+Uzavření má výslovně říct, co končí. Jinak zvláštní režim přežije v malých zbytcích.
+
+Typicky končí:
+
+- dočasné poznámky z prvního a druhého použití;
+- ruční připomínky vlastníkovi před dalším review;
+- pomocný seznam míst, kde se pravidlo zkoušelo;
+- screenshoty, pracovní kopie a komentáře, které už neslouží rozhodnutí;
+- plán třetí kontroly bez konkrétní nezodpovězené otázky.
+
+Příklad uzavření:
+
+```text
+Končí:
+Dočasná poznámka k druhému použití, ruční připomínka před dalším briefem a pracovní kopie checklistu.
+
+Zůstává:
+Jedna věta v kanonickém briefu, návratový signál a běžná měsíční kontrola kampaní.
+```
+
+Tento rozdíl je praktický. Zůstává pravidlo, ne péče okolo pravidla. Zůstává návratový signál, ne nervozita. Zůstává běžný rytmus, ne speciální režim pro téma, které už obstálo.
+
+### Kdy přece jen nepustit pravidlo do klidu
+
+Pravidlo nepouštějte do klidu, pokud druhé použití zanechalo skutečnou nezodpovězenou otázku:
+
+- člověk pravidlo použil jen díky ústnímu vysvětlení vlastníka;
+- pravidlo nebylo v kanonickém místě, ale v pracovní kopii;
+- dočasná lokální opora se ukázala jako nutná pro každé použití;
+- druhá situace otevřela nový sběr dat, který pravidlo neumí ohraničit;
+- návratový signál je tak široký, že by spouštěl kontrolu skoro pořád.
+
+V takové chvíli nepište "ještě sledovat". To je slabé. Napište konkrétní mezistav:
+
+```text
+Pravidlo zatím nepouštíme do klidu, protože:
+
+Chybí:
+
+Nejmenší oprava:
+
+Ověříme při:
+
+Co zatím neotevíráme:
+
+Jaká data zatím nesbíráme:
+```
+
+Mezistav má být krátký a nepohodlně konkrétní. Pokud neumíte říct, co chybí a kde to ověříte, možná pravidlo do klidu pustit můžete a jen se vám nechce vzdát kontroly.
+
+### Privacy-first uzavření
+
+Druhé použití po dlouhodobém klidu je ideální chvíle udělat datovou dietu. Pokud pravidlo funguje, nepotřebujete dál držet osobní poznámky, kopie briefů, screenshoty, exporty ani pomocné tabulky z ověřování.
+
+Zapište:
+
+```text
+Po druhém běžném použití zůstává:
+
+Mažeme nebo anonymizujeme:
+
+Dál nesbíráme:
+
+Návrat poznáme podle:
+```
+
+Vyplněný příklad:
+
+```text
+Po druhém běžném použití zůstává:
+Pravidlo v kampaňovém briefu a krátký anonymizovaný závěr v rozhodovacím logu.
+
+Mažeme nebo anonymizujeme:
+Pracovní komentáře z obou použití a kopii starého briefu.
+
+Dál nesbíráme:
+Detailní segmentační štítky u kontaktů, klikání v dokumentaci ani osobní záznamy o tom, kdo pravidlo použil.
+
+Návrat poznáme podle:
+Návrhu exportu kontaktů bez účelu, vlastníka a data smazání.
+```
+
+Codyho komentář: když pravidlo po dvou běžných použitích pořád potřebuje vlastní tabulku, možná netestujete pravidlo. Možná si jen necháváte suvenýr z doby, kdy jste mu ještě nevěřili. Suvenýry patří na poličku, ne do provozu.
+
+### Karta uzavření druhého použití
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+První běžné použití:
+
+Druhé běžné použití:
+
+Výsledek druhého použití:
+- přenositelné / slabé pracovní místo / závislé na historii / jiné téma
+
+Uzavírací stav:
+- běžný rytmus / lokální opora / přepsat pravidlo / nové téma
+
+Uzavírací věta:
+
+Co zůstává v kanonickém místě:
+
+Co končí jako mimořádná péče:
+
+Co mažeme nebo anonymizujeme:
+
+Co dál nesbíráme:
+
+Návratový signál:
+
+Vzniká třetí použití?
+- ne / ano, protože:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 5 minut
+
+1. Vlastník přečte pravidlo a výsledek prvního použití jednou větou.
+2. Člověk z druhého použití řekne, jestli pravidlo našel bez historie.
+3. Tým vybere uzavírací stav.
+4. Zapíše uzavírací větu v přítomném čase.
+5. Určí, co zůstává v kanonickém místě a co se maže.
+6. Potvrdí, že třetí použití nevzniká bez konkrétní otázky.
+
+Pokud workshop potřebuje víc času, nejspíš neuzavíráte druhé použití. Otevíráte nové téma, nebo opravujete pravidlo, které ještě není připravené na klid. To není problém. Problém by bylo tvářit se, že jde pořád jen o formální uzavření.
+
+### Checklist uzavření druhého běžného použití
+
+- Proběhlo druhé použití v jiné běžné situaci?
+- Použil pravidlo člověk bez znalosti celé historie návratu?
+- Vybrali jsme jeden uzavírací stav?
+- Je uzavírací věta v přítomném čase?
+- Pokud pravidlo drží, nevzniká třetí kontrola ze zvyku?
+- Pokud potřebuje lokální oporu, je to jedna věta, odkaz nebo příklad?
+- Pokud pravidlo závisí na historii, přepisujeme pravidlo místo přidávání dalšího kontextu?
+- Pokud vzniklo nové téma, má vlastní kartu mimo původní pravidlo?
+- Je jasné, co končí jako mimořádná péče?
+- Uklidili jsme pracovní kopie, komentáře, screenshoty nebo pomocné tabulky?
+- Nevzniká nová evidence podle lidí, klikání nebo použití dokumentace?
+- Zůstává návratový signál konkrétní a použitelný bez průběžného dohledu?
+
+Uzavření druhého běžného použití je malá tečka za dlouhou smyčkou. Pravidlo se vrátilo z klidu, obstálo v první situaci, obstálo i v druhé, a teď má znovu zmizet do běžné práce. To je dobrý konec: žádná fanfára, žádný nový dohled, jen čisté pravidlo na správném místě a méně datového šumu okolo.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z dlouhodobého klidu: uzavírací stavy, konec mimořádné péče, podmínky pro nepouštění do klidu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o druhém běžném použití po návratu z dlouhodobého klidu: přenositelnost pravidla, výsledné stavy, prevence třetí kontroly ze zvyku, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z dlouhodobého klidu: uzavírací stavy, kanonické propsání, úklid stop, prevence nové kontroly ze zvyku, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním běžném použití po návratu z dlouhodobého klidu: ověření pravidla v běžné práci, čtyři výsledky použití, skrytý návrat dohledu, privacy-first zápis, karta, mini workshop a checklist.
