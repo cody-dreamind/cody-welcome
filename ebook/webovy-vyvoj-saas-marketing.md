@@ -201309,8 +201309,213 @@ Když zápis jen dokazuje pečlivost, zkraťte ho. Pečlivost má být vidět v 
 
 Uzavřené druhé běžné použití má být krátké, konkrétní a trochu nezajímavé. To je dobře. Pravidlo se už nemá předvádět. Má tiše pomáhat v práci, dokud ho reálný návratový signál znovu nepozve ke stolu.
 
+## První měsíc po uzavřeném návratovém signálu
+
+Po uzavření druhého běžného použití je pravidlo zpět v normálním provozu. Tým už nemá dokazovat, že oprava byla správná. Má jen po měsíci zkontrolovat, jestli se kolem pravidla nevytvořil tichý doprovod: ruční připomínání, neveřejné poznámky, soukromé checklisty, opakované dotazy autorovi nebo preventivní kontroly, které nikdo oficiálně nezavedl, ale všichni se podle nich začali chovat.
+
+První měsíc po uzavřeném návratovém signálu proto není další audit pravidla. Je to kontrola, jestli pravidlo opravdu funguje bez mimořádné péče. Pokud tým po měsíci zjistí, že se pravidlo používá samostatně, smyčka zůstává v klidu. Pokud se ukáže, že lidé pořád potřebují autora, zvláštní dohled nebo staré podklady, problém není v tom, že by kontrola měla pokračovat. Problém je v tom, že pravidlo se ještě nestalo běžným pracovním místem.
+
+Dobrá měsíční otázka zní:
+
+```text
+Použilo se pravidlo v posledním měsíci běžně, bez mimořádné kontroly, bez starých podkladů a bez nového sběru dat?
+```
+
+Nepřidávejte k ní další otázky jen proto, že už jste se sešli. Neptáte se, jestli by šlo pravidlo vylepšit, rozšířit, přepsat pro další role nebo spojit s novým systémem. Ptáte se, jestli uzavřená smyčka zůstala uzavřená.
+
+### Tři měsíční signály
+
+Za měsíc stačí hledat tři typy signálů:
+
+1. Samostatné použití: člověk pravidlo našel, pochopil a použil bez vysvětlování.
+2. Tichá závislost: pravidlo se použilo, ale jen díky neformální pomoci, připomínce nebo staré pracovní stopě.
+3. Nový návratový signál: původní problém se objevil znovu, případně v jiné podobě, která stále patří k témuž pravidlu.
+
+`Samostatné použití` je stav, který chcete vidět. Nevyžaduje akci. Maximálně do logu dopište jednu větu, že měsíční kontrola nenašla skrytou závislost ani návratový signál.
+
+`Tichá závislost` je jemnější. Pravidlo možná formálně existuje, ale lidé ho ve skutečnosti nepoužívají přímo. Někdo jim posílá odkaz, připomíná správný postup, překládá text pravidla do praxe nebo drží starou tabulku "pro jistotu". V tom případě neopravujte celé pravidlo. Najděte nejbližší místo, kde závislost vzniká, a opravte ho jednou lokální změnou.
+
+`Nový návratový signál` znamená, že smyčku nelze prohlásit za klidnou. Ani tady ale nezačínejte široký audit. Otevřete úzkou otázku: co se vrátilo, kde se to stalo a proč nestačil návratový signál, který už pravidlo mělo.
+
+### Čtyři výsledky měsíční kontroly
+
+Po měsíční kontrole vyberte jeden stav:
+
+- Klid potvrzen: pravidlo se používá bez mimořádné péče a bez nových stop.
+- Lokální tření odstraněno: našla se jedna malá závislost a opravila se v pracovním místě.
+- Návratový signál otevřen: původní problém se vrátil a má vlastní úzkou kartu.
+- Samostatný nápad odložen: kontrola ukázala nové vylepšení, které nepatří do uzavřené smyčky.
+
+`Klid potvrzen` je nejčastější dobrý výsledek. Není potřeba z něj vyrábět slavnostní závěr. Stačí krátký zápis a konec. Pravidlo zůstává v běžném rytmu.
+
+`Lokální tření odstraněno` znamená například doplněný odkaz do šablony, přejmenovaný nadpis, zkrácenou větu nebo odstraněný starý příklad. Pozor: lokální oprava se nesmí změnit v novou měsíční kontrolu. Opravte místo, napište návratový signál a zavřete.
+
+`Návratový signál otevřen` je návrat do práce, ale pořád úzké. Pokud se znovu objevil identifikovatelný zákaznický screenshot v obchodním materiálu, neřešte najednou všechny typy důkazů, celý sales proces a nový schvalovací tok. Řešte návrat stejného problému.
+
+`Samostatný nápad odložen` chrání systém před hezkými odbočkami. Měsíční kontrola často vyvolá myšlenku "když už jsme tady, mohli bychom pravidlo rozšířit i na reference, case studies a web". Možná ano. Ale ne v rámci kontroly uzavřeného návratového signálu. Zapište nápad zvlášť a nechte původní smyčku zavřenou.
+
+### Karta prvního měsíce po uzavřeném signálu
+
+```text
+Pravidlo:
+
+Uzavřený návratový signál:
+
+Období kontroly:
+
+Kde se pravidlo reálně použilo:
+
+Výsledek měsíce:
+- klid potvrzen
+- lokální tření odstraněno
+- návratový signál otevřen
+- samostatný nápad odložen
+
+Důkaz jednou větou:
+
+Skrytá pomoc nebo mimořádná péče:
+- žádná / jaká
+
+Dočasné podklady nalezené po uzavření:
+
+Co se upravilo:
+
+Co se dál nehlídá:
+
+Návratový signál pro další otevření:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Zákaznické důkazy používáme anonymizovaně a bez původního screenshotu.
+
+Uzavřený návratový signál:
+Screenshot zákaznického výstupu se objevil v obchodním materiálu.
+
+Období kontroly:
+První měsíc po uzavření druhého běžného použití.
+
+Kde se pravidlo reálně použilo:
+Sales follow-up a onboardingový e-mail.
+
+Výsledek měsíce:
+Lokální tření odstraněno.
+
+Důkaz jednou větou:
+Sales pravidlo použil samostatně, onboarding potřeboval odkaz přímo v části "důkaz hodnoty".
+
+Skrytá pomoc nebo mimořádná péče:
+Jedna neformální připomínka v chatu před odesláním onboardingového e-mailu.
+
+Dočasné podklady nalezené po uzavření:
+Starý pracovní screenshot v návrhu onboardingové šablony.
+
+Co se upravilo:
+Screenshot smazán, do šablony doplněn odkaz na kanonické pravidlo a věta o anonymizovaném důkazu.
+
+Co se dál nehlídá:
+Nezavádíme kontrolu všech onboardingových e-mailů.
+
+Návratový signál pro další otevření:
+Identifikovatelný zákaznický důkaz se znovu objeví v materiálu pro zákazníka.
+
+Privacy-first úklid:
+Starý screenshot smazán; nezakládá se archiv příkladů ani nový schvalovací export.
+
+Vlastník:
+Customer success owner.
+
+Datum:
+2026-06-10.
+```
+
+### Jak měsíční kontrolu nepřerůst
+
+Měsíční kontrola má přirozenou tendenci přerůst, protože po měsíci už lidé vidí další souvislosti. To je užitečné pro backlog, ale ne pro uzavřenou smyčku. Držte tři brzdy:
+
+- Pokud důkaz nesouvisí s původním návratovým signálem, patří do nové karty.
+- Pokud oprava vyžaduje víc než jedno pracovní místo, nejdřív zapište samostatnou otázku.
+- Pokud by ověření potřebovalo nový tracker, export nebo sběr osobních údajů, zmenšete ho na ruční a agregovaný signál.
+
+Praktická měsíční věta:
+
+```text
+Měsíční kontrola potvrzuje [stav]. Do uzavřené smyčky zapisujeme jen [jedna věc]. Všechno ostatní zůstává mimo rozsah, dokud nevznikne samostatná rozhodovací otázka.
+```
+
+Codyho komentář: měsíční kontrola není reunion starých problémů. Žádné "pamatujete, jak jsme tenkrát řešili formulář, důkazy, onboarding a vlastně celý životní směr firmy". Jedna smyčka, jeden stav, jeden zápis. Drama si nechte na faktury za nástroje, které nikdo nepoužívá.
+
+### Privacy-first měsíční kontrola
+
+Privacy-first princip je po měsíci jednoduchý: pravidlo má fungovat s menší datovou stopou než v době ověřování. Pokud po uzavření smyčky pořád existují screenshoty, exporty, kopie e-mailů, seznamy lidí, poznámky z chatu nebo dočasné tabulky, měsíční kontrola má právo je uklidit.
+
+Zeptejte se:
+
+- Zůstala po uzavření data, která už neslouží rozhodnutí?
+- Vznikla skrytá kontrola, která sbírá víc informací než původní pravidlo?
+- Je návratový signál definovaný tak, aby nepotřeboval průběžné sledování lidí?
+- Umí tým ověřit běžné použití agregovaně nebo ručně bez nového trackeru?
+- Má každý ponechaný podklad účel, vlastníka a retenční dobu?
+
+Dobré měsíční uzavření může znít:
+
+```text
+Pravidlo zůstává v klidovém provozu. Po měsíci nemažeme rozhodnutí ani návratový signál, ale mažeme dočasné podklady z ověřování. Další data nesbíráme, dokud se návratový signál znovu neobjeví.
+```
+
+Tím se privacy-first hodnota neřeší jako dodatečná právní nálepka. Je součástí provozní hygieny. Co už nepomáhá rozhodovat, nemá zbytečně zůstávat v systému.
+
+### Mini workshop na 6 minut
+
+Minuta 1: vlastník připomene původní návratový signál a pravidlo.
+
+Minuta 2: tým pojmenuje, kde se pravidlo za poslední měsíc reálně použilo.
+
+Minuta 3: vybere jeden ze čtyř výsledků měsíce.
+
+Minuta 4: zapíše důkaz jednou větou a rozhodne, jestli existovala skrytá pomoc.
+
+Minuta 5: uklidí nebo označí dočasné podklady, které už nemají účel.
+
+Minuta 6: potvrdí, co se dál nehlídá a jaký signál pravidlo znovu otevře.
+
+Hlídací otázka:
+
+```text
+Zavírání nám zmenšuje provozní stopu, nebo si jen vytváříme nenápadnou další kontrolu?
+```
+
+Pokud odpověď směřuje k další kontrole, zastavte se. Měsíční kontrola má vracet pravidlo do běžné práce, ne přidávat k němu servisní vrstvu.
+
+### Checklist prvního měsíce po uzavřeném signálu
+
+- Je jasné, jaký návratový signál byl původně uzavřen?
+- Víme, kde se pravidlo za poslední měsíc reálně použilo?
+- Vybrali jsme jeden ze čtyř výsledků měsíce?
+- Máme důkaz zapsaný jednou větou?
+- Rozlišili jsme samostatné použití od tiché závislosti?
+- Pokud existovala skrytá pomoc, opravili jsme nejbližší pracovní místo?
+- Pokud se signál vrátil, otevřeli jsme úzkou kartu místo širšího auditu?
+- Pokud vznikl nový nápad, oddělili jsme ho mimo uzavřenou smyčku?
+- Je napsané, co se dál nehlídá?
+- Zůstává návratový signál použitelný bez průběžného sledování lidí?
+- Uklidili jsme dočasné screenshoty, exporty, kopie a pracovní poznámky?
+- Nevznikl nový tracker, kontrolní tabulka ani schvalovací proces bez jasného účelu?
+- Končí měsíční kontrola klidem, ne další pravidelnou kontrolou?
+
+První měsíc po uzavřeném návratovém signálu má potvrdit, že pravidlo přežilo návrat do běžné práce. Když ano, neoslavujte to novým procesem. Prostě ho nechte dělat svou práci. Někdy je nejvyšší forma provozní zralosti věc, o které už nikdo nemusí mluvit.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o prvním měsíci po uzavřeném návratovém signálu: samostatné použití pravidla, tichá závislost, čtyři výsledky kontroly, karta měsíce, privacy-first úklid, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, propsání do kanonického místa, uzavírací karta, privacy-first úklid, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném návratovém signálu: přenosové riziko, čtyři výsledky použití, prevence třetí kontroly, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po uzavřeném návratovém signálu: čtyři uzavírací stavy, propsání a úklid pracovních stop, privacy-first uzavření, karta, mini workshop a checklist.
