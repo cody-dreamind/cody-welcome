@@ -205209,8 +205209,270 @@ Pokud odpověď zní "stavíme lešení", zastavte se. Buď je potřeba nová ma
 
 První běžné použití po návratu z dlouhodobého klidu má být klidné. To není málo ambiciózní výsledek. Je to přesně ta disciplína, která odděluje dobrý provoz od systému, který při každém podnětu znovu rozloží celý stůl.
 
+## Uzavření prvního běžného použití po návratu z dlouhodobého klidu
+
+První běžné použití po návratu z dlouhodobého klidu není hotové ve chvíli, kdy někdo řekne "fungovalo to". Hotové je až tehdy, když tým ví, co se tím potvrzuje, co se nemění a jaké stopy po použití zůstanou v systému. Bez uzavření se i dobrý výsledek snadno změní v další neformální dohled: všichni si pamatují, že se něco ověřovalo, ale nikdo přesně neví, zda už je téma zpátky v klidu.
+
+Uzavření má být malé. Neotevírá starý návratový signál, nehodnotí celou historii pravidla a nepřepisuje širší standard jen proto, že jeden běžný průchod dopadl zajímavě. Má převést první použití do jednoho jasného stavu.
+
+Začněte větou:
+
+```text
+První běžné použití po návratu ukázalo, že [výsledek], proto teď [nejmenší uzavření] a neotevíráme [co zůstává mimo rozsah].
+```
+
+Příklad:
+
+```text
+První běžné použití po návratu ukázalo, že pravidlo o kampanových exportech drží přímo v briefu, proto jen doplníme jeden konkrétnější příklad do části "data a měření" a neotevíráme audit všech marketingových nástrojů.
+```
+
+Tahle věta je užitečná hlavně proto, že obsahuje brzdu. Neříká jen, co tým udělá. Říká i to, co teď vědomě nedělá. U dlouho klidných pravidel je to důležité, protože návrat často probudí chuť pro jistotu zkontrolovat všechno okolo.
+
+### Čtyři uzavírací stavy prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř stavů:
+
+- Uzavřít bez změny: pravidlo bylo použitelné, nalezitelné a nevytvořilo novou datovou stopu.
+- Uzavřít s lokální oporou: pravidlo je správně, ale jedno pracovní místo potřebuje drobný příklad, odkaz nebo přesnější větu.
+- Vrátit k uzavřenému návratu: první použití ukázalo, že předchozí návratový signál nebyl uzavřený dost jasně.
+- Otevřít novou samostatnou otázku: objevila se situace, která nepatří do původního pravidla.
+
+`Uzavřít bez změny` je nejlepší výsledek a zároveň nejtěžší disciplína. Tým má tendenci dobrý výsledek oslavit tím, že přidá další jistící kontrolu. Nedělejte to. Pokud pravidlo funguje, nechte ho pracovat.
+
+`Uzavřít s lokální oporou` znamená udělat jednu malou úpravu tam, kde člověk pravidlo skutečně použil. Například doplnit příklad do briefu, přejmenovat sekci, odstranit starý odkaz nebo přesunout větu z interní poznámky do kanonické šablony. Neznamená to vytvořit nový playbook.
+
+`Vrátit k uzavřenému návratu` použijte tehdy, když běžné použití narazilo na starou nejasnost. Třeba není jasné, proč se dřív odmítl nový nástroj, kdo rozhodnutí vlastní nebo kdy by se téma mohlo otevřít znovu. V takovém případě neopravujte jen aktuální šablonu. Nejprve dočistěte uzavírací větu návratu.
+
+`Otevřít novou samostatnou otázku` chrání původní pravidlo před přetížením. Když se při kampani objeví produktový problém, obchodní výjimka nebo nová právní otázka, nedělejte z toho rozšíření starého pravidla. Zapište novou otázku, vlastníka a stop podmínku.
+
+### Co se smí propsat zpět
+
+Po prvním běžném použití se zpět propisuje jen to, co zlepší další normální průchod. Typicky:
+
+- jedna přesnější věta v kanonické šabloně;
+- jeden příklad u místa, kde člověk váhal;
+- opravený odkaz na zdroj pravdy;
+- odstranění staré kopie, která táhla tým ke špatnému postupu;
+- krátká poznámka, že zvláštní dohled se neobnovuje.
+
+Nepropisujte zpět celý příběh návratu. Historie může zůstat v rozhodovacím logu, ale běžná práce potřebuje stručné pravidlo, ne kroniku. Pokud se šablona po každém návratu nafoukne o další vysvětlení, za pár měsíců ji lidé přestanou používat.
+
+Příklad špatného propsání:
+
+```text
+Do briefu přidáme celý odstavec o tom, jak v minulosti vznikl návrh segmentačního nástroje, proč se neudělal export a jaké alternativy jsme tehdy zvažovali.
+```
+
+Příklad dobrého propsání:
+
+```text
+Do briefu přidáme větu: "Pokud kampaň potřebuje segmentaci, nejdřív ověřte, zda stačí obsahové rozlišení stránky; export kontaktů do nového nástroje vyžaduje samostatný účel, vlastníka a datum smazání."
+```
+
+Druhá varianta pomáhá v práci. První varianta z člověka dělá archeologa interních rozhodnutí. To je zajímavé povolání, ale špatný výchozí režim pro marketingový brief.
+
+### Úklid po prvním použití
+
+Uzavření prvního běžného použití musí zahrnovat úklid. I když nevznikl žádný nový proces, často vzniknou drobné stopy: poznámka z workshopu, pracovní screenshot, dočasná kopie šablony, komentář v dokumentu nebo testovací tabulka.
+
+Projděte tyto otázky:
+
+```text
+Co vzniklo jen kvůli prvnímu běžnému použití:
+
+Co z toho musí zůstat:
+
+Co se smaže:
+
+Co se anonymizuje:
+
+Co se nahradí odkazem na kanonické místo:
+
+Kdo úklid potvrdí:
+```
+
+U privacy-first provozu je úklid stejně důležitý jako samotné rozhodnutí. Pokud tým po každém ověření nechává ležet pomocné exporty a komentáře s osobními údaji, pravidlo sice možná funguje procesně, ale selhává provozně. Menší stopa je výsledek práce, ne kosmetika.
+
+### Jak zabránit nové kontrole ze zvyku
+
+Nejčastější chyba po prvním běžném použití zní rozumně: "Ještě to jednou zkontrolujeme příště." Někdy je to správně. Častěji je to jen opatrnost, která si hledá trvalé bydlení.
+
+Další kontrolu povolte jen tehdy, když umíte vyplnit:
+
+```text
+Co první použití neukázalo:
+
+Proč to potřebujeme vědět pro rozhodnutí:
+
+Jaká bude stop podmínka druhé kontroly:
+
+Jak zabráníme nové datové stopě:
+
+Co se stane, když druhá kontrola nic nového neukáže:
+```
+
+Pokud odpovědi nejsou konkrétní, druhá kontrola nevzniká. Pravidlo se vrací do běžného rytmu a další návrat nastane až podle skutečného návratového signálu.
+
+Codyho komentář: "ještě jednou pro jistotu" je v týmech tak populární věta, že by měla mít vlastní rozpočet. Bohužel ho často platí pozornost lidí, čistota dat a čas, který měl jít do produktu.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření prvního běžného použití má tři části:
+
+- potvrdit, že kvůli použití nevznikl nový sběr osobních údajů;
+- uklidit dočasné pracovní stopy;
+- zapsat, jaká data tým vědomě nesbírá ani po návratu pravidla.
+
+Krátká šablona:
+
+```text
+Po prvním běžném použití zůstává uložené:
+
+Dočasné stopy a jejich úklid:
+
+Nevzniká:
+- nový tracker
+- nový export
+- nové formulářové pole
+- nová pomocná tabulka
+- delší retence poznámek
+
+Vědomě nesbíráme:
+
+Důvod:
+```
+
+Příklad:
+
+```text
+Po prvním běžném použití zůstává uložené:
+Jedna věta v kampaňovém briefu a záznam v rozhodovacím logu.
+
+Dočasné stopy a jejich úklid:
+Pracovní komentáře v kopii briefu se smažou po propsání věty do kanonické šablony.
+
+Nevzniká:
+Nový export kontaktů, nové pole v poptávkovém formuláři ani sledování chování kontaktů napříč kampaní.
+
+Vědomě nesbíráme:
+Detailní segmentační štítky u jednotlivých kontaktů.
+
+Důvod:
+Pro rozhodnutí stačí agregovaná kvalita poptávek a ruční poznámka obchodníka v existujícím CRM.
+```
+
+Takový zápis chrání tým před pozdějším dojmem, že "jsme asi něco zapomněli měřit". Nezapomněli. Rozhodli se neměřit, protože to nebylo potřeba.
+
+### Karta uzavření prvního běžného použití
+
+```text
+Pravidlo:
+
+Uzavřený návratový signál:
+
+První běžné použití:
+
+Výsledek použití:
+- drží bez změny
+- potřebuje lokální oporu
+- návrat byl nedotažený
+- vznikla nová otázka
+
+Uzavírací stav:
+- uzavřít bez změny
+- uzavřít s lokální oporou
+- vrátit k uzavřenému návratu
+- otevřít novou samostatnou otázku
+
+Uzavírací věta:
+
+Co se propíše do kanonického místa:
+
+Co se neotevírá:
+
+Jaké dočasné stopy uklízíme:
+
+Jaká data dál nesbíráme:
+
+Je potřeba další kontrola?
+- ne / ano, protože:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Kampaně neposílají kontakty do nových nástrojů bez účelu, vlastníka a data smazání.
+
+Uzavřený návratový signál:
+Návrh segmentačního nástroje u partnerské kampaně byl uzavřený bez exportu kontaktů.
+
+První běžné použití:
+Brief nové landing page pro partnerskou akci.
+
+Výsledek použití:
+Drží bez změny.
+
+Uzavírací stav:
+Uzavřít s lokální oporou.
+
+Uzavírací věta:
+Pravidlo drží v běžném briefu; doplňujeme jen příklad, že segmentaci má nejdřív řešit obsah stránky, ne export kontaktů.
+
+Co se propíše do kanonického místa:
+Jedna věta do části "data a měření" v kampaňovém briefu.
+
+Co se neotevírá:
+Audit kampanových nástrojů, nový segmentační nástroj ani změna formulářů.
+
+Jaké dočasné stopy uklízíme:
+Komentáře v pracovní kopii briefu.
+
+Jaká data dál nesbíráme:
+Detailní segmentační štítky u jednotlivých kontaktů.
+
+Je potřeba další kontrola?
+Ne.
+```
+
+### Mini workshop na 6 minut
+
+1. Vlastník přečte uzavřený návratový signál a běžnou situaci použití.
+2. Člověk, který pravidlo použil, řekne, co mu pomohlo a kde zaváhal.
+3. Tým vybere jeden ze čtyř uzavíracích stavů.
+4. Zapíše jednu uzavírací větu.
+5. Určí nejvýše jednu lokální úpravu kanonického místa.
+6. Vyjmenuje dočasné stopy a rozhodne o jejich úklidu.
+7. Potvrdí, zda nevzniká další kontrola.
+
+Workshop se má vejít do krátkého okna. Pokud potřebuje delší debatu, pravděpodobně nejde o uzavření prvního použití, ale o novou otázku nebo nedotažený návrat. To je v pořádku, jen to pojmenujte správně.
+
+### Checklist uzavření prvního běžného použití
+
+- Víme, jaké pravidlo se po dlouhodobém klidu znovu použilo?
+- Je jasné, v jaké běžné pracovní situaci se použilo?
+- Vybrali jsme jeden výsledek prvního použití?
+- Vybrali jsme jeden uzavírací stav?
+- Máme uzavírací větu v přítomném čase?
+- Propsali jsme nejvýše jednu lokální oporu do kanonického místa?
+- Neotevíráme znovu celou historii pravidla?
+- Pokud návrat zůstal nedotažený, vracíme se k jeho uzavírací větě?
+- Pokud vznikla nová otázka, má vlastní kartu mimo původní pravidlo?
+- Uklidili jsme pracovní kopie, komentáře, screenshoty nebo pomocné tabulky?
+- Je jasné, jaká data dál nesbíráme?
+- Nevznikla další kontrola jen ze zvyku?
+- Pokud další kontrola vzniká, má stop podmínku, vlastníka a privacy-first hranici?
+
+Uzavření prvního běžného použití má jednu ambici: nechat dobré pravidlo zase zmizet do normální práce. Když se o něm nemusí mluvit, protože lidem pomáhá ve správném místě a nevyrábí nová data, je to dobrý výsledek. Tichý, ale dobrý. Přesně ten typ výsledku, který webům, SaaS produktům i marketingu dlouhodobě šetří nervy.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z dlouhodobého klidu: uzavírací stavy, kanonické propsání, úklid stop, prevence nové kontroly ze zvyku, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním běžném použití po návratu z dlouhodobého klidu: ověření pravidla v běžné práci, čtyři výsledky použití, skrytý návrat dohledu, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po dlouhodobém klidu: čtyři uzavírací stavy, kanonické propsání, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním návratovém signálu po dlouhodobém klidu: rozlišení skutečného signálu, staré kopie a provozní nervozity, malá smyčka, privacy-first návrat, karta, mini workshop a checklist.
