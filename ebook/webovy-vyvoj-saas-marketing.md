@@ -205470,8 +205470,265 @@ Workshop se má vejít do krátkého okna. Pokud potřebuje delší debatu, prav
 
 Uzavření prvního běžného použití má jednu ambici: nechat dobré pravidlo zase zmizet do normální práce. Když se o něm nemusí mluvit, protože lidem pomáhá ve správném místě a nevyrábí nová data, je to dobrý výsledek. Tichý, ale dobrý. Přesně ten typ výsledku, který webům, SaaS produktům i marketingu dlouhodobě šetří nervy.
 
+## Druhé běžné použití po návratu z dlouhodobého klidu
+
+Druhé běžné použití po návratu z dlouhodobého klidu nemá být další velká kontrola. Je to malý test přenositelnosti: funguje pravidlo i ve chvíli, kdy už tým nežije prvním návratem, nemá po ruce čerstvý kontext a používá ho v jiné běžné situaci?
+
+Pokud první běžné použití ukázalo, že pravidlo drží, druhé použití nemá znovu dokazovat totéž do nekonečna. Má ověřit jen jednu věc: zda pravidlo obstojí bez mimořádné paměti lidí, kteří byli u původního návratu.
+
+Začněte větou:
+
+```text
+Druhé běžné použití ověřuje, jestli pravidlo funguje i v [jiná běžná situace] bez pomoci historie, zvláštní kontroly a nové datové stopy.
+```
+
+Příklad:
+
+```text
+Druhé běžné použití ověřuje, jestli pravidlo o kampanových exportech funguje i při úpravě existující landing page bez pomoci historie, zvláštní kontroly a nové datové stopy.
+```
+
+Tahle věta je schválně úzká. Neříká "ověříme marketingový provoz". Říká "vezmeme jinou běžnou práci a podíváme se, jestli se pravidlo už opravdu chová jako součást systému".
+
+### Co má druhé použití potvrdit
+
+Druhé použití má potvrdit čtyři věci:
+
+- pravidlo najde i člověk, který nebyl u prvního návratu;
+- pravidlo je použitelné bez vysvětlování celé historie;
+- první lokální opora nepřidala zbytečnou složitost;
+- běžné použití pořád nevyrábí nové exporty, pomocné tabulky ani prodlouženou retenci poznámek.
+
+Rozdíl proti prvnímu použití je v odstupu. První použití často těží z čerstvé pozornosti. Druhé použití už ukazuje, jestli se pravidlo opravdu propsalo do pracovního místa, nebo jen do krátkodobé paměti týmu.
+
+Příklad z SaaS produktu:
+
+```text
+Pravidlo:
+Nový onboardingový event vzniká jen tehdy, když odpovídá na konkrétní rozhodovací otázku.
+
+První běžné použití:
+Tým odmítl přidat event pro každý klik v onboardingovém průvodci a nechal jen jeden agregovaný signál dokončení prvního výsledku.
+
+Druhé běžné použití:
+Produktový tým upravuje importní krok pro nový segment.
+
+Co má být vidět:
+Brief importního kroku se ptá na rozhodovací otázku dřív než na eventy. Pokud stačí existující support poznámky a agregované dokončení importu, nevzniká nový detailní tracking.
+```
+
+Tento příklad neřeší celou produktovou analytiku. Řeší jen to, zda se pravidlo přeneslo do další situace, kde by bylo snadné podlehnout dojmu, že víc dat automaticky znamená lepší rozhodnutí.
+
+### Čtyři výsledky druhého použití
+
+Po druhém použití vyberte jeden výsledek:
+
+- Pravidlo je přenositelné: fungovalo v jiné běžné situaci bez zvláštní pomoci.
+- Pravidlo drží, ale pracovní místo je slabé: člověk ho použil, ale musel hledat, ptát se nebo obcházet staré odkazy.
+- Pravidlo je příliš závislé na původním kontextu: bez vysvětlení historie není jasné, proč existuje nebo jak ho použít.
+- Druhá situace je jiný problém: práce otevřela nové rozhodnutí, které nepatří do původního pravidla.
+
+`Pravidlo je přenositelné` znamená konec zvláštního režimu. Nezakládejte třetí kontrolu jen proto, že druhá dopadla dobře. Pravidlo se vrací do běžného rytmu a další návrat má přijít až přes návratový signál.
+
+`Pravidlo drží, ale pracovní místo je slabé` řešte nejmenší opravou. Přesuňte větu, opravte odkaz, zkraťte příklad nebo smažte starou variantu šablony. Neotevírejte obsah pravidla, pokud problém leží v navigaci.
+
+`Pravidlo je příliš závislé na původním kontextu` je signál k přepsání do přítomného času. Pravidlo nesmí znít jako poznámka z dávného incidentu. Má říkat, co se dělá teď, v jaké situaci a podle čeho se pozná správný postup.
+
+`Druhá situace je jiný problém` oddělte rychle. Pokud při úpravě landing page narazíte na nový obchodní segment, neohýbejte pravidlo o exportech kontaktů. Zapište novou otázku a původní pravidlo nechte v klidu.
+
+### Kdy už nepřidávat třetí použití
+
+Třetí použití má vzniknout jen tehdy, když druhé použití nechalo konkrétní nezodpovězenou otázku. Ne tehdy, když tým chce "ještě jednou pro jistotu" vidět stejný dobrý výsledek.
+
+Třetí kontrolu povolte jen po vyplnění:
+
+```text
+Co druhé použití neukázalo:
+
+Proč to brání běžnému provozu:
+
+Jaká bude jedna stop podmínka:
+
+Kde proběhne třetí použití:
+
+Jak zabráníme nové datové stopě:
+
+Co se stane, když třetí použití nic nového neukáže:
+```
+
+Pokud nejde vyplnit první dvě odpovědi, třetí použití nevzniká. Nejde o tvrdost, ale o hygienu systému. Každá další kontrola zabírá pozornost, vyrábí pracovní stopy a nenápadně učí tým, že uzavřené věci vlastně nikdy nejsou uzavřené.
+
+Codyho komentář: dobré pravidlo nepotřebuje, aby kolem něj tým chodil s měřákem pokaždé, když někdo otevře šablonu. Buď pomáhá v práci, nebo potřebuje opravu. Nekonečné ujišťování je jen dražší forma nejistoty.
+
+### Privacy-first druhé použití
+
+Druhé použití má být ještě tišší než první. Pokud pravidlo opravdu přešlo do běžné práce, neměla by kvůli němu vzniknout nová vrstva záznamů.
+
+Privacy-first zápis:
+
+```text
+Druhé použití proběhlo v:
+
+Výsledek:
+- přenositelné / slabé pracovní místo / závislé na historii / jiný problém
+
+Zůstává uložené:
+
+Nevzniká:
+- třetí kontrola bez konkrétní otázky
+- nový export
+- nový tracker
+- nová pomocná tabulka
+- delší retence pracovních poznámek
+
+Pokud vznikla dočasná stopa, smaže se nebo anonymizuje do:
+```
+
+Příklad:
+
+```text
+Druhé použití proběhlo v:
+Úpravě existující landing page pro partnerský segment.
+
+Výsledek:
+Přenositelné.
+
+Zůstává uložené:
+Jedna věta v briefu a krátký záznam v rozhodovacím logu.
+
+Nevzniká:
+Třetí kontrola, export kontaktů, nové segmentační pole ani tabulka s detailními poznámkami k jednotlivým návštěvníkům.
+```
+
+Takový zápis je užitečný právě proto, že je nudný. Ukazuje, že tým umí potvrdit stabilitu bez rozšiřování datové stopy.
+
+### Karta druhého běžného použití po dlouhodobém klidu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+První běžné použití a jeho uzavření:
+
+Druhá běžná situace:
+
+Kdo pravidlo použil:
+
+Byl u původního návratu?
+- ano / ne
+
+Kde pravidlo našel:
+
+Potřeboval vysvětlení historie?
+- ne / trochu / ano
+
+Výsledek:
+- pravidlo je přenositelné
+- pravidlo drží, ale pracovní místo je slabé
+- pravidlo je příliš závislé na původním kontextu
+- druhá situace je jiný problém
+
+Nejmenší reakce:
+
+Co se propíše do kanonického místa:
+
+Co výslovně neotevíráme:
+
+Vzniká třetí použití?
+- ne / ano, protože:
+
+Jaká data nebo kontroly nevznikají:
+
+Úklid dočasných stop:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+Nový onboardingový event vzniká jen kvůli konkrétní rozhodovací otázce.
+
+Kanonické místo:
+Produktový brief části "měření a rozhodnutí".
+
+První běžné použití a jeho uzavření:
+Onboardingový průvodce zůstal u jednoho agregovaného signálu dokončení prvního výsledku.
+
+Druhá běžná situace:
+Úprava importního kroku pro nový segment.
+
+Kdo pravidlo použil:
+Produktový designer.
+
+Byl u původního návratu?
+Ne.
+
+Kde pravidlo našel:
+V briefu importního kroku.
+
+Potřeboval vysvětlení historie?
+Ne.
+
+Výsledek:
+Pravidlo je přenositelné.
+
+Nejmenší reakce:
+Žádná další úprava.
+
+Co výslovně neotevíráme:
+Audit všech onboardingových eventů ani nové měření kliků v importu.
+
+Vzniká třetí použití?
+Ne.
+
+Jaká data nebo kontroly nevznikají:
+Detailní klikový tracking, pomocný export uživatelů ani další kontrolní tabulka.
+```
+
+### Mini workshop na 5 minut
+
+Workshop použijte jen tehdy, když druhé použití neskončí výsledkem `pravidlo je přenositelné`.
+
+1. Vlastník připomene pravidlo a první běžné použití jednou větou.
+2. Člověk z druhé situace řekne, kde pravidlo hledal a co musel doplnit.
+3. Tým vybere jeden ze čtyř výsledků.
+4. Určí jednu nejmenší reakci.
+5. Rozhodne, zda třetí použití opravdu potřebuje konkrétní otázku.
+6. Zapíše, jaké nové kontroly a data nevznikají.
+
+Hlídací otázka:
+
+```text
+Opravujeme skutečné tření ve druhé situaci, nebo jen prodlužujeme návratový režim?
+```
+
+Pokud odpověď míří k prodlužování režimu, vraťte se ke stop podmínce. Dlouhodobý klid se neobnoví tím, že kolem něj postavíte malý dohled s hezčím názvem.
+
+### Checklist druhého běžného použití po dlouhodobém klidu
+
+- Proběhlo druhé použití v jiné běžné pracovní situaci?
+- Použil pravidlo někdo, kdo nepotřeboval celou historii návratu?
+- Bylo pravidlo dostupné v kanonickém pracovním místě?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud je pravidlo přenositelné, nevzniká třetí kontrola ze zvyku?
+- Pokud je slabé pracovní místo, opravujeme jen nejbližší větu, odkaz nebo příklad?
+- Pokud pravidlo závisí na historii, přepisujeme ho do přítomného pracovního jazyka?
+- Pokud vznikl jiný problém, má vlastní kartu mimo původní pravidlo?
+- Je jasně napsané, co teď neotevíráme?
+- Nevznikl nový export, tracker, pomocná tabulka ani delší retence poznámek?
+- Je uklizená každá dočasná stopa po druhém použití?
+- Ví vlastník, kdy se pravidlo vrací do běžného rytmu?
+
+Druhé běžné použití má být poslední lehký dotek po návratu z dlouhodobého klidu. Když pravidlo funguje i mimo čerstvý kontext, nechte ho pracovat. Přesně tak vypadá zralý provoz: méně zvláštních kontrol, méně datového šumu a víc energie na věci, které zákazník opravdu pozná.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o druhém běžném použití po návratu z dlouhodobého klidu: přenositelnost pravidla, výsledné stavy, prevence třetí kontroly ze zvyku, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního běžného použití po návratu z dlouhodobého klidu: uzavírací stavy, kanonické propsání, úklid stop, prevence nové kontroly ze zvyku, privacy-first závěr, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním běžném použití po návratu z dlouhodobého klidu: ověření pravidla v běžné práci, čtyři výsledky použití, skrytý návrat dohledu, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po dlouhodobém klidu: čtyři uzavírací stavy, kanonické propsání, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
