@@ -37,6 +37,8 @@ Na konci čtení stop podmínku neměňte podle toho, co se zrovna povedlo. Poku
 
 Když stop podmínka zůstane nesplněná, neberte to jako selhání čtení, ale jako signál ke zmenšení dalšího kroku. Lepší je zavřít drobnou, poctivě ověřitelnou úpravu než pokračovat ve větším tématu jen proto, že už je rozečtené.
 
+Než otevřete další průchod, pojmenujte také nejbližší místo, kde se má změna opravdu stát: konkrétní stránku, formulář, e-mail, onboardingový krok nebo obchodní rozhovor. Bez pracovního místa zůstane i dobře zmenšený krok abstraktní a tým si ho může každý představit jinak.
+
 ## Jak zmenšit další krok po nesplněné stop podmínce
 
 Nesplněná stop podmínka často neříká, že tým pracoval špatně. Častěji říká, že otázka byla moc široká, důkaz moc vzdálený nebo změna spolkla víc pracovních míst najednou. V tu chvíli nepomůže přidat další kapitolu, další meeting ani další tabulku. Pomůže přeložit původní záměr do menší jednotky, kterou jde dokončit bez nového systému okolo.
