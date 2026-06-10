@@ -203277,8 +203277,204 @@ Workshop skončí dobře, když po něm pravidlo působí obyčejněji než pře
 
 Uzavření měsíčního review je malý test dospělosti provozu. Otevřít kontrolu umí skoro každý tým. Zavřít ji bez toho, aby po ní zůstala nová opatrnost, už je těžší. Právě tam se pozná rozdíl mezi systémem, který se učí, a systémem, který si jen sbírá další důkazy, že by se možná měl učit.
 
+## Převod uzavřeného review do běžného kvartálního rytmu
+
+Když se měsíční review tichého provozu uzavře, pravidlo se má vrátit do normálního rytmu týmu. Ne do dalšího zvláštního režimu, ne do série preventivních kontrol, ne do nového dashboardu. Normální rytmus znamená, že se pravidlo připomene jen tam, kde se přirozeně potkává s prací: při kvartálním review standardů, při údržbě šablon, při změně nabídky, při nové kampani nebo při produktové změně, která pravidlo opravdu používá.
+
+Převod do kvartálního rytmu má jednu hlavní otázku:
+
+```text
+Jak pravidlo zůstane dohledatelné a užitečné bez toho, aby kolem něj vznikla samostatná agenda?
+```
+
+Tato otázka je důležitá hlavně po období, kdy se pravidlu věnovala zvláštní pozornost. Tým si snadno zvykne, že se "raději ještě podívá". Jenže stabilní pravidlo nemá potřebovat autora, kontrolora ani pravidelný obřad. Má žít v pracovním místě, kde ho lidé potkají ve chvíli rozhodnutí.
+
+Příklad:
+
+```text
+Pravidlo:
+Zákaznickou ukázku lze použít jen jako veřejnou, anonymizovanou nebo demo variantu.
+
+Po měsíčním review:
+Pravidlo funguje v publikačním checklistu. Nezůstaly dočasné screenshoty ani vedlejší schvalovací vlákno.
+
+Kvartální rytmus:
+Při kvartální údržbě marketingových šablon se kontroluje jen to, jestli pravidlo pořád bydlí ve správném checklistu a jestli nevznikl nový typ ukázky.
+
+Co nevzniká:
+Nevzniká měsíční report použití, nový analytický event, ruční seznam všech ukázek ani povinné schválení každé reference.
+```
+
+Tohle je přiměřený převod. Pravidlo nezmizí, ale ani nedostane vlastní malý úřad. A to je přesně ten druh provozní civilizace, který šetří nervy i data.
+
+### Co se převádí
+
+Do běžného kvartálního rytmu nepřevádějte celý příběh pravidla. Převádějte jen ty části, které někdo potřebuje při další práci.
+
+Převést se má:
+
+- kanonická rozhodovací věta;
+- místo, kde pravidlo bydlí;
+- návratový signál;
+- vlastník pracovního místa, ne nutně autor pravidla;
+- jedna kontrolní otázka pro kvartální review;
+- případná hranice, kdy pravidlo už nestačí.
+
+Nepřevádějte:
+
+- historii všech předchozích signálů;
+- poznámky z měsíčního review;
+- pomocné důkazy, screenshoty nebo exporty;
+- seznam lidí, kteří pravidlo kdysi řešili;
+- dočasný kontrolní režim;
+- opatrnost formulovanou jako "pro jistotu vždy zkontrolovat".
+
+Dobrá kvartální kontrolní otázka je malá:
+
+```text
+Je pravidlo pořád na místě, kde se rozhodnutí skutečně dělá?
+```
+
+Ještě lepší je, když má otázka konkrétní pracovní místo:
+
+```text
+Je věta o zákaznických ukázkách pořád v publikačním checklistu a pokrývá nové typy ukázek, které tým za kvartál použil?
+```
+
+Špatná otázka:
+
+```text
+Funguje naše práce se zákaznickými ukázkami ideálně napříč celým marketingem?
+```
+
+To už není kvartální rytmus jednoho pravidla. To je audit, který si oblékl nenápadný kabát a tváří se jako drobnost. Kabát hezký, práce velká.
+
+### Tři úrovně kvartálního rytmu
+
+Ne každé pravidlo potřebuje stejnou pozornost. Po uzavřeném review vyberte jednu ze tří úrovní:
+
+- Tiché připomenutí: pravidlo se kontroluje jen jako součást existujícího checklistu nebo šablony.
+- Lehký sanity check: vlastník jednou za kvartál ověří jednu otázku, bez sběru nových dat.
+- Spojené review: pravidlo se kontroluje spolu s širší údržbou oblasti, například marketingových šablon, supportních maker nebo onboardingových kroků.
+
+Tiché připomenutí stačí tam, kde pravidlo funguje a riziko změny je nízké. Typicky jde o formulaci v checklistu, interní šablonu, rozhodovací větu nebo drobné provozní pravidlo.
+
+Lehký sanity check použijte, když pravidlo chrání něco citlivějšího: zákaznická data, veřejné reference, přístupy, exporty, billingové informace nebo automatizace s dopadem na zákazníka. Pořád ale platí, že sanity check má jednu otázku a jeden výsledek.
+
+Spojené review dává smysl, když pravidlo samo o sobě nemá cenu kontrolovat, ale patří do oblasti, která se stejně kvartálně uklízí. Třeba pravidlo pro anonymizované ukázky se nemusí kontrolovat zvlášť; může být součástí údržby publikačních šablon a případových studií.
+
+### Jak nastavit hranici bez nového procesu
+
+Převod do kvartálního rytmu často selže na dobrém úmyslu. Někdo napíše: "Budeme to kvartálně sledovat." Jenže sledovat co? Kým? Kde? Jak dlouho? A hlavně: jaké rozhodnutí z toho vznikne?
+
+Místo sledování napište hranici:
+
+```text
+Kvartálně kontrolujeme jen:
+
+Nekontrolujeme:
+
+Otevíráme nový signál pouze když:
+```
+
+Příklad:
+
+```text
+Kvartálně kontrolujeme jen:
+Jestli je pravidlo pořád v publikačním checklistu a jestli vznikl nový typ zákaznické ukázky.
+
+Nekontrolujeme:
+Každé použití pravidla, všechny publikované reference ani historii schvalování.
+
+Otevíráme nový signál pouze když:
+Tým použije ukázku, která není veřejná, anonymizovaná ani demo; nebo když vznikne nechtěná kopie zákaznických dat.
+```
+
+Taková hranice je provozně užitečná. Dává vlastníkovi právo pravidlo neřešit, dokud nenastane skutečný důvod. To je často podceňovaná část dobrého systému: nejen říct, co dělat, ale i co už znovu neotevírat.
+
+### Privacy-first převod
+
+Privacy-first hodnota se v kvartálním rytmu pozná podle toho, že pravidlo nezanechává větší datovou stopu než problém, který řeší. Po uzavřeném review je lákavé nechat si důkazy "kdyby něco". Jenže kdyby něco není provozní důvod. Je to strach v pracovním adresáři.
+
+Při převodu si položte pět otázek:
+
+- Potřebujeme pro kvartální kontrolu osobní data, nebo stačí stav pravidla?
+- Musí zůstat konkrétní zákaznický příklad, nebo stačí anonymizovaná pracovní věta?
+- Je potřeba nový report, nebo se signál pozná z běžného použití?
+- Kdo má pravidlo vidět a kdo už nepotřebuje přístup k pomocným podkladům?
+- Kdy se smažou dočasné poznámky z review?
+
+Praktické pravidlo:
+
+```text
+Kvartální rytmus má kontrolovat stav pracovního pravidla, ne archiv citlivých důkazů.
+```
+
+Pokud ke kontrole potřebujete příklad, vytvořte bezpečnou demo variantu. Pokud potřebujete ověřit, že pravidlo lidé najdou, projděte pracovní trasu bez kopírování reálných dat. Pokud potřebujete vědět, jestli se objevil nový typ případu, zeptejte se vlastníka pracovního místa místo zavádění nového sledování.
+
+Codyho komentář: nejlevnější privacy-first nástroj je občas obyčejná věta "tohle už nepotřebujeme". Má mizerný marketing, žádné logo a nulový onboarding. Podezřele účinné.
+
+### Karta převodu do kvartálního rytmu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Výsledek posledního měsíčního review:
+
+Kvartální úroveň:
+- tiché připomenutí / lehký sanity check / spojené review
+
+Jedna kontrolní otázka:
+
+Co se v kvartálním rytmu nekontroluje:
+
+Návratový signál:
+
+Vlastník pracovního místa:
+
+Jaká data kvůli kvartálnímu rytmu nesbíráme:
+
+Co se po převodu maže nebo archivuje mimo aktivní trasu:
+
+Datum nejbližšího přirozeného review:
+```
+
+Tato karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně nepřevádíte pravidlo do běžného rytmu, ale navrhujete nový proces. To nemusí být špatně, ale pak to pojmenujte pravým jménem a vraťte se k otázce, jestli je nový proces opravdu nutný.
+
+### Mini workshop na 7 minut
+
+1. Přečtěte uzavírací kartu měsíčního review.
+2. Řekněte, kde má pravidlo bydlet v běžné práci.
+3. Vyberte jednu ze tří úrovní kvartálního rytmu.
+4. Napište jednu kvartální kontrolní otázku.
+5. Napište, co se výslovně nebude sledovat.
+6. Určete návratový signál místo další mimořádné kontroly.
+7. Smažte nebo přesuňte jednu pomocnou stopu, která po review nemá aktivní účel.
+
+Workshop skončí dobře, když po něm není v kalendáři nová schůzka navíc. Kvartální rytmus má využít existující údržbu, ne vyrábět další slot jen proto, že pravidlo bylo nedávno důležité.
+
+### Checklist převodu do kvartálního rytmu
+
+- Je jasné, proč už pravidlo nepotřebuje měsíční review?
+- Má pravidlo jedno kanonické místo v běžné pracovní trase?
+- Vybrali jsme jen jednu úroveň kvartálního rytmu?
+- Existuje jedna konkrétní kontrolní otázka?
+- Je napsané, co se v kvartálním rytmu nekontroluje?
+- Nahrazuje návratový signál mimořádnou kontrolu?
+- Nepřevádíme do kvartálního rytmu historii, nálady ani pomocné důkazy?
+- Nevznikl nový report, tracker, CRM pole, schvalovací role ani export bez jasného rozhodnutí?
+- Ví vlastník pracovního místa, že není automaticky vlastníkem celé historie pravidla?
+- Jsou dočasné poznámky, screenshoty a zákaznické podklady smazané, anonymizované nebo mimo aktivní trasu?
+- Lze kvartální kontrolu udělat v existujícím review oblasti?
+- Umí tým říct, jaká data díky převodu do běžného rytmu nevzniknou?
+
+Převod do kvartálního rytmu není slavnostní povýšení pravidla. Je to návrat do normálu. Dobré pravidlo má být dostupné, stručné a dost klidné na to, aby ho lidé použili bez pocitu, že otevírají starý případ. Když se to povede, tým neztratí paměť, ale přestane platit daň za minulou nejistotu.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o převodu uzavřeného review do běžného kvartálního rytmu: úrovně kontroly, hranice bez nového procesu, privacy-first převod, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření měsíčního review tichého provozu: čtyři uzavírací stavy, kanonické propsání, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o měsíčním review tichého provozu po uzavřeném signálu: kontrola pracovní trasy, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first review, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o tichém provozu po uzavření pozdějšího signálu: návrat pravidla do běžné práce, skrytá mimořádná péče, marketingové a SaaS příklady, privacy-first hranice, karta, mini workshop a checklist.
