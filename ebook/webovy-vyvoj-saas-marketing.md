@@ -204246,8 +204246,214 @@ Workshop má skončit čistým stavem. Buď pravidlo žije v běžném rytmu, ne
 
 Uzavření druhého kvartálního sanity checku je konec mimořádné péče. Pravidlo buď drží, nebo má poslední drobnou opravu, nebo se čistě přesune jinam. Nejhorší výsledek je neurčitý mezistav, ve kterém se nic nerozhodne a tým si jen ponechá právo znovu se znepokojit. To není provozní kvalita. To je drahé čekání v kancelářském oblečení.
 
+## Dlouhodobý klid po dvou kvartálních sanity checkech
+
+Po dvou kvartálních sanity checkech už pravidlo nemá dokazovat, že existuje. Má prostě fungovat. Pokud se i po dvou stabilních kontrolách pořád vracíte k tomu, jestli je pravidlo správné, pravděpodobně neřešíte pravidlo, ale nedůvěru v pracovní systém okolo něj.
+
+Dlouhodobý klid neznamená "nikdy se k tomu nevrátíme". Znamená:
+
+```text
+Pravidlo je uložené v kanonickém místě.
+Tým ví, kdy ho použít.
+Návratový signál je jasný.
+Další kontrola nevzniká ze zvyku, ale jen z reálné změny.
+```
+
+Tohle je důležité hlavně u webu, SaaS a marketingu, kde se snadno udržuje mnoho drobných kontrol jen proto, že kdysi dávaly smysl. Jedna kontrola k formuláři, druhá k analytice, třetí k exportům, čtvrtá k obsahu. Každá sama o sobě vypadá rozumně. Dohromady ale vytvoří provoz, který je pomalý, opatrný špatným způsobem a plný datových stop, které už nikdo nepotřebuje.
+
+Začněte dlouhodobý klid jednou větou:
+
+```text
+Po dvou kvartálních sanity checkech pravidlo nepokračuje jako samostatná kontrola; zůstává v kanonickém místě a znovu se otevře jen při návratovém signálu.
+```
+
+Příklad pro marketing:
+
+```text
+Pravidlo:
+U kampaní neposíláme kontakty do nových nástrojů bez účelu, vlastníka a data smazání.
+
+Stav po dvou kvartálech:
+Pravidlo se použilo ve třech kampaních, bez nového exportu mimo schválený stack.
+
+Dlouhodobý klid:
+Samostatnou kontrolu kampaní rušíme. Pole účel, vlastník a datum smazání zůstává v kampaňovém briefu.
+
+Návratový signál:
+Požadavek na nový marketingový nástroj, nový typ exportu nebo pomocnou kopii kontaktů.
+```
+
+Příklad pro SaaS:
+
+```text
+Pravidlo:
+Nová produktová událost se přidává jen tehdy, když má rozhodovací otázku a retenční pravidlo.
+
+Stav po dvou kvartálech:
+Nové eventy vznikly jen u aktivace a fakturace; u obou existuje vlastník a datum review.
+
+Dlouhodobý klid:
+Pravidlo zůstává v produktovém checklistu. Nevzniká samostatný event audit.
+
+Návratový signál:
+Návrh nového eventu bez jasného rozhodnutí nebo bez retenční hranice.
+```
+
+V obou příkladech je podstatné, že stabilita se neodmění dalším dohledem. Stabilita se odmění menší agendou.
+
+### Co se v dlouhodobém klidu hlídá
+
+V dlouhodobém klidu nehlídáte historii pravidla. Hlídáte jen tři živé věci:
+
+- kanonické místo je pořád najitelné;
+- návratový signál je pořád srozumitelný;
+- pravidlo nevytváří skrytou práci nebo zbytečnou datovou stopu.
+
+To je celé. Pokud přidáte další body, snadno z toho vznikne třetí kvartální check s jiným názvem.
+
+Dobrá otázka pro dlouhodobý klid:
+
+```text
+Je pravidlo pořád na místě, kde ho člověk potřebuje při práci?
+```
+
+Slabá otázka:
+
+```text
+Neměli bychom se pro jistotu podívat, jestli se někde něco nezměnilo?
+```
+
+Slabá otázka je nebezpečná, protože nemá konec. Když ji otevřete, vždycky něco najdete. V každém systému se něco změnilo, někde je starý komentář, někdo použil trochu jinou formulaci. Dlouhodobý klid potřebuje rozhodovací otázku, ne provozní nervozitu.
+
+### Tři legitimní důvody k návratu
+
+Pravidlo v dlouhodobém klidu znovu otevřete jen při jednom ze tří důvodů:
+
+- Změnil se kontext: nový produktový režim, nový kanál, nový typ zákazníka, nový dodavatel nebo nový datový tok.
+- Nastal návratový signál: objevila se situace, kterou jste výslovně pojmenovali jako důvod k návratu.
+- Pravidlo začalo škodit práci: brzdí rozhodnutí, které nemělo brzdit, nebo nutí tým sbírat data bez jasného účelu.
+
+Všechno ostatní patří do běžné práce. Ne každá otázka je důvod otevřít pravidlo. Někdy stačí člověku ukázat kanonické místo, opravit odkaz nebo smazat starou kopii. To je údržba, ne nová smyčka.
+
+Příklad z webu:
+
+```text
+Situace:
+Někdo našel starý checklist pro landing page, kde je ještě zmíněný dřívější analytický postup.
+
+Není to:
+Návrat pravidla.
+
+Je to:
+Úklid staré kopie.
+
+Akce:
+Smazat starý checklist nebo ho přesměrovat na kanonické místo.
+```
+
+Příklad skutečného návratu:
+
+```text
+Situace:
+Tým chce přidat nový nástroj pro heatmapy na produktové stránce.
+
+Je to:
+Návratový signál, protože vzniká nový měřicí nástroj a nový datový tok.
+
+Akce:
+Otevřít novou úzkou smyčku: jaký problém má měření rozhodnout a jaké minimum dat k tomu stačí?
+```
+
+Rozdíl mezi těmito dvěma situacemi šetří hodiny práce. Starou kopii neřešte jako strategii. Nový datový tok neřešte jako drobný úklid.
+
+### Privacy-first dlouhodobý klid
+
+Privacy-first dlouhodobý klid má jednoduché pravidlo: stabilní pravidlo nemá vytvářet nová data jen proto, aby dokazovalo vlastní stabilitu. Pokud pravidlo chrání soukromí, jeho údržba musí být stejně střídmá jako jeho obsah.
+
+V praxi to znamená:
+
+- neuchovávat staré exporty jako důkaz, že pravidlo fungovalo;
+- nedělat screenshoty interních systémů, pokud stačí kanonická věta;
+- nepsat poznámky o konkrétních lidech, když ověřujete pracovní místo;
+- nepřidávat nový dashboard pro pravidlo, které má být tiché;
+- mazat nebo anonymizovat pomocné podklady hned po rozhodnutí.
+
+Dobrá privacy-first věta:
+
+```text
+V dlouhodobém klidu nevedeme samostatnou evidenci použití pravidla; při běžné práci stačí kanonické místo, návratový signál a úklid dočasných podkladů.
+```
+
+Codyho komentář: nejlevnější a nejčistší databáze je ta, kterou vůbec nezaložíte. Pokud pravidlo po dvou kvartálech funguje, neodměňujte ho tabulkou. Tabulka není medaile. Tabulka je malý závazek s vlastním prachem.
+
+### Karta dlouhodobého klidu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Výsledek po dvou kvartálních sanity checkech:
+
+Uzavírací věta dlouhodobého klidu:
+
+Co zůstává v běžné práci:
+
+Co se už samostatně nekontroluje:
+
+Návratový signál:
+
+Tři legitimní důvody k otevření:
+- změna kontextu:
+- návratový signál:
+- pravidlo škodí práci:
+
+Co mažeme:
+
+Co anonymizujeme:
+
+Co archivujeme a proč:
+
+Kdo vlastní kanonické místo:
+
+Nejbližší běžný rytmus, ve kterém se pravidlo může objevit:
+
+Datum:
+```
+
+Karta je záměrně krátká. Nemá nahradit staré kontroly novým dokumentem. Má nechat po sobě jen tolik informací, kolik bude budoucí člověk potřebovat, aby pravidlo našel, použil a věděl, kdy ho znovu otevřít.
+
+### Mini workshop na 5 minut
+
+1. Otevřete závěr druhého kvartálního sanity checku.
+2. Napište jednu větu dlouhodobého klidu.
+3. Určete, co se už samostatně nekontroluje.
+4. Přečtěte návratový signál a zkontrolujte, že je konkrétní.
+5. Najděte jednu starou stopu, kterou lze smazat, anonymizovat nebo archivovat.
+6. Ověřte, že kanonické místo má vlastníka.
+
+Workshop má skončit menší agendou než začal. Pokud po něm vzniknou tři nové úkoly, něco se zvrhlo. Dlouhodobý klid není projekt. Je to ukončení mimořádné péče.
+
+### Checklist dlouhodobého klidu
+
+- Proběhly dva kvartální sanity checky bez návratu původního problému?
+- Má pravidlo jasné kanonické místo?
+- Je napsaná jedna uzavírací věta dlouhodobého klidu?
+- Ví tým, co se už samostatně nekontroluje?
+- Je návratový signál konkrétní a použitelný?
+- Rozlišujeme starou kopii od skutečného návratu pravidla?
+- Nevzniká nový dashboard, export, evidence ani pravidelný meeting?
+- Smazali jsme dočasné podklady bez dalšího účelu?
+- Jsou ponechané příklady anonymizované nebo opravdu nutné?
+- Má kanonické místo vlastníka?
+- Víme, ve kterém běžném rytmu se pravidlo může přirozeně objevit?
+- Zůstává po této iteraci méně práce a méně datové stopy než před ní?
+
+Dlouhodobý klid je dobrý konec stabilizační smyčky. Ne proto, že tým přestane být pozorný, ale proto, že pozornost přesune zpátky do práce. Pravidlo zůstává tam, kde rozhoduje. Zbytek se uklidí. A když přijde skutečný návratový signál, otevře se nová malá smyčka, ne celé staré album provozních obav.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o dlouhodobém klidu po dvou kvartálních sanity checkech: ukončení samostatné kontroly, návratové signály, privacy-first provoz bez nových evidencí, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření druhého kvartálního sanity checku: uzavírací stavy, kanonické propsání, úklid podkladů, prevence třetí kontroly, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o druhém kvartálním sanity checku po stabilním návratu pravidla: tichý provoz, poslední lokální připomínka, sloučení do širšího standardu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního kvartálního sanity checku: uzavírací stavy, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
