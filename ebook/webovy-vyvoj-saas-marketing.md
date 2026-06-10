@@ -204722,8 +204722,248 @@ Workshop má skončit jednou ze tří akcí: úklid kopie, potvrzení klidu, neb
 
 První návratový signál po dlouhodobém klidu má být přesný, ne dramatický. Dobrý tým se nelekne, že se pravidlo znovu objevilo. Jen rozliší, jestli jde o úklid, nervozitu nebo nové rozhodnutí, a podle toho udělá nejmenší odpovídající krok.
 
+## Uzavření prvního návratového signálu po dlouhodobém klidu
+
+První návrat po dlouhodobém klidu se nesmí nechat viset. Pokud ho tým otevře a neuzavře, dlouhodobý klid se začne tvářit jako dočasná pauza. Lidé si zapamatují, že pravidlo se může kdykoli vrátit v plné síle, a začnou kolem něj znovu vyrábět opatrnost, kopie a kontrolní poznámky. To je přesně stav, kterému se předchozí práce snažila zabránit.
+
+Uzavření má odpovědět na jednu otázku:
+
+```text
+Co se po prvním návratovém signálu opravdu změnilo v běžné práci?
+```
+
+Ne "co všechno jsme si připomněli". Ne "co by stálo za úvahu". Jen co se opravdu změnilo. Pokud odpověď nejde říct jednou pracovní větou, návrat pravděpodobně ještě není uzavřený.
+
+Začněte krátkým zápisem:
+
+```text
+Návratový signál:
+
+Původní stav pravidla:
+- dlouhodobý klid
+
+Typ situace:
+- skutečný signál / stará kopie / provozní nervozita
+
+Co jsme udělali:
+
+Co se změnilo v kanonickém místě:
+
+Co se už dál nehlídá:
+
+Co se smaže, anonymizuje nebo zavře:
+
+Výsledek:
+- vracíme do dlouhodobého klidu / drobná lokální oprava / nová malá smyčka / skutečné znovuotevření pravidla
+```
+
+Tento zápis brání dvěma častým chybám. První chyba je nechat otevřenou poznámku "ještě se k tomu vrátíme", aniž by existoval důvod, vlastník a datum. Druhá chyba je prohlásit návrat za uzavřený, ale ponechat nový export, nový checklist nebo neformální ruční kontrolu. Uzavření není jen věta. Je to i úklid provozní stopy.
+
+### Čtyři uzavírací stavy
+
+Po prvním návratovém signálu zvolte jeden ze čtyř stavů:
+
+- Vracíme do dlouhodobého klidu: signál byl vysvětlený, pravidlo stačí a nevzniká nová práce.
+- Drobná lokální oprava: pravidlo platí, ale jedno pracovní místo potřebuje upřesnit text, odkaz, příklad nebo vlastnictví.
+- Nová malá smyčka: objevil se nový konkrétní problém, který má vlastní otázku, rozsah a stop podmínku.
+- Skutečné znovuotevření pravidla: změnil se kontext tak zásadně, že dlouhodobý klid už není pravdivý.
+
+První dva stavy by měly být nejběžnější. Pokud každý návrat končí novou smyčkou nebo znovuotevřením pravidla, dlouhodobý klid nebyl dobře nastavený, nebo tým plete signál s nervozitou.
+
+Příklad návratu do dlouhodobého klidu:
+
+```text
+Návratový signál:
+V kampani se objevil návrh exportovat kontakty do pomocné segmentační tabulky.
+
+Co jsme zjistili:
+Tabulka nebyla potřeba. K rozhodnutí stačí agregované výsledky kampaně a ruční kvalita poptávek v existujícím CRM.
+
+Co se změnilo:
+Do briefu kampaně přibyla jedna věta: "Kontakty se pro segmentaci neexportují bez nového schváleného účelu a data smazání."
+
+Výsledek:
+Vracíme do dlouhodobého klidu.
+```
+
+Příklad drobné lokální opravy:
+
+```text
+Návratový signál:
+Nový člověk našel starý návod s neplatným odkazem na export.
+
+Co jsme zjistili:
+Pravidlo je v pořádku, ale onboardingová trasa stále vede přes starý návod.
+
+Co se změnilo:
+Starý návod jsme nahradili odkazem na kanonický brief a smazali duplicitní checklist.
+
+Výsledek:
+Drobná lokální oprava, po dalším použití se ověří jen najitelnost odkazu.
+```
+
+Příklad nové malé smyčky:
+
+```text
+Návratový signál:
+Do SaaS onboardingu má přibýt nový event, který by mohl obsahovat citlivý obsah z uživatelského účtu.
+
+Co jsme zjistili:
+Původní pravidlo řešilo marketingové exporty, ale ne produktové eventy s obsahem práce uživatele.
+
+Co se změnilo:
+Otevíráme novou malou smyčku: jak měřit dokončení onboardingu bez ukládání obsahu uživatelských dat.
+
+Výsledek:
+Nová malá smyčka s vlastní stop podmínkou.
+```
+
+Skutečné znovuotevření pravidla si nechte pro situace, kdy se změnila architektura, typ produktu, odpovědnost, právní režim, dodavatelský tok nebo reálné riziko. Ne pro každý nový nápad. Když se pravidlo znovuotevře příliš snadno, tým se naučí, že žádné uzavření není stabilní.
+
+### Co propsat do kanonického místa
+
+Kanonické místo nemá absorbovat celou historii návratu. Má dostat jen to, co pomůže příštímu člověku udělat správný krok bez čtení starých poznámek.
+
+Propisujte:
+
+- jednu aktuální větu pravidla;
+- odkaz nebo název správného pracovního místa;
+- lokální upřesnění, pokud se opravdu změnilo;
+- návratový signál, pokud se tím zpřesnil;
+- datum posledního uzavření, pokud pomůže rozlišit starou kopii od aktuálního stavu.
+
+Nepropisujte:
+
+- podrobný průběh debaty;
+- osobní poznámky z rozhovorů;
+- staré varianty, které už neplatí;
+- dočasné exporty nebo screenshoty;
+- seznam všech lidí, kteří se k návratu vyjadřovali.
+
+Kanonické místo má být pracovní, ne archeologické. Když ho přetížíte historií, příští člověk stejně sáhne po zkratce. Dobré pravidlo se dá použít rychle i bez paměti celého příběhu.
+
+### Úklid po návratu
+
+Po uzavření návratu projděte všechny stopy, které kvůli němu vznikly. Typicky půjde o:
+
+- dočasný dokument s otázkou;
+- pomocnou tabulku;
+- export dat;
+- interní komentář ve starém návodu;
+- screenshot pracovního místa;
+- návrh nové automatizace;
+- neformální připomínku v chatu nebo task systému.
+
+U každé stopy rozhodněte:
+
+```text
+Stopa:
+
+Má po uzavření účel?
+
+Pokud ano, kde je její kanonické místo?
+
+Pokud ne, co se s ní stane:
+- smazat / anonymizovat / archivovat s datem / nahradit odkazem
+
+Vlastník úklidu:
+
+Termín:
+```
+
+Nejhorší výsledek návratu je stav, kdy pravidlo zůstalo v dlouhodobém klidu, ale kolem něj vznikla nová sbírka opatrnostních materiálů. Tým si pak myslí, že nic nezměnil, ale ve skutečnosti přidal tření a datovou stopu. Uzavření proto končí až ve chvíli, kdy jsou pomocné stopy zavřené.
+
+### Privacy-first uzavření návratu
+
+Privacy-first uzavření má tři vrstvy:
+
+1. Nezvětšit účel: pokud návrat nevyžadoval nová data, nesmí po něm zůstat nový sběr.
+2. Zkrátit stopu: dočasné podklady se smažou nebo anonymizují hned po rozhodnutí.
+3. Vrátit odpovědnost do práce: pravidlo má být v briefu, formuláři, runbooku nebo produktové specifikaci, ne v separátním kontrolním souboru.
+
+Praktická uzavírací věta:
+
+```text
+Návrat jsme uzavřeli bez nového sběru dat; aktuální pravidlo je v kanonickém místě, dočasné podklady se smažou do [datum] a samostatná kontrola se neobnovuje.
+```
+
+Pokud se během návratu přece jen pracovalo s citlivými podklady, doplňte konkrétnější verzi:
+
+```text
+Během návratu vznikl dočasný podklad [název]. Použil se jen pro rozhodnutí [účel], měl přístup [role] a po uzavření bude [smazán/anonymizován/archivován] do [datum].
+```
+
+Codyho komentář: uzavřený návrat má po sobě nechat méně napětí, ne víc dokumentů. Když po něm vznikne nový kontrolní rituál, pravidlo se možná nevrátilo kvůli signálu. Možná se jen někdo zalekl ticha.
+
+### Karta uzavření prvního návratového signálu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Původní stav:
+- dlouhodobý klid
+
+Návratový signál:
+
+Typ situace:
+- skutečný signál / stará kopie / provozní nervozita
+
+Výsledek:
+- vracíme do dlouhodobého klidu / drobná lokální oprava / nová malá smyčka / skutečné znovuotevření pravidla
+
+Uzavírací věta:
+
+Co se propsalo do kanonického místa:
+
+Co zůstává mimo rozsah:
+
+Jaké dočasné stopy uklízíme:
+
+Jaká data nevznikla:
+
+Pokud data vznikla, co se s nimi stane:
+
+Vlastník:
+
+Datum uzavření:
+
+Návratový signál pro příště:
+```
+
+### Mini workshop na 6 minut
+
+1. Přečtěte původní kartu návratového signálu.
+2. Vyberte jeden ze čtyř uzavíracích stavů.
+3. Napište uzavírací větu v přítomném čase.
+4. Určete jednu věc, která se propíše do kanonického místa.
+5. Najděte všechny dočasné stopy vzniklé během návratu.
+6. Rozhodněte, co se smaže, anonymizuje, archivuje nebo nahradí odkazem.
+7. Potvrďte, zda se samostatná kontrola obnovuje, nebo zůstává dlouhodobý klid.
+
+Workshop nesmí skončit jen pocitem, že je všechno jasné. Musí skončit konkrétní uzavírací větou a úklidem stop. Jinak se návrat přesune z práce do kolektivní paměti, a tam obvykle začne bobtnat.
+
+### Checklist uzavření prvního návratového signálu
+
+- Je jasné, jaký návratový signál se uzavírá?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je uzavírací věta napsaná v přítomném čase?
+- Víme, co se opravdu změnilo v běžné práci?
+- Propsali jsme jen nezbytné upřesnění do kanonického místa?
+- Nevracíme do pravidla celou starou historii?
+- Uklidili jsme staré kopie, pomocné dokumenty a dočasné odkazy?
+- Nevznikl nový tracker, export, tabulka ani rituál bez jasného účelu?
+- Pokud vznikla dočasná data, mají vlastníka a datum smazání nebo anonymizace?
+- Je jasné, zda se pravidlo vrací do dlouhodobého klidu?
+- Pokud vzniká nová malá smyčka, má vlastní otázku, vlastníka a stop podmínku?
+- Pokud se pravidlo opravdu znovuotevírá, víme přesně, co se změnilo v kontextu?
+
+Dobré uzavření prvního návratu po dlouhodobém klidu má být skoro nenápadné. Nezakládá novou kapitolu života pravidla pokaždé, když se objeví podnět. Jen opraví nejbližší pracovní místo, uklidí stopy a vrátí pozornost tam, kde má být: k produktu, zákazníkovi a rozhodnutí, které se opravdu musí udělat.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po dlouhodobém klidu: čtyři uzavírací stavy, kanonické propsání, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním návratovém signálu po dlouhodobém klidu: rozlišení skutečného signálu, staré kopie a provozní nervozity, malá smyčka, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o dlouhodobém klidu po dvou kvartálních sanity checkech: ukončení samostatné kontroly, návratové signály, privacy-first provoz bez nových evidencí, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření druhého kvartálního sanity checku: uzavírací stavy, kanonické propsání, úklid podkladů, prevence třetí kontroly, privacy-first uzavření, karta, mini workshop a checklist.
