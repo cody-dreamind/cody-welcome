@@ -202196,8 +202196,179 @@ Workshop neslouží k tomu, aby se z prvního použití stala retrospektiva cel�
 
 První běžné použití po pozdějším signálu je úspěšné, když se z něj nestane nová agenda. Buď potvrdí, že pravidlo funguje samo, nebo ukáže jednu přesnou opravu. V obou případech má tým odejít s klidnějším pravidlem, ne s novou vrstvou dohledu.
 
+## Uzavření prvního běžného použití po pozdějším signálu
+
+První běžné použití po pozdějším signálu nestačí jen pozorovat. Je potřeba ho také zavřít. Bez uzavření zůstane v týmu nenápadná otázka: máme to ještě sledovat? Má někdo příště raději zkontrolovat, jestli pravidlo zase neselže? Máme si nechat pomocnou tabulku pro jistotu? Přesně tady se z jedné zdravé opravy může stát nový provozní návyk, který nikdo nechtěl.
+
+Uzavření má odpovědět na jednu pracovní otázku:
+
+```text
+Co se po prvním běžném použití mění v pravidle, pracovním místě nebo provozní stopě?
+```
+
+Pokud odpověď zní "nic", je to plnohodnotný výsledek. Stabilní pravidlo nepotřebuje další dekoraci. Potřebuje klid, aby se ukázalo, jestli opravdu drží i bez mimořádné pozornosti.
+
+### Čtyři uzavírací stavy
+
+Po prvním běžném použití vyberte jeden ze čtyř uzavíracích stavů:
+
+- Zavřít beze změny: pravidlo bylo nalezené, pochopené a použité bez tření.
+- Dočistit jednu lokální věc: jedna věta, odkaz, příklad nebo umístění bránily hladkému použití.
+- Přesunout do pracovního místa: pravidlo je dobré, ale žije mimo trasu, kde vzniká rozhodnutí.
+- Otevřít úzkou opravu samostatnosti: použití fungovalo jen díky autorovi, mimořádné kontrole nebo starému dohledu.
+
+`Zavřít beze změny` znamená, že není potřeba druhé kontrolní kolečko. Zapište krátkou uzavírací větu, odstraňte pomocné poznámky a nechte pravidlo běžet. Pokud tým po dobrém výsledku okamžitě plánuje další ověření, často tím nechrání kvalitu, ale krmí nejistotu.
+
+`Dočistit jednu lokální věc` má být opravdu jedna věc. Například přepsat "zkontroluj citlivá data" na "nepoužívej screenshot zákaznického účtu bez veřejného zdroje, anonymizace nebo demo dat". To je oprava rozhodnutelnosti. Není to důvod otevírat celou metodiku publikování.
+
+`Přesunout do pracovního místa` je častý výsledek u pravidel, která vznikla při revizi. Text bývá dobrý, ale člověk ho nevidí při práci. Oprava pak není další odstavec v dlouhém dokumentu, ale odkaz v CMS checklistu, otázka v briefu, položka v pull request šabloně nebo krátká poznámka v sales kartě.
+
+`Otevřít úzkou opravu samostatnosti` použijte jen tehdy, když pravidlo samo nestačilo. Například editor ho použil pouze proto, že autor pravidla seděl u revize a připomněl mu ho. To není katastrofa, ale není to ani stabilní provoz. Nová oprava má mířit na samostatnost pravidla, ne na opakování celé předchozí smyčky.
+
+### Uzavírací věta
+
+Každé uzavření napište jednou větou. Krátká věta nutí tým rozlišit výsledek od pocitu:
+
+```text
+Po prvním běžném použití pravidlo zavíráme beze změny; bylo nalezené v publikačním checklistu, použité bez eskalace a nevzniká žádná nová evidence.
+```
+
+Nebo:
+
+```text
+Po prvním běžném použití dočišťujeme jednu větu v checklistu, protože pravidlo bylo najitelné, ale nerozlišovalo demo data od anonymizovaného zákaznického příkladu.
+```
+
+Nebo:
+
+```text
+Po prvním běžném použití přesouváme pravidlo z revizní poznámky do šablony briefu, protože rozhodnutí vzniká před psaním stránky, ne až při publikační kontrole.
+```
+
+Dobrá uzavírací věta má tři části: výsledek, důvod a hranici. Hranice je důležitá hlavně u privacy-first provozu. Říká, co kvůli uzavření nevzniká: žádný nový tracker, žádná tabulka screenshotů, žádné plošné schvalování, žádné dočasné exporty "pro jistotu".
+
+### Co se propisuje do kanonického místa
+
+Do kanonického místa patří jen to, co má příště pomoct při práci. Nepřepisujte do něj celou historii signálu. Většina historie patří do pracovního logu, ne do checklistu, který má člověk použít během normálního dne.
+
+Propisujte jen:
+
+- finální rozhodovací otázku;
+- jednu jasnou hranici výjimky;
+- jeden anonymizovaný příklad, pokud bez něj pravidlo není rozhodnutelné;
+- odkaz na správné pracovní místo, pokud pravidlo slouží jiné roli;
+- vlastníka výjimky, pokud ji nelze rozhodnout přímo v pravidle.
+
+Nepropisujte:
+
+- staré návrhy, které už neplatí;
+- citlivé ukázky zákaznických materiálů;
+- detailní popis incidentu nebo chyby;
+- interní debatu o tom, kdo měl co udělat;
+- pomocné kontrolní tabulky bez jasné retence.
+
+Kanonické místo má být menší po každém uzavření, ne větší. Pokud se pravidlo po uzavření rozrostlo o tři odstavce historie, pravděpodobně jste neuzavřeli rozhodnutí, ale přenesli úzkost do dokumentace. Dokumentace to sice neunese nahlas, ale uživatelé ano, a pak ji přestanou číst. Klasika: papír snese všechno, člověk ne.
+
+### Úklid po uzavření
+
+Po uzavření prvního použití udělejte malý úklid. Nečekejte na měsíční review, protože zbytečné pracovní stopy mají tendenci přežít právě díky tomu, že vypadají neškodně.
+
+Úklid zahrnuje:
+
+- smazat pomocné screenshoty, exporty a kopie, které už neslouží rozhodnutí;
+- anonymizovat příklady, které zůstávají jako učební materiál;
+- odstranit odkazy na starou smyčku z míst, kde by vedly k opakované kontrole;
+- zavřít dočasný úkol, který měl jen pohlídat první použití;
+- zapsat návratový signál místo plánování další kontroly.
+
+Návratový signál je lepší než pravidelný dohled. Například:
+
+```text
+Vrátíme se k pravidlu až tehdy, když se v běžné práci znovu objeví nejasný zákaznický důkaz, který člověk nedokáže rozhodnout podle checklistu.
+```
+
+To je jiné než:
+
+```text
+Za týden raději zkontrolujeme všechny stránky.
+```
+
+První věta chrání rozhodnutí. Druhá věta otevírá provozní dohled bez nového důvodu.
+
+### Privacy-first uzavření
+
+Privacy-first hodnota se při uzavření pozná podle minimální stopy. Cílem není dokázat budoucímu auditu všechno do posledního pixelu. Cílem je mít dost důkazů pro rozhodnutí a zároveň neskladovat věci, které zvyšují riziko.
+
+Praktická pravidla:
+
+- Do logu zapisujte typ situace a rozhodnutí, ne kopii citlivého obsahu.
+- Pokud potřebujete ukázku, ponechte anonymizovaný nebo demo příklad.
+- U dočasných podkladů napište, co bylo smazáno nebo zkráceno.
+- Odkazy na interní materiály nechávejte jen tam, kde mají pracovní účel.
+- Pokud zůstává výjimka, dejte jí vlastníka a návratový signál.
+
+Codyho komentář: nejlepší privacy-first uzavření je trochu nudné. Má jednu větu, jednu drobnou změnu a žádnou novou datovou skládku. Když po něm nikdo nemá pocit, že vznikl nový proces, pravděpodobně jste to trefili.
+
+### Karta uzavření prvního použití
+
+```text
+Uzavřený pozdější signál:
+
+První běžné použití:
+
+Výsledek použití:
+- bez tření / lokální tření / slabé napojení / skrytý návrat dohledu
+
+Uzavírací stav:
+- zavřít beze změny / dočistit jednu lokální věc / přesunout do pracovního místa / otevřít úzkou opravu samostatnosti
+
+Uzavírací věta:
+
+Kanonické místo:
+
+Co se propisuje:
+
+Co se výslovně nevrací:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 7 minut
+
+1. Přečtěte záznam prvního běžného použití.
+2. Vyberte jeden uzavírací stav.
+3. Napište jednu uzavírací větu s hranicí rozsahu.
+4. Určete kanonické místo, kam patří případná změna.
+5. Smažte nebo anonymizujte pomocné podklady.
+6. Nahraďte další kontrolu návratovým signálem.
+7. Zavřete dočasný úkol nebo poznámku, která hlídala první použití.
+
+Workshop končí ve chvíli, kdy je jasné, co se mění a co se nevrací. Pokud se během něj objeví větší téma, zapište ho jako nový signál. Nevtahujte ho do uzavření prvního použití, jinak se z uzavírání stane nenápadné rozšiřování práce.
+
+### Checklist uzavření
+
+- Má první použití vybraný jeden uzavírací stav?
+- Je uzavírací věta konkrétní a krátká?
+- Víme, jestli se pravidlo zavírá beze změny, dočišťuje, přesouvá nebo otevírá úzkou opravu samostatnosti?
+- Je případná změna vložená do skutečného pracovního místa?
+- Nepropsali jsme do kanonického místa zbytečnou historii?
+- Je zapsané, co se výslovně nevrací?
+- Nahradili jsme další kontrolu návratovým signálem?
+- Smazali jsme nebo anonymizovali pomocné podklady?
+- Nevznikla nová tabulka, tracker, export ani schvalovací role bez jasného důvodu?
+- Umí vlastník říct, kdy se k pravidlu znovu vrátit?
+
+Uzavření prvního běžného použití má z pravidla sundat mimořádnou pozornost. Buď potvrdí, že pravidlo pracuje samo, nebo ho drobně posune do místa, kde má pracovat příště. Jakmile je výsledek propsaný, stopa uklizená a návratový signál jasný, nechte pravidlo být. V provozu je někdy největší známka dospělosti právě to, že se dokážete nedívat dál.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního běžného použití po pozdějším signálu: čtyři uzavírací stavy, uzavírací věta, kanonické místo, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním běžném použití po uzavření pozdějšího signálu: najitelnost, rozhodnutelnost, klid pravidla, čtyři výsledky použití, lokální opravy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření pozdějšího návratového signálu: čtyři uzavírací stavy, kanonická změna, prevence návratu staré kontroly, privacy-first úklid, karta a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o pozdějším návratovém signálu po uzavřeném měsíci: rozlišení typů signálu, přenosová věta, otevření nové smyčky jen při novém rozhodnutí, privacy-first hranice, karta a checklist.
