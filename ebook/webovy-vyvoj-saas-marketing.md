@@ -203090,8 +203090,196 @@ Pravidlo zůstává v tichém provozu; po review nepřidáváme žádnou novou k
 
 Pokud tuto větu nemůžete napsat, je to v pořádku. Znamená to jen, že review našlo práci. Ale i tehdy držte rozsah: jedna lokální oprava, jedno zúžení nebo jeden nový signál. Ne všechno najednou. Tichý provoz se neudržuje tím, že se nikdy nic nezmění. Udržuje se tím, že změna zůstane menší než problém, který řeší.
 
+## Uzavření měsíčního review tichého provozu
+
+Měsíční review tichého provozu má smysl jen tehdy, když se umí také zavřít. Jinak se z něj stane nový zvyk: jednou měsíčně se tým sejde, opatrně zkontroluje staré pravidlo, trochu si připomene historii a odejde s pocitem, že byl pečlivý. Jenže pokud po review nezůstane jasný konečný stav, pravidlo se nevrátilo do klidu. Jen dostalo pravidelný servis, o který si neřeklo.
+
+Uzavírací otázka zní:
+
+```text
+Co po měsíčním review tichého provozu končí, co zůstává v běžné práci a kdy se k pravidlu znovu vrátíme?
+```
+
+Tato otázka má tři části záměrně. `Co končí` chrání tým před skrytou kontrolou. `Co zůstává` chrání kanonické pravidlo před tím, aby se vymazalo i s užitečným poučením. `Kdy se vrátíme` nahrazuje další plánovanou kontrolu návratovým signálem. Bez všech tří částí review snadno vyrobí buď přílišnou opatrnost, nebo příliš rychlé zapomenutí.
+
+Příklad:
+
+```text
+Review:
+Pravidlo pro používání zákaznických ukázek v marketingu bylo za poslední měsíc použito jednou. Editor ho našel v publikačním checklistu, nepotřeboval autora pravidla a nevznikla nová kopie zákaznického materiálu.
+
+Uzavření:
+Pravidlo zůstává v tichém provozu. Nepřidáváme další měsíční kontrolu. Do šablony se nepropsuje historie signálu, jen zůstává finální otázka k veřejným, anonymizovaným nebo demo materiálům.
+
+Návrat:
+K pravidlu se vrátíme jen při novém typu ukázky, dvojím výkladu nebo nechtěné datové stopě.
+```
+
+Takové uzavření je krátké, ale stačí. Neopakuje celé review, nevyrábí novou metriku a nevytváří pocit, že pravidlo je pořád trochu nebezpečné. Tým ví, kde pravidlo bydlí, co se po review nemění a jak pozná skutečný důvod k návratu.
+
+### Čtyři uzavírací stavy review
+
+Po měsíčním review vyberte jeden ze čtyř stavů:
+
+- Uzavřít beze změny: pravidlo funguje, nevznikla nová práce ani datová stopa.
+- Uzavřít po lokálním úklidu: pravidlo funguje, ale jedna stará připomínka, šablona, kopie nebo poznámka držela mimořádnou péči při životě.
+- Uzavřít se zúžením pravidla: review ukázalo, že pravidlo má zůstat užší, než se původně tvářilo.
+- Otevřít nový signál a staré review zavřít: objevilo se nové rozhodnutí, které patří do vlastní smyčky.
+
+První stav je nejjednodušší. Napište uzavírací větu, nechte pravidlo v kanonickém místě a nepřidávejte další kontrolu. Pokud se vám chce ještě něco měřit, položte si nepříjemnou otázku: jaké rozhodnutí bez toho neumíme udělat? Když žádné, metriku nechte spát.
+
+Druhý stav je praktický úklid. Například v onboardingové šabloně zůstala věta `pošli novou variantu ještě ke kontrole`, i když pravidlo už umí rozhodnout běžný případ. Opravte jen tuto větu. Neotevírejte celé pravidlo, nepřidávejte školení a nedělejte z jednoho starého odkazu důkaz systémového selhání.
+
+Třetí stav je užitečný tam, kde se z pravidla během provozu stal příliš široký nápis. Třeba pravidlo pro anonymizované screenshoty dobře funguje pro webové reference, ale ne pro produktové demo v živé prezentaci. Zúžení není porážka. Je to přesnější vlastnictví. Široké pravidlo, které lidé obcházejí, je horší než úzké pravidlo, které opravdu používají.
+
+Čtvrtý stav použijte, když review najde něco nového. Například pravidlo pro marketingové ukázky je v pořádku, ale tým narazil na otázku, kdo smí schválit syntetická demo data odvozená z reálného workflow. To není důvod držet staré review otevřené. Staré review zavřete a nové téma pojmenujte jako samostatný signál.
+
+### Co se smí propsat zpět
+
+Po review bývá pokušení napsat do kanonického místa víc, než je potřeba. Tým má čerstvé poznámky, pár nových vět a pocit, že když už review proběhlo, mělo by po něm něco viditelně zůstat. To je nebezpečné. Kanonické místo není vitrína odvedené práce. Je to pracovní nástroj.
+
+Propisujte jen:
+
+- finální rozhodovací větu, pokud je kratší nebo jasnější než před review;
+- zúžený rozsah pravidla, pokud review ukázalo příliš širokou formulaci;
+- návratový signál, pokud byl po review zpřesněn;
+- jednu lokální opravu odkazu, šablony nebo checklistu;
+- datum změny, pokud tým u standardů vede jednoduchý changelog.
+
+Nepropisujte:
+
+- zápis z celého review;
+- seznam všech použití pravidla;
+- jména lidí, kteří se k pravidlu vyjádřili;
+- pomocné screenshoty, exporty nebo zákaznické materiály;
+- dočasné pochybnosti, které už nemění rozhodnutí;
+- novou kontrolní metriku bez jasného rozhodnutí.
+
+Dobrá změna kanonického místa:
+
+```text
+Zákaznickou ukázku použij jen tehdy, když je veřejná, anonymizovaná nebo vytvořená z demo dat. U jiného typu ukázky otevři nový signál; běžné použití těchto tří kategorií se znovu neschvaluje.
+```
+
+Špatná změna kanonického místa:
+
+```text
+Po měsíčním review jsme zjistili, že pravidlo bylo použito jednou, editor si nebyl úplně jistý, ale nakonec to prošlo, takže zatím budeme sledovat...
+```
+
+Druhá varianta není pravidlo. Je to záznam nálady. Nálady patří do pracovního zápisu, pokud vůbec. Člověk v běžné práci potřebuje vědět, co má udělat teď.
+
+### Úklid po review
+
+Uzavření review je dobrý moment k malému úklidu. Ne k velkému auditu, jen k odstranění věcí, které vznikly kvůli dočasné nejistotě.
+
+Projít stačí tato místa:
+
+- pracovní poznámku z review;
+- jednu šablonu nebo checklist, kde se pravidlo používá;
+- dočasné příklady, screenshoty nebo exporty;
+- starý odkaz na mimořádnou kontrolu;
+- soukromé poznámky vlastníka pravidla, pokud se z nich stal neoficiální zdroj pravdy.
+
+U každé stopy zvolte jeden stav:
+
+```text
+Zůstává v kanonickém místě.
+Maže se.
+Anonymizuje se.
+Archivuje se mimo aktivní pracovní trasu.
+Převádí se do nového signálu.
+```
+
+Nejnebezpečnější stav je `necháme to zatím být`. U citlivých podkladů je to jen pomalejší způsob, jak z dočasné kopie udělat trvalou kopii. Pokud stopa nemá účel, smažte ji. Pokud účel má, napište ho a určete místo, kde má žít. Všechno mezi tím je šedá zóna, ve které se datová stopa množí sama od sebe. Což je technicky působivé, ale provozně dost otrava.
+
+### Privacy-first uzavření review
+
+Privacy-first uzavření má jasnou logiku: po review má existovat méně nejistoty, ne více dat. Pokud review skončí novým sledováním, novými kopiemi nebo širším sdílením podkladů, zeptejte se, jestli jste opravdu uzavřeli pravidlo, nebo jen přesunuli úzkost do infrastruktury.
+
+Praktické hranice:
+
+- Nepřidávejte event do analytiky jen proto, že chcete vědět, jestli se pravidlo používá.
+- Nepřidávejte pole do CRM, pokud návratový signál poznáte z běžného obchodního nebo supportního průchodu.
+- Neponechávejte zákaznické ukázky v pracovní složce jen proto, že se hodily při review.
+- Neposílejte závěr review širšímu okruhu lidí, než kteří pravidlo opravdu používají.
+- Neuchovávejte celý přepis diskuse, pokud stačí rozhodovací věta a návratový signál.
+
+Dobré privacy-first uzavření může vypadat takto:
+
+```text
+Po review zůstává jedna věta v publikačním checklistu.
+Dočasné screenshoty z review se mažou.
+Autor pravidla už není v kopii běžných kontrol.
+Návratový signál je nový typ ukázky nebo nechtěná datová kopie.
+Další měsíční review se neplánuje.
+```
+
+To je dost. Privacy-first provoz není divadelní představení o tom, jak moc nám záleží na datech. Je to schopnost po rozhodnutí smazat pomocné věci, které už nepotřebujeme.
+
+### Karta uzavření měsíčního review
+
+```text
+Pravidlo v tichém provozu:
+
+Kanonické místo:
+
+Výsledek měsíčního review:
+- beze změny / lokální úklid / zúžení pravidla / nový signál
+
+Uzavírací věta:
+
+Co zůstává v běžné práci:
+
+Co tímto končí:
+
+Co se nepropíše do pravidla:
+
+Co se maže, anonymizuje nebo archivuje mimo aktivní trasu:
+
+Vzniká nový signál?
+- ne / ano:
+
+Návratový signál místo další plánované kontroly:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být poslední artefakt review, ne začátek dalšího kola. Pokud po jejím vyplnění vznikne pět úkolů, vraťte se k vybranému stavu. Lokální úklid znamená jeden úklid. Zúžení znamená jednu změnu rozsahu. Nový signál znamená nové téma, ale staré review se tím nezdržuje jako rukojmí.
+
+### Mini workshop na 6 minut
+
+1. Přečtěte kartu měsíčního review.
+2. Vyberte jeden ze čtyř uzavíracích stavů.
+3. Napište jednu uzavírací větu.
+4. Řekněte, co zůstává v kanonickém místě a co se do něj nepropíše.
+5. Určete jednu datovou nebo pracovní stopu k odstranění, anonymizaci nebo archivaci.
+6. Nahraďte další plánovanou kontrolu návratovým signálem.
+
+Workshop skončí dobře, když po něm pravidlo působí obyčejněji než před ním. Ne slavnostněji, ne důležitěji, ne obalené další opatrností. Obyčejněji. To je u stabilního pravidla pochvala.
+
+### Checklist uzavření měsíčního review
+
+- Má review jeden jasný uzavírací stav?
+- Je napsané, co končí a co zůstává v běžné práci?
+- Nevznikla další plánovaná kontrola jen ze zvyku?
+- Je kanonické místo kratší, nebo alespoň ne delší než před review?
+- Nepropsali jsme do pravidla historii, náladu ani pomocné důkazy?
+- Pokud vznikl lokální úklid, je opravdu jeden a dokončitelný?
+- Pokud se pravidlo zúžilo, je hranice rozsahu viditelná pro další použití?
+- Pokud vznikl nový signál, má vlastní název a staré review je zavřené?
+- Jsou dočasné screenshoty, exporty, kopie a poznámky smazané, anonymizované nebo přesunuté mimo aktivní trasu?
+- Nepřidali jsme nový tracker, pole, report, štítek ani schvalovací roli bez jasného rozhodnutí?
+- Je návratový signál konkrétnější než neurčité "uvidíme za měsíc"?
+- Umí vlastník říct, jaká data díky uzavření review nevzniknou?
+
+Uzavření měsíčního review je malý test dospělosti provozu. Otevřít kontrolu umí skoro každý tým. Zavřít ji bez toho, aby po ní zůstala nová opatrnost, už je těžší. Právě tam se pozná rozdíl mezi systémem, který se učí, a systémem, který si jen sbírá další důkazy, že by se možná měl učit.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o uzavření měsíčního review tichého provozu: čtyři uzavírací stavy, kanonické propsání, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o měsíčním review tichého provozu po uzavřeném signálu: kontrola pracovní trasy, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first review, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o tichém provozu po uzavření pozdějšího signálu: návrat pravidla do běžné práce, skrytá mimořádná péče, marketingové a SaaS příklady, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření pozdějšího signálu: uzavírací stavy, kanonické místo, úklid pomocných stop, privacy-first karta, mini workshop a checklist.
