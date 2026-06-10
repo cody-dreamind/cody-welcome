@@ -203647,8 +203647,181 @@ Pět minut stačí, pokud je pravidlo opravdu stabilní. Pokud nestačí, je to 
 
 První kvartální sanity check je dobrý tehdy, když po něm pravidlo vypadá ještě méně dramaticky než před ním. Pokud drží, nechte ho být. Pokud drhne, opravte nejbližší pracovní místo. Pokud se změnil svět kolem něj, otevřete novou otázku. Všechno ostatní je jen drahá verze nejistoty.
 
+## Uzavření prvního kvartálního sanity checku
+
+Sanity check má cenu až ve chvíli, kdy se po něm něco jasně uzavře. Ne nutně změní. Uzavře. Tým má vědět, jestli pravidlo zůstává v běžném rytmu, jestli potřebuje jednu lokální opravu, jestli se má zúžit, nebo jestli vznikla nová pracovní otázka. Bez uzavření se i malá kvartální kontrola začne tvářit jako trvalý dohled a pravidlo se nikdy úplně nevrátí do normálu.
+
+Uzavření začněte krátkou větou:
+
+```text
+Po prvním kvartálním sanity checku pravidlo:
+- zůstává v běžném rytmu / čeká na lokální úklid / zužuje se / otevírá novou otázku
+```
+
+Tato věta je důležitější než dlouhý zápis. Když ji tým neumí napsat, sanity check pravděpodobně neskončil. Možná jen našel pár poznámek, které se někam přesunuly. To nestačí. Kontrola bez stavu je jen další způsob, jak udržet téma při životě.
+
+Příklad:
+
+```text
+Po prvním kvartálním sanity checku pravidlo zůstává v běžném rytmu.
+Publikační checklist je aktuální, tým ho použil u dvou ukázek a nevznikl nový export ani výjimka.
+```
+
+Jiný příklad:
+
+```text
+Po prvním kvartálním sanity checku pravidlo čeká na lokální úklid.
+Ve starém sales briefu zůstala věta, která odporuje aktuálnímu formuláři. Opravíme brief, ale neotevíráme znovu rozhodnutí o sběru telefonu.
+```
+
+V obou případech je jasné, co se děje dál. První výsledek nevyžaduje akci. Druhý výsledek vyžaduje jednu akci. Ani jeden výsledek neotevírá starou historii.
+
+### Čtyři uzavírací stavy
+
+Po sanity checku vyberte jeden stav:
+
+- Uzavřeno bez změny: pravidlo drží a zůstává v běžném kvartálním rytmu.
+- Uzavřeno po lokálním úklidu: pravidlo platí, ale jedno pracovní místo se opraví.
+- Uzavřeno zúžením: pravidlo bylo moc široké a dostane přesnější hranici.
+- Uzavřeno novou otázkou: sanity check odhalil skutečný návratový signál a stará kontrola končí.
+
+`Uzavřeno bez změny` má být nudné. Zapište stav, neplánujte další mimořádnou kontrolu a nehledejte ještě jeden důkaz pro jistotu. Jestli pravidlo drží, nejlepší práce je nechat ho pracovat.
+
+`Uzavřeno po lokálním úklidu` nesmí přerůst do auditu. Pokud opravujete jeden brief, opravte jeden brief. Pokud opravujete jednu šablonu, opravte jednu šablonu. Když během toho najdete víc podobných stop, zeptejte se, jestli mají stejnou příčinu. Pokud ano, pořád jde o úklid jednoho typu. Pokud ne, napište novou otázku, ale nezvětšujte původní check za pochodu.
+
+`Uzavřeno zúžením` znamená, že pravidlo zůstává užitečné, ale jeho formulace v běžné práci vytváří zbytečný strach nebo dvojí výklad. Zúžení má odpovědět na tři věci: kdy pravidlo platí, kdy neplatí a jak se zapisuje výjimka. Nic víc. Nepřepisujte celý provozní standard jen proto, že jedna věta byla moc široká.
+
+`Uzavřeno novou otázkou` je stav pro skutečnou změnu kontextu. Například vznikl nový typ zákaznické ukázky, nový datový tok, nový distribuční kanál nebo nový SaaS onboardingový scénář. V takové chvíli sanity check ukončete a založte novou smyčku. Staré pravidlo nemá nést odpovědnost za rozhodnutí, které tehdy ještě neexistovalo.
+
+### Co propsat zpět
+
+Uzavření sanity checku se má propsat jen do míst, která budou lidé skutečně používat:
+
+- kanonické pracovní místo pravidla;
+- krátký changelog nebo rozhodovací záznam;
+- jedna šablona, pokud se jí změna přímo týká;
+- archivní poznámka, pokud sanity check odhalil starou stopu k odstranění.
+
+Nezakládejte samostatný report sanity checku, pokud pro něj není jasný čtenář. Report, který nikdo nepotřebuje při práci, je jen další artefakt k údržbě. Lepší je jedna věta v kanonickém místě než tři stránky závěrů mimo trasu.
+
+Dobrá uzavírací věta v kanonickém místě:
+
+```text
+Pravidlo bylo po prvním kvartálu ověřeno v běžném použití a zůstává v kvartálním rytmu bez mimořádné kontroly.
+```
+
+Dobrá věta po lokálním úklidu:
+
+```text
+Po sanity checku byl opraven starý sales brief; pravidlo se nemění a debata o prvním formulářovém telefonu zůstává zavřená.
+```
+
+Dobrá věta po nové otázce:
+
+```text
+Sanity check uzavírá původní pravidlo jako použitelné pro běžné ukázky; nový typ partnerské ukázky se otevírá jako samostatná rozhodovací otázka.
+```
+
+Tyto věty pomáhají při dalším plánování. Člověk nečte historii, ale vidí stav. To je přesně úloha kanonického místa: neuchovávat všechno, ale ukazovat, co platí teď.
+
+### Privacy-first uzavření
+
+Po sanity checku ukliďte pracovní stopu stejně důsledně jako samotné pravidlo. Kvartální kontrola často svádí k tomu, že si tým nechá pomocné výpisy, screenshoty, poznámky nebo exporty "kdyby se to ještě hodilo". To je nenápadný návrat datového dluhu.
+
+Použijte jednoduché pravidlo:
+
+```text
+V kanonickém místě necháváme závěr. Pomocné podklady necháváme jen tehdy, když mají konkrétní další účel, vlastníka a datum návratu.
+```
+
+Typické privacy-first uzavření:
+
+- ponechat agregovaný závěr místo detailního seznamu případů;
+- smazat pracovní export, pokud už byl výsledek propsán;
+- anonymizovat příklad, který má zůstat jako vysvětlení pravidla;
+- zavřít dočasný přístup, který byl potřeba jen pro kontrolu;
+- nechat výjimku jen s účelem, vlastníkem a datem návratu.
+
+Codyho komentář: "možná se to bude hodit" je nejdražší věta v provozu dat. Ne hned. Ale časem. Vždycky dorazí účet za neuklizené kopie, nejasné přístupy a poznámky bez vlastníka.
+
+Privacy-first závěr pište konkrétně:
+
+```text
+Po uzavření sanity checku zůstává jen agregovaný závěr v rozhodovacím záznamu. Pracovní export a dočasné screenshoty se mažou, protože nemají další účel.
+```
+
+Když žádná pomocná data nevznikla, zapište to také:
+
+```text
+Sanity check proběhl bez nového exportu, trackeru, screenshotů a osobních poznámek.
+```
+
+Taková věta je malá, ale užitečná. Učí tým, že dobrá kontrola nemusí automaticky vyrábět další podklady.
+
+### Karta uzavření kvartálního sanity checku
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Výsledek sanity checku:
+- drží beze změny / lokální úklid / zúžení / skutečný návratový signál
+
+Uzavírací stav:
+- uzavřeno bez změny / uzavřeno po úklidu / uzavřeno zúžením / uzavřeno novou otázkou
+
+Jedna věta do kanonického místa:
+
+Jedna akce, pokud je potřeba:
+
+Co neotevíráme:
+
+Co zůstává v běžném kvartálním rytmu:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Nová otázka, pokud vznikla:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má zůstat krátká. Pokud se nevejde na jednu obrazovku, sanity check nejspíš začal řešit víc než měl. Vraťte se k uzavíracímu stavu a zbytek přesuňte do nové otázky nebo archivu.
+
+### Mini workshop na 6 minut
+
+1. Přečtěte výsledek sanity checku.
+2. Vyberte jeden uzavírací stav.
+3. Napište jednu větu do kanonického místa.
+4. Určete jednu akci, pokud je potřeba.
+5. Napište, co se výslovně znovu neotevírá.
+6. Zkontrolujte pomocné podklady a rozhodněte, co se maže, anonymizuje nebo archivuje.
+7. Pokud vznikla nová otázka, oddělte ji od původního checku.
+
+Workshop má skončit tím, že sanity check zmizí z aktivní pozornosti. Buď proto, že pravidlo drží, nebo proto, že jedna lokální oprava má vlastníka, nebo proto, že nová otázka převzala jen to, co opravdu patří do další smyčky.
+
+### Checklist uzavření sanity checku
+
+- Má sanity check jeden jasný uzavírací stav?
+- Je napsané, zda pravidlo zůstává v běžném kvartálním rytmu?
+- Pokud je potřeba úklid, týká se jednoho konkrétního pracovního místa?
+- Pokud se pravidlo zužuje, je jasné, kdy platí a kdy neplatí?
+- Pokud vznikla nová otázka, je oddělená od původní kontroly?
+- Je v kanonickém místě jedna krátká věta o výsledku?
+- Neotevíráme původní rozhodnutí kvůli staré pracovní stopě?
+- Víme, co se výslovně znovu neřeší?
+- Jsou pomocné exporty, screenshoty, poznámky a dočasné přístupy uklizené?
+- Zůstává jen taková datová stopa, která má účel, vlastníka a datum návratu?
+- Nevznikl nový report, dashboard ani kontrolní rituál jen kvůli uzavření?
+- Umí tým říct, co se stane při dalším běžném kvartálním review?
+
+Uzavřený sanity check má působit skoro neviditelně. Pravidlo zůstane na místě, lidé ho použijí, datová stopa se nezvětší a stará nejistota se nevrátí jen proto, že byla kdysi důležitá. To je dospělý konec provozní smyčky: méně dramatu, víc použitelnosti.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního kvartálního sanity checku: uzavírací stavy, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním kvartálním sanity checku po návratu pravidla do rytmu: čtyři výsledné stavy, úzký rozsah kontroly, privacy-first sanity check, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o převodu uzavřeného review do běžného kvartálního rytmu: úrovně kontroly, hranice bez nového procesu, privacy-first převod, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření měsíčního review tichého provozu: čtyři uzavírací stavy, kanonické propsání, privacy-first úklid, karta, mini workshop a checklist.
