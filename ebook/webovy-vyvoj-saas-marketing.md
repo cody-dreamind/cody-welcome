@@ -203472,8 +203472,184 @@ Workshop skončí dobře, když po něm není v kalendáři nová schůzka naví
 
 Převod do kvartálního rytmu není slavnostní povýšení pravidla. Je to návrat do normálu. Dobré pravidlo má být dostupné, stručné a dost klidné na to, aby ho lidé použili bez pocitu, že otevírají starý případ. Když se to povede, tým neztratí paměť, ale přestane platit daň za minulou nejistotu.
 
+## První kvartální sanity check po návratu pravidla do rytmu
+
+Pravidlo, které se vrátilo z měsíčního review do kvartálního rytmu, potřebuje už jen jeden nenápadný test: jestli opravdu vydrží bez mimořádné péče. První kvartální sanity check nemá ověřovat celou historii pravidla. Nemá znovu hodnotit původní rozhodnutí, vytahovat staré důkazy ani hledat další optimalizace. Má zjistit, jestli pravidlo pořád bydlí na správném místě, jestli ho tým použil bez zvláštní připomínky a jestli nevznikla nová datová stopa jen kvůli kontrole.
+
+Začněte jednou otázkou:
+
+```text
+Zůstalo pravidlo po jednom kvartálu použitelné v běžné práci bez návratu mimořádného dohledu?
+```
+
+Pokud je odpověď ano, sanity check má skončit rychle. Napište krátký záznam, ponechte pravidlo v rytmu a neplánujte další zvláštní kontrolu. Pokud je odpověď ne, nejdřív rozlišujte, co přesně selhalo: kanonické místo, formulace, vlastnictví, návratový signál nebo datový úklid. Každý z těchto problémů má jinou reakci a žádný z nich automaticky neznamená, že se má znovu otevřít původní rozhodnutí.
+
+Příklad:
+
+```text
+Pravidlo:
+U veřejných zákaznických ukázek používáme jen veřejnou, anonymizovanou nebo demo variantu.
+
+Kvartální sanity check:
+Publikační checklist pravidlo obsahuje, tým ho použil u dvou nových ukázek a nevznikly nové kopie zákaznických dat.
+
+Výsledek:
+Pravidlo drží.
+
+Akce:
+Bez změny. Další kontrola jen v běžném kvartálním review marketingových šablon.
+```
+
+Jiný výsledek:
+
+```text
+Pravidlo:
+První kontaktní formulář nesbírá telefon.
+
+Kvartální sanity check:
+Nová landing page použila správnou komponentu, ale ve starém sales briefu zůstala věta "telefon doplnit pro rychlé spojení".
+
+Výsledek:
+Lokální zbytek, ne návrat původního problému.
+
+Akce:
+Upravit sales brief. Neotevírat debatu o telefonu v prvním formuláři.
+```
+
+Tento rozdíl je klíčový. Starý zbytek v jedné pracovní stopě není nový důkaz. Je to úklidový nález. Kdyby tým při každém takovém nálezu znovu otevřel celé pravidlo, kvartální rytmus by se změnil na nekonečnou kontrolní smyčku.
+
+### Čtyři výsledky sanity checku
+
+Po prvním kvartálním sanity checku vyberte jeden stav:
+
+- Drží beze změny: pravidlo je najitelné, použitelné a nevytváří nové datové náklady.
+- Potřebuje lokální úklid: pravidlo platí, ale jedno pracovní místo nese starou stopu.
+- Potřebuje zúžení: pravidlo je moc široké a v běžné práci vytváří zbytečnou opatrnost.
+- Vznikl skutečný návratový signál: změnil se kontext a pravidlo už nestačí pro nové rozhodnutí.
+
+`Drží beze změny` je nejlepší a nejkratší výsledek. Nepřidávejte k němu preventivní úkol. Pravidlo má zůstat obyčejné.
+
+`Potřebuje lokální úklid` znamená jednu opravu. Jeden brief, jedna šablona, jeden odkaz, jedna archivace. Pokud najdete víc míst, zapište je, ale pořád se ptejte, jestli nejde o stejný úklidový typ. Nezakládejte nový projekt, dokud není jasné, že selhává kanonické místo.
+
+`Potřebuje zúžení` je časté u pravidel, která vznikla po citlivějším období. Tým je napsal opatrně a po kvartálu se ukáže, že běžnou práci zbytečně brzdí. V takové situaci pravidlo nezahazujte. Zkraťte hranici: kdy platí, kdy neplatí a jak se zapisuje výjimka.
+
+`Vznikl skutečný návratový signál` používejte jen tehdy, když se změnila pracovní realita. Například přišel nový typ zákaznické ukázky, nový datový tok, nová nabídka, nový segment nebo opakované provozní tření, které původní pravidlo neumí rozhodnout. To už je nová smyčka, ale sanity check se tím nemá nafouknout. Zavřete check a založte novou pracovní otázku.
+
+### Co při checku nekontrolovat
+
+První kvartální sanity check má záměrně úzký rozsah. Nekontrolujte:
+
+- všechny historické případy, ve kterých pravidlo vznikalo;
+- výkon konkrétních lidí;
+- každé použití pravidla v drobných detailech;
+- staré exporty, pokud už byly smazané nebo agregované;
+- metriky, které pravidlo nikdy nemělo zlepšovat;
+- nové hypotézy, které se jen tváří jako kontrola pravidla.
+
+Kontrolujte jen to, co rozhoduje o životaschopnosti pravidla:
+
+- je pravidlo v kanonickém pracovním místě;
+- bylo použité bez mimořádné připomínky;
+- nevytváří dvojí výklad;
+- má pořád konkrétní návratový signál;
+- neudržuje zbytečná data, přístupy nebo exporty.
+
+Tím check zůstane malý. A malý check má větší šanci, že se opravdu stane. Velké kontrolní rituály většinou nezačínají špatně. Jen postupně spolknou víc energie než problém, který měly hlídat.
+
+### Privacy-first sanity check
+
+Privacy-first část je jednoduchá: kontrola nesmí vytvořit větší datovou stopu než samotné pravidlo. Pokud pravidlo chrání zákaznické ukázky, nepotřebujete kvůli sanity checku stahovat všechny podklady, screenshoty a schvalovací historie. Stačí ověřit stav pracovního místa a případně jeden anonymizovaný příklad.
+
+Položte si pět otázek:
+
+- Potřebujeme vidět osobní nebo zákaznická data, nebo stačí stav pravidla?
+- Nevzniká kvůli kontrole nový export, kopie nebo screenshot?
+- Nezůstaly po měsíčním review pomocné podklady, které měly zmizet?
+- Má případná výjimka vlastní účel, vlastníka a datum návratu?
+- Dá se záznam sanity checku napsat bez osobních detailů?
+
+Codyho komentář: sanity check, který kvůli kontrole soukromí vytvoří nový balík citlivých podkladů, je jako požární cvičení s otevřeným ohněm v archivu. Teoreticky tematické. Prakticky hloupé.
+
+Dobrá privacy-first věta po checku zní:
+
+```text
+Pravidlo drží bez nového sběru dat. Pro záznam stačí stav kanonického místa, počet použití v agregované podobě a informace, že nevznikl nový export ani výjimka.
+```
+
+Pokud check odhalí starou datovou stopu, nepište jen "uklidit". Zapište konkrétně:
+
+```text
+Smazat pracovní kopii exportu z ověření po ponechání agregovaného závěru v rozhodovacím záznamu.
+```
+
+Rozdíl mezi těmito větami je praktický. První vytváří hezký úmysl. Druhá zavírá riziko.
+
+### Karta prvního kvartálního sanity checku
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Kvartální úroveň:
+- tiché připomenutí / lehký sanity check / spojené review
+
+Co mělo po kvartálu platit:
+
+Co jsme reálně našli:
+
+Výsledek:
+- drží beze změny / lokální úklid / zúžení / skutečný návratový signál
+
+Jedna akce, pokud je potřeba:
+
+Co tím neotevíráme:
+
+Privacy-first výsledek:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Návrat do běžného rytmu:
+- ano / po lokálním úklidu / ne, vzniká nová otázka
+
+Vlastník:
+
+Datum:
+```
+
+Karta má chránit konec checku. Pokud výsledek zní `držící pravidlo`, karta nesmí otevřít další kontrolu. Pokud výsledek zní `lokální úklid`, karta nesmí otevřít původní rozhodnutí. Pokud výsledek zní `skutečný návratový signál`, karta má starý check zavřít a nové téma jasně oddělit.
+
+### Mini workshop na 5 minut
+
+1. Otevřete kanonické místo pravidla.
+2. Ověřte, jestli bylo pravidlo v kvartálu použité v běžné práci.
+3. Vyberte jeden ze čtyř výsledných stavů.
+4. Napište jednu větu, co se nebude znovu otevírat.
+5. Zkontrolujte, že kvůli checku nevznikl nový export, tracker ani osobní poznámka.
+6. Pokud je potřeba akce, vyberte jednu nejbližší opravu.
+
+Pět minut stačí, pokud je pravidlo opravdu stabilní. Pokud nestačí, je to signál sám o sobě: buď je kanonické místo slabé, nebo check ve skutečnosti otevřel nové rozhodnutí. Obojí se dá řešit, ale nemá se to tvářit jako běžná kontrola.
+
+### Checklist prvního kvartálního sanity checku
+
+- Kontrolujeme stav pravidla, ne celou historii jeho vzniku?
+- Je pravidlo pořád v kanonickém pracovním místě?
+- Použil ho tým bez mimořádné připomínky?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud je potřeba úklid, jde o jedno konkrétní místo?
+- Pokud je potřeba zúžení, je nová hranice viditelná pro další použití?
+- Pokud vznikl návratový signál, je oddělený jako nová pracovní otázka?
+- Neotevíráme původní rozhodnutí kvůli starému artefaktu?
+- Nevznikl kvůli checku nový tracker, export, screenshot, CRM údaj ani kontrolní seznam lidí?
+- Jsou dočasné podklady smazané, anonymizované nebo přesunuté mimo aktivní trasu?
+- Je napsané, jaká data díky sanity checku dál nevznikají?
+- Vrací se pravidlo do běžného rytmu bez nové mimořádné péče?
+
+První kvartální sanity check je dobrý tehdy, když po něm pravidlo vypadá ještě méně dramaticky než před ním. Pokud drží, nechte ho být. Pokud drhne, opravte nejbližší pracovní místo. Pokud se změnil svět kolem něj, otevřete novou otázku. Všechno ostatní je jen drahá verze nejistoty.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o prvním kvartálním sanity checku po návratu pravidla do rytmu: čtyři výsledné stavy, úzký rozsah kontroly, privacy-first sanity check, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o převodu uzavřeného review do běžného kvartálního rytmu: úrovně kontroly, hranice bez nového procesu, privacy-first převod, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření měsíčního review tichého provozu: čtyři uzavírací stavy, kanonické propsání, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o měsíčním review tichého provozu po uzavřeném signálu: kontrola pracovní trasy, samostatnosti a datové stopy, čtyři výsledné stavy, privacy-first review, karta, mini workshop a checklist.
