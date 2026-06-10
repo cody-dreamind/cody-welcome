@@ -203819,8 +203819,226 @@ Workshop má skončit tím, že sanity check zmizí z aktivní pozornosti. Buď 
 
 Uzavřený sanity check má působit skoro neviditelně. Pravidlo zůstane na místě, lidé ho použijí, datová stopa se nezvětší a stará nejistota se nevrátí jen proto, že byla kdysi důležitá. To je dospělý konec provozní smyčky: méně dramatu, víc použitelnosti.
 
+## Druhý kvartální sanity check po stabilním návratu pravidla
+
+Druhý kvartální sanity check má jinou roli než první. První ověřoval, jestli se pravidlo po návratu do běžného rytmu nerozpadlo hned na začátku. Druhý už má ukázat, jestli se pravidlo stalo obyčejnou součástí práce. To znamená méně dokazování, méně vysvětlování a méně stop kolem kontroly. Pokud druhý check vypadá stejně těžce jako první, pravidlo se možná nevrátilo do rytmu, jen dostalo delší vodítko.
+
+Začněte otázkou:
+
+```text
+Umí pravidlo po dvou kvartálech fungovat jako běžná součást práce bez zvláštní pozornosti a bez nové datové stopy?
+```
+
+Tato otázka je schválně přísná. Neptá se, jestli pravidlo pořád existuje. Ptá se, jestli už kvůli němu tým nepotřebuje malý provozní obřad. Stabilní pravidlo není to, které má nejdelší dokumentaci. Stabilní pravidlo je to, které člověk najde ve správném místě, použije ho bez autora a po použití nevznikne další vrstva vysvětlivek.
+
+Příklad:
+
+```text
+Pravidlo:
+U nových landing pages nepřidáváme měřicí skripty mimo schválený privacy-first stack.
+
+Druhý kvartální check:
+Dvě nové landing pages použily stejný analytický standard, bez nových vendorů, bez extra cookie banneru a bez ručního připomínání.
+
+Výsledek:
+Pravidlo je součást běžné publikační práce.
+
+Akce:
+Žádná. Kontrola zůstává jen součástí kvartálního review webových šablon.
+```
+
+Jiný příklad:
+
+```text
+Pravidlo:
+Před exportem kontaktů z CRM musí existovat účel, vlastník a datum smazání.
+
+Druhý kvartální check:
+Tým pravidlo zná, ale při jedné kampani vznikl pomocný export bez data smazání.
+
+Výsledek:
+Pravidlo drží, ale chybí viditelná připomínka v kampanové šabloně.
+
+Akce:
+Doplnit jedno pole do šablony kampaně. Neotevírat znovu debatu, zda exporty povolit obecně.
+```
+
+Druhý příklad je pořád dobrý výsledek. Neukazuje návrat původního problému, ale slabé pracovní místo. Rozdíl je praktický: opravuje se šablona, ne filozofie.
+
+### Čtyři výsledky druhého checku
+
+Po druhém kvartálním sanity checku vyberte jeden stav:
+
+- Zůstává tiché: pravidlo je běžně použitelné a nepotřebuje samostatnou zmínku mimo existující rytmus.
+- Potřebuje poslední lokální připomínku: pravidlo platí, ale jedno pracovní místo ho ještě neumí samo připomenout.
+- Má se sloučit do širšího standardu: pravidlo už není samostatné téma a patří do obecnějšího provozního pravidla.
+- Otevírá novou smyčku: změnil se kontext a vzniklo rozhodnutí, které staré pravidlo nemá nést.
+
+`Zůstává tiché` je stav, ve kterém se má tým zastavit nejrychleji. Zapište jednu větu a nepřidávejte úkol. Pokud kontrola dopadla dobře, odměnou není další kontrola. Odměnou je klid.
+
+`Potřebuje poslední lokální připomínku` znamená, že pravidlo samo o sobě funguje, ale jedno místo v procesu ho nepřenáší dost spolehlivě. Typicky formulář, checklist, brief, šablona nabídky nebo onboardingová karta. Opravte místo, ne celý systém.
+
+`Má se sloučit do širšího standardu` nastává, když samostatné pravidlo přestalo být užitečnou jednotkou. Například pravidlo o anonymizovaných ukázkách může patřit do širšího standardu práce se zákaznickými daty. Sloučení je správné jen tehdy, když zjednoduší použití. Pokud by širší standard schoval důležitou hranici, pravidlo nechte samostatné.
+
+`Otevírá novou smyčku` používejte opatrně. Druhý check není pozvánka k tomu, aby tým našel další téma. Nová smyčka vzniká jen při skutečné změně pracovní reality: nový kanál, nový typ zákazníka, nový regulatorní dopad, nový datový tok, nový produktový režim nebo opakované tření, které staré pravidlo neumí rozhodnout.
+
+### Jak poznat, že pravidlo už má být tiché
+
+Pravidlo může přejít do tichého provozu, když platí většina těchto signálů:
+
+- lidé ho najdou v pracovním místě, kde ho potřebují;
+- nové použití nevyžaduje autora původního rozhodnutí;
+- výjimky jsou vzácné a mají vlastní zápis;
+- kontrola nevyžaduje osobní data, exporty ani detailní historii;
+- pravidlo nebrzdí práci, kterou nemělo ovlivňovat;
+- návratový signál je pořád konkrétní;
+- tým umí říct, co by pravidlo znovu otevřelo.
+
+Tiché pravidlo není zapomenuté pravidlo. Je to pravidlo, které se přestalo dožadovat pozornosti, protože dobře sedí v pracovním místě. V praxi je to vyšší úroveň kvality než velký dokument s čerstvým datem aktualizace.
+
+Pozor na falešné ticho. Pokud se pravidlo nepoužívá proto, že na něj nikdo nenarazil, nejde o stabilitu. Je to jen absence příležitosti. Druhý check proto nemá hledat velká čísla, ale přirozený průchod: stalo se v posledních dvou kvartálech něco, kde pravidlo mělo pomoct? Pokud ne, zapište to a nevyvozujte přehnané závěry.
+
+### Sloučení bez ztráty hranice
+
+Když se pravidlo sloučí do širšího standardu, největší riziko je rozmazání hranice. Z jedné praktické věty se stane obecné "pracujeme odpovědně s daty" a tým je zase tam, kde byl před pravidlem: všichni souhlasí, ale v konkrétní situaci není jasné, co udělat.
+
+Před sloučením si napište:
+
+```text
+Samostatné pravidlo:
+
+Širší standard:
+
+Jaká konkrétní hranice se musí zachovat:
+
+Kde ji člověk uvidí při práci:
+
+Co se po sloučení smaže nebo archivuje:
+
+Co by sloučení znovu otevřelo:
+```
+
+Příklad dobrého sloučení:
+
+```text
+Samostatné pravidlo:
+Zákaznické ukázky nesmí obsahovat reálná osobní data.
+
+Širší standard:
+Práce s ukázkovými a demo daty.
+
+Zachovaná hranice:
+Ve veřejné ukázce smí být jen demo, veřejná nebo anonymizovaná data.
+
+Pracovní místo:
+Publikační checklist a šablona zákaznické case study.
+```
+
+Příklad slabého sloučení:
+
+```text
+Samostatné pravidlo:
+Zákaznické ukázky nesmí obsahovat reálná osobní data.
+
+Širší standard:
+Buďte opatrní s daty.
+```
+
+Druhá varianta je hezká nálada, ne standard. Na chodbě zní rozumně, v ostré práci nerozhodne nic.
+
+### Privacy-first kontrola druhého checku
+
+Druhý check má být datově ještě lehčí než první. Pokud jste pravidlo jednou ověřili a uzavřeli, nepotřebujete znovu sbírat detailní doklady. Stačí stav pracovního místa, jeden agregovaný signál použití a kontrola, že nevznikl nový datový dluh.
+
+Pět otázek:
+
+- Stačí nám ověřit pracovní místo místo detailních případů?
+- Nevracíme do aktivní práce exporty, které už měly být smazané?
+- Necháváme po checku jen závěr, ne pomocné kopie?
+- Pokud pravidlo slučujeme, neztrácí se konkrétní privacy hranice?
+- Je jasné, jaká data díky tichému provozu dál nesbíráme?
+
+Codyho komentář: druhý check je test dospělosti. Když kvůli němu tým znovu vytáhne všechny staré exporty, neověřuje pravidlo. Oživuje muzeum provozních obav. A muzeum je fajn, ale ne v CRM.
+
+Dobrá privacy-first věta po druhém checku:
+
+```text
+Druhý kvartální check proběhl jen kontrolou kanonického místa a agregovaného použití; nevznikl nový export, screenshot ani osobní poznámka.
+```
+
+Pokud pravidlo přechází do tichého provozu, přidejte větu:
+
+```text
+Další kontrola probíhá jen v běžném kvartálním review standardu, bez samostatného sběru podkladů.
+```
+
+### Karta druhého kvartálního sanity checku
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Co mělo po dvou kvartálech platit:
+
+Kde se pravidlo přirozeně použilo:
+
+Co jsme našli:
+
+Výsledek:
+- zůstává tiché / poslední lokální připomínka / sloučit do širšího standardu / nová smyčka
+
+Jedna akce, pokud je potřeba:
+
+Co se po druhém checku dál nekontroluje:
+
+Co se slučuje nebo nechává samostatně:
+
+Zachovaná privacy-first hranice:
+
+Co mažeme, anonymizujeme nebo archivujeme:
+
+Návratový signál:
+
+Vlastník pracovního místa:
+
+Datum:
+```
+
+Karta má chránit hlavně před dvěma chybami: před pokračováním kontroly jen ze zvyku a před sloučením pravidla tak obecně, že přestane rozhodovat. Když karta nevede k jedné větě, druhý check ještě není hotový.
+
+### Mini workshop na 6 minut
+
+1. Otevřete kanonické místo pravidla.
+2. Najděte jedno přirozené použití z posledních dvou kvartálů, pokud existuje.
+3. Vyberte jeden ze čtyř výsledků druhého checku.
+4. Rozhodněte, jestli pravidlo zůstává samostatné, nebo se sloučí.
+5. Napište zachovanou privacy-first hranici jednou větou.
+6. Zapište, co se dál samostatně nekontroluje.
+7. Ukliďte pomocné podklady, pokud při checku vznikly.
+
+Workshop nesmí skončit větou "ještě se na to podíváme". Buď pravidlo zůstává tiché, dostane jednu lokální připomínku, sloučí se do širšího standardu, nebo otevírá novou smyčku. Všechno mezi tím je jen odložené rozhodnutí v hezčím svetru.
+
+### Checklist druhého kvartálního sanity checku
+
+- Ověřujeme běžné použití pravidla, ne celou jeho historii?
+- Je jasné, zda pravidlo potřebuje samostatnou pozornost?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud je potřeba připomínka, týká se jednoho pracovního místa?
+- Pokud pravidlo slučujeme, zůstává viditelná konkrétní hranice?
+- Pokud vznikla nová smyčka, je oddělená od checku?
+- Nezakládáme třetí samostatnou kontrolu jen ze zvyku?
+- Nevytváříme nový dashboard, tracker, export ani seznam lidí?
+- Je zapsané, co se dál nekontroluje samostatně?
+- Zůstává po checku jen závěr, ne balík pomocných dokladů?
+- Umí vlastník pracovního místa použít pravidlo bez autora původního rozhodnutí?
+- Je návratový signál pořád konkrétní a srozumitelný?
+
+Druhý kvartální sanity check je dobrý tehdy, když zmenší budoucí pozornost. Ne tím, že pravidlo smaže, ale tím, že ho nechá žít na správném místě. Stabilní provoz není hromada kontrol. Stabilní provoz je situace, kdy důležité hranice fungují i ve chvíli, kdy na ně nikdo nedělá slavnostní kolečko.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o druhém kvartálním sanity checku po stabilním návratu pravidla: tichý provoz, poslední lokální připomínka, sloučení do širšího standardu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního kvartálního sanity checku: uzavírací stavy, propsání do kanonického místa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním kvartálním sanity checku po návratu pravidla do rytmu: čtyři výsledné stavy, úzký rozsah kontroly, privacy-first sanity check, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o převodu uzavřeného review do běžného kvartálního rytmu: úrovně kontroly, hranice bez nového procesu, privacy-first převod, karta, mini workshop a checklist.
