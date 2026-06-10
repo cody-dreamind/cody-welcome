@@ -204961,8 +204961,257 @@ Workshop nesmí skončit jen pocitem, že je všechno jasné. Musí skončit kon
 
 Dobré uzavření prvního návratu po dlouhodobém klidu má být skoro nenápadné. Nezakládá novou kapitolu života pravidla pokaždé, když se objeví podnět. Jen opraví nejbližší pracovní místo, uklidí stopy a vrátí pozornost tam, kde má být: k produktu, zákazníkovi a rozhodnutí, které se opravdu musí udělat.
 
+## První běžné použití po návratu z dlouhodobého klidu
+
+Po uzavření prvního návratového signálu po dlouhodobém klidu přichází nejdůležitější praktický test: pravidlo se má znovu použít jako obyčejná součást práce. Ne jako slavnostní revize. Ne jako další kontrolní etapa. Prostě někdo udělá běžný úkol a pravidlo mu buď pomůže, nebo se ukáže, že po návratu zůstala v systému nejasnost.
+
+Tato část je úzká schválně. Neověřuje celý dlouhodobý klid. Ověřuje jen to, zda se po prvním návratu nevytvořil nový mimořádný režim.
+
+Začněte větou:
+
+```text
+Po uzavřeném návratu používáme pravidlo znovu v běžné situaci [kde] a hlídáme jen [co má být vidět při normální práci].
+```
+
+Příklad:
+
+```text
+Po uzavřeném návratu používáme pravidlo znovu v briefu jedné partnerské kampaně a hlídáme jen to, zda tým rozhodne bez exportu kontaktů do nového nástroje.
+```
+
+Taková věta chrání rozsah. Neříká "zkontrolujeme marketingové nástroje". Říká "vezmeme jednu běžnou kampaňovou situaci a ověříme, jestli se pravidlo vrací do práce bez nové datové stopy".
+
+### Co se má při prvním použití ukázat
+
+První běžné použití po návratu z dlouhodobého klidu má ukázat čtyři věci:
+
+- pravidlo je dostupné tam, kde se práce opravdu děje;
+- člověk nemusí znát celou historii dlouhodobého klidu;
+- uzavřený návrat nezanechal nový skrytý dohled;
+- běžné použití nepotřebuje nové osobní údaje, exporty ani pomocné tabulky.
+
+Pokud tým potřebuje otevřít starý rozhodovací zápis, pět screenshotů a interní debatu, pravidlo není zpátky v běžné práci. Je pořád v režimu zvláštní péče. To neznamená katastrofu. Znamená to jen, že první použití nemá být označené jako "hotovo", dokud se pravidlo nezkrátí nebo nepřesune do správného pracovního místa.
+
+Příklad z webu:
+
+```text
+Pravidlo:
+Nový formulář nepřidává pole bez jasného účelu, vlastníka a retenční hranice.
+
+Uzavřený návrat:
+Tým chtěl u kampaně přidat pole "velikost firmy", ale zjistil, že pro první rozhodnutí stačí ruční kvalita poptávek.
+
+První běžné použití:
+Vzniká nová landing page pro menší segment služby.
+
+Co má být vidět:
+Brief stránky obsahuje jen nezbytná pole formuláře, není vytvořený pomocný export a případná segmentace se řeší přes obsah stránky, ne přes sběr dalších údajů.
+```
+
+Tento příklad je malý, ale přesný. Neřeší celý lead generation systém. Jen ukazuje, jestli se pravidlo po návratu umí použít tam, kde by starý zvyk znovu lákal k většímu sběru dat.
+
+### Čtyři výsledky prvního běžného použití
+
+Po prvním použití vyberte jeden výsledek:
+
+- Pravidlo drží v běžné práci: člověk ho našel, použil a nepotřeboval zvláštní dohled.
+- Chybí pracovní opora: pravidlo je správné, ale šablona, brief, checklist nebo navigace ho nedostaly dost blízko k práci.
+- Návrat zůstal nedotažený: uzavřený návrat po sobě nechal nejasnou větu, starou kopii nebo dočasnou kontrolu.
+- Objevila se nová situace: běžná práce otevřela jiné rozhodnutí, které nepatří do původního pravidla.
+
+`Pravidlo drží v běžné práci` znamená konec speciální pozornosti. Stačí krátký záznam. Nepřidávejte další použití jen proto, že první dopadlo dobře.
+
+`Chybí pracovní opora` řešte lokálně. Přesuňte větu do briefu, opravte odkaz, přidejte příklad nebo smažte starou kopii. Neotevírejte znovu celé pravidlo, pokud problém leží v tom, že ho člověk nenašel včas.
+
+`Návrat zůstal nedotažený` znamená, že je potřeba vrátit se k uzavírací větě návratového signálu. Typicky chybí hranice, co už je vyřešené, co zůstává mimo rozsah a kdy by se téma otevřelo znovu.
+
+`Objevila se nová situace` má dostat vlastní kartu. Když například pravidlo o marketingových exportech narazí na produktový event v SaaS onboardingu, není to důvod ohýbat původní pravidlo. Je to samostatná otázka s vlastní datovou mapou a vlastním rozhodnutím.
+
+### Jak poznat skrytý návrat dohledu
+
+Po dlouhodobém klidu bývá tým opatrný. To je pochopitelné. Problém začíná ve chvíli, kdy se opatrnost přepíše do nového nepojmenovaného procesu.
+
+Varovné věty:
+
+- "Jen si první měsíc budeme ukládat příklady."
+- "Radši si uděláme bokem kontrolní tabulku."
+- "Necháme pravidlo běžet, ale někdo to bude procházet."
+- "Zatím budeme exportovat jen testovací vzorek."
+- "Není to proces, jen interní jistota."
+
+Každá taková věta potřebuje protiotázku:
+
+```text
+Jaké rozhodnutí tím chceme udělat:
+
+Proč nestačí zapsaný návratový signál:
+
+Jak dlouho má dohled trvat:
+
+Jaká data nebo pracovní stopy vzniknou:
+
+Co se smaže, pokud se nic nového nepotvrdí:
+```
+
+Pokud odpovědi nejsou konkrétní, dohled nevzniká. Pokud konkrétní jsou, nejde už o "jen pro jistotu", ale o novou malou smyčku. Ta musí mít vlastníka, stop podmínku a privacy-first hranici.
+
+Codyho komentář: skrytý dohled je jako kancelářská židle v zasedačce, kterou tam někdo "dočasně" odložil. Za týden ji všichni obcházejí a nikdo už neví, komu patří. U dat je to stejné, jen se o ni navíc můžete bolestivě praštit při auditu.
+
+### Privacy-first použití bez nové stopy
+
+První běžné použití po návratu z dlouhodobého klidu má být datově nudné. To je pochvala, ne urážka. Dobré pravidlo se pozná tak, že kvůli němu nevznikne další pomocný svět.
+
+Privacy-first zápis po použití:
+
+```text
+Pravidlo bylo použito v [situace].
+
+Výsledek:
+- drží / potřebuje lokální oporu / návrat je nedotažený / vznikla nová situace
+
+Zůstává uložené:
+
+Nevzniká:
+- nový export
+- nový tracker
+- nový screenshot
+- nová pomocná tabulka
+- delší retence poznámek
+
+Pokud něco dočasně vzniklo, smaže se nebo anonymizuje do:
+```
+
+Příklad:
+
+```text
+Pravidlo bylo použito v briefu partnerské kampaně.
+
+Výsledek:
+Drží.
+
+Zůstává uložené:
+Jedna věta v briefu, že kvalita kampaně se vyhodnotí agregovaně a podle kvality poptávek v existujícím CRM.
+
+Nevzniká:
+Export kontaktů do segmentačního nástroje, pomocná tabulka publika ani delší retence kampanových poznámek.
+```
+
+Tento zápis pomáhá i za půl roku. Člověk nemusí dohledávat, proč se žádný export nedělal. Vidí, že to nebyla mezera v práci, ale vědomé rozhodnutí.
+
+### Karta prvního běžného použití po dlouhodobém klidu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Uzavřený návratový signál:
+
+Běžná situace použití:
+
+Kdo pravidlo použil:
+
+Kde ho našel:
+
+Potřeboval historii návratu?
+- ne / trochu / ano
+
+Výsledek:
+- pravidlo drží v běžné práci
+- chybí pracovní opora
+- návrat zůstal nedotažený
+- objevila se nová situace
+
+Nejmenší reakce:
+
+Co se propíše do pracovního místa:
+
+Co výslovně neotevíráme:
+
+Jaká data nebo kontroly nevznikají:
+
+Pokud dočasně vznikla stopa, co se s ní stane:
+
+Vlastník:
+
+Datum:
+```
+
+Vyplněný příklad:
+
+```text
+Pravidlo:
+U kampaní neposíláme kontakty do nových nástrojů bez účelu, vlastníka a data smazání.
+
+Kanonické místo:
+Kampaňový brief.
+
+Uzavřený návratový signál:
+Návrh segmentačního nástroje u partnerské kampaně byl uzavřený bez exportu kontaktů.
+
+Běžná situace použití:
+Brief nové landing page pro partnerskou akci.
+
+Kde ho člověk našel:
+V části "data a měření" v briefu.
+
+Potřeboval historii návratu?
+Ne.
+
+Výsledek:
+Pravidlo drží v běžné práci.
+
+Nejmenší reakce:
+Žádná další změna.
+
+Co výslovně neotevíráme:
+Audit všech kampaní, nový segmentační nástroj ani plošné měření chování kontaktů.
+
+Jaká data nebo kontroly nevznikají:
+Žádný export kontaktů, žádná pomocná tabulka publika, žádná nová kontrola prvního měsíce.
+
+Vlastník:
+Marketing owner.
+```
+
+### Mini workshop na 5 minut
+
+Workshop použijte jen tehdy, když první použití neskončí čistým výsledkem `pravidlo drží v běžné práci`.
+
+1. Vlastník přečte pravidlo a uzavřený návratový signál.
+2. Člověk z běžné práce popíše, kde pravidlo hledal a co udělal.
+3. Tým vybere jeden ze čtyř výsledků.
+4. Určí jednu nejmenší reakci a jedno místo propsání.
+5. Zapíše, jaká data, kontroly nebo exporty nevznikají.
+
+Hlídací otázka:
+
+```text
+Pomáháme pravidlu vrátit se do práce, nebo kolem něj znovu stavíme kontrolní lešení?
+```
+
+Pokud odpověď zní "stavíme lešení", zastavte se. Buď je potřeba nová malá smyčka, nebo tým jen nevěří vlastnímu uzavření. Obojí se dá řešit lépe než další tichou evidencí.
+
+### Checklist prvního běžného použití po dlouhodobém klidu
+
+- Proběhlo použití v reálné pracovní situaci?
+- Našel člověk pravidlo v kanonickém místě?
+- Šlo pravidlo použít bez čtení celé historie dlouhodobého klidu?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud pravidlo drží, nevzniká další zvláštní kontrola?
+- Pokud chybí pracovní opora, opravujeme jedno nejbližší místo?
+- Pokud návrat zůstal nedotažený, vracíme se k uzavírací větě návratu?
+- Pokud vznikla nová situace, má vlastní kartu mimo původní pravidlo?
+- Nevznikl nový export, tracker, screenshot, pomocná tabulka ani dočasný dohled?
+- Je zapsané, co výslovně neotevíráme?
+- Je jasné, jaká data dál nesbíráme?
+- Umí vlastník říct, proč pravidlo pokračuje v běžném provozu?
+
+První běžné použití po návratu z dlouhodobého klidu má být klidné. To není málo ambiciózní výsledek. Je to přesně ta disciplína, která odděluje dobrý provoz od systému, který při každém podnětu znovu rozloží celý stůl.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o prvním běžném použití po návratu z dlouhodobého klidu: ověření pravidla v běžné práci, čtyři výsledky použití, skrytý návrat dohledu, privacy-first zápis, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po dlouhodobém klidu: čtyři uzavírací stavy, kanonické propsání, úklid dočasných stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním návratovém signálu po dlouhodobém klidu: rozlišení skutečného signálu, staré kopie a provozní nervozity, malá smyčka, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o dlouhodobém klidu po dvou kvartálních sanity checkech: ukončení samostatné kontroly, návratové signály, privacy-first provoz bez nových evidencí, karta, mini workshop a checklist.
