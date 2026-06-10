@@ -202537,8 +202537,164 @@ Workshop má skončit návratem pravidla do klidu. Pokud během něj vznikne nov
 
 Druhé běžné použití po uzavření pozdějšího signálu je malá zkouška přenosu. Když pravidlo obstojí, nechte ho být. Když potřebuje jednu lokální opravu, udělejte ji a zavřete. Když ukáže nový problém, dejte mu vlastní smyčku. Hlavní pravidlo si zaslouží klid, ne další vrstvu dohledu, která se tváří jako péče.
 
+## Uzavření druhého běžného použití po uzavření pozdějšího signálu
+
+Uzavření druhého běžného použití má jednu práci: nedovolit, aby se z posledního ověření stal nový provozní režim. Po pozdějším návratovém signálu už tým jednou pravidlo otevřel, jednou ho zavřel, jednou ho použil v běžné práci a podruhé ověřil přenos. Pokud se v této chvíli nevysloví konečný stav, pravidlo začne žít zvláštním mezistavem: není už problém, ale pořád kolem něj chodí lidé opatrněji než kolem ostatních pravidel.
+
+Uzavírací otázka zní:
+
+```text
+Co přesně po druhém běžném použití zůstává v provozu a co tímto končí?
+```
+
+Tato otázka je důležitější než další vysvětlování. Tým často ví, že pravidlo "asi funguje", ale nikdo neřekne, co to znamená prakticky. Zůstává jen jedna věta v checklistu? Přepisuje se příklad? Zavře se dočasná poznámka? Maže se pomocný screenshot? Nebo se původní pravidlo záměrně nechává úzké a nepřenáší se dál?
+
+Příklad:
+
+```text
+Druhé běžné použití:
+Product marketer použil pravidlo u e-mailu s odkazem na případovou studii.
+
+Výsledek:
+Pravidlo fungovalo bez autora a bez nové evidence.
+
+Uzavření:
+Do kanonického checklistu zůstává jedna otázka: "Obsahuje ukázka pouze veřejný, anonymizovaný nebo demo materiál?"
+
+Končí:
+Pomocná poznámka z návratového signálu, dočasný příklad v draftu e-mailu a potřeba další kontroly.
+
+Návrat:
+K pravidlu se vrátíme až při novém typu zákaznického důkazu, který do těchto tří kategorií nepasuje.
+```
+
+Takové uzavření je malé, ale čisté. Nenechává za sebou poloviční dohled, další schvalovací krok ani neviditelný strach, že se k pravidlu bude muset někdo "pro jistotu" zase vrátit příští týden.
+
+### Čtyři uzavírací stavy
+
+Po druhém běžném použití vyberte jeden ze čtyř stavů:
+
+- Zavřít do klidu: pravidlo obstálo a vrací se do normálního provozu.
+- Zavřít po jedné lokální opravě: pravidlo obstálo, ale nejdřív se upraví jedna konkrétní věta, odkaz, šablona nebo příklad.
+- Zúžit rozsah: pravidlo je užitečné jen pro konkrétní pracovní místo a nebude se vydávat za širší standard.
+- Oddělit nový signál: druhé použití ukázalo jiné téma, které má vlastní smyčku, ale původní pravidlo se tím nezvětšuje.
+
+`Zavřít do klidu` je nejčistší výsledek. Zapište jen konečný stav, kanonické místo a návratový signál. Nepřidávejte "pro jistotu" třetí použití, měsíční kontrolu ani zvláštní připomínku do kalendáře.
+
+`Zavřít po jedné lokální opravě` je v pořádku, pokud oprava opravdu nemění povahu pravidla. Typicky jde o doplnění otázky do šablony, odstranění starého odkazu, přejmenování položky v checklistu nebo nahrazení konkrétního příkladu anonymizovanou variantou. Jakmile oprava zasahuje víc míst, už to není lokální dočištění, ale nové otevření pravidla.
+
+`Zúžit rozsah` chrání tým před falešným standardem. Jestli pravidlo dobře funguje pro publikaci zákaznických ukázek na webu, ale v e-mailu působí nepřirozeně, nechte ho jako webové pravidlo. Není nutné z každé dobré zkušenosti vyrábět univerzální provozní zákoník. Ten už lidstvo zkoušelo a skončilo to moc dlouhými dokumenty.
+
+`Oddělit nový signál` použijte, když druhé použití odkryje něco vedlejšího. Například pravidlo pro datovou stopu ukázek je stabilní, ale ukáže se, že tým nemá jasně pojmenované vlastnictví případových studií. To je nový signál. Nepřilepujte ho k původnímu pravidlu jen proto, že se objevil ve stejné konverzaci.
+
+### Co propsat do kanonického místa
+
+Kanonické místo nemá nést celou historii návratového signálu. Má nést jen to, co bude příště člověk potřebovat k rozhodnutí. Po uzavření druhého použití proto propisujte úsporně:
+
+- finální rozhodovací otázku;
+- hranici rozsahu pravidla;
+- jeden příklad, pokud opravdu zkracuje rozhodování;
+- návratový signál;
+- datum nebo verzi poslední změny, pokud tým verzuje pracovní standardy.
+
+Naopak nepropisujte:
+
+- debatu, proč se pravidlo znovu otevřelo;
+- všechny varianty, které tým zvažoval;
+- kopie zákaznických materiálů;
+- pomocné screenshoty z ověření;
+- seznam lidí, kteří u rozhodnutí byli, pokud to není provozně nutné;
+- dočasné výjimky, které už po uzavření neplatí.
+
+Dobrá kanonická změna je krátká:
+
+```text
+Před zveřejněním zákaznické ukázky zkontroluj, že jde o veřejný zdroj, anonymizovanou ukázku nebo demo data. Pokud ukázka do žádné z kategorií nepasuje, nepřidávej ji do materiálu a otevři nový návratový signál.
+```
+
+Špatná kanonická změna je malý román:
+
+```text
+Po červnovém návratovém signálu jsme řešili, že u jednoho e-mailu nebylo jasné, jestli se smí použít screenshot. V prvním použití jsme zjistili...
+```
+
+Historie má své místo v pracovním logu nebo rozhodovacím záznamu, ne v pravidle, které má někdo použít během práce.
+
+### Úklid po uzavření
+
+Uzavření druhého použití je zároveň úklidový moment. V této fázi už pomocné podklady splnily účel. Pokud je necháte žít dál, začnou se tvářit jako nový zdroj pravdy.
+
+Projít stačí pět míst:
+
+- Kanonické místo: obsahuje jen finální pravidlo a návratový signál.
+- Dočasné poznámky: jsou smazané, archivované nebo nahrazené jedním rozhodovacím záznamem.
+- Šablony: neobsahují starou verzi otázky ani duplicitní připomínku.
+- Pomocné příklady: jsou anonymizované, převedené na demo variantu nebo odstraněné.
+- Přístupy: ke zbylým podkladům nemá přístup širší okruh lidí jen proto, že byl u ověření potřeba.
+
+Privacy-first úklid není administrativní pěknůstka. Je to způsob, jak po rozhodnutí nezanechat víc dat, než kolik rozhodnutí vyžaduje. V menším týmu to navíc šetří pozornost: když existuje jen jedno kanonické místo, lidé nehledají odpověď ve starém chatu, dočasné tabulce a třech kopiích checklistu.
+
+### Uzavírací karta
+
+```text
+Původní pozdější signál:
+
+První běžné použití:
+
+Druhé běžné použití:
+
+Výsledek druhého použití:
+- stabilní přenos / poslední lokální dočištění / příliš úzké pravidlo / nový samostatný signál
+
+Uzavírací stav:
+- zavřít do klidu / zavřít po jedné lokální opravě / zúžit rozsah / oddělit nový signál
+
+Co zůstává v kanonickém místě:
+
+Co se nepropíše:
+
+Co se maže nebo anonymizuje:
+
+Kde končí dočasná kontrola:
+
+Návratový signál:
+
+Vlastník:
+
+Datum:
+```
+
+Karta má být vyplněná tak, aby šla po měsíci pochopit bez dalšího výkladu. Pokud k ní potřebujete deset minut slovního doprovodu, je pravděpodobně moc ukecaná nebo naopak vynechává hlavní rozhodnutí. Ano, dokument může být zároveň dlouhý a neříkat dost. To je oblíbený kancelářský trik.
+
+### Mini workshop na 6 minut
+
+1. Přečtěte poslední kartu druhého běžného použití.
+2. Vyberte jeden ze čtyř uzavíracích stavů.
+3. Napište jednu větu, která zůstane v kanonickém místě.
+4. Napište jednu větu, která říká, co tímto končí.
+5. Určete, co se smaže, anonymizuje nebo odpojí od běžné pracovní trasy.
+6. Zapište návratový signál a zavřete dočasnou kontrolu.
+
+Workshop nesmí skončit seznamem dalších námětů. Pokud se během něj objeví nové téma, dejte mu vlastní název a vlastní signál. Původní pravidlo už dokončilo svou smyčku.
+
+### Checklist uzavření druhého použití
+
+- Je vybraný jeden jasný uzavírací stav?
+- Je zřejmé, co zůstává v kanonickém místě?
+- Nepropsali jsme do pravidla historii, debatu ani pomocné důkazy?
+- Pokud vznikla oprava, je opravdu jen jedna a lokální?
+- Pokud je pravidlo úzké, je zúžení napsané bez omlouvání?
+- Pokud vznikl nový signál, má vlastní název a není přilepený k původnímu pravidlu?
+- Skončila dočasná kontrola, připomínka nebo mimořádná pozornost?
+- Jsou pomocné podklady smazané, anonymizované nebo přesunuté mimo aktivní pracovní trasu?
+- Nevznikl nový tracker, tabulka, export ani schvalovací role?
+- Má pravidlo návratový signál místo další kontroly ze zvyku?
+
+Uzavření druhého běžného použití je dobré místo, kde být trochu přísný. Ne na lidi, ale na rozsah. Pokud pravidlo funguje, vraťte ho do klidu. Pokud funguje jen někde, zúžte ho. Pokud ukázalo nový problém, oddělte ho. Hlavní výhra není další dokonalejší formulace, ale provoz, který se umí učit bez toho, aby po každém poučení zanechal novou vrstvu dohledu.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o uzavření druhého běžného použití po uzavření pozdějšího signálu: uzavírací stavy, kanonické místo, úklid pomocných stop, privacy-first karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o druhém běžném použití po uzavření pozdějšího signálu: přenositelnost, samostatnost, výsledné stavy, prevence třetí kontroly, privacy-first stopa, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního běžného použití po pozdějším signálu: čtyři uzavírací stavy, uzavírací věta, kanonické místo, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o prvním běžném použití po uzavření pozdějšího signálu: najitelnost, rozhodnutelnost, klid pravidla, čtyři výsledky použití, lokální opravy, privacy-first kontrola, karta, mini workshop a checklist.
