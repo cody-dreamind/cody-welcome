@@ -201998,8 +201998,205 @@ Datum:
 
 Uzavřený pozdější signál má po sobě nechat méně neklidu, ne víc procesu. Pokud po něm tým ví, kde pravidlo platí, co se změnilo a co se nevrací, práce je hotová. Další kontrola má přijít až ve chvíli, kdy ji vyvolá skutečný návratový signál, ne jen pocit, že by bylo hezké mít ještě jednu jistotu v záloze.
 
+## První běžné použití po uzavření pozdějšího signálu
+
+Po uzavření pozdějšího signálu přichází nenápadně důležitý okamžik: někdo má pravidlo použít v běžné práci bez toho, aby kolem něj znovu stála mimořádná pozornost. Nejde o velký audit. Jde o první normální průchod, který ukáže, jestli uzavření opravdu pomohlo, nebo jen hezky popsalo problém v pracovním logu.
+
+Toto první použití má odpovědět na jednoduchou otázku:
+
+```text
+Umí člověk použít upravené pravidlo v běžné situaci bez návratu ke staré smyčce?
+```
+
+Příklad:
+
+```text
+Situace:
+Marketing připravuje novou segmentovou landing page.
+
+Upravené pravidlo:
+Zákaznický důkaz na veřejné stránce musí být veřejný, anonymizovaný nebo nahrazený popisem výsledku.
+
+První běžné použití:
+Editor při přípravě stránky narazí na návrh screenshotu a podle checklistu ho nahradí anonymizovanou ukázkou.
+
+Co se nevrací:
+Neotevírá se měsíční kontrola všech důkazů, nevzniká evidence screenshotů a nečeká se na zvláštní schválení mimo běžný publikační proces.
+```
+
+Tady je důležité slovo `běžné`. Pokud první použití probíhá jako slavnostní test s autorem pravidla u stolu, neověřujete pravidlo. Ověřujete, že člověk zvládne práci, když má vedle sebe nápovědu. To může být užitečné při školení, ale není to důkaz samostatnosti.
+
+### Co první použití ověřuje
+
+První běžné použití po pozdějším signálu ověřuje tři věci:
+
+- Najitelnost: člověk ví, kde pravidlo najít ve své běžné pracovní trase.
+- Rozhodnutelnost: pravidlo říká, co udělat, ne jen čeho se obecně bát.
+- Klid: práce nevyvolá návrat staré kontroly, tabulky, schvalování nebo sběru příkladů.
+
+`Najitelnost` není otázka dokumentační krásy. Pravidlo může být napsané výborně, ale pokud žije v poznámce z revize a ne v checklistu, briefu nebo šabloně, běžný člověk ho mine. Dobré místo je tam, kde ruka pracujícího člověka už stejně je.
+
+`Rozhodnutelnost` znamená, že pravidlo umí převést situaci do akce. Slabé pravidlo říká "pozor na citlivá data". Silnější pravidlo říká "screenshot zákaznického účtu použij jen jako veřejný zdroj, anonymizovanou ukázku nebo textový popis výsledku". První věta vyvolává opatrnost. Druhá pomáhá dokončit práci.
+
+`Klid` je často nejcennější část. Po pozdějším signálu bývá tým trochu nervózní a má chuť obnovit starý dohled. První běžné použití má ukázat, že to není potřeba. Pokud kvůli jedné stránce vznikne kontrolní schůzka, pravidlo sice možná chrání data, ale zároveň znovu otevírá provozní dluh.
+
+### Čtyři výsledky prvního použití
+
+Po prvním běžném použití vyberte jeden ze čtyř výsledků:
+
+- Použito bez tření: pravidlo bylo nalezené, pochopené a použité bez nové pomoci.
+- Lokální tření: člověk pravidlo našel, ale jedna věta, příklad nebo umístění potřebuje drobnou opravu.
+- Slabé napojení: pravidlo existuje, ale není v pracovním místě, kde rozhodnutí vzniká.
+- Skrytý návrat dohledu: pravidlo se použilo jen díky mimořádné kontrole, autorovi nebo starému procesu.
+
+`Použito bez tření` je nejlepší výsledek a zároveň největší pokušení něco ještě vylepšovat. Nedělejte to. Zapište jednu větu do logu, smažte dočasné poznámky a nechte pravidlo pracovat.
+
+`Lokální tření` řešte jednou úpravou. Například doplňte konkrétní příklad do checklistu nebo přepište vágní větu na rozhodovací otázku. Neotevírejte celou kapitolu, nepřepisujte všechna pravidla pro zákaznické důkazy a nevyhlašujte nový standard jen proto, že jedna věta skřípala.
+
+`Slabé napojení` znamená, že pravidlo není ve správném místě. Typicky žije v interním dokumentu, ale rozhodnutí vzniká v CMS, v šabloně briefu, v issue nebo v publikačním checklistu. Oprava má být přesun nebo odkaz do pracovního místa, ne další vysvětlující text na konci dlouhého dokumentu.
+
+`Skrytý návrat dohledu` je nejzrádnější. Vypadá jako úspěch, protože chyba se nestala. Jenže chyba se nestala hlavně proto, že někdo hlídal práci navíc. Pokud má pravidlo žít v běžném provozu, potřebuje být použitelné bez toho, aby u něj stál původní autor s píšťalkou a blokem poznámek.
+
+### Mini příklad z webu a SaaS
+
+Představte si SaaS tým, který po pozdějším signálu doplnil pravidlo pro ukázky zákaznických dashboardů. Staré pravidlo řešilo case studies, nový signál přišel z produktové landing page. Uzavření doplnilo větu do publikačního checklistu:
+
+```text
+Obsahuje stránka zákaznický dashboard, export nebo screenshot? Pokud ano, použij jen veřejný zdroj, anonymizovanou ukázku nebo vlastní demo data.
+```
+
+Při prvním běžném použití editor připraví stránku pro nový segment. Designer vloží screenshot z interního demo účtu, který obsahuje realistická, ale smyšlená data. Editor v checklistu označí, že ukázka používá demo data, a stránka jde dál běžným publikačním procesem.
+
+Výsledek:
+
+```text
+Stav:
+Použito bez tření.
+
+Důkaz:
+Editor našel otázku v publikačním checklistu a rozhodl bez eskalace.
+
+Co neměníme:
+Nevytváříme novou evidenci screenshotů.
+
+Co mažeme:
+Pomocnou poznámku z návrhu, která obsahovala odkaz na starý pracovní signál.
+```
+
+Kdyby editor musel psát autorovi pravidla, výsledek by nebyl "použito bez tření", ale "skrytý návrat dohledu". To není tragédie. Je to jen přesnější diagnóza a vede k jiné opravě: pravidlo má být blíž pracovnímu místu nebo konkrétnější.
+
+### Jak opravit první tření bez nové smyčky
+
+Když první použití odhalí malé tření, držte opravu v jedné z těchto podob:
+
+- přepsat jednu větu pravidla do rozhodovací otázky;
+- přidat jeden anonymizovaný příklad;
+- přesunout odkaz do správné šablony;
+- odstranit starou poznámku, která vede člověka zpět do uzavřené smyčky;
+- doplnit vlastníka pro jednu konkrétní výjimku.
+
+Vědomě se vyhněte opravám, které zavádějí nový režim:
+
+- týdenní kontrola všech výstupů;
+- schvalování každého podobného materiálu;
+- sdílená tabulka sporných příkladů bez retence;
+- nový tracker nebo event jen kvůli pocitu jistoty;
+- plošné školení, pokud selhala jedna špatně umístěná věta.
+
+Krátká oprava má mít krátký životní cyklus:
+
+```text
+Tření:
+
+Jedna oprava:
+
+Kde bude oprava vidět při práci:
+
+Co kvůli tomu nezavádíme:
+
+Kdy poznáme, že stačí:
+```
+
+### Privacy-first kontrola prvního použití
+
+První použití po pozdějším signálu nesmí vytvořit větší datovou stopu než samotná práce. Pokud pravidlo vzniklo kolem zákaznických důkazů, screenshotů, obchodních poznámek nebo interních ukázek, kontrolujte výsledek bez ukládání nových kopií citlivých materiálů.
+
+Praktická privacy-first pravidla:
+
+- Do záznamu dávejte popis rozhodnutí, ne kopii problematického materiálu.
+- Když potřebujete příklad, použijte anonymizovanou nebo demo variantu.
+- Pomocné screenshoty po rozhodnutí smažte.
+- Pokud zůstává odkaz na zdroj, musí mít jasný účel a omezený přístup.
+- První použití neměřte novým trackerem; stačí pracovní záznam nebo ruční poznámka.
+
+Dobrá uzavírací věta:
+
+```text
+První běžné použití pravidla proběhlo bez nové evidence. Zůstává jen rozhodnutí v checklistu a anonymizovaný popis výsledku; pracovní podklady byly smazány.
+```
+
+Codyho komentář: privacy-first provoz se často pozná podle toho, co nevzniklo. Žádný nový export, žádný "dočasný" disk se screenshoty, žádná tabulka citlivých ukázek. Jen pravidlo v místě práce a minimum stop. Krásně nudné, tedy přesně správně.
+
+### Karta prvního běžného použití po pozdějším signálu
+
+```text
+Uzavřený pozdější signál:
+
+Pracovní místo prvního použití:
+
+Kdo pravidlo použil:
+
+Bylo pravidlo najitelné?
+
+Bylo rozhodnutelné?
+
+Vznikla mimořádná pomoc nebo kontrola?
+
+Výsledek:
+- použito bez tření / lokální tření / slabé napojení / skrytý návrat dohledu
+
+Jedna případná oprava:
+
+Co se výslovně nevrací:
+
+Jaká data jsme nesbírali:
+
+Co mažeme nebo anonymizujeme:
+
+Kanonické místo:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+1. Najděte první reálné použití pravidla po uzavřeném pozdějším signálu.
+2. Zeptejte se člověka, kde pravidlo našel a podle čeho se rozhodl.
+3. Zapište jeden ze čtyř výsledků.
+4. Pokud je potřeba oprava, vyberte jen jednu větu, odkaz nebo příklad.
+5. Napište, co se kvůli použití výslovně nevrací.
+6. Smažte nebo anonymizujte pracovní podklady, které už nejsou potřeba.
+
+Workshop neslouží k tomu, aby se z prvního použití stala retrospektiva celé historie. Má jen potvrdit, že pravidlo přežilo návrat do běžné práce. Jakmile máte výsledek a případnou jednu opravu, zastavte.
+
+### Checklist prvního běžného použití
+
+- Šlo o skutečnou běžnou práci, ne inscenovaný test?
+- Našel člověk pravidlo ve své pracovní trase?
+- Vedlo pravidlo ke konkrétnímu rozhodnutí?
+- Nepotřeboval člověk autora pravidla jako tichou oporu?
+- Nevrátila se stará tabulka, schůzka ani schvalovací role?
+- Pokud vzniklo tření, vybrali jsme jen jednu lokální opravu?
+- Je oprava ve stejném místě, kde vzniká rozhodnutí?
+- Neuložili jsme zbytečně citlivý screenshot, export nebo zákaznický materiál?
+- Má záznam jen minimum informací nutných pro budoucí rozhodnutí?
+- Umíme výsledek popsat jednou větou?
+
+První běžné použití po pozdějším signálu je úspěšné, když se z něj nestane nová agenda. Buď potvrdí, že pravidlo funguje samo, nebo ukáže jednu přesnou opravu. V obou případech má tým odejít s klidnějším pravidlem, ne s novou vrstvou dohledu.
+
 ## Pracovní log
 
+- 2026-06-10: Doplněna úvodní podkapitola o prvním běžném použití po uzavření pozdějšího signálu: najitelnost, rozhodnutelnost, klid pravidla, čtyři výsledky použití, lokální opravy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření pozdějšího návratového signálu: čtyři uzavírací stavy, kanonická změna, prevence návratu staré kontroly, privacy-first úklid, karta a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o pozdějším návratovém signálu po uzavřeném měsíci: rozlišení typů signálu, přenosová věta, otevření nové smyčky jen při novém rozhodnutí, privacy-first hranice, karta a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření prvního měsíce po uzavřeném návratovém signálu: čtyři uzavírací stavy, uzavírací karta, prevence druhé kontroly ze zvyku, privacy-first úklid a checklist.
