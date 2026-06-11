@@ -207530,8 +207530,204 @@ Pokud odpověď stojí hlavně na minulosti, pravidlo ztište nebo zavřete. Pok
 
 Druhá roční kontrola je dobrá, když je kratší než první. Ještě lepší je, když po ní zmizí kus samostatné agendy a zůstane jen pracovní pravidlo na správném místě. Zralý systém se nepozná podle toho, že všechno kontroluje navždy. Pozná se podle toho, že ví, kdy už kontrolu nepotřebuje.
 
+## Uzavření druhé roční kontroly po stabilizaci pravidla
+
+Uzavření druhé roční kontroly má být krátké. Pokud předchozí část ověřovala, jestli pravidlo pořád sedí na práci, tato část říká, co se po ověření skutečně stane. Bez uzavření se i dobrá kontrola snadno změní v novou otevřenou položku: někdo si ji uloží, někdo ji připomene za měsíc, někdo začne dopisovat další výjimky a pravidlo, které už mělo být klidné, znovu nabere administrativu.
+
+Začněte větou:
+
+```text
+Po druhé roční kontrole s pravidlem děláme:
+```
+
+A doplňte jen jeden výsledek:
+
+```text
+ponecháváme ho v ročním rytmu / ztišujeme ho do širší inventury / upravujeme jednu hranu / otevíráme novou kartu mimo starou smyčku
+```
+
+Tato věta je důležitější než dlouhý zápis z kontroly. Říká týmu, jestli se pravidlo dál chová jako samostatná položka, běžná součást standardu, drobná oprava nebo nový problém. Když výsledek není takto pojmenovaný, každý si z kontroly odnese trochu jinou práci.
+
+Příklad:
+
+```text
+Po druhé roční kontrole pravidlo pro kampaňové exporty ztišujeme do roční inventury marketingových šablon. Samostatná položka v kalendáři končí. V marketingovém briefu zůstává věta: každý export má účel, vlastníka, datum smazání a uložené místo.
+```
+
+Takový zápis uzavírá dvě věci najednou: co zůstává živé a co končí. Bez druhé části se starý dohled často potichu vrátí.
+
+### Čtyři uzavírací zápisy
+
+Pro každý výsledek použijte jiný typ uzavření.
+
+`Ponechat v ročním rytmu`:
+
+```text
+Pravidlo ponecháváme jako samostatnou roční položku, protože chrání málo častou, ale rizikovou práci. Další kontrola má ověřit jen kanonické místo, návratový signál a datovou stopu. Starou smyčku neotevíráme.
+```
+
+`Ztišit do širší inventury`:
+
+```text
+Pravidlo už nemá vlastní roční kontrolu. Zůstává součástí širší inventury šablon. Samostatné připomínky, dočasné poznámky a starý kontrolní řádek rušíme.
+```
+
+`Upravit jednu hranu`:
+
+```text
+Pravidlo zůstává platné. Upravujeme jen název pracovního místa z "kampaňový checklist" na "marketingový brief". Ostatní části staré smyčky zůstávají zavřené.
+```
+
+`Otevřít novou kartu`:
+
+```text
+Objevila se nová situace mimo původní pravidlo. Zakládáme novou kartu pro export z partnerské kampaně. Pravidlo z druhé roční kontroly tím neměníme a starou smyčku znovu neotevíráme.
+```
+
+Rozdíl mezi těmito zápisy je praktický. První drží samostatnou pozornost. Druhý ji záměrně ruší. Třetí opravuje jednu hranu bez nové kapitoly práce. Čtvrtý chrání staré pravidlo před tím, aby do sebe nasálo nový problém.
+
+### Co po uzavření odstranit
+
+Uzavření druhé roční kontroly má často větší hodnotu v tom, co odstraní, než v tom, co přidá. Po dvou letech už kolem pravidla obvykle zůstaly pomocné vrstvy: staré kontrolní karty, dočasné poznámky, duplicitní odkazy, připomínky v kalendáři nebo šablony, které kdysi pomohly, ale teď jen udržují mimořádnou pozornost.
+
+Projděte pět míst:
+
+- kalendář nebo úkolovník, kde žije kontrolní rytmus;
+- kanonickou šablonu, kde má pravidlo zůstat;
+- starou kartu návratové smyčky;
+- týmovou paměť nebo onboarding;
+- složku s pracovními podklady, exporty a screenshoty.
+
+U každého místa vyberte jeden stav:
+
+- ponechat živé;
+- přesunout do širší inventury;
+- archivovat jako anonymizované poučení;
+- smazat;
+- založit novou kartu mimo starou smyčku.
+
+Nepoužívejte stav "nechat zatím být". Po druhé roční kontrole je to jen jiný název pro budoucí nepořádek. Pokud něco neumíte rozhodnout, napište konkrétní návratový signál a vlastníka. Jinak to odstraňte nebo přesuňte tam, kde to má práci.
+
+### Kdy nechat pravidlo opravdu klidné
+
+Pravidlo může po druhé roční kontrole zůstat v systému a zároveň přestat být tématem. To je dobrý stav. Neznamená nezájem, ale důvěru v běžný provoz.
+
+Pravidlo nechte klidné, když:
+
+- je napsané v pracovním místě, kde se skutečně používá;
+- člověk bez znalosti historie pochopí, co má udělat;
+- návratový signál je konkrétní a nevyžaduje plošné sledování;
+- kontrola nepřinesla novou datovou stopu;
+- širší inventura umí pravidlo zachytit bez zvláštní agendy.
+
+Klidný stav zapište krátce:
+
+```text
+Pravidlo je odteď součástí běžné práce. Nevedeme k němu samostatný kontrolní režim. Vracíme se k němu jen při návratovém signálu nebo v širší inventuře.
+```
+
+Tato věta brání týmu v tom, aby z úspěšného pravidla udělal památník. Památníky jsou hezké ve městě, ale v provozních standardech umí překážet.
+
+Codyho komentář: když pravidlo dva roky funguje, největší riziko už často není jeho selhání. Největší riziko je, že ho tým začne kontrolovat z úcty k vlastní minulosti. To je roztomilé, ale drahé.
+
+### Privacy-first uzavření
+
+Po druhé roční kontrole by neměla zůstat nová data jen proto, že se kontrolovalo. Privacy-first uzavření se proto ptá:
+
+- vznikl během kontroly nový dokument, screenshot, export nebo seznam lidí?
+- má každá nová stopa účel, vlastníka a datum další kontroly?
+- lze zápis zkrátit na anonymizované poučení?
+- rušíme samostatnou evidenci, pokud pravidlo ztišujeme?
+- nepřidali jsme měření používání pravidla podle jednotlivců?
+
+Dobré uzavření:
+
+```text
+Po kontrole zůstává jen aktualizovaná věta v marketingovém briefu a anonymizovaná poznámka v roční inventuře. Dočasný export, pracovní screenshoty a samostatný kontrolní řádek mažeme.
+```
+
+Špatné uzavření:
+
+```text
+Pro jistotu ponecháme všechny podklady a budeme průběžně sledovat, kdo pravidlo používá.
+```
+
+"Pro jistotu" je v privacy-first provozu podezřelá věta. Někdy je oprávněná. Častěji ale znamená, že tým neumí pojmenovat účel, tak si nechává všechno.
+
+### Karta uzavření druhé roční kontroly
+
+```text
+Živé pravidlo:
+
+Výsledek druhé roční kontroly:
+- ponechat v ročním rytmu / ztišit do širší inventury / upravit jednu hranu / otevřít novou kartu
+
+Uzavírací věta:
+
+Co zůstává živé:
+
+Co se ruší nebo ztišuje:
+
+Co se přesouvá do širší inventury:
+
+Jedna případná úprava:
+
+Nová karta mimo starou smyčku:
+
+Privacy-first úklid:
+- ponechané stopy:
+- smazané stopy:
+- anonymizované poučení:
+- co výslovně neměříme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum další běžné kontroly:
+```
+
+Kartu používejte jen tehdy, když uzavření mění stav pravidla. Pokud výsledek jen potvrzuje běžný roční rytmus bez úprav a bez nové datové stopy, stačí jedna věta v inventuře. Formuláře nemají být trest za stabilitu.
+
+### Mini workshop na 5 minut
+
+1. Vlastník přečte výsledek druhé roční kontroly.
+2. Tým vybere jeden uzavírací zápis.
+3. Pojmenuje, co zůstává živé a co končí.
+4. Otevře jen místa, kde může zůstat zbytečná stopa.
+5. Zapíše privacy-first úklid.
+6. Potvrdí návratový signál nebo širší inventuru.
+
+Stop otázka:
+
+```text
+Zůstává nám po kontrole něco jen proto, že jsme to kdysi vytvořili?
+```
+
+Pokud ano, buď tomu dejte dnešní účel, nebo to zrušte. Historie může zůstat jako poučení. Nemá se tvářit jako živý provoz.
+
+### Checklist uzavření druhé roční kontroly
+
+- Vybrali jsme jeden jasný výsledek druhé roční kontroly?
+- Napsali jsme uzavírací větu, kterou pochopí člověk bez znalosti historie?
+- Víme, co zůstává v živém pravidle?
+- Víme, co se ruší, ztišuje nebo přesouvá do širší inventury?
+- Pokud pravidlo zůstává samostatné, má pro to dnešní důvod?
+- Pokud se pravidlo ztišuje, víme, kde bude dál viditelné?
+- Pokud upravujeme jednu hranu, zůstala opravdu jedna?
+- Pokud vznikl nový problém, dostal novou kartu mimo starou smyčku?
+- Prošli jsme kalendář, kanonickou šablonu, starou kartu, týmovou paměť a pracovní podklady?
+- Smazali jsme dočasné exporty, screenshoty nebo poznámky bez účelu?
+- Nezavedli jsme nové měření lidí ani nové eventy kvůli uzavření?
+- Má zbylá datová stopa účel, vlastníka a datum další kontroly?
+- Je návratový signál konkrétní a nepřipomíná plošný dohled?
+- Umí vlastník říct, kdy se k pravidlu znovu vrátit a kdy ho naopak nechat být?
+
+Uzavřená druhá roční kontrola má být téměř neviditelná. V ideálním případě po ní zůstane jedno lepší pracovní místo, méně připomínek a méně datových stop. To není malý výsledek. To je přesně ten druh údržby, díky které systém stárne slušně místo toho, aby se nafukoval pokaždé, když se o něj někdo stará.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o uzavření druhé roční kontroly po stabilizaci pravidla: uzavírací zápisy, ztišení agendy, úklid stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhé roční kontrole po stabilizaci pravidla: ztišení ročního rytmu, čtyři výsledky, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření první roční kontroly po převodu archivované smyčky: uzavírací stavy, kanonické propsání, úklid podkladů, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o první roční kontrole po převodu archivované smyčky: kontrola živého pravidla místo staré smyčky, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
