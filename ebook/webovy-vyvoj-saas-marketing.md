@@ -209391,8 +209391,121 @@ Pokud zápis vyžaduje historii, ještě není minimální. Zkraťte ho na praco
 
 Minimální portfoliová stopa je dobrý konec pro pravidlo, které už obstálo. Neoslavuje proces, neprodlužuje kontrolu a netváří se, že každá historická poznámka je znalostní kapitál. Nechává v ruce jen to, co pomáhá další práci. To je přesně ta nenápadná disciplína, díky které se ze standardů nestává interní tapeta.
 
+## První běžné review minimální portfoliové stopy
+
+Minimální portfoliová stopa se nemá po převodu hned znovu rozebírat jako projekt. První běžné review má ověřit jen jednu věc: jestli zkrácený zápis stačí člověku v reálné práci. Pokud nestačí, opravte nejbližší pracovní hranu. Nevracejte celé pravidlo zpět do zvláštní péče jen proto, že první průchod ukázal drobné tření.
+
+Začněte otázkou:
+
+```text
+Dokázal člověk pravidlo najít, pochopit a použít bez čtení archivované historie?
+```
+
+Tato otázka je záměrně přísná. Minimální stopa má fungovat v přítomnosti, ne jako odkaz na dlouhý příběh. Pokud člověk musí otevírat staré karty, dohledávat důvody v chatu nebo se ptát původního autora, pravidlo ještě není úplně přenositelné. To ale neznamená, že je špatné. Znamená to, že mu chybí jedna pracovní informace.
+
+Příklad:
+
+```text
+Pravidlo:
+Při založení nebo změně formuláře vyplň účel, povinná pole, vlastníka, místo uložení a datum smazání v datové mapě.
+
+Co se stalo při prvním běžném review:
+Marketing našel pravidlo v portfoliu a správně doplnil účel, pole i vlastníka. Zaváhal u místa uložení, protože datová mapa používá název "zdroj pravdy" a formulářový checklist používá "místo uložení".
+
+Rozhodnutí:
+Neotevíráme pravidlo znovu. Sjednotíme název pole v checklistu na "zdroj pravdy / místo uložení" a necháme další kontrolu v běžném kvartálním rytmu.
+
+Privacy-first výsledek:
+Nepřidáváme nové kontrolní pole ani seznam použití pravidla. Opravujeme jen jazyk v existujícím pracovním místě.
+```
+
+Dobré review nehledá dokonalost. Hledá rozdíl mezi třením, které se dá opravit jednou větou, a signálem, že pravidlo už neodpovídá realitě. Většina prvních review po zkrácení má skončit lokální jazykovou nebo navigační úpravou. Pokud pokaždé vznikne nová revize procesu, minimální stopa se jen převlékla za další kontrolní kolečko.
+
+### Čtyři otázky prvního review
+
+Držte review krátké a projděte jen čtyři otázky:
+
+- Najitelnost: našel člověk pravidlo tam, kde by ho přirozeně hledal?
+- Srozumitelnost: rozuměl pracovní větě bez znalosti historie?
+- Použitelnost: vedla věta ke konkrétnímu kroku v produktu, webu, marketingu nebo provozu?
+- Datová střídmost: nevznikla kvůli použití pravidla nová evidence, export, tracker nebo kopie osobních údajů?
+
+Pokud odpověď selže u najitelnosti, opravte odkaz nebo index. Pokud selže u srozumitelnosti, přepište pracovní větu. Pokud selže u použitelnosti, doplňte hranici nebo příklad. Pokud selže u datové střídmosti, zastavte nový datový tok dřív, než se stane zvykem.
+
+Neřešte při prvním review všechno, co by se dalo zlepšit. Pravidlo právě prošlo ztišením. Úkolem review není vrátit mu ambici, ale potvrdit, že se dá používat bez zvláštní pozornosti.
+
+### Výsledné stavy
+
+Po review vyberte jeden stav:
+
+- Potvrdit minimální stopu: pravidlo se našlo, použilo a nevytvořilo novou datovou stopu.
+- Opravit jednu hranu: chybí odkaz, jasnější název, příklad nebo drobná formulace.
+- Vrátit do portfoliové kontroly: pravidlo je živé, ale minimální stopa nestačí opakovaně.
+- Otevřít novou otázku: problém už není v pravidle, ale v jiné části procesu, nabídky, produktu nebo datového toku.
+
+Stav "vrátit do portfoliové kontroly" používejte opatrně. Jedno zaváhání obvykle není důvod zrušit ztišení. Důvodem je až opakované selhání v běžné práci nebo změna kontextu, která z pravidla udělala neúplnou oporu.
+
+U stavu "otevřít novou otázku" nepřipisujte novou práci starému pravidlu. Pokud při review zjistíte, že formulářový checklist je srozumitelný, ale obchod si začal dělat vlastní kopie kontaktů mimo CRM, není to oprava formulářového pravidla. Je to nová otázka datové disciplíny v obchodním toku.
+
+### Privacy-first kontrola
+
+První review minimální stopy nesmí samo vytvořit větší stopu než pravidlo, které kontroluje. Nedělejte seznam lidí, kteří pravidlo použili. Nenahrávejte obrazovku jen pro jistotu. Nevytvářejte samostatnou tabulku "adopce pravidla", pokud stačí jeden záznam v portfoliu.
+
+Stačí krátký zápis:
+
+```text
+Review:
+
+Použitá pracovní situace:
+
+Výsledek:
+- potvrdit / opravit jednu hranu / vrátit do kontroly / otevřít novou otázku
+
+Co jsme upravili:
+
+Co jsme nesbírali:
+
+Další běžný rytmus:
+```
+
+Privacy-first hodnota je tady praktická: pravidlo má chránit práci a data, ne vytvořit další dohled nad lidmi. Pokud kvůli kontrole pravidla vznikne nová kontrolní agenda, tým začne řešit kontrolu kontroly. To je drahý sport a výsledky nejsou ani olympijské, ani hezké.
+
+### Mini workshop na 5 minut
+
+1. Vezměte jednu reálnou pracovní situaci, kde se pravidlo mělo použít.
+2. Zeptejte se člověka, kde pravidlo hledal a co podle něj mělo znamenat.
+3. Porovnejte jeho výklad s pracovní větou v portfoliu.
+4. Zapište jeden výsledný stav.
+5. Pokud je potřeba úprava, změňte jen nejbližší hranu.
+6. Zkontrolujte, že review nepřidalo nové osobní údaje ani nový export.
+7. Potvrďte další běžný rytmus nebo otevřete novou samostatnou otázku.
+
+Stop otázka:
+
+```text
+Opravujeme minimální stopu, nebo si nenápadně vyrábíme nový dohled nad pravidlem?
+```
+
+Pokud odpověď míří k novému dohledu, zmenšete zásah. První review má být test použitelnosti, ne návrat do péče.
+
+### Checklist prvního review minimální stopy
+
+- Použili jsme reálnou pracovní situaci, ne umělý test?
+- Ověřili jsme najitelnost, srozumitelnost, použitelnost a datovou střídmost?
+- Vybrali jsme jeden výsledný stav?
+- Pokud je potřeba oprava, týká se jedné hrany?
+- Nevracíme pravidlo do zvláštní péče kvůli jednomu drobnému zaváhání?
+- Pokud se objevil jiný problém, má vlastní novou otázku?
+- Nevznikl seznam použití pravidla, záznam chování lidí nebo zbytečný export?
+- Je zapsané, co jsme kvůli review nesbírali?
+- Zůstává další kontrola v běžném portfoliovém rytmu?
+- Dá se pravidlo po review použít ještě snadněji než před ním?
+
+První běžné review minimální portfoliové stopy má být nenápadné. Když dopadne dobře, skoro nic se nestane: pravidlo zůstane na svém místě, tým ho použije a stará smyčka zůstane zavřená. Právě to je výsledek. Ne každá dobrá práce musí zanechat velký zápis; některá jen zabrání tomu, aby se starý proces znovu probudil.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o prvním běžném review minimální portfoliové stopy: najitelnost, srozumitelnost, použitelnost, datová střídmost, výsledné stavy, privacy-first kontrola, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převodu stabilního pravidla do minimální portfoliové stopy: pracovní věta pravidla, kanonické místo, archivace historie, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhé portfoliové kontroly po uklidnění pravidla: uzavírací stavy, propsání do portfolia, konec zvláštní péče, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhé portfoliové kontrole po uklidnění pravidla: test přenositelnosti bez čerstvé paměti, výsledné stavy, privacy-first kontrola nových stop, karta, mini workshop a checklist.
