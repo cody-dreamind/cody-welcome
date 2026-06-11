@@ -208587,8 +208587,166 @@ Pokud pravidlo po převodu pořád potřebuje vlastní schůzku, vlastní tabulk
 
 Převod do portfoliového rytmu je úspěšný, když se o pravidle přestane mluvit jako o zvláštní věci. Je dostupné, používá se a kontroluje se společně s ostatními standardy. Zůstává odpovědnost, mizí drama. Přesně tak má vypadat zralý privacy-first provoz: méně stínů, méně dat navíc, méně procesního divadla a víc práce, která jde skutečně dokončit.
 
+## První portfoliová kontrola po převodu ztišeného pravidla
+
+První portfoliová kontrola po převodu nemá znovu otevírat původní smyčku. Má ověřit, že pravidlo v portfoliu opravdu přežilo jako běžná součást práce. To je jiný druh kontroly než audit. Neptáte se "funguje ještě celý příběh, který nás sem dostal". Ptáte se "najde člověk pravidlo tam, kde ho při práci potřebuje, a udělá podle něj lepší rozhodnutí bez zvláštní pomoci".
+
+Hlavní otázka zní:
+
+```text
+Chová se ztišené pravidlo v portfoliu jako normální standard, nebo se kolem něj zase tvoří zvláštní péče?
+```
+
+Tahle kontrola má být krátká, konkrétní a připojená k existujícímu portfoliovému rytmu. Pokud z ní uděláte samostatný meeting, samostatnou tabulku nebo samostatný report, převod se nepovedl. Pravidlo sice změnilo poličku, ale pořád zabírá stejnou pozornost.
+
+Příklad:
+
+```text
+Převedené pravidlo:
+Každý export kontaktů z kampaně má účel, vlastníka, místo uložení a datum smazání.
+
+Portfoliová kontrola:
+V kvartální kontrole marketingových šablon projdeme jeden nový campaign brief a jednu partnerskou šablonu.
+
+Co ověřujeme:
+Pravidlo je přímo v pracovním místě, člověk podle něj doplní export bez doptávání a index jen ukazuje na šablonu.
+
+Co neověřujeme:
+Neprocházíme staré incidentní poznámky, nepočítáme všechny historické exporty a nezakládáme nový metrický panel.
+```
+
+Dobrá první kontrola je skoro nudná. Někdo otevře správné pracovní místo, uvidí pravidlo, použije ho a portfoliový index ho neodvede do minulosti. Pokud to zní málo slavnostně, výborně. Provozní standard nemá vyhrávat pozornost. Má snižovat tření.
+
+### Čtyři otázky první kontroly
+
+První portfoliovou kontrolu držte na čtyřech otázkách:
+
+- Je pravidlo najitelné v živém pracovním místě?
+- Je napsané jako instrukce pro dnešní práci, ne jako historické vysvětlení?
+- Ukazuje portfoliový index na správné místo a nevytváří druhý zdroj pravdy?
+- Nezůstaly po převodu pomocné stopy, které už nemají účel?
+
+Každá otázka má vést k jedné drobné akci, ne k debatě o celém pravidle. Pokud pravidlo není najitelné, opravte odkaz nebo umístění. Pokud je text historický, přepište ho do přítomného času. Pokud index opakuje pravidlo, zkraťte ho na mapu. Pokud zůstaly staré stopy, smažte je, anonymizujte nebo jim dejte retenční datum.
+
+Nepřidávejte pátou otázku typu "a neměli bychom to celé ještě jednou projít". Pokud se objeví skutečný nový problém, založte novou kartu mimo starou smyčku. Pokud se objeví jen nejistota, zapište ji jako poznámku k dalšímu běžnému review a nezvyšujte rozsah.
+
+### Výsledné stavy
+
+Po první portfoliové kontrole vyberte jeden ze čtyř stavů:
+
+- Potvrzeno v portfoliu: pravidlo je najitelné, použitelné a nepotřebuje žádnou další pozornost mimo běžný rytmus.
+- Lokálně dočištěno: chyběl odkaz, věta, vlastník nebo retenční detail; oprava se udělala na jednom místě a kontrola tím končí.
+- Slabý index: pravidlo funguje v pracovním místě, ale portfoliový index mate lidi nebo vytváří druhý zdroj pravdy.
+- Nová karta: kontrola odhalila jiný problém, který nesouvisí s původní smyčkou a zaslouží si vlastní rozhodovací otázku.
+
+Nejnebezpečnější je tvářit se, že "slabý index" je problém pravidla. Často není. Pravidlo může být v kampanovém briefu napsané skvěle, ale index na něj odkazuje starým názvem, přes archiv nebo přes dokument, který už nikdo neotevírá. V takové chvíli neopravujte pravidlo. Opravte mapu.
+
+Stav "nová karta" používejte opatrně. Nová karta nevzniká proto, že si někdo vzpomněl na původní incident. Vzniká tehdy, když dnešní práce narazila na dnešní rozhodnutí. Třeba zjistíte, že exporty jsou v pořádku, ale partnerská šablona nemá jasné pravidlo pro sdílení výstupů zpět do CRM. To je příbuzné téma, ale není to pokračování starého exportního pravidla.
+
+### Privacy-first kontrola portfolia
+
+Privacy-first smysl první kontroly je jednoduchý: ověřit, že převod do portfolia nepřenesl zbytečná data. Portfoliový index má obsahovat odkazy, vlastníky, rytmus a návratové signály. Nemá obsahovat příklady se zákaznickými údaji, screenshoty starých exportů, seznamy lidí, kteří pravidlo kdysi porušili, ani detailní historii provozního problému.
+
+Praktická privacy-first kontrola:
+
+```text
+Živé místo:
+- obsahuje instrukci bez osobních údajů
+
+Index:
+- odkazuje na živé místo
+- neopakuje citlivé příklady
+
+Historická stopa:
+- má rozhodovací větu
+- má retenční datum
+- neobsahuje data, která už nejsou potřebná
+
+Příklady:
+- jsou anonymizované, syntetické nebo smazané
+
+Měření:
+- sleduje stav výstupu, ne chování lidí
+```
+
+U marketingu a SaaS se tohle často láme na detailech. Není problém mít v pravidle větu "export musí mít datum smazání". Problém je nechat v indexu starý odkaz na tabulku s reálnými kontakty, protože "se může hodit jako příklad". Pokud příklad potřebujete, udělejte syntetický. Pokud ho nepotřebujete, smažte ho. V portfoliu nemá být muzeum dat.
+
+Codyho komentář: první portfoliová kontrola je trochu jako otevřít skříň po stěhování. Když najdete věc na správném místě, nesepisujte o tom román. Když najdete krabici s nápisem "možná důležité", právě jste našli práci.
+
+### Karta první portfoliové kontroly
+
+```text
+Převedené pravidlo:
+
+Portfoliový rytmus:
+
+Kontrolované pracovní místo:
+
+Kontrolovaný indexový odkaz:
+
+Výsledek:
+- potvrzeno v portfoliu / lokálně dočištěno / slabý index / nová karta
+
+Co jsme ověřili:
+
+Co jsme opravili na jednom místě:
+
+Co jsme nespojili se starou smyčkou:
+
+Privacy-first úklid:
+- smazáno:
+- anonymizováno:
+- ponecháno s retenčním datem:
+
+Návratový signál:
+
+Vlastník:
+
+Další běžné portfoliové review:
+```
+
+Karta má být krátká. Pokud se začne plnit dlouhými citacemi, odkazy na staré diskuse a seznamem výjimek, zastavte se. Buď kontrolujete moc široce, nebo znovu otevíráte smyčku, která už měla být zavřená.
+
+### Mini workshop na 6 minut
+
+1. Otevřete portfoliový index a najděte převedené pravidlo.
+2. Otevřete živé pracovní místo, na které index odkazuje.
+3. Zkontrolujte, jestli je pravidlo napsané pro dnešní práci.
+4. Ověřte jeden reálný nebo bezpečně anonymizovaný průchod.
+5. Vyberte jeden ze čtyř výsledných stavů.
+6. Smažte nebo označte staré stopy bez účelu.
+7. Zapište jednovětý závěr a zavřete kontrolu.
+
+Stop otázka:
+
+```text
+Ověřujeme pravidlo v portfoliu, nebo se vracíme ke staré mimořádné péči?
+```
+
+Pokud odpověď zní "vracíme se", napište proč. Možná se pravidlo do portfolia převedlo předčasně. Možná chybí živé pracovní místo. Možná portfoliový rytmus nedokáže zachytit riziko. To jsou legitimní nálezy. Ale pojmenujte je přímo, ne maskovaně jako "ještě jedno malé review".
+
+### Checklist první portfoliové kontroly
+
+- Proběhla kontrola v existujícím portfoliovém rytmu?
+- Ověřili jsme živé pracovní místo, ne starou historii?
+- Je pravidlo najitelné bez doptávání?
+- Je text pravidla napsaný v přítomném čase?
+- Je portfoliový index pouze mapa?
+- Nevznikl druhý zdroj pravdy?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud šlo o lokální dočištění, opravili jsme jen nejbližší místo?
+- Pokud je slabý index, neopravujeme zbytečně samotné pravidlo?
+- Pokud vznikla nová karta, má vlastní otázku a není pokračováním staré smyčky?
+- Smazali jsme nebo anonymizovali pomocné stopy bez účelu?
+- Má každá ponechaná historická stopa retenční datum?
+- Neměříme chování lidí ani čtenost dokumentace?
+- Zůstává návratový signál situační a navázaný na pracovní výstup?
+
+První portfoliová kontrola je hotová, když pravidlo nepotřebuje vysvětlování. Člověk ho najde, použije a portfoliový index ho přivede na správné místo bez toho, aby mu do ruky strčil starý incident. Tím se pozná, že pravidlo přešlo z mimořádné péče do normálního provozu.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o první portfoliové kontrole po převodu ztišeného pravidla: najitelnost v živém pracovním místě, index bez druhého zdroje pravdy, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převodu ztišeného pravidla do portfoliového rytmu: živé pracovní místo, portfoliový index, historická stopa, privacy-first redukce dat, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhé širší inventury po ztišení pravidla: čtyři uzavírací stavy, zrušení zbytků staré péče, privacy-first redukce stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhé širší inventuře po ztišení pravidla: ověření tichého režimu bez čerstvé paměti, čtyři signály inventury, nová karta mimo starou smyčku, privacy-first úklid, karta, mini workshop a checklist.
