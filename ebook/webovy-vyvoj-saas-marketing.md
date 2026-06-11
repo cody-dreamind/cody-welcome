@@ -207334,8 +207334,205 @@ Pokud odpověď není jasné ano, najděte, kde nervozita zůstala: ve zbytečn�
 
 Dobré uzavření první roční kontroly je nenápadné. Čtenář dokumentu za měsíc nemá poznat dramatickou historii, jen lepší pracovní pravidlo na správném místě. To je přesně ten druh provozní elegance, který se špatně prodává na konferenci, ale výborně funguje v pondělí ráno.
 
+## Druhá roční kontrola po stabilizaci pravidla
+
+Druhá roční kontrola je jiný typ práce než první. První rok ověřoval, jestli se archivovaná smyčka opravdu přenesla do živého pravidla a nezůstala viset ve staré historii. Druhý rok už nemá dokazovat totéž znovu. Má potvrdit, jestli pravidlo může zůstat v běžném rytmu bez samostatného dohledu, nebo jestli se změnil kontext natolik, že potřebuje malou úpravu.
+
+Začněte jednoduchou větou:
+
+```text
+Druhý rok kontrolujeme, jestli pravidlo pořád sedí na práci, ne jestli byla původní smyčka správně uzavřená.
+```
+
+Tato věta chrání rozsah. Pokud se tým při druhé roční kontrole znovu vrátí k původnímu incidentu, starému exportu, dávné debatě nebo seznamu tehdejších variant, kontrola se vrací o dvě fáze zpět. Druhý rok má být kratší, klidnější a víc provozní.
+
+Příklad:
+
+```text
+Živé pravidlo:
+Každý marketingový export má účel, vlastníka, datum smazání a uložené místo.
+
+Co kontrolujeme ve druhém roce:
+Jestli je tato věta pořád v aktuálním kampaňovém briefu a jestli nevznikl nový typ kampaně, který brief obchází.
+
+Co nekontrolujeme:
+Neprocházíme staré kampaně, neobnovujeme pilotní tabulku a neměříme, kdo pravidlo použil.
+```
+
+Taková kontrola je dost malá na to, aby se opravdu dělala. A dost konkrétní na to, aby chránila hodnotu pravidla.
+
+### Co má druhý rok potvrdit
+
+Druhá roční kontrola má čtyři praktické cíle:
+
+- pravidlo je stále srozumitelné člověku, který nezná jeho historii;
+- kanonické pracovní místo pořád odpovídá tomu, kde se práce děje;
+- návratový signál je stále konkrétní a nevede k plošnému dohledu;
+- po kontrole nevzniká nová evidence jen proto, že kontrola existuje.
+
+U webu to může znamenat ověřit, že pravidlo pro formulář stále sedí v aktuální šabloně landing page. U SaaS produktu to může znamenat otevřít onboardingový checklist a zkontrolovat, že nevyžaduje údaje, které produkt už nepotřebuje. U marketingu to může znamenat projít brief kampaně a ověřit, že práce s kontakty nezačala žít mimo původní hranice.
+
+Nejde o obecný audit webu, produktu ani marketingu. Druhý rok má zkontrolovat jen živé pravidlo a jeho nejbližší pracovní okolí. Pokud se během toho objeví širší problém, napište ho zvlášť. Nelepte ho na starou smyčku jen proto, že se zrovna otevřel podobný dokument.
+
+Dobrá druhá roční kontrola končí jednou z těchto vět:
+
+```text
+Pravidlo sedí a zůstává v běžném ročním rytmu.
+```
+
+```text
+Pravidlo sedí, ale přesouváme ho do nové šablony.
+```
+
+```text
+Pravidlo je moc dlouhé; zkracujeme ho na jednu pracovní větu.
+```
+
+```text
+Objevila se nová cesta mimo pravidlo; zakládáme novou kartu a starou smyčku necháváme zavřenou.
+```
+
+Všimněte si, že ani jedna věta neříká "uděláme další detailní review". Pokud je potřeba review, musí mít vlastní otázku a vlastní důvod. Druhá roční kontrola nemá automaticky rodit třetí kontrolní kolečko.
+
+### Čtyři výsledky druhé roční kontroly
+
+Po druhém roce vyberte jeden ze čtyř výsledků:
+
+- Ponechat v ročním rytmu: pravidlo sedí, pracovní místo sedí a kontrola byla lehká.
+- Ztišit do běžné inventury: pravidlo už nepotřebuje vlastní položku a stačí mu širší roční kontrola standardů.
+- Upravit jednu hranu: pravidlo je platné, ale jedno slovo, umístění nebo návratový signál už neodpovídá práci.
+- Otevřít novou kartu: objevila se nová situace mimo rozsah živého pravidla.
+
+`Ponechat v ročním rytmu` je vhodné u pravidel, která jsou málo častá, ale pořád důležitá. Typicky jde o exporty kontaktů, méně časté kampaně, incidentní postupy, předávky zákaznických dat nebo roční obsahové úklidy.
+
+`Ztišit do běžné inventury` znamená, že pravidlo už nepotřebuje vlastní řádek. Může být součástí širší kontroly webových formulářů, marketingových šablon, SaaS onboardingu nebo provozních standardů. Ztišení není smazání. Je to snížení samostatné pozornosti.
+
+`Upravit jednu hranu` je správné, když se změnil nástroj, název šablony, umístění pravidla nebo formulace návratového signálu. Jedna hrana znamená opravdu jedna. Pokud úprava potřebuje víc míst, pravděpodobně už otevíráte novou kartu.
+
+`Otevřít novou kartu` použijte, když se ukáže nový problém: nový formulář sbírá víc údajů, nová automatizace obchází ruční schválení, nový dodavatel chce export bez jasného účelu nebo nový segment zákazníků potřebuje jiné vysvětlení. Stará smyčka může dodat poučení, ale nemá dodat rozsah.
+
+### Kdy roční rytmus ztišit
+
+Po druhé roční kontrole se vyplatí zeptat, jestli pravidlo ještě potřebuje vlastní roční zmínku. Někdy ano. Někdy už je samostatná položka jen historická připomínka.
+
+Roční rytmus ztište, když:
+
+- pravidlo je přirozenou součástí širšího standardu;
+- za dva roky nevznikl návratový signál ani skrytá datová stopa;
+- kanonické místo je stabilní a používá se bez vysvětlování historie;
+- kontrola už jen potvrzuje samozřejmost;
+- širší inventura stejně pokrývá stejné riziko.
+
+Příklad ztišení:
+
+```text
+Pravidlo pro kampaňové exporty už není samostatná roční položka. Zůstává v marketingovém briefu a kontroluje se jen v rámci roční inventury marketingových šablon.
+```
+
+To je dobrý výsledek. Pravidlo nezmizelo, ale stará smyčka přestala mít vlastní místo v kalendáři. Tým si ponechal ochranu a zahodil zbytečnou pozornost.
+
+Neztišujte pravidlo jen proto, že je nudné. Ztište ho proto, že má spolehlivý domov v běžném systému. Nuda sama o sobě není důkaz stability. Někdy je to jen ticho před dalším špatně pojmenovaným exportem.
+
+Codyho komentář: když druhý rok kontrolujete totéž a výsledek je potřetí "nic se nestalo", možná je čas pogratulovat pravidlu k dospělosti a přestat ho vodit za ruku. Ano, i pravidla mají nárok odejít z jeslí.
+
+### Privacy-first hranice druhého roku
+
+Druhý rok svádí ke dvěma chybám. První je nostalgie: tým chce otevřít staré důkazy, aby si připomněl, proč pravidlo vzniklo. Druhá je kontrolní hlad: tým chce dokázat stabilitu čísly, a tak začne měřit používání pravidla víc, než je potřeba.
+
+Privacy-first kontrola druhého roku říká:
+
+- neotevírejte staré osobní údaje, pokud nejsou nutné pro dnešní rozhodnutí;
+- nevytvářejte seznam lidí, kteří pravidlo použili;
+- nesbírejte nové eventy jen kvůli kontrole pravidla;
+- neponechávejte screenshoty, exporty ani pracovní kopie bez účelu;
+- pokud se pravidlo ztišuje, ztište i pomocnou evidenci okolo něj.
+
+Dobrá privacy-first věta po druhé roční kontrole:
+
+```text
+Po druhé roční kontrole nezůstává žádná nová datová stopa; pravidlo se ztišuje do roční inventury šablon a staré pomocné poznámky mažeme.
+```
+
+Pokud nějaká stopa zůstat musí, napište proč:
+
+```text
+Zůstává anonymizovaný příklad v týmové paměti, protože pomáhá vysvětlit pravidlo novému marketing ownerovi. Bez jmen, bez exportu a s kontrolou při příští roční inventuře.
+```
+
+Privacy-first provoz není soutěž v mazání všeho. Je to schopnost ponechat jen to, co má účel, vlastníka a hranici.
+
+### Karta druhé roční kontroly
+
+```text
+Živé pravidlo:
+
+Kanonické pracovní místo:
+
+Výsledek první roční kontroly:
+
+Co se za druhý rok změnilo:
+
+Druhá roční kontrolní otázka:
+
+Výsledek:
+- ponechat v ročním rytmu / ztišit do běžné inventury / upravit jednu hranu / otevřít novou kartu
+
+Jedna případná úprava:
+
+Co se neotevírá ze staré smyčky:
+
+Co se ztišuje nebo ruší:
+
+Privacy-first úklid:
+- nové stopy:
+- staré stopy k odstranění:
+- co výslovně neměříme:
+
+Návratový signál:
+
+Vlastník:
+```
+
+Karta je užitečná hlavně tehdy, když se něco mění. Pokud výsledek zní "ponechat v ročním rytmu" a nevznikla žádná datová stopa, stačí krátká věta v inventuře. Formulář nemá být daň za to, že pravidlo funguje.
+
+### Mini workshop na 6 minut
+
+1. Vlastník přečte živé pravidlo bez historie.
+2. Tým otevře jen kanonické pracovní místo.
+3. Řekne, co se za druhý rok změnilo v práci, nástroji nebo datové stopě.
+4. Vybere jeden ze čtyř výsledků.
+5. Pokud se pravidlo ztišuje, pojmenuje širší inventuru, kde bude dál vidět.
+6. Zapíše privacy-first úklid a návratový signál.
+
+Stop otázka:
+
+```text
+Kontrolujeme pravidlo, protože chrání dnešní práci, nebo protože si pamatujeme, že kdysi bylo důležité?
+```
+
+Pokud odpověď stojí hlavně na minulosti, pravidlo ztište nebo zavřete. Pokud stojí na dnešním riziku, ponechte ho v ročním rytmu nebo upravte jednu hranu.
+
+### Checklist druhé roční kontroly
+
+- Kontrolovali jsme živé pravidlo, ne starou smyčku?
+- Otevřeli jsme jen aktuální kanonické pracovní místo?
+- Víme, co se za druhý rok změnilo v práci, nástroji nebo datové stopě?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud pravidlo zůstává v ročním rytmu, má pro to dnešní důvod?
+- Pokud se pravidlo ztišuje, víme, ve které širší inventuře zůstane viditelné?
+- Pokud upravujeme hranu, je to opravdu jedna úprava?
+- Pokud vznikl nový problém, dostal vlastní kartu mimo starou smyčku?
+- Neotevřeli jsme staré osobní údaje, exporty nebo screenshoty bez účelu?
+- Nezavedli jsme měření používání pravidla podle jednotlivců?
+- Uklidili jsme pomocné poznámky, které už existovaly jen kvůli kontrole?
+- Je návratový signál konkrétnější než obecné "kdyby se něco stalo"?
+- Umí vlastník jednou větou říct, proč pravidlo zůstává, ztišuje se, upravuje nebo opouští starou stopu?
+
+Druhá roční kontrola je dobrá, když je kratší než první. Ještě lepší je, když po ní zmizí kus samostatné agendy a zůstane jen pracovní pravidlo na správném místě. Zralý systém se nepozná podle toho, že všechno kontroluje navždy. Pozná se podle toho, že ví, kdy už kontrolu nepotřebuje.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o druhé roční kontrole po stabilizaci pravidla: ztišení ročního rytmu, čtyři výsledky, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření první roční kontroly po převodu archivované smyčky: uzavírací stavy, kanonické propsání, úklid podkladů, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o první roční kontrole po převodu archivované smyčky: kontrola živého pravidla místo staré smyčky, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převedení archivované smyčky do ročního rytmu: podmínky převodu, karta ročního zahlédnutí, privacy-first hranice, situace pro vynechání roční kontroly, mini workshop a checklist.
