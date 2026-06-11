@@ -209666,8 +209666,167 @@ Pokud odpověď ukazuje na novou péči, vraťte se k výslednému stavu. Buď p
 
 Uzavření prvního běžného review je malé, ale důležité. Právě tady se rozhoduje, jestli minimální stopa opravdu zůstane minimální. Když tým zavře review bez nové kontrolní vrstvy, pravidlo se stane běžnou součástí práce. Když k němu přidá další dohled, vrací se zpátky do režimu, ze kterého se ho snažil dostat.
 
+## Druhé běžné review minimální portfoliové stopy
+
+Druhé běžné review je test bez čerstvé paměti. První review ještě často těží z toho, že lidé vědí, proč se pravidlo zkracovalo, kdo ho upravoval a kde se o něm mluvilo. Druhé review už má být normální provozní situace: člověk otevře portfolio, najde krátkou pracovní větu, použije ji a nepotřebuje k tomu žádné vysvětlující kolečko.
+
+Začněte otázkou:
+
+```text
+Fungovala minimální stopa i ve druhé běžné situaci bez návratu staré péče?
+```
+
+Pokud odpověď zní ano, pravidlo už pravděpodobně nepotřebuje zvláštní pozornost. Pokud odpověď zní ne, nejdřív rozlišujte, jestli selhala stopa, nebo se změnila práce okolo ní. To je zásadní rozdíl. Slabá stopa se dá opravit jednou větou, odkazem nebo příkladem. Změněná práce může znamenat novou otázku, nový proces nebo rozhodnutí, že pravidlo patří do jiné části portfolia.
+
+Příklad:
+
+```text
+Pravidlo:
+Při změně formuláře ověř účel sběru, povinná pole, zdroj pravdy a dobu uchování.
+
+První review:
+Pravidlo bylo použito po drobné jazykové opravě.
+
+Druhé review:
+Produktový tým pravidlo našel, ale narazil na novou situaci: formulář už neposílá data jen do CRM, ale také do interního nástroje pro předvyplnění onboardingového kroku.
+
+Rozhodnutí:
+Neopravujeme staré pravidlo jako text. Otevíráme novou otázku datového toku pro onboarding, protože se změnila skutečná práce s daty.
+
+Privacy-first hranice:
+Dočasně nezapínáme nový export ani nové měření používání formuláře. Nejdřív popíšeme účel, přístup a retenci v datové mapě.
+```
+
+Druhé review tedy není mechanické potvrzení. Je to klidný test přenositelnosti v čase. Pravidlo má obstát bez autora, bez historie a bez mimořádné pozornosti. Když obstojí, neoslavujte ho další tabulkou. Když neobstojí, opravte přesně ten typ problému, který se ukázal.
+
+### Co má druhé review ukázat
+
+Druhé review má odpovědět na čtyři věci:
+
+- Přenositelnost: použil pravidlo někdo, kdo nebyl u původního zkracování?
+- Stabilita jazyka: znamenala pracovní věta totéž v další situaci?
+- Provozní klid: nevznikla kvůli pravidlu nová kontrolní rutina?
+- Datová střídmost: nepřibyly nové kopie, exporty, seznamy použití nebo zbytečné osobní údaje?
+
+Pokud se pravidlo použilo jen proto, že ho někdo připomněl v chatu, není to ještě přenositelnost. Pokud člověk musel dohledat archivovanou historii, není to stabilita jazyka. Pokud po použití vznikl nový tracking adopce, není to provozní klid. A pokud kvůli review zůstala ležet kopie zákaznického příkladu v poznámkách, není to datová střídmost.
+
+Druhé review má být krátké, ale nesmí být povrchní. Nejčastější chyba je napsat "funguje" jen proto, že se nikdo neozval. Ticho může znamenat stabilitu, ale také to, že pravidlo nikdo nepotřeboval, nenašel nebo obešel. Proto kontrolujte jednu konkrétní pracovní situaci, ne obecný pocit.
+
+### Čtyři výsledné stavy
+
+Po druhém review vyberte jeden stav:
+
+- Potvrdit tichý provoz: pravidlo funguje i podruhé a další zvláštní review končí.
+- Dočistit poslední hranu: chybí jeden odkaz, název, příklad nebo hranice, ale pravidlo je jinak přenositelné.
+- Přesunout pravidlo v portfoliu: pravidlo je dobré, ale lidé ho hledají v jiném pracovním místě.
+- Otevřít novou provozní otázku: druhé review odhalilo změněný proces, datový tok, nabídku nebo odpovědnost.
+
+Stav "potvrdit tichý provoz" má být skutečný konec mimořádné pozornosti. Neznamená, že pravidlo zmizí. Znamená, že se dál kontroluje jen v běžném portfoliovém rytmu nebo při návratovém signálu.
+
+Stav "dočistit poslední hranu" používejte jen pro opravdu malou opravu. Pokud se při druhém review mění víc částí najednou, už nejde o dočištění. Pravděpodobně máte slabé kanonické místo nebo novou otázku.
+
+Stav "přesunout pravidlo v portfoliu" je užitečný, když pravidlo funguje, ale je špatně zařazené. Například privacy pravidlo pro formuláře může lidé hledat u marketingových checklistů, ne v obecném provozním indexu. Přesun je lepší než přidat duplicitní kopii. Jedno pravidlo, jedno kanonické místo, více odkazů jen tam, kde opravdu pomáhají.
+
+### Kdy už skončit se zvláštním review
+
+Se zvláštním review skončete, když platí:
+
+- pravidlo bylo použito ve dvou běžných situacích;
+- druhé použití nevyžadovalo autora ani archivovanou historii;
+- poslední lokální oprava je propsaná v kanonickém místě;
+- nevznikl nový seznam adopce, tracker ani ruční dohled;
+- další signál má jasnou návratovou podmínku.
+
+Návratová podmínka může být jednoduchá:
+
+```text
+K pravidlu se mimo běžné portfoliové review vrátíme jen tehdy, když:
+- ho člověk nenajde ve správném pracovním místě,
+- kvůli němu vznikne nová kopie dat,
+- nebo se změní datový tok, kterého se pravidlo týká.
+```
+
+Bez návratové podmínky se tým často uklidňuje dalším review "pro jistotu". Jenže jistota, která nepřináší nové rozhodnutí, je většinou jen převlečená úzkost z toho, že pouštíte proces z ruky. Proces nemá vyžadovat pozornost jen proto, že jednou pozornost dostal. Pokud funguje, vraťte ho do běžného rytmu.
+
+### Privacy-first kontrola druhého review
+
+Druhé review je dobré místo pro poslední redukci stop po mimořádné péči. Zeptejte se:
+
+- Zůstaly po prvním review pomocné poznámky, které už nejsou potřeba?
+- Není pravidlo duplikované ve více dokumentech s mírně odlišným zněním?
+- Nevznikla při druhém použití nová kopie zákaznických dat?
+- Má kanonické místo jasného vlastníka a další běžný rytmus?
+- Je návratový signál popsaný bez sledování lidí po jménech?
+
+Privacy-first závěr po druhém review nemá být dlouhý. Stačí věta:
+
+```text
+Po druhém review končí zvláštní kontrola pravidla; v portfoliu zůstává jen pracovní věta, kanonický odkaz, návratový signál a běžný rytmus.
+```
+
+Pokud tato věta není pravdivá, něco ještě leží mimo místo. Buď starý podklad, duplicitní pravidlo, nebo nová otázka, která se tváří jako pokračování staré smyčky.
+
+### Karta druhého review minimální stopy
+
+```text
+Pravidlo:
+
+Druhá pracovní situace:
+
+Kdo pravidlo použil bez znalosti historie:
+
+Výsledek:
+- potvrdit tichý provoz / dočistit poslední hranu / přesunout v portfoliu / otevřít novou otázku
+
+Co se změnilo v kanonickém místě:
+
+Co jsme odstranili z mimořádné péče:
+
+Návratový signál:
+
+Další běžný rytmus:
+
+Privacy-first poznámka:
+```
+
+Pole "kdo pravidlo použil" nepište jako evidenci výkonu člověka. Stačí role nebo pracovní situace, například "produktový tým při změně onboardingového formuláře". Cílem je ověřit přenositelnost pravidla, ne dělat žebříček poslušnosti. Ten bývá nepřesný, nepříjemný a navíc strašně nudný.
+
+### Mini workshop na 6 minut
+
+1. Vyberte druhou reálnou pracovní situaci od prvního review.
+2. Ověřte, jestli člověk použil pravidlo bez archivované historie.
+3. Zapište, kde pravidlo hledal a jestli kanonické místo dávalo smysl.
+4. Vyberte jeden ze čtyř výsledných stavů.
+5. Pokud je potřeba oprava, změňte jen poslední hranu.
+6. Odstraňte zbytky mimořádné péče, které už pravidlo nepotřebuje.
+7. Napište návratový signál a vraťte pravidlo do běžného rytmu.
+
+Stop otázka:
+
+```text
+Potvrzujeme tichý provoz, nebo si necháváme zvláštní review jen proto, že se bojíme pustit starou smyčku?
+```
+
+Pokud odpověď míří ke strachu, nepřidávejte další kontrolu. Napište návratový signál. To je praktičtější a méně datově hladové.
+
+### Checklist druhého review minimální stopy
+
+- Proběhlo review na druhé reálné pracovní situaci?
+- Použil pravidlo někdo bez čerstvé znalosti historie?
+- Ověřili jsme přenositelnost, jazyk, provozní klid a datovou střídmost?
+- Vybrali jsme jeden výsledný stav?
+- Neopravujeme víc než jednu poslední hranu, pokud nejde o novou otázku?
+- Nepřidali jsme duplicitní kopii pravidla místo lepšího odkazu?
+- Odstranili jsme zbytky mimořádné péče, pokud už nejsou potřeba?
+- Je návratový signál konkrétní a nevyžaduje sledování lidí?
+- Zůstává v portfoliu jen pracovní minimum?
+- Končí zvláštní review, pokud pravidlo obstálo?
+
+Druhé běžné review je chvíle, kdy se minimální stopa přestane kontrolovat jako rekonvalescent a začne se používat jako normální pracovní opora. Když obstojí, nechte ji v klidu. Když neobstojí, neopravujte všechno. Buď dočistěte poslední hranu, nebo přiznejte, že se otevřela nová otázka.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o druhém běžném review minimální portfoliové stopy: test bez čerstvé paměti, přenositelnost, tichý provoz, návratový signál, privacy-first redukce stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření prvního běžného review minimální portfoliové stopy: uzavírací stavy, propsání do portfolia, ukončení další kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o prvním běžném review minimální portfoliové stopy: najitelnost, srozumitelnost, použitelnost, datová střídmost, výsledné stavy, privacy-first kontrola, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převodu stabilního pravidla do minimální portfoliové stopy: pracovní věta pravidla, kanonické místo, archivace historie, privacy-first úklid, karta, mini workshop a checklist.
