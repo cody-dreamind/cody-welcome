@@ -206704,8 +206704,154 @@ Pokud odpověď míří ke zvyku, zvláštní kontrolu ukončete. Zvyk kontrolov
 
 Druhý běžný kvartál po archivaci má zavřít poslední zbytečnou pozornost. Pokud pravidlo drží, nechte ho splynout s běžnou prací. Pokud potřebuje drobnou opravu, udělejte ji přesně tam, kde se práce děje. A pokud se objevil nový problém, dejte mu vlastní kartu. Starou smyčku už netahejte zpět na stůl jen proto, že na něm kdysi ležela.
 
+## Uzavření druhého běžného kvartálu po archivaci
+
+Druhý běžný kvartál po archivaci není hotový tím, že proběhla kontrola. Hotový je až ve chvíli, kdy tým ví, co dál už nebude dělat. To zní skoro podezřele jednoduše, ale právě tady se často ztrácí nejvíc času: pravidlo funguje, stará smyčka je klidná, žádný nový problém nevznikl, a přesto si tým nechá v kalendáři další kontrolu "pro jistotu".
+
+Uzavření druhého kvartálu má proto tři cíle:
+
+1. potvrdit finální stav pravidla;
+2. odstranit poslední zbytky mimořádné péče;
+3. nechat budoucí návrat jen na jasném návratovém signálu.
+
+Nejde o slavnostní konec. Jde o provozní úklid. Pokud pravidlo opravdu drží, nemá už mít vlastní pozornost. Má být součástí šablony, checklistu, pracovního místa nebo běžného review. Pokud nedrží, nemá se tvářit jako dlouhodobý problém jen proto, že kdysi vznikla smyčka. Má dostat jednu konkrétní opravu nebo novou samostatnou kartu.
+
+Krátká uzavírací otázka zní:
+
+```text
+Co po druhém kvartálu zůstává v běžném provozu a co tímto výslovně končí?
+```
+
+Bez druhé poloviny věty je uzavření slabé. "Pravidlo zůstává v provozu" ještě neříká, jestli končí kontrolní tabulka, připomínka v kalendáři, stará komentářová větev, dočasný export nebo ruční dohled vlastníka. Uzavření musí pojmenovat i to, co se zavírá.
+
+Praktický příklad:
+
+```text
+Pravidlo:
+Při přípravě kampaně se nepoužívá export kontaktů bez účelu, vlastníka a data smazání.
+
+Výsledek druhého kvartálu:
+Pravidlo použil nový člověk přímo z briefové šablony. Nebyla potřeba stará historie ani kontrolní tabulka.
+
+Uzavření:
+Pravidlo zůstává v šabloně briefu a v běžném kvartálním review standardů. Končí samostatná kontrola této smyčky, maže se pomocná poznámka z pilotu a návrat se otevře jen při novém požadavku na export bez účelu, vlastníka nebo data smazání.
+```
+
+Tento zápis je malý, ale dělá důležitou práci. Chrání tým před tím, aby se z úspěšného pravidla stal další provozní závazek navíc.
+
+### Čtyři uzavírací stavy po druhém kvartálu
+
+Po druhém běžném kvartálu vyberte jeden ze čtyř uzavíracích stavů:
+
+- Uzavřeno do tichého provozu.
+- Uzavřeno s poslední navigační opravou.
+- Uzavřeno jako nová samostatná karta.
+- Neuzavřeno, protože chybí reálné použití.
+
+`Uzavřeno do tichého provozu` znamená, že pravidlo funguje tam, kde má, a další samostatná pozornost končí. Akce: ponechat pravidlo v běžném pracovním místě, smazat dočasné podklady a zapsat návratový signál.
+
+`Uzavřeno s poslední navigační opravou` znamená, že pravidlo funguje, ale jeho cesta byla pořád zbytečně nepohodlná. Akce: udělat jednu opravu odkazu, názvu, umístění nebo stručnosti. Potom smyčku zavřít. Navigační oprava není důvod pro třetí kvartální kontrolu.
+
+`Uzavřeno jako nová samostatná karta` znamená, že druhý kvartál odkryl problém, který má vlastní rozsah. Akce: starou smyčku uzavřít a novou práci zapsat zvlášť. Nová karta musí mít vlastní otázku, vlastníka a privacy-first hranici.
+
+`Neuzavřeno, protože chybí reálné použití` znamená, že ve druhém kvartálu nenastala situace, ve které by se pravidlo mohlo přirozeně ověřit. Akce: neprodlužovat mimořádný dohled automaticky. Zapište, že pravidlo zůstává v běžném pracovním místě a návrat se otevře při prvním reálném použití, ne při dalším umělém review.
+
+Poslední stav je důležitý. Když pravidlo nebylo potřeba, nemusí to být problém. U sezónních kampaní, ročních auditů nebo málo častých incidentních scénářů může být běžné, že druhý kvartál nepřinese přirozený test. V takovém případě není rozumné vyrábět simulaci jen proto, aby se tabulka tvářila kompletně. Stačí ponechat pravidlo na správném místě a nechat návratový signál dělat svou práci.
+
+### Co po uzavření smazat nebo ztišit
+
+Uzavření druhého kvartálu je vhodný okamžik pro poslední úklid pomocných stop. Hledejte hlavně věci, které vznikly během mimořádné péče a teď už nemají rozhodovací účel:
+
+- dočasné kontrolní tabulky;
+- komentáře s osobními poznámkami;
+- screenshoty pracovních situací;
+- kopie původních šablon;
+- seznamy lidí, kteří měli pravidlo vyzkoušet;
+- připomínky v kalendáři mimo běžný provozní rytmus;
+- pracovní exporty vytvořené kvůli kontrole;
+- dlouhé vysvětlení původní smyčky vložené přímo do živé šablony.
+
+Ne všechno se musí smazat. Něco stačí zkrátit, anonymizovat nebo přesunout do krátké týmové paměti. Rozhodující je účel. Pokud stopa pomáhá budoucímu rozhodnutí, napište k ní účel a retenci. Pokud jen uklidňuje tým, že "někde máme celou historii", je to slabý důvod.
+
+Privacy-first pravidlo: po uzavření druhého kvartálu nemá zůstat víc osobních nebo zákaznických dat než před smyčkou. Ideální výsledek je dokonce menší stopa: jasnější pravidlo, méně pomocných kopií, kratší paměť a žádné měření lidí.
+
+Codyho komentář: "pro jistotu si to necháme" je věta, ze které vyrostla polovina firemních skládek. Druhá polovina vznikla z názvu `final_v3_opravdu_final`. Ano, bolí mě to taky.
+
+### Finální uzavírací zápis
+
+Uzavírací zápis po druhém kvartálu má být krátký. Pokud potřebuje půl stránky vysvětlování, smyčka pravděpodobně ještě není dost uklizená.
+
+Použijte tuto šablonu:
+
+```text
+Uzavíraná smyčka:
+
+Živé pravidlo:
+
+Kde pravidlo zůstává:
+
+Výsledek druhého kvartálu:
+- tichý provoz / navigační oprava / nová samostatná karta / čekáme na reálné použití
+
+Co tímto končí:
+
+Co zůstává v běžném rytmu:
+
+Návratový signál:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Co výslovně neměříme:
+
+Vlastník:
+
+Datum:
+```
+
+Pole `Co výslovně neměříme` je ochrana proti tichému rozrůstání kontroly. Může vypadat například takto:
+
+```text
+Neměříme používání pravidla podle jednotlivých lidí, nevedeme samostatnou evidenci otevření šablony a nesbíráme nové eventy. Hodnotíme jen výsledek práce v běžném review.
+```
+
+Takový zápis je přiměřený pro web, SaaS i marketing. U webu může jít o pravidlo pro formulář, u SaaS o onboardingový krok, u marketingu o práci s kontakty nebo publikací obsahu. Princip je stejný: měřte rozhodnutí a výsledek, ne každý pohyb člověka okolo dokumentace.
+
+### Mini workshop na 5 minut
+
+1. Vlastník přečte výsledek druhého kvartálu.
+2. Tým vybere jeden ze čtyř uzavíracích stavů.
+3. Nahlas řekne, co tímto končí.
+4. Zkontroluje, jestli živé pravidlo zůstává na správném pracovním místě.
+5. Zapíše návratový signál a privacy-first úklid.
+
+Stop otázka:
+
+```text
+Kdybychom tuto smyčku už nikdy samostatně nekontrolovali, co by nám reálně chybělo?
+```
+
+Pokud odpověď není konkrétní, samostatná kontrola má skončit. Pokud odpověď konkrétní je, pravděpodobně nejde o starou smyčku, ale o novou práci s vlastním rozsahem.
+
+### Checklist uzavření druhého kvartálu
+
+- Vybrali jsme jeden uzavírací stav?
+- Je jasné, kde živé pravidlo zůstává?
+- Popsali jsme, co tímto výslovně končí?
+- Nezůstala samostatná kontrola jen ze zvyku?
+- Pokud chybělo reálné použití, nevyrobili jsme umělý test bez důvodu?
+- Má návratový signál konkrétní pracovní situaci?
+- Smazali, zkrátili nebo anonymizovali jsme pomocné stopy?
+- Neponechali jsme seznamy lidí, screenshoty nebo exporty bez účelu?
+- Nezavedli jsme měření používání pravidla podle jednotlivců?
+- Pokud vznikl nový problém, má vlastní kartu mimo starou smyčku?
+- Umí vlastník jednou větou říct, co zůstává v provozu a co končí?
+- Je uzavření zapsané v běžném místě, ne schované v dlouhé historii?
+
+Dobře uzavřený druhý kvartál po archivaci má nenápadný výsledek: pravidlo zůstává, smyčka mizí. Tým neztrácí zkušenost, ale přestává krmit proces, který už splnil svůj účel. To je praktická produktivita v nejméně efektní podobě. Což je často ta nejlepší.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o uzavření druhého běžného kvartálu po archivaci návratové smyčky: finální stavy, ukončení mimořádné péče, úklid pomocných stop, privacy-first uzavírací zápis, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhém běžném kvartálu po archivaci návratové smyčky: ověření pravidla bez čerstvé paměti původní smyčky, čtyři výsledné stavy, ukončení samostatné pozornosti, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření prvního běžného kvartálu po archivaci návratové smyčky: čtyři uzavírací stavy, propsání do kanonického místa, neotevírání staré historie, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o prvním běžném kvartálu po archivaci návratové smyčky: ověření tichého fungování pravidla, čtyři výsledky kvartálu, prevence nového auditu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
