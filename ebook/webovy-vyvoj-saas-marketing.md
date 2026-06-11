@@ -209997,8 +209997,158 @@ Pokud ano, pryč s tím. Ne všechno, co pomohlo pravidlo stabilizovat, má prá
 
 Uzavření druhého review je drobná disciplína proti bobtnání provozu. Když ho uděláte poctivě, pravidlo se přestane tvářit jako projekt a začne fungovat jako normální opora práce. To je ideální konec: méně historie, méně dohledu, méně datové stopy, víc použitelného klidu.
 
+## Převod minimální portfoliové stopy do tichého provozu
+
+Po druhém běžném review přichází poslední nenápadný krok: minimální portfoliovou stopu opravdu pustit z ruky. Ne smazat pravidlo, ne zapomenout, že existuje, ale přestat kolem něj držet zvláštní režim. Pokud se to neudělá vědomě, tým často nechá v provozu malé zbytky péče: připomínku v kalendáři, samostatnou poznámku, kontrolní otázku v meetingu, dočasný sloupec v tabulce nebo interní komentář "ještě sledujeme".
+
+Tyto zbytky vypadají nevinně. Jenže právě z nich vzniká provozní šum. Každá malá kontrola chce pozornost, každá poznámka žádá údržbu a každá pomocná evidence zvyšuje šanci, že se v systému drží data bez jasného účelu. Tichý provoz znamená, že pravidlo má své místo, svůj návratový signál a běžný rytmus. Nic víc.
+
+Začněte převodovou větou:
+
+```text
+Minimální portfoliová stopa přechází do tichého provozu.
+
+V běžné práci zůstává:
+
+Návratový signál je:
+
+Rušíme tyto zbytky zvláštní péče:
+
+Nové sledování nezavádíme, protože:
+```
+
+Příklad:
+
+```text
+Minimální portfoliová stopa pro změny formulářů přechází do tichého provozu.
+
+V běžné práci zůstává:
+Při úpravě formuláře ověř účel sběru, povinná pole, vlastníka dat, retenci a kanonickou datovou mapu.
+
+Návratový signál:
+Nové povinné pole, nový export, nový dodavatel nebo změna účelu sběru.
+
+Rušíme:
+Dočasnou poznámku z druhého review, kontrolní bod v pátečním standupu a starou kopii checklistu v marketingové složce.
+
+Nové sledování nezavádíme, protože běžný návratový signál stačí k rozhodnutí, kdy pravidlo znovu otevřít.
+```
+
+Tato věta chrání tým před dvěma extrémy. První extrém je zapomenutí: pravidlo se rozpustí a při další změně se znovu řeší od nuly. Druhý extrém je přehnaná péče: pravidlo sice funguje, ale pořád se kolem něj chodí po špičkách. Tichý provoz je střed: pravidlo je dostupné, ale nebere si vlastní proces.
+
+### Co znamená tichý provoz
+
+Tichý provoz neznamená, že se pravidlo nikdy nekontroluje. Znamená, že se nekontroluje samo pro sebe. Vrací se do hry jen tehdy, když vznikne pracovní situace, která ho opravdu potřebuje.
+
+Dobré signály tichého provozu:
+
+- člověk najde pravidlo v běžném pracovním místě bez dotazu na autora;
+- pravidlo se použije při konkrétní změně, ne při abstraktní revizi;
+- tým neotevírá archivované poznámky, pokud nenastal návratový signál;
+- v portfoliu je jedna pracovní věta, ne historie stabilizace;
+- údržba probíhá v běžném rytmu portfolia, ne ve zvláštním režimu.
+
+Špatné signály:
+
+- pravidlo má vlastní opakovaný meeting;
+- někdo ručně sleduje, jestli ho lidé používají;
+- kvůli pravidlu vzniká nový report bez rozhodovací otázky;
+- staré pilotní příklady zůstávají v aktivních šablonách;
+- tým neví, kdy pravidlo nechat být.
+
+Codyho komentář: pravidlo v tichém provozu je jako dobrý vypínač. Víš, kde je, použiješ ho, když je potřeba, a zbytek dne se na něj nedíváš s otázkou, jestli se náhodou necítí osaměle. Provoz nemá být terapie pro dokumenty.
+
+### Tři kroky převodu
+
+Převod do tichého provozu udělejte ve třech krátkých krocích.
+
+První krok: zkraťte aktivní stopu. V živém pracovním místě má zůstat jen věta pravidla, odkaz na kanonické místo, návratový signál a případná jedna hranice. Pokud člověk při použití potřebuje dlouhou historii, pravidlo ještě není připravené na tichý provoz.
+
+Druhý krok: zrušte zvláštní péči. Projděte kalendář, meetingové agendy, tabulky, komentáře, dočasné dokumenty a automatizace. Všude hledejte věty typu "ještě kontrolovat", "sledovat po zavedení", "dočasně ponechat" nebo "vrátit se příště". Pokud už nemají jasnou rozhodovací otázku, ukončete je.
+
+Třetí krok: nastavte návratový signál. Ten musí být spojený se změnou práce, ne se sledováním lidí. Dobrý signál je "přidáváme nový datový tok" nebo "mění se vlastník procesu". Slabý signál je "někdo možná pravidlo nepoužil". Pokud chcete sledovat chování lidí jen proto, abyste měli jistotu, vraťte se k otázce, jestli pravidlo není moc složité.
+
+### Privacy-first hranice tichého provozu
+
+Tichý provoz má přímý privacy-first přínos: když pravidlo funguje, není potřeba přidávat měření jeho používání. Ne každá interní změna potřebuje event, log, auditní tabulku nebo kontrolní formulář. Často stačí návratový signál v běžné práci.
+
+Před převodem si položte pět otázek:
+
+- Jaké dočasné poznámky obsahují osobní údaje, zákaznické citace nebo interní detaily?
+- Které kopie pravidla mohou zmást člověka nebo prodloužit retenci dat?
+- Zůstává někde export, screenshot, nahrávka nebo tabulka jen proto, že vznikly během ověřování?
+- Umíme návratový signál popsat bez sledování jednotlivců?
+- Je jasné, kdo smí pravidlo znovu otevřít a kde se to zapíše?
+
+Privacy-first zápis může být krátký:
+
+```text
+Po převodu do tichého provozu mažeme dočasné review podklady, archivujeme jen anonymizovanou uzavírací větu a v aktivním portfoliu ponecháváme pracovní pravidlo s návratovým signálem. Používání pravidla neměříme samostatně.
+```
+
+Pokud si nejste jistí, jestli podklad smazat, zeptejte se na účel. Ne "mohl by se někdy hodit", ale "k jakému konkrétnímu rozhodnutí ho ještě potřebujeme". Když rozhodnutí neexistuje, podklad nemá v aktivním provozu co dělat.
+
+### Karta převodu do tichého provozu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Pracovní věta pravidla:
+
+Návratový signál:
+
+Běžný rytmus, ve kterém se pravidlo může znovu objevit:
+
+Rušené zbytky zvláštní péče:
+
+Archivované nebo smazané podklady:
+
+Kdo může pravidlo znovu otevřít:
+
+Privacy-first výsledek:
+```
+
+Karta je přechodový nástroj. Po převodu nemá žít vedle pravidla jako další dokument. Výsledek propsat do portfolia, podpůrné poznámky uklidit a kartu uložit jen tam, kde dává smysl uchovat krátký uzavírací záznam.
+
+### Mini workshop na 6 minut
+
+1. Přečtěte pracovní větu pravidla a návratový signál.
+2. Ověřte, že pravidlo už dvakrát obstálo v běžném použití nebo review.
+3. Najděte všechny zbytky zvláštní péče.
+4. U každého zbytku řekněte, jaké rozhodnutí ještě podporuje.
+5. Co rozhodnutí nepodporuje, smažte nebo archivujte podle retence.
+6. Zapište jednu větu tichého provozu.
+7. Domluvte, kde se pravidlo znovu otevře při návratovém signálu.
+
+Stop otázka:
+
+```text
+Kdybychom tento kontrolní zbytek dnes zrušili, ztratili bychom schopnost udělat konkrétní rozhodnutí?
+```
+
+Pokud odpověď zní ne, zbytek pryč. Tým nepotřebuje pomník každé poctivé iteraci. Potřebuje pracovní systém, který nezarůstá.
+
+### Checklist převodu do tichého provozu
+
+- Má pravidlo jednu krátkou pracovní větu?
+- Je kanonické místo jasné?
+- Existuje konkrétní návratový signál?
+- Skončila zvláštní kontrola po druhém review?
+- Nezůstal samostatný meeting, report nebo připomínka bez rozhodovací otázky?
+- Jsou staré kopie pravidla zrušené nebo nahrazené směrovkou?
+- Jsou dočasné podklady smazané, anonymizované nebo archivované?
+- Nepřidává převod žádné nové sledování lidí?
+- Je běžný rytmus kontroly součástí portfolia, ne nového procesu?
+- Ví tým, kdy pravidlo nechat být?
+- Ví tým, kdo a kde ho může znovu otevřít?
+
+Tichý provoz je dobrý konec stabilizační práce. Pravidlo už nemusí dokazovat, že si zaslouží existovat. Stačí, že pomáhá ve správnou chvíli, nezabírá prostor mimo ni a nenechává za sebou zbytečnou datovou stopu.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o převodu minimální portfoliové stopy do tichého provozu: zrušení zbytků zvláštní péče, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhého běžného review minimální portfoliové stopy: uzavírací stavy, propsání pracovního minima, ukončení zvláštní kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhém běžném review minimální portfoliové stopy: test bez čerstvé paměti, přenositelnost, tichý provoz, návratový signál, privacy-first redukce stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření prvního běžného review minimální portfoliové stopy: uzavírací stavy, propsání do portfolia, ukončení další kontroly, privacy-first úklid, karta, mini workshop a checklist.
