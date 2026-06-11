@@ -206849,8 +206849,162 @@ Pokud odpověď není konkrétní, samostatná kontrola má skončit. Pokud odpo
 
 Dobře uzavřený druhý kvartál po archivaci má nenápadný výsledek: pravidlo zůstává, smyčka mizí. Tým neztrácí zkušenost, ale přestává krmit proces, který už splnil svůj účel. To je praktická produktivita v nejméně efektní podobě. Což je často ta nejlepší.
 
+## Převedení archivované smyčky do ročního rytmu
+
+Po dvou běžných kvartálech bez samostatné péče už archivovaná smyčka nemá dostávat vlastní provozní pozornost. To ale neznamená, že se má úplně ztratit z paměti. Správný další stav je roční rytmus: lehká kontrola, která se neptá "funguje tahle stará smyčka pořád?", ale "nezestárlo pravidlo, které z ní zůstalo?".
+
+Rozdíl je podstatný. Starou smyčku už nechcete znovu otevírat jako projekt. Chcete jen ověřit, jestli živé pravidlo stále sedí na dnešní práci, dnešních nástrojích a dnešních rozhodnutích. Pokud se nic zásadního nezměnilo, roční kontrola má trvat pár minut. Pokud se něco změnilo, nevzniká pokračování staré smyčky, ale nová karta s vlastním rozsahem.
+
+Krátká otázka pro převod zní:
+
+```text
+Které živé pravidlo z archivované smyčky má smysl jednou ročně zahlédnout v běžné inventuře?
+```
+
+Slovo `zahlédnout` je záměrné. Roční rytmus nemá být nový audit, další tabulka ani historická detektivka. Má to být malý kontrolní okamžik v už existující roční inventuře webu, SaaS provozu, marketingu, šablon nebo týmových standardů.
+
+Příklad:
+
+```text
+Archivovaná smyčka:
+Kontrola exportů kontaktů po kampani.
+
+Živé pravidlo:
+Každý export má účel, vlastníka, datum smazání a místo uložení.
+
+Roční rytmus:
+Při roční inventuře marketingových šablon zkontrolujeme, jestli pravidlo pořád sedí v briefu kampaně a jestli nevznikla nová cesta pro export mimo brief.
+
+Co neotevíráme:
+Neprocházíme staré kampaně, neměříme jednotlivé lidi, neobnovujeme kontrolní tabulku a neřešíme původní incident jako samostatné téma.
+```
+
+Tím se zkušenost neztratí, ale nezůstane ani viset jako zvláštní proces. Přesune se do místa, kde má přirozený důvod existovat.
+
+### Tři podmínky pro roční rytmus
+
+Archivovanou smyčku převádějte do ročního rytmu jen tehdy, když splní tři podmínky:
+
+- existuje jasné živé pravidlo;
+- pravidlo má kanonické pracovní místo;
+- roční kontrola už někde přirozeně probíhá.
+
+Pokud chybí živé pravidlo, není co kontrolovat. Vraťte se k uzavíracímu zápisu a napište pravidlo jednou pracovní větou. Pokud chybí kanonické místo, roční rytmus jen zakryje problém dohledatelnosti. Nejdřív pravidlo vložte tam, kde ho člověk používá: do briefu, checklistu, šablony, provozní karty nebo onboardingového kroku. Pokud chybí roční kontrola, nevytvářejte ji kvůli jedné staré smyčce. Zapište návratový signál a nechte téma spát.
+
+Roční rytmus má smysl hlavně u pravidel, která mohou zestárnout tiše:
+
+- formuláře, které po čase začnou sbírat víc údajů, než je potřeba;
+- marketingové šablony, do kterých se vrací staré exporty;
+- onboardingové postupy, které používají neaktuální příklady;
+- provozní checklisty, které odkazují na zrušené nástroje;
+- produktová pravidla, která kdysi chránila uživatele, ale už nejsou vidět v běžné práci.
+
+U pravidla, které je každý týden v provozu a má jasného vlastníka, často roční rytmus není potřeba. Tam stačí běžný pracovní tlak: když pravidlo přestane fungovat, ozve se v provozu samo. Roční kontrola je užitečná pro věci, které jsou důležité, ale málokdy hlučné.
+
+### Jak převod zapsat
+
+Převod do ročního rytmu má být kratší než původní smyčka. Pokud při zápisu vzniká nová metodika, něco se utrhlo z řetězu. Použijte malou kartu:
+
+```text
+Archivovaná smyčka:
+
+Živé pravidlo:
+
+Kanonické pracovní místo:
+
+Roční inventura, ve které se pravidlo zahlédne:
+
+Jedna kontrolní otázka:
+
+Návratový signál mimo roční rytmus:
+
+Co výslovně neotevíráme:
+
+Co výslovně neměříme:
+
+Vlastník:
+```
+
+Dobrá kontrolní otázka nemá vyžadovat nové sběry dat. Má jít odpovědět z běžné pracovní reality:
+
+```text
+Je pravidlo pořád na místě, kde ho člověk potřebuje při práci?
+```
+
+nebo:
+
+```text
+Nevznikla nová cesta, která pravidlo obchází?
+```
+
+nebo:
+
+```text
+Nezůstala v šabloně stará datová stopa, kterou už nepotřebujeme?
+```
+
+Taková otázka chrání hodnotu pravidla bez toho, aby z roční kontroly udělala malý compliance cirkus. A těch už má svět dost i bez naší pomoci.
+
+### Privacy-first roční rytmus
+
+Privacy-first převod má jednoduché pravidlo: roční kontrola nesmí znovu vytvořit data, která archivace uklidila. Nepotřebujete seznam lidí, kteří pravidlo použili. Nepotřebujete detailní historii starých exportů. Nepotřebujete měřit otevření dokumentu ani sledovat, kdo se na šablonu díval.
+
+Stačí ověřit tři věci:
+
+- pravidlo stále omezuje zbytečné sbírání dat;
+- pracovní místo neobsahuje staré kopie, exporty nebo osobní údaje bez účelu;
+- návratový signál nevede k plošnému monitoringu lidí.
+
+Pokud roční inventura odhalí novou datovou stopu, opravte nejbližší pracovní místo. Neotevírejte starou smyčku jen proto, že se objevilo podobné téma. Starý příběh může pomoct pojmenovat riziko, ale nová stopa potřebuje vlastní rozhodnutí.
+
+Codyho komentář: nejlepší privacy-first proces je často ten, který po sobě nenechá moc důkazů o tom, jak moc se kdysi snažil být důkladný. Když je pravidlo jasné a data uklizená, není potřeba stavět muzeum bývalého problému.
+
+### Kdy roční rytmus vynechat
+
+Roční rytmus není povinná odměna za každou dobře uzavřenou smyčku. Vynechte ho, když:
+
+- pravidlo už splývá s běžným standardem a nemá vlastní riziko stárnutí;
+- roční kontrola by musela vzniknout jen kvůli této jedné položce;
+- návratový signál je jasnější než kalendář;
+- pravidlo se týká situace, která už v produktu, webu nebo marketingu neexistuje;
+- převod by zachoval víc historie, než kolik přinese užitku.
+
+Vynechání ročního rytmu není zanedbání. Je to rozhodnutí, že téma má zůstat zavřené, dokud nepřijde konkrétní návratový signál. V pracovním systému je to zdravé: ne každá uzavřená věc si zaslouží výroční návštěvu.
+
+### Mini workshop na 5 minut
+
+1. Vlastník přečte finální uzavírací zápis po druhém kvartálu.
+2. Tým pojmenuje živé pravidlo jednou větou.
+3. Zkontroluje, jestli pravidlo má kanonické pracovní místo.
+4. Rozhodne, jestli existuje přirozená roční inventura.
+5. Zapíše jednu kontrolní otázku nebo výslovně rozhodne, že roční rytmus nebude.
+
+Stop otázka:
+
+```text
+Pomůže roční zahlédnutí pravidla k lepší práci, nebo jen udržuje při životě starou starost?
+```
+
+Pokud odpověď míří ke staré starosti, roční rytmus vynechte. Pokud míří k reálnému pracovnímu riziku, zařaďte pravidlo do existující inventury a zavřete smyčku.
+
+### Checklist převodu do ročního rytmu
+
+- Má archivovaná smyčka jasné živé pravidlo?
+- Je pravidlo na konkrétním pracovním místě?
+- Existuje přirozená roční inventura, do které položka zapadne?
+- Nezakládáme novou kontrolu jen kvůli jedné staré smyčce?
+- Je kontrolní otázka krátká a odpověditelná z běžné práce?
+- Má návratový signál přednost před kalendářem, pokud se objeví dřív?
+- Neotevíráme staré exporty, seznamy lidí ani pomocné tabulky?
+- Nezavádíme měření používání pravidla podle jednotlivců?
+- Je jasné, kdy roční rytmus vynechat?
+- Umí vlastník říct, co zůstává v roční inventuře a co zůstává zavřené?
+
+Převod do ročního rytmu je dobrý konec dlouhé smyčky. Ne proto, že všechno uloží do dalšího procesu, ale proto, že zkušenost nechá na jednom rozumném místě. Pravidlo může stárnout pod dohledem, aniž by tým dál nosil batoh původní historie.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o převedení archivované smyčky do ročního rytmu: podmínky převodu, karta ročního zahlédnutí, privacy-first hranice, situace pro vynechání roční kontroly, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhého běžného kvartálu po archivaci návratové smyčky: finální stavy, ukončení mimořádné péče, úklid pomocných stop, privacy-first uzavírací zápis, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhém běžném kvartálu po archivaci návratové smyčky: ověření pravidla bez čerstvé paměti původní smyčky, čtyři výsledné stavy, ukončení samostatné pozornosti, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření prvního běžného kvartálu po archivaci návratové smyčky: čtyři uzavírací stavy, propsání do kanonického místa, neotevírání staré historie, privacy-first uzavření, karta, mini workshop a checklist.
