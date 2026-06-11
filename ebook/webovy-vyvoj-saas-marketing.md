@@ -209089,8 +209089,172 @@ Když odpověď sklouzne ke zvláštnímu dohledu, musí být jasné riziko. Bez
 
 Druhá portfoliová kontrola je hotová, když pravidlo prokáže přenositelnost. Ne tím, že ho původní vlastník obhájí, ale tím, že ho někdo použije bez doprovodného výkladu. V tu chvíli už standard opravdu patří do portfolia: je najitelný, srozumitelný, datově čistý a dost obyčejný na to, aby dělal svoji práci bez potlesku.
 
+## Uzavření druhé portfoliové kontroly po uklidnění pravidla
+
+Druhá portfoliová kontrola má smysl jen tehdy, když po ní pravidlo opravdu zůstane v portfoliu a nepřilepí se k němu další zvláštní péče. Pokud kontrola ukázala přenositelnost, není potřeba budovat nový hlídací režim. Pokud ukázala mezeru, opravte ji v nejbližším pracovním místě. Pokud ukázala širší problém, dejte mu vlastní kartu a nenechte ho tvářit se jako pokračování staré smyčky.
+
+Uzavření proto začíná otázkou:
+
+```text
+Co se po druhé portfoliové kontrole mění v běžném portfoliu a co už dál nesledujeme zvlášť?
+```
+
+Tahle otázka chrání před nenápadným rozšiřováním. Druhá kontrola může snadno vyvolat pocit, že by se mělo ještě jednou ověřit, ještě jednou připomenout, ještě jednou projít historii. Pokud pro to nemáte konkrétní nové riziko, je lepší pravidlo vrátit do normálního rytmu. Dobrý standard nemá potřebovat doprovodný výklad pokaždé, když projde kontrolou.
+
+Příklad:
+
+```text
+Kontrolované pravidlo:
+Každý export kontaktů z kampaně má účel, vlastníka, místo uložení a datum smazání.
+
+Druhá portfoliová kontrola:
+Nový člověk použil campaign brief bez původního vlastníka, našel pravidlo v indexu a nevytvořil pomocnou tabulku bez retence.
+
+Uzavírací stav:
+Stabilní v portfoliu.
+
+Co se mění:
+Do portfoliového indexu doplňujeme jen datum poslední kontroly a potvrzení, že pravidlo je přenositelné.
+
+Co už nesledujeme zvlášť:
+Nevedeme samostatný seznam kontrol exportů pro toto pravidlo.
+
+Privacy-first výsledek:
+Nevznikl nový export ani osobní seznam. Pomocná poznámka z kontroly se maže po zapsání tohoto závěru.
+```
+
+Takový zápis je krátký, ale důležitý. Říká, že kontrola proběhla, pravidlo obstálo a tým nemá kvůli tomu zakládat další vrstvu práce. Portfolio má nést aktuální stav, ne celý příběh o tom, jak se k němu došlo.
+
+### Čtyři uzavírací stavy
+
+Po druhé portfoliové kontrole vyberte jeden z těchto stavů:
+
+- Ponechat v běžném rytmu: pravidlo je přenositelné, index funguje a žádná zvláštní péče nepokračuje.
+- Doplnit lokální opravu: jedna věta, odkaz, šablona nebo příklad pořád potřebuje úpravu.
+- Převést na samostatnou portfoliovou kartu: problém přesahuje jedno pravidlo a má vlastní otázku.
+- Ukončit zvláštní sledování a archivovat smyčku: pravidlo už má stabilní místo a stará návratová historie dál nepomáhá.
+
+Stav `ponechat v běžném rytmu` je výchozí zdravý konec. Nepřidávejte k němu další kontrolu jen proto, že kontrola byla užitečná. Užitečnost kontroly se pozná i podle toho, že umí skončit.
+
+Stav `doplnit lokální opravu` má mít úzký rozsah. Opravte konkrétní místo, které vyžadovalo neformální paměť: špatný název odkazu, větu bez kontextu, chybějící příklad nebo starou formulaci v šabloně. Po opravě stačí první běžné použití, ne nová portfoliová série.
+
+Stav `převést na samostatnou portfoliovou kartu` použijte jen tehdy, když nález ukazuje vzor mimo kontrolované pravidlo. Například index více standardů vede přes archiv, vlastníci nejsou dohledatelní, nebo se u více pravidel opakují pomocné exporty bez retenčního data. V takovém případě staré pravidlo nezatěžujte novým problémem. Nová otázka potřebuje vlastní rozsah, vlastníka a privacy-first hranici.
+
+Stav `ukončit zvláštní sledování a archivovat smyčku` je vhodný, když druhá kontrola potvrdí, že dřívější návratová smyčka už nepřidává hodnotu. Archivujte krátký závěr, ne celou historii. Živé pravidlo zůstává v portfoliu; stará smyčka odchází z aktivní práce.
+
+### Co propsat do portfolia
+
+Do portfolia po druhé kontrole patří jen několik polí:
+
+```text
+Stav:
+Poslední kontrola:
+Kanonické místo:
+Vlastník:
+Návratový signál:
+Privacy-first poznámka:
+Další běžné review:
+```
+
+Nepatří tam:
+
+- detailní historie původního incidentu;
+- jména lidí, kteří kontrolou prošli;
+- pracovní exporty, screenshoty nebo chatové úryvky;
+- dočasné poznámky z ověření;
+- dlouhé zdůvodnění, proč se pravidlo kdysi ztišovalo.
+
+Portfolio má být navigace pro budoucí práci. Když se z něj stane kronika, lidé ho přestanou používat jako pracovní nástroj. A když ho přestanou používat, začne tým znovu spoléhat na paměť lidí. Přesně tomu měla druhá kontrola zabránit.
+
+### Privacy-first uzavření
+
+Uzavření druhé kontroly má uklidit i poslední pomocné stopy. Ne proto, že by byly dramaticky nebezpečné, ale protože bez úklidu se z malých kontrolních podkladů stává trvalá vrstva dat.
+
+Projďte čtyři hromádky:
+
+- Pomocné poznámky: ponechat jen anonymizovaný závěr nebo je smazat.
+- Příklady: převést na syntetickou podobu, pokud mají zůstat v šabloně.
+- Exporty a kopie: smazat, pokud už nepodporují aktivní rozhodnutí.
+- Přístupy: zrušit, pokud byly potřeba jen kvůli kontrole.
+
+Zápis může být velmi krátký:
+
+```text
+Privacy-first uzavření:
+Zůstává jen portfoliový stav pravidla a anonymizovaný závěr druhé kontroly. Dočasné poznámky a pracovní kopie se mažou. Nevzniká nové měření používání pravidla ani osobní kontrolní seznam.
+```
+
+Codyho komentář: po druhé kontrole už není hrdinství mít víc důkazů. Hrdinství je poznat, že důkaz stačí, uklidit po sobě a nenechat z dobrého pravidla vyrůst malou byrokratickou bonsaj.
+
+### Karta uzavření druhé portfoliové kontroly
+
+```text
+Kontrolované pravidlo:
+
+Výsledek druhé kontroly:
+- stabilní v portfoliu / lokální mezera / slabá přenositelnost / nový portfoliový problém
+
+Uzavírací stav:
+- ponechat v běžném rytmu / doplnit lokální opravu / převést na novou kartu / archivovat smyčku
+
+Co se propsuje do portfolia:
+
+Co už nesledujeme zvlášť:
+
+Lokální oprava, pokud je potřeba:
+
+Nová portfoliová karta, pokud je potřeba:
+
+Co archivujeme:
+
+Co mažeme, zkracujeme nebo anonymizujeme:
+
+Návratový signál:
+
+Vlastník:
+
+Další běžné review:
+```
+
+### Mini workshop na 7 minut
+
+1. Přečtěte výsledek druhé portfoliové kontroly.
+2. Vyberte jeden uzavírací stav.
+3. Napište jednovětý závěr pro portfoliový index.
+4. Rozhodněte, jestli existuje lokální oprava, nebo nová portfoliová karta.
+5. Zapište, co se už dál nesleduje zvlášť.
+6. Ukliďte pomocné poznámky, příklady, exporty a přístupy.
+7. Potvrďte návratový signál a další běžné review.
+8. Zavřete kontrolu bez další mimořádné agendy.
+
+Stop otázka:
+
+```text
+Zavřeli jsme druhou kontrolu do běžného portfolia, nebo jsme kolem pravidla potichu vytvořili nový provozní rituál?
+```
+
+Pokud vznikl nový rituál, musí mít jasný důvod, vlastní otázku a vlastní konec. Bez toho je to jen opatrnost, která se převlékla za proces.
+
+### Checklist uzavření druhé portfoliové kontroly
+
+- Má druhá kontrola jeden uzavírací stav?
+- Je jasné, co se propsuje do portfoliového indexu?
+- Neopisujeme do portfolia historii původní smyčky?
+- Pokud pravidlo funguje, vrací se do běžného rytmu bez zvláštní péče?
+- Pokud vznikla lokální oprava, týká se jednoho pracovního místa?
+- Pokud vznikl širší problém, má novou kartu a vlastní otázku?
+- Je napsané, co už dál nesledujeme zvlášť?
+- Zůstává návratový signál konkrétní a úzký?
+- Jsou pomocné poznámky, exporty, kopie a screenshoty smazané nebo anonymizované?
+- Nevzniká nové měření chování lidí kvůli pravidlu?
+- Má každá ponechaná stopa účel a retenční datum?
+- Ví tým, kdy bude další běžné review a kdo ho drží?
+
+Uzavření druhé portfoliové kontroly je konec mimořádné pozornosti. Pravidlo buď žije v portfoliu, nebo má malou opravu, nebo se z nálezu stává nová samostatná otázka. V žádném případě nemá zůstat v mlhavém stavu "ještě to raději sledujme". Právě tím se pozná dospělý provoz: umí kontrolovat, ale umí i přestat.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o uzavření druhé portfoliové kontroly po uklidnění pravidla: uzavírací stavy, propsání do portfolia, konec zvláštní péče, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhé portfoliové kontrole po uklidnění pravidla: test přenositelnosti bez čerstvé paměti, výsledné stavy, privacy-first kontrola nových stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření první portfoliové kontroly po převodu ztišeného pravidla: čtyři uzavírací stavy, propsání do portfolia, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o první portfoliové kontrole po převodu ztišeného pravidla: najitelnost v živém pracovním místě, index bez druhého zdroje pravdy, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
