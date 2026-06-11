@@ -206131,8 +206131,202 @@ Pokud odpověď míří k pocitu jistoty, zkraťte archiv. Jistota má být v pr
 
 Archivace návratové smyčky je poslední test provozní dospělosti. Nejde o to, jestli umíte napsat další dokument. Jde o to, jestli umíte nechat v provozu jen to, co pomáhá práci, a zbytek pustit. Dobré pravidlo má být lehké. Dobrý archiv taky.
 
+## První běžný kvartál po archivaci návratové smyčky
+
+Archivace návratové smyčky ukončí mimořádnou pozornost. Neznamená ale, že pravidlo má navždy zmizet z dohledu. Znamená, že se na něj díváte už jen v běžném rytmu, spolu s ostatními pravidly, šablonami a provozními návyky. První běžný kvartál po archivaci je proto kontrola dospělosti: má ukázat, jestli se uzavřená smyčka opravdu stala normální součástí práce.
+
+Rozdíl je v tónu. Neptáte se: "Držíme to pořád?" To by znovu spustilo mimořádný dohled. Ptáte se:
+
+```text
+Použilo se pravidlo v běžném kvartálu tak, aby nevznikla nová nejistota, nová datová stopa ani skrytá ruční kontrola?
+```
+
+Pokud odpověď zní ano, nejlepší další krok je žádný další krok. Pravidlo zůstává v kanonickém místě, archiv zůstává krátký a tým pokračuje. Pokud odpověď zní ne, neotvírejte rovnou celou historii. Nejprve určete, jestli selhalo pravidlo, jeho umístění, nebo jen očekávání, že stará smyčka má ještě někoho uklidňovat.
+
+### Co kvartál po archivaci ověřuje
+
+První běžný kvartál po archivaci má ověřit čtyři věci:
+
+1. Pravidlo je najitelné bez znalosti původní smyčky.
+2. Pravidlo se používá bez mimořádného vysvětlování.
+3. Návratový signál je konkrétní, ale nespouští falešné poplachy.
+4. Archiv nepřitahuje staré podklady zpět do provozu.
+
+To je celé. Není to audit všech podobných pravidel, revize celé dokumentace ani příležitost "ještě trochu vylepšit" šablonu, která už funguje. Pokud při kontrole najdete nové téma, založte mu vlastní kartu mimo původní smyčku. Archivovaná smyčka nemá sloužit jako magnet na každou další provozní nejistotu.
+
+Praktický příklad z marketingu:
+
+```text
+Archivovaná smyčka:
+Kampaňové exporty kontaktů.
+
+Živé pravidlo:
+Export vzniká jen s účelem, vlastníkem, minimálním rozsahem polí a datem smazání.
+
+Kvartální otázka:
+Proběhly kampaně bez toho, aby někdo vytvářel exporty "pro jistotu" nebo obnovoval staré kontrolní tabulky?
+
+Výsledek:
+Ano. Jedna kampaň použila pravidlo přímo v briefu, druhá export vůbec nepotřebovala. Archiv se neotevíral.
+```
+
+Tento výsledek nepotřebuje velkou oslavu ani novou úpravu. Stačí krátká poznámka do běžného kvartálního review: pravidlo funguje, bez změny.
+
+### Čtyři výsledky prvního kvartálu
+
+Po prvním kvartálu vyberte jeden ze čtyř stavů:
+
+- Pravidlo funguje tiše.
+- Pravidlo funguje, ale potřebuje lepší umístění.
+- Pravidlo vyvolalo falešný návratový signál.
+- Pravidlo se znovu stalo mimořádnou kontrolou.
+
+`Pravidlo funguje tiše` znamená, že ho tým použil nebo nepotřeboval použít, ale nevznikla nová nejistota. Neotevřely se staré podklady, nikdo nezavedl novou evidenci a návratový signál nezazvonil jen proto, že někdo byl nervózní. Akce: zapsat "bez změny" a pokračovat.
+
+`Pravidlo funguje, ale potřebuje lepší umístění` znamená, že obsah je správný, jen ho člověk hledal jinde. Akce: přesunout nebo odkázat pravidlo do správného pracovního místa. Nepřepisujte obsah, pokud problém byl navigační.
+
+`Pravidlo vyvolalo falešný návratový signál` znamená, že signál je moc široký. Tým zbytečně otevřel smyčku kvůli situaci, kterou běžné pravidlo umělo pokrýt. Akce: zpřesnit návratový signál, ne rozšiřovat pravidlo.
+
+`Pravidlo se znovu stalo mimořádnou kontrolou` znamená, že někdo začal preventivně hlídat dodržování, sbírat nové důkazy nebo držet pomocnou tabulku. Akce: zastavit kontrolu, zapsat důvod návratu dohledu a rozhodnout, jestli šlo o skutečné riziko, nebo jen o nedůvěru v uzavřené pravidlo.
+
+### Jak nedělat z kvartálu nový audit
+
+Kvartální kontrola má být krátká, protože její smysl je ověřit návrat do normálu. Jakmile z ní vznikne dlouhý audit, smyčka se nenápadně znovu otevře.
+
+Držte se tří omezení:
+
+- Kontrolujte jen pracovní místo, kde pravidlo žije.
+- Neporovnávejte pravidlo s celou historickou dokumentací.
+- Nehledejte hypotetické problémy, které se v kvartálu nestaly.
+
+Dobrá otázka:
+
+```text
+Použili jsme v tomto kvartálu pravidlo bez mimořádné podpory?
+```
+
+Špatná otázka:
+
+```text
+Neměli bychom znovu projít všechny staré smyčky, jestli se z nich nedá něco vytěžit?
+```
+
+Druhá otázka zní pracovitě, ale často jen vyrábí nové tření. Jestli chcete dělat portfoliovou revizi standardů, udělejte ji jako samostatnou aktivitu. Nemíchejte ji do prvního kvartálu po jedné archivované smyčce.
+
+Codyho komentář: když se vám po úklidu chce znovu vyndat všechny krabice ze skříně, možná nekontrolujete pořádek. Možná jen nevěříte tomu, že jste uklidili dost dobře. Provozní dospělost je i schopnost nechat hotovou věc být.
+
+### Privacy-first kontrola po kvartálu
+
+Privacy-first otázka po archivaci je jednoduchá:
+
+```text
+Zmenšila archivace datovou stopu i po jednom běžném kvartálu, nebo se stopa potichu vrátila?
+```
+
+Typické tiché návraty datové stopy:
+
+- někdo si nechal pracovní kopii "jen pro sebe";
+- vznikla nová tabulka kontrol podle lidí;
+- v komentářích zůstaly osobní nebo zákaznické detaily;
+- starý export se použil jako zkratka pro novou práci;
+- tým začal měřit používání pravidla místo výsledku práce;
+- archiv se rozšířil o další kontext, který nemá budoucí rozhodovací účel.
+
+Privacy-first kvartální kontrola nemá přidávat nové sledování. Má potvrdit, že se staré sledování nevrátilo. Pokud najdete novou datovou stopu, napište k ní tři věty:
+
+```text
+Kde vznikla:
+K jakému rozhodnutí má sloužit:
+Kdy ji smažeme nebo anonymizujeme:
+```
+
+Pokud druhou větu neumíte vyplnit, stopa pravděpodobně nemá v provozu co dělat.
+
+### Karta prvního kvartálu po archivaci
+
+```text
+Název archivované smyčky:
+
+Živé pravidlo:
+
+Živé pracovní místo:
+
+Návratový signál:
+
+Kvartální otázka:
+
+Použilo se pravidlo v běžné práci?
+- ano / ne / nebyla situace
+
+Potřeboval někdo starou historii?
+- ne / ano, proč:
+
+Vznikla skrytá mimořádná kontrola?
+- ne / ano, kde:
+
+Vznikla nová datová stopa?
+- ne / ano, jaká:
+
+Výsledek kvartálu:
+- pravidlo funguje tiše
+- pravidlo potřebuje lepší umístění
+- návratový signál je moc široký
+- vrátila se mimořádná kontrola
+
+Jedna další akce:
+
+Co výslovně neotevíráme:
+
+Vlastník:
+
+Datum:
+```
+
+Klíčové pole je `Co výslovně neotevíráme`. Bez něj se i krátké kvartální review může rozlézt do staré historie. Napište například:
+
+```text
+Neotevíráme původní pracovní komentáře, nepřepisujeme celé kampanové workflow a nezavádíme novou evidenci exportů podle lidí.
+```
+
+Taková věta není byrokracie. Je to brzda proti tomu, aby se archivovaná smyčka vrátila v převleku za zodpovědnost.
+
+### Mini workshop na 6 minut
+
+1. Vlastník přečte živé pravidlo a návratový signál.
+2. Tým řekne, jestli v kvartálu nastala situace, kde se pravidlo použilo.
+3. Pokud ano, popíše použití jednou větou bez návratu do historie.
+4. Pokud ne, ověří jen to, že nevznikla skrytá kontrola nebo nová datová stopa.
+5. Vybere jeden ze čtyř výsledků kvartálu.
+6. Zapíše jednu další akci nebo výslovné "bez změny".
+
+Hlídací otázka:
+
+```text
+Kontrolujeme běžný provoz, nebo znovu otevíráme starou smyčku, protože se nám po ní stýská?
+```
+
+Pokud odpověď sklouzává ke staré smyčce, zastavte workshop. Přečtěte archivační větu a vraťte se k živému pravidlu. Historie už odpracovala svoje.
+
+### Checklist prvního kvartálu po archivaci
+
+- Proběhl první běžný kvartál od archivace smyčky?
+- Kontrolovali jsme jen živé pracovní místo, ne celou historii?
+- Je pravidlo najitelné bez původních podkladů?
+- Použil tým pravidlo bez mimořádného vysvětlování?
+- Pokud situace nenastala, nezavedli jsme preventivní dohled?
+- Je návratový signál pořád konkrétní a nevyvolává falešné poplachy?
+- Nevrátila se pracovní kopie, starý export, pomocná tabulka nebo osobní evidence?
+- Má každá nově nalezená datová stopa jasný účel a retenční hranici?
+- Vybrali jsme jeden ze čtyř výsledků kvartálu?
+- Pokud stačí "bez změny", opravdu jsme nic dalšího nepřidali?
+- Pokud je potřeba oprava, je to jedna navigační nebo signální úprava, ne nová smyčka?
+- Je jasně napsané, co výslovně neotevíráme?
+
+První běžný kvartál po archivaci je dobrý tehdy, když je trochu nudný. Pravidlo buď tiše funguje, nebo dostane jednu malou opravu. Nic víc. Nejlepší provozní dokumentace není ta, která o sobě každý kvartál hlasitě ví. Je to ta, která pomůže ve správnou chvíli a zbytek času nepřidává práci, dohled ani data navíc.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o prvním běžném kvartálu po archivaci návratové smyčky: ověření tichého fungování pravidla, čtyři výsledky kvartálu, prevence nového auditu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o archivaci návratové smyčky po druhém běžném použití: tři vrstvy archivu, živé pravidlo, krátká týmová paměť, prevence archivace strachu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z dlouhodobého klidu: uzavírací stavy, konec mimořádné péče, podmínky pro nepouštění do klidu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o druhém běžném použití po návratu z dlouhodobého klidu: přenositelnost pravidla, výsledné stavy, prevence třetí kontroly ze zvyku, privacy-first zápis, karta, mini workshop a checklist.
