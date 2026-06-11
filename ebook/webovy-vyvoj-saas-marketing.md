@@ -207004,8 +207004,183 @@ Pokud odpověď míří ke staré starosti, roční rytmus vynechte. Pokud míř
 
 Převod do ročního rytmu je dobrý konec dlouhé smyčky. Ne proto, že všechno uloží do dalšího procesu, ale proto, že zkušenost nechá na jednom rozumném místě. Pravidlo může stárnout pod dohledem, aniž by tým dál nosil batoh původní historie.
 
+## První roční kontrola po převodu archivované smyčky
+
+První roční kontrola je zkouška, jestli se převod do ročního rytmu povedl. Neověřuje starou smyčku. Nevrací tým k původnímu problému. Neprochází historii krok za krokem. Ptá se jen na to, jestli živé pravidlo pořád pomáhá v práci, ve které má být vidět.
+
+Pokud se při první roční kontrole začne znovu číst dlouhý archiv, hledat staré tabulky nebo obnovovat kontrolní režim, převod nebyl dokončený. Roční kontrola má být krátká návštěva kanonického místa: otevřít šablonu, brief, checklist, provozní kartu nebo onboardingový krok a ověřit, jestli pravidlo stále sedí na dnešní realitu.
+
+Začněte jednou větou:
+
+```text
+Ročně kontrolujeme toto živé pravidlo, ne původní smyčku:
+```
+
+Příklad:
+
+```text
+Ročně kontrolujeme toto živé pravidlo, ne původní smyčku:
+Každý marketingový export má účel, vlastníka, datum smazání a uložené místo.
+
+Kanonické místo:
+Brief kampaně a checklist před odesláním.
+
+Kontrolní otázka:
+Nevznikla za poslední rok nová cesta, kde se export dělá mimo brief?
+```
+
+To stačí. Pokud tým potřebuje k odpovědi víc než běžnou pracovní znalost, nemá roční kontrolu rozšiřovat. Má rozhodnout, jestli vznikl nový problém s vlastním rozsahem.
+
+### Co kontrolovat v prvním roce
+
+První roční kontrola má čtyři malé kontroly:
+
+- pravidlo je pořád formulované jednou pracovní větou;
+- pravidlo je na místě, kde ho člověk při práci opravdu potká;
+- za poslední rok nevznikla nová cesta, která pravidlo obchází;
+- kontrola nevytváří novou datovou stopu jen proto, aby dokázala, že proběhla.
+
+Nejde o audit kvality celého systému. U webu to může znamenat otevřít jednu šablonu pro landing page a ověřit, že formulář neobsahuje staré kvalifikační pole. U SaaS produktu to může znamenat zkontrolovat, že onboardingový checklist stále odkazuje na aktuální role a nevyžaduje zbytečné osobní údaje. U marketingu to může znamenat projít brief kampaně a zjistit, jestli v něm pořád existuje jasné pravidlo pro práci s exporty.
+
+Dobrá roční kontrola má výstup typu:
+
+```text
+Pravidlo sedí, kanonické místo je správné, nic dalšího neotevíráme.
+```
+
+nebo:
+
+```text
+Pravidlo sedí, ale kanonické místo se změnilo. Přesouváme jednu větu do nové šablony.
+```
+
+nebo:
+
+```text
+Vznikla nová cesta mimo pravidlo. Zakládáme novou kartu problému, starou smyčku neotevíráme.
+```
+
+To poslední je důležité. Nový problém může připomínat starý příběh, ale nemá zdědit jeho historii, strach ani staré pomocné evidence. Má dostat vlastní otázku, vlastní rozsah a vlastní privacy-first hranici.
+
+### Čtyři výsledky první roční kontroly
+
+Po kontrole vyberte jeden ze čtyř výsledků:
+
+- Ponechat beze změny: pravidlo je srozumitelné, na správném místě a bez nové datové stopy.
+- Přesunout pravidlo: věta je dobrá, ale pracovní místo se změnilo.
+- Zkrátit pravidlo: původní věta je moc opatrná, opakuje starý strach nebo obsahuje zbytečný krok.
+- Otevřít novou kartu: vznikla nová situace, která už není údržbou pravidla.
+
+Výsledek `ponechat beze změny` je plnohodnotná práce. Není potřeba k němu přidávat opravu, aby kontrola vypadala užitečně. Někdy je nejlepší výsledek to, že systém nevyrobil žádnou práci navíc. Ano, dramaticky se to nečte. Přesně proto to často funguje.
+
+U přesunu pravidla udělejte jen jeden pohyb. Nepřepisujte všechny šablony v okolí, pokud roční kontrola ukázala jen to, že kanonické místo se změnilo. U zkrácení pravidla škrtejte hlavně části, které chrání před dávno uzavřeným scénářem, ale už nepomáhají současné práci. U nové karty napište první otázku tak, aby nezněla jako "zopakovat starou smyčku".
+
+Špatně:
+
+```text
+Znovu prověřit exporty stejně jako minule.
+```
+
+Lépe:
+
+```text
+Zjistit, proč nový partnerský formulář obchází kampaňový brief a jaký minimální údaj opravdu potřebuje.
+```
+
+Druhá věta je konkrétnější, blíž práci a drží privacy-first hranici.
+
+### Privacy-first kontrola po roce
+
+Po roce je největší riziko nenápadné: tým chce dokázat, že pravidlo fungovalo, a kvůli tomu začne sbírat důkazy, které by jinak nepotřeboval. To je přesně opačný směr než privacy-first provoz.
+
+Roční kontrola nemá sbírat:
+
+- seznam lidí, kteří pravidlo použili;
+- detailní historii všech formulářů, kampaní nebo exportů;
+- screenshoty s osobními údaji;
+- nové analytické eventy pro měření poslušnosti týmu;
+- dlouhé kopie starých incidentních poznámek.
+
+Stačí pracovní důkaz z kanonického místa. Pokud kontrolujete brief, otevřete brief. Pokud kontrolujete checklist, otevřete checklist. Pokud kontrolujete onboardingový krok, projděte jeho aktuální verzi. Důkazem není množství stop, ale schopnost říct, co se má dál stát.
+
+Privacy-first otázky:
+
+```text
+Potřebujeme kvůli této kontrole sbírat nové údaje?
+Zůstala v kanonickém místě stará osobní data nebo exporty?
+Nevede návratový signál k monitoringu konkrétních lidí?
+Můžeme výsledek zapsat bez identifikovatelných příkladů?
+```
+
+Když odpověď na první otázku zní ano, zmenšete kontrolu. Když odpověď na druhou zní ano, nejbližší práce není analýza, ale úklid. Když třetí otázka odhalí monitoring lidí, pravidlo přepište směrem k práci a systému, ne k jednotlivcům.
+
+### Karta první roční kontroly
+
+```text
+Živé pravidlo:
+
+Kanonické pracovní místo:
+
+Roční kontrolní otázka:
+
+Co jsme skutečně otevřeli:
+
+Výsledek:
+- ponechat beze změny / přesunout / zkrátit / otevřít novou kartu
+
+Jedna provedená změna:
+
+Co výslovně neotevíráme ze staré smyčky:
+
+Privacy-first kontrola:
+- nové údaje: ano/ne
+- staré stopy k úklidu: ano/ne
+- monitoring lidí: ano/ne
+
+Návratový signál před další roční kontrolou:
+
+Vlastník:
+```
+
+Karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně už nepopisuje roční kontrolu, ale novou pracovní smyčku. V takovém případě ji rozdělte: roční kontrolu zavřete jednou větou a nový problém otevřete samostatně.
+
+### Mini workshop na 6 minut
+
+1. Vlastník přečte živé pravidlo a kanonické místo.
+2. Tým otevře jen aktuální pracovní místo, ne archiv.
+3. Odpoví na jednu roční kontrolní otázku.
+4. Vybere jeden ze čtyř výsledků.
+5. Zapíše privacy-first kontrolu a návratový signál.
+6. Pokud vznikl nový problém, založí novou kartu mimo starou smyčku.
+
+Stop otázka:
+
+```text
+Pomohla nám roční kontrola upravit dnešní práci, nebo nás jen vtáhla do staré historie?
+```
+
+Pokud odpověď míří do staré historie, kontrolu zkraťte a zavřete. Roční rytmus má být připomínka živého pravidla, ne výroční rekonstrukce dávno vyřešeného problému.
+
+### Checklist první roční kontroly
+
+- Kontrolovali jsme živé pravidlo, ne původní smyčku?
+- Otevřeli jsme kanonické pracovní místo místo dlouhého archivu?
+- Odpověděli jsme na jednu kontrolní otázku?
+- Vybrali jsme jeden ze čtyř výsledků?
+- Pokud se pravidlo přesunulo, změnili jsme jen nejbližší pracovní místo?
+- Pokud se pravidlo zkrátilo, odstranili jsme starý strach místo užitečné hranice?
+- Pokud vznikl nový problém, dostal vlastní kartu?
+- Nesbírali jsme nové údaje jen kvůli důkazu kontroly?
+- Uklidili jsme případné staré osobní údaje, exporty nebo screenshoty?
+- Nezavedli jsme měření podle jednotlivců?
+- Je jasný návratový signál před další roční kontrolou?
+- Umí vlastník říct jednou větou, co se změnilo a co zůstává zavřené?
+
+První roční kontrola je úspěšná, když zůstane lehká. Má chránit pravidlo před tichým stárnutím, ne obnovovat proces, který už měl skončit. Když se po ní tým vrátí k práci s jednou jasnější větou a bez nových zbytečných stop, systém drží pohromadě.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o první roční kontrole po převodu archivované smyčky: kontrola živého pravidla místo staré smyčky, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převedení archivované smyčky do ročního rytmu: podmínky převodu, karta ročního zahlédnutí, privacy-first hranice, situace pro vynechání roční kontroly, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhého běžného kvartálu po archivaci návratové smyčky: finální stavy, ukončení mimořádné péče, úklid pomocných stop, privacy-first uzavírací zápis, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhém běžném kvartálu po archivaci návratové smyčky: ověření pravidla bez čerstvé paměti původní smyčky, čtyři výsledné stavy, ukončení samostatné pozornosti, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
