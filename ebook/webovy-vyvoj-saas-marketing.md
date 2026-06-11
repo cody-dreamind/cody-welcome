@@ -209824,8 +209824,182 @@ Pokud odpověď míří ke strachu, nepřidávejte další kontrolu. Napište n�
 
 Druhé běžné review je chvíle, kdy se minimální stopa přestane kontrolovat jako rekonvalescent a začne se používat jako normální pracovní opora. Když obstojí, nechte ji v klidu. Když neobstojí, neopravujte všechno. Buď dočistěte poslední hranu, nebo přiznejte, že se otevřela nová otázka.
 
+## Uzavření druhého běžného review minimální portfoliové stopy
+
+Uzavření druhého review má udělat jednu věc: rozhodnout, jestli minimální portfoliová stopa už patří do běžného provozu, nebo jestli poslední průchod ukázal konkrétní práci. Bez uzavření zůstane review viset jako neviditelná kontrola. Tým sice řekne "hotovo", ale příště se někdo stejně vrátí k poznámkám, otevře starý kontext a začne pravidlo znovu obhajovat.
+
+Začněte uzavírací větou:
+
+```text
+Po druhém běžném review pravidlo:
+- ponecháváme v tichém provozu / dočišťujeme poslední hranu / přesouváme v portfoliu / oddělujeme novou otázku
+protože:
+další zvláštní kontrola:
+- končí / pokračuje jen na jedné konkrétní opravě / přechází do nové karty
+```
+
+Tato věta musí být srozumitelná i člověku, který nebyl u předchozích smyček. Pokud potřebuje pět odstavců historie, minimální stopa ještě není minimální. Možná máte dobré pravidlo, ale pořád špatně uzavřený příběh okolo něj.
+
+Příklad:
+
+```text
+Po druhém běžném review pravidlo ponecháváme v tichém provozu,
+protože ho produktový tým použil při změně onboardingového formuláře bez otevření archivovaných poznámek.
+
+Další zvláštní kontrola končí.
+
+V portfoliu zůstává:
+- pracovní věta pravidla,
+- kanonický odkaz na formulářovou datovou mapu,
+- návratový signál při změně datového toku.
+
+Odstraňujeme:
+- dočasnou review poznámku,
+- duplicitní kopii pravidla v marketingovém checklistu,
+- osobní příklad z pilotní fáze.
+```
+
+Dobré uzavření není slavnostní razítko. Je to úklidový pohyb. Pravidlo buď vrátíte do běžného rytmu, nebo ho přeměníte na jasně pojmenovanou další práci.
+
+### Čtyři uzavírací stavy
+
+Po druhém review vyberte jeden stav a napište ho do portfolia nebo changelogu pravidla:
+
+- Tichý provoz potvrzen: pravidlo funguje bez mimořádné péče a další speciální review končí.
+- Poslední hrana dočištěna: jedna drobná oprava je hotová a po ní pravidlo přechází do tichého provozu.
+- Kanonické místo změněno: pravidlo bylo přesunuté tam, kde ho tým opravdu hledá.
+- Nová otázka oddělena: druhé review ukázalo jiný problém, který už nepatří do staré smyčky.
+
+Stav "tichý provoz potvrzen" má být výchozí cíl. Pokud pravidlo fungovalo dvakrát po sobě, nepotřebuje další ochrannou vrstvu jen proto, že na něj byl tým chvíli zvyklý svítit reflektorem.
+
+Stav "poslední hrana dočištěna" používejte úsporně. Typická poslední hrana je chybějící odkaz, nejasný název, špatné umístění jedné věty nebo zbytečně dlouhý příklad. Jakmile oprava mění slib pravidla, datový tok, odpovědnost nebo workflow, nejde o hranu. Je to nová otázka.
+
+Stav "kanonické místo změněno" musí zrušit starou nejasnost. Nestačí přidat další kopii pravidla na místo, kde ho lidé hledali. Lepší je přesunout kanonický text a ze starého místa vést krátkou směrovku. Jedno pravidlo může mít více vstupů, ale jen jeden zdroj pravdy.
+
+Stav "nová otázka oddělena" chrání staré pravidlo před nekonečným natahováním. Když review ukáže nový segment, nový nástroj, nový datový tok nebo novou odpovědnost, založte novou kartu. Staré pravidlo tím nemusí být špatné. Jen už nenese nový problém.
+
+### Co propsat po uzavření
+
+Po uzavření druhého review má v běžném pracovním místě zůstat jen to, co člověk skutečně potřebuje při dalším použití:
+
+- krátká pracovní věta pravidla;
+- odkaz na kanonické místo;
+- případná jedna výjimka nebo hranice;
+- návratový signál;
+- běžný rytmus kontroly, pokud existuje.
+
+Do běžného místa nepatří historie pilotu, seznam review otázek, osobní poznámky z používání, staré varianty formulace ani doklady, které měly význam jen při stabilizaci. Ty buď smažte, anonymizujte, nebo přesuňte do archivu se stručnou poznámkou, proč už nejsou aktivní.
+
+Praktický rozdíl:
+
+```text
+Špatně:
+Pravidlo vzniklo po několika review formulářů, viz poznámky z pilotu, staré komentáře a tabulka použití.
+
+Lépe:
+Při změně formuláře ověř účel sběru, povinná pole, zdroj pravdy a dobu uchování. Návratový signál: nový datový tok nebo nové povinné pole.
+```
+
+První varianta nutí člověka otevřít minulost. Druhá mu pomáhá udělat práci teď.
+
+### Kdy nezakládat novou kontrolu
+
+Novou kontrolu po druhém review nezakládejte, pokud jediný důvod zní "ať máme jistotu". Jistota má mít rozhodovací otázku. Bez ní vyrábíte rutinu, která bude žrát pozornost a možná i data.
+
+Novou kontrolu má smysl založit jen tehdy, když:
+
+- druhé review odhalilo konkrétní novou otázku;
+- pravidlo se přesunulo na jiné kanonické místo a je potřeba ověřit najitelnost;
+- poslední hrana mění jednu praktickou část použití;
+- změnil se datový tok, odpovědnost, nabídka nebo nástroj.
+
+I tehdy má být kontrola malá. Jedna otázka, jeden vlastník, jeden návratový signál. Pokud se z ní stává obecný audit portfolia, vraťte se o krok zpět a pojmenujte, co vlastně chcete rozhodnout.
+
+Codyho komentář: nejdražší věta v týmu často není "uděláme nový projekt", ale "budeme to ještě preventivně sledovat". Zní nenápadně, ale umí tiše založit proces, který nikdo nechce vlastnit a všichni ho budou obcházet. To je administrativní horor v bačkorách.
+
+### Privacy-first uzavření
+
+Uzavření druhého review je poslední vhodný okamžik odstranit podpůrnou datovou stopu. Zeptejte se:
+
+- Zůstala někde kopie zákaznického příkladu, která už není potřeba?
+- Obsahuje review poznámka osobní údaje, jména lidí nebo zbytečné citace?
+- Nevznikly dvě verze pravidla v různých dokumentech?
+- Je návratový signál popsaný přes změnu práce, ne přes sledování člověka?
+- Ví tým, kde je kanonické místo, aniž by musel prohledávat chat?
+
+Privacy-first uzavření pište krátce:
+
+```text
+Po uzavření druhého review mažeme dočasné poznámky, ponecháváme jen kanonickou pracovní větu, návratový signál a běžný portfoliový rytmus. Žádný nový tracking používání pravidla nezavádíme.
+```
+
+Pokud potřebujete ponechat příklad, zkraťte ho na pracovní situaci bez osobních detailů. Místo "Novák z firmy X poslal formulář s konkrétním obsahem" stačí "relevantní zákazník poslal formulář po změně onboardingového toku". Cílem je zachovat poučení, ne archivovat člověka.
+
+### Karta uzavření druhého review
+
+```text
+Pravidlo:
+
+Druhá review situace:
+
+Uzavírací stav:
+- tichý provoz potvrzen / poslední hrana dočištěna / kanonické místo změněno / nová otázka oddělena
+
+Uzavírací věta:
+
+Co zůstává v portfoliu:
+
+Co se přesouvá do archivu nebo maže:
+
+Návratový signál:
+
+Další běžný rytmus:
+
+Nová karta, pokud vzniká:
+
+Privacy-first úklid:
+```
+
+Karta nemá být další trvalý dokument, pokud pravidlo přechází do tichého provozu. Použijte ji jako uzavírací zápis, propsaný výsledek přeneste do portfolia a kartu potom archivujte nebo smažte podle interního rytmu.
+
+### Mini workshop na 5 minut
+
+1. Přečtěte výsledek druhého review bez předchozí historie.
+2. Vyberte jeden ze čtyř uzavíracích stavů.
+3. Napište jednu uzavírací větu.
+4. Zkraťte kanonické místo na pracovní minimum.
+5. Odstraňte nebo archivujte podpůrné poznámky z mimořádné péče.
+6. Zapište návratový signál.
+7. Pokud vznikla nová otázka, založte ji odděleně a staré pravidlo už nerozšiřujte.
+
+Stop otázka:
+
+```text
+Zůstává po uzavření něco, co člověk při dalším použití pravidla opravdu nepotřebuje?
+```
+
+Pokud ano, pryč s tím. Ne všechno, co pomohlo pravidlo stabilizovat, má právo bydlet v běžném provozu.
+
+### Checklist uzavření druhého review
+
+- Má druhé review jeden jasný uzavírací stav?
+- Je uzavírací věta čitelná bez znalosti celé historie?
+- Zůstává v portfoliu jen pracovní minimum?
+- Je kanonické místo jednoznačné?
+- Nezůstaly aktivní dvě verze pravidla?
+- Skončila zvláštní kontrola, pokud pravidlo obstálo?
+- Je případná poslední oprava opravdu jen poslední hrana?
+- Je nová otázka oddělená od starého pravidla?
+- Jsou dočasné poznámky smazané, anonymizované nebo archivované?
+- Nezavedli jsme nový tracking používání pravidla?
+- Je návratový signál konkrétní a datově střídmý?
+- Ví tým, kdy se k pravidlu vrátit a kdy ho nechat být?
+
+Uzavření druhého review je drobná disciplína proti bobtnání provozu. Když ho uděláte poctivě, pravidlo se přestane tvářit jako projekt a začne fungovat jako normální opora práce. To je ideální konec: méně historie, méně dohledu, méně datové stopy, víc použitelného klidu.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o uzavření druhého běžného review minimální portfoliové stopy: uzavírací stavy, propsání pracovního minima, ukončení zvláštní kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhém běžném review minimální portfoliové stopy: test bez čerstvé paměti, přenositelnost, tichý provoz, návratový signál, privacy-first redukce stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření prvního běžného review minimální portfoliové stopy: uzavírací stavy, propsání do portfolia, ukončení další kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o prvním běžném review minimální portfoliové stopy: najitelnost, srozumitelnost, použitelnost, datová střídmost, výsledné stavy, privacy-first kontrola, mini workshop a checklist.
