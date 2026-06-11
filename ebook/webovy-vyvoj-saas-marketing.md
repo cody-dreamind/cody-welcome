@@ -207178,8 +207178,165 @@ Pokud odpověď míří do staré historie, kontrolu zkraťte a zavřete. Ročn�
 
 První roční kontrola je úspěšná, když zůstane lehká. Má chránit pravidlo před tichým stárnutím, ne obnovovat proces, který už měl skončit. Když se po ní tým vrátí k práci s jednou jasnější větou a bez nových zbytečných stop, systém drží pohromadě.
 
+## Uzavření první roční kontroly po převodu archivované smyčky
+
+Roční kontrola má skončit stejně prakticky, jako začala: jedním rozhodnutím, jednou případnou úpravou a jasným zákazem tahat za sebou starou historii. Pokud se kontrola jen "proběhla", ale nikdo nezavře výsledek, vznikne šedá zóna. Tým sice nic dalšího neplánuje, ale v hlavě zůstane pocit, že je potřeba se k tomu ještě někdy vrátit. A přesně tam se rodí další zbytečný audit.
+
+Uzavření první roční kontroly proto napište jako provozní větu, ne jako zápis ze schůzky:
+
+```text
+První roční kontrola skončila takto:
+```
+
+Příklad:
+
+```text
+První roční kontrola skončila takto:
+Pravidlo pro kampaňové exporty zůstává beze změny, přesouváme jeho větu z původního briefu do nové šablony kampaně a starou smyčku znovu neotevíráme.
+```
+
+Tahle věta má tři části: výsledek, změnu a hranici. Výsledek říká, co kontrola zjistila. Změna říká, co se opravdu stane v pracovním místě. Hranice říká, co se neotevírá. Bez hranice se i rozumná změna snadno rozšíří na "když už jsme u toho".
+
+### Čtyři uzavírací stavy
+
+Po první roční kontrole vyberte jeden uzavírací stav:
+
+- Zavřít beze změny: pravidlo sedí, místo sedí a další práce by byla jen kosmetika.
+- Zavřít s jednou úpravou: pravidlo sedí, ale potřebuje drobný přesun, zkrácení nebo přepsání do aktuální šablony.
+- Zavřít starou kontrolu a otevřít novou kartu: objevila se nová situace, která si zaslouží vlastní rozsah.
+- Neuzavírat: kontrola odhalila živé riziko, které brání normálnímu provozu pravidla.
+
+Stav `neuzavírat` používejte opatrně. Není to stav pro pocit, že by se ještě něco mohlo vylepšit. Je to stav pro konkrétní překážku: pravidlo je na špatném místě, lidé ho nemohou použít, vznikla nová datová cesta bez vlastníka nebo se v kanonickém místě drží staré osobní údaje.
+
+U stavu `zavřít s jednou úpravou` platí tvrdé pravidlo: jedna úprava znamená jedna úprava. Přesunout větu do nové šablony ano. Přepsat celou metodiku kampaní, přidat další kontrolní sloupec a udělat k tomu meeting s pěti lidmi ne. To už není uzavření roční kontroly, ale nový projekt v převleku.
+
+Codyho komentář: roční kontrola, která končí pěti novými úkoly, není kontrola. Je to malý ohňostroj nejistoty. Hezky svítí, ale ráno po něm někdo zametá.
+
+### Co propsat do kanonického místa
+
+Do kanonického místa se po uzavření propisuje jen to, co má člověk potkat při běžné práci. Neopisujte tam příběh kontroly, datumy debat ani důvody všech minulých rozhodnutí.
+
+Typické kanonické změny:
+
+- jedna věta pravidla v aktuální šabloně;
+- odstranění staré opatrnostní formulace;
+- přesun pravidla z archivu do živého checklistu;
+- smazání odkazu na starý dokument, který už nemá být používán;
+- doplnění jedné návratové otázky pro příští roční kontrolu.
+
+Příklad po kontrole SaaS onboardingu:
+
+```text
+Kanonická změna:
+V onboarding checklistu zůstává jen věta: "Pro aktivaci stačí pracovní e-mail, role a první cíl; další údaje se doplňují až při reálné potřebě."
+
+Co se nepropsalo:
+Historie původního sporu o kvalifikační pole, staré exporty testovacích účtů ani seznam lidí, kteří se kontroly účastnili.
+```
+
+Tím se zachová užitečné pravidlo a nepřenese se k němu zbytečná zátěž. Nový člověk má vidět, co má dělat, ne proč tým před rokem málem založil další tabulku. I tabulky mají své city, ale nemusíme je krmit.
+
+### Úklid po uzavření
+
+Uzavření první roční kontroly má mít malý úklid. Ne proto, aby se všechno dokonale archivovalo, ale aby po kontrole nezůstaly pomocné stopy, které budou za rok vypadat jako povinný proces.
+
+Uklidit typicky znamená:
+
+- zavřít dočasnou poznámku ke kontrole;
+- smazat pracovní export, pokud vznikl a už nemá účel;
+- odstranit duplicitní odkaz na starou šablonu;
+- zrušit připomínku, která měla platit jen pro první roční kontrolu;
+- nechat v živém místě jen další běžný návratový signál.
+
+Neuklízejte tím způsobem, že vytvoříte nový archiv úklidu. Pokud potřebujete tři dokumenty na popsání toho, že jste smazali jeden dočasný dokument, proces právě vyhrál nad zdravým rozumem. A zdravý rozum se v provozu špatně nahrazuje.
+
+### Privacy-first uzavření
+
+Privacy-first uzavření se ptá hlavně na to, co po kontrole zůstane ležet. Roční kontrola může být krátká, ale i krátká kontrola umí vyrobit datový nepořádek: screenshoty formulářů, seznamy poptávek, exporty kampaní, kopie support tiketů nebo poznámky s konkrétními jmény.
+
+Před zavřením odpovězte:
+
+```text
+Vznikla při kontrole nová datová stopa?
+Má pořád účel?
+Kdo ji vlastní?
+Kdy zmizí?
+Lze výsledek ponechat bez identifikovatelných příkladů?
+```
+
+Když datová stopa nemá další účel, smažte ji hned. Když účel má, zapište vlastníka a datum návratu. Když potřebujete příklad, anonymizujte ho na úroveň rozhodnutí. Místo konkrétního zákazníka napište "nový partnerský formulář sbíral o dvě pole víc, než bylo potřeba". Pro uzavření pravidla to většinou stačí.
+
+Privacy-first není slavnostní nálepka na konec kapitoly. Je to okamžik, kdy se tým rozhodne, že dobré rozhodnutí nepotřebuje zbytečnou stopu po každém člověku, který kolem něj prošel.
+
+### Karta uzavření první roční kontroly
+
+```text
+Kontrolované živé pravidlo:
+
+Kanonické pracovní místo:
+
+Výsledek první roční kontroly:
+- zavřít beze změny / zavřít s jednou úpravou / otevřít novou kartu / neuzavírat
+
+Uzavírací věta:
+
+Jedna provedená změna:
+
+Co se neotevírá ze staré smyčky:
+
+Co se propisuje do kanonického místa:
+
+Co se uklízí:
+
+Privacy-first úklid:
+- nové stopy:
+- vlastník:
+- datum smazání nebo důvod ponechání:
+
+Návratový signál:
+
+Vlastník:
+```
+
+Karta nemá být povinný formulář pro každou drobnost. Použijte ji, když roční kontrola mění živé pravidlo, přesouvá pracovní místo nebo otevírá novou kartu. Pokud výsledek zní "beze změny", často stačí jedna uzavírací věta v changelogu kanonického místa.
+
+### Mini workshop na 5 minut
+
+1. Vlastník přečte výsledek roční kontroly.
+2. Tým vybere jeden uzavírací stav.
+3. Sepíše jednu uzavírací větu.
+4. Provede nejvýše jednu kanonickou úpravu.
+5. Uklidí dočasné podklady a zkontroluje datovou stopu.
+6. Zapíše návratový signál nebo potvrdí, že další návrat bude až v běžném ročním rytmu.
+
+Stop otázka:
+
+```text
+Zavřeli jsme roční kontrolu tak, aby další člověk potkal jen aktuální pravidlo, ne naši starou nervozitu?
+```
+
+Pokud odpověď není jasné ano, najděte, kde nervozita zůstala: ve zbytečném odkazu, v příliš dlouhé větě, v pomocné tabulce, v připomínce navíc nebo v nevysloveném strachu, že bez další kontroly se všechno rozpadne. Pak opravte jen toto jedno místo.
+
+### Checklist uzavření první roční kontroly
+
+- Vybrali jsme jeden uzavírací stav?
+- Máme jednu uzavírací větu?
+- Je případná úprava opravdu jen jedna?
+- Propsali jsme změnu do kanonického pracovního místa?
+- Neopisujeme do živého pravidla starou historii?
+- Zavřeli jsme dočasné poznámky, exporty a odkazy?
+- Neotevřeli jsme starou smyčku jen kvůli novému podnětu?
+- Pokud vznikla nová situace, dostala vlastní kartu?
+- Máme jasný návratový signál?
+- Zkontrolovali jsme, jaká datová stopa po kontrole zůstává?
+- Smazali jsme údaje, které už nemají účel?
+- Umí vlastník jednou větou říct, co je po kontrole jinak?
+
+Dobré uzavření první roční kontroly je nenápadné. Čtenář dokumentu za měsíc nemá poznat dramatickou historii, jen lepší pracovní pravidlo na správném místě. To je přesně ten druh provozní elegance, který se špatně prodává na konferenci, ale výborně funguje v pondělí ráno.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o uzavření první roční kontroly po převodu archivované smyčky: uzavírací stavy, kanonické propsání, úklid podkladů, privacy-first datová stopa, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o první roční kontrole po převodu archivované smyčky: kontrola živého pravidla místo staré smyčky, čtyři výsledky, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převedení archivované smyčky do ročního rytmu: podmínky převodu, karta ročního zahlédnutí, privacy-first hranice, situace pro vynechání roční kontroly, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhého běžného kvartálu po archivaci návratové smyčky: finální stavy, ukončení mimořádné péče, úklid pomocných stop, privacy-first uzavírací zápis, mini workshop a checklist.
