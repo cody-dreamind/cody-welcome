@@ -208397,8 +208397,199 @@ Pokud si schováváte důvod ke sledování, pojmenujte ho. Buď je to skutečn�
 
 Uzavření druhé širší inventury je hotové, když pravidlo nepotřebuje doprovod. Je v práci, kde má být, staré stopy nepřekážejí a nový problém, pokud se objevil, má vlastní kartu. Tiché pravidlo není pravidlo bez odpovědnosti. Je to pravidlo, které už nepotřebuje speciální světlo, aby šlo použít.
 
+## Převod ztišeného pravidla do portfoliového rytmu
+
+Po druhé širší inventuře přichází nenápadný, ale důležitý krok: pravidlo už nemá žít jako samostatný příběh. Pokud obstálo v běžné práci, nepotřebuje vlastní smyčku, vlastní připomínku ani vlastní malý oltářík v dokumentaci. Potřebuje se připojit k portfoliovému rytmu, ve kterém tým spravuje ostatní standardy, šablony a provozní dohody.
+
+Hlavní otázka zní:
+
+```text
+Kam pravidlo patří, aby zůstalo dostupné, ale už netahalo vlastní historii?
+```
+
+Odpověď nemá být "do archivu". Archiv je místo pro historii, ne pro živé pracovní pravidlo. Ztišené pravidlo má mít živé kanonické místo a archivovanou stopu vzniku. Tyto dvě věci se nesmí míchat. Když je smícháte, člověk při běžné práci čte incident místo instrukce. A když je úplně oddělíte bez odkazu, pravidlo se časem ztratí.
+
+Příklad:
+
+```text
+Pravidlo:
+Export kontaktů z kampaně má účel, vlastníka, místo uložení a datum smazání.
+
+Po druhé širší inventuře:
+Pravidlo funguje v aktuálních šablonách a nepotřebuje samostatnou kontrolu.
+
+Portfoliový rytmus:
+Kvartální kontrola marketingových a sales šablon.
+
+Převod:
+Živá věta zůstává v briefu kampaně a v partnerské šabloně. Starou kartu pravidla archivujeme jako rozhodovací stopu s retenčním datem. V indexu standardů zůstává jen odkaz na aktuální šablonu, ne na původní smyčku.
+
+Co nepřenášíme:
+Nepřenášíme seznam starých exportů, screenshoty kontrol ani připomínku samostatné revize.
+```
+
+Tento převod je dobrý, protože pravidlu bere status výjimečnosti. Zůstává závazné, ale už nevyžaduje zvláštní scénu. Provozní pravidla mají být jako dobré zábradlí: člověk ho použije ve správnou chvíli, ale nemusí kolem něj stát komise s deníčkem.
+
+### Tři vrstvy převodu
+
+Převod do portfoliového rytmu má tři vrstvy.
+
+První vrstva je živé pracovní místo. To je šablona, checklist, brief, handoff nebo provozní dokument, kde člověk pravidlo opravdu potřebuje. Tady má být pravidlo napsané v přítomném čase a bez historického vysvětlování.
+
+```text
+Každý export má účel, vlastníka, místo uložení a datum smazání.
+```
+
+Druhá vrstva je portfoliový index. Ten nemá opakovat celý text pravidla. Má ukázat, kde pravidlo bydlí a v jakém rytmu se přirozeně kontroluje. Index je mapa, ne román. Když se z indexu stane druhý zdroj pravdy, časem začne odporovat prvnímu.
+
+```text
+Datové exporty v kampaních:
+Kanonické místo: marketingový brief a partnerská šablona.
+Kontrola: kvartální inventura marketingových a sales šablon.
+Návratový signál: export bez vlastníka nebo data smazání.
+```
+
+Třetí vrstva je historická stopa. Ta má vysvětlit, proč pravidlo vzniklo, ale nemá překážet běžné práci. Nechte v ní jen rozhodovací větu, datum, vlastníka a retenční stav. Všechno ostatní musí mít důvod, nebo pryč.
+
+### Co z portfolia vyhodit
+
+Při převodu je lákavé přenést všechno, co se během smyčky nasbíralo. To je nejrychlejší cesta k portfoliu, které nikdo nechce používat. Převod není stěhování krabic. Převod je výběr toho, co má ještě pracovní hodnotu.
+
+Typicky vyhoďte nebo archivujte mimo živý rytmus:
+
+- staré ověřovací checklisty, které sloužily jen pro přechodné období;
+- screenshoty, exporty a příklady s osobními nebo zákaznickými údaji;
+- kontrolní sloupce, které už nerozhodují o žádné další akci;
+- staré odkazy na původní kartu, pokud vedou lidi mimo kanonické místo;
+- komentáře typu "po incidentu vždy", pokud pravidlo už funguje jako normální standard.
+
+Ponechte jen to, co pomáhá při dnešní práci:
+
+- jednu jasnou instrukci v pracovním místě;
+- odkaz v portfoliovém indexu;
+- návratový signál;
+- vlastníka živého místa;
+- minimální historickou stopu s retenčním datem.
+
+Codyho komentář: jestli převod do portfolia vypadá jako balení půdy po dědovi, zastavte se. V provozu nepotřebujete každou krabici. Potřebujete vědět, kde je pojistková skříň, kdo má klíče a co se smí vyhodit.
+
+### Portfoliový rytmus bez nového meetingu
+
+Nezakládejte nový meeting jen proto, že pravidlo vstoupilo do portfolia. Pokud pravidlo opravdu ztišilo, má se vejít do existujícího rytmu: kvartální kontrola šablon, měsíční produktové review, roční audit standardů, pravidelný úklid dokumentace. Nový rytmus má vzniknout jen tehdy, když žádný existující rytmus neumí pravidlo přirozeně zachytit a riziko je dost konkrétní.
+
+Rozhodovací filtr:
+
+```text
+Existuje už rytmus, kde se kontroluje stejné pracovní místo?
+Kontroluje tento rytmus výstup, ne člověka?
+Stačí do něj přidat jednu otázku nebo odkaz?
+Víme, co by se stalo, kdybychom žádný nový rytmus nezaložili?
+```
+
+Pokud první tři odpovědi zní ano, nepřidávejte další proces. Přidejte pravidlo do existujícího rytmu a zavřete převod. Pokud odpovědi zní ne, napište nejdřív, proč existující rytmus nestačí. Bez této věty se nový meeting tváří jako zodpovědnost, ale často je to jen úzkost s kalendářovou pozvánkou.
+
+### Privacy-first převod
+
+Privacy-first převod do portfolia je hlavně o tom, aby se živé pravidlo oddělilo od dat, která už nemají účel. Čím déle smyčka běžela, tím větší je šance, že po ní zůstaly pomocné exporty, poznámky, screenshoty, dočasné tabulky nebo interní komentáře. V portfoliu nemají co dělat, pokud nejsou nezbytné pro dnešní rozhodnutí.
+
+Praktický postup:
+
+```text
+Živé pravidlo:
+- ponechat v pracovním místě
+
+Historie:
+- zkrátit na rozhodovací větu
+
+Příklady:
+- anonymizovat nebo smazat
+
+Dočasné důkazy:
+- smazat po skončení účelu
+
+Ponechané stopy:
+- zapsat účel, vlastníka a datum další kontroly
+
+Nové měření:
+- nepřidávat, pokud nevede ke konkrétnímu rozhodnutí
+```
+
+U SaaS, marketingu a webového provozu je tohle obzvlášť důležité. Pravidlo často vznikne kvůli datům zákazníků, leadům, exportům, analytice nebo supportu. Když po opravě necháte běžet všechny pomocné stopy, vyřešili jste proces, ale zhoršili datovou hygienu. To je jako vytřít kuchyň a nechat kýbl uprostřed místnosti.
+
+### Karta převodu do portfolia
+
+```text
+Ztišené pravidlo:
+
+Stav po druhé širší inventuře:
+
+Živé pracovní místo:
+
+Portfoliový rytmus:
+- existující rytmus:
+- proč stačí:
+
+Kanonický index:
+- odkazuje na:
+- neopakuje:
+
+Historická stopa:
+- ponechaná rozhodovací věta:
+- retenční datum:
+
+Co rušíme nebo mažeme:
+
+Co anonymizujeme:
+
+Co výslovně nepřenášíme do portfolia:
+
+Návratový signál:
+
+Vlastník živého místa:
+
+Datum další běžné portfoliové kontroly:
+```
+
+Karta má potvrdit převod, ne založit nový objekt údržby. Po vyplnění by mělo být jasné, kde pravidlo žije, kdy se přirozeně zahlédne a co už se nemá znovu tahat do práce.
+
+### Mini workshop na 6 minut
+
+1. Napište jednou větou, co po druhé širší inventuře zůstává živé.
+2. Najděte pracovní místo, kde pravidlo opravdu patří.
+3. Vyberte existující portfoliový rytmus.
+4. Zkraťte historickou stopu na rozhodovací větu.
+5. Smažte nebo anonymizujte dočasné důkazy bez účelu.
+6. Zapište návratový signál.
+7. Zavřete původní smyčku bez nové připomínky.
+
+Stop otázka:
+
+```text
+Převádíme pravidlo do běžného portfolia, nebo mu jen měníme název samostatné péče?
+```
+
+Pokud pravidlo po převodu pořád potřebuje vlastní schůzku, vlastní tabulku a vlastní kontrolní sloupec, nejspíš ještě není ztišené. Vraťte se k důvodu. Možná chybí kanonické místo. Možná je návratový signál slabý. A možná tým jen drží starou kontrolu, protože ji jednou draze zaplatil.
+
+### Checklist převodu do portfolia
+
+- Má pravidlo po druhé širší inventuře jasný stav?
+- Je živé pravidlo v pracovním místě, kde ho člověk opravdu potřebuje?
+- Je portfoliový index jen mapa, ne druhý zdroj pravdy?
+- Připojili jsme pravidlo k existujícímu rytmu místo zakládání nového?
+- Je historická stopa zkrácená na rozhodovací minimum?
+- Smazali jsme dočasné exporty, screenshoty a pomocné poznámky bez účelu?
+- Anonymizovali jsme příklady, které by jinak nesly zákaznická nebo osobní data?
+- Má každá ponechaná stopa účel, vlastníka a retenční datum?
+- Nezavedli jsme měření lidí, klikání ani čtenosti dokumentace?
+- Je návratový signál situační a navázaný na pracovní výstup?
+- Ví vlastník, kdy pravidlo zůstává v portfoliu a kdy se otevírá nová karta?
+- Je původní smyčka opravdu zavřená?
+
+Převod do portfoliového rytmu je úspěšný, když se o pravidle přestane mluvit jako o zvláštní věci. Je dostupné, používá se a kontroluje se společně s ostatními standardy. Zůstává odpovědnost, mizí drama. Přesně tak má vypadat zralý privacy-first provoz: méně stínů, méně dat navíc, méně procesního divadla a víc práce, která jde skutečně dokončit.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o převodu ztišeného pravidla do portfoliového rytmu: živé pracovní místo, portfoliový index, historická stopa, privacy-first redukce dat, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhé širší inventury po ztišení pravidla: čtyři uzavírací stavy, zrušení zbytků staré péče, privacy-first redukce stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhé širší inventuře po ztišení pravidla: ověření tichého režimu bez čerstvé paměti, čtyři signály inventury, nová karta mimo starou smyčku, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření první širší inventury po ztišení pravidla: čtyři uzavírací stavy, lokální oprava, prevence nového dohledu, privacy-first uzavření, karta, mini workshop a checklist.
