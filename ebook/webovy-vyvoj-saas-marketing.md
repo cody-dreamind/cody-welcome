@@ -206324,8 +206324,190 @@ Pokud odpověď sklouzává ke staré smyčce, zastavte workshop. Přečtěte ar
 
 První běžný kvartál po archivaci je dobrý tehdy, když je trochu nudný. Pravidlo buď tiše funguje, nebo dostane jednu malou opravu. Nic víc. Nejlepší provozní dokumentace není ta, která o sobě každý kvartál hlasitě ví. Je to ta, která pomůže ve správnou chvíli a zbytek času nepřidává práci, dohled ani data navíc.
 
+## Uzavření prvního běžného kvartálu po archivaci
+
+První běžný kvartál po archivaci návratové smyčky má jasný konec. Buď pravidlo zůstane v tichém provozu, dostane jednu lokální opravu, nebo se ukáže, že archivace byla předčasná. Co nesmí nastat: kvartál skončí krátkou debatou, všichni pokývou hlavou a v provozu zůstane poloviční dohled, pomocná tabulka nebo stará nejistota bez vlastníka.
+
+Uzavření kvartálu proto není další audit. Je to zavírací zápis, který řekne:
+
+```text
+Co jsme v kvartálu ověřili:
+Co se potvrdilo:
+Co se nevrací do práce:
+Jaký je nový stav pravidla:
+Kde pravidlo teď žije:
+Jaká data po uzavření nemažeme, mažeme nebo dál nesbíráme:
+```
+
+Pokud pravidlo fungovalo tiše, zápis může být opravdu krátký:
+
+```text
+Pravidlo pro kampaňové exporty fungovalo v kvartálu bez mimořádné podpory. Archiv se neotevíral, nové pomocné tabulky nevznikly. Stav: tichý provoz bez změny.
+```
+
+Takový závěr je lepší než dlouhý dokument. Hlavní práce už proběhla dřív: smyčka se uzavřela, archiv zkrátil a živé pravidlo se propsalo do pracovního místa. Kvartální uzavření má jen potvrdit, že se tato změna v běžném provozu nerozpadla.
+
+### Čtyři uzavírací stavy kvartálu
+
+Po prvním běžném kvartálu vyberte jeden ze čtyř stavů:
+
+- Uzavřít bez změny.
+- Uzavřít s lokální opravou umístění.
+- Uzavřít se zpřesněním návratového signálu.
+- Neuzavírat a otevřít novou malou smyčku.
+
+`Uzavřít bez změny` je správné, když pravidlo nikdo nemusel mimořádně vysvětlovat, archiv zůstal v klidu a nevznikla nová datová stopa. Akce: zapsat výsledek do kvartálního review a nechat pravidlo být.
+
+`Uzavřít s lokální opravou umístění` patří situaci, kdy pravidlo funguje, ale lidé ho hledají na špatném místě. Akce: přidat odkaz, přesunout krátké pravidlo do pracovního briefu nebo upravit název v kanonickém indexu. Neměňte obsah, pokud selhala jen navigace.
+
+`Uzavřít se zpřesněním návratového signálu` použijte, když signál vyvolal zbytečnou nejistotu. Akce: zúžit signál tak, aby spouštěl návrat jen při skutečném problému, ne při běžném tření.
+
+`Neuzavírat a otevřít novou malou smyčku` je výjimka. Použijte ji jen tehdy, když se v kvartálu ukázal reálný problém, který běžné pravidlo nepokrývá. Nová smyčka má mít vlastní otázku, vlastníka a rozsah. Nesmí tajně obnovit celou starou historii.
+
+### Co propsat po uzavření
+
+Po uzavření prvního kvartálu se do systému propisují jen tři věci:
+
+- stav pravidla;
+- případná jedna lokální oprava;
+- potvrzení, že archiv se nevrací do aktivní práce.
+
+Nepřepisujte staré záznamy jen proto, aby vypadaly hezčeji. Nepřidávejte retrospektivu, pokud nevzniklo nové rozhodnutí. Neposouvejte pravidlo do širšího standardu jen proto, že jeden kvartál fungovalo. Jeden nudný kvartál je dobrý signál stability, ne automatická licence ke škálování.
+
+Praktický příklad pro SaaS onboarding:
+
+```text
+Archivovaná smyčka:
+Kontrola prvního onboardingového e-mailu po opakovaných dotazech uživatelů.
+
+Živé pravidlo:
+Každý onboardingový e-mail má mít jeden primární další krok a jeden kontakt pro pomoc.
+
+Kvartální výsledek:
+Noví uživatelé prošli onboardingem bez opakovaného dotazu na další krok. Support nepoužil staré kontrolní poznámky.
+
+Uzavření:
+Bez změny. Pravidlo zůstává v šabloně e-mailu. Neotevíráme starou smyčku ani nepřidáváme měření otevření e-mailu podle jednotlivých uživatelů.
+```
+
+Tady je důležité poslední souvětí. Uzavření neříká jen co platí, ale i co se znovu neotevírá. Právě tím chrání rozsah a data.
+
+### Kdy kvartál neuzavírat
+
+Neuzavření není prohra. Je to poctivé přiznání, že běžný provoz ještě neunesl pravidlo bez pomoci. Použijte ho, když nastane jedna z těchto situací:
+
+- pravidlo lidé opakovaně nenašli ani s dobrým pracovním kontextem;
+- pravidlo vyžadovalo vysvětlování od původního autora;
+- návratový signál spustil falešný poplach víc než jednou;
+- někdo obnovil starou tabulku, export nebo ruční kontrolu;
+- v kvartálu vznikl nový typ rizika, který původní pravidlo neumí pokrýt.
+
+I pak ale neotvírejte celou minulost. Vytvořte novou malou smyčku:
+
+```text
+Nová otázka:
+Co v běžném provozu selhalo?
+
+Nejmenší oprava:
+Kde přesně pravidlo upravíme nebo přesuneme?
+
+Co neotevíráme:
+Které staré podklady, debaty a kontroly zůstávají v archivu?
+
+Privacy-first hranice:
+Jak ověříme opravu bez nového sledování lidí, klikání nebo zákaznických detailů?
+```
+
+Tím se problém řeší bez návratu do plného mimořádného režimu. Když se po archivaci objeví chyba, obvykle nepotřebujete velkou operaci. Potřebujete jednu přesnou opravu v místě, kde se pravidlo potkává s prací.
+
+### Privacy-first uzavření kvartálu
+
+Privacy-first uzavření má být konkrétní. Nestačí napsat "bez dopadu na data". Lepší je pojmenovat, co se po kvartálu nestane:
+
+```text
+Po uzavření kvartálu:
+- nemažeme živé pravidlo, protože má aktuální provozní účel;
+- mažeme dočasnou kontrolní poznámku z kvartálního review;
+- neobnovujeme staré exporty ani screenshoty;
+- nezavádíme měření používání pravidla podle jednotlivých lidí;
+- neukládáme zákaznické příklady, pokud nejsou anonymizované a nutné pro rozhodnutí.
+```
+
+Tento zápis má chránit tým před tichým rozšiřováním evidence. Po úspěšném kvartálu je lákavé chtít "trochu víc jistoty". Jenže víc jistoty často znamená víc stop: tabulku použití, seznam lidí, screenshoty, komentáře, výjimky. Pokud pravidlo funguje, nepotřebujete sledovat jeho existenci jen proto, abyste se cítili klidněji.
+
+Codyho komentář: dobrý kvartální závěr je jako vypnutá kontrolka v autě. Když nesvítí, nezačněte kvůli tomu montovat druhou kontrolku, která hlídá tu první. Ano, i provozní dokumentace má svoje absurdní tuningové srazy.
+
+### Karta uzavření prvního kvartálu
+
+```text
+Archivovaná smyčka:
+
+Živé pravidlo:
+
+Pracovní místo pravidla:
+
+Kvartální výsledek:
+- bez změny / lokální oprava umístění / zpřesnění signálu / nová malá smyčka
+
+Co se potvrdilo:
+
+Co se nepotvrdilo:
+
+Co se propsalo do kanonického místa:
+
+Co zůstává v archivu:
+
+Co po uzavření mažeme nebo anonymizujeme:
+
+Co dál výslovně nesbíráme:
+
+Vlastník:
+
+Datum další běžné kontroly:
+```
+
+Pole `Datum další běžné kontroly` neznamená nový speciální režim. Znamená jen návrat do rytmu, ve kterém se kontrolují i ostatní provozní pravidla. Pokud by datum vytvářelo zvláštní dohled jen pro tuto smyčku, raději ho nahraďte větou:
+
+```text
+Kontroluje se jen v běžném kvartálním review standardů.
+```
+
+### Mini workshop na 6 minut
+
+1. Vlastník přečte kvartální výsledek jednou větou.
+2. Tým vybere jeden ze čtyř uzavíracích stavů.
+3. Pokud je potřeba oprava, pojmenuje jen jedno pracovní místo.
+4. Zapíše, co zůstává v archivu a co se neotevírá.
+5. Udělá privacy-first kontrolu dočasných stop.
+6. Uzavře záznam větou "bez změny", nebo jednou konkrétní akcí.
+
+Stop otázka:
+
+```text
+Uzavíráme kvartál, nebo si vyrábíme nový důvod sledovat pravidlo, které už funguje?
+```
+
+Pokud odpověď není jasná, vraťte se k živému pravidlu. Kvartál má skončit stavem, ne další debatou.
+
+### Checklist uzavření prvního kvartálu po archivaci
+
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je zapsané, co se v kvartálu potvrdilo a co ne?
+- Pokud pravidlo funguje, opravdu jsme ho nechali bez nové kontroly?
+- Pokud je potřeba oprava, týká se jednoho pracovního místa?
+- Neotevřeli jsme celou historickou smyčku kvůli malé navigační chybě?
+- Je jasně napsané, co zůstává v archivu?
+- Smazali nebo označili jsme dočasné poznámky, kopie, exporty a screenshoty?
+- Nepřidali jsme měření používání pravidla podle lidí?
+- Má každá ponechaná datová stopa účel, vlastníka a retenční hranici?
+- Vrací se pravidlo do běžného rytmu, ne do zvláštního dohledu?
+- Umí tým jednou větou říct, jaký je stav pravidla po kvartálu?
+
+Uzavřený první kvartál má vytvořit klid. Pokud pravidlo funguje, nechte ho pracovat. Pokud potřebuje drobnou opravu, udělejte ji tam, kde se používá. Pokud se ukáže větší problém, otevřete novou malou smyčku s vlastním rozsahem. Ve všech třech případech platí stejné pravidlo: stará smyčka se nevrací do provozu jen proto, že umíme napsat ještě jeden dokument.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o uzavření prvního běžného kvartálu po archivaci návratové smyčky: čtyři uzavírací stavy, propsání do kanonického místa, neotevírání staré historie, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o prvním běžném kvartálu po archivaci návratové smyčky: ověření tichého fungování pravidla, čtyři výsledky kvartálu, prevence nového auditu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o archivaci návratové smyčky po druhém běžném použití: tři vrstvy archivu, živé pravidlo, krátká týmová paměť, prevence archivace strachu, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o uzavření druhého běžného použití po návratu z dlouhodobého klidu: uzavírací stavy, konec mimořádné péče, podmínky pro nepouštění do klidu, privacy-first úklid, karta, mini workshop a checklist.
