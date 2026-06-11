@@ -206505,8 +206505,208 @@ Pokud odpověď není jasná, vraťte se k živému pravidlu. Kvartál má skon�
 
 Uzavřený první kvartál má vytvořit klid. Pokud pravidlo funguje, nechte ho pracovat. Pokud potřebuje drobnou opravu, udělejte ji tam, kde se používá. Pokud se ukáže větší problém, otevřete novou malou smyčku s vlastním rozsahem. Ve všech třech případech platí stejné pravidlo: stará smyčka se nevrací do provozu jen proto, že umíme napsat ještě jeden dokument.
 
+## Druhý běžný kvartál po archivaci návratové smyčky
+
+První běžný kvartál po archivaci ověřil, že pravidlo se nezhroutilo hned po odložení mimořádné péče. Druhý kvartál má jinou roli. Má ukázat, jestli pravidlo drží i ve chvíli, kdy už si tým nepamatuje detaily původní smyčky a kdy už nikdo nemá čerstvý pocit, že "na tohle si musíme dát pozor".
+
+To je důležitý rozdíl. První kvartál ještě často jede na dozvuku změny. Lidé si pamatují debatu, archivaci, rozhodnutí i důvod úklidu. Druhý kvartál už testuje normální provoz:
+
+```text
+Funguje pravidlo bez čerstvé paměti, bez autora smyčky po ruce a bez nového důvodu sledovat ho zvlášť?
+```
+
+Pokud odpověď zní ano, pravidlo se má ještě víc ztišit. Ne zasloužit novou kontrolu, ne vyrůst do větší šablony, ne dostat nový dashboard. Prostě zůstat tam, kde pomáhá práci. Pokud odpověď zní ne, druhý kvartál má najít nejmenší opravu, která vrátí pravidlo do běžného rytmu.
+
+Praktický příklad:
+
+```text
+Archivovaná smyčka:
+Kampaňové exporty kontaktů.
+
+První kvartál:
+Pravidlo fungovalo bez změny.
+
+Druhý kvartál:
+Nový člověk připravil kampaňový brief a export vůbec nenavrhl, protože pravidlo našel přímo v šabloně.
+
+Výsledek:
+Pravidlo je stabilní. Neotevíráme smyčku, nepřidáváme měření používání a ponecháváme jen běžnou kvartální kontrolu standardů.
+```
+
+Takový výsledek je přesně ten druh nudy, kterou chcete. Dobře navržené pravidlo nemusí být vidět, aby fungovalo.
+
+### Co druhý kvartál opravdu ověřuje
+
+Druhý kvartál po archivaci ověřuje pět věcí:
+
+1. Pravidlo používá i člověk, který nezná původní příběh.
+2. Pracovní místo pravidla je pořád správné.
+3. Návratový signál nespouští preventivní nervozitu.
+4. Archiv zůstává krátký a nevrací se do každodenní práce.
+5. Datová stopa se znovu nerozrostla pomocnými kontrolami.
+
+Nekontrolujte víc. Druhý kvartál není druhá šance na celý audit, zpětné přepsání historie ani soutěž o dokonalejší dokumentaci. Pokud pravidlo funguje, nechte ho fungovat. Pokud někdo našel drobný problém, opravte konkrétní místo.
+
+Typické dobré otázky:
+
+- Našel pravidlo člověk bez pomoci původního autora?
+- Stačila mu formulace v pracovním místě?
+- Nevznikla nová tabulka, komentářová větev nebo ruční kontrola?
+- Nepotřebovali jsme starý archiv k běžnému rozhodnutí?
+- Víme, co by byl skutečný návratový signál?
+
+Typické špatné otázky:
+
+- Neměli bychom teď zkontrolovat všechny podobné smyčky?
+- Nedalo by se z toho udělat větší standard pro celý tým?
+- Nemáme raději měřit, kdo pravidlo používá?
+- Neměli bychom archiv rozšířit o příklady pro jistotu?
+
+Špatné otázky nemusí být hloupé. Jen patří do jiné práce. Druhý kvartál má chránit klid, ne hledat nový projekt.
+
+### Čtyři výsledky druhého kvartálu
+
+Po druhém kvartálu vyberte jeden ze čtyř stavů:
+
+- Stabilní tichý provoz.
+- Stabilní pravidlo s jednou navigační opravou.
+- Slabý návratový signál.
+- Nový problém mimo původní smyčku.
+
+`Stabilní tichý provoz` znamená, že pravidlo žije v běžné práci, nikdo nepotřebuje staré podklady a nevzniká nová evidence. Akce: zapsat "bez změny" do běžného review a nechat pravidlo být.
+
+`Stabilní pravidlo s jednou navigační opravou` znamená, že obsah pravidla je správný, ale jeho umístění není ideální. Akce: přidat odkaz, upravit název v indexu nebo přesunout pravidlo do šablony, kde se opravdu používá. Neměňte obsah, pokud problém byl jen v cestě k němu.
+
+`Slabý návratový signál` znamená, že tým neví, kdy má pravidlo znovu otevřít. Signál je buď příliš měkký, nebo příliš široký. Akce: přepsat návratový signál do konkrétní provozní situace. Například místo "lidé si nejsou jistí exportem" napište "nový brief žádá export kontaktů bez účelu, vlastníka nebo data smazání".
+
+`Nový problém mimo původní smyčku` znamená, že druhý kvartál odkryl něco reálného, ale není to selhání archivované smyčky. Akce: založit novou kartu s vlastním rozsahem. Nelepte ji na starou smyčku jen proto, že se objevila při jejím review.
+
+### Jak poznat, že pravidlo už nepotřebuje samostatnou pozornost
+
+Pravidlo může přestat dostávat samostatnou pozornost, když platí tři věci:
+
+- nový člověk ho najde v pracovním místě;
+- běžná práce podle něj proběhne bez vysvětlování;
+- návratový signál je jasný i bez staré historie.
+
+Když tyto tři věci platí, další zvláštní kontrola by měla mít opravdu silný důvod. Ne "pro jistotu". Ne "protože už to máme v kalendáři". Ne "ať víme, že to pořád drží". Pokud pravidlo patří do běžného kvartálního review standardů, kontrolujte ho tam. Pokud tam nepatří, nechte ho v klidu až do návratového signálu.
+
+Krátká uzavírací věta může znít takto:
+
+```text
+Pravidlo prošlo druhým běžným kvartálem bez mimořádné podpory. Zůstává jen v běžném provozním rytmu. Samostatné kontroly končí, návrat se otevírá jen při zapsaném návratovém signálu.
+```
+
+Codyho komentář: největší kompliment pro provozní pravidlo je, že o něm nikdo nemluví a práce se přesto nerozsype. Ano, je to trochu nevděčné. Dokumentace nemá potlesk, má být po ruce.
+
+### Privacy-first kontrola druhého kvartálu
+
+Druhý kvartál je dobré místo pro poslední kontrolu, jestli se datová stopa nevrátila zadními dveřmi. Nehledejte jen velké věci jako exporty nebo nové nástroje. Hledejte malé zbytky:
+
+- osobní poznámky ponechané u starého rozhodnutí;
+- screenshoty s údaji zákazníků v pracovních komentářích;
+- kopie tabulek vytvořené "jen na kontrolu";
+- seznamy lidí, kteří pravidlo použili nebo nepoužili;
+- nové měření používání dokumentace místo výsledku práce;
+- rozšířený archiv, který už nemá budoucí rozhodovací účel.
+
+Privacy-first závěr po druhém kvartálu má být konkrétní:
+
+```text
+Po druhém kvartálu zůstává jen živé pravidlo, návratový signál a krátká anonymizovaná paměť. Dočasné kontrolní poznámky mažeme. Nepřidáváme evidenci používání pravidla podle lidí ani nové měření dokumentace.
+```
+
+Pokud tým potřebuje ponechat nějaký detail, napište k němu účel a retenci. Pokud účel neumíte pojmenovat, detail nepatří do provozu. Tohle není puntičkářství. Je to způsob, jak zabránit tomu, aby se z dobré provozní paměti stala skládka údajů.
+
+### Karta druhého běžného kvartálu po archivaci
+
+```text
+Archivovaná smyčka:
+
+Živé pravidlo:
+
+Pracovní místo pravidla:
+
+Návratový signál:
+
+Co potvrdil první kvartál:
+
+Co ověřuje druhý kvartál:
+
+Použil pravidlo někdo bez znalosti původní smyčky?
+- ano / ne / nenastala situace
+
+Bylo pravidlo najitelné v běžném pracovním místě?
+- ano / ne, kde ho lidé hledali:
+
+Potřeboval někdo starý archiv?
+- ne / ano, proč:
+
+Vznikla nová datová stopa?
+- ne / ano, jaká:
+
+Výsledek druhého kvartálu:
+- stabilní tichý provoz
+- stabilní pravidlo s navigační opravou
+- slabý návratový signál
+- nový problém mimo původní smyčku
+
+Jedna další akce:
+
+Co výslovně nekontrolujeme dál:
+
+Co mažeme nebo anonymizujeme:
+
+Vlastník:
+
+Datum:
+```
+
+Pole `Co výslovně nekontrolujeme dál` je ochranné. Může vypadat třeba takto:
+
+```text
+Nekontrolujeme samostatně používání pravidla, nevracíme se ke starým komentářům a nezavádíme evidenci podle lidí. Pravidlo se kontroluje jen v běžném kvartálním review standardů nebo při návratovém signálu.
+```
+
+Tím se z druhého kvartálu nestane začátek třetího. Hotovo má zůstat hotovo.
+
+### Mini workshop na 6 minut
+
+1. Vlastník přečte výsledek prvního kvartálu jednou větou.
+2. Tým řekne, jestli ve druhém kvartálu nastala běžná situace pro použití pravidla.
+3. Pokud ano, ověří, jestli pravidlo fungovalo bez staré historie.
+4. Pokud ne, ověří jen to, že nevznikla skrytá kontrola nebo nová datová stopa.
+5. Vybere jeden ze čtyř výsledků druhého kvartálu.
+6. Zapíše, co se dál samostatně nekontroluje.
+
+Stop otázka:
+
+```text
+Potřebuje pravidlo další pozornost kvůli reálnému problému, nebo jen proto, že jsme si zvykli ho hlídat?
+```
+
+Pokud odpověď míří ke zvyku, zvláštní kontrolu ukončete. Zvyk kontrolovat může být stejně drahý jako problém, který měl původně řešit.
+
+### Checklist druhého běžného kvartálu po archivaci
+
+- Proběhl druhý běžný kvartál od archivace smyčky?
+- Navazujeme na stav z prvního kvartálu, ne na celou starou historii?
+- Použil pravidlo člověk bez znalosti původní smyčky?
+- Je pravidlo pořád na správném pracovním místě?
+- Pokud pravidlo nikdo nepotřeboval, nevznikla preventivní kontrola?
+- Je návratový signál dost konkrétní pro budoucí použití?
+- Zůstal archiv krátký a anonymizovaný?
+- Nepřibyly pracovní kopie, screenshoty, exporty nebo komentáře bez účelu?
+- Nevzniká měření používání pravidla podle jednotlivých lidí?
+- Vybrali jsme jeden ze čtyř výsledků druhého kvartálu?
+- Pokud je potřeba akce, je to jedna navigační oprava, zpřesnění signálu nebo nová samostatná karta?
+- Je jasně napsané, co už dál samostatně nekontrolujeme?
+
+Druhý běžný kvartál po archivaci má zavřít poslední zbytečnou pozornost. Pokud pravidlo drží, nechte ho splynout s běžnou prací. Pokud potřebuje drobnou opravu, udělejte ji přesně tam, kde se práce děje. A pokud se objevil nový problém, dejte mu vlastní kartu. Starou smyčku už netahejte zpět na stůl jen proto, že na něm kdysi ležela.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o druhém běžném kvartálu po archivaci návratové smyčky: ověření pravidla bez čerstvé paměti původní smyčky, čtyři výsledné stavy, ukončení samostatné pozornosti, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření prvního běžného kvartálu po archivaci návratové smyčky: čtyři uzavírací stavy, propsání do kanonického místa, neotevírání staré historie, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o prvním běžném kvartálu po archivaci návratové smyčky: ověření tichého fungování pravidla, čtyři výsledky kvartálu, prevence nového auditu, privacy-first kontrola datové stopy, karta, mini workshop a checklist.
 - 2026-06-10: Doplněna úvodní podkapitola o archivaci návratové smyčky po druhém běžném použití: tři vrstvy archivu, živé pravidlo, krátká týmová paměť, prevence archivace strachu, privacy-first kontrola, karta, mini workshop a checklist.
