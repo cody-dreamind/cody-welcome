@@ -208028,8 +208028,194 @@ Pokud odpověď míří ke strachu, vraťte se ke konkrétní práci. Strach se 
 
 Uzavření první širší inventury je dobré, když po něm tým nemá víc práce než před ním. Má mít lepší najitelnost, čistší kanonické místo a méně starých stop. Pokud po uzavření přibyly tři nové připomínky, dva nové sloupce a další pravidelný meeting, pravidlo se ve skutečnosti neztišilo. Jen dostalo nový kabát.
 
+## Druhá širší inventura po ztišení pravidla
+
+Druhá širší inventura je první chvíle, kdy se ukáže, jestli tichý režim opravdu funguje bez čerstvé paměti předchozí opravy. První inventura často ještě těží z toho, že tým ví, proč se pravidlo ztišovalo, kde se opravoval odkaz a co se nemělo znovu otevírat. Druhá inventura už má být obyčejnější. Pravidlo buď žije ve správném pracovním místě, nebo začne být vidět, že ztišení bylo závislé na lidech, kteří si příběh pamatovali.
+
+Hlavní otázka zní:
+
+```text
+Funguje ztišené pravidlo i tehdy, když ho nikdo zvlášť nepřipomíná?
+```
+
+Pokud ano, druhá širší inventura má být krátká. Nechte pravidlo v běžném režimu a nezakládejte novou péči jen proto, že kontrola proběhla úspěšně. Pokud ne, nevracejte se automaticky k původní smyčce. Nejdřív zjistěte, jestli problém leží v najitelnosti, jazyce, vlastnictví, nebo v tom, že se změnil kontext práce.
+
+Příklad:
+
+```text
+Ztišené pravidlo:
+Každý export kontaktů z kampaně má účel, vlastníka, místo uložení a datum smazání.
+
+Druhá širší inventura:
+Kvartální kontrola marketingových a partnerských šablon.
+
+Co se ukázalo:
+Pravidlo je v hlavním briefu i partnerské šabloně. Nový člověk ho použil bez vysvětlení, ale ve staré kampani zůstala kopie exportní tabulky bez data smazání.
+
+Rozhodnutí:
+Neobnovujeme samostatnou kontrolu exportů. Zavřeme starou kopii tabulky, dopíšeme do inventury jednu větu o úklidu historických kampaní a necháme pravidlo v tichém režimu.
+
+Co neotevíráme:
+Nepřidáváme sledování používání šablon, nový dashboard ani povinné screenshoty exportů.
+```
+
+Tady druhá inventura neukázala slabé pravidlo. Ukázala starý zbytek, který přežil mimo aktuální pracovní trasu. To je rozdíl. Slabé pravidlo potřebuje opravit kanonické místo nebo jazyk. Starý zbytek potřebuje smazat, archivovat nebo přiřadit retenci. Když tyto dvě věci smícháte, z obyčejného úklidu snadno vznikne nový proces.
+
+### Čtyři signály druhé inventury
+
+V druhé širší inventuře hledejte jen čtyři signály.
+
+První signál: pravidlo se používá bez příběhu. Člověk otevře běžnou šablonu, pochopí větu a udělá správnou práci. To je nejlepší výsledek. Do logu stačí krátké potvrzení a případný drobný úklid staré stopy.
+
+Druhý signál: pravidlo je najitelné, ale jazyk je pořád historický. Text připomíná starou kontrolu, incident, audit nebo interní rozhodnutí. Přepište ho do přítomného času. Ne "po předchozím problému vždy kontrolujeme exporty", ale "export má účel, vlastníka, místo uložení a datum smazání".
+
+Třetí signál: pravidlo je srozumitelné, ale bydlí na slabém místě. Lidé ho pochopí, když ho najdou, jenže ho při práci přirozeně neotevřou. Opravujte navigaci, ne obsah. Často stačí přesunout větu do šablony, kterou tým opravdu používá.
+
+Čtvrtý signál: problém už není pravidlo, ale okolní systém. Třeba exportní pravidlo funguje, ale ukáže se, že nikdo nevlastní partnerské kampaně. To není důvod vrátit exporty do samostatné kontroly. To je nová otázka vlastnictví a má dostat vlastní kartu.
+
+### Kdy ztišení potvrdit
+
+Ztišení potvrďte, když platí tři věci najednou:
+
+- pravidlo je v pracovním místě, kde ho člověk přirozeně hledá;
+- text funguje bez znalosti historie;
+- návratový signál je situační, ne dohledový.
+
+Situační signál popisuje událost v práci: vznikl export bez vlastníka, šablona nemá datum smazání, zákaznická data se objevila v pomocném dokumentu. Dohledový signál sleduje lidi: kdo šablonu otevřel, kdo na co klikl, kdo si co přečetl. Pro privacy-first provoz je rozdíl zásadní. Kontrolujte výstup a pracovní situaci, ne osobu.
+
+Dobrá potvrzovací věta:
+
+```text
+Pravidlo zůstává ztišené. Druhá širší inventura potvrdila, že je najitelné v běžné šabloně a nepotřebuje samostatnou kontrolu. Uklidili jsme jednu starou kopii exportu bez návratu k mimořádnému režimu.
+```
+
+Slabá potvrzovací věta:
+
+```text
+Zatím to vypadá dobře, ale raději to budeme sledovat.
+```
+
+Druhá věta nevysvětluje, co se bude sledovat, proč, jak dlouho a jaká data kvůli tomu vzniknou. To není opatrnost. To je nerozhodnost s provozní cenou.
+
+### Kdy otevřít novou kartu
+
+Novou kartu otevřete jen tehdy, když druhá inventura ukáže problém mimo původní pravidlo. Typicky:
+
+- chybí vlastník pracovního místa;
+- dvě šablony si odporují;
+- pravidlo funguje v marketingu, ale ne v sales handoffu;
+- datová stopa vzniká mimo kontrolovaný proces;
+- staré rozhodnutí se dostalo do konfliktu s novým způsobem práce.
+
+Nová karta má mít vlastní otázku. Nepište "pokračování exportního pravidla", pokud skutečný problém je vlastnictví partnerských kampaní. Staré pravidlo by jinak táhlo novou práci do špatného rámce.
+
+Šablona nové karty:
+
+```text
+Co druhá širší inventura ukázala:
+
+Proč to není pokračování původního pravidla:
+
+Nová pracovní otázka:
+
+Nejbližší pracovní místo:
+
+Co zůstává ve starém pravidle zavřené:
+
+Privacy-first hranice:
+
+Vlastník:
+
+Datum první malé kontroly:
+```
+
+Tato hranice chrání tým před recyklací starých smyček. Nový problém má dostat nový tvar. Starý problém má zůstat zavřený, pokud se opravdu nevrátil.
+
+### Privacy-first kontrola druhé inventury
+
+Druhá širší inventura je dobré místo pro úklid starých stop, protože už víte, že pravidlo nepotřebuje mimořádnou oporu. Projděte jen artefakty, které se dotýkají aktuální pracovní trasy:
+
+- kanonickou šablonu;
+- index nebo rozcestník, odkud se k ní chodí;
+- starou kartu pravidla, pokud pořád někam odkazuje;
+- pomocné exporty nebo poznámky, které měly být dočasné;
+- jednu ukázku reálného použití, pokud ji potřebujete k ověření.
+
+Neotvírejte kompletní historii jen kvůli pocitu důkladnosti. Pokud staré podklady nemají účel, vlastníka a retenční důvod, rozhodněte o jejich smazání nebo anonymizaci. Pokud účel mají, zapište datum další kontroly. Tichý režim má po druhé inventuře znamenat méně živých stop než před ní.
+
+### Karta druhé širší inventury
+
+```text
+Ztišené pravidlo:
+
+Širší inventura:
+
+Pracovní místo:
+
+Signál druhé inventury:
+- pravidlo funguje bez příběhu / jazyk je historický / místo je slabé / vznikla nová otázka
+
+Rozhodnutí:
+- ponechat tichý režim / přepsat jazyk / opravit navigaci / otevřít novou kartu
+
+Jedna případná oprava:
+
+Co výslovně nevracíme:
+
+Staré stopy k úklidu:
+
+Privacy-first uzavření:
+- co zůstává s účelem:
+- co mažeme:
+- co anonymizujeme:
+- co výslovně neměříme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum další běžné inventury:
+```
+
+Kartu držte krátkou. Pokud se začíná rozrůstat, pravděpodobně nemáte jednu druhou inventuru, ale několik různých problémů. Rozdělte je, nebo většinu z nich zavřete jako podněty bez dostatečného důvodu.
+
+### Mini workshop na 6 minut
+
+1. Otevřete kanonické pracovní místo, ne starou historii.
+2. Ověřte, jestli pravidlo funguje bez vysvětlení autora.
+3. Vyberte jeden ze čtyř signálů druhé inventury.
+4. Udělejte nejmenší odpovídající opravu, pokud je potřeba.
+5. Zapište, co se nevrací do samostatné kontroly.
+6. Uklidte nebo pojmenujte staré stopy.
+7. Potvrďte návratový signál bez sledování lidí.
+
+Stop otázka:
+
+```text
+Našli jsme problém v pravidle, nebo jen zbytek staré péče?
+```
+
+Pokud jde o zbytek staré péče, ukliďte ho. Nevyrábějte z něj novou agendu. Systém, který neumí uklidit vlastní opatrnost, časem začne dusit i dobrá pravidla.
+
+### Checklist druhé širší inventury
+
+- Kontrolovali jsme pravidlo v běžném pracovním místě?
+- Funguje pravidlo bez znalosti původní historie?
+- Rozlišili jsme slabý jazyk, slabé místo, starý zbytek a novou otázku?
+- Pokud byla potřeba oprava, zůstala nejmenší možná?
+- Neobnovili jsme samostatnou kontrolu jen kvůli pocitu jistoty?
+- Pokud vznikla nová karta, má vlastní otázku mimo starou smyčku?
+- Uklidili jsme staré odkazy, pomocné exporty nebo dočasné poznámky bez účelu?
+- Má každá ponechaná stopa vlastníka a retenční důvod?
+- Nezavedli jsme měření jednotlivců, klikání ani čtenosti šablon?
+- Je návratový signál situační a dostatečně konkrétní?
+- Ví tým, kdy pravidlo nechat v tichu?
+
+Druhá širší inventura je úspěšná, když pravidlo zůstane nudné. Ne proto, že by bylo nedůležité, ale proto, že už se stalo součástí normální práce. Dobrá provozní pravidla nemají navždy připomínat svůj vznik. Mají pomáhat potichu, s minimem dat, minimem dohledu a maximem srozumitelnosti.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o druhé širší inventuře po ztišení pravidla: ověření tichého režimu bez čerstvé paměti, čtyři signály inventury, nová karta mimo starou smyčku, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření první širší inventury po ztišení pravidla: čtyři uzavírací stavy, lokální oprava, prevence nového dohledu, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o první širší inventuře po ztišení pravidla: test najitelnosti, jazyk bez historie, návratový signál, privacy-first inventura, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhé roční kontroly po stabilizaci pravidla: uzavírací zápisy, ztišení agendy, úklid stop, privacy-first uzavření, karta, mini workshop a checklist.
