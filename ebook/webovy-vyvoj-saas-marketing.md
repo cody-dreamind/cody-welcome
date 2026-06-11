@@ -207725,8 +207725,173 @@ Pokud ano, buď tomu dejte dnešní účel, nebo to zrušte. Historie může zů
 
 Uzavřená druhá roční kontrola má být téměř neviditelná. V ideálním případě po ní zůstane jedno lepší pracovní místo, méně připomínek a méně datových stop. To není malý výsledek. To je přesně ten druh údržby, díky které systém stárne slušně místo toho, aby se nafukoval pokaždé, když se o něj někdo stará.
 
+## První širší inventura po ztišení pravidla
+
+Když se pravidlo ztiší do širší inventury, práce ještě nekončí. Nekončí ale proto, že by pravidlo potřebovalo další mimořádnou péči. Končí až ve chvíli, kdy se při první běžné inventuře ukáže, že pravidlo je pořád najitelné, srozumitelné a nepřitahuje zpět starý dohled. Jinak ztišení zůstane jen hezkou větou v logu.
+
+První širší inventura má odpovědět na jednu otázku:
+
+```text
+Najdeme ztišené pravidlo tam, kde ho člověk při běžné práci opravdu hledá?
+```
+
+Pokud ano, pravidlo zůstává v tichém režimu. Pokud ne, neopravujte hned celý systém standardů. Opravte nejbližší pracovní místo, kde pravidlo mělo být vidět.
+
+Příklad:
+
+```text
+Ztišené pravidlo:
+Každý kampaňový export má účel, vlastníka, datum smazání a uložené místo.
+
+Širší inventura:
+Kvartální kontrola marketingových šablon.
+
+Co se ukázalo:
+Pravidlo je v marketingovém briefu, ale není v šabloně pro jednorázovou partnerskou akci.
+
+Nejmenší oprava:
+Doplnit jednu větu do partnerské šablony a zrušit starý odkaz na samostatnou exportní kartu.
+
+Co neotevíráme:
+Neobnovujeme roční kontrolu exportů a nepřidáváme nové sledování práce lidí.
+```
+
+Tento výsledek je dobrý. Neříká, že ztišení selhalo. Říká, že jedno pracovní místo nedostalo stejnou informaci jako kanonická šablona. To je lokální údržba, ne návrat k mimořádnému režimu.
+
+### Tři testy najitelnosti
+
+V první širší inventuře nepátrejte po celé historii pravidla. Udělejte tři malé testy.
+
+První test je test pracovního místa:
+
+```text
+Kdyby člověk pravidlo potřeboval dnes, otevřel by právě toto místo?
+```
+
+Pokud odpověď zní "možná", místo je slabé. Slabé místo nemusí znamenat nový dokument. Často stačí přejmenovat sekci, přidat jednu větu do existující šablony nebo odstranit starý odkaz, který vede jinam.
+
+Druhý test je test jazyka:
+
+```text
+Pochopí pravidlo člověk, který nezná původní incident, audit ani rozhodovací smyčku?
+```
+
+Pokud text potřebuje příběh okolo, není připravený na tichý provoz. Přepište ho do běžné pracovní instrukce. Ne "po problému z dubna kontrolujeme exporty", ale "každý export má účel, vlastníka, místo uložení a datum smazání".
+
+Třetí test je test návratu:
+
+```text
+Víme, jaký signál pravidlo znovu otevře, aniž bychom kvůli tomu plošně sledovali tým?
+```
+
+Návratový signál má být situace, ne dohled. Například "vznikl export bez vlastníka" je použitelný signál. "Budeme měřit, kdo pravidlo otevírá" je většinou zbytečně invazivní.
+
+### Co neopravovat
+
+První širší inventura umí svádět k velkému úklidu. Tým najde jedno slabé místo a najednou chce přejmenovat všechny standardy, sjednotit všechny šablony, přidat navigaci, založit nový index a ještě udělat školení. To může být někdy správná práce, ale není to automatický výsledek první inventury po ztišení pravidla.
+
+V této iteraci neopravujte:
+
+- celou informační architekturu, pokud selhalo jedno pracovní místo;
+- všechny šablony, pokud problém vznikl jen v jedné variantě;
+- onboarding, pokud nový člověk pravidlo zatím nepotřeboval;
+- měření používání, pokud stačí ověřit existenci pravidla ve správné šabloně;
+- historii rozhodnutí, pokud pravidlo funguje bez znalosti historie.
+
+Codyho komentář: slabý odkaz není pozvánka k rekonstrukci knihovny. Někdy je to prostě slabý odkaz. Opravte ho a běžte dělat práci, která vydělává, pomáhá zákazníkům nebo aspoň nezakládá další tabulku.
+
+### Privacy-first inventura
+
+Ztišené pravidlo má po první širší inventuře zanechat menší datovou stopu, ne větší. Proto si dejte pozor na dvě věci: staré podklady a nové důkazy.
+
+Staré podklady projděte jen v rozsahu, který potřebujete k ověření pracovního místa. Pokud pravidlo najdete v kanonické šabloně a je srozumitelné, není důvod otevírat staré exporty, screenshoty nebo seznamy lidí. Historie má zůstat zavřená, pokud k ní není konkrétní účel.
+
+Nové důkazy sbírejte minimalisticky. Pro inventuru obvykle stačí zápis typu:
+
+```text
+Pravidlo nalezeno v marketingovém briefu a partnerské šabloně.
+Jedna stará exportní karta odstraněna.
+Nevznikl nový export ani nové měření lidí.
+```
+
+To je dost. Nepotřebujete screenshot každé šablony, jmenný seznam účastníků ani archiv všech verzí, pokud k nim nemáte jasný účel a retenční pravidlo.
+
+### Karta první širší inventury
+
+```text
+Ztišené pravidlo:
+
+Širší inventura, ve které se kontroluje:
+
+Pracovní místo, kde má být pravidlo vidět:
+
+Test pracovního místa:
+- našli bychom ho při běžné práci? ano / ne / částečně
+
+Test jazyka:
+- funguje bez znalosti historie? ano / ne / částečně
+
+Test návratu:
+- je návratový signál konkrétní? ano / ne / částečně
+
+Výsledek:
+- ponechat tichý režim / opravit jedno pracovní místo / vrátit do samostatné kontroly / založit novou kartu mimo starou smyčku
+
+Jedna případná oprava:
+
+Co výslovně neotevíráme:
+
+Privacy-first úklid:
+- staré stopy ponechané:
+- staré stopy smazané:
+- nové stopy nevznikly / vznikly s účelem:
+- co výslovně neměříme:
+
+Vlastník:
+
+Datum další širší inventury:
+```
+
+Stav "vrátit do samostatné kontroly" používejte opatrně. Je správný jen tehdy, když ztišení prokazatelně ohrožuje práci: pravidlo není najitelné, lidé ho opakovaně míjejí a jedna lokální oprava nestačí. Pokud jen někomu chybí pocit jistoty, nevracejte starou agendu. Přidejte lepší větu do správného místa.
+
+### Mini workshop na 6 minut
+
+1. Otevřete širší inventuru, ne starou kartu pravidla.
+2. Najděte pracovní místo, kde má pravidlo žít.
+3. Udělejte test pracovního místa, jazyka a návratu.
+4. Vyberte jeden výsledek.
+5. Pokud je potřeba oprava, zapište jen jednu.
+6. Zapište, které staré stopy zůstaly zavřené nebo byly smazané.
+7. Potvrďte datum další běžné širší inventury.
+
+Stop otázka:
+
+```text
+Řešíme najitelnost pravidla, nebo znovu otevíráme pocit, který vedl k jeho vzniku?
+```
+
+Pokud řešíte pocit, vraťte se k pracovnímu místu. Pravidla nemají uchovávat emoce z dávného problému. Mají chránit konkrétní práci.
+
+### Checklist první širší inventury
+
+- Otevřeli jsme širší inventuru místo staré samostatné karty?
+- Víme, kde má být ztišené pravidlo při běžné práci vidět?
+- Ověřili jsme najitelnost bez procházení celé historie?
+- Je pravidlo napsané jazykem pro dnešní práci, ne jako vzpomínka na starý problém?
+- Má návratový signál konkrétní podobu?
+- Pokud jsme našli slabé místo, opravujeme jen nejbližší pracovní místo?
+- Neobnovili jsme roční nebo měsíční kontrolu jen kvůli nejistotě?
+- Neotevřeli jsme staré exporty, screenshoty nebo osobní údaje bez účelu?
+- Nevzniklo nové měření lidí ani sledování používání pravidla?
+- Smazali jsme staré odkazy nebo karty, které by tým vedly zpět do mimořádného režimu?
+- Umí vlastník říct, kdy pravidlo zůstává tiché a kdy se má znovu otevřít?
+- Je další návrat navázaný na běžnou širší inventuru, ne na samostatnou připomínku?
+
+První širší inventura po ztišení pravidla je úspěšná, když se pravidlo najde bez nostalgie. Někdo otevře běžnou šablonu, pochopí větu, udělá správnou práci a nezajímá ho, jak dramaticky pravidlo vzniklo. To je vysoká forma provozní dospělosti: užitečná minulost, která nepřekáží přítomnosti.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o první širší inventuře po ztišení pravidla: test najitelnosti, jazyk bez historie, návratový signál, privacy-first inventura, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhé roční kontroly po stabilizaci pravidla: uzavírací zápisy, ztišení agendy, úklid stop, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhé roční kontrole po stabilizaci pravidla: ztišení ročního rytmu, čtyři výsledky, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření první roční kontroly po převodu archivované smyčky: uzavírací stavy, kanonické propsání, úklid podkladů, privacy-first datová stopa, karta, mini workshop a checklist.
