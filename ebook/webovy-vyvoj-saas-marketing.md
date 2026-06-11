@@ -209252,8 +209252,148 @@ Pokud vznikl nový rituál, musí mít jasný důvod, vlastní otázku a vlastn�
 
 Uzavření druhé portfoliové kontroly je konec mimořádné pozornosti. Pravidlo buď žije v portfoliu, nebo má malou opravu, nebo se z nálezu stává nová samostatná otázka. V žádném případě nemá zůstat v mlhavém stavu "ještě to raději sledujme". Právě tím se pozná dospělý provoz: umí kontrolovat, ale umí i přestat.
 
+## Převod stabilního pravidla do minimální portfoliové stopy
+
+Po dvou portfoliových kontrolách už pravidlo nepotřebuje vlastní příběh, pokud funguje. Potřebuje jen minimální stopu, podle které ho tým znovu najde, použije a případně otevře až ve chvíli, kdy se objeví skutečný návratový signál. To je jiný režim než kontrola. Kontrola se ptá, jestli pravidlo drží. Minimální portfoliová stopa říká, kde pravidlo žije a kdy má smysl ho znovu řešit.
+
+Začněte větou:
+
+```text
+Toto pravidlo zůstává v portfoliu jen jako běžná pracovní opora; další zvláštní sledování končí.
+```
+
+Tahle věta vypadá obyčejně, ale dělá důležitou práci. Oddělí živý standard od staré návratové smyčky. Tým pak nemusí pokaždé znovu číst, proč pravidlo vzniklo, jak se opravovalo a kdo ho kontroloval. Stačí mu vědět, co má udělat dnes.
+
+Příklad:
+
+```text
+Pravidlo:
+Každý nový marketingový formulář má účel, vlastníka, datové minimum, retenční datum a místo záznamu v datové mapě.
+
+Minimální portfoliová stopa:
+Kanonické místo: Datová mapa / Formuláře
+Použití: při založení nebo změně formuláře
+Vlastník: marketing operations
+Návratový signál: nový formulář vznikne bez retenčního data nebo mimo datovou mapu
+Další běžné review: kvartální kontrola portfolia standardů
+Privacy-first poznámka: nevzniká samostatný seznam lidí, kteří pravidlo použili
+```
+
+Takový zápis je dostatečný. Neříká všechno, ale říká to, co člověk potřebuje při práci. Pokud někdo potřebuje historii, může sáhnout do archivu. Běžné portfolio ale nemá být sklad starých důvodů ve formátu Markdown.
+
+### Co v minimální stopě zůstává
+
+Minimální stopa má držet jen provozní orientaci:
+
+- název pravidla v řeči člověka, který ho má použít;
+- kanonické místo, kde je aktuální verze;
+- pracovní situaci, kdy se pravidlo používá;
+- vlastníka, který umí pravidlo upravit nebo zrušit;
+- návratový signál, který pravidlo znovu otevře;
+- datum nebo rytmus dalšího běžného review;
+- privacy-first poznámku, pokud pravidlo hlídá data, přístupy, souhlasy nebo retenci.
+
+Nepřidávejte pole jen proto, že se dají vyplnit. Každé pole má mít jasného čtenáře a rozhodnutí, které podporuje. Pokud nikdo neumí říct, kdy pole použije, pole do minimální stopy nepatří.
+
+### Co přesunout do archivu
+
+Do archivu patří všechno, co vysvětluje minulost, ale nemá být součástí běžné práce:
+
+- původní incident, chyba nebo falešný poplach;
+- detailní poznámky z kontrol;
+- pracovní varianty formulací;
+- seznamy lidí, kteří pravidlo testovali;
+- screenshoty, exporty a kopie pomocných tabulek;
+- dlouhé zdůvodnění, proč se pravidlo ztišovalo;
+- staré karty návratových signálů, které už byly uzavřené.
+
+Archiv není odpadkový koš. Je to místo pro krátký důkaz, že se práce stala a proč skončila. Pokud materiál nechrání rozhodnutí, nesplňuje právní povinnost a nepomáhá budoucí revizi, pravděpodobně ho nemá smysl držet.
+
+Privacy-first pravidlo: archiv má být menší než živý problém. Když kvůli uzavřenému pravidlu uchováváte víc osobních údajů, exportů nebo interních detailů než kvůli jeho běžnému používání, něco je obráceně.
+
+### Přepis do pracovního jazyka
+
+Při převodu do minimální stopy přepište pravidlo z kontrolního jazyka do pracovního jazyka.
+
+Slabé znění:
+
+```text
+Kontrolovat, zda se při marketingových formulářích dodržuje datové minimum a zda nevznikají exporty bez retence.
+```
+
+Lepší znění:
+
+```text
+Při založení nebo změně formuláře vyplň účel, povinná pole, vlastníka, místo uložení a datum smazání v datové mapě.
+```
+
+První věta popisuje dohled. Druhá věta pomáhá člověku udělat práci správně. Minimální portfoliová stopa má používat druhý typ vět. Čím víc zní jako auditní připomínka, tím větší je šance, že ji tým bude brát jako cizí povinnost místo jako pracovní oporu.
+
+### Karta minimální portfoliové stopy
+
+```text
+Název pravidla:
+
+Pracovní věta pravidla:
+
+Kdy se používá:
+
+Kanonické místo:
+
+Vlastník:
+
+Co zůstává v portfoliu:
+
+Co přesouváme do archivu:
+
+Co mažeme nebo anonymizujeme:
+
+Návratový signál:
+
+Další běžné review:
+
+Privacy-first poznámka:
+```
+
+### Mini workshop na 6 minut
+
+1. Otevřete výsledek druhé portfoliové kontroly.
+2. Napište jednu pracovní větu pravidla.
+3. Vyberte kanonické místo a vlastníka.
+4. Zkraťte portfoliový zápis na minimální stopu.
+5. Přesuňte historii do archivu nebo ji smažte.
+6. Potvrďte návratový signál.
+7. Zkontrolujte, že nevzniká nové měření používání pravidla.
+8. Zavřete starou smyčku jako neaktivní.
+
+Stop otázka:
+
+```text
+Pomůže tento zápis člověku pravidlo použít, nebo ho nutí znovu pochopit celou historii pravidla?
+```
+
+Pokud zápis vyžaduje historii, ještě není minimální. Zkraťte ho na pracovní situaci, aktuální pravidlo a návratový signál.
+
+### Checklist minimální stopy
+
+- Je pravidlo napsané jako pracovní věta?
+- Je jasné, kdy ho člověk použije?
+- Má jedno kanonické místo?
+- Má vlastníka, který může pravidlo upravit nebo zrušit?
+- Zůstává v portfoliu jen aktuální provozní orientace?
+- Je historie přesunutá do archivu nebo smazaná?
+- Nezůstaly v živém portfoliu dočasné poznámky z kontrol?
+- Je návratový signál konkrétní a úzký?
+- Nevzniká nové sledování lidí, kteří pravidlo používají?
+- Mají ponechané podklady účel, vlastníka a retenční hranici?
+- Dá se pravidlo použít bez původního autora?
+- Umí tým říct, kdy se pravidlo příště běžně zkontroluje?
+
+Minimální portfoliová stopa je dobrý konec pro pravidlo, které už obstálo. Neoslavuje proces, neprodlužuje kontrolu a netváří se, že každá historická poznámka je znalostní kapitál. Nechává v ruce jen to, co pomáhá další práci. To je přesně ta nenápadná disciplína, díky které se ze standardů nestává interní tapeta.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o převodu stabilního pravidla do minimální portfoliové stopy: pracovní věta pravidla, kanonické místo, archivace historie, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhé portfoliové kontroly po uklidnění pravidla: uzavírací stavy, propsání do portfolia, konec zvláštní péče, privacy-first úklid stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhé portfoliové kontrole po uklidnění pravidla: test přenositelnosti bez čerstvé paměti, výsledné stavy, privacy-first kontrola nových stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření první portfoliové kontroly po převodu ztišeného pravidla: čtyři uzavírací stavy, propsání do portfolia, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
