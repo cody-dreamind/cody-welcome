@@ -208925,8 +208925,173 @@ Když odpověď zní "další péči", musí být jasné, jaké riziko by bez n�
 
 Uzavření první portfoliové kontroly je úspěšné, když po něm zmizí pracovní šum. Pravidlo je v portfoliu, index ukazuje na správné místo, staré pomocné stopy jsou pryč a tým ví, kdy se k tématu vrátit. Nic víc není potřeba. A právě proto je to dobrý konec: udržuje standard živý, ale nenechá kolem něj znovu vyrůst proces, který měl převod do portfolia odstranit.
 
+## Druhá portfoliová kontrola po uklidnění pravidla
+
+Druhá portfoliová kontrola je test paměti bez čerstvé energie. První kontrola ještě těžila z toho, že převod do portfolia byl nový. Lidé si pamatovali, proč se pravidlo přesouvalo, kde se opravoval index a které podklady se mazaly. Druhá kontrola má ukázat něco cennějšího: jestli pravidlo funguje i ve chvíli, kdy už kolem něj není příběh.
+
+Hlavní otázka zní:
+
+```text
+Používá se pravidlo jako normální součást portfolia, nebo se po první kontrole znovu opřelo o neformální paměť lidí?
+```
+
+Tohle je důležitý rozdíl. Pravidlo může při první kontrole vypadat dobře, protože u něj stojí člověk, který si pamatuje celý kontext. Jenže běžný provoz nestojí na pamětnících. Stojí na pracovním místě, jasné instrukci, návratovém signálu a rytmu, který není závislý na tom, kdo byl u původního problému.
+
+Příklad:
+
+```text
+Pravidlo:
+Každý export kontaktů z kampaně má účel, vlastníka, místo uložení a datum smazání.
+
+První portfoliová kontrola:
+Index odkazoval správně, stará ukázková tabulka byla smazána a pravidlo zůstalo v campaign briefu.
+
+Druhá portfoliová kontrola:
+Nový člověk připravuje brief bez účasti původního vlastníka. Pravidlo najde, vyplní datovou stopu a neptá se, kde má vzniknout export.
+
+Výsledek:
+Pravidlo je přenositelné. Neotevíráme starou smyčku a nepřidáváme nové měření.
+```
+
+Pokud druhá kontrola ukáže, že pravidlo funguje jen díky člověku, který "ví, jak to bylo myšleno", není to katastrofa. Je to užitečný nález. Jen ho neřešte tím, že přidáte další kontrolní vrstvu. Nejdřív opravte místo, kde se neformální paměť schovala do mezer v dokumentu.
+
+### Čtyři testy druhé kontroly
+
+Druhou portfoliovou kontrolu držte na čtyřech testech:
+
+- Test nového průchodu: použil pravidlo někdo, kdo nebyl u původní smyčky?
+- Test samostatného místa: stačilo otevřít kanonické pracovní místo bez hledání v historii?
+- Test indexu bez vysvětlování: navedl index člověka na správné místo bez doplňujícího komentáře?
+- Test datové stopy: nezůstaly kvůli používání pravidla nové pomocné exporty, kopie nebo poznámky bez účelu?
+
+Každý test musí být malý. Neprocházejte celé portfolio. Vezměte jeden reálný pracovní průchod, jeden odkaz v indexu a jednu datovou stopu. Pokud ani takový malý test nejde provést, je to signál samo o sobě: pravidlo možná nemá dost jasné pracovní místo.
+
+Nejlepší důkaz je obyčejný průchod. Někdo připraví brief, upraví šablonu, založí onboardingový krok nebo vyřídí supportní situaci a pravidlo mu pomůže bez dalšího vysvětlování. Pokud musíte svolat schůzku, aby se ověřilo, jestli je pravidlo použitelné, pravděpodobně netestujete běžný provoz, ale vyrábíte mu kulisy.
+
+### Výsledné stavy druhé kontroly
+
+Po druhé portfoliové kontrole vyberte jeden stav:
+
+- Stabilní v portfoliu: pravidlo funguje v běžném průchodu, index stačí a není potřeba žádná další zvláštní péče.
+- Lokální mezera: jedno pracovní místo nebo jedna věta pořád vyžaduje paměť člověka; opravte ji tam, kde vzniká tření.
+- Slabá přenositelnost: pravidlo funguje původnímu týmu, ale nový člověk nebo sousední role ho nedokáže použít bez vysvětlení.
+- Nový portfoliový problém: kontrola odhalila problém v mapě standardů, vlastnictví nebo datové hygieně, který přesahuje jedno pravidlo.
+
+Stav "slabá přenositelnost" si zaslouží pozornost. Neznamená automaticky, že pravidlo je špatně. Může znamenat, že pravidlo používá interní zkratku, odkazuje na starý název šablony nebo předpokládá znalost procesu, která není v pracovním místě. Oprava má být co nejbližší místu použití: přepsat jednu větu, doplnit příklad, opravit název odkazu nebo přesunout instrukci z poznámky do hlavního checklistu.
+
+Stav "nový portfoliový problém" naopak neřešte jako opravu pravidla. Pokud zjistíte, že index obecně vede přes archiv, vlastníci standardů nejsou jasní nebo se u více pravidel hromadí dočasné exporty, je to samostatná portfoliová práce. Založte novou kartu s vlastní otázkou a původní pravidlo nechte zavřené, pokud samo funguje.
+
+### Privacy-first kontrola při druhém průchodu
+
+Druhá kontrola je dobrá chvíle zkontrolovat, jestli se po prvním úklidu nezačaly tvořit nové nečisté stopy. Ne proto, že by lidé chtěli sbírat data navíc. Spíš proto, že provoz si rád pomáhá kopiemi: dočasná tabulka pro jistotu, screenshot jako příklad, export pro kontrolu, komentář v chatu s reálným jménem zákazníka. Jedna taková stopa vypadá nevinně. Deset takových stop už je datový sklep.
+
+Praktická kontrola:
+
+```text
+Nový průchod:
+- vznikl bez nového trackeru, exportu nebo osobního seznamu
+
+Příklad:
+- je syntetický, anonymizovaný nebo zcela vynechaný
+
+Pomocné poznámky:
+- mají účel a retenční datum, nebo jsou smazané
+
+Index:
+- neobsahuje zákaznické detaily ani historii incidentu
+
+Ověření:
+- sleduje stav výstupu, ne chování konkrétního člověka
+```
+
+U privacy-first provozu je druhá kontrola často důležitější než první. Při první kontrole lidé vědomě uklízejí. Při druhé už se ukáže, jak se systém chová bez slavnostního úklidového režimu. Pokud znovu vznikají kopie a exporty, neopravujte jen jednotlivé soubory. Zeptejte se, proč pravidlo nutí lidi vytvářet pomocné stopy. Možná je instrukce moc nejasná. Možná chybí bezpečný syntetický příklad. Možná pracovní místo neumožňuje zapsat účel a retenci přímo tam, kde se export plánuje.
+
+Codyho komentář: druhá kontrola je moment, kdy se pozná, jestli jste uklidili kuchyň, nebo jen schovali nádobí do trouby. Obojí na první pohled vypadá dobře. Jen jedno z toho přežije další oběd.
+
+### Karta druhé portfoliové kontroly
+
+```text
+Kontrolované pravidlo:
+
+Portfoliový rytmus:
+
+Testovaný běžný průchod:
+
+Kdo pravidlo použil:
+- původní vlastník / nový člověk / sousední role
+
+Kanonické pracovní místo:
+
+Indexový odkaz:
+
+Výsledek:
+- stabilní v portfoliu / lokální mezera / slabá přenositelnost / nový portfoliový problém
+
+Co fungovalo bez vysvětlování:
+
+Co pořád vyžadovalo neformální paměť:
+
+Lokální oprava:
+
+Nová portfoliová karta:
+- ne / ano, otázka:
+
+Privacy-first kontrola:
+- nové exporty:
+- pomocné poznámky:
+- příklady:
+- retenční data:
+
+Návratový signál:
+
+Vlastník:
+
+Další běžné portfoliové review:
+```
+
+Karta má zachytit přenositelnost, ne opisovat celý průchod. Pokud se z ní stane podrobný deník práce, zkraťte ji. Druhá kontrola má portfoliu dodat důvěru, ne další vrstvu zápisů.
+
+### Mini workshop na 6 minut
+
+1. Vyberte jeden běžný průchod, kde se pravidlo mělo použít.
+2. Ověřte, jestli ho použil někdo bez čerstvé znalosti původní smyčky.
+3. Otevřete kanonické pracovní místo a portfoliový index.
+4. Zapište, co fungovalo bez vysvětlování.
+5. Zapište jednu mezeru, pokud se objevila.
+6. Zkontrolujte nové exporty, poznámky a příklady.
+7. Vyberte jeden výsledný stav.
+8. Pokud je pravidlo stabilní, vraťte ho do běžného portfoliového rytmu bez další zvláštní péče.
+
+Stop otázka:
+
+```text
+Ověřujeme přenositelnost pravidla, nebo znovu budujeme zvláštní dohled kolem věci, která už má fungovat sama?
+```
+
+Když odpověď sklouzne ke zvláštnímu dohledu, musí být jasné riziko. Bez něj je lepší opravit jedno pracovní místo a nechat pravidlo žít.
+
+### Checklist druhé portfoliové kontroly
+
+- Proběhla kontrola na jednom běžném průchodu?
+- Použil pravidlo někdo bez čerstvé paměti původní smyčky?
+- Stačilo kanonické pracovní místo bez hledání v historii?
+- Index navedl člověka na správný zdroj pravdy?
+- Je jasné, co fungovalo bez vysvětlování?
+- Pokud vznikla lokální mezera, opravujeme nejbližší větu, odkaz nebo šablonu?
+- Pokud je přenositelnost slabá, nepleteme si to s novým incidentem?
+- Pokud vznikl portfoliový problém, má vlastní kartu a nepřenáší starý rozsah?
+- Nevznikly nové pomocné exporty nebo kopie bez účelu?
+- Jsou příklady syntetické, anonymizované nebo vynechané?
+- Má každá ponechaná pomocná stopa retenční datum?
+- Neměříme chování lidí místo kvality výstupu?
+- Zůstává další kontrola v běžném portfoliovém rytmu?
+- Umíme říct, jaký návratový signál by pravidlo znovu otevřel?
+
+Druhá portfoliová kontrola je hotová, když pravidlo prokáže přenositelnost. Ne tím, že ho původní vlastník obhájí, ale tím, že ho někdo použije bez doprovodného výkladu. V tu chvíli už standard opravdu patří do portfolia: je najitelný, srozumitelný, datově čistý a dost obyčejný na to, aby dělal svoji práci bez potlesku.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o druhé portfoliové kontrole po uklidnění pravidla: test přenositelnosti bez čerstvé paměti, výsledné stavy, privacy-first kontrola nových stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření první portfoliové kontroly po převodu ztišeného pravidla: čtyři uzavírací stavy, propsání do portfolia, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o první portfoliové kontrole po převodu ztišeného pravidla: najitelnost v živém pracovním místě, index bez druhého zdroje pravdy, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převodu ztišeného pravidla do portfoliového rytmu: živé pracovní místo, portfoliový index, historická stopa, privacy-first redukce dat, karta, mini workshop a checklist.
