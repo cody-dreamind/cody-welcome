@@ -208744,8 +208744,190 @@ Pokud odpověď zní "vracíme se", napište proč. Možná se pravidlo do portf
 
 První portfoliová kontrola je hotová, když pravidlo nepotřebuje vysvětlování. Člověk ho najde, použije a portfoliový index ho přivede na správné místo bez toho, aby mu do ruky strčil starý incident. Tím se pozná, že pravidlo přešlo z mimořádné péče do normálního provozu.
 
+## Uzavření první portfoliové kontroly po převodu ztišeného pravidla
+
+První portfoliová kontrola má po sobě zanechat jen malou stopu. Pokud se po ní objeví dlouhý zápis, nová sada úkolů a chuť znovu projít celou historii pravidla, kontrola se proměnila v další smyčku. Uzavření proto není administrativní konec. Je to vědomé rozhodnutí, že pravidlo buď zůstává v portfoliu jako běžný standard, nebo se z něj oddělí přesně pojmenovaná nová práce.
+
+Začněte jednou větou:
+
+```text
+První portfoliová kontrola ukázala:
+```
+
+Věta má popsat stav pravidla v dnešní práci, ne historii jeho vzniku. Dobrá věta zní:
+
+```text
+Pravidlo pro export kontaktů je v campaign briefu najitelné, index odkazuje správně a stará ukázková tabulka byla smazána.
+```
+
+Slabá věta zní:
+
+```text
+Pravidlo jsme znovu prošli a je potřeba ho dál sledovat.
+```
+
+První věta zavírá kontrolu. Druhá otevírá neurčitou péči bez jasného důvodu.
+
+### Čtyři uzavírací stavy
+
+Po kontrole vyberte jeden uzavírací stav:
+
+- Zavřeno bez změny: pravidlo je najitelné, index je čistý a nevznikla žádná oprava.
+- Zavřeno po lokální opravě: jedno pracovní místo, odkaz, věta nebo retenční údaj byly opraveny a není potřeba další sledování.
+- Předáno jako oprava indexu: pravidlo funguje, ale mapa portfolia byla matoucí a oprava patří vlastníkovi indexu.
+- Oddělena nová karta: kontrola odhalila nový problém, který má vlastní otázku, vlastní rozsah a nesmí se tvářit jako pokračování staré smyčky.
+
+Každý stav má jiný konec. "Zavřeno bez změny" potřebuje jen jednovětý záznam. "Zavřeno po lokální opravě" potřebuje ještě odkaz na místo, kde se oprava provedla. "Předáno jako oprava indexu" potřebuje vlastníka portfoliové mapy a nejbližší review. "Oddělena nová karta" potřebuje novou rozhodovací otázku a jasné vymezení, co z původní smyčky se nepřenáší.
+
+Nejčastější chyba je nechat všechny čtyři stavy napůl otevřené. Tým napíše, že pravidlo funguje, ale zároveň založí úkol na další kontrolu, nechá staré podklady v indexu a ještě přidá poznámku "možná rozšířit". To není uzavření. To je provozní mlha s hezkým titulkem.
+
+### Co propsat zpět do portfolia
+
+Do portfolia se po první kontrole nepropsuje celý průběh. Propsat se mají jen věci, které pomáhají dalšímu použití:
+
+- aktuální stav pravidla;
+- kanonické pracovní místo;
+- vlastník pravidla nebo oblasti;
+- návratový signál;
+- nejbližší běžné review;
+- privacy-first poznámka k odstraněným nebo ponechaným stopám.
+
+Historie, proč pravidlo vzniklo, patří jen do zkrácené rozhodovací stopy. Pokud ji portfoliový index potřebuje, obvykle je to signál, že pravidlo není napsané dost samostatně. Běžný člověk nemá při práci číst archeologii. Má vidět instrukci, hranici a důvod v jedné použitelné podobě.
+
+Příklad portfoliového zápisu:
+
+```text
+Pravidlo:
+Každý export kontaktů z kampaně má účel, vlastníka, místo uložení a datum smazání.
+
+Kanonické místo:
+Campaign brief, sekce Datová stopa.
+
+Stav:
+Potvrzeno v portfoliu po první kontrole.
+
+Návratový signál:
+Nový typ exportu, nejasný vlastník dat, nebo opakované chybějící datum smazání.
+
+Privacy-first poznámka:
+Stará ukázková tabulka s reálnými kontakty smazána; v pravidle zůstává jen syntetický příklad.
+```
+
+To stačí. Pokud někdo potřebuje víc, pravděpodobně neřeší běžné použití pravidla, ale chce znovu otevřít původní problém. To může být legitimní, ale má to mít vlastní kartu.
+
+### Úklid po první kontrole
+
+Uzavření kontroly je dobrý okamžik na malý úklid, ne na velkou revizi. Hledejte hlavně zbytky, které vznikly jen kvůli převodu do portfolia:
+
+- dočasné poznámky z kontroly;
+- kopie pravidla v chatu, dokumentu nebo ticketu;
+- screenshoty starých pracovních míst;
+- exporty použité jako příklad;
+- duplicitní odkazy v indexu;
+- rozpracované nápady, které nemají rozhodovací otázku.
+
+U každé stopy vyberte jeden stav:
+
+```text
+Smazat:
+Anonymizovat:
+Ponechat s retenčním datem:
+Převést do nové karty:
+```
+
+Nepřidávejte stav "nechat zatím být". Ten je přesně důvod, proč se portfolio časem zanáší. Pokud něco ponecháváte, musí být jasné proč, kde a do kdy. Pokud to nevíte, pravděpodobně to nemá zůstávat v živém pracovním prostoru.
+
+Privacy-first pravidlo je tady přísné a jednoduché: kontrolní podklady nejsou archivní poklad. Pokud neobsahují rozhodnutí, důkaz potřebný pro další práci nebo povinný záznam, mají zmizet. Zvlášť opatrně zacházejte s příklady z kampaní, supportu, CRM, analytiky a zákaznických rozhovorů. Často se tváří jako nevinné ilustrační materiály, ale nesou reálné osobní nebo obchodní údaje.
+
+### Kdy nezakládat další review
+
+Po první portfoliové kontrole často vznikne pocit, že by bylo rozumné dát si ještě jednu kontrolu "pro jistotu". Občas ano. Většinou ne. Pokud pravidlo prošlo kontrolou, lokální oprava je hotová a návratový signál je jasný, další zvláštní review jen vrací pravidlo do mimořádné péče.
+
+Další zvláštní review zakládejte jen tehdy, když platí aspoň jedna z těchto věcí:
+
+- portfoliový index byl slabý a oprava indexu se nedá ověřit v běžném rytmu;
+- pravidlo nebylo najitelné ve více než jednom pracovním místě;
+- kontrola odhalila skutečný nový problém s datovou stopou;
+- vlastník pravidla není jasný a bez něj by standard osiřel;
+- lokální oprava mění způsob práce více lidí a potřebuje krátké ověření.
+
+Pokud neplatí nic z toho, vraťte pravidlo do běžného portfoliového rytmu. Zapište návratový signál a zavřete. Provozní disciplína se pozná i tím, že tým umí nepřidat kontrolu, která by jen uklidňovala nervy.
+
+Codyho komentář: "ještě jedno review pro jistotu" je občas rozumné. Ale často je to jen procesní bonbon před obědem. Chutná to bezpečně, ale za chvíli už nikdo nemá hlad na skutečnou práci.
+
+### Karta uzavření první portfoliové kontroly
+
+```text
+Kontrolované pravidlo:
+
+Portfoliový rytmus:
+
+Kanonické pracovní místo:
+
+Výsledek kontroly:
+- zavřeno bez změny / zavřeno po lokální opravě / předáno jako oprava indexu / oddělena nová karta
+
+Jednovětý závěr:
+
+Co bylo opraveno:
+
+Co bylo smazáno nebo anonymizováno:
+
+Co zůstává s retenčním datem:
+
+Co nepřenášíme ze staré smyčky:
+
+Návratový signál:
+
+Vlastník:
+
+Další běžné portfoliové review:
+
+Potřebuje zvláštní review:
+- ne / ano, protože:
+```
+
+Kartu ukládejte k portfoliovému záznamu, ne do samostatné složky "kontrola první kontroly". Pokud karta potřebuje vlastní navigaci, je moc velká. Zkraťte ji na rozhodovací minimum.
+
+### Mini workshop na 5 minut
+
+1. Přečtěte výsledek první portfoliové kontroly.
+2. Vyberte jeden ze čtyř uzavíracích stavů.
+3. Zapište jednovětý závěr do portfoliového záznamu.
+4. Projděte pomocné stopy a rozhodněte smazat, anonymizovat, ponechat s retencí, nebo převést do nové karty.
+5. Ověřte, že portfoliový index zůstává mapou, ne druhým zdrojem pravdy.
+6. Zapište návratový signál.
+7. Rozhodněte, zda opravdu existuje důvod pro zvláštní review.
+8. Pokud ne, zavřete kontrolu a vraťte pravidlo do běžného rytmu.
+
+Stop otázka:
+
+```text
+Uzavíráme první portfoliovou kontrolu, nebo si vytváříme další zvláštní péči?
+```
+
+Když odpověď zní "další péči", musí být jasné, jaké riziko by bez ní zůstalo neřízené. Pokud žádné neumíte pojmenovat, není to péče. Je to setrvačnost.
+
+### Checklist uzavření první portfoliové kontroly
+
+- Má kontrola jeden jasný uzavírací stav?
+- Je zapsaný jednovětý závěr o dnešním stavu pravidla?
+- Propsali jsme do portfolia jen aktuální stav, kanonické místo, vlastníka, návratový signál a privacy-first poznámku?
+- Nevrátili jsme do indexu historii původní smyčky?
+- Smazali jsme dočasné poznámky, screenshoty, exporty a duplicitní kopie bez účelu?
+- Anonymizovali jsme příklady, které mají zůstat jako bezpečná ilustrace?
+- Má každá ponechaná stopa účel a retenční datum?
+- Pokud vznikla oprava indexu, má vlastníka a běžné ověření?
+- Pokud vznikla nová karta, má vlastní otázku a nepřenáší starý rozsah?
+- Nezakládáme zvláštní review jen pro uklidnění?
+- Zůstává pravidlo v běžném portfoliovém rytmu?
+- Umí tým říct, jaký signál pravidlo znovu otevře?
+
+Uzavření první portfoliové kontroly je úspěšné, když po něm zmizí pracovní šum. Pravidlo je v portfoliu, index ukazuje na správné místo, staré pomocné stopy jsou pryč a tým ví, kdy se k tématu vrátit. Nic víc není potřeba. A právě proto je to dobrý konec: udržuje standard živý, ale nenechá kolem něj znovu vyrůst proces, který měl převod do portfolia odstranit.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o uzavření první portfoliové kontroly po převodu ztišeného pravidla: čtyři uzavírací stavy, propsání do portfolia, privacy-first úklid pomocných stop, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o první portfoliové kontrole po převodu ztišeného pravidla: najitelnost v živém pracovním místě, index bez druhého zdroje pravdy, čtyři výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převodu ztišeného pravidla do portfoliového rytmu: živé pracovní místo, portfoliový index, historická stopa, privacy-first redukce dat, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhé širší inventury po ztišení pravidla: čtyři uzavírací stavy, zrušení zbytků staré péče, privacy-first redukce stop, karta, mini workshop a checklist.
