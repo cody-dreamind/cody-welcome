@@ -209503,8 +209503,172 @@ Pokud odpověď míří k novému dohledu, zmenšete zásah. První review má b
 
 První běžné review minimální portfoliové stopy má být nenápadné. Když dopadne dobře, skoro nic se nestane: pravidlo zůstane na svém místě, tým ho použije a stará smyčka zůstane zavřená. Právě to je výsledek. Ne každá dobrá práce musí zanechat velký zápis; některá jen zabrání tomu, aby se starý proces znovu probudil.
 
+## Uzavření prvního běžného review minimální portfoliové stopy
+
+První běžné review minimální portfoliové stopy se má zavřít stejně úsporně, jako proběhlo. Pokud review potvrdilo, že pravidlo funguje, není potřeba vyrábět nový plán, novou tabulku ani další kontrolní režim. Stačí propsat drobnou opravu, uložit výsledek do portfolia a nechat pravidlo dál žít v běžném rytmu.
+
+Uzavření začněte větou:
+
+```text
+Po prvním běžném review zůstává pravidlo v minimální stopě, protože:
+```
+
+Tato věta nutí tým pojmenovat důvod klidu. Ne "protože jsme se tomu už věnovali", ale protože se pravidlo našlo, šlo použít, nezpůsobilo novou evidenci a neotevřelo starou smyčku. Pokud takovou větu neumíte napsat, review ještě není zavřené. Možná chybí lokální oprava. Možná se objevila nová otázka. Možná jste jen rádi, že už to nechcete řešit, což je lidské, ale jako provozní standard trochu vratké.
+
+Příklad:
+
+```text
+Pravidlo:
+Při změně formuláře aktualizuj datovou mapu a ověř, že se nesbírá víc údajů, než formulář opravdu potřebuje.
+
+Výsledek review:
+Pravidlo bylo nalezeno v portfoliu, použito při úpravě poptávkového formuláře a nevyžadovalo otevření archivované historie.
+
+Drobné dočištění:
+V checklistu formuláře sjednocujeme pojem "zdroj pravdy / místo uložení".
+
+Uzavírací věta:
+Pravidlo zůstává v minimální portfoliové stopě, protože ho tým použil v běžné práci bez zvláštní podpory a bez nové datové evidence.
+
+Další rytmus:
+Bez samostatné kontroly. Vrací se do běžného kvartálního portfoliového review.
+```
+
+Takový zápis je dostatečný. Neobsahuje kompletní historii, nepopisuje všechny debaty a nedělá z jednoho review další kapitolu v životopisu pravidla. Zachytí jen to, co bude člověk příště potřebovat: stav, jednu úpravu, důvod uzavření a další rytmus.
+
+### Čtyři uzavírací stavy
+
+Po prvním review vyberte jeden uzavírací stav:
+
+- Zavřít bez změny: pravidlo je najitelné, srozumitelné a použitelné.
+- Zavřít po lokální opravě: opravili jste jeden název, odkaz, příklad nebo hranici.
+- Zavřít starou smyčku a otevřít novou otázku: review odhalilo jiný problém, který nesmí zůstat přilepený ke starému pravidlu.
+- Vrátit pravidlo do portfoliové kontroly: minimální stopa opakovaně nestačí nebo se změnil kontext.
+
+První dva stavy jsou nejběžnější. Třetí stav je důležitý, protože chrání staré pravidlo před tím, aby na sebe nabalovalo nový problém. Čtvrtý stav používejte jen tehdy, když je opravdu slabá minimální stopa, ne když tým zrovna narazil na vedlejší otázku.
+
+Rozdíl mezi třetím a čtvrtým stavem je praktický. Když člověk nerozumí pracovní větě pravidla, je to problém pravidla. Když pravidlu rozumí, ale při práci zjistí, že obchodní tým ukládá kontakty do nové bokové tabulky, je to nová otázka datového toku. Staré pravidlo ji může odhalit, ale nemá ji celé nést.
+
+### Co propsat do portfolia
+
+Do portfolia patří jen stabilní minimum:
+
+- aktuální pracovní věta pravidla;
+- stav po review;
+- případná jedna lokální oprava;
+- další běžný rytmus;
+- odkaz na kanonické pracovní místo;
+- krátká privacy-first poznámka, pokud review zabránilo nové datové stopě.
+
+Nepatří sem detailní poznámky z rozhovoru, seznam lidí, kteří pravidlo použili, pomocné screenshoty, dočasné exporty ani stará argumentace. Pokud něco z toho vzniklo při review, po uzavření rozhodněte, jestli to má právní nebo provozní důvod zůstat. Pokud ne, smažte to nebo anonymizujte.
+
+Dobrá portfoliová stopa po uzavření může vypadat takto:
+
+```text
+Stav:
+Minimální stopa potvrzena po prvním běžném review.
+
+Poslední úprava:
+Sjednocen název pole "zdroj pravdy / místo uložení" ve formulářovém checklistu.
+
+Další rytmus:
+Kvartální portfoliové review, bez samostatné kontroly adopce.
+
+Privacy-first poznámka:
+Review nevedlo k nové evidenci použití pravidla ani k exportu osobních údajů.
+```
+
+Všimněte si, že zápis neříká všechno. To je pointa. Portfolio není archiv emocí z procesu, ale mapa aktuálně použitelných opor. Když má někdo příště pravidlo použít, nepotřebuje číst detektivku o tom, jak jste se k němu dostali.
+
+### Kdy neotevírat další kontrolu
+
+Další kontrolu neotevírejte jen proto, že:
+
+- někdo navrhl lepší formulaci, ale současná věta práci neblokuje;
+- v review se objevila zajímavá otázka mimo původní pravidlo;
+- tým chce mít jistotu, že se pravidlo bude používat vždycky;
+- někdo má pocit, že "by se to mělo ještě jednou ověřit";
+- vznikla chuť měřit adopci pravidla po lidech.
+
+Jistota je drahá surovina. V provozu ji často kupujete další evidencí, dalším meetingem nebo dalším sběrem dat. U minimální portfoliové stopy se ptejte, jestli by další kontrola opravdu změnila rozhodnutí. Pokud ne, je to jen pohodlně vypadající zdržení.
+
+Codyho komentář: když pravidlo funguje potichu, nechoďte za ním s trumpetou a dotazníkem spokojenosti. Nechte ho pracovat. Některé procesy jsou nejlepší ve chvíli, kdy si jich nikdo nevšimne.
+
+### Privacy-first uzavření
+
+Uzavření review je dobrý moment na malý úklid datové stopy. Projděte jen pracovní materiály, které vznikly kvůli review, a u každého se zeptejte:
+
+- Je potřeba pro další použití pravidla?
+- Má právní, smluvní nebo bezpečnostní důvod zůstat?
+- Obsahuje osobní údaje, interní poznámky nebo zákaznický kontext?
+- Dá se nahradit kratším anonymním závěrem?
+- Má určené místo a dobu uchování?
+
+Pokud review použilo reálný formulář, ticket, obchodní poznámku nebo zákaznický příklad, nenechávejte tyto podklady volně připojené k pravidlu. Do portfolia přeneste jen závěr. Detailní podklad vraťte tam, kde má běžně být, nebo ho smažte podle retenčního pravidla.
+
+Privacy-first provoz není jen otázka nástrojů. Je to i disciplína v malých uzávěrkách. Každý dočasný výstřižek, který zůstane "pro jistotu", se může za půl roku změnit v nejasný kus dat, který nikdo nevlastní a nikdo se ho neodváží smazat.
+
+### Karta uzavření review
+
+```text
+Pravidlo:
+
+Pracovní situace z review:
+
+Výsledek review:
+- zavřít bez změny / zavřít po lokální opravě / otevřít novou otázku / vrátit do portfoliové kontroly
+
+Uzavírací věta:
+
+Co jsme propsali do portfolia:
+
+Co jsme nepropsali a proč:
+
+Co jsme smazali, anonymizovali nebo vrátili do správného místa:
+
+Další běžný rytmus:
+
+Vlastník portfoliové stopy:
+```
+
+Karta má být krátká. Pokud se nevejde na jednu obrazovku, pravděpodobně do ní taháte historii, která patří do archivu nebo do samostatné nové otázky. Uzavření má zmenšovat kognitivní stopu pravidla, ne ji znovu nafouknout.
+
+### Mini workshop na 5 minut
+
+1. Přečtěte poslední pracovní větu pravidla.
+2. Pojmenujte výsledek prvního review jedním ze čtyř stavů.
+3. Pokud proběhla lokální oprava, ověřte, že je propsaná v kanonickém místě.
+4. Napište jednu uzavírací větu.
+5. Odstraňte nebo anonymizujte dočasné podklady z review.
+6. Potvrďte další běžný rytmus.
+7. Pokud se objevila nová otázka, založte ji mimo staré pravidlo.
+
+Stop otázka:
+
+```text
+Zavíráme review, nebo jen převlékáme starou mimořádnou péči do nového názvu?
+```
+
+Pokud odpověď ukazuje na novou péči, vraťte se k výslednému stavu. Buď pravidlo opravdu potřebuje portfoliovou kontrolu, nebo tým jen nechce pustit proces, který už splnil svůj účel.
+
+### Checklist uzavření prvního review minimální stopy
+
+- Má review vybraný jeden uzavírací stav?
+- Je uzavírací věta konkrétní a srozumitelná bez znalosti historie?
+- Je případná oprava propsaná v kanonickém pracovním místě?
+- Zůstává v portfoliu jen aktuální pracovní minimum?
+- Nevznikla nová kontrola adopce bez jasného rozhodovacího důvodu?
+- Je nová otázka oddělená od starého pravidla, pokud se objevila?
+- Jsou dočasné podklady z review smazané, anonymizované nebo vrácené na správné místo?
+- Je zapsané, co jsme nepropsali do portfolia?
+- Má pravidlo potvrzený další běžný rytmus?
+- Umí ho další člověk použít bez otevření archivované historie?
+
+Uzavření prvního běžného review je malé, ale důležité. Právě tady se rozhoduje, jestli minimální stopa opravdu zůstane minimální. Když tým zavře review bez nové kontrolní vrstvy, pravidlo se stane běžnou součástí práce. Když k němu přidá další dohled, vrací se zpátky do režimu, ze kterého se ho snažil dostat.
+
 ## Pracovní log
 
+- 2026-06-11: Doplněna úvodní podkapitola o uzavření prvního běžného review minimální portfoliové stopy: uzavírací stavy, propsání do portfolia, ukončení další kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o prvním běžném review minimální portfoliové stopy: najitelnost, srozumitelnost, použitelnost, datová střídmost, výsledné stavy, privacy-first kontrola, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převodu stabilního pravidla do minimální portfoliové stopy: pracovní věta pravidla, kanonické místo, archivace historie, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhé portfoliové kontroly po uklidnění pravidla: uzavírací stavy, propsání do portfolia, konec zvláštní péče, privacy-first úklid stop, karta, mini workshop a checklist.
