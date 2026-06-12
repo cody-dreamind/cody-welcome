@@ -212424,8 +212424,188 @@ Pokud odpověď zní "další vrstvu péče", nejdřív ji pojmenujte jako novou
 
 Uzavření návratového signálu po dvou klidových letech má být klidné a trochu neokázalé. Opravit cestu, zapsat závěr, uklidit stopy a nechat pravidlo znovu pracovat bez zvláštní péče. Když systém po návratu zůstane lehčí než před ním, signál nepřidal dluh. Přidal zkušenost.
 
+## Návrat pravidla do ročního klidového rytmu po uzavřeném signálu
+
+Po uzavření prvního návratového signálu po dvou klidových letech zbývá ještě jedna drobná, ale důležitá práce: vrátit pravidlo zpět do běžného ročního klidového rytmu. Nejde o další kontrolu. Jde o to, aby dnešní zkušenost nezaložila nový mimořádný režim, novou sledovací tabulku ani dlouhou sérii připomínek.
+
+Začněte krátkou otázkou:
+
+```text
+Co se po signálu změnilo v samotném ročním rytmu?
+```
+
+Ve většině případů odpověď zní: nic zásadního. Signál vedl k lokální opravě, jedna pracovní cesta je čistší a pravidlo může dál žít ve stejném rytmu jako předtím. To je dobrý výsledek. Není potřeba přidávat měsíční mezikontrolu jen proto, že se po dlouhé době něco stalo.
+
+Příklad:
+
+```text
+Uzavřený signál:
+Nový člověk našel archivní kartu místo kanonického pravidla.
+
+Výsledek:
+Opravený odkaz v onboardingu a zkrácená archivní karta.
+
+Co se mění v ročním rytmu:
+Do příští roční inventury přidáváme jednu kontrolní otázku: vede onboarding stále na kanonické pravidlo?
+
+Co se nemění:
+Nezavádíme měsíční dohled nad používáním dokumentace, nesledujeme jednotlivé kliky a neotvíráme znovu staré review.
+```
+
+Takový návrat je silnější než nový dohled. Roční rytmus zůstává stabilní, ale získá jednu lepší otázku. Systém se učí, aniž by bobtnal.
+
+### Tři možné návraty
+
+Po uzavřeném signálu vyberte jeden ze tří návratů:
+
+- Beze změny rytmu: signál byl šum nebo drobná oprava a roční kontrola zůstává stejná.
+- Rytmus s jednou lepší otázkou: signál ukázal konkrétní slabinu, kterou stačí přidat do příští roční inventury.
+- Nová samostatná práce mimo roční rytmus: signál odhalil širší problém, který už má vlastní kartu a nemá zatěžovat původní pravidlo.
+
+Nedávejte pravidlu čtvrtý stav "budeme ho raději častěji hlídat". Pokud častější péče opravdu dává smysl, pojmenujte ji jako novou samostatnou práci: co chrání, kdo ji vlastní, jak dlouho trvá a jaká data kvůli ní vznikají. Jinak se z dočasné opatrnosti stane trvalý proces bez rozhodnutí.
+
+Rozhodovací věta:
+
+```text
+Po uzavřeném signálu se pravidlo vrací do:
+- stejného ročního rytmu / ročního rytmu s jednou lepší otázkou / nové samostatné práce
+
+Protože:
+
+Do příští roční kontroly se propisuje:
+
+Co se výslovně nezavádí:
+```
+
+### Jak upravit roční otázku
+
+Když signál ukázal užitečnou slabinu, nepřepisujte celý roční proces. Upravte jednu otázku tak, aby příště zachytila stejný typ rizika dřív a levněji.
+
+Slabá úprava:
+
+```text
+Prověřit dokumentaci důkladněji.
+```
+
+Lepší úprava:
+
+```text
+U jednoho běžného předání ověřit, zda cesta z onboardingového checklistu vede na kanonické pravidlo, ne na archivní kartu.
+```
+
+První věta otevírá audit. Druhá věta drží roční rytmus malý a navázaný na reálnou práci. Neptá se, jestli je dokumentace krásná, kompletní a dokonale uklizená. Ptá se, jestli v jedné důležité situaci vede člověka správně.
+
+Dobrá roční otázka má tři vlastnosti:
+
+- je navázaná na pracovní situaci, ne na abstraktní kvalitu dokumentace;
+- dá se ověřit bez nového trackingu;
+- po odpovědi vede k jednomu rozhodnutí, ne k dlouhému seznamu námětů.
+
+### Co nevracet do ročního rytmu
+
+Roční rytmus není skládka všeho, co tým při signálu viděl. Nevracejte do něj:
+
+- staré pracovní poznámky, které už byly smazané nebo zkrácené;
+- jména lidí, kteří na problém narazili;
+- pomocné exporty, screenshoty nebo přepisy chatu;
+- dočasné checklisty z řešení signálu;
+- obecné obavy typu "dokumentace se možná časem zase rozjede";
+- měření čtenosti pravidel nebo individuální evidence chyb.
+
+Do ročního rytmu patří jen to, co pomůže příštímu rozhodnutí. Pokud něco sloužilo jen dnešnímu řešení, má po uzavření zmizet. Pokud něco odhalilo nový širší problém, má dostat vlastní kartu. Roční rytmus má zůstat klidový, ne poloviční provozní štáb.
+
+Codyho komentář: když do roční kontroly přidáte všechno, co vás při posledním incidentu napadlo, už to není roční kontrola. Je to historická prohlídka sklepa s baterkou a špatným svědomím. Praktická práce potřebuje dveře, ne muzeum.
+
+### Privacy-first návrat do klidu
+
+Privacy-first návrat znamená, že po signálu nevznikne trvalé sledování lidí ani dokumentační analytika jen kvůli pocitu jistoty. Potřebujete vědět, zda pracovní cesta funguje. Nepotřebujete vědět, kdo kdy pravidlo otevřel, kolikrát klikl, jak dlouho četl nebo jak často se vrací ke staré kartě.
+
+Stačí pracovat s přirozeným důkazem:
+
+- při příštím běžném předání někdo projde checklist;
+- při roční inventuře se ověří jeden odkazový tok;
+- při běžné práci se zaznamená jen to, zda člověk skončil na správném kanonickém místě;
+- po opravě se ponechá krátký changelog, ne detailní incidentová složka.
+
+Do zápisu přidejte větu:
+
+```text
+Díky návratu do ročního rytmu nepřidáváme:
+```
+
+Příklad:
+
+```text
+Díky návratu do ročního rytmu nepřidáváme sledování čtenosti interní dokumentace, individuální evidenci chyb ani měsíční export odkazů. Příští ověření proběhne při běžném onboardingu a v roční inventuře jednou otázkou.
+```
+
+Tato věta chrání tým před velmi lidskou reakcí: po problému chceme víc kontroly. Někdy je to správně. Často ale stačí lepší cesta, čistší odkaz a jeden návratový signál.
+
+### Karta návratu do ročního klidového rytmu
+
+```text
+Uzavřený návratový signál:
+
+Datum návratu do rytmu:
+
+Kanonické pravidlo:
+
+Vybraný návrat:
+- beze změny rytmu / roční rytmus s jednou lepší otázkou / nová samostatná práce
+
+Co se propisuje do příští roční inventury:
+
+Co zůstává mimo roční rytmus:
+
+Co bylo smazáno, zkráceno nebo sloučeno:
+
+Příští přirozené ověření:
+
+Privacy-first hranice:
+
+Jednovětý závěr pro portfoliový log:
+```
+
+Karta má smysl jen jako přechodový záznam. Jakmile je závěr propsaný do roční inventury nebo nové samostatné karty, přechodovou kartu zrušte nebo zkraťte na log. Jinak si systém vytvoří další místo, které bude jednou někdo muset najít, pochopit a uklidit.
+
+### Mini workshop na 6 minut
+
+1. Přečtěte uzavírací stav návratového signálu.
+2. Vyberte jeden ze tří návratů.
+3. Rozhodněte, zda se mění jedna roční otázka.
+4. Zapište, co se do ročního rytmu nevrací.
+5. Určete příští přirozené ověření.
+6. Zapište privacy-first větu o tom, co se nepřidává.
+7. Přepište závěr do portfoliového logu.
+
+Stop otázka:
+
+```text
+Vracíme pravidlo do klidu, nebo jsme z jednoho signálu vyrobili novou péči?
+```
+
+Pokud odpověď zní "nová péče", dejte jí vlastní kartu a vlastní důvod. Neschovávejte ji do ročního rytmu, protože tím znečistíte pravidlo, které jinak mohlo zůstat jednoduché.
+
+### Checklist návratu do ročního rytmu
+
+- Je uzavřený návratový signál opravdu uzavřený?
+- Vybrali jsme jeden ze tří návratů?
+- Pokud se rytmus nemění, není přidaná žádná skrytá mezikontrola?
+- Pokud se mění otázka, je jen jedna a navazuje na reálnou pracovní situaci?
+- Pokud vznikla nová práce, má vlastní kartu a nezatěžuje původní pravidlo?
+- Je zapsané, co se do ročního rytmu nevrací?
+- Byly smazané nebo zkrácené přechodové poznámky?
+- Je příští ověření přirozené, ne nové sledování?
+- Nepřibyla individuální evidence chyb, čtenosti nebo kliků?
+- Zůstává kanonické pravidlo hlavním zdrojem pravdy?
+- Je v portfoliovém logu jedna stručná věta místo dlouhého příběhu?
+- Umí další člověk použít pravidlo bez znalosti celého návratového signálu?
+
+Návrat do ročního klidového rytmu je malá tečka za celou smyčkou. Důležité není, aby tým ukázal, kolik práce kolem signálu udělal. Důležité je, aby po něm zůstalo méně tření, čistší cesta a pořád dost klidu. Stabilní systém se pozná podle toho, že se po vyrušení umí vrátit do normálu bez dramatického protokolu.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o návratu pravidla do ročního klidového rytmu po uzavřeném signálu: tři typy návratu, úprava jedné roční otázky, věci mimo rytmus, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po dvou klidových letech: uzavírací stavy, propsání do běžného pracovního místa, ukončení dočasné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o prvním návratovém signálu po dvou klidových letech: oddělení dnešního důkazu od archivu, tři brány před novou kartou, lokální oprava, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého klidového roku minimální portfoliové stopy: čtyři uzavírací stavy, úklid přechodných stop, privacy-first cílová stopa, karta, mini workshop a checklist.
