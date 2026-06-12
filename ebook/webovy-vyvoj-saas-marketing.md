@@ -213687,8 +213687,173 @@ Pokud jde hlavně o pocit, zkraťte ji. Pečlivost se v provozu pozná podle toh
 
 Dlouhodobá portfoliová paměť je dobrý konec dlouhé péče. Neoslavuje minulou práci, ale nechává po ní použitelnou stopu. Pravidlo má být dostupné, stručné a aktivovatelné jen tehdy, když se objeví skutečný návratový signál. Všechno ostatní je už jen provozní šum v hezkém kabátě.
 
+## Roční zhuštění dlouhodobé portfoliové paměti
+
+Dlouhodobá portfoliová paměť má časem ještě jednu zkoušku: jestli zůstane krátká. I dobře uklizený index začne po roce nabírat drobné poznámky, výjimky, odkazy na staré rozhodovací karty a "pro jistotu" uložené vysvětlivky. Každá jednotlivá věta může dávat smysl. Dohromady ale vytvoří druhý archiv, který se jen tváří jako pracovní mapa.
+
+Roční zhuštění proto není další audit pravidel. Je to úklid portfoliové vrstvy tak, aby další rok sloužila jako rozcestník, ne jako pamětní album. Cíl je jednoduchý: u každé dlouhodobé položky ponechat jen to, co pomáhá budoucímu rozhodnutí.
+
+Začněte větou:
+
+```text
+Tuto položku držíme v portfoliové paměti proto, že:
+
+Člověk ji má najít ve chvíli, kdy:
+
+K rozhodnutí potřebuje vědět:
+
+Naopak už nepotřebuje vědět:
+
+Po zhuštění zůstane:
+```
+
+Příklad:
+
+```text
+Tuto položku držíme v portfoliové paměti proto, že:
+Chrání formuláře před návratem povinných polí bez obchodního použití.
+
+Člověk ji má najít ve chvíli, kdy:
+Upravuje landing page, poptávkový formulář nebo kvalifikační otázky.
+
+K rozhodnutí potřebuje vědět:
+Kanonické pravidlo, místo v checklistu a návratový signál.
+
+Naopak už nepotřebuje vědět:
+Staré debaty o konkrétních verzích formuláře ani jména lidí u tehdejších oprav.
+
+Po zhuštění zůstane:
+Jedna věta pravidla, odkaz na checklist konverzních míst a signál "nové pole bez použití v prvním navázání".
+```
+
+Takové zhuštění neoslabuje paměť. Naopak ji dělá použitelnější. Když se k pravidlu vrátí nový člověk, nepotřebuje číst celý příběh, aby udělal rozumné rozhodnutí.
+
+### Tři otázky zhuštění
+
+U každé položky portfoliové paměti projděte tři otázky:
+
+- Pomáhá tato informace poznat, kdy pravidlo použít?
+- Pomáhá tato informace najít kanonické místo?
+- Pomáhá tato informace rozhodnout, jestli se objevil skutečný návratový signál?
+
+Pokud odpověď třikrát zní ne, položka do portfoliové vrstvy nepatří. Může jít do archivu, může se smazat, nebo může zůstat jen jako krátká poznámka u starého rozhodovacího záznamu. Nemá ale ležet v indexu, který má sloužit běžné práci.
+
+Typické kandidáty na zkrácení:
+
+- vysvětlení, proč se kdysi zvolil konkrétní název pravidla;
+- staré varianty šablony, které už nikdo nepoužívá;
+- odkazy na dočasné tabulky a pracovní exporty;
+- seznamy lidí, kteří byli u původního rozhodnutí;
+- dlouhé příklady, když už existuje krátké kanonické pravidlo;
+- poznámky o jednorázových výjimkách, které se neopakovaly.
+
+Naopak neskracujte věci, které přímo chrání práci:
+
+- větu pravidla;
+- kanonické místo;
+- návratový signál;
+- stav pravidla;
+- vlastnickou roli;
+- poslední datum, kdy se pravidlo vědomě uzavřelo.
+
+### Když zhuštění odhalí slabé pravidlo
+
+Roční zhuštění někdy ukáže, že problém není v délce zápisu, ale v samotném pravidle. Pokud nejde napsat krátká věta, kdy se má položka použít, možná pravidlo nikdy nebylo dost jasné. Pokud nejde určit kanonické místo, možná pravidlo žije jen v hlavách lidí. Pokud nejde pojmenovat návratový signál, možná tým drží starý strach místo praktické paměti.
+
+V takové chvíli nepřepisujte celou historii. Vyberte jeden ze čtyř stavů:
+
+- Zpřesnit pravidlo: existuje, ale potřebuje jednu jasnější větu.
+- Přesunout do kanonického místa: pravidlo je dobré, jen neleží tam, kde se pracuje.
+- Archivovat položku: pravidlo už nemá aktivní použití ani návratový signál.
+- Otevřít novou otázku: zhuštění odhalilo reálný problém, který přesahuje úklid paměti.
+
+Novou otázku otevírejte jen tehdy, když má vlastní pracovní místo a konkrétní důkaz. "Měli bychom to celé znovu promyslet" není otázka, ale pozvánka k mlze v konferenční místnosti. Ano, i digitální mlha se dá vyrobit překvapivě rychle.
+
+### Privacy-first zhuštění
+
+Čím je paměť starší, tím přísněji má držet datové minimum. Staré osobní poznámky, seznamy chyb, interní výřezy a dočasné exporty obvykle ztrácejí hodnotu rychleji než samotné rozhodnutí. Při ročním zhuštění proto u každé položky napište, jakou stopu můžete zmenšit bez ztráty provozní použitelnosti.
+
+Praktické pravidlo:
+
+```text
+Pokud informace nechrání budoucí rozhodnutí, nemá v dlouhodobé paměti co dělat.
+```
+
+To platí i pro informace, které nejsou právně dramatické. Privacy-first provoz není jen o citlivých údajích. Je to návyk neschovávat víc, než tým opravdu potřebuje. Méně starých stop znamená méně vysvětlování, méně rizika a méně nepořádku pro lidi, kteří mají dělat práci, ne luštit minulost.
+
+Codyho komentář: nejlepší archiv je často ten, který se umí tvářit trochu nudně. Když po roce najdete jen aktuální pravidlo, kanonický odkaz a návratový signál, není to nedostatek péče. Je to důkaz, že péče konečně dospěla.
+
+### Karta ročního zhuštění
+
+```text
+Položka portfoliové paměti:
+
+Proč ji držíme:
+
+Kdy ji má člověk najít:
+
+Kanonické místo:
+
+Aktuální návratový signál:
+
+Co v portfoliové vrstvě zůstává:
+
+Co přesouváme do archivu:
+
+Co mažeme nebo zkracujeme:
+
+Co se znovu neotevírá:
+
+Výsledný stav:
+- ponechat / zpřesnit / přesunout / archivovat / otevřít novou otázku
+
+Vlastník:
+
+Datum dalšího zhuštění:
+
+Jednovětý zápis do logu:
+```
+
+Karta má pomoct hlavně u položek, které se začaly rozlézat. U jednoduché položky stačí jednovětý zápis: "Pravidlo ponecháno, portfoliový záznam zkrácen na kanonické místo a návratový signál." Formulář nemá být trest za to, že někdo chtěl uklidit.
+
+### Mini workshop na 7 minut
+
+1. Vyberte jednu položku portfoliové paměti, která je delší než ostatní.
+2. Napište, kdy ji má člověk najít v reálné práci.
+3. Označte věty, které pomáhají použití, nalezení nebo návratovému signálu.
+4. Zbytek rozdělte na archivovat, smazat nebo převést do kanonického místa.
+5. Zkraťte portfoliový zápis na pracovní minimum.
+6. Zkontrolujte, že nezůstaly osobní nebo dočasné stopy bez hodnoty.
+7. Zapište jednovětý výsledek do logu.
+
+Stop otázka:
+
+```text
+Najde příští člověk díky této položce správné pravidlo rychleji než před zhuštěním?
+```
+
+Pokud ne, zhuštění je jen přepsání nepořádku hezčí češtinou. To je sice literárně sympatické, ale provozně slabé.
+
+### Checklist ročního zhuštění
+
+- Vybrali jsme jednu konkrétní položku portfoliové paměti?
+- Víme, kdy ji má člověk najít v reálné práci?
+- Zůstává v indexu jen pravidlo, stav, kanonické místo a návratový signál?
+- Přesunuli jsme historické vysvětlivky mimo portfoliovou vrstvu?
+- Smazali nebo zkrátili jsme dočasné pracovní stopy bez budoucí hodnoty?
+- Nezůstávají v dlouhodobé paměti jména lidí u starých chyb bez důvodu?
+- Je jasné, co se kvůli položce nemá znovu otevírat?
+- Odhalilo zhuštění slabé pravidlo, které potřebuje samostatnou otázku?
+- Pokud ano, má nová otázka vlastní pracovní místo a důkaz?
+- Nezavedli jsme nové měření používání dokumentace?
+- Je log kratší než původní položka?
+- Pomáhá výsledný zápis rychlejšímu rozhodnutí?
+
+Roční zhuštění je údržba paměti bez nostalgie. Nejde o to dokázat, kolik práce tým v minulosti udělal. Jde o to, aby příští rozhodnutí mělo po ruce přesně tolik kontextu, kolik potřebuje. Ani míň, ani hromadu navíc.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o ročním zhuštění dlouhodobé portfoliové paměti: tři otázky zhuštění, slabá pravidla, privacy-first redukce stop, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o dlouhodobé portfoliové paměti po uzavřeném druhém ročním cyklu: vrstvy paměti, portfoliový index, privacy-first redukce stop, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého ročního cyklu po uzavřené první kontrole: uzavírací stavy, ztišení pravidla, archivace bez falešného bezpečí, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o druhém ročním cyklu po uzavřené první kontrole: ověření pravidla bez čerstvé paměti, čtyři výsledné stavy, sloučení do širší rutiny, privacy-first hranice, karta, mini workshop a checklist.
