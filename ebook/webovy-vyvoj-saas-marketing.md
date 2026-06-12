@@ -210318,8 +210318,167 @@ Když odpověď míří k druhé části věty, zavřete kontrolu. Provozní sys
 
 První tichá kontrola je úspěšná, když po ní není moc co dělat. Buď pravidlo potichu funguje, nebo se opraví jeden odkaz, jedna věta či jeden zbytek péče. Jakmile z kontroly vzniká nový projekt, pravidlo se nevrátilo do tichého provozu. Jen změnilo kostým a dál si říká o pozornost.
 
+## Uzavření první tiché kontroly minimální portfoliové stopy
+
+První tichá kontrola má skončit rychle. Její hodnota není v tom, že se k pravidlu znovu všichni dlouze vyjádří, ale v tom, že tým dokáže říct: pravidlo funguje, potřebuje drobnou lokální opravu, nebo se kolem něj znovu začíná tvořit zbytečná péče. Pokud po kontrole zůstane otevřený dlouhý seznam poznámek, kontrola se nepovedla uzavřít. Jen vyrobila další vrstvu práce nad pravidlem, které už mělo být tiché.
+
+Uzavření proto pište jako rozhodnutí, ne jako zápis dojmů:
+
+```text
+První tichá kontrola dopadla takto:
+
+Výsledný stav:
+
+Jedna uzavírací věta:
+
+Co jsme opravili / co necháváme být:
+
+Co jsme výslovně nezaložili:
+
+Další návrat nastane jen když:
+```
+
+Příklad:
+
+```text
+První tichá kontrola dopadla takto:
+Pravidlo pro datovou střídmost formulářů bylo nalezené v briefu a použité bez starých poznámek.
+
+Výsledný stav:
+Funguje tiše.
+
+Jedna uzavírací věta:
+Pravidlo zůstává v běžném portfoliovém indexu a další návrat nastane jen při novém datovém toku, povinném poli nebo změně vlastníka dat.
+
+Co necháváme být:
+Neměníme text pravidla, nepřidáváme další kontrolu a nevracíme se k pilotní tabulce.
+
+Co jsme výslovně nezaložili:
+Žádný report používání pravidla, žádný kontrolní meeting, žádný nový formulář pro interní potvrzení.
+```
+
+Tento zápis je krátký schválně. Po první tiché kontrole už nemá vznikat druhá dokumentace k dokumentaci. Stačí uzavírací věta, případná malá oprava a jasná hranice, kdy se pravidlo znovu otevře.
+
+### Čtyři uzavírací stavy
+
+Použijte stejné stavy jako při kontrole, ale přepište je do uzavírací akce:
+
+- Funguje tiše: zapište jednu větu do portfoliového logu a nic dalšího nezakládejte.
+- Lokální směrovka opravena: upravte jeden odkaz, navigaci nebo popisek v pracovním místě a kartu zavřete.
+- Věta zkrácena: nahraďte aktivní pracovní text kratší verzí a starší vysvětlení nechte jen v archivu.
+- Zvláštní péče zastavena: zrušte novou připomínku, report nebo kontrolní bod, pokud nemá konkrétní rozhodovací účel.
+
+U každého stavu platí stejná brzda: po uzavření nesmí vzniknout nová pravidelná kontrola jen proto, že tým chce mít jistotu. Jistota se má opírat o návratový signál, ne o další sledování.
+
+Codyho komentář: když kontrola dopadne dobře, nejlepší manažerský pohyb je často nedělat slavnostní kolečko. Zapsat, uklidit, zavřít. Ano, je to méně efektní než barevný dashboard, ale dashboard se sám neudržuje a málokdy vám poděkuje.
+
+### Co propsat zpět
+
+Po uzavření první tiché kontroly se do aktivního portfolia propisuje jen to, co pomůže při další běžné práci:
+
+- aktuální pracovní věta pravidla;
+- správné kanonické místo;
+- návratový signál;
+- jedna lokální oprava směrovky, pokud byla potřeba;
+- krátká uzavírací věta, že první tichá kontrola neotevřela zvláštní režim.
+
+Nepropisujte celé zdůvodnění, kdo co řekl, proč vznikla původní stabilizace ani jaké varianty tým zvažoval. Tyto věci mohou zůstat v archivu, pokud mají retenční důvod, ale nemají zatěžovat člověka, který za tři týdny jen upravuje formulář, šablonu nebo landing page.
+
+Dobrá uzavírací věta vypadá třeba takto:
+
+```text
+První tichá kontrola potvrdila, že pravidlo je nalezitelné a použitelné v běžné práci; další návrat nastane jen při změně účelu, datového toku, vlastníka nebo pracovního místa.
+```
+
+Slabá uzavírací věta vypadá takto:
+
+```text
+Pravidlo zatím necháme sledovat a za měsíc se k tomu pro jistotu vrátíme.
+```
+
+Druhá věta možná zní opatrně, ale ve skutečnosti ruší tichý provoz. Pokud neexistuje návratový signál, který by další návrat spustil, jde o nový dohled.
+
+### Privacy-first uzavření
+
+Uzavření první tiché kontroly je poslední šance zrušit zbytky, které by jinak zůstaly v systému jen ze zvyku. Ptejte se jednoduše:
+
+- Zůstala někde pracovní kopie s osobními údaji, zákaznickým příkladem nebo interním komentářem?
+- Vznikl během kontroly nový seznam lidí, kteří pravidlo použili nebo nepoužili?
+- Přibyla poznámka, screenshot nebo export bez jasného rozhodovacího účelu?
+- Je v aktivním portfoliu jen současné pravidlo, nebo i historie jeho stabilizace?
+- Umíme další návrat spustit bez sledování jednotlivců?
+
+Privacy-first uzavírací zápis:
+
+```text
+Po první tiché kontrole zůstává v aktivním portfoliu jen pracovní věta pravidla, kanonické místo a návratový signál. Dočasné poznámky z kontroly mažeme nebo anonymizujeme. Nepřidáváme měření používání pravidla po lidech.
+```
+
+Tohle není jen právní opatrnost. Je to provozní hygiena. Čím méně pomocných stop tým drží, tím méně musí vysvětlovat, mazat, zabezpečovat a udržovat. Privacy-first přístup tady není brzda práce; je to způsob, jak nenechat interní systém bobtnat.
+
+### Karta uzavření první tiché kontroly
+
+```text
+Pravidlo:
+
+Kontrolovaná pracovní situace:
+
+Výsledný stav:
+- funguje tiše / lokální směrovka opravena / věta zkrácena / zvláštní péče zastavena
+
+Uzavírací věta:
+
+Propis do aktivního portfolia:
+
+Archivované nebo smazané podklady:
+
+Co jsme nezaložili:
+
+Návratový signál:
+
+Vlastník kanonického místa:
+
+Datum uzavření:
+```
+
+Karta má po uzavření zůstat krátká. Pokud se do ní nevejdete bez dlouhého vysvětlování, pravděpodobně nezavíráte kontrolu, ale otevíráte novou práci. V takovém případě novou otázku oddělte a původní tichou kontrolu nejdřív zavřete vlastním výsledkem.
+
+### Mini workshop na 5 minut
+
+1. Přečtěte výsledek první tiché kontroly.
+2. Vyberte jeden ze čtyř uzavíracích stavů.
+3. Napište jednu uzavírací větu.
+4. Proveďte nejmenší lokální opravu, pokud je potřeba.
+5. Zrušte všechno, co by obnovilo zvláštní péči bez rozhodovací otázky.
+6. Zapište návratový signál.
+7. Smažte nebo anonymizujte dočasné kontrolní podklady bez účelu.
+
+Stop otázka:
+
+```text
+Zůstává po uzavření jen to, co člověk potřebuje při další běžné práci?
+```
+
+Pokud ne, ještě neuzavíráte. Pořád držíte kus staré stabilizace v aktivním provozu.
+
+### Checklist uzavření první tiché kontroly
+
+- Je vybraný jeden uzavírací stav?
+- Vznikla jedna krátká uzavírací věta?
+- Byla případná oprava omezená na jedno pracovní místo nebo jednu větu?
+- Nezaložil se nový meeting, report, připomínka ani kontrolní formulář?
+- Je v aktivním portfoliu jen současné pravidlo a návratový signál?
+- Jsou staré kontrolní podklady smazané, anonymizované nebo přesunuté podle retence?
+- Nepřibylo sledování používání pravidla po jednotlivcích?
+- Je jasné, kdo vlastní kanonické místo?
+- Ví tým, že další návrat nastává jen při skutečném signálu?
+- Nezůstala po kontrole otevřená karta bez rozhodnutí?
+
+Uzavření první tiché kontroly má být nenápadné. Právě v tom je jeho smysl. Když pravidlo funguje, nemá si říkat o další péči. Má být po ruce ve správnou chvíli, pomoct rozhodnutí a zase zmizet z pozornosti týmu.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o uzavření první tiché kontroly minimální portfoliové stopy: uzavírací stavy, propsání do portfolia, zastavení zvláštní péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o první tiché kontrole po převodu minimální portfoliové stopy: ověření běžné pracovní situace, výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převodu minimální portfoliové stopy do tichého provozu: zrušení zbytků zvláštní péče, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhého běžného review minimální portfoliové stopy: uzavírací stavy, propsání pracovního minima, ukončení zvláštní kontroly, privacy-first úklid, karta, mini workshop a checklist.
