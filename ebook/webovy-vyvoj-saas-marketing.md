@@ -10250,6 +10250,162 @@ Návratový signál pro budoucnost:
 
 Druhé běžné použití má jednoduchý cíl: oddělit stabilní převod od převodu, který drží jen díky doznívající pozornosti. Když drží, nechte ho v klidu. Když drhne stejně jako poprvé, opravte nejbližší místo. Když se opravdu vrátí problém, otevřete novou smyčku. Všechno mezi tím je jen provozní šum, který si nezaslouží vlastní tabulku.
 
+## Uzavření druhého běžného použití po převodu reakce
+
+Druhé běžné použití po převodu reakce má skončit jasným stavem. Bez uzavření zůstává tým v nenápadném mezirežimu: pravidlo už se používá normálně, ale někde v hlavě pořád běží otázka, jestli ho ještě jednou nezkontrolovat. To je drahé. Ne kvůli samotné kontrole, ale kvůli pozornosti, kterou bere dalším rozhodnutím.
+
+Uzavření napište jednou větou:
+
+```text
+Po druhém běžném použití je stav:
+```
+
+A doplňte jeden ze čtyř stavů:
+
+- nechat v klidovém provozu;
+- udělat poslední lokální dočištění;
+- opravit kanonické místo;
+- otevřít novou smyčku kvůli skutečnému návratovému signálu.
+
+Nevymýšlejte pátý stav "budeme sledovat". Pokud není jasné, co přesně a proč sledovat, nejde o rozhodnutí, ale o odloženou nejistotu. Ta pak často vyrobí další report, připomínku nebo ruční kontrolu, která nebude mít vlastníka ani konec.
+
+Příklad krátkého uzavření:
+
+```text
+Po druhém běžném použití je stav:
+nechat v klidovém provozu.
+
+Důvod:
+Druhý vlastník použil pravidlo z kanonického místa, staré podklady nebyly potřeba a nevznikla nová pomocná evidence.
+
+Co se mění:
+Nic. Pravidlo zůstává v běžném rytmu.
+
+Co zavíráme:
+Zvláštní pozornost po převodu reakce.
+```
+
+Tohle je celý smysl uzavření: říct, že práce skončila, a nepřidat k tomu další práci.
+
+### Čtyři uzavírací stavy
+
+Stav "nechat v klidovém provozu" použijte, když druhé běžné použití potvrdilo přenositelnost. Kanonické místo stačilo, výstup vznikl v běžném rytmu a nikdo nepotřeboval starou reakci jako berličku. V takovém případě není co zlepšovat. Jen zapište stav a smažte pomocné stopy, pokud ještě existují.
+
+Stav "poslední lokální dočištění" použijte, když pravidlo funguje, ale jedno malé tření se zopakovalo. Oprava má být u nejbližšího pracovního místa: název odkazu, jedna věta v šabloně, umístění stavového pole, doplnění příkladu nebo odstranění starého odkazu. Po opravě neotevírejte nový projekt. Příští přirozené použití jen ukáže, jestli tření zmizelo.
+
+Stav "opravit kanonické místo" použijte, když lidé pravidlo obcházejí ne proto, že by bylo špatné, ale proto, že není dost dobře dostupné. Typický signál: výsledek práce je správný, ale člověk ho našel přes starý komentář, uložený chat, kopii v dokumentu nebo paměť kolegy. V takové situaci neopravujte lidi. Opravte cestu ke zdroji pravdy.
+
+Stav "otevřít novou smyčku" použijte jen tehdy, když druhé použití ukázalo návrat skutečného problému. Nestačí drobný dotaz nebo kosmetická nejasnost. Nová smyčka má smysl, když se znovu objevila původní chyba, nové pravidlo vede ke špatnému rozhodnutí, nebo se změnila pracovní realita natolik, že stará reakce už není dobrý základ.
+
+### Co propsat a co nechat v historii
+
+Po uzavření druhého použití se do běžného pracovního místa propisuje jen to, co někdo potřebuje při příštím použití. Historie může zůstat v rozhodovacím záznamu, ale nemá znovu lézt do každodenní práce.
+
+Propsat dává smysl:
+
+- nový stav pravidla;
+- jednu lokální opravu, pokud opravdu proběhla;
+- přesnější návratový signál;
+- změnu vlastníka nebo místa, kde pravidlo žije;
+- informaci, že zvláštní kontrola končí.
+
+Nepropsat dává smysl:
+
+- celý průběh původní reakce;
+- staré screenshoty a pracovní kopie;
+- seznam lidí, kteří pravidlo použili;
+- dočasné poznámky z ověření;
+- interní debatu o tom, jestli byla oprava dobrý nápad.
+
+Praktické pravidlo: pokud by informace při příštím použití nepomohla rychleji udělat správnou práci, nepatří do běžného místa. Patří do historie, nebo se má smazat.
+
+### Kdy ukončit zvláštní pozornost
+
+Zvláštní pozornost ukončete hned, jak druhé běžné použití potvrdí klidový stav. Nečekejte na třetí, čtvrté ani "ještě jednou po kvartálu", pokud nemáte konkrétní návratový signál. Provozní pravidlo má pracovat samo. Když potřebuje nekonečný dohled, není uzavřené.
+
+Ukončení zvláštní pozornosti může být jednoduchá věta v changelogu nebo u pravidla:
+
+```text
+Zvláštní kontrola po převodu reakce končí. Další návrat otevřeme jen při návratovém signálu: [konkrétní signál].
+```
+
+Tím tým získá dvě věci. Zaprvé ví, že už nemá pravidlo pořád znovu hodnotit. Zadruhé ví, co by muselo nastat, aby se téma opravdu otevřelo. Bez druhé věty se "necháme to být" může změnit v zapomenutí. S návratovým signálem je to vědomé uzavření.
+
+Codyho komentář: jedna z nejlepších provozních dovedností je umět přestat kontrolovat věc, která už funguje. Není to lenost. Je to úklid pozornosti. A pozornost je ve firmě dražší než většina SaaS předplatných, jen nemá tak hezkou fakturu.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití je dobrý okamžik na datový úklid. V průběhu převodu mohly vzniknout poznámky, dočasné tabulky, kopie staré reakce, screenshoty, exporty nebo ruční seznamy. Po uzavření už mají buď jasný účel, nebo překážejí.
+
+Použijte jednoduché třídění:
+
+```text
+Ponechat:
+Co je potřeba pro běžné pravidlo.
+
+Archivovat:
+Co vysvětluje rozhodnutí, ale nebude se používat při běžné práci.
+
+Smazat nebo anonymizovat:
+Co bylo jen dočasný důkaz, pracovní kopie nebo osobní stopa.
+
+Dál nesbírat:
+Co vzniklo jen kvůli zvláštní kontrole a po uzavření už nemá účel.
+```
+
+Privacy-first hodnota tady není v hezké formulaci. Je v tom, že tým nepřenese mimořádné ověřování do normálního provozu. Nezakládejte dlouhodobý report používání pravidla. Nepřidávejte sledování kliknutí v interním rozcestníku. Neuchovávejte screenshoty jen proto, že "by se mohly hodit". Pokud má být výsledek přenositelný, musí žít v pravidle, ne v hromadě podpůrných stop.
+
+### Karta uzavření druhého běžného použití
+
+```text
+Převedená reakce:
+
+Druhé běžné použití:
+
+Výsledek práce:
+
+Stačilo kanonické místo?
+
+Byly potřeba staré podklady?
+
+Vznikla nová pomocná evidence?
+
+Uzavírací stav:
+- klidový provoz / poslední lokální dočištění / opravit kanonické místo / nová smyčka
+
+Důvod stavu:
+
+Jedna změna, pokud je potřeba:
+
+Co se propisuje do běžného pracovního místa:
+
+Co zůstává jen v historii:
+
+Co mažeme nebo anonymizujeme:
+
+Co už dál nesledujeme:
+
+Návratový signál:
+
+Vlastník:
+```
+
+### Checklist uzavření druhého použití
+
+- Má druhé běžné použití jeden jasný stav?
+- Neskončili jsme neurčitým "budeme sledovat"?
+- Pokud pravidlo drží, opravdu končí zvláštní pozornost?
+- Pokud se dělá lokální dočištění, týká se jednoho nejbližšího místa?
+- Pokud je slabé kanonické místo, opravujeme cestu ke zdroji pravdy?
+- Pokud vzniká nová smyčka, má dnešní důkaz a vlastní stop podmínku?
+- Je jasné, co se propisuje do běžného pracovního místa?
+- Zůstává historie v historii, místo aby řídila další běžnou práci?
+- Mažeme nebo anonymizujeme dočasné důkazy?
+- Končí sběr dat, který měl smysl jen během zvláštní kontroly?
+- Má budoucí návrat konkrétní signál, ne jen pocit?
+
+Uzavření druhého běžného použití je poslední brzda proti tomu, aby se oprava změnila v trvalý dohled. Když pravidlo drží, pusťte ho do klidu. Když potřebuje drobné dočištění, udělejte ho u nejbližšího místa. Když se vrací problém, otevřete novou smyčku bez starého dramatického balastu. Hlavní je nenechat tým žít v mlze, kde je všechno skoro hotové, ale nic není opravdu zavřené.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -212642,3 +212798,4 @@ Druhý rok po uzavřené roční inventuře má jeden hlavní úkol: nenechat do
 - 2026-06-09: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném měsíci: přenositelnost pravidla, slabý přenos, poslední lokální dočištění, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna krátká úvodní poznámka, aby návratový signál byl rozpoznatelný i pro člověka mimo původní rozhodnutí.
 - 2026-06-12: Doplněna úvodní podkapitola o druhém běžném použití po převodu reakce: přenositelnost bez čerstvé paměti, poslední lokální dočištění, privacy-first hranice, karta a checklist.
+- 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého běžného použití po převodu reakce: čtyři uzavírací stavy, propsání do běžného pracovního místa, ukončení zvláštní pozornosti, privacy-first úklid, karta a checklist.
