@@ -210476,8 +210476,189 @@ Pokud ne, ještě neuzavíráte. Pořád držíte kus staré stabilizace v aktiv
 
 Uzavření první tiché kontroly má být nenápadné. Právě v tom je jeho smysl. Když pravidlo funguje, nemá si říkat o další péči. Má být po ruce ve správnou chvíli, pomoct rozhodnutí a zase zmizet z pozornosti týmu.
 
+## Druhá tichá kontrola minimální portfoliové stopy
+
+První tichá kontrola ověřila, že pravidlo po převodu do tichého provozu nezmizelo a zároveň kolem sebe nezačalo znovu stavět malý dohledový aparát. Druhá tichá kontrola má jiný účel. Neptá se "funguje pravidlo hned po převodu?", ale "funguje pravidlo i ve chvíli, kdy už ho nikdo čerstvě nehlídá?".
+
+To je důležitý rozdíl. První kontrola bývá ještě blízko původní práce. Lidé si pamatují, proč pravidlo vzniklo, kde je uložené a co se při stabilizaci řešilo. Druhá kontrola přichází později: v běžném provozu, bez slavnostního připomenutí a ideálně bez autora původní změny u stolu. Právě tam se ukáže, jestli minimální portfoliová stopa opravdu stačí.
+
+Začněte krátkým zápisem:
+
+```text
+Druhá tichá kontrola ověřuje:
+
+Od první tiché kontroly se pravidlo objevilo při:
+
+Našli jsme ho bez čerstvé paměti:
+
+Použili jsme pracovní větu:
+
+Návratový signál:
+- nenastal / nastal / byl nejasný
+
+Zvláštní péče:
+- nevrátila se / vrátila se takto
+
+Rozhodnutí:
+```
+
+Příklad:
+
+```text
+Druhá tichá kontrola ověřuje:
+Jestli pravidlo pro datovou střídmost formulářů funguje i měsíc po převodu do tichého provozu.
+
+Od první tiché kontroly se pravidlo objevilo při:
+Úpravě poptávkového formuláře na landing page pro audit webu.
+
+Našli jsme ho bez čerstvé paměti:
+Ano, přes portfoliový index a brief formuláře.
+
+Použili jsme pracovní větu:
+Ano. Navržené pole "telefon" jsme nechali nepovinné, protože účel povinného sběru nebyl dost silný.
+
+Návratový signál:
+Nenastal. Nezměnil se účel, dodavatel, export ani vlastník dat.
+
+Zvláštní péče:
+Nevrátila se. Nevznikl report používání pravidla ani kontrolní meeting.
+
+Rozhodnutí:
+Pravidlo zůstává v tichém provozu a další návrat spustí jen skutečná změna datového toku nebo účelu sběru.
+```
+
+Druhá tichá kontrola má být ještě méně ambiciózní než první. Pokud se z ní stane velké hodnocení portfolia, revize všech formulářů nebo debata o celé datové strategii, ujela z kolejí. Jejím výsledkem má být buď potvrzení tichého provozu, nebo jeden velmi konkrétní zásah do místa, kde pravidlo selhalo.
+
+### Co má druhá kontrola potvrdit
+
+Druhá tichá kontrola testuje čtyři věci.
+
+- Pravidlo je najitelné bez člověka, který ho zavedl.
+- Aktivní pracovní věta stačí i bez připomenutí celé historie.
+- Návratový signál je rozpoznatelný v jiné běžné situaci než minule.
+- Tým nesklouzl zpět k drobnému dohledu, který nemá rozhodovací účel.
+
+První bod je test samostatnosti systému. Pokud pravidlo najdete jen tak, že někdo napíše původnímu autorovi, stopa není minimální. Je osobní. To může fungovat u malého týmu chvíli, ale dlouhodobě to vytváří křehkost: pravidlo existuje, dokud si ho někdo pamatuje.
+
+Druhý bod je test jazyka. Pracovní věta nemá být krátká za každou cenu, ale musí být použitelná v akci. Když člověk při běžné změně musí otevřít archiv, číst starý workshop a rekonstruovat rozhodnutí, pravidlo pořád nese moc historie v aktivní vrstvě.
+
+Třetí bod chrání před falešnými návraty. Druhá situace se obvykle nebude přesně podobat té první. To je v pořádku. Návratový signál nemá spouštět každá odchylka, jen změna, která mění rozhodnutí: účel sběru dat, pracovní místo, odpovědnost, riziko, dodavatele, export nebo dopad na zákazníka.
+
+Čtvrtý bod hlídá provozní šum. Tým může pravidlo používat správně a přesto kolem něj nenápadně obnovit zvláštní péči. Stačí věta "dejme si to ještě do příštího review" bez jasné otázky. Pokud není jasné, co se má příště rozhodnout, nejde o opatrnost. Jde o nový úkol bez účelu.
+
+Codyho komentář: druhá tichá kontrola je zkouška dospělosti dokumentu. Když pořád potřebuje chůvičku, není tichý provoz. Je to jen dokument s dobrým PR.
+
+### Čtyři výsledné stavy
+
+Po druhé tiché kontrole vyberte jeden stav:
+
+- Potvrzený tichý provoz: pravidlo funguje bez autora, bez historie a bez zvláštní péče.
+- Poslední lokální směrovka: pravidlo funguje, ale jedno pracovní místo ještě ukazuje na starou cestu.
+- Slabý návratový signál: pravidlo je použitelné, ale tým si není jistý, kdy ho znovu otevřít.
+- Tichý provoz neplatí: pravidlo se bez zvláštní péče nepoužívá nebo se kvůli němu obnovuje dohled.
+
+U potvrzeného tichého provozu nedělejte další plán. Zapište jednověté potvrzení a nechte pravidlo v běžném portfoliu. Když dobrý výsledek automaticky vyrábí další kontrolu, tým si plete provozní kvalitu s provozní aktivitou.
+
+U poslední lokální směrovky opravte jen odkaz, název, navigaci nebo krátký popisek. Neotevírejte obsah pravidla, pokud se ukázalo, že funguje. Typický příklad: šablona briefu pořád odkazuje na starý checklist, zatímco portfoliový index už vede správně. Opravte šablonu a kartu zavřete.
+
+U slabého návratového signálu nepřepisujte celé pravidlo. Zpřesněte jen hranici návratu:
+
+```text
+Pravidlo znovu otevíráme jen při novém povinném poli, novém exportu, změně účelu sběru, změně dodavatele nebo změně vlastníka dat. Běžná textová úprava formuláře návrat nespouští.
+```
+
+U stavu "tichý provoz neplatí" se nevracejte automaticky na začátek celé stabilizační historie. Nejdřív napište, co přesně neplatí. Je pravidlo nenajitelné? Nesrozumitelné? Příliš vzdálené reálné práci? Nebo je problém v tom, že se mění proces, pro který pravidlo původně vzniklo? Teprve potom otevřete novou kartu. A ta má mít novou otázku, ne nekonečný dodatek ke staré kontrole.
+
+### Privacy-first kontrola druhého tichého průchodu
+
+Druhá tichá kontrola je dobrý okamžik pro potvrzení, že privacy-first úklid nebyl jen jednorázové gesto. Po první kontrole se často smažou očividné podklady. Po druhé se ukáže, jestli tým nevyrábí nové pomocné stopy jen proto, že chce mít "důkaz", že pravidlo žije.
+
+Zkontrolujte hlavně:
+
+- nevznikl seznam lidí, kteří pravidlo použili nebo nepoužili;
+- nepřibyla tabulka "pro jistotu" bez rozhodovací otázky;
+- neukládají se nové screenshoty, exporty nebo příklady s osobními údaji;
+- nevznikla kopie pravidla v dalším nástroji bez kanonického odkazu;
+- další návrat se dá spustit pracovním signálem, ne sledováním jednotlivců.
+
+Privacy-first zápis může být úplně krátký:
+
+```text
+Druhá tichá kontrola nepotřebovala nové měření používání pravidla. Zůstává kanonická pracovní věta, návratový signál a běžný portfoliový rytmus. Dočasné poznámky z kontroly mažeme po propsání jedné uzavírací věty.
+```
+
+Pokud druhá kontrola odhalí, že tým kvůli pravidlu sbírá nová interní data, položte tvrdou otázku: jaké rozhodnutí bez nich nejde udělat? Pokud žádné, sběr ukončete. Interní evidence je pořád evidence. I když nevypadá jako marketingový tracker, může zbytečně prodlužovat retenci, rozšiřovat přístupy a zvyšovat odpovědnost za data.
+
+### Karta druhé tiché kontroly
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Druhá běžná pracovní situace:
+
+Našel pravidlo někdo bez čerstvé paměti:
+- ano / částečně / ne
+
+Stačila pracovní věta:
+- ano / částečně / ne
+
+Návratový signál:
+- nenastal / nastal / byl nejasný
+
+Vznikla nebo se vrátila zvláštní péče:
+- ne / ano, jaká
+
+Výsledný stav:
+- potvrzený tichý provoz / poslední lokální směrovka / slabý návratový signál / tichý provoz neplatí
+
+Jedna oprava, pokud je potřeba:
+
+Privacy-first výsledek:
+
+Další návrat jen při:
+```
+
+Karta druhé tiché kontroly má po dokončení zmizet z aktivní práce, pokud není potřeba oprava. U potvrzeného tichého provozu stačí propsat jednu větu do portfoliového logu. U opravy ji zavřete hned po úpravě směrovky nebo návratového signálu.
+
+### Mini workshop na 6 minut
+
+1. Vyberte druhou běžnou situaci, kde se pravidlo mělo přirozeně objevit.
+2. Nechte ho najít někoho, kdo nebyl autorem původní stabilizace.
+3. Přečtěte jen aktivní pracovní větu.
+4. Řekněte, jestli nastal návratový signál.
+5. Najděte případnou novou nebo vrácenou zvláštní péči.
+6. Vyberte jeden ze čtyř výsledných stavů.
+7. Udělejte nejmenší opravu, nebo pravidlo nechte být.
+
+Stop otázka:
+
+```text
+Potřebujeme po druhém tichém průchodu další kontrolu kvůli rozhodnutí, nebo jen kvůli pocitu jistoty?
+```
+
+Pokud jde o pocit jistoty, kontrolu nezakládejte. Jistota v dobře navrženém systému vzniká z jasného návratového signálu a dobrého kanonického místa, ne z nekonečného přidávání drobných hlídek.
+
+### Checklist druhé tiché kontroly
+
+- Proběhla kontrola v jiné běžné situaci než minule?
+- Našel pravidlo někdo bez pomoci původního autora?
+- Stačila aktivní pracovní věta bez čtení staré historie?
+- Je jasné, zda nastal návratový signál?
+- Nevznikla nová zvláštní péče, report, tabulka ani připomínka?
+- Pokud byla potřeba oprava, je omezená na jednu směrovku nebo návratový signál?
+- Neotevřela kontrola celou stabilizační historii?
+- Nevzniklo měření používání pravidla po lidech?
+- Jsou dočasné poznámky po propsání výsledku smazané nebo anonymizované?
+- Je výsledek zapsaný jednou větou v portfoliovém logu?
+- Umí tým pravidlo po druhé kontrole opravdu nechat být?
+
+Druhá tichá kontrola je často poslední důvod se na pravidlo dívat samostatně. Pokud obstálo, patří do běžného provozu bez dalšího doprovodu. Pokud neobstálo, otevřete novou, malou a přesně pojmenovanou otázku. V obou případech je výhra stejná: žádná mlhavá péče navíc.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o druhé tiché kontrole minimální portfoliové stopy: ověření bez čerstvé paměti, výsledné stavy, návratový signál, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření první tiché kontroly minimální portfoliové stopy: uzavírací stavy, propsání do portfolia, zastavení zvláštní péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o první tiché kontrole po převodu minimální portfoliové stopy: ověření běžné pracovní situace, výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převodu minimální portfoliové stopy do tichého provozu: zrušení zbytků zvláštní péče, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
