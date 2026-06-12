@@ -212603,8 +212603,216 @@ Pokud odpověď zní "nová péče", dejte jí vlastní kartu a vlastní důvod.
 
 Návrat do ročního klidového rytmu je malá tečka za celou smyčkou. Důležité není, aby tým ukázal, kolik práce kolem signálu udělal. Důležité je, aby po něm zůstalo méně tření, čistší cesta a pořád dost klidu. Stabilní systém se pozná podle toho, že se po vyrušení umí vrátit do normálu bez dramatického protokolu.
 
+## První roční kontrola po návratu pravidla do klidového rytmu
+
+První roční kontrola po návratu pravidla do klidového rytmu nemá dokazovat, že celý předchozí návrat byl správný. Má ověřit jednu praktičtější věc: jestli se pravidlo po vyrušení opravdu vrátilo do běžné práce a jestli se z jedné lepší otázky nestal nenápadný nový proces.
+
+Začněte tím, že si připomenete jen poslední rozhodovací větu. Neotvírejte celý archiv signálu, staré dočasné poznámky ani původní rozbor. Roční kontrola má pracovat s živým pravidlem a s tím, co se od posledního návratu opravdu používalo.
+
+Krátký vstup:
+
+```text
+Kanonické pravidlo:
+
+Poslední rozhodovací věta:
+
+Jedna otázka přidaná do ročního rytmu:
+
+Kde se pravidlo v posledním roce reálně použilo:
+
+Co má dnešní kontrola rozhodnout:
+```
+
+Pokud neumíte vyplnit místo reálného použití, neznamená to automaticky problém. Znamená to, že pravidlo možná během roku nebylo potřeba. V takovém případě nekontrolujte hypotetické scénáře jen proto, aby kontrola měla co dělat. Zapište klidový stav a rozhodněte, zda pravidlo pořád patří do roční inventury.
+
+### Příklad roční kontroly
+
+```text
+Kanonické pravidlo:
+Onboarding vede na aktuální pracovní kompas, ne na archivní kartu.
+
+Poslední rozhodovací věta:
+Po uzavřeném signálu se pravidlo vrací do ročního rytmu s jednou lepší otázkou.
+
+Jedna otázka:
+Vede onboardingový checklist při běžném předání na kanonické pravidlo?
+
+Reálné použití:
+Jeden nový člověk prošel onboardingem a jeden stávající člověk převzal sousední agendu.
+
+Dnešní rozhodnutí:
+Otázka zůstává v roční kontrole, ale pomocný odkaz v interní poznámce smažeme, protože už jen duplikuje kanonické místo.
+```
+
+Všimněte si, že výsledek není "prověřit onboarding důkladněji". Výsledek je menší a užitečnější: otázka se potvrdila, jeden duplicitní odkaz zmizí a pravidlo zůstává v klidovém rytmu.
+
+### Čtyři výsledné stavy
+
+Po první roční kontrole vyberte jeden stav:
+
+- Beze změny: pravidlo je najitelné, použitelné a přidaná otázka nepřinesla nové tření.
+- Lokální úklid: pravidlo funguje, ale jedno pracovní místo potřebuje zkrátit, přesměrovat nebo smazat.
+- Změna roční otázky: původní otázka byla užitečná, ale dnešní práce ukázala přesnější formulaci.
+- Vyřazení z roční kontroly: pravidlo zůstává v kanonickém místě, ale samostatná roční otázka už nepřináší hodnotu.
+
+Nepřidávejte stav "otevřít znovu celý signál". Pokud se objeví nový důkaz širšího problému, založte novou kartu s dnešním důkazem. Starý signál už svou práci udělal a nemá se vracet jako nekonečný kontext.
+
+Rozhodovací věta:
+
+```text
+Po první roční kontrole pravidlo zůstává ve stavu:
+- beze změny / lokální úklid / změna roční otázky / vyřazení z roční kontroly
+
+Protože:
+
+Do kanonického místa se propisuje:
+
+Z ročního rytmu mizí:
+
+Další návratový signál bude:
+```
+
+### Kdy změnit roční otázku
+
+Roční otázku měňte jen tehdy, když ji zlepší reálné použití. Nepřepisujte ji kvůli pocitu, že po roce by se mělo něco inovovat. Dobrá roční otázka má být trochu nudná: vrací tým k jednomu ověřitelnému průchodu a po odpovědi umožní rozhodnout.
+
+Slabá změna:
+
+```text
+Lépe kontrolovat, zda lidé používají správnou dokumentaci.
+```
+
+Silnější změna:
+
+```text
+Při jednom reálném předání ověřit, zda nový vlastník najde kanonické pravidlo bez odkazu ze staré karty.
+```
+
+Druhá otázka je konkrétní, netlačí na sledování lidí a dává jasný výstup. Buď člověk pravidlo najde, nebo ne. Pokud ho nenajde, opravuje se pracovní cesta, ne člověk.
+
+Codyho komentář: dobrá roční kontrola není slavnostní audit s velkým stolem a malou radostí. Je to spíš rychlé ověření, jestli dveře pořád vedou do správné místnosti. Ano, metafora zase pracuje s budovou. Aspoň nevyžaduje licenci na enterprise software.
+
+### Lokální úklid po roční kontrole
+
+Nejčastější užitečný výsledek první roční kontroly je malý lokální úklid. Například:
+
+- jeden starý odkaz vede na archiv místo kanonického pravidla;
+- roční otázka je správná, ale v checklistu je zbytečně dlouhá;
+- v portfoliovém logu zůstal přechodový komentář, který dnes už jen mate;
+- pracovní místo obsahuje dvě podobné věty a jedna se dá smazat;
+- návratový signál je formulovaný moc široce a je potřeba ho zúžit.
+
+Takový úklid nezvětšujte. Neotevírejte celou dokumentaci, nevyrábějte nový index a nespouštějte plošnou revizi. Opravte místo, které dnešní kontrola skutečně našla, a zapište krátký závěr.
+
+Šablona lokálního úklidu:
+
+```text
+Dnešní nález:
+
+Jedno místo opravy:
+
+Co přesně měníme:
+
+Co kvůli tomu neotevíráme:
+
+Jak poznáme, že oprava stačí:
+```
+
+### Privacy-first roční kontrola
+
+Privacy-first kontrola po roce stojí na přirozených pracovních stopách. Nepotřebujete vědět, kdo pravidlo kolikrát otevřel, jak dlouho ho četl ani v jakém pořadí klikl na odkazy. Potřebujete vědět, jestli v jedné reálné pracovní situaci cesta vedla na správné místo.
+
+Stačí tyto typy důkazů:
+
+- výsledek jednoho běžného předání;
+- kontrola jednoho odkazu v onboardingovém checklistu;
+- krátká poznámka z roční inventury;
+- porovnání kanonického místa s jedním živým pracovním místem;
+- rozhodovací věta v portfoliovém logu.
+
+Do kontroly naopak nepatří:
+
+- individuální čtenářská analytika interní dokumentace;
+- exporty kliků;
+- dlouhé přepisy interních diskusí;
+- jména lidí, kteří udělali chybu při hledání pravidla;
+- nová povinná evidence každého použití pravidla.
+
+Pokud roční kontrola bez těchto dat nejde udělat, je pravděpodobně špatně položená. Ptejte se na pracovní cestu, ne na chování jednotlivců.
+
+### Karta první roční kontroly po návratu
+
+```text
+Kanonické pravidlo:
+
+Datum kontroly:
+
+Poslední rozhodovací věta:
+
+Roční otázka:
+
+Reálné použití od posledního návratu:
+
+Vybraný stav:
+- beze změny / lokální úklid / změna roční otázky / vyřazení z roční kontroly
+
+Dnešní důkaz:
+
+Jedna provedená nebo plánovaná oprava:
+
+Co neotevíráme:
+
+Co mažeme, zkracujeme nebo slučujeme:
+
+Další návratový signál:
+
+Privacy-first hranice:
+
+Jednovětý závěr pro portfoliový log:
+```
+
+Karta má po kontrole zůstat krátká. Jakmile se z ní stane zápis celé historie pravidla, ztratila smysl. Historie už byla uzavřená. Dnešní karta má zachytit jen to, co pomůže příští roční inventuře.
+
+### Mini workshop na 7 minut
+
+1. Přečtěte kanonické pravidlo a poslední rozhodovací větu.
+2. Najděte jedno reálné použití od posledního návratu.
+3. Odpovězte na roční otázku podle tohoto použití.
+4. Vyberte jeden ze čtyř výsledných stavů.
+5. Pokud je potřeba úklid, určete jedno místo opravy.
+6. Zapište, co se neotevírá znovu.
+7. Projděte privacy-first hranici.
+8. Přepište jednu větu do portfoliového logu.
+
+Stop otázka:
+
+```text
+Pomohla dnešní kontrola roční rytmus zjednodušit, nebo z něj udělala nový dohled?
+```
+
+Pokud z něj udělala nový dohled, vraťte se k vybranému stavu. Buď máte lokální úklid, nebo novou samostatnou práci. Roční klidový rytmus nemá nést práci, která už není klidová.
+
+### Checklist první roční kontroly po návratu
+
+- Pracujeme s kanonickým pravidlem, ne s celým archivem signálu?
+- Je známá poslední rozhodovací věta?
+- Máme jedno reálné použití, nebo poctivě zapisujeme, že pravidlo nebylo potřeba?
+- Odpověděli jsme na jednu roční otázku?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud děláme lokální úklid, má přesně jedno pracovní místo?
+- Pokud měníme roční otázku, je konkrétnější a ověřitelnější než původní?
+- Pokud otázku vyřazujeme, zůstává kanonické pravidlo najitelné?
+- Neotevíráme znovu uzavřený návratový signál bez nového dnešního důkazu?
+- Nesbíráme individuální čtenost, kliky ani chybovost lidí?
+- Zkrátili jsme nebo smazali přechodové poznámky, které už nepomáhají?
+- Je v portfoliovém logu jedna stručná věta?
+- Ví další člověk, kdy se k pravidlu znovu vrátit?
+
+První roční kontrola po návratu má potvrdit, že systém umí pamatovat bez přetížení. Ne každý signál si zaslouží novou rutinu. Někdy stačí lepší otázka, jeden uklizený odkaz a klid pokračuje dál.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o první roční kontrole po návratu pravidla do klidového rytmu: reálné použití, čtyři výsledné stavy, lokální úklid, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o návratu pravidla do ročního klidového rytmu po uzavřeném signálu: tři typy návratu, úprava jedné roční otázky, věci mimo rytmus, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po dvou klidových letech: uzavírací stavy, propsání do běžného pracovního místa, ukončení dočasné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o prvním návratovém signálu po dvou klidových letech: oddělení dnešního důkazu od archivu, tři brány před novou kartou, lokální oprava, privacy-first reakce, karta, mini workshop a checklist.
