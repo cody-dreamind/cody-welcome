@@ -214209,8 +214209,200 @@ Když se během šesti minut začne řešit celá portfoliová paměť, workshop
 
 Uzavření prvního použití má chránit dvě věci najednou: použitelnost pravidla a lehkost paměti. Když položka funguje, nechte ji pracovat tiše. Když nefunguje, opravte nejmenší chybějící kus. A když se ukáže, že zkratka ztratila směr, vraťte jí smysl, ne celý starý batoh poznámek.
 
+## Druhé použití zhuštěné portfoliové položky
+
+Druhé použití zhuštěné portfoliové položky je důležitější než první, i když vypadá méně slavnostně. První použití často ještě nese čerstvou paměť: někdo si pamatuje, proč se položka zkracovala, kde byl původní dlouhý text a jaká debata k ní vedla. Druhé použití už má ukázat, jestli položka obstojí bez téhle neviditelné nápovědy.
+
+Nejde o další revizi. Jde o normální pracovní situaci, ve které někdo sáhne do portfoliové paměti a má podle ní rychle rozhodnout:
+
+```text
+Funguje zhuštěná položka i tehdy, když ji používá člověk, který nebyl u prvního zhuštění ani u prvního použití?
+```
+
+Pokud ano, položka se může vrátit do tichého provozu. Pokud ne, pořád to není důvod otevřít celý archiv. Druhé použití má odhalit poslední lokální slabinu: nejasný spouštěč, špatný odkaz, příliš obecný název nebo chybějící hranici, co položka neřeší.
+
+### Co druhé použití ověřuje
+
+První použití odpovídá na otázku, jestli zhuštěná položka vůbec funguje. Druhé použití odpovídá na otázku, jestli je přenosná. To jsou dvě různé věci.
+
+Položka je použitelná, když pomohla jednomu člověku v jedné situaci. Přenosná je až ve chvíli, kdy ji další člověk použije bez asistence původního editora, bez vysvětlovací schůzky a bez lovení starých poznámek.
+
+Při druhém použití sledujte čtyři signály:
+
+- Samostatný start: člověk poznal, že má položku použít.
+- Správný přechod: položka ho dovedla na kanonické pracovní místo.
+- Přenos rozhodnutí: vzniklo rozhodnutí podobné typem, ne nutně stejným výsledkem.
+- Nízká datová stopa: ověření nepřidalo sledování lidí, kliků ani nové exporty.
+
+Příklad:
+
+```text
+První použití:
+Editor odmítl povinný telefon v poptávkovém formuláři.
+
+Druhé použití:
+Obchodník navrhuje přidat pole "rozpočet" do stejného typu formuláře.
+
+Očekávaný přenos:
+Tým najde stejnou zhuštěnou položku, ověří, jestli je rozpočet použitelný v prvním navázání, a rozhodne, zda patří do prvního formuláře nebo až do následného rozhovoru.
+```
+
+Výsledek se může lišit. Telefon může zůstat nepovinný a rozpočet může být vhodný jako volitelná otázka. Důležité je, že položka dovedla tým ke stejnému typu úvahy bez nové metodiky okolo.
+
+### Když druhé použití potřebuje pomoc
+
+Pokud druhý člověk potřebuje vysvětlení, nepovažujte položku automaticky za špatnou. Nejprve rozlište, jaký druh pomoci chyběl.
+
+Typické mezery:
+
+- nepoznal spouštěč, protože návratový signál byl moc obecný;
+- našel položku, ale název zněl jako jiné pravidlo;
+- došel na správné místo, ale kanonický odkaz vedl příliš vysoko v dokumentaci;
+- pochopil pravidlo, ale nevěděl, co teď výslovně neotevírat;
+- rozhodl správně, ale chtěl k tomu vytvořit nový sledovací záznam.
+
+Každá mezera má mít nejmenší možnou opravu. Když chybí spouštěč, doplňte návratový signál. Když mate název, přepište název. Když odkaz vede moc obecně, změňte cíl odkazu. Když se vrací chuť měřit každé použití, doplňte privacy-first hranici.
+
+Nejhorší reakce je vrátit do položky celý starý příběh. Tím sice krátkodobě pomůžete, ale z dlouhodobé paměti znovu uděláte sklad kontextu. Druhé použití má položku zostřit, ne rozbalit.
+
+### Čtyři výsledné stavy
+
+Po druhém použití vyberte jeden stav:
+
+- Přenos drží: položka funguje i bez čerstvé paměti a vrací se do tichého provozu.
+- Poslední lokální oprava: stačí jedna úprava názvu, odkazu, signálu nebo hranice.
+- Slabé kanonické místo: položka je v pořádku, ale cílový dokument neumí rozhodnutí unést.
+- Vrátit k širšímu zhuštění: zkratka je tak krátká, že opakovaně ztrácí pracovní smysl.
+
+Stav "slabé kanonické místo" je důležitý. Někdy se portfoliová položka tváří jako problém, ale skutečný problém je v cíli. Index říká správně "formuláře sbírají jen údaje použitelné v prvním navázání", ale checklist formulářů pak neříká, jak posoudit volitelná pole, obchodní výjimky nebo pozdější doplnění údajů. V takové chvíli neopravujte index donekonečna. Opravte pracovní místo, kam index vede.
+
+U širšího zhuštění buďte přísní. Ten stav patří jen tam, kde selhalo první i druhé použití a obě selhání ukazují, že položka nemá dost rozhodovacího smyslu. Jedno zaváhání není důvod vracet historický batoh zpátky na záda.
+
+### Privacy-first druhé použití
+
+Druhé použití svádí ke sledování přenositelnosti. Tým chce vědět, kdo položku použil, jak dlouho hledal, kde se zasekl a kdo mu pomohl. To může být užitečné při školení, ale pro portfoliovou paměť většinou stačí mnohem méně.
+
+Zapište pouze:
+
+```text
+typ druhé pracovní situace, výsledný stav, případnou jednu opravu, stav kanonického místa a návratový signál.
+```
+
+Nezapisujte:
+
+- jméno člověka, pokud není vlastníkem opravy;
+- osobní hodnocení typu "nepochopil pravidlo";
+- čas čtení, kliky nebo trasu v dokumentaci;
+- plné zákaznické detaily, pokud stačí anonymizovaný vzor;
+- nové tabulky používání portfoliových položek.
+
+Codyho komentář: když druhé použití pravidla potřebuje vlastní pozorovací věž, pravidlo ještě není samostatné. Ale pozor, řešením není větší věž. Řešením je kratší cesta od signálu k rozhodnutí.
+
+### Karta druhého použití zhuštěné položky
+
+```text
+Zhuštěná portfoliová položka:
+
+První použití uzavřeno stavem:
+
+Druhá pracovní situace:
+
+Použil ji člověk bez čerstvé historie?
+- ano / částečně / ne
+
+Kanonické místo:
+
+Rozhodnutí, které vzniklo:
+
+Výsledek:
+- přenos drží / poslední lokální oprava / slabé kanonické místo / vrátit k širšímu zhuštění
+
+Co chybělo při přenosu:
+
+Jedna oprava:
+
+Co nevracíme ze staré historie:
+
+Privacy-first úklid:
+
+Návratový signál po druhém použití:
+
+Datum návratu:
+```
+
+Vyplněný příklad:
+
+```text
+Zhuštěná portfoliová položka:
+Formulář sbírá jen údaje použitelné v prvním navázání. Otevřít při návrhu nového povinného pole nebo změně obchodního navázání.
+
+První použití uzavřeno stavem:
+Lokálně opravit.
+
+Druhá pracovní situace:
+Návrh přidat volitelné pole "rozpočet" na landing page pro audit.
+
+Použil ji člověk bez čerstvé historie?
+Částečně. Položku našel, ale váhal, jestli řeší jen povinná pole.
+
+Kanonické místo:
+Checklist konverzních formulářů.
+
+Rozhodnutí:
+Rozpočet nebude povinný. Zůstane jako volitelná otázka v navazujícím obchodním rozhovoru.
+
+Výsledek:
+Poslední lokální oprava.
+
+Co chybělo při přenosu:
+Hranice pro volitelná pole.
+
+Jedna oprava:
+Doplnit větu "Stejnou kontrolu použít i pro volitelná pole, pokud mění očekávání nebo tření prvního kontaktu."
+
+Co nevracíme ze staré historie:
+Staré varianty formulářů ani poznámky z debaty o scoringu leadů.
+
+Privacy-first úklid:
+Zůstává anonymizovaný typ situace. Nevzniká evidence použití podle lidí.
+
+Návratový signál:
+Nové pole ve formuláři, které zvyšuje tření prvního kontaktu nebo mění obchodní navázání.
+```
+
+### Mini workshop na 7 minut
+
+Použijte ho jen tehdy, když druhé použití přinese tření:
+
+1. Popište druhou pracovní situaci jednou větou.
+2. Řekněte, jestli člověk použil položku bez čerstvé historie.
+3. Vyberte jeden výsledný stav.
+4. Pokud je potřeba oprava, určete jeden prvek: název, odkaz, signál, hranice nebo kanonické místo.
+5. Napište, co se nevrací ze staré historie.
+6. Smažte dočasné podklady bez dalšího účelu.
+7. Vraťte položku do tichého provozu, nebo otevřete jen přesně pojmenovanou opravu.
+
+Pokud workshop začne řešit celý portfoliový index, vraťte se k otázce druhého použití. Druhé použití není generální inspekce. Je to kontrola přenositelnosti jedné zkratky.
+
+### Checklist druhého použití
+
+- Proběhlo druhé použití v jiné reálné pracovní situaci než první?
+- Použil položku člověk bez čerstvé paměti z původního zhuštění?
+- Bylo jasné, kdy položku otevřít?
+- Vedla položka na správné kanonické místo?
+- Vzniklo rozhodnutí, ne jen komentář k dokumentaci?
+- Pokud přenos drhnul, víme přesně, jestli chyběl název, odkaz, signál, hranice nebo lepší cílové místo?
+- Nevracíme staré příklady a debaty kvůli jednomu zaváhání?
+- Neotevíráme audit celého portfoliového indexu?
+- Zůstává záznam anonymizovaný a bez sledování čtenářské trasy?
+- Má položka po druhém použití jasný stav a návratový signál?
+- Může se položka vrátit do tichého provozu?
+
+Druhé použití má zavřít otázku přenositelnosti. Když položka pomůže i bez čerstvé historie, nechte ji být. Když potřebuje poslední lokální opravu, udělejte ji jedním řezem. A když opakovaně selže, vraťte se k širšímu zhuštění, ale pořád držte stejný princip: do portfoliové paměti patří rozhodovací smysl, ne celá kronika toho, jak jste se k němu kdysi propracovali.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o druhém použití zhuštěné portfoliové položky: přenositelnost bez čerstvé historie, poslední lokální oprava, slabé kanonické místo, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření prvního použití zhuštěné portfoliové položky: výsledné stavy, lokální oprava, návrat do běžného rytmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o prvním použití zhuštěné portfoliové položky: ověření při reálném rozhodnutí, chybějící věta nebo odkaz, privacy-first úklid, karta a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o ročním zhuštění dlouhodobé portfoliové paměti: tři otázky zhuštění, slabá pravidla, privacy-first redukce stop, karta, mini workshop a checklist.
