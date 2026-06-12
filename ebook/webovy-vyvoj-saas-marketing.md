@@ -214028,8 +214028,190 @@ Nový povinný údaj, který obchod nepoužije v prvním navázání.
 
 První použití zhuštěné položky je kontrola, jestli paměť opravdu zhubla zdravě. Když čtenář najde pravidlo rychleji, rozhodne se přesněji a nevznikne nová datová stopa, zhuštění splnilo účel. Pokud ne, neoprašujte celý archiv. Doplňte nejmenší chybějící kus a nechte portfoliovou paměť zůstat krátkou.
 
+## Uzavření prvního použití zhuštěné portfoliové položky
+
+První použití zhuštěné portfoliové položky nekončí tím, že někdo řekne "šlo to". Končí až ve chvíli, kdy položka dostane jasný stav a portfoliová paměť se podle toho opravdu upraví, nebo vědomě neupraví. Bez uzavření se i dobrý test snadno změní v další volně pohozený komentář: někdo si všiml, že text byl možná krátký, někdo jiný zahlédl špatný odkaz, ale index se dál tváří, že je hotovo.
+
+Uzavření má být krátké. Nevracejte se k celé historii zhuštění, neotevírejte roční audit a nehodnoťte celý systém znalostí. Zavřete jen jednu otázku:
+
+```text
+Pomohla tato zhuštěná položka v jedné reálné situaci najít správné pravidlo a udělat rozhodnutí?
+```
+
+Odpověď musí skončit jedním ze čtyř stavů:
+
+- Drží: položka pomohla a není potřeba ji měnit.
+- Lokálně opravit: stačí upravit název, jednu větu, návratový signál nebo odkaz.
+- Vrátit k širšímu zhuštění: položka je tak krátká, že ztratila rozhodovací smysl.
+- Sloučit s jinou položkou: první použití ukázalo, že dvě položky vedou k témuž pracovnímu místu a jen dělají falešnou volbu.
+
+Čtvrtý stav používejte opatrně. Sloučení není úklid pro úklid. Má smysl jen tehdy, když člověk při reálném rozhodnutí váhá mezi dvěma zhuštěnými položkami a obě ho posílají ke stejnému pravidlu, stejné stop podmínce nebo stejnému návratovému signálu.
+
+### Co udělat podle výsledného stavu
+
+Když položka drží, neoslavujte ji další dokumentací. Stačí zapsat datum prvního použití, typ situace a návratový signál. Zbytek nechte být. Dobrá portfoliová paměť má být nudně použitelná, ne slavnostně popsaná.
+
+Příklad zápisu:
+
+```text
+Stav:
+Drží.
+
+Použití:
+Nová landing page, rozhodnutí o povinném poli telefon.
+
+Výsledek:
+Položka dovedla editora na checklist formuláře a pomohla zavřít návrh bez nového pole.
+
+Návratový signál:
+Nový povinný údaj, který se nepoužije v prvním navázání.
+```
+
+Když je potřeba lokální oprava, udělejte ji hned a jen na nejbližším místě. Jestli chyběl odkaz, opravte odkaz. Jestli chyběla věta důvodu, přidejte jednu větu. Jestli byl slabý název, přepište název. Nevytvářejte k tomu novou šablonu, pokud ji nepotřebujete pro opakovanou práci.
+
+Příklad lokální opravy:
+
+```text
+Původně:
+Minimum formulářových polí.
+
+Po opravě:
+Formulář sbírá jen údaje použitelné v prvním navázání. Otevřít při návrhu nového povinného pole nebo změně obchodního navázání.
+```
+
+Když se položka musí vrátit k širšímu zhuštění, neberte to jako prohru. Znamená to jen, že zkratka se utrhla od rozhodnutí. Vraťte do ní pouze ten prvek, který chyběl při použití: obvykle důvod, hranici použití nebo odkaz na kanonické místo. Staré příklady, debaty a dočasné porovnání variant nechte v archivu.
+
+Když se má položka sloučit s jinou, napište nejdřív společnou pracovní situaci. Pokud ji neumíte napsat jednou větou, položky ještě neslučujte. Možná vypadají podobně jen podle názvu, ale v provozu slouží jiné roli.
+
+### Uzavření bez návratu staré péče
+
+Největší riziko po prvním použití je návrat mimořádné pozornosti. Tým jednou ověří zhuštěnou položku a najednou chce evidovat každé další použití, měřit kliky v indexu, sbírat komentáře a dělat pravidelné mini review. To je přesně chvíle, kdy se portfoliová paměť zase začne nafukovat.
+
+Po uzavření prvního použití proto určete, co dál nebude sledované:
+
+- nebudeme zapisovat každé otevření položky;
+- nebudeme držet pracovní kopii původního dlouhého textu;
+- nebudeme přidávat metriky čtení indexu;
+- nebudeme sbírat jména lidí, kteří položku použili;
+- nebudeme otevírat další review bez návratového signálu.
+
+Zůstává jen běžný rytmus: položka je v indexu, vede na kanonické místo a znovu se otevře až při návratovém signálu. Pokud žádný signál nepřijde, nejlepší výsledek je tichý provoz.
+
+Codyho komentář: dlouhodobá znalostní báze má zvláštní pokušení. Jakmile něco konečně funguje, někdo to chce měřit, chránit a obalit procesem. Jenže pravidlo, které potřebuje vlastní bodyguarda, ještě není pravidlo. Je to křehká dohoda v převleku.
+
+### Privacy-first uzavření
+
+Uzavření prvního použití má potvrdit, že zhuštění nepřidalo novou datovou stopu. Nejde jen o zákaznická data. I interní záznamy o tom, kdo co četl, kdo kde váhal a kdo potřeboval pomoc, mohou být zbytečně osobní, pokud pro ně nemáte jasný účel.
+
+Stačí ponechat:
+
+```text
+typ pracovní situace, výsledný stav položky, jednu opravu, návratový signál a datum další běžné kontroly.
+```
+
+Neponechávejte:
+
+- osobní hodnocení čtenáře;
+- historii klikání nebo čas strávený v dokumentaci;
+- plné zákaznické příklady, pokud stačí anonymizovaný vzor;
+- staré pracovní kopie po přepsání položky;
+- dočasné screenshoty nebo exporty, které už neslouží opravě.
+
+Pokud první použití proběhlo na citlivém zákaznickém příkladu, přepište ho do obecného typu situace ještě před uložením záznamu. "B2B zákazník chtěl povinný telefon ve formuláři" obvykle stačí. Konkrétní jméno, projekt a obchodní kontext patří jen tam, kde mají platný účel a omezenou retenci.
+
+### Karta uzavření prvního použití
+
+```text
+Zhuštěná portfoliová položka:
+
+První použití proběhlo v situaci:
+
+Výsledný stav:
+- drží / lokálně opravit / vrátit k širšímu zhuštění / sloučit
+
+Rozhodnutí, které položka podpořila:
+
+Co se mění v položce:
+
+Co se nemění:
+
+Co nevracíme ze staré historie:
+
+Kanonické místo po uzavření:
+
+Návratový signál:
+
+Privacy-first úklid:
+
+Datum další běžné kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Zhuštěná portfoliová položka:
+Formulář sbírá jen údaje použitelné v prvním navázání.
+
+První použití proběhlo v situaci:
+Nová landing page pro konzultaci.
+
+Výsledný stav:
+Lokálně opravit.
+
+Rozhodnutí, které položka podpořila:
+Telefon nebude povinný. Obchod ho doplní až při domluvě schůzky, pokud bude potřeba.
+
+Co se mění v položce:
+Doplňuje se věta "Otevřít při návrhu nového povinného pole nebo změně obchodního navázání."
+
+Co se nemění:
+Kanonické místo zůstává checklist konverzních formulářů.
+
+Co nevracíme ze staré historie:
+Staré varianty formuláře a debatu o měření každého pole.
+
+Návratový signál:
+Nový povinný údaj, který obchod nepoužije v prvním navázání.
+
+Privacy-first úklid:
+Zůstává jen anonymizovaný typ situace. Nevzniká evidence čtenářů indexu.
+
+Datum další běžné kontroly:
+Při nejbližší roční kontrole portfoliové paměti nebo při návratovém signálu.
+```
+
+### Mini workshop na 6 minut
+
+Použijte ho hned po prvním reálném použití položky:
+
+1. Jednou větou popište pracovní situaci.
+2. Vyberte výsledný stav položky.
+3. Řekněte, jestli stačí název, věta, odkaz nebo návratový signál.
+4. Zapište, co se nevrací ze staré historie.
+5. Smažte nebo anonymizujte dočasné podklady.
+6. Zavřete položku zpět do běžného rytmu.
+
+Když se během šesti minut začne řešit celá portfoliová paměť, workshop zastavte. První použití jedné položky není mandát k přestavbě celého indexu. Je to jen kontrola, jestli jedna zkratka pořád vede ke správnému rozhodnutí.
+
+### Checklist uzavření prvního použití
+
+- Má položka po prvním použití jeden jasný stav?
+- Víme, jaké rozhodnutí položka reálně podpořila?
+- Pokud je potřeba oprava, je omezená na název, větu, odkaz nebo návratový signál?
+- Nevracíme staré příklady jen proto, že zkrácený text působí nezvykle?
+- Neotevíráme audit celého portfoliového indexu kvůli jedné položce?
+- Je zapsané, co se nemění?
+- Je jasné kanonické místo po uzavření?
+- Zůstává návratový signál rozpoznatelný i bez původní historie?
+- Smazali jsme dočasné kopie, screenshoty nebo exporty bez dalšího účelu?
+- Nevzniká evidence konkrétních čtenářů, kliků nebo osobních pracovních tras?
+- Vrací se položka po uzavření do běžného rytmu?
+
+Uzavření prvního použití má chránit dvě věci najednou: použitelnost pravidla a lehkost paměti. Když položka funguje, nechte ji pracovat tiše. Když nefunguje, opravte nejmenší chybějící kus. A když se ukáže, že zkratka ztratila směr, vraťte jí smysl, ne celý starý batoh poznámek.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o uzavření prvního použití zhuštěné portfoliové položky: výsledné stavy, lokální oprava, návrat do běžného rytmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o prvním použití zhuštěné portfoliové položky: ověření při reálném rozhodnutí, chybějící věta nebo odkaz, privacy-first úklid, karta a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o ročním zhuštění dlouhodobé portfoliové paměti: tři otázky zhuštění, slabá pravidla, privacy-first redukce stop, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o dlouhodobé portfoliové paměti po uzavřeném druhém ročním cyklu: vrstvy paměti, portfoliový index, privacy-first redukce stop, karta, mini workshop a checklist.
