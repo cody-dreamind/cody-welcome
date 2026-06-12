@@ -210146,8 +210146,181 @@ Pokud odpověď zní ne, zbytek pryč. Tým nepotřebuje pomník každé poctiv�
 
 Tichý provoz je dobrý konec stabilizační práce. Pravidlo už nemusí dokazovat, že si zaslouží existovat. Stačí, že pomáhá ve správnou chvíli, nezabírá prostor mimo ni a nenechává za sebou zbytečnou datovou stopu.
 
+## První tichá kontrola po převodu minimální portfoliové stopy
+
+Tichý provoz neznamená, že se na pravidlo už nikdy nepodíváte. Znamená, že se na něj nepodíváte jen proto, že existuje. První tichá kontrola má ověřit, jestli se převod opravdu povedl: pravidlo je dostupné v běžné práci, návratový signál je srozumitelný a kolem pravidla nevznikla nová skrytá péče.
+
+Tahle kontrola má být krátká a nenápadná. Nedělejte z ní nový workshop o historii pravidla, nový audit dokumentace ani další kolečko "pro jistotu". Stačí jeden běžný moment, kdy se pravidlo mělo přirozeně objevit: úprava formuláře, změna landing page, nový support postup, aktualizace šablony nebo menší produktové rozhodnutí.
+
+Začněte kontrolní větou:
+
+```text
+První tichá kontrola ověřuje:
+
+Pravidlo se mělo objevit při:
+
+Našli jsme ho:
+
+Použili jsme ho:
+
+Návratový signál:
+
+Zvláštní péče se nevrátila / vrátila takto:
+```
+
+Příklad:
+
+```text
+První tichá kontrola ověřuje:
+Jestli pravidlo pro datovou střídmost formulářů funguje bez samostatného review.
+
+Pravidlo se mělo objevit při:
+Úpravě kontaktního formuláře pro nový typ poptávky.
+
+Našli jsme ho:
+V portfoliovém indexu a v briefu formuláře.
+
+Použili jsme ho:
+Ano. Nejdřív jsme popsali účel pole, pak jsme jedno navržené povinné pole zrušili.
+
+Návratový signál:
+Nový export do CRM by pravidlo znovu otevřel.
+
+Zvláštní péče:
+Nevznikla. Nepřidali jsme nový report ani kontrolní meeting.
+```
+
+Smysl první tiché kontroly není znovu dokazovat, že pravidlo bylo dobrý nápad. Smysl je zjistit, jestli se pravidlo chová jako běžná součást práce. Pokud se pořád musí svolávat autor, dohledávat staré poznámky nebo vysvětlovat, proč pravidlo vzniklo, nejde o tichý provoz. Jde o pravidlo, které sice prošlo revizemi, ale ještě nedorostlo do normálního používání.
+
+### Čtyři otázky tiché kontroly
+
+Položte jen čtyři otázky. Když nestačí, pravděpodobně nekontrolujete tichý provoz, ale otevíráte novou změnu.
+
+- Bylo pravidlo nalezitelné v místě, kde člověk opravdu pracoval?
+- Dalo se použít bez znalosti celé historie stabilizace?
+- Objevil se návratový signál, nebo šlo jen o běžný průchod?
+- Nevznikla nová péče, evidence, připomínka nebo měření používání pravidla?
+
+První otázka testuje pracovní trasu. Pokud pravidlo existuje v portfoliu, ale člověk při práci skončí ve staré poznámce, problém není v motivaci lidí. Problém je v tom, že živá trasa pořád ukazuje do minulosti.
+
+Druhá otázka testuje jazyk. Pravidlo v tichém provozu nesmí potřebovat archeologii. Člověk má pochopit, co udělat teď, ne proč se tým před měsícem rozhodl pro třetí variantu po druhém review. Historie může zůstat v archivu, ale pracovní věta má stát sama.
+
+Třetí otázka chrání před falešným poplachem. Ne každé zaváhání je návratový signál. Někdy člověk jen poprvé používá pravidlo v trochu jiné situaci. Pokud se tím nemění účel, data, vlastník, riziko ani pracovní místo, není potřeba pravidlo znovu otevírat.
+
+Čtvrtá otázka hlídá provozní hygienu. Tichý provoz se dá pokazit i dobrým úmyslem: "jen si to poznamenáme", "jen jeden check příště", "jen malá tabulka". Pokud poznámka nepodporuje konkrétní rozhodnutí, je to nový šum.
+
+### Výsledné stavy
+
+Po první tiché kontrole vyberte jeden stav:
+
+- Funguje tiše: pravidlo bylo nalezené, použité a nevznikla nová péče.
+- Potřebuje lokální směrovku: pravidlo funguje, ale jedno pracovní místo na něj špatně odkazuje.
+- Potřebuje zkrácení věty: pravidlo je správně umístěné, ale lidé musí číst příliš mnoho kontextu.
+- Vrací se zvláštní péče: tým znovu zakládá kontrolu, report nebo ruční dohled.
+
+U prvního stavu nedělejte nic velkého. Zapište krátkou uzavírací větu a nechte pravidlo být. Tohle je přesně situace, kdy je dobrý výsledek nudný. Nudný provoz je často známka, že systém konečně přestal žrát pozornost.
+
+U lokální směrovky opravte jen cestu. Například starý odkaz v šabloně, poznámku v briefu nebo navigaci v indexu. Neměňte pravidlo samotné, pokud se při práci ukázalo jako použitelné.
+
+U zkrácení věty přepište aktivní pracovní text, ne archivní historii. Dobrá oprava může být tak malá jako jedna věta:
+
+```text
+Před přidáním pole do formuláře napiš účel, vlastníka dat a retenci; pokud to neumíš, pole nepřidávej.
+```
+
+U návratu zvláštní péče se zastavte. Než přijmete nový dohled jako "dočasný", napište, jaké rozhodnutí má podpořit a kdy skončí. Pokud odpověď není jasná, dohled nezakládejte.
+
+### Privacy-first kontrola
+
+První tichá kontrola je dobré místo pro poslední úklid drobných stop, které se do převodu nevešly. Nehledejte dokonalý archiv. Hledejte konkrétní zbytky, které už nemají účel.
+
+Typické zbytky:
+
+- pracovní kopie checklistu se zákaznickým příkladem;
+- screenshot starého formuláře s osobními údaji;
+- tabulka z review, kde jsou jména lidí, interní komentáře nebo ruční hodnocení;
+- kalendářová připomínka, která dál vytváří kontrolní režim;
+- komentář v nástroji, který odkazuje na starou verzi pravidla.
+
+Privacy-first výsledek zapište přímo:
+
+```text
+Po první tiché kontrole zůstává jen pracovní pravidlo a návratový signál. Staré review podklady bez rozhodovacího účelu mažeme nebo anonymizujeme. Používání pravidla samostatně neměříme.
+```
+
+Pokud pravidlo pracuje s daty zákazníků, držte kontrolu na úrovni účelu a toku, ne na úrovni lidí. Není potřeba sledovat, kdo přesně pravidlo použil. Stačí ověřit, že pracovní místo vede ke správnému rozhodnutí a že nevzniká nový sběr dat bez jasného důvodu.
+
+Codyho komentář: nejčistší interní metrika je často ta, kterou vůbec nezavedete. Pokud pravidlo funguje a tým kvůli němu nemusí špehovat sám sebe, gratuluji, právě jste vyhráli malou provozní bitvu bez konfetek a bez cookie lišty navíc.
+
+### Karta první tiché kontroly
+
+```text
+Pravidlo:
+
+Běžná pracovní situace:
+
+Kde mělo být pravidlo nalezené:
+
+Kde bylo reálně nalezené:
+
+Použití bez historie:
+- ano / částečně / ne
+
+Návratový signál:
+- nenastal / nastal / byl nejasný
+
+Vznikla nová zvláštní péče:
+- ne / ano, jaká
+
+Rozhodnutí:
+- funguje tiše / lokální směrovka / zkrácení věty / zastavit návrat zvláštní péče
+
+Jedna oprava, pokud je potřeba:
+
+Privacy-first úklid:
+
+Datum dalšího návratu jen při signálu:
+```
+
+Kartu po kontrole nezakládejte jako nový aktivní dokument, pokud není potřeba oprava. U stavu "funguje tiše" stačí krátká poznámka v pracovním logu portfolia. U opravy kartu zavřete hned po změně směrovky nebo věty.
+
+### Mini workshop na 5 minut
+
+1. Vyberte jednu běžnou situaci, kde se pravidlo mělo objevit.
+2. Najděte pravidlo bez pomoci autora.
+3. Přečtěte jen aktivní pracovní větu, ne historii.
+4. Řekněte, jestli nastal návratový signál.
+5. Najděte případnou novou zvláštní péči.
+6. Vyberte jeden výsledný stav.
+7. Udělejte nejmenší opravu, nebo pravidlo nechte být.
+
+Stop otázka:
+
+```text
+Potřebujeme po této kontrole pravidlo opravdu měnit, nebo jen neumíme snést, že funguje bez naší pozornosti?
+```
+
+Když odpověď míří k druhé části věty, zavřete kontrolu. Provozní systém není sbírka míst, kam se chodí uklidňovat nervozita týmu. Má pomáhat práci.
+
+### Checklist první tiché kontroly
+
+- Proběhla kontrola v reálné pracovní situaci?
+- Šlo pravidlo najít bez autora a bez starých poznámek?
+- Stačila aktivní pracovní věta?
+- Je jasné, jestli nastal návratový signál?
+- Nevznikl nový kontrolní meeting, report nebo tabulka?
+- Pokud byla potřeba oprava, je lokální a malá?
+- Neotevřela kontrola celou historii stabilizace?
+- Jsou zrušené nebo anonymizované zbytky bez rozhodovacího účelu?
+- Nepřibylo měření používání lidí?
+- Je výsledek zapsaný jednou větou?
+- Ví tým, že další návrat nastává jen při skutečném signálu?
+
+První tichá kontrola je úspěšná, když po ní není moc co dělat. Buď pravidlo potichu funguje, nebo se opraví jeden odkaz, jedna věta či jeden zbytek péče. Jakmile z kontroly vzniká nový projekt, pravidlo se nevrátilo do tichého provozu. Jen změnilo kostým a dál si říká o pozornost.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o první tiché kontrole po převodu minimální portfoliové stopy: ověření běžné pracovní situace, výsledné stavy, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o převodu minimální portfoliové stopy do tichého provozu: zrušení zbytků zvláštní péče, návratový signál, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o uzavření druhého běžného review minimální portfoliové stopy: uzavírací stavy, propsání pracovního minima, ukončení zvláštní kontroly, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-11: Doplněna úvodní podkapitola o druhém běžném review minimální portfoliové stopy: test bez čerstvé paměti, přenositelnost, tichý provoz, návratový signál, privacy-first redukce stop, karta, mini workshop a checklist.
