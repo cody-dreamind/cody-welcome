@@ -15,6 +15,8 @@ Když se k rukopisu vracíte opakovaně, porovnejte novou pracovní větu s posl
 
 Ke každému rozhodnutí si přidejte i návratový signál: číslo, pozorování nebo konkrétní situaci, kvůli které se k němu znovu vrátíte. Bez něj se z dobrého zápisu snadno stane jen hezky formulovaný názor.
 
+Návratový signál má být dost konkrétní, aby ho poznal i člověk, který u původního rozhodnutí nebyl. "Zlepšíme onboarding" je přání; "tři noví uživatelé za sebou nedokončí první import bez pomoci" už je signál, který umí spustit další malý průchod.
+
 Každý průchod rukopisem berte jako malou pracovní smyčku: vybrat problém, najít relevantní část, udělat jedno rozhodnutí, zapsat ověření a vrátit se až podle výsledku. Tím text zůstane praktický i ve chvíli, kdy ho používá víc lidí v různých rolích.
 
 Když po čtení vznikne víc úkolů, vyberte jeden hlavní a zbytek nechte v poznámkách. Praktický e-book má pomáhat k lepším prioritám, ne vyrábět další frontu práce, kterou nikdo nestihne uzavřít.
@@ -211975,3 +211977,4 @@ Převod do ročního klidového rytmu je dobrý konec dlouhé stabilizační lin
 - 2026-06-09: Doplněna úvodní podkapitola o uzavření prvního běžného použití po převodu reakce: čtyři stavy výsledku, dočištění jednoho místa, slabé kanonické místo, nová smyčka při návratovém signálu, privacy-first úklid, karta a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném měsíci: samostatné použití pravidla bez mimořádné péče, čtyři výsledné stavy, privacy-first kontrola, karta a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném měsíci: přenositelnost pravidla, slabý přenos, poslední lokální dočištění, privacy-first kontrola, karta, mini workshop a checklist.
+- 2026-06-12: Doplněna krátká úvodní poznámka, aby návratový signál byl rozpoznatelný i pro člověka mimo původní rozhodnutí.
