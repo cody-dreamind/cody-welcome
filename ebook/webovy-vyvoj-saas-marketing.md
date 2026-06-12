@@ -212222,8 +212222,211 @@ Pokud odpověď směřuje k archivu, vraťte se k dnešnímu důkazu. Archiv pom
 
 První návratový signál po dvou klidových letech je test dospělosti systému. Dobrý systém se nelekne a nezačne auditovat všechno. Podívá se na dnešní důkaz, vybere nejmenší odpověď a nechá zavřené všechno, co pro ni není potřeba. Tak se drží kontinuita bez toho, aby se z klidu znovu stala správa starostí.
 
+## Uzavření prvního návratového signálu po dvou klidových letech
+
+První návratový signál po dvou klidových letech není hotový ve chvíli, kdy tým vybere stav šum, lokální oprava nebo nová karta. Hotový je až tehdy, když po něm nezůstane další nejasná péče. Jinak se i dobře zvládnutý návrat začne tvářit jako nová rutina: někdo čeká na kontrolu, někdo si nechá pomocnou tabulku, někdo si do kalendáře přidá připomínku "radši se na to za měsíc podívat". A najednou už nejde o reakci na signál, ale o návrat systému, který měl po dvou letech klidu dávno dýchat sám.
+
+Uzavření proto začněte otázkou:
+
+```text
+Co musí po dnešním signálu zůstat viditelné, aby další člověk jednal správně?
+
+Co může po dnešním signálu zmizet, protože už splnilo účel?
+```
+
+Příklad:
+
+```text
+Dnešní signál:
+Nový člověk našel archivní kartu místo kanonického pravidla.
+
+Vybraný stav:
+Lokální oprava.
+
+Co zůstává viditelné:
+Kanonické pravidlo v portfoliovém indexu a opravený odkaz v onboardingovém checklistu.
+
+Co mizí:
+Dočasná poznámka z šetření, starý odkaz v interním dokumentu a pracovní komentář se jménem člověka, který na problém narazil.
+
+Ověření:
+Při dalším běžném onboardingu se zkontroluje jen to, jestli cesta vede na kanonické pravidlo. Nezakládá se nová série kontrol.
+```
+
+Tento zápis je krátký, ale důležitý. Odděluje věci, které pomáhají budoucí práci, od věcí, které byly užitečné jen při dnešním řešení. Bez takového oddělení se archiv zase začne plnit polotovary.
+
+### Čtyři uzavírací stavy
+
+Po reakci na návratový signál vyberte jeden ze čtyř uzavíracích stavů:
+
+- Bez akce: signál byl šum, nedotkl se reálné práce a není potřeba nic přepisovat.
+- Lokálně opraveno: jedno pracovní místo bylo upraveno a výsledek je propsaný do kanonické trasy.
+- Otevřena nová karta: dnešní důkaz má širší dopad a dál se řeší jako samostatná současná práce.
+- Pravidlo vyřazeno nebo sloučeno: signál ukázal, že staré pravidlo už nemá samostatný smysl.
+
+Každý stav má jiný konec. Bez akce končí krátkou větou v logu nebo žádným zápisem, pokud by zápis byl větší než samotný signál. Lokální oprava končí změnou v jednom místě a smazáním dočasných stop. Nová karta končí jasným oddělením od staré historie: starý archiv je zdroj kontextu, ne pracovní plocha. Vyřazení nebo sloučení končí aktualizací portfoliového indexu, aby příští člověk nehledal pravidlo, které už nemá existovat.
+
+Rozhodovací věta:
+
+```text
+Návratový signál uzavíráme stavem:
+
+Protože:
+
+Viditelné zůstává:
+
+Mizí nebo se slučuje:
+
+Další přirozené ověření:
+
+Co už dál nekontrolujeme:
+```
+
+### Co propsat do běžného místa
+
+Po dvou klidových letech má být výsledek propsaný tam, kde bude další člověk pracovat. Ne do zvláštní servisní karty, pokud není opravdu potřeba. Běžné místo může být:
+
+- kanonické pravidlo;
+- portfoliový index;
+- onboardingový checklist;
+- šablona předání;
+- jedna stránka v interní znalostní bázi;
+- changelog pravidla;
+- odkazová mapa, pokud problém vznikl špatnou navigací.
+
+Nepopisujte celou historii. Stačí věta, která chrání správné použití:
+
+```text
+Aktuální pravidlo je zde. Starší pracovní karta je archivní a nepoužívá se pro běžné předání.
+```
+
+Nebo:
+
+```text
+Při novém předání se používá jen kanonická šablona. Staré příklady slouží pouze jako historický kontext a nejsou zdrojem aktuálního postupu.
+```
+
+Dobré propsání má být nudné. Člověk nemá obdivovat, jak hezky tým vyřešil návratový signál. Má jednoduše skončit na správném místě a udělat správnou práci.
+
+### Ukončení dočasné pozornosti
+
+Největší riziko po návratovém signálu je nenápadná dočasná pozornost, která se nikdy nezruší. Tým si řekne, že "to ještě chvilku pohlídá", ale nikdo nedefinuje konec. Po měsíci už se nikomu nechce vysvětlovat, proč se něco hlídá, a po půl roce vznikne další kontrolní vrstva.
+
+U každé dočasné pozornosti napište konec:
+
+```text
+Dočasně sledujeme:
+
+Skončí to, když:
+
+Skončí to nejpozději:
+
+Kdo to zavře:
+
+Co po zavření zůstane:
+```
+
+Pokud neumíte napsat konec, pravděpodobně nejde o dočasnou pozornost, ale o novou rutinu. Nová rutina může být správná, ale musí projít stejnou otázkou jako každé jiné pravidlo: co chrání, kdo ji vlastní, jaká data kvůli ní vznikají a kdy se znovu ověří, že pořád stojí za námahu.
+
+Codyho komentář: "budeme to chvíli sledovat" je v týmu často slušná verze věty "nevíme, kdo to má uzavřít". To není morální selhání. Jen tomu dejte vlastníka, konec a koště. Hlavně to koště.
+
+### Privacy-first uzavření návratového signálu
+
+Privacy-first uzavření znamená, že po reakci nezůstane víc osobních, provozních ani behaviorálních dat, než kolik je nutné pro budoucí správné rozhodnutí. U interních pravidel je to obzvlášť důležité, protože práce s dokumentací se snadno změní v nevědomé sledování lidí: kdo co četl, kdo klikl, kdo udělal chybu, kdo potřeboval pomoc.
+
+Po uzavření projděte čtyři úklidové otázky:
+
+- Zůstává někde jméno konkrétního člověka, i když stačí popis pracovního místa?
+- Zůstává dočasný export, screenshot, přepis chatu nebo komentář, který už není potřeba?
+- Přibylo kvůli signálu nové měření lidí místo opravy pracovní cesty?
+- Vede odkazová struktura na kanonické pravidlo, nebo stále umožňuje bloudit do starých stop?
+
+Výsledek privacy-first úklidu může být jednoduchý:
+
+```text
+Ponecháno:
+Kanonické pravidlo, opravený odkaz, jedna věta v changelogu.
+
+Smazáno nebo zkráceno:
+Dočasný komentář, kopie staré karty, jmenný detail v poznámce.
+
+Nepřidáno:
+Žádný nový tracker čtenosti dokumentace, žádná individuální evidence chyb.
+```
+
+Tím se chrání jak soukromí lidí, tak kvalita systému. Když se kvůli každému návratovému signálu začne ukládat víc detailů, příští rozhodnutí se neutopí jen v datech. Utopí se i v opatrnosti.
+
+### Karta uzavření návratového signálu po dvou letech
+
+```text
+Návratový signál:
+
+Datum uzavření:
+
+Vybraný uzavírací stav:
+- bez akce / lokálně opraveno / otevřena nová karta / pravidlo vyřazeno nebo sloučeno
+
+Dnešní důkaz:
+
+Kanonické místo po uzavření:
+
+Co bylo propsáno:
+
+Co bylo smazáno, zkráceno nebo sloučeno:
+
+Co ze staré historie zůstává zavřené:
+
+Dočasná pozornost:
+- žádná / popis a konec
+
+Další přirozené ověření:
+
+Privacy-first výsledek:
+
+Jednovětý závěr pro log:
+```
+
+Karta má být krátká. Pokud se začne plnit dlouhým vysvětlováním, vraťte se k uzavíracímu stavu. Buď řešíte lokální opravu a karta má být malá, nebo jste otevřeli novou práci a ta potřebuje vlastní samostatný rámec.
+
+### Mini workshop na 7 minut
+
+1. Přečtěte dnešní signál a vybraný stav.
+2. Vyberte uzavírací stav.
+3. Najděte běžné pracovní místo, kam se má výsledek propsat.
+4. Rozhodněte, co se smaže, zkrátí nebo sloučí.
+5. Zapište, co ze staré historie zůstává zavřené.
+6. U každé dočasné pozornosti napište konec.
+7. Projděte privacy-first úklid.
+8. Zapište jednu větu do logu.
+
+Stop otázka:
+
+```text
+Zanecháváme po dnešním signálu čistší pracovní cestu, nebo další vrstvu péče?
+```
+
+Pokud odpověď zní "další vrstvu péče", nejdřív ji pojmenujte jako novou rutinu. Teprve potom rozhodujte, jestli si ji systém opravdu zaslouží.
+
+### Checklist uzavření návratového signálu po dvou letech
+
+- Je jasné, jaký stav reakce uzavíráme?
+- Vybrali jsme jeden ze čtyř uzavíracích stavů?
+- Je výsledek propsaný do běžného pracovního místa?
+- Neopisujeme do běžného místa celou starou historii?
+- Je zapsané, co zůstává zavřené?
+- Smazali jsme nebo zkrátili dočasné poznámky, které už splnily účel?
+- Má každá dočasná pozornost jasný konec a vlastníka?
+- Pokud vznikla nová karta, má vlastní dnešní důkaz a není jen pokračováním starého archivu?
+- Pokud bylo pravidlo vyřazeno nebo sloučeno, ukazuje index na nový zdroj pravdy?
+- Nezavedli jsme měření lidí místo opravy pracovní cesty?
+- Zůstává po uzavření jen datová stopa nutná pro budoucí správné rozhodnutí?
+- Ví další člověk, kam jít a co použít, aniž by znal celý příběh?
+
+Uzavření návratového signálu po dvou klidových letech má být klidné a trochu neokázalé. Opravit cestu, zapsat závěr, uklidit stopy a nechat pravidlo znovu pracovat bez zvláštní péče. Když systém po návratu zůstane lehčí než před ním, signál nepřidal dluh. Přidal zkušenost.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po dvou klidových letech: uzavírací stavy, propsání do běžného pracovního místa, ukončení dočasné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o prvním návratovém signálu po dvou klidových letech: oddělení dnešního důkazu od archivu, tři brány před novou kartou, lokální oprava, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého klidového roku minimální portfoliové stopy: čtyři uzavírací stavy, úklid přechodných stop, privacy-first cílová stopa, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o druhém roce po uzavřené roční inventuře minimální portfoliové stopy: zachování klidového rytmu, filtr drobných podnětů, privacy-first hranice, karta, mini workshop a checklist.
