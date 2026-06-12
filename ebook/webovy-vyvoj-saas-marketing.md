@@ -213478,8 +213478,218 @@ Pokud ne, uzavření ještě není hotové. Nejspíš chybí kanonické místo, 
 
 Uzavření druhého ročního cyklu je dobrý konec dlouhé smyčky. Pravidlo buď získá místo v běžném rytmu, ztiší se do kanonické věty, nebo odejde do archivu. Všechny tři výsledky jsou lepší než nekonečná péče ze setrvačnosti. Provoz má být spolehlivý, ne pamětní síň každého starého rozhodnutí.
 
+## Dlouhodobá portfoliová paměť po uzavřeném druhém ročním cyklu
+
+Po uzavření druhého ročního cyklu už pravidlo nemá žít jako samostatný projekt. Buď zůstává v ročním rytmu, slučuje se do širší rutiny, ztišuje se do kanonického místa, nebo je archivované. Další práce proto není další kontrola pravidla, ale péče o portfoliovou paměť: aby tým věděl, že pravidlo existuje, kde ho najde a kdy ho znovu otevřít, aniž by musel držet celou historii.
+
+Začněte větou:
+
+```text
+Uzavřený druhý roční cyklus skončil stavem:
+
+Pravidlo dál žije v:
+
+Do portfoliové paměti patří:
+
+Do portfoliové paměti už nepatří:
+
+Nový návratový signál je:
+```
+
+Portfoliová paměť není archiv všeho. Je to mapa toho, co má být použitelné i za rok nebo dva. Když do ní přidáte celé staré karty, poznámky z kontrol a seznamy historických odboček, ztratí hlavní hodnotu: rychle ukázat, co platí dnes.
+
+Příklad:
+
+```text
+Uzavřený druhý roční cyklus skončil stavem:
+Sloučit do širší rutiny.
+
+Pravidlo dál žije v:
+Roční kontrole aktivních formulářů.
+
+Do portfoliové paměti patří:
+Jedna věta pravidla, odkaz na šablonu landing page a návratový signál pro nové povinné pole.
+
+Do portfoliové paměti už nepatří:
+Staré porovnání formulářů, pomocný seznam návrhů a poznámky ke konkrétním autorům změn.
+
+Nový návratový signál:
+Někdo navrhne nové pole, které obchod nepoužije v prvním navázání.
+```
+
+Takový zápis je krátký, ale stačí. Další člověk nemusí znát celou cestu od původního incidentu přes roční kontroly. Vidí aktuální pravidlo, pracovní místo a signál, který ho znovu otevře.
+
+### Co patří do dlouhodobé paměti
+
+Do dlouhodobé portfoliové paměti patří jen informace, které pomáhají budoucímu rozhodnutí:
+
+- název pravidla nebo pracovní situace;
+- aktuální stav pravidla;
+- kanonické místo, kde se pravidlo používá;
+- jedna věta důvodu, proč pravidlo existuje;
+- návratový signál;
+- vlastník nebo role, která paměť udržuje;
+- datum posledního uzavření.
+
+Nepatří tam všechno, co bylo zajímavé při cestě. Historie může být užitečná při auditu nebo větší retrospektivě, ale běžný týmový provoz nepotřebuje číst celý vývoj pravidla pokaždé, když upravuje formulář, onboarding nebo šablonu nabídky.
+
+Rozumný zápis:
+
+```text
+Pravidlo:
+Formulář sbírá jen údaje použitelné v prvním navázání.
+
+Stav:
+Sloučeno do roční kontroly aktivních formulářů.
+
+Kanonické místo:
+Šablona landing page a checklist konverzních míst.
+
+Proč existuje:
+Brání návratu povinných polí bez jasného obchodního použití.
+
+Návratový signál:
+Nové povinné pole bez použití v prvním navázání.
+
+Poslední uzavření:
+2026-06-12.
+```
+
+To je pracovní paměť. Není krásná, ale ví, co má dělat. A to je pro provoz webu, SaaS i marketingu výrazně lepší než elegantní dokument, který nikdo neotevře v pravý čas.
+
+### Tři vrstvy paměti
+
+Po dlouhé smyčce oddělte tři vrstvy:
+
+- Živá vrstva: pravidlo, které se používá v aktuální práci.
+- Portfoliová vrstva: index pravidel a stavů, podle kterého se dá najít správné místo.
+- Archivní vrstva: historické podklady, které už nejsou potřeba pro běžné rozhodování.
+
+Nemíchejte je dohromady. Když archivní vrstva leží přímo v živé šabloně, lidé začnou přeskakovat všechno. Když živé pravidlo schováte do archivu, nikdo ho nepoužije. Když portfoliový index obsahuje celé příběhy, ztrácí roli mapy a mění se v druhý rukopis. Ano, rukopis máme rádi, ale ne každý checklist si zaslouží vlastní román.
+
+Jednoduché pravidlo:
+
+```text
+Živá vrstva říká, co mám udělat.
+Portfoliová vrstva říká, kde to najdu a v jakém je to stavu.
+Archivní vrstva říká, proč jsme kdysi došli k tomuto závěru, pokud to někdy opravdu potřebuji.
+```
+
+Když jednu větu neumíte zařadit do žádné z těchto vrstev, pravděpodobně ji nepotřebujete držet.
+
+### Jak nepřetížit portfoliový index
+
+Portfoliový index má být krátký. Není to místo pro vysvětlení každé hrany pravidla. Je to rozcestník. Pokud se v něm začnou objevovat dlouhé odstavce, příklady, výjimky a staré diskuze, index přestane sloužit.
+
+U každé položky indexu držte maximálně:
+
+- pracovní název;
+- stav;
+- kanonický odkaz nebo místo;
+- návratový signál;
+- datum poslední změny;
+- poznámku "neotevírat kvůli", pokud je důležitá.
+
+Příklad poznámky "neotevírat kvůli":
+
+```text
+Neotevírat kvůli jednorázové debatě o barvě tlačítka. Otevřít jen při návrhu nového povinného pole nebo změně obchodního navázání.
+```
+
+Tato věta chrání tým před falešnými návratovými signály. Nezavírá oči před změnou, jen říká, co do tohoto pravidla nepatří.
+
+### Privacy-first dlouhodobá paměť
+
+Dlouhodobá paměť má držet rozhodnutí, ne osobní historii práce. Čím déle pravidlo žije, tím méně potřebujete vědět, kdo přesně kdy udělal chybu, kdo navrhl špatnou variantu nebo kdo musel proces zachraňovat. Pro budoucí práci je důležitější aktuální pravidlo a návratový signál.
+
+Při převodu do portfoliové paměti odstraňte:
+
+- jména lidí u starých chyb, pokud nejsou nutná pro odpovědnost;
+- pracovní exporty, které už nepodporují rozhodnutí;
+- detailní poznámky z interních debat;
+- seznamy individuálních průchodů šablonou;
+- dočasné datové výřezy použité jen pro ověření.
+
+Nechte:
+
+- stav pravidla;
+- kanonické místo;
+- odůvodnění bez osobních detailů;
+- návratový signál;
+- odkaz na archiv jen tehdy, když má reálnou budoucí hodnotu.
+
+Codyho komentář: privacy-first není jen o tom, kam posíláte data. Je to i o tom, jestli si zbytečně neschováváte interní drobky, které za dva roky nikomu nepomůžou a při úniku budou jen trapně vysvětlitelné. Minimalismus v paměti je provozní hygiena, ne póza.
+
+### Karta dlouhodobé portfoliové paměti
+
+```text
+Pravidlo nebo pracovní situace:
+
+Stav po druhém ročním cyklu:
+- ponecháno v ročním rytmu / sloučeno do širší rutiny / ztišeno / archivováno
+
+Živá vrstva:
+
+Portfoliová vrstva:
+
+Archivní vrstva:
+
+Kanonické místo:
+
+Návratový signál:
+
+Co výslovně neotevíráme:
+
+Co mažeme nebo zkracujeme:
+
+Vlastník paměti:
+
+Datum posledního uzavření:
+
+Jednovětý záznam do indexu:
+```
+
+Tato karta se nemá vyplňovat jako formulář pro radost z formulářů. Pokud je pravidlo ztišené a jednoduché, stačí několik řádků. Delší zápis použijte jen tehdy, když pravidlo žije přes více pracovních míst a hrozí, že by se po uzavření ztratilo.
+
+### Mini workshop na 8 minut
+
+1. Přečtěte uzavírací stav druhého ročního cyklu.
+2. Rozdělte zbylé informace na živou, portfoliovou a archivní vrstvu.
+3. Napište jednu větu pravidla pro portfoliový index.
+4. Zkontrolujte, kde pravidlo člověk potká při reálné práci.
+5. Zapište návratový signál bez starého kontextu.
+6. Označte jednu věc, která se kvůli tomuto pravidlu už znovu neotevírá.
+7. Smažte nebo zkraťte jednu nepotřebnou pracovní stopu.
+8. Zapište poslední uzavření do logu.
+
+Stop otázka:
+
+```text
+Pomůže tato paměť příštímu rozhodnutí, nebo jen uchovává pocit, že jsme kdysi pracovali pečlivě?
+```
+
+Pokud jde hlavně o pocit, zkraťte ji. Pečlivost se v provozu pozná podle toho, že další rozhodnutí je snazší, ne podle toho, že archiv váží víc než živý systém.
+
+### Checklist dlouhodobé paměti
+
+- Je jasné, v jakém stavu pravidlo skončilo po druhém ročním cyklu?
+- Má pravidlo jedno kanonické místo?
+- Je portfoliový zápis kratší než uzavírací karta?
+- Neobsahuje index staré diskuze, které patří maximálně do archivu?
+- Je návratový signál srozumitelný člověku bez historické paměti?
+- Víme, co pravidlo výslovně neotevírá?
+- Jsou živá, portfoliová a archivní vrstva oddělené?
+- Zmizely dočasné exporty, seznamy chyb a osobní pracovní poznámky bez další hodnoty?
+- Nevzniká nový tracker používání dokumentace nebo individuálních kontrol?
+- Má někdo odpovědnost za udržení indexu krátkého?
+- Umí tým najít pravidlo v okamžiku, kdy upravuje příslušné pracovní místo?
+- Je poslední log tak krátký, aby nepřidával další archeologii?
+
+Dlouhodobá portfoliová paměť je dobrý konec dlouhé péče. Neoslavuje minulou práci, ale nechává po ní použitelnou stopu. Pravidlo má být dostupné, stručné a aktivovatelné jen tehdy, když se objeví skutečný návratový signál. Všechno ostatní je už jen provozní šum v hezkém kabátě.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o dlouhodobé portfoliové paměti po uzavřeném druhém ročním cyklu: vrstvy paměti, portfoliový index, privacy-first redukce stop, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého ročního cyklu po uzavřené první kontrole: uzavírací stavy, ztišení pravidla, archivace bez falešného bezpečí, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o druhém ročním cyklu po uzavřené první kontrole: ověření pravidla bez čerstvé paměti, čtyři výsledné stavy, sloučení do širší rutiny, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření první roční kontroly po návratu pravidla do klidového rytmu: uzavírací stavy, zrušení zvláštní roční otázky, lokální úklid, privacy-first uzavření, karta, mini workshop a checklist.
