@@ -211386,8 +211386,161 @@ Pokud jde jen o chuť, inventuru ukončete. Staré rozhodnutí se nemá otevíra
 
 První roční inventura je zkouška dospělosti minimální portfoliové stopy. Neptá se, jestli tým umí dělat velké kontroly. Ptá se, jestli umí udržet dobré pravidlo malé, čitelné a bez zbytečných dat. Když ano, roční rytmus začne fungovat jako zdravá paměť systému: občas se připomene, ale nežije z pozornosti, kterou nepotřebuje.
 
+## Uzavření první roční inventury minimální portfoliové stopy
+
+První roční inventura nemá končit dojmem, že "vypadá to dobře". Má skončit jedním stavem, jednou větou v portfoliovém logu a jasným úklidem toho, co bylo potřeba jen pro kontrolu. Pokud po inventuře zůstane otevřený seznam drobných poznámek, samostatná tabulka nebo neurčitá domluva, že se k tomu někdo vrátí, inventura se ve skutečnosti nezavřela. Jen se přestěhovala do další malé fronty práce.
+
+Uzavření začněte návratem k původní otázce:
+
+```text
+Co měla roční inventura ověřit:
+
+Co jsme reálně zkontrolovali:
+
+Jaký stav z toho plyne:
+
+Jaká jedna věta se propíše do portfolia:
+
+Co tím končí:
+
+Co se otevírá jen pokud nastal skutečný návratový signál:
+```
+
+Příklad:
+
+```text
+Co měla roční inventura ověřit:
+Jestli pravidlo pro zavírání návratových signálů pořád pomáhá bez samostatného dohledu.
+
+Co jsme reálně zkontrolovali:
+Dvě poslední pracovní situace a aktuální kanonické místo v rozcestníku.
+
+Jaký stav z toho plyne:
+Pravidlo je malé, najitelné a bez nové datové stopy.
+
+Jaká jedna věta se propíše do portfolia:
+Roční inventura potvrzuje ponechání pravidla v klidovém rytmu; další návrat spustí jen opakované nedokončené předání nebo nejasné kanonické místo.
+
+Co tím končí:
+Dočasná inventurní poznámka a odkazy na staré kontrolní karty.
+
+Co se otevírá jen pokud nastal skutečný návratový signál:
+Nová karta k dohledatelnosti pravidla, ale jen pokud se problém zopakuje v běžné práci.
+```
+
+Tento zápis je krátký schválně. Po roce je největší riziko, že tým začne znovu vyprávět celou historii pravidla. Jenže historie už svoji práci udělala. Roční uzavření má potvrdit současný stav, ne rekonstruovat každý krok, kterým jste se k němu dostali.
+
+### Čtyři způsoby uzavření
+
+Po první roční inventuře vyberte jeden ze čtyř stavů:
+
+- ponechat v ročním klidu;
+- udělat jednu lokální opravu kanonického místa;
+- otevřít novou kartu pro dnešní návratový signál;
+- ukončit pravidlo nebo ho sloučit s jiným místem.
+
+Ponechat v ročním klidu znamená, že pravidlo pořád slouží, nestojí moc pozornosti a nevyrábí novou datovou stopu. V tom případě nic nepřepisujte kromě jedné potvrzující věty v portfoliovém logu. Pokud pravidlo funguje, další práce by byla jen převlečená nejistota.
+
+Lokální oprava je vhodná, když pravidlo platí, ale cesta k němu je slabá. Typicky chybí jasný název, odkaz vede přes starý dokument nebo návratový signál není srozumitelný člověku mimo původní kontext. Opravte nejbližší pracovní místo, ne celý systém. Jedna věta, jeden odkaz nebo jedno přejmenování často stačí.
+
+Novou kartu otevřete jen tehdy, když inventura najde současný problém. Ne "možná by se někdy mohlo stát", ale reálný rozpor v práci: pravidlo nešlo použít, tým se vrátil ke starému postupu, vznikla nová kopie zdroje pravdy nebo se opakuje stejná nejasnost. Nová karta má mít vlastní otázku a stop podmínku. Nepřilepujte ji jako poznámku k roční inventuře.
+
+Ukončení nebo sloučení pravidla je správné, když pravidlo už nemá samostatný účel. Třeba se stalo součástí obecnějšího provozního standardu, pracovní místo zaniklo nebo se změnila role, která ho používala. Ukončení není prohra. Je to dobrý výsledek, pokud po něm zůstane méně dokumentů, méně odkazů a stejná nebo lepší schopnost rozhodovat.
+
+### Co propsat a co nechat zmizet
+
+Do kanonického místa po inventuře patří jen to, co pomůže příštímu použití:
+
+- aktuální pracovní věta pravidla;
+- návratový signál, který spustí další otevření;
+- vlastník nebo role odpovědná za běžný rytmus;
+- případná lokální oprava názvu, odkazu nebo hranice pravidla;
+- stav v portfoliovém logu.
+
+Do kanonického místa nepatří:
+
+- celý příběh původní opravy;
+- seznam lidí, kteří se inventury účastnili;
+- pracovní poznámky z kontroly;
+- screenshoty, exporty a pomocné tabulky;
+- staré varianty formulací, pokud už nerozhodují.
+
+Privacy-first pravidlo je jednoduché: ponechte stopu rozhodnutí, ne stopu pozorování. Tým má později vědět, co platí a proč se to znovu otevře. Nemusí vědět, kdo přesně při roční kontrole co řekl, v jakém pořadí prošel dokumenty nebo kolik meziverzí vzniklo.
+
+Codyho komentář: dobrý portfoliový log je trochu nudný. A to je kompliment. Když po roce čtete jen jasné věty o stavu, ne archeologii starých emocí, systém vám šetří hlavu.
+
+### Karta uzavření roční inventury
+
+```text
+Kontrolovaná portfoliová stopa:
+
+Původní pracovní věta:
+
+Roční inventura ověřila:
+
+Výsledný stav:
+- ponechat v ročním klidu / lokálně opravit / otevřít novou kartu / ukončit nebo sloučit
+
+Jedna věta do portfoliového logu:
+
+Kanonické místo, které se mění:
+
+Konkrétní změna:
+
+Co zůstává zavřené:
+
+Co se ruší nebo maže:
+
+Co dál nesledujeme:
+
+Návratový signál:
+
+Vlastník:
+
+Datum dalšího ročního návratu nebo podmínka dřívějšího otevření:
+```
+
+Pokud karta nejde vyplnit bez dlouhého vysvětlování, inventura pravděpodobně smíchala víc témat. Vraťte se k jednomu pravidlu a jednomu stavu. Ostatní poznámky buď zahodit, nebo zapsat jako samostatné podněty s vlastním důvodem.
+
+### Mini workshop na 8 minut
+
+1. Přečtěte původní pracovní větu a návratový signál.
+2. Pojmenujte, co se při inventuře skutečně ověřilo.
+3. Vyberte jeden ze čtyř výsledných stavů.
+4. Napište jednu větu do portfoliového logu.
+5. Rozhodněte, zda se mění kanonické místo.
+6. Smažte nebo zkraťte dočasné podklady.
+7. Řekněte nahlas, co se kvůli inventuře dál nesleduje.
+8. Zavřete kartu.
+
+Stop otázka:
+
+```text
+Zůstává po inventuře méně otevřené práce než před ní?
+```
+
+Pokud odpověď zní ne, uzavření ještě není hotové. Roční inventura má snížit neurčitost, ne založit nový provozní rituál.
+
+### Checklist uzavření roční inventury
+
+- Je vybraný jeden výsledný stav?
+- Je v portfoliovém logu jedna konkrétní věta?
+- Pokud pravidlo drží, nepřidali jsme další kontrolu jen pro jistotu?
+- Pokud stačí lokální oprava, je opravdu lokální?
+- Pokud vzniká nová karta, má dnešní důkaz a vlastní stop podmínku?
+- Pokud se pravidlo ukončuje nebo slučuje, mizí staré odkazy a duplicitní místa?
+- Je jasné, co zůstává zavřené?
+- Jsou dočasné poznámky, kopie, screenshoty a exporty smazané nebo zkrácené?
+- Nesledujeme používání pravidla po lidech?
+- Zůstává jen stopa rozhodnutí, ne stopa pozorování?
+- Umí vlastník říct, kdy se téma otevře dřív než za rok?
+- Zůstává další roční návrat lehký, bez nové vrstvy administrativy?
+
+Uzavření první roční inventury je okamžik, kdy se ukáže, jestli portfoliová stopa opravdu dozrála. Pokud po ní zůstane jen platná věta, čisté kanonické místo a rozumný návratový signál, systém funguje. Pokud po ní zůstane další tabulka, další hlídání a další výjimka, nevznikl klidový rytmus, ale nový malý audit. A ten si zaslouží zmenšit dřív, než se stane tradicí.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o uzavření první roční inventury minimální portfoliové stopy: čtyři uzavírací stavy, propsání do portfoliového logu, lokální oprava, ukončení nebo sloučení pravidla, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o první roční inventuře minimální portfoliové stopy: tři inventurní otázky, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o převodu minimální portfoliové stopy do ročního klidového rytmu: roční inventura bez nového auditu, zrušení zbytků samostatné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhé tiché kontroly minimální portfoliové stopy: čtyři uzavírací stavy, propsání do portfolia, privacy-first datový a procesní úklid, karta, mini workshop a checklist.
