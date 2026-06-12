@@ -213851,8 +213851,186 @@ Pokud ne, zhuštění je jen přepsání nepořádku hezčí češtinou. To je s
 
 Roční zhuštění je údržba paměti bez nostalgie. Nejde o to dokázat, kolik práce tým v minulosti udělal. Jde o to, aby příští rozhodnutí mělo po ruce přesně tolik kontextu, kolik potřebuje. Ani míň, ani hromadu navíc.
 
+## První použití zhuštěné portfoliové položky
+
+Zhuštěná portfoliová položka je užitečná až ve chvíli, kdy podle ní někdo opravdu najde správné pravidlo a udělá rozhodnutí bez archeologie. Dokud jen hezky vypadá v indexu, nevíte, jestli jste paměť zlepšili, nebo jen zkrátili text tak moc, že z něj zmizel pracovní směr.
+
+První použití po zhuštění proto neberte jako další audit. Berte ho jako malý průchod běžnou situací:
+
+```text
+Najde člověk podle zhuštěné položky kanonické místo, pochopí návratový signál a udělá rozhodnutí bez otevírání staré historie?
+```
+
+Pokud ano, položka může zůstat v portfoliové paměti. Pokud ne, nevracejte hned všechno, co jste při zhuštění smazali. Nejdřív zjistěte, co chybělo: název, kanonický odkaz, návratový signál, nebo jedna věta důvodu.
+
+### Testujte skutečné rozhodnutí
+
+Neověřujte zhuštěnou položku otázkou "je to srozumitelné?". To skoro vždycky vyrobí obecný komentář. Lepší je vzít nejbližší reálné rozhodnutí, pro které položka existuje.
+
+Příklad:
+
+```text
+Situace:
+Editor upravuje landing page a zvažuje nové povinné pole ve formuláři.
+
+Zhuštěná položka:
+Formulář sbírá jen údaje použitelné v prvním navázání.
+
+Očekávané použití:
+Editor najde checklist konverzních míst, ověří návratový signál a rozhodne, jestli nové pole patří do výjimky, nebo se má zavřít.
+```
+
+Při průchodu sledujte čtyři věci:
+
+- Nalezení: člověk našel položku v portfoliovém indexu ve chvíli, kdy ji potřeboval.
+- Přechod: položka ho dovedla na kanonické místo, ne do archivu.
+- Rozhodnutí: vznikl stav, například ponechat pravidlo, otevřít výjimku, zavřít návrh nebo upravit pracovní místo.
+- Datová střídmost: kvůli ověření nevznikl nový export, tracker ani osobní poznámka bez účelu.
+
+To stačí. První použití nemá testovat celý portfoliový index. Má ověřit jednu zhuštěnou položku v jedné pracovní situaci.
+
+### Když je položka příliš krátká
+
+Zhuštění se může přehnat. Typický signál je, že člověk najde položku, ale neví, proč existuje, nebo nepozná rozdíl mezi běžným třením a skutečným návratovým signálem.
+
+V takové chvíli nepřidávejte zpět celý původní příběh. Doplňte nejmenší chybějící prvek:
+
+- lepší pracovní název;
+- jednu větu důvodu;
+- přesnější návratový signál;
+- odkaz na kanonické místo;
+- poznámku, co položka výslovně neotevírá.
+
+Příklad drobné opravy:
+
+```text
+Původní zhuštěná položka:
+Formuláře: minimum polí.
+
+Lepší zhuštěná položka:
+Formulář sbírá jen údaje použitelné v prvním navázání. Otevřít jen při návrhu nového povinného pole nebo změně obchodního navázání.
+```
+
+Rozdíl je malý, ale praktický. Druhá věta dává člověku hranici. Neříká jen téma, říká kdy se má pravidlo použít.
+
+### Když položka odkazuje špatně
+
+Někdy není problém v textu položky, ale v odkazu. Portfoliový index říká správnou věc, jen vede na starou šablonu, dlouhý archiv nebo příliš obecnou kapitolu. V tom případě neopravujte pravidlo. Opravte cestu.
+
+Krátký test:
+
+```text
+Kdyby odkaz vedl přímo na správné pracovní místo, stačila by současná formulace položky?
+```
+
+Pokud ano, změňte odkaz nebo název cíle. Pokud ne, doplňte jednu větu do položky. Až když selžou obě věci, vraťte se k hlubší úpravě pravidla.
+
+Codyho komentář: když mapa ukazuje na správné město, ale šipka vede do sklepa, nepotřebujete přepsat geografii. Potřebujete opravit šipku. Ano, i dokumentace má svoje sklepy.
+
+### Privacy-first ověření
+
+První použití zhuštěné portfoliové položky nesmí vytvořit novou vrstvu sledování. Nepotřebujete vědět, kdo přesně kam klikl, jak dlouho četl index ani kolikrát se vrátil do archivu. Potřebujete vědět, jestli položka pomohla rozhodnutí.
+
+Zůstává:
+
+```text
+Typ situace, stav použití, případná drobná oprava a aktualizovaný návratový signál.
+```
+
+Maže se nebo vůbec nevzniká:
+
+- osobní trasa čtenáře;
+- screenshoty rozcestníku, pokud po opravě nemají další účel;
+- pracovní kopie staré položky;
+- syrové zákaznické nebo interní podklady, pokud stačí anonymizovaný typ problému;
+- nový tracker používání portfoliového indexu.
+
+Pokud při použití pracujete se zákaznickou situací, přepište ji do obecného vzoru. V portfoliové paměti má zůstat pravidlo a signál, ne konkrétní zákaznický příběh.
+
+### Karta prvního použití zhuštěné položky
+
+```text
+Zhuštěná portfoliová položka:
+
+Pracovní situace:
+
+Kde člověk začal:
+
+Kanonické místo, kam měl dojít:
+
+Co rozhodl:
+
+Výsledek:
+- drží / doplnit jednu větu / opravit odkaz / vrátit k širšímu zhuštění
+
+Co chybělo:
+
+Jedna oprava:
+
+Co výslovně nevracíme z historie:
+
+Privacy-first úklid:
+
+Návratový signál:
+
+Datum další běžné kontroly:
+```
+
+Vyplněný příklad:
+
+```text
+Zhuštěná portfoliová položka:
+Formulář sbírá jen údaje použitelné v prvním navázání.
+
+Pracovní situace:
+Editor zvažoval povinné pole telefon na nové landing page.
+
+Kde člověk začal:
+V portfoliovém indexu pravidel pro konverzní místa.
+
+Kanonické místo:
+Checklist konverzních míst a šablona landing page.
+
+Co rozhodl:
+Telefon nebude povinný v prvním formuláři. Zůstane až v navazující domluvě.
+
+Výsledek:
+Drží.
+
+Co chybělo:
+Nic zásadního. Položka dovedla na správné místo.
+
+Jedna oprava:
+Žádná.
+
+Co výslovně nevracíme z historie:
+Staré porovnání formulářových variant.
+
+Privacy-first úklid:
+Nevznikl nový export ani evidence čtenářů.
+
+Návratový signál:
+Nový povinný údaj, který obchod nepoužije v prvním navázání.
+```
+
+### Checklist prvního použití
+
+- Proběhlo ověření při reálném rozhodnutí?
+- Našel člověk zhuštěnou položku v místě, kde by ji přirozeně hledal?
+- Dovedla položka na kanonické pracovní místo?
+- Byl návratový signál dost jasný bez čtení staré historie?
+- Vzniklo konkrétní rozhodnutí, ne jen komentář k textu?
+- Pokud něco chybělo, stačí jedna věta, odkaz nebo název?
+- Nevracíme do portfoliové paměti staré příběhy jen kvůli pohodlí?
+- Nevznikl nový tracker, export ani osobní záznam čtenářské cesty?
+- Je privacy-first úklid zapsaný stejně stručně jako samotná položka?
+- Má položka po prvním použití stav: drží, opravit, nebo vrátit k širšímu zhuštění?
+
+První použití zhuštěné položky je kontrola, jestli paměť opravdu zhubla zdravě. Když čtenář najde pravidlo rychleji, rozhodne se přesněji a nevznikne nová datová stopa, zhuštění splnilo účel. Pokud ne, neoprašujte celý archiv. Doplňte nejmenší chybějící kus a nechte portfoliovou paměť zůstat krátkou.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o prvním použití zhuštěné portfoliové položky: ověření při reálném rozhodnutí, chybějící věta nebo odkaz, privacy-first úklid, karta a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o ročním zhuštění dlouhodobé portfoliové paměti: tři otázky zhuštění, slabá pravidla, privacy-first redukce stop, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o dlouhodobé portfoliové paměti po uzavřeném druhém ročním cyklu: vrstvy paměti, portfoliový index, privacy-first redukce stop, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého ročního cyklu po uzavřené první kontrole: uzavírací stavy, ztišení pravidla, archivace bez falešného bezpečí, privacy-first úklid, karta, mini workshop a checklist.
