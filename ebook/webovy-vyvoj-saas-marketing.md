@@ -213217,8 +213217,270 @@ Pokud není, nepokračujte stejným rytmem ze setrvačnosti. Buď pravidlo potř
 
 Druhý roční cyklus je dobré místo pro malou odvahu: ponechat pravidlo, které pořád pomáhá, a bez sentimentu zrušit péči, která už jen připomíná, že kdysi něco hořelo. Klidový rytmus není odměna za minulou práci. Je to pracovní forma pro pravidla, která dokážou pomáhat bez dohledu.
 
+## Uzavření druhého ročního cyklu po uzavřené první kontrole
+
+Druhý roční cyklus se nesmí jen odškrtnout. Právě po něm se rozhoduje, jestli pravidlo opravdu patří do dlouhodobého rytmu, jestli se má sloučit s širší rutinou, nebo jestli už samostatná péče přestala dávat smysl. Uzavření má proto převést výsledek druhého cyklu do stavu, který příští člověk pochopí bez staré paměti, bez hledání důvodů v archivu a bez dalšího "raději to ještě sledujme".
+
+Začněte krátkým uzavíracím zápisem:
+
+```text
+Kanonické pravidlo:
+
+Výsledek druhého ročního cyklu:
+
+Co se tím potvrzuje:
+
+Co se mění v běžném rytmu:
+
+Co se ruší, slučuje nebo archivuje:
+
+Kdy se k tomu vrátíme:
+```
+
+Tento zápis má být kratší než karta druhého cyklu. Pokud je delší, pravděpodobně znovu otevíráte historii místo toho, abyste ji zavírali. Uzavření není další analýza. Je to převod rozhodnutí do běžného pracovního místa.
+
+Příklad:
+
+```text
+Kanonické pravidlo:
+Poptávkový formulář sbírá jen údaje nutné pro první kvalifikované navázání.
+
+Výsledek druhého ročního cyklu:
+Roční otázka opět zabránila zkopírování starého formuláře s jedním zbytečným polem.
+
+Co se potvrzuje:
+Pravidlo má dál hodnotu, ale nepotřebuje samostatnou roční kontrolu mimo inventuru konverzních míst.
+
+Co se mění v běžném rytmu:
+Otázku slučujeme do roční kontroly aktivních formulářů.
+
+Co se ruší:
+Samostatnou kartu roční péče zavíráme.
+
+Kdy se vrátíme:
+Při nové šabloně formuláře nebo při opakovaném požadavku na pole, které obchod v prvním kroku nepoužije.
+```
+
+Výsledek je praktický: pravidlo nezmizelo, ale už kolem sebe nepotřebuje zvláštní lešení. Další člověk najde otázku tam, kde ji při práci opravdu potřebuje.
+
+### Čtyři uzavírací stavy
+
+Po druhém ročním cyklu vyberte jeden uzavírací stav:
+
+- Ponechat v ročním rytmu: pravidlo opakovaně přineslo rozhodnutí a samostatná otázka je pořád lehká.
+- Sloučit do širší rutiny: význam pravidla zůstává, ale samostatná péče už je zbytečná.
+- Ztišit na kanonické pravidlo: pravidlo zůstává najitelné, ale bez vlastní roční otázky.
+- Archivovat pravidlo: pravidlo už nepomáhá současné práci a jeho ponechání by jen mátlo.
+
+Nejčastější zdravý výsledek po druhém ročním cyklu je sloučení nebo ztišení. Pokud pravidlo přežilo dva roky a pořád nepotřebuje zásahy, často už nemusí mít vlastní malý reflektor. Stačí, aby žilo na správném místě.
+
+Rozhodovací věta:
+
+```text
+Druhý roční cyklus uzavíráme stavem:
+- ponechat v ročním rytmu / sloučit do širší rutiny / ztišit na kanonické pravidlo / archivovat pravidlo
+
+Protože:
+
+Do kanonického místa se propisuje:
+
+Do běžného rytmu se propisuje:
+
+Samostatná péče:
+- pokračuje / slučuje se / končí / archivuje se
+
+Další návratový signál:
+```
+
+Stav vybírejte podle hodnoty pro budoucí práci, ne podle nostalgie. To, že pravidlo kdysi zachránilo nepříjemnou situaci, není samo o sobě důvod, aby mělo vlastní kontrolu navždy.
+
+### Kdy ponechat samostatný roční rytmus
+
+Samostatný roční rytmus ponechte jen tehdy, když druhý cyklus znovu přinesl konkrétní rozhodnutí a otázka zůstala lehká. Typicky jde o pravidla, která hlídají kritická místa: sběr dat, formuláře, přístupy, veřejné sliby, provozní odpovědnosti nebo obchodní kvalifikaci.
+
+Dobré důvody pro ponechání:
+
+- otázka během roku zabránila konkrétní chybě;
+- pravidlo chrání místo s vyšším dopadem na zákazníka nebo data;
+- roční kontrola trvá pár minut a vede k jasnému stavu;
+- pravidlo se dotýká více týmových rolí a potřebuje společnou připomínku;
+- bez samostatné otázky by se význam ztratil v příliš obecné rutině.
+
+Špatné důvody:
+
+- "už jsme to tak měli";
+- "kdysi to bylo důležité";
+- "pro jistotu se to může hodit";
+- "nechce se nám rozhodovat, kam to sloučit";
+- "nikomu to zatím nepřekáží".
+
+Poslední věta je zrádná. To, že něco nepřekáží viditelně, ještě neznamená, že to nic nestojí. Každá zvláštní kontrola bere pozornost, zvyšuje množství pravidel a učí tým, že staré stopy se nemají uklízet.
+
+### Jak ztišit pravidlo bez ztráty smyslu
+
+Ztišení znamená, že pravidlo dál existuje, ale už nemá vlastní kontrolní režim. To je správné, když pravidlo obstálo, je najitelné a další péče by přidávala víc administrativy než užitku.
+
+Ztišení udělejte ve třech krocích:
+
+- nechte jednu větu v kanonickém místě;
+- smažte nebo archivujte samostatnou roční kartu;
+- přidejte návratový signál, který pravidlo znovu otevře jen při reálném problému.
+
+Příklad ztišení:
+
+```text
+Kanonické místo:
+Šablona nové landing page.
+
+Ztišené pravidlo:
+Každý formulář obsahuje jen pole, která tým použije v prvním navázání.
+
+Zrušená péče:
+Samostatná roční otázka k formulářům končí.
+
+Návratový signál:
+Někdo navrhne nové povinné pole bez jasného použití v prvním obchodním kroku.
+```
+
+Tady pravidlo nezmizelo. Jen přestalo cestovat s vlastním zavazadlem. Další člověk ho potká přesně tam, kde pracuje s formulářem.
+
+Codyho komentář: dobré pravidlo po čase nepotřebuje ceduli "pozor, jsem důležité pravidlo". Prostě sedí ve správném místě a brání hloupostem včas. Tichá kompetence, žádný interní ohňostroj.
+
+### Archivace bez falešného bezpečí
+
+Archivace je správná, když pravidlo přestalo odpovídat současné práci. Třeba proto, že produkt změnil model, formulář zmizel, tým přešel na jiný prodejní proces nebo původní riziko už neexistuje. Archivace ale nesmí vytvořit falešný pocit, že je věc pořád chráněná.
+
+Archivovaný zápis má říct:
+
+```text
+Archivované pravidlo:
+
+Proč ho archivujeme:
+
+Kde dřív žilo:
+
+Co ho dnes nahrazuje:
+
+Co by otevřelo novou otázku:
+
+Datum archivace:
+```
+
+Slabá archivace:
+
+```text
+Pravidlo zatím necháváme v archivu, kdyby se hodilo.
+```
+
+Lepší archivace:
+
+```text
+Pravidlo k ruční kontrole exportů archivujeme, protože exportní krok už v procesu neexistuje. Pokud vznikne nový export osobních dat mimo hlavní systém, otevře se nová datová karta, ne stará roční kontrola.
+```
+
+Druhá formulace chrání tým před dvěma chybami: před návratem zastaralého pravidla a před slepým místem, kdy se nové riziko schová za starou archivní poznámku.
+
+### Privacy-first uzavření druhého cyklu
+
+Privacy-first uzavření po druhém ročním cyklu znamená hlavně redukci stop. Po dvou letech už nepotřebujete držet všechny pomocné poznámky, staré kontrolní tabulky, dočasné exporty ani seznamy historických nálezů. Potřebujete jen tolik informací, aby bylo jasné, co platí dál a kdy se téma znovu otevře.
+
+Po uzavření nechte:
+
+- kanonické pravidlo nebo archivní větu;
+- uzavírací stav;
+- místo, kde pravidlo dál žije nebo kam bylo sloučeno;
+- konkrétní návratový signál;
+- stručný záznam v logu.
+
+Odstraňte nebo zkraťte:
+
+- staré pracovní kopie;
+- přechodové checklisty;
+- seznamy lidí, kteří na problém narazili;
+- detailní poznámky z kontrol, pokud už nepodporují rozhodnutí;
+- samostatné úkoly, které jen připomínají uzavřenou historii.
+
+Do uzavírací karty přidejte větu:
+
+```text
+Po uzavření druhého ročního cyklu dál neuchováváme:
+```
+
+Příklad:
+
+```text
+Po uzavření druhého ročního cyklu dál neuchováváme pracovní výpis starých formulářů, seznam historických návrhů na nová pole ani poznámky ke konkrétním autorům návrhů. Zůstává jen pravidlo v šabloně landing page a návratový signál pro nové povinné pole.
+```
+
+To je přesně ten typ úklidu, který není vidět v marketingové prezentaci, ale v provozu snižuje riziko. Méně stop znamená méně nejasností, méně osobních detailů a méně míst, která musí někdo hlídat.
+
+### Karta uzavření druhého ročního cyklu
+
+```text
+Kanonické pravidlo:
+
+Datum uzavření druhého cyklu:
+
+Výsledek druhého ročního cyklu:
+
+Uzavírací stav:
+- ponechat v ročním rytmu / sloučit do širší rutiny / ztišit na kanonické pravidlo / archivovat pravidlo
+
+Co zůstává v kanonickém místě:
+
+Co se mění v běžném rytmu:
+
+Co se ruší, slučuje nebo archivuje:
+
+Co se znovu neotevírá:
+
+Další návratový signál:
+
+Privacy-first úklid:
+
+Jednovětý závěr pro log:
+```
+
+Jednovětý závěr je důležitý. Příští člověk nemá znovu zkoumat celý cyklus. Má vidět, jestli pravidlo pokračuje, slučuje se, ztišuje nebo archivuje.
+
+### Mini workshop na 6 minut
+
+1. Přečtěte výsledek druhého ročního cyklu.
+2. Vyberte jeden ze čtyř uzavíracích stavů.
+3. Rozhodněte, kde pravidlo dál žije.
+4. Zapište, co se ruší, slučuje nebo archivuje.
+5. Upravte návratový signál tak, aby byl rozpoznatelný bez staré historie.
+6. Smažte nebo zkraťte dočasné pracovní stopy.
+7. Zapište jednu větu do logu.
+
+Stop otázka:
+
+```text
+Umí další člověk po uzavření použít nebo ignorovat pravidlo bez znalosti posledních dvou ročních cyklů?
+```
+
+Pokud ne, uzavření ještě není hotové. Nejspíš chybí kanonické místo, jasný návratový signál nebo rozhodnutí, jestli samostatná péče opravdu pokračuje.
+
+### Checklist uzavření druhého ročního cyklu
+
+- Má druhý roční cyklus jeden jasný uzavírací stav?
+- Je rozhodnutí kratší než původní karta cyklu?
+- Víme, jestli pravidlo zůstává samostatné, slučuje se, ztišuje nebo archivuje?
+- Je kanonické místo po uzavření najitelné?
+- Pokud pravidlo slučujeme, je jasné, v jaké rutině dál žije?
+- Pokud pravidlo ztišujeme, má konkrétní návratový signál?
+- Pokud pravidlo archivujeme, je napsané, co ho dnes nahrazuje?
+- Nezůstává samostatná péče jen ze zvyku?
+- Zmizely dočasné poznámky, pracovní kopie a historické seznamy bez další hodnoty?
+- Nepřibylo nové sledování lidí, čtenosti dokumentace ani individuálních chyb?
+- Je log dost stručný, aby příští kontrola nezačínala archeologií?
+- Umí nový člověk poznat aktuální stav bez čtení celé historie?
+
+Uzavření druhého ročního cyklu je dobrý konec dlouhé smyčky. Pravidlo buď získá místo v běžném rytmu, ztiší se do kanonické věty, nebo odejde do archivu. Všechny tři výsledky jsou lepší než nekonečná péče ze setrvačnosti. Provoz má být spolehlivý, ne pamětní síň každého starého rozhodnutí.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého ročního cyklu po uzavřené první kontrole: uzavírací stavy, ztišení pravidla, archivace bez falešného bezpečí, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o druhém ročním cyklu po uzavřené první kontrole: ověření pravidla bez čerstvé paměti, čtyři výsledné stavy, sloučení do širší rutiny, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření první roční kontroly po návratu pravidla do klidového rytmu: uzavírací stavy, zrušení zvláštní roční otázky, lokální úklid, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o první roční kontrole po návratu pravidla do klidového rytmu: reálné použití, čtyři výsledné stavy, lokální úklid, privacy-first kontrola, karta, mini workshop a checklist.
