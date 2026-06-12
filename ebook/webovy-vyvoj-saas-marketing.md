@@ -10062,6 +10062,194 @@ Vlastník:
 
 Uzavření prvního běžného použití je krátké, ale šetří hodně budoucího zmatku. Buď potvrdí, že pravidlo může žít dál v klidu, nebo přesně řekne, kde ho dočistit. A když se opravdu vrátí problém, otevře novou smyčku s dnešním důkazem, ne s celou tíhou staré historie.
 
+## Druhé běžné použití po převodu reakce
+
+První běžné použití po převodu reakce říká, jestli pravidlo umí přežít návrat do normální práce. Druhé běžné použití říká něco trochu jiného: jestli pravidlo funguje i bez čerstvé paměti z poslední kontroly. Mezi prvním a druhým průchodem už opadne pozornost, lidé řeší jiné věci a systém se musí opřít o svoje běžné pracovní místo, ne o to, že si někdo ještě pamatuje poslední opravu.
+
+Druhé použití proto neberte jako další audit. Berte ho jako test přenositelnosti. Pokud druhý člověk, druhý cyklus nebo druhá podobná situace použije pravidlo bez návratu ke staré reakci, máte silnější důkaz, že převod opravdu drží. Pokud se objeví stejné tření jako poprvé, nejde už o náhodný dotaz. Pravděpodobně je slabé pracovní místo, název, cesta ke zdroji pravdy nebo hranice pravidla.
+
+Zápis má zůstat krátký:
+
+```text
+Druhá běžná situace:
+
+Co se opakovalo z prvního použití:
+
+Co bylo jiné:
+
+Stačilo kanonické místo?
+
+Vznikla nová pomocná stopa?
+
+Stav po druhém použití:
+```
+
+Příklad:
+
+```text
+Druhá běžná situace:
+Další měsíční údržba šablon, tentokrát pro sales materiály.
+
+Co se opakovalo z prvního použití:
+Člověk začal v rozcestníku a použil aktuální pravidlo.
+
+Co bylo jiné:
+Šlo o jiný typ šablony a jiného vlastníka.
+
+Stačilo kanonické místo:
+Ano. Nebylo potřeba otevírat starý ověřovací záznam.
+
+Vznikla nová pomocná stopa:
+Ne. Výsledek je jen běžná poznámka v měsíční údržbě.
+
+Stav po druhém použití:
+Převod je přenositelný. Téma zůstává v běžném rytmu.
+```
+
+Takový zápis není efektní, ale je cenný. Ukazuje, že systém nefunguje jen díky člověku, který ho posledně opravoval. Funguje v běžném provozu.
+
+### Co druhé použití opravdu ověřuje
+
+Druhé použití má ověřit tři věci:
+
+- přenositelnost: pravidlo použije i někdo, kdo nebyl u poslední reakce;
+- nezávislost: výsledek nevznikne díky starému podkladu, chatu nebo osobní paměti;
+- klid: po práci nevznikne další mimořádná kontrola.
+
+Přenositelnost neznamená, že pravidlo musí pochopit každý bez kontextu. Znamená, že člověk v dané pracovní roli najde správnou cestu z běžného místa. Pokud potřebuje krátký dotaz, ale dotaz se týká jen věcné hranice práce, nemusí to být problém. Pokud se ale ptá, kde pravidlo vlastně žije, máte problém s kanonickým místem.
+
+Nezávislost znamená, že stará reakce už není zdrojem rozhodnutí. Může zůstat v historii, ale nemá řídit další průchod. Jakmile lidé při druhém použití znovu otevírají starý komentář, screenshot nebo dočasnou kartu, převod ještě není dokončený. Nejspíš chybí jedna věta v aktuálním pravidle, nebo starý podklad zůstal příliš viditelný.
+
+Klid znamená, že druhé použití nezaloží nový režim sledování. Když pravidlo drží, neudělujte mu novou nálepku, zvláštní report ani další připomínku. Stabilita se někdy pozná právě podle toho, že po ní nezůstane nový proces.
+
+### Kdy udělat poslední lokální dočištění
+
+Poslední lokální dočištění dává smysl, když se při druhém použití objeví stejné malé tření jako při prvním. Jednorázový dotaz mohl být náhoda. Opakovaný dotaz už je návrh na úpravu pracovního místa.
+
+Typické situace:
+
+- dva různí lidé hledali pravidlo stejným špatným slovem;
+- druhý průchod znovu otevřel starý odkaz, i když výsledek byl správný;
+- jedna věta v pravidle opakovaně působí jako výjimka, ne jako běžný postup;
+- lidé vědí, co mají udělat, ale nevědí, kam zapsat stav;
+- starý příklad je pořád čitelnější než aktuální kanonické pravidlo.
+
+Dočištění udělejte jen v nejbližším místě použití:
+
+```text
+Opakované tření:
+
+Kde se objevilo podruhé:
+
+Jedna lokální oprava:
+
+Co zůstává zavřené:
+
+Co po opravě mažeme nebo archivujeme:
+
+Další stav:
+- nechat v běžném rytmu / ověřit při příštím přirozeném použití
+```
+
+Nepřepisujte celou smyčku jen proto, že se potvrdila jedna slabá věta. Druhé použití má chránit provoz před návratem starého problému, ne vyrábět ediční projekt. Když stačí přejmenovat odkaz, přesuňte odkaz. Když stačí doplnit jednu větu do šablony, doplňte jednu větu. Když musíte přepsat tři dokumenty, nejdřív napište novou pracovní otázku.
+
+### Kdy už nechat převod být
+
+Převod nechte být, pokud druhé použití splní tyto podmínky:
+
+- proběhlo v běžném rytmu;
+- kanonické místo stačilo bez staré reakce;
+- pracovní výstup vznikl bez nové pomocné evidence;
+- nikdo nezaložil zvláštní kontrolu jen kvůli jistotě;
+- případná otázka byla zodpověditelná z existujícího pravidla;
+- návratový signál nenastal.
+
+V takovém případě je nejlepší záznam velmi krátký:
+
+```text
+Druhé běžné použití potvrdilo převod. Pravidlo je přenositelné, staré podklady nebyly potřeba a nevzniká další agenda. Téma zůstává v běžném rytmu.
+```
+
+Tím práce končí. Žádné "ještě jednou pro jistotu". Žádné nové měření používání. Žádné hlídání lidí. Pokud se v budoucnu objeví skutečný návratový signál, otevřete ho tehdy. Ne dnes.
+
+Codyho komentář: dobrý provoz není ten, kde má všechno tři kontroly. Dobrý provoz je ten, kde se po druhém normálním průchodu umíme přestat tvářit, že jsme uprostřed dramatu.
+
+### Privacy-first hranice druhého použití
+
+Druhé použití svádí k tomu, aby si tým začal evidovat, kdo pravidlo použil správně a kdo ne. To je špatná cesta. Pokud potřebujete vědět, jestli pravidlo drží, sledujte pracovní výsledek a datovou stopu, ne chování jednotlivců.
+
+Stačí odpovědět:
+
+- vznikl výstup v běžném místě?
+- použilo se kanonické pravidlo?
+- nebyly potřeba staré podklady?
+- nezůstala nová kopie, export nebo osobní evidence?
+
+Nezapisujte jména lidí, pokud nejsou nutná pro vlastnictví další opravy. Nepořizujte screenshoty průchodů, pokud nerozhodují o konkrétní změně. Nezakládejte report používání pravidla, pokud nejde o skutečný provozní závazek. A pokud už nějaký dočasný důkaz vznikl, smažte ho nebo anonymizujte hned po uzavření stavu.
+
+Privacy-first výsledek po druhém použití může vypadat takto:
+
+```text
+Ponecháváme:
+stav převodu, kanonické místo a případnou jednu lokální opravu.
+
+Mažeme:
+dočasné poznámky z ověření, pracovní kopie staré reakce a screenshoty bez dalšího účelu.
+
+Nesbíráme:
+osobní používání pravidla, klikání v rozcestníku, ruční seznam správných průchodů ani další exporty.
+```
+
+Tahle část není formalita. Právě malé provozní kontroly často vytvářejí zbytečnou datovou stopu. Když je zavřete čistě, chráníte tým před nepořádkem i před pozdějším vysvětlováním, proč někde leží staré pracovní podklady.
+
+### Karta druhého běžného použití po převodu
+
+```text
+Převedená reakce:
+
+První běžné použití skončilo stavem:
+
+Druhá běžná situace:
+
+Kdo nebo která role pravidlo použila:
+
+Kanonické místo:
+
+Výstup práce:
+
+Co bylo potřeba mimo běžné místo:
+
+Opakovalo se tření z prvního použití?
+
+Stav:
+- přenositelné a klidné / poslední lokální dočištění / slabé kanonické místo / skutečný návratový signál
+
+Jedna oprava, pokud je potřeba:
+
+Co zůstává zavřené:
+
+Co mažeme nebo anonymizujeme:
+
+Co dál nesledujeme:
+
+Návratový signál pro budoucnost:
+```
+
+### Checklist druhého běžného použití
+
+- Šlo o skutečnou běžnou situaci, ne umělý test?
+- Použil pravidlo někdo nebo něco mimo čerstvou paměť první kontroly?
+- Stačilo kanonické místo bez staré reakce?
+- Nevznikla nová pomocná evidence?
+- Pokud se tření opakovalo, opravujeme jedno nejbližší pracovní místo?
+- Pokud je slabá cesta ke zdroji pravdy, nekopírujeme pravidlo do dalšího dokumentu?
+- Je jasné, co zůstává zavřené?
+- Mažeme nebo anonymizujeme dočasné důkazy?
+- Nevzniká sledování podle lidí?
+- Umí vlastník říct, že převod buď drží, nebo má přesně jednu poslední opravu?
+
+Druhé běžné použití má jednoduchý cíl: oddělit stabilní převod od převodu, který drží jen díky doznívající pozornosti. Když drží, nechte ho v klidu. Když drhne stejně jako poprvé, opravte nejbližší místo. Když se opravdu vrátí problém, otevřete novou smyčku. Všechno mezi tím je jen provozní šum, který si nezaslouží vlastní tabulku.
+
 ## Pravidla rukopisu
 
 - Pišu česky, prakticky a bez nafukování.
@@ -211978,3 +212166,4 @@ Převod do ročního klidového rytmu je dobrý konec dlouhé stabilizační lin
 - 2026-06-09: Doplněna úvodní podkapitola o prvním běžném použití po uzavřeném měsíci: samostatné použití pravidla bez mimořádné péče, čtyři výsledné stavy, privacy-first kontrola, karta a checklist.
 - 2026-06-09: Doplněna úvodní podkapitola o druhém běžném použití po uzavřeném měsíci: přenositelnost pravidla, slabý přenos, poslední lokální dočištění, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna krátká úvodní poznámka, aby návratový signál byl rozpoznatelný i pro člověka mimo původní rozhodnutí.
+- 2026-06-12: Doplněna úvodní podkapitola o druhém běžném použití po převodu reakce: přenositelnost bez čerstvé paměti, poslední lokální dočištění, privacy-first hranice, karta a checklist.
