@@ -211538,8 +211538,163 @@ Pokud odpověď zní ne, uzavření ještě není hotové. Roční inventura má
 
 Uzavření první roční inventury je okamžik, kdy se ukáže, jestli portfoliová stopa opravdu dozrála. Pokud po ní zůstane jen platná věta, čisté kanonické místo a rozumný návratový signál, systém funguje. Pokud po ní zůstane další tabulka, další hlídání a další výjimka, nevznikl klidový rytmus, ale nový malý audit. A ten si zaslouží zmenšit dřív, než se stane tradicí.
 
+## Druhý rok po uzavřené roční inventuře minimální portfoliové stopy
+
+Po první roční inventuře přichází nenápadná zkouška: neudělat z úspěšné kontroly nový zvyk s vlastní administrativou. Tým už ví, že pravidlo existuje, kde bydlí a kdy se má znovu otevřít. Druhý rok proto nemá přidávat další vrstvu jistoty. Má potvrdit, že portfoliová stopa umí žít v normálním provozu bez toho, aby si pořád říkala o pozornost.
+
+Začněte krátkým zápisem:
+
+```text
+Co zůstalo po první roční inventuře:
+
+Kde pravidlo bydlí:
+
+Jaký návratový signál ho otevře dřív než za rok:
+
+Co se během druhého roku nebude samostatně sledovat:
+
+Kdo pozná, že se návratový signál objevil:
+```
+
+Příklad:
+
+```text
+Co zůstalo po první roční inventuře:
+Jedna pracovní věta v portfoliovém logu a odkaz na kanonické místo v rozcestníku standardů.
+
+Kde pravidlo bydlí:
+V části "uzavírání návratových signálů" jako běžná hranice pro práci s iteracemi.
+
+Jaký návratový signál ho otevře dřív než za rok:
+Dvě po sobě jdoucí předání změny skončí nejasným vlastníkem nebo starou kopií rozhodnutí.
+
+Co se během druhého roku nebude samostatně sledovat:
+Nebudeme měřit čtenost pravidla, dělat měsíční check-in ani sbírat seznam lidí, kteří ho použili.
+
+Kdo pozná, že se návratový signál objevil:
+Vlastník kanonického indexu při běžném review nebo člověk, který narazí na rozpor v předání.
+```
+
+Tento zápis je užitečný hlavně proto, že chrání tým před "preventivní péčí". Když je pravidlo stabilní, nepotřebuje malý dashboard, další tabulku ani pravidelné připomínky. Potřebuje být najitelné, srozumitelné a otevřitelné jen ve chvíli, kdy k tomu existuje reálný důvod.
+
+### Co znamená druhý klidový rok
+
+Druhý klidový rok není období bez odpovědnosti. Je to období bez zvláštního režimu. Pravidlo zůstává v běžném portfoliu, má vlastníka a má návratový signál, ale nevyžaduje samostatnou pozornost mimo normální pracovní rytmus.
+
+Prakticky to znamená:
+
+- pravidlo se nehlídá mimo kanonický index;
+- při běžné práci se používá bez inventurní šablony;
+- staré kontrolní karty zůstávají zavřené;
+- nový podnět se nepřilepuje k historii, ale dostane vlastní kartu, pokud splní návratový signál;
+- roční návrat je naplánovaný jako lehká inventura, ne jako velký audit.
+
+Nejčastější chyba je zaměnit klid za zapomnění. Pokud tým neví, kde pravidlo najde, není v klidu. Je ztracené. Pokud ho ale najde, použije a zase zavře bez zvláštní ceremonie, druhý rok funguje přesně tak, jak má.
+
+### Jak zacházet s drobnými podněty během roku
+
+Během druhého roku se objeví drobné podněty. Někdo navrhne lepší formulaci. Někdo si vzpomene na starou výjimku. Někdo bude chtít přidat další příklad, protože "by se mohl hodit". Většina těchto podnětů nemá otevírat pravidlo.
+
+Použijte jednoduchý filtr:
+
+```text
+Podnět:
+
+Je to rozpor v reálné práci?
+
+Opakuje se?
+
+Brání rozhodnutí, předání nebo úklidu datové stopy?
+
+Splňuje návratový signál?
+
+Nejmenší odpověď:
+- ignorovat / lokálně opravit / otevřít novou kartu
+```
+
+Ignorovat neznamená být ledabylý. Znamená nekrmit systém šumem. Lokální oprava stačí, když jde o překlep, nejasný odkaz nebo drobnou formulaci, která nemění smysl pravidla. Novou kartu otevřete až ve chvíli, kdy podnět ukazuje skutečný problém v práci.
+
+Codyho komentář: stabilní pravidlo občas potřebuje nechat být. Jestli pokaždé, když někomu svrbí dokumentační ruka, zakládáte mini review, tak nemáte systém znalostí. Máte hobby.
+
+### Privacy-first hranice druhého roku
+
+Privacy-first hodnota se ve druhém roce pozná podle toho, že tým nepotřebuje sbírat nové údaje jen proto, aby si potvrdil existenci pravidla. Pokud pravidlo funguje, důkazem je běžná práce: čisté předání, dohledatelné kanonické místo a absence opakovaného rozporu. Není potřeba sledovat, kdo pravidlo otevřel, kolikrát ho četl ani jak dlouho na stránce zůstal.
+
+Do druhého roku proto nepatří:
+
+- individuální analytika používání interních pravidel;
+- seznam lidí, kteří pravidlo četli;
+- exporty komentářů z nástrojů jen pro pocit kontroly;
+- screenshoty běžných průchodů;
+- nový tracker nad dokumentací;
+- kopie pravidla v dalších systémech bez jasného vlastnictví.
+
+Stačí ponechat tři věci: kanonické místo, návratový signál a krátký portfoliový log. To je málo záměrně. Čím méně stop systém potřebuje, tím menší je riziko úniku, neaktuálních kopií a zbytečného dohledu nad prací lidí.
+
+### Karta druhého klidového roku
+
+```text
+Pravidlo nebo portfoliová stopa:
+
+Kanonické místo:
+
+Věta po první roční inventuře:
+
+Návratový signál:
+
+Vlastník:
+
+Běžný rytmus, ve kterém se pravidlo objeví:
+
+Co se samostatně nesleduje:
+
+Jak se zachází s drobnými podněty:
+
+Kdy vznikne nová karta:
+
+Co zůstává zavřené z první roční inventury:
+
+Datum dalšího lehkého ročního návratu:
+```
+
+Karta nemá být novým dokumentem vedle portfolia, pokud už pro tyto věci existuje místo v kanonickém indexu. Klidně ji vyplňte jen jako část jedné řádky nebo krátkou poznámku. Důležitý je obsah, ne formát.
+
+### Mini workshop na 6 minut
+
+1. Přečtěte jednu větu z uzavření první roční inventury.
+2. Ověřte, že kanonické místo je pořád dohledatelné.
+3. Řekněte, jaký návratový signál otevře pravidlo dřív než za rok.
+4. Vyjmenujte jednu věc, kterou během druhého roku nebudete sledovat.
+5. Domluvte, kdo pozná návratový signál v běžné práci.
+6. Zavřete zápis bez zakládání nové kontrolní fronty.
+
+Stop otázka:
+
+```text
+Přidali jsme druhému roku jen jasnost, nebo i novou administrativu?
+```
+
+Pokud přibyla administrativa, zmenšete zápis. Druhý rok nemá být restart péče. Má být důkaz, že péče už není potřeba v samostatném režimu.
+
+### Checklist druhého klidového roku
+
+- Je jasné, co zůstalo po první roční inventuře?
+- Má pravidlo jedno kanonické místo?
+- Je návratový signál srozumitelný i bez staré historie?
+- Ví vlastník, v jakém běžném rytmu si pravidla všimne?
+- Není založené nové měření používání pravidla po lidech?
+- Nevznikla nová tabulka, připomínka nebo kontrolní schůzka jen pro jistotu?
+- Umí tým rozlišit drobný podnět od skutečného návratového signálu?
+- Jsou staré kontrolní karty stále zavřené?
+- Pokud vznikne nový problém, dostane vlastní kartu místo přílepku k historii?
+- Zůstává datová stopa minimální: kanonické místo, návratový signál, log?
+- Je další roční návrat lehký a konkrétní?
+
+Druhý rok po uzavřené roční inventuře má jeden hlavní úkol: nenechat dobré pravidlo znovu ztěžknout. Když se pravidlo používá bez zvláštní péče, drobné podněty nekrmí novou administrativu a návratový signál zůstává jasný, systém získal něco cenného. Ne další dokument, ale tichou schopnost rozhodovat stejně dobře s menším množstvím dat, schůzek a vysvětlování.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o druhém roce po uzavřené roční inventuře minimální portfoliové stopy: zachování klidového rytmu, filtr drobných podnětů, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření první roční inventury minimální portfoliové stopy: čtyři uzavírací stavy, propsání do portfoliového logu, lokální oprava, ukončení nebo sloučení pravidla, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o první roční inventuře minimální portfoliové stopy: tři inventurní otázky, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o převodu minimální portfoliové stopy do ročního klidového rytmu: roční inventura bez nového auditu, zrušení zbytků samostatné péče, privacy-first úklid, karta, mini workshop a checklist.
