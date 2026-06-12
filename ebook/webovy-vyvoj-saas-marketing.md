@@ -211848,8 +211848,183 @@ Pokud přibyla administrativa, zmenšete zápis. Druhý rok nemá být restart p
 
 Druhý rok po uzavřené roční inventuře má jeden hlavní úkol: nenechat dobré pravidlo znovu ztěžknout. Když se pravidlo používá bez zvláštní péče, drobné podněty nekrmí novou administrativu a návratový signál zůstává jasný, systém získal něco cenného. Ne další dokument, ale tichou schopnost rozhodovat stejně dobře s menším množstvím dat, schůzek a vysvětlování.
 
+## Uzavření druhého klidového roku minimální portfoliové stopy
+
+Na konci druhého klidového roku už tým neověřuje, jestli pravidlo přežije bez mimořádné péče. To mělo ukázat samotné období klidu. Teď jde o jiné rozhodnutí: co přesně zůstane v dalším ročním rytmu, co se smaže jako zbytečná kontrolní stopa a kdy se téma otevře dřív než za rok.
+
+Začněte krátkým uzavíracím zápisem:
+
+```text
+Pravidlo nebo portfoliová stopa:
+
+Co se během druhého roku skutečně stalo:
+
+Objevil se návratový signál?
+
+Co se ukázalo jako zbytečná péče:
+
+Co zůstává v dalším ročním rytmu:
+
+Co se po uzavření smaže, sloučí nebo zkrátí:
+```
+
+Příklad:
+
+```text
+Pravidlo nebo portfoliová stopa:
+Uzavírání návratových signálů po první běžné reakci.
+
+Co se během druhého roku skutečně stalo:
+Pravidlo se použilo ve dvou běžných předáních. V obou případech stačil odkaz na kanonické místo a krátká věta v logu.
+
+Objevil se návratový signál?
+Ne. Neopakoval se rozpor ve vlastnictví ani stará kopie rozhodnutí.
+
+Co se ukázalo jako zbytečná péče:
+Poznámka "zkontrolovat při příštím měsíčním review" zůstala v jednom dokumentu, ale nikdo ji nepotřeboval.
+
+Co zůstává v dalším ročním rytmu:
+Kanonické místo, návratový signál a jedna věta v portfoliovém logu.
+
+Co se po uzavření smaže, sloučí nebo zkrátí:
+Smaže se měsíční připomínka, stará pracovní karta se přesune do archivu jen s výslednou větou.
+```
+
+Uzavření druhého roku je dobré místo pro trochu disciplíny. Pokud se nic dramatického nestalo, nezapisujte dramatický závěr. "Pravidlo drží, další návrat za rok" je plnohodnotný výsledek. Někdy je nejlepší důkaz kvality právě to, že není o čem psát dlouhou zprávu.
+
+### Čtyři uzavírací stavy
+
+Po druhém klidovém roce vyberte jeden stav:
+
+- Nechat v ročním rytmu: pravidlo je srozumitelné, návratový signál se neobjevil a stačí další lehká inventura za rok.
+- Lokálně dočistit: pravidlo funguje, ale jedno místo potřebuje opravit odkaz, formulaci nebo starý příklad.
+- Sloučit s jinou stopou: dvě stabilní pravidla se v praxi používají spolu a samostatné vedení už zvyšuje tření.
+- Znovu otevřít jako novou kartu: během roku se objevil návratový signál, který mění rozhodování, předání nebo datovou stopu.
+
+Nepoužívejte stav "pro jistotu ještě sledovat". Pokud pravidlo vydrželo dva klidové roky a návratový signál se neobjevil, další sledování není opatrnost. Je to jen drahá nedůvěra ve vlastní systém.
+
+Šablona rozhodnutí:
+
+```text
+Stav:
+- nechat v ročním rytmu / lokálně dočistit / sloučit / otevřít novou kartu
+
+Rozhodnutí jednou větou:
+
+Nejmenší zásah:
+
+Co po zásahu zmizí:
+
+Další návrat:
+
+Privacy-first výsledek:
+```
+
+### Co po druhém roce uklidit
+
+Druhý klidový rok často nechá za sebou drobné stopy, které už nemají rozhodovací hodnotu. Nejsou škodlivé samy o sobě, ale časem z nich vzniká šum: staré připomínky, duplicitní odkazy, dočasné karty, poznámky z kontrol, které měly pomoci jen během přechodu do klidu.
+
+Uklízejte hlavně:
+
+- dočasné připomínky, které po roce nikdo nepoužil;
+- pracovní karty, které mají stejný závěr jako portfoliový log;
+- staré kopie pravidla mimo kanonické místo;
+- kontrolní otázky, které patřily jen k přechodnému období;
+- příklady s reálnými lidmi, zákazníky nebo interními detaily, pokud už nejsou nutné;
+- komentáře, které vysvětlují historický spor místo současného pravidla.
+
+Úklid nemá mazat paměť rozhodnutí. Má mazat provozní lešení. V kanonickém místě zůstane současné pravidlo, v portfoliovém logu zůstane výsledná věta a v archivu může zůstat zkrácený důvod, proč pravidlo vůbec vzniklo. Všechno ostatní musí mít jasný účel, jinak jen prodlužuje cestu k odpovědi.
+
+### Privacy-first uzavření po druhém roce
+
+Privacy-first uzavření je jednoduché: po druhém klidovém roce má zůstat méně dat než na jeho začátku. Pokud se pravidlo nepotřebovalo mimořádně otevírat, není důvod nechávat detailní poznámky z přechodného období. Nechte si jen to, co pomáhá dalšímu rozhodnutí.
+
+Dobrá cílová stopa:
+
+```text
+Kanonické pravidlo:
+1 aktuální věta nebo krátký odstavec.
+
+Portfoliový log:
+1 uzavírací věta z druhého roku.
+
+Návratový signál:
+1 konkrétní podmínka pro dřívější otevření.
+
+Archiv:
+Volitelně zkrácený důvod vzniku bez osobních detailů, screenshotů a pracovních přepisů.
+```
+
+Do cílové stopy nepatří individuální historie použití, seznam čtenářů, dlouhé exporty komentářů ani záznamy běžných průchodů. Když pravidlo funguje v tichém režimu, nepotřebujete dokazovat každý dotek. Potřebujete umět poznat jen situaci, kdy se má znovu otevřít.
+
+Codyho komentář: pokud po dvou klidových letech pořád skladujete každou poznámku "pro případ", není to paměť. Je to digitální půda. A ta se tváří užitečně přesně do chvíle, kdy v ní někdo musí něco najít.
+
+### Karta uzavření druhého klidového roku
+
+```text
+Pravidlo nebo stopa:
+
+Kanonické místo:
+
+Výsledek druhého roku:
+
+Vybraný uzavírací stav:
+
+Jednovětý zápis do portfoliového logu:
+
+Lokální úklid:
+
+Co se slučuje nebo ruší:
+
+Co zůstává zavřené:
+
+Návratový signál pro dřívější otevření:
+
+Další lehký roční návrat:
+
+Privacy-first úklid:
+```
+
+Tuto kartu nearchivujte jako další samostatný artefakt, pokud není potřeba. Použijte ji jako pracovní pomůcku pro uzavření a výsledné věty přepište do míst, kde je tým opravdu najde. Karta může po uzavření zmizet, pokud její obsah zůstane v kanonickém místě a logu.
+
+### Mini workshop na 7 minut
+
+1. Přečtěte uzavírací větu z první roční inventury.
+2. Řekněte, co se během druhého roku skutečně stalo.
+3. Vyberte jeden ze čtyř uzavíracích stavů.
+4. Najděte jednu stopu, která už nemá rozhodovací hodnotu.
+5. Zapište jednu větu do portfoliového logu.
+6. Potvrďte návratový signál pro dřívější otevření.
+7. Smažte nebo zkraťte přechodnou poznámku, kterou už nikdo nepotřebuje.
+
+Stop otázka:
+
+```text
+Zůstává po uzavření druhého roku méně věcí k hlídání než před ním?
+```
+
+Pokud odpověď zní ne, uzavření není hotové. Pravděpodobně jste přidali další opatrnost místo toho, abyste důvěřovali výsledku klidového provozu.
+
+### Checklist uzavření druhého klidového roku
+
+- Je jasné, co se během druhého roku reálně stalo?
+- Je vybraný jeden uzavírací stav?
+- Pokud návratový signál nepřišel, nepřidali jsme nové sledování?
+- Pokud stačí lokální oprava, zůstává opravdu lokální?
+- Pokud se pravidlo slučuje, zmizí duplicitní odkazy a staré kopie?
+- Pokud vzniká nová karta, má vlastní otázku a dnešní důkaz?
+- Je portfoliový log doplněný jednou konkrétní větou?
+- Zůstává kanonické místo jediným zdrojem pravdy?
+- Jsou přechodné připomínky a kontrolní poznámky smazané nebo zkrácené?
+- Nezůstávají v archivu osobní detaily, screenshoty ani dlouhé exporty?
+- Je návratový signál srozumitelný člověku, který u druhého roku nebyl?
+- Je další roční návrat lehký, konkrétní a bez nové administrativní vrstvy?
+
+Uzavření druhého klidového roku má potvrdit, že stabilní pravidlo nepotřebuje vlastní servisní příběh. Stačí mu místo, vlastník, návratový signál a krátká stopa rozhodnutí. Všechno navíc musí obhájit, proč pomáhá budoucí práci. Pokud to neumí, pryč s tím. Užitečný systém znalostí není ten, který si pamatuje nejvíc, ale ten, který nechává lidem nejméně překážek při dobrém rozhodnutí.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého klidového roku minimální portfoliové stopy: čtyři uzavírací stavy, úklid přechodných stop, privacy-first cílová stopa, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o druhém roce po uzavřené roční inventuře minimální portfoliové stopy: zachování klidového rytmu, filtr drobných podnětů, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření první roční inventury minimální portfoliové stopy: čtyři uzavírací stavy, propsání do portfoliového logu, lokální oprava, ukončení nebo sloučení pravidla, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o první roční inventuře minimální portfoliové stopy: tři inventurní otázky, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
