@@ -212810,8 +212810,222 @@ Pokud z něj udělala nový dohled, vraťte se k vybranému stavu. Buď máte lo
 
 První roční kontrola po návratu má potvrdit, že systém umí pamatovat bez přetížení. Ne každý signál si zaslouží novou rutinu. Někdy stačí lepší otázka, jeden uklizený odkaz a klid pokračuje dál.
 
+## Uzavření první roční kontroly po návratu pravidla do klidového rytmu
+
+Roční kontrola má smysl až ve chvíli, kdy po ní nezůstane další neurčitá práce. Pokud kontrola skončí větou "ještě se na to podíváme", pravidlo se ve skutečnosti nevrátilo do klidu. Jen se posunulo do dalšího malého mezistavu. Uzavření proto musí říct, co platí dál, co se uklízí, co se z ročního rytmu vyřazuje a kdy se pravidlo znovu otevře.
+
+Začněte krátkým souhrnem:
+
+```text
+Kontrolované pravidlo:
+
+Výsledek první roční kontroly:
+
+Co se po kontrole mění:
+
+Co zůstává stejné:
+
+Co už dál nesledujeme:
+```
+
+Tento souhrn nemá znovu vyprávět celou historii návratového signálu. Má převést dnešní kontrolu do běžného provozu. Když čtenář potřebuje znát jen aktuální stav, nemá být nucen procházet starý signál, lokální opravu, návrat do rytmu a roční kontrolu. Stačí mu vědět, co má použít příště.
+
+Příklad:
+
+```text
+Kontrolované pravidlo:
+Onboarding vede na aktuální pracovní kompas, ne na archivní kartu.
+
+Výsledek první roční kontroly:
+Pravidlo drží. Jeden pomocný odkaz v interní poznámce byl duplicitní a už neměl účel.
+
+Co se po kontrole mění:
+Duplicitní odkaz mažeme a roční otázku zkracujeme na kontrolu jedné běžné onboardingové cesty.
+
+Co zůstává stejné:
+Kanonické pravidlo zůstává v pracovním kompasu a roční rytmus se nezahušťuje.
+
+Co už dál nesledujeme:
+Nevedeme zvláštní seznam míst, kde se archivní karta kdysi objevila.
+```
+
+Takové uzavření chrání pravidlo před bobtnáním. Kontrola něco našla, ale výsledek není nový audit. Výsledek je čistší cesta a kratší budoucí otázka.
+
+### Čtyři uzavírací stavy
+
+Po první roční kontrole vyberte jeden uzavírací stav:
+
+- Potvrdit klidový rytmus: pravidlo drží a další roční kontrola zůstává beze změny.
+- Potvrdit s lokálním úklidem: pravidlo drží, ale jedno místo se zkrátí, smaže nebo přesměruje.
+- Upravit roční otázku: pravidlo drží, ale příští kontrola má mít přesnější otázku.
+- Vyřadit zvláštní otázku: pravidlo zůstává v kanonickém místě, ale samostatná roční otázka už nepřináší hodnotu.
+
+Tady je důležité nepřidat pátý stav "nechat otevřené". Pokud kontrola nemá jasný závěr, vraťte se k důkazu. Buď stačí k lokálnímu úklidu, nebo ukazuje novou samostatnou práci. V obou případech nemá původní pravidlo zůstávat v rozmazaném stavu.
+
+Rozhodovací věta:
+
+```text
+První roční kontrolu uzavíráme stavem:
+- potvrdit klidový rytmus / potvrdit s lokálním úklidem / upravit roční otázku / vyřadit zvláštní otázku
+
+Protože:
+
+Do kanonického místa se propisuje:
+
+Do ročního rytmu se propisuje:
+
+Co se maže, zkracuje nebo slučuje:
+
+Co se znovu neotevírá:
+```
+
+### Kdy zrušit zvláštní roční otázku
+
+Zvláštní roční otázka vznikla po návratovém signálu proto, aby pravidlo po vyrušení znovu našlo klid. Nemá žít navždy jen proto, že jednou pomohla. Pokud první roční kontrola ukáže, že otázka nepřidala žádnou novou hodnotu a kanonické pravidlo je běžně najitelné, otázku klidně zrušte.
+
+Zrušení je správné hlavně tehdy, když:
+
+- pravidlo se během roku použilo bez návratu ke staré stopě;
+- otázka jen opakuje něco, co už kontroluje běžná roční inventura;
+- její ponechání by nutilo tým znovu číst starý kontext;
+- nevznikl žádný nový důkaz, který by vyžadoval zvláštní péči;
+- kanonické místo je jasné a nepotřebuje další připomínku.
+
+Zrušení zvláštní otázky neznamená zrušení pravidla. Pravidlo dál žije ve svém pracovním místě. Mizí jen mimořádná stopa, která měla dočasně ověřit návrat do klidu.
+
+Dobrá věta:
+
+```text
+Zvláštní roční otázku rušíme, protože poslední kontrola nepotvrdila žádné samostatné riziko. Pravidlo zůstává v běžné roční inventuře kanonického indexu.
+```
+
+Slabá věta:
+
+```text
+Už to asi není potřeba.
+```
+
+První věta říká proč a kam se pravidlo vrací. Druhá jen zavírá oči a doufá, že si toho nikdo nevšimne. Doufání je výborné pro počasí, horší pro provoz.
+
+### Lokální úklid bez nové péče
+
+Když kontrola najde jedno místo k úklidu, uzavřete ho stejným krokem. Nezakládejte další zvláštní kontrolní režim, pokud oprava nemá vlastní návratový signál.
+
+Příklad:
+
+```text
+Nález:
+V portfoliovém logu zůstal přechodový komentář z návratového signálu.
+
+Oprava:
+Komentář zkracujeme na jednu rozhodovací větu a odkazujeme na kanonické pravidlo.
+
+Co neotevíráme:
+Neprocházíme celý archiv starých signálů.
+
+Ověření:
+Při příští roční inventuře stačí zkontrolovat, že log vede na kanonické místo.
+```
+
+Lokální úklid je hotový, když další člověk nenarazí na zbytečný mezikrok. Nemusí být hotový celý svět dokumentace. Stačí opravit stopu, kterou kontrola opravdu našla.
+
+### Privacy-first uzavření
+
+Uzavření roční kontroly má odstranit dočasnou pozornost i dočasná data. Pokud jste kvůli kontrole vytvořili pracovní poznámku, kopii odkazu, výpis míst nebo krátký seznam nálezů, rozhodněte hned, co zůstává a co mizí.
+
+Minimum, které má zůstat:
+
+- jednovětý závěr v portfoliovém logu;
+- aktuální roční otázka, pokud dál existuje;
+- kanonické pravidlo v pracovním místě;
+- návratový signál, pokud se změnil.
+
+Co má zmizet nebo se zkrátit:
+
+- přechodové poznámky z kontroly;
+- seznam historických míst, pokud už byl uklizený;
+- screenshoty, exporty nebo kopie dokumentů;
+- osobní detaily o tom, kdo na starou stopu narazil;
+- dočasné úkoly, které po opravě jen připomínají hotovou práci.
+
+Do zápisu přidejte větu:
+
+```text
+Díky uzavření roční kontroly dál nepřidáváme:
+```
+
+Příklad:
+
+```text
+Díky uzavření roční kontroly dál nepřidáváme měření čtenosti pravidla, seznam individuálních chyb ani zvláštní měsíční kontrolu odkazů. Zůstává jen jedna roční otázka v běžné inventuře.
+```
+
+Codyho komentář: po roční kontrole je nejlepší kompliment systému to, že je zase nudný. Žádná nová tabulka "pro jistotu", žádný dohled nad lidmi, žádný archivní román. Jen pravidlo, místo pravdy a jedna věta v logu.
+
+### Karta uzavření první roční kontroly
+
+```text
+Kanonické pravidlo:
+
+Datum kontroly:
+
+Výsledek kontroly:
+
+Uzavírací stav:
+- potvrdit klidový rytmus / potvrdit s lokálním úklidem / upravit roční otázku / vyřadit zvláštní otázku
+
+Co se mění v kanonickém místě:
+
+Co se mění v ročním rytmu:
+
+Co se maže, zkracuje nebo slučuje:
+
+Co zůstává mimo rozsah:
+
+Další návratový signál:
+
+Privacy-first výsledek:
+
+Jednovětý závěr pro portfoliový log:
+```
+
+### Mini workshop na 6 minut
+
+1. Přečtěte výsledek první roční kontroly.
+2. Vyberte jeden ze čtyř uzavíracích stavů.
+3. Rozhodněte, co se propíše do kanonického místa.
+4. Rozhodněte, zda roční otázka zůstává, mění se nebo mizí.
+5. Zapište, co se znovu neotevírá.
+6. Uklidte dočasné poznámky a pracovní kopie.
+7. Přepište jednu větu do portfoliového logu.
+
+Stop otázka:
+
+```text
+Je po uzavření roční kontrola lehčí než před kontrolou?
+```
+
+Pokud není, pravděpodobně jste z kontroly udělali novou péči. Dejte jí vlastní důvod, vlastní kartu a vlastní konec. Nepřilepujte ji k pravidlu, které se právě snaží vrátit do klidu.
+
+### Checklist uzavření první roční kontroly
+
+- Má první roční kontrola jeden jasný uzavírací stav?
+- Je zapsané, co se mění v kanonickém místě?
+- Víme, jestli roční otázka zůstává, mění se nebo mizí?
+- Nezůstalo rozhodnutí ve stavu "ještě se uvidí"?
+- Pokud byl potřeba lokální úklid, má jedno pracovní místo a hotový výsledek?
+- Pokud vznikla nová samostatná práce, má vlastní kartu a nezatěžuje původní pravidlo?
+- Je napsané, co se znovu neotevírá ze starého signálu?
+- Jsou dočasné poznámky, kopie, exporty a seznamy po kontrole smazané nebo zkrácené?
+- Nepřibylo měření čtenosti, kliků, individuálních chyb ani zvláštní dohled?
+- Zůstává v portfoliovém logu jedna stručná věta?
+- Umí další člověk použít pravidlo bez znalosti celé roční kontroly?
+
+Uzavření první roční kontroly má udělat přesně jednu věc: nechat pravidlo dál fungovat bez přebytečné historie. Pokud kontrola našla problém, opravte ho. Pokud potvrdila klid, zrušte zvláštní péči. Pokud zpřesnila otázku, zapište ji krátce. Všechno ostatní je šum, který se tváří jako odpovědnost.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o uzavření první roční kontroly po návratu pravidla do klidového rytmu: uzavírací stavy, zrušení zvláštní roční otázky, lokální úklid, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o první roční kontrole po návratu pravidla do klidového rytmu: reálné použití, čtyři výsledné stavy, lokální úklid, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o návratu pravidla do ročního klidového rytmu po uzavřeném signálu: tři typy návratu, úprava jedné roční otázky, věci mimo rytmus, privacy-first návrat, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření prvního návratového signálu po dvou klidových letech: uzavírací stavy, propsání do běžného pracovního místa, ukončení dočasné pozornosti, privacy-first úklid, karta, mini workshop a checklist.
