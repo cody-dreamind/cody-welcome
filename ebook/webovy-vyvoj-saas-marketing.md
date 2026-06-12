@@ -214400,8 +214400,219 @@ Pokud workshop začne řešit celý portfoliový index, vraťte se k otázce dru
 
 Druhé použití má zavřít otázku přenositelnosti. Když položka pomůže i bez čerstvé historie, nechte ji být. Když potřebuje poslední lokální opravu, udělejte ji jedním řezem. A když opakovaně selže, vraťte se k širšímu zhuštění, ale pořád držte stejný princip: do portfoliové paměti patří rozhodovací smysl, ne celá kronika toho, jak jste se k němu kdysi propracovali.
 
+## Uzavření druhého použití zhuštěné portfoliové položky
+
+Po druhém použití už není cílem položku dál pozorovat. Cílem je rozhodnout, jestli se zhuštěná položka vrací do tichého provozu, dostane poslední lokální opravu, odhalila slabé kanonické místo, nebo se vrací k širšímu zhuštění. Když toto rozhodnutí neuděláte hned, začne se kolem jedné krátké položky nenápadně tvořit nový servisní proces. A to je přesně opačný výsledek, než kvůli kterému jste ji zhušťovali.
+
+Uzavření má být krátké. Neopisujte celý průběh prvního a druhého použití. Nevracejte staré debaty, proč položka kdysi vznikla. Stačí zapsat, co druhé použití prokázalo a jaký je další stav:
+
+```text
+Zhuštěná položka po druhém použití:
+
+Prokázaný stav:
+
+Jedna změna, pokud je potřeba:
+
+Co tím končí:
+
+Návratový signál:
+```
+
+Tento zápis chrání dvě věci najednou. Chrání paměť, protože neztratíte význam rozhodnutí. A chrání tým před novou vrstvou dokumentace, protože nevzniká další místo, které musí někdo do budoucna pravidelně číst.
+
+### Čtyři uzavírací stavy
+
+Po druhém použití vyberte jeden stav a podle něj udělejte přesně odpovídající krok.
+
+- Přenos potvrzen: položka se vrací do portfoliového indexu beze změny nebo jen s drobným datem kontroly.
+- Lokálně dočištěno: upraví se jeden prvek položky a tím se zvláštní pozornost uzavírá.
+- Opravit kanonické místo: portfoliová položka zůstává stručná, ale cílový dokument nebo checklist dostane jednu opravu.
+- Vrátit k širšímu zhuštění: položka nemá dost rozhodovacího smyslu a musí se znovu zpracovat z původní delší stopy.
+
+Každý stav má jinou práci. U potvrzeného přenosu nedělejte nic navíc. U lokálního dočištění přepište jen název, odkaz, spouštěč nebo hranici. U slabého kanonického místa neopravujte index tak, aby suploval cílový dokument. U návratu k širšímu zhuštění otevřete novou kartu, ale nevracejte celou historii rovnou do aktivního portfolia.
+
+Příklad uzavření:
+
+```text
+Zhuštěná položka:
+Formulář sbírá jen údaje použitelné v prvním navázání.
+
+Druhé použití:
+Návrh přidat volitelné pole "rozpočet" na landing page pro audit.
+
+Prokázaný stav:
+Lokálně dočištěno.
+
+Jedna změna:
+Doplněna hranice, že stejná kontrola platí i pro volitelná pole, pokud mění očekávání nebo tření prvního kontaktu.
+
+Co tím končí:
+Nekontrolujeme další použití této položky zvlášť.
+
+Návratový signál:
+Nové pole ve formuláři, které mění tření prvního kontaktu nebo obchodní navázání.
+```
+
+Všimněte si, že zápis neřeší, kdo při druhém použití váhal, jak dlouho hledal, ani jak přesně proběhla debata. Pro budoucí práci stačí stav, změna, konec zvláštní péče a návratový signál.
+
+### Propsání bez rozbalení historie
+
+Nejčastější chyba při uzavření druhého použití je snaha položku "pro jistotu" obohatit. Tým přidá dva příklady, poznámku k původní debatě, výjimku pro jeden starý projekt a odkaz na pracovní tabulku. Za chvíli je zhuštěná položka zase malý archiv.
+
+Místo rozbalování použijte pravidlo jednoho propsání:
+
+- Pokud chyběl spouštěč, upravte spouštěč.
+- Pokud chyběl odkaz, upravte odkaz.
+- Pokud chyběla hranice, doplňte jednu hraniční větu.
+- Pokud chyběl kontext v cílovém checklistu, opravte cílový checklist.
+- Pokud chyběl celý rozhodovací smysl, neprodlužujte položku a vraťte ji k širšímu zhuštění.
+
+Dobrá hraniční věta vypadá třeba takto:
+
+```text
+Použít i pro volitelná pole, pokud mění tření prvního kontaktu nebo očekávání dalšího obchodního kroku.
+```
+
+Špatná hraniční věta vypadá takto:
+
+```text
+Viz debata z března, varianta B, poznámky z obchodu a původní tabulka s lead scoringem.
+```
+
+První věta pomáhá rozhodnout. Druhá věta posílá člověka do archeologie. Archeologie má své kouzlo, ale v provozní paměti většinou jen zvyšuje prašnost.
+
+### Ukončení zvláštní pozornosti
+
+Jakmile je uzavírací stav zapsaný, vypněte zvláštní péči okolo položky. To znamená:
+
+- zrušit dočasnou kartu druhého použití;
+- smazat nebo archivovat pomocné poznámky bez dalšího účelu;
+- neplánovat třetí kontrolní použití, pokud nevznikl jasný návratový signál;
+- nepřidávat položku do nového reportu "co sledovat";
+- nezakládat metodu pro všechny podobné položky jen proto, že jedna potřebovala drobnou opravu.
+
+Třetí použití už nemá být kontrolní. Má být běžné. Pokud při něm vznikne skutečné tření, otevře se jako nový návratový signál, ne jako pokračování staré mimořádné péče.
+
+Codyho komentář: dobré pravidlo po druhém použití odejde ze scény. Když se pořád uklání, vysvětluje svůj význam a žádá další potlesk v podobě review meetingu, ještě není pravidlem. Je to divadelní kus v kostýmu dokumentace.
+
+### Privacy-first uzavření
+
+Uzavření druhého použití je dobrý moment pro datový úklid. Při ověřování přenositelnosti často vzniknou dočasné poznámky, ukázky, kopie zákaznických formulářů nebo interní komentáře k tomu, kdo co pochopil. Většina z nich nemá po uzavření dlouhodobý účel.
+
+Nechte jen minimum:
+
+```text
+stav položky, jedna případná oprava, kanonické místo, návratový signál a datum uzavření.
+```
+
+Odstraňte nebo anonymizujte:
+
+- jména lidí, pokud nejsou vlastníky další opravy;
+- konkrétní zákaznické údaje, pokud stačí typ situace;
+- dočasné screenshoty formulářů;
+- exporty komentářů z interních nástrojů;
+- osobní poznámky typu "tady se někdo ztratil";
+- duplicitní kopie stejné položky v pracovních tabulkách.
+
+Privacy-first hodnota tu není jen právní opatrnost. Je to provozní hygiena. Čím méně pomocných stop po uzavření zůstane, tím menší je riziko, že budoucí člověk najde starý pracovní šum a začne podle něj rozhodovat.
+
+### Karta uzavření druhého použití
+
+```text
+Zhuštěná portfoliová položka:
+
+Druhá pracovní situace:
+
+Výsledek druhého použití:
+- přenos potvrzen / lokálně dočištěno / opravit kanonické místo / vrátit k širšímu zhuštění
+
+Rozhodnutí po uzavření:
+
+Jedna provedená změna:
+
+Kanonické místo po uzavření:
+
+Co už dál nesledujeme:
+
+Co se maže nebo anonymizuje:
+
+Návratový signál:
+
+Vlastník případné opravy:
+
+Datum uzavření:
+```
+
+Vyplněný příklad:
+
+```text
+Zhuštěná portfoliová položka:
+Formulář sbírá jen údaje použitelné v prvním navázání.
+
+Druhá pracovní situace:
+Volitelné pole "rozpočet" na landing page pro audit.
+
+Výsledek druhého použití:
+Lokálně dočištěno.
+
+Rozhodnutí po uzavření:
+Položka zůstává v portfoliovém indexu a nevyžaduje další zvláštní kontrolu.
+
+Jedna provedená změna:
+Doplněna hranice pro volitelná pole.
+
+Kanonické místo po uzavření:
+Checklist konverzních formulářů.
+
+Co už dál nesledujeme:
+Nepozorujeme třetí použití této položky jako samostatnou kontrolu.
+
+Co se maže nebo anonymizuje:
+Maže se pracovní poznámka s konkrétními formulářovými variantami. Zůstává anonymizovaný typ situace.
+
+Návratový signál:
+Nové pole ve formuláři, které mění tření prvního kontaktu nebo obchodní navázání.
+
+Vlastník případné opravy:
+Vlastník formulářového checklistu.
+
+Datum uzavření:
+2026-06-12
+```
+
+### Mini workshop na 6 minut
+
+Použijte ho hned po druhém použití, dokud je výsledek čerstvý:
+
+1. Přečtěte zhuštěnou položku nahlas.
+2. Jednou větou popište druhou pracovní situaci.
+3. Vyberte jeden ze čtyř uzavíracích stavů.
+4. Pokud je potřeba změna, určete jen jeden prvek k úpravě.
+5. Řekněte, co tímto uzavřením končí.
+6. Smažte nebo anonymizujte dočasné podklady bez dalšího účelu.
+7. Zapište návratový signál a vraťte položku do běžného rytmu.
+
+Pokud se během workshopu objeví další nápady na úpravy portfolia, dejte je mimo rozsah. Uzavíráte druhé použití jedné položky, ne otevíráte novou ediční sezónu. Ta může přijít později, ale ať přijde vlastním vchodem a s vlastní otázkou.
+
+### Checklist uzavření druhého použití
+
+- Je jasné, jaký stav druhé použití prokázalo?
+- Vybrali jsme jen jeden uzavírací stav?
+- Pokud je potřeba oprava, týká se jen jednoho prvku položky nebo jednoho kanonického místa?
+- Nevracíme do položky staré příklady, debaty ani pracovní historii?
+- Je zapsané, co zvláštní pozornost po druhém použití ukončuje?
+- Neplánujeme třetí kontrolní použití bez skutečného návratového signálu?
+- Zůstává portfoliová položka krátká a rozhodovací?
+- Je jasné, kam položka vede při dalším běžném použití?
+- Smazali nebo anonymizovali jsme dočasné pracovní stopy?
+- Nevznikla nová evidence používání podle lidí, kliků nebo čtenářských tras?
+- Má položka po uzavření návratový signál, který pozná i člověk bez původní historie?
+
+Uzavření druhého použití má být tiché, skoro nudné. To je známka zdraví. Zkratka prokázala, že umí přenést rozhodovací smysl bez podpůrného lešení, dostala případnou poslední opravu a může se vrátit do portfoliové paměti jako normální pracovní položka. Další pozornost si zaslouží až ve chvíli, kdy se ozve nový návratový signál.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého použití zhuštěné portfoliové položky: uzavírací stavy, propsání bez rozbalení historie, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o druhém použití zhuštěné portfoliové položky: přenositelnost bez čerstvé historie, poslední lokální oprava, slabé kanonické místo, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření prvního použití zhuštěné portfoliové položky: výsledné stavy, lokální oprava, návrat do běžného rytmu, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o prvním použití zhuštěné portfoliové položky: ověření při reálném rozhodnutí, chybějící věta nebo odkaz, privacy-first úklid, karta a checklist.
