@@ -211220,8 +211220,175 @@ Pokud odpověď není konkrétní, další kontrolu nezakládejte. Obecný pocit
 
 Převod do ročního klidového rytmu je dobrý konec dlouhé stabilizační linky. Pravidlo nezmizí, ale už si neříká o zvláštní péči. Tým tím získá přesně to, co má dobrý provozní systém dávat: paměť bez šumu, kontrolu bez mikromanagementu a méně dat, která nikdo nepotřebuje.
 
+## První roční inventura minimální portfoliové stopy
+
+První roční inventura po převodu do klidového rytmu má jeden hlavní úkol: ověřit, že minimální portfoliová stopa pořád odpovídá reálné práci, aniž by se z ní znovu stal samostatný projekt. Pokud se při inventuře otevře všechno, co se kolem pravidla kdy řešilo, klidový rytmus selhal. Ne proto, že by pravidlo bylo špatné, ale protože tým neudržel hranici mezi údržbou paměti a novým auditem.
+
+Začněte tím, že si přečtete jen aktivní portfoliovou stopu:
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Aktivní pracovní věta:
+
+Návratový signál mimo roční rytmus:
+
+Vlastník nebo role:
+
+Poslední uzavírací věta:
+
+Privacy-first hranice:
+```
+
+Neotevírejte staré kontrolní karty, pokud k tomu nemáte konkrétní důvod. Roční inventura nemá dokazovat, že stabilizační cesta byla správná. Má zjistit, jestli je dnešní pravidlo pořád použitelné. To je kratší otázka a také poctivější otázka.
+
+Příklad dobrého začátku:
+
+```text
+Letos u pravidla datové střídmosti formulářů ověřujeme jen to, zda aktivní pracovní věta stále pokrývá aktuální formuláře, exporty a vlastníky dat. Neotevíráme historii tichých kontrol, pokud nenajdeme konkrétní rozpor v dnešní práci.
+```
+
+Slabý začátek:
+
+```text
+Podíváme se na celé pravidlo a rozhodneme, co s ním dál.
+```
+
+Druhá věta je moc široká. Vypadá nevinně, ale snadno otevře redesign formulářů, debatu o CRM, nové měření, obchodní kvalifikaci a půl dne zmizí v provozní mlze. Ano, mlha má atmosféru. Ale fakt špatně se v ní commitují rozhodnutí.
+
+### Tři otázky první roční inventury
+
+První roční inventura má odpovědět jen na tři otázky:
+
+- Platí pracovní věta pro aktuální pracovní místa?
+- Je návratový signál pořád rozpoznatelný bez znalosti původní historie?
+- Neobjevily se nové datové toky, kopie nebo zbytky péče, které pravidlo obcházejí?
+
+Pokud všechny tři odpovědi vyjdou čistě, inventura končí potvrzením. Nepřidávejte další kontrolu jen proto, že už jste se k pravidlu po roce dostali. Roční rytmus má chránit pozornost, ne vytvářet ceremoniál.
+
+Pokud jedna odpověď čistá není, nerozšiřujte inventuru automaticky. Nejprve pojmenujte typ nálezu:
+
+- Lokální nesoulad: jedno pracovní místo se změnilo a pravidlo potřebuje drobnou úpravu.
+- Slabý návratový signál: tým nepozná, kdy pravidlo otevřít mimo roční rytmus.
+- Datová odchylka: vznikl nový sběr, export, kopie nebo dodavatelský tok.
+- Procesní zbytek: někde zůstala připomínka, karta nebo report, který pravidlo sleduje zbytečně.
+
+Každý typ nálezu má jinou reakci. Lokální nesoulad opravte v kanonickém místě. Slabý návratový signál přepište do konkrétnější věty. Datovou odchylku otevřete jako samostatnou privacy-first kartu. Procesní zbytek zrušte, pokud nemá vlastní rozhodovací otázku.
+
+### Čtyři výsledné stavy
+
+Na konci první roční inventury vyberte jeden stav:
+
+- Potvrzeno beze změny: pravidlo dál zůstává v ročním klidovém rytmu.
+- Potvrzeno s lokální úpravou: změnilo se jedno místo a pravidlo bylo drobně zpřesněno.
+- Otevřena nová karta: objevil se nový problém, který nepatří do staré stabilizační historie.
+- Pravidlo zralé k archivaci: pracovní situace zanikla nebo ji nahradil jiný kanonický standard.
+
+Stav "budeme ještě sledovat" nepoužívejte. Buď máte důvod otevřít novou kartu, nebo nemáte. Sledování bez otázky je jen pomalá výroba dalšího šumu.
+
+Příklad potvrzení beze změny:
+
+```text
+Roční inventura potvrzuje, že pravidlo datové střídmosti formulářů stále pokrývá aktivní formuláře, exporty i vlastníky dat. Návratový signál je srozumitelný. Nezůstává žádná samostatná evidence používání pravidla. Pravidlo pokračuje v ročním klidovém rytmu.
+```
+
+Příklad otevření nové karty:
+
+```text
+Roční inventura našla nový export poptávek do nástroje pro obchodní vyhodnocení. Nejde o úpravu původní formulace, ale o nový datový tok. Otevíráme samostatnou privacy-first kartu pro ověření účelu, rozsahu, přístupu a retence exportu.
+```
+
+Rozdíl je důležitý. V prvním případě pravidlo zůstává klidné. Ve druhém se otevírá nový problém, ale nepřilepí se ke staré historii. Díky tomu portfolio zůstává čitelné: staré pravidlo žije, nový tok dostane vlastní odpovědnost.
+
+### Privacy-first kontrola roční inventury
+
+Roční inventura svádí k tomu, aby tým "pro jistotu" posbíral víc důkazů. U minimální portfoliové stopy to většinou není potřeba. Důkaz má vycházet z běžné práce: aktuálního formuláře, aktuální šablony, aktuálního exportu, aktuálního vlastníka. Nepotřebujete sledovat, kdo pravidlo četl, kolikrát ho otevřel nebo jak dlouho nad ním strávil.
+
+Privacy-first otázky:
+
+- Stačí nám pro rozhodnutí existující pracovní podklady?
+- Nepřidává inventura nové osobní údaje jen kvůli pohodlí kontroly?
+- Pokud používáme příklad, je anonymizovaný nebo zkrácený na minimum?
+- Nevzniká nová tabulka, která by přežila déle než samotná inventura?
+- Když najdeme nový datový tok, dostane vlastní účel, vlastníka a retenční hranici?
+
+Codyho komentář: dobrá inventura má někdy nejlepší výsledek v tom, že po ní nezůstane skoro nic. Jedna věta v logu, žádná nová evidence a tým, který ví, kdy se k pravidlu vrátit. To je provozní elegance, ne lenost.
+
+### Karta první roční inventury
+
+```text
+Pravidlo:
+
+Datum inventury:
+
+Kanonické místo:
+
+Aktivní pracovní věta:
+
+Kontrolovaná pracovní místa:
+
+Odpověď 1: platí pracovní věta pro aktuální práci?
+
+Odpověď 2: je návratový signál srozumitelný?
+
+Odpověď 3: nevznikly nové datové toky, kopie nebo zbytky péče?
+
+Výsledný stav:
+- potvrzeno beze změny / potvrzeno s lokální úpravou / otevřena nová karta / archivace
+
+Co se mění v kanonickém místě:
+
+Co se otevírá jako nová karta:
+
+Co se ruší nebo maže:
+
+Privacy-first výsledek:
+
+Další roční inventura nebo návratová podmínka:
+```
+
+Kartu po inventuře neponechávejte jako aktivní pracovní dokument. Výsledek patří do portfoliového logu a případná lokální úprava do kanonického místa. Pokud vznikne nová karta, má mít vlastní rozhodovací otázku. Pokud nevznikne, inventura je zavřená.
+
+### Mini workshop na 7 minut
+
+1. Otevřete jen aktivní portfoliovou stopu.
+2. Přečtěte pracovní větu pravidla nahlas.
+3. Ověřte ji proti jednomu až třem aktuálním pracovním místům.
+4. Přečtěte návratový signál člověku, který nebyl u původního rozhodnutí.
+5. Zkontrolujte, jestli nevznikl nový datový tok, kopie nebo procesní zbytek.
+6. Vyberte jeden výsledný stav.
+7. Zapište jednu větu do portfoliového logu a zavřete kartu.
+
+Stop otázka:
+
+```text
+Našli jsme konkrétní dnešní rozpor, nebo jen chuť znovu projít staré rozhodnutí?
+```
+
+Pokud jde jen o chuť, inventuru ukončete. Staré rozhodnutí se nemá otevírat kvůli nostalgii po pečlivosti. Má se otevřít kvůli reálnému signálu.
+
+### Checklist první roční inventury
+
+- Otevřeli jsme nejdřív jen aktivní portfoliovou stopu?
+- Nevrátili jsme se do starých kontrolních karet bez konkrétního důvodu?
+- Ověřili jsme pracovní větu proti aktuálním pracovním místům?
+- Je návratový signál srozumitelný i bez původní historie?
+- Zkontrolovali jsme nové datové toky, kopie a zbytky samostatné péče?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud je problém nový, dostal vlastní kartu místo přílepku ke staré historii?
+- Pokud stačí lokální úprava, je propsaná do kanonického místa?
+- Nevznikla nová evidence používání pravidla po lidech?
+- Jsou dočasné poznámky z inventury smazané nebo zkrácené na log?
+- Je v portfoliovém logu jedna konkrétní uzavírací věta?
+- Zůstává pravidlo po inventuře v klidu, pokud nenastal skutečný návratový signál?
+
+První roční inventura je zkouška dospělosti minimální portfoliové stopy. Neptá se, jestli tým umí dělat velké kontroly. Ptá se, jestli umí udržet dobré pravidlo malé, čitelné a bez zbytečných dat. Když ano, roční rytmus začne fungovat jako zdravá paměť systému: občas se připomene, ale nežije z pozornosti, kterou nepotřebuje.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o první roční inventuře minimální portfoliové stopy: tři inventurní otázky, čtyři výsledné stavy, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o převodu minimální portfoliové stopy do ročního klidového rytmu: roční inventura bez nového auditu, zrušení zbytků samostatné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhé tiché kontroly minimální portfoliové stopy: čtyři uzavírací stavy, propsání do portfolia, privacy-first datový a procesní úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o druhé tiché kontrole minimální portfoliové stopy: ověření bez čerstvé paměti, výsledné stavy, návratový signál, privacy-first kontrola, karta, mini workshop a checklist.
