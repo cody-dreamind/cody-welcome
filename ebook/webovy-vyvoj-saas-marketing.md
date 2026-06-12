@@ -210856,8 +210856,183 @@ Pokud odpověď zní ne, karta splnila účel a nemá zůstávat aktivní. Pokud
 
 Uzavření druhé tiché kontroly je dobré místo, kde si připomenout jednoduchou provozní zásadu: pravidlo, které funguje, nepotřebuje kolem sebe produkovat práci. Potřebuje být najitelné, použitelné a klidné. Když k němu tým přistupuje takhle, portfolio neztrácí paměť, ale ani nenabírá zbytečnou váhu.
 
+## Převod minimální portfoliové stopy do ročního klidového rytmu
+
+Po uzavření druhé tiché kontroly už minimální portfoliová stopa nemá dostávat další samostatnou pozornost. Pokud pravidlo obstálo bez autora, bez staré historie a bez nové zvláštní péče, další rozumný krok není třetí kontrola. Další krok je převést pravidlo do ročního klidového rytmu: zůstane viditelné v portfoliu, ale vrací se jen při běžné roční inventuře nebo při skutečném návratovém signálu.
+
+Tento převod je malý, ale důležitý. Bez něj se může stát, že tým sice formálně řekne "hotovo", ale v kalendáři zůstane měsíční připomínka, v backlogu karta "ještě sledovat", v chatu připnutá poznámka a v hlavě vlastníka pocit, že pravidlo pořád potřebuje dohled. To není klidový rytmus. To je tichá údržba bez konce.
+
+Začněte převodovou větou:
+
+```text
+Minimální portfoliová stopa přechází do ročního klidového rytmu.
+
+V běžném portfoliu zůstává:
+
+Roční inventura ověří jen:
+
+Mimo roční rytmus pravidlo otevírá jen:
+
+Rušíme tyto zbytky samostatné péče:
+
+Nové měření nezavádíme, protože:
+```
+
+Příklad:
+
+```text
+Minimální portfoliová stopa pro datovou střídmost formulářů přechází do ročního klidového rytmu.
+
+V běžném portfoliu zůstává:
+Pracovní věta pravidla, kanonické místo a návratový signál.
+
+Roční inventura ověří jen:
+Jestli pravidlo pořád odpovídá aktuálním formulářům, datovým tokům a vlastníkům.
+
+Mimo roční rytmus pravidlo otevírá jen:
+Nový povinný údaj, nový export, nový dodavatel, změna účelu sběru nebo změna vlastníka dat.
+
+Rušíme:
+Kartu druhé tiché kontroly, připomínku v kalendáři a starý komentář "zkontrolovat ještě jednou".
+
+Nové měření nezavádíme, protože návratový signál je spojený s pracovní změnou, ne s potřebou sledovat používání pravidla po lidech.
+```
+
+Roční klidový rytmus chrání dvě věci najednou. Chrání paměť systému, protože pravidlo nezmizí. A chrání pozornost týmu, protože se z pravidla nestane další položka, která chce pravidelnou péči jen proto, že kdysi vznikla pečlivě.
+
+### Co v ročním rytmu zůstává
+
+Do ročního rytmu nepatří historie stabilizace. Nepatří tam všechny kontrolní karty, staré příklady, seznam debat ani poznámky z tichých kontrol. Patří tam jen minimum, které pomůže při roční inventuře rozhodnout, jestli pravidlo stále dává smysl.
+
+Zůstává:
+
+- název pravidla a jeho kanonické místo;
+- aktivní pracovní věta;
+- návratový signál mimo roční rytmus;
+- vlastník nebo role, která pravidlo drží v portfoliu;
+- poslední krátká uzavírací věta;
+- privacy-first hranice, pokud pravidlo pracuje s daty.
+
+Nezůstává v aktivní vrstvě:
+
+- pomocná karta první nebo druhé tiché kontroly;
+- screenshoty, exporty, tabulky a dočasné příklady;
+- poznámky o tom, kdo pravidlo hledal nebo použil;
+- staré varianty formulace;
+- připomínky bez jasné rozhodovací otázky;
+- duplicitní kopie pravidla v dalších nástrojích.
+
+Když něco z historie potřebujete uchovat, uložte to jako krátký archivní záznam, ne jako živý pracovní podklad. Archiv má odpovídat na otázku "proč toto pravidlo existuje", ne nutit každého dalšího člověka znovu projít celou cestu stabilizace.
+
+### Roční inventura není nový audit
+
+Roční klidový rytmus není pozvánka k velkému auditu všeho. Roční inventura má u minimální portfoliové stopy odpovědět na tři otázky:
+
+- Platí pracovní věta pořád pro reálnou práci?
+- Je návratový signál pořád srozumitelný a dost úzký?
+- Nevznikly během roku nové datové toky, kopie nebo zbytky péče, které pravidlo obcházejí?
+
+To stačí. Pokud inventura najde nový problém, otevřete novou malou kartu. Nepřilepujte všechno zpět k původní stabilizační historii. Pravidlo už prošlo tichým provozem; nový problém si zaslouží vlastní otázku, vlastní hranici a vlastní stop podmínku.
+
+Příklad roční otázky:
+
+```text
+Při letošní inventuře formulářů ověřujeme jen to, jestli pravidlo datové střídmosti stále pokrývá aktuální povinná pole, exporty a vlastníky dat.
+```
+
+Slabá roční otázka:
+
+```text
+Podíváme se, jestli pravidlo pořád funguje.
+```
+
+Druhá věta je moc široká. Snadno z ní vznikne debata o všem: formuláře, CRM, marketing, obchod, analytika, dodavatelé a staré nápady. Dobrá roční inventura má být úzká. Ne proto, že tým nechce vidět širší souvislosti, ale proto, že širší souvislosti mají vlastní místo.
+
+### Privacy-first převod do ročního rytmu
+
+Privacy-first hodnota převodu je jednoduchá: když pravidlo přechází do ročního klidového rytmu, nemá za sebou nechat další evidenci. Nepotřebujete seznam použití, interní skóre dodržování, nový report ani tabulku "pro jistotu". Pokud pravidlo pracuje s datovou střídmostí, bylo by trochu absurdní dokazovat jeho úspěch novou zbytečnou evidencí. Ano, i provozní ironie má svoje hranice.
+
+Před uzavřením převodu zkontrolujte:
+
+- zda neexistuje samostatné měření používání pravidla po lidech;
+- zda dočasné kontrolní podklady neobsahují osobní nebo zákaznické údaje;
+- zda archivní záznam používá anonymizovaný příklad, pokud příklad vůbec potřebuje;
+- zda návratový signál nevyžaduje nové sledování, ale vychází z běžné pracovní změny;
+- zda má pravidlo jedno kanonické místo místo několika kopií.
+
+Krátký privacy-first zápis:
+
+```text
+Po převodu do ročního klidového rytmu nezůstává žádná samostatná evidence používání pravidla. Aktivní portfolio drží jen pracovní větu, kanonické místo, vlastníka a návratový signál. Dočasné podklady z tichých kontrol mažeme nebo anonymizujeme podle retenčního pravidla.
+```
+
+Tento zápis je malý, ale chrání budoucí práci. Až se za rok někdo vrátí k portfoliu, najde pravidlo bez hromady starého provozního prachu. Když mezitím nastane návratový signál, otevře se věcně. Když nenastane, pravidlo nebere pozornost.
+
+### Karta převodu do ročního klidového rytmu
+
+```text
+Pravidlo:
+
+Kanonické místo:
+
+Pracovní věta:
+
+Návratový signál mimo roční rytmus:
+
+Co ověří roční inventura:
+
+Co se ruší po druhé tiché kontrole:
+
+Co jde do archivu:
+
+Co se maže nebo anonymizuje:
+
+Vlastník pravidla:
+
+Privacy-first výsledek:
+
+Datum další roční inventury nebo podmínka návratu:
+```
+
+Karta je přechodová. Po propsání výsledku do portfolia by neměla zůstat jako další aktivní dokument. Pokud v ní je něco, co potřebujete pro běžné použití, přesuňte to do kanonického pravidla. Pokud ne, karta splnila účel a může zmizet z aktivní práce.
+
+### Mini workshop na 6 minut
+
+1. Přečtěte uzavření druhé tiché kontroly.
+2. Potvrďte, že další samostatná kontrola nemá konkrétní rozhodovací otázku.
+3. Napište pracovní větu pravidla pro roční portfolio.
+4. Zpřesněte návratový signál mimo roční rytmus.
+5. Zrušte připomínky, karty a poznámky, které jen prodlužují samostatnou péči.
+6. Označte dočasné podklady k archivaci, smazání nebo anonymizaci.
+7. Zapište jednu větu do portfoliového logu.
+
+Stop otázka:
+
+```text
+Co by se pokazilo, kdybychom pravidlo další rok samostatně nekontrolovali a otevřeli ho jen při návratovém signálu nebo roční inventuře?
+```
+
+Pokud odpověď není konkrétní, další kontrolu nezakládejte. Obecný pocit "měli bychom to hlídat" není rozhodovací otázka. Je to pozvánka k nové evidenci.
+
+### Checklist převodu do ročního klidového rytmu
+
+- Je po druhé tiché kontrole jasné, že pravidlo nevyžaduje další samostatnou péči?
+- Má pravidlo jednu aktivní pracovní větu?
+- Je kanonické místo zapsané v portfoliu?
+- Je návratový signál mimo roční rytmus konkrétní?
+- Víme, co přesně ověří roční inventura?
+- Byly zrušené připomínky, reporty, karty a poznámky bez rozhodovací otázky?
+- Nezůstává samostatná evidence používání pravidla po lidech?
+- Jsou dočasné podklady smazané, anonymizované nebo archivované podle účelu?
+- Neexistují duplicitní kopie pravidla bez odkazu na kanonické místo?
+- Ví vlastník, že nový problém má dostat novou kartu, ne přílepek ke staré kontrole?
+- Umí tým pravidlo po převodu nechat rok na pokoji, pokud nenastane skutečný signál?
+
+Převod do ročního klidového rytmu je dobrý konec dlouhé stabilizační linky. Pravidlo nezmizí, ale už si neříká o zvláštní péči. Tým tím získá přesně to, co má dobrý provozní systém dávat: paměť bez šumu, kontrolu bez mikromanagementu a méně dat, která nikdo nepotřebuje.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o převodu minimální portfoliové stopy do ročního klidového rytmu: roční inventura bez nového auditu, zrušení zbytků samostatné péče, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhé tiché kontroly minimální portfoliové stopy: čtyři uzavírací stavy, propsání do portfolia, privacy-first datový a procesní úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o druhé tiché kontrole minimální portfoliové stopy: ověření bez čerstvé paměti, výsledné stavy, návratový signál, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření první tiché kontroly minimální portfoliové stopy: uzavírací stavy, propsání do portfolia, zastavení zvláštní péče, privacy-first úklid, karta, mini workshop a checklist.
