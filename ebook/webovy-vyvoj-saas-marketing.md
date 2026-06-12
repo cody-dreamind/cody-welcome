@@ -213023,8 +213023,203 @@ Pokud není, pravděpodobně jste z kontroly udělali novou péči. Dejte jí vl
 
 Uzavření první roční kontroly má udělat přesně jednu věc: nechat pravidlo dál fungovat bez přebytečné historie. Pokud kontrola našla problém, opravte ho. Pokud potvrdila klid, zrušte zvláštní péči. Pokud zpřesnila otázku, zapište ji krátce. Všechno ostatní je šum, který se tváří jako odpovědnost.
 
+## Druhý roční cyklus po uzavřené první kontrole
+
+Druhý roční cyklus je test dospělosti pravidla. První rok po návratu ještě často nese čerstvou paměť: lidé vědí, proč se otázka přidala, kdo ji otevřel a jaký problém ji vyvolal. Druhý rok už má pravidlo obstát bez této energie. Pokud je pořád srozumitelné, najitelné a lehké, může zůstat v běžném rytmu. Pokud přežívá jen díky tomu, že si někdo pamatuje starý incident, není to klidový rytmus, ale závislost na paměti konkrétního člověka.
+
+Nezačínejte druhý cyklus čtením starého signálu. Začněte aktuálním pracovním místem:
+
+```text
+Kanonické pravidlo:
+
+Aktuální roční otázka:
+
+Co první roční kontrola uzavřela:
+
+Kde se pravidlo v posledním roce přirozeně potkalo s prací:
+
+Co má druhý roční cyklus potvrdit:
+```
+
+Slovo "přirozeně" je důležité. Druhý cyklus nemá vyrábět testovací situace jen proto, aby měl co vyhodnotit. Pokud se pravidlo během roku nepoužilo, napište to jako výsledek. U některých pravidel je klid právě to, že se nepotřebovala aktivovat. Rozhodnutí pak není "musíme ho víc používat", ale "má ještě smysl ho držet v ročním rytmu?"
+
+### Co druhý cyklus opravdu ověřuje
+
+Druhý roční cyklus neověřuje, jestli bylo původní rozhodnutí historicky správné. Ověřuje tři praktičtější věci:
+
+- pravidlo jde najít bez znalosti staré karty;
+- roční otázka vede k rozhodnutí, ne k novému rozboru;
+- po kontrole nezůstane víc práce, než kolik jí bylo před kontrolou.
+
+Příklad:
+
+```text
+Kanonické pravidlo:
+Poptávkový formulář sbírá jen údaje nutné pro první kvalifikované navázání.
+
+Aktuální roční otázka:
+Obsahuje formulář pořád jen pole, která obchod skutečně použije v prvním kroku?
+
+První roční kontrola uzavřela:
+Jedno duplicitní pole bylo smazané a zvláštní měsíční sledování se nezavádí.
+
+Přirozené použití:
+Marketing připravil novou stránku pro menší SaaS týmy a chtěl zkopírovat starý formulář.
+
+Dnešní rozhodnutí:
+Roční otázka zůstává, protože pomohla zastavit návrat zbytečného pole. Do šablony stránky přidáme krátkou poznámku, že formulář se nekopíruje mechanicky.
+```
+
+Tady druhý cyklus potvrzuje, že pravidlo má pořád hodnotu. Nevzniká nový audit, jen se jedno živé pracovní místo zpřesní, aby příště nebylo potřeba stejné vysvětlování.
+
+### Čtyři výsledné stavy druhého cyklu
+
+Po druhém ročním cyklu vyberte jeden stav:
+
+- Stabilní pravidlo: pravidlo je jasné, roční otázka pomohla a nic dalšího není potřeba.
+- Stabilní pravidlo s drobným propsáním: pravidlo drží, ale jedno pracovní místo potřebuje lepší odkaz, kratší větu nebo odstranění duplicity.
+- Sloučení do širší rutiny: samostatná roční otázka už jen opakuje jinou běžnou kontrolu a může se do ní sloučit.
+- Ukončení roční péče: pravidlo zůstává v kanonickém místě nebo se archivuje, ale samostatný roční cyklus už nepřináší rozhodnutí.
+
+Nepřidávejte stav "sledovat ještě rok pro jistotu". Jestli po dvou ročních cyklech neumíte říct, co pravidlo přináší, další rok nejspíš nepřinese jasno. Buď pravidlo patří do širší rutiny, nebo má zůstat jen jako běžný zápis bez vlastní kontroly.
+
+Rozhodovací věta:
+
+```text
+Druhý roční cyklus uzavíráme stavem:
+- stabilní pravidlo / stabilní pravidlo s drobným propsáním / sloučení do širší rutiny / ukončení roční péče
+
+Protože:
+
+Do kanonického místa se propisuje:
+
+Do ročního rytmu se propisuje:
+
+Co se ruší nebo slučuje:
+
+Další návratový signál:
+```
+
+### Sloučení bez ztráty významu
+
+Sloučení do širší rutiny je dobrý výsledek, pokud pravidlo nezmizí v mlze. Nestačí říct "bude součástí roční kontroly dokumentace". To je věta, která vypadá odpovědně a v praxi často neznamená nic. Sloučení musí říct, kde přesně pravidlo dál žije a jaká otázka ho nahradí.
+
+Slabé sloučení:
+
+```text
+Pravidlo bude dál hlídané v rámci běžné kontroly webu.
+```
+
+Silnější sloučení:
+
+```text
+Samostatnou otázku rušíme. V roční kontrole konverzních míst zůstává jedna položka: u každého aktivního formuláře ověřit, zda všechna pole používá obchod v prvním navázání.
+```
+
+Druhá věta chrání význam pravidla. Neříká jen "někde to bude", ale ukazuje konkrétní pracovní místo, konkrétní objekt a konkrétní rozhodnutí.
+
+Codyho komentář: sloučení je užitečné jen tehdy, když z něj nevznikne firemní černá díra. Jakmile věta obsahuje "nějak v rámci procesu", pravděpodobně jste pravidlo neposunuli do rutiny, ale poslali ho na dovolenou bez zpáteční jízdenky.
+
+### Privacy-first druhý cyklus
+
+Po dvou letech je lákavé chtít "lepší data", protože starý kontext bledne. Právě tady je potřeba držet brzdu. Druhý roční cyklus má používat pracovní důkazy, které už vznikají při normální práci, ne nové sledování lidí.
+
+Stačí:
+
+- kontrola jednoho živého formuláře, checklistu, šablony nebo onboardingové cesty;
+- krátká poznámka z ročního review;
+- porovnání kanonického pravidla s jedním místem, kde se reálně používá;
+- jednovětý závěr v portfoliovém nebo provozním logu;
+- odstranění jedné přechodové poznámky, pokud už jen prodlužuje cestu.
+
+Nepřidávejte:
+
+- měření individuálního čtení dokumentace;
+- povinný log každého použití pravidla;
+- nahrávání pracovních průchodů jen kvůli kontrole;
+- exporty osobních chyb;
+- nový tracker v interních nástrojích.
+
+Dobrá privacy-first otázka pro druhý cyklus zní:
+
+```text
+Umíme rozhodnout z jednoho přirozeného pracovního průchodu, nebo bychom kvůli kontrole museli začít sledovat lidi?
+```
+
+Pokud byste museli začít sledovat lidi, zmenšete otázku. Nejspíš nepotřebujete vědět, kdo co četl. Potřebujete vědět, jestli konkrétní pracovní cesta vede na správné rozhodnutí.
+
+### Karta druhého ročního cyklu
+
+```text
+Kanonické pravidlo:
+
+Datum druhého cyklu:
+
+Aktuální roční otázka:
+
+Výsledek první roční kontroly:
+
+Přirozený pracovní důkaz:
+
+Vybraný stav:
+- stabilní pravidlo / stabilní pravidlo s drobným propsáním / sloučení do širší rutiny / ukončení roční péče
+
+Co se propisuje do kanonického místa:
+
+Co se propisuje do širší rutiny:
+
+Co se ruší, slučuje nebo archivuje:
+
+Co zůstává mimo rozsah:
+
+Další návratový signál:
+
+Privacy-first hranice:
+
+Jednovětý závěr pro log:
+```
+
+Karta má po druhém cyklu často skončit kratší než po prvním. Pokud bobtná, je to signál, že roční péče možná už není klidová. Druhý cyklus má buď potvrdit jednoduchost, nebo pravidlo přesunout do vhodnějšího místa.
+
+### Mini workshop na 7 minut
+
+1. Přečtěte kanonické pravidlo a aktuální roční otázku.
+2. Připomeňte si jednou větou výsledek první roční kontroly.
+3. Najděte jeden přirozený pracovní důkaz z posledního roku.
+4. Vyberte jeden ze čtyř výsledných stavů.
+5. Rozhodněte, zda otázka zůstává samostatná, slučuje se, nebo mizí.
+6. Zapište jedno místo, které se případně upraví.
+7. Projděte privacy-first hranici.
+8. Zapište jednu větu do logu a smažte dočasné poznámky.
+
+Stop otázka:
+
+```text
+Je pravidlo po druhém cyklu lehčí pro další rok než před dnešní kontrolou?
+```
+
+Pokud není, nepokračujte stejným rytmem ze setrvačnosti. Buď pravidlo potřebuje vlastní novou kartu, nebo je čas roční péči sloučit či ukončit.
+
+### Checklist druhého ročního cyklu
+
+- Pracujeme s aktuálním kanonickým pravidlem, ne s celým archivem?
+- Je jasné, co první roční kontrola uzavřela?
+- Máme jeden přirozený pracovní důkaz, nebo poctivě zapisujeme, že žádný nebyl?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud pravidlo zůstává stabilní, nepřidali jsme mu další péči?
+- Pokud něco propsujeme, má to přesně jedno pracovní místo?
+- Pokud otázku slučujeme, je jasné, kde dál žije její význam?
+- Pokud ukončujeme roční péči, zůstává kanonické pravidlo najitelné nebo je korektně archivované?
+- Nevznikl nový log individuálních chyb, čtenosti ani kliků?
+- Smazali jsme dočasné poznámky, které po druhém cyklu už jen vysvětlují historii?
+- Je další návratový signál konkrétní a rozpoznatelný bez starého kontextu?
+- Má log jednu stručnou větu, podle které se dá příští rok navázat?
+
+Druhý roční cyklus je dobré místo pro malou odvahu: ponechat pravidlo, které pořád pomáhá, a bez sentimentu zrušit péči, která už jen připomíná, že kdysi něco hořelo. Klidový rytmus není odměna za minulou práci. Je to pracovní forma pro pravidla, která dokážou pomáhat bez dohledu.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o druhém ročním cyklu po uzavřené první kontrole: ověření pravidla bez čerstvé paměti, čtyři výsledné stavy, sloučení do širší rutiny, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření první roční kontroly po návratu pravidla do klidového rytmu: uzavírací stavy, zrušení zvláštní roční otázky, lokální úklid, privacy-first uzavření, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o první roční kontrole po návratu pravidla do klidového rytmu: reálné použití, čtyři výsledné stavy, lokální úklid, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o návratu pravidla do ročního klidového rytmu po uzavřeném signálu: tři typy návratu, úprava jedné roční otázky, věci mimo rytmus, privacy-first návrat, karta, mini workshop a checklist.
