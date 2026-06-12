@@ -212022,8 +212022,209 @@ Pokud odpověď zní ne, uzavření není hotové. Pravděpodobně jste přidali
 
 Uzavření druhého klidového roku má potvrdit, že stabilní pravidlo nepotřebuje vlastní servisní příběh. Stačí mu místo, vlastník, návratový signál a krátká stopa rozhodnutí. Všechno navíc musí obhájit, proč pomáhá budoucí práci. Pokud to neumí, pryč s tím. Užitečný systém znalostí není ten, který si pamatuje nejvíc, ale ten, který nechává lidem nejméně překážek při dobrém rozhodnutí.
 
+## První návratový signál po dvou klidových letech
+
+Když se po dvou klidových letech objeví návratový signál, nemá se automaticky otevřít celá stará historie. Dva roky klidu jsou důkaz, že pravidlo nějakou dobu fungovalo bez mimořádné péče. Nový signál proto nejdřív berte jako dnešní pracovní událost, ne jako návrat všech starých pochybností.
+
+Začněte malým oddělením současnosti od archivu:
+
+```text
+Co se právě stalo:
+
+Který návratový signál to připomíná:
+
+Kde je kanonické pravidlo:
+
+Stačí pravidlo použít, nebo se pravidlo ukázalo jako slabé?
+
+Jaký dnešní důkaz máme:
+
+Co z dvouleté historie teď nepotřebujeme otevírat:
+```
+
+Příklad:
+
+```text
+Co se právě stalo:
+Nový člověk při předání použil starý název procesu a našel archivní kartu místo kanonického pravidla.
+
+Který návratový signál to připomíná:
+Opakovaná záměna kanonického místa a starých pracovních stop.
+
+Kde je kanonické pravidlo:
+V portfoliovém indexu pravidel, část "Předání uzavřených návratových signálů".
+
+Stačí pravidlo použít, nebo se pravidlo ukázalo jako slabé?
+Pravidlo možná funguje, ale navigace z onboardingového materiálu vede na starou stopu.
+
+Jaký dnešní důkaz máme:
+Jeden konkrétní průchod nového člověka a jeden špatný odkaz.
+
+Co z dvouleté historie teď nepotřebujeme otevírat:
+Neotevíráme původní rozhodování o pravidle, staré kontrolní karty ani předchozí měsíční review.
+```
+
+Tento zápis chrání rozsah. Pokud je problém dnešní odkaz, nechte ho dnešním odkazem. Pokud se ukáže, že se stejné zmatení opakuje ve více pracovních místech, teprve potom vzniká nová karta. Ani tehdy ale nejde o pokračování staré smyčky. Jde o nový problém s vlastním důkazem.
+
+### Tři brány před otevřením nové karty
+
+Před otevřením nové karty projděte tři brány:
+
+- Brána reality: stal se problém v reálné práci, nebo jde jen o pocit při čtení starého dokumentu?
+- Brána opakování: je to jednorázová chyba odkazu, nebo vzor, který může znovu poškodit rozhodnutí?
+- Brána dopadu: brání problém předání, zákaznické práci, provoznímu rozhodnutí nebo privacy-first úklidu?
+
+Pokud problém projde jen první bránou, stačí krátká poznámka nebo žádná akce. Pokud projde první a druhou, udělejte lokální opravu a sledujte nejbližší přirozené použití. Novou kartu otevřete až tehdy, když projde i třetí bránou.
+
+Rozhodovací věta:
+
+```text
+Návratový signál po dvou letech řešíme jako:
+- šum / lokální opravu / novou kartu
+
+Protože:
+
+Nejmenší zásah:
+
+Co zůstává zavřené:
+```
+
+### Lokální oprava bez návratu staré péče
+
+Lokální oprava po dvou klidových letech má být opravdu malá. Typicky jde o přesměrování odkazu, zkrácení staré poznámky, přepsání jedné věty v onboardingovém materiálu nebo odstranění archivní kopie, která se omylem tváří jako aktuální pravidlo.
+
+Dobrá lokální oprava:
+
+- má jedno pracovní místo;
+- má jeden dnešní důkaz;
+- nemění smysl pravidla;
+- neotevírá staré review;
+- po dokončení smaže nebo zkrátí zbytečnou stopu;
+- má nejbližší přirozené ověření, ne novou kontrolní sérii.
+
+Špatná lokální oprava po dvou letech vypadá nenápadně: "když už jsme tady, projdeme celý portfoliový index". To už není oprava. To je nový audit převlečený za úklid, pěkně s falešným knírkem.
+
+Codyho komentář: dvouletý klid má v systému váhu. Nezahazujte ho kvůli jednomu špatnému odkazu. Jeden špatný odkaz opravte. Když se ukáže, že špatných odkazů je víc a lidi podle nich skutečně špatně pracují, pak teprve vytáhněte větší nářadí.
+
+### Kdy otevřít novou kartu
+
+Nová karta má smysl, když dnešní signál mění práci víc než jen lokálně. Typické situace:
+
+- stejná záměna se objevila u dvou různých lidí nebo ve dvou různých pracovních místech;
+- kanonické pravidlo je sice správně napsané, ale v běžné práci ho nejde najít;
+- stará archivní stopa opakovaně přebíjí aktuální pravidlo;
+- lokální oprava by musela zasáhnout víc míst bez jasného vlastníka;
+- problém přidal zbytečná data, kopie, exporty nebo individuální sledování;
+- pravidlo už neodpovídá novému způsobu práce týmu.
+
+Novou kartu pište jako dnešní věc:
+
+```text
+Nová karta:
+
+Dnešní důkaz:
+
+Kanonické pravidlo, kterého se to týká:
+
+Co se nevrací ze staré historie:
+
+Pracovní místo prvního zásahu:
+
+Vlastník:
+
+Ověření:
+
+Privacy-first hranice:
+```
+
+Neopisujte do ní celý archiv. Stačí odkázat na kanonické pravidlo a zapsat dnešní důkaz. Staré rozhodnutí může zůstat v archivu jako původ, ne jako pracovní materiál.
+
+### Privacy-first reakce na návratový signál
+
+Návratový signál po dvou klidových letech často svádí k novému měření: kdo pravidlo četl, kdo klikl na špatný odkaz, kdo použil starou šablonu. Tomu se vyhněte. Potřebujete opravit pracovní cestu, ne začít sledovat lidi.
+
+Privacy-first reakce:
+
+- pracuje s konkrétním pracovním místem, ne s individuálním dohledem;
+- sbírá jen důkaz nutný pro rozhodnutí;
+- maže staré kopie místo zakládání nového seznamu rizik;
+- nepřidává nový tracker nad dokumentací;
+- neexportuje historii komentářů, pokud stačí jedna rozhodovací věta;
+- po lokální opravě nechává jen kanonické pravidlo, krátký log a případný návratový signál.
+
+Pokud se otevře nová karta, privacy-first hranice má být součástí prvního zápisu. Tým si tím včas řekne, jaká data kvůli opravě nebude sbírat. To je důležité hlavně u interních pravidel: snadno sklouznou do měření lidí místo měření kvality systému.
+
+### Karta prvního návratového signálu po dvou letech
+
+```text
+Pravidlo nebo portfoliová stopa:
+
+Datum signálu:
+
+Co se stalo v reálné práci:
+
+Kanonické místo:
+
+Návratový signál:
+
+Brány:
+- realita / opakování / dopad
+
+Vybraný stav:
+- šum / lokální oprava / nová karta
+
+Nejmenší zásah:
+
+Co zůstává zavřené:
+
+Co se maže, zkracuje nebo slučuje:
+
+Ověření při nejbližším přirozeném použití:
+
+Privacy-first hranice:
+```
+
+Karta může být dočasná. Pokud vyjde stav šum nebo jednoduchá lokální oprava, přepište výsledek do portfoliového logu jednou větou a kartu zrušte. Pokud vznikne nová karta, nechte ji žít jako samostatnou dnešní práci, ne jako nekonečné pokračování dávno uzavřené péče.
+
+### Mini workshop na 8 minut
+
+1. Pojmenujte dnešní signál jednou větou.
+2. Najděte kanonické pravidlo.
+3. Projděte bránu reality, opakování a dopadu.
+4. Vyberte stav: šum, lokální oprava nebo nová karta.
+5. Zapište, co ze staré historie zůstává zavřené.
+6. Určete nejmenší zásah.
+7. Zapište privacy-first hranici.
+8. Domluvte nejbližší přirozené ověření, pokud je potřeba.
+
+Stop otázka:
+
+```text
+Řešíme dnešní signál, nebo znovu otevíráme starý systém péče jen proto, že existuje archiv?
+```
+
+Pokud odpověď směřuje k archivu, vraťte se k dnešnímu důkazu. Archiv pomáhá pochopit původ pravidla, ale nemá diktovat rozsah nové práce.
+
+### Checklist prvního návratového signálu po dvou letech
+
+- Je popsané, co se skutečně stalo dnes?
+- Našli jsme kanonické pravidlo místo staré pracovní karty?
+- Prošel signál bránou reality?
+- Je jasné, jestli jde o jednorázový podnět, nebo opakovatelný vzor?
+- Má problém dopad na rozhodnutí, předání, zákaznickou práci nebo datovou stopu?
+- Vybrali jsme jeden stav: šum, lokální oprava nebo nová karta?
+- Zůstává stará dvouletá historie zavřená, pokud není nutná pro dnešní rozhodnutí?
+- Je nejmenší zásah opravdu v jednom pracovním místě?
+- Pokud vzniká nová karta, má vlastní dnešní důkaz a vlastníka?
+- Nepřidáváme měření lidí, čtenosti pravidel ani nový tracker dokumentace?
+- Mažeme nebo zkracujeme staré kopie, které problém způsobily?
+- Je ověření napojené na nejbližší přirozené použití, ne na novou kontrolní sérii?
+
+První návratový signál po dvou klidových letech je test dospělosti systému. Dobrý systém se nelekne a nezačne auditovat všechno. Podívá se na dnešní důkaz, vybere nejmenší odpověď a nechá zavřené všechno, co pro ni není potřeba. Tak se drží kontinuita bez toho, aby se z klidu znovu stala správa starostí.
+
 ## Pracovní log
 
+- 2026-06-12: Doplněna úvodní podkapitola o prvním návratovém signálu po dvou klidových letech: oddělení dnešního důkazu od archivu, tři brány před novou kartou, lokální oprava, privacy-first reakce, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého klidového roku minimální portfoliové stopy: čtyři uzavírací stavy, úklid přechodných stop, privacy-first cílová stopa, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o druhém roce po uzavřené roční inventuře minimální portfoliové stopy: zachování klidového rytmu, filtr drobných podnětů, privacy-first hranice, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření první roční inventury minimální portfoliové stopy: čtyři uzavírací stavy, propsání do portfoliového logu, lokální oprava, ukončení nebo sloučení pravidla, privacy-first úklid, karta, mini workshop a checklist.
