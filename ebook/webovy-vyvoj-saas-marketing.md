@@ -214742,8 +214742,174 @@ Datum:
 
 Vyřazení zhuštěné portfoliové položky je zdravý konec. Aktivní paměť má být dost krátká na to, aby se dala používat, a dost přesná na to, aby chránila důležitá rozhodnutí. Všechno ostatní patří do archivu, do sloučeného pravidla, nebo pryč.
 
+## Uzavření vyřazení zhuštěné portfoliové položky
+
+Rozhodnout o vyřazení nestačí. Skutečná práce končí až ve chvíli, kdy už vyřazená položka nevede člověka špatnou cestou, nezůstává v indexu jako aktivní možnost a nevyrábí tichý druhý zdroj pravdy. Jinak se z vyřazení stane jen štítek na dokumentu, který se při dalším spěchu stejně znovu použije.
+
+Uzavření vyřazení má proto tři cíle: přepsat aktivní mapu, uklidit pracovní stopy a ověřit, že nejbližší podobné rozhodnutí jde novou cestou. Nedělejte z toho velký archivní projekt. Stačí jeden čistý průchod přes místa, kde se položka reálně mohla objevit.
+
+Začněte větou:
+
+```text
+Položka už není aktivní. Další podobné rozhodnutí vede přes:
+```
+
+Pokud větu neumíte dopsat jedním konkrétním místem, vyřazení ještě není uzavřené. Možná položku necháváte zmizet bez náhrady, i když pořád chránila důležité rozhodnutí. Nebo jste ji sloučili, ale nové kanonické místo zatím není použitelné.
+
+### Co se musí propsat
+
+Po vyřazení projděte jen místa, kde by člověk položku hledal při práci:
+
+- portfoliový index nebo rozcestník;
+- kanonické pravidlo, do kterého se položka sloučila;
+- onboardingový nebo provozní checklist, pokud na položku odkazoval;
+- šablonu review, pokud položka hlídala návratový signál;
+- archivní poznámku, pokud má zůstat historický důvod.
+
+U každého místa udělejte jednu ze tří akcí:
+
+- odstranit odkaz;
+- nahradit odkaz novým kanonickým místem;
+- přepsat aktivní pokyn na archivní vysvětlení.
+
+Nepřidávejte další vysvětlující vrstvu jen proto, aby vyřazení působilo opatrně. Když položka odchází, má po ní zůstat méně aktivních cest, ne nový komentář ke každé staré větvi.
+
+Příklad:
+
+```text
+Původní položka:
+Samostatná karta pro ruční kontrolu datové stopy po zkrácení pravidla.
+
+Rozhodnutí:
+Sloučit do ročního review portfoliové paměti.
+
+Propsání:
+Index už kartu nenabízí jako samostatnou položku.
+Roční review má jednu otázku: nevznikla po zkrácení nová zbytečná datová stopa?
+Archiv obsahuje jen větu, že samostatná karta byla sloučená do ročního review.
+```
+
+Tím se zachová smysl původního pravidla, ale zmizí samostatná pracovní cesta, která už neměla důvod žít vlastním životem.
+
+### Test nejbližší podobné situace
+
+Vyřazení ověřte při nejbližší podobné práci, ne umělým auditem celé dokumentace. Cíl je prostý: člověk má najít správné aktuální místo bez toho, aby narazil na vyřazenou položku a začal podle ní jednat.
+
+Použijte čtyři otázky:
+
+- Kde by člověk tuto položku hledal jako první?
+- Najde tam jasný nový směr?
+- Nevede ho žádný starý odkaz zpět k vyřazené položce?
+- Stačí mu aktuální pravidlo k rozhodnutí bez otevírání staré historie?
+
+Pokud odpověď na některou otázku zní ne, neopravujte celé portfolio. Opravte nejbližší místo selhání. Typicky stačí přepsat jeden řádek indexu, odstranit jeden starý odkaz nebo doplnit jednu větu do nového kanonického pravidla.
+
+### Kdy ponechat archivní stopu
+
+Archivní stopa má smysl jen tehdy, když chrání budoucí rozhodnutí před opakováním drahé chyby nebo vysvětluje změnu směru. Nemá sloužit jako muzeum interních debat.
+
+Dobrá archivní stopa vypadá takto:
+
+```text
+Archivní důvod:
+Samostatná karta ruční kontroly byla v roce 2026 sloučená do ročního review, protože stejný návratový signál už hlídá portfoliový rytmus.
+
+Nepoužívat jako aktivní pravidlo.
+Aktuální místo:
+Roční review portfoliové paměti.
+```
+
+Špatná archivní stopa je dlouhý příběh plný starých příkladů, jmen, screenshotů a poznámek z ověřování. Taková stopa budí dojem, že položka pořád žije. Pokud má zůstat archiv, musí být kratší než aktivní pravidlo a nesmí konkurovat aktuálnímu místu.
+
+### Privacy-first uzavření
+
+Při uzavření vyřazení udělejte poslední datovou kontrolu. Neřešte jen obsah pravidla, ale i vedlejší stopy, které po něm zůstaly:
+
+- kopie v pracovních poznámkách;
+- exporty z review;
+- screenshoty starých stavů;
+- příklady s konkrétními zákaznickými nebo interními detaily;
+- dočasné tabulky používané při ověřování;
+- odkazy v onboardingových materiálech.
+
+Privacy-first závěr napište jako rozhodnutí, ne jako pocit:
+
+```text
+Ponecháváme:
+Jednu anonymizovanou archivní větu.
+
+Mažeme:
+Dočasné příklady, staré exporty a pracovní kopii karty.
+
+Nesbíráme dál:
+Samostatné signály k vyřazené položce.
+
+Aktuální kontrola žije:
+V ročním review portfoliové paměti.
+```
+
+Codyho komentář: vyřazení bez úklidu je jako odhlásit newsletter a dál si nechávat jeho exporty v pěti složkách. Technicky jste se rozhodli správně, prakticky vám to pořád šumí v hlavě i v datech.
+
+### Karta uzavření vyřazení
+
+```text
+Vyřazená položka:
+
+Rozhodnutí:
+- vyřazena / archivována / sloučena
+
+Aktuální kanonické místo:
+
+Místa, kde byl odstraněn nebo nahrazen odkaz:
+
+Archivní stopa, pokud zůstává:
+
+Smazané nebo anonymizované podklady:
+
+Test nejbližší podobné situace:
+
+Výsledek testu:
+- čistě uzavřeno / lokálně opravit / vrátit rozhodnutí k revizi
+
+Co už dál nesledujeme:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+Použijte ho ve chvíli, kdy je rozhodnutí o vyřazení provedené:
+
+1. Přečtěte název vyřazené položky.
+2. Řekněte aktuální kanonické místo pro podobné rozhodnutí.
+3. Projděte nejpravděpodobnější místo, kde by člověk položku hledal.
+4. Odstraňte nebo nahraďte jeden starý odkaz.
+5. Rozhodněte, jestli archivní stopa opravdu musí zůstat.
+6. Smažte nebo anonymizujte podklady bez účelu.
+7. Zapište, co se po vyřazení už dál nesleduje.
+
+Workshop má skončit čistším portfoliem, ne novým seznamem archivních úkolů. Pokud narazíte na širší nepořádek, zapište ho jako samostatný návratový signál pro portfoliové review a vraťte se k uzavření jedné položky.
+
+### Checklist uzavření vyřazení
+
+- Je jasné, kam vede další podobné rozhodnutí?
+- Zmizela vyřazená položka z aktivního indexu nebo rozcestníku?
+- Nahradili jsme staré odkazy jen tam, kde je člověk skutečně potká při práci?
+- Nevznikla nová vysvětlující vrstva, která by suplovala starou položku?
+- Pokud zůstává archivní stopa, je krátká a výslovně neaktivní?
+- Nezůstaly dočasné exporty, screenshoty nebo pracovní kopie bez účelu?
+- Je zapsané, co už dál nesledujeme?
+- Ověřili jsme nejbližší podobnou situaci, nebo aspoň určili, kdy se ověří?
+- Umí nový člověk najít aktuální pravidlo bez znalosti staré historie?
+- Nevrátilo vyřazení do provozu skrytý druhý zdroj pravdy?
+
+Uzavřené vyřazení má působit nenápadně. Položka zmizí z aktivní práce, její užitečná část žije na správném místě a staré podklady nepokračují v tichém sběru prachu ani dat. Přesně tak má vypadat portfoliová hygiena, která šetří hlavu i provoz.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o uzavření vyřazení zhuštěné portfoliové položky: propsání do indexu, test nejbližší podobné situace, archivní stopa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o vyřazení zhuštěné portfoliové položky: důvody pro vyřazení, rozlišení vyřadit/archivovat/sloučit, privacy-first úklid, karta a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého použití zhuštěné portfoliové položky: uzavírací stavy, propsání bez rozbalení historie, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o druhém použití zhuštěné portfoliové položky: přenositelnost bez čerstvé historie, poslední lokální oprava, slabé kanonické místo, privacy-first úklid, karta, mini workshop a checklist.
