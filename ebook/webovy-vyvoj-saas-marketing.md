@@ -215237,8 +215237,186 @@ Workshop má skončit zavřením, ne plánem dalšího velkého review. Pokud se
 
 Uzavření prvního průchodu po vyřazení je malá, ale důležitá brzda proti dokumentačnímu ping-pongu. Bez ní se staré položky pořád vracejí v poznámkách, přesměrováních a opatrných "radši to ještě sledujme". S ní má tým čistý závěr: buď vyřazení drží, nebo se opraví nejbližší nové místo, nebo se rozhodnutí vrátí k revizi. Všechno ostatní je šum v hezkém kabátě.
 
+## Druhý běžný průchod po vyřazení zhuštěné portfoliové položky
+
+První běžný průchod po vyřazení ukáže, jestli tým zvládne podobnou situaci bez staré položky krátce po úklidu. Druhý průchod je přísnější. Ověřuje, jestli nové kanonické místo funguje i ve chvíli, kdy už nikdo nemá čerstvě v hlavě, proč se původní položka vyřadila, kdo to rozhodl a kde leží archivní stopa.
+
+Druhý průchod nespouštějte jako zvláštní audit. Počkejte na nejbližší přirozenou situaci, ve které by se dřív vyřazená položka použila:
+
+- nové rozhodnutí v portfoliu;
+- kontrola staršího pravidla;
+- onboarding člověka do podobné pracovní situace;
+- úprava indexu, playbooku nebo checklistu;
+- zákaznický workshop, kde se objeví podobná otázka;
+- provozní review, které potřebuje najít správné rozhodovací místo.
+
+Smyslem není znovu hodnotit celé vyřazení. Smyslem je zjistit, jestli běžná cesta obstojí bez zvláštního výkladu. Pokud musí někdo u druhého průchodu dlouze vysvětlovat historii vyřazené položky, není to ještě tichý provoz. Je to znalost v hlavě člověka, převlečená za systém.
+
+### Co druhý průchod ověřuje
+
+Druhý průchod má čtyři kontrolní otázky:
+
+```text
+Našlo se aktuální místo bez znalosti staré položky?
+
+Vedlo aktuální místo k rozhodnutí bez archivní historie?
+
+Nevznikla potřeba obnovit pomocnou evidenci?
+
+Stačí výsledek zapsat jako běžný průchod, ne jako další projekt?
+```
+
+Pokud jsou odpovědi ano, vyřazení se blíží tichému provozu. Pokud jedna odpověď drhne, řešte jen nejbližší slabé místo. Druhý průchod není povolenka k tomu, aby se vyřazená položka vrátila v celé své dokumentační slávě a začala si nárokovat vlastní židli u stolu.
+
+Příklad:
+
+```text
+Situace:
+Tým řeší, kam zařadit pravidlo pro měsíční úklid starých šablon.
+
+Dřívější cesta:
+Použila by se vyřazená zhuštěná položka o portfoliové paměti.
+
+Aktuální cesta:
+Kanonický index vede na širší pravidlo pro retenční rytmus a úklid artefaktů.
+
+Výsledek:
+Rozhodnutí šlo udělat bez otevření vyřazené položky.
+
+Lokální oprava:
+Do indexu se doplnila jedna fráze "šablony po použití", protože podle ní tým situaci hledal.
+```
+
+Tento výsledek neznamená, že se má stará položka vrátit jako podrobnější vysvětlení. Znamená, že aktuální místo funguje, jen potřebovalo lepší vstupní slovník.
+
+### Čtyři výsledné stavy
+
+Po druhém průchodu vyberte jeden stav:
+
+- Tichý provoz: aktuální místo fungovalo bez pomoci a bez návratu ke staré položce.
+- Lokální dočištění: aktuální místo fungovalo, ale potřebuje jeden název, odkaz, příklad nebo vstupní otázku.
+- Slabá přenositelnost: člověk znalý historie rozhodnutí cestu našel, ale nový nebo méně zapojený člověk by pravděpodobně tápal.
+- Vrátit rozhodnutí k revizi: vyřazení odstranilo rozhodovací funkci, kterou aktuální systém neumí nahradit.
+
+U tichého provozu nedělejte nic víc než krátký záznam. Nepřidávejte třetí kontrolu "pro jistotu". Jistota má v provozu cenu, a pokud ji platíte další evidencí, možná kupujete jen pocit pořádku.
+
+U lokálního dočištění platí limit jedné úpravy. Druhý průchod už není první nejisté použití; jestli oprava potřebuje víc než jedno místo, pravděpodobně nejde o lokální tření, ale o slabou přenositelnost.
+
+U slabé přenositelnosti neobnovujte starou kartu. Nejdřív upravte cestu, kterou má použít člověk bez historické paměti: lepší název v indexu, jasnější rozcestník, jednoznačnější štítek, krátký příklad v aktuálním pravidle. Historie má zůstat v archivu, ne sloužit jako navigace.
+
+U revize napište přesně, jaká funkce chybí. Ne "stará položka byla užitečná", ale například:
+
+```text
+Chybí rozhodovací hranice mezi úklidem portfoliové paměti a údržbou retenčního rytmu.
+```
+
+Taková věta umožní opravit systém. Nostalgie po staré položce umí být hlasitá, ale jako specifikace je zoufalá.
+
+### Jak poznat, že vyřazení přešlo do tichého provozu
+
+Vyřazení je v tichém provozu, když se podobná situace vyřeší bez tří věcí:
+
+- bez otevření vyřazené položky;
+- bez hledání člověka, který si pamatuje důvod vyřazení;
+- bez nové pomocné evidence, která má uklidnit nejistotu.
+
+Tichý provoz neznamená, že archivní stopa zmizí. Znamená, že archiv není součástí běžné práce. Když ho otevřete jen při skutečném návratovém signálu, je v pořádku. Když ho otevíráte při každém podobném rozhodnutí, vyřazení se ve skutečnosti nestalo.
+
+Praktická věta do logu:
+
+```text
+Druhý běžný průchod proběhl přes [aktuální místo]; vyřazenou položku neotevíráme a další zvláštní kontrolu nezakládáme.
+```
+
+Pokud proběhlo lokální dočištění:
+
+```text
+Druhý běžný průchod potvrdil vyřazení; v [aktuální místo] upraven [název/odkaz/příklad], další kontrola jen při návratovém signálu.
+```
+
+Pokud se ukázala slabá přenositelnost:
+
+```text
+Vyřazení zatím drží, ale aktuální cesta není dost přenositelná pro člověka bez historie; opravujeme navigaci, neobnovujeme starou položku.
+```
+
+### Privacy-first kontrola druhého průchodu
+
+Druhý průchod často svádí k měření adopce: kdo už používá novou cestu, kdo ještě říká starý název, kdo si otevřel archiv, kdo potřeboval pomoc. To je špatný směr. Potřebujete ověřit pracovní trasu, ne sledovat lidi.
+
+Privacy-first kontrola se ptá:
+
+- Stačí ověřit jeden reálný průchod bez osobního scoreboardu?
+- Nezapisujeme jména lidí, kteří si ještě pamatovali starou položku?
+- Nevzniká tabulka používání jen kvůli nejistotě po vyřazení?
+- Nevracíme do aktivního pravidla staré příklady s citlivými detaily?
+- Je archivní stopa pořád krátká, neaktivní a oddělená od běžné práce?
+- Dá se výsledek popsat jednou větou v logu?
+
+Pokud potřebujete lepší důkaz, zlepšete test pracovního místa. Dejte někomu situaci, ne historii. Pokud cestu najde a rozhodne, systém funguje. Pokud ne, opravte navigaci. Není potřeba vyrábět sledování chování týmu, protože dokumentace má být užitečná, ne dotěrná.
+
+### Karta druhého běžného průchodu po vyřazení
+
+```text
+Vyřazená položka:
+
+Přirozená situace druhého průchodu:
+
+Aktuální místo, které mělo práci převzít:
+
+Kdo průchod provedl:
+- člověk znalý historie / člověk bez historie / smíšený tým
+
+Výsledný stav:
+- tichý provoz / lokální dočištění / slabá přenositelnost / vrátit k revizi
+
+Co bylo potřeba vysvětlit:
+
+Jedna lokální oprava:
+
+Co se neobnovuje:
+
+Návratový signál:
+
+Privacy-first úklid:
+
+Závěrečná věta do logu:
+
+Datum:
+```
+
+### Mini workshop na 7 minut
+
+Použijte ho po druhém přirozeném průchodu:
+
+1. Pojmenujte situaci, ve které by se dřív použila vyřazená položka.
+2. Ukažte aktuální místo, které práci převzalo.
+3. Řekněte, jestli cesta fungovala bez znalosti historie.
+4. Vyberte jeden ze čtyř výsledných stavů.
+5. Pokud je potřeba oprava, omezte ji na jedno místo.
+6. Napište větu do logu.
+7. Odmítněte novou evidenci adopce, pokud by sledovala lidi místo trasy.
+
+Workshop končí rozhodnutím, jestli vyřazení přechází do tichého provozu, nebo jestli se opravuje přenositelnost aktuální cesty. Nemá končit seznamem všech míst, kde by se "možná ještě mohl starý název objevit". To není workshop, to je hon na stíny.
+
+### Checklist druhého běžného průchodu po vyřazení
+
+- Proběhl druhý průchod v přirozené pracovní situaci?
+- Šlo aktuální místo najít bez otevření vyřazené položky?
+- Vedlo aktuální místo k rozhodnutí bez archivní historie?
+- Vybrali jsme jeden ze čtyř výsledných stavů?
+- Pokud byla potřeba oprava, zůstala u jednoho pracovního místa?
+- Neobnovili jsme starou položku jen kvůli slabšímu názvu nebo odkazu?
+- Je jasné, jestli vyřazení přechází do tichého provozu?
+- Nevznikla evidence adopce, která sleduje jednotlivé lidi?
+- Zůstala archivní stopa mimo běžný pracovní tok?
+- Má log krátkou závěrečnou větu a konkrétní návratový signál?
+
+Druhý běžný průchod po vyřazení je test přenositelnosti. První průchod může ještě táhnout čerstvá paměť. Druhý už ukáže, jestli systém opravdu nahradil starou položku. Když ano, nechte ji v klidu. Když ne, opravte cestu, ne historii. Portfolio má být pracovní mapa, ne muzeum každého dobrého nápadu, který kdysi dával smysl.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o druhém běžném průchodu po vyřazení zhuštěné portfoliové položky: ověření bez čerstvé historie, čtyři výsledné stavy, tichý provoz, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření prvního běžného průchodu po vyřazení zhuštěné portfoliové položky: výsledné závěry, propsání bez návratu staré karty, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o prvním běžném průchodu po vyřazení zhuštěné portfoliové položky: test reálné podobné situace, výsledné stavy, práce se starým názvem, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření vyřazení zhuštěné portfoliové položky: propsání do indexu, test nejbližší podobné situace, archivní stopa, privacy-first úklid, karta, mini workshop a checklist.
