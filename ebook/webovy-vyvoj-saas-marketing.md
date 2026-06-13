@@ -43,6 +43,8 @@ Než otevřete další průchod, pojmenujte také nejbližší místo, kde se m�
 
 Po zavření průchodu si nechte krátkou závěrečnou stopu: původní otázku, rozhodnutí, ověření a věc, kterou jste vědomě neposunuli. Při dalším návratu pak nezačínáte od dojmu, ale od záznamu, který ukáže, jestli má smysl pokračovat, zmenšit krok, nebo téma na chvíli odložit.
 
+Další průchod otevírejte až ve chvíli, kdy se objeví návratový signál ze závěrečné stopy. Pouhý pocit, že by se "ještě dalo něco zlepšit", patří do poznámek, ne do nové iterace; jinak se z klidného návratu stane trvalá údržba bez jasného důvodu.
+
 ## Jak zmenšit další krok po nesplněné stop podmínce
 
 Nesplněná stop podmínka často neříká, že tým pracoval špatně. Častěji říká, že otázka byla moc široká, důkaz moc vzdálený nebo změna spolkla víc pracovních míst najednou. V tu chvíli nepomůže přidat další kapitolu, další meeting ani další tabulku. Pomůže přeložit původní záměr do menší jednotky, kterou jde dokončit bez nového systému okolo.
@@ -216384,3 +216386,4 @@ Druhý běžný průchod po vyřazení je test přenositelnosti. První průchod
 - 2026-06-12: Doplněna krátká úvodní poznámka, aby návratový signál byl rozpoznatelný i pro člověka mimo původní rozhodnutí.
 - 2026-06-12: Doplněna úvodní podkapitola o druhém běžném použití po převodu reakce: přenositelnost bez čerstvé paměti, poslední lokální dočištění, privacy-first hranice, karta a checklist.
 - 2026-06-12: Doplněna úvodní podkapitola o uzavření druhého běžného použití po převodu reakce: čtyři uzavírací stavy, propsání do běžného pracovního místa, ukončení zvláštní pozornosti, privacy-first úklid, karta a checklist.
+- 2026-06-13: Doplněna krátká úvodní poznámka, aby další průchod rukopisem začínal až z návratového signálu, ne z obecného pocitu dalšího zlepšování.
