@@ -215068,8 +215068,178 @@ Workshop má skončit buď potvrzením, že vyřazení drží, nebo jednou loká
 
 První běžný průchod po vyřazení má chránit dvě věci najednou: rozhodovací schopnost týmu a klid portfolia. Pokud aktuální místo vede práci, stará položka může zůstat pryč. Pokud nevede, opravte nejbližší slabé místo. A pokud se ukáže, že vyřazení bylo předčasné, vraťte rozhodnutí k revizi bez divadla. Dobrý systém nemá problém přiznat, že jedno uklizení bylo moc rychlé.
 
+## Uzavření prvního běžného průchodu po vyřazení zhuštěné portfoliové položky
+
+První průchod po vyřazení nestačí jen pozorovat. Musí se také uzavřít, jinak se kolem něj vytvoří mlha: někdo si myslí, že vyřazení drží, někdo čeká na další kontrolu a někdo si pro jistotu nechá vlastní kopii staré položky. Uzavření má proto jeden úkol: převést výsledek prvního průchodu do nejbližšího pracovního místa a ukončit zvláštní pozornost, pokud už není potřeba.
+
+Uzavření začněte větou:
+
+```text
+Po prvním běžném průchodu zůstává vyřazená položka:
+```
+
+Možné konce věty jsou jen tři:
+
+- vyřazená, protože aktuální místo práci uneslo;
+- vyřazená s jednou lokální opravou aktuálního místa;
+- vrácená k revizi, protože náhrada nebyla dostatečná.
+
+Nevkládejte mezi ně mezistav "ještě to budeme sledovat". Pokud chcete další sledování, pojmenujte přesně proč a kde. Jinak jen prodlužujete přechodové období a vyřazená položka dál funguje jako neformální staré rozhodnutí. Dokumentační setrvačnost je otravná a nemá ani dobrý soundtrack.
+
+### Uzavření podle výsledného stavu
+
+U stavu čistě potvrzeno udělejte minimum:
+
+- do logu napište, že první průchod proběhl přes aktuální kanonické místo;
+- nechte archivní stopu beze změny;
+- nepřidávejte další kontrolní úkol;
+- ukončete zmínku o vyřazené položce v běžné komunikaci.
+
+U lokální opravy platí pravidlo jednoho místa. Opravte jen nejbližší slabinu, která se při průchodu ukázala: jeden odkaz, jeden název, jednu chybějící větu, jedno přesměrování v indexu. Po opravě už neotevírejte celé rozhodnutí znovu. Lokální oprava není pozvánka k redakčnímu festivalu.
+
+U slabého kanonického místa nejdřív opravte novou cestu, ne starou položku. Typická úprava je lepší název, jasnější vstupní otázka nebo doplnění jedné věty, která vysvětlí, kdy se místo používá. Teprve když ani tato oprava nedává smysl, vraťte rozhodnutí k revizi.
+
+U stavu vrátit k revizi nezakládejte automaticky starou kartu. Vraťte se k původnímu důvodu vyřazení a napište, co přesně chybělo:
+
+```text
+Vyřazení vracíme k revizi, protože:
+
+Chybějící rozhodovací funkce:
+
+Nejbližší místo, kde se má náhrada opravit:
+
+Co zatím neobnovujeme:
+```
+
+Tento zápis chrání tým před reflexem "tak to vraťme celé". Někdy je potřeba obnovit jen malý kousek původní funkce. Celá stará položka může zůstat v archivu.
+
+### Propsání bez návratu staré položky
+
+Uzavření má skončit v pracovním místě, které lidé opravdu používají. Nejčastější kandidáti jsou:
+
+- kanonický index;
+- aktuální pravidlo nebo checklist;
+- rozhodovací log;
+- onboardingová trasa;
+- provozní karta portfolia;
+- krátký changelog změny.
+
+Do každého místa pište jen to, co tam patří. Index potřebuje směrování, ne historii. Checklist potřebuje krok, ne důvod vyřazení. Rozhodovací log potřebuje závěr, ne kopii celé diskuse. Archiv potřebuje stopu, ne nové instrukce pro běžnou práci.
+
+Praktická věta do indexu:
+
+```text
+Situace dříve vedená položkou [název] teď patří do [aktuální místo].
+```
+
+Praktická věta do logu:
+
+```text
+První běžný průchod po vyřazení proběhl přes [aktuální místo]; starou položku neobnovujeme.
+```
+
+Pokud byla potřeba lokální oprava:
+
+```text
+Doplněna jedna věta/opraven jeden odkaz v [aktuální místo]; další sledování se nezakládá.
+```
+
+Takové věty jsou nudné, ale použitelné. Přesně o to jde. Uzavření nemá být malá kronika dokumentačního hrdinství.
+
+### Ukončení zvláštní pozornosti
+
+Po prvním průchodu často zůstane skrytá péče: někdo si pamatuje, že položka byla nedávno vyřazená, a při každé podobné situaci ji v hlavě kontroluje. Krátkodobě je to normální. Dlouhodobě je to zbytečná práce.
+
+Ukončení zvláštní pozornosti napište přímo:
+
+```text
+Od další podobné situace se používá běžný kanonický tok. Vyřazená položka se otevírá jen při novém návratovém signálu.
+```
+
+Návratový signál musí být konkrétní. Ne "někdo si vzpomněl na starou kartu", ale například:
+
+- dva lidé po sobě nenajdou aktuální místo bez pomoci;
+- aktuální checklist nedovede rozhodnutí k závěru;
+- starý odkaz se objeví v aktivním pracovním materiálu;
+- tým začne znovu zakládat pomocnou evidenci, kterou vyřazení odstranilo.
+
+Pokud se žádný takový signál neobjeví, položka zůstává vyřazená. Ne proto, že je zakázané o ní mluvit, ale protože běžný systém už má práci vést bez ní.
+
+### Privacy-first uzavření průchodu
+
+Privacy-first uzavření se ptá na jednoduchou věc: nezaplatili jsme za jistotu novou datovou stopou? Vyřazení má portfolio zjednodušit. Pokud po něm vznikne tabulka sledování, kopie starých příkladů, nová evidence používání nebo ruční seznam lidí, kteří "už používají novou cestu", úklid se nepovedl.
+
+Závěrečná kontrola:
+
+- Zůstala stará položka mimo aktivní pracovní tok?
+- Nevznikla nová evidence jen kvůli nejistotě po vyřazení?
+- Nevrátily se staré příklady s citlivými detaily do aktuálního pravidla?
+- Stačí výsledek zapsat jednou větou v logu?
+- Je jasné, při jakém signálu se téma znovu otevře?
+
+Pokud potřebujete ověřit další použití, nedělejte z toho sledování lidí. Ověřte pracovní trasu: dá se najít, pochopit a použít? To je otázka kvality systému, ne výkonnosti jednotlivce.
+
+### Karta uzavření prvního průchodu po vyřazení
+
+```text
+Vyřazená položka:
+
+První běžný průchod:
+
+Výsledný stav:
+- čistě potvrzeno / lokální oprava / slabé kanonické místo / vrátit k revizi
+
+Aktuální místo, které práci převzalo:
+
+Co se propsalo do indexu nebo logu:
+
+Jedna provedená oprava:
+
+Co neobnovujeme:
+
+Jaká zvláštní pozornost končí:
+
+Návratový signál pro znovuotevření:
+
+Privacy-first úklid:
+
+Vlastník:
+
+Datum:
+```
+
+### Mini workshop na 6 minut
+
+Použijte ho hned po prvním běžném průchodu:
+
+1. Přečtěte kartu prvního průchodu.
+2. Vyberte jeden výsledný stav.
+3. Napište jednovětý závěr do logu.
+4. Pokud je potřeba oprava, určete jedno pracovní místo.
+5. Pojmenujte, co se po průchodu neobnovuje.
+6. Zapište konkrétní návratový signál.
+7. Smažte nebo odmítněte pomocnou evidenci, která vznikla jen z nejistoty.
+
+Workshop má skončit zavřením, ne plánem dalšího velkého review. Pokud se během něj objeví širší problém, založte samostatnou otázku a nechte uzavření vyřazení doběhnout.
+
+### Checklist uzavření prvního průchodu po vyřazení
+
+- Je výsledek prvního průchodu převedený do jednoho ze tří závěrů?
+- Víme, které aktuální místo převzalo práci po vyřazené položce?
+- Propsali jsme jen nezbytnou větu, odkaz nebo lokální opravu?
+- Neobnovili jsme starou kartu jen kvůli nejistotě po prvním použití?
+- Je ukončená zvláštní pozornost, pokud už není potřeba?
+- Máme konkrétní návratový signál pro případné znovuotevření?
+- Nevznikla nová tabulka, tracker ani evidence jednotlivých lidí?
+- Zůstala archivní stopa krátká a neaktivní?
+- Je jasné, kdo uzavření provedl a kde je zapsané?
+- Může další podobná situace projít běžným kanonickým tokem?
+
+Uzavření prvního průchodu po vyřazení je malá, ale důležitá brzda proti dokumentačnímu ping-pongu. Bez ní se staré položky pořád vracejí v poznámkách, přesměrováních a opatrných "radši to ještě sledujme". S ní má tým čistý závěr: buď vyřazení drží, nebo se opraví nejbližší nové místo, nebo se rozhodnutí vrátí k revizi. Všechno ostatní je šum v hezkém kabátě.
+
 ## Pracovní log
 
+- 2026-06-13: Doplněna úvodní podkapitola o uzavření prvního běžného průchodu po vyřazení zhuštěné portfoliové položky: výsledné závěry, propsání bez návratu staré karty, ukončení zvláštní pozornosti, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o prvním běžném průchodu po vyřazení zhuštěné portfoliové položky: test reálné podobné situace, výsledné stavy, práce se starým názvem, privacy-first kontrola, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o uzavření vyřazení zhuštěné portfoliové položky: propsání do indexu, test nejbližší podobné situace, archivní stopa, privacy-first úklid, karta, mini workshop a checklist.
 - 2026-06-13: Doplněna úvodní podkapitola o vyřazení zhuštěné portfoliové položky: důvody pro vyřazení, rozlišení vyřadit/archivovat/sloučit, privacy-first úklid, karta a checklist.
